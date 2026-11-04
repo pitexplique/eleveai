@@ -433,7 +433,7 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "OD 3", domaine: "Organisation de données",
       texte: "Variables aléatoires : loi, fonction de répartition F(x) = P(X ≤ x), espérance, variance, écart-type ; schéma de Bernoulli, loi binomiale.",
       couverture: "partielle",
-      micros: m("terminale-spe", "va_definition", "va_loi_probabilite", "va_esperance", "va_variance_ecart_type", "binomiale_schema", "binomiale_reconnaitre", "binomiale_calculer", "binomiale_esperance_variance"),
+      micros: m("terminale-spe", "va_definition", "va_loi_probabilite", "va_esperance", "va_variance_ecart_type", "va_somme", "binomiale_schema", "binomiale_reconnaitre", "binomiale_calculer", "binomiale_esperance_variance"),
       note: "La FONCTION DE RÉPARTITION (fonction en escalier, à tracer) n'a pas de micro.",
     },
 

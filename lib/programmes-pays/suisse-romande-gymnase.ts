@@ -91,7 +91,7 @@ export const SUISSE_GYMNASE: ProgrammePays = {
     c("3.3b", GEO, "Décrire des objets géométriques par diverses représentations, analyser leur position relative, résoudre des problèmes géométriques de manière algébrique.", "complete",
       [...m("seconde", "droite_equation_cartesienne", "droite_intersection"), ...m("premiere-spe", "gr_cercle", "gr_equation_droite"), ...m("terminale-spe", "espace_droite_parametrique", "espace_plan_equation", "espace_position_relative")]),
     c("4.1", STO, "Dénombrer de manière analytique et structurée (CdBA) ; résoudre des problèmes combinatoires.", "complete",
-      m("terminale-spe", "denombrement_produit_somme", "denombrement_arrangement_combinaison", "denombrement_coefficient_binomial", "denombrement_pascal")),
+      m("terminale-spe", "denombrement_reconnaitre", "denombrement_produit_somme", "denombrement_arrangement_combinaison", "denombrement_coefficient_binomial", "denombrement_pascal", "denombrement_defi")),
     c("4.2a", STO, "Expliquer la notion de probabilité, illustrer et utiliser ses propriétés.", "complete",
       m("seconde", "proba_modele", "proba_calculer", "proba_evenement_contraire", "proba_formule_union")),
     c("4.2b", STO, "Analyser et résoudre des problèmes liés au hasard en mobilisant les divers aspects calculatoires des probabilités.", "complete",

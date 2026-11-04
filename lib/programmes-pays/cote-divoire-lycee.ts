@@ -364,7 +364,7 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
       code: "C2-L2", domaine: ALEA,
       texte: "Probabilité conditionnelle et variable aléatoire : probabilité conditionnelle, indépendance, système complet, probabilités totales, arbre pondéré ; loi, fonction de répartition, espérance, variance, écart type ; schéma de Bernoulli et loi binomiale.",
       couverture: "partielle",
-      micros: m("terminale-spe", "proba_conditionnelle_arbre", "proba_conditionnelle_formule", "proba_totales", "va_loi_probabilite", "va_esperance", "va_variance_ecart_type", "binomiale_schema", "binomiale_calculer", "binomiale_esperance_variance"),
+      micros: m("terminale-spe", "proba_conditionnelle_arbre", "proba_conditionnelle_formule", "proba_totales", "va_loi_probabilite", "va_esperance", "va_variance_ecart_type", "va_somme", "binomiale_schema", "binomiale_calculer", "binomiale_esperance_variance"),
       note: "La fonction de répartition n'a pas de micro.",
     },
     {

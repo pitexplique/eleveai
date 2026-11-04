@@ -165,7 +165,7 @@ const CONTENUS: ContenuQuebec[] = [
 
   // Probabilités
   { code: "PRB A12", domaine: PR, annees: [5], texte: "Distinguer événements mutuellement exclusifs ou non, dépendants ou indépendants.", couverture: "partielle", micros: m("seconde", "proba_reunion_intersection", "proba_formule_union"), note: "L'indépendance de deux événements n'a pas de micro." },
-  { code: "PRB A16", domaine: PR, annees: [5], texte: "Notation factorielle (facultative en CST).", couverture: "partielle", micros: m("terminale-spe", "denombrement_arrangement_combinaison"), note: "Pas de micro sur n! lui-même." },
+  { code: "PRB A16", domaine: PR, annees: [5], texte: "Notation factorielle (facultative en CST).", couverture: "complete", micros: m("terminale-spe", "denombrement_arrangement_combinaison"), note: "n! se calcule dans la micro (n!, n!/m!, (n + 1)! à partir de n!, 0! = 1)." },
   { code: "PRB A17 / B6", domaine: PR, annees: [5], texte: "Types de probabilités : fréquentielle, théorique, subjective ; associer le type à une situation.", couverture: "partielle", micros: m("4e", "proba_frequence_comparer", "proba_calculer_fraction"), note: "La probabilité subjective n'est pas travaillée." },
   { code: "PRB B8", domaine: PR, annees: [5], texte: "Calculer des probabilités conditionnelles.", couverture: "complete", micros: [...m("seconde", "proba_conditionnelle", "proba_arbre_pondere", "proba_tableau_croise"), ...m("premiere", "alea_cond_formule")] },
   { code: "PRB A18 / B10-B12", domaine: PR, annees: [5], texte: "Chances pour et chances contre : définir, calculer, interpréter, choisir entre chance et probabilité.", couverture: "absente", micros: [], note: "La notion de cote (« 3 contre 1 ») n'existe pas dans le programme français." },
