@@ -10,7 +10,7 @@ Réponds en français. Dépôt C:\Users\FRED\Documents\eleveai (Windows ; Git Ba
 ⛔ Ne modifie aucun module commun ni le script d'un autre épisode (importe ou recopie dans TON script ce dont tu as besoin).
 
 ## Voix
-VALIDÉES par Frédéric : `manim/voix/4e-puissance-<slug>.json` / `…-<slug>-short.json`. N'y change RIEN, sauf erreur factuelle ou phrase imprononçable (dis-le dans ton rapport). Débit −6 : `powershell -NoProfile -File scripts/generer-voix.ps1 -Fichier manim/voix/<nom>.json -Debit -6`, WAV dans `public/sons/<nom-de-la-voix>/`. Marques mot à mot : `scripts/marques_dump.ps1` puis `scripts/cues2marques.py` (comme les modèles).
+VALIDÉES par Frédéric : `manim/voix/4e-puissance-<slug>.json` / `…-<slug>-short.json`. N'y change RIEN, sauf erreur factuelle ou phrase imprononçable (dis-le dans ton rapport). Débit −6 : `powershell -NoProfile -File scripts/generer-voix.ps1 -Fichier manim/voix/<nom>.json -Debit -6`, WAV dans `public/sons/<nom-de-la-voix>/`. Marques mot à mot : `scripts/marques_dump.ps1` puis `scripts/cues2marques.py` (comme les modèles). ⚠️ `cues2marques.py` perd les marques des mots RÉPÉTÉS (« 3 fois 3 fois 3 fois 3 » : seuls le premier et le dernier 3 sont datés) : recalcule ces marques toi-même (copie corrigée dans TON dossier temporaire, sans toucher au script commun). Voix 2de : `manim/voix/2de-puissance-<slug>.json`.
 
 ## Noms (épisode NN, slug ex. `comprendre`)
 - Scripts : `manim/scripts/4e/puissance_<slug>.py` (classes `Puissance<Slug>4e`, `Puissance<Slug>3e`… selon les classes de l'épisode) et `manim/scripts/4e/puissance_<slug>_short.py` (classe `Puissance<Slug>Short`).
