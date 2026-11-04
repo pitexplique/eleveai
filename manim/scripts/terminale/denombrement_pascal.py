@@ -545,6 +545,30 @@ class DenombrementPascalBase(OutilsDenombrement):
 
     # ── 03 : la grille, les nombres se propagent ───────────────────────────
 
+    def place_pour_coche(self, cartes, marge=1.0):
+        """Les trois cartes à la MÊME taille de police, le texte s'arrêtant à
+        « marge » du bord droit : la coche de la bonne réponse a sa place."""
+        lim = cartes[0][0].width - 0.2 - marge
+        ech = [c[1][0][0].width / 0.5 for c in cartes]          # l'échelle du rond (rayon 0,25)
+        s = min(min(1.0, lim / (c[1].width / e)) for c, e in zip(cartes, ech))
+        for c, e in zip(cartes, ech):
+            c[1].scale(s / e, about_edge=LEFT)
+
+    def q_reponse(self, cartes, bonne, pause, rebours):
+        """La coche FINIT à 0,35 du bord droit de la carte : posée sur la carte
+        agrandie, elle rétrécit avec elle (elle ne glisse plus sur le texte)."""
+        b = cartes[bonne]
+        anims = [b[0].animate.set_stroke(VERT_OK, width=7).set_fill("#052e16", 1),
+                 b[1][0][0].animate.set_fill(VERT_OK)]
+        anims += [cartes[j].animate.set_opacity(0.3) for j in range(len(cartes)) if j != bonne]
+        self.play(*anims, FadeOut(rebours), FadeOut(pause), run_time=0.25)
+        k = 1.12
+        c = b.get_center()
+        ok = self.coche(VERT_OK, 0.2 * k).move_to(c + (b[0].get_right() + LEFT * 0.35 - c) * k)
+        self.play(b.animate.scale(k), Create(ok), run_time=0.25)
+        self.play(b.animate.scale(1 / k), ok.animate.scale(1 / k, about_point=c), run_time=0.25)
+        return ok
+
     def grille(self):
         return Damier(3, 2, (-5.2, -2.45), 1.95)
 
@@ -566,7 +590,7 @@ class DenombrementPascalBase(OutilsDenombrement):
 
         self.au_mot("1 façon")
         b0 = pose(0, 0, 1, VERT_OK)
-        l1 = self.ligne(self.t("Départ : 1 façon", 34), y=2.6, xl=1.8)
+        l1 = self.ligne(self.t("Départ : 1 façon", 34), y=2.6, xl=1.45)
         self.play(FadeIn(b0, scale=1.6), FadeIn(l1, shift=RIGHT * 0.1), run_time=0.4)
         self.au_mot("bord du bas")
         bas = [pose(i, 0, 1) for i in (1, 2, 3)]
@@ -575,7 +599,7 @@ class DenombrementPascalBase(OutilsDenombrement):
         gau = [pose(0, j, 1) for j in (1, 2)]
         self.play(LaggedStart(*[FadeIn(b, scale=1.5) for b in gau], lag_ratio=0.25), run_time=0.5)
         self.au_mot("1 seule façon")
-        l2 = self.ligne(self.t("Les bords : 1 seule façon", 34), y=1.95, xl=1.8)
+        l2 = self.ligne(self.t("Bords : 1 seule façon", 34), y=1.95, xl=1.45)
         self.play(FadeIn(l2, shift=RIGHT * 0.1), run_time=0.35)
         self.au_mot("tout droit")
         droit = VGroup(Line(d.N(0, 0), d.N(3, 0), color=VERT_OK, stroke_width=8),
@@ -586,26 +610,26 @@ class DenombrementPascalBase(OutilsDenombrement):
         self.play(FadeOut(droit), run_time=0.3)
         self.au_mot("autre carrefour")
         cible = Circle(radius=0.42, color=JAUNE_TITRE, stroke_width=5).move_to(d.N(1, 1))
-        l3 = self.ligne(self.t("Ailleurs : on arrive", 34), y=1.2, xl=1.8)
+        l3 = self.ligne(self.t("Ailleurs : on arrive", 34), y=1.2, xl=1.45)
         self.play(Create(cible), FadeIn(l3, shift=RIGHT * 0.1), run_time=0.45)
         self.au_mot("par la gauche")
         fg = Arrow(d.N(0, 1) + RIGHT * 0.3, d.N(1, 1) + LEFT * 0.4, buff=0, color=FLECHE, stroke_width=7)
-        l4 = self.ligne(self.t("par la gauche", 34, FLECHE), y=0.6, xl=2.1)
+        l4 = self.ligne(self.t("par la gauche", 34, FLECHE), y=0.6, xl=1.75)
         self.play(GrowArrow(fg), FadeIn(l4, shift=RIGHT * 0.1), run_time=0.4)
         self.au_mot("par le bas")
         fb = Arrow(d.N(1, 0) + UP * 0.3, d.N(1, 1) + DOWN * 0.4, buff=0, color=FLECHE, stroke_width=7)
-        l5 = self.ligne(self.t("OU par le bas", 34, FLECHE), y=0.05, xl=2.1)
+        l5 = self.ligne(self.t("OU par le bas", 34, FLECHE), y=0.05, xl=1.75)
         self.play(GrowArrow(fb), FadeIn(l5, shift=RIGHT * 0.1), run_time=0.4)
         self.au_mot("Deux cas disjoints")
-        l6 = self.ligne(self.t("deux cas disjoints :", 34), y=-0.65, xl=1.8)
+        l6 = self.ligne(self.t("deux cas disjoints :", 34), y=-0.65, xl=1.45)
         self.play(FadeIn(l6, shift=RIGHT * 0.1), run_time=0.35)
         self.au_mot("on additionne")
-        l7 = self.ligne(self.t("on additionne", 38, VERT_OK), y=-1.25, xl=1.8)
+        l7 = self.ligne(self.t("on additionne", 38, VERT_OK), y=-1.25, xl=1.45)
         self.play(FadeIn(l7, scale=1.2), run_time=0.35)
         self.au_mot("1 plus")
         s1 = self.t("1 + 1", 40, FLECHE)
         s1b = self.t("= 2", 40, VERT_OK)
-        self.ligne(s1, s1b, y=-1.95, xl=1.8)
+        self.ligne(s1, s1b, y=-1.95, xl=1.45, buff=0.25)
         self.play(FadeIn(s1, shift=UP * 0.1), run_time=0.3)
         self.au_nb("1 plus 1", "2")
         b11 = pose(1, 1, 2, VERT_OK)
@@ -615,22 +639,18 @@ class DenombrementPascalBase(OutilsDenombrement):
         fb2 = Arrow(d.N(2, 0) + UP * 0.3, d.N(2, 1) + DOWN * 0.4, buff=0, color=FLECHE, stroke_width=7)
         s2 = self.t("2 + 1", 40, FLECHE)
         s2b = self.t("= 3", 40, VERT_OK)
-        self.ligne(s2, s2b, y=-2.65, xl=1.8)
+        self.ligne(s2, s2b, y=-2.65, xl=1.45, buff=0.25)
         self.play(FadeOut(fg), FadeOut(fb), GrowArrow(fg2), GrowArrow(fb2), FadeIn(s2, shift=UP * 0.1), run_time=0.35)
         self.au_nb("2 plus 1", "3")
         b21 = pose(2, 1, 3, VERT_OK)
         self.play(FadeIn(s2b, shift=UP * 0.1), FadeIn(b21, scale=1.7), run_time=0.4)
+        # « Et ainsi de suite » : la figure se remplit D'UN COUP, sur ces mots
+        # (4, 3, 6 ne sont pas dits : ils n'apparaissent pas avant la phrase).
         self.au_mot("ainsi de suite")
-        self.play(FadeOut(fg2), FadeOut(fb2), run_time=0.2)
-        # « et ainsi de suite » : la figure se remplit (4, 3, 6 lus, pas dits)
-        for (i, j) in [(3, 1), (1, 2), (2, 2)]:
-            fa = Arrow(d.N(i - 1, j) + RIGHT * 0.3, d.N(i, j) + LEFT * 0.4, buff=0, color=FLECHE, stroke_width=6)
-            fc = Arrow(d.N(i, j - 1) + UP * 0.3, d.N(i, j) + DOWN * 0.4, buff=0, color=FLECHE, stroke_width=6)
-            b = pose(i, j, C(i + j, i), WHITE, audit=False)
-            self.play(GrowArrow(fa), GrowArrow(fc), run_time=0.3)
-            self.play(FadeIn(b, scale=1.6), FadeOut(fa), FadeOut(fc), run_time=0.3)
+        restes = [pose(i, j, C(i + j, i), WHITE, audit=False) for (i, j) in [(3, 1), (1, 2), (2, 2)]]
         bq = pose(3, 2, "?", JAUNE_TITRE, audit=False)
-        self.play(FadeIn(bq, scale=1.6), run_time=0.3)
+        self.play(FadeOut(fg2), FadeOut(fb2), LaggedStart(*[FadeIn(b, scale=1.6) for b in restes + [bq]],
+                                                          lag_ratio=0.15), run_time=0.6)
         self.attendre_voix(marge=0.5)
         self.d = d
         self.decor = VGroup(d.rues(8), d.blocs(), m, ly)
@@ -916,7 +936,7 @@ class DenombrementPascalBase(OutilsDenombrement):
         nsam = self.t("Sam", 30, JAUNE_TITRE).next_to(sam, DOWN, buff=0.08)
         l1 = VGroup(self.t("Choisis", 34), self.t("k + 1", 34, ORANGE_RETENUE), self.t("élèves parmi", 34),
                     self.t("n + 1", 34, ORANGE_RETENUE)).arrange(RIGHT, buff=0.15)
-        l1.move_to(P(0, 0.85)).align_to(P(-5.9, 0), LEFT)
+        l1.move_to(P(0, 0.72)).align_to(P(-5.9, 0), LEFT)
         self.au_mot("Choisis")
         self.play(LaggedStart(*[FadeIn(e, shift=UP * 0.15) for e in classe], lag_ratio=0.08),
                   FadeIn(l1[0], shift=RIGHT * 0.1), run_time=0.6)
@@ -933,7 +953,7 @@ class DenombrementPascalBase(OutilsDenombrement):
         self.au_mot("Soit Sam est choisi")
         s1 = self.eleve(JAUNE_TITRE, 0.3).move_to(P(x1 - w / 2 + 0.5, yc + 0.85))
         ok = Circle(radius=0.42, color=VERT_OK, stroke_width=5).move_to(s1)
-        c1 = self.t("Sam est choisi :", 30, VERT_OK, larg=w - 1.3).next_to(s1, RIGHT, buff=0.35)
+        c1 = self.t("Sam est choisi :", 30, VERT_OK, larg=w - 1.5).next_to(ok, RIGHT, buff=0.22)
         self.play(Create(cadres[0]), FadeIn(s1), Create(ok), FadeIn(c1, shift=RIGHT * 0.1), run_time=0.5)
         self.au_mot("il reste k")
         c1b = self.t("il reste k élèves", 28, larg=w - 0.5)
@@ -948,7 +968,8 @@ class DenombrementPascalBase(OutilsDenombrement):
         s2 = self.eleve(JAUNE_TITRE, 0.3).move_to(P(x2 - w / 2 + 0.5, yc + 0.85))
         croix = VGroup(Line(s2.get_corner(UL), s2.get_corner(DR)), Line(s2.get_corner(UR), s2.get_corner(DL)))
         croix.set_stroke(ROUGE_ERREUR, 5)
-        c2 = self.t("Sam n'est pas choisi :", 30, ROUGE_ERREUR, larg=w - 1.3).next_to(s2, RIGHT, buff=0.35)
+        c2 = self.t("Sam n'est pas choisi :", 30, ROUGE_ERREUR, larg=w - 1.5).next_to(s2, RIGHT, buff=0.35)
+        c2.align_to(P(c1.get_left()[0] + x2 - x1, 0), LEFT)
         self.play(Create(cadres[1]), FadeIn(s2), Create(croix), FadeIn(c2, shift=RIGHT * 0.1), run_time=0.5)
         self.au_nb("il faut k plus", "1")
         c2b = self.t("il faut k + 1 élèves", 28, larg=w - 0.5)
@@ -1043,6 +1064,7 @@ class DenombrementPascalBase(OutilsDenombrement):
         q2 = self.t("Quelle est la ligne 6 ?", 32)
         choix = ["1, 6, 15, 20, 15, 6, 1", "1, 6, 10, 20, 10, 6, 1", "1, 5, 15, 20, 15, 5, 1"]
         tete, q, cartes, pause, rebours = self.q_tete([q1, q2], choix, xl=1.0, largeur=5.25)
+        self.place_pour_coche(cartes)
         self.au_mot("Question")
         self.play(FadeIn(tete, shift=DOWN * 0.2), run_time=0.4)
         lignes = triangle_pascal(7, (-3.6, 2.55), dx=0.62, dy=0.52, fs=26, color=GREY_A, audit=False)

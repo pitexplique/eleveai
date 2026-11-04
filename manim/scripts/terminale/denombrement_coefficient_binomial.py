@@ -275,7 +275,8 @@ class DenombrementCoefficientBinomialBase(DenombrementArrangementCombinaisonBase
         barre = Line(rep[0].get_left(), rep[0].get_right(), color=ROUGE_ERREUR, stroke_width=4)
         self.play(FadeIn(o2, shift=RIGHT * 0.1), FadeIn(rep), Create(barre), run_time=0.45)
         self.au_mot("combinaison")
-        c1 = self.t("C'est une combinaison :", 40).move_to(P(0, -2.25)).align_to(P(-6.3, 0), LEFT)
+        # plus bas qu'avant (−2,25) : le binôme est nettement sous « Do, do, mi impossible »
+        c1 = self.t("C'est une combinaison :", 40).move_to(P(0, -2.65)).align_to(P(-6.3, 0), LEFT)
         bn = parmi(12, 3, 52).next_to(c1, RIGHT, buff=0.35)
         self.play(FadeIn(c1, shift=UP * 0.1), run_time=0.4)
         self.au_mot("3 parmi")
@@ -341,7 +342,7 @@ class DenombrementCoefficientBinomialBase(DenombrementArrangementCombinaisonBase
         self.dire("05-formule")
         bn = parmi("n", "k", 52)
         eg = self.t("=", 48)
-        den = VGroup(self.t("k!", 46), self.t("× (n − k)!", 46)).arrange(RIGHT, buff=0.15)
+        den = VGroup(self.t("k!", 46), self.t("× (n − k)!", 46)).arrange(RIGHT, buff=0.32)
         fr = frac(self.t("n!", 46), den, 46)
         VGroup(bn, eg, fr).arrange(RIGHT, buff=0.3).move_to(P(-2.6, 2.1))
         self.au_mot("k parmi")
@@ -355,7 +356,7 @@ class DenombrementCoefficientBinomialBase(DenombrementArrangementCombinaisonBase
         cad = SurroundingRectangle(VGroup(bn, eg, fr), color=SANS_ORDRE, buff=0.2, stroke_width=3)
         self.play(Create(cad), run_time=0.3)
         ici = self.t("Ici :", 38, JAUNE_TITRE)
-        den2 = VGroup(self.t("3!", 42), self.t("× 9!", 42)).arrange(RIGHT, buff=0.15)
+        den2 = VGroup(self.t("3!", 42), self.t("× 9!", 42)).arrange(RIGHT, buff=0.3)
         f2 = frac(self.t("12!", 42), den2, 42)
         r2 = VGroup(self.t("=", 44), parmi(12, 3, 44), self.t("= 220", 46, VERT_OK)).arrange(RIGHT, buff=0.25)
         muet(r2[1])
@@ -514,7 +515,7 @@ class DenombrementCoefficientBinomialBase(DenombrementArrangementCombinaisonBase
         self.play(*[c.animate.set_fill(BLEU_CALCUL) for c in ronds[18:]], FadeIn(l2), run_time=0.35)
         b1, b2 = parmi(20, 18, 44), parmi(20, 2, 44, BLEU_CALCUL)
         eg = self.t("=", 44)
-        VGroup(b1, eg, b2).arrange(RIGHT, buff=0.3).move_to(P(-3.4, -1.65))
+        VGroup(b1, eg, b2).arrange(RIGHT, buff=0.3).move_to(P(-3.4, -2.05))   # sous la carte C (« = 190 » la touchait)
         self.montrer_parmi(b1, "18 parmi", "20 égale")
         self.play(FadeIn(eg), run_time=0.12)
         self.montrer_parmi(b2, "2 parmi", "20 :")
@@ -530,7 +531,7 @@ class DenombrementCoefficientBinomialBase(DenombrementArrangementCombinaisonBase
         self.au_mot("190")
         self.play(FadeIn(r[2], scale=1.3), run_time=0.3)
         pb = VGroup(self.t("Pas besoin de calculer", 32, VERT_OK), self.t("20!", 34, VERT_OK))
-        pb.arrange(RIGHT, buff=0.2).move_to(P(-3.4, -2.75))
+        pb.arrange(RIGHT, buff=0.2).move_to(P(-3.4, -3.05))
         self.au_mot("Pas besoin")
         self.play(FadeIn(pb[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("20 factorielle")
@@ -711,7 +712,7 @@ class DenombrementCoefficientBinomialBase(DenombrementArrangementCombinaisonBase
         self.play(Write(tit), run_time=0.7)
         fs = 36
         a = [parmi("n", "k", fs), self.t("compte les façons de choisir k éléments parmi n, sans ordre.", fs)]
-        den = VGroup(self.t("k!", fs), self.t("× (n − k)!", fs)).arrange(RIGHT, buff=0.12)
+        den = VGroup(self.t("k!", fs), self.t("× (n − k)!", fs)).arrange(RIGHT, buff=0.28)
         b = [self.t("Il vaut", fs), frac(self.t("n!", fs), den, fs)]
         c = [parmi("n", "k", fs), self.t("=", fs), parmi("n", "n − k", fs)]
         d = [self.t("Un ensemble à n éléments a", fs), puissance("2", "n", fs + 4, VERT_OK), self.t("parties.", fs)]

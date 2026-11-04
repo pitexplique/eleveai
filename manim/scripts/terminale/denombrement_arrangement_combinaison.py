@@ -277,19 +277,24 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
         return VGroup(cadre, ligne)
 
     def q_tete(self, question, choix):
+        # pas de « larg » par ligne : le bloc garde la police 34 sur TOUTES ses
+        # lignes ; la colonne s'élargit vers la gauche (jusqu'à −0,7, les dessins
+        # de gauche s'arrêtent avant) plutôt que de rapetisser le texte.
+        q = VGroup(*[x if isinstance(x, Mobject) else self.t(x, 34) for x in question])
+        q.arrange(DOWN, aligned_edge=LEFT, buff=0.14)
+        xl = max(-0.7, min(XL, BORD_X - q.width))
         tete = VGroup(pastille_pause(0.38), self.t("Question !", 38, ORANGE_RETENUE)).arrange(RIGHT, buff=0.22)
-        self.col(tete, 3.15)
+        self.col(tete, 3.15, xl)
         rebours = CompteARebours(5, r=0.34, fs=32).next_to(tete, RIGHT, buff=0.35)
         if rebours.get_right()[0] > BORD_X:
             rebours.shift(LEFT * (rebours.get_right()[0] - BORD_X))
-        q = VGroup(*[x if isinstance(x, Mobject) else self.t(x, 34, larg=BORD_X - XL) for x in question])
-        q.arrange(DOWN, aligned_edge=LEFT, buff=0.14)
-        self.col(q, 0)
+        self.col(q, 0, xl)
         q.align_to(P(0, tete.get_bottom()[1] - 0.25), UP)
         cartes = VGroup(*[self.carte_choix(l, c) for l, c in zip("ABC", choix)]).arrange(DOWN, buff=0.16)
-        self.col(cartes, 0)
+        self.col(cartes, 0, xl)
         cartes.align_to(P(0, q.get_bottom()[1] - 0.3), UP)
-        pause = self.col(self.t("Mets pause, et choisis !", 32, ORANGE_RETENUE), cartes.get_bottom()[1] - 0.45)
+        # sous le dessin de gauche : dans la colonne, la règle Ti-Margo la rapetissait
+        pause = self.t("Mets pause, et choisis !", 34, ORANGE_RETENUE).move_to(P(-3.4, -2.8))
         return tete, q, cartes, pause, rebours
 
     def q_montrer_choix(self, cartes):
@@ -459,7 +464,7 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
         for r in range(3):
             self.au_nb(*mots[r])
             v = self.t(vals[r], 40, ORDRE)
-            lg = self.ligne(self.t(noms[r], 34, audit=False), v, y=2.35 - r * 0.72)
+            lg = self.ligne(self.t(noms[r], 34, audit=False), v, y=2.35 - r * 0.72, buff=0.24)
             sous = self.t(("" if r == 0 else "× ") + vals[r], 32, ORDRE).move_to(P(xs[r], -2.85))
             anims = [FadeIn(lg, shift=RIGHT * 0.15), FadeIn(sous),
                      Create(niveaux[r], lag_ratio=0.02 if r else 0.1)]
@@ -472,7 +477,7 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
             lignes.append(lg)
         self.au_mot("8 fois")
         p = [self.t(x, 42, ORDRE) for x in ("8", "× 7", "× 6", "=", "336")]
-        prod = self.ligne(*p, y=-0.15)
+        prod = self.ligne(*p, y=-0.15, buff=0.2)
         p[4].set_color(VERT_OK)
         self.play(FadeIn(p[0], shift=UP * 0.1), run_time=0.25)
         self.au_nb("8 fois", "7")
@@ -527,7 +532,7 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
         self.play(FadeIn(g2, shift=UP * 0.1), run_time=0.35)
         f = [self.t("n", 42, ORDRE), self.t("× (n − 1)", 42, ORDRE),
              self.t("× … × (n − k + 1)", 42, ORDRE, audit=False)]
-        fo = VGroup(*f).arrange(RIGHT, buff=0.18).move_to(P(0, 0.2)).align_to(P(-6.3, 0), LEFT)
+        fo = VGroup(*f).arrange(RIGHT, buff=0.24).move_to(P(0, 0.2)).align_to(P(-6.3, 0), LEFT)
         self.au_mot("c'est n")
         self.play(FadeIn(f[0], scale=1.3), run_time=0.3)
         self.au_nb("n moins", "1")
@@ -615,7 +620,7 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
         p1 = self.t("8 × 7 × 6 × 5 × 4 × 3 × 2 × 1", 38, ORDRE, audit=False)
         p2 = self.t("= 8!", 42, ORDRE)
         p3 = self.t("= 40 320", 46, VERT_OK, audit=False)
-        VGroup(p1, p2, p3).arrange(RIGHT, buff=0.2).move_to(P(0, -1.2)).align_to(P(-6.3, 0), LEFT)
+        VGroup(p1, p2, p3).arrange(RIGHT, buff=0.28).move_to(P(0, -1.2)).align_to(P(-6.3, 0), LEFT)
         self.play(FadeIn(p1, shift=UP * 0.1), FadeIn(p2, scale=1.2), run_time=0.45)
         self.au_mot("40 320")
         self.play(FadeIn(p3, scale=1.4), run_time=0.35)
@@ -664,7 +669,7 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
         f5 = self.t("5! =", 38, ORDRE)
         pr = [self.t(x, 38, ORDRE) for x in ("5", "× 4", "× 3", "× 2", "× 1")]
         eg = self.t("= 120", 42, VERT_OK)
-        VGroup(f5, *pr, eg).arrange(RIGHT, buff=0.14).move_to(P(-2.6, -2.3))
+        VGroup(f5, *pr, eg).arrange(RIGHT, buff=0.24).move_to(P(-2.6, -2.3))
         self.play(FadeIn(f5, scale=1.3), run_time=0.3)
         mots = [("5 fois", "5"), ("4 fois", "4"), ("3 fois", "3"), ("2 fois", "2"), ("fois 1", "1")]
         for k, (ctx, nb) in enumerate(mots):
@@ -724,7 +729,7 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
                     max_tip_length_to_length_ratio=0.12)
         self.play(GrowFromCenter(br), GrowArrow(fl2), FadeIn(f6b, scale=1.2), run_time=0.5)
         eq = [self.t("336", 46, ORDRE), self.t("÷ 6", 46), self.t("= 56 groupes", 46, VERT_OK)]
-        VGroup(*eq).arrange(RIGHT, buff=0.2).move_to(P(-1.2, -2.75))
+        VGroup(*eq).arrange(RIGHT, buff=0.28).move_to(P(-1.2, -2.75))
         self.au_mot("336")
         self.play(FadeIn(eq[0], shift=UP * 0.1), run_time=0.3)
         self.au_nb("divisé par", "6")
@@ -765,7 +770,9 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
         self.play(FadeIn(bn[0]), FadeIn(bn[2]), FadeIn(bn[1][1], scale=1.3), run_time=0.3)
         self.au_nb("3 parmi", "8")
         self.play(FadeIn(bn[1][0], scale=1.3), FadeIn(dit), run_time=0.3)
-        self.au_mot("factorielle")
+        # « 8! » au PREMIER « 8 » de « 8 factorielle » (cues2marques fusionnait les
+        # deux « 8 » de « parmi 8 : 8 » : la marque [75, 6,211] est ajoutée à la main)
+        self.au_pos(self._texte_voix.find("8 factorielle"))
         self.play(FadeIn(eg1), FadeIn(f[0], scale=1.2), run_time=0.35)
         self.au_mot("3 factorielle")
         self.play(Create(f[1]), FadeIn(f[2][0], shift=UP * 0.1), run_time=0.35)
@@ -868,7 +875,7 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
         onc = self.t("l'ordre ne compte pas", 30, SANS_ORDRE).next_to(mm, DOWN, buff=0.15)
         self.play(FadeIn(onc, shift=UP * 0.1), run_time=0.35)
         f = [self.t("8 × 7", 44), self.t("÷ 2", 44), self.t("= 28", 48, VERT_OK)]
-        VGroup(*f).arrange(RIGHT, buff=0.2).move_to(P(-3.4, 2.65))
+        VGroup(*f).arrange(RIGHT, buff=0.28).move_to(P(-3.4, 2.65))
         self.au_mot("8 fois")
         self.play(FadeIn(f[0][0], shift=UP * 0.1), run_time=0.25)
         self.au_nb("8 fois", "7")
@@ -923,7 +930,7 @@ class DenombrementArrangementCombinaisonBase(AuditSynchro, MotsCales, Notion6e):
         oc = self.t("l'ordre compte", 34, ORDRE).move_to(P(-3.5, -0.8))
         self.play(FadeIn(oc, scale=1.2), run_time=0.3)
         f = [self.t("5", 46, ORDRE), self.t("× 4", 46, ORDRE), self.t("= 20", 50, VERT_OK)]
-        VGroup(*f).arrange(RIGHT, buff=0.2).move_to(P(-3.5, -1.7))
+        VGroup(*f).arrange(RIGHT, buff=0.28).move_to(P(-3.5, -1.7))
         self.au_mot("5 fois")
         self.play(FadeIn(f[0], shift=UP * 0.1), run_time=0.25)
         self.au_nb("5 fois", "4")

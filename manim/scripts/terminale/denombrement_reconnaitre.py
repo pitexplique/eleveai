@@ -460,6 +460,33 @@ class DenombrementReconnaitreTerminale(DenombBase):
     fichier_marques = "denombrement_reconnaitre_marques.json"
     nom_voix = "terminale-denombrement-reconnaitre"
 
+    def q_reponse(self, cartes, bonne, pause, rebours):
+        """Comme DenombBase.q_reponse, mais la carte grandit depuis son BORD DROIT
+        (vers la gauche : les cartes larges restent dans la marge de 3 %), et la
+        coche FINIT à 0,35 de ce bord (posée sur la carte agrandie, elle rétrécit
+        avec elle, sans glisser sur le texte)."""
+        b = cartes[bonne]
+        anims = [b[0].animate.set_stroke(VERT_OK, width=7).set_fill("#052e16", 1),
+                 b[1][0][0].animate.set_fill(VERT_OK)]
+        anims += [cartes[j].animate.set_opacity(0.3) for j in range(len(cartes)) if j != bonne]
+        self.play(*anims, FadeOut(rebours), FadeOut(pause), run_time=0.25)
+        k = 1.12
+        c = b[0].get_right()
+        ok = self.coche(VERT_OK, 0.2 * k).move_to(c + LEFT * 0.35 * k)
+        self.play(b.animate.scale(k, about_point=c), Create(ok), run_time=0.25)
+        self.play(b.animate.scale(1 / k, about_point=c), ok.animate.scale(1 / k, about_point=c), run_time=0.25)
+        return ok
+
+    def fois(self, *termes, fs=44, color=WHITE, signe="×"):
+        """Comme DenombBase.fois, mais avec des espaces visibles autour des signes
+        (0,26 au lieu de 0,18 : « 10 × 9 × 8 × 7 » n'est plus collé)."""
+        g = VGroup()
+        for k, x in enumerate(termes):
+            if k:
+                g.add(self.t(signe, fs, color))
+            g.add(x if isinstance(x, Mobject) else self.t(x, fs, color))
+        return g.arrange(RIGHT, buff=0.26)
+
     def chiffres_dans(self, boites, chaine, fs=48, color=WHITE, audit=True):
         """Un chiffre par case (les espaces de la chaîne sont ignorés)."""
         g = VGroup()
@@ -615,13 +642,13 @@ class DenombrementReconnaitreTerminale(DenombBase):
             anims += [a for j in ks for a in (FadeIn(prod[2 * j], shift=UP * 0.15),
                                               grosses[j].animate.set_fill(ORDRE, 0.35))]
             self.play(*anims, run_time=0.15)
-        p4 = VGroup(self.t("=", 42), puissance("10", "4", 42, WHITE)).arrange(RIGHT, buff=0.18)
-        p4.next_to(prod, RIGHT, buff=0.2)
+        p4 = VGroup(self.t("=", 42), puissance("10", "4", 42, WHITE)).arrange(RIGHT, buff=0.26)
+        p4.next_to(prod, RIGHT, buff=0.26)
         self.au_pos(self.ip("10", 6))
         self.play(FadeIn(p4[0]), FadeIn(p4[1][0], shift=LEFT * 0.1), run_time=0.3)
         self.au_pos(self.ip("4", 1, v.find("puissance")))
         self.play(FadeIn(p4[1][1], scale=1.4), run_time=0.25)
-        res = VGroup(self.t("=", 46, VERT_OK), self.t("10 000 codes", 46, VERT_OK)).arrange(RIGHT, buff=0.2)
+        res = VGroup(self.t("=", 46, VERT_OK), self.t("10 000 codes", 46, VERT_OK)).arrange(RIGHT, buff=0.26)
         res.next_to(prod, DOWN, buff=0.35).align_to(prod, LEFT)
         self.au_mot("10 000")
         cad = SurroundingRectangle(res, color=VERT_OK, buff=0.12, stroke_width=3)
@@ -653,7 +680,7 @@ class DenombrementReconnaitreTerminale(DenombBase):
         t0 = self.renderer.time
         tete, q, cartes, pause, rebours = self.q_tete(
             ["Un code de 6 chiffres,", "répétitions permises.", "Combien de codes ?"],
-            ["60", "1 000 000", "151 200"])
+            ["60", "1 000 000", "151 200"], xl=1.6)   # colonne un peu plus large : la question garde sa police 32
         self.au_mot("Question")
         self.play(FadeIn(tete, shift=DOWN * 0.2), run_time=0.4)
         six = cases(6, 0.68, 0.8, 0.1).move_to(P(-3.55, 1.4))
@@ -730,8 +757,8 @@ class DenombrementReconnaitreTerminale(DenombBase):
             if k < 3:
                 perdu = libres[k][-1].copy().set_color(ROUGE_ERREUR)
                 self.play(Flash(perdu, color=ROUGE_ERREUR, line_length=0.12), run_time=0.25)
-        res = VGroup(self.t("=", 44, VERT_OK), self.t("5 040 codes", 44, VERT_OK)).arrange(RIGHT, buff=0.18)
-        res.next_to(prod, RIGHT, buff=0.2)
+        res = VGroup(self.t("=", 44, VERT_OK), self.t("5 040 codes", 44, VERT_OK)).arrange(RIGHT, buff=0.26)
+        res.next_to(prod, RIGHT, buff=0.26)
         self.au_mot("5 040 codes")
         self.play(FadeIn(res, scale=1.3), run_time=0.4)
         self.insister(res, 1.12)
@@ -852,9 +879,26 @@ class DenombrementReconnaitreTerminale(DenombBase):
         return VGroup(r, c)
 
     def fleche(self, a, b, mot, color=WHITE, cote=UP):
+        """L'étiquette s'écarte de la flèche PERPENDICULAIREMENT, du côté « cote »,
+        d'au moins 0,14 entre son bord et le trait (elle ne le frôle plus)."""
         f = Arrow(a, b, buff=0.05, color=color, stroke_width=4, max_tip_length_to_length_ratio=0.15)
-        l = self.t(mot, 26, color, audit=False).next_to(f.get_center(), cote, buff=0.12)
+        l = self.t(mot, 26, color, audit=False)
+        d = (np.array(b) - np.array(a)) / np.linalg.norm(np.array(b) - np.array(a))
+        n = np.array([-d[1], d[0], 0.0])
+        if np.dot(n, cote) < 0:
+            n = -n
+        ext = abs(n[0]) * l.width / 2 + abs(n[1]) * l.height / 2
+        l.move_to(f.get_center() + n * (ext + 0.16))
         return f, l
+
+    def fs_commun(self, choix, largeur, fs=30):
+        """La taille commune des cartes : la plus grande qui tient sur TOUTES
+        (aucune carte n'est réduite à part : même police sur les trois)."""
+        while fs > 16:
+            if all(Text(c, font_size=fs).width + 0.25 + 0.5 * fs / 32 <= largeur - 1.15 for c in choix):
+                return fs
+            fs -= 1
+        return fs
 
     def ecran_piege(self):
         self.clear()
@@ -923,7 +967,8 @@ class DenombrementReconnaitreTerminale(DenombBase):
         t0 = self.renderer.time
         choix = ["un 3-uplet avec répétitions", "un 3-uplet d'éléments distincts", "une partie à 3 éléments"]
         tete, q, cartes, pause, rebours = self.q_tete(
-            ["Une équipe de 3 joueurs", "parmi 10 copains. C'est :"], choix, xl=-0.1, largeur=6.3, fs_c=30)
+            ["Une équipe de 3 joueurs", "parmi 10 copains. C'est :"], choix, xl=-0.5, largeur=6.95,
+            fs_c=self.fs_commun(choix, 6.95))
         self.au_mot("Question")
         self.play(FadeIn(tete, shift=DOWN * 0.2), run_time=0.4)
         hauts = [BLEU_CALCUL, VERT_OK, ORANGE_RETENUE, VIOLET_ACCENT, "#F472B6"]
@@ -971,8 +1016,8 @@ class DenombrementReconnaitreTerminale(DenombBase):
         t0 = self.renderer.time
         choix = ["une partie à 3 éléments", "un 3-uplet d'éléments distincts", "un 3-uplet avec répétitions"]
         tete, q, cartes, pause, rebours = self.q_tete(
-            ["Une course de 15 chevaux :", "les trois premiers, dans l'ordre.", "Ton pari est :"], choix, xl=-0.1,
-            largeur=6.3, fs_c=30)
+            ["Une course de 15 chevaux :", "les trois premiers, dans l'ordre.", "Ton pari est :"], choix, xl=-0.5,
+            largeur=6.95, fs_c=self.fs_commun(choix, 6.95))
         self.au_mot("Question")
         self.play(FadeIn(tete, shift=DOWN * 0.2), run_time=0.4)
         robes = ["#8B5A2B", "#5c3a1e", "#A0522D", "#2b1a0e", "#C19A6B"]
@@ -1011,8 +1056,8 @@ class DenombrementReconnaitreTerminale(DenombBase):
             if k:
                 anims.append(FadeIn(prod[2 * k - 1]))
             self.play(*anims, run_time=0.25)
-        res = VGroup(self.t("=", 40, VERT_OK), self.t("2 730 paris", 40, VERT_OK)).arrange(RIGHT, buff=0.15)
-        res.next_to(prod, RIGHT, buff=0.18)
+        res = VGroup(self.t("=", 40, VERT_OK), self.t("2 730 paris", 40, VERT_OK)).arrange(RIGHT, buff=0.24)
+        res.next_to(prod, RIGHT, buff=0.45)   # le cadre agrandi ne touche plus « 13 »
         self.au_mot("2 730")
         cad = SurroundingRectangle(res, color=VERT_OK, buff=0.12, stroke_width=3)
         self.play(FadeIn(res, scale=1.3), Create(cad), run_time=0.4)

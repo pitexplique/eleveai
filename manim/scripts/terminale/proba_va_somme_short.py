@@ -198,7 +198,7 @@ class ProbaVaSommeShort(AuditSynchro, MotsCales, Short6e):
 
         # ── 01 : Chloé ; l'espérance d'un dé : 3,5 ──
         self.dire("01-image")
-        ch = chloe(0.85).move_to(P(-1.25, 1.55))
+        ch = chloe(0.85).move_to(P(-1.45, 1.55))   # le dé ne touche plus « jeux de société »
         nom = self.t("Chloé", 34, VERT_OK).move_to(P(0.75, 2.0))
         self.au_mot("Chloé")
         self.play(FadeOut(grille), FadeOut(cent), FadeOut(add), FadeOut(pt), FadeOut(vr), FadeIn(ch, shift=UP * 0.15),
@@ -210,7 +210,7 @@ class ProbaVaSommeShort(AuditSynchro, MotsCales, Short6e):
         self.au_mot("l'espérance")
         e1 = self.t("Un dé : E =", 32, ESP)
         e2 = self.t("3,5", 36, ESP)
-        ee = VGroup(e1, e2).arrange(RIGHT, buff=0.15).move_to(P(0, 0.25))
+        ee = VGroup(e1, e2).arrange(RIGHT, buff=0.25).move_to(P(0, 0.25))
         self.play(FadeIn(e1, shift=UP * 0.1), run_time=0.3)
         self.au_mot("3,5")
         y0 = -1.55
@@ -269,7 +269,7 @@ class ProbaVaSommeShort(AuditSynchro, MotsCales, Short6e):
         r1 = self.t("3,5 +", 32, ESP)
         r1b = self.t("3,5", 32, ESP)
         r2 = self.t("= 7", 34, VERT_OK)
-        rr = VGroup(r1, r1b, r2).arrange(RIGHT, buff=0.15).move_to(P(0, -0.33))
+        rr = VGroup(r1, r1b, r2).arrange(RIGHT, buff=0.24).move_to(P(0, -0.33))   # « 3,5 + 3,5 » : espace visible
         self.play(FadeOut(q1), FadeOut(q2), FadeIn(r1, shift=UP * 0.1), run_time=0.3)
         self.au_nb("plus", "3,5")
         self.play(FadeIn(r1b, shift=UP * 0.1), run_time=0.25)
@@ -282,11 +282,13 @@ class ProbaVaSommeShort(AuditSynchro, MotsCales, Short6e):
                                      fill_color=VERT_OK if s == 7 else COUL_X, fill_opacity=0.9)
                            .move_to(P((s - 7) * 0.33, yb + FREQ2[s] * kh / 2)) for s in range(2, 13)])
         l7 = self.t("7", 28, VERT_OK).next_to(barres2[5], UP, buff=0.06)
-        self.play(FadeOut(d1), FadeOut(d2), Create(base2), LaggedStart(*[GrowFromEdge(x, DOWN) for x in barres2],
+        # « Question ! » s'efface ICI (avec les dés), bien avant que « la somme la
+        # plus fréquente » n'apparaisse à la même place : plus de fondu enchaîné.
+        self.play(FadeOut(d1), FadeOut(d2), FadeOut(tete), Create(base2), LaggedStart(*[GrowFromEdge(x, DOWN) for x in barres2],
                                                                       lag_ratio=0.06), FadeIn(l7), run_time=0.7)
         self.au_mot("la plus fréquente")
         fr = self.t("la somme la plus fréquente", 26, VERT_OK).move_to(P(0, 0.25))
-        self.play(FadeOut(tete), FadeIn(fr, shift=UP * 0.1), Indicate(barres2[5], color=VERT_OK), run_time=0.5)
+        self.play(FadeIn(fr, shift=UP * 0.1), Indicate(barres2[5], color=VERT_OK), run_time=0.5)
         self.attendre_voix(marge=0.2)
 
         # ── 03 : la surprise : 100 dés, le total tout près de 350 ──
@@ -300,20 +302,20 @@ class ProbaVaSommeShort(AuditSynchro, MotsCales, Short6e):
         fs = 30
         self.au_nb("Espérance", "100")
         e1 = VGroup(self.t("E = 100 ×", fs, ESP), self.t("3,5", fs, ESP), self.t("= 350", fs + 4, VERT_OK))
-        e1.arrange(RIGHT, buff=0.12).scale_to_fit_width(3.8).move_to(P(0, 0.3))
+        e1.arrange(RIGHT, buff=0.22).scale_to_fit_width(3.8).move_to(P(0, 0.3))   # « × 3,5 = » : espaces visibles
         self.play(FadeIn(e1[0], shift=UP * 0.1), run_time=0.25)
         self.au_nb("100 fois", "3,5")
         self.play(FadeIn(e1[1], shift=UP * 0.1), run_time=0.25)
         self.au_mot("350")
         self.play(FadeIn(e1[2], scale=1.4), run_time=0.3)
         self.au_mot("L'écart-type")
-        s1 = VGroup(self.t("un dé : σ ≈", fs, COUL_X), self.t("1,71", fs + 2, COUL_X)).arrange(RIGHT, buff=0.12)
+        s1 = VGroup(self.t("un dé : σ ≈", fs, COUL_X), self.t("1,71", fs + 2, COUL_X)).arrange(RIGHT, buff=0.2)
         s1.scale_to_fit_width(min(s1.width, 3.8)).move_to(P(0, -0.3))
         self.play(FadeIn(s1[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("1,71")
         self.play(FadeIn(s1[1], scale=1.3), run_time=0.3)
         self.au_mot("Celui du total")
-        s2 = VGroup(self.t("total : σ =", fs), self.t("pas 171 !", fs + 2, ROUGE_ERREUR)).arrange(RIGHT, buff=0.12)
+        s2 = VGroup(self.t("total : σ =", fs), self.t("pas 171 !", fs + 2, ROUGE_ERREUR)).arrange(RIGHT, buff=0.2)
         s2.scale_to_fit_width(min(s2.width, 3.8)).move_to(P(0, -0.9))
         self.play(FadeIn(s2[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("171")
