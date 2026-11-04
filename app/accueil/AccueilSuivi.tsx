@@ -225,7 +225,8 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
           </h1>
           {/* ⭐ 03/11/2026 — Frédéric : « EleveAI adaptée à huit pays
               francophones, à mettre dans la page d'accueil ». Sous le titre,
-              visible de tous ; les 8 pays du plan, voir lib/aventure/pays.ts. */}
+              visible de tous ; les 8 pays du plan, voir lib/aventure/pays.ts.
+              04/11 : retirée le matin, remise à sa demande (« remets tout »). */}
           <Link
             href="/rejoindre-l-aventure"
             className="mx-auto mt-4 inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-black text-teal-800 shadow-sm ring-1 ring-teal-200 hover:ring-teal-400 sm:text-base"
