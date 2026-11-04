@@ -223,12 +223,9 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
           <h1 className={`${slab.className} text-3xl font-light leading-tight text-sky-700 sm:text-4xl lg:whitespace-nowrap lg:text-5xl`}>
             <span className="font-bold text-teal-700">EleveAI</span> <span className="font-bold">c&apos;est</span> l&apos;apprentissage personnalisé
           </h1>
-          {/* ⛔ 04/11 — Frédéric : « enlève le bandeau, les drapeaux pays et
-              participez à l'aventure, on verra ça quand tout sera fait fin
-              décembre ». La page /rejoindre-l-aventure reste, sans lien ici.
-              Pour remettre la pastille (03/11 : « EleveAI adaptée à huit pays
-              francophones »), décommenter :
-
+          {/* ⭐ 03/11/2026 — Frédéric : « EleveAI adaptée à huit pays
+              francophones, à mettre dans la page d'accueil ». Sous le titre,
+              visible de tous ; les 8 pays du plan, voir lib/aventure/pays.ts. */}
           <Link
             href="/rejoindre-l-aventure"
             className="mx-auto mt-4 inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-black text-teal-800 shadow-sm ring-1 ring-teal-200 hover:ring-teal-400 sm:text-base"
@@ -236,6 +233,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             Adaptée à 8 pays francophones
             <span className="flex gap-1">
               {PAYS_AVENTURE.map((p) => (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={p.slug}
                   src={`/drapeaux/${p.slug}.svg`}
@@ -248,7 +246,6 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               ))}
             </span>
           </Link>
-          */}
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <Nuage Icone={GraduationCap} titre="Tout le programme">
               Du CP à la Terminale : {totalMicros.toLocaleString("fr-FR")} micro-compétences de maths et {totalVideos.toLocaleString("fr-FR")}+ vidéos, rangées comme le programme officiel.
@@ -361,16 +358,14 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             <Link href="/prof/classes" className="mt-4 inline-flex items-center gap-2 font-black text-teal-800 hover:underline">
               Ouvrir « Mes classes » <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            {/* ⛔ 04/11 : l'appel aux profs des 8 pays, retiré jusqu'à fin
-                décembre. Pour le remettre, décommenter :
-
+            {/* 03/11 : l'appel aux profs des 8 pays, une ligne, pas un bandeau :
+                l'accueil parle d'abord aux élèves et aux parents. */}
             <p className="mt-3 text-sm font-bold text-slate-600">
               🌍 Professeur en France, Andorre, Suisse, Belgique, Luxembourg, Côte d&apos;Ivoire, au Sénégal ou au Maroc ?{" "}
               <Link href="/rejoindre-l-aventure" className="text-teal-800 underline">
                 Votre classe offerte : rejoignez l&apos;aventure
               </Link>
             </p>
-            */}
           </div>
           <figure className="overflow-x-auto rounded-2xl bg-white p-4 shadow-sm">
             <figcaption className="mb-2 text-sm font-bold text-slate-500">Exemple — 6e, nombres décimaux</figcaption>
