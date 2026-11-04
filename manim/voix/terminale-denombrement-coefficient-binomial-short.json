@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Une pizzeria propose 10 garnitures. Tu en mets autant que tu veux. Combien de pizzas différentes ?",
+  "01-image": "Voici Enzo, pizzaïolo. Pour chaque garniture, une seule question : je la mets, ou pas ? Champignons : oui ou non. Olives : oui ou non. 2 choix à chaque fois.",
+  "02-question": "Question ! Avec seulement 3 garnitures, combien de pizzas, la pizza sans rien comprise ? A : 6. B : 9. C : 8. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C. 2 fois 2 fois 2 : 2 puissance 3, 8 pizzas.",
+  "03-surprise": "Avec 10 garnitures : 2 puissance 10, 1 024 pizzas. Une par jour pendant presque 3 ans ! Et avec 20 garnitures : plus d'un million. Exactement 1 048 576.",
+  "04-commentaire": "À toi : avec 10 garnitures, combien de pizzas ont exactement 2 garnitures ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

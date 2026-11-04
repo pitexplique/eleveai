@@ -57158,6 +57158,1101 @@
       ],
       "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-9/eleveai-francais-cp-pas-a-pas-chiffre-9.png",
       "prioritaire": true
+    },
+    {
+      "id": "terminale-denombrement-reconnaitre",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_reconnaitre",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre.png",
+      "titre": "4 touches usées : bonne nouvelle pour le voleur ? — Dénombrer, reconnaître la situation · Tle spé",
+      "accroche": "Le code de ta carte bancaire a 4 chiffres, et 4 touches du distributeur sont plus usées que les autres. Inès, ingénieure en cybersécurité, compte combien de codes un pirate devrait essayer. Avant de compter, elle se pose deux questions : l'ordre compte-t-il ? Peut-on répéter ?\n\nDans cette vidéo :\n• ordre et répétitions : n puissance k, 10 000 codes à 4 chiffres\n• ordre sans répétition : k-uplets d'éléments distincts, n! / (n − k)!, 5 040 codes\n• ni ordre ni répétition : une partie, une combinaison\n• le piège : lire « 4 chiffres » et foncer sur une formule sans se poser les deux questions\n• le code, l'équipe, le tiercé : trois situations, trois façons de compter\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/denombrement-combinatoire\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_reconnaitre&display=simple\n\n📈 Épisode 1 sur 6 de la série Dénombrement d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Le code de la carte"
+        ],
+        [
+          "00:21",
+          "Inès, ingénieure en cybersécurité"
+        ],
+        [
+          "00:44",
+          "Premier cas : ordre et répétitions"
+        ],
+        [
+          "01:14",
+          "Question 1"
+        ],
+        [
+          "01:49",
+          "Deuxième cas : éléments distincts"
+        ],
+        [
+          "02:23",
+          "Troisième cas : une partie"
+        ],
+        [
+          "02:51",
+          "Le piège : foncer sur une formule"
+        ],
+        [
+          "03:16",
+          "Question 2 : l'équipe"
+        ],
+        [
+          "03:50",
+          "Question 3 : le tiercé"
+        ],
+        [
+          "04:28",
+          "Le conseil d'Inès"
+        ],
+        [
+          "04:40",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "dénombrement",
+        "k-uplet",
+        "combinaison",
+        "code secret",
+        "cybersécurité",
+        "ingénieure",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:14",
+          "question": "Un code de 6 chiffres, répétitions permises. Combien de codes ?",
+          "choix": [
+            "60",
+            "1 000 000",
+            "151 200"
+          ],
+          "reponse": 1,
+          "explication": "L'ordre compte et on peut répéter : 10 choix par case, 10⁶ = 1 000 000."
+        },
+        {
+          "t": "03:16",
+          "question": "Une équipe de 3 joueurs parmi 10 copains. C'est :",
+          "choix": [
+            "un 3-uplet avec répétitions",
+            "un 3-uplet d'éléments distincts",
+            "une partie à 3 éléments"
+          ],
+          "reponse": 2,
+          "explication": "Pas d'ordre dans une équipe et pas deux fois le même : une partie (une combinaison)."
+        },
+        {
+          "t": "03:50",
+          "question": "Une course de 15 chevaux : les trois premiers, dans l'ordre. Ton pari est :",
+          "choix": [
+            "une partie à 3 éléments",
+            "un 3-uplet d'éléments distincts",
+            "un 3-uplet avec répétitions"
+          ],
+          "reponse": 1,
+          "explication": "L'ordre compte, un cheval ne finit pas deux fois : 15 × 14 × 13 = 2 730 paris."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "argent-budget",
+        "chevaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-reconnaitre-short",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_reconnaitre",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-denombrement-reconnaitre",
+      "fichier": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre-short.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre-short.png",
+      "titre": "4 lettres pour écrire tout le vivant ? 🧬 — Tle spé #Shorts",
+      "accroche": "L'ADN n'a que 4 lettres : A, C, G et T. Des mots de 2 lettres ? 4 × 4 = 16, trop peu pour 20 acides aminés. Des mots de 3 lettres : 4³ = 64, c'est assez. La vie a choisi les mots de 3 lettres !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de mots de 3 lettres avec A, C, G et T, si les 3 lettres sont toutes différentes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #dénombrement #terminale #bac",
+      "tags": [
+        "ADN",
+        "codon",
+        "biologie",
+        "dénombrement",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Mots de 2 lettres avec A, C, G, T ?",
+          "choix": [
+            "8",
+            "12",
+            "16"
+          ],
+          "reponse": 2,
+          "explication": "4 choix pour chaque lettre, répétition permise : 4 × 4 = 16."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-produit-somme",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_produit_somme",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme.png",
+      "titre": "Lisbonne : plus de voyages que tu ne crois — Principe multiplicatif, principe additif · Tle spé",
+      "accroche": "Tu veux partir une semaine à Lisbonne : un vol, un hôtel, une excursion. Clara, conseillère en voyages, propose 3 vols, 4 hôtels et 5 excursions. Combien de voyages différents ? Plus que tu ne crois.\n\nDans cette vidéo :\n• « et », des étapes successives : on multiplie, 3 × 4 × 5 = 60 voyages\n• l'arbre des voyages montre tout\n• le cardinal d'un produit cartésien est le produit des cardinaux\n• « ou », des cas disjoints : on additionne\n• le piège : 30 clients avec vol et 20 avec hôtel ne font pas 50 si 12 ont pris les deux : 30 + 20 − 12 = 38\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/denombrement-combinatoire\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_produit_somme&display=simple\n\n📈 Épisode 2 sur 6 de la série Dénombrement d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Un voyage à Lisbonne"
+        ],
+        [
+          "00:21",
+          "Clara, conseillère en voyages"
+        ],
+        [
+          "00:34",
+          "L'arbre des voyages"
+        ],
+        [
+          "00:53",
+          "Le principe multiplicatif"
+        ],
+        [
+          "01:18",
+          "Question 1"
+        ],
+        [
+          "01:50",
+          "Le principe additif"
+        ],
+        [
+          "02:17",
+          "Le piège : des cas qui se chevauchent"
+        ],
+        [
+          "02:40",
+          "Question 2"
+        ],
+        [
+          "03:20",
+          "Le métier de Clara"
+        ],
+        [
+          "03:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "dénombrement",
+        "principe multiplicatif",
+        "principe additif",
+        "produit cartésien",
+        "arbre",
+        "voyage",
+        "conseillère en voyages",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:18",
+          "question": "Clara ajoute un choix : avec ou sans voiture. Combien de voyages ?",
+          "choix": [
+            "62",
+            "120",
+            "14"
+          ],
+          "reponse": 1,
+          "explication": "Une étape de plus à 2 choix : 60 × 2 = 120 voyages."
+        },
+        {
+          "t": "02:40",
+          "question": "6 vols ou 4 bus, puis 2 classes. Combien de façons de voyager ?",
+          "choix": [
+            "48",
+            "12",
+            "20"
+          ],
+          "reponse": 2,
+          "explication": "« ou » : 6 + 4 = 10 trajets ; « et » : 10 × 2 = 20."
+        }
+      ],
+      "centres": [
+        "transports",
+        "avions",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-produit-somme-short",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_produit_somme",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-denombrement-produit-somme",
+      "fichier": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme-short.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme-short.png",
+      "titre": "2 mois sans jamais la même tenue ? 👕 — Tle spé #Shorts",
+      "accroche": "5 t-shirts, 3 pantalons, 4 paires de baskets : 5 × 3 × 4 = 60 tenues, 2 mois sans jamais la même. Yanis, styliste, ajoute 2 casquettes, ou aucune : 60 × 3 = 180 tenues, presque 6 mois !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 7 t-shirts, 3 shorts et 2 paires de sandales : combien de tenues ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_produit_somme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #dénombrement #terminale #bac",
+      "tags": [
+        "tenues",
+        "mode",
+        "styliste",
+        "dénombrement",
+        "principe multiplicatif",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "2 casquettes, ou aucune : combien de tenues ?",
+          "choix": [
+            "120",
+            "180",
+            "62"
+          ],
+          "reponse": 1,
+          "explication": "Casquette 1, casquette 2 ou rien : 3 choix, 60 × 3 = 180 tenues."
+        }
+      ],
+      "centres": [
+        "mode",
+        "art-design"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-arrangement-combinaison",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_arrangement_combinaison",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison.png",
+      "titre": "8 équipes : combien de podiums ? — Permutations et combinaisons · Tle spé",
+      "accroche": "8 équipes s'affrontent dans un tournoi de jeu vidéo. Léa, organisatrice de tournois d'e-sport, doit tout prévoir : les podiums, les ordres de passage, les groupes de la finale. Quand l'ordre compte-t-il ?\n\nDans cette vidéo :\n• les podiums : 8 × 7 × 6 = 336\n• k-uplets d'éléments distincts : n! / (n − k)!\n• permutations : ranger n éléments, n! façons\n• combinaisons : l'ordre ne compte pas, on divise par k!\n• le piège : compter des podiums quand on cherche des groupes, 336 compte chaque groupe 6 fois\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/denombrement-combinatoire\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_arrangement_combinaison&display=simple\n\n📈 Épisode 3 sur 6 de la série Dénombrement d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "8 équipes, combien de podiums ?"
+        ],
+        [
+          "00:18",
+          "Léa, organisatrice de tournois"
+        ],
+        [
+          "00:30",
+          "Les podiums : 8 × 7 × 6"
+        ],
+        [
+          "00:52",
+          "Les k-uplets d'éléments distincts"
+        ],
+        [
+          "01:16",
+          "Les permutations : n!"
+        ],
+        [
+          "01:38",
+          "Question 1"
+        ],
+        [
+          "02:04",
+          "Un groupe sans ordre"
+        ],
+        [
+          "02:28",
+          "Les combinaisons"
+        ],
+        [
+          "02:42",
+          "Le piège : podium ou groupe ?"
+        ],
+        [
+          "03:03",
+          "Question 2"
+        ],
+        [
+          "03:35",
+          "Question 3"
+        ],
+        [
+          "04:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "dénombrement",
+        "permutation",
+        "factorielle",
+        "combinaison",
+        "arrangement",
+        "e-sport",
+        "tournoi",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:38",
+          "question": "5 joueurs passent un par un pour un défi. Combien d'ordres de passage ?",
+          "choix": [
+            "25",
+            "120",
+            "5"
+          ],
+          "reponse": 1,
+          "explication": "5! = 5 × 4 × 3 × 2 × 1 = 120."
+        },
+        {
+          "t": "03:03",
+          "question": "Léa tire 2 équipes parmi les 8 pour le match d'ouverture. Combien de matchs possibles ?",
+          "choix": [
+            "56",
+            "28",
+            "64"
+          ],
+          "reponse": 1,
+          "explication": "Échanger les deux équipes donne le même match : l'ordre ne compte pas. 8 × 7 ÷ 2 = 28 matchs."
+        },
+        {
+          "t": "03:35",
+          "question": "Dans une équipe de 5 joueurs, on nomme un capitaine et un vice-capitaine. Combien de choix ?",
+          "choix": [
+            "10",
+            "20",
+            "25"
+          ],
+          "reponse": 1,
+          "explication": "Les deux rôles sont différents : l'ordre compte. 5 × 4 = 20. 10, c'est si on oublie les rôles."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-arrangement-combinaison-short",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_arrangement_combinaison",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-denombrement-arrangement-combinaison",
+      "fichier": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison-short.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison-short.png",
+      "titre": "Ton mélange de cartes est unique dans l'histoire 🃏 — Tle spé #Shorts",
+      "accroche": "Hugo, magicien, étale 3 cartes : 3 × 2 × 1 = 6 ordres. Avec 4 cartes, 24. Avec 52 cartes : 52 factorielle, environ 8 × 10⁶⁷ ordres. Ton mélange n'a presque sûrement jamais existé !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien d'ordres possibles pour 6 cartes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_arrangement_combinaison&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #dénombrement #terminale #bac",
+      "tags": [
+        "cartes",
+        "magie",
+        "factorielle",
+        "permutation",
+        "dénombrement",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Et avec 4 cartes, combien d'ordres ?",
+          "choix": [
+            "16",
+            "24",
+            "10"
+          ],
+          "reponse": 1,
+          "explication": "4 × 3 × 2 × 1 = 24. Chaque carte ajoutée multiplie tout."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "sciences"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-coefficient-binomial",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_coefficient_binomial",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial.png",
+      "titre": "Combien d'accords de 3 notes ? — Les coefficients binomiaux, k parmi n · Tle spé",
+      "accroche": "Un piano a 12 notes par octave. Nadia, compositrice de musiques de films, cherche un accord étrange de 3 notes pour une scène angoissante. Avant de tout essayer, elle compte : combien d'accords de 3 notes existent ?\n\nDans cette vidéo :\n• k parmi n : le nombre de façons de choisir k éléments parmi n, sans ordre\n• avec l'ordre, puis ÷ k! : 12 × 11 × 10 ÷ 6 = 220 accords\n• la formule : n! / (k! (n − k)!)\n• la symétrie : k parmi n = (n − k) parmi n\n• un ensemble à n éléments a 2ⁿ parties\n• le piège : oublier de diviser par k!, 1 320 mélodies au lieu de 220 accords\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/denombrement-combinatoire\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_coefficient_binomial&display=simple\n\n📈 Épisode 4 sur 6 de la série Dénombrement d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien d'accords de 3 notes ?"
+        ],
+        [
+          "00:18",
+          "Nadia, compositrice"
+        ],
+        [
+          "00:33",
+          "L'ordre ne compte pas"
+        ],
+        [
+          "00:49",
+          "Avec l'ordre, puis ÷ 3!"
+        ],
+        [
+          "01:05",
+          "La formule de k parmi n"
+        ],
+        [
+          "01:28",
+          "Question 1"
+        ],
+        [
+          "01:56",
+          "La symétrie"
+        ],
+        [
+          "02:12",
+          "Question 2"
+        ],
+        [
+          "02:44",
+          "Les parties d'un ensemble : 2ⁿ"
+        ],
+        [
+          "03:06",
+          "Le piège : oublier ÷ k!"
+        ],
+        [
+          "03:23",
+          "Question 3"
+        ],
+        [
+          "03:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "dénombrement",
+        "coefficient binomial",
+        "k parmi n",
+        "combinaison",
+        "parties d'un ensemble",
+        "musique",
+        "compositrice",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:28",
+          "question": "Combien vaut 2 parmi 5 ?",
+          "choix": [
+            "10",
+            "20",
+            "25"
+          ],
+          "reponse": 0,
+          "explication": "5 × 4 ÷ 2 = 10. 20, c'est en comptant l'ordre ; 25, c'est 5²."
+        },
+        {
+          "t": "02:12",
+          "question": "Combien vaut 18 parmi 20 ?",
+          "choix": [
+            "380",
+            "190",
+            "20"
+          ],
+          "reponse": 1,
+          "explication": "Par symétrie, 18 parmi 20 = 2 parmi 20 = 20 × 19 ÷ 2 = 190. Pas besoin de calculer 20 factorielle."
+        },
+        {
+          "t": "03:23",
+          "question": "Un ensemble à 5 éléments a combien de parties ?",
+          "choix": [
+            "25",
+            "32",
+            "31"
+          ],
+          "reponse": 1,
+          "explication": "2⁵ = 32, sans oublier la partie vide ni l'ensemble entier."
+        }
+      ],
+      "centres": [
+        "musique",
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-coefficient-binomial-short",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_coefficient_binomial",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-denombrement-coefficient-binomial",
+      "fichier": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial-short.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial-short.png",
+      "titre": "10 garnitures : combien de pizzas ? 🍕 — Tle spé #Shorts",
+      "accroche": "Enzo, pizzaïolo : pour chaque garniture, une seule question, je la mets ou pas ? 3 garnitures : 2 × 2 × 2 = 8 pizzas. 10 garnitures : 1 024, une par jour pendant presque 3 ans. 20 garnitures : 1 048 576 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec 10 garnitures, combien de pizzas ont exactement 2 garnitures ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_coefficient_binomial&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #dénombrement #terminale #bac",
+      "tags": [
+        "pizza",
+        "pizzaïolo",
+        "parties d'un ensemble",
+        "puissance de 2",
+        "dénombrement",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Avec 3 garnitures, combien de pizzas (la pizza sans rien comprise) ?",
+          "choix": [
+            "6",
+            "9",
+            "8"
+          ],
+          "reponse": 2,
+          "explication": "2 × 2 × 2 = 2³ = 8 pizzas."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-pascal",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_pascal",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal.png",
+      "titre": "Combien de chemins jusqu'au lycée ? — La relation et le triangle de Pascal · Tle spé",
+      "accroche": "Dans une ville en damier, tu vas de chez toi au lycée : 3 rues vers l'est, 2 vers le nord, sans revenir en arrière. Mélissa, urbaniste, compte les chemins carrefour par carrefour : là où beaucoup passent, il y aura des embouteillages.\n\nDans cette vidéo :\n• 10 chemins : on choisit les places des 2 pas vers le nord, 2 parmi 5\n• le triangle de Pascal se construit par additions\n• la relation : k parmi n + (k + 1) parmi n = (k + 1) parmi (n + 1)\n• pourquoi ça marche, en mettant un élément à part\n• le triangle compte les chemins, sur une grille comme dans un arbre\n• le piège : la somme descend d'une ligne ET avance d'un cran\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/denombrement-combinatoire\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_pascal&display=simple\n\n📈 Épisode 5 sur 6 de la série Dénombrement d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chemin du lycée"
+        ],
+        [
+          "00:16",
+          "Mélissa, urbaniste"
+        ],
+        [
+          "00:30",
+          "Compter les chemins sur la grille"
+        ],
+        [
+          "00:55",
+          "Pourquoi 10 : 2 parmi 5"
+        ],
+        [
+          "01:12",
+          "Question 1"
+        ],
+        [
+          "01:50",
+          "Le triangle de Pascal"
+        ],
+        [
+          "02:14",
+          "La relation de Pascal"
+        ],
+        [
+          "02:32",
+          "Pourquoi ça marche"
+        ],
+        [
+          "02:52",
+          "Le triangle compte les chemins d'un arbre"
+        ],
+        [
+          "03:09",
+          "Question 2"
+        ],
+        [
+          "03:52",
+          "Le piège : descendre ET avancer"
+        ],
+        [
+          "04:11",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "dénombrement",
+        "triangle de Pascal",
+        "relation de Pascal",
+        "coefficient binomial",
+        "chemins",
+        "urbaniste",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Grille de 4 rues vers l'est et 4 rues vers le nord. Combien de chemins ?",
+          "choix": [
+            "16",
+            "70",
+            "256"
+          ],
+          "reponse": 1,
+          "explication": "8 déplacements dont 4 vers le nord : on choisit leurs places, 4 parmi 8 = 70."
+        },
+        {
+          "t": "03:09",
+          "question": "Ligne 5 : 1, 5, 10, 10, 5, 1. Quelle est la ligne 6 ?",
+          "choix": [
+            "1, 6, 15, 20, 15, 6, 1",
+            "1, 6, 10, 20, 10, 6, 1",
+            "1, 5, 15, 20, 15, 5, 1"
+          ],
+          "reponse": 0,
+          "explication": "On additionne deux voisins : 1 + 5 = 6, 5 + 10 = 15, 10 + 10 = 20. La somme vaut 64 = 2⁶."
+        }
+      ],
+      "centres": [
+        "transports",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-pascal-short",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_pascal",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-denombrement-pascal",
+      "fichier": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal-short.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal-short.png",
+      "titre": "Le dessin secret du triangle de Pascal 🔺 — Tle spé #Shorts",
+      "accroche": "Des 1 sur les bords, et chaque nombre est la somme des deux du dessus. Colorie les nombres impairs sur 32 lignes : surprise, le triangle de Sierpinski ! Rosa, designer textile, l'imprime sur des foulards.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : quelle est la somme des nombres de la ligne 1, 5, 10, 10, 5, 1 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_pascal&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #dénombrement #terminale #bac",
+      "tags": [
+        "triangle de Pascal",
+        "Sierpinski",
+        "fractale",
+        "motif",
+        "dénombrement",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Quelle ligne vient après 1, 4, 6, 4, 1 ?",
+          "choix": [
+            "1, 5, 10, 10, 5, 1",
+            "1, 5, 11, 11, 5, 1",
+            "1, 4, 10, 10, 4, 1"
+          ],
+          "reponse": 0,
+          "explication": "Chaque nombre est la somme des deux du dessus : 1 + 4 = 5, 4 + 6 = 10."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "mode"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-defi",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_defi",
+      "classe": "terminale-spe",
+      "ceinture": "bleue",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi.png",
+      "titre": "20 rivets, 4 défectueux : le contrôleur les verra-t-il ? — Sujet type bac, dénombrement · Tle spé",
+      "accroche": "Dans une caisse de 20 rivets pour avion, 4 sont défectueux. Karima, ingénieure qualité dans l'aéronautique, ne peut pas tout tester : un rivet testé est détruit. Elle en prélève 3 simultanément. A-t-elle de bonnes chances de repérer le problème ? Un exercice type bac, rédigé pas à pas.\n\nDans cette vidéo :\n• un prélèvement simultané est une combinaison : 3 parmi 20 = 1 140\n• aucun rivet défectueux : 3 parmi 16 = 560\n• exactement 1 défectueux : « et » multiplie, 4 × 120 = 480\n• au moins 1 : par le contraire, 1 140 − 560 = 580, soit une probabilité d'environ 0,51\n• le piège : 4 × 171 = 684 compte deux fois les prélèvements à 2 défectueux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 10 pièces dont 3 défectueuses, 2 prélevées : combien de prélèvements avec au moins une défectueuse, et quelle probabilité ? (réponse : 24, et 24/45 ≈ 0,53).\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/denombrement-combinatoire\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_defi&display=simple\n\n📈 Épisode 6 sur 6 de la série Dénombrement d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "La caisse de rivets"
+        ],
+        [
+          "00:16",
+          "Karima, ingénieure qualité"
+        ],
+        [
+          "00:28",
+          "L'énoncé"
+        ],
+        [
+          "00:57",
+          "D'abord, reconnaître"
+        ],
+        [
+          "01:11",
+          "Question 1"
+        ],
+        [
+          "01:42",
+          "Rédiger, comme au bac"
+        ],
+        [
+          "02:02",
+          "Question 2"
+        ],
+        [
+          "02:42",
+          "Rédiger « exactement 1 » et « au moins 1 »"
+        ],
+        [
+          "03:00",
+          "Vérifier : 560 + 480 + 96 + 4"
+        ],
+        [
+          "03:21",
+          "Le piège du « au moins 1 »"
+        ],
+        [
+          "03:43",
+          "La probabilité"
+        ],
+        [
+          "04:02",
+          "À toi de jouer"
+        ],
+        [
+          "04:26",
+          "Correction"
+        ],
+        [
+          "04:48",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "dénombrement",
+        "combinaison",
+        "exercice type bac",
+        "au moins un",
+        "événement contraire",
+        "contrôle qualité",
+        "aéronautique",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "Le nombre de prélèvements possibles est :",
+          "choix": [
+            "20³",
+            "20 × 19 × 18",
+            "3 parmi 20"
+          ],
+          "reponse": 2,
+          "explication": "Simultané : pas d'ordre, pas de répétition. 3 parmi 20 = 20 × 19 × 18 / 6 = 1 140."
+        },
+        {
+          "t": "02:02",
+          "question": "Exactement 1 rivet défectueux. Combien de prélèvements ?",
+          "choix": [
+            "4 + 120, soit 124",
+            "4 × 120, soit 480",
+            "4 × 560, soit 2 240"
+          ],
+          "reponse": 1,
+          "explication": "1 défectueux parmi 4 ET 2 bons parmi 16 : on multiplie, 4 × 120 = 480."
+        }
+      ],
+      "centres": [
+        "avions",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "terminale-denombrement-defi-short",
+      "notionId": "denombrement_combinatoire",
+      "microId": "denombrement_defi",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-denombrement-defi",
+      "fichier": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi-short.mp4",
+      "miniature": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi-short.png",
+      "titre": "30 élèves se serrent la main : combien de poignées ? 🤝 — Tle spé #Shorts",
+      "accroche": "Une poignée de main, c'est 2 personnes sans ordre : entre 4 personnes, 2 parmi 4 = 6. Pour une classe de 30 : 2 parmi 30 = 435 poignées de main. À 3 secondes chacune, presque 22 minutes de salutations !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de poignées de main entre 12 personnes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #dénombrement #terminale #bac",
+      "tags": [
+        "poignée de main",
+        "classe",
+        "combinaison",
+        "dénombrement",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Poignées de main entre 4 personnes ?",
+          "choix": [
+            "16",
+            "12",
+            "6"
+          ],
+          "reponse": 2,
+          "explication": "Une poignée = 2 personnes sans ordre : 2 parmi 4 = 6. 12 compte chaque poignée deux fois."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-somme",
+      "notionId": "variable_aleatoire",
+      "microId": "va_somme",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme.mp4",
+      "miniature": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme.png",
+      "titre": "Comment le hasard devient prévisible — Somme de variables aléatoires · Tle spé",
+      "accroche": "Les frais de santé d'une personne sont imprévisibles : 0 euro une année, 2 000 euros la suivante. Pourtant, pour des milliers d'adhérents, Maëlle, actuaire dans une mutuelle, prévoit son budget avec précision. Comment le hasard devient-il prévisible ?\n\nDans cette vidéo :\n• E(X + Y) = E(X) + E(Y), toujours\n• E(aX + b) = aE(X) + b et V(aX + b) = a²V(X) : décaler ne disperse pas\n• si X et Y sont indépendantes, V(X + Y) = V(X) + V(Y)\n• la loi binomiale est une somme de variables de Bernoulli\n• n copies indépendantes : espérance × n, variance × n, écart-type × √n\n• le secret de l'assurance : plus on est nombreux, plus le total est prévisible\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/variable-aleatoire\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_somme&display=simple\n\n🎲 Cette vidéo fait partie de la série Probabilités d'EleveAI, du CP à la terminale : https://youtu.be/unumlzio13U",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment le hasard devient prévisible ?"
+        ],
+        [
+          "00:25",
+          "Maëlle, actuaire"
+        ],
+        [
+          "00:47",
+          "E(X + Y) = E(X) + E(Y)"
+        ],
+        [
+          "01:10",
+          "E(aX + b) et V(aX + b)"
+        ],
+        [
+          "01:36",
+          "Question 1"
+        ],
+        [
+          "02:16",
+          "Indépendance : les variances s'additionnent"
+        ],
+        [
+          "02:45",
+          "Question 2"
+        ],
+        [
+          "03:27",
+          "La loi binomiale, somme de Bernoulli"
+        ],
+        [
+          "04:09",
+          "Le total de 100 adhérents"
+        ],
+        [
+          "04:34",
+          "Question 3"
+        ],
+        [
+          "05:09",
+          "Le secret de l'assurance"
+        ],
+        [
+          "05:34",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "variable aléatoire",
+        "somme de variables aléatoires",
+        "espérance",
+        "variance",
+        "écart-type",
+        "indépendance",
+        "loi binomiale",
+        "actuaire",
+        "assurance",
+        "probabilités",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:36",
+          "question": "V(X) = 2 500. Que vaut V(1,2X + 30) ?",
+          "choix": [
+            "3 000",
+            "3 600",
+            "3 030"
+          ],
+          "reponse": 1,
+          "explication": "1,2² = 1,44 ; 1,44 × 2 500 = 3 600. Le 30 ne compte pas ; 3 000, c'est oublier le carré."
+        },
+        {
+          "t": "02:45",
+          "question": "X et Y indépendantes, de variance 2 500 chacune. Que vaut V(X − Y) ?",
+          "choix": [
+            "0",
+            "5 000",
+            "2 500"
+          ],
+          "reponse": 1,
+          "explication": "V(−Y) = (−1)² × 2 500 = 2 500 ; les variances s'additionnent : 5 000. Soustraire ne retire pas le hasard."
+        },
+        {
+          "t": "04:34",
+          "question": "σ d'un adhérent = 50. Pour 100 adhérents indépendants, σ du total ?",
+          "choix": [
+            "5 000",
+            "500",
+            "50"
+          ],
+          "reponse": 1,
+          "explication": "On additionne les variances, pas les écarts-types : σ × √100 = σ × 10 = 500."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "terminale-proba-va-somme-short",
+      "notionId": "variable_aleatoire",
+      "microId": "va_somme",
+      "classe": "terminale-spe",
+      "ceinture": "blanche",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-proba-va-somme",
+      "fichier": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme-short.mp4",
+      "miniature": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme-short.png",
+      "titre": "100 dés : le total est presque prévisible 🎲 — Tle spé #Shorts",
+      "accroche": "1 dé : tout peut arriver, de 1 à 6. 100 dés : l'espérance du total vaut 100 × 3,5 = 350, et son écart-type n'est pas 171 mais environ 17. Le total tombe presque toujours tout près de 350 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : tu lances 10 dés : quelle est l'espérance de leur somme ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_somme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probabilités #terminale #bac",
+      "tags": [
+        "dés",
+        "jeux de société",
+        "espérance",
+        "écart-type",
+        "somme de variables aléatoires",
+        "maths",
+        "terminale",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Quelle est l'espérance de la somme de 2 dés ?",
+          "choix": [
+            "3,5",
+            "7",
+            "12"
+          ],
+          "reponse": 1,
+          "explication": "3,5 + 3,5 = 7, et 7 est la somme la plus fréquente."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

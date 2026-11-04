@@ -1,0 +1,17 @@
+{
+  "00-accroche": "Tu veux partir une semaine à Lisbonne. Un vol, un hôtel, une excursion. Combien de voyages différents peux-tu composer ? Plus que tu ne crois.",
+  "01-titre": "Dénombrer : le principe multiplicatif et le principe additif. Quand multiplier, quand additionner ?",
+  "02-metier": "Voici Clara, conseillère en voyages. Elle propose 3 vols, 4 hôtels et 5 excursions. Un voyage, c'est un vol ET un hôtel ET une excursion.",
+  "03-arbre": "Dessinons l'arbre. 3 branches pour les vols. Au bout de chacune, 4 branches pour les hôtels : 12 chemins. Au bout de chacun, 5 branches pour les excursions : 60 chemins. 3 fois 4 fois 5 : 60 voyages.",
+  "04-produit": "C'est le principe multiplicatif. Des étapes successives, reliées par « et » : on multiplie. En maths, un voyage est un triplet : un vol, un hôtel, une excursion. L'ensemble de ces triplets est le produit cartésien V fois H fois E. Son cardinal est le produit des cardinaux : 3 fois 4 fois 5.",
+  "05-question": "Question ! Clara ajoute un choix : avec ou sans voiture de location. Combien de voyages ? A : 62. B : 120. C : 14. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Une étape de plus, avec 2 choix : on multiplie par 2. 60 fois 2 : 120 voyages.",
+  "06-somme": "Maintenant, le trajet jusqu'à Lisbonne. Soit en avion : 6 vols. Soit en bus : 4 bus. On prend l'un OU l'autre, jamais les deux. Les cas sont disjoints : on additionne. 6 plus 4 : 10 trajets.",
+  "07-additif": "C'est le principe additif. Des cas qui ne se chevauchent pas, reliés par « ou » : on additionne leurs nombres.",
+  "08-piege": "Voilà le piège ! On n'additionne que si les cas sont disjoints. Clara compte ses clients : 30 ont pris un vol, 20 ont pris un hôtel. Ça ne fait pas forcément 50 clients. Si 12 ont pris les deux, ils sont comptés deux fois. Il y a 30 plus 20 moins 12 : 38 clients.",
+  "09-question": "Question ! Soit l'avion, 6 vols, soit le bus, 4 bus. Et dans les deux cas, 2 classes : économique ou confort. Combien de façons de voyager ? A : 48. B : 12. C : 20. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. Avion ou bus : 6 plus 4, 10 trajets. Et une classe : fois 2. 10 fois 2 : 20. Le « ou » additionne, le « et » multiplie.",
+  "10-metier": "Clara fait ces calculs chaque jour : pour bâtir ses offres, pour savoir si son catalogue est assez varié, et pour ne pas compter deux fois le même client.",
+  "11-appris": "Ce que tu as appris. « Et », des étapes successives : on multiplie. Le cardinal d'un produit cartésien est le produit des cardinaux. « Ou », des cas disjoints : on additionne. Et un arbre montre tout.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

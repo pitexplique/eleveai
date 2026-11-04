@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Un triangle de nombres tout simple cache un dessin secret. Tu le vois ?",
+  "01-image": "Des 1 sur les bords. Chaque nombre est la somme des deux nombres du dessus. 1, 2, 1. Puis 1, 3, 3, 1. Puis 1, 4, 6, 4, 1.",
+  "02-question": "Question ! Quelle ligne vient après 1, 4, 6, 4, 1 ? A : 1, 5, 10, 10, 5, 1. B : 1, 5, 11, 11, 5, 1. C : 1, 4, 10, 10, 4, 1. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. 1 plus 4 : 5. 4 plus 6 : 10. Et la ligne est symétrique.",
+  "03-surprise": "Maintenant, colorie les nombres impairs, et continue jusqu'à 32 lignes. Surprise : un triangle troué de triangles, eux-mêmes troués de triangles. C'est le triangle de Sierpinski ! Voici Rosa, designer textile : ce motif, elle l'imprime sur des foulards.",
+  "04-commentaire": "À toi : quelle est la somme des nombres de la ligne 1, 5, 10, 10, 5, 1 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

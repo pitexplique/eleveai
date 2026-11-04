@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Lance 1 dé : tout peut arriver, de 1 à 6. Lance 100 dés et additionne : tu peux presque prédire le total. Vraiment ?",
+  "01-image": "Voici Chloé, créatrice de jeux de société. Pour un dé, l'espérance vaut 3,5. Pour une somme de dés, les espérances s'additionnent.",
+  "02-question": "Question ! Quelle est l'espérance de la somme de 2 dés ? A : 3,5. B : 7. C : 12. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. 3,5 plus 3,5 : 7. Et 7 est justement la somme la plus fréquente.",
+  "03-surprise": "Maintenant, 100 dés. Espérance : 100 fois 3,5, soit 350. L'écart-type d'un dé vaut environ 1,71. Celui du total ? Pas 171 ! Il est multiplié par racine de 100, soit 10 : environ 17,1. Le total peut aller de 100 à 600, mais il tombe le plus souvent tout près de 350. Chloé s'en sert pour équilibrer ses jeux.",
+  "04-commentaire": "À toi : tu lances 10 dés. Quelle est l'espérance de leur somme ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,18 @@
+{
+  "00-accroche": "Le code de ta carte bancaire a 4 chiffres. Sur le clavier du distributeur, 4 touches sont plus usées que les autres. Pour un voleur, est-ce une bonne nouvelle ?",
+  "01-titre": "Dénombrer : reconnaître la situation. L'ordre compte-t-il ? Peut-on répéter ?",
+  "02-metier": "Voici Inès. Elle est ingénieure en cybersécurité. Son travail : compter combien de codes un pirate devrait essayer. Plus il y en a, plus tu es protégé. Pour compter juste, elle se pose toujours deux questions. Un : l'ordre compte-t-il ? Deux : peut-on répéter un élément ?",
+  "03-k-uplets": "Premier cas : un code de 4 chiffres, sans rien savoir. L'ordre compte : 1 4 7 9, ce n'est pas 9 7 4 1. Et on peut répéter : 7 7 7 7 est permis. Chaque chiffre a 10 choix : 10 fois 10 fois 10 fois 10, 10 puissance 4, soit 10 000 codes. Un code, c'est un 4-uplet de chiffres. Le nombre de k-uplets d'un ensemble à n éléments est n puissance k.",
+  "04-question": "Question ! Un code de 6 chiffres, répétitions permises. Combien de codes ? A : 60. B : 1 000 000. C : 151 200. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 6 chiffres, 10 choix pour chacun : 10 puissance 6, soit 1 000 000. 151 200, c'est sans répétition : ce n'était pas la question.",
+  "05-distincts": "Deuxième cas : la banque interdit de répéter un chiffre. L'ordre compte encore, mais plus de répétition. 10 choix pour le premier chiffre, 9 pour le deuxième, 8 pour le troisième, 7 pour le dernier : 5 040 codes. C'est un 4-uplet d'éléments distincts. Avec n éléments, il y en a n factorielle, sur n moins k, factorielle. Surprise : interdire les répétitions affaiblit le code. 5 040 au lieu de 10 000.",
+  "06-parties": "Troisième cas : les 4 touches usées. Le pirate sait quels chiffres forment le code : 1, 4, 7 et 9. Choisir ces chiffres, c'est choisir une partie du clavier : l'ordre ne compte pas, pas de répétition. Il ne reste qu'à les ranger, si chacun sert une fois : 4 fois 3 fois 2 fois 1, 4 factorielle, 24 codes. On passe de 10 000 à 24 !",
+  "07-piege": "Voilà le piège ! Lire « 4 chiffres » et foncer sur une formule. Avant tout calcul, pose les deux questions. L'ordre compte, avec répétitions : n puissance k. L'ordre compte, sans répétition : des k-uplets d'éléments distincts. Ni ordre, ni répétition : une partie, c'est-à-dire une combinaison.",
+  "08-question": "Question ! Tu choisis une équipe de 3 joueurs parmi 10 copains. C'est : A : un 3-uplet avec répétitions. B : un 3-uplet d'éléments distincts. C : une partie à 3 éléments. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. Une équipe ne dépend pas de l'ordre, et on ne choisit pas deux fois le même copain : c'est une partie à 3 éléments, une combinaison.",
+  "09-question": "Question ! Une course de 15 chevaux. Tu paries sur le premier, le deuxième et le troisième, dans l'ordre. Ton pari est : A : une partie à 3 éléments. B : un 3-uplet d'éléments distincts. C : un 3-uplet avec répétitions. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. L'ordre compte, et un cheval ne finit pas deux fois. 15 fois 14 fois 13 : 2 730 paris possibles.",
+  "10-conseil": "Le conseil d'Inès : un code long, où les répétitions sont permises, et des touches propres. Chaque chiffre de plus multiplie par 10 le travail du pirate.",
+  "11-appris": "Ce que tu as appris. Avant de compter, deux questions : l'ordre compte-t-il ? Peut-on répéter ? Ordre et répétitions : n puissance k. Ordre sans répétition : n factorielle, sur n moins k, factorielle. Ni l'un ni l'autre : une partie.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

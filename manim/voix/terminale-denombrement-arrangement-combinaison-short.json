@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mélange un jeu de 52 cartes. Cet ordre exact a-t-il déjà existé, une seule fois, dans toute l'histoire ?",
+  "01-image": "Voici Hugo, magicien. Il étale 3 cartes : as, roi, dame. 3 choix pour la première, 2 pour la deuxième, 1 pour la dernière : 6 ordres. C'est 3 factorielle.",
+  "02-question": "Question ! Et avec 4 cartes, combien d'ordres ? A : 16. B : 24. C : 10. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. 4 fois 3 fois 2 fois 1 : 24. Chaque carte ajoutée multiplie tout.",
+  "03-surprise": "Alors, 52 cartes ? 52 factorielle : environ 8 fois 10 puissance 67. Un 8 suivi de 67 chiffres. Si chaque humain mélangeait un jeu par seconde depuis le big bang, on n'en aurait pas vu une infime partie. Ton mélange est presque sûrement unique dans l'histoire !",
+  "04-commentaire": "À toi : combien d'ordres possibles pour 6 cartes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

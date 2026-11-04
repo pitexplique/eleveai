@@ -1,0 +1,19 @@
+{
+  "00-accroche": "8 équipes s'affrontent dans un tournoi de jeu vidéo. À la fin, un podium. Combien de podiums différents sont possibles ?",
+  "01-titre": "Quand l'ordre compte, et quand il ne compte pas. k-uplets d'éléments distincts, permutations et combinaisons.",
+  "02-metier": "Voici Léa. Elle organise des tournois d'e-sport. Elle doit tout prévoir : les podiums, les ordres de passage, les groupes de la finale.",
+  "03-podium": "Le podium d'abord. Pour la première place, 8 équipes possibles. Pour la deuxième, il en reste 7. Pour la troisième, 6. 8 fois 7 fois 6 : 336 podiums. Ici, l'ordre compte : or, argent, bronze, ce n'est pas pareil.",
+  "04-formule": "Un podium est un 3-uplet d'éléments distincts. Le nombre de k-uplets d'éléments distincts d'un ensemble à n éléments, c'est n fois n moins 1, et ainsi de suite, avec k facteurs. On l'écrit aussi n factorielle, sur n moins k, factorielle. Ici, 8 factorielle sur 5 factorielle : 336.",
+  "05-permutations": "Et si on range les 8 équipes, toutes ? C'est l'ordre de passage sur scène. 8 fois 7 fois 6, jusqu'à 1 : 8 factorielle, 40 320. Ranger tous les éléments, c'est une permutation. Un ensemble à n éléments a n factorielle permutations.",
+  "06-question": "Question ! 5 joueurs passent un par un pour un défi. Combien d'ordres de passage ? A : 25. B : 120. C : 5. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 5 factorielle : 5 fois 4 fois 3 fois 2 fois 1, 120.",
+  "07-groupe": "Maintenant, Léa choisit 3 équipes qualifiées pour la finale, sans classement. L'ordre ne compte plus. Le podium A, B, C et le podium C, B, A donnent le même groupe. Chaque groupe apparaît dans 3 factorielle podiums, soit 6. Donc 336 divisé par 6 : 56 groupes.",
+  "08-combinaison": "C'est une combinaison de 3 éléments parmi 8. Son nombre se dit 3 parmi 8 : 8 factorielle, sur 3 factorielle fois 5 factorielle. 56.",
+  "09-piege": "Voilà le piège ! Compter des podiums quand on cherche des groupes. 336, c'est compter chaque groupe 6 fois. Demande-toi : si j'échange deux équipes, est-ce que ça change quelque chose ? Si oui, l'ordre compte. Sinon, c'est une combinaison.",
+  "10-question": "Question ! Léa tire 2 équipes parmi les 8 pour le match d'ouverture. Combien de matchs possibles ? A : 56. B : 28. C : 64. Mets pause, et choisis !",
+  "10b-reponse": "Réponse B. Échanger les deux équipes donne le même match : l'ordre ne compte pas. 8 fois 7 divisé par 2 : 28 matchs.",
+  "11-question": "Question ! Dans une équipe de 5 joueurs, on nomme un capitaine et un vice-capitaine. Combien de choix ? A : 10. B : 20. C : 25. Mets pause, et choisis !",
+  "11b-reponse": "Réponse B. Les deux rôles sont différents : l'ordre compte. 5 fois 4 : 20. 10, c'est si on oublie les rôles.",
+  "12-appris": "Ce que tu as appris. L'ordre compte, sans répétition : n factorielle, sur n moins k, factorielle. Ranger tous les éléments : n factorielle permutations. L'ordre ne compte pas : k parmi n, le nombre précédent divisé par k factorielle.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

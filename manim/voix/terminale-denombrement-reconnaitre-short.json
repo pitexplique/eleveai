@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Ton ADN n'a que 4 lettres : A, C, G et T. Avec si peu de lettres, comment écrire tout un être vivant ?",
+  "01-image": "Voici Lina, biologiste moléculaire. Elle lit l'ADN par mots de 3 lettres : les codons. L'ordre compte : A C G, ce n'est pas G C A. Et on peut répéter : A A A existe.",
+  "02-question": "Question ! Combien de mots de 2 lettres avec A, C, G et T ? A : 8. B : 12. C : 16. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C. 4 choix pour la première lettre, 4 pour la deuxième : 4 fois 4, 16. 12, c'est si on interdit les répétitions.",
+  "03-surprise": "Et en 3 lettres : 4 puissance 3, 64 codons. Or la cellule doit fabriquer 20 acides aminés. 16 mots, c'est trop peu. 64, c'est assez, et même plus. La vie a choisi les mots de 3 lettres !",
+  "04-commentaire": "À toi : combien de mots de 3 lettres avec A, C, G et T, si les 3 lettres sont toutes différentes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

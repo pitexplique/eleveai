@@ -1,0 +1,9 @@
+{
+  "00-accroche": "À la rentrée, chaque élève d'une classe de 30 serre la main de chacun des autres, une seule fois. Combien de poignées de main ?",
+  "01-image": "Voici Fatou, organisatrice de congrès. Elle doit prévoir le temps des salutations. Avec 4 personnes, elle dessine 4 points, et un trait pour chaque poignée de main.",
+  "02-question": "Question ! Combien de poignées de main entre 4 personnes ? A : 16. B : 12. C : 6. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C. Une poignée de main, c'est 2 personnes, sans ordre : 2 parmi 4, égale 6. 12, c'est compter chaque poignée deux fois.",
+  "03-surprise": "Et pour 30 élèves ? 2 parmi 30 : 30 fois 29, sur 2, égale 435. À 3 secondes la poignée de main, l'une après l'autre : 1 305 secondes. Presque 22 minutes de salutations !",
+  "04-commentaire": "À toi : combien de poignées de main entre 12 personnes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

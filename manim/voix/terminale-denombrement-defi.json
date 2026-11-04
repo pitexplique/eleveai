@@ -1,0 +1,20 @@
+{
+  "00-accroche": "Dans une caisse de 20 rivets pour avion, 4 sont défectueux. Un contrôleur en prend 3 au hasard. A-t-il de bonnes chances de repérer le problème ?",
+  "01-titre": "Dénombrement : un exercice de bac.",
+  "02-metier": "Voici Karima, ingénieure qualité dans l'aéronautique. Elle ne peut pas tester tous les rivets : un rivet testé est détruit. Alors elle prélève, et elle compte.",
+  "03-enonce": "L'énoncé. Un lot de 20 rivets contient 4 rivets défectueux. On prélève simultanément 3 rivets. Un : combien de prélèvements sont possibles ? Deux : combien ne contiennent aucun rivet défectueux ? Trois : combien contiennent exactement 1 rivet défectueux ? Quatre : combien en contiennent au moins 1 ? Cinq : quelle est la probabilité de repérer le problème ?",
+  "04-reconnaitre": "D'abord, reconnaître. Simultanément : pas d'ordre. 3 rivets différents : pas de répétition. Un prélèvement est une partie à 3 éléments : une combinaison.",
+  "05-question": "Question ! Le nombre de prélèvements possibles est : A : 20 puissance 3. B : 20 fois 19 fois 18. C : 3 parmi 20. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Pas d'ordre, pas de répétition : 3 parmi 20. 20 fois 19 fois 18, sur 6 : 1 140 prélèvements.",
+  "06-rediger": "Rédigeons. Un : un prélèvement est une combinaison de 3 rivets parmi 20. Il y en a 3 parmi 20, égale 1 140. Deux : sans rivet défectueux, on choisit les 3 rivets parmi les 16 bons. 3 parmi 16 égale 560.",
+  "07-question": "Question ! Exactement 1 rivet défectueux. Combien de prélèvements ? A : 4 plus 120, soit 124. B : 4 fois 120, soit 480. C : 4 fois 560, soit 2 240. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. On choisit 1 défectueux parmi 4, ET 2 bons parmi 16. « Et » : on multiplie. 4 fois 120 : 480.",
+  "08-rediger": "Trois : 1 parmi 4, fois 2 parmi 16, égale 4 fois 120, égale 480. Quatre : « au moins 1 défectueux » est le contraire de « aucun ». 1 140 moins 560 : 580.",
+  "09-verifier": "Vérifions. Exactement 2 défectueux : 2 parmi 4, fois 16, soit 6 fois 16, 96. Exactement 3 : 3 parmi 4, soit 4. 480 plus 96 plus 4 : 580. Ça colle.",
+  "10-piege": "Voilà le piège ! Pour « au moins 1 », prendre 1 défectueux parmi 4, puis 2 rivets quelconques parmi les 19 restants. 4 fois 171 : 684. Trop ! Un prélèvement avec 2 défectueux est compté deux fois. Le contraire est plus sûr.",
+  "11-probabilite": "Cinq : les prélèvements sont équiprobables. La probabilité de repérer le problème vaut 580 sur 1 140, environ 0,51. Une chance sur deux seulement ! Karima conclut : prélever 3 rivets, c'est trop peu.",
+  "12-defi": "À toi de jouer ! Un lot de 10 pièces contient 3 pièces défectueuses. On en prélève 2 simultanément. Combien de prélèvements contiennent au moins une pièce défectueuse ? Et quelle est la probabilité ? Mets pause, et cherche !",
+  "12b-correction": "Correction. Tous les prélèvements : 2 parmi 10, égale 45. Aucune pièce défectueuse : 2 parmi 7, égale 21. Au moins une : 45 moins 21, égale 24. La probabilité : 24 sur 45, environ 0,53.",
+  "13-appris": "Ce que tu as appris. Reconnais d'abord : ordre, répétition. Un prélèvement simultané, c'est une combinaison. « Et » multiplie, « ou » additionne. Pour « au moins un », passe par le contraire.",
+  "14-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

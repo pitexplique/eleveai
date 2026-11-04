@@ -10782,6 +10782,114 @@
   "youtube": null,
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=convexite_fonction&microId=convexite_tangente&display=simple"
  },
+ "terminale-denombrement-arrangement-combinaison": {
+  "fichier": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison.png",
+  "vignette": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison.vignette.webp",
+  "titre": "8 équipes : combien de podiums ? — Permutations et combinaisons · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_arrangement_combinaison&display=simple"
+ },
+ "terminale-denombrement-arrangement-combinaison-short": {
+  "fichier": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison-short.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison-short.png",
+  "vignette": "terminale/maths/probabilites/denombrement-arrangement-combinaison/eleveai-maths-terminale-denombrement-arrangement-combinaison-short.vignette.webp",
+  "titre": "Ton mélange de cartes est unique dans l'histoire 🃏 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_arrangement_combinaison&display=simple"
+ },
+ "terminale-denombrement-coefficient-binomial": {
+  "fichier": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial.png",
+  "vignette": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial.vignette.webp",
+  "titre": "Combien d'accords de 3 notes ? — Les coefficients binomiaux, k parmi n · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_coefficient_binomial&display=simple"
+ },
+ "terminale-denombrement-coefficient-binomial-short": {
+  "fichier": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial-short.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial-short.png",
+  "vignette": "terminale/maths/probabilites/denombrement-coefficient-binomial/eleveai-maths-terminale-denombrement-coefficient-binomial-short.vignette.webp",
+  "titre": "10 garnitures : combien de pizzas ? 🍕 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_coefficient_binomial&display=simple"
+ },
+ "terminale-denombrement-defi": {
+  "fichier": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi.png",
+  "vignette": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi.vignette.webp",
+  "titre": "20 rivets, 4 défectueux : le contrôleur les verra-t-il ? — Sujet type bac, dénombrement · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_defi&display=simple"
+ },
+ "terminale-denombrement-defi-short": {
+  "fichier": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi-short.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi-short.png",
+  "vignette": "terminale/maths/probabilites/denombrement-defi/eleveai-maths-terminale-denombrement-defi-short.vignette.webp",
+  "titre": "30 élèves se serrent la main : combien de poignées ? 🤝 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_defi&display=simple"
+ },
+ "terminale-denombrement-pascal": {
+  "fichier": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal.png",
+  "vignette": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal.vignette.webp",
+  "titre": "Combien de chemins jusqu'au lycée ? — La relation et le triangle de Pascal · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_pascal&display=simple"
+ },
+ "terminale-denombrement-pascal-short": {
+  "fichier": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal-short.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal-short.png",
+  "vignette": "terminale/maths/probabilites/denombrement-pascal/eleveai-maths-terminale-denombrement-pascal-short.vignette.webp",
+  "titre": "Le dessin secret du triangle de Pascal 🔺 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_pascal&display=simple"
+ },
+ "terminale-denombrement-produit-somme": {
+  "fichier": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme.png",
+  "vignette": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme.vignette.webp",
+  "titre": "Lisbonne : plus de voyages que tu ne crois — Principe multiplicatif, principe additif · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_produit_somme&display=simple"
+ },
+ "terminale-denombrement-produit-somme-short": {
+  "fichier": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme-short.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme-short.png",
+  "vignette": "terminale/maths/probabilites/denombrement-produit-somme/eleveai-maths-terminale-denombrement-produit-somme-short.vignette.webp",
+  "titre": "2 mois sans jamais la même tenue ? 👕 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_produit_somme&display=simple"
+ },
+ "terminale-denombrement-reconnaitre": {
+  "fichier": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre.png",
+  "vignette": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre.vignette.webp",
+  "titre": "4 touches usées : bonne nouvelle pour le voleur ? — Dénombrer, reconnaître la situation · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_reconnaitre&display=simple"
+ },
+ "terminale-denombrement-reconnaitre-short": {
+  "fichier": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre-short.mp4",
+  "poster": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre-short.png",
+  "vignette": "terminale/maths/probabilites/denombrement-reconnaitre/eleveai-maths-terminale-denombrement-reconnaitre-short.vignette.webp",
+  "titre": "4 lettres pour écrire tout le vivant ? 🧬 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=denombrement_combinatoire&microId=denombrement_reconnaitre&display=simple"
+ },
  "terminale-loi-normale-escalier": {
   "fichier": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.mp4",
   "poster": "terminale/maths/probabilites/loi-normale-escalier/eleveai-maths-terminale-loi-normale-escalier.png",
@@ -11213,6 +11321,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_loi_probabilite&display=simple"
+ },
+ "terminale-proba-va-somme": {
+  "fichier": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme.mp4",
+  "poster": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme.png",
+  "vignette": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme.vignette.webp",
+  "titre": "Comment le hasard devient prévisible — Somme de variables aléatoires · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_somme&display=simple"
+ },
+ "terminale-proba-va-somme-short": {
+  "fichier": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme-short.mp4",
+  "poster": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme-short.png",
+  "vignette": "terminale/maths/probabilites/va-somme/eleveai-maths-terminale-proba-va-somme-short.vignette.webp",
+  "titre": "100 dés : le total est presque prévisible 🎲 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_somme&display=simple"
  },
  "youtube--0ybi5u05P0": {
   "fichier": "cp/maths/youtube/-0ybi5u05P0.mp4",

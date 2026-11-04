@@ -1,0 +1,19 @@
+{
+  "00-accroche": "Un piano a 12 notes différentes par octave. Tu en enfonces 3 en même temps : c'est un accord. Combien d'accords de 3 notes existent ?",
+  "01-titre": "Les coefficients binomiaux. Compter les façons de choisir k éléments parmi n.",
+  "02-metier": "Voici Nadia, compositrice de musiques de films. Pour une scène angoissante, elle cherche un accord étrange. Avant de tout essayer, elle veut savoir combien d'accords de 3 notes existent.",
+  "03-ordre": "Un accord, c'est 3 notes jouées ensemble. Do, mi, sol, ou sol, mi, do : c'est le même accord. L'ordre ne compte pas, et pas de répétition. C'est une combinaison : 3 parmi 12.",
+  "04-calcul": "Comptons d'abord avec l'ordre : 12 fois 11 fois 10, 1 320. Mais chaque accord est compté 3 factorielle fois, soit 6 fois. 1 320 divisé par 6 : 220 accords.",
+  "05-formule": "En général, k parmi n égale n factorielle, sur k factorielle fois n moins k, factorielle. Ici, 12 factorielle, sur 3 factorielle fois 9 factorielle : 220. Trois valeurs à connaître : 0 parmi n égale 1. 1 parmi n égale n. 2 parmi n égale n fois n moins 1, sur 2.",
+  "06-question": "Question ! Combien vaut 2 parmi 5 ? A : 10. B : 20. C : 25. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. 5 fois 4, sur 2 : 10. 20, c'est en comptant l'ordre. 25, c'est 5 puissance 2.",
+  "07-symetrie": "Une astuce. Choisir les 3 notes qu'on joue, c'est choisir les 9 qu'on ne joue pas. Donc 3 parmi 12 égale 9 parmi 12 : 220. C'est la symétrie : k parmi n égale n moins k parmi n.",
+  "08-question": "Question ! Combien vaut 18 parmi 20 ? A : 380. B : 190. C : 20. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Par symétrie, 18 parmi 20 égale 2 parmi 20 : 20 fois 19, sur 2, 190. Pas besoin de calculer 20 factorielle !",
+  "09-parties": "Et si Nadia accepte un ensemble de n'importe quelle taille, de 0 à 12 notes ? Pour chaque note : jouée ou pas, 2 choix. 2 puissance 12 : 4 096 ensembles de notes. Un ensemble à n éléments a 2 puissance n parties. C'est aussi la somme de tous les k parmi n.",
+  "10-piege": "Voilà le piège ! Oublier de diviser par k factorielle. 1 320, c'est le nombre de mélodies de 3 notes différentes, jouées l'une après l'autre : l'ordre compte. Un accord, c'est 220.",
+  "11-question": "Question ! Un ensemble à 5 éléments a combien de parties ? A : 25. B : 32. C : 31. Mets pause, et choisis !",
+  "11b-reponse": "Réponse B. 2 puissance 5 : 32. Sans oublier la partie vide, ni l'ensemble entier.",
+  "12-appris": "Ce que tu as appris. k parmi n compte les façons de choisir k éléments parmi n, sans ordre. Il vaut n factorielle, sur k factorielle fois n moins k, factorielle. k parmi n égale n moins k parmi n. Et un ensemble à n éléments a 2 puissance n parties.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
