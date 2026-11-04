@@ -225,7 +225,30 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
           </h1>
           {/* ⛔ 04/11 — Frédéric : « enlève le bandeau, les drapeaux pays et
               participez à l'aventure, on verra ça quand tout sera fait fin
-              décembre ». La page /rejoindre-l-aventure reste, sans lien ici. */}
+              décembre ». La page /rejoindre-l-aventure reste, sans lien ici.
+              Pour remettre la pastille (03/11 : « EleveAI adaptée à huit pays
+              francophones »), décommenter :
+
+          <Link
+            href="/rejoindre-l-aventure"
+            className="mx-auto mt-4 inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-black text-teal-800 shadow-sm ring-1 ring-teal-200 hover:ring-teal-400 sm:text-base"
+          >
+            Adaptée à 8 pays francophones
+            <span className="flex gap-1">
+              {PAYS_AVENTURE.map((p) => (
+                <img
+                  key={p.slug}
+                  src={`/drapeaux/${p.slug}.svg`}
+                  alt={p.nom}
+                  title={p.nom}
+                  width={20}
+                  height={15}
+                  className="h-[15px] w-5 rounded-[3px] object-cover ring-1 ring-black/10"
+                />
+              ))}
+            </span>
+          </Link>
+          */}
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <Nuage Icone={GraduationCap} titre="Tout le programme">
               Du CP à la Terminale : {totalMicros.toLocaleString("fr-FR")} micro-compétences de maths et {totalVideos.toLocaleString("fr-FR")}+ vidéos, rangées comme le programme officiel.
@@ -338,6 +361,16 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             <Link href="/prof/classes" className="mt-4 inline-flex items-center gap-2 font-black text-teal-800 hover:underline">
               Ouvrir « Mes classes » <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
+            {/* ⛔ 04/11 : l'appel aux profs des 8 pays, retiré jusqu'à fin
+                décembre. Pour le remettre, décommenter :
+
+            <p className="mt-3 text-sm font-bold text-slate-600">
+              🌍 Professeur en France, Andorre, Suisse, Belgique, Luxembourg, Côte d&apos;Ivoire, au Sénégal ou au Maroc ?{" "}
+              <Link href="/rejoindre-l-aventure" className="text-teal-800 underline">
+                Votre classe offerte : rejoignez l&apos;aventure
+              </Link>
+            </p>
+            */}
           </div>
           <figure className="overflow-x-auto rounded-2xl bg-white p-4 shadow-sm">
             <figcaption className="mb-2 text-sm font-bold text-slate-500">Exemple — 6e, nombres décimaux</figcaption>
