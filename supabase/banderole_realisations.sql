@@ -29,22 +29,20 @@ create index if not exists banderole_realisations_ordre_idx
 -- RLS activé sans policy : seule la clé service role (la route API) lit.
 alter table public.banderole_realisations enable row level security;
 
--- Les premières lignes : chiffres relevés le 03/11/2026 dans
--- lib/videos/videos-r2.json (1 363 vidéos, dont 709 shorts).
+-- Les premières lignes. ⭐ 04/11/2026 : le suivi d'abord, puis les nouveautés,
+-- plus de compteurs de stock (Frédéric : « on ne vend plus un suivi mais un
+-- nombre de vidéos ? »). Table déjà remplie avec les anciens compteurs :
+-- exécuter banderole_realisations_04-11.sql.
 insert into public.banderole_realisations (texte, lien, ordre)
 select * from (values
-  ('1 363 vidéos de maths en ligne, du CP à la Terminale', '/video', 10),
-  ('654 vidéos de cours et 709 shorts', '/video', 20),
-  ('66 vidéos de Terminale spécialité maths', '/video', 30),
-  ('10 vidéos sur la convexité en Terminale', '/video', 40),
-  ('170 vidéos pour la STMG', '/video', 50),
-  ('162 vidéos de Première', '/video', 60),
-  ('119 vidéos de Seconde', '/video', 70),
-  ('168 vidéos de 4e et 130 de 6e', '/video', 80),
-  ('Série Statistiques complète, du CM1 à la Terminale', '/video', 90),
-  ('Pythagore 4e et 3e : 18 vidéos refaites', '/video', 100),
-  ('2 370 exercices de lycée corrigés sans IA', '/fiches-exercices', 110),
-  ('Le coach suit ton programme et tes progrès', '/coach', 120),
-  ('Un cahier d''écriture pas à pas', '/fiches-ecriture/mon-cahier', 130)
+  ('Le coach trouve ce qui te manque et t''entraîne là-dessus', '/coach-ia/maths', 10),
+  ('Tes résultats sont gardés : demain, tu reprends où tu t''es arrêté', '/auth/signin?inscription=1', 20),
+  ('Une vidéo pour chaque micro-compétence, du CP à la Terminale', '/video', 30),
+  ('Prof : le bilan de ta classe, micro-compétence par micro-compétence', '/prof/classes', 40),
+  ('Nouveau : le dénombrement en Terminale, vidéos et coach', '/video', 50),
+  ('Nouveau : la convexité en Terminale', '/video', 60),
+  ('Nouveau : un cahier d''écriture pas à pas', '/fiches-ecriture/mon-cahier', 70),
+  ('Adapté à 8 pays francophones', '/rejoindre-l-aventure', 80),
+  ('En janvier : les visios « Maths réelles », vrai ou faux ?', '/tarifs', 90)
 ) as v(texte, lien, ordre)
 where not exists (select 1 from public.banderole_realisations);

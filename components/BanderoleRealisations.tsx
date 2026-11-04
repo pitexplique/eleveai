@@ -23,15 +23,20 @@ import { useEffect, useState } from "react";
 
 type Ligne = { texte: string; lien?: string | null };
 
-// Relevé le 03/11/2026 dans lib/videos/videos-r2.json.
+// ⭐ 04/11/2026 — Frédéric : « on ne vend plus un suivi mais un nombre de
+// vidéos ? ». Le défilé parle donc du SUIVI d'abord, puis des nouveautés
+// datées ; plus de compteurs de stock (ils vieillissaient en une semaine).
+// Mêmes phrases que supabase/banderole_realisations_04-11.sql.
 const SECOURS: Ligne[] = [
-  { texte: "1 363 vidéos de maths en ligne, du CP à la Terminale", lien: "/video" },
-  { texte: "66 vidéos de Terminale spécialité maths", lien: "/video" },
-  { texte: "170 vidéos pour la STMG", lien: "/video" },
-  { texte: "162 vidéos de Première", lien: "/video" },
-  { texte: "168 vidéos de 4e et 130 de 6e", lien: "/video" },
-  { texte: "2 370 exercices de lycée corrigés sans IA", lien: "/fiches-exercices" },
-  { texte: "Le coach suit ton programme et tes progrès", lien: "/coach" },
+  { texte: "Le coach trouve ce qui te manque et t'entraîne là-dessus", lien: "/coach-ia/maths" },
+  { texte: "Tes résultats sont gardés : demain, tu reprends où tu t'es arrêté", lien: "/auth/signin?inscription=1" },
+  { texte: "Une vidéo pour chaque micro-compétence, du CP à la Terminale", lien: "/video" },
+  { texte: "Prof : le bilan de ta classe, micro-compétence par micro-compétence", lien: "/prof/classes" },
+  { texte: "Nouveau : le dénombrement en Terminale, vidéos et coach", lien: "/video" },
+  { texte: "Nouveau : la convexité en Terminale", lien: "/video" },
+  { texte: "Nouveau : un cahier d'écriture pas à pas", lien: "/fiches-ecriture/mon-cahier" },
+  { texte: "Adapté à 8 pays francophones", lien: "/rejoindre-l-aventure" },
+  { texte: "En janvier : les visios « Maths réelles », vrai ou faux ?", lien: "/tarifs" },
 ];
 
 export default function BanderoleRealisations() {
