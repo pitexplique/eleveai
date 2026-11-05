@@ -195,6 +195,17 @@ function comparerDeux(plusGrand: boolean, ctx = false) {
       `Deux angles mesurent ${a}° et ${b}°. Écris la mesure du plus ${mot}.`,
       `${n1.nom} = ${a}° et ${n2.nom} = ${b}°. Donne la mesure du plus ${mot}.`,
       `Écris la mesure du plus ${mot} angle : ${a}° ou ${b}°.`,
+      // ⭐ 05/11/2026 : ★1 mesuré à 8,6 répétitions sur 20 → dix tournures de plus.
+      `Le plus ${mot} : ${a}° ou ${b}° ?`,
+      `Entre ${a}° et ${b}°, quel angle est le plus ${mot} ?`,
+      `${a}° et ${b}° : lequel est le plus ${mot} ?`,
+      `Compare ${a}° et ${b}°. Écris le plus ${mot}.`,
+      `Regarde les mesures : ${a}° et ${b}°. Quel angle est le plus ${mot} ?`,
+      `Angle 1 : ${a}°. Angle 2 : ${b}°. Écris le plus ${mot}.`,
+      `Voici deux angles : ${a}° et ${b}°. Lequel est le plus ${mot} ?`,
+      `Garde le plus ${mot} angle : ${a}° ou ${b}°.`,
+      `Sur ces deux angles, ${a}° et ${b}°, écris le plus ${mot}.`,
+      `L’angle ${n1.nom} mesure ${a}°, l’angle ${n2.nom} ${b}°. Écris le plus ${mot}.`,
     ]);
   return {
     text,
@@ -204,6 +215,52 @@ function comparerDeux(plusGrand: boolean, ctx = false) {
     explanation: expl(
       `On compare les nombres de degrés : ${Math.min(a, b)} < ${Math.max(a, b)}. Le plus ${mot} angle mesure ${r}°. La longueur des côtés ne compte pas.`,
     ),
+  };
+}
+
+/** ★1 nu (05/11/2026) : le signe < ou > entre deux mesures. */
+function genComparerSigne(): G {
+  const a = 10 * randomInt(2, 17);
+  let b = a;
+  while (Math.abs(b - a) < 20) b = 10 * randomInt(2, 17);
+  const s = a < b ? "<" : ">";
+  return {
+    text: pick([
+      `Complète avec < ou > : ${a}° … ${b}°.`,
+      `Choisis le bon signe : ${a}° … ${b}°.`,
+      `${a}° … ${b}° : quel signe mets-tu ?`,
+      `Quel signe va entre ${a}° et ${b}° ?`,
+    ]),
+    format: "qcm",
+    choices: ["<", ">", "="],
+    expected: [s],
+    comparator: "mcq_exact",
+    explanation: expl(`On compare les nombres de degrés : ${a} ${s} ${b}, donc ${a}° ${s} ${b}°.`),
+  };
+}
+
+/** ★1 nu et dessiné (05/11/2026) : deux angles au même sommet, on choisit à l'œil. */
+function genComparerDessin(plusGrand: boolean): G {
+  const [s, c0, c1, c2] = lettres(4);
+  const v1 = 10 * randomInt(2, 17);
+  let v2 = v1;
+  while (Math.abs(v2 - v1) < 40) v2 = 10 * randomInt(2, 17);
+  const [n1, n2] = [`${c0}${s}${c1}`, `${c0}${s}${c2}`];
+  const bon = (v1 > v2) === plusGrand ? n1 : n2;
+  const mot = plusGrand ? "grand" : "petit";
+  return {
+    text: pick([
+      `Regarde la figure. Quel angle est le plus ${mot} ?`,
+      `Sur la figure, quel angle est le plus ${mot} ?`,
+      `Sans mesurer, choisis le plus ${mot} angle.`,
+      `Observe les deux angles. Lequel est le plus ${mot} ?`,
+    ]),
+    format: "qcm",
+    choices: shuffle([`l’angle ${n1}`, `l’angle ${n2}`]),
+    expected: [`l’angle ${bon}`],
+    comparator: "mcq_exact",
+    explanation: expl(`On regarde l’ouverture entre les côtés. L’angle ${bon} est ${plusGrand ? "le plus ouvert" : "le moins ouvert"} : c’est le plus ${mot}.`),
+    canvas: figureRayons(s, [{ nom: c0, deg: 0 }, { nom: c1, deg: v1 }, { nom: c2, deg: v2 }]),
   };
 }
 
@@ -1623,6 +1680,9 @@ export const anglesBank: TutorBankItemV4[] = [
     ["angle_mesure", "angle_droit", "qcm", "template"], () => genDroitOuiNon(false)),
   gabarit("angle_comparer_tpl_1", "angle_comparer", 1, "L’angle le plus grand a la plus grande mesure.", ["angle_mesure", "comparaison", "template"], () => comparerDeux(true)),
   gabarit("angle_comparer_tpl_2", "angle_comparer", 1, "L’angle le plus petit a la plus petite mesure.", ["angle_mesure", "comparaison", "template"], () => comparerDeux(false)),
+  gabarit("angle_comparer_tpl_signe", "angle_comparer", 1, "Compare les deux nombres de degrés.", ["angle_mesure", "comparaison", "qcm", "template"], genComparerSigne),
+  gabarit("angle_comparer_tpl_dessin_grand", "angle_comparer", 1, "Regarde l’ouverture entre les côtés.", ["angle_mesure", "comparaison", "qcm", "template", "canvas"], () => genComparerDessin(true)),
+  gabarit("angle_comparer_tpl_dessin_petit", "angle_comparer", 1, "Regarde l’ouverture entre les côtés.", ["angle_mesure", "comparaison", "qcm", "template", "canvas"], () => genComparerDessin(false)),
   gabarit("angle_comparer_tpl_3", "angle_comparer", 2, "Compare à 90°.", ["angle_mesure", "comparaison", "template", "angle_droit"],
     () => comparerAuDroit(mesure5(15, 85), false, "plat")),
   gabarit("angle_comparer_tpl_4", "angle_comparer", 2, "Compare à 90°.", ["angle_mesure", "comparaison", "template", "angle_droit"],

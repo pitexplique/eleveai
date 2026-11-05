@@ -344,6 +344,24 @@ function canvasDroites(q: Q): string[] {
   }
   return p;
 }
+/** Le signe entre deux mesures : je relis les deux nombres et je refais la comparaison. */
+function corrigerSigne(q: Q): string[] {
+  const v = degres(q.text);
+  if (v.length !== 2) return [`deux mesures attendues, lu : ${v.join(", ")}`];
+  if (v[0] === v[1]) return ["les deux mesures sont égales"];
+  return qcm(q, v[0] < v[1] ? "<" : ">");
+}
+/** Deux angles dessinés : je mesure la figure et je retrouve le plus grand ou le plus petit. */
+function corrigerDessin(q: Q): string[] {
+  const noms = (q.choices ?? []).map((c) => c.match(/([A-Z]{3})$/)?.[1] ?? "");
+  if (noms.length !== 2 || noms.some((n) => !n)) return ["deux angles nommés attendus dans les propositions"];
+  const [d1, d2] = noms.map((n) => mesureDessinee(q, n));
+  if (d1 === null || d2 === null) return ["angle introuvable sur la figure"];
+  if (Math.abs(d1 - d2) < 30) return [`angles trop proches pour un choix à l’œil : ${Math.round(d1)}° et ${Math.round(d2)}°`];
+  const grand = /plus grand/.test(q.text);
+  if (grand === /plus petit/.test(q.text)) return ["la question ne dit pas clairement « plus grand » ou « plus petit »"];
+  return [...qcm(q, `l’angle ${(d1 > d2) === grand ? noms[0] : noms[1]}`), ...canvasDroites(q)];
+}
 /** Le dernier angle nommé dans la question (« Combien mesure l'angle XYZ ? »). */
 const angleDemande = (t: string) => t.match(/Combien mesure l’angle ([A-Z]{3}) \?/)?.[1] ?? null;
 
@@ -416,6 +434,9 @@ export const CORRECTEURS: CorrecteursMaths = {
   angle_mesurer_qcm_tpl_rapporteur: corrigerRapporteur,
   angle_comparer_tpl_1: nu(corrigerDeux),
   angle_comparer_tpl_2: nu(corrigerDeux),
+  angle_comparer_tpl_signe: nu(corrigerSigne),
+  angle_comparer_tpl_dessin_grand: nu(corrigerDessin),
+  angle_comparer_tpl_dessin_petit: nu(corrigerDessin),
   angle_comparer_tpl_3: nu(corrigerAuDroit),
   angle_comparer_tpl_4: nu(corrigerAuDroit),
   angle_comparer_qcm_tpl_1: nu(corrigerQuatre),
