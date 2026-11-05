@@ -31,10 +31,13 @@ export const eur = (n: number) => (Number.isInteger(net(n)) ? fr(n) : fr(Math.fl
 export const exp = (definition: string, methode: string, calcul: string, conclusion: string) =>
   `Définition : ${definition}\n\nMéthode : ${methode}\n\nCalcul : ${calcul}\n\nConclusion : ${conclusion}`;
 
+/** Les apostrophes droites deviennent typographiques, partout, au même endroit. */
+export const typo = (t: string) => t.replace(/'/g, "’");
+
 /** QCM à propositions écrites : jamais deux fois la même, toujours la bonne. */
 export function qcm(juste: string, faux: readonly string[], explanation: string, text: string, canvas?: CanvasFigure): TutorGeneratedQuestionV4 {
   const d = melange([...new Set(faux)].filter((x) => x !== juste)).slice(0, 3);
-  return { text, format: "qcm", choices: melange([juste, ...d]), expected: [juste], comparator: "mcq_exact", explanation, ...(canvas ? { canvas } : {}) };
+  return { text: typo(text), format: "qcm", choices: melange([juste, ...d]).map(typo), expected: [typo(juste)], comparator: "mcq_exact", explanation: typo(explanation), ...(canvas ? { canvas } : {}) };
 }
 
 /** QCM numérique : les leurres de même valeur que la réponse (ou entre eux) sont écartés,
@@ -65,7 +68,7 @@ export const gabarits = (micro: string, notionId: string, tags: string[] = []) =
       microId: micro,
       difficulty,
       theme: "neutral",
-      hint,
+      hint: typo(hint),
       tags: [...tags, "template"],
       generate,
     }) as TutorBankItemV4;

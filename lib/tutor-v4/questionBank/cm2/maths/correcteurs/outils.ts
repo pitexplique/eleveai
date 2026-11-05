@@ -36,8 +36,10 @@ export function reponse(q: Q, juste: number, u = ""): string[] {
 }
 
 /** Réponse écrite : l'attendue est exactement ce texte. */
-export const texte = (q: Q, juste: string): string[] =>
-  q.expected[0] === juste && (q.choices ?? []).includes(juste) ? [] : [`attendu « ${q.expected[0]} », juste : « ${juste} »`];
+export const texte = (q: Q, juste0: string): string[] => {
+  const juste = juste0.replace(/'/g, "’");
+  return q.expected[0] === juste && (q.choices ?? []).includes(juste) ? [] : [`attendu « ${q.expected[0]} », juste : « ${juste} »`];
+};
 
 export const diviseurs = (n: number) => {
   const l: number[] = [];
