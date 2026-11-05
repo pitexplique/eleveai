@@ -55,6 +55,14 @@ function segment(d: DemiPlanDroite, f: { x0: number; x1: number; y0: number; y1:
   return uniques.length >= 2 ? [uniques[0], uniques[1]] : null;
 }
 
+/** Distance d'un point à un segment, dans les pixels du dessin. */
+function distance(p: P, a: P, b: P): number {
+  const [dx, dy] = [b.x - a.x, b.y - a.y];
+  const carre = dx * dx + dy * dy;
+  const r = carre === 0 ? 0 : Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / carre));
+  return Math.hypot(p.x - a.x - r * dx, p.y - a.y - r * dy);
+}
+
 const strict = (d: DemiPlanDroite) => d.pointilles ?? (d.sens === "<" || d.sens === ">");
 
 export default function DemiPlanCanvas({ figure }: Props) {
@@ -95,6 +103,48 @@ export default function DemiPlanCanvas({ figure }: Props) {
   const axeX = f.y0 <= 0 && f.y1 >= 0 ? Y(0) : Y(f.y0);
   const axeY = f.x0 <= 0 && f.x1 >= 0 ? X(0) : X(f.x0);
 
+  // Le nom d'une droite se pose à côté d'elle, là où il ne touche ni une autre droite,
+  // ni un axe, ni un point, ni un autre nom. Sinon, à l'endroit le moins encombré.
+  const enPixels = (p: P): P => ({ x: X(p.x), y: Y(p.y) });
+  const traits = figure.droites.map((d) => {
+    const s = segment(d, f);
+    return s ? ([enPixels(s[0]), enPixels(s[1])] as [P, P]) : null;
+  });
+  const axes: [P, P][] = [
+    [{ x: X(f.x0), y: axeX }, { x: X(f.x1), y: axeX }],
+    [{ x: axeY, y: Y(f.y0) }, { x: axeY, y: Y(f.y1) }],
+  ];
+  const pointsPx = (figure.points ?? []).map(enPixels);
+  const nomsPoses: P[] = [];
+  const places = traits.map((trait, i) => {
+    if (!trait || !figure.droites[i].nom) return null;
+    const [a, b] = trait[0].y <= trait[1].y ? trait : [trait[1], trait[0]];
+    const long = Math.hypot(b.x - a.x, b.y - a.y) || 1;
+    let n = { x: (b.y - a.y) / long, y: -(b.x - a.x) / long };
+    if (n.y > 0 || (n.y === 0 && n.x < 0)) n = { x: -n.x, y: -n.y };
+    let meilleure: P = a;
+    let score = -Infinity;
+    for (const t of [0.15, 0.3, 0.45, 0.6, 0.75, 0.9]) {
+      for (const cote of [1, -1]) {
+        const c = { x: a.x + t * (b.x - a.x) + cote * 15 * n.x, y: a.y + t * (b.y - a.y) + cote * 15 * n.y };
+        if (c.x < 16 || c.x > LARGEUR - 16 || c.y < 16 || c.y > hauteur - 12) continue;
+        const ecarts = [
+          ...traits.flatMap((u2, j) => (u2 && j !== i ? [distance(c, u2[0], u2[1])] : [])),
+          ...axes.map((ax) => distance(c, ax[0], ax[1])),
+          ...pointsPx.map((q) => Math.hypot(c.x - q.x, c.y - q.y)),
+          ...nomsPoses.map((q) => Math.hypot(c.x - q.x, c.y - q.y) - 10),
+        ];
+        const s = Math.min(22, ...ecarts);
+        if (s > score) {
+          score = s;
+          meilleure = c;
+        }
+      }
+    }
+    nomsPoses.push(meilleure);
+    return meilleure;
+  });
+
   return (
     <div className="mx-auto w-full max-w-[360px] rounded-xl border border-slate-200 bg-white p-2 shadow-sm">
       <svg viewBox={`0 0 ${LARGEUR} ${hauteur}`} className="block h-auto w-full" role="img" aria-label="Repère, droites et demi-plan">
@@ -120,6 +170,23 @@ export default function DemiPlanCanvas({ figure }: Props) {
         <line x1={axeY} x2={axeY} y1={Y(f.y0)} y2={Y(f.y1)} stroke="#0f172a" strokeWidth="1.5" />
         <path d={`M ${X(f.x1)} ${axeX} l -7 -4 v 8 Z`} fill="#0f172a" />
         <path d={`M ${axeY} ${Y(f.y1)} l -4 7 h 8 Z`} fill="#0f172a" />
+        {figure.droites.map((d, i) => {
+          const s = segment(d, f);
+          if (!s) return null;
+          const c = couleur(d, i);
+          const place = places[i];
+          return (
+            <g key={`d${i}`}>
+              <line x1={X(s[0].x)} y1={Y(s[0].y)} x2={X(s[1].x)} y2={Y(s[1].y)} stroke={c} strokeWidth="2.5" strokeDasharray={strict(d) ? "8 6" : undefined} strokeLinecap="round" />
+              {d.nom && place ? (
+                <text x={place.x} y={place.y + 5} textAnchor="middle" fontSize="14" fontWeight="800" fill={c} stroke="#ffffff" strokeWidth="3.5" paintOrder="stroke">
+                  {d.nom}
+                </text>
+              ) : null}
+            </g>
+          );
+        })}
+
         <g fontSize="12" fill="#334155" stroke="#ffffff" strokeWidth="3" paintOrder="stroke" fontWeight="600">
           {graduations(f.x0 + 0.5, f.x1 - 0.5).map((v) => (
             <text key={`gx${v}`} x={X(v)} y={axeX + 15} textAnchor="middle">
@@ -135,29 +202,6 @@ export default function DemiPlanCanvas({ figure }: Props) {
             0
           </text>
         </g>
-
-        {figure.droites.map((d, i) => {
-          const s = segment(d, f);
-          if (!s) return null;
-          const c = couleur(d, i);
-          // Le nom se pose le long de la droite, en retrait du bord. Chaque droite nommée
-          // descend d'un cran : deux droites qui partent du même bord ne se recouvrent pas.
-          const haut = s[0].y >= s[1].y ? s[0] : s[1];
-          const bas = haut === s[0] ? s[1] : s[0];
-          const rang = figure.droites.slice(0, i).filter((x) => x.nom).length;
-          const t = 0.85 - 0.25 * rang;
-          const nomP = { x: bas.x + t * (haut.x - bas.x), y: bas.y + t * (haut.y - bas.y) };
-          return (
-            <g key={`d${i}`}>
-              <line x1={X(s[0].x)} y1={Y(s[0].y)} x2={X(s[1].x)} y2={Y(s[1].y)} stroke={c} strokeWidth="2.5" strokeDasharray={strict(d) ? "8 6" : undefined} strokeLinecap="round" />
-              {d.nom ? (
-                <text x={X(nomP.x) + 7} y={Y(nomP.y) - 5} fontSize="14" fontWeight="800" fill={c} stroke="#ffffff" strokeWidth="3.5" paintOrder="stroke">
-                  {d.nom}
-                </text>
-              ) : null}
-            </g>
-          );
-        })}
 
         {(figure.points ?? []).map((p, i) => {
           const c = p.test ? "#ea580c" : "#dc2626";
