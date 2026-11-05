@@ -97,9 +97,8 @@ export const SENEGAL_2NDE: ProgrammePays = {
     {
       code: "AG 8", domaine: "Géométrie plane",
       texte: "Relations métriques dans le triangle rectangle : AB² = BC·BH, AH² = HB·HC, AB·AC = BC·AH.",
-      couverture: "absente",
-      micros: [],
-      note: "Les relations avec le pied de la hauteur (AH² = HB·HC…) n'ont pas de micro ; Pythagore n'en est que le prérequis.",
+      couverture: "complete",
+      micros: m("3e", "metrique_produit", "metrique_carre"),
     },
     {
       code: "AG 9", domaine: "Géométrie plane",
@@ -170,19 +169,18 @@ export const SENEGAL_2NDE: ProgrammePays = {
     {
       code: "AN 6", domaine: "Activités numériques",
       texte: "Systèmes du premier degré : deux équations à deux inconnues (méthode de Cramer), deux ou trois équations à deux inconnues et leur interprétation ; systèmes d'inéquations, régionnement du plan, exemples de programmation linéaire.",
-      couverture: "partielle",
-      micros: m("seconde", "droite_systeme", "droite_intersection", "demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"),
-      note: "Régionnement du plan et programmation linéaire couverts ; manque la méthode de Cramer (déterminant).",
+      couverture: "complete",
+      micros: m("seconde", "droite_systeme", "droite_intersection", "systeme_determinant", "systeme_cramer", "demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"),
     },
     {
       code: "AN 7", domaine: "Activités numériques",
       texte: "Polynômes (degré ≤ 4) et fractions rationnelles : zéro, factorisation par (x − a) (identification, Horner, division euclidienne), signe ; condition d'existence, simplification, zéros et signe d'une fraction rationnelle.",
       couverture: "partielle",
       micros: [
-        ...m("seconde", "signes_premier_degre", "signes_produit", "signes_quotient", "fonction_domaine"),
+        ...m("seconde", "signes_premier_degre", "signes_produit", "signes_quotient", "fonction_domaine", "poly_racine_factoriser", "poly_division", "poly_horner"),
         ...m("premiere-spe", "sd_factorisation"),
       ],
-      note: "Manquent la factorisation d'un polynôme de degré 3 ou 4 par (x − a), la méthode de Horner, la division euclidienne et la simplification d'une fraction rationnelle.",
+      note: "Factorisation, Horner et division couverts jusqu'au degré 3 ; manquent le degré 4 et la simplification d'une fraction rationnelle.",
     },
     {
       code: "AN 8", domaine: "Activités numériques",
@@ -221,8 +219,8 @@ export const SENEGAL_1RE: ProgrammePays = {
       code: "AN 1", domaine: "Analyse",
       texte: "Fonctions associées : courbes de x ↦ f(x − a), f(x) + b, |f(x)|, f(|x|) ; centre et axe de symétrie d'une courbe ; courbe de la réciproque d'une bijection.",
       couverture: "partielle",
-      micros: m("terminale-spe", "reciproque_courbe"),
-      note: "La courbe de la réciproque est couverte ; micros à écrire : translater une courbe (f(x − a), f(x) + b), tracer |f| et f(|x|) à partir de la courbe de f, démontrer un centre de symétrie (f(a + x) + f(a − x) = 2b).",
+      micros: [...m("terminale-spe", "reciproque_courbe"), ...m("seconde", "courbe_translation", "courbe_dilatation_abs")],
+      note: "La courbe de la réciproque, les translations et |f| sont couvertes ; manquent f(|x|) et le centre de symétrie (f(a + x) + f(a − x) = 2b).",
     },
     {
       code: "AN 2", domaine: "Analyse",

@@ -401,12 +401,12 @@ export const SENEGAL_4E: ProgrammePays = {
     {
       code: "AG 1", domaine: AG,
       texte: "Distance : distance de deux points, distance d'un point à une droite.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("6e", "distance_definition", "distance_inegalite"),
+        ...m("4e", "distance_point_droite"),
         ...m("seconde", "geo_projete_orthogonal"),
       ],
-      note: "La distance d'un point à une droite (le plus court chemin, par la perpendiculaire) n'a pas de micro au collège.",
     },
     {
       code: "AG 2", domaine: AG,
@@ -559,7 +559,7 @@ export const SENEGAL_3E: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc", "triangle_demi_cercle"),
-        ...m("premiere-spe", "trig_arc"),
+        ...m("4e", "arc_longueur"),
       ],
     },
     {
