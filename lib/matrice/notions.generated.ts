@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 815 notions, 44 paquets.
+// 819 notions, 44 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -2051,6 +2051,11 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "analyse_graphique_1s",
+        "label": "Analyse graphique d'une fonction",
+        "prerequis": []
+      },
+      {
         "id": "variations_fonctions",
         "label": "Variations et courbes des fonctions",
         "prerequis": [
@@ -2201,6 +2206,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "analyse_graphique_2de",
+        "label": "Analyse graphique d'une fonction",
+        "prerequis": [
+          "fonction_vocabulaire_2de"
+        ]
+      },
+      {
         "id": "fonction_variations_extremums",
         "label": "Variations et extremums",
         "prerequis": [
@@ -2232,6 +2244,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "id": "statistiques_descriptives",
         "label": "Statistiques descriptives",
         "prerequis": []
+      },
+      {
+        "id": "croisement_variables_2de",
+        "label": "Croiser deux variables : tableaux croisés et fréquences",
+        "prerequis": [
+          "statistiques_descriptives"
+        ]
       },
       {
         "id": "probabilites_ensemble_fini",
@@ -2924,6 +2943,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
           "derivation_fonction",
           "fonction_exponentielle",
           "fonction_logarithme"
+        ]
+      },
+      {
+        "id": "fonctions_sinus_cosinus",
+        "label": "Fonctions sinus et cosinus",
+        "prerequis": [
+          "derivation_fonction"
         ]
       },
       {
