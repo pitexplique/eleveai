@@ -175,7 +175,7 @@ function troisEnsembles(condition: (z: Trois) => boolean): Trois {
     return l.length >= 5 && tientSurLaFigure(fig) && condition(z) && z;
   });
 }
-const et =(x: Objet, ...ks: Critere[]) => ks.every((k) => sat(x, k));
+const et = (x: Objet, ...ks: Critere[]) => ks.every((k) => sat(x, k));
 /** Le nom court d'une zone : « A et B », « C seulement », « Dans aucun ». */
 function zone(x: Objet, cs: Critere[]): string {
   const dans = cs.flatMap((k, i) => (sat(x, k) ? [LETTRE[i]] : []));
