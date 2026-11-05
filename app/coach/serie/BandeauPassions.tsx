@@ -27,7 +27,7 @@ export default function BandeauPassions() {
         className="flex items-center gap-3 rounded-2xl border-2 border-amber-300 bg-amber-50 px-4 py-2 font-bold text-amber-900 hover:bg-amber-100"
       >
         <span className="text-2xl">⚽🎵🎮</span>
-        <span>Dis-nous ce que tu aimes : on te montre les maths de tes passions !</span>
+        <span>Dis-nous ce que tu aimes : on te montre les maths de tes passions&nbsp;!</span>
       </Link>
     );
   }
