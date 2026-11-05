@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { SUIVI_A_VENIR, SUIVI_DES_MAINTENANT } from "@/lib/tarifs";
 
 type Props = { ouvert: boolean; mensuel: string; annee: string; finAnnee: string; nbVideos: number };
 
@@ -19,7 +20,7 @@ export default function ChoixAbonnement({ ouvert, mensuel, annee, finAnnee, nbVi
     try {
       const { data } = await createClient().auth.getSession();
       if (!data.session) {
-        window.location.href = "/auth/signin?next=/abonnement";
+        window.location.href = "/auth/signin?type=parent&next=/abonnement";
         return;
       }
       const r = await fetch("/api/abonnement/checkout", {
@@ -58,9 +59,15 @@ export default function ChoixAbonnement({ ouvert, mensuel, annee, finAnnee, nbVi
       <div className="mx-auto max-w-2xl">
         <h1 className="text-3xl font-black sm:text-4xl">Le suivi famille</h1>
         <p className="mt-3 text-slate-600">
-          Dès aujourd&apos;hui : toute la vidéothèque, soit {nbVideos} vidéos à parcourir par classe, sans publicité.
-          Le compte rendu aux parents et le bilan de départ arrivent ensuite, en exclusivité pour les abonnés et sans
-          supplément.
+          Toute la vidéothèque, soit {nbVideos} vidéos à parcourir par classe, et la page de suivi de votre enfant.
+        </p>
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-slate-700">
+          {SUIVI_DES_MAINTENANT.map((t) => <li key={t}>{t}</li>)}
+        </ul>
+        <p className="mt-3 text-sm text-slate-600">
+          À venir pour les abonnés, sans supplément : {SUIVI_A_VENIR.map((t) => t.charAt(0).toLowerCase() + t.slice(1)).join(", ")}.
+          Votre enfant doit avoir un compte par courriel et travailler connecté.{" "}
+          <Link href="/suivi/exemple" className="font-bold text-sky-700 underline">Voir un exemple</Link>
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">

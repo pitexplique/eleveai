@@ -166,9 +166,11 @@ export default function CgvPage() {
         <Article titre="3. Services proposés">
           <p>
             L’abonnement donne accès, pour la durée souscrite, à la vidéothèque
-            d’EleveAI. Les fonctions de suivi annoncées comme « à venir » sur la
-            page Tarifs ne font pas partie de ce qui est dû à la commande ; elles
-            sont ajoutées à l’abonnement, sans supplément, quand elles sont prêtes.
+            d’EleveAI et à une page de suivi du travail au coach des enfants dont
+            le compte a été relié par un code qu’ils ont créé eux-mêmes. Les
+            fonctions annoncées comme « à venir » sur la page Tarifs ne font pas
+            partie de ce qui est dû à la commande ; elles sont ajoutées à
+            l’abonnement, sans supplément, quand elles sont prêtes.
           </p>
           <p>
             Les offres, leur périmètre et leurs conditions d’éligibilité sont

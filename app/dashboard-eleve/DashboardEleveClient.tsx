@@ -8,6 +8,7 @@ import ClassementAvis from "@/components/points/ClassementAvis";
 import CartePassions from "./CartePassions";
 import CarteAvatar from "./CarteAvatar";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
+import CarteCodeParent from "./CarteCodeParent";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
@@ -512,6 +513,7 @@ export default function DashboardEleveClient() {
 
         <CarteAvatar />
         <CartePassions />
+        <CarteCodeParent />
 
         {bulletin && (
           <div className="mt-6">

@@ -54,7 +54,7 @@ import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import { DONS, VENTE } from "@/lib/legal/editeur";
-import { ETABLISSEMENT_ETRANGER, NOM_VISIO, OUVERTURE_VISIO, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, montant } from "@/lib/tarifs";
+import { ETABLISSEMENT_ETRANGER, NOM_VISIO, OUVERTURE_VISIO, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, SUIVI_DES_MAINTENANT, montant } from "@/lib/tarifs";
 import { PAYS_AVENTURE } from "@/lib/aventure/pays";
 
 /** La classe du coach → son dossier de vidéos sur R2 (et la clé de /video). */
@@ -427,7 +427,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               </h3>
               <p className="mt-1 text-slate-600">Pour les parents qui veulent savoir où en est leur enfant, sans faire à sa place.</p>
               <ul className="mt-4 space-y-2 text-slate-800">
-                {SUIVI_FAMILLE.map(({ Icone, texte }) => (
+                {(VENTE.ouverte ? SUIVI_DES_MAINTENANT.map((texte) => ({ Icone: ClipboardList, texte })) : SUIVI_FAMILLE).map(({ Icone, texte }) => (
                   <li key={texte} className="flex gap-2">
                     <Icone className="mt-0.5 h-5 w-5 shrink-0 text-sky-600" aria-hidden="true" />
                     <span>{texte}</span>

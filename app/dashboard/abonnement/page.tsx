@@ -58,7 +58,8 @@ export default function AbonnementPage() {
           {statut && !statut.enseignant && statut.acces && (
             <>
               <p className="text-xl font-black">Le suivi famille, {statut.formule === "annee" ? "année scolaire" : "au mois"}</p>
-              <p className="mt-1 text-slate-600">
+              <Link href="/suivi" className="mt-3 inline-flex rounded-full bg-sky-700 px-6 py-3 font-black text-white hover:bg-sky-800">Le suivi de mon enfant</Link>
+              <p className="mt-3 text-slate-600">
                 {statut.finProgrammee ? `Accès jusqu'au ${fin}, sans nouveau prélèvement.` : `Prochain prélèvement le ${fin}.`}
               </p>
             </>

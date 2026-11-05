@@ -11,7 +11,8 @@ export default function Page() {
         Votre paiement est reçu et votre facture part par courriel. L&apos;accès s&apos;ouvre dans quelques secondes.
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <Link href="/video" className="rounded-full bg-sky-700 px-6 py-3 font-black text-white hover:bg-sky-800">Ouvrir la vidéothèque</Link>
+        <Link href="/suivi" className="rounded-full bg-sky-700 px-6 py-3 font-black text-white hover:bg-sky-800">Relier le compte de mon enfant</Link>
+        <Link href="/video" className="rounded-full px-6 py-3 font-black text-slate-800 ring-1 ring-slate-200 hover:bg-slate-50">Ouvrir la vidéothèque</Link>
         <Link href="/dashboard/abonnement" className="rounded-full px-6 py-3 font-black text-slate-800 ring-1 ring-slate-200 hover:bg-slate-50">Mon abonnement</Link>
       </div>
     </main>

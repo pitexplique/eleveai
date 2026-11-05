@@ -118,7 +118,8 @@ const sections = [
               on ne déclare pas un traitement qui n'a jamais lieu. */}
           {(VENTE.ouverte || DONS.ouverts) && (
             <li>
-              <span className="font-semibold text-slate-50">Clients d&apos;un abonnement et donateurs</span> : nom,
+              <span className="font-semibold text-slate-50">Clients d&apos;un abonnement et donateurs</span> : les parents abonnés voient
+              le travail au coach des enfants qui leur ont donné un code ; nom,
               adresse de facturation et historique des commandes. Les données de carte
               bancaire sont saisies chez notre prestataire de paiement et ne sont
               jamais reçues ni conservées par EleveAI.

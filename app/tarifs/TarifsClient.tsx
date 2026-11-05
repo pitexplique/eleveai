@@ -27,6 +27,8 @@ import {
   PRIX_MENSUEL,
   PRIX_PAR_PAYS,
   PRIX_VISIO,
+  SUIVI_A_VENIR,
+  SUIVI_DES_MAINTENANT,
   NOM_VISIO,
   VISIO_MATHS_REELLES,
   VIDEOS_SITE,
@@ -50,15 +52,15 @@ const VIDEOS_REELLES = toutesLesVideos().filter((v) => !/\/(gb|en)\//.test(v.fic
 const SUIVI_AUJOURDHUI = VENTE.ouverte
   ? `Dès aujourd'hui : toute la vidéothèque, ${nombre(VIDEOS_REELLES)} vidéos du CP à la Terminale, à parcourir par classe`
   : `Toute la vidéothèque : ${nombre(VIDEOS_SITE)} vidéos du CP à la Terminale (${nombre(VIDEOS_YOUTUBE)} seulement sur YouTube)`;
-const SUIVI_A_VENIR = [
+const SUIVI_PROMIS = [
   "Un bilan de départ : la carte de votre enfant sur toute sa classe",
   "Un compte rendu chaque semaine : ce qui est acquis, les erreurs qui reviennent, les 3 choses à revoir",
   "10 minutes par jour choisies par le coach, et la préparation ciblée d'un contrôle",
   "Une alerte quand il décroche sur une notion",
 ];
 const SUIVI = VENTE.ouverte
-  ? [SUIVI_AUJOURDHUI, "Un seul abonnement pour tous les enfants de la maison", ...SUIVI_A_VENIR.map((t) => `À venir, en exclusivité : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]
-  : [SUIVI_AUJOURDHUI, ...SUIVI_A_VENIR, "Un seul abonnement pour tous les enfants de la maison"];
+  ? [SUIVI_AUJOURDHUI, ...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir, en exclusivité : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]
+  : [SUIVI_AUJOURDHUI, ...SUIVI_PROMIS, "Un seul abonnement pour tous les enfants de la maison"];
 
 // ⭐ 03/11 : « Maths réelles », la liste vit dans lib/tarifs.ts.
 const VISIO = VISIO_MATHS_REELLES;
@@ -142,6 +144,7 @@ export default function TarifsClient() {
             <h2 className="mt-1 flex items-center gap-2 text-2xl font-black">
               <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> Le suivi famille
             </h2>
+            <Link href="/suivi/exemple" className="mt-1 text-sm font-black text-sky-700 underline">Voir un exemple</Link>
             <p className="mt-3 text-3xl font-black">
               {montant(PRIX_MENSUEL)} <span className="text-base font-bold text-slate-500">par mois</span>
             </p>
