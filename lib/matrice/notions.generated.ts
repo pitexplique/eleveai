@@ -2119,7 +2119,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "arithmetique_entiers",
-        "label": "Multiples, diviseurs et nombres premiers",
+        "label": "Multiples, diviseurs, pair et impair",
         "prerequis": []
       },
       {

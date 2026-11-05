@@ -671,7 +671,8 @@ export function lireFeuille(source) {
     /** Le source de chaque exercice, schéma compris (k − 1 pour l'exercice k). */
     blocs: series.split(/\n\s+enonce:/).slice(1),
     /** Toutes les chaînes que l'élève LIT : titres, consignes, rappels, énoncés, corrigés. */
-    textes: [...series.matchAll(/"((?:[^"\\]|\\.)*)"/g)].map((m) => m[1].replace(/\\\\/g, "\\")),
+    // Sans `attendu` : l'élève ne le lit pas, et il s'écrit en notation calculatrice (3/13, 10^(x)).
+    textes: [...series.replace(/attendu:\s*(?:\[(?:"(?:[^"\\]|\\.)*"|[\s,])*\]|"(?:[^"\\]|\\.)*")/g, "attendu: 0").matchAll(/"((?:[^"\\]|\\.)*)"/g)].map((m) => m[1].replace(/\\\\/g, "\\")),
     series,
   };
 }
@@ -736,8 +737,11 @@ export function controlesCommuns(v, source, { notionId, classe = "seconde", mati
   ].map((m) => m[1]);
   const inconnues = [...cites].filter((id) => !microSkills.includes(`id: "${id}"`));
   v.ok(`${cites.size} micros citées, toutes connues du coach`, inconnues.length === 0, inconnues.join(", "));
-  const sansExercice = deLaNotion.filter((id) => !cites.has(id));
-  v.ok(`les ${deLaNotion.length} micros de ${notionId} ont chacune un exercice`, deLaNotion.length > 0 && sansExercice.length === 0, sansExercice.join(", ") || "aucune micro lue");
+  // Une micro masquée (hors programme) n'exige plus d'exercice.
+  const masquees = fs.readFileSync(path.join(RACINE, "lib", "tutor-v4", "micros-masquees.ts"), "utf8");
+  const requises = deLaNotion.filter((id) => !masquees.includes(`"${id}"`));
+  const sansExercice = requises.filter((id) => !cites.has(id));
+  v.ok(`les ${requises.length} micros de ${notionId} ont chacune un exercice`, deLaNotion.length > 0 && sansExercice.length === 0, sansExercice.join(", ") || "aucune micro lue");
   const horsNotion = [...cites].filter((id) => !deLaNotion.includes(id));
   v.ok("aucune micro d'une autre notion", horsNotion.length === 0, horsNotion.join(", "));
 }

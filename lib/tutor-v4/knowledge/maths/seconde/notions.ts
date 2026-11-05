@@ -20,7 +20,7 @@ export const notions: NotionSource[] = [
   },
   {
     id: "arithmetique_entiers",
-    label: "Multiples, diviseurs et nombres premiers",
+    label: "Multiples, diviseurs, pair et impair",
     boId: "BO2N1",
     prerequis: [],
     levels: [1, 2],

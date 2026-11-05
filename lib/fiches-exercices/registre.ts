@@ -504,9 +504,9 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
       "Du calcul seul au problème : résoudre, diviser par un négatif, écrire les solutions en intervalle et les voir sur une droite graduée, aucune solution ou tous les nombres, comparer par la différence ou le quotient. Le marché de Saint-Paul, le froid au Piton des Neiges, une course à rattraper.",
   },
   "maths/seconde/arithmetique-entiers": {
-    titre: "Multiples, diviseurs et nombres premiers : 20 exercices corrigés",
+    titre: "Multiples, diviseurs, pair et impair : 20 exercices corrigés",
     resume:
-      "Du calcul seul au problème : diviseurs, pair et impair, critères de divisibilité, nombres premiers, décomposition, fractions irréductibles, et deux démonstrations avec une lettre. Des bouquets, des bus, un carrelage, un vélo, et les cigales qui comptent en nombres premiers.",
+      "Du calcul seul au problème : diviseurs, pair et impair, critères de divisibilité, fractions irréductibles, et deux démonstrations avec une lettre. Des bouquets, des bus, un carrelage, un vélo, et les cigales de 13 et de 17 ans.",
   },
   "maths/seconde/reels-intervalles": {
     titre: "Nombres réels, intervalles et valeur absolue : 20 exercices corrigés",

@@ -1,10 +1,14 @@
-// ─── Fiche d'exercices : multiples, diviseurs, nombres premiers (seconde) ──────
+// ─── Fiche d'exercices : multiples, diviseurs, pair et impair (seconde) ────────
 //
 // Septième feuille du bloc « Nombres et calculs » (21/09/2026). Alignée sur la
 // banque `lib/tutor-v4/questionBank/seconde/maths/arithmetique-entiers.bank.ts`
 // (notionId arithmetique_entiers). La fiche de cours de la notion est écrite
 // APRÈS la feuille, dans la même session (ordre donné par Frédéric : « toutes
 // les fiches exercices, puis les deux fiches de cours manquantes »).
+//
+// ⛔ 05/11/2026 : le programme de seconde 2026 (annexe, BO n°14 du 02/04/2026)
+// arrête l'arithmétique à multiple, diviseur, pair, impair. Les nombres premiers
+// et la décomposition sont retirés de la feuille, à la demande de Frédéric.
 //
 // ⭐ LES DEUX DÉMONSTRATIONS DU BO : « la somme de deux multiples de a est un
 // multiple de a » (exercice 8) et « le carré d'un nombre impair est impair »
@@ -17,11 +21,11 @@
 // en 2024, pour la première fois depuis 1803 (2024 − 221). Un fait, pas une fable.
 //
 // ⭐ Recalcul indépendant : `scripts/verifier-exercices-arithmetique.mjs` —
-// les diviseurs par essais un à un, les nombres premiers par crible.
+// les diviseurs par essais un à un, le plus grand diviseur commun par Euclide.
 //
-// Micro-compétences : arith_multiple_diviseur (1, 2, 3, 8, 9, 10, 14),
-// arith_nombre_premier (4, 5, 11, 13, 14, 19, 20), arith_fraction_irreductible
-// (6, 11, 12), arith_probleme (7, 15, 16, 17, 18, 20). 4/4.
+// Micro-compétences : arith_multiple_diviseur (1, 2, 3, 4, 5, 8, 9, 10, 11, 13,
+// 14, 19), arith_fraction_irreductible (6, 11, 12), arith_probleme (7, 15, 16,
+// 17, 18, 20). 3/3 ; arith_nombre_premier est masquée (micros-masquees.ts).
 
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
@@ -42,12 +46,12 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
   matiereLabel: "Maths",
   classe: "seconde",
   notion: "arithmetique-entiers",
-  titre: "Multiples, diviseurs et nombres premiers",
+  titre: "Multiples, diviseurs, pair et impair",
   accroche:
-    "Vingt exercices, du calcul seul au problème : trouver les diviseurs, reconnaître un nombre premier, rendre une fraction irréductible, démontrer avec une lettre. Des bouquets, des bus, un carrelage, un vélo, et des cigales qui comptent en nombres premiers. Un rappel de cours de trois lignes avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : elle est écrite étape par étape, avec le pourquoi de chaque étape et le piège nommé.",
+    "Vingt exercices, du calcul seul au problème : trouver les diviseurs, appliquer les critères de divisibilité, rendre une fraction irréductible, démontrer avec une lettre. Des bouquets, des bus, un carrelage, un vélo, et des cigales qui sortent de terre tous les 13 ou 17 ans. Un rappel de cours de trois lignes avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : elle est écrite étape par étape, avec le pourquoi de chaque étape et le piège nommé.",
 
   fichesCours: [
-    { href: "/fiches-cours/maths/seconde/arithmetique-entiers", titre: "Multiples, diviseurs et nombres premiers" },
+    { href: "/fiches-cours/maths/seconde/arithmetique-entiers", titre: "Multiples, diviseurs, pair et impair" },
   ],
   coachHref: "/coach-ia/maths?classe=seconde",
 
@@ -60,7 +64,7 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
       rappel: [
         "$b$ est un DIVISEUR de $a$ (et $a$ un MULTIPLE de $b$) si $a = b \\times k$ avec $k$ entier. Exemple : $91 = 7 \\times 13$.",
         "PAIR : s'écrit $2k$. IMPAIR : s'écrit $2k + 1$. Divisible par $3$ ou par $9$ : la somme des chiffres l'est.",
-        "PREMIER : exactement deux diviseurs, $1$ et lui-même. $1$ n'est pas premier. Pour tester $n$, on essaie les nombres premiers jusqu'à $\\sqrt{n}$.",
+        "Par $2$, $5$ ou $10$ : le dernier chiffre. Par $4$ : les deux derniers. Une fraction est IRRÉDUCTIBLE quand seul $1$ divise à la fois son numérateur et son dénominateur.",
       ],
       exercices: [
         {
@@ -96,43 +100,43 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
           micros: ["arith_multiple_diviseur"],
         },
         {
-          enonce: "Ces nombres sont-ils premiers ? Justifier.\na) $29$\nb) $51$\nc) $57$\nd) $97$\ne) $1$",
+          enonce: "Répondre par oui ou non, et justifier par une égalité.\na) $8$ divise-t-il $96$ ?\nb) $6$ divise-t-il $75$ ?\nc) $104$ est-il un multiple de $13$ ?\nd) $7$ divise-t-il $100$ ?\ne) $1$ divise-t-il $57$ ?",
           reponses: [
-            { question: "a) premier ?", attendu: ["oui", "vrai"] },
-            { question: "b) premier ?", attendu: ["non", "faux"] },
-            { question: "c) premier ?", attendu: ["non", "faux"] },
-            { question: "d) premier ?", attendu: ["oui", "vrai"] },
-            { question: "e) premier ?", attendu: ["non", "faux"] },
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["oui", "vrai"] },
+            { question: "d)", attendu: ["non", "faux"] },
+            { question: "e)", attendu: ["oui", "vrai"] },
           ],
           correction:
-            "Pour tester $n$, on essaie de le diviser par les nombres premiers $2$, $3$, $5$, $7$… jusqu'à $\\sqrt{n}$.\na) $\\sqrt{29} \\approx 5{,}4$. $29$ n'est divisible ni par $2$, ni par $3$, ni par $5$ : il est premier.\nb) $51 = 3 \\times 17$ : il n'est pas premier.\nc) $57 = 3 \\times 19$ : il n'est pas premier.\nd) $\\sqrt{97} \\approx 9{,}8$. $97$ n'est divisible ni par $2$, ni par $3$, ni par $5$, ni par $7$ : il est premier.\ne) $1$ n'a qu'un seul diviseur : il n'est pas premier.\n⛔ Le piège : croire que $51$ et $57$ sont premiers parce qu'ils sont impairs. La somme de leurs chiffres ($6$ et $12$) montre qu'ils sont divisibles par $3$.",
-          micros: ["arith_nombre_premier"],
+            "On écrit la division : le nombre divise si le reste vaut $0$.\na) $96 = 8 \\times 12$ : oui.\nb) $75 = 6 \\times 12 + 3$ : le reste vaut $3$, donc non.\nc) $104 = 13 \\times 8$ : oui.\nd) $100 = 7 \\times 14 + 2$ : le reste vaut $2$, donc non.\ne) $57 = 1 \\times 57$ : oui.\n⭐ $1$ divise tous les entiers, et tout entier se divise lui-même.\n⛔ Le piège au b) : croire que $6$ divise $75$ parce que $6$ et $75$ sont tous les deux divisibles par $3$. Cela ne suffit pas : c'est le reste qui décide.",
+          micros: ["arith_multiple_diviseur"],
         },
         {
-          enonce: "Décomposer en produit de facteurs premiers.\na) $60$\nb) $84$\nc) $126$",
+          enonce: "Donner tous les diviseurs de chaque nombre.\na) $45$\nb) $64$\nc) $84$",
           reponses: [
-            { question: "a)", attendu: ["2^2×3×5", "2×2×3×5"], exact: true },
-            { question: "b)", attendu: ["2^2×3×7", "2×2×3×7"], exact: true },
-            { question: "c)", attendu: ["2×3^2×7", "2×3×3×7"], exact: true },
+            { question: "a)", attendu: "1 ; 3 ; 5 ; 9 ; 15 ; 45" },
+            { question: "b)", attendu: "1 ; 2 ; 4 ; 8 ; 16 ; 32 ; 64" },
+            { question: "c)", attendu: "1 ; 2 ; 3 ; 4 ; 6 ; 7 ; 12 ; 14 ; 21 ; 28 ; 42 ; 84" },
           ],
           correction:
-            "On divise par le plus petit nombre premier possible, et on recommence avec le quotient.\na) $60 = 2 \\times 30 = 2 \\times 2 \\times 15 = 2 \\times 2 \\times 3 \\times 5$, soit $60 = 2^2 \\times 3 \\times 5$.\nb) $84 = 2 \\times 42 = 2 \\times 2 \\times 21 = 2 \\times 2 \\times 3 \\times 7$, soit $84 = 2^2 \\times 3 \\times 7$.\nc) $126 = 2 \\times 63 = 2 \\times 3 \\times 21 = 2 \\times 3 \\times 3 \\times 7$, soit $126 = 2 \\times 3^2 \\times 7$.\n⛔ Le piège : s'arrêter à $60 = 4 \\times 15$. Ni $4$ ni $15$ ne sont premiers : il faut aller jusqu'au bout.",
-          schema: tableau("Les trois décompositions", ["en facteurs premiers", "vérification"], [
-            { label: "60", values: ["2² × 3 × 5", "4 × 15 = 60"] },
-            { label: "84", values: ["2² × 3 × 7", "4 × 21 = 84"] },
-            { label: "126", values: ["2 × 3² × 7", "2 × 63 = 126"] },
+            "On cherche les produits, en essayant $1$, $2$, $3$… jusqu'à ce que les deux facteurs se rejoignent.\na) $1 \\times 45$, $3 \\times 15$, $5 \\times 9$. Les diviseurs de $45$ sont $1$, $3$, $5$, $9$, $15$ et $45$.\nb) $1 \\times 64$, $2 \\times 32$, $4 \\times 16$, $8 \\times 8$. Les diviseurs de $64$ sont $1$, $2$, $4$, $8$, $16$, $32$ et $64$.\nc) $1 \\times 84$, $2 \\times 42$, $3 \\times 28$, $4 \\times 21$, $6 \\times 14$, $7 \\times 12$. Les diviseurs de $84$ sont $1$, $2$, $3$, $4$, $6$, $7$, $12$, $14$, $21$, $28$, $42$ et $84$.\n⭐ $64$ a un nombre impair de diviseurs : dans $8 \\times 8$, le $8$ ne compte qu'une fois. Seuls les carrés font cela.\n⛔ Le piège au a) : essayer seulement $2$, $4$, $6$. Le nombre $45$ est impair, mais il a bien d'autres diviseurs.",
+          schema: tableau("Le dernier essai, et le nombre de diviseurs", ["=", "total"], [
+            { label: "45", values: ["5×9", "6"] },
+            { label: "64", values: ["8×8", "7"] },
+            { label: "84", values: ["7×12", "12"] },
           ]),
-          micros: ["arith_nombre_premier"],
+          micros: ["arith_multiple_diviseur"],
         },
         {
-          enonce: "Rendre ces fractions irréductibles.\na) $\\dfrac{42}{56}$\nb) $\\dfrac{90}{126}$\nc) $\\dfrac{17}{51}$",
+          enonce: "Rendre ces fractions irréductibles.\na) $\\frac{42}{56}$\nb) $\\frac{90}{126}$\nc) $\\frac{17}{51}$",
           reponses: [
             { question: "a)", attendu: "3/4", exact: true },
             { question: "b)", attendu: "5/7", exact: true },
             { question: "c)", attendu: "1/3", exact: true },
           ],
           correction:
-            "On divise le numérateur et le dénominateur par le même diviseur commun, le plus grand possible.\na) $42 = 14 \\times 3$ et $56 = 14 \\times 4$, donc $\\dfrac{42}{56} = \\dfrac{3}{4}$.\nb) $90 = 18 \\times 5$ et $126 = 18 \\times 7$, donc $\\dfrac{90}{126} = \\dfrac{5}{7}$.\nc) $51 = 17 \\times 3$, donc $\\dfrac{17}{51} = \\dfrac{1}{3}$.\n⭐ Une fraction est irréductible quand le numérateur et le dénominateur n'ont plus aucun diviseur commun, sauf $1$.\n⛔ Le piège au b) : diviser seulement par $2$, et s'arrêter à $\\dfrac{45}{63}$. On peut encore diviser par $9$.",
+            "On divise le numérateur et le dénominateur par le même diviseur commun, le plus grand possible.\na) $42 = 14 \\times 3$ et $56 = 14 \\times 4$, donc $\\frac{42}{56} = \\frac{3}{4}$.\nb) $90 = 18 \\times 5$ et $126 = 18 \\times 7$, donc $\\frac{90}{126} = \\frac{5}{7}$.\nc) $51 = 17 \\times 3$, donc $\\frac{17}{51} = \\frac{1}{3}$.\n⭐ Une fraction est irréductible quand le numérateur et le dénominateur n'ont plus aucun diviseur commun, sauf $1$.\n⛔ Le piège au b) : diviser seulement par $2$, et s'arrêter à $\\frac{45}{63}$. On peut encore diviser par $9$.",
           micros: ["arith_fraction_irreductible"],
         },
         {
@@ -159,11 +163,11 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
     {
       niveau: 2,
       titre: "Type devoir",
-      consigne: "Plusieurs étapes. On démontre avec une lettre, on décompose avant de simplifier.",
+      consigne: "Plusieurs étapes. On démontre avec une lettre, on cherche les diviseurs communs avant de simplifier.",
       rappel: [
         "DÉMONTRER : on écrit les nombres avec une lettre ($2k$, $2k + 1$, $7a$), on calcule, puis on reconnaît la forme cherchée.",
-        "PLUS GRAND DIVISEUR COMMUN : on décompose les deux nombres et on garde les facteurs premiers qu'ils ont EN COMMUN.",
-        "PLUS PETIT MULTIPLE COMMUN : on garde TOUS les facteurs premiers, chacun avec sa plus grande puissance.",
+        "PLUS GRAND DIVISEUR COMMUN : on écrit les diviseurs du plus petit nombre, et on garde le plus grand qui divise aussi l'autre.",
+        "PLUS PETIT MULTIPLE COMMUN : on écrit les multiples du plus grand nombre, et on s'arrête dès que l'un d'eux est aussi un multiple de l'autre.",
       ],
       exercices: [
         {
@@ -179,41 +183,41 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
           micros: ["arith_multiple_diviseur"],
         },
         {
-          enonce: "a) Décomposer $198$ et $308$ en produit de facteurs premiers.\nb) En déduire leur plus grand diviseur commun.\nc) Rendre $\\dfrac{198}{308}$ irréductible.",
+          enonce: "a) Donner tous les diviseurs de $66$ et de $90$.\nb) En déduire leur plus grand diviseur commun.\nc) Rendre $\\frac{66}{90}$ irréductible.",
           reponses: [
-            { question: "a) 198", attendu: ["2×3^2×11", "2×3×3×11"], exact: true },
-            { question: "a) 308", attendu: ["2^2×7×11", "2×2×7×11"], exact: true },
-            { question: "b)", attendu: "22" },
-            { question: "c)", attendu: "9/14", exact: true },
+            { question: "a) 66", attendu: "1 ; 2 ; 3 ; 6 ; 11 ; 22 ; 33 ; 66" },
+            { question: "a) 90", attendu: "1 ; 2 ; 3 ; 5 ; 6 ; 9 ; 10 ; 15 ; 18 ; 30 ; 45 ; 90" },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "11/15", exact: true },
           ],
           correction:
-            "a) $198 = 2 \\times 99 = 2 \\times 3^2 \\times 11$. Et $308 = 4 \\times 77 = 2^2 \\times 7 \\times 11$.\nb) Les facteurs communs sont $2$ et $11$. Le plus grand diviseur commun vaut $2 \\times 11 = 22$.\nc) $198 = 22 \\times 9$ et $308 = 22 \\times 14$, donc $\\dfrac{198}{308} = \\dfrac{9}{14}$.\n⭐ $9 = 3^2$ et $14 = 2 \\times 7$ n'ont plus aucun facteur commun : la fraction est bien irréductible.",
-          schema: tableau("Ce qui est commun", ["en facteurs premiers", "commun"], [
-            { label: "198", values: ["2 × 3² × 11", "2 et 11"] },
-            { label: "308", values: ["2² × 7 × 11", "2 et 11"] },
+            "a) Par paires, les diviseurs de $66$ sont $1$, $2$, $3$, $6$, $11$, $22$, $33$ et $66$.\nCeux de $90$ sont $1$, $2$, $3$, $5$, $6$, $9$, $10$, $15$, $18$, $30$, $45$ et $90$.\nb) Les diviseurs communs sont $1$, $2$, $3$ et $6$. Le plus grand vaut $6$.\nc) $66 = 6 \\times 11$ et $90 = 6 \\times 15$, donc $\\frac{66}{90} = \\frac{11}{15}$.\n⭐ Les diviseurs de $11$ sont $1$ et $11$, ceux de $15$ sont $1$, $3$, $5$ et $15$ : seul $1$ est commun, la fraction est bien irréductible.",
+          schema: tableau("Le plus grand diviseur commun : 6", ["=", "reste"], [
+            { label: "66", values: ["6×11", "11"] },
+            { label: "90", values: ["6×15", "15"] },
           ]),
-          micros: ["arith_nombre_premier", "arith_fraction_irreductible"],
+          micros: ["arith_multiple_diviseur", "arith_fraction_irreductible"],
         },
         {
-          enonce: "Calculer $\\dfrac{5}{12} + \\dfrac{7}{18}$ et donner le résultat sous forme irréductible.",
+          enonce: "Calculer $\\frac{5}{12} + \\frac{7}{18}$ et donner le résultat sous forme irréductible.",
           reponses: [
             { attendu: "29/36", exact: true },
           ],
           correction:
-            "On cherche le plus petit multiple commun de $12$ et $18$. On décompose : $12 = 2^2 \\times 3$ et $18 = 2 \\times 3^2$.\nOn garde chaque facteur avec sa plus grande puissance : $2^2 \\times 3^2 = 36$.\n$\\dfrac{5}{12} = \\dfrac{15}{36}$ et $\\dfrac{7}{18} = \\dfrac{14}{36}$. Donc $\\dfrac{5}{12} + \\dfrac{7}{18} = \\dfrac{29}{36}$.\n$29$ est premier et ne divise pas $36$ : la fraction est irréductible.\n⛔ Le piège : prendre $12 \\times 18 = 216$ comme dénominateur. Le calcul est juste, mais il faut ensuite simplifier $\\dfrac{174}{216}$ par $6$.",
+            "On cherche le plus petit multiple commun de $12$ et $18$. Les multiples de $18$ sont $18$, $36$… $18$ n'est pas un multiple de $12$, mais $36 = 12 \\times 3$ : c'est $36$.\n$\\frac{5}{12} = \\frac{15}{36}$ et $\\frac{7}{18} = \\frac{14}{36}$. Donc $\\frac{5}{12} + \\frac{7}{18} = \\frac{29}{36}$.\n$29$ n'est divisible ni par $2$, ni par $3$ : il n'a aucun diviseur commun avec $36$, sauf $1$. La fraction est irréductible.\n⛔ Le piège : prendre $12 \\times 18 = 216$ comme dénominateur. Le calcul est juste, mais il faut ensuite simplifier $\\frac{174}{216}$ par $6$.",
           micros: ["arith_fraction_irreductible"],
         },
         {
-          enonce: "Donner tous les nombres premiers compris entre $40$ et $60$.",
+          enonce: "Donner tous les entiers compris entre $100$ et $150$ qui sont divisibles à la fois par $4$ et par $6$.",
           reponses: [
-            { attendu: "41 ; 43 ; 47 ; 53 ; 59" },
+            { attendu: "108 ; 120 ; 132 ; 144" },
           ],
           correction:
-            "On élimine d'abord les nombres pairs, puis les multiples de $3$, de $5$ et de $7$ (car $\\sqrt{60} < 8$).\nMultiples de $3$ : $45$, $51$, $57$. Multiples de $5$ : $45$, $55$. Multiple de $7$ : $49$.\nIl reste $41$, $43$, $47$, $53$ et $59$.\n⛔ Le piège : garder $49$. Il est impair, et n'est divisible ni par $3$ ni par $5$ — mais $49 = 7 \\times 7$.",
-          micros: ["arith_nombre_premier"],
+            "On part des multiples de $6$ : $102$, $108$, $114$, $120$, $126$, $132$, $138$, $144$, $150$.\nOn regarde les deux derniers chiffres pour le critère de $4$ : $08$, $20$, $32$ et $44$ sont des multiples de $4$ ; $02$, $14$, $26$, $38$ et $50$ n'en sont pas.\nIl reste $108$, $120$, $132$ et $144$.\n⛔ Le piège : chercher les multiples de $24$, parce que $4 \\times 6 = 24$. On oublierait $108$ et $132$.",
+          micros: ["arith_multiple_diviseur"],
         },
         {
-          enonce: "Vrai ou faux ? Justifier par une preuve ou un contre-exemple.\na) Tout nombre impair est premier.\nb) La somme de deux nombres premiers est paire.\nc) Un nombre divisible par $6$ est divisible par $3$.\nd) Un nombre divisible par $4$ et par $6$ est divisible par $24$.",
+          enonce: "Vrai ou faux ? Justifier par une preuve ou un contre-exemple.\na) Tout nombre impair est divisible par $3$.\nb) La somme de deux nombres impairs est impaire.\nc) Un nombre divisible par $6$ est divisible par $3$.\nd) Un nombre divisible par $4$ et par $6$ est divisible par $24$.",
           reponses: [
             { question: "a)", attendu: ["non", "faux"] },
             { question: "b)", attendu: ["non", "faux"] },
@@ -221,8 +225,8 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
             { question: "d)", attendu: ["non", "faux"] },
           ],
           correction:
-            "a) FAUX. Contre-exemple : $9 = 3 \\times 3$ est impair mais pas premier.\nb) FAUX. Contre-exemple : $2 + 3 = 5$, qui est impair. Le seul nombre premier pair, $2$, fait tomber la règle.\nc) VRAI. Un multiple de $6$ s'écrit $6k = 3 \\times (2k)$ : c'est un multiple de $3$.\nd) FAUX. Contre-exemple : $12$ est divisible par $4$ et par $6$, mais pas par $24$.\n⭐ Au d), $4$ et $6$ ont le facteur $2$ en commun : il ne faut pas le compter deux fois.",
-          micros: ["arith_multiple_diviseur", "arith_nombre_premier"],
+            "a) FAUX. Contre-exemple : $7 = 3 \\times 2 + 1$ est impair, mais pas divisible par $3$.\nb) FAUX. Contre-exemple : $3 + 5 = 8$, qui est pair.\nc) VRAI. Un multiple de $6$ s'écrit $6k = 3 \\times (2k)$ : c'est un multiple de $3$.\nd) FAUX. Contre-exemple : $12$ est divisible par $4$ et par $6$, mais pas par $24$.\n⭐ Au d), $4$ et $6$ sont tous les deux divisibles par $2$ : il ne faut pas compter ce $2$ deux fois.",
+          micros: ["arith_multiple_diviseur"],
         },
         {
           enonce: "Un fleuriste a $126$ roses et $90$ lys. Il veut faire le plus grand nombre possible de bouquets identiques, en utilisant toutes les fleurs.\na) Combien de bouquets peut-il faire ?\nb) Que contient chaque bouquet ?",
@@ -232,7 +236,7 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
             { question: "b) lys", attendu: "5" },
           ],
           correction:
-            "a) Le nombre de bouquets doit diviser $126$ ET $90$ : on cherche leur plus grand diviseur commun.\n$126 = 2 \\times 3^2 \\times 7$ et $90 = 2 \\times 3^2 \\times 5$. Les facteurs communs donnent $2 \\times 3^2 = 18$.\nIl peut faire $18$ bouquets.\nb) $126 \\div 18 = 7$ et $90 \\div 18 = 5$. Chaque bouquet contient $7$ roses et $5$ lys.\n⛔ Le piège : chercher le plus petit multiple commun. On PARTAGE des fleurs : c'est un diviseur qu'on cherche.",
+            "a) Le nombre de bouquets doit diviser $126$ ET $90$ : on cherche leur plus grand diviseur commun.\nLes diviseurs de $90$, du plus grand au plus petit : $90$, $45$, $30$, $18$… Or $126 = 90 \\times 1 + 36$, $126 = 45 \\times 2 + 36$, $126 = 30 \\times 4 + 6$, mais $126 = 18 \\times 7$. Le plus grand diviseur commun est $18$.\nIl peut faire $18$ bouquets.\nb) $126 \\div 18 = 7$ et $90 \\div 18 = 5$. Chaque bouquet contient $7$ roses et $5$ lys.\n⛔ Le piège : chercher le plus petit multiple commun. On PARTAGE des fleurs : c'est un diviseur qu'on cherche.",
           micros: ["arith_probleme"],
         },
         {
@@ -241,7 +245,7 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
             { attendu: ["7 h", "7h00"] },
           ],
           correction:
-            "Les départs de la ligne A tombent sur les multiples de $20$ : $20$, $40$, $60$, $80$… Ceux de la ligne B, sur les multiples de $30$ : $30$, $60$, $90$…\nLe premier multiple commun est $60$. Avec les décompositions : $20 = 2^2 \\times 5$, $30 = 2 \\times 3 \\times 5$, donc $2^2 \\times 3 \\times 5 = 60$.\nIls repartiront ensemble $60$ minutes plus tard, à $7$ h.\n⛔ Le piège : calculer $20 \\times 30 = 600$ minutes. C'est bien un multiple commun ($10$ heures plus tard, à $16$ h), mais pas le premier.",
+            "Les départs de la ligne A tombent sur les multiples de $20$ : $20$, $40$, $60$, $80$… Ceux de la ligne B, sur les multiples de $30$ : $30$, $60$, $90$…\nLe plus petit multiple commun est $60$.\nIls repartiront ensemble $60$ minutes plus tard, à $7$ h.\n⛔ Le piège : calculer $20 \\times 30 = 600$ minutes. C'est bien un multiple commun ($10$ heures plus tard, à $16$ h), mais pas le premier.",
           micros: ["arith_probleme"],
         },
       ],
@@ -265,7 +269,7 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
             { question: "b)", attendu: "12" },
           ],
           correction:
-            "a) En centimètres, la pièce mesure $360$ sur $270$. Le côté du carreau doit diviser $360$ et $270$, et être le plus grand possible.\n$360 = 2^3 \\times 3^2 \\times 5$ et $270 = 2 \\times 3^3 \\times 5$. Les facteurs communs donnent $2 \\times 3^2 \\times 5 = 90$.\nUn carreau mesure $90$ cm de côté.\nb) $360 \\div 90 = 4$ carreaux dans la longueur, $270 \\div 90 = 3$ dans la largeur. Il faut $4 \\times 3 = 12$ carreaux.\n⛔ Le piège : se contenter d'un diviseur commun, par exemple $30$. Il convient ($360 = 30 \\times 12$ et $270 = 30 \\times 9$), mais il faudrait $12 \\times 9 = 108$ carreaux : ce ne sont pas les plus grands.",
+            "a) En centimètres, la pièce mesure $360$ sur $270$. Le côté du carreau doit diviser $360$ et $270$, et être le plus grand possible.\nLes diviseurs de $270$, du plus grand au plus petit : $270$, $135$, $90$… Or $360 = 270 \\times 1 + 90$, $360 = 135 \\times 2 + 90$, mais $360 = 90 \\times 4$. Le plus grand diviseur commun est $90$.\nUn carreau mesure $90$ cm de côté.\nb) $360 \\div 90 = 4$ carreaux dans la longueur, $270 \\div 90 = 3$ dans la largeur. Il faut $4 \\times 3 = 12$ carreaux.\n⛔ Le piège : se contenter d'un diviseur commun, par exemple $30$. Il convient ($360 = 30 \\times 12$ et $270 = 30 \\times 9$), mais il faudrait $12 \\times 9 = 108$ carreaux : ce ne sont pas les plus grands.",
           micros: ["arith_probleme"],
         },
         {
@@ -277,21 +281,21 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
             { question: "b) pignon", attendu: "8" },
           ],
           correction:
-            "a) Les marques se retrouvent quand le nombre de dents passées est un multiple de $48$ ET de $18$. On cherche le plus petit.\n$48 = 2^4 \\times 3$ et $18 = 2 \\times 3^2$. On garde chaque facteur avec sa plus grande puissance : $2^4 \\times 3^2 = 144$.\nLes marques se retrouvent après $144$ dents.\nb) Le plateau a fait $144 \\div 48 = 3$ tours, et le pignon $144 \\div 18 = 8$ tours.\n⭐ Pendant que le plateau fait $3$ tours, la roue arrière en fait $8$ : c'est ce qui fait avancer le vélo plus vite que les pédales.",
+            "a) Les marques se retrouvent quand le nombre de dents passées est un multiple de $48$ ET de $18$. On cherche le plus petit.\nLes multiples de $48$ sont $48$, $96$, $144$… Or $48 = 18 \\times 2 + 12$, $96 = 18 \\times 5 + 6$, mais $144 = 18 \\times 8$. Le plus petit multiple commun est $144$.\nLes marques se retrouvent après $144$ dents.\nb) Le plateau a fait $144 \\div 48 = 3$ tours, et le pignon $144 \\div 18 = 8$ tours.\n⭐ Pendant que le plateau fait $3$ tours, la roue arrière en fait $8$ : c'est ce qui fait avancer le vélo plus vite que les pédales.",
           micros: ["arith_probleme"],
         },
         {
-          titre: "Jamais premier",
-          enonce: "a) Factoriser $n^2 - 1$.\nb) Démontrer que, pour tout entier $n \\geqslant 3$, le nombre $n^2 - 1$ n'est pas premier.\nc) En déduire, sans calculatrice, que $99\\,999\\,999$ n'est pas premier.",
+          titre: "Le nombre qui cache ses diviseurs",
+          enonce: "a) Factoriser $n^2 - 1$.\nb) En déduire, sans calculatrice, deux diviseurs de $99\\,999\\,999$ autres que $1$ et lui-même.\nc) Démontrer que, si $n$ est impair, alors $n^2 - 1$ est un multiple de $4$.",
           reponses: [
             { question: "a)", attendu: ["(n-1)(n+1)", "(n+1)(n-1)"], exact: true },
           ],
           correction:
-            "a) C'est une différence de deux carrés : $n^2 - 1 = (n - 1)(n + 1)$.\nb) Si $n \\geqslant 3$, alors $n - 1 \\geqslant 2$ et $n + 1 \\geqslant 4$. Le nombre $n^2 - 1$ est le produit de deux entiers plus grands que $1$ : il a au moins un diviseur autre que $1$ et lui-même. Il n'est pas premier.\nc) $99\\,999\\,999 = 100\\,000\\,000 - 1 = 10\\,000^2 - 1$.\nDonc $99\\,999\\,999 = 9\\,999 \\times 10\\,001$ : il n'est pas premier.\n⭐ Pour $n = 2$, on trouve $2^2 - 1 = 3$, qui est premier : c'est pour cela que la preuve demande $n \\geqslant 3$.",
-          micros: ["arith_nombre_premier"],
+            "a) C'est une différence de deux carrés : $n^2 - 1 = (n - 1)(n + 1)$.\nb) $99\\,999\\,999 = 100\\,000\\,000 - 1 = 10\\,000^2 - 1$.\nDonc $99\\,999\\,999 = 9\\,999 \\times 10\\,001$ : $9\\,999$ et $10\\,001$ sont deux diviseurs.\nc) Si $n$ est impair, il s'écrit $2k + 1$, avec $k$ entier. Alors $n - 1 = 2k$ et $n + 1 = 2k + 2 = 2(k + 1)$.\nDonc $n^2 - 1 = 2k \\times 2(k + 1) = 4k(k + 1)$. Comme $k(k + 1)$ est un entier, c'est un multiple de $4$.\n⭐ Avec $n = 7$, donc $k = 3$ : $7^2 - 1 = 48 = 4 \\times 12$, et on a bien $k(k + 1) = 3 \\times 4 = 12$.",
+          micros: ["arith_multiple_diviseur"],
         },
         {
-          titre: "Les cigales qui comptent en nombres premiers",
+          titre: "Les cigales de 13 et de 17 ans",
           enonce: "En Amérique du Nord, certaines cigales vivent sous terre et ne sortent que tous les $13$ ans ; d'autres, tous les $17$ ans. En 2024, les deux espèces sont sorties la même année.\na) En quelle année ressortiront-elles ensemble ?\nb) En quelle année l'avaient-elles fait avant 2024 ?\nc) Un prédateur revient tous les $4$ ans. Tous les combien de temps rencontre-t-il une cigale à cycle de $12$ ans ? Et une cigale à cycle de $13$ ans ?\nd) Pourquoi un cycle de $13$ ou $17$ ans protège-t-il les cigales ?",
           reponses: [
             { question: "a)", attendu: "2245" },
@@ -300,8 +304,8 @@ export const exercicesArithmetiqueSeconde: FicheExercicesData = {
             { question: "c) cycle de 13 ans", attendu: "52" },
           ],
           correction:
-            "a) $13$ et $17$ sont premiers : leur plus petit multiple commun est $13 \\times 17 = 221$. Elles ressortiront ensemble en $2024 + 221 = 2245$.\nb) $2024 - 221 = 1803$.\nc) Avec un cycle de $12$ ans : $12$ est un multiple de $4$, le prédateur est là à CHAQUE sortie, tous les $12$ ans.\nAvec un cycle de $13$ ans : $4$ et $13$ n'ont aucun facteur commun, ils ne se croisent que tous les $4 \\times 13 = 52$ ans.\nd) Un nombre premier n'a pas d'autre diviseur que $1$ et lui-même. Un prédateur à cycle court ne tombe donc presque jamais sur la sortie des cigales.\n⭐ Les cigales ne savent pas ce qu'est un nombre premier. C'est l'explication que proposent beaucoup de biologistes : celles qui avaient ces cycles auraient été moins mangées, et ce sont elles qui ont survécu. Elle reste discutée.",
-          micros: ["arith_nombre_premier", "arith_probleme"],
+            "a) Les multiples de $17$ sont $17$, $34$, $51$… Aucun n'est un multiple de $13$ avant $13 \\times 17 = 221$ : c'est leur plus petit multiple commun. Elles ressortiront ensemble en $2024 + 221 = 2245$.\nb) $2024 - 221 = 1803$.\nc) Avec un cycle de $12$ ans : $12$ est un multiple de $4$, le prédateur est là à CHAQUE sortie, tous les $12$ ans.\nAvec un cycle de $13$ ans : $4$ et $13$ n'ont que $1$ comme diviseur commun, ils ne se croisent que tous les $4 \\times 13 = 52$ ans.\nd) $12$ a beaucoup de diviseurs : $1$, $2$, $3$, $4$, $6$ et $12$. $13$ n'en a que deux, $1$ et $13$, et $17$ aussi. Un prédateur à cycle court ne tombe donc presque jamais sur la sortie des cigales.\n⭐ Les cigales ne font aucun calcul : celles qui avaient ces cycles auraient été moins mangées, et ce sont elles qui ont survécu. C'est l'explication que proposent beaucoup de biologistes, et elle reste discutée.",
+          micros: ["arith_probleme"],
         },
       ],
     },

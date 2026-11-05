@@ -689,8 +689,8 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume: "Les cinq ensembles de nombres, les crochets qui disent compris ou exclu, et la valeur absolue qui est une distance : tout se lit sur la droite graduée.",
   },
   "maths/seconde/arithmetique-entiers": {
-    titre: "Multiples, diviseurs et nombres premiers",
-    resume: "Tout se justifie par une égalité : 56 = 8 × 7. Pair et impair, critères de divisibilité, nombres premiers, et la décomposition qui rend une fraction irréductible.",
+    titre: "Multiples, diviseurs, pair et impair",
+    resume: "Tout se justifie par une égalité : 56 = 8 × 7. Pair et impair, critères de divisibilité, et les divisions successives qui rendent une fraction irréductible.",
   },
   "maths/seconde/information-chiffree-evolutions": {
     titre: "Pourcentages et évolutions",
