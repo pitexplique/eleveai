@@ -312,8 +312,8 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
       code: "C1-L2", domaine: FONC,
       texte: "Limites et continuité : limite d'une composée, comparaison, branches paraboliques, image d'un intervalle, théorème des valeurs intermédiaires, bijection continue strictement monotone, dichotomie et balayage, racine n-ième et puissances d'exposant rationnel, prolongement par continuité.",
       couverture: "partielle",
-      micros: m("terminale-spe", "limite_fonction_operations", "limite_fonction_reference", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "reciproque_bijection"),
-      note: "La bijection est couverte ; manquent racine n-ième, branches paraboliques, prolongement par continuité.",
+      micros: m("terminale-spe", "limite_fonction_operations", "limite_fonction_reference", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "reciproque_bijection", "expo_ratio_racine", "expo_ratio_calcul"),
+      note: "Bijection, racine n-ième et exposant rationnel couverts ; manquent branches paraboliques et prolongement par continuité.",
     },
     {
       code: "C1-L3", domaine: FONC,
@@ -339,8 +339,8 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
       code: "C1-L6", domaine: FONC,
       texte: "Fonctions exponentielles et puissances : exp (propriétés, dérivée, limites), exp∘u, primitives de u′eᵘ ; exponentielle de base a, puissance d'exposant réel ; croissances comparées.",
       couverture: "partielle",
-      micros: m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite"),
-      note: "Manquent aˣ et x^α pour α réel.",
+      micros: m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "expo_ratio_regles"),
+      note: "L'exposant rationnel (x^r) est couvert ; manquent aˣ et x^α pour α réel.",
     },
     {
       code: "C1-L7", domaine: FONC,

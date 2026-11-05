@@ -484,9 +484,11 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "A2-3", domaine: AN,
       texte: "Puissances rationnelles x^r et racine n-ième : propriétés, dérivée de x ↦ ⁿ√x.",
-      couverture: "partielle",
-      micros: m("stmg", "expoT_exposant_un_sur_n"),
-      note: "Seule l'écriture a^(1/n) (STMG) existe ; manquent le calcul sur les racines n-ièmes et leur dérivée.",
+      couverture: "complete",
+      micros: [
+        ...m("stmg", "expoT_exposant_un_sur_n"),
+        ...m("terminale-spe", "expo_ratio_racine", "expo_ratio_calcul", "expo_ratio_regles"),
+      ],
     },
     {
       code: "A2-4", domaine: AN,

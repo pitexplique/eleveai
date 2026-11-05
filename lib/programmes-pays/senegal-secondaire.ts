@@ -398,9 +398,8 @@ export const SENEGAL_TLE: ProgrammePays = {
     {
       code: "AN 5", domaine: "Analyse",
       texte: "Études de fonctions : polynômes, rationnelles, trigonométriques ; fonctions puissances x ↦ xᵃ (a entier ou rationnel).",
-      couverture: "partielle",
-      micros: m("terminale-spe", "derivation_variation", "derivation_optimisation", "limite_fonction_asymptote", "trigo_etude_fonction"),
-      note: "Étude trigonométrique couverte ; manquent les fonctions puissances à exposant RATIONNEL.",
+      couverture: "complete",
+      micros: m("terminale-spe", "derivation_variation", "derivation_optimisation", "limite_fonction_asymptote", "trigo_etude_fonction", "expo_ratio_regles"),
     },
     {
       code: "AN 6", domaine: "Analyse",
