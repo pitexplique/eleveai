@@ -23,6 +23,7 @@ import { CORRECTEURS as mediatrice } from "./mediatrice";
 import { CORRECTEURS as perimetres } from "./perimetres";
 import { CORRECTEURS as pourcentages } from "./pourcentages";
 import { CORRECTEURS as probabilites } from "./probabilites";
+import { CORRECTEURS as programmeTrous } from "./programme-trous";
 import { CORRECTEURS as proportionnalite } from "./proportionnalite";
 import { CORRECTEURS as quadrilateres } from "./quadrilateres";
 import { CORRECTEURS as symetrie } from "./symetrie";
@@ -56,6 +57,7 @@ export const CORRECTEURS_6E: CorrecteursMaths = {
   ...perimetres,
   ...pourcentages,
   ...probabilites,
+  ...programmeTrous,
   ...proportionnalite,
   ...quadrilateres,
   ...symetrie,

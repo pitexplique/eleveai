@@ -107,6 +107,12 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "decimal_calcul",
     prerequis: ["decimal_additionner"],
   },
+  {
+    id: "decimal_multiplier_decimaux",
+    label: "Calculer le produit de deux nombres décimaux",
+    notionId: "decimal_calcul",
+    prerequis: ["decimal_multiplier"],
+  },
   // ⛔ AJOUTÉE LE 23/08/2026 (6e-N-entiers-12). Rangée dans le CALCUL et non
   // dans « Nombres décimaux » : multiplier par 0,1 est une opération, et c'est
   // le cas particulier le plus utile de `decimal_multiplier`.
@@ -205,6 +211,12 @@ export const microSkills: MicroSkillSource[] = [
     label: "Relier fraction et décimal",
     notionId: "fraction_nombre",
     prerequis: ["fraction_quantite", "decimal_lire_ecrire"],
+  },
+  {
+    id: "fraction_quotient",
+    label: "Une fraction est un quotient : a/b = a ÷ b et b × … = a",
+    notionId: "fraction_nombre",
+    prerequis: ["fraction_decimal"],
   },
   {
     id: "fraction_comparer",
@@ -712,6 +724,12 @@ export const microSkills: MicroSkillSource[] = [
   {
     id: "angle_tracer",
     label: "Tracer un angle",
+    notionId: "angle_mesure",
+    prerequis: ["angle_mesurer"],
+  },
+  {
+    id: "angle_relations",
+    label: "Angles adjacents, supplémentaires et opposés par le sommet",
     notionId: "angle_mesure",
     prerequis: ["angle_mesurer"],
   },

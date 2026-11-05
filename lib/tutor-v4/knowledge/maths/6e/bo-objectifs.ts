@@ -172,7 +172,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Comprendre le sens de la multiplication de deux nombres décimaux. Calculer le produit de deux nombres décimaux.",
     page: 3,
-    micros: ["decimal_multiplier", "entier_multiplication_posee"],
+    micros: ["decimal_multiplier", "decimal_multiplier_decimaux", "entier_multiplication_posee"],
     note: "Le sens s'appuie sur l'aire d'un rectangle de 3,7 dm sur 2,9 dm.",
   },
   {
@@ -220,7 +220,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Relier une fraction au résultat exact de la division de son numérateur par son dénominateur.",
     page: 5,
-    micros: ["fraction_decimal"],
+    micros: ["fraction_decimal", "fraction_quotient"],
   },
   {
     id: "6e-N-fractions-2",
@@ -229,8 +229,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Comprendre et connaître la définition du quotient d'un entier a par un entier b non nul. Compléter des égalités à trou multiplicatives.",
     page: 5,
-    micros: ["fraction_lire_ecrire"],
-    note: "⚠️ Les ÉGALITÉS À TROU (b × … = a) ne sont couvertes par aucune micro.",
+    micros: ["fraction_lire_ecrire", "fraction_quotient"],
+    note: "Les ÉGALITÉS À TROU (b × … = a) sont dans fraction_quotient (05/11/2026).",
   },
   {
     id: "6e-N-fractions-3",
@@ -249,7 +249,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Savoir que la fraction a/b peut représenter un nombre entier, un nombre décimal non entier ou un nombre non décimal.",
     page: 6,
-    micros: ["fraction_decimal"],
+    micros: ["fraction_decimal", "fraction_quotient"],
     note: "Le BO relie ça à π : « il admet que le nombre π ne peut pas s'écrire sous la forme d'une fraction ».",
   },
   {
@@ -593,8 +593,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Connaître et utiliser les angles ainsi que le lexique et les notations qui s'y rapportent : angle droit, angle plat, angle plein, angle nul, angle aigu, angle obtus, angles opposés par le sommet, angles adjacents, angles supplémentaires.",
     page: 13,
-    micros: ["angle_reconnaitre", "angle_droit"],
-    note: "⚠️ Couverture partielle : opposés par le sommet, adjacents et supplémentaires n'ont aucune micro.",
+    micros: ["angle_reconnaitre", "angle_droit", "angle_relations"],
+    note: "Opposés par le sommet, adjacents et supplémentaires : angle_relations (05/11/2026).",
   },
   {
     id: "6e-G-angles-2",
