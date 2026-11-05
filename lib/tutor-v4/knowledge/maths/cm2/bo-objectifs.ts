@@ -96,8 +96,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les nombres entiers",
     objectif: "Placer des nombres et repérer des points sur une demi-droite graduée.",
     page: 9,
-    micros: [],
-    note: "⚠️ `fraction_droite` et `decimal_droite` existent, mais AUCUNE micro ne place un ENTIER sur une demi-droite graduée — et c'est le premier des trois usages que le programme en fait.",
+    micros: ["entier_droite"],
+    note: "Couvert le 05/11/2026 : lire un point, choisir le point d'un nombre, trouver la valeur d'une petite graduation, jusqu'aux millions.",
   },
   {
     id: "cm2-N-entiers-8",
@@ -106,8 +106,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Déterminer si un nombre entier inférieur ou égal à 10 est un diviseur d'un nombre entier donné ou si un nombre entier donné est un multiple d'un nombre entier inférieur ou égal à 10.",
     page: 9,
-    micros: ["entier_multiple"],
-    note: "⚠️ COUVERTURE PARTIELLE : `entier_multiple` ne pose que « 72 est-il un multiple de 8 ? ». Le sens DIVISEUR n'a aucun item — le mot n'apparaît dans la banque CM2 que comme terme d'une division posée.",
+    micros: ["entier_multiple", "entier_diviseur"],
+    note: "Les deux sens sont posés : « 72 est-il un multiple de 8 ? » et, depuis le 05/11/2026, « 8 est-il un diviseur de 72 ? ».",
   },
   {
     id: "cm2-N-entiers-9",
@@ -115,7 +115,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les nombres entiers",
     objectif: "Déterminer des diviseurs d'un nombre entier inférieur ou égal à 100.",
     page: 9,
-    micros: [],
+    micros: ["entier_diviseur"],
   },
   {
     id: "cm2-N-entiers-10",
@@ -123,7 +123,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les nombres entiers",
     objectif: "Déterminer tous les diviseurs d'un nombre entier inférieur ou égal à 30.",
     page: 9,
-    micros: [],
+    micros: ["entier_diviseurs_tous"],
     note: "« TOUS les diviseurs » est un autre geste que « est-ce un diviseur ? » : il demande une recherche exhaustive et organisée.",
   },
   {
@@ -132,7 +132,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les nombres entiers",
     objectif: "Déterminer les diviseurs communs à deux nombres entiers inférieurs ou égaux à 30.",
     page: 9,
-    micros: [],
+    micros: ["entier_diviseurs_communs"],
   },
   {
     id: "cm2-N-entiers-12",
@@ -140,7 +140,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les nombres entiers",
     objectif: "Déterminer des multiples communs à deux nombres entiers inférieurs à 15.",
     page: 9,
-    micros: [],
+    micros: ["entier_multiples_communs"],
   },
 
   // ─── Les fractions ─────────────────────────────────────────────────────────
@@ -261,8 +261,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Placer une fraction décimale sur une demi-droite graduée et repérer un point d'une demi-droite graduée par une fraction décimale.",
     page: 10,
-    micros: [],
-    note: "⚠️ `fraction_droite` place des fractions et `decimal_droite` des écritures à virgule ; la FRACTION DÉCIMALE sur la droite n'est posée par ni l'une ni l'autre.",
+    micros: ["decimal_droite"],
+    note: "⚠️ COUVERTURE FAIBLE : la fraction décimale sur la droite est travaillée côté CM1 ; `decimal_droite` du CM2 n'écrit que des nombres à virgule. Le lien avec la fraction reste à faire par le professeur.",
   },
   {
     id: "cm2-N-decimaux-4",
@@ -271,7 +271,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Écrire une fraction décimale supérieure à 1 comme la somme d'un nombre entier et d'une fraction décimale inférieure à 1.",
     page: 10,
-    micros: [],
+    micros: ["fraction_mixte_ecrire"],
+    note: "⚠️ COUVERTURE PARTIELLE : `fraction_mixte_ecrire` traite le dénominateur 10, jamais 100.",
   },
   {
     id: "cm2-N-decimaux-5",
@@ -280,7 +281,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Écrire une fraction décimale supérieure à 1 comme la somme d'un nombre entier et de fractions décimales ayant un numérateur inférieur à 10.",
     page: 10,
-    micros: [],
+    micros: ["decimal_somme_fractions"],
     note: "C'est la décomposition canonique du BO : 35,78 = 35 + 7/10 + 8/100.",
   },
   {
@@ -290,7 +291,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Comparer, encadrer, intercaler des fractions décimales en utilisant les symboles =, < et >.",
     page: 10,
-    micros: [],
+    micros: ["fraction_decimale_comparer"],
   },
   {
     id: "cm2-N-decimaux-7",
@@ -298,7 +299,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les nombres décimaux",
     objectif: "Ordonner des fractions décimales dans l'ordre croissant ou décroissant.",
     page: 10,
-    micros: [],
+    micros: ["fraction_decimale_ordonner"],
   },
   {
     id: "cm2-N-decimaux-8",
@@ -360,7 +361,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Le calcul mental — mémoriser des faits numériques",
     objectif: "Connaître la moitié des nombres impairs jusqu'à 15.",
     page: 10,
-    micros: [],
+    micros: ["calcul_moitie_impair"],
     note: "La moitié de 7 vaut 3,5 : c'est là que la moitié d'un impair fait apparaître un décimal.",
   },
   {
@@ -369,7 +370,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Le calcul mental — mémoriser des faits numériques",
     objectif: "Connaître quelques relations entre des fractions usuelles.",
     page: 10,
-    micros: [],
+    micros: ["fraction_equivalente", "fraction_additionner"],
+    note: "Les relations entre fractions usuelles (1/2 = 2/4, un quart et un quart…) passent par les fractions égales et l'addition.",
   },
   {
     id: "cm2-N-mental-4",
@@ -377,8 +379,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Le calcul mental — mémoriser des faits numériques",
     objectif: "Connaître l'écriture décimale de fractions usuelles.",
     page: 10,
-    micros: [],
-    note: "1/4 = 0,25 ; 1/2 = 0,5 ; 3/4 = 0,75. `decimal_fraction` ne traite que les fractions DÉCIMALES (7/10), pas les fractions usuelles.",
+    micros: ["fraction_decimale"],
+    note: "Couvert par `fraction_decimale`, dont le gabarit « usuelles » pose l'écriture décimale des fractions usuelles (3/4 = 75/100 = 0,75).",
   },
   {
     id: "cm2-N-mental-5",
@@ -411,8 +413,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Le calcul mental — numération",
     objectif: "Diviser un nombre décimal par 10, 100 ou 1 000.",
     page: 11,
-    micros: [],
-    note: "⚠️ `multiplication_puissance_dix` ne fait que MULTIPLIER. La division par 10, 100, 1 000 n'a aucune micro — et c'est elle qui prépare la multiplication par 0,1 de la 6e.",
+    micros: ["decimal_diviser_puissance_dix"],
+    note: "Couvert le 05/11/2026 par la valeur des chiffres d'abord. C'est elle qui prépare la multiplication par 0,1 de la 6e.",
   },
   {
     id: "cm2-N-mental-9",
@@ -447,8 +449,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Utiliser la distributivité de la multiplication par rapport à l'addition dans des cas simples.",
     page: 11,
-    micros: [],
-    note: "12 × 7 = 10 × 7 + 2 × 7. C'est la procédure qui rend le calcul mental possible sur de grands nombres.",
+    micros: ["multiplication_mental"],
+    note: "⚠️ COUVERTURE FAIBLE : `multiplication_mental` s'appuie sur la décomposition, sans nommer ni travailler la distributivité pour elle-même. Exemple attendu : 12 × 7 = 10 × 7 + 2 × 7.",
   },
   {
     id: "cm2-N-mental-13",
@@ -456,7 +458,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Le calcul mental — procédures",
     objectif: "Calculer le double d'un nombre décimal dans des cas simples.",
     page: 11,
-    micros: [],
+    micros: ["calcul_double_decimal"],
   },
   {
     id: "cm2-N-mental-14",
@@ -464,7 +466,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Le calcul mental — procédures",
     objectif: "Calculer la moitié d'un nombre décimal dans des cas simples.",
     page: 11,
-    micros: [],
+    micros: ["calcul_moitie_decimal"],
   },
   {
     id: "cm2-N-mental-15",
@@ -472,7 +474,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Le calcul mental — procédures",
     objectif: "Diviser un nombre entier par 4 ou par 8.",
     page: 11,
-    micros: [],
+    micros: ["calcul_diviser_4_8"],
     note: "Par moitiés successives : diviser par 4, c'est prendre deux fois la moitié.",
   },
   {
@@ -489,7 +491,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Le calcul mental — procédures",
     objectif: "Multiplier un nombre décimal par 50.",
     page: 11,
-    micros: [],
+    micros: ["calcul_multiplier_50"],
   },
 
   // ─── Les quatre opérations ─────────────────────────────────────────────────
@@ -499,7 +501,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les quatre opérations",
     objectif: "Estimer le résultat d'une opération.",
     page: 11,
-    micros: [],
+    micros: ["calcul_ordre_grandeur", "multiplication_defi"],
     note: "L'ordre de grandeur, qui sert à contrôler un résultat avant de le valider.",
   },
   {
@@ -517,8 +519,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les quatre opérations",
     objectif: "Poser et effectuer la multiplication d'un nombre décimal par un nombre entier.",
     page: 11,
-    micros: [],
-    note: "⚠️ `multiplication_posee` ne pose que des multiplications d'ENTIERS. Le facteur décimal, nouveauté du CM2, n'a aucun item.",
+    micros: ["multiplication_decimale_posee"],
+    note: "Couvert le 05/11/2026 : le facteur décimal, nouveauté du CM2.",
   },
   {
     id: "cm2-N-operations-4",
@@ -527,8 +529,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Poser et effectuer des divisions décimales avec un dividende entier et un diviseur à un chiffre.",
     page: 11,
-    micros: [],
-    note: "⚠️ `division_posee` s'arrête à la division euclidienne : poursuivre le calcul APRÈS la virgule n'est posé nulle part.",
+    micros: ["division_decimale_posee"],
+    note: "Couvert le 05/11/2026 : poursuivre la division APRÈS la virgule.",
   },
   {
     id: "cm2-N-operations-5",
@@ -537,7 +539,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Poser et effectuer des divisions décimales avec un dividende décimal et un diviseur à un chiffre.",
     page: 11,
-    micros: [],
+    micros: ["division_decimale_dividende"],
   },
 
   // ─── La résolution de problèmes ────────────────────────────────────────────
@@ -571,8 +573,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "La résolution de problèmes",
     objectif: "Résoudre des problèmes de comparaison multiplicative.",
     page: 12,
-    micros: [],
-    note: "« Trois fois plus », « quatre fois moins » — la structure que le BO nomme explicitement.",
+    micros: ["multiplication_probleme", "multiplication_defi", "prop_quatrieme"],
+    note: "« Trois fois plus » est bien posé. ⚠️ « Quatre fois moins » est FAIBLE : peu d'items.",
   },
   {
     id: "cm2-N-problemes-5",
@@ -580,7 +582,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "La résolution de problèmes",
     objectif: "Résoudre des problèmes de dénombrement.",
     page: 12,
-    micros: [],
+    micros: ["probleme_denombrement"],
   },
   {
     id: "cm2-N-problemes-6",
@@ -588,7 +590,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "La résolution de problèmes",
     objectif: "Résoudre des problèmes d'optimisation.",
     page: 12,
-    micros: [],
+    micros: ["probleme_optimisation", "probleme_defi"],
   },
   {
     id: "cm2-N-problemes-7",
@@ -596,8 +598,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "La résolution de problèmes",
     objectif: "Résoudre des problèmes préparant à l'utilisation d'algorithmes.",
     page: 12,
-    micros: [],
-    note: "⚠️ CORRIGÉ le 23/08/2026 après lecture des exemples de réussite : il ne s'agit PAS de suivre un programme d'instructions, mais de « rechercher TOUTES les solutions vérifiant certaines conditions » en organisant sa recherche pour en assurer l'exhaustivité (les 100 œufs en boîtes de 6 et de 10, les rectangles d'aire 60 cm²). Aucune micro ne fait ça — `algo_programme` et `algo_repetition` exécutent des instructions, ce qui est un autre geste.",
+    micros: ["probleme_toutes_solutions"],
+    note: "Couvert le 05/11/2026 : il s'agit de « rechercher TOUTES les solutions vérifiant certaines conditions » en organisant sa recherche (les œufs en boîtes de 6 et de 10, les rectangles d'une aire donnée). `algo_programme` et `algo_repetition` exécutent des instructions, ce qui est un autre geste.",
   },
 
   // ─── Algèbre ───────────────────────────────────────────────────────────────
@@ -650,7 +652,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Trouver le nombre d'éléments pour une étape donnée dans une suite de motifs évolutive.",
     page: 13,
-    micros: [],
+    micros: ["algebre_motif_rang"],
     note: "⭐ C'est la STRUCTURE du motif — répondre pour l'étape 25 sans dessiner. Nouveauté du CM2, et l'objectif qui prépare directement `algebre_motif` de la 6e.",
   },
 
@@ -680,7 +682,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Connaître et utiliser les unités centimètre carré, décimètre carré et mètre carré pour exprimer des aires.",
     page: 16,
-    micros: [],
+    micros: ["aire_unites", "aire_comprendre"],
   },
   {
     id: "cm2-GM-aires-4",
@@ -688,7 +690,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les aires",
     objectif: "Convertir des aires entre différentes unités.",
     page: 16,
-    micros: [],
+    micros: ["aire_convertir_unites"],
     note: "⚠️ Le BO du cours moyen précise que « les élèves n'utilisent pas de tableaux pour effectuer des conversions ; ils s'appuient sur les relations connues entre les unités en jeu ».",
   },
   {
@@ -714,7 +716,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les angles",
     objectif: "Comprendre et utiliser les notations des angles.",
     page: 16,
-    micros: [],
+    micros: ["angle_notation"],
   },
   {
     id: "cm2-GM-angles-3",
@@ -722,7 +724,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les angles",
     objectif: "Comparer des angles.",
     page: 16,
-    micros: [],
+    micros: ["angle_comparer_sans_mesure"],
     note: "⭐ SANS RAPPORTEUR : par superposition ou par report, le rapporteur ne relevant pas du CM2.",
   },
   {
@@ -732,7 +734,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Construire un angle égal à la somme de deux angles donnés ou un angle multiple d'un angle donné.",
     page: 16,
-    micros: [],
+    micros: ["angle_somme_multiple"],
+    note: "⚠️ Le coach ne fait pas CONSTRUIRE : l'élève choisit la figure ou le résultat de la somme ou du multiple. La construction elle-même se fait sur papier.",
   },
   {
     id: "cm2-GM-angles-5",
@@ -741,7 +744,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif: "Construire par pliage la moitié d'un angle donné.",
     page: 16,
     micros: [],
-    note: "Le pliage, et non la bissectrice au compas — celle-ci arrive en 6e.",
+    note: "⛔ NON ÉVALUABLE dans le coach (décision du 05/11/2026) : c'est un geste de pliage sur papier. Le pliage, et non la bissectrice au compas — celle-ci arrive en 6e.",
   },
   {
     id: "cm2-GM-angles-6",
@@ -767,8 +770,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Positionner les aiguilles d'une horloge correspondant à une heure donnée en heure, minute et seconde.",
     page: 16,
-    micros: [],
-    note: "Le geste inverse de la lecture : `duree_lire` ne fait que lire.",
+    micros: ["duree_positionner_aiguilles"],
+    note: "Le geste inverse de la lecture, posé en QCM : le coach ne fait pas déplacer les aiguilles à l'élève.",
   },
   {
     id: "cm2-GM-durees-3",
@@ -815,7 +818,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "La géométrie plane",
     objectif: "Connaître les notations et les codes usuels utilisés en géométrie.",
     page: 21,
-    micros: [],
+    micros: ["figure_codage"],
     note: "⚠️ Le BO précise qu'aucune connaissance des conventions (AB), [AB], AB n'est exigible au cours moyen : les consignes explicitent les symboles. Ce qui est attendu, c'est le CODAGE des angles droits et des longueurs égales.",
   },
   {
@@ -841,7 +844,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Décrire et reconnaître un cercle et un disque comme un ensemble de points caractérisés par leur distance à un point donné.",
     page: 21,
-    micros: [],
+    micros: ["cercle_ensemble_points"],
     note: "⚠️ `figure_cercle` reconnaît le cercle comme une FORME. La définition par ensemble de points — la même qu'en 6e (6e-G-cercles-2) — n'est posée nulle part au CM2.",
   },
   {
@@ -887,8 +890,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "La géométrie plane",
     objectif: "Élaborer un programme de construction.",
     page: 22,
-    micros: [],
-    note: "⭐ Nouveauté du CM2 : au CM1 l'élève SUIT un programme de construction, au CM2 il en ÉCRIT un. C'est aussi de la pensée informatique.",
+    micros: ["figure_programme_construction"],
+    note: "⭐ Nouveauté du CM2 : l'élève ÉCRIT un programme. ⚠️ Le CM n'a pas de question ouverte : le coach fait choisir, ordonner et corriger les étapes d'un programme ; la rédaction libre reste sur papier.",
   },
   {
     id: "cm2-G-plane-12",
@@ -931,8 +934,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les solides",
     objectif: "Construire un patron d'un cube.",
     page: 22,
-    micros: [],
-    note: "⚠️ `solide_patron` ne fait que RECONNAÎTRE. Construire est un autre geste, et le BO le demande.",
+    micros: ["solide_patron_construire"],
+    note: "⚠️ Le coach fait choisir et compléter un patron (35 hexominos vérifiés par pliage, 11 patrons) ; le découpage réel reste sur papier.",
   },
   {
     id: "cm2-G-solides-5",
@@ -965,8 +968,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Déplacements dans l'espace",
     objectif: "Résoudre des problèmes portant sur des assemblages de cubes.",
     page: 22,
-    micros: [],
-    note: "Le même objectif reviendra en 6e sous le nom « voir dans l'espace des assemblages de cubes ».",
+    micros: ["solide_defi"],
+    note: "⚠️ COUVERTURE PARTIELLE : `solide_defi` ne traite ni les vues ni les plans de pose. Le même objectif reviendra en 6e sous le nom « voir dans l'espace des assemblages de cubes ».",
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1015,8 +1018,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Identifier toutes les issues réalisant un évènement dans une expérience aléatoire simple.",
     page: 25,
-    micros: [],
-    note: "La différence entre les issues POSSIBLES et celles qui réalisent l'ÉVÈNEMENT — c'est elle qui rend le quotient a/b calculable.",
+    micros: ["probabilite_roue_de_sac"],
+    note: "⚠️ Le geste y est (compter les cases ou les boules qui conviennent), mais le mot « issue » n'y apparaît pas. La différence issues possibles / issues de l'évènement est ce qui rend le quotient a/b calculable.",
   },
   {
     id: "cm2-D-probabilites-3",
@@ -1025,7 +1028,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Dans une situation d'équiprobabilité, lors d'une expérience aléatoire simple, exprimer la probabilité d'un évènement sous la forme « a chances sur b ».",
     page: 25,
-    micros: [],
+    micros: ["probabilite_roue_de_sac", "probabilite_deux_etapes"],
     note: "⭐ C'est l'objectif qui prépare directement la 6e, où « a chances sur b » devient le quotient a/b.",
   },
   {
@@ -1043,8 +1046,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Comprendre la notion d'indépendance lors de la répétition de la même expérience aléatoire.",
     page: 25,
-    micros: [],
-    note: "⭐ Le BO l'écrit ainsi : les élèves « prennent conscience que le dé ne se souvient pas du résultat sorti lors du lancer précédent ». C'est le piège du joueur, posé dès le CM2.",
+    micros: ["probabilite_hasard"],
+    note: "⚠️ COUVERTURE FAIBLE : `probabilite_hasard` pose l'idée en peu de tirages. Le BO : les élèves « prennent conscience que le dé ne se souvient pas du résultat sorti lors du lancer précédent ».",
   },
   {
     id: "cm2-D-probabilites-6",
@@ -1053,7 +1056,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Dans des situations d'équiprobabilité, recenser toutes les issues possibles d'une expérience aléatoire en deux étapes dans un tableau ou dans un arbre afin de déterminer des probabilités.",
     page: 25,
-    micros: [],
+    micros: ["probabilite_deux_etapes"],
     note: "Le tableau à double entrée et l'arbre, sur une expérience à DEUX épreuves.",
   },
 
@@ -1166,19 +1169,11 @@ export const microsHorsProgrammeCm2Maths: { micro: string; raison: string }[] = 
     raison: "Bloc de défis d'un chapitre couvert : il sert plusieurs objectifs à la fois.",
   },
   {
-    micro: "multiplication_defi",
-    raison: "Bloc de défis d'un chapitre couvert : il sert plusieurs objectifs à la fois.",
-  },
-  {
     micro: "division_defi",
     raison: "Bloc de défis d'un chapitre couvert : il sert plusieurs objectifs à la fois.",
   },
   {
     micro: "figure_defi",
-    raison: "Bloc de défis d'un chapitre couvert : il sert plusieurs objectifs à la fois.",
-  },
-  {
-    micro: "solide_defi",
     raison: "Bloc de défis d'un chapitre couvert : il sert plusieurs objectifs à la fois.",
   },
   {
@@ -1218,7 +1213,7 @@ export const microsHorsProgrammeCm2Maths: { micro: string; raison: string }[] = 
   {
     micro: "division_posee",
     raison:
-      "⚠️ Réinvestissement PARTIEL : la division euclidienne posée relève du CM1 ; le CM2 demande les divisions DÉCIMALES (cm2-N-operations-4 et -5), qui n'ont aucun item.",
+      "⚠️ Réinvestissement PARTIEL : la division euclidienne posée relève du CM1 ; le CM2 demande les divisions DÉCIMALES, posées par `division_decimale_posee` et `division_decimale_dividende`.",
   },
   {
     micro: "division_probleme",
@@ -1227,7 +1222,7 @@ export const microsHorsProgrammeCm2Maths: { micro: string; raison: string }[] = 
   {
     micro: "multiplication_posee",
     raison:
-      "⚠️ Réinvestissement PARTIEL : la multiplication posée d'entiers relève du CM1 ; le CM2 demande le produit d'un DÉCIMAL par un entier (cm2-N-operations-3), qui n'a aucun item.",
+      "⚠️ Réinvestissement PARTIEL : la multiplication posée d'entiers relève du CM1 ; le CM2 demande le produit d'un DÉCIMAL par un entier, posé par `multiplication_decimale_posee`.",
   },
   {
     micro: "calcul_addition_posee",
@@ -1260,7 +1255,7 @@ export const microsHorsProgrammeCm2Maths: { micro: string; raison: string }[] = 
   {
     micro: "algo_defi",
     raison:
-      "Bloc de défis d'un domaine qui n'a pas d'objectif propre au cours moyen. ⏳ Ce serait le bon endroit pour accrocher cm2-N-problemes-7 (chercher TOUTES les solutions), qui n'a aujourd'hui aucune micro.",
+      "Bloc de défis d'un domaine qui n'a pas d'objectif propre au cours moyen.",
   },
   {
     micro: "reperage_quadrillage",
@@ -1327,10 +1322,5 @@ export const microsHorsProgrammeCm2Maths: { micro: string; raison: string }[] = 
     micro: "probabilite_vocabulaire",
     raison:
       "Réinvestissement du CM1 : « impossible, possible, certain, probable, peu probable » y est un objectif. Le CM2 passe au dénombrement des issues.",
-  },
-  {
-    micro: "probabilite_hasard",
-    raison:
-      "Réinvestissement du CM1 : « identifier des expériences aléatoires » y est un objectif propre.",
   },
 ];
