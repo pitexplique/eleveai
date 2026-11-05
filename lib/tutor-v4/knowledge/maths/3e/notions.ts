@@ -217,4 +217,19 @@ export const notions: NotionSource[] = [
 
 
 
+  /* Hors du programme français (05/11/2026) : masquées dans micros-masquees.ts, gardées pour /pays. */
+  {
+    id: "aire_solides",
+    label: "Aires latérales et totales des solides",
+    boId: "BO3M1",
+    prerequis: ["volume_solide"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "angles_cercle",
+    label: "Angles inscrits et angle au centre",
+    boId: "BO3G1",
+    prerequis: ["aire_surface"],
+    levels: [1, 2, 3],
+  },
 ];

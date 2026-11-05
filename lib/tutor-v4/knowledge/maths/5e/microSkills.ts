@@ -747,4 +747,24 @@ export const microSkills: MicroSkillSource[] = [
   notionId: "algo_construire",
   prerequis: ["algo_boucle", "algo_parametre"],
 },
+
+/* Hors du programme français (05/11/2026) : masquées dans micros-masquees.ts, gardées pour /pays. */
+{
+  id: "polygone_regulier_reconnaitre",
+  label: "Reconnaître un polygone régulier, calculer son périmètre",
+  notionId: "polygones_reguliers",
+  prerequis: [],
+},
+{
+  id: "polygone_regulier_angles",
+  label: "Calculer l’angle au centre et l’angle intérieur d’un polygone régulier",
+  notionId: "polygones_reguliers",
+  prerequis: ["polygone_regulier_reconnaitre"],
+},
+{
+  id: "polygone_regulier_aire",
+  label: "Calculer l’aire d’un polygone régulier avec l’apothème",
+  notionId: "polygones_reguliers",
+  prerequis: ["polygone_regulier_angles"],
+},
 ];

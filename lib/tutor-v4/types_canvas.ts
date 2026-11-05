@@ -2182,9 +2182,30 @@ export type DemiPlanCanvasData = {
   legende?: string;
 };
 
+// La figure de géométrie tracée (05/11/2026) : voir lib/canvas/construction.ts pour
+// les helpers qui CALCULENT les points. Coordonnées de maths : y vers le haut.
+export type ConstructionCanvasData = {
+  kind: "construction";
+  points: { id: string; x: number; y: number; nom?: string; cache?: boolean; couleur?: string }[];
+  polygones?: { sommets: string[]; fond?: string; contour?: string }[];
+  /** `code` : 1, 2 ou 3 tirets, le codage des longueurs égales. */
+  segments?: { a: string; b: string; code?: number; pointille?: boolean; couleur?: string; epais?: boolean; texte?: string }[];
+  /** Prolongée jusqu'au bord du cadre. */
+  droites?: { a: string; b: string; couleur?: string; pointille?: boolean }[];
+  cercles?: { centre: string; rayon: number; couleur?: string; pointille?: boolean; fond?: string }[];
+  /** Un arc du cercle de centre `centre`, de `de` à `vers` ; `eviter` choisit le côté qui ne passe pas par ce point. */
+  arcs?: { centre: string; de: string; vers: string; eviter?: string; couleur?: string }[];
+  /** Le petit angle (de, sommet, vers) ; `droit` trace le petit carré, `code` les tirets des angles égaux. */
+  angles?: { sommet: string; de: string; vers: string; droit?: boolean; code?: number; texte?: string; couleur?: string; rayon?: number; rayonTexte?: number }[];
+  largeur?: number;
+  hauteurMax?: number;
+  description?: string;
+};
+
 export type CanvasFigure =
   | DemiPlanCanvasData
   | DeuxAnglesCanvasData
+  | ConstructionCanvasData
   | PatronsCubeCanvasData
   | CercleTrigoCanvasData
   | ReglureCanvasData

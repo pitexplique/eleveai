@@ -27,6 +27,7 @@ type EleveSession = {
 
 import {
   TriangleCanvas,
+  ConstructionCanvas,
   QuadrilatereCanvas,
   FigureLibreCanvas,
   DroiteGradueeCanvas,
@@ -261,6 +262,9 @@ function scoreOn20(bonnes: number, questions: number) {
 function renderCanvas(canvas?: CanvasFigure | null) {
   if (!canvas) return null;
 
+  if (canvas.kind === "construction") {
+    return <ConstructionCanvas figure={canvas} />;
+  }
   if (canvas.kind === "triangle") {
     return <TriangleCanvas figure={canvas} />;
   }

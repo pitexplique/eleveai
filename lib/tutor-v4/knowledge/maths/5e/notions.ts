@@ -188,4 +188,12 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
+  // Hors du programme français (05/11/2026) : masquée dans micros-masquees.ts, gardée pour /pays.
+  {
+    id: "polygones_reguliers",
+    label: "Polygones réguliers",
+    boId: "BO5G1",
+    prerequis: ["triangle_figure"],
+    levels: [1, 2, 3],
+  },
 ];

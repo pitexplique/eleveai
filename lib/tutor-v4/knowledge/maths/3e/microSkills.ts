@@ -710,6 +710,12 @@ export const microSkills: MicroSkillSource[] = [
   prerequis: ["section_reconnaitre"],
 },
 {
+  id: "section_sphere",
+  label: "Identifier et calculer la section d’une sphère",
+  notionId: "sections_solides",
+  prerequis: ["section_reconnaitre", "pythagore_calculer_hypotenuse"],
+},
+{
   id: "section_calculer_longueur",
   label: "Calculer une longueur dans une section plane",
   notionId: "sections_solides",
@@ -1021,4 +1027,13 @@ export const microSkills: MicroSkillSource[] = [
       "algo_generaliser",
     ],
   },
+
+  /* Hors du programme français (05/11/2026) : masquées dans micros-masquees.ts, gardées pour /pays. */
+  { id: "aire_prisme_droit", label: "Calculer l’aire latérale et totale d’un prisme droit", notionId: "aire_solides", prerequis: ["aire_perimetre_polygone"] },
+  { id: "aire_cylindre", label: "Calculer l’aire latérale et totale d’un cylindre", notionId: "aire_solides", prerequis: ["volume_cylindre"] },
+  { id: "aire_pyramide_cone", label: "Calculer l’aire latérale et totale d’une pyramide régulière et d’un cône", notionId: "aire_solides", prerequis: ["aire_prisme_droit", "aire_cylindre"] },
+  { id: "aire_sphere", label: "Calculer l’aire d’une sphère", notionId: "aire_solides", prerequis: ["volume_boule"] },
+  { id: "angle_inscrit_centre", label: "Relier un angle inscrit et un angle au centre", notionId: "angles_cercle", prerequis: [] },
+  { id: "angles_inscrits_meme_arc", label: "Utiliser deux angles inscrits interceptant le même arc", notionId: "angles_cercle", prerequis: ["angle_inscrit_centre"] },
+  { id: "triangle_demi_cercle", label: "Utiliser un triangle inscrit dans un demi-cercle", notionId: "angles_cercle", prerequis: ["angle_inscrit_centre", "pythagore_calculer_hypotenuse"] },
 ];

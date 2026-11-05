@@ -42,6 +42,49 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       "prop_coefficient",
       "angle_mesurer",
     ]),
+    /* Hors programme français : « par défaut », « par excès », « troncature » n'y sont pas ;
+       l'encadrement d'un quotient, lui, y est et reste visible. Maroc, Côte d'Ivoire, Belgique, Québec. */
+    "5e": {
+      ...lot("hors_france", "Maroc, Côte d'Ivoire, Belgique, Québec", [
+      "approx_defaut_exces",
+      "approx_troncature_arrondi",
+      ]),
+      /* Polygones réguliers : absents de `docs/bo-maths-cycle4-recopie.md`. */
+      ...lot("hors_france", "Maroc, Suisse, Belgique, Québec", [
+      "polygone_regulier_reconnaitre",
+      "polygone_regulier_angles",
+      "polygone_regulier_aire",
+      ]),
+    },
+    /* Médianes, centre de gravité, cercle inscrit, orthocentre : absents du BO, qui ne cite
+       que hauteurs et médiatrices (la hauteur reste visible, `triangle_droites`). */
+    "4e": lot("hors_france", "Québec, Maroc, Suisse, Belgique, Sénégal, Côte d'Ivoire", [
+      "mediane_triangle",
+      "centre_gravite",
+      "bissectrice_equidistance",
+      "cercle_inscrit",
+      "orthocentre",
+    ]),
+    /* Classe modale, centre, moyenne par les centres, effectifs cumulés : Sénégal, Côte
+       d'Ivoire, Belgique, Québec. Regrouper en classes reste visible (BO 2020, p. 133). */
+    "3e": {
+      ...lot("hors_france", "Sénégal, Côte d'Ivoire, Belgique, Québec", [
+      "stat_classe_modale_centre",
+      "stat_moyenne_classes",
+      "stat_effectifs_cumules",
+      ]),
+      /* Aires latérales, aire de la sphère, angles inscrits : absents du BO. La section d'une
+         sphère, elle, y est (« sections planes ») et reste visible. */
+      ...lot("hors_france", "Québec, Maroc, Suisse, Belgique, Sénégal, Côte d'Ivoire", [
+      "aire_prisme_droit",
+      "aire_cylindre",
+      "aire_pyramide_cone",
+      "aire_sphere",
+      "angle_inscrit_centre",
+      "angles_inscrits_meme_arc",
+      "triangle_demi_cercle",
+      ]),
+    },
     /* Annexe du programme de seconde, BO n°14 du 02/04/2026, lue le 05/11/2026. */
     seconde: {
       ...lot("hors_programme", "Programme 2026 de seconde", [

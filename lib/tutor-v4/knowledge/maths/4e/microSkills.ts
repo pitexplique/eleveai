@@ -1693,4 +1693,36 @@ export const microSkills: MicroSkillSource[] = [
     "algo_modifier",
   ],
 },
+
+  /* Hors du programme français (05/11/2026) : masquées dans micros-masquees.ts, gardées pour /pays. */
+  {
+    id: "mediane_triangle",
+    label: "Reconnaître et utiliser une médiane d’un triangle",
+    notionId: "triangle_points_remarquables",
+    prerequis: ["triangle_droites"],
+  },
+  {
+    id: "centre_gravite",
+    label: "Utiliser le centre de gravité d’un triangle",
+    notionId: "triangle_points_remarquables",
+    prerequis: ["mediane_triangle"],
+  },
+  {
+    id: "bissectrice_equidistance",
+    label: "Utiliser la bissectrice : deux angles égaux, deux distances égales",
+    notionId: "triangle_points_remarquables",
+    prerequis: ["triangle_somme_angle"],
+  },
+  {
+    id: "cercle_inscrit",
+    label: "Utiliser le cercle inscrit dans un triangle",
+    notionId: "triangle_points_remarquables",
+    prerequis: ["bissectrice_equidistance"],
+  },
+  {
+    id: "orthocentre",
+    label: "Utiliser les hauteurs et l’orthocentre d’un triangle",
+    notionId: "triangle_points_remarquables",
+    prerequis: ["triangle_droites"],
+  },
 ];

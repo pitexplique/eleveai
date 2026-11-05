@@ -1,5 +1,6 @@
 // lib/tutor-v4/questionBank/5e/maths/index.ts
 
+import { polygonesReguliersBank } from "./polygones-reguliers.bank";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { nombresRelatifsBank } from "./nombres-relatifs.bank";
@@ -46,6 +47,7 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...algoEvenementBank,
   ...evaluationNationale4eBank,
   ...conversionsBank,
+  ...polygonesReguliersBank,
 ];
 
 export function getMaths5eQuestionBank(args?: {

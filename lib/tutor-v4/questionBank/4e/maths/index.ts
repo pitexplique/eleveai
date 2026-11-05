@@ -12,6 +12,7 @@
  * - on les assemble ici
  */
 
+import { pointsRemarquablesBank } from "./points-remarquables.bank";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { expressionsLitteralesBank } from "./expressions-litterales.bank";
@@ -82,6 +83,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...echellesBank,
   ...volumesBank,
   ...volumesPyramideConeBank,
+  ...pointsRemarquablesBank,
   ...grandeursBank,
   ...fonctionsBank,
   ...thalesBank,

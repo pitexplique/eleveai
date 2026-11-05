@@ -4,6 +4,8 @@
  * Ce fichier regroupe toutes les banques de questions de 3e.
  */
 
+import { anglesCercleBank } from "./angles-cercle.bank";
+import { airesSolidesBank } from "./aires-solides.bank";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 // =========================
@@ -82,6 +84,8 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...perimetresBank,
   ...volumesBank,
   ...volumesPyramideConeBank,
+  ...airesSolidesBank,
+  ...anglesCercleBank,
   ...sectionsSolidesBank,
 
   ...probabilitesBank,

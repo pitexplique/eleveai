@@ -492,4 +492,12 @@ export const notions: NotionSource[] = [
   },
 
 
+  // Hors du programme français (05/11/2026) : masquée dans micros-masquees.ts, gardée pour /pays.
+  {
+    id: "triangle_points_remarquables",
+    label: "Médianes, bissectrices et points remarquables du triangle",
+    boId: "BO4G1",
+    prerequis: ["triangle_figure"],
+    levels: [1, 2, 3],
+  },
 ];
