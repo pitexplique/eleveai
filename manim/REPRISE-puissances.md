@@ -15,7 +15,9 @@ Lire d'abord `manim/prompt-session-puissances.md` (découpage, ordre de travail)
 | 8 | produit-quotient | 2de verte, short blanche (voix 2de-puissance-…) | VALIDÉE | ✅ FINI (seconde, short), revu ; corrigé (ligne du short dans la carte, une taille par explication) et re-rendu 05/11 1 h 20 |
 | 9 | puissance-puissance | 2de verte, PAYSAGE SEULE (voix 2de-puissance-puissance-puissance) | VALIDÉE | ✅ FINI (seconde), revu 05/11 3 h : rien à corriger |
 | 10 | enchainer | 2de orange, short blanche (voix 2de-puissance-enchainer) | VALIDÉE | ✅ FINI (seconde, short), revu ; short corrigé (« Réponse B : 10. » écrit au mot, cartes à 82 %) et re-rendu 05/11 2 h 55 |
-| 11 → 13 | | | à écrire | — |
+| 11 | defi | 4e orange, short blanche (voix 4e-puissance-defi) | VALIDÉE 05/11 | agent en cours, sorties 4e/…/11-defi |
+| 12 | defi 3e | 3e orange, short blanche (voix 3e-puissance-defi ; scripts 4e/puissance_defi_3e[_short].py) | VALIDÉE 05/11 | agent en cours, sorties 3e/…/12-defi |
+| 13 | cinq-regles | 1re + STMG jaune, short blanche (voix 1re-puissance-cinq-regles) | VALIDÉE 05/11 | agent en cours, sorties premiere et stmg/…/13-cinq-regles |
 
 Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des agents : `manim/rapports-puissances.md`.
 
@@ -28,6 +30,19 @@ Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des age
 ## État au 05/11, 4 h (session de contrôle 7 et 9)
 - Ép. 1 à 10 FINIS, revus, commités. Aperçu port 3900 : paysage 3e de l'ép. 7, en pause.
 - Avec Frédéric : voix 11, 12, 13 à écrire et valider une par une, puis passe finale (miniatures, manifeste SANS le réécrire, R2, coach, bilans). Rien de poussé.
+
+## État au 05/11, vers 11 h (session « puissances-suite 2 », à 65 % de contexte)
+- Voix 11, 12, 13 VALIDÉES. Ép. 12 FINI, revu (paysage corrigée : « 10 » de « 0,5 × 10³ » sur la ligne de base, re-rendue, bords 0). Scripts : `manim/scripts/4e/puissance_defi.py`, `puissance_defi_3e.py`, `puissance_cinq_regles.py` + leurs `_short.py` et `_marques.json`.
+- Ép. 13 : short fini, revu. Paysages 1re et STMG re-rendues après desserrage (légendes éoliennes, sous-titre du défi) : À CONTRÔLER, planche + bords.
+- Ép. 11 : agent en cours (paysage re-rendue, exposant agrandi qui mordait « octets » à la question 3). Sa section du rapport n'est pas encore écrite : À REVOIR soi-même (planches 12 + 6, zoom). Défaut à chercher en priorité sur 11 : le « 10 » sous la ligne de base quand la mantisse a une virgule.
+- MISE À JOUR : l'agent de l'ép. 11 a fini (paysage 4:02, short 1:04, bords 0, section au rapport) et les paysages 13 sont re-rendues. Plus rien ne tourne. Contrôles restants : planches de 11 (paysage + short) et paysage 13 (1re, STMG). Après la retouche « octets », la paysage 11 n'a pas repassé l'audit : relancer le dry run.
+- Voix, scripts, `_marques.json`, rapport et cette note de 11, 12, 13 sont COMMITÉS (par chemin, non poussés).
+- PASSE FINALE à faire, sur les 33 vidéos (aucune de la série n'a d'entrée au manifeste : `id` à créer, la table R2 en liste déjà une partie) : ép. 1, 2, 3, 7 = 4e, 3e, short ; ép. 4 = 4e, seconde, short ; ép. 5 = 4e, 3e, seconde, short ; ép. 6 = 4e, short ; ép. 8, 10 = seconde, short ; ép. 9 = seconde seule ; ép. 11 = 4e, short ; ép. 12 = 3e, short ; ép. 13 = premiere, stmg, short.
+  1. Miniatures : `manim/miniature.py` (registre `NOTIONS`, paysage « COMPRENDRE X EN N MIN ») et un `miniature_short_*.py` (image à 1 s).
+  2. Manifeste : ⛔ `cp` d'abord, lire puis écrire en deux étapes, AJOUT SEUL, pas de < >. Modèle d'entrée : `terminale-denombrement-reconnaitre` (+ `-short`, avec `renvoie_vers`) : id, notionId, microId, classe, ceinture, serie, type, fichier, miniature, titre, accroche, chapitres, tags, questions, centres ; les données sont dans `manim/rapports-puissances.md`. Playlists collège Cycle 4 + CRPE. Micros : `prompt-session-puissances.md` § 1 (paysages communes : une entrée par classe). Short = `{{LONGUE}}` : la paysage part AVANT.
+  3. `python scripts/fiches-youtube.py <filtre>` ; `scripts/r2-videos.ps1` (à blanc, puis `-Envoyer`) ; `node scripts/generer-videos-r2.mjs` (lance aussi les bilans) ; `node scripts/brancher-videos-coach.mjs` (lecture, puis `--ecrire`, en PRODUCTION).
+  4. Commit manifeste : blob `git show HEAD:` + ses entrées seulement, `git hash-object -w` + `git update-index --cacheinfo` (note mémoire manifeste-partage-modifs-non-commitees). Vérifier que `generer-videos-r2.mjs` redonne la même table.
+  5. Aperçu port 3900 de la DERNIÈRE vidéo, en pause ; push le soir seulement, sur proposition.
 
 ## Reste à faire
 - Contrôler chaque rendu soi-même (planche ffmpeg de 6 images), corriger tout défaut mineur.

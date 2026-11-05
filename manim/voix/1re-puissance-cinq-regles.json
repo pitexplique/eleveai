@@ -1,0 +1,18 @@
+{
+  "00-garde": "Les puissances en 5 règles. Tu peux les retenir, sans calculatrice ?",
+  "01-eolienne": "Louise répare des éoliennes en mer : elle est technicienne de maintenance. Là-haut, pas de calculatrice, et il faut estimer vite. Cinq règles sur les puissances lui suffisent. Ce sont les mêmes qui te servent en automatismes.",
+  "02-regle1": "Règle 1. a puissance n, c'est n facteurs a. 2 puissance 5 : 2 fois 2 fois 2 fois 2 fois 2, 32. Pas 2 fois 5.",
+  "03-regle2": "Règle 2. Tout nombre non nul, à la puissance 0, égale 1. 7 puissance 0 : 1. 2026 puissance 0 : 1. Pas 0.",
+  "04-regle3": "Règle 3. Pour un produit de même base, on additionne les exposants. 2 puissance 3 fois 2 puissance 4 : 2 puissance 7. Pour un quotient, on soustrait. 5 puissance 6 divisé par 5 puissance 2 : 5 puissance 4.",
+  "04q-question": "Question ! 3 puissance 8 divisé par 3 puissance 2 ? A : 3 puissance 4. B : 3 puissance 6. C : 1 puissance 6. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : 3 puissance 6. On soustrait : 8 moins 2, 6. On ne divise pas les exposants.",
+  "05-regle4": "Règle 4. Pour une puissance de puissance, on multiplie les exposants. 2 puissance 3, le tout puissance 4 : 3 fois 4, 12. 2 puissance 12.",
+  "06-regle5": "Règle 5. Un exposant négatif, c'est l'inverse. a puissance moins n, égale 1 sur a puissance n. 2 puissance moins 3 : 1 sur 8, 0,125. Un petit nombre, pas un nombre négatif.",
+  "06q-question": "Question ! Combien vaut 5 puissance moins 2 ? A : moins 25. B : moins 10. C : 0,04. Mets pause, et choisis !",
+  "06r-reponse": "Réponse C : 0,04. 1 sur 5 puissance 2, 1 sur 25.",
+  "07-ordre": "Et la notation scientifique donne l'ordre de grandeur. Une éolienne de Louise produit 6 fois 10 puissance 6 watts. Le parc en compte 50 : 5 fois 10 puissance 1. 6 fois 5, 30. 6 plus 1, 7. 30 fois 10 puissance 7, c'est 3 fois 10 puissance 8 watts. Ordre de grandeur : 10 puissance 8.",
+  "08-defi": "À toi de jouer, les règles s'enchaînent. Écris sous la forme 2 puissance n. En haut : 2 puissance 5, fois 2 puissance moins 3. En bas : 2 puissance 2, le tout au cube. Mets pause, et cherche !",
+  "08b-correction": "Correction. En bas, règle 4 : 2 fois 3, 6. 2 puissance 6. En haut, règle 3 : 5 plus moins 3, 2. 2 puissance 2. Puis le quotient : 2 moins 6, moins 4. 2 puissance moins 4. Et avec la règle 5 : 1 sur 16.",
+  "09-finale": "Ce que tu as appris. a puissance n : n facteurs. Exposant 0 : ça fait 1. Produit : on additionne. Quotient : on soustrait. Puissance de puissance : on multiplie. Exposant négatif : l'inverse. Et la notation scientifique donne l'ordre de grandeur. Alors les automatismes sont à toi.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

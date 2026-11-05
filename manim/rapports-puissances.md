@@ -273,3 +273,83 @@
   - short : réponse en deux tailles de police (une seule maintenant), « = 8 zéros » qui touchait Ti-Margo, rangées 100 / × 10 000 / 1 000 000 serrées, lignes qui touchaient les bords de la carte.
 - Soucis restants : aucun défaut visuel. Rien de commité ; pas de miniature, de manifeste ni de R2.
 - Contrôle du 05/11, 3 h - 4 h : planches + zooms regardés. Corrigé : interlignes inégaux du bilan (lignes de base fixes), « 300 » plus grand que « millions de kilomètres » (même taille), « 8 zéros » du short qui mordait sur le « = » en s'agrandissant (toute la ligne s'agrandit). Les 3 vidéos RE-RENDUES en HD ; audit 0, `verifier-bords-video.py` = 0 instants ; durées inchangées.
+
+## Épisode 12 « defi » 3e — PAYSAGE (orange) et SHORT (blanche) (05/11)
+- Fichiers : `manim/scripts/4e/puissance_defi_3e.py` (`PuissanceDefi3e`), `manim/scripts/4e/puissance_defi_3e_short.py` (`PuissanceDefi3eShort`), `puissance_defi_3e_marques.json`, `puissance_defi_3e_short_marques.json`, leurs `.cues.tsv`, WAV dans `public/sons/3e-puissance-defi/` et `public/sons/3e-puissance-defi-short/` (débit −6). Voix validées non modifiées.
+- Sorties : `manim/sorties/3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi.mp4` (1920 × 1080, 4:19), `manim/sorties/3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.mp4` (1080 × 1920, 1:08).
+- Ceintures : paysage ORANGE ; short BLANCHE.
+- Micro : 3e `entier_puissance_defi`.
+- Centres : paysage `sciences`, `espace` ; short `jeux-defis`, `sciences`.
+- Paysage : le bureau d'Amina, journaliste scientifique (pictogramme journal et loupe, métier écrit). Quatre calculs, quatre tampons (FAUX, JUSTE, FAUX, JUSTE), tableau des tampons toujours visible en bas à gauche. Le dernier calcul : la lumière du Soleil, rayon jusqu'à la Terre, pause pour chercher, correction avec le piège 0,5 × 10³.
+- Short « Le jeu des paires » : en haut, des billes de deux couleurs groupées par paires (2 et 3, puis 2 et 5, puis 4 et 5) ; en bas, les maths en même temps. Fin sur 4³ × 5³, question en commentaire, fin standard.
+- Paysage, questions (t mesuré sur le rendu HD) :
+```json
+[{"t": "00:35", "question": "Combien vaut 10³ + 10² ?", "choix": ["10⁵", "1 100", "10⁶"], "reponse": 1, "explication": "1 000 + 100. On additionne les exposants pour un produit, jamais pour une somme."},
+ {"t": "01:18", "question": "Ce calcul est-il juste ? 2³ × 3³ = 6³", "choix": ["oui", "non, les bases sont différentes", "non, c'est 6⁶"], "reponse": 0, "explication": "8 × 27 = 216 et 6³ = 216."},
+ {"t": "02:12", "question": "Combien vaut 10⁻² ?", "choix": ["−100", "−20", "0,01"], "reponse": 2, "explication": "1 ÷ 10². Un exposant négatif donne un petit nombre, pas un nombre négatif."}]
+```
+- Short :
+```json
+[{"t": "00:24", "question": "2⁵ × 5⁵ ?", "choix": ["7⁵", "10⁵", "10¹⁰"], "reponse": 1, "explication": "On fait des paires : 2 × 5, cinq fois de suite. 100 000."}]
+```
+- Chapitres de la paysage (lignes ECRAN du rendu HD) : 00:00 Défi puissances · 00:08 Amina, journaliste scientifique · 00:24 Premier calcul : 10³ + 10² · 00:35 Question : 10³ + 10² · 00:55 Réponse : 1 100 · 01:08 Deuxième calcul : 2³ × 3³ · 01:18 Question : ce calcul est-il juste ? · 01:38 Réponse : oui · 02:02 Troisième calcul : 10⁻² · 02:12 Question : 10⁻² · 02:30 Réponse : 0,01 · 02:45 Le Soleil et la Terre · 03:17 Correction · 03:45 Ce que tu as appris · 04:12 Entraîne-toi et abonne-toi.
+- Contrôles : rendus avec AUDIT=1 BORDS=1 : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD sur les deux vidéos (seul signalement : AUDIT-ABSENT « 974 » de la phrase de fin de la paysage, normal). `verifier-bords-video.py` : « 0 instants qui touchent un bord » sur les deux mp4.
+- Planches : rendus basse déf, planches HD et images à des instants choisis (tampons image par image, droite graduée zoomée). Corrigé et re-rendu :
+  - tampon qui mordait sur 10⁵ et débordait de sa bande en s'agrandissant ; deux tampons qui se touchaient sur l'article ; JUSTE collé aux bords de sa case dans le tableau ;
+  - deux tailles de police dans les lignes du Soleil (une seule maintenant, unités comprises) et dans la colonne de correction ; interlignes inégaux (02r, 04r, 05b : lignes de base fixes) ;
+  - « journaliste scientifique » qui touchait l'article (écrans 01 et énoncés) ; dernières lignes griffonnées contre le bas du cadre ; texte de la page de garde collé aux ceintures ;
+  - flèches minuscules entre les paires (2 × 3) et les 6 ; « 0,01 » collé à sa flèche ; « 0 » et « 0,01 » collés sur la droite ;
+  - « Réponse » qui croisait « Question ! » en montant : elle attend que la question soit partie ;
+  - short : les quatre lignes de « Vérifions » à la même taille sur des lignes de base régulières ; « en commentaire ! » trop près du bord de la carte.
+- Soucis restants : aucun défaut corrigeable vu. Rien de commité ; pas de miniature, de manifeste ni de R2.
+
+## Épisode 13 « cinq-regles » 1re + STMG — PAYSAGE (jaune) et SHORT (blanche) (05/11)
+- Fichiers : `manim/scripts/4e/puissance_cinq_regles.py` (`PuissanceCinqReglesBase`, `PuissanceCinqRegles1re`, `PuissanceCinqReglesStmg` : seule l'identité change), `manim/scripts/4e/puissance_cinq_regles_short.py` (`PuissanceCinqReglesShort`), `puissance_cinq_regles_marques.json`, `puissance_cinq_regles_short_marques.json`, leurs `.cues.tsv`, WAV dans `public/sons/1re-puissance-cinq-regles/` et `public/sons/1re-puissance-cinq-regles-short/`. Voix validées inchangées. Aucun module commun modifié.
+- Sorties : `manim/sorties/premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles.mp4` (1920 × 1080, 4:32), `manim/sorties/stmg/maths/puissances/13-cinq-regles/eleveai-maths-stmg-puissance-cinq-regles.mp4` (1920 × 1080, 4:32), `manim/sorties/premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.mp4` (1080 × 1920, 1:12).
+- Ceintures : paysages JAUNE ; short BLANCHE.
+- Micro : `auto_num_puissances`.
+- Centres : paysage `nature-ecologie`, `sciences` ; short `jeux-defis`.
+- Paysage : Louise, technicienne de maintenance d'éoliennes en mer (éolienne dont les pales tournent, métier écrit, calculatrice barrée). Fil visuel : la colonne « Les 5 règles » se remplit, chaque règle grande au centre puis rangée dans la colonne. Écran ordre de grandeur (parc de 50 éoliennes, 3 × 10⁸ W), défi avec compte à rebours, correction où chaque étape allume sa règle, bilan « Ce que tu as appris » allumé ligne à ligne au mot.
+- Short « 2³ × 2⁴ = 4⁷ ? » : le titre composé est posé d'un bloc à 0 s (demandé par la commande : lisible dès 1 s). En haut, 7 jetons qui se rangent, barre 128 et barre énorme 16 384 ; en bas, les maths. Fin sur 3⁴ × 3⁵, question en commentaire, fin standard.
+- Paysage, questions (t mesuré sur le rendu HD, 71,00 s et 134,52 s, identiques en 1re et STMG) :
+```json
+[{"t": "01:11", "question": "3⁸ ÷ 3² ?", "choix": ["3⁴", "3⁶", "1⁶"], "reponse": 1, "explication": "On soustrait : 8 − 2 = 6. On ne divise pas les exposants."},
+ {"t": "02:14", "question": "Combien vaut 5⁻² ?", "choix": ["−25", "−10", "0,04"], "reponse": 2, "explication": "1/5² = 1/25 = 0,04."}]
+```
+- Short (t mesuré : 28,53 s) :
+```json
+[{"t": "00:28", "question": "5² × 5³ ?", "choix": ["25⁵", "5⁵", "5⁶"], "reponse": 1, "explication": "On garde la base, on additionne les exposants : 2 + 3."}]
+```
+- Chapitres de la paysage (lignes ECRAN du rendu HD) : 00:00 Les puissances en 5 règles · 00:06 Louise, technicienne d'éoliennes en mer · 00:24 Règle 1 : n facteurs · 00:36 Règle 2 : exposant 0 · 00:50 Règle 3 : produit et quotient · 01:11 Question : 3⁸ ÷ 3² · 01:41 Règle 4 : puissance de puissance · 01:56 Règle 5 : exposant négatif · 02:14 Question : 5⁻² · 02:42 L'ordre de grandeur · 03:10 À toi de jouer · 03:33 Correction · 03:57 Ce que tu as appris · 04:25 Fin.
+- Contrôles : rendus HD avec AUDIT=1 BORDS=1 : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD sur les trois vidéos. Signalements restants, tous normaux : TARD « 5 » et « 3 » (chiffres du compte à rebours), TARD « 8 ÷ 2 » (rappel écrit bien après sa première mention), AUDIT-ABSENT « 974 » de la phrase de fin, LARGE « On soustrait » (5,27 ; vérifié à l'image, ne touche pas Ti-Margo). `verifier-bords-video.py` : « 0 instants qui touchent un bord » sur les trois.
+- Marques mot à mot : converties par paires, car `cues2marques` perdait les mots répétés et les nombres en plusieurs cues (« 2026 puissance », « 0,125 », « 16 384 »).
+- Planches : rendus basse déf, planches HD (12 images paysage, 6 short) et zooms à des instants choisis. Corrigé et re-rendu :
+  - paysage : barre de 1/8 qui touchait d'abord 0,125, puis « Un petit nombre, » ; « En haut » / « En bas » collés à la fiche et mal alignés entre eux ; 0,04 de la question 2 presque collé aux cartes ; largeur de la fiche et des en-têtes ; « Règle n » sous la ligne de base ; « ça fait 1. » sous la ligne de base (le ç) ; cadre du 1/16 décalé ; « Mets pause » réduite ; bilan qui débordait ; éoliennes du parc ; exposants agrandis qui mordaient leur voisin ;
+  - short : polices trop grandes pour la carte (une seule taille maintenant, réponse sur 4 lignes) ; interlignes inégaux ; « 3 » affiché avant la voix ; étiquette 16 384 posée au mot ; tête de Ti-Margo qui passait sous la carte (carte raccourcie, lignes resserrées).
+- Soucis restants : aucun défaut corrigeable vu. Rien de commité ; pas de miniature, de manifeste ni de R2.
+
+## Épisode 11 « defi » 4e — PAYSAGE (orange) et SHORT (blanche) (05/11)
+
+- Fichiers créés : `manim/scripts/4e/puissance_defi.py`, `manim/scripts/4e/puissance_defi_short.py`, `manim/scripts/4e/puissance_defi_marques.json` + `.cues.tsv`, `manim/scripts/4e/puissance_defi_short_marques.json` + `.cues.tsv`, WAV dans `public/sons/4e-puissance-defi/` et `public/sons/4e-puissance-defi-short/`. Voix inchangées.
+- Vidéos : `manim/sorties/4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi.mp4` (4:02, ceinture ORANGE, micro 4e `puissance_defi`) ; `manim/sorties/4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.mp4` (1:04, ceinture BLANCHE, échelle entière).
+- Centres (liste fermée) : paysage `jeux-video`, `musique`, `cinema-series` ; short `argent-budget`, `jeux-defis`.
+- Questions paysage :
+
+```json
+[{"t":"00:22","question":"Combien faut-il de joueurs au départ ?","choix":["12","36","64"],"reponse":2,"explication":"On remonte depuis le vainqueur : 1, 2, 4, 8, 16, 32, 64. Six doublements : 2⁶. Pas 2 × 6 = 12 : le piège."},
+ {"t":"01:13","question":"Combien d'auditeurs au bout des 10 jours ?","choix":["100","5 120","1 024"],"reponse":1,"explication":"5 × 2¹⁰. 2¹⁰ = 1 024. × 5 = 5 120. On part de 5, et le 5 reste devant."},
+ {"t":"02:55","question":"Le film tient-il dessus ?","choix":["oui, car 9 est plus grand que 1,2.","non, car l'exposant 13 est plus grand que 12.","oui, tout juste."],"reponse":1,"explication":"L'exposant décide d'abord : 13 bat 12. En entier : 12 000 milliards d'octets pour le film, 9 000 milliards pour le serveur."}]
+```
+
+- Question short :
+
+```json
+[{"t":"00:12","question":"1 centime doublé 10 fois ?","choix":["20 centimes","100 centimes","1 024 centimes"],"reponse":2,"explication":"2¹⁰, 1 024 centimes. Seulement 10 euros et 24 centimes."}]
+```
+
+- Chapitres paysage : 00:00 Défi puissances · 00:07 Épreuve 1 : le tournoi · 00:22 Question : les joueurs · 01:00 Épreuve 2 : la chanson · 01:13 Question : les auditeurs · 01:50 Épreuve 3 : le poids du film · 02:16 Correction · 02:42 Dernière épreuve : le serveur · 02:55 Question : le film tient-il ? · 03:27 Ce que tu as appris · 03:54 Fin.
+- Bords : 0 instant sur les deux mp4 (`verifier-bords-video.py`). Audit à 60 im/s : 0 avance, 0 retard (seul « 974 » absent, écran de fin commun).
+- Ce que j'ai vu sur les planches (12 paysage, 6 short, zooms), puis corrigé et re-rendu :
+  - paysage : lignes de base faussées par les ligatures fi/ff et le ç ; boutons de la question 3 sur toute la largeur ; barres sans recouvrement ; texte du studio qui chevauchait la pile d'images ; notation et unité en deux tailles sur une même ligne (une seule taille maintenant) ; « tient-il dessus ? » aligné sous le film ; exposant agrandi qui mordait « octets » (il le pousse maintenant) ; compte à rebours de 5 s ajouté sur « Mets pause, et cherche ».
+  - short : « Et doublé 30 fois… » rétabli (une erreur de ma part l'avait changé en 27) ; textes qui frôlaient la carte ; coche qui touchait « centimes » ; 2²⁰ et 1 048 576 à la même taille ; interligne inégal de « ça fait combien / d'euros ? » ; « Ça ne ressemble à rien. » sur deux lignes.
+- Soucis restants : aucun défaut corrigeable vu. Rien de commité ; pas de miniature, de manifeste ni de R2.
