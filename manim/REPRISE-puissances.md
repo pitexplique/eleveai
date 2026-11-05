@@ -11,13 +11,19 @@ Lire d'abord `manim/prompt-session-puissances.md` (découpage, ordre de travail)
 | 4 | zero-negatif | 4e orange / 2de jaune (écran 04b 2de seulement), short blanche | VALIDÉE | ✅ FINI (4e, seconde, short), revu |
 | 5 | notation-scientifique | 4e/3e/2de (4e verte, 3e/2de jaune), short blanche | VALIDÉE | ✅ FINI (4e, 3e, seconde, short), revu ; short corrigé (marges) et re-rendu 04/11 18 h |
 | 6 | comparer | 4e verte, short blanche | VALIDÉE | ✅ FINI (4e, short), revu ; paysage corrigée (flèche sur l'exposant) et re-rendue 05/11 1 h |
-| 7 | calcul | 4e/3e verte, short blanche | VALIDÉE | agent lancé (nuit du 04/11) |
+| 7 | calcul | 4e/3e verte, short blanche | VALIDÉE | 1er agent figé à 23 h 55 (scripts écrits, aucun HD) ; agent de reprise lancé 05/11 2 h |
 | 8 | produit-quotient | 2de verte, short blanche (voix 2de-puissance-…) | VALIDÉE | ✅ FINI (seconde, short), revu ; corrigé (ligne du short dans la carte, une taille par explication) et re-rendu 05/11 1 h 20 |
 | 9 | puissance-puissance | 2de verte, PAYSAGE SEULE (voix 2de-puissance-puissance-puissance) | VALIDÉE | agent lancé 05/11 0 h 57 |
-| 10 | enchainer | 2de orange, short blanche (voix 2de-puissance-enchainer) | VALIDÉE | agent lancé 05/11 1 h 30 |
+| 10 | enchainer | 2de orange, short blanche (voix 2de-puissance-enchainer) | VALIDÉE | ✅ FINI (seconde, short), revu 05/11 2 h : rien à corriger (« Réponse B » du short portée par la carte allumée, comme ép. 6) |
 | 11 → 13 | | | à écrire | — |
 
 Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des agents : `manim/rapports-puissances.md`.
+
+## Passage de main (05/11, vers 2 h 40, session « rendus 5 → 10 » à 59 % de contexte)
+- Revus par la session principale : ép. 5, 6, 8, 10. Commits 1b54a618 (5, 6, 8) + celui de l'ép. 10. Rien de poussé.
+- EN COURS, lancés par la session qui passe la main : ép. 7 (agent de reprise, le 1er s'était figé à 23 h 55 ; 4e + short rendus vers 2 h 33, reste la 3e) et ép. 9 (rendu HD en attente du verrou depuis 1 h 47). Fini = section dans `manim/rapports-puissances.md` + mp4 + verrou libre. Si plus aucun fichier ne bouge pendant 30 min, l'agent est figé : relancer depuis ses scripts, avec la même consigne.
+- Reste : planches de 7 et 9 regardées (défauts repérés jusqu'ici : texte collé au bord d'une carte, deux tailles dans une explication, cercle qui mord sur la base d'un exposant) ; aperçu port 3900 de la DERNIÈRE vidéo, en pause ; commit par chemin de 7 et 9 (scripts + `_marques.json` ; ni `.cues.tsv`, ni `media-puiss-*`, ni mp4, ni WAV).
+- Avec Frédéric, le matin : voix 11, 12, 13, puis passe finale.
 
 ## Reste à faire
 - Contrôler chaque rendu soi-même (planche ffmpeg de 6 images), corriger tout défaut mineur.
