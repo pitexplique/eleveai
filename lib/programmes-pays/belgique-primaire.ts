@@ -379,7 +379,7 @@ const P1_CONTENUS: ContenuPays[] = [
   c("1.2 SF3", GEO, "Relier 3D et 2D : associer l'empreinte d'une face à une figure ; dessiner le contour de toutes les faces d'une boîte.", "complete", m("cp", "cp_solide_faces")),
   c("1.2 C1", GEO, "Construire un carré, un rectangle en assemblant deux figures données.", "partielle", m("cp", "cp_figure_defi")),
   c("2.1 Sv1", GRA, "Les grandeurs : longueur (court, long), masse (léger, lourd), coût ; petit, grand ; plus, moins, aussi.", "complete", m("cp", "cp_longueur_lexique", "cp_masse_lexique", "cp_longueur_comparer", "cp_masse_comparer")),
-  c("2.1 SF1", GRA, "Comparer des objets à un objet de référence ; classer des personnes selon leur taille, des objets selon leur longueur.", "complete", m("cp", "cp_longueur_comparer", "cp_masse_contenance_estimer")),
+  c("2.1 SF1", GRA, "Comparer des objets à un objet de référence ; classer des personnes selon leur taille, des objets selon leur longueur.", "complete", m("cp", "cp_longueur_comparer")),
   c("2.1 SF2", GRA, "Comparer des durées vécues à une durée de référence (sablier, chanson).", "hors-coach", []),
   c("2.1 C1", GRA, "Choisir une action concrète pour comparer des longueurs (juxtaposer…).", "hors-coach", []),
   c("2.2 Sv1", GRA, "L'euro (€).", "complete", m("cp", "cp_monnaie_reconnaitre", "cp_monnaie_valeur")),

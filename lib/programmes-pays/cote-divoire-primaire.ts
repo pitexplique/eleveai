@@ -63,7 +63,7 @@ export const COTE_DIVOIRE_CP2 = base("cp2", "CP2", "cp", [
   c("L8", GEO, "Prise d'empreintes des faces planes des solides : figures planes, contour d'une face.", "complete", m("cp", "cp_solide_faces", "cp_figure_reconnaitre")),
   c("L9", GEO, "Tracé d'empreintes : classer les figures planes selon le nombre de côtés.", "complete", m("cp", "cp_figure_decrire", "cp_figure_tracer")),
   c("L10", MES, "La longueur : comparer, unité arbitraire, règle graduée.", "complete", m("cp", "cp_longueur_comparer", "cp_longueur_mesurer_unite", "cp_longueur_regle")),
-  c("L11", MES, "La capacité : comparer des contenances, unité arbitraire.", "partielle", m("cp", "cp_masse_contenance_estimer"), "Pas de micro « mesurer avec une unité arbitraire de capacité »."),
+  c("L11", MES, "La capacité : comparer des contenances, unité arbitraire.", "partielle", m("ce2", "ce2_contenance_comparer"), "Chez nous au CE2 : pas de micro « mesurer avec une unité arbitraire de capacité »."),
 ]);
 
 export const COTE_DIVOIRE_CE1 = base("ce1", "CE1", "ce1", [
