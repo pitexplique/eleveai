@@ -26,12 +26,12 @@ function toSvgY(y: number, ymin: number, ymax: number, height: number) {
 }
 
 function formatNumber(n: number) {
-  return Number.isInteger(n) ? String(n) : n.toFixed(1);
+  return (Number.isInteger(n) ? String(n) : n.toFixed(1).replace(".", ",")).replace("-", "−");
 }
 
-/** Largeur d'un chiffre de graduation écrit en 12 : ~7 unités par signe. */
+/** Largeur d'un chiffre de graduation écrit en 13 : ~7,5 unités par signe. */
 function largeurChiffre(n: number) {
-  return 7 * formatNumber(n).length;
+  return 7.5 * formatNumber(n).length;
 }
 
 /**
@@ -70,6 +70,18 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
 
   const xAxisY = ymin <= 0 && ymax >= 0 ? toSvgY(0, ymin, ymax, height) : height;
   const yAxisX = xmin <= 0 && xmax >= 0 ? toSvgX(0, xmin, xmax, width) : 0;
+
+  /* ⛔ LE DERNIER NOMBRE N'ÉTAIT PLUS SOUS SA GRADUATION (05/11/2026, Frédéric).
+     Le cadre s'arrêtait pile sur `xmax` : la dernière ligne de grille tombait sur
+     le bord (à moitié coupée) et le dernier nombre était ramené de 10 px vers
+     l'intérieur, sans rien au-dessus de lui. Le dessin garde donc une MARGE autour
+     du cadre : chaque nombre reste centré sur sa graduation, bornes comprises.
+     La bande du bas réserve aussi la place des abscisses quand l'axe est en bas
+     (`ymin = 0`). Les 8 % perdus par la marge sont rendus à la police (13 au lieu
+     de 12) : le plancher de 11 px sur téléphone tient toujours. */
+  const margeX = 14;
+  const margeHaut = 8;
+  const margeBas = Math.max(8, xAxisY + 21 - height);
 
   function pointToSvg(p: Point) {
     return {
@@ -123,7 +135,7 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
       ) : null}
 
       <svg
-        viewBox={`0 0 ${width} ${height}`}
+        viewBox={`${-margeX} ${-margeHaut} ${width + 2 * margeX} ${height + margeHaut + margeBas}`}
         className="block h-auto w-full"
         aria-label="Graphique de fonction"
       >
@@ -161,143 +173,6 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
 
         <line x1={0} y1={xAxisY} x2={width} y2={xAxisY} stroke={COULEUR_AXES} strokeWidth={2.2} />
         <line x1={yAxisX} y1={0} x2={yAxisX} y2={height} stroke={COULEUR_AXES} strokeWidth={2.2} />
-
-        {/*
-          ⛔⛔ LES GRADUATIONS ÉTAIENT EN 10 px — CORRIGÉ LE 01/09/2026.
-          Le plancher de lisibilité mesuré sur téléphone de 375 px est de
-          11 px, et le `viewBox` de ce canvas vaut son champ `size` : réduire
-          la largeur ne rétrécissait pas davantage les chiffres, mais ne les
-          agrandissait pas non plus. Le défaut était donc DANS le canvas, et
-          il interdisait de l'employer dans une fiche — une fiche de fonctions
-          affines sans droite, ce qui n'avait aucun sens.
-          C'est le même remède que pour `solide_3d` le 24/08 : on monte la
-          police au lieu d'éviter le canvas.
-
-          ⚠️ MAIS MONTER LA POLICE SEULE AURAIT FAIT CHEVAUCHER LES GRANDES
-          PLAGES. Ce canvas étiquette CHAQUE entier : sur −8..8 dans une carte
-          de 222 px, cela fait 17 étiquettes à 13,9 px d'intervalle, pour des
-          libellés comme « −8 » qui en mesurent 14. D'où le PAS ADAPTATIF :
-          on n'écrit un chiffre que s'il reste au moins 22 px depuis le
-          précédent, sinon on saute. Les traits de graduation, eux, restent
-          tous tracés — c'est le CHIFFRE qui s'espace, pas la graduation.
-        */}
-        {(() => {
-          const nbX = xmax - xmin + 1;
-          const ecartX = width / Math.max(1, nbX - 1);
-          const pasX = Math.max(1, Math.ceil(22 / ecartX));
-          const marge = 10;
-          const posX = (x: number) => {
-            const sx = toSvgX(x, xmin, xmax, width);
-            return Math.min(width - marge, Math.max(marge, sx)) + (x === 0 && sx > marge ? 8 : 0);
-          };
-          // ⛔ LES REMONTÉES AU BORD RAPPROCHENT LES CHIFFRES (30/09/2026, feuille
-          // de dérivation de 1re spé). Le « 0 » décalé de 8 px touchait le « 1 »
-          // quand l'unité est petite. On place donc tous les chiffres, puis on
-          // n'écrit que ceux qui ont leur place (`espacer`), le « 0 » d'abord,
-          // puis les bornes.
-          const gardes = espacer(
-            Array.from({ length: nbX }, (_, i) => xmin + i).filter((x) => x === 0 || (x - xmin) % pasX === 0),
-            posX,
-            (x) => largeurChiffre(x) / 2,
-            (x) => (x === 0 ? 0 : x === xmin || x === xmax ? 1 : 2),
-          );
-          return gardes
-            .map((x) => {
-              // ⚠️ L'ÉTIQUETTE EST CENTRÉE SUR SA VALEUR, et `toSvgX` envoie
-              // `xmin` sur 0 et `xmax` sur `width` : aux deux extrémités, la
-              // moitié du chiffre sortait du viewBox. Mesuré le 01/09/2026 —
-              // quatre graduations débordaient sur la fiche des fonctions
-              // affines. On les ramène dans le cadre plutôt que de les
-              // supprimer : un axe sans ses bornes se lit mal.
-              // Le « 0 » est centré sur l'origine, donc TRAVERSÉ par l'axe
-              // vertical, qui lui barre le ventre. On le décale de quelques
-              // pixels vers la droite : la place à gauche est prise par la
-              // colonne des ordonnées.
-              // ⚠️ SAUF QUAND LE « 0 » EST DÉJÀ RAMENÉ AU BORD (xmin = 0) : l'axe
-              // est alors le bord gauche, il ne le traverse pas, et le décalage
-              // le collait au chiffre suivant — « 03 » lu sur l'axe des vitesses
-              // d'une éolienne, gradué de 3 en 3 (21/09/2026).
-              // (Ce décalage et la remontée au bord sont calculés dans `posX`.)
-              const sxClamp = posX(x);
-              return (
-                <text key={`tx-${x}`} x={sxClamp} y={Math.min(xAxisY + 17, height - 3)} textAnchor="middle" fontSize="12" fill="#334155">
-                  {x !== 0 ? formatNumber(x) : "0"}
-                </text>
-              );
-            });
-        })()}
-
-        {(() => {
-          const nbY = ymax - ymin + 1;
-          const ecartY = height / Math.max(1, nbY - 1);
-          const pasY = Math.max(1, Math.ceil(16 / ecartY));
-          const posY = (y: number) => Math.min(height - 7, Math.max(7, toSvgY(y, ymin, ymax, height)));
-          const candidats = Array.from({ length: nbY }, (_, i) => ymin + i)
-            .filter((y) => y !== 0 && (y - ymin) % pasY === 0)
-            // ⛔ LA RANGÉE DES ABSCISSES EST RÉSERVÉE (30/09/2026, feuilles de
-            // terminale : 38 chevauchements mesurés à 375 px). Les abscisses
-            // occupent la bande `xAxisY + 5` → `xAxisY + 19` ; un chiffre
-            // d'ordonnée centré sur sa graduation déborde de ±6 px. Quand
-            // l'unité est petite (cadre haut, `ymin = −1`), le « −1 » tombait
-            // DANS cette bande, sur le « 0 » ou le « −1 » des abscisses. On
-            // saute ce chiffre, comme le pas adaptatif saute les autres ; son
-            // trait de graduation, lui, reste tracé.
-            // ⚠️ On teste la position APRÈS la remontée au bord (`syClamp`
-            // plus bas) : un « −1 » posé sur le bord du bas est remonté de 7 px.
-            .filter((y) => y > 0 || Math.min(height - 7, toSvgY(y, ymin, ymax, height)) - xAxisY >= 26);
-          // ⛔ Même geste que pour les abscisses (30/09/2026) : le « −4 » d'un
-          // cadre qui s'arrête à −4 était remonté à 10 unités du « −3 », le « 8 »
-          // descendu à 10 du « 7 ». Un chiffre fait 12 de haut : les bornes
-          // passent d'abord, et un voisin trop proche n'est pas écrit.
-          return espacer(candidats, posY, () => 6.5, (y) => (y === ymin || y === ymax ? 0 : 1))
-            .map((y) => {
-              const sy = toSvgY(y, ymin, ymax, height);
-              // ⛔⛔ LE « −1 » DE L'AXE VERTICAL SE LISAIT COMME UNE ABSCISSE —
-              // corrigé le 01/09/2026, sur signalement de Frédéric. L'axe
-              // horizontal semblait porter « −2  −1  −1  0  1  2 » : le second
-              // « −1 » était l'ordonnée.
-              //
-              // ⚠️ ET LE CONTRÔLE AUTOMATIQUE DISAIT « AUCUN CHEVAUCHEMENT ».
-              // Il ne mentait pas — les boites ne se touchaient pas — mais il
-              // répondait à la mauvaise question. La gêne ne vient PAS d'un
-              // recouvrement : elle vient de ce que les deux étiquettes sont
-              // sur LA MÊME RANGÉE. Les ordonnées étaient écrites en `sy − 4`,
-              // ce qui place le « −1 » (un cran sous l'axe, ~22 px) en
-              // `xAxisY + 18` — quand les abscisses sont en `xAxisY + 17`. Un
-              // pixel d'écart : l'œil lit une seule ligne de chiffres.
-              //
-              // DEUX CORRECTIONS, ET IL FALLAIT LES DEUX :
-              // ⭐ 1. À GAUCHE de l'axe, alignées à droite — la convention des
-              //    manuels. Seule, elle ne suffisait pas : le « −1 » restait
-              //    dans la rangée des abscisses, simplement de l'autre côté.
-              // ⭐ 2. CENTRÉES SUR LEUR GRADUATION (`dominantBaseline`), et non
-              //    posées 4 px au-dessus. Le « −1 » descend alors à
-              //    `xAxisY + 25` tandis que les abscisses culminent vers
-              //    `xAxisY + 17` : deux rangées distinctes, et le regard suit
-              //    enfin une colonne verticale au lieu d'une ligne.
-              //
-              // ⚠️ Sauf quand l'axe vertical est collé au bord gauche — cas
-              // `xmin = 0`, fréquent dans les banques : il n'y a alors pas la
-              // place à gauche, et on revient à droite.
-              const placeAGauche = yAxisX > 26;
-              // Centrer sur la graduation sortirait la moitié du chiffre du
-              // cadre aux deux extrémités, exactement comme pour les abscisses.
-              const syClamp = Math.min(height - 7, Math.max(7, sy));
-              return (
-                <text
-                  key={`ty-${y}`}
-                  x={placeAGauche ? yAxisX - 6 : yAxisX + 6}
-                  y={syClamp}
-                  textAnchor={placeAGauche ? "end" : "start"}
-                  dominantBaseline="central"
-                  fontSize="12"
-                  fill="#334155"
-                >
-                  {formatNumber(y)}
-                </text>
-              );
-            });
-        })()}
 
         {courbes.map((courbe) => (
           <path
@@ -371,6 +246,148 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
 
           return <g key={`mise-${index}`}>{elements}</g>;
         })}
+
+        {/* ⛔ 05/11/2026 : dessinés APRÈS les courbes et les pointillés, avec un halo
+            blanc. Sinon le pointillé y = 9 barrait le « 9 » de l'axe, et les droites
+            passant près de l'origine traversaient les chiffres. */}
+        {/*
+          ⛔⛔ LES GRADUATIONS ÉTAIENT EN 10 px — CORRIGÉ LE 01/09/2026.
+          Le plancher de lisibilité mesuré sur téléphone de 375 px est de
+          11 px, et le `viewBox` de ce canvas vaut son champ `size` : réduire
+          la largeur ne rétrécissait pas davantage les chiffres, mais ne les
+          agrandissait pas non plus. Le défaut était donc DANS le canvas, et
+          il interdisait de l'employer dans une fiche — une fiche de fonctions
+          affines sans droite, ce qui n'avait aucun sens.
+          C'est le même remède que pour `solide_3d` le 24/08 : on monte la
+          police au lieu d'éviter le canvas.
+
+          ⚠️ MAIS MONTER LA POLICE SEULE AURAIT FAIT CHEVAUCHER LES GRANDES
+          PLAGES. Ce canvas étiquette CHAQUE entier : sur −8..8 dans une carte
+          de 222 px, cela fait 17 étiquettes à 13,9 px d'intervalle, pour des
+          libellés comme « −8 » qui en mesurent 14. D'où le PAS ADAPTATIF :
+          on n'écrit un chiffre que s'il reste au moins 22 px depuis le
+          précédent, sinon on saute. Les traits de graduation, eux, restent
+          tous tracés — c'est le CHIFFRE qui s'espace, pas la graduation.
+        */}
+        {(() => {
+          const nbX = xmax - xmin + 1;
+          const ecartX = width / Math.max(1, nbX - 1);
+          const pasX = Math.max(1, Math.ceil(22 / ecartX));
+          const posX = (x: number) => {
+            const sx = toSvgX(x, xmin, xmax, width);
+            const demi = largeurChiffre(x) / 2;
+            // Centré sur sa graduation ; on ne ramène que ce qui sortirait de la marge.
+            return Math.min(width + margeX - demi, Math.max(demi - margeX, sx)) + (x === 0 && sx > 10 ? 8 : 0);
+          };
+          // ⛔ LES REMONTÉES AU BORD RAPPROCHENT LES CHIFFRES (30/09/2026, feuille
+          // de dérivation de 1re spé). Le « 0 » décalé de 8 px touchait le « 1 »
+          // quand l'unité est petite. On place donc tous les chiffres, puis on
+          // n'écrit que ceux qui ont leur place (`espacer`), le « 0 » d'abord,
+          // puis les bornes.
+          const gardes = espacer(
+            Array.from({ length: nbX }, (_, i) => xmin + i).filter((x) => x === 0 || (x - xmin) % pasX === 0),
+            posX,
+            (x) => largeurChiffre(x) / 2,
+            (x) => (x === 0 ? 0 : x === xmin || x === xmax ? 1 : 2),
+          );
+          return gardes
+            .map((x) => {
+              // ⚠️ L'ÉTIQUETTE EST CENTRÉE SUR SA VALEUR, et `toSvgX` envoie
+              // `xmin` sur 0 et `xmax` sur `width` : aux deux extrémités, la
+              // moitié du chiffre sortait du viewBox. Mesuré le 01/09/2026 —
+              // quatre graduations débordaient sur la fiche des fonctions
+              // affines. On les ramène dans le cadre plutôt que de les
+              // supprimer : un axe sans ses bornes se lit mal.
+              // Le « 0 » est centré sur l'origine, donc TRAVERSÉ par l'axe
+              // vertical, qui lui barre le ventre. On le décale de quelques
+              // pixels vers la droite : la place à gauche est prise par la
+              // colonne des ordonnées.
+              // ⚠️ SAUF QUAND LE « 0 » EST DÉJÀ RAMENÉ AU BORD (xmin = 0) : l'axe
+              // est alors le bord gauche, il ne le traverse pas, et le décalage
+              // le collait au chiffre suivant — « 03 » lu sur l'axe des vitesses
+              // d'une éolienne, gradué de 3 en 3 (21/09/2026).
+              // (Ce décalage et la remontée au bord sont calculés dans `posX`.)
+              const sxClamp = posX(x);
+              return (
+                <text key={`tx-${x}`} x={sxClamp} y={xAxisY + 17} textAnchor="middle" fontSize="13" fill="#334155" stroke="white" strokeWidth={3} paintOrder="stroke">
+                  {x !== 0 ? formatNumber(x) : "0"}
+                </text>
+              );
+            });
+        })()}
+
+        {(() => {
+          const nbY = ymax - ymin + 1;
+          const ecartY = height / Math.max(1, nbY - 1);
+          const pasY = Math.max(1, Math.ceil(16 / ecartY));
+          const posY = (y: number) => toSvgY(y, ymin, ymax, height);
+          const candidats = Array.from({ length: nbY }, (_, i) => ymin + i)
+            .filter((y) => y !== 0 && (y - ymin) % pasY === 0)
+            // ⛔ LA RANGÉE DES ABSCISSES EST RÉSERVÉE (30/09/2026, feuilles de
+            // terminale : 38 chevauchements mesurés à 375 px). Les abscisses
+            // occupent la bande `xAxisY + 5` → `xAxisY + 19` ; un chiffre
+            // d'ordonnée centré sur sa graduation déborde de ±6 px. Quand
+            // l'unité est petite (cadre haut, `ymin = −1`), le « −1 » tombait
+            // DANS cette bande, sur le « 0 » ou le « −1 » des abscisses. On
+            // saute ce chiffre, comme le pas adaptatif saute les autres ; son
+            // trait de graduation, lui, reste tracé.
+            // ⚠️ On teste la position APRÈS la remontée au bord (`syClamp`
+            // plus bas) : un « −1 » posé sur le bord du bas est remonté de 7 px.
+            .filter((y) => y > 0 || toSvgY(y, ymin, ymax, height) - xAxisY >= 26);
+          // ⛔ Même geste que pour les abscisses (30/09/2026) : le « −4 » d'un
+          // cadre qui s'arrête à −4 était remonté à 10 unités du « −3 », le « 8 »
+          // descendu à 10 du « 7 ». Un chiffre fait 12 de haut : les bornes
+          // passent d'abord, et un voisin trop proche n'est pas écrit.
+          return espacer(candidats, posY, () => 7, (y) => (y === ymin || y === ymax ? 0 : 1))
+            .map((y) => {
+              const sy = toSvgY(y, ymin, ymax, height);
+              // ⛔⛔ LE « −1 » DE L'AXE VERTICAL SE LISAIT COMME UNE ABSCISSE —
+              // corrigé le 01/09/2026, sur signalement de Frédéric. L'axe
+              // horizontal semblait porter « −2  −1  −1  0  1  2 » : le second
+              // « −1 » était l'ordonnée.
+              //
+              // ⚠️ ET LE CONTRÔLE AUTOMATIQUE DISAIT « AUCUN CHEVAUCHEMENT ».
+              // Il ne mentait pas — les boites ne se touchaient pas — mais il
+              // répondait à la mauvaise question. La gêne ne vient PAS d'un
+              // recouvrement : elle vient de ce que les deux étiquettes sont
+              // sur LA MÊME RANGÉE. Les ordonnées étaient écrites en `sy − 4`,
+              // ce qui place le « −1 » (un cran sous l'axe, ~22 px) en
+              // `xAxisY + 18` — quand les abscisses sont en `xAxisY + 17`. Un
+              // pixel d'écart : l'œil lit une seule ligne de chiffres.
+              //
+              // DEUX CORRECTIONS, ET IL FALLAIT LES DEUX :
+              // ⭐ 1. À GAUCHE de l'axe, alignées à droite — la convention des
+              //    manuels. Seule, elle ne suffisait pas : le « −1 » restait
+              //    dans la rangée des abscisses, simplement de l'autre côté.
+              // ⭐ 2. CENTRÉES SUR LEUR GRADUATION (`dominantBaseline`), et non
+              //    posées 4 px au-dessus. Le « −1 » descend alors à
+              //    `xAxisY + 25` tandis que les abscisses culminent vers
+              //    `xAxisY + 17` : deux rangées distinctes, et le regard suit
+              //    enfin une colonne verticale au lieu d'une ligne.
+              //
+              // ⚠️ Sauf quand l'axe vertical est collé au bord gauche — cas
+              // `xmin = 0`, fréquent dans les banques : il n'y a alors pas la
+              // place à gauche, et on revient à droite.
+              const placeAGauche = yAxisX > 26;
+              // La marge du dessin laisse la place au chiffre, bornes comprises.
+              return (
+                <text
+                  key={`ty-${y}`}
+                  x={placeAGauche ? yAxisX - 6 : yAxisX + 6}
+                  y={sy}
+                  textAnchor={placeAGauche ? "end" : "start"}
+                  dominantBaseline="central"
+                  fontSize="13"
+                  fill="#334155"
+                  stroke="white"
+                  strokeWidth={3}
+                  paintOrder="stroke"
+                >
+                  {formatNumber(y)}
+                </text>
+              );
+            });
+        })()}
 
         {points.map((p, index) => {
           const s = pointToSvg(p);

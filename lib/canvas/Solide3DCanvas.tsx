@@ -89,12 +89,15 @@ function DimensionLine({
   label,
   color = "#0369a1",
   labelOffset = { x: 0, y: 0 },
+  fondBlanc = false,
 }: {
   from: Point;
   to: Point;
   label?: string;
   color?: string;
   labelOffset?: Point;
+  /** L'étiquette posée SUR un trait : un fond blanc, sinon le trait la coupe en deux (« 12|dm »). */
+  fondBlanc?: boolean;
 }) {
   const m = mid(from, to);
 
@@ -111,6 +114,18 @@ function DimensionLine({
       />
       <circle cx={from.x} cy={from.y} r={3.2} fill={color} />
       <circle cx={to.x} cy={to.y} r={3.2} fill={color} />
+
+      {label && fondBlanc ? (
+        <rect
+          x={m.x + labelOffset.x - (label.length * 10.5 + 8) / 2}
+          y={m.y + labelOffset.y - 17}
+          width={label.length * 10.5 + 8}
+          height={23}
+          rx={6}
+          fill="white"
+          opacity={0.94}
+        />
+      ) : null}
 
       {label ? (
         <Label x={m.x + labelOffset.x} y={m.y + labelOffset.y} color={color}>
@@ -538,15 +553,18 @@ function drawCone({
             to={{ x: cx, y: baseY }}
             label={hauteur}
             color={highlightHeight ? colors.heightStroke : "#0369a1"}
-            labelOffset={{ x: 0, y: 12 }}
+            labelOffset={{ x: 0, y: 24 }}
+            fondBlanc
           />
 
+          {/* Le rayon s'écrit SOUS son trait : au-dessus, il touchait le bord du cône. */}
           <DimensionLine
             from={{ x: cx, y: baseY }}
             to={{ x: cx + rx, y: baseY }}
             label={rayon}
             color="#0369a1"
-            labelOffset={{ x: -6, y: -12 }}
+            labelOffset={{ x: -2, y: 21 }}
+            fondBlanc
           />
         </>
       ) : null}
@@ -746,6 +764,7 @@ function drawPyramide({
           label={hauteur}
           color={highlightHeight ? colors.heightStroke : "#0369a1"}
           labelOffset={{ x: -3, y: 22 }}
+          fondBlanc
         />
       ) : null}
 

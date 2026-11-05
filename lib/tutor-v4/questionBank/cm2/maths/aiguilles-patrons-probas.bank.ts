@@ -144,7 +144,7 @@ function canon(c: Cases): string {
 const CANONS = new Set(PATRONS.map(canon));
 const estPatron = (c: Cases) => CANONS.has(canon(c));
 const NOMS = ["A", "B", "C", "D"];
-const expPatron = (nom: string) => exp("un patron de cube, c'est 6 carrés qui se referment en cube, sans face en double.", "on plie le dessin en pensée : pas de bloc de 4 carrés, pas plus de 4 carrés en ligne.", `seul ${nom} se referme sans trou ni superposition.`, `${nom} est un patron de cube.`);
+const expPatron = (nom: string) => exp("un patron de cube, c'est 6 carrés qui se referment en cube, sans face en double.", "on plie le dessin en pensée : pas de bloc de 4 carrés, pas plus de 4 carrés en ligne.", `${nom.startsWith("la ") ? "seule" : "seul"} ${nom} se referme sans trou ni superposition.`, `${nom} est un patron de cube.`);
 /** Les faces obtenues en roulant le cube sur le patron : pour trouver la face opposée. */
 function plier(c: Cases): Map<string, string> {
   const dep = c[0];
@@ -212,12 +212,12 @@ const solidePatron: TutorBankItemV4[] = [
     const i0 = entre(0, 5);
     const face = enFace(c, c[i0]);
     const ni = textes.find((t) => t.case[0] === face[0] && t.case[1] === face[1])!;
-    return qcmN(Number(ni.texte), nums.filter((n) => n !== Number(ni.texte) && n !== nums[i0]), exp("deux faces opposées ne se touchent pas.", "on plie le patron en pensée. Dans une ligne de trois carrés, les deux bouts sont face à face.", `la face ${nums[i0]} arrive en face de la face ${ni.texte}.`, `c'est la face ${ni.texte}.`), v(["On plie ce patron en cube.", "On replie ce patron.", "Ce patron devient un cube."], [`Quelle face est en face de la face ${nums[i0]} ?`, `Quelle face se retrouve en face de la ${nums[i0]} ?`, `Quel nombre est opposé au ${nums[i0]} ?`, `Quelle est la face opposée au ${nums[i0]} ?`]), dessin([{ cases: c, textes }]));
+    return qcmN(Number(ni.texte), nums.filter((n) => n !== Number(ni.texte) && n !== nums[i0]), exp("deux faces opposées ne se touchent pas.", "on plie le patron en pensée, carré après carré. Deux carrés séparés par un seul autre, en ligne, sont face à face.", `la face ${nums[i0]} arrive en face de la face ${ni.texte}.`, `c'est la face ${ni.texte}.`), v(["On plie ce patron en cube.", "On replie ce patron.", "Ce patron devient un cube."], [`Quelle face est en face de la face ${nums[i0]} ?`, `Quelle face se retrouve en face de la ${nums[i0]} ?`, `Quel nombre est opposé au ${nums[i0]} ?`, `Quelle est la face opposée au ${nums[i0]} ?`]), dessin([{ cases: c, textes }]));
   }),
   pa(2, "Un seul de ces dessins ne se referme pas.", () => {
     const l = melange([unNonPatron(), ...melange(PATRONS).slice(0, 3).map(tourne)]);
     const j = l.findIndex((c) => !estPatron(c));
-    return qcm(`Le dessin ${NOMS[j]}`, CHOIX("Le dessin", 4).filter((_, i) => i !== j), expPatron("le dessin qui reste").replace(/seul .+\./, `le dessin ${NOMS[j]} ne se referme pas.`).replace(/Conclusion : .+$/, `Conclusion : ${`le dessin ${NOMS[j]} n'est pas un patron de cube.`}`), v(PLIE, ["Lequel n'est pas un patron de cube ?", "Quel dessin ne peut pas se plier en cube ?", "Lequel ne donne pas un cube ?", "Quel dessin ne se referme pas ?", "Avec lequel ne peut-on pas faire un cube ?"]), dessin(l.map((cases, i) => ({ nom: NOMS[i], cases }))));
+    return qcm(`Le dessin ${NOMS[j]}`, CHOIX("Le dessin", 4).filter((_, i) => i !== j), expPatron("le dessin qui reste").replace(/seule? .+\./, `le dessin ${NOMS[j]} ne se referme pas.`).replace(/Conclusion : .+$/, `Conclusion : ${`le dessin ${NOMS[j]} n'est pas un patron de cube.`}`), v(PLIE, ["Lequel n'est pas un patron de cube ?", "Quel dessin ne peut pas se plier en cube ?", "Lequel ne donne pas un cube ?", "Quel dessin ne se referme pas ?", "Avec lequel ne peut-on pas faire un cube ?"]), dessin(l.map((cases, i) => ({ nom: NOMS[i], cases }))));
   }),
   pa(3, "Une seule découpe se plie en cube.", () => {
     const l = melange([unPatron(), ...melange(NON_PATRONS).slice(0, 2).map(tourne)]);

@@ -94,6 +94,17 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   const axisStartX = valueToX(min, min, max, leftPad, rightPad, width);
   const axisEndX = valueToX(max, min, max, leftPad, rightPad, width);
 
+  // ⛔ LES GRANDS NOMBRES (05/11/2026, captures à 375 px). « 66 000 000 » ne tient pas
+  // entre deux grands traits : élargir le dessin les faisait tomber à 5 px à l'écran.
+  // On écrit un nombre sur deux une rangée plus bas : tous restent lus, à bonne taille.
+  const largeurNombre = Math.max(...ticks.map((t) => formatTick(t).length)) * 8;
+  const ecartGraduations = ticks.length > 1 ? (axisEndX - axisStartX) / (ticks.length - 1) : Infinity;
+  const enDeuxRangees =
+    showValues &&
+    !points.some((p) => p.below) &&
+    largeurNombre + 4 > ecartGraduations &&
+    largeurNombre + 4 <= 2 * ecartGraduations;
+
   // ─── La place au-dessus de l'axe ────────────────────────────────────────────
   // ⛔ L'AXE NE SE CENTRE PAS (Frédéric, 20/08/2026, en relisant la fiche des
   // opérations sur les relatifs). Une étiquette de point se dessine 52 px
@@ -137,7 +148,10 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   const hautNecessaire = 56 + CRAN * (etages - 1);
   const axisY = Math.max(Math.round(height / 2), hautNecessaire);
   // L'écriture sous l'axe (`below`) se dessine à axisY + 46 : 20 px de plus.
-  const hauteurTotale = Math.max(height, axisY + BAS + (points.some((p) => p.below) ? 20 : 0));
+  const hauteurTotale = Math.max(
+    height,
+    axisY + BAS + (points.some((p) => p.below) ? 20 : 0) + (enDeuxRangees ? 18 : 0),
+  );
 
   return (
     <div className="mx-auto w-full max-w-[320px] rounded-xl border border-slate-200 bg-white p-2 shadow-sm">
@@ -222,7 +236,7 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
 
         {/* Graduations */}
         {showTicks &&
-          ticks.map((tick) => {
+          ticks.map((tick, rang) => {
             const x = valueToX(tick, min, max, leftPad, rightPad, width);
             const isZero = Math.abs(tick) < 1e-9;
 
@@ -243,7 +257,7 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
                 {showValues ? (
                   <text
                     x={x}
-                    y={axisY + 26}
+                    y={axisY + 26 + (enDeuxRangees && rang % 2 === 1 ? 18 : 0)}
                     textAnchor="middle"
                     fontSize="14"
                     fontWeight="800"

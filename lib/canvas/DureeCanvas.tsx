@@ -108,8 +108,13 @@ function Clock({
   const hourAngle = normalizeHour(time.hour) * 30 + time.minute * 0.5;
   const minuteAngle = time.minute * 6;
 
-  const hourEnd = polarToCartesian(cx, cy, radius * 0.5, hourAngle);
-  const minuteEnd = polarToCartesian(cx, cy, radius * 0.72, minuteAngle);
+  /* ⛔ LES AIGUILLES NE RECOUVRENT PLUS LES CHIFFRES (05/11/2026). Les chiffres
+     étaient à `radius - 30` et la grande aiguille allait jusqu'à `radius * 0.72` :
+     elle passait sur le chiffre qu'elle montrait. Les chiffres vont maintenant
+     près du bord (graduations courtes contre le cadran) et la grande aiguille
+     s'arrête juste avant eux. Sans chiffres, elle retrouve sa longueur. */
+  const hourEnd = polarToCartesian(cx, cy, radius * (showNumbers ? 0.38 : 0.5), hourAngle);
+  const minuteEnd = polarToCartesian(cx, cy, radius * (showNumbers ? 0.6 : 0.72), minuteAngle);
 
   return (
     <svg
@@ -161,11 +166,11 @@ function Clock({
       {showMinuteTicks &&
         Array.from({ length: 60 }, (_, i) => {
           const angle = i * 6;
-          const outer = polarToCartesian(cx, cy, radius - 6, angle);
+          const outer = polarToCartesian(cx, cy, radius - 3, angle);
           const inner = polarToCartesian(
             cx,
             cy,
-            i % 5 === 0 ? radius - 17 : radius - 11,
+            i % 5 === 0 ? radius - 9 : radius - 6,
             angle
           );
 
@@ -186,7 +191,7 @@ function Clock({
       {/* nombres */}
       {showNumbers &&
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((n) => {
-          const p = polarToCartesian(cx, cy, radius - 30, n * 30);
+          const p = polarToCartesian(cx, cy, radius - 20, n * 30);
 
           return (
             <text
@@ -229,13 +234,15 @@ function Clock({
 
       <circle cx={cx} cy={cy} r={8} fill={colors.accent} stroke={colors.bezel} strokeWidth={2} />
 
-      {/* petit repère 12 */}
-      <circle cx={cx} cy={cy - radius + 16} r={5} fill={colors.accent} />
+      {/* petit repère 12 : seulement sans chiffres, il tomberait sur le « 12 » */}
+      {showNumbers ? null : (
+        <circle cx={cx} cy={cy - radius + 16} r={5} fill={colors.accent} />
+      )}
 
       {label ? (
         <text
           x={cx}
-          y={210}
+          y={220}
           textAnchor="middle"
           fontSize="15"
           fontWeight="900"

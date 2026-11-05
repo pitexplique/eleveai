@@ -76,6 +76,8 @@ export default function DeuxAnglesCanvas({ figure }: { figure: CanvasFigure }) {
   const W = 150;
   const H = 130;
   const lignes = Math.ceil(angles.length / parLigne);
+  // Trois angles côte à côte rétrécissent le dessin : la lettre grossit pour rester lisible à 375 px.
+  const tailleNom = parLigne >= 3 ? 23 : 15;
   return (
     <svg viewBox={`0 0 ${parLigne * W} ${lignes * (H + 24)}`} width="100%" style={{ maxWidth: parLigne * W, display: "block", margin: "0 auto" }} role="img" aria-label="Des angles à comparer">
       {angles.map((a, i) => {
@@ -102,7 +104,7 @@ export default function DeuxAnglesCanvas({ figure }: { figure: CanvasFigure }) {
             <line x1={cx} y1={cy} x2={q1.x} y2={q1.y} stroke={TRAIT} strokeWidth={2} strokeLinecap="round" />
             <line x1={cx} y1={cy} x2={q2.x} y2={q2.y} stroke={TRAIT} strokeWidth={2} strokeLinecap="round" />
             {a.deg === 90 ? coinDroit(cx, cy, rot, c) : null}
-            {a.nom ? <text x={col * W + W / 2} y={lig * (H + 24) + H + 16} textAnchor="middle" fontSize={15} fontWeight={700} fill={c}>{a.nom}</text> : null}
+            {a.nom ? <text x={col * W + W / 2} y={lig * (H + 24) + H + (parLigne >= 3 ? 20 : 16)} textAnchor="middle" fontSize={tailleNom} fontWeight={700} fill={c}>{a.nom}</text> : null}
           </g>
         );
       })}

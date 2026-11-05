@@ -38,6 +38,33 @@ type MarkdownMathProps = {
 };
 
 /**
+ * ⛔ « ? » SEUL EN DÉBUT DE LIGNE, « 7 » PUIS « dm » À LA LIGNE (05/11/2026, captures
+ * à 375 px). Les banques écrivent une espace ordinaire : le téléphone coupait là,
+ * et le « ? » ou le « » » se retrouvait seul sur sa ligne. On pose donc des espaces
+ * insécables à l'affichage, jamais dans les formules ni dans le code, et sans toucher
+ * aux banques : leurs textes restent ceux que les correcteurs relisent.
+ */
+const NBSP = "\u00a0";
+const UNITE = "(?:km|dm|cm|mm|m|mL|cL|dL|L|kg|mg|g|min|ms|h|s|ans|pas)(?:[²³]|(?![\\wàâéèêîôû’'])|$)|[%€°]";
+const AVANT_UNITE = new RegExp(`(^|\\d) (?=${UNITE})`, "g");
+
+function espacesInsecables(texte: string): string {
+  return texte
+    .split(/(\$\$[\s\S]*?\$\$|\$[^$]*\$|`[^`]*`)/)
+    .map((morceau, i) =>
+      i % 2 === 1
+        ? morceau
+        : morceau
+            .replace(/ ([?!;:»%])/g, `${NBSP}$1`)
+            .replace(/« /g, `«${NBSP}`)
+            .replace(/(\d) (?=\d{3}(?!\d))/g, `$1${NBSP}`)
+            .replace(AVANT_UNITE, `$1${NBSP}`)
+            .replace(/\b(angle|point|dessin|segment|droite|place|découpe|horloge) ([A-Z0-9])(?![\wà-ÿ])/g, `$1${NBSP}$2`),
+    )
+    .join("");
+}
+
+/**
  * Rend du texte contenant éventuellement des formules LaTeX ($...$ ou $$...$$).
  *
  * Rétro-compatible : un texte sans `$` est rendu tel quel (texte simple).
@@ -54,7 +81,7 @@ export function MarkdownMath({ children, className, inline = false }: MarkdownMa
           inline ? <span>{children}</span> : <p className="mb-2 last:mb-0">{children}</p>,
       }}
     >
-      {children}
+      {espacesInsecables(children)}
     </ReactMarkdown>
   );
 

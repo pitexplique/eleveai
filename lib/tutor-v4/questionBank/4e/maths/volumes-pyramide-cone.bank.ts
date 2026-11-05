@@ -606,8 +606,8 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
 
     // ★3 : contenance en litres (1 dm³ = 1 L).
     tpl("volume_cone", 7, 3, "1 dm³ = 1 L.", () => {
-      const r = entre(1, 6);
-      const h = hauteurDivisible(r * r, 3, 15);
+      const r = entre(2, 6);
+      const h = hauteurDivisible(r * r, 3, 12);
       const a = (r * r * h) / 3;
       const V = Math.round(a * 314) / 100;
       const objet = un(["Un entonnoir industriel", "Un seau conique", "Une trémie de jardin", "Un bac à compost conique", "Une cuve conique", "Un réservoir conique"]);

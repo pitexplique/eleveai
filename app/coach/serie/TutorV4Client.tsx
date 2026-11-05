@@ -2728,8 +2728,10 @@ function extractConclusion(explanation: string): {
 } {
   const full = (explanation || "").trim();
   const m = full.match(/Conclusion\s*:\s*([\s\S]*)$/i);
-  const brief = m ? m[1].trim() : full;
-  return { brief, full, hasMore: full.length > 0 && brief !== full };
+  // Les banques écrivent « Conclusion : c'est 5. » : seule, la phrase garde sa majuscule.
+  const conclusion = m ? m[1].trim() : full;
+  const brief = conclusion.charAt(0).toUpperCase() + conclusion.slice(1);
+  return { brief, full, hasMore: full.length > 0 && conclusion !== full };
 }
 
 type CoachContext = {

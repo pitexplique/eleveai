@@ -15,14 +15,15 @@ const VOIR = ["Regarde la droite graduée.", "Voici une demi-droite graduée.", 
 /** Une portion de droite : 5 grands pas, chacun coupé en `p` petits pas. */
 function droite(grandPas: readonly number[], depart: (g: number) => number) {
   const g = un(grandPas);
-  const p = un([2, 4, 5, 10].filter((x) => Number.isInteger(g / x)));
+  // Les grands nombres prennent la place de l'axe : 50 petits traits y seraient à 4 px l'un de l'autre.
+  const p = un([2, 4, 5, 10].filter((x) => Number.isInteger(g / x) && (g < 100000 || x < 10)));
   const min = depart(g);
   return { g, p, petit: g / p, min, max: min + 5 * g };
 }
 const figure = (min: number, max: number, g: number, petit: number, points: { value: number; label: string }[]): CanvasFigure => ({
   kind: "number_line",
-  // Les grands nombres prennent de la place : la largeur suit, pour que leurs écritures ne se touchent pas.
-  size: { width: Math.max(420, Math.round(6.6 * (fr(max).length * 8.5 + 12))), height: 110 },
+  // Pas plus large pour les grands nombres : le canvas les écrit sur deux rangées (un dessin large les rapetissait à 5 px).
+  size: { width: fr(max).length >= 9 ? 380 : 420, height: 110 },
   min,
   max,
   step: g,
@@ -115,7 +116,7 @@ const entierDroite: TutorBankItemV4[] = [
   // ★2 : grands nombres (millions).
   dd(2, "Regarde bien l'écart entre deux nombres écrits : ici, on compte en grands nombres.", () => {
     const g = un([100000, 1000000, 10000000]);
-    const p = un([2, 4, 5, 10]);
+    const p = un([2, 4, 5]);
     const min = g * entre(2, 90);
     const d = { g, p, petit: g / p, min, max: min + 5 * g };
     const x = surPetite(d);
@@ -453,7 +454,7 @@ for (let a = 6; a <= 30; a++) for (let b = a + 1; b <= 30; b++) {
 }
 const communs = (a: number, b: number) => diviseurs(a).filter((x) => b % x === 0);
 const expDc = (a: number, b: number) =>
-  exp("un diviseur commun divise les deux nombres à la fois.", "on écrit les diviseurs de chacun, puis on garde ceux qui sont dans les deux listes.", `${a} : ${ecrit(diviseurs(a))}. ${b} : ${ecrit(diviseurs(b))}.`, `les diviseurs communs sont ${ecrit(communs(a, b))}.`);
+  exp("un diviseur commun divise les deux nombres à la fois.", "on écrit les diviseurs de chacun, puis on garde ceux qui sont dans les deux listes.", `${a} : ${ecrit(diviseurs(a))}. ${b} : ${ecrit(diviseurs(b))}.`, `les diviseurs communs sont ${ecrit(communs(a, b))} ; le plus grand est ${Math.max(...communs(a, b))}.`);
 const INTRO_C = ["", "Écris les deux listes.", "Il doit diviser les deux nombres.", "Compare les diviseurs."];
 const entierDiviseursCommuns: TutorBankItemV4[] = [
   dc(1, "Le nombre doit diviser les deux nombres.", () => {
