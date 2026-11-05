@@ -213,9 +213,9 @@ export const BELGIQUE_S2: ProgrammePays = {
       code: "4.1 Sv1", domaine: STA, texte: "Vocabulaire : population, échantillon, variable, modalité, effectif et effectif cumulé, fréquence et fréquence cumulée, étendue ; moyenne, mode, médiane (variable discrète).",
       couverture: "partielle", micros: [
         ...m("4e", "stat_effectif", "stat_frequence", "stat_moyenne", "stat_mediane", "stat_etendue", "proba_frequence_echantillon"),
-        ...m("seconde", "echantillon_fluctuation", "stat_polygone_cumule"),
+        ...m("seconde", "echantillon_fluctuation", "stat_polygone_cumule", "stat_lire_serie"),
         ...m("3e", "stat_effectifs_cumules"),
-      ], note: "L'échantillon est vu côté probabilités (4e, seconde) ; les cumulés sont couverts ; le mode d'une série n'a pas de micro (seulement la classe modale) et le vocabulaire population / variable / modalité n'est pas travaillé.",
+      ], note: "L'échantillon est vu côté probabilités (4e, seconde) ; les cumulés sont couverts ; le mode se lit comme « la valeur la plus fréquente », sans le mot ; le vocabulaire population / variable / modalité n'est pas travaillé.",
     },
     {
       code: "4.1 SF1", domaine: STA, texte: "Traiter, calculer, présenter : tableau de distribution (groupé ou non), effectif à partir de la fréquence, moyenne, mode, médiane ; diagrammes en bâtonnets, à bandes, circulaire ; diagramme par outil numérique.",
@@ -225,9 +225,9 @@ export const BELGIQUE_S2: ProgrammePays = {
         ...m("6e", "stat_construire_tableau"),
         ...m("premiere", "auto_stat_moyenne"),
         ...m("3e", "stat_classes_regrouper", "stat_moyenne_classes", "stat_effectifs_cumules"),
-        ...m("seconde", "stat_polygone_cumule"),
+        ...m("seconde", "stat_polygone_cumule", "stat_lire_serie"),
       ],
-      note: "Tableau groupé, moyenne par classes et cumulés couverts ; manquent le mode et la construction du diagramme circulaire.",
+      note: "Tableau groupé, moyenne par classes et cumulés couverts ; le mode se lit comme « la valeur la plus fréquente » ; manque la construction du diagramme circulaire.",
     },
     { code: "4.1 C1", domaine: STA, texte: "Lire et interpréter : modalité répondant à « au moins », « au plus » ; décrire dans plusieurs registres ; choisir un paramètre ou un support.", couverture: "complete", micros: [...m("4e", "stat_interpreter", "stat_lire_graphique", "stat_probleme"), ...m("5e", "stat_representation_choisir")] },
   ],

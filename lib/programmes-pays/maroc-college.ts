@@ -266,9 +266,10 @@ export const MAROC_2AC: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("4e", "puissance_calcul", "puissance_exposant_negatif", "puissance_dix", "puissance_notation_scientifique", "ordre_estimer"),
+        ...m("3e", "entier_puissance_calcul"),
         ...m("seconde", "puiss_produit_quotient"),
       ],
-      note: "Manquent (ab)ⁿ = aⁿbⁿ et (a/b)ⁿ = aⁿ/bⁿ : nos micros ne travaillent que les puissances de même base.",
+      note: "(ab)ⁿ = aⁿbⁿ n'est vu qu'en vrai ou faux (3e) ; (a/b)ⁿ = aⁿ/bⁿ manque.",
     },
     {
       code: "S1-3", domaine: AG,
