@@ -189,6 +189,7 @@
   - short : « 10⁵VS2 » collés (VS descendu), trait parasite dans les gants, pointillés qui barraient « Écrits en entier », question cachée sous les cartes (bug de ligne de base corrigé), réponse qui touchait Ti-Margo (cartes réduites, « Réponse B » porté par la carte allumée), « Qui gagne ? » sur le VS et « 2 000 000 » au bord de la carte.
 - Soucis restants : aucun défaut visuel. Rien de commité ; pas de miniature, de manifeste ni de R2.
 - Contrôle de la session principale (05/11, 1 h) : planches paysage + short regardées. Paysage, écran « La règle » : le cercle orange autour de l'exposant n de « a × 10ⁿ » mordait sur le « 0 » → remplacé par une flèche orange qui pointe l'exposant ; paysage RE-RENDUE en HD (audit 60 im/s = 0, `verifier-bords-video.py` = 0 instants). Short : rien à corriger.
+- Correction du 05/11, 2 h 55 (règle voix = écrit) : short, écran de réponse : « Réponse B : » puis « 1 000 contre 700. » sont maintenant ÉCRITS au mot ; 4 lignes sur des lignes de base fixes, chiffres sur la ligne de base, Ti-Margo libre. Short RE-RENDU en HD (audit 0, `verifier-bords-video.py` = 0 instants) ; durée et question inchangées.
 
 ## Épisode 10 « enchainer » — PAYSAGE 2de (orange) et SHORT 2de (blanche) (05/11)
 - Fichiers : `manim/scripts/4e/puissance_enchainer.py` (base `PuissanceEnchainerBase` + `PuissanceEnchainer2de`), `puissance_enchainer_short.py` (`PuissanceEnchainerShort`), marques `puissance_enchainer[_short]_marques.json` (+ `.cues.tsv`), WAV `public/sons/2de-puissance-enchainer[-short]/` (débit −6). Outils importés sans modification : `6e/prop_commun.py`, `OutilsNotation` / `puiss` / `T` de `puissance_notation_scientifique.py`, `fracm` / `rangee` / `expo2` / `eg` de `puissance_produit_quotient.py`. Voix : AUCUN changement.
@@ -219,3 +220,54 @@
 - Contrôles : dry runs AUDIT=1 BORDS=1 à 60 im/s : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD, 0 ligne trop large (paysage et short). Restent seulement : « TARD 5 » (chiffre du compte à rebours), les « TARD » du rappel −1 − 12 = −13 écrit à côté (déjà dit) et « 974 » de l'écran de fin commun. `verifier-bords-video.py` : « 0 instants qui touchent un bord » sur les deux mp4.
 - Planches : deux passes basse déf + planches HD (12 images paysage, 8 short, zooms sur les questions, la correction, « Ce que tu as appris »). Corrigé avant le rendu HD : textes plus larges que prévu (check-list, planchette, but « On veut » qui touchait le bord droit), lignes du calcul qui descendaient sous la marge du bas (interlignes resserrés), pilote cachée par la phrase du bas, casquette trop basse, étiquette « 12 vers la gauche » sur l'arc puis collée à « −1 − 12 », exposant « −2−4 » qui perdait son premier « − », « −13 » du but mal posé, règles du bilan trop petites, chiffres « 11 », « −13 », « −2 », « 4 » posés un peu avant la voix, retards de la correction (coche jouée avec la dernière pièce) ; short : « ? » géant de l'accroche, numéros ② collés aux lignes (lignes bornées à 2,85 et décalées), explication de la question qui touchait Ti-Margo (« Réponse B : 10. » porté par la carte B allumée, 3 lignes à taille unique), « Réponds en commentaire ! » borné à 85 % de la carte.
 - Soucis restants : aucun défaut visuel. Rien de commité ; pas de miniature, manifeste ni R2.
+- Correction du 05/11, 2 h 55 (règle voix = écrit) : short, écran de réponse : « Réponse B : 10. » est maintenant ÉCRIT au mot ; cartes réduites à 82 %, 4 lignes sur des lignes de base fixes, Ti-Margo libre. Short RE-RENDU en HD (audit 0, `verifier-bords-video.py` = 0 instants) ; durée et question inchangées.
+
+## Épisode 09 « puissance-puissance » — PAYSAGE 2de (verte) (05/11)
+- Fichiers : `manim/scripts/4e/puissance_puissance_puissance.py` (base `PuissancePuissancePuissanceBase` + `PuissancePuissancePuissance2de`), marques `puissance_puissance_puissance_marques.json` (+ `.cues.tsv`), WAV `public/sons/2de-puissance-puissance-puissance/` (débit −6). Pas de short (`puissances-parenthese` gardé). Outils importés sans modification : `6e/prop_commun.py`, `OutilsNotation` / `T` / `puiss` / `ligne_base` / `sans_audit` de l'épisode 05, `barre` / `eg` / `expo2` / `facteurs` / `rangee` / `poser_idx` / `accolade` de l'épisode 08. Voix : AUCUN changement.
+- Marques : les cues doublées (« 2 puissance » ×2, « 4 fois » ×4, « 10 000 mètres » ×3) lues PAR PAQUETS avec une copie corrigée de `cues2marques.py` dans mon dossier temporaire : chaque mot répété garde son instant ; script commun non modifié.
+- Sortie : `manim/sorties/seconde/maths/puissances/09-puissance-puissance/eleveai-maths-seconde-puissance-puissance-puissance.mp4` (3:30, 1920 × 1080, avec son). Media : `manim/scripts/4e/media-puiss-09-seconde`.
+- Ceinture : VERTE. Identité « Maths 2de — EleveAI ».
+- Micro : 2de `puiss_puissance_puissance` (notion `puissances_2de`). Centres : `art-design`, `jeux-defis`. Métier : architecte (place carrée).
+- Dessins :
+  - 01 l'architecte (casque, équerre) et la place vue d'en haut (dalles, fontaine, arbres) ; la cote 10² mètres = 100 mètres, les dalles qui verdissent rangée par rangée pour l'aire, aire = côté², (10²)² ;
+  - 02 les deux cotes 10² de la place deviennent 10² × 10² ; leurs exposants 2 + 2 = 4 ; 10⁴ = 10 000 mètres carrés encadré, la place se remplit ;
+  - 03 (2³)² : le paquet « 2 × 2 × 2 » se recopie 2 fois (grille 3 × 2), compteur 1…6, 2⁶ ; accolades « 3 » et « deux fois », 3 × 2 = 6 ; (aᵐ)ⁿ = aᵐˣⁿ encadré ;
+  - 04 deux cartes : 2³ × 2² (les facteurs se rejoignent, 1…5, on additionne, 2⁵) contre (2³)² (deux paquets, 1…6, on multiplie, 2⁶ ≠ 2⁵ en rouge : le piège) ;
+  - 05 (10⁻³)² : droite des exposants de 0 à −6, deux sauts de −3, −3 × 2 = −6, 10⁻⁶ encadré ;
+  - 06 défi 4³ = 4 × 4 × 4, le 4 devient un carré de 2 × 2 points (4 = 2²) ; 06b 4³ = (2²)³, trois paquets « 2 × 2 », 2 × 3 = 6, 2⁶ = 64, vérification 4 × 4 × 4 = 64.
+- Questions (t mesuré au rendu HD = début de l'écran « Question ! ») :
+```json
+[{"t": "00:58", "question": "(5⁴)³ ?", "choix": ["5⁷", "5¹²", "15⁴"], "reponse": 1, "explication": "Puissance d'une puissance : 4 × 3 = 12. 5⁷, c'est la règle du produit : le piège."},
+ {"t": "02:02", "question": "(3⁻²)⁻¹ ?", "choix": ["3²", "3⁻³", "3⁻²"], "reponse": 0, "explication": "(−2) × (−1) = +2."}]
+```
+- Chapitres (ECRAN du rendu HD) : 00:00 La puissance d'une puissance · 00:09 L'architecte et la place carrée · 00:25 (10²)² = 10⁴ · 00:37 (2³)² = 2⁶ : la règle · 00:58 Question : (5⁴)³ · 01:32 Ne confonds pas les deux règles · 01:50 Avec un exposant négatif · 02:02 Question : (3⁻²)⁻¹ · 02:30 À toi de jouer · 02:44 Correction · 03:04 Ce que tu as appris · 03:23 Fin.
+- Contrôles : dry run AUDIT=1 BORDS=1 (dernier, avant le rendu final) : 0 AUDIT-AVANCE, 0 AUDIT-TARD, 0 RETARD, 0 BORD (restent « TARD 5 » = chiffre du compte à rebours, « 974 » de l'écran de fin). `verifier-bords-video.py` : « 0 instants qui touchent un bord ».
+- Planches : trois passes basse déf puis trois rendus HD (le premier et le deuxième refaits pour des défauts mineurs). Corrigé : texte qui sortait du cadre et cadre au bord (01, 02), « 3 » de l'accolade collé à la formule (03), explication trop large pour la colonne (question 1, répartie en lignes centrées de même taille, interligne régulier, loin de Ti-Margo ; le piège écrit à côté du 5⁷), titre qui débordait de sa carte, compteurs sur les cadres, résultats collés au bas de la carte, « ≠ » collé (04), chiffres en vol qui traversaient d'autres textes (03, 04, 05, 05q), 64 et 10 000 encadrés collés au « = », compteurs sur les cadres (06b), formules du bilan sur les phrases, interlignes du bilan (07), visage de l'architecte caché par son casque, « 1 0 » trop écarté à la taille 72 ou 80 (passé à 76). Planche HD finale : rien qui chevauche ni ne déborde.
+- Soucis restants : aucun défaut visuel. Rien de commité ; pas de miniature, manifeste ni R2.
+
+## Épisode 07 « calcul » — PAYSAGE 4e + 3e (verte) et SHORT 4e (blanche) (05/11)
+- Reprise d'un agent figé à 23 h 55 (scripts, marques et WAV déjà faits). Fichiers : `manim/scripts/4e/puissance_calcul.py` (`PuissanceCalculBase` + `PuissanceCalcul4e`, `PuissanceCalcul3e`), `puissance_calcul_short.py` (`PuissanceCalculShort`), marques `puissance_calcul_marques.json` / `…_short_marques.json` (+ `.cues.tsv`, convertis PAR PAIRES pour garder les mots répétés), WAV `public/sons/4e-puissance-calcul[-short]/`. Aucun module commun modifié. Voix : AUCUN changement.
+- Sorties : `manim/sorties/4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul.mp4` (1920 × 1080, 3:50), `manim/sorties/3e/maths/puissances/07-calcul/eleveai-maths-3e-puissance-calcul.mp4` (1920 × 1080, 3:50), `manim/sorties/4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.mp4` (1080 × 1920, 0:58). Media : `manim/scripts/4e/media-puiss-07-4e`, `media-puiss-07-3e`, `media-puiss-07-short`.
+- Ceintures : paysages 4e et 3e VERTES ; short BLANCHE (échelle entière sous le titre).
+- Micros : 4e `puissance_calcul`, 3e `entier_puissance_calcul`.
+- Centres : paysage `animaux`, `photo`, `espace` ; short `jeux-defis`.
+- Dessins de la paysage : un apiculteur (combinaison, voile) devant 100 ruches qui arrivent rangée par rangée, une ruche agrandie et ses abeilles ; 10² × 10⁴ se déplie en six facteurs 10 comptés un à un, le 6 du compteur vole vers 10⁶. Un photographe, sa carte mémoire et une photo : 10⁹ ÷ 10⁶ en fraction dépliée, six facteurs barrés, les trois restants en vert → 10³ = 1 000 photos. Les nombres devant : 3 × 10² × 2 × 10⁴ se range en deux cadres (bleu 3 × 2, orange 10² × 10⁴), des flèches mènent à 6 et 10⁶. L'exposant négatif : 10⁵ × 10⁻², deux facteurs barrés. Le défi et la correction : une astrophysicienne, le Soleil et son rayon, un photon qui file (3 × 10⁸ km).
+- Short « Le jeu des zéros » : en haut, 100 et 10 000, dont les zéros orange glissent en une rangée 1 000 000 ; en bas, au même instant, l'exposant s'allume et 2 + 4 = 6 se remplit, puis = 10⁶. Accroche : 10⁸ barré, « Perdu ! ». Question-pause de 3 s, puis 10⁷ ÷ 10³ à répondre en commentaire, puis la fin standard.
+- Paysages 4e et 3e, questions (t mesuré sur le rendu HD, identique pour les deux) :
+```json
+[{"t": "00:37", "question": "Combien font 10³ × 10⁵ ?", "choix": ["10¹⁵", "10⁸", "100⁸"], "reponse": 1, "explication": "On additionne les exposants : 3 + 5 = 8. 15, c'est 3 × 5 : le piège."},
+ {"t": "01:55", "question": "4 × 10³ × 2 × 10⁵ ?", "choix": ["8 × 10⁸", "6 × 10⁸", "8 × 10¹⁵"], "reponse": 0, "explication": "4 × 2 = 8. Et 10³ × 10⁵ = 10⁸."}]
+```
+- Short :
+```json
+[{"t": "00:18", "question": "10⁴ × 10⁴ ?", "choix": ["10¹⁶", "10⁸", "20⁸"], "reponse": 1, "explication": "4 zéros + 4 zéros = 8 zéros."}]
+```
+- Chapitres des paysages (lignes ECRAN du rendu HD) : 00:00 Calculer avec des puissances de 10 · 00:07 L'apiculteur et ses 100 ruches · 00:16 Le produit : 10² × 10⁴ · 00:37 Question : 10³ × 10⁵ · 01:09 Le quotient : la carte mémoire · 01:36 Avec des nombres devant · 01:55 Question : 4 × 10³ × 2 × 10⁵ · 02:30 Avec un exposant négatif · 02:43 À toi de jouer · 03:03 Correction · 03:21 Ce que tu as appris · 03:42 Fin.
+- Contrôles : dry runs puis rendus avec AUDIT=1 BORDS=1 : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD sur les trois vidéos. `verifier-bords-video.py` : « 0 instants qui touchent un bord » sur les trois mp4.
+- Planches : quatre passes basse déf + planches HD (14 images paysage, 12 short, zooms sur les questions, la correction, les insistances image par image). Corrigé et re-rendu :
+  - exposant qui touchait le « 0 » aux grandes tailles (écart base-exposant proportionnel à la police) ;
+  - « On additionne les exposants : » contre le bord gauche, cadre de la question 1 trop large ;
+  - exposant qui débordait un instant de son cadre en s'agrandissant (2 + 4 = 6, 10⁸ de la question 1, 10³ de l'écran négatif, 3 × 10⁸ km) : le cadre grandit avec son contenu, ou l'insistance vient avant le cadre ;
+  - « octets » et « de place » pas sur la même ligne de base ; « : » et « = » collés aux cadres ; cadre de 3 collé au « × » ; « 1 000 » serré dans son cadre ; point final détaché (« 10⁸ . ») ;
+  - short : réponse en deux tailles de police (une seule maintenant), « = 8 zéros » qui touchait Ti-Margo, rangées 100 / × 10 000 / 1 000 000 serrées, lignes qui touchaient les bords de la carte.
+- Soucis restants : aucun défaut visuel. Rien de commité ; pas de miniature, de manifeste ni de R2.

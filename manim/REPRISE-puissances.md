@@ -10,11 +10,11 @@ Lire d'abord `manim/prompt-session-puissances.md` (découpage, ordre de travail)
 | 3 | dix | 4e/3e jaune, short blanche | VALIDÉE | ✅ FINI, revu |
 | 4 | zero-negatif | 4e orange / 2de jaune (écran 04b 2de seulement), short blanche | VALIDÉE | ✅ FINI (4e, seconde, short), revu |
 | 5 | notation-scientifique | 4e/3e/2de (4e verte, 3e/2de jaune), short blanche | VALIDÉE | ✅ FINI (4e, 3e, seconde, short), revu ; short corrigé (marges) et re-rendu 04/11 18 h |
-| 6 | comparer | 4e verte, short blanche | VALIDÉE | ✅ FINI (4e, short), revu ; paysage corrigée (flèche sur l'exposant) et re-rendue 05/11 1 h |
-| 7 | calcul | 4e/3e verte, short blanche | VALIDÉE | 1er agent figé à 23 h 55 (scripts écrits, aucun HD) ; agent de reprise lancé 05/11 2 h |
+| 6 | comparer | 4e verte, short blanche | VALIDÉE | ✅ FINI (4e, short), revu ; paysage corrigée 05/11 1 h ; short corrigé (« Réponse B : » écrit au mot) et re-rendu 05/11 2 h 55 |
+| 7 | calcul | 4e/3e verte, short blanche | VALIDÉE | revu 05/11 3 h ; 3 corrections (interlignes du bilan, « 300 » à la même taille, insistance du short) ; 3 RE-RENDUS HD lancés à 3 h 12 (short, 4e, 3e) : vérifier mp4 datés après 3 h 12 + bords |
 | 8 | produit-quotient | 2de verte, short blanche (voix 2de-puissance-…) | VALIDÉE | ✅ FINI (seconde, short), revu ; corrigé (ligne du short dans la carte, une taille par explication) et re-rendu 05/11 1 h 20 |
-| 9 | puissance-puissance | 2de verte, PAYSAGE SEULE (voix 2de-puissance-puissance-puissance) | VALIDÉE | agent lancé 05/11 0 h 57 |
-| 10 | enchainer | 2de orange, short blanche (voix 2de-puissance-enchainer) | VALIDÉE | ✅ FINI (seconde, short), revu 05/11 2 h : rien à corriger (« Réponse B » du short portée par la carte allumée, comme ép. 6) |
+| 9 | puissance-puissance | 2de verte, PAYSAGE SEULE (voix 2de-puissance-puissance-puissance) | VALIDÉE | ✅ FINI (seconde), revu 05/11 3 h : rien à corriger |
+| 10 | enchainer | 2de orange, short blanche (voix 2de-puissance-enchainer) | VALIDÉE | ✅ FINI (seconde, short), revu ; short corrigé (« Réponse B : 10. » écrit au mot, cartes à 82 %) et re-rendu 05/11 2 h 55 |
 | 11 → 13 | | | à écrire | — |
 
 Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des agents : `manim/rapports-puissances.md`.
@@ -24,6 +24,10 @@ Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des age
 - EN COURS, lancés par la session qui passe la main : ép. 7 (agent de reprise, le 1er s'était figé à 23 h 55 ; 4e + short rendus vers 2 h 33, reste la 3e) et ép. 9 (rendu HD en attente du verrou depuis 1 h 47). Fini = section dans `manim/rapports-puissances.md` + mp4 + verrou libre. Si plus aucun fichier ne bouge pendant 30 min, l'agent est figé : relancer depuis ses scripts, avec la même consigne.
 - Reste : planches de 7 et 9 regardées (défauts repérés jusqu'ici : texte collé au bord d'une carte, deux tailles dans une explication, cercle qui mord sur la base d'un exposant) ; aperçu port 3900 de la DERNIÈRE vidéo, en pause ; commit par chemin de 7 et 9 (scripts + `_marques.json` ; ni `.cues.tsv`, ni `media-puiss-*`, ni mp4, ni WAV).
 - Avec Frédéric, le matin : voix 11, 12, 13, puis passe finale.
+
+## État au 05/11, 3 h 15 (session de contrôle 7 et 9, à 63 % de contexte)
+- Ép. 7 : si les mp4 de `07-calcul` (4e, 3e, short) sont datés d'après 3 h 12 et que le verrou est libre, regarder le bilan (fin de paysage, vers 3:30), « 300 millions » (vers 3:18) et la réponse du short (vers 0:44), `verifier-bords-video.py` = 0 ; ajouter une ligne au rapport de l'ép. 7. Sinon relancer depuis les scripts (commandes en tête de `puissance_calcul.py`).
+- Avec Frédéric : voix 11, 12, 13 à écrire et valider une par une, puis passe finale (miniatures, manifeste SANS le réécrire, R2, coach, bilans). Rien de poussé.
 
 ## Reste à faire
 - Contrôler chaque rendu soi-même (planche ffmpeg de 6 images), corriger tout défaut mineur.
