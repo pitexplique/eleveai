@@ -184,9 +184,8 @@ export const ETATS_UNIS_GRADE_8: ProgrammePays = {
     {
       code: "8.G.C.9", domaine: "Géométrie",
       texte: "Formules du volume du cône, du cylindre et de la boule ; problèmes.",
-      couverture: "partielle",
-      micros: m("3e", "volume_cylindre", "volume_boule"),
-      note: "Pas de micro « volume d'un cône » : même trou qu'en Ontario E1.6, au Maroc et en 3e française.",
+      couverture: "complete",
+      micros: m("3e", "volume_cylindre", "volume_boule", "volume_cone"),
     },
 
     // ── Statistics & Probability ────────────────────────────────────────────

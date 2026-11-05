@@ -175,8 +175,8 @@ export const ONTARIO_9E_MTH1W: ProgrammePays = {
       code: "C4.2", domaine: "Algèbre",
       texte: "Tracer x = k, y = k, x + y = k, x – y = k, ax + by = k, xy = k et les inéquations associées (régions).",
       couverture: "partielle",
-      micros: m("seconde", "droite_equation_cartesienne", "reference_inverse"),
-      note: "Manquent les droites x = k / y = k comme notion, et les RÉGIONS du plan (inéquations à deux inconnues).",
+      micros: m("seconde", "droite_equation_cartesienne", "reference_inverse", "demi_plan_representer"),
+      note: "Les régions du plan sont couvertes ; manquent les droites x = k / y = k comme notion.",
     },
     {
       code: "C4.3", domaine: "Algèbre",
@@ -255,8 +255,9 @@ export const ONTARIO_9E_MTH1W: ProgrammePays = {
         ...m("6e", "cercle_vocabulaire", "circonscrit_construire"),
         ...m("5e", "triangle_somme_angle", "angle_paralleles"),
         ...m("4e", "triangle_semblable"),
+        ...m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"),
       ],
-      note: "Les propriétés ontariennes du cercle (angle inscrit, médiatrice d'une corde) sont peu travaillées chez nous.",
+      note: "Angle inscrit couvert ; la médiatrice d'une corde est peu travaillée chez nous.",
     },
     {
       code: "E1.3", domaine: "Géométrie et mesure",
@@ -268,9 +269,11 @@ export const ONTARIO_9E_MTH1W: ProgrammePays = {
     {
       code: "E1.4", domaine: "Géométrie et mesure",
       texte: "Effet d'un changement de dimensions sur périmètre, circonférence, aire de surface et volume.",
-      couverture: "partielle",
-      micros: [...m("4e", "agrandissement_aire", "agrandissement_volume"), ...m("3e", "sym_transformation_effet", "volume_agrandissement_reduction")],
-      note: "L'aire de la surface d'un solide (aire totale d'un prisme, d'un cylindre) n'a pas de micro.",
+      couverture: "complete",
+      micros: [
+        ...m("4e", "agrandissement_aire", "agrandissement_volume"),
+        ...m("3e", "sym_transformation_effet", "volume_agrandissement_reduction", "aire_prisme_droit", "aire_cylindre", "aire_agrandissement_reduction"),
+      ],
     },
     {
       code: "E1.5", domaine: "Géométrie et mesure",
@@ -281,9 +284,8 @@ export const ONTARIO_9E_MTH1W: ProgrammePays = {
     {
       code: "E1.6", domaine: "Géométrie et mesure",
       texte: "Relation entre volumes de prismes et de pyramides, de cylindres et de cônes.",
-      couverture: "partielle",
-      micros: m("4e", "volume_prisme", "volume_cylindre"),
-      note: "Pas de micro « volume d'une pyramide ou d'un cône » (V = B × h ÷ 3) — trou AUSSI pour le programme français de 3e.",
+      couverture: "complete",
+      micros: [...m("4e", "volume_prisme", "volume_cylindre"), ...m("3e", "volume_pyramide", "volume_cone")],
     },
 
     // ── F. Littératie financière ────────────────────────────────────────────

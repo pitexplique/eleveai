@@ -123,13 +123,12 @@ export const COTE_DIVOIRE_6E: ProgrammePays = {
     {
       code: "C3-L5", domaine: GPLAN,
       texte: "Triangles : rectangle, isocèle, équilatéral ; hauteur, médiane, médiatrice d'un côté ; construire (compas, règle) ; périmètre et aire.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("6e", "triangle_type_cote", "triangle_type_angle", "mediatrice_construire"),
         ...m("5e", "triangle_construire", "aire_triangle"),
-        ...m("4e", "triangle_droites", "aire_perimetre_triangle"),
+        ...m("4e", "triangle_droites", "aire_perimetre_triangle", "mediane_triangle"),
       ],
-      note: "La médiane d'un triangle n'a pas de micro (triangle_droites : hauteur et médiatrice).",
     },
     {
       code: "C3-L6", domaine: GPLAN,
@@ -143,12 +142,12 @@ export const COTE_DIVOIRE_6E: ProgrammePays = {
     {
       code: "C3-L7", domaine: GESP,
       texte: "Pavés droits et cylindres droits : sommets, arêtes, faces, patrons ; aire d'une face, aire latérale, aire totale ; volume du pavé, du cube, du cylindre.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("cm2", "solide_sommet_arete_face", "solide_patron"),
         ...m("5e", "volume_pave", "volume_cylindre"),
+        ...m("3e", "aire_prisme_droit", "aire_cylindre"),
       ],
-      note: "Pas de micro « aire latérale / aire totale » d'un pavé ou d'un cylindre.",
     },
     {
       code: "C3-L8", domaine: TRANS,
@@ -187,10 +186,10 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
       texte: "Fractions : différence de deux fractions, produit d'une fraction par un entier, produit de deux fractions, puissance entière d'une fraction ; encadrer une fraction par deux décimaux consécutifs de même ordre.",
       couverture: "partielle",
       micros: [
-        ...m("5e", "fraction_additionner", "fraction_multiplier"),
+        ...m("5e", "fraction_additionner", "fraction_multiplier", "approx_encadrer_quotient"),
         ...m("6e", "fraction_multiplier_entier"),
       ],
-      note: "Manquent la puissance d'une fraction ((a/b)ⁿ = aⁿ/bⁿ) et l'encadrement décimal d'une fraction.",
+      note: "L'encadrement d'un quotient est couvert ; manque la puissance d'une fraction ((a/b)ⁿ = aⁿ/bⁿ).",
     },
     {
       code: "C2-L1", domaine: DONN,
@@ -234,9 +233,11 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
     {
       code: "C3-L4", domaine: GPLAN,
       texte: "Cercles : point intérieur, sur, extérieur ; disque (AM ≤ r) ; cercle circonscrit à un triangle (cas général et triangle rectangle).",
-      couverture: "partielle",
-      micros: m("6e", "cercle_ensemble", "cercle_distance", "circonscrit_concourantes", "circonscrit_construire"),
-      note: "Le cas du triangle rectangle (centre = milieu de l'hypoténuse) n'a pas de micro dédiée.",
+      couverture: "complete",
+      micros: [
+        ...m("6e", "cercle_ensemble", "cercle_distance", "circonscrit_concourantes", "circonscrit_construire"),
+        ...m("3e", "triangle_demi_cercle"),
+      ],
     },
     {
       code: "C3-L5", domaine: GPLAN,
@@ -251,12 +252,14 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
     {
       code: "C3-L6", domaine: GESP,
       texte: "Prisme droit : faces latérales, bases, arêtes, hauteur, patron ; aire latérale, aire totale, volume.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("5e", "volume_prisme"),
         ...m("6e", "vision_representation"),
+        ...m("cm2", "solide_patron"),
+        ...m("3e", "aire_prisme_droit"),
       ],
-      note: "Pas de micro « aire latérale / aire totale » d'un prisme.",
+      note: "Patrons : on les reconnaît, on ne les trace pas.",
     },
     {
       code: "C3-L7", domaine: TRANS,
@@ -287,13 +290,13 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
     {
       code: "C1-L2", domaine: CALC,
       texte: "Nombres rationnels : ℚ, décimal en fraction ; somme, différence, produit, quotient, inverse ; PGCD (simplifier, diviseurs communs) et PPCM (même dénominateur) ; valeurs approchées par défaut et par excès, troncature, arrondi ; encadrement.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "fraction_rationnel", "fraction_additionner", "fraction_multiplier", "fraction_inverse", "fraction_diviser", "fraction_simplifier"),
         ...m("3e", "entier_pgcd_ppcm"),
         ...m("6e", "decimal_arrondir"),
+        ...m("5e", "approx_encadrer_quotient", "approx_defaut_exces", "approx_troncature_arrondi"),
       ],
-      note: "Manquent troncature et valeurs approchées par défaut / par excès d'un rationnel.",
     },
     {
       code: "C1-L3", domaine: CALC,
@@ -328,8 +331,8 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       code: "C3-L1", domaine: GPLAN,
       texte: "Angles : angle au centre, arcs et cordes de même longueur, longueur d'un arc ; angles alternes-internes et correspondants (propriétés, parallélisme).",
       couverture: "partielle",
-      micros: m("5e", "angle_paralleles"),
-      note: "Manquent angle au centre, cordes et longueur d'un arc.",
+      micros: [...m("5e", "angle_paralleles"), ...m("3e", "angle_inscrit_centre")],
+      note: "L'angle au centre est couvert ; manquent les cordes et la longueur d'un arc.",
     },
     {
       code: "C3-L2", domaine: GPLAN,
@@ -338,15 +341,16 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       micros: [
         ...m("6e", "bissectrice_definition", "bissectrice_construire", "bissectrice_probleme"),
         ...m("seconde", "geo_projete_orthogonal"),
+        ...m("4e", "bissectrice_equidistance"),
       ],
-      note: "La distance d'un point à une droite (par le projeté orthogonal) est en seconde chez nous ; manquent la distance de deux parallèles et « bissectrice = points équidistants des côtés ».",
+      note: "La bissectrice par l'équidistance est couverte ; la distance d'un point à une droite (projeté orthogonal) est en seconde chez nous ; manque la distance de deux parallèles.",
     },
     {
       code: "C3-L3", domaine: GPLAN,
       texte: "Cercles et triangles : tangente à un cercle, positions relatives cercle-droite ; droite des milieux ; hauteurs, médianes, bissectrices ; centre de gravité, orthocentre, cercle inscrit.",
-      couverture: "absente",
-      micros: [],
-      note: "Trou : tangente, droite des milieux, points remarquables (déjà relevé pour le Maroc 2AC). triangle_droites (4e) ne couvre que hauteur et médiatrice.",
+      couverture: "partielle",
+      micros: m("4e", "mediane_triangle", "centre_gravite", "orthocentre", "cercle_inscrit", "bissectrice_equidistance"),
+      note: "Points remarquables couverts ; manquent la tangente et la droite des milieux.",
     },
     {
       code: "C3-L4", domaine: GPLAN,
@@ -424,9 +428,8 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
     {
       code: "C1-L5", domaine: CALC,
       texte: "Équations et inéquations du premier degré dans ℝ × ℝ : couples solutions, systèmes de deux équations (substitution, combinaison, graphique) ; résolution graphique d'une inéquation ou d'un système d'inéquations (demi-plans).",
-      couverture: "partielle",
-      micros: m("seconde", "droite_systeme", "droite_intersection"),
-      note: "Les demi-plans (inéquations à deux inconnues) n'ont pas de micro (trou déjà vu au Sénégal et au Québec).",
+      couverture: "complete",
+      micros: m("seconde", "droite_systeme", "droite_intersection", "demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"),
     },
     {
       code: "C1-L6", domaine: FONC,
@@ -437,12 +440,14 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
     {
       code: "C2-L1", domaine: DONN,
       texte: "Statistique : classes de même amplitude, classe modale, effectifs et fréquences cumulés croissants, polygone des effectifs cumulés, médiane (discrète et continue, lecture graphique), moyenne d'une série en classes, diagramme circulaire.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane", "stat_interpreter", "stat_lire_graphique"),
+        ...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane", "stat_interpreter", "stat_lire_graphique", "stat_classes_regrouper", "stat_classe_modale_centre", "stat_moyenne_classes", "stat_effectifs_cumules"),
         ...m("6e", "stat_donnee_lire_circulaire"),
+        ...m("4e", "stat_histogramme_lire"),
+        ...m("seconde", "stat_histogramme", "stat_polygone_cumule", "stat_mediane_estimee"),
+        ...m("premiere", "auto_stat_moyenne"),
       ],
-      note: "Lire un histogramme et cumuler des classes : stat_lire_graphique (3e) ; médiane par les effectifs cumulés : stat_mediane (3e). Manquent classe modale, moyenne d'une série en classes, polygone des effectifs cumulés et médiane lue sur ce polygone.",
     },
     {
       code: "C3-L1", domaine: GPLAN,
@@ -463,9 +468,8 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
     {
       code: "C3-L3", domaine: GPLAN,
       texte: "Angles inscrits : arc intercepté, angle inscrit et angle au centre associé, deux angles inscrits interceptant le même arc.",
-      couverture: "absente",
-      micros: [],
-      note: "Trou : angles inscrits (retirés du programme français, présents au Sénégal et au Maroc).",
+      couverture: "complete",
+      micros: m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"),
     },
     {
       code: "C3-L4", domaine: GPLAN,
@@ -496,8 +500,8 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       code: "C3-L7", domaine: GESP,
       texte: "Pyramides et cônes : pyramide régulière, cône de révolution, patrons, apothème, angle de développement ; volume, aire latérale, aire totale ; troncs ; réduction (coefficient, aires, volumes).",
       couverture: "partielle",
-      micros: m("3e", "section_cone_pyramide", "aire_agrandissement_reduction", "volume_agrandissement_reduction"),
-      note: "Trou commun : volume et aire latérale de la pyramide et du cône, angle de développement, troncs.",
+      micros: m("3e", "section_cone_pyramide", "aire_agrandissement_reduction", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "volume_pyramide_cone_reduction", "aire_pyramide_cone"),
+      note: "Volumes, aires et réduction couverts ; restent l'angle de développement et les troncs.",
     },
   ],
 };

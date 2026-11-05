@@ -141,9 +141,8 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "I-5d", domaine: NB,
       texte: "Inéquations et systèmes d'inéquations du premier degré à deux inconnues : régionnement du plan, programmation linéaire simple.",
-      couverture: "absente",
-      micros: [],
-      note: "Demi-plans et programmation linéaire : trou déjà relevé au Sénégal et au Québec.",
+      couverture: "complete",
+      micros: m("seconde", "demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"),
     },
     // ── II. Géométrie plane ─────────────────────────────────────────────────
     {
@@ -258,16 +257,16 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "V-6", domaine: TR,
       texte: "Équations et inéquations trigonométriques fondamentales : sin x = a, cos x = a, tan x = a et leurs inéquations, résolues sur le cercle.",
-      couverture: "absente",
-      micros: [],
-      note: "Aucune micro de résolution d'équation trigonométrique (hors programme de 1re spé en France).",
+      couverture: "partielle",
+      micros: [...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"), ...m("premiere-spe", "trig_equation_generale")],
+      note: "Les équations sin x = a, cos x = a et tan x = a et les inéquations en sin et cos sont couvertes ; reste l'inéquation tan x ≥ a.",
     },
     {
       code: "V-7", domaine: TR,
       texte: "Angles inscrits, quadrilatères inscriptibles.",
-      couverture: "absente",
-      micros: [],
-      note: "Trou déjà relevé au Sénégal (3e).",
+      couverture: "partielle",
+      micros: m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"),
+      note: "Angles inscrits couverts ; manquent les quadrilatères inscriptibles.",
     },
     {
       code: "V-8", domaine: TR,
@@ -374,15 +373,15 @@ export const MAROC_1BAC: ProgrammePays = {
     {
       code: "AA-3a", domaine: AA,
       texte: "Calcul trigonométrique : formules de transformation (addition, duplication) ; transformation de a cos x + b sin x.",
-      couverture: "absente",
-      micros: [],
-      note: "Formules d'addition et de duplication : retirées du programme français (seulement en option maths expertes).",
+      couverture: "complete",
+      micros: m("premiere-spe", "trig_formule_addition", "trig_formule_duplication"),
     },
     {
       code: "AA-3b", domaine: AA,
       texte: "Équations et inéquations trigonométriques se ramenant aux équations fondamentales ; lecture des solutions sur le cercle.",
-      couverture: "absente",
-      micros: [],
+      couverture: "partielle",
+      micros: [...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"), ...m("premiere-spe", "trig_equation_generale")],
+      note: "Les équations fondamentales et leurs inéquations sont couvertes ; restent les formes qui s'y ramènent.",
     },
     {
       code: "AA-4a", domaine: FN,
@@ -478,9 +477,9 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "A2-2", domaine: AN,
       texte: "Fonction réciproque d'une fonction continue strictement monotone : existence, monotonie, courbe symétrique, nombre dérivé de la réciproque.",
-      couverture: "absente",
-      micros: [],
-      note: "La fonction réciproque n'est pas au programme français : micros à écrire.",
+      couverture: "complete",
+      micros: m("terminale-spe", "reciproque_bijection", "reciproque_expression", "reciproque_courbe", "reciproque_derivee"),
+      note: "Micros de Terminale chez nous, hors programme français.",
     },
     {
       code: "A2-3", domaine: AN,
@@ -552,9 +551,8 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "A3-2", domaine: AN,
       texte: "Intégration par parties.",
-      couverture: "absente",
-      micros: [],
-      note: "Au programme de Terminale spé en France, mais sans micro chez nous : à écrire.",
+      couverture: "complete",
+      micros: m("terminale-spe", "integrale_ipp_choisir", "integrale_ipp_calculer", "integrale_ipp_primitive"),
     },
     {
       code: "A3-3", domaine: AN,

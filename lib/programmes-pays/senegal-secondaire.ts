@@ -62,8 +62,11 @@ export const SENEGAL_2NDE: ProgrammePays = {
       code: "AG 4", domaine: "Géométrie plane",
       texte: "Angles : longueur d'un arc, radian, conversion degrés-radians ; angle inscrit, angle au centre, quadrilatères inscriptibles ; orientation du plan, angle orienté de deux demi-droites ou de deux vecteurs, mesure principale.",
       couverture: "partielle",
-      micros: m("premiere-spe", "trig_radian", "trig_arc", "trig_enroulement", "trig_grand_reel"),
-      note: "Manquent les angles inscrits et les quadrilatères inscriptibles (retirés en France), et les angles ORIENTÉS de vecteurs.",
+      micros: [
+        ...m("premiere-spe", "trig_radian", "trig_arc", "trig_enroulement", "trig_grand_reel"),
+        ...m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"),
+      ],
+      note: "Angles inscrits couverts ; manquent les quadrilatères inscriptibles et les angles ORIENTÉS de vecteurs.",
     },
     {
       code: "AG 5", domaine: "Géométrie plane",
@@ -170,8 +173,8 @@ export const SENEGAL_2NDE: ProgrammePays = {
       code: "AN 6", domaine: "Activités numériques",
       texte: "Systèmes du premier degré : deux équations à deux inconnues (méthode de Cramer), deux ou trois équations à deux inconnues et leur interprétation ; systèmes d'inéquations, régionnement du plan, exemples de programmation linéaire.",
       couverture: "partielle",
-      micros: m("seconde", "droite_systeme", "droite_intersection"),
-      note: "Manquent la méthode de Cramer (déterminant), le régionnement du plan et la programmation linéaire.",
+      micros: m("seconde", "droite_systeme", "droite_intersection", "demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"),
+      note: "Régionnement du plan et programmation linéaire couverts ; manque la méthode de Cramer (déterminant).",
     },
     {
       code: "AN 7", domaine: "Activités numériques",
@@ -197,8 +200,13 @@ export const SENEGAL_2NDE: ProgrammePays = {
       code: "ST 1", domaine: "Statistique",
       texte: "Statistique descriptive : diagrammes cumulatifs, histogramme, mode, classe modale, moyenne, médiane, quartiles (graphiquement et par le calcul) ; variance, écart-type, interprétation.",
       couverture: "partielle",
-      micros: m("seconde", "stat_lire_serie", "stat_frequence", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_interquartile", "stat_ecart_type", "stat_interpreter"),
-      note: "Manquent les séries en classes : histogramme, polygone des effectifs cumulés, quartiles lus sur la courbe.",
+      micros: [
+        ...m("seconde", "stat_lire_serie", "stat_frequence", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_interquartile", "stat_ecart_type", "stat_interpreter", "stat_histogramme", "stat_polygone_cumule", "stat_mediane_estimee"),
+        ...m("3e", "stat_classe_modale_centre"),
+        ...m("4e", "stat_histogramme_lire"),
+        ...m("premiere", "auto_stat_moyenne"),
+      ],
+      note: "Séries en classes, histogramme, classe modale et courbes cumulées couverts ; le mode d'une série non groupée n'a pas de micro.",
     },
   ],
 };
@@ -214,9 +222,9 @@ export const SENEGAL_1RE: ProgrammePays = {
     {
       code: "AN 1", domaine: "Analyse",
       texte: "Fonctions associées : courbes de x ↦ f(x − a), f(x) + b, |f(x)|, f(|x|) ; centre et axe de symétrie d'une courbe ; courbe de la réciproque d'une bijection.",
-      couverture: "absente",
-      micros: [],
-      note: "Micros à écrire : tracer |f| et f(|x|) à partir de la courbe de f, démontrer un centre de symétrie (f(a + x) + f(a − x) = 2b).",
+      couverture: "partielle",
+      micros: m("terminale-spe", "reciproque_courbe"),
+      note: "La courbe de la réciproque est couverte ; micros à écrire : tracer |f| et f(|x|) à partir de la courbe de f, démontrer un centre de symétrie (f(a + x) + f(a − x) = 2b).",
     },
     {
       code: "AN 2", domaine: "Analyse",
@@ -229,8 +237,8 @@ export const SENEGAL_1RE: ProgrammePays = {
       code: "AN 3", domaine: "Analyse",
       texte: "Continuité : en un point, à droite, à gauche, sur un intervalle ; image d'un intervalle ; une fonction continue strictement monotone est une bijection.",
       couverture: "partielle",
-      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_unicite"),
-      note: "Manque la preuve de la continuité en un point par les limites (fonctions définies par morceaux, à droite et à gauche).",
+      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_unicite", "reciproque_bijection"),
+      note: "Monotone et bijection couverts ; manque la preuve de la continuité en un point par les limites (fonctions définies par morceaux, à droite et à gauche).",
     },
     {
       code: "AN 4", domaine: "Analyse",
@@ -289,9 +297,9 @@ export const SENEGAL_1RE: ProgrammePays = {
     {
       code: "AL 1", domaine: "Algèbre",
       texte: "Applications : image directe, image réciproque, applications injectives, surjectives, bijectives, application réciproque, restriction.",
-      couverture: "absente",
-      micros: [],
-      note: "Ce vocabulaire n'est plus enseigné au lycée en France : micros à écrire.",
+      couverture: "partielle",
+      micros: m("terminale-spe", "reciproque_bijection", "reciproque_expression"),
+      note: "Injective, surjective, bijective et réciproque couvertes ; image directe et image réciproque d'un ensemble ne sont pas travaillées pour elles-mêmes.",
     },
     {
       code: "AL 2", domaine: "Algèbre",
@@ -303,9 +311,9 @@ export const SENEGAL_1RE: ProgrammePays = {
     {
       code: "AL 3", domaine: "Algèbre",
       texte: "Systèmes d'équations linéaires dans ℝ³ (méthode du pivot de Gauss) ; systèmes d'inéquations, programmation linéaire.",
-      couverture: "absente",
-      micros: [],
-      note: "Ni le pivot de Gauss ni la programmation linéaire ne sont dans le coach : micros à écrire.",
+      couverture: "partielle",
+      micros: m("seconde", "demi_plan_systeme"),
+      note: "Systèmes d'inéquations et programmation linéaire couverts ; manque le pivot de Gauss.",
     },
 
     {
@@ -329,8 +337,11 @@ export const SENEGAL_1RE: ProgrammePays = {
       code: "GE 3", domaine: "Géométrie",
       texte: "Angles orientés et trigonométrie : relation de Chasles, mesure principale, congruences ; formules d'addition, de duplication, de linéarisation ; équations cos x = cos a, sin x = sin a, tan x = tan a, a cos x + b sin x + c = 0 ; inéquations trigonométriques.",
       couverture: "partielle",
-      micros: m("premiere-spe", "trig_grand_reel", "trig_valeurs", "trig_angles_associes", "trig_cercle"),
-      note: "Manquent les angles ORIENTÉS, les formules d'addition et de duplication, et les équations et inéquations trigonométriques.",
+      micros: [
+        ...m("premiere-spe", "trig_grand_reel", "trig_valeurs", "trig_angles_associes", "trig_cercle", "trig_formule_addition", "trig_formule_duplication", "trig_equation_generale"),
+        ...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"),
+      ],
+      note: "Formules d'addition, de duplication, équations et inéquations couvertes ; manquent les angles ORIENTÉS et l'équation a cos x + b sin x + c = 0.",
     },
     {
       code: "GE 4", domaine: "Géométrie",
@@ -343,8 +354,8 @@ export const SENEGAL_1RE: ProgrammePays = {
       code: "GE 5", domaine: "Géométrie",
       texte: "Géométrie dans l'espace : plan médiateur, sections planes (sphère, prisme, pyramide), distances, angles, aires et volumes ; produit vectoriel (coordonnées, propriétés).",
       couverture: "partielle",
-      micros: m("3e", "section_pave_cube", "section_cone_pyramide", "section_calculer_longueur", "volume_boule"),
-      note: "Manquent le plan médiateur et le PRODUIT VECTORIEL (absent du lycée français).",
+      micros: m("3e", "section_pave_cube", "section_cone_pyramide", "section_calculer_longueur", "volume_boule", "section_sphere"),
+      note: "Section d'une sphère couverte ; manquent le plan médiateur et le PRODUIT VECTORIEL (absent du lycée français).",
     },
   ],
 };
@@ -361,15 +372,15 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "AN 1", domaine: "Analyse",
       texte: "Continuité et fonction réciproque : théorème des valeurs intermédiaires, valeur approchée d'un zéro ; réciproque d'une fonction continue strictement monotone (existence, courbe) ; branches infinies, comparaison de limites, limite d'une composée.",
       couverture: "partielle",
-      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "python_seuil", "limite_fonction_operations", "limite_fonction_asymptote"),
-      note: "Manquent la FONCTION RÉCIPROQUE (courbe symétrique par rapport à y = x, expression de f⁻¹) et les branches paraboliques.",
+      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "python_seuil", "limite_fonction_operations", "limite_fonction_asymptote", "reciproque_bijection", "reciproque_expression", "reciproque_courbe"),
+      note: "La fonction réciproque est couverte ; manquent les branches paraboliques.",
     },
     {
       code: "AN 2", domaine: "Analyse",
       texte: "Dérivées et primitives : dérivée d'une composée et d'une réciproque, dérivées successives, point d'inflexion ; primitives des fonctions usuelles, de (g' ∘ f)·f' et fⁿ·f' ; inégalité des accroissements finis.",
       couverture: "partielle",
-      micros: m("terminale-spe", "derivation_formules", "derivation_composee", "convexite_derivee_seconde", "convexite_point_inflexion", "primitive_reconnaitre", "primitive_calculer"),
-      note: "Manquent la dérivée de la RÉCIPROQUE et l'inégalité des accroissements finis.",
+      micros: m("terminale-spe", "derivation_formules", "derivation_composee", "convexite_derivee_seconde", "convexite_point_inflexion", "primitive_reconnaitre", "primitive_calculer", "reciproque_derivee"),
+      note: "La dérivée de la réciproque est couverte ; manque l'inégalité des accroissements finis.",
     },
     {
       code: "AN 3", domaine: "Analyse",
@@ -388,8 +399,8 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "AN 5", domaine: "Analyse",
       texte: "Études de fonctions : polynômes, rationnelles, trigonométriques ; fonctions puissances x ↦ xᵃ (a entier ou rationnel).",
       couverture: "partielle",
-      micros: m("terminale-spe", "derivation_variation", "derivation_optimisation", "limite_fonction_asymptote"),
-      note: "Manquent les fonctions puissances à exposant RATIONNEL et l'étude complète des fonctions trigonométriques.",
+      micros: m("terminale-spe", "derivation_variation", "derivation_optimisation", "limite_fonction_asymptote", "trigo_etude_fonction"),
+      note: "Étude trigonométrique couverte ; manquent les fonctions puissances à exposant RATIONNEL.",
     },
     {
       code: "AN 6", domaine: "Analyse",
@@ -401,8 +412,8 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "AN 7", domaine: "Analyse",
       texte: "Calcul intégral : intégrale d'une fonction continue, linéarité, Chasles, positivité, inégalité de la moyenne, intégration par parties ; aires planes, volumes V = ∫ S(z) dz et solides de révolution.",
       couverture: "partielle",
-      micros: m("terminale-spe", "primitive_calculer", "integrale_calculer", "integrale_aire", "integrale_valeur_moyenne"),
-      note: "Manquent l'INTÉGRATION PAR PARTIES (pourtant au programme français) et les calculs de VOLUMES.",
+      micros: m("terminale-spe", "primitive_calculer", "integrale_calculer", "integrale_aire", "integrale_valeur_moyenne", "integrale_ipp_choisir", "integrale_ipp_calculer", "integrale_ipp_primitive", "integrale_proprietes", "integrale_encadrer"),
+      note: "Intégration par parties et propriétés couvertes ; manquent les calculs de VOLUMES.",
     },
     {
       code: "AN 8", domaine: "Analyse",

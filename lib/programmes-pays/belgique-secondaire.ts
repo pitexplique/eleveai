@@ -55,13 +55,12 @@ export const BELGIQUE_S1: ProgrammePays = {
     },
     {
       code: "1.2 Sv1", domaine: GEO, texte: "Les figures, leurs composantes, caractéristiques et propriétés : triangles, quadrilatères, polygones réguliers, angles particuliers ; médiatrice, bissectrice, droites remarquables du triangle (identifier, définir, propriétés) ; quadrilatères à axe(s) ou centre de symétrie.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("6e", "triangle_type_cote", "triangle_type_angle", "quadrilatere_identifier_nature", "angle_reconnaitre", "mediatrice_definition", "bissectrice_definition", "circonscrit_concourantes", "sym_axe"),
-        ...m("5e", "para_diagonales"),
-        ...m("4e", "triangle_droites"),
+        ...m("5e", "para_diagonales", "polygone_regulier_reconnaitre"),
+        ...m("4e", "triangle_droites", "mediane_triangle", "centre_gravite", "orthocentre"),
       ],
-      note: "Manquent les polygones réguliers, les médianes et hauteurs concourantes (centre de gravité, orthocentre).",
     },
     { code: "1.2 SF1", domaine: GEO, texte: "Interpréter et utiliser les symboles géométriques : point, segment, demi-droite, droite, angle, parallèles, perpendiculaires ; codage.", couverture: "partielle", micros: [...m("6e", "distance_definition"), ...m("ce2", "ce2_angle_droit_codage", "ce2_segments_codage"), ...m("cm2", "droite_parallele", "droite_perpendiculaire")], note: "Notation (AB), [AB], AB (6e) et codage de l'angle droit et des longueurs égales (CE2) entraînés ; les symboles // et ⊥ n'ont pas de micro." },
     {
@@ -70,10 +69,14 @@ export const BELGIQUE_S1: ProgrammePays = {
     },
     {
       code: "1.2 SF3", domaine: GEO, texte: "Construire la médiatrice, la bissectrice, les droites remarquables d'un triangle ou d'un quadrilatère, les axes et le centre de symétrie d'une figure simple.",
-      couverture: "partielle", micros: [...m("6e", "mediatrice_construire", "bissectrice_construire", "circonscrit_construire", "sym_axe"), ...m("5e", "sym_centrale_figure")],
-      note: "Pas de construction des hauteurs et des médianes.",
+      couverture: "partielle", micros: [
+        ...m("6e", "mediatrice_construire", "bissectrice_construire", "circonscrit_construire", "sym_axe"),
+        ...m("5e", "sym_centrale_figure"),
+        ...m("4e", "mediane_triangle", "orthocentre"),
+      ],
+      note: "Hauteurs et médianes : on les reconnaît et on les utilise, leur construction n'est pas entraînée.",
     },
-    { code: "1.2 C1", domaine: GEO, texte: "Construire une figure complexe dont les étapes sont données ; rédiger les étapes de construction d'une figure complexe.", couverture: "partielle", micros: m("4e", "triangle_construire"), note: "Le protocole n'est entraîné que pour le triangle." },
+    { code: "1.2 C1", domaine: GEO, texte: "Construire une figure complexe dont les étapes sont données ; rédiger les étapes de construction d'une figure complexe.", couverture: "partielle", micros: [...m("4e", "triangle_construire"), ...m("cm2", "figure_programme_construction")], note: "Le programme de construction est travaillé au niveau CM2 et le protocole pour le triangle ; pas de figure complexe." },
     {
       code: "1.3 Sv1", domaine: GEO, texte: "Des mouvements (glisser, pivoter, retourner) vers les isométries : symétrie orthogonale, symétrie centrale, translation, rotation ; leurs éléments caractéristiques et leurs invariants.",
       couverture: "complete", micros: [...m("6e", "sym_reconnaitre"), ...m("5e", "sym_centrale_reconnaitre"), ...m("4e", "sym_translation", "sym_rotation", "sym_transformation_propriete")],
@@ -88,7 +91,7 @@ export const BELGIQUE_S1: ProgrammePays = {
       note: "Retrouver l'axe, le centre ou la translation à partir d'une figure et de son image n'est pas entraîné.",
     },
     { code: "1.3 SF2", domaine: GEO, texte: "Déterminer l'amplitude d'un angle avec les angles complémentaires, supplémentaires, opposés par le sommet et la somme des angles du triangle et du quadrilatère.", couverture: "complete", micros: [...m("5e", "angle_paires", "triangle_somme_angle"), ...m("6e", "triangle_angle_manquant")] },
-    { code: "1.3 SF3", domaine: GEO, texte: "Utiliser des propriétés pour construire : terminer une figure sous contraintes (droites remarquables, symétries) ; cercle inscrit et cercle circonscrit à un triangle.", couverture: "partielle", micros: m("6e", "circonscrit_construire", "quadrilatere_completer_construire"), note: "Le cercle inscrit (bissectrices) manque." },
+    { code: "1.3 SF3", domaine: GEO, texte: "Utiliser des propriétés pour construire : terminer une figure sous contraintes (droites remarquables, symétries) ; cercle inscrit et cercle circonscrit à un triangle.", couverture: "partielle", micros: [...m("6e", "circonscrit_construire", "quadrilatere_completer_construire"), ...m("4e", "cercle_inscrit")], note: "Le cercle inscrit s'utilise ; sa construction n'est pas entraînée." },
     { code: "1.3 SF4", domaine: GEO, texte: "Justifier l'amplitude d'un angle en utilisant des propriétés.", couverture: "partielle", micros: [...m("5e", "angle_paires"), ...m("6e", "bissectrice_probleme")], note: "On calcule l'angle, on ne rédige pas la justification." },
     {
       code: "1.3 C1", domaine: GEO, texte: "Articuler propriétés et constructions : figure dont les axes, le centre, une diagonale, des médiatrices ou des bissectrices sont donnés ; problèmes d'angles et d'isométries justifiés ; montrer que deux figures sont (ou ne sont pas) isométriques.",
@@ -118,7 +121,7 @@ export const BELGIQUE_S1: ProgrammePays = {
       micros: [...m("5e", "relatif_placer", "relatif_oppose", "fraction_rationnel"), ...m("6e", "fraction_decimal", "pourcentage_decimal"), ...m("4e", "ordre_prefixe", "puissance_dix", "fraction_inverse"), ...m("seconde", "reels_ensembles")],
     },
     { code: "3.1 Sv2", domaine: NBR, texte: "La relation d'ordre : symboles <, >, = et position sur une droite graduée orientée.", couverture: "complete", micros: [...m("5e", "relatif_comparer"), ...m("6e", "entier_comparer")] },
-    { code: "3.1 Sv3", domaine: NBR, texte: "L'approximation : valeur exacte, valeurs approchées par défaut et par excès, arrondi ; lire l'écriture décimale d'une calculatrice.", couverture: "partielle", micros: [...m("6e", "decimal_arrondir", "decimal_encadrer"), ...m("seconde", "reels_encadrement")], note: "Le vocabulaire « par défaut / par excès » n'est pas travaillé pour lui-même." },
+    { code: "3.1 Sv3", domaine: NBR, texte: "L'approximation : valeur exacte, valeurs approchées par défaut et par excès, arrondi ; lire l'écriture décimale d'une calculatrice.", couverture: "complete", micros: [...m("6e", "decimal_arrondir", "decimal_encadrer"), ...m("seconde", "reels_encadrement"), ...m("5e", "approx_defaut_exces", "approx_troncature_arrondi")] },
     { code: "3.1 Sv4", domaine: NBR, texte: "La lettre et ses statuts : coefficient, inconnue, terme indépendant, termes semblables ; conventions d'écriture (3x = 3.x, a = 1a).", couverture: "complete", micros: m("5e", "litteral_expression_comprendre", "litteral_reduire") },
     { code: "3.1 SF1", domaine: NBR, texte: "Dire, lire, écrire les nombres sous différentes formes : écriture fractionnaire ↔ écriture décimale.", couverture: "complete", micros: [...m("6e", "fraction_decimal"), ...m("4e", "fraction_decimal")] },
     { code: "3.1 SF2", domaine: NBR, texte: "Comparer, encadrer (unité, dixième, centième), ordonner des entiers et des rationnels ; les placer sur une droite graduée.", couverture: "complete", micros: [...m("5e", "relatif_comparer", "relatif_placer", "fraction_comparer"), ...m("6e", "decimal_encadrer", "abscisse_fraction")] },
@@ -169,8 +172,12 @@ export const BELGIQUE_S2: ProgrammePays = {
     { code: "1.2 Sv1", domaine: GEO, texte: "Des agrandissements et réductions vers les figures semblables : isométriques, agrandies ou déformées ; variants et invariants ; effet sur le périmètre et l'aire.", couverture: "complete", micros: m("4e", "agrandissement_rapport", "agrandissement_aire", "triangle_semblable") },
     {
       code: "1.2 Sv2", domaine: GEO, texte: "Distances et lieux géométriques : distance entre deux points, entre deux parallèles, d'un point à une droite ; parallèles, médiatrice, bissectrice et cercle définis comme lieux.",
-      couverture: "partielle", micros: [...m("6e", "distance_definition", "mediatrice_propriete", "cercle_ensemble"), ...m("seconde", "geo_projete_orthogonal")],
-      note: "Manquent la bissectrice comme lieu des points équidistants des côtés et les parallèles comme lieu.",
+      couverture: "partielle", micros: [
+        ...m("6e", "distance_definition", "mediatrice_propriete", "cercle_ensemble"),
+        ...m("seconde", "geo_projete_orthogonal"),
+        ...m("4e", "bissectrice_equidistance"),
+      ],
+      note: "La bissectrice comme lieu est couverte ; manquent les parallèles comme lieu.",
     },
     { code: "1.2 Sv3", domaine: GEO, texte: "Les angles : correspondants, alternes-internes, alternes-externes ; propriétés des parallèles coupées par une sécante.", couverture: "complete", micros: m("5e", "angle_paralleles") },
     { code: "1.2 SF1", domaine: GEO, texte: "Réaliser des agrandissements et réductions : construire l'image (coefficient donné), trouver le coefficient, périmètre et aire de l'image.", couverture: "complete", micros: [...m("4e", "agrandissement_rapport", "agrandissement_aire"), ...m("3e", "aire_agrandissement_reduction", "sym_homothetie_construire")] },
@@ -204,12 +211,23 @@ export const BELGIQUE_S2: ProgrammePays = {
     { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes avec les outils algébriques ; traduire une situation par une expression ou une équation ; rédiger un énoncé.", couverture: "complete", micros: m("4e", "equation_probleme", "equation_traduire", "litteral_expression_traduire") },
     {
       code: "4.1 Sv1", domaine: STA, texte: "Vocabulaire : population, échantillon, variable, modalité, effectif et effectif cumulé, fréquence et fréquence cumulée, étendue ; moyenne, mode, médiane (variable discrète).",
-      couverture: "partielle", micros: [...m("4e", "stat_effectif", "stat_frequence", "stat_moyenne", "stat_mediane", "stat_etendue", "proba_frequence_echantillon"), ...m("seconde", "echantillon_fluctuation")], note: "L'échantillon est vu côté probabilités (4e, seconde) ; effectifs et fréquences cumulés et le mode n'ont pas de micro.",
+      couverture: "partielle", micros: [
+        ...m("4e", "stat_effectif", "stat_frequence", "stat_moyenne", "stat_mediane", "stat_etendue", "proba_frequence_echantillon"),
+        ...m("seconde", "echantillon_fluctuation", "stat_polygone_cumule"),
+        ...m("3e", "stat_effectifs_cumules"),
+      ], note: "L'échantillon est vu côté probabilités (4e, seconde) ; les cumulés sont couverts ; le mode d'une série n'a pas de micro (seulement la classe modale).",
     },
     {
       code: "4.1 SF1", domaine: STA, texte: "Traiter, calculer, présenter : tableau de distribution (groupé ou non), effectif à partir de la fréquence, moyenne, mode, médiane ; diagrammes en bâtonnets, à bandes, circulaire ; diagramme par outil numérique.",
-      couverture: "partielle", micros: [...m("4e", "stat_frequence", "stat_moyenne", "stat_mediane"), ...m("5e", "stat_representer"), ...m("6e", "stat_construire_tableau"), ...m("premiere", "auto_stat_moyenne")],
-      note: "La moyenne de données groupées en classes existe (automatismes de 1re) ; manquent les cumulés, le mode et la construction du diagramme circulaire.",
+      couverture: "partielle", micros: [
+        ...m("4e", "stat_frequence", "stat_moyenne", "stat_mediane"),
+        ...m("5e", "stat_representer"),
+        ...m("6e", "stat_construire_tableau"),
+        ...m("premiere", "auto_stat_moyenne"),
+        ...m("3e", "stat_classes_regrouper", "stat_moyenne_classes", "stat_effectifs_cumules"),
+        ...m("seconde", "stat_polygone_cumule"),
+      ],
+      note: "Tableau groupé, moyenne par classes et cumulés couverts ; manquent le mode et la construction du diagramme circulaire.",
     },
     { code: "4.1 C1", domaine: STA, texte: "Lire et interpréter : modalité répondant à « au moins », « au plus » ; décrire dans plusieurs registres ; choisir un paramètre ou un support.", couverture: "complete", micros: [...m("4e", "stat_interpreter", "stat_lire_graphique", "stat_probleme"), ...m("5e", "stat_representation_choisir")] },
   ],
@@ -257,13 +275,16 @@ export const BELGIQUE_S3: ProgrammePays = {
     { code: "3.2 SF2", domaine: NBR, texte: "Résoudre ax + b = cx + d, une équation produit nul, une équation par le produit en croix ; vérifier ; écrire une équation de deux solutions données.", couverture: "complete", micros: [...m("3e", "equation_resoudre_developper", "equation_produit_nul", "equation_verifier"), ...m("4e", "prop_quatrieme")] },
     { code: "3.2 SF3", domaine: NBR, texte: "Calculer avec des puissances de 10 à exposants entiers ; valeur approchée d'une racine à la calculatrice ; ordre de grandeur, plausibilité.", couverture: "partielle", micros: [...m("3e", "entier_puissance_dix", "entier_puissance_ecriture_scientifique", "entier_racine_calculer"), ...m("4e", "ordre_estimer")], note: "La calculatrice n'est pas entraînée." },
     { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes avec les nombres, les opérations et les outils algébriques ; rédiger un énoncé.", couverture: "complete", micros: [...m("3e", "equation_probleme"), ...m("4e", "equation_traduire")] },
-    { code: "4.1 Sv1", domaine: STA, texte: "Notions : population, variable, classes et centres de classes ; variable discrète ou continue ; bâtonnets, bandes ou histogramme.", couverture: "partielle", micros: [...m("3e", "stat_lire_tableau", "stat_lire_graphique"), ...m("premiere", "auto_stat_lire_graphique", "auto_stat_moyenne")], note: "Lire un histogramme et calculer avec des classes : automatismes de 1re ; variable discrète / continue non travaillée." },
+    { code: "4.1 Sv1", domaine: STA, texte: "Notions : population, variable, classes et centres de classes ; variable discrète ou continue ; bâtonnets, bandes ou histogramme.", couverture: "partielle", micros: [...m("3e", "stat_lire_tableau", "stat_lire_graphique", "stat_classes_regrouper", "stat_classe_modale_centre"), ...m("premiere", "auto_stat_lire_graphique", "auto_stat_moyenne")], note: "Classes et centres de classes couverts ; variable discrète / continue non travaillée." },
     {
       code: "4.1 SF1", domaine: STA, texte: "Traiter et calculer : effectifs et fréquences (cumulés), effectif d'une classe, moyenne d'une variable continue, médiane approchée sur la courbe des effectifs cumulés.",
-      couverture: "partielle", micros: [...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane"), ...m("seconde", "stat_moyenne_ponderee", "stat_mediane_quartiles"), ...m("premiere", "auto_stat_moyenne")],
-      note: "Moyenne par classes : automatismes de 1re ; manquent les cumulés et la médiane lue sur la courbe des cumulés.",
+      couverture: "complete", micros: [
+        ...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane", "stat_classes_regrouper", "stat_moyenne_classes", "stat_effectifs_cumules"),
+        ...m("seconde", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_polygone_cumule", "stat_mediane_estimee"),
+        ...m("premiere", "auto_stat_moyenne"),
+      ],
     },
-    { code: "4.1 SF2", domaine: STA, texte: "Présenter : tableau de distribution en classes, histogramme, histogramme par outil numérique.", couverture: "partielle", micros: m("premiere", "auto_stat_lire_graphique", "auto_stat_graphique_donnees"), note: "On LIT un histogramme (automatismes de 1re) ; le construire et faire le tableau en classes : micro à écrire." },
+    { code: "4.1 SF2", domaine: STA, texte: "Présenter : tableau de distribution en classes, histogramme, histogramme par outil numérique.", couverture: "partielle", micros: [...m("premiere", "auto_stat_lire_graphique", "auto_stat_graphique_donnees"), ...m("3e", "stat_classes_regrouper")], note: "Le tableau en classes est couvert ; on LIT un histogramme (automatismes de 1re), le construire : micro à écrire." },
     { code: "4.1 C1", domaine: STA, texte: "Interpréter en contexte, critiquer des informations sur une même situation, choisir un paramètre ou un support.", couverture: "complete", micros: [...m("3e", "stat_interpreter"), ...m("seconde", "stat_interpreter")] },
   ],
 };

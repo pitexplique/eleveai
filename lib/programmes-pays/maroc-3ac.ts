@@ -83,8 +83,9 @@ export const MAROC_3AC: ProgrammePays = {
       micros: [
         ...m("3e", "entier_racine_encadrer", "fraction_rationnel_comparer"),
         ...m("seconde", "reels_encadrement", "comparer_difference_quotient", "inequation_resoudre"),
+        ...m("5e", "approx_encadrer_quotient"),
       ],
-      note: "Manquent les règles de l'ordre comme notion (si a < b alors a + c < b + c ; multiplier par un négatif renverse) et l'encadrement d'une somme ou d'un produit à partir d'encadrements.",
+      note: "Encadrer un quotient est couvert ; manquent les règles de l'ordre comme notion (si a < b alors a + c < b + c ; multiplier par un négatif renverse) et l'encadrement d'une somme ou d'un produit à partir d'encadrements.",
     },
     {
       code: "S1-5", domaine: AG,
@@ -112,9 +113,8 @@ export const MAROC_3AC: ProgrammePays = {
     {
       code: "S1-8", domaine: AG,
       texte: "Angle inscrit et angle au centre interceptant le même arc : les comparer.",
-      couverture: "absente",
-      micros: [],
-      note: "Retiré du programme français depuis 2008 : micros à écrire (angle inscrit = moitié de l'angle au centre, deux angles inscrits interceptant le même arc).",
+      couverture: "complete",
+      micros: m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"),
     },
     {
       code: "S1-9", domaine: AG,
@@ -195,10 +195,8 @@ export const MAROC_3AC: ProgrammePays = {
       code: "S2-9", domaine: AG,
       texte: "Calcul des volumes (toutes les formules d'aires et de volumes) ; positions relatives et orthogonalité autour du prisme droit ; agrandissement et réduction de rapport k : longueurs × k, aires × k², volumes × k³.",
       couverture: "partielle",
-      micros: [
-        ...m("3e", "volume_pave", "volume_prisme", "volume_cylindre", "volume_boule", "pythagore_solide", "aire_agrandissement_reduction", "volume_agrandissement_reduction"),
-      ],
-      note: "Pas de micro « volume d'une pyramide ou d'un cône » (V = B × h ÷ 3), vue au 2AC et réutilisée ici.",
+      micros: m("3e", "volume_pave", "volume_prisme", "volume_cylindre", "volume_boule", "pythagore_solide", "aire_agrandissement_reduction", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "aire_prisme_droit", "aire_cylindre", "aire_pyramide_cone", "aire_sphere"),
+      note: "Toutes les formules d'aires et de volumes sont couvertes ; restent les positions relatives et l'orthogonalité autour du prisme droit.",
     },
   ],
 };

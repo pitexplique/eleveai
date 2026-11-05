@@ -77,9 +77,8 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
     {
       code: "C1-L4", domaine: CALC,
       texte: "Inéquations dans ℝ × ℝ : interprétation graphique (demi-plans), systèmes d'inéquations du premier degré, programmation linéaire.",
-      couverture: "absente",
-      micros: [],
-      note: "Trou : demi-plans et programmation linéaire (vu aussi au Québec CST 5 et au Maroc).",
+      couverture: "complete",
+      micros: m("seconde", "demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"),
     },
     {
       code: "C1-L5", domaine: FONC,
@@ -99,8 +98,13 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
       code: "C2-L1", domaine: DONN,
       texte: "Statistique à une variable : classes de même amplitude, classe modale, effectifs et fréquences cumulés croissants et décroissants, polygones, médiane par lecture graphique, moyenne, écart moyen, variance, écart type.",
       couverture: "partielle",
-      micros: m("seconde", "stat_moyenne", "stat_mediane_quartiles", "stat_frequence", "stat_ecart_type", "stat_interpreter"),
-      note: "Manquent les séries en classes, les polygones des effectifs cumulés et l'écart moyen.",
+      micros: [
+        ...m("seconde", "stat_moyenne", "stat_mediane_quartiles", "stat_frequence", "stat_ecart_type", "stat_interpreter", "stat_histogramme", "stat_polygone_cumule", "stat_mediane_estimee"),
+        ...m("3e", "stat_classe_modale_centre", "stat_effectifs_cumules"),
+        ...m("4e", "stat_histogramme_lire"),
+        ...m("premiere", "auto_stat_moyenne"),
+      ],
+      note: "Séries en classes et polygones couverts ; reste l'écart moyen.",
     },
     {
       code: "C3-L1", domaine: GPLAN,
@@ -118,9 +122,9 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
     {
       code: "C3-L3", domaine: GPLAN,
       texte: "Angles inscrits : angle au centre, angle inscrit défini par une corde et une demi-tangente, arc capable ; aire d'un triangle (½ ab sin C), théorème des sinus.",
-      couverture: "absente",
-      micros: [],
-      note: "Trou : angles inscrits et loi des sinus (déjà en 3e ivoirienne).",
+      couverture: "partielle",
+      micros: m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"),
+      note: "Angle inscrit et angle au centre couverts ; manquent la demi-tangente, l'arc capable, l'aire ½ ab sin C et le théorème des sinus.",
     },
     {
       code: "C3-L4", domaine: GPLAN,
@@ -193,9 +197,9 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
     {
       code: "C1-L3", domaine: FONC,
       texte: "Généralités sur les fonctions : restriction, application injective, surjective, bijective et réciproque, comparaison de fonctions, somme, produit, quotient, composée ; fonctions associées f(x − a) + b, f(−x), −f(x), |f(x)| et leurs courbes (translations, symétries).",
-      couverture: "absente",
-      micros: [],
-      note: "Trou : bijections, composée et courbes des fonctions associées.",
+      couverture: "partielle",
+      micros: m("terminale-spe", "reciproque_bijection", "reciproque_expression", "reciproque_courbe"),
+      note: "Injective, surjective, bijective et réciproque couvertes ; manquent la composée et les courbes des fonctions associées.",
     },
     {
       code: "C1-L4", domaine: FONC,
@@ -234,8 +238,13 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
       code: "C2-L1", domaine: DONN,
       texte: "Statistique à une variable en classes (amplitudes égales ou non) : densité, classe modale, histogramme, polygones, courbes cumulatives, moyenne, médiane, quartiles, variance, écart type, écart interquartile.",
       couverture: "partielle",
-      micros: m("seconde", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_interquartile", "stat_ecart_type"),
-      note: "Manquent histogramme, densité de classe et courbes cumulatives.",
+      micros: [
+        ...m("seconde", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_interquartile", "stat_ecart_type", "stat_histogramme", "stat_polygone_cumule", "stat_mediane_estimee"),
+        ...m("3e", "stat_classe_modale_centre"),
+        ...m("4e", "stat_histogramme_lire"),
+        ...m("premiere", "auto_stat_moyenne"),
+      ],
+      note: "Histogramme et courbes cumulatives couverts ; reste la densité (classes inégales).",
     },
     {
       code: "C2-L2", domaine: ALEA,
@@ -261,8 +270,11 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
       code: "C3-L2", domaine: GPLAN,
       texte: "Angles orientés et trigonométrie : Chasles, angle double, angles inscrits orientés, cocyclicité ; formules d'addition, de duplication, de linéarisation ; a cos x + b sin x ; équations et inéquations trigonométriques.",
       couverture: "partielle",
-      micros: m("premiere-spe", "trig_cercle", "trig_valeurs", "trig_angles_associes", "trig_grand_reel"),
-      note: "Manquent les formules d'addition et de duplication et les équations trigonométriques.",
+      micros: [
+        ...m("premiere-spe", "trig_cercle", "trig_valeurs", "trig_angles_associes", "trig_grand_reel", "trig_formule_addition", "trig_formule_duplication", "trig_equation_generale"),
+        ...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"),
+      ],
+      note: "Formules, équations et inéquations couvertes ; manquent les angles orientés et la cocyclicité.",
     },
     {
       code: "C3-L3", domaine: GESP,
@@ -300,15 +312,15 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
       code: "C1-L2", domaine: FONC,
       texte: "Limites et continuité : limite d'une composée, comparaison, branches paraboliques, image d'un intervalle, théorème des valeurs intermédiaires, bijection continue strictement monotone, dichotomie et balayage, racine n-ième et puissances d'exposant rationnel, prolongement par continuité.",
       couverture: "partielle",
-      micros: m("terminale-spe", "limite_fonction_operations", "limite_fonction_reference", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger"),
-      note: "Manquent bijection réciproque, racine n-ième, branches paraboliques, prolongement par continuité.",
+      micros: m("terminale-spe", "limite_fonction_operations", "limite_fonction_reference", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "reciproque_bijection"),
+      note: "La bijection est couverte ; manquent racine n-ième, branches paraboliques, prolongement par continuité.",
     },
     {
       code: "C1-L3", domaine: FONC,
       texte: "Dérivabilité et étude de fonctions : dérivée à gauche et à droite, dérivée d'une composée, dérivées successives, point d'inflexion, inégalité des accroissements finis, dérivée d'une réciproque ; études de fonctions rationnelles, irrationnelles, trigonométriques, par raccordement.",
       couverture: "partielle",
-      micros: m("terminale-spe", "derivation_formules", "derivation_composee", "derivation_variation", "derivation_tangente", "convexite_derivee_seconde", "convexite_point_inflexion"),
-      note: "Manquent accroissements finis, dérivée d'une réciproque et dérivabilité à gauche / à droite.",
+      micros: m("terminale-spe", "derivation_formules", "derivation_composee", "derivation_variation", "derivation_tangente", "convexite_derivee_seconde", "convexite_point_inflexion", "reciproque_derivee"),
+      note: "La dérivée d'une réciproque est couverte ; manquent accroissements finis et dérivabilité à gauche / à droite.",
     },
     {
       code: "C1-L4", domaine: FONC,
@@ -334,8 +346,8 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
       code: "C1-L7", domaine: FONC,
       texte: "Calcul intégral : intégrale, linéarité, Chasles, positivité, inégalité de la moyenne, valeur moyenne, intégration par parties, changement de variable affine, aire, x ↦ ∫ₐˣ f(t) dt.",
       couverture: "partielle",
-      micros: m("terminale-spe", "integrale_calculer", "integrale_aire", "integrale_valeur_moyenne"),
-      note: "Manquent intégration par parties, encadrement d'une intégrale et fonctions définies par une intégrale.",
+      micros: m("terminale-spe", "integrale_calculer", "integrale_aire", "integrale_valeur_moyenne", "integrale_ipp_choisir", "integrale_ipp_calculer", "integrale_ipp_primitive", "integrale_proprietes", "integrale_encadrer"),
+      note: "Intégration par parties et encadrement couverts ; manquent le changement de variable et les fonctions définies par une intégrale.",
     },
     {
       code: "C1-L8", domaine: FONC,

@@ -95,12 +95,12 @@ export const MAROC_1AC: ProgrammePays = {
     {
       code: "S1-6", domaine: AN,
       texte: "Multiplication et division des relatifs : produit de plusieurs facteurs, inverse, écriture a/b, valeurs approchées et encadrement d'un quotient.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "relatif_multiplication", "relatif_division", "fraction_inverse"),
         ...m("6e", "decimal_arrondir", "decimal_encadrer"),
+        ...m("5e", "approx_encadrer_quotient", "approx_defaut_exces"),
       ],
-      note: "Manquent les valeurs approchées PAR DÉFAUT et PAR EXCÈS d'un quotient (17 ÷ 7 ≈ 2,42 par défaut, 2,43 par excès), au cœur du chapitre marocain.",
     },
     {
       code: "S1-7", domaine: AN,
@@ -130,13 +130,13 @@ export const MAROC_1AC: ProgrammePays = {
     {
       code: "S1-10", domaine: AG,
       texte: "Droites du triangle : médiatrice (propriété caractéristique) et cercle circonscrit ; bissectrice (propriété caractéristique) et cercle inscrit ; hauteurs et orthocentre ; distance d'un point à une droite.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("6e", "mediatrice_propriete", "mediatrice_construire", "circonscrit_concourantes", "circonscrit_construire", "bissectrice_definition", "bissectrice_construire"),
-        ...m("4e", "triangle_droites"),
+        ...m("4e", "triangle_droites", "bissectrice_equidistance", "cercle_inscrit", "orthocentre"),
         ...m("seconde", "geo_projete_orthogonal"),
       ],
-      note: "Manquent la bissectrice comme lieu des points ÉQUIDISTANTS des côtés, le cercle inscrit et l'orthocentre. La distance d'un point à une droite (projeté orthogonal) est en seconde chez nous.",
+      note: "La distance d'un point à une droite (projeté orthogonal) est en seconde chez nous.",
     },
 
     // ── Semestre 2 ──────────────────────────────────────────────────────────
@@ -187,15 +187,20 @@ export const MAROC_1AC: ProgrammePays = {
       code: "S2-7", domaine: AG,
       texte: "Le cercle : centre, corde, diamètre, tangente ; tracer la tangente en un point ; un triangle dont un côté est un diamètre du cercle circonscrit est rectangle.",
       couverture: "partielle",
-      micros: m("6e", "cercle_vocabulaire", "cercle_ensemble", "cercle_distance"),
-      note: "Manquent la tangente (perpendiculaire au rayon) et le triangle inscrit dans un demi-cercle, absents du programme français actuel.",
+      micros: [...m("6e", "cercle_vocabulaire", "cercle_ensemble", "cercle_distance"), ...m("3e", "triangle_demi_cercle")],
+      note: "Le triangle inscrit dans un demi-cercle est couvert ; manque la tangente (perpendiculaire au rayon).",
     },
     {
       code: "S2-8", domaine: AG,
       texte: "Prisme droit et cylindre de révolution : représentation, patron, aire latérale et volume.",
-      couverture: "partielle",
-      micros: [...m("5e", "volume_prisme", "volume_cylindre"), ...m("4e", "vision_representation")],
-      note: "Manque l'AIRE LATÉRALE (périmètre de la base × hauteur) : pas de micro chez nous.",
+      couverture: "complete",
+      micros: [
+        ...m("5e", "volume_prisme", "volume_cylindre"),
+        ...m("4e", "vision_representation"),
+        ...m("cm2", "solide_patron"),
+        ...m("3e", "aire_prisme_droit", "aire_cylindre"),
+      ],
+      note: "Patrons : on les reconnaît, on ne les trace pas. Aires latérales : micros de 3e chez nous.",
     },
     {
       code: "S2-9", domaine: GS,
@@ -275,9 +280,11 @@ export const MAROC_2AC: ProgrammePays = {
     {
       code: "S1-4", domaine: AG,
       texte: "Droites remarquables du triangle : hauteurs, médianes, médiatrices, bissectrices ; position du centre de gravité.",
-      couverture: "partielle",
-      micros: [...m("4e", "triangle_droites"), ...m("6e", "circonscrit_concourantes", "bissectrice_definition")],
-      note: "Manquent les MÉDIANES et le CENTRE DE GRAVITÉ (aux deux tiers de chaque médiane), retirés du programme français.",
+      couverture: "complete",
+      micros: [
+        ...m("4e", "triangle_droites", "mediane_triangle", "centre_gravite"),
+        ...m("6e", "circonscrit_concourantes", "bissectrice_definition"),
+      ],
     },
     {
       code: "S1-5", domaine: AG,
@@ -334,9 +341,8 @@ export const MAROC_2AC: ProgrammePays = {
     {
       code: "S2-6", domaine: AG,
       texte: "Triangle rectangle et cercle : le cercle circonscrit à un triangle rectangle a pour centre le milieu de l'hypoténuse (propriété caractéristique).",
-      couverture: "partielle",
-      micros: m("6e", "circonscrit_construire"),
-      note: "Pas de micro sur la propriété elle-même (et sa réciproque), absente du programme français actuel.",
+      couverture: "complete",
+      micros: [...m("6e", "circonscrit_construire"), ...m("3e", "triangle_demi_cercle")],
     },
     {
       code: "S2-7", domaine: AG,
@@ -367,9 +373,13 @@ export const MAROC_2AC: ProgrammePays = {
     {
       code: "S2-10", domaine: AG,
       texte: "Pyramide, cône de révolution, prisme droit : patrons, représentation, aire latérale, volumes.",
-      couverture: "partielle",
-      micros: [...m("4e", "vision_representation", "volume_prisme"), ...m("3e", "volume_solide_reconnaitre", "section_cone_pyramide")],
-      note: "Manquent le volume de la pyramide et du cône (V = B × h ÷ 3) et l'aire latérale : même trou qu'au 3AC.",
+      couverture: "complete",
+      micros: [
+        ...m("4e", "vision_representation", "volume_prisme", "volume_pyramide", "volume_cone"),
+        ...m("3e", "volume_solide_reconnaitre", "section_cone_pyramide", "aire_prisme_droit", "aire_pyramide_cone"),
+        ...m("cm2", "solide_patron"),
+      ],
+      note: "Patrons : on les reconnaît, on ne les trace pas. Aires latérales : micros de 3e chez nous.",
     },
   ],
 };

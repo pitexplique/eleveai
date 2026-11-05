@@ -163,12 +163,11 @@ export const SENEGAL_6E: ProgrammePays = {
     {
       code: "AG 6", domaine: AG,
       texte: "Polygones : triangles (vocabulaire, droites remarquables, triangles particuliers et leurs axes de symétrie) ; parallélogramme, trapèze, rectangle, losange, carré : description, construction.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("6e", "triangle_nommer", "triangle_sommet_cote", "triangle_type_cote", "triangle_type_angle", "quadrilatere_nommer_vocabulaire", "quadrilatere_identifier_nature", "quadrilatere_lire_propriete"),
-        ...m("4e", "triangle_droites"),
+        ...m("4e", "triangle_droites", "mediane_triangle"),
       ],
-      note: "Les médianes d'un triangle (construction dès la 6e au Sénégal) n'ont pas de micro.",
     },
     {
       code: "AG 7", domaine: AG,
@@ -182,14 +181,13 @@ export const SENEGAL_6E: ProgrammePays = {
     {
       code: "AG 8", domaine: AG,
       texte: "Géométrie dans l'espace : pavé droit, cube, cylindre, sphère et boule — patron, représentation plane, aire, volume.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("cm2", "solide_patron"),
         ...m("6e", "vision_vues", "vision_representation"),
         ...m("5e", "volume_pave", "volume_cylindre"),
-        ...m("3e", "volume_boule"),
+        ...m("3e", "volume_boule", "aire_prisme_droit", "aire_cylindre", "aire_sphere"),
       ],
-      note: "Manquent les AIRES des solides : aire latérale et totale du pavé et du cylindre, aire de la sphère (4πR²).",
     },
     {
       code: "AG 9", domaine: AG,
@@ -289,13 +287,12 @@ export const SENEGAL_5E: ProgrammePays = {
     {
       code: "AG 4", domaine: AG,
       texte: "Triangles : somme des angles ; médiatrices et cercle circonscrit ; hauteurs et orthocentre ; triangles particuliers (rectangle, isocèle, équilatéral) : propriétés et reconnaissances.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("5e", "triangle_somme_angle", "triangle_nature", "triangle_construire"),
         ...m("6e", "circonscrit_concourantes", "circonscrit_construire"),
-        ...m("4e", "triangle_droites"),
+        ...m("4e", "triangle_droites", "orthocentre"),
       ],
-      note: "Les hauteurs concourantes et l'orthocentre n'ont pas de micro dédiée.",
     },
     {
       code: "AG 5", domaine: AG,
@@ -319,12 +316,14 @@ export const SENEGAL_5E: ProgrammePays = {
     {
       code: "AG 9", domaine: AG,
       texte: "Géométrie dans l'espace : le prisme droit — description, représentation, patron, orthogonalité et parallélisme, longueurs, aires, volume.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "vision_reconnaitre", "vision_representation"),
         ...m("5e", "volume_prisme"),
+        ...m("cm2", "solide_patron"),
+        ...m("3e", "aire_prisme_droit"),
       ],
-      note: "Manque l'aire latérale du prisme droit (périmètre de la base × hauteur).",
+      note: "Patrons : on les reconnaît, on ne les trace pas.",
     },
   ],
 };
@@ -416,12 +415,12 @@ export const SENEGAL_4E: ProgrammePays = {
     {
       code: "AG 3", domaine: AG,
       texte: "Droites remarquables dans un triangle : bissectrices et cercle inscrit, médianes et centre de gravité ; angle au centre et arc intercepté.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("6e", "bissectrice_definition", "bissectrice_construire"),
-        ...m("4e", "triangle_droites"),
+        ...m("4e", "triangle_droites", "bissectrice_equidistance", "cercle_inscrit", "mediane_triangle", "centre_gravite"),
+        ...m("3e", "angle_inscrit_centre"),
       ],
-      note: "Manquent le cercle inscrit (bissectrices concourantes), les médianes et le centre de gravité (aux deux tiers de chaque médiane).",
     },
     {
       code: "AG 4", domaine: AG,
@@ -448,9 +447,11 @@ export const SENEGAL_4E: ProgrammePays = {
     {
       code: "AG 7", domaine: AG,
       texte: "Rotations : définition, construction, propriétés ; polygones réguliers et leurs angles au centre.",
-      couverture: "partielle",
-      micros: m("4e", "sym_rotation", "sym_transformation_propriete"),
-      note: "Les polygones réguliers (hexagone, octogone : angle au centre 360° ÷ n, construction) n'ont pas de micro.",
+      couverture: "complete",
+      micros: [
+        ...m("4e", "sym_rotation", "sym_transformation_propriete"),
+        ...m("5e", "polygone_regulier_reconnaitre", "polygone_regulier_angles"),
+      ],
     },
     {
       code: "AG 8", domaine: AG,
@@ -458,9 +459,9 @@ export const SENEGAL_4E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("4e", "vision_section"),
-        ...m("3e", "section_reconnaitre", "volume_section"),
+        ...m("3e", "section_reconnaitre", "volume_section", "section_sphere"),
       ],
-      note: "Manquent les positions relatives dans l'espace (droites coplanaires ou non, droite et plan, deux plans) et le rayon d'une section de sphère (Pythagore).",
+      note: "La section d'une sphère est couverte ; manquent les positions relatives dans l'espace (droites coplanaires ou non, droite et plan, deux plans).",
     },
     {
       code: "AG 9", domaine: AG,
@@ -512,19 +513,20 @@ export const SENEGAL_3E: ProgrammePays = {
     {
       code: "AN 4", domaine: AN,
       texte: "Inéquations et systèmes d'inéquations à deux inconnues (résolution graphique par demi-plans).",
-      couverture: "absente",
-      micros: [],
-      note: "Le régionnement du plan (hachurer le demi-plan 2x + y − 3 < 0) n'est pas au programme français : micros à écrire.",
+      couverture: "complete",
+      micros: m("seconde", "demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"),
+      note: "Micros de seconde chez nous, hors programme français.",
     },
     {
       code: "AN 5", domaine: AN,
       texte: "Statistique : regroupement en classes d'égales amplitudes, centre de classe, histogramme, diagramme des effectifs cumulés, classe modale, médiane, moyenne.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane", "stat_interpreter", "stat_lire_graphique"),
-        ...m("seconde", "stat_moyenne_ponderee"),
+        ...m("3e", "stat_effectif_frequence", "stat_moyenne", "stat_mediane", "stat_interpreter", "stat_lire_graphique", "stat_classes_regrouper", "stat_classe_modale_centre", "stat_moyenne_classes", "stat_effectifs_cumules"),
+        ...m("seconde", "stat_moyenne_ponderee", "stat_histogramme", "stat_polygone_cumule", "stat_mediane_estimee"),
+        ...m("4e", "stat_histogramme_lire"),
+        ...m("premiere", "auto_stat_moyenne"),
       ],
-      note: "Lire un histogramme et cumuler des classes : stat_lire_graphique (3e) ; médiane par les effectifs cumulés : stat_mediane (3e). Manquent centre de classe, classe modale, moyenne par les centres, diagramme des effectifs cumulés.",
     },
     {
       code: "AN 6", domaine: AN,
@@ -547,9 +549,9 @@ export const SENEGAL_3E: ProgrammePays = {
     {
       code: "AG 2", domaine: AG,
       texte: "Angles inscrits : angle inscrit, angle au centre associé, arc intercepté ; angles inscrits interceptant le même arc ; triangle rectangle et cercle ; longueur d'un arc.",
-      couverture: "absente",
-      micros: [],
-      note: "Retiré du programme français : micros à écrire (angle inscrit = moitié de l'angle au centre), comme pour le Maroc.",
+      couverture: "partielle",
+      micros: m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc", "triangle_demi_cercle"),
+      note: "Angles inscrits et triangle rectangle couverts ; manque la longueur d'un arc.",
     },
     {
       code: "AG 3", domaine: AG,
@@ -565,9 +567,12 @@ export const SENEGAL_3E: ProgrammePays = {
     {
       code: "AG 4", domaine: AG,
       texte: "Géométrie dans l'espace : pyramide et cône de révolution — patron, représentation, aire, volume, section par un plan parallèle à la base.",
-      couverture: "partielle",
-      micros: m("3e", "volume_solide_reconnaitre", "volume_representation", "section_cone_pyramide", "pythagore_solide", "volume_agrandissement_reduction"),
-      note: "Pas de micro « volume d'une pyramide ou d'un cône » (V = B × h ÷ 3) ni d'aire latérale du cône : même trou qu'au Maroc.",
+      couverture: "complete",
+      micros: [
+        ...m("3e", "volume_solide_reconnaitre", "volume_representation", "section_cone_pyramide", "pythagore_solide", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "volume_pyramide_cone_reduction", "aire_pyramide_cone"),
+        ...m("cm2", "solide_patron"),
+      ],
+      note: "Patrons : on les reconnaît, on ne les trace pas.",
     },
     {
       code: "AG 5", domaine: AG,
