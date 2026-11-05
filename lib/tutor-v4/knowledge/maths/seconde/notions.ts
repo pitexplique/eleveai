@@ -233,4 +233,25 @@ export const notions: NotionSource[] = [
     prerequis: [],
     levels: [1, 2, 3],
   },
+  {
+    id: "systemes_determinant",
+    label: "Systèmes : déterminant et formules de Cramer",
+    boId: "BO2G1",
+    prerequis: ["droites_plan", "equations_inequations_1er_degre"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "courbes_associees",
+    label: "Courbes associées : translations, dilatations, valeur absolue",
+    boId: "BO2F1",
+    prerequis: ["fonction_vocabulaire_2de", "analyse_graphique_2de"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "polynomes_division",
+    label: "Polynômes : racine, division euclidienne, Horner",
+    boId: "BO2N1",
+    prerequis: ["developpement_factorisation_2de", "equations_inequations_1er_degre"],
+    levels: [1, 2, 3],
+  },
 ];

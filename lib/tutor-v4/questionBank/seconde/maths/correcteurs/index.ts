@@ -7,6 +7,9 @@ import { CORRECTEURS as logiqueRaisonnement } from "./logique-raisonnement";
 import { CORRECTEURS as vecteurCombinaison } from "./vecteur-combinaison";
 import { CORRECTEURS as fonctionModeliser } from "./fonction-modeliser";
 import { CORRECTEURS as demiPlansSystemes } from "./demi-plans-systemes";
+import { CORRECTEURS as systemesDeterminant } from "./systemes-determinant";
+import { CORRECTEURS as courbesAssociees } from "./courbes-associees";
+import { CORRECTEURS as polynomesDivision } from "./polynomes-division";
 
 export const CORRECTEURS_SECONDE: CorrecteursMaths = {
   ...statistiquesClasses,
@@ -15,4 +18,7 @@ export const CORRECTEURS_SECONDE: CorrecteursMaths = {
   ...vecteurCombinaison,
   ...fonctionModeliser,
   ...demiPlansSystemes,
+  ...systemesDeterminant,
+  ...courbesAssociees,
+  ...polynomesDivision,
 };

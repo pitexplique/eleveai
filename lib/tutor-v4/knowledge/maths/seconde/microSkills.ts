@@ -278,4 +278,13 @@ export const microSkills: MicroSkillSource[] = [
   { id: "demi_plan_couple_solution", label: "Vérifier qu'un couple est solution d'une inéquation à deux inconnues", notionId: "demi_plans_systemes", prerequis: [] },
   { id: "demi_plan_representer", label: "Représenter un demi-plan : droite frontière, point test, zone hachurée", notionId: "demi_plans_systemes", prerequis: ["demi_plan_couple_solution"] },
   { id: "demi_plan_systeme", label: "Résoudre graphiquement un système d'inéquations, optimiser sur un polygone", notionId: "demi_plans_systemes", prerequis: ["demi_plan_representer"] },
+
+  /* Thèmes communs à 4 pays, hors programme français (lib/tutor-v4/micros-masquees.ts). */
+  { id: "systeme_determinant", label: "Calculer le déterminant d'un système : nombre de solutions, droites sécantes ou parallèles", notionId: "systemes_determinant", prerequis: ["droite_parallelisme", "droite_intersection"] },
+  { id: "systeme_cramer", label: "Résoudre un système par les formules de Cramer", notionId: "systemes_determinant", prerequis: ["systeme_determinant", "equation_resoudre"] },
+  { id: "courbe_translation", label: "Déduire les courbes de $f(x) + k$ et de $f(x + k)$ de celle de $f$", notionId: "courbes_associees", prerequis: ["graph_image", "fonction_image_formule"] },
+  { id: "courbe_dilatation_abs", label: "Déduire les courbes de $k f(x)$, de $-f(x)$ et de $|f(x)|$ de celle de $f$", notionId: "courbes_associees", prerequis: ["courbe_translation", "reference_valeur_absolue"] },
+  { id: "poly_racine_factoriser", label: "Utiliser une racine : $P(a) = 0$ équivaut à $x - a$ facteur de $P$", notionId: "polynomes_division", prerequis: ["devfac_developper_double", "fonction_image_formule"] },
+  { id: "poly_division", label: "Poser la division euclidienne d'un polynôme : quotient et reste", notionId: "polynomes_division", prerequis: ["poly_racine_factoriser"] },
+  { id: "poly_horner", label: "Diviser par $x - a$ avec le tableau de Horner", notionId: "polynomes_division", prerequis: ["poly_division"] },
 ];

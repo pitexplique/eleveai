@@ -99,6 +99,10 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
     ]),
       /* Demi-plans, systèmes d'inéquations à deux inconnues, programmation linéaire. */
       ...lot("hors_france", "Sénégal, Maroc, Côte d'Ivoire, Québec", ["demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"]),
+      /* Déterminant et Cramer ; courbes associées ; division de polynômes et Horner. */
+      ...lot("hors_france", "Maroc, Belgique, Sénégal, Côte d'Ivoire", ["systeme_determinant", "systeme_cramer"]),
+      ...lot("hors_france", "Suisse, Belgique, Sénégal, Côte d'Ivoire", ["courbe_translation", "courbe_dilatation_abs"]),
+      ...lot("hors_france", "Maroc, Belgique, Sénégal, Côte d'Ivoire", ["poly_racine_factoriser", "poly_division", "poly_horner"]),
     },
     /* Annexe de première spécialité, BO n°14 du 02/04/2026. La terminale garde
        sinus et cosinus. La dérivée de t ↦ e^(at) reste : `exp_derivee_affine`. */

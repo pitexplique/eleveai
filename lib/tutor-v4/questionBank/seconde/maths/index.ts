@@ -8,6 +8,9 @@ import { logiqueRaisonnementBank } from "./logique-raisonnement.bank";
 import { vecteurCombinaisonBank } from "./vecteur-combinaison.bank";
 import { fonctionModeliserBank } from "./fonction-modeliser.bank";
 import { demiPlansSystemesBank } from "./demi-plans-systemes.bank";
+import { systemesDeterminantBank } from "./systemes-determinant.bank";
+import { courbesAssocieesBank } from "./courbes-associees.bank";
+import { polynomesDivisionBank } from "./polynomes-division.bank";
 import { arithmetiqueEntiersBank } from "./arithmetique-entiers.bank";
 import { puissancesBank } from "./puissances.bank";
 import { puissancesCanvas2de } from "@/lib/tutor-v4/questionBank/puissances-canvas-items";
@@ -74,6 +77,10 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...vecteurCombinaisonBank,
   ...fonctionModeliserBank,
   ...demiPlansSystemesBank,
+  // === Hors France : thèmes communs à 4 pays (05/11/2026) ===
+  ...systemesDeterminantBank,
+  ...courbesAssocieesBank,
+  ...polynomesDivisionBank,
 ];
 
 export function getMathsSecondeQuestionBank(args?: {
