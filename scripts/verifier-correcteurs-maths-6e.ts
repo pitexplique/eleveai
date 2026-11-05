@@ -22,6 +22,10 @@ import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths/index"
 import { CORRECTEURS_5E } from "@/lib/tutor-v4/questionBank/5e/maths/correcteurs";
 import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths/index";
 import { CORRECTEURS_3E } from "@/lib/tutor-v4/questionBank/3e/maths/correcteurs";
+import { mathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths/index";
+import { CORRECTEURS_CM2 } from "@/lib/tutor-v4/questionBank/cm2/maths/correcteurs";
+import { mathsCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/maths/index";
+import { CORRECTEURS_CM1 } from "@/lib/tutor-v4/questionBank/cm1/maths/correcteurs";
 import { compareAnswer } from "@/lib/tutor/evaluation/comparators";
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 
@@ -30,9 +34,11 @@ const args = process.argv.slice(2);
 const en4e = args[0] === "4e";
 const en5e = args[0] === "5e";
 const en3e = args[0] === "3e"; // 05/11/2026 : seulement sur des micros nommées, la 3e n'a de correcteurs que depuis cette date.
-const filtres = args.filter((a) => a !== "3e" && a !== "4e" && a !== "5e" && a !== "6e");
-const BANQUE: any[] = en3e ? maths3eQuestionBank : en4e ? maths4eQuestionBank : en5e ? maths5eQuestionBank : maths6eQuestionBank;
-const CORRECTEURS = en3e ? CORRECTEURS_3E : en4e ? CORRECTEURS_4E : en5e ? CORRECTEURS_5E : CORRECTEURS_6E;
+const enCm2 = args[0] === "cm2"; // 05/11/2026 : idem, sur des micros nommées.
+const enCm1 = args[0] === "cm1"; // 05/11/2026 : idem, sur des micros nommées.
+const filtres = args.filter((a) => a !== "cm1" && a !== "cm2" && a !== "3e" && a !== "4e" && a !== "5e" && a !== "6e");
+const BANQUE: any[] = enCm1 ? mathsCm1QuestionBank : enCm2 ? mathsCm2QuestionBank : en3e ? maths3eQuestionBank : en4e ? maths4eQuestionBank : en5e ? maths5eQuestionBank : maths6eQuestionBank;
+const CORRECTEURS = enCm1 ? CORRECTEURS_CM1 : enCm2 ? CORRECTEURS_CM2 : en3e ? CORRECTEURS_3E : en4e ? CORRECTEURS_4E : en5e ? CORRECTEURS_5E : CORRECTEURS_6E;
 const gabarits = BANQUE.filter(
   (i) =>
     i.kind === "template" &&
@@ -53,11 +59,13 @@ const NOTION_A_FRACTIONS = /^(fraction_|proba_|pourcentage_|decimal_nombre$|demi
 // (10⁻² = 1/100). La règle reste entière ailleurs (relatifs, divisibilité,
 // géométrie, statistiques…).
 const NOTION_A_FRACTIONS_4E = /^(equation_|litteral_|thales_|trigo_|puissance_)/;
+// CM2 (05/11/2026) : les fractions décimales sont l'objet d'étude des décimaux (35 + 7/10 + 8/100).
+const NOTION_A_FRACTIONS_CM2 = /^(fraction|nombre_decimal)$/;
 const BARRE_ENTRE_NOMBRES = /(?<![\d/])\d+(?:[,.]\d+)?\s*\/\s*\d+(?![\d/])/;
 
 function reglesCommunes(q: TutorGeneratedQuestionV4, notionId: string): string[] {
   const p: string[] = [];
-  if (!NOTION_A_FRACTIONS.test(notionId) && !((en3e || en4e || en5e) && NOTION_A_FRACTIONS_4E.test(notionId)))
+  if (!NOTION_A_FRACTIONS.test(notionId) && !((en3e || en4e || en5e) && NOTION_A_FRACTIONS_4E.test(notionId)) && !((enCm1 || enCm2) && NOTION_A_FRACTIONS_CM2.test(notionId)))
     for (const s of [q.text, ...(q.choices ?? []), ...(q.expected ?? []), q.explanation ?? ""].map(String)) {
       const m = s.match(BARRE_ENTRE_NOMBRES);
       if (m) p.push(`barre de fraction pour une division : « ${m[0]} » (écrire « : » ou « ÷ ») dans « ${s.slice(0, 120)} »`);

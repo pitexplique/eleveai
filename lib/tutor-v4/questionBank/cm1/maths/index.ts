@@ -31,6 +31,10 @@ import { symetrieBank } from "./symetrie.bank";
 import { figuresPlanesBank } from "./figures-planes.bank";
 import { solidesBank } from "./solides.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
+import { nombresEntiersTrousBank } from "./nombres-entiers-trous.bank";
+import { fractionsDecimauxTrousBank } from "./fractions-decimaux-trous.bank";
+import { calculTrousBank } from "./calcul-trous.bank";
+import { geometrieTrousBank } from "./geometrie-trous.bank";
 
 // Zéro clavier en CM1 : short numériques -> QCM, et open « Explique… » retirées
 // (cf. applyMathsKeyboardFree). Appliqué à TOUTES les banques maths CM1.
@@ -63,6 +67,10 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...applyMathsKeyboardFree(figuresPlanesBank),
   ...applyMathsKeyboardFree(solidesBank),
   ...applyMathsKeyboardFree(algorithmiqueBank),
+  ...nombresEntiersTrousBank,
+  ...fractionsDecimauxTrousBank,
+  ...calculTrousBank,
+  ...geometrieTrousBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {

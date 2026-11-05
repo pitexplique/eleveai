@@ -46,6 +46,25 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "nombre_entier",
     prerequis: ["entier_comparer", "entier_multiple"],
   },
+  // Trous du programme (05/11/2026) : questionBank/cm1/maths/nombres-entiers-trous.bank.ts
+  {
+    id: "entier_droite",
+    label: "Placer un nombre entier sur une demi-droite graduée",
+    notionId: "nombre_entier",
+    prerequis: ["entier_comparer"],
+  },
+  {
+    id: "entier_diviseur",
+    label: "Savoir si un nombre est un diviseur d’un autre",
+    notionId: "nombre_entier",
+    prerequis: ["entier_multiple"],
+  },
+  {
+    id: "entier_encadrer",
+    label: "Encadrer et intercaler un nombre entier",
+    notionId: "nombre_entier",
+    prerequis: ["entier_comparer"],
+  },
 
   // ============================================================
   // SUITES
@@ -182,6 +201,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["multiplication_mental"],
   },
   {
+    id: "multiplication_decimale_posee",
+    label: "Poser une multiplication d’un décimal par un entier",
+    notionId: "multiplication",
+    prerequis: ["multiplication_posee"],
+  },
+  {
     id: "multiplication_defi",
     label: "Résoudre un défi de multiplication",
     notionId: "multiplication",
@@ -282,6 +307,18 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_lire"],
   },
   {
+    id: "fraction_additionner",
+    label: "Additionner et soustraire des fractions de même dénominateur",
+    notionId: "fraction",
+    prerequis: ["fraction_lire"],
+  },
+  {
+    id: "fraction_mixte_regrouper",
+    label: "Regrouper un entier et une fraction en une seule fraction",
+    notionId: "fraction",
+    prerequis: ["fraction_additionner"],
+  },
+  {
     id: "fraction_defi",
     label: "Résoudre un défi sur les fractions",
     notionId: "fraction",
@@ -335,6 +372,30 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["decimal_comparer"],
   },
   {
+    id: "decimal_somme_fractions",
+    label: "Écrire un nombre décimal comme une somme de fractions décimales",
+    notionId: "nombre_decimal",
+    prerequis: ["decimal_valeur_chiffre"],
+  },
+  {
+    id: "fraction_decimale_comparer",
+    label: "Comparer, encadrer et ranger des fractions décimales",
+    notionId: "nombre_decimal",
+    prerequis: ["decimal_somme_fractions"],
+  },
+  {
+    id: "decimal_puissance_dix",
+    label: "Multiplier ou diviser un décimal par 10, 100 ou 1 000",
+    notionId: "nombre_decimal",
+    prerequis: ["decimal_valeur_chiffre"],
+  },
+  {
+    id: "decimal_ajouter_dixiemes",
+    label: "Ajouter ou retirer des dixièmes et des centièmes",
+    notionId: "nombre_decimal",
+    prerequis: ["decimal_valeur_chiffre"],
+  },
+  {
     id: "decimal_defi",
     label: "Résoudre un défi sur les nombres décimaux",
     notionId: "nombre_decimal",
@@ -384,6 +445,18 @@ export const microSkills: MicroSkillSource[] = [
   {
     id: "calcul_priorite",
     label: "Utiliser des priorités opératoires simples",
+    notionId: "calcul",
+    prerequis: ["calcul_mental"],
+  },
+  {
+    id: "calcul_estimer",
+    label: "Estimer le résultat d’une opération",
+    notionId: "calcul",
+    prerequis: ["calcul_mental"],
+  },
+  {
+    id: "calcul_procedures",
+    label: "Choisir une procédure de calcul mental (+ 9, × 5, décomposer)",
     notionId: "calcul",
     prerequis: ["calcul_mental"],
   },
@@ -474,6 +547,12 @@ export const microSkills: MicroSkillSource[] = [
     label: "Décrire une relation entre deux quantités",
     notionId: "algebre",
     prerequis: ["algebre_egalite", "algebre_motif"],
+  },
+  {
+    id: "algebre_programme_calcul",
+    label: "Exécuter un programme de calcul",
+    notionId: "algebre",
+    prerequis: ["calcul_mental"],
   },
   {
     id: "algebre_defi",
@@ -651,6 +730,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["duree_calculer"],
   },
   {
+    id: "duree_positionner_aiguilles",
+    label: "Placer les aiguilles d’une horloge pour une heure donnée",
+    notionId: "duree",
+    prerequis: ["duree_lire"],
+  },
+  {
     id: "duree_defi",
     label: "Résoudre un défi de durées",
     notionId: "duree",
@@ -754,6 +839,18 @@ export const microSkills: MicroSkillSource[] = [
     label: "Comparer des angles",
     notionId: "angle",
     prerequis: ["angle_reconnaitre"],
+  },
+  {
+    id: "angle_notation",
+    label: "Écrire et lire la notation d’un angle",
+    notionId: "angle",
+    prerequis: ["angle_reconnaitre"],
+  },
+  {
+    id: "angle_comparer_sans_mesure",
+    label: "Comparer des angles sans les mesurer",
+    notionId: "angle",
+    prerequis: ["angle_comparer"],
   },
   {
     id: "angle_defi",
@@ -902,6 +999,18 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["figure_propriete"],
   },
   {
+    id: "figure_codage",
+    label: "Lire le codage d’une figure (angle droit, côtés égaux)",
+    notionId: "figure_plane",
+    prerequis: ["figure_quadrilatere"],
+  },
+  {
+    id: "cercle_ensemble_points",
+    label: "Le cercle : tous les points à la même distance du centre",
+    notionId: "figure_plane",
+    prerequis: ["figure_cercle"],
+  },
+  {
     id: "figure_defi",
     label: "Résoudre un défi sur les figures planes",
     notionId: "figure_plane",
@@ -935,6 +1044,12 @@ export const microSkills: MicroSkillSource[] = [
     label: "Reconnaître un patron de solide simple",
     notionId: "solide",
     prerequis: ["solide_face"],
+  },
+  {
+    id: "solide_prisme",
+    label: "Décrire un prisme droit (faces, sommets, arêtes, patron)",
+    notionId: "solide",
+    prerequis: ["solide_sommet_arete_face"],
   },
   {
     id: "solide_defi",
@@ -995,6 +1110,18 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["graphique_lire"],
   },
   {
+    id: "graphique_courbe_lire",
+    label: "Lire une courbe",
+    notionId: "graphique",
+    prerequis: ["graphique_lire"],
+  },
+  {
+    id: "graphique_nuage_points",
+    label: "Lire un nuage de points",
+    notionId: "graphique",
+    prerequis: ["graphique_lire"],
+  },
+  {
     id: "graphique_defi",
     label: "Résoudre un défi avec un graphique",
     notionId: "graphique",
@@ -1028,6 +1155,12 @@ export const microSkills: MicroSkillSource[] = [
     label: "Raisonner avec une roue, un dé ou un sac",
     notionId: "probabilite",
     prerequis: ["probabilite_comparer"],
+  },
+  {
+    id: "probabilite_issues",
+    label: "Trouver toutes les issues d’une expérience",
+    notionId: "probabilite",
+    prerequis: ["probabilite_vocabulaire"],
   },
   {
     id: "probabilite_defi",
