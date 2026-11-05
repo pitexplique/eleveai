@@ -179,7 +179,6 @@ const CONDENSES: Condense[] = [
       { label: "Identité", latex: "$\\cos^2 x+\\sin^2 x=1$" },
       { label: "Valeurs (cos)", latex: "$0,\\dfrac{\\pi}{6},\\dfrac{\\pi}{4},\\dfrac{\\pi}{3},\\dfrac{\\pi}{2}$ → $1,\\dfrac{\\sqrt3}{2},\\dfrac{\\sqrt2}{2},\\dfrac12,0$ (sin : l'ordre inverse)" },
       { label: "Angles associés", latex: "$\\cos(-x)=\\cos x$ ; $\\sin(-x)=-\\sin x$" },
-      { label: "Périodicité", latex: "$\\cos(x+2\\pi)=\\cos x$ ; $\\sin(x+2\\pi)=\\sin x$" },
     ],
     reflexes: [
       { si: "un angle en degrés", alors: "convertir en radians ($\\times\\pi/180$)" },
