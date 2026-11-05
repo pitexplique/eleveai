@@ -46,6 +46,7 @@ import { sectionsSolidesBank } from "./sections_solides.bank";
 
 import { probabilitesBank } from "./probabilites.bank";
 import { statistiquesBank } from "./statistiques.bank";
+import { statClassesBank } from "./stat-classes.bank";
 
 import { algorithmiqueBank } from "./algorithmique.bank";
 
@@ -90,6 +91,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
 
   ...probabilitesBank,
   ...statistiquesBank,
+  ...statClassesBank,
 
   ...algorithmiqueBank
 ];

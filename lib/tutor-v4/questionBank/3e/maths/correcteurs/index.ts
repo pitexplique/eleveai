@@ -9,6 +9,7 @@ import { CORRECTEURS as anglesCercle } from "./angles-cercle";
 import { CORRECTEURS as equationsCarre } from "./equations-carre";
 import { CORRECTEURS as litteralDemontrer } from "./litteral-demontrer";
 import { CORRECTEURS as affineTracer } from "./affine-tracer";
+import { CORRECTEURS as statClasses } from "./stat-classes";
 
 export const CORRECTEURS_3E: CorrecteursMaths = {
   ...volumesPyramideCone,
@@ -17,4 +18,5 @@ export const CORRECTEURS_3E: CorrecteursMaths = {
   ...equationsCarre,
   ...litteralDemontrer,
   ...affineTracer,
+  ...statClasses,
 };

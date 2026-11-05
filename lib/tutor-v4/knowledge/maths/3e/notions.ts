@@ -206,6 +206,15 @@ export const notions: NotionSource[] = [
     prerequis: [],
     levels: [1, 2],
   },
+  // 05/11/2026 : demandée par le Sénégal, la Côte d'Ivoire, la Belgique et le Québec.
+  // En France, seul le regroupement reste visible (voir micros-masquees.ts).
+  {
+    id: "stat_classes",
+    label: "Séries statistiques en classes",
+    boId: "BO3D1",
+    prerequis: ["stat_statistique"],
+    levels: [1, 2, 3],
+  },
 
   {
     id: "proba_experience",

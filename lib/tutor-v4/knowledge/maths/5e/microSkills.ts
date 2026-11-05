@@ -748,6 +748,28 @@ export const microSkills: MicroSkillSource[] = [
   prerequis: ["algo_boucle", "algo_parametre"],
 },
 
+  /* ======================
+     VALEURS APPROCHÉES (05/11/2026)
+  ========================= */
+{
+  id: "approx_encadrer_quotient",
+  label: "Encadrer un quotient, amplitude d’un encadrement",
+  notionId: "nombre_approche",
+  prerequis: [],
+},
+{
+  id: "approx_defaut_exces",
+  label: "Valeur approchée par défaut, par excès",
+  notionId: "nombre_approche",
+  prerequis: ["approx_encadrer_quotient"],
+},
+{
+  id: "approx_troncature_arrondi",
+  label: "Troncature et arrondi d’un nombre",
+  notionId: "nombre_approche",
+  prerequis: ["approx_defaut_exces"],
+},
+
 /* Hors du programme français (05/11/2026) : masquées dans micros-masquees.ts, gardées pour /pays. */
 {
   id: "polygone_regulier_reconnaitre",

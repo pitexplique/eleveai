@@ -48,6 +48,16 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  // 05/11/2026 : demandée par le Maroc, la Côte d'Ivoire, la Belgique et le Québec.
+  // En France, seul l'encadrement reste visible (voir micros-masquees.ts).
+  {
+    id: "nombre_approche",
+    label: "Valeurs approchées et encadrements",
+    boId: "BO5N1",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
+
   // Une notion est une séance de coach : au-delà de huit micro-compétences,
   // l'élève ne voit plus où il en est. Les fractions en portaient onze, et deux
   // gestes s'y mélangeaient — reconnaître une fraction, puis calculer avec.

@@ -932,6 +932,34 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     SÉRIES EN CLASSES (05/11/2026)
+  ========================= */
+  {
+    id: "stat_classes_regrouper",
+    label: "Regrouper une série en classes",
+    notionId: "stat_classes",
+    prerequis: ["stat_lire_tableau"],
+  },
+  {
+    id: "stat_classe_modale_centre",
+    label: "Classe modale et centre de classe",
+    notionId: "stat_classes",
+    prerequis: ["stat_classes_regrouper"],
+  },
+  {
+    id: "stat_moyenne_classes",
+    label: "Moyenne d’une série en classes",
+    notionId: "stat_classes",
+    prerequis: ["stat_classe_modale_centre", "stat_moyenne"],
+  },
+  {
+    id: "stat_effectifs_cumules",
+    label: "Effectifs cumulés et polygone des effectifs cumulés",
+    notionId: "stat_classes",
+    prerequis: ["stat_classes_regrouper"],
+  },
+
+  /* =========================
      PROBABILITÉS
   ========================= */
   {

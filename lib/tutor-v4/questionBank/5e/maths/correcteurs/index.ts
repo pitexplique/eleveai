@@ -15,6 +15,7 @@ import { CORRECTEURS as proportionnalite } from "./proportionnalite";
 import { CORRECTEURS as statistiques } from "./statistiques";
 import { CORRECTEURS as symetrieCentrale } from "./symetrie_centrale";
 import { CORRECTEURS as triangles } from "./triangles";
+import { CORRECTEURS as valeursApprochees } from "./valeurs-approchees";
 import { CORRECTEURS as volumes } from "./volumes";
 import { CORRECTEURS as polygonesReguliers } from "./polygones-reguliers";
 
@@ -36,6 +37,7 @@ export const CORRECTEURS_5E: CorrecteursMaths = {
   ...statistiques,
   ...symetrieCentrale,
   ...triangles,
+  ...valeursApprochees,
   ...volumes,
   ...polygonesReguliers,
 };
