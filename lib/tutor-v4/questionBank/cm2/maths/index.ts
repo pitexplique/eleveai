@@ -44,6 +44,10 @@ import { echellesBank } from "./echelles.bank";
 // sur les fractions, deux sur les figures planes, une sur les probabilités.
 // Voir scripts/auditer-banque.mjs.
 import { complementsEvalNationaleBank } from "./complements-eval-nationale.bank";
+// Les trous du programme bouchés le 05/11/2026 (audit France), avec correcteurs.
+import { entiersDiviseursBank } from "./entiers-diviseurs.bank";
+import { calculMentalDecimalBank } from "./calcul-mental-decimal.bank";
+import { decimauxFractionsDecimalesBank } from "./decimaux-fractions-decimales.bank";
 
 // Zéro clavier en CM2 : short numériques -> QCM, et open « Explique… » retirées
 // (cf. applyMathsKeyboardFree). Appliqué à TOUTES les banques maths CM2.
@@ -83,6 +87,10 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...applyMathsKeyboardFree(echellesBank),
 
   ...applyMathsKeyboardFree(complementsEvalNationaleBank),
+
+  ...applyMathsKeyboardFree(entiersDiviseursBank),
+  ...applyMathsKeyboardFree(calculMentalDecimalBank),
+  ...applyMathsKeyboardFree(decimauxFractionsDecimalesBank),
 ];
 
 export function getMathCm2QuestionBank(args?: {

@@ -37,6 +37,36 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["entier_decomposer"],
   },
   {
+    id: "entier_droite",
+    label: "Placer un nombre entier sur une demi-droite graduée",
+    notionId: "nombre_entier",
+    prerequis: ["entier_comparer"],
+  },
+  {
+    id: "entier_diviseur",
+    label: "Savoir si un nombre est un diviseur d’un autre",
+    notionId: "nombre_entier",
+    prerequis: ["entier_multiple"],
+  },
+  {
+    id: "entier_diviseurs_tous",
+    label: "Trouver tous les diviseurs d’un nombre",
+    notionId: "nombre_entier",
+    prerequis: ["entier_diviseur"],
+  },
+  {
+    id: "entier_diviseurs_communs",
+    label: "Trouver les diviseurs communs de deux nombres",
+    notionId: "nombre_entier",
+    prerequis: ["entier_diviseurs_tous"],
+  },
+  {
+    id: "entier_multiples_communs",
+    label: "Trouver des multiples communs de deux nombres",
+    notionId: "nombre_entier",
+    prerequis: ["entier_multiple"],
+  },
+  {
     id: "entier_defi",
     label: "Résoudre un défi sur les nombres entiers",
     notionId: "nombre_entier",
@@ -99,6 +129,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["multiplication_table"],
   },
   {
+    id: "multiplication_decimale_posee",
+    label: "Poser une multiplication d’un décimal par un entier",
+    notionId: "multiplication",
+    prerequis: ["multiplication_posee", "decimal_valeur_chiffre"],
+  },
+  {
     id: "multiplication_probleme",
     label: "Utiliser la multiplication dans un problème",
     notionId: "multiplication",
@@ -131,6 +167,18 @@ export const microSkills: MicroSkillSource[] = [
     label: "Poser une division simple",
     notionId: "division",
     prerequis: ["division_lien_multiplication"],
+  },
+  {
+    id: "division_decimale_posee",
+    label: "Poursuivre une division après la virgule",
+    notionId: "division",
+    prerequis: ["division_posee", "decimal_valeur_chiffre"],
+  },
+  {
+    id: "division_decimale_dividende",
+    label: "Diviser un nombre décimal par un entier",
+    notionId: "division",
+    prerequis: ["division_decimale_posee"],
   },
   {
     id: "division_reste",
@@ -267,6 +315,30 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_decimale"],
   },
   {
+    id: "decimal_somme_fractions",
+    label: "Écrire un décimal comme une somme de fractions décimales",
+    notionId: "nombre_decimal",
+    prerequis: ["decimal_fraction"],
+  },
+  {
+    id: "fraction_decimale_comparer",
+    label: "Comparer et encadrer des fractions décimales",
+    notionId: "nombre_decimal",
+    prerequis: ["decimal_fraction"],
+  },
+  {
+    id: "fraction_decimale_ordonner",
+    label: "Ranger des fractions décimales",
+    notionId: "nombre_decimal",
+    prerequis: ["fraction_decimale_comparer"],
+  },
+  {
+    id: "decimal_diviser_puissance_dix",
+    label: "Diviser un décimal par 10, 100 ou 1 000",
+    notionId: "nombre_decimal",
+    prerequis: ["decimal_valeur_chiffre"],
+  },
+  {
     id: "decimal_valeur_chiffre",
     label: "Donner la valeur d’un chiffre dans un nombre décimal",
     notionId: "nombre_decimal",
@@ -343,6 +415,42 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["calcul_mental"],
   },
   {
+    id: "calcul_moitie_impair",
+    label: "Connaître la moitié d’un nombre impair",
+    notionId: "calcul",
+    prerequis: ["calcul_mental"],
+  },
+  {
+    id: "calcul_double_decimal",
+    label: "Calculer le double d’un décimal",
+    notionId: "calcul",
+    prerequis: ["calcul_mental", "decimal_lire"],
+  },
+  {
+    id: "calcul_moitie_decimal",
+    label: "Calculer la moitié d’un décimal",
+    notionId: "calcul",
+    prerequis: ["calcul_moitie_impair"],
+  },
+  {
+    id: "calcul_diviser_4_8",
+    label: "Diviser par 4 ou par 8 en prenant des moitiés",
+    notionId: "calcul",
+    prerequis: ["calcul_mental"],
+  },
+  {
+    id: "calcul_multiplier_50",
+    label: "Multiplier par 5 ou par 50",
+    notionId: "calcul",
+    prerequis: ["multiplication_puissance_dix"],
+  },
+  {
+    id: "calcul_ordre_grandeur",
+    label: "Estimer le résultat d’une opération",
+    notionId: "calcul",
+    prerequis: ["calcul_mental"],
+  },
+  {
     id: "calcul_defi",
     label: "Résoudre un défi de calcul",
     notionId: "calcul",
@@ -375,6 +483,24 @@ export const microSkills: MicroSkillSource[] = [
     label: "Rédiger une réponse claire à un problème",
     notionId: "probleme",
     prerequis: ["probleme_une_etape"],
+  },
+  {
+    id: "probleme_denombrement",
+    label: "Dénombrer toutes les possibilités",
+    notionId: "probleme",
+    prerequis: ["probleme_une_etape"],
+  },
+  {
+    id: "probleme_toutes_solutions",
+    label: "Trouver toutes les solutions d’un problème",
+    notionId: "probleme",
+    prerequis: ["probleme_denombrement"],
+  },
+  {
+    id: "probleme_optimisation",
+    label: "Chercher le minimum ou le maximum",
+    notionId: "probleme",
+    prerequis: ["probleme_plusieurs_etapes"],
   },
   {
     id: "probleme_defi",
@@ -415,6 +541,12 @@ export const microSkills: MicroSkillSource[] = [
     label: "Reconnaître et poursuivre un motif évolutif",
     notionId: "algebre",
     prerequis: ["suite_regle"],
+  },
+  {
+    id: "algebre_motif_rang",
+    label: "Trouver le nombre d’éléments à une étape éloignée",
+    notionId: "algebre",
+    prerequis: ["algebre_motif"],
   },
   {
     id: "algebre_relation",
@@ -625,6 +757,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["entier_lire"],
   },
   {
+    id: "duree_positionner_aiguilles",
+    label: "Placer les aiguilles pour une heure donnée",
+    notionId: "duree",
+    prerequis: ["duree_lire"],
+  },
+  {
     id: "duree_convertir",
     label: "Convertir des durées",
     notionId: "duree",
@@ -693,6 +831,18 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["longueur_comparer"],
   },
   {
+    id: "aire_unites",
+    label: "Utiliser cm², dm² et m²",
+    notionId: "aire",
+    prerequis: ["aire_comprendre"],
+  },
+  {
+    id: "aire_convertir_unites",
+    label: "Convertir des aires",
+    notionId: "aire",
+    prerequis: ["aire_unites"],
+  },
+  {
     id: "aire_carre_rectangle",
     label: "Calculer l’aire d’un carré ou d’un rectangle",
     notionId: "aire",
@@ -731,6 +881,24 @@ export const microSkills: MicroSkillSource[] = [
     label: "Reconnaître un angle droit",
     notionId: "angle",
     prerequis: ["angle_reconnaitre"],
+  },
+  {
+    id: "angle_notation",
+    label: "Lire et écrire un angle avec trois lettres",
+    notionId: "angle",
+    prerequis: ["angle_reconnaitre"],
+  },
+  {
+    id: "angle_comparer_sans_mesure",
+    label: "Comparer des angles sans les mesurer",
+    notionId: "angle",
+    prerequis: ["angle_reconnaitre"],
+  },
+  {
+    id: "angle_somme_multiple",
+    label: "Ajouter des angles, doubler un angle",
+    notionId: "angle",
+    prerequis: ["angle_comparer_sans_mesure"],
   },
   {
     id: "angle_type",
@@ -884,6 +1052,24 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["droite_reconnaitre"],
   },
   {
+    id: "figure_codage",
+    label: "Lire le codage d’une figure",
+    notionId: "figure_plane",
+    prerequis: ["figure_triangle", "figure_quadrilatere"],
+  },
+  {
+    id: "cercle_ensemble_points",
+    label: "Cercle et disque : la distance au centre",
+    notionId: "figure_plane",
+    prerequis: ["figure_cercle"],
+  },
+  {
+    id: "figure_programme_construction",
+    label: "Écrire un programme de construction",
+    notionId: "figure_plane",
+    prerequis: ["figure_propriete"],
+  },
+  {
     id: "figure_propriete",
     label: "Utiliser les propriétés des figures planes",
     notionId: "figure_plane",
@@ -928,6 +1114,12 @@ export const microSkills: MicroSkillSource[] = [
     label: "Reconnaître un patron de solide",
     notionId: "solide",
     prerequis: ["solide_face"],
+  },
+  {
+    id: "solide_patron_construire",
+    label: "Construire un patron de cube",
+    notionId: "solide",
+    prerequis: ["solide_patron"],
   },
   {
     id: "solide_defi",
@@ -1018,6 +1210,12 @@ export const microSkills: MicroSkillSource[] = [
     label: "Raisonner avec une roue, un dé ou un sac",
     notionId: "probabilite",
     prerequis: ["probabilite_comparer"],
+  },
+  {
+    id: "probabilite_deux_etapes",
+    label: "Recenser les issues de deux épreuves",
+    notionId: "probabilite",
+    prerequis: ["probabilite_roue_de_sac"],
   },
   {
     id: "probabilite_defi",
