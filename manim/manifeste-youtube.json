@@ -58256,6 +58256,2868 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "4e-puissance-comprendre",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_comprendre",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre.mp4",
+      "miniature": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre.png",
+      "titre": "3⁴ : 12 ou 81 ? — Comprendre une puissance — épisode 1 · Maths 4e",
+      "accroche": "Inès publie une vidéo de son chat. Elle l'envoie à 3 amis, et chacun l'envoie à 3 nouveaux amis. Au quatrième envoi, combien de personnes la reçoivent ?\n\nDans cette vidéo :\n• l'arbre des partages : 3 × 3 × 3 × 3 = 3⁴ = 81, pas 12\n• la base et l'exposant : l'exposant compte les facteurs\n• le carré 4² et le cube 3³\n• le piège : 3⁴ n'est pas 3 × 4\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : une bactérie se divise en 2 toutes les 20 minutes. Après 5 divisions, combien y a-t-il de bactéries ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comprendre&display=simple\n\n🔢 Épisode 1 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comprendre une puissance"
+        ],
+        [
+          "00:10",
+          "La vidéo du chat d'Inès"
+        ],
+        [
+          "00:26",
+          "L'arbre des partages : 81, pas 12"
+        ],
+        [
+          "00:57",
+          "Base et exposant : 3⁴"
+        ],
+        [
+          "01:17",
+          "Question 1"
+        ],
+        [
+          "01:49",
+          "Le carré : 4²"
+        ],
+        [
+          "02:14",
+          "Le cube : 3³"
+        ],
+        [
+          "02:28",
+          "Les pièges"
+        ],
+        [
+          "02:53",
+          "Question 2"
+        ],
+        [
+          "03:18",
+          "À toi de jouer"
+        ],
+        [
+          "03:39",
+          "Correction"
+        ],
+        [
+          "04:01",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture",
+      "tags": [
+        "puissance",
+        "base",
+        "exposant",
+        "carré",
+        "cube",
+        "partage de vidéo",
+        "analyste de données",
+        "biologiste",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:17",
+          "question": "Comment écrire 5 × 5 × 5 avec une puissance ?",
+          "choix": [
+            "5³",
+            "3⁵",
+            "5 × 3"
+          ],
+          "reponse": 0,
+          "explication": "La base, c'est 5, le nombre répété. L'exposant, 3, compte les facteurs."
+        },
+        {
+          "t": "02:53",
+          "question": "Combien vaut 2 puissance 4 ?",
+          "choix": [
+            "8",
+            "16",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "2 × 2 × 2 × 2 = 16. 8, c'est 2 × 4 : le piège."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "art-design",
+        "sciences"
+      ]
+    },
+    {
+      "id": "3e-puissance-comprendre",
+      "notionId": "entier_puissance",
+      "microId": "entier_puissance_comprendre",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "4e-puissance-comprendre",
+      "fichier": "3e/maths/puissances/01-comprendre/eleveai-maths-3e-puissance-comprendre.mp4",
+      "miniature": "3e/maths/puissances/01-comprendre/eleveai-maths-3e-puissance-comprendre.png",
+      "titre": "3⁴ : 12 ou 81 ? — Comprendre une puissance — épisode 1 · Maths 3e",
+      "accroche": "Inès publie une vidéo de son chat. Elle l'envoie à 3 amis, et chacun l'envoie à 3 nouveaux amis. Au quatrième envoi, combien de personnes la reçoivent ?\n\nDans cette vidéo :\n• l'arbre des partages : 3 × 3 × 3 × 3 = 3⁴ = 81, pas 12\n• la base et l'exposant : l'exposant compte les facteurs\n• le carré 4² et le cube 3³\n• le piège : 3⁴ n'est pas 3 × 4\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : une bactérie se divise en 2 toutes les 20 minutes. Après 5 divisions, combien y a-t-il de bactéries ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_comprendre&display=simple\n\n🔢 Épisode 1 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comprendre une puissance"
+        ],
+        [
+          "00:10",
+          "La vidéo du chat d'Inès"
+        ],
+        [
+          "00:26",
+          "L'arbre des partages : 81, pas 12"
+        ],
+        [
+          "00:57",
+          "Base et exposant : 3⁴"
+        ],
+        [
+          "01:17",
+          "Question 1"
+        ],
+        [
+          "01:49",
+          "Le carré : 4²"
+        ],
+        [
+          "02:14",
+          "Le cube : 3³"
+        ],
+        [
+          "02:28",
+          "Les pièges"
+        ],
+        [
+          "02:53",
+          "Question 2"
+        ],
+        [
+          "03:18",
+          "À toi de jouer"
+        ],
+        [
+          "03:39",
+          "Correction"
+        ],
+        [
+          "04:01",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance",
+      "tags": [
+        "puissance",
+        "base",
+        "exposant",
+        "carré",
+        "cube",
+        "partage de vidéo",
+        "analyste de données",
+        "biologiste",
+        "puissances",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:17",
+          "question": "Comment écrire 5 × 5 × 5 avec une puissance ?",
+          "choix": [
+            "5³",
+            "3⁵",
+            "5 × 3"
+          ],
+          "reponse": 0,
+          "explication": "La base, c'est 5, le nombre répété. L'exposant, 3, compte les facteurs."
+        },
+        {
+          "t": "02:53",
+          "question": "Combien vaut 2 puissance 4 ?",
+          "choix": [
+            "8",
+            "16",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "2 × 2 × 2 × 2 = 16. 8, c'est 2 × 4 : le piège."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "art-design",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-puissance-comprendre-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_comprendre",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-comprendre",
+      "fichier": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.mp4",
+      "miniature": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.png",
+      "titre": "Plie une feuille en deux : combien de couches ? 📄 — 4e #Shorts",
+      "accroche": "Plie une feuille en deux. Encore. Et encore. 1 pliage : 2 couches. 2 pliages : 4 couches. 5 pliages : 2 × 2 × 2 × 2 × 2 = 2⁵, soit 32 couches. Pas 2 × 5 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Après 7 pliages, combien de couches ? Écris-le avec une puissance. Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "puissance",
+        "exposant",
+        "pliage",
+        "feuille",
+        "piège",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Après 3 pliages, combien de couches ?",
+          "choix": [
+            "6",
+            "8",
+            "9"
+          ],
+          "reponse": 1,
+          "explication": "2 × 2 × 2 = 2³ = 8 couches."
+        }
+      ],
+      "centres": [
+        "sciences"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "entier_puissance",
+          "microId": "entier_puissance_comprendre"
+        }
+      ]
+    },
+    {
+      "id": "4e-puissance-calculer",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_calculer",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer.mp4",
+      "miniature": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer.png",
+      "titre": "−2⁴ ou (−2)⁴ : qui a raison ? — Calculer une puissance — épisode 2 · Maths 4e",
+      "accroche": "Léo et Maya pensent taper le même calcul. Léo trouve −16, Maya trouve 16. Qui a raison ? Les deux : ils n'ont pas tapé le même calcul.\n\nDans cette vidéo :\n• pas à pas avec une cheffe pâtissière : 3, 9, 27, 81 couches de pâte\n• (−2)⁴ : la base est −2, le résultat vaut 16\n• −2⁴ sans parenthèses : 2⁴ = 16, et le moins reste devant : −16\n• la règle des signes : exposant pair ou impair\n• le conseil : les touches ( ) de la calculatrice\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : calcule (−2)⁵, puis −2⁵ sans parenthèses.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calculer&display=simple\n\n🔢 Épisode 2 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux calculatrices, deux résultats"
+        ],
+        [
+          "00:26",
+          "Pas à pas : la pâte feuilletée"
+        ],
+        [
+          "00:49",
+          "Question : 4³"
+        ],
+        [
+          "01:20",
+          "(−2)⁴ : la base est −2"
+        ],
+        [
+          "01:41",
+          "−2⁴ : sans parenthèses"
+        ],
+        [
+          "01:56",
+          "La règle des signes"
+        ],
+        [
+          "02:15",
+          "Question : (−3)²"
+        ],
+        [
+          "02:40",
+          "Le conseil de la calculatrice"
+        ],
+        [
+          "02:53",
+          "Question : −5²"
+        ],
+        [
+          "03:22",
+          "À toi de jouer"
+        ],
+        [
+          "03:37",
+          "Correction"
+        ],
+        [
+          "04:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture",
+      "tags": [
+        "calculer une puissance",
+        "parenthèses",
+        "signe moins",
+        "règle des signes",
+        "calculatrice",
+        "pâtissière",
+        "pâte feuilletée",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "Combien vaut 4³ ?",
+          "choix": [
+            "12",
+            "64",
+            "81"
+          ],
+          "reponse": 1,
+          "explication": "4 × 4 = 16, × 4 = 64. 12 = 4 × 3 : le piège !"
+        },
+        {
+          "t": "02:15",
+          "question": "Combien vaut (−3)² ?",
+          "choix": [
+            "−9",
+            "9",
+            "−6"
+          ],
+          "reponse": 1,
+          "explication": "(−3) × (−3) : deux signes moins, le résultat est positif."
+        },
+        {
+          "t": "02:53",
+          "question": "Combien vaut −5² (sans parenthèses) ?",
+          "choix": [
+            "25",
+            "−25",
+            "−10"
+          ],
+          "reponse": 1,
+          "explication": "Sans parenthèses : 5² = 25, et le moins reste devant."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "3e-puissance-calculer",
+      "notionId": "entier_puissance",
+      "microId": "entier_puissance_calculer",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "4e-puissance-calculer",
+      "fichier": "3e/maths/puissances/02-calculer/eleveai-maths-3e-puissance-calculer.mp4",
+      "miniature": "3e/maths/puissances/02-calculer/eleveai-maths-3e-puissance-calculer.png",
+      "titre": "−2⁴ ou (−2)⁴ : qui a raison ? — Calculer une puissance — épisode 2 · Maths 3e",
+      "accroche": "Léo et Maya pensent taper le même calcul. Léo trouve −16, Maya trouve 16. Qui a raison ? Les deux : ils n'ont pas tapé le même calcul.\n\nDans cette vidéo :\n• pas à pas avec une cheffe pâtissière : 3, 9, 27, 81 couches de pâte\n• (−2)⁴ : la base est −2, le résultat vaut 16\n• −2⁴ sans parenthèses : 2⁴ = 16, et le moins reste devant : −16\n• la règle des signes : exposant pair ou impair\n• le conseil : les touches ( ) de la calculatrice\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : calcule (−2)⁵, puis −2⁵ sans parenthèses.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_calculer&display=simple\n\n🔢 Épisode 2 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux calculatrices, deux résultats"
+        ],
+        [
+          "00:26",
+          "Pas à pas : la pâte feuilletée"
+        ],
+        [
+          "00:49",
+          "Question : 4³"
+        ],
+        [
+          "01:20",
+          "(−2)⁴ : la base est −2"
+        ],
+        [
+          "01:41",
+          "−2⁴ : sans parenthèses"
+        ],
+        [
+          "01:56",
+          "La règle des signes"
+        ],
+        [
+          "02:15",
+          "Question : (−3)²"
+        ],
+        [
+          "02:40",
+          "Le conseil de la calculatrice"
+        ],
+        [
+          "02:53",
+          "Question : −5²"
+        ],
+        [
+          "03:22",
+          "À toi de jouer"
+        ],
+        [
+          "03:37",
+          "Correction"
+        ],
+        [
+          "04:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance",
+      "tags": [
+        "calculer une puissance",
+        "parenthèses",
+        "signe moins",
+        "règle des signes",
+        "calculatrice",
+        "pâtissière",
+        "pâte feuilletée",
+        "puissances",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "Combien vaut 4³ ?",
+          "choix": [
+            "12",
+            "64",
+            "81"
+          ],
+          "reponse": 1,
+          "explication": "4 × 4 = 16, × 4 = 64. 12 = 4 × 3 : le piège !"
+        },
+        {
+          "t": "02:15",
+          "question": "Combien vaut (−3)² ?",
+          "choix": [
+            "−9",
+            "9",
+            "−6"
+          ],
+          "reponse": 1,
+          "explication": "(−3) × (−3) : deux signes moins, le résultat est positif."
+        },
+        {
+          "t": "02:53",
+          "question": "Combien vaut −5² (sans parenthèses) ?",
+          "choix": [
+            "25",
+            "−25",
+            "−10"
+          ],
+          "reponse": 1,
+          "explication": "Sans parenthèses : 5² = 25, et le moins reste devant."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-puissance-calculer-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_calculer",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-calculer",
+      "fichier": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.mp4",
+      "miniature": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.png",
+      "titre": "Ma calculatrice est-elle cassée ? 🧮 — 4e #Shorts",
+      "accroche": "Ma calculatrice dit : −2⁴ = −16. Elle est cassée ? Non ! Sans parenthèses, la puissance passe d'abord : 2⁴ = 16, puis le moins devant. Avec des parenthèses : (−2)⁴ = 16.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et −1¹⁰⁰, sans parenthèses ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "puissance",
+        "calculatrice",
+        "parenthèses",
+        "signe moins",
+        "piège",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "(−3)² = ?",
+          "choix": [
+            "−9",
+            "9",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "Deux signes moins : le résultat est positif."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "entier_puissance",
+          "microId": "entier_puissance_calculer"
+        }
+      ]
+    },
+    {
+      "id": "4e-puissance-dix",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_dix",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix.mp4",
+      "miniature": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix.png",
+      "titre": "Combien de zéros dans 100 milliards ? — Les puissances de 10 — épisode 3 · Maths 4e",
+      "accroche": "Une astronome compte les étoiles. Notre galaxie en contient environ 100 milliards : un 1 suivi de 11 zéros. Une puissance de 10 l'écrit en deux caractères.\n\nDans cette vidéo :\n• la table qui monte : 10¹, 10², … 10⁶, l'exposant compte les zéros\n• une galaxie : 10¹¹ étoiles\n• dans l'autre sens, avec un ingénieur réseau : du nombre à la puissance\n• le piège : compter les chiffres au lieu des zéros (100 000 = 10⁵, pas 10⁶)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une technicienne installe un disque dur d'un téraoctet : mille milliards d'octets. Écris ce nombre avec une puissance de 10.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_dix&display=simple\n\n🔢 Épisode 3 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "L'astronome et les étoiles"
+        ],
+        [
+          "00:23",
+          "La table qui monte"
+        ],
+        [
+          "00:48",
+          "Question : 10⁴"
+        ],
+        [
+          "01:15",
+          "Dans l'autre sens : les serveurs"
+        ],
+        [
+          "01:34",
+          "Le piège : chiffres ou zéros ?"
+        ],
+        [
+          "01:45",
+          "Question : 100 000"
+        ],
+        [
+          "02:17",
+          "À toi de jouer : le disque dur"
+        ],
+        [
+          "02:32",
+          "Correction"
+        ],
+        [
+          "02:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture",
+      "tags": [
+        "puissances de 10",
+        "zéros",
+        "exposant",
+        "galaxie",
+        "astronome",
+        "ingénieur réseau",
+        "téraoctet",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "Combien vaut 10 puissance 4 ?",
+          "choix": [
+            "40",
+            "10 000",
+            "1 000"
+          ],
+          "reponse": 1,
+          "explication": "10 000 : un 1 suivi de 4 zéros ; 40, c'est 10 × 4 : le piège."
+        },
+        {
+          "t": "01:45",
+          "question": "Comment écrire 100 000 avec une puissance de 10 ?",
+          "choix": [
+            "10⁶",
+            "10⁵",
+            "10 × 5"
+          ],
+          "reponse": 1,
+          "explication": "10⁵ : un 1 et cinq zéros ; 6, c'est le nombre de chiffres : le piège."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "3e-puissance-dix",
+      "notionId": "entier_puissance",
+      "microId": "entier_puissance_dix",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "4e-puissance-dix",
+      "fichier": "3e/maths/puissances/03-dix/eleveai-maths-3e-puissance-dix.mp4",
+      "miniature": "3e/maths/puissances/03-dix/eleveai-maths-3e-puissance-dix.png",
+      "titre": "Combien de zéros dans 100 milliards ? — Les puissances de 10 — épisode 3 · Maths 3e",
+      "accroche": "Une astronome compte les étoiles. Notre galaxie en contient environ 100 milliards : un 1 suivi de 11 zéros. Une puissance de 10 l'écrit en deux caractères.\n\nDans cette vidéo :\n• la table qui monte : 10¹, 10², … 10⁶, l'exposant compte les zéros\n• une galaxie : 10¹¹ étoiles\n• dans l'autre sens, avec un ingénieur réseau : du nombre à la puissance\n• le piège : compter les chiffres au lieu des zéros (100 000 = 10⁵, pas 10⁶)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une technicienne installe un disque dur d'un téraoctet : mille milliards d'octets. Écris ce nombre avec une puissance de 10.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_dix&display=simple\n\n🔢 Épisode 3 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "L'astronome et les étoiles"
+        ],
+        [
+          "00:23",
+          "La table qui monte"
+        ],
+        [
+          "00:48",
+          "Question : 10⁴"
+        ],
+        [
+          "01:15",
+          "Dans l'autre sens : les serveurs"
+        ],
+        [
+          "01:34",
+          "Le piège : chiffres ou zéros ?"
+        ],
+        [
+          "01:45",
+          "Question : 100 000"
+        ],
+        [
+          "02:17",
+          "À toi de jouer : le disque dur"
+        ],
+        [
+          "02:32",
+          "Correction"
+        ],
+        [
+          "02:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance",
+      "tags": [
+        "puissances de 10",
+        "zéros",
+        "exposant",
+        "galaxie",
+        "astronome",
+        "ingénieur réseau",
+        "téraoctet",
+        "puissances",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "Combien vaut 10 puissance 4 ?",
+          "choix": [
+            "40",
+            "10 000",
+            "1 000"
+          ],
+          "reponse": 1,
+          "explication": "10 000 : un 1 suivi de 4 zéros ; 40, c'est 10 × 4 : le piège."
+        },
+        {
+          "t": "01:45",
+          "question": "Comment écrire 100 000 avec une puissance de 10 ?",
+          "choix": [
+            "10⁶",
+            "10⁵",
+            "10 × 5"
+          ],
+          "reponse": 1,
+          "explication": "10⁵ : un 1 et cinq zéros ; 6, c'est le nombre de chiffres : le piège."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "4e-puissance-dix-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_dix",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-dix",
+      "fichier": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.mp4",
+      "miniature": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.png",
+      "titre": "Un milliard de vues : combien de zéros ? 📱 — 4e #Shorts",
+      "accroche": "10 vues : 10¹. 100 vues : 10². 1 000 vues : 10³. L'exposant compte les zéros. Un milliard de vues : un 1 suivi de 9 zéros, 10⁹ !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 10¹⁰⁰ : combien de zéros ? Ce nombre porte un nom célèbre. Lequel ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_dix&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "puissances de 10",
+        "zéros",
+        "milliard",
+        "vues",
+        "réseaux sociaux",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Un million de vues, c'est :",
+          "choix": [
+            "10⁶",
+            "10⁷",
+            "10 × 6"
+          ],
+          "reponse": 0,
+          "explication": "Un million, c'est un 1 suivi de 6 zéros : 10⁶."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "entier_puissance",
+          "microId": "entier_puissance_dix"
+        }
+      ]
+    },
+    {
+      "id": "4e-puissance-zero-negatif",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_exposant_negatif",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif.mp4",
+      "miniature": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif.png",
+      "titre": "10⁰ vaut 1, pas 0 ! — Puissance zéro et exposant négatif — épisode 4 · Maths 4e",
+      "accroche": "Une ingénieure en microélectronique dessine les puces des téléphones. Ses traits mesurent quelques milliardièmes de mètre. Pour écrire des nombres aussi petits, les puissances de 10 descendent sous zéro.\n\nDans cette vidéo :\n• la table qui descend : 10³, 10², 10¹, et 10 ÷ 10 = 1, donc 10⁰ = 1\n• avec 2, c'est pareil : quelle que soit la base, a⁰ = 1\n• sous zéro : 10⁻¹ = 0,1 ; 10⁻³ = 0,001\n• la règle : a⁻ⁿ = 1/aⁿ\n• le piège : un exposant négatif ne rend pas le nombre négatif, il le rend petit\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : le trait d'une puce mesure 10⁻⁹ mètre : écris ce nombre en décimal. Puis calcule 4⁻¹.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple\n\n🔢 Épisode 4 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "L'ingénieure et la puce"
+        ],
+        [
+          "00:24",
+          "La table qui descend"
+        ],
+        [
+          "00:39",
+          "10⁰ = 1"
+        ],
+        [
+          "00:49",
+          "Avec 2, c'est pareil"
+        ],
+        [
+          "01:07",
+          "Question : 7⁰"
+        ],
+        [
+          "01:27",
+          "Et sous zéro ?"
+        ],
+        [
+          "01:45",
+          "Le rang du 1"
+        ],
+        [
+          "01:58",
+          "a⁻ⁿ = 1/aⁿ"
+        ],
+        [
+          "02:15",
+          "Question : 10⁻²"
+        ],
+        [
+          "02:43",
+          "Défi"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:18",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture",
+      "tags": [
+        "puissance zéro",
+        "exposant négatif",
+        "puissances de 10",
+        "puce électronique",
+        "ingénieure en microélectronique",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:07",
+          "question": "Combien vaut 7 puissance 0 ?",
+          "choix": [
+            "0",
+            "7",
+            "1"
+          ],
+          "reponse": 2,
+          "explication": "Une puissance d'exposant 0 vaut toujours 1."
+        },
+        {
+          "t": "02:15",
+          "question": "Combien vaut 10 puissance moins 2 ?",
+          "choix": [
+            "−100",
+            "0,01",
+            "−20"
+          ],
+          "reponse": 1,
+          "explication": "Un exposant négatif ne rend pas le nombre négatif : il le rend petit."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "sciences"
+      ]
+    },
+    {
+      "id": "seconde-puissance-zero-negatif",
+      "notionId": "puissances_2de",
+      "microId": "puiss_exposant_negatif",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/puissances/04-zero-negatif/eleveai-maths-seconde-puissance-zero-negatif.mp4",
+      "miniature": "seconde/maths/puissances/04-zero-negatif/eleveai-maths-seconde-puissance-zero-negatif.png",
+      "titre": "10⁰ vaut 1, pas 0 ! — Puissance zéro et exposant négatif — épisode 4 · Maths 2de",
+      "accroche": "Une ingénieure en microélectronique dessine les puces des téléphones. Ses traits mesurent quelques milliardièmes de mètre. Pour écrire des nombres aussi petits, les puissances de 10 descendent sous zéro.\n\nDans cette vidéo :\n• la table qui descend : 10³, 10², 10¹, et 10 ÷ 10 = 1, donc 10⁰ = 1\n• avec 2, c'est pareil : quelle que soit la base, a⁰ = 1\n• la preuve : 5³ ÷ 5³ = 1 et 5³⁻³ = 5⁰\n• sous zéro : 10⁻¹ = 0,1 ; 10⁻³ = 0,001\n• la règle : a⁻ⁿ = 1/aⁿ\n• le piège : un exposant négatif ne rend pas le nombre négatif, il le rend petit\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : le trait d'une puce mesure 10⁻⁹ mètre : écris ce nombre en décimal. Puis calcule 4⁻¹.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_exposant_negatif&display=simple\n\n🔢 Épisode 4 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "L'ingénieure et la puce"
+        ],
+        [
+          "00:24",
+          "La table qui descend"
+        ],
+        [
+          "00:39",
+          "10⁰ = 1"
+        ],
+        [
+          "00:49",
+          "Avec 2, c'est pareil"
+        ],
+        [
+          "01:07",
+          "Question : 7⁰"
+        ],
+        [
+          "01:27",
+          "Preuve : 5³ ÷ 5³"
+        ],
+        [
+          "01:46",
+          "Et sous zéro ?"
+        ],
+        [
+          "02:04",
+          "Le rang du 1"
+        ],
+        [
+          "02:17",
+          "La règle"
+        ],
+        [
+          "02:34",
+          "Question : 10⁻²"
+        ],
+        [
+          "03:02",
+          "Défi"
+        ],
+        [
+          "03:18",
+          "Correction"
+        ],
+        [
+          "03:38",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de",
+      "tags": [
+        "puissance zéro",
+        "exposant négatif",
+        "puissances de 10",
+        "puce électronique",
+        "ingénieure en microélectronique",
+        "puissances",
+        "maths",
+        "seconde",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:07",
+          "question": "Combien vaut 7 puissance 0 ?",
+          "choix": [
+            "0",
+            "7",
+            "1"
+          ],
+          "reponse": 2,
+          "explication": "Une puissance d'exposant 0 vaut toujours 1."
+        },
+        {
+          "t": "02:34",
+          "question": "Combien vaut 10 puissance moins 2 ?",
+          "choix": [
+            "−100",
+            "0,01",
+            "−20"
+          ],
+          "reponse": 1,
+          "explication": "Un exposant négatif ne rend pas le nombre négatif : il le rend petit."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-puissance-zero-negatif-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_exposant_negatif",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-zero-negatif",
+      "fichier": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.mp4",
+      "miniature": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.png",
+      "titre": "2026 puissance 0, ça fait combien ? 🤯 — 4e #Shorts",
+      "accroche": "2026⁰ : un indice, ce n'est pas 0. Descends l'escalier des puissances de 3 : 3² = 9, 3¹ = 3. À chaque marche, on divise par 3. 3⁰ = 3 ÷ 3 = 1 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 1 000 000⁰ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "puissance zéro",
+        "exposant",
+        "2026",
+        "escalier",
+        "piège",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Alors, 2026 puissance 0 ?",
+          "choix": [
+            "0",
+            "1",
+            "2026"
+          ],
+          "reponse": 1,
+          "explication": "Avec 2026 aussi, la dernière marche divise 2026 par 2026 : 1."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "seconde",
+          "notionId": "puissances_2de",
+          "microId": "puiss_exposant_negatif"
+        }
+      ]
+    },
+    {
+      "id": "4e-puissance-notation-scientifique",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_notation_scientifique",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique.mp4",
+      "miniature": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique.png",
+      "titre": "8 milliards et 0,000 007, même écriture ? — La notation scientifique — épisode 5 · Maths 4e",
+      "accroche": "Une démographe étudie la population du monde : environ 8 milliards d'habitants. Une médecin observe un globule rouge : 0,000 007 mètre. Un nombre géant, un nombre minuscule : les scientifiques les écrivent de la même façon.\n\nDans cette vidéo :\n• la forme : un nombre entre 1 et 10 × une puissance de 10\n• un grand nombre : la virgule recule, 2 500 000 000 battements de cœur\n• un petit nombre : la virgule avance, 0,000 007 = 7 × 10⁻⁶\n• le piège du signe, et 45 × 10³ qui n'est pas une notation scientifique\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un grain de pollen de 0,000 03 mètre et 1 400 000 000 habitants en Chine : écris ces deux nombres en notation scientifique.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_notation_scientifique&display=simple\n\n🔢 Épisode 5 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une démographe, une médecin"
+        ],
+        [
+          "00:29",
+          "Un nombre entre 1 et 10 × une puissance de 10"
+        ],
+        [
+          "00:41",
+          "Un grand nombre : la virgule recule"
+        ],
+        [
+          "01:00",
+          "Question : 45 000"
+        ],
+        [
+          "01:37",
+          "Un petit nombre : la virgule avance"
+        ],
+        [
+          "01:57",
+          "Le piège : le signe"
+        ],
+        [
+          "02:08",
+          "Question : 0,003"
+        ],
+        [
+          "02:46",
+          "À toi de jouer"
+        ],
+        [
+          "03:07",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture",
+      "tags": [
+        "notation scientifique",
+        "écriture scientifique",
+        "puissances de 10",
+        "démographe",
+        "médecin",
+        "globule rouge",
+        "botaniste",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:00",
+          "question": "Quelle est la notation scientifique de 45 000 ?",
+          "choix": [
+            "45 × 10³",
+            "4,5 × 10⁴",
+            "4,5 × 10³"
+          ],
+          "reponse": 1,
+          "explication": "45 × 10³ vaut bien 45 000, mais 45 n'est pas entre 1 et 10."
+        },
+        {
+          "t": "02:08",
+          "question": "Quelle est la notation scientifique de 0,003 ?",
+          "choix": [
+            "3 × 10³",
+            "3 × 10⁻³",
+            "0,3 × 10⁻²"
+          ],
+          "reponse": 1,
+          "explication": "0,003 est plus petit que 1 : l'exposant est négatif. Le 3 est à la troisième place après la virgule."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "histoire-geographie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "3e-puissance-notation-scientifique",
+      "notionId": "entier_puissance",
+      "microId": "entier_puissance_ecriture_scientifique",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "4e-puissance-notation-scientifique",
+      "fichier": "3e/maths/puissances/05-notation-scientifique/eleveai-maths-3e-puissance-notation-scientifique.mp4",
+      "miniature": "3e/maths/puissances/05-notation-scientifique/eleveai-maths-3e-puissance-notation-scientifique.png",
+      "titre": "8 milliards et 0,000 007, même écriture ? — La notation scientifique — épisode 5 · Maths 3e",
+      "accroche": "Une démographe étudie la population du monde : environ 8 milliards d'habitants. Une médecin observe un globule rouge : 0,000 007 mètre. Un nombre géant, un nombre minuscule : les scientifiques les écrivent de la même façon.\n\nDans cette vidéo :\n• la forme : un nombre entre 1 et 10 × une puissance de 10\n• un grand nombre : la virgule recule, 2 500 000 000 battements de cœur\n• un petit nombre : la virgule avance, 0,000 007 = 7 × 10⁻⁶\n• le piège du signe, et 45 × 10³ qui n'est pas une notation scientifique\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un grain de pollen de 0,000 03 mètre et 1 400 000 000 habitants en Chine : écris ces deux nombres en notation scientifique.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_ecriture_scientifique&display=simple\n\n🔢 Épisode 5 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une démographe, une médecin"
+        ],
+        [
+          "00:29",
+          "Un nombre entre 1 et 10 × une puissance de 10"
+        ],
+        [
+          "00:41",
+          "Un grand nombre : la virgule recule"
+        ],
+        [
+          "01:00",
+          "Question : 45 000"
+        ],
+        [
+          "01:37",
+          "Un petit nombre : la virgule avance"
+        ],
+        [
+          "01:57",
+          "Le piège : le signe"
+        ],
+        [
+          "02:08",
+          "Question : 0,003"
+        ],
+        [
+          "02:46",
+          "À toi de jouer"
+        ],
+        [
+          "03:07",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance",
+      "tags": [
+        "notation scientifique",
+        "écriture scientifique",
+        "puissances de 10",
+        "démographe",
+        "médecin",
+        "globule rouge",
+        "botaniste",
+        "puissances",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:00",
+          "question": "Quelle est la notation scientifique de 45 000 ?",
+          "choix": [
+            "45 × 10³",
+            "4,5 × 10⁴",
+            "4,5 × 10³"
+          ],
+          "reponse": 1,
+          "explication": "45 × 10³ vaut bien 45 000, mais 45 n'est pas entre 1 et 10."
+        },
+        {
+          "t": "02:08",
+          "question": "Quelle est la notation scientifique de 0,003 ?",
+          "choix": [
+            "3 × 10³",
+            "3 × 10⁻³",
+            "0,3 × 10⁻²"
+          ],
+          "reponse": 1,
+          "explication": "0,003 est plus petit que 1 : l'exposant est négatif. Le 3 est à la troisième place après la virgule."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "histoire-geographie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "seconde-puissance-notation-scientifique",
+      "notionId": "puissances_2de",
+      "microId": "puiss_notation_scientifique",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "meme_video_que": "4e-puissance-notation-scientifique",
+      "fichier": "seconde/maths/puissances/05-notation-scientifique/eleveai-maths-seconde-puissance-notation-scientifique.mp4",
+      "miniature": "seconde/maths/puissances/05-notation-scientifique/eleveai-maths-seconde-puissance-notation-scientifique.png",
+      "titre": "8 milliards et 0,000 007, même écriture ? — La notation scientifique — épisode 5 · Maths 2de",
+      "accroche": "Une démographe étudie la population du monde : environ 8 milliards d'habitants. Une médecin observe un globule rouge : 0,000 007 mètre. Un nombre géant, un nombre minuscule : les scientifiques les écrivent de la même façon.\n\nDans cette vidéo :\n• la forme : un nombre entre 1 et 10 × une puissance de 10\n• un grand nombre : la virgule recule, 2 500 000 000 battements de cœur\n• un petit nombre : la virgule avance, 0,000 007 = 7 × 10⁻⁶\n• le piège du signe, et 45 × 10³ qui n'est pas une notation scientifique\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un grain de pollen de 0,000 03 mètre et 1 400 000 000 habitants en Chine : écris ces deux nombres en notation scientifique.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_notation_scientifique&display=simple\n\n🔢 Épisode 5 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une démographe, une médecin"
+        ],
+        [
+          "00:29",
+          "Un nombre entre 1 et 10 × une puissance de 10"
+        ],
+        [
+          "00:41",
+          "Un grand nombre : la virgule recule"
+        ],
+        [
+          "01:00",
+          "Question : 45 000"
+        ],
+        [
+          "01:37",
+          "Un petit nombre : la virgule avance"
+        ],
+        [
+          "01:57",
+          "Le piège : le signe"
+        ],
+        [
+          "02:08",
+          "Question : 0,003"
+        ],
+        [
+          "02:46",
+          "À toi de jouer"
+        ],
+        [
+          "03:07",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de",
+      "tags": [
+        "notation scientifique",
+        "écriture scientifique",
+        "puissances de 10",
+        "démographe",
+        "médecin",
+        "globule rouge",
+        "botaniste",
+        "puissances",
+        "maths",
+        "seconde",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:00",
+          "question": "Quelle est la notation scientifique de 45 000 ?",
+          "choix": [
+            "45 × 10³",
+            "4,5 × 10⁴",
+            "4,5 × 10³"
+          ],
+          "reponse": 1,
+          "explication": "45 × 10³ vaut bien 45 000, mais 45 n'est pas entre 1 et 10."
+        },
+        {
+          "t": "02:08",
+          "question": "Quelle est la notation scientifique de 0,003 ?",
+          "choix": [
+            "3 × 10³",
+            "3 × 10⁻³",
+            "0,3 × 10⁻²"
+          ],
+          "reponse": 1,
+          "explication": "0,003 est plus petit que 1 : l'exposant est négatif. Le 3 est à la troisième place après la virgule."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "histoire-geographie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-puissance-notation-scientifique-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_notation_scientifique",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-notation-scientifique",
+      "fichier": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.mp4",
+      "miniature": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.png",
+      "titre": "8 milliards d'humains, sans aligner les zéros 🌍 — 4e #Shorts",
+      "accroche": "8 milliards : un 8 suivi de 9 zéros. On écrit 8 × 10⁹. Et le minuscule ? Un globule rouge : 0,000 007 mètre, 7 × 10⁻⁶.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : La Terre pèse environ 6 suivi de 24 zéros kilogrammes. Écris-le en notation scientifique. Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_notation_scientifique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "notation scientifique",
+        "population mondiale",
+        "globule rouge",
+        "zéros",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Et 3 millions ?",
+          "choix": [
+            "3 × 10⁶",
+            "3 × 10³",
+            "30 × 10⁵"
+          ],
+          "reponse": 0,
+          "explication": "Un 3 suivi de 6 zéros."
+        }
+      ],
+      "centres": [
+        "espace",
+        "corps-sante"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "entier_puissance",
+          "microId": "entier_puissance_ecriture_scientifique"
+        },
+        {
+          "classe": "seconde",
+          "notionId": "puissances_2de",
+          "microId": "puiss_notation_scientifique"
+        }
+      ]
+    },
+    {
+      "id": "4e-puissance-comparer",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_comparer",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer.mp4",
+      "miniature": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer.png",
+      "titre": "9 × 10⁵ ou 2 × 10⁶ : qui gagne ? — Comparer en notation scientifique — épisode 6 · Maths 4e",
+      "accroche": "Une géologue compare deux éruptions. Le premier volcan a rejeté 9 × 10⁵ mètres cubes de lave, le second 2 × 10⁶. 9, c'est plus que 2 : le premier a gagné ? Attention !\n\nDans cette vidéo :\n• en entier : 900 000 contre 2 000 000\n• la règle en deux marches : les exposants d'abord, les nombres devant ensuite\n• même exposant : 3,7 × 10⁸ contre 3,2 × 10⁸\n• les exposants négatifs : −4 est plus petit que −3\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : range de la plus petite à la plus grande : une baleine bleue (1,5 × 10⁵ kg), un éléphant (6 × 10³ kg), un camion (4 × 10⁴ kg).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comparer&display=simple\n\n🔢 Épisode 6 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "La géologue et les deux volcans"
+        ],
+        [
+          "00:27",
+          "En entier"
+        ],
+        [
+          "00:42",
+          "La règle en deux marches"
+        ],
+        [
+          "00:55",
+          "Question : le plus grand"
+        ],
+        [
+          "01:25",
+          "Même exposant"
+        ],
+        [
+          "01:41",
+          "Exposants négatifs"
+        ],
+        [
+          "01:56",
+          "Question : le plus petit"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:53",
+          "Correction"
+        ],
+        [
+          "03:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture",
+      "tags": [
+        "comparer",
+        "notation scientifique",
+        "exposant",
+        "volcan",
+        "géologue",
+        "baleine bleue",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "Lequel est le plus grand ?",
+          "choix": [
+            "8 × 10³",
+            "1,2 × 10⁴",
+            "9,9 × 10³"
+          ],
+          "reponse": 1,
+          "explication": "Son exposant, 4, est le plus grand : 12 000, contre 8 000 et 9 900."
+        },
+        {
+          "t": "01:56",
+          "question": "Lequel est le plus petit ?",
+          "choix": [
+            "5 × 10⁻³",
+            "5 × 10⁻⁴",
+            "1 × 10⁻³"
+          ],
+          "reponse": 1,
+          "explication": "5 × 10⁻⁴, soit 0,000 5. Son exposant, −4, est le plus petit."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "nature-ecologie",
+        "animaux"
+      ]
+    },
+    {
+      "id": "4e-puissance-comparer-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_comparer",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-comparer",
+      "fichier": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.mp4",
+      "miniature": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.png",
+      "titre": "9 × 10⁵ contre 2 × 10⁶ : qui gagne ? 🥊 — 4e #Shorts",
+      "accroche": "9 × 10⁵ contre 2 × 10⁶ : pas celui que tu crois ! Écrits en entier : 900 000 contre 2 000 000. L'exposant décide d'abord : 6 bat 5.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 9,9 × 10⁻⁴ contre 1 × 10⁻³ : lequel est le plus grand ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "comparer",
+        "notation scientifique",
+        "exposant",
+        "duel",
+        "piège",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "7 × 10² contre 1 × 10³ ?",
+          "choix": [
+            "7 × 10²",
+            "1 × 10³",
+            "égalité"
+          ],
+          "reponse": 1,
+          "explication": "1 000 contre 700. L'exposant 3 bat l'exposant 2."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-puissance-calcul",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_calcul",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul.mp4",
+      "miniature": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul.png",
+      "titre": "10² × 10⁴ : 10⁸ ou 10⁶ ? — Calculer avec des puissances de 10 — épisode 7 · Maths 4e",
+      "accroche": "Un apiculteur a 100 ruches. Dans chaque ruche vivent environ 10 000 abeilles. Combien d'abeilles en tout ?\n\nDans cette vidéo :\n• le produit : 10² × 10⁴ = 10⁶, on additionne les exposants\n• le quotient, avec la carte mémoire d'un photographe : 10⁹ ÷ 10⁶ = 10³\n• avec des nombres devant : 3 × 10² × 2 × 10⁴ = 6 × 10⁶\n• avec un exposant négatif : 10⁵ × 10⁻² = 10³\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : la lumière parcourt 3 × 10⁵ kilomètres en une seconde. Combien en 10³ secondes ? Écris le résultat en notation scientifique.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calcul&display=simple\n\n🔢 Épisode 7 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "L'apiculteur et ses 100 ruches"
+        ],
+        [
+          "00:16",
+          "Le produit : 10² × 10⁴"
+        ],
+        [
+          "00:37",
+          "Question : 10³ × 10⁵"
+        ],
+        [
+          "01:09",
+          "Le quotient : la carte mémoire"
+        ],
+        [
+          "01:36",
+          "Avec des nombres devant"
+        ],
+        [
+          "01:55",
+          "Question : 4 × 10³ × 2 × 10⁵"
+        ],
+        [
+          "02:30",
+          "Avec un exposant négatif"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture",
+      "tags": [
+        "calcul",
+        "puissances de 10",
+        "produit",
+        "quotient",
+        "apiculteur",
+        "abeilles",
+        "photographe",
+        "astrophysicienne",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Combien font 10³ × 10⁵ ?",
+          "choix": [
+            "10¹⁵",
+            "10⁸",
+            "100⁸"
+          ],
+          "reponse": 1,
+          "explication": "On additionne les exposants : 3 + 5 = 8. 15, c'est 3 × 5 : le piège."
+        },
+        {
+          "t": "01:55",
+          "question": "4 × 10³ × 2 × 10⁵ ?",
+          "choix": [
+            "8 × 10⁸",
+            "6 × 10⁸",
+            "8 × 10¹⁵"
+          ],
+          "reponse": 0,
+          "explication": "4 × 2 = 8. Et 10³ × 10⁵ = 10⁸."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "espace"
+      ]
+    },
+    {
+      "id": "3e-puissance-calcul",
+      "notionId": "entier_puissance",
+      "microId": "entier_puissance_calcul",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "meme_video_que": "4e-puissance-calcul",
+      "fichier": "3e/maths/puissances/07-calcul/eleveai-maths-3e-puissance-calcul.mp4",
+      "miniature": "3e/maths/puissances/07-calcul/eleveai-maths-3e-puissance-calcul.png",
+      "titre": "10² × 10⁴ : 10⁸ ou 10⁶ ? — Calculer avec des puissances de 10 — épisode 7 · Maths 3e",
+      "accroche": "Un apiculteur a 100 ruches. Dans chaque ruche vivent environ 10 000 abeilles. Combien d'abeilles en tout ?\n\nDans cette vidéo :\n• le produit : 10² × 10⁴ = 10⁶, on additionne les exposants\n• le quotient, avec la carte mémoire d'un photographe : 10⁹ ÷ 10⁶ = 10³\n• avec des nombres devant : 3 × 10² × 2 × 10⁴ = 6 × 10⁶\n• avec un exposant négatif : 10⁵ × 10⁻² = 10³\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : la lumière parcourt 3 × 10⁵ kilomètres en une seconde. Combien en 10³ secondes ? Écris le résultat en notation scientifique.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_calcul&display=simple\n\n🔢 Épisode 7 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "L'apiculteur et ses 100 ruches"
+        ],
+        [
+          "00:16",
+          "Le produit : 10² × 10⁴"
+        ],
+        [
+          "00:37",
+          "Question : 10³ × 10⁵"
+        ],
+        [
+          "01:09",
+          "Le quotient : la carte mémoire"
+        ],
+        [
+          "01:36",
+          "Avec des nombres devant"
+        ],
+        [
+          "01:55",
+          "Question : 4 × 10³ × 2 × 10⁵"
+        ],
+        [
+          "02:30",
+          "Avec un exposant négatif"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance",
+      "tags": [
+        "calcul",
+        "puissances de 10",
+        "produit",
+        "quotient",
+        "apiculteur",
+        "abeilles",
+        "photographe",
+        "astrophysicienne",
+        "puissances",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Combien font 10³ × 10⁵ ?",
+          "choix": [
+            "10¹⁵",
+            "10⁸",
+            "100⁸"
+          ],
+          "reponse": 1,
+          "explication": "On additionne les exposants : 3 + 5 = 8. 15, c'est 3 × 5 : le piège."
+        },
+        {
+          "t": "01:55",
+          "question": "4 × 10³ × 2 × 10⁵ ?",
+          "choix": [
+            "8 × 10⁸",
+            "6 × 10⁸",
+            "8 × 10¹⁵"
+          ],
+          "reponse": 0,
+          "explication": "4 × 2 = 8. Et 10³ × 10⁵ = 10⁸."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "espace"
+      ]
+    },
+    {
+      "id": "4e-puissance-calcul-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_calcul",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-calcul",
+      "fichier": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.mp4",
+      "miniature": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.png",
+      "titre": "10² × 10⁴ = 10⁸ ? Perdu ! 🎯 — 4e #Shorts",
+      "accroche": "100 × 10 000 : 2 zéros plus 4 zéros, 6 zéros. 1 000 000, c'est 10⁶. On additionne les exposants.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 10⁷ ÷ 10³ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calcul&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "puissances de 10",
+        "zéros",
+        "produit",
+        "exposants",
+        "piège",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "10⁴ × 10⁴ ?",
+          "choix": [
+            "10¹⁶",
+            "10⁸",
+            "20⁸"
+          ],
+          "reponse": 1,
+          "explication": "4 zéros + 4 zéros = 8 zéros."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "entier_puissance",
+          "microId": "entier_puissance_calcul"
+        }
+      ]
+    },
+    {
+      "id": "seconde-puissance-produit-quotient",
+      "notionId": "puissances_2de",
+      "microId": "puiss_produit_quotient",
+      "classe": "seconde",
+      "ceinture": "verte",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient.mp4",
+      "miniature": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient.png",
+      "titre": "2³ × 2⁴ : 2⁷ ou 4⁷ ? — Produit et quotient de puissances — épisode 8 · Maths 2de",
+      "accroche": "Une ingénieure en cybersécurité fabrique des clés secrètes, écrites avec des 0 et des 1. Une clé de 3 bits : 2³ clés. Elle ajoute 4 bits. Combien de clés en tout ?\n\nDans cette vidéo :\n• le produit : aᵐ × aⁿ = aᵐ⁺ⁿ, 2³ × 2⁴ = 2⁷ = 128 clés\n• le quotient : aᵐ ÷ aⁿ = aᵐ⁻ⁿ, 3⁷ ÷ 3² = 3⁵\n• un rappel : 5³ ÷ 5³ = 1 = 5⁰\n• l'exposant du bas plus grand : 2³ ÷ 2⁵ = 2⁻²\n• le piège : 2³ × 3², deux bases différentes, la règle ne marche pas\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : écris (4⁵ × 4⁻²) ÷ 4³ sous la forme d'une seule puissance.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_produit_quotient&display=simple\n\n🔢 Épisode 8 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Produit et quotient de puissances"
+        ],
+        [
+          "00:10",
+          "Les clés de l'ingénieure en cybersécurité"
+        ],
+        [
+          "00:29",
+          "2³ × 2⁴ = 2⁷"
+        ],
+        [
+          "00:46",
+          "Question : 5² × 5⁶"
+        ],
+        [
+          "01:20",
+          "Pour diviser : 3⁷ ÷ 3²"
+        ],
+        [
+          "01:39",
+          "Un rappel : 5⁰ = 1"
+        ],
+        [
+          "01:57",
+          "Exposant du bas plus grand : 2⁻²"
+        ],
+        [
+          "02:13",
+          "Question : 7⁴ ÷ 7⁶"
+        ],
+        [
+          "02:44",
+          "Le piège : deux bases différentes"
+        ],
+        [
+          "02:57",
+          "Question : 2³ × 3²"
+        ],
+        [
+          "03:25",
+          "À toi de jouer"
+        ],
+        [
+          "03:40",
+          "Correction"
+        ],
+        [
+          "03:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de",
+      "tags": [
+        "produit de puissances",
+        "quotient de puissances",
+        "règles de calcul",
+        "cybersécurité",
+        "clé secrète",
+        "bits",
+        "ingénieure",
+        "puissances",
+        "maths",
+        "seconde",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:46",
+          "question": "5² × 5⁶ ?",
+          "choix": [
+            "5¹²",
+            "25⁸",
+            "5⁸"
+          ],
+          "reponse": 2,
+          "explication": "La base reste 5, on additionne les exposants. 25⁸ : le piège, la base ne se multiplie pas."
+        },
+        {
+          "t": "02:13",
+          "question": "7⁴ ÷ 7⁶ ?",
+          "choix": [
+            "7²",
+            "7⁻²",
+            "1⁻²"
+          ],
+          "reponse": 1,
+          "explication": "4 − 6 = −2. La base 7 ne change pas."
+        },
+        {
+          "t": "02:57",
+          "question": "2³ × 3² ?",
+          "choix": [
+            "6⁵",
+            "72",
+            "6⁶"
+          ],
+          "reponse": 1,
+          "explication": "Les bases sont différentes : on calcule 8 × 9 = 72."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "seconde-puissance-produit-quotient-short",
+      "notionId": "puissances_2de",
+      "microId": "puiss_produit_quotient",
+      "classe": "seconde",
+      "ceinture": "blanche",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-puissance-produit-quotient",
+      "fichier": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.mp4",
+      "miniature": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.png",
+      "titre": "Une clé secrète : combien de possibilités ? 🔐 — 2de #Shorts",
+      "accroche": "3 bits : 2³, 8 clés. On ajoute 4 bits : × 2⁴. On additionne les exposants : 2⁷, soit 128 clés.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et une clé de 128 bits : combien de clés ? Écris-le avec une puissance. Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_produit_quotient&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #seconde #lycée",
+      "tags": [
+        "clé secrète",
+        "bits",
+        "cybersécurité",
+        "produit de puissances",
+        "puissances",
+        "maths",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "2⁵ × 2⁵ ?",
+          "choix": [
+            "2¹⁰",
+            "4¹⁰",
+            "2²⁵"
+          ],
+          "reponse": 0,
+          "explication": "La base reste 2 : 5 + 5 = 10. 1 024 clés."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "seconde-puissance-puissance-puissance",
+      "notionId": "puissances_2de",
+      "microId": "puiss_puissance_puissance",
+      "classe": "seconde",
+      "ceinture": "verte",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/puissances/09-puissance-puissance/eleveai-maths-seconde-puissance-puissance-puissance.mp4",
+      "miniature": "seconde/maths/puissances/09-puissance-puissance/eleveai-maths-seconde-puissance-puissance-puissance.png",
+      "titre": "(2³)² : 2⁵ ou 2⁶ ? — La puissance d'une puissance — épisode 9 · Maths 2de",
+      "accroche": "Une architecte dessine une place carrée. Chaque côté mesure 10² mètres. Son aire, c'est le côté au carré : (10²)². Combien de mètres carrés ?\n\nDans cette vidéo :\n• (10²)² = 10² × 10² = 10⁴ = 10 000 mètres carrés\n• (2³)² = 2⁶ : la règle (aᵐ)ⁿ = aᵐˣⁿ\n• ne confonds pas : 2³ × 2² = 2⁵, mais (2³)² = 2⁶\n• avec un exposant négatif : (10⁻³)² = 10⁻⁶\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : écris 4³ sous la forme d'une seule puissance de 2. Un indice : 4, c'est 2².\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_puissance_puissance&display=simple\n\n🔢 Épisode 9 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "L'architecte et la place carrée"
+        ],
+        [
+          "00:25",
+          "(10²)² = 10⁴"
+        ],
+        [
+          "00:37",
+          "(2³)² = 2⁶ : la règle"
+        ],
+        [
+          "00:58",
+          "Question : (5⁴)³"
+        ],
+        [
+          "01:32",
+          "Ne confonds pas les deux règles"
+        ],
+        [
+          "01:50",
+          "Avec un exposant négatif"
+        ],
+        [
+          "02:02",
+          "Question : (3⁻²)⁻¹"
+        ],
+        [
+          "02:30",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "03:04",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de",
+      "tags": [
+        "puissance d'une puissance",
+        "règles de calcul",
+        "exposants",
+        "architecte",
+        "place carrée",
+        "aire",
+        "puissances",
+        "maths",
+        "seconde",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "(5⁴)³ ?",
+          "choix": [
+            "5⁷",
+            "5¹²",
+            "15⁴"
+          ],
+          "reponse": 1,
+          "explication": "Puissance d'une puissance : 4 × 3 = 12. 5⁷, c'est la règle du produit : le piège."
+        },
+        {
+          "t": "02:02",
+          "question": "(3⁻²)⁻¹ ?",
+          "choix": [
+            "3²",
+            "3⁻³",
+            "3⁻²"
+          ],
+          "reponse": 0,
+          "explication": "(−2) × (−1) = +2."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "seconde-puissance-enchainer",
+      "notionId": "puissances_2de",
+      "microId": "puiss_expression_composee",
+      "classe": "seconde",
+      "ceinture": "orange",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer.mp4",
+      "miniature": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer.png",
+      "titre": "Une seule puissance au bout ? — Enchaîner les règles — épisode 10 · Maths 2de",
+      "accroche": "Avant de décoller, une pilote de ligne suit sa check-list : une étape à la fois, dans l'ordre, sans en sauter. Pour une longue expression de puissances, on fait pareil.\n\nDans cette vidéo :\n• l'expression du contrôle : B = (7⁴ × 7⁻⁵) ÷ (7³)⁴\n• étape 1 : la puissance de puissance, (7³)⁴ = 7¹²\n• étape 2 : le produit, 7⁴ × 7⁻⁵ = 7⁻¹\n• étape 3 : le quotient, B = 7⁻¹³\n• le piège : −1 − 12 = −13, ni 11 ni −11\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : écris C = ((5²)³ × 5⁻⁴) ÷ 5³ sous la forme 5ⁿ.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_expression_composee&display=simple\n\n🔢 Épisode 10 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "La check-list de la pilote de ligne"
+        ],
+        [
+          "00:19",
+          "L'expression B"
+        ],
+        [
+          "00:42",
+          "Étape 1 : la puissance de puissance"
+        ],
+        [
+          "00:54",
+          "Étape 2 : le produit"
+        ],
+        [
+          "01:06",
+          "Étape 3 : le quotient, B = 7⁻¹³"
+        ],
+        [
+          "01:20",
+          "Question : (2⁵ × 2³) ÷ 2⁶"
+        ],
+        [
+          "01:51",
+          "Le piège : −1 − 12"
+        ],
+        [
+          "02:04",
+          "Question : 3⁻² ÷ 3⁴"
+        ],
+        [
+          "02:33",
+          "À toi de jouer"
+        ],
+        [
+          "02:51",
+          "Correction"
+        ],
+        [
+          "03:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/seconde/puissances-2de",
+      "tags": [
+        "enchaîner les règles",
+        "réduire une expression",
+        "exposants",
+        "check-list",
+        "pilote de ligne",
+        "contrôle",
+        "puissances",
+        "maths",
+        "seconde",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:20",
+          "question": "(2⁵ × 2³) ÷ 2⁶ ?",
+          "choix": [
+            "2²",
+            "2⁹",
+            "2¹⁴"
+          ],
+          "reponse": 0,
+          "explication": "5 + 3 = 8, puis 8 − 6 = 2 : 2²."
+        },
+        {
+          "t": "02:04",
+          "question": "3⁻² ÷ 3⁴ ?",
+          "choix": [
+            "3²",
+            "3⁻⁶",
+            "3⁻²"
+          ],
+          "reponse": 1,
+          "explication": "−2 − 4 = −6 : 3⁻⁶."
+        }
+      ],
+      "centres": [
+        "transports",
+        "avions"
+      ]
+    },
+    {
+      "id": "seconde-puissance-enchainer-short",
+      "notionId": "puissances_2de",
+      "microId": "puiss_expression_composee",
+      "classe": "seconde",
+      "ceinture": "blanche",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-puissance-enchainer",
+      "fichier": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.mp4",
+      "miniature": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.png",
+      "titre": "Une expression géante, une seule puissance ✈️ — 2de #Shorts",
+      "accroche": "(2³)² = 2⁶. Fois 2⁴ : 2¹⁰. Divisé par 2⁷ : 2³. 8 ! Une étape à la fois, comme la check-list d'une pilote.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et (3⁴)² ÷ 3⁸ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_expression_composee&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #seconde #lycée",
+      "tags": [
+        "enchaîner les règles",
+        "check-list",
+        "avion",
+        "exposants",
+        "puissances",
+        "maths",
+        "seconde",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "(10²)³ ÷ 10⁵ ?",
+          "choix": [
+            "1",
+            "10",
+            "100"
+          ],
+          "reponse": 1,
+          "explication": "2 × 3 = 6, puis 6 − 5 = 1 : 10¹ = 10."
+        }
+      ],
+      "centres": [
+        "avions",
+        "transports"
+      ]
+    },
+    {
+      "id": "4e-puissance-defi",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi.mp4",
+      "miniature": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi.png",
+      "titre": "4 épreuves : tu tiens jusqu'au bout ? — Défi puissances — épisode 11 · Maths 4e",
+      "accroche": "Quatre épreuves, de plus en plus dures. Yanis organise un tournoi de jeux vidéo en 6 tours : à chaque tour, la moitié des joueurs est éliminée. Combien de joueurs au départ ?\n\nDans cette vidéo :\n• épreuve 1, le tournoi : 2⁶ = 64 joueurs, pas 2 × 6 = 12\n• épreuve 2, la chanson : 5 × 2¹⁰ = 5 120 auditeurs\n• épreuve 3, le poids du film : 1,5 × 10⁵ images de 8 × 10⁷ octets\n• dernière épreuve : le film tient-il sur le serveur ? L'exposant décide d'abord\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_defi&display=simple\n\n🔢 Épisode 11 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Épreuve 1 : le tournoi"
+        ],
+        [
+          "00:22",
+          "Question : les joueurs"
+        ],
+        [
+          "01:00",
+          "Épreuve 2 : la chanson"
+        ],
+        [
+          "01:13",
+          "Question : les auditeurs"
+        ],
+        [
+          "01:50",
+          "Épreuve 3 : le poids du film"
+        ],
+        [
+          "02:16",
+          "Correction"
+        ],
+        [
+          "02:42",
+          "Dernière épreuve : le serveur"
+        ],
+        [
+          "02:55",
+          "Question : le film tient-il ?"
+        ],
+        [
+          "03:27",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/puissance-ecriture",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/puissance-ecriture",
+      "tags": [
+        "défi",
+        "puissances",
+        "notation scientifique",
+        "tournoi",
+        "jeux vidéo",
+        "chanson",
+        "artiste d'effets spéciaux",
+        "film d'animation",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Combien faut-il de joueurs au départ ?",
+          "choix": [
+            "12",
+            "36",
+            "64"
+          ],
+          "reponse": 2,
+          "explication": "On remonte depuis le vainqueur : 1, 2, 4, 8, 16, 32, 64. Six doublements : 2⁶. Pas 2 × 6 = 12 : le piège."
+        },
+        {
+          "t": "01:13",
+          "question": "Combien d'auditeurs au bout des 10 jours ?",
+          "choix": [
+            "100",
+            "5 120",
+            "1 024"
+          ],
+          "reponse": 1,
+          "explication": "5 × 2¹⁰. 2¹⁰ = 1 024. × 5 = 5 120. On part de 5, et le 5 reste devant."
+        },
+        {
+          "t": "02:55",
+          "question": "Le film tient-il dessus ?",
+          "choix": [
+            "oui, car 9 est plus grand que 1,2.",
+            "non, car l'exposant 13 est plus grand que 12.",
+            "oui, tout juste."
+          ],
+          "reponse": 1,
+          "explication": "L'exposant décide d'abord : 13 bat 12. En entier : 12 000 milliards d'octets pour le film, 9 000 milliards pour le serveur."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "musique",
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "4e-puissance-defi-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_defi",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-defi",
+      "fichier": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.mp4",
+      "miniature": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.png",
+      "titre": "1 000 € ou 1 centime doublé 20 fois ? 💶 — 4e #Shorts",
+      "accroche": "1 centime. Doublé : 2. Encore : 4. Encore : 8. Ça ne ressemble à rien. Mais doublé 20 fois : 2²⁰ = 1 048 576 centimes, plus de 10 000 euros ! Le centime gagne.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et doublé 30 fois, ça fait combien d'euros ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "centime qui double",
+        "doubler",
+        "argent",
+        "défi",
+        "puissances de 2",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "1 centime doublé 10 fois ?",
+          "choix": [
+            "20 centimes",
+            "100 centimes",
+            "1 024 centimes"
+          ],
+          "reponse": 2,
+          "explication": "2¹⁰, 1 024 centimes. Seulement 10 euros et 24 centimes."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "3e-puissance-defi",
+      "notionId": "entier_puissance",
+      "microId": "entier_puissance_defi",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi.mp4",
+      "miniature": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi.png",
+      "titre": "4 calculs : lesquels sont justes ? — Défi puissances — épisode 12 · Maths 3e",
+      "accroche": "Amina est journaliste scientifique. Avant de publier un article, elle vérifie chaque calcul : une seule erreur, et ses lecteurs ne la croiront plus. Ce matin, quatre calculs l'attendent. Vérifie-les avec elle.\n\nDans cette vidéo :\n• 10³ + 10² = 10⁵ ? Faux : 1 100\n• 2³ × 3³ = 6³ ? Juste : 216 des deux côtés\n• 10⁻² = −100 ? Faux : 0,01\n• la lumière du Soleil : 1,5 × 10⁸ km à 3 × 10⁵ km/s, et le piège de 0,5 × 10³\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_defi&display=simple\n\n🔢 Épisode 12 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Amina, journaliste scientifique"
+        ],
+        [
+          "00:24",
+          "Premier calcul : 10³ + 10²"
+        ],
+        [
+          "00:35",
+          "Question : 10³ + 10²"
+        ],
+        [
+          "00:55",
+          "Réponse : 1 100"
+        ],
+        [
+          "01:08",
+          "Deuxième calcul : 2³ × 3³"
+        ],
+        [
+          "01:18",
+          "Question : ce calcul est-il juste ?"
+        ],
+        [
+          "01:38",
+          "Réponse : oui"
+        ],
+        [
+          "02:02",
+          "Troisième calcul : 10⁻²"
+        ],
+        [
+          "02:12",
+          "Question : 10⁻²"
+        ],
+        [
+          "02:30",
+          "Réponse : 0,01"
+        ],
+        [
+          "02:45",
+          "Le Soleil et la Terre"
+        ],
+        [
+          "03:17",
+          "Correction"
+        ],
+        [
+          "03:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/entier-puissance",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/3e/entier-puissance",
+      "tags": [
+        "défi",
+        "puissances",
+        "vrai ou faux",
+        "notation scientifique",
+        "journaliste scientifique",
+        "lumière du Soleil",
+        "puissances",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Combien vaut 10³ + 10² ?",
+          "choix": [
+            "10⁵",
+            "1 100",
+            "10⁶"
+          ],
+          "reponse": 1,
+          "explication": "1 000 + 100. On additionne les exposants pour un produit, jamais pour une somme."
+        },
+        {
+          "t": "01:18",
+          "question": "Ce calcul est-il juste ? 2³ × 3³ = 6³",
+          "choix": [
+            "oui",
+            "non, les bases sont différentes",
+            "non, c'est 6⁶"
+          ],
+          "reponse": 0,
+          "explication": "8 × 27 = 216 et 6³ = 216."
+        },
+        {
+          "t": "02:12",
+          "question": "Combien vaut 10⁻² ?",
+          "choix": [
+            "−100",
+            "−20",
+            "0,01"
+          ],
+          "reponse": 2,
+          "explication": "1 ÷ 10². Un exposant négatif donne un petit nombre, pas un nombre négatif."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "espace"
+      ]
+    },
+    {
+      "id": "3e-puissance-defi-short",
+      "notionId": "entier_puissance",
+      "microId": "entier_puissance_defi",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-puissance-defi",
+      "fichier": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.mp4",
+      "miniature": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.png",
+      "titre": "2³ × 3³ = 6³ : ça a l'air faux, non ? 🤔 — 3e #Shorts",
+      "accroche": "Vérifions. 2³ = 8. 3³ = 27. 8 × 27 = 216. Et 6³ = 216. C'est juste !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 4³ × 5³, ça fait combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #3e #collège",
+      "tags": [
+        "défi",
+        "bases différentes",
+        "même exposant",
+        "paires",
+        "vérifier",
+        "puissances",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "2⁵ × 5⁵ ?",
+          "choix": [
+            "7⁵",
+            "10⁵",
+            "10¹⁰"
+          ],
+          "reponse": 1,
+          "explication": "On fait des paires : 2 × 5, cinq fois de suite. 100 000."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-puissance-cinq-regles",
+      "notionId": "auto_fractions_puissances",
+      "microId": "auto_num_puissances",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles.mp4",
+      "miniature": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles.png",
+      "titre": "Tu peux les retenir sans calculatrice ? — Les puissances en 5 règles — épisode 13 · Maths 1re",
+      "accroche": "Louise répare des éoliennes en mer : elle est technicienne de maintenance. Là-haut, pas de calculatrice, et il faut estimer vite. Cinq règles sur les puissances lui suffisent, et ce sont les mêmes qui te servent en automatismes.\n\nDans cette vidéo :\n• règle 1 : aⁿ, c'est n facteurs\n• règle 2 : a⁰ = 1\n• règle 3 : aᵐ × aⁿ = aᵐ⁺ⁿ, et le quotient soustrait\n• règle 4 : (aᵐ)ⁿ = aᵐˣⁿ\n• règle 5 : a⁻ⁿ = 1/aⁿ\n• l'ordre de grandeur : un parc de 50 éoliennes, 3 × 10⁸ W\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : écris (2⁵ × 2⁻³) ÷ (2²)³ sous la forme 2ⁿ.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-fractions-puissances\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple\n\n🔢 Épisode 13 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Louise, technicienne d'éoliennes en mer"
+        ],
+        [
+          "00:24",
+          "Règle 1 : n facteurs"
+        ],
+        [
+          "00:36",
+          "Règle 2 : exposant 0"
+        ],
+        [
+          "00:50",
+          "Règle 3 : produit et quotient"
+        ],
+        [
+          "01:11",
+          "Question : 3⁸ ÷ 3²"
+        ],
+        [
+          "01:41",
+          "Règle 4 : puissance de puissance"
+        ],
+        [
+          "01:56",
+          "Règle 5 : exposant négatif"
+        ],
+        [
+          "02:14",
+          "Question : 5⁻²"
+        ],
+        [
+          "02:42",
+          "L'ordre de grandeur"
+        ],
+        [
+          "03:10",
+          "À toi de jouer"
+        ],
+        [
+          "03:33",
+          "Correction"
+        ],
+        [
+          "03:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-fractions-puissances",
+      "tags": [
+        "règles des puissances",
+        "automatismes",
+        "sans calculatrice",
+        "ordre de grandeur",
+        "éoliennes en mer",
+        "technicienne de maintenance",
+        "puissances",
+        "maths",
+        "1re",
+        "automatismes",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "3⁸ ÷ 3² ?",
+          "choix": [
+            "3⁴",
+            "3⁶",
+            "1⁶"
+          ],
+          "reponse": 1,
+          "explication": "On soustrait : 8 − 2 = 6. On ne divise pas les exposants."
+        },
+        {
+          "t": "02:14",
+          "question": "Combien vaut 5⁻² ?",
+          "choix": [
+            "−25",
+            "−10",
+            "0,04"
+          ],
+          "reponse": 2,
+          "explication": "1/5² = 1/25 = 0,04."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "stmg-puissance-cinq-regles",
+      "notionId": "auto_fractions_puissances",
+      "microId": "auto_num_puissances",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "meme_video_que": "premiere-puissance-cinq-regles",
+      "fichier": "stmg/maths/puissances/13-cinq-regles/eleveai-maths-stmg-puissance-cinq-regles.mp4",
+      "miniature": "stmg/maths/puissances/13-cinq-regles/eleveai-maths-stmg-puissance-cinq-regles.png",
+      "titre": "Tu peux les retenir sans calculatrice ? — Les puissances en 5 règles — épisode 13 · Maths STMG",
+      "accroche": "Louise répare des éoliennes en mer : elle est technicienne de maintenance. Là-haut, pas de calculatrice, et il faut estimer vite. Cinq règles sur les puissances lui suffisent, et ce sont les mêmes qui te servent en automatismes.\n\nDans cette vidéo :\n• règle 1 : aⁿ, c'est n facteurs\n• règle 2 : a⁰ = 1\n• règle 3 : aᵐ × aⁿ = aᵐ⁺ⁿ, et le quotient soustrait\n• règle 4 : (aᵐ)ⁿ = aᵐˣⁿ\n• règle 5 : a⁻ⁿ = 1/aⁿ\n• l'ordre de grandeur : un parc de 50 éoliennes, 3 × 10⁸ W\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : écris (2⁵ × 2⁻³) ÷ (2²)³ sous la forme 2ⁿ.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-fractions-puissances\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple\n\n🔢 Épisode 13 sur 13 de la série Puissances d'EleveAI, de la 4e à la 1re.",
+      "chapitres": [
+        [
+          "00:00",
+          "Louise, technicienne d'éoliennes en mer"
+        ],
+        [
+          "00:24",
+          "Règle 1 : n facteurs"
+        ],
+        [
+          "00:36",
+          "Règle 2 : exposant 0"
+        ],
+        [
+          "00:50",
+          "Règle 3 : produit et quotient"
+        ],
+        [
+          "01:11",
+          "Question : 3⁸ ÷ 3²"
+        ],
+        [
+          "01:41",
+          "Règle 4 : puissance de puissance"
+        ],
+        [
+          "01:56",
+          "Règle 5 : exposant négatif"
+        ],
+        [
+          "02:14",
+          "Question : 5⁻²"
+        ],
+        [
+          "02:42",
+          "L'ordre de grandeur"
+        ],
+        [
+          "03:10",
+          "À toi de jouer"
+        ],
+        [
+          "03:33",
+          "Correction"
+        ],
+        [
+          "03:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-fractions-puissances",
+      "tags": [
+        "règles des puissances",
+        "automatismes",
+        "sans calculatrice",
+        "ordre de grandeur",
+        "éoliennes en mer",
+        "technicienne de maintenance",
+        "puissances",
+        "maths",
+        "STMG",
+        "automatismes",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "3⁸ ÷ 3² ?",
+          "choix": [
+            "3⁴",
+            "3⁶",
+            "1⁶"
+          ],
+          "reponse": 1,
+          "explication": "On soustrait : 8 − 2 = 6. On ne divise pas les exposants."
+        },
+        {
+          "t": "02:14",
+          "question": "Combien vaut 5⁻² ?",
+          "choix": [
+            "−25",
+            "−10",
+            "0,04"
+          ],
+          "reponse": 2,
+          "explication": "1/5² = 1/25 = 0,04."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-puissance-cinq-regles-short",
+      "notionId": "auto_fractions_puissances",
+      "microId": "auto_num_puissances",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-puissance-cinq-regles",
+      "fichier": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.mp4",
+      "miniature": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.png",
+      "titre": "2³ × 2⁴ = 4⁷ : tu signes ? ✍️ — 1re #Shorts",
+      "accroche": "Écris les facteurs : sept facteurs 2, soit 2⁷ = 128. Et 4⁷ ? 16 384, beaucoup trop ! La base ne change pas.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 3⁴ × 3⁵, ça s'écrit comment ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #1re #lycée",
+      "tags": [
+        "règles des puissances",
+        "automatismes",
+        "piège",
+        "base",
+        "exposants",
+        "puissances",
+        "maths",
+        "1re",
+        "automatismes",
+        "lycée",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:28",
+          "question": "5² × 5³ ?",
+          "choix": [
+            "25⁵",
+            "5⁵",
+            "5⁶"
+          ],
+          "reponse": 1,
+          "explication": "On garde la base, on additionne les exposants : 2 + 3."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "stmg",
+          "notionId": "auto_fractions_puissances",
+          "microId": "auto_num_puissances"
+        }
+      ]
     }
   ]
 }

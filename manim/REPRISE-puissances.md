@@ -44,7 +44,29 @@ Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des age
   4. Commit manifeste : blob `git show HEAD:` + ses entrées seulement, `git hash-object -w` + `git update-index --cacheinfo` (note mémoire manifeste-partage-modifs-non-commitees). Vérifier que `generer-videos-r2.mjs` redonne la même table.
   5. Aperçu port 3900 de la DERNIÈRE vidéo, en pause ; push le soir seulement, sur proposition.
 
-## Reste à faire
+## État au 05/11, vers 12 h 40 (session « passe finale 1 », à 69 % de contexte) — À LIRE EN PREMIER
+- CONTRÔLES FAITS. Audit paysage 11 avant retouche : 0 avance, 0 retard, 0 bord. Planches + zooms regardés : ép. 11 (paysage, short), ép. 13 (paysages 1re et STMG ; bords 0 sur les deux). Le « 10 » sous la ligne de base n'existe PAS sur 11 ; rien à corriger sur 13.
+- 3 DÉFAUTS MINEURS CORRIGÉS sur 11, scripts modifiés NON commités (`manim/scripts/4e/puissance_defi.py`, `puissance_defi_short.py`) : short : « = » ajouté (2¹⁰ = / 1 024 ; 2²⁰ = 1 048 576), « 1 000 € » réduit (collé aux bords du billet), réponse en taille 30 ; paysage : espace « d'octets  pour le film » resserré (buff 0,1). Dry run du short propre.
+- RE-RENDUS HD LANCÉS à 12 h 20 par la session précédente, sous verrou : short puis paysage 11, copie automatique dans `manim/sorties/4e/maths/puissances/11-defi/`. À VÉRIFIER : verrou `%TEMP%/eleveai-rendu-hd.lock` libre, date des deux mp4 après 12 h 20, `python scripts/verifier-bords-video.py` = 0, planche du short (voir le « = », le billet) et de l'écran question 3 de la paysage, durées inchangées (paysage 4:02, short 1:04), sinon recaler chapitres et questions. Si plus rien ne bouge depuis 30 min : relancer avec `rendu_hd.sh` (dossier de notes local_86f1ad73-…).
+- MINIATURES : `manim/miniature_puissances.py` écrit (NON commité, à committer), 33 PNG générés à côté des vidéos, PAS ENCORE REGARDÉS : à regarder en planche, corriger (débordements, lignes trop longues), relancer. `python manim/miniature_puissances.py [filtre]` ; relancer pour 11 après le re-rendu (durée lue dans le mp4). Ajouter les `.vignette.webp` : `scripts/vignettes-videos.py`.
+- MANIFESTE, à faire (rien n'est écrit) — conventions relevées :
+  - id : `<classe>-puissance-<slug>[-short]` ; classe `4e`, `3e`, `seconde`, `premiere`, `stmg` (dossiers de `lib/tutor-v4/knowledge/maths`). `fichier` et `miniature` relatifs à `manim/sorties`. Ép. 9 : slug `puissance-puissance`, dossier `09-puissance-puissance`. Ép. 11 et 12 : slug `defi`, ép. 13 : `cinq-regles`. Chaque titre ≤ 100 caractères, pas de < >.
+  - notions : 4e `puissance_ecriture`, 3e `entier_puissance`, 2de `puissances_2de`, 1re et STMG `auto_fractions_puissances` (micro `auto_num_puissances`). Micros dans `prompt-session-puissances.md` § 1 (vérifier la notion réelle : le branchement refuse un identifiant inconnu).
+  - jumelles : la 3e (ép. 1, 2, 3, 5, 7), la seconde de l'ép. 5, la STMG de l'ép. 13 portent `meme_video_que` : l'entrée 4e (ou 1re), avec leur propre fichier, ceinture et titre (mêmes temps). ⚠️ La seconde de l'ép. 4 N'EST PAS jumelle : écran en plus, 4:05, ses propres temps.
+  - short : `renvoie_vers` la paysage, `{{LONGUE}}` dans l'accroche, lien coach, question en commentaire. Shorts communs : champ `aussi: [{classe, notionId, microId}]` pour la classe voisine (ép. 1, 2, 3, 7 → 3e ; ép. 4 → seconde ; ép. 5 → 3e et seconde ; ép. 13 → stmg).
+  - tags collège : ajouter `cycle 4` et `CRPE` (`publier-youtube.mjs` range lui-même la playlist). Questions, chapitres, centres, ceintures, métiers : `rapports-puissances.md`, épisode par épisode. Voix : `manim/voix/`.
+  - La table R2 contient 61 clés orphelines `maths-<classe>-puissance-…` (titres automatiques) : vérifier qu'elles disparaissent ou restent cohérentes une fois les entrées posées.
+  - Coach : `brancher-videos-coach.mjs` : lecture d'abord, puis `--ecrire` (PRODUCTION). Pagination corrigée depuis le 01/11 (`.range` présent, à reconfirmer). Ne pas toucher au short `puissances-parenthese` ni à la paysage `puissances` déjà en ligne en 2de : une micro déjà occupée n'est pas écrasée, voir au cas par cas.
+
+## État au 05/11, 13 h 40 (session « passe finale 2 ») — SÉRIE TERMINÉE, À LIRE EN PREMIER
+- Ép. 11 re-rendu et contrôlé : short 1:04, paysage 4:02, bords 0, mêmes temps. 33 miniatures regardées et corrigées (exposants sur le sous-titre des shorts ; « eleveai.fr » collé à « ceinture blanche » ; « = » faux devant une autre égalité).
+- 33 entrées au manifeste, fiches YouTube et vignettes faites. Chapitres : « Fin » et chapitres de moins de 10 s retirés (YouTube désactive tous les chapitres sinon) ; micro `photo` n'est pas un centre : retiré de l'ép. 7.
+- R2 : les 99 fichiers de la série envoyés, à blanc = 0 restant. Envoi limité à la série (`-Rclone` avec `--include eleveai-maths-*-puissance-*`) car `-Envoyer` aurait aussi poussé les angles 6e et équations 4e en cours et leurs planches.
+- Coach : 41 lignes écrites en PRODUCTION (33 + 8 alias de shorts) ; 21 micros vérifiées en base, paysage + short partout ; `puissances-parenthese` gardé sur `puiss_puissance_puissance`. ⚠️ Les boutons mènent à /video/<id> : 404 tant que la table n'est pas poussée. PUSH DU SOIR INDISPENSABLE.
+- Commit : manifeste et table = HEAD + mes entrées seulement (les 20 clés angles/équations de la table locale n'y sont pas, leurs fichiers ne sont pas sur R2). `bilans-notions` : aucun changement pour nos notions, pas commité ; `mots-videos` non commité.
+- Reste : YouTube (`publier-youtube.mjs`, paysage AVANT son short). Rien de poussé.
+
+## Reste à faire (ancien, tout est fait sauf YouTube)
 - Contrôler chaque rendu soi-même (planche ffmpeg de 6 images), corriger tout défaut mineur.
 - Ép. 5 : lancer un agent (modèle de prompt : celui de l'ép. 4, paysage 3 classes `PuissanceNotationScientifique4e/3e/2de`).
 - Faire valider la voix 6, écrire 7 → 13 (ép. 9 : paysage seule ; ép. 13 : a⁰ = 1 dans les règles).

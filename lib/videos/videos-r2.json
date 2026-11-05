@@ -301,6 +301,69 @@
   "youtube": "Re9H-gXzveU",
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple"
  },
+ "3e-puissance-calcul": {
+  "fichier": "3e/maths/puissances/07-calcul/eleveai-maths-3e-puissance-calcul.mp4",
+  "poster": "3e/maths/puissances/07-calcul/eleveai-maths-3e-puissance-calcul.png",
+  "vignette": "3e/maths/puissances/07-calcul/eleveai-maths-3e-puissance-calcul.vignette.webp",
+  "titre": "10² × 10⁴ : 10⁸ ou 10⁶ ? — Calculer avec des puissances de 10 — épisode 7 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_calcul&display=simple"
+ },
+ "3e-puissance-calculer": {
+  "fichier": "3e/maths/puissances/02-calculer/eleveai-maths-3e-puissance-calculer.mp4",
+  "poster": "3e/maths/puissances/02-calculer/eleveai-maths-3e-puissance-calculer.png",
+  "vignette": "3e/maths/puissances/02-calculer/eleveai-maths-3e-puissance-calculer.vignette.webp",
+  "titre": "−2⁴ ou (−2)⁴ : qui a raison ? — Calculer une puissance — épisode 2 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_calculer&display=simple"
+ },
+ "3e-puissance-comprendre": {
+  "fichier": "3e/maths/puissances/01-comprendre/eleveai-maths-3e-puissance-comprendre.mp4",
+  "poster": "3e/maths/puissances/01-comprendre/eleveai-maths-3e-puissance-comprendre.png",
+  "vignette": "3e/maths/puissances/01-comprendre/eleveai-maths-3e-puissance-comprendre.vignette.webp",
+  "titre": "3⁴ : 12 ou 81 ? — Comprendre une puissance — épisode 1 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_comprendre&display=simple"
+ },
+ "3e-puissance-defi": {
+  "fichier": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi.mp4",
+  "poster": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi.png",
+  "vignette": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi.vignette.webp",
+  "titre": "4 calculs : lesquels sont justes ? — Défi puissances — épisode 12 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_defi&display=simple"
+ },
+ "3e-puissance-defi-short": {
+  "fichier": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.mp4",
+  "poster": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.png",
+  "vignette": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.vignette.webp",
+  "titre": "2³ × 3³ = 6³ : ça a l'air faux, non ? 🤔 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_defi&display=simple"
+ },
+ "3e-puissance-dix": {
+  "fichier": "3e/maths/puissances/03-dix/eleveai-maths-3e-puissance-dix.mp4",
+  "poster": "3e/maths/puissances/03-dix/eleveai-maths-3e-puissance-dix.png",
+  "vignette": "3e/maths/puissances/03-dix/eleveai-maths-3e-puissance-dix.vignette.webp",
+  "titre": "Combien de zéros dans 100 milliards ? — Les puissances de 10 — épisode 3 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_dix&display=simple"
+ },
+ "3e-puissance-notation-scientifique": {
+  "fichier": "3e/maths/puissances/05-notation-scientifique/eleveai-maths-3e-puissance-notation-scientifique.mp4",
+  "poster": "3e/maths/puissances/05-notation-scientifique/eleveai-maths-3e-puissance-notation-scientifique.png",
+  "vignette": "3e/maths/puissances/05-notation-scientifique/eleveai-maths-3e-puissance-notation-scientifique.vignette.webp",
+  "titre": "8 milliards et 0,000 007, même écriture ? — La notation scientifique — épisode 5 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_ecriture_scientifique&display=simple"
+ },
  "3e-pythagore-solide": {
   "fichier": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide.mp4",
   "poster": "3e/maths/pythagore/01-gobelet-brevet/eleveai-maths-3e-pythagore-solide.png",
@@ -1631,6 +1694,150 @@
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=prop_proportionnalite&microId=prop_table&display=simple"
+ },
+ "4e-puissance-calcul": {
+  "fichier": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul.mp4",
+  "poster": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul.png",
+  "vignette": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul.vignette.webp",
+  "titre": "10² × 10⁴ : 10⁸ ou 10⁶ ? — Calculer avec des puissances de 10 — épisode 7 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calcul&display=simple"
+ },
+ "4e-puissance-calcul-short": {
+  "fichier": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.mp4",
+  "poster": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.png",
+  "vignette": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.vignette.webp",
+  "titre": "10² × 10⁴ = 10⁸ ? Perdu ! 🎯 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calcul&display=simple"
+ },
+ "4e-puissance-calculer": {
+  "fichier": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer.mp4",
+  "poster": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer.png",
+  "vignette": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer.vignette.webp",
+  "titre": "−2⁴ ou (−2)⁴ : qui a raison ? — Calculer une puissance — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calculer&display=simple"
+ },
+ "4e-puissance-calculer-short": {
+  "fichier": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.mp4",
+  "poster": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.png",
+  "vignette": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.vignette.webp",
+  "titre": "Ma calculatrice est-elle cassée ? 🧮 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calculer&display=simple"
+ },
+ "4e-puissance-comparer": {
+  "fichier": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer.mp4",
+  "poster": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer.png",
+  "vignette": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer.vignette.webp",
+  "titre": "9 × 10⁵ ou 2 × 10⁶ : qui gagne ? — Comparer en notation scientifique — épisode 6 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comparer&display=simple"
+ },
+ "4e-puissance-comparer-short": {
+  "fichier": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.mp4",
+  "poster": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.png",
+  "vignette": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.vignette.webp",
+  "titre": "9 × 10⁵ contre 2 × 10⁶ : qui gagne ? 🥊 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comparer&display=simple"
+ },
+ "4e-puissance-comprendre": {
+  "fichier": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre.mp4",
+  "poster": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre.png",
+  "vignette": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre.vignette.webp",
+  "titre": "3⁴ : 12 ou 81 ? — Comprendre une puissance — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comprendre&display=simple"
+ },
+ "4e-puissance-comprendre-short": {
+  "fichier": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.mp4",
+  "poster": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.png",
+  "vignette": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.vignette.webp",
+  "titre": "Plie une feuille en deux : combien de couches ? 📄 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comprendre&display=simple"
+ },
+ "4e-puissance-defi": {
+  "fichier": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi.mp4",
+  "poster": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi.png",
+  "vignette": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi.vignette.webp",
+  "titre": "4 épreuves : tu tiens jusqu'au bout ? — Défi puissances — épisode 11 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_defi&display=simple"
+ },
+ "4e-puissance-defi-short": {
+  "fichier": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.mp4",
+  "poster": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.png",
+  "vignette": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.vignette.webp",
+  "titre": "1 000 € ou 1 centime doublé 20 fois ? 💶 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_defi&display=simple"
+ },
+ "4e-puissance-dix": {
+  "fichier": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix.mp4",
+  "poster": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix.png",
+  "vignette": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix.vignette.webp",
+  "titre": "Combien de zéros dans 100 milliards ? — Les puissances de 10 — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_dix&display=simple"
+ },
+ "4e-puissance-dix-short": {
+  "fichier": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.mp4",
+  "poster": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.png",
+  "vignette": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.vignette.webp",
+  "titre": "Un milliard de vues : combien de zéros ? 📱 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_dix&display=simple"
+ },
+ "4e-puissance-notation-scientifique": {
+  "fichier": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique.mp4",
+  "poster": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique.png",
+  "vignette": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique.vignette.webp",
+  "titre": "8 milliards et 0,000 007, même écriture ? — La notation scientifique — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_notation_scientifique&display=simple"
+ },
+ "4e-puissance-notation-scientifique-short": {
+  "fichier": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.mp4",
+  "poster": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.png",
+  "vignette": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.vignette.webp",
+  "titre": "8 milliards d'humains, sans aligner les zéros 🌍 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_notation_scientifique&display=simple"
+ },
+ "4e-puissance-zero-negatif": {
+  "fichier": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif.mp4",
+  "poster": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif.png",
+  "vignette": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif.vignette.webp",
+  "titre": "10⁰ vaut 1, pas 0 ! — Puissance zéro et exposant négatif — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple"
+ },
+ "4e-puissance-zero-negatif-short": {
+  "fichier": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.mp4",
+  "poster": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.png",
+  "vignette": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.vignette.webp",
+  "titre": "2026 puissance 0, ça fait combien ? 🤯 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple"
  },
  "4e-pythagore-carre-racine": {
   "fichier": "4e/maths/pythagore/02-carre-racine/eleveai-maths-4e-pythagore-carre-racine.mp4",
@@ -6668,22 +6875,6 @@
   "youtube": "uVs9h6561zU",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=identites_remarquables_2de&microId=ir_carre_somme&display=simple"
  },
- "maths-4e-puissance-calculer": {
-  "fichier": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e puissance calculer",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-puissance-comprendre-short": {
-  "fichier": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e puissance comprendre short",
-  "short": true,
-  "youtube": null
- },
  "maths-cp-chiffre-0-droitier-portrait": {
   "fichier": "cp/maths/shorts/fr/chiffre-0/eleveai-maths-cp-chiffre-0-droitier-portrait.mp4",
   "poster": null,
@@ -8413,6 +8604,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_partie_tout&microId=auto_prop_tout_connaissant_partie&display=simple"
  },
+ "premiere-puissance-cinq-regles": {
+  "fichier": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles.mp4",
+  "poster": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles.png",
+  "vignette": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles.vignette.webp",
+  "titre": "Tu peux les retenir sans calculatrice ? — Les puissances en 5 règles — épisode 13 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple"
+ },
+ "premiere-puissance-cinq-regles-short": {
+  "fichier": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.mp4",
+  "poster": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.png",
+  "vignette": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.vignette.webp",
+  "titre": "2³ × 2⁴ = 4⁷ : tu signes ? ✍️ — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple"
+ },
  "puissances": {
   "fichier": "seconde/maths/paysage/fr/puissances/eleveai-maths-seconde-puissances.mp4",
   "poster": null,
@@ -8898,6 +9107,69 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_proportion&display=simple"
+ },
+ "seconde-puissance-enchainer": {
+  "fichier": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer.mp4",
+  "poster": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer.png",
+  "vignette": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer.vignette.webp",
+  "titre": "Une seule puissance au bout ? — Enchaîner les règles — épisode 10 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_expression_composee&display=simple"
+ },
+ "seconde-puissance-enchainer-short": {
+  "fichier": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.mp4",
+  "poster": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.png",
+  "vignette": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.vignette.webp",
+  "titre": "Une expression géante, une seule puissance ✈️ — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_expression_composee&display=simple"
+ },
+ "seconde-puissance-notation-scientifique": {
+  "fichier": "seconde/maths/puissances/05-notation-scientifique/eleveai-maths-seconde-puissance-notation-scientifique.mp4",
+  "poster": "seconde/maths/puissances/05-notation-scientifique/eleveai-maths-seconde-puissance-notation-scientifique.png",
+  "vignette": "seconde/maths/puissances/05-notation-scientifique/eleveai-maths-seconde-puissance-notation-scientifique.vignette.webp",
+  "titre": "8 milliards et 0,000 007, même écriture ? — La notation scientifique — épisode 5 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_notation_scientifique&display=simple"
+ },
+ "seconde-puissance-produit-quotient": {
+  "fichier": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient.mp4",
+  "poster": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient.png",
+  "vignette": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient.vignette.webp",
+  "titre": "2³ × 2⁴ : 2⁷ ou 4⁷ ? — Produit et quotient de puissances — épisode 8 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_produit_quotient&display=simple"
+ },
+ "seconde-puissance-produit-quotient-short": {
+  "fichier": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.mp4",
+  "poster": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.png",
+  "vignette": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.vignette.webp",
+  "titre": "Une clé secrète : combien de possibilités ? 🔐 — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_produit_quotient&display=simple"
+ },
+ "seconde-puissance-puissance-puissance": {
+  "fichier": "seconde/maths/puissances/09-puissance-puissance/eleveai-maths-seconde-puissance-puissance-puissance.mp4",
+  "poster": "seconde/maths/puissances/09-puissance-puissance/eleveai-maths-seconde-puissance-puissance-puissance.png",
+  "vignette": "seconde/maths/puissances/09-puissance-puissance/eleveai-maths-seconde-puissance-puissance-puissance.vignette.webp",
+  "titre": "(2³)² : 2⁵ ou 2⁶ ? — La puissance d'une puissance — épisode 9 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_puissance_puissance&display=simple"
+ },
+ "seconde-puissance-zero-negatif": {
+  "fichier": "seconde/maths/puissances/04-zero-negatif/eleveai-maths-seconde-puissance-zero-negatif.mp4",
+  "poster": "seconde/maths/puissances/04-zero-negatif/eleveai-maths-seconde-puissance-zero-negatif.png",
+  "vignette": "seconde/maths/puissances/04-zero-negatif/eleveai-maths-seconde-puissance-zero-negatif.vignette.webp",
+  "titre": "10⁰ vaut 1, pas 0 ! — Puissance zéro et exposant négatif — épisode 4 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_exposant_negatif&display=simple"
  },
  "seconde-signes-expression": {
   "fichier": "seconde/maths/paysage/fr/signes-expression/eleveai-maths-seconde-signes-expression.mp4",
@@ -10086,6 +10358,15 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=suite_comparer&microId=suiteT_taux_equivalent_proportionnel&display=simple"
+ },
+ "stmg-puissance-cinq-regles": {
+  "fichier": "stmg/maths/puissances/13-cinq-regles/eleveai-maths-stmg-puissance-cinq-regles.mp4",
+  "poster": "stmg/maths/puissances/13-cinq-regles/eleveai-maths-stmg-puissance-cinq-regles.png",
+  "vignette": "stmg/maths/puissances/13-cinq-regles/eleveai-maths-stmg-puissance-cinq-regles.vignette.webp",
+  "titre": "Tu peux les retenir sans calculatrice ? — Les puissances en 5 règles — épisode 13 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple"
  },
  "stmg-stats-ajust-au-juge": {
   "fichier": "stmg/maths/statistiques/21-ajust-au-juge/eleveai-maths-stmg-stats-ajust-au-juge.mp4",
