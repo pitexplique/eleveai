@@ -46,6 +46,10 @@ import { echellesBank } from "./echelles.bank";
 import { complementsEvalNationaleBank } from "./complements-eval-nationale.bank";
 // Les trous du programme bouchés le 05/11/2026 (audit France), avec correcteurs.
 import { entiersDiviseursBank } from "./entiers-diviseurs.bank";
+import { aiguillesPatronsProbasBank } from "./aiguilles-patrons-probas.bank";
+import { figuresCodageBank } from "./figures-codage.bank";
+import { anglesSansMesureBank } from "./angles-sans-mesure.bank";
+import { airesUnitesBank } from "./aires-unites.bank";
 import { problemesRechercheBank } from "./problemes-recherche.bank";
 import { operationsDecimalesBank } from "./operations-decimales.bank";
 import { calculMentalDecimalBank } from "./calcul-mental-decimal.bank";
@@ -91,6 +95,10 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...applyMathsKeyboardFree(complementsEvalNationaleBank),
 
   ...applyMathsKeyboardFree(entiersDiviseursBank),
+  ...applyMathsKeyboardFree(aiguillesPatronsProbasBank),
+  ...applyMathsKeyboardFree(figuresCodageBank),
+  ...applyMathsKeyboardFree(anglesSansMesureBank),
+  ...applyMathsKeyboardFree(airesUnitesBank),
   ...applyMathsKeyboardFree(problemesRechercheBank),
   ...applyMathsKeyboardFree(operationsDecimalesBank),
   ...applyMathsKeyboardFree(calculMentalDecimalBank),
