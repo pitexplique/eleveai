@@ -8,6 +8,9 @@ import { CORRECTEURS as integralesEncadrement } from "./integrales-encadrement";
 import { CORRECTEURS as sinusCosinus } from "./sinus-cosinus";
 import { CORRECTEURS as fonctionReciproque } from "./fonction-reciproque";
 import { CORRECTEURS as exposantsFractionnaires } from "./exposants-fractionnaires";
+import { CORRECTEURS as logExpBaseA } from "./log-exp-base-a";
+import { CORRECTEURS as composeeEcrire } from "./composee-ecrire";
+import { CORRECTEURS as systemes3x3 } from "./systemes-3x3";
 
 export const CORRECTEURS_TLE: CorrecteursMaths = {
   ...integrationParties,
@@ -15,4 +18,7 @@ export const CORRECTEURS_TLE: CorrecteursMaths = {
   ...sinusCosinus,
   ...fonctionReciproque,
   ...exposantsFractionnaires,
+  ...logExpBaseA,
+  ...composeeEcrire,
+  ...systemes3x3,
 };

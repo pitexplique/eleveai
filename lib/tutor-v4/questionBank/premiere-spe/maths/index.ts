@@ -1,6 +1,8 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { bernoulliRepetitionBank } from "./bernoulli-repetition.bank";
 import { trigoFormulesEquationsBank } from "./trigo-formules-equations.bank";
+import { triangleQuelconqueBank } from "./triangle-quelconque.bank";
+import { pariteBank } from "./parite.bank";
 
 // --- Banques par notion (1 banque par notion, standard seconde/terminale, >=10 items/micro) ---
 import { suitesBank } from "./suites.bank";
@@ -40,6 +42,8 @@ export const mathsPremiereSpeQuestionBank: TutorBankItemV4[] = [
   // === Programme : trou bouché le 05/11/2026 ===
   ...bernoulliRepetitionBank,
   ...trigoFormulesEquationsBank,
+  ...triangleQuelconqueBank,
+  ...pariteBank,
 ];
 
 export function getMathsPremiereSpeQuestionBank(args?: {

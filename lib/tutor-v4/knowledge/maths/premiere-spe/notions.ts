@@ -168,4 +168,12 @@ export const notions: NotionSource[] = [
     prerequis: ["trigonometrie"],
     levels: [1, 2, 3],
   },
+  /* Hors programme français : masquée (lib/tutor-v4/micros-masquees.ts). Al-Kashi reste dans produit_scalaire. */
+  {
+    id: "triangle_quelconque",
+    label: "Triangle quelconque : loi des sinus, aire et formule de Héron",
+    boId: "BOPSGE",
+    prerequis: ["trigonometrie"],
+    levels: [1, 2, 3],
+  },
 ];

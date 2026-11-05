@@ -2,7 +2,9 @@
 import type { CorrecteursMaths } from "@/lib/tutor-v4/questionBank/4e/maths/correcteurs/types";
 
 import { CORRECTEURS as paraboleImageEgale } from "./parabole-image-egale";
+import { CORRECTEURS as statCorrelation } from "./stat-correlation";
 
 export const CORRECTEURS_STMG: CorrecteursMaths = {
   ...paraboleImageEgale,
+  ...statCorrelation,
 };

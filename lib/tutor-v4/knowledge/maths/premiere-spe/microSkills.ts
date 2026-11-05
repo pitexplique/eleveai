@@ -305,6 +305,12 @@ export const microSkills: MicroSkillSource[] = [
 
   /* ===================== VARIATIONS ET COURBES ===================== */
   {
+    id: "var_parite",
+    label: "Reconnaître une fonction paire ou impaire : f(−x), courbe symétrique",
+    notionId: "variations_fonctions",
+    prerequis: [],
+  },
+  {
     id: "var_signe_derivee",
     label: "Lien entre signe de la dérivée et variations",
     notionId: "variations_fonctions",
@@ -961,5 +967,19 @@ export const microSkills: MicroSkillSource[] = [
     label: "Résoudre cos x = a, sin x = a, tan x = a sur ℝ : solutions générales",
     notionId: "trigo_formules_equations",
     prerequis: ["trig_valeurs"],
+  },
+
+  /* ===================== TRIANGLE QUELCONQUE (hors programme français) ===================== */
+  {
+    id: "trig_loi_sinus",
+    label: "Loi des sinus : calculer un côté, un angle, le rayon du cercle circonscrit",
+    notionId: "triangle_quelconque",
+    prerequis: [],
+  },
+  {
+    id: "trig_aire_heron",
+    label: "Aire d'un triangle : ½ ab sin C et formule de Héron",
+    notionId: "triangle_quelconque",
+    prerequis: ["trig_loi_sinus"],
   },
 ];

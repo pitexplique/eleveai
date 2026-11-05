@@ -125,6 +125,8 @@ export const notions: NotionSource[] = [
   { id: "stat_ajustement", label: "Ajustement affine", boId: "STMGST", prerequis: ["stat_nuage", "auto_droites"], levels: [1, 2, 3] },
   { id: "stat_interpoler", label: "Interpoler et extrapoler", boId: "STMGST", prerequis: ["stat_ajustement"], levels: [1, 2, 3] },
   { id: "stat_moindres_carres", label: "Méthode des moindres carrés", boId: "STMGST", prerequis: ["stat_ajustement"], levels: [1, 2, 3] },
+  /* Hors programme français : masquée (lib/tutor-v4/micros-masquees.ts). */
+  { id: "stat_correlation", label: "Covariance, coefficient de corrélation, droites de régression", boId: "STMGST", prerequis: ["stat_moindres_carres"], levels: [1, 2, 3] },
   { id: "stat_changement_variable", label: "Changement de variable pour linéariser (Tle)", boId: "STMGST", prerequis: ["stat_ajustement"], levels: [1, 2, 3] },
 
   /* ═══════════ PROBABILITÉS CONDITIONNELLES (STMGPR) ═══════════ */

@@ -184,6 +184,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["derivation_formules"],
   },
   {
+    id: "composee_ecrire",
+    label: "Écrire et calculer une composée g ∘ f, la décomposer, l'ordre compte",
+    notionId: "derivation_fonction",
+    prerequis: [],
+  },
+  {
     id: "derivation_composee",
     label: "Dériver une fonction composée",
     notionId: "derivation_fonction",
@@ -855,5 +861,33 @@ export const microSkills: MicroSkillSource[] = [
     label: "Règles de calcul, changement de base et fonctions x^r à exposant rationnel",
     notionId: "exposants_fractionnaires",
     prerequis: ["expo_ratio_calcul"],
+  },
+
+  /* Logarithme et exponentielle de base a (hors programme français). */
+  {
+    id: "log_base_calcul",
+    label: "Calculer log_a(x) = ln x ÷ ln a : valeurs exactes et approchées",
+    notionId: "log_exp_base_a",
+    prerequis: [],
+  },
+  {
+    id: "log_base_proprietes",
+    label: "Logarithme de base a : produit, quotient, puissance, changement de base, équations",
+    notionId: "log_exp_base_a",
+    prerequis: ["log_base_calcul"],
+  },
+  {
+    id: "exp_base_a",
+    label: "Exponentielle de base a : aˣ = e^(x ln a), dérivée, variations selon a",
+    notionId: "log_exp_base_a",
+    prerequis: ["log_base_calcul"],
+  },
+
+  /* Systèmes 3 × 3 (hors programme français). */
+  {
+    id: "systeme_3x3_gauss",
+    label: "Résoudre un système de trois équations à trois inconnues par le pivot de Gauss",
+    notionId: "systemes_3x3",
+    prerequis: [],
   },
 ];

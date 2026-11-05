@@ -156,6 +156,8 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
     ]),
       /* Formules d'addition et de duplication, solutions générales sur ℝ. Le programme français garde `trigo_equation_cos` en Terminale. */
       ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire, Belgique", ["trig_formule_addition", "trig_formule_duplication", "trig_equation_generale"]),
+      /* Loi des sinus, aire ½ ab sin C, Héron. `var_parite` n'est PAS masquée : elle est au programme 2026. */
+      ...lot("hors_france", "Québec, Maroc, Suisse, Côte d'Ivoire", ["trig_loi_sinus", "trig_aire_heron"]),
     },
     /* Module spécifique de première, BO n°14 du 02/04/2026 : ni « dériv » ni
        « tangente » dans le texte. ⚠️ Revient sur la décision du 14/08/2026, qui
@@ -189,7 +191,8 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
     ]),
     /* Annexe de première technologique, BO n°14 du 02/04/2026. Reste la dérivée
        d'un polynôme de degré ≤ 3 ; les fréquences marginales passent en seconde. */
-    stmg: lot("hors_programme", "Programme 2026 de première technologique", [
+    stmg: {
+      ...lot("hors_programme", "Programme 2026 de première technologique", [
       "fct_d3_courbes",
       "fct_d3_racines",
       "fct_d3_signe",
@@ -199,11 +202,17 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       "don_freq_completer",
       "don_freq_interpreter",
     ]),
+      /* Covariance, coefficient de corrélation, droites de régression par les formules. */
+      ...lot("hors_france", "Québec, Belgique, Sénégal, Côte d'Ivoire", ["stat_covariance", "stat_correlation_r", "stat_regression_formules"]),
+    },
     /* Fonction réciproque : bijection, f⁻¹, courbes symétriques, nombre dérivé. */
     "terminale-spe": {
       ...lot("hors_france", "Sénégal, Maroc, Côte d'Ivoire, Belgique, Québec", ["reciproque_bijection", "reciproque_expression", "reciproque_courbe", "reciproque_derivee"]),
       /* Exposants fractionnaires m/n, racines n-ièmes, x^r : la France s'arrête à a^(1/n) en 1re. */
       ...lot("hors_france", "Québec, Maroc, Suisse, Sénégal, Côte d'Ivoire", ["expo_ratio_racine", "expo_ratio_calcul", "expo_ratio_regles"]),
+      /* Logarithme et exponentielle de base a ; systèmes 3 × 3. `composee_ecrire` n'est PAS masquée : v ∘ u est au programme. */
+      ...lot("hors_france", "Québec, Maroc, Belgique, Côte d'Ivoire", ["log_base_calcul", "log_base_proprietes", "exp_base_a"]),
+      ...lot("hors_france", "Maroc, Belgique, Sénégal, Côte d'Ivoire", ["systeme_3x3_gauss"]),
     },
   },
 };

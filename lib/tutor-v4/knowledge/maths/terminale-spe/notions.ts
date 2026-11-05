@@ -218,4 +218,19 @@ export const notions: NotionSource[] = [
     prerequis: ["variable_aleatoire", "loi_binomiale"],
     levels: [2, 3],
   },
+  /* Hors programme français : masquées (lib/tutor-v4/micros-masquees.ts). */
+  {
+    id: "log_exp_base_a",
+    label: "Logarithme et exponentielle de base a",
+    boId: "BOTSA3",
+    prerequis: ["fonction_logarithme", "fonction_exponentielle"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "systemes_3x3",
+    label: "Systèmes 3 × 3 : pivot de Gauss",
+    boId: "BOTSAG1",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
 ];

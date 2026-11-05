@@ -588,4 +588,10 @@ export const microSkills: MicroSkillSource[] = [
   { id: "logique_reciproque", label: "Distinguer une proposition de sa réciproque", notionId: "logique_raisonnement", prerequis: ["logique_contre_exemple"] },
   { id: "logique_contraposee", label: "Formuler et utiliser la contraposée d'une implication", notionId: "logique_raisonnement", prerequis: ["logique_reciproque"] },
   { id: "logique_necessaire_suffisante", label: "Utiliser à bon escient « condition nécessaire », « condition suffisante », « équivalence »", notionId: "logique_raisonnement", prerequis: ["logique_reciproque"] },
+
+  /* ────────────────────────── stat_correlation (hors programme français) ────────────────────────── */
+
+  { id: "stat_covariance", label: "Calculer et interpréter la covariance d'une série à deux variables", notionId: "stat_correlation", prerequis: [] },
+  { id: "stat_correlation_r", label: "Calculer et interpréter le coefficient de corrélation linéaire", notionId: "stat_correlation", prerequis: ["stat_covariance"] },
+  { id: "stat_regression_formules", label: "Écrire une droite de régression par les formules", notionId: "stat_correlation", prerequis: ["stat_covariance"] },
 ];

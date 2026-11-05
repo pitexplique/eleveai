@@ -3,6 +3,9 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { fonctionReciproqueBank } from "./fonction-reciproque.bank";
 import { exposantsFractionnairesBank } from "./exposants-fractionnaires.bank";
+import { logExpBaseABank } from "./log-exp-base-a.bank";
+import { composeeEcrireBank } from "./composee-ecrire.bank";
+import { systemes3x3Bank } from "./systemes-3x3.bank";
 
 import { suitesBank } from "./suites.bank";
 import { limitesSuitesBank } from "./limites-suites.bank";
@@ -61,6 +64,9 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...sinusCosinusBank,
   ...fonctionReciproqueBank,
   ...exposantsFractionnairesBank,
+  ...logExpBaseABank,
+  ...composeeEcrireBank,
+  ...systemes3x3Bank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
