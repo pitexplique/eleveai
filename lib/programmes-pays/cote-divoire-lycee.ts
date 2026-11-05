@@ -71,8 +71,8 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
       code: "C1-L3", domaine: CALC,
       texte: "Équations et inéquations dans ℝ : équations équivalentes, ensemble de validité ; membres polynômes ou fractions rationnelles ; équations et inéquations avec valeur absolue.",
       couverture: "partielle",
-      micros: m("seconde", "equation_resoudre", "inequation_resoudre", "signes_quotient", "signes_resoudre_equation", "signes_resoudre_inequation"),
-      note: "Pas de micro « équation ou inéquation avec valeur absolue ».",
+      micros: m("seconde", "equation_resoudre", "inequation_resoudre", "signes_quotient", "signes_resoudre_equation", "signes_resoudre_inequation", "valeur_absolue_distance"),
+      note: "Seuls |x − a| = r et |x − a| ≤ r sont couverts : manquent les autres équations et inéquations avec valeur absolue.",
     },
     {
       code: "C1-L4", domaine: CALC,
@@ -91,8 +91,11 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
       code: "C1-L6", domaine: FONC,
       texte: "Fonctions élémentaires : x², x³, 1/x, √x, partie entière E(x), |ax + b|, affines par intervalles, ax² et a/x ; sens de variation et tableau.",
       couverture: "partielle",
-      micros: m("seconde", "reference_carre", "reference_cube", "reference_inverse", "reference_racine", "reference_valeur_absolue", "reference_comparer"),
-      note: "Manquent la partie entière et les fonctions affines par intervalles.",
+      micros: [
+        ...m("seconde", "reference_carre", "reference_cube", "reference_inverse", "reference_racine", "reference_valeur_absolue", "reference_comparer"),
+        ...m("premiere", "lin_affine_par_morceaux"),
+      ],
+      note: "Manque la fonction partie entière E(x).",
     },
     {
       code: "C2-L1", domaine: DONN,
@@ -109,15 +112,16 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
     {
       code: "C3-L1", domaine: GPLAN,
       texte: "Vecteurs et points du plan : combinaison linéaire, base, colinéarité, norme, base orthonormée, mesure algébrique, déterminant de deux vecteurs ; équation cartésienne de droite, alignement et parallélisme par le déterminant.",
-      couverture: "complete",
-      micros: m("seconde", "vecteur_coordonnees", "vecteur_norme", "vecteur_produit_reel", "vecteur_colinearite", "vecteur_chasles_calcul", "droite_vecteur_directeur", "droite_equation_cartesienne", "droite_parallelisme"),
+      couverture: "partielle",
+      micros: m("seconde", "vecteur_coordonnees", "vecteur_norme", "vecteur_produit_reel", "vecteur_colinearite", "vecteur_combinaison_lineaire", "vecteur_chasles_calcul", "droite_vecteur_directeur", "droite_equation_cartesienne", "droite_parallelisme"),
+      note: "Manque la mesure algébrique.",
     },
     {
       code: "C3-L2", domaine: GPLAN,
       texte: "Produit scalaire : définition, carré scalaire, interprétation géométrique (projeté), règles de calcul, expression en base orthonormée, orthogonalité, Al Kashi, relations métriques du triangle rectangle, angle de deux vecteurs, cercle de diamètre donné.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("premiere-spe", "ps_projection", "ps_norme_angle", "ps_coordonnees", "ps_proprietes", "ps_orthogonalite", "ps_alkashi", "ps_angle_longueur", "ps_ma_mb", "gr_cercle"),
-      note: "Chez nous en 1re spécialité.",
+      note: "Chez nous en 1re spécialité ; manquent les relations métriques du triangle rectangle.",
     },
     {
       code: "C3-L3", domaine: GPLAN,
@@ -146,11 +150,12 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
     {
       code: "C3-L6", domaine: TRANS,
       texte: "Utilisation des symétries et translations : propriété caractéristique de la translation, constructions, démonstrations, lieux de points.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: [
         ...m("4e", "sym_axiale", "sym_centrale", "sym_translation", "sym_transformation_propriete"),
         ...m("3e", "sym_symetrie_translation_rotation"),
       ],
+      note: "Propriétés et constructions couvertes ; manquent les démonstrations et les lieux de points par ces transformations.",
     },
     {
       code: "C3-L7", domaine: TRANS,
@@ -218,7 +223,10 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
       code: "C1-L6", domaine: FONC,
       texte: "Dérivation : nombre dérivé, tangente, fonction dérivée, dérivées usuelles (y compris cos, sin, tan), opérations, f(ax + b) ; signe de la dérivée et variations, extremum.",
       couverture: "partielle",
-      micros: m("premiere-spe", "der_nombre_derive", "der_graphique", "der_tangente", "der_usuelles", "der_operations", "der_quotient", "der_composee_affine", "var_signe_derivee", "var_extremum"),
+      micros: [
+        ...m("premiere-spe", "der_nombre_derive", "der_graphique", "der_tangente", "der_usuelles", "der_operations", "der_quotient", "der_composee_affine", "var_signe_derivee", "var_extremum"),
+        ...m("terminale-spe", "trigo_etude_fonction"),
+      ],
       note: "La dérivée de tan n'a pas de micro.",
     },
     {
@@ -250,7 +258,10 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
       code: "C2-L2", domaine: ALEA,
       texte: "Dénombrement : ensembles finis, cardinal de la réunion et du complémentaire, produit cartésien, p-uplets, arrangements, permutations, combinaisons (n!, Aₙᵖ, Cₙᵖ), arbres et tableaux.",
       couverture: "complete",
-      micros: m("terminale-spe", "denombrement_reconnaitre", "denombrement_produit_somme", "denombrement_arrangement_combinaison", "denombrement_coefficient_binomial"),
+      micros: [
+        ...m("terminale-spe", "denombrement_reconnaitre", "denombrement_produit_somme", "denombrement_arrangement_combinaison", "denombrement_coefficient_binomial"),
+        ...m("premiere-spe", "log_couple"),
+      ],
       note: "Chez nous en Terminale.",
     },
     {
@@ -313,34 +324,41 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
       texte: "Limites et continuité : limite d'une composée, comparaison, branches paraboliques, image d'un intervalle, théorème des valeurs intermédiaires, bijection continue strictement monotone, dichotomie et balayage, racine n-ième et puissances d'exposant rationnel, prolongement par continuité.",
       couverture: "partielle",
       micros: m("terminale-spe", "limite_fonction_operations", "limite_fonction_reference", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "reciproque_bijection", "expo_ratio_racine", "expo_ratio_calcul"),
-      note: "Bijection, racine n-ième et exposant rationnel couverts ; manquent branches paraboliques et prolongement par continuité.",
+      note: "Bijection, racine n-ième et exposant rationnel couverts ; manquent la limite d'une composée, la comparaison, les branches paraboliques et le prolongement par continuité.",
     },
     {
       code: "C1-L3", domaine: FONC,
       texte: "Dérivabilité et étude de fonctions : dérivée à gauche et à droite, dérivée d'une composée, dérivées successives, point d'inflexion, inégalité des accroissements finis, dérivée d'une réciproque ; études de fonctions rationnelles, irrationnelles, trigonométriques, par raccordement.",
       couverture: "partielle",
-      micros: m("terminale-spe", "derivation_formules", "derivation_composee", "derivation_variation", "derivation_tangente", "convexite_derivee_seconde", "convexite_point_inflexion", "reciproque_derivee"),
+      micros: m("terminale-spe", "derivation_formules", "derivation_composee", "derivation_variation", "derivation_tangente", "convexite_derivee_seconde", "convexite_point_inflexion", "reciproque_derivee", "trigo_etude_fonction"),
       note: "La dérivée d'une réciproque est couverte ; manquent accroissements finis et dérivabilité à gauche / à droite.",
     },
     {
       code: "C1-L4", domaine: FONC,
       texte: "Primitives : définition, primitives usuelles, de u′ + v′, λu′, u′·(f∘u), u′/√u, u′cos u, u′sin u, u′uʳ ; primitive prenant une valeur donnée.",
-      couverture: "complete",
-      micros: m("terminale-spe", "primitive_reconnaitre", "primitive_calculer"),
+      couverture: "partielle",
+      micros: m("terminale-spe", "primitive_reconnaitre", "primitive_calculer", "trigo_primitives"),
+      note: "Manquent les primitives de u′/√u, et de u′cos u, u′sin u quand u n'est pas affine.",
     },
     {
       code: "C1-L5", domaine: FONC,
       texte: "Fonctions logarithmes : ln (propriétés, dérivée, variations, courbe, limites), ln∘u et ln|u|, primitives de u′/u ; logarithme décimal et de base a ; équations xⁿ = k et qⁿ ≥ a.",
       couverture: "partielle",
-      micros: m("terminale-spe", "ln_definition", "ln_proprietes", "ln_deriver", "ln_equation_inequation", "ln_limite"),
-      note: "Manquent le logarithme décimal et le logarithme de base a.",
+      micros: [
+        ...m("terminale-spe", "ln_definition", "ln_proprietes", "ln_deriver", "ln_equation_inequation", "ln_limite", "primitive_calculer"),
+        ...m("stmg", "logT_definition", "logT_produit", "logT_resoudre_puissance"),
+      ],
+      note: "Le logarithme décimal est couvert (Terminale STMG) ; manque le logarithme de base a.",
     },
     {
       code: "C1-L6", domaine: FONC,
       texte: "Fonctions exponentielles et puissances : exp (propriétés, dérivée, limites), exp∘u, primitives de u′eᵘ ; exponentielle de base a, puissance d'exposant réel ; croissances comparées.",
       couverture: "partielle",
-      micros: m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "expo_ratio_regles"),
-      note: "L'exposant rationnel (x^r) est couvert ; manquent aˣ et x^α pour α réel.",
+      micros: [
+        ...m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "expo_ratio_regles", "primitive_calculer"),
+        ...m("stmg", "expoT_reconnaitre", "expoT_sens_selon_a"),
+      ],
+      note: "L'exposant rationnel (x^r) et aˣ (Terminale STMG) sont couverts ; manque x^α pour α réel.",
     },
     {
       code: "C1-L7", domaine: FONC,
@@ -369,14 +387,20 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
       code: "C2-L1", domaine: DONN,
       texte: "Statistique à deux variables : séries marginales, nuage de points, point moyen, covariance, coefficient de corrélation linéaire, droite de régression par les moindres carrés.",
       couverture: "partielle",
-      micros: m("premiere", "info_nuage_lire", "info_nuage_construire", "info_ajust_determiner", "info_ajust_equation"),
+      micros: [
+        ...m("premiere", "info_nuage_lire", "info_nuage_construire", "info_point_moyen_calculer", "info_ajust_determiner", "info_ajust_equation"),
+        ...m("stmg", "statT_mc_principe"),
+      ],
       note: "Manquent covariance, coefficient de corrélation et formules des moindres carrés.",
     },
     {
       code: "C2-L2", domaine: ALEA,
       texte: "Probabilité conditionnelle et variable aléatoire : probabilité conditionnelle, indépendance, système complet, probabilités totales, arbre pondéré ; loi, fonction de répartition, espérance, variance, écart type ; schéma de Bernoulli et loi binomiale.",
       couverture: "partielle",
-      micros: m("terminale-spe", "proba_conditionnelle_arbre", "proba_conditionnelle_formule", "proba_totales", "va_loi_probabilite", "va_esperance", "va_variance_ecart_type", "va_somme", "binomiale_schema", "binomiale_calculer", "binomiale_esperance_variance"),
+      micros: [
+        ...m("terminale-spe", "proba_conditionnelle_arbre", "proba_conditionnelle_formule", "proba_totales", "va_loi_probabilite", "va_esperance", "va_variance_ecart_type", "va_somme", "binomiale_schema", "binomiale_calculer", "binomiale_esperance_variance"),
+        ...m("premiere-spe", "pc_independance", "pc_partition"),
+      ],
       note: "La fonction de répartition n'a pas de micro.",
     },
     {

@@ -67,7 +67,10 @@ export const COTE_DIVOIRE_6E: ProgrammePays = {
       code: "C1-L2", domaine: CALC,
       texte: "Nombres décimaux relatifs : ℤ et 𝔻, opposé, comparaison, droite graduée (lire, graduer, placer), somme de deux décimaux relatifs.",
       couverture: "complete",
-      micros: m("5e", "relatif_lire", "relatif_signe", "relatif_oppose", "relatif_comparer", "relatif_placer", "relatif_addition"),
+      micros: [
+        ...m("5e", "relatif_lire", "relatif_signe", "relatif_oppose", "relatif_comparer", "relatif_placer", "relatif_addition"),
+        ...m("seconde", "reels_ensembles"),
+      ],
     },
     {
       code: "C1-L3", domaine: CALC,
@@ -97,13 +100,19 @@ export const COTE_DIVOIRE_6E: ProgrammePays = {
       code: "C3-L1", domaine: GPLAN,
       texte: "Droites et points : points alignés, demi-droite, droites sécantes, perpendiculaires, parallèles ; tracer la perpendiculaire ou la parallèle passant par un point.",
       couverture: "complete",
-      micros: m("cm2", "droite_reconnaitre", "droite_parallele", "droite_perpendiculaire", "droite_tracer"),
+      micros: [
+        ...m("cm2", "droite_reconnaitre", "droite_parallele", "droite_perpendiculaire", "droite_tracer"),
+        ...m("ce2", "ce2_droite_alignement"),
+      ],
     },
     {
       code: "C3-L2", domaine: GPLAN,
       texte: "Segments : segment, milieu, médiatrice (règle et équerre), report de longueurs au compas.",
       couverture: "complete",
-      micros: m("6e", "distance_definition", "distance_milieu", "mediatrice_definition", "mediatrice_construire", "aire_longueur_mesurer"),
+      micros: [
+        ...m("6e", "distance_definition", "distance_milieu", "mediatrice_definition", "mediatrice_construire"),
+        ...m("5e", "triangle_construire"),
+      ],
     },
     {
       code: "C3-L3", domaine: GPLAN,
@@ -170,7 +179,10 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
       code: "C1-L1", domaine: CALC,
       texte: "Nombres premiers : puissance d'exposant entier d'un entier naturel, priorité de la puissance, (a × b)ⁿ = aⁿ × bⁿ, aⁿ × aᵐ = aⁿ⁺ᵐ ; division euclidienne (égalité, encadrement de a entre deux multiples consécutifs de b) ; reconnaître un nombre premier (2 ou 3 chiffres), décomposer en produit de facteurs premiers.",
       couverture: "complete",
-      micros: m("4e", "puissance_comprendre", "puissance_calculer", "puissance_calcul", "div_euclidienne", "premier_definition", "premier_determiner", "premier_decomposer"),
+      micros: [
+        ...m("4e", "puissance_comprendre", "puissance_calculer", "puissance_calcul", "div_euclidienne", "premier_definition", "premier_determiner", "premier_decomposer"),
+        ...m("3e", "entier_puissance_calcul"),
+      ],
     },
     {
       code: "C1-L2", domaine: CALC,
@@ -197,15 +209,16 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("4e", "prop_graphique", "grandeur_quotient", "grandeur_unite_composee"),
-        ...m("3e", "prop_vitesse_debit"),
+        ...m("3e", "prop_vitesse_debit", "affine_tracer"),
         ...m("cm2", "reperage_coordonnees"),
       ],
     },
     {
       code: "C2-L2", domaine: DONN,
       texte: "Statistique : population, caractère qualitatif ou quantitatif, modalités ; diagramme en bâtons et diagramme à bandes (construire, lire effectifs et fréquences).",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("5e", "stat_donnee_organiser", "stat_lire_graphique", "stat_effectif_frequence", "stat_representer", "stat_representation_choisir"),
+      note: "Diagrammes couverts ; manque le vocabulaire : population, caractère qualitatif ou quantitatif, modalités.",
     },
     {
       code: "C3-L1", domaine: GPLAN,
@@ -224,11 +237,12 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
     {
       code: "C3-L3", domaine: GPLAN,
       texte: "Triangles : inégalité triangulaire, axes de symétrie et droites particulières des triangles particuliers ; construire et démontrer qu'un triangle est isocèle, équilatéral ou rectangle ; bissectrice au compas.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: [
         ...m("5e", "triangle_inegalite", "triangle_nature", "triangle_construire"),
         ...m("6e", "bissectrice_construire", "sym_axe"),
       ],
+      note: "La bissectrice se construit chez nous par pliage ou au rapporteur : manque la construction au compas.",
     },
     {
       code: "C3-L4", domaine: GPLAN,
@@ -285,7 +299,10 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       code: "C1-L1", domaine: CALC,
       texte: "Nombres décimaux relatifs : puissances de 10 d'exposant entier relatif, écriture a × 10ᵖ, notation scientifique, ordre d'un décimal, produits (a × 10ᵖ) × (b × 10ᵠ), comparaison.",
       couverture: "complete",
-      micros: m("4e", "puissance_exposant_negatif", "puissance_dix", "puissance_notation_scientifique", "puissance_comparer", "puissance_calcul"),
+      micros: [
+        ...m("4e", "puissance_exposant_negatif", "puissance_dix", "puissance_notation_scientifique", "puissance_comparer", "puissance_calcul"),
+        ...m("3e", "entier_puissance_ecriture_scientifique"),
+      ],
     },
     {
       code: "C1-L2", domaine: CALC,
@@ -301,18 +318,21 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
     {
       code: "C1-L3", domaine: CALC,
       texte: "Calcul littéral : développer a(x + y), (a + b)(x + y) ; identités remarquables (a + b)², (a − b)², (a + b)(a − b) ; factoriser ax + ay, ax + ay + bx + by et les expressions remarquables.",
-      couverture: "complete",
-      micros: m("4e", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_identite_developper", "litteral_identite_reconnaitre", "litteral_facteur_commun", "litteral_factoriser_simple"),
+      couverture: "partielle",
+      micros: [
+        ...m("4e", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_identite_developper", "litteral_identite_reconnaitre", "litteral_facteur_commun", "litteral_factoriser_simple"),
+        ...m("3e", "litteral_factoriser"),
+      ],
+      note: "Manque la factorisation par groupement de ax + ay + bx + by.",
     },
     {
       code: "C1-L4", domaine: CALC,
       texte: "Équations et inéquations du premier degré dans ℚ : vocabulaire, propriétés des égalités et des inégalités, tester une solution, résoudre, traduire un problème ; inéquations x + a < b, ax + b > c ; solutions sur une droite graduée.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "equation_reconnaitre", "equation_traduire", "equation_resoudre_simple", "equation_resoudre_reduction", "equation_verifier", "equation_probleme"),
         ...m("seconde", "inequation_resoudre", "intervalle_representer"),
       ],
-      note: "Les inéquations sont chez nous en seconde ; pas de micro « inéquation » au collège.",
     },
     {
       code: "C2-L1", domaine: DONN,
@@ -331,8 +351,8 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       code: "C3-L1", domaine: GPLAN,
       texte: "Angles : angle au centre, arcs et cordes de même longueur, longueur d'un arc ; angles alternes-internes et correspondants (propriétés, parallélisme).",
       couverture: "partielle",
-      micros: [...m("5e", "angle_paralleles"), ...m("3e", "angle_inscrit_centre")],
-      note: "L'angle au centre est couvert ; manquent les cordes et la longueur d'un arc.",
+      micros: [...m("5e", "angle_paralleles"), ...m("3e", "angle_inscrit_centre"), ...m("premiere-spe", "trig_arc")],
+      note: "L'angle au centre et la longueur d'un arc (en radians, 1re spé) sont couverts ; manquent les cordes.",
     },
     {
       code: "C3-L2", domaine: GPLAN,
@@ -343,7 +363,7 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
         ...m("seconde", "geo_projete_orthogonal"),
         ...m("4e", "bissectrice_equidistance"),
       ],
-      note: "La bissectrice par l'équidistance est couverte ; la distance d'un point à une droite (projeté orthogonal) est en seconde chez nous ; manque la distance de deux parallèles.",
+      note: "La bissectrice par l'équidistance est couverte ; la distance d'un point à une droite (projeté orthogonal) est en seconde chez nous ; manquent la distance de deux parallèles et la construction de la bissectrice au compas.",
     },
     {
       code: "C3-L3", domaine: GPLAN,
@@ -390,7 +410,7 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       texte: "Calcul littéral : polynômes (somme, différence, produit, quotient), puissances d'exposant relatif, produit nul, nombres de même carré, développer, réduire, factoriser, valeur numérique ; fraction rationnelle (condition d'existence, simplification).",
       couverture: "partielle",
       micros: [
-        ...m("3e", "litteral_substituer", "litteral_reduire", "litteral_developper", "litteral_factoriser", "litteral_identite", "equation_produit_nul"),
+        ...m("3e", "litteral_substituer", "litteral_reduire", "litteral_developper", "litteral_factoriser", "litteral_identite", "equation_produit_nul", "equation_carre_factoriser"),
         ...m("4e", "puissance_exposant_negatif"),
       ],
       note: "Les fractions rationnelles (valeurs interdites, simplification) n'ont pas de micro.",
@@ -401,16 +421,16 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("3e", "entier_racine_comprendre", "entier_racine_calculer"),
-        ...m("seconde", "racine_carre_de_a2", "racine_produit", "racine_simplification", "racine_somme", "valeur_absolue_distance"),
+        ...m("seconde", "racine_carre_de_a2", "racine_produit", "racine_simplification", "racine_somme", "valeur_absolue_distance", "ir_difference_carres"),
       ],
-      note: "Manque « rendre rationnel le dénominateur » avec l'expression conjuguée.",
+      note: "Manquent la propriété du quotient √(a/b) et « rendre rationnel le dénominateur » avec l'expression conjuguée.",
     },
     {
       code: "C1-L3", domaine: CALC,
       texte: "Calcul numérique : intervalles (notation, inégalités, droite graduée, centre, amplitude, intersection et réunion) ; comparer par la différence, les carrés, les inverses ; encadrer un réel ; opérations sur les encadrements ; arrondi d'une racine carrée.",
       couverture: "partielle",
       micros: [
-        ...m("seconde", "intervalle_representer", "intervalle_appartenance", "reels_encadrement", "comparer_difference_quotient"),
+        ...m("seconde", "intervalle_representer", "intervalle_appartenance", "reels_encadrement", "comparer_difference_quotient", "reference_comparer"),
         ...m("3e", "entier_racine_encadrer"),
       ],
       note: "Manquent centre et amplitude d'un intervalle, réunion / intersection, opérations sur les encadrements.",
@@ -435,7 +455,7 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       code: "C1-L6", domaine: FONC,
       texte: "Applications affines et linéaires : définition, représentation graphique, sens de variation, expression à partir de deux images ou du graphique, image et antécédent (calcul et lecture), proportionnalité et application linéaire.",
       couverture: "complete",
-      micros: m("3e", "fonction_affine_lineaire", "affine_reconnaitre", "affine_coeff_directeur", "affine_ordonnee_origine", "affine_calcul_image", "affine_expression", "affine_graphique", "affine_probleme"),
+      micros: m("3e", "fonction_affine_lineaire", "affine_reconnaitre", "affine_coeff_directeur", "affine_ordonnee_origine", "affine_calcul_image", "affine_expression", "affine_graphique", "affine_tracer", "affine_probleme"),
     },
     {
       code: "C2-L1", domaine: DONN,
@@ -462,8 +482,9 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
     {
       code: "C3-L2", domaine: GPLAN,
       texte: "Propriétés de Thalès dans un triangle : propriété, conséquence, réciproque ; partager un segment en segments de même longueur ; calculer des distances, démontrer un parallélisme.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("3e", "thales_configuration", "thales_rapport", "thales_calculer_longueur", "thales_reciproque", "thales_rediger"),
+      note: "Manque le partage d'un segment en segments de même longueur.",
     },
     {
       code: "C3-L3", domaine: GPLAN,
@@ -475,14 +496,17 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       code: "C3-L4", domaine: GPLAN,
       texte: "Vecteurs : différence, produit par un réel, vecteurs colinéaires, orthogonaux, vecteur directeur ; construire M tel que AM = k AB (vecteurs) ; alignement, parallélisme.",
       couverture: "complete",
-      micros: m("seconde", "vecteur_somme", "vecteur_produit_reel", "vecteur_point_defini", "vecteur_colinearite", "vecteur_chasles_calcul"),
+      micros: [
+        ...m("seconde", "vecteur_somme", "vecteur_produit_reel", "vecteur_point_defini", "vecteur_colinearite", "vecteur_chasles_calcul", "droite_vecteur_directeur"),
+        ...m("premiere-spe", "ps_orthogonalite"),
+      ],
     },
     {
       code: "C3-L5", domaine: GPLAN,
       texte: "Coordonnées d'un vecteur : coordonnées d'une somme, d'un produit par un réel, du milieu ; égalité, colinéarité, orthogonalité ; distance de deux points.",
       couverture: "complete",
       micros: [
-        ...m("seconde", "vecteur_coordonnees", "repere_milieu", "repere_distance", "vecteur_colinearite"),
+        ...m("seconde", "vecteur_coordonnees", "vecteur_egalite", "vecteur_combinaison_lineaire", "repere_milieu", "repere_distance", "vecteur_colinearite"),
         ...m("premiere-spe", "ps_orthogonalite"),
       ],
     },
@@ -500,7 +524,10 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       code: "C3-L7", domaine: GESP,
       texte: "Pyramides et cônes : pyramide régulière, cône de révolution, patrons, apothème, angle de développement ; volume, aire latérale, aire totale ; troncs ; réduction (coefficient, aires, volumes).",
       couverture: "partielle",
-      micros: m("3e", "section_cone_pyramide", "aire_agrandissement_reduction", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "volume_pyramide_cone_reduction", "aire_pyramide_cone"),
+      micros: [
+        ...m("3e", "section_cone_pyramide", "aire_agrandissement_reduction", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "volume_pyramide_cone_reduction", "aire_pyramide_cone"),
+        ...m("cm2", "solide_patron"),
+      ],
       note: "Volumes, aires et réduction couverts ; restent l'angle de développement et les troncs.",
     },
   ],
