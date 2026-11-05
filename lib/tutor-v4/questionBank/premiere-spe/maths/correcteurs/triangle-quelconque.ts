@@ -220,5 +220,5 @@ const PAR_GABARIT: CorrecteursMaths = {
 
 /** La banque écrit l'unité dans la formule (`15\text{ cm}`), pour qu'elle ne passe pas seule à la ligne : on relit sans. */
 export const CORRECTEURS: CorrecteursMaths = Object.fromEntries(
-  Object.entries(PAR_GABARIT).map(([id, c]) => [id, (q: Q) => c({ ...q, text: q.text.replace(/\\text\{ ([a-z]+)\}\$/g, "$ $1") })]),
+  Object.entries(PAR_GABARIT).map(([id, c]) => [id, (q: Q) => c({ ...q, text: q.text.replace(/\\text\{ ([a-z]+)\}\$/g, "$ $1").replace(/ =\\nobreak /g, " = ") })]),
 );

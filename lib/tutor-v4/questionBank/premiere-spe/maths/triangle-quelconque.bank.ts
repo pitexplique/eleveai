@@ -6,7 +6,13 @@
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { court, entre, expl, fabrique, fr, nL, phrase, qcm, un } from "../../lycee-commun";
 
-const tpl = fabrique("premiere-spe", "triangle_quelconque", "1s_");
+const gabarit = fabrique("premiere-spe", "triangle_quelconque", "1s_");
+/** KaTeX coupe la ligne après « = » (« K̂ = / 90° ») : on colle la mesure à son angle. */
+const tpl: typeof gabarit = (microId, n, difficulty, hint, generate) =>
+  gabarit(microId, n, difficulty, hint, () => {
+    const q = generate();
+    return { ...q, text: q.text.replace(/(\\widehat\{[A-Z]\}) = /g, "$1 =\\nobreak ") };
+  });
 const M1 = "trig_loi_sinus";
 const M2 = "trig_aire_heron";
 
