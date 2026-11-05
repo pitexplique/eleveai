@@ -2255,7 +2255,7 @@ export const droitesBank: TutorBankItemV4[] = [
       "une règle et une équerre",
       "une balance",
       "un chronomètre",
-      "un rapporteur seul",
+      "une gomme seule",
     ],
     expected: ["une règle et une équerre"],
     comparator: "mcq_exact",

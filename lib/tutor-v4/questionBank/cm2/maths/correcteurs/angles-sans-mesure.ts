@@ -113,7 +113,7 @@ const droitOuNon = (q: Q) => {
 /* somme, multiple */
 const degres = (q: Q) => {
   const l = nombres(q.text);
-  return texte(q, `${l[0] * 90}°`);
+  return texte(q, ({ 2: "Un angle plat", 3: "Trois quarts de tour", 4: "Un tour complet" } as Record<number, string>)[l[0]]);
 };
 const fois = (q: Q) => {
   const a = fig(q);

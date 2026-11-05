@@ -39,7 +39,7 @@ const anciens: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Regarde si le prix d’un carnet reste le même.",
     explanation: exp(
-      "Deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.",
+      "Deux grandeurs sont proportionnelles quand 2 fois plus de l’une donne 2 fois plus de l’autre.",
       "On compare le prix pour une unité ou on vérifie que quantité et prix sont multipliés pareil.",
       "1 carnet coûte 2 €. Pour 3 carnets, 3 × 2 € = 6 €.",
       "La situation est proportionnelle."

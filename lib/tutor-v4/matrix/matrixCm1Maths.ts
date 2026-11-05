@@ -188,7 +188,7 @@ const supportLinks: Record<string, string[]> = {
   prop_fois_moins: ["division_sens", "prop_reconnaitre"],
   prop_tableau: ["tableau_completer", "multiplication_mental"],
   prop_probleme: ["probleme_une_etape", "tableau_lire"],
-  prop_defi: ["probleme_plusieurs_etapes", "prop_tableau"],
+  prop_defi: ["probleme_plusieurs_etapes", "prop_probleme"],
 
   // ============================================================
   // LONGUEURS
@@ -314,7 +314,7 @@ const supportLinks: Record<string, string[]> = {
   figure_quadrilatere: ["droite_parallele", "droite_perpendiculaire"],
   figure_cercle: ["droite_reconnaitre"],
   figure_propriete: ["angle_type"],
-  figure_construire: ["droite_tracer", "angle_comparer"],
+  figure_construire: ["droite_tracer", "angle_comparer_sans_mesure"],
   figure_defi: ["perimetre_triangle", "perimetre_quadrilatere"],
 
   // ============================================================

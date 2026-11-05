@@ -174,7 +174,7 @@ export const droitesBank: TutorBankItemV4[] = [
     expected: ["un angle droit"],
     comparator: "mcq_exact",
     hint: "Perpendiculaire fait penser à angle droit.",
-    explanation: "Deux droites perpendiculaires se coupent en formant un angle droit (90°), souvent codé par un petit carré.",
+    explanation: "Deux droites perpendiculaires se coupent en formant un angle droit, souvent codé par un petit carré.",
     tags: ["cm1","droite","droite_perpendiculaire","guide","qcm"],
   },
   {
@@ -188,7 +188,7 @@ export const droitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Pour tracer une droite perpendiculaire à une autre, quel instrument utilise-t-on ?",
     format: "qcm",
-    choices: ["l'équerre","seulement la règle","le compas","le rapporteur"],
+    choices: ["l'équerre","seulement la règle","le compas","le crayon seul"],
     expected: ["l'équerre"],
     comparator: "mcq_exact",
     hint: "Cet instrument a un angle droit.",
@@ -2169,7 +2169,7 @@ export const droitesBank: TutorBankItemV4[] = [
         {
           text: "Quel outil aide à tracer une droite perpendiculaire ?",
           correct: "une équerre",
-          wrongs: ["une balance", "un rapporteur uniquement", "un verre doseur"],
+          wrongs: ["une balance", "un crayon uniquement", "un verre doseur"],
           explanation:
             "Une équerre possède un angle droit. Elle aide donc à tracer une droite perpendiculaire.",
         },

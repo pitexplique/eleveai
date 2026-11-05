@@ -143,19 +143,19 @@ const anciens: TutorBankItemV4[] = [
     text: "Dans quelle situation parle-t-on de proportionnalité ?",
     format: "qcm",
     choices: [
-      "Quand on multiplie toujours par le même nombre",
+      "Quand 2 fois plus de l’une donne 2 fois plus de l’autre",
       "Quand on ajoute toujours 1",
       "Quand les nombres sont tous différents",
       "Quand le résultat est toujours plus petit",
     ],
-    expected: ["Quand on multiplie toujours par le même nombre"],
+    expected: ["Quand 2 fois plus de l’une donne 2 fois plus de l’autre"],
     comparator: "mcq_exact",
-    hint: "Cherche l’idée de même coefficient multiplicateur.",
+    hint: "Pense à ce qui se passe quand on en prend 2 fois plus.",
     explanation: exp(
-      "Une situation de proportionnalité existe quand deux quantités sont liées par une multiplication toujours identique.",
-      "On vérifie si on passe d’une quantité à l’autre en multipliant toujours par le même nombre.",
-      "Par exemple : 1 carnet coûte 3 €, 2 carnets coûtent 6 €, 3 carnets coûtent 9 €. On multiplie par 3.",
-      "C’est une situation de proportionnalité."
+      "Une situation de proportionnalité : 2 fois plus de l’une donne 2 fois plus de l’autre.",
+      "On teste avec un exemple.",
+      "2 carnets coûtent 6 €, donc 4 carnets coûtent 12 €.",
+      "C’est cette régularité qui dit la proportionnalité."
     ),
     tags: [
       "cm1",
@@ -181,35 +181,13 @@ const anciens: TutorBankItemV4[] = [
     choices: ["oui", "non"],
     expected: ["oui"],
     comparator: "mcq_exact",
-    hint: "Regarde si le prix est toujours le nombre de carnets multiplié par le même nombre.",
+    hint: "Cherche le prix d’un carnet dans chaque cas.",
     explanation: exp(
-      "Une situation est proportionnelle si on multiplie toujours par le même nombre.",
-      "Ici, le prix dépend du nombre de carnets.",
-      "1 × 3 = 3, 2 × 3 = 6, 3 × 3 = 9.",
-      "C’est proportionnel, car on multiplie toujours par 3."
+      "Dans une situation proportionnelle, le prix d’un seul objet ne change pas.",
+      "On cherche le prix d’un carnet dans chaque cas.",
+      "3 ÷ 1 = 3 ; 6 ÷ 2 = 3 ; 9 ÷ 3 = 3.",
+      "C’est proportionnel : un carnet coûte toujours 3 €."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 3,
-      rowLabels: ["Carnets", "Prix (€)"],
-      colLabels: ["1", "2", "3"],
-      values: [
-        ["1", "2", "3"],
-        ["3", "6", "9"],
-      ],
-      missing: [],
-      highlightedCells: [
-        { row: 1, col: 0 },
-        { row: 1, col: 1 },
-        { row: 1, col: 2 },
-      ],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -237,8 +215,8 @@ const anciens: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Quand l’âge double, la taille ne double pas forcément.",
     explanation: exp(
-      "Dans une situation de proportionnalité, multiplier une quantité doit multiplier l’autre par le même nombre.",
-      "On vérifie si la relation reste régulière.",
+      "Dans une situation de proportionnalité, 2 fois plus de l’une donne 2 fois plus de l’autre.",
+      "On teste avec un exemple.",
       "Si un enfant de 5 ans mesure 110 cm, un enfant de 10 ans ne mesure pas forcément 220 cm.",
       "L’âge et la taille ne sont donc pas toujours proportionnels."
     ),
@@ -272,28 +250,6 @@ const anciens: TutorBankItemV4[] = [
       "1 × 4 = 4, 2 × 4 = 8, 3 × 4 = 12.",
       "La situation est proportionnelle, car on multiplie toujours par 4."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 3,
-      rowLabels: ["Tickets", "Prix (€)"],
-      colLabels: ["1", "2", "3"],
-      values: [
-        ["1", "2", "3"],
-        ["4", "8", "12"],
-      ],
-      missing: [],
-      highlightedCells: [
-        { row: 1, col: 0 },
-        { row: 1, col: 1 },
-        { row: 1, col: 2 },
-      ],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -788,24 +744,6 @@ const anciens: TutorBankItemV4[] = [
       "Le prix est donc aussi 2 fois plus grand : 6 × 2 = 12.",
       "4 carnets coûtent 12 €."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 2,
-      rowLabels: ["Carnets", "Prix (€)"],
-      colLabels: ["Départ", "Fois plus"],
-      values: [
-        ["2", "4"],
-        ["6", ""],
-      ],
-      missing: [{ row: 1, col: 1 }],
-      highlightedCells: [{ row: 1, col: 1 }],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -837,24 +775,6 @@ const anciens: TutorBankItemV4[] = [
       "6 = 3 × 2, donc le prix devient 15 × 2 = 30.",
       "6 objets coûtent 30 €."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 2,
-      rowLabels: ["Objets", "Prix (€)"],
-      colLabels: ["Départ", "Fois plus"],
-      values: [
-        ["3", "6"],
-        ["15", ""],
-      ],
-      missing: [{ row: 1, col: 1 }],
-      highlightedCells: [{ row: 1, col: 1 }],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -1248,24 +1168,6 @@ const anciens: TutorBankItemV4[] = [
       "Le prix est donc aussi divisé par 2 : 18 ÷ 2 = 9.",
       "3 carnets coûtent 9 €."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 2,
-      rowLabels: ["Carnets", "Prix (€)"],
-      colLabels: ["Départ", "Fois moins"],
-      values: [
-        ["6", "3"],
-        ["18", ""],
-      ],
-      missing: [{ row: 1, col: 1 }],
-      highlightedCells: [{ row: 1, col: 1 }],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -1297,24 +1199,6 @@ const anciens: TutorBankItemV4[] = [
       "8 ÷ 4 = 2, donc le prix devient 32 ÷ 4 = 8.",
       "2 objets coûtent 8 €."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 2,
-      rowLabels: ["Objets", "Prix (€)"],
-      colLabels: ["Départ", "Fois moins"],
-      values: [
-        ["8", "2"],
-        ["32", ""],
-      ],
-      missing: [{ row: 1, col: 1 }],
-      highlightedCells: [{ row: 1, col: 1 }],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -3011,29 +2895,11 @@ const anciens: TutorBankItemV4[] = [
     comparator: "number_equal",
     hint: "Multiplie le nombre de stylos par le prix d’un stylo.",
     explanation: exp(
-      "Un problème de proportionnalité relie deux quantités par un même multiplicateur.",
-      "Ici, le prix total dépend du nombre de stylos.",
+      "Dans un problème de proportionnalité, on part de la valeur pour un seul.",
+      "Ici, un stylo coûte 2 €.",
       "7 × 2 = 14.",
       "7 stylos coûtent 14 €."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 4,
-      rowLabels: ["Stylos", "Prix (€)"],
-      colLabels: ["1", "2", "7", "10"],
-      values: [
-        ["1", "2", "7", "10"],
-        ["2", "4", "", "20"],
-      ],
-      missing: [{ row: 1, col: 2 }],
-      highlightedCells: [{ row: 1, col: 2 }],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -3065,24 +2931,6 @@ const anciens: TutorBankItemV4[] = [
       "28 ÷ 4 = 7.",
       "1 boîte contient 7 crayons."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 3,
-      rowLabels: ["Boîtes", "Crayons"],
-      colLabels: ["1", "4", "8"],
-      values: [
-        ["1", "4", "8"],
-        ["", "28", "56"],
-      ],
-      missing: [{ row: 1, col: 0 }],
-      highlightedCells: [{ row: 1, col: 0 }],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -3114,24 +2962,6 @@ const anciens: TutorBankItemV4[] = [
       "12 × 2 = 24.",
       "6 carnets coûtent 24 €."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 2,
-      rowLabels: ["Carnets", "Prix (€)"],
-      colLabels: ["Départ", "Fois plus"],
-      values: [
-        ["3", "6"],
-        ["12", ""],
-      ],
-      missing: [{ row: 1, col: 1 }],
-      highlightedCells: [{ row: 1, col: 1 }],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -3776,30 +3606,6 @@ const anciens: TutorBankItemV4[] = [
       "24 ÷ 3 = 8, puis 5 × 8 = 40.",
       "5 paniers contiennent 40 fruits."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 4,
-      rowLabels: ["Paniers", "Fruits"],
-      colLabels: ["1", "3", "5", "10"],
-      values: [
-        ["1", "3", "5", "10"],
-        ["", "24", "", "80"],
-      ],
-      missing: [
-        { row: 1, col: 0 },
-        { row: 1, col: 2 },
-      ],
-      highlightedCells: [
-        { row: 1, col: 0 },
-        { row: 1, col: 2 },
-      ],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -3833,24 +3639,6 @@ const anciens: TutorBankItemV4[] = [
       "36 × 2 = 72.",
       "8 boîtes contiennent 72 crayons."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 2,
-      rowLabels: ["Boîtes", "Crayons"],
-      colLabels: ["Départ", "Fois plus"],
-      values: [
-        ["4", "8"],
-        ["36", ""],
-      ],
-      missing: [{ row: 1, col: 1 }],
-      highlightedCells: [{ row: 1, col: 1 }],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",
@@ -3882,30 +3670,6 @@ const anciens: TutorBankItemV4[] = [
       "30 ÷ 6 = 5, puis 10 × 5 = 50.",
       "10 objets coûtent 50 €."
     ),
-    canvas: tableauProportionnaliteCanvas({
-      rows: 2,
-      cols: 4,
-      rowLabels: ["Objets", "Prix (€)"],
-      colLabels: ["1", "6", "10", "12"],
-      values: [
-        ["1", "6", "10", "12"],
-        ["", "30", "", "60"],
-      ],
-      missing: [
-        { row: 1, col: 0 },
-        { row: 1, col: 2 },
-      ],
-      highlightedCells: [
-        { row: 1, col: 0 },
-        { row: 1, col: 2 },
-      ],
-      display: {
-        showRowLabels: true,
-        showColLabels: true,
-        showMissing: true,
-        showGrid: true,
-      },
-    }),
     tags: [
       "cm1",
       "proportionnalite",

@@ -33,7 +33,7 @@ function label(block: ScratchBlockData) {
       return `avancer de ${block.value}`;
 
     case "turn":
-      return `tourner de ${block.value}°`;
+      return block.text ?? `tourner de ${block.value}°`;
 
     case "repeat":
       return `répéter ${block.times} fois`;

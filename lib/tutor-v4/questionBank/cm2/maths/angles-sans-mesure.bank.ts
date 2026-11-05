@@ -1,6 +1,6 @@
 // LES ANGLES SANS MESURE (05/11/2026). Trous du programme de CM2 : cm2-G-angles-2
 // (nommer un angle), -3 (comparer sans mesurer), -4 (somme, multiple).
-// Les degrés ne servent ici que pour l'angle droit. Le pliage (angles-5) n'est pas évaluable.
+// Aucune mesure : le repère est l'angle droit. Le pliage (angles-5) n'est pas évaluable.
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type { CanvasFigure } from "@/lib/tutor-v4/types_canvas";
@@ -71,7 +71,7 @@ const angleNotation: TutorBankItemV4[] = [
 /* ───────────────────────── angle_comparer_sans_mesure ───────────────────────── */
 const co = gabarits("angle_comparer_sans_mesure", "angle", ["comparer"]);
 const NOMS = ["A", "B", "C", "D"];
-/** Des ouvertures séparées d'au moins 20° : on les voit à l'œil. */
+/** Des ouvertures bien séparées : on les voit à l'œil. */
 const tireDeg = (n: number) => {
   const pas = melange([25, 35, 45, 60, 75, 95, 110, 130, 150]);
   for (;;) {
@@ -157,7 +157,7 @@ const expFois = (k: number, n: number, nom: string) => exp(`${k} petits angles �
 const POUR_DROIT = [2, 3, 5, 6, 9];
 const ORDRE = ["", "Sans mesurer.", "Pense à l'angle droit.", "Regarde bien."];
 const angleSommeMultiple: TutorBankItemV4[] = [
-  so(1, "Un angle droit vaut 90°. Ajoute-les.", () => {
+  so(1, "Deux angles droits collés font un angle plat.", () => {
     const k = entre(2, 4);
     return qcmSansEspace(k);
   }),
@@ -196,7 +196,7 @@ const angleSommeMultiple: TutorBankItemV4[] = [
   }),
   so(3, "Un angle plat, c'est deux angles droits : prends la moitié.", () => {
     const n = un([4, 6, 8, 10, 12, 14, 16, 18]);
-    const C = un(["Un éventail a", "Un compas de marine a", "Un rapporteur géant a", "Un demi-cercle de jardin a", "Une roue de paon a", "Une vitre en demi-cercle a", "Une scène en demi-cercle a", "Un arc de lumière a"]);
+    const C = un(["Un éventail a", "Un compas de marine a", "Un paravent a", "Un demi-cercle de jardin a", "Une roue de paon a", "Une vitre en demi-cercle a", "Une scène en demi-cercle a", "Un arc de lumière a"]);
     return qcmN(n / 2, [n, n * 2, n / 2 + 1, n / 2 + 2, 2].filter((f) => f !== n / 2), exp("un angle plat vaut deux angles droits.", "on prend la moitié du nombre de parts.", `${n} ÷ 2 = ${n / 2}.`, `${n / 2} parts forment un angle droit.`), `${C} ${n} parts égales, ouvertes en angle plat. ${v(["Combien de parts forment un angle droit ?", "Combien de parts faut-il pour un angle droit ?", "Combien de parts font un angle droit ?"])}`);
   }),
   so(3, "Chaque virage est un quart de tour.", () => {
@@ -206,10 +206,11 @@ const angleSommeMultiple: TutorBankItemV4[] = [
     return qcm(t[k], Object.values(t).filter((x) => x !== t[k]), exp("chaque angle droit est un quart de tour.", "on compte les quarts de tour.", `${k} × un quart de tour.`, `${O.toLowerCase()} a fait : ${t[k].toLowerCase()}.`), `${O} ${v(["tourne d'un angle droit", "fait un angle droit"])}, ${k} fois de suite, toujours du même côté. ${v(["Quel tour a-t-on fait ?", "Quelle rotation cela fait-il ?", "Cela fait quel tour ?"])}`);
   }),
 ];
-/** « 180° » s'écrit sans espace : on ne passe pas par l'unité de qcmN. */
+/** Sans degrés : k angles droits collés, c'est un angle plat, trois quarts de tour ou un tour complet. */
+const NOM_COLLES: Record<number, string> = { 2: "Un angle plat", 3: "Trois quarts de tour", 4: "Un tour complet" };
 function qcmSansEspace(k: number) {
-  const r = k * 90;
-  return qcm(`${r}°`, [`${k * 45}°`, `${k * 100}°`, `${r + 90}°`, `${r - 90 > 0 ? r - 90 : r + 180}°`], exp("un angle droit mesure 90°.", "on ajoute autant de fois 90° qu'il y a d'angles droits.", `${k} × 90° = ${r}°.`, `cela fait ${r}°.`), v(ORDRE, [`On colle ${k} angles droits. Combien de degrés en tout ?`, `${k} angles droits collés font combien de degrés ?`, `Quelle est la somme de ${k} angles droits ?`, `Combien de degrés font ${k} angles droits ?`]));
+  const r = NOM_COLLES[k];
+  return qcm(r, ["Un angle plat", "Trois quarts de tour", "Un tour complet", "Un angle aigu", "Un angle obtus"], exp("un angle droit, c'est un quart de tour.", "on compte les quarts de tour.", `${k} angles droits, c'est ${k} quarts de tour.`, `cela fait : ${r.toLowerCase()}.`), v(ORDRE, [`On colle ${k} angles droits. Qu'obtient-on ?`, `${k} angles droits collés forment :`, `Que forment ${k} angles droits collés ?`, `On met côte à côte ${k} angles droits. Cela fait :`]));
 }
 
 export const anglesSansMesureBank: TutorBankItemV4[] = [

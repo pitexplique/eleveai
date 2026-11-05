@@ -352,8 +352,8 @@ const algoDeplacement: TutorBankItemV4[] = [
     choices: makeChoices("La même direction qu'au départ", ["La direction opposée", "À droite du départ", "À gauche du départ"]),
     expected: ["La même direction qu'au départ"],
     comparator: "mcq_exact",
-    hint: "2 × 180° = 360° = tour complet.",
-    explanation: "2 demi-tours = 360°, le robot revient à sa direction initiale.",
+    hint: "2 demi-tours font un tour complet.",
+    explanation: "2 demi-tours font un tour complet : le robot revient à sa direction initiale.",
     tags: ["déplacement", "demi-tour"],
   },
   {
@@ -488,7 +488,7 @@ const algoProgramme: TutorBankItemV4[] = [
     hint: "Le dernier bloc = celui tout en bas.",
     tags: ["programme", "ordre", "dernier"],
     generate: () => {
-      const fins = ["Dire Bravo", "Dire Terminé", "S'arrêter", "Tourner de 90°"];
+      const fins = ["Dire Bravo", "Dire Terminé", "S'arrêter", "Tourner d’un quart de tour"];
       const fin = pickOne(fins);
       const wrongs = fins.filter(f => f !== fin);
       return {
@@ -501,7 +501,7 @@ const algoProgramme: TutorBankItemV4[] = [
         canvas: scratchCanvas("Ordre", [
           { type: "event", text: "Quand 🚩 est cliqué" },
           { type: "move", text: "Avancer de 10 pas", value: 10 },
-          { type: "turn", text: "Tourner de 90°", value: 90 },
+          { type: "turn", text: "Tourner d’un quart de tour", value: 90 },
           { type: "say", text: fin },
         ]),
       };
@@ -614,13 +614,13 @@ const algoProgramme: TutorBankItemV4[] = [
     difficulty: 2, theme: "neutral",
     text: "Quel bloc s'exécute juste après le déclencheur dans ce programme ?",
     format: "qcm",
-    choices: makeChoices("Avancer de 10 pas", ["Tourner de 90°", "Dire Fini", "Quand 🚩 est cliqué"]),
+    choices: makeChoices("Avancer de 10 pas", ["Tourner d’un quart de tour", "Dire Fini", "Quand 🚩 est cliqué"]),
     expected: ["Avancer de 10 pas"],
     comparator: "mcq_exact",
     canvas: scratchCanvas("Premier bloc", [
       { type: "event", text: "Quand 🚩 est cliqué" },
       { type: "move", text: "Avancer de 10 pas", value: 10 },
-      { type: "turn", text: "Tourner de 90°", value: 90 },
+      { type: "turn", text: "Tourner d’un quart de tour", value: 90 },
       { type: "say", text: "Dire Fini" },
     ]),
     hint: "C'est le bloc juste sous le déclencheur.",
@@ -682,19 +682,19 @@ const algoRepetition: TutorBankItemV4[] = [
     tags: ["répétition", "figure"],
     generate: () => {
       const figures = [
-        { cotes: 3, nom: "triangle", angle: 120 },
-        { cotes: 4, nom: "carré", angle: 90 },
-        { cotes: 6, nom: "hexagone", angle: 60 },
+        { cotes: 3, nom: "triangle", angle: "d’un tiers de tour" },
+        { cotes: 4, nom: "carré", angle: "d’un quart de tour" },
+        { cotes: 6, nom: "hexagone", angle: "d’un sixième de tour" },
       ] as const;
       const fig = pickOne(figures);
       const wrongs = figures.filter(f => f.nom !== fig.nom).map(f => `un ${f.nom}`);
       return {
-        text: `Répéter ${fig.cotes} fois : "Avancer 50 pas · Tourner ${fig.angle}°". Quelle figure est dessinée ?`,
+        text: `Répéter ${fig.cotes} fois : "Avancer 50 pas · Tourner ${fig.angle}". Quelle figure est dessinée ?`,
         choices: makeChoices(`un ${fig.nom}`, wrongs),
         expected: [`un ${fig.nom}`],
         format: "qcm" as const,
         comparator: "mcq_exact" as const,
-        explanation: `${fig.cotes} côtés avec ${fig.angle}° = un ${fig.nom}.`,
+        explanation: `${fig.cotes} côtés, on tourne ${fig.angle} à chaque fois : un ${fig.nom}.`,
       };
     },
   },
@@ -749,13 +749,13 @@ const algoRepetition: TutorBankItemV4[] = [
     niveau: "cm1", matiere: "maths",
     notionId: "algorithmique", microId: "algo_repetition",
     difficulty: 2, theme: "neutral",
-    text: "Programme : Répéter 4 fois 'Tourner de 90°'. L'angle total parcouru est de…",
+    text: "Programme : Répéter 4 fois 'Tourner d’un quart de tour'. En tout, le robot a fait…",
     format: "qcm",
-    choices: ["90°", "180°", "270°", "360°"],
-    expected: ["360°"],
+    choices: ["un quart de tour", "un demi-tour", "trois quarts de tour", "un tour complet"],
+    expected: ["un tour complet"],
     comparator: "mcq_exact",
-    hint: "4 × 90° = ?",
-    explanation: "4 × 90° = 360°. Le robot a fait un tour complet.",
+    hint: "Compte les quarts de tour.",
+    explanation: "4 quarts de tour font un tour complet.",
     tags: ["répétition", "angle"],
   },
   {
@@ -783,12 +783,12 @@ const algoRepetition: TutorBankItemV4[] = [
     niveau: "cm1", matiere: "maths",
     notionId: "algorithmique", microId: "algo_repetition",
     difficulty: 3, theme: "neutral",
-    text: "Programme : Répéter 5 fois 'Tourner de 72°'. Quel est l'angle total parcouru ?",
+    text: "Programme : Répéter 5 fois 'Tourner d’un cinquième de tour'. Combien de tours complets le robot a-t-il faits ?",
     format: "short",
-    expected: ["360"],
+    expected: ["1"],
     comparator: "number_equal",
-    hint: "5 × 72°.",
-    explanation: "5 × 72° = 360°. Le robot fait un tour complet (utile pour un pentagone).",
+    hint: "5 cinquièmes de tour, combien de tours ?",
+    explanation: "5 cinquièmes de tour font un tour complet (utile pour un pentagone).",
     tags: ["répétition", "angle"],
   },
   {
@@ -1115,13 +1115,13 @@ const algoDefi: TutorBankItemV4[] = [
     niveau: "cm1", matiere: "maths",
     notionId: "algorithmique", microId: "algo_defi",
     difficulty: 3, theme: "neutral",
-    text: "Programme : Répéter 4 fois 'Avancer de 5 pas · Tourner de 90°'. Quelle figure dessine le robot ?",
+    text: "Programme : Répéter 4 fois 'Avancer de 5 pas · Tourner d’un quart de tour'. Quelle figure dessine le robot ?",
     format: "qcm",
     choices: makeChoices("un carré", ["un triangle", "un cercle", "un hexagone"]),
     expected: ["un carré"],
     comparator: "mcq_exact",
-    hint: "4 côtés et des angles de 90°.",
-    explanation: "4 côtés égaux avec des angles de 90° forment un carré.",
+    hint: "4 côtés et des angles droits.",
+    explanation: "4 côtés égaux avec des angles droits forment un carré.",
     tags: ["défi", "carré", "figure"],
   },
   {

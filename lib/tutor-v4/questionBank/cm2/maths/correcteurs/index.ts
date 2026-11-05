@@ -12,6 +12,8 @@ import { CORRECTEURS as problemesRecherche } from "./problemes-recherche";
 import { CORRECTEURS as operationsDecimales } from "./operations-decimales";
 import { CORRECTEURS as calculMentalDecimal } from "./calcul-mental-decimal";
 import { CORRECTEURS as decimauxFractionsDecimales } from "./decimaux-fractions-decimales";
+import { correcteursAnglesRepere } from "./angles-repere-droit";
+import { correcteursPropRenfort } from "./proportionnalite-renfort";
 
 export const CORRECTEURS_CM2: CorrecteursMaths = {
   ...entiersDiviseurs,
@@ -23,4 +25,6 @@ export const CORRECTEURS_CM2: CorrecteursMaths = {
   ...operationsDecimales,
   ...calculMentalDecimal,
   ...decimauxFractionsDecimales,
+  ...correcteursAnglesRepere("cm2"),
+  ...correcteursPropRenfort("cm2"),
 };

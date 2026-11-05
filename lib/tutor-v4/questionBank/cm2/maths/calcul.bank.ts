@@ -221,7 +221,7 @@ export const calculBank: TutorBankItemV4[] = [
         comparator: "number_equal",
         explanation: exp(
           "Multiplier par 10 ou 100 est un calcul mental fréquent.",
-          "On multiplie le nombre par le coefficient donné.",
+          "On multiplie le nombre par 10 ou par 100.",
           `${n} × ${k} = ${result}.`,
           `Le résultat est ${result}.`
         ),

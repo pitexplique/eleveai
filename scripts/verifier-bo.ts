@@ -28,6 +28,7 @@
 // déclarées, elles, ne bloquent pas — elles se rappellent.
 
 import { loadKnowledgeV4 } from "@/lib/tutor-v4/loaders/loadKnowledgeV4";
+import { masquagesDe } from "@/lib/tutor-v4/micros-masquees";
 
 /** Les classes dont le programme a été écrit comme une donnée. */
 const CLASSES_OUTILLEES = ["cm2", "6e", "4e"] as const;
@@ -105,8 +106,11 @@ async function verifier(classe: string, seulementTrous: boolean): Promise<number
   }
 
   const knowledge = await loadKnowledgeV4(classe, "maths");
+  // ⛔ 05/11/2026 : une micro masquée n'est plus proposée à l'élève. Elle ne couvre donc
+  // aucun objectif (la citer sort en « faute de frappe »), et n'est pas une dette.
+  const masquees = masquagesDe(classe, "maths");
   const microsExistantes = new Set(
-    (knowledge?.microSkills ?? []).map((m: { id: string }) => m.id)
+    (knowledge?.microSkills ?? []).map((m: { id: string }) => m.id).filter((id: string) => !(id in masquees))
   );
   const labelDe = new Map(
     (knowledge?.microSkills ?? []).map((m: { id: string; label: string }) => [m.id, m.label])

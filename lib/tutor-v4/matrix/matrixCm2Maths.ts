@@ -168,7 +168,7 @@ const supportLinks: Record<string, string[]> = {
   pourcentage_comprendre: ["fraction_representer"],
   pourcentage_fraction_decimal: ["decimal_fraction", "fraction_decimale"],
   pourcentage_calculer: ["division_sens", "multiplication_mental"],
-  pourcentage_probleme: ["probleme_une_etape", "prop_tableau"],
+  pourcentage_probleme: ["probleme_une_etape", "prop_quatrieme"],
   pourcentage_defi: ["probleme_plusieurs_etapes"],
 
   // ============================================================
@@ -288,7 +288,7 @@ const supportLinks: Record<string, string[]> = {
   figure_quadrilatere: ["droite_parallele", "droite_perpendiculaire"],
   figure_cercle: ["droite_reconnaitre"],
   figure_propriete: ["angle_type"],
-  figure_construire: ["droite_tracer", "angle_mesurer"],
+  figure_construire: ["droite_tracer", "angle_droit"],
   figure_defi: ["perimetre_triangle", "perimetre_quadrilatere"],
 
   // ============================================================

@@ -584,15 +584,15 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "prop_quatrieme",
-    label: "Calculer une quatrième proportionnelle",
+    label: "Trouver une valeur manquante (2 fois plus, valeur pour un seul)",
     notionId: "proportionnalite",
-    prerequis: ["prop_tableau"],
+    prerequis: ["prop_reconnaitre"],
   },
   {
     id: "prop_probleme",
     label: "Résoudre un problème de proportionnalité",
     notionId: "proportionnalite",
-    prerequis: ["prop_tableau"],
+    prerequis: ["prop_reconnaitre"],
   },
   {
     id: "prop_defi",
@@ -916,7 +916,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "angle_defi",
     label: "Résoudre un défi sur les angles",
     notionId: "angle",
-    prerequis: ["angle_type", "angle_mesurer"],
+    prerequis: ["angle_type", "angle_comparer_sans_mesure"],
   },
 
   // ============================================================

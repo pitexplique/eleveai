@@ -850,13 +850,13 @@ export const microSkills: MicroSkillSource[] = [
     id: "angle_comparer_sans_mesure",
     label: "Comparer des angles sans les mesurer",
     notionId: "angle",
-    prerequis: ["angle_comparer"],
+    prerequis: ["angle_reconnaitre"],
   },
   {
     id: "angle_defi",
     label: "Résoudre un défi sur les angles",
     notionId: "angle",
-    prerequis: ["angle_type", "angle_comparer"],
+    prerequis: ["angle_type", "angle_comparer_sans_mesure"],
   },
 
   // ============================================================

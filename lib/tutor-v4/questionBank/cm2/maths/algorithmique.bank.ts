@@ -138,7 +138,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     canvas: scratchCanvas("Programme simple", [
       { type: "event" },
       { type: "move", value: 10 },
-      { type: "turn", value: 90 },
+      { type: "turn", value: 90, text: "tourner d’un quart de tour" },
       { type: "say", text: "Bonjour !" },
     ]),
   },
@@ -159,7 +159,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const blocks = [
         { type: "event" as const },
         { type: "move" as const, value: 10 },
-        { type: "turn" as const, value: 90 },
+        { type: "turn" as const, value: 90, text: "tourner d’un quart de tour" },
         { type: "say" as const, text: "Coucou !" },
         { type: "move" as const, value: 20 },
       ].slice(0, n + 1);
@@ -194,7 +194,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     generate: () => {
       const first = randomChoice([
         { label: "avancer", block: { type: "move" as const, value: 10 } },
-        { label: "tourner", block: { type: "turn" as const, value: 90 } },
+        { label: "tourner", block: { type: "turn" as const, value: 90, text: "tourner d’un quart de tour" } },
         { label: "dire Bonjour", block: { type: "say" as const, text: "Bonjour" } },
       ]);
 
@@ -339,7 +339,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
             times,
             children: [
               { type: "move", value: 10 },
-              { type: "turn", value: 90 },
+              { type: "turn", value: 90, text: "tourner d’un quart de tour" },
             ],
           },
         ]),
@@ -417,27 +417,27 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_deplacement",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans Scratch, le bloc “tourner de 90°” sert à...",
+    text: "Dans Scratch, le bloc “tourner d’un quart de tour” sert à...",
     format: "qcm",
     choices: [
       "changer de direction",
-      "avancer de 90 pas",
-      "répéter 90 fois",
-      "écrire 90",
+      "avancer de 4 pas",
+      "répéter 4 fois",
+      "écrire 4",
     ],
     expected: ["changer de direction"],
     comparator: "mcq_exact",
-    hint: "90° est une mesure d’angle.",
+    hint: "Un quart de tour, c’est un angle droit.",
     explanation: exp(
       "Tourner signifie changer de direction.",
       "On distingue une distance et un angle.",
-      "Le bloc “tourner de 90°” change l’orientation du personnage.",
+      "Le bloc “tourner d’un quart de tour” change l’orientation du personnage.",
       "Ce bloc sert à changer de direction."
     ),
     tags: ["cm2", "algorithmique", "deplacement", "angle", "qcm", "canvas"],
     canvas: scratchCanvas("Tourner", [
       { type: "event" },
-      { type: "turn", value: 90 },
+      { type: "turn", value: 90, text: "tourner d’un quart de tour" },
     ]),
   },
 
@@ -471,7 +471,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         canvas: scratchCanvas("Distance totale", [
           { type: "event" },
           { type: "move", value: a },
-          { type: "turn", value: 90 },
+          { type: "turn", value: 90, text: "tourner d’un quart de tour" },
           { type: "move", value: b },
         ]),
       };
@@ -520,7 +520,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_deplacement",
     difficulty: 3,
     theme: "neutral",
-    text: "Un élève dit : “tourner de 90° fait avancer de 90 pas.” A-t-il raison ?",
+    text: "Un élève dit : “tourner d’un quart de tour fait avancer d’un pas.” A-t-il raison ?",
     format: "qcm",
     choices: ["non", "oui"],
     expected: ["non"],
@@ -529,7 +529,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     explanation: exp(
       "Avancer et tourner sont deux actions différentes.",
       "On regarde si le bloc contient une distance ou un angle.",
-      "Tourner de 90° change la direction, mais ne fait pas avancer de 90 pas.",
+      "Tourner d’un quart de tour change la direction, mais ne fait pas avancer.",
       "L’élève a tort."
     ),
     tags: ["cm2", "algorithmique", "deplacement", "erreur", "angle", "qcm"],
@@ -573,21 +573,21 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Dans ce programme, que fait le personnage après avoir avancé de 20 pas ?",
     format: "qcm",
-    choices: ["il tourne de 90°", "il dit Bonjour", "il répète 4 fois", "il s’arrête"],
-    expected: ["il tourne de 90°"],
+    choices: ["il tourne d’un quart de tour", "il dit Bonjour", "il répète 4 fois", "il s’arrête"],
+    expected: ["il tourne d’un quart de tour"],
     comparator: "mcq_exact",
     hint: "Lis les blocs de haut en bas.",
     explanation: exp(
       "Lire un programme, c’est prévoir les actions dans l’ordre.",
       "On suit les blocs de haut en bas.",
-      "Après “avancer de 20”, le bloc suivant est “tourner de 90°”.",
-      "Le personnage tourne de 90°."
+      "Après “avancer de 20”, le bloc suivant est “tourner d’un quart de tour”.",
+      "Le personnage tourne d’un quart de tour."
     ),
     tags: ["cm2", "algorithmique", "programme", "lire", "scratch", "canvas", "qcm"],
     canvas: scratchCanvas("Lire un programme", [
       { type: "event" },
       { type: "move", value: 20 },
-      { type: "turn", value: 90 },
+      { type: "turn", value: 90, text: "tourner d’un quart de tour" },
       { type: "say", text: "Bonjour" },
     ]),
   },
@@ -623,7 +623,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         canvas: scratchCanvas("Distance du programme", [
           { type: "event" },
           { type: "move", value: a },
-          { type: "turn", value: 90 },
+          { type: "turn", value: 90, text: "tourner d’un quart de tour" },
           { type: "move", value: b },
           { type: "say", text: "Encore !" },
           { type: "move", value: c },
@@ -648,11 +648,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         {
           text: "faire avancer le personnage",
           correct: "avancer de 20",
-          wrongs: ["tourner de 20°", "dire 20", "répéter 20 fois"],
+          wrongs: ["tourner 20 fois", "dire 20", "répéter 20 fois"],
         },
         {
           text: "faire changer de direction le personnage",
-          correct: "tourner de 90°",
+          correct: "tourner d’un quart de tour",
           wrongs: ["avancer de 90", "dire 90", "effacer tout"],
         },
       ]);
@@ -914,11 +914,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     choices: ["oui", "non"],
     expected: ["oui"],
     comparator: "mcq_exact",
-    hint: "Un carré a 4 côtés et on tourne de 90°.",
+    hint: "Un carré a 4 côtés et on tourne d’un quart de tour.",
     explanation: exp(
       "Un carré possède 4 côtés et 4 angles droits.",
-      "Pour tracer un carré, on répète 4 fois : avancer puis tourner de 90°.",
-      "Le programme répète bien 4 fois avancer puis tourner de 90°.",
+      "Pour tracer un carré, on répète 4 fois : avancer puis tourner d’un quart de tour.",
+      "Le programme répète bien 4 fois avancer puis tourner d’un quart de tour.",
       "Oui, ce programme permet de tracer un carré."
     ),
     tags: ["cm2", "algorithmique", "defi", "carre", "scratch", "canvas", "qcm"],
@@ -930,7 +930,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         times: 4,
         children: [
           { type: "move", value: 50 },
-          { type: "turn", value: 90 },
+          { type: "turn", value: 90, text: "tourner d’un quart de tour" },
         ],
       },
     ]),
@@ -945,7 +945,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève veut tracer un carré, mais il répète seulement 3 fois : avancer puis tourner de 90°. Son programme est-il correct ?",
+    text: "Un élève veut tracer un carré, mais il répète seulement 3 fois : avancer puis tourner d’un quart de tour. Son programme est-il correct ?",
     format: "qcm",
     choices: ["non", "oui"],
     expected: ["non"],
@@ -966,7 +966,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         times: 3,
         children: [
           { type: "move", value: 50 },
-          { type: "turn", value: 90 },
+          { type: "turn", value: 90, text: "tourner d’un quart de tour" },
         ],
       },
     ]),
@@ -1048,7 +1048,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
             times: 4,
             children: [
               { type: "move", value: cote },
-              { type: "turn", value: 90 },
+              { type: "turn", value: 90, text: "tourner d’un quart de tour" },
             ],
           },
         ]),

@@ -681,7 +681,7 @@ const angleComparer: TutorBankItemV4[] = [
     const { liste, s2 } = duo();
     const [p, q] = liste.map((a) => a.s);
     return {
-      text: tournure(["", "Regarde l’écart des côtés.", "Sans rapporteur."], ["Quel angle est le plus grand ?", "Quel angle est le plus ouvert ?", "Lequel est le plus ouvert ?", "Lequel est le plus grand ?", "Trouve le plus grand angle."]),
+      text: tournure(["", "Regarde l’écart des côtés.", "Sans mesurer."], ["Quel angle est le plus grand ?", "Quel angle est le plus ouvert ?", "Lequel est le plus ouvert ?", "Lequel est le plus grand ?", "Trouve le plus grand angle."]),
       ...qcm(`L’angle ${s2}`, [`L’angle ${p}`, `L’angle ${q}`, "Ils sont égaux"]),
       canvas: angles(liste),
       explanation: etapes(`on regarde l’écart entre les côtés, pas leur longueur.`, `l’écart est plus grand pour ${s2}.`, `l’angle ${s2} est le plus grand.`),
@@ -691,7 +691,7 @@ const angleComparer: TutorBankItemV4[] = [
     const { liste, s1 } = duo();
     const [p, q] = liste.map((a) => a.s);
     return {
-      text: tournure(["", "Regarde l’écart des côtés.", "Sans rapporteur."], ["Quel angle est le plus petit ?", "Quel angle est le moins ouvert ?", "Lequel est le moins ouvert ?", "Lequel est le plus petit ?", "Trouve le plus petit angle."]),
+      text: tournure(["", "Regarde l’écart des côtés.", "Sans mesurer."], ["Quel angle est le plus petit ?", "Quel angle est le moins ouvert ?", "Lequel est le moins ouvert ?", "Lequel est le plus petit ?", "Trouve le plus petit angle."]),
       ...qcm(`L’angle ${s1}`, [`L’angle ${p}`, `L’angle ${q}`, "Ils sont égaux"]),
       canvas: angles(liste),
       explanation: etapes(`on regarde l’écart entre les côtés, pas leur longueur.`, `l’écart est plus petit pour ${s1}.`, `l’angle ${s1} est le plus petit.`),
@@ -702,7 +702,7 @@ const angleComparer: TutorBankItemV4[] = [
     const inf = Math.random() < 0.5;
     const juste = inf ? `${s1} < ${s2}` : `${s2} > ${s1}`;
     return {
-      text: tournure(["", "Regarde l’écart des côtés.", "Sans rapporteur."], ["Quelle comparaison est juste ?", "Quelle phrase est vraie ?", "Compare les deux angles.", "Que peut-on écrire ?", "Quelle écriture convient ?"]),
+      text: tournure(["", "Regarde l’écart des côtés.", "Sans mesurer."], ["Quelle comparaison est juste ?", "Quelle phrase est vraie ?", "Compare les deux angles.", "Que peut-on écrire ?", "Quelle écriture convient ?"]),
       ...qcm(juste, inf ? [`${s1} > ${s2}`, `${s1} = ${s2}`] : [`${s2} < ${s1}`, `${s2} = ${s1}`]),
       canvas: angles(liste),
       explanation: etapes(`on regarde l’écart entre les côtés.`, `l’écart de ${s2} est plus grand que celui de ${s1}.`, `donc ${juste}.`),
@@ -758,7 +758,7 @@ const angleComparer: TutorBankItemV4[] = [
     const qui = un(QUI_C);
     const [a, b] = lettres(2);
     return {
-      text: tournure([`${qui} veut comparer les angles ${a} et ${b}.`], ["Il n’y a pas de rapporteur.", "Le rapporteur est cassé.", "Le rapporteur manque."], ["Que faire ?", "Quelle méthode convient ?", "Comment les comparer ?"]),
+      text: tournure([`${qui} veut comparer les angles ${a} et ${b}.`], ["Il ne veut rien mesurer.", "Il n’a que du papier calque.", "Il cherche sans mesurer."], ["Que faire ?", "Quelle méthode convient ?", "Comment les comparer ?"]),
       ...qcm("Décalquer un angle et le poser sur l’autre", ["Mesurer la longueur des côtés", "Compter les lettres", "Prolonger un seul côté"]),
       explanation: etapes(`le calque garde l’écart de l’angle.`, `on pose le sommet sur ${b}, et un côté sur un côté.`, `on voit lequel dépasse.`),
     };

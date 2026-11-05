@@ -26,10 +26,12 @@
 //
 // ⛔⛔ CE QUE LA PREMIÈRE LECTURE A TROUVÉ, ET QUI COMPTE PLUS QUE LES TROUS :
 // le programme du cours moyen INTERDIT explicitement trois choses que le coach
-// enseigne aujourd'hui en CM2 — le tableau de proportionnalité, le coefficient
-// de proportionnalité, et le rapporteur. Ce ne sont pas des oublis de couverture,
-// ce sont des contenus à retirer ou à déplacer. Voir les dettes en bas de
-// fichier, elles portent la citation exacte du BO.
+// enseignait en CM2 : le tableau de proportionnalité, le coefficient de
+// proportionnalité, et le rapporteur.
+// ✅ RÉGLÉ le 05/11/2026 (Frédéric : « enlève-les, ils sont hors programme ») :
+// `prop_tableau`, `prop_coefficient` et `angle_mesurer` sont masquées
+// (lib/tutor-v4/micros-masquees.ts), et les micros visibles ne les emploient plus.
+// Une micro masquée ne couvre aucun objectif et ne compte pas comme une dette.
 
 import type { ObjectifBO } from "@/lib/tutor-v4/knowledge/maths/6e/bo-objectifs";
 
@@ -724,8 +726,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les angles",
     objectif: "Comparer des angles.",
     page: 16,
-    micros: ["angle_comparer_sans_mesure"],
-    note: "⭐ SANS RAPPORTEUR : par superposition ou par report, le rapporteur ne relevant pas du CM2.",
+    micros: ["angle_comparer_sans_mesure", "angle_defi"],
+    note: "⭐ SANS RAPPORTEUR : par superposition ou par report, le rapporteur ne relevant pas du CM2. `angle_defi` compare au coin d'une feuille, sans aucun degré depuis le 05/11/2026.",
   },
   {
     id: "cm2-GM-angles-4",
@@ -753,7 +755,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif: "Savoir qu'un angle droit mesure 90°.",
     page: 16,
     micros: ["angle_droit"],
-    note: "Le degré est introduit au CM2 À PARTIR de la mesure de l'angle droit — c'est le seul repère chiffré attendu.",
+    note: "C'est le seul repère chiffré attendu, et le seul degré du coach au cours moyen : l'item figé `cm2_angle_droit_fixed_1_mesure`. Partout ailleurs (05/11/2026), on dit « angle droit ».",
   },
   {
     id: "cm2-GM-durees-1",
@@ -1078,7 +1080,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif: "Savoir résoudre un problème de proportionnalité.",
     page: 27,
     micros: ["prop_probleme", "prop_quatrieme", "prop_defi"],
-    note: "⛔⛔ LE BO BORNE LES PROCÉDURES, ET LE COACH LES DÉPASSE : « Seuls des raisonnements fondés sur les propriétés de linéarité pour la multiplication et pour l'addition sont attendus ; ni l'utilisation du coefficient de proportionnalité, ni le recours au “produit en croix” ne sont enseignés au cours moyen. » Voir les dettes `prop_tableau`, `prop_coefficient` et `prop_quatrieme`.",
+    note: "✅ RÉGLÉ le 05/11/2026. Le BO borne les procédures : « Seuls des raisonnements fondés sur les propriétés de linéarité pour la multiplication et pour l'addition sont attendus ; ni l'utilisation du coefficient de proportionnalité, ni le recours au “produit en croix” ne sont enseignés au cours moyen. » `prop_quatrieme`, `prop_probleme` et `prop_defi` raisonnent par « fois plus », par somme et par la valeur d'un seul ; `prop_tableau` et `prop_coefficient` sont masquées.",
   },
 ];
 
@@ -1090,22 +1092,6 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
  * en silence — c'est exactement ce que ce fichier existe pour empêcher.
  */
 export const microsHorsProgrammeCm2Maths: { micro: string; raison: string }[] = [
-  // ── ⛔⛔ À TRANCHER : le BO les EXCLUT nommément du cours moyen ────────────
-  {
-    micro: "prop_tableau",
-    raison:
-      "⚠️ LE LIBELLÉ EST HORS PROGRAMME, PAS LES ITEMS — vérifié le 23/08/2026. Le BO écrit : « les élèves n'utilisent pas de tableaux de proportionnalité au cours moyen » (p. 27). Or les items de cette micro raisonnent par LINÉARITÉ (« 8 personnes, c'est 2 fois plus que 4 ») et par PASSAGE À L'UNITÉ — exactement ce que le BO demande. Il suffit donc de la RENOMMER, pas de la supprimer.",
-  },
-  {
-    micro: "prop_coefficient",
-    raison:
-      "⛔⛔ CONTRAIRE AU BO. « Ni l'utilisation du coefficient de proportionnalité, ni le recours au “produit en croix” ne sont enseignés au cours moyen » (p. 27). À retirer ou à déplacer.",
-  },
-  {
-    micro: "angle_mesurer",
-    raison:
-      "⛔⛔ CONTRAIRE AU BO. « L'utilisation d'un instrument de mesure des angles (rapporteur) ne relève pas du CM2 et sera introduite au collège » (p. 16). Au cours moyen on COMPARE des angles, on ne les mesure pas.",
-  },
 
   // ── Hors programme du CM2, mais légitime : le pourcentage arrive en 6e ────
   {
@@ -1182,10 +1168,6 @@ export const microsHorsProgrammeCm2Maths: { micro: string; raison: string }[] = 
   },
   {
     micro: "droite_defi",
-    raison: "Bloc de défis d'un chapitre couvert : il sert plusieurs objectifs à la fois.",
-  },
-  {
-    micro: "angle_defi",
     raison: "Bloc de défis d'un chapitre couvert : il sert plusieurs objectifs à la fois.",
   },
   {

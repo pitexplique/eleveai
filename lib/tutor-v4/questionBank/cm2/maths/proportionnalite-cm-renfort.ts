@@ -4,8 +4,12 @@
 // par micro, 14 à 19 répétitions sur 20, et 27 questions « open ».
 // ⛔ Frédéric, 27/10 : plus AUCUNE question open (« on n'est pas prêt ») ;
 // 28/10 : « remplace open par réponse courte ». Ici : QCM ou réponse courte
-// seulement, des nombres entiers simples, des situations de leur âge, et un
-// tableau en canvas une fois sur deux (règle des CM : la moitié avec canvas).
+// seulement, des nombres entiers simples, des situations de leur âge.
+// ⛔ 05/11/2026 (Frédéric, programme du cours moyen) : « les élèves n'utilisent pas de
+// tableaux de proportionnalité » ; « ni l'utilisation du coefficient de proportionnalité,
+// ni le recours au produit en croix ». Les micros visibles raisonnent par linéarité
+// (2 fois plus, somme de deux situations) et par la valeur d'un seul. `genTableauCM` et
+// `genCoeffCM` ne servent plus que `prop_tableau` et `prop_coefficient`, masquées.
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { attendu, makeChoices, tableauProportionnaliteCanvas } from "@/lib/tutor-v4/questionBank/4e/maths/proportionnalite.bank";
@@ -30,7 +34,7 @@ function expl(definition: string, methode: string, calcul: string, conclusion: s
   return `Définition : ${definition}\n\nMéthode : ${methode}\n\nCalcul : ${calcul}\n\nConclusion : ${conclusion}`;
 }
 
-const DEF_PROP = "deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.";
+const DEF_PROP = "deux grandeurs sont proportionnelles quand 2 fois plus de l’une donne 2 fois plus de l’autre : la valeur pour un seul ne change jamais.";
 
 /* =========================================================
    PROPORTIONNALITÉ : situations × tournures
@@ -184,6 +188,9 @@ const SITS: SitCM[] = [
   },
 ];
 
+/** Pour le correcteur : les tournures des questions, relues dans l'énoncé. */
+export const SITS_PROP_CM = SITS;
+
 function rep(n: number, s: SitCM) {
   return attendu(n, s.uB);
 }
@@ -272,23 +279,29 @@ export function genTableauCM(niveau: 1 | 2 | 3) {
   return { ...base, text: `${s.lieu}, tableau de proportionnalité — ${s.labelA} : ${haut} — ${s.labelB} : ${bas}. Quelle est la valeur manquante ?` };
 }
 
-/** Reconnaître une situation proportionnelle (oui / non). */
+/** Reconnaître une situation proportionnelle (oui / non), sans tableau : par la valeur d'un seul. */
+// Les vélos, les araignées et les équipes ont un nombre fixe : « 4 vélos ont 9 roues »
+// ne se dit pas. Le « non » se tire ailleurs.
+const SITS_LIBRES = SITS.filter((s) => !/vélos|vivarium|club de foot/.test(s.lieu));
 export function genReconnaitreCM(niveau: 1 | 2 | 3) {
-  const s = randomChoice(SITS);
+  const prop = Math.random() < 0.5;
+  const s = randomChoice(prop ? SITS : SITS_LIBRES);
   const k = randomChoice(s.k);
   const a = randomInt(2, 3);
   const ns = niveau === 1 ? [a, 2 * a] : niveau === 2 ? [a, 2 * a, 3 * a] : [a, a + randomInt(1, 3), a + randomInt(4, 6)];
   const ms = ns.map((x) => x * k);
-  const prop = Math.random() < 0.5;
   if (!prop) ms[ms.length - 1] += randomChoice([1, 2, 3, k]);
   const couples = ns.map((x, i) => s.lien(x, ms[i]));
-  const t = randomInt(1, 3);
+  const t = randomInt(1, 4);
   const text =
     t === 1
       ? `${s.lieu} : ${couples.join(" ; ")}. Est-ce une situation de proportionnalité ?`
       : t === 2
-        ? `${s.lieu}, tableau — ${s.labelA} : ${ns.join(" ; ")} — ${s.labelB} : ${ms.join(" ; ")}. Ce tableau est-il proportionnel ?`
-        : `On relève : ${couples.join(" ; ")}. Peut-on passer d’une ligne à l’autre en multipliant toujours par le même nombre ?`;
+        ? `${s.lieu}, on a noté : ${couples.join(" ; ")}. Est-ce proportionnel ?`
+        : t === 3
+          ? `On relève : ${couples.join(" ; ")}. Pour un seul, trouve-t-on toujours la même valeur ?`
+          : `${cap(couples.join(" ; "))}. Est-ce une situation de proportionnalité ?`;
+  const unites = ns.map((x, i) => `${ms[i]} ÷ ${x} = ${fr(ms[i] / x)}`).join(" ; ");
   return {
     text,
     format: "qcm" as const,
@@ -297,9 +310,9 @@ export function genReconnaitreCM(niveau: 1 | 2 | 3) {
     comparator: "mcq_exact" as const,
     explanation: expl(
       DEF_PROP,
-      "on divise chaque nombre du bas par le nombre du haut.",
-      ns.map((x, i) => `${ms[i]} ÷ ${x} = ${fr(ms[i] / x)}`).join(" ; ") + ".",
-      prop ? `on multiplie toujours par ${k} : c’est proportionnel.` : "on ne multiplie pas toujours par le même nombre : ce n’est pas proportionnel.",
+      "on cherche la valeur pour un seul, dans chaque cas.",
+      unites + ".",
+      prop ? `pour un seul, on trouve toujours ${k} : c’est proportionnel.` : "pour un seul, on ne trouve pas toujours la même valeur : ce n’est pas proportionnel.",
     ),
   };
 }
@@ -753,7 +766,7 @@ export function tplCM(niveau: "cm1" | "cm2", notionId: string, microId: string, 
 
 const H_FOIS = "Si une grandeur est multipliée (ou divisée) par un nombre, l’autre aussi.";
 const H_TAB = "Cherche par quel nombre on multiplie la ligne du haut.";
-const H_REC = "Divise chaque nombre du bas par celui du haut : est-ce toujours pareil ?";
+const H_REC = "Cherche la valeur pour un seul, dans chaque cas : est-ce toujours pareil ?";
 const H_UN = "Passe par un : divise pour trouver la valeur d’un seul.";
 const H_PCT = "p %, c’est p sur 100.";
 const H_ECH = "À l’échelle 1/E, 1 cm sur le plan représente E cm en réalité.";
