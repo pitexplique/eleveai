@@ -23,6 +23,10 @@ const COULEUR_PROBA = "#2563eb";
 const COULEUR_LABEL = "#0f172a";
 const COULEUR_DEPART = "#0f172a";
 
+function profondeur(n: ArbreProbaNoeud): number {
+  return 1 + Math.max(0, ...(n.enfants ?? []).map(profondeur));
+}
+
 function countLeaves(n: ArbreProbaNoeud): number {
   if (!n.enfants || n.enfants.length === 0) return 1;
   return n.enfants.reduce((sum, c) => sum + countLeaves(c), 0);
@@ -33,6 +37,13 @@ export default function ArbreProbabilitesCanvas({ figure }: Props) {
 
   const roots = figure.racineEnfants ?? [];
   const totalLeaves = roots.reduce((sum, r) => sum + countLeaves(r), 0);
+
+  // Un arbre à trois niveaux (répétition de 3 épreuves, 05/11/2026) empilait son
+  // dernier niveau sur la dernière colonne : on ajoute une colonne par niveau.
+  // Les arbres à un ou deux niveaux gardent exactement leurs colonnes.
+  const niveaux = Math.max(0, ...roots.map(profondeur));
+  const colonnes = [...COL_X];
+  while (colonnes.length < niveaux + 1) colonnes.push(colonnes[colonnes.length - 1] + 152);
 
   // ⛔ LE CADRE S'ELARGIT POUR L'ETIQUETTE LA PLUS LONGUE, il ne la coupe plus.
   //
@@ -51,7 +62,7 @@ export default function ArbreProbabilitesCanvas({ figure }: Props) {
     }
     return max;
   })(roots);
-  const largeurNecessaire = COL_X[COL_X.length - 1] + 8 + plusLongue * LARGEUR_CAR + 6;
+  const largeurNecessaire = colonnes[colonnes.length - 1] + 8 + plusLongue * LARGEUR_CAR + 6;
   const width = Math.max(figure.size?.width ?? 360, Math.ceil(largeurNecessaire));
   const height = figure.size?.height ?? PAD_TOP * 2 + Math.max(1, totalLeaves) * ROW_H;
 
@@ -59,7 +70,7 @@ export default function ArbreProbabilitesCanvas({ figure }: Props) {
   // place à la moyenne des ordonnées de ses enfants.
   let cursor = 0;
   function place(node: ArbreProbaNoeud, depth: number): Placed {
-    const x = COL_X[Math.min(depth + 1, COL_X.length - 1)];
+    const x = colonnes[Math.min(depth + 1, colonnes.length - 1)];
     if (!node.enfants || node.enfants.length === 0) {
       const y = PAD_TOP + (cursor + 0.5) * ROW_H;
       cursor += 1;
@@ -75,7 +86,7 @@ export default function ArbreProbabilitesCanvas({ figure }: Props) {
     placedRoots.length > 0
       ? (placedRoots[0].y + placedRoots[placedRoots.length - 1].y) / 2
       : height / 2;
-  const departure = { x: COL_X[0], y: rootY };
+  const departure = { x: colonnes[0], y: rootY };
 
   const edges: { x1: number; y1: number; x2: number; y2: number; proba?: string }[] = [];
   const nodes: Placed[] = [];

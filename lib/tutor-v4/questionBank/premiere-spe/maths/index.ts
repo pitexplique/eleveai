@@ -1,4 +1,5 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { bernoulliRepetitionBank } from "./bernoulli-repetition.bank";
 
 // --- Banques par notion (1 banque par notion, standard seconde/terminale, >=10 items/micro) ---
 import { suitesBank } from "./suites.bank";
@@ -35,6 +36,8 @@ export const mathsPremiereSpeQuestionBank: TutorBankItemV4[] = [
   ...algorithmiqueBank,
   // === VOCABULAIRE ENSEMBLISTE ET LOGIQUE ===
   ...logiqueEnsemblesBank,
+  // === Programme : trou bouché le 05/11/2026 ===
+  ...bernoulliRepetitionBank,
 ];
 
 export function getMathsPremiereSpeQuestionBank(args?: {

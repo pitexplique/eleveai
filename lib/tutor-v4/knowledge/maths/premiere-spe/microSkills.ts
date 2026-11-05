@@ -726,6 +726,18 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "probabilites_conditionnelles",
     prerequis: ["pc_independance"],
   },
+  {
+    id: "pc_bernoulli_repetition",
+    label: "Répéter n ≤ 4 épreuves de Bernoulli : arbre, chemins, probabilité",
+    notionId: "probabilites_conditionnelles",
+    prerequis: ["pc_succession"],
+  },
+  {
+    id: "pc_bernoulli_au_moins_un",
+    label: "Calculer la probabilité d'« au moins un succès » par le contraire",
+    notionId: "probabilites_conditionnelles",
+    prerequis: ["pc_bernoulli_repetition"],
+  },
 
   /* ===================== VARIABLES ALÉATOIRES ===================== */
   {
