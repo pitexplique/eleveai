@@ -21,6 +21,7 @@ import {
   saveSessionV4,
 } from "@/lib/tutor-v4/sessionStoreV4";
 
+import { appliquerMasquage } from "@/lib/tutor-v4/micros-masquees";
 import { updateStarLevel } from "@/lib/tutor-v4/starEngine";
 import { updateLearnerProfile } from "@/lib/tutor-v4/profileEngine";
 import { buildQuestionPair } from "@/lib/tutor-v4/questionPairBuilder";
@@ -495,7 +496,17 @@ function choisirEnonceSimple(pair: TutorQuestionPair): TutorQuestionOption {
 export async function startTutorSessionV4(
   input: StartTutorV4Input
 ): Promise<StartTutorV4Response> {
-  const knowledge = await loadKnowledge(input.classe, input.matiere);
+  /* Ce que l'adresse nomme reste servi, même masqué : un ancien lien ne casse pas.
+     Tout le reste de ce qui est masqué sort de la séance (tirage et remédiation). */
+  const garderMasquees = [
+    input.notion,
+    input.microId,
+    ...(input.microsAutorisees ?? []),
+  ].filter((id): id is string => Boolean(id));
+  const knowledge = appliquerMasquage(
+    await loadKnowledge(input.classe, input.matiere),
+    { garder: garderMasquees }
+  );
   const matrix = await loadMatrix(input.classe, input.matiere);
   const bank = await loadQuestionBank(input.classe, input.matiere);
 
@@ -595,6 +606,7 @@ export async function startTutorSessionV4(
     notionFocus: notion.id,
     microFocus: actualMicro.id,
     microsAutorisees,
+    garderMasquees,
 
     recommendedDifficulty,
     recommendedStar,
@@ -717,7 +729,10 @@ export async function jumpToMicroV4(
     throw new Error("Session introuvable");
   }
 
-  const knowledge = await loadKnowledge(session.classe, session.matiere);
+  const knowledge = appliquerMasquage(
+    await loadKnowledge(session.classe, session.matiere),
+    { garder: [...(session.garderMasquees ?? []), session.notionFocus, session.microFocus] }
+  );
   const matrix = await loadMatrix(session.classe, session.matiere);
   const bank = await loadQuestionBank(session.classe, session.matiere);
 
@@ -902,7 +917,10 @@ export async function answerTutorV4(
 
   const result = evaluateAnswer(chosenOption, answer);
 
-  const knowledge = await loadKnowledge(session.classe, session.matiere);
+  const knowledge = appliquerMasquage(
+    await loadKnowledge(session.classe, session.matiere),
+    { garder: [...(session.garderMasquees ?? []), session.notionFocus, session.microFocus] }
+  );
   const matrix = await loadMatrix(session.classe, session.matiere);
   const bank = await loadQuestionBank(session.classe, session.matiere);
 

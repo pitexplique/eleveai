@@ -398,6 +398,15 @@ if (canvas.kind === "schema_barre") {
   return <CanvasRenderer figure={canvas} />;
 }
 
+/** Ce que l'adresse nomme explicitement : gardé même si c'est masqué. */
+function garderDepuisAdresse(params: { get(nom: string): string | null }): string[] {
+  return [
+    params.get("notion"),
+    params.get("microId"),
+    ...(params.get("micros") ?? "").split(",").map((id) => id.trim()),
+  ].filter((id): id is string => Boolean(id));
+}
+
 function normalizeClasse(value: string | null): Classe {
   if (
     value === "cp" ||
@@ -654,13 +663,19 @@ function forceScrollTopOnArrival() {
     });
   }, 120);
 }
+  /* Une micro ou une notion masquée (hors programme, hors France) n'est plus
+     proposée ; mais si l'ADRESSE la nomme, elle reste : un ancien lien ne casse pas. */
+  const garderDepuisUrl = useMemo(
+    () => garderDepuisAdresse(searchParams),
+    [searchParams]
+  );
   const notionOptions = useMemo(
-    () => getNotionOptions(classe, matiere),
-    [classe, matiere]
+    () => getNotionOptions(classe, matiere, { garder: garderDepuisUrl }),
+    [classe, matiere, garderDepuisUrl]
   );
   const notionMicroMap = useMemo(
-    () => getNotionMicroMap(classe, matiere),
-    [classe, matiere]
+    () => getNotionMicroMap(classe, matiere, { garder: garderDepuisUrl }),
+    [classe, matiere, garderDepuisUrl]
   );
 
   const [sessionId, setSessionId] = useState<string | null>(null);
@@ -799,7 +814,7 @@ function forceScrollTopOnArrival() {
   });
 
   function isValidNotionId(value: string, currentClasse: Classe): boolean {
-    return getNotionOptions(currentClasse, matiere).includes(value);
+    return getNotionOptions(currentClasse, matiere, { garder: garderDepuisUrl }).includes(value);
   }
 
 useEffect(() => {
@@ -815,7 +830,9 @@ useEffect(() => {
     .map((id) => id.trim())
     .filter(Boolean);
 
-  const options = getNotionOptions(urlClasse, urlMatiere);
+  const options = getNotionOptions(urlClasse, urlMatiere, {
+    garder: garderDepuisAdresse(searchParams),
+  });
   const initialNotion =
     urlNotion && options.includes(urlNotion) ? urlNotion : options[0] ?? "";
 

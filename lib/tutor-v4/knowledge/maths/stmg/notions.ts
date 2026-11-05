@@ -66,7 +66,7 @@ export const notions: NotionSource[] = [
   { id: "suite_representation", label: "Représenter les termes d'une suite", boId: "STMGSU", prerequis: ["suite_termes"], levels: [1, 2, 3] },
   { id: "suite_modeliser", label: "Modéliser par une suite", boId: "STMGSU", prerequis: ["suite_arithmetique", "suite_geometrique"], levels: [1, 2, 3] },
   { id: "suite_seuil", label: "Problème de seuil", boId: "STMGSU", prerequis: ["suite_modeliser"], levels: [1, 2, 3] },
-  { id: "suite_terme_general", label: "Terme général d'une suite (Tle)", boId: "STMGSU", prerequis: ["suite_arithmetique", "suite_geometrique"], levels: [1, 2, 3] },
+  { id: "suite_terme_general", label: "Terme général d'une suite", boId: "STMGSU", prerequis: ["suite_arithmetique", "suite_geometrique"], levels: [1, 2, 3] },
   { id: "suite_moyennes", label: "Moyenne arithmétique et géométrique (Tle)", boId: "STMGSU", prerequis: ["suite_terme_general"], levels: [1, 2, 3] },
   { id: "suite_somme", label: "Somme des n premiers termes (Tle)", boId: "STMGSU", prerequis: ["suite_terme_general"], levels: [1, 2, 3] },
   { id: "suite_somme_situations", label: "Sommes : emprunts et placements (Tle)", boId: "STMGSU", prerequis: ["suite_somme"], levels: [1, 2, 3] },
@@ -121,10 +121,10 @@ export const notions: NotionSource[] = [
   //
   // Domaine entièrement de terminale, comme STMGEX.
 
-  { id: "stat_nuage", label: "Nuage de points (Tle)", boId: "STMGST", prerequis: ["auto_lecture_graphique"], levels: [1, 2, 3] },
-  { id: "stat_ajustement", label: "Ajustement affine (Tle)", boId: "STMGST", prerequis: ["stat_nuage", "auto_droites"], levels: [1, 2, 3] },
-  { id: "stat_interpoler", label: "Interpoler et extrapoler (Tle)", boId: "STMGST", prerequis: ["stat_ajustement"], levels: [1, 2, 3] },
-  { id: "stat_moindres_carres", label: "Méthode des moindres carrés (Tle)", boId: "STMGST", prerequis: ["stat_ajustement"], levels: [1, 2, 3] },
+  { id: "stat_nuage", label: "Nuage de points", boId: "STMGST", prerequis: ["auto_lecture_graphique"], levels: [1, 2, 3] },
+  { id: "stat_ajustement", label: "Ajustement affine", boId: "STMGST", prerequis: ["stat_nuage", "auto_droites"], levels: [1, 2, 3] },
+  { id: "stat_interpoler", label: "Interpoler et extrapoler", boId: "STMGST", prerequis: ["stat_ajustement"], levels: [1, 2, 3] },
+  { id: "stat_moindres_carres", label: "Méthode des moindres carrés", boId: "STMGST", prerequis: ["stat_ajustement"], levels: [1, 2, 3] },
   { id: "stat_changement_variable", label: "Changement de variable pour linéariser (Tle)", boId: "STMGST", prerequis: ["stat_ajustement"], levels: [1, 2, 3] },
 
   /* ═══════════ PROBABILITÉS CONDITIONNELLES (STMGPR) ═══════════ */
@@ -132,9 +132,9 @@ export const notions: NotionSource[] = [
   { id: "proba_conditionnelle_tableau", label: "Probabilité conditionnelle sur un tableau", boId: "STMGPR", prerequis: ["donnees_frequences"], levels: [1, 2, 3] },
   { id: "proba_conditionnelle_distinguer", label: "Ne pas confondre les probabilités conditionnelles", boId: "STMGPR", prerequis: ["proba_conditionnelle_tableau"], levels: [1, 2, 3] },
   { id: "proba_epreuves_independantes", label: "Deux épreuves indépendantes", boId: "STMGPR", prerequis: ["proba_conditionnelle_tableau"], levels: [1, 2, 3] },
-  { id: "proba_arbre", label: "Arbre de probabilités : construire (Tle)", boId: "STMGPR", prerequis: ["proba_conditionnelle_tableau"], levels: [1, 2, 3] },
-  { id: "proba_arbre_calcul", label: "Arbre : chemins et probabilités totales (Tle)", boId: "STMGPR", prerequis: ["proba_arbre"], levels: [1, 2, 3] },
-  { id: "proba_independance", label: "Indépendance de deux événements (Tle)", boId: "STMGPR", prerequis: ["proba_arbre_calcul"], levels: [1, 2, 3] },
+  { id: "proba_arbre", label: "Arbre de probabilités : construire", boId: "STMGPR", prerequis: ["proba_conditionnelle_tableau"], levels: [1, 2, 3] },
+  { id: "proba_arbre_calcul", label: "Arbre : chemins et probabilités totales", boId: "STMGPR", prerequis: ["proba_arbre"], levels: [1, 2, 3] },
+  { id: "proba_independance", label: "Indépendance de deux événements", boId: "STMGPR", prerequis: ["proba_arbre_calcul"], levels: [1, 2, 3] },
 
   /* ═══ VARIABLES ALÉATOIRES ET LOI BINOMIALE (STMGVA) ═══ */
 

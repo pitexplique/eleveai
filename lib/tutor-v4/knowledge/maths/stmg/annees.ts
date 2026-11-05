@@ -41,8 +41,8 @@ export const NOTIONS_TERMINALE: readonly string[] = [
   // Automatismes enrichis (« les tirets en italique » du BO)
   "auto_terminale_reconnaitre",
   "auto_terminale_derivee",
-  // Suites : le terme général et tout ce qui en découle
-  "suite_terme_general",
+  // Suites : ce qui découle du terme général. Le terme de rang n lui-même est
+  // passé en première avec le programme 2026 (BO n°14 du 02/04/2026).
   "suite_moyennes",
   "suite_somme",
   "suite_somme_situations",
@@ -60,17 +60,12 @@ export const NOTIONS_TERMINALE: readonly string[] = [
   "log_proprietes",
   "log_equations",
   "log_applications",
-  // Statistique à deux variables : domaine entièrement de terminale
-  "stat_nuage",
-  "stat_ajustement",
-  "stat_interpoler",
-  "stat_moindres_carres",
+  // Statistique à deux variables : le programme 2026 met en première le nuage,
+  // le point moyen, l'ajustement, l'interpolation et les moindres carrés (« présentée »,
+  // sans théorie). Seul le changement de variable reste de terminale.
   "stat_changement_variable",
-  // Probabilités : l'arbre et les probabilités totales (le tableau croisé reste
-  // en première, le BO le dit noir sur blanc)
-  "proba_arbre",
-  "proba_arbre_calcul",
-  "proba_independance",
+  // Probabilités : l'arbre, les probabilités totales, l'indépendance et la répétition
+  // de n ≤ 4 épreuves de Bernoulli sont passés en première (programme 2026).
   // Loi binomiale
   "va_binomiale_reconnaitre",
   "va_binomiale_coefficients",

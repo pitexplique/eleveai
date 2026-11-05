@@ -48,6 +48,7 @@ import { buildKnowledgeC1Ia } from "@/lib/tutor-v4/knowledge/ia/c1/buildKnowledg
 import { buildKnowledgePixCollegeIa } from "@/lib/tutor-v4/knowledge/ia/pix-college/buildKnowledgePixCollegeIa";
 import { buildKnowledgePixLyceeIa } from "@/lib/tutor-v4/knowledge/ia/pix-lycee/buildKnowledgePixLyceeIa";
 import { libelleTexte } from "@/lib/tutor-v4/libelleMath";
+import { appliquerMasquage, type VisibiliteCatalogue } from "@/lib/tutor-v4/micros-masquees";
 
 // =========================
 // TYPES
@@ -219,8 +220,16 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
 // NOTIONS
 // =========================
 
-export function getNotionOptions(classe: Classe, matiere: Matiere = "maths"): string[] {
-  const knowledge = getKnowledge(classe, matiere);
+// ⛔ Ces listes disent ce que le coach PROPOSE : les micros masquées (voir
+// `micros-masquees.ts`) n'y sont pas, sauf `garder` (ce qu'un lien nomme) ou `tout`.
+// Les cartes de LIBELLÉS, elles, restent complètes : un bilan ou un ancien lien
+// doit toujours savoir nommer une micro masquée.
+export function getNotionOptions(
+  classe: Classe,
+  matiere: Matiere = "maths",
+  vis?: VisibiliteCatalogue
+): string[] {
+  const knowledge = appliquerMasquage(getKnowledge(classe, matiere), vis);
   return knowledge.notions.map((n) => n.id);
 }
 
@@ -228,8 +237,12 @@ export function getNotionOptions(classe: Classe, matiere: Matiere = "maths"): st
 // MAP NOTION -> MICROS
 // =========================
 
-export function getNotionMicroMap(classe: Classe, matiere: Matiere = "maths"): Record<string, string[]> {
-  const knowledge = getKnowledge(classe, matiere);
+export function getNotionMicroMap(
+  classe: Classe,
+  matiere: Matiere = "maths",
+  vis?: VisibiliteCatalogue
+): Record<string, string[]> {
+  const knowledge = appliquerMasquage(getKnowledge(classe, matiere), vis);
 
   return Object.fromEntries(
     knowledge.notions.map((notion) => [
@@ -307,7 +320,7 @@ export function microLabel(microId: string, classe: Classe, matiere: Matiere = "
 // =========================
 
 export function getDomaineMap(classe: Classe, matiere: Matiere = "maths") {
-  const knowledge = getKnowledge(classe, matiere);
+  const knowledge = appliquerMasquage(getKnowledge(classe, matiere));
 
   const domaines = knowledge.bo_competences.map((bo) => {
     const notions = knowledge.notions
@@ -355,6 +368,10 @@ export type { AnneeStmg };
 // Pour les pages « programme » (/programme/<classe>) : exposer le pack
 // (bo + notions + micros) côté SERVEUR uniquement — ne jamais importer
 // depuis un composant client (les banques pèsent lourd dans un bundle).
-export function getKnowledgePack(classe: Classe, matiere: Matiere = "maths") {
-  return getKnowledge(classe, matiere);
+export function getKnowledgePack(
+  classe: Classe,
+  matiere: Matiere = "maths",
+  vis?: VisibiliteCatalogue
+) {
+  return appliquerMasquage(getKnowledge(classe, matiere), vis);
 }

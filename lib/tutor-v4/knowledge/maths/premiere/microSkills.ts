@@ -118,7 +118,7 @@ export const microSkills: MicroSkillSource[] = [
 
   /* ─────────────────────── auto_lire_statistiques ─────────────────────── */
 
-  { id: "auto_stat_lire_graphique", label: "Lire un graphique, un histogramme, un diagramme (origine, graduations, échelles)", notionId: "auto_lire_statistiques", prerequis: [] },
+  { id: "auto_stat_lire_graphique", label: "Lire un graphique, un diagramme (origine, graduations, échelles)", notionId: "auto_lire_statistiques", prerequis: [] },
   { id: "auto_stat_lire_histogramme", label: "Lire un histogramme (classes, effectifs, fréquences)", notionId: "auto_lire_statistiques", prerequis: ["auto_stat_lire_graphique"] },
   { id: "auto_stat_graphiques_usuels", label: "Lire et commenter les graphiques usuels (barres, circulaire, nuage de points)", notionId: "auto_lire_statistiques", prerequis: ["auto_stat_lire_graphique"] },
   { id: "auto_stat_graphique_donnees", label: "Passer du graphique aux données et inversement", notionId: "auto_lire_statistiques", prerequis: ["auto_stat_lire_graphique"] },

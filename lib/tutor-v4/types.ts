@@ -377,6 +377,8 @@ export type TutorSessionV4 = {
    * `undefined` = toute la notion, comme avant.
    */
   microsAutorisees?: string[];
+  /** Micros ou notions masquées que le lien de départ nommait (voir `micros-masquees.ts`). */
+  garderMasquees?: string[];
 };
 
 export type StartTutorV4Input = {

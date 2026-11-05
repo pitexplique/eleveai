@@ -43,12 +43,12 @@ export default function RessourcesAdminClient() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [msg, setMsg] = useState<string>("");
 
-  const microMap = useMemo(() => getNotionMicroMap(classe, "maths"), [classe]);
+  const microMap = useMemo(() => getNotionMicroMap(classe, "maths", { tout: true }), [classe]);
   const microLabels = useMemo(() => getMicroLabelMap(classe, "maths"), [classe]);
 
   const notions = useMemo(
     () =>
-      getNotionOptions(classe, "maths").map((id) => ({
+      getNotionOptions(classe, "maths", { tout: true }).map((id) => ({
         id,
         label: notionLabel(id, classe, "maths"),
         ficheHref: ficheHrefSiExiste("maths", classe, id),

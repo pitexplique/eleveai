@@ -74,7 +74,7 @@ function lienMicro(
   r: RenvoiMicro,
 ): { href: string; label: string; notion: string; ficheHref: string | null; exercicesHref: string | null } | null {
   const classe = r.classe as Classe;
-  const notion = Object.entries(getNotionMicroMap(classe)).find(([, ms]) => ms.includes(r.micro))?.[0];
+  const notion = Object.entries(getNotionMicroMap(classe, "maths", { tout: true })).find(([, ms]) => ms.includes(r.micro))?.[0];
   if (!notion) return null;
   return {
     href: `/coach/serie?classe=${classe}&matiere=maths&notion=${notion}&microId=${r.micro}&${displayParamForClasse(classe)}`,

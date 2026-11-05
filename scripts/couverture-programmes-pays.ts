@@ -12,7 +12,7 @@ for (const p of PROGRAMMES_PAYS) {
   for (const c of p.contenus) {
     compte[c.couverture]++;
     for (const r of c.micros) {
-      const micros = Object.values(getNotionMicroMap(r.classe)).flat();
+      const micros = Object.values(getNotionMicroMap(r.classe, "maths", { tout: true })).flat();
       if (!micros.includes(r.micro)) {
         erreurs++;
         console.log(`❌ ${p.pays} ${p.niveau} ${c.code} : ${r.classe}/${r.micro} n'existe pas`);
