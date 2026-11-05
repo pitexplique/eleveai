@@ -271,6 +271,19 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["litteral_factoriser"],
   },
   {
+    // 05/11/2026 : trou du programme (BO 2020, p. 132).
+    id: "equation_carre_egal_a",
+    label: "Résoudre x² = a : deux solutions, une seule ou aucune",
+    notionId: "equation_resolution",
+    prerequis: ["equation_resoudre_simple", "entier_racine_calculer"],
+  },
+  {
+    id: "equation_carre_factoriser",
+    label: "Résoudre x² − 9 = 0 ou (x − 2)² = 25 en factorisant",
+    notionId: "equation_resolution",
+    prerequis: ["equation_carre_egal_a", "equation_produit_nul", "litteral_identite"],
+  },
+  {
     id: "equation_verifier",
     label: "Vérifier une solution d’équation",
     notionId: "equation_resolution",

@@ -84,6 +84,8 @@ const supportLinks: Record<string, string[]> = {
   affine_graphique: ["fonction_graphique", "affine_coeff_directeur"],
   affine_probleme: ["prop_defi", "equation_defi"],
   affine_defi: ["fonction_defi", "equation_defi"],
+  equation_carre_egal_a: ["entier_racine_calculer", "fonction_graphique"],
+  equation_carre_factoriser: ["litteral_identite", "equation_produit_nul"],
 
    // =========================
   // GRANDEURS

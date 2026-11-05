@@ -4,7 +4,9 @@
 // 3e sur des micros ou des notions nommées, pas sur toute la classe.
 import type { CorrecteursMaths } from "@/lib/tutor-v4/questionBank/4e/maths/correcteurs/types";
 import { CORRECTEURS as volumesPyramideCone } from "./volumes-pyramide-cone";
+import { CORRECTEURS as equationsCarre } from "./equations-carre";
 
 export const CORRECTEURS_3E: CorrecteursMaths = {
   ...volumesPyramideCone,
+  ...equationsCarre,
 };

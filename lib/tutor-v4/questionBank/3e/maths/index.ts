@@ -20,6 +20,7 @@ import { proportionnaliteBank } from "./proportionnalite.bank";
 
 import { calculLitteralBank } from "./calcul_litteral.bank";
 import { equationsBank } from "./equations.bank";
+import { equationsCarreBank } from "./equations-carre.bank";
 
 import { fonctionsBank } from "./fonctions.bank";
 import { affineBank } from "./affine.bank";
@@ -59,6 +60,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
 
   ...calculLitteralBank,
   ...equationsBank,
+  ...equationsCarreBank,
 
   ...fonctionsBank,
   ...affineBank,
