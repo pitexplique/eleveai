@@ -248,6 +248,8 @@ export const microSkills: MicroSkillSource[] = [
   /* ──────────────────────── fct_degre2_symetrie ──────────────────────── */
 
   { id: "fct_d2_axe_symetrie", label: "Déterminer l'axe de symétrie d'une parabole", notionId: "fct_degre2_symetrie", prerequis: [] },
+  { id: "fct_d2_axe_par_image_egale", label: "Trouver l'axe de symétrie de ax² + bx + c en résolvant f(x) = c", notionId: "fct_degre2_symetrie", prerequis: ["fct_d2_axe_symetrie"] },
+  { id: "fct_d2_sommet_general", label: "Trouver le sommet et l'extremum de ax² + bx + c", notionId: "fct_degre2_symetrie", prerequis: ["fct_d2_axe_par_image_egale"] },
   { id: "fct_d2_extremum", label: "Déterminer l'extremum d'une fonction de la forme a(x − x₁)(x − x₂)", notionId: "fct_degre2_symetrie", prerequis: ["fct_d2_axe_symetrie"] },
   { id: "fct_d2_symetrie_images", label: "Utiliser la symétrie de la parabole pour comparer deux images", notionId: "fct_degre2_symetrie", prerequis: ["fct_d2_axe_symetrie"] },
 
@@ -584,5 +586,6 @@ export const microSkills: MicroSkillSource[] = [
 
   { id: "logique_contre_exemple", label: "Utiliser un contre-exemple pour infirmer une proposition universelle", notionId: "logique_raisonnement", prerequis: [] },
   { id: "logique_reciproque", label: "Distinguer une proposition de sa réciproque", notionId: "logique_raisonnement", prerequis: ["logique_contre_exemple"] },
+  { id: "logique_contraposee", label: "Formuler et utiliser la contraposée d'une implication", notionId: "logique_raisonnement", prerequis: ["logique_reciproque"] },
   { id: "logique_necessaire_suffisante", label: "Utiliser à bon escient « condition nécessaire », « condition suffisante », « équivalence »", notionId: "logique_raisonnement", prerequis: ["logique_reciproque"] },
 ];

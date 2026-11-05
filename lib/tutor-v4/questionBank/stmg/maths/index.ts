@@ -1,4 +1,5 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { parabolesImageEgaleBank } from "./parabole-image-egale.bank";
 
 // Banques par notion du cycle terminal de la voie technologique (série STMG).
 //
@@ -139,4 +140,6 @@ export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...variablesAleatoiresBank,
   ...statistiqueDeuxVariablesBank,
   ...algorithmiqueBank,
+  // === Programme 2026 : trous bouchés le 05/11/2026 ===
+  ...parabolesImageEgaleBank,
 ];
