@@ -99,7 +99,7 @@ export const MAROC_3AC: ProgrammePays = {
       texte: "Trigonométrie dans le triangle rectangle : sinus, cosinus, tangente d'un angle aigu ; valeurs à la calculatrice dans les deux sens ; cos² x + sin² x = 1 et tan x = sin x ÷ cos x.",
       couverture: "partielle",
       micros: [
-        ...m("3e", "trigo_triangle_rectangle", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_choisir_rapport", "trigo_calculer_angle", "metrique_produit", "metrique_carre"),
+        ...m("3e", "trigo_triangle_rectangle", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_choisir_rapport", "trigo_calculer_angle"),
         ...m("seconde", "geo_trig_identite"),
       ],
       note: "Manque la relation tan x = sin x ÷ cos x.",
