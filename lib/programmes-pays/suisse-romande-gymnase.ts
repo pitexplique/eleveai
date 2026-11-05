@@ -96,6 +96,6 @@ export const SUISSE_GYMNASE: ProgrammePays = {
     c("4.2b", STO, "Analyser et résoudre des problèmes liés au hasard en mobilisant les divers aspects calculatoires des probabilités.", "complete",
       [...m("premiere-spe", "pc_arbre", "pc_totales", "pc_independance", "va_esperance"), ...m("terminale-spe", "binomiale_calculer")]),
     c("4.3", STO, "Décrire et interpréter un ensemble de données graphiquement ou en calculant les indicateurs appropriés (CdBA).", "complete",
-      m("seconde", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_interquartile", "stat_ecart_type", "stat_interpreter")),
+      m("seconde", "stat_histogramme", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_interquartile", "stat_ecart_type", "stat_interpreter")),
   ],
 };
