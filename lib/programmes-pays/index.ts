@@ -26,6 +26,14 @@ import {
   QUEBEC_6E_ANNEE,
 } from "./quebec-primaire";
 import { QUEBEC_SEC_1, QUEBEC_SEC_2, QUEBEC_SEC_3, QUEBEC_SEC_4, QUEBEC_SEC_5 } from "./quebec-secondaire";
+import {
+  SENEGAL_CE1,
+  SENEGAL_CE2,
+  SENEGAL_CI,
+  SENEGAL_CM1,
+  SENEGAL_CM2,
+  SENEGAL_CP,
+} from "./senegal-elementaire";
 import { SENEGAL_3E, SENEGAL_4E, SENEGAL_5E, SENEGAL_6E } from "./senegal-moyen";
 import { SENEGAL_1RE, SENEGAL_2NDE, SENEGAL_TLE } from "./senegal-secondaire";
 import { SUISSE_3_4H } from "./suisse-romande-cycle1";
@@ -81,6 +89,13 @@ export const PROGRAMMES_PAYS: ProgrammePays[] = [
   SENEGAL_2NDE,
   SENEGAL_1RE,
   SENEGAL_TLE,
+  // Le primaire après : /pays/senegal sans classe ouvre la 6e.
+  SENEGAL_CI,
+  SENEGAL_CP,
+  SENEGAL_CE1,
+  SENEGAL_CE2,
+  SENEGAL_CM1,
+  SENEGAL_CM2,
   COTE_DIVOIRE_6E,
   COTE_DIVOIRE_5E,
   COTE_DIVOIRE_4E,
