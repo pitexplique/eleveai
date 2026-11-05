@@ -252,10 +252,14 @@ const gabarits: TutorBankItemV4[] = [
  */
 const sansCoupure = (t: string) => t.replace(/\(([a-z]) \\circ ([a-z])\)/g, "($1 \\circ\\nobreak $2)");
 
-export const composeeEcrireBank: TutorBankItemV4[] = gabarits.map((g) => ({
-  ...g,
-  generate: () => {
-    const q = g.generate();
-    return { ...q, text: sansCoupure(q.text) };
-  },
-}));
+export const composeeEcrireBank: TutorBankItemV4[] = gabarits.map((g) =>
+  "generate" in g
+    ? {
+        ...g,
+        generate: () => {
+          const q = g.generate();
+          return { ...q, text: sansCoupure(q.text) };
+        },
+      }
+    : g,
+);

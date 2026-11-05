@@ -255,10 +255,14 @@ const gabarits: TutorBankItemV4[] = [
 ];
 
 /** Le système a son paragraphe : la phrase qui suit ne garde pas l'espace de la jonction. */
-export const systemes3x3Bank: TutorBankItemV4[] = gabarits.map((g) => ({
-  ...g,
-  generate: () => {
-    const q = g.generate();
-    return { ...q, text: q.text.replace(/\n\n /g, "\n\n") };
-  },
-}));
+export const systemes3x3Bank: TutorBankItemV4[] = gabarits.map((g) =>
+  "generate" in g
+    ? {
+        ...g,
+        generate: () => {
+          const q = g.generate();
+          return { ...q, text: q.text.replace(/\n\n /g, "\n\n") };
+        },
+      }
+    : g,
+);

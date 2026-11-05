@@ -70,7 +70,7 @@ function figure(noms: { a: string; b: string; c: string; h?: string }, hb: numbe
   // H reste à au moins 22 % d'un bout : sinon son nom et sa longueur se posent sur B ou C.
   const r = Math.min(0.78, Math.max(0.22, hb / (hb + hc)));
   // Une longueur sur la base se lit sous la base : le cadre ne laissait pas la place à « 30 cm », posé dans le triangle.
-  const sousLaBase = textes.bc || textes.hb || textes.hc ? { bas: point(2, -0.25) } : {};
+  const sousLaBase: Record<string, ReturnType<typeof point>> = textes.bc || textes.hb || textes.hc ? { bas: point(2, -0.25) } : {};
   const pts = { [b]: point(0, 0), [c]: point(4, 0), [h]: point(4 * r, 0), [a]: point(4 * r, 4 * Math.sqrt(r * (1 - r))), ...sousLaBase };
   return figureConstruction(
     pts,
