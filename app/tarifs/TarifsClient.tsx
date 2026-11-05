@@ -15,7 +15,9 @@
 // ⛔ Jamais aux élèves actuels ou anciens de Frédéric.
 
 import Link from "next/link";
-import { ArrowRight, Building2, Check, Eye, Globe2, MonitorPlay, Sparkles } from "lucide-react";
+import { ArrowRight, Building2, Check, Eye, Globe2, Heart, MonitorPlay, Sparkles } from "lucide-react";
+import { DONS, VENTE } from "@/lib/legal/editeur";
+import { toutesLesVideos } from "@/lib/videos/r2";
 import {
   ETABLISSEMENT_ETRANGER,
   OUVERTURE_SUIVI,
@@ -42,14 +44,21 @@ const OUVERT = [
   "Les feuilles d'exercices corrigées",
 ];
 
-const SUIVI = [
-  `Toute la vidéothèque : ${nombre(VIDEOS_SITE)} vidéos du CP à la Terminale (${nombre(VIDEOS_YOUTUBE)} seulement sur YouTube)`,
+// ⛔ 05/11/2026 : on écrit le nombre réel de vidéos le jour de l'ouverture, et
+// ce qui n'existe pas encore est annoncé comme « à venir ».
+const VIDEOS_REELLES = toutesLesVideos().filter((v) => !/\/(gb|en)\//.test(v.fichier)).length;
+const SUIVI_AUJOURDHUI = VENTE.ouverte
+  ? `Dès aujourd'hui : toute la vidéothèque, ${nombre(VIDEOS_REELLES)} vidéos du CP à la Terminale, à parcourir par classe`
+  : `Toute la vidéothèque : ${nombre(VIDEOS_SITE)} vidéos du CP à la Terminale (${nombre(VIDEOS_YOUTUBE)} seulement sur YouTube)`;
+const SUIVI_A_VENIR = [
   "Un bilan de départ : la carte de votre enfant sur toute sa classe",
   "Un compte rendu chaque semaine : ce qui est acquis, les erreurs qui reviennent, les 3 choses à revoir",
   "10 minutes par jour choisies par le coach, et la préparation ciblée d'un contrôle",
   "Une alerte quand il décroche sur une notion",
-  "Un seul abonnement pour tous les enfants de la maison",
 ];
+const SUIVI = VENTE.ouverte
+  ? [SUIVI_AUJOURDHUI, "Un seul abonnement pour tous les enfants de la maison", ...SUIVI_A_VENIR.map((t) => `À venir, en exclusivité : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]
+  : [SUIVI_AUJOURDHUI, ...SUIVI_A_VENIR, "Un seul abonnement pour tous les enfants de la maison"];
 
 // ⭐ 03/11 : « Maths réelles », la liste vit dans lib/tarifs.ts.
 const VISIO = VISIO_MATHS_REELLES;
@@ -73,7 +82,9 @@ const faq = [
   },
   {
     q: "Quand est-ce que ça ouvre ?",
-    a: `Le suivi famille ouvre ${OUVERTURE_SUIVI}, les visios « ${NOM_VISIO} » en ${OUVERTURE_VISIO}. Rien n'est encaissé avant l'ouverture.`,
+    a: VENTE.ouverte
+      ? `Le suivi famille est ouvert. Les visios « ${NOM_VISIO} » arrivent en ${OUVERTURE_VISIO}.`
+      : `Le suivi famille ouvre ${OUVERTURE_SUIVI}, les visios « ${NOM_VISIO} » en ${OUVERTURE_VISIO}. Rien n'est encaissé avant l'ouverture.`,
   },
   {
     q: "Le prix est-il le même dans tous les pays ?",
@@ -103,7 +114,7 @@ export default function TarifsClient() {
         {/* 1. LA PROMESSE */}
         <section className="text-center">
           <p className="inline-flex rounded-full bg-sky-100 px-4 py-1.5 text-xs font-black uppercase tracking-wide text-sky-800 ring-1 ring-sky-200">
-            Ouverture {OUVERTURE_SUIVI}
+            {VENTE.ouverte ? "Le suivi famille est ouvert" : `Ouverture ${OUVERTURE_SUIVI}`}
           </p>
           <h1 className="mt-4 text-3xl font-black leading-tight sm:text-5xl">Les offres d&apos;EleveAI</h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
@@ -127,7 +138,7 @@ export default function TarifsClient() {
           </div>
 
           <div className="flex flex-col rounded-3xl border-2 border-sky-300 p-6 shadow-lg">
-            <p className="text-sm font-black uppercase tracking-wide text-sky-700">Ouverture {OUVERTURE_SUIVI}</p>
+            <p className="text-sm font-black uppercase tracking-wide text-sky-700">{VENTE.ouverte ? "Pour les familles" : `Ouverture ${OUVERTURE_SUIVI}`}</p>
             <h2 className="mt-1 flex items-center gap-2 text-2xl font-black">
               <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> Le suivi famille
             </h2>
@@ -140,9 +151,15 @@ export default function TarifsClient() {
             <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
               {SUIVI.map((t) => <Puce key={t} couleur="text-sky-600">{t}</Puce>)}
             </ul>
-            <a href="#pays" className="mt-6 block rounded-full bg-sky-700 px-5 py-3 text-center font-black text-white hover:bg-sky-800">
-              Le prix dans mon pays
-            </a>
+            {VENTE.ouverte ? (
+              <Link href="/abonnement" className="mt-6 block rounded-full bg-sky-700 px-5 py-3 text-center font-black text-white hover:bg-sky-800">
+                S&apos;abonner
+              </Link>
+            ) : (
+              <a href="#pays" className="mt-6 block rounded-full bg-sky-700 px-5 py-3 text-center font-black text-white hover:bg-sky-800">
+                Le prix dans mon pays
+              </a>
+            )}
           </div>
 
           <div className="flex flex-col rounded-3xl border border-slate-200 p-6">
@@ -179,8 +196,15 @@ export default function TarifsClient() {
           </div>
         </section>
         <p className="-mt-8 text-center text-sm text-slate-500">
-          Rien n&apos;est encaissé avant l&apos;ouverture. Ces offres ne s&apos;adressent pas aux élèves de son professeur.
+          {!VENTE.ouverte && <>Rien n&apos;est encaissé avant l&apos;ouverture. </>}Ces offres ne s&apos;adressent pas aux élèves de son professeur.
         </p>
+        {DONS.ouverts && (
+          <p className="-mt-8 text-center">
+            <Link href="/soutenir" className="inline-flex items-center gap-2 font-black text-rose-700 hover:underline">
+              <Heart className="h-5 w-5" aria-hidden="true" /> Vous préférez simplement encourager le site ? Faire un don
+            </Link>
+          </p>
+        )}
 
         {/* 3. POURQUOI, À L'HEURE DE L'IA */}
         <section className="rounded-3xl bg-slate-50 p-6 sm:p-8">

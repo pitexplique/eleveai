@@ -126,6 +126,8 @@
 // n'est toujours pas branchée dans l'inscription (report décidé, pas un oubli).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { VENTE } from "@/lib/legal/editeur";
+
 /* ⛔⛔ L'INTERRUPTEUR DES PRIX — POSÉ LE 09/09/2026, EN ATTENTE DE RÉFLEXION.
    Frédéric : « on va enlever les tarifs », « je veux plus voir des prix »,
    « débranche, ne supprime pas ». Le site se réoriente peut-être vers un
@@ -155,7 +157,7 @@
    ⚠️ `scripts/verifier-tarifs.ts` continue de tourner et c'est voulu : il
    garantit qu'aucun prix n'est écrit à la main, donc qu'aucun ne réapparaîtra
    par une page oubliée le jour où l'on rallume. */
-export const PRIX_PUBLICS = false;
+export const PRIX_PUBLICS = VENTE.ouverte; // 05/11/2026 : un seul interrupteur, la vente.
 
 /**
  * ⭐ 2,50 € PAR MOIS, SANS ENGAGEMENT — par FOYER, jamais par enfant, sur une
@@ -343,18 +345,89 @@ export const VISIO_MATHS_REELLES = [
 export const VIDEOS_SITE = 3500;
 export const VIDEOS_YOUTUBE = 500;
 
+export type CodeZone =
+  | "europe" | "suisse" | "canada" | "maghreb" | "fcfa_ouest" | "fcfa_centre" | "modeste";
+export type Formule = "mensuel" | "annee";
+
+/**
+ * ⭐ 05/11/2026 — CE QUE STRIPE ENCAISSE, en plus petite unité de la devise
+ * (centimes ; le franc CFA n'a pas de centimes : 1000 = 1 000 FCFA).
+ * ⛔ Le prix se décide TOUJOURS côté serveur, jamais depuis le navigateur.
+ * L'annuel garde partout à peu près le rapport validé en France (39 € pour
+ * 4,95 € par mois). « europe » est aussi le prix par défaut : un pays absent des
+ * listes paie le prix français, jamais le plus bas.
+ */
+export const ZONES_PAIEMENT: Record<CodeZone, { devise: string; mensuel: number; annee: number }> = {
+  europe: { devise: "eur", mensuel: 495, annee: 3900 },
+  suisse: { devise: "chf", mensuel: 500, annee: 3900 },
+  canada: { devise: "cad", mensuel: 695, annee: 5490 },
+  maghreb: { devise: "eur", mensuel: 250, annee: 1990 },
+  fcfa_ouest: { devise: "xof", mensuel: 1000, annee: 8000 },
+  fcfa_centre: { devise: "xaf", mensuel: 1000, annee: 8000 },
+  modeste: { devise: "eur", mensuel: 100, annee: 790 },
+};
+
+const PAYS_PAR_ZONE: Partial<Record<CodeZone, string[]>> = {
+  suisse: ["CH"],
+  canada: ["CA"],
+  maghreb: ["MA", "TN", "DZ"],
+  fcfa_ouest: ["SN", "CI", "BJ", "BF", "ML", "NE", "TG", "GW"],
+  fcfa_centre: ["CM", "GA", "CG", "TD", "CF", "GQ"],
+  modeste: [
+    "MG", "MU", "KM", "HT", "CD", "GN", "MR", "DJ", "BI", "RW", "LB", "VU",
+    "IN", "PK", "BD", "NP", "LK", "VN", "PH", "ID", "KH", "LA", "MM",
+    "NG", "GH", "KE", "ET", "TZ", "UG", "MZ", "ZM", "ZW", "MW", "SL", "LR", "GM", "EG",
+    "BO", "HN", "NI", "GT", "UA", "MD",
+  ],
+};
+
+/** Le pays (ISO, donné par l'hébergeur) → sa zone. Inconnu : le prix français. */
+export function zoneDuPays(pays: string | null | undefined): CodeZone {
+  const code = (pays ?? "").toUpperCase();
+  for (const [zone, liste] of Object.entries(PAYS_PAR_ZONE)) {
+    if (liste?.includes(code)) return zone as CodeZone;
+  }
+  return "europe";
+}
+
+/** « 4,95 € », « 5 CHF », « 6,95 $ CA », « 1 000 FCFA » : le montant lisible d'une zone. */
+export function prixZone(zone: CodeZone, formule: Formule): string {
+  const { devise, [formule]: valeur } = ZONES_PAIEMENT[zone];
+  if (devise === "xof" || devise === "xaf") {
+    return `${String(valeur).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} FCFA`;
+  }
+  const texte = valeur % 100 === 0 ? String(valeur / 100) : (valeur / 100).toFixed(2).replace(".", ",");
+  const signe = devise === "eur" ? "€" : devise === "chf" ? "CHF" : "$ CA";
+  return `${texte} ${signe}`;
+}
+
+/**
+ * La fin de l'année scolaire que couvre la formule annuelle : le 31 août.
+ * ⚠️ À partir de juin, on vend l'année suivante : personne ne paie l'année pour
+ * trois mois d'été. La date exacte s'affiche avant le paiement.
+ */
+export function finAnneeScolaire(maintenant: Date = new Date()): Date {
+  const annee = maintenant.getUTCFullYear() + (maintenant.getUTCMonth() >= 5 ? 1 : 0);
+  return new Date(Date.UTC(annee, 7, 31, 23, 59, 59));
+}
+
+/** Le bouton de soutien (05/11/2026) : montants proposés et bornes, en euros. */
+export const DONS_MONTANTS = [5, 10, 20, 50];
+export const DON_MIN = 2;
+export const DON_MAX = 500;
+
 /**
  * ⭐ UN PRIX PAR PAYS (Frédéric, 02/11 : « offre par pays est bien aussi »).
  * 4,95 € est raisonnable en France, trop cher à Dakar : le prix suit le niveau
- * de vie. Écrits en toutes lettres ici, et seulement ici.
+ * de vie. Les montants viennent de `ZONES_PAIEMENT` : l'affiché est l'encaissé.
  */
 export const PRIX_PAR_PAYS: { zone: string; pays: string; suivi: string; visio: string }[] = [
-  { zone: "France et Europe francophone", pays: "France (outre-mer compris), Belgique, Luxembourg, Monaco", suivi: "4,95 €", visio: "12 €" },
-  { zone: "Suisse romande", pays: "Genève, Vaud, Neuchâtel, Jura, Fribourg, Valais", suivi: "5 CHF", visio: "12 CHF" },
-  { zone: "Canada francophone", pays: "Québec, Nouveau-Brunswick, Ontario", suivi: "6,95 $ CA", visio: "17 $ CA" },
-  { zone: "Maghreb", pays: "Maroc, Tunisie, Algérie", suivi: "2,50 €", visio: "6 €" },
-  { zone: "Afrique de l'Ouest et centrale", pays: "Sénégal, Côte d'Ivoire, Cameroun, Gabon, Bénin, Togo, Burkina Faso, Mali, Niger, Congo", suivi: "1 000 FCFA", visio: "3 000 FCFA" },
-  { zone: "Océan Indien, Caraïbes et autres pays", pays: "Madagascar, Maurice, Comores, Haïti, RD Congo, Guinée…", suivi: "1 €", visio: "3 €" },
+  { zone: "France, Europe et autres pays", pays: "France (outre-mer compris), Belgique, Luxembourg, Monaco, Europe, États-Unis, Royaume-Uni…", suivi: prixZone("europe", "mensuel"), visio: "12 €" },
+  { zone: "Suisse", pays: "Genève, Vaud, Neuchâtel, Jura, Fribourg, Valais…", suivi: prixZone("suisse", "mensuel"), visio: "12 CHF" },
+  { zone: "Canada", pays: "Québec, Nouveau-Brunswick, Ontario…", suivi: prixZone("canada", "mensuel"), visio: "17 $ CA" },
+  { zone: "Maghreb", pays: "Maroc, Tunisie, Algérie", suivi: prixZone("maghreb", "mensuel"), visio: "6 €" },
+  { zone: "Afrique de l'Ouest et centrale", pays: "Sénégal, Côte d'Ivoire, Cameroun, Gabon, Bénin, Togo, Burkina Faso, Mali, Niger, Congo", suivi: prixZone("fcfa_ouest", "mensuel"), visio: "3 000 FCFA" },
+  { zone: "Pays à revenu modeste", pays: "Madagascar, Maurice, Comores, Haïti, RD Congo, Guinée, Inde, Nigeria, Vietnam…", suivi: prixZone("modeste", "mensuel"), visio: "3 €" },
 ];
 
 /**

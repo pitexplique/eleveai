@@ -305,7 +305,7 @@ export default function EspaceParentsClient() {
 
                   {venteOuverte ? (
                     <Link
-                      href="/tarifs#famille"
+                      href="/abonnement"
                       className="mt-5 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5"
                     >
                       S&apos;abonner — {montant(PRIX_ANNUEL)} pour l&apos;année

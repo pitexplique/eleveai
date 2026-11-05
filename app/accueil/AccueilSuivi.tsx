@@ -53,6 +53,7 @@ import {
 import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
+import { DONS, VENTE } from "@/lib/legal/editeur";
 import { ETABLISSEMENT_ETRANGER, NOM_VISIO, OUVERTURE_VISIO, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, montant } from "@/lib/tarifs";
 import { PAYS_AVENTURE } from "@/lib/aventure/pays";
 
@@ -402,7 +403,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             chaque pays. Toujours aucun bouton de paiement avant l'ouverture. */}
         <section className="mt-12">
           <h2 className="text-2xl font-black sm:text-3xl">
-            {offresFamille ? "Ce qui est ouvert à tous, et ce qui s'ouvre aux familles fin décembre" : "Pour les élèves et les professeurs"}
+            {offresFamille ? (VENTE.ouverte ? "Ce qui est ouvert à tous, et ce qui est proposé aux familles" : "Ce qui est ouvert à tous, et ce qui s'ouvre aux familles fin décembre") : "Pour les élèves et les professeurs"}
           </h2>
           <div className={`mt-6 grid gap-5 ${offresFamille ? "lg:grid-cols-3" : ""}`}>
             <div className="rounded-3xl border-2 border-emerald-300 bg-emerald-50/50 p-6">
@@ -420,7 +421,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             {offresFamille && (
               <>
             <div className="rounded-3xl border border-slate-200 p-6">
-              <p className="text-sm font-black uppercase tracking-wide text-sky-700">Ouverture fin décembre 2026</p>
+              <p className="text-sm font-black uppercase tracking-wide text-sky-700">{VENTE.ouverte ? "Pour les familles" : "Ouverture fin décembre 2026"}</p>
               <h3 className="mt-1 flex items-center gap-2 text-2xl font-black">
                 <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> Le suivi famille
               </h3>
@@ -435,6 +436,11 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               </ul>
               <p className="mt-5 text-lg font-black">{montant(PRIX_MENSUEL)} par mois en France</p>
               <p className="text-sm text-slate-500">Un prix adapté à chaque pays, et sans engagement.</p>
+              {VENTE.ouverte && (
+                <Link href="/abonnement" className="mt-3 inline-flex rounded-full bg-sky-700 px-5 py-2.5 font-black text-white hover:bg-sky-800">
+                  S&apos;abonner
+                </Link>
+              )}
             </div>
 
             <div className="rounded-3xl border border-slate-200 p-6">
@@ -489,10 +495,18 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
           )}
           {offresFamille && (
             <p className="mt-4 text-sm text-slate-500">
-            Le suivi famille et l&apos;offre établissement ouvrent fin décembre 2026, les visios en janvier. Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de son professeur.
+            {!VENTE.ouverte && <>Le suivi famille et l&apos;offre établissement ouvrent fin décembre 2026, les visios en janvier. </>}Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de son professeur.
           </p>
           )}
         </section>
+
+        {DONS.ouverts && (
+          <p className="mt-6 text-center">
+            <Link href="/soutenir" className="font-black text-rose-700 hover:underline">
+              Vous voulez simplement encourager le site ? Faire un don ❤️
+            </Link>
+          </p>
+        )}
 
         {/* 6. QUI EST DERRIÈRE — la confiance, sans promesse qu'on ne tient pas
             (pas de « tout est vérifié » : c'est le reproche de l'inspecteur). */}

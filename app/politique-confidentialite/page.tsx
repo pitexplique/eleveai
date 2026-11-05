@@ -23,7 +23,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import { EDITEUR, PSP, VENTE, cgvEnVigueur } from "@/lib/legal/editeur";
+import { EDITEUR, PSP, VENTE, DONS, cgvEnVigueur } from "@/lib/legal/editeur";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
@@ -116,9 +116,9 @@ const sections = [
           </li>
           {/* Les données de facturation n'existent pas tant que rien ne se vend :
               on ne déclare pas un traitement qui n'a jamais lieu. */}
-          {VENTE.ouverte && (
+          {(VENTE.ouverte || DONS.ouverts) && (
             <li>
-              <span className="font-semibold text-slate-50">Clients d&apos;un abonnement</span> : nom,
+              <span className="font-semibold text-slate-50">Clients d&apos;un abonnement et donateurs</span> : nom,
               adresse de facturation et historique des commandes. Les données de carte
               bancaire sont saisies chez notre prestataire de paiement et ne sont
               jamais reçues ni conservées par EleveAI.
@@ -222,7 +222,7 @@ const sections = [
             <span className="font-semibold text-slate-50">Resend</span> — envoi des courriels
             (confirmations, lettre d&apos;information).
           </li>
-          {VENTE.ouverte && (
+          {(VENTE.ouverte || DONS.ouverts) && (
             <li>
               <span className="font-semibold text-slate-50">{PSP.nom}</span> — traitement des
               paiements par carte. Les coordonnées bancaires sont saisies chez lui et ne
@@ -265,7 +265,7 @@ const sections = [
           Un compte resté sans aucune connexion pendant deux années scolaires est
           supprimé, sans qu&apos;il soit besoin de le demander.
         </p>
-        {VENTE.ouverte && (
+        {(VENTE.ouverte || DONS.ouverts) && (
           <p>
             Une seule catégorie échappe à cette règle : les factures et les pièces
             comptables, que la loi impose de conserver dix ans (art. L123-22 du code

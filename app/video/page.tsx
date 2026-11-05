@@ -2,6 +2,8 @@
 // un short), rangées façon Netflix, grille façon YouTube (VideosClient). noindex.
 import type { Metadata } from "next";
 import { toutesLesVideos, trouverVideo, urlR2 } from "@/lib/videos/r2";
+import { VENTE } from "@/lib/legal/editeur";
+import GardeVideotheque from "./GardeVideotheque";
 import VideosClient, { type VideoListe, type VideoUne } from "./VideosClient";
 
 export const metadata: Metadata = {
@@ -34,7 +36,7 @@ export default function ListeVideos() {
   // en anglais (dossiers gb/, « english cursive… », « Writing cursive… »)
   // passaient EN PREMIER au CP. Elles restent sur R2, elles sortent de la liste.
   const videos: VideoListe[] = toutesLesVideos()
-    .filter((v) => !/\/(gb|en)\//.test(v.fichier) && !/^(english|writing)\b/i.test(v.titre))
+    .filter((v) => !/\/(gb|en)\//.test(v.fichier) && !/^(english|writing)\b/i.test(v.titre) && !/^\d-(premier|exemple|essai|version)/.test(v.id))
     .map((v) => ({
     id: v.id,
     titre: v.titre,
@@ -48,7 +50,9 @@ export default function ListeVideos() {
     <main className="min-h-screen bg-[#f5f8ff] text-slate-800">
       <div className="mx-auto max-w-5xl px-4 py-8">
         <h1 className="text-2xl font-black text-slate-900">Les vidéos EleveAI</h1>
-        <VideosClient videos={videos} paysage={une(A_LA_UNE.paysage)} short={une(A_LA_UNE.short)} />
+        <GardeVideotheque fermee={VENTE.ouverte} nbVideos={videos.length}>
+          <VideosClient videos={videos} paysage={une(A_LA_UNE.paysage)} short={une(A_LA_UNE.short)} />
+        </GardeVideotheque>
       </div>
     </main>
   );

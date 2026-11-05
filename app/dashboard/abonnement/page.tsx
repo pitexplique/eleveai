@@ -1,65 +1,80 @@
-//app/dashboard/abonnement/page.tsx
-
+// app/dashboard/abonnement/page.tsx — l'état de l'abonnement et le portail Stripe (05/11/2026).
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+
+type Statut = {
+  acces: boolean;
+  enseignant: boolean;
+  formule: "mensuel" | "annee" | null;
+  accesJusquau: string | null;
+  finProgrammee: boolean;
+  portail: boolean;
+};
 
 export default function AbonnementPage() {
   const supabase = useMemo(() => createClient(), []);
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const [jeton, setJeton] = useState("");
+  const [statut, setStatut] = useState<Statut | null>(null);
+  const [erreur, setErreur] = useState("");
 
   useEffect(() => {
-    async function guard() {
-      const { data } = await supabase.auth.getUser();
-      if (!data.user) {
-        router.push("/auth/signin");
+    async function charger() {
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) {
+        router.push("/auth/signin?next=/dashboard/abonnement");
         return;
       }
-      setLoading(false);
+      setJeton(data.session.access_token);
+      const r = await fetch("/api/abonnement/statut", {
+        headers: { Authorization: `Bearer ${data.session.access_token}` },
+      });
+      setStatut(await r.json());
     }
-    guard();
+    charger().catch(() => setErreur("Impossible de lire votre abonnement."));
   }, [router, supabase]);
 
+  async function ouvrirPortail() {
+    setErreur("");
+    const r = await fetch("/api/abonnement/portail", { method: "POST", headers: { Authorization: `Bearer ${jeton}` } });
+    const j = await r.json().catch(() => ({}));
+    if (j.url) window.location.href = j.url;
+    else setErreur(j.error ?? "Le portail n'a pas pu s'ouvrir.");
+  }
+
+  const fin = statut?.accesJusquau ? new Date(statut.accesJusquau).toLocaleDateString("fr-FR") : "";
+
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50">
-      <div className="mx-auto max-w-4xl px-4 py-8">
-        <h1 className="text-2xl font-bold">Abonnement</h1>
-        <p className="mt-1 text-sm text-slate-300">
-          (V1 : intégration Stripe + plan actuel + gestion quota)
-        </p>
-
-        <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
-          {loading ? (
-            <p className="text-sm text-slate-300">Chargement…</p>
-          ) : (
+    <main className="min-h-screen bg-white px-4 py-10 text-slate-900 [color-scheme:light]">
+      <div className="mx-auto max-w-2xl">
+        <h1 className="text-3xl font-black">Mon abonnement</h1>
+        <div className="mt-6 rounded-2xl p-5 ring-1 ring-slate-200">
+          {!statut && !erreur && <p className="text-slate-600">Chargement…</p>}
+          {statut?.enseignant && <p className="font-bold">Votre adresse académique vous donne accès à la vidéothèque, à titre personnel.</p>}
+          {statut && !statut.enseignant && statut.acces && (
             <>
-              <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
-                <p className="text-xs text-slate-400">Plan actuel</p>
-                <p className="mt-1 text-lg font-semibold">Découverte (V0)</p>
-                <p className="mt-2 text-sm text-slate-300">
-                  Stripe arrive en semaine 2/3 : checkout + webhook + statut plan.
-                </p>
-              </div>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                <button
-                  onClick={() => alert("V1 : ouvrir Stripe Checkout")}
-                  className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500"
-                >
-                  Passer à Premium
-                </button>
-                <button
-                  onClick={() => alert("V1 : voir facture / portail Stripe")}
-                  className="rounded-xl border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 hover:bg-slate-900"
-                >
-                  Gérer mon abonnement
-                </button>
-              </div>
+              <p className="text-xl font-black">Le suivi famille, {statut.formule === "annee" ? "année scolaire" : "au mois"}</p>
+              <p className="mt-1 text-slate-600">
+                {statut.finProgrammee ? `Accès jusqu'au ${fin}, sans nouveau prélèvement.` : `Prochain prélèvement le ${fin}.`}
+              </p>
             </>
           )}
+          {statut && !statut.enseignant && !statut.acces && (
+            <>
+              <p className="text-xl font-black">Aucun abonnement en cours</p>
+              <Link href="/abonnement" className="mt-4 inline-flex rounded-full bg-sky-700 px-6 py-3 font-black text-white hover:bg-sky-800">Voir le suivi famille</Link>
+            </>
+          )}
+          {statut?.portail && (
+            <button type="button" onClick={ouvrirPortail} className="mt-4 block rounded-full px-6 py-3 font-black text-slate-800 ring-1 ring-slate-300 hover:bg-slate-50">
+              Arrêter l&apos;abonnement, changer de carte, voir mes factures
+            </button>
+          )}
+          {erreur && <p role="alert" className="mt-3 font-bold text-rose-700">{erreur}</p>}
         </div>
       </div>
     </main>

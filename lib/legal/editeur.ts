@@ -62,6 +62,8 @@ export const VENDEUR = {
   denominationEI: "Frédéric Lacoste EI",
   forme: "Entrepreneur individuel — micro-entrepreneur",
   siren: "399856558", // répertoire INSEE ; compte actif depuis le 16/04/2023
+  /* ⏳ 05/11/2026 : Frédéric le donne à l'ouverture. Il part sur les factures. */
+  siret: "",
   /* ⚠️ L'ADRESSE PROFESSIONNELLE, PAS CELLE DU DOMICILE. L'Urssaf en connaît
      deux ; c'est l'adresse d'établissement qui se publie, et elle seule. */
   adresse: "249 avenue du Général de Gaulle, 97410 Saint-Pierre, La Réunion",
@@ -155,6 +157,12 @@ export const VENTE = {
   ouverteAuxParticuliers: true,
 };
 
+/* LE BOUTON DE SOUTIEN (05/11/2026) — Frédéric : « l'un n'empêche pas l'autre ».
+   Un don sans contrepartie : pas de compte, pas d'accès, pas de reçu fiscal.
+   Il s'ouvre séparément de la vente : passer à true seulement quand la clé
+   Stripe réelle est en place. */
+export const DONS = { ouverts: false };
+
 /** Ce qu'un éditeur professionnel doit publier : identité, siège, joignabilité.
     ⚠️ CE BOOLÉEN DIT « LES PIÈCES SONT RÉUNIES », PAS « ON LES AFFICHE ». Les
     deux ont été confondus jusqu'au 09/09/2026 — voir `identitePubliee`. */
@@ -192,7 +200,7 @@ export const identiteProfessionnelleComplete: boolean = Boolean(
    SIREN est invalide (art. R526-27 du code de commerce). Les débrancher
    casserait la facturation sans rien retirer du site public. */
 export const identitePubliee: boolean = Boolean(
-  VENTE.ouverte && identiteProfessionnelleComplete
+  (VENTE.ouverte || DONS.ouverts) && identiteProfessionnelleComplete
 );
 
 /* Les CGV ne sont « en vigueur » que quand elles sont complètes ET que quelque
@@ -202,6 +210,7 @@ export const cgvEnVigueur: boolean = Boolean(
   VENTE.ouverte &&
     VENTE.dateEntreeEnVigueur &&
     identiteProfessionnelleComplete &&
+    VENDEUR.siret &&
     (!VENTE.ouverteAuxParticuliers || (MEDIATEUR !== null && VENDEUR.telephone))
 );
 
@@ -209,6 +218,7 @@ export const cgvEnVigueur: boolean = Boolean(
 export function piecesManquantes(): string[] {
   const manque: string[] = [];
   if (!VENDEUR.siren) manque.push("le numéro SIREN de l'entreprise individuelle");
+  if (!VENDEUR.siret) manque.push("le numéro SIRET de l'établissement");
   if (!VENDEUR.adresse) manque.push("l'adresse de l'entreprise individuelle");
   if (!VENDEUR.telephone)
     manque.push("un numéro de téléphone joignable par les clients");

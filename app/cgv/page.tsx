@@ -131,7 +131,7 @@ export default function CgvPage() {
                 nom commercial {VENDEUR.nomCommercial}.
               </p>
               <p>{VENDEUR.adresse}</p>
-              <p>SIREN : {VENDEUR.siren}</p>
+              <p>SIRET : {VENDEUR.siret || VENDEUR.siren}</p>
               {VENDEUR.telephone && <p>Téléphone : {VENDEUR.telephone}</p>}
               <p>
                 Courriel :{" "}
@@ -165,10 +165,10 @@ export default function CgvPage() {
 
         <Article titre="3. Services proposés">
           <p>
-            Le Service donne accès, pour la durée souscrite, aux contenus et aux
-            outils pédagogiques d’EleveAI : parcours d’entraînement, coach,
-            évaluations, tableaux de suivi et ressources associées, selon
-            l’offre retenue.
+            L’abonnement donne accès, pour la durée souscrite, à la vidéothèque
+            d’EleveAI. Les fonctions de suivi annoncées comme « à venir » sur la
+            page Tarifs ne font pas partie de ce qui est dû à la commande ; elles
+            sont ajoutées à l’abonnement, sans supplément, quand elles sont prêtes.
           </p>
           <p>
             Les offres, leur périmètre et leurs conditions d’éligibilité sont
@@ -191,6 +191,15 @@ export default function CgvPage() {
           </p>
         </Article>
 
+        <Article titre="3 bis. Dons">
+          <p>
+            Le site permet aussi de soutenir {VENDEUR.nomCommercial} par un don
+            sans contrepartie. Il n’ouvre aucun accès, n’est pas une commande et
+            ne donne pas droit à un reçu fiscal. Un don fait par erreur est
+            remboursé sur simple demande à {EDITEUR.contact}.
+          </p>
+        </Article>
+
         <Article titre="4. Prix">
           <p>
             Les prix applicables sont ceux affichés sur la page{" "}
@@ -202,7 +211,8 @@ export default function CgvPage() {
               Tarifs
             </Link>{" "}
             au jour de la commande, et repris dans le récapitulatif présenté au
-            Client avant paiement. Ils sont exprimés en euros.
+            Client avant paiement. Ils dépendent du pays depuis lequel la commande
+            est passée et sont exprimés dans la devise de ce récapitulatif.
           </p>
           <p>
             {VENDEUR.mentionTva} : les prix affichés sont des prix nets, sans
@@ -284,19 +294,22 @@ export default function CgvPage() {
               une promesse commerciale sans contrepartie contractuelle ne vaut
               rien. */}
           <p>
-            L’abonnement mensuel est souscrit sans engagement de durée : il se
-            renouvelle de mois en mois tant que le Client le souhaite, et
-            s’interrompt à tout moment depuis son espace, sans motif ni frais.
+            L’abonnement mensuel est souscrit sans engagement de durée. Il est
+            prélevé automatiquement chaque mois, à la date anniversaire de la
+            commande, jusqu’à ce que le Client l’arrête. Il s’arrête à tout moment
+            depuis son espace, sans motif ni frais ; l’accès dure alors jusqu’à la
+            fin du mois déjà payé.
           </p>
           <p>
             L’abonnement annuel est souscrit pour une <strong>année scolaire</strong>,
             et non pour douze mois glissants : quelle que soit sa date de
-            souscription, il prend fin au terme de l’année scolaire en cours.
+            souscription, il prend fin le 31 août de l’année scolaire concernée,
+            à la date indiquée avant le paiement. Une souscription à partir du
+            1er juin couvre l’année scolaire suivante.
           </p>
           <p>
-            Ni l’un ni l’autre ne fait l’objet d’une reconduction tacite : à leur
-            terme, l’accès prend fin, sauf nouvelle commande du Client. Aucun
-            prélèvement n’intervient sans une nouvelle commande de sa part.
+            L’abonnement annuel n’est pas reconduit : à son terme, l’accès prend
+            fin et aucun prélèvement n’intervient sans une nouvelle commande.
           </p>
         </Article>
 
