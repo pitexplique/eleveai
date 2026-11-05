@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
-import Link from "next/link";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import {
@@ -60,13 +59,8 @@ type TutorSimpleViewProps = {
   onSubmit: () => void;
   onQcmClick: (choice: string) => void;
   onInputKeyDown: (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  // Enregistrement de la séance (comme en mode complet) : un élève connecté
-  // doit pouvoir sauvegarder son score depuis le mode simple aussi.
-  isLoggedIn: boolean;
-  canSave: boolean;
-  saving: boolean;
-  saveMessage: string | null;
-  onSave: () => void;
+  // Ligne discrète sur l'enregistrement automatique (comme en mode complet).
+  etatEnregistrement: ReactNode;
 };
 
 const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
@@ -126,11 +120,7 @@ export default function TutorSimpleView({
   onSubmit,
   onQcmClick,
   onInputKeyDown,
-  isLoggedIn,
-  canSave,
-  saving,
-  saveMessage,
-  onSave,
+  etatEnregistrement,
 }: TutorSimpleViewProps) {
 
   // Tailles agrandies en « affichage classe » (projection sans zoom).
@@ -557,41 +547,7 @@ export default function TutorSimpleView({
           ) : null}
         </div>
 
-        {/* Enregistrement de la séance : visible dès la première réponse, comme
-            en mode complet. Un élève non connecté est invité à se connecter. */}
-        {canSave ? (
-          <div className="mt-4 flex flex-col items-center gap-2">
-            {isLoggedIn ? (
-              <button
-                type="button"
-                onClick={onSave}
-                disabled={saving}
-                className="rounded-md bg-emerald-500 px-8 py-3 text-base font-black text-white shadow-sm hover:bg-emerald-600 disabled:opacity-60"
-              >
-                {saving ? "Enregistrement..." : "✅ Enregistrer ma séance"}
-              </button>
-            ) : (
-              <Link
-                href="/auth/signin-eleve"
-                className="rounded-md bg-amber-500 px-8 py-3 text-center text-base font-black text-white shadow-sm hover:bg-amber-600"
-              >
-                Se connecter pour enregistrer
-              </Link>
-            )}
-
-            {saveMessage ? (
-              <p
-                className={`rounded-md px-4 py-2 text-sm font-black ${
-                  saveMessage.includes("✅")
-                    ? "bg-emerald-100 text-emerald-800"
-                    : "bg-red-100 text-red-700"
-                }`}
-              >
-                {saveMessage}
-              </p>
-            ) : null}
-          </div>
-        ) : null}
+        {etatEnregistrement ? <div className="mt-4">{etatEnregistrement}</div> : null}
 
         <div className="mt-3 text-center text-xs font-semibold text-slate-500">
           Progression automatique : niveau {Math.max(1, Math.min(5, currentStar))}

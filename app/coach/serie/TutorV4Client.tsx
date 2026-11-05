@@ -118,7 +118,8 @@ import FloatingCoach from "@/components/FloatingCoach";
 import BandeauPassions from "./BandeauPassions";
 import Image from "next/image";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import EtatEnregistrementSeance, { type EtatAuto } from "./EtatEnregistrementSeance";
 
 type StartResponse = StartTutorV4Response;
 type AnswerResponse = AnswerTutorV4Response;
@@ -526,19 +527,23 @@ function PastilleFiche({
   );
 }
 
+const CLE_SEANCE_A_REPRENDRE = "tutorv4-seance-a-reprendre";
+const DUREE_SEANCE_A_REPRENDRE_MS = 30 * 60 * 1000;
+
 function nouvelIdSeance(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const router = useRouter();
 
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
   const eleve = eleveContext.eleve ?? null;
 
-  const [saving, setSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState<string | null>(null);
+  const [etatAuto, setEtatAuto] = useState<EtatAuto>(null);
+  const [reprise, setReprise] = useState<{ nbReponses: number; ok: boolean } | null>(null);
 
   const [classe, setClasse] = useState<Classe>("6e");
 
@@ -1281,6 +1286,7 @@ function continueAfterExplanation() {
       enregistrerEnSilenceRef.current();
       seanceIdRef.current = nouvelIdSeance();
       dernierEnregistreRef.current = 0;
+      setEtatAuto(null);
       setBusy(true);
       setAnswer("");
       setSessionResults([]);
@@ -1758,14 +1764,25 @@ function handleInputKeyDown(
   const enregistrerEnSilenceRef = useRef<() => void>(() => {});
   enregistrerEnSilenceRef.current = () => {
     if (!eleve?.token || nbTentatives === 0 || nbTentatives === dernierEnregistreRef.current) return;
-    dernierEnregistreRef.current = nbTentatives;
+    const envoi = nbTentatives;
+    const seance = seanceIdRef.current;
+    dernierEnregistreRef.current = envoi;
+    const signaler = (ok: boolean) => {
+      // Une réponse tardive de la séance précédente ne parle pas de celle-ci.
+      if (seanceIdRef.current !== seance) return;
+      setEtatAuto(ok ? "ok" : "erreur");
+      // Échec : le prochain envoi (5 réponses plus loin, ou la sortie) réessaie.
+      if (!ok && dernierEnregistreRef.current === envoi) dernierEnregistreRef.current = 0;
+    };
     // keepalive : l'envoi survit à la fermeture de l'onglet.
     fetch("/api/resultats", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: eleve.token, type: "tutor", resultat: contenuSeance() }),
       keepalive: true,
-    }).catch(() => {});
+    })
+      .then((reponse) => signaler(reponse.ok))
+      .catch(() => signaler(false));
   };
 
   useEffect(() => {
@@ -1786,43 +1803,54 @@ function handleInputKeyDown(
     };
   }, []);
 
-  async function enregistrerSeance() {
-    setSaveMessage(null);
-
-    if (!eleve) {
-      setSaveMessage("Tu dois être connecté pour enregistrer ta séance.");
-      return;
+  // SÉANCE SANS COMPTE : quitter la page pour se connecter la ferait perdre.
+  // Au clic sur l'invitation, elle est gardée dans l'onglet (sessionStorage :
+  // sur un poste partagé en classe, elle ne peut pas passer à un autre onglet ni
+  // survivre longtemps), puis envoyée quand l'élève revient connecté.
+  function garderSeanceAvantConnexion() {
+    try {
+      sessionStorage.setItem(
+        CLE_SEANCE_A_REPRENDRE,
+        JSON.stringify({ at: Date.now(), nbReponses: nbTentatives, resultat: contenuSeance() })
+      );
+    } catch {
+      /* Stockage indisponible : l'élève se connecte quand même. */
     }
-
-    if (nbTentatives === 0) {
-      setSaveMessage("Fais au moins une question avant d'enregistrer.");
-      return;
-    }
-
-    const codeEtablissement = eleve.code_etablissement?.trim() ?? "";
-    const codeUtilisateur = eleve.code_eleve?.trim() ?? eleve.code_utilisateur?.trim() ?? "";
-
-    if (!codeEtablissement || !codeUtilisateur) {
-      setSaveMessage("Impossible d'identifier ton compte élève.");
-      return;
-    }
-
-    setSaving(true);
-
-    // Insert via /api/resultats : identité prise dans le jeton de session.
-    const { error } = await saveResultat(eleve, "tutor", contenuSeance());
-
-    setSaving(false);
-
-    if (error) {
-      console.error(error);
-      setSaveMessage("Erreur : la séance n'a pas été enregistrée.");
-      return;
-    }
-
-    dernierEnregistreRef.current = nbTentatives;
-    setSaveMessage("Séance enregistrée ✅");
   }
+
+  useEffect(() => {
+    if (!eleve?.token) return;
+    let gardee: { at: number; nbReponses: number; resultat: unknown } | null = null;
+    try {
+      const brut = sessionStorage.getItem(CLE_SEANCE_A_REPRENDRE);
+      // Retirée avant l'envoi : jamais envoyée deux fois.
+      sessionStorage.removeItem(CLE_SEANCE_A_REPRENDRE);
+      gardee = brut ? JSON.parse(brut) : null;
+    } catch {
+      return;
+    }
+    if (!gardee || Date.now() - gardee.at > DUREE_SEANCE_A_REPRENDRE_MS) return;
+    const nbReponses = gardee.nbReponses;
+    saveResultat(eleve, "tutor", gardee.resultat as Record<string, unknown>).then(({ error }) =>
+      setReprise({ nbReponses, ok: !error })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- une fois, à l'arrivée du jeton.
+  }, [eleve?.token]);
+
+  const etatEnregistrement = (surFondSombre = false) => (
+    <EtatEnregistrementSeance
+      connecte={!!eleve}
+      sessionARenouveler={!!eleve && !eleve.token}
+      nbReponses={nbTentatives}
+      etatAuto={etatAuto}
+      reprise={reprise}
+      lienConnexion={`/auth/signin?mode=eleve&next=${encodeURIComponent(
+        `${pathname}?${searchParams.toString()}`
+      )}`}
+      onAvantConnexion={garderSeanceAvantConnexion}
+      surFondSombre={surFondSombre}
+    />
+  );
 
   // Ressources internes proposées après la réponse de l'IA : on entraîne sur le
   // micro raté + quelques voisins de la même notion (liens vers le tutor ciblé).
@@ -1941,11 +1969,7 @@ function handleInputKeyDown(
           onSubmit={() => void submitAnswer()}
           onQcmClick={(choice) => void handleQcmClick(choice)}
           onInputKeyDown={handleInputKeyDown}
-          isLoggedIn={!!eleve}
-          canSave={nbTentatives > 0}
-          saving={saving}
-          saveMessage={saveMessage}
-          onSave={() => void enregistrerSeance()}
+          etatEnregistrement={etatEnregistrement()}
         />
         {/* ⭐ 27/10/2026 — Frédéric : « la calculatrice à gauche », « Question
             suivante » là où était « Demande à l'IA » (en bas à droite, les élèves
@@ -2139,34 +2163,7 @@ function handleInputKeyDown(
                     {busy ? "Chargement..." : "Démarrer une mission"}
                   </button>
 
-                  {nbTentatives > 0 && (
-                    eleve ? (
-                      <button
-                        type="button"
-                        onClick={() => void enregistrerSeance()}
-                        disabled={saving}
-                        className="rounded-2xl bg-emerald-500 px-6 py-2.5 text-sm font-black text-white shadow hover:bg-emerald-400 disabled:opacity-60"
-                      >
-                        {saving ? "Enregistrement..." : "✅ Enregistrer ma séance"}
-                      </button>
-                    ) : (
-                      <Link
-                        href="/auth/signin-eleve"
-                        className="rounded-2xl bg-amber-500 px-6 py-2.5 text-center text-sm font-black text-white shadow hover:bg-amber-400"
-                      >
-                        Se connecter pour enregistrer
-                      </Link>
-                    )
-                  )}
-
-                  {saveMessage && (
-                    <p className={[
-                      "rounded-2xl px-4 py-2 text-xs font-black text-center",
-                      saveMessage.includes("✅") ? "bg-white/90 text-emerald-800" : "bg-white/90 text-red-700",
-                    ].join(" ")}>
-                      {saveMessage}
-                    </p>
-                  )}
+                  {etatEnregistrement(true)}
                 </div>
               </div>
             </div>
@@ -2200,36 +2197,7 @@ function handleInputKeyDown(
               {busy ? "Chargement..." : "Démarrer une mission"}
             </button>
 
-            {/* Enregistrement aussi sur mobile : un élève connecté doit pouvoir
-                sauvegarder sa séance depuis son téléphone. */}
-            {nbTentatives > 0 && (
-              eleve ? (
-                <button
-                  type="button"
-                  onClick={() => void enregistrerSeance()}
-                  disabled={saving}
-                  className="rounded-2xl bg-emerald-500 px-5 py-3 text-base font-black text-white shadow hover:bg-emerald-400 disabled:opacity-60"
-                >
-                  {saving ? "Enregistrement..." : "✅ Enregistrer ma séance"}
-                </button>
-              ) : (
-                <Link
-                  href="/auth/signin-eleve"
-                  className="rounded-2xl bg-amber-500 px-5 py-3 text-center text-base font-black text-white shadow hover:bg-amber-400"
-                >
-                  Se connecter pour enregistrer
-                </Link>
-              )
-            )}
-
-            {saveMessage && (
-              <p className={[
-                "rounded-2xl px-4 py-2 text-sm font-black text-center",
-                saveMessage.includes("✅") ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-700",
-              ].join(" ")}>
-                {saveMessage}
-              </p>
-            )}
+            {etatEnregistrement()}
           </section>
 
           {(() => {
