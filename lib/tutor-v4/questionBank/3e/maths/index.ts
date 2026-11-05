@@ -25,6 +25,7 @@ import { equationsCarreBank } from "./equations-carre.bank";
 
 import { fonctionsBank } from "./fonctions.bank";
 import { affineBank } from "./affine.bank";
+import { affineTracerBank } from "./affine-tracer.bank";
 
 import { pythagore3eBank } from "./pythagore.bank";
 import { pythagoreSolide3eBank } from "./pythagore-solide.bank";
@@ -66,6 +67,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
 
   ...fonctionsBank,
   ...affineBank,
+  ...affineTracerBank,
 
   ...pythagore3eBank,
   ...pythagoreSolide3eBank,

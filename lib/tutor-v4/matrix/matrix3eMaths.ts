@@ -82,6 +82,7 @@ const supportLinks: Record<string, string[]> = {
   affine_calcul_image: ["fonction_image", "equation_resoudre_simple"],
   affine_expression: ["equation_resoudre_simple", "fonction_tableau"],
   affine_graphique: ["fonction_graphique", "affine_coeff_directeur"],
+  affine_tracer: ["fonction_graphique", "affine_graphique"],
   affine_probleme: ["prop_defi", "equation_defi"],
   affine_defi: ["fonction_defi", "equation_defi"],
   equation_carre_egal_a: ["entier_racine_calculer", "fonction_graphique"],

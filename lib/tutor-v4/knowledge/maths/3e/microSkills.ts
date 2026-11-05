@@ -413,6 +413,14 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   {
+    // 05/11/2026 : trou du programme (BO 2020, p. 134) : seule la lecture était faite.
+    id: "affine_tracer",
+    label: "Représenter une fonction affine : deux images, deux points, la bonne droite",
+    notionId: "affine_fonction",
+    prerequis: ["affine_calcul_image", "affine_coeff_directeur", "affine_ordonnee_origine"],
+  },
+
+  {
     id: "affine_probleme",
     label: "Résoudre un problème avec une fonction affine",
     notionId: "affine_fonction",
