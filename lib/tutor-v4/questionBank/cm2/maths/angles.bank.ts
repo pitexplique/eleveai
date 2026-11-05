@@ -1,5 +1,6 @@
 // lib/tutor-v4/question-banks/maths/cm2/angles.bank.ts
 
+import { anglesReconnaitre } from "@/lib/tutor-v4/questionBank/cm2/maths/angle-reconnaitre.bank";
 import { anglesRepereDroit } from "@/lib/tutor-v4/questionBank/cm2/maths/angles-repere-droit.bank";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
@@ -228,109 +229,8 @@ export const anglesBank: TutorBankItemV4[] = [
     tags: ["cm2", "angle", "reconnaitre", "vie_quotidienne", "qcm"],
   },
 
-  {
-    kind: "template",
-    id: "cm2_angle_reconnaitre_tpl_1_definition",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "angle",
-    microId: "angle_reconnaitre",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "Un angle a deux côtés et un sommet.",
-    tags: ["cm2", "angle", "reconnaitre", "template", "qcm", "canvas"],
-    generate: () => {
-      const angleDeg = randomChoice([35, 45, 60, 75, 110]);
-
-      return {
-        text: "Un angle est formé par...",
-        format: "qcm",
-        choices: shuffle([
-          "deux demi-droites de même origine",
-          "trois droites parallèles",
-          "un cercle et un segment",
-          "deux points isolés",
-        ]),
-        expected: ["deux demi-droites de même origine"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un angle mesure l’ouverture entre deux demi-droites.",
-          "On repère les deux côtés et leur origine commune.",
-          "Deux demi-droites de même origine forment un angle.",
-          "Un angle est formé par deux demi-droites de même origine."
-        ),
-        canvas: {
-          kind: "angle",
-          angle: {
-            angleDeg,
-            labels: {
-              vertex: "O",
-              left: "A",
-              right: "B",
-              angle: "",
-            },
-            display: {
-              showLabels: true,
-              showMeasure: false,
-              showArc: true,
-              showRightAngle: angleDeg === 90,
-              placeholder: "",
-            },
-          },
-        },
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_angle_reconnaitre_tpl_2_sommet",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "angle",
-    microId: "angle_reconnaitre",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le sommet est le point commun aux deux côtés.",
-    tags: ["cm2", "angle", "reconnaitre", "sommet", "template", "canvas"],
-    generate: () => {
-      const vertex = randomChoice(["O", "S", "A"]);
-      const angleDeg = randomChoice([40, 65, 80, 100, 120]);
-
-      return {
-        text: `Sur la figure, le sommet de l’angle est le point ${vertex}. Vrai ou faux ?`,
-        format: "qcm",
-        choices: ["vrai", "faux"],
-        expected: ["vrai"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Le sommet d’un angle est le point commun aux deux côtés.",
-          "On regarde le point d’où partent les deux demi-droites.",
-          `Sur la figure, les deux côtés partent du point ${vertex}.`,
-          `Le sommet est bien le point ${vertex}.`
-        ),
-        canvas: {
-          kind: "angle",
-          angle: {
-            angleDeg,
-            labels: {
-              vertex,
-              left: "B",
-              right: "C",
-              angle: "",
-            },
-            display: {
-              showLabels: true,
-              showMeasure: false,
-              showArc: true,
-              showRightAngle: false,
-              placeholder: "",
-            },
-          },
-        },
-      };
-    },
-  },
+  // Les gabarits de cette micro : angle-reconnaitre.bank.ts (05/11/2026).
+  ...anglesReconnaitre("cm2"),
 
   // ============================================================
   // ANGLE_DROIT
