@@ -535,8 +535,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Lire et interpréter des données sous forme de données brutes, de tableau, de diagramme (diagramme en bâtons, diagramme circulaire, histogramme).",
     page: 133,
-    micros: ["stat_lire_tableau", "stat_lire_graphique"],
-    note: "⚠️ Diagramme en barres et diagramme circulaire seulement. L'HISTOGRAMME n'a aucun item — et ce n'est pas un synonyme du diagramme en bâtons.",
+    micros: ["stat_lire_tableau", "stat_lire_graphique", "stat_histogramme_lire"],
+    note: "05/11/2026 : histogramme ajouté (`stat_histogramme_lire`), distinct du diagramme en bâtons.",
   },
   {
     id: "4e-B-donnees-6",

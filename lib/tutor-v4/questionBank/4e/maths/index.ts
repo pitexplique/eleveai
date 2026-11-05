@@ -32,6 +32,7 @@ import { volumesBank } from "./volumes.bank";
 import { volumesPyramideConeBank } from "./volumes-pyramide-cone.bank";
 import { thalesBank } from "./thales.bank";
 import { statistiquesBank} from "./statistiques.bank"
+import { statHistogrammeBank } from "./stat-histogramme.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
 import { cosinusBank } from "./cosinus.bank";
 import { puissancesBank } from "./puissances.bank";
@@ -85,6 +86,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...fonctionsBank,
   ...thalesBank,
   ...statistiquesBank,
+  ...statHistogrammeBank,
   ...algorithmiqueBank,
   ...cosinusBank
 

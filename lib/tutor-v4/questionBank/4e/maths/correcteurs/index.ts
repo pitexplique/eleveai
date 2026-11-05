@@ -31,6 +31,7 @@ import { CORRECTEURS as triangles } from "./triangles";
 import { CORRECTEURS as visionEspace } from "./vision-espace";
 import { CORRECTEURS as volumes } from "./volumes";
 import { CORRECTEURS as volumesPyramideCone } from "./volumes-pyramide-cone";
+import { CORRECTEURS as statHistogramme } from "./stat-histogramme";
 
 // Un fichier par banque (proportionnalité le 07/10, le reste à partir du 08/10).
 export const CORRECTEURS_4E: CorrecteursMaths = {
@@ -66,4 +67,5 @@ export const CORRECTEURS_4E: CorrecteursMaths = {
   ...visionEspace,
   ...volumes,
   ...volumesPyramideCone,
+  ...statHistogramme,
 };

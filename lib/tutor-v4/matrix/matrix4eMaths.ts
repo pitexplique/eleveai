@@ -507,6 +507,7 @@ const supportLinks: Record<string, string[]> = {
 // STATISTIQUES
 // =========================
   stat_lire_graphique: ["stat_lire_tableau"],
+  stat_histogramme_lire: ["stat_lire_graphique", "stat_effectif"],
   stat_effectif: ["stat_lire_tableau"],
   stat_frequence: ["stat_effectif"],
   // ⭐ Ajouté le 28/08 avec la scission : le défi de la notion neuve s'appuie

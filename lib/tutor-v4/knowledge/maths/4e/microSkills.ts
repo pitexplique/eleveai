@@ -1404,6 +1404,13 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["stat_lire_tableau"],
   },
   {
+    // 05/11/2026 : trou du programme (BO 2020, p. 133).
+    id: "stat_histogramme_lire",
+    label: "Lire un histogramme : effectif d’une classe, classe modale",
+    notionId: "stat_donnee",
+    prerequis: ["stat_lire_graphique"],
+  },
+  {
     id: "stat_effectif",
     label: "Déterminer un effectif",
     notionId: "stat_donnee",
