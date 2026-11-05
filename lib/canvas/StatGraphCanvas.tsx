@@ -80,6 +80,9 @@ export default function StatGraphCanvas({ figure }: Props) {
 
   const width = figure.size?.width ?? 320;
   const height = figure.size?.height ?? 220;
+  // Le cadre affiche environ 300 px de large au téléphone : une figure plus large
+  // que ça rétrécit ses chiffres (9 px à l'écran pour une figure de 360, 05/11/2026).
+  const f = Math.max(1, width / 300);
 
   const data = figure.data ?? [];
   const max = Math.max(1, ...data.map((d) => d.value));
@@ -106,7 +109,7 @@ export default function StatGraphCanvas({ figure }: Props) {
   const usableHeight = axisBottom - topPadding;
   // Les chiffres des graduations ont besoin de place à gauche.
   const longueur = Math.max(1, ...graduations.map((g) => fr(g).length));
-  const axisLeft = showAxis ? 16 + longueur * 7 : 28;
+  const axisLeft = showAxis ? 16 * f + longueur * 7 * f : 28 * f;
   const plotLeft = axisLeft + 6;
   const plotWidth = width - 12 - plotLeft;
 
@@ -114,13 +117,18 @@ export default function StatGraphCanvas({ figure }: Props) {
     axisBottom - (Math.max(0, Math.min(v, yTop) - yMin) / Math.max(1e-9, yTop - yMin)) * usableHeight;
 
   const slot = plotWidth / Math.max(1, data.length);
+  // Une grande borne (« 2 250 ») centrée sur le bord du graphique sortait du cadre.
+  const dansLeCadre = (x: number, borne: number) => {
+    const demi = (fr(borne).length * 7.2 * f) / 2;
+    return Math.max(demi, Math.min(x, width - demi));
+  };
   const valueText = (x: number, y: number, v: number, dy = 7) =>
     showValues ? (
       <text
         x={x}
         y={y - dy}
         textAnchor="middle"
-        fontSize="13"
+        fontSize={13 * f}
         fontWeight="900"
         fill="#0f172a"
         stroke="white"
@@ -132,7 +140,7 @@ export default function StatGraphCanvas({ figure }: Props) {
     ) : null;
   const labelText = (x: number, d: string) =>
     showLabels ? (
-      <text x={x} y={axisBottom + 20} textAnchor="middle" fontSize="12" fontWeight="800" fill="#0f172a">
+      <text x={x} y={axisBottom + 20} textAnchor="middle" fontSize={12 * f} fontWeight="800" fill="#0f172a">
         {d}
       </text>
     ) : null;
@@ -157,7 +165,7 @@ export default function StatGraphCanvas({ figure }: Props) {
             <g key={`g-${g}`}>
               <line x1={axisLeft} y1={yOf(g)} x2={width - 12} y2={yOf(g)} stroke="#e2e8f0" strokeWidth={1} />
               <line x1={axisLeft - 4} y1={yOf(g)} x2={axisLeft} y2={yOf(g)} stroke="#0f172a" strokeWidth={1.5} />
-              <text x={axisLeft - 7} y={yOf(g) + 4} textAnchor="end" fontSize="12" fontWeight="700" fill="#334155">
+              <text x={axisLeft - 7} y={yOf(g) + 4 * f} textAnchor="end" fontSize={12 * f} fontWeight="700" fill="#334155">
                 {fr(g)}
               </text>
             </g>
@@ -168,7 +176,7 @@ export default function StatGraphCanvas({ figure }: Props) {
             <line x1={axisLeft} y1={axisBottom} x2={width - 12} y2={axisBottom} stroke="#0f172a" strokeWidth={2} />
             <line x1={axisLeft} y1={axisBottom} x2={axisLeft} y2={topPadding - 6} stroke="#0f172a" strokeWidth={2} />
             {axeY ? (
-              <text x={axisLeft - 4} y={14} textAnchor="start" fontSize="11" fontWeight="700" fill="#475569">
+              <text x={axisLeft - 4} y={14} textAnchor="start" fontSize={11 * f} fontWeight="700" fill="#475569">
                 {axeY}
               </text>
             ) : null}
@@ -223,11 +231,11 @@ export default function StatGraphCanvas({ figure }: Props) {
                 {showLabels && bornes && bornes.length === data.length + 1 ? (
                   <>
                     {i === 0 ? (
-                      <text x={x} y={axisBottom + 18} textAnchor="middle" fontSize="12" fontWeight="800" fill="#0f172a">
+                      <text x={dansLeCadre(x, bornes[0])} y={axisBottom + 18} textAnchor="middle" fontSize={12 * f} fontWeight="800" fill="#0f172a">
                         {fr(bornes[0])}
                       </text>
                     ) : null}
-                    <text x={x + slot} y={axisBottom + 18} textAnchor="middle" fontSize="12" fontWeight="800" fill="#0f172a">
+                    <text x={dansLeCadre(x + slot, bornes[i + 1])} y={axisBottom + 18} textAnchor="middle" fontSize={12 * f} fontWeight="800" fill="#0f172a">
                       {fr(bornes[i + 1])}
                     </text>
                   </>
@@ -346,7 +354,7 @@ export default function StatGraphCanvas({ figure }: Props) {
                             y={labelPoint.y}
                             textAnchor={ancre}
                             dominantBaseline="middle"
-                            fontSize="12"
+                            fontSize={12 * f}
                             fontWeight="900"
                             fill="#0f172a"
                             stroke="white"
@@ -368,7 +376,7 @@ export default function StatGraphCanvas({ figure }: Props) {
                   })}
 
                   {showValues && !enPourcent && (
-                    <text x={cx} y={height - 8} textAnchor="middle" fontSize="12" fontWeight="800" fill="#475569">
+                    <text x={cx} y={height - 8} textAnchor="middle" fontSize={12 * f} fontWeight="800" fill="#475569">
                       total : {fr(total)}
                     </text>
                   )}

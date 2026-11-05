@@ -59,6 +59,7 @@ function espacesInsecables(texte: string): string {
             .replace(/« /g, `«${NBSP}`)
             .replace(/(\d) (?=\d{3}(?!\d))/g, `$1${NBSP}`)
             .replace(AVANT_UNITE, `$1${NBSP}`)
+            .replace(/(\d h) (?=\d)/g, `$1${NBSP}`) // « 2 h » puis « 30 » à la ligne
             .replace(/\b(angle|point|dessin|segment|droite|place|découpe|horloge) ([A-Z0-9])(?![\wà-ÿ])/g, `$1${NBSP}$2`),
     )
     .join("");
