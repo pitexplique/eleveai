@@ -494,6 +494,9 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "aire_surface",
     prerequis: ["aire_composer"],
   },
+  /* Hors du programme français, formules non exigées (05/11/2026) : masquées dans micros-masquees.ts, gardées pour /pays. */
+  { id: "aire_losange", label: "Calculer l’aire d’un losange avec ses diagonales", notionId: "aire_surface", prerequis: ["aire_triangle"] },
+  { id: "aire_trapeze", label: "Calculer l’aire d’un trapèze", notionId: "aire_surface", prerequis: ["aire_triangle", "aire_parallelogramme"] },
 
 /* =========================
    CONVERSIONS ET DURÉES

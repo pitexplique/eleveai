@@ -241,4 +241,11 @@ export const notions: NotionSource[] = [
     prerequis: ["aire_surface"],
     levels: [1, 2, 3],
   },
+  {
+    id: "relations_metriques",
+    label: "Relations métriques du triangle rectangle",
+    boId: "BO3G1",
+    prerequis: ["pythagore_theoreme"],
+    levels: [1, 2, 3],
+  },
 ];

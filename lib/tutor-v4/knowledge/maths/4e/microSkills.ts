@@ -1725,4 +1725,9 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "triangle_points_remarquables",
     prerequis: ["triangle_droites"],
   },
+  /* Hors du programme français (05/11/2026) : masquées dans micros-masquees.ts, gardées pour /pays. */
+  { id: "arc_longueur", label: "Calculer la longueur d’un arc de cercle par proportionnalité à l’angle", notionId: "arcs_secteurs", prerequis: [] },
+  { id: "secteur_aire", label: "Calculer l’aire d’un secteur de disque par proportionnalité à l’angle", notionId: "arcs_secteurs", prerequis: ["arc_longueur"] },
+  { id: "distance_point_droite", label: "Trouver la distance d’un point à une droite", notionId: "distance_droite", prerequis: [] },
+  { id: "distance_paralleles", label: "Trouver la distance entre deux droites parallèles", notionId: "distance_droite", prerequis: ["distance_point_droite"] },
 ];

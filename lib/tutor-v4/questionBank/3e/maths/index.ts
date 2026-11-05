@@ -5,6 +5,7 @@
  */
 
 import { anglesCercleBank } from "./angles-cercle.bank";
+import { relationsMetriquesBank } from "./relations-metriques.bank";
 import { airesSolidesBank } from "./aires-solides.bank";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
@@ -87,6 +88,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...volumesPyramideConeBank,
   ...airesSolidesBank,
   ...anglesCercleBank,
+  ...relationsMetriquesBank,
   ...sectionsSolidesBank,
 
   ...probabilitesBank,

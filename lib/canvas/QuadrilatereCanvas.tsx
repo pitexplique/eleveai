@@ -429,8 +429,9 @@ export default function QuadrilatereCanvas({ figure }: Props) {
             {sideBC && <SideLabel point={mBC} label={sideBC} />}
             {sideCD && <SideLabel point={mCD} label={sideCD} />}
             {sideDA && <SideLabel point={mDA} label={sideDA} />}
-            {showDiagonals && sideAC && <SideLabel point={mAC} label={sideAC} />}
-            {showDiagonals && sideBD && <SideLabel point={mBD} label={sideBD} />}
+            {/* Deux légendes de diagonales : le même milieu les superposait, chacune va sur sa moitié. */}
+            {showDiagonals && sideAC && <SideLabel point={sideBD ? mid(A, mAC) : mAC} label={sideAC} />}
+            {showDiagonals && sideBD && <SideLabel point={sideAC ? mid(B, mBD) : mBD} label={sideBD} />}
           </>
         )}
 

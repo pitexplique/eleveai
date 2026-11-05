@@ -6,6 +6,7 @@ import type { CorrecteursMaths } from "@/lib/tutor-v4/questionBank/4e/maths/corr
 import { CORRECTEURS as volumesPyramideCone } from "./volumes-pyramide-cone";
 import { CORRECTEURS as airesSolides } from "./aires-solides";
 import { CORRECTEURS as anglesCercle } from "./angles-cercle";
+import { CORRECTEURS as relationsMetriques } from "./relations-metriques";
 import { CORRECTEURS as equationsCarre } from "./equations-carre";
 import { CORRECTEURS as litteralDemontrer } from "./litteral-demontrer";
 import { CORRECTEURS as affineTracer } from "./affine-tracer";
@@ -15,6 +16,7 @@ export const CORRECTEURS_3E: CorrecteursMaths = {
   ...volumesPyramideCone,
   ...airesSolides,
   ...anglesCercle,
+  ...relationsMetriques,
   ...equationsCarre,
   ...litteralDemontrer,
   ...affineTracer,

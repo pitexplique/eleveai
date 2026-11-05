@@ -500,4 +500,18 @@ export const notions: NotionSource[] = [
     prerequis: ["triangle_figure"],
     levels: [1, 2, 3],
   },
+  {
+    id: "arcs_secteurs",
+    label: "Longueur d’un arc et aire d’un secteur",
+    boId: "BO4G1",
+    prerequis: ["prop_proportionnalite", "aire_perimetre"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "distance_droite",
+    label: "Distance d’un point à une droite, de deux parallèles",
+    boId: "BO4G1",
+    prerequis: ["triangle_figure", "pythagore_theoreme"],
+    levels: [1, 2, 3],
+  },
 ];

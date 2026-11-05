@@ -1064,4 +1064,6 @@ export const microSkills: MicroSkillSource[] = [
   { id: "angle_inscrit_centre", label: "Relier un angle inscrit et un angle au centre", notionId: "angles_cercle", prerequis: [] },
   { id: "angles_inscrits_meme_arc", label: "Utiliser deux angles inscrits interceptant le même arc", notionId: "angles_cercle", prerequis: ["angle_inscrit_centre"] },
   { id: "triangle_demi_cercle", label: "Utiliser un triangle inscrit dans un demi-cercle", notionId: "angles_cercle", prerequis: ["angle_inscrit_centre", "pythagore_calculer_hypotenuse"] },
+  { id: "metrique_produit", label: "Utiliser AH × BC = AB × AC dans un triangle rectangle", notionId: "relations_metriques", prerequis: ["pythagore_calculer_hypotenuse"] },
+  { id: "metrique_carre", label: "Utiliser AH² = HB × HC et AB² = BH × BC dans un triangle rectangle", notionId: "relations_metriques", prerequis: ["metrique_produit"] },
 ];

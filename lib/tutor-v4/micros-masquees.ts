@@ -55,16 +55,33 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       "polygone_regulier_angles",
       "polygone_regulier_aire",
       ]),
+      /* Aire du losange et du trapèze : formules non exigées par le programme français. */
+      ...lot("hors_france", "Suisse, Belgique, Sénégal, Côte d'Ivoire", [
+      "aire_losange",
+      "aire_trapeze",
+      ]),
     },
     /* Médianes, centre de gravité, cercle inscrit, orthocentre : absents du BO, qui ne cite
        que hauteurs et médiatrices (la hauteur reste visible, `triangle_droites`). */
-    "4e": lot("hors_france", "Québec, Maroc, Suisse, Belgique, Sénégal, Côte d'Ivoire", [
+    "4e": {
+      ...lot("hors_france", "Québec, Maroc, Suisse, Belgique, Sénégal, Côte d'Ivoire", [
       "mediane_triangle",
       "centre_gravite",
       "bissectrice_equidistance",
       "cercle_inscrit",
       "orthocentre",
-    ]),
+      ]),
+      /* Arc et secteur par l'angle : l'arc ne revient en France qu'en 1re spé, en radians. */
+      ...lot("hors_france", "Québec, Suisse, Sénégal, Côte d'Ivoire", [
+      "arc_longueur",
+      "secteur_aire",
+      ]),
+      /* Distance à une droite : ni dans le BO de 6e (`6e/bo-objectifs.ts`), ni au cycle 4. */
+      ...lot("hors_france", "Maroc, Belgique, Sénégal, Côte d'Ivoire", [
+      "distance_point_droite",
+      "distance_paralleles",
+      ]),
+    },
     /* Classe modale, centre, moyenne par les centres, effectifs cumulés : Sénégal, Côte
        d'Ivoire, Belgique, Québec. Regrouper en classes reste visible (BO 2020, p. 133). */
     "3e": {
@@ -83,6 +100,11 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       "angle_inscrit_centre",
       "angles_inscrits_meme_arc",
       "triangle_demi_cercle",
+      ]),
+      /* Relations métriques du triangle rectangle : absentes du BO. */
+      ...lot("hors_france", "Québec, Maroc, Sénégal, Côte d'Ivoire", [
+      "metrique_produit",
+      "metrique_carre",
       ]),
     },
     /* Annexe du programme de seconde, BO n°14 du 02/04/2026, lue le 05/11/2026. */

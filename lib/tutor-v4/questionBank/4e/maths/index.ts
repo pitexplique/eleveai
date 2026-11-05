@@ -13,6 +13,8 @@
  */
 
 import { pointsRemarquablesBank } from "./points-remarquables.bank";
+import { arcsSecteursBank } from "./arcs-secteurs.bank";
+import { distanceDroiteBank } from "./distance-droite.bank";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { expressionsLitteralesBank } from "./expressions-litterales.bank";
@@ -84,6 +86,8 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...volumesBank,
   ...volumesPyramideConeBank,
   ...pointsRemarquablesBank,
+  ...arcsSecteursBank,
+  ...distanceDroiteBank,
   ...grandeursBank,
   ...fonctionsBank,
   ...thalesBank,

@@ -18,6 +18,7 @@ import { CORRECTEURS as triangles } from "./triangles";
 import { CORRECTEURS as valeursApprochees } from "./valeurs-approchees";
 import { CORRECTEURS as volumes } from "./volumes";
 import { CORRECTEURS as polygonesReguliers } from "./polygones-reguliers";
+import { CORRECTEURS as airesLosangeTrapeze } from "./aires-losange-trapeze";
 
 // Un fichier par banque, écrits en parallèle à partir du 09/10/2026.
 export const CORRECTEURS_5E: CorrecteursMaths = {
@@ -40,4 +41,5 @@ export const CORRECTEURS_5E: CorrecteursMaths = {
   ...valeursApprochees,
   ...volumes,
   ...polygonesReguliers,
+  ...airesLosangeTrapeze,
 };
