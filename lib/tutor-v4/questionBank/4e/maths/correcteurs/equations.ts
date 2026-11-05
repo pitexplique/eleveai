@@ -444,6 +444,8 @@ export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
   equation_resoudre_simple_tpl_3: RESOUDRE,
   equation_resoudre_simple_tpl_4: RESOUDRE,
   equation_resoudre_simple_tpl_5: RESOUDRE,
+  equation_resoudre_simple_tpl_6: RESOUDRE,
+  equation_resoudre_simple_tpl_7: RESOUDRE,
   equation_resoudre_reduction_tpl_1: RESOUDRE,
   equation_resoudre_reduction_tpl_2: RESOUDRE,
   equation_resoudre_reduction_tpl_3: RESOUDRE,

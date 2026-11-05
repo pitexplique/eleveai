@@ -626,9 +626,10 @@ function situationSimple(): Q {
   return { text, format: "short", expected: avecUnite(attendu(f.sol), u), comparator: "number_equal", explanation: explRes(L, f) };
 }
 
+// ⛔ 05/11 (règle collège du 03/11) : ★1-★2 = le geste nu ; les situations ci-dessus
+// sont servies à ★3 (gabarits `equation_resoudre_simple_tpl_6` et `_7`).
 function genSimple(etoile: 1 | 2): Q {
   if (etoile === 1) return questionResoudre(SIMPLE_1);
-  if (Math.random() < 0.3) return situationSimple();
   return questionResoudre([...SIMPLE_1, ...SIMPLE_2, ...SIMPLE_2]);
 }
 
@@ -642,7 +643,6 @@ function uneEquation(L: string): string {
 
 function genReconnaitre(etoile: 1 | 2): Q {
   const L = lettre();
-  const q = randomChoice(PRENOMS);
   const genre = etoile === 1 ? randomChoice(["laquelle", "inconnue"]) : randomChoice(["oui_non", "oui_non", "membre", "coefficient"]);
 
   if (genre === "laquelle") {
@@ -690,7 +690,6 @@ function genReconnaitre(etoile: 1 | 2): Q {
       `Dans l’équation $${eq}$, quelle est l’inconnue ?`,
       `Quelle est l’inconnue de l’équation $${eq}$ ?`,
       `On veut résoudre $${eq}$. Quelle lettre désigne l’inconnue ?`,
-      `${q.nom} doit résoudre $${eq}$. Quelle est l’inconnue ?`,
     ];
     return {
       text: randomChoice(tours),
@@ -717,7 +716,6 @@ function genReconnaitre(etoile: 1 | 2): Q {
       { t: `L’écriture $${ecriture}$ est-elle une équation ?`, rep: oui },
       { t: `$${ecriture}$ : est-ce une équation ?`, rep: oui },
       { t: `Peut-on dire que $${ecriture}$ est une équation ?`, rep: oui },
-      { t: `${q.nom} affirme que $${ecriture}$ est une équation. A-t-${il(q)} raison ?`, rep: oui },
     ];
     const tr = randomChoice(tours);
     const raison =
@@ -850,6 +848,9 @@ function traduction(etoile: 2 | 3, L: string): Traduction {
       const bb = b + 10, c = randomInt(1, bb - 1);
       return { phrase: `${bb} moins $${L}$ ${v} ${c}`, eq: `${bb} - ${L} = ${c}`, faux: [`${L} - ${bb} = ${c}`, `${bb} + ${L} = ${c}`, `${bb}${L} = ${c}`] };
     },
+  ];
+  const k3: (() => Traduction)[] = [
+    // ⛔ 05/11 (règle collège du 03/11) : ces trois situations étaient servies à ★2.
     () => {
       const c = s + b + 2;
       return {
@@ -871,8 +872,6 @@ function traduction(etoile: 2 | 3, L: string): Traduction {
         eq: `${L} + ${b} = ${c}`, faux: [`${L} - ${b} = ${c}`, `${b}${L} = ${c}`, `${L} = ${b} + ${c}`], contexte: true,
       };
     },
-  ];
-  const k3: (() => Traduction)[] = [
     () => {
       const c = a * (s + b);
       const w = MULT[a] ? `${MULT[a]} de la somme de $${L}$ et de ${b}` : `${a} fois la somme de $${L}$ et de ${b}`;
@@ -1060,7 +1059,8 @@ function genVerifier(etoile: 2 | 3): Q {
     `$${L} = ${nb(k)}$ est-il solution de $${f.eq}$ ?`,
     `L’égalité $${f.eq}$ est-elle vraie pour $${L} = ${nb(k)}$ ?`,
     `On remplace $${L}$ par $${nb(k)}$ dans $${f.eq}$. L’égalité est-elle vérifiée ?`,
-    `${q.nom} affirme que $${nb(k)}$ est solution de $${f.eq}$. A-t-${il(q)} raison ?`,
+    // ⛔ 05/11 : pas de prénom à ★2 (règle collège du 03/11).
+    ...(etoile >= 3 ? [`${q.nom} affirme que $${nb(k)}$ est solution de $${f.eq}$. A-t-${il(q)} raison ?`] : []),
     `Vérifie si $${nb(k)}$ est une solution de l’équation $${f.eq}$.`,
   ];
   return {
@@ -2370,10 +2370,17 @@ export const equationsBank: TutorBankItemV4[] = [
     microId: "equation_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce qu’est une équation et ce que signifie la résoudre.",
-    format: "open",
-    expected: ["égalité", "inconnue", "valeur"],
-    comparator: "contains_keyword",
+    // ⛔ 05/11 : ex-question ouverte (plus aucune « open » depuis le 27/10) → QCM.
+    text: "Une équation, c’est…",
+    format: "qcm",
+    choices: [
+      "une égalité avec une inconnue",
+      "une égalité sans aucune lettre",
+      "une expression sans signe =",
+      "un calcul avec un seul résultat",
+    ],
+    expected: ["une égalité avec une inconnue"],
+    comparator: "mcq_exact",
     hint: "Pense au signe = et à l’inconnue.",
     explanation:
       "Définition : une équation est une égalité contenant une inconnue.\n\n" +
@@ -2635,6 +2642,33 @@ export const equationsBank: TutorBankItemV4[] = [
     hint: "Un coefficient : on divise ; un nombre ajouté : on le soustrait.",
     tags: ["equation", "resolution", "template"],
     generate: () => genSimple(2),
+  },
+  // ⛔ 05/11 : les situations, ex-★2 (règle collège : le contexte à partir de ★3).
+  {
+    kind: "template",
+    id: "equation_resoudre_simple_tpl_6",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "equation_resolution",
+    microId: "equation_resoudre_simple",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L’équation est écrite dans l’énoncé : résous-la, puis réponds à la question.",
+    tags: ["equation", "resolution", "template", "contexte"],
+    generate: () => situationSimple(),
+  },
+  {
+    kind: "template",
+    id: "equation_resoudre_simple_tpl_7",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "equation_resolution",
+    microId: "equation_resoudre_simple",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Fais l’opération inverse des deux côtés.",
+    tags: ["equation", "resolution", "template", "contexte"],
+    generate: () => situationSimple(),
   },
   {
     kind: "template",
@@ -3286,19 +3320,26 @@ export const equationsBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "equation_resolution",
     microId: "equation_defi",
-    difficulty: 5,
+    difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi on fait la même opération des deux côtés d’une équation.",
-    format: "open",
-    expected: ["égalité", "deux côtés", "équilibre"],
-    comparator: "contains_keyword",
+    // ⛔ 05/11 : ex-question ouverte (plus aucune « open » depuis le 27/10) → QCM.
+    text: "Pourquoi fait-on la même opération des deux côtés d’une équation ?",
+    format: "qcm",
+    choices: [
+      "pour garder l’égalité vraie",
+      "pour effacer le signe =",
+      "pour changer la solution",
+      "pour ajouter une inconnue",
+    ],
+    expected: ["pour garder l’égalité vraie"],
+    comparator: "mcq_exact",
     hint: "Pense à une balance.",
     explanation:
       "Définition : une équation est une égalité, comme une balance équilibrée.\n\n" +
       "Méthode : pour garder l’égalité vraie, on fait la même opération des deux côtés.\n\n" +
       "Calcul : ajouter ou retirer la même chose des deux côtés conserve l’équilibre.\n\n" +
       "Conclusion : on agit identiquement des deux côtés pour préserver l’égalité.",
-    tags: ["equation", "defi", "open"],
+    tags: ["equation", "defi", "qcm"],
   },
   {
     kind: "fixed",
