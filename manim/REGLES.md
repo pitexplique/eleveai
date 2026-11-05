@@ -3,13 +3,18 @@
 Une notion = une banque (source de vérité) = une fiche = **une vidéo**.
 Cette procédure est la jumelle de la procédure fiches : même point de départ (la banque), même nommage (le notionId), même standard qualité (montrer, pas raconter).
 
-## ⛔ La phrase de fin (Frédéric, 19/10/2026, depuis la nouvelle page d'accueil)
+## ⛔ La phrase de fin (Frédéric, 19/10/2026 ; pouce, commentaire et cloche ajoutés le 05/11/2026)
 
 Toute NOUVELLE voix finit par la clé `…-abonne` exactement ainsi :
 
-> « Entraîne-toi sur éleveai point f r. Et abonne-toi ! »
+- **Paysage :** « Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche ! »
+- **Short :** « Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche ! » (le commentaire est déjà demandé juste avant, par la question « Réponds en commentaire ».)
 
-L'écran de fin écrit ce que dit la voix : « Entraîne-toi sur » + « eleveai.fr » (encadré), puis « Abonne-toi ! » + « @eleveai974 ». Plus de « va sur le coach » : l'accueil mène à tout (exercices, vidéos, coach). Les vidéos rendues avant le 19/10 gardent leur ancienne fin (pas de re-rendu pour ça).
+Pas de « cœur » : sur YouTube, le spectateur ne peut pas en mettre, c'est le créateur qui en pose sur un commentaire.
+
+L'écran de fin écrit ce que dit la voix : « Entraîne-toi sur » + « eleveai.fr » (encadré), « Abonne-toi ! » + « @eleveai974 », et les autres gestes écrits en plus (paysage : « Un pouce · Un commentaire · La cloche » ; short : « Un pouce · La cloche »), sans rien rogner. Plus de « va sur le coach » : l'accueil mène à tout (exercices, vidéos, coach). Les vidéos déjà rendues gardent leur fin (pas de re-rendu pour ça).
+
+⚠️ Le lecteur du site coupe 3,6 s avant la fin (`COUPE_FIN`, `components/LecteurVideo.tsx`) pour que les élèves n'entendent pas « abonne-toi ». Cette fin est plus longue : à la première vidéo rendue avec elle, mesurer la durée de la phrase et faire couper le lecteur au bon endroit pour ces vidéos, sans changer la coupe des anciennes.
 
 ---
 
@@ -218,7 +223,7 @@ Dans toutes les vidéos (paysages et shorts), l'écran « Ce que tu as appris »
 
 ## ⛔ RIEN NE DOIT ÊTRE ROGNÉ (Frédéric, 24/10/2026 : « relis bien tes écrans pour ne pas rogner »)
 Marge d'au moins 3 % de la largeur sur les QUATRE côtés pour tout ce qui est dessiné : cartes des figures (leurs coins arrondis compris), textes, boutons des questions, Ti-Margo. Contrôle obligatoire après chaque rendu : `python scripts/verifier-bords-video.py <video.mp4>` doit afficher « 0 instants qui touchent un bord » (le fondu noir ne compte pas). Le premier épisode lycée avait la carte du graphique collée au bord gauche (coins coupés).
-L'écran de fin « Entraîne-toi sur eleveai.fr » est PARFAIT (24/10) : on n'y touche pas.
+L'écran de fin « Entraîne-toi sur eleveai.fr » est PARFAIT (24/10) : on garde son style, on y ajoute seulement les gestes de la phrase de fin du 05/11 (voir en tête de ce fichier).
 
 ## ⛔ SYNCHRO VOIX / ÉCRIT : 0 s D'AVANCE (Frédéric, 24/10/2026 : « pour plus tard, ne dépasse pas 0 »)
 - Un nombre, une étiquette ou un mot n'apparaît JAMAIS avant que la voix le dise : avance tolérée = **0 s**. Les écarts relevés le 24/10 (étiquettes ~1 s en avance dans le lot J2) ne doivent plus exister.
