@@ -83,9 +83,8 @@ export const SENEGAL_6E: ProgrammePays = {
     {
       code: "AN 5", domaine: AN,
       texte: "Division des décimaux arithmétiques : quotient entier, quotient décimal, division par un décimal.",
-      couverture: "partielle",
-      micros: m("6e", "entier_division_posee", "entier_division_mentale", "decimal_diviser_par_entier"),
-      note: "Pas de micro « diviser par un nombre décimal » (12,6 ÷ 0,3 : on multiplie les deux nombres par 10).",
+      couverture: "complete",
+      micros: m("6e", "entier_division_posee", "entier_division_mentale", "decimal_diviser_par_entier", "decimal_diviser_par_decimal"),
     },
     {
       code: "AN 6", domaine: AN,

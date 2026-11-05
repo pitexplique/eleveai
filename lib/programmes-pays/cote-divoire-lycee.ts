@@ -65,7 +65,7 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
         ...m("premiere-spe", "sd_canonique", "sd_completion_carre", "sd_forme_factorisee"),
         ...m("seconde", "devfac_factoriser_identite", "signes_produit", "poly_racine_factoriser", "poly_division", "poly_horner"),
       ],
-      note: "Manquent les fractions rationnelles.",
+      note: "Manquent les coefficients indéterminés et les fractions rationnelles.",
     },
     {
       code: "C1-L3", domaine: CALC,
@@ -119,16 +119,15 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
     {
       code: "C3-L2", domaine: GPLAN,
       texte: "Produit scalaire : définition, carré scalaire, interprétation géométrique (projeté), règles de calcul, expression en base orthonormée, orthogonalité, Al Kashi, relations métriques du triangle rectangle, angle de deux vecteurs, cercle de diamètre donné.",
-      couverture: "partielle",
-      micros: m("premiere-spe", "ps_projection", "ps_norme_angle", "ps_coordonnees", "ps_proprietes", "ps_orthogonalite", "ps_alkashi", "ps_angle_longueur", "ps_ma_mb", "gr_cercle"),
-      note: "Chez nous en 1re spécialité ; manquent les relations métriques du triangle rectangle.",
+      couverture: "complete",
+      micros: [...m("premiere-spe", "ps_projection", "ps_norme_angle", "ps_coordonnees", "ps_proprietes", "ps_orthogonalite", "ps_alkashi", "ps_angle_longueur", "ps_ma_mb", "gr_cercle"), ...m("3e", "metrique_produit", "metrique_carre")],
     },
     {
       code: "C3-L3", domaine: GPLAN,
       texte: "Angles inscrits : angle au centre, angle inscrit défini par une corde et une demi-tangente, arc capable ; aire d'un triangle (½ ab sin C), théorème des sinus.",
       couverture: "partielle",
-      micros: m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"),
-      note: "Angle inscrit et angle au centre couverts ; manquent la demi-tangente, l'arc capable, l'aire ½ ab sin C et le théorème des sinus.",
+      micros: [...m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"), ...m("premiere-spe", "trig_loi_sinus", "trig_aire_heron")],
+      note: "Manquent la demi-tangente et l'arc capable.",
     },
     {
       code: "C3-L4", domaine: GPLAN,
@@ -195,16 +194,15 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
     {
       code: "C1-L2", domaine: CALC,
       texte: "Systèmes d'équations linéaires dans ℝ² (déterminant, existence et unicité) et dans ℝ³ (substitution, pivot de Gauss) ; mise en équation de situations concrètes.",
-      couverture: "partielle",
-      micros: m("seconde", "droite_systeme", "systeme_determinant", "systeme_cramer"),
-      note: "Manquent les systèmes 3 × 3 (pivot de Gauss).",
+      couverture: "complete",
+      micros: [...m("seconde", "droite_systeme", "systeme_determinant", "systeme_cramer"), ...m("terminale-spe", "systeme_3x3_gauss")],
     },
     {
       code: "C1-L3", domaine: FONC,
       texte: "Généralités sur les fonctions : restriction, application injective, surjective, bijective et réciproque, comparaison de fonctions, somme, produit, quotient, composée ; fonctions associées f(x − a) + b, f(−x), −f(x), |f(x)| et leurs courbes (translations, symétries).",
       couverture: "partielle",
-      micros: [...m("terminale-spe", "reciproque_bijection", "reciproque_expression", "reciproque_courbe"), ...m("seconde", "courbe_translation", "courbe_dilatation_abs")],
-      note: "Injective, surjective, bijective, réciproque et courbes associées couvertes ; manquent la composée et f(−x).",
+      micros: [...m("terminale-spe", "reciproque_bijection", "reciproque_expression", "reciproque_courbe", "composee_ecrire"), ...m("seconde", "courbe_translation", "courbe_dilatation_abs"), ...m("premiere-spe", "var_parite")],
+      note: "Manquent la restriction et la comparaison de fonctions ; la courbe de f(−x) n'est vue que par la symétrie des fonctions paires et impaires.",
     },
     {
       code: "C1-L4", domaine: FONC,
@@ -343,22 +341,21 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
     {
       code: "C1-L5", domaine: FONC,
       texte: "Fonctions logarithmes : ln (propriétés, dérivée, variations, courbe, limites), ln∘u et ln|u|, primitives de u′/u ; logarithme décimal et de base a ; équations xⁿ = k et qⁿ ≥ a.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("terminale-spe", "ln_definition", "ln_proprietes", "ln_deriver", "ln_equation_inequation", "ln_limite", "primitive_calculer"),
+        ...m("terminale-spe", "ln_definition", "ln_proprietes", "ln_deriver", "ln_equation_inequation", "ln_limite", "primitive_calculer", "log_base_calcul", "log_base_proprietes"),
         ...m("stmg", "logT_definition", "logT_produit", "logT_resoudre_puissance"),
       ],
-      note: "Le logarithme décimal est couvert (Terminale STMG) ; manque le logarithme de base a.",
     },
     {
       code: "C1-L6", domaine: FONC,
       texte: "Fonctions exponentielles et puissances : exp (propriétés, dérivée, limites), exp∘u, primitives de u′eᵘ ; exponentielle de base a, puissance d'exposant réel ; croissances comparées.",
       couverture: "partielle",
       micros: [
-        ...m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "expo_ratio_regles", "primitive_calculer"),
+        ...m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "expo_ratio_regles", "primitive_calculer", "exp_base_a"),
         ...m("stmg", "expoT_reconnaitre", "expoT_sens_selon_a"),
       ],
-      note: "L'exposant rationnel (x^r) et aˣ (Terminale STMG) sont couverts ; manque x^α pour α réel.",
+      note: "Manque x^α pour α réel.",
     },
     {
       code: "C1-L7", domaine: FONC,
@@ -386,12 +383,11 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
     {
       code: "C2-L1", domaine: DONN,
       texte: "Statistique à deux variables : séries marginales, nuage de points, point moyen, covariance, coefficient de corrélation linéaire, droite de régression par les moindres carrés.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("premiere", "info_nuage_lire", "info_nuage_construire", "info_point_moyen_calculer", "info_ajust_determiner", "info_ajust_equation"),
-        ...m("stmg", "statT_mc_principe"),
+        ...m("stmg", "statT_mc_principe", "stat_covariance", "stat_correlation_r", "stat_regression_formules"),
       ],
-      note: "Manquent covariance, coefficient de corrélation et formules des moindres carrés.",
     },
     {
       code: "C2-L2", domaine: ALEA,

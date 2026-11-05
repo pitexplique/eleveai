@@ -100,7 +100,8 @@ export const BELGIQUE_S1: ProgrammePays = {
     },
     {
       code: "2.1 Sv1", domaine: GRA, texte: "Périmètres et aires : périmètre du triangle équilatéral, du rectangle, du carré, du cercle ; liens entre les formules d'aire du rectangle, du parallélogramme, du trapèze, du triangle, du losange ; aire du disque.",
-      couverture: "complete", micros: [...m("6e", "aire_perimetre_rectangle", "aire_perimetre_carre", "cercle_perimetre", "aire_rectangle"), ...m("5e", "aire_triangle", "aire_parallelogramme", "aire_losange", "aire_trapeze"), ...m("3e", "aire_disque")],
+      couverture: "partielle", micros: [...m("6e", "aire_perimetre_rectangle", "aire_perimetre_carre", "cercle_perimetre", "aire_rectangle"), ...m("5e", "aire_triangle", "aire_parallelogramme", "aire_losange", "aire_trapeze"), ...m("3e", "aire_disque")],
+      note: "Les liens entre les formules ne sont entraînés que pour le losange et le rectangle.",
     },
     {
       code: "2.1 SF1", domaine: GRA, texte: "Calculer périmètres et aires : côté d'un polygone régulier de périmètre donné, périmètre du cercle, aire d'une figure simple, décomposition d'une surface complexe.",

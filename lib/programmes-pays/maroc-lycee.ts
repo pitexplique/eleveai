@@ -113,8 +113,9 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "I-4", domaine: NB,
       texte: "Polynômes : degré, égalité, somme et produit ; racine d'un polynôme, division euclidienne par x − a, factorisation.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: [...m("stmg", "fct_d2_verifier_racine", "fct_d2_factoriser_racine_connue", "fct_d3_verifier_racine", "fct_d3_racines"), ...m("seconde", "poly_racine_factoriser", "poly_division", "poly_horner")],
+      note: "Manquent la somme et le produit de polynômes ; l'égalité (identification) n'est vue qu'en passant.",
     },
     {
       code: "I-5a", domaine: NB,
@@ -133,9 +134,8 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "I-5c", domaine: NB,
       texte: "Systèmes de deux équations du premier degré à deux inconnues : combinaison linéaire, substitution, déterminant ; lien avec la position de deux droites.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: m("seconde", "droite_systeme", "droite_intersection", "systeme_determinant", "systeme_cramer"),
-      note: "Substitution et déterminant (règle de Cramer) sont couverts ; manque la combinaison linéaire.",
     },
     {
       code: "I-5d", domaine: NB,
@@ -199,9 +199,8 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "IV-2", domaine: FN,
       texte: "Fonction paire, fonction impaire, et leur interprétation graphique.",
-      couverture: "partielle",
-      micros: [...m("premiere-spe", "trig_parite"), ...m("seconde", "reference_carre", "reference_inverse", "reference_cube")],
-      note: "Seule la parité de cos, sin et des fonctions de référence est travaillée : manque la parité d'une fonction quelconque (f(−x) = ±f(x), symétrie de la courbe).",
+      couverture: "complete",
+      micros: [...m("premiere-spe", "trig_parite", "var_parite"), ...m("seconde", "reference_carre", "reference_inverse", "reference_cube")],
     },
     {
       code: "IV-3", domaine: FN,
@@ -271,8 +270,8 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "V-8", domaine: TR,
       texte: "Relations dans le triangle : loi des sinus a/sin A = b/sin B = c/sin C = 2R, aire S = ½ ab sin C, S = pr.",
-      couverture: "absente",
-      micros: [],
+      couverture: "complete",
+      micros: m("premiere-spe", "trig_loi_sinus", "trig_aire_heron"),
     },
     // ── VI. Statistiques ────────────────────────────────────────────────────
     {
@@ -398,8 +397,8 @@ export const MAROC_1BAC: ProgrammePays = {
       code: "AA-4b", domaine: FN,
       texte: "Composée de deux fonctions et sa monotonie ; variations de f + λ et λf ; courbes de x ↦ √(x + a) et x ↦ ax³.",
       couverture: "partielle",
-      micros: [...m("seconde", "reference_racine", "reference_cube"), ...m("premiere-spe", "der_composee_affine")],
-      note: "Manquent la composée g∘f, la monotonie d'une composée (sans dérivée) et les variations de f + λ et λf.",
+      micros: [...m("seconde", "reference_racine", "reference_cube"), ...m("premiere-spe", "der_composee_affine"), ...m("terminale-spe", "composee_ecrire")],
+      note: "Manquent la monotonie d'une composée (sans dérivée) et les variations de f + λ et λf.",
     },
     {
       code: "AA-4c", domaine: FN,
@@ -515,9 +514,8 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "A2-7", domaine: AN,
       texte: "Logarithme de base a, logarithme décimal (équations 10ˣ = a, inéquations 10ˣ < a).",
-      couverture: "partielle",
-      micros: m("stmg", "logT_definition", "logT_valeurs_remarquables", "logT_produit", "logT_resoudre_exponentielle", "logT_inequation"),
-      note: "Le logarithme décimal est couvert (STMG) ; manque le logarithme de base a quelconque.",
+      couverture: "complete",
+      micros: [...m("stmg", "logT_definition", "logT_valeurs_remarquables", "logT_produit", "logT_resoudre_exponentielle", "logT_inequation"), ...m("terminale-spe", "log_base_calcul", "log_base_proprietes")],
     },
     {
       code: "A2-8", domaine: AN,
@@ -528,9 +526,8 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "A2-9", domaine: AN,
       texte: "Exponentielle de base a : définition (aˣ = e^(x ln a)), propriétés, dérivée de x ↦ aˣ.",
-      couverture: "partielle",
-      micros: m("stmg", "expoT_reconnaitre", "expoT_sens_selon_a", "expoT_somme_exposants", "expoT_transformer"),
-      note: "Manque la dérivée (aˣ)' = aˣ ln a.",
+      couverture: "complete",
+      micros: [...m("stmg", "expoT_reconnaitre", "expoT_sens_selon_a", "expoT_somme_exposants", "expoT_transformer"), ...m("terminale-spe", "exp_base_a")],
     },
     {
       code: "A2-10", domaine: AN,

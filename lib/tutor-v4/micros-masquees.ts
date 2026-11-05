@@ -212,7 +212,7 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       ...lot("hors_france", "Québec, Maroc, Suisse, Sénégal, Côte d'Ivoire", ["expo_ratio_racine", "expo_ratio_calcul", "expo_ratio_regles"]),
       /* Logarithme et exponentielle de base a ; systèmes 3 × 3. `composee_ecrire` n'est PAS masquée : v ∘ u est au programme. */
       ...lot("hors_france", "Québec, Maroc, Belgique, Côte d'Ivoire", ["log_base_calcul", "log_base_proprietes", "exp_base_a"]),
-      ...lot("hors_france", "Maroc, Belgique, Sénégal, Côte d'Ivoire", ["systeme_3x3_gauss"]),
+      ...lot("hors_france", "Belgique, Sénégal, Côte d'Ivoire", ["systeme_3x3_gauss"]),
     },
   },
 };

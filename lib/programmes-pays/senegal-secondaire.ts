@@ -145,9 +145,10 @@ export const SENEGAL_2NDE: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("seconde", "fonction_vocabulaire", "fonction_domaine", "fonction_image_formule", "fonction_antecedent", "fonction_tableau_graphique", "fonction_resolution_graphique", "variation_tableau", "variation_croissance", "variation_extremum", "reference_carre"),
-        ...m("premiere-spe", "der_taux", "trig_parite"),
+        ...m("premiere-spe", "der_taux", "trig_parite", "var_parite"),
+        ...m("terminale-spe", "composee_ecrire"),
       ],
-      note: "Manquent la COMPOSÉE f ∘ g et le changement d'origine.",
+      note: "Manquent la restriction et le changement d'origine.",
     },
     {
       code: "AN 4", domaine: "Activités numériques",
@@ -169,8 +170,9 @@ export const SENEGAL_2NDE: ProgrammePays = {
     {
       code: "AN 6", domaine: "Activités numériques",
       texte: "Systèmes du premier degré : deux équations à deux inconnues (méthode de Cramer), deux ou trois équations à deux inconnues et leur interprétation ; systèmes d'inéquations, régionnement du plan, exemples de programmation linéaire.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("seconde", "droite_systeme", "droite_intersection", "systeme_determinant", "systeme_cramer", "demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"),
+      note: "Manquent trois équations à deux inconnues et leur interprétation.",
     },
     {
       code: "AN 7", domaine: "Activités numériques",
@@ -180,7 +182,7 @@ export const SENEGAL_2NDE: ProgrammePays = {
         ...m("seconde", "signes_premier_degre", "signes_produit", "signes_quotient", "fonction_domaine", "poly_racine_factoriser", "poly_division", "poly_horner"),
         ...m("premiere-spe", "sd_factorisation"),
       ],
-      note: "Factorisation, Horner et division couverts jusqu'au degré 3 ; manquent le degré 4 et la simplification d'une fraction rationnelle.",
+      note: "Manquent l'identification et la simplification d'une fraction rationnelle ; le degré 4 n'est vu que par Horner.",
     },
     {
       code: "AN 8", domaine: "Activités numériques",
@@ -307,9 +309,8 @@ export const SENEGAL_1RE: ProgrammePays = {
     {
       code: "AL 3", domaine: "Algèbre",
       texte: "Systèmes d'équations linéaires dans ℝ³ (méthode du pivot de Gauss) ; systèmes d'inéquations, programmation linéaire.",
-      couverture: "partielle",
-      micros: m("seconde", "demi_plan_systeme"),
-      note: "Systèmes d'inéquations et programmation linéaire couverts ; manque le pivot de Gauss.",
+      couverture: "complete",
+      micros: [...m("seconde", "demi_plan_systeme"), ...m("terminale-spe", "systeme_3x3_gauss")],
     },
 
     {
@@ -421,12 +422,11 @@ export const SENEGAL_TLE: ProgrammePays = {
     {
       code: "OD 1", domaine: "Organisation de données",
       texte: "Séries statistiques à deux variables : méthode des moindres carrés, coefficient de corrélation linéaire, droites de régression, prévisions.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("premiere", "info_nuage_construire", "info_point_moyen_calculer", "info_ajust_equation", "info_ajust_interpoler", "info_ajust_extrapoler"),
-        ...m("stmg", "statT_mc_principe", "statT_mc_calculer", "statT_mc_comparer"),
+        ...m("stmg", "statT_mc_principe", "statT_mc_calculer", "statT_mc_comparer", "stat_covariance", "stat_correlation_r", "stat_regression_formules"),
       ],
-      note: "Principe des moindres carrés en Terminale STMG. Manquent le COEFFICIENT DE CORRÉLATION et le calcul des droites de régression.",
     },
     {
       code: "OD 2", domaine: "Organisation de données",

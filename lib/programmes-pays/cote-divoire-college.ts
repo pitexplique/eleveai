@@ -473,10 +473,10 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       texte: "Triangle rectangle : Pythagore et sa réciproque, relation métrique déduite de l'aire, cosinus, sinus, tangente d'un angle aigu, cos² + sin² = 1, angles complémentaires ; construire un segment de longueur √a.",
       couverture: "partielle",
       micros: [
-        ...m("3e", "pythagore_reconnaitre", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_reciproque", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_calculer_longueur", "trigo_calculer_angle"),
+        ...m("3e", "pythagore_reconnaitre", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_reciproque", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_calculer_longueur", "trigo_calculer_angle", "metrique_produit"),
         ...m("seconde", "geo_trig_identite"),
       ],
-      note: "Manque la relation AH × BC = AB × AC (aire) et la construction d'un segment de longueur √a.",
+      note: "Manque la construction d'un segment de longueur √a.",
     },
     {
       code: "C3-L2", domaine: GPLAN,

@@ -67,10 +67,10 @@ export const MAROC_1AC: ProgrammePays = {
       texte: "Écritures fractionnaires : écritures égales d'un même nombre, simplification, rendre entier un dénominateur décimal, comparer deux fractions.",
       couverture: "partielle",
       micros: [
-        ...m("6e", "fraction_egale", "fraction_comparer"),
+        ...m("6e", "fraction_egale", "fraction_comparer", "decimal_diviser_par_decimal"),
         ...m("5e", "fraction_egale", "fraction_simplifier", "fraction_comparer"),
       ],
-      note: "Manque le quotient à dénominateur décimal rendu entier (2,5 ÷ 1,5 = 25 ÷ 15) comme exercice à part.",
+      note: "La méthode (2,5 ÷ 1,5 = 25 ÷ 15) est entraînée avec le signe ÷ ; manque son écriture en fraction, dénominateur décimal rendu entier.",
     },
     {
       code: "S1-3", domaine: AN,
