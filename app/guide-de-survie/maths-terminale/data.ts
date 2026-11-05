@@ -32,7 +32,7 @@ import { algorithmiquePythonBank } from "@/lib/tutor-v4/questionBank/terminale-s
 import type { KitData, KitNotion } from "@/components/kit/types";
 
 // Checklists + tests dérivés du coach (module partagé par tous les guides).
-const { microsDe, testDeSurvie } = kitHelpers(microSkills);
+const { microsDe, testDeSurvie } = kitHelpers(microSkills, "terminale-spe");
 
 type Condense = Omit<KitNotion, "micros" | "exos">;
 

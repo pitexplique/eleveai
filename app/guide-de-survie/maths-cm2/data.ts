@@ -41,7 +41,7 @@ import { algorithmiqueBank } from "@/lib/tutor-v4/questionBank/cm2/maths/algorit
 import type { KitData, KitNotion } from "@/components/kit/types";
 
 // Checklists + tests dérivés du coach (module partagé par tous les guides).
-const { microsDe, testDeSurvie } = kitHelpers(microSkills);
+const { microsDe, testDeSurvie } = kitHelpers(microSkills, "cm2");
 
 type Condense = Omit<KitNotion, "micros" | "exos">;
 
@@ -536,26 +536,26 @@ const CONDENSES: Condense[] = [
     titre: "Angles",
     domaine: "Grandeurs et mesures",
     essentiel:
-      "Un **angle**, c'est l'**ouverture** entre deux **demi-droites** (les **côtés**) qui partent du même point : le **sommet**. On le mesure en **degrés** (°) avec un **rapporteur**. L'**angle droit** ($90^\\circ$), le coin d'un carré, sert de repère pour comparer les autres.",
+      "Un **angle**, c'est l'**ouverture** entre deux **demi-droites** (les **côtés**) qui partent du même point : le **sommet**. On compare deux angles avec un **gabarit** ou une **équerre**, sans les mesurer. L'**angle droit**, le coin d'un carré, sert de repère ; il mesure $90^\\circ$.",
     formules: [
       { label: "Angle droit", latex: "$90^\\circ$ : le coin d'un carré ou d'une feuille" },
-      { label: "Angle aigu", latex: "plus petit qu'un angle droit ($<90^\\circ$)" },
-      { label: "Angle obtus", latex: "entre l'angle droit et l'angle plat ($90^\\circ$ à $180^\\circ$)" },
-      { label: "Angle plat", latex: "$180^\\circ$ : les deux côtés forment une ligne droite" },
-      { label: "Mesurer au rapporteur", latex: "centre sur le **sommet**, un côté sur le $0$, on lit les degrés" },
+      { label: "Angle aigu", latex: "plus petit qu'un angle droit" },
+      { label: "Angle obtus", latex: "plus grand qu'un angle droit, plus petit qu'un angle plat" },
+      { label: "Angle plat", latex: "les deux côtés forment une ligne droite" },
+      { label: "Comparer avec un gabarit", latex: "on pose le **sommet** sur le sommet, un côté sur un côté, on regarde lequel dépasse" },
     ],
     reflexes: [
-      { si: "un coin de carré, de feuille ou de fenêtre", alors: "c'est un angle droit, $90^\\circ$" },
-      { si: "l'ouverture est plus petite que le coin (< $90^\\circ$)", alors: "l'angle est aigu" },
-      { si: "l'ouverture est plus grande que le coin (> $90^\\circ$)", alors: "l'angle est obtus" },
-      { si: "on doit mesurer un angle", alors: "on prend le rapporteur, centre sur le sommet" },
+      { si: "un coin de carré, de feuille ou de fenêtre", alors: "c'est un angle droit" },
+      { si: "l'ouverture est plus petite que le coin", alors: "l'angle est aigu" },
+      { si: "l'ouverture est plus grande que le coin", alors: "l'angle est obtus" },
+      { si: "on doit comparer deux angles", alors: "on reproduit l'un sur un gabarit et on le pose sur l'autre" },
     ],
     pieges: [
-      "Mesurer un angle en cm : un angle se mesure en degrés (°), pas en centimètres (ça, c'est une longueur).",
-      "Croire qu'un angle de $90^\\circ$ est aigu : un angle aigu est plus petit que $90^\\circ$, $90^\\circ$ est pile l'angle droit.",
-      "Mal poser le rapporteur : il faut mettre son centre sur le sommet, pas sur un côté au hasard.",
+      "Croire qu'un angle est plus grand parce que ses côtés sont dessinés plus longs : seule l'ouverture compte.",
+      "Croire qu'un angle droit est aigu : un angle aigu est plus petit que l'angle droit, il ne lui est pas égal.",
+      "Mal poser le gabarit : il faut mettre son sommet sur le sommet de l'angle et un côté sur un côté.",
     ],
-    reel: "Quand tu ouvres une porte, elle forme un angle avec le mur ; le coin d'une fenêtre de case créole à Saint-Pierre est un angle droit de $90^\\circ$.",
+    reel: "Quand tu ouvres une porte, elle forme un angle avec le mur ; le coin d'une fenêtre est un angle droit.",
   },
   {
     id: "reperage",

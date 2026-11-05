@@ -6,19 +6,25 @@
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 import type { TutorBankItemFixedV4, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { libelleTexte } from "@/lib/tutor-v4/libelleMath";
+import { estMasquee } from "@/lib/tutor-v4/micros-masquees";
 import type { KitExo } from "./types";
 
 // ⛔ CES KITS S'IMPRIMENT. C'est le seul endroit du dépôt qui lit les libellés
 // SANS passer par `catalog.ts` : sans `libelleTexte`, une checklist de survie
 // sortirait « Utiliser $\sqrt{a^2} = |a|$ » sur une photocopie, sans que rien
 // ne le signale. Voir l'en-tête de `lib/tutor-v4/libelleMath.ts`.
-export function kitHelpers(microSkills: MicroSkillSource[]) {
+//
+// `classeMaths` : un kit lit la knowledge brute, il doit donc écarter lui-même les
+// micros masquées (hors programme, hors France), sinon une photocopie les imprime.
+export function kitHelpers(microSkills: MicroSkillSource[], classeMaths?: string) {
+  const masquee = (microId: string) =>
+    classeMaths !== undefined && estMasquee(classeMaths, "maths", microId);
   const microLabel = new Map(microSkills.map((m) => [m.id, libelleTexte(m.label)]));
 
   /** Libellés des micro-compétences d'une notion (checklist « je sais… »). */
   function microsDe(notionId: string): string[] {
     return microSkills
-      .filter((m) => m.notionId === notionId)
+      .filter((m) => m.notionId === notionId && !masquee(m.id))
       .map((m) => libelleTexte(m.label));
   }
 
@@ -29,7 +35,8 @@ export function kitHelpers(microSkills: MicroSkillSource[]) {
    */
   function testDeSurvie(bank: TutorBankItemV4[], take = 3): KitExo[] {
     const imprimables = bank.filter(
-      (i): i is TutorBankItemFixedV4 => i.kind === "fixed" && !i.canvas && !i.audioSrc
+      (i): i is TutorBankItemFixedV4 =>
+        i.kind === "fixed" && !i.canvas && !i.audioSrc && !masquee(i.microId)
     );
     const parDifficulte = [...imprimables].sort((a, b) => a.difficulty - b.difficulty);
 

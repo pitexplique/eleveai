@@ -25,7 +25,7 @@ import type { KitData, KitNotion } from "@/components/kit/types";
 /* ───────────────────────── dérivations automatiques ───────────────────────── */
 
 // Checklists + tests dérivés du coach (module partagé par tous les kits).
-const { microsDe, testDeSurvie } = kitHelpers(microSkills);
+const { microsDe, testDeSurvie } = kitHelpers(microSkills, "premiere-spe");
 
 /* ─────────────────────────── le condensé de survie ────────────────────────── */
 

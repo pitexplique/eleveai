@@ -40,7 +40,7 @@ import { algorithmiqueBank } from "@/lib/tutor-v4/questionBank/cm1/maths/algorit
 import type { KitData, KitNotion } from "@/components/kit/types";
 
 // Checklists + tests dérivés du coach (module partagé par tous les guides).
-const { microsDe, testDeSurvie } = kitHelpers(microSkills);
+const { microsDe, testDeSurvie } = kitHelpers(microSkills, "cm1");
 
 type Condense = Omit<KitNotion, "micros" | "exos">;
 

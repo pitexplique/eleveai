@@ -36,7 +36,7 @@ import { logiqueEnsemblesBank } from "@/lib/tutor-v4/questionBank/seconde/maths/
 import type { KitData, KitNotion } from "@/components/kit/types";
 
 // Checklists + tests dérivés du coach (module partagé par tous les guides).
-const { microsDe, testDeSurvie } = kitHelpers(microSkills);
+const { microsDe, testDeSurvie } = kitHelpers(microSkills, "seconde");
 
 type Condense = Omit<KitNotion, "micros" | "exos">;
 
