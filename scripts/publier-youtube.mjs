@@ -56,6 +56,12 @@
  *
  * Le journal `manim/sorties/.publiees.json` retient ce qui est déjà en ligne :
  * relancer le script ne republie jamais deux fois la même vidéo.
+ *
+ * Films d'animation (05/11/2026) : ils ne sont PAS dans le manifeste. Chaque film
+ * vit dans `manim/sorties/ti-margo/<dossier>/` avec son `publication.md`. Il part
+ * en tête du choix du jour (2 par jour au plus) quand ce fichier contient, sur
+ * l'ordre de Frédéric, la ligne `Validé : oui` (et, si besoin, `Pas avant : 2026-12-14`).
+ *   node scripts/publier-youtube.mjs --films     # l'état de chaque film
  */
 
 import fs from "fs";
@@ -467,6 +473,65 @@ async function videosDeLaChaine(token) {
   return parFichier;
 }
 
+// ─── Films d'animation ────────────────────────────────────────────────────────
+
+const DOSSIER_FILMS = "ti-margo";
+const FILMS_PAR_JOUR = 2; // Deux films le même jour se disputent le flux et brouillent la mesure.
+
+/**
+ * Lit les `publication.md` des films (mêmes rubriques que `defi-mur/publication.md`).
+ * Un film sans la ligne `Validé : oui` reste listé par --films, mais ne part jamais :
+ * l'envoi automatique publie sans demander, et Frédéric veut voir le film avant.
+ */
+function chargerFilms(journal) {
+  const racine = path.join(SORTIES, DOSSIER_FILMS);
+  if (!fs.existsSync(racine)) return [];
+  const films = [];
+  for (const dossier of fs.readdirSync(racine)) {
+    const fiche = path.join(racine, dossier, "publication.md");
+    if (!fs.existsSync(fiche)) continue;
+    const texte = fs.readFileSync(fiche, "utf-8").replace(/\r\n/g, "\n");
+    const rubrique = (nom) =>
+      texte.split(/^## /m).find((r) => r.startsWith(nom + "\n"))?.slice(nom.length).trim() ?? "";
+    const nomFichier = rubrique("Fichier à envoyer");
+    const nomMiniature = texte.match(/^- Miniature : (\S+\.(?:png|jpg))/m)?.[1];
+    const id = `film-${dossier}`;
+    const type = /short/i.test(nomFichier) ? "short" : "longue";
+    const videoId = journal[id]?.videoId;
+    const url = rubrique("En ligne").match(/https?:\/\/\S+/)?.[0]
+      ?? (videoId ? (type === "short" ? `https://youtube.com/shorts/${videoId}` : `https://youtu.be/${videoId}`) : undefined);
+    films.push({
+      id,
+      film: true,
+      dossierFilm: `${DOSSIER_FILMS}/${dossier}`,
+      valide: /^Validé\s*:\s*oui\s*$/im.test(texte),
+      pas_avant: texte.match(/^Pas avant\s*:\s*(\d{4}-\d{2}-\d{2})\s*$/im)?.[1],
+      serie: "Films d'animation",
+      classe: "film",
+      type,
+      fichier: `${DOSSIER_FILMS}/${dossier}/${nomFichier}`,
+      miniature: nomMiniature && `${DOSSIER_FILMS}/${dossier}/${nomMiniature}`,
+      titre: rubrique("Titre"),
+      accroche: rubrique("Description"),
+      tags: rubrique("Étiquettes").split(",").map((t) => t.trim()).filter(Boolean),
+      ...(url ? { url } : {}),
+    });
+  }
+  return films;
+}
+
+/** Ce qui retient encore un film, ou null s'il peut partir. */
+function freinDuFilm(v, journal) {
+  if (v.url || journal[v.id]) return "déjà en ligne";
+  if (!v.valide) return "pas encore validé (ligne « Validé : oui » absente)";
+  if (!fs.existsSync(path.join(SORTIES, v.fichier))) return "vidéo absente";
+  if (!cheminMiniature(v.miniature)) return "miniature absente";
+  if (!v.titre) return "titre absent";
+  const demain = horairesDeDemain(1)[0].slice(0, 10);
+  if (v.pas_avant && v.pas_avant > demain) return `attend le ${v.pas_avant}`;
+  return null;
+}
+
 // Créneaux de mise en ligne, HEURE DE LA RÉUNION (UTC+4 toute l'année, sans
 // heure d'été ; 3 h de plus que la métropole en hiver, 2 h en été).
 // Proposés le 01/11/2026 : le bus du matin (son record de 1 000 vues à 8 h),
@@ -492,6 +557,7 @@ const heureReunion = (iso) =>
 const CRPE = "CRPE maths : revoir les notions du collège";
 function playlistsDe(v, m) {
   const k = v.classe || v.fichier.split("/")[0];
+  if (v.film) return ["Films d'animation 3D"];
   if (/^cp/.test(k) && v.serie === "La belle écriture") return ["La belle écriture pour les droitiers"];
   const par = {
     cm1: ["Maths CM1"], cm2: ["Maths CM2"],
@@ -508,6 +574,9 @@ function playlistsDe(v, m) {
 const classeDe = (v) => v.classe || v.fichier.split("/")[0];
 
 function choixDuJour(candidats, m, journal, enLigne, limite) {
+  // Frédéric, 05/11 : les films d'animation passent devant tout le reste.
+  const films = candidats.filter((v) => v.film).slice(0, Math.min(FILMS_PAR_JOUR, limite));
+  candidats = candidats.filter((v) => !v.film);
   // Date de la dernière publication par API de chaque classe (jamais = tout en tête).
   const derniere = {};
   for (const [id, j] of Object.entries(journal)) {
@@ -522,16 +591,16 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
   }
   const classes = [...parClasse.keys()].sort((a, b) => (derniere[a] ?? 0) - (derniere[b] ?? 0));
 
-  const choisis = [];
+  const choisis = [...films];
   const notions = new Set();
   // `a_remplacer` (Pythagore refaites, 01/11) : une paysage et son short par
-  // jour passent avant tout le reste, jusqu'à ce qu'il n'y en ait plus.
+  // jour passent juste après les films, jusqu'à ce qu'il n'y en ait plus.
   const refaite = candidats.find((v) => v.a_remplacer && v.type === "longue");
-  if (refaite) {
+  if (refaite && choisis.length < limite && choisis.filter((x) => x.type === "longue").length < 2) {
     choisis.push(refaite);
     notions.add(refaite.notionId);
     const sonShort = candidats.find((v) => v.a_remplacer && v.renvoie_vers === refaite.id);
-    if (sonShort) choisis.push(sonShort);
+    if (sonShort && choisis.length < limite) choisis.push(sonShort);
   }
   candidats = candidats.filter((v) => !v.a_remplacer);
   // `prioritaire` (nouveautés que Frédéric veut voir sortir, 02/11) : avant la
@@ -582,6 +651,17 @@ async function main() {
 
   const m = JSON.parse(fs.readFileSync(MANIFESTE, "utf-8"));
   const journal = lireJournal();
+
+  const films = chargerFilms(journal);
+  if (args.includes("--films")) {
+    if (!films.length) console.log("Aucun film : pas de publication.md dans manim/sorties/ti-margo/.");
+    for (const f of films) console.log(`  ${f.id} [${f.type}] ${f.titre}\n    → ${freinDuFilm(f, journal) ?? "prêt : part en tête du prochain envoi"}`);
+    return;
+  }
+  // En mémoire seulement : le manifeste, partagé entre sessions, n'est pas touché.
+  // Un film retenu (non validé, sans miniature…) n'entre pas dans la liste, sauf
+  // s'il est déjà en ligne : l'onglet Shorts doit encore recevoir sa miniature.
+  m.videos.push(...films.filter((f) => f.valide && (f.url || journal[f.id] || !freinDuFilm(f, journal))));
 
   // Les vidéos longues d'abord : les shorts ont besoin de leur URL.
   // `url` dans le manifeste = déjà en ligne (publiée à la main dans Studio) :
@@ -754,7 +834,12 @@ async function main() {
       // 03/11 : l'url de TOUTE vidéo envoyée va dans le manifeste (la table R2
       // du site, scripts/generer-videos-r2.mjs, ne lit que lui).
       v.url = v.type === "short" ? `https://youtube.com/shorts/${videoId}` : `https://youtu.be/${videoId}`;
-      ecrireManifeste([v]);
+      if (v.film) {
+        // Pas d'entrée dans le manifeste : le lien reste dans le dossier du film.
+        fs.appendFileSync(path.join(SORTIES, v.dossierFilm, "publication.md"), `\n## En ligne\n${v.url}\n`);
+      } else {
+        ecrireManifeste([v]);
+      }
       envoyees++;
     } catch (e) {
       console.error(`  ✖ échec : ${e.message}`);
