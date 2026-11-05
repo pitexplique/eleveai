@@ -109,6 +109,15 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  /* Hors programme français : masquée (lib/tutor-v4/micros-masquees.ts). */
+  {
+    id: "fonction_reciproque",
+    label: "Fonction réciproque",
+    boId: "BOTSA2",
+    prerequis: ["derivation_fonction"],
+    levels: [1, 2, 3],
+  },
+
   /* =========================
      ALGÈBRE ET GÉOMÉTRIE
   ========================= */

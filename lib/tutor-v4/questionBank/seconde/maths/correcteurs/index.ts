@@ -6,6 +6,7 @@ import { CORRECTEURS as croisementVariables } from "./croisement-variables";
 import { CORRECTEURS as logiqueRaisonnement } from "./logique-raisonnement";
 import { CORRECTEURS as vecteurCombinaison } from "./vecteur-combinaison";
 import { CORRECTEURS as fonctionModeliser } from "./fonction-modeliser";
+import { CORRECTEURS as demiPlansSystemes } from "./demi-plans-systemes";
 
 export const CORRECTEURS_SECONDE: CorrecteursMaths = {
   ...statistiquesClasses,
@@ -13,4 +14,5 @@ export const CORRECTEURS_SECONDE: CorrecteursMaths = {
   ...logiqueRaisonnement,
   ...vecteurCombinaison,
   ...fonctionModeliser,
+  ...demiPlansSystemes,
 };

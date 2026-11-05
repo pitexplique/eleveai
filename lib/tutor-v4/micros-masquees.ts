@@ -43,7 +43,8 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       "angle_mesurer",
     ]),
     /* Annexe du programme de seconde, BO n°14 du 02/04/2026, lue le 05/11/2026. */
-    seconde: lot("hors_programme", "Programme 2026 de seconde", [
+    seconde: {
+      ...lot("hors_programme", "Programme 2026 de seconde", [
       "arith_nombre_premier", // l'arithmétique s'arrête à multiple, diviseur, pair, impair
       "geo_projete_orthogonal", // plus aucune occurrence de « projeté »
       "geo_trig_identite", // seulement les lignes trigonométriques du triangle rectangle
@@ -53,14 +54,21 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       "reference_cube", // idem
       "echantillon_fluctuation", // citée dans les objectifs, aucun contenu ; reste la loi des grands nombres
     ]),
+      /* Demi-plans, systèmes d'inéquations à deux inconnues, programmation linéaire. */
+      ...lot("hors_france", "Sénégal, Maroc, Côte d'Ivoire, Québec", ["demi_plan_couple_solution", "demi_plan_representer", "demi_plan_systeme"]),
+    },
     /* Annexe de première spécialité, BO n°14 du 02/04/2026. La terminale garde
        sinus et cosinus. La dérivée de t ↦ e^(at) reste : `exp_derivee_affine`. */
-    "premiere-spe": lot("hors_programme", "Programme 2026 de première spécialité", [
+    "premiere-spe": {
+      ...lot("hors_programme", "Programme 2026 de première spécialité", [
       "trig_parite",
       "trig_periodicite",
       "trig_courbes",
       "der_composee_affine",
     ]),
+      /* Formules d'addition et de duplication, solutions générales sur ℝ. Le programme français garde `trigo_equation_cos` en Terminale. */
+      ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire, Belgique", ["trig_formule_addition", "trig_formule_duplication", "trig_equation_generale"]),
+    },
     /* Module spécifique de première, BO n°14 du 02/04/2026 : ni « dériv » ni
        « tangente » dans le texte. ⚠️ Revient sur la décision du 14/08/2026, qui
        suivait les sujets de juin 2026 ; l'épreuve de juin 2027 porte sur le nouveau
@@ -103,6 +111,8 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       "don_freq_completer",
       "don_freq_interpreter",
     ]),
+    /* Fonction réciproque : bijection, f⁻¹, courbes symétriques, nombre dérivé. */
+    "terminale-spe": lot("hors_france", "Sénégal, Maroc, Côte d'Ivoire, Belgique, Québec", ["reciproque_bijection", "reciproque_expression", "reciproque_courbe", "reciproque_derivee"]),
   },
 };
 

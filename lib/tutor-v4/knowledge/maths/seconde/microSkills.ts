@@ -273,4 +273,9 @@ export const microSkills: MicroSkillSource[] = [
   { id: "logique_contraposee", label: "Formuler et utiliser la contraposée d'une implication", notionId: "logique_ensembles", prerequis: ["logique_implication_reciproque"] },
   { id: "logique_raisonnement_type", label: "Reconnaître un raisonnement : disjonction des cas, absurde, contraposée, contre-exemple", notionId: "logique_ensembles", prerequis: ["logique_contraposee"] },
   { id: "logique_quantificateurs", label: "Utiliser « pour tout » et « il existe », et les nier", notionId: "logique_ensembles", prerequis: ["logique_connecteurs"] },
+
+  /* Demi-plans et systèmes d'inéquations : hors programme français (lib/tutor-v4/micros-masquees.ts). */
+  { id: "demi_plan_couple_solution", label: "Vérifier qu'un couple est solution d'une inéquation à deux inconnues", notionId: "demi_plans_systemes", prerequis: [] },
+  { id: "demi_plan_representer", label: "Représenter un demi-plan : droite frontière, point test, zone hachurée", notionId: "demi_plans_systemes", prerequis: ["demi_plan_couple_solution"] },
+  { id: "demi_plan_systeme", label: "Résoudre graphiquement un système d'inéquations, optimiser sur un polygone", notionId: "demi_plans_systemes", prerequis: ["demi_plan_representer"] },
 ];

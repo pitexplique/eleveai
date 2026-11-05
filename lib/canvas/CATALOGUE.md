@@ -46,6 +46,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `transformation` | Une figure et son image : symétrie axiale, centrale, translation, rotation | Un agrandissement |
 | `homothetie` | Le centre, le rapport k, la figure et son image — et **les droites issues de O**, prolongées | Une transformation qui conserve les longueurs |
 | `reperage` | Un repère du plan, des points, un chemin | Une courbe de fonction |
+| `demi_plan` | Un repère, des droites `ax + by + c = 0`, la zone hachurée **calculée** (une par droite, ou `zone: "commune"` pour un système), la frontière en pointillés si l'inégalité est stricte, un point test en anneau | Une droite seule sans inéquation (→ `droites`) |
 
 ## Espace
 

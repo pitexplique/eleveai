@@ -7,6 +7,7 @@ import { croisementVariablesBank } from "./croisement-variables.bank";
 import { logiqueRaisonnementBank } from "./logique-raisonnement.bank";
 import { vecteurCombinaisonBank } from "./vecteur-combinaison.bank";
 import { fonctionModeliserBank } from "./fonction-modeliser.bank";
+import { demiPlansSystemesBank } from "./demi-plans-systemes.bank";
 import { arithmetiqueEntiersBank } from "./arithmetique-entiers.bank";
 import { puissancesBank } from "./puissances.bank";
 import { puissancesCanvas2de } from "@/lib/tutor-v4/questionBank/puissances-canvas-items";
@@ -72,6 +73,7 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...logiqueRaisonnementBank,
   ...vecteurCombinaisonBank,
   ...fonctionModeliserBank,
+  ...demiPlansSystemesBank,
 ];
 
 export function getMathsSecondeQuestionBank(args?: {

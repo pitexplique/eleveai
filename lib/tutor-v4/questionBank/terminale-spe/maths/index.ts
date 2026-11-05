@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/terminale-spe/index.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { fonctionReciproqueBank } from "./fonction-reciproque.bank";
 
 import { suitesBank } from "./suites.bank";
 import { limitesSuitesBank } from "./limites-suites.bank";
@@ -57,6 +58,7 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...integrationPartiesBank,
   ...integralesEncadrementBank,
   ...sinusCosinusBank,
+  ...fonctionReciproqueBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {

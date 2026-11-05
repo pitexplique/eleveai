@@ -808,4 +808,33 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "concentration_echantillonnage",
     prerequis: ["concentration_loi_grands_nombres", "concentration_fluctuation"],
   },
+
+  /* =========================
+     FONCTION RÉCIPROQUE : hors programme français (lib/tutor-v4/micros-masquees.ts)
+  ========================= */
+
+  {
+    id: "reciproque_bijection",
+    label: "Reconnaître une bijection : injective, surjective, fonction continue strictement monotone",
+    notionId: "fonction_reciproque",
+    prerequis: ["derivation_variation"],
+  },
+  {
+    id: "reciproque_expression",
+    label: "Calculer f⁻¹(y) et déterminer la réciproque d'une fonction simple",
+    notionId: "fonction_reciproque",
+    prerequis: ["reciproque_bijection"],
+  },
+  {
+    id: "reciproque_courbe",
+    label: "Courbes de f et f⁻¹ : symétrie par rapport à y = x, sens de variation, ensemble de définition",
+    notionId: "fonction_reciproque",
+    prerequis: ["reciproque_expression"],
+  },
+  {
+    id: "reciproque_derivee",
+    label: "Nombre dérivé de la réciproque et tangente à sa courbe",
+    notionId: "fonction_reciproque",
+    prerequis: ["reciproque_expression"],
+  },
 ];

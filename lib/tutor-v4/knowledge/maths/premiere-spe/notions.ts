@@ -159,4 +159,13 @@ export const notions: NotionSource[] = [
     prerequis: [],
     levels: [1, 2, 3],
   },
+
+  /* Hors programme français : masquée (lib/tutor-v4/micros-masquees.ts). */
+  {
+    id: "trigo_formules_equations",
+    label: "Formules et équations trigonométriques",
+    boId: "BOPSAN",
+    prerequis: ["trigonometrie"],
+    levels: [1, 2, 3],
+  },
 ];

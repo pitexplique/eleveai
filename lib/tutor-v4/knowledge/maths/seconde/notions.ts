@@ -224,4 +224,13 @@ export const notions: NotionSource[] = [
     prerequis: [],
     levels: [1, 2, 3],
   },
+
+  /* ===================== HORS PROGRAMME FRANÇAIS : masquée (lib/tutor-v4/micros-masquees.ts) ===================== */
+  {
+    id: "demi_plans_systemes",
+    label: "Demi-plans et systèmes d'inéquations à deux inconnues",
+    boId: "BO2G1",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
 ];

@@ -2153,7 +2153,37 @@ export type PatronsCubeCanvasData = {
   questionLabel?: string;
 };
 
+// Un demi-plan ou un système d'inéquations à deux inconnues (hors programme français).
+export type DemiPlanDroite = {
+  /** La droite ax + by + c = 0. */
+  a: number;
+  b: number;
+  c: number;
+  /** Le côté hachuré : les points où ax + by + c vérifie ce signe. Absent : la droite seule. */
+  sens?: "<=" | ">=" | "<" | ">";
+  /** Sans `sens`, pour dessiner une frontière exclue. Sinon, déduit de l'inégalité stricte. */
+  pointilles?: boolean;
+  nom?: string;
+  couleur?: string;
+};
+
+export type DemiPlanCanvasData = {
+  kind: "demi_plan";
+  /** Fenêtre, en unités du repère. Défaut : −6 à 6. */
+  xmin?: number;
+  xmax?: number;
+  ymin?: number;
+  ymax?: number;
+  droites: DemiPlanDroite[];
+  /** « chaque » : un hachurage par droite. « commune » : seulement l'intersection (un système). */
+  zone?: "chaque" | "commune";
+  /** `test` dessine le point test, en anneau orange. */
+  points?: { x: number; y: number; nom?: string; test?: boolean }[];
+  legende?: string;
+};
+
 export type CanvasFigure =
+  | DemiPlanCanvasData
   | DeuxAnglesCanvasData
   | PatronsCubeCanvasData
   | CercleTrigoCanvasData

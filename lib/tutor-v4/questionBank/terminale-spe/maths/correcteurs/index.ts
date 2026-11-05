@@ -6,9 +6,11 @@ import type { CorrecteursMaths } from "@/lib/tutor-v4/questionBank/4e/maths/corr
 import { CORRECTEURS as integrationParties } from "./integration-parties";
 import { CORRECTEURS as integralesEncadrement } from "./integrales-encadrement";
 import { CORRECTEURS as sinusCosinus } from "./sinus-cosinus";
+import { CORRECTEURS as fonctionReciproque } from "./fonction-reciproque";
 
 export const CORRECTEURS_TLE: CorrecteursMaths = {
   ...integrationParties,
   ...integralesEncadrement,
   ...sinusCosinus,
+  ...fonctionReciproque,
 };

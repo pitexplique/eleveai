@@ -53,6 +53,7 @@ import {
   DureeCanvas,
   ReperageCanvas,
   DroitesCanvas,
+  DemiPlanCanvas,
   MasseCanvas,
   ContenanceCanvas,
   EchelleCanvas,
@@ -365,6 +366,10 @@ if (canvas.kind === "reperage") {
 
 if (canvas.kind === "droites") {
   return <DroitesCanvas figure={canvas} />;
+}
+
+if (canvas.kind === "demi_plan") {
+  return <DemiPlanCanvas figure={canvas} />;
 }
 
 if (canvas.kind === "masse") {

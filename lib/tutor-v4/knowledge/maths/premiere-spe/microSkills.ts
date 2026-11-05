@@ -942,4 +942,24 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "logique_ensembles",
     prerequis: ["log_implication", "log_contre_exemple"],
   },
+
+  /* Formules et équations trigonométriques : hors programme français (lib/tutor-v4/micros-masquees.ts). */
+  {
+    id: "trig_formule_addition",
+    label: "Formules d'addition, a cos x + b sin x sous la forme R cos(x − φ)",
+    notionId: "trigo_formules_equations",
+    prerequis: ["trig_valeurs"],
+  },
+  {
+    id: "trig_formule_duplication",
+    label: "Formules de duplication et linéarisation",
+    notionId: "trigo_formules_equations",
+    prerequis: ["trig_formule_addition"],
+  },
+  {
+    id: "trig_equation_generale",
+    label: "Résoudre cos x = a, sin x = a, tan x = a sur ℝ : solutions générales",
+    notionId: "trigo_formules_equations",
+    prerequis: ["trig_valeurs"],
+  },
 ];
