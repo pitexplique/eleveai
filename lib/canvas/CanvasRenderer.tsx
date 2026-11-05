@@ -18,6 +18,8 @@ import AngleCanvas from "./AngleCanvas";
 import DeuxAnglesCanvas from "./DeuxAnglesCanvas";
 import ConstructionCanvas from "./ConstructionCanvas";
 import PatronsCubeCanvas from "./PatronsCubeCanvas";
+import EnsemblesCanvas from "./EnsemblesCanvas";
+import ArbreTriCanvas from "./ArbreTriCanvas";
 import FonctionGraphiqueCanvas from "./FonctionGraphiqueCanvas";
 import FonctionTableauCanvas from "./FonctionTableauCanvas";
 import TransformationCanvas from "./TransformationCanvas";
@@ -111,6 +113,10 @@ export default function CanvasRenderer({ figure }: Props) {
     // Lequel est un patron de cube ? (CM2)
     case "patrons_cube":
       return <PatronsCubeCanvas figure={figure} />;
+    case "ensembles":
+      return <EnsemblesCanvas figure={figure} />;
+    case "arbre_tri":
+      return <ArbreTriCanvas figure={figure} />;
 
     case "fonctionGraphique":
       return <FonctionGraphiqueCanvas figure={figure} />;

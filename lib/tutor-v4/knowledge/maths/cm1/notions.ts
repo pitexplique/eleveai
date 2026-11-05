@@ -218,6 +218,15 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
+  // Hors programme français, masqué : Belgique, Suisse, Sénégal, Côte d'Ivoire.
+  {
+    id: "trier_classer",
+    label: "Trier et classer",
+    boId: "BOCM1D1",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
+
   // ============================================================
   // PENSÉE INFORMATIQUE ET ALGORITHMIQUE
   // ============================================================

@@ -26,6 +26,8 @@ import { mathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths/inde
 import { CORRECTEURS_CM2 } from "@/lib/tutor-v4/questionBank/cm2/maths/correcteurs";
 import { mathsCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/maths/index";
 import { CORRECTEURS_CM1 } from "@/lib/tutor-v4/questionBank/cm1/maths/correcteurs";
+import { mathsCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/maths/index";
+import { CORRECTEURS_CE1 } from "@/lib/tutor-v4/questionBank/ce1/maths/correcteurs";
 import { compareAnswer } from "@/lib/tutor/evaluation/comparators";
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 
@@ -36,9 +38,10 @@ const en5e = args[0] === "5e";
 const en3e = args[0] === "3e"; // 05/11/2026 : seulement sur des micros nommées, la 3e n'a de correcteurs que depuis cette date.
 const enCm2 = args[0] === "cm2"; // 05/11/2026 : idem, sur des micros nommées.
 const enCm1 = args[0] === "cm1"; // 05/11/2026 : idem, sur des micros nommées.
-const filtres = args.filter((a) => a !== "cm1" && a !== "cm2" && a !== "3e" && a !== "4e" && a !== "5e" && a !== "6e");
-const BANQUE: any[] = enCm1 ? mathsCm1QuestionBank : enCm2 ? mathsCm2QuestionBank : en3e ? maths3eQuestionBank : en4e ? maths4eQuestionBank : en5e ? maths5eQuestionBank : maths6eQuestionBank;
-const CORRECTEURS = enCm1 ? CORRECTEURS_CM1 : enCm2 ? CORRECTEURS_CM2 : en3e ? CORRECTEURS_3E : en4e ? CORRECTEURS_4E : en5e ? CORRECTEURS_5E : CORRECTEURS_6E;
+const enCe1 = args[0] === "ce1"; // 05/11/2026 : idem, sur des micros nommées.
+const filtres = args.filter((a) => a !== "ce1" && a !== "cm1" && a !== "cm2" && a !== "3e" && a !== "4e" && a !== "5e" && a !== "6e");
+const BANQUE: any[] = enCe1 ? mathsCe1QuestionBank : enCm1 ? mathsCm1QuestionBank : enCm2 ? mathsCm2QuestionBank : en3e ? maths3eQuestionBank : en4e ? maths4eQuestionBank : en5e ? maths5eQuestionBank : maths6eQuestionBank;
+const CORRECTEURS = enCe1 ? CORRECTEURS_CE1 : enCm1 ? CORRECTEURS_CM1 : enCm2 ? CORRECTEURS_CM2 : en3e ? CORRECTEURS_3E : en4e ? CORRECTEURS_4E : en5e ? CORRECTEURS_5E : CORRECTEURS_6E;
 const gabarits = BANQUE.filter(
   (i) =>
     i.kind === "template" &&

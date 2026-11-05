@@ -24,5 +24,6 @@ export const notions: NotionSource[] = [
   { id: "figures_planes", label: "Figures planes", boId: "BOCE1G1", prerequis: ["droites_segments"], levels: [1, 2] },
   { id: "solides", label: "Solides", boId: "BOCE1G1", prerequis: ["figures_planes"], levels: [1, 2] },
   { id: "donnees", label: "Tableaux et graphiques simples", boId: "BOCE1D1", prerequis: ["nombre_entier"], levels: [1, 2] },
+  { id: "trier_classer", label: "Trier et classer", boId: "BOCE1D1", prerequis: ["donnees"], levels: [1, 2, 3] },
   { id: "algorithmique", label: "Instructions et déplacements codés", boId: "BOCE1I1", prerequis: ["reperage"], levels: [1, 2] },
 ];

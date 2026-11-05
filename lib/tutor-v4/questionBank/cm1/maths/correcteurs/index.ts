@@ -7,6 +7,7 @@ import { CORRECTEURS as nombresEntiers } from "./nombres-entiers-trous";
 import { CORRECTEURS as fractionsDecimaux } from "./fractions-decimaux-trous";
 import { CORRECTEURS as calcul } from "./calcul-trous";
 import { CORRECTEURS as geometrie } from "./geometrie-trous";
+import { CORRECTEURS as trierClasser } from "./trier-classer";
 import { correcteursAngleReconnaitre } from "@/lib/tutor-v4/questionBank/cm2/maths/correcteurs/angle-reconnaitre";
 import { correcteursAnglesRepere } from "@/lib/tutor-v4/questionBank/cm2/maths/correcteurs/angles-repere-droit";
 import { correcteursPropRenfort } from "@/lib/tutor-v4/questionBank/cm2/maths/correcteurs/proportionnalite-renfort";
@@ -16,6 +17,7 @@ export const CORRECTEURS_CM1: CorrecteursMaths = {
   ...fractionsDecimaux,
   ...calcul,
   ...geometrie,
+  ...trierClasser,
   ...correcteursAngleReconnaitre("cm1"),
   ...correcteursAnglesRepere("cm1"),
   ...correcteursPropRenfort("cm1"),

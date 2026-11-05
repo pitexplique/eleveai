@@ -2202,11 +2202,34 @@ export type ConstructionCanvasData = {
   description?: string;
 };
 
+// Deux ou trois ensembles, et des éléments placés par leurs appartenances (trier, classer).
+// Les coordonnées ne se saisissent jamais : lib/canvas/ensembles.ts les CALCULE depuis `dans`.
+export type EnsemblesCanvasData = {
+  kind: "ensembles";
+  /** Le nom de chaque ensemble (2 ou 3). */
+  ensembles: string[];
+  /** `dans` : les indices des ensembles qui contiennent l'élément ; [] = en dehors. */
+  elements: { nom: string; dans: number[] }[];
+  /** Deux ensembles qui ne se touchent pas (tri en deux groupes). */
+  disjoints?: boolean;
+  description?: string;
+};
+
+// Un arbre de tri : une question par nœud, « oui » à gauche, « non » à droite.
+export type NoeudArbreTri = { question: string; oui: NoeudArbreTri; non: NoeudArbreTri } | { feuille: string };
+export type ArbreTriCanvasData = {
+  kind: "arbre_tri";
+  racine: NoeudArbreTri;
+  description?: string;
+};
+
 export type CanvasFigure =
   | DemiPlanCanvasData
   | DeuxAnglesCanvasData
   | ConstructionCanvasData
   | PatronsCubeCanvasData
+  | EnsemblesCanvasData
+  | ArbreTriCanvasData
   | CercleTrigoCanvasData
   | ReglureCanvasData
   | ObjetsCanvasData

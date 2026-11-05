@@ -35,6 +35,7 @@ import { volumesBank } from "./volumes.bank";
 import { donneesBank } from "./donnees.bank";
 import { probabilitesBank } from "./probabilites.bank";
 import { programmeTrous6eBank } from "./programme-trous.bank";
+import { decimalDiviserParDecimalBank } from "./decimal-diviser-par-decimal.bank";
 
 import { algorithmiqueBank } from "./algorithmique.bank";
 
@@ -93,6 +94,7 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...donneesBank,
   ...probabilitesBank,
   ...programmeTrous6eBank,
+  ...decimalDiviserParDecimalBank,
 ];
 
 export function getMaths6eQuestionBank(args?: {

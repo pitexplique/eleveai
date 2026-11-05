@@ -129,6 +129,12 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["decimal_multiplier"],
   },
   {
+    id: "decimal_diviser_par_decimal",
+    label: "Diviser par un nombre décimal",
+    notionId: "decimal_calcul",
+    prerequis: ["decimal_diviser_par_entier"],
+  },
+  {
     id: "decimal_calcul_defi",
     label: "Défis de calcul avec les décimaux",
     notionId: "decimal_calcul",

@@ -32,10 +32,29 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
     /* Cycle 3, cours moyen : « les élèves n'utilisent pas de tableaux de
        proportionnalité », « ni l'utilisation du coefficient de proportionnalité, ni
        le recours au “produit en croix” » ; le rapporteur « sera introduit au collège ». */
-    cm1: lot("hors_programme", "Programme du cours moyen", [
+    cm1: {
+      ...lot("hors_programme", "Programme du cours moyen", [
       "prop_tableau",
       "prop_coefficient",
       "angle_comparer", // comparait des degrés ; remplacée par `angle_comparer_sans_mesure`
+      ]),
+      /* Trier, classer, ensembles, arbre : ni dans l'audit `audit-france-ecole.md`, ni dans `cm1/bo.ts`. */
+      ...lot("hors_france", "Suisse, Belgique, Sénégal, Côte d'Ivoire", [
+      "tri_criteres_successifs",
+      "tri_ensembles_intersection",
+      "tri_arbre",
+      ]),
+    },
+    /* Trier, classer, ensembles : ni dans l'audit `audit-france-ecole.md`, ni dans `ce1/bo.ts`. */
+    ce1: lot("hors_france", "Suisse, Belgique, Sénégal, Côte d'Ivoire", [
+      "ce1_tri_critere",
+      "ce1_tri_ensembles",
+    ]),
+    /* Diviser par un décimal : le BO de 6e s'arrête au diviseur « entier non nul inférieur à 10 »
+       (`6e/bo-objectifs.ts`). Le cycle 4 cite le « quotient de nombres décimaux » sans en dire la
+       classe (`docs/bo-maths-cycle4-recopie.md`, p. 131) : en 6e, elle reste masquée. */
+    "6e": lot("hors_france", "Maroc, Suisse, Sénégal, Côte d'Ivoire", [
+      "decimal_diviser_par_decimal",
     ]),
     cm2: lot("hors_programme", "Programme du cours moyen", [
       "prop_tableau",

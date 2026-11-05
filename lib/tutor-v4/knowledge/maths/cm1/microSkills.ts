@@ -1209,4 +1209,24 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "algorithmique",
     prerequis: ["algo_repetition"],
   },
+
+  // TRIER ET CLASSER : hors programme français, masqué.
+  {
+    id: "tri_criteres_successifs",
+    label: "Trier selon des critères successifs, les retrouver",
+    notionId: "trier_classer",
+    prerequis: [],
+  },
+  {
+    id: "tri_ensembles_intersection",
+    label: "Trois ensembles : intersection, compter",
+    notionId: "trier_classer",
+    prerequis: ["tri_criteres_successifs"],
+  },
+  {
+    id: "tri_arbre",
+    label: "Arbre de tri : suivre, compléter",
+    notionId: "trier_classer",
+    prerequis: ["tri_criteres_successifs"],
+  },
 ];

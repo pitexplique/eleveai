@@ -40,6 +40,8 @@ import {
   AngleCanvas,
   DeuxAnglesCanvas,
   PatronsCubeCanvas,
+  EnsemblesCanvas,
+  ArbreTriCanvas,
   FonctionGraphiqueCanvas,
   FonctionTableauCanvas,
   TransformationCanvas,
@@ -311,6 +313,14 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 
   if (canvas.kind === "deux_angles") {
     return <DeuxAnglesCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "ensembles") {
+    return <EnsemblesCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "arbre_tri") {
+    return <ArbreTriCanvas figure={canvas} />;
   }
 
   if (canvas.kind === "patrons_cube") {

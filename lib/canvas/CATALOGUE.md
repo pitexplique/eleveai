@@ -67,6 +67,8 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `tableau_donnees` | Un tableau (croisé compris), colonnes ou cellules surlignables | Un graphique |
 | `probabilites` | Le matériel de l'expérience : dé, roue, urne de billes, tableau à double entrée | Un enchaînement de deux épreuves |
 | `arbre_proba` | L'arbre : issues, branches, probabilités portées | Une expérience à une épreuve |
+| `ensembles` | Deux ou trois ensembles (cercles qui se croisent, ou deux groupes séparés avec `disjoints`) : on ne donne que le nom de chaque élément et ses appartenances (`dans`), **la place se calcule** (`lib/canvas/ensembles.ts`) et un élément qui ne tient pas se voit (`place: false`) | Un tableau à double entrée (→ `tableau_donnees`) |
+| `arbre_tri` | L'arbre de tri : une question par nœud, « oui » à gauche, « non » à droite, 4 feuilles alignées en bas ; une feuille ou une question « ? » est à trouver | Un arbre qui porte des probabilités (→ `arbre_proba`) |
 | `fonctionGraphique` | Courbes, droites, nuage de points, avec `misesEnEvidence` pour guider la lecture. ⚠️ **Le seul `kind` en camelCase** | Un tableau de valeurs |
 | `fonction_tableau` | Le tableau de valeurs d'une fonction, à trous | La courbe |
 | `tableau_signes` | Le tableau de signes : 1 à 3 facteurs, produit **ou quotient**. Chaque ligne porte un signe par intervalle et une marque sur les bornes intérieures — `0` si le facteur s'annule, `\|\|` si la valeur est **interdite** | Les variations : c'est `tableau_variations` |

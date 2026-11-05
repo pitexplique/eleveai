@@ -333,4 +333,11 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_algo_deplacement", label: "Écrire une suite d'instructions qui code un déplacement", notionId: "algorithmique", prerequis: ["ce1_reperage_deplacement"] },
   { id: "ce1_algo_repetition", label: "Utiliser une répétition simple", notionId: "algorithmique", prerequis: ["ce1_suite_pas"] },
   { id: "ce1_algo_defi", label: "Résoudre un défi d'algorithmique", notionId: "algorithmique", prerequis: ["ce1_algo_instruction", "ce1_algo_deplacement"] },
+
+  // ============================================================
+  // TRIER ET CLASSER (hors programme français, masqué : Suisse, Belgique, Sénégal, Côte d'Ivoire)
+  // ============================================================
+
+  { id: "ce1_tri_critere", label: "Trier selon un critère, trouver l'intrus", notionId: "trier_classer", prerequis: [] },
+  { id: "ce1_tri_ensembles", label: "Lire et compléter deux ensembles", notionId: "trier_classer", prerequis: ["ce1_tri_critere"] },
 ];

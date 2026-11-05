@@ -2,6 +2,7 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
+import { trierClasserBank } from "./trier-classer.bank";
 
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { suitesBank } from "./suites.bank";
@@ -71,6 +72,7 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...fractionsDecimauxTrousBank,
   ...calculTrousBank,
   ...geometrieTrousBank,
+  ...trierClasserBank,
 ];
 
 export function getMathCm1QuestionBank(args?: {
