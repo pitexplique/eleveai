@@ -14,7 +14,8 @@ const LOG = "Pour $a > 0$, $a \\neq 1$ : $\\log_{a}(x) = \\dfrac{\\ln x}{\\ln a}
 const REGLES = "$\\log_{a}(xy) = \\log_{a}(x) + \\log_{a}(y)$, $\\log_{a}\\left(\\dfrac{x}{y}\\right) = \\log_{a}(x) - \\log_{a}(y)$, $\\log_{a}(x^{n}) = n\\log_{a}(x)$.";
 const EXPO = "Pour $a > 0$ : $a^{x} = \\mathrm{e}^{x \\ln a}$, et la dérivée de $x \\mapsto a^{x}$ est $x \\mapsto a^{x} \\ln a$.";
 
-const lg = (a: number | string, x: number | string) => `\\log_{${a}}(${x})`;
+/** Autour d'une fraction, les parenthèses grandissent avec elle. */
+const lg = (a: number | string, x: number | string) => (String(x).includes("\\dfrac") ? `\\log_{${a}}\\left(${x}\\right)` : `\\log_{${a}}(${x})`);
 const BASES = [2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 const MAXN: Record<number, number> = { 2: 8, 3: 5, 4: 4, 5: 4, 6: 3, 7: 3, 8: 3, 9: 3, 10: 4 };
 /** Une puissance de taille humaine : a^n. */
@@ -323,9 +324,9 @@ export const logExpBaseABank: TutorBankItemV4[] = [
     const signe = sup ? ">" : "<";
     const juste = (a > 1) === sup ? G : D;
     return qcm(
-      `${un([`Résous $${lg(b, l)} ${signe} ${n}$.`, `Quel est l'ensemble des solutions de $${lg(b, l)} ${signe} ${n}$ ?`, `Pour quels réels $${l} > 0$ a-t-on $${lg(b, l)} ${signe} ${n}$ ?`, `Une capteur de lumière renvoie $${lg(b, l)}$, et on veut $${lg(b, l)} ${signe} ${n}$. Quelles valeurs de $${l}$ conviennent ?`, `Dans un programme, la condition est $${lg(b, l)} ${signe} ${n}$. Pour quels $${l}$ est-elle vraie ?`])}`,
+      `${un([`Résous $${lg(b, l)} ${signe} ${n}$.`, `Quel est l'ensemble des solutions de $${lg(b, l)} ${signe} ${n}$ ?`, `Pour quels réels $${l} > 0$ a-t-on $${lg(b, l)} ${signe} ${n}$ ?`, `Un capteur de lumière renvoie $${lg(b, l)}$, et on veut $${lg(b, l)} ${signe} ${n}$. Quelles valeurs de $${l}$ conviennent ?`, `Dans un programme, la condition est $${lg(b, l)} ${signe} ${n}$. Pour quels $${l}$ est-elle vraie ?`])}`,
       juste,
-      [G, D, `$]-\\infty\\,;${s}[$`, `$[${s}\\,;+\\infty[$`],
+      [G, D, `$]{-}\\infty\\,;${s}[$`, `$[${s}\\,;+\\infty[$`], // {-} : sans lui, KaTeX lit un moins binaire après « ] » et l'écarte.
       expl(LOG, a > 1 ? "La base dépasse 1 : la fonction est croissante." : "La base est entre 0 et 1 : la fonction est décroissante, le sens change.", `$${b}^{${n}} = ${s}$.`, `Solutions : ${juste}.`),
     );
   }),

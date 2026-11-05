@@ -9,7 +9,10 @@ import { couper } from "./ensembles";
 // milieu de ses deux branches. Une case « ? » est celle que l'élève doit trouver.
 
 const W = 360;
-const PAS = 76;
+const PAS = 84;
+
+/** Les lignes d'une question : le « ? » reste collé au dernier mot, jamais seul à la ligne. */
+const lignesQuestion = (q: string) => couper(q.replace(/ \?/g, " ?"), 20);
 
 type Place = { n: NoeudArbreTri; x: number; y: number; oui?: Place; non?: Place };
 
@@ -31,7 +34,7 @@ function aplatir(p: Place): Place[] {
 const HAUT_BOITE = (lignes: number) => 10 + 16 * lignes;
 
 function Branche({ de, vers, mot, couleur }: { de: Place; vers: Place; mot: string; couleur: string }) {
-  const y1 = de.y + HAUT_BOITE(couper(("question" in de.n ? de.n.question : ""), 20).length);
+  const y1 = de.y + HAUT_BOITE(lignesQuestion("question" in de.n ? de.n.question : "").length);
   const y2 = vers.y;
   const mx = (de.x + vers.x) / 2;
   const my = (y1 + y2) / 2;
@@ -64,7 +67,7 @@ export default function ArbreTriCanvas({ figure }: { figure: CanvasFigure }) {
       {toutes.map((p, i) => {
         const estFeuille = "feuille" in p.n;
         const texte = "feuille" in p.n ? p.n.feuille : p.n.question;
-        const lignes = estFeuille ? [texte] : couper(texte, 20);
+        const lignes = estFeuille ? [texte] : lignesQuestion(texte);
         const h = HAUT_BOITE(lignes.length);
         const larg = estFeuille ? Math.min(largeur - 4, Math.max(44, texte.length * 7.6 + 10)) : Math.min(152, Math.max(...lignes.map((l) => l.length)) * 7.4 + 14);
         const cache = texte === "?";

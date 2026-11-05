@@ -146,7 +146,7 @@ const pan = (q: Q) => {
   return l.length === 2 ? reponseLongueur(q, Math.sqrt(l[0].v * l[1].v), l[0].u) : ["deux longueurs attendues"];
 };
 
-export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
+const PAR_GABARIT: CorrecteursMaths = avecRegleMotsCles({
   metrique_produit_tpl_1: produitHauteur,
   metrique_produit_tpl_2: egaliteProduit,
   metrique_produit_tpl_3: hauteurFigure,
@@ -171,3 +171,8 @@ export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
   metrique_carre_tpl_10: visee,
   metrique_carre_tpl_11: pan,
 });
+
+/** La banque colle « = » par des espaces insécables pour que la ligne ne se coupe pas : on relit sans. */
+export const CORRECTEURS: CorrecteursMaths = Object.fromEntries(
+  Object.entries(PAR_GABARIT).map(([id, c]) => [id, (q: Q) => c({ ...q, text: q.text.replace(/ /g, " ") })]),
+);

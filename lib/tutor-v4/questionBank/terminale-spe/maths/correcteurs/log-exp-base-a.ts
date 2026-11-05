@@ -27,8 +27,8 @@ function sansLog(src: string): string {
   const g = fermante(src, f + 1);
   return sansLog(`${src.slice(0, d)}(\\ln(${src.slice(f + 2, g)})/\\ln(${base}))${src.slice(g + 1)}`);
 }
-/** Les espaces fines de milliers et les limites ne gênent pas le compilateur. */
-const ecrit = (s: string) => sansLog(s.replace(/\$/g, "").replace(/(\d)\\,(?=\d{3})/g, "$1"));
+/** Les espaces fines de milliers et les limites ne gênent pas le compilateur. `\left(` et `\right)` se lisent comme des parenthèses. */
+const ecrit = (s: string) => sansLog(s.replace(/\$/g, "").replace(/(\d)\\,(?=\d{3})/g, "$1").replace(/\\left\(/g, "(").replace(/\\right\)/g, ")"));
 const V = (s: string, env: Env = {}) => compiler(ecrit(s))(env);
 const LETTRES: Env = { x: 1.7, t: 1.7, u: 1.7, y: 2.1, v: 2.3, p: 2.9, q: 2.3, s: 2.9 };
 

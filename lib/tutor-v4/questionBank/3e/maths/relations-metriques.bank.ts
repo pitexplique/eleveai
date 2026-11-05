@@ -10,7 +10,19 @@
 import { figureConstruction, point } from "@/lib/canvas/construction";
 import { entre, expliquer, fabriqueGabarits, fr, mesure, nomsTriangle, qcm, un, UNITES } from "@/lib/tutor-v4/questionBank/outils-geometrie";
 
-const tpl = fabriqueGabarits("3e", "relations_metriques", ["triangle_rectangle", "hauteur", "canvas"]);
+const gabarit = fabriqueGabarits("3e", "relations_metriques", ["triangle_rectangle", "hauteur", "canvas"]);
+
+/**
+ * ⛔ « FT = / 156 cm » coupé en bout de ligne à 375 px (05/11/2026). Ces énoncés sont du texte,
+ * pas des formules : on colle « = » à ce qui l'entoure par des espaces insécables. Les
+ * correcteurs relisent le texte avec des espaces ordinaires.
+ */
+const sansCoupure = (t: string) => t.replace(/ = /g, " = ");
+const tpl: typeof gabarit = (microId, n, difficulty, hint, generate) =>
+  gabarit(microId, n, difficulty, hint, () => {
+    const q = generate() as Record<string, unknown>;
+    return { ...q, text: sansCoupure(String(q.text)) };
+  });
 
 const DEF_P = "dans un triangle rectangle, le produit de l’hypoténuse par la hauteur est égal au produit des deux côtés de l’angle droit : c’est deux fois l’aire, calculée de deux façons.";
 const DEF_C = "dans un triangle rectangle, le carré de la hauteur est égal au produit des deux segments qu’elle découpe sur l’hypoténuse ; le carré d’un côté de l’angle droit est égal au produit de sa projection par l’hypoténuse.";
@@ -57,7 +69,9 @@ function figure(noms: { a: string; b: string; c: string; h?: string }, hb: numbe
   const h = noms.h ?? "H";
   // H reste à au moins 22 % d'un bout : sinon son nom et sa longueur se posent sur B ou C.
   const r = Math.min(0.78, Math.max(0.22, hb / (hb + hc)));
-  const pts = { [b]: point(0, 0), [c]: point(4, 0), [h]: point(4 * r, 0), [a]: point(4 * r, 4 * Math.sqrt(r * (1 - r))) };
+  // Une longueur sur la base se lit sous la base : le cadre ne laissait pas la place à « 30 cm », posé dans le triangle.
+  const sousLaBase = textes.bc || textes.hb || textes.hc ? { bas: point(2, -0.25) } : {};
+  const pts = { [b]: point(0, 0), [c]: point(4, 0), [h]: point(4 * r, 0), [a]: point(4 * r, 4 * Math.sqrt(r * (1 - r))), ...sousLaBase };
   return figureConstruction(
     pts,
     {
@@ -76,7 +90,7 @@ function figure(noms: { a: string; b: string; c: string; h?: string }, hb: numbe
       ],
       description: "Un triangle rectangle et la hauteur issue de l’angle droit",
     },
-    sansNom ? [a, b, c, h] : [],
+    sansNom ? [a, b, c, h, "bas"] : ["bas"],
   );
 }
 

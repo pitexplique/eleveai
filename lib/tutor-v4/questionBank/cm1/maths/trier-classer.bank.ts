@@ -171,10 +171,11 @@ function troisEnsembles(condition: (z: Trois) => boolean): Trois {
     const l = repartir(d, cs, 8, 10, 2);
     const fig = figureEnsembles(l, cs, cs.map((k, i) => `${LETTRE[i]} : ${k.label}`));
     const z: Trois = { d, cs, l, fig, autres: melange(d.objets().filter((x) => !l.some((y) => y.nom === x.nom) && x.nom.length <= 10)) };
-    return tientSurLaFigure(fig) && condition(z) && z;
+    // Les noms longs sont écartés : il pouvait ne rester que « grand rond, petit rond » dans trois cercles.
+    return l.length >= 5 && tientSurLaFigure(fig) && condition(z) && z;
   });
 }
-const et = (x: Objet, ...ks: Critere[]) => ks.every((k) => sat(x, k));
+const et =(x: Objet, ...ks: Critere[]) => ks.every((k) => sat(x, k));
 /** Le nom court d'une zone : « A et B », « C seulement », « Dans aucun ». */
 function zone(x: Objet, cs: Critere[]): string {
   const dans = cs.flatMap((k, i) => (sat(x, k) ? [LETTRE[i]] : []));

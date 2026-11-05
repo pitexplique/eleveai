@@ -29,7 +29,8 @@ function tirer(angles: readonly number[], coef: (r: number, a: number) => number
   for (;;) {
     const r = entre(rmin, rmax);
     const a = un(angles);
-    if (estPropre(coef(r, a))) return [r, a];
+    // Pas de coefficient 1 : « sous la forme aπ » n'a plus de sens, et « π » seul serait refusé.
+    if (estPropre(coef(r, a)) && coef(r, a) > 1) return [r, a];
   }
 }
 const cArc = (r: number, a: number) => (r * a) / 180;
@@ -43,6 +44,8 @@ function figure(angle: number, opts: { rayon?: string; angle?: string; secteur?:
   const contour = Array.from({ length: 25 }, (_, k) => `s${k}`);
   contour.forEach((id, k) => (pts[id] = surCercle(O, 1, debut + (angle * k) / 24)));
   const petit = angle < 180;
+  // Plus l'angle est fermé, plus sa mesure s'éloigne du centre : « 45° » touchait le rayon.
+  const loinTexte = Math.min(72, Math.max(32, 15 / Math.sin((angle * Math.PI) / 360)));
   return figureConstruction(
     pts,
     {
@@ -53,7 +56,7 @@ function figure(angle: number, opts: { rayon?: string; angle?: string; secteur?:
         { a: "O", b: "A", couleur: "#2563eb", texte: opts.rayon },
         { a: "O", b: "B", couleur: "#2563eb" },
       ],
-      angles: petit ? [{ sommet: "O", de: "A", vers: "B", couleur: "#2563eb", texte: opts.angle, rayon: 18, rayonTexte: 14 }] : [],
+      angles: petit ? [{ sommet: "O", de: "A", vers: "B", couleur: "#2563eb", texte: opts.angle, rayon: 18, rayonTexte: loinTexte - 18 }] : [],
       description: opts.secteur ? "Un disque et un secteur coloré, de sommet le centre O" : "Un cercle et un arc en rouge, entre deux rayons",
     },
     ["x", ...contour],
