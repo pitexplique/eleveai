@@ -27,6 +27,9 @@ import { primitivesIntegralesConcoursBank } from "./primitives-integrales-concou
 import { suitesConcoursBank } from "./suites-concours.bank";
 import { geometrieEspaceConcoursBank } from "./geometrie-espace-concours.bank";
 import { concentrationBank } from "./concentration.bank";
+import { integrationPartiesBank } from "./integration-parties.bank";
+import { integralesEncadrementBank } from "./integrales-encadrement.bank";
+import { sinusCosinusBank } from "./sinus-cosinus.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...suitesBank,
@@ -51,6 +54,9 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...primitivesIntegralesConcoursBank,
   ...suitesConcoursBank,
   ...geometrieEspaceConcoursBank,
+  ...integrationPartiesBank,
+  ...integralesEncadrementBank,
+  ...sinusCosinusBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {

@@ -371,6 +371,71 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "primitive_integrale",
     prerequis: ["integrale_aire", "integrale_valeur_moyenne"],
   },
+  {
+    id: "integrale_ipp_choisir",
+    label: "Choisir u et v' pour une intégration par parties",
+    notionId: "primitive_integrale",
+    prerequis: ["integrale_calculer"],
+  },
+  {
+    id: "integrale_ipp_calculer",
+    label: "Calculer une intégrale par parties",
+    notionId: "primitive_integrale",
+    prerequis: ["integrale_ipp_choisir"],
+  },
+  {
+    id: "integrale_ipp_primitive",
+    label: "Trouver une primitive par parties (ln x, x eˣ, x sin x)",
+    notionId: "primitive_integrale",
+    prerequis: ["integrale_ipp_choisir"],
+  },
+  {
+    id: "integrale_proprietes",
+    label: "Utiliser la linéarité, Chasles et la positivité de l’intégrale",
+    notionId: "primitive_integrale",
+    prerequis: ["integrale_calculer"],
+  },
+  {
+    id: "integrale_encadrer",
+    label: "Majorer, minorer, encadrer une intégrale",
+    notionId: "primitive_integrale",
+    prerequis: ["integrale_proprietes"],
+  },
+  {
+    id: "integrale_suite",
+    label: "Étudier une suite d’intégrales (variations, limite, récurrence)",
+    notionId: "primitive_integrale",
+    prerequis: ["integrale_ipp_calculer", "integrale_encadrer"],
+  },
+
+  /* =========================
+     FONCTIONS SINUS ET COSINUS
+  ========================= */
+
+  {
+    id: "trigo_equation_cos",
+    label: "Résoudre cos x = a ou sin x = a sur un intervalle",
+    notionId: "fonctions_sinus_cosinus",
+    prerequis: [],
+  },
+  {
+    id: "trigo_inequation_cos",
+    label: "Résoudre cos x ≥ a ou sin x ≥ a sur [−π ; π]",
+    notionId: "fonctions_sinus_cosinus",
+    prerequis: ["trigo_equation_cos"],
+  },
+  {
+    id: "trigo_etude_fonction",
+    label: "Étudier une fonction construite avec sin et cos (dérivée, variations, extremum)",
+    notionId: "fonctions_sinus_cosinus",
+    prerequis: ["trigo_equation_cos", "derivation_variation"],
+  },
+  {
+    id: "trigo_primitives",
+    label: "Primitiver et intégrer sin(ax+b) et cos(ax+b)",
+    notionId: "fonctions_sinus_cosinus",
+    prerequis: ["primitive_calculer"],
+  },
 
   /* =========================
      DÉNOMBREMENT ET COMBINATOIRE

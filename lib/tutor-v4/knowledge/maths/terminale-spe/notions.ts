@@ -101,6 +101,14 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  {
+    id: "fonctions_sinus_cosinus",
+    label: "Fonctions sinus et cosinus",
+    boId: "BOTSA2",
+    prerequis: ["derivation_fonction"],
+    levels: [1, 2, 3],
+  },
+
   /* =========================
      ALGÈBRE ET GÉOMÉTRIE
   ========================= */
