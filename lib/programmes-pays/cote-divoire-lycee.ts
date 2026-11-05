@@ -63,9 +63,9 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("premiere-spe", "sd_canonique", "sd_completion_carre", "sd_forme_factorisee"),
-        ...m("seconde", "devfac_factoriser_identite", "signes_produit"),
+        ...m("seconde", "devfac_factoriser_identite", "signes_produit", "poly_racine_factoriser", "poly_division", "poly_horner"),
       ],
-      note: "Manquent la division euclidienne de polynômes, les coefficients indéterminés et les fractions rationnelles.",
+      note: "Manquent les fractions rationnelles.",
     },
     {
       code: "C1-L3", domaine: CALC,
@@ -196,15 +196,15 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
       code: "C1-L2", domaine: CALC,
       texte: "Systèmes d'équations linéaires dans ℝ² (déterminant, existence et unicité) et dans ℝ³ (substitution, pivot de Gauss) ; mise en équation de situations concrètes.",
       couverture: "partielle",
-      micros: m("seconde", "droite_systeme"),
-      note: "Manquent le déterminant d'un système et les systèmes 3 × 3 (pivot de Gauss).",
+      micros: m("seconde", "droite_systeme", "systeme_determinant", "systeme_cramer"),
+      note: "Manquent les systèmes 3 × 3 (pivot de Gauss).",
     },
     {
       code: "C1-L3", domaine: FONC,
       texte: "Généralités sur les fonctions : restriction, application injective, surjective, bijective et réciproque, comparaison de fonctions, somme, produit, quotient, composée ; fonctions associées f(x − a) + b, f(−x), −f(x), |f(x)| et leurs courbes (translations, symétries).",
       couverture: "partielle",
-      micros: m("terminale-spe", "reciproque_bijection", "reciproque_expression", "reciproque_courbe"),
-      note: "Injective, surjective, bijective et réciproque couvertes ; manquent la composée et les courbes des fonctions associées.",
+      micros: [...m("terminale-spe", "reciproque_bijection", "reciproque_expression", "reciproque_courbe"), ...m("seconde", "courbe_translation", "courbe_dilatation_abs")],
+      note: "Injective, surjective, bijective, réciproque et courbes associées couvertes ; manquent la composée et f(−x).",
     },
     {
       code: "C1-L4", domaine: FONC,

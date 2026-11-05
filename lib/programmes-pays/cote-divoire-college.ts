@@ -256,12 +256,11 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
     {
       code: "C3-L5", domaine: GPLAN,
       texte: "Parallélogrammes particuliers : angles consécutifs et opposés, rectangle, losange, carré (définitions, diagonales, réciproques), construire, démontrer ; périmètre et aire du losange.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("5e", "para_cotes_angles", "para_particuliers", "para_construire"),
+        ...m("5e", "para_cotes_angles", "para_particuliers", "para_construire", "aire_losange"),
         ...m("6e", "quadrilatere_lien_propriete", "quadrilatere_conclusion"),
       ],
-      note: "Pas de micro « aire du losange (D × d ÷ 2) ».",
     },
     {
       code: "C3-L6", domaine: GESP,
@@ -351,8 +350,8 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       code: "C3-L1", domaine: GPLAN,
       texte: "Angles : angle au centre, arcs et cordes de même longueur, longueur d'un arc ; angles alternes-internes et correspondants (propriétés, parallélisme).",
       couverture: "partielle",
-      micros: [...m("5e", "angle_paralleles"), ...m("3e", "angle_inscrit_centre"), ...m("premiere-spe", "trig_arc")],
-      note: "L'angle au centre et la longueur d'un arc (en radians, 1re spé) sont couverts ; manquent les cordes.",
+      micros: [...m("5e", "angle_paralleles"), ...m("3e", "angle_inscrit_centre"), ...m("4e", "arc_longueur")],
+      note: "L'angle au centre et la longueur d'un arc sont couverts ; manquent les cordes.",
     },
     {
       code: "C3-L2", domaine: GPLAN,
@@ -361,9 +360,9 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       micros: [
         ...m("6e", "bissectrice_definition", "bissectrice_construire", "bissectrice_probleme"),
         ...m("seconde", "geo_projete_orthogonal"),
-        ...m("4e", "bissectrice_equidistance"),
+        ...m("4e", "bissectrice_equidistance", "distance_point_droite", "distance_paralleles"),
       ],
-      note: "La bissectrice par l'équidistance est couverte ; la distance d'un point à une droite (projeté orthogonal) est en seconde chez nous ; manquent la distance de deux parallèles et la construction de la bissectrice au compas.",
+      note: "Les distances et la bissectrice par l'équidistance sont couvertes ; manque la construction de la bissectrice au compas.",
     },
     {
       code: "C3-L3", domaine: GPLAN,
