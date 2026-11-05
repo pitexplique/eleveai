@@ -113,9 +113,8 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "I-4", domaine: NB,
       texte: "Polynômes : degré, égalité, somme et produit ; racine d'un polynôme, division euclidienne par x − a, factorisation.",
-      couverture: "partielle",
-      micros: m("stmg", "fct_d2_verifier_racine", "fct_d2_factoriser_racine_connue", "fct_d3_verifier_racine", "fct_d3_racines"),
-      note: "Manque la division euclidienne par x − a (et l'identification des coefficients) : absente des programmes français.",
+      couverture: "complete",
+      micros: [...m("stmg", "fct_d2_verifier_racine", "fct_d2_factoriser_racine_connue", "fct_d3_verifier_racine", "fct_d3_racines"), ...m("seconde", "poly_racine_factoriser", "poly_division", "poly_horner")],
     },
     {
       code: "I-5a", domaine: NB,
@@ -135,8 +134,8 @@ export const MAROC_TC: ProgrammePays = {
       code: "I-5c", domaine: NB,
       texte: "Systèmes de deux équations du premier degré à deux inconnues : combinaison linéaire, substitution, déterminant ; lien avec la position de deux droites.",
       couverture: "partielle",
-      micros: m("seconde", "droite_systeme", "droite_intersection"),
-      note: "Nos micros résolvent par substitution ; manquent la combinaison linéaire et la méthode du déterminant (règle de Cramer).",
+      micros: m("seconde", "droite_systeme", "droite_intersection", "systeme_determinant", "systeme_cramer"),
+      note: "Substitution et déterminant (règle de Cramer) sont couverts ; manque la combinaison linéaire.",
     },
     {
       code: "I-5d", domaine: NB,
@@ -179,8 +178,8 @@ export const MAROC_TC: ProgrammePays = {
       code: "II-5", domaine: GP,
       texte: "Produit scalaire : définition par projection, expression trigonométrique, orthogonalité ; relations métriques du triangle rectangle, théorème de la médiane, théorème d'Al-Kashi.",
       couverture: "partielle",
-      micros: m("premiere-spe", "ps_projection", "ps_norme_angle", "ps_proprietes", "ps_orthogonalite", "ps_alkashi", "ps_angle_longueur"),
-      note: "Au Maroc dès le TC (en France en 1re spé). Manquent le théorème de la médiane (AB² + AC² = 2AI² + BC²/2) et les relations métriques du triangle rectangle (AH² = HB × HC…).",
+      micros: [...m("premiere-spe", "ps_projection", "ps_norme_angle", "ps_proprietes", "ps_orthogonalite", "ps_alkashi", "ps_angle_longueur"), ...m("3e", "metrique_produit", "metrique_carre")],
+      note: "Au Maroc dès le TC (en France en 1re spé). Manque le théorème de la médiane (AB² + AC² = 2AI² + BC²/2).",
     },
     // ── III. Géométrie dans l'espace ────────────────────────────────────────
     {

@@ -102,7 +102,7 @@ export const MAROC_3AC: ProgrammePays = {
         ...m("3e", "trigo_triangle_rectangle", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_choisir_rapport", "trigo_calculer_angle"),
         ...m("seconde", "geo_trig_identite"),
       ],
-      note: "Manque la relation tan x = sin x ÷ cos x (cos² x + sin² x = 1 est en seconde chez nous). Les relations métriques (AH² = HB × HC…) sont en exercices, hors cours.",
+      note: "Manque la relation tan x = sin x ÷ cos x (cos² x + sin² x = 1 est en seconde chez nous).",
     },
     {
       code: "S1-7", domaine: AG,

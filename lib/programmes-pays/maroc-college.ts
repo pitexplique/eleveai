@@ -134,10 +134,9 @@ export const MAROC_1AC: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("6e", "mediatrice_propriete", "mediatrice_construire", "circonscrit_concourantes", "circonscrit_construire", "bissectrice_definition", "bissectrice_construire"),
-        ...m("4e", "triangle_droites", "bissectrice_equidistance", "cercle_inscrit", "orthocentre"),
+        ...m("4e", "triangle_droites", "bissectrice_equidistance", "cercle_inscrit", "orthocentre", "distance_point_droite"),
         ...m("seconde", "geo_projete_orthogonal"),
       ],
-      note: "La distance d'un point à une droite (projeté orthogonal) est en seconde chez nous.",
     },
 
     // ── Semestre 2 ──────────────────────────────────────────────────────────
