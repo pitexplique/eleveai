@@ -315,6 +315,8 @@ export type CubeCell3D = {
 export type Solide3DCanvasData = {
   kind: "solide_3d";
   solide: SolideKind;
+  /** Pyramide : base triangulaire au lieu de la base quadrilatère (05/11/2026). */
+  baseTriangulaire?: boolean;
   size?: { width?: number; height?: number };
   dimensions?: {
     longueur?: number;

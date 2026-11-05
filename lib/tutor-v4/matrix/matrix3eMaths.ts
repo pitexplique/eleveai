@@ -91,6 +91,9 @@ const supportLinks: Record<string, string[]> = {
   aire_triangle: ["triangle_reconnaitre"],
   volume_prisme: ["aire_triangle"],
   volume_cylindre: ["aire_disque"],
+  volume_pyramide: ["volume_prisme", "aire_triangle"],
+  volume_cone: ["volume_cylindre", "aire_disque"],
+  volume_pyramide_cone_reduction: ["volume_agrandissement_reduction", "volume_pyramide", "volume_cone"],
   volume_boule: ["volume_cylindre"],
 
   // =========================

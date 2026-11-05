@@ -20,6 +20,8 @@ import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths/index"
 import { CORRECTEURS_4E } from "@/lib/tutor-v4/questionBank/4e/maths/correcteurs";
 import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths/index";
 import { CORRECTEURS_5E } from "@/lib/tutor-v4/questionBank/5e/maths/correcteurs";
+import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths/index";
+import { CORRECTEURS_3E } from "@/lib/tutor-v4/questionBank/3e/maths/correcteurs";
 import { compareAnswer } from "@/lib/tutor/evaluation/comparators";
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 
@@ -27,9 +29,10 @@ const TIRAGES = 500;
 const args = process.argv.slice(2);
 const en4e = args[0] === "4e";
 const en5e = args[0] === "5e";
-const filtres = args.filter((a) => a !== "4e" && a !== "5e" && a !== "6e");
-const BANQUE: any[] = en4e ? maths4eQuestionBank : en5e ? maths5eQuestionBank : maths6eQuestionBank;
-const CORRECTEURS = en4e ? CORRECTEURS_4E : en5e ? CORRECTEURS_5E : CORRECTEURS_6E;
+const en3e = args[0] === "3e"; // 05/11/2026 : seulement sur des micros nommées, la 3e n'a de correcteurs que depuis cette date.
+const filtres = args.filter((a) => a !== "3e" && a !== "4e" && a !== "5e" && a !== "6e");
+const BANQUE: any[] = en3e ? maths3eQuestionBank : en4e ? maths4eQuestionBank : en5e ? maths5eQuestionBank : maths6eQuestionBank;
+const CORRECTEURS = en3e ? CORRECTEURS_3E : en4e ? CORRECTEURS_4E : en5e ? CORRECTEURS_5E : CORRECTEURS_6E;
 const gabarits = BANQUE.filter(
   (i) =>
     i.kind === "template" &&
@@ -54,7 +57,7 @@ const BARRE_ENTRE_NOMBRES = /(?<![\d/])\d+(?:[,.]\d+)?\s*\/\s*\d+(?![\d/])/;
 
 function reglesCommunes(q: TutorGeneratedQuestionV4, notionId: string): string[] {
   const p: string[] = [];
-  if (!NOTION_A_FRACTIONS.test(notionId) && !((en4e || en5e) && NOTION_A_FRACTIONS_4E.test(notionId)))
+  if (!NOTION_A_FRACTIONS.test(notionId) && !((en3e || en4e || en5e) && NOTION_A_FRACTIONS_4E.test(notionId)))
     for (const s of [q.text, ...(q.choices ?? []), ...(q.expected ?? []), q.explanation ?? ""].map(String)) {
       const m = s.match(BARRE_ENTRE_NOMBRES);
       if (m) p.push(`barre de fraction pour une division : « ${m[0]} » (écrire « : » ou « ÷ ») dans « ${s.slice(0, 120)} »`);

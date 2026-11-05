@@ -491,6 +491,9 @@ const supportLinks: Record<string, string[]> = {
     "relatif_multiplication",
   ],
 
+  volume_pyramide: ["volume_prisme", "aire_rectangle", "aire_triangle"],
+  volume_cone: ["volume_cylindre", "volume_pyramide", "aire_carre"],
+
   volume_unite: ["volume_pave", "volume_prisme", "volume_cylindre"],
 
   volume_defi: [

@@ -843,8 +843,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
       "Calculer avec des grandeurs mesurables ; exprimer les résultats dans les unités adaptées",
     objectif: "Volume d'un prisme, d'une pyramide, d'un cylindre, d'un cône, d'une boule.",
     page: 135,
-    micros: ["volume_prisme", "volume_cylindre", "volume_pave", "volume_lien_aire"],
-    note: "⚠️ Deux solides sur cinq. PYRAMIDE, CÔNE et BOULE ont zéro occurrence en 4e. ⛔ Objectif de CYCLE : vérifier les repères annuels avant d'en faire un chantier de 4e — le nouveau programme, lui, fait arriver le volume de la pyramide et du cône EN 4e à partir de 2027.",
+    micros: ["volume_prisme", "volume_cylindre", "volume_pave", "volume_lien_aire", "volume_pyramide", "volume_cone"],
+    note: "05/11/2026 : pyramide et cône ajoutés (4e et 3e). La boule reste en 3e, objectif de cycle.",
   },
   {
     id: "4e-C-grandeurs-4",

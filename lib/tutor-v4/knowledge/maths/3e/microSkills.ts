@@ -796,6 +796,25 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["volume_cylindre"],
   },
   {
+    // 05/11/2026 : trou du programme (BO 2020, p. 135).
+    id: "volume_pyramide",
+    label: "Calculer le volume d’une pyramide",
+    notionId: "volume_solide",
+    prerequis: ["volume_prisme"],
+  },
+  {
+    id: "volume_cone",
+    label: "Calculer le volume d’un cône",
+    notionId: "volume_solide",
+    prerequis: ["volume_cylindre"],
+  },
+  {
+    id: "volume_pyramide_cone_reduction",
+    label: "Volume d’une pyramide ou d’un cône réduit par une section",
+    notionId: "volume_solide",
+    prerequis: ["volume_pyramide", "volume_cone", "volume_agrandissement_reduction"],
+  },
+  {
     id: "volume_agrandissement_reduction",
     label: "Comprendre l’effet d’un agrandissement ou d’une réduction sur les volumes",
     notionId: "volume_solide",

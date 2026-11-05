@@ -29,6 +29,7 @@ import { identitesRemarquablesBank} from "./identites-remarquables.bank"
 import { factorisationBank } from "./factorisation.bank";
 import { proportionnaliteBank} from "./proportionnalite.bank"
 import { volumesBank } from "./volumes.bank";
+import { volumesPyramideConeBank } from "./volumes-pyramide-cone.bank";
 import { thalesBank } from "./thales.bank";
 import { statistiquesBank} from "./statistiques.bank"
 import { algorithmiqueBank } from "./algorithmique.bank";
@@ -79,6 +80,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...ratiosBank,
   ...echellesBank,
   ...volumesBank,
+  ...volumesPyramideConeBank,
   ...grandeursBank,
   ...fonctionsBank,
   ...thalesBank,

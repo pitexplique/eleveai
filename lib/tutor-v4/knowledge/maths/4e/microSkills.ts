@@ -1300,6 +1300,19 @@ export const microSkills: MicroSkillSource[] = [
   prerequis: ["volume_lien_aire"],
 },
 {
+  // 05/11/2026 : trou du programme (BO 2020, p. 135).
+  id: "volume_pyramide",
+  label: "Calculer le volume d’une pyramide",
+  notionId: "volume_solide",
+  prerequis: ["volume_prisme"],
+},
+{
+  id: "volume_cone",
+  label: "Calculer le volume d’un cône",
+  notionId: "volume_solide",
+  prerequis: ["volume_cylindre"],
+},
+{
   id: "volume_unite",
   label: "Utiliser les unités de volume",
   notionId: "volume_solide",

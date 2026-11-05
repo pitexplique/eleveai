@@ -538,7 +538,7 @@ function drawCone({
             to={{ x: cx, y: baseY }}
             label={hauteur}
             color={highlightHeight ? colors.heightStroke : "#0369a1"}
-            labelOffset={{ x: 25, y: 0 }}
+            labelOffset={{ x: 0, y: 12 }}
           />
 
           <DimensionLine
@@ -546,7 +546,7 @@ function drawCone({
             to={{ x: cx + rx, y: baseY }}
             label={rayon}
             color="#0369a1"
-            labelOffset={{ x: 0, y: -12 }}
+            labelOffset={{ x: -6, y: -12 }}
           />
         </>
       ) : null}
@@ -632,7 +632,7 @@ function drawBoule({
             to={{ x: cx + r, y: cy }}
             label={rayon}
             color="#0369a1"
-            labelOffset={{ x: 0, y: -12 }}
+            labelOffset={{ x: -6, y: -12 }}
           />
 
           <DimensionLine
@@ -640,7 +640,7 @@ function drawBoule({
             to={{ x: cx + r, y: cy + 48 }}
             label={diametre}
             color="#7c3aed"
-            labelOffset={{ x: 0, y: 22 }}
+            labelOffset={{ x: -3, y: 22 }}
           />
         </>
       ) : null}
@@ -680,9 +680,25 @@ function drawPyramide({
   const B = { x: 222, y: 188 };
   const C = { x: 268, y: 146 };
   const D = { x: 132, y: 146 };
+  const T = { x: 245, y: 135 };
 
   const S = { x: 176, y: 58 };
-  const O = { x: 178, y: 166 };
+  // 05/11/2026 : une pyramide à base triangulaire ne se dessine plus sur un carré.
+  const triangulaire = data.baseTriangulaire === true;
+  const O = triangulaire ? { x: 185, y: 170 } : { x: 178, y: 166 };
+  const sommetsBase = triangulaire ? [A, B, T] : [A, B, C, D];
+  const faces = triangulaire
+    ? [
+        { p: [S, B, T], fill: "#bfdbfe", opacity: 0.76 },
+        { p: [S, T, A], fill: "#dbeafe", opacity: 0.62 },
+        { p: [S, A, B], fill: colors.bodyFill, opacity: 0.82 },
+      ]
+    : [
+        { p: [S, A, B], fill: colors.bodyFill, opacity: 0.82 },
+        { p: [S, B, C], fill: "#bfdbfe", opacity: 0.76 },
+        { p: [S, C, D], fill: "#dbeafe", opacity: 0.62 },
+        { p: [S, D, A], fill: "#e0f2fe", opacity: 0.68 },
+      ];
 
   const hauteur =
     data.labels?.hauteur ?? `${data.dimensions?.hauteur ?? "h"} cm`;
@@ -692,46 +708,25 @@ function drawPyramide({
   return (
     <>
       <polygon
-        points={polygon([A, B, C, D])}
+        points={polygon(sommetsBase)}
         fill={highlightBase ? colors.baseFill : colors.bodyFill}
         stroke={highlightBase ? colors.baseStroke : colors.bodyStroke}
         strokeWidth={highlightBase ? 3.2 : 2.6}
         opacity={0.9}
       />
 
-      <polygon
-        points={polygon([S, A, B])}
-        fill={colors.bodyFill}
-        stroke={colors.bodyStroke}
-        strokeWidth={2.5}
-        opacity={0.82}
-      />
+      {faces.map((f, i) => (
+        <polygon
+          key={`pyramide-face-${i}`}
+          points={polygon(f.p)}
+          fill={f.fill}
+          stroke={colors.bodyStroke}
+          strokeWidth={2.5}
+          opacity={f.opacity}
+        />
+      ))}
 
-      <polygon
-        points={polygon([S, B, C])}
-        fill="#bfdbfe"
-        stroke={colors.bodyStroke}
-        strokeWidth={2.5}
-        opacity={0.76}
-      />
-
-      <polygon
-        points={polygon([S, C, D])}
-        fill="#dbeafe"
-        stroke={colors.bodyStroke}
-        strokeWidth={2.5}
-        opacity={0.62}
-      />
-
-      <polygon
-        points={polygon([S, D, A])}
-        fill="#e0f2fe"
-        stroke={colors.bodyStroke}
-        strokeWidth={2.5}
-        opacity={0.68}
-      />
-
-      {[A, B, C, D].map((p, i) => (
+      {sommetsBase.map((p, i) => (
         <line
           key={`pyramide-edge-${i}`}
           x1={S.x}
@@ -744,19 +739,20 @@ function drawPyramide({
       ))}
 
       {showDimensions ? (
+        // ⛔ 05/11/2026 : l'étiquette sur la hauteur, entre les arêtes (à côté, elle touchait l'arête).
         <DimensionLine
           from={S}
           to={O}
           label={hauteur}
           color={highlightHeight ? colors.heightStroke : "#0369a1"}
-          labelOffset={{ x: 24, y: 0 }}
+          labelOffset={{ x: -3, y: 22 }}
         />
       ) : null}
 
       <circle cx={O.x} cy={O.y} r={3.5} fill="#0f172a" opacity={0.8} />
 
       {showLabels && highlightBase ? (
-        <Label x={176} y={174} color={colors.baseStroke}>
+        <Label x={(A.x + B.x) / 2} y={A.y + 18} color={colors.baseStroke}>
           {baseLabel}
         </Label>
       ) : null}
