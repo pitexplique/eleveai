@@ -11,7 +11,7 @@ const produit = (q: Q) => reponse(q, nombres(q.text).reduce((p, x) => p * x, 1))
 /* dénombrer */
 const tableauCodes = (q: Q) => {
   const f = q.canvas as any;
-  return reponse(q, f.rows.length * f.rows[0].values.length);
+  return reponse(q, f.rows.length * (f.rows[0].values.length - 1));
 };
 const codes = (q: Q) => {
   const l = q.text.match(/Lettres : ([A-E, ]+)\./)?.[1].split(", ").length;

@@ -21,7 +21,8 @@ function droite(grandPas: readonly number[], depart: (g: number) => number) {
 }
 const figure = (min: number, max: number, g: number, petit: number, points: { value: number; label: string }[]): CanvasFigure => ({
   kind: "number_line",
-  size: { width: 420, height: 110 },
+  // Les grands nombres prennent de la place : la largeur suit, pour que leurs écritures ne se touchent pas.
+  size: { width: Math.max(420, Math.round(6.6 * (fr(max).length * 8.5 + 12))), height: 110 },
   min,
   max,
   step: g,
@@ -93,9 +94,14 @@ const entierDroite: TutorBankItemV4[] = [
   dd(2, "Compare le nombre aux grands traits, puis compte les petits.", () => {
     const d = droite([100, 1000, 10000, 100000], (g) => g * entre(1, 40));
     const lettres = melange(["A", "B", "C", "D"]);
-    const valeurs = new Set<number>();
-    while (valeurs.size < 4) valeurs.add(surPetite(d));
-    const vals = [...valeurs].sort((a, b) => a - b);
+    // Deux points collés se liraient mal : on les garde à plusieurs petites graduations l'un de l'autre.
+    const ecart = (d.p >= 5 ? 3 : 2) * d.petit;
+    const vals: number[] = [];
+    while (vals.length < 4) {
+      const x = surPetite(d);
+      if (vals.every((y) => Math.abs(x - y) >= ecart)) vals.push(x);
+    }
+    vals.sort((a, b) => a - b);
     const pts = vals.map((value, i) => ({ value, label: lettres[i] }));
     const c = un(pts);
     return qcm(

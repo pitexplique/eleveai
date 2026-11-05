@@ -39,7 +39,7 @@ const probleme_denombrement: TutorBankItemV4[] = [
     const b = P(5);
     const lignes = LETTRES.slice(0, a);
     const cols = Array.from({ length: b }, (_, i) => String(i + 1));
-    const figure: CanvasFigure = { kind: "tableau_donnees", headers: ["", ...cols], rows: lignes.map((l) => ({ label: l, values: cols.map(() => "") })), display: { compact: true } };
+    const figure: CanvasFigure = { kind: "tableau_donnees", title: "Les codes", headers: ["Lettre", ...cols], rows: lignes.map((l) => ({ values: [l, ...cols.map(() => "")] })), display: { compact: true } };
     return qcmN(a * b, fauxP(a, b), expProduit(a, b), v(["Un code est fait d'une lettre et d'un chiffre.", "Chaque case du tableau est un code : une lettre, puis un chiffre.", "Une case de ce tableau donne un code différent."], ["Combien de codes différents ?", "Combien de codes en tout ?", "Combien de codes possibles ?", "Combien de cases à remplir ?", "Combien de codes peut-on faire ?"]), figure);
   }),
   de(1, "Une lettre, puis un chiffre : multiplie.", () => {
