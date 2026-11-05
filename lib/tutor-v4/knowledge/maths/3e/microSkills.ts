@@ -237,6 +237,19 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["litteral_developper", "litteral_factoriser"],
   },
   {
+    // 05/11/2026 : trou du programme (BO 2020, p. 132, « il est attendu »).
+    id: "litteral_demontrer_entiers",
+    label: "Démontrer une propriété des entiers avec le calcul littéral",
+    notionId: "litteral_calcul",
+    prerequis: ["litteral_developper", "litteral_factoriser"],
+  },
+  {
+    id: "litteral_demontrer_fraction",
+    label: "Démontrer une propriété des fractions avec le calcul littéral",
+    notionId: "litteral_calcul",
+    prerequis: ["litteral_developper", "fraction_rationnel_calculer"],
+  },
+  {
     id: "litteral_defi",
     label: "Défis sur le calcul littéral",
     notionId: "litteral_calcul",

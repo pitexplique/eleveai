@@ -19,6 +19,7 @@ import { arithmetiqueBank } from "./arithmetique.bank";
 import { proportionnaliteBank } from "./proportionnalite.bank";
 
 import { calculLitteralBank } from "./calcul_litteral.bank";
+import { litteralDemontrerBank } from "./litteral-demontrer.bank";
 import { equationsBank } from "./equations.bank";
 import { equationsCarreBank } from "./equations-carre.bank";
 
@@ -59,6 +60,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...proportionnaliteBank,
 
   ...calculLitteralBank,
+  ...litteralDemontrerBank,
   ...equationsBank,
   ...equationsCarreBank,
 

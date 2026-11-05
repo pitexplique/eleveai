@@ -86,6 +86,8 @@ const supportLinks: Record<string, string[]> = {
   affine_defi: ["fonction_defi", "equation_defi"],
   equation_carre_egal_a: ["entier_racine_calculer", "fonction_graphique"],
   equation_carre_factoriser: ["litteral_identite", "equation_produit_nul"],
+  litteral_demontrer_entiers: ["litteral_reduire", "litteral_substituer"],
+  litteral_demontrer_fraction: ["fraction_rationnel_calculer", "litteral_substituer"],
 
    // =========================
   // GRANDEURS
