@@ -306,7 +306,7 @@ export const microSkills: MicroSkillSource[] = [
   /* ===================== VARIATIONS ET COURBES ===================== */
   {
     id: "var_parite",
-    label: "Reconnaître une fonction paire ou impaire : f(−x), courbe symétrique",
+    label: "Reconnaître une fonction paire ou impaire avec f(−x) et la symétrie de la courbe",
     notionId: "variations_fonctions",
     prerequis: [],
   },

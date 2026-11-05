@@ -196,10 +196,41 @@ export default function TriangleCanvas({ figure }: Props) {
     };
   })();
 
+  // ⛔ 05/11/2026, captures à 375 px : sur un triangle quelconque (angle aigu, triangle aplati), les
+  // positions fixes posaient le « ? » sur un côté et les caches blancs coupaient les côtés. Sur demande
+  // (`legendesDehors`), les légendes se calculent depuis le centre de gravité et les bissectrices.
+  const dehors = figure.display?.legendesDehors === true;
+  const G = { x: (A.x + B.x + C.x) / 3, y: (A.y + B.y + C.y) / 3 };
+  const legendeSommet = (P: Point) => {
+    const u = norm(P.x - G.x, P.y - G.y);
+    return { x: P.x + u.x * 16, y: P.y + u.y * 16 };
+  };
+  const legendeCote = (P: Point, Q: Point, texte: string) => {
+    const m = mid(P, Q);
+    const n0 = norm(-(Q.y - P.y), Q.x - P.x);
+    const s = n0.x * (m.x - G.x) + n0.y * (m.y - G.y) >= 0 ? 1 : -1;
+    const n = { x: n0.x * s, y: n0.y * s };
+    const d = 12 + Math.abs(n.x) * texte.length * 4.5;
+    return { x: m.x + n.x * d, y: m.y + n.y * d };
+  };
+  const legendeAngle = (S: Point, P: Point, Q: Point) => {
+    const u1 = norm(P.x - S.x, P.y - S.y);
+    const u2 = norm(Q.x - S.x, Q.y - S.y);
+    const b = norm(u1.x + u2.x, u1.y + u2.y);
+    const demi = Math.acos(Math.max(-1, Math.min(1, u1.x * u2.x + u1.y * u2.y))) / 2;
+    const r = Math.min(70, Math.max(26, 15 / Math.max(Math.sin(demi), 0.01)));
+    return { x: S.x + b.x * r, y: S.y + b.y * r };
+  };
+  const texteCentre = { textAnchor: "middle" as const, dominantBaseline: "central" as const, stroke: "white", strokeWidth: 3, paintOrder: "stroke" as const, fontWeight: 900 };
+
+  // Un triangle plat ne laisse pas un grand vide au-dessus de lui : le cadre suit la figure.
+  const yHaut = dehors ? Math.max(0, Math.min(A.y, B.y, C.y) - 34) : 0;
+  const yBas = dehors ? Math.min(height, Math.max(A.y, B.y, C.y) + 34) : height;
+
   return (
-    <div className="mx-auto w-full max-w-[240px] rounded-xl border border-slate-200 bg-white p-2 shadow-sm">
+    <div className={`mx-auto w-full ${dehors ? "max-w-[300px]" : "max-w-[240px]"} rounded-xl border border-slate-200 bg-white p-2 shadow-sm`}>
       <svg
-        viewBox={`0 0 ${width} ${height}`}
+        viewBox={`0 ${yHaut} ${width} ${yBas - yHaut}`}
         className="block h-auto w-full"
         aria-label="Figure triangle"
       >
@@ -264,7 +295,7 @@ export default function TriangleCanvas({ figure }: Props) {
           </>
         )}
 
-        {showLabels && (
+        {!dehors && showLabels && (
           <>
             <text
               x={posLabelA.x}
@@ -305,7 +336,7 @@ export default function TriangleCanvas({ figure }: Props) {
           </>
         )}
 
-        {showAngles && (
+        {!dehors && showAngles && (
           <>
             {angleA ? (
               <g>
@@ -387,7 +418,29 @@ export default function TriangleCanvas({ figure }: Props) {
           </>
         )}
 
-        {showSides && (
+        {dehors && (
+          <>
+            {showLabels &&
+              ([[A, labelA], [B, labelB], [C, labelC]] as [Point, string][]).map(([P, t], i) => {
+                const q = legendeSommet(P);
+                return <text key={`nom-${i}`} x={q.x} y={q.y} fontSize="18" fill="#0f172a" {...texteCentre}>{t}</text>;
+              })}
+            {showSides &&
+              ([[A, B, sideAB], [B, C, sideBC], [C, A, sideCA]] as [Point, Point, string | undefined][]).map(([P, Q, t], i) => {
+                if (!t) return null;
+                const q = legendeCote(P, Q, t);
+                return <text key={`cote-${i}`} x={q.x} y={q.y} fontSize="15" fill="#0369a1" {...texteCentre}>{t}</text>;
+              })}
+            {showAngles &&
+              ([[A, B, C, angleA], [B, A, C, angleB], [C, A, B, angleC]] as [Point, Point, Point, string | undefined][]).map(([S, P, Q, t], i) => {
+                if (!t) return null;
+                const q = legendeAngle(S, P, Q);
+                return <text key={`angle-${i}`} x={q.x} y={q.y} fontSize="15" fill="#7c3aed" {...texteCentre}>{t}</text>;
+              })}
+          </>
+        )}
+
+        {!dehors && showSides && (
           <>
             {sideAB ? (
               <g>

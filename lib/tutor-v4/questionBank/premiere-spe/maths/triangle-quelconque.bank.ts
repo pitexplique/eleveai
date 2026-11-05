@@ -39,7 +39,7 @@ function figure(n: readonly string[], aDeg: number, bDeg: number, cotes: Record<
     labels: { A: P, B: Q, C: R },
     sideLabels,
     angleLabels,
-    display: { showPoints: true, showLabels: true, showSides: true, showAngles: Object.keys(angleLabels).length > 0 },
+    display: { showPoints: true, showLabels: true, showSides: true, showAngles: Object.keys(angleLabels).length > 0, legendesDehors: true },
   } as CanvasFigure;
 }
 /** Les angles d'un triangle dont on connaît les trois côtés (`a` opposé au 1er sommet…). */
@@ -99,36 +99,36 @@ const VISEES: ((d: string, a: string, b: string) => string)[] = [
   (d, a, b) => `Au volcan, deux sismographes $A$ et $B$, avec $AB = ${d}$ m, repèrent une fissure en $C$ : $\\widehat{A} = ${a}$ et $\\widehat{B} = ${b}$.`,
 ];
 const CERCLES: ((c: string, a: string) => string)[] = [
-  (c, a) => `Trois antennes $A$, $B$, $C$ sont posées sur un même cercle. On a $BC = ${c}$ m et $\\widehat{A} = ${a}$.`,
-  (c, a) => `Un paysagiste plante trois arbres $A$, $B$, $C$ sur le bord d'un bassin circulaire. Il mesure $BC = ${c}$ m et $\\widehat{A} = ${a}$.`,
-  (c, a) => `Des archéologues trouvent trois pierres $A$, $B$, $C$ d'une ancienne enceinte ronde, avec $BC = ${c}$ m et $\\widehat{A} = ${a}$.`,
-  (c, a) => `Sur une piste circulaire, trois coureuses sont en $A$, $B$, $C$, avec $BC = ${c}$ m et $\\widehat{A} = ${a}$.`,
-  (c, a) => `Trois projecteurs $A$, $B$, $C$ sont fixés sur un anneau de scène. On lit $BC = ${c}$ m et $\\widehat{A} = ${a}$.`,
-  (c, a) => `Trois ruches $A$, $B$, $C$ sont placées sur un cercle autour d'un verger, avec $BC = ${c}$ m et $\\widehat{A} = ${a}$.`,
+  (c, a) => `Trois antennes $A$, $B$, $C$ sont posées sur un même cercle. On a $BC = ${c}\\text{ m}$ et $\\widehat{A} = ${a}$.`,
+  (c, a) => `Un paysagiste plante trois arbres $A$, $B$, $C$ sur le bord d'un bassin circulaire. Il mesure $BC = ${c}\\text{ m}$ et $\\widehat{A} = ${a}$.`,
+  (c, a) => `Des archéologues trouvent trois pierres $A$, $B$, $C$ d'une ancienne enceinte ronde, avec $BC = ${c}\\text{ m}$ et $\\widehat{A} = ${a}$.`,
+  (c, a) => `Sur une piste circulaire, trois coureuses sont en $A$, $B$, $C$, avec $BC = ${c}\\text{ m}$ et $\\widehat{A} = ${a}$.`,
+  (c, a) => `Trois projecteurs $A$, $B$, $C$ sont fixés sur un anneau de scène. On lit $BC = ${c}\\text{ m}$ et $\\widehat{A} = ${a}$.`,
+  (c, a) => `Trois ruches $A$, $B$, $C$ sont placées sur un cercle autour d'un verger, avec $BC = ${c}\\text{ m}$ et $\\widehat{A} = ${a}$.`,
 ];
 const PIECES: ((a: string, b: string, al: string) => string)[] = [
-  (a, b, al) => `Une voile triangulaire $ABC$ a pour mesures $BC = ${a}$ m, $AC = ${b}$ m et $\\widehat{A} = ${al}$.`,
-  (a, b, al) => `La charpente d'un abri forme un triangle $ABC$ : $BC = ${a}$ m, $AC = ${b}$ m, $\\widehat{A} = ${al}$.`,
-  (a, b, al) => `Un cerf-volant de compétition contient un triangle $ABC$ avec $BC = ${a}$ dm, $AC = ${b}$ dm et $\\widehat{A} = ${al}$.`,
-  (a, b, al) => `Sur un plan de parcours, trois balises forment le triangle $ABC$, avec $BC = ${a}$ km, $AC = ${b}$ km et $\\widehat{A} = ${al}$.`,
-  (a, b, al) => `Une ingénieure dessine une poutre en triangle $ABC$ : $BC = ${a}$ m, $AC = ${b}$ m, $\\widehat{A} = ${al}$.`,
-  (a, b, al) => `Un luthier trace une pièce triangulaire $ABC$ avec $BC = ${a}$ cm, $AC = ${b}$ cm et $\\widehat{A} = ${al}$.`,
+  (a, b, al) => `Une voile triangulaire $ABC$ a pour mesures $BC = ${a}\\text{ m}$, $AC = ${b}\\text{ m}$ et $\\widehat{A} = ${al}$.`,
+  (a, b, al) => `La charpente d'un abri forme un triangle $ABC$ : $BC = ${a}\\text{ m}$, $AC = ${b}\\text{ m}$, $\\widehat{A} = ${al}$.`,
+  (a, b, al) => `Un cerf-volant de compétition contient un triangle $ABC$ avec $BC = ${a}\\text{ dm}$, $AC = ${b}\\text{ dm}$ et $\\widehat{A} = ${al}$.`,
+  (a, b, al) => `Sur un plan de parcours, trois balises forment le triangle $ABC$, avec $BC = ${a}\\text{ km}$, $AC = ${b}\\text{ km}$ et $\\widehat{A} = ${al}$.`,
+  (a, b, al) => `Une ingénieure dessine une poutre en triangle $ABC$ : $BC = ${a}\\text{ m}$, $AC = ${b}\\text{ m}$, $\\widehat{A} = ${al}$.`,
+  (a, b, al) => `Un luthier trace une pièce triangulaire $ABC$ avec $BC = ${a}\\text{ cm}$, $AC = ${b}\\text{ cm}$ et $\\widehat{A} = ${al}$.`,
 ];
 const TERRAINS: ((a: string, b: string, c: string) => string)[] = [
-  (a, b, c) => `Un champ triangulaire $ABC$ a pour côtés $AB = ${a}$ m, $BC = ${b}$ m et $AC = ${c}$ m.`,
-  (a, b, c) => `Une voile de bateau a la forme d'un triangle $ABC$ avec $AB = ${a}$ dm, $BC = ${b}$ dm, $AC = ${c}$ dm.`,
-  (a, b, c) => `Une couturière découpe un tissu en triangle $ABC$ : $AB = ${a}$ cm, $BC = ${b}$ cm, $AC = ${c}$ cm.`,
-  (a, b, c) => `Un parc naturel protège une zone triangulaire $ABC$ avec $AB = ${a}$ hm, $BC = ${b}$ hm et $AC = ${c}$ hm.`,
-  (a, b, c) => `Un toit a un pan en forme de triangle $ABC$, avec $AB = ${a}$ dm, $BC = ${b}$ dm et $AC = ${c}$ dm.`,
-  (a, b, c) => `Une artiste peint une fresque sur un mur triangulaire $ABC$, de côtés $AB = ${a}$ dm, $BC = ${b}$ dm et $AC = ${c}$ dm.`,
+  (a, b, c) => `Un champ triangulaire $ABC$ a pour côtés $AB = ${a}\\text{ m}$, $BC = ${b}\\text{ m}$ et $AC = ${c}\\text{ m}$.`,
+  (a, b, c) => `Une voile de bateau a la forme d'un triangle $ABC$ avec $AB = ${a}\\text{ dm}$, $BC = ${b}\\text{ dm}$, $AC = ${c}\\text{ dm}$.`,
+  (a, b, c) => `Une couturière découpe un tissu en triangle $ABC$ : $AB = ${a}\\text{ cm}$, $BC = ${b}\\text{ cm}$, $AC = ${c}\\text{ cm}$.`,
+  (a, b, c) => `Un parc naturel protège une zone triangulaire $ABC$ avec $AB = ${a}\\text{ hm}$, $BC = ${b}\\text{ hm}$ et $AC = ${c}\\text{ hm}$.`,
+  (a, b, c) => `Un toit a un pan en forme de triangle $ABC$, avec $AB = ${a}\\text{ dm}$, $BC = ${b}\\text{ dm}$ et $AC = ${c}\\text{ dm}$.`,
+  (a, b, c) => `Une artiste peint une fresque sur un mur triangulaire $ABC$, de côtés $AB = ${a}\\text{ dm}$, $BC = ${b}\\text{ dm}$ et $AC = ${c}\\text{ dm}$.`,
 ];
 const SECTEURS: ((a: string, b: string, g: string) => string)[] = [
-  (a, b, g) => `Un jardinier clôt un massif triangulaire $ABC$ avec $CA = ${a}$ m, $CB = ${b}$ m et $\\widehat{C} = ${g}$.`,
-  (a, b, g) => `Deux caméras de surveillance en $A$ et $B$ sont reliées à un boîtier $C$ par $CA = ${a}$ m et $CB = ${b}$ m, avec $\\widehat{C} = ${g}$.`,
-  (a, b, g) => `Un filet de pêche est tendu entre trois piquets $A$, $B$, $C$ : $CA = ${a}$ m, $CB = ${b}$ m, $\\widehat{C} = ${g}$.`,
-  (a, b, g) => `Sur un terrain de jeu, on trace le triangle $ABC$ tel que $CA = ${a}$ m, $CB = ${b}$ m et $\\widehat{C} = ${g}$.`,
-  (a, b, g) => `Un panneau solaire triangulaire $ABC$ a pour mesures $CA = ${a}$ dm, $CB = ${b}$ dm et $\\widehat{C} = ${g}$.`,
-  (a, b, g) => `Une bâche d'ombre est tendue en triangle $ABC$, avec $CA = ${a}$ m, $CB = ${b}$ m et $\\widehat{C} = ${g}$.`,
+  (a, b, g) => `Un jardinier clôt un massif triangulaire $ABC$ avec $CA = ${a}\\text{ m}$, $CB = ${b}\\text{ m}$ et $\\widehat{C} = ${g}$.`,
+  (a, b, g) => `Deux caméras de surveillance en $A$ et $B$ sont reliées à un boîtier $C$ par $CA = ${a}\\text{ m}$ et $CB = ${b}\\text{ m}$, avec $\\widehat{C} = ${g}$.`,
+  (a, b, g) => `Un filet de pêche est tendu entre trois piquets $A$, $B$, $C$ : $CA = ${a}\\text{ m}$, $CB = ${b}\\text{ m}$, $\\widehat{C} = ${g}$.`,
+  (a, b, g) => `Sur un terrain de jeu, on trace le triangle $ABC$ tel que $CA = ${a}\\text{ m}$, $CB = ${b}\\text{ m}$ et $\\widehat{C} = ${g}$.`,
+  (a, b, g) => `Un panneau solaire triangulaire $ABC$ a pour mesures $CA = ${a}\\text{ dm}$, $CB = ${b}\\text{ dm}$ et $\\widehat{C} = ${g}$.`,
+  (a, b, g) => `Une bâche d'ombre est tendue en triangle $ABC$, avec $CA = ${a}\\text{ m}$, $CB = ${b}\\text{ m}$ et $\\widehat{C} = ${g}$.`,
 ];
 
 /* Triangles dont l'aire de Héron tombe juste : [a, b, c, aire]. */

@@ -37,21 +37,40 @@ function tirerF(opt: { fin?: number[]; deuxSignes?: boolean } = {}): Pt[] {
 }
 const COUL = ["#2563eb", "#dc2626", "#059669", "#d97706"];
 const REF = "#0f172a";
+/** La lettre s'écrit en haut à droite de son point : sa boîte, en unités du repère (24 px par unité). */
+const boiteLettre = (p: Pt) => ({ x1: p.x + 0.2, x2: p.x + 1.1, y1: p.y + 0.2, y2: p.y + 0.9 });
+/** Distance d'un point à un segment. */
+function distSeg(q: Pt, a: Pt, b: Pt) {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const t = Math.max(0, Math.min(1, ((q.x - a.x) * dx + (q.y - a.y) * dy) / (dx * dx + dy * dy || 1)));
+  return Math.hypot(q.x - a.x - t * dx, q.y - a.y - t * dy);
+}
 /**
- * Où poser une lettre : un sommet qui ne tombe ni sur les nombres des axes, ni à côté d'une autre lettre.
- * L'étiquette s'écrit en haut à droite du point : au-dessus de l'axe des abscisses (y = -1, y = 0) ou
- * devant celui des ordonnées (x = -1, x = 0), elle recouvrirait une graduation.
+ * Où poser une lettre : le sommet dont la boîte reste le plus loin de TOUTES les courbes, des nombres
+ * des axes et des lettres déjà posées (⛔ 05/11/2026, captures à 375 px : le « B » et le « Cf » étaient
+ * posés sur une autre courbe).
  */
-function ouEtiqueter(pts: Pt[], pris: Pt[]): Pt {
-  const libre = (p: Pt) => ![-1, -0.5, 0].includes(p.y) && ![-1, 0].includes(p.x) && pris.every((q) => Math.abs(q.x - p.x) >= 2 || Math.abs(q.y - p.y) >= 1);
-  const p = pts.find(libre) ?? pts[0];
+function ouEtiqueter(pts: Pt[], pris: Pt[], toutes: Pt[][]): Pt {
+  const note = (p: Pt) => {
+    const b = boiteLettre(p);
+    const coins = [{ x: b.x1, y: b.y1 }, { x: b.x2, y: b.y1 }, { x: b.x1, y: b.y2 }, { x: b.x2, y: b.y2 }, { x: (b.x1 + b.x2) / 2, y: (b.y1 + b.y2) / 2 }];
+    let d = Infinity;
+    for (const c of toutes) for (let i = 1; i < c.length; i++) for (const k of coins) d = Math.min(d, distSeg(k, c[i - 1], c[i]));
+    const surAxe = b.y1 < 0 && b.y2 > -1;
+    const surOrdonnees = b.x1 < 0 && b.x2 > -1;
+    const pres = pris.some((q) => Math.abs(q.x - p.x) < 2 && Math.abs(q.y - p.y) < 1);
+    return d - (surAxe ? 1 : 0) - (surOrdonnees ? 1 : 0) - (pres ? 2 : 0);
+  };
+  const p = [...pts].sort((u, v) => note(v) - note(u))[0];
   pris.push(p);
   return p;
 }
 function figure(f: Pt[], nomF: string, autres: { id: string; pts: Pt[] }[], cadre: { x: number; y: number } = { x: 7, y: 7 }): CanvasFigure {
   const pris: Pt[] = [];
-  const reperes = autres.map((a) => ouEtiqueter([...a.pts].reverse(), pris));
-  const repereF = ouEtiqueter(f, pris);
+  const toutes = [f, ...autres.map((a) => a.pts)];
+  const reperes = autres.map((a) => ouEtiqueter(a.pts, pris, toutes));
+  const repereF = ouEtiqueter(f, pris, toutes);
   return {
     kind: "fonctionGraphique",
     size: { width: 340, height: 340 },
@@ -227,7 +246,8 @@ export const courbesAssocieesBank: TutorBankItemV4[] = [
     const f = tirerF();
     const a = nz(-3, 3);
     const b = nz(-3, 3);
-    const F = (p: number, r: number) => `$${ng}(x) = ${formule(nf, p, r)}$`;
+    // Sans « g(x) = » : à 375 px, la proposition laissait son dernier nombre seul à la ligne.
+    const F = (p: number, r: number) => `$${formule(nf, p, r)}$`;
     return qcm(
       `Sur la figure, C${nf} est la courbe de $${nf}$ et la courbe A celle de $${ng}$. ${un([`Quelle formule définit $${ng}$ ?`, `Comment s'écrit $${ng}(x)$ à partir de $${nf}$ ?`, `Quelle expression de $${ng}(x)$ convient ?`, `Choisis l'écriture de $${ng}(x)$.`, `La courbe a bougé dans les deux sens : que vaut $${ng}(x)$ ?`, `Quelle écriture de $${ng}(x)$ traduit ce double décalage ?`])}`,
       F(a, b),

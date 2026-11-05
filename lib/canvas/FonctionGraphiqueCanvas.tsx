@@ -319,10 +319,12 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
         {(() => {
           const nbY = ymax - ymin + 1;
           const ecartY = height / Math.max(1, nbY - 1);
+          // Cadre qui ne contient pas 0 (nuage de 71 à 86) : un chiffre par unité faisait une colonne serrée. On gradue de 5 en 5, de 10 en 10.
+          const pasRond = ymin > 0 ? [1, 2, 5, 10, 20, 50, 100, 200, 500].find((p) => p * ecartY >= 26) : undefined;
           const pasY = Math.max(1, Math.ceil(16 / ecartY));
           const posY = (y: number) => toSvgY(y, ymin, ymax, height);
           const candidats = Array.from({ length: nbY }, (_, i) => ymin + i)
-            .filter((y) => y !== 0 && (y - ymin) % pasY === 0)
+            .filter((y) => y !== 0 && (pasRond ? y % pasRond === 0 : (y - ymin) % pasY === 0))
             // ⛔ LA RANGÉE DES ABSCISSES EST RÉSERVÉE (30/09/2026, feuilles de
             // terminale : 38 chevauchements mesurés à 375 px). Les abscisses
             // occupent la bande `xAxisY + 5` → `xAxisY + 19` ; un chiffre
@@ -333,7 +335,9 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
             // trait de graduation, lui, reste tracé.
             // ⚠️ On teste la position APRÈS la remontée au bord (`syClamp`
             // plus bas) : un « −1 » posé sur le bord du bas est remonté de 7 px.
-            .filter((y) => y > 0 || toSvgY(y, ymin, ymax, height) - xAxisY >= 26);
+            .filter((y) => y > 0 || toSvgY(y, ymin, ymax, height) - xAxisY >= 26)
+            // Cadre qui ne contient pas 0 (nuage de 29 à 68) : l'axe est au bas du cadre et barrait le « 29 ».
+            .filter((y) => Math.abs(toSvgY(y, ymin, ymax, height) - xAxisY) >= 8);
           // ⛔ Même geste que pour les abscisses (30/09/2026) : le « −4 » d'un
           // cadre qui s'arrête à −4 était remonté à 10 unités du « −3 », le « 8 »
           // descendu à 10 du « 7 ». Un chiffre fait 12 de haut : les bornes

@@ -59,10 +59,11 @@ const ord = (s: Serie) => moy(s.ys) - pente(s) * moy(s.xs);
 const net = (v: number) => Math.round(v * 1e6) / 1e6;
 
 /** Le tableau de la série : la première colonne porte les noms, relus par le correcteur. */
-function tableau(s: Serie, nx = "$x_{i}$", ny = "$y_{i}$"): CanvasFigure {
+function tableau(s: Serie, nx = "xᵢ", ny = "yᵢ"): CanvasFigure {
   return {
     kind: "tableau_donnees",
-    headers: ["", ...s.xs.map((_, i) => String(i + 1))],
+    coin: "n°",
+    headers: s.xs.map((_, i) => String(i + 1)),
     rows: [
       { label: nx, values: s.xs },
       { label: ny, values: s.ys },
@@ -74,7 +75,7 @@ function nuage(s: Serie): CanvasFigure {
   const pad = (l: number[]) => [Math.floor(Math.min(...l)) - 2, Math.ceil(Math.max(...l)) + 2];
   const [xmin, xmax] = pad(s.xs);
   const [ymin, ymax] = pad(s.ys);
-  return { kind: "fonctionGraphique", size: { width: 340, height: 280 }, xmin, xmax, ymin, ymax, grille: true, points: s.xs.map((x, i) => ({ x, y: s.ys[i], couleur: "#2563eb" })) } as CanvasFigure;
+  return { kind: "fonctionGraphique", size: { width: 340, height: 280 }, xmin, xmax, ymin, ymax, grille: false, points: s.xs.map((x, i) => ({ x, y: s.ys[i], couleur: "#2563eb" })) } as CanvasFigure;
 }
 /** Une réponse arrondie : le cran voisin est admis. */
 function arr(text: string, v: number, p: number, explication: string, canvas?: CanvasFigure) {

@@ -178,7 +178,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
     const s = quelconque();
     const v = det(s);
     return court(
-      `${un(INTRO)} $${sys(s)}$. ${un(["Calcule son déterminant.", "Que vaut son déterminant ?", "Quel est son déterminant ?", "Donne la valeur de son déterminant.", "Détermine son déterminant $\\Delta$.", "Calcule le déterminant $\\Delta$ de ce système.", "Combien vaut le déterminant de ce système ?"])}`,
+      `${un(INTRO)} :\n\n$${sys(s)}$\n\n${un(["Calcule son déterminant.", "Que vaut son déterminant ?", "Quel est son déterminant ?", "Donne la valeur de son déterminant.", "Détermine son déterminant $\\Delta$.", "Calcule le déterminant $\\Delta$ de ce système.", "Combien vaut le déterminant de ce système ?"])}`,
       v,
       expl(DEF_D, "on multiplie les coefficients en croix, puis on soustrait.", `$${pm(s.a)} \\times ${pm(s.e)} - ${pm(s.b)} \\times ${pm(s.d)} = ${v}$.`, `le déterminant vaut $${v}$.`),
     );
@@ -217,7 +217,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
       const valeurs = new Map(faux.map((f) => [f.v, f.t]));
       if (valeurs.size < 3) continue;
       return qcm(
-        `${un(INTRO)} $${sys(s)}$. ${un(["Quel calcul donne son déterminant ?", "Quel calcul faut-il faire pour obtenir son déterminant ?", "Parmi ces calculs, lequel donne le déterminant ?", "Comment calcule-t-on son déterminant ?", "Quelle écriture correspond à son déterminant ?", "Choisis le calcul de son déterminant."])}`,
+        `${un(INTRO)} :\n\n$${sys(s)}$\n\n${un(["Quel calcul donne son déterminant ?", "Quel calcul faut-il faire pour obtenir son déterminant ?", "Parmi ces calculs, lequel donne le déterminant ?", "Comment calcule-t-on son déterminant ?", "Quelle écriture correspond à son déterminant ?", "Choisis le calcul de son déterminant."])}`,
         pr(s.a, s.e, s.b, s.d).t,
         [...valeurs.values()],
         expl(DEF_D, "on repère $a$, $b$, $a'$, $b'$ sur les deux lignes.", `$a = ${s.a}$, $b = ${s.b}$, $a' = ${s.d}$, $b' = ${s.e}$.`, `le déterminant se calcule par ${pr(s.a, s.e, s.b, s.d).t}, soit $${v}$.`),
@@ -228,7 +228,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
     const g = un(GENRES);
     const s = duGenre(g);
     return qcm(
-      `${un(INTRO)} $${sys(s)}$. ${un(Q_NB)}`,
+      `${un(INTRO)} :\n\n$${sys(s)}$\n\n${un(Q_NB)}`,
       NOM_SOL[g],
       [UNE, AUCUNE, INFINIE, DEUX],
       expl(DEF_N, "on calcule le déterminant, puis on regarde les seconds membres s'il est nul.", `$${pm(s.a)} \\times ${pm(s.e)} - ${pm(s.b)} \\times ${pm(s.d)} = ${det(s)}$.`, `le système a : ${NOM_SOL[g].toLowerCase()}.`),
@@ -264,7 +264,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
       "Pour quel nombre $m$ ses premiers membres sont-ils proportionnels ?",
     ]);
     return court(
-      `${un(INTRO)} $${accolade(eq(co[0], co[1], c, X, Y), eq(co[2], co[3], f, X, Y))}$. ${q}`,
+      `${un(INTRO)} :\n\n$${accolade(eq(co[0], co[1], c, X, Y), eq(co[2], co[3], f, X, Y))}$\n\n${q}`,
       v,
       expl(DEF_D, "on écrit $ab' - a'b = 0$ en gardant $m$, puis on résout cette équation du premier degré.", `avec les coefficients $${a}$, $${b}$ et $${t * a}$, $${t * b}$, le déterminant s'annule pour $m = ${v}$.`, `$m = ${v}$.`),
     );
@@ -273,7 +273,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
     const g = un(GENRES);
     const s = duGenre(g);
     return qcm(
-      `${un(INTRO)} $${accolade(autrement(s.a, s.b, s.c, s.X, s.Y), autrement(s.d, s.e, s.f, s.X, s.Y))}$. ${un(Q_NB)}`,
+      `${un(INTRO)} :\n\n$${accolade(autrement(s.a, s.b, s.c, s.X, s.Y), autrement(s.d, s.e, s.f, s.X, s.Y))}$\n\n${un(Q_NB)}`,
       NOM_SOL[g],
       [UNE, AUCUNE, INFINIE, DEUX],
       expl(DEF_N, "on passe les inconnues à gauche et les nombres à droite, puis on calcule le déterminant.", `$${eq(s.a, s.b, s.c, s.X, s.Y)}$ et $${eq(s.d, s.e, s.f, s.X, s.Y)}$ : le déterminant vaut $${det(s)}$.`, `le système a : ${NOM_SOL[g].toLowerCase()}.`),
@@ -334,7 +334,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
       const faux = [vm(s.a, s.b, s.d, s.e), pour ? vm(s.c, s.b, s.f, s.e) : vm(s.a, s.c, s.d, s.f), vm(s.b, s.c, s.e, s.f), vm(s.c, s.a, s.f, s.d), vm(s.a, s.d, s.c, s.f)].filter((f) => f !== juste);
       if (new Set(faux).size < 3) continue;
       return qcm(
-        `${un(INTRO)} $${sys(s)}$. ${un([`Par la méthode de Cramer, quel déterminant est $\\Delta_{${L}}$ ?`, `Quel déterminant donne $\\Delta_{${L}}$ ?`, `Dans les formules de Cramer, comment s'écrit $\\Delta_{${L}}$ ?`, `Parmi ces déterminants, lequel est $\\Delta_{${L}}$ ?`, `Choisis le déterminant $\\Delta_{${L}}$ des formules de Cramer.`, `Quelle écriture correspond à $\\Delta_{${L}}$ ?`])}`,
+        `${un(INTRO)} :\n\n$${sys(s)}$\n\n${un([`Par la méthode de Cramer, quel déterminant est $\\Delta_{${L}}$ ?`, `Quel déterminant donne $\\Delta_{${L}}$ ?`, `Dans les formules de Cramer, comment s'écrit $\\Delta_{${L}}$ ?`, `Parmi ces déterminants, lequel est $\\Delta_{${L}}$ ?`, `Choisis le déterminant $\\Delta_{${L}}$ des formules de Cramer.`, `Quelle écriture correspond à $\\Delta_{${L}}$ ?`])}`,
         `$${juste}$`,
         faux.map((f) => `$${f}$`),
         expl(DEF_C, `on part du déterminant du système et on remplace la colonne de $${L}$ par les seconds membres.`, `$\\Delta_{${L}} = ${juste}$.`, `$\\Delta_{${L}} = ${juste}$.`),
@@ -361,7 +361,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
     const L = pour ? s.Y : s.X;
     const v = pour ? dY(s) : dX(s);
     return court(
-      `${un(INTRO)} $${sys(s)}$. ${un([`Calcule $\\Delta_{${L}}$.`, `Que vaut $\\Delta_{${L}}$ ?`, `Dans les formules de Cramer, que vaut $\\Delta_{${L}}$ ?`, `Quelle est la valeur de $\\Delta_{${L}}$ ?`, `Donne le déterminant $\\Delta_{${L}}$ de la méthode de Cramer.`, `Pour appliquer Cramer, calcule d'abord $\\Delta_{${L}}$.`])}`,
+      `${un(INTRO)} :\n\n$${sys(s)}$\n\n${un([`Calcule $\\Delta_{${L}}$.`, `Que vaut $\\Delta_{${L}}$ ?`, `Dans les formules de Cramer, que vaut $\\Delta_{${L}}$ ?`, `Quelle est la valeur de $\\Delta_{${L}}$ ?`, `Donne le déterminant $\\Delta_{${L}}$ de la méthode de Cramer.`, `Pour appliquer Cramer, calcule d'abord $\\Delta_{${L}}$.`])}`,
       v,
       expl(DEF_C, `on remplace la colonne de $${L}$ par les seconds membres.`, pour ? `$${pm(s.a)} \\times ${pm(s.f)} - ${pm(s.c)} \\times ${pm(s.d)} = ${v}$.` : `$${pm(s.c)} \\times ${pm(s.e)} - ${pm(s.b)} \\times ${pm(s.f)} = ${v}$.`, `$\\Delta_{${L}} = ${v}$.`),
     );
@@ -371,7 +371,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
     const asked = un([s.X, s.Y]);
     const v = asked === s.X ? s.x0 : s.y0;
     return court(
-      `${un(INTRO)} $${sys(s)}$. ${un([`Par la méthode de Cramer, que vaut $${asked}$ ?`, `Résous-le par les formules de Cramer et donne $${asked}$.`, `Avec les déterminants, calcule $${asked}$.`, `Quelle est la valeur de $${asked}$ dans sa solution ?`, `Applique Cramer : que vaut $${asked}$ ?`, `Détermine $${asked}$ à l'aide des déterminants.`])}`,
+      `${un(INTRO)} :\n\n$${sys(s)}$\n\n${un([`Par la méthode de Cramer, que vaut $${asked}$ ?`, `Résous-le par les formules de Cramer et donne $${asked}$.`, `Avec les déterminants, calcule $${asked}$.`, `Quelle est la valeur de $${asked}$ dans sa solution ?`, `Applique Cramer : que vaut $${asked}$ ?`, `Détermine $${asked}$ à l'aide des déterminants.`])}`,
       v,
       expl(DEF_C, "on calcule les deux déterminants utiles, puis on divise.", `$\\Delta = ${det(s)}$, $\\Delta_{${s.X}} = ${dX(s)}$, $\\Delta_{${s.Y}} = ${dY(s)}$.`, `$${asked} = ${v}$.`),
     );
@@ -380,7 +380,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
     const s = avecSolution();
     const co = (a: number, b: number) => `$(${a}\\,;${b})$`;
     return qcm(
-      `${un(INTRO)} $${sys(s)}$. ${un([`Quel est le couple $(${s.X}\\,;${s.Y})$ solution ?`, `Par la méthode de Cramer, quelle est sa solution $(${s.X}\\,;${s.Y})$ ?`, `Quel couple $(${s.X}\\,;${s.Y})$ le résout ?`, `Résous-le avec les déterminants : quel est le couple $(${s.X}\\,;${s.Y})$ ?`, `Choisis sa solution $(${s.X}\\,;${s.Y})$.`])}`,
+      `${un(INTRO)} :\n\n$${sys(s)}$\n\n${un([`Quel est le couple $(${s.X}\\,;${s.Y})$ solution ?`, `Par la méthode de Cramer, quelle est sa solution $(${s.X}\\,;${s.Y})$ ?`, `Quel couple $(${s.X}\\,;${s.Y})$ le résout ?`, `Résous-le avec les déterminants : quel est le couple $(${s.X}\\,;${s.Y})$ ?`, `Choisis sa solution $(${s.X}\\,;${s.Y})$.`])}`,
       co(s.x0, s.y0),
       [co(s.y0, s.x0), co(-s.x0, s.y0), co(s.x0, -s.y0), co(-s.x0, -s.y0), co(s.x0 + 1, s.y0), co(s.x0, s.y0 - 1)],
       expl(DEF_C, "on calcule $\\Delta$, puis les deux autres déterminants, puis on divise.", `$\\Delta = ${det(s)}$, $\\Delta_{${s.X}} = ${dX(s)}$, $\\Delta_{${s.Y}} = ${dY(s)}$.`, `la solution est $(${s.x0}\\,;${s.y0})$.`),
@@ -395,7 +395,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
     const D = det(s);
     const fr = (a: number, b: number) => `$\\dfrac{${a}}{${b}}$`;
     return qcm(
-      `${un(INTRO)} $${sys(s)}$. ${un([`Quelle fraction donne $${L}$ par la méthode de Cramer ?`, `Avant de simplifier, comment s'écrit $${L}$ avec les formules de Cramer ?`, `Quelle écriture de $${L}$ donnent les formules de Cramer ?`, `Parmi ces fractions, laquelle est celle de Cramer pour $${L}$ ?`, `Choisis la fraction de Cramer qui donne $${L}$.`])}`,
+      `${un(INTRO)} :\n\n$${sys(s)}$\n\n${un([`Quelle fraction donne $${L}$ par la méthode de Cramer ?`, `Avant de simplifier, comment s'écrit $${L}$ avec les formules de Cramer ?`, `Quelle écriture de $${L}$ donnent les formules de Cramer ?`, `Parmi ces fractions, laquelle est celle de Cramer pour $${L}$ ?`, `Choisis la fraction de Cramer qui donne $${L}$.`])}`,
       fr(n, D),
       [fr(D, n), fr(m, D), fr(-n, D), fr(D, m), fr(n, -D), fr(n, m), fr(2 * n, D), fr(n, 2 * D)],
       expl(DEF_C, "au numérateur, le déterminant de l'inconnue ; au dénominateur, celui du système.", `$\\Delta = ${D}$ et $\\Delta_{${L}} = ${n}$.`, `$${L} = \\dfrac{${n}}{${D}}$, soit $${pour ? s.y0 : s.x0}$.`),
@@ -428,7 +428,7 @@ export const systemesDeterminantBank: TutorBankItemV4[] = [
       const asked = un([s.X, s.Y]);
       const v = asked === s.X ? s.x0 : s.y0;
       return court(
-        `${un(INTRO)} $${accolade(autrement(s.a, s.b, s.c, s.X, s.Y), autrement(s.d, s.e, s.f, s.X, s.Y))}$. ${un([`Mets-le sous la forme habituelle, puis calcule $${asked}$ par la méthode de Cramer.`, `Par la méthode de Cramer, que vaut $${asked}$ ?`, `Remets-le en ordre : que vaut $${asked}$ ?`, `Avec les déterminants, calcule $${asked}$.`, `Quelle est la valeur de $${asked}$ dans sa solution ?`])}`,
+        `${un(INTRO)} :\n\n$${accolade(autrement(s.a, s.b, s.c, s.X, s.Y), autrement(s.d, s.e, s.f, s.X, s.Y))}$\n\n${un([`Mets-le sous la forme habituelle, puis calcule $${asked}$ par la méthode de Cramer.`, `Par la méthode de Cramer, que vaut $${asked}$ ?`, `Remets-le en ordre : que vaut $${asked}$ ?`, `Avec les déterminants, calcule $${asked}$.`, `Quelle est la valeur de $${asked}$ dans sa solution ?`])}`,
         v,
         expl(DEF_C, "on passe les inconnues à gauche et les nombres à droite, puis on calcule les déterminants.", `$${eq(s.a, s.b, s.c, s.X, s.Y)}$ et $${eq(s.d, s.e, s.f, s.X, s.Y)}$ : $\\Delta = ${det(s)}$, $\\Delta_{${s.X}} = ${dX(s)}$, $\\Delta_{${s.Y}} = ${dY(s)}$.`, `$${asked} = ${v}$.`),
       );

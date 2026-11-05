@@ -64,8 +64,9 @@ function figPointDroite(o: { p: string; h: string; d: string; h0: number; obliqu
     {
       droites: [{ a: "x1", b: "x2" }],
       segments: [
-        { a: "x3", b: "x2", couleur: "#2563eb", texte: o.d },
-        { a: o.p, b: o.h, couleur: "#dc2626", texte: o.texteH },
+        { a: "x3", b: "x2", couleur: "#2563eb", texte: o.d, sansTrait: true },
+        // Avec des obliques, la couleur désignait la réponse : seul l'angle droit la montre.
+        { a: o.p, b: o.h, couleur: o.obliques.length ? "#64748b" : "#dc2626", texte: o.texteH },
         ...o.obliques.map((m) => ({ a: o.p, b: m.nom, couleur: "#64748b", texte: m.texte })),
       ],
       angles: o.droit === false ? [] : [{ sommet: o.h, de: o.p, vers: "x2", droit: true }],
@@ -97,9 +98,9 @@ function figParalleles(o: { a: string; h: string; d1: string; d2: string; h0: nu
     {
       droites: [{ a: "x1", b: "x2" }, { a: "y1", b: "y2" }],
       segments: [
-        { a: "x3", b: "x2", couleur: "#2563eb", texte: o.d2 },
-        { a: "y3", b: "y2", couleur: "#2563eb", texte: o.d1 },
-        { a: o.a, b: o.h, couleur: "#dc2626", texte: o.texteH },
+        { a: "x3", b: "x2", couleur: "#2563eb", texte: o.d2, sansTrait: true },
+        { a: "y3", b: "y2", couleur: "#2563eb", texte: o.d1, sansTrait: true },
+        { a: o.a, b: o.h, couleur: o.n ? "#64748b" : "#dc2626", texte: o.texteH },
         ...(o.n ? [{ a: o.a, b: o.n, couleur: "#64748b", texte: o.texteO }] : []),
       ],
       angles: o.droit === false ? [] : [{ sommet: o.h, de: o.a, vers: "x2", droit: true }],
@@ -120,7 +121,7 @@ function figEntre(p: string, d1: string, d2: string, h1: number, h2: number) {
     pts,
     {
       droites: [{ a: "x1", b: "x2" }, { a: "y1", b: "y2" }],
-      segments: [{ a: "x3", b: "x2", couleur: "#2563eb", texte: d2 }, { a: "y3", b: "y2", couleur: "#2563eb", texte: d1 }, { a: "a", b: "b", couleur: "#dc2626" }],
+      segments: [{ a: "x3", b: "x2", couleur: "#2563eb", texte: d2, sansTrait: true }, { a: "y3", b: "y2", couleur: "#2563eb", texte: d1, sansTrait: true }, { a: "a", b: "b", couleur: "#dc2626" }],
       angles: [{ sommet: "b", de: "a", vers: "x2", droit: true }],
       description: "Un point entre deux droites parallèles",
     },

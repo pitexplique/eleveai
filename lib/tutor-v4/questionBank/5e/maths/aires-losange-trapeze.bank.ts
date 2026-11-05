@@ -41,13 +41,16 @@ function figLosange(ac: number, bd: number, opts: { ac?: string; bd?: string } =
 function figTrapeze(B: number, b: number, h: number, opts: { B?: string; b?: string; h?: string; rectangle?: boolean; oblique?: string } = {}): QuadrilatereCanvasData {
   const k = 230 / B;
   const hp = borne(h * k, 60, 130);
-  const dec = opts.rectangle ? 0 : (B - b) * k * (0.25 + Math.random() * 0.5);
+  // ⛔ Bases presque égales : la hauteur tombait SUR le côté oblique. La figure garde au moins 44 px
+  // d'écart entre les bases (aucune longueur n'y est mesurée à l'échelle), la hauteur s'en écarte de 18.
+  const ecart = opts.rectangle ? (B - b) * k : Math.max((B - b) * k, 44);
+  const dec = opts.rectangle ? 0 : Math.max(18, ecart * (0.25 + Math.random() * 0.5));
   const y = 190;
   const x = 35;
   return {
     kind: "quadrilatere",
     size: { width: 300, height: 230 },
-    points: { A: { x: x + dec, y: y - hp }, B: { x: x + dec + b * k, y: y - hp }, C: { x: x + B * k, y }, D: { x, y } },
+    points: { A: { x: x + dec, y: y - hp }, B: { x: x + dec + B * k - ecart, y: y - hp }, C: { x: x + B * k, y }, D: { x, y } },
     labels: { A: "D", B: "C", C: "B", D: "A" },
     sideLabels: {
       ...(opts.B ? { CD: opts.B } : {}),

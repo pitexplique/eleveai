@@ -13,6 +13,9 @@ export type TableauDonneesCanvasData = {
 
   headers: string[];
 
+  /** Le coin haut gauche quand les lignes ont un libellé. Par défaut « Données ». */
+  coin?: string;
+
   rows: {
     label?: string;
     values: CellValue[];
@@ -38,6 +41,13 @@ export type TableauDonneesCanvasData = {
 type Props = {
   figure: TableauDonneesCanvasData;
 };
+
+/** « -5 » en tiret se lit mal à côté d'un nombre : le vrai signe moins, à l'affichage seulement. */
+function signeMoins<T extends CellValue | undefined>(v: T): T | string {
+  if (typeof v === "number") return v < 0 ? `−${-v}` : v;
+  if (typeof v === "string") return v.replace(/(^|[\s=(])-(?=\d)/g, "$1−");
+  return v;
+}
 
 export default function TableauDonneesCanvas({ figure: brute }: Props) {
   // ─── L'espace insécable, ici aussi ──────────────────────────────────────────
@@ -140,7 +150,7 @@ export default function TableauDonneesCanvas({ figure: brute }: Props) {
                 <th
                   className={`border border-slate-300 bg-slate-800 text-white ${padding} ${fontSize} font-black`}
                 >
-                  Données
+                  {figure.coin ?? "Données"}
                 </th>
               ) : null}
 
@@ -149,7 +159,7 @@ export default function TableauDonneesCanvas({ figure: brute }: Props) {
                   key={index}
                   className={`border border-slate-300 bg-slate-800 text-white ${padding} ${fontSize} font-black`}
                 >
-                  {header}
+                  {signeMoins(header)}
                 </th>
               ))}
             </tr>
@@ -170,7 +180,7 @@ export default function TableauDonneesCanvas({ figure: brute }: Props) {
                   <td
                     className={`border border-slate-300 bg-sky-100 text-slate-900 ${padding} ${fontSize} font-bold`}
                   >
-                    {row.label}
+                    {signeMoins(row.label)}
                   </td>
                 ) : null}
 
@@ -193,7 +203,7 @@ export default function TableauDonneesCanvas({ figure: brute }: Props) {
                         }
                       `}
                     >
-                      {value}
+                      {signeMoins(value)}
                     </td>
                   );
                 })}

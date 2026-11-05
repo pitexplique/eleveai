@@ -213,7 +213,12 @@ function hauteur(q: Q): string[] {
 
 const avec = (micro: string, l: Record<number, (q: Q) => string[]>) => Object.fromEntries(Object.entries(l).map(([n, c]) => [`1s_${micro}_tpl_${n}`, c]));
 
-export const CORRECTEURS: CorrecteursMaths = {
+const PAR_GABARIT: CorrecteursMaths = {
   ...avec("trig_loi_sinus", { 1: egaliteLoi, 2: quotient, 3: egaliteChiffree, 4: quotientVersCote, 5: coteParLoi, 6: coteParLoi, 7: angleAigu, 8: rayon, 9: coteParLoi, 10: nombreDeTriangles, 11: rayon, 12: angleAigu }),
   ...avec("trig_aire_heron", { 1: aireDeuxCotes, 2: formuleAire, 3: demiPerimetre, 4: aireDeuxCotes, 5: heronExact, 6: heronArrondi, 7: coteDepuisAire, 8: heronArrondi, 9: aireDeuxCotes, 10: rayonInscrit, 11: hauteur }),
 };
+
+/** La banque écrit l'unité dans la formule (`15\text{ cm}`), pour qu'elle ne passe pas seule à la ligne : on relit sans. */
+export const CORRECTEURS: CorrecteursMaths = Object.fromEntries(
+  Object.entries(PAR_GABARIT).map(([id, c]) => [id, (q: Q) => c({ ...q, text: q.text.replace(/\\text\{ ([a-z]+)\}\$/g, "$ $1") })]),
+);

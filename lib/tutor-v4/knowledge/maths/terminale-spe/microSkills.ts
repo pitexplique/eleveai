@@ -866,7 +866,7 @@ export const microSkills: MicroSkillSource[] = [
   /* Logarithme et exponentielle de base a (hors programme français). */
   {
     id: "log_base_calcul",
-    label: "Calculer log_a(x) = ln x ÷ ln a : valeurs exactes et approchées",
+    label: "Calculer un logarithme de base a avec ln x ÷ ln a : valeurs exactes et approchées",
     notionId: "log_exp_base_a",
     prerequis: [],
   },
@@ -878,7 +878,7 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "exp_base_a",
-    label: "Exponentielle de base a : aˣ = e^(x ln a), dérivée, variations selon a",
+    label: "Exponentielle de base a : lien avec e et ln, dérivée, variations selon a",
     notionId: "log_exp_base_a",
     prerequis: ["log_base_calcul"],
   },

@@ -53,10 +53,10 @@ function complet(s: readonly number[]) {
 }
 const OPS = ["\\leftarrow", "\\to"];
 const RESOUS = (s: string) => [
-  `On considère le système ${s}.`,
-  `Soit le système ${s}.`,
-  `Voici un système : ${s}.`,
-  `On veut résoudre ${s}.`,
+  `On considère le système :\n\n${s}\n\n`,
+  `Soit le système :\n\n${s}\n\n`,
+  `Voici un système :\n\n${s}\n\n`,
+  `On veut résoudre :\n\n${s}\n\n`,
 ];
 const comb = (k: number, i: number) => {
   const a = Math.abs(k);
@@ -76,7 +76,7 @@ const CONTEXTES: Ctx[] = [
   { intro: "Un technicien de son relève le temps de pose de trois scènes.", a: "enceintes", b: "micros", c: "projecteurs", verbe: "prennent", unite: "minutes", q: (n) => `Combien de minutes prend la pose d'un seul appareil parmi les ${n} ?` },
 ];
 
-export const systemes3x3Bank: TutorBankItemV4[] = [
+const gabarits: TutorBankItemV4[] = [
   /* ★1 */
   tpl(M, 1, 1, "Commence par la dernière ligne : elle n'a qu'une inconnue.", () => {
     const v = un(LETTRES);
@@ -245,7 +245,7 @@ export const systemes3x3Bank: TutorBankItemV4[] = [
         if (ech === 0 && c2[0] * c1[2] - c2[2] * c1[0] === 0) continue;
       }
       return qcm(
-        `${un(["Une équipe de recherche obtient ce système :", "Dans un modèle de circuit électrique, on trouve le système", "Une chimiste équilibre un mélange avec le système", "Un logiciel de planning aboutit au système", "Un programme de jeu vidéo calcule une position par le système"])} ${sys(ls, v)}. ${un(["Combien de solutions a-t-il ?", "Que dire de ses solutions ?", "Combien de triplets le vérifient ?", "Comment se termine le pivot de Gauss, en nombre de solutions ?"])}`,
+        `${un(["Une équipe de recherche obtient ce système :", "Dans un modèle de circuit électrique, on trouve le système", "Une chimiste équilibre un mélange avec le système", "Un logiciel de planning aboutit au système", "Un programme de jeu vidéo calcule une position par le système"])}\n\n${sys(ls, v)}\n\n${un(["Combien de solutions a-t-il ?", "Que dire de ses solutions ?", "Combien de triplets le vérifient ?", "Comment se termine le pivot de Gauss, en nombre de solutions ?"])}`,
         genre,
         [UNE, AUCUNE, INF, "Exactement deux solutions"],
         expl(DEF, "On échelonne le système.", genre === UNE ? "On obtient un système triangulaire avec trois pivots." : genre === AUCUNE ? "La dernière ligne devient $0 = k$, avec $k$ non nul." : "La dernière ligne devient $0 = 0$.", `Réponse : ${genre.toLowerCase()}.`),
@@ -253,3 +253,12 @@ export const systemes3x3Bank: TutorBankItemV4[] = [
     }
   }),
 ];
+
+/** Le système a son paragraphe : la phrase qui suit ne garde pas l'espace de la jonction. */
+export const systemes3x3Bank: TutorBankItemV4[] = gabarits.map((g) => ({
+  ...g,
+  generate: () => {
+    const q = g.generate();
+    return { ...q, text: q.text.replace(/\n\n /g, "\n\n") };
+  },
+}));

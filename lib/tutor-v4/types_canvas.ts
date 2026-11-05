@@ -28,6 +28,8 @@ export type TriangleCanvasData = {
     showLabels?: boolean;
     showSides?: boolean;
     showAngles?: boolean;
+    /** Noms et longueurs hors du triangle, angles sur la bissectrice, sans cache blanc sur les côtés. */
+    legendesDehors?: boolean;
   };
   labels?: Partial<Record<TriangleCanvasPointLabel, string>>;
   angleLabels?: Partial<Record<TriangleCanvasPointLabel, string>>;
@@ -2189,7 +2191,7 @@ export type ConstructionCanvasData = {
   points: { id: string; x: number; y: number; nom?: string; cache?: boolean; couleur?: string }[];
   polygones?: { sommets: string[]; fond?: string; contour?: string }[];
   /** `code` : 1, 2 ou 3 tirets, le codage des longueurs égales. */
-  segments?: { a: string; b: string; code?: number; pointille?: boolean; couleur?: string; epais?: boolean; texte?: string }[];
+  segments?: { a: string; b: string; code?: number; pointille?: boolean; couleur?: string; epais?: boolean; texte?: string; /** Le texte seul : le segment ne sert qu'à placer le nom d'une droite déjà tracée. */ sansTrait?: boolean }[];
   /** Prolongée jusqu'au bord du cadre. */
   droites?: { a: string; b: string; couleur?: string; pointille?: boolean }[];
   cercles?: { centre: string; rayon: number; couleur?: string; pointille?: boolean; fond?: string }[];

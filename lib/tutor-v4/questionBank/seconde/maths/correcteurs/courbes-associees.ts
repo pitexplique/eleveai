@@ -138,7 +138,7 @@ export const CORRECTEURS: CorrecteursMaths = {
     const dx = g[0].x - f[0].x;
     const dy = g[0].y - f[0].y;
     return avecFigure(q, seulChoix(q, (c) => {
-      const { a, b } = lireT(c);
+      const { a, b } = lireT(c.replace("$", "$z(x) = "));
       return a === -dx && b === dy;
     }));
   },

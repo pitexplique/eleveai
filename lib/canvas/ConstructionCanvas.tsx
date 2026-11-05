@@ -204,7 +204,7 @@ export default function ConstructionCanvas({ figure }: { figure: CanvasFigure })
         const c = g.couleur ?? TRAIT;
         return (
           <g key={`s${i}`}>
-            <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={c} strokeWidth={g.epais ? 3 : 2} strokeLinecap="round" strokeDasharray={g.pointille ? "6 5" : undefined} />
+            {g.sansTrait ? null : <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={c} strokeWidth={g.epais ? 3 : 2} strokeLinecap="round" strokeDasharray={g.pointille ? "6 5" : undefined} />}
             {Array.from({ length: g.code ?? 0 }, (_, k) => {
               const d = (k - ((g.code ?? 1) - 1) / 2) * 5;
               const t = { x: m.x + u.x * d, y: m.y + u.y * d };

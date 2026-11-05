@@ -430,7 +430,8 @@ export default function QuadrilatereCanvas({ figure }: Props) {
             {sideCD && <SideLabel point={mCD} label={sideCD} />}
             {sideDA && <SideLabel point={mDA} label={sideDA} />}
             {/* Deux légendes de diagonales : le même milieu les superposait, chacune va sur sa moitié. */}
-            {showDiagonals && sideAC && <SideLabel point={sideBD ? mid(A, mAC) : mAC} label={sideAC} />}
+            {/* Vers le centre : au quart de la diagonale, la légende touchait les codages des côtés d'un losange. */}
+            {showDiagonals && sideAC && <SideLabel point={sideBD ? mid(mid(A, mAC), mAC) : mAC} label={sideAC} />}
             {showDiagonals && sideBD && <SideLabel point={sideAC ? mid(B, mBD) : mBD} label={sideBD} />}
           </>
         )}
@@ -494,7 +495,10 @@ export default function QuadrilatereCanvas({ figure }: Props) {
 
           const variant = ((idx % 2) + 1) as 1 | 2;
           const seg1 = getParallelMarkSegments(p1a, p1b, variant);
-          const seg2 = getParallelMarkSegments(p2a, p2b, variant);
+          // ⛔ 05/11/2026 : deux côtés parcourus en sens contraires donnaient « > » et « < ». Les
+          // chevrons de deux parallèles vont dans le même sens.
+          const memeSens = (p1b.x - p1a.x) * (p2b.x - p2a.x) + (p1b.y - p1a.y) * (p2b.y - p2a.y) >= 0;
+          const seg2 = memeSens ? getParallelMarkSegments(p2a, p2b, variant) : getParallelMarkSegments(p2b, p2a, variant);
 
           return (
             <g key={`${s1}-${s2}-parallel-${idx}`} fill="none" stroke="#8b5cf6" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">

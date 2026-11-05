@@ -41,8 +41,8 @@ function image(q: Q): string[] {
 function lectureTableau(q: Q): string[] {
   const c = q.canvas as any;
   if (c?.kind !== "tableau_donnees") return ["pas de tableau"];
-  const xs = c.headers.slice(1).map(Number);
-  const ligne = (n: string) => c.rows.find((r: any) => r.label === `$${n}(x)$`).values as number[];
+  const xs = c.headers.map(Number);
+  const ligne = (n: string) => c.rows.find((r: any) => r.label === `${n}(x)`).values as number[];
   const { ext, int, a } = appel(q.text);
   const y = ligne(int)[xs.indexOf(a)];
   if (y === undefined) return ["abscisse absente du tableau"];
@@ -105,7 +105,7 @@ function domaine(q: Q): string[] {
   return q.expected[0] === j ? [] : [`attendu ${q.expected[0]}, recalculé ${j}`];
 }
 
-export const CORRECTEURS: CorrecteursMaths = {
+const PAR_GABARIT: CorrecteursMaths = {
   [`${P}1`]: image,
   [`${P}2`]: lectureTableau,
   [`${P}3`]: lecture,
@@ -118,3 +118,8 @@ export const CORRECTEURS: CorrecteursMaths = {
   [`${P}10`]: domaine,
   [`${P}11`]: image,
 };
+
+/** La banque écrit `\circ\nobreak` pour que la formule ne se coupe pas : on relit sans. */
+export const CORRECTEURS: CorrecteursMaths = Object.fromEntries(
+  Object.entries(PAR_GABARIT).map(([id, c]) => [id, (q: Q) => c({ ...q, text: q.text.replace(/\\nobreak /g, " ") })]),
+);

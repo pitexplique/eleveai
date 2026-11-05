@@ -109,11 +109,11 @@ function trou() {
     [`Complète : ${ecr(d)} = … ÷ ${fr(d.B)}`, d.A, [d.a, arr(d.A * 10), arr(d.a / 10)]],
     [`${ecr(d)} = … ÷ ${fr(d.B)}. Que mettre à la place des points ?`, d.A, [d.a, arr(d.A * 10), arr(d.a / 10)]],
     [`Trouve le nombre manquant : ${ecr(d)} = … ÷ ${fr(d.B)}`, d.A, [d.a, arr(d.A * 10), arr(d.a / 10)]],
-    [`Quel dividende manque ? ${ecr(d)} = … ÷ ${fr(d.B)}`, d.A, [d.a, arr(d.A * 10), arr(d.a / 10)]],
+    [`Quel dividende manque ?\n\n${ecr(d)} = … ÷ ${fr(d.B)}`, d.A, [d.a, arr(d.A * 10), arr(d.a / 10)]],
     [`Complète : ${ecr(d)} = ${fr(d.A)} ÷ …`, d.B, [d.b, arr(d.B * 10), arr(d.b / 10)]],
     [`${ecr(d)} = ${fr(d.A)} ÷ …. Que mettre à la place des points ?`, d.B, [d.b, arr(d.B * 10), arr(d.b / 10)]],
     [`Trouve le nombre manquant : ${ecr(d)} = ${fr(d.A)} ÷ …`, d.B, [d.b, arr(d.B * 10), arr(d.b / 10)]],
-    [`Quel diviseur manque ? ${ecr(d)} = ${fr(d.A)} ÷ …`, d.B, [d.b, arr(d.B * 10), arr(d.b / 10)]],
+    [`Quel diviseur manque ?\n\n${ecr(d)} = ${fr(d.A)} ÷ …`, d.B, [d.b, arr(d.B * 10), arr(d.b / 10)]],
   ]);
   return { text, ...qcmN(juste, faux), explanation: expl(d) };
 }
@@ -217,19 +217,19 @@ function quelCalcul() {
 }
 /* « Combien de fois plus » : là, le quotient peut être décimal. */
 const COMPARE: ((a: string, b: string) => string)[] = [
-  (a, b) => `Une barre fait ${a} m. Une baguette fait ${b} m.`,
-  (a, b) => `Un sac pèse ${a} kg. Une boîte pèse ${b} kg.`,
-  (a, b) => `Une bouteille contient ${a} L. Un verre contient ${b} L.`,
-  (a, b) => `Une pastèque pèse ${a} kg. Une mangue pèse ${b} kg.`,
-  (a, b) => `Un seau contient ${a} L. Une tasse contient ${b} L.`,
-  (a, b) => `Un arbre a grandi de ${a} m. Une tige a grandi de ${b} m.`,
-  (a, b) => `La ville A reçoit ${a} m de pluie. La ville B en reçoit ${b} m.`,
-  (a, b) => `Un cheval parcourt ${a} km. Un chien parcourt ${b} km.`,
+  (a, b) => `Une barre fait ${a} m. Une baguette fait ${b} m. La barre est combien de fois plus longue que la baguette ?`,
+  (a, b) => `Un sac pèse ${a} kg. Une boîte pèse ${b} kg. Le sac est combien de fois plus lourd que la boîte ?`,
+  (a, b) => `Une bouteille contient ${a} L. Un verre contient ${b} L. La bouteille contient combien de fois plus que le verre ?`,
+  (a, b) => `Une pastèque pèse ${a} kg. Une mangue pèse ${b} kg. La pastèque est combien de fois plus lourde que la mangue ?`,
+  (a, b) => `Un seau contient ${a} L. Une tasse contient ${b} L. Le seau contient combien de fois plus que la tasse ?`,
+  (a, b) => `Un arbre a grandi de ${a} m. Une tige a grandi de ${b} m. L’arbre a grandi combien de fois plus que la tige ?`,
+  (a, b) => `La ville A reçoit ${a} m de pluie. La ville B en reçoit ${b} m. La ville A reçoit combien de fois plus de pluie que la ville B ?`,
+  (a, b) => `Un cheval parcourt ${a} km. Un chien parcourt ${b} km. Le cheval va combien de fois plus loin que le chien ?`,
 ];
 function combienDeFois() {
   const d = quotientDecimal();
   return {
-    text: `${un(COMPARE)(fr(d.a), fr(d.b))} ${un(["Le premier fait combien de fois le second ?", "Le premier vaut combien de fois le second ?", "Combien de fois le second dans le premier ?", "Le second entre combien de fois dans le premier ?"])}`,
+    text: un(COMPARE)(fr(d.a), fr(d.b)),
     ...qcmN(d.q, leurres(d), "", 0.5),
     explanation: expl(d),
   };

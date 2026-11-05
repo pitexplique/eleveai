@@ -83,16 +83,17 @@ const CHAINES: ((f: string, g: string, sf: string, sg: string) => string)[] = [
 function tableau(f: string, g: string, xs: number[], vf: number[], vg: number[]): CanvasFigure {
   return {
     kind: "tableau_donnees",
-    headers: ["$x$", ...xs.map(String)],
+    coin: "x",
+    headers: xs.map(String),
     rows: [
-      { label: `$${f}(x)$`, values: vf },
-      { label: `$${g}(x)$`, values: vg },
+      { label: `${f}(x)`, values: vf },
+      { label: `${g}(x)`, values: vg },
     ],
     display: { compact: true },
   } as CanvasFigure;
 }
 
-export const composeeEcrireBank: TutorBankItemV4[] = [
+const gabarits: TutorBankItemV4[] = [
   /* ★1 */
   tpl(M, 1, 1, "Calcule d'abord l'image par la fonction écrite à droite du rond.", () => {
     const [f, g] = un(NOMS);
@@ -244,3 +245,17 @@ export const composeeEcrireBank: TutorBankItemV4[] = [
     );
   }),
 ];
+
+/**
+ * ⛔ 05/11/2026, capture à 375 px : « (q ○ » puis « p)(a) » à la ligne. KaTeX coupe après le rond,
+ * sauf devant `\nobreak`. Les correcteurs relisent le texte sans lui.
+ */
+const sansCoupure = (t: string) => t.replace(/\(([a-z]) \\circ ([a-z])\)/g, "($1 \\circ\\nobreak $2)");
+
+export const composeeEcrireBank: TutorBankItemV4[] = gabarits.map((g) => ({
+  ...g,
+  generate: () => {
+    const q = g.generate();
+    return { ...q, text: sansCoupure(q.text) };
+  },
+}));

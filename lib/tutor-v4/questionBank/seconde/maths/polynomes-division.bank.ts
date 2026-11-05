@@ -547,7 +547,7 @@ export const polynomesDivisionBank: TutorBankItemV4[] = [
     const co = [nz(1, 2), nz(-4, 4), entre(-4, 4), entre(-4, 4), nz(-9, 9)];
     const { b, r } = horner(co, a);
     return court(
-      `${un(CALCS)} Il faut $${n}(${a})$, avec $${n}(x) = ${P(co)}$. ${un([`Par la méthode de Horner, que vaut $${n}(${a})$ ?`, `Avec ce tableau, calcule $${n}(${a})$.`, `Complète le tableau : que vaut $${n}(${a})$ ?`, `Quelle valeur de $${n}(${a})$ donne la dernière case ?`, `Combien vaut $${n}(${a})$ ?`])}`,
+      `${un(CALCS)} Il faut $${n}(${a})$, avec :\n\n$${n}(x) = ${P(co)}$\n\n${un([`Par la méthode de Horner, que vaut $${n}(${a})$ ?`, `Avec ce tableau, calcule $${n}(${a})$.`, `Complète le tableau : que vaut $${n}(${a})$ ?`, `Quelle valeur de $${n}(${a})$ donne la dernière case ?`, `Combien vaut $${n}(${a})$ ?`])}`,
       r,
       expl(DEF_H, "le reste de la division par $x - a$ est $P(a)$.", `résultat : $${b.join("\\,;")}$.`, `$${n}(${a}) = ${r}$.`),
       tableau(co, a, b, 1, { rien: true }),
