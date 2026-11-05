@@ -153,6 +153,7 @@ const supportLinks: Record<string, string[]> = {
   // ALGORITHMIQUE
   // =========================
   algo_sequence: ["litteral_expression_comprendre", "relatif_lire"],
+  algo_evenement: ["algo_sequence"],
 
   algo_entree_sortie: [
     "algo_sequence",

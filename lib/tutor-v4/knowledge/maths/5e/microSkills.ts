@@ -683,6 +683,13 @@ export const microSkills: MicroSkillSource[] = [
   prerequis: [],
 },
 {
+  // 05/11/2026 : trou du programme (BO 2020, p. 137 ; repères : 5e).
+  id: "algo_evenement",
+  label: "Repérer l’événement qui déclenche un script (drapeau, touche, clic)",
+  notionId: "algo_programmation",
+  prerequis: ["algo_sequence"],
+},
+{
   id: "algo_entree_sortie",
   label: "Identifier les entrées et sorties d’un programme",
   notionId: "algo_programmation",

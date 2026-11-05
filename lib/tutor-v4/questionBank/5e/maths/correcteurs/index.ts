@@ -1,6 +1,7 @@
 import type { CorrecteursMaths } from "./types";
 import { CORRECTEURS as aires } from "./aires";
 import { CORRECTEURS as algorithmique } from "./algorithmique";
+import { CORRECTEURS as algoEvenement } from "./algo-evenement";
 import { CORRECTEURS as angles } from "./angles";
 import { CORRECTEURS as calculLitteral } from "./calcul-litteral";
 import { CORRECTEURS as conversions } from "./conversions";
@@ -20,6 +21,7 @@ import { CORRECTEURS as volumes } from "./volumes";
 export const CORRECTEURS_5E: CorrecteursMaths = {
   ...aires,
   ...algorithmique,
+  ...algoEvenement,
   ...angles,
   ...calculLitteral,
   ...conversions,

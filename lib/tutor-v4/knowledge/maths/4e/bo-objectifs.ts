@@ -1220,7 +1220,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif: "Déclenchement d'une action par un événement.",
     page: 137,
     micros: [],
-    note: "⚠️ TROU ÉTROIT. Le drapeau vert n'est cité qu'une fois, dans un item de `algo_modifier`. Le déclenchement par événement n'a aucune micro. ⭐ C'est le seul point du thème E que « La pensée informatique — Quatrième » du programme 2027 n'aligne pas déjà.",
+    note: "05/11/2026 : couvert en 5e par `algo_evenement` (drapeau, touches, clic), classe des repères de progressivité.",
   },
   {
     id: "4e-E-algo-4",

@@ -15,6 +15,7 @@ import { symetrieCentraleBank} from "./symetrie_centrale.bank"
 import { volumesBank } from "./volumes.bank";
 import { airesBank } from "./aires.bank";
 import { algorithmiqueBank } from "./algorithmique.bank"
+import { algoEvenementBank } from "./algo-evenement.bank";
 import { divisibiliteBank } from "./divisibilite.bank";
 import { parallelogrammesBank } from "./parallelogrammes.bank";
 // Les items libérés de l'évaluation nationale de 4ᵉ (Éduscol, juillet 2023) :
@@ -42,6 +43,7 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...volumesBank,
   ...airesBank,
   ...algorithmiqueBank,
+  ...algoEvenementBank,
   ...evaluationNationale4eBank,
   ...conversionsBank,
 ];
