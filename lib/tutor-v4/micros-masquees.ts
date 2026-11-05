@@ -155,7 +155,11 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       "don_freq_interpreter",
     ]),
     /* Fonction réciproque : bijection, f⁻¹, courbes symétriques, nombre dérivé. */
-    "terminale-spe": lot("hors_france", "Sénégal, Maroc, Côte d'Ivoire, Belgique, Québec", ["reciproque_bijection", "reciproque_expression", "reciproque_courbe", "reciproque_derivee"]),
+    "terminale-spe": {
+      ...lot("hors_france", "Sénégal, Maroc, Côte d'Ivoire, Belgique, Québec", ["reciproque_bijection", "reciproque_expression", "reciproque_courbe", "reciproque_derivee"]),
+      /* Exposants fractionnaires m/n, racines n-ièmes, x^r : la France s'arrête à a^(1/n) en 1re. */
+      ...lot("hors_france", "Québec, Maroc, Suisse, Sénégal, Côte d'Ivoire", ["expo_ratio_racine", "expo_ratio_calcul", "expo_ratio_regles"]),
+    },
   },
 };
 

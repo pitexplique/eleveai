@@ -7,10 +7,12 @@ import { CORRECTEURS as integrationParties } from "./integration-parties";
 import { CORRECTEURS as integralesEncadrement } from "./integrales-encadrement";
 import { CORRECTEURS as sinusCosinus } from "./sinus-cosinus";
 import { CORRECTEURS as fonctionReciproque } from "./fonction-reciproque";
+import { CORRECTEURS as exposantsFractionnaires } from "./exposants-fractionnaires";
 
 export const CORRECTEURS_TLE: CorrecteursMaths = {
   ...integrationParties,
   ...integralesEncadrement,
   ...sinusCosinus,
   ...fonctionReciproque,
+  ...exposantsFractionnaires,
 };

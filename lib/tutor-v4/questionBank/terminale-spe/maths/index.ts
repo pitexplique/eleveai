@@ -2,6 +2,7 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { fonctionReciproqueBank } from "./fonction-reciproque.bank";
+import { exposantsFractionnairesBank } from "./exposants-fractionnaires.bank";
 
 import { suitesBank } from "./suites.bank";
 import { limitesSuitesBank } from "./limites-suites.bank";
@@ -59,6 +60,7 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...integralesEncadrementBank,
   ...sinusCosinusBank,
   ...fonctionReciproqueBank,
+  ...exposantsFractionnairesBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {

@@ -837,4 +837,23 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "fonction_reciproque",
     prerequis: ["reciproque_expression"],
   },
+
+  {
+    id: "expo_ratio_racine",
+    label: "Lire a^(1/n) comme la racine n-ième d'un réel positif",
+    notionId: "exposants_fractionnaires",
+    prerequis: [],
+  },
+  {
+    id: "expo_ratio_calcul",
+    label: "Calculer a^(p/q) : racine, puissance, exposant négatif",
+    notionId: "exposants_fractionnaires",
+    prerequis: ["expo_ratio_racine"],
+  },
+  {
+    id: "expo_ratio_regles",
+    label: "Règles de calcul, changement de base et fonctions x^r à exposant rationnel",
+    notionId: "exposants_fractionnaires",
+    prerequis: ["expo_ratio_calcul"],
+  },
 ];
