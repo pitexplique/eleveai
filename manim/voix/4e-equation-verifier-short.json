@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Détecteur de mensonges ! Quelqu'un affirme : 5 x égale 8, donc x égale 3. Vrai ou faux ?",
+  "01-test": "On remplace. 5 fois 3, 15. Ce n'est pas 8. Mensonge démasqué ! Dix secondes, et on sait.",
+  "01q-question": "Question ! 3 x égale 0, donc x égale 0. Vrai ou faux ? A : vrai. B : faux. C : impossible à savoir. Mets pause, et choisis !",
+  "01r-reponse": "Réponse A : vrai. 3 fois 0, 0. Zéro est une vraie solution.",
+  "02-question": "Quelqu'un affirme que x égale 6 est solution de 2 x moins 5 égale 7. Vrai ou faux ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

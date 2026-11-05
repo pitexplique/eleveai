@@ -1,0 +1,17 @@
+{
+  "00-garde": "Reconnaître une équation. Comment savoir qu'une écriture est une équation ?",
+  "01-coffre": "Salma conçoit des escape games. Sur un coffre, elle laisse ce message : 3 fois le code, plus 2, ça fait 11. Les joueurs écrivent : 3 x plus 2 égale 11. Le code, on ne le connaît pas : c'est la lettre x.",
+  "02-deux-choses": "Une équation, c'est une égalité : il y a un signe égal. Et il y a une inconnue : une lettre dont on cherche la valeur. Il faut les deux.",
+  "03-trois": "Regarde ces trois écritures. 3 x plus 2 égale 11 : un signe égal et une lettre. C'est une équation. 2 plus 7 égale 9 : un signe égal, mais pas de lettre. Tout est connu : c'est un calcul. 3 x plus 5 : une lettre, mais pas de signe égal. C'est une expression.",
+  "03q-question": "Question ! Laquelle est une équation ? A : 5 moins 2. B : 5 x moins 2 égale 8. C : 5 x moins 2. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B. C'est la seule qui a un signe égal et une lettre.",
+  "04-membres": "Deux mots à connaître. Ce qui est à gauche du signe égal, c'est le premier membre. Ce qui est à droite, c'est le second membre. Dans 4 x plus 1 égale 13, le premier membre est 4 x plus 1, le second membre est 13. Et la lettre peut changer : x, y, t ou n. C'est toujours l'inconnue.",
+  "04q-question": "Question ! Dans 4 x plus 1 égale 13, comment s'appelle le 13 ? A : l'inconnue. B : le premier membre. C : le second membre. Mets pause, et choisis !",
+  "04r-reponse": "Réponse C : le second membre. Il est à droite du signe égal.",
+  "05-resoudre": "Et résoudre ? C'est trouver la valeur de l'inconnue qui rend l'égalité vraie. Salma teste. x égale 2 : 3 fois 2 plus 2, 8. Ce n'est pas 11. x égale 3 : 3 fois 3 plus 2, 11. L'égalité est vraie : le coffre s'ouvre. Le code est 3.",
+  "06-piege": "Le piège : croire que tout signe égal fait une équation. 2 plus 7 égale 9 est vrai, mais il n'y a rien à chercher.",
+  "07-defi": "À toi de jouer. Quatre écritures : 4 fois 6 égale 24. 7 n plus 1. 7 n plus 1 égale 15. 10 moins 3. Laquelle est une équation ? Quelle est son inconnue ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 7 n plus 1 égale 15 : un signe égal et une lettre. Son inconnue est n. 4 fois 6 égale 24 est un calcul. 7 n plus 1 est une expression. 10 moins 3 n'a ni lettre, ni signe égal.",
+  "08-finale": "Ce que tu as appris. Une équation est une égalité avec une inconnue. À gauche, le premier membre. À droite, le second membre. Résoudre, c'est trouver la valeur qui rend l'égalité vraie.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

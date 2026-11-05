@@ -1,0 +1,16 @@
+{
+  "00-garde": "Traduire par une équation. Comment passer d'une phrase à une équation ?",
+  "01-monteuse": "Camille est monteuse de cinéma. Elle assemble un court métrage. Elle ajoute 3 minutes de générique, et le film dure alors 11 minutes. Combien dure le film sans le générique ? On ne le sait pas : on l'appelle x. Un nombre x augmenté de 3 vaut 11. On écrit x plus 3 égale 11.",
+  "02-dictionnaire": "Les mots se traduisent un par un. Augmenté de : plus. Diminué de : moins. Le double de x : 2 x. Le triple de x : 3 x. Vaut, ou est égal à : le signe égal.",
+  "03-exemple": "Le double de x est égal à 14. Le double de x : 2 x. Est égal à : le signe égal. 14 : 14. On écrit 2 x égale 14.",
+  "03q-question": "Question ! Le triple de x vaut 21. Quelle équation ? A : x plus 3 égale 21. B : 3 x égale 21. C : x égale 3 fois 21. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : 3 x égale 21. Le triple de x, c'est 3 fois x, pas x plus 3.",
+  "04-ordre": "Attention à l'ordre. Le double de x diminué de 4 vaut 10. On prend d'abord le double : 2 x. Puis on retire 4 : 2 x moins 4. On écrit 2 x moins 4 égale 10.",
+  "05-piege": "Le piège : mettre des parenthèses au hasard. 2 x moins 4, c'est le double de x, puis moins 4. 2 fois x moins 4 entre parenthèses, c'est le double de la différence entre x et 4. Ce n'est pas la même phrase.",
+  "05q-question": "Question ! Le double de x augmenté de 1 vaut 9. Quelle équation ? A : 2 x plus 1 égale 9. B : 2 fois x plus 1 entre parenthèses égale 9. C : 2 plus x plus 1 égale 9. Mets pause, et choisis !",
+  "05r-reponse": "Réponse A. On prend le double, puis on ajoute 1.",
+  "06-defi": "À toi de jouer. Camille monte 3 bandes-annonces de même durée, x minutes chacune. Elle ajoute 2 minutes de présentation. En tout, 17 minutes. Écris l'équation. Mets pause, et cherche !",
+  "06b-correction": "Correction. 3 bandes-annonces de x minutes : 3 x. Plus 2 minutes : 3 x plus 2. En tout, 17 : 3 x plus 2 égale 17. On ne demande pas encore de la résoudre. Écrire l'équation, c'est déjà la moitié du travail.",
+  "07-finale": "Ce que tu as appris. On nomme x ce qu'on cherche. On traduit la phrase morceau par morceau. Le double donne 2 x, augmenté de donne plus, vaut donne le signe égal.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

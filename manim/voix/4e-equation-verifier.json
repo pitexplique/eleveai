@@ -1,0 +1,17 @@
+{
+  "00-garde": "Vérifier une solution. Comment être sûr de sa réponse ?",
+  "01-ingenieure": "Aïcha est ingénieure dans le spatial. Avant un lancement, chaque calcul est vérifié. Pour une équation, le contrôle prend dix secondes. Son collègue a résolu 2 x plus 1 égale 9 et trouve x égale 4. Est-ce juste ?",
+  "02-remplacer": "Elle remplace x par 4 dans l'équation de départ. 2 fois 4 plus 1 : 8 plus 1, 9. À droite, 9 aussi. Les deux membres sont égaux : 4 est solution.",
+  "03-tableau": "Une solution, c'est une valeur qui rend l'égalité vraie. Pour 3 x égale 9, on essaie. 2 donne 6 : non. 3 donne 9 : oui. 4 donne 12 : non. Seul 3 convient.",
+  "03q-question": "Question ! Le nombre 2 est-il solution de 3 x égale 9 ? A : oui. B : non. C : on ne peut pas savoir. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : non. 3 fois 2, 6. Ce n'est pas 9.",
+  "04-faux": "Vérifier démasque les erreurs. Quelqu'un écrit : 5 x égale 8, donc x égale 3. On remplace : 5 fois 3, 15. Ce n'est pas 8. C'est faux. La bonne solution est 1 virgule 6 : 5 fois 1 virgule 6, 8.",
+  "05-zero": "Et zéro ? 0 est-il solution de 3 x égale 0 ? 3 fois 0, 0. L'égalité est vraie. Oui, zéro peut être une solution.",
+  "05q-question": "Question ! 0 est-il solution de x plus 5 égale 5 ? A : non, 0 n'est jamais solution. B : oui. C : non, car il faut un nombre positif. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : oui. 0 plus 5, 5. L'égalité est vraie.",
+  "06-deux-membres": "Quand x est des deux côtés, on calcule chaque membre séparément. 3 fois, entre parenthèses, t moins 1, égale t plus 11, avec t égale 7. À gauche : 3 fois 6, 18. À droite : 7 plus 11, 18. C'est égal : 7 est solution.",
+  "07-defi": "À toi de jouer. 5 est-il solution de 4 x moins 3 égale 2 x plus 7 ? Et 4 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Pour 5 : à gauche, 20 moins 3, 17. À droite, 10 plus 7, 17. Oui, 5 est solution. Pour 4 : à gauche, 13. À droite, 15. Non, 4 n'est pas solution.",
+  "08-finale": "Ce que tu as appris. Pour vérifier, on remplace la lettre dans l'équation de départ. On calcule les deux membres séparément. S'ils sont égaux, le nombre est solution. Zéro peut être solution.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

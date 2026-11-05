@@ -1,0 +1,17 @@
+{
+  "00-garde": "Résoudre une équation avec des parenthèses. Par où commencer ?",
+  "01-dj": "Nathan est DJ. Il prépare 2 parties identiques. Chaque partie : un morceau de x minutes, plus 3 minutes de transition. En tout, 14 minutes. 2 fois, entre parenthèses, x plus 3, égale 14.",
+  "02-diviser": "Première route : on divise par 2 des deux côtés. x plus 3 égale 7. On soustrait 3 : x égale 4. Le morceau dure 4 minutes.",
+  "03-developper": "Deuxième route : on développe. 2 fois x, 2 x. 2 fois 3, 6. 2 x plus 6 égale 14. On soustrait 6 : 2 x égale 8. On divise par 2 : x égale 4.",
+  "04-deux-routes": "Deux routes, la même solution. Ici, diviser d'abord est plus court : la parenthèse disparaît d'un coup.",
+  "04q-question": "Question ! Que donne 2 fois, entre parenthèses, x plus 3, quand on développe ? A : 2 x plus 3. B : 2 x plus 6. C : x plus 6. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : 2 x plus 6. Le 2 multiplie x, et il multiplie aussi le 3.",
+  "05-piege": "Le piège : ne multiplier que le premier terme. 2 x plus 3 est faux. Le nombre devant la parenthèse multiplie tout ce qu'elle contient.",
+  "06-moins": "Avec un moins. 3 fois, entre parenthèses, x moins 1, égale 12. On divise par 3 : x moins 1 égale 4. On ajoute 1 : x égale 5.",
+  "06q-question": "Question ! 4 fois, entre parenthèses, x moins 2, égale 12. Que vaut x ? A : 3. B : 1. C : 5. Mets pause, et choisis !",
+  "06r-reponse": "Réponse C : 5. On divise par 4 : x moins 2 égale 3. On ajoute 2 : x égale 5.",
+  "07-defi": "À toi de jouer. Nathan fait 3 parties de a plus 6 minutes chacune, et 7 minutes d'introduction. En tout, 37 minutes. 3 fois, entre parenthèses, a plus 6, plus 7, égale 37. Que vaut a ? Mets pause, et cherche !",
+  "07b-correction": "Correction. On soustrait d'abord 7 : 3 fois, entre parenthèses, a plus 6, égale 30. On divise par 3 : a plus 6 égale 10. On soustrait 6 : a égale 4.",
+  "08-finale": "Ce que tu as appris. Devant une parenthèse, on peut diviser d'abord ou développer d'abord. Les deux routes donnent la même solution. En développant, le nombre multiplie tout ce qui est dans la parenthèse.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

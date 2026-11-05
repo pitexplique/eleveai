@@ -1,0 +1,17 @@
+{
+  "00-garde": "Résoudre une équation en réduisant. Que faire quand x apparaît deux fois ?",
+  "01-coach": "Awa entraîne des coureuses. Sa boucle de course fait x kilomètres. Lundi, ses athlètes font 2 boucles. Mardi, 3 boucles. En tout, 15 kilomètres. 2 x plus 3 x égale 15.",
+  "02-reduire": "Il y a deux termes en x : on ne peut pas encore isoler x. 2 boucles plus 3 boucles, ça fait 5 boucles. 2 x plus 3 x égale 5 x. L'équation devient 5 x égale 15.",
+  "03-resoudre": "Maintenant, c'est une équation simple. On divise par 5 des deux côtés. x égale 3. La boucle fait 3 kilomètres. D'abord réduire, ensuite résoudre.",
+  "04-seul": "Et 4 x moins x égale 12 ? x tout seul, c'est 1 x. 4 x moins 1 x, 3 x. Donc 3 x égale 12, et x égale 4.",
+  "04q-question": "Question ! Combien vaut 4 x moins x ? A : 4. B : 3 x. C : 4 x au carré. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : 3 x. x tout seul, c'est 1 x.",
+  "05-piege": "Le piège : mélanger les x et les nombres. 2 x plus 3, ce n'est pas 5 x. On ajoute les x avec les x, les nombres avec les nombres.",
+  "06-mele": "Exemple. 2 t plus 12 plus t moins 3 égale 27. Les t ensemble : 2 t plus t, 3 t. Les nombres ensemble : 12 moins 3, 9. On obtient 3 t plus 9 égale 27. On soustrait 9 : 3 t égale 18. On divise par 3 : t égale 6.",
+  "06q-question": "Question ! 5 x moins 2 x égale 9. Que vaut x ? A : 3. B : 6. C : 9. Mets pause, et choisis !",
+  "06r-reponse": "Réponse A : 3. 5 x moins 2 x, 3 x. Donc 3 x égale 9, et x égale 3.",
+  "07-defi": "À toi de jouer. Une coureuse fait 3 boucles de x kilomètres, puis 2 boucles de x kilomètres, puis encore 4 kilomètres. En tout, 19 kilomètres. Écris l'équation et trouve x. Mets pause, et cherche !",
+  "07b-correction": "Correction. 3 x plus 2 x plus 4 égale 19. On réduit : 5 x plus 4 égale 19. On soustrait 4 : 5 x égale 15. On divise par 5 : x égale 3. La boucle fait 3 kilomètres.",
+  "08-finale": "Ce que tu as appris. Quand x apparaît plusieurs fois, on réduit d'abord. On regroupe les x avec les x, les nombres avec les nombres. x tout seul, c'est 1 x.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

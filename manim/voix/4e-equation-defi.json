@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi sur les équations. Peut-on trouver la bonne réponse, et avoir tort ?",
+  "01-correctrice": "Lina corrige des manuels de maths avant leur impression. Son métier : trouver l'erreur que personne n'a vue. Sur son bureau, le calcul de Léo. Dans 2 x plus 3 égale 11, x égale 4, car 2 plus 3 plus 4 égale 9.",
+  "02-leo": "La réponse est bonne : 2 fois 4 plus 3, 11. Mais le raisonnement est faux. Léo a additionné les nombres qu'il voyait, et il trouve 9, pas 11. Il est tombé juste par hasard.",
+  "03-vrai-chemin": "Le vrai chemin. 2 x plus 3 égale 11. On soustrait 3 : 2 x égale 8. On divise par 2 : x égale 4. Trouver le bon nombre ne suffit pas : le chemin compte aussi.",
+  "03q-question": "Question ! Quel calcul prouve que 3 est solution de 2 x plus 1 égale 7 ? A : 2 plus 3 plus 1 égale 6. B : 2 fois 3 plus 1 égale 7. C : 7 moins 1 égale 6. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B. On remplace x par 3 dans l'équation de départ, et on trouve bien 7.",
+  "04-erreur": "Autre copie. a plus 2 égale 11, donc a égale 11 plus 2, 13. Lina vérifie : 13 plus 2, 15. Ce n'est pas 11. L'erreur : on a ajouté 2 au lieu de soustraire 2. La solution est 9.",
+  "04q-question": "Question ! Une copie dit : 3 x égale 12, donc x égale 9. Quelle est l'erreur ? A : il fallait ajouter 3. B : il fallait diviser par 3. C : il n'y a pas d'erreur. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B. Le 3 multiplie x : on divise par 3, et x égale 4. La copie a soustrait 3.",
+  "05-deux-cotes": "Le dernier niveau : x des deux côtés. 4 x moins 3 égale 2 x plus 7. On retire 2 x des deux côtés : 2 x moins 3 égale 7. On ajoute 3 : 2 x égale 10. On divise par 2 : x égale 5. On vérifie : 17 à gauche, 17 à droite.",
+  "06-defi": "À toi de jouer. Résous 3 fois, entre parenthèses, x moins 1, égale 2 x plus 4. Puis vérifie. Mets pause, et cherche !",
+  "06b-correction": "Correction. On développe : 3 x moins 3 égale 2 x plus 4. On retire 2 x : x moins 3 égale 4. On ajoute 3 : x égale 7. Vérification : à gauche, 3 fois 6, 18. À droite, 14 plus 4, 18. C'est juste.",
+  "07-finale": "Ce que tu as appris. Une bonne réponse ne prouve pas un bon raisonnement. Pour trouver une erreur, on vérifie en remplaçant. Quand x est des deux côtés, on le regroupe d'un seul côté.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un sac mystère et 4 billes d'un côté de la balance. 9 billes de l'autre. Combien de billes dans le sac ?",
+  "01-jeu": "On enlève 4 billes de chaque côté. La balance ne bouge pas. Il reste le sac d'un côté, 5 billes de l'autre. x plus 4 égale 9, donc x égale 5.",
+  "01q-question": "Question ! 3 sacs identiques d'un côté, 15 billes de l'autre. Combien de billes par sac ? A : 12. B : 5. C : 18. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 5. 3 x égale 15. On divise par 3 des deux côtés.",
+  "02-question": "Un sac et 7 billes d'un côté, 15 billes de l'autre. Combien de billes dans le sac ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

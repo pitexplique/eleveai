@@ -1,0 +1,18 @@
+{
+  "00-garde": "Résoudre une équation simple. Comment retrouver x sans deviner ?",
+  "01-veto": "Marie est vétérinaire. Elle pèse un petit chien dans sa caisse de 4 kilos. La balance affiche 9 kilos. Le chien pèse x kilos : x plus 4 égale 9.",
+  "02-balance": "Imagine une balance en équilibre. À gauche, le chien et 4 kilos. À droite, 9 kilos. On retire 4 kilos à gauche. Pour garder l'équilibre, on retire 4 kilos à droite aussi. Il reste x égale 5. Le chien pèse 5 kilos.",
+  "03-inverse": "Résoudre, c'est défaire. On ajoutait 4 : on soustrait 4, des deux côtés. C'est l'opération inverse.",
+  "04-moins": "Une tortue a perdu 3 kilos. Elle pèse maintenant 8 kilos. x moins 3 égale 8. On retirait 3 : on ajoute 3 des deux côtés. x égale 11. La tortue pesait 11 kilos.",
+  "04q-question": "Question ! Pour résoudre x moins 5 égale 12, que fait-on des deux côtés ? A : soustraire 5. B : ajouter 5. C : diviser par 5. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : ajouter 5. x égale 17. On retirait 5, l'inverse est d'ajouter 5.",
+  "05-fois": "3 chiots de même poids pèsent 15 kilos en tout. 3 x égale 15. Le 3 multiplie x : on divise par 3 des deux côtés. x égale 5. Chaque chiot pèse 5 kilos.",
+  "06-piege": "Le piège : 5 chatons de même poids pèsent 8 kilos. 5 x égale 8. Certains écrivent x égale 3 : ils ont soustrait 5. Mais 5 x, c'est 5 fois x, pas 5 plus x. On divise : 8 divisé par 5, 1 virgule 6. Chaque chaton pèse 1 virgule 6 kilo.",
+  "06q-question": "Question ! 4 x égale 10. Que vaut x ? A : 6. B : 2 virgule 5. C : 40. Mets pause, et choisis !",
+  "06r-reponse": "Réponse B : 2 virgule 5. Le 4 multiplie x, donc 10 divisé par 4. Le 6, c'est le piège de la soustraction.",
+  "07-negatif": "Ça marche aussi avec un nombre négatif. Moins 3 a égale 30. On divise par moins 3 des deux côtés. a égale moins 10.",
+  "08-defi": "À toi de jouer. Résous deux équations. x plus 5 égale 12. Et 6 x égale 9. Mets pause, et cherche !",
+  "08b-correction": "Correction. x plus 5 égale 12 : on soustrait 5, x égale 7. 6 x égale 9 : on divise par 6, x égale 1 virgule 5.",
+  "09-finale": "Ce que tu as appris. On fait la même opération des deux côtés. Un nombre ajouté se soustrait, un nombre retiré s'ajoute. Devant un produit, on divise.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
