@@ -285,6 +285,33 @@ async function poserMiniature(token, videoId, relatif) {
   return r.ok ? "posée" : `refusée (${r.status})`;
 }
 
+// Frédéric, 05/11 : l'onglet Shorts de la chaîne montre une image de la vidéo.
+// Une miniature posée juste après l'envoi s'affiche dans la recherche, mais
+// l'onglet Shorts ne la prend que si elle est reposée une fois le short en ligne :
+// alors seulement YouTube crée `sardefault.jpg`. Contrôler cette image est gratuit.
+async function rattraperMiniaturesShorts(token, m, journal, max) {
+  const maintenant = new Date().toISOString();
+  const aVoir = m.videos.filter(
+    (v) => v.type === "short" && v.url && cheminMiniature(v.miniature) && !(journal[v.id]?.publieLe > maintenant),
+  );
+  let posees = 0;
+  for (const v of aVoir) {
+    if (posees >= max) break;
+    const videoId = v.url.match(/(?:youtu\.be\/|v=|shorts\/)([\w-]{11})/)?.[1];
+    if (!videoId) continue;
+    const r = await fetch(`https://i.ytimg.com/vi/${videoId}/sardefault.jpg`, { method: "HEAD" });
+    if (r.status !== 404) continue;
+    // Une vidéo privée n'a aucune image publique : elle ne peut pas être rattrapée.
+    const publique = await fetch(`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`, { method: "HEAD" });
+    if (publique.status === 404) continue;
+    const res = await poserMiniature(token, videoId, v.miniature);
+    console.log(`  miniature de l'onglet Shorts : ${v.id} (${videoId}) ${res}`);
+    if (res === "refusée (403)") break; // quota épuisé : la suite à la prochaine heure
+    if (res === "posée") posees++;
+  }
+  return posees;
+}
+
 async function playlist(token, nom) {
   const r = await fetch(
     "https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true&maxResults=50",
@@ -581,6 +608,14 @@ async function main() {
     return;
   }
 
+  // --rattraper-miniatures 20 : reprend le retard de l'onglet Shorts, à la main.
+  const rattrapage = lire("--rattraper-miniatures", null);
+  if (rattrapage) {
+    const n = await rattraperMiniaturesShorts(token, m, journal, parseInt(rattrapage, 10));
+    console.log(`${n} miniature(s) reposée(s).`);
+    return;
+  }
+
   // Une centaine de vidéos publiées à la main n'ont pas d'`url` dans le
   // manifeste : on les reconnaît sur la chaîne par leur nom de fichier d'origine.
   // Retrouvées, leur `url` est écrite dans le manifeste (une fois pour toutes).
@@ -644,7 +679,9 @@ async function main() {
     const demain = heureReunion(horaires[0]).split(" ")[0];
     const deja = Object.values(journal).filter((j) => j.publieLe > new Date().toISOString());
     if (deja.some((j) => heureReunion(j.publieLe).split(" ")[0] === demain)) {
-      console.log(`Demain (${demain}) a déjà ses vidéos programmées : rien à faire.`);
+      console.log(`Demain (${demain}) a déjà ses vidéos programmées.`);
+      // Les essais de chaque heure rattrapent les shorts sortis depuis le dernier.
+      if (!dryRun) await rattraperMiniaturesShorts(token, m, journal, 8);
       return;
     }
   }
