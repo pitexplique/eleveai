@@ -80,12 +80,12 @@ export default function ReponseExercice({
   return (
     <div className="screen-only flex min-w-0 flex-col gap-2 self-start rounded-2xl border border-slate-200 bg-slate-50 p-3">
       <div className="flex items-center justify-between gap-2">
-        <p className="text-sm font-black text-slate-700">Ma réponse</p>
+        <p className="whitespace-nowrap text-sm font-black text-slate-700">Ma réponse</p>
         {clavierMaths ? (
           <button
             type="button"
             onClick={() => setClavier((v) => !v)}
-            className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-bold text-slate-500 hover:bg-slate-200"
+            className="inline-flex items-center gap-1 whitespace-nowrap rounded-full px-1.5 py-0.5 text-xs font-bold text-slate-500 hover:bg-slate-200"
             aria-pressed={clavier}
           >
             <Keyboard className="h-3.5 w-3.5" />

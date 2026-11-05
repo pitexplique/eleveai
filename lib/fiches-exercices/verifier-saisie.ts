@@ -162,9 +162,13 @@ function evaluer(src: string, vars: Valeurs): number {
 
 /** « x = 3 », « S = {3} », « AB = 5 cm » → « 3 », « 3 », « 5 cm ». */
 function sansMembreGauche(s: string): string {
-  let t = s.trim().replace(/^S\s*=\s*/i, "").replace(/^\{(.*)\}$/, "$1");
+  // ⭐ STMG (05/11) : « ≈ 0,41 » et « P ≈ 0,41 » se lisent comme « 0,41 » et « P = 0,41 ».
+  let t = s.trim().replace(/^≈\s*/, "").replace(/\s*≈\s*/, " = ").replace(/^S\s*=\s*/i, "").replace(/^\{(.*)\}$/, "$1");
   const egal = t.lastIndexOf("=");
-  if (egal >= 0 && /^[\p{L}\s()0-9]*$/u.test(t.slice(0, egal)) && /\p{L}/u.test(t.slice(0, egal))) {
+  // ⭐ STMG (05/11) : l'apostrophe et le prime sont permis, « f'(x) = 3x² + 3 », et
+  // un événement à gauche, « P(X = 1) = 0,41 », « P(X ≤ 2) = 0,8 ».
+  // ⛔ « x <= 5 » n'a pas de membre gauche : son = appartient au symbole.
+  if (egal >= 0 && !/[<>]/.test(t[egal - 1] ?? "") && /^[\p{L}\s()0-9'’′=<>≤≥]*$/u.test(t.slice(0, egal)) && /\p{L}/u.test(t.slice(0, egal))) {
     t = t.slice(egal + 1);
   }
   return t.trim();
@@ -173,7 +177,18 @@ function sansMembreGauche(s: string): string {
 /** Les unités courantes en fin de réponse, qu'on ignore pour le calcul — y
  *  compris les composées (km/h, g/cm³, hab/km², €/kg) et kWh. */
 const UNITE =
-  /\s*([\p{L}€]+\s*\/\s*\p{L}+[²³23]?|kwh|wh|kw|w|ha|mm|cm|dm|km|m|g|kg|mg|t|l|cl|ml|dl|s|min|h|ans?|jours?|€|°|%|cm²|m²|km²|dm²|mm²|cm³|m³|dm³|mm³|cm2|m2|km2|dm2|cm3|m3|dm3)\s*$/iu;
+  /\s*([\p{L}€]+\s*\/\s*\p{L}+[²³23]?|gwh|mwh|kwh|wh|kw|w|ha|mm|cm|dm|km|m|g|kg|mg|t|l|cl|ml|dl|s|min|h|ans?|jours?|k€|m€|€|°c|°|%|cm²|m²|km²|dm²|mm²|km³|cm³|m³|dm³|mm³|cm2|m2|km2|dm2|km3|cm3|m3|dm3)\s*$/iu;
+
+/**
+ * ⭐ STMG (05/11) : un MOT avant un nombre, côté élève : « rang 3 », « à partir du
+ * rang 3 », « en 2027 », « année 3 ». ⛔ Pas une fonction (« log 3 », « cos 3 »), et
+ * au moins deux lettres : « x 3 » reste le produit de x par 3.
+ */
+function sansMotDevant(s: string): string {
+  const m = /^[\p{L}'’\s]*?(\p{L}{2,})\s+([-−+]?\d[\d\s.,]*)$/u.exec(s.trim());
+  if (!m || /^(ln|log|exp|sqrt|racine|cos|sin|tan)$/i.test(m[1])) return s;
+  return m[2];
+}
 
 /**
  * Enlève l'unité finale, mais SEULEMENT derrière un nombre nu : « 7 140 m² »,
@@ -181,7 +196,8 @@ const UNITE =
  * est une inconnue, pas des tonnes ni des heures (trouvé sur la fiche 4e
  * « dépendance », 29/10/2026) : l'expression reste entière.
  */
-function sansUnite(s: string, strict = false): string {
+function sansUnite(s0: string, strict = false): string {
+  const s = strict ? s0 : sansMotDevant(s0);
   // Côté élève, un MOT après un nombre se lit comme une unité : « 36 cubes »,
   // « 12 élèves », « 5 paniers » (vu sur la fiche 4e « volumes »).
   const mot = /^(\s*[-−+]?[\d\s.,]*\d)\s+\p{L}{2,}[\p{L}\s'’-]*$/u.exec(s);
@@ -200,8 +216,10 @@ function sansUnite(s: string, strict = false): string {
 function membreGauche(s: string): string | null {
   const t = s.trim().replace(/^S\s*=\s*/i, "");
   const egal = t.lastIndexOf("=");
-  if (egal >= 0 && /^[\p{L}\s()0-9]*$/u.test(t.slice(0, egal)) && /\p{L}/u.test(t.slice(0, egal))) {
-    return texteNormalise(t.slice(0, egal));
+  if (egal >= 0 && !/[<>]/.test(t[egal - 1] ?? "") && /^[\p{L}\s()0-9'’′=<>≤≥]*$/u.test(t.slice(0, egal)) && /\p{L}/u.test(t.slice(0, egal))) {
+    const gauche = texteNormalise(t.slice(0, egal)).replace(/′/g, "'");
+    // ⭐ STMG (05/11) : pour une droite, « f(x) = 2x + 3 » vaut « y = 2x + 3 ».
+    return /^\p{L}\(x\)$/u.test(gauche) ? "y" : gauche;
   }
   return null;
 }
@@ -235,7 +253,12 @@ function formeNormalisee(s: string): string {
     .replace(/[×·]/g, "*")
     .replace(/[−–]/g, "-")
     .replace(/÷/g, ":")
-    .replace(/\^\(([^()]*)\)/g, "^$1")
+    // ⛔ STMG (05/11) : seul un exposant SIMPLE perd ses parenthèses. « 20^(1/5) »
+    // restait « 20^1/5 », et l'élève qui tapait 20^1/5 (qui vaut 4) avait juste.
+    .replace(/\^\((-?[\p{L}\d.]+)\)/gu, "^$1")
+    // ⭐ STMG (05/11) : la touche a⁄b écrit « (5)/(6) » : c'est bien 5/6.
+    .replace(/\((-?[\p{L}\d.]+)\)\//gu, "$1/")
+    .replace(/\/\((-?[\p{L}\d.]+)\)/gu, "/$1")
     .replace(/²/g, "^2")
     .replace(/³/g, "^3");
 }
@@ -276,6 +299,10 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
     const juste = sansMembreGauche(forme);
     if (attendue.exact) return formeNormalisee(eleve) === formeNormalisee(juste);
     if (texteNormalise(eleve) === texteNormalise(juste)) return true;
+    // ⭐ STMG (05/11) : un mot au féminin ou au pluriel, « croissant » pour « croissante ».
+    const motNu = (m: string) => (/^\p{L}{5,}$/u.test(m) ? m.replace(/e?s?$/, "") : null);
+    const mE = motNu(texteNormalise(eleve));
+    if (mE && mE === motNu(texteNormalise(juste))) return true;
     if (attendue.colineaire) return colineaires(saisie, forme);
     // Une ÉQUATION attendue (« 2x - y + 3 = 0 ») : toute équation équivalente
     // est juste, -4x + 2y - 6 = 0 comme y = 2x + 3 (seconde, droites, 03/11).
@@ -286,11 +313,15 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
     const ie = intervalles(saisie);
     const ij = intervalles(forme);
     if (ie && ij) {
+      // ⭐ STMG (05/11) : une réunion se lit dans les deux sens, [5 ; 8] ∪ [0 ; 1].
+      const restants = [...ij];
       return (
         ie.length === ij.length &&
-        ie.every((p, k) => {
-          const q = ij[k];
-          return p.g === q.g && p.d === q.d && bornesEgales(p.a, q.a, attendue.tolerance ?? 0) && bornesEgales(p.b, q.b, attendue.tolerance ?? 0);
+        ie.every((p) => {
+          const k = restants.findIndex((q) => p.g === q.g && p.d === q.d && bornesEgales(p.a, q.a, attendue.tolerance ?? 0) && bornesEgales(p.b, q.b, attendue.tolerance ?? 0));
+          if (k < 0) return false;
+          restants.splice(k, 1);
+          return true;
         })
       );
     }
@@ -302,7 +333,7 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
         .replace(/^S\s*=\s*/i, "")
         .replace(/^\{(.*)\}$/, "$1")
         .replace(attendue.ordre ? /^\((.*)\)$/ : /$^/, "$1")
-        .split(attendue.ordre ? /\s*[;<>≤≥]\s*/ : /\s*[;]\s*|\s+(?:et|ou)\s+/)
+        .split(attendue.ordre ? /\s*[;<>≤≥]\s*|\s+et\s+/ : /\s*[;]\s*|\s+(?:et|ou)\s+/)
         .filter(Boolean)
         .map(sansMembreGauche);
     const le = decoupe(saisie);
@@ -412,6 +443,16 @@ type Intervalle = { g: string; a: string; b: string; d: string };
 
 /** « ]-∞ ; 2] ∪ [5 ; +∞[ » → ses morceaux ; null si ce n'est pas un intervalle. */
 function intervalles(t: string): Intervalle[] | null {
+  // ⭐ STMG (05/11) : l'encadrement « 1 < x < 4 » et l'inégalité « x ≥ 3 » sont
+  // aussi des intervalles. La lettre n'est lue que s'il y en a une seule.
+  const inf = (c: string) => (c === "<" ? "]" : "[");
+  const sup = (c: string) => (c === "<" ? "[" : "]");
+  const enc = /^\s*([^<>≤≥]*\d[^<>≤≥]*?)\s*([<≤])\s*\p{L}\s*([<≤])\s*([^<>≤≥]*\d[^<>≤≥]*?)\s*$/u.exec(t);
+  if (enc) return [{ g: inf(enc[2]), a: enc[1], b: enc[4], d: sup(enc[3]) }];
+  const bas = /^\s*\p{L}\s*([>≥])\s*(-?[\d.,/\s]+)$/u.exec(t);
+  if (bas) return [{ g: bas[1] === ">" ? "]" : "[", a: bas[2].trim(), b: "+∞", d: "[" }];
+  const haut = /^\s*\p{L}\s*([<≤])\s*(-?[\d.,/\s]+)$/u.exec(t);
+  if (haut) return [{ g: "]", a: "-∞", b: haut[2].trim(), d: haut[1] === "<" ? "[" : "]" }];
   const morceaux = t
     .trim()
     .replace(/^S\s*=\s*/i, "")

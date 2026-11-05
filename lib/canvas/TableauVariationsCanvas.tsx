@@ -78,7 +78,22 @@ export default function TableauVariationsCanvas({ figure }: Props) {
   // ⚠️ EN CONTREPARTIE, LES LIBELLES DOIVENT ETRE COURTS : « f ′(x) » et « f »,
   // pas « variations de f ». Le SVG ne sait pas passer un texte a la ligne, donc
   // un libelle long repousse toute la grille vers la droite.
-  const LARGEUR_INTER = 54;
+  // ⛔ 05/11/2026 : deux bornes longues dans un seul intervalle (« 100 » et « 1 000 »)
+  // s'écrivaient l'une sur l'autre. L'intervalle s'élargit, et seulement dans ce cas.
+  const LARGEUR_CAR_BORNE = 8;
+  const LARGEUR_INTER = Math.max(
+    54,
+    ...bornes.slice(0, -1).map((b, i) => {
+      const part = (k: number) => (k === 0 || k === bornes.length - 1 ? 1 : 0.5);
+      return (
+        String(b).length * LARGEUR_CAR_BORNE * part(i) +
+        String(bornes[i + 1]).length * LARGEUR_CAR_BORNE * part(i + 1) +
+        (i === 0 ? 8 : 0) +
+        (i + 1 === bornes.length - 1 ? 8 : 0) +
+        6
+      );
+    }),
+  );
   const HAUT_ENTETE = 36;
   const HAUT_DERIVEE = 42;
   const HAUT_VARIATIONS = 84;

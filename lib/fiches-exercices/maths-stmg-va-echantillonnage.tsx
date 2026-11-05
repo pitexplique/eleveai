@@ -43,7 +43,8 @@
 // 19, 20), va_ech_taille (2, 4, 7, 8, 13, 16, 18, 19). 4/4.
 
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
-import { barres, ecranSeulement, grille, intervalle } from "@/lib/fiches-exercices/figures-donnees";
+import { barres, ecranSeulement, intervalle } from "@/lib/fiches-exercices/figures-donnees";
+import { grille } from "@/lib/fiches-exercices/stmg-tableaux";
 
 export const exercicesVaEchantillonnageStmg: FicheExercicesData = {
   matiere: "maths",

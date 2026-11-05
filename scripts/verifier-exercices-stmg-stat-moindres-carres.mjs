@@ -200,7 +200,7 @@ essai("17", () => {
   vrai("17. Spotify 2017 → 2024", memes(ys, [71, 96, 124, 155, 180, 205, 236, 263]) && an[0] === 2017);
   const xs = an.map((_, i) => i + 1);
   const m = calculatrice(17, xs, ys, 27.52, 42.39, 2);
-  dit(17, `\\dfrac{${plus(ys)}}{8} = \\dfrac{${somme(ys)}}{8} = ${tx(m.my)}$`);
+  dit(17, `(${plus(ys)}) \\div 8 = \\dfrac{${somme(ys)}}{8} = ${tx(m.my)}$`);
   const g = 27.52 * 4.5 + 42.39;
   dit(17, `$27{,}52 \\times 4{,}5 + 42{,}39 = ${tx(27.52 * 4.5)} + 42{,}39 = ${tx(g)}$, à $${tx(m.my - g)}$`);
   const p4 = 27.52 * 4 + 42.39;

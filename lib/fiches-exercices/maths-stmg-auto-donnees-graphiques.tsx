@@ -47,7 +47,8 @@
 
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
 import { boite } from "@/lib/fiches-exercices/figures";
-import { barres, camembert, ecranSeulement, grille } from "@/lib/fiches-exercices/figures-donnees";
+import { barres, camembert, ecranSeulement } from "@/lib/fiches-exercices/figures-donnees";
+import { grille } from "@/lib/fiches-exercices/stmg-tableaux";
 
 export const exercicesAutoDonneesGraphiquesStmg: FicheExercicesData = {
   matiere: "maths",
@@ -261,7 +262,7 @@ export const exercicesAutoDonneesGraphiquesStmg: FicheExercicesData = {
               { label: "WTC", value: 541 },
               { label: "Eiffel", value: 330 },
               { label: "Montp.", value: 210 },
-            ], { unite: "mètres" }),
+            ], { unite: "m" }),
           ),
           micros: ["auto_stat_lire_graphique", "auto_stat_graphique_donnees"],
         },

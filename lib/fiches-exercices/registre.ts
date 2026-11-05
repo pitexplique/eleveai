@@ -1289,6 +1289,387 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Linéariser un nuage qui se courbe par u = x², z = 1/x ou Y = log y, vérifier que le nuage transformé est presque aligné, utiliser la droite de la calculatrice, puis revenir aux variables de départ pour estimer. Le prix des pizzas, l'électricité solaire en France, le freinage, les bactéries, la loi de Moore, une navette partagée.",
   },
+  // ─── STMG : les 76 autres notions du coach, avec réponse et clavier maths (05/11/2026) ───
+  "maths/stmg/auto-proportion": {
+    titre: "Proportions et pourcentages : 20 exercices corrigés",
+    resume:
+      "Automatismes : calculer une proportion (« parmi »), passer d'une fraction à un décimal et à un pourcentage, appliquer un taux, prendre la proportion d'une proportion. Un hôpital, une cantine, une facture avec TVA, un marathon, un festival, le budget d'une commune, l'eau douce de la planète.",
+  },
+  "maths/stmg/auto-developper-factoriser": {
+    titre: "Développer, factoriser, réduire : 20 exercices corrigés",
+    resume:
+      "Automatismes : développer un produit, ne plus oublier le double produit, sortir le plus grand facteur commun, factoriser une différence de deux carrés. Un terrain de sport, une affiche, un cinéma, un food truck, un cadre photo, un chantier de carrelage.",
+  },
+  "maths/stmg/auto-equations": {
+    titre: "Équations et inéquations : 20 exercices corrigés",
+    resume:
+      "Automatismes : résoudre une équation du premier degré, une inéquation dont le sens se retourne, x² = a et ses deux solutions, une équation produit nul. Une salle d'escalade, une cuve d'irrigation, un contrat d'électricité, un monte-charge, la température en montagne.",
+  },
+  "maths/stmg/auto-formules": {
+    titre: "Formules et calcul littéral : 20 exercices corrigés",
+    resume:
+      "Automatismes : réduire sans se tromper de signe, isoler une lettre, remplacer les lettres par des valeurs, remonter à une donnée manquante. Un vélo, un enclos, une perfusion, un livre et sa TVA, le devis d'un plombier, un stade, les degrés Fahrenheit.",
+  },
+  "maths/stmg/auto-fractions-puissances": {
+    titre: "Fractions, puissances et écritures : 20 exercices corrigés",
+    resume:
+      "Automatismes : additionner et comparer des fractions, en prendre une partie, calculer avec des puissances, passer à l'écriture scientifique et en revenir. Un parc de vélos, une colonie de bactéries, la lumière du Soleil, le budget d'une médiathèque, un centre de données.",
+  },
+  "maths/stmg/auto-ordres-unites": {
+    titre: "Ordre de grandeur et conversions : 20 exercices corrigés",
+    resume:
+      "Automatismes : les pourcentages usuels de tête, l'ordre de grandeur d'un produit ou d'un quotient, les heures et les minutes, les tonnes et les kilos. Un train, un glacier, un chargement de pommes, le cœur qui bat, la facture d'un hôtel, une salle de concert.",
+  },
+  "maths/stmg/auto-droites": {
+    titre: "Droites et coefficient directeur : 20 exercices corrigés",
+    resume:
+      "Automatismes : placer un point, lire une équation réduite sur le dessin, calculer un coefficient directeur, trouver l'équation à partir de deux points. Une montgolfière, un four de boulanger, une cuve de piscine, un taxi, un glacier, une perfusion.",
+  },
+  "maths/stmg/auto-lecture-graphique": {
+    titre: "Lire une courbe : 20 exercices corrigés",
+    resume:
+      "Automatismes : image et antécédent lus sur une courbe, graduation et échelle d'un axe, point qui appartient ou non à une courbe, seuil dépassé. Une rivière en crue, des panneaux solaires, un musée, un drone, des abeilles.",
+  },
+  "maths/stmg/auto-resolution-graphique": {
+    titre: "Résoudre graphiquement : 20 exercices corrigés",
+    resume:
+      "Automatismes : tout se lit sur le dessin. Résoudre f(x) = k et f(x) < k, trouver le signe d'une fonction, décrire ses variations. Une chambre froide, un camping, un barrage, un stand de crêpes, une randonnée en montagne. Chaque corrigé dresse son tableau.",
+  },
+  "maths/stmg/auto-signes": {
+    titre: "Signe d'une expression : 20 exercices corrigés",
+    resume:
+      "Automatismes : le signe de ax + b, le seuil de rentabilité, le signe d'un produit de deux facteurs, le tableau de signes et l'inéquation qu'il résout. Un atelier de vélos, un réfrigérateur à vaccins, un plongeoir, une serre, une fromagerie.",
+  },
+  "maths/stmg/auto-terminale-derivee": {
+    titre: "Dérivée et tangente, les automatismes de terminale : 20 exercices corrigés",
+    resume:
+      "Réflexes de terminale : dériver un polynôme terme à terme, calculer le coefficient directeur d'une tangente, trouver où elle est horizontale, lire sa pente sur le dessin. Une imprimerie, un souffleur de verre, un lancer de javelot, un toboggan, une station d'épuration.",
+  },
+  "maths/stmg/auto-terminale-reconnaitre": {
+    titre: "Reconnaître, les automatismes de terminale : 20 exercices corrigés",
+    resume:
+      "Réflexes de terminale : un pourcentage qui se répète, c'est une suite géométrique ; la raison se lit dans le taux, et le taux dans la raison ; le signe d'une expression factorisée se trouve sans rien tracer. Un loyer, une machine, un stock qui fond, des papillons.",
+  },
+  "maths/stmg/auto-evo-coefficient": {
+    titre: "Coefficient multiplicateur : 20 exercices corrigés",
+    resume:
+      "Automatismes : traduire une hausse ou une baisse par un coefficient (+ 5 % → × 1,05 ; − 5 % → × 0,95), lire un coefficient, calculer une valeur finale, retrouver une valeur initiale en divisant, passer du prix TTC au prix HT. Une boulangerie, un garage, une forêt après la tempête, une librairie, un bâtiment isolé.",
+  },
+  "maths/stmg/auto-evo-enchainees": {
+    titre: "Évolutions successives et réciproque : 20 exercices corrigés",
+    resume:
+      "Automatismes : multiplier les coefficients de deux évolutions, lire le taux global, retrouver un coefficient manquant, revenir au départ par l'inverse, et voir qu'une baisse puis une hausse de même taux ne se compensent pas. Des soldes qui annoncent « − 50 % », un capital placé deux ans, une TVA suivie d'une remise, une colonie d'oiseaux.",
+  },
+  "maths/stmg/auto-evo-taux": {
+    titre: "Calculer un taux d'évolution : 20 exercices corrigés",
+    resume:
+      "Automatismes : variation absolue et variation relative, taux d'évolution d'une hausse ou d'une baisse (on divise par la valeur de départ), taux lu sur un coefficient, comparer deux progressions, proportion ou évolution. Un parc éolien, les urgences, deux glaciers, un festival, une part de marché.",
+  },
+  "maths/stmg/auto-indice": {
+    titre: "Indice base 100 : 20 exercices corrigés",
+    resume:
+      "Automatismes : lire un indice (l'écart à 100 est le taux depuis la référence), calculer un indice, retrouver une valeur, calculer le taux entre deux indices, comparer deux séries d'unités différentes. Un aéroport, un vignoble, les prix et les salaires, l'électricité et le solaire, un parc national.",
+  },
+  "maths/stmg/der-secante-tangente": {
+    titre: "Sécantes et tangente : 20 exercices corrigés",
+    resume:
+      "Le coefficient directeur d'une sécante et son équation, les sécantes qui se rapprochent de la tangente, reconnaître une tangente sur un dessin et par le calcul. Un plongeon, un médicament, un panneau solaire, une arche, un sentier de randonnée.",
+  },
+  "maths/stmg/der-nombre-derive": {
+    titre: "Le nombre dérivé : 20 exercices corrigés",
+    resume:
+      "Le taux de variation et le nombre dont il se rapproche, le coefficient directeur de la tangente, ce qu'on lit sur une courbe, la vitesse à un instant et le coût marginal. Un voilier, un tram, un stock de médicaments, des bougies, un livre à éditer.",
+  },
+  "maths/stmg/der-tangente-equation": {
+    titre: "L'équation de la tangente : 20 exercices corrigés",
+    resume:
+      "La formule, l'équation réduite, le second point pour tracer à la règle, le point à vérifier, l'estimation par la tangente. Une météo, des urgences, une fusée à eau, un pont, un menu de restaurant.",
+  },
+  "maths/stmg/der-formules": {
+    titre: "Les formules de dérivation : 20 exercices corrigés",
+    resume:
+      "Dériver x², x³, le nombre devant, la somme, et la constante qui disparaît ; calculer f'(a), s'en servir pour une vitesse ou une petite variation. Une skateuse, un carrelage, un aquarium, deux podcasts, le four d'une potière.",
+  },
+  "maths/stmg/der-polynome": {
+    titre: "Dériver un polynôme : 20 exercices corrigés",
+    resume:
+      "Dériver un polynôme de degré 2 ou 3 terme à terme, calculer f'(a), trouver la tangente horizontale, vérifier une forme factorisée. Des coffrets de chocolats, un ballon-sonde, des huîtres, un glacier, les T-shirts d'un festival.",
+  },
+  "maths/stmg/der-variations": {
+    titre: "Signe de la dérivée et variations : 20 exercices corrigés",
+    resume:
+      "Où la dérivée s'annule, son signe, le sens de variation qui s'en déduit, le tableau dessiné, le maximum et le minimum. Un parapente, une cuve de lait, une serre, un étang à truites, une start-up.",
+  },
+  "maths/stmg/der-optimisation": {
+    titre: "Problèmes d'optimisation : 20 exercices corrigés",
+    resume:
+      "Combien produire, à quel prix vendre : la quantité qui rend un bénéfice maximal, celle qui rend un coût minimal, le prix qui maximise une recette, et la phrase de conclusion. Des savons, une salle d'escalade, un concert, des skis, la consommation d'une voiture.",
+  },
+  "maths/stmg/fct-representation": {
+    titre: "Fonction : représenter et noter : 20 exercices corrigés",
+    resume:
+      "Une fonction sous ses trois visages : image et antécédent, lecture d'une courbe et d'un tableau, écrire et relire un coût C(x) = ax + b, grandeurs inversement proportionnelles et grandeurs liées à un carré. Un food truck, un taxi, une fleuriste, une pizza de 40 cm, un lancer de poids.",
+  },
+  "maths/stmg/fct-taux-variation": {
+    titre: "Taux de variation et sécante : 20 exercices corrigés",
+    resume:
+      "Calculer un taux entre deux valeurs, le lire comme la pente d'une sécante, remonter à une image, dire ce qu'il signifie : une variation moyenne, pas un pourcentage. Une chambre froide en panne, une rivière en décrue, le rythme d'une coureuse, deux magasins au même taux.",
+  },
+  "maths/stmg/fct-monotonie": {
+    titre: "Fonction monotone sur un intervalle : 20 exercices corrigés",
+    resume:
+      "Le signe du taux donne le sens de variation : lire et dresser un tableau de variations, comparer deux images sans calculer, et savoir quand on ne peut pas conclure. Une randonnée, un camping, une ruche, le pic d'une grippe, la neige d'une station.",
+  },
+  "maths/stmg/fct-equations-puissance": {
+    titre: "Résoudre x² = c et x³ = c : 20 exercices corrigés",
+    resume:
+      "Deux solutions opposées pour le carré, une seule pour le cube : retrouver un côté, une arête, écrire une racine cubique et l'arrondir, se ramener à une puissance seule. Une cuve de vigneronne, un plongeon, des caisses de logisticien, les abonnés d'une plateforme.",
+  },
+  "maths/stmg/fct-inverse": {
+    titre: "Fonction inverse : 20 exercices corrigés",
+    resume:
+      "Terminale : lire l'hyperbole, retrouver k par le produit des coordonnées, voir ce que devient k/x aux bornes, et le coût moyen a + b/x, où la charge fixe se dilue. Un cours de yoga, une troupe de théâtre, un abonnement de piscine, deux fournisseurs.",
+  },
+  "maths/stmg/fct-inverse-derivee": {
+    titre: "Fonction inverse : dérivée et variations : 20 exercices corrigés",
+    resume:
+      "Terminale : la dérivée de k/x et son signe moins, le sens de variation sur chaque intervalle, les fonctions ax + b/x jusqu'au coût minimal, avec le tableau de variations. Une pharmacie, un entrepôt, une cave à vin, la vitesse d'un cargo.",
+  },
+  "maths/stmg/fct-degre2-courbe": {
+    titre: "Degré 2, la parabole : 20 exercices corrigés",
+    resume:
+      "Lire une parabole sans la tracer : le sens et l'ouverture avec le coefficient a, la translation verticale avec b, les racines dans la forme factorisée, et associer une courbe à son expression. Une fontaine, un skatepark, une arche de pont, une fromagerie, une antenne.",
+  },
+  "maths/stmg/fct-degre2-symetrie": {
+    titre: "Degré 2, axe de symétrie et extremum : 20 exercices corrigés",
+    resume:
+      "L'axe au milieu des racines ou de deux nombres de même image, le maximum ou le minimum calculé sur l'axe, une image ou un antécédent retrouvés par symétrie. Une brasserie, un coup de pied au rugby, des panneaux solaires, un billet de théâtre, un camion sous une arche.",
+  },
+  "maths/stmg/fct-degre2-factorisee": {
+    titre: "Degré 2, racines et signe (forme factorisée) : 20 exercices corrigés",
+    resume:
+      "Annuler chaque facteur pour trouver les racines, dresser le tableau de signes, résoudre une inéquation et traduire « bénéficiaire » en B(x) > 0, sans discriminant. Un atelier de vélos, un ballon de volley, une piscine, deux drones, une copie à corriger.",
+  },
+  "maths/stmg/fct-degre2-factoriser": {
+    titre: "Degré 2, factoriser connaissant une racine : 20 exercices corrigés",
+    resume:
+      "Sans discriminant : vérifier qu'un nombre annule le polynôme, trouver l'autre racine avec le produit c/a, écrire la forme factorisée sans oublier a, développer pour contrôler. Des trottinettes, une boulangerie, un bassin de jardin, un cinéma, deux copies à départager.",
+  },
+  "maths/stmg/fct-degre3": {
+    titre: "Degré 3, courbe, racines et signe : 20 exercices corrigés",
+    resume:
+      "Reconnaître la courbe de ax³ + b, lire ou écrire les trois racines d'une forme factorisée, suivre le signe qui change à chaque racine, vérifier une racine par le calcul. Une éolienne, un sismographe, un grand huit, un magasin de ski, un rapport à contrôler.",
+  },
+  "maths/stmg/suite-notation": {
+    titre: "Suites, notation et modes de génération : 20 exercices corrigés",
+    resume:
+      "Le rang et le terme, u(n) et l'indice, une définition fonctionnelle ou par récurrence, traduire une situation en relation et lire ce que dit une relation. Une piscine, un club d'escalade, un stock de pharmacie, un théâtre, un glacier fictif.",
+  },
+  "maths/stmg/suite-termes": {
+    titre: "Suites, calculer des termes : 20 exercices corrigés",
+    resume:
+      "Dérouler une suite de proche en proche, atteindre un rang donné, remonter en arrière, compter les pas et repérer une suite ni arithmétique ni géométrique. Des ruches, des bornes de recharge, un podcast, une boulangerie, un lac.",
+  },
+  "maths/stmg/suite-arithmetique": {
+    titre: "Suite arithmétique : 20 exercices corrigés",
+    resume:
+      "Trouver la raison, y compris entre deux relevés éloignés, écrire la relation de récurrence, lire le sens de variation au signe de la raison et démontrer par la différence. Un cinéma, une cuve, un taxi, un drone, une ligne de bus.",
+  },
+  "maths/stmg/suite-geometrique": {
+    titre: "Suite géométrique : 20 exercices corrigés",
+    resume:
+      "Trouver la raison par un quotient dans le bon sens, dérouler la relation de récurrence, remonter en divisant et démontrer par le quotient constant. Une rumeur, une voiture de société, un placement, des lynx, un festival.",
+  },
+  "maths/stmg/suite-geo-evolution": {
+    titre: "Suite géométrique et taux d'évolution : 20 exercices corrigés",
+    resume:
+      "De + 20 % à q = 1,2 et retour, retrouver un taux avec deux relevés, calculer l'évolution sur deux ans sans additionner les pourcentages, lire le sens de variation en comparant q à 1. Des vélos, une PME, un club de rugby, une banquise fictive, une librairie.",
+  },
+  "maths/stmg/suite-representation": {
+    titre: "Représenter les termes d'une suite : 20 exercices corrigés",
+    resume:
+      "Le nuage de points sans relier, lire un terme ou un rang, conjecturer la nature de la suite à l'allure des points, écrire une formule de tableur qu'on recopie. Un studio de yoga, une médiathèque, un entrepôt, une serre, un jeu vidéo.",
+  },
+  "maths/stmg/suite-modeliser": {
+    titre: "Modéliser par une suite : 20 exercices corrigés",
+    resume:
+      "Passer d'une situation à une suite : on ajoute ou on multiplie, premier terme et relation, rang d'une année, capital à intérêts composés et simples, phrase de conclusion. Un glacier, un tramway, une salle de sport, une voiture d'auto-école, des cigognes.",
+  },
+  "maths/stmg/suite-seuil": {
+    titre: "Problème de seuil : 20 exercices corrigés",
+    resume:
+      "À partir de quand ? Lire le premier rang qui franchit un seuil dans un tableau ou sur un graphique, le trouver de proche en proche, écrire la condition d'une boucle « tant que », repérer quand une suite passe devant l'autre. Une recyclerie, un médicament, un food-truck, une réserve d'eau.",
+  },
+  "maths/stmg/suite-terme-general": {
+    titre: "Terme général d'une suite : 20 exercices corrigés",
+    resume:
+      "Terminale. Écrire u(n) en fonction de n pour une suite arithmétique ou géométrique, sauter à un rang lointain, lire une raison, remonter au premier terme, tester trois nombres consécutifs. Des bornes de recharge, un podcast, une digue face à la mer, un plan vélo.",
+  },
+  "maths/stmg/suite-moyennes": {
+    titre: "Moyennes arithmétique et géométrique : 20 exercices corrigés",
+    resume:
+      "Terminale. La demi-somme quand on ajoute la même chose, la racine du produit quand on applique le même pourcentage. Retrouver un nombre manquant, intercaler un terme, comprendre pourquoi +100 % puis −50 % ne font pas +25 %. Un loyer, des cigognes, une prime de vente, l'audience d'une radio.",
+  },
+  "maths/stmg/suite-somme": {
+    titre: "Somme des premiers termes d'une suite : 20 exercices corrigés",
+    resume:
+      "Terminale. Lire et écrire une somme avec le signe Σ, compter les termes sans en oublier un, appliquer la bonne formule, arithmétique ou géométrique. L'entraînement d'un marathonien, les sièges d'un théâtre, une collecte de dons, des arbres plantés, une pyramide de cubes.",
+  },
+  "maths/stmg/suite-somme-situations": {
+    titre: "Sommes, emprunts et placements : 20 exercices corrigés",
+    resume:
+      "Terminale. Un terme ou une somme ? Le total versé, la valeur acquise de versements réguliers, le gain des intérêts, le coût d'un crédit, la mensualité. Un four de boulangerie, un voyage de classe, le cabinet d'une dentiste, une voiture à crédit ou à l'épargne.",
+  },
+  "maths/stmg/suite-comparer": {
+    titre: "Comparer deux suites : 20 exercices corrigés",
+    resume:
+      "Terminale. Le rang où une suite passe devant l'autre, qui l'emporte à long terme, intérêts simples ou composés, taux proportionnel ou taux équivalent. Deux cinémas, deux parcs éoliens, deux contrats de travail, la somme d'une grand-mère.",
+  },
+  "maths/stmg/expo-definition": {
+    titre: "La fonction x ↦ aˣ : 20 exercices corrigés",
+    resume:
+      "Reconnaître une exponentielle, calculer une image, l'exposant négatif, prolonger une suite géométrique aux durées non entières. Des bactéries, un musée, le carbone 14, un podcast, une forêt, un entraînement de cyclisme.",
+  },
+  "maths/stmg/expo-variations": {
+    titre: "La fonction x ↦ kaˣ, variations et allure : 20 exercices corrigés",
+    resume:
+      "Comparer la base à 1, reconnaître l'allure de la courbe, voir ce que change le coefficient k, relier la fonction à la suite géométrique. Un glacier, une librairie, le déficit d'un club de rugby, une voiture d'occasion, le vélo en ville.",
+  },
+  "maths/stmg/expo-proprietes": {
+    titre: "Propriétés algébriques de aˣ : 20 exercices corrigés",
+    resume:
+      "Un produit additionne les exposants, un quotient les soustrait, une puissance de puissance les multiplie, l'exposant manquant, une copie à corriger. Un placement, des levures en fromagerie, le prix de l'électricité, une vidéo qui circule, des adresses informatiques.",
+  },
+  "maths/stmg/expo-taux-moyen": {
+    titre: "Le taux d'évolution moyen : 20 exercices corrigés",
+    resume:
+      "L'exposant 1/n, le coefficient global, sa racine, et le piège : le taux moyen n'est pas la moyenne des taux. Une commune qui grandit, une cantine qui gaspille moins, le prix du blé, une station de ski, un lac qui recule.",
+  },
+  "maths/stmg/expo-taux-equivalent": {
+    titre: "Taux équivalent sur une autre période : 20 exercices corrigés",
+    resume:
+      "Du taux moyen au taux global, du taux annuel au taux mensuel et l'inverse, lire ce que dit vraiment un taux moyen. Un crédit à la consommation, une facture d'énergie, le prix d'une baguette, deux offres à comparer, un office de tourisme.",
+  },
+  "maths/stmg/log-definition": {
+    titre: "Logarithme décimal, définition : 20 exercices corrigés",
+    resume:
+      "Terminale. Log(b), solution de 10^x = b : lire un exposant, retrouver x quand on connaît log(x), encadrer un logarithme sans calculatrice, se servir de la croissance. Les décibels, le pH d'une solution, un séisme, une dilution au laboratoire, un festival.",
+  },
+  "maths/stmg/log-proprietes": {
+    titre: "Propriétés du logarithme décimal : 20 exercices corrigés",
+    resume:
+      "Terminale. Les quatre règles : le produit devient une somme, le quotient une différence, l'exposant descend devant, l'inverse change le signe. Des calculs avec un tableau de valeurs, le gain d'un amplificateur, la magnitude des étoiles, un code secret, des bouquetins.",
+  },
+  "maths/stmg/log-equations": {
+    titre: "Résoudre aˣ = b avec le logarithme : 20 exercices corrigés",
+    resume:
+      "Terminale. Reconnaître où est l'inconnue, écrire la solution exacte, la calculer avec un tableau, trouver le premier entier qui convient, et l'inégalité qui se retourne quand la grandeur diminue. Un parc éolien, un glacier, un médicament, un tournoi d'e-sport, le levain d'un boulanger.",
+  },
+  "maths/stmg/log-applications": {
+    titre: "Logarithme, durées et ordres de grandeur : 20 exercices corrigés",
+    resume:
+      "Terminale. Combien d'années pour atteindre un objectif, un temps de doublement, une demi-vie, le nombre de chiffres d'un très grand nombre. Un livret d'épargne, une salle d'escalade, une forêt, une dette, les grains de riz de l'échiquier.",
+  },
+  "maths/stmg/proba-conditionnelle-tableau": {
+    titre: "Probabilité conditionnelle sur un tableau : 20 exercices corrigés",
+    resume:
+      "Lire un tableau croisé sans se tromper de population : repérer « parmi » et « sachant que », écrire la notation, choisir le dénominateur, calculer. Une école de musique, les urgences, un verger, une agence immobilière, la météo.",
+  },
+  "maths/stmg/proba-conditionnelle-distinguer": {
+    titre: "Ne pas confondre les probabilités conditionnelles : 20 exercices corrigés",
+    resume:
+      "Trois nombres qui se ressemblent : l'intersection et les deux conditionnelles, leur traduction par une phrase, et le vocabulaire des tests : faux positifs, faux négatifs, sensibilité, spécificité. Une alarme incendie, un filtre anti-spam, un scanner d'aéroport, un détecteur de faux billets.",
+  },
+  "maths/stmg/proba-epreuves-independantes": {
+    titre: "Deux épreuves indépendantes : 20 exercices corrigés",
+    resume:
+      "Les expériences qui se répètent : dessiner l'arbre, multiplier le long d'un chemin, calculer « au moins une fois » par le contraire, voir ce que change un tirage sans remise. Un tir à l'arc, des feux tricolores, une sauvegarde informatique, une tombola, trois jours de randonnée.",
+  },
+  "maths/stmg/proba-arbre": {
+    titre: "Arbre de probabilités, construire : 20 exercices corrigés",
+    resume:
+      "Terminale. Ce que porte le premier niveau, ce que porte le second, placer un nombre de l'énoncé, compléter, repérer un arbre impossible, traduire une branche par une phrase. Une épicerie, une opticienne, les urgences, un port de pêche, des vacances.",
+  },
+  "maths/stmg/proba-arbre-calcul": {
+    titre: "Arbre, chemins et probabilités totales : 20 exercices corrigés",
+    resume:
+      "Terminale. Multiplier le long d'un chemin, additionner les chemins qui mènent au même résultat, écrire la formule des probabilités totales, passer de l'arbre au tableau et retour. Une cave à vin, des moteurs, une radio, un réseau de bus.",
+  },
+  "maths/stmg/proba-independance": {
+    titre: "Indépendance de deux évènements : 20 exercices corrigés",
+    resume:
+      "Terminale. Comparer deux probabilités, utiliser le produit, justifier sur un tableau ou un arbre, ne plus confondre indépendants et incompatibles. Un recrutement, une collecte de sang, des abeilles, un jeu vidéo.",
+  },
+  "maths/stmg/va-loi-probabilite": {
+    titre: "Variable aléatoire : loi de probabilité : 20 exercices corrigés",
+    resume:
+      "Traduire « au moins » et « au plus » en écritures, additionner les bonnes colonnes, passer par le contraire, dresser une loi depuis des effectifs ou une composition, trouver la case manquante, repérer un tableau impossible. Une tombola de rugby, des ruches, des trains en retard, un cinéma, un mur d'escalade.",
+  },
+  "maths/stmg/va-esperance": {
+    titre: "Espérance d'une variable aléatoire : 20 exercices corrigés",
+    resume:
+      "Calculer une espérance, prévoir un total sur un grand nombre de répétitions, juger si un jeu est équitable, fixer une mise ou une prime d'assurance, choisir entre deux options. Une pêche aux canards, une assurance de smartphone, un festival en plein air, des panneaux solaires.",
+  },
+  "maths/stmg/va-bernoulli": {
+    titre: "Loi de Bernoulli : 20 exercices corrigés",
+    resume:
+      "Reconnaître une épreuve à deux issues, écrire son espérance, la simuler avec un nombre aléatoire, compter les tirages d'une simulation, lire le diagramme des fréquences observées. Un service au tennis, des oiseaux bagués, un sondage, des ampoules à tester, une appli de musique.",
+  },
+  "maths/stmg/va-binomiale-reconnaitre": {
+    titre: "Loi binomiale : reconnaître : 20 exercices corrigés",
+    resume:
+      "Terminale. Vérifier les conditions, lire n et p dans un énoncé, repérer {X = k} sur un arbre, calculer la probabilité d'un chemin, démasquer le tirage sans remise et les situations qui n'en relèvent pas. Une salle d'attente, des flacons de parfum, des arbres malades, des vols en retard.",
+  },
+  "maths/stmg/va-binomiale-coefficients": {
+    titre: "Coefficients binomiaux et triangle de Pascal : 20 exercices corrigés",
+    resume:
+      "Terminale. Compter les chemins d'un arbre, lire le triangle de Pascal, construire une ligne à partir de la précédente, utiliser la symétrie, dénombrer « au moins » et « au plus ». Des drones de livraison, un biathlon, un tournoi d'échecs, un vieux cahier d'archives.",
+  },
+  "maths/stmg/va-binomiale-calcul": {
+    titre: "Loi binomiale : calculer : 20 exercices corrigés",
+    resume:
+      "Terminale. Aucun succès, tous les succès, un seul échec, exactement k succès avec le coefficient du triangle de Pascal, « au moins un » et « au moins deux » par le contraire, et l'espérance. Des tirs au but, des tubes de laboratoire, des bornes de recharge, des serveurs informatiques.",
+  },
+  "maths/stmg/algo-variables": {
+    titre: "Variables, compteur et accumulateur : 20 exercices corrigés",
+    resume:
+      "Automatismes : dérouler une affectation, échanger deux variables, compter avec un compteur, cumuler avec un accumulateur, simuler un tirage avec random. Une boulangerie, un hôpital, une forêt, un cinéma, un festival, de l'énergie solaire.",
+  },
+  "maths/stmg/algo-boucles": {
+    titre: "Boucles et instruction conditionnelle : 20 exercices corrigés",
+    resume:
+      "Automatismes : compter les tours d'un for, suivre une condition if, elif, else, trouver un seuil avec while, dérouler un programme pas à pas. Une épargne, une serre, le littoral, des ruches, une rivière, des chaînes vidéo.",
+  },
+  "maths/stmg/algo-listes": {
+    titre: "Listes : 20 exercices corrigés",
+    resume:
+      "Automatismes : lire un élément par son indice (qui commence à 0), générer une liste, ajouter avec append, parcourir pour une somme, un maximum ou un filtre. Un marché aux poissons, la montagne, un laboratoire, un théâtre, des colis, une librairie.",
+  },
+  "maths/stmg/algo-fonctions": {
+    titre: "Fonctions en Python : 20 exercices corrigés",
+    resume:
+      "Automatismes : repérer les entrées et la sortie d'une fonction, compléter sa définition, calculer un appel, découper un programme pour ne pas répéter un calcul. Un commerce, une diététicienne, un marathon, une pâtisserie, un zoo, une facture d'électricité.",
+  },
+  "maths/stmg/tableur-formules": {
+    titre: "Tableur : écrire une formule : 20 exercices corrigés",
+    resume:
+      "Automatismes : lire une cellule, comprendre ce que calcule une formule, écrire une formule qui commence par =, avec une hausse ou une baisse. Une piscine, une boulangerie, un hôtel, une pharmacie, des ruches, un gîte.",
+  },
+  "maths/stmg/tableur-recopie": {
+    titre: "Tableur : recopier et exploiter : 20 exercices corrigés",
+    resume:
+      "Automatismes : prédire une formule recopiée, figer une cellule avec le dollar, lire une colonne, choisir entre courbe, barres et diagramme circulaire. Une agence immobilière, une paie, une station météo, une crèche, un tournoi de rugby, un logement.",
+  },
+  "maths/stmg/logique-connecteurs": {
+    titre: "Logique : et, ou, non : 20 exercices corrigés",
+    resume:
+      "Automatismes : décider si une proposition avec et, ou est vraie, nier une inégalité sans oublier l'égalité, nier « tous » et « au moins un », distinguer le « ou » courant du « ou » mathématique. Un magasin, un cinéma, un hôpital, des bourses d'études, une régate, un musée.",
+  },
+  "maths/stmg/logique-raisonnement": {
+    titre: "Contre-exemple, réciproque, contraposée : 20 exercices corrigés",
+    resume:
+      "Automatismes : réfuter par un contre-exemple, écrire et tester une réciproque, utiliser une contraposée, reconnaître une condition nécessaire ou suffisante. Une vente en ligne, un match de football, un lycée, une usine, un jury d'examen, une banque.",
+  },
   "maths/stmg/va-echantillonnage": {
     titre: "La fluctuation d'échantillonnage : 20 exercices corrigés",
     resume:

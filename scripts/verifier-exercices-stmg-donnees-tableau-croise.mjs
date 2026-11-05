@@ -255,12 +255,12 @@ essai("19", () => {
   const t = dessin("croise", 19, "figure");
   const PRIX = { Extra: 18, "Catégorie I": 12, "Catégorie II": 7 };
   enonceDit(19, `${PRIX.Extra} € en catégorie Extra, ${PRIX["Catégorie I"]} € en catégorie I et ${PRIX["Catégorie II"]} € en catégorie II`);
-  const pI = lire(t, "Pommes", "Total") - lire(t, "Pommes", "Extra") - lire(t, "Pommes", "Catégorie II");
+  const pI = lire(t, "Pommes", "Total") - lire(t, "Pommes", "Extra") - lire(t, "Pommes", "Cat. II");
   const poE = lire(t, "Total", "Extra") - lire(t, "Pommes", "Extra");
-  const poII = lire(t, "Poires", "Total") - poE - lire(t, "Poires", "Catégorie I");
-  const I = pI + lire(t, "Poires", "Catégorie I"), II = lire(t, "Pommes", "Catégorie II") + poII, T = lire(t, "Pommes", "Total") + lire(t, "Poires", "Total");
+  const poII = lire(t, "Poires", "Total") - poE - lire(t, "Poires", "Cat. I");
+  const I = pI + lire(t, "Poires", "Cat. I"), II = lire(t, "Pommes", "Cat. II") + poII, T = lire(t, "Pommes", "Total") + lire(t, "Poires", "Total");
   vrai("19. total par les deux chemins", lire(t, "Total", "Extra") + I + II === T);
-  const pommes = [lire(t, "Pommes", "Extra"), pI, lire(t, "Pommes", "Catégorie II")];
+  const pommes = [lire(t, "Pommes", "Extra"), pI, lire(t, "Pommes", "Cat. II")];
   const tous = [lire(t, "Total", "Extra"), I, II];
   const p = [18, 12, 7];
   const rec = (q) => q.map((x, i) => x * p[i]);

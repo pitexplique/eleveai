@@ -160,13 +160,13 @@ export const camembert = (data: Barre[], valeurs = true, pourcent = false) => {
  * `total` met la dernière ligne en gras ; `surligne` met une ligne en orange.
  * ⛔ Texte NU dans les cases (pas de KaTeX).
  */
-export const grille = (entetes: string[], lignes: (string | number)[][], opts: { total?: boolean; surligne?: number } = {}) => (
+export const grille = (entetes: string[], lignes: (string | number)[][], opts: { total?: boolean; surligne?: number; compact?: boolean } = {}) => (
   <div className="mx-auto w-full max-w-[20rem] overflow-x-auto print:max-w-[15rem] print:overflow-visible">
-    <table className="w-full border-collapse text-center text-[13px] print:text-[10px]">
+    <table className={`w-full border-collapse text-center ${opts.compact ? "text-[12px] hyphens-auto" : "text-[13px]"} print:text-[10px]`}>
       <thead>
         <tr>
           {entetes.map((e, i) => (
-            <th key={i} className="border border-slate-300 bg-slate-100 px-1.5 py-1 font-bold text-slate-700">
+            <th key={i} className={`border border-slate-300 bg-slate-100 ${opts.compact ? "px-1" : "px-1.5"} py-1 font-bold text-slate-700`}>
               {e}
             </th>
           ))}
@@ -179,7 +179,7 @@ export const grille = (entetes: string[], lignes: (string | number)[][], opts: {
           return (
             <tr key={i} className={sur ? "bg-orange-100 font-bold text-orange-800" : total ? "bg-slate-50 font-bold" : ""}>
               {l.map((c, j) => (
-                <td key={j} className="border border-slate-300 px-1.5 py-0.5 text-slate-800">
+                <td key={j} className={`border border-slate-300 ${opts.compact ? "px-1" : "px-1.5"} py-0.5 text-slate-800`}>
                   {typeof c === "number" ? fr(c) : c}
                 </td>
               ))}
@@ -200,15 +200,15 @@ export const grille = (entetes: string[], lignes: (string | number)[][], opts: {
  * dans `lignes` (0 = première ligne de données) et dans `entetes`.
  * ⛔ 5 colonnes au plus, texte NU, nombres en clair (le script les relit).
  */
-export const croise = (entetes: string[], lignes: (string | number)[][], surligne: [number, number][] = []) => {
+export const croise = (entetes: string[], lignes: (string | number)[][], surligne: [number, number][] = [], compact = false) => {
   const colTotal = entetes.findIndex((e) => /^total$/i.test(e));
   return (
     <div className="mx-auto w-full max-w-[22rem] overflow-x-auto print:max-w-[15rem] print:overflow-visible">
-      <table className="w-full border-collapse text-center text-[13px] print:text-[10px]">
+      <table className={`w-full border-collapse text-center ${compact ? "text-[12px] hyphens-auto" : "text-[13px]"} print:text-[10px]`}>
         <thead>
           <tr>
             {entetes.map((e, i) => (
-              <th key={i} className={["border border-slate-300 px-1.5 py-1 font-bold", i === colTotal ? "bg-slate-200 text-slate-900" : "bg-sky-50 text-sky-900"].join(" ")}>
+              <th key={i} className={["border border-slate-300 py-1 font-bold", compact ? "px-1" : "px-1.5", i === colTotal ? "bg-slate-200 text-slate-900" : "bg-sky-50 text-sky-900"].join(" ")}>
                 {e}
               </th>
             ))}
@@ -233,7 +233,7 @@ export const croise = (entetes: string[], lignes: (string | number)[][], surlign
                           ? "bg-slate-100 font-bold text-slate-900"
                           : "text-slate-800";
                   return (
-                    <td key={j} className={["border border-slate-300 px-1.5 py-0.5", fond].join(" ")}>
+                    <td key={j} className={["border border-slate-300 py-0.5", compact ? "px-1" : "px-1.5", fond].join(" ")}>
                       {typeof c === "number" ? fr(c) : c}
                     </td>
                   );
@@ -269,8 +269,8 @@ export const intervalle = (
   const { p, e, points = [] } = opts;
   return (
     <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
-      <svg viewBox="0 0 300 110" className="block h-auto w-full" role="img" aria-label="Fréquences sur une droite graduée">
-        <rect x="0" y="0" width="300" height="110" rx="10" fill="#fff" />
+      <svg viewBox="0 0 300 118" className="block h-auto w-full" role="img" aria-label="Fréquences sur une droite graduée">
+        <rect x="0" y="0" width="300" height="118" rx="10" fill="#fff" />
         {p !== undefined && e !== undefined ? (
           <rect x={x(p - e)} y={Y - 12} width={x(p + e) - x(p - e)} height="24" rx="4" fill="#bbf7d0" stroke="#16a34a" strokeWidth="1.5" />
         ) : null}
@@ -294,7 +294,7 @@ export const intervalle = (
         {points.map((pt, i) => (
           <g key={i}>
             <circle cx={x(pt.value)} cy={Y} r="5" fill={ORANGE} stroke="#fff" strokeWidth="1.5" />
-            <text x={x(pt.value)} y={Y - 20 - (i % 2) * 14} textAnchor="middle" fontSize="13" fontWeight="800" fill="#9a3412" stroke="#fff" strokeWidth="3" paintOrder="stroke">
+            <text x={x(pt.value)} y={Y - 20 - (i % 2) * 17} textAnchor="middle" fontSize="13" fontWeight="800" fill="#9a3412" stroke="#fff" strokeWidth="3" paintOrder="stroke">
               {pt.label}
             </text>
           </g>

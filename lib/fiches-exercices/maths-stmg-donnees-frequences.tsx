@@ -48,7 +48,8 @@
 // (7, 9, 12, 15, 17, 18). 4/4.
 
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
-import { camembert, croise, ecranSeulement } from "@/lib/fiches-exercices/figures-donnees";
+import { camembert, ecranSeulement } from "@/lib/fiches-exercices/figures-donnees";
+import { croise } from "@/lib/fiches-exercices/stmg-tableaux";
 
 export const exercicesDonneesFrequencesStmg: FicheExercicesData = {
   matiere: "maths",

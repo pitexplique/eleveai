@@ -46,7 +46,8 @@
 // don_tab_dresser (7, 8, 9, 12, 17, 20). 4/4.
 
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
-import { croise, ecranSeulement } from "@/lib/fiches-exercices/figures-donnees";
+import { ecranSeulement } from "@/lib/fiches-exercices/figures-donnees";
+import { croise } from "@/lib/fiches-exercices/stmg-tableaux";
 
 export const exercicesDonneesTableauCroiseStmg: FicheExercicesData = {
   matiere: "maths",
@@ -459,7 +460,7 @@ export const exercicesDonneesTableauCroiseStmg: FicheExercicesData = {
           titre: "La coopérative fruitière",
           enonce:
             "La responsable qualité d'une coopérative agricole classe les cagettes de fruits reçues en une semaine (modèle). Une cagette se vend 18 € en catégorie Extra, 12 € en catégorie I et 7 € en catégorie II.\na) Complète le tableau.\nb) Combien de cagettes de catégorie I la coopérative a-t-elle reçues ?\nc) Calcule ce que rapportent les cagettes de pommes.\nd) Calcule ce que rapportent toutes les cagettes de la semaine.",
-          figure: croise(["", "Extra", "Catégorie I", "Catégorie II", "Total"], [
+          figure: croise(["", "Extra", "Cat. I", "Cat. II", "Total"], [
             ["Pommes", 120, "?", 80, 500],
             ["Poires", "?", 150, "?", 260],
             ["Total", 160, "?", "?", "?"],

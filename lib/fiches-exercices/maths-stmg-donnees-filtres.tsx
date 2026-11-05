@@ -46,7 +46,8 @@
 // don_filtre_non (5, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20). 4/4.
 
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
-import { croise, ecranSeulement, grille } from "@/lib/fiches-exercices/figures-donnees";
+import { ecranSeulement } from "@/lib/fiches-exercices/figures-donnees";
+import { croise, grille } from "@/lib/fiches-exercices/stmg-tableaux";
 
 export const exercicesDonneesFiltresStmg: FicheExercicesData = {
   matiere: "maths",
@@ -78,14 +79,14 @@ export const exercicesDonneesFiltresStmg: FicheExercicesData = {
             "Une assistante RH extrait du fichier du personnel les 10 salariés d'une agence (modèle). L'ancienneté est en années.\na) Applique le filtre « Service = Commercial ». Quels salariés restent ? Combien sont-ils ?\nb) Applique le filtre « Ancienneté ≥ 5 ». Combien de salariés restent ?\nc) Applique le filtre « Télétravail = oui ». Combien de salariés restent ?",
           figure: grille(["Nom", "Service", "Ancienneté", "Télétravail"], [
             ["Alice", "Commercial", 3, "oui"],
-            ["Bruno", "Comptabilité", 12, "non"],
+            ["Bruno", "Compta", 12, "non"],
             ["Chloé", "Commercial", 7, "non"],
             ["David", "Logistique", 1, "non"],
             ["Emma", "Commercial", 15, "oui"],
-            ["Farid", "Comptabilité", 5, "oui"],
+            ["Farid", "Compta", 5, "oui"],
             ["Gaëlle", "Logistique", 9, "non"],
             ["Hugo", "Commercial", 2, "oui"],
-            ["Inès", "Comptabilité", 4, "non"],
+            ["Inès", "Compta", 4, "non"],
             ["Jules", "Logistique", 6, "oui"],
           ]),
           reponses: [

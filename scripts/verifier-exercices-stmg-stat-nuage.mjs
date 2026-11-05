@@ -19,7 +19,9 @@ const s = ouvrirStmg("lib/fiches-exercices/maths-stmg-stat-nuage.tsx", "stat_nua
 const { vrai, verif, dit, enonceDit, dessin, essai, e, c, pointsDe, colonnes, listeEnonce, memes, fin } = s;
 
 /** Le corrigé de k écrit « $\dfrac{a + b + …}{n} = \dfrac{S}{n} … » pour la moyenne d'une liste. */
-const ditSomme = (k, xs, d = 6) => dit(k, `\\dfrac{${plus(xs, d)}}{${xs.length}}`);
+// (Les plus longues s'écrivent « (a + b + …) \div n » : elles tiennent à 375 px.)
+const ditSomme = (k, xs, d = 6) =>
+  vrai(`${k}. le corrigé écrit la somme de la moyenne`, c(k).includes(`\\dfrac{${plus(xs, d)}}{${xs.length}}`) || c(k).includes(`(${plus(xs, d)}) \\div ${xs.length}`), plus(xs, d));
 /** Le schéma d'écran de k porte les mêmes points que les listes (xs, ys). */
 const schemaPareil = (k, xs, ys) => {
   const [sx, sy] = pointsDe(k, "schema");

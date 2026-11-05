@@ -48,7 +48,16 @@ export const TOUCHES_MATHS: ToucheMaths[] = [
 /** Les touches d'une classe (« 6e », « 3e », « 1re-spe », « cm2 »…). */
 export function touchesPourClasse(classe: string): ToucheMaths[] {
   const palier = /^(cp|ce|cm|6e|5e)/.test(classe) ? 1 : /^(4e|3e)/.test(classe) ? 2 : 3;
-  return TOUCHES_MATHS.filter((t) => (t.des ?? 1) <= palier);
+  const touches = TOUCHES_MATHS.filter((t) => (t.des ?? 1) <= palier);
+  // ⭐ STMG (05/11/2026) : ni e ni ln au programme, le seul logarithme est le
+  // logarithme décimal. La touche log prend la place de eˣ et de ln.
+  if (classe.startsWith("stmg")) {
+    return [
+      { label: "log", inserer: "log()", curseur: 4, titre: "Logarithme décimal", des: 3 },
+      ...touches.filter((t) => t.label !== "eˣ" && t.label !== "ln"),
+    ];
+  }
+  return touches;
 }
 
 const FONCTIONS = new Set(["ln", "exp", "log", "cos", "sin", "tan", "lim"]);
@@ -100,9 +109,26 @@ function lireLigne(src: string): string {
       } else if (/\p{L}/u.test(c) && c !== "π") {
         let mot = "";
         while (i < src.length && /\p{L}/u.test(src[i]) && src[i] !== "π") mot += src[i++];
-        if (FONCTIONS.has(mot)) liste.push({ latex: `\\${mot} `, nu: `\\${mot} ` });
-        else if (mot.length === 1 && /[a-zA-Z]/.test(mot)) liste.push({ latex: mot, nu: mot });
+        if (FONCTIONS.has(mot) && src[i] === "(") {
+          // La fonction et sa parenthèse font un seul morceau : log(3)/log(20) est
+          // une fraction de deux logarithmes, pas log × 3/log × (20).
+          i++;
+          const dedans = assembler(atomes(")"));
+          if (src[i] === ")") i++;
+          const l = `\\${mot}\\left(${dedans}\\right)`;
+          liste.push({ latex: l, nu: l });
+        } else if (FONCTIONS.has(mot)) liste.push({ latex: `\\${mot} `, nu: `\\${mot} ` });
+        else if (/^P[A-Z]$/.test(mot) && src[i] === "(") {
+          // PA(B) : la probabilité sachant A, écrite comme au tableau.
+          const l = `P_{${mot[1]}}`;
+          liste.push({ latex: l, nu: l });
+        } else if (mot.length === 1 && /[a-zA-Z]/.test(mot)) liste.push({ latex: mot, nu: mot });
         else liste.push({ latex: `\\text{${mot}}`, nu: `\\text{${mot}}` });
+      } else if (c === "_" && /[a-zA-Z0-9]/.test(src[i + 1] ?? "") && liste.length) {
+        // P_A(B), u_n : un indice d'un seul caractère.
+        const l = `_{${src[i + 1]}}`;
+        i += 2;
+        liste.push({ latex: l, nu: l });
       } else if (c === " ") {
         i++;
         liste.push({ latex: "\\ ", nu: "\\ ", espace: true });
