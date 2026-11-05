@@ -220,7 +220,7 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
               // (Ce décalage et la remontée au bord sont calculés dans `posX`.)
               const sxClamp = posX(x);
               return (
-                <text key={`tx-${x}`} x={sxClamp} y={xAxisY + 17} textAnchor="middle" fontSize="12" fill="#334155">
+                <text key={`tx-${x}`} x={sxClamp} y={Math.min(xAxisY + 17, height - 3)} textAnchor="middle" fontSize="12" fill="#334155">
                   {x !== 0 ? formatNumber(x) : "0"}
                 </text>
               );

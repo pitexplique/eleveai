@@ -283,6 +283,15 @@ export default function QuadrilatereCanvas({ figure }: Props) {
   const mBD = mid(B, D);
 
   const equalSides = figure.marks?.equalSides ?? [];
+  // Côtés liés en chaîne (AB=BC, BC=CD, CD=DA) : un seul groupe, donc le même nombre de traits.
+  const cleCote = (s: string) => [...s].sort().join("");
+  const groupeCote = new Map<string, number>();
+  let nbGroupesCotes = 0;
+  for (const [s1, s2] of equalSides) {
+    const g = groupeCote.get(cleCote(s1)) ?? groupeCote.get(cleCote(s2)) ?? ++nbGroupesCotes;
+    groupeCote.set(cleCote(s1), g);
+    groupeCote.set(cleCote(s2), g);
+  }
   const equalAngles = figure.marks?.equalAngles ?? [];
   const rightAnglesAt = figure.marks?.rightAnglesAt ?? [];
   const parallelSides = figure.marks?.parallelSides ?? [];
@@ -452,8 +461,9 @@ export default function QuadrilatereCanvas({ figure }: Props) {
           const [p1a, p1b] = getSidePoints(s1, A, B, C, D);
           const [p2a, p2b] = getSidePoints(s2, A, B, C, D);
 
-          const segs1 = getMultipleTickSegments(p1a, p1b, idx + 1);
-          const segs2 = getMultipleTickSegments(p2a, p2b, idx + 1);
+          const traits = groupeCote.get(cleCote(s1)) ?? idx + 1;
+          const segs1 = getMultipleTickSegments(p1a, p1b, traits);
+          const segs2 = getMultipleTickSegments(p2a, p2b, traits);
 
           return (
             <g key={`${s1}-${s2}-${idx}`} stroke="#16a34a" strokeWidth={3} strokeLinecap="round">
