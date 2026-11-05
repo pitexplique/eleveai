@@ -1122,7 +1122,7 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
   "/fiches-cours/maths/seconde/arithmetique-entiers": [
     {
       id: "ZZiXPXBTXIQ",
-      title: "Multiples, diviseurs et nombres premiers — Maths seconde — EleveAI",
+      title: "Multiples, diviseurs, pair et impair — Maths seconde — EleveAI",
       description:
         "119 a l'air premier, et pourtant 119 = 7 × 17. Diviseurs, pair et impair, nombres premiers, décomposition, fractions irréductibles : tout se justifie par une égalité (seconde).",
       ajoutee: "2026-09-21",
