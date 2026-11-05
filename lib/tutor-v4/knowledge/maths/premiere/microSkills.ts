@@ -119,6 +119,7 @@ export const microSkills: MicroSkillSource[] = [
   /* ─────────────────────── auto_lire_statistiques ─────────────────────── */
 
   { id: "auto_stat_lire_graphique", label: "Lire un graphique, un histogramme, un diagramme (origine, graduations, échelles)", notionId: "auto_lire_statistiques", prerequis: [] },
+  { id: "auto_stat_lire_histogramme", label: "Lire un histogramme (classes, effectifs, fréquences)", notionId: "auto_lire_statistiques", prerequis: ["auto_stat_lire_graphique"] },
   { id: "auto_stat_graphiques_usuels", label: "Lire et commenter les graphiques usuels (barres, circulaire, nuage de points)", notionId: "auto_lire_statistiques", prerequis: ["auto_stat_lire_graphique"] },
   { id: "auto_stat_graphique_donnees", label: "Passer du graphique aux données et inversement", notionId: "auto_lire_statistiques", prerequis: ["auto_stat_lire_graphique"] },
 
@@ -214,6 +215,7 @@ export const microSkills: MicroSkillSource[] = [
   { id: "alea_cond_intersection", label: "Calculer $P(A \\cap B)$ à partir de $P(A)$ et de $P_A(B)$", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_formule"] },
   { id: "alea_cond_interpreter", label: "Interpréter une probabilité conditionnelle par une phrase", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_tableau"] },
   { id: "alea_cond_faux_positifs", label: "Distinguer $P_A(B)$ et $P_B(A)$ dans un test médical (faux positifs)", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_interpreter", "alea_cond_formule"] },
+  { id: "alea_cond_faux_negatifs", label: "Test médical : faux négatifs, sensibilité, spécificité", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_faux_positifs"] },
 
   /* ──────────────────────────── alea_arbre ──────────────────────────── */
 
@@ -239,6 +241,7 @@ export const microSkills: MicroSkillSource[] = [
   { id: "alea_bern_epreuve", label: "Reconnaître une épreuve de Bernoulli (succès, échec)", notionId: "alea_bernoulli", prerequis: [] },
   { id: "alea_bern_repetition", label: "Reconnaître une répétition d'épreuves identiques et indépendantes", notionId: "alea_bernoulli", prerequis: ["alea_bern_epreuve"] },
   { id: "alea_bern_avec_sans_remise", label: "Distinguer un tirage avec remise (indépendance) d'un tirage sans remise", notionId: "alea_bernoulli", prerequis: ["alea_bern_repetition"] },
+  { id: "alea_loi_grands_nombres", label: "Simuler : la fréquence se rapproche de la probabilité quand le nombre d'essais grandit", notionId: "alea_bernoulli", prerequis: [] },
 
   /* ─────────────────────── alea_bernoulli_calcul ─────────────────────── */
 

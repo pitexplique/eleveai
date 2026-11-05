@@ -1,4 +1,5 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { testsGrandsNombresBank } from "./tests-grands-nombres.bank";
 
 // Banques par notion du module spécifique de Première (élèves sans spé maths).
 //
@@ -93,6 +94,8 @@ export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === DÉRIVATION ===
   ...deriveeLectureBank, // lire un graphique · nombre dérivé et tangente
   ...deriveeCalculBank, // formules · polynômes · signe · variations
+  // === Programme 2026 : trous bouchés le 05/11/2026 ===
+  ...testsGrandsNombresBank, // faux négatifs · loi des grands nombres · histogramme
 ];
 
 export function getMathsPremiereQuestionBank(args?: {
