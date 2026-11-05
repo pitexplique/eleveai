@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une éolienne tourne. Quel angle entre ses pales ?",
+  "01-pales": "La plupart des éoliennes ont 3 pales, bien réparties. Elles font un tour complet : 360 degrés.",
+  "02-question": "Question ! Quel angle entre deux pales voisines ? A : 90 degrés. B : 120 degrés. C : 180 degrés. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. On partage le tour en 3. 360 divisé par 3, égale 120 degrés.",
+  "03-verif": "On vérifie : 120 plus 120 plus 120, égale 360. Le compte est bon !",
+  "04-commentaire": "Et toi ? Une hélice de bateau a 5 pales, bien réparties. Quel angle entre deux pales voisines ? Réponds en commentaire !"
+}

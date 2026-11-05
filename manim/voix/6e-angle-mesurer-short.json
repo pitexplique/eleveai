@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Il y a un rapporteur caché dans une horloge !",
+  "01-une-heure": "À 1 heure pile, les aiguilles font un angle de 30 degrés.",
+  "02-deux-trois": "À 2 heures : 60 degrés. À 3 heures : 90 degrés. Un angle droit !",
+  "03-question": "Question ! Et à 4 heures ? A : 40 degrés. B : 90 degrés. C : 120 degrés. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 30 degrés de plus à chaque heure : 120 degrés.",
+  "04-six": "À 6 heures : 180 degrés. Les aiguilles font une ligne droite, un angle plat !",
+  "05-commentaire": "Et toi ? Quel angle font les aiguilles à 5 heures ? Réponds en commentaire !"
+}

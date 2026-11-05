@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Avec un seul angle, on dessine un flocon de neige !",
+  "01-branche": "Un flocon en étoile a 6 branches. Trace une ligne droite. C'est déjà 2 branches.",
+  "02-soixante": "Pose le rapporteur au milieu. Fais un repère à 60 degrés. Trace. Une nouvelle branche !",
+  "03-question": "Question ! Quel repère pour la branche suivante ? A : 70 degrés. B : 90 degrés. C : 120 degrés. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 60 degrés de plus : 120 degrés.",
+  "04-flocon": "Fais pareil de l'autre côté. Encore de petits traits, et voici ton flocon !",
+  "05-commentaire": "Et toi ? Une roue a 12 rayons, bien réguliers. Quel angle entre deux rayons voisins ? Réponds en commentaire !"
+}

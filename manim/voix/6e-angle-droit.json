@@ -1,0 +1,18 @@
+{
+  "00-garde": "L'angle droit. Comment savoir si un coin est vraiment droit ?",
+  "01-situation": "Voici Mehdi. Il est carreleur. Il pose des carreaux dans une cuisine. Si le premier carreau est de travers, tous les autres le seront aussi.",
+  "02-coin": "Regarde le coin d'un carreau carré. Cet angle a un nom : c'est un angle droit. Il mesure toujours 90 degrés.",
+  "03-partout": "Un carré a 4 angles droits. Un rectangle aussi. Petit ou grand, c'est toujours 90 degrés.",
+  "04-equerre": "Pour vérifier, Mehdi prend une équerre. Il pose son coin sur le sommet. Si les deux côtés collent à l'équerre, l'angle est droit.",
+  "05-code": "Sur une figure, on dessine un petit carré dans le coin. Ce petit carré veut dire : angle droit. Pas besoin d'écrire 90.",
+  "06-question": "Question ! Mehdi pose un carreau penché, sur la pointe. Son coin est-il encore un angle droit ? A : oui, 90 degrés. B : non, moins de 90 degrés. C : non, plus de 90 degrés. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. On a tourné le carreau, on n'a pas changé son ouverture. L'angle droit peut être penché.",
+  "07-piege": "Le piège : à l'œil, tout semble droit. Cet angle mesure 85 degrés, celui-ci 90 degrés. Ils se ressemblent ! Seule l'équerre le dit.",
+  "08-question": "Question ! Lequel est un angle droit ? A : 89 degrés. B : 90 degrés. C : 100 degrés. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Droit, c'est 90 degrés pile. Ni un peu moins, ni un peu plus.",
+  "09-plat": "Deux angles droits côte à côte font une ligne droite. 90 plus 90, égale 180 degrés : c'est un angle plat.",
+  "10-defi": "À toi de jouer ! Mehdi coupe un carreau carré en deux, par le milieu. Il obtient 2 rectangles. Combien d'angles droits en tout ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Un rectangle a 4 angles droits. 2 fois 4, égale 8 angles droits.",
+  "11-finale": "Ce que tu as appris. Un angle droit mesure 90 degrés, même s'il est penché. On le vérifie avec l'équerre. Sur une figure, un petit carré le montre.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

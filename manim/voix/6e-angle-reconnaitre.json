@@ -1,0 +1,17 @@
+{
+  "00-garde": "Reconnaître un angle. Où se cache un angle dans un bras qui bouge ?",
+  "01-situation": "Voici Lina. Elle est animatrice de dessins animés. Son personnage doit dire bonjour. Alors, image par image, Lina plie son bras.",
+  "02-coude": "Regarde le coude. Deux traits en partent : le bras et l'avant-bras. Lina les écarte plus ou moins. Cette ouverture, c'est un angle.",
+  "03-definition": "En maths, un angle, c'est deux demi-droites qui partent du même point. Ce point s'appelle le sommet. Les deux demi-droites sont les côtés de l'angle.",
+  "04-nom": "Pour nommer un angle, on prend trois lettres. Ici, les côtés O A et O B partent de O. Le sommet s'écrit au milieu : c'est l'angle A O B. On peut dire aussi B O A.",
+  "05-question": "Question ! Voici l'angle R S T. Quel point est le sommet ? A : R. B : S. C : T. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. La lettre du milieu est le sommet : c'est S.",
+  "06-piege": "Attention ! Deux traits qui ne se touchent pas ne font pas un angle. Il faut un point de départ commun.",
+  "07-famille": "Lina plie le bras très fort : l'angle est aigu, moins de 90 degrés. En forme de coin : il est droit, 90 degrés. Plus ouvert : il est obtus, entre 90 et 180 degrés. Le bras bien tendu : il est plat, 180 degrés.",
+  "08-question": "Question ! Un angle mesure 150 degrés. Comment s'appelle-t-il ? A : aigu. B : obtus. C : plat. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 150 est entre 90 et 180 : l'angle est obtus.",
+  "09-defi": "À toi de jouer ! Les demi-droites E F et E G partent du même point. Quel est le sommet ? Comment s'appelle cet angle ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Le point de départ est E : c'est le sommet. L'angle s'appelle F E G, ou G E F. Le E reste au milieu.",
+  "10-finale": "Ce que tu as appris. Un angle, c'est deux demi-droites qui partent du même point, le sommet. Dans son nom, le sommet s'écrit au milieu. Aigu, droit, obtus, plat : plus l'angle est ouvert, plus il est grand.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

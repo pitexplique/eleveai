@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les angles. Peut-on trouver un angle sans rapporteur ?",
+  "01-situation": "Voici Tom. Il est urbaniste. Il dessine les rues d'un nouveau quartier. Sur son plan, il doit connaître les angles. Mais parfois, il ne peut pas les mesurer.",
+  "02-plat": "Premier cas. Une rue bien droite : c'est un angle plat, 180 degrés. Une petite rue en part, et fait un angle de 110 degrés.",
+  "03-plat-calcul": "Combien mesure l'autre angle ? Les deux ensemble font 180 degrés. 180 moins 110, égale 70. L'autre angle mesure 70 degrés.",
+  "04-question": "Question ! Sur une rue droite, un angle mesure 125 degrés. Combien mesure l'autre ? A : 55 degrés. B : 65 degrés. C : 235 degrés. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 180 moins 125, égale 55 degrés. On vérifie : 125 plus 55, égale 180.",
+  "05-croisement": "Deuxième cas. Deux rues droites se croisent. Regarde les deux angles qui se font face. Ils sont opposés par le sommet. Ils ont la même mesure.",
+  "06-question": "Question ! Deux rues se croisent. Un angle mesure 35 degrés. Combien mesure l'angle en face ? A : 35 degrés. B : 145 degrés. C : 325 degrés. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. En face, c'est la même mesure : 35 degrés.",
+  "07-tour": "Troisième cas. Un tour complet. C'est 2 angles plats : 180 plus 180, égale 360 degrés. Autour d'un point, tous les angles font 360 degrés.",
+  "08-defi": "À toi de jouer ! À un rond-point, 4 rues se rejoignent. Trois angles mesurent 120, 90 et 80 degrés. Combien mesure le quatrième ? Mets pause, et cherche !",
+  "08b-correction": "Correction. D'abord, on additionne : 120 plus 90 plus 80, égale 290. Puis, 360 moins 290, égale 70. Le quatrième angle mesure 70 degrés.",
+  "09-finale": "Ce que tu as appris. Sur une ligne droite, les angles font 180 degrés. Deux angles opposés par le sommet sont égaux. Autour d'un point, les angles font 360 degrés. On trouve l'angle manquant sans le mesurer.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

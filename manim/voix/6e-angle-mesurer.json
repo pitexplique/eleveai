@@ -1,0 +1,17 @@
+{
+  "00-garde": "Mesurer un angle. Comment lire un rapporteur sans se tromper de rangée ?",
+  "01-situation": "Voici Yanis. Il est kinésithérapeute. Manon s'est blessée au genou, au basket. Yanis veut savoir si son genou plie mieux.",
+  "02-outil": "Il regarde l'angle entre la cuisse et le mollet. Le sommet, c'est le genou. Son outil s'appelle un goniomètre : un rapporteur avec deux grands bras.",
+  "03-rapporteur": "Toi, sur ton cahier, tu prends un rapporteur. Il est gradué en degrés. Une règle mesure des longueurs. Un rapporteur mesure des angles.",
+  "04-methode": "Trois gestes. Un : le centre du rapporteur sur le sommet. Deux : le 0 sur un côté. Trois : on lit le nombre sur l'autre côté. Ici, 55. L'angle mesure 55 degrés.",
+  "05-question": "Question ! Où poses-tu le centre du rapporteur ? A : sur le sommet. B : au bout d'un côté. C : au milieu de l'angle. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Le centre va pile sur le sommet. Sinon, la mesure est fausse.",
+  "06-rangees": "Mais le rapporteur a deux rangées de nombres. Au même endroit, on lit 55 et 125. Laquelle est la bonne ? Celle qui part du 0 posé sur le côté.",
+  "07-controle": "Pour vérifier, regarde l'angle. Il est plus petit qu'un coin : il est aigu. Donc c'est 55 degrés, pas 125.",
+  "08-question": "Question ! Un mois plus tôt, le genou de Manon pliait moins. L'angle était obtus. Le rapporteur indiquait 60 et 120. Quelle est la mesure ? A : 60 degrés. B : 120 degrés. C : 180 degrés. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Un angle obtus est plus grand que 90 degrés. Donc 120. Aujourd'hui, 55 degrés : le genou de Manon plie bien mieux !",
+  "09-defi": "À toi de jouer ! Le 0 est posé à gauche, sur un côté. L'autre côté passe par 35 et 145. Combien mesure l'angle ? Mets pause, et cherche !",
+  "09b-correction": "Correction. On part du 0 de gauche, et on monte : 10, 20, 30, 35. L'angle mesure 35 degrés. Il est aigu : c'est cohérent.",
+  "10-finale": "Ce que tu as appris. Un angle se mesure en degrés, avec un rapporteur. Le centre sur le sommet, le 0 sur un côté, on lit sur l'autre côté. On part du bon 0, puis on vérifie : aigu ou obtus ?",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

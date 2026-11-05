@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des angles. Le plus grand angle a-t-il les plus longs côtés ?",
+  "01-situation": "Voici Jade. Elle est analyste vidéo dans un club de foot. Elle compare deux tirs. Le premier part du point de penalty, à 11 mètres du but. Le second part de plus près, à 5 mètres et demi.",
+  "02-angles": "Depuis chaque point, Jade trace deux traits vers les poteaux. Au penalty, l'angle mesure environ 37 degrés. De plus près, environ 67 degrés. L'angle est plus ouvert : le but paraît plus large.",
+  "03-methode": "Pour comparer deux angles, on compare leurs mesures. 30 degrés et 80 degrés : 80 est plus grand que 30. L'angle de 80 degrés est le plus grand.",
+  "04-question": "Question ! Voici deux angles. L'un mesure 70 degrés, avec de longs côtés. L'autre mesure 120 degrés, avec des côtés courts. Lequel est le plus grand ? A : 70 degrés. B : 120 degrés. C : ils sont égaux. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 120 degrés. La longueur des côtés ne compte pas. Seule l'ouverture compte.",
+  "05-superposer": "Et sans mesure ? On pose un angle sur l'autre, sommet sur sommet, un côté sur un côté. Celui qui dépasse est le plus grand.",
+  "06-repere": "Autre repère : l'angle droit. Plus petit que 90 degrés, l'angle est aigu. Plus grand que 90 degrés, il est obtus.",
+  "07-question": "Question ! Un angle mesure 118 degrés. Comparé à un angle droit, il est : A : plus petit. B : égal. C : plus grand. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 118 est plus grand que 90. Cet angle est obtus.",
+  "08-defi": "À toi de jouer ! Trois angles : A B C mesure 95 degrés, D E F mesure 40 degrés, G H I mesure 120 degrés. Range-les du plus petit au plus grand. Lequel est aigu ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 40, puis 95, puis 120. Donc D E F, A B C, G H I. Seul D E F est aigu, car 40 est plus petit que 90.",
+  "09-finale": "Ce que tu as appris. Pour comparer deux angles, on compare leurs mesures ou leurs ouvertures. La longueur des côtés ne compte pas. L'angle droit sert de repère : aigu en dessous, obtus au-dessus.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

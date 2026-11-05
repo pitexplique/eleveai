@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Pas d'équerre ? Déchire une feuille !",
+  "01-pli1": "Prends un bout de papier, tout de travers. Plie-le une fois : le pli fait un bord bien droit.",
+  "02-pli2": "Maintenant, replie ce bord sur lui-même.",
+  "03-question": "Question ! Quel angle obtiens-tu dans le coin ? A : un peu moins de 90 degrés. B : 90 degrés pile. C : ça dépend du papier. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 90 degrés pile !",
+  "04-pourquoi": "Le bord droit est un angle plat : 180 degrés. Plié en deux : 90 degrés. Tu viens de fabriquer une équerre !",
+  "05-commentaire": "Et toi ? Tu casses une tablette de chocolat en 6 carrés. Combien d'angles droits en tout ? Réponds en commentaire !"
+}

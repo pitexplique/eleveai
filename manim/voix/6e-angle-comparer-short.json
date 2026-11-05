@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une loupe grossit tout. Vraiment tout ?",
+  "01-loupe": "Voici un angle de 30 degrés, tout petit. On le passe sous une loupe qui grossit 3 fois. Les côtés deviennent 3 fois plus longs.",
+  "02-question": "Question ! Sous la loupe, combien mesure l'angle ? A : 30 degrés. B : 33 degrés. C : 90 degrés. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. Toujours 30 degrés !",
+  "03-pourquoi": "Les côtés sont plus longs, mais l'ouverture ne change pas. Un angle ne se mesure pas avec la longueur de ses côtés.",
+  "04-commentaire": "Et toi ? Un angle de 45 degrés, sous une loupe qui grossit 10 fois : combien de degrés ? Réponds en commentaire !"
+}

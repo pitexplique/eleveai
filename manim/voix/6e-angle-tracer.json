@@ -1,0 +1,19 @@
+{
+  "00-garde": "Tracer un angle. Quels sont les quatre gestes, dans le bon ordre ?",
+  "01-situation": "Voici Inès. Elle est game designer. Dans son jeu, une catapulte lance des boules de peinture. Elle veut un tir à 40 degrés. Elle dessine d'abord cet angle.",
+  "02-outil": "Quel outil prend-elle ? L'équerre ne donne que 90 degrés. Pour 40 degrés, il faut un rapporteur.",
+  "03-geste1": "Premier geste : tracer un côté. C'est la demi-droite O B. Le point O sera le sommet.",
+  "04-geste2": "Deuxième geste : poser le centre du rapporteur sur O, et le 0 sur le côté.",
+  "05-geste3": "Troisième geste : compter à partir de ce 0, jusqu'à 40. On fait un petit repère.",
+  "06-geste4": "Quatrième geste : enlever le rapporteur, et tracer le côté qui part de O et passe par le repère. L'angle mesure 40 degrés !",
+  "07-question": "Question ! Que fais-tu en premier ? A : poser le rapporteur. B : tracer un côté. C : faire un repère à 40. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Sans premier côté, on ne sait pas où poser le 0.",
+  "08-piege": "Le piège : compter depuis le mauvais 0. Inès a pris l'autre rangée. Son angle mesure 140 degrés, et la boule part en arrière !",
+  "09-controle": "Pour éviter ça, on prévoit. 40 degrés, c'est plus petit qu'un angle droit : l'angle doit être aigu. S'il est très ouvert, on recommence.",
+  "10-question": "Question ! Tu traces un angle de 130 degrés. Il sera : A : aigu. B : droit. C : obtus. Mets pause, et choisis !",
+  "10b-reponse": "Réponse C. 130 est entre 90 et 180. L'angle sera obtus.",
+  "11-defi": "À toi de jouer ! Prends ton rapporteur. Trace un angle de 115 degrés, de sommet K. Mets pause, et trace-le !",
+  "11b-correction": "Correction. Un côté qui part de K. Le centre sur K, le 0 sur le côté. Un repère à 115. Puis le second côté. L'angle est obtus : il dépasse le coin d'une équerre.",
+  "12-finale": "Ce que tu as appris. Pour tracer un angle : un côté, le rapporteur sur le sommet, un repère, le second côté. On compte depuis le 0 posé sur le côté. On vérifie : aigu ou obtus ?",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
