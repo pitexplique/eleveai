@@ -174,6 +174,14 @@ export const notions: NotionSource[] = [
     prerequis: [],
     levels: [1, 2, 3],
   },
+  // AJOUTEE LE 05/11/2026 : programme 2026 de seconde, tableau croisé d'effectifs.
+  {
+    id: "croisement_variables_2de",
+    label: "Croiser deux variables : tableaux croisés et fréquences",
+    boId: "BO2D1",
+    prerequis: ["statistiques_descriptives"],
+    levels: [1, 2, 3],
+  },
   {
     id: "probabilites_ensemble_fini",
     label: "Probabilités sur un ensemble fini",

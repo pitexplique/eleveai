@@ -104,6 +104,7 @@ export const microSkills: MicroSkillSource[] = [
   { id: "vecteur_chasles_calcul", label: "Simplifier une expression vectorielle avec Chasles (somme, différence, réordonnancement)", notionId: "vecteurs_plan", prerequis: ["vecteur_somme"] },
   { id: "vecteur_point_defini", label: "Placer un point défini par une égalité vectorielle", notionId: "vecteurs_plan", prerequis: ["vecteur_egalite", "vecteur_produit_reel"] },
   { id: "vecteur_colinearite", label: "Étudier la colinéarité avec le déterminant (alignement, parallélisme)", notionId: "vecteurs_plan", prerequis: ["vecteur_produit_reel", "vecteur_coordonnees"] },
+  { id: "vecteur_combinaison_lineaire", label: "Écrire un vecteur comme combinaison de deux vecteurs non colinéaires", notionId: "vecteurs_plan", prerequis: ["vecteur_produit_reel", "vecteur_colinearite"] },
 
   /* ===================== repere_coordonnees ===================== */
   { id: "repere_coordonnees_point", label: "Lire et placer un point dans un repère", notionId: "repere_coordonnees", prerequis: [] },
@@ -163,6 +164,7 @@ export const microSkills: MicroSkillSource[] = [
   // « recherche de domaine d'étude (ensemble de définition) » y figure en
   // contenu de la section « Représentation algébrique et graphique ».
   { id: "fonction_domaine", label: "Déterminer le domaine de définition d'une fonction", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_image_formule"] },
+  { id: "fonction_modeliser", label: "Modéliser une situation par une fonction (formule, intervalle, lecture)", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_image_formule", "fonction_domaine"] },
 
   /* ===================== analyse_graphique_2de (12/10/2026) ===================== */
   { id: "graph_image", label: "Lire graphiquement l'image d'un nombre", notionId: "analyse_graphique_2de", prerequis: ["fonction_vocabulaire"] },
@@ -217,6 +219,12 @@ export const microSkills: MicroSkillSource[] = [
   { id: "stat_linearite_moyenne", label: "Utiliser la linéarité de la moyenne", notionId: "statistiques_descriptives", prerequis: ["stat_moyenne"] },
   { id: "stat_ecart_type", label: "Calculer et interpréter l'écart type", notionId: "statistiques_descriptives", prerequis: ["stat_moyenne"] },
   { id: "stat_interpreter", label: "Interpréter des indicateurs statistiques", notionId: "statistiques_descriptives", prerequis: ["stat_moyenne", "stat_mediane_quartiles", "stat_frequence"] },
+  { id: "stat_histogramme", label: "Lire et utiliser un histogramme à classes de même amplitude", notionId: "statistiques_descriptives", prerequis: ["stat_frequence", "stat_moyenne"] },
+  { id: "stat_polygone_cumule", label: "Lire un polygone des fréquences cumulées (médiane, quartiles)", notionId: "statistiques_descriptives", prerequis: ["stat_frequence", "stat_mediane_quartiles"] },
+  { id: "stat_mediane_estimee", label: "Estimer la médiane d'une série en classes (répartition uniforme)", notionId: "statistiques_descriptives", prerequis: ["stat_histogramme", "stat_mediane_quartiles"] },
+  { id: "croise_completer_tableau", label: "Compléter un tableau croisé d'effectifs", notionId: "croisement_variables_2de", prerequis: ["stat_frequence"] },
+  { id: "croise_frequence_marginale", label: "Calculer une fréquence marginale", notionId: "croisement_variables_2de", prerequis: ["croise_completer_tableau"] },
+  { id: "croise_frequence_conditionnelle", label: "Calculer et interpréter une fréquence conditionnelle", notionId: "croisement_variables_2de", prerequis: ["croise_frequence_marginale"] },
 
   /* ===================== probabilites_ensemble_fini ===================== */
   { id: "proba_vocabulaire", label: "Utiliser issue, évènement et univers", notionId: "probabilites_ensemble_fini", prerequis: [] },
@@ -262,4 +270,7 @@ export const microSkills: MicroSkillSource[] = [
   { id: "logique_connecteurs", label: "Utiliser les connecteurs « et » et « ou »", notionId: "logique_ensembles", prerequis: [] },
   { id: "logique_negation_contre_exemple", label: "Formuler une négation, utiliser un contre-exemple", notionId: "logique_ensembles", prerequis: ["logique_connecteurs"] },
   { id: "logique_implication_reciproque", label: "Formuler une implication, une équivalence et une réciproque", notionId: "logique_ensembles", prerequis: ["logique_connecteurs"] },
+  { id: "logique_contraposee", label: "Formuler et utiliser la contraposée d'une implication", notionId: "logique_ensembles", prerequis: ["logique_implication_reciproque"] },
+  { id: "logique_raisonnement_type", label: "Reconnaître un raisonnement : disjonction des cas, absurde, contraposée, contre-exemple", notionId: "logique_ensembles", prerequis: ["logique_contraposee"] },
+  { id: "logique_quantificateurs", label: "Utiliser « pour tout » et « il existe », et les nier", notionId: "logique_ensembles", prerequis: ["logique_connecteurs"] },
 ];

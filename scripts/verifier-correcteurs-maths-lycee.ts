@@ -56,7 +56,8 @@ function reglesCommunes(q: TutorGeneratedQuestionV4): string[] {
   if (!q.explanation?.trim()) p.push("pas d'explication");
   for (const s of [q.text, ...(q.choices ?? []), ...(q.expected ?? []), q.explanation ?? ""].map(String)) {
     if (/undefined|NaN|Infinity|\[object|\$\{/.test(s)) p.push(`écriture suspecte : « ${s} »`);
-    if (/\d\.\d/.test(s)) p.push(`point décimal : « ${s} »`);
+    // Dans du code entre accents graves (Python), le point décimal est le bon.
+    if (/\d\.\d/.test(s.replace(/`[^`]*`/g, ""))) p.push(`point décimal : « ${s} »`);
     if ((s.match(/\$/g) ?? []).length % 2) p.push(`dollars impairs : « ${s} »`);
     if (/\+ -|- -|\+ \+|\\dfrac\{0\}|(^|[^\d])1x|\s{2,}/.test(s.replace(/\n+/g, " "))) p.push(`écriture maladroite : « ${s} »`);
   }

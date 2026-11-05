@@ -2,6 +2,11 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 // --- Banques par notion (standard terminale, ~10 items/micro) ---
 import { reelsIntervallesBank } from "./reels-intervalles.bank";
+import { statistiquesClassesBank } from "./statistiques-classes.bank";
+import { croisementVariablesBank } from "./croisement-variables.bank";
+import { logiqueRaisonnementBank } from "./logique-raisonnement.bank";
+import { vecteurCombinaisonBank } from "./vecteur-combinaison.bank";
+import { fonctionModeliserBank } from "./fonction-modeliser.bank";
 import { arithmetiqueEntiersBank } from "./arithmetique-entiers.bank";
 import { puissancesBank } from "./puissances.bank";
 import { puissancesCanvas2de } from "@/lib/tutor-v4/questionBank/puissances-canvas-items";
@@ -61,6 +66,12 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...algorithmiquePythonBank,
   // === Domaine VOCABULAIRE ENSEMBLISTE ET LOGIQUE ===
   ...logiqueEnsemblesBank,
+  // === Programme 2026 : trous bouchés le 05/11/2026 ===
+  ...statistiquesClassesBank,
+  ...croisementVariablesBank,
+  ...logiqueRaisonnementBank,
+  ...vecteurCombinaisonBank,
+  ...fonctionModeliserBank,
 ];
 
 export function getMathsSecondeQuestionBank(args?: {

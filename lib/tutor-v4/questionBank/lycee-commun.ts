@@ -15,6 +15,12 @@ export function phrase(debuts: readonly string[], fins: readonly string[]) {
   return `${d} ${g}`.trim();
 }
 
+/** « de élèves » n'existe pas : « d'élèves », « de joueuses ». */
+export const de = (s: string) => (/^[aeiouyéèêh]/i.test(s) ? `d'${s}` : `de ${s}`);
+
+/** 12000 → « 12 000 », avec une espace insécable. */
+export const mil = (n: number) => String(n).replace(/\B(?=(\d{3})+$)/g, "\u00a0");
+
 export const pgcd = (a: number, b: number): number => (b === 0 ? Math.abs(a) : pgcd(b, a % b));
 
 export function expl(definition: string, methode: string, calcul: string, conclusion: string) {
