@@ -88,14 +88,15 @@ export const BELGIQUE_S1: ProgrammePays = {
     {
       code: "1.3 SF1", domaine: GEO, texte: "Construire l'image d'un triangle ou d'un quadrilatère par les quatre isométries (rotation de ±90°) ; retrouver les éléments caractéristiques quand la figure et son image sont données.",
       couverture: "partielle", micros: [...m("6e", "sym_figure"), ...m("5e", "sym_centrale_figure"), ...m("4e", "sym_translation", "sym_rotation")],
-      note: "Retrouver l'axe, le centre ou la translation à partir d'une figure et de son image n'est pas entraîné.",
+      note: "On reconnaît une rotation sans en construire l'image ; retrouver l'axe, le centre ou la translation à partir d'une figure et de son image n'est pas entraîné.",
     },
-    { code: "1.3 SF2", domaine: GEO, texte: "Déterminer l'amplitude d'un angle avec les angles complémentaires, supplémentaires, opposés par le sommet et la somme des angles du triangle et du quadrilatère.", couverture: "complete", micros: [...m("5e", "angle_paires", "triangle_somme_angle"), ...m("6e", "triangle_angle_manquant")] },
+    { code: "1.3 SF2", domaine: GEO, texte: "Déterminer l'amplitude d'un angle avec les angles complémentaires, supplémentaires, opposés par le sommet et la somme des angles du triangle et du quadrilatère.", couverture: "partielle", micros: [...m("5e", "angle_paires", "triangle_somme_angle"), ...m("6e", "triangle_angle_manquant")], note: "La somme des angles d'un quadrilatère (360°) n'a pas de micro." },
     { code: "1.3 SF3", domaine: GEO, texte: "Utiliser des propriétés pour construire : terminer une figure sous contraintes (droites remarquables, symétries) ; cercle inscrit et cercle circonscrit à un triangle.", couverture: "partielle", micros: [...m("6e", "circonscrit_construire", "quadrilatere_completer_construire"), ...m("4e", "cercle_inscrit")], note: "Le cercle inscrit s'utilise ; sa construction n'est pas entraînée." },
     { code: "1.3 SF4", domaine: GEO, texte: "Justifier l'amplitude d'un angle en utilisant des propriétés.", couverture: "partielle", micros: [...m("5e", "angle_paires"), ...m("6e", "bissectrice_probleme")], note: "On calcule l'angle, on ne rédige pas la justification." },
     {
       code: "1.3 C1", domaine: GEO, texte: "Articuler propriétés et constructions : figure dont les axes, le centre, une diagonale, des médiatrices ou des bissectrices sont donnés ; problèmes d'angles et d'isométries justifiés ; montrer que deux figures sont (ou ne sont pas) isométriques.",
       couverture: "partielle", micros: [...m("6e", "mediatrice_defi", "bissectrice_defi"), ...m("5e", "para_defi"), ...m("4e", "sym_transformation_defi")],
+      note: "Construire à partir d'éléments donnés et montrer que deux figures sont isométriques ne sont pas entraînés.",
     },
     {
       code: "2.1 Sv1", domaine: GRA, texte: "Périmètres et aires : périmètre du triangle équilatéral, du rectangle, du carré, du cercle ; liens entre les formules d'aire du rectangle, du parallélogramme, du trapèze, du triangle, du losange ; aire du disque.",
@@ -104,7 +105,7 @@ export const BELGIQUE_S1: ProgrammePays = {
     },
     {
       code: "2.1 SF1", domaine: GRA, texte: "Calculer périmètres et aires : côté d'un polygone régulier de périmètre donné, périmètre du cercle, aire d'une figure simple, décomposition d'une surface complexe.",
-      couverture: "complete", micros: [...m("6e", "aire_perimetre_figure", "cercle_perimetre"), ...m("5e", "aire_composer"), ...m("3e", "aire_disque", "aire_figure_composee")],
+      couverture: "complete", micros: [...m("6e", "aire_perimetre_figure", "cercle_perimetre"), ...m("5e", "aire_composer", "polygone_regulier_reconnaitre"), ...m("3e", "aire_disque", "aire_figure_composee")],
     },
     {
       code: "2.1 C1", domaine: GRA, texte: "Résoudre des problèmes d'aire et de périmètre de figures simples ou complexes en contexte ; représenter une figure de même aire qu'une figure donnée.",
@@ -132,17 +133,17 @@ export const BELGIQUE_S1: ProgrammePays = {
     {
       code: "3.2 Sv1", domaine: NBR, texte: "Les opérations et leurs propriétés : vocabulaire (terme, facteur, dividende, reste, base, exposant) ; addition d'entiers sur la droite ; règles des signes pour × et ÷ ; puissance à exposant naturel ; commutativité, associativité, neutre, absorbant ; justifier le calcul mental (×5, ×9, ×11) ; carrés jusqu'à 15² ; principes d'équivalence d'une égalité.",
       couverture: "partielle",
-      micros: [...m("5e", "relatif_addition"), ...m("4e", "relatif_multiplication", "relatif_division", "puissance_comprendre", "pythagore_carre_racine"), ...m("6e", "entier_strategie_mentale"), ...m("3e", "entier_racine_carre_parfait")],
-      note: "Les propriétés nommées (commutativité, neutre, absorbant) et le vocabulaire des opérations ne sont pas des micros.",
+      micros: [...m("5e", "relatif_addition"), ...m("4e", "relatif_multiplication", "relatif_division", "puissance_comprendre", "pythagore_carre_racine", "equation_resoudre_simple"), ...m("6e", "entier_strategie_mentale", "entier_division_posee"), ...m("3e", "entier_racine_carre_parfait"), ...m("ce2", "ce2_add_sous_vocabulaire", "ce2_multiplication_vocabulaire"), ...m("ce1", "ce1_multiplication_commutativite")],
+      note: "L'associativité, l'élément neutre et l'élément absorbant n'ont pas de micro.",
     },
     { code: "3.2 SF1", domaine: NBR, texte: "Exploiter des expressions algébriques : réduire les termes semblables, produit de monômes du 1er degré ; valeur numérique.", couverture: "complete", micros: [...m("5e", "litteral_reduire", "litteral_substituer"), ...m("4e", "litteral_expression_reduire")] },
-    { code: "3.2 SF2", domaine: NBR, texte: "Résoudre une équation ax = b, ax + b = c (a, b, c entiers), vérifier la solution, écrire une équation de solution donnée.", couverture: "complete", micros: m("4e", "equation_resoudre_simple", "equation_verifier") },
+    { code: "3.2 SF2", domaine: NBR, texte: "Résoudre une équation ax = b, ax + b = c (a, b, c entiers), vérifier la solution, écrire une équation de solution donnée.", couverture: "partielle", micros: m("4e", "equation_resoudre_simple", "equation_verifier"), note: "Écrire soi-même une équation de solution donnée n'est pas entraîné." },
     {
       code: "3.2 SF3", domaine: NBR, texte: "Procédures de calcul : fractions équivalentes, simplifier, rendre irréductible ; les quatre opérations sur les entiers ; propriétés et distributivité ; priorités ; puissance de base et exposant naturels.",
       couverture: "complete", micros: [...m("5e", "fraction_egale", "fraction_simplifier", "litteral_distributivite"), ...m("4e", "relatif_calcul", "puissance_calculer"), ...m("cm2", "calcul_priorite")],
     },
     { code: "3.2 SF4", domaine: NBR, texte: "Utiliser une calculatrice ; estimer l'ordre de grandeur d'un résultat ; vérifier sa plausibilité.", couverture: "partielle", micros: [...m("4e", "ordre_estimer", "ordre_vraisemblance"), ...m("6e", "entier_calcul_verifier")], note: "L'usage de la calculatrice n'est pas entraîné par le coach." },
-    { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes : traduire par un schéma, une expression ou une équation ; associer une situation à une équation ; rédiger un énoncé.", couverture: "complete", micros: [...m("6e", "algebre_barres"), ...m("4e", "equation_traduire", "equation_probleme")] },
+    { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes : traduire par un schéma, une expression ou une équation ; associer une situation à une équation ; rédiger un énoncé.", couverture: "partielle", micros: [...m("6e", "algebre_barres"), ...m("4e", "equation_traduire", "equation_probleme")], note: "Rédiger un énoncé n'est pas entraîné." },
     {
       code: "4.1 Sv1", domaine: STA, texte: "Notions de statistique : population, variable (qualitative ou quantitative), modalités, effectifs, fréquences, étendue ; diagramme en bâtonnets, à bandes, circulaire.",
       couverture: "partielle", micros: [...m("5e", "stat_donnee_organiser", "stat_effectif_frequence", "stat_representation_choisir"), ...m("4e", "stat_etendue")],
@@ -164,11 +165,10 @@ export const BELGIQUE_S2: ProgrammePays = {
   contenus: [
     {
       code: "1.1 Sv1", domaine: GEO, texte: "Les solides et leurs représentations planes : cylindre, cube, parallélépipède rectangle, pyramide, prisme droit, cône ; figures vues en perspective cavalière ; vues coordonnées ; éléments en vraie grandeur.",
-      couverture: "partielle", micros: [...m("4e", "vision_reconnaitre", "vision_vues", "vision_representation"), ...m("3e", "volume_representation")],
-      note: "Repérer ce qui est en vraie grandeur dans une perspective n'est pas entraîné.",
+      couverture: "complete", micros: [...m("4e", "vision_reconnaitre", "vision_vues", "vision_representation"), ...m("3e", "volume_representation")],
     },
     { code: "1.1 SF1", domaine: GEO, texte: "Relier vues coordonnées et perspective cavalière d'un solide ou d'un assemblage ; représenter cube, pavé, pyramide en perspective ; dessiner une vue d'un prisme.", couverture: "partielle", micros: [...m("4e", "vision_vues", "vision_representation"), ...m("6e", "vision_vues")], note: "On lit les représentations ; on ne les trace pas." },
-    { code: "1.1 C1", domaine: GEO, texte: "Nature de la section d'un cube ou d'un pavé (plan parallèle à une face ou passant par trois sommets) et sa vraie grandeur ; vue d'un assemblage de prismes.", couverture: "partielle", micros: [...m("3e", "section_pave_cube", "section_calculer_longueur"), ...m("6e", "vision_denombrer")], note: "La section par trois sommets n'est pas couverte." },
+    { code: "1.1 C1", domaine: GEO, texte: "Nature de la section d'un cube ou d'un pavé (plan parallèle à une face ou passant par trois sommets) et sa vraie grandeur ; vue d'un assemblage de prismes.", couverture: "partielle", micros: [...m("3e", "section_pave_cube", "section_calculer_longueur"), ...m("6e", "vision_vues")], note: "La section par trois sommets n'est pas couverte." },
     { code: "1.2 Sv1", domaine: GEO, texte: "Des agrandissements et réductions vers les figures semblables : isométriques, agrandies ou déformées ; variants et invariants ; effet sur le périmètre et l'aire.", couverture: "complete", micros: m("4e", "agrandissement_rapport", "agrandissement_aire", "triangle_semblable") },
     {
       code: "1.2 Sv2", domaine: GEO, texte: "Distances et lieux géométriques : distance entre deux points, entre deux parallèles, d'un point à une droite ; parallèles, médiatrice, bissectrice et cercle définis comme lieux.",
@@ -177,14 +177,14 @@ export const BELGIQUE_S2: ProgrammePays = {
         ...m("seconde", "geo_projete_orthogonal"),
         ...m("4e", "bissectrice_equidistance"),
       ],
-      note: "La bissectrice comme lieu est couverte ; manquent les parallèles comme lieu.",
+      note: "La bissectrice comme lieu est couverte ; manquent la distance entre deux parallèles et les parallèles comme lieu.",
     },
     { code: "1.2 Sv3", domaine: GEO, texte: "Les angles : correspondants, alternes-internes, alternes-externes ; propriétés des parallèles coupées par une sécante.", couverture: "complete", micros: m("5e", "angle_paralleles") },
     { code: "1.2 SF1", domaine: GEO, texte: "Réaliser des agrandissements et réductions : construire l'image (coefficient donné), trouver le coefficient, périmètre et aire de l'image.", couverture: "complete", micros: [...m("4e", "agrandissement_rapport", "agrandissement_aire"), ...m("3e", "aire_agrandissement_reduction", "sym_homothetie_construire")] },
-    { code: "1.2 SF2", domaine: GEO, texte: "Déterminer des amplitudes d'angles avec la somme des angles d'un polygone et les parallèles coupées par une sécante.", couverture: "partielle", micros: m("5e", "angle_paralleles", "triangle_somme_angle"), note: "La somme des angles d'un polygone, (n − 2) × 180°, manque." },
-    { code: "1.2 SF3", domaine: GEO, texte: "Représenter la distance entre deux parallèles ou d'un point à une droite ; construire un lieu de points sous une contrainte de distance.", couverture: "partielle", micros: m("6e", "cercle_distance", "mediatrice_probleme") },
+    { code: "1.2 SF2", domaine: GEO, texte: "Déterminer des amplitudes d'angles avec la somme des angles d'un polygone et les parallèles coupées par une sécante.", couverture: "partielle", micros: m("5e", "angle_paralleles", "triangle_somme_angle", "polygone_regulier_angles"), note: "Seul l'angle du polygone régulier est vu ; la somme des angles d'un polygone, (n − 2) × 180°, manque." },
+    { code: "1.2 SF3", domaine: GEO, texte: "Représenter la distance entre deux parallèles ou d'un point à une droite ; construire un lieu de points sous une contrainte de distance.", couverture: "partielle", micros: m("6e", "cercle_distance", "mediatrice_probleme"), note: "Seuls des problèmes de distance à un point sont entraînés ; manquent le tracé de la distance à une droite ou entre deux parallèles et la construction d'un lieu." },
     { code: "1.2 SF4", domaine: GEO, texte: "Justifier l'amplitude d'un angle en utilisant une propriété.", couverture: "partielle", micros: m("5e", "angle_paralleles", "angle_paires"), note: "Le calcul est entraîné, pas la rédaction." },
-    { code: "1.2 C1", domaine: GEO, texte: "Problèmes de lieux géométriques, d'angles justifiés, de périmètre et d'aire d'une figure agrandie ; justifier chaque étape d'une construction.", couverture: "partielle", micros: [...m("6e", "circonscrit_defi"), ...m("5e", "angle_defi"), ...m("4e", "echelle_defi")] },
+    { code: "1.2 C1", domaine: GEO, texte: "Problèmes de lieux géométriques, d'angles justifiés, de périmètre et d'aire d'une figure agrandie ; justifier chaque étape d'une construction.", couverture: "partielle", micros: [...m("6e", "circonscrit_defi"), ...m("5e", "angle_defi"), ...m("4e", "echelle_defi")], note: "On calcule ; justifier par écrit un angle ou chaque étape d'une construction n'est pas entraîné." },
     { code: "2.1 Sv1", domaine: GRA, texte: "Les volumes : formules du parallélépipède rectangle, du cube, du prisme droit, du cylindre.", couverture: "complete", micros: m("5e", "volume_pave", "volume_prisme", "volume_cylindre") },
     { code: "2.1 SF1", domaine: GRA, texte: "Calculer le volume d'un cube, d'un pavé, d'un prisme droit, d'un cylindre, d'un solide complexe décomposé.", couverture: "complete", micros: m("5e", "volume_pave", "volume_prisme", "volume_cylindre", "volume_assemblage") },
     { code: "2.1 C1", domaine: GRA, texte: "Résoudre des problèmes de volumes de solides simples ou complexes en contexte.", couverture: "complete", micros: [...m("5e", "volume_defi"), ...m("4e", "volume_unite")] },
@@ -205,17 +205,17 @@ export const BELGIQUE_S2: ProgrammePays = {
       code: "3.2 SF1", domaine: NBR, texte: "Transformer une expression : réduire, supprimer les parenthèses, produit de facteurs, propriétés des puissances ; distributivité simple et double, carré d'une somme, d'une différence, binômes conjugués ; valeur numérique.",
       couverture: "complete", micros: m("4e", "litteral_expression_reduire", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_identite_developper", "puissance_calcul", "litteral_expression_substituer"),
     },
-    { code: "3.2 SF2", domaine: NBR, texte: "Résoudre ax = b, ax + b = c, ax + b = cx + d (coefficients entiers ou rationnels), vérifier, écrire deux équations de solution donnée.", couverture: "complete", micros: m("4e", "equation_resoudre_reduction", "equation_resoudre_distributivite", "equation_verifier") },
+    { code: "3.2 SF2", domaine: NBR, texte: "Résoudre ax = b, ax + b = c, ax + b = cx + d (coefficients entiers ou rationnels), vérifier, écrire deux équations de solution donnée.", couverture: "partielle", micros: m("4e", "equation_resoudre_reduction", "equation_resoudre_distributivite", "equation_verifier", "equation_defi"), note: "Écrire soi-même une équation de solution donnée n'est pas entraîné." },
     { code: "3.2 SF3", domaine: NBR, texte: "Calculer : les quatre opérations sur les fractions, propriétés et priorités avec des rationnels, puissance de base entière ou fractionnaire.", couverture: "complete", micros: [...m("4e", "fraction_additionner", "fraction_multiplier", "fraction_diviser", "relatif_calcul", "puissance_calculer"), ...m("3e", "fraction_rationnel_calculer")] },
     { code: "3.2 SF4", domaine: NBR, texte: "Calculatrice (puissances), ordre de grandeur, plausibilité d'un résultat.", couverture: "partielle", micros: m("4e", "ordre_estimer", "ordre_vraisemblance"), note: "La calculatrice elle-même n'est pas entraînée." },
-    { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes avec les outils algébriques ; traduire une situation par une expression ou une équation ; rédiger un énoncé.", couverture: "complete", micros: m("4e", "equation_probleme", "equation_traduire", "litteral_expression_traduire") },
+    { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes avec les outils algébriques ; traduire une situation par une expression ou une équation ; rédiger un énoncé.", couverture: "partielle", micros: m("4e", "equation_probleme", "equation_traduire", "litteral_expression_traduire"), note: "Rédiger un énoncé n'est pas entraîné." },
     {
       code: "4.1 Sv1", domaine: STA, texte: "Vocabulaire : population, échantillon, variable, modalité, effectif et effectif cumulé, fréquence et fréquence cumulée, étendue ; moyenne, mode, médiane (variable discrète).",
       couverture: "partielle", micros: [
         ...m("4e", "stat_effectif", "stat_frequence", "stat_moyenne", "stat_mediane", "stat_etendue", "proba_frequence_echantillon"),
         ...m("seconde", "echantillon_fluctuation", "stat_polygone_cumule"),
         ...m("3e", "stat_effectifs_cumules"),
-      ], note: "L'échantillon est vu côté probabilités (4e, seconde) ; les cumulés sont couverts ; le mode d'une série n'a pas de micro (seulement la classe modale).",
+      ], note: "L'échantillon est vu côté probabilités (4e, seconde) ; les cumulés sont couverts ; le mode d'une série n'a pas de micro (seulement la classe modale) et le vocabulaire population / variable / modalité n'est pas travaillé.",
     },
     {
       code: "4.1 SF1", domaine: STA, texte: "Traiter, calculer, présenter : tableau de distribution (groupé ou non), effectif à partir de la fréquence, moyenne, mode, médiane ; diagrammes en bâtonnets, à bandes, circulaire ; diagramme par outil numérique.",
@@ -258,7 +258,7 @@ export const BELGIQUE_S3: ProgrammePays = {
     {
       code: "2.1 SF1", domaine: GRA, texte: "Exploiter des fonctions : lire images, zéros, extremums, intervalles de croissance et de signe ; image et antécédent ; tracer le graphique ; appartenance d'un point ; résoudre graphiquement une équation du 1er degré ; taux de variation ; tableau de signes.",
       couverture: "complete",
-      micros: [...m("3e", "fonction_image", "fonction_antecedent", "affine_calcul_image", "affine_graphique", "affine_coeff_directeur"), ...m("seconde", "graph_resoudre_equation", "affine_signe", "signes_premier_degre")],
+      micros: [...m("3e", "fonction_image", "fonction_antecedent", "affine_calcul_image", "affine_graphique", "affine_tracer", "affine_coeff_directeur"), ...m("seconde", "graph_resoudre_equation", "affine_signe", "signes_premier_degre")],
     },
     {
       code: "2.1 C1", domaine: GRA, texte: "Modéliser une situation par une fonction du 1er degré, résoudre le problème, chercher l'intersection de deux fonctions (graphiquement, algébriquement), utiliser l'outil informatique.",
@@ -268,13 +268,13 @@ export const BELGIQUE_S3: ProgrammePays = {
     { code: "3.1 SF1", domaine: NBR, texte: "Comparer, encadrer, ordonner entiers, rationnels et irrationnels ; les placer ; valeur approchée par défaut ou par excès.", couverture: "complete", micros: [...m("3e", "entier_racine_encadrer", "fraction_rationnel_comparer"), ...m("seconde", "reels_encadrement", "reels_droite_graduee")] },
     {
       code: "3.2 Sv1", domaine: NBR, texte: "Le radical (√) dans les équations-produits et les triangles rectangles ; racines des 15 premiers carrés parfaits ; factorisation : mise en évidence, différence de deux carrés, trinôme carré parfait ; règle fondamentale des proportions ; équation sans solution ou vraie pour tout réel.",
-      couverture: "partielle", micros: [...m("3e", "entier_racine_comprendre", "entier_racine_carre_parfait", "litteral_factoriser", "litteral_identite"), ...m("seconde", "devfac_factoriser_identite")],
-      note: "Les équations sans solution ou à infinité de solutions n'ont pas de micro.",
+      couverture: "partielle", micros: [...m("3e", "entier_racine_comprendre", "entier_racine_carre_parfait", "equation_carre_egal_a", "equation_carre_factoriser", "litteral_factoriser", "litteral_identite"), ...m("seconde", "devfac_factoriser_identite"), ...m("4e", "prop_quatrieme")],
+      note: "Les équations du 1er degré sans solution ou vraies pour tout réel n'ont pas de micro.",
     },
     { code: "3.2 SF1", domaine: NBR, texte: "Factoriser (mise en évidence, différence de deux carrés, trinôme carré parfait) ; reconnaître une expression non factorisable par ces outils.", couverture: "complete", micros: [...m("3e", "litteral_factoriser", "litteral_identite"), ...m("seconde", "devfac_facteur_commun", "devfac_factoriser_identite", "ir_difference_carres")] },
-    { code: "3.2 SF2", domaine: NBR, texte: "Résoudre ax + b = cx + d, une équation produit nul, une équation par le produit en croix ; vérifier ; écrire une équation de deux solutions données.", couverture: "complete", micros: [...m("3e", "equation_resoudre_developper", "equation_produit_nul", "equation_verifier"), ...m("4e", "prop_quatrieme")] },
+    { code: "3.2 SF2", domaine: NBR, texte: "Résoudre ax + b = cx + d, une équation produit nul, une équation par le produit en croix ; vérifier ; écrire une équation de deux solutions données.", couverture: "complete", micros: [...m("3e", "equation_resoudre_developper", "equation_produit_nul", "equation_verifier"), ...m("4e", "prop_quatrieme"), ...m("premiere", "quad_ecrire_factorisee")] },
     { code: "3.2 SF3", domaine: NBR, texte: "Calculer avec des puissances de 10 à exposants entiers ; valeur approchée d'une racine à la calculatrice ; ordre de grandeur, plausibilité.", couverture: "partielle", micros: [...m("3e", "entier_puissance_dix", "entier_puissance_ecriture_scientifique", "entier_racine_calculer"), ...m("4e", "ordre_estimer")], note: "La calculatrice n'est pas entraînée." },
-    { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes avec les nombres, les opérations et les outils algébriques ; rédiger un énoncé.", couverture: "complete", micros: [...m("3e", "equation_probleme"), ...m("4e", "equation_traduire")] },
+    { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes avec les nombres, les opérations et les outils algébriques ; rédiger un énoncé.", couverture: "partielle", micros: [...m("3e", "equation_probleme"), ...m("4e", "equation_traduire")], note: "Rédiger un énoncé n'est pas entraîné." },
     { code: "4.1 Sv1", domaine: STA, texte: "Notions : population, variable, classes et centres de classes ; variable discrète ou continue ; bâtonnets, bandes ou histogramme.", couverture: "partielle", micros: [...m("3e", "stat_lire_tableau", "stat_lire_graphique", "stat_classes_regrouper", "stat_classe_modale_centre"), ...m("premiere", "auto_stat_lire_graphique", "auto_stat_moyenne")], note: "Classes et centres de classes couverts ; variable discrète / continue non travaillée." },
     {
       code: "4.1 SF1", domaine: STA, texte: "Traiter et calculer : effectifs et fréquences (cumulés), effectif d'une classe, moyenne d'une variable continue, médiane approchée sur la courbe des effectifs cumulés.",
@@ -284,7 +284,7 @@ export const BELGIQUE_S3: ProgrammePays = {
         ...m("premiere", "auto_stat_moyenne"),
       ],
     },
-    { code: "4.1 SF2", domaine: STA, texte: "Présenter : tableau de distribution en classes, histogramme, histogramme par outil numérique.", couverture: "partielle", micros: [...m("premiere", "auto_stat_lire_graphique", "auto_stat_graphique_donnees"), ...m("3e", "stat_classes_regrouper")], note: "Le tableau en classes est couvert ; on LIT un histogramme (automatismes de 1re), le construire : micro à écrire." },
+    { code: "4.1 SF2", domaine: STA, texte: "Présenter : tableau de distribution en classes, histogramme, histogramme par outil numérique.", couverture: "partielle", micros: [...m("premiere", "auto_stat_lire_graphique", "auto_stat_lire_histogramme", "auto_stat_graphique_donnees"), ...m("3e", "stat_classes_regrouper")], note: "Le tableau en classes est couvert ; on LIT un histogramme (automatismes de 1re), le construire : micro à écrire." },
     { code: "4.1 C1", domaine: STA, texte: "Interpréter en contexte, critiquer des informations sur une même situation, choisir un paramètre ou un support.", couverture: "complete", micros: [...m("3e", "stat_interpreter"), ...m("seconde", "stat_interpreter")] },
   ],
 };
