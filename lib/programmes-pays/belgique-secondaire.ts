@@ -100,8 +100,7 @@ export const BELGIQUE_S1: ProgrammePays = {
     },
     {
       code: "2.1 Sv1", domaine: GRA, texte: "Périmètres et aires : périmètre du triangle équilatéral, du rectangle, du carré, du cercle ; liens entre les formules d'aire du rectangle, du parallélogramme, du trapèze, du triangle, du losange ; aire du disque.",
-      couverture: "partielle", micros: [...m("6e", "aire_perimetre_rectangle", "aire_perimetre_carre", "cercle_perimetre", "aire_rectangle"), ...m("5e", "aire_triangle", "aire_parallelogramme"), ...m("3e", "aire_disque")],
-      note: "Pas de micro pour l'aire du trapèze ni du losange (formules D × d / 2 et (B + b) × h / 2).",
+      couverture: "complete", micros: [...m("6e", "aire_perimetre_rectangle", "aire_perimetre_carre", "cercle_perimetre", "aire_rectangle"), ...m("5e", "aire_triangle", "aire_parallelogramme", "aire_losange", "aire_trapeze"), ...m("3e", "aire_disque")],
     },
     {
       code: "2.1 SF1", domaine: GRA, texte: "Calculer périmètres et aires : côté d'un polygone régulier de périmètre donné, périmètre du cercle, aire d'une figure simple, décomposition d'une surface complexe.",
@@ -175,14 +174,14 @@ export const BELGIQUE_S2: ProgrammePays = {
       couverture: "partielle", micros: [
         ...m("6e", "distance_definition", "mediatrice_propriete", "cercle_ensemble"),
         ...m("seconde", "geo_projete_orthogonal"),
-        ...m("4e", "bissectrice_equidistance"),
+        ...m("4e", "bissectrice_equidistance", "distance_point_droite", "distance_paralleles"),
       ],
-      note: "La bissectrice comme lieu est couverte ; manquent la distance entre deux parallèles et les parallèles comme lieu.",
+      note: "La bissectrice comme lieu est couverte ; manquent les parallèles comme lieu.",
     },
     { code: "1.2 Sv3", domaine: GEO, texte: "Les angles : correspondants, alternes-internes, alternes-externes ; propriétés des parallèles coupées par une sécante.", couverture: "complete", micros: m("5e", "angle_paralleles") },
     { code: "1.2 SF1", domaine: GEO, texte: "Réaliser des agrandissements et réductions : construire l'image (coefficient donné), trouver le coefficient, périmètre et aire de l'image.", couverture: "complete", micros: [...m("4e", "agrandissement_rapport", "agrandissement_aire"), ...m("3e", "aire_agrandissement_reduction", "sym_homothetie_construire")] },
     { code: "1.2 SF2", domaine: GEO, texte: "Déterminer des amplitudes d'angles avec la somme des angles d'un polygone et les parallèles coupées par une sécante.", couverture: "partielle", micros: m("5e", "angle_paralleles", "triangle_somme_angle", "polygone_regulier_angles"), note: "Seul l'angle du polygone régulier est vu ; la somme des angles d'un polygone, (n − 2) × 180°, manque." },
-    { code: "1.2 SF3", domaine: GEO, texte: "Représenter la distance entre deux parallèles ou d'un point à une droite ; construire un lieu de points sous une contrainte de distance.", couverture: "partielle", micros: m("6e", "cercle_distance", "mediatrice_probleme"), note: "Seuls des problèmes de distance à un point sont entraînés ; manquent le tracé de la distance à une droite ou entre deux parallèles et la construction d'un lieu." },
+    { code: "1.2 SF3", domaine: GEO, texte: "Représenter la distance entre deux parallèles ou d'un point à une droite ; construire un lieu de points sous une contrainte de distance.", couverture: "partielle", micros: [...m("6e", "cercle_distance", "mediatrice_probleme"), ...m("4e", "distance_point_droite", "distance_paralleles")], note: "La distance à une droite ou entre deux parallèles se lit sur une figure ; manquent son tracé et la construction d'un lieu." },
     { code: "1.2 SF4", domaine: GEO, texte: "Justifier l'amplitude d'un angle en utilisant une propriété.", couverture: "partielle", micros: m("5e", "angle_paralleles", "angle_paires"), note: "Le calcul est entraîné, pas la rédaction." },
     { code: "1.2 C1", domaine: GEO, texte: "Problèmes de lieux géométriques, d'angles justifiés, de périmètre et d'aire d'une figure agrandie ; justifier chaque étape d'une construction.", couverture: "partielle", micros: [...m("6e", "circonscrit_defi"), ...m("5e", "angle_defi"), ...m("4e", "echelle_defi")], note: "On calcule ; justifier par écrit un angle ou chaque étape d'une construction n'est pas entraîné." },
     { code: "2.1 Sv1", domaine: GRA, texte: "Les volumes : formules du parallélépipède rectangle, du cube, du prisme droit, du cylindre.", couverture: "complete", micros: m("5e", "volume_pave", "volume_prisme", "volume_cylindre") },
