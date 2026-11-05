@@ -42,7 +42,7 @@ export const SENEGAL_2NDE: ProgrammePays = {
       code: "AG 1", domaine: "Géométrie plane",
       texte: "Calcul vectoriel : combinaisons linéaires de vecteurs, décomposition par la relation de Chasles, passage de AC = λ·AB à la relation algébrique, démonstrations (alignement, milieu, parallélisme).",
       couverture: "complete",
-      micros: m("seconde", "vecteur_somme", "vecteur_chasles_calcul", "vecteur_produit_reel", "vecteur_point_defini", "vecteur_colinearite"),
+      micros: m("seconde", "vecteur_somme", "vecteur_chasles_calcul", "vecteur_produit_reel", "vecteur_point_defini", "vecteur_colinearite", "vecteur_combinaison_lineaire"),
     },
     {
       code: "AG 2", domaine: "Géométrie plane",
@@ -56,7 +56,7 @@ export const SENEGAL_2NDE: ProgrammePays = {
       texte: "Repérage cartésien : abscisse et mesure algébrique, repère quelconque, coordonnées du barycentre, changement de repère par translation ; déterminant et colinéarité ; équations de droites (vecteur directeur, équation générale et réduite, équations paramétriques).",
       couverture: "partielle",
       micros: m("seconde", "repere_coordonnees_point", "repere_milieu", "vecteur_coordonnees", "vecteur_colinearite", "droite_vecteur_directeur", "droite_equation_cartesienne", "droite_equation_reduite", "droite_pente_ordonne", "droite_parallelisme"),
-      note: "Manquent les équations PARAMÉTRIQUES d'une droite du plan, la mesure algébrique et le changement de repère par translation.",
+      note: "Manquent les équations PARAMÉTRIQUES d'une droite du plan, la mesure algébrique, les coordonnées du barycentre et le changement de repère par translation.",
     },
     {
       code: "AG 4", domaine: "Géométrie plane",
@@ -66,7 +66,7 @@ export const SENEGAL_2NDE: ProgrammePays = {
         ...m("premiere-spe", "trig_radian", "trig_arc", "trig_enroulement", "trig_grand_reel"),
         ...m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"),
       ],
-      note: "Angles inscrits couverts ; manquent les quadrilatères inscriptibles et les angles ORIENTÉS de vecteurs.",
+      note: "Angles inscrits et quadrilatère inscrit couverts ; manquent les angles ORIENTÉS de vecteurs.",
     },
     {
       code: "AG 5", domaine: "Géométrie plane",
@@ -97,12 +97,9 @@ export const SENEGAL_2NDE: ProgrammePays = {
     {
       code: "AG 8", domaine: "Géométrie plane",
       texte: "Relations métriques dans le triangle rectangle : AB² = BC·BH, AH² = HB·HC, AB·AC = BC·AH.",
-      couverture: "partielle",
-      micros: [
-        ...m("3e", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote"),
-        ...m("seconde", "geo_projete_orthogonal"),
-      ],
-      note: "Seul Pythagore est travaillé : les relations avec le pied de la hauteur (AH² = HB·HC…) n'ont pas de micro.",
+      couverture: "absente",
+      micros: [],
+      note: "Les relations avec le pied de la hauteur (AH² = HB·HC…) n'ont pas de micro ; Pythagore n'en est que le prérequis.",
     },
     {
       code: "AG 9", domaine: "Géométrie plane",
@@ -128,8 +125,9 @@ export const SENEGAL_2NDE: ProgrammePays = {
     {
       code: "AN 1", domaine: "Activités numériques",
       texte: "Calcul dans ℝ : puissances, radicaux (√(a²b) = |a|√b), valeur absolue, distance sur une droite ; résoudre |ax + b| = |cx + d|, |x − a| ≤ b.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("seconde", "puiss_calcul", "puiss_produit_quotient", "racine_carre_de_a2", "racine_produit", "racine_simplification", "valeur_absolue_distance", "reference_valeur_absolue"),
+      note: "|x + 1| = 3 et |x − 2| ≤ 3 sont couverts ; manquent |ax + b| = c avec a ≠ 1 et |ax + b| = |cx + d|.",
     },
     {
       code: "AN 2", domaine: "Activités numériques",
@@ -140,17 +138,17 @@ export const SENEGAL_2NDE: ProgrammePays = {
         ...m("6e", "decimal_arrondir"),
         ...m("4e", "ordre_estimer"),
       ],
-      note: "Manquent le centre et le rayon d'un intervalle, l'encadrement d'une somme ou d'un produit, la partie entière.",
+      note: "Manquent le centre et le rayon d'un intervalle, l'encadrement d'une somme ou d'un produit.",
     },
     {
       code: "AN 3", domaine: "Activités numériques",
       texte: "Fonctions, généralités : définition, ensemble de définition, restriction, sens de variation, taux de variation, extremum, parité, composée de deux fonctions, représentation graphique et changement d'origine.",
       couverture: "partielle",
       micros: [
-        ...m("seconde", "fonction_vocabulaire", "fonction_domaine", "fonction_image_formule", "fonction_antecedent", "fonction_tableau_graphique", "fonction_resolution_graphique", "variation_tableau", "variation_croissance", "variation_extremum"),
-        ...m("premiere-spe", "der_taux"),
+        ...m("seconde", "fonction_vocabulaire", "fonction_domaine", "fonction_image_formule", "fonction_antecedent", "fonction_tableau_graphique", "fonction_resolution_graphique", "variation_tableau", "variation_croissance", "variation_extremum", "reference_carre"),
+        ...m("premiere-spe", "der_taux", "trig_parite"),
       ],
-      note: "Manquent la PARITÉ (lien avec la symétrie de la courbe), la COMPOSÉE f ∘ g et le changement d'origine.",
+      note: "Manquent la COMPOSÉE f ∘ g et le changement d'origine.",
     },
     {
       code: "AN 4", domaine: "Activités numériques",
@@ -184,7 +182,7 @@ export const SENEGAL_2NDE: ProgrammePays = {
         ...m("seconde", "signes_premier_degre", "signes_produit", "signes_quotient", "fonction_domaine"),
         ...m("premiere-spe", "sd_factorisation"),
       ],
-      note: "Manquent la factorisation d'un polynôme de degré 3 ou 4 par (x − a), la méthode de Horner et la division euclidienne.",
+      note: "Manquent la factorisation d'un polynôme de degré 3 ou 4 par (x − a), la méthode de Horner, la division euclidienne et la simplification d'une fraction rationnelle.",
     },
     {
       code: "AN 8", domaine: "Activités numériques",
@@ -199,14 +197,14 @@ export const SENEGAL_2NDE: ProgrammePays = {
     {
       code: "ST 1", domaine: "Statistique",
       texte: "Statistique descriptive : diagrammes cumulatifs, histogramme, mode, classe modale, moyenne, médiane, quartiles (graphiquement et par le calcul) ; variance, écart-type, interprétation.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("seconde", "stat_lire_serie", "stat_frequence", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_interquartile", "stat_ecart_type", "stat_interpreter", "stat_histogramme", "stat_polygone_cumule", "stat_mediane_estimee"),
-        ...m("3e", "stat_classe_modale_centre"),
+        ...m("3e", "stat_classe_modale_centre", "stat_lire_tableau"),
         ...m("4e", "stat_histogramme_lire"),
         ...m("premiere", "auto_stat_moyenne"),
       ],
-      note: "Séries en classes, histogramme, classe modale et courbes cumulées couverts ; le mode d'une série non groupée n'a pas de micro.",
+      note: "Le mode se travaille comme « la réponse la plus fréquente » (stat_lire_tableau 3e), sans le mot « mode ».",
     },
   ],
 };
@@ -224,7 +222,7 @@ export const SENEGAL_1RE: ProgrammePays = {
       texte: "Fonctions associées : courbes de x ↦ f(x − a), f(x) + b, |f(x)|, f(|x|) ; centre et axe de symétrie d'une courbe ; courbe de la réciproque d'une bijection.",
       couverture: "partielle",
       micros: m("terminale-spe", "reciproque_courbe"),
-      note: "La courbe de la réciproque est couverte ; micros à écrire : tracer |f| et f(|x|) à partir de la courbe de f, démontrer un centre de symétrie (f(a + x) + f(a − x) = 2b).",
+      note: "La courbe de la réciproque est couverte ; micros à écrire : translater une courbe (f(x − a), f(x) + b), tracer |f| et f(|x|) à partir de la courbe de f, démontrer un centre de symétrie (f(a + x) + f(a − x) = 2b).",
     },
     {
       code: "AN 2", domaine: "Analyse",
@@ -244,7 +242,7 @@ export const SENEGAL_1RE: ProgrammePays = {
       code: "AN 4", domaine: "Analyse",
       texte: "Dérivation : nombre dérivé, à gauche et à droite, demi-tangentes et point anguleux, tangente, approximation affine, dérivées usuelles, somme, produit, quotient, x ↦ f(ax + b).",
       couverture: "complete",
-      micros: m("premiere-spe", "der_taux", "der_nombre_derive", "der_definition", "der_tangente", "der_valeur_absolue", "der_usuelles", "der_operations", "der_quotient", "der_composee_affine"),
+      micros: m("premiere-spe", "der_taux", "der_nombre_derive", "der_definition", "der_tangente", "der_interpreter", "der_valeur_absolue", "der_usuelles", "der_operations", "der_quotient", "der_composee_affine"),
     },
     {
       code: "AN 5", domaine: "Analyse",
@@ -263,7 +261,7 @@ export const SENEGAL_1RE: ProgrammePays = {
         ...m("premiere-spe", "var_tableau", "var_position_relative", "graph1s_resoudre_equation", "graph1s_resoudre_inequation", "trig_courbes", "trig_periodicite"),
         ...m("terminale-spe", "limite_fonction_asymptote"),
       ],
-      note: "Manquent les ASYMPTOTES OBLIQUES, l'étude des fonctions irrationnelles et la discussion graphique d'une équation f(x) = m.",
+      note: "Manquent les ASYMPTOTES OBLIQUES, l'étude des fonctions irrationnelles et de la fonction tangente, et la discussion graphique d'une équation f(x) = m.",
     },
     {
       code: "AN 7", domaine: "Analyse",
@@ -291,7 +289,7 @@ export const SENEGAL_1RE: ProgrammePays = {
       texte: "Séries classées d'inégales amplitudes ; séries à deux variables : effectifs et fréquences marginaux et conditionnels, nuage de points, point moyen, ajustement à main levée et par la méthode de Mayer.",
       couverture: "partielle",
       micros: m("premiere", "info_tab_frequence_marginale", "info_tab_frequence_conditionnelle", "info_nuage_construire", "info_point_moyen_calculer", "info_point_moyen_droite", "info_ajust_determiner", "info_ajust_equation"),
-      note: "Renvois à l'enseignement scientifique de 1re (tronc commun). La méthode de MAYER (deux sous-nuages, deux points moyens) n'a pas de micro propre.",
+      note: "Renvois à l'enseignement scientifique de 1re (tronc commun). Les classes d'inégales amplitudes et la méthode de MAYER (deux sous-nuages, deux points moyens) n'ont pas de micro propre.",
     },
 
     {
@@ -306,7 +304,7 @@ export const SENEGAL_1RE: ProgrammePays = {
       texte: "Équations et inéquations : irrationnelles (√f(x) = ax + b, √f(x) ≤ g(x)), bicarrées, avec un paramètre réel, se ramenant au second degré.",
       couverture: "partielle",
       micros: m("premiere-spe", "sd_discriminant", "sd_racines", "sd_inequation", "sd_forme_adaptee"),
-      note: "Manquent les équations IRRATIONNELLES (élever au carré, vérifier), les bicarrées (poser X = x²) et la discussion selon un paramètre.",
+      note: "Les bicarrées (poser X = x²) sont dans sd_racines ; manquent les équations IRRATIONNELLES (élever au carré, vérifier) et la discussion selon un paramètre.",
     },
     {
       code: "AL 3", domaine: "Algèbre",
@@ -341,14 +339,14 @@ export const SENEGAL_1RE: ProgrammePays = {
         ...m("premiere-spe", "trig_grand_reel", "trig_valeurs", "trig_angles_associes", "trig_cercle", "trig_formule_addition", "trig_formule_duplication", "trig_equation_generale"),
         ...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"),
       ],
-      note: "Formules d'addition, de duplication, équations et inéquations couvertes ; manquent les angles ORIENTÉS et l'équation a cos x + b sin x + c = 0.",
+      note: "Formules d'addition, de duplication, équations (dont a cos x + b sin x = c) et inéquations couvertes ; manquent les angles ORIENTÉS.",
     },
     {
       code: "GE 4", domaine: "Géométrie",
       texte: "Transformations : composée de deux transformations planes (rotations de même centre, symétries orthogonales, homothétie et rotation de même centre), expression analytique, isométries ayant un point invariant.",
-      couverture: "absente",
-      micros: [],
-      note: "Le coach s'arrête aux transformations de 3e : composées et expressions analytiques à écrire.",
+      couverture: "partielle",
+      micros: m("4e", "sym_transformation_defi"),
+      note: "Seules deux rotations de même centre se composent (★5) ; manquent deux symétries d'axes distincts, homothétie et rotation, l'expression analytique et les isométries à point invariant.",
     },
     {
       code: "GE 5", domaine: "Géométrie",
@@ -372,28 +370,28 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "AN 1", domaine: "Analyse",
       texte: "Continuité et fonction réciproque : théorème des valeurs intermédiaires, valeur approchée d'un zéro ; réciproque d'une fonction continue strictement monotone (existence, courbe) ; branches infinies, comparaison de limites, limite d'une composée.",
       couverture: "partielle",
-      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "python_seuil", "limite_fonction_operations", "limite_fonction_asymptote", "reciproque_bijection", "reciproque_expression", "reciproque_courbe"),
-      note: "La fonction réciproque est couverte ; manquent les branches paraboliques.",
+      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "limite_fonction_operations", "limite_fonction_asymptote", "reciproque_bijection", "reciproque_expression", "reciproque_courbe"),
+      note: "La fonction réciproque est couverte ; manquent le calcul d'une valeur approchée d'un zéro, les branches paraboliques, la comparaison de limites et la limite d'une composée pour les fonctions.",
     },
     {
       code: "AN 2", domaine: "Analyse",
       texte: "Dérivées et primitives : dérivée d'une composée et d'une réciproque, dérivées successives, point d'inflexion ; primitives des fonctions usuelles, de (g' ∘ f)·f' et fⁿ·f' ; inégalité des accroissements finis.",
       couverture: "partielle",
       micros: m("terminale-spe", "derivation_formules", "derivation_composee", "convexite_derivee_seconde", "convexite_point_inflexion", "primitive_reconnaitre", "primitive_calculer", "reciproque_derivee"),
-      note: "La dérivée de la réciproque est couverte ; manque l'inégalité des accroissements finis.",
+      note: "La dérivée de la réciproque est couverte ; manquent les primitives de fⁿ·f' et l'inégalité des accroissements finis.",
     },
     {
       code: "AN 3", domaine: "Analyse",
       texte: "Logarithme népérien : primitive de x ↦ 1/x qui s'annule en 1, propriétés algébriques, limites (dont ln(1 + x)/x en 0 et ln(x)/xᵃ en +∞), dérivée, courbe.",
       couverture: "complete",
       micros: m("terminale-spe", "ln_definition", "ln_proprietes", "ln_deriver", "ln_equation_inequation", "ln_limite"),
-      note: "En France, ln est défini comme réciproque de exp : l'ordre est inverse, le contenu est le même. Le logarithme décimal n'a pas de micro.",
+      note: "En France, ln est défini comme réciproque de exp : l'ordre est inverse, le contenu est le même.",
     },
     {
       code: "AN 4", domaine: "Analyse",
       texte: "Exponentielle : réciproque de ln, propriétés, limites (eˣ/xᵃ, xⁿeˣ, (eˣ − 1)/x), dérivée, primitives de (exp ∘ f)·f', courbe.",
       couverture: "complete",
-      micros: m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite"),
+      micros: m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "primitive_calculer"),
     },
     {
       code: "AN 5", domaine: "Analyse",
@@ -426,8 +424,11 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "OD 1", domaine: "Organisation de données",
       texte: "Séries statistiques à deux variables : méthode des moindres carrés, coefficient de corrélation linéaire, droites de régression, prévisions.",
       couverture: "partielle",
-      micros: m("premiere", "info_nuage_construire", "info_point_moyen_calculer", "info_ajust_equation", "info_ajust_interpoler", "info_ajust_extrapoler"),
-      note: "Renvois à l'enseignement scientifique de 1re. Manquent le COEFFICIENT DE CORRÉLATION et les droites de régression par les moindres carrés.",
+      micros: [
+        ...m("premiere", "info_nuage_construire", "info_point_moyen_calculer", "info_ajust_equation", "info_ajust_interpoler", "info_ajust_extrapoler"),
+        ...m("stmg", "statT_mc_principe", "statT_mc_calculer", "statT_mc_comparer"),
+      ],
+      note: "Principe des moindres carrés en Terminale STMG. Manquent le COEFFICIENT DE CORRÉLATION et le calcul des droites de régression.",
     },
     {
       code: "OD 2", domaine: "Organisation de données",

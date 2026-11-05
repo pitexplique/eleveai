@@ -165,7 +165,8 @@ export const SENEGAL_6E: ProgrammePays = {
       texte: "Polygones : triangles (vocabulaire, droites remarquables, triangles particuliers et leurs axes de symétrie) ; parallélogramme, trapèze, rectangle, losange, carré : description, construction.",
       couverture: "complete",
       micros: [
-        ...m("6e", "triangle_nommer", "triangle_sommet_cote", "triangle_type_cote", "triangle_type_angle", "quadrilatere_nommer_vocabulaire", "quadrilatere_identifier_nature", "quadrilatere_lire_propriete"),
+        ...m("6e", "triangle_nommer", "triangle_sommet_cote", "triangle_type_cote", "triangle_type_angle", "quadrilatere_nommer_vocabulaire", "quadrilatere_identifier_nature", "quadrilatere_lire_propriete", "quadrilatere_completer_construire", "sym_axe"),
+        ...m("5e", "triangle_construire"),
         ...m("4e", "triangle_droites", "mediane_triangle"),
       ],
     },
@@ -272,8 +273,9 @@ export const SENEGAL_5E: ProgrammePays = {
     {
       code: "AG 2", domaine: AG,
       texte: "Angles : opposés par le sommet, alternes-internes, alternes-externes, correspondants, intérieurs d'un même côté ; symétrique d'un angle par rapport à un point.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("5e", "angle_paires", "angle_paralleles", "sym_centrale_propriete"),
+      note: "Alternes-internes, correspondants et intérieurs d'un même côté couverts ; manquent les angles alternes-externes.",
     },
     {
       code: "AG 3", domaine: AG,
@@ -363,6 +365,7 @@ export const SENEGAL_4E: ProgrammePays = {
       micros: [
         ...m("4e", "equation_resoudre_simple", "equation_resoudre_reduction", "equation_traduire", "equation_probleme"),
         ...m("3e", "equation_produit_nul"),
+        ...m("seconde", "reference_resoudre"),
       ],
     },
     {
@@ -426,7 +429,10 @@ export const SENEGAL_4E: ProgrammePays = {
       code: "AG 4", domaine: AG,
       texte: "Triangle rectangle : aire, théorème de Pythagore et sa réciproque ; triangle isocèle : reconnaissances.",
       couverture: "complete",
-      micros: m("4e", "pythagore_carre_racine", "pythagore_reconnaitre", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_reciproque_conclure", "pythagore_rediger", "aire_triangle"),
+      micros: [
+        ...m("4e", "pythagore_carre_racine", "pythagore_reconnaitre", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_reciproque_conclure", "pythagore_rediger", "aire_triangle"),
+        ...m("5e", "triangle_nature"),
+      ],
     },
     {
       code: "AG 5", domaine: AG,
@@ -456,12 +462,12 @@ export const SENEGAL_4E: ProgrammePays = {
     {
       code: "AG 8", domaine: AG,
       texte: "Géométrie dans l'espace : positions relatives de droites et de plans ; section d'une sphère par un plan.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "vision_section"),
         ...m("3e", "section_reconnaitre", "volume_section", "section_sphere"),
+        ...m("terminale-spe", "espace_position_relative"),
       ],
-      note: "La section d'une sphère est couverte ; manquent les positions relatives dans l'espace (droites coplanaires ou non, droite et plan, deux plans).",
     },
     {
       code: "AG 9", domaine: AG,
@@ -490,9 +496,9 @@ export const SENEGAL_3E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("3e", "entier_racine_comprendre", "entier_racine_carre_parfait", "entier_racine_calculer", "entier_racine_encadrer"),
-        ...m("seconde", "racine_produit", "racine_simplification", "racine_somme", "reels_ensembles", "valeur_absolue_distance"),
+        ...m("seconde", "racine_produit", "racine_simplification", "racine_somme", "reels_ensembles", "valeur_absolue_distance", "ir_difference_carres"),
       ],
-      note: "Manque « rendre rationnel le dénominateur » par l'expression conjuguée (1/(√3 − 1)) : même trou qu'au Maroc.",
+      note: "Manquent √(a/b) = √a ÷ √b, la comparaison de réels avec radicaux (2√3 et 3√2) et « rendre rationnel le dénominateur » par l'expression conjuguée (1/(√3 − 1)).",
     },
     {
       code: "AN 2", domaine: AN,
@@ -535,8 +541,9 @@ export const SENEGAL_3E: ProgrammePays = {
       micros: [
         ...m("3e", "affine_reconnaitre", "affine_coeff_directeur", "affine_ordonnee_origine", "affine_expression", "affine_graphique", "affine_probleme"),
         ...m("seconde", "variation_croissance", "reference_valeur_absolue"),
+        ...m("premiere", "lin_affine_par_morceaux"),
       ],
-      note: "Manquent les fonctions affines PAR INTERVALLES (tarifs par tranches, |ax + b| tracée en deux morceaux).",
+      note: "Les tarifs par tranches se lisent et se calculent (lin_affine_par_morceaux) ; manque le tracé d'une fonction par intervalles (|ax + b| en deux morceaux).",
     },
 
     {
@@ -549,9 +556,11 @@ export const SENEGAL_3E: ProgrammePays = {
     {
       code: "AG 2", domaine: AG,
       texte: "Angles inscrits : angle inscrit, angle au centre associé, arc intercepté ; angles inscrits interceptant le même arc ; triangle rectangle et cercle ; longueur d'un arc.",
-      couverture: "partielle",
-      micros: m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc", "triangle_demi_cercle"),
-      note: "Angles inscrits et triangle rectangle couverts ; manque la longueur d'un arc.",
+      couverture: "complete",
+      micros: [
+        ...m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc", "triangle_demi_cercle"),
+        ...m("premiere-spe", "trig_arc"),
+      ],
     },
     {
       code: "AG 3", domaine: AG,
