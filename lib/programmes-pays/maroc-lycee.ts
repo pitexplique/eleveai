@@ -136,7 +136,7 @@ export const MAROC_TC: ProgrammePays = {
       texte: "Systèmes de deux équations du premier degré à deux inconnues : combinaison linéaire, substitution, déterminant ; lien avec la position de deux droites.",
       couverture: "partielle",
       micros: m("seconde", "droite_systeme", "droite_intersection"),
-      note: "La méthode du déterminant (règle de Cramer) n'a pas de micro.",
+      note: "Nos micros résolvent par substitution ; manquent la combinaison linéaire et la méthode du déterminant (règle de Cramer).",
     },
     {
       code: "I-5d", domaine: NB,
@@ -180,7 +180,7 @@ export const MAROC_TC: ProgrammePays = {
       texte: "Produit scalaire : définition par projection, expression trigonométrique, orthogonalité ; relations métriques du triangle rectangle, théorème de la médiane, théorème d'Al-Kashi.",
       couverture: "partielle",
       micros: m("premiere-spe", "ps_projection", "ps_norme_angle", "ps_proprietes", "ps_orthogonalite", "ps_alkashi", "ps_angle_longueur"),
-      note: "Au Maroc dès le TC (en France en 1re spé). Manque le théorème de la médiane (AB² + AC² = 2AI² + BC²/2).",
+      note: "Au Maroc dès le TC (en France en 1re spé). Manquent le théorème de la médiane (AB² + AC² = 2AI² + BC²/2) et les relations métriques du triangle rectangle (AH² = HB × HC…).",
     },
     // ── III. Géométrie dans l'espace ────────────────────────────────────────
     {
@@ -201,8 +201,8 @@ export const MAROC_TC: ProgrammePays = {
       code: "IV-2", domaine: FN,
       texte: "Fonction paire, fonction impaire, et leur interprétation graphique.",
       couverture: "partielle",
-      micros: m("premiere-spe", "trig_parite"),
-      note: "Seule la parité de cos et sin est travaillée : manque la parité d'une fonction quelconque (f(−x) = ±f(x), symétrie de la courbe).",
+      micros: [...m("premiere-spe", "trig_parite"), ...m("seconde", "reference_carre", "reference_inverse", "reference_cube")],
+      note: "Seule la parité de cos, sin et des fonctions de référence est travaillée : manque la parité d'une fonction quelconque (f(−x) = ±f(x), symétrie de la courbe).",
     },
     {
       code: "IV-3", domaine: FN,
@@ -245,8 +245,9 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "V-4", domaine: TR,
       texte: "Lignes trigonométriques des angles associés : −x, π − x, π + x, π/2 − x, π/2 + x.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("premiere-spe", "trig_angles_associes"),
+      note: "Couverts : −x, π − x et π + x ; manquent π/2 − x et π/2 + x.",
     },
     {
       code: "V-5", domaine: TR,
@@ -279,7 +280,7 @@ export const MAROC_TC: ProgrammePays = {
       code: "VI-1", domaine: ST,
       texte: "Statistiques : effectifs et fréquences (simples et cumulés), représentations graphiques, moyenne, médiane, mode, variance et écart type.",
       couverture: "complete",
-      micros: m("seconde", "stat_lire_serie", "stat_frequence", "stat_moyenne", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_type", "stat_interpreter"),
+      micros: m("seconde", "stat_lire_serie", "stat_frequence", "stat_polygone_cumule", "stat_moyenne", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_type", "stat_interpreter"),
       note: "Page 10 du livret absente de l'extrait diffusé : contenu d'après le résumé de mathtutor.ma, à revérifier.",
     },
   ],
@@ -310,14 +311,15 @@ export const MAROC_1BAC: ProgrammePays = {
       code: "GP-2", domaine: GP,
       texte: "Rotation : définition par centre et angle, rotation réciproque ; conservation des distances, des angles orientés et du barycentre ; images d'une droite, d'un segment, d'un cercle.",
       couverture: "partielle",
-      micros: [...m("4e", "sym_rotation"), ...m("3e", "sym_symetrie_translation_rotation")],
-      note: "Nos micros de collège construisent l'image ; manquent l'angle orienté et les propriétés de conservation.",
+      micros: [...m("4e", "sym_rotation", "sym_transformation_propriete"), ...m("3e", "sym_symetrie_translation_rotation")],
+      note: "Nos micros de collège construisent l'image et conservent longueurs et angles ; manquent l'angle orienté, la rotation réciproque et la conservation du barycentre.",
     },
     {
       code: "GP-3a", domaine: GP,
       texte: "Expression analytique du produit scalaire en repère orthonormé, de la norme et de la distance ; cos et sin d'un angle par le produit scalaire.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("premiere-spe", "ps_coordonnees", "ps_norme", "ps_angle_longueur"),
+      note: "Le cosinus d'un angle est couvert ; manque le sinus d'un angle de vecteurs (par le déterminant).",
     },
     {
       code: "GP-3b", domaine: GP,
@@ -381,7 +383,7 @@ export const MAROC_1BAC: ProgrammePays = {
       texte: "Équations et inéquations trigonométriques se ramenant aux équations fondamentales ; lecture des solutions sur le cercle.",
       couverture: "partielle",
       micros: [...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"), ...m("premiere-spe", "trig_equation_generale")],
-      note: "Les équations fondamentales et leurs inéquations sont couvertes ; restent les formes qui s'y ramènent.",
+      note: "Les équations, y compris celles qui se ramènent aux fondamentales, sont couvertes ; restent les inéquations qui s'y ramènent.",
     },
     {
       code: "AA-4a", domaine: FN,
@@ -398,14 +400,14 @@ export const MAROC_1BAC: ProgrammePays = {
       texte: "Composée de deux fonctions et sa monotonie ; variations de f + λ et λf ; courbes de x ↦ √(x + a) et x ↦ ax³.",
       couverture: "partielle",
       micros: [...m("seconde", "reference_racine", "reference_cube"), ...m("premiere-spe", "der_composee_affine")],
-      note: "Manque la composée g∘f et la monotonie d'une composée (sans dérivée).",
+      note: "Manquent la composée g∘f, la monotonie d'une composée (sans dérivée) et les variations de f + λ et λf.",
     },
     {
       code: "AA-4c", domaine: FN,
       texte: "Limites : fonctions de référence en 0 et en ±∞, limites finies et infinies, opérations, limites à gauche et à droite, polynômes, rationnelles, irrationnelles ; limites trigonométriques sin x / x, tan x / x, (1 − cos x)/x² ; limites et ordre.",
       couverture: "partielle",
       micros: m("terminale-spe", "limite_fonction_reference", "limite_fonction_operations", "limite_fonction_infini", "limite_fonction_point", "limite_fonction_asymptote"),
-      note: "Au Maroc en 1re, chez nous en Terminale. Manquent les limites trigonométriques usuelles (sin x / x…) et les limites à gauche et à droite comme exercice à part.",
+      note: "Au Maroc en 1re, chez nous en Terminale. Manquent les limites trigonométriques usuelles (sin x / x…) et les théorèmes de comparaison pour les fonctions (limites et ordre).",
     },
     {
       code: "AA-4d", domaine: FN,
@@ -420,7 +422,7 @@ export const MAROC_1BAC: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("premiere-spe", "der_usuelles", "der_puissance", "der_operations", "der_quotient", "der_composee_affine"),
-        ...m("terminale-spe", "derivation_composee"),
+        ...m("terminale-spe", "derivation_composee", "convexite_derivee_seconde"),
       ],
     },
     {
@@ -465,14 +467,15 @@ export const MAROC_2BAC: ProgrammePays = {
       texte: "Suites récurrentes u(n+1) = a·u(n) + b, homographiques, u(n+1) = f(u(n)) (limite solution de f(x) = x), suites v(n) = f(u(n)) ; limites de aⁿ et de n^α.",
       couverture: "partielle",
       micros: [...m("premiere-spe", "suite_auxiliaire"), ...m("terminale-spe", "suite_recurrence_preuve", "limite_suite_monotone_bornee", "limite_suite_defi")],
-      note: "Manquent les suites homographiques et la recherche de la limite comme point fixe de f.",
+      note: "Manque l'étude des suites homographiques ; la limite comme point fixe de f n'apparaît que dans quelques questions de défi.",
     },
     // ── Analyse : fonctions ─────────────────────────────────────────────────
     {
       code: "A2-1", domaine: AN,
       texte: "Continuité en un point, à droite, à gauche, sur un intervalle ; image d'un intervalle ; théorème des valeurs intermédiaires ; dichotomie.",
-      couverture: "complete",
-      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "python_seuil"),
+      couverture: "partielle",
+      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger"),
+      note: "Manquent la continuité en un point, à droite et à gauche, l'image d'un intervalle et la dichotomie.",
     },
     {
       code: "A2-2", domaine: AN,
@@ -494,7 +497,7 @@ export const MAROC_2BAC: ProgrammePays = {
       code: "A2-4", domaine: AN,
       texte: "Dérivée d'une composée ; études de fonctions rationnelles, trigonométriques et irrationnelles : branches infinies, concavité, éléments de symétrie, résolution graphique.",
       couverture: "partielle",
-      micros: m("terminale-spe", "derivation_composee", "derivation_variation", "derivation_defi", "limite_fonction_asymptote", "convexite_derivee_seconde", "convexite_point_inflexion"),
+      micros: m("terminale-spe", "derivation_composee", "derivation_variation", "derivation_defi", "trigo_etude_fonction", "limite_fonction_asymptote", "convexite_derivee_seconde", "convexite_point_inflexion"),
       note: "Manquent les branches paraboliques, les asymptotes obliques, les centres et axes de symétrie d'une courbe.",
     },
     {
@@ -507,7 +510,7 @@ export const MAROC_2BAC: ProgrammePays = {
       code: "A2-6", domaine: AN,
       texte: "Logarithme népérien (primitive de 1/x qui s'annule en 1) : propriétés, étude, dérivée logarithmique, primitives de u'/u, limites fondamentales.",
       couverture: "complete",
-      micros: m("terminale-spe", "ln_definition", "ln_proprietes", "ln_deriver", "ln_equation_inequation", "ln_limite", "ln_defi"),
+      micros: m("terminale-spe", "ln_definition", "ln_proprietes", "ln_deriver", "ln_equation_inequation", "ln_limite", "ln_defi", "primitive_calculer"),
       note: "En France, ln vient après l'exponentielle (réciproque) ; au Maroc, avant (primitive).",
     },
     {
@@ -521,7 +524,7 @@ export const MAROC_2BAC: ProgrammePays = {
       code: "A2-8", domaine: AN,
       texte: "Exponentielle népérienne (réciproque de ln) : propriétés, étude, nombre e, primitives de u'·e^u, limites fondamentales.",
       couverture: "complete",
-      micros: m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "exp_defi"),
+      micros: m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "exp_defi", "primitive_calculer"),
     },
     {
       code: "A2-9", domaine: AN,
@@ -548,7 +551,7 @@ export const MAROC_2BAC: ProgrammePays = {
       code: "A3-1", domaine: AN,
       texte: "Intégrale d'une fonction continue sur un segment, définie par une primitive ; relation de Chasles, linéarité, intégrale et ordre, valeur moyenne.",
       couverture: "complete",
-      micros: m("terminale-spe", "integrale_calculer", "integrale_valeur_moyenne", "integrale_defi"),
+      micros: m("terminale-spe", "integrale_calculer", "integrale_proprietes", "integrale_encadrer", "integrale_valeur_moyenne", "integrale_defi"),
     },
     {
       code: "A3-2", domaine: AN,
@@ -559,9 +562,8 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "A3-3", domaine: AN,
       texte: "Aire d'un domaine limité par deux courbes et deux droites parallèles à l'axe des ordonnées.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: m("terminale-spe", "integrale_aire"),
-      note: "Manque l'aire entre deux courbes (intégrale de f − g).",
     },
     {
       code: "A3-4", domaine: AN,
@@ -579,9 +581,8 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "G-2", domaine: AL,
       texte: "Vecteur normal à un plan, équation cartésienne d'un plan par un point et un vecteur normal, droite orthogonale à un plan, distance d'un point à un plan.",
-      couverture: "partielle",
-      micros: m("terminale-spe", "ps_espace_plan_normal", "espace_plan_equation", "espace_droite_parametrique"),
-      note: "Manque la formule de la distance d'un point à un plan.",
+      couverture: "complete",
+      micros: m("terminale-spe", "ps_espace_plan_normal", "espace_plan_equation", "espace_droite_parametrique", "ps_espace_norme_distance"),
     },
     {
       code: "G-3", domaine: AL,

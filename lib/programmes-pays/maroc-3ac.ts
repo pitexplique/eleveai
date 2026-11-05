@@ -51,7 +51,7 @@ export const MAROC_3AC: ProgrammePays = {
       texte: "Racines carrées : racine carrée d'un positif, (√a)² et √(a²), x² = a ; valeurs approchées à la calculatrice ; √(ab) = √a × √b, √(a/b) = √a / √b ; rendre rationnel le dénominateur dans des cas simples.",
       couverture: "partielle",
       micros: [
-        ...m("3e", "entier_racine_comprendre", "entier_racine_calculer", "entier_racine_carre_parfait", "entier_racine_encadrer"),
+        ...m("3e", "entier_racine_comprendre", "entier_racine_calculer", "entier_racine_carre_parfait", "entier_racine_encadrer", "equation_carre_egal_a"),
         ...m("seconde", "racine_carre_de_a2", "racine_produit", "racine_simplification"),
       ],
       note: "Manquent le quotient √(a/b) = √a / √b et « rendre rationnel le dénominateur » (3/√2 = 3√2/2) : classiques au Maroc, absents du programme français.",
@@ -119,8 +119,9 @@ export const MAROC_3AC: ProgrammePays = {
     {
       code: "S1-9", domaine: AG,
       texte: "Triangles isométriques (les trois cas) et triangles semblables (côtés proportionnels, cas de similitude).",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("4e", "triangle_egalite", "triangle_semblable"),
+      note: "Manquent les cas de similitude par les angles : notre micro ne compare que les longueurs des côtés.",
     },
 
     // ── Semestre 2 ──────────────────────────────────────────────────────────
@@ -137,16 +138,16 @@ export const MAROC_3AC: ProgrammePays = {
     {
       code: "S2-2", domaine: AN,
       texte: "Système de deux équations du premier degré à deux inconnues : résolution algébrique (combinaison, substitution) et graphique ; mise en équation de situations.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: m("seconde", "droite_systeme", "droite_intersection"),
-      note: "En seconde chez nous.",
+      note: "En seconde chez nous, par substitution et graphiquement ; manquent la méthode par combinaison et la mise en équation de situations.",
     },
     {
       code: "S2-3", domaine: GS,
       texte: "Fonctions linéaires : situation de proportionnalité traduite par f(x) = ax ; image, nombre d'image connue, par le calcul et sur la représentation graphique ; formule à partir d'un nombre et de son image ou d'un point.",
       couverture: "complete",
       micros: [
-        ...m("3e", "fonction_affine_lineaire", "affine_reconnaitre", "affine_calcul_image", "affine_coeff_directeur", "affine_graphique"),
+        ...m("3e", "fonction_affine_lineaire", "affine_reconnaitre", "affine_calcul_image", "fonction_antecedent", "affine_coeff_directeur", "affine_graphique"),
         ...m("4e", "prop_graphique"),
       ],
     },
@@ -162,9 +163,11 @@ export const MAROC_3AC: ProgrammePays = {
     {
       code: "S2-5", domaine: GS,
       texte: "Statistiques : médiane et mode ; moyenne arithmétique à la calculatrice ; représentations graphiques usuelles ; comparer deux séries.",
-      couverture: "partielle",
-      micros: m("3e", "stat_lire_tableau", "stat_lire_graphique", "stat_moyenne", "stat_mediane", "stat_interpreter"),
-      note: "Manque le MODE (valeur de plus grand effectif), que le Maroc demande explicitement.",
+      couverture: "complete",
+      micros: [
+        ...m("3e", "stat_lire_tableau", "stat_lire_graphique", "stat_moyenne", "stat_mediane", "stat_interpreter"),
+        ...m("seconde", "stat_lire_serie"),
+      ],
     },
     {
       code: "S2-6", domaine: AG,

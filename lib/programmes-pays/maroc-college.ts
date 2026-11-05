@@ -59,6 +59,7 @@ export const MAROC_1AC: ProgrammePays = {
         ...m("cm2", "calcul_priorite"),
         ...m("6e", "decimal_additionner", "decimal_multiplier", "entier_strategie_mentale"),
         ...m("5e", "litteral_distributivite"),
+        ...m("4e", "litteral_factoriser_simple"),
       ],
     },
     {
@@ -175,13 +176,13 @@ export const MAROC_1AC: ProgrammePays = {
       code: "S2-5", domaine: AG,
       texte: "Quadrilatères particuliers : losange, rectangle, carré ; centre et axes de symétrie de figures simples.",
       couverture: "complete",
-      micros: [...m("5e", "para_particuliers"), ...m("6e", "quadrilatere_identifier_nature", "sym_axe")],
+      micros: [...m("5e", "para_particuliers", "para_diagonales"), ...m("6e", "quadrilatere_identifier_nature", "sym_axe")],
     },
     {
       code: "S2-6", domaine: AG,
       texte: "Deux parallèles et une sécante : angles alternes-internes et correspondants ; angles adjacents, complémentaires, opposés par le sommet ; démontrer que la somme des angles d'un triangle vaut 180°.",
       couverture: "complete",
-      micros: m("5e", "angle_paralleles", "angle_paires"),
+      micros: [...m("5e", "angle_paralleles", "angle_paires"), ...m("6e", "angle_relations")],
     },
     {
       code: "S2-7", domaine: AG,
@@ -262,11 +263,12 @@ export const MAROC_2AC: ProgrammePays = {
     {
       code: "S1-2", domaine: AN,
       texte: "Puissances à exposant entier relatif : aᵐ × aⁿ = aᵐ⁺ⁿ, (ab)ⁿ = aⁿbⁿ, (a/b)ⁿ = aⁿ/bⁿ ; exposants négatifs ; écriture scientifique et ordre de grandeur.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: [
         ...m("4e", "puissance_calcul", "puissance_exposant_negatif", "puissance_dix", "puissance_notation_scientifique", "ordre_estimer"),
         ...m("seconde", "puiss_produit_quotient"),
       ],
+      note: "Manquent (ab)ⁿ = aⁿbⁿ et (a/b)ⁿ = aⁿ/bⁿ : nos micros ne travaillent que les puissances de même base.",
     },
     {
       code: "S1-3", domaine: AG,
