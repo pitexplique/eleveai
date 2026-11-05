@@ -189,3 +189,33 @@
   - short : « 10⁵VS2 » collés (VS descendu), trait parasite dans les gants, pointillés qui barraient « Écrits en entier », question cachée sous les cartes (bug de ligne de base corrigé), réponse qui touchait Ti-Margo (cartes réduites, « Réponse B » porté par la carte allumée), « Qui gagne ? » sur le VS et « 2 000 000 » au bord de la carte.
 - Soucis restants : aucun défaut visuel. Rien de commité ; pas de miniature, de manifeste ni de R2.
 - Contrôle de la session principale (05/11, 1 h) : planches paysage + short regardées. Paysage, écran « La règle » : le cercle orange autour de l'exposant n de « a × 10ⁿ » mordait sur le « 0 » → remplacé par une flèche orange qui pointe l'exposant ; paysage RE-RENDUE en HD (audit 60 im/s = 0, `verifier-bords-video.py` = 0 instants). Short : rien à corriger.
+
+## Épisode 10 « enchainer » — PAYSAGE 2de (orange) et SHORT 2de (blanche) (05/11)
+- Fichiers : `manim/scripts/4e/puissance_enchainer.py` (base `PuissanceEnchainerBase` + `PuissanceEnchainer2de`), `puissance_enchainer_short.py` (`PuissanceEnchainerShort`), marques `puissance_enchainer[_short]_marques.json` (+ `.cues.tsv`), WAV `public/sons/2de-puissance-enchainer[-short]/` (débit −6). Outils importés sans modification : `6e/prop_commun.py`, `OutilsNotation` / `puiss` / `T` de `puissance_notation_scientifique.py`, `fracm` / `rangee` / `expo2` / `eg` de `puissance_produit_quotient.py`. Voix : AUCUN changement.
+- Marques : `marques_dump.ps1` puis conversion PAR PAIRES (copie corrigée de `cues2marques.py` dans mon dossier temporaire) : les « 7 puissance », « 2 puissance », « moins » répétés gardent chacun leur instant ; `scripts/cues2marques.py` non modifié.
+- Sorties : `manim/sorties/seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer.mp4` (3:38, 1920 × 1080) et `…/eleveai-maths-seconde-puissance-enchainer-short.mp4` (1:05, 1080 × 1920). Media : `manim/scripts/4e/media-puiss-10-seconde`, `media-puiss-10-short`.
+- Ceintures : paysage ORANGE, short BLANCHE (échelle entière sous le titre). Identité « Maths 2de — EleveAI ».
+- Micro : 2de `puiss_expression_composee` (notion `puissances_2de`, B = (7⁴ × 7⁻⁵) / (7³)⁴ du contrôle commun). Centres : paysage `transports`, `avions` ; short `avions`, `transports`. Métier : une pilote de ligne et sa check-list avant le décollage.
+- Dessins de la paysage :
+  - 00 une longue rangée de « puissances » schématiques (carré bleu + petit carré orange) qui se fond en UNE seule, exposant « ? » orange ;
+  - 01 la pilote (casquette à galon, ailes dorées), sa planchette « Check-list » cochée ligne à ligne (une étape à la fois / dans l'ordre / sans en sauter) ; l'avion roule à chaque coche puis décolle au « on fait pareil » ;
+  - 02 B posé au mot (parenthèse et exposant extérieur au « le tout puissance 4 »), le but encadré « On veut : B = 7ⁿ » ;
+  - 03 la check-list à droite : 3 cartes numérotées (puissances de puissances (aᵐ)ⁿ = aᵐˣⁿ, produits, quotient) ;
+  - 04-05-06 une étape par ligne : la carte de l'étape s'allume en jaune, sa règle grandit puis rétrécit, le calcul des exposants s'écrit À CÔTÉ en orange (3 × 4 = 12 ; 4 + (−5) = −1 ; −1 − 12 = −13), la ligne suivante DESCEND de la précédente (copie qui glisse), pastille ①②③ à gauche, la carte se coche en vert ; 7⁻¹³ encadré en vert et le but devient « B = 7⁻¹³ » ;
+  - 07 le piège sur une droite graduée −14 … 1 : départ à −1, arc orange « 12 vers la gauche », 11 et −11 barrés (point rouge en −11), −13 vert encadré ; « Écris le calcul des exposants à côté » + −1 − 12 = −13 ;
+  - 08 défi C = ((5²)³ × 5⁻⁴) / 5³ avec la planchette 1 □ 2 □ 3 □ ; 08b correction en trois lignes qui descendent (2 × 3 = 6 ; 6 + (−4) = 2 ; 2 − 3 = −1), check-list cochée, C = 5⁻¹ encadré ;
+  - 09 « Ce que tu as appris » titre en haut, centré : l'ordre 1-2-3 avec les trois règles, écrire les exposants à côté, vérifier les signes moins.
+- Short « La check-list » : en haut une piste, l'avion et trois balises 1, 2, 3 ; en bas, une ligne par étape portant le même numéro que la balise : (2³)² = 2⁶, 2⁶ × 2⁴ = 2¹⁰, 2¹⁰ ÷ 2⁷ = 2³, puis 2³ = 8 encadré ; à chaque résultat dit, l'avion roule jusqu'à sa balise qui s'allume en vert ; au « 8 ! » il décolle. Question-pause 3 s, puis (3⁴)² ÷ 3⁸ = 3^? « Réponds en commentaire ! », puis la fin standard.
+- Paysage, questions (t mesuré au rendu HD = début de l'écran « Question ! ») :
+```json
+[{"t": "01:20", "question": "(2⁵ × 2³) ÷ 2⁶ ?", "choix": ["2²", "2⁹", "2¹⁴"], "reponse": 0, "explication": "5 + 3 = 8, puis 8 − 6 = 2 : 2²."},
+ {"t": "02:04", "question": "3⁻² ÷ 3⁴ ?", "choix": ["3²", "3⁻⁶", "3⁻²"], "reponse": 1, "explication": "−2 − 4 = −6 : 3⁻⁶."}]
+```
+- Short, questions :
+```json
+[{"t": "00:21", "question": "(10²)³ ÷ 10⁵ ?", "choix": ["1", "10", "100"], "reponse": 1, "explication": "2 × 3 = 6, puis 6 − 5 = 1 : 10¹ = 10."}]
+```
+- Chapitres paysage (ECRAN du rendu HD) : 00:00 Enchaîner les règles · 00:06 La check-list de la pilote de ligne · 00:19 L'expression B · 00:33 La check-list : l'ordre des règles · 00:42 Étape 1 : la puissance de puissance · 00:54 Étape 2 : le produit · 01:06 Étape 3 : le quotient, B = 7⁻¹³ · 01:20 Question : (2⁵ × 2³) ÷ 2⁶ · 01:51 Le piège : −1 − 12 · 02:04 Question : 3⁻² ÷ 3⁴ · 02:33 À toi de jouer · 02:51 Correction · 03:14 Ce que tu as appris · 03:31 Fin.
+- Contrôles : dry runs AUDIT=1 BORDS=1 à 60 im/s : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD, 0 ligne trop large (paysage et short). Restent seulement : « TARD 5 » (chiffre du compte à rebours), les « TARD » du rappel −1 − 12 = −13 écrit à côté (déjà dit) et « 974 » de l'écran de fin commun. `verifier-bords-video.py` : « 0 instants qui touchent un bord » sur les deux mp4.
+- Planches : deux passes basse déf + planches HD (12 images paysage, 8 short, zooms sur les questions, la correction, « Ce que tu as appris »). Corrigé avant le rendu HD : textes plus larges que prévu (check-list, planchette, but « On veut » qui touchait le bord droit), lignes du calcul qui descendaient sous la marge du bas (interlignes resserrés), pilote cachée par la phrase du bas, casquette trop basse, étiquette « 12 vers la gauche » sur l'arc puis collée à « −1 − 12 », exposant « −2−4 » qui perdait son premier « − », « −13 » du but mal posé, règles du bilan trop petites, chiffres « 11 », « −13 », « −2 », « 4 » posés un peu avant la voix, retards de la correction (coche jouée avec la dernière pièce) ; short : « ? » géant de l'accroche, numéros ② collés aux lignes (lignes bornées à 2,85 et décalées), explication de la question qui touchait Ti-Margo (« Réponse B : 10. » porté par la carte B allumée, 3 lignes à taille unique), « Réponds en commentaire ! » borné à 85 % de la carte.
+- Soucis restants : aucun défaut visuel. Rien de commité ; pas de miniature, manifeste ni R2.

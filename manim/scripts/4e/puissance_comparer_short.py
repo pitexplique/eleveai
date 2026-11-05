@@ -38,6 +38,7 @@ XG, XD = -1.1, 1.1      # les deux boxeurs, et leurs colonnes en bas
 Y0 = 0.25               # le sol du ring
 K = 0.5                 # hauteur de jauge pour 1 000 000
 Y_N = 2.0               # les deux nombres en notation scientifique
+YB_REP = [-1.55, -1.95, -2.35, -2.75]  # les lignes de base de la réponse
 
 
 def T(s, fs=34, c=WHITE, audit=True, largeur=3.9):
@@ -86,8 +87,18 @@ class PuissanceComparerShort(OutilsNotation, ShortProp):
         q.move_to(P(0, tete.get_bottom()[1] - 0.45))
         cartes.scale(0.82).next_to(P(0, q.get_y() - 0.35), DOWN, buff=0).set_x(0)
         pause.next_to(cartes, DOWN, buff=0.18).set_x(0)
-        ph.arrange(DOWN, buff=0.2).next_to(cartes, DOWN, buff=0.18).set_x(0)
+        ph.arrange(DOWN, buff=0.12).next_to(cartes, DOWN, buff=0.16).set_x(0)  # 4 lignes, au-dessus de Ti-Margo
         return tete, q, cartes, pause, rebours, ph
+
+    def sur_base(self, lg, i, aligner=True):
+        """La ligne i de la réponse sur sa ligne de base fixe (interlignes égaux,
+        Ti-Margo libre) ; les morceaux posés sur la base de la 1re lettre."""
+        ref = lg[0][0]
+        if aligner:
+            for m in lg[1:]:
+                m.align_to(ref, DOWN)
+        lg.shift(UP * (YB_REP[i] - ref.get_bottom()[1]))
+        return lg
 
     def fin_short(self, voix, a_effacer):
         """La fin du 19/10 (celle des shorts des épisodes 01 à 05)."""
@@ -191,12 +202,14 @@ class PuissanceComparerShort(OutilsNotation, ShortProp):
             sc.play(FadeIn(qm, scale=1.4), run_time=0.2)
 
         def apres(sc):
+            l0 = sc.sur_base(sc.rep_ligne(0, ["Réponse B :"]), 0)  # la voix = l'écrit
+            sc.au("B :", FadeIn(l0[0], shift=UP * 0.12), rt=0.2)
             sc.pieges(0, 2)
-            l1 = sans_audit(sc.rep_ligne(0, ["1 000", "contre", "700."]))
+            l1 = sans_audit(sc.sur_base(sc.rep_ligne(1, ["1 000", "contre", "700."]), 1))
             for m, mot in zip(l1, ("1 000", "contre", "700")):
                 sc.au(mot, FadeIn(m, shift=UP * 0.12), rt=0.25)
-            l2 = sc.rep_ligne(1, ["L'exposant", "3"])
-            l2.add(*sc.rep_ligne(2, ["bat l'exposant", "2."]))
+            l2 = sc.sur_base(sc.rep_ligne(2, ["L'exposant", "3"]), 2)
+            l2.add(*sc.sur_base(sc.rep_ligne(3, ["bat l'exposant", "2."]), 3))
             sc.au("L'exposant", FadeIn(l2[0], shift=UP * 0.12), rt=0.25)
             sc.au("3 bat", FadeIn(l2[1], scale=1.3), Indicate(choix[1].p.expo, color=VERT_OK, scale_factor=1.8), rt=0.3)
             sc.au("bat l'exposant", FadeIn(l2[2], shift=UP * 0.12), rt=0.25)
@@ -204,7 +217,7 @@ class PuissanceComparerShort(OutilsNotation, ShortProp):
             sc.insister(l2[1], 1.5, 0.2)
 
         self.qpause("01q-question", "01r-reponse", ["contre"], choix, plans, 1,
-                    ["1 000 contre 700.", "L'exposant 3", "bat l'exposant 2."], avant=avant, apres=apres)
+                    ["Réponse B :", "1 000 contre 700.", "L'exposant 3", "bat l'exposant 2."], avant=avant, apres=apres)
         self.vider(garder)
 
         # ── 02 : la question en commentaire : 9,9 × 10⁻⁴ contre 1 × 10⁻³ ──

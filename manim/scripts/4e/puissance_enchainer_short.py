@@ -40,6 +40,7 @@ Y_PISTE = 0.72
 XB = [-0.55, 0.45, 1.45]      # les balises 1, 2, 3 sur la piste
 YL = [-0.2, -0.95, -1.7, -2.45]  # les lignes du calcul dans la carte
 XD = -1.62                    # les numéros des lignes (comme les balises)
+YB_REP = [-1.55, -1.95, -2.35, -2.75]  # les lignes de base de la réponse
 
 
 def T(s, fs=34, c=WHITE, audit=True, largeur=3.8):
@@ -66,7 +67,21 @@ class PuissanceEnchainerShort(OutilsNotation, ShortProp):
         if d > 0:
             tete.shift(LEFT * d)
             rebours.shift(LEFT * d)
+        # cartes réduites : les 4 lignes de la réponse tiennent au-dessus de Ti-Margo
+        cartes.scale(0.82).next_to(q, DOWN, buff=0.2).set_x(0)
+        pause.next_to(cartes, DOWN, buff=0.18).set_x(0)
+        ph.arrange(DOWN, buff=0.12).next_to(cartes, DOWN, buff=0.16).set_x(0)
         return tete, q, cartes, pause, rebours, ph
+
+    def sur_base(self, lg, i, aligner=True):
+        """La ligne i de la réponse sur sa ligne de base fixe (interlignes égaux,
+        Ti-Margo libre) ; les morceaux posés sur la base de la 1re lettre."""
+        ref = lg[0][0]
+        if aligner:
+            for m in lg[1:]:
+                m.align_to(ref, DOWN)
+        lg.shift(UP * (YB_REP[i] - ref.get_bottom()[1]))
+        return lg
 
     def fin_short(self, voix, a_effacer):
         """La fin du 19/10 (celle des shorts des épisodes précédents)."""
@@ -226,28 +241,28 @@ class PuissanceEnchainerShort(OutilsNotation, ShortProp):
                                 (11, "5 ?")])
 
         def apres(sc):
-            # « Réponse B : 10. » : portée par la carte B allumée (la place de
-            # Ti-Margo reste libre sous les trois lignes du calcul)
-            sc.au("10.", sc.cartes_q[1].animate.scale(1.06), rt=0.2)
-            sc.play(sc.cartes_q[1].animate.scale(1 / 1.06), run_time=0.2)
+            l0 = sc.sur_base(sc.rep_ligne(0, ["Réponse B :", "10."]), 0)  # la voix = l'écrit
+            sc.au("B :", FadeIn(l0[0], shift=UP * 0.12), rt=0.2)
+            sc.au("10.", FadeIn(l0[1], scale=1.3), rt=0.2)
             sc.pieges(0, 2)
-            l1 = sc.rep_ligne(0, ["2 ×", "3 =", "6."])
+            l1 = sc.sur_base(sc.rep_ligne(1, ["2 ×", "3 =", "6."]), 1)
             for m, ex in zip(l1, ["2 fois", "3,", "6."]):
                 sc.au(ex, FadeIn(m, shift=UP * 0.12), rt=0.22)
-            l2 = sc.rep_ligne(1, ["Puis", "6 −", "5 =", "1."])
+            l2 = sc.sur_base(sc.rep_ligne(2, ["Puis", "6 −", "5 =", "1."]), 2)
             for m, ex in zip(l2, ["Puis", "6 moins", "5,", "1."]):
                 sc.au(ex, FadeIn(m, shift=UP * 0.12), rt=0.22)
-            l3 = sc.rep_ligne(2, ["10", "¹ =", "10."])
+            l3 = sc.rep_ligne(3, ["10", "¹ =", "10."])
             l3[1].next_to(l3[0], RIGHT, buff=0.03).align_to(l3[0], UP)
             l3[2].next_to(l3[1], RIGHT, buff=0.14)
             l3[2].align_to(l3[0], DOWN)
-            l3.move_to(sc.ph_q[2])
+            l3.move_to(sc.ph_q[3])
+            sc.sur_base(l3, 3, aligner=False)
             for m, ex in zip(l3, ["10 puissance", "1 :", "10."]):
                 sc.au(ex, FadeIn(m, shift=UP * 0.12), rt=0.22)
             sc.insister(l3[2], 1.25, 0.2)
 
         self.qpause("01q-question", "01r-reponse", ["(10²)³ ÷ 10⁵ ?"], choix, plans, 1,
-                    ["2 × 3 = 6.", "Puis 6 − 5 = 1.", "10¹ = 10."], avant=avant, apres=apres)
+                    ["Réponse B : 10.", "2 × 3 = 6.", "Puis 6 − 5 = 1.", "10¹ = 10."], avant=avant, apres=apres)
         self.vider(garder)
 
         # ── 02 : la question en commentaire : (3⁴)² ÷ 3⁸ ──
