@@ -2121,7 +2121,41 @@ export type CercleTrigoCanvasData = {
   size?: { width?: number; height?: number };
 };
 
+// Comparer des angles sans les mesurer (CM2) : aucune mesure écrite, l'élève regarde l'ouverture.
+export type DeuxAnglesCanvasData = {
+  kind: "deux_angles";
+  /** « cote_a_cote » : chacun dans sa case. « juxtaposes » : collés par un côté, pour voir leur somme. */
+  mode: "cote_a_cote" | "juxtaposes";
+  angles: {
+    deg: number;
+    nom?: string;
+    /** Orientation du premier côté, en degrés. */
+    rotation?: number;
+    /** Longueur des côtés : la changer sert à montrer qu'elle ne compte pas. */
+    longueur?: number;
+    couleur?: string;
+  }[];
+  questionLabel?: string;
+};
+
+// Des assemblages de carrés : « lequel est un patron de cube ? » (CM2).
+export type PatronsCubeCanvasData = {
+  kind: "patrons_cube";
+  patrons: {
+    nom?: string;
+    /** [ligne, colonne] de chaque carré. */
+    cases: [number, number][];
+    /** Un nombre écrit dans un carré (la face d'un dé). */
+    textes?: { case: [number, number]; texte: string }[];
+    /** Des places possibles, en pointillés. */
+    places?: { case: [number, number]; texte: string }[];
+  }[];
+  questionLabel?: string;
+};
+
 export type CanvasFigure =
+  | DeuxAnglesCanvasData
+  | PatronsCubeCanvasData
   | CercleTrigoCanvasData
   | ReglureCanvasData
   | ObjetsCanvasData

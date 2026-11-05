@@ -1,6 +1,8 @@
 export { default as CanvasRenderer } from "./CanvasRenderer";
 
 export { default as AngleCanvas } from "./AngleCanvas";
+export { default as DeuxAnglesCanvas } from "./DeuxAnglesCanvas";
+export { default as PatronsCubeCanvas } from "./PatronsCubeCanvas";
 export { default as CalculPoseCanvas } from "./CalculPoseCanvas";
 export { default as TriangleCanvas } from "./TriangleCanvas";
 export { default as QuadrilatereCanvas } from "./QuadrilatereCanvas";

@@ -37,6 +37,8 @@ import {
   ArbreProbabilitesCanvas,
   Repere3dCanvas,
   AngleCanvas,
+  DeuxAnglesCanvas,
+  PatronsCubeCanvas,
   FonctionGraphiqueCanvas,
   FonctionTableauCanvas,
   TransformationCanvas,
@@ -299,6 +301,14 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 
   if (canvas.kind === "angle") {
     return <AngleCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "deux_angles") {
+    return <DeuxAnglesCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "patrons_cube") {
+    return <PatronsCubeCanvas figure={canvas} />;
   }
 
   if (canvas.kind === "fonctionGraphique") {

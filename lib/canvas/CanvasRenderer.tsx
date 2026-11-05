@@ -15,6 +15,8 @@ import CanvasProbabilites from "./ProbabilitesCanvas";
 import ArbreProbabilitesCanvas from "./ArbreProbabilitesCanvas";
 import Repere3dCanvas from "./Repere3dCanvas";
 import AngleCanvas from "./AngleCanvas";
+import DeuxAnglesCanvas from "./DeuxAnglesCanvas";
+import PatronsCubeCanvas from "./PatronsCubeCanvas";
 import FonctionGraphiqueCanvas from "./FonctionGraphiqueCanvas";
 import FonctionTableauCanvas from "./FonctionTableauCanvas";
 import TransformationCanvas from "./TransformationCanvas";
@@ -95,6 +97,14 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "angle":
       return <AngleCanvas figure={figure} />;
+
+    // Comparer des angles sans les mesurer (CM2).
+    case "deux_angles":
+      return <DeuxAnglesCanvas figure={figure} />;
+
+    // Lequel est un patron de cube ? (CM2)
+    case "patrons_cube":
+      return <PatronsCubeCanvas figure={figure} />;
 
     case "fonctionGraphique":
       return <FonctionGraphiqueCanvas figure={figure} />;

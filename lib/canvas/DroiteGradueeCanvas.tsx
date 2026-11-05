@@ -37,7 +37,8 @@ function formatTick(value: number) {
   const rounded = Math.round(value * 100) / 100;
 
   if (Number.isInteger(rounded)) {
-    return String(rounded);
+    // Dès 10 000, l'espace des milliers : « 45 000 », pas « 45000 ».
+    return Math.abs(rounded) >= 10000 ? String(rounded).replace(/\B(?=(\d{3})+$)/g, "\u00a0") : String(rounded);
   }
 
   return rounded
@@ -57,8 +58,9 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   const max = figure.max ?? 5;
   const step = figure.step ?? 1;
 
-  const leftPad = 28;
-  const rightPad = 28;
+  // Un grand nombre aux extrémités (« 86 000 000 ») était coupé par le bord : la marge suit sa longueur.
+  const leftPad = Math.max(28, formatTick(min).length * 4.5 + 4);
+  const rightPad = Math.max(28, formatTick(max).length * 4.5 + 4);
 
   const showTicks = figure.display?.showTicks ?? true;
   const showValues = figure.display?.showValues ?? true;

@@ -39,6 +39,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `quadrilatere` | Carré, rectangle, parallélogramme, losange, trapèze : côtés, angles, codage | Une aire sur quadrillage |
 | `figure_libre` | Une figure quelconque **sur quadrillage** : c'est le canvas des aires et des périmètres composés | Une figure usuelle nommée |
 | `angle` | Un angle seul, avec sa mesure | Deux angles à comparer |
+| `deux_angles` | Deux à quatre angles sans mesure écrite : `cote_a_cote` (lequel est le plus ouvert ? les `longueur` différentes piègent l’élève) ou `juxtaposes` (collés par un côté : somme, multiple). Un angle de 90° reçoit son petit carré | Lire une mesure : c’est `angle` |
 | `droites` | Plusieurs droites, leurs intersections, parallèles et perpendiculaires marquées | Une droite graduée |
 | `cercle` | Cercle avec rayon, diamètre, corde, arcs | Un disque à colorier pour une fraction ; le cercle trigonométrique |
 | `cercle_trigo` | Le cercle trigonométrique : les 16 réels remarquables en fractions de π, les axes gradués en 1/2, √2/2, √3/2, l'arc parcouru depuis I et les projections (cos et sin **calculés**, jamais saisis). Se décrit en `{ n, d }` = nπ/d | Une courbe de cosinus (→ `fonctionGraphique`) |
@@ -50,6 +51,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 
 | `kind` | Ce qu'il montre | ⛔ Pas pour |
 |---|---|---|
+| `patrons_cube` | Plusieurs assemblages de carrés, nommés : lequel est un patron de cube ? Un carré peut porter un nombre (`textes`), un carré en pointillés est une place possible (`places`) | Un patron d’un autre solide ; le cube en perspective : c’est `solide_3d` |
 | `solide_3d` | Pavé, cube, prisme, cylindre, cône, pyramide, boule, avec dimensions et face surlignée | Une section |
 | `section_solide` | Le solide **et le plan qui le coupe** : la section apparaît | Un patron |
 | `repere3d` | Un repère de l'espace, points et segments | Une vue de solide plein |
