@@ -14,6 +14,8 @@ import { entre, eur, exp, fr, gabarits, net, qcm, qcmN, un, v } from "./trous-ou
 type Monnaie = { u: string; k: number };
 /** `k` : ce que vaut, dans cette monnaie, un « pas » de calcul. */
 const monnaie = (): Monnaie => un([{ u: "€", k: 1 }, { u: "€", k: 1 }, { u: "F CFA", k: 250 }, { u: "F CFA", k: 500 }, { u: "F CFA", k: 1000 }]);
+/** La conclusion reprend le choix sans sa majuscule de tête : « F CFA » et « A » restent en capitales. */
+const minuscule1 = (t: string) => t.charAt(0).toLowerCase() + t.slice(1);
 const nb = (x: number) => (Number.isInteger(net(x)) ? fr(x) : eur(x));
 /** Un montant lisible : jamais coupé en bout de ligne. */
 const ms = (x: number, m: Monnaie) => `${nb(x)} ${m.u}`;
@@ -90,7 +92,7 @@ export const prixRevientVenteBeneficeBank: TutorBankItemV4[] = [
     const V = gagne ? R + d : R - d;
     const [r, w, e] = [ms(R, m), ms(V, m), ms(d, m)];
     const juste = gagne ? `Un bénéfice de ${e}` : `Une perte de ${e}`;
-    return qt(juste, [gagne ? `Une perte de ${e}` : `Un bénéfice de ${e}`, `Un bénéfice de ${ms(R + V, m)}`, `Une perte de ${ms(R + V, m)}`, "Ni bénéfice ni perte"], exp(DEF_B, "on compare le prix de vente et le prix de revient, puis on calcule l'écart.", `l'écart entre ${r} et ${w} est ${e}.`, `${juste.toLowerCase()}.`), v([
+    return qt(juste, [gagne ? `Une perte de ${e}` : `Un bénéfice de ${e}`, `Un bénéfice de ${ms(R + V, m)}`, `Une perte de ${ms(R + V, m)}`, "Ni bénéfice ni perte"], exp(DEF_B, "on compare le prix de vente et le prix de revient, puis on calcule l'écart.", `l'écart entre ${r} et ${w} est ${e}.`, `${minuscule1(juste)}.`), v([
       `Prix de revient : ${r}. Prix de vente : ${w}. Que fait-on ?`,
       `Un article revient à ${r} et se vend ${w}. Que fait-on sur cette vente ?`,
       `Revient : ${r}. Vente : ${w}. Bénéfice ou perte ?`,
@@ -423,7 +425,7 @@ export const interetSimpleBank: TutorBankItemV4[] = [
     const I2 = (C * t2 * n2) / 100;
     const W = un(["Une entraîneuse de natation", "Un chauffeur de bus", "Une vétérinaire", "Un guide de montagne", "Une pharmacienne", "Un musicien", "Une pilote", "Un cuisinier", "Une agricultrice", "Un mécanicien"]);
     const juste = I1 === I2 ? "Les deux rapportent autant" : I1 > I2 ? "Le placement A" : "Le placement B";
-    return qt(juste, ["Le placement A", "Le placement B", "Les deux rapportent autant"], exp(DEF_I, "on calcule les deux intérêts sur le même capital.", `A : ${ms(I1, m)} ; B : ${ms(I2, m)}.`, `${juste.toLowerCase()}.`), `${W} hésite pour placer ${ms(C, m)}. Placement A : ${t1} % par an pendant ${n1} ans. Placement B : ${t2} % par an pendant ${n2} ans. ${v(["Lequel rapporte le plus ?", "Quel placement donne le plus d'intérêts ?", "Quel est le meilleur choix ?", "Lequel faut-il choisir pour gagner le plus ?"])}`);
+    return qt(juste, ["Le placement A", "Le placement B", "Les deux rapportent autant"], exp(DEF_I, "on calcule les deux intérêts sur le même capital.", `A : ${ms(I1, m)} ; B : ${ms(I2, m)}.`, `${minuscule1(juste)}.`), `${W} hésite pour placer ${ms(C, m)}. Placement A : ${t1} % par an pendant ${n1} ans. Placement B : ${t2} % par an pendant ${n2} ans. ${v(["Lequel rapporte le plus ?", "Quel placement donne le plus d'intérêts ?", "Quel est le meilleur choix ?", "Lequel faut-il choisir pour gagner le plus ?"])}`);
   }),
   is_(3, "Le capital reste moins d'un an : l'intérêt est une part de l'intérêt annuel.", () => {
     const { m, C } = capitalMois();
@@ -625,7 +627,7 @@ export const factureTvaBank: TutorBankItemV4[] = [
     const A = juste ? S : un([S + ecart, Math.max(S - ecart, 5 * m.k)]);
     const verdict = A === S ? "Oui, le total est juste" : A > S ? `Non, il y a ${ms(A - S, m)} de trop` : `Non, il manque ${ms(S - A, m)}`;
     const W = un(["Une pharmacienne", "Un entraîneur", "Un boulanger", "Une ingénieure", "Un photographe", "Une agricultrice", "Un facteur de pianos", "Une marin", "Un cuisinier", "Une libraire"]);
-    return qt(verdict, ["Oui, le total est juste", `Non, il y a ${ms(ecart + (A === S ? 0 : 10 * m.k), m)} de trop`, `Non, il manque ${ms(ecart + (A === S ? 0 : 10 * m.k), m)}`, A > S ? `Non, il manque ${ms(A - S, m)}` : `Non, il y a ${ms(Math.max(S - A, 5 * m.k), m)} de trop`], exp(DEF_F, "on additionne les montants, puis on compare au total écrit.", `${l.map((x) => n2(x.t)).join(" + ")} = ${ms(S, m)}. Le total annoncé est ${ms(A, m)}.`, `${verdict.toLowerCase()}.`), `${W} vérifie cette facture. ${v(["Le total est-il juste ?", "Le total écrit est-il exact ?", "Faut-il corriger le total ?", "Le bas de la facture est-il correct ?"])}`, tableau(m, [...l.map((x) => [x.a, x.n, n2(x.p), n2(x.t)]), ["Total", "", "", n2(A)]]));
+    return qt(verdict, ["Oui, le total est juste", `Non, il y a ${ms(ecart + (A === S ? 0 : 10 * m.k), m)} de trop`, `Non, il manque ${ms(ecart + (A === S ? 0 : 10 * m.k), m)}`, A > S ? `Non, il manque ${ms(A - S, m)}` : `Non, il y a ${ms(Math.max(S - A, 5 * m.k), m)} de trop`], exp(DEF_F, "on additionne les montants, puis on compare au total écrit.", `${l.map((x) => n2(x.t)).join(" + ")} = ${ms(S, m)}. Le total annoncé est ${ms(A, m)}.`, `${minuscule1(verdict)}.`), `${W} vérifie cette facture. ${v(["Le total est-il juste ?", "Le total écrit est-il exact ?", "Faut-il corriger le total ?", "Le bas de la facture est-il correct ?"])}`, tableau(m, [...l.map((x) => [x.a, x.n, n2(x.p), n2(x.t)]), ["Total", "", "", n2(A)]]));
   }),
 ];
 

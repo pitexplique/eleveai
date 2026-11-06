@@ -39,16 +39,17 @@ const UNITES: [RegExp, string | ((m: string, u: string) => string)][] = [
   [/(\d)\s?dm\b/g, "$1 décimètres"],
   [/(\d)\s?cm\b/g, "$1 centimètres"],
   [/(\d)\s?mm\b/g, "$1 millimètres"],
-  [/(\d)\s?m\b/g, "$1 mètres"],
+  // ⛔ Pas devant une apostrophe : « 12 s'annule », « par 5 s'il » ne sont pas des secondes.
+  [/(\d)\s?m\b(?!['’])/g, "$1 mètres"],
   [/(\d)\s?kg\b/g, "$1 kilogrammes"],
-  [/(\d)\s?g\b/g, "$1 grammes"],
+  [/(\d)\s?g\b(?!['’])/g, "$1 grammes"],
   [/(\d)\s?mL\b/g, "$1 millilitres"],
   [/(\d)\s?cL\b/g, "$1 centilitres"],
-  [/(\d)\s?L\b/g, "$1 litres"],
+  [/(\d)\s?L\b(?!['’])/g, "$1 litres"],
   [/(\d)\s?min\b/g, "$1 minutes"],
   [/(\d)\s?h\s?(\d\d)\b/g, "$1 heures $2"],
-  [/(\d)\s?h\b/g, "$1 heures"],
-  [/(\d)\s?s\b/g, "$1 secondes"],
+  [/(\d)\s?h\b(?!['’])/g, "$1 heures"],
+  [/(\d)\s?s\b(?!['’])/g, "$1 secondes"],
   [/(\d)\s?€/g, "$1 euros"],
   // « en cm », « combien m » : l'unité seule, sans nombre devant
   [/\b(en|combien) km\b/g, "$1 kilomètres"],
@@ -76,7 +77,15 @@ function formuleEnMots(f: string): string {
   let s = f
     // « 0{,}5 » : la virgule décimale protégée, qui doit rester collée.
     .replace(/\{,\}/g, ",")
+    // « -\dfrac{\pi}{3} » : devenu « - pi sur 3 », il passait pour un tiret de
+    // liste et le signe disparaissait (« , pi sur 3 », comme le choix voisin).
+    .replace(/[-−]\s*(?=\\[a-zA-Z]|π)/g, " moins ")
     .replace(/\\(?:left|right)\b/g, "")
+    // « f(x) = \begin{cases} 4x + 3 & \text{si } x < 1 \\ … \end{cases} » : une ligne, une pause.
+    // Sans ça, la voix disait « cases 4x plus 3 & si… cases ».
+    .replace(/\\begin\{cases\}([\s\S]*?)\\end\{cases\}/g, (_m, lignes: string) => ` ${lignes.replace(/\\\\/g, " ; ").replace(/&/g, " ")} `)
+    // « a \equiv b \ [2\pi] » : « a congru à b modulo 2 pi »
+    .replace(/(?:\\equiv(?![a-zA-Z])|≡)([^[\]$\n]*)\[([^[\]]*)\]/g, " congru à $1 modulo $2 ")
     // « 49\ \text{cm}^2 » : l'unité rendue à « cm² », que la liste des unités lit
     .replace(/\\(?:text|mathrm)\{\s*(km|m|dm|cm|mm)\s*\}\^\{?([23])\}?/g, (_m, u: string, p: string) => ` ${u}${p === "2" ? "²" : "³"}`)
     .replace(/-\s*\\infty/g, " moins l'infini ").replace(/\+\s*\\infty/g, " plus l'infini ")
@@ -97,7 +106,13 @@ function formuleEnMots(f: string): string {
     .replace(/\^\+/g, " plus ").replace(/\^-(?![\w{])/g, " moins ").replace(/\^\*/g, " étoile ")
     // « \vec{u} \cdot \vec{v} » se lit « u scalaire v » ; « \|\vec{u}\| », « norme de u »
     .replace(/(\\vec\{[^{}]*\}|\\overrightarrow\{[^{}]*\})\s*\\cdot\s*(\\vec\{[^{}]*\}|\\overrightarrow\{[^{}]*\})/g, "$1 scalaire $2")
-    .replace(/\\\|\s*([^|]*?)\s*\\\|/g, " norme de $1 ");
+    .replace(/\\\|\s*([^|]*?)\s*\\\|/g, " norme de $1 ")
+    // « |2x - 4| - 3 » : « valeur absolue de 2x moins 4, moins 3 ». Pas de barre
+    // collée à une espace (un tableau) ni de parenthèse coupée (« P(A|B) + P(A|C) »).
+    .replace(/\|(?!\s)([^|\n]{1,60}?)(?<!\s)\|/g, (m: string, c: string, i: number, t: string) => {
+      if (c.split("(").length !== c.split(")").length) return m;
+      return ` valeur absolue de ${c}${/^\s*[+\-−]/.test(t.slice(i + m.length)) ? " , " : " "}`;
+    });
   // Les constructions imbriquées se déplient de l'intérieur : on répète.
   for (let i = 0; i < 4; i++) {
     s = s
@@ -127,6 +142,12 @@ function formuleEnMots(f: string): string {
     .replace(/\\approx(?![a-zA-Z])|≈/g, " environ ")
     .replace(/\\to(?![a-zA-Z])/g, " tend vers ")
     .replace(/\\in(?![a-zA-Z])|∈/g, " appartient à ")
+    // Les ensembles : « \mathbb{R} \setminus \{2\} » se disait « R 2 ».
+    .replace(/\\cup(?![a-zA-Z])|∪/g, " union ")
+    .replace(/\\cap(?![a-zA-Z])|∩/g, " inter ")
+    .replace(/\\setminus(?![a-zA-Z])|∖/g, " privé de ")
+    .replace(/\\equiv(?![a-zA-Z])|≡/g, " congru à ")
+    .replace(/\\[{}]/g, " ")
     .replace(/\\pi(?![a-zA-Z])|π/g, " pi ")
     .replace(/\\(cos|sin|tan)(?![a-zA-Z])/g, (_, t) => ({ cos: " cosinus ", sin: " sinus ", tan: " tangente " })[t as "cos" | "sin" | "tan"])
     .replace(/\\ln(?![a-zA-Z])/g, " l n ")
@@ -144,6 +165,8 @@ export function enMots(texte: string): string {
     .replace(/P_\{?\s*(?:\\overline\{([A-Z])\}|([A-Z]))\s*\}?\s*\(([^()]*)\)/g, (_m, barre, a, b) => ` P de ${b} sachant ${barre ? `non ${barre}` : a} `)
     .replace(/\\overline\{([A-Z])\}/g, " $1 barre ")
     .replace(/\s?°C\b/g, " degrés")
+    // « 500 F CFA » (l'espace peut être insécable) : pas « F C F A ».
+    .replace(/\bF\s*CFA\b/g, "francs CFA")
     .replace(/```[a-z]*\n?/g, " ")
     .replace(/\*\*/g, "")
     // Tableur (STMG) : dans « `$B$2` » ou « C$9 », le « $ » est un vrai dollar.
@@ -163,7 +186,9 @@ export function enMots(texte: string): string {
   // la réponse attendue (« x^2 », « \dfrac{\sqrt{3}}{2} ») : le même
   // traducteur passe sur le reste. Sans effet sur un texte ordinaire, qui n'a
   // ni « \ », ni « ^ », ni « _ », ni accolades.
-  s = formuleEnMots(s);
+  // Un retour à la ligne après une formule est une pause (« …est : 7 pi sur 3. Donne… »).
+  // Les espaces se resserrent ici : « 32\ \text{kg} » restait « 32 kg » faute d'y arriver.
+  s = formuleEnMots(s).replace(/([^\s.,;:?!])\s*\n\s*(?![,\s])/g, "$1. ").replace(/\s+/g, " ");
   // Les unités AVANT « ² » : sinon « cm² » deviendrait « cm au carré ».
   for (const [re, mot] of UNITES) s = typeof mot === "string" ? s.replace(re, mot) : s.replace(re, mot);
   s = s
@@ -175,9 +200,14 @@ export function enMots(texte: string): string {
     .replace(/√/g, " racine carrée de ")
     .replace(/°/g, " degrés")
     .replace(/(\d)\s?%/g, "$1 pour cent")
+    .replace(/\ben %/g, "en pourcentage")
     // Un nombre négatif ou une soustraction
-    .replace(/(^|[\s(=;])-\s?(\d)/g, "$1moins $2")
+    .replace(/(^|[\s(=;[\]])-\s?(\d)/g, "$1moins $2")
+    // « -x », « -A » : une lettre seule, pas « -t-on » ni un mot.
+    .replace(/(^|[\s(=;[\]])-(?=[a-zA-Z](?![\p{L}-]))/gu, "$1moins ")
     .replace(/\s-\s/g, " moins ")
+    // Le titre des explications. Ailleurs « / » reste une division (« PF / PR », « distance / temps »).
+    .replace(/\bCalcul \/ Observation\b/g, "Calcul, observation")
     .replace(/\s\+\s/g, " plus ")
     .replace(/\s=\s|=/g, " égale ")
     .replace(/\s<\s/g, " inférieur à ").replace(/\s>\s/g, " supérieur à ");
@@ -191,8 +221,13 @@ export function enMots(texte: string): string {
   s = s.replace(/([A-Z])'(?=[A-Z\s\]).,;:?!]|$)/g, (m: string, l: string, i: number, t: string) =>
     /[LDJMNSTC]/.test(l) && /[A-Z]/.test(t[i + 2] ?? "") && !/[A-Z]/.test(t[i - 1] ?? "") ? m : `${l} prime `);
   // Des noms de points : « AB » se lit « A B », pas comme un mot.
-  s = s.replace(/\b([A-Z]{2,4})\b/g, (m) => m.split("").join(" "));
+  s = s.replace(/\b(?!CFA\b)([A-Z]{2,4})\b/g, (m) => m.split("").join(" "));
   // « les vecteurs \vec{u} et… » : pas « les vecteurs vecteur u »
   s = s.replace(/\b(vecteurs?) vecteur\b/g, "$1");
+  // « ]-π ; π] » : « l'intervalle de moins pi exclu à pi inclus » (la voix tait les crochets).
+  // Une borne est un nombre ou une lettre : « répéter 3 fois [avancer de 40 pas ; tourner] » reste du code.
+  const borne = /^(?:(?:moins|plus) )?(?:\d|pi\b|l'infini|racine\b|[a-zA-Z](?!\p{L}))/u;
+  s = s.replace(/([[\]])\s*([^[\]\n;]{1,30}?)\s*;\s*([^[\]\n;]{1,30}?)\s*([[\]])/g, (m: string, g: string, a: string, b: string, d: string) =>
+    borne.test(a) && borne.test(b) ? ` l'intervalle de ${a} ${g === "]" ? "exclu" : "inclus"} à ${b} ${d === "]" ? "inclus" : "exclu"} ` : m).replace(/\b(intervalles?)\s+l'intervalle de/g, "$1 de");
   return s.replace(/\s+/g, " ").replace(/\s([.,;:?!])/g, "$1").trim();
 }
