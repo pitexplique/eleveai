@@ -419,11 +419,11 @@ export const SUIVI_DES_MAINTENANT = [
   "La page de suivi de votre enfant : ses jours de travail, ses séances et ses réponses de la semaine",
   "Les 3 choses à revoir et ce qui est acquis, micro-compétence par micro-compétence",
   "La carte de toute sa classe en maths",
+  "Le compte rendu envoyé chaque semaine par courriel",
   "Une alerte sur la page quand il décroche ou s'arrête de travailler",
   "Un seul abonnement pour tous les enfants de la maison",
 ];
 export const SUIVI_A_VENIR = [
-  "Le compte rendu envoyé chaque semaine par courriel",
   "10 minutes par jour choisies par le coach",
   "La préparation ciblée d'un contrôle",
 ];

@@ -23,6 +23,7 @@ export type LigneAbonnement = {
   statut: string;
   acces_jusquau: string | null;
   fin_programmee: boolean;
+  compte_rendu: boolean;
   zone: string | null;
 };
 

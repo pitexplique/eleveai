@@ -17,6 +17,7 @@ export default function SuiviClient() {
   const [code, setCode] = useState("");
   const [message, setMessage] = useState("");
   const [enCours, setEnCours] = useState(false);
+  const [compteRendu, setCompteRendu] = useState(true);
 
   const charger = useCallback(async (t: string) => {
     const r = await fetch("/api/suivi/enfants", { headers: { Authorization: `Bearer ${t}` } });
@@ -24,6 +25,7 @@ export default function SuiviClient() {
     if (!r.ok) return setEtat("erreur");
     const j = await r.json();
     setEnfants(j.enfants ?? []);
+    setCompteRendu(j.compteRendu !== false);
     setEtat("pret");
   }, []);
 
@@ -72,6 +74,16 @@ export default function SuiviClient() {
     await charger(jeton);
   }
 
+  async function reglerCompteRendu(actif: boolean) {
+    setCompteRendu(actif);
+    const r = await fetch("/api/suivi/compte-rendu", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${jeton}` },
+      body: JSON.stringify({ actif }),
+    }).catch(() => null);
+    if (!r?.ok) setCompteRendu(!actif);
+  }
+
   const courant = enfants[actif];
 
   return (
@@ -118,6 +130,18 @@ export default function SuiviClient() {
                   Ne plus suivre {courant.rapport.prenom}
                 </button>
               </div>
+            )}
+
+            {enfants.length > 0 && (
+              <label className="mt-8 flex gap-3 rounded-2xl p-4 ring-1 ring-slate-200">
+                <input
+                  type="checkbox"
+                  checked={compteRendu}
+                  onChange={(e) => reglerCompteRendu(e.target.checked)}
+                  className="mt-0.5 h-5 w-5 shrink-0"
+                />
+                <span>Recevoir le compte rendu par courriel, chaque dimanche.</span>
+              </label>
             )}
 
             <section className="mt-10 rounded-3xl bg-slate-50 p-6">

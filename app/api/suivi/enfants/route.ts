@@ -36,7 +36,8 @@ export async function GET(req: Request) {
       rapport: await rapportDeLEnfant(admin, e.code_etablissement, e.code_utilisateur),
     })),
   );
-  return NextResponse.json({ enfants });
+  const ligne = await lireAbonnement(compte.id);
+  return NextResponse.json({ enfants, compteRendu: ligne?.compte_rendu ?? true });
 }
 
 export async function POST(req: Request) {

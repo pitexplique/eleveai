@@ -24,5 +24,9 @@ create table if not exists public.enfants_parent (
 create index if not exists enfants_parent_enfant_idx
   on public.enfants_parent (code_etablissement, code_utilisateur);
 
+-- Le compte rendu hebdomadaire par courriel (06/11/2026).
+alter table public.abonnements add column if not exists compte_rendu boolean not null default true;
+alter table public.abonnements add column if not exists dernier_compte_rendu timestamp with time zone;
+
 alter table public.codes_parent enable row level security;
 alter table public.enfants_parent enable row level security;
