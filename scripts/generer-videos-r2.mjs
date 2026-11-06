@@ -152,6 +152,19 @@ const publiees = Object.values(trie).filter((v) => v.youtube).length;
 console.log(`${Object.keys(trie).length} vidéos → ${path.relative(RACINE, SORTIE)} (${publiees} déjà sur YouTube, ${horsManifeste} hors manifeste)`);
 if (sansFichier) console.log(`${sansFichier} vidéos du manifeste sans MP4 dans manim/sorties`);
 
+// Les anciens ID YouTube d'une vidéo republiée (`ancienne_url`) : les liens du coach
+// et les QR déjà imprimés qui les portent ouvrent encore la vidéo sur R2 (06/11/2026).
+const anciens = {};
+for (const v of manifeste.videos) {
+  const a = ytId(v.ancienne_url ?? "");
+  if (a && a !== ytId(v.url ?? "")) anciens[a] = v.id;
+}
+fs.writeFileSync(
+  path.join(RACINE, "lib", "videos", "anciens-youtube.json"),
+  JSON.stringify(Object.fromEntries(Object.entries(anciens).sort(([a], [b]) => a.localeCompare(b))), null, 1) + "\n",
+  "utf8"
+);
+
 // Les mots des titres, pour la recherche de l'en-tête (19/10/2026).
 await import("./generer-mots-videos.mjs");
 await import("./generer-bilans-videos.mjs");

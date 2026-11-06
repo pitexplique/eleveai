@@ -6,6 +6,7 @@
 // ⛔ Côté SERVEUR seulement : la table pèse ~160 Ko, elle n'a rien à faire dans
 // le paquet du navigateur. Le coach pointe vers /video/<id YouTube> sans la lire.
 import table from "./videos-r2.json";
+import anciensYoutube from "./anciens-youtube.json";
 
 export type VideoR2 = {
   id: string;
@@ -31,10 +32,15 @@ const LIGNES = table as Record<string, Ligne>;
 const PAR_YOUTUBE = new Map<string, string>();
 for (const [id, v] of Object.entries(LIGNES)) if (v.youtube) PAR_YOUTUBE.set(v.youtube, id);
 
-/** Par id du manifeste (« 3e-proba-vocabulaire ») OU par ID YouTube (11 caractères). */
+// ⛔ 06/11/2026 — Frédéric : « ça marche sur 6e mais pas sur Pythagore 4e ». Une
+// vidéo republiée change d'ID YouTube : l'ancien, resté sur des QR déjà imprimés,
+// doit encore ouvrir la vidéo sur R2, pas YouTube (`ancienne_url` du manifeste).
+const ANCIENS = anciensYoutube as Record<string, string>;
+
+/** Par id du manifeste (« 3e-proba-vocabulaire ») OU par ID YouTube, même ancien. */
 export function trouverVideo(cle: string): VideoR2 | null {
-  const id = LIGNES[cle] ? cle : PAR_YOUTUBE.get(cle);
-  return id ? { id, ...LIGNES[id] } : null;
+  const id = LIGNES[cle] ? cle : PAR_YOUTUBE.get(cle) ?? ANCIENS[cle];
+  return id && LIGNES[id] ? { id, ...LIGNES[id] } : null;
 }
 
 export function toutesLesVideos(): VideoR2[] {
