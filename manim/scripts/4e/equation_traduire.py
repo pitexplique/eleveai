@@ -159,7 +159,7 @@ class EquationTraduire4e(PaysageEq):
         self.au("11 minutes", GrowFromCenter(fl), FadeIn(lab, scale=1.3), tete.animate.move_to(P(p.x0 + p.u * 11, p.y)), rt=0.45)
         q = T("Combien dure le film sans le générique ?", 38, JAUNE_TITRE).move_to(P(-0.6, -0.5))
         self.au("Combien", FadeIn(q, shift=UP * 0.15), FadeOut(tete), rt=0.4)
-        x = T("x", 62, INCONNUE, gras=True).move_to(film)
+        x = T("x", 62, WHITE, gras=True).move_to(film)  # blanc : le bleu du x se perdait sur le bloc bleu
         self.au("x. Un", ReplacementTransform(film.txt, x), film.boite.animate.set_fill("#1d4ed8", 1), rt=0.35)
         self.insister(x, 1.4, 0.18)
         ph = Eq("Un nombre x augmenté de 3 vaut 11.", 40, lettres="x").move_to(P(-0.6, -1.3))
@@ -168,7 +168,7 @@ class EquationTraduire4e(PaysageEq):
         e.atomes[2].set_color(VIOLET)
         e.egal.set_color(EGAL)
         self.dire_eq(e, "x plus 3 égale 11.")
-        cad = self.encadrer(e, buff=0.16)
+        cad = self.encadrer(e, buff=0.26)
         self.play(Create(cad), run_time=0.25)
         self.attendre_voix(marge=0.6)
 
@@ -248,7 +248,7 @@ class EquationTraduire4e(PaysageEq):
         e = Eq("2x = 14", 92).move_to(P(0.3, -1.6))
         e.egal.set_color(EGAL)
         self.dire_eq(e, "2 x égale 14.")
-        cad = self.encadrer(e, buff=0.18)
+        cad = self.encadrer(e, buff=0.26)
         self.play(Create(cad), run_time=0.25)
         self.insister(VGroup(e, cad), 1.1, 0.2)
         self.attendre_voix(marge=0.6)
@@ -441,7 +441,7 @@ class EquationTraduire4e(PaysageEq):
         self.au("Écris", FadeIn(ecr, scale=1.15), rt=0.3)
         pz = T("Mets pause, et cherche !", 34, ORANGE_RETENUE).move_to(P(-0.55, -2.95))
         self.au("Mets pause", Write(pz), rt=0.7)
-        self.defi = {"p": p, "ba": ba, "pres": pres, "fl": fl, "lab": lab, "tit": tit,
+        self.defi = {"p": p, "ba": ba, "xs": xs, "pres": pres, "fl": fl, "lab": lab, "tit": tit,
                      "textes": VGroup(l1, l1b, l1c, l2, l2b, l3, l3b, ecr, pz)}
         self.attendre_voix(marge=2.0)
 
@@ -463,7 +463,8 @@ class EquationTraduire4e(PaysageEq):
         e.egal.set_color(EGAL)
         a = e.atomes
         cr1 = crochet(p.x0, p.x0 + p.u * 15, INCONNUE)
-        self.au("3 bandes-annonces", *[b.boite.animate.set_fill("#1d4ed8", 1) for b in d["ba"]], rt=0.3)
+        self.au("3 bandes-annonces", *[b.boite.animate.set_fill("#1d4ed8", 1) for b in d["ba"]],
+                *[x.animate.set_color(WHITE) for x in d["xs"]], rt=0.3)  # le x reste lisible sur le bleu vif
         self.dire_eq(e, "3 x.", sauf=a[2:], avec=[Create(cr1)])
         cr2 = crochet(p.x0 + p.u * 15, p.x0 + p.u * 17, VIOLET)
         self.au("Plus 2 minutes", Create(cr2), d["pres"].boite.animate.set_fill("#5b21b6", 1), rt=0.3)
@@ -471,7 +472,7 @@ class EquationTraduire4e(PaysageEq):
         a[3].set_color(VIOLET)
         self.au("En tout", d["fl"].animate.set_color(VERT_OK), d["lab"][1].animate.set_color(VERT_OK), rt=0.3)
         self.dire_eq(e, "3 x plus 2 égale 17.", sauf=a[:4])
-        cad = self.encadrer(e, buff=0.16)
+        cad = self.encadrer(e, buff=0.26)
         self.play(Create(cad), run_time=0.22)
         n1 = T("On ne demande pas encore de la résoudre.", 34, GRIS_V).move_to(P(-0.6, -1.65))
         self.au("On ne demande", FadeIn(n1, shift=UP * 0.12), rt=0.35)
@@ -498,6 +499,13 @@ class EquationTraduire4e(PaysageEq):
                                       ["On traduit la phrase", "morceau par morceau."],
                                       ["Le double donne 2x,", "augmenté de donne plus,", "vaut donne le signe égal."]],
                                      fs=36, figure=fig)
+        # interligne desserré (le module commun serre à 0,1) ; même bord gauche, même haut
+        gauche, haut = lignes.get_left()[0], lignes.get_top()[1]
+        for lg in lignes:
+            lg[1].arrange(DOWN, aligned_edge=LEFT, buff=0.22)
+            lg[0].next_to(lg[1], LEFT, buff=0.25)
+        lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.5)
+        lignes.align_to(P(gauche, 0), LEFT).align_to(P(0, haut), UP)
         self.play(FadeIn(fig), run_time=0.3)
         for lg in lignes:
             self.montrer_ligne(lg)

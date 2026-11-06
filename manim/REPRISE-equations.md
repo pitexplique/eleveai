@@ -7,9 +7,11 @@
 - 14 voix VALIDÉES par Frédéric le 05/11, committées `2249911b` (`manim/voix/4e-equation-*.json`). Ne pas les changer.
 - Pilote lancé : épisode 01 `reconnaitre` + module `manim/scripts/4e/equation_commun.py`. Fini = section dans `manim/rapports-equations.md` + 2 mp4 dans `manim/sorties/4e/maths/equations/01-reconnaitre/` + places de rendu libres. Si plus aucun fichier ne bouge pendant 30 min, l'agent est figé : relancer depuis ses scripts.
 
+- Les 14 vidéos sont rendues ; relecture faite : aucun bloquant, défauts mineurs listés dans `manim/defauts-equations.md`. Fins de voix gardées : voix validées avant la règle du 05/11.
+
 ## Reste
-1. Épisodes 02 à 07 : un agent neuf par épisode, 2 à la fois au plus, prompt : « Lis et applique `manim/brief-agent-equations.md`. Tu es l'agent de l'épisode NN, slug `<slug>`. Module `manim/scripts/4e/equation_commun.py` en lecture seule. PAYSAGE, puis SHORT, jusqu'au bout de l'ordre obligatoire. Ne committe rien. Message final : 10 lignes au plus. »
-2. Relecture des planches par un agent neuf (défauts mineurs à corriger et re-rendre).
+1. Corrections : un agent neuf par épisode, 2 à la fois au plus, depuis `manim/defauts-equations.md`. Shorts `verifier` et `defi` : rien à refaire. Fini quand le mp4 de l'épisode est plus récent que le module et que son rapport a une ligne « Corrections ».
+2. Passer une dernière relecture sur les vidéos re-rendues.
 3. Aperçu port 3900 : `manim/sorties/apercu.html`, la DERNIÈRE vidéo seulement, ouverte EN PAUSE.
 4. Commit PAR CHEMIN (scripts + `_marques.json` + rapports + ce fichier ; ni `.cues.tsv`, ni `media-eq-*`, ni mp4, ni WAV). Pas de push : il se propose le soir.
 5. Passe finale, après ces rendus : miniatures, manifeste (⛔ jamais réécrit en entier : modifs d'autres sessions), R2, coach, bilans.

@@ -103,7 +103,7 @@ class EquationTraduireShort(ShortEq):
         ch.jouer(self)
         self.margo_c.clear_updaters()
         self.moi_c.clear_updaters()
-        q = Eq(s, 48).move_to(P(0, Y_EQ))
+        q = Eq(s, 44).move_to(P(0, Y_EQ))
         q.egal.set_color(EGAL)
         self.dire_eq(q, phrase_eq, avec=[FadeOut(ch)])
         cad = self.encadrer_c(q)
@@ -111,7 +111,7 @@ class EquationTraduireShort(ShortEq):
         return VGroup(*ls, q, cad)
 
     def encadrer_c(self, m):
-        return SurroundingRectangle(m, color=VERT_OK, buff=0.14, corner_radius=0.1, stroke_width=4)
+        return SurroundingRectangle(m, color=VERT_OK, buff=0.24, corner_radius=0.1, stroke_width=4)
 
     def construct(self):
         margo = self.margo_bas()
@@ -187,9 +187,12 @@ class EquationTraduireShort(ShortEq):
         self.dire_eq(b, "augmenté de 4", echelle=1.0, rt=0.14)
         self.play(FadeIn(q, shift=LEFT * 0.3), run_time=0.2)
         self.dire_eq(d, "vaut 19.", echelle=1.0, rt=0.14)
-        yf = -0.72
+        yf = -0.8
         fl = DoubleArrow(P(-1.8, yf), P(r.get_right()[0], yf), color=WHITE, stroke_width=4, buff=0, tip_length=0.16)
-        self.play(GrowFromCenter(fl), run_time=0.2)
+        # la flèche porte sa valeur, comme la timeline de la paysage
+        v = T("19", 30, WHITE, gras=True)
+        lab = VGroup(BackgroundRectangle(v, color=BLACK, fill_opacity=1, buff=0.06), v).move_to(fl)
+        self.play(GrowFromCenter(fl), FadeIn(lab, scale=1.3), run_time=0.2)
         e = self.tx("Écris l'équation", 38, JAUNE_TITRE, True).move_to(P(0, -1.35))
         self.au("Écris", FadeIn(e, scale=1.15), rt=0.3)
         ap = self.tx("en commentaire !", 34, VERT_OK, True).scale_to_fit_width(3.6).move_to(P(0, -2.0))

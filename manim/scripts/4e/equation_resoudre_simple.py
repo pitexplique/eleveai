@@ -70,8 +70,8 @@ class BalanceVeto(Balance):
 
 
 class BalanceHaute(BalanceVeto):
-    """Le même portique, plus haut : deux charges empilées y tiennent."""
-    RATIO = 0.28
+    """Le même portique, plus haut : deux charges empilées y tiennent, loin du fléau."""
+    RATIO = 0.37
 
 
 class Pese(VGroup):
@@ -390,8 +390,8 @@ class EquationResoudreSimple4e(_OutilsVeto, PaysageEq):
             o1 = sc.sous_membre(e.gauche, "+ 5", 1.72, 44, audit=False)
             o2 = sc.sous_membre(e.droite, "+ 5", 1.72, 44, audit=False)
             p1, p2 = Charge("+ 5", OPERATION, 30, audit=False), Charge("+ 5", OPERATION, 30, audit=False)
-            p1.next_to(cg, UP, buff=0.04)
-            p2.next_to(cd, UP, buff=0.04)
+            p1.next_to(cg, UP, buff=0.07)
+            p2.next_to(cd, UP, buff=0.07)
             b.sur["g"].append(p1)
             b.sur["d"].append(p2)
             sc.play(FadeIn(o1, scale=1.3), FadeIn(o2, scale=1.3), FadeIn(p1, shift=DOWN * 0.3), FadeIn(p2, shift=DOWN * 0.3), run_time=0.25)
@@ -448,7 +448,7 @@ class EquationResoudreSimple4e(_OutilsVeto, PaysageEq):
         self.au("Le piège", FadeIn(tit, scale=1.3), rt=0.25)
         pese = Pese(5.4, centre=P(-3.45, -2.3))
         xs = [-5.5 + 1.02 * k for k in range(5)]
-        ct = [pese.dessus(chaton(0.88), x) for x in xs]
+        ct = [pese.dessus(chaton(0.74), x) for x in xs]
         n5 = T("5 chatons", 36, CIEL).move_to(P(-3.45, 1.9))
         self.au("5 chatons", FadeIn(n5), FadeIn(pese), *[FadeIn(c, shift=DOWN * 0.3) for c in ct], rt=0.3)
         self.au("8 kilos", pese.afficher("8 kg"), rt=0.3)
@@ -459,30 +459,29 @@ class EquationResoudreSimple4e(_OutilsVeto, PaysageEq):
         # l'erreur : x = 3
         e3 = Eq("x = 3", 54, PIEGE, inconnue=PIEGE).mis_sur_egal(XE, 2.05)
         self.dire_eq(e3, "x égale 3")
-        s1 = Eq("ils ont soustrait 5.", 30, PIEGE, lettres="")
-        s1.scale_to_fit_width(3.3).move_to(P(0, 2.05)).align_to(P(3.3, 0), LEFT)
+        s1 = Eq("ils ont soustrait 5.", 38, PIEGE, lettres="").move_to(P(0, 1.33)).align_to(P(0.95, 0), LEFT)
         self.dire_eq(s1, "ils ont soustrait 5.", echelle=1.0, rt=0.12)
         ba = self.barrer(e3)
         self.play(Create(ba), run_time=0.2)
         # 5x, c'est 5 fois x
-        s2 = Eq("5x, c'est 5 × x,", 36, lettres="x").move_to(P(0, 1.3)).align_to(P(0.95, 0), LEFT)
+        s2 = Eq("5x, c'est 5 × x,", 36, lettres="x").move_to(P(0, 0.63)).align_to(P(0.95, 0), LEFT)
         self.dire_eq(s2, "5 x, c'est 5 fois x,", echelle=1.0, rt=0.12)
         ok = VGroup(*s2.atomes[-4:-1])
         self.play(ok.animate.set_color(VERT_OK), run_time=0.12)
-        s3 = Eq("pas 5 + x.", 36, lettres="").move_to(P(0, 0.72)).align_to(P(0.95, 0), LEFT)
+        s3 = Eq("pas 5 + x.", 36, lettres="").move_to(P(0, 0.05)).align_to(P(0.95, 0), LEFT)
         self.dire_eq(s3, "pas 5 plus x.", echelle=1.0, rt=0.12)
         ko = VGroup(*s3.atomes[1:4])
         self.play(ko.animate.set_color(PIEGE), Create(self.barrer(ko)), run_time=0.2)
         # on divise
-        d1 = Eq("On divise :", 30, OPERATION, lettres="").move_to(P(0, -0.05)).align_to(P(0.95, 0), LEFT)
+        d1 = Eq("On divise :", 30, OPERATION, lettres="").move_to(P(0, -0.6)).align_to(P(0.95, 0), LEFT)
         self.dire_eq(d1, "On divise :", echelle=1.0, rt=0.12)
-        calc = E("8 ÷ 5 = 1,6", 38, lettres="").move_to(P(0, -0.05)).align_to(P(3.5, 0), LEFT)
+        calc = E("8 ÷ 5 = 1,6", 38, lettres="").move_to(P(0, -0.6)).align_to(P(3.5, 0), LEFT)
         calc.atomes[-1].set_color(VERT_OK)
         calc.atomes[1].set_color(OPERATION)
         self.dire_eq(calc, "8 divisé par 5, 1 virgule 6")
         coupes = VGroup(*[DashedLine(P(xs[k] + 0.51, -1.95), P(xs[k] + 0.51, 0.05), color=OPERATION, stroke_width=3) for k in range(4)])
         self.play(Create(coupes), run_time=0.2)
-        f1 = Eq("Chaque chaton", 38, VERT_OK, lettres="").move_to(P(0, -0.85)).align_to(P(0.95, 0), LEFT)
+        f1 = Eq("Chaque chaton", 38, VERT_OK, lettres="").move_to(P(0, -1.35)).align_to(P(0.95, 0), LEFT)
         f2 = E("pèse 1,6 kilo.", 38, couleur=VERT_OK, lettres="").next_to(f1, DOWN, buff=0.14).align_to(f1, LEFT)
         self.dire_eq(f1, "Chaque chaton", echelle=1.0, rt=0.13)
         self.dire_eq(f2, "pèse 1 virgule 6 kilo.", echelle=1.0, rt=0.13)
@@ -547,7 +546,7 @@ class EquationResoudreSimple4e(_OutilsVeto, PaysageEq):
         # la droite graduée, où tombe la solution
         ax = NumberLine(x_range=[-12, 12, 2], length=10.0, color=GRIS_P, stroke_width=4, include_tip=False,
                         include_numbers=False).move_to(P(-0.9, -1.9))
-        lab = VGroup(*[T(s, 28, GRIS_P, audit=False).next_to(ax.n2p(v), DOWN, buff=0.18) for s, v in (("−10", -10), ("0", 0), ("10", 10))])
+        lab = VGroup(*[T(s, 28, GRIS_P, audit=False).next_to(ax.n2p(v), DOWN, buff=0.42) for s, v in (("−10", -10), ("0", 0), ("10", 10))])
         e2 = Eq("a = −10", 76, lettres="a").mis_sur_egal(X, -0.1)
         self.play(FadeIn(ax), FadeIn(lab), run_time=0.2)
         self.descendre(e1, e2, "a égale moins 10")
@@ -573,7 +572,7 @@ class EquationResoudreSimple4e(_OutilsVeto, PaysageEq):
             self.play(FadeIn(ca, shift=UP * 0.15), run_time=0.15)
             e = Eq(st, 56).move_to(P(self.XC[k], 1.15))
             self.dire_eq(e, ph)
-            b = BalanceVeto(largeur=3.5, hauteur=2.0, centre=P(self.XC[k], -0.75))
+            b = BalanceVeto(largeur=4.2, hauteur=2.0, centre=P(self.XC[k], -0.75))
             c1 = b.charger("g", Charge(cg, INCONNUE, 28, audit=False))
             c2 = b.charger("d", Charge(cd, WHITE, 28, audit=False))
             self.play(FadeIn(b), FadeIn(c1), FadeIn(c2), run_time=0.15)

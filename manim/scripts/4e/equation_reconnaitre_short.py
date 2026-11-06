@@ -31,7 +31,7 @@ from equation_commun import *  # noqa: E402,F403
 from equation_reconnaitre import Coffre, OR  # noqa: E402
 
 X_LAMPE_EG, X_LAMPE_X, Y_LAMPE = 0.85, 1.6, 1.9
-Y_EQ, Y_VERDICT, Y_RAISON = -0.45, -1.3, -2.1
+Y_EQ, Y_VERDICT, Y_RAISON = -0.3, -1.12, (-1.82, -2.24)  # raison sur 2 lignes : loin du bord de la carte
 ECART_CHRONO = 3.35  # du dernier mot de l'écriture au verdict : 3 s de chrono + les fondus
 
 
@@ -118,13 +118,14 @@ class EquationReconnaitreShort(ShortEq):
         ch = self.chrono(3).move_to(P((X_LAMPE_EG + X_LAMPE_X) / 2, 0.78))
         self.play(FadeIn(ch, scale=0.7), run_time=0.08)
         ch.jouer(self)
-        tv = self.verdict(verdict, couleur, 28).move_to(P(0, Y_VERDICT))
+        tv = self.verdict(verdict, couleur, 26).move_to(P(0, Y_VERDICT))
         self.au(mot_verdict, FadeOut(ch), FadeIn(tv, scale=1.4), *avec_verdict, n=n_verdict, rt=0.3)
         self.insister(tv, 1.12, 0.15)
-        r = Eq(raison, 28, lettres="").move_to(P(0, Y_RAISON))
-        if r.width > 3.9:
-            r.scale_to_fit_width(3.9)
-        self.dire_eq(r, raison, echelle=1.0, rt=0.14)
+        r = VGroup()
+        for (ligne, n), y in zip(raison, Y_RAISON):
+            lg = Eq(ligne, 27, lettres="").move_to(P(0, y))
+            self.dire_eq(lg, ligne, n=n, echelle=1.0, rt=0.14)
+            r.add(lg)
         return e, tv, r
 
     def construct(self):
@@ -164,7 +165,7 @@ class EquationReconnaitreShort(ShortEq):
 
         # manche 1 : 2 + 7 = 9 ; il manque la lettre
         e, tv, r = self.manche("2 + 7 = 9", "2 plus 7 égale 9", "Pas d'équation", "Pas d'", 1, PIEGE,
-                               "il n'y a pas de lettre.", [v_eg.allumer()])
+                               [("il n'y a pas", 1), ("de lettre.", 1)], [v_eg.allumer()])
         ba = self.barrer(v_x.txt)
         self.play(v_x.manque(), Create(ba), run_time=0.25)
         self.wait(0.2)
@@ -172,7 +173,7 @@ class EquationReconnaitreShort(ShortEq):
 
         # manche 2 : 3x + 5 ; il manque le signe égal
         e, tv, r = self.manche("3x + 5", "3 x plus 5", "Pas d'équation", "Pas d'", 2, PIEGE,
-                               "il n'y a pas de signe égal.", [v_x.allumer()])
+                               [("il n'y a pas", 2), ("de signe égal.", 1)], [v_x.allumer()])
         ba = self.barrer(v_eg.txt)
         self.play(v_eg.manque(), Create(ba), run_time=0.25)
         self.wait(0.2)
@@ -180,7 +181,7 @@ class EquationReconnaitreShort(ShortEq):
 
         # manche 3 : x + 4 = 9 ; les deux, le coffre s'ouvre
         e, tv, r = self.manche("x + 4 = 9", "x plus 4 égale 9", "Équation", "Équation :", 1, VERT_OK,
-                               "un signe égal et une lettre !", [v_eg.allumer(), v_x.allumer()])
+                               [("un signe égal", 1), ("et une lettre !", 1)], [v_eg.allumer(), v_x.allumer()])
         an, _ = c.afficher("x", INCONNUE)
         self.play(*c.ouvrir(0.3), an, run_time=0.5)
         self.play(Flash(c.lueur, color=OR, line_length=0.25, flash_radius=0.9), run_time=0.35)

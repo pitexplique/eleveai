@@ -63,13 +63,13 @@ class EquationResoudreReductionShort(_OutilsReduc, ShortEq):
         titre.sans_synchro = True
         self.add(badge)
         garder = [badge, titre, margo]
-        Y = 1.2
+        Y = 1.4
 
         # ── 00 : l'accroche ──
         self.dire("00-accroche")
         g2 = paquets(2).move_to(P(-1.42, Y))
-        pl = T("+", 40, OPERATION, audit=False, gras=True).move_to(P(-0.53, Y))
-        g3 = paquets(3).move_to(P(0.84, Y))
+        pl = T("+", 40, OPERATION, audit=False, gras=True).move_to(P(-0.42, Y))
+        g3 = paquets(3).move_to(P(0.94, Y))
         a1 = self.ligne_eq("2 paquets de cartes,", 0.3)
         self.dire_eq(a1, "2 paquets de cartes,", echelle=1.0, rt=0.14, avec=[FadeIn(titre), FadeIn(g2, shift=DOWN * 0.2)])
         a2 = self.ligne_eq("+ 3 paquets,", -0.15)
@@ -87,24 +87,27 @@ class EquationResoudreReductionShort(_OutilsReduc, ShortEq):
         self.dire("01-jeu")
         self.play(FadeOut(lignes), run_time=0.1)
         cible = VGroup(g2.copy(), g3.copy()).arrange(RIGHT, buff=0.08).move_to(P(0, Y))
-        c1 = self.ligne_eq("On regroupe : 5 paquets.", 0.3, 32, VERT_OK)
+        # écran dense : tout remonte et rétrécit un peu, pour laisser de l'air au-dessus de Ti-Margo
+        c1 = self.ligne_eq("On regroupe : 5 paquets.", 0.5, 28, VERT_OK)
         self.dire_eq(c1, "On regroupe :", echelle=1.0, rt=0.14, sauf=c1.atomes[3:])
         self.play(FadeOut(pl), g2.animate.move_to(cible[0]), g3.animate.move_to(cible[1]), run_time=0.3)
         self.dire_eq(c1, "5 paquets.", echelle=1.0, rt=0.14, sauf=c1.atomes[:3])
         cad = SurroundingRectangle(VGroup(g2, g3), color=VERT_OK, buff=0.09, corner_radius=0.1, stroke_width=4)
         self.play(Create(cad), run_time=0.15)
-        e1 = Eq("5x = 15", 44).mis_sur_egal(0.6, -0.3)
+        e1 = Eq("5x = 15", 40).mis_sur_egal(0.6, 0.0)
         self.dire_eq(e1, "5 x égale 15")
         self.play(e1.egal.animate.set_color(EGAL), run_time=0.1)
-        e2 = Eq("Donc x = 3.", 44).mis_sur_egal(0.6, -0.95)
+        e2 = Eq("Donc x = 3.", 40).mis_sur_egal(0.6, -0.68)
+        e2.atomes[0].shift(LEFT * 0.14)  # « Donc » ne colle pas au cadre
         self.dire_eq(e2, "Donc x égale 3.")
-        e2c = SurroundingRectangle(VGroup(*e2.atomes[1:4]), color=VERT_OK, buff=0.08, corner_radius=0.08, stroke_width=4)
-        self.play(e2.atomes[3].animate.set_color(VERT_OK), Create(e2c), run_time=0.12)
-        d = self.ligne_eq("3 cartes par paquet.", -1.55, 32, VERT_OK)
+        # le cadre prend le point final : il ne colle plus à son bord
+        e2c = SurroundingRectangle(VGroup(*e2.atomes[1:]), color=VERT_OK, buff=0.1, corner_radius=0.08, stroke_width=4)
+        self.play(e2.atomes[3].animate.set_color(VERT_OK), e2.atomes[4].animate.set_color(VERT_OK), Create(e2c), run_time=0.12)
+        d = self.ligne_eq("3 cartes par paquet.", -1.3, 28, VERT_OK)
         self.dire_eq(d, "3 cartes par paquet.", echelle=1.0, rt=0.13)
         self.play(*[p.devient("3") for p in list(g2) + list(g3)], run_time=0.2)
-        r1 = self.ligne_eq("Regrouper d'abord,", -2.05, 32, JAUNE_TITRE)
-        r2 = self.ligne_eq("et tout devient facile.", -2.5, 32, JAUNE_TITRE)
+        r1 = self.ligne_eq("Regrouper d'abord,", -1.8, 26, JAUNE_TITRE)
+        r2 = self.ligne_eq("et tout devient facile.", -2.2, 26, JAUNE_TITRE)
         self.dire_eq(r1, "Regrouper d'abord,", echelle=1.0, rt=0.12)
         self.dire_eq(r2, "et tout devient facile.", echelle=1.0, rt=0.12)
         self.attendre_voix(marge=0.4)

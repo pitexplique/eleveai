@@ -95,6 +95,14 @@ def barre_parts(w, h, n, centre=ORIGIN):
     return ca
 
 
+def aerer(e, *coupes, dx=0.14):
+    """Écarte les atomes d'une Eq à ces indices (les cadres ne collent plus aux signes)."""
+    for i in coupes:
+        for a in e.atomes[i:]:
+            a.shift(RIGHT * dx)
+    return e
+
+
 class _OutilsReduc:
     # ── outils de l'épisode (recopiés de l'épisode 03) ──────────────────────
     def descendre(self, a, b, phrase, n=1):
@@ -200,19 +208,19 @@ class EquationResoudreReduction4e(_OutilsReduc, PaysageEq):
     # ── 02 : on réduit, les boucles fusionnent ──────────────────────────────
     def ecran_reduire(self):
         self.ecran("02-reduire")
-        e0 = Eq("2x + 3x = 15", 62).sans_audit().mis_sur_egal(0.75, 3.0)
+        e0 = aerer(Eq("2x + 3x = 15", 62).sans_audit(), 2, 3, 5).mis_sur_egal(0.75, 3.0)
         e0.egal.set_color(EGAL)
         self.play(FadeIn(e0), run_time=0.15)
-        l1 = Eq("Il y a deux termes en x : on ne peut pas encore isoler x.", 32, lettres="x").move_to(P(0, 2.15))
-        c1 = SurroundingRectangle(VGroup(*e0.atomes[:2]), color=INCONNUE, buff=0.1, corner_radius=0.08, stroke_width=4)
-        c2 = SurroundingRectangle(VGroup(*e0.atomes[3:5]), color=INCONNUE, buff=0.1, corner_radius=0.08, stroke_width=4)
+        l1 = Eq("Il y a deux termes en x : on ne peut pas encore isoler x.", 32, lettres="x").move_to(P(0, 2.1))
+        c1 = SurroundingRectangle(VGroup(*e0.atomes[:2]), color=INCONNUE, buff=0.14, corner_radius=0.08, stroke_width=4)
+        c2 = SurroundingRectangle(VGroup(*e0.atomes[3:5]), color=INCONNUE, buff=0.14, corner_radius=0.08, stroke_width=4)
         self.dire_eq(l1, "Il y a deux termes en x :", echelle=1.0, rt=0.12, sauf=l1.atomes[8:])
         self.play(Create(c1), Create(c2), run_time=0.2)
         self.dire_eq(l1, "on ne peut pas encore isoler x.", echelle=1.0, rt=0.12, sauf=l1.atomes[:8])
         g2 = rang(2, 0.5, 0.12).move_to(P(-4.35, 0.85))
         g3 = rang(3, 0.5, 0.12).move_to(P(0.05, 0.85))
         pl = T("+", 54, OPERATION, audit=False, gras=True).move_to(P(-2.42, 0.85))
-        l2 = Eq("2 boucles + 3 boucles, ça fait 5 boucles.", 36, lettres="").move_to(P(-1.6, -0.15))
+        l2 = Eq("2 boucles + 3 boucles, ça fait 5 boucles.", 36, lettres="").move_to(P(-1.6, -0.38))
         self.par_morceaux(l2, (2, "2 boucles", [FadeIn(g2, shift=DOWN * 0.15)]),
                           (1, "plus", [FadeIn(pl, scale=1.3)]),
                           (3, "3 boucles,", [FadeIn(g3, shift=DOWN * 0.15)]))
@@ -229,7 +237,7 @@ class EquationResoudreReduction4e(_OutilsReduc, PaysageEq):
         d = Eq("L'équation devient", 34, CIEL, lettres="").move_to(P(-4.0, -2.55))
         self.dire_eq(d, "L'équation devient", echelle=1.0, rt=0.12)
         self.dire_eq(e2, "5 x égale 15")
-        cad = SurroundingRectangle(e2, color=JAUNE_TITRE, buff=0.14, corner_radius=0.1, stroke_width=4)
+        cad = SurroundingRectangle(e2, color=JAUNE_TITRE, buff=0.2, corner_radius=0.1, stroke_width=4)
         self.play(e2.egal.animate.set_color(EGAL), Create(cad), run_time=0.2)
         self.attendre_voix(marge=0.5)
 
@@ -277,9 +285,10 @@ class EquationResoudreReduction4e(_OutilsReduc, PaysageEq):
         self.play(e0.egal.animate.set_color(EGAL), run_time=0.1)
         # x tout seul : le 1 caché sort
         gx = T("x", 120, INCONNUE, audit=False, gras=True).move_to(P(3.9, 2.05))
-        l1 = Eq("x tout seul, c'est 1x.", 40, lettres="x").move_to(P(3.2, 0.72))
+        l1 = Eq("x tout seul, c'est 1x.", 40, lettres="x").move_to(P(3.3, 0.92))
         un = T("1", 120, OPERATION, audit=False, gras=True).next_to(gx, LEFT, buff=0.12).align_to(gx, DOWN)
         g4 = rang(4, 0.45, 0.1).move_to(P(-3.05, 1.45))
+        g4[3].shift(RIGHT * 0.16)  # la barre rouge de la 4e boucle ne touche plus le cadre vert
         self.dire_eq(l1, "x tout seul, c'est 1 x.", echelle=1.0, rt=0.13, sauf=l1.atomes[-3:], avec=[FadeIn(gx, scale=1.2), FadeIn(g4)])
         self.dire_eq(l1, "1 x.", echelle=1.0, rt=0.13, sauf=l1.atomes[:-3], avec=[FadeIn(un, shift=RIGHT * 0.5)])
         self.insister(un, 1.3, 0.2)
@@ -293,9 +302,11 @@ class EquationResoudreReduction4e(_OutilsReduc, PaysageEq):
         e2 = Eq("Donc 3x = 12,", 60).mis_sur_egal(X, -1.1)
         self.dire_eq(e2, "Donc 3 x égale 12,")
         e3 = Eq("et x = 4.", 60).mis_sur_egal(X, -2.3)
+        e3.atomes[0].shift(LEFT * 0.2)  # « et » ne colle pas au cadre
         self.dire_eq(e3, "et x égale 4.")
-        cad = SurroundingRectangle(VGroup(*e3.atomes[1:-1]), color=VERT_OK, buff=0.12, corner_radius=0.1, stroke_width=4)
-        self.play(e3.atomes[-2].animate.set_color(VERT_OK), Create(cad), run_time=0.15)
+        # le cadre prend le point final : il ne colle plus à son bord
+        cad = SurroundingRectangle(VGroup(*e3.atomes[1:]), color=VERT_OK, buff=0.15, corner_radius=0.1, stroke_width=4)
+        self.play(e3.atomes[-2].animate.set_color(VERT_OK), e3.atomes[-1].animate.set_color(VERT_OK), Create(cad), run_time=0.15)
         self.attendre_voix(marge=0.5)
 
     # ── 04q : QUESTION 1 ────────────────────────────────────────────────────
@@ -358,39 +369,39 @@ class EquationResoudreReduction4e(_OutilsReduc, PaysageEq):
     # ── 06 : les t et les nombres groupés ───────────────────────────────────
     def ecran_mele(self):
         self.ecran("06-mele")
-        X, XL_ = 1.45, -5.9
-        ex = Eq("Exemple.", 36, JAUNE_TITRE, lettres="").move_to(P(0, 3.25)).align_to(P(XL_, 0), LEFT)
+        X, XL_ = 1.85, -5.9
+        ex = Eq("Exemple.", 36, JAUNE_TITRE, lettres="").move_to(P(0, 3.3)).align_to(P(XL_, 0), LEFT)
         self.dire_eq(ex, "Exemple.", echelle=1.0, rt=0.15)
-        e0 = Eq("2t + 12 + t − 3 = 27", 62).mis_sur_egal(X, 2.45)
+        e0 = aerer(Eq("2t + 12 + t − 3 = 27", 62), 2, 3, 4, 5, 6, 8).mis_sur_egal(X, 2.33)
         self.dire_eq(e0, "2 t plus 12 plus t moins 3 égale 27")
         self.play(e0.egal.animate.set_color(EGAL), run_time=0.1)
         a = e0.atomes
-        ct = VGroup(*[SurroundingRectangle(VGroup(*m), color=INCONNUE, buff=0.07, corner_radius=0.07, stroke_width=4)
+        ct = VGroup(*[SurroundingRectangle(VGroup(*m), color=INCONNUE, buff=0.13, corner_radius=0.07, stroke_width=4)
                       for m in (a[0:2], a[5:6])])
-        cn = VGroup(*[SurroundingRectangle(VGroup(*m), color=NOMBRE, buff=0.07, corner_radius=0.07, stroke_width=4)
+        cn = VGroup(*[SurroundingRectangle(VGroup(*m), color=NOMBRE, buff=0.13, corner_radius=0.07, stroke_width=4)
                       for m in (a[3:4], a[6:8])])
-        l1 = Eq("Les t ensemble : 2t + t, 3t.", 38, lettres="t").move_to(P(0, 1.68)).align_to(P(XL_, 0), LEFT)
+        l1 = Eq("Les t ensemble : 2t + t, 3t.", 38, lettres="t").move_to(P(0, 1.45)).align_to(P(XL_, 0), LEFT)
         for at in l1.atomes[:3]:
             at.set_color(INCONNUE)
         self.dire_eq(l1, "Les t ensemble : 2 t plus t, 3 t.", echelle=1.0, rt=0.12, avec=[Create(ct)])
-        l2 = Eq("Les nombres ensemble : 12 − 3, 9.", 38, NOMBRE, lettres="").move_to(P(0, 1.06)).align_to(P(XL_, 0), LEFT)
+        l2 = Eq("Les nombres ensemble : 12 − 3, 9.", 38, NOMBRE, lettres="").move_to(P(0, 0.85)).align_to(P(XL_, 0), LEFT)
         self.dire_eq(l2, "Les nombres ensemble : 12 moins 3, 9.", echelle=1.0, rt=0.12, avec=[Create(cn)])
-        ob = Eq("On obtient", 34, CIEL, lettres="").move_to(P(0, 0.2)).align_to(P(XL_, 0), LEFT)
+        ob = Eq("On obtient", 34, CIEL, lettres="").move_to(P(0, 0.0)).align_to(P(XL_, 0), LEFT)
         self.dire_eq(ob, "On obtient", echelle=1.0, rt=0.12)
-        e1 = Eq("3t + 9 = 27", 62).mis_sur_egal(X, 0.2)
+        e1 = aerer(Eq("3t + 9 = 27", 62), 2, 3, 4).mis_sur_egal(X, 0.0)
         self.dire_eq(e1, "3 t plus 9 égale 27")
-        c1 = SurroundingRectangle(VGroup(*e1.atomes[:2]), color=INCONNUE, buff=0.07, corner_radius=0.07, stroke_width=4)
-        c2 = SurroundingRectangle(e1.atomes[3], color=NOMBRE, buff=0.07, corner_radius=0.07, stroke_width=4)
+        c1 = SurroundingRectangle(VGroup(*e1.atomes[:2]), color=INCONNUE, buff=0.13, corner_radius=0.07, stroke_width=4)
+        c2 = SurroundingRectangle(e1.atomes[3], color=NOMBRE, buff=0.13, corner_radius=0.07, stroke_width=4)
         self.play(Create(c1), Create(c2), e1.egal.animate.set_color(EGAL), run_time=0.15)
-        s1 = Eq("On soustrait 9 :", 34, OPERATION, lettres="").move_to(P(0, -0.9)).align_to(P(XL_, 0), LEFT)
+        s1 = Eq("On soustrait 9 :", 34, OPERATION, lettres="").move_to(P(0, -1.08)).align_to(P(XL_, 0), LEFT)
         self.dire_eq(s1, "On soustrait 9 :", echelle=1.0, rt=0.12)
-        e2 = Eq("3t = 18", 62).mis_sur_egal(X, -0.9)
+        e2 = Eq("3t = 18", 62).mis_sur_egal(X, -1.08)
         self.dire_eq(e2, "3 t égale 18")
-        s2 = Eq("On divise par 3 :", 34, OPERATION, lettres="").move_to(P(0, -2.0)).align_to(P(XL_, 0), LEFT)
+        s2 = Eq("On divise par 3 :", 34, OPERATION, lettres="").move_to(P(0, -2.2)).align_to(P(XL_, 0), LEFT)
         self.dire_eq(s2, "On divise par 3 :", echelle=1.0, rt=0.12)
-        e3 = Eq("t = 6", 62).mis_sur_egal(X, -2.0)
+        e3 = Eq("t = 6", 62).mis_sur_egal(X, -2.2)
         self.dire_eq(e3, "t égale 6")
-        cad = SurroundingRectangle(e3, color=VERT_OK, buff=0.14, corner_radius=0.1, stroke_width=4)
+        cad = SurroundingRectangle(e3, color=VERT_OK, buff=0.2, corner_radius=0.1, stroke_width=4)
         self.play(e3.droite.animate.set_color(VERT_OK), Create(cad), run_time=0.2)
         self.attendre_voix(marge=0.5)
 
@@ -503,9 +514,17 @@ class EquationResoudreReduction4e(_OutilsReduc, PaysageEq):
         lignes = self.finale_colonne([["Quand x apparaît plusieurs fois,", "on réduit d'abord."],
                                       ["On regroupe les x avec les x,", "les nombres avec les nombres."],
                                       ["x tout seul, c'est 1x."]], fs=36, figure=fig)
-        self.play(FadeIn(fig), run_time=0.3)
-        for lg in lignes:
+        self.play(FadeIn(VGroup(r, e)), run_time=0.3)
+        for lg in lignes[:2]:
             self.montrer_ligne(lg)
+        # « x = 1x » et le « 1x » de la dernière ligne : seulement quand la voix dit « 1 x »
+        ref = lignes[2][1][0]
+        der = Eq("x tout seul, c'est 1x.", 36, lettres="")
+        der.scale_to_fit_height(ref.height).move_to(ref)
+        a = der.atomes
+        self.dire_eq(der, "x tout seul, c'est", echelle=1.0, rt=0.13, sauf=a[7:], avec=[Create(lignes[2][0])])
+        self.dire_eq(der, "1 x.", echelle=1.0, rt=0.13, sauf=a[:7] + a[8:], avec=[FadeIn(VGroup(*s.atomes[:3]))])
+        self.dire_eq(der, "x.", echelle=1.0, rt=0.13, sauf=a[:8], avec=[FadeIn(s.atomes[3])])
         self.attendre_voix(marge=1.0)
 
     def construct(self):

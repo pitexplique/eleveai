@@ -39,6 +39,8 @@ Question en commentaire : parmi 6 × 2 = 12, 4n − 1 et 4n = 20, laquelle est u
 
 **Soucis restants** : aucun défaut visuel connu.
 
+**Corrections (relecture du 05/11, `defauts-equations.md`)** : aucun mot de la voix changé, durées inchangées (3:53 et 1:12). Paysage 00:24 : le x grandit depuis son coin bas-gauche, à 1,45 au lieu de 1,7, il ne mord plus le 3 (`allumer_lettre` applique le même zoom aux autres lettres collées à leur coefficient : écran 03, membres, correction). Paysage 02:48 : verre de la loupe sans remplissage, plus grand, centré sur le chiffre, il entoure le 2 sans le masquer ; « vrai » écarté pour laisser passer le verre sur le 9. Short 00:30 : la raison passe sur 2 lignes (les 3 manches), équation et tampon remontés, plus rien près du bord de la carte. Vu en plus au contrôle des animations et corrigé : le y de « 4y » flottait au-dessus de la ligne (aligné par le bas de son jambage) ; il garde la ligne de base, et les soulignés des membres descendent pour que son jambage ne les croise pas. Anneau 02:05 vérifié : il ne touche plus rien. Dry run : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD (seul reste `AUDIT-ABSENT « 974 »`, l'écran de fin) ; `verifier-bords-video.py` : 0 instant sur les deux ; rendus HD : paysage 2 (la planche HD a montré le jambage du y qui touchait encore le souligné), short 1, aucune `MemoryError`.
+
 ## Épisode 03 : resoudre-simple (05/11/2026)
 
 **Fichiers**
@@ -79,6 +81,8 @@ Question en commentaire : un sac et 7 billes d'un côté, 15 billes de l'autre, 
 **Vu sur les planches, corrigé puis re-rendu** : flèches qui barraient « On ajoutait 4 » et « on soustrait 4 » ; phrases qui sortaient du cadre (écrans 02, 05, 06) ; « pas 5 + x » sur « 5 × x » ; réponse de la question 2 illisible (trop petite), le piège passe sous la figure ; le « 10 » coupé par les pointillés, remplacé par 2,5 dans chaque part ; « en équilibre » affiché pendant que la balance penche ; tailles de texte inégales dans le short ; « x » peu lisible sur le sac. Vus sur la planche HD : les deux-points collés au 8 (06), le sac qui touchait le portique, la ligne de question 1 décalée. D'où 2 rendus HD par vidéo.
 
 **Soucis restants** : aucun défaut visuel connu.
+
+**Corrections (relecture du 05/11)** : portique de la question 1 plus haut et « + 5 » moins collés, ils ne touchent plus le fléau (01:31-01:35) ; balances du défi élargies, la case « x + 5 » ne remplit plus son plateau (03:12) ; « ils ont soustrait 5. » passé sur sa propre ligne, en grand, le reste de la colonne descend (02:17) ; libellés de la droite graduée descendus, le point vert ne mord plus « −10 », même agrandi (02:58) ; en plus, chatons un peu réduits : la queue touchait la tête du voisin et les pointillés coupaient les têtes. Short 00:20 : doute non confirmé au zoom (le x bleu est sur un disque sombre, très lisible), short NON re-rendu. Anneau : ne touche plus la question (01:23). Aucun mot de voix changé. Dry run paysage : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD. `verifier-bords-video.py` : 0 instant. 1 rendu HD pour la paysage, aucune `MemoryError`. Durée (3:47), chapitres et questions inchangés.
 
 ## Épisode 02 : traduire (05/11/2026)
 
@@ -121,16 +125,18 @@ Question en commentaire : le triple de x augmenté de 4 vaut 19, écris l'équat
 
 **Soucis restants** : aucun défaut visuel connu.
 
+**Corrections (relecture du 05/11)** : interligne de « Ce que tu as appris » desserré (03:26) ; x blanc sur le bloc bleu (00:26, doute confirmé), et aussi sur les 3 blocs de la correction, même défaut ; cadre de 3x = 21 et x + 3 = 11 du short élargi (00:22), équation passée de 48 à 44 pour tenir dans la carte ; flèche sans valeur du short (00:52-00:56, doute confirmé) : elle porte maintenant « 19 », affiché juste après le mot ; en plus, cadres des équations de la paysage élargis (écrans 01, 03, correction), serrés de la même façon. Anneau : ne touche plus la question aux deux questions de la paysage. Aucun mot de voix changé. Dry run paysage et short : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD. `verifier-bords-video.py` : 0 instant sur les deux. 1 rendu HD pour chacune, aucune `MemoryError`. Durées inchangées : 3:40 et 1:03.
+
 ## Épisode 05 : resoudre-distributivite (05/11/2026)
 
 **Fichiers**
 - Scripts : `manim/scripts/4e/equation_resoudre_distributivite.py` (classe `EquationResoudreDistributivite4e`), `equation_resoudre_distributivite_short.py` (classe `EquationResoudreDistributiviteShort`), marques `equation_resoudre_distributivite_marques.json` et `equation_resoudre_distributivite_short_marques.json`. WAV : `public/sons/4e-equation-resoudre-distributivite/` et `…-short/` (débit −6).
-- Sorties : `manim/sorties/4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite.mp4` (3:27) et `eleveai-maths-4e-equation-resoudre-distributivite-short.mp4` (1:11).
+- Sorties : `manim/sorties/4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite.mp4` (3:29) et `eleveai-maths-4e-equation-resoudre-distributivite-short.mp4` (1:11).
 
 **Ceintures** : verte (paysage), blanche (short). **Centres** : `["electro-dj", "musique"]`. **Métier** : Nathan, DJ. **Micro** : `equation_resoudre_distributivite`.
 
 **Chapitres de la paysage (mesurés au rendu)**
-00:00 Résoudre avec des parenthèses · 00:05 La timeline de Nathan · 00:24 Première route : diviser · 00:37 Deuxième route : développer · 00:54 Deux routes, la même solution · 01:03 Question 1 · 01:33 Le piège · 01:45 Avec un moins · 01:59 Question 2 · 02:26 À toi de jouer · 02:48 Correction · 03:04 Ce que tu as appris
+00:00 Résoudre avec des parenthèses · 00:05 La timeline de Nathan · 00:24 Première route : diviser · 00:37 Deuxième route : développer · 00:54 Deux routes, la même solution · 01:03 Question 1 · 01:33 Le piège · 01:45 Avec un moins · 01:59 Question 2 · 02:26 À toi de jouer · 02:48 Correction · 03:06 Ce que tu as appris
 
 **Questions de la paysage**
 ```json
@@ -159,6 +165,8 @@ Question en commentaire : 5(x + 2) = 35, que vaut x ?
 **À savoir pour les épisodes suivants** : `Eq` plante aussi sur « fi » (« fini ») : ce mot se pose avec `T`. `ph_eq` doit caler la largeur et non la hauteur, sinon une ligne longue sort du cadre du short.
 
 **Soucis restants** : aucun défaut visuel connu.
+
+**Corrections (relecture du 05/11)** : colonnes des deux routes redisposées et phrases du bas descendues, plus rien ne touche les cadres x = 4 (01:02, et colonne de droite dès 00:52). Opérations de la correction passées de 26 à 34, lignes plus espacées (03:01-03:04) ; celles des deux routes de 30 à 34, par cohérence. Le résultat a = 4 grandit puis reste environ 3 s, et l'écran se vide en fondu : silence après la voix, la paysage passe de 3:27 à 3:29, « Ce que tu as appris » à 03:06. Contraste : blocs de l'inconnue en bleu foncé (`BLEU_BLOC`), plus aucune strie sous leur nom (paysage et short). Short : trait central décalé à gauche et lignes de 23 à 22, le 2x ne le touche plus (00:20-00:28) ; « Lui développe : » écarté du coureur (00:20) ; 01:00 : doute levé, ce n'est pas « x − 1/2 » mais le x et le 2 de x + 2 dans leurs blocs, les stries faisaient croire à un trait : aucune barre, règle respectée. Vu en plus : le cercle rouge du piège frôlait la parenthèse, le 3 oublié est maintenant souligné ; « ÷ 2 » et « − 6 » trop près des cadres. Aucun mot de voix changé, questions inchangées. Dry run paysage et short : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD (seul reste `AUDIT-ABSENT « 974 »`, l'écran de fin). `verifier-bords-video.py` : 0 instant sur les deux. Rendus HD : paysage 2 (la planche HD a montré le cercle et les opérations serrées), short 1, aucune `MemoryError`. Durée du short inchangée (1:11).
 
 ## Épisode 04 : resoudre-reduction (05/11/2026)
 
@@ -204,6 +212,8 @@ Question en commentaire : 6x − 2x = 20, que vaut x ?
 
 **Soucis restants** : aucun défaut visuel connu.
 
+**Corrections (relecture du 05/11, `defauts-equations.md`)** : aucun mot de la voix changé, durées inchangées (3:31 et 1:01). Paysage 00:37 : « 2 boucles + 3 boucles » descendu sous le cadre vert. Paysage 00:37 et 02:04 : cadres desserrés (5x = 15, 2x, 3x, 2t, 12, t, −3, 3t, 9, t = 6), et les atomes des équations encadrées écartés (`aerer()`, dans MON script), le = reste aligné ; écran 06 redisposé. Paysage 01:05 et short 00:16-00:22 : le cadre de « x = 4. » et « x = 3. » prend le point final, en vert. Paysage 03:14-03:23 : doute confirmé, « x = 1x » était là 10 s trop tôt, il arrive maintenant au mot « 1 x », comme le « 1x » de la ligne (le 2x + 3x = 5x reste un rappel). Short 00:20-00:22 : tout remonte et rétrécit, le bas du texte a 0,75 d'air au-dessus de Ti-Margo, « Regrouper d'abord, » et « et tout devient facile. » à la même taille. Vu en plus et corrigé : barre rouge de la 4e boucle qui touchait le cadre vert, « x tout seul » trop près de 4x − 1x = 3x, « et » et « Donc » collés à leur cadre ; short 00:07 : le + collé au paquet de gauche, recentré (vu sur la planche HD). Anneau 01:19 vérifié : il ne touche plus rien. Dry run : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD (seul reste `AUDIT-ABSENT « 974 »`, l'écran de fin). `verifier-bords-video.py` : 0 instant sur les deux. Rendus HD : paysage 1, short 2 (à cause du +), aucune `MemoryError`.
+
 ## Épisode 06 : verifier (05/11/2026)
 
 **Fichiers**
@@ -244,6 +254,8 @@ Question en commentaire : x = 6 est-il solution de 2x − 5 = 7 ? Vrai ou faux ?
 - Pour des choix longs, reconstruire les cartes depuis des copies : `_carte_choix` réduit l'`Eq` et ne l'agrandit plus ensuite.
 
 **Vu sur les planches, corrigé puis re-rendu** : basse définition : « 2x + 1 = 9 » collé à « et trouve », le 4 écrasé sur le x (écran 02), « ≠ » sur les cases de la question 1, « Quelqu'un écrit : » collé à 5x, « Non, 4 n'est » sur la case de la correction, lignes de « Ce que tu as appris » trop petites ; dans le short, le « ? » du voyant resté sur le rouge (devient « ! »), l'aiguille sur « faux », un verdict hors cadre. Planche HD : nombres serrés dans les cases, loupe contre la rature, lignes serrées dans le short, puis « = » qui mordait sur les cases de la question 2. D'où 3 rendus HD pour la paysage et 2 pour le short.
+
+**Corrections (relecture du 05/11, paysage seule, short non re-rendu, voix inchangée)** : 00:28 flèche du 4 relevée, elle ne touche plus le x ; 00:47-00:55 colonnes du tableau élargies (2,6 / 2,4 / 2,2) pour « On essaie » ; 01:04-01:21 rappel 3x = 9 remonté et cartes écartées, ≠ au large ; 02:24 cartes de la question 2 écartées, = au large ; 03:19 pastilles et textes décalés, « Non, 4 n'est pas solution » à distance égale de la case et de la pastille. Anneau vérifié à 01:08 : il ne touche plus la question. Vus en plus et corrigés : étiquettes « à gauche » / « à droite » remises sur la même ligne d'écriture, voyant qui touchait le nez de la fusée (écrans 02 et 06), « Les deux membres » serré sous les cases (02), « à gauche » serré sous la ligne (05), « La bonne solution » serré (04). Ces deux derniers, vus au zoom sur le premier rendu, ont demandé un 2e rendu HD au lieu d'un seul. Dry run : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD (seul reste `AUDIT-ABSENT « 974 »`). `verifier-bords-video.py` : 0 instant. Durée 3:45 inchangée, donc chapitres et `t` des questions inchangés. Aucune `MemoryError`.
 
 **Soucis restants** : aucun défaut visuel connu.
 
@@ -288,3 +300,5 @@ Sur les cartes du short, seul le cœur du choix est écrit (« soustraire 2 », 
 **Vu sur les planches, corrigé puis re-rendu** : basse définition : coche sous la croix et croix sur « x = 4 » (short), texte de la feuille hors feuille (short), cartes trop petites (short) ; feuille sur « 2x + 3 » (écran 03), flèches sur « On soustrait », texte hors feuille (question 1), réponse illisible (question 1), « Mets pause » sur la feuille (défi), « Correction » sur l'équation, le 2x de droite mal désigné (écran 05), phrase de réponse hors cadre (question 2). Planche HD : « a » sur la marge, croix collée au 15, cadres serrés autour de x = 5 et x = 7, cadre de x = 5 sur « ÷ 2 », « = » collé entre 17 à gauche et 17 à droite puis entre les cases de la correction, « À droite » décalé de « à gauche », « C'est juste. » collé à la case (paysage) ; « 2x + 3 = 11 » collé à la feuille, « Sauras-tu… » trop petit (short). D'où 4 rendus HD pour la paysage et 2 pour le short.
 
 **Soucis restants** : aucun défaut visuel connu.
+
+**Corrections (relecture du 05/11)** : libellés « À gauche » / « À droite » écrits pareil, même écart à la case, même ligne de base (03:16-03:23). Ellipse de 00:39 élargie, la ligne « car… » passée de 32 à 30 : elle passe au large du 9 et du « car » ; stylo garé plus bas, il ne touche plus l'ellipse. Ellipse de 01:45 : « + 2 » écarté du 11 et du =, ellipse plus large, plus aucun contact ; ligne « donc… » de 34 à 32 pour tenir dans la feuille. Écran « x des deux côtés » (02:32-02:40) : chaque opération s'écrit sous le terme visé (− 2x sous 4x et sous 2x, + 3 sous − 3 et sous 7, ÷ 2 sous 2x et sous 10), planche confirmée ; x = 5 descendu, « ÷ 2 » ne serre plus son cadre. Vu en plus et corrigé : le a et « donc » sur la marge rouge de la feuille (écran 04), décalés à droite ; lignes rapprochées des − 2x, redistribuées ; envol du 2x, qui serait passé par le titre et l'équation, il passe maintenant dessous. Aucun mot de voix changé, questions et chapitres inchangés, durée inchangée (3:45), short non re-rendu. Dry run : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD (seul reste `AUDIT-ABSENT « 974 »`, l'écran de fin). `verifier-bords-video.py` : 0 instant. 1 rendu HD, aucune `MemoryError`.

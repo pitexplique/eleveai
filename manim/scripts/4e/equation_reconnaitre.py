@@ -28,6 +28,12 @@ PAPIER = "#fef3c7"
 ENCRE_N = "#1f2937"
 
 
+def allumer_lettre(m, couleur, k=1.5):
+    """Le zoom d'une lettre collée à son coefficient (3x, 7n) : elle grandit depuis
+    son coin bas-gauche, vers la droite et vers le haut, sans empiéter sur le chiffre."""
+    return m.animate(rate_func=there_and_back).scale(k, about_point=m.get_corner(DL)).set_color(couleur)
+
+
 class Coffre(VGroup):
     """Le coffre : .caisse .couvercle .lueur, le cadenas (.anse .serrure .symbole).
     coffre.ouvrir() : les animations qui l'ouvrent (couvercle, anse, lueur)."""
@@ -138,7 +144,7 @@ class EquationReconnaitre4e(PaysageEq):
         self.dire_eq(c2, "c'est la lettre x.", echelle=1.0)
         an, nv = c.afficher("x", INCONNUE)
         self.play(an, run_time=0.3)
-        self.insister(VGroup(e.x[0]), 1.7, 0.25, about=e.x[0].get_center())
+        self.insister(VGroup(e.x[0]), 1.45, 0.25, about=e.x[0].get_corner(DL))
         self.attendre_voix(marge=0.4)
 
     # ── 02 : une égalité ET une inconnue ───────────────────────────────────
@@ -190,7 +196,7 @@ class EquationReconnaitre4e(PaysageEq):
         k1 = self.coche(VERT_OK, 0.26).move_to(P(X_S, YS[0]))
         k2 = self.coche(VERT_OK, 0.26).move_to(P(X_L, YS[0]))
         self.au("signe", FadeIn(h1, shift=DOWN * 0.1), Create(k1), e1.egal.animate.set_color(EGAL), rt=0.35)
-        self.au("lettre.", FadeIn(h2, shift=DOWN * 0.1), Create(k2), Indicate(e1.x[0], color=INCONNUE, scale_factor=1.5), rt=0.35)
+        self.au("lettre.", FadeIn(h2, shift=DOWN * 0.1), Create(k2), allumer_lettre(e1.x[0], INCONNUE), rt=0.35)
         t1 = self.tampon("Équation", VERT_OK, 34).move_to(P(X_V, YS[0]))
         self.au("équation", FadeIn(t1, scale=1.4), rt=0.3)
         self.insister(t1, 1.15, 0.2)
@@ -213,7 +219,7 @@ class EquationReconnaitre4e(PaysageEq):
         e3.move_to(P(0, YS[2])).align_to(e1, LEFT)
         self.dire_eq(e3, "3 x plus 5")
         k4 = self.coche(VERT_OK, 0.26).move_to(P(X_L, YS[2]))
-        self.au("lettre,", Create(k4), Indicate(e3.x[0], color=INCONNUE, scale_factor=1.5), rt=0.35)
+        self.au("lettre,", Create(k4), allumer_lettre(e3.x[0], INCONNUE), rt=0.35)
         vide2 = Square(0.5, stroke_color=PIEGE, stroke_width=3).move_to(P(X_S, YS[2]))
         cr2 = croix(vide2.copy().scale(0.7), PIEGE)
         self.au("signe égal. C'est", FadeIn(vide2), Create(cr2), rt=0.35)
@@ -266,8 +272,8 @@ class EquationReconnaitre4e(PaysageEq):
         self.au("second", FadeIn(ld2, shift=UP * 0.15), rt=0.3)
         self.dire_eq(e, "4 x plus 1 égale 13", sauf=[e.egal])
         # les membres : premier = 4x + 1 ; second = 13
-        s1 = Line(e.gauche.get_corner(DL) + DOWN * 0.1, e.gauche.get_corner(DR) + DOWN * 0.1, color=CIEL, stroke_width=7)
-        s2 = Line(e.droite.get_corner(DL) + DOWN * 0.1, e.droite.get_corner(DR) + DOWN * 0.1, color=OR, stroke_width=7)
+        s1 = Line(e.gauche.get_corner(DL) + DOWN * 0.34, e.gauche.get_corner(DR) + DOWN * 0.34, color=CIEL, stroke_width=7)
+        s2 = Line(e.droite.get_corner(DL) + DOWN * 0.34, e.droite.get_corner(DR) + DOWN * 0.34, color=OR, stroke_width=7)
         self.au("premier", Indicate(lg2, color=CIEL, scale_factor=1.15), n=2, rt=0.3)
         self.au("4 x plus 1,", Create(s1), rt=0.4)
         self.au("second", Indicate(ld2, color=OR, scale_factor=1.15), n=2, rt=0.3)
@@ -279,14 +285,18 @@ class EquationReconnaitre4e(PaysageEq):
         xs = [-5.3, -4.0, -2.7, -1.4]
         ltr = VGroup(*[T(s, 76, INCONNUE).move_to(P(xx, -1.9)) for s, xx in zip("xytn", xs)])
         cur = e.x[0]
+        # la lettre qui remplace x garde sa ligne de base (y descend) et son bord gauche
+        ref = T("xytn", 92, audit=False)
+        bas, gauche = cur.get_bottom()[1], cur.get_left()[0]
 
         def lettre(mot, k):
             if k:
                 n = T("xytn"[k], 92, INCONNUE, audit=False)
-                n.move_to(cur).align_to(cur, DOWN)
+                n.shift(UP * (bas + ref[k].get_bottom()[1] - ref[0].get_bottom()[1] - n.get_bottom()[1])
+                        + RIGHT * (gauche - n.get_left()[0]))
                 self.au(mot, FadeIn(ltr[k], scale=1.5), Transform(cur, n), rt=0.25)
             else:
-                self.au(mot, FadeIn(ltr[k], scale=1.5), Indicate(cur, color=INCONNUE, scale_factor=1.4), rt=0.25)
+                self.au(mot, FadeIn(ltr[k], scale=1.5), allumer_lettre(cur, INCONNUE, 1.4), rt=0.25)
 
         lettre("x, y", 0)
         lettre("y, t", 1)
@@ -384,16 +394,18 @@ class EquationReconnaitre4e(PaysageEq):
         e = Eq("2 + 7 = 9", 100).move_to(P(-1.5, 0.45))
         e.egal.set_color(EGAL)
         self.dire_eq(e, "2 plus 7 égale 9")
-        vr = self.tampon("vrai", VERT_OK, 40).next_to(e, RIGHT, buff=0.6)
+        vr = self.tampon("vrai", VERT_OK, 40).next_to(e, RIGHT, buff=0.9)
         self.au("vrai,", FadeIn(vr, scale=1.4), rt=0.3)
         fin = Eq("mais il n'y a rien à chercher.", 42, lettres="").move_to(P(-0.2, -1.45))
         self.dire_eq(fin, "mais il n'y a rien à chercher.", echelle=1.0, rt=0.15)
         # la loupe passe sur l'écriture et ne trouve aucune lettre
-        verre = Circle(radius=0.55, stroke_color=WHITE, stroke_width=6, fill_color=CIEL, fill_opacity=0.12)
-        manche = Line(P(0.4, -0.4), P(0.9, -0.9), color=WHITE, stroke_width=9)
-        loupe = VGroup(verre, manche).move_to(e.get_left() + RIGHT * 0.5 + DOWN * 0.15)
+        # verre SANS remplissage, CENTRÉ sur le chiffre et plus grand que lui : il l'entoure sans le masquer
+        verre = Circle(radius=0.72, stroke_color=WHITE, stroke_width=5)
+        manche = Line(P(0.51, -0.51), P(0.98, -0.98), color=WHITE, stroke_width=9)
+        loupe = VGroup(verre, manche)
+        loupe.shift(e.atomes[0].get_center() - verre.get_center())
         self.play(FadeIn(loupe), run_time=0.15)
-        self.play(loupe.animate.shift(RIGHT * (e.width - 1.0)), run_time=0.9)
+        self.play(loupe.animate.shift(e.atomes[-1].get_center() - e.atomes[0].get_center()), run_time=0.9)
         mot = next(a for a in d.atomes if a.original_text == "équation")
         ba = self.barrer(mot)
         self.play(Create(ba), FadeOut(loupe), run_time=0.3)
@@ -443,7 +455,7 @@ class EquationReconnaitre4e(PaysageEq):
         a1 = T("un signe égal et une lettre.", 36, VERT_OK)
         a1.move_to(P(0, self.YR[2] + 0.27)).align_to(P(X, 0), LEFT)
         self.au("un signe", FadeIn(a1, shift=RIGHT * 0.2), rt=0.3)
-        self.play(Indicate(e3.x[0], color=INCONNUE, scale_factor=1.5), run_time=0.3)
+        self.play(allumer_lettre(e3.x[0], INCONNUE), run_time=0.3)
         a2 = Eq("Son inconnue est n.", 36, lettres="n").move_to(P(0, self.YR[2] - 0.27)).align_to(P(X, 0), LEFT)
         self.dire_eq(a2, "Son inconnue est n.", echelle=1.0)
         b1 = T("un calcul.", 36, GRIS_V).move_to(P(0, self.YR[0])).align_to(P(X, 0), LEFT)

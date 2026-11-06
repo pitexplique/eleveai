@@ -113,8 +113,9 @@ class DeuxCases(VGroup):
         self.ym = y
 
     def etiquettes(self, fs=24, g="à gauche", d="à droite"):
-        tg = T(g, fs, CIEL, audit=False).next_to(self.cg, UP, buff=0.07)
-        td = T(d, fs, CIEL, audit=False).next_to(self.cd, UP, buff=0.07)
+        tg = T(g, fs, CIEL, audit=False).next_to(self.cg, UP, buff=0.1)
+        td = T(d, fs, CIEL, audit=False).next_to(self.cd, UP, buff=0.1)
+        td.align_to(tg, UP)  # même ligne d'écriture (le g de « gauche » descend)
         return tg, td
 
     def signe(self, s, couleur, fs=72):
@@ -225,9 +226,9 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         # la valeur glisse au-dessus du x (écrite collée, « 24 » se lirait vingt-quatre)
         v = T("4", 42, INCONNUE, audit=False, gras=True).move_to(l.atomes[4])
         x0 = e0.x[0]
-        fl = Arrow(x0.get_top() + UP * 0.42, x0.get_top() + UP * 0.06, color=INCONNUE, buff=0, stroke_width=4, tip_length=0.13)
-        self.play(v.animate.move_to(x0.get_top() + UP * 0.66), Create(fl), run_time=0.45)
-        d = DeuxCases(-2.5, 2.3, -0.55, 3.9, 3.0, 2.6, rangs=3)
+        fl = Arrow(x0.get_top() + UP * 0.44, x0.get_top() + UP * 0.15, color=INCONNUE, buff=0, stroke_width=4, tip_length=0.13)
+        self.play(v.animate.move_to(x0.get_top() + UP * 0.74), Create(fl), run_time=0.45)
+        d = DeuxCases(-2.5, 2.3, -0.62, 3.9, 3.0, 2.6, rangs=3)
         tg, td = d.etiquettes()
         xd = d.xg
         y1, y2, y3 = d.yh, d.ym, d.yb
@@ -245,13 +246,13 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         self.au("À droite", FadeIn(d.cd), FadeIn(td), rt=0.2)
         self.dire_eq(c2, "droite, 9")
         eg = d.signe("=", VERT_OK)
-        pn = Voyant(0.34).move_to(P(5.05, 0.7))
+        pn = Voyant(0.34).move_to(P(5.05, 0.9))
         f2 = Fusee(0.5).move_to(P(5.05, -0.55))
         self.play(FadeIn(pn), FadeIn(f2), run_time=0.15)
-        l2 = Eq("Les deux membres sont égaux :", 36, lettres="").move_to(P(-1.2, -2.3))
+        l2 = Eq("Les deux membres sont égaux :", 36, lettres="").move_to(P(-1.2, -2.45))
         self.dire_eq(l2, "Les deux membres sont égaux :", echelle=1.0, rt=0.12, avec=[FadeIn(eg, scale=1.5), *d.colorer(VERT_OK)])
         self.insister(eg, 1.3, 0.14)
-        l3 = Eq("4 est solution.", 50, VERT_OK, lettres="").move_to(P(-1.2, -3.0))
+        l3 = Eq("4 est solution.", 50, VERT_OK, lettres="").move_to(P(-1.2, -3.1))
         l3.atomes[0].set_color(INCONNUE)
         self.dire_eq(l3, "4 est solution.", echelle=1.0, rt=0.14, avec=[pn.vert()])
         self.attendre_voix(marge=0.4)
@@ -266,7 +267,7 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         e = Eq("3x = 9", 66).move_to(P(-4.45, 0.6))
         self.dire_eq(e, "3 x égale 9")
         self.play(e.egal.animate.set_color(EGAL), run_time=0.1)
-        t = TableauEssais(["On essaie", "3x donne", "Vrai ?"], [2.2, 2.2, 2.2], n=3, h=0.82, fs=30, centre=P(1.4, 0.2), audit=False)
+        t = TableauEssais(["On essaie", "3x donne", "Vrai ?"], [2.6, 2.4, 2.2], n=3, h=0.82, fs=30, centre=P(1.55, 0.2), audit=False)
         oe = Eq("on essaie", 36, OPERATION, lettres="").move_to(P(-4.45, -0.25))
         self.dire_eq(oe, "on essaie", echelle=1.0, rt=0.12, avec=[FadeIn(t)])
         for r, (p, s, c, mot) in enumerate((("2", "6", PIEGE, "non"), ("3", "9", VERT_OK, "oui"), ("4", "12", PIEGE, "non"))):
@@ -276,7 +277,7 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
             self.dire_eq(a, f"{p} donne {s}")
             self.dire_eq(b, f"{p} donne {s}")
             self.dire_eq(v, f"{s} : {mot}", echelle=1.0, avec=[Create(t.oui(r)) if c == VERT_OK else Create(t.non(r))])
-        rang = SurroundingRectangle(VGroup(Dot(t.case(1, 0)).shift(LEFT * 1.0), Dot(t.case(1, 2)).shift(RIGHT * 1.0)), color=VERT_OK, buff=0.24, stroke_width=5, corner_radius=0.06)
+        rang = SurroundingRectangle(VGroup(Dot(t.case(1, 0)).shift(LEFT * 1.2), Dot(t.case(1, 2)).shift(RIGHT * 1.0)), color=VERT_OK, buff=0.24, stroke_width=5, corner_radius=0.06)
         f = Eq("Seul 3 convient.", 46, VERT_OK, lettres="").move_to(P(-0.6, -2.55))
         self.dire_eq(f, "Seul 3 convient.", echelle=1.0, rt=0.14, avec=[Create(rang)])
         self.insister(f.atomes[1], 1.4, 0.15)
@@ -286,9 +287,9 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
     def ecran_question1(self):
         self.clear()
         self.add_mascotte()
-        d = DeuxCases(-4.85, -1.35, 0.35, 2.9, 2.1, 2.1)
+        d = DeuxCases(-4.85, -1.0, 0.35, 2.9, 2.1, 2.1)  # ≠ au large entre les cartes
         tg, td = d.etiquettes()
-        rappel = Eq("3x = 9", 60).sans_audit().move_to(P(-3.3, 2.2))
+        rappel = Eq("3x = 9", 60).sans_audit().move_to(P(-3.1, 2.5))
 
         def avant(sc):
             sc.eq_dans_q(0, "Le nombre 2 est-il solution", "Le nombre 2 est-il solution", lettres="", fs=36)
@@ -342,7 +343,7 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         v = self.verdict("C'est faux !", PIEGE, 40).move_to(P(3.0, 0.72))
         self.au("C'est faux", FadeIn(v, scale=1.4), Create(ba), rt=0.25)
         self.insister(v, 1.12, 0.14)
-        lb = E("La bonne solution est 1,6 :", 38, couleur=VERT_OK, lettres="").move_to(P(-2.0, -0.5))
+        lb = E("La bonne solution est 1,6 :", 38, couleur=VERT_OK, lettres="").move_to(P(-2.0, -0.58))
         self.dire_eq(lb, "La bonne solution est 1 virgule 6 :", echelle=1.0, rt=0.14)
         d2 = DeuxCases(-4.2, -0.4, -1.88, 2.9, 2.2, 1.62)
         a2 = E("5 × 1,6", 40).move_to(P(d2.xg, d2.yh))
@@ -363,19 +364,19 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         self.dire_eq(t, "Et zéro ?", echelle=1.0, rt=0.14)
         l = Eq("0 est-il solution de 3x = 0 ?", 44).move_to(P(-0.5, 2.2))
         self.dire_eq(l, "0 est-il solution de 3 x égale 0 ?", echelle=1.1)
-        d = DeuxCases(-4.2, -0.3, 0.42, 3.0, 2.2, 1.9)
+        d = DeuxCases(-4.2, -0.3, 0.28, 3.0, 2.2, 1.9)
         tg, td = d.etiquettes()
         self.play(FadeIn(d), FadeIn(tg), FadeIn(td), run_time=0.15)
         a = Eq("3 × 0", 42).move_to(P(d.xg, d.yh))
         bacs = VGroup(*[VGroup(RoundedRectangle(width=1.0, height=1.0, corner_radius=0.08, stroke_color=CIEL, stroke_width=3),
-                               T("0", 40, CIEL, audit=False)) for _ in range(3)]).arrange(RIGHT, buff=0.16).move_to(P(3.6, 0.42))
+                               T("0", 40, CIEL, audit=False)) for _ in range(3)]).arrange(RIGHT, buff=0.16).move_to(P(3.6, 0.28))
         self.dire_eq(a, "3 fois 0", avec=[FadeIn(bacs, shift=LEFT * 0.2)])
         b = Eq("0", 48).move_to(P(d.xg, d.yb))
         c = Eq("0", 48).sans_audit().move_to(P(d.xd, d.yb))
         self._attendre_pos(self._texte_voix.find("0, 0") + 3)
         self.play(FadeIn(b, scale=1.3), FadeIn(c, scale=1.3), run_time=0.2)
         eg = d.signe("=", VERT_OK, 62)
-        l = Eq("L'égalité est vraie.", 40, VERT_OK, lettres="").move_to(P(-2.4, -1.25))
+        l = Eq("L'égalité est vraie.", 40, VERT_OK, lettres="").move_to(P(-2.4, -1.3))
         self.dire_eq(l, "L'égalité est vraie.", echelle=1.0, rt=0.13, avec=[FadeIn(eg, scale=1.5), *d.colorer(VERT_OK)])
         l2 = Eq("Oui, zéro peut être une solution.", 44, lettres="").move_to(P(-1.0, -2.2))
         self.dire_eq(l2, "Oui, zéro peut être une solution.", echelle=1.0, rt=0.13)
@@ -399,7 +400,7 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         self.clear()
         self.add_mascotte()
         self.XL, self._cartes_larges = -6.2, 8.5
-        d = DeuxCases(3.6, 5.75, 0.9, 1.85, 1.4, 1.9)
+        d = DeuxCases(3.475, 5.9, 0.9, 1.75, 1.3, 1.9)  # = au large entre les cartes
         tg, td = d.etiquettes(22)
 
         def avant(sc):
@@ -441,7 +442,7 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         self.dire_eq(av, "avec t égale 7")
         d = DeuxCases(-3.7, 1.0, -0.75, 3.5, 3.0, 2.58, rangs=3)
         tg = T("À gauche", 28, CIEL).next_to(d.cg, UP, buff=0.08)
-        td = T("À droite", 28, CIEL).next_to(d.cd, UP, buff=0.08)
+        td = T("À droite", 28, CIEL).next_to(d.cd, UP, buff=0.08).align_to(tg, UP)
         z = Eq("3(7 − 1)", 40).sans_audit().move_to(P(d.xg, d.yh))
         z.atomes[2].set_color(INCONNUE)
         self.au("À gauche", FadeIn(d.cg), FadeIn(tg), FadeIn(z), rt=0.2)
@@ -458,7 +459,7 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         eg = d.signe("=", VERT_OK, 62)
         f = Eq("C'est égal : 7 est solution.", 44, VERT_OK, lettres="").move_to(P(-1.2, -2.78))
         f.atomes[5].set_color(INCONNUE)
-        lp = Voyant(0.34).move_to(P(4.3, 0.55))
+        lp = Voyant(0.34).move_to(P(4.3, 0.8))
         fu = Fusee(0.55).move_to(P(4.3, -0.75))
         self.play(FadeIn(lp), FadeIn(fu), run_time=0.12)
         self.dire_eq(f, "C'est égal : 7 est solution.", echelle=1.0, rt=0.13, avec=[FadeIn(eg, scale=1.5), *d.colorer(VERT_OK), lp.vert()])
@@ -494,8 +495,8 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         e = d0["e"]
         r5, r4 = d0["v5"], d0["v4"]
         self.au("Correction", ReplacementTransform(d0["tit"], tit), FadeOut(d0["l1"]), FadeOut(d0["q"]), FadeOut(d0["pz"]), FadeOut(d0["fu"]),
-                e.animate.scale(44 / 70).move_to(P(1.3, 3.1)), r5.animate.scale(0.75).move_to(P(5.95, 1.15)),
-                r4.animate.scale(0.75).move_to(P(5.95, -1.05)), rt=0.35)
+                e.animate.scale(44 / 70).move_to(P(1.3, 3.1)), r5.animate.scale(0.75).move_to(P(6.25, 1.15)),
+                r4.animate.scale(0.75).move_to(P(6.25, -1.05)), rt=0.35)
         d = DeuxCases(-2.85, 0.95, 1.2, 2.5, 2.5, 1.72)
         tg, td = d.etiquettes(24)
         p5 = Eq("Pour 5 :", 38, CIEL, lettres="").move_to(P(-5.35, 1.2))
@@ -511,8 +512,8 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         b2 = Eq("17", 46).move_to(P(d.xd, d.yb))
         self.dire_eq(b2, "7, 17")
         eg = d.signe("=", VERT_OK, 60)
-        v1 = Eq("Oui, 5 est", 32, VERT_OK, lettres="").move_to(P(3.9, 1.42))
-        v2 = Eq("solution.", 32, VERT_OK, lettres="").move_to(P(3.9, 0.95))
+        v1 = Eq("Oui, 5 est", 32, VERT_OK, lettres="").move_to(P(4.03, 1.42))
+        v2 = Eq("solution.", 32, VERT_OK, lettres="").move_to(P(4.03, 0.95))
         self.dire_eq(v1, "Oui, 5 est", echelle=1.0, rt=0.13, avec=[FadeIn(eg, scale=1.5), *d.colorer(VERT_OK), r5.vert()])
         self.dire_eq(v2, "solution.", echelle=1.0, rt=0.13)
         d4 = DeuxCases(-2.85, 0.95, -1.05, 2.5, 2.5, 1.0, rangs=1)
@@ -524,8 +525,8 @@ class EquationVerifier4e(_OutilsVerif, PaysageEq):
         d4_ = Eq("15", 52).move_to(P(d4.xd, -1.05))
         self.dire_eq(d4_, "droite, 15")
         ne = d4.signe("≠", PIEGE, 60)
-        w1 = Eq("Non, 4 n'est", 32, PIEGE, lettres="").move_to(P(3.9, -0.83))
-        w2 = Eq("pas solution.", 32, PIEGE, lettres="").move_to(P(3.9, -1.3))
+        w1 = Eq("Non, 4 n'est", 32, PIEGE, lettres="").move_to(P(4.03, -0.83))
+        w2 = Eq("pas solution.", 32, PIEGE, lettres="").move_to(P(4.03, -1.3))
         self.dire_eq(w1, "Non, 4 n'est", echelle=1.0, rt=0.13, avec=[FadeIn(ne, scale=1.5), *d4.colorer(PIEGE), r4.rouge()])
         self.dire_eq(w2, "pas solution.", echelle=1.0, rt=0.13)
         self.attendre_voix(marge=0.6)

@@ -29,6 +29,7 @@ from equation_commun import PAROLE  # noqa: E402
 PAROLE.update({"5,5": "5 virgule 5"})
 VIOLET_T = "#7c3aed"  # la transition (ni bleu ni orange : le code couleur reste libre)
 GRIS_B = "#94a3b8"
+BLEU_BLOC = "#0369a1"  # les blocs de l'inconnue : bleu foncé, le x blanc s'y lit de loin
 FOND_B = "#0b1220"
 
 
@@ -49,23 +50,26 @@ class Bloc(VGroup):
         self.rect = RoundedRectangle(width=w, height=h, corner_radius=0.06, fill_color=couleur, fill_opacity=1,
                                      stroke_color=WHITE, stroke_width=2)
         self.add(self.rect)
-        if onde:  # la forme d'onde du morceau, derrière son nom
-            hs = [0.3, 0.6, 0.42, 0.8, 0.5, 0.7, 0.34, 0.62, 0.46, 0.76, 0.38, 0.56]
-            n = max(4, int(w / 0.14))
-            self.add(VGroup(*[Line(P(-w / 2 + 0.1 + k * (w - 0.2) / (n - 1), -hs[k % 12] * h * 0.42),
-                                   P(-w / 2 + 0.1 + k * (w - 0.2) / (n - 1), hs[k % 12] * h * 0.42),
-                                   color=WHITE, stroke_width=2, stroke_opacity=0.28) for k in range(n)]))
         self.txt = None
         if s:
             self.txt = T(s, fs, WHITE, audit, gras=True)
             if self.txt.width > w - 0.1:
                 self.txt.scale_to_fit_width(w - 0.1)
+        if onde:  # la forme d'onde du morceau : aucune strie sous son nom, qui reste lisible
+            hs = [0.3, 0.6, 0.42, 0.8, 0.5, 0.7, 0.34, 0.62, 0.46, 0.76, 0.38, 0.56]
+            n = max(4, int(w / 0.14))
+            libre = (self.txt.width / 2 + 0.16) if self.txt is not None else 0
+            xs = [-w / 2 + 0.1 + k * (w - 0.2) / (n - 1) for k in range(n)]
+            self.add(VGroup(*[Line(P(x, -hs[k % 12] * h * 0.42), P(x, hs[k % 12] * h * 0.42),
+                                   color=WHITE, stroke_width=2, stroke_opacity=0.28)
+                              for k, x in enumerate(xs) if abs(x) > libre]))
+        if self.txt is not None:
             self.add(self.txt)
 
 
 def partie(u, h, n=3, lettre="x", x_val=4, txt_x="x min", txt_n="3 min", fs=28):
     """Une partie du set : le morceau (bleu) et la transition (violette), à l'échelle u."""
-    a = Bloc(x_val * u, h, INCONNUE, txt_x, fs, onde=True)
+    a = Bloc(x_val * u, h, BLEU_BLOC, txt_x, fs, onde=True)
     b = Bloc(n * u, h, VIOLET_T, txt_n, fs)
     g = VGroup(a, b).arrange(RIGHT, buff=0)
     g.a, g.b = a, b
@@ -99,7 +103,7 @@ class Barre(VGroup):
 
     def __init__(self, u, h, x_val, r, s, fs=26, **kw):
         super().__init__(**kw)
-        self.plein = RoundedRectangle(width=(x_val - r) * u, height=h, corner_radius=0.05, fill_color=INCONNUE,
+        self.plein = RoundedRectangle(width=(x_val - r) * u, height=h, corner_radius=0.05, fill_color=BLEU_BLOC,
                                       fill_opacity=1, stroke_color=WHITE, stroke_width=2)
         self.retire = DashedVMobject(Rectangle(width=r * u, height=h, stroke_color=GRIS_B, stroke_width=3), num_dashes=16)
         VGroup(self.plein, self.retire).arrange(RIGHT, buff=0)
@@ -171,7 +175,7 @@ class _OutilsDj:
 
 
 XE_G, XE_D = -2.75, 3.75  # le signe = des deux routes
-Y_R = (1.85, 0.95, 0.4, -0.15, -0.72, -1.36)  # les rangées de la colonne de droite
+Y_R = (1.9, 1.12, 0.47, -0.16, -0.72, -1.42)  # les rangées de la colonne de droite
 
 
 class EquationResoudreDistributivite4e(_OutilsDj, PaysageEq):
@@ -247,7 +251,7 @@ class EquationResoudreDistributivite4e(_OutilsDj, PaysageEq):
     # ── 02 : la première route, diviser ─────────────────────────────────────
     def ecran_diviser(self):
         self.ecran("02-diviser")
-        sep = DashedLine(P(0.35, 3.3), P(0.35, -1.62), color="#475569", stroke_width=2)
+        sep = DashedLine(P(0.35, 3.3), P(0.35, -1.75), color="#475569", stroke_width=2)
         u, h = 0.33, 0.36
         p1 = partie(u, h, txt_x=None, txt_n=None).move_to(P(-4.5, 2.6))
         p2 = partie(u, h, txt_x=None, txt_n=None).next_to(p1, RIGHT, buff=0)
@@ -259,16 +263,16 @@ class EquationResoudreDistributivite4e(_OutilsDj, PaysageEq):
         t2.shift(UP * (t.get_bottom()[1] - t2.atomes[0].get_bottom()[1]))
         self.dire_eq(t2, "on divise", echelle=1.0, rt=0.12)
         coupe = DashedLine(p1.get_corner(UR) + UP * 0.1, p1.get_corner(DR) + DOWN * 0.1, color=OPERATION, stroke_width=5)
-        self.deux_cotes(e0.gauche, e0.droite, "÷ 2", 1.05, "divise par 2", fs=30, mot_d="deux côtés",
+        self.deux_cotes(e0.gauche, e0.droite, "÷ 2", 1.07, "divise par 2", fs=34, mot_d="deux côtés",
                         avec=[Create(coupe), p2.animate.set_opacity(0.22)])
         e1 = Eq("x + 3 = 7", 44).mis_sur_egal(XE_G, 0.25)
         self.glisser(e0, e1, "x plus 3 égale 7", {0: 2, 1: 3, 2: 4, 3: 6})
         e1.egal.set_color(EGAL)
-        self.deux_cotes(e1.gauche, e1.droite, "− 3", -0.52, "On soustrait 3", fs=30, avec=[p1.b.animate.set_opacity(0.22)])
+        self.deux_cotes(e1.gauche, e1.droite, "− 3", -0.58, "On soustrait 3", fs=34, avec=[p1.b.animate.set_opacity(0.22)])
         e2 = Eq("x = 4", 44).mis_sur_egal(XE_G, Y_R[5])
         self.glisser(e1, e2, "x égale 4", {0: 0, 1: 3})
         self.play(e2.egal.animate.set_color(EGAL), e2.droite.animate.set_color(VERT_OK), run_time=0.12)
-        f = Eq("Le morceau dure 4 minutes.", 34, VERT_OK, lettres="").move_to(P(-3.0, -2.05))
+        f = Eq("Le morceau dure 4 minutes.", 34, VERT_OK, lettres="").move_to(P(-3.0, -2.12))
         self.dire_eq(f, "Le morceau dure 4 minutes.", echelle=1.0, rt=0.14)
         self.g0, self.g1, self.g2, self.fin_g = e0, e1, e2, f
         self.attendre_voix(marge=0.4)
@@ -295,11 +299,11 @@ class EquationResoudreDistributivite4e(_OutilsDj, PaysageEq):
         self.glisser(e0, e1, "3, 6.", {3: 4}, sauf=[e1.atomes[k] for k in (0, 1, 2, 4, 5)])
         self.dire_eq(e1, "2 x plus 6 égale 14", sauf=[e1.atomes[k] for k in (0, 1, 3)], echelle=1.1)
         self.play(e1.egal.animate.set_color(EGAL), e0.atomes[4].animate.set_color(WHITE), run_time=0.1)
-        self.deux_cotes(VGroup(*e1.atomes[2:4]), e1.droite, "− 6", Y_R[2], "On soustrait 6", fs=30)
+        self.deux_cotes(VGroup(*e1.atomes[2:4]), e1.droite, "− 6", Y_R[2], "On soustrait 6", fs=34)
         e2 = Eq("2x = 8", 44).mis_sur_egal(XE_D, Y_R[3])
         self.glisser(e1, e2, "2 x égale 8", {0: 0, 1: 1, 2: 4})
         e2.egal.set_color(EGAL)
-        self.deux_cotes(e2.gauche, e2.droite, "÷ 2", Y_R[4], "divise par 2", fs=30)
+        self.deux_cotes(e2.gauche, e2.droite, "÷ 2", Y_R[4], "divise par 2", fs=34)
         e3 = Eq("x = 4", 44).mis_sur_egal(XE_D, Y_R[5])
         self.glisser(e2, e3, "x égale 4", {0: 1, 1: 2})
         self.play(e3.egal.animate.set_color(EGAL), e3.droite.animate.set_color(VERT_OK), run_time=0.12)
@@ -314,12 +318,12 @@ class EquationResoudreDistributivite4e(_OutilsDj, PaysageEq):
         d = self.encadrer(self.d3, buff=0.09)
         d.stretch_to_fit_width(d.width + 0.2)
         self.play(FadeOut(self.fin_g), run_time=0.15)
-        l1 = Eq("Deux routes, la même solution.", 42, JAUNE_TITRE, lettres="").move_to(P(0.35, -2.0))
+        l1 = Eq("Deux routes, la même solution.", 42, JAUNE_TITRE, lettres="").move_to(P(0.35, -2.14))
         self.dire_eq(l1, "Deux routes, la même solution.", echelle=1.0, rt=0.14, avec=[Create(g), Create(d)])
         self.insister(VGroup(self.g2, g), 1.15, 0.15)
-        l2 = Eq("Ici, diviser d'abord est plus court :", 36, lettres="").move_to(P(0.0, -2.62))
+        l2 = Eq("Ici, diviser d'abord est plus court :", 36, lettres="").move_to(P(0.0, -2.73))
         self.dire_eq(l2, "Ici, diviser d'abord est plus court", echelle=1.0, rt=0.12)
-        l3 = Eq("la parenthèse disparaît d'un coup.", 36, VERT_OK, lettres="").move_to(P(0.0, -3.14))
+        l3 = Eq("la parenthèse disparaît d'un coup.", 36, VERT_OK, lettres="").move_to(P(0.0, -3.27))
         pa = VGroup(self.g0.atomes[1], self.g0.atomes[5])
         self.dire_eq(l3, "la parenthèse disparaît d'un coup.", echelle=1.0, rt=0.12,
                      avec=[pa.animate.set_color(OPERATION)])
@@ -382,7 +386,8 @@ class EquationResoudreDistributivite4e(_OutilsDj, PaysageEq):
         f1 = self.fleche_arc(e0.atomes[0], e0.atomes[2], PIEGE, angle=-1.7, sw=6)
         self.dire_eq(l, "ne multiplier que le premier terme.", echelle=1.0, rt=0.12, avec=[FadeIn(e0)])
         self.play(Create(f1), run_time=0.25)
-        rond = Circle(radius=0.36, color=PIEGE, stroke_width=5).move_to(e0.atomes[4])
+        trois = e0.atomes[4]  # le 3 oublié, souligné : un cercle touchait le 3 ou la parenthèse
+        rond = Line(trois.get_corner(DL) + P(-0.04, -0.1), trois.get_corner(DR) + P(0.04, -0.1), color=PIEGE, stroke_width=8)
         self.play(Create(rond), run_time=0.2)
         fx = Arrow(P(-2.3, 1.2), P(-1.2, 1.2), color=PIEGE, stroke_width=6, buff=0)
         e1 = Eq("2x + 3", 66, PIEGE, inconnue=PIEGE).move_to(P(0.62, 1.2))
@@ -393,8 +398,8 @@ class EquationResoudreDistributivite4e(_OutilsDj, PaysageEq):
         # la preuve à la timeline : il manque un 3
         u, h, y = 0.5, 0.8, -0.35
         ax = -5.75
-        a1 = Bloc(4 * u, h, INCONNUE, "x", 36, onde=True)
-        a2 = Bloc(4 * u, h, INCONNUE, "x", 36, onde=True)
+        a1 = Bloc(4 * u, h, BLEU_BLOC, "x", 36, onde=True)
+        a2 = Bloc(4 * u, h, BLEU_BLOC, "x", 36, onde=True)
         b1 = Bloc(3 * u, h, VIOLET_T, "3", 36)
         rangee = VGroup(a1, a2, b1).arrange(RIGHT, buff=0).move_to(P(0, y)).align_to(P(ax, 0), LEFT)
         trou = DashedVMobject(Rectangle(width=3 * u, height=h, stroke_color=PIEGE, stroke_width=4), num_dashes=20)
@@ -525,23 +530,23 @@ class EquationResoudreDistributivite4e(_OutilsDj, PaysageEq):
         tit = T("Correction", 50, JAUNE_TITRE).move_to(P(-0.4, 3.15))
         e = d["e"]
         k = 44 / 66
-        y0, pas = 0.95, 1.1
+        y0, pas = 0.95, 1.25
         cible = e.get_center() + (P(self.XE_C, y0) - e.egal.get_center()) + (e.get_center() - e.egal.get_center()) * (k - 1)
         self.au("Correction", ReplacementTransform(d["tit"], tit), FadeOut(d["q"]), FadeOut(d["pz"]), FadeOut(d["br"]),
                 FadeOut(d["t37"]), FadeOut(d["tin"]), FadeOut(d["t3"]), e.animate.scale(k).move_to(cible),
                 VGroup(d["ligne"], d["cadres"]).animate.shift(UP * 0.4), rt=0.35)
         mg, md = VGroup(*e.atomes[6:8]), e.atomes[9]
-        self.deux_cotes(mg, md, "− 7", y0 - pas / 2 + 0.05, "soustrait d'abord 7", fs=26,
+        self.deux_cotes(mg, md, "− 7", y0 - pas / 2, "soustrait d'abord 7", fs=34,
                         avec=[d["intro"].animate.set_opacity(0.2)])
         e1 = Eq("3(a + 6) = 30", 44, lettres="a").mis_sur_egal(self.XE_C, y0 - pas)
         self.glisser(e, e1, "3 fois, entre parenthèses, a plus 6, égale 30", {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 8})
         e1.egal.set_color(EGAL)
-        self.deux_cotes(e1.gauche, e1.droite, "÷ 3", y0 - 1.5 * pas + 0.05, "divise par 3", fs=26,
+        self.deux_cotes(e1.gauche, e1.droite, "÷ 3", y0 - 1.5 * pas, "divise par 3", fs=34,
                         avec=[d["ps"][1].animate.set_opacity(0.2), d["ps"][2].animate.set_opacity(0.2), d["cadres"][1:].animate.set_opacity(0.2)])
         e2 = Eq("a + 6 = 10", 44, lettres="a").mis_sur_egal(self.XE_C, y0 - 2 * pas)
         self.glisser(e1, e2, "a plus 6 égale 10", {0: 2, 1: 3, 2: 4, 3: 6})
         e2.egal.set_color(EGAL)
-        self.deux_cotes(VGroup(*e2.atomes[1:3]), e2.droite, "− 6", y0 - 2.5 * pas + 0.08, "soustrait 6", fs=26,
+        self.deux_cotes(VGroup(*e2.atomes[1:3]), e2.droite, "− 6", y0 - 2.5 * pas + 0.03, "soustrait 6", fs=34,
                         avec=[d["ps"][0].b.animate.set_opacity(0.2)])
         e3 = Eq("a = 4", 44, lettres="a").mis_sur_egal(self.XE_C, y0 - 3 * pas - 0.1)
         self.glisser(e2, e3, "a égale 4", {0: 0, 1: 3})
@@ -549,7 +554,10 @@ class EquationResoudreDistributivite4e(_OutilsDj, PaysageEq):
         cad = self.encadrer(e3, buff=0.1)
         cad.stretch_to_fit_width(cad.width + 0.2)
         self.play(Create(cad), run_time=0.2)
-        self.attendre_voix(marge=0.6)
+        self.insister(VGroup(e3, cad), 1.15, 0.16)
+        # le résultat reste le temps de le lire, puis l'écran se vide en fondu (la voix est finie)
+        self.attendre_voix(marge=2.2)
+        self.play(FadeOut(Group(*[m for m in self.mobjects if type(m).__name__ != "MascotteMargouillat"])), run_time=0.4)
 
     # ── 08 : ce que tu as appris ────────────────────────────────────────────
     def ecran_finale(self):

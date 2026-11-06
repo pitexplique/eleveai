@@ -430,6 +430,11 @@ if __name__ != "__main__":
             tete, q, cartes, pause, rebours, ph = self._disposer_q(question, choix, phrase)
             for f in rebours.get_family():  # son chiffre n'attend aucun mot de la voix
                 f.sans_synchro = True
+            # L'anneau ne touche jamais la question : s'il descend dessus, il rétrécit vers le haut.
+            if len(q.submobjects) and rebours.get_right()[0] > q.get_left()[0] and rebours.get_left()[0] < q.get_right()[0]:
+                trop = q.get_top()[1] + 0.2 - rebours.get_bottom()[1]
+                if trop > 0:
+                    rebours.scale(max(0.6, (rebours.height - trop) / rebours.height), about_point=rebours.get_top())
             self.au_mot("Question")
             self.play(FadeIn(tete, shift=DOWN * 0.2), run_time=0.4)
             if avant_q:

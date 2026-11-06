@@ -21,12 +21,14 @@ sys.path.insert(0, str(ICI))  # le dossier du script EN TÊTE
 from equation_commun import *  # noqa: E402,F403
 from equation_resoudre_distributivite import E, _OutilsDj, partie  # noqa: E402
 
-XE_ELLE, XE_LUI = -0.78, 1.28  # le = de chaque colonne
+XE_ELLE, XE_LUI = -0.8, 1.215  # le = de chaque colonne
+X_SEP = -0.2  # le trait central : la colonne de droite porte la ligne la plus longue
+X_ELLE, X_LUI = -1.1, 0.9  # le milieu de chaque colonne
 Y_ARR = -1.9  # la ligne d'arrivée
 X_PISTE = 2.0
 Y_D = 0.52  # le départ des pistes
 D_P = 0.3  # le pion s'arrête juste au-dessus de la ligne écrite : il ne touche jamais les nombres
-FS_C = 23  # les lignes de calcul : « 2x + 6 = 14 » tient dans sa colonne, sans toucher la piste
+FS_C = 22  # les lignes de calcul : « 2x + 6 = 14 » tient dans sa colonne, sans toucher la piste
 
 
 def damier(y, largeur=4.0, n=26, cote=0.08):
@@ -97,16 +99,16 @@ class EquationResoudreDistributiviteShort(_OutilsDj, ShortEq):
         pe = pion("#c68642", "#1f2937", True).move_to(P(-X_PISTE, Y_D))
         pl = pion("#8d5524", "#111827", False).move_to(P(X_PISTE, Y_D))
         pistes = VGroup(*[DashedLine(P(s * X_PISTE, Y_D), P(s * X_PISTE, Y_ARR), color="#64748b", stroke_width=3) for s in (-1, 1)])
-        sep = Line(P(0, Y_D), P(0, Y_ARR), color="#334155", stroke_width=2)
+        sep = Line(P(X_SEP, Y_D), P(X_SEP, Y_ARR), color="#334155", stroke_width=2)
         arr = damier(Y_ARR)
         self.play(FadeOut(VGroup(a1, l1, l2, q)), e.animate.move_to(P(0, 1.78)),
-                  elle.animate.scale(0.62).move_to(P(-1.05, 1.14)), lui.animate.scale(0.62).move_to(P(1.05, 1.14)),
+                  elle.animate.scale(0.62).move_to(P(X_ELLE, 1.14)), lui.animate.scale(0.62).move_to(P(X_LUI, 1.14)),
                   FadeIn(pistes), FadeIn(sep), FadeIn(arr), FadeIn(pe), FadeIn(pl), run_time=0.22)
         n2 = self.ligne_eq("Lui développe :", Y_D, 26, OPERATION, x=1.0)
-        k = 1.66 / n2.width
-        n2.scale(k).move_to(P(0.98, Y_D))
+        k = 1.58 / n2.width  # jamais contre la tête du coureur
+        n2.scale(k).move_to(P(X_LUI, Y_D))
         n1 = self.ligne_eq("Elle divise :", Y_D, 26, OPERATION, x=-1.0)
-        n1.scale(k).move_to(P(-0.98, Y_D))
+        n1.scale(k).move_to(P(X_ELLE, Y_D))
         self.dire_eq(n1, "Elle divise :", echelle=1.0, rt=0.1)
         y1, y2, y3 = 0.02, -0.76, -1.54
         e1 = Eq("x + 3 = 7", FS_C).mis_sur_egal(XE_ELLE, y1)
@@ -125,8 +127,8 @@ class EquationResoudreDistributiviteShort(_OutilsDj, ShortEq):
         d3 = Eq("x = 4", FS_C).mis_sur_egal(XE_LUI, y3)
         self.glisser(d2, d3, "x égale 4", {0: 1, 1: 2}, n=2, rt=0.14)
         self.play(pl.animate.move_to(P(X_PISTE, y3 + D_P)), d3.egal.animate.set_color(EGAL), d3.droite.animate.set_color(VERT_OK), run_time=0.14)
-        c1 = SurroundingRectangle(e2, color=VERT_OK, buff=0.08, corner_radius=0.08, stroke_width=4)
-        c2 = SurroundingRectangle(d3, color=VERT_OK, buff=0.08, corner_radius=0.08, stroke_width=4)
+        c1 = SurroundingRectangle(e2, color=VERT_OK, buff=0.1, corner_radius=0.08, stroke_width=4)
+        c2 = SurroundingRectangle(d3, color=VERT_OK, buff=0.1, corner_radius=0.08, stroke_width=4)
         f1 = self.ligne_eq("Les deux ont raison !", -2.3, 32, VERT_OK)
         self.dire_eq(f1, "Les deux ont raison !", echelle=1.0, rt=0.13, avec=[Create(c1), Create(c2)])
         # « fini » : Eq plante sur la ligature « fi », ce mot se pose avec T
