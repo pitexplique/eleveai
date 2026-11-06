@@ -7,7 +7,8 @@
 
 import { useEffect, useState } from "react";
 import { Video } from "lucide-react";
-import { estShortVideo, lienVideo } from "@/lib/videos/lienVideo";
+import LienVideoModal from "@/components/LienVideoModal";
+import { estShortVideo } from "@/lib/videos/lienVideo";
 
 type VideoCoach = { url: string; titre: string | null };
 type Videos = { notion: Record<string, VideoCoach[]>; micro: Record<string, VideoCoach[]> };
@@ -62,15 +63,14 @@ export default function BoutonVideoCompetence({
   if (!video) return null;
 
   return (
-    <a
-      href={lienVideo(video.url).replace(/^https:\/\/www\.eleveai\.fr(?=\/video\/)/, "")}
-      target="_blank"
-      rel="noopener noreferrer"
-      title={video.titre ?? "Regarder la vidéo de cette compétence"}
-      aria-label="Regarder la vidéo de cette compétence"
+    // ⭐ 05/11/2026 : la vidéo s'ouvre dans un modal, l'élève garde sa question.
+    <LienVideoModal
+      url={video.url}
+      titre={video.titre ?? "Regarder la vidéo de cette compétence"}
+      ariaLabel="Regarder la vidéo de cette compétence"
       className={`inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-600 text-white shadow-sm hover:bg-sky-500 ${className}`}
     >
       <Video aria-hidden="true" size={18} strokeWidth={2.5} />
-    </a>
+    </LienVideoModal>
   );
 }

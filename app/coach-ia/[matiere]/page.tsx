@@ -31,7 +31,8 @@ import Link from "next/link";
 import SelecteurPays from "@/components/SelecteurPays";
 import { BookOpen, Camera, ChevronRight, Network, PencilLine, Play } from "lucide-react";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
-import { estShortVideo, lienVideo } from "@/lib/videos/lienVideo";
+import { estShortVideo } from "@/lib/videos/lienVideo";
+import LienVideoModal from "@/components/LienVideoModal";
 import { ficheClasseSource, ficheHrefPourCoach, libelleClasse } from "@/lib/fiches/registre";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";import { track } from "@vercel/analytics";
 
@@ -1183,16 +1184,16 @@ export default function CoachIA() {
                               notion à vidéo chargeait une image de ytimg.com.
                               Le ▶ rouge dit « vidéo » aussi bien. */}
                           {videos.length ? (
-                            <a
-                              href={lienVideo(videos[0].url)}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <LienVideoModal
+                              url={videos[0].url}
+                              libelleRetour="Retour à la liste"
+                              retourQuestion={false}
                               className={[CASE_VIDEO, BOUTON_SECONDAIRE].join(" ")}
-                              title={videos[0].titre ?? "Voir la vidéo de cette notion"}
+                              titre={videos[0].titre ?? "Voir la vidéo de cette notion"}
                             >
                               <Play className="h-3 w-3 fill-rose-600 text-rose-600" />
                               Vidéo
-                            </a>
+                            </LienVideoModal>
                           ) : <span aria-hidden="true" className={CASE_VIDEO} />}
                           {/* La carte mentale de la notion, à imprimer : une par
                               notion du coach qui a des micros (/cartes-mentales). */}
@@ -1270,30 +1271,28 @@ export default function CoachIA() {
                                   return (
                                     <span className="flex shrink-0 items-center gap-1 self-center">
                                       {paysage ? (
-                                        <a
-                                          href={lienVideo(paysage.url)}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          onClick={(e) => e.stopPropagation()}
+                                        <LienVideoModal
+                                          url={paysage.url}
+                                          libelleRetour="Retour à la liste"
+                                          retourQuestion={false}
                                           className="flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-bold text-rose-700 transition hover:bg-rose-100"
-                                          title={paysage.titre ?? "Vidéo sur cette compétence"}
+                                          titre={paysage.titre ?? "Vidéo sur cette compétence"}
                                         >
                                           <Play className="h-3 w-3 fill-current" />
                                           Vidéo
-                                        </a>
+                                        </LienVideoModal>
                                       ) : null}
                                       {short ? (
-                                        <a
-                                          href={lienVideo(short.url)}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          onClick={(e) => e.stopPropagation()}
+                                        <LienVideoModal
+                                          url={short.url}
+                                          libelleRetour="Retour à la liste"
+                                          retourQuestion={false}
                                           className="flex h-7 w-[18px] items-center justify-center rounded-[5px] border-2 border-rose-300 bg-rose-50 text-rose-600 transition hover:bg-rose-100"
-                                          title={short.titre ?? "Le short de cette compétence"}
-                                          aria-label={`Short : ${short.titre ?? microLabels[microId] ?? microId}`}
+                                          titre={short.titre ?? "Le short de cette compétence"}
+                                          ariaLabel={`Short : ${short.titre ?? microLabels[microId] ?? microId}`}
                                         >
                                           <Play className="h-2.5 w-2.5 fill-current" />
-                                        </a>
+                                        </LienVideoModal>
                                       ) : null}
                                     </span>
                                   );

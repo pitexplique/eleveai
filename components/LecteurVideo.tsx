@@ -23,9 +23,11 @@ type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> 
   videoId: string;
   // Où mène l'écran de fin (le coach de la micro, sinon le coach).
   suite?: { href: string; label: string };
+  // Dans le modal du coach : l'écran de fin ramène à la question, sans changer de page.
+  retour?: { label: string; action: () => void };
 };
 
-export default function LecteurVideo({ videoId, children, suite, ...props }: Props) {
+export default function LecteurVideo({ videoId, children, suite, retour, ...props }: Props) {
   const compte = useRef(false);
   const ref = useRef<HTMLVideoElement>(null);
   const [fini, setFini] = useState(false);
@@ -70,13 +72,21 @@ export default function LecteurVideo({ videoId, children, suite, ...props }: Pro
         {children}
       </video>
       {fini && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-2xl bg-slate-950 p-4 text-center text-white">
+        // Centré et sans hauteur imposée : sur un petit téléphone, la vidéo paysage
+        // est moins haute que ce texte et ses boutons, qui ne doivent pas déborder.
+        <div className="absolute inset-x-0 top-1/2 flex min-h-full -translate-y-1/2 flex-col items-center justify-center gap-4 bg-slate-950 p-4 text-center text-white sm:rounded-2xl">
           <p className="text-2xl font-black sm:text-3xl">À toi !</p>
           <p className="max-w-md text-sm text-slate-200 sm:text-base">Tu as vu la vidéo : maintenant, entraîne-toi sur les mêmes questions.</p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href={lien.href} className="rounded-2xl bg-emerald-400 px-5 py-3 text-base font-black text-slate-950 hover:bg-emerald-300">
-              {lien.label}
-            </Link>
+            {retour ? (
+              <button type="button" onClick={retour.action} className="rounded-2xl bg-emerald-400 px-5 py-3 text-base font-black text-slate-950 hover:bg-emerald-300">
+                {retour.label}
+              </button>
+            ) : (
+              <Link href={lien.href} className="rounded-2xl bg-emerald-400 px-5 py-3 text-base font-black text-slate-950 hover:bg-emerald-300">
+                {lien.label}
+              </Link>
+            )}
             <button type="button" onClick={revoir} className="rounded-2xl px-5 py-3 text-base font-bold text-white ring-1 ring-white/40 hover:bg-white/10">
               Revoir la vidéo
             </button>
