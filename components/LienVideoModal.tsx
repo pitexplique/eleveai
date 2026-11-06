@@ -143,7 +143,8 @@ function ModalVideo({
     >
       <div
         className={[
-          "flex h-full w-full flex-col bg-slate-950 text-white sm:h-auto sm:rounded-2xl sm:shadow-2xl",
+          // Contour blanc (06/11) ; sur téléphone, plein écran et fond noir autour de la vidéo.
+          "flex h-full w-full flex-col bg-slate-950 text-white sm:h-auto sm:rounded-2xl sm:bg-white sm:text-slate-900 sm:shadow-2xl",
           video?.short ? "sm:max-w-md" : "sm:max-w-5xl",
         ].join(" ")}
       >
@@ -152,20 +153,20 @@ function ModalVideo({
             ref={bouton}
             type="button"
             onClick={fermer}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white px-3 py-2 text-sm font-black text-slate-950 transition hover:bg-slate-200"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white px-3 py-2 text-sm font-black text-slate-950 transition hover:bg-slate-200 sm:bg-slate-900 sm:text-white sm:hover:bg-slate-700"
           >
             <ArrowLeft aria-hidden="true" className="h-4 w-4" strokeWidth={3} />
             {libelleRetour}
           </button>
-          <p className="line-clamp-2 min-w-0 text-sm font-bold leading-tight text-slate-200">{video?.titre ?? titre}</p>
+          <p className="line-clamp-2 min-w-0 text-sm font-bold leading-tight text-slate-200 sm:text-slate-800">{video?.titre ?? titre}</p>
         </div>
 
         <div className="flex flex-1 items-center justify-center sm:px-4 sm:pb-4">
           {video === undefined ? (
-            <p className="py-20 text-sm font-bold text-slate-300">Chargement de la vidéo…</p>
+            <p className="py-20 text-sm font-bold text-slate-300 sm:text-slate-600">Chargement de la vidéo…</p>
           ) : video === null ? (
             // Pas encore sur le lecteur du site : le seul cas où YouTube reste possible.
-            <p className="px-6 py-16 text-center text-sm text-slate-200">
+            <p className="px-6 py-16 text-center text-sm text-slate-200 sm:text-slate-700">
               Cette vidéo n&apos;est pas encore sur le site.{" "}
               <a href={lien} target="_blank" rel="noopener noreferrer" className="font-bold underline">
                 L&apos;ouvrir à part
