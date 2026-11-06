@@ -18,5 +18,5 @@
 3. Push : il se propose le soir.
 
 ## En attente de Frédéric
-- `equation_probleme` : le manifeste ne le couvre que par un short de SECONDE (même identifiant). Frédéric a dit oui le 06/11, la micro existant bien en 4e. Épisode 08, slug `probleme`, centre nature-ecologie, Yanis garde forestier. Voix écrites (`manim/voix/4e-equation-probleme.json` et `-short.json`), À VALIDER par lui : rien de généré ni de rendu avant son oui. Elles ont la NOUVELLE fin : à la première vidéo rendue, mesurer la phrase et recaler `COUPE_FIN` pour ces vidéos seulement.
+- Écoute des 16 vidéos, épisode 08 compris (`equation_probleme`, Yanis garde forestier, voix validées le 06/11, rendu fait : paysage 5:08, short 1:14). Il a la NOUVELLE fin (9,74 s en paysage, 6,04 s en short) : recaler `COUPE_FIN` de `components/LecteurVideo.tsx` pour ces deux vidéos seulement, à la passe finale.
 - Ne pas toucher : `manim/scripts/4e/puissance_*`, `manim/rapports-puissances.md`, banques 4e `divisibilite`, `factorisation`, `fractions`, `operations-relatifs`, `probabilites`.

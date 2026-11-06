@@ -302,3 +302,53 @@ Sur les cartes du short, seul le cœur du choix est écrit (« soustraire 2 », 
 **Soucis restants** : aucun défaut visuel connu.
 
 **Corrections (relecture du 05/11)** : libellés « À gauche » / « À droite » écrits pareil, même écart à la case, même ligne de base (03:16-03:23). Ellipse de 00:39 élargie, la ligne « car… » passée de 32 à 30 : elle passe au large du 9 et du « car » ; stylo garé plus bas, il ne touche plus l'ellipse. Ellipse de 01:45 : « + 2 » écarté du 11 et du =, ellipse plus large, plus aucun contact ; ligne « donc… » de 34 à 32 pour tenir dans la feuille. Écran « x des deux côtés » (02:32-02:40) : chaque opération s'écrit sous le terme visé (− 2x sous 4x et sous 2x, + 3 sous − 3 et sous 7, ÷ 2 sous 2x et sous 10), planche confirmée ; x = 5 descendu, « ÷ 2 » ne serre plus son cadre. Vu en plus et corrigé : le a et « donc » sur la marge rouge de la feuille (écran 04), décalés à droite ; lignes rapprochées des − 2x, redistribuées ; envol du 2x, qui serait passé par le titre et l'équation, il passe maintenant dessous. Aucun mot de voix changé, questions et chapitres inchangés, durée inchangée (3:45), short non re-rendu. Dry run : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD (seul reste `AUDIT-ABSENT « 974 »`, l'écran de fin). `verifier-bords-video.py` : 0 instant. 1 rendu HD, aucune `MemoryError`.
+
+## Épisode 08 : probleme (06/11/2026)
+
+**Fichiers**
+- Scripts : `manim/scripts/4e/equation_probleme.py` (classe `EquationProbleme4e`), `equation_probleme_short.py` (classe `EquationProblemeShort`), marques `equation_probleme_marques.json` et `equation_probleme_short_marques.json`.
+- Sorties : `manim/sorties/4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme.mp4` (307,83 s, soit 5:08) et `eleveai-maths-4e-equation-probleme-short.mp4` (73,87 s, soit 1:14).
+
+**Ceintures** : verte (paysage), blanche (short). **Centres** : `["nature-ecologie"]`. **Métier** : Yanis, garde forestier. **Micro** : `equation_probleme`.
+
+**Écrans de la paysage** (section de voix → instant) : 00-garde 00:00 · 01-garde-forestier 00:07 · 02-nommer 00:24 · 03-traduire 00:34 · 04-resoudre 00:49 · 05-repondre 01:01 · 05q-question 01:23 (83,05 s) · 05r-reponse 01:56 · 06-enclos 02:02 · 06q-question 02:34 (154,15 s) · 06r-reponse 03:01 · 07-pepinieres 03:11 · 08-defi 03:51 · 08b-correction 04:07 · 09-finale 04:39 · 10-abonne 04:56 (296,73 s).
+
+**Écrans du short** : 00-accroche (le tour de magie) 00:00 · secret 00:13 · question 00:29 (29,95 s) · 01r-reponse 00:46 · question en commentaire 00:54 · fin 01:06 (66,85 s).
+
+**Chapitres de la paysage**
+00:00 Résoudre un problème avec une équation · 00:07 Yanis, garde forestier · 00:24 Étape 1 : nommer · 00:34 Étape 2 : traduire · 00:49 Étape 3 : résoudre · 01:01 Étape 4 : vérifier et répondre · 01:23 Question 1 · 02:02 L'enclos rectangulaire · 02:34 Question 2 · 03:11 Quelle pépinière choisir ? · 03:51 À toi de jouer · 04:07 Correction · 04:39 Ce que tu as appris
+
+**Questions de la paysage** (`t` = début de l'écran de la question)
+```json
+[
+  {"t": "01:23", "question": "Yanis achète 3 sacs de graines à x euros le sac. Il paie 5 euros de livraison, et 41 euros en tout. Quelle équation ?", "choix": ["3x + 5 = 41", "3(x + 5) = 41", "x + 3 + 5 = 41"], "reponse": 0, "explication": "3 sacs, c'est 3x, et la livraison ne se paie qu'une fois."},
+  {"t": "02:34", "question": "Un autre enclos a une largeur x et une longueur 3x. Son tour mesure 40 mètres. Quelle équation ?", "choix": ["x + 3x = 40", "8x = 40", "3x = 40"], "reponse": 1, "explication": "Le tour passe par les 4 côtés : x + 3x + x + 3x = 8x."}
+]
+```
+
+**Question du short**
+```json
+[
+  {"t": "00:29", "question": "Une amie double son nombre, retire 3, et trouve 11. Quel est son nombre ?", "choix": ["4", "7", "14"], "reponse": 1, "explication": "2 × 7 = 14, 14 − 3 = 11."}
+]
+```
+Question en commentaire : × 4, + 5, on trouve 29 ; quel est le nombre de départ ? (réponse 6). Le chrono du short dure vraiment 3 s : `question_pause` attend la fin de la voix puis joue 3 × 1,00 s, aucun WAV dérivé.
+
+**Phrase de fin** : `10-abonne.wav` 9,74 s (paysage, écran de fin de 11,10 s à partir de 296,73 s) ; `03-abonne.wav` 6,04 s (short, écran de fin de 7,02 s à partir de 66,85 s). Écran : « Entraîne-toi sur » + « eleveai.fr » encadré, « Abonne-toi ! » + « @eleveai974 », puis « Un pouce · Un commentaire · La cloche » (paysage) ou « Un pouce · La cloche » (short).
+
+**Voix** : aucun mot changé, aucun silence inséré. WAV générés au débit −6 dans `public/sons/4e-equation-probleme/` et `public/sons/4e-equation-probleme-short/`.
+
+**Contrôles** : dry run final paysage (60 i/s) : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD, seul reste `AUDIT-ABSENT « 974 »`. Dry run final short : aucune ligne. `verifier-bords-video.py` : 0 instant sur les deux rendus HD finaux. Aucune `MemoryError`. Le short a eu 3 rendus HD, la paysage 2.
+
+**Complété dans MES scripts (module commun inchangé)** : `arbre`, `Reperes` (les 4 étapes), `Parcelle`, `Enclos`, `Serre`, `sac`, `camion`, `nichoir`, `barre`, `yanis`, `_OutilsProbleme` (`lg` avec `maxw`, `dit`, `cadre_ok`, `poser_avec`), `ph_eq`, `_disposer_q`, `page_abonnement` ; pour le short `haut_de_forme`, `lapin`, `magicien`, `baguette`, `Bulle`, `etoiles`, `decor`, `fin_05_11`. `E` et `_OutilsDefi` sont importés de `equation_defi.py`, sans le modifier.
+
+**À savoir pour la suite** : à 15 i/s, l'audit donne de faux AVANCE (0,06-0,07 s) et un faux TARD (1,49 s), dus à l'arrondi des images ; à 60 i/s en dry run, ils disparaissent. La largeur d'un texte vaut environ 0,0068 × fs par caractère : la prévoir évite des séries de BORD.
+
+**Vu sur les planches, corrigé puis re-rendu**
+- Paysage, basse définition : équation sur la parcelle (écran 04) ; cadre x = 13 sur « ÷ 4 », cadre x = 30 sur « ÷ 2 », « − 5 » sur le cadre x = 15 ; « Comment trouver… » rétréci à tort ; « ? » sur le dernier arbre ; flammes trop brèves, visibles maintenant jusqu'après « il replante » ; « dans chaque rangée ? » contre Ti Margo ; arbres de réserve contre Yanis ; « 4x » de l'accolade contre le texte ; accolade des sacs sur « Il paie » ; réponses de question trop petites ; lignes de l'enclos serrées (coupées en deux, fs 30) ; « 5 m » hors marge ; « donc » sous le cadre ; « Avec x arbres » collé à 3x ; « 65 euros… », « On vérifie » hors marge ; « Correction » collé à l'équation ; « On appelle… » trop petit, passé sur 2 lignes ; lignes de base des gestes de fin.
+- Paysage, planche HD : noms des 4 étapes collés à leur case (fs 34 → 30) ; flèche orange sur le cadre x = 13 et sur le cadre x = 30 (flèches raccourcies, cadres descendus) ; « − 10 » collé à la flèche ; « − 5 » coupé par le cadre x = 15 ; cadre x = 5 collé à « 6x = 30 » ; cadre x = 30 proche de « On vérifie ».
+- Short : 3x + 2 = 17 débordant de la bulle (fs 40, bulle 4,15, centrée) ; cadre x = 5 sur Ti Margo et collé à « On divise » ; « 14 − 3 » sur Ti Margo (réponse sur 2 lignes) ; « magie » contre le bord du chapeau (chapeau remonté) ; étoiles hors marge ; gestes hors marge (fs 26) ; interlignes ; ligne de base de « La cloche ».
+
+**Soucis restants** : aucun défaut visuel connu. Le son n'a pas été écouté : les contrôles portent sur les marques et l'image.
+
+**Corrections (épisode 08, relecture du 06/11)** : questions 1 et 2 : les lignes de l'énoncé ont la même taille (30 et 29), l'énoncé et sa figure sont décalés pour tenir sans rétrécir. Même défaut repris ailleurs : accroche, « Combien d'arbres / dans chaque rangée ? », écrans Nommer, Traduire, Enclos, cartes et opérations des pépinières, « On appelle x / les nichoirs de Yanis », opérations de la correction. Cadres x = 13, x = 5, x = 15, x = 30 et phrases-réponses : plus d'air, surtout en largeur, sans contact avec les opérations (cadres descendus, flèches raccourcies, « Yanis en pose… » descendu). Sous la taille 30, le texte est composé à 30 puis réduit : à 28, le rendu de la police mangeait les espaces entre les mots. Aucun mot de voix changé, questions et chapitres inchangés, durée inchangée (307,83 s, soit 5:08), short non re-rendu. Dry run : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD (seul reste `AUDIT-ABSENT « 974 »`). `verifier-bords-video.py` : 0 instant. 2 rendus HD de plus pour la paysage (4 en tout), aucune `MemoryError`.
