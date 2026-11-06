@@ -288,7 +288,34 @@ async function poserMiniature(token, videoId, relatif) {
   );
   // ⚠️ Une miniature personnalisée exige un compte YouTube VÉRIFIÉ (par
   // téléphone). Sans cela l'appel échoue — sans que la vidéo, elle, soit perdue.
-  return r.ok ? "posée" : `refusée (${r.status})`;
+  if (r.ok) return "posée";
+  console.log(`  motif du refus : ${(await r.text()).replace(/\s+/g, " ").slice(0, 300)}`);
+  return `refusée (${r.status})`;
+}
+
+// 06/11 : YouTube a refusé (403) les miniatures de 2 vidéos, puis les a acceptées
+// quelques minutes plus tard, sans rien changer. On réessaie donc sur place.
+async function poserMiniatureAvecReprises(token, videoId, relatif) {
+  let res = await poserMiniature(token, videoId, relatif);
+  for (const attente of [30, 90]) {
+    if (!res.startsWith("refusée")) break;
+    await new Promise((ok) => setTimeout(ok, attente * 1000));
+    res = await poserMiniature(token, videoId, relatif);
+  }
+  return res;
+}
+
+// Une miniature encore refusée après les reprises reste notée dans le journal :
+// les essais de chaque heure la reposent jusqu'à ce que YouTube l'accepte.
+async function rattraperMiniaturesRefusees(token, journal) {
+  for (const [id, j] of Object.entries(journal)) {
+    if (!j.miniatureAReposer) continue;
+    const res = await poserMiniature(token, j.videoId, j.miniatureAReposer);
+    console.log(`  miniature refusée plus tôt : ${id} (${j.videoId}) ${res}`);
+    if (res !== "posée") break; // la suite à la prochaine heure
+    delete j.miniatureAReposer;
+    ecrireJournal(journal);
+  }
 }
 
 // Frédéric, 05/11 : l'onglet Shorts de la chaîne montre une image de la vidéo.
@@ -761,7 +788,10 @@ async function main() {
     if (deja.some((j) => heureReunion(j.publieLe).split(" ")[0] === demain)) {
       console.log(`Demain (${demain}) a déjà ses vidéos programmées.`);
       // Les essais de chaque heure rattrapent les shorts sortis depuis le dernier.
-      if (!dryRun) await rattraperMiniaturesShorts(token, m, journal, 8);
+      if (!dryRun) {
+        await rattraperMiniaturesRefusees(token, journal);
+        await rattraperMiniaturesShorts(token, m, journal, 8);
+      }
       return;
     }
   }
@@ -815,7 +845,7 @@ async function main() {
       if (publieA) console.log(`  programmée : ${heureReunion(publieA)} (heure de La Réunion)`);
       process.stdout.write(` ok (${videoId})\n`);
 
-      const mini = v.miniature ? await poserMiniature(token, videoId, v.miniature) : "sans objet";
+      const mini = v.miniature ? await poserMiniatureAvecReprises(token, videoId, v.miniature) : "sans objet";
       const noms = playlistsDe(v, m);
       for (const nom of noms) await ajouterAPlaylist(token, await idPlaylist(nom), videoId);
       const pl = noms.join(" + ");
@@ -823,6 +853,7 @@ async function main() {
       console.log(`  https://youtu.be/${videoId}`);
 
       journal[v.id] = { videoId, titre: v.titre, visibilite, publieLe: publieA ?? new Date().toISOString() };
+      if (mini.startsWith("refusée")) journal[v.id].miniatureAReposer = v.miniature;
       ecrireJournal(journal); // écrit APRÈS chaque vidéo : une coupure ne perd rien
 
       if ((remplacer || v.a_remplacer) && v.url) {
