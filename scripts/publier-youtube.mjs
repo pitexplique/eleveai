@@ -595,7 +595,13 @@ function playlistsDe(v, m) {
     terminale: ["Maths terminale spé"], "terminale-spe": ["Maths terminale spé"],
     bases: ["LES BASES"], actu: ["Les maths en vrai"], "maths-en-vrai": ["Les maths en vrai"], "974": ["Les maths en vrai"],
   };
-  return par[k] ?? [m.playlist];
+  // 06/11 : la vidéo sert aussi une classe voisine (`aussi`, ou une jumelle qui
+  // n'est pas publiée) : elle entre dans la playlist de cette classe.
+  const voisines = [
+    ...(v.aussi ?? []).map((a) => a.classe),
+    ...m.videos.filter((x) => x.meme_video_que === v.id).map(classeDe),
+  ];
+  return [...new Set([...(par[k] ?? [m.playlist]), ...voisines.flatMap((c) => par[c] ?? [])])];
 }
 
 const classeDe = (v) => v.classe || v.fichier.split("/")[0];
@@ -632,7 +638,11 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
   candidats = candidats.filter((v) => !v.a_remplacer);
   // `prioritaire` (nouveautés que Frédéric veut voir sortir, 02/11) : avant la
   // rotation des classes, une paysage n'occupant jamais plus de 2 places.
-  for (const v of candidats.filter((x) => x.prioritaire)) {
+  // Une vidéo datée (`pas_avant`, calendrier validé par Frédéric) passe avant les
+  // autres prioritaires : sa date tient même si la file est longue.
+  const prioritaires = candidats.filter((x) => x.prioritaire)
+    .sort((a, b) => (b.pas_avant ? 1 : 0) - (a.pas_avant ? 1 : 0));
+  for (const v of prioritaires) {
     if (choisis.length >= limite || choisis.includes(v)) continue;
     if (v.type === "longue") {
       if (choisis.filter((x) => x.type === "longue").length >= 2) continue;
@@ -739,8 +749,14 @@ async function main() {
   if (rattrapees.length) console.log(`(${rattrapees.length} vidéos déjà sur la chaîne, reconnues par leur fichier)`);
 
   const enLigneOuJournal = (id) => journal[id] || m.videos.find((p) => p.id === id)?.url;
+  const dateDeDemain = horairesDeDemain(1)[0].slice(0, 10);
   let aFaire = m.videos
     .filter((v) => !journal[v.id] && (!v.url || remplacer || v.a_remplacer))
+    // 06/11 : une jumelle (`meme_video_que`) n'est publiée qu'une fois, sous l'entrée
+    // qu'elle désigne ; son propre rendu reste sur R2, pour le coach de sa classe.
+    .filter((v) => !v.meme_video_que)
+    // `pas_avant` : calendrier validé par Frédéric. Sans objet si on nomme la vidéo.
+    .filter((v) => seulement || !v.pas_avant || v.pas_avant <= dateDeDemain)
     // --seulement accepte une liste séparée par des virgules (le choix du jour).
     .filter((v) => !seulement || seulement.split(",").some((s) => v.id === s || v.notionId === s))
     .filter((v) => fs.existsSync(path.join(SORTIES, v.fichier)))

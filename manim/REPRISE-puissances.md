@@ -86,3 +86,12 @@ Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des age
 > Dessins écran par écran (un par clé de voix, qui bouge ; code couleur bleu base / orange exposant / vert juste / rouge piège ; pictogramme + métier écrit) ; questions-pauses 5 s.
 > SHORT ceinture blanche, identité 4e (ou 2de), `…_short.py`, classe `Puissance<Slug>Short` : en HAUT l'image concrète qui bouge, en BAS les maths en même temps ; question-pause 3 s ; question en commentaire puis l'abonne.
 > D'autres agents rendent en même temps : verrou HD obligatoire. Rapport court à la fin.
+
+## État au 06/11 (session « publication YouTube ») — À LIRE EN PREMIER
+- Frédéric a validé le plan le 06/11. 26 vidéos sur 33 partent par la tâche automatique, chacune datée au manifeste (`prioritaire` + `pas_avant`) : une paysage et son short par jour, du mar. 10/11 au lun. 23/11. Programmées la veille à 12 h 30 Réunion : premier envoi lun. 09/11. Paysage à 7 h 30 ; short à 12 h 15 ou 16 h 30.
+- Calendrier : 10/11 ép. 1 ; 11 ép. 2 ; 12 ép. 3 ; 13 ép. 4 ; 14 ép. 4 seconde seule ; 15 ép. 5 ; 16 ép. 6 ; 17 ép. 7 ; 18 ép. 8 ; 19 ép. 9 seule ; 20 ép. 10 ; 21 ép. 11 ; 22 ép. 12 ; 23 ép. 13.
+- Les 7 jumelles (3e des ép. 1, 2, 3, 5, 7 ; seconde de l'ép. 5 ; STMG de l'ép. 13) restent sur R2 : `publier-youtube.mjs` ne publie plus aucune entrée `meme_video_que`. Les vidéos servant une classe voisine entrent aussi dans sa playlist (`aussi` + jumelles).
+- Les `url` s'écrivent toutes seules au manifeste à chaque envoi. Le coach ne bouge pas : 41 lignes sur /video/<id> (R2) vérifiées le 06/11. Relancer `brancher-videos-coach.mjs` ne les remplace pas (place déjà occupée).
+- Fin des vidéos : ancienne phrase (« Et abonne-toi »), gardée : pas de re-rendu (règle du 05/11).
+- ⏳ Frédéric, dans Studio, une fois la paysage en ligne : « Vidéo similaire » des 12 shorts = sa paysage (l'API ne le fait pas).
+- ⏳ À contrôler après le 23/11 : 26 `url` au manifeste, journal `manim/sorties/publication-auto.log`, puis committer ces `url` par chemin (`git hash-object`).

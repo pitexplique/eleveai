@@ -233,7 +233,8 @@
         "Shorts",
         "2de"
       ],
-      "miniature": "seconde/maths/fr/eleveai-maths-seconde-repere-coordonnees-short.png"
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-repere-coordonnees-short.png",
+      "url": "https://youtube.com/shorts/6G4TGfuSPmg"
     },
     {
       "id": "puissances",
@@ -1084,7 +1085,8 @@
         "fractions égales",
         "révisions",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/4QvQH0yTklk"
     },
     {
       "id": "bases-fractions-simplifier",
@@ -1632,7 +1634,8 @@
         "Shorts"
       ],
       "fichier": "maths-en-vrai/maths/shorts/fr/fonctions/eleveai-maths-en-vrai-fonctions-short-quand.mp4",
-      "miniature": "maths-en-vrai/maths/fr/eleveai-maths-en-vrai-fonctions-short-quand.png"
+      "miniature": "maths-en-vrai/maths/fr/eleveai-maths-en-vrai-fonctions-short-quand.png",
+      "url": "https://youtube.com/shorts/xqCoeaGuxX4"
     },
     {
       "id": "bases-fonctions-jusquou",
@@ -6129,7 +6132,8 @@
         "terminale",
         "spécialité maths",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/4RIt5j59Pp4"
     },
     {
       "id": "terminale-continuite-tvi-short-unicite",
@@ -7094,8 +7098,8 @@
           "explication": "Le théorème part de l'angle droit ; seule la réciproque le prouve."
         }
       ],
-      "url": "https://youtu.be/IV4gWGe597Q",
-      "a_remplacer": true
+      "url": "https://youtu.be/E64f6HmaFr4",
+      "ancienne_url": "https://youtu.be/IV4gWGe597Q"
     },
     {
       "id": "4e-pythagore-reciproque-short",
@@ -7136,8 +7140,8 @@
           "explication": "36 + 64 = 100 = 10² : le coin est droit."
         }
       ],
-      "url": "https://youtube.com/shorts/9JazsOkfeDA",
-      "a_remplacer": true
+      "url": "https://youtube.com/shorts/NXVnYoIo7Fc",
+      "ancienne_url": "https://youtube.com/shorts/9JazsOkfeDA"
     },
     {
       "id": "4e-pythagore-rediger",
@@ -7231,8 +7235,8 @@
           "explication": "La réciproque prouve l'angle droit ; le théorème calcule une longueur."
         }
       ],
-      "url": "https://youtu.be/cBgnO9A9cG8",
-      "a_remplacer": true
+      "url": "https://youtu.be/1JDKfd9k3kA",
+      "ancienne_url": "https://youtu.be/cBgnO9A9cG8"
     },
     {
       "id": "4e-pythagore-rediger-short",
@@ -7273,8 +7277,8 @@
           "explication": "On cherche l'angle droit : c'est la réciproque."
         }
       ],
-      "url": "https://youtube.com/shorts/eIi_u2MlcnM",
-      "a_remplacer": true
+      "url": "https://youtube.com/shorts/kPTPqGyGres",
+      "ancienne_url": "https://youtube.com/shorts/eIi_u2MlcnM"
     },
     {
       "id": "4e-pythagore-defi-cube",
@@ -53559,6 +53563,192 @@
       "url": "https://youtube.com/shorts/DLNc84RLJ_0"
     },
     {
+      "id": "actu-maths-reelles-short",
+      "ceinture": "blanche",
+      "type": "short",
+      "prioritaire": true,
+      "fichier": "actu/maths/shorts/fr/maths-reelles/eleveai-maths-actu-maths-reelles-short.mp4",
+      "miniature": "actu/maths/shorts/fr/maths-reelles/eleveai-maths-actu-maths-reelles-short.png",
+      "titre": "−30 % puis +30 % : le jean revient à 100 € ? Vrai ou faux 🤔 #Shorts",
+      "accroche": "Le jean baisse de 30 %, puis remonte de 30 %. Revenu à 100 € ? Non : 91 €.\nEn janvier 2027, les visios « Maths réelles » : une phrase entendue à la télé ou sur les réseaux, on vote, on vérifie avec les maths. Du collège au lycée, avec des élèves de 8 pays.\nQuelle phrase veux-tu qu’on vérifie ? Dis-le en commentaire.\n\n🎯 Les visios : https://www.eleveai.fr/tarifs\n\n⏸ La question-pause : vrai ou faux, il est revenu à 100 € ?\n🥋 Ceinture blanche.\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #espritcritique #eleveai",
+      "tags": [
+        "maths réelles",
+        "pourcentages",
+        "soldes",
+        "pourcentages successifs",
+        "vrai ou faux",
+        "esprit critique",
+        "visio maths",
+        "maths",
+        "collège",
+        "lycée",
+        "4e",
+        "3e",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "url": "https://youtube.com/shorts/ifn2_ZscfV8"
+    },
+    {
+      "id": "6e-goldbach",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/mysteres/01-goldbach/eleveai-maths-6e-goldbach.mp4",
+      "miniature": "6e/maths/mysteres/01-goldbach/eleveai-maths-6e-goldbach.png",
+      "titre": "Le mystère que personne n'a résolu depuis 1742 — Comprendre la conjecture de Goldbach · Maths 6e",
+      "accroche": "En 1742, Christian Goldbach écrit une lettre à Leonhard Euler. Il lui pose une petite question sur les nombres premiers. Presque 300 ans plus tard, personne n'a su y répondre : ni les plus grands savants, ni les ordinateurs les plus puissants.\n\nDans cette vidéo :\n• un nombre premier a exactement deux diviseurs : 1 et lui-même (7 billes ne se rangent qu'en une seule ligne)\n• 10 = 3 + 7, 16 = 3 + 13, 28 = 5 + 23 : un nombre pair semble toujours être la somme de deux nombres premiers\n• 100 s'écrit de six façons\n• la conjecture de Goldbach : un pari pas encore démontré\n• vérifié par ordinateur jusqu'à 4 milliards de milliards, mais essayer, ce n'est pas prouver\n• les nombres premiers protègent ta carte bancaire : le métier de cryptographe\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : écris 36 comme la somme de deux nombres premiers (il y a quatre façons).\n\n🎬 Tu as vu le film « Le Théorème de Marguerite » ? C'est cette conjecture qui l'occupe.\n\nPour revoir les nombres premiers avec des billes : https://youtu.be/0SMk_9elRFI\nPour s'entraîner : https://www.eleveai.fr\n\nEt toi, quel nombre pair écris-tu comme la somme de deux nombres premiers ? Dis-le en commentaire.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une lettre de 1742"
+        ],
+        [
+          "00:31",
+          "C'est quoi, un nombre premier ?"
+        ],
+        [
+          "00:57",
+          "L'idée de Goldbach"
+        ],
+        [
+          "01:22",
+          "Question : 20 = ? + ?"
+        ],
+        [
+          "01:56",
+          "100 : six façons"
+        ],
+        [
+          "02:24",
+          "Un pari : la conjecture"
+        ],
+        [
+          "02:48",
+          "Question : pourquoi après 2 ?"
+        ],
+        [
+          "03:16",
+          "4 milliards de milliards d'essais"
+        ],
+        [
+          "03:41",
+          "À toi de jouer : 36"
+        ],
+        [
+          "03:53",
+          "Correction"
+        ],
+        [
+          "04:13",
+          "Marguerite et les codes secrets"
+        ],
+        [
+          "04:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "conjecture de Goldbach",
+        "Goldbach",
+        "nombres premiers",
+        "nombre premier",
+        "Euler",
+        "Le Théorème de Marguerite",
+        "diviseurs",
+        "nombres pairs",
+        "mystère des maths",
+        "problème non résolu",
+        "cryptographie",
+        "cryptographe",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:22",
+          "question": "20 est égal à quelle somme de deux nombres premiers ?",
+          "choix": [
+            "9 + 11",
+            "7 + 13",
+            "5 + 15"
+          ],
+          "reponse": 1,
+          "explication": "7 et 13 sont premiers. 9 et 15 ne le sont pas : 9 ÷ 3 = 3 et 15 ÷ 3 = 5."
+        },
+        {
+          "t": "02:48",
+          "question": "Pourquoi commence-t-on après 2 ? Combien font 2 + 2, les deux plus petits nombres premiers ?",
+          "choix": [
+            "2",
+            "4",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "Le plus petit nombre premier est 2. Deux nombres premiers font donc au moins 2 + 2 = 4."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "histoire-geographie",
+        "technologie-ia"
+      ],
+      "url": "https://youtu.be/yYxNOsDUSBo"
+    },
+    {
+      "id": "6e-goldbach-short",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-goldbach",
+      "fichier": "6e/maths/mysteres/01-goldbach/eleveai-maths-6e-goldbach-short.mp4",
+      "miniature": "6e/maths/mysteres/01-goldbach/eleveai-maths-6e-goldbach-short.png",
+      "titre": "Le défi que personne n'a jamais gagné 🤯 — 6e #Shorts",
+      "accroche": "Prends un nombre pair et coupe-le en deux nombres premiers : 12 = 5 + 7, 18 = 7 + 11, 30 = 13 + 17. Ça marche toujours… mais depuis 1742, personne n'a su prouver que ça marche pour TOUS les nombres pairs. C'est la conjecture de Goldbach, celle du film « Le Théorème de Marguerite ».\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : écris 50 comme la somme de deux nombres premiers. Ta réponse en commentaire !\n\n▶️ La vidéo complète : https://youtu.be/yYxNOsDUSBo\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombrespremiers #Goldbach #6e #collège",
+      "tags": [
+        "conjecture de Goldbach",
+        "Goldbach",
+        "nombres premiers",
+        "défi maths",
+        "mystère des maths",
+        "Le Théorème de Marguerite",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "14 = … ?",
+          "choix": [
+            "7 + 7",
+            "5 + 9",
+            "1 + 13"
+          ],
+          "reponse": 0,
+          "explication": "7 + 7 ! 9 n'est pas premier, et 1 non plus."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "cinema-series",
+        "histoire-geographie"
+      ],
+      "url": "https://youtube.com/shorts/oVqU7WQL4TA"
+    },
+    {
       "id": "seconde-prop-proportion",
       "notionId": "information_chiffree_evolutions",
       "microId": "info_proportion",
@@ -56448,7 +56638,8 @@
         }
       ],
       "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-1/eleveai-francais-cp-pas-a-pas-chiffre-1.png",
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/hXIz4QekyUc"
     },
     {
       "id": "cp-pas-a-pas-chiffre-2",
@@ -56537,7 +56728,8 @@
         }
       ],
       "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-2/eleveai-francais-cp-pas-a-pas-chiffre-2.png",
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/_VWgY_nJDig"
     },
     {
       "id": "cp-pas-a-pas-chiffre-3",
@@ -57817,11 +58009,11 @@
           "Pourquoi 10 : 2 parmi 5"
         ],
         [
-          "01:12",
+          "01:11",
           "Question 1"
         ],
         [
-          "01:50",
+          "01:49",
           "Le triangle de Pascal"
         ],
         [
@@ -57829,19 +58021,19 @@
           "La relation de Pascal"
         ],
         [
-          "02:32",
+          "02:31",
           "Pourquoi ça marche"
         ],
         [
-          "02:52",
+          "02:51",
           "Le triangle compte les chemins d'un arbre"
         ],
         [
-          "03:09",
+          "03:08",
           "Question 2"
         ],
         [
-          "03:52",
+          "03:51",
           "Le piège : descendre ET avancer"
         ],
         [
@@ -57866,7 +58058,7 @@
       ],
       "questions": [
         {
-          "t": "01:12",
+          "t": "01:11",
           "question": "Grille de 4 rues vers l'est et 4 rues vers le nord. Combien de chemins ?",
           "choix": [
             "16",
@@ -57877,7 +58069,7 @@
           "explication": "8 déplacements dont 4 vers le nord : on choisit leurs places, 4 parmi 8 = 70."
         },
         {
-          "t": "03:09",
+          "t": "03:08",
           "question": "Ligne 5 : 1, 5, 10, 10, 5, 1. Quelle est la ligne 6 ?",
           "choix": [
             "1, 6, 15, 20, 15, 6, 1",
@@ -58366,7 +58558,9 @@
         "reseaux-sociaux",
         "art-design",
         "sciences"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-10"
     },
     {
       "id": "3e-puissance-comprendre",
@@ -58531,7 +58725,9 @@
           "notionId": "entier_puissance",
           "microId": "entier_puissance_comprendre"
         }
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-10"
     },
     {
       "id": "4e-puissance-calculer",
@@ -58651,7 +58847,9 @@
       "centres": [
         "cuisine",
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-11"
     },
     {
       "id": "3e-puissance-calculer",
@@ -58826,7 +59024,9 @@
           "notionId": "entier_puissance",
           "microId": "entier_puissance_calculer"
         }
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-11"
     },
     {
       "id": "4e-puissance-dix",
@@ -58924,7 +59124,9 @@
         "espace",
         "sciences",
         "technologie-ia"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-12"
     },
     {
       "id": "3e-puissance-dix",
@@ -59077,7 +59279,9 @@
           "notionId": "entier_puissance",
           "microId": "entier_puissance_dix"
         }
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-12"
     },
     {
       "id": "4e-puissance-zero-negatif",
@@ -59184,7 +59388,9 @@
       "centres": [
         "technologie-ia",
         "sciences"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-13"
     },
     {
       "id": "seconde-puissance-zero-negatif",
@@ -59293,7 +59499,9 @@
       "centres": [
         "technologie-ia",
         "sciences"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-14"
     },
     {
       "id": "4e-puissance-zero-negatif-short",
@@ -59346,7 +59554,9 @@
           "notionId": "puissances_2de",
           "microId": "puiss_exposant_negatif"
         }
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-13"
     },
     {
       "id": "4e-puissance-notation-scientifique",
@@ -59448,7 +59658,9 @@
         "corps-sante",
         "histoire-geographie",
         "sciences"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-15"
     },
     {
       "id": "3e-puissance-notation-scientifique",
@@ -59710,7 +59922,9 @@
           "notionId": "puissances_2de",
           "microId": "puiss_notation_scientifique"
         }
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-15"
     },
     {
       "id": "4e-puissance-comparer",
@@ -59811,7 +60025,9 @@
         "sciences",
         "nature-ecologie",
         "animaux"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-16"
     },
     {
       "id": "4e-puissance-comparer-short",
@@ -59858,7 +60074,9 @@
       "centres": [
         "sport",
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-16"
     },
     {
       "id": "4e-puissance-calcul",
@@ -59960,7 +60178,9 @@
       "centres": [
         "animaux",
         "espace"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-17"
     },
     {
       "id": "3e-puissance-calcul",
@@ -60116,7 +60336,9 @@
           "notionId": "entier_puissance",
           "microId": "entier_puissance_calcul"
         }
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-17"
     },
     {
       "id": "seconde-puissance-produit-quotient",
@@ -60238,7 +60460,9 @@
       "centres": [
         "technologie-ia",
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-18"
     },
     {
       "id": "seconde-puissance-produit-quotient-short",
@@ -60281,7 +60505,9 @@
       ],
       "centres": [
         "technologie-ia"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-18"
     },
     {
       "id": "seconde-puissance-puissance-puissance",
@@ -60379,7 +60605,9 @@
       "centres": [
         "art-design",
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-19"
     },
     {
       "id": "seconde-puissance-enchainer",
@@ -60481,7 +60709,9 @@
       "centres": [
         "transports",
         "avions"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-20"
     },
     {
       "id": "seconde-puissance-enchainer-short",
@@ -60525,7 +60755,9 @@
       "centres": [
         "avions",
         "transports"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-20"
     },
     {
       "id": "4e-puissance-defi",
@@ -60635,7 +60867,9 @@
         "jeux-video",
         "musique",
         "cinema-series"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-21"
     },
     {
       "id": "4e-puissance-defi-short",
@@ -60682,7 +60916,9 @@
       "centres": [
         "argent-budget",
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-21"
     },
     {
       "id": "3e-puissance-defi",
@@ -60805,7 +61041,9 @@
       "centres": [
         "sciences",
         "espace"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-22"
     },
     {
       "id": "3e-puissance-defi-short",
@@ -60852,7 +61090,9 @@
       "centres": [
         "jeux-defis",
         "sciences"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-22"
     },
     {
       "id": "premiere-puissance-cinq-regles",
@@ -60958,7 +61198,9 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-23"
     },
     {
       "id": "stmg-puissance-cinq-regles",
@@ -61117,7 +61359,9 @@
           "notionId": "auto_fractions_puissances",
           "microId": "auto_num_puissances"
         }
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-23"
     },
     {
       "id": "6e-angle-reconnaitre",
