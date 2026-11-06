@@ -17,11 +17,11 @@
 - Manifeste : 16 entrées `4e-equation-<slug>[-short]` ajoutées (`4e-equation-resolution` et `eq-probleme` intacts). Temps relevés dans l'audio de chaque mp4 (corrélation avec les WAV) : ils priment sur `rapports-equations.md`. Différences : chapitre et question 1 de la paysage 02 à 01:01, chapitres 05 à 01:34, 07 à 01:28 et 02:58, 08 à 01:02. Retirés car ils duraient moins de 10 s : le titre de 00:00 (le chapitre d'après démarre à 00:00), « Le piège » de la 01, « Deux routes » de la 05 (noms fusionnés dans le chapitre d'avant).
 - R2 : 48 fichiers envoyés (16 mp4, 16 png, 16 webp), à blanc = 0 restant. Table et bilans à jour.
 - Coupe de fin de l'épisode 08 dans `components/LecteurVideo.tsx` : paysage 8,6 s, short 4,7 s. Dans le WAV du short, « f r. » s'enchaîne sans pause sur « Mets un pouce » (fin de mot vers 2,32 s, trouvée par comparaison avec le WAV de la paysage) : le lecteur vérifie 4 fois par seconde, on peut donc entendre le début de « Mets ». Non essayé dans un navigateur.
-- ⛔ COACH PAS ÉCRIT : juste après le push du soir, `node scripts/brancher-videos-coach.mjs --id <les 16 id> --ecrire` (lecture du 06/11 : 16 lignes, aucune micro occupée, aucun refus). Avant le push, les boutons mèneraient à un 404.
+- Coach : 16 lignes écrites en production après le push, avec `node scripts/brancher-videos-coach.mjs --id <les 16 id> --ecrire`.
 
 ## Reste
 1. Écoute par Frédéric. Pour les retours : un agent neuf par épisode, 2 à la fois au plus.
-2. Push : il se propose le soir, puis branchement du coach (`--ecrire`, voir ci-dessus).
+2. FAIT le 06/11, sur son ordre : push `ce3b3f88`, puis branchement du coach (`--ecrire`). Les élèves voient les vidéos ; Frédéric ne les avait pas encore écoutées.
 3. YouTube : paysage AVANT son short. Les 16 entrées portent `pas_avant: 2026-11-24` pour qu'aucune ne parte avant l'écoute de Frédéric. Date de prudence, PAS un calendrier validé : à cette date, elles passent devant les vidéos non datées (`publier-youtube.mjs`). À recaler après son écoute.
 
 ## En attente de Frédéric
