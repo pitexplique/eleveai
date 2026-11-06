@@ -12452,5 +12452,113 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
+ },
+ "6e-angle-comparer": {
+  "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.mp4",
+  "poster": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.png",
+  "vignette": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.vignette.webp",
+  "titre": "Le plus grand angle a-t-il les plus longs côtés ? — Comparer des angles — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_comparer&display=simple"
+ },
+ "6e-angle-comparer-short": {
+  "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.mp4",
+  "poster": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.png",
+  "vignette": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.vignette.webp",
+  "titre": "Une loupe grossit tout. Même les angles ? 🔍 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_comparer&display=simple"
+ },
+ "6e-angle-defi": {
+  "fichier": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.mp4",
+  "poster": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.png",
+  "vignette": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.vignette.webp",
+  "titre": "Peut-on trouver un angle sans rapporteur ? — Défis sur les angles — épisode 6 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_defi&display=simple"
+ },
+ "6e-angle-defi-short": {
+  "fichier": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.mp4",
+  "poster": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.png",
+  "vignette": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.vignette.webp",
+  "titre": "Quel angle entre les pales d'une éolienne ? 🌬️ — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_defi&display=simple"
+ },
+ "6e-angle-droit": {
+  "fichier": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.mp4",
+  "poster": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.png",
+  "vignette": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.vignette.webp",
+  "titre": "Comment savoir si un coin est vraiment droit ? — L'angle droit — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_droit&display=simple"
+ },
+ "6e-angle-droit-short": {
+  "fichier": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.mp4",
+  "poster": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.png",
+  "vignette": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.vignette.webp",
+  "titre": "Pas d'équerre ? Déchire une feuille ! 📄 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_droit&display=simple"
+ },
+ "6e-angle-mesurer": {
+  "fichier": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.mp4",
+  "poster": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.png",
+  "vignette": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.vignette.webp",
+  "titre": "Comment lire un rapporteur sans se tromper ? — Mesurer un angle — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_mesurer&display=simple"
+ },
+ "6e-angle-mesurer-short": {
+  "fichier": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.mp4",
+  "poster": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.png",
+  "vignette": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.vignette.webp",
+  "titre": "Il y a un rapporteur caché dans une horloge ! 🕒 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_mesurer&display=simple"
+ },
+ "6e-angle-reconnaitre": {
+  "fichier": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.mp4",
+  "poster": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.png",
+  "vignette": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.vignette.webp",
+  "titre": "Où se cache un angle ? — Reconnaître un angle — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_reconnaitre&display=simple"
+ },
+ "6e-angle-reconnaitre-short": {
+  "fichier": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.mp4",
+  "poster": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.png",
+  "vignette": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.vignette.webp",
+  "titre": "Des angles cachés dans l'alphabet 🔤 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_reconnaitre&display=simple"
+ },
+ "6e-angle-tracer": {
+  "fichier": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.mp4",
+  "poster": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.png",
+  "vignette": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.vignette.webp",
+  "titre": "Quels sont les quatre gestes ? — Tracer un angle — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple"
+ },
+ "6e-angle-tracer-short": {
+  "fichier": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.mp4",
+  "poster": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.png",
+  "vignette": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.vignette.webp",
+  "titre": "Avec un seul angle, on dessine un flocon ! ❄️ — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple"
  }
 }

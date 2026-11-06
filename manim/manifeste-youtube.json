@@ -61118,6 +61118,879 @@
           "microId": "auto_num_puissances"
         }
       ]
+    },
+    {
+      "id": "6e-angle-reconnaitre",
+      "notionId": "angle_mesure",
+      "microId": "angle_reconnaitre",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.mp4",
+      "miniature": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.png",
+      "titre": "Où se cache un angle ? — Reconnaître un angle — épisode 1 · Maths 6e",
+      "accroche": "Lina est animatrice de dessins animés. Son personnage doit dire bonjour : image par image, elle plie son bras. Dans ce coude, il y a un angle.\n\nDans cette vidéo :\n• un angle, c'est deux demi-droites qui partent du même point\n• le sommet et les côtés\n• le nom de l'angle : le sommet s'écrit au milieu\n• aigu, droit, obtus, plat\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : les demi-droites E F et E G partent du même point : quel est le sommet, et comment s'appelle cet angle ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_reconnaitre&display=simple\n\n📐 Épisode 1 sur 6 de la série Angles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où se cache un angle ?"
+        ],
+        [
+          "00:18",
+          "Le coude"
+        ],
+        [
+          "00:30",
+          "La définition"
+        ],
+        [
+          "00:41",
+          "Le nom de l'angle"
+        ],
+        [
+          "00:55",
+          "Question 1"
+        ],
+        [
+          "01:25",
+          "Aigu, droit, obtus, plat"
+        ],
+        [
+          "01:45",
+          "Question 2"
+        ],
+        [
+          "02:11",
+          "À toi de jouer"
+        ],
+        [
+          "02:26",
+          "Correction"
+        ],
+        [
+          "02:37",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure",
+      "tags": [
+        "angle",
+        "sommet",
+        "demi-droite",
+        "aigu",
+        "obtus",
+        "angle plat",
+        "dessin animé",
+        "animatrice",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "L'angle RST : quel point est le sommet ?",
+          "choix": [
+            "R",
+            "S",
+            "T"
+          ],
+          "reponse": 1,
+          "explication": "La lettre du milieu est le sommet : c'est S."
+        },
+        {
+          "t": "01:45",
+          "question": "Un angle mesure 150°. Comment s'appelle-t-il ?",
+          "choix": [
+            "aigu",
+            "obtus",
+            "plat"
+          ],
+          "reponse": 1,
+          "explication": "150 est entre 90 et 180 : l'angle est obtus."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-angle-reconnaitre-short",
+      "notionId": "angle_mesure",
+      "microId": "angle_reconnaitre",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-angle-reconnaitre",
+      "fichier": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.mp4",
+      "miniature": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.png",
+      "titre": "Des angles cachés dans l'alphabet 🔤 — 6e #Shorts",
+      "accroche": "Il y a des angles cachés dans l'alphabet ! V : un angle. Z : deux. Et le I ? Aucun !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Combien d'angles dans le mot NIL, écrit en majuscules ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #angles #6e #collège",
+      "tags": [
+        "alphabet",
+        "lettres",
+        "angle",
+        "sommet",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Combien d'angles dans la lettre N ?",
+          "choix": [
+            "1",
+            "2",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "Le N tourne en haut et en bas : 2 sommets, donc 2 angles."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-angle-droit",
+      "notionId": "angle_mesure",
+      "microId": "angle_droit",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.mp4",
+      "miniature": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.png",
+      "titre": "Comment savoir si un coin est vraiment droit ? — L'angle droit — épisode 2 · Maths 6e",
+      "accroche": "Mehdi est carreleur. Il pose des carreaux dans une cuisine : si le premier est de travers, tous les autres le seront aussi.\n\nDans cette vidéo :\n• un angle droit mesure 90°, même s'il est penché\n• le vérifier avec l'équerre\n• le petit carré sur une figure\n• deux angles droits font un angle plat\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Mehdi coupe un carreau carré en deux, par le milieu : combien d'angles droits en tout ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_droit&display=simple\n\n📐 Épisode 2 sur 6 de la série Angles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment savoir si un coin est droit ?"
+        ],
+        [
+          "00:17",
+          "Le coin : 90°"
+        ],
+        [
+          "00:36",
+          "L'équerre"
+        ],
+        [
+          "00:47",
+          "Le petit carré"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "Le piège"
+        ],
+        [
+          "01:47",
+          "Question 2"
+        ],
+        [
+          "02:15",
+          "Deux angles droits, un angle plat"
+        ],
+        [
+          "02:25",
+          "À toi de jouer"
+        ],
+        [
+          "02:48",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure",
+      "tags": [
+        "angle droit",
+        "équerre",
+        "90 degrés",
+        "carreau",
+        "carreleur",
+        "métier",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "Mehdi pose un carreau penché, sur la pointe. Son coin est-il encore un angle droit ?",
+          "choix": [
+            "oui, 90°",
+            "non, moins de 90°",
+            "non, plus de 90°"
+          ],
+          "reponse": 0,
+          "explication": "On a tourné le carreau, on n'a pas changé son ouverture. L'angle droit peut être penché."
+        },
+        {
+          "t": "01:47",
+          "question": "Lequel est un angle droit ?",
+          "choix": [
+            "89°",
+            "90°",
+            "100°"
+          ],
+          "reponse": 1,
+          "explication": "Droit, c'est 90° pile. Ni un peu moins, ni un peu plus."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-angle-droit-short",
+      "notionId": "angle_mesure",
+      "microId": "angle_droit",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-angle-droit",
+      "fichier": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.mp4",
+      "miniature": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.png",
+      "titre": "Pas d'équerre ? Déchire une feuille ! 📄 — 6e #Shorts",
+      "accroche": "Pas d'équerre ? Plie un bout de papier deux fois, tout de travers : dans le coin, tu viens de fabriquer une équerre.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Tu casses une tablette de chocolat en 6 carrés : combien d'angles droits en tout ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_droit&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #angles #6e #collège",
+      "tags": [
+        "pliage",
+        "équerre",
+        "angle droit",
+        "90 degrés",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Quel angle obtiens-tu dans le coin ?",
+          "choix": [
+            "un peu moins de 90°",
+            "90° pile",
+            "ça dépend du papier"
+          ],
+          "reponse": 1,
+          "explication": "90° pile !"
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-angle-comparer",
+      "notionId": "angle_mesure",
+      "microId": "angle_comparer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.mp4",
+      "miniature": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.png",
+      "titre": "Le plus grand angle a-t-il les plus longs côtés ? — Comparer des angles — épisode 3 · Maths 6e",
+      "accroche": "Jade est analyste vidéo dans un club de foot. Elle compare deux tirs : le premier part du point de penalty, le second de plus près. Depuis où voit-on le but le plus large ?\n\nDans cette vidéo :\n• comparer les mesures\n• superposer deux angles, sans mesurer\n• l'angle droit comme repère\n• la longueur des côtés ne compte pas\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois angles de 95°, 40° et 120° : range-les du plus petit au plus grand. Lequel est aigu ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_comparer&display=simple\n\n📐 Épisode 3 sur 6 de la série Angles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus grand angle a-t-il les plus longs côtés ?"
+        ],
+        [
+          "00:22",
+          "Deux traits vers les poteaux"
+        ],
+        [
+          "00:39",
+          "Comparer les mesures"
+        ],
+        [
+          "00:52",
+          "Question 1"
+        ],
+        [
+          "01:29",
+          "Superposer"
+        ],
+        [
+          "01:40",
+          "Le repère : l'angle droit"
+        ],
+        [
+          "01:51",
+          "Question 2"
+        ],
+        [
+          "02:18",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "02:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure",
+      "tags": [
+        "comparer des angles",
+        "ouverture",
+        "superposer",
+        "football",
+        "penalty",
+        "analyste vidéo",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Un angle de 70° à longs côtés, un angle de 120° à côtés courts. Lequel est le plus grand ?",
+          "choix": [
+            "70°",
+            "120°",
+            "ils sont égaux"
+          ],
+          "reponse": 1,
+          "explication": "La longueur des côtés ne compte pas. Seule l'ouverture compte."
+        },
+        {
+          "t": "01:51",
+          "question": "Un angle mesure 118°. Comparé à un angle droit, il est :",
+          "choix": [
+            "plus petit",
+            "égal",
+            "plus grand"
+          ],
+          "reponse": 2,
+          "explication": "118 est plus grand que 90. Cet angle est obtus."
+        }
+      ],
+      "centres": [
+        "football",
+        "sport"
+      ]
+    },
+    {
+      "id": "6e-angle-comparer-short",
+      "notionId": "angle_mesure",
+      "microId": "angle_comparer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-angle-comparer",
+      "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.mp4",
+      "miniature": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.png",
+      "titre": "Une loupe grossit tout. Même les angles ? 🔍 — 6e #Shorts",
+      "accroche": "Un angle de 30° sous une loupe qui grossit 3 fois : les côtés sont plus longs. Et l'angle ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Un angle de 45°, sous une loupe qui grossit 10 fois : combien de degrés ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #angles #6e #collège",
+      "tags": [
+        "loupe",
+        "ouverture",
+        "angle",
+        "piège",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Sous la loupe, combien mesure l'angle ?",
+          "choix": [
+            "30°",
+            "33°",
+            "90°"
+          ],
+          "reponse": 0,
+          "explication": "Toujours 30° !"
+        }
+      ],
+      "centres": [
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-angle-mesurer",
+      "notionId": "angle_mesure",
+      "microId": "angle_mesurer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.mp4",
+      "miniature": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.png",
+      "titre": "Comment lire un rapporteur sans se tromper ? — Mesurer un angle — épisode 4 · Maths 6e",
+      "accroche": "Yanis est kinésithérapeute. Manon s'est blessée au genou, au basket : il veut savoir si son genou plie mieux. Son outil ressemble à un rapporteur.\n\nDans cette vidéo :\n• les trois gestes : le centre sur le sommet, le 0 sur un côté, on lit sur l'autre côté\n• les deux rangées : partir du bon 0\n• vérifier : aigu ou obtus ?\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le 0 est posé à gauche, l'autre côté passe par 35 et 145 : combien mesure l'angle ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_mesurer&display=simple\n\n📐 Épisode 4 sur 6 de la série Angles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Mesurer un angle ?"
+        ],
+        [
+          "00:18",
+          "Le goniomètre"
+        ],
+        [
+          "00:30",
+          "Le rapporteur"
+        ],
+        [
+          "00:42",
+          "Les trois gestes"
+        ],
+        [
+          "00:59",
+          "Question 1"
+        ],
+        [
+          "01:27",
+          "Les deux rangées"
+        ],
+        [
+          "01:40",
+          "Vérifier : aigu"
+        ],
+        [
+          "01:51",
+          "Question 2"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:48",
+          "Correction"
+        ],
+        [
+          "03:02",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure",
+      "tags": [
+        "mesurer un angle",
+        "rapporteur",
+        "degrés",
+        "goniomètre",
+        "kinésithérapeute",
+        "genou",
+        "basket",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "Où poses-tu le centre du rapporteur ?",
+          "choix": [
+            "sur le sommet",
+            "au bout d'un côté",
+            "au milieu de l'angle"
+          ],
+          "reponse": 0,
+          "explication": "Le centre va pile sur le sommet. Sinon, la mesure est fausse."
+        },
+        {
+          "t": "01:51",
+          "question": "Un mois plus tôt, l'angle était obtus. Le rapporteur indiquait 60 et 120. Quelle est la mesure ?",
+          "choix": [
+            "60°",
+            "120°",
+            "180°"
+          ],
+          "reponse": 1,
+          "explication": "Un angle obtus est plus grand que 90°. Donc 120."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sport"
+      ]
+    },
+    {
+      "id": "6e-angle-mesurer-short",
+      "notionId": "angle_mesure",
+      "microId": "angle_mesurer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-angle-mesurer",
+      "fichier": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.mp4",
+      "miniature": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.png",
+      "titre": "Il y a un rapporteur caché dans une horloge ! 🕒 — 6e #Shorts",
+      "accroche": "À 1 heure, les aiguilles font 30°. À 2 heures, 60°. À 3 heures, un angle droit. Et à 4 heures ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Quel angle font les aiguilles à 5 heures ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_mesurer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #angles #6e #collège",
+      "tags": [
+        "horloge",
+        "aiguilles",
+        "rapporteur",
+        "degrés",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Et à 4 heures ?",
+          "choix": [
+            "40°",
+            "90°",
+            "120°"
+          ],
+          "reponse": 2,
+          "explication": "30° de plus à chaque heure : 120°."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-angle-tracer",
+      "notionId": "angle_mesure",
+      "microId": "angle_tracer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.mp4",
+      "miniature": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.png",
+      "titre": "Quels sont les quatre gestes ? — Tracer un angle — épisode 5 · Maths 6e",
+      "accroche": "Inès est game designer. Dans son jeu, une catapulte lance des boules de peinture, et elle veut un tir à 40°. Elle dessine d'abord cet angle.\n\nDans cette vidéo :\n• les quatre gestes : un côté, le rapporteur sur le sommet, un repère, le second côté\n• le piège : compter depuis le mauvais 0\n• prévoir et vérifier : aigu ou obtus ?\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : prends ton rapporteur et trace un angle de 115°, de sommet K.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple\n\n📐 Épisode 5 sur 6 de la série Angles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quels sont les quatre gestes ?"
+        ],
+        [
+          "00:29",
+          "Les quatre gestes"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:29",
+          "Le piège"
+        ],
+        [
+          "01:41",
+          "On prévoit"
+        ],
+        [
+          "01:52",
+          "Question 2"
+        ],
+        [
+          "02:18",
+          "À toi de jouer"
+        ],
+        [
+          "02:29",
+          "Correction"
+        ],
+        [
+          "02:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure",
+      "tags": [
+        "tracer un angle",
+        "rapporteur",
+        "repère",
+        "catapulte",
+        "jeu vidéo",
+        "game designer",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Que fais-tu en premier ?",
+          "choix": [
+            "poser le rapporteur",
+            "tracer un côté",
+            "faire un repère à 40"
+          ],
+          "reponse": 1,
+          "explication": "Sans premier côté, on ne sait pas où poser le 0."
+        },
+        {
+          "t": "01:52",
+          "question": "Tu traces un angle de 130°. Il sera :",
+          "choix": [
+            "aigu",
+            "droit",
+            "obtus"
+          ],
+          "reponse": 2,
+          "explication": "130 est entre 90 et 180. L'angle sera obtus."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-angle-tracer-short",
+      "notionId": "angle_mesure",
+      "microId": "angle_tracer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-angle-tracer",
+      "fichier": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.mp4",
+      "miniature": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.png",
+      "titre": "Avec un seul angle, on dessine un flocon ! ❄️ — 6e #Shorts",
+      "accroche": "Une ligne droite, un repère à 60°, et une branche de plus. Quel repère pour la suivante ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Une roue a 12 rayons, bien réguliers : quel angle entre deux rayons voisins ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #angles #6e #collège",
+      "tags": [
+        "flocon",
+        "neige",
+        "rapporteur",
+        "tracer",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Quel repère pour la branche suivante ?",
+          "choix": [
+            "70°",
+            "90°",
+            "120°"
+          ],
+          "reponse": 2,
+          "explication": "60° de plus : 120°"
+        }
+      ],
+      "centres": [
+        "meteo-climat"
+      ]
+    },
+    {
+      "id": "6e-angle-defi",
+      "notionId": "angle_mesure",
+      "microId": "angle_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.mp4",
+      "miniature": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.png",
+      "titre": "Peut-on trouver un angle sans rapporteur ? — Défis sur les angles — épisode 6 · Maths 6e",
+      "accroche": "Tom est urbaniste. Il dessine les rues d'un nouveau quartier. Sur son plan, il doit connaître les angles, mais parfois il ne peut pas les mesurer.\n\nDans cette vidéo :\n• sur une ligne droite, les angles font 180°\n• deux angles opposés par le sommet sont égaux\n• autour d'un point, les angles font 360°\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : à un rond-point, 4 rues se rejoignent ; trois angles mesurent 120°, 90° et 80° : combien mesure le quatrième ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_defi&display=simple\n\n📐 Épisode 6 sur 6 de la série Angles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Peut-on trouver un angle sans rapporteur ?"
+        ],
+        [
+          "00:20",
+          "Premier cas : la rue droite"
+        ],
+        [
+          "00:32",
+          "L'autre angle"
+        ],
+        [
+          "00:46",
+          "Question 1"
+        ],
+        [
+          "01:21",
+          "Deuxième cas : le croisement"
+        ],
+        [
+          "01:34",
+          "Question 2"
+        ],
+        [
+          "02:06",
+          "Troisième cas : le tour complet"
+        ],
+        [
+          "02:22",
+          "À toi de jouer"
+        ],
+        [
+          "02:39",
+          "Correction"
+        ],
+        [
+          "02:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/angle-mesure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/angle-mesure",
+      "tags": [
+        "angle plat",
+        "angles opposés par le sommet",
+        "tour complet",
+        "360 degrés",
+        "rond-point",
+        "urbaniste",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:46",
+          "question": "Sur une rue droite, un angle mesure 125°. Combien mesure l'autre ?",
+          "choix": [
+            "55°",
+            "65°",
+            "235°"
+          ],
+          "reponse": 0,
+          "explication": "180 − 125 = 55°. On vérifie : 125 + 55 = 180."
+        },
+        {
+          "t": "01:34",
+          "question": "Deux rues se croisent. Un angle mesure 35°. Combien mesure l'angle en face ?",
+          "choix": [
+            "35°",
+            "145°",
+            "325°"
+          ],
+          "reponse": 0,
+          "explication": "En face, c'est la même mesure : 35°."
+        }
+      ],
+      "centres": [
+        "transports",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "6e-angle-defi-short",
+      "notionId": "angle_mesure",
+      "microId": "angle_defi",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-angle-defi",
+      "fichier": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.mp4",
+      "miniature": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.png",
+      "titre": "Quel angle entre les pales d'une éolienne ? 🌬️ — 6e #Shorts",
+      "accroche": "Une éolienne a 3 pales, bien réparties, et elles font un tour complet : 360°. Quel angle entre deux pales voisines ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Une hélice de bateau a 5 pales, bien réparties : quel angle entre deux pales voisines ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #angles #6e #collège",
+      "tags": [
+        "éolienne",
+        "pales",
+        "360 degrés",
+        "partage",
+        "angles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Quel angle entre deux pales voisines ?",
+          "choix": [
+            "90°",
+            "120°",
+            "180°"
+          ],
+          "reponse": 1,
+          "explication": "On partage le tour en 3 : 360 ÷ 3 = 120°."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
     }
   ]
 }
