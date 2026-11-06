@@ -106,9 +106,8 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "I-3c", domaine: NB,
       texte: "Encadrement et approximation d'un nombre ou d'une expression ; valeurs approchées à la calculatrice.",
-      couverture: "partielle",
-      micros: m("seconde", "reels_encadrement"),
-      note: "Manque l'encadrement d'une somme, d'une différence, d'un produit et d'un quotient à partir d'encadrements donnés.",
+      couverture: "complete",
+      micros: m("seconde", "reels_encadrement", "encadrer_somme_produit"),
     },
     {
       code: "I-4", domaine: NB,
@@ -121,8 +120,8 @@ export const MAROC_TC: ProgrammePays = {
       code: "I-5a", domaine: NB,
       texte: "Équations et inéquations du premier degré à une inconnue, dont des cas simples avec valeur absolue ou paramètre ; mise en équation de problèmes.",
       couverture: "partielle",
-      micros: m("seconde", "equation_resoudre", "equation_probleme", "inequation_resoudre", "inequation_intervalle"),
-      note: "Manquent les équations avec valeur absolue (|2x − 1| = 3) et les équations paramétriques simples, par disjonction des cas.",
+      micros: m("seconde", "equation_resoudre", "equation_probleme", "inequation_resoudre", "inequation_intervalle", "va_equation_affine", "va_inequation_affine"),
+      note: "Manquent les équations paramétriques simples, par disjonction des cas.",
     },
     {
       code: "I-5b", domaine: NB,
@@ -153,9 +152,8 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "II-2", domaine: GP,
       texte: "Projection sur une droite, projection orthogonale ; théorème de Thalès et sa réciproque ; conservation du coefficient de colinéarité par projection.",
-      couverture: "partielle",
-      micros: [...m("3e", "thales_configuration", "thales_reciproque"), ...m("seconde", "geo_projete_orthogonal")],
-      note: "Manquent la projection parallèlement à une droite et sa traduction vectorielle du théorème de Thalès.",
+      couverture: "complete",
+      micros: [...m("3e", "thales_configuration", "thales_reciproque"), ...m("seconde", "geo_projete_orthogonal", "projection_parallele")],
     },
     {
       code: "II-3", domaine: GP,
@@ -186,8 +184,8 @@ export const MAROC_TC: ProgrammePays = {
       code: "III-1", domaine: GE,
       texte: "Axiomes d'incidence, détermination d'un plan ; positions relatives de droites et de plans ; parallélisme et orthogonalité (droite et plan, deux plans) ; représentation en perspective.",
       couverture: "partielle",
-      micros: [...m("terminale-spe", "espace_position_relative"), ...m("3e", "section_reconnaitre", "section_pave_cube")],
-      note: "Notre micro de Terminale passe par les vecteurs ; manquent la géométrie de position sans repère (théorème du toit, orthogonalité droite-plan) et les règles de la perspective.",
+      micros: [...m("terminale-spe", "espace_position_relative"), ...m("3e", "section_reconnaitre", "section_pave_cube"), ...m("seconde", "espace_positions_relatives", "espace_orthogonalite_droite_plan")],
+      note: "Manquent les axiomes d'incidence et la détermination d'un plan comme savoirs, et les règles de la perspective.",
     },
     // ── IV. Fonctions numériques ────────────────────────────────────────────
     {
@@ -211,12 +209,11 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "IV-4", domaine: FN,
       texte: "Fonctions de référence : x ↦ ax², x ↦ a/x, x ↦ ax² + bx + c, x ↦ (ax + b)/(cx + d), sin et cos ; courbes sans changement de repère.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("seconde", "reference_carre", "reference_inverse"),
+        ...m("seconde", "reference_carre", "reference_inverse", "fct_homographique"),
         ...m("premiere-spe", "gr_parabole", "var_second_degre", "trig_courbes"),
       ],
-      note: "Manque la fonction homographique x ↦ (ax + b)/(cx + d) (courbe, asymptotes, centre de symétrie).",
     },
     // ── V. Trigonométrie ────────────────────────────────────────────────────
     {
@@ -229,16 +226,14 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "V-2", domaine: TR,
       texte: "Angle orienté de deux demi-droites et de deux vecteurs, mesure principale, relation de Chasles.",
-      couverture: "absente",
-      micros: [],
-      note: "Les angles orientés ont quitté le programme français en 2019 : micro à écrire.",
+      couverture: "complete",
+      micros: m("premiere-spe", "angle_oriente_mesure_principale", "angle_oriente_chasles"),
     },
     {
       code: "V-3", domaine: TR,
       texte: "Lignes trigonométriques d'un réel, valeurs pour 0, π/6, π/4, π/3, π/2 ; relations cos² x + sin² x = 1, tan x = sin x / cos x, 1 + tan² x = 1/cos² x.",
-      couverture: "partielle",
-      micros: [...m("premiere-spe", "trig_cos_sin", "trig_valeurs"), ...m("seconde", "geo_trig_identite")],
-      note: "Manque la tangente d'un réel et la relation 1 + tan² x = 1/cos² x.",
+      couverture: "complete",
+      micros: [...m("premiere-spe", "trig_cos_sin", "trig_valeurs", "tan_reel", "tan_identite_derivee"), ...m("seconde", "geo_trig_identite")],
     },
     {
       code: "V-4", domaine: TR,
@@ -256,9 +251,8 @@ export const MAROC_TC: ProgrammePays = {
     {
       code: "V-6", domaine: TR,
       texte: "Équations et inéquations trigonométriques fondamentales : sin x = a, cos x = a, tan x = a et leurs inéquations, résolues sur le cercle.",
-      couverture: "partielle",
-      micros: [...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"), ...m("premiere-spe", "trig_equation_generale")],
-      note: "Les équations sin x = a, cos x = a et tan x = a et les inéquations en sin et cos sont couvertes ; reste l'inéquation tan x ≥ a.",
+      couverture: "complete",
+      micros: [...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"), ...m("premiere-spe", "trig_equation_generale", "trig_equation_formes")],
     },
     {
       code: "V-7", domaine: TR,
@@ -278,7 +272,7 @@ export const MAROC_TC: ProgrammePays = {
       code: "VI-1", domaine: ST,
       texte: "Statistiques : effectifs et fréquences (simples et cumulés), représentations graphiques, moyenne, médiane, mode, variance et écart type.",
       couverture: "complete",
-      micros: m("seconde", "stat_lire_serie", "stat_frequence", "stat_polygone_cumule", "stat_moyenne", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_type", "stat_interpreter"),
+      micros: [...m("seconde", "stat_lire_serie", "stat_frequence", "stat_polygone_cumule", "stat_moyenne", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_type", "stat_interpreter"), ...m("5e", "stat_mode")],
       note: "Page 10 du livret absente de l'extrait diffusé : contenu d'après le résumé de mathtutor.ma, à revérifier.",
     },
   ],
@@ -301,16 +295,16 @@ export const MAROC_1BAC: ProgrammePays = {
     {
       code: "GP-1", domaine: GP,
       texte: "Barycentre de 2 à 4 points, centre de gravité ; propriété caractéristique, invariance, associativité ; coordonnées du barycentre ; alignement et concours de droites.",
-      couverture: "absente",
-      micros: [],
-      note: "Le barycentre a quitté le programme français : micros à écrire (classique au Maroc, utile en physique).",
+      couverture: "partielle",
+      micros: m("premiere-spe", "barycentre_deux_points", "barycentre_coordonnees"),
+      note: "Restent l'alignement et le concours de droites par le barycentre.",
     },
     {
       code: "GP-2", domaine: GP,
       texte: "Rotation : définition par centre et angle, rotation réciproque ; conservation des distances, des angles orientés et du barycentre ; images d'une droite, d'un segment, d'un cercle.",
       couverture: "partielle",
-      micros: [...m("4e", "sym_rotation", "sym_transformation_propriete"), ...m("3e", "sym_symetrie_translation_rotation")],
-      note: "Nos micros de collège construisent l'image et conservent longueurs et angles ; manquent l'angle orienté, la rotation réciproque et la conservation du barycentre.",
+      micros: [...m("4e", "sym_rotation", "sym_transformation_propriete"), ...m("3e", "sym_symetrie_translation_rotation"), ...m("premiere-spe", "angle_oriente_mesure_principale")],
+      note: "Manquent la rotation définie par un angle orienté, la rotation réciproque et la conservation du barycentre.",
     },
     {
       code: "GP-3a", domaine: GP,
@@ -330,8 +324,8 @@ export const MAROC_1BAC: ProgrammePays = {
       code: "GP-3c", domaine: GP,
       texte: "Le cercle (étude analytique) : équation cartésienne, représentation paramétrique, ensemble x² + y² + ax + by + c = 0, ensemble MA·MB = 0, position d'un cercle et d'une droite, tangente en un point.",
       couverture: "partielle",
-      micros: m("premiere-spe", "gr_cercle", "gr_cercle_reconnaitre", "gr_cercle_utiliser", "ps_ma_mb"),
-      note: "Manquent la représentation paramétrique du cercle, la position cercle-droite et l'équation de la tangente à un cercle.",
+      micros: [...m("premiere-spe", "gr_cercle", "gr_cercle_reconnaitre", "gr_cercle_utiliser", "ps_ma_mb"), ...m("4e", "cercle_droite_position")],
+      note: "La position cercle-droite est couverte par la comparaison distance-rayon, sans la calculer depuis une équation ; manquent la représentation paramétrique du cercle et l'équation de la tangente.",
     },
     // ── Géométrie dans l'espace ─────────────────────────────────────────────
     {
@@ -380,8 +374,8 @@ export const MAROC_1BAC: ProgrammePays = {
       code: "AA-3b", domaine: AA,
       texte: "Équations et inéquations trigonométriques se ramenant aux équations fondamentales ; lecture des solutions sur le cercle.",
       couverture: "partielle",
-      micros: [...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"), ...m("premiere-spe", "trig_equation_generale")],
-      note: "Les équations, y compris celles qui se ramènent aux fondamentales, sont couvertes ; restent les inéquations qui s'y ramènent.",
+      micros: [...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"), ...m("premiere-spe", "trig_equation_generale", "trig_equation_formes")],
+      note: "Inéquations en ax + b et en tan couvertes ; restent les inéquations du second degré en sin, cos, tan.",
     },
     {
       code: "AA-4a", domaine: FN,
@@ -404,15 +398,15 @@ export const MAROC_1BAC: ProgrammePays = {
       code: "AA-4c", domaine: FN,
       texte: "Limites : fonctions de référence en 0 et en ±∞, limites finies et infinies, opérations, limites à gauche et à droite, polynômes, rationnelles, irrationnelles ; limites trigonométriques sin x / x, tan x / x, (1 − cos x)/x² ; limites et ordre.",
       couverture: "partielle",
-      micros: m("terminale-spe", "limite_fonction_reference", "limite_fonction_operations", "limite_fonction_infini", "limite_fonction_point", "limite_fonction_asymptote"),
-      note: "Au Maroc en 1re, chez nous en Terminale. Manquent les limites trigonométriques usuelles (sin x / x…) et les théorèmes de comparaison pour les fonctions (limites et ordre).",
+      micros: m("terminale-spe", "limite_fonction_reference", "limite_fonction_operations", "limite_fonction_infini", "limite_fonction_point", "limite_fonction_asymptote", "limite_gauche_droite"),
+      note: "Manquent les limites trigonométriques usuelles (sin x / x…) et les théorèmes de comparaison pour les fonctions (limites et ordre).",
     },
     {
       code: "AA-4d", domaine: FN,
       texte: "Dérivabilité en un point, nombre dérivé, tangente, approximation affine ; dérivabilité à gauche et à droite, demi-tangentes (et tangentes verticales).",
       couverture: "partielle",
-      micros: m("premiere-spe", "der_taux", "der_nombre_derive", "der_definition", "der_graphique", "der_tangente", "der_valeur_absolue"),
-      note: "Manquent l'approximation affine au voisinage de 0 ((1 + h)² ≈ 1 + 2h) et les demi-tangentes.",
+      micros: [...m("premiere-spe", "der_taux", "der_nombre_derive", "der_definition", "der_graphique", "der_tangente", "der_valeur_absolue"), ...m("terminale-spe", "derivabilite_gauche_droite", "approximation_affine")],
+      note: "Manquent les formules d'approximation au voisinage de 0 ((1 + h)² ≈ 1 + 2h) ; la tangente verticale n'est vue que comme demi-tangente verticale ou choix de QCM.",
     },
     {
       code: "AA-4e", domaine: FN,
@@ -432,9 +426,8 @@ export const MAROC_1BAC: ProgrammePays = {
     {
       code: "AA-4g", domaine: FN,
       texte: "Équation différentielle y'' + ω²y = 0 (solution générale admise).",
-      couverture: "absente",
-      micros: [],
-      note: "Liée à la physique (oscillateur) ; absente du programme français.",
+      couverture: "complete",
+      micros: m("terminale-spe", "equadiff_second_ordre", "equadiff_second_ordre_conditions"),
     },
   ],
 };
@@ -472,8 +465,8 @@ export const MAROC_2BAC: ProgrammePays = {
       code: "A2-1", domaine: AN,
       texte: "Continuité en un point, à droite, à gauche, sur un intervalle ; image d'un intervalle ; théorème des valeurs intermédiaires ; dichotomie.",
       couverture: "partielle",
-      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger"),
-      note: "Manquent la continuité en un point, à droite et à gauche, l'image d'un intervalle et la dichotomie.",
+      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "limite_gauche_droite"),
+      note: "Manquent l'image d'un intervalle et la dichotomie.",
     },
     {
       code: "A2-2", domaine: AN,
@@ -495,8 +488,8 @@ export const MAROC_2BAC: ProgrammePays = {
       code: "A2-4", domaine: AN,
       texte: "Dérivée d'une composée ; études de fonctions rationnelles, trigonométriques et irrationnelles : branches infinies, concavité, éléments de symétrie, résolution graphique.",
       couverture: "partielle",
-      micros: m("terminale-spe", "derivation_composee", "derivation_variation", "derivation_defi", "trigo_etude_fonction", "limite_fonction_asymptote", "convexite_derivee_seconde", "convexite_point_inflexion"),
-      note: "Manquent les branches paraboliques, les asymptotes obliques, les centres et axes de symétrie d'une courbe.",
+      micros: m("terminale-spe", "derivation_composee", "derivation_variation", "derivation_defi", "trigo_etude_fonction", "limite_fonction_asymptote", "convexite_derivee_seconde", "convexite_point_inflexion", "asymptote_oblique", "branches_infinies", "symetrie_courbe"),
+      note: "Reste l'étude complète d'une fonction irrationnelle ; la résolution graphique n'a pas de micro citée sur cette ligne.",
     },
     {
       code: "A2-5", domaine: AN,
@@ -538,9 +531,8 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "A2-11", domaine: AN,
       texte: "Équation différentielle y'' + ay' + by = 0 (solution générale admise).",
-      couverture: "absente",
-      micros: [],
-      note: "Absente du programme français (équation caractéristique, solutions oscillantes).",
+      couverture: "complete",
+      micros: m("terminale-spe", "equadiff_second_ordre", "equadiff_second_ordre_conditions"),
     },
     // ── Analyse : calcul intégral ───────────────────────────────────────────
     {
@@ -596,27 +588,26 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "C-1", domaine: AL,
       texte: "Nombres complexes : écriture algébrique, représentation géométrique, affixe, opérations, conjugué, module.",
-      couverture: "absente",
-      micros: [],
-      note: "En France, seulement en option maths expertes : aucune micro chez nous. Gros chapitre du bac marocain.",
+      couverture: "complete",
+      micros: m("terminale-spe", "cx_forme_algebrique", "cx_conjugue_quotient", "cx_module_argument", "cx_geometrie"),
     },
     {
       code: "C-2", domaine: AL,
       texte: "Argument, forme trigonométrique, notation exponentielle e^(iθ), formules de Moivre et d'Euler, linéarisation.",
-      couverture: "absente",
-      micros: [],
+      couverture: "complete",
+      micros: m("terminale-spe", "cx_module_argument", "cx_forme_exponentielle"),
     },
     {
       code: "C-3", domaine: AL,
       texte: "Équation az² + bz + c = 0 à coefficients réels dans ℂ.",
-      couverture: "absente",
-      micros: [],
+      couverture: "complete",
+      micros: m("terminale-spe", "cx_equation_second_degre"),
     },
     {
       code: "C-4", domaine: AL,
       texte: "Complexes et géométrie : distance, angle orienté, alignement, cocyclicité ; écriture complexe d'une translation, d'une homothétie, d'une rotation.",
-      couverture: "absente",
-      micros: [],
+      couverture: "complete",
+      micros: m("terminale-spe", "cx_geometrie", "cx_transformations"),
     },
     {
       code: "P-1", domaine: AL,

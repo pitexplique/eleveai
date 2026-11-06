@@ -248,10 +248,10 @@ export const SENEGAL_5E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("5e", "relatif_addition", "relatif_soustraction", "relatif_calcul", "relatif_comparer"),
-        ...m("4e", "relatif_multiplication", "relatif_division", "equation_resoudre_simple"),
+        ...m("4e", "relatif_multiplication", "relatif_division", "equation_resoudre_simple", "inequation_college"),
         ...m("seconde", "inequation_resoudre"),
       ],
-      note: "Pas de micro sur la suppression des parenthèses (a − (b − c) = a − b + c) ; les inéquations n'existent chez nous qu'en seconde.",
+      note: "Pas de micro sur la suppression des parenthèses (a − (b − c) = a − b + c).",
     },
     {
       code: "AN 6", domaine: AN,
@@ -371,8 +371,8 @@ export const SENEGAL_4E: ProgrammePays = {
       code: "AN 4", domaine: AN,
       texte: "Inéquations et systèmes de deux inéquations à une inconnue.",
       couverture: "partielle",
-      micros: m("seconde", "inequation_resoudre", "inequation_intervalle"),
-      note: "Les inéquations sont en seconde chez nous ; manque le SYSTÈME de deux inéquations (intersection des deux intervalles de solutions).",
+      micros: [...m("seconde", "inequation_resoudre", "inequation_intervalle"), ...m("4e", "ordre_regles", "inequation_college")],
+      note: "Manque le SYSTÈME de deux inéquations (intersection des deux ensembles de solutions).",
     },
     {
       code: "AN 5", domaine: AN,
@@ -389,12 +389,12 @@ export const SENEGAL_4E: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("4e", "stat_lire_tableau", "stat_lire_graphique", "stat_effectif", "stat_frequence", "stat_moyenne"),
-        ...m("5e", "stat_donnee_organiser", "stat_representer"),
+        ...m("5e", "stat_donnee_organiser", "stat_representer", "stat_mode"),
         ...m("6e", "stat_donnee_lire_circulaire"),
         ...m("3e", "stat_lire_tableau"),
         ...m("premiere", "info_rep_circulaire"),
       ],
-      note: "Angle d'un secteur circulaire (effectif × 360 ÷ N) : stat_representer (5e) ; semi-circulaire (180°) : info_rep_circulaire (1re) ; le mode se travaille comme « la réponse la plus fréquente » (stat_lire_tableau 3e), sans le mot « mode ».",
+      note: "Angle d'un secteur circulaire (effectif × 360 ÷ N) : stat_representer (5e) ; semi-circulaire (180°) : info_rep_circulaire (1re).",
     },
 
     {
@@ -410,9 +410,8 @@ export const SENEGAL_4E: ProgrammePays = {
     {
       code: "AG 2", domaine: AG,
       texte: "Droites des milieux dans un triangle.",
-      couverture: "partielle",
-      micros: m("4e", "thales_configuration", "thales_calculer_longueur"),
-      note: "Le théorème des milieux (parallèle au troisième côté, longueur moitié) et sa réciproque n'ont pas de micro : Thalès le contient, mais il n'est pas nommé.",
+      couverture: "complete",
+      micros: m("4e", "thales_configuration", "thales_calculer_longueur", "milieux_droite", "milieux_reciproque"),
     },
     {
       code: "AG 3", domaine: AG,
@@ -445,9 +444,8 @@ export const SENEGAL_4E: ProgrammePays = {
     {
       code: "AG 6", domaine: AG,
       texte: "Projection orthogonale dans le plan.",
-      couverture: "partielle",
-      micros: m("seconde", "geo_projete_orthogonal"),
-      note: "Seulement le projeté d'un point, en seconde ; rien sur la conservation des milieux et des rapports de longueurs par projection.",
+      couverture: "complete",
+      micros: m("seconde", "geo_projete_orthogonal", "projection_parallele"),
     },
     {
       code: "AG 7", domaine: AG,
@@ -466,6 +464,7 @@ export const SENEGAL_4E: ProgrammePays = {
         ...m("4e", "vision_section"),
         ...m("3e", "section_reconnaitre", "volume_section", "section_sphere"),
         ...m("terminale-spe", "espace_position_relative"),
+        ...m("seconde", "espace_positions_relatives"),
       ],
     },
     {
@@ -495,19 +494,18 @@ export const SENEGAL_3E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("3e", "entier_racine_comprendre", "entier_racine_carre_parfait", "entier_racine_calculer", "entier_racine_encadrer"),
-        ...m("seconde", "racine_produit", "racine_simplification", "racine_somme", "reels_ensembles", "valeur_absolue_distance", "ir_difference_carres"),
+        ...m("seconde", "racine_produit", "racine_simplification", "racine_somme", "reels_ensembles", "valeur_absolue_distance", "ir_difference_carres", "racine_denominateur_rationnel"),
       ],
-      note: "Manquent √(a/b) = √a ÷ √b, la comparaison de réels avec radicaux (2√3 et 3√2) et « rendre rationnel le dénominateur » par l'expression conjuguée (1/(√3 − 1)).",
+      note: "Manque la comparaison de réels avec radicaux (2√3 et 3√2).",
     },
     {
       code: "AN 2", domaine: AN,
       texte: "Équations et inéquations à une inconnue : |ax + b| = c, |ax + b| = |cx + d|, équations produits, inéquations (ax + b)(cx + d) ≤ 0.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("3e", "equation_resoudre_developper", "equation_produit_nul"),
-        ...m("seconde", "inequation_resoudre", "signes_produit", "signes_resoudre_inequation", "reference_valeur_absolue", "valeur_absolue_distance"),
+        ...m("seconde", "inequation_resoudre", "signes_produit", "signes_resoudre_inequation", "reference_valeur_absolue", "valeur_absolue_distance", "va_equation_affine"),
       ],
-      note: "valeur_absolue_distance (seconde) résout |x| = 5 et |x + 1| = 3 ; manquent |ax + b| = c avec a ≠ 1 (|2x − 1| = 3) et |ax + b| = |cx + d|.",
     },
     {
       code: "AN 3", domaine: AN,
@@ -536,13 +534,13 @@ export const SENEGAL_3E: ProgrammePays = {
     {
       code: "AN 6", domaine: AN,
       texte: "Applications affines : définition, application linéaire associée, variation, représentation graphique ; applications affines par intervalles (x ↦ |ax + b|, constantes par intervalles).",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("3e", "affine_reconnaitre", "affine_coeff_directeur", "affine_ordonnee_origine", "affine_expression", "affine_graphique", "affine_probleme"),
-        ...m("seconde", "variation_croissance", "reference_valeur_absolue"),
+        ...m("seconde", "variation_croissance", "reference_valeur_absolue", "fct_par_intervalles", "abs_affine_morceaux"),
         ...m("premiere", "lin_affine_par_morceaux"),
       ],
-      note: "Les tarifs par tranches se lisent et se calculent (lin_affine_par_morceaux) ; manque le tracé d'une fonction par intervalles (|ax + b| en deux morceaux).",
+      note: "Le tracé se travaille par lecture et reconnaissance de la courbe, pas par un dessin à la main.",
     },
 
     {
@@ -593,20 +591,20 @@ export const SENEGAL_3E: ProgrammePays = {
       texte: "Repérage dans le plan : coordonnées d'un vecteur, distance de deux points, équation générale et réduite d'une droite, vecteur directeur ; équations d'une médiane, d'une hauteur, d'une médiatrice.",
       couverture: "partielle",
       micros: [
-        ...m("seconde", "vecteur_coordonnees", "repere_distance", "droite_pente_ordonne", "droite_equation_reduite", "droite_equation_cartesienne", "droite_vecteur_directeur", "droite_parallelisme"),
+        ...m("seconde", "vecteur_coordonnees", "repere_distance", "droite_pente_ordonne", "droite_equation_reduite", "droite_equation_cartesienne", "droite_vecteur_directeur", "droite_parallelisme", "droite_perpendiculaire_coeff"),
         ...m("premiere-spe", "gr_droites"),
       ],
-      note: "Deux droites perpendiculaires se reconnaissent à leurs équations dans gr_droites (1re spé, par les vecteurs normaux) ; manquent la méthode du collège (a × a′ = −1) et les équations d'une hauteur et d'une médiatrice.",
+      note: "a × a′ = −1, hauteur et médiatrice couvertes ; manque l'équation d'une médiane comme gabarit dédié.",
     },
     {
       code: "AG 7", domaine: AG,
       texte: "Transformations du plan : composées de deux translations, de deux symétries centrales, de deux symétries orthogonales d'axes parallèles, perpendiculaires ou sécants.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("3e", "sym_symetrie_translation_rotation", "sym_transformation_effet"),
         ...m("4e", "sym_translation", "sym_rotation", "sym_transformation_defi"),
+        ...m("seconde", "composee_symetries"),
       ],
-      note: "sym_transformation_defi (4e, ★5) compose deux translations, deux symétries de même centre ou de même axe, deux rotations de même centre ; manquent les cas du programme : deux symétries centrales de centres différents, deux symétries axiales d'axes parallèles (une translation), perpendiculaires (une symétrie centrale) ou sécants (une rotation).",
     },
   ],
 };

@@ -330,7 +330,7 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       texte: "Équations et inéquations du premier degré dans ℚ : vocabulaire, propriétés des égalités et des inégalités, tester une solution, résoudre, traduire un problème ; inéquations x + a < b, ax + b > c ; solutions sur une droite graduée.",
       couverture: "complete",
       micros: [
-        ...m("4e", "equation_reconnaitre", "equation_traduire", "equation_resoudre_simple", "equation_resoudre_reduction", "equation_verifier", "equation_probleme"),
+        ...m("4e", "equation_reconnaitre", "equation_traduire", "equation_resoudre_simple", "equation_resoudre_reduction", "equation_verifier", "equation_probleme", "ordre_regles", "inequation_college"),
         ...m("seconde", "inequation_resoudre", "intervalle_representer"),
       ],
     },
@@ -341,11 +341,11 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       micros: [
         ...m("4e", "stat_moyenne", "stat_lire_graphique"),
         ...m("6e", "stat_donnee_lire_circulaire"),
-        ...m("5e", "stat_representer"),
+        ...m("5e", "stat_representer", "stat_mode"),
         ...m("3e", "stat_lire_tableau"),
         ...m("premiere", "info_rep_circulaire"),
       ],
-      note: "Angle d'un secteur (effectif × 360 ÷ N) : stat_representer (5e) ; demi-disque de 180° : info_rep_circulaire (1re) ; le mode se travaille comme « la réponse la plus fréquente » (stat_lire_tableau 3e), sans le mot « mode ».",
+      note: "Angle d'un secteur (effectif × 360 ÷ N) : stat_representer (5e) ; demi-disque de 180° : info_rep_circulaire (1re).",
     },
     {
       code: "C3-L1", domaine: GPLAN,
@@ -368,9 +368,8 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
     {
       code: "C3-L3", domaine: GPLAN,
       texte: "Cercles et triangles : tangente à un cercle, positions relatives cercle-droite ; droite des milieux ; hauteurs, médianes, bissectrices ; centre de gravité, orthocentre, cercle inscrit.",
-      couverture: "partielle",
-      micros: m("4e", "mediane_triangle", "centre_gravite", "orthocentre", "cercle_inscrit", "bissectrice_equidistance"),
-      note: "Points remarquables couverts ; manquent la tangente et la droite des milieux.",
+      couverture: "complete",
+      micros: m("4e", "mediane_triangle", "centre_gravite", "orthocentre", "cercle_inscrit", "bissectrice_equidistance", "tangente_rayon", "cercle_droite_position", "milieux_droite", "milieux_reciproque"),
     },
     {
       code: "C3-L4", domaine: GPLAN,
@@ -418,22 +417,22 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
     {
       code: "C1-L2", domaine: CALC,
       texte: "Racines carrées : ℝ, racine carrée d'un positif, √(a²) = |a|, valeur absolue, propriétés (produit, quotient), expressions conjuguées et quotient sans radical au dénominateur, sommes et produits avec radicaux.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("3e", "entier_racine_comprendre", "entier_racine_calculer"),
-        ...m("seconde", "racine_carre_de_a2", "racine_produit", "racine_simplification", "racine_somme", "valeur_absolue_distance", "ir_difference_carres"),
+        ...m("seconde", "racine_carre_de_a2", "racine_produit", "racine_simplification", "racine_somme", "valeur_absolue_distance", "ir_difference_carres", "racine_denominateur_rationnel"),
       ],
-      note: "Manquent la propriété du quotient √(a/b) et « rendre rationnel le dénominateur » avec l'expression conjuguée.",
     },
     {
       code: "C1-L3", domaine: CALC,
       texte: "Calcul numérique : intervalles (notation, inégalités, droite graduée, centre, amplitude, intersection et réunion) ; comparer par la différence, les carrés, les inverses ; encadrer un réel ; opérations sur les encadrements ; arrondi d'une racine carrée.",
       couverture: "partielle",
       micros: [
-        ...m("seconde", "intervalle_representer", "intervalle_appartenance", "reels_encadrement", "comparer_difference_quotient", "reference_comparer"),
+        ...m("seconde", "intervalle_representer", "intervalle_appartenance", "reels_encadrement", "comparer_difference_quotient", "reference_comparer", "encadrer_somme_produit"),
         ...m("3e", "entier_racine_encadrer"),
+        ...m("4e", "ordre_regles"),
       ],
-      note: "Manquent centre et amplitude d'un intervalle, réunion / intersection, opérations sur les encadrements.",
+      note: "Manquent centre et amplitude d'un intervalle, réunion / intersection.",
     },
     {
       code: "C1-L4", domaine: CALC,
@@ -513,12 +512,11 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
     {
       code: "C3-L6", domaine: GPLAN,
       texte: "Équations de droites : coefficient directeur (calcul, lecture), équation par deux points, par un point et un vecteur directeur, parallèle ou perpendiculaire à une droite donnée ; appartenance d'un point.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("seconde", "droite_pente_ordonne", "droite_vecteur_directeur", "droite_equation_reduite", "droite_parallelisme"),
+        ...m("seconde", "droite_pente_ordonne", "droite_vecteur_directeur", "droite_equation_reduite", "droite_parallelisme", "droite_perpendiculaire_coeff"),
         ...m("premiere-spe", "gr_droites"),
       ],
-      note: "Deux droites perpendiculaires se reconnaissent à leurs équations dans gr_droites (1re spé, par les vecteurs normaux) ; la méthode du collège (a × a′ = −1) n'a pas de micro.",
     },
     {
       code: "C3-L7", domaine: GESP,

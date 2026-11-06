@@ -47,36 +47,34 @@ export const SENEGAL_2NDE: ProgrammePays = {
     {
       code: "AG 2", domaine: "Géométrie plane",
       texte: "Barycentre de deux ou trois points pondérés : définition, propriétés (homogénéité, associativité), construction, réduction de αMA + βMB + γMC.",
-      couverture: "absente",
-      micros: [],
-      note: "Le barycentre a quitté le programme français : micros à écrire (construire G, réduire αMA + βMB).",
+      couverture: "partielle",
+      micros: m("premiere-spe", "barycentre_deux_points", "barycentre_coordonnees"),
+      note: "Position de G calculée et lue sur une droite graduée, réduction à 2 et 3 points ; reste la construction à la règle et au compas.",
     },
     {
       code: "AG 3", domaine: "Géométrie plane",
       texte: "Repérage cartésien : abscisse et mesure algébrique, repère quelconque, coordonnées du barycentre, changement de repère par translation ; déterminant et colinéarité ; équations de droites (vecteur directeur, équation générale et réduite, équations paramétriques).",
       couverture: "partielle",
-      micros: m("seconde", "repere_coordonnees_point", "repere_milieu", "vecteur_coordonnees", "vecteur_colinearite", "droite_vecteur_directeur", "droite_equation_cartesienne", "droite_equation_reduite", "droite_pente_ordonne", "droite_parallelisme"),
-      note: "Manquent les équations PARAMÉTRIQUES d'une droite du plan, la mesure algébrique, les coordonnées du barycentre et le changement de repère par translation.",
+      micros: [...m("seconde", "repere_coordonnees_point", "repere_milieu", "vecteur_coordonnees", "vecteur_colinearite", "droite_vecteur_directeur", "droite_equation_cartesienne", "droite_equation_reduite", "droite_pente_ordonne", "droite_parallelisme"), ...m("premiere-spe", "barycentre_coordonnees")],
+      note: "Manquent les équations PARAMÉTRIQUES d'une droite du plan, la mesure algébrique et le changement de repère par translation.",
     },
     {
       code: "AG 4", domaine: "Géométrie plane",
       texte: "Angles : longueur d'un arc, radian, conversion degrés-radians ; angle inscrit, angle au centre, quadrilatères inscriptibles ; orientation du plan, angle orienté de deux demi-droites ou de deux vecteurs, mesure principale.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("premiere-spe", "trig_radian", "trig_arc", "trig_enroulement", "trig_grand_reel"),
+        ...m("premiere-spe", "trig_radian", "trig_arc", "trig_enroulement", "trig_grand_reel", "angle_oriente_mesure_principale", "angle_oriente_chasles"),
         ...m("3e", "angle_inscrit_centre", "angles_inscrits_meme_arc"),
       ],
-      note: "Angles inscrits et quadrilatère inscrit couverts ; manquent les angles ORIENTÉS de vecteurs.",
     },
     {
       code: "AG 5", domaine: "Géométrie plane",
       texte: "Lignes trigonométriques : cercle trigonométrique, cosinus, sinus et tangente d'un angle orienté ; cos²x + sin²x = 1 ; angles complémentaires, opposés, supplémentaires ; signe dans les quatre quadrants.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("premiere-spe", "trig_cercle", "trig_cos_sin", "trig_valeurs", "trig_angles_associes"),
+        ...m("premiere-spe", "trig_cercle", "trig_cos_sin", "trig_valeurs", "trig_angles_associes", "tan_reel"),
         ...m("seconde", "geo_trig_identite"),
       ],
-      note: "La TANGENTE d'un angle orienté (tan x = sin x ÷ cos x sur le cercle) n'a pas de micro.",
     },
     {
       code: "AG 6", domaine: "Géométrie plane",
@@ -107,8 +105,9 @@ export const SENEGAL_2NDE: ProgrammePays = {
       micros: [
         ...m("3e", "sym_homothetie_reconnaitre", "sym_homothetie_construire", "sym_homothetie_rapport", "sym_symetrie_translation_rotation", "sym_transformation_effet"),
         ...m("4e", "sym_translation", "sym_rotation"),
+        ...m("seconde", "composee_symetries", "composee_homotheties"),
       ],
-      note: "Manquent la COMPOSÉE de deux transformations, leur expression analytique et les lieux géométriques.",
+      note: "Composées et expression analytique couvertes pour des centres, des axes horizontaux ou verticaux et des homothéties ; manquent les lieux géométriques, la bijection et Thalès vectoriel.",
     },
     {
       code: "AG 10", domaine: "Géométrie dans l'espace",
@@ -117,27 +116,27 @@ export const SENEGAL_2NDE: ProgrammePays = {
       micros: [
         ...m("3e", "volume_representation", "section_pave_cube", "section_cone_pyramide"),
         ...m("terminale-spe", "espace_position_relative"),
+        ...m("seconde", "espace_positions_relatives", "espace_orthogonalite_droite_plan"),
       ],
-      note: "L'orthogonalité dans l'espace, démontrée sans vecteurs (droite orthogonale à deux droites sécantes d'un plan), n'a pas de micro.",
+      note: "Manquent les règles de la perspective cavalière.",
     },
 
     {
       code: "AN 1", domaine: "Activités numériques",
       texte: "Calcul dans ℝ : puissances, radicaux (√(a²b) = |a|√b), valeur absolue, distance sur une droite ; résoudre |ax + b| = |cx + d|, |x − a| ≤ b.",
-      couverture: "partielle",
-      micros: m("seconde", "puiss_calcul", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_exposant_negatif", "puiss_expression_composee", "racine_carre_de_a2", "racine_produit", "racine_simplification", "valeur_absolue_distance", "reference_valeur_absolue"),
-      note: "|x + 1| = 3 et |x − 2| ≤ 3 sont couverts ; manquent |ax + b| = c avec a ≠ 1 et |ax + b| = |cx + d|.",
+      couverture: "complete",
+      micros: m("seconde", "puiss_calcul", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_exposant_negatif", "puiss_expression_composee", "racine_carre_de_a2", "racine_produit", "racine_simplification", "valeur_absolue_distance", "reference_valeur_absolue", "va_equation_affine", "va_inequation_affine"),
     },
     {
       code: "AN 2", domaine: "Activités numériques",
       texte: "Intervalles et calcul approché : intervalles bornés ou non, centre et rayon ; approximation décimale, encadrement d'une somme et d'un produit, ordre de grandeur, partie entière, arrondi.",
       couverture: "partielle",
       micros: [
-        ...m("seconde", "reels_ensembles", "intervalle_representer", "intervalle_appartenance", "reels_encadrement"),
+        ...m("seconde", "reels_ensembles", "intervalle_representer", "intervalle_appartenance", "reels_encadrement", "encadrer_somme_produit"),
         ...m("6e", "decimal_arrondir"),
         ...m("4e", "ordre_estimer"),
       ],
-      note: "Manquent le centre et le rayon d'un intervalle, l'encadrement d'une somme ou d'un produit.",
+      note: "Manquent le centre et le rayon d'un intervalle.",
     },
     {
       code: "AN 3", domaine: "Activités numériques",
@@ -153,12 +152,11 @@ export const SENEGAL_2NDE: ProgrammePays = {
     {
       code: "AN 4", domaine: "Activités numériques",
       texte: "Étude de fonctions : partie entière, x ↦ ax², x ↦ ax² + bx + c, cube, inverse, x ↦ k/x, homographiques x ↦ (ax + b)/(cx + d), racine carrée ; asymptotes parallèles aux axes (intuitif).",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("seconde", "reference_carre", "reference_cube", "reference_inverse", "reference_racine", "reference_comparer"),
+        ...m("seconde", "reference_carre", "reference_cube", "reference_inverse", "reference_racine", "reference_comparer", "fct_partie_entiere", "fct_homographique"),
         ...m("premiere-spe", "sd_canonique", "var_second_degre"),
       ],
-      note: "Manquent la fonction partie entière et les fonctions HOMOGRAPHIQUES avec leurs asymptotes.",
     },
     {
       code: "AN 5", domaine: "Activités numériques",
@@ -203,8 +201,8 @@ export const SENEGAL_2NDE: ProgrammePays = {
         ...m("3e", "stat_classe_modale_centre", "stat_lire_tableau"),
         ...m("4e", "stat_histogramme_lire"),
         ...m("premiere", "auto_stat_moyenne"),
+        ...m("5e", "stat_mode"),
       ],
-      note: "Le mode se travaille comme « la réponse la plus fréquente » (stat_lire_tableau 3e), sans le mot « mode ».",
     },
   ],
 };
@@ -221,8 +219,8 @@ export const SENEGAL_1RE: ProgrammePays = {
       code: "AN 1", domaine: "Analyse",
       texte: "Fonctions associées : courbes de x ↦ f(x − a), f(x) + b, |f(x)|, f(|x|) ; centre et axe de symétrie d'une courbe ; courbe de la réciproque d'une bijection.",
       couverture: "partielle",
-      micros: [...m("terminale-spe", "reciproque_courbe"), ...m("seconde", "courbe_translation", "courbe_dilatation_abs")],
-      note: "La courbe de la réciproque, les translations et |f| sont couvertes ; manquent f(|x|) et le centre de symétrie (f(a + x) + f(a − x) = 2b).",
+      micros: [...m("terminale-spe", "reciproque_courbe", "symetrie_courbe"), ...m("seconde", "courbe_translation", "courbe_dilatation_abs")],
+      note: "Manque la courbe de f(|x|).",
     },
     {
       code: "AN 2", domaine: "Analyse",
@@ -235,8 +233,8 @@ export const SENEGAL_1RE: ProgrammePays = {
       code: "AN 3", domaine: "Analyse",
       texte: "Continuité : en un point, à droite, à gauche, sur un intervalle ; image d'un intervalle ; une fonction continue strictement monotone est une bijection.",
       couverture: "partielle",
-      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_unicite", "reciproque_bijection"),
-      note: "Monotone et bijection couverts ; manque la preuve de la continuité en un point par les limites (fonctions définies par morceaux, à droite et à gauche).",
+      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_unicite", "reciproque_bijection", "limite_gauche_droite"),
+      note: "Manque l'image d'un intervalle.",
     },
     {
       code: "AN 4", domaine: "Analyse",
@@ -258,10 +256,10 @@ export const SENEGAL_1RE: ProgrammePays = {
       texte: "Étude de fonctions : polynômes de degré ≤ 3, rationnelles (asymptotes obliques), irrationnelles, sinus, cosinus, tangente (périodicité, composées avec une affine) ; résolution graphique de f(x) = g(x), f(x) > g(x), discussion de f(x) = m.",
       couverture: "partielle",
       micros: [
-        ...m("premiere-spe", "var_tableau", "var_position_relative", "graph1s_resoudre_equation", "graph1s_resoudre_inequation", "trig_courbes", "trig_periodicite"),
-        ...m("terminale-spe", "limite_fonction_asymptote"),
+        ...m("premiere-spe", "var_tableau", "var_position_relative", "graph1s_resoudre_equation", "graph1s_resoudre_inequation", "trig_courbes", "trig_periodicite", "tan_reel", "tan_identite_derivee"),
+        ...m("terminale-spe", "limite_fonction_asymptote", "asymptote_oblique"),
       ],
-      note: "Manquent les ASYMPTOTES OBLIQUES, l'étude des fonctions irrationnelles et de la fonction tangente, et la discussion graphique d'une équation f(x) = m.",
+      note: "Asymptotes obliques couvertes ; domaine, période et dérivée de tan aussi. Manquent l'étude complète de la fonction tangente, les fonctions irrationnelles et la discussion graphique de f(x) = m.",
     },
     {
       code: "AN 7", domaine: "Analyse",
@@ -316,9 +314,8 @@ export const SENEGAL_1RE: ProgrammePays = {
     {
       code: "GE 1", domaine: "Géométrie",
       texte: "Outil vectoriel : vecteurs du plan et de l'espace, décomposition d'un vecteur de l'espace ; barycentre de quatre points pondérés, coordonnées, centre d'inertie d'une plaque homogène.",
-      couverture: "partielle",
-      micros: m("terminale-spe", "espace_vecteurs", "espace_repere_coordonnees"),
-      note: "Manque tout le BARYCENTRE (et le centre d'inertie), retiré du programme français.",
+      couverture: "complete",
+      micros: [...m("terminale-spe", "espace_vecteurs", "espace_repere_coordonnees"), ...m("premiere-spe", "barycentre_coordonnees")],
     },
     {
       code: "GE 2", domaine: "Géométrie",
@@ -333,19 +330,18 @@ export const SENEGAL_1RE: ProgrammePays = {
     {
       code: "GE 3", domaine: "Géométrie",
       texte: "Angles orientés et trigonométrie : relation de Chasles, mesure principale, congruences ; formules d'addition, de duplication, de linéarisation ; équations cos x = cos a, sin x = sin a, tan x = tan a, a cos x + b sin x + c = 0 ; inéquations trigonométriques.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("premiere-spe", "trig_grand_reel", "trig_valeurs", "trig_angles_associes", "trig_cercle", "trig_formule_addition", "trig_formule_duplication", "trig_equation_generale"),
+        ...m("premiere-spe", "trig_grand_reel", "trig_valeurs", "trig_angles_associes", "trig_cercle", "trig_formule_addition", "trig_formule_duplication", "trig_equation_generale", "angle_oriente_mesure_principale", "angle_oriente_chasles", "trig_equation_formes"),
         ...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"),
       ],
-      note: "Formules d'addition, de duplication, équations (dont a cos x + b sin x = c) et inéquations couvertes ; manquent les angles ORIENTÉS.",
     },
     {
       code: "GE 4", domaine: "Géométrie",
       texte: "Transformations : composée de deux transformations planes (rotations de même centre, symétries orthogonales, homothétie et rotation de même centre), expression analytique, isométries ayant un point invariant.",
       couverture: "partielle",
-      micros: m("4e", "sym_transformation_defi"),
-      note: "Seules deux rotations de même centre se composent (★5) ; manquent deux symétries d'axes distincts, homothétie et rotation, l'expression analytique et les isométries à point invariant.",
+      micros: [...m("4e", "sym_transformation_defi"), ...m("seconde", "composee_symetries", "composee_homotheties")],
+      note: "Deux rotations de même centre : seulement sym_transformation_defi (4e, ★5) ; manquent les isométries à point invariant.",
     },
     {
       code: "GE 5", domaine: "Géométrie",
@@ -369,8 +365,8 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "AN 1", domaine: "Analyse",
       texte: "Continuité et fonction réciproque : théorème des valeurs intermédiaires, valeur approchée d'un zéro ; réciproque d'une fonction continue strictement monotone (existence, courbe) ; branches infinies, comparaison de limites, limite d'une composée.",
       couverture: "partielle",
-      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "limite_fonction_operations", "limite_fonction_asymptote", "reciproque_bijection", "reciproque_expression", "reciproque_courbe"),
-      note: "La fonction réciproque est couverte ; manquent le calcul d'une valeur approchée d'un zéro, les branches paraboliques, la comparaison de limites et la limite d'une composée pour les fonctions.",
+      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "limite_fonction_operations", "limite_fonction_asymptote", "reciproque_bijection", "reciproque_expression", "reciproque_courbe", "branches_infinies"),
+      note: "Manquent le calcul d'une valeur approchée d'un zéro, la comparaison de limites et la limite d'une composée pour les fonctions.",
     },
     {
       code: "AN 2", domaine: "Analyse",
@@ -415,8 +411,8 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "AN 8", domaine: "Analyse",
       texte: "Équations différentielles linéaires à coefficients constants : premier ordre et SECOND ordre, homogènes ou avec second membre, solution vérifiant des conditions initiales.",
       couverture: "partielle",
-      micros: m("terminale-spe", "equadiff_reconnaitre", "equadiff_y_prime_ay", "equadiff_y_prime_ay_b", "equadiff_solution_particuliere", "equadiff_condition_initiale"),
-      note: "Le SECOND ordre (y'' + ay' + by = 0, oscillations) n'est plus au programme français : micros à écrire.",
+      micros: m("terminale-spe", "equadiff_reconnaitre", "equadiff_y_prime_ay", "equadiff_y_prime_ay_b", "equadiff_solution_particuliere", "equadiff_condition_initiale", "equadiff_second_ordre", "equadiff_second_ordre_conditions"),
+      note: "Manque le second ordre avec second membre : seules les équations homogènes sont traitées.",
     },
 
     {
@@ -449,23 +445,21 @@ export const SENEGAL_TLE: ProgrammePays = {
     {
       code: "AG 1", domaine: "Algèbre et géométrie",
       texte: "Nombres complexes : forme algébrique, somme, produit, quotient, conjugué ; module, argument, forme trigonométrique, notation e^{iθ} ; affixe d'un point, d'un vecteur.",
-      couverture: "absente",
-      micros: [],
-      note: "En France, les complexes sont en maths EXPERTES, que le coach ne couvre pas encore : micros à écrire.",
+      couverture: "complete",
+      micros: m("terminale-spe", "cx_forme_algebrique", "cx_conjugue_quotient", "cx_module_argument", "cx_forme_exponentielle", "cx_geometrie"),
     },
     {
       code: "AG 2", domaine: "Algèbre et géométrie",
       texte: "Formules de Moivre et d'Euler, linéarisation, racines n-ièmes de l'unité et d'un complexe ; équations du second degré à coefficients complexes.",
-      couverture: "absente",
-      micros: [],
-      note: "Maths expertes en France : micros à écrire.",
+      couverture: "complete",
+      micros: m("terminale-spe", "cx_forme_exponentielle", "cx_racines_nieme", "cx_equation_second_degre"),
+      note: "Équations à coefficients complexes en QCM seulement (somme et produit, test des solutions) : pas de saisie d'une racine du discriminant complexe.",
     },
     {
       code: "AG 3", domaine: "Algèbre et géométrie",
       texte: "Complexes et géométrie : alignement, longueurs, nature d'une configuration ; similitudes planes directes z ↦ az + b et leurs éléments caractéristiques.",
-      couverture: "absente",
-      micros: [],
-      note: "Les similitudes ne sont plus enseignées en France : micros à écrire.",
+      couverture: "complete",
+      micros: m("terminale-spe", "cx_geometrie", "similitude_directe"),
     },
   ],
 };

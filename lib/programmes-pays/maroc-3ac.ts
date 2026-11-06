@@ -49,12 +49,11 @@ export const MAROC_3AC: ProgrammePays = {
     {
       code: "S1-1", domaine: AN,
       texte: "Racines carrées : racine carrée d'un positif, (√a)² et √(a²), x² = a ; valeurs approchées à la calculatrice ; √(ab) = √a × √b, √(a/b) = √a / √b ; rendre rationnel le dénominateur dans des cas simples.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("3e", "entier_racine_comprendre", "entier_racine_calculer", "entier_racine_carre_parfait", "entier_racine_encadrer", "equation_carre_egal_a"),
-        ...m("seconde", "racine_carre_de_a2", "racine_produit", "racine_simplification"),
+        ...m("seconde", "racine_carre_de_a2", "racine_produit", "racine_simplification", "racine_denominateur_rationnel"),
       ],
-      note: "Manquent le quotient √(a/b) = √a / √b et « rendre rationnel le dénominateur » (3/√2 = 3√2/2) : classiques au Maroc, absents du programme français.",
     },
     {
       code: "S1-2", domaine: AN,
@@ -79,13 +78,13 @@ export const MAROC_3AC: ProgrammePays = {
     {
       code: "S1-4", domaine: AN,
       texte: "Ordre et opérations : propriétés de l'ordre ; techniques de comparaison de deux nombres ; encadrer et approcher la somme, la différence, le produit et le quotient de deux rationnels.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("3e", "entier_racine_encadrer", "fraction_rationnel_comparer"),
-        ...m("seconde", "reels_encadrement", "comparer_difference_quotient", "inequation_resoudre"),
+        ...m("seconde", "reels_encadrement", "comparer_difference_quotient", "inequation_resoudre", "encadrer_somme_produit"),
         ...m("5e", "approx_encadrer_quotient"),
+        ...m("4e", "ordre_regles"),
       ],
-      note: "Encadrer un quotient est couvert ; manquent les règles de l'ordre comme notion (si a < b alors a + c < b + c ; multiplier par un négatif renverse) et l'encadrement d'une somme ou d'un produit à partir d'encadrements.",
     },
     {
       code: "S1-5", domaine: AG,
@@ -167,6 +166,7 @@ export const MAROC_3AC: ProgrammePays = {
       micros: [
         ...m("3e", "stat_lire_tableau", "stat_lire_graphique", "stat_moyenne", "stat_mediane", "stat_interpreter"),
         ...m("seconde", "stat_lire_serie"),
+        ...m("5e", "stat_mode"),
       ],
     },
     {
@@ -190,9 +190,8 @@ export const MAROC_3AC: ProgrammePays = {
     {
       code: "S2-8", domaine: AG,
       texte: "Équation réduite d'une droite ; parallèles si a = a', perpendiculaires si a × a' = −1 ; lien avec les fonctions affines et les systèmes.",
-      couverture: "partielle",
-      micros: m("seconde", "droite_pente_ordonne", "droite_equation_reduite", "droite_parallelisme"),
-      note: "Manque le critère de perpendicularité a × a' = −1 (en 1re spé, la perpendicularité passe par les vecteurs normaux, pas par les coefficients directeurs).",
+      couverture: "complete",
+      micros: m("seconde", "droite_pente_ordonne", "droite_equation_reduite", "droite_parallelisme", "droite_perpendiculaire_coeff"),
     },
     {
       code: "S2-9", domaine: AG,

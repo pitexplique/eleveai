@@ -187,8 +187,8 @@ export const MAROC_1AC: ProgrammePays = {
       code: "S2-7", domaine: AG,
       texte: "Le cercle : centre, corde, diamètre, tangente ; tracer la tangente en un point ; un triangle dont un côté est un diamètre du cercle circonscrit est rectangle.",
       couverture: "partielle",
-      micros: [...m("6e", "cercle_vocabulaire", "cercle_ensemble", "cercle_distance"), ...m("3e", "triangle_demi_cercle")],
-      note: "Le triangle inscrit dans un demi-cercle est couvert ; manque la tangente (perpendiculaire au rayon).",
+      micros: [...m("6e", "cercle_vocabulaire", "cercle_ensemble", "cercle_distance"), ...m("3e", "triangle_demi_cercle"), ...m("4e", "tangente_rayon")],
+      note: "Le triangle inscrit dans un demi-cercle et la tangente perpendiculaire au rayon sont couverts ; le tracé de la tangente n'est pas fait aux instruments : on choisit la bonne droite parmi trois.",
     },
     {
       code: "S2-8", domaine: AG,
@@ -292,8 +292,8 @@ export const MAROC_2AC: ProgrammePays = {
       code: "S1-5", domaine: AG,
       texte: "Droite des milieux et sa réciproque ; le segment des milieux mesure la moitié du troisième côté ; si (MN) ∥ (BC) alors AM/AB = AN/AC = MN/BC ; partager un segment en segments égaux.",
       couverture: "partielle",
-      micros: m("4e", "thales_configuration", "thales_rapport", "thales_calculer_longueur"),
-      note: "Manquent le théorème des milieux (et sa réciproque) et le partage d'un segment en n parts égales. Le Thalès « complet » vient en 3AC.",
+      micros: m("4e", "thales_configuration", "thales_rapport", "thales_calculer_longueur", "milieux_droite", "milieux_reciproque"),
+      note: "Manque le partage d'un segment en n parts égales. Le Thalès « complet » vient en 3AC.",
     },
 
     // ── Semestre 2 ──────────────────────────────────────────────────────────
@@ -312,13 +312,12 @@ export const MAROC_2AC: ProgrammePays = {
     {
       code: "S2-3", domaine: AN,
       texte: "Ordre et opérations : comparer deux rationnels, ordre et addition, ordre et multiplication par un positif.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("4e", "fraction_comparer"),
+        ...m("4e", "fraction_comparer", "ordre_regles"),
         ...m("3e", "fraction_rationnel_comparer"),
         ...m("seconde", "comparer_difference_quotient", "inequation_resoudre"),
       ],
-      note: "Manquent les règles de l'ordre comme notion (si a < b alors a + c < b + c ; multiplier par un positif conserve l'ordre) : même trou qu'au 3AC ; les inéquations de seconde les font seulement pratiquer.",
     },
     {
       code: "S2-4", domaine: GS,

@@ -70,9 +70,8 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
     {
       code: "C1-L3", domaine: CALC,
       texte: "Équations et inéquations dans ℝ : équations équivalentes, ensemble de validité ; membres polynômes ou fractions rationnelles ; équations et inéquations avec valeur absolue.",
-      couverture: "partielle",
-      micros: m("seconde", "equation_resoudre", "inequation_resoudre", "signes_quotient", "signes_resoudre_equation", "signes_resoudre_inequation", "valeur_absolue_distance"),
-      note: "Seuls |x − a| = r et |x − a| ≤ r sont couverts : manquent les autres équations et inéquations avec valeur absolue.",
+      couverture: "complete",
+      micros: m("seconde", "equation_resoudre", "inequation_resoudre", "signes_quotient", "signes_resoudre_equation", "signes_resoudre_inequation", "valeur_absolue_distance", "va_equation_affine", "va_inequation_affine"),
     },
     {
       code: "C1-L4", domaine: CALC,
@@ -90,12 +89,11 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
     {
       code: "C1-L6", domaine: FONC,
       texte: "Fonctions élémentaires : x², x³, 1/x, √x, partie entière E(x), |ax + b|, affines par intervalles, ax² et a/x ; sens de variation et tableau.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("seconde", "reference_carre", "reference_cube", "reference_inverse", "reference_racine", "reference_valeur_absolue", "reference_comparer"),
+        ...m("seconde", "reference_carre", "reference_cube", "reference_inverse", "reference_racine", "reference_valeur_absolue", "reference_comparer", "fct_partie_entiere", "fct_par_intervalles", "abs_affine_morceaux"),
         ...m("premiere", "lin_affine_par_morceaux"),
       ],
-      note: "Manque la fonction partie entière E(x).",
     },
     {
       code: "C2-L1", domaine: DONN,
@@ -132,9 +130,8 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
     {
       code: "C3-L4", domaine: GPLAN,
       texte: "Angles orientés et trigonométrie : radian, conversions, angle orienté et mesure principale, cercle trigonométrique, cosinus, sinus, tangente, angles opposés.",
-      couverture: "partielle",
-      micros: m("premiere-spe", "trig_radian", "trig_enroulement", "trig_cercle", "trig_cos_sin", "trig_valeurs", "trig_angles_associes"),
-      note: "Manquent l'angle orienté de deux vecteurs et sa mesure principale, et la tangente.",
+      couverture: "complete",
+      micros: m("premiere-spe", "trig_radian", "trig_enroulement", "trig_cercle", "trig_cos_sin", "trig_valeurs", "trig_angles_associes", "angle_oriente_mesure_principale", "tan_reel"),
     },
     {
       code: "C3-L5", domaine: GESP,
@@ -143,8 +140,9 @@ export const COTE_DIVOIRE_2NDE: ProgrammePays = {
       micros: [
         ...m("terminale-spe", "espace_position_relative"),
         ...m("3e", "section_reconnaitre", "section_pave_cube"),
+        ...m("seconde", "espace_positions_relatives"),
       ],
-      note: "Pas de micro « démontrer un parallélisme dans l'espace » (théorème du toit, etc.).",
+      note: "Reste la détermination d'un plan comme savoir ; le parallélisme se travaille en QCM, pas par la rédaction d'une preuve.",
     },
     {
       code: "C3-L6", domaine: TRANS,
@@ -220,19 +218,18 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
     {
       code: "C1-L6", domaine: FONC,
       texte: "Dérivation : nombre dérivé, tangente, fonction dérivée, dérivées usuelles (y compris cos, sin, tan), opérations, f(ax + b) ; signe de la dérivée et variations, extremum.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("premiere-spe", "der_nombre_derive", "der_graphique", "der_tangente", "der_usuelles", "der_operations", "der_quotient", "der_composee_affine", "var_signe_derivee", "var_extremum"),
+        ...m("premiere-spe", "der_nombre_derive", "der_graphique", "der_tangente", "der_usuelles", "der_operations", "der_quotient", "der_composee_affine", "var_signe_derivee", "var_extremum", "tan_identite_derivee"),
         ...m("terminale-spe", "trigo_etude_fonction"),
       ],
-      note: "La dérivée de tan n'a pas de micro.",
     },
     {
       code: "C1-L7", domaine: FONC,
       texte: "Étude et représentation d'une fonction : parité, périodicité, axe et centre de symétrie de la courbe, asymptotes (dont obliques), polynômes de degré ≤ 3, homographiques, ax + b + c/(dx + e), fonctions circulaires.",
       couverture: "partielle",
-      micros: m("premiere-spe", "var_tableau", "var_lecture_courbe", "trig_parite", "trig_periodicite", "trig_courbes"),
-      note: "Manquent axe / centre de symétrie d'une courbe et asymptote oblique.",
+      micros: [...m("premiere-spe", "var_tableau", "var_lecture_courbe", "trig_parite", "trig_periodicite", "trig_courbes"), ...m("seconde", "fct_homographique"), ...m("terminale-spe", "asymptote_oblique", "symetrie_courbe")],
+      note: "Reste l'étude complète des familles citées (degré ≤ 3, ax + b + c/(dx + e)), non portée par une micro dédiée.",
     },
     {
       code: "C1-L8", domaine: FONC,
@@ -271,33 +268,33 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
     {
       code: "C3-L1", domaine: GPLAN,
       texte: "Barycentre de 2 ou 3 points pondérés : existence, isobarycentre, homogénéité, barycentres partiels, réduction de aMA + bMB (+ cMC), coordonnées, alignement, concours, lieux.",
-      couverture: "absente",
-      micros: [],
-      note: "Trou : barycentre (vu aussi au Maroc et au Sénégal).",
+      couverture: "partielle",
+      micros: m("premiere-spe", "barycentre_deux_points", "barycentre_coordonnees"),
+      note: "Restent l'alignement, le concours et les lieux de points par le barycentre.",
     },
     {
       code: "C3-L2", domaine: GPLAN,
       texte: "Angles orientés et trigonométrie : Chasles, angle double, angles inscrits orientés, cocyclicité ; formules d'addition, de duplication, de linéarisation ; a cos x + b sin x ; équations et inéquations trigonométriques.",
       couverture: "partielle",
       micros: [
-        ...m("premiere-spe", "trig_cercle", "trig_valeurs", "trig_angles_associes", "trig_grand_reel", "trig_formule_addition", "trig_formule_duplication", "trig_equation_generale"),
+        ...m("premiere-spe", "trig_cercle", "trig_valeurs", "trig_angles_associes", "trig_grand_reel", "trig_formule_addition", "trig_formule_duplication", "trig_equation_generale", "angle_oriente_mesure_principale", "angle_oriente_chasles", "trig_equation_formes"),
         ...m("terminale-spe", "trigo_equation_cos", "trigo_inequation_cos"),
       ],
-      note: "Formules, équations et inéquations couvertes ; manquent les angles orientés et la cocyclicité.",
+      note: "Manquent les angles inscrits orientés et la cocyclicité.",
     },
     {
       code: "C3-L3", domaine: GESP,
       texte: "Orthogonalité dans l'espace : droites orthogonales, droite orthogonale à un plan, plans perpendiculaires, projection orthogonale, distance d'un point à un plan.",
       couverture: "partielle",
-      micros: m("terminale-spe", "ps_espace_orthogonalite", "ps_espace_norme_distance", "espace_position_relative"),
-      note: "Approche géométrique (sans coordonnées) : nos micros sont analytiques.",
+      micros: [...m("terminale-spe", "ps_espace_orthogonalite", "ps_espace_norme_distance", "espace_position_relative"), ...m("seconde", "espace_orthogonalite_droite_plan")],
+      note: "Approche sans coordonnées désormais couverte. Manquent la projection orthogonale sur un plan et la distance d'un point à un plan sans coordonnées.",
     },
     {
       code: "C3-L4", domaine: TRANS,
       texte: "Composées de transformations de même nature : deux translations, deux homothéties ou deux rotations de même centre ; expressions analytiques d'une translation et d'une homothétie.",
-      couverture: "absente",
-      micros: [],
-      note: "Trou : composées de transformations (vu aussi au Sénégal).",
+      couverture: "partielle",
+      micros: m("seconde", "composee_symetries", "composee_homotheties"),
+      note: "Deux translations, deux homothéties de même centre, expression analytique de l'homothétie et de la translation couvertes. Manquent deux rotations de même centre (seule sym_transformation_defi, 4e, les compose).",
     },
   ],
 };
@@ -313,23 +310,23 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
     {
       code: "C1-L1", domaine: CALC,
       texte: "Nombres complexes : formes algébrique, trigonométrique, exponentielle ; conjugué, module, argument ; Moivre, Euler, linéarisation ; racines carrées, racines n-ièmes ; équations du second degré à coefficients complexes ; lieux géométriques.",
-      couverture: "absente",
-      micros: [],
-      note: "Trou majeur : les nombres complexes (en France : maths expertes).",
+      couverture: "complete",
+      micros: m("terminale-spe", "cx_forme_algebrique", "cx_conjugue_quotient", "cx_module_argument", "cx_forme_exponentielle", "cx_equation_second_degre", "cx_racines_nieme", "cx_geometrie"),
+      note: "Équations à coefficients complexes en QCM seulement : pas de saisie d'une racine du discriminant complexe. Lieux : médiatrice et cercle.",
     },
     {
       code: "C1-L2", domaine: FONC,
       texte: "Limites et continuité : limite d'une composée, comparaison, branches paraboliques, image d'un intervalle, théorème des valeurs intermédiaires, bijection continue strictement monotone, dichotomie et balayage, racine n-ième et puissances d'exposant rationnel, prolongement par continuité.",
       couverture: "partielle",
-      micros: m("terminale-spe", "limite_fonction_operations", "limite_fonction_reference", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "reciproque_bijection", "expo_ratio_racine", "expo_ratio_calcul"),
-      note: "Bijection, racine n-ième et exposant rationnel couverts ; manquent la limite d'une composée, la comparaison, les branches paraboliques et le prolongement par continuité.",
+      micros: m("terminale-spe", "limite_fonction_operations", "limite_fonction_reference", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "reciproque_bijection", "expo_ratio_racine", "expo_ratio_calcul", "branches_infinies", "limite_gauche_droite"),
+      note: "Manquent la limite d'une composée, la comparaison, l'image d'un intervalle, dichotomie et balayage. Le prolongement par continuité n'est pas une micro : seul le raccord d'une fonction par morceaux est travaillé.",
     },
     {
       code: "C1-L3", domaine: FONC,
       texte: "Dérivabilité et étude de fonctions : dérivée à gauche et à droite, dérivée d'une composée, dérivées successives, point d'inflexion, inégalité des accroissements finis, dérivée d'une réciproque ; études de fonctions rationnelles, irrationnelles, trigonométriques, par raccordement.",
       couverture: "partielle",
-      micros: m("terminale-spe", "derivation_formules", "derivation_composee", "derivation_variation", "derivation_tangente", "convexite_derivee_seconde", "convexite_point_inflexion", "reciproque_derivee", "trigo_etude_fonction"),
-      note: "La dérivée d'une réciproque est couverte ; manquent accroissements finis et dérivabilité à gauche / à droite.",
+      micros: m("terminale-spe", "derivation_formules", "derivation_composee", "derivation_variation", "derivation_tangente", "convexite_derivee_seconde", "convexite_point_inflexion", "reciproque_derivee", "trigo_etude_fonction", "derivabilite_gauche_droite"),
+      note: "Manque l'inégalité des accroissements finis ; les études par raccordement ne sont abordées que par le point anguleux.",
     },
     {
       code: "C1-L4", domaine: FONC,
@@ -376,9 +373,8 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
     {
       code: "C1-L9", domaine: FONC,
       texte: "Équations différentielles : f′ + af = 0, f′ + af = b, f″ = 0, f″ + ω²f = 0, f″ − ω²f = 0 ; conditions initiales.",
-      couverture: "partielle",
-      micros: m("terminale-spe", "equadiff_reconnaitre", "equadiff_y_prime_ay", "equadiff_y_prime_ay_b", "equadiff_condition_initiale"),
-      note: "Les équations du second ordre (f″ ± ω²f = 0) n'ont pas de micro.",
+      couverture: "complete",
+      micros: m("terminale-spe", "equadiff_reconnaitre", "equadiff_y_prime_ay", "equadiff_y_prime_ay_b", "equadiff_condition_initiale", "equadiff_second_ordre", "equadiff_second_ordre_conditions"),
     },
     {
       code: "C2-L1", domaine: DONN,
@@ -402,9 +398,9 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
     {
       code: "C3-L1", domaine: GPLAN,
       texte: "Nombres complexes et géométrie du plan : écriture complexe d'une translation, symétrie, homothétie, rotation, similitude directe ; éléments caractéristiques ; caractérisations complexes (alignement, cocyclicité, triangles particuliers) ; lieux.",
-      couverture: "absente",
-      micros: [],
-      note: "Trou : complexes et similitudes directes.",
+      couverture: "partielle",
+      micros: m("terminale-spe", "cx_geometrie", "cx_transformations", "similitude_directe"),
+      note: "La symétrie axiale n'est traitée que pour z' = z̄ (axe des réels) : pas de réflexion d'axe quelconque.",
     },
   ],
 };
