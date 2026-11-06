@@ -198,7 +198,7 @@ export const BELGIQUE_S2: ProgrammePays = {
     { code: "3.1 SF1", domaine: NBR, texte: "Généraliser : expression algébrique du terme d'une suite selon son rang, l'utiliser ; traduire une situation ou une phrase ; expression d'un périmètre, d'une aire, d'un volume.", couverture: "complete", micros: [...m("4e", "litteral_expression_traduire", "litteral_expression_substituer"), ...m("6e", "algebre_motif")] },
     {
       code: "3.2 Sv1", domaine: NBR, texte: "Opérations et propriétés : règles des quatre opérations sur les fractions ; parité de l'exposant quand la base est négative ; distributivité et sa figure ; propriétés des puissances (énoncer, justifier) ; 10⁻ⁿ inverse de 10ⁿ ; solution d'une équation, principes d'équivalence.",
-      couverture: "partielle", micros: [...m("4e", "fraction_additionner", "fraction_multiplier", "fraction_diviser", "puissance_calcul", "litteral_identite_lier_distributivite", "equation_reconnaitre")],
+      couverture: "partielle", micros: [...m("4e", "fraction_additionner", "fraction_multiplier", "fraction_diviser", "puissance_calculer", "puissance_calcul", "litteral_identite_lier_distributivite", "equation_reconnaitre")],
       note: "Justifier les propriétés des opérations et des puissances n'est pas entraîné.",
     },
     {
@@ -206,7 +206,7 @@ export const BELGIQUE_S2: ProgrammePays = {
       couverture: "complete", micros: m("4e", "litteral_expression_reduire", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_identite_developper", "puissance_calcul", "litteral_expression_substituer"),
     },
     { code: "3.2 SF2", domaine: NBR, texte: "Résoudre ax = b, ax + b = c, ax + b = cx + d (coefficients entiers ou rationnels), vérifier, écrire deux équations de solution donnée.", couverture: "partielle", micros: m("4e", "equation_resoudre_reduction", "equation_resoudre_distributivite", "equation_verifier", "equation_defi"), note: "Écrire soi-même une équation de solution donnée n'est pas entraîné." },
-    { code: "3.2 SF3", domaine: NBR, texte: "Calculer : les quatre opérations sur les fractions, propriétés et priorités avec des rationnels, puissance de base entière ou fractionnaire.", couverture: "complete", micros: [...m("4e", "fraction_additionner", "fraction_multiplier", "fraction_diviser", "relatif_calcul", "puissance_calculer"), ...m("3e", "fraction_rationnel_calculer")] },
+    { code: "3.2 SF3", domaine: NBR, texte: "Calculer : les quatre opérations sur les fractions, propriétés et priorités avec des rationnels, puissance de base entière ou fractionnaire.", couverture: "partielle", micros: [...m("4e", "fraction_additionner", "fraction_multiplier", "fraction_diviser", "relatif_calcul", "puissance_calculer"), ...m("3e", "fraction_rationnel_calculer")], note: "Bases entières seulement : pas de puissance d'une fraction ((2/3)³)." },
     { code: "3.2 SF4", domaine: NBR, texte: "Calculatrice (puissances), ordre de grandeur, plausibilité d'un résultat.", couverture: "partielle", micros: m("4e", "ordre_estimer", "ordre_vraisemblance"), note: "La calculatrice elle-même n'est pas entraînée." },
     { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes avec les outils algébriques ; traduire une situation par une expression ou une équation ; rédiger un énoncé.", couverture: "partielle", micros: m("4e", "equation_probleme", "equation_traduire", "litteral_expression_traduire"), note: "Rédiger un énoncé n'est pas entraîné." },
     {

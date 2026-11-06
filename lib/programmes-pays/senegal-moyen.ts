@@ -210,7 +210,7 @@ export const SENEGAL_5E: ProgrammePays = {
       code: "AN 1", domaine: AN,
       texte: "Puissances dans 𝔻 : écriture, calcul, puissances de 10.",
       couverture: "complete",
-      micros: m("4e", "puissance_comprendre", "puissance_calculer", "puissance_dix"),
+      micros: m("4e", "puissance_comprendre", "puissance_calculer", "puissance_dix", "puissance_calcul"),
     },
     {
       code: "AN 2", domaine: AN,

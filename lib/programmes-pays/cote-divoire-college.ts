@@ -178,11 +178,12 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
     {
       code: "C1-L1", domaine: CALC,
       texte: "Nombres premiers : puissance d'exposant entier d'un entier naturel, priorité de la puissance, (a × b)ⁿ = aⁿ × bⁿ, aⁿ × aᵐ = aⁿ⁺ᵐ ; division euclidienne (égalité, encadrement de a entre deux multiples consécutifs de b) ; reconnaître un nombre premier (2 ou 3 chiffres), décomposer en produit de facteurs premiers.",
-      couverture: "complete",
+      couverture: "partielle",
       micros: [
         ...m("4e", "puissance_comprendre", "puissance_calculer", "puissance_calcul", "div_euclidienne", "premier_definition", "premier_determiner", "premier_decomposer"),
         ...m("3e", "entier_puissance_calcul"),
       ],
+      note: "(a × b)ⁿ = aⁿ × bⁿ n'est vu qu'en vrai ou faux (3e) et dans le défi de 3e.",
     },
     {
       code: "C1-L2", domaine: CALC,
@@ -299,7 +300,7 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       texte: "Nombres décimaux relatifs : puissances de 10 d'exposant entier relatif, écriture a × 10ᵖ, notation scientifique, ordre d'un décimal, produits (a × 10ᵖ) × (b × 10ᵠ), comparaison.",
       couverture: "complete",
       micros: [
-        ...m("4e", "puissance_exposant_negatif", "puissance_dix", "puissance_notation_scientifique", "puissance_comparer", "puissance_calcul"),
+        ...m("4e", "puissance_exposant_negatif", "puissance_dix", "puissance_notation_scientifique", "puissance_comparer", "puissance_calcul", "puissance_defi"),
         ...m("3e", "entier_puissance_ecriture_scientifique"),
       ],
     },
@@ -409,7 +410,7 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       texte: "Calcul littéral : polynômes (somme, différence, produit, quotient), puissances d'exposant relatif, produit nul, nombres de même carré, développer, réduire, factoriser, valeur numérique ; fraction rationnelle (condition d'existence, simplification).",
       couverture: "partielle",
       micros: [
-        ...m("3e", "litteral_substituer", "litteral_reduire", "litteral_developper", "litteral_factoriser", "litteral_identite", "equation_produit_nul", "equation_carre_factoriser"),
+        ...m("3e", "litteral_substituer", "litteral_reduire", "litteral_developper", "litteral_factoriser", "litteral_identite", "equation_produit_nul", "equation_carre_factoriser", "entier_puissance_calcul"),
         ...m("4e", "puissance_exposant_negatif"),
       ],
       note: "Les fractions rationnelles (valeurs interdites, simplification) n'ont pas de micro.",
