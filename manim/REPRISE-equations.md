@@ -9,12 +9,13 @@
 
 - Les 14 vidéos sont rendues ; relecture faite : aucun bloquant, défauts mineurs listés dans `manim/defauts-equations.md`. Fins de voix gardées : voix validées avant la règle du 05/11.
 
+- 06/11 : défauts de la liste corrigés sur les 7 épisodes, dernière relecture faite, derniers défauts de la paysage 01 corrigés (rendue à 03:59, sur l'aperçu port 3900). Shorts `resoudre-simple`, `verifier` et `defi` non re-rendus : aucun défaut.
+- Non vérifié par les relecteurs (images seulement) : le son, et les défauts brefs entre deux images. Frédéric n'a pas encore écouté.
+
 ## Reste
-1. Corrections : un agent neuf par épisode, 2 à la fois au plus, depuis `manim/defauts-equations.md`. Shorts `verifier` et `defi` : rien à refaire. Fini quand le mp4 de l'épisode est plus récent que le module et que son rapport a une ligne « Corrections ».
-2. Passer une dernière relecture sur les vidéos re-rendues.
-3. Aperçu port 3900 : `manim/sorties/apercu.html`, la DERNIÈRE vidéo seulement, ouverte EN PAUSE.
-4. Commit PAR CHEMIN (scripts + `_marques.json` + rapports + ce fichier ; ni `.cues.tsv`, ni `media-eq-*`, ni mp4, ni WAV). Pas de push : il se propose le soir.
-5. Passe finale, après ces rendus : miniatures, manifeste (⛔ jamais réécrit en entier : modifs d'autres sessions), R2, coach, bilans.
+1. Écoute par Frédéric. Pour les retours : un agent neuf par épisode, 2 à la fois au plus.
+2. Passe finale, sur son accord : miniatures, manifeste (⛔ jamais réécrit en entier : modifs d'autres sessions), R2, coach, bilans.
+3. Push : il se propose le soir.
 
 ## En attente de Frédéric
 - `equation_probleme` : le manifeste ne le couvre que par un short de SECONDE (même identifiant). Écrire une paysage + un short 4e ? Pas de réponse pour l'instant ; rien d'écrit.

@@ -24,6 +24,7 @@ from equation_commun import *  # noqa: E402,F403
 
 BOIS, BOIS2, OR = "#92400e", "#78350f", "#fbbf24"
 GRIS_V = "#cbd5e1"   # verdict « pas équation »
+SERRURE_SOMBRE = "#0f172a"   # cadenas sombre : le ?, le x et le 3 s'y lisent en projection
 PAPIER = "#fef3c7"
 ENCRE_N = "#1f2937"
 
@@ -36,9 +37,10 @@ def allumer_lettre(m, couleur, k=1.5):
 
 class Coffre(VGroup):
     """Le coffre : .caisse .couvercle .lueur, le cadenas (.anse .serrure .symbole).
-    coffre.ouvrir() : les animations qui l'ouvrent (couvercle, anse, lueur)."""
+    coffre.ouvrir() : les animations qui l'ouvrent (couvercle, anse, lueur).
+    sombre=True : cadenas sombre à bord clair (la paysage) ; le short garde le cadenas clair."""
 
-    def __init__(self, w=2.8, symbole="?", **kw):
+    def __init__(self, w=2.8, symbole="?", sombre=False, **kw):
         super().__init__(**kw)
         h = w * 0.5
         self.w = w
@@ -55,8 +57,9 @@ class Coffre(VGroup):
               .move_to(P(x * w, 0)) for x in (-0.33, 0.33)])
         self.couvercle.move_to(P(0, h * 0.73))
         l = 0.32 * w
-        self.serrure = RoundedRectangle(width=l, height=l * 0.85, corner_radius=0.05 * w, fill_color=GRIS_V,
-                                        fill_opacity=1, stroke_color="#475569", stroke_width=3).move_to(P(0, h * 0.14))
+        self.serrure = RoundedRectangle(width=l, height=l * 0.85, corner_radius=0.05 * w,
+                                        fill_color=SERRURE_SOMBRE if sombre else GRIS_V, fill_opacity=1,
+                                        stroke_color=GRIS_V if sombre else "#475569", stroke_width=3).move_to(P(0, h * 0.14))
         self.anse = Arc(radius=l * 0.3, start_angle=0, angle=PI, stroke_color="#94a3b8", stroke_width=7,
                         arc_center=self.serrure.get_top())
         self.symbole = Text(symbole, font_size=64 * w / 2.8, color=OPERATION, weight=BOLD).move_to(self.serrure)
@@ -100,7 +103,7 @@ class EquationReconnaitre4e(PaysageEq):
             m.sans_synchro = True
         ident._pas_audit = True
         self.au("Reconnaître", Write(titre), FadeIn(ident, shift=DOWN * 0.2), FadeIn(ech), rt=0.7)
-        c = Coffre(2.2).en(-5.0, 0.1)
+        c = Coffre(2.2, sombre=True).en(-5.0, 0.1)
         q = VGroup(T("Comment savoir qu'une écriture", 42), T("est une équation ?", 42, BLEU_CALCUL))
         q.arrange(DOWN, buff=0.18).move_to(P(1.3, 0.35))
         self.au("Comment", FadeIn(q[0], shift=RIGHT * 0.2), FadeIn(c, scale=0.7), rt=0.4)
@@ -113,9 +116,10 @@ class EquationReconnaitre4e(PaysageEq):
         self.ecran("01-coffre")
         m = Metier(["Salma", "conçoit des", "escape games"], fs=30, peau="#8d5524", tenue="#7c3aed", longs=True, s=0.95)
         m.perso.move_to(P(-5.45, -2.0))
+        m.nom.arrange(DOWN, buff=0.2)  # la cédille de « conçoit » ne frôle plus la ligne du dessous
         m.nom.next_to(m.perso, UP, buff=0.12)
         m.nom.set_x(-5.2)
-        c = Coffre(3.1).en(-2.3, -2.3)
+        c = Coffre(3.1, sombre=True).en(-2.3, -2.3)
         self.au("Salma", FadeIn(m.perso, shift=UP * 0.3), FadeIn(m.nom[0], shift=UP * 0.1), rt=0.4)
         self.au("conçoit", FadeIn(m.nom[1], shift=UP * 0.1), rt=0.3)
         self.au("escape", FadeIn(m.nom[2], shift=UP * 0.1), rt=0.3)
@@ -231,7 +235,7 @@ class EquationReconnaitre4e(PaysageEq):
     def ecran_question1(self):
         self.clear()
         self.add_mascotte()
-        c = Coffre(3.2).move_to(P(-3.3, -0.9))
+        c = Coffre(3.2, sombre=True).move_to(P(-3.3, -0.9))
         self.add(c)
         eg = T("=", 110, EGAL).move_to(P(-4.5, 1.75))
         plus = T("et", 44, audit=False).move_to(P(-3.3, 1.7))
@@ -349,11 +353,11 @@ class EquationReconnaitre4e(PaysageEq):
         # à gauche : l'équation à vérifier et le coffre
         qui = T("Salma teste.", 32, CIEL).move_to(P(-4.55, 1.65))
         rappel = Eq("3x + 2 = 11", 48).sans_audit().move_to(P(-4.55, 0.85))
-        c = Coffre(2.6).en(-4.55, -2.2)
+        c = Coffre(2.6, sombre=True).en(-4.55, -2.2)
         self.au("Salma", FadeIn(qui, shift=DOWN * 0.1), FadeIn(rappel), FadeIn(c, scale=0.8), rt=0.4)
         # à droite : le tableau d'essais
-        tb = TableauEssais(["On essaie", "On calcule", "Égal à 11 ?"], [1.6, 4.1, 2.3], n=2, h=0.85, fs=26,
-                           centre=P(2.45, 0.75), audit=False)
+        tb = TableauEssais(["On essaie", "On calcule", "Égal à 11 ?"], [2.15, 4.0, 2.3], n=2, h=0.85, fs=26,
+                           centre=P(2.325, 0.75), audit=False)
         self.play(FadeIn(tb), run_time=0.3)
         # essai 1 : x = 2
         x2 = tb.placer(Eq("x = 2", 34), 0, 0)
@@ -362,7 +366,7 @@ class EquationReconnaitre4e(PaysageEq):
         tb.placer(cal1, 0, 1)
         self.dire_eq(x2, "x égale 2")
         self.dire_eq(cal1, "3 fois 2 plus 2, 8")
-        v1 = tb.placer(Eq("pas 11", 30, PIEGE, lettres=""), 0, 2).shift(LEFT * 0.35)
+        v1 = tb.placer(Eq("pas 11", 30, PIEGE, lettres=""), 0, 2).shift(LEFT * 0.35 + DOWN * 0.05)  # le jambage du p remontait le texte : même ligne que le calcul
         self.dire_eq(v1, "pas 11.", avec=[Create(tb.non(0))])
         # essai 2 : x = 3
         x3 = tb.placer(Eq("x = 3", 34), 1, 0)
@@ -435,7 +439,7 @@ class EquationReconnaitre4e(PaysageEq):
         q2 = T("Quelle est son inconnue ?", 38, INCONNUE).move_to(P(2.45, 0.85))
         self.au("Laquelle", FadeIn(q1, shift=RIGHT * 0.2), rt=0.35)
         self.au("Quelle", FadeIn(q2, shift=RIGHT * 0.2), rt=0.35)
-        c = Coffre(2.1).move_to(P(2.45, -1.75))
+        c = Coffre(2.1, sombre=True).move_to(P(2.45, -1.75))
         self.play(FadeIn(c, scale=0.8), run_time=0.3)
         pz = T("Mets pause, et cherche !", 34, ORANGE_RETENUE).move_to(P(2.45, -0.15))
         self.au("Mets pause", Write(pz), rt=0.8)
@@ -472,8 +476,8 @@ class EquationReconnaitre4e(PaysageEq):
     # ── 08 : ce que tu as appris ────────────────────────────────────────────
     def ecran_finale(self):
         self.ecran("08-finale", 0.5)
-        c = Coffre(2.8, symbole="3")
-        c.symbole.set_color(VERT_OK)
+        c = Coffre(2.8, symbole="3", sombre=True)
+        c.symbole.set_color(VERT_OK).scale_to_fit_height(c.serrure.height * 0.6).move_to(c.serrure)
         c.couvercle.rotate(0.75, about_point=c.charniere_pos())
         c.lueur.set_fill(opacity=0.55)
         c.anse.shift(UP * 0.14).rotate(0.7, about_point=c.anse.get_end())
