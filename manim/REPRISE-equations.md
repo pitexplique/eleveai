@@ -18,5 +18,5 @@
 3. Push : il se propose le soir.
 
 ## En attente de Frédéric
-- `equation_probleme` : le manifeste ne le couvre que par un short de SECONDE (même identifiant). Écrire une paysage + un short 4e ? Pas de réponse pour l'instant ; rien d'écrit.
+- `equation_probleme` : le manifeste ne le couvre que par un short de SECONDE (même identifiant). Frédéric a dit oui le 06/11, la micro existant bien en 4e. Épisode 08, slug `probleme`, centre nature-ecologie, Yanis garde forestier. Voix écrites (`manim/voix/4e-equation-probleme.json` et `-short.json`), À VALIDER par lui : rien de généré ni de rendu avant son oui. Elles ont la NOUVELLE fin : à la première vidéo rendue, mesurer la phrase et recaler `COUPE_FIN` pour ces vidéos seulement.
 - Ne pas toucher : `manim/scripts/4e/puissance_*`, `manim/rapports-puissances.md`, banques 4e `divisibilite`, `factorisation`, `fractions`, `operations-relatifs`, `probabilites`.

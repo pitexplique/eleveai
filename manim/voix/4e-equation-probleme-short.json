@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Je vais deviner ton nombre. Pense à un nombre. Multiplie-le par 3. Ajoute 2. Tu trouves 17 ? Alors tu avais pensé à 5 !",
+  "01-secret": "Ce n'est pas de la magie. Ton nombre, c'est x. 3 x plus 2 égale 17. On soustrait 2 : 3 x égale 15. On divise par 3 : x égale 5.",
+  "01q-question": "Question ! Une amie double son nombre, retire 3, et trouve 11. Quel est son nombre ? A : 4. B : 7. C : 14. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 2 fois 7, 14. Moins 3, 11.",
+  "02-question": "À toi de deviner le mien. Je le multiplie par 4, j'ajoute 5, et je trouve 29. Quel est mon nombre ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

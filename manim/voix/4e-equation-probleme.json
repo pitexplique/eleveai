@@ -1,0 +1,18 @@
+{
+  "00-garde": "Résoudre un problème avec une équation. Comment trouver un nombre que personne ne te donne ?",
+  "01-garde-forestier": "Yanis est garde forestier. Après un incendie, il replante une parcelle. Il a 58 jeunes arbres. Il forme 4 rangées égales, et il lui reste 6 arbres. Combien d'arbres dans chaque rangée ?",
+  "02-nommer": "Première étape : on nomme ce qu'on cherche. Ici, le nombre d'arbres dans une rangée. On l'appelle x.",
+  "03-traduire": "Deuxième étape : on traduit. 4 rangées de x arbres, c'est 4 x. On ajoute les 6 qui restent, et ça fait 58 en tout. 4 x plus 6 égale 58.",
+  "04-resoudre": "Troisième étape : on résout. On soustrait 6 : 4 x égale 52. On divise par 4 : x égale 13.",
+  "05-repondre": "Quatrième étape : on vérifie, puis on répond. 4 fois 13, 52. Plus 6, 58. C'est juste. Et x égale 13 ne suffit pas : on répond par une phrase. Il y a 13 arbres dans chaque rangée.",
+  "05q-question": "Question ! Yanis achète 3 sacs de graines à x euros le sac. Il paie 5 euros de livraison, et 41 euros en tout. Quelle équation ? A : 3 x plus 5 égale 41. B : 3 fois, entre parenthèses, x plus 5, égale 41. C : x plus 3 plus 5 égale 41. Mets pause, et choisis !",
+  "05r-reponse": "Réponse A. 3 sacs, c'est 3 x, et la livraison ne se paie qu'une fois.",
+  "06-enclos": "Yanis protège les jeunes arbres avec un enclos rectangulaire. La longueur est le double de la largeur. Il a 30 mètres de grillage. On appelle x la largeur. La longueur s'écrit alors avec x : 2 x. Le tour : x plus 2 x plus x plus 2 x, 6 x. 6 x égale 30, donc x égale 5. La largeur est de 5 mètres, et la longueur de 10 mètres.",
+  "06q-question": "Question ! Un autre enclos a une largeur x et une longueur 3 x. Son tour mesure 40 mètres. Quelle équation ? A : x plus 3 x égale 40. B : 8 x égale 40. C : 3 x égale 40. Mets pause, et choisis !",
+  "06r-reponse": "Réponse B. Le tour passe par les 4 côtés : x plus 3 x plus x plus 3 x, 8 x.",
+  "07-pepinieres": "Quel fournisseur choisir ? Première pépinière : 3 euros l'arbre, et 20 euros de livraison. Seconde pépinière : 4 euros l'arbre, et 5 euros de livraison. Pour combien d'arbres paie-t-on le même prix ? Avec x arbres : 3 x plus 20 égale 4 x plus 5. On retire 3 x des deux côtés : 20 égale x plus 5. On soustrait 5 : x égale 15. On vérifie : 65 euros des deux côtés. Pour 15 arbres, les deux pépinières coûtent le même prix.",
+  "08-defi": "À toi de jouer. Yanis et Inès posent 70 nichoirs dans la forêt. Inès en pose 10 de plus que Yanis. Combien chacun en pose-t-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On appelle x les nichoirs de Yanis. Inès en pose x plus 10. Donc x plus x plus 10 égale 70. 2 x plus 10 égale 70. On soustrait 10 : 2 x égale 60. On divise par 2 : x égale 30. On vérifie : 30 plus 40, 70. Yanis en pose 30, et Inès 40.",
+  "09-finale": "Ce que tu as appris. Un problème se résout en quatre étapes : nommer, traduire, résoudre, répondre. Les autres quantités s'écrivent avec x. Et on vérifie, avant de répondre par une phrase.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

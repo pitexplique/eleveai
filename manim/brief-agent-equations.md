@@ -26,6 +26,7 @@ Le verrou unique du brief puissances est REMPLACÉ par deux places propres à ce
 | 05 | resoudre-distributivite | equation_resoudre_distributivite | verte | electro-dj, musique | Nathan, DJ |
 | 06 | verifier | equation_verifier | orange | espace, sciences | Aïcha, ingénieure du spatial |
 | 07 | defi | equation_defi | verte | jeux-defis | Lina, correctrice de manuels |
+| 08 | probleme | equation_probleme | verte | nature-ecologie | Yanis, garde forestier |
 
 ## Module commun
 `manim/scripts/4e/equation_commun.py`, créé par l'agent de l'épisode 01, LECTURE SEULE pour les suivants (ils complètent dans LEUR script et le signalent). Il importe de `manim/scripts/6e/prop_commun.py` ce qui existe, et fournit : l'écriture d'une équation en `Text` avec l'inconnue colorée, le pictogramme métier + prénom écrit, la BALANCE animée (deux plateaux, ce qu'on retire à gauche et à droite, équilibre gardé), et le TABLEAU D'ESSAIS (on essaie x =, on calcule, oui/non).
@@ -47,6 +48,10 @@ Code couleur constant : bleu = l'inconnue ; orange = l'opération faite des deux
 - **05** : timeline de DJ (x + 3, deux fois = 14) ; deux routes en deux colonnes, même arrivée x = 4 ; les flèches de distributivité (le 2 vise x et le 3). Short : course de deux élèves, en deux colonnes qui descendent.
 - **06** : tableau de contrôle d'une fusée qui passe au vert ; on remplace x (la valeur glisse dans l'équation) ; tableau d'essais pour 3x = 9 ; gauche et droite calculées dans deux cases, avec = ou ≠. Short : détecteur de mensonges avec voyant rouge ou vert.
 - **07** : feuille de manuel où Lina entoure l'erreur au stylo rouge ; Léo : 2 + 3 + 4 = 9 barré, le vrai chemin en vert ; x des deux côtés : les termes en x passent d'un seul côté. Short : « Léo a juste et il a tort », grande surprise.
+- **08** : la parcelle brûlée qui se replante, 4 rangées d'arbres + 6 arbres restants ; les 4 étapes (nommer, traduire, résoudre, répondre) en repères qui s'allument et restent visibles ; l'enclos rectangulaire dont chaque côté porte x ou 2 x ; deux pépinières côte à côte avec leurs prix ; les nichoirs de Yanis et d'Inès en barres. Short : le tour de magie, la « pensée » qui se dévoile en équation.
+
+## Épisode 08 : fin des vidéos NOUVELLE
+Ses voix suivent la règle du 05/11 en tête de `manim/REGLES.md`. Dans TON script (sans toucher au module), l'écran de fin écrit ce que dit la voix : « Entraîne-toi sur » + « eleveai.fr » encadré, « Abonne-toi ! » + « @eleveai974 », et « Un pouce · Un commentaire · La cloche » (paysage) ou « Un pouce · La cloche » (short). Mesure la durée exacte de la phrase de fin de chaque vidéo et écris-la dans ton rapport : elle servira à recaler `COUPE_FIN`. Ne touche pas à `components/LecteurVideo.tsx`.
 
 ## Rapport final
 Ta réponse à la session principale tient en 10 lignes au plus (fichiers, durées, bords, soucis) : tout le détail (questions, chapitres, centres) va dans `manim/rapports-equations.md`.
