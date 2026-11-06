@@ -22,9 +22,9 @@ from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from miniature import BLEU, NAVY, ROUGE, VERT, W, police
+from miniature import BLEU, NAVY, ROUGE, VERT, police
 from miniature_essai_v2 import construire as construire_paysage
-from miniature_short import ORANGE, construire as construire_short
+from miniature_short import ORANGE, W, construire as construire_short
 from miniature_short_expression import echelle
 
 RACINE = Path(__file__).resolve().parents[1]
@@ -85,6 +85,7 @@ def acc_paysage(haut, bas, ceinture, y0):
 
 
 def acc_short(lignes):
+    """Centrée sur la largeur du SHORT : le W de `miniature.py` est celui de la paysage (1280)."""
     def f(d):
         echelle(d, W // 2, 1190, "blanche", s=0.8)
         for i, (txt, t, c) in enumerate(lignes):
