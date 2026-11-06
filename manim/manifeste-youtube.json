@@ -62043,6 +62043,1194 @@
       "centres": [
         "nature-ecologie"
       ]
+    },
+    {
+      "id": "4e-equation-reconnaitre",
+      "notionId": "equation_resolution",
+      "microId": "equation_reconnaitre",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre.mp4",
+      "miniature": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre.png",
+      "titre": "Équation ou simple calcul ? — Reconnaître une équation — épisode 1 · Maths 4e",
+      "accroche": "Salma conçoit des escape games. Sur un coffre, elle laisse ce message : 3 fois le code, plus 2, ça fait 11. Comment l'écrire, et comment savoir que c'est une équation ?\n\nDans cette vidéo :\n• une équation : un signe égal et une inconnue, il faut les deux\n• équation, calcul ou expression : 3x + 2 = 11, 2 + 7 = 9 et 3x + 5\n• le premier membre et le second membre\n• résoudre : trouver la valeur qui rend l'égalité vraie (x = 3 ouvre le coffre)\n• le piège : tout signe égal ne fait pas une équation\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : 4 × 6 = 24, 7n + 1, 7n + 1 = 15, 10 − 3 : laquelle est une équation ? Quelle est son inconnue ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_reconnaitre&display=simple\n\n🔢 Épisode 1 sur 8 de la série Équations d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le coffre de Salma"
+        ],
+        [
+          "00:24",
+          "Une égalité et une inconnue"
+        ],
+        [
+          "00:35",
+          "Les trois écritures"
+        ],
+        [
+          "01:00",
+          "Question 1"
+        ],
+        [
+          "01:25",
+          "Les deux membres"
+        ],
+        [
+          "01:49",
+          "Question 2"
+        ],
+        [
+          "02:16",
+          "Résoudre : les essais et le piège"
+        ],
+        [
+          "02:49",
+          "À toi de jouer"
+        ],
+        [
+          "03:11",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution",
+      "tags": [
+        "équation",
+        "reconnaître une équation",
+        "inconnue",
+        "premier membre",
+        "second membre",
+        "escape game",
+        "conceptrice d'escape games",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:00",
+          "question": "Laquelle est une équation ?",
+          "choix": [
+            "5 − 2",
+            "5x − 2 = 8",
+            "5x − 2"
+          ],
+          "reponse": 1,
+          "explication": "C'est la seule qui a un signe égal et une lettre."
+        },
+        {
+          "t": "01:49",
+          "question": "Dans 4x + 1 = 13, comment s'appelle le 13 ?",
+          "choix": [
+            "l'inconnue",
+            "le premier membre",
+            "le second membre"
+          ],
+          "reponse": 2,
+          "explication": "Le second membre. Il est à droite du signe égal."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-equation-reconnaitre-short",
+      "notionId": "equation_resolution",
+      "microId": "equation_reconnaitre",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-equation-reconnaitre",
+      "fichier": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre-short.mp4",
+      "miniature": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre-short.png",
+      "titre": "Équation ou pas ? 3 secondes à chaque fois ⏱️ — 4e #Shorts",
+      "accroche": "Équation, ou pas équation ? 2 + 7 = 9 : pas de lettre. 3x + 5 : pas de signe égal. x + 4 = 9 : un signe égal et une lettre, c'est une équation !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Parmi 6 × 2 = 12, 4n − 1, et 4n = 20, laquelle est une équation ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #équations #4e #collège",
+      "tags": [
+        "équation ou pas",
+        "signe égal",
+        "inconnue",
+        "jeu",
+        "chrono",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "8 = y − 1, c'est une équation ?",
+          "choix": [
+            "oui",
+            "non",
+            "seulement à l'envers"
+          ],
+          "reponse": 0,
+          "explication": "Il y a un signe égal et une lettre. L'inconnue peut être à droite."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-equation-traduire",
+      "notionId": "equation_resolution",
+      "microId": "equation_traduire",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire.mp4",
+      "miniature": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire.png",
+      "titre": "Une phrase devient une équation — Traduire par une équation — épisode 2 · Maths 4e",
+      "accroche": "Camille est monteuse de cinéma. Elle ajoute 3 minutes de générique, et le film dure alors 11 minutes. Combien dure le film sans le générique ? On l'appelle x, et la phrase devient une équation.\n\nDans cette vidéo :\n• le dictionnaire : augmenté de, diminué de, le double, le triple, vaut\n• un exemple morceau par morceau : le double de x est égal à 14, 2x = 14\n• attention à l'ordre : le double de x diminué de 4 vaut 10, 2x − 4 = 10\n• le piège des parenthèses : 2x − 4 n'est pas 2(x − 4)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Camille monte 3 bandes-annonces de x minutes chacune et ajoute 2 minutes de présentation. En tout, 17 minutes. Écris l'équation.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_traduire&display=simple\n\n🔢 Épisode 2 sur 8 de la série Équations d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La timeline de Camille"
+        ],
+        [
+          "00:29",
+          "Le dictionnaire des mots"
+        ],
+        [
+          "00:45",
+          "Un exemple, morceau par morceau"
+        ],
+        [
+          "01:01",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "Attention à l'ordre"
+        ],
+        [
+          "01:49",
+          "Le piège des parenthèses"
+        ],
+        [
+          "02:07",
+          "Question 2"
+        ],
+        [
+          "02:38",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Correction"
+        ],
+        [
+          "03:18",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution",
+      "tags": [
+        "équation",
+        "traduire une phrase",
+        "mettre en équation",
+        "le double",
+        "le triple",
+        "cinéma",
+        "monteuse de cinéma",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Le triple de x vaut 21. Quelle équation ?",
+          "choix": [
+            "x + 3 = 21",
+            "3x = 21",
+            "x = 3 × 21"
+          ],
+          "reponse": 1,
+          "explication": "Le triple de x, c'est 3 fois x, pas x plus 3."
+        },
+        {
+          "t": "02:07",
+          "question": "Le double de x augmenté de 1 vaut 9. Quelle équation ?",
+          "choix": [
+            "2x + 1 = 9",
+            "2(x + 1) = 9",
+            "2 + x + 1 = 9"
+          ],
+          "reponse": 0,
+          "explication": "On prend le double, puis on ajoute 1."
+        }
+      ],
+      "centres": [
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "4e-equation-traduire-short",
+      "notionId": "equation_resolution",
+      "microId": "equation_traduire",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-equation-traduire",
+      "fichier": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire-short.mp4",
+      "miniature": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire-short.png",
+      "titre": "Tu parles français ? Tu sais écrire une équation ✍️ — 4e #Shorts",
+      "accroche": "Traduis avant moi ! Un nombre augmenté de 3 vaut 11 : x + 3 = 11. Le triple d'un nombre vaut 21 : 3x = 21.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Le triple de x augmenté de 4 vaut 19. Écris l'équation en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_traduire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #équations #4e #collège",
+      "tags": [
+        "traduire une phrase",
+        "le triple",
+        "le double",
+        "course",
+        "chrono",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Le double de x vaut 14.",
+          "choix": [
+            "x + 2 = 14",
+            "2x = 14",
+            "x = 28"
+          ],
+          "reponse": 1,
+          "explication": "Le double, c'est 2 fois."
+        }
+      ],
+      "centres": [
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "4e-equation-resoudre-simple",
+      "notionId": "equation_resolution",
+      "microId": "equation_resoudre_simple",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple.mp4",
+      "miniature": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple.png",
+      "titre": "Retrouver x sans deviner — Résoudre une équation simple — épisode 3 · Maths 4e",
+      "accroche": "Marie est vétérinaire. Elle pèse un petit chien dans sa caisse de 4 kilos, et la balance affiche 9 kilos. Comment retrouver x sans deviner ?\n\nDans cette vidéo :\n• la balance : on retire 4 kilos des deux côtés, x + 4 = 9 donne x = 5\n• résoudre, c'est défaire : l'opération inverse\n• x − 3 = 8 : on ajoute 3 des deux côtés\n• 3x = 15 : on divise par 3\n• le piège : 5x = 8 donne x = 1,6, pas 3\n• avec un nombre négatif : −3a = 30, a = −10\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : résous x + 5 = 12, et 6x = 9.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_simple&display=simple\n\n🔢 Épisode 3 sur 8 de la série Équations d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chien de Marie"
+        ],
+        [
+          "00:19",
+          "La balance"
+        ],
+        [
+          "00:41",
+          "Résoudre, c'est défaire"
+        ],
+        [
+          "00:51",
+          "La tortue"
+        ],
+        [
+          "01:07",
+          "Question 1"
+        ],
+        [
+          "01:39",
+          "Les 3 chiots"
+        ],
+        [
+          "01:54",
+          "Le piège des 5 chatons"
+        ],
+        [
+          "02:18",
+          "Question 2"
+        ],
+        [
+          "02:48",
+          "Un nombre négatif"
+        ],
+        [
+          "02:59",
+          "À toi de jouer"
+        ],
+        [
+          "03:13",
+          "Correction"
+        ],
+        [
+          "03:26",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution",
+      "tags": [
+        "équation",
+        "résoudre une équation",
+        "opération inverse",
+        "balance",
+        "animaux",
+        "vétérinaire",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:07",
+          "question": "Pour résoudre x − 5 = 12, que fait-on des deux côtés ?",
+          "choix": [
+            "soustraire 5",
+            "ajouter 5",
+            "diviser par 5"
+          ],
+          "reponse": 1,
+          "explication": "x = 17. On retirait 5, l'inverse est d'ajouter 5."
+        },
+        {
+          "t": "02:18",
+          "question": "4x = 10. Que vaut x ?",
+          "choix": [
+            "6",
+            "2,5",
+            "40"
+          ],
+          "reponse": 1,
+          "explication": "Le 4 multiplie x, donc 10 ÷ 4. Le 6, c'est le piège de la soustraction."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "chiens-chats"
+      ]
+    },
+    {
+      "id": "4e-equation-resoudre-simple-short",
+      "notionId": "equation_resolution",
+      "microId": "equation_resoudre_simple",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-equation-resoudre-simple",
+      "fichier": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple-short.mp4",
+      "miniature": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple-short.png",
+      "titre": "Le sac mystère : combien de billes ? ⚖️ — 4e #Shorts",
+      "accroche": "Un sac mystère et 4 billes d'un côté de la balance, 9 billes de l'autre. On enlève 4 billes de chaque côté, la balance ne bouge pas : x + 4 = 9, donc x = 5.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Un sac et 7 billes d'un côté, 15 billes de l'autre. Combien de billes dans le sac ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_simple&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #équations #4e #collège",
+      "tags": [
+        "balance",
+        "sac mystère",
+        "billes",
+        "résoudre une équation",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "3 sacs identiques d'un côté, 15 billes de l'autre. Combien de billes par sac ?",
+          "choix": [
+            "12",
+            "5",
+            "18"
+          ],
+          "reponse": 1,
+          "explication": "3x = 15. On divise par 3 des deux côtés."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-equation-resoudre-reduction",
+      "notionId": "equation_resolution",
+      "microId": "equation_resoudre_reduction",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction.mp4",
+      "miniature": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction.png",
+      "titre": "Quand x apparaît deux fois — Résoudre en réduisant — épisode 4 · Maths 4e",
+      "accroche": "Awa entraîne des coureuses. Sa boucle fait x kilomètres. Lundi, 2 boucles. Mardi, 3 boucles. En tout, 15 kilomètres. Que faire quand x apparaît deux fois ?\n\nDans cette vidéo :\n• réduire : 2x + 3x = 5x, puis 5x = 15 donne x = 3\n• x tout seul, c'est 1x : 4x − x = 3x\n• le piège : 2x + 3, ce n'est pas 5x\n• les t ensemble, les nombres ensemble : 2t + 12 + t − 3 = 27, t = 6\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : une coureuse fait 3 boucles de x kilomètres, puis 2 boucles de x kilomètres, puis encore 4 kilomètres. En tout, 19 kilomètres. Écris l'équation et trouve x.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_reduction&display=simple\n\n🔢 Épisode 4 sur 8 de la série Équations d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La boucle d'Awa"
+        ],
+        [
+          "00:24",
+          "Réduire : 2x + 3x = 5x"
+        ],
+        [
+          "00:39",
+          "On résout"
+        ],
+        [
+          "00:53",
+          "x tout seul, c'est 1x"
+        ],
+        [
+          "01:07",
+          "Question 1"
+        ],
+        [
+          "01:29",
+          "Le piège"
+        ],
+        [
+          "01:42",
+          "Les t et les nombres ensemble"
+        ],
+        [
+          "02:05",
+          "Question 2"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "03:10",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution",
+      "tags": [
+        "équation",
+        "résoudre une équation",
+        "réduire",
+        "termes en x",
+        "course",
+        "sport",
+        "entraîneuse",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:07",
+          "question": "Combien vaut 4x − x ?",
+          "choix": [
+            "4",
+            "3x",
+            "4x²"
+          ],
+          "reponse": 1,
+          "explication": "x tout seul, c'est 1x."
+        },
+        {
+          "t": "02:05",
+          "question": "5x − 2x = 9. Que vaut x ?",
+          "choix": [
+            "3",
+            "6",
+            "9"
+          ],
+          "reponse": 0,
+          "explication": "5x − 2x, 3x. Donc 3x = 9, et x = 3."
+        }
+      ],
+      "centres": [
+        "course-trail",
+        "sport"
+      ]
+    },
+    {
+      "id": "4e-equation-resoudre-reduction-short",
+      "notionId": "equation_resolution",
+      "microId": "equation_resoudre_reduction",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-equation-resoudre-reduction",
+      "fichier": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction-short.mp4",
+      "miniature": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction-short.png",
+      "titre": "2 paquets + 3 paquets = 15 cartes : combien par paquet ? 🃏 — 4e #Shorts",
+      "accroche": "2 paquets de cartes, plus 3 paquets, ça fait 15 cartes. On regroupe : 5 paquets. 5x = 15, donc x = 3. Regrouper d'abord, et tout devient facile.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 6x − 2x = 20. Que vaut x ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_reduction&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #équations #4e #collège",
+      "tags": [
+        "paquets de cartes",
+        "regrouper",
+        "réduire",
+        "résoudre une équation",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "3x + 4x = 21. Que vaut x ?",
+          "choix": [
+            "3",
+            "7",
+            "14"
+          ],
+          "reponse": 0,
+          "explication": "3x + 4x, 7x. Donc 7x = 21."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-equation-resoudre-distributivite",
+      "notionId": "equation_resolution",
+      "microId": "equation_resoudre_distributivite",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite.mp4",
+      "miniature": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite.png",
+      "titre": "2(x + 3) = 14 : par où commencer ? — Résoudre avec des parenthèses — épisode 5 · Maths 4e",
+      "accroche": "Nathan est DJ. Il prépare 2 parties identiques : un morceau de x minutes, plus 3 minutes de transition. En tout, 14 minutes. 2(x + 3) = 14 : par où commencer ?\n\nDans cette vidéo :\n• première route : diviser par 2 des deux côtés\n• deuxième route : développer, 2x + 6 = 14\n• deux routes, la même solution : x = 4\n• le piège : le nombre devant la parenthèse multiplie tout ce qu'elle contient\n• avec un moins : 3(x − 1) = 12, x = 5\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 3 parties de a + 6 minutes et 7 minutes d'introduction, 37 minutes en tout : 3(a + 6) + 7 = 37. Que vaut a ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_distributivite&display=simple\n\n🔢 Épisode 5 sur 8 de la série Équations d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La timeline de Nathan"
+        ],
+        [
+          "00:24",
+          "Première route : diviser"
+        ],
+        [
+          "00:37",
+          "Deuxième route : développer, même solution"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:34",
+          "Le piège"
+        ],
+        [
+          "01:45",
+          "Avec un moins"
+        ],
+        [
+          "01:59",
+          "Question 2"
+        ],
+        [
+          "02:26",
+          "À toi de jouer"
+        ],
+        [
+          "02:48",
+          "Correction"
+        ],
+        [
+          "03:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution",
+      "tags": [
+        "équation",
+        "résoudre une équation",
+        "parenthèses",
+        "développer",
+        "distributivité",
+        "musique",
+        "DJ",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Que donne 2(x + 3) quand on développe ?",
+          "choix": [
+            "2x + 3",
+            "2x + 6",
+            "x + 6"
+          ],
+          "reponse": 1,
+          "explication": "Le 2 multiplie x, et il multiplie aussi le 3."
+        },
+        {
+          "t": "01:59",
+          "question": "4(x − 2) = 12. Que vaut x ?",
+          "choix": [
+            "3",
+            "1",
+            "5"
+          ],
+          "reponse": 2,
+          "explication": "On divise par 4 : x − 2 = 3. On ajoute 2 : x = 5."
+        }
+      ],
+      "centres": [
+        "electro-dj",
+        "musique"
+      ]
+    },
+    {
+      "id": "4e-equation-resoudre-distributivite-short",
+      "notionId": "equation_resolution",
+      "microId": "equation_resoudre_distributivite",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-equation-resoudre-distributivite",
+      "fichier": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite-short.mp4",
+      "miniature": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite-short.png",
+      "titre": "Elle divise, il développe : qui trouve le bon x ? 🏁 — 4e #Shorts",
+      "accroche": "Deux élèves, une même équation : 2(x + 3) = 14. Elle divise : x + 3 = 7, x = 4. Lui développe : 2x + 6 = 14, 2x = 8, x = 4. Les deux ont raison ! Mais elle a fini la première.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 5(x + 2) = 35. Que vaut x ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_distributivite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #équations #4e #collège",
+      "tags": [
+        "course",
+        "diviser ou développer",
+        "parenthèses",
+        "résoudre une équation",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "2(x + 5) = 16. Que vaut x ?",
+          "choix": [
+            "3",
+            "8",
+            "5,5"
+          ],
+          "reponse": 0,
+          "explication": "x + 5 = 8, donc x = 3."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-equation-verifier",
+      "notionId": "equation_resolution",
+      "microId": "equation_verifier",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier.mp4",
+      "miniature": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier.png",
+      "titre": "Comment être sûr de sa réponse ? — Vérifier une solution — épisode 6 · Maths 4e",
+      "accroche": "Aïcha est ingénieure dans le spatial. Avant un lancement, chaque calcul est vérifié. Son collègue a résolu 2x + 1 = 9 et trouve x = 4. Est-ce juste ? Le contrôle prend dix secondes.\n\nDans cette vidéo :\n• on remplace x dans l'équation de départ : 2 × 4 + 1, 9\n• le tableau d'essais pour 3x = 9 : seul 3 convient\n• vérifier démasque les erreurs : 5x = 8, donc x = 3 ? Non\n• zéro peut être une solution\n• x des deux côtés : on calcule chaque membre séparément\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 5 est-il solution de 4x − 3 = 2x + 7 ? Et 4 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_verifier&display=simple\n\n🔢 Épisode 6 sur 8 de la série Équations d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le tableau de contrôle d'Aïcha"
+        ],
+        [
+          "00:24",
+          "On remplace x"
+        ],
+        [
+          "00:38",
+          "Le tableau d'essais"
+        ],
+        [
+          "00:56",
+          "Question 1"
+        ],
+        [
+          "01:22",
+          "Vérifier démasque les erreurs"
+        ],
+        [
+          "01:43",
+          "Et zéro ?"
+        ],
+        [
+          "01:56",
+          "Question 2"
+        ],
+        [
+          "02:26",
+          "x des deux côtés"
+        ],
+        [
+          "02:47",
+          "À toi de jouer"
+        ],
+        [
+          "03:01",
+          "Correction"
+        ],
+        [
+          "03:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution",
+      "tags": [
+        "équation",
+        "vérifier une solution",
+        "solution",
+        "remplacer",
+        "espace",
+        "fusée",
+        "ingénieure du spatial",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Le nombre 2 est-il solution de 3x = 9 ?",
+          "choix": [
+            "oui",
+            "non",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "3 × 2, 6. Ce n'est pas 9."
+        },
+        {
+          "t": "01:56",
+          "question": "0 est-il solution de x + 5 = 5 ?",
+          "choix": [
+            "non, 0 n'est jamais solution",
+            "oui",
+            "non, car il faut un nombre positif"
+          ],
+          "reponse": 1,
+          "explication": "0 + 5, 5. L'égalité est vraie."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-equation-verifier-short",
+      "notionId": "equation_resolution",
+      "microId": "equation_verifier",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-equation-verifier",
+      "fichier": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier-short.mp4",
+      "miniature": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier-short.png",
+      "titre": "Détecteur de mensonges : 5x = 8, donc x = 3 ? 🚨 — 4e #Shorts",
+      "accroche": "Détecteur de mensonges ! Quelqu'un affirme : 5x = 8, donc x = 3. On remplace : 5 × 3, 15. Ce n'est pas 8. Mensonge démasqué ! Dix secondes, et on sait.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Quelqu'un affirme que x = 6 est solution de 2x − 5 = 7. Vrai ou faux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_verifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #équations #4e #collège",
+      "tags": [
+        "détecteur de mensonges",
+        "vrai ou faux",
+        "vérifier une solution",
+        "remplacer",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "3x = 0, donc x = 0. Vrai ou faux ?",
+          "choix": [
+            "vrai",
+            "faux",
+            "impossible à savoir"
+          ],
+          "reponse": 0,
+          "explication": "3 × 0, 0. Zéro est une vraie solution."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-equation-defi",
+      "notionId": "equation_resolution",
+      "microId": "equation_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi.mp4",
+      "miniature": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi.png",
+      "titre": "La bonne réponse, et pourtant tort — Défi sur les équations — épisode 7 · Maths 4e",
+      "accroche": "Peut-on trouver la bonne réponse, et avoir tort ? Lina corrige des manuels de maths avant leur impression. Sur son bureau, le calcul de Léo : dans 2x + 3 = 11, x = 4, car 2 + 3 + 4 = 9.\n\nDans cette vidéo :\n• bonne réponse, faux raisonnement : le chemin compte aussi\n• le vrai chemin : 2x + 3 = 11, 2x = 8, x = 4\n• trouver une erreur en remplaçant : a + 2 = 11, donc a = 13 ? Non\n• x des deux côtés : 4x − 3 = 2x + 7, x = 5\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : résous 3(x − 1) = 2x + 4, puis vérifie.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_defi&display=simple\n\n🔢 Épisode 7 sur 8 de la série Équations d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Lina, correctrice de manuels"
+        ],
+        [
+          "00:25",
+          "Bonne réponse, faux raisonnement"
+        ],
+        [
+          "00:40",
+          "Le vrai chemin"
+        ],
+        [
+          "00:55",
+          "Question 1"
+        ],
+        [
+          "01:28",
+          "Autre copie : Lina vérifie"
+        ],
+        [
+          "01:46",
+          "Question 2"
+        ],
+        [
+          "02:20",
+          "x des deux côtés"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "02:58",
+          "Correction"
+        ],
+        [
+          "03:23",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution",
+      "tags": [
+        "équation",
+        "défi",
+        "trouver l'erreur",
+        "x des deux côtés",
+        "raisonnement",
+        "correctrice de manuels",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "Quel calcul prouve que 3 est solution de 2x + 1 = 7 ?",
+          "choix": [
+            "2 + 3 + 1 = 6",
+            "2 × 3 + 1 = 7",
+            "7 − 1 = 6"
+          ],
+          "reponse": 1,
+          "explication": "On remplace x par 3 dans l'équation de départ, et on trouve bien 7."
+        },
+        {
+          "t": "01:46",
+          "question": "Une copie dit : 3x = 12, donc x = 9. Quelle est l'erreur ?",
+          "choix": [
+            "il fallait ajouter 3",
+            "il fallait diviser par 3",
+            "il n'y a pas d'erreur"
+          ],
+          "reponse": 1,
+          "explication": "Le 3 multiplie x : on divise par 3, et x = 4. La copie a soustrait 3."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-equation-defi-short",
+      "notionId": "equation_resolution",
+      "microId": "equation_defi",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-equation-defi",
+      "fichier": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi-short.mp4",
+      "miniature": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi-short.png",
+      "titre": "Léo a la bonne réponse, et pourtant il a tort 🤔 — 4e #Shorts",
+      "accroche": "Léo a la bonne réponse. Et pourtant, il a tort. 2x + 3 = 11. Léo écrit : x = 4, car 2 + 3 + 4 = 9. Mais on voulait 11, pas 9 ! Il est tombé juste par hasard.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Sauras-tu faire mieux que Léo ? 3x + 4 = x + 10. Que vaut x ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #équations #4e #collège",
+      "tags": [
+        "bonne réponse",
+        "raisonnement faux",
+        "trouver l'erreur",
+        "défi",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "a + 2 = 11, donc a = 13. Où est l'erreur ?",
+          "choix": [
+            "il fallait soustraire 2",
+            "il fallait multiplier par 2",
+            "il n'y a pas d'erreur"
+          ],
+          "reponse": 0,
+          "explication": "On soustrait 2, et a = 9."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-equation-probleme",
+      "notionId": "equation_resolution",
+      "microId": "equation_probleme",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme.mp4",
+      "miniature": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme.png",
+      "titre": "4 étapes pour tout problème — Résoudre un problème avec une équation — épisode 8 · Maths 4e",
+      "accroche": "Yanis est garde forestier. Après un incendie, il replante une parcelle : 58 jeunes arbres, 4 rangées égales, et il lui reste 6 arbres. Combien d'arbres dans chaque rangée ?\n\nDans cette vidéo :\n• les 4 étapes : nommer, traduire, résoudre, répondre\n• 4x + 6 = 58, x = 13 : on vérifie, puis on répond par une phrase\n• l'enclos rectangulaire : la longueur s'écrit avec x, 6x = 30\n• quelle pépinière choisir ? 3x + 20 = 4x + 5, x = 15\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Yanis et Inès posent 70 nichoirs dans la forêt. Inès en pose 10 de plus que Yanis. Combien chacun en pose-t-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_probleme&display=simple\n\n🔢 Épisode 8 sur 8 de la série Équations d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Yanis, garde forestier"
+        ],
+        [
+          "00:24",
+          "Étape 1 : nommer"
+        ],
+        [
+          "00:34",
+          "Étape 2 : traduire"
+        ],
+        [
+          "00:49",
+          "Étape 3 : résoudre"
+        ],
+        [
+          "01:02",
+          "Étape 4 : vérifier et répondre"
+        ],
+        [
+          "01:23",
+          "Question 1"
+        ],
+        [
+          "02:02",
+          "L'enclos rectangulaire"
+        ],
+        [
+          "02:34",
+          "Question 2"
+        ],
+        [
+          "03:11",
+          "Quelle pépinière choisir ?"
+        ],
+        [
+          "03:51",
+          "À toi de jouer"
+        ],
+        [
+          "04:07",
+          "Correction"
+        ],
+        [
+          "04:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/equation-resolution",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/equation-resolution",
+      "tags": [
+        "équation",
+        "mettre un problème en équation",
+        "résoudre un problème",
+        "4 étapes",
+        "forêt",
+        "nature",
+        "garde forestier",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Yanis achète 3 sacs de graines à x euros le sac. Il paie 5 euros de livraison, et 41 euros en tout. Quelle équation ?",
+          "choix": [
+            "3x + 5 = 41",
+            "3(x + 5) = 41",
+            "x + 3 + 5 = 41"
+          ],
+          "reponse": 0,
+          "explication": "3 sacs, c'est 3x, et la livraison ne se paie qu'une fois."
+        },
+        {
+          "t": "02:34",
+          "question": "Un autre enclos a une largeur x et une longueur 3x. Son tour mesure 40 mètres. Quelle équation ?",
+          "choix": [
+            "x + 3x = 40",
+            "8x = 40",
+            "3x = 40"
+          ],
+          "reponse": 1,
+          "explication": "Le tour passe par les 4 côtés : x + 3x + x + 3x, 8x."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-equation-probleme-short",
+      "notionId": "equation_resolution",
+      "microId": "equation_probleme",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-equation-probleme",
+      "fichier": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme-short.mp4",
+      "miniature": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme-short.png",
+      "titre": "Je devine ton nombre : tour de magie ou équation ? 🎩 — 4e #Shorts",
+      "accroche": "Pense à un nombre. Multiplie-le par 3. Ajoute 2. Tu trouves 17 ? Alors tu avais pensé à 5 ! Ce n'est pas de la magie : ton nombre, c'est x. 3x + 2 = 17, 3x = 15, x = 5.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : À toi de deviner le mien. Je le multiplie par 4, j'ajoute 5, et je trouve 29. Quel est mon nombre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #équations #4e #collège",
+      "tags": [
+        "tour de magie",
+        "deviner un nombre",
+        "mettre en équation",
+        "problème",
+        "équations",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Une amie double son nombre, retire 3, et trouve 11. Quel est son nombre ?",
+          "choix": [
+            "4",
+            "7",
+            "14"
+          ],
+          "reponse": 1,
+          "explication": "2 × 7, 14. Moins 3, 11."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

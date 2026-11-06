@@ -543,6 +543,60 @@
   "short": false,
   "youtube": null
  },
+ "4e-equation-defi": {
+  "fichier": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi.mp4",
+  "poster": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi.png",
+  "vignette": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi.vignette.webp",
+  "titre": "La bonne réponse, et pourtant tort — Défi sur les équations — épisode 7 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_defi&display=simple"
+ },
+ "4e-equation-defi-short": {
+  "fichier": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi-short.mp4",
+  "poster": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi-short.png",
+  "vignette": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi-short.vignette.webp",
+  "titre": "Léo a la bonne réponse, et pourtant il a tort 🤔 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_defi&display=simple"
+ },
+ "4e-equation-probleme": {
+  "fichier": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme.mp4",
+  "poster": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme.png",
+  "vignette": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme.vignette.webp",
+  "titre": "4 étapes pour tout problème — Résoudre un problème avec une équation — épisode 8 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_probleme&display=simple"
+ },
+ "4e-equation-probleme-short": {
+  "fichier": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme-short.mp4",
+  "poster": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme-short.png",
+  "vignette": "4e/maths/equations/08-probleme/eleveai-maths-4e-equation-probleme-short.vignette.webp",
+  "titre": "Je devine ton nombre : tour de magie ou équation ? 🎩 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_probleme&display=simple"
+ },
+ "4e-equation-reconnaitre": {
+  "fichier": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre.mp4",
+  "poster": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre.png",
+  "vignette": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre.vignette.webp",
+  "titre": "Équation ou simple calcul ? — Reconnaître une équation — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_reconnaitre&display=simple"
+ },
+ "4e-equation-reconnaitre-short": {
+  "fichier": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre-short.mp4",
+  "poster": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre-short.png",
+  "vignette": "4e/maths/equations/01-reconnaitre/eleveai-maths-4e-equation-reconnaitre-short.vignette.webp",
+  "titre": "Équation ou pas ? 3 secondes à chaque fois ⏱️ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_reconnaitre&display=simple"
+ },
  "4e-equation-resolution": {
   "fichier": "4e/maths/paysage/fr/equation-resolution/eleveai-maths-4e-equation-resolution.mp4",
   "poster": "4e/maths/paysage/fr/equation-resolution/eleveai-maths-4e-equation-resolution.png",
@@ -551,6 +605,96 @@
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&display=simple"
+ },
+ "4e-equation-resoudre-distributivite": {
+  "fichier": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite.mp4",
+  "poster": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite.png",
+  "vignette": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite.vignette.webp",
+  "titre": "2(x + 3) = 14 : par où commencer ? — Résoudre avec des parenthèses — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_distributivite&display=simple"
+ },
+ "4e-equation-resoudre-distributivite-short": {
+  "fichier": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite-short.mp4",
+  "poster": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite-short.png",
+  "vignette": "4e/maths/equations/05-resoudre-distributivite/eleveai-maths-4e-equation-resoudre-distributivite-short.vignette.webp",
+  "titre": "Elle divise, il développe : qui trouve le bon x ? 🏁 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_distributivite&display=simple"
+ },
+ "4e-equation-resoudre-reduction": {
+  "fichier": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction.mp4",
+  "poster": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction.png",
+  "vignette": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction.vignette.webp",
+  "titre": "Quand x apparaît deux fois — Résoudre en réduisant — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_reduction&display=simple"
+ },
+ "4e-equation-resoudre-reduction-short": {
+  "fichier": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction-short.mp4",
+  "poster": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction-short.png",
+  "vignette": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction-short.vignette.webp",
+  "titre": "2 paquets + 3 paquets = 15 cartes : combien par paquet ? 🃏 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_reduction&display=simple"
+ },
+ "4e-equation-resoudre-simple": {
+  "fichier": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple.mp4",
+  "poster": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple.png",
+  "vignette": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple.vignette.webp",
+  "titre": "Retrouver x sans deviner — Résoudre une équation simple — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_simple&display=simple"
+ },
+ "4e-equation-resoudre-simple-short": {
+  "fichier": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple-short.mp4",
+  "poster": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple-short.png",
+  "vignette": "4e/maths/equations/03-resoudre-simple/eleveai-maths-4e-equation-resoudre-simple-short.vignette.webp",
+  "titre": "Le sac mystère : combien de billes ? ⚖️ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_simple&display=simple"
+ },
+ "4e-equation-traduire": {
+  "fichier": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire.mp4",
+  "poster": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire.png",
+  "vignette": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire.vignette.webp",
+  "titre": "Une phrase devient une équation — Traduire par une équation — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_traduire&display=simple"
+ },
+ "4e-equation-traduire-short": {
+  "fichier": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire-short.mp4",
+  "poster": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire-short.png",
+  "vignette": "4e/maths/equations/02-traduire/eleveai-maths-4e-equation-traduire-short.vignette.webp",
+  "titre": "Tu parles français ? Tu sais écrire une équation ✍️ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_traduire&display=simple"
+ },
+ "4e-equation-verifier": {
+  "fichier": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier.mp4",
+  "poster": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier.png",
+  "vignette": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier.vignette.webp",
+  "titre": "Comment être sûr de sa réponse ? — Vérifier une solution — épisode 6 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_verifier&display=simple"
+ },
+ "4e-equation-verifier-short": {
+  "fichier": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier-short.mp4",
+  "poster": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier-short.png",
+  "vignette": "4e/maths/equations/06-verifier/eleveai-maths-4e-equation-verifier-short.vignette.webp",
+  "titre": "Détecteur de mensonges : 5x = 8, donc x = 3 ? 🚨 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_verifier&display=simple"
  },
  "4e-expression-comprendre": {
   "fichier": "4e/maths/expression-litterale/01-comprendre/eleveai-maths-4e-expression-comprendre.mp4",
@@ -2836,6 +2980,114 @@
   "short": true,
   "youtube": "ai3qedWj4nM",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_longueur&microId=aire_longueur_defi&display=simple"
+ },
+ "6e-angle-comparer": {
+  "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.mp4",
+  "poster": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.png",
+  "vignette": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.vignette.webp",
+  "titre": "Le plus grand angle a-t-il les plus longs côtés ? — Comparer des angles — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_comparer&display=simple"
+ },
+ "6e-angle-comparer-short": {
+  "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.mp4",
+  "poster": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.png",
+  "vignette": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.vignette.webp",
+  "titre": "Une loupe grossit tout. Même les angles ? 🔍 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_comparer&display=simple"
+ },
+ "6e-angle-defi": {
+  "fichier": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.mp4",
+  "poster": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.png",
+  "vignette": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.vignette.webp",
+  "titre": "Peut-on trouver un angle sans rapporteur ? — Défis sur les angles — épisode 6 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_defi&display=simple"
+ },
+ "6e-angle-defi-short": {
+  "fichier": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.mp4",
+  "poster": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.png",
+  "vignette": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.vignette.webp",
+  "titre": "Quel angle entre les pales d'une éolienne ? 🌬️ — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_defi&display=simple"
+ },
+ "6e-angle-droit": {
+  "fichier": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.mp4",
+  "poster": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.png",
+  "vignette": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.vignette.webp",
+  "titre": "Comment savoir si un coin est vraiment droit ? — L'angle droit — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_droit&display=simple"
+ },
+ "6e-angle-droit-short": {
+  "fichier": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.mp4",
+  "poster": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.png",
+  "vignette": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.vignette.webp",
+  "titre": "Pas d'équerre ? Déchire une feuille ! 📄 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_droit&display=simple"
+ },
+ "6e-angle-mesurer": {
+  "fichier": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.mp4",
+  "poster": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.png",
+  "vignette": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.vignette.webp",
+  "titre": "Comment lire un rapporteur sans se tromper ? — Mesurer un angle — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_mesurer&display=simple"
+ },
+ "6e-angle-mesurer-short": {
+  "fichier": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.mp4",
+  "poster": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.png",
+  "vignette": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.vignette.webp",
+  "titre": "Il y a un rapporteur caché dans une horloge ! 🕒 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_mesurer&display=simple"
+ },
+ "6e-angle-reconnaitre": {
+  "fichier": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.mp4",
+  "poster": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.png",
+  "vignette": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.vignette.webp",
+  "titre": "Où se cache un angle ? — Reconnaître un angle — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_reconnaitre&display=simple"
+ },
+ "6e-angle-reconnaitre-short": {
+  "fichier": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.mp4",
+  "poster": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.png",
+  "vignette": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.vignette.webp",
+  "titre": "Des angles cachés dans l'alphabet 🔤 — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_reconnaitre&display=simple"
+ },
+ "6e-angle-tracer": {
+  "fichier": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.mp4",
+  "poster": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.png",
+  "vignette": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.vignette.webp",
+  "titre": "Quels sont les quatre gestes ? — Tracer un angle — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple"
+ },
+ "6e-angle-tracer-short": {
+  "fichier": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.mp4",
+  "poster": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.png",
+  "vignette": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.vignette.webp",
+  "titre": "Avec un seul angle, on dessine un flocon ! ❄️ — 6e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple"
  },
  "6e-decimal-calcul": {
   "fichier": "6e/maths/paysage/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul.mp4",
@@ -12452,113 +12704,5 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
- },
- "6e-angle-comparer": {
-  "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.mp4",
-  "poster": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.png",
-  "vignette": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.vignette.webp",
-  "titre": "Le plus grand angle a-t-il les plus longs côtés ? — Comparer des angles — épisode 3 · Maths 6e",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_comparer&display=simple"
- },
- "6e-angle-comparer-short": {
-  "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.mp4",
-  "poster": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.png",
-  "vignette": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer-short.vignette.webp",
-  "titre": "Une loupe grossit tout. Même les angles ? 🔍 — 6e #Shorts",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_comparer&display=simple"
- },
- "6e-angle-defi": {
-  "fichier": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.mp4",
-  "poster": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.png",
-  "vignette": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi.vignette.webp",
-  "titre": "Peut-on trouver un angle sans rapporteur ? — Défis sur les angles — épisode 6 · Maths 6e",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_defi&display=simple"
- },
- "6e-angle-defi-short": {
-  "fichier": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.mp4",
-  "poster": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.png",
-  "vignette": "6e/maths/angles/06-defi/eleveai-maths-6e-angle-defi-short.vignette.webp",
-  "titre": "Quel angle entre les pales d'une éolienne ? 🌬️ — 6e #Shorts",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_defi&display=simple"
- },
- "6e-angle-droit": {
-  "fichier": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.mp4",
-  "poster": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.png",
-  "vignette": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit.vignette.webp",
-  "titre": "Comment savoir si un coin est vraiment droit ? — L'angle droit — épisode 2 · Maths 6e",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_droit&display=simple"
- },
- "6e-angle-droit-short": {
-  "fichier": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.mp4",
-  "poster": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.png",
-  "vignette": "6e/maths/angles/02-droit/eleveai-maths-6e-angle-droit-short.vignette.webp",
-  "titre": "Pas d'équerre ? Déchire une feuille ! 📄 — 6e #Shorts",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_droit&display=simple"
- },
- "6e-angle-mesurer": {
-  "fichier": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.mp4",
-  "poster": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.png",
-  "vignette": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer.vignette.webp",
-  "titre": "Comment lire un rapporteur sans se tromper ? — Mesurer un angle — épisode 4 · Maths 6e",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_mesurer&display=simple"
- },
- "6e-angle-mesurer-short": {
-  "fichier": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.mp4",
-  "poster": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.png",
-  "vignette": "6e/maths/angles/04-mesurer/eleveai-maths-6e-angle-mesurer-short.vignette.webp",
-  "titre": "Il y a un rapporteur caché dans une horloge ! 🕒 — 6e #Shorts",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_mesurer&display=simple"
- },
- "6e-angle-reconnaitre": {
-  "fichier": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.mp4",
-  "poster": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.png",
-  "vignette": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre.vignette.webp",
-  "titre": "Où se cache un angle ? — Reconnaître un angle — épisode 1 · Maths 6e",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_reconnaitre&display=simple"
- },
- "6e-angle-reconnaitre-short": {
-  "fichier": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.mp4",
-  "poster": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.png",
-  "vignette": "6e/maths/angles/01-reconnaitre/eleveai-maths-6e-angle-reconnaitre-short.vignette.webp",
-  "titre": "Des angles cachés dans l'alphabet 🔤 — 6e #Shorts",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_reconnaitre&display=simple"
- },
- "6e-angle-tracer": {
-  "fichier": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.mp4",
-  "poster": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.png",
-  "vignette": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer.vignette.webp",
-  "titre": "Quels sont les quatre gestes ? — Tracer un angle — épisode 5 · Maths 6e",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple"
- },
- "6e-angle-tracer-short": {
-  "fichier": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.mp4",
-  "poster": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.png",
-  "vignette": "6e/maths/angles/05-tracer/eleveai-maths-6e-angle-tracer-short.vignette.webp",
-  "titre": "Avec un seul angle, on dessine un flocon ! ❄️ — 6e #Shorts",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple"
  }
 }

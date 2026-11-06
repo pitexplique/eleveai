@@ -18,6 +18,12 @@ import { useEleve } from "@/context/EleveContext";
 import { signalerActivite } from "@/lib/activite";
 
 const COUPE_FIN = 3.6; // secondes retirées à la fin : « Et abonne-toi ! »
+// La fin du 05/11 (manim/REGLES.md) est plus longue : ces vidéos s'arrêtent juste
+// après « Entraîne-toi sur éleveai point f r. » (mesuré dans le WAV de fin et le mp4).
+const COUPE_PAR_VIDEO: Record<string, number> = {
+  "4e-equation-probleme": 8.6,
+  "4e-equation-probleme-short": 4.7,
+};
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {
   videoId: string;
@@ -48,7 +54,7 @@ export default function LecteurVideo({ videoId, children, suite, retour, ...prop
   const surveiller = () => {
     const v = ref.current;
     if (!v || fini || !Number.isFinite(v.duration) || v.duration < 20) return;
-    if (v.currentTime >= v.duration - COUPE_FIN) {
+    if (v.currentTime >= v.duration - (COUPE_PAR_VIDEO[videoId] ?? COUPE_FIN)) {
       v.pause();
       setFini(true);
       if (!finSignalee.current) {
