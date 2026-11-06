@@ -10,6 +10,15 @@ import { CORRECTEURS as demiPlansSystemes } from "./demi-plans-systemes";
 import { CORRECTEURS as systemesDeterminant } from "./systemes-determinant";
 import { CORRECTEURS as courbesAssociees } from "./courbes-associees";
 import { CORRECTEURS as polynomesDivision } from "./polynomes-division";
+import { CORRECTEURS as projectionDroite } from "./projection-droite";
+import { CORRECTEURS as espacePosition } from "./espace-position";
+import { CORRECTEURS as composeesTransformations } from "./composees-transformations";
+import { CORRECTEURS as encadrementsOperations } from "./encadrements-operations";
+import { CORRECTEURS as racineDenominateur } from "./racine-denominateur";
+import { CORRECTEURS as valeurAbsolueEquations } from "./valeur-absolue-equations";
+import { CORRECTEURS as homographiquePartieEntiere } from "./homographique-partie-entiere";
+import { CORRECTEURS as fonctionsParIntervalles } from "./fonctions-par-intervalles";
+import { CORRECTEURS as droitesPerpendiculaires } from "./droites-perpendiculaires";
 
 export const CORRECTEURS_SECONDE: CorrecteursMaths = {
   ...statistiquesClasses,
@@ -21,4 +30,13 @@ export const CORRECTEURS_SECONDE: CorrecteursMaths = {
   ...systemesDeterminant,
   ...courbesAssociees,
   ...polynomesDivision,
+  ...projectionDroite,
+  ...espacePosition,
+  ...composeesTransformations,
+  ...encadrementsOperations,
+  ...racineDenominateur,
+  ...valeurAbsolueEquations,
+  ...homographiquePartieEntiere,
+  ...fonctionsParIntervalles,
+  ...droitesPerpendiculaires,
 };

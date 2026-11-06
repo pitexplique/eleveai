@@ -514,4 +514,25 @@ export const notions: NotionSource[] = [
     prerequis: ["triangle_figure", "pythagore_theoreme"],
     levels: [1, 2, 3],
   },
+  {
+    id: "droite_milieux",
+    label: "Théorème des milieux et sa réciproque",
+    boId: "BO4G1",
+    prerequis: ["triangle_figure"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "tangente_cercle",
+    label: "Tangente à un cercle, position d’une droite et d’un cercle",
+    boId: "BO4G1",
+    prerequis: ["triangle_figure", "pythagore_theoreme"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "ordre_inequations",
+    label: "Règles de l’ordre, inéquations",
+    boId: "BO4A1",
+    prerequis: ["equation_resolution"],
+    levels: [1, 2, 3],
+  },
 ];

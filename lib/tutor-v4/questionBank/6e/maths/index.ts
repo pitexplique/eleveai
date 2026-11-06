@@ -1,3 +1,4 @@
+import { tenir375 } from "@/lib/tutor-v4/questionBank/tenir-375";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { entiersBank } from "./entiers.bank";
@@ -38,6 +39,7 @@ import { programmeTrous6eBank } from "./programme-trous.bank";
 import { decimalDiviserParDecimalBank } from "./decimal-diviser-par-decimal.bank";
 
 import { algorithmiqueBank } from "./algorithmique.bank";
+import { patronPaveBank } from "./patron-pave.bank";
 
 export const maths6eQuestionBank: TutorBankItemV4[] = [
   // =========================
@@ -82,6 +84,7 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...symetrieBank,
   ...volumesBank,
   ...visionEspaceBank,
+  ...tenir375(patronPaveBank),
 
   // =========================
   // ALGORITHMIQUE

@@ -968,6 +968,54 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "trigo_formules_equations",
     prerequis: ["trig_valeurs"],
   },
+  {
+    id: "trig_equation_formes",
+    label: "Équations cos u = cos v, sin u = sin v, tan u = tan v, formes qui s'y ramènent, inéquations avec tan",
+    notionId: "trigo_formules_equations",
+    prerequis: ["trig_equation_generale"],
+  },
+
+  /* Angles orientés : hors programme français (lib/tutor-v4/micros-masquees.ts). */
+  {
+    id: "angle_oriente_mesure_principale",
+    label: "Angle orienté : mesure principale et congruences modulo 2π",
+    notionId: "angles_orientes",
+    prerequis: ["trig_enroulement"],
+  },
+  {
+    id: "angle_oriente_chasles",
+    label: "Angles orientés de vecteurs : relation de Chasles, opposé, lecture sur une figure",
+    notionId: "angles_orientes",
+    prerequis: ["angle_oriente_mesure_principale"],
+  },
+
+  /* Tangente d'un réel : hors programme français de première (lib/tutor-v4/micros-masquees.ts). */
+  {
+    id: "tan_reel",
+    label: "Tangente d'un réel : valeurs remarquables, signe, ensemble de définition",
+    notionId: "tangente_reel",
+    prerequis: ["trig_valeurs"],
+  },
+  {
+    id: "tan_identite_derivee",
+    label: "1 + tan² x = 1 ÷ cos² x, retrouver cos à partir de tan, dérivée et variations de tan",
+    notionId: "tangente_reel",
+    prerequis: ["tan_reel"],
+  },
+
+  /* Barycentre : hors programme français (lib/tutor-v4/micros-masquees.ts). */
+  {
+    id: "barycentre_deux_points",
+    label: "Barycentre de deux points : définition, existence, position, réduction de la somme de vecteurs",
+    notionId: "barycentre",
+    prerequis: [],
+  },
+  {
+    id: "barycentre_coordonnees",
+    label: "Barycentre de 3 ou 4 points : coordonnées, associativité, centre d'inertie d'une plaque",
+    notionId: "barycentre",
+    prerequis: ["barycentre_deux_points"],
+  },
 
   /* ===================== TRIANGLE QUELCONQUE (hors programme français) ===================== */
   {

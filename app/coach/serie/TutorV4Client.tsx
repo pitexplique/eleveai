@@ -27,7 +27,6 @@ type EleveSession = {
 
 import {
   TriangleCanvas,
-  ConstructionCanvas,
   QuadrilatereCanvas,
   FigureLibreCanvas,
   DroiteGradueeCanvas,
@@ -39,8 +38,10 @@ import {
   Repere3dCanvas,
   AngleCanvas,
   DeuxAnglesCanvas,
+  ConstructionCanvas,
   PatronsCubeCanvas,
   EnsemblesCanvas,
+  PatronSolideCanvas,
   ArbreTriCanvas,
   FonctionGraphiqueCanvas,
   FonctionTableauCanvas,
@@ -261,12 +262,23 @@ function scoreOn20(bonnes: number, questions: number) {
   return (Math.round((bonnes / questions) * 200) / 10).toString().replace(".", ",");
 }
 
+/** La bonne réponse à montrer : « 90° ou 90 ou 90 ° ou 90 degrés » est une seule réponse, écrite
+ *  de plusieurs façons que le correcteur accepte. Deux vraies réponses restent toutes les deux. */
+function reponseAffichee(expected: string[]): string {
+  const vues = new Set<string>();
+  return expected
+    .filter((e) => {
+      const cle = String(e).replace(/\s*(°|degrés?)\s*$/, "").trim();
+      if (vues.has(cle)) return false;
+      vues.add(cle);
+      return true;
+    })
+    .join(" ou ");
+}
+
 function renderCanvas(canvas?: CanvasFigure | null) {
   if (!canvas) return null;
 
-  if (canvas.kind === "construction") {
-    return <ConstructionCanvas figure={canvas} />;
-  }
   if (canvas.kind === "triangle") {
     return <TriangleCanvas figure={canvas} />;
   }
@@ -313,6 +325,14 @@ function renderCanvas(canvas?: CanvasFigure | null) {
 
   if (canvas.kind === "deux_angles") {
     return <DeuxAnglesCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "construction") {
+    return <ConstructionCanvas figure={canvas} />;
+  }
+
+  if (canvas.kind === "patron_solide") {
+    return <PatronSolideCanvas figure={canvas} />;
   }
 
   if (canvas.kind === "ensembles") {
@@ -808,7 +828,7 @@ function forceScrollTopOnArrival() {
   // Lit automatiquement la correction quand l'écran « mauvaise réponse » s'ouvre.
   useEffect(() => {
     if (!autoRead || !wrongAnswerPanelOpen || !currentQuestion) return;
-    const expected = currentQuestion.expected?.join(" ou ") ?? "";
+    const expected = reponseAffichee(currentQuestion.expected ?? []);
     const { brief } = extractConclusion(explanationText);
     // Lu par la voix française : les formules passent en mots.
     speakText(textePourLaVoix(`Pas tout à fait. La bonne réponse était : ${expected}. ${brief}`));
@@ -2780,7 +2800,7 @@ function CoachErrorHelp({
   const canAsk = Boolean(coach.codeEtablissement && coach.codeUtilisateur);
   const expectedAnswer =
     question.expected && question.expected.length > 0
-      ? question.expected.join(" ou ")
+      ? reponseAffichee(question.expected)
       : "";
 
   async function ask(studentQuestion: string, showUser: boolean) {
@@ -2968,7 +2988,7 @@ function WrongAnswerPanel({
 
   const correctAnswer =
     question.expected && question.expected.length > 0
-      ? question.expected.join(" ou ")
+      ? reponseAffichee(question.expected)
       : "—";
 
   const { brief, full, hasMore } = extractConclusion(explanation);
@@ -3036,7 +3056,14 @@ function WrongAnswerPanel({
         <div className="mt-4 text-base font-medium text-slate-500">
           La bonne réponse était :
         </div>
-        <div className="mt-2 inline-flex min-w-[88px] items-center justify-center rounded-2xl border-2 border-lime-400 bg-white px-5 py-2 text-3xl font-bold text-lime-700 shadow-sm">
+        {/* ⚠️ UN MOT LONG OU UNE FORMULE NE DOIT PAS ÉLARGIR LA PAGE (06/11/2026) : capture à 375 px,
+            « Perpendiculaires » en text-3xl poussait la page jusqu'à 459 px. Le corps suit la longueur,
+            et le cadre ne dépasse jamais sa colonne. */}
+        <div
+          className={`mt-2 inline-flex min-w-[88px] max-w-full items-center justify-center overflow-x-auto rounded-2xl border-2 border-lime-400 bg-white px-5 py-2 font-bold text-lime-700 shadow-sm [overflow-wrap:anywhere] ${
+            correctAnswer.length > 24 ? "text-lg" : correctAnswer.length > 12 ? "text-2xl" : "text-3xl"
+          }`}
+        >
           <MarkdownMath inline>{correctAnswer}</MarkdownMath>
         </div>
 

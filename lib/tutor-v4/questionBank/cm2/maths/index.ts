@@ -1,3 +1,4 @@
+import { tenir375 } from "@/lib/tutor-v4/questionBank/tenir-375";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 
@@ -54,6 +55,8 @@ import { problemesRechercheBank } from "./problemes-recherche.bank";
 import { operationsDecimalesBank } from "./operations-decimales.bank";
 import { calculMentalDecimalBank } from "./calcul-mental-decimal.bank";
 import { decimauxFractionsDecimalesBank } from "./decimaux-fractions-decimales.bank";
+import { commercePrixBank } from "./commerce-prix.bank";
+import { calculRapideBank } from "./calcul-rapide.bank";
 
 // Zéro clavier en CM2 : short numériques -> QCM, et open « Explique… » retirées
 // (cf. applyMathsKeyboardFree). Appliqué à TOUTES les banques maths CM2.
@@ -103,6 +106,8 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...applyMathsKeyboardFree(operationsDecimalesBank),
   ...applyMathsKeyboardFree(calculMentalDecimalBank),
   ...applyMathsKeyboardFree(decimauxFractionsDecimalesBank),
+  ...applyMathsKeyboardFree(tenir375(calculRapideBank)),
+  ...applyMathsKeyboardFree(tenir375(commercePrixBank)),
 ];
 
 export function getMathCm2QuestionBank(args?: {

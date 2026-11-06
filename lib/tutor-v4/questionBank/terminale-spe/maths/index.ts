@@ -1,11 +1,18 @@
 // lib/tutor-v4/question-banks/maths/terminale-spe/index.ts
 
+import { tenir375 } from "@/lib/tutor-v4/questionBank/tenir-375";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { fonctionReciproqueBank } from "./fonction-reciproque.bank";
 import { exposantsFractionnairesBank } from "./exposants-fractionnaires.bank";
 import { logExpBaseABank } from "./log-exp-base-a.bank";
 import { composeeEcrireBank } from "./composee-ecrire.bank";
 import { systemes3x3Bank } from "./systemes-3x3.bank";
+import { nombresComplexesBank } from "./nombres-complexes.bank";
+import { nombresComplexesExpBank } from "./nombres-complexes-exp.bank";
+import { nombresComplexesGeometrieBank } from "./nombres-complexes-geometrie.bank";
+import { asymptotesSymetriesBank } from "./asymptotes-symetries.bank";
+import { gaucheDroiteApproximationBank } from "./gauche-droite-approximation.bank";
+import { equadiffSecondOrdreBank } from "./equadiff-second-ordre.bank";
 
 import { suitesBank } from "./suites.bank";
 import { limitesSuitesBank } from "./limites-suites.bank";
@@ -67,6 +74,12 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...logExpBaseABank,
   ...composeeEcrireBank,
   ...systemes3x3Bank,
+  ...tenir375(nombresComplexesBank),
+  ...tenir375(nombresComplexesExpBank),
+  ...tenir375(nombresComplexesGeometrieBank),
+  ...tenir375(asymptotesSymetriesBank),
+  ...tenir375(gaucheDroiteApproximationBank),
+  ...tenir375(equadiffSecondOrdreBank),
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {

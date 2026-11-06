@@ -290,6 +290,13 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["vision_reconnaitre"],
   },
   {
+    // 06/11/2026 : BO cycle 4, « représentations de ces solides (…) patrons ». Reste visible.
+    id: "patron_pyramide",
+    label: "Construire le patron d'une pyramide régulière",
+    notionId: "vision_espace",
+    prerequis: ["vision_representation"],
+  },
+  {
     id: "vision_section",
     label: "Reconnaître la section plane d'un solide",
     notionId: "vision_espace",
@@ -1730,4 +1737,10 @@ export const microSkills: MicroSkillSource[] = [
   { id: "secteur_aire", label: "Calculer l’aire d’un secteur de disque par proportionnalité à l’angle", notionId: "arcs_secteurs", prerequis: ["arc_longueur"] },
   { id: "distance_point_droite", label: "Trouver la distance d’un point à une droite", notionId: "distance_droite", prerequis: [] },
   { id: "distance_paralleles", label: "Trouver la distance entre deux droites parallèles", notionId: "distance_droite", prerequis: ["distance_point_droite"] },
+  { id: "milieux_droite", label: "Utiliser le théorème des milieux : la droite parallèle, la longueur moitié", notionId: "droite_milieux", prerequis: [] },
+  { id: "milieux_reciproque", label: "Utiliser la réciproque : un milieu, une parallèle, l’autre milieu", notionId: "droite_milieux", prerequis: ["milieux_droite"] },
+  { id: "tangente_rayon", label: "Utiliser la tangente à un cercle : perpendiculaire au rayon, longueur par Pythagore", notionId: "tangente_cercle", prerequis: [] },
+  { id: "cercle_droite_position", label: "Trouver la position d’une droite et d’un cercle : comparer la distance et le rayon", notionId: "tangente_cercle", prerequis: ["tangente_rayon"] },
+  { id: "ordre_regles", label: "Utiliser les règles de l’ordre : ajouter, multiplier par un positif ou un négatif", notionId: "ordre_inequations", prerequis: [] },
+  { id: "inequation_college", label: "Résoudre une inéquation simple et décrire ses solutions par une inégalité", notionId: "ordre_inequations", prerequis: ["ordre_regles"] },
 ];

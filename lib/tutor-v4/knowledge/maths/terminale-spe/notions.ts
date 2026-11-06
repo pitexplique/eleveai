@@ -227,8 +227,37 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
   {
+    id: "asymptotes_symetries_courbes",
+    label: "Asymptote oblique, branches infinies, symétries d'une courbe",
+    boId: "BOTSA2",
+    prerequis: ["limite_fonction"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "gauche_droite_approximation",
+    label: "À gauche et à droite, demi-tangentes, approximation affine",
+    boId: "BOTSA2",
+    prerequis: ["limite_fonction", "continuite_tvi"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "equations_differentielles_second_ordre",
+    label: "Équations différentielles du second ordre",
+    boId: "BOTSA3",
+    prerequis: ["equation_differentielle"],
+    levels: [1, 2, 3],
+  },
+  {
     id: "systemes_3x3",
     label: "Systèmes 3 × 3 : pivot de Gauss",
+    boId: "BOTSAG1",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
+  /* Maths expertes en France, hors tronc commun : masquée (lib/tutor-v4/micros-masquees.ts). */
+  {
+    id: "nombres_complexes",
+    label: "Nombres complexes",
     boId: "BOTSAG1",
     prerequis: [],
     levels: [1, 2, 3],

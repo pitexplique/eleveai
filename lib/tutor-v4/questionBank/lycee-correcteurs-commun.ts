@@ -10,6 +10,8 @@ export type Fn = (env: Env) => number;
 
 export function compiler(src: string): Fn {
   const s = src
+    // Mise en page à 375 px (`tenir-375.ts`, équations différentielles) : rien de mathématique.
+    .replace(/\\nobreak|\\footnotesize|\\scriptsize|\\begin\{aligned\}|\\end\{aligned\}|&|\\\\/g, "")
     .replace(/\\mathrm\{e\}/g, "e")
     .replace(/\\left|\\right|\\,|\\!|\\;|\\displaystyle/g, "")
     .replace(/\{,\}/g, ",")
@@ -109,7 +111,7 @@ export function compiler(src: string): Fn {
     }
     if (c === "{") return groupe();
     if (c === "\\") {
-      const m = s.slice(i).match(/^\\(?:pi|ln|sin|cos|sqrt|frac)/);
+      const m = s.slice(i).match(/^\\(?:pi|ln|sin|cos|tan|sqrt|frac)/);
       if (!m) throw new Error(`commande illisible dans ${src}`);
       i += m[0].length;
       switch (m[0]) {
@@ -121,6 +123,8 @@ export function compiler(src: string): Fn {
           return fonction(Math.sin);
         case "\\cos":
           return fonction(Math.cos);
+        case "\\tan":
+          return fonction(Math.tan);
         case "\\sqrt": {
           const g = groupe();
           return (e) => Math.sqrt(g(e));

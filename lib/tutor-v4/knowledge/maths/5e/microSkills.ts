@@ -535,6 +535,13 @@ export const microSkills: MicroSkillSource[] = [
 ========================= */
 
 {
+  // 06/11/2026 : BO cycle 4, « représentations de ces solides (…) patrons ». Reste visible.
+  id: "patron_prisme_cylindre",
+  label: "Construire le patron d'un prisme droit ou d'un cylindre",
+  notionId: "volume_solide",
+  prerequis: [],
+},
+{
   id: "volume_comprendre",
   label: "Comprendre ce qu’est un volume",
   notionId: "volume_solide",
@@ -636,6 +643,13 @@ export const microSkills: MicroSkillSource[] = [
   label: "Calculer et interpréter une moyenne simple",
   notionId: "stat_statistique",
   prerequis: ["stat_effectif_frequence"],
+},
+{
+  // 06/11/2026 : Québec, Maroc, Belgique. Le mot n'est pas au programme français : masquée.
+  id: "stat_mode",
+  label: "Le mode d'une série : la valeur de plus grand effectif",
+  notionId: "stat_statistique",
+  prerequis: ["stat_lire_tableau", "stat_effectif_frequence"],
 },
 {
   id: "stat_defi",
@@ -750,6 +764,10 @@ export const microSkills: MicroSkillSource[] = [
   notionId: "algo_construire",
   prerequis: ["algo_boucle", "algo_parametre"],
 },
+
+  /* ======================
+     QUOTIENT DE DEUX DÉCIMAUX (06/11/2026)
+  ========================= */
 
   /* ======================
      VALEURS APPROCHÉES (05/11/2026)

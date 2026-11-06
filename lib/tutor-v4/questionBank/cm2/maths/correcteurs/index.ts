@@ -12,11 +12,15 @@ import { CORRECTEURS as problemesRecherche } from "./problemes-recherche";
 import { CORRECTEURS as operationsDecimales } from "./operations-decimales";
 import { CORRECTEURS as calculMentalDecimal } from "./calcul-mental-decimal";
 import { CORRECTEURS as decimauxFractionsDecimales } from "./decimaux-fractions-decimales";
+import { CORRECTEURS as commercePrix } from "./commerce-prix";
+import { CORRECTEURS as calculRapide } from "./calcul-rapide";
 import { correcteursAngleReconnaitre } from "./angle-reconnaitre";
 import { correcteursAnglesRepere } from "./angles-repere-droit";
 import { correcteursPropRenfort } from "./proportionnalite-renfort";
 
 export const CORRECTEURS_CM2: CorrecteursMaths = {
+  ...calculRapide,
+  ...commercePrix,
   ...entiersDiviseurs,
   ...aiguillesPatronsProbas,
   ...figuresCodage,

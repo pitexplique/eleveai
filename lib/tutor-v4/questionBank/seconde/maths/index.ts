@@ -1,3 +1,4 @@
+import { tenir375 } from "@/lib/tutor-v4/questionBank/tenir-375";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 // --- Banques par notion (standard terminale, ~10 items/micro) ---
@@ -11,6 +12,15 @@ import { demiPlansSystemesBank } from "./demi-plans-systemes.bank";
 import { systemesDeterminantBank } from "./systemes-determinant.bank";
 import { courbesAssocieesBank } from "./courbes-associees.bank";
 import { polynomesDivisionBank } from "./polynomes-division.bank";
+import { projectionDroiteBank } from "./projection-droite.bank";
+import { espacePositionBank } from "./espace-position.bank";
+import { composeesTransformationsBank } from "./composees-transformations.bank";
+import { encadrementsOperationsBank } from "./encadrements-operations.bank";
+import { racinesDenominateurBank } from "./racine-denominateur.bank";
+import { valeurAbsolueEquationsBank } from "./valeur-absolue-equations.bank";
+import { homographiquePartieEntiereBank } from "./homographique-partie-entiere.bank";
+import { fonctionsParIntervallesBank } from "./fonctions-par-intervalles.bank";
+import { droitesPerpendiculairesBank } from "./droites-perpendiculaires.bank";
 import { arithmetiqueEntiersBank } from "./arithmetique-entiers.bank";
 import { puissancesBank } from "./puissances.bank";
 import { puissancesCanvas2de } from "@/lib/tutor-v4/questionBank/puissances-canvas-items";
@@ -81,6 +91,16 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...systemesDeterminantBank,
   ...courbesAssocieesBank,
   ...polynomesDivisionBank,
+  ...tenir375(projectionDroiteBank),
+  ...tenir375(espacePositionBank),
+  ...tenir375(composeesTransformationsBank),
+  // === Hors France : thèmes communs à 3 pays, fonctions et nombres (06/11/2026) ===
+  ...tenir375(encadrementsOperationsBank),
+  ...tenir375(racinesDenominateurBank),
+  ...tenir375(valeurAbsolueEquationsBank),
+  ...tenir375(homographiquePartieEntiereBank),
+  ...tenir375(fonctionsParIntervallesBank),
+  ...tenir375(droitesPerpendiculairesBank),
 ];
 
 export function getMathsSecondeQuestionBank(args?: {

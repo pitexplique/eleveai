@@ -593,7 +593,13 @@ export type FonctionGraphiqueCanvasData = {
     y: number;
     label?: string;
     couleur?: string;
+    /** Point creux : la borne n'appartient pas au palier. */
+    ouvert?: boolean;
+    /** Le nom du point à sa gauche : à droite, près de l'axe, il tomberait sur les graduations. */
+    labelGauche?: boolean;
   }[];
+  /** Ordonnées dont le chiffre n'est pas écrit (il couperait un palier horizontal). */
+  ordonneesMasquees?: number[];
   misesEnEvidence?: {
     verticale?: { x: number; couleur?: string };
     horizontale?: { y: number; couleur?: string };
@@ -2155,6 +2161,19 @@ export type PatronsCubeCanvasData = {
   questionLabel?: string;
 };
 
+// Le dépliage d'un solide, CALCULÉ par `lib/canvas/patron-solide.ts` (pavé, prisme, cylindre, pyramide).
+export type PatronSolideCanvasData = {
+  kind: "patron_solide";
+  panneaux: {
+    nom?: string;
+    pieces: { points: [number, number][]; fond?: string; nom?: string }[];
+    disques?: { x: number; y: number; r: number; fond?: string; nom?: string }[];
+    cotes?: { a: [number, number]; b: [number, number]; texte: string; inconnue?: boolean; centre?: [number, number] }[];
+  }[];
+  description?: string;
+  questionLabel?: string;
+};
+
 // Un demi-plan ou un système d'inéquations à deux inconnues (hors programme français).
 export type DemiPlanDroite = {
   /** La droite ax + by + c = 0. */
@@ -2231,6 +2250,7 @@ export type CanvasFigure =
   | ConstructionCanvasData
   | PatronsCubeCanvasData
   | EnsemblesCanvasData
+  | PatronSolideCanvasData
   | ArbreTriCanvasData
   | CercleTrigoCanvasData
   | ReglureCanvasData

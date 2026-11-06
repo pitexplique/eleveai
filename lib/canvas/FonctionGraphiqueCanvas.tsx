@@ -337,7 +337,9 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
             // plus bas) : un « −1 » posé sur le bord du bas est remonté de 7 px.
             .filter((y) => y > 0 || toSvgY(y, ymin, ymax, height) - xAxisY >= 26)
             // Cadre qui ne contient pas 0 (nuage de 29 à 68) : l'axe est au bas du cadre et barrait le « 29 ».
-            .filter((y) => Math.abs(toSvgY(y, ymin, ymax, height) - xAxisY) >= 8);
+            .filter((y) => Math.abs(toSvgY(y, ymin, ymax, height) - xAxisY) >= 8)
+            // Palier horizontal juste à gauche de l'axe : le halo du chiffre le coupait en deux.
+            .filter((y) => !figure.ordonneesMasquees?.includes(y));
           // ⛔ Même geste que pour les abscisses (30/09/2026) : le « −4 » d'un
           // cadre qui s'arrête à −4 était remonté à 10 unités du « −3 », le « 8 »
           // descendu à 10 du « 7 ». Un chiffre fait 12 de haut : les bornes
@@ -397,11 +399,17 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
           const s = pointToSvg(p);
           return (
             <g key={`pt-${index}`}>
-              <circle cx={s.x} cy={s.y} r={4.5} fill={p.couleur ?? COULEUR_POINT} />
+              {/* `ouvert` : point creux, la borne n'appartient pas au palier (partie entière, escaliers). */}
+              {p.ouvert ? (
+                <circle cx={s.x} cy={s.y} r={4.5} fill="white" stroke={p.couleur ?? COULEUR_POINT} strokeWidth={2.2} />
+              ) : (
+                <circle cx={s.x} cy={s.y} r={4.5} fill={p.couleur ?? COULEUR_POINT} />
+              )}
               {p.label ? (
                 <text
-                  x={s.x + 7}
+                  x={p.labelGauche ? s.x - 7 : s.x + 7}
                   y={s.y - 7}
+                  textAnchor={p.labelGauche ? "end" : "start"}
                   fontSize="12"
                   fontWeight="900"
                   fill={p.couleur ?? COULEUR_POINT}

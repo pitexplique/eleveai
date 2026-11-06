@@ -19,9 +19,13 @@ import { CORRECTEURS as valeursApprochees } from "./valeurs-approchees";
 import { CORRECTEURS as volumes } from "./volumes";
 import { CORRECTEURS as polygonesReguliers } from "./polygones-reguliers";
 import { CORRECTEURS as airesLosangeTrapeze } from "./aires-losange-trapeze";
+import { CORRECTEURS as patronPrismeCylindre } from "./patron-prisme-cylindre";
+import { CORRECTEURS as statMode } from "./stat-mode";
 
 // Un fichier par banque, écrits en parallèle à partir du 09/10/2026.
 export const CORRECTEURS_5E: CorrecteursMaths = {
+  ...statMode,
+  ...patronPrismeCylindre,
   ...aires,
   ...algorithmique,
   ...algoEvenement,

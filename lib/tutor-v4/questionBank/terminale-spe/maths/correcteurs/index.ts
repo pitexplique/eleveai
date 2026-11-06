@@ -11,6 +11,10 @@ import { CORRECTEURS as exposantsFractionnaires } from "./exposants-fractionnair
 import { CORRECTEURS as logExpBaseA } from "./log-exp-base-a";
 import { CORRECTEURS as composeeEcrire } from "./composee-ecrire";
 import { CORRECTEURS as systemes3x3 } from "./systemes-3x3";
+import { CORRECTEURS as nombresComplexes } from "./nombres-complexes";
+import { CORRECTEURS as asymptotesSymetries } from "./asymptotes-symetries";
+import { CORRECTEURS as gaucheDroiteApproximation } from "./gauche-droite-approximation";
+import { CORRECTEURS as equadiffSecondOrdre } from "./equadiff-second-ordre";
 
 export const CORRECTEURS_TLE: CorrecteursMaths = {
   ...integrationParties,
@@ -21,4 +25,8 @@ export const CORRECTEURS_TLE: CorrecteursMaths = {
   ...logExpBaseA,
   ...composeeEcrire,
   ...systemes3x3,
+  ...nombresComplexes,
+  ...asymptotesSymetries,
+  ...gaucheDroiteApproximation,
+  ...equadiffSecondOrdre,
 };

@@ -252,6 +252,14 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
   {
+    // 06/11/2026 : Belgique, Sénégal, Côte d'Ivoire. Micros masquées en France.
+    id: "calculs_commerciaux",
+    label: "Prix, intérêts et factures",
+    boId: "BOCM2N2",
+    prerequis: ["pourcentage"],
+    levels: [1, 2, 3],
+  },
+  {
     id: "probabilite",
     label: "Probabilités simples",
     boId: "BOCM2D2",

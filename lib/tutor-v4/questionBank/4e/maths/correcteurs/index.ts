@@ -35,9 +35,14 @@ import { CORRECTEURS as statHistogramme } from "./stat-histogramme";
 import { CORRECTEURS as pointsRemarquables } from "./points-remarquables";
 import { CORRECTEURS as arcsSecteurs } from "./arcs-secteurs";
 import { CORRECTEURS as distanceDroite } from "./distance-droite";
+import { CORRECTEURS as droiteMilieux } from "./droite-milieux";
+import { CORRECTEURS as tangenteCercle } from "./tangente-cercle";
+import { CORRECTEURS as ordreInequations } from "./ordre-inequations";
+import { CORRECTEURS as patronPyramide } from "./patron-pyramide";
 
 // Un fichier par banque (proportionnalité le 07/10, le reste à partir du 08/10).
 export const CORRECTEURS_4E: CorrecteursMaths = {
+  ...patronPyramide,
   ...aires,
   ...algorithmique,
   ...cosinus,
@@ -74,4 +79,7 @@ export const CORRECTEURS_4E: CorrecteursMaths = {
   ...pointsRemarquables,
   ...arcsSecteurs,
   ...distanceDroite,
+  ...droiteMilieux,
+  ...tangenteCercle,
+  ...ordreInequations,
 };

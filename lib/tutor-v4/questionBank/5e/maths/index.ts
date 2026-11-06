@@ -1,5 +1,6 @@
 // lib/tutor-v4/questionBank/5e/maths/index.ts
 
+import { tenir375 } from "@/lib/tutor-v4/questionBank/tenir-375";
 import { polygonesReguliersBank } from "./polygones-reguliers.bank";
 import { airesLosangeTrapezeBank } from "./aires-losange-trapeze.bank";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
@@ -28,6 +29,8 @@ import { evaluationNationale4eBank } from "./evaluation-nationale-4e.bank";
 // Conversions et durées : la notion `grandeur_conversion`, ajoutée le 15/08
 // parce que `BO5M1 « Grandeurs et mesures »` ne portait que les aires.
 import { conversionsBank } from "./conversions.bank";
+import { patronPrismeCylindreBank } from "./patron-prisme-cylindre.bank";
+import { statModeBank } from "./stat-mode.bank";
 
 
 export const maths5eQuestionBank: TutorBankItemV4[] = [
@@ -51,6 +54,8 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...evaluationNationale4eBank,
   ...conversionsBank,
   ...polygonesReguliersBank,
+  ...tenir375(statModeBank),
+  ...tenir375(patronPrismeCylindreBank),
   ...airesLosangeTrapezeBank,
 ];
 

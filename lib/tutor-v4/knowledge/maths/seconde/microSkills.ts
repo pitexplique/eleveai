@@ -287,4 +287,22 @@ export const microSkills: MicroSkillSource[] = [
   { id: "poly_racine_factoriser", label: "Utiliser une racine : $P(a) = 0$ équivaut à $x − a$ facteur de $P$", notionId: "polynomes_division", prerequis: ["devfac_developper_double", "fonction_image_formule"] },
   { id: "poly_division", label: "Poser la division euclidienne d'un polynôme : quotient et reste", notionId: "polynomes_division", prerequis: ["poly_racine_factoriser"] },
   { id: "poly_horner", label: "Diviser par $x − a$ avec le tableau de Horner", notionId: "polynomes_division", prerequis: ["poly_division"] },
+
+  /* Thèmes communs à 3 pays, hors programme français (lib/tutor-v4/micros-masquees.ts). */
+  { id: "encadrer_somme_produit", label: "Encadrer une somme, une différence, un produit ou un quotient à partir d'encadrements", notionId: "encadrements_operations", prerequis: ["reels_encadrement"] },
+  { id: "racine_denominateur_rationnel", label: "Rendre rationnel un dénominateur, écrire la racine d'un quotient, utiliser l'expression conjuguée", notionId: "racines_denominateur", prerequis: ["racine_simplification", "ir_difference_carres"] },
+  { id: "va_equation_affine", label: "Résoudre une équation avec valeur absolue : $|ax + b| = c$ et $|ax + b| = |cx + d|$", notionId: "valeur_absolue_equations", prerequis: ["valeur_absolue_distance", "equation_resoudre"] },
+  { id: "va_inequation_affine", label: "Résoudre une inéquation avec valeur absolue : $|ax + b| \\leq c$", notionId: "valeur_absolue_equations", prerequis: ["va_equation_affine", "inequation_resoudre"] },
+  { id: "fct_homographique", label: "Étudier une fonction homographique : valeur interdite, asymptotes, centre de symétrie, courbe", notionId: "homographique_partie_entiere", prerequis: ["reference_inverse", "fonction_domaine"] },
+  { id: "fct_partie_entiere", label: "Calculer et représenter la partie entière d'un nombre", notionId: "homographique_partie_entiere", prerequis: ["reels_encadrement", "graph_image"] },
+  { id: "fct_par_intervalles", label: "Utiliser une fonction affine par intervalles ou en escalier : image, lecture, expression", notionId: "fonctions_par_intervalles", prerequis: ["affine_calculer_image", "graph_image"] },
+  { id: "abs_affine_morceaux", label: "Écrire $|ax + b|$ en deux morceaux et reconnaître sa courbe", notionId: "fonctions_par_intervalles", prerequis: ["reference_valeur_absolue", "fct_par_intervalles"] },
+  { id: "droite_perpendiculaire_coeff", label: "Droites perpendiculaires par $a \\times a' = −1$ : reconnaître, équation, hauteur, médiatrice", notionId: "droites_perpendiculaires", prerequis: ["droite_equation_reduite", "droite_parallelisme"] },
+
+  /* Thèmes communs à 3 pays, hors programme français de 2de (lib/tutor-v4/micros-masquees.ts). */
+  { id: "projection_parallele", label: "Projeter sur une droite parallèlement à une autre : milieux et rapports conservés", notionId: "projection_droite", prerequis: ["vecteur_colinearite", "geo_projete_orthogonal"] },
+  { id: "espace_positions_relatives", label: "Droites et plans sur un solide : parallèles, sécants, non coplanaires, théorème du toit", notionId: "espace_position_2de", prerequis: [] },
+  { id: "espace_orthogonalite_droite_plan", label: "Orthogonalité dans l'espace : droites orthogonales, droite et plan, plans perpendiculaires", notionId: "espace_position_2de", prerequis: ["espace_positions_relatives"] },
+  { id: "composee_symetries", label: "Composer deux symétries ou deux translations : translation, symétrie centrale ou rotation", notionId: "composees_transformations", prerequis: ["vecteur_somme", "vecteur_coordonnees"] },
+  { id: "composee_homotheties", label: "Composer des homothéties, avec une translation ou une rotation : similitudes", notionId: "composees_transformations", prerequis: ["composee_symetries"] },
 ];

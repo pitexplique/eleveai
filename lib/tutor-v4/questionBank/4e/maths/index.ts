@@ -12,9 +12,13 @@
  * - on les assemble ici
  */
 
+import { tenir375 } from "@/lib/tutor-v4/questionBank/tenir-375";
 import { pointsRemarquablesBank } from "./points-remarquables.bank";
 import { arcsSecteursBank } from "./arcs-secteurs.bank";
 import { distanceDroiteBank } from "./distance-droite.bank";
+import { droiteMilieuxBank } from "./droite-milieux.bank";
+import { tangenteCercleBank } from "./tangente-cercle.bank";
+import { ordreInequationsBank } from "./ordre-inequations.bank";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { expressionsLitteralesBank } from "./expressions-litterales.bank";
@@ -51,6 +55,7 @@ import { divisibiliteBank } from "./divisibilite.bank";
 import { nombresPremiersBank } from "./nombres-premiers.bank";
 import { reperageBank } from "./reperage.bank";
 import { visionEspaceBank } from "./vision-espace.bank";
+import { patronPyramideBank } from "./patron-pyramide.bank";
 
 
 // =========================
@@ -71,6 +76,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...nombresPremiersBank,
   ...reperageBank,
   ...visionEspaceBank,
+  ...tenir375(patronPyramideBank),
   ...transformationsBank,
   ...probabilitesBank,
   ...frequencesBank,
@@ -88,6 +94,9 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...pointsRemarquablesBank,
   ...arcsSecteursBank,
   ...distanceDroiteBank,
+  ...tenir375(droiteMilieuxBank),
+  ...tenir375(tangenteCercleBank),
+  ...tenir375(ordreInequationsBank),
   ...grandeursBank,
   ...fonctionsBank,
   ...thalesBank,

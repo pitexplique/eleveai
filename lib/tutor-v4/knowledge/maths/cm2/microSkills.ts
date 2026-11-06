@@ -445,6 +445,39 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["multiplication_puissance_dix"],
   },
   {
+    // 06/11/2026 : Belgique, Sénégal, Côte d'Ivoire. Masquée en France.
+    id: "calcul_fois_11_25",
+    label: "Calcul rapide : multiplier par 11 ou 25, diviser par 25",
+    notionId: "calcul",
+    prerequis: ["multiplication_puissance_dix"],
+  },
+  {
+    // 06/11/2026 : Belgique, Sénégal, Côte d'Ivoire. Masquée en France.
+    id: "calcul_fois_05_025",
+    label: "Calcul rapide : multiplier ou diviser par 0,5 et 0,25",
+    notionId: "calcul",
+    prerequis: ["calcul_moitie_decimal"],
+  },
+  {
+    // 06/11/2026 : Belgique, Sénégal, Côte d'Ivoire. Masquée en France.
+    id: "prix_revient_vente_benefice",
+    label: "Prix d'achat, de revient, de vente ; bénéfice et perte",
+    notionId: "calculs_commerciaux",
+    prerequis: [],
+  },
+  {
+    id: "interet_simple",
+    label: "Intérêt, capital, taux et durée d'un placement",
+    notionId: "calculs_commerciaux",
+    prerequis: ["prix_revient_vente_benefice"],
+  },
+  {
+    id: "facture_tva",
+    label: "Lire et calculer une facture ; la TVA",
+    notionId: "calculs_commerciaux",
+    prerequis: ["prix_revient_vente_benefice"],
+  },
+  {
     id: "calcul_ordre_grandeur",
     label: "Estimer le résultat d’une opération",
     notionId: "calcul",

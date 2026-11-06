@@ -1027,6 +1027,13 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["vision_vues"],
   },
   {
+    // 06/11/2026 : `6e-G-espace-1` cite le patron. Reste visible.
+    id: "patron_pave_dimensions",
+    label: "Construire le patron d'un pavé droit : dimensions de chaque face",
+    notionId: "vision_espace",
+    prerequis: ["vision_representation"],
+  },
+  {
     id: "vision_defi",
     label: "Défis : cubes cachés, cube peint puis découpé",
     notionId: "vision_espace",

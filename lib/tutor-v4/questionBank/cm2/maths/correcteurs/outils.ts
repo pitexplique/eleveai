@@ -28,7 +28,7 @@ export function reponse(q: Q, juste: number, u = ""): string[] {
   const p: string[] = [];
   const e = String(q.expected[0]);
   if (!egal(valeur(e), net(juste))) p.push(`attendu « ${e} », le calcul donne ${juste}`);
-  if (u && !e.endsWith(` ${u}`)) p.push(`unité absente de « ${e} » (${u})`);
+  if (u && !e.replace(/\u00a0/g, " ").endsWith(` ${u}`)) p.push(`unité absente de « ${e} » (${u})`);
   const vals = (q.choices ?? []).map(valeur).map(net);
   if (new Set(vals).size !== vals.length) p.push(`deux propositions de même valeur : ${q.choices?.join(" | ")}`);
   if (vals.some((x) => Number.isNaN(x))) p.push(`proposition non numérique : ${q.choices?.join(" | ")}`);
@@ -38,7 +38,8 @@ export function reponse(q: Q, juste: number, u = ""): string[] {
 /** Réponse écrite : l'attendue est exactement ce texte. */
 export const texte = (q: Q, juste0: string): string[] => {
   const juste = juste0.replace(/'/g, "’");
-  return q.expected[0] === juste && (q.choices ?? []).includes(juste) ? [] : [`attendu « ${q.expected[0]} », juste : « ${juste} »`];
+  const sp = (s: unknown) => String(s).replace(/\u00a0/g, " ");
+  return sp(q.expected[0]) === sp(juste) && (q.choices ?? []).some((c) => sp(c) === sp(juste)) ? [] : [`attendu « ${q.expected[0]} », juste : « ${juste} »`];
 };
 
 export const diviseurs = (n: number) => {

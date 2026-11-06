@@ -56,17 +56,32 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
     "6e": lot("hors_france", "Maroc, Suisse, Sénégal, Côte d'Ivoire", [
       "decimal_diviser_par_decimal",
     ]),
-    cm2: lot("hors_programme", "Programme du cours moyen", [
+    cm2: {
+      ...lot("hors_programme", "Programme du cours moyen", [
       "prop_tableau",
       "prop_coefficient",
       "angle_mesurer",
-    ]),
+      ]),
+      /* Prix de revient, bénéfice, perte, intérêt, facture, TVA : aucun objectif de `cm2/bo-objectifs.ts`.
+         Calcul rapide × 11, × 25, × 0,5… : le programme laisse les stratégies libres, n'en nomme aucune. */
+      ...lot("hors_france", "Belgique, Sénégal, Côte d'Ivoire", [
+      "prix_revient_vente_benefice",
+      "interet_simple",
+      "facture_tva",
+      "calcul_fois_11_25",
+      "calcul_fois_05_025",
+      ]),
+    },
     /* Hors programme français : « par défaut », « par excès », « troncature » n'y sont pas ;
        l'encadrement d'un quotient, lui, y est et reste visible. Maroc, Côte d'Ivoire, Belgique, Québec. */
     "5e": {
       ...lot("hors_france", "Maroc, Côte d'Ivoire, Belgique, Québec", [
       "approx_defaut_exces",
       "approx_troncature_arrondi",
+      ]),
+      /* Le mode : le cycle 4 ne cite que « moyenne, médiane » (`docs/bo-maths-cycle4-recopie.md`, l. 193). */
+      ...lot("hors_france", "Québec, Maroc, Belgique, Sénégal, Côte d'Ivoire", [
+      "stat_mode",
       ]),
       /* Polygones réguliers : absents de `docs/bo-maths-cycle4-recopie.md`. */
       ...lot("hors_france", "Maroc, Suisse, Belgique, Québec", [
@@ -99,6 +114,21 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       ...lot("hors_france", "Maroc, Belgique, Sénégal, Côte d'Ivoire", [
       "distance_point_droite",
       "distance_paralleles",
+      ]),
+      /* Théorème des milieux : le BO du cycle 4 donne Thalès, sans le nommer. */
+      ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire", [
+      "milieux_droite",
+      "milieux_reciproque",
+      ]),
+      /* Tangente à un cercle : le BO du cycle 4 ne dit « tangente » que pour la trigonométrie. */
+      ...lot("hors_france", "Maroc, Suisse, Côte d'Ivoire", [
+      "tangente_rayon",
+      "cercle_droite_position",
+      ]),
+      /* Règles de l'ordre, inéquations : en France, seulement en 2de. */
+      ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire", [
+      "ordre_regles",
+      "inequation_college",
       ]),
     },
     /* Classe modale, centre, moyenne par les centres, effectifs cumulés : Sénégal, Côte
@@ -144,6 +174,13 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       ...lot("hors_france", "Maroc, Belgique, Sénégal, Côte d'Ivoire", ["systeme_determinant", "systeme_cramer"]),
       ...lot("hors_france", "Suisse, Belgique, Sénégal, Côte d'Ivoire", ["courbe_translation", "courbe_dilatation_abs"]),
       ...lot("hors_france", "Maroc, Belgique, Sénégal, Côte d'Ivoire", ["poly_racine_factoriser", "poly_division", "poly_horner"]),
+      /* Thèmes à 3 pays : encadrements, dénominateur rationnel, valeur absolue, homographiques, escaliers, a × a' = −1. */
+      ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire", ["encadrer_somme_produit", "racine_denominateur_rationnel", "va_equation_affine", "va_inequation_affine", "fct_homographique", "fct_partie_entiere", "droite_perpendiculaire_coeff"]),
+      ...lot("hors_france", "Québec, Sénégal, Côte d'Ivoire", ["fct_par_intervalles", "abs_affine_morceaux"]),
+      /* Projection parallèle ; géométrie de position sans repère ; composées de transformations. */
+      ...lot("hors_france", "Maroc, Belgique, Sénégal", ["projection_parallele"]),
+      ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire", ["espace_positions_relatives", "espace_orthogonalite_droite_plan"]),
+      ...lot("hors_france", "Suisse, Sénégal, Côte d'Ivoire", ["composee_symetries", "composee_homotheties"]),
     },
     /* Annexe de première spécialité, BO n°14 du 02/04/2026. La terminale garde
        sinus et cosinus. La dérivée de t ↦ e^(at) reste : `exp_derivee_affine`. */
@@ -158,6 +195,8 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire, Belgique", ["trig_formule_addition", "trig_formule_duplication", "trig_equation_generale"]),
       /* Loi des sinus, aire ½ ab sin C, Héron. `var_parite` n'est PAS masquée : elle est au programme 2026. */
       ...lot("hors_france", "Québec, Maroc, Suisse, Côte d'Ivoire", ["trig_loi_sinus", "trig_aire_heron"]),
+      /* Angles orientés (sortis du programme français en 2019), tangente d'un réel, formes d'équations, barycentre. */
+      ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire", ["angle_oriente_mesure_principale", "angle_oriente_chasles", "tan_reel", "tan_identite_derivee", "trig_equation_formes", "barycentre_deux_points", "barycentre_coordonnees"]),
     },
     /* Module spécifique de première, BO n°14 du 02/04/2026 : ni « dériv » ni
        « tangente » dans le texte. ⚠️ Revient sur la décision du 14/08/2026, qui
@@ -213,6 +252,14 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       /* Logarithme et exponentielle de base a ; systèmes 3 × 3. `composee_ecrire` n'est PAS masquée : v ∘ u est au programme. */
       ...lot("hors_france", "Québec, Maroc, Belgique, Côte d'Ivoire", ["log_base_calcul", "log_base_proprietes", "exp_base_a"]),
       ...lot("hors_france", "Belgique, Sénégal, Côte d'Ivoire", ["systeme_3x3_gauss"]),
+      /* Nombres complexes et similitudes : maths expertes, hors tronc commun. */
+      ...lot("hors_france", "Maths expertes, hors tronc commun ; Maroc, Sénégal, Côte d'Ivoire", ["cx_forme_algebrique", "cx_conjugue_quotient", "cx_module_argument", "cx_forme_exponentielle", "cx_equation_second_degre", "cx_racines_nieme", "cx_geometrie", "cx_transformations", "similitude_directe"]),
+      /* Asymptote oblique, branches paraboliques, éléments de symétrie : la France s'arrête aux asymptotes parallèles aux axes. */
+      ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire", ["asymptote_oblique", "branches_infinies", "symetrie_courbe"]),
+      /* À gauche et à droite, approximation affine : masquées par prudence, le programme français est à relire sur ces points. */
+      ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire", ["limite_gauche_droite", "derivabilite_gauche_droite", "approximation_affine"]),
+      /* Second ordre : la France s'arrête au premier ordre. */
+      ...lot("hors_france", "Maroc, Sénégal, Côte d'Ivoire", ["equadiff_second_ordre", "equadiff_second_ordre_conditions"]),
     },
   },
 };

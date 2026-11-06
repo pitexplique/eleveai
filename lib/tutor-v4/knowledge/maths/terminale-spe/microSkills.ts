@@ -883,6 +883,116 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["log_base_calcul"],
   },
 
+  /* Nombres complexes (maths expertes en France, hors tronc commun). */
+  {
+    id: "cx_forme_algebrique",
+    label: "Forme algébrique d'un complexe : parties réelle et imaginaire, somme, produit, puissances de i",
+    notionId: "nombres_complexes",
+    prerequis: [],
+  },
+  {
+    id: "cx_conjugue_quotient",
+    label: "Conjugué d'un complexe, quotient mis sous forme algébrique",
+    notionId: "nombres_complexes",
+    prerequis: ["cx_forme_algebrique"],
+  },
+  {
+    id: "cx_module_argument",
+    label: "Module, argument et forme trigonométrique d'un complexe",
+    notionId: "nombres_complexes",
+    prerequis: ["cx_forme_algebrique"],
+  },
+  {
+    id: "cx_forme_exponentielle",
+    label: "Forme exponentielle : produit, quotient, formules de Moivre et d'Euler, linéarisation",
+    notionId: "nombres_complexes",
+    prerequis: ["cx_module_argument"],
+  },
+  {
+    id: "cx_equation_second_degre",
+    label: "Équations du second degré dans l'ensemble des complexes, racines carrées d'un complexe",
+    notionId: "nombres_complexes",
+    prerequis: ["cx_forme_algebrique"],
+  },
+  {
+    id: "cx_racines_nieme",
+    label: "Racines n-ièmes de l'unité et d'un complexe, polygones réguliers",
+    notionId: "nombres_complexes",
+    prerequis: ["cx_forme_exponentielle"],
+  },
+  {
+    id: "cx_geometrie",
+    label: "Complexes et géométrie : affixes, distances, alignement, nature d'une figure, lieux",
+    notionId: "nombres_complexes",
+    prerequis: ["cx_module_argument"],
+  },
+  {
+    id: "cx_transformations",
+    label: "Écriture complexe d'une translation, d'une homothétie, d'une rotation, d'une symétrie",
+    notionId: "nombres_complexes",
+    prerequis: ["cx_geometrie"],
+  },
+  {
+    id: "similitude_directe",
+    label: "Similitude directe : écriture complexe, rapport, angle et centre",
+    notionId: "nombres_complexes",
+    prerequis: ["cx_transformations"],
+  },
+
+  /* Asymptote oblique, branches infinies, symétries d'une courbe (hors programme français). */
+  {
+    id: "asymptote_oblique",
+    label: "Asymptote oblique : la trouver, la vérifier, position de la courbe",
+    notionId: "asymptotes_symetries_courbes",
+    prerequis: ["limite_fonction_asymptote"],
+  },
+  {
+    id: "branches_infinies",
+    label: "Branches infinies : direction d'une branche parabolique, par les limites de f(x) et f(x) ÷ x",
+    notionId: "asymptotes_symetries_courbes",
+    prerequis: ["asymptote_oblique"],
+  },
+  {
+    id: "symetrie_courbe",
+    label: "Centre et axe de symétrie d'une courbe",
+    notionId: "asymptotes_symetries_courbes",
+    prerequis: [],
+  },
+
+  /* À gauche et à droite, approximation affine (masquées en France). */
+  {
+    id: "limite_gauche_droite",
+    label: "Limites à gauche et à droite : continuité d'une fonction définie par morceaux",
+    notionId: "gauche_droite_approximation",
+    prerequis: ["limite_fonction_point"],
+  },
+  {
+    id: "derivabilite_gauche_droite",
+    label: "Nombres dérivés à gauche et à droite, demi-tangentes, point anguleux",
+    notionId: "gauche_droite_approximation",
+    prerequis: ["limite_gauche_droite"],
+  },
+  {
+    id: "approximation_affine",
+    label: "Approximation affine : estimer une valeur avec la tangente",
+    notionId: "gauche_droite_approximation",
+    prerequis: ["derivation_tangente"],
+  },
+
+  /* Équations différentielles du second ordre (hors programme français). */
+  {
+    id: "equadiff_second_ordre",
+    label: "Second ordre y″ + ay′ + by = 0 : équation caractéristique, les trois cas, oscillations",
+    notionId: "equations_differentielles_second_ordre",
+    prerequis: ["equadiff_y_prime_ay"],
+  },
+  {
+    id: "equadiff_second_ordre_conditions",
+    label: "Second ordre : la solution qui vérifie deux conditions",
+    notionId: "equations_differentielles_second_ordre",
+    prerequis: ["equadiff_second_ordre"],
+  },
+
   /* Systèmes 3 × 3 (hors programme français). */
   {
     id: "systeme_3x3_gauss",

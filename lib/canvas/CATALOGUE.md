@@ -54,6 +54,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `kind` | Ce qu'il montre | ⛔ Pas pour |
 |---|---|---|
 | `patrons_cube` | Plusieurs assemblages de carrés, nommés : lequel est un patron de cube ? Un carré peut porter un nombre (`textes`), un carré en pointillés est une place possible (`places`) | Un patron d’un autre solide ; le cube en perspective : c’est `solide_3d` |
+| `patron_solide` | Le dépliage **calculé** d'un pavé, d'un prisme droit, d'un cylindre ou d'une pyramide régulière (`lib/canvas/patron-solide.ts`) : un panneau seul avec ses longueurs (`?` en orange), ou 2 à 4 panneaux nommés pour « lequel est un patron ? » (`defaut` fabrique un faux, calculé lui aussi) | Le patron d'un cube en carrés : c'est `patrons_cube` ; le solide en perspective : `solide_3d` |
 | `solide_3d` | Pavé, cube, prisme, cylindre, cône, pyramide, boule, avec dimensions et face surlignée | Une section |
 | `section_solide` | Le solide **et le plan qui le coupe** : la section apparaît | Un patron |
 | `repere3d` | Un repère de l'espace, points et segments | Une vue de solide plein |

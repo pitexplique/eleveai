@@ -1,8 +1,13 @@
+import { tenir375 } from "@/lib/tutor-v4/questionBank/tenir-375";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { bernoulliRepetitionBank } from "./bernoulli-repetition.bank";
 import { trigoFormulesEquationsBank } from "./trigo-formules-equations.bank";
 import { triangleQuelconqueBank } from "./triangle-quelconque.bank";
 import { pariteBank } from "./parite.bank";
+import { anglesOrientesBank } from "./angles-orientes.bank";
+import { tangenteReelBank } from "./tangente-reel.bank";
+import { trigoEquationsFormesBank } from "./trigo-equations-formes.bank";
+import { barycentreBank } from "./barycentre.bank";
 
 // --- Banques par notion (1 banque par notion, standard seconde/terminale, >=10 items/micro) ---
 import { suitesBank } from "./suites.bank";
@@ -44,6 +49,10 @@ export const mathsPremiereSpeQuestionBank: TutorBankItemV4[] = [
   ...trigoFormulesEquationsBank,
   ...triangleQuelconqueBank,
   ...pariteBank,
+  ...tenir375(anglesOrientesBank),
+  ...tenir375(tangenteReelBank),
+  ...tenir375(trigoEquationsFormesBank),
+  ...tenir375(barycentreBank),
 ];
 
 export function getMathsPremiereSpeQuestionBank(args?: {

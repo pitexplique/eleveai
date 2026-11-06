@@ -5,6 +5,7 @@ export { default as DeuxAnglesCanvas } from "./DeuxAnglesCanvas";
 export { default as ConstructionCanvas } from "./ConstructionCanvas";
 export { default as PatronsCubeCanvas } from "./PatronsCubeCanvas";
 export { default as EnsemblesCanvas } from "./EnsemblesCanvas";
+export { default as PatronSolideCanvas } from "./PatronSolideCanvas";
 export { default as ArbreTriCanvas } from "./ArbreTriCanvas";
 export { default as CalculPoseCanvas } from "./CalculPoseCanvas";
 export { default as TriangleCanvas } from "./TriangleCanvas";

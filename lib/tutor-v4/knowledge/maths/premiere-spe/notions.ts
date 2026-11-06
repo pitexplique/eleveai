@@ -176,4 +176,26 @@ export const notions: NotionSource[] = [
     prerequis: ["trigonometrie"],
     levels: [1, 2, 3],
   },
+  /* Hors programme français : masquées (lib/tutor-v4/micros-masquees.ts). */
+  {
+    id: "angles_orientes",
+    label: "Angles orientés : mesure principale, relation de Chasles",
+    boId: "BOPSGE",
+    prerequis: ["trigonometrie"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "tangente_reel",
+    label: "Tangente d'un réel : valeurs, identité, dérivée",
+    boId: "BOPSAN",
+    prerequis: ["trigonometrie"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "barycentre",
+    label: "Barycentre de deux à quatre points",
+    boId: "BOPSGE",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
 ];
