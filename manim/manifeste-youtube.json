@@ -62046,6 +62046,7 @@
     },
     {
       "id": "4e-equation-reconnaitre",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_reconnaitre",
       "classe": "4e",
@@ -62146,6 +62147,7 @@
     },
     {
       "id": "4e-equation-reconnaitre-short",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_reconnaitre",
       "classe": "4e",
@@ -62192,6 +62194,7 @@
     },
     {
       "id": "4e-equation-traduire",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_traduire",
       "classe": "4e",
@@ -62292,6 +62295,7 @@
     },
     {
       "id": "4e-equation-traduire-short",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_traduire",
       "classe": "4e",
@@ -62338,6 +62342,7 @@
     },
     {
       "id": "4e-equation-resoudre-simple",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_simple",
       "classe": "4e",
@@ -62446,6 +62451,7 @@
     },
     {
       "id": "4e-equation-resoudre-simple-short",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_simple",
       "classe": "4e",
@@ -62491,6 +62497,7 @@
     },
     {
       "id": "4e-equation-resoudre-reduction",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_reduction",
       "classe": "4e",
@@ -62596,6 +62603,7 @@
     },
     {
       "id": "4e-equation-resoudre-reduction-short",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_reduction",
       "classe": "4e",
@@ -62641,6 +62649,7 @@
     },
     {
       "id": "4e-equation-resoudre-distributivite",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_distributivite",
       "classe": "4e",
@@ -62742,6 +62751,7 @@
     },
     {
       "id": "4e-equation-resoudre-distributivite-short",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_distributivite",
       "classe": "4e",
@@ -62787,6 +62797,7 @@
     },
     {
       "id": "4e-equation-verifier",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_verifier",
       "classe": "4e",
@@ -62892,6 +62903,7 @@
     },
     {
       "id": "4e-equation-verifier-short",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_verifier",
       "classe": "4e",
@@ -62937,6 +62949,7 @@
     },
     {
       "id": "4e-equation-defi",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_defi",
       "classe": "4e",
@@ -63036,6 +63049,7 @@
     },
     {
       "id": "4e-equation-defi-short",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_defi",
       "classe": "4e",
@@ -63081,6 +63095,7 @@
     },
     {
       "id": "4e-equation-probleme",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_probleme",
       "classe": "4e",
@@ -63189,6 +63204,7 @@
     },
     {
       "id": "4e-equation-probleme-short",
+      "pas_avant": "2026-11-24",
       "notionId": "equation_resolution",
       "microId": "equation_probleme",
       "classe": "4e",

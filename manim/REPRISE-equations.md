@@ -22,7 +22,7 @@
 ## Reste
 1. Écoute par Frédéric. Pour les retours : un agent neuf par épisode, 2 à la fois au plus.
 2. Push : il se propose le soir, puis branchement du coach (`--ecrire`, voir ci-dessus).
-3. YouTube : paysage AVANT son short.
+3. YouTube : paysage AVANT son short. Les 16 entrées portent `pas_avant: 2026-11-24` pour qu'aucune ne parte avant l'écoute de Frédéric. Date de prudence, PAS un calendrier validé : à cette date, elles passent devant les vidéos non datées (`publier-youtube.mjs`). À recaler après son écoute.
 
 ## En attente de Frédéric
 - Écoute des 16 vidéos, épisode 08 compris (`equation_probleme`, Yanis garde forestier, voix validées le 06/11, rendu fait : paysage 5:08, short 1:14). Il a la NOUVELLE fin (9,74 s en paysage, 6,04 s en short) : coupe recalée pour ces deux vidéos (voir « État final »).
