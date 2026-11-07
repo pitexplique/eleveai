@@ -4,7 +4,7 @@
   "02-equilateral": "Premier morceau : 5 centimètres, 5 centimètres, 5 centimètres. Les trois côtés ont la même longueur. C'est un triangle équilatéral.",
   "03-isocele": "Deuxième morceau : 7 centimètres, 7 centimètres et 4 centimètres. Deux côtés ont la même longueur. C'est un triangle isocèle.",
   "04-quelconque": "Troisième morceau : 6 centimètres, 5 centimètres et 4 centimètres. Trois longueurs différentes. C'est un triangle quelconque.",
-  "05-codage": "Sur un dessin, on code. Des petits traits identiques veulent dire : même longueur. Trois côtés codés pareil : équilatéral. Deux côtés codés pareil : isocèle. Aucun codage : quelconque.",
+  "05-codage": "Sur un dessin, on code. Des petits traits identiques veulent dire : même longueur. Trois côtés codés pareil : équilatéral. Deux côtés codés pareil : isocèle. Aucun codage : on ne peut rien dire, il faut mesurer.",
   "06-question": "Question ! Un triangle a des côtés de 6 centimètres, 9 centimètres et 6 centimètres. Quelle est sa nature ? A : équilatéral. B : isocèle. C : quelconque. Mets pause, et choisis !",
   "06b-reponse": "Réponse B. 6 et 6 : deux côtés égaux. Il est isocèle.",
   "07-sommet-principal": "Dans un triangle isocèle, les deux côtés égaux partent du même point : le sommet principal. Le troisième côté s'appelle la base. Voici le triangle K L M. K L et L M sont égaux. Il est isocèle en L.",

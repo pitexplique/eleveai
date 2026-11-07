@@ -69,8 +69,9 @@ function preparerVideo(){
   /* ---- Texte : un mot n'apparaît que quand la voix le dit (avance 0 s) ---- */
   function mots(cont,phrases,T){
     if(cont._cle!==phrases){ cont._cle=phrases; cont.innerHTML='';
-      cont._m=[]; for(const [a,b,t] of phrases){ const li=document.createElement('span'); li.className='ligne'; let av=0;
-        for(const w of t.split(' ')){ const sp=document.createElement('span'); sp.className='mot'; sp.textContent=w+' '; li.append(sp); cont._m.push({sp,t:a+(b-a)*av/t.length}); av+=w.length+1; }
+      /* Une phrase peut porter un 4e élément : l'instant exact de chaque mot */
+      cont._m=[]; for(const [a,b,t,exact] of phrases){ const li=document.createElement('span'); li.className='ligne'; let av=0;
+        t.split(' ').forEach((w,i)=>{ const sp=document.createElement('span'); sp.className='mot'; sp.textContent=w+' '; li.append(sp); cont._m.push({sp,t:exact?exact[i]:a+(b-a)*av/t.length}); av+=w.length+1; });
         cont.append(li); } }
     for(const m of cont._m) m.sp.classList.toggle('vu',T>=m.t);
   }

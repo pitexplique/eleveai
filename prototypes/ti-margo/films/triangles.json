@@ -1,0 +1,7 @@
+{
+  "voix": "6e-triangle-{ep}-short",
+  "sons": "public/sons/6e-triangle-{ep}-short",
+  "sortie": "manim/sorties/6e/maths/triangles/{num}-{ep}",
+  "nom": "eleveai-maths-6e-triangle-{ep}-short",
+  "episodes": { "nommer": "01", "sommet-cote": "02", "type-cote": "03", "type-angle": "04", "defi": "05", "somme-angle": "06", "angle-manquant": "07", "possible-ou-non": "08", "propriete-defi": "09" }
+}
