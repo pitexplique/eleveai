@@ -127,7 +127,11 @@ function trou() {
   const surB = egalite(fr(d.A), "…");
   const formes = (e: string, nom: string) => [`Complète : ${e}`, `${e}. Que mettre à la place des points ?`, `Trouve le nombre manquant : ${e}`, `Quel ${nom} manque ?\n\n${e}`, `Écris le nombre caché : ${e}`, `${e}. Quel nombre manque ?`, `Remplace les points : ${e}`, `Le ${nom} manque : ${e}`];
   const [text, juste] = Math.random() < 0.5 ? [un(formes(surA, "dividende")), d.A] : [un(formes(surB, "diviseur")), d.B];
-  return { text, ...court(juste), explanation: expl(d) };
+  return {
+    text,
+    ...court(juste),
+    explanation: etapes(`on multiplie les DEUX nombres par ${fr(d.k)} : le résultat ne change pas.`, `${fr(d.a)} × ${fr(d.k)} = ${fr(d.A)} et ${fr(d.b)} × ${fr(d.k)} = ${fr(d.B)}.`, `${ecr(d)} = ${paire(d.A, d.B)} : le nombre manquant est ${fr(juste)}.`),
+  };
 }
 
 const FORMES_CALCUL = (x: string) => [

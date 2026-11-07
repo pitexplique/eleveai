@@ -1227,6 +1227,13 @@ export async function answerTutorV4(
         nextPair = fallback.pair;
         decisionReason =
           "Changement de micro-compétence (progression ou difficulté).";
+      } else if (shouldSwitchMicro) {
+        /* ⛔ Notion à UNE micro (07/11/2026) : `decimal_quotient` et `nombre_approche` en 5e,
+           `stat_classes` en 3e, une fois les micros hors France masquées. Après deux réussites
+           ou deux erreurs, il n'y avait pas d'autre micro où aller : « Aucune paire disponible
+           pour continuer ». On reste sur la même micro, à l'étoile que la séance a fixée. */
+        nextPair = buildPairFor(session.notionFocus, session.microFocus);
+        if (nextPair) decisionReason = "Seule micro de la notion : on continue sur elle.";
       }
     }
   }
