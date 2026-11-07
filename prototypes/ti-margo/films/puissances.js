@@ -1,28 +1,6 @@
 /* Série Puissances 4e : les shorts refaits en dessin animé (essai du 07/11).
    Un FILMS.<épisode> par film. Les mp4 Manim de la série ne sont pas touchés. */
-{ const css=document.createElement('style'); css.textContent=`div#rebours{display:block;}
-  #cA,#cB,#cC{display:inline-flex;width:27%;margin:8px 8px;box-sizing:border-box;}
-  #pause .ligne,#cq .ligne{display:block;}
-  #legende.piege{color:#c92a2a;}
-  #panneau .r{font-size:74px;text-align:center;white-space:nowrap;line-height:1.2;}
-  .ex{color:#e8590c;}.ba{color:#1971c2;}
-  .expo{display:inline-block;font-size:.66em;vertical-align:.55em;line-height:0;color:#e8590c;}`; document.head.append(css); }
-
-function gestes(P,T){ return {
-  ouvre(){ P.gesteD='ouverte'; P.md.set(.86,2.02+Math.sin(T*3)*.06,.5); P.cd.set(.72,1.58,.2); P.tetY=.08+Math.sin(T*1.7)*.07; },
-  montre(){ P.gesteD='index'; P.md.set(1.02,2.72+Math.sin(T*3)*.04,.42); P.cd.set(.86,1.95,.1); P.tetX=-.1; P.regX=-.2; P.regY=.25; },
-  pouce(){ P.md.set(.95,2.32,.45); P.cd.set(.74,1.7,.14); P.gesteD='pouce'; P.tetZ=-.14; P.paupiere=-1.1; },
-  reflechit(){ P.md.set(.44,2.3,.72); P.cd.set(.78,1.78,.34); P.gesteD='ouverte'; P.tetZ=.15; P.tetX=-.1; P.regX=-.28; P.regY=.35; P.qSway=Math.sin(T*3)*.3; },
-  oups(){ P.gesteD='ouverte'; P.md.set(.98,2.42,.5); P.mg.set(-.98,2.42,.5); P.cd.set(.82,1.7,.2); P.cg.set(-.82,1.7,.2); P.tetZ=.16+Math.sin(T*2)*.03; P.tetX=-.06; P.paupiere=-1.25; }
-}; }
-
-/* La miniature verticale : la question, la ceinture, la mention « Film d'animation 3D » */
-function poserMiniature({$,carte,legende,panneau},t,html){ window.tiMargoMiniature=()=>{ window.MINI=true; window.tiMargo.aller(t);
-  carte.style.display='none'; panneau.style.display='none'; $('titre').style.display='none'; $('fin').style.display='none';
-  legende.style.cssText+=';display:block;top:60px;left:50px;right:50px;font-size:92px;line-height:1.08;padding:26px;'; legende.innerHTML=html;
-  const e=$('echelle'); e.style.display='flex'; e.style.top='500px';
-  const m=document.createElement('div'); m.className='cv'; m.textContent='Film d’animation 3D';
-  m.style.cssText='left:176px;right:176px;bottom:36px;text-align:center;font-size:66px;background:#17452a;color:#fff;border-radius:999px;padding:14px 0;z-index:6;'; document.body.append(m); }; }
+/* Les outils communs (gestes, miniature, couleurs) sont dans puissances-commun.js ; les autres films 4e, dans puissances-<épisode>.js. */
 
 /* ============================================================
    ÉPISODE 01 : LA FEUILLE PLIÉE. aⁿ, ce n'est pas a × n.
@@ -30,6 +8,7 @@ function poserMiniature({$,carte,legende,panneau},t,html){ window.tiMargoMiniatu
    ============================================================ */
 FILMS.comprendre=function(outils){
   const {el,$,jetons,panneau}=outils;
+  document.body.classList.add('cartes-en-ligne');
   const DUR={'00-accroche':7.2,'01-pliages':6.23,'01q-question':9.66,'01r-reponse':4.705,'02-suite':13.375,'03-question':7.915,'04-abonne':6.045};
   const clips=[]; { let t=.4; for(const c of Object.keys(DUR)){ clips.push([c,+t.toFixed(2)]); t+=DUR[c]+(c==='01q-question'?3.3:(c==='03-question'?1.5:.25)); } }
   const A=Object.fromEntries(clips), CL=window.CUES.comprendre;
@@ -84,7 +63,6 @@ FILMS.comprendre=function(outils){
 
   /* ---- Le panneau du bas : compteur de pliages (orange), produit (bleu), couches (vert) ---- */
   panneau.innerHTML='<div class="r" id="l1"></div><div class="r" id="l2"></div><div class="r" id="l3"></div>';
-  const ex=s=>`<span class="ex">${s}</span>`, ba=s=>`<span class="ba">${s}</span>`, ok=s=>`<span class="ok">${s}</span>`, sup=s=>`<span class="expo">${s}</span>`;
   const P='01-pliages', S='02-suite', R='01r-reponse';
   const J1a=[[m(P,0),ex('1')+' '],[m(P,1),'pliage : '],[m(P,2),ok('2')+' '],[m(P,3),ok('couches')]];
   const J1b=[[m(P,4),ex('2')+' '],[m(P,5),'pliages :']];

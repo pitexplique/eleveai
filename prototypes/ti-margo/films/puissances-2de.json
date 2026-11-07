@@ -1,0 +1,7 @@
+{
+  "voix": "2de-puissance-{ep}-short-da",
+  "sons": "public/sons/2de-puissance-{ep}-short-da",
+  "sortie": "manim/sorties/seconde/maths/puissances/dessin-anime/{num}-{ep}",
+  "nom": "eleveai-maths-seconde-puissance-{ep}-short-dessin-anime",
+  "episodes": { "produit-quotient": "08", "enchainer": "10" }
+}

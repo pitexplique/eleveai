@@ -1,0 +1,7 @@
+{
+  "voix": "3e-puissance-{ep}-short-da",
+  "sons": "public/sons/3e-puissance-{ep}-short-da",
+  "sortie": "manim/sorties/3e/maths/puissances/dessin-anime/{num}-{ep}",
+  "nom": "eleveai-maths-3e-puissance-{ep}-short-dessin-anime",
+  "episodes": { "defi": "12" }
+}

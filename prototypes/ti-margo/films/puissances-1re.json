@@ -1,0 +1,7 @@
+{
+  "voix": "1re-puissance-{ep}-short-da",
+  "sons": "public/sons/1re-puissance-{ep}-short-da",
+  "sortie": "manim/sorties/premiere/maths/puissances/dessin-anime/{num}-{ep}",
+  "nom": "eleveai-maths-premiere-puissance-{ep}-short-dessin-anime",
+  "episodes": { "cinq-regles": "13" }
+}

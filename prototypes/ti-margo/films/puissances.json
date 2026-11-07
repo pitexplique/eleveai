@@ -3,5 +3,5 @@
   "sons": "public/sons/4e-puissance-{ep}-short-da",
   "sortie": "manim/sorties/4e/maths/puissances/dessin-anime/{num}-{ep}",
   "nom": "eleveai-maths-4e-puissance-{ep}-short-dessin-anime",
-  "episodes": { "comprendre": "01" }
+  "episodes": { "comprendre": "01", "calculer": "02", "dix": "03", "zero-negatif": "04", "notation-scientifique": "05", "comparer": "06", "calcul": "07", "defi": "11" }
 }

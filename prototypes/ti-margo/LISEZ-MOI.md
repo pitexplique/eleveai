@@ -9,6 +9,7 @@ Un seul Ti Margo, une seule page, un seul outil de rendu. **Chaque film n'écrit
 | `page.html` | La page unique : `page.html?serie=<série>&video=<épisode>`. Sans paramètre : Ti Margo seul, avec ses boutons de gestes. |
 | `films/<série>.js` | Les films de la série : `FILMS.<épisode> = function(outils){ … }`. |
 | `films/<série>-<épisode>.js` | Facultatif : le film d'un épisode dans son propre fichier, chargé après `films/<série>.js` (plusieurs sessions peuvent ainsi écrire chacune leur film). |
+| `films/<préfixe>-commun.js` | Facultatif : les outils communs aux séries de même préfixe (`puissances-2de` charge `puissances-commun.js`). |
 | `films/<série>.json` | Où sont les voix et où écrire les vidéos. |
 | `films/<série>-cues.js` | Les instants des mots, fabriqués par `ti-margo-cues.py`. |
 | `films/_modele.js` | Le plus petit film complet, à recopier pour commencer. |
@@ -43,7 +44,7 @@ Un seul Ti Margo, une seule page, un seul outil de rendu. **Chaque film n'écrit
    node scripts/ti-margo-short.mjs <série> <épisode> film
    ```
 
-Le mode `mix` refait seulement le son. Le mode `miniature` appelle `window.tiMargoMiniature`, que le film doit définir ; la miniature porte la mention « Film d'animation 3D ».
+Pour regarder : `python scripts/ti-margo-planche.py <dossier ou mp4> <planche.png>`. Le mode `mix` refait seulement le son. Le mode `miniature` appelle `window.tiMargoMiniature`, que le film doit définir ; la miniature porte la mention « Film d'animation 3D ».
 
 ## Ce qu'un film renvoie
 

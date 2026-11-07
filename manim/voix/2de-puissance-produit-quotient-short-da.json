@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une clé secrète de 3 bits. On ajoute 4 bits. Combien de clés possibles ?",
+  "01-bits": "3 bits : 2 puissance 3, 8 clés. On ajoute 4 bits : fois 2 puissance 4. 2 puissance 3 fois 2 puissance 4 : on additionne les exposants. 2 puissance 7, 128 clés.",
+  "01q-question": "Question ! 2 puissance 5 fois 2 puissance 5 ? A : 2 puissance 10. B : 4 puissance 10. C : 2 puissance 25. Mets pause, et choisis !",
+  "01r-reponse": "Réponse A : 2 puissance 10. La base reste 2 : 5 plus 5, 10. 1 024 clés.",
+  "02-question": "Et une clé de 128 bits : combien de clés ? Écris-le avec une puissance, et réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -59,7 +59,8 @@ if (serie && !/^[a-z0-9_-]+$/i.test(serie)) throw new Error('Série invalide : '
 await charger('personnage.js');
 await charger('short.js');
 const episode = new URLSearchParams(location.search).get('video');
-if (serie) { await charger('films/' + serie + '-cues.js', true); await charger('films/' + serie + '.js'); }
+/* Facultatif : les outils communs à plusieurs séries de même préfixe (puissances-2de → films/puissances-commun.js) */
+if (serie) { await charger('films/' + serie.split('-')[0] + '-commun.js', true); await charger('films/' + serie + '-cues.js', true); await charger('films/' + serie + '.js'); }
 /* Facultatif : un film peut vivre dans son propre fichier, films/<série>-<épisode>.js */
 if (serie && episode && /^[a-z0-9_-]+$/i.test(episode)) await charger('films/' + serie + '-' + episode + '.js', true);
 demarrerTiMargo();
