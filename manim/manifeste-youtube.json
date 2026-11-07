@@ -63247,6 +63247,1091 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "4e-relatif-addition",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_addition",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition.mp4",
+      "miniature": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition.png",
+      "titre": "Moins + moins, ça ne fait pas plus — Additionner des relatifs — épisode 1 · Maths 4e",
+      "accroche": "Inès est conceptrice de jeux vidéo. Un joueur a −3 points et il attrape un bonus de 7 points. Quel est son score ? Et s'il tombe dans deux pièges de suite ?\n\nDans cette vidéo :\n• signes contraires : on soustrait les distances à zéro, on garde le signe du plus éloigné\n• même signe : (−5) + (−4) = −9, et pas +9\n• deux nombres opposés font zéro\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : (−8) + (−2) et 9 + (−4).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_addition&display=simple\n\n🔢 Épisode 1 sur 7 de la série Relatifs d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Inès, conceptrice de jeux vidéo"
+        ],
+        [
+          "00:27",
+          "Sur la droite graduée"
+        ],
+        [
+          "00:44",
+          "Signes contraires"
+        ],
+        [
+          "01:01",
+          "Question 1"
+        ],
+        [
+          "01:29",
+          "Deux pièges de suite"
+        ],
+        [
+          "01:46",
+          "Même signe"
+        ],
+        [
+          "01:57",
+          "Le piège"
+        ],
+        [
+          "02:11",
+          "Question 2"
+        ],
+        [
+          "02:41",
+          "Deux nombres opposés"
+        ],
+        [
+          "02:56",
+          "À toi de jouer"
+        ],
+        [
+          "03:09",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation",
+      "tags": [
+        "addition",
+        "additionner des relatifs",
+        "signes contraires",
+        "droite graduée",
+        "jeux vidéo",
+        "conceptrice de jeux vidéo",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Que vaut (−8) + 5 ?",
+          "choix": [
+            "−13",
+            "−3",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "Signes contraires : 8 − 5 = 3, et −8 est le plus éloigné de zéro."
+        },
+        {
+          "t": "02:11",
+          "question": "Que vaut (−6) + (−7) ?",
+          "choix": [
+            "13",
+            "−1",
+            "−13"
+          ],
+          "reponse": 2,
+          "explication": "Même signe : 6 + 7 = 13, et on garde le signe moins."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "4e-relatif-addition-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_addition",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-relatif-addition",
+      "fichier": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition-short.mp4",
+      "miniature": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition-short-miniature.png",
+      "titre": "Cet ascenseur est fou : tu paries que tu ne devines pas où il me dépose ? #maths #4e",
+      "accroche": "Ti Margo part du parking, au niveau −3, et appuie sur +7. Où sort-il ? Puis l'ascenseur s'emballe jusqu'à la cave.\nLa cage d'ascenseur est une droite graduée : additionner des relatifs, tu vas le voir de tes yeux.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : je pars du niveau 2. −5, +9, −7. À quel niveau j'arrive ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_addition&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #relatifs #4e #collège",
+      "tags": [
+        "ascenseur",
+        "addition",
+        "droite graduée",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "À quel niveau je sors ?",
+          "choix": [
+            "−10",
+            "4",
+            "10"
+          ],
+          "reponse": 1,
+          "explication": "−3 + 7 = 4 : 3 étages jusqu'à zéro, encore 4."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "4e-relatif-soustraction",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_soustraction",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction.mp4",
+      "miniature": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction.png",
+      "titre": "Enlever peut faire monter — Soustraire des relatifs — épisode 2 · Maths 4e",
+      "accroche": "Mathis est météorologue. À Lyon, il fait 5 degrés. À Montréal, −3 degrés. Quel est l'écart de température ? Il va nous faire enlever un nombre négatif.\n\nDans cette vidéo :\n• soustraire, c'est ajouter l'opposé : 5 − (−3) = 5 + 3 = 8\n• les deux moins ne disent pas la même chose\n• le piège : seul le second nombre change de signe\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : l'écart entre −7 degrés au sommet et 4 degrés dans la vallée, et (−1) − 6.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_soustraction&display=simple\n\n🔢 Épisode 2 sur 7 de la série Relatifs d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Mathis, météorologue"
+        ],
+        [
+          "00:22",
+          "Sur le thermomètre"
+        ],
+        [
+          "00:34",
+          "Un écart, c'est une soustraction"
+        ],
+        [
+          "00:47",
+          "La règle : ajouter l'opposé"
+        ],
+        [
+          "01:04",
+          "Les deux moins"
+        ],
+        [
+          "01:16",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Quand ça baisse"
+        ],
+        [
+          "02:10",
+          "Le piège"
+        ],
+        [
+          "02:26",
+          "Question 2"
+        ],
+        [
+          "02:52",
+          "À toi de jouer"
+        ],
+        [
+          "03:09",
+          "Correction"
+        ],
+        [
+          "03:23",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation",
+      "tags": [
+        "soustraction",
+        "soustraire des relatifs",
+        "opposé",
+        "thermomètre",
+        "météo",
+        "météorologue",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:16",
+          "question": "4 − (−6) revient à quel calcul ?",
+          "choix": [
+            "4 − 6",
+            "4 + 6",
+            "−4 + 6"
+          ],
+          "reponse": 1,
+          "explication": "On ajoute l'opposé de −6 : 4 + 6, donc 10."
+        },
+        {
+          "t": "02:26",
+          "question": "Que vaut (−2) − (−5) ?",
+          "choix": [
+            "−7",
+            "3",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "On ajoute l'opposé de −5 : −2 + 5 = 3."
+        }
+      ],
+      "centres": [
+        "meteo-climat"
+      ]
+    },
+    {
+      "id": "4e-relatif-soustraction-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_soustraction",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-relatif-soustraction",
+      "fichier": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction-short.mp4",
+      "miniature": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction-short-miniature.png",
+      "titre": "J'enlève un sac de sable : je descends ? Tu paries ? #maths #4e",
+      "accroche": "Ti Margo part en montgolfière à l'altitude 5. Il lâche 3 sacs de sable qui valent −1 chacun : où arrive-t-il ? Puis il enlève ses 9 petits ballons, et c'est le plouf.\nRetirer −3, c'est comme ajouter 3 : tu vas le voir de tes yeux.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : je suis à l'altitude 2. J'enlève 6 sacs de sable, puis 4 petits ballons. Quelle est mon altitude ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_soustraction&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #relatifs #4e #collège",
+      "tags": [
+        "montgolfière",
+        "soustraction",
+        "opposé",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "J'enlève 3 sacs de sable. Quelle est mon altitude ?",
+          "choix": [
+            "2",
+            "8",
+            "5"
+          ],
+          "reponse": 1,
+          "explication": "Retirer −3, c'est ajouter 3 : 5 − (−3) = 8."
+        }
+      ],
+      "centres": [
+        "meteo-climat"
+      ]
+    },
+    {
+      "id": "4e-relatif-multiplication",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_multiplication",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication.mp4",
+      "miniature": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication.png",
+      "titre": "Pourquoi moins par moins fait plus — Multiplier des relatifs — épisode 3 · Maths 4e",
+      "accroche": "Léa est glaciologue. Un glacier perd 4 mètres par an : dans 3 ans ? Et il y a 2 ans, était-il plus épais ou moins épais ? On remonte le temps pour comprendre pourquoi moins par moins, ça fait plus.\n\nDans cette vidéo :\n• une perte répétée : (−4) × 3 = −12\n• remonter le temps : (−5) × (−2) = +10\n• la table des signes, et le piège de l'addition\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : (−4) × (−3) et (−1) × 9.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_multiplication&display=simple\n\n🔢 Épisode 3 sur 7 de la série Relatifs d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Léa, glaciologue"
+        ],
+        [
+          "00:24",
+          "Une perte répétée"
+        ],
+        [
+          "00:36",
+          "Le signe d'abord"
+        ],
+        [
+          "00:50",
+          "Question 1"
+        ],
+        [
+          "01:16",
+          "Remonter le temps"
+        ],
+        [
+          "01:34",
+          "Le film à l'envers"
+        ],
+        [
+          "01:50",
+          "La suite qui continue"
+        ],
+        [
+          "02:12",
+          "La table des signes"
+        ],
+        [
+          "02:29",
+          "Le piège"
+        ],
+        [
+          "02:44",
+          "Question 2"
+        ],
+        [
+          "03:09",
+          "À toi de jouer"
+        ],
+        [
+          "03:20",
+          "Correction"
+        ],
+        [
+          "03:33",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation",
+      "tags": [
+        "multiplication",
+        "multiplier des relatifs",
+        "règle des signes",
+        "moins par moins",
+        "glacier",
+        "glaciologue",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "Que vaut 6 × (−3) ?",
+          "choix": [
+            "18",
+            "−18",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "Signes différents, donc négatif, et 6 × 3 = 18."
+        },
+        {
+          "t": "02:44",
+          "question": "Que vaut (−7) × (−1) ?",
+          "choix": [
+            "−7",
+            "7",
+            "−8"
+          ],
+          "reponse": 1,
+          "explication": "Deux signes identiques : positif, et 7 × 1 = 7."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-relatif-multiplication-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_multiplication",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-relatif-multiplication",
+      "fichier": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication-short.mp4",
+      "miniature": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication-short-miniature.png",
+      "titre": "Moins par moins, ça fait plus. Tu paries que non ? #maths #4e",
+      "accroche": "Ti Margo marche vers la gauche, mais le film tourne à l'envers. Où arrive-t-il ?\nMoins par moins, ça fait plus : tu vas le voir de tes yeux.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : je marche vers la droite, 5 pas par seconde. Le film tourne à l'envers pendant 4 secondes. Où j'arrive ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_multiplication&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #relatifs #4e #collège",
+      "tags": [
+        "moins par moins",
+        "multiplication",
+        "règle des signes",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Où j'arrive ?",
+          "choix": [
+            "−6",
+            "+6",
+            "−5"
+          ],
+          "reponse": 1,
+          "explication": "Vers la gauche, film à l'envers : (−2) × (−3) = +6."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-relatif-division",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_division",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division.mp4",
+      "miniature": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division.png",
+      "titre": "Rien de nouveau à apprendre — Diviser des relatifs — épisode 4 · Maths 4e",
+      "accroche": "Nour est biologiste marine. Elle plonge pour observer des tortues : en 3 minutes, elle arrive à −12 mètres. De combien change sa position à chaque minute ? Et faut-il une nouvelle règle pour diviser ?\n\nDans cette vidéo :\n• diviser, c'est défaire une multiplication : la même table des signes\n• (−20) ÷ (−5) = 4 : deux négatifs donnent un positif\n• pour vérifier, on multiplie\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : (−24) ÷ 6 et (−35) ÷ (−7).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_division&display=simple\n\n🔢 Épisode 4 sur 7 de la série Relatifs d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Nour, biologiste marine"
+        ],
+        [
+          "00:26",
+          "Un partage"
+        ],
+        [
+          "00:40",
+          "Le lien avec la multiplication"
+        ],
+        [
+          "00:56",
+          "Le signe d'abord"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:36",
+          "Combien de minutes ?"
+        ],
+        [
+          "01:50",
+          "Sur le dessin"
+        ],
+        [
+          "02:20",
+          "Le piège"
+        ],
+        [
+          "02:35",
+          "Question 2"
+        ],
+        [
+          "03:03",
+          "À toi de jouer"
+        ],
+        [
+          "03:16",
+          "Correction"
+        ],
+        [
+          "03:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation",
+      "tags": [
+        "division",
+        "diviser des relatifs",
+        "règle des signes",
+        "plongée",
+        "tortues",
+        "biologiste marine",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Que vaut 15 ÷ (−3) ?",
+          "choix": [
+            "5",
+            "−5",
+            "12"
+          ],
+          "reponse": 1,
+          "explication": "Signes différents, donc négatif, et 15 ÷ 3 = 5."
+        },
+        {
+          "t": "02:35",
+          "question": "Que vaut (−36) ÷ (−9) ?",
+          "choix": [
+            "−4",
+            "4",
+            "−45"
+          ],
+          "reponse": 1,
+          "explication": "Signes identiques, donc positif, et 4 × (−9) donne bien −36."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "4e-relatif-division-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_division",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-relatif-division",
+      "fichier": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division-short.mp4",
+      "miniature": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division-short-miniature.png",
+      "titre": "Un trésor à −20 m. Dans le coffre, il y a quoi ? Tu paries ? #maths #4e",
+      "accroche": "Ti Margo creuse 5 mètres par jour pour atteindre un trésor à −20 mètres. En combien de jours ? Et surtout, qu'y a-t-il dans le coffre ?\n(−20) ÷ (−5) = 4, puis (−12) ÷ 3 = −4 : la division des nombres relatifs, à la pelle.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : un autre trésor, à −36 mètres. Je creuse 4 mètres par jour. Combien de jours ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_division&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #relatifs #4e #collège",
+      "tags": [
+        "trésor",
+        "division",
+        "règle des signes",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "En combien de jours j'atteins le trésor ?",
+          "choix": [
+            "−4",
+            "4",
+            "15"
+          ],
+          "reponse": 1,
+          "explication": "(−20) ÷ (−5) = 4 : un nombre de jours, c'est positif."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "4e-relatif-calcul",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_calcul",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul.mp4",
+      "miniature": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul.png",
+      "titre": "Par quelle opération commencer ? — Calculer avec des relatifs — épisode 5 · Maths 4e",
+      "accroche": "Sami est ingénieur en robotique. Au concours, son robot fait 4 fautes à −3 points et gagne un bonus de 5 points. Son score : −3 × 4 + 5. Lire de gauche à droite donnerait −27 : faux !\n\nDans cette vidéo :\n• l'ordre : parenthèses, multiplications et divisions, puis additions et soustractions\n• on réécrit tout le calcul à chaque étape\n• 3 × (−2 + 6) n'est pas 3 × (−2) + 6\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : −4 × 5 + 8 et 6 − 3 × (−2).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_calcul&display=simple\n\n🔢 Épisode 5 sur 7 de la série Relatifs d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sami, ingénieur en robotique"
+        ],
+        [
+          "00:24",
+          "L'ordre des opérations"
+        ],
+        [
+          "00:40",
+          "La multiplication d'abord"
+        ],
+        [
+          "00:59",
+          "Le piège"
+        ],
+        [
+          "01:13",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Tout réécrire"
+        ],
+        [
+          "01:58",
+          "Avec des parenthèses"
+        ],
+        [
+          "02:17",
+          "Avec une division"
+        ],
+        [
+          "02:31",
+          "Question 2"
+        ],
+        [
+          "03:05",
+          "À toi de jouer"
+        ],
+        [
+          "03:19",
+          "Correction"
+        ],
+        [
+          "03:38",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation",
+      "tags": [
+        "priorités opératoires",
+        "calcul avec des relatifs",
+        "ordre des opérations",
+        "robot",
+        "robotique",
+        "ingénieur",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Que vaut 10 + (−2) × 3 ?",
+          "choix": [
+            "24",
+            "4",
+            "16"
+          ],
+          "reponse": 1,
+          "explication": "La multiplication d'abord : (−2) × 3 = −6, puis 10 + (−6) = 4."
+        },
+        {
+          "t": "02:31",
+          "question": "Dans −6 − 2 × (−5), par quoi commence-t-on ?",
+          "choix": [
+            "−6 − 2",
+            "2 × (−5)",
+            "−5 − 6"
+          ],
+          "reponse": 1,
+          "explication": "2 × (−5) = −10, puis −6 − (−10) = 4."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "4e-relatif-calcul-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_calcul",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-relatif-calcul",
+      "fichier": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul-short.mp4",
+      "miniature": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul-short-miniature.png",
+      "titre": "−2 + 3 × (−4) : tu paries que je trouve du premier coup ? #maths #4e",
+      "accroche": "Trois portes, un seul bon résultat. Derrière les deux autres : plouf, dans la piscine !\nTi Margo se trompe deux fois : la multiplication d'abord, et le moins du 4 ne s'oublie pas.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture verte.\n👉 À toi : −5 × 2 + (−3) × (−4). Quel résultat ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_calcul&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #relatifs #4e #collège",
+      "tags": [
+        "3 portes",
+        "priorités opératoires",
+        "multiplication d'abord",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Quelle porte je dois ouvrir ?",
+          "choix": [
+            "−4",
+            "−14",
+            "10"
+          ],
+          "reponse": 1,
+          "explication": "La multiplication d'abord : 3 × (−4) = −12, puis −2 + (−12) = −14."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "4e-relatif-probleme",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_probleme",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme.mp4",
+      "miniature": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme.png",
+      "titre": "De l'histoire au calcul — Résoudre un problème avec des relatifs — épisode 6 · Maths 4e",
+      "accroche": "Clara est guide de haute montagne. Au petit matin, il fait −2 degrés au refuge, et ça monte de 7 degrés. Combien fera-t-il ? Trois étapes pour passer de l'histoire au calcul.\n\nDans cette vidéo :\n• traduire : hausse positive, baisse négative\n• calculer dans le bon ordre, répondre avec l'unité et contrôler\n• une variation, c'est l'arrivée moins le départ\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une cordée part de 1 500 mètres, monte de 400 mètres, puis redescend de 200 mètres par heure pendant 3 heures.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_probleme&display=simple\n\n🔢 Épisode 6 sur 7 de la série Relatifs d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Clara, guide de haute montagne"
+        ],
+        [
+          "00:24",
+          "Étape 1 : traduire"
+        ],
+        [
+          "00:37",
+          "Étapes 2 et 3 : calculer, répondre"
+        ],
+        [
+          "00:59",
+          "Question 1"
+        ],
+        [
+          "01:30",
+          "Une baisse répétée"
+        ],
+        [
+          "01:50",
+          "Une variation"
+        ],
+        [
+          "02:15",
+          "Question 2"
+        ],
+        [
+          "02:47",
+          "Le piège"
+        ],
+        [
+          "03:04",
+          "À toi de jouer"
+        ],
+        [
+          "03:23",
+          "Correction"
+        ],
+        [
+          "03:41",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation",
+      "tags": [
+        "problème",
+        "résoudre un problème",
+        "variation",
+        "température",
+        "montagne",
+        "guide de haute montagne",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "Il fait 3 degrés, et la température baisse de 8 degrés. Quel calcul ?",
+          "choix": [
+            "3 + 8",
+            "3 + (−8)",
+            "−3 + 8"
+          ],
+          "reponse": 1,
+          "explication": "3 + (−8) = −5 : il fait −5 degrés."
+        },
+        {
+          "t": "02:15",
+          "question": "Le matin, −6 degrés. À midi, 2 degrés. Quelle est la variation ?",
+          "choix": [
+            "−4",
+            "8",
+            "−8"
+          ],
+          "reponse": 1,
+          "explication": "Arrivée moins départ : 2 − (−6) = 8 degrés de hausse."
+        }
+      ],
+      "centres": [
+        "sport",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-relatif-probleme-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_probleme",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-relatif-probleme",
+      "fichier": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme-short.mp4",
+      "miniature": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme-short-miniature.png",
+      "titre": "Tu paries que je tiens jusqu'au soir ? −6 + 9, puis −4 par heure #maths #4e",
+      "accroche": "Ti Margo, un gecko, n'a jamais vu la neige. Au réveil, il fait −6 degrés. Il tient jusqu'au soir ?\nLe thermomètre suit le calcul, degré par degré : −6 + 9 = 3, puis 3 + (−8) = −5.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : cette nuit, on part de −5 degrés. Ça baisse encore de 2 degrés par heure, pendant 3 heures. Quelle température fera-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #relatifs #4e #collège",
+      "tags": [
+        "neige",
+        "température",
+        "thermomètre",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Quelle température fait-il à midi ?",
+          "choix": [
+            "−15",
+            "3",
+            "15"
+          ],
+          "reponse": 1,
+          "explication": "−6 + 9 = 3 degrés."
+        }
+      ],
+      "centres": [
+        "sport",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-relatif-defi",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_operation_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi.mp4",
+      "miniature": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi.png",
+      "titre": "Démasque les erreurs du vieux cahier — Défis sur les relatifs — épisode 7 · Maths 4e",
+      "accroche": "Lou est historienne des sciences. Il y a 2 000 ans, en Chine, on calculait déjà avec des baguettes. En Europe, on appelait encore ces nombres « absurdes » il y a quelques siècles. Mène l'enquête dans un vieux cahier rempli d'erreurs.\n\nDans cette vidéo :\n• avant de calculer, on regarde l'opération\n• dans un produit, on compte les moins : pair, positif ; impair, négatif\n• un nombre effacé se retrouve par le signe et par une multiplication\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : (−3) × (−5) contre (−3) + (−5), le signe de −1 sept fois de suite, et le nombre qui, multiplié par −6, donne −30.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_operation_defi&display=simple\n\n🔢 Épisode 7 sur 7 de la série Relatifs d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Lou, historienne des sciences"
+        ],
+        [
+          "00:24",
+          "Le cahier : première erreur"
+        ],
+        [
+          "00:41",
+          "Deuxième erreur"
+        ],
+        [
+          "00:53",
+          "Question 1"
+        ],
+        [
+          "01:27",
+          "On compte les moins"
+        ],
+        [
+          "01:50",
+          "Pair ou impair"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:38",
+          "Le nombre effacé"
+        ],
+        [
+          "02:54",
+          "À toi de jouer"
+        ],
+        [
+          "03:17",
+          "Correction"
+        ],
+        [
+          "03:38",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/relatif-operation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/relatif-operation",
+      "tags": [
+        "défi",
+        "erreurs à démasquer",
+        "compter les moins",
+        "histoire des maths",
+        "baguettes chinoises",
+        "historienne des sciences",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "Dans le cahier : (−6) + (−2) = 8. D'où vient l'erreur ?",
+          "choix": [
+            "La règle de la multiplication, utilisée pour une addition",
+            "Une erreur de priorité",
+            "Un oubli de parenthèses"
+          ],
+          "reponse": 0,
+          "explication": "Le résultat est −8 : moins et moins ne donnent plus que pour multiplier."
+        },
+        {
+          "t": "02:06",
+          "question": "Quel est le signe de (−1) × 2 × (−3) × (−4) × 5 ?",
+          "choix": [
+            "positif",
+            "négatif",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "3 moins, c'est impair ; le 2 et le 5 sont positifs."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "4e-relatif-defi-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "relatif_operation",
+      "microId": "relatif_operation_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-relatif-defi",
+      "fichier": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi-short.mp4",
+      "miniature": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi-short-miniature.png",
+      "titre": "−1 fois −1 fois −1… 100 fois de suite, sans calculatrice. Tu paries que tu y arrives ? #maths #4e",
+      "accroche": "Ti Margo traverse un temple dans la jungle, sur 100 dalles gravées « −1 ». À chaque dalle, sa pancarte se retourne.\nQue dit-elle à la 100e ? Il court vérifier.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : j'ajoute une dalle. −1, 101 fois de suite. Quel est le résultat ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_operation_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #relatifs #4e #collège",
+      "tags": [
+        "pair ou impair",
+        "règle des signes",
+        "moins par moins",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "nombres relatifs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "100 dalles : que dit ma pancarte ?",
+          "choix": [
+            "moins",
+            "plus",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "100, c'est pair : les moins vont par deux."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ]
     }
   ]
 }

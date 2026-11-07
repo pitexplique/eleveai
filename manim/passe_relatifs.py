@@ -129,7 +129,7 @@ EPS = [
          intro="Nour est biologiste marine. Elle plonge pour observer des tortues : en 3 minutes, elle arrive à −12 mètres. De combien change sa position à chaque minute ? Et faut-il une nouvelle règle pour diviser ?",
          puces=["diviser, c'est défaire une multiplication : la même table des signes", "(−20) ÷ (−5) = 4 : deux négatifs donnent un positif", "pour vérifier, on multiplie"],
          defi="(−24) ÷ 6 et (−35) ÷ (−7).",
-         chap={"01-plongee": "Nour, biologiste marine", "02-partage": "Un partage", "03-lien": "Le lien avec la multiplication", "04-methode": "Le signe d'abord", "04q-question": "Question 1", "05-temps": "Combien de minutes ?", "06-minutes": "Sur le dessin", "07-verifier": "On vérifie", "08-piege": "Le piège", "08q-question": "Question 2", "09-defi": "À toi de jouer", "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+         chap={"01-plongee": "Nour, biologiste marine", "02-partage": "Un partage", "03-lien": "Le lien avec la multiplication", "04-methode": "Le signe d'abord", "04q-question": "Question 1", "05-temps": "Combien de minutes ?", "06-minutes": "Sur le dessin", "08-piege": "Le piège", "08q-question": "Question 2", "09-defi": "À toi de jouer", "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
          qs=[("04q-question", "Que vaut 15 ÷ (−3) ?", ["5", "−5", "12"], 1, "Signes différents, donc négatif, et 15 ÷ 3 = 5."),
              ("08q-question", "Que vaut (−36) ÷ (−9) ?", ["−4", "4", "−45"], 1, "Signes identiques, donc positif, et 4 × (−9) donne bien −36.")],
          tags=["division", "diviser des relatifs", "règle des signes", "plongée", "tortues", "biologiste marine"], metier="plongée",
@@ -157,7 +157,7 @@ EPS = [
          intro="Clara est guide de haute montagne. Au petit matin, il fait −2 degrés au refuge, et ça monte de 7 degrés. Combien fera-t-il ? Trois étapes pour passer de l'histoire au calcul.",
          puces=["traduire : hausse positive, baisse négative", "calculer dans le bon ordre, répondre avec l'unité et contrôler", "une variation, c'est l'arrivée moins le départ"],
          defi="une cordée part de 1 500 mètres, monte de 400 mètres, puis redescend de 200 mètres par heure pendant 3 heures.",
-         chap={"01-refuge": "Clara, guide de haute montagne", "02-traduire": "Étape 1 : traduire", "03-calculer": "Étape 2 : calculer", "04-repondre": "Étape 3 : répondre", "04q-question": "Question 1", "05-repetee": "Une baisse répétée", "06-variation": "Une variation", "06q-question": "Question 2", "07-piege": "Le piège", "08-defi": "À toi de jouer", "08b-correction": "Correction", "09-finale": "Ce que tu as appris"},
+         chap={"01-refuge": "Clara, guide de haute montagne", "02-traduire": "Étape 1 : traduire", "03-calculer": "Étapes 2 et 3 : calculer, répondre", "04q-question": "Question 1", "05-repetee": "Une baisse répétée", "06-variation": "Une variation", "06q-question": "Question 2", "07-piege": "Le piège", "08-defi": "À toi de jouer", "08b-correction": "Correction", "09-finale": "Ce que tu as appris"},
          qs=[("04q-question", "Il fait 3 degrés, et la température baisse de 8 degrés. Quel calcul ?", ["3 + 8", "3 + (−8)", "−3 + 8"], 1, "3 + (−8) = −5 : il fait −5 degrés."),
              ("06q-question", "Le matin, −6 degrés. À midi, 2 degrés. Quelle est la variation ?", ["−4", "8", "−8"], 1, "Arrivée moins départ : 2 − (−6) = 8 degrés de hausse.")],
          tags=["problème", "résoudre un problème", "variation", "température", "montagne", "guide de haute montagne"], metier="montagne",
@@ -208,7 +208,7 @@ def entrees():
         ts = temps[f"4e-relatif-{slug}-short"]["clips"]
         c, q, ch, r, x = e["sq"]
         sacc = e["sa"] + f"\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture {e['sc']}.\n👉 À toi : {e['stoi']}"
-        sacc += f"\n\n▶️ L'épisode complet : {{{{LONGUE}}}}\n🎯 Le coach : {coach(e['micro'])}\n\n#Shorts #maths #relatifs #4e #collège"
+        sacc += f"\n\n▶️ L'épisode complet : {{{{LONGUE}}}}\n🎯 Le coach : {coach(e['micro'])}\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #relatifs #4e #collège"
         out.append({
             "id": f"4e-relatif-{slug}-short", "pas_avant": PAS_AVANT, "notionId": "relatif_operation", "microId": e["micro"], "classe": "4e",
             "ceinture": e["sc"], "serie": "Maths 4e", "type": "short", "renvoie_vers": f"4e-relatif-{slug}",

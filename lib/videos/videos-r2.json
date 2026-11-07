@@ -2127,6 +2127,132 @@
   "youtube": "kBF71CcBHqQ",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_reciproque_verifier&display=simple"
  },
+ "4e-relatif-addition": {
+  "fichier": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition.mp4",
+  "poster": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition.png",
+  "vignette": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition.vignette.webp",
+  "titre": "Moins + moins, ça ne fait pas plus — Additionner des relatifs — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_addition&display=simple"
+ },
+ "4e-relatif-addition-short": {
+  "fichier": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition-short.mp4",
+  "poster": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition-short-miniature.png",
+  "vignette": "4e/maths/relatifs/01-addition/eleveai-maths-4e-relatif-addition-short-miniature.vignette.webp",
+  "titre": "Cet ascenseur est fou : tu paries que tu ne devines pas où il me dépose ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_addition&display=simple"
+ },
+ "4e-relatif-calcul": {
+  "fichier": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul.mp4",
+  "poster": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul.png",
+  "vignette": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul.vignette.webp",
+  "titre": "Par quelle opération commencer ? — Calculer avec des relatifs — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_calcul&display=simple"
+ },
+ "4e-relatif-calcul-short": {
+  "fichier": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul-short.mp4",
+  "poster": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul-short-miniature.png",
+  "vignette": "4e/maths/relatifs/05-calcul/eleveai-maths-4e-relatif-calcul-short-miniature.vignette.webp",
+  "titre": "−2 + 3 × (−4) : tu paries que je trouve du premier coup ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_calcul&display=simple"
+ },
+ "4e-relatif-defi": {
+  "fichier": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi.mp4",
+  "poster": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi.png",
+  "vignette": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi.vignette.webp",
+  "titre": "Démasque les erreurs du vieux cahier — Défis sur les relatifs — épisode 7 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_operation_defi&display=simple"
+ },
+ "4e-relatif-defi-short": {
+  "fichier": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi-short.mp4",
+  "poster": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi-short-miniature.png",
+  "vignette": "4e/maths/relatifs/07-defi/eleveai-maths-4e-relatif-defi-short-miniature.vignette.webp",
+  "titre": "−1 fois −1 fois −1… 100 fois de suite, sans calculatrice. Tu paries que tu y arrives ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_operation_defi&display=simple"
+ },
+ "4e-relatif-division": {
+  "fichier": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division.mp4",
+  "poster": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division.png",
+  "vignette": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division.vignette.webp",
+  "titre": "Rien de nouveau à apprendre — Diviser des relatifs — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_division&display=simple"
+ },
+ "4e-relatif-division-short": {
+  "fichier": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division-short.mp4",
+  "poster": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division-short-miniature.png",
+  "vignette": "4e/maths/relatifs/04-division/eleveai-maths-4e-relatif-division-short-miniature.vignette.webp",
+  "titre": "Un trésor à −20 m. Dans le coffre, il y a quoi ? Tu paries ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_division&display=simple"
+ },
+ "4e-relatif-multiplication": {
+  "fichier": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication.mp4",
+  "poster": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication.png",
+  "vignette": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication.vignette.webp",
+  "titre": "Pourquoi moins par moins fait plus — Multiplier des relatifs — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_multiplication&display=simple"
+ },
+ "4e-relatif-multiplication-short": {
+  "fichier": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication-short.mp4",
+  "poster": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication-short-miniature.png",
+  "vignette": "4e/maths/relatifs/03-multiplication/eleveai-maths-4e-relatif-multiplication-short-miniature.vignette.webp",
+  "titre": "Moins par moins, ça fait plus. Tu paries que non ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_multiplication&display=simple"
+ },
+ "4e-relatif-probleme": {
+  "fichier": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme.mp4",
+  "poster": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme.png",
+  "vignette": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme.vignette.webp",
+  "titre": "De l'histoire au calcul — Résoudre un problème avec des relatifs — épisode 6 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_probleme&display=simple"
+ },
+ "4e-relatif-probleme-short": {
+  "fichier": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme-short.mp4",
+  "poster": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme-short-miniature.png",
+  "vignette": "4e/maths/relatifs/06-probleme/eleveai-maths-4e-relatif-probleme-short-miniature.vignette.webp",
+  "titre": "Tu paries que je tiens jusqu'au soir ? −6 + 9, puis −4 par heure #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_probleme&display=simple"
+ },
+ "4e-relatif-soustraction": {
+  "fichier": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction.mp4",
+  "poster": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction.png",
+  "vignette": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction.vignette.webp",
+  "titre": "Enlever peut faire monter — Soustraire des relatifs — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_soustraction&display=simple"
+ },
+ "4e-relatif-soustraction-short": {
+  "fichier": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction-short.mp4",
+  "poster": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction-short-miniature.png",
+  "vignette": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction-short-miniature.vignette.webp",
+  "titre": "J'enlève un sac de sable : je descends ? Tu paries ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_soustraction&display=simple"
+ },
  "4e-stats-defi": {
   "fichier": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.mp4",
   "poster": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.png",

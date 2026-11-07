@@ -23,6 +23,21 @@ const COUPE_FIN = 3.6; // secondes retirées à la fin : « Et abonne-toi ! »
 const COUPE_PAR_VIDEO: Record<string, number> = {
   "4e-equation-probleme": 8.6,
   "4e-equation-probleme-short": 4.7,
+  // Relatifs 4e : mesuré dans les mp4, la pause après « point f r » (07/11).
+  "4e-relatif-addition": 8.4,
+  "4e-relatif-soustraction": 8.4,
+  "4e-relatif-multiplication": 8.4,
+  "4e-relatif-division": 8.4,
+  "4e-relatif-calcul": 8.4,
+  "4e-relatif-probleme": 8.4,
+  "4e-relatif-defi": 8.4,
+  "4e-relatif-addition-short": 4.1,
+  "4e-relatif-soustraction-short": 4.1,
+  "4e-relatif-multiplication-short": 4.1,
+  "4e-relatif-division-short": 4.1,
+  "4e-relatif-calcul-short": 4.1,
+  "4e-relatif-probleme-short": 4.1,
+  "4e-relatif-defi-short": 4.1,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

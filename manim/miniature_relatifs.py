@@ -24,7 +24,7 @@ EP = [
     ("02-soustraction", "orange", ["COMPRENDRE COMMENT", "SOUSTRAIRE DES RELATIFS"], "5 − (−3) = 8", "+ enlever peut faire monter"),
     ("03-multiplication", "orange", ["COMPRENDRE POURQUOI", "MOINS PAR MOINS FAIT PLUS"], "(−5) × (−2) = 10", "+ la preuve par le glacier"),
     ("04-division", "orange", ["COMPRENDRE COMMENT", "DIVISER DES RELATIFS"], "(−20) ÷ (−5) = 4", "+ la même règle que multiplier"),
-    ("05-calcul", "verte", ["COMPRENDRE L'ORDRE", "DES CALCULS AVEC RELATIFS"], "−3 × 4 + 5 = −7", "pas −27 !"),
+    ("05-calcul", "verte", ["COMPRENDRE L'ORDRE", "DES OPÉRATIONS"], "−3 × 4 + 5 = −7", "pas −27 !"),
     ("06-probleme", "verte", ["COMPRENDRE UN PROBLÈME", "AVEC DES RELATIFS"], "−2 + 7 = 5", "+ traduire, calculer, répondre"),
     ("07-defi", "verte", ["DÉFI : COMPRENDRE", "LES SIGNES DES RELATIFS"], "(−2) × (−3) × (−1)", "+ 3 moins : négatif"),
 ]
