@@ -43,6 +43,8 @@ export const microSkills: MicroSkillSource[] = [
   // dans la seconde, alors que le programme la reactive pour comparer des ordres
   // de grandeur (masse d'un atome, distance d'une etoile).
   { id: "puiss_notation_scientifique", label: "Écrire un nombre en notation scientifique", notionId: "puissances_2de", prerequis: ["puiss_exposant_negatif"] },
+  // 07/11/2026 : le coach n'avait que des bases entières, et aⁿ × bⁿ en vrai ou faux.
+  { id: "puiss_meme_exposant", label: "Calculer la puissance d'un produit ou d'une fraction : $(ab)^n$ et $\\left(\\frac{a}{b}\\right)^n$", notionId: "puissances_2de", prerequis: ["puiss_produit_quotient"] },
 
   /* ===================== racine_carree_2de ===================== */
   { id: "racine_calcul", label: "Calculer une racine carrée", notionId: "racine_carree_2de", prerequis: ["puiss_calcul"] },

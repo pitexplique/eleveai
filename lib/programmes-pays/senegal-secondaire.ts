@@ -125,7 +125,7 @@ export const SENEGAL_2NDE: ProgrammePays = {
       code: "AN 1", domaine: "Activités numériques",
       texte: "Calcul dans ℝ : puissances, radicaux (√(a²b) = |a|√b), valeur absolue, distance sur une droite ; résoudre |ax + b| = |cx + d|, |x − a| ≤ b.",
       couverture: "complete",
-      micros: m("seconde", "puiss_calcul", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_exposant_negatif", "puiss_expression_composee", "racine_carre_de_a2", "racine_produit", "racine_simplification", "valeur_absolue_distance", "reference_valeur_absolue", "va_equation_affine", "va_inequation_affine"),
+      micros: m("seconde", "puiss_calcul", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_exposant_negatif", "puiss_expression_composee", "puiss_meme_exposant", "racine_carre_de_a2", "racine_produit", "racine_simplification", "valeur_absolue_distance", "reference_valeur_absolue", "va_equation_affine", "va_inequation_affine"),
     },
     {
       code: "AN 2", domaine: "Activités numériques",

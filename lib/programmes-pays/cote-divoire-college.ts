@@ -178,12 +178,13 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
     {
       code: "C1-L1", domaine: CALC,
       texte: "Nombres premiers : puissance d'exposant entier d'un entier naturel, priorité de la puissance, (a × b)ⁿ = aⁿ × bⁿ, aⁿ × aᵐ = aⁿ⁺ᵐ ; division euclidienne (égalité, encadrement de a entre deux multiples consécutifs de b) ; reconnaître un nombre premier (2 ou 3 chiffres), décomposer en produit de facteurs premiers.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "puissance_comprendre", "puissance_calculer", "puissance_calcul", "div_euclidienne", "premier_definition", "premier_determiner", "premier_decomposer"),
         ...m("3e", "entier_puissance_calcul"),
+        ...m("seconde", "puiss_meme_exposant"),
       ],
-      note: "(a × b)ⁿ = aⁿ × bⁿ n'est vu qu'en vrai ou faux (3e) et dans le défi de 3e.",
+      note: "(a × b)ⁿ = aⁿ × bⁿ est travaillé dans une micro de seconde.",
     },
     {
       code: "C1-L2", domaine: CALC,
@@ -197,12 +198,13 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
     {
       code: "C1-L3", domaine: CALC,
       texte: "Fractions : différence de deux fractions, produit d'une fraction par un entier, produit de deux fractions, puissance entière d'une fraction ; encadrer une fraction par deux décimaux consécutifs de même ordre.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("5e", "fraction_additionner", "fraction_multiplier", "approx_encadrer_quotient"),
         ...m("6e", "fraction_multiplier_entier"),
+        ...m("seconde", "puiss_meme_exposant"),
       ],
-      note: "L'encadrement d'un quotient est couvert ; manque la puissance d'une fraction ((a/b)ⁿ = aⁿ/bⁿ).",
+      note: "L'encadrement d'un quotient est couvert ; la puissance d'une fraction ((a/b)ⁿ = aⁿ/bⁿ) est dans une micro de seconde.",
     },
     {
       code: "C2-L1", domaine: DONN,

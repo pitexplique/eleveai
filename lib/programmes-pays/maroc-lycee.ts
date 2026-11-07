@@ -81,7 +81,7 @@ export const MAROC_TC: ProgrammePays = {
       code: "I-2b", domaine: NB,
       texte: "Puissances et leurs propriétés, puissances de 10, écriture scientifique d'un décimal.",
       couverture: "complete",
-      micros: m("seconde", "puiss_calcul", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_exposant_negatif", "puiss_expression_composee", "puiss_notation_scientifique"),
+      micros: m("seconde", "puiss_calcul", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_exposant_negatif", "puiss_expression_composee", "puiss_notation_scientifique", "puiss_meme_exposant"),
     },
     {
       code: "I-2c", domaine: NB,

@@ -17,6 +17,13 @@ import {
   genQuotientMemeBase,
   genVraiFaux,
 } from "@/lib/tutor-v4/questionBank/puissances-regles-commun";
+import {
+  genPuissanceDecimal,
+  genPuissanceFractionContexte,
+  genPuissanceProduit,
+  genPuissanceQuotient,
+  genVraiFauxMemeExposant,
+} from "@/lib/tutor-v4/questionBank/puissances-meme-exposant";
 
 const C_CON = gab4e("4e_puissance_comprendre_tpl_2_condenser");
 const K_VAL = gab4e("4e_puissance_calculer_tpl_1");
@@ -63,6 +70,7 @@ const H_PP = "(aᵐ)ⁿ = aᵐˣⁿ : on multiplie les exposants.";
 const H_NEG = "a⁻ⁿ = 1/aⁿ : un inverse, jamais un nombre négatif.";
 const H_ENC = "Parenthèses d’abord (puissance de puissance), puis produits, puis quotient.";
 const H_SCI = "Notation scientifique : a × 10ⁿ avec 1 ≤ a < 10.";
+const H_ME = "L’exposant s’applique à chaque facteur, en haut et en bas d’une fraction : (ab)ⁿ = aⁿbⁿ et (a/b)ⁿ = aⁿ/bⁿ.";
 
 export const puissancesRenfort2de: TutorBankItemV4[] = [
   // puiss_calcul — ★1 à ★3
@@ -134,4 +142,16 @@ export const puissancesRenfort2de: TutorBankItemV4[] = [
   tpl("puiss_notation_scientifique", 5, () => genCalculScientifique(LNC), H_SCI),
   tpl("puiss_notation_scientifique", 5, F_ORD, H_SCI),
   tpl("puiss_notation_scientifique", 5, S_RAN, H_SCI),
+
+  // puiss_meme_exposant — ★2 à ★4 : (ab)ⁿ, (a/b)ⁿ, bases décimales (07/11/2026)
+  tpl("puiss_meme_exposant", 2, () => genPuissanceProduit(L), H_ME),
+  tpl("puiss_meme_exposant", 2, () => genPuissanceQuotient(L), H_ME),
+  tpl("puiss_meme_exposant", 2, () => genPuissanceDecimal(L), H_DEF),
+  tpl("puiss_meme_exposant", 3, () => genPuissanceQuotient(L), H_ME),
+  tpl("puiss_meme_exposant", 3, () => genPuissanceProduit(L), H_ME),
+  tpl("puiss_meme_exposant", 3, () => genVraiFauxMemeExposant(L), H_ME),
+  tpl("puiss_meme_exposant", 3, () => genPuissanceDecimal(L), H_DEF),
+  tpl("puiss_meme_exposant", 4, () => genPuissanceQuotient(LN), H_ME),
+  tpl("puiss_meme_exposant", 4, () => genPuissanceFractionContexte(L), H_ME),
+  tpl("puiss_meme_exposant", 4, () => genVraiFauxMemeExposant(L), H_ME),
 ];

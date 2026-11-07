@@ -43,7 +43,7 @@ export const ETATS_UNIS_GRADE_8: ProgrammePays = {
       code: "8.EE.A.1", domaine: "Expressions et équations",
       texte: "Propriétés des exposants entiers pour écrire des expressions numériques équivalentes.",
       couverture: "complete",
-      micros: [...m("4e", "puissance_calcul", "puissance_exposant_negatif"), ...m("seconde", "puiss_produit_quotient")],
+      micros: [...m("4e", "puissance_calcul", "puissance_exposant_negatif"), ...m("seconde", "puiss_produit_quotient", "puiss_meme_exposant")],
     },
     {
       code: "8.EE.A.2", domaine: "Expressions et équations",

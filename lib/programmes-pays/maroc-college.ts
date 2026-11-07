@@ -262,13 +262,13 @@ export const MAROC_2AC: ProgrammePays = {
     {
       code: "S1-2", domaine: AN,
       texte: "Puissances à exposant entier relatif : aᵐ × aⁿ = aᵐ⁺ⁿ, (ab)ⁿ = aⁿbⁿ, (a/b)ⁿ = aⁿ/bⁿ ; exposants négatifs ; écriture scientifique et ordre de grandeur.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
         ...m("4e", "puissance_calcul", "puissance_exposant_negatif", "puissance_dix", "puissance_notation_scientifique", "puissance_defi", "ordre_estimer"),
         ...m("3e", "entier_puissance_calcul", "entier_puissance_defi"),
-        ...m("seconde", "puiss_produit_quotient"),
+        ...m("seconde", "puiss_produit_quotient", "puiss_meme_exposant"),
       ],
-      note: "(ab)ⁿ = aⁿbⁿ n'est vu qu'en vrai ou faux (3e) et dans le défi de 3e ; (a/b)ⁿ = aⁿ/bⁿ manque.",
+      note: "(ab)ⁿ et (a/b)ⁿ sont travaillés dans une micro de seconde.",
     },
     {
       code: "S1-3", domaine: AG,

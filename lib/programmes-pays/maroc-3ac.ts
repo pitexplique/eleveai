@@ -72,7 +72,7 @@ export const MAROC_3AC: ProgrammePays = {
       micros: [
         ...m("3e", "entier_puissance_comprendre", "entier_puissance_calculer", "entier_puissance_calcul", "entier_puissance_dix", "entier_puissance_ecriture_scientifique", "entier_puissance_defi"),
         ...m("4e", "puissance_exposant_negatif"),
-        ...m("seconde", "puiss_produit_quotient", "puiss_puissance_puissance"),
+        ...m("seconde", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_meme_exposant"),
       ],
     },
     {

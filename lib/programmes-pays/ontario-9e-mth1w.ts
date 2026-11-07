@@ -51,7 +51,7 @@ export const ONTARIO_9E_MTH1W: ProgrammePays = {
       code: "B2.2", domaine: "Nombres",
       texte: "Lois des exposants pour simplifier des expressions numériques et algébriques.",
       couverture: "complete",
-      micros: m("seconde", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_expression_composee"),
+      micros: m("seconde", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_expression_composee", "puiss_meme_exposant"),
     },
     {
       code: "B3.1", domaine: "Nombres",
