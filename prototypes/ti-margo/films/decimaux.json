@@ -1,0 +1,7 @@
+{
+  "voix": "6e-decimal-{ep}-short",
+  "sons": "public/sons/6e-decimal-{ep}-short",
+  "sortie": "manim/sorties/6e/maths/decimaux/{num}-{ep}",
+  "nom": "eleveai-maths-6e-decimal-{ep}-short",
+  "episodes": { "lire-ecrire": "01", "rang": "02", "comparer": "03", "arrondir": "04", "encadrer": "05", "defi": "06", "additionner": "07", "multiplier": "08", "multiplier-decimaux": "09", "multiplier-par-01": "10", "diviser-par-entier": "11", "calcul-defi": "12" }
+}

@@ -5,7 +5,7 @@ Réponds en français. Série : notions `decimal_nombre` et `decimal_calcul`, 12
 ## Où on en est
 Lis `manim/REPRISE-decimaux.md` : état, slugs, décors, ceintures, choix à garder. Le coach est vérifié (`9850db39`). Les 24 voix sont dans `manim/voix/6e-decimal-<slug>[-short].json`.
 
-**Les voix sont VALIDÉES (07/11, « Oui, enchaîne ») : ne les redemande pas.** Commence par la ligne « ⏳ RESTE » de la reprise (génération des voix, puis pilotes de l'épisode 01).
+**Les voix sont VALIDÉES (07/11, « Oui, enchaîne ») : ne les redemande pas.** 07/11 après-midi : voix générées et pilotes 01 rendus (voir « session pilotes » dans la reprise). Commence par : contrôle final des deux mp4 de `manim/sorties/6e/maths/decimaux/01-lire-ecrire/` (`python scripts/verifier-bords-video.py <mp4>`, planche relue), aperçu `manim/sorties/apercu-decimaux.html` (port 3900, à l'arrêt), puis montre-les à Frédéric et attends le oui du FORMAT.
 
 ## Après son oui, dans l'ordre (modèle : série Triangles)
 1. Voix générées (même outil que les triangles : voir l'en-tête de `manim/scripts/6e/triangle_nommer.py`).
