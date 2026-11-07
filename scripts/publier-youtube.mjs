@@ -584,7 +584,7 @@ const heureReunion = (iso) =>
 const CRPE = "CRPE maths : revoir les notions du collège";
 function playlistsDe(v, m) {
   const k = v.classe || v.fichier.split("/")[0];
-  if (v.film) return ["Films d'animation 3D"];
+  if (v.film) return ["Animation 3D maths"]; // nom donné par Frédéric, 06/11
   if (/^cp/.test(k) && v.serie === "La belle écriture") return ["La belle écriture pour les droitiers"];
   const par = {
     cm1: ["Maths CM1"], cm2: ["Maths CM2"],
