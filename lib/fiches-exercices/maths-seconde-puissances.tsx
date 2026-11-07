@@ -22,6 +22,8 @@
 // 15, 20), puiss_puissance_puissance (4, 15, 19, 20), puiss_exposant_negatif
 // (5, 8, 10), puiss_expression_composee (9, 10, 11, 12), puiss_notation_scientifique
 // (6, 7, 13, 14, 16, 17, 18). 6/6.
+// La 7e micro de la notion, puiss_meme_exposant (07/11/2026), a sa propre feuille :
+// `maths-seconde-puissance-produit-fraction.tsx`.
 
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
@@ -49,6 +51,7 @@ export const exercicesPuissancesSeconde: FicheExercicesData = {
 
   fichesCours: [{ href: "/fiches-cours/maths/seconde/puissances-2de", titre: "Les puissances" }],
   coachHref: "/coach-ia/maths?classe=seconde",
+  feuillesVoisines: [{ href: "/fiches-exercices/maths/seconde/puissance-produit-fraction", titre: "Puissance d'un produit ou d'une fraction" }],
 
   series: [
     /* ───────────────────────── ★ Un seul geste ───────────────────────── */
@@ -68,8 +71,8 @@ export const exercicesPuissancesSeconde: FicheExercicesData = {
             { question: "a)", attendu: "32" },
             { question: "b)", attendu: "-1" },
             { question: "c)", attendu: "1" },
-            { question: "d) (-5)^2", attendu: "25" },
-            { question: "d) -5^2", attendu: "-25" },
+            { question: "d) (-5)²", attendu: "25" },
+            { question: "d) -5²", attendu: "-25" },
           ],
           correction:
             "a) $2^5 = 2 \\times 2 \\times 2 \\times 2 \\times 2 = 32$. L'exposant compte les facteurs.\nb) $(-1)^7 = -1$. Il y a sept facteurs $-1$ : un nombre impair de signes moins donne un résultat négatif.\nc) $4^0 = 1$. Un nombre non nul à la puissance $0$ vaut toujours $1$.\nd) $(-5)^2 = (-5) \\times (-5) = 25$. Mais $-5^2 = -(5 \\times 5) = -25$ : sans parenthèse, seul le $5$ est au carré.\n⛔ Le piège : $2^5 = 10$. On a multiplié $2 \\times 5$ au lieu d'écrire cinq facteurs $2$.",
@@ -135,8 +138,8 @@ export const exercicesPuissancesSeconde: FicheExercicesData = {
           enonce: "Voici quatre écritures : $0{,}5 \\times 10^{3}$ ; $5 \\times 10^{2}$ ; $12 \\times 10^{-4}$ ; $1{,}2 \\times 10^{-3}$.\na) Lesquelles sont en notation scientifique ?\nb) Écrire les autres en notation scientifique.",
           reponses: [
             { question: "a)", attendu: ["5 × 10^2 ; 1,2 × 10^(-3)", "1,2 × 10^(-3) ; 5 × 10^2"], exact: true },
-            { question: "b) 0,5 × 10^3", attendu: "5 × 10^2", exact: true },
-            { question: "b) 12 × 10^(-4)", attendu: "1,2 × 10^(-3)", exact: true },
+            { question: "b) 0,5 × 10³", attendu: "5 × 10^2", exact: true },
+            { question: "b) 12 × 10⁻⁴", attendu: "1,2 × 10^(-3)", exact: true },
           ],
           correction:
             "On regarde seulement le nombre devant la puissance de $10$ : il doit être au moins $1$ et plus petit que $10$.\na) $5 \\times 10^{2}$ et $1{,}2 \\times 10^{-3}$ sont en notation scientifique.\nb) $0{,}5$ commence par $0$. Or $0{,}5 = 5 \\times 10^{-1}$, donc $0{,}5 \\times 10^{3} = 5 \\times 10^{-1+3} = 5 \\times 10^{2}$.\n$12$ a deux chiffres. Or $12 = 1{,}2 \\times 10^{1}$, donc $12 \\times 10^{-4} = 1{,}2 \\times 10^{1-4} = 1{,}2 \\times 10^{-3}$.\n⭐ Les deux écritures fausses valaient exactement les deux justes. Un nombre n'a qu'une seule notation scientifique : c'est pour cela qu'on l'utilise pour comparer.",
@@ -174,10 +177,10 @@ export const exercicesPuissancesSeconde: FicheExercicesData = {
           ],
           correction:
             "On réduit par étages : le haut, puis le bas, puis la fraction.\nLe haut est un produit : on additionne. $3^5 \\times 3^{-2} = 3^{5+(-2)} = 3^3$.\nLe bas est une puissance de puissance : on multiplie. $\\left(3^2\\right)^3 = 3^{2 \\times 3} = 3^6$.\nLa fraction est un quotient : on soustrait. $C = \\dfrac{3^3}{3^6} = 3^{3-6} = 3^{-3}$.\nDonc $n = -3$, et on s'arrête là.\n⛔ Le piège : calculer $3^5 = 243$, puis les autres. On ne calcule aucune valeur : la question demande $3^n$.",
-          schema: tableau("C par étages", ["réduit à", "la règle"], [
-            { label: "Le haut", values: ["3⁵ × 3⁻² = 3³", "on additionne"] },
-            { label: "Le bas", values: ["(3²)³ = 3⁶", "on multiplie"] },
-            { label: "C", values: ["3³ ÷ 3⁶ = 3⁻³", "on soustrait"] },
+          schema: tableau("C par étages", ["réduit à", "op."], [
+            { label: "Haut", values: ["3⁵ × 3⁻² = 3³", "+"] },
+            { label: "Bas", values: ["(3²)³ = 3⁶", "×"] },
+            { label: "C", values: ["3³ ÷ 3⁶ = 3⁻³", "−"] },
           ]),
           micros: ["puiss_expression_composee"],
         },
@@ -188,10 +191,10 @@ export const exercicesPuissancesSeconde: FicheExercicesData = {
           ],
           correction:
             "Le haut : $\\left(5^{-1}\\right)^4 = 5^{-1 \\times 4} = 5^{-4}$, puis $5^{-4} \\times 5^7 = 5^{-4+7} = 5^3$.\nLe bas : $5^2 \\times 5^{-3} = 5^{2+(-3)} = 5^{-1}$.\nLa fraction : $D = \\dfrac{5^3}{5^{-1}} = 5^{3-(-1)} = 5^{3+1} = 5^4$.\n⛔ Le piège : écrire $3 - (-1) = 2$. Soustraire un nombre négatif, c'est AJOUTER son opposé : $3 - (-1) = 4$.\n⭐ On peut vérifier autrement : $5^{-1} = \\dfrac{1}{5}$, et diviser par $\\dfrac{1}{5}$, c'est multiplier par $5$. Donc $D = 5^3 \\times 5 = 5^4$.",
-          schema: tableau("D par étages", ["réduit à", "la règle"], [
-            { label: "Le haut", values: ["5⁻⁴ × 5⁷ = 5³", "× puis +"] },
-            { label: "Le bas", values: ["5² × 5⁻³ = 5⁻¹", "on additionne"] },
-            { label: "D", values: ["5³ ÷ 5⁻¹ = 5⁴", "3 − (−1) = 4"] },
+          schema: tableau("D par étages", ["réduit à", "op."], [
+            { label: "Haut", values: ["5⁻⁴ × 5⁷ = 5³", "×, +"] },
+            { label: "Bas", values: ["5² × 5⁻³ = 5⁻¹", "+"] },
+            { label: "D", values: ["5³ ÷ 5⁻¹ = 5⁴", "−"] },
           ]),
           micros: ["puiss_expression_composee", "puiss_exposant_negatif"],
         },
@@ -287,10 +290,10 @@ export const exercicesPuissancesSeconde: FicheExercicesData = {
           ],
           correction:
             "a) D'abord le volume en mm³ : $5 \\times 10^{6}$ mm³.\nPuis le nombre de globules : $5 \\times 10^{6} \\times 5 \\times 10^{6} = 25 \\times 10^{12}$.\nEn notation scientifique : $25 = 2{,}5 \\times 10^{1}$, donc $2{,}5 \\times 10^{13}$ globules rouges.\nb) $2{,}5 \\times 10^{13} \\times 7 \\times 10^{-6} = 17{,}5 \\times 10^{7}$ m, soit $1{,}75 \\times 10^{8}$ m.\nEn kilomètres, on divise par $10^{3}$ : $1{,}75 \\times 10^{5}$ km, c'est-à-dire $175\\,000$ km.\nc) $\\dfrac{1{,}75 \\times 10^{5}}{4 \\times 10^{4}} = 0{,}4375 \\times 10^{1} = 4{,}375$. On ferait un peu plus de $4$ fois le tour de la Terre.\n⛔ Le piège : oublier de convertir les litres. $5 \\times 5 \\times 10^{6} = 2{,}5 \\times 10^{7}$ : un million de fois trop peu.",
-          schema: tableau("Du sang au tour de la Terre", ["valeur", "unité"], [
+          schema: tableau("Du sang au tour de la Terre", ["valeur", "en"], [
             { label: "Volume", values: ["5 × 10⁶", "mm³"] },
-            { label: "Globules", values: ["2,5 × 10¹³", "globules"] },
-            { label: "Bout à bout", values: ["1,75 × 10⁵", "km"] },
+            { label: "Nombre", values: ["2,5 × 10¹³", "—"] },
+            { label: "En ligne", values: ["1,75 × 10⁵", "km"] },
           ]),
           micros: ["puiss_notation_scientifique"],
         },

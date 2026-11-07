@@ -162,6 +162,16 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                   {insecables(`Relire le cours — ${f.titre}`)}
                 </Link>
               ))}
+              {fiche.feuillesVoisines?.map((f) => (
+                <Link
+                  key={f.href}
+                  href={f.href}
+                  className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-bold text-amber-800 transition hover:bg-amber-100"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  {insecables(`Autre feuille — ${f.titre}`)}
+                </Link>
+              ))}
               <ModeClasse sousTitre={`${titreComplet} - ${classe}`} slides={slides} />
               {pdfPret ? (
                 <a

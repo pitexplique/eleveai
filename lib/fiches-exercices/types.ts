@@ -98,6 +98,9 @@ export type FicheExercicesData = {
   series: SerieExercices[];
   /** Les fiches de cours à relire, dans l'ordre. */
   fichesCours: { href: string; titre: string }[];
+  /** Les autres feuilles de la même notion (07/11/2026, seconde : les puissances
+   *  et la puissance d'un produit ou d'une fraction). Facultatif. */
+  feuillesVoisines?: { href: string; titre: string }[];
   /** Le coach de la classe, pour « encore un comme ça ». */
   coachHref: string;
 };

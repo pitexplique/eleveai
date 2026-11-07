@@ -27,7 +27,7 @@ Frédéric a répondu « Oui, ajoute-la ». Commit `0b25d81f`, non poussé :
 - 10 fichiers de `lib/programmes-pays/` ; 6 lignes repassent en « complete ».
 - Pas vu à l'écran : le navigateur intégré refuse localhost. Contrôlé par 100 000 tirages, KaTeX sur 1 082 formules, types, et la page répond 200.
 
-Question laissée à Frédéric, sans réponse à ce jour : préparer la feuille d'exercices de cette micro ? Ne pas la lancer d'office. Elle n'a ni feuille, ni vidéo, ni short.
+Feuille d'exercices : Frédéric a répondu « Oui, prépare-la » le 07/11. FAITE : `/fiches-exercices/maths/seconde/puissance-produit-fraction`, 20 exercices, PDF. La micro n'a toujours ni vidéo, ni short.
 
 ## 3. Ce qui reste à part
 - La session « Coach 5e : puissances du nouveau programme » est distincte : ne pas la reprendre.

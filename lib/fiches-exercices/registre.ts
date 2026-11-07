@@ -478,6 +478,13 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du calcul seul au problème : produit, quotient, puissance d'une puissance, exposant négatif, expressions à réduire sous la forme a^n comme au contrôle, notation scientifique. La lumière du Soleil, les globules rouges, une bactérie qui se divise.",
   },
+  // La feuille de la micro `puiss_meme_exposant` (07/11/2026). Le bouton « Exercices »
+  // de la notion reste sur la feuille au-dessus, qui renvoie à celle-ci.
+  "maths/seconde/puissance-produit-fraction": {
+    titre: "Puissance d'un produit ou d'une fraction : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : répartir un exposant, regrouper pour calculer sans calculatrice, calculer (2/3)^3, exposant négatif, base négative, bases décimales. Une maquette d'architecte, des lancers francs, la caféine d'une canette, les Lunes dans la Terre.",
+  },
   "maths/seconde/racine-carree-2de": {
     titre: "La racine carrée : 20 exercices corrigés",
     resume:

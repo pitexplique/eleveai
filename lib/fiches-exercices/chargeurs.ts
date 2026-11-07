@@ -94,6 +94,7 @@ export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExerc
   "maths/3e/entier-racine-carree": () => import("@/lib/fiches-exercices/maths-3e-racine-carree").then((m) => m.exercicesRacineCarree3e),
   "maths/seconde/information-chiffree-evolutions": () => import("@/lib/fiches-exercices/maths-seconde-information-chiffree").then((m) => m.exercicesInformationChiffreeSeconde),
   "maths/seconde/puissances-2de": () => import("@/lib/fiches-exercices/maths-seconde-puissances").then((m) => m.exercicesPuissancesSeconde),
+  "maths/seconde/puissance-produit-fraction": () => import("@/lib/fiches-exercices/maths-seconde-puissance-produit-fraction").then((m) => m.exercicesPuissanceProduitFractionSeconde),
   "maths/seconde/racine-carree-2de": () => import("@/lib/fiches-exercices/maths-seconde-racines").then((m) => m.exercicesRacinesSeconde),
   "maths/seconde/developpement-factorisation-2de": () => import("@/lib/fiches-exercices/maths-seconde-devfac").then((m) => m.exercicesDevfacSeconde),
   "maths/seconde/identites-remarquables-2de": () => import("@/lib/fiches-exercices/maths-seconde-identites").then((m) => m.exercicesIdentitesSeconde),

@@ -700,7 +700,7 @@ export function creerVerif(bavard = true) {
 /** Ce qui est vrai de TOUTE feuille : 20 exercices en 8 + 8 + 4, des `$`
  *  appariés, pas de LaTeX hors formule, pas de `$` dans un canvas, et les
  *  micros de la notion toutes servies — sans micro d'une autre notion. */
-export function controlesCommuns(v, source, { notionId, classe = "seconde", matiere = "maths" }) {
+export function controlesCommuns(v, source, { notionId, classe = "seconde", matiere = "maths", microsRequises }) {
   const f = lireFeuille(source);
   v.titre("Le texte de la feuille");
   v.ok("20 énoncés, 20 corrigés", f.enonces.length === 20 && f.corrections.length === 20, `${f.enonces.length} / ${f.corrections.length}`);
@@ -739,7 +739,8 @@ export function controlesCommuns(v, source, { notionId, classe = "seconde", mati
   v.ok(`${cites.size} micros citées, toutes connues du coach`, inconnues.length === 0, inconnues.join(", "));
   // Une micro masquée (hors programme) n'exige plus d'exercice.
   const masquees = fs.readFileSync(path.join(RACINE, "lib", "tutor-v4", "micros-masquees.ts"), "utf8");
-  const requises = deLaNotion.filter((id) => !masquees.includes(`"${id}"`));
+  // `microsRequises` : une notion à deux feuilles, chacune ne répond que de ses micros (07/11/2026).
+  const requises = microsRequises ?? deLaNotion.filter((id) => !masquees.includes(`"${id}"`));
   const sansExercice = requises.filter((id) => !cites.has(id));
   v.ok(`les ${requises.length} micros de ${notionId} ont chacune un exercice`, deLaNotion.length > 0 && sansExercice.length === 0, sansExercice.join(", ") || "aucune micro lue");
   const horsNotion = [...cites].filter((id) => !deLaNotion.includes(id));
@@ -751,7 +752,7 @@ export function controlesCommuns(v, source, { notionId, classe = "seconde", mati
  * @param {{ nom: string, fichier: string, notionId: string, verifier: (source: string, v: ReturnType<typeof creerVerif>) => void, casses: [string, string, string][] }} p
  */
 // `classe` : « 3e » lit les micros écrites sur trois lignes (24/09/2026).
-export function lancer({ nom, fichier, notionId, verifier, casses, classe = "seconde" }) {
+export function lancer({ nom, fichier, notionId, verifier, casses, classe = "seconde", microsRequises }) {
   const chemin = path.join(RACINE, fichier);
   const source = fs.readFileSync(chemin, "utf8");
   const passe = (src, bavard) => {
@@ -761,7 +762,7 @@ export function lancer({ nom, fichier, notionId, verifier, casses, classe = "sec
     } catch (e) {
       v.ok("le recalcul s'exécute", false, String(e?.message ?? e));
     }
-    controlesCommuns(v, src, { notionId, classe });
+    controlesCommuns(v, src, { notionId, classe, microsRequises });
     return v.erreurs();
   };
 

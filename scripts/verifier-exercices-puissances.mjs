@@ -162,6 +162,8 @@ lancer({
   nom: "LES PUISSANCES · seconde · 20 exercices",
   fichier: "lib/fiches-exercices/maths-seconde-puissances.tsx",
   notionId: "puissances_2de",
+  // puiss_meme_exposant a sa propre feuille (verifier-exercices-puissance-produit-fraction.mjs).
+  microsRequises: ["puiss_calcul", "puiss_produit_quotient", "puiss_puissance_puissance", "puiss_exposant_negatif", "puiss_expression_composee", "puiss_notation_scientifique"],
   verifier,
   casses: [
     ["ex. 9 : C devient 3⁻²", "= 3^{3-6} = 3^{-3}$", "= 3^{3-6} = 3^{-2}$"],

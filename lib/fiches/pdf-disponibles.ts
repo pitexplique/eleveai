@@ -317,6 +317,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "proportions-et-pourcentages-premiere-20-exercices-corriges.pdf",
   "proprietes-des-quadrilateres-6e-20-exercices-corriges.pdf",
   "proprietes-des-quadrilateres-6e-cours-exercices-corriges.pdf",
+  "puissance-d-un-produit-ou-d-une-fraction-seconde-20-exercices-corriges.pdf",
   "puissances-et-ecriture-scientifique-3e-20-exercices-corriges.pdf",
   "puissances-et-ecriture-scientifique-3e-cours-exercices-corriges.pdf",
   "puissances-et-notation-scientifique-4e-cours-exercices-corriges.pdf",
