@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ti Margo 3D</title>
+<style>
+  :root { --encre:#17452a; --bouton:#ffffff; --accent:#f5a50a; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; overflow:hidden; font-family:"Segoe UI",system-ui,sans-serif; color:var(--encre);
+    background:linear-gradient(#bfe9ff 0%,#e8f8ff 58%,#fff7dc 100%); }
+  canvas { position:fixed; inset:0; display:block; touch-action:none; }
+  #bulle { position:fixed; left:0; top:0; max-width:min(320px,70vw); padding:12px 18px; background:#fff; border:3px solid var(--encre);
+    border-radius:20px; font-size:clamp(17px,2.4vw,24px); font-weight:700; line-height:1.2; text-align:center;
+    opacity:0; transition:opacity .15s; pointer-events:none; }
+  #bulle::after { content:""; position:absolute; left:26px; bottom:-14px; width:20px; height:20px; background:#fff;
+    border-right:3px solid var(--encre); border-bottom:3px solid var(--encre); transform:rotate(45deg) skew(12deg,12deg); }
+  #barre { position:fixed; left:0; right:0; bottom:0; padding:12px 16px 16px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  button { font:inherit; font-weight:700; font-size:16px; color:var(--encre); background:var(--bouton); border:2px solid var(--encre);
+    border-radius:999px; padding:9px 16px; cursor:pointer; box-shadow:0 3px 0 var(--encre); }
+  button:active { transform:translateY(2px); box-shadow:0 1px 0 var(--encre); }
+  button.principal { background:var(--accent); }
+  #erreur { position:fixed; inset:20% 10% auto; font-weight:700; text-align:center; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="bulle"></div>
+<div id="barre">
+  <button class="principal" data-a="scene">▶ Petit dessin animé</button>
+  <button data-a="salut">Salut</button>
+  <button data-a="parle">Parler</button>
+  <button data-a="reflechit">Réfléchir</button>
+  <button data-a="eureka">Eurêka</button>
+  <button data-a="bravo">Bravo</button>
+  <button data-a="saut">Sauter</button>
+  <button data-a="danse">Danser</button>
+  <button data-a="marche">Marcher</button>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+/* ---------- Rendu ---------- */
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true, preserveDrawingBuffer:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+document.body.prepend(renderer.domElement);
+const scene3d = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(32,1,.1,100);
+const controls = new OrbitControls(camera,renderer.domElement);
+controls.target.set(0,1.72,0); controls.enablePan=false; controls.enableDamping=true;
+controls.minDistance=4; controls.maxDistance=14; controls.maxPolarAngle=Math.PI*.56;
+camera.position.set(1.1,2.3,8.4);
+
+scene3d.add(new THREE.AmbientLight(0xffffff,1.25));
+const soleil = new THREE.DirectionalLight(0xfffbe8,2.1); soleil.position.set(-2.5,5,5); scene3d.add(soleil);
+const contre = new THREE.DirectionalLight(0xbfe6ff,.5); contre.position.set(3,2,-4); scene3d.add(contre);
+
+/* ---------- Matières dessin animé : aplats + contour ---------- */
+const degrade = new THREE.DataTexture(new Uint8Array([120,120,120,255, 195,195,195,255, 255,255,255,255]),3,1,THREE.RGBAFormat);
+degrade.minFilter=degrade.magFilter=THREE.NearestFilter; degrade.needsUpdate=true;
+const toon = (c,extra={}) => new THREE.MeshToonMaterial({ color:c, gradientMap:degrade, ...extra });
+const C = {
+  vert:toon(0x86bc1c), vertFonce:toon(0x2f9a3a), jaune:toon(0xf6dc62), jauneVert:toon(0xd3d73a),
+  blanc:toon(0xffffff), noir:toon(0x0a0f14), bleuIris:toon(0x1c5f9e), bouche:toon(0x4a1512), langue:toon(0xe56a68),
+  sac:toon(0x0f4f97), sacFonce:toon(0x0a3a70), orange:toon(0xf5a50a), bois:toon(0xf3cf9a), mine:toon(0x2a2a30),
+  metal:toon(0x5f8fae), gomme:toon(0xee6f6c)
+};
+function contour(epaisseur,couleur=0x14602a){
+  const m = new THREE.MeshBasicMaterial({ color:couleur, side:THREE.BackSide });
+  m.onBeforeCompile = s => { s.vertexShader = s.vertexShader.replace('#include <begin_vertex>',
+    `#include <begin_vertex>\n transformed += normalize(normal)*${epaisseur.toFixed(4)};`); };
+  m.customProgramCacheKey = () => 'contour'+epaisseur;
+  return m;
+}
+const CONTOUR = contour(.016), CONTOUR_FIN = contour(.008), CONTOUR_SOMBRE = contour(.012,0x0d2b45);
+
+function piece(parent,geo,mat,pos,trait=CONTOUR){
+  const m = new THREE.Mesh(geo,mat); if(pos) m.position.set(...pos); parent.add(m);
+  if(trait){ const o=new THREE.Mesh(geo,trait); m.add(o); o.frustumCulled=m.frustumCulled=false; }
+  return m;
+}
+const ell = (rx,ry,rz,s=32) => new THREE.SphereGeometry(1,s,Math.round(s*.75)).scale(rx,ry,rz);
+
+/* Tube souple : bras, jambes, cou, queue. Recalculé à chaque image. */
+class Tube {
+  constructor(parent,rayon,mat,{seg=28,rad=14,trait=CONTOUR}={}){
+    this.seg=seg; this.rad=rad; this.rayon=rayon; this.taches=[];
+    const n=(seg+1)*(rad+1), geo=new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(n*3),3));
+    geo.setAttribute('normal',new THREE.BufferAttribute(new Float32Array(n*3),3));
+    const idx=[]; for(let i=0;i<seg;i++)for(let j=0;j<rad;j++){ const a=i*(rad+1)+j,b=a+rad+1; idx.push(a,a+1,b, b,a+1,b+1); }
+    geo.setIndex(idx); this.geo=geo;
+    piece(parent,geo,mat,null,trait);
+    this.frames=[]; for(let i=0;i<=seg;i++) this.frames.push({p:new THREE.Vector3(),n:new THREE.Vector3(),b:new THREE.Vector3()});
+    this.parent=parent;
+  }
+  tache(t,angle,r,mat=C.vertFonce){
+    const m=new THREE.Mesh(new THREE.SphereGeometry(1,12,8).scale(r,r,r*.18),mat); this.parent.add(m); m.frustumCulled=false;
+    this.taches.push({m,t,angle}); return m;
+  }
+  maj(points){
+    const pts=new THREE.CatmullRomCurve3(points,false,'centripetal').getSpacedPoints(this.seg);
+    const T=new THREE.Vector3(),N=new THREE.Vector3(),B=new THREE.Vector3(),pos=this.geo.attributes.position,nor=this.geo.attributes.normal;
+    const v=new THREE.Vector3();
+    for(let i=0;i<=this.seg;i++){
+      T.subVectors(pts[Math.min(i+1,this.seg)],pts[Math.max(i-1,0)]).normalize();
+      if(i===0){ N.set(0,0,1); if(Math.abs(T.z)>.9) N.set(1,0,0); }
+      N.addScaledVector(T,-N.dot(T)).normalize(); B.crossVectors(T,N);
+      const f=this.frames[i]; f.p.copy(pts[i]); f.n.copy(N); f.b.copy(B);
+      const r=this.rayon(i/this.seg);
+      for(let j=0;j<=this.rad;j++){
+        const a=j/this.rad*Math.PI*2,c=Math.cos(a),s=Math.sin(a),k=i*(this.rad+1)+j;
+        v.copy(N).multiplyScalar(c).addScaledVector(B,s);
+        nor.setXYZ(k,v.x,v.y,v.z); pos.setXYZ(k,pts[i].x+v.x*r,pts[i].y+v.y*r,pts[i].z+v.z*r);
+      }
+    }
+    pos.needsUpdate=nor.needsUpdate=true;
+    const Z=new THREE.Vector3(0,0,1);
+    for(const q of this.taches){
+      const i=Math.round(q.t*this.seg),f=this.frames[i],r=this.rayon(q.t);
+      v.copy(f.n).multiplyScalar(Math.cos(q.angle)).addScaledVector(f.b,Math.sin(q.angle));
+      q.m.position.copy(f.p).addScaledVector(v,r*.97); q.m.quaternion.setFromUnitVectors(Z,v);
+    }
+  }
+}
+
+/* Petit générateur reproductible : Ti Margo a toujours les mêmes taches */
+let graine=7; const hasard=()=> (graine=(graine*16807)%2147483647)/2147483647;
+function tacheSurEllipsoide(parent,c,r,dir,taille,mat=C.vertFonce){
+  const d=new THREE.Vector3(...dir).normalize();
+  const p=new THREE.Vector3(d.x*r[0],d.y*r[1],d.z*r[2]);
+  const n=new THREE.Vector3(d.x/r[0],d.y/r[1],d.z/r[2]).normalize();
+  const m=new THREE.Mesh(new THREE.SphereGeometry(1,12,8).scale(taille,taille,taille*.2),mat);
+  m.position.set(c[0]+p.x,c[1]+p.y,c[2]+p.z); m.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),n); parent.add(m);
+}
+
+/* ---------- Le personnage ---------- */
+const racine = new THREE.Group(); scene3d.add(racine);
+
+/* Tronc + ventre jaune */
+const tronc = new THREE.Group(); racine.add(tronc);
+const CT=[0,.54,0], RT=[.36,.68,.27];
+piece(tronc,ell(...RT),C.vert,CT);
+piece(tronc,ell(.255,.6,.23),C.jaune,[0,.5,.09],CONTOUR_FIN);
+for(const [y,l] of [[.16,.13],[.38,.17],[.6,.17],[.82,.14]]){
+  const pli=new THREE.Mesh(new THREE.TorusGeometry(l,.0055,6,20,Math.PI*.8),C.jauneVert.clone());
+  pli.material.color.set(0xb9a93a); pli.position.set(0,y,.09+.205); pli.rotation.set(Math.PI*.5+.15,0,Math.PI*.1); tronc.add(pli);
+}
+for(let i=0;i<34;i++){
+  const a=hasard()*Math.PI*2, h=-.85+hasard()*1.65, cz=Math.sin(a), cx=Math.cos(a);
+  if(cz>.1 && Math.abs(cx)<.86) continue;
+  tacheSurEllipsoide(tronc,CT,RT,[cx,h,cz],.025+hasard()*.05);
+}
+
+/* Sac à dos */
+const sac=new THREE.Group(); sac.position.set(.03,.62,-.36); tronc.add(sac);
+piece(sac,new RoundedBoxGeometry(.86,1.02,.4,6,.15),C.sac,null,CONTOUR_SOMBRE);
+piece(sac,new RoundedBoxGeometry(.56,.42,.12,4,.05),C.sacFonce,[0,-.2,-.22],CONTOUR_SOMBRE);
+piece(sac,new RoundedBoxGeometry(.46,.03,.03,2,.012),C.orange,[0,-.02,-.285],null);
+for(const s of [-1,1]){
+  const b=new Tube(tronc,()=>.05,C.sac,{seg:14,rad:8,trait:CONTOUR_SOMBRE});
+  b.maj([[s*.2,1.08,-.2],[s*.25,1.14,.0],[s*.31,.9,.2],[s*.34,.5,.2],[s*.34,.2,.0]].map(p=>new THREE.Vector3(...p)));
+}
+
+/* Tête */
+const tete = new THREE.Group(); racine.add(tete);
+const RC=[.6,.42,.54], CC=[0,.08,-.04];
+piece(tete,ell(...RC),C.vert,CC);
+const RM=[.48,.215,.44], CM=[0,-.02,.34];
+piece(tete,ell(...RM),C.vert,CM);
+tacheSurEllipsoide(tete,CC,RC,[.93,.1,-.25],.1); tacheSurEllipsoide(tete,CC,RC,[-.93,.1,-.25],.1);
+for(let i=0;i<22;i++){
+  const a=hasard()*Math.PI*2, h=hasard()*.85-.15, y=hasard()>.72;
+  const d=[Math.cos(a),h,Math.sin(a)]; if(d[2]>.35 && Math.abs(d[0])<.72 && h<.5) continue;
+  tacheSurEllipsoide(tete,CC,RC,d,.022+hasard()*.04,y?C.jauneVert:C.vertFonce);
+}
+for(const [d,r,m] of [[[0,.86,.5],.05,C.vertFonce],[[-.14,.92,.36],.03,C.jauneVert],[[.15,.9,.38],.035,C.vertFonce],[[.05,.74,.66],.028,C.jauneVert],[[-.08,.72,.68],.022,C.vertFonce],[[.8,-.05,.6],.05,C.vertFonce],[[-.8,-.05,.6],.05,C.vertFonce],[[.86,.25,.42],.032,C.jauneVert],[[-.86,.25,.42],.032,C.vertFonce]])
+  tacheSurEllipsoide(tete,CC,RC,d,r,m);
+piece(tete,new THREE.SphereGeometry(.024,10,8),C.noir,[-.13,.075,.74],null);
+piece(tete,new THREE.SphereGeometry(.024,10,8),C.noir,[.13,.075,.74],null);
+
+/* Bouche : l'intérieur, puis la mâchoire qui s'ouvre */
+piece(tete,ell(.4,.14,.34),C.bouche,[0,-.17,.34],null);
+const machoire = new THREE.Group(); machoire.position.set(0,-.13,.0); tete.add(machoire);
+piece(machoire,ell(.41,.125,.39),C.jaune,[0,-.075,.35]);
+piece(machoire,ell(.375,.07,.35),C.bouche,[0,-.02,.36],null);
+const langue=piece(machoire,ell(.22,.05,.22),C.langue,[0,.018,.38],null);
+
+/* Coins de la bouche : le sourire */
+for(const s of [-1,1]){
+  const coin=new Tube(tete,t=>.02*(1-t*.6),C.noir,{seg:8,rad:6,trait:null});
+  coin.maj([[s*.455,-.13,.3],[s*.54,-.05,.17],[s*.575,.03,.06]].map(p=>new THREE.Vector3(...p)));
+}
+
+/* Yeux */
+const yeux=[];
+for(const s of [-1,1]){
+  piece(tete,ell(.285,.31,.27),C.vert,[s*.3,.32,.15]);
+  const o=new THREE.Group(); o.position.set(s*.3,.31,.32); o.rotation.y=s*.22; tete.add(o);
+  piece(o,new THREE.SphereGeometry(.225,28,20),C.blanc,null,CONTOUR_SOMBRE);
+  const globe=new THREE.Group(); o.add(globe);
+  const iris=new THREE.Mesh(new THREE.SphereGeometry(.128,22,16).scale(1,1,.34),C.bleuIris); iris.position.z=.19; globe.add(iris);
+  const pup=new THREE.Mesh(new THREE.SphereGeometry(.09,20,14).scale(1,1,.34),C.noir); pup.position.z=.215; globe.add(pup);
+  const eclat=new THREE.Mesh(new THREE.SphereGeometry(.036,12,8),new THREE.MeshBasicMaterial({color:0xffffff})); eclat.position.set(-.045,.055,.235); globe.add(eclat);
+  const paup=new THREE.Mesh(new THREE.SphereGeometry(.238,24,14,0,Math.PI*2,0,Math.PI/2),toon(0x86bc1c,{side:THREE.DoubleSide})); o.add(paup);
+  yeux.push({globe,paup});
+}
+
+/* Cou */
+const cou=new Tube(racine,t=>.17-.03*t,C.vert,{seg:10,rad:14});
+const gorge=new Tube(racine,t=>.105-.015*t,C.jaune,{seg:10,rad:12,trait:null});
+
+/* Queue en spirale */
+const queue=new Tube(racine,t=>(t>.995?.002:.2*Math.pow(1-t,.62)+.035),C.vert,{seg:80,rad:14});
+for(let i=0;i<64;i++) queue.tache(.04+.92*i/64,hasard()*Math.PI*2,.018+hasard()*.05*(1-i/90));
+
+/* Mains */
+function main(cote){
+  const g=new THREE.Group(); racine.add(g);
+  piece(g,ell(.14,.15,.1),C.vert);
+  const doigts=[];
+  for(let i=0;i<4;i++){
+    const p=new THREE.Group(); p.position.set(-.1+.067*i,.11,.015); g.add(p);
+    const geo=new THREE.CapsuleGeometry(.047,.17-.012*Math.abs(i-1.5),5,12); geo.translate(0,.11,0);
+    piece(p,geo,C.vert); doigts.push(p);
+  }
+  const pouce=new THREE.Group(); g.add(pouce);
+  const gp=new THREE.CapsuleGeometry(.068,.12,5,12); gp.translate(0,.1,0); piece(pouce,gp,C.vert);
+  return { g, doigts, pouce, cote };
+}
+const mainG=main(-1), mainD=main(1);
+const GESTES={
+  ouverte:{d:[.05,.03,.03,.05],pz:1.0,px:.0,ppos:[.13,-.01,.03]},
+  poing:{d:[1.9,1.9,1.9,1.9],pz:.9,px:.9,ppos:[.08,.0,.07]},
+  pouce:{d:[1.95,1.95,1.95,1.95],pz:.32,px:0,ppos:[-.135,.03,.03]},
+  index:{d:[1.9,1.9,1.9,.0],pz:.9,px:.9,ppos:[.08,.0,.07]}
+};
+function poserMain(M,nom,k){
+  const G=GESTES[nom];
+  M.doigts.forEach((p,i)=>{ p.rotation.x+=(G.d[i]-p.rotation.x)*k; p.rotation.z+=((nom==='ouverte'?(1.5-i)*.24:0)-p.rotation.z)*k; });
+  M.pouce.rotation.z+=(-G.pz*-1-M.pouce.rotation.z)*k; M.pouce.rotation.x+=(G.px-M.pouce.rotation.x)*k;
+  M.pouce.position.lerp(new THREE.Vector3(...G.ppos),k);
+}
+
+/* Crayon */
+const crayon=new THREE.Group(); crayon.position.set(0,.02,.11); crayon.rotation.set(0,0,.09); mainG.g.add(crayon);
+piece(crayon,new THREE.CylinderGeometry(.064,.064,.98,6),C.orange,[0,.02,0],CONTOUR_FIN);
+piece(crayon,new THREE.ConeGeometry(.064,.2,6),C.bois,[0,.61,0],CONTOUR_FIN);
+piece(crayon,new THREE.ConeGeometry(.024,.075,6),C.mine,[0,.68,0],null);
+piece(crayon,new THREE.CylinderGeometry(.068,.068,.1,12),C.metal,[0,-.52,0],CONTOUR_FIN);
+piece(crayon,new THREE.CapsuleGeometry(.064,.05,4,12),C.gomme,[0,-.62,0],CONTOUR_FIN);
+
+/* Bras et jambes */
+const brasG=new Tube(racine,t=>.098-.022*t,C.vert), brasD=new Tube(racine,t=>.098-.022*t,C.vert);
+const jambeG=new Tube(racine,t=>.17-.085*t,C.vert), jambeD=new Tube(racine,t=>.17-.085*t,C.vert);
+for(const m of [brasG,brasD,jambeG,jambeD]) for(let i=0;i<15;i++) m.tache(.12+hasard()*.76,hasard()*Math.PI*2,.016+hasard()*.03);
+
+/* Pieds */
+function pied(cote){
+  const g=new THREE.Group(); racine.add(g);
+  piece(g,ell(.21,.095,.29),C.vert,[0,.09,.11]);
+  [-1.5,-.5,.5,1.5].forEach(i=>{
+    const a=i*.4; const d=new THREE.Group(); d.position.set(Math.sin(a)*.15,.05,.28); d.rotation.y=a; g.add(d);
+    const geo=new THREE.CapsuleGeometry(.045,.17,4,10); geo.rotateX(Math.PI/2); geo.translate(0,0,.09); piece(d,geo,C.vert);
+    piece(d,ell(.085,.058,.085,14),C.vert,[0,.006,.24]);
+  });
+  return g;
+}
+const piedG=pied(-1), piedD=pied(1);
+
+/* Ombre douce au sol */
+const cv=document.createElement('canvas'); cv.width=cv.height=128; const cx=cv.getContext('2d');
+const gr=cx.createRadialGradient(64,64,4,64,64,64); gr.addColorStop(0,'rgba(23,69,42,.42)'); gr.addColorStop(1,'rgba(23,69,42,0)');
+cx.fillStyle=gr; cx.fillRect(0,0,128,128);
+const ombre=new THREE.Mesh(new THREE.PlaneGeometry(3,2.2),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cv),transparent:true,depthWrite:false}));
+ombre.rotation.x=-Math.PI/2; ombre.position.y=.002; scene3d.add(ombre);
+
+/* ---------- La pose : ce qu'une action peut changer ---------- */
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+function poseDeBase(t){
+  const s=Math.sin(t*2.1);
+  return {
+    x:scene.x, ry:scene.ry, sautY:0, ecrase:0, hanche:1.26+.012*s,
+    tx:.03+.006*s, ty:.08, tz:0,
+    tetX:0, tetY:Math.sin(t*.5)*.05+.08, tetZ:-.05+Math.sin(t*.37)*.025, jaw:.34,
+    mg:V(-.82,2.14+.02*s,.34), cg:V(-.72,1.62,.12), md:V(.9,2.2+.02*s,.32), cd:V(.72,1.63,.08),
+    pg:V(-.33,0,.1), pd:V(.31,0,.04), rpg:0, rpd:0, kneeZ:.12,
+    qSway:Math.sin(t*1.3)*.16, qEnroule:1, regX:0, regY:0,
+    gesteD:'pouce', tourneD:0, paupiere:-1.02
+  };
+}
+const ACTIONS={
+  salut:{ d:2.6, f(t,P){ const e=Math.min(1,t*4)*Math.min(1,(2.6-t)*4);
+    P.md.set(.88,2.2+.68*e,.28); P.cd.set(.82,1.92,.06); P.gesteD='ouverte'; P.tourneD=Math.sin(t*11)*.42*e; P.tetZ=-.1; P.tz=.03*e; P.jaw=.5+Math.sin(t*7)*.15; } },
+  parle:{ d:3.2, f(t,P){ P.jaw=.28+.3*Math.abs(Math.sin(t*9)*Math.sin(t*3.7+1)); P.gesteD='ouverte'; P.md.set(.86,2.0+Math.sin(t*3)*.08,.5); P.cd.set(.72,1.58,.2);
+    P.tetX=Math.sin(t*4)*.04; P.tetY=.1+Math.sin(t*1.7)*.09; } },
+  reflechit:{ d:3, f(t,P){ P.md.set(.44,2.3,.72); P.cd.set(.78,1.78,.34); P.gesteD='index'; P.tetZ=.15; P.tetX=-.1; P.regX=-.28; P.regY=.35; P.jaw=.1; P.tz=-.03; P.qSway=Math.sin(t*3)*.3; } },
+  eureka:{ d:2.4, f(t,P){ const b=Math.max(0,Math.sin(Math.min(t*5,Math.PI))); P.md.set(1.08,2.92,.25); P.cd.set(.92,2.02,.04); P.gesteD='index'; P.tetX=-.16; P.jaw=.72; P.sautY=b*.2; P.ecrase=-b*.05; P.paupiere=-1.2; P.qEnroule=.72; } },
+  bravo:{ d:2.4, f(t,P){ const b=Math.sin(t*5); P.md.set(.95,2.32+b*.04,.45); P.cd.set(.74,1.7,.14); P.gesteD='pouce'; P.tetZ=-.14; P.jaw=.6; P.paupiere=-1.1; P.ty=.08+b*.04; } },
+  saut:{ d:1.5, f(t,P){
+    const accroupi=t<.32?Math.sin(t/.32*Math.PI/2):(t<.42?1-(t-.32)/.1:0), l=t>1.05?Math.max(0,Math.sin((t-1.05)/.45*Math.PI)):0;
+    const air=(t>.38&&t<1.08)?Math.sin((t-.38)/.7*Math.PI):0;
+    P.hanche-=accroupi*.24+l*.22; P.tx=.03+accroupi*.2+l*.16; P.sautY=air*1.15; P.ecrase=air>0?-.05*air:(accroupi+l)*.07;
+    P.mg.y+=air*.7-accroupi*.2; P.md.y+=air*.78-accroupi*.2; P.mg.x-=air*.18; P.md.x+=air*.18; P.gesteD=air>.2?'ouverte':'pouce'; P.jaw=.3+air*.5;
+    P.pg.y=air>.2?air*.12:0; P.pd.y=air>.2?air*.12:0; P.qEnroule=1-air*.45; P.tetX=accroupi*.14-air*.12; } },
+  danse:{ d:5.5, f(t,P){ const a=t*6.1,s=Math.sin(a),c=Math.cos(a),h=Math.abs(s);
+    P.hanche-=.05-h*.06; P.tz=s*.1; P.ty=.08+c*.12; P.tetZ=-s*.14; P.tetY=c*.12; P.jaw=.5;
+    P.md.set(.86+s*.1,2.55+s*.42,.3); P.cd.set(.82,1.84,.1); P.mg.set(-.86+s*.1,2.55-s*.42,.3); P.cg.set(-.82,1.84,.1); P.gesteD='ouverte';
+    P.pg.y=s>0?s*.15:0; P.pd.y=s<0?-s*.15:0; P.pg.x=-.34+s*.05; P.pd.x=.34+s*.05; P.qSway=c*.5; P.qEnroule=.85; } },
+  marche:{ d:3, f(t,P){ marcher(t,P); } }
+};
+function marcher(t,P){
+  const a=t*8.2,s=Math.sin(a),c=Math.cos(a);
+  P.pg.z=.1+s*.34; P.pd.z=.04-s*.34; P.pg.y=Math.max(0,c)*.2; P.pd.y=Math.max(0,-c)*.2; P.rpg=-c*.28; P.rpd=c*.28;
+  P.hanche+=Math.abs(c)*.05-.03; P.tz=s*.045; P.ty=s*.08; P.tx=.08; P.tetZ=-s*.03; P.jaw=.42;
+  P.md.set(.84,1.76+Math.max(0,s)*.2,.1+s*.34); P.cd.set(.72,1.6,.0); P.mg.set(-.84,1.82+Math.max(0,-s)*.2,.2-s*.3); P.cg.set(-.72,1.58,.02);
+  P.gesteD='poing'; P.qSway=s*.34; P.qEnroule=.92;
+}
+
+/* ---------- La petite scène ---------- */
+const scene={ x:0, ry:-.12, bulle:null, enCours:false, t:0, etapes:[], i:0 };
+let action=null;
+function jouer(nom){ action={nom,t:0,def:ACTIONS[nom]}; }
+function arreterScene(){ scene.enCours=false; dire(null); scene.x=0; scene.ry=-.12; }
+const SCRIPT=[
+  [0,   ()=>{ scene.x=-5.2; cur.x=-5.2; scene.ry=1.25; action={nom:'entree',t:0,def:{d:2.7,f(t,P){ marcher(t,P); scene.x=-5.2+5.2*Math.min(1,t/2.6); }}}; }],
+  [2.75,()=>{ scene.x=0; scene.ry=-.12; dire(null); }],
+  [3.2, ()=>{ jouer('salut'); dire('Salut ! Moi, c’est Ti Margo.'); }],
+  [5.9, ()=>{ jouer('reflechit'); dire('Hmm… 12 × 12 ?'); }],
+  [8.7, ()=>{ jouer('eureka'); dire('144 !'); }],
+  [11,  ()=>{ jouer('parle'); dire('12 × 10, puis 12 × 2.'); }],
+  [14.1,()=>{ jouer('bravo'); dire('Et voilà !'); }],
+  [16.2,()=>{ jouer('saut'); dire(null); }],
+  [17.8,()=>{ jouer('danse'); dire('À toi, maintenant !'); }],
+  [23.4,()=>{ arreterScene(); }]
+];
+function lancerScene(){ scene.enCours=true; scene.t=0; scene.i=0; action=null; }
+const bulle=document.getElementById('bulle');
+function dire(txt){ scene.bulle=txt; if(txt) bulle.textContent=txt; bulle.style.opacity=txt?1:0; }
+
+document.getElementById('barre').addEventListener('click',e=>{
+  const a=e.target.dataset?.a; if(!a) return;
+  if(a==='scene') return lancerScene();
+  arreterScene(); jouer(a);
+});
+
+/* Le regard suit la souris */
+const souris={x:0,y:0};
+addEventListener('pointermove',e=>{ souris.x=e.clientX/innerWidth*2-1; souris.y=e.clientY/innerHeight*2-1; });
+
+/* ---------- Mise à jour image par image ---------- */
+const cur=poseDeBase(0);
+let cligne=2.3,dernier=performance.now(),temps=0;
+const Tp=(x,y,z)=>new THREE.Vector3(x,y,z).applyMatrix4(tronc.matrix);
+function bougerVers(cible,k){
+  for(const c in cible){
+    const v=cible[c];
+    if(v instanceof THREE.Vector3) cur[c].lerp(v,k);
+    else if(typeof v==='number') cur[c]+=(v-cur[c])*k;
+    else cur[c]=v;
+  }
+}
+function pas(dt){
+  temps+=dt;
+  if(scene.enCours){ scene.t+=dt; while(scene.i<SCRIPT.length && SCRIPT[scene.i][0]<=scene.t){ SCRIPT[scene.i][1](); scene.i++; } }
+  const P=poseDeBase(temps);
+  if(action){ action.t+=dt; action.def.f(action.t,P); if(action.t>=action.def.d) action=null; }
+  P.x=scene.x; P.ry=scene.ry;
+  const k=scene.couper?1:1-Math.exp(-dt*16); bougerVers(P,k);
+  const S=cur;
+
+  const tl=scene.taille||1, posX=scene.video?scene.x:S.x, rotY=scene.video?scene.ry:S.ry;
+  racine.position.set(posX,S.sautY+(scene.y||0),scene.z||0); racine.rotation.y=rotY;
+  racine.scale.set(tl*(1+S.ecrase*.6),tl*(1-S.ecrase),tl*(1+S.ecrase*.6));
+  ombre.position.z=scene.z||0; ombre.position.x=posX; ombre.position.y=(scene.video?(scene.ySol||0):0)+.004; ombre.visible=!scene.cacherOmbre;
+  const om=1-S.sautY*.28; ombre.scale.set(om*tl,om*tl,1); ombre.material.opacity=Math.max(.3,om);
+  crayon.visible=!scene.sansCrayon;
+
+  const sf=scene.souffle||0; tronc.scale.set(1+.08*sf,1+.1*sf,1+.14*sf);
+  tronc.position.set(0,S.hanche,0); tronc.rotation.set(S.tx,S.ty,S.tz); tronc.updateMatrix();
+
+  const baseCou=Tp(0,1.08,.0), haut=Tp(0,1.42,.07);
+  tete.position.copy(Tp(0,1.68,.1));
+  tete.rotation.set(S.tx*.7+S.tetX,S.ty*.6+S.tetY,S.tz*.7+S.tetZ);
+  cou.maj([baseCou,baseCou.clone().lerp(haut,.55),haut,tete.position.clone().add(V(0,-.2,.0))]);
+  gorge.maj([Tp(0,.98,.17),Tp(0,1.2,.17),Tp(0,1.42,.17),tete.position.clone().add(V(0,-.25,.12))]);
+
+  machoire.rotation.x=S.jaw*1.05;
+
+  /* Clignement : rapide et irrégulier */
+  cligne-=dt; if(cligne<-.14) cligne=1.8+Math.random()*3.4;
+  const lid=cligne<0?1.55:S.paupiere;
+  const rx=S.regX+souris.y*.16, ry=S.regY+souris.x*.3;
+  for(const o of yeux){ o.paup.rotation.x+=(lid-o.paup.rotation.x)*(cligne<0?.7:.2); o.globe.rotation.set(rx,ry,0); }
+
+  /* Bras */
+  for(const [b,m,e,mn,cote] of [[brasG,S.mg,S.cg,mainG,-1],[brasD,S.md,S.cd,mainD,1]]){
+    const epaule=Tp(cote*.31,.98,.02);
+    b.maj([epaule,epaule.clone().lerp(e,.55),e,e.clone().lerp(m,.55),m]);
+    mn.g.position.copy(m);
+  }
+  mainG.g.rotation.set(.0,.1,.18);
+  mainD.g.rotation.set(0,-.2,-.1+S.tourneD);
+  poserMain(mainG,'poing',scene.couper?1:.2); poserMain(mainD,S.gesteD,scene.couper?1:.25);
+  for(const p of mainG.pouce.children) p.scale.setScalar(1);
+
+  /* Jambes */
+  for(const [j,pos,pi,ro,cote] of [[jambeG,S.pg,piedG,S.rpg,-1],[jambeD,S.pd,piedD,S.rpd,1]]){
+    const cheville=V(pos.x,pos.y+.13,pos.z-.03), h=Tp(cote*.18,.06,.0);
+    const genou=h.clone().lerp(cheville,.5); genou.z+=S.kneeZ+Math.max(0,(1.26-S.hanche))*.9; genou.x+=cote*.05;
+    j.maj([h,h.clone().lerp(genou,.6),genou,genou.clone().lerp(cheville,.6),cheville]);
+    pi.position.set(pos.x,pos.y,pos.z-.03); pi.rotation.set(ro,cote*.32,0);
+  }
+
+  /* Queue */
+  const b=Tp(.06,.13,-.17), pts=[b];
+  const sw=S.qSway, e=S.qEnroule;
+  pts.push(V(.36+sw*.1,.9,-.42+sw*.12),V(.84+sw*.2,.62,-.52+sw*.2),V(1.32+sw*.28,.72+sw*.05,-.54+sw*.25));
+  const cxq=1.34+sw*.32, cyq=1.2+sw*.08, tours=1.65*e;
+  for(let i=0;i<=18;i++){
+    const u=i/18, a=-Math.PI/2+.25+u*tours*Math.PI*2, r=(.48-.385*u)*(1+(1-e)*1.1);
+    pts.push(V(cxq+Math.cos(a)*r,cyq+Math.sin(a)*r,-.54+sw*.25+u*.06));
+  }
+  queue.maj(pts);
+
+  /* Bulle au-dessus de la tête */
+  if(scene.bulle){
+    const p=tete.getWorldPosition(new THREE.Vector3()).add(V(.45,.72,0)).project(camera);
+    const px=(p.x+1)/2*innerWidth, py=(1-p.y)/2*innerHeight;
+    bulle.style.transform=`translate(${Math.max(8,Math.min(innerWidth-bulle.offsetWidth-8,px-30))}px,${Math.max(8,py-bulle.offsetHeight)}px)`;
+  }
+}
+
+function dimension(){
+  renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight;
+  const portrait=camera.aspect<.8;
+  camera.fov=portrait?42:32;
+  camera.updateProjectionMatrix();
+  /* Sur téléphone : plus de recul pour la queue, et il monte au-dessus des boutons */
+  controls.target.set(portrait?.35:0,portrait?1.15:1.72,0);
+  camera.position.set(portrait?1.3:1.1,portrait?1.7:2.3,portrait?10.8:8.4);
+  controls.maxDistance=portrait?16:14;
+}
+addEventListener('resize',dimension); dimension();
+
+function boucle(now){
+  const dt=Math.min(.05,(now-dernier)/1000); dernier=now;
+  pas(dt); controls.update(); renderer.render(scene3d,camera);
+  requestAnimationFrame(boucle);
+}
+const FILM_DEMANDE=new URLSearchParams(location.search).get('video');
+const MODE_VIDEO=FILM_DEMANDE==='mur'||FILM_DEMANDE==='maths';
+if(!MODE_VIDEO) requestAnimationFrame(boucle);
+
+/* ============================================================
+   LE SHORT « LE DÉFI DU MUR » : tout dépend de l'instant T (s),
+   et chaque mot écrit suit les temps mesurés sur la voix.
+   ============================================================ */
+function preparerVideo(){
+  document.body.classList.add('video');
+  document.getElementById('barre').style.display='none';
+  controls.enabled=false;
+  scene.video=true; scene.taille=.8;
+  let graineV=12345; Math.random=()=> (graineV=(graineV*16807)%2147483647)/2147483647;
+
+  /* Départ de chaque clip de voix, en secondes */
+  const A={ acc:.4, sit:9.0, q:19.9, pie:36.05, j:43.0, tl:56.0, m:60.7, r:71.7, c:74.6, f:82.4 };
+  const FIN=88.2, M=.85, XMUR=-.55, HAUT=12*M, s=.8, ZMUR=-.45, PROF=2.4;
+  window.tiMargoClips=A; window.tiMargoFin=FIN;
+
+  /* ---- Décor ---- */
+  const cvm=document.createElement('canvas'); cvm.width=1024; cvm.height=2048; const g=cvm.getContext('2d');
+  g.fillStyle='#d9b48a'; g.fillRect(0,0,1024,2048);
+  const hb=56, lb=128;
+  for(let r=0;r<Math.ceil(2048/hb);r++) for(let c=-1;c<9;c++){
+    const x=c*lb+(r%2?lb/2:0), y=r*hb, t=[ '#cf9f70','#c99465','#d6a97c','#c58f60' ][(r*3+c*5+40)%4];
+    g.fillStyle=t; g.fillRect(x+3,y+3,lb-6,hb-6);
+  }
+  const X0=860; g.fillStyle='#fffdf4'; g.fillRect(X0,0,164,2048); g.fillStyle='#17452a'; g.fillRect(X0-6,0,6,2048);
+  g.textAlign='right'; g.textBaseline='middle';
+  for(let m=0;m<=12;m++){
+    const y=2048-m/12*2048;
+    g.fillStyle='#17452a'; g.fillRect(X0,Math.max(0,Math.min(2040,y-4)),m%1?30:56,8);
+    if(m>0&&m<12||m===0){ g.font='bold 62px Segoe UI, sans-serif'; g.fillText(String(m),1012,Math.max(40,Math.min(2008,y-(m===0?34:0)))); }
+    if(m===12){ g.font='bold 62px Segoe UI, sans-serif'; g.fillText('12',1012,42); }
+  }
+  const tex=new THREE.CanvasTexture(cvm); tex.colorSpace=THREE.SRGBColorSpace; tex.anisotropy=8;
+  const LARG=5.45;
+  const face=new THREE.Mesh(new THREE.PlaneGeometry(LARG,HAUT),new THREE.MeshLambertMaterial({map:tex}));
+  face.position.set(XMUR-LARG/2,HAUT/2,ZMUR+.005); scene3d.add(face);
+  const bloc=new THREE.Mesh(new THREE.BoxGeometry(LARG,HAUT,PROF),toon(0xb98b5e)); bloc.position.set(XMUR-LARG/2,HAUT/2,ZMUR-PROF/2); scene3d.add(bloc);
+  const herbeHaut=new THREE.Mesh(new THREE.BoxGeometry(LARG+.06,.09,PROF+.08),toon(0x6fb02c)); herbeHaut.position.set(XMUR-LARG/2,HAUT+.04,ZMUR-PROF/2); scene3d.add(herbeHaut);
+  const sol=new THREE.Mesh(new THREE.PlaneGeometry(40,24),toon(0x7cc23a)); sol.rotation.x=-Math.PI/2; sol.position.set(0,-.002,4); scene3d.add(sol);
+  /* Trait jaune : la hauteur de ses pieds, sur la règle */
+  const repere=new THREE.Mesh(new THREE.BoxGeometry(LARG*.16,.085,.02),new THREE.MeshBasicMaterial({color:0xf5a50a})); repere.position.set(XMUR-LARG*.08,0,ZMUR+.03); scene3d.add(repere);
+
+  /* ---- Calques écrits ---- */
+  const css=document.createElement('style');
+  css.textContent=`
+  body.video{background:linear-gradient(#a8e0ff 0%,#dff5ff 60%,#fff6d6 100%);}
+  body.video canvas{z-index:2;}
+  .cv{position:fixed;z-index:3;color:#17452a;font-weight:800;transition:none;}
+  #nuit{position:fixed;inset:0;z-index:1;background:linear-gradient(#0d1b45,#27306e 70%,#49407f);opacity:0;}
+  #soleil{position:fixed;z-index:1;width:170px;height:170px;left:860px;top:760px;border-radius:50%;background:#ffd23f;box-shadow:0 0 70px #ffe27a;}
+  #lune{position:fixed;z-index:1;width:150px;height:150px;left:870px;top:770px;border-radius:50%;background:#f4f1d6;box-shadow:inset -34px -10px 0 #cfcba5,0 0 60px #cfd3ff;opacity:0;}
+  .etoile{position:fixed;z-index:1;width:9px;height:9px;border-radius:50%;background:#fff;opacity:0;}
+  #legende{left:50px;right:50px;top:150px;background:#fff;border:7px solid #17452a;border-radius:44px;padding:30px 36px;font-size:64px;line-height:1.16;text-align:center;}
+  #legende .ligne{display:block;}
+  #titre{left:50px;right:50px;top:70px;text-align:center;font-size:88px;line-height:1.1;color:#17452a;background:#fff;border:7px solid #17452a;border-radius:36px;padding:10px 0;}
+  #echelle{left:50px;right:50px;top:222px;display:flex;justify-content:center;align-items:center;gap:14px;background:#fff;border:5px solid #17452a;border-radius:30px;padding:18px 18px 10px;flex-wrap:wrap;}
+  .ceinture{width:96px;height:24px;border-radius:5px;border:3px solid #39424e;position:relative;opacity:.45;}
+  .ceinture::after{content:"";position:absolute;left:34px;top:-7px;width:22px;height:32px;background:inherit;border:3px solid #39424e;border-radius:4px;}
+  .ceinture.jour{opacity:1;width:150px;height:38px;}.ceinture.jour::after{left:58px;top:-8px;height:48px;width:28px;}
+  #nomCeinture{width:100%;text-align:center;font-size:42px;margin-top:10px;}
+  #jour{left:640px;top:600px;background:#17452a;color:#fff;border-radius:999px;padding:12px 40px;font-size:62px;display:none;}
+  #zzz{font-size:88px;color:#fff;text-shadow:0 3px 0 #27306e;display:none;}
+  #carte{left:44px;right:44px;top:120px;background:#fff;border:7px solid #17452a;border-radius:44px;padding:28px 34px;display:none;text-align:center;}
+  #carte .tete{display:inline-block;background:#f5a50a;border-radius:999px;padding:6px 36px;font-size:58px;margin-bottom:14px;}
+  #carte .q{font-size:58px;line-height:1.14;margin-bottom:18px;}
+  .choix{display:flex;align-items:center;gap:24px;font-size:62px;border:5px solid #17452a;border-radius:26px;padding:4px 26px;margin:8px 30px;text-align:left;background:#fff;}
+  .choix b{display:inline-flex;justify-content:center;align-items:center;width:84px;height:84px;border-radius:50%;background:#17452a;color:#fff;}
+  .choix.bon{background:#c7f4a1;border-color:#2f9a3a;}.choix.bon b{background:#2f9a3a;}
+  .choix.pale{opacity:.35;}
+  #pause{font-size:56px;margin-top:16px;min-height:66px;}
+  #rebours{height:34px;border-radius:17px;background:#e4efe0;margin:12px 30px 2px;overflow:hidden;display:none;}
+  #rebours i{display:block;height:100%;background:#f5a50a;}
+  #fin{left:60px;right:60px;top:140px;background:#fff;border:7px solid #17452a;border-radius:44px;padding:36px;text-align:center;display:none;font-size:68px;line-height:1.2;}
+  #fin .site{display:inline-block;margin:10px 0 26px;border:7px solid #f5a50a;border-radius:24px;padding:10px 34px;font-size:92px;}
+  #fin .chaine{font-size:60px;color:#2f6f3f;}
+  .mot{visibility:hidden;}.mot.vu{visibility:visible;}`;
+  document.head.append(css);
+  const el=(id,html='',parent=document.body)=>{const d=document.createElement('div');d.id=id;d.className='cv';d.innerHTML=html;parent.append(d);return d;};
+  const nuitEl=el('nuit'), soleil=el('soleil'), lune=el('lune');
+  const etoiles=[]; for(let i=0;i<34;i++){ const e=document.createElement('div'); e.className='etoile'; e.style.left=(Math.random()*1060)+'px'; e.style.top=(Math.random()*1200)+'px'; document.body.append(e); etoiles.push(e); }
+  const titre=el('titre','Le défi du mur');
+  const COUL=['#f5f5f5','#facc15','#f97316','#22c55e','#3b82f6','#8b5a2b','#1a1a1a'];
+  const echelle=el('echelle',COUL.map((c,i)=>`<span class="ceinture${i===1?' jour':''}" style="background:${c}"></span>`).join('')+'<div id="nomCeinture">Ceinture jaune</div>');
+  const legende=el('legende'), jourEl=el('jour'), zzz=el('zzz','Z z z');
+  const carte=el('carte',`<div class="tete" id="ct"></div><div class="q" id="cq"></div>
+    <div class="choix" id="cA"><b>A</b><span>12 jours</span></div><div class="choix" id="cB"><b>B</b><span>10 jours</span></div><div class="choix" id="cC"><b>C</b><span>4 jours</span></div>
+    <div id="rebours"><i></i></div><div id="pause"></div>`);
+  const fin=el('fin',`<div id="f1">Entraîne-toi sur</div><div class="site" id="f2">eleveai.fr</div><div id="f3">Abonne-toi !</div><div class="chaine" id="f4">@eleveai974</div>`);
+  const $=id=>document.getElementById(id);
+
+  /* ---- Texte : chaque mot apparaît quand la voix le dit (avance 0 s) ---- */
+  const G=(de,a,base,phr)=>({de:base+de,a,phrases:phr.map(([x,y,t])=>[base+x,base+y,t])});
+  const GROUPES=[
+    G(0,A.acc+3.7,A.acc,[[0,.59,'Salut !'],[1.47,2.92,'Moi, c’est Ti Margo.']]),
+    G(3.8,A.sit,A.acc,[[3.8,5.08,'Je te lance un défi.'],[6,7.56,'Tu paries que tu te trompes ?']]),
+    G(0,A.sit+3.5,A.sit,[[0,2.65,'Je veux grimper en haut de ce mur de 12 mètres.']]),
+    G(3.56,A.q-.05,A.sit,[[3.56,5.78,'Le jour, je monte de 3 mètres.'],[6.71,9.75,'Mais la nuit, je dors, et je glisse de 2 mètres.']]),
+    G(0,A.pie+5,A.pie,[[0,2.34,'Beaucoup répondent 12 :'],[2.51,4.12,'3 moins 2, ça fait 1 mètre par jour.']]),
+    G(5.04,A.j-.05,A.pie,[[5.04,5.93,'Regarde bien.']]),
+    G(.19,A.j+4.8,A.j,[[.19,1,'Premier jour :'],[1.16,2.49,'je monte à 3 mètres,'],[2.65,3.96,'et je glisse à 1 mètre.']]),
+    G(4.88,A.j+9.85,A.j,[[4.88,5.9,'Deuxième jour :'],[6.05,7.46,'je monte à 4 mètres,'],[7.62,8.96,'et je glisse à 2 mètres.']]),
+    G(9.91,A.m-.05,A.j,[[9.91,10.71,'Chaque matin,'],[10.87,12.03,'j’ai gagné 1 mètre.']]),
+    G(0,A.m+4.15,A.m,[[0,1.7,'Au matin du dixième jour,'],[1.85,3.27,'je suis à 9 mètres.']]),
+    G(4.21,A.m+7.4,A.m,[[4.21,5.66,'Je monte de 3 mètres :'],[5.81,6.53,'12 mètres.']]),
+    G(7.44,A.r-.05,A.m,[[7.44,8.36,'Je suis en haut,'],[8.6,9.98,'plus besoin de dormir !']]),
+    G(0,A.f-.05,A.c,[[0,.55,'À toi :'],[.7,2.27,'et si le mur fait 20 mètres ?'],[3.28,4.33,'Combien de jours ?'],[5.26,6.62,'Réponds en commentaire !']])
+  ];
+  /* Toutes les plages où la voix parle : la bouche bouge alors, et seulement alors */
+  const QP=[[.18,.74],[1.64,3.42],[4.3,5.37],[6.32,7.38],[8.33,9.67],[10.58,12.06]], RP=[[0,.88],[1.04,1.68]], FP=[[0,2.46],[3.38,4.21]];
+  const PAROLE=[...GROUPES.flatMap(g=>g.phrases.map(p=>[p[0],p[1]])),...QP.map(p=>[A.q+p[0],A.q+p[1]]),...RP.map(p=>[A.r+p[0],A.r+p[1]]),...FP.map(p=>[A.f+p[0],A.f+p[1]])];
+  const parle=T=>PAROLE.some(p=>T>=p[0]&&T<=p[1]);
+
+  function mots(cont,phrases,T){
+    if(cont._cle!==phrases){ cont._cle=phrases; cont.innerHTML='';
+      cont._m=[]; for(const [a,b,t] of phrases){ const li=document.createElement('span'); li.className='ligne'; let av=0;
+        for(const w of t.split(' ')){ const sp=document.createElement('span'); sp.className='mot'; sp.textContent=w+' '; li.append(sp); cont._m.push({sp,t:a+(b-a)*av/t.length}); av+=w.length+1; }
+        cont.append(li); } }
+    for(const m of cont._m) m.sp.classList.toggle('vu',T>=m.t);
+  }
+
+  /* ---- Hauteur des pieds, en mètres ---- */
+  const SEG=[[A.sit+3.56,A.sit+5.78,0,3],[A.sit+8.39,A.sit+9.75,3,1],[A.pie,A.pie,1,0],[A.j+1.16,A.j+2.49,0,3],[A.j+2.65,A.j+3.96,3,1],[A.j+6.05,A.j+7.46,1,4],[A.j+7.62,A.j+8.96,4,2]];
+  const C_TL=.643, NUITS=[[A.sit+6.71,A.sit+10.2],[A.j+2.65,A.j+4.3],[A.j+7.62,A.j+9.3]];
+  for(let i=0;i<7;i++){ const t=A.tl+i*C_TL; SEG.push([t,t+.36,2+i,5+i],[t+.36,t+C_TL,5+i,3+i]); NUITS.push([t+.36,t+C_TL]); }
+  SEG.push([A.m+4.21,A.m+5.66,9,12]);
+  const lisse=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+  const hauteur=T=>{ let h=0; for(const [a,b,h0,h1] of SEG){ if(T<a) break; h=b<=a?h1:h0+(h1-h0)*lisse((T-a)/(b-a)); } return h; };
+  const nuit=T=>{ let n=0; for(const [a,b] of NUITS){ const e=(b-a)<1?.07:.25; n=Math.max(n,Math.min(lisse((T-a)/e),lisse((b-T)/e))); } return n; };
+  const dort=T=>NUITS.some(([a,b])=>T>=a&&T<=b);
+  const CUTS=[A.sit,A.pie,A.j,A.m+6.7];
+
+  /* ---- Lui, accroché au mur ---- */
+  const RY=-1.1, sn=Math.sin(RY), cs=Math.cos(RY);
+  const lzMur=(lx,d=.02)=>(XMUR+d-scene.x-s*lx*cs)/(s*sn);
+  function surMur(P,T,h){
+    const phi=h*2.5, u=Math.sin(phi), v=Math.cos(phi), sommeil=dort(T);
+    P.hanche=1.3; P.tx=.2; P.ty=0; P.tz=0;
+    P.mg.set(-.28,2.46+u*.34,lzMur(-.28,-.22)); P.md.set(.28,2.46-u*.34,lzMur(.28,-.22));
+    P.cg.set(-.66,1.9,.32); P.cd.set(.66,1.9,.32);
+    P.pg.set(-.22,.36-u*.2,lzMur(-.22,-.1)); P.pd.set(.22,.36+u*.2,lzMur(.22,-.1));
+    P.rpg=P.rpd=-1.15; P.kneeZ=.2; P.gesteD='poing';
+    P.tetX=-.08; P.tetY=.98; P.tetZ=0; P.regX=-.04; P.regY=.12; P.paupiere=-1.02;
+    P.qSway=Math.sin(T*1.3)*.1; P.qEnroule=1;
+    if(sommeil){ P.paupiere=1.55; P.tetX=.26; P.tetZ=-.14; P.jaw=.06; P.qSway=0; }
+  }
+  let camX=.25,camY=2,camD=10,dernierT=-1;
+  const lumieres=[...scene3d.children].filter(o=>o.isLight);
+
+  window.tiMargoFilm=function(P,T){
+    const h=hauteur(T), n=nuit(T), couper=CUTS.some(c=>dernierT<c&&T>=c)||dernierT<0;
+    scene.couper=couper; dernierT=T;
+    let cx,cy,cd;
+    P.jaw=parle(T)?.24+.42*Math.abs(Math.sin(T*9.3)*Math.sin(T*3.7+1)):.2;
+    if(T<A.sit){ /* ---- Accroche, au pied du mur ---- */
+      scene.x=.42; scene.y=0; scene.z=0; scene.ry=-.1; scene.ySol=0; scene.cacherOmbre=false; scene.sansCrayon=false;
+      cx=.42; cy=2.55; cd=8.6;
+      const t=T-A.acc;
+      if(t<3.3){ const e=lisse(t*4)*lisse((3.3-t)*4); P.md.set(.88,2.2+.68*e,.28); P.cd.set(.82,1.92,.06); P.gesteD='ouverte'; P.tourneD=Math.sin(T*11)*.42*e; P.tetZ=-.1; }
+      else if(t<5.6){ P.md.set(.48,2.28,.78); P.cd.set(.74,1.7,.34); P.gesteD='index'; P.tetX=.06; P.tetZ=.06; }
+      else { P.md.set(.95,2.32,.45); P.cd.set(.74,1.7,.14); P.gesteD='pouce'; P.tetZ=-.14; P.paupiere=-1.1; }
+    } else if(T<A.m+6.7){ /* ---- Sur le mur ---- */
+      scene.x=0; scene.z=0; scene.ry=RY; scene.cacherOmbre=h>.1; scene.ySol=0; scene.sansCrayon=true;
+      scene.y=h*M-.2*s;
+      surMur(P,T,h);
+      const enCarte=T>=A.q&&T<A.q+16;
+      cx=.25; cd=10.2; cy=h*M+(enCarte?3.0:1.95);
+      if(T>=A.pie&&T<A.pie+5){ P.tetY=.98+Math.sin(T*5)*.14; }
+      if(enCarte){ P.tetZ=.1; P.regX=-.3; P.regY=.3; }
+    } else { /* ---- En haut ! ---- */
+      scene.x=-1.45; scene.z=ZMUR-PROF/2+.4; scene.y=HAUT+.09; scene.ry=.14; scene.ySol=HAUT+.09; scene.cacherOmbre=false; scene.sansCrayon=false;
+      cx=-.72; cy=HAUT+(T>=A.r&&T<A.c?2.95:2.5); cd=9;
+      const t0=A.m+7.44;
+      if(T>=t0&&T<t0+1.5) ACTIONS.saut.f(T-t0,P);
+      else if(T>=A.r&&T<A.c){ P.md.set(.95,2.32,.45); P.cd.set(.74,1.7,.14); P.gesteD='pouce'; P.tetZ=-.14; P.paupiere=-1.1; }
+      else if(T>=A.c&&T<A.f){ P.gesteD='ouverte'; P.md.set(.86,2.02+Math.sin(T*3)*.06,.5); P.cd.set(.72,1.58,.2); P.tetY=.08+Math.sin(T*1.7)*.07; }
+      else if(T>=A.f){ const j=P.jaw; ACTIONS.danse.f(T-A.f,P); P.jaw=j; }
+      const j2=P.jaw; P.jaw=parle(T)?j2:Math.max(j2,.34);
+    }
+    /* Caméra : douce, sauf aux changements de plan */
+    const kc=couper?1:.09; camX+=(cx-camX)*kc; camY+=(cy-camY)*kc; camD+=(cd-camD)*kc;
+    camera.fov=40; camera.updateProjectionMatrix();
+    camera.position.set(camX+.08,camY+.25,camD); camera.lookAt(camX,camY,0);
+
+    /* Jour et nuit */
+    for(const l of lumieres){ if(l.isAmbientLight) l.intensity=1.25-.72*n; else if(l===soleil3) l.intensity=2.1-1.5*n; }
+    nuitEl.style.opacity=n; soleil.style.opacity=1-n; lune.style.opacity=n; for(const e of etoiles) e.style.opacity=n;
+
+    repere.visible=T>=A.sit&&T<A.m+6.7; repere.position.y=h*M;
+
+    /* Écrits */
+    const dansAcc=T<A.sit;
+    titre.style.display=echelle.style.display=dansAcc?'':'none';
+    const gr=GROUPES.find(g=>T>=g.de&&T<g.a);
+    legende.style.display=gr?'':'none'; legende.style.top=dansAcc?'420px':'110px';
+    if(gr) mots(legende,gr.phrases,T);
+
+    /* Jour N */
+    let j=0;
+    if(T>=A.j+.19) j=1; if(T>=A.j+4.88) j=2; if(T>=A.tl) j=Math.min(9,3+Math.floor((T-A.tl)/C_TL)); if(T>=A.m+.7) j=10; if(T>=A.m+6.7) j=0;
+    if(T>=A.tl+7*C_TL&&T<A.m+.7) j=0;
+    jourEl.style.display=j?'block':'none'; jourEl.textContent='Jour '+j;
+    /* Z z z : au-dessus de sa tête */
+    if(dort(T)&&!(T>=A.tl&&T<A.m)){ const p=tete.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(.2,.75,0)).project(camera);
+      zzz.style.display='block'; zzz.style.left=((p.x+1)/2*1080)+'px'; zzz.style.top=((1-p.y)/2*1920-60+Math.sin(T*3)*12)+'px'; } else zzz.style.display='none';
+
+    /* Carte question, puis réponse */
+    const q=T>=A.q&&T<A.q+16.05, r=T>=A.r&&T<A.c;
+    carte.style.display=(q||r)?'block':'none';
+    if(q){
+      const t=T-A.q;
+      $('ct').textContent=t>=.18?'Question !':''; $('ct').style.visibility=t>=.18?'':'hidden';
+      mots($('cq'),[[A.q+1.64,A.q+3.42,'En combien de jours j’arrive en haut ?']],T);
+      for(const [id,d] of [['cA',4.3],['cB',6.32],['cC',8.33]]){ const e=$(id); e.style.visibility=t>=d?'':'hidden'; e.classList.remove('bon','pale'); e.style.transform=''; }
+      mots($('pause'),[[A.q+10.58,A.q+12.06,'Mets pause, et choisis !']],T);
+      const reb=t>=12.85&&t<15.85; $('rebours').style.display=reb?'':'none';
+      if(reb) $('rebours').firstChild.style.width=(100*(1-(t-12.85)/3))+'%';
+    }
+    if(r){
+      const t=T-A.r;
+      $('ct').style.visibility=''; $('ct').textContent='Réponse B :'; $('ct').style.visibility=t>=0?'':'hidden';
+      $('cq').style.fontSize='88px'; mots($('cq'),[[A.r+1.04,A.r+1.68,'10 jours !']],T); $('pause').textContent=''; $('rebours').style.display='none';
+      for(const id of ['cA','cB','cC']) { $(id).style.visibility=''; $(id).classList.toggle('pale',id!=='cB'&&t>=.5); $(id).classList.toggle('bon',id==='cB'&&t>=.5); }
+      const z=t<.5?1:1+.16*Math.sin(Math.min(1,(t-.5)/.8)*Math.PI); $('cB').style.transform=`scale(${z})`;
+    }
+
+    /* Écran de fin */
+    const f=T>=A.f; fin.style.display=f?'block':'none';
+    if(f){ const t=T-A.f; $('f1').style.visibility=t>=0?'':'hidden'; $('f2').style.visibility=t>=1?'':'hidden'; $('f3').style.visibility=t>=3.38?'':'hidden'; $('f4').style.visibility=t>=3.7?'':'hidden'; }
+  };
+  const soleil3=soleil_;
+  action={nom:'film',t:0,def:{d:1e9,f:(t,P)=>window.tiMargoFilm(P,window.tiMargoT)}};
+  dimension2();
+  function dimension2(){ renderer.setPixelRatio(1); renderer.setSize(1080,1920); camera.aspect=1080/1920; camera.updateProjectionMatrix(); }
+}
+const soleil_=soleil;
+
+/* ============================================================
+   L'ENCOURAGEMENT AVANT UN TEST DE MATHS (paysage 1920×1080,
+   pour ses élèves) : tout dépend de l'instant T (s).
+   ============================================================ */
+function preparerEncouragement(){
+  document.body.classList.add('video');
+  document.getElementById('barre').style.display='none';
+  controls.enabled=false;
+  scene.video=true; scene.taille=1; scene.x=0; scene.ry=-.2;
+  let graineV=4242; Math.random=()=> (graineV=(graineV*16807)%2147483647)/2147483647;
+  const lisse=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+
+  /* Départ de chaque clip de voix. Le 2e est coupé en deux : la vraie respiration se place dans le silence. */
+  const A={ s:.4, r:7, rb:10.114, c:12.95, a:19.7 };
+  const FIN=23.4, RB=A.rb+.386; /* RB : le moment où il dit « Tu as travaillé » */
+  window.tiMargoClips=A; window.tiMargoFin=FIN;
+
+  /* ---- Décor : ciel, collines, soleil, nuages, pelouse ---- */
+  const sol=new THREE.Mesh(new THREE.PlaneGeometry(60,30),toon(0x8fd14a)); sol.rotation.x=-Math.PI/2; sol.position.set(0,-.002,-5); scene3d.add(sol);
+  const css=document.createElement('style');
+  css.textContent=`
+  body.video{background:linear-gradient(#8fd8ff 0%,#d3f1ff 55%,#fff6d6 100%);}
+  body.video canvas{z-index:2;}
+  .fd{position:fixed;z-index:1;}
+  #astre{left:96px;top:44px;width:150px;height:150px;border-radius:50%;background:#ffd23f;box-shadow:0 0 70px #ffe27a;}
+  .nuage{height:64px;border-radius:40px;background:#fff;opacity:.95;}
+  .nuage::before,.nuage::after{content:"";position:absolute;background:#fff;border-radius:50%;}
+  .nuage::before{width:92px;height:92px;left:22%;top:-44px;}.nuage::after{width:66px;height:66px;left:56%;top:-28px;}
+  .colline{border-radius:50%;}
+  #halo{width:760px;height:760px;margin:-380px 0 0 -380px;border-radius:50%;background:radial-gradient(circle,#fff6b8 0%,#fff6b8cc 45%,#fff6b800 70%);opacity:0;}
+  #cadre{position:fixed;z-index:3;left:44px;width:990px;top:50%;transform:translateY(-52%);background:#fff;border:8px solid #17452a;border-radius:48px;padding:36px 40px;
+    color:#17452a;font-weight:800;font-size:88px;line-height:1.16;text-align:left;display:none;}
+  #cadre .ligne{display:block;margin:6px 0;}
+  #cadre.grand{font-size:150px;text-align:center;}
+  #cadre .fort{color:#d9480f;}
+  .mot{visibility:hidden;}.mot.vu{visibility:visible;}`;
+  document.head.append(css);
+  const fd=(id,style='',cl='')=>{const d=document.createElement('div');if(id)d.id=id;d.className='fd '+cl;d.style.cssText=style;document.body.append(d);return d;};
+  fd('astre');
+  fd('','left:320px;top:150px;width:210px;','nuage'); fd('','left:640px;top:84px;width:170px;','nuage'); fd('','left:830px;top:176px;width:150px;','nuage');
+  fd('','left:-180px;top:470px;width:1200px;height:420px;background:#b5e486;','colline');
+  fd('','left:760px;top:500px;width:1500px;height:420px;background:#a6dc74;','colline');
+  const halo=fd('halo');
+  const cadre=document.createElement('div'); cadre.id='cadre'; document.body.append(cadre);
+
+  /* ---- La feuille de test : tenue dans la main droite, sa question surlignée ---- */
+  const cvf=document.createElement('canvas'); cvf.width=800; cvf.height=1080; const gf=cvf.getContext('2d');
+  const texF=new THREE.CanvasTexture(cvf); texF.colorSpace=THREE.SRGBColorSpace; texF.anisotropy=8;
+  let ligneF=-2;
+  function dessinerFeuille(active){
+    if(active===ligneF) return; ligneF=active;
+    gf.fillStyle='#fff'; gf.fillRect(0,0,800,1080);
+    gf.fillStyle='#17452a'; gf.font='800 92px Segoe UI, sans-serif'; gf.textAlign='center'; gf.textBaseline='middle';
+    gf.fillText('Mathématiques',400,86); gf.fillRect(60,152,680,9);
+    for(let i=0;i<3;i++){
+      const y=186+i*290;
+      if(i===active){ gf.fillStyle='#ffe066'; gf.beginPath(); gf.roundRect(26,y,748,272,34); gf.fill(); gf.strokeStyle='#f5a50a'; gf.lineWidth=10; gf.stroke(); }
+      gf.fillStyle='#17452a'; gf.beginPath(); gf.arc(106,y+76,50,0,Math.PI*2); gf.fill();
+      gf.fillStyle='#fff'; gf.font='800 70px Segoe UI, sans-serif'; gf.fillText(String(i+1),106,y+80);
+      gf.fillStyle='#5b6b73';
+      gf.fillRect(186,y+56,540,17); gf.fillRect(186,y+136,540,17); gf.fillRect(70,y+212,656,17);
+    }
+    texF.needsUpdate=true;
+  }
+  dessinerFeuille(-1);
+  const feuille=new THREE.Group(); feuille.position.set(.02,0,.05); feuille.rotation.set(-.04,-.18,.1); mainD.g.add(feuille);
+  const LF=1.06, HF=1.43;
+  piece(feuille,new RoundedBoxGeometry(LF,HF,.014,2,.006),C.blanc,[0,HF/2,0],CONTOUR_SOMBRE);
+  const faceF=new THREE.Mesh(new THREE.PlaneGeometry(LF-.02,HF-.02),new THREE.MeshBasicMaterial({map:texF})); faceF.position.set(0,HF/2,.009); feuille.add(faceF);
+
+  /* ---- Le texte : chaque mot apparaît quand la voix le dit, jamais avant.
+     DV : le silence mesuré au début de chaque clip, avant le premier mot. ---- */
+  const DV={s:.113,r:.103,c:.115,a:.106};
+  const GROUPES=[
+    {de:A.s+DV.s,a:A.s+3.25,phrases:[[A.s+DV.s,A.s+.587,'Salut !'],[A.s+1.461,A.s+2.4,'C’est Ti Margo.']]},
+    {de:A.s+3.291,a:A.r+DV.r,phrases:[[A.s+3.291,A.s+3.937,'Aujourd’hui,'],[A.s+4.116,A.s+5.949,'c’est un test de *mathématiques.']]},
+    {de:A.r+DV.r,a:RB,grand:true,phrases:[[A.r+DV.r,A.r+.797,'*Respire.']]},
+    {de:RB,a:A.c+DV.c,phrases:[[RB,RB+.92,'Tu as travaillé,'],[A.rb+2.955-1.4,A.rb+3.752-1.4,'tu sais faire.']]},
+    {de:A.c+DV.c,a:A.c+2.38,phrases:[[A.c+DV.c,A.c+1.49,'Lis bien chaque *question.']]},
+    {de:A.c+2.381,a:A.a+DV.a,phrases:[[A.c+2.381,A.c+3.485,'Et si tu bloques,'],[A.c+3.727,A.c+4.936,'passe à la *suivante,'],[A.c+5.171,A.c+6.241,'puis *reviens après.']]},
+    {de:A.a+DV.a,a:FIN+1,phrases:[[A.a+DV.a,A.a+.477,'Allez,'],[A.a+.631,A.a+1.786,'je suis *avec *toi !']]}
+  ];
+  const PAROLE=GROUPES.flatMap(g=>g.phrases.map(p=>[p[0],p[1]]));
+  const parle=T=>PAROLE.some(p=>T>=p[0]&&T<=p[1]);
+  function mots(cont,phrases,T){
+    if(cont._cle!==phrases){ cont._cle=phrases; cont.innerHTML=''; cont._m=[];
+      for(const [a,b,t] of phrases){ const li=document.createElement('span'); li.className='ligne'; let av=0;
+        const longueur=t.replace(/\*/g,'').length;
+        for(const w0 of t.split(' ')){ const w=w0.replace(/^\*/,''), sp=document.createElement('span');
+          sp.className='mot'+(w0[0]==='*'?' fort':''); sp.textContent=w+' '; li.append(sp); cont._m.push({sp,t:a+(b-a)*av/longueur+(av?.05:0)}); av+=w.length+1; }
+        cont.append(li); } }
+    for(const m of cont._m) m.sp.classList.toggle('vu',T>=m.t);
+  }
+
+  /* Yeux fermés : l'iris ne doit pas traverser la paupière, et un petit trait dessine l'œil clos */
+  const clos=yeux.map(y=>{ const t=new THREE.Mesh(new THREE.TorusGeometry(.125,.013,8,24,Math.PI),C.noir); t.position.set(0,.015,.232); t.rotation.z=Math.PI; t.visible=false; y.paup.parent.add(t); return t; });
+
+  /* Une vraie respiration : on inspire 1,6 s, on souffle 1,7 s */
+  const souffle=T=>T<A.r||T>A.r+3.3?0:(T<A.r+1.6?lisse((T-A.r)/1.6):1-lisse((T-A.r-1.6)/1.7));
+  const SAUTS=[A.a-.1,A.a+1.55];
+  const DF=A.c-.25, FF=A.a-.3;
+  let camX=-1.5,camY=1.95,camD=7.35,dernierT=-1;
+
+  window.tiMargoFilm=function(P,T){
+    scene.couper=dernierT<0; dernierT=T;
+    scene.x=0; scene.ry=-.2;
+    P.jaw=parle(T)?.24+.42*Math.abs(Math.sin(T*9.3)*Math.sin(T*3.7+1)):.2;
+
+    const b=souffle(T); scene.souffle=b;
+    if(T<A.s+3.1){ /* Il salue */
+      const e=lisse((T-.1)*4)*lisse((A.s+3.1-T)*4), xs=.16;
+      P.md.set(.88+xs,2.2+.68*e,.28); P.cd.set(.82+xs*.6,1.92,.06); P.gesteD='ouverte'; P.tourneD=Math.sin(T*11)*.42*e; P.tetZ=-.1;
+    } else if(T<A.r-.1){ /* Il annonce */
+      P.gesteD='ouverte'; P.md.set(.86,2.02+Math.sin(T*3)*.07,.5); P.cd.set(.72,1.58,.2); P.tetY=.02+Math.sin(T*1.7)*.07; P.tetX=Math.sin(T*4)*.03;
+    } else if(T<A.r+3.45){ /* Il respire : bras le long du corps, tout le haut du corps monte puis descend */
+      P.gesteD='ouverte';
+      P.mg.set(-.7,1.14+.3*b,.24); P.cg.set(-.66,1.72+.22*b,.06);
+      P.md.set(.72,1.14+.3*b,.24); P.cd.set(.68,1.72+.22*b,.06);
+      P.hanche+=.03*b; P.tx=.03-.05*b; P.tetX=-.07*b; P.tetZ=0; P.tetY=0;
+      P.paupiere=T>A.r+.8?1.55:-1.02; P.jaw=T>A.r+1.6&&T<A.r+3.1?.32:.16;
+    } else if(T<DF){ /* Il rassure, en hochant la tête */
+      P.gesteD='ouverte'; P.md.set(.84,2.05+Math.sin(T*3)*.05,.5); P.cd.set(.72,1.6,.2); P.tetX=.03+Math.sin(T*5.2)*.06; P.tetY=-.04; P.paupiere=-1.1;
+    } else if(T<FF){ /* Il montre la feuille */
+      const lit=T<A.c+2.2||(T>=A.c+3.7&&T<A.c+4.95)||T>=A.c+5.17;
+      P.gesteD='poing'; P.md.set(1.2,1.72+Math.sin(T*2.2)*.015,.66); P.cd.set(.92,1.42,.26);
+      P.tetY=lit?.12:-.02; P.tetZ=-.03; P.tetX=lit?.03:0; P.regY=lit?.6:0; P.regX=lit?-.08:0;
+    } else { /* Le pouce levé, et deux sauts de joie */
+      P.md.set(1.02,2.62,.46); P.cd.set(.88,1.92,.1); P.mg.set(-.92,2.3,.32); P.cg.set(-.8,1.75,.08);
+      P.tetZ=-.1; P.tetY=-.04; P.paupiere=-1.14; P.qEnroule=.92;
+      for(const s of SAUTS) if(T>=s&&T<s+1.5){ ACTIONS.saut.f(T-s,P); P.sautY*=.62; P.md.y-=.3*P.sautY; P.mg.y-=.3*P.sautY; }
+      P.gesteD='pouce';
+      P.jaw=parle(T)?P.jaw+.12:.5;
+    }
+
+    yeux.forEach((y,i)=>{ const f=y.paup.rotation.x>1.15; y.globe.visible=!f; clos[i].visible=f; });
+
+    /* La feuille apparaît et disparaît en s'agrandissant, sa ligne surlignée suit la phrase */
+    const vf=T>=DF&&T<FF+.02;
+    feuille.visible=vf;
+    if(vf){ const z=Math.max(.001,lisse((T-DF)/.25)*lisse((FF-T)/.2)); feuille.scale.setScalar(z);
+      dessinerFeuille(T<A.c?-1:(T<A.c+3.727?0:(T<A.c+5.171?1:0))); }
+
+    /* Caméra : il reste grand, à droite ; elle recule un peu pour les sauts */
+    const fin=T>=FF-.4, cX=fin?-1.8:-1.5, cY=fin?2.25:1.95, cD=fin?8.6:7.35, kc=scene.couper?1:.05;
+    camX+=(cX-camX)*kc; camY+=(cY-camY)*kc; camD+=(cD-camD)*kc;
+    camera.fov=32; camera.updateProjectionMatrix();
+    camera.position.set(camX,camY+.25,camD); camera.lookAt(camX,camY,0);
+
+    /* Le halo qui grandit avec la respiration */
+    const p=new THREE.Vector3(0,2.05,0).project(camera);
+    halo.style.left=((p.x+1)/2*1920)+'px'; halo.style.top=((1-p.y)/2*1080)+'px';
+    halo.style.opacity=Math.min(1,b*1.35); halo.style.transform=`scale(${.72+.46*b})`;
+
+    /* Écrits */
+    const gr=GROUPES.find(g=>T>=g.de&&T<g.a);
+    cadre.style.display=gr?'block':'none';
+    if(gr){ cadre.classList.toggle('grand',!!gr.grand); mots(cadre,gr.phrases,T); }
+  };
+  action={nom:'film',t:0,def:{d:1e9,f:(t,P)=>window.tiMargoFilm(P,window.tiMargoT)}};
+  renderer.setPixelRatio(1); renderer.setSize(1920,1080); camera.aspect=1920/1080; camera.updateProjectionMatrix();
+}
+
+if(FILM_DEMANDE==='mur') preparerVideo();
+if(FILM_DEMANDE==='maths') preparerEncouragement();
+
+/* Pour vérifier une pose précise et, plus tard, exporter des images vers une vidéo */
+window.tiMargo={ jouer, lancerScene, arreterScene, avancer(sec){ for(let i=0;i<sec*60;i++) pas(1/60); renderer.render(scene3d,camera); }, camera, controls,
+  /* Vidéo : image(T) avance de deux pas de 1/60 s (30 images/s) ; aller(T) saute à T pour un contrôle */
+  image(T){ for(const d of [-1/60,0]){ window.tiMargoT=T+d; pas(1/60); scene.couper=false; } renderer.render(scene3d,camera); },
+  aller(T){ for(let t=Math.max(0,T-1.5);t<T;t+=1/30) this.image(t); this.image(T); } };
+</script>
+</body>
+</html>

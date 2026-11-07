@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ti Margo</title>
+<style>
+  :root { --encre:#17452a; --bouton:#ffffff; --accent:#f5a50a; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; overflow:hidden; font-family:"Segoe UI",system-ui,sans-serif; color:var(--encre);
+    background:linear-gradient(#bfe9ff 0%,#e8f8ff 58%,#fff7dc 100%); }
+  canvas { position:fixed; inset:0; display:block; touch-action:none; }
+  #bulle { position:fixed; left:0; top:0; max-width:min(320px,70vw); padding:12px 18px; background:#fff; border:3px solid var(--encre);
+    border-radius:20px; font-size:clamp(17px,2.4vw,24px); font-weight:700; line-height:1.2; text-align:center;
+    opacity:0; transition:opacity .15s; pointer-events:none; }
+  #bulle::after { content:""; position:absolute; left:26px; bottom:-14px; width:20px; height:20px; background:#fff;
+    border-right:3px solid var(--encre); border-bottom:3px solid var(--encre); transform:rotate(45deg) skew(12deg,12deg); }
+  #barre { position:fixed; left:0; right:0; bottom:0; padding:12px 16px 16px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  button { font:inherit; font-weight:700; font-size:16px; color:var(--encre); background:var(--bouton); border:2px solid var(--encre);
+    border-radius:999px; padding:9px 16px; cursor:pointer; box-shadow:0 3px 0 var(--encre); }
+  button:active { transform:translateY(2px); box-shadow:0 1px 0 var(--encre); }
+  button.principal { background:var(--accent); }
+  #erreur { position:fixed; inset:20% 10% auto; font-weight:700; text-align:center; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="bulle"></div>
+<div id="barre">
+  <button class="principal" data-a="scene">▶ Petit dessin animé</button>
+  <button data-a="salut">Salut</button>
+  <button data-a="parle">Parler</button>
+  <button data-a="reflechit">Réfléchir</button>
+  <button data-a="eureka">Eurêka</button>
+  <button data-a="bravo">Bravo</button>
+  <button data-a="saut">Sauter</button>
+  <button data-a="danse">Danser</button>
+  <button data-a="marche">Marcher</button>
+</div>
+<script type="module">
+/* Une seule page pour tous les shorts : page.html?serie=<série>&video=<épisode>.
+   Sans paramètre : Ti Margo seul, avec ses boutons de gestes. */
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+window.THREE = THREE; window.OrbitControls = OrbitControls; window.RoundedBoxGeometry = RoundedBoxGeometry;
+
+const charger = (src, facultatif = false) => new Promise((ok, non) => {
+  const s = document.createElement('script'); s.src = src; s.onload = ok;
+  s.onerror = () => (facultatif ? ok() : non(new Error('Fichier introuvable : ' + src))); document.body.append(s);
+});
+const serie = new URLSearchParams(location.search).get('serie');
+if (serie && !/^[a-z0-9_-]+$/i.test(serie)) throw new Error('Série invalide : ' + serie);
+await charger('personnage.js');
+await charger('short.js');
+if (serie) { await charger('films/' + serie + '-cues.js', true); await charger('films/' + serie + '.js'); }
+demarrerTiMargo();
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "voix": "4e-relatif-multiplication-short",
+  "sons": "public/sons/4e-relatif-multiplication-short",
+  "sortie": "manim/sorties/ti-margo/_modele",
+  "nom": "eleveai-ti-margo-modele-{ep}-short",
+  "episodes": { "exemple": "00" }
+}

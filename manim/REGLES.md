@@ -84,6 +84,16 @@ Frédéric, 11/10/2026 : « à partir de maintenant il faudrait que apparaisse u
 - **Les ceintures sont DESSINÉES** (bande, nœud, deux pans), jamais un emoji. Le code se trouve dans `scripts/seconde/signes_expression_2de.py` : `CEINTURES`, `ceinture()`, `echelle_ceintures()`. À importer de là, pas à recopier.
 - **Repères** : la blanche, c'est le short visuel ci-dessous ; la verte, c'est la paysage complète du niveau de la classe (méthode, pièges, défi corrigé). Les autres ceintures se fixent avec Frédéric au fil des vidéos : on ne les invente pas seul.
 
+### ⛔⛔ Les nouveaux shorts sont en DESSIN ANIMÉ (Ti Margo)
+
+Directive de Frédéric, 07/11/2026 : « on va créer paysage normalement et short en mode dessin animé ». Les 6e ont adoré le film du mur, les 4e l'ont apprécié.
+
+- **Paysage :** rien ne change (Manim, méthode, pièges, défi corrigé).
+- **Short :** film Ti Margo 3D, fait avec le socle commun (`prototypes/ti-margo/LISEZ-MOI.md`, `scripts/ti-margo-short.mjs`) : on ne copie plus de page entière. Même personnage et même style à tous les âges ; seul son jeu s'adapte à la classe.
+- **Ce qui reste valable pour le short :** un défi et pas un mini-cours, sa ceinture, une question-pause, la question en commentaire, la paysage publiée avant lui, le script validé à deux.
+- **Le gag porte sur les maths :** l'image concrète et l'objet mathématique restent synchrones (règle ci-dessous), le calcul n'est pas remplacé par l'histoire.
+- **Shorts Manim déjà rendus ou en ligne :** on les garde, sans les refaire.
+
 ### ⛔ Le short CEINTURE BLANCHE : la règle
 
 Premier modèle : `scripts/seconde/signes_short_dauphin.py`, le dauphin et le tableau de signes (11/10/2026). Frédéric : « un short simple : un dauphin qui saute en haut et le tableau de signes qui se remplit en bas ; le dauphin devient bleu dans l'air et d'une autre couleur dans l'eau ».
