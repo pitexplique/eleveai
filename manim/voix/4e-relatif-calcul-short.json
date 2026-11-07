@@ -1,5 +1,5 @@
 {
-  "00-accroche": "Salut ! Moi, c'est Ti Margo. Bienvenue au jeu des 3 portes ! Derrière la bonne : la fête. Derrière les deux autres : plouf, dans la piscine !",
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Bienvenue au jeu des 3 portes ! Derrière la bonne : la fête. Derrière les deux autres : plouf, dans la piscine ! Tu paries que je trouve du premier coup ?",
   "01-situation": "Le calcul est au tableau : moins 2 plus 3 fois moins 4. Sur chaque porte, un résultat.",
   "01q-question": "Question ! Quelle porte je dois ouvrir ? A : moins 4. B : moins 14. C : 10. Mets pause, et choisis !",
   "02-porte-a": "J'essaie la porte A. Moins 2 plus 3 : 1. 1 fois moins 4 : moins 4. Plouf ! On n'a pas le droit de lire de gauche à droite.",

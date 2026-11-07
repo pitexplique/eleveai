@@ -1,5 +1,5 @@
 {
-  "00-accroche": "Salut ! Moi, c'est Ti Margo, et je pars en montgolfière. Mon défi : enlever, ça fait toujours baisser ? Tu paries ?",
+  "00-accroche": "Salut ! Moi, c'est Ti Margo, et je pars en montgolfière. Enlever, ça fait toujours baisser ? Tu paries ?",
   "01-situation": "Mon altitude : 5. Regarde ma nacelle. Les petits ballons valent plus 1 : ils tirent vers le haut. Les sacs de sable valent moins 1 : ils tirent vers le bas.",
   "01q-question": "Question ! J'enlève 3 sacs de sable. Quelle est mon altitude ? A : 2. B : 8. C : 5. Mets pause, et choisis !",
   "01r-reponse": "Réponse B : 8 ! Regarde.",

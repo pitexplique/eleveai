@@ -534,7 +534,7 @@ else:
 
     voix_j, tsv, out = sys.argv[1:4]
     textes = json.load(open(voix_j, encoding="utf-8"))
-    res, prec, pos = {}, {}, {}
+    res, prec, pos, rang = {}, {}, {}, {}
     for l in open(tsv, encoding="utf-8-sig"):
         l = l.rstrip("\n")
         if not l:
@@ -543,15 +543,22 @@ else:
         t = float(t.replace(",", "."))
         raw = textes[cle]
         L = res.setdefault(cle, [])
-        if prec.get(cle) == mot and " " in mot:
+        # Une cue à plusieurs mots (« 1 200 mètres ») revient une fois par mot : on date
+        # chacun. Le moteur peut la répéter une fois de plus (« mille ») : on l'ignore.
+        toks = mot.split()
+        if prec.get(cle) == mot and " " in mot and rang.get(cle, 1) < len(toks):
+            k = rang.get(cle, 1)
             i0 = L[-1][0]
-            i = raw.find(mot.split()[1], i0 + len(mot.split()[0]))
+            i = raw.find(toks[k], i0 + len(toks[k - 1]))
             if i > i0:
                 L.append([i, round(t, 3)])
-                pos[cle] = i + len(mot.split()[1])
-            prec[cle] = None
+                pos[cle] = i + len(toks[k])
+            rang[cle] = k + 1
+            continue
+        if prec.get(cle) == mot and not 0 <= raw.find(mot, pos.get(cle, 0)) - pos.get(cle, 0) <= 3:
             continue
         prec[cle] = mot
+        rang[cle] = 1
         p = pos.get(cle, 0)
         i = raw.find(mot, p)
         if i < 0:

@@ -8,6 +8,7 @@ Un seul Ti Margo, une seule page, un seul outil de rendu. **Chaque film n'écrit
 | `short.js` | Le cadre du short : titre et ceinture, écrits mot à mot, question-pause, écran de fin, bouche, caméra, `poserStudio()`. |
 | `page.html` | La page unique : `page.html?serie=<série>&video=<épisode>`. Sans paramètre : Ti Margo seul, avec ses boutons de gestes. |
 | `films/<série>.js` | Les films de la série : `FILMS.<épisode> = function(outils){ … }`. |
+| `films/<série>-<épisode>.js` | Facultatif : le film d'un épisode dans son propre fichier, chargé après `films/<série>.js` (plusieurs sessions peuvent ainsi écrire chacune leur film). |
 | `films/<série>.json` | Où sont les voix et où écrire les vidéos. |
 | `films/<série>-cues.js` | Les instants des mots, fabriqués par `ti-margo-cues.py`. |
 | `films/_modele.js` | Le plus petit film complet, à recopier pour commencer. |

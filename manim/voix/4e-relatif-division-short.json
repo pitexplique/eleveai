@@ -1,5 +1,5 @@
 {
-  "00-accroche": "Salut ! Moi, c'est Ti Margo. Un trésor est enterré ici, à moins 20 mètres ! J'ai ma pelle. Je te lance un défi.",
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Un trésor est enterré ici, à moins 20 mètres ! J'ai ma pelle. Tu paries que tu ne devines pas ce qu'il y a dans le coffre ?",
   "01-situation": "Chaque jour, je creuse de 5 mètres vers le bas : moins 5 par jour.",
   "01q-question": "Question ! En combien de jours j'atteins le trésor ? A : moins 4. B : 4. C : 15. Mets pause, et choisis !",
   "01r-reponse": "Réponse B : 4 jours ! Un nombre de jours, c'est positif.",
