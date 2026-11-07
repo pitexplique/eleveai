@@ -31,13 +31,15 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "4e-relatif-calcul": 8.4,
   "4e-relatif-probleme": 8.4,
   "4e-relatif-defi": 8.4,
-  "4e-relatif-addition-short": 4.1,
-  "4e-relatif-soustraction-short": 4.1,
-  "4e-relatif-multiplication-short": 4.1,
-  "4e-relatif-division-short": 4.1,
-  "4e-relatif-calcul-short": 4.1,
-  "4e-relatif-probleme-short": 4.1,
-  "4e-relatif-defi-short": 4.1,
+  // Shorts Relatifs : « Mets » mesuré dans chaque mp4 + 0,15 s. Aucun silence entre « f r » et
+  // « Mets », et timeupdate arrête jusqu'à 0,25 s après le seuil : on vise la fin du « r » (07/11).
+  "4e-relatif-addition-short": 4.65,
+  "4e-relatif-soustraction-short": 4.64,
+  "4e-relatif-multiplication-short": 4.59,
+  "4e-relatif-division-short": 4.64,
+  "4e-relatif-calcul-short": 4.64,
+  "4e-relatif-probleme-short": 4.69,
+  "4e-relatif-defi-short": 4.65,
   // Triangles 6e : mesuré dans les mp4, la pause après « point f r » (07/11).
   "6e-triangle-nommer": 8.4,
   "6e-triangle-sommet-cote": 8.4,
