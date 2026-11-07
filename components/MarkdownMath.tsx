@@ -66,6 +66,135 @@ function espacesInsecables(texte: string): string {
 }
 
 /**
+ * ⛔ « NH = » PUIS « 21 cm » À LA LIGNE (06/11/2026, captures à 375 px). KaTeX autorise
+ * une coupure après chaque relation : on la retire avec `\nobreak`, tant que la
+ * formule tient d'un bloc. Au-delà de LARGEUR_D_UN_BLOC signes depuis la dernière
+ * coupure possible, on la garde, sinon une chaîne d'égalités déborde du téléphone :
+ * mesuré dans le coach, la loi des sinus sortait de l'écran sous 300 px à 24 signes.
+ * 18 signes tiennent sur un écran de 320 px (256 px de texte).
+ */
+const LARGEUR_D_UN_BLOC = 18;
+const SIGNES_D_UNE_RELATION = 2; // le signe et ses espaces
+const RELATION = /^(?:[=<>]|\\(?:approx|simeq|equiv|leqslant|geqslant|leq?|geq?|neq?|in)(?![a-zA-Z]))/;
+const OPERATEUR = /^(?:[+-]|\\(?:times|cdot|div|pm)(?![a-zA-Z]))/;
+
+const signesAffiches = (membre: string) =>
+  membre
+    .replace(/\\(?:[dt]?frac|text|math[a-z]+|left|right|sqrt|widehat|overline|operatorname)(?![a-zA-Z])/g, "")
+    .replace(/\\[a-zA-Z]+/g, "xx") // \times, \cos, la flèche d'un vecteur… : autour de deux signes
+    .replace(/[\\{}^_\s]/g, "").length;
+
+function relationsNonCoupees(formule: string): string {
+  if (formule.includes("\\begin")) return formule; // les tableaux ne se coupent pas
+  // Les membres et ce qui les sépare, en alternance, hors de toute accolade.
+  const morceaux = [""];
+  let profondeur = 0;
+  for (let i = 0; i < formule.length; i++) {
+    const reste = formule.slice(i);
+    const separateur = profondeur === 0 ? (RELATION.exec(reste) ?? OPERATEUR.exec(reste))?.[0] : undefined;
+    if (separateur) {
+      morceaux.push(separateur, "");
+      i += separateur.length - 1;
+      continue;
+    }
+    const commande = /^\\(?:[a-zA-Z]+|.)/.exec(reste)?.[0] ?? formule[i];
+    if (commande === "{") profondeur++;
+    if (commande === "}") profondeur--;
+    morceaux[morceaux.length - 1] += commande;
+    i += commande.length - 1;
+  }
+  let bloc = signesAffiches(morceaux[0]);
+  return morceaux
+    .map((morceau, i) => {
+      if (i % 2 === 0) return morceau;
+      const suivant = signesAffiches(morceaux[i + 1]);
+      // KaTeX peut couper après un opérateur : le bloc repart de là.
+      if (!OPERATEUR.test(morceau) && bloc + SIGNES_D_UNE_RELATION + suivant <= LARGEUR_D_UN_BLOC) {
+        bloc += SIGNES_D_UNE_RELATION + suivant;
+        return `${morceau}\\nobreak `;
+      }
+      bloc = suivant;
+      return morceau;
+    })
+    .join("");
+}
+
+/** Les formules en ligne seulement : une formule centrée n'est jamais coupée par KaTeX. */
+function formulesNonCoupees(texte: string): string {
+  return texte.replace(/\$\$[\s\S]*?\$\$|\$[^$]*\$|`[^`]*`/g, (morceau) =>
+    morceau.startsWith("$") && !morceau.startsWith("$$")
+      ? `$${relationsNonCoupees(morceau.slice(1, -1))}$`
+      : morceau,
+  );
+}
+
+/**
+ * ⛔ « x² » PUIS « . Calcule » À LA LIGNE (06/11/2026, captures à 375 px). Pour Chrome,
+ * une formule KaTeX est un bloc insécable : il coupe juste après, même devant un point
+ * ou une espace insécable. On enferme donc la formule et ce qui doit lui rester collé
+ * dans un `white-space: nowrap`.
+ *
+ * ⚠️ Une longue formule doit pouvoir encore se couper après un opérateur, entre ses
+ * morceaux `.base`. Mesuré dans Chrome : ce qui décide de la coupure après un morceau,
+ * c'est le `white-space` de son parent direct. Remettre `normal` sur toute la formule
+ * rouvre donc la coupure devant la ponctuation : seuls les morceaux d'avant le dernier
+ * sont regroupés sous `normal`.
+ */
+type NoeudHtml = {
+  type: string;
+  tagName?: string;
+  value?: string;
+  properties?: Record<string, unknown>;
+  children?: NoeudHtml[];
+};
+const COLLE_A_LA_FORMULE = /^(?: [^ \t\n]*|[.,;:!?…)\]»%]+)/;
+
+const aLaClasse = (noeud: NoeudHtml, classe: string) => {
+  const classes = noeud.properties?.className;
+  return Array.isArray(classes) && classes.includes(classe);
+};
+
+function longueFormuleSecable(formule: NoeudHtml): void {
+  const rendu = formule.children?.find((enfant) => aLaClasse(enfant, "katex-html"));
+  const morceaux = rendu?.children ?? [];
+  if (!rendu || morceaux.length < 2 || !morceaux.every((m) => aLaClasse(m, "base"))) return;
+  rendu.children = [
+    {
+      type: "element",
+      tagName: "span",
+      properties: { style: "white-space:normal" },
+      children: morceaux.slice(0, -1),
+    },
+    morceaux[morceaux.length - 1],
+  ];
+}
+
+function collerLaPonctuation(noeud: NoeudHtml): void {
+  const enfants = noeud.children;
+  if (!enfants) return;
+  for (let i = enfants.length - 1; i >= 0; i--) {
+    const enfant = enfants[i];
+    if (enfant.tagName !== "span" || !aLaClasse(enfant, "katex")) {
+      collerLaPonctuation(enfant);
+      continue;
+    }
+    const suite = enfants[i + 1];
+    const colle = suite?.type === "text" ? COLLE_A_LA_FORMULE.exec(suite.value ?? "")?.[0] : undefined;
+    if (!colle || !suite) continue;
+    suite.value = (suite.value ?? "").slice(colle.length);
+    longueFormuleSecable(enfant);
+    enfants[i] = {
+      type: "element",
+      tagName: "span",
+      properties: { style: "white-space:nowrap" },
+      children: [enfant, { type: "text", value: colle }],
+    };
+  }
+}
+
+const ponctuationCollee = () => (arbre: unknown) => collerLaPonctuation(arbre as NoeudHtml);
+
+/**
  * Rend du texte contenant éventuellement des formules LaTeX ($...$ ou $$...$$).
  *
  * Rétro-compatible : un texte sans `$` est rendu tel quel (texte simple).
@@ -76,13 +205,13 @@ export function MarkdownMath({ children, className, inline = false }: MarkdownMa
   const content = (
     <ReactMarkdown
       remarkPlugins={[remarkMath]}
-      rehypePlugins={[rehypeKatex]}
+      rehypePlugins={[rehypeKatex, ponctuationCollee]}
       components={{
         p: ({ children }) =>
           inline ? <span>{children}</span> : <p className="mb-2 last:mb-0">{children}</p>,
       }}
     >
-      {espacesInsecables(children)}
+      {formulesNonCoupees(espacesInsecables(children))}
     </ReactMarkdown>
   );
 

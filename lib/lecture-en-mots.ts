@@ -135,6 +135,8 @@ function formuleEnMots(f: string): string {
     .replace(/\\times(?![a-zA-Z])|×/g, " fois ")
     .replace(/\\div(?![a-zA-Z])|÷/g, " divisé par ")
     .replace(/\\cdot(?![a-zA-Z])/g, " fois ")
+    // « (q \circ p)(3) » : « q rond p ». « 60^\circ » est déjà devenu « degrés » plus haut.
+    .replace(/\\circ(?![a-zA-Z])|∘/g, " rond ")
     .replace(/\\(?:ldots|dots|cdots)|…/g, " combien ")
     .replace(/\\leq?(?![a-zA-Z])|\\leqslant|⩽|≤/g, " inférieur ou égal à ")
     .replace(/\\geq?(?![a-zA-Z])|\\geqslant|⩾|≥/g, " supérieur ou égal à ")
