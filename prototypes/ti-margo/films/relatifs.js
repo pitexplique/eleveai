@@ -1,4 +1,6 @@
 /* Série Relatifs 4e : les 7 shorts. Décor commun, puis un FILMS.<épisode> par film. */
+/* La barre du compte à rebours : short.js la laisse en display:none. Plus spécifique que #rebours, et le style en ligne la cache hors du rebours. */
+{ const css=document.createElement('style'); css.textContent='div#rebours{display:block;}'; document.head.append(css); }
 /* La miniature verticale : la question, la ceinture, la mention « Film d'animation 3D » */
 function poserMiniature({$,carte,legende,panneau},t,html){ window.tiMargoMiniature=()=>{ window.MINI=true; window.tiMargo.aller(t);
   carte.style.display='none'; panneau.style.display='none'; $('titre').style.display='none';
