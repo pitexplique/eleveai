@@ -63,13 +63,29 @@ function frac(num: number, den: number): string {
   return `\\dfrac{${n}}{${q}}`;
 }
 
+/** « = 0,75 » si le quotient tombe juste au millième, « \approx 0,667 » sinon :
+ *  ⛔ un signe = devant une valeur arrondie est faux. */
+function egalOuEnviron(num: number, den: number): string {
+  const arrondi = Math.round((num / den) * 1000) / 1000;
+  return `${Math.abs(arrondi - num / den) < 1e-9 ? "=" : "\\approx"} ${fr(arrondi)}`;
+}
+
 /* ─────────────────── réservoirs de contexte ─────────────────── */
 
-const MARCHANDISES = [
-  { nom: "un carton de livres", unite: "kg" },
-  { nom: "une palette de conserves", unite: "kg" },
-  { nom: "un colis express", unite: "kg" },
-  { nom: "un sac de café vert", unite: "kg" },
+const MARCHANDISES = ["livres", "conserves", "colis express", "café vert"] as const;
+
+/** Conversions hors durées et masses : capacités, volumes, aires, longueurs,
+ *  données. `egalite` dit le lien entre les deux unités, `facteur` s'applique à
+ *  la valeur de départ. Chaque phrase garde un ordre de grandeur réaliste. */
+const CONVERSIONS_AUTRES = [
+  { phrase: "Une bouteille contient", de: "L", vers: "centilitres (cL)", symbole: "cL", egalite: "1 \\text{ L} = 100 \\text{ cL}", facteur: 100, valeurs: [0.5, 0.75, 1.5, 2] },
+  { phrase: "Un flacon de sirop contient", de: "L", vers: "millilitres (mL)", symbole: "mL", egalite: "1 \\text{ L} = 1000 \\text{ mL}", facteur: 1000, valeurs: [0.1, 0.15, 0.25] },
+  { phrase: "Une canette contient", de: "cL", vers: "litres (L)", symbole: "L", egalite: "1 \\text{ L} = 100 \\text{ cL}", facteur: 0.01, valeurs: [25, 33, 50] },
+  { phrase: "Une cuve de récupération d'eau contient", de: "m³", vers: "litres (L)", symbole: "L", egalite: "1 \\text{ m}^3 = 1000 \\text{ L}", facteur: 1000, valeurs: [1.5, 2.4, 3, 5.2] },
+  { phrase: "Une parcelle agricole mesure", de: "ha", vers: "mètres carrés (m²)", symbole: "m²", egalite: "1 \\text{ ha} = 10000 \\text{ m}^2", facteur: 10000, valeurs: [0.5, 1.2, 2.5, 3] },
+  { phrase: "Un parc de loisirs s'étend sur", de: "m²", vers: "hectares (ha)", symbole: "ha", egalite: "1 \\text{ ha} = 10000 \\text{ m}^2", facteur: 0.0001, valeurs: [5000, 12000, 25000] },
+  { phrase: "Une étagère de magasin mesure", de: "cm", vers: "mètres (m)", symbole: "m", egalite: "1 \\text{ m} = 100 \\text{ cm}", facteur: 0.01, valeurs: [85, 120, 240] },
+  { phrase: "Une vidéo pèse", de: "Go", vers: "mégaoctets (Mo)", symbole: "Mo", egalite: "1 \\text{ Go} = 1000 \\text{ Mo}", facteur: 1000, valeurs: [1.5, 2.5, 4] },
 ] as const;
 
 /** Fractions de référence : celles qu'un élève doit situer sans calculer. */
@@ -178,8 +194,12 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
     hint: "Prendre une fraction d'une quantité, c'est multiplier.",
     tags: ["stmg", "maths", "calcul", "fractions", "template", "short"],
     generate: () => {
-      const den = pick([2, 3, 4, 5, 6, 8, 10] as const);
-      const num = pick([1, 2, 3] as const);
+      // ⛔ Couples écrits en entier : tirer `num` et `den` séparément donnait
+      // « 3/2 des colis partent » (plus que le total), « 2/2 » et « 2/4 ».
+      const [num, den] = pick([
+        [1, 2], [1, 3], [2, 3], [1, 4], [3, 4], [1, 5], [2, 5], [3, 5],
+        [1, 6], [5, 6], [1, 8], [3, 8], [1, 10], [3, 10],
+      ] as const);
       const quantite = den * pick([4, 6, 10, 12, 20, 30] as const);
       const resultat = (quantite * num) / den;
       return {
@@ -242,7 +262,7 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
         explanation: exp(
           "Deux fractions se comparent une fois ramenées au même dénominateur — ou par leurs écritures décimales.",
           "On multiplie en croix, ou on calcule les deux quotients.",
-          `$\\dfrac{${cas.a}}{${cas.b}} = ${fr(Math.round(v1 * 1000) / 1000)}$ et $\\dfrac{${cas.c}}{${cas.d}} = ${fr(Math.round(v2 * 1000) / 1000)}$.`,
+          `$\\dfrac{${cas.a}}{${cas.b}} ${egalOuEnviron(cas.a, cas.b)}$ et $\\dfrac{${cas.c}}{${cas.d}} ${egalOuEnviron(cas.c, cas.d)}$.`,
           `La plus grande est ${plusGrande}.`
         ),
         choiceDiagnostics: [
@@ -282,7 +302,6 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
       const petite = pick(dessous);
       const quatre = shuffle([petite, ...shuffle(dessus).slice(0, 3)]);
       const ecrire = (f: { n: number; d: number }) => `$\\dfrac{${f.n}}{${f.d}}$`;
-      const decimal = (f: { n: number; d: number }) => fr(Math.round((f.n / f.d) * 1000) / 1000);
       return {
         text:
           `Parmi ces quatre fractions, une seule est INFÉRIEURE à $\\dfrac{${repere.n}}{${repere.d}}$. ` +
@@ -292,10 +311,10 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
         expected: [ecrire(petite)],
         comparator: "mcq_exact",
         explanation: exp(
-          `Situer une fraction par rapport à un repère, c'est comparer deux quotients : $\\dfrac{${repere.n}}{${repere.d}} = ${decimal(repere)}$.`,
+          `Situer une fraction par rapport à un repère, c'est comparer deux quotients : $\\dfrac{${repere.n}}{${repere.d}} ${egalOuEnviron(repere.n, repere.d)}$.`,
           "On calcule mentalement chaque quotient, ou on ramène chaque fraction au même dénominateur que le repère.",
-          quatre.map((f) => `${ecrire(f)} $= ${decimal(f)}$`).join(" · ") +
-            `. Une seule est plus petite que $${decimal(repere)}$.`,
+          quatre.map((f) => `${ecrire(f)} $${egalOuEnviron(f.n, f.d)}$`).join(" · ") +
+            `. Une seule est plus petite que $\\dfrac{${repere.n}}{${repere.d}}$.`,
           `La fraction inférieure à $\\dfrac{${repere.n}}{${repere.d}}$ est ${ecrire(petite)}.`
         ),
       };
@@ -672,7 +691,10 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
           "$(a^m)^k = a^{m \\times k}$ et $a^m \\times a^q = a^{m+q}$.",
           "On multiplie d'abord les exposants de la puissance de puissance, puis on ajoute celui du second facteur.",
           `$${m} \\times (${k}) + (${q}) = ${m * k} + (${q}) = ${n}$.`,
-          `$n = ${n}$ — et non $${m + k + q}$ : une puissance de puissance MULTIPLIE les exposants.`
+          // ⛔ Pour m = k = 2, m × k = m + k : « n = 5, et non 5 ».
+          m * k === m + k
+            ? `$n = ${n}$ : une puissance de puissance MULTIPLIE les exposants.`
+            : `$n = ${n}$ — et non $${m + k + q}$ : une puissance de puissance MULTIPLIE les exposants.`
         ),
       };
     },
@@ -1006,7 +1028,7 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
       const kg = tonnes * 1000;
       return {
         text:
-          `Un chargement de ${marchandise.nom.replace(/^un |^une /, "")} pèse $${fr(tonnes)}$ tonne(s). ` +
+          `Un chargement de ${marchandise} pèse $${fr(tonnes)}$ tonne${tonnes >= 2 ? "s" : ""}. ` +
           `Combien cela fait-il de kilogrammes ?`,
         format: "short",
         expected: [fr(kg)],
@@ -1041,10 +1063,10 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
           `Un camion roule à $${vitesse}$ km/h pendant $${minutes}$ minutes. ` +
           `Quelle distance parcourt-il ?`,
         format: "qcm",
+        // ⛔ « vitesse − minutes » n'est gardé que positif : −10 km ne trompe personne.
         choices: makeChoices(`$${fr(distance)}$ km`, [
           `$${fr(vitesse * minutes)}$ km`,
-          `$${fr(vitesse / minutes)}$ km`,
-          `$${fr(vitesse - minutes)}$ km`,
+          ...(vitesse > minutes ? [`$${fr(vitesse - minutes)}$ km`] : []),
           `$${fr((vitesse * 60) / minutes)}$ km`,
           `$${fr(distance * 2)}$ km`,
         ]),
@@ -1053,7 +1075,8 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
         explanation: exp(
           "Distance $=$ vitesse $\\times$ durée, à condition que la durée soit exprimée dans la même unité de temps que la vitesse.",
           "La vitesse est en km/h : on convertit d'abord les minutes en heures.",
-          `$${minutes}$ min $= \\dfrac{${minutes}}{60} = ${fr(Math.round((minutes / 60) * 10000) / 10000)}$ h, donc $${vitesse} \\times ${fr(Math.round((minutes / 60) * 10000) / 10000)} = ${fr(distance)}$ km.`,
+          // ⛔ On garde la fraction : 20 min ne valent pas 0,3333 h, et 30 × 0,3333 ne fait pas 10.
+          `$${minutes}$ min $= \\dfrac{${minutes}}{60}$ h, donc $${vitesse} \\times \\dfrac{${minutes}}{60} = ${fr(distance)}$ km.`,
           `Le camion parcourt $${fr(distance)}$ km.`
         ),
         choiceDiagnostics: [
@@ -1062,6 +1085,43 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
             cause: "a multiplié par les minutes sans les convertir en heures",
           },
         ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 4 — les AUTRES unités. Le libellé dit « conversions d'unités », et
+    // les trois premiers gabarits s'en tenaient aux durées, aux masses et à une
+    // distance : ici capacités, volumes, aires, longueurs et données.
+    kind: "template",
+    id: "stmg_num_conversions_tpl_autres_unites",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_ordres_unites",
+    microId: "auto_num_conversions",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Écris d'abord le lien entre les deux unités, par exemple $1$ L $= 100$ cL : il dit s'il faut multiplier ou diviser.",
+    tags: ["stmg", "maths", "calcul", "conversions", "template", "short"],
+    generate: () => {
+      const c = pick(CONVERSIONS_AUTRES);
+      const v = pick(c.valeurs as readonly number[]);
+      const resultat = v * c.facteur;
+      const multiplie = c.facteur > 1;
+      const nombre = multiplie ? c.facteur : Math.round(1 / c.facteur);
+      return {
+        text: `${c.phrase} $${fr(v)}$ ${c.de}. Combien cela fait-il en ${c.vers} ?`,
+        format: "short",
+        expected: [fr(resultat)],
+        comparator: "number_equal",
+        explanation: exp(
+          `On part de l'égalité $${c.egalite}$.`,
+          multiplie
+            ? "On passe à une unité plus petite : le nombre obtenu est plus grand, on multiplie."
+            : "On passe à une unité plus grande : le nombre obtenu est plus petit, on divise.",
+          `$${fr(v)} ${multiplie ? "\\times" : "\\div"} ${nombre} = ${fr(resultat)}$.`,
+          `Cela fait $${fr(resultat)}$ ${c.symbole}.`
+        ),
       };
     },
   },

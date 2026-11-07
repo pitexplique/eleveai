@@ -61,6 +61,11 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
   );
 }
 
+/** Un monôme seul : « x^3 », « -x », « 4x^2 ». */
+function monome(coef: number, partie: string): string {
+  return `${coef === 1 ? "" : coef === -1 ? "-" : coef}${partie}`;
+}
+
 function terme(coef: number, partie: string, premier = false): string {
   if (coef === 0) return "";
   const signe = coef < 0 ? "-" : premier ? "" : "+";
@@ -412,7 +417,8 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
         explanation: exp(
           "La dérivée de $x^n$ est $nx^{n-1}$ ; celle d'une somme est la somme des dérivées ; celle d'une constante est nulle.",
           "On dérive terme à terme : chaque exposant descend en facteur et diminue de $1$.",
-          `$(${a}x^3)' = ${3 * a}x^2$ ; $(${b}x^2)' = ${2 * b}x$ ; $(${c}x)' = ${c}$ ; $(${d})' = 0$.`,
+          // ⛔ `terme` écrit « x^3 » et « -x^2 », jamais « 1x^3 » ni « -1x^2 ».
+          `$(${monome(a, "x^3")})' = ${3 * a}x^2$ ; $(${monome(b, "x^2")})' = ${2 * b}x$ ; $(${monome(c, "x")})' = ${c}$ ; $(${d})' = 0$.`,
           `Donc $f'(x) = ${polynome(0, 3 * a, 2 * b, c)}$.`
         ),
         choiceDiagnostics: [
@@ -478,7 +484,7 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
           `La dérivée correcte est $f'(x) = ${polynome(0, 3 * a, 2 * b, c)}$. ` +
             (garde
               ? `L'élève a bien dérivé les trois premiers termes, mais il a recopié le $${d}$ : une constante disparaît.`
-              : `L'élève a bien fait disparaître le $${d}$, mais il a emporté avec lui le terme $${c}x$, dont la dérivée vaut $${c}$.`),
+              : `L'élève a bien fait disparaître le $${d}$, mais il a emporté avec lui le terme $${monome(c, "x")}$, dont la dérivée vaut $${c}$.`),
           `L'erreur : ${garde ? causeGarde : causeEfface}.`
         ),
       };
@@ -505,6 +511,12 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
       const x0 = randomInt(-2, 3);
       const derivee = 2 * a * x0 + b;
       const y0 = a * x0 * x0 + b * x0 + c;
+      // ⛔ Le cadre suit le point et le sommet : un cadre fixe −12 → 14 laissait le
+      // point (jusqu'à y = 29) hors du dessin. Bornes paires et hauteur de 320 au-delà
+      // de 32 unités : le canvas écrit alors un chiffre sur deux, sur les nombres pairs.
+      const sommetY = c - (b * b) / (4 * a);
+      const ymin = Math.floor((Math.min(y0, sommetY, -2) - 3) / 2) * 2;
+      const ymax = Math.ceil((Math.max(y0, sommetY, 2) + 3) / 2) * 2;
       return {
         text:
           `Soit $f(x) = ${polynome(0, a, b, c)}$, dont la courbe est tracée ci-dessous. ` +
@@ -517,8 +529,9 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
           titre: "Courbe représentative de f",
           xmin: -5,
           xmax: 5,
-          ymin: -12,
-          ymax: 14,
+          ymin,
+          ymax,
+          size: ymax - ymin > 32 ? { width: 320, height: 320 } : undefined,
           grille: true,
           courbes: [
             { id: "f", type: "quadratique", a, b, c },
@@ -529,7 +542,7 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
         explanation: exp(
           "Le coefficient directeur de la tangente à la courbe de $f$ au point d'abscisse $a$ est le nombre dérivé $f'(a)$.",
           "On calcule d'abord l'expression de $f'$, puis on y remplace $x$ par l'abscisse du point.",
-          `$f'(x) = ${polynome(0, 0, 2 * a, b)}$, donc $f'(${x0}) = ${2 * a} \\times ${x0} ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${fr(derivee)}$.`,
+          `$f'(x) = ${polynome(0, 0, 2 * a, b)}$, donc $f'(${x0}) = ${2 * a} \\times ${x0 < 0 ? `(${x0})` : x0}${b === 0 ? "" : ` ${b > 0 ? "+" : "-"} ${Math.abs(b)}`} = ${fr(derivee)}$.`,
           `Le coefficient directeur de la tangente vaut $${fr(derivee)}$.`
         ),
       };

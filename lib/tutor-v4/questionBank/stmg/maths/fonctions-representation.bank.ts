@@ -42,6 +42,47 @@ function fr(n: number): string {
   return String(arrondi).replace(".", ",");
 }
 
+/** Nombre dans un calcul : un négatif entre parenthèses, jamais « 3 - -2 ». */
+function frP(n: number): string {
+  return n < 0 ? `(${fr(n)})` : fr(n);
+}
+
+/** Terme d'un polynôme, omis s'il est nul : jamais « 0x » ni « + 0 ». */
+function terme(c: number, partie: string, premier = false): string {
+  if (c === 0) return "";
+  const signe = c < 0 ? "-" : premier ? "" : "+";
+  const abs = Math.abs(c);
+  const nombre = abs === 1 && partie !== "" ? "" : fr(abs);
+  return `${signe}${premier && c > 0 ? "" : " "}${nombre}${partie}`;
+}
+
+function trinome(a: number, b: number, c: number): string {
+  return [terme(a, "x^2", true), terme(b, "x", a === 0), terme(c, "", a === 0 && b === 0)]
+    .filter((x) => x !== "")
+    .join(" ");
+}
+
+/**
+ * Bornes verticales entières, alignées sur le pas des chiffres de l'axe.
+ *
+ * ⛔ `FonctionGraphiqueCanvas` écrit un chiffre tous les `pas` en partant de
+ * `ymin` : avec `ymin = -7` et un pas de 2, on lisait -7, -5, -3… Une borne
+ * multiple du pas donne les graduations paires qu'on attend.
+ */
+function cadreY(bas: number, haut: number): { ymin: number; ymax: number } {
+  let ymin = Math.floor(bas);
+  let ymax = Math.ceil(haut);
+  for (let i = 0; i < 4; i++) {
+    const pas = Math.max(1, Math.ceil((16 * (ymax - ymin)) / 260));
+    const a = Math.floor(ymin / pas) * pas;
+    const b = Math.ceil(ymax / pas) * pas;
+    if (a === ymin && b === ymax) break;
+    ymin = a;
+    ymax = b;
+  }
+  return { ymin, ymax };
+}
+
 function makeChoices(correct: string, wrongs: readonly string[]): string[] {
   const distracteurs = Array.from(new Set(wrongs)).filter((w) => w !== correct);
   return shuffle([correct, ...distracteurs.slice(0, 3)]);
@@ -68,11 +109,17 @@ function canvasCourbePoints(
   xmin: number,
   xmax: number,
   titre: string,
-  options?: { pas?: number; evidence?: { x?: number; y?: number }; marques?: { x: number; label?: string }[] }
+  options?: {
+    pas?: number;
+    evidence?: { x?: number; y?: number };
+    marques?: { x: number; label?: string }[];
+    /** Abscisse où la courbe commence quand elle ne part pas de `xmin`. */
+    departTrace?: number;
+  }
 ): CanvasFigure {
   const pas = options?.pas ?? (xmax - xmin) / 40;
   const points: { x: number; y: number }[] = [];
-  for (let x = xmin; x <= xmax + 1e-9; x += pas) {
+  for (let x = options?.departTrace ?? xmin; x <= xmax + 1e-9; x += pas) {
     const y = f(x);
     if (Number.isFinite(y)) points.push({ x: Math.round(x * 1000) / 1000, y: Math.round(y * 1000) / 1000 });
   }
@@ -80,14 +127,16 @@ function canvasCourbePoints(
   const ymin = Math.min(...ys, 0);
   const ymax = Math.max(...ys, 0);
   const marge = Math.max(1, (ymax - ymin) * 0.12);
+  const cadre = cadreY(ymin - marge, ymax + marge);
   return {
     kind: "fonctionGraphique",
     titre,
     xmin,
     xmax,
-    ymin: Math.floor(ymin - marge),
-    ymax: Math.ceil(ymax + marge),
-    grille: true,
+    ...cadre,
+    // ⛔ Le canvas trace une ligne par unité : au-delà de 50 unités, la grille
+    // devenait un aplat gris qui noyait la courbe.
+    grille: xmax - xmin <= 50 && cadre.ymax - cadre.ymin <= 50,
     courbes: [{ id: "f", type: "points", points }],
     points: options?.marques?.map((m) => ({ x: m.x, y: Math.round(f(m.x) * 100) / 100, label: m.label })),
     misesEnEvidence:
@@ -116,25 +165,14 @@ function deNomGrandeur(nom: string): string {
   return `de ${nom}`;
 }
 
-/**
- * « de » contracté devant une variable qui porte déjà son article.
- *
- * ⚠️ « par unité de ${grandeur.variable} » donnait « par unité DE LE nombre de
- * jours » — deux des quatre variables commencent par « le ». Trouvé le
- * 19/08/2026 par un balayage des énoncés rendus, pas à la relecture.
- */
-function deVariable(variable: string): string {
-  if (variable.startsWith("le ")) return `du ${variable.slice(3)}`;
-  if (variable.startsWith("la ")) return `de la ${variable.slice(3)}`;
-  if (variable.startsWith("les ")) return `des ${variable.slice(4)}`;
-  return `de ${variable}`;
-}
-
+// ⛔ `taux` : chaque grandeur a ses valeurs. Tirés dans un seul réservoir, les
+// taux donnaient une chambre froide qui gagne 150 °C par heure, et un coût total
+// qui baisse quand on produit davantage.
 const GRANDEURS = [
-  { nom: "le coût de production", unite: "€", variable: "la quantité produite" },
-  { nom: "le chiffre d'affaires", unite: "k€", variable: "le nombre de mois écoulés" },
-  { nom: "la fréquentation du site", unite: "visiteurs", variable: "le nombre de jours" },
-  { nom: "la température d'une chambre froide", unite: "°C", variable: "la durée en heures" },
+  { nom: "le coût de production", unite: "€", variable: "la quantité produite", parUnite: "par article produit", taux: [6, 8, 12, 25, 60] },
+  { nom: "le chiffre d'affaires", unite: "k€", variable: "le nombre de mois écoulés", parUnite: "par mois", taux: [-20, -8, 12, 25, 60] },
+  { nom: "la fréquentation du site", unite: "visiteurs", variable: "le nombre de jours", parUnite: "par jour", taux: [-45, -20, 25, 60, 150] },
+  { nom: "la température d'une chambre froide", unite: "°C", variable: "la durée en heures", parUnite: "par heure", taux: [-3, -2, -1.5, 1.5, 2, 3] },
 ] as const;
 
 export const fonctionsRepresentationBank: TutorBankItemV4[] = [
@@ -156,7 +194,16 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
       const b = pick([1, 2, -1, -3] as const);
       const c = pick([0, 2, 4, -2] as const);
       const f = (x: number) => a * x * x + b * x + c;
-      const x0 = randomInt(-3, 3);
+      // ⛔ La valeur à lire doit être dans le cadre, sur une grille lisible : avec
+      // une fenêtre figée de -20 à 20, on attendait f(3) = 37, hors du dessin.
+      // On interroge donc un point de hauteur raisonnable ($f(0) = c$ convient
+      // toujours), et la fenêtre se calcule d'après ce point et le sommet.
+      const x0 = pick([-3, -2, -1, 0, 1, 2, 3].filter((x) => Math.abs(f(x)) <= 12));
+      const ySommet = c - (b * b) / (4 * a);
+      const cadre =
+        a > 0
+          ? cadreY(Math.min(0, ySommet, f(x0)) - 1, Math.max(12, f(x0)) + 1)
+          : cadreY(Math.min(-12, f(x0)) - 1, Math.max(0, ySommet, f(x0)) + 1);
       return {
         text: `La courbe ci-dessous représente une fonction $f$. Quelle est la valeur de $f(${x0})$ ?`,
         format: "short",
@@ -165,10 +212,9 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
         canvas: {
           kind: "fonctionGraphique",
           titre: "Représentation graphique de f",
-          xmin: -5,
-          xmax: 5,
-          ymin: -20,
-          ymax: 20,
+          xmin: -4,
+          xmax: 4,
+          ...cadre,
           grille: true,
           courbes: [{ id: "f", type: "quadratique", a, b, c }],
           misesEnEvidence: [{ verticale: { x: x0 } }],
@@ -503,8 +549,9 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
         ]),
         expected: [`$x \\times y = ${k}$`],
         comparator: "mcq_exact",
-        canvas: canvasCourbePoints(f, 1, 12, "Prix unitaire en fonction de la quantité", {
+        canvas: canvasCourbePoints(f, 0, 12, "Prix unitaire en fonction de la quantité", {
           pas: 0.25,
+          departTrace: 1,
           marques: [{ x: x0, label: `(${x0} ; ${fr(k / x0)})` }],
         }),
         explanation: exp(
@@ -560,8 +607,9 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
-        canvas: canvasCourbePoints(f, carre ? 0 : 1, carre ? 10 : 12, carre ? "Coût en fonction du côté" : "Prix unitaire en fonction de la quantité", {
+        canvas: canvasCourbePoints(f, 0, carre ? 10 : 12, carre ? "Coût en fonction du côté" : "Prix unitaire en fonction de la quantité", {
           pas: 0.25,
+          departTrace: carre ? 0 : 1,
         }),
         explanation: exp(
           carre
@@ -606,7 +654,7 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
       const taux = (f(b) - f(a)) / (b - a);
       return {
         text:
-          `Soit $f$ la fonction définie par $f(x) = ${A === 1 ? "" : A === -1 ? "-" : A}x^2 ${B >= 0 ? "+" : "-"} ${Math.abs(B)}x ${C >= 0 ? "+" : "-"} ${Math.abs(C)}$. ` +
+          `Soit $f$ la fonction définie par $f(x) = ${trinome(A, B, C)}$. ` +
           `Calcule le taux de variation de $f$ entre $${a}$ et $${b}$.`,
         format: "short",
         expected: [fr(taux)],
@@ -615,7 +663,7 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
           "Le taux de variation d'une fonction $f$ entre deux valeurs $a$ et $b$ est $\\dfrac{f(b) - f(a)}{b - a}$.",
           "On calcule les deux images, puis on divise l'écart des images par l'écart des abscisses.",
           `$f(${a}) = ${fr(f(a))}$ et $f(${b}) = ${fr(f(b))}$, donc le taux vaut ` +
-            `$\\dfrac{${fr(f(b))} - ${fr(f(a))}}{${b} - ${a}} = \\dfrac{${fr(f(b) - f(a))}}{${b - a}} = ${fr(taux)}$.`,
+            `$\\dfrac{${fr(f(b))} - ${frP(f(a))}}{${b} - ${a}} = \\dfrac{${fr(f(b) - f(a))}}{${b - a}} = ${fr(taux)}$.`,
           `Le taux de variation vaut $${fr(taux)}$.`
         ),
       };
@@ -648,7 +696,8 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
       const a = randomInt(1, 5);
       const ecart = pick([2, 3, 4, 5] as const);
       const b = a + ecart;
-      const taux = pick([-40, -25, -12, 8, 15, 30, 60] as const);
+      // ⛔ Un coût total ne baisse pas quand la production augmente.
+      const taux = grandeur.unite === "€" ? pick([8, 15, 30, 60] as const) : pick([-40, -25, -12, 8, 15, 30, 60] as const);
       // ⛔ La valeur de départ doit absorber la baisse : sans ce filtre, un coût
       // de production tombait à $-80$ €.
       const perte = taux < 0 ? Math.abs(taux) * ecart : 0;
@@ -691,9 +740,17 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
       const B = pick([0, 1, -2, 3] as const);
       const C = pick([0, 2, -1] as const);
       const f = (x: number) => A * x * x + B * x + C;
-      const a = randomInt(-3, 0);
-      const b = a + randomInt(2, 4);
+      // ⛔ Les deux points doivent rester dans le cadre, sur une grille lisible :
+      // avec une fenêtre figée de -12 à 22, le point B pouvait valoir 46. On écarte
+      // les points trop hauts, et la fenêtre se calcule, comme dans l'angle 2.
+      let a = randomInt(-3, 0);
+      let b = a + randomInt(2, 4);
+      while (Math.max(Math.abs(f(a)), Math.abs(f(b))) > 20) {
+        a = randomInt(-3, 0);
+        b = a + randomInt(2, 4);
+      }
       const pente = (f(b) - f(a)) / (b - a);
+      const ySommet = C - (B * B) / (4 * A);
       return {
         text:
           `La courbe de $f$ et la droite passant par les points d'abscisses $${a}$ et $${b}$ sont tracées. ` +
@@ -710,10 +767,9 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
         canvas: {
           kind: "fonctionGraphique",
           titre: "La courbe de f et sa sécante",
-          xmin: -6,
-          xmax: 6,
-          ymin: -12,
-          ymax: 22,
+          xmin: Math.min(a, 0) - 1,
+          xmax: Math.max(b, 0) + 1,
+          ...cadreY(Math.min(f(a), f(b), ySommet, 0) - 2, Math.max(f(a), f(b), ySommet, 0) + 2),
           grille: true,
           courbes: [
             { id: "f", type: "quadratique", a: A, b: B, c: C },
@@ -724,7 +780,7 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
         explanation: exp(
           "La droite qui passe par deux points d'une courbe s'appelle une SÉCANTE. Son coefficient directeur est exactement le taux de variation entre les deux abscisses.",
           "On calcule le coefficient directeur avec les deux points, et l'on reconnaît la formule du taux de variation.",
-          `$\\dfrac{f(${b}) - f(${a})}{${b} - ${a}} = \\dfrac{${fr(f(b))} - ${fr(f(a))}}{${b - a}} = ${fr(pente)}$ : ` +
+          `$\\dfrac{f(${b}) - f(${a})}{${b} - ${frP(a)}} = \\dfrac{${fr(f(b))} - ${frP(f(a))}}{${b - a}} = ${fr(pente)}$ : ` +
             `c'est à la fois la pente de la sécante et le taux de variation.`,
           `Le coefficient directeur de la sécante est le taux de variation de $f$ entre $${a}$ et $${b}$.`
         ),
@@ -803,7 +859,7 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
         explanation: exp(
           "Le taux de variation entre deux abscisses est le coefficient directeur de la sécante qui joint les deux points. Une sécante horizontale a un coefficient directeur NUL.",
           "On lit les deux images : si elles sont égales, le taux est nul. Puis on regarde ce que fait la courbe ENTRE les deux points.",
-          `$f(${a}) = f(${b}) = ${fr(f(a))}$, donc le taux vaut $\\dfrac{${fr(f(b))} - ${fr(f(a))}}{${b} - ${a}} = 0$. ` +
+          `$f(${a}) = f(${b}) = ${fr(f(a))}$, donc le taux vaut $\\dfrac{${fr(f(b))} - ${frP(f(a))}}{${b} - ${frP(a)}} = 0$. ` +
             `Mais entre les deux, la courbe ${A > 0 ? "descend jusqu'à son minimum puis remonte" : "monte jusqu'à son maximum puis redescend"} : ` +
             `$f$ n'est pas constante.`,
           `Le taux est nul parce que les deux images sont égales — cela ne dit rien de ce qui se passe entre les deux.`
@@ -830,46 +886,62 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Un taux de variation s'exprime dans l'unité de la grandeur PAR unité de la variable.",
-    tags: ["stmg", "maths", "fonctions", "open", "template"],
+    tags: ["stmg", "maths", "fonctions", "template"],
     generate: () => {
+      // ANGLE 1 — le SENS et le TOTAL, dans quatre situations. Le taux peut être
+      // négatif, et l'élève doit distinguer la variation par unité de la variation
+      // sur tout l'intervalle, qu'il faut recalculer pour trancher.
       const grandeur = pick(GRANDEURS);
       const debut = randomInt(1, 4);
       const fin = debut + randomInt(2, 5);
-      const taux = pick([-45, -20, -8, 12, 25, 60, 150] as const);
+      const ecart = fin - debut;
+      const taux = pick<number>(grandeur.taux);
+      const abs = Math.abs(taux);
+      const verbe = taux < 0 ? "baisse" : "augmente";
+      const contraire = taux < 0 ? "augmente" : "baisse";
+      const moyenne = `$${fr(abs)}$ ${grandeur.unite} ${grandeur.parUnite}`;
+      const total = `$${fr(abs * ecart)}$ ${grandeur.unite} au total`;
+      const bonne = `${grandeur.nom} ${verbe} en moyenne de ${moyenne}, soit ${total}`;
+      const piegeTotal = `${grandeur.nom} ${verbe} de $${fr(abs)}$ ${grandeur.unite} au total, sur tout l'intervalle`;
+      const piegePourcent = `${grandeur.nom} ${verbe} de $${fr(abs)}\\,\\%$`;
       return {
         text:
-          `Le taux de variation ${deNomGrandeur(grandeur.nom)} entre ${grandeur.variable} $= ${debut}$ et $= ${fin}$ vaut $${fr(taux)}$. ` +
-          `Interprète ce nombre dans le contexte.`,
-        format: "open",
-        // L'unité n'est retenue comme mot-clé que si elle fait plus de deux
-        // caractères : « € » ou « °C » seraient validés par toute réponse
-        // citant un montant ou une température, sans aucune interprétation.
-        expected: [
-          "moyenne",
-          "en moyenne",
-          "par unite",
-          "par unité",
-          ...(grandeur.unite.length > 2 ? [grandeur.unite] : []),
-          taux < 0 ? "baisse" : "hausse",
-        ],
-        comparator: "contains_keyword",
+          `Quand ${grandeur.variable} passe de $${debut}$ à $${fin}$, le taux de variation ${deNomGrandeur(grandeur.nom)} vaut $${fr(taux)}$. ` +
+          `Quelle phrase interprète ce nombre ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `${grandeur.nom} ${contraire} en moyenne de ${moyenne}, soit ${total}`,
+          piegeTotal,
+          piegePourcent,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation: exp(
-          "Un taux de variation mesure la variation MOYENNE de la grandeur par unité de la variable, sur l'intervalle considéré.",
-          "On donne l'unité du résultat : celle de la grandeur, divisée par celle de la variable.",
-          `Ici le taux vaut $${fr(taux)}$ : sur cet intervalle, ${grandeur.nom} ${taux < 0 ? "baisse" : "augmente"} ` +
-            `en moyenne de $${fr(Math.abs(taux))}$ ${grandeur.unite} par unité ${deVariable(grandeur.variable)}.`,
-          `Par exemple : « Entre ${debut} et ${fin}, ${grandeur.nom} ${taux < 0 ? "diminue" : "augmente"} en moyenne de ${fr(Math.abs(taux))} ${grandeur.unite} par unité. »`
+          "Un taux de variation mesure la variation MOYENNE de la grandeur par unité de la variable, sur l'intervalle considéré. Son signe donne le sens.",
+          "On lit le signe, puis on multiplie le taux par la longueur de l'intervalle pour obtenir la variation totale.",
+          `Le taux vaut $${fr(taux)}$ : ${grandeur.nom} ${verbe} en moyenne de ${moyenne}. ` +
+            `L'intervalle mesure $${fin} - ${debut} = ${ecart}$, et $${fr(abs)} \\times ${ecart} = ${fr(abs * ecart)}$.`,
+          `Entre $${debut}$ et $${fin}$, ${bonne}.`
         ),
+        choiceDiagnostics: [
+          {
+            choice: piegeTotal,
+            cause: "a pris la variation par unité pour la variation sur tout l'intervalle",
+          },
+          {
+            choice: piegePourcent,
+            cause: "a lu le taux de variation comme un pourcentage ; il s'exprime dans l'unité de la grandeur par unité de la variable",
+          },
+        ],
       };
     },
   },
 
   {
-    // ANGLE 2 — l'interprétation SÉCURISÉE par un QCM. Le premier item est une
-    // question ouverte, validée par mots-clés : un élève qui écrit « ça monte »
-    // passe, un élève qui écrit la bonne phrase sans le mot « moyenne » échoue.
-    // Ici les quatre lectures sont posées côte à côte, et l'unité — des euros
-    // PAR unité produite — départage à elle seule.
+    // ANGLE 2 — UNE SEULE situation, celle du coût, où l'unité (des euros PAR
+    // article) départage à elle seule les quatre lectures. Le premier item, lui,
+    // fait trancher le sens et le total dans quatre situations.
     kind: "template",
     id: "stmg_fct_taux_interpreter_tpl_2",
     niveau: "stmg",
@@ -1137,7 +1209,9 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
           format: "short" as const,
           expected: ["1"],
           comparator: "number_equal" as const,
-          canvas: canvasCourbePoints(f, -6, 6, "Représentation graphique de f", { pas: 0.25 }),
+          // ⛔ La fenêtre suit le sommet : de -6 à 6, la courbe montait à 64 et le
+          // virage, seul objet de la question, s'écrasait en bas du cadre.
+          canvas: canvasCourbePoints(f, sommet - 3, sommet + 3, "Représentation graphique de f", { pas: 0.25 }),
           explanation: exp(
             "Une fonction est monotone par morceaux lorsqu'on peut découper son intervalle en portions où elle ne fait que monter, ou que descendre. Chaque changement de sens sépare deux morceaux.",
             "On parcourt la courbe de gauche à droite et on compte les sommets et les creux.",
@@ -1275,7 +1349,7 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
           memeMorceau
             ? `$${a}$ et $${b}$ appartiennent tous deux à $[${borneG}\\,;\\,${sommet}]$, où $f$ est ${surLeMorceauGauche} : ` +
               `l'ordre est donc ${croissantePuisDecroissante ? "conservé" : "inversé"}.`
-            : `$${a}$ est avant le changement de sens et $${b}$ après : la fonction monte puis descend entre les deux. ` +
+            : `$${a}$ est avant le changement de sens et $${b}$ après : la fonction ${croissantePuisDecroissante ? "monte puis descend" : "descend puis monte"} entre les deux. ` +
               `Rien n'impose alors que l'une des deux images soit la plus grande.`,
           memeMorceau ? `On a ${bonne}.` : `Avec ces seules informations, la comparaison est impossible.`
         ),

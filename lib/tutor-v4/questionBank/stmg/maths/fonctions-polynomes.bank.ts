@@ -73,7 +73,38 @@ function facteur(r: number): string {
 
 /** Coefficient devant un produit de facteurs : « », « - » ou « 3 ». */
 function coef(a: number): string {
-  return a === 1 ? "" : a === -1 ? "-" : String(a);
+  return a === 1 ? "" : a === -1 ? "-" : fr(a);
+}
+
+/** Nombre dans un calcul : un négatif entre parenthèses, jamais « + -3 » ni « 2 × -1 ». */
+function par(n: number): string {
+  return n < 0 ? `(${fr(n)})` : fr(n);
+}
+
+/** Écart « v - r » écrit proprement : « 3 + 2 », « 3 - 2 », ou « 3 » si r est nul. */
+function ecart(v: number, r: number): string {
+  return r === 0 ? fr(v) : r > 0 ? `${fr(v)} - ${fr(r)}` : `${fr(v)} + ${fr(-r)}`;
+}
+
+/**
+ * Bornes verticales entières, alignées sur le pas des chiffres de l'axe.
+ *
+ * ⛔ `FonctionGraphiqueCanvas` écrit un chiffre tous les `pas` en partant de
+ * `ymin` : avec `ymin = -7` et un pas de 2, on lisait -7, -5, -3… Une borne
+ * multiple du pas donne les graduations paires qu'on attend.
+ */
+function cadreY(bas: number, haut: number): { ymin: number; ymax: number } {
+  let ymin = Math.floor(bas);
+  let ymax = Math.ceil(haut);
+  for (let i = 0; i < 4; i++) {
+    const pas = Math.max(1, Math.ceil((16 * (ymax - ymin)) / 260));
+    const a = Math.floor(ymin / pas) * pas;
+    const b = Math.ceil(ymax / pas) * pas;
+    if (a === ymin && b === ymax) break;
+    ymin = a;
+    ymax = b;
+  }
+  return { ymin, ymax };
 }
 
 function terme(c: number, partie: string, premier = false): string {
@@ -110,31 +141,56 @@ function canvasCourbePoints(
   const ymin = Math.min(...ys, 0);
   const ymax = Math.max(...ys, 0);
   const marge = Math.max(1, (ymax - ymin) * 0.12);
+  const cadre = cadreY(ymin - marge, ymax + marge);
   return {
     kind: "fonctionGraphique",
     titre,
     xmin,
     xmax,
-    ymin: Math.floor(ymin - marge),
-    ymax: Math.ceil(ymax + marge),
-    grille: true,
+    ...cadre,
+    // ⛔ Le canvas trace une ligne par unité : au-delà de 50 unités, la grille
+    // devenait un aplat gris qui noyait la courbe.
+    grille: xmax - xmin <= 50 && cadre.ymax - cadre.ymin <= 50,
     courbes: [{ id: "f", type: "points", points }],
     points: options?.marques?.map((x) => ({ x, y: Math.round(f(x) * 100) / 100 })),
     misesEnEvidence: [{ horizontale: { y: 0 } }],
   };
 }
 
-function canvasParabole(a: number, b: number, c: number, titre: string, evidence?: number): CanvasFigure {
+/**
+ * Parabole dans une fenêtre qui suit son sommet et ses racines.
+ *
+ * ⛔ De -6 à 6 en x, `ymax` suivait l'image aux bords : a = 2 et les racines -5
+ * et 1 donnaient ymax > 110, et les racines à lire tombaient dans une courbe
+ * écrasée. La fenêtre va maintenant une unité au-delà des racines, l'axe des
+ * ordonnées y reste, et la hauteur s'arrête à l'image du bord symétrique : ce qui
+ * dépasse est coupé par le canvas. `inclure` : des abscisses à garder en vue.
+ */
+function canvasParabole(
+  a: number,
+  b: number,
+  c: number,
+  titre: string,
+  evidence?: number,
+  inclure: readonly number[] = []
+): CanvasFigure {
+  const f = (x: number) => a * x * x + b * x + c;
   const sommet = -b / (2 * a);
-  const yS = a * sommet * sommet + b * sommet + c;
-  const bornes = [a * 36 + b * -6 + c, a * 36 + b * 6 + c, yS];
+  const delta = b * b - 4 * a * c;
+  const demiEcartRacines = delta >= 0 ? Math.sqrt(delta) / (2 * Math.abs(a)) : 0;
+  // Ouverture de confort : assez large pour qu'on voie les branches, quel que soit a.
+  const ouverture = Math.min(6, Math.max(2, Math.ceil(Math.sqrt(10 / Math.abs(a)))));
+  const demi = Math.max(demiEcartRacines + 1, ouverture);
+  const cadre = cadreY(
+    Math.min(f(sommet + demi), f(sommet), 0, ...inclure.map(f)) - 1,
+    Math.max(f(sommet + demi), f(sommet), 0, ...inclure.map(f)) + 1
+  );
   return {
     kind: "fonctionGraphique",
     titre,
-    xmin: -6,
-    xmax: 6,
-    ymin: Math.floor(Math.min(...bornes, 0)) - 2,
-    ymax: Math.ceil(Math.max(...bornes, 0)) + 2,
+    xmin: Math.floor(Math.min(sommet - demi, -1, ...inclure)),
+    xmax: Math.ceil(Math.max(sommet + demi, 1, ...inclure)),
+    ...cadre,
     grille: true,
     courbes: [{ id: "p", type: "quadratique", a, b, c }],
     misesEnEvidence:
@@ -178,7 +234,8 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           ecrire(-a, r1, r2),
           ecrire(a, r1, r2 + 1),
           ecrire(a, r1 - 1, r2),
-          ecrire(a + 1, r1, r2),
+          // ⛔ a + 1 valait 0 pour a = -1 : « f(x) = 0(x + 1)(x - 2) » s'écartait sans maths.
+          ecrire(a === -1 ? -2 : a + 1, r1, r2),
         ]),
         expected: [ecrire(a, r1, r2)],
         comparator: "mcq_exact",
@@ -246,7 +303,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           "On annule chaque parenthèse pour trouver les racines, puis on regarde le signe du coefficient de tête.",
           `$${facteur(r1)} = 0$ donne $x = ${r1}$, et $${facteur(r2)} = 0$ donne $x = ${r2}$. ` +
             `Comme $a = ${a}$ est ${a > 0 ? "positif" : "négatif"}, la parabole est tournée vers ${a > 0 ? "le haut" : "le bas"}.`,
-          `La courbe ${bonne}.`
+          `La courbe ${bonne.replace(/^elle /, "").replace(", et elle est", " et elle est")}.`
         ),
         choiceDiagnostics: [
           {
@@ -275,7 +332,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
       const a = pick([0.25, 0.5, 1, 2, 3, -0.5, -1, -2, -3] as const);
       const c = pick([0, 1, -2, 3] as const);
       return {
-        text: `D'après la courbe de $f(x) = ax^2 ${c >= 0 ? "+" : "-"} ${Math.abs(c)}$, que peut-on dire du coefficient $a$ ?`,
+        text: `D'après la courbe de $f(x) = ax^2${c === 0 ? "" : ` ${c > 0 ? "+" : "-"} ${Math.abs(c)}`}$, que peut-on dire du coefficient $a$ ?`,
         format: "qcm",
         choices: shuffle([
           a > 0 ? "il est positif : la parabole est tournée vers le haut" : "il est négatif : la parabole est tournée vers le bas",
@@ -387,7 +444,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Ajouter une constante $b$ à l'expression d'une fonction ajoute $b$ à toutes les ordonnées : la courbe se déplace verticalement, sans changer de forme.",
           "On compare les deux sommets : celui de $g$ est en $(0\\,;\\,0)$, celui de $f$ en $(0\\,;\\,b)$.",
-          `Ici $b = ${b}$ : la courbe monte de $${Math.abs(b)}$${b < 0 ? " — pardon, elle descend de " + Math.abs(b) : ""}.`,
+          `Ici $b = ${b}$ : la courbe ${b > 0 ? "monte" : "descend"} de $${Math.abs(b)}$.`,
           `La courbe est translatée de $${Math.abs(b)}$ vers le ${b > 0 ? "haut" : "bas"}.`
         ),
         choiceDiagnostics: [
@@ -479,11 +536,12 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fr(axe)],
         comparator: "number_equal",
-        canvas: canvasParabole(a, B, C, "Parabole de f", axe),
+        // ⛔ Pas de pointillé sur l'axe : il donnerait la réponse demandée.
+        canvas: canvasParabole(a, B, C, "Parabole de f"),
         explanation: exp(
           "Une parabole est symétrique par rapport à la droite verticale passant par son sommet ; quand elle a deux racines, cet axe passe exactement à leur milieu.",
           "On calcule la demi-somme des deux racines.",
-          `Les racines sont $${r1}$ et $${r2}$, donc l'axe a pour abscisse $\\dfrac{${r1} + ${r2}}{2} = ${fr(axe)}$.`,
+          `Les racines sont $${r1}$ et $${r2}$, donc l'axe a pour abscisse $\\dfrac{${r1} + ${par(r2)}}{2} = ${fr(axe)}$.`,
           `L'axe de symétrie a pour équation $x = ${fr(axe)}$.`
         ),
       };
@@ -525,7 +583,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une parabole est symétrique par rapport à la droite verticale passant par son sommet : deux nombres qui ont la même image sont donc symétriques par rapport à cet axe.",
           "On calcule le milieu des deux antécédents.",
-          `$\\dfrac{${x1} + ${x2}}{2} = \\dfrac{${x1 + x2}}{2} = ${fr(axe)}$.`,
+          `$\\dfrac{${x1} + ${par(x2)}}{2} = \\dfrac{${x1 + x2}}{2} = ${fr(axe)}$.`,
           `L'axe de symétrie a pour équation $x = ${fr(axe)}$.`
         ),
       };
@@ -561,8 +619,8 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         explanation: exp(
           `Une parabole tournée vers ${a > 0 ? "le haut admet un MINIMUM" : "le bas admet un MAXIMUM"}, atteint au sommet, c'est-à-dire sur l'axe de symétrie.`,
           "On calcule l'abscisse de l'axe (la demi-somme des racines), puis on calcule son image.",
-          `Axe : $x = \\dfrac{${r1} + ${r2}}{2} = ${fr(axe)}$. ` +
-            `Image : $f(${fr(axe)}) = ${coef(a)}(${fr(axe)} - (${r1}))(${fr(axe)} - (${r2})) = ${fr(extremum)}$.`,
+          `Axe : $x = \\dfrac{${r1} + ${par(r2)}}{2} = ${fr(axe)}$. ` +
+            `Image : $f(${fr(axe)}) = ${coef(a)}(${ecart(axe, r1)})(${ecart(axe, r2)}) = ${fr(extremum)}$.`,
           `Le ${a > 0 ? "minimum" : "maximum"} de $f$ vaut $${fr(extremum)}$, atteint en $x = ${fr(axe)}$.`
         ),
       };
@@ -642,7 +700,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fr(a * (x2 - r1) * (x2 - r2))],
         comparator: "number_equal",
-        canvas: canvasParabole(a, B, C, "Parabole de f", axe),
+        canvas: canvasParabole(a, B, C, "Parabole de f", axe, [x1, x2]),
         explanation: exp(
           "Deux nombres situés à la même distance de l'axe de symétrie, de part et d'autre, ont la même image par la fonction.",
           "On vérifie que les deux abscisses sont symétriques par rapport à l'axe, puis on conclut sans calcul.",
@@ -837,7 +895,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           "Un polynôme de degré 2 est du signe de $a$ à l'extérieur de ses racines, et du signe contraire entre elles.",
           "On lit la position de la parabole par rapport à l'axe des abscisses : au-dessus, le polynôme est positif ; en dessous, négatif.",
           `Les racines sont $${r1}$ et $${r2}$, et $a = ${a}$ est ${a > 0 ? "positif : la parabole plonge sous l'axe entre les racines" : "négatif : la parabole passe au-dessus de l'axe entre les racines"}.`,
-          `$f$ est ${bonne}.`
+          `Le polynôme est ${bonne}.`
         ),
       };
     },
@@ -895,7 +953,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           "Un tableau de signes se construit ligne par ligne : chaque facteur du premier degré $x - r$ est négatif avant $r$, nul en $r$, positif après. Le signe du produit s'obtient ensuite en multipliant les lignes.",
           "On compare l'intervalle à la racine DU FACTEUR étudié, pas aux deux racines à la fois.",
           `Le facteur $${facteur(racineDuFacteur)}$ s'annule en $${racineDuFacteur}$. ` +
-            `Sur ${intervalle}, prenons $x = ${fr(temoin)}$ : $${fr(temoin)} - (${racineDuFacteur}) = ${fr(temoin - racineDuFacteur)}$, ` +
+            `Sur ${intervalle}, prenons $x = ${fr(temoin)}$ : $${ecart(temoin, racineDuFacteur)} = ${fr(temoin - racineDuFacteur)}$, ` +
             `qui est ${signe}.`,
           `Sur ${intervalle}, le facteur $${facteur(racineDuFacteur)}$ est ${signe}.`
         ),
@@ -1048,8 +1106,8 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Un nombre est racine d'un polynôme lorsque son image vaut $0$.",
           "On remplace $x$ par le nombre proposé et l'on calcule — le discriminant n'est pas nécessaire pour VÉRIFIER une racine.",
-          `$f(${candidat}) = ${a} \\times (${candidat})^2 + (${B}) \\times (${candidat}) + (${C}) = ` +
-            `${fr(a * candidat * candidat)} + ${fr(B * candidat)} + ${fr(C)} = ${fr(image)}$.`,
+          `$f(${candidat}) = ${a} \\times ${par(candidat)}^2 + ${par(B)} \\times ${par(candidat)} + ${par(C)} = ` +
+            `${fr(a * candidat * candidat)} + ${par(B * candidat)} + ${par(C)} = ${fr(image)}$.`,
           image === 0
             ? `Comme $f(${candidat}) = 0$, oui : $${candidat}$ est une racine.`
             : `Comme $f(${candidat}) = ${fr(image)} \\neq 0$, non : $${candidat}$ n'est pas une racine.`
@@ -1187,7 +1245,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           "Pour $f(x) = ax^2 + bx + c$ de racines $x_1$ et $x_2$, on a $f(x) = a(x - x_1)(x - x_2)$ : en développant, le terme constant vaut $a\\,x_1x_2$, donc $x_1 x_2 = \\dfrac{c}{a}$.",
           "On divise le terme constant par le coefficient de $x^2$, puis on divise le résultat par la racine connue.",
           `$\\dfrac{c}{a} = \\dfrac{${C}}{${a}} = ${fr(C / a)}$, donc $${r1} \\times x_2 = ${fr(C / a)}$ et $x_2 = ${fr(r2)}$. ` +
-            `Vérification par la somme : $${r1} + ${r2} = ${r1 + r2}$, et $-\\dfrac{b}{a} = -\\dfrac{${B}}{${a}} = ${fr(-B / a)}$.`,
+            `Vérification par la somme : $${r1} + ${par(r2)} = ${r1 + r2}$, et $-\\dfrac{b}{a} = -\\dfrac{${B}}{${a}} = ${fr(-B / a)}$.`,
           `L'autre racine est $${fr(r2)}$.`
         ),
       };
@@ -1277,7 +1335,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Développer un produit de deux facteurs du premier degré, c'est multiplier chaque terme du premier par chaque terme du second : $(x - x_1)(x - x_2) = x^2 - (x_1 + x_2)x + x_1x_2$.",
           "On calcule d'abord la somme des racines — elle donne le terme en $x$, changé de signe — puis leur produit, qui donne le terme constant. Le coefficient $a$ multiplie ensuite le tout.",
-          `Somme : $${r1} + ${r2} = ${r1 + r2}$ ; produit : $${r1} \\times ${r2} = ${r1 * r2}$. ` +
+          `Somme : $${r1} + ${par(r2)} = ${r1 + r2}$ ; produit : $${r1} \\times ${par(r2)} = ${r1 * r2}$. ` +
             `Avec $a = ${a}$ : $${trinome(a, B, C)}$.`,
           `Le développement est $${trinome(a, B, C)}$.`
         ),
@@ -1302,7 +1360,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     microId: "fct_d3_courbes",
     difficulty: 2,
     theme: "neutral",
-    hint: "Une courbe de $x \\mapsto ax^3$ traverse l'axe en changeant de courbure ; le signe de $a$ dit si elle monte ou descend.",
+    hint: "La courbe de $x \\mapsto ax^3 + b$ est croissante si $a > 0$, décroissante si $a < 0$, et elle coupe l'axe des ordonnées en $b$.",
     tags: ["stmg", "maths", "fonctions", "degre3", "canvas", "template"],
     generate: () => {
       const a = pick([0.5, 1, 2, -0.5, -1, -2] as const);
@@ -1310,6 +1368,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
       const f = (x: number) => a * x * x * x + b;
       const ecrire = (k: number, c: number) =>
         c === 0 ? `$f(x) = ${coef(k)}x^3$` : `$f(x) = ${coef(k)}x^3 ${c >= 0 ? "+" : "-"} ${Math.abs(c)}$`;
+      const parabole = b === 0 ? `$f(x) = ${coef(a)}x^2$` : `$f(x) = ${coef(a)}x^2 ${b > 0 ? "+" : "-"} ${Math.abs(b)}$`;
       return {
         text: `Quelle expression correspond à la courbe tracée ?`,
         format: "qcm",
@@ -1317,12 +1376,14 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           ecrire(-a, b),
           ecrire(a, -b),
           ecrire(a, b + 2),
-          `$f(x) = ${coef(a)}x^2 ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$`,
+          parabole,
           ecrire(a * 2, b),
         ]),
         expected: [ecrire(a, b)],
         comparator: "mcq_exact",
-        canvas: canvasCourbePoints(f, -3, 3, "Courbe à identifier", { pas: 0.1 }),
+        // ⛔ De -2 à 2 : jusqu'à 3, la courbe montait à 54 et l'on ne distinguait
+        // plus a = 1 de a = 2 sur la grille.
+        canvas: canvasCourbePoints(f, -2, 2, "Courbe à identifier", { pas: 0.1 }),
         explanation: exp(
           "La courbe de $x \\mapsto ax^3$ est croissante si $a > 0$, décroissante si $a < 0$, et traverse l'axe des ordonnées en $0$ ; ajouter $b$ la translate verticalement.",
           "On regarde le sens général de la courbe, puis l'ordonnée du point d'abscisse $0$.",
@@ -1332,8 +1393,8 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `$f(x) = ${coef(a)}x^2 ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$`,
-            cause: "a confondu une cubique avec une parabole : une parabole ne traverse pas l'axe en changeant de courbure",
+            choice: parabole,
+            cause: "a confondu avec une parabole : une parabole change de sens de variation, alors que cette courbe garde le même sens de bout en bout",
           },
         ],
       };
@@ -1528,9 +1589,9 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Un polynôme de degré 3 sous forme factorisée change de signe à chacune de ses trois racines : les signes ALTERNENT d'un intervalle au suivant.",
           "On détermine le signe sur l'intervalle le plus à droite — c'est celui de $a$ —, puis on alterne en remontant vers la gauche.",
-          `Ici $a = ${a}$ : à droite de $${r3}$, $f$ est ${a > 0 ? "positif" : "négatif"}, puis les signes alternent. ` +
+          `Ici $a = ${a}$ : à droite de $${r3}$, $f(x)$ est ${a > 0 ? "positif" : "négatif"}, puis les signes alternent. ` +
             `Sur ${intervalle}, une valeur test donne $f(${fr(x)}) = ${fr(f(x))}$.`,
-          `Sur ${intervalle}, $f$ est ${signe}.`
+          `Sur ${intervalle}, $f(x)$ est ${signe}.`
         ),
         choiceDiagnostics: [
           {
@@ -1635,7 +1696,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Pour vérifier qu'une valeur est racine, on calcule son image : elle vaut $0$ si et seulement si la valeur est racine.",
           "On remplace $x$ par le nombre dans chaque facteur, puis on multiplie.",
-          `$f(${candidat}) = ${coef(a)}(${candidat} - (${r1}))(${candidat} - (${r2}))(${candidat} - (${r3})) = ${fr(f(candidat))}$.`,
+          `$f(${candidat}) = ${coef(a)}(${ecart(candidat, r1)})(${ecart(candidat, r2)})(${ecart(candidat, r3)}) = ${fr(f(candidat))}$.`,
           f(candidat) === 0
             ? `$f(${candidat}) = 0$ : $${candidat}$ est bien une racine.`
             : `$f(${candidat}) = ${fr(f(candidat))}$, donc $${candidat}$ n'est pas une racine.`
@@ -1832,7 +1893,7 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Le cube conserve le signe : $(-x)^3 = -x^3$. L'équation $x^3 = c$ n'admet donc qu'UNE seule solution réelle, quel que soit le signe de $c$ — contrairement à $x^2 = c$, qui en a deux quand $c > 0$.",
           "On teste la solution négative proposée en l'élevant au cube.",
-          `$${n}^3 = ${c}$ : cette solution convient. Mais $(-${n})^3 = -${n} \\times -${n} \\times -${n} = ${-c}$, ` +
+          `$${n}^3 = ${c}$ : cette solution convient. Mais $(-${n})^3 = (-${n}) \\times (-${n}) \\times (-${n}) = ${-c}$, ` +
             `qui n'est pas $${c}$ : la seconde solution est fausse.`,
           `La seule solution est $${n}$ : $(-${n})^3$ vaut $${-c}$, et non $${c}$.`
         ),

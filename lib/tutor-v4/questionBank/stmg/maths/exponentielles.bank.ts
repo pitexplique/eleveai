@@ -93,8 +93,9 @@ function canvasExponentielle(
     titre,
     xmin: xmin - 0.3,
     xmax: xmax + 0.3,
-    ymin: Math.floor(Math.min(...ys, 0)),
-    ymax: Math.ceil(Math.max(...ys) * 1.1),
+    // ⛔ Pour k < 0 la courbe est sous l'axe : le cadre garde l'axe et une marge des deux côtés.
+    ymin: Math.floor(Math.min(...ys, 0) * 1.1),
+    ymax: Math.max(...ys) > 0 ? Math.ceil(Math.max(...ys) * 1.1) : Math.ceil(-Math.min(...ys) * 0.1),
     grille: true,
     courbes: [{ id: "f", type: "points", points }],
     points: nuage,
@@ -103,13 +104,14 @@ function canvasExponentielle(
 
 /* ─────────────────── réservoirs de contexte ─────────────────── */
 
+// `e` : l'accord du participe avec le sujet (« la population… est passée »).
 const EVOLUTIONS = [
-  { sujet: "un capital placé", unite: "€" },
-  { sujet: "le chiffre d'affaires d'une enseigne", unite: "k€" },
-  { sujet: "le nombre d'abonnés d'un service", unite: "abonnés" },
-  { sujet: "la valeur d'un parc de machines", unite: "€" },
-  { sujet: "la population d'une commune", unite: "habitants" },
-  { sujet: "le stock d'invendus", unite: "articles" },
+  { sujet: "un capital placé", unite: "€", e: "" },
+  { sujet: "le chiffre d'affaires d'une enseigne", unite: "k€", e: "" },
+  { sujet: "le nombre d'abonnés d'un service", unite: "abonnés", e: "" },
+  { sujet: "la valeur d'un parc de machines", unite: "€", e: "e" },
+  { sujet: "la population d'une commune", unite: "habitants", e: "e" },
+  { sujet: "le stock d'invendus", unite: "articles", e: "" },
 ] as const;
 
 export const exponentiellesBank: TutorBankItemV4[] = [
@@ -285,7 +287,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
       return {
         text:
           `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} augmente de $${t}\\,\\%$ par an. ` +
-          `On peut le modéliser par une suite géométrique, ou par la fonction exponentielle qui la prolonge. ` +
+          `On peut modéliser cette évolution par une suite géométrique, ou par la fonction exponentielle qui la prolonge. ` +
           `Qu'apporte la fonction que la suite ne donnait pas ?`,
         format: "qcm",
         choices: shuffle([
@@ -330,16 +332,19 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     generate: () => {
       const a = pick([2, 3, 4, 5, 10, 1.5, 0.5] as const);
       const x = randomInt(2, 6);
+      // ⛔ La valeur EXACTE, pas `fr()` qui coupe à 5 décimales : $1{,}5^6 = 11{,}390625$.
+      // Ces bases tombent juste, et l'élève qui tape ce que donne sa calculatrice a bon.
+      const image = String(Math.pow(a, x)).replace(".", ",");
       return {
         text: `Soit $f(x) = ${fr(a)}^x$. Calcule $f(${x})$.`,
         format: "short",
-        expected: [fr(Math.pow(a, x))],
+        expected: [image],
         comparator: "number_equal",
         explanation: exp(
           "Pour un exposant entier, $a^x$ est le produit de $x$ facteurs égaux à $a$.",
           "On multiplie la base par elle-même autant de fois que l'indique l'exposant.",
-          `$${fr(a)}^{${x}} = ${Array.from({ length: x }, () => fr(a)).join(" \\times ")} = ${fr(Math.pow(a, x))}$.`,
-          `$f(${x}) = ${fr(Math.pow(a, x))}$.`
+          `$${fr(a)}^{${x}} = ${Array.from({ length: x }, () => fr(a)).join(" \\times ")} = ${image}$.`,
+          `$f(${x}) = ${image}$.`
         ),
       };
     },
@@ -396,28 +401,38 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     generate: () => {
       const a = pick([2, 3, 4, 5, 10] as const);
       const x = randomInt(1, 4);
-      const valeur = 1 / Math.pow(a, x);
+      const puissance = Math.pow(a, x);
+      const valeur = 1 / puissance;
+      // ⛔ Choix en fractions : $3^{-1}$ n'est pas égal à $0{,}33333$. La fraction est
+      // exacte pour toutes les bases ; la valeur décimale vient dans le corrigé, avec
+      // « = » si elle tombe juste (bases autres que 3), « ≈ » sinon.
+      const fraction = (d: number) => `\\dfrac{1}{${d}}`;
+      const bonne = `$${fraction(puissance)}$`;
+      const decimale =
+        a === 3
+          ? `\\approx ${fr(Math.round(valeur * 1000) / 1000)}`
+          : `= ${String(valeur).replace(".", ",")}`;
       return {
         text: `Que vaut $${a}^{-${x}}$ ?`,
         format: "qcm",
-        choices: makeChoices(`$${fr(valeur)}$`, [
-          `$-${fr(Math.pow(a, x))}$`,
-          `$${fr(Math.pow(a, x))}$`,
-          `$-${fr(valeur)}$`,
-          `$${fr(-a * x)}$`,
-          `$${fr(1 / (a * x))}$`,
+        choices: makeChoices(bonne, [
+          `$-${puissance}$`,
+          `$${puissance}$`,
+          `$-${fraction(puissance)}$`,
+          `$${-a * x}$`,
+          `$${fraction(a * x)}$`,
         ]),
-        expected: [`$${fr(valeur)}$`],
+        expected: [bonne],
         comparator: "mcq_exact",
         explanation: exp(
           "Un exposant négatif désigne l'INVERSE : $a^{-x} = \\dfrac{1}{a^{x}}$.",
           "On calcule la puissance positive, puis on prend son inverse — le résultat reste strictement positif.",
-          `$${a}^{${x}} = ${fr(Math.pow(a, x))}$, donc $${a}^{-${x}} = \\dfrac{1}{${fr(Math.pow(a, x))}} = ${fr(valeur)}$.`,
-          `$${a}^{-${x}} = ${fr(valeur)}$.`
+          `$${a}^{${x}} = ${puissance}$, donc $${a}^{-${x}} = ${fraction(puissance)} ${decimale}$.`,
+          `$${a}^{-${x}} = ${fraction(puissance)}$.`
         ),
         choiceDiagnostics: [
           {
-            choice: `$-${fr(Math.pow(a, x))}$`,
+            choice: `$-${puissance}$`,
             cause: "a transformé l'exposant négatif en résultat négatif : une exponentielle est toujours strictement positive",
           },
         ],
@@ -452,7 +467,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
       return {
         text:
           `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} vaut $${v0}$ ${evo.unite} aujourd'hui ` +
-          `et augmente de $${t}\\,\\%$ par an. On le modélise par $f(x) = ${v0} \\times ${fr(q)}^x$, ` +
+          `et augmente de $${t}\\,\\%$ par an. On modélise cette évolution par $f(x) = ${v0} \\times ${fr(q)}^x$, ` +
           `où $x$ compte les années à partir d'aujourd'hui. Que représente $f(-${recul})$ ?`,
         format: "qcm",
         choices: shuffle([
@@ -466,7 +481,8 @@ export const exponentiellesBank: TutorBankItemV4[] = [
         explanation: exp(
           "Un exposant négatif désigne l'inverse : $a^{-x} = \\dfrac{1}{a^{x}}$. Dans un modèle où $x$ compte les années écoulées, un exposant négatif fait donc remonter le temps — et le résultat reste strictement positif.",
           "On calcule l'image, puis on la lit dans la situation.",
-          `$f(-${recul}) = ${v0} \\times ${fr(q)}^{-${recul}} = \\dfrac{${v0}}{${fr(Math.round(Math.pow(q, recul) * 100000) / 100000)}} \\approx ${fr(Math.round(valeur))}$ ${evo.unite}. ` +
+          // ⛔ Six décimales : $1{,}25^3 = 1{,}953125$ tombe juste, `fr()` l'aurait coupé derrière un « = ».
+          `$f(-${recul}) = ${v0} \\times ${fr(q)}^{-${recul}} = \\dfrac{${v0}}{${String(Math.round(Math.pow(q, recul) * 1000000) / 1000000).replace(".", ",")}} \\approx ${fr(Math.round(valeur))}$ ${evo.unite}. ` +
             `On vérifie : en appliquant $${t}\\,\\%$ de hausse pendant $${recul}$ ans à cette valeur, on retombe sur $${v0}$.`,
           `$f(-${recul})$ donne la valeur d'il y a $${recul}$ ans : environ $${fr(Math.round(valeur))}$ ${evo.unite}.`
         ),
@@ -492,7 +508,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "On compare la base à $1$, pas à $0$.",
-    tags: ["stmg", "maths", "exponentielle", "canvas", "template"],
+    tags: ["stmg", "maths", "exponentielle", "template"],
     generate: () => {
       const a = pick([1.05, 1.1, 1.25, 1.5, 2, 3, 0.4, 0.5, 0.7, 0.8, 0.9, 0.95] as const);
       const croissante = a > 1;
@@ -502,7 +518,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
         choices: shuffle(["croissante", "décroissante", "constante", "croissante puis décroissante"]),
         expected: [croissante ? "croissante" : "décroissante"],
         comparator: "mcq_exact",
-        canvas: canvasExponentielle(1, a, 8, `Courbe de f(x) = ${fr(a)}ˣ`, { avecNuage: false }),
+        // ⛔ Pas de courbe ici : elle donnait le sens de variation sans comparer la base à 1.
         explanation: exp(
           "Une fonction exponentielle $x \\mapsto a^x$ est croissante si $a > 1$, décroissante si $0 < a < 1$, constante si $a = 1$.",
           "On compare la base à $1$ — c'est le même critère que pour la raison d'une suite géométrique.",
@@ -688,7 +704,8 @@ export const exponentiellesBank: TutorBankItemV4[] = [
         choices: shuffle(["croissante", "décroissante", "constante", "cela dépend de $x$"]),
         expected: [croissante ? "croissante" : "décroissante"],
         comparator: "mcq_exact",
-        canvas: canvasExponentielle(k, a, 6, `Courbe de f(x) = ${k} × ${fr(a)}ˣ`, { avecNuage: false }),
+        // ⛔ On trace $a^x$, pas $f$ : la courbe de $f$ donnerait la réponse et ôterait le piège du $k$ négatif.
+        canvas: canvasExponentielle(1, a, 6, `Courbe de y = ${fr(a)}ˣ, sans le coefficient ${k}`, { avecNuage: false }),
         explanation: exp(
           "Pour $x \\mapsto k\\,a^x$, deux éléments décident : la position de $a$ par rapport à $1$, et le SIGNE de $k$. Un $k$ négatif retourne la courbe et inverse le sens de variation.",
           "On détermine d'abord le sens de $a^x$, puis on regarde si $k$ le conserve ou l'inverse.",
@@ -729,7 +746,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
       const bonne = `la valeur de départ, au temps $x = 0$`;
       return {
         text:
-          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} est modélisé par $f(x) = ${k} \\times ${fr(q)}^x$, ` +
+          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} est modélisé${evo.e} par $f(x) = ${k} \\times ${fr(q)}^x$, ` +
           `où $x$ compte les années. Que représente le nombre $${k}$ ?`,
         format: "qcm",
         choices: shuffle([
@@ -1178,14 +1195,17 @@ export const exponentiellesBank: TutorBankItemV4[] = [
       const pBrut = randomInt(1, 4);
       const p = pBrut === m ? m - 1 : pBrut;
       const resultat = m - p;
+      // ⛔ Si m < p, le résultat est négatif : pas de `x+-1` ni de `-1x` à l'écran.
+      const xPlus = resultat < 0 ? `x-${-resultat}` : `x+${resultat}`;
+      const foisX = resultat === 1 ? "x" : resultat === -1 ? "-x" : `${resultat}x`;
       return {
         text: `Simplifie $\\dfrac{${fr(a)}^{x+${m}}}{${fr(a)}^{x+${p}}}$.`,
         format: "qcm",
         choices: makeChoices(`$${fr(a)}^{${resultat}}$`, [
           `$${fr(a)}^{2x+${m + p}}$`,
-          `$${fr(a)}^{x+${resultat}}$`,
+          `$${fr(a)}^{${xPlus}}$`,
           `$${fr(a)}^{${m}}$`,
-          `$${fr(a)}^{${resultat}x}$`,
+          `$${fr(a)}^{${foisX}}$`,
         ]),
         expected: [`$${fr(a)}^{${resultat}}$`],
         comparator: "mcq_exact",
@@ -1198,7 +1218,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `$${fr(a)}^{x+${resultat}}$`,
+            choice: `$${fr(a)}^{${xPlus}}$`,
             cause: "n'a soustrait que les nombres et a gardé un $x$ : les deux $x$ se simplifient aussi",
           },
         ],
@@ -1316,7 +1336,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
       const evo = pick(EVOLUTIONS);
       return {
         text:
-          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} a été multiplié par $${fr(Math.round(global * 10000) / 10000)}$ en $${n}$ ans. ` +
+          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} a été multiplié${evo.e} par $${fr(Math.round(global * 10000) / 10000)}$ en $${n}$ ans. ` +
           `Quel est le taux d'évolution annuel MOYEN, en pourcentage arrondi au dixième ?`,
         format: "short",
         expected: [fr(Math.round(tMoyen * 10) / 10)],
@@ -1349,7 +1369,8 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "exponentielle", "gestion", "template", "short"],
     generate: () => {
       const evo = pick(EVOLUTIONS);
-      const vi = pick([200, 250, 400, 500, 800] as const);
+      // ⛔ Pas de 250 : avec le facteur 0,75, on passait à « 187,5 abonnés ».
+      const vi = pick([200, 240, 400, 500, 800] as const);
       const facteur = pick([1.5, 2, 2.5, 3, 0.5, 0.75, 0.8] as const);
       const vf = vi * facteur;
       const n = pick([3, 4, 5, 6, 8, 10] as const);
@@ -1357,8 +1378,8 @@ export const exponentiellesBank: TutorBankItemV4[] = [
       const taux = (qMoyen - 1) * 100;
       return {
         text:
-          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} est passé de $${fr(vi)}$ à $${fr(vf)}$ ${evo.unite} en $${n}$ ans. ` +
-          `Quel est le taux d'évolution annuel MOYEN, en pourcentage arrondi au dixième ?`,
+          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} est passé${evo.e} de $${fr(vi)}$ à $${fr(vf)}$ ${evo.unite} en $${n}$ ans. ` +
+          `Quel est le taux d'évolution annuel MOYEN, en pourcentage arrondi au dixième${facteur < 1 ? " (négatif pour une baisse)" : ""} ?`,
         format: "short",
         expected: [fr(Math.round(taux * 10) / 10)],
         comparator: "number_equal",
@@ -1538,7 +1559,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
           "On élève le coefficient annuel à la puissance $n$, puis on retire $1$.",
           `$${fr(1 + tMoyen / 100)}^{${n}} \\approx ${fr(Math.round(Math.pow(1 + tMoyen / 100, n) * 10000) / 10000)}$, ` +
             `soit un taux global d'environ $${fr(Math.round(global * 10) / 10)}\\,\\%$ — et non $${naif}\\,\\%$. ` +
-            `L'écart vient des intérêts qui s'appliquent, chaque année, à ce que les années précédentes ont déjà ajouté.`,
+            `L'écart vient de ce que chaque hausse s'applique aussi à ce que les années précédentes ont déjà ajouté.`,
           `Le taux global est d'environ $${fr(Math.round(global * 10) / 10)}\\,\\%$, plus GRAND que la simple multiplication.`
         ),
         choiceDiagnostics: [
@@ -1638,18 +1659,26 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Un taux moyen décrit une évolution FICTIVE, régulière, qui aurait le même effet total.",
-    tags: ["stmg", "maths", "exponentielle", "gestion", "open", "template"],
+    tags: ["stmg", "maths", "exponentielle", "gestion", "template"],
     generate: () => {
       const evo = pick(EVOLUTIONS);
       const t = pick([2.5, 3.4, 4.8, 6.2, 7.5, 11.3, -2.8, -5.1] as const);
       const n = pick([4, 5, 6, 8, 10] as const);
+      // ANGLE : ce que le taux moyen NE dit PAS (le tpl_2 demande ce qu'il dit).
+      const bonne = `chaque année, l'évolution a été d'exactement $${fr(t)}\\,\\%$`;
       return {
         text:
           `Sur $${n}$ ans, ${evo.sujet} a évolué au taux annuel moyen de $${fr(t)}\\,\\%$. ` +
-          `Explique ce que signifie ce nombre — et ce qu'il ne signifie pas.`,
-        format: "open",
-        expected: ["moyen", "chaque annee", "chaque année", "meme evolution", "même évolution", "regulier", "régulier", "fictif"],
-        comparator: "contains_keyword",
+          `Laquelle de ces affirmations ce nombre NE permet-il PAS de faire ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `une évolution régulière de $${fr(t)}\\,\\%$ par an aurait donné le même résultat final`,
+          `le coefficient multiplicateur global sur les $${n}$ ans vaut $\\left(${fr(1 + t / 100)}\\right)^{${n}}$`,
+          `certaines années, l'évolution a pu être différente de $${fr(t)}\\,\\%$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation: exp(
           "Le taux moyen est le taux CONSTANT qui, appliqué à chaque période, aurait produit la même évolution globale.",
           "On distingue ce qu'il décrit — un scénario régulier équivalent — de ce qu'il ne décrit pas : l'évolution réelle année par année.",
@@ -1662,11 +1691,9 @@ export const exponentiellesBank: TutorBankItemV4[] = [
   },
 
   {
-    // ANGLE 2 — la même interprétation, mais SÉCURISÉE par un QCM. Le premier
-    // item est une question ouverte validée par mots-clés : un élève qui écrit
-    // la bonne phrase sans le mot « moyen » échoue, un autre qui recopie
-    // « en moyenne » sans rien comprendre passe. Ici les quatre lectures sont
-    // posées côte à côte, et c'est le sens qui départage.
+    // ANGLE 2 — ce que le taux moyen DIT. Le premier item demande ce qu'il ne
+    // permet pas d'affirmer. Ici les quatre lectures sont posées côte à côte, et
+    // c'est le sens qui départage.
     kind: "template",
     id: "stmg_expo_taux_interpreter_tpl_2",
     niveau: "stmg",

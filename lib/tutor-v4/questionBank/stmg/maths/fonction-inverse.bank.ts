@@ -45,6 +45,11 @@ function fr(n: number): string {
   return String(arrondi).replace(".", ",");
 }
 
+/** Très petit nombre écrit en entier : `fr` arrondit à 4 décimales, et 1 ÷ 1 000 000 y deviendrait 0. */
+function frExact(n: number): string {
+  return n.toFixed(6).replace(/0+$/, "").replace(/\.$/, "").replace(".", ",");
+}
+
 function makeChoices(correct: string, wrongs: readonly string[]): string[] {
   const distracteurs = Array.from(new Set(wrongs)).filter((w) => w !== correct);
   return shuffle([correct, ...distracteurs.slice(0, 3)]);
@@ -86,7 +91,9 @@ function canvasCourbePoints(
     xmax,
     ymin: Math.floor(Math.min(...ys, 0)) - 1,
     ymax: Math.ceil(Math.max(...ys, 0)) + 1,
-    grille: true,
+    // ⛔ Le canvas trace une ligne par unité : au-delà de 40 unités, la grille
+    // devenait un aplat gris qui noyait la courbe.
+    grille: xmax - xmin <= 40 && Math.max(...ys, 0) - Math.min(...ys, 0) <= 38,
     courbes: [{ id: "f", type: "points", points }],
     points: options?.marques?.map((x) => ({ x, y: Math.round(f(x) * 100) / 100 })),
   };
@@ -108,15 +115,18 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "fonctions", "inverse", "canvas", "template", "short"],
     generate: () => {
       const k = pick([6, 8, 10, 12, 15, 18, 20, 24] as const);
-      const x0 = pick([1, 2, 3, 4, 5, 6] as const);
+      // ⛔ La valeur doit se LIRE : $k \div x_0$ entier, dans le cadre. Avec k = 10
+      // et x₀ = 3, on attendait 3,3333 sur une courbe. La fenêtre part de 0 :
+      // partie de 0,5, elle posait les graduations sur 0,5 ; 1,5 ; 2,5…
+      const x0 = pick([1, 2, 3, 4, 5, 6].filter((x) => k % x === 0 && k / x <= 12));
       return {
         text: `La courbe représente la fonction $f(x) = \\dfrac{${k}}{x}$. Lis la valeur de $f(${x0})$.`,
         format: "short",
         expected: [fr(k / x0)],
         comparator: "number_equal",
-        canvas: canvasCourbePoints((x) => k / x, 0.5, 10, `Courbe de f(x) = ${k}/x`, {
+        canvas: canvasCourbePoints((x) => k / x, 0, 10, `Courbe de f(x) = ${k}/x`, {
           pas: 0.1,
-          plafond: 26,
+          plafond: 14,
           marques: [x0],
         }),
         explanation: exp(
@@ -211,7 +221,7 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
           sens === "grand"
             ? `$f(100) = ${fr(k / 100)}$, $f(1000) = ${fr(k / 1000)}$, $f(10\\,000) = ${fr(k / 10000)}$ : les valeurs s'écrasent vers $0$.`
             : `$f(0{,}1) = ${fr(k / 0.1)}$, $f(0{,}01) = ${fr(k / 0.01)}$, $f(0{,}001) = ${fr(k / 0.001)}$ : les valeurs explosent.`,
-          `Quand $x$ ${sens === "grand" ? "grandit" : "se rapproche de zéro"}, $f(x)$ ${bonne}.`
+          `Quand $x$ ${sens === "grand" ? "grandit" : "se rapproche de zéro"}, $f(x)$ ${bonne.replace(/^elle /, "")}.`
         ),
         choiceDiagnostics: [
           {
@@ -259,7 +269,8 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
         explanation: exp(
           "Un quotient est nul si, et seulement si, son numérateur est nul. La fonction inverse ne s'annule donc jamais : sa courbe s'approche de l'axe des abscisses sans jamais le toucher.",
           "On essaie des valeurs de plus en plus grandes et l'on regarde ce que devient le résultat — aucune définition formelle n'est attendue.",
-          `$f(1000) = ${fr(k / 1000)}$, $f(1\\,000\\,000) = ${fr(k / 1000000)}$ : c'est de plus en plus petit, mais toujours strictement positif. ` +
+          // ⛔ `fr` écrivait f(1 000 000) = 0, l'erreur même que l'item veut corriger.
+          `$f(1000) = ${frExact(k / 1000)}$, $f(1\\,000\\,000) = ${frExact(k / 1000000)}$ : c'est de plus en plus petit, mais toujours strictement positif. ` +
             `Aussi grand que soit $x$, $\\dfrac{${k}}{x}$ reste au-dessus de zéro.`,
           `L'élève a tort : $f(x)$ se rapproche de $0$ sans jamais l'atteindre.`
         ),
@@ -289,16 +300,18 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
     generate: () => {
       const fixe = pick([600, 800, 1200, 1500, 2000, 3000] as const);
       const unitaire = pick([4, 5, 8, 10, 12, 15] as const);
-      const x0 = pick([50, 100, 150, 200, 250, 300] as const);
+      // ⛔ Quantité choisie pour que le résultat tombe juste au centième : 800 ÷ 150
+      // donnait 9,33, un arrondi que l'énoncé ne demandait pas.
+      const x0 = pick([50, 100, 150, 200, 250, 300].filter((q) => Number.isInteger((fixe * 100) / q)));
       const coutMoyen = unitaire + fixe / x0;
       return {
         text:
           `Le coût total de production de $x$ articles est $C(x) = ${unitaire}x + ${fixe}$ (en euros). ` +
           `Quel est le coût moyen par article pour $x = ${x0}$ ?`,
         format: "short",
-        expected: [fr(Math.round(coutMoyen * 100) / 100)],
+        expected: [fr(coutMoyen)],
         comparator: "number_equal",
-        canvas: canvasCourbePoints((x) => unitaire + fixe / x, 10, 400, "Coût moyen par article (€)", {
+        canvas: canvasCourbePoints((x) => unitaire + fixe / x, 0, 400, "Coût moyen par article (€)", {
           pas: 5,
           plafond: unitaire + fixe / 8,
           marques: [x0],
@@ -306,8 +319,8 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
         explanation: exp(
           "Le coût moyen est le coût total rapporté au nombre d'unités : $\\dfrac{C(x)}{x}$. Quand le coût total est affine, le coût moyen s'écrit $a + \\dfrac{b}{x}$ — une fonction inverse décalée.",
           "On divise le coût total par la quantité, puis on interprète : la part variable reste constante, la charge fixe se dilue.",
-          `$\\dfrac{C(${x0})}{${x0}} = \\dfrac{${unitaire} \\times ${x0} + ${fixe}}{${x0}} = ${unitaire} + \\dfrac{${fixe}}{${x0}} = ${fr(Math.round(coutMoyen * 100) / 100)}$ €.`,
-          `Le coût moyen est de $${fr(Math.round(coutMoyen * 100) / 100)}$ € par article — et il se rapproche de $${unitaire}$ € quand la production augmente.`
+          `$\\dfrac{C(${x0})}{${x0}} = \\dfrac{${unitaire} \\times ${x0} + ${fixe}}{${x0}} = ${unitaire} + \\dfrac{${fixe}}{${x0}} = ${fr(coutMoyen)}$ €.`,
+          `Le coût moyen est de $${fr(coutMoyen)}$ € par article — et il se rapproche de $${unitaire}$ € quand la production augmente.`
         ),
       };
     },
@@ -386,7 +399,7 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
           coefAuDenominateur,
           `$-\\dfrac{${k}}{x}$`,
           `$\\dfrac{${k}}{2x}$`,
-          `$-${k}x$`,
+          k === 1 ? `$-x$` : `$-${k}x$`,
         ]),
         expected: [`$-\\dfrac{${k}}{x^2}$`],
         comparator: "mcq_exact",
@@ -481,7 +494,7 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
         explanation: exp(
           "Le sens de variation se lit sur le signe de la dérivée : $f'(x) = -\\dfrac{k}{x^2}$.",
           "On observe que $x^2$ est strictement positif partout où $f$ est définie : le signe de la dérivée est donc l'OPPOSÉ de celui de $k$, sur chacun des deux intervalles.",
-          `Ici $k = ${k}$, donc $f'(x) = ${decroit ? "-" : "+"}\\dfrac{${Math.abs(k)}}{x^2}$, ` +
+          `Ici $k = ${k}$, donc $f'(x) = ${decroit ? "-" : ""}\\dfrac{${Math.abs(k)}}{x^2}$, ` +
             `strictement ${decroit ? "négative" : "positive"} pour tout $x \\neq 0$.`,
           `$f$ est ${decroit ? "décroissante" : "croissante"} sur cet intervalle.`
         ),
@@ -535,14 +548,20 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
         explanation: exp(
           "La fonction inverse est décroissante sur $]-\\infty\\,;\\,0[$ ET sur $]0\\,;\\,+\\infty[$, mais PAS sur la réunion des deux : entre les deux branches, elle saute de très bas à très haut.",
           "Quand les deux nombres sont de part et d'autre de zéro, on ne compare pas par la monotonie mais par les SIGNES des images.",
-          `$f(${negatif}) = \\dfrac{${k}}{${negatif}} = ${fr(k / negatif)}$, qui est négatif, ` +
-            `et $f(${positif}) = \\dfrac{${k}}{${positif}} = ${fr(k / positif)}$, qui est positif.`,
+          // ⛔ Pas de valeur décimale : « 4 ÷ (-6) = -0,6667 » posait un = devant un
+          // arrondi, et seul le signe sert ici.
+          `$f(${negatif}) = \\dfrac{${k}}{${negatif}}$ est négatif, ` +
+            `et $f(${positif}) = \\dfrac{${k}}{${positif}}$ est positif.`,
           `On a ${bonne}, alors que $${negatif} < ${positif}$ : l'ordre est CONSERVÉ ici, ` +
             `ce qui montre bien que $f$ n'est pas décroissante sur tout son ensemble de définition.`
         ),
         choiceDiagnostics: [
           {
-            choice: "on ne peut pas comparer : $f$ est décroissante, donc l'ordre est inversé",
+            choice: `on ne peut pas les comparer : $${negatif}$ et $${positif}$ ne sont pas dans le même intervalle`,
+            cause: "la monotonie ne s'applique pas ici, mais les signes des deux images suffisent à comparer",
+          },
+          {
+            choice: `$f(${negatif}) > f(${positif})$`,
             cause: "a appliqué la décroissance à deux nombres qui ne sont pas dans le même intervalle",
           },
         ],
@@ -615,12 +634,12 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
       const f = (x: number) => a * x + b / x;
       return {
         text:
-          `Le coût total de gestion d'un stock s'écrit $f(x) = ${a}x + \\dfrac{${b}}{x}$ pour $x > 0$, ` +
+          `Le coût total de gestion d'un stock s'écrit $f(x) = ${a === 1 ? "" : a}x + \\dfrac{${b}}{x}$ pour $x > 0$, ` +
           `où $x$ est la taille d'une commande. Pour quelle valeur de $x$ ce coût est-il minimal ?`,
         format: "short",
         expected: [String(x0)],
         comparator: "number_equal",
-        canvas: canvasCourbePoints(f, Math.max(1, x0 / 5), x0 * 3, "Coût total en fonction de la taille de commande", {
+        canvas: canvasCourbePoints(f, 0, x0 * 3, "Coût total en fonction de la taille de commande", {
           pas: x0 / 20,
           plafond: f(Math.max(1, x0 / 5)) * 1.05,
           marques: [x0],
@@ -628,7 +647,7 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
         explanation: exp(
           "Un extremum d'une fonction dérivable s'obtient là où la dérivée s'annule en changeant de signe.",
           "On dérive la combinaison linéaire terme à terme, on annule, puis on résout — l'équation obtenue est du type $x^2 = c$, au programme.",
-          `$f'(x) = ${a} - \\dfrac{${b}}{x^2}$. On résout $${a} - \\dfrac{${b}}{x^2} = 0$, soit $x^2 = \\dfrac{${b}}{${a}} = ${b / a}$, ` +
+          `$f'(x) = ${a} - \\dfrac{${b}}{x^2}$. On résout $${a} - \\dfrac{${b}}{x^2} = 0$, soit $x^2 = ${a === 1 ? "" : `\\dfrac{${b}}{${a}} = `}${b / a}$, ` +
             `donc $x = ${x0}$ (la solution négative est écartée : une taille de commande est positive). ` +
             `Le coût minimal vaut alors $${fr(f(x0))}$.`,
           `Le coût est minimal pour une taille de commande de $${x0}$.`

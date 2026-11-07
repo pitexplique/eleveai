@@ -10,6 +10,9 @@
 // terme général est étudiée en classe terminale. »
 //
 // Donc AUCUN item de ce fichier n'utilise $u_n = u_0 + nr$ ni $u_n = u_0q^n$.
+// Une définition fonctionnelle DONNÉE par l'énoncé, $u(n) = an + b$, reste permise
+// (micros suite_gen_fonctionnelle et suite_arith_demontrer) : ce qui attend la
+// terminale, c'est de passer de la récurrence à l'expression en fonction de $n$.
 // On calcule de proche en proche, au tableur ou par un algorithme — ce que le
 // texte demande justement : « mettre en œuvre un algorithme ou utiliser un
 // tableur pour obtenir une liste de termes ». Les seuils se cherchent donc par
@@ -69,26 +72,79 @@ function termesArith(u0: number, r: number, n: number): number[] {
   return t;
 }
 
-/** Les n premiers termes d'une suite géométrique (raison > 0). */
+/**
+ * Les n premiers termes d'une suite géométrique (raison > 0).
+ *
+ * ⛔ Pas d'arrondi au centième ici : 16 × 0,25⁴ = 0,0625 s'affichait 0,06, et le
+ * dernier quotient du tableau valait 0,24 sous une raison annoncée de 0,25.
+ * Le million ne sert qu'à effacer le bruit des nombres flottants.
+ */
 function termesGeo(u0: number, q: number, n: number): number[] {
   const t = [u0];
-  for (let k = 1; k < n; k++) t.push(Math.round(t[k - 1] * q * 100) / 100);
+  for (let k = 1; k < n; k++) t.push(Math.round(t[k - 1] * q * 1000000) / 1000000);
   return t;
+}
+
+/** Vrai si tous les termes s'écrivent exactement avec deux décimales au plus. */
+function auCentimePres(termes: readonly number[]): boolean {
+  return termes.every((v) => Math.abs(v * 100 - Math.round(v * 100)) < 1e-6);
+}
+
+/** Le signe qui convient entre une valeur et ce qu'on affiche d'elle. */
+function egalOuEnviron(exact: number, affiche: number): string {
+  return Math.abs(exact - affiche) < 1e-6 ? "=" : "\\approx";
+}
+
+/** Un terme ajouté à la suite d'une formule : « + 5 » ou « - 8 », jamais « + -8 ». */
+function termeSigne(n: number): string {
+  return n >= 0 ? `+ ${fr(n)}` : `- ${fr(-n)}`;
+}
+
+/**
+ * Suite arithmétique à lire sur la grille : entiers, 27 au plus.
+ *
+ * ⛔ `canvasNuage` trace une ligne de grille par unité, et le canvas n'a pas de pas
+ * réglable. Au-delà de 27, les chiffres de l'axe sautent de 3 en 3 ou davantage et
+ * la valeur d'un point ne se lit plus. Pour lire, on prend donc de petits nombres.
+ */
+function termesArithLisibles(): number[] {
+  return Math.random() < 0.5
+    ? termesArith(randomInt(1, 8), randomInt(1, 3), 7)
+    : termesArith(randomInt(20, 26), -randomInt(1, 3), 7);
+}
+
+/** Comme `termesArithLisibles`, avec aussi des suites géométriques à termes entiers. */
+function termesLisibles(): number[] {
+  if (Math.random() < 0.6) return termesArithLisibles();
+  const [u0, q, n] = pick([
+    [1, 2, 5],
+    [2, 2, 4],
+    [3, 2, 4],
+    [1, 3, 4],
+    [8, 1.5, 4],
+    [16, 0.5, 5],
+    [24, 0.5, 4],
+  ] as const);
+  return termesGeo(u0, q, n);
 }
 
 /** Nuage de points (n, u(n)) — la représentation demandée par le BO. */
 function canvasNuage(termes: number[], titre: string, evidence?: { x?: number; y?: number }): CanvasFigure {
-  const ymax = Math.max(...termes);
-  const ymin = Math.min(...termes, 0);
+  const ymin = Math.floor(Math.min(...termes, 0));
+  const ymax = Math.ceil(Math.max(...termes) * 1.15);
   return {
     kind: "fonctionGraphique",
     titre,
-    xmin: -0.5,
-    xmax: termes.length - 0.5,
-    ymin: Math.floor(ymin),
-    ymax: Math.ceil(ymax * 1.15),
-    grille: true,
-    courbes: [{ id: "u", type: "points", points: termes.map((v, k) => ({ x: k, y: v })) }],
+    // ⛔ Le canvas gradue de 1 en 1 À PARTIR DE `xmin` : avec −0,5, l'axe portait
+    // −0,5 ; 0,5 ; 1,5… et chaque point tombait entre deux graduations.
+    xmin: 0,
+    xmax: termes.length - 1,
+    ymin,
+    ymax,
+    // Une ligne par unité : sur une grande plage, la grille devient un aplat gris.
+    grille: ymax - ymin <= 40,
+    // ⛔ Pas de `courbes` : le type « points » RELIE les points par un trait, alors
+    // qu'une suite se représente par des points isolés.
     points: termes.map((v, k) => ({ x: k, y: v })),
     misesEnEvidence:
       evidence !== undefined
@@ -147,6 +203,28 @@ const CONTEXTES_GEO = [
   { sujet: "la valeur d'un véhicule de société", unite: "€" },
   { sujet: "le stock d'invendus d'un entrepôt", unite: "articles" },
 ] as const;
+
+type ContexteGeo = { sujet: string; unite: string };
+
+/**
+ * ⛔ Seules les grandeurs qui peuvent CROÎTRE. La valeur d'un véhicule ou un stock
+ * d'invendus n'augmentent pas de 20 % par an : tirer dans `CONTEXTES_GEO` une
+ * hausse de ces grandeurs n'a aucun sens en gestion.
+ */
+const CONTEXTES_GEO_HAUSSE: readonly ContexteGeo[] = [
+  { sujet: "un capital placé", unite: "€" },
+  { sujet: "le chiffre d'affaires d'une enseigne", unite: "k€" },
+  { sujet: "le nombre d'abonnés d'une plateforme", unite: "abonnés" },
+  { sujet: "le nombre de visiteurs d'un site marchand", unite: "visiteurs" },
+  { sujet: "la facture d'énergie d'un atelier", unite: "€" },
+];
+
+/** ⛔ Des montants : ici un terme à décimales a un sens, pas « 1157,63 abonnés ». */
+const CONTEXTES_GEO_MONTANT = CONTEXTES_GEO_HAUSSE.filter((c) => c.unite.endsWith("€"));
+
+function contexteGeo(hausse: boolean): ContexteGeo {
+  return hausse ? pick(CONTEXTES_GEO_HAUSSE) : pick(CONTEXTES_GEO);
+}
 
 export const suitesPremiereBank: TutorBankItemV4[] = [
   /* ═══════════════════ suite_gen_notation ═══════════════════ */
@@ -297,7 +375,8 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     // type ; celui-ci demande sa conséquence pratique : avec une récurrence, on
     // ne peut pas sauter au rang 20, il faut passer par tous les précédents.
     // C'est la seule chose qui compte quand on choisit entre les deux — et le
-    // BO le pose ainsi, la définition explicite étant réservée à la terminale.
+    // BO le pose ainsi, le passage de la récurrence à l'expression en fonction
+    // de $n$ étant réservé à la terminale.
     kind: "template",
     id: "stmg_suite_gen_fonctionnelle_tpl_2",
     niveau: "stmg",
@@ -327,12 +406,12 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         expected: [bonne],
         comparator: "mcq_exact",
         explanation: exp(
-          "Une définition PAR RÉCURRENCE donne chaque terme à partir du précédent : elle décrit un pas, pas un saut. Une définition EXPLICITE, elle, donne le terme directement en fonction de $n$ — mais elle n'est pas au programme de première.",
+          "Une définition PAR RÉCURRENCE donne chaque terme à partir du précédent : elle décrit un pas, pas un saut. Une définition FONCTIONNELLE, comme $u(n) = 3n + 5$, donne au contraire le terme directement à partir de $n$. Passer de la première à la seconde se fait en terminale.",
           "On regarde ce que la relation relie : si elle fait intervenir $u(n)$, il faut connaître $u(n)$ avant d'obtenir $u(n+1)$.",
           `Pour $u(${rang})$, il faudrait remonter la chaîne : ` +
             `$u(1) = ${u0 + r}$, $u(2) = ${u0 + 2 * r}$, … jusqu'à $u(${rang}) = ${u0 + rang * r}$. ` +
             `Un tableur le fait en une recopie ; c'est justement pour cela que le programme l'utilise ici. ` +
-            `L'expression directe $u(n) = ${u0} + ${r}n$ existe, mais elle relève de la classe terminale.`,
+            `Trouver une expression directe de ce terme en fonction de $n$ relève de la classe terminale.`,
           `Non : il faut parcourir tous les termes, du rang $0$ au rang $${rang}$.`
         ),
         choiceDiagnostics: [
@@ -363,7 +442,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Une relation de récurrence dit comment passer d'un terme au SUIVANT.",
     tags: ["stmg", "maths", "suites", "template"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
+      const contexte = pick(CONTEXTES_GEO_HAUSSE);
       const t = pick([2, 3, 4, 5, 8, 10, 12, 15, 20, 25] as const);
       const q = 1 + t / 100;
       return {
@@ -418,9 +497,9 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Un coefficient plus grand que $1$ fait augmenter ; plus petit que $1$, il fait diminuer. L'écart à $1$ donne le pourcentage.",
     tags: ["stmg", "maths", "suites", "piege", "template"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
       const t = pick([2, 4, 5, 8, 10, 12, 15, 20, 25] as const);
       const hausse = Math.random() < 0.5;
+      const contexte = contexteGeo(hausse);
       const q = hausse ? 1 + t / 100 : 1 - t / 100;
       const bonne = `${contexte.sujet} ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$ chaque année`;
       return {
@@ -431,16 +510,16 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         choices: makeChoices(bonne, [
           `${contexte.sujet} ${hausse ? "diminue" : "augmente"} de $${t}\\,\\%$ chaque année`,
           `${contexte.sujet} ${hausse ? "augmente" : "diminue"} de $${fr(q)}$ ${contexte.unite} chaque année`,
-          `${contexte.sujet} est multiplié par $${t}$ chaque année`,
+          `chaque année, on multiplie ${contexte.sujet} par $${t}$`,
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
         explanation: exp(
           "Une relation $u(n+1) = q \\times u(n)$ décrit une évolution en POURCENTAGE : $q$ est le coefficient multiplicateur, et le taux se lit dans son écart à $1$.",
           "On compare $q$ à $1$ : au-dessus, c'est une hausse ; en dessous, une baisse. Puis on convertit l'écart en pourcentage.",
-          `$${fr(q)} ${hausse ? "-" : "="} 1 ${hausse ? "" : "-"} ${hausse ? fr(t / 100) : fr(t / 100)}$, soit $${t}\\,\\%$ ${hausse ? "de plus" : "de moins"} chaque année. ` +
+          `${hausse ? `$${fr(q)} - 1 = ${fr(t / 100)}$` : `$${fr(q)} = 1 - ${fr(t / 100)}$`}, soit $${t}\\,\\%$ ${hausse ? "de plus" : "de moins"} chaque année. ` +
             `⚠️ Le coefficient MULTIPLIE, il ne s'ajoute pas : la grandeur ne bouge pas de $${fr(q)}$ ${contexte.unite}, ` +
-            `elle est multipliée par $${fr(q)}$ — et l'évolution en euros change donc d'une année sur l'autre.`,
+            `elle est multipliée par $${fr(q)}$ — et la quantité gagnée ou perdue change donc d'une année sur l'autre.`,
           `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$ par an.`
         ),
         choiceDiagnostics: [
@@ -553,12 +632,22 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Le tableau donne les termes déjà calculés : continue la même règle.",
     tags: ["stmg", "maths", "suites", "canvas", "template", "short"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
-      const u0 = pick([1000, 1200, 1500, 2000, 2400, 3000] as const);
-      const t = pick([5, 10, 20, 25, 50] as const);
-      const q = 1 + t / 100;
-      const termes = termesGeo(u0, q, 6);
+      const contexte = pick(CONTEXTES_GEO_MONTANT);
       const rang = randomInt(3, 5);
+      // ⛔ On écarte les tirages qui ne tombent pas juste au centime : le corrigé
+      // écrirait une égalité fausse, et le bon résultat dépendrait de l'arrondi.
+      let t: number = 10;
+      let q = 1.1;
+      let termes = termesGeo(1000, q, rang + 1);
+      for (let essai = 0; essai < 80; essai++) {
+        const taux = pick([5, 10, 20, 25, 50] as const);
+        const suite = termesGeo(pick([1000, 1200, 1500, 2000, 2400, 3000] as const), 1 + taux / 100, rang + 1);
+        if (!auCentimePres(suite)) continue;
+        t = taux;
+        q = 1 + taux / 100;
+        termes = suite;
+        break;
+      }
       return {
         text:
           `Le tableau donne les premiers termes de la suite qui modélise ${contexte.sujet}, ` +
@@ -594,15 +683,23 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Compte les FLÈCHES entre les colonnes du tableau, pas les colonnes elles-mêmes.",
     tags: ["stmg", "maths", "suites", "canvas", "piege", "template", "short"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
-      const u0 = pick([1000, 1200, 1500, 2000, 2400, 3000] as const);
-      const t = pick([5, 10, 20, 25] as const);
-      const q = 1 + t / 100;
+      const contexte = pick(CONTEXTES_GEO_MONTANT);
       const rang = randomInt(3, 5);
-      const termes = termesGeo(u0, q, rang + 1);
+      // ⛔ Même garde que le premier item : le corrigé écrit des égalités.
+      let q = 1.1;
+      let termes = termesGeo(1000, q, rang + 1);
+      for (let essai = 0; essai < 80; essai++) {
+        const coefficient = 1 + pick([5, 10, 20, 25] as const) / 100;
+        const suite = termesGeo(pick([1000, 1200, 1500, 2000, 2400, 3000] as const), coefficient, rang + 1);
+        if (!auCentimePres(suite)) continue;
+        q = coefficient;
+        termes = suite;
+        break;
+      }
+      const uneDeTrop = termes[rang] * q;
       return {
         text:
-          `Le tableau donne ${contexte.sujet}, qui est multiplié par $${fr(q)}$ chaque année. ` +
+          `Le tableau donne ${contexte.sujet}. Chaque année, cette grandeur est multipliée par $${fr(q)}$. ` +
           `Pour passer de $u(0)$ à $u(${rang})$, combien de fois multiplie-t-on par $${fr(q)}$ ?`,
         format: "short",
         expected: [String(rang)],
@@ -613,9 +710,10 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On compte les flèches entre les colonnes du tableau : du rang $0$ au rang $n$, il y en a exactement $n$.",
           `Le tableau affiche $${rang + 1}$ valeurs — de $u(0)$ à $u(${rang})$ — mais seulement $${rang}$ passages : ` +
             `$u(0) \\to u(1) \\to \\ldots \\to u(${rang})$. ` +
-            `Vérification : $${u0} \\times ${fr(q)}^{${rang}} = ${fr(termes[rang])}$, ` +
-            `ce qui est bien la dernière valeur du tableau. Avec $${rang + 1}$ multiplications, on trouverait ` +
-            `$${fr(Math.round(u0 * Math.pow(q, rang + 1) * 100) / 100)}$ — une année de trop.`,
+            // ⛔ Pas de $u_0 \times q^n$ : le terme général attend la terminale.
+            `Vérification sur le dernier passage : $${fr(termes[rang - 1])} \\times ${fr(q)} = ${fr(termes[rang])}$, ` +
+            `ce qui est bien la dernière valeur du tableau. Une multiplication de plus donnerait ` +
+            `${egalOuEnviron(uneDeTrop, Math.round(uneDeTrop * 100) / 100) === "=" ? "" : "environ "}$${fr(Math.round(uneDeTrop * 100) / 100)}$ : une année de trop.`,
           `On multiplie $${rang}$ fois.`
         ),
       };
@@ -668,7 +766,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "Une suite est arithmétique si l'on passe d'un terme au suivant en AJOUTANT toujours le même nombre, géométrique si l'on MULTIPLIE toujours par le même nombre.",
           "On calcule les différences successives, puis les quotients successifs : il faut que l'une des deux listes soit constante.",
           `Différences : ${termes.slice(1).map((v, k) => fr(v - termes[k])).join(" ; ")}. ` +
-            `Quotients : ${termes.slice(1).map((v, k) => fr(Math.round((v / termes[k]) * 100) / 100)).join(" ; ")}.`,
+            `Quotients, arrondis au centième si besoin : ${termes.slice(1).map((v, k) => fr(Math.round((v / termes[k]) * 100) / 100)).join(" ; ")}.`,
           `Cette suite est ${bonne}.`
         ),
         choiceDiagnostics: [
@@ -738,8 +836,10 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une suite est arithmétique si les DIFFÉRENCES entre termes consécutifs sont constantes, et géométrique si les QUOTIENTS le sont. Écarter les deux natures demande donc de mener les deux tests.",
           "On calcule d'abord les différences, puis les quotients. Il faut que les DEUX séries varient pour conclure « ni l'une ni l'autre ».",
-          `Différences : ${diffs.map((v) => `$${v}$`).join(", ")} — elles augmentent, donc pas arithmétique. ` +
-            `Quotients : ${quots.map((v) => `$${fr(v)}$`).join(", ")} — ils diminuent, donc pas géométrique. ` +
+          // ⛔ Pas de « elles augmentent, ils diminuent » : avec 1, 2, 3, 5, 8, les
+          // différences commencent par 1 ; 1 et les quotients remontent de 1,5 à 1,67.
+          `Différences : ${diffs.map((v) => `$${v}$`).join(", ")} — elles ne sont pas toutes égales, donc pas arithmétique. ` +
+            `Quotients, arrondis au centième : ${quots.map((v) => `$${fr(v)}$`).join(", ")} — ils ne sont pas tous égaux, donc pas géométrique. ` +
             `Un seul de ces deux constats n'aurait rien prouvé : une suite géométrique a elle aussi des différences non constantes.`,
           `Les deux tests échouent : la suite n'est ni arithmétique, ni géométrique.`
         ),
@@ -783,7 +883,8 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         explanation: exp(
           "La raison $r$ d'une suite arithmétique est le nombre que l'on ajoute pour passer d'un terme au suivant : $r = u(n+1) - u(n)$.",
           "On calcule la différence entre deux termes consécutifs, et l'on vérifie sur une seconde paire.",
-          `$${fr(termes[1])} - ${fr(termes[0])} = ${fr(r)}$, et $${fr(termes[2])} - ${fr(termes[1])} = ${fr(r)}$.`,
+          // ⛔ Parenthèses autour d'un terme négatif : pas de « −18 − −3 ».
+          `$${fr(termes[1])} - ${fr(termes[0])} = ${fr(r)}$, et $${fr(termes[2])} - ${termes[1] < 0 ? `(${fr(termes[1])})` : fr(termes[1])} = ${fr(r)}$.`,
           `La raison est $r = ${fr(r)}$.`
         ),
       };
@@ -808,12 +909,16 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "suites", "piege", "template", "short"],
     generate: () => {
       const r = pick([-15, -12, -8, -5, 4, 6, 7, 9, 11, 14] as const);
-      const u0 = pick([60, 80, 100, 120, 150, 200] as const);
       const n1 = randomInt(1, 3);
       const n2 = n1 + randomInt(3, 5);
+      // ⛔ Le contexte suit le signe de r, et le départ est assez haut pour que les
+      // valeurs restent positives : pas de « −60 abonnés » au rang 8.
+      const u0 = pick([60, 80, 100, 120, 150, 200] as const) + (r < 0 ? -r * n2 : 0);
       const v1 = u0 + n1 * r;
       const v2 = u0 + n2 * r;
-      const contexte = pick(CONTEXTES_ARITH);
+      const contexte = pick(CONTEXTES_ARITH.filter((c) => c.verbe === (r > 0 ? "gagne" : "perd")));
+      const fauxQuotient = (v2 - v1) / n2;
+      const fauxArrondi = Math.round(fauxQuotient * 100) / 100;
       return {
         text:
           `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} suit une suite ARITHMÉTIQUE. ` +
@@ -827,7 +932,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `Écart des valeurs : $${fr(v2)} - ${fr(v1)} = ${fr(v2 - v1)}$. ` +
             `Nombre de pas : $${n2} - ${n1} = ${n2 - n1}$. ` +
             `Donc $r = \\dfrac{${fr(v2 - v1)}}{${n2 - n1}} = ${fr(r)}$. ` +
-            `⚠️ Diviser par $${n2}$ au lieu de $${n2 - n1}$ donnerait $${fr(Math.round(((v2 - v1) / n2) * 100) / 100)}$ : ` +
+            `⚠️ Diviser par $${n2}$ au lieu de $${n2 - n1}$ donnerait ${egalOuEnviron(fauxQuotient, fauxArrondi) === "=" ? "" : "environ "}$${fr(fauxArrondi)}$ : ` +
             `on ne divise pas par le rang d'arrivée, mais par le nombre de pas franchis.`,
           `La raison vaut $${fr(r)}$.`
         ),
@@ -854,7 +959,8 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
       const signe = contexte.verbe === "perd" ? -1 : 1;
       return {
         text:
-          `Chaque mois, ${contexte.sujet} ${contexte.verbe} $${r}$ ${contexte.unite}. ` +
+          // ⚠️ « Le nombre d'abonnés GAGNE 15 abonnés » : voir l'angle 2.
+          `Chaque mois, ${contexte.sujet} ${signe > 0 ? "augmente" : "diminue"} de $${r}$ ${contexte.unite}. ` +
           `Quelle relation de récurrence traduit cette situation ?`,
         format: "qcm",
         choices: makeChoices(`$u(n+1) = u(n) ${signe > 0 ? "+" : "-"} ${r}$`, [
@@ -869,7 +975,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une évolution ABSOLUE constante — une même quantité ajoutée ou retirée à chaque étape — se traduit par une suite arithmétique.",
           "On écrit ce qui relie le terme suivant au terme courant, avec le bon signe.",
-          `${contexte.verbe === "perd" ? "Perdre" : "Gagner"} $${r}$ ${contexte.unite} par mois donne $u(n+1) = u(n) ${signe > 0 ? "+" : "-"} ${r}$.`,
+          `${signe > 0 ? "Une hausse" : "Une baisse"} de $${r}$ ${contexte.unite} par mois donne $u(n+1) = u(n) ${signe > 0 ? "+" : "-"} ${r}$.`,
           `La relation est $u(n+1) = u(n) ${signe > 0 ? "+" : "-"} ${r}$.`
         ),
         choiceDiagnostics: [
@@ -996,14 +1102,15 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "La raison est un nombre FIXE : elle ne croît ni ne décroît. C'est son SIGNE qui décide du sens de la suite.",
     tags: ["stmg", "maths", "suites", "piege", "template"],
     generate: () => {
-      const contexte = pick(CONTEXTES_ARITH);
       const baisse = Math.random() < 0.5;
+      const contexte = pick(CONTEXTES_ARITH.filter((c) => c.verbe === (baisse ? "perd" : "gagne")));
       const u0 = pick([200, 300, 400, 500, 800] as const);
       const bonne = `sa raison est ${baisse ? "NÉGATIVE" : "POSITIVE"}`;
       return {
         text:
+          // ⛔ Pas de pronom : « l'épargne… il diminue ». Le sujet peut être féminin.
           `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} suit une suite arithmétique de premier terme $${u0}$, ` +
-          `et l'on constate qu'${baisse ? "il diminue" : "il augmente"} mois après mois. Que peut-on en dire ?`,
+          `et l'on constate que cette grandeur ${baisse ? "diminue" : "augmente"} mois après mois. Que peut-on en dire ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           `sa raison est ${baisse ? "POSITIVE" : "NÉGATIVE"}`,
@@ -1048,26 +1155,31 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Démontrer, ce n'est pas vérifier sur deux termes : il faut calculer $u(n+1) - u(n)$ en gardant $n$.",
-    tags: ["stmg", "maths", "suites", "open", "template"],
+    tags: ["stmg", "maths", "suites", "template"],
     generate: () => {
       const a = pick([3, 4, 5, 6, 7, 8, 9, 11] as const);
       const b = pick([1, 2, 5, 10, 12, 20, 25] as const);
+      const bonne = `on calcule $u(n+1) - u(n)$, on trouve $${a}$ : cette différence ne dépend pas de $n$`;
+      const surDeuxTermes = `on calcule $u(1) - u(0) = ${a}$ et $u(2) - u(1) = ${a}$ : la différence est la même deux fois de suite`;
+      const parQuotient = `on calcule $\\dfrac{u(n+1)}{u(n)}$, et l'on montre que ce quotient vaut toujours $${a}$`;
       return {
+        // Plus de question ouverte (règle du 27/10) : l'angle reste la DÉMARCHE, et
+        // le deuxième item lit la raison.
         text:
           `Une suite est définie pour tout entier $n$ par $u(n) = ${a}n + ${b}$. ` +
-          `Explique comment démontrer qu'elle est arithmétique, et donne sa raison.`,
-        format: "open",
-        // ⛔ La raison nue (`${a}`, un seul chiffre) ne peut pas être un
-        // mot-clé : `contains_keyword` valide sur la sous-chaîne, et le nombre
-        // FIGURE DÉJÀ dans l'énoncé — recopier « u(n) = 9n + 1 » suffirait à
-        // valider sans avoir rien démontré. La démarche seule est attendue.
-        expected: [
-          "u(n+1) - u(n)",
-          "difference",
-          "différence",
-          "constante",
+          `Quel raisonnement démontre qu'elle est arithmétique ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          surDeuxTermes,
+          parQuotient,
+          `on remarque que $u(n)$ augmente quand $n$ augmente`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        choiceDiagnostics: [
+          { choice: surDeuxTermes, cause: "une vérification sur deux écarts ne démontre rien pour tous les rangs" },
+          { choice: parQuotient, cause: "le quotient est le test d'une suite GÉOMÉTRIQUE, et il n'est pas constant ici" },
         ],
-        comparator: "contains_keyword",
         explanation: exp(
           "Une suite est arithmétique lorsque la différence $u(n+1) - u(n)$ est CONSTANTE, c'est-à-dire ne dépend pas de $n$.",
           "On calcule cette différence en gardant la lettre $n$ : vérifier sur deux ou trois termes ne démontre rien.",
@@ -1080,8 +1192,8 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
   },
 
   {
-    // ANGLE 2 — la raison LUE sur la forme explicite. Le premier item est une
-    // ouverte : il fait rédiger la démonstration $u(n+1) - u(n) = r$. Celui-ci
+    // ANGLE 2 — la raison LUE sur la forme explicite. Le premier item fait
+    // choisir la démonstration $u(n+1) - u(n) = r$. Celui-ci
     // en donne le résultat d'un coup d'œil : dans $u(n) = an + b$, le
     // coefficient de $n$ EST la raison. Les deux vont ensemble — l'une prouve,
     // l'autre reconnaît —, et la seconde est ce qui reste quand on relit sa
@@ -1109,7 +1221,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une suite dont le terme s'écrit $u(n) = an + b$ est arithmétique, et sa raison vaut $a$ : c'est ce qu'on ajoute chaque fois que $n$ augmente de $1$.",
           "On calcule la différence entre deux termes consécutifs : $u(n+1) - u(n)$. Tout ce qui ne dépend pas de $n$ s'élimine, et il ne reste que le coefficient de $n$.",
-          `$u(n+1) = ${a}(n+1) + ${b} = ${a}n + ${a + b}$. ` +
+          `$u(n+1) = ${a}(n+1) + ${b} = ${a}n ${termeSigne(a + b)}$. ` +
             `Donc $u(n+1) - u(n) = ${a + b} - ${b} = ${fr(a)}$ : une constante, indépendante de $n$. ` +
             `⚠️ Le nombre $${b}$ n'est pas la raison : c'est le premier terme, $u(0) = ${b}$.`,
           `La raison vaut $${fr(a)}$.`
@@ -1132,8 +1244,12 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "La raison d'une suite géométrique est le QUOTIENT de deux termes consécutifs.",
     tags: ["stmg", "maths", "suites", "canvas", "template", "short"],
     generate: () => {
-      const u0 = pick([16, 24, 32, 48, 64, 80, 100, 128] as const);
       const q = pick([0.5, 1.5, 2, 2.5, 3, 0.25] as const);
+      // ⛔ Avec q = 0,25, on part d'un multiple de 16 : les cinq termes s'écrivent
+      // alors avec quatre décimales au plus et les quotients affichés tombent juste.
+      const u0 = q === 0.25
+        ? pick([16, 32, 48, 64, 80, 128] as const)
+        : pick([16, 24, 32, 48, 64, 80, 100, 128] as const);
       const termes = termesGeo(u0, q, 5);
       return {
         text: `Le tableau donne les premiers termes d'une suite géométrique. Quelle est sa raison ?`,
@@ -1168,10 +1284,15 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "La raison est le nombre par lequel on MULTIPLIE : c'est donc le terme suivant divisé par le précédent.",
     tags: ["stmg", "maths", "suites", "canvas", "piege", "template"],
     generate: () => {
-      const u0 = pick([16, 24, 32, 48, 64, 80, 100, 128] as const);
       const q = pick([0.5, 1.5, 2, 2.5, 0.25] as const);
+      // ⛔ Avec q = 0,25, un multiple de 16 : voir le premier item.
+      const u0 = q === 0.25
+        ? pick([16, 32, 48, 64, 80, 128] as const)
+        : pick([16, 24, 32, 48, 64, 80, 100, 128] as const);
       const termes = termesGeo(u0, q, 5);
       const k = randomInt(1, 3);
+      // 1 ÷ 1,5 ne tombe pas juste.
+      const inverse = `${q === 1.5 ? "environ " : ""}$${fr(Math.round((1 / q) * 10000) / 10000)}$`;
       const bonne = `$\\dfrac{${fr(termes[k])}}{${fr(termes[k - 1])}}$`;
       return {
         text:
@@ -1191,7 +1312,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On choisit deux termes consécutifs et l'on divise celui de droite par celui de gauche. L'ordre compte : l'inverse donnerait un autre nombre, tout aussi crédible.",
           `$\\dfrac{${fr(termes[k])}}{${fr(termes[k - 1])}} = ${fr(q)}$, et ce quotient est le même d'un rang à l'autre : ` +
             `c'est ce qui fait de la suite une suite géométrique. ` +
-            `⚠️ À l'envers, on obtiendrait $${fr(Math.round((1 / q) * 10000) / 10000)}$ — ` +
+            `⚠️ À l'envers, on obtiendrait ${inverse} — ` +
             `un nombre qui ${q > 1 ? "annoncerait une baisse là où la suite monte" : "annoncerait une hausse là où la suite descend"}. ` +
             `Et la DIFFÉRENCE, elle, ne serait constante que pour une suite arithmétique.`,
           `La raison se calcule par $\\dfrac{${fr(termes[k])}}{${fr(termes[k - 1])}}$, soit $${fr(q)}$.`
@@ -1199,7 +1320,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         choiceDiagnostics: [
           {
             choice: `$\\dfrac{${fr(termes[k - 1])}}{${fr(termes[k])}}$`,
-            cause: `a divisé dans le mauvais sens : cela donne $${fr(Math.round((1 / q) * 10000) / 10000)}$, l'inverse de la raison`,
+            cause: `a divisé dans le mauvais sens : cela donne ${inverse}, l'inverse de la raison`,
           },
           {
             choice: `$${fr(termes[k])} - ${fr(termes[k - 1])}$`,
@@ -1276,10 +1397,13 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         comparator: "number_equal",
         explanation: exp(
           "Chaque pas vers l'avant multiplie par $q$ ; chaque pas en arrière divise donc par $q$. Remonter de $n$ rangs revient à diviser $n$ fois.",
-          "On compte les rangs à remonter, et l'on divise par la raison autant de fois — ou, ce qui revient au même, par $q$ élevé à cette puissance.",
+          // ⛔ De proche en proche, sans puissance de $q$ : le terme général attend la terminale.
+          "On compte les rangs à remonter, et l'on divise par la raison autant de fois, un rang après l'autre.",
           `De $u(${rang})$ à $u(0)$, il y a $${rang}$ pas en arrière : ` +
-            `$\\dfrac{${fr(termes[rang])}}{${fr(q)}^{${rang}}} = \\dfrac{${fr(termes[rang])}}{${fr(Math.round(Math.pow(q, rang) * 10000) / 10000)}} = ${fr(u0)}$. ` +
-            `⚠️ Multiplier au lieu de diviser donnerait $${fr(Math.round(termes[rang] * Math.pow(q, rang) * 100) / 100)}$ : ` +
+            Array.from({ length: rang }, (_, i) => rang - i)
+              .map((k) => `$u(${k - 1}) = \\dfrac{${fr(termes[k])}}{${fr(q)}} = ${fr(termes[k - 1])}$`)
+              .join(" ; ") +
+            `. ⚠️ Multiplier au lieu de diviser donnerait $${fr(termesGeo(termes[rang], q, rang + 1)[rang])}$ : ` +
             `on s'éloignerait du départ au lieu d'y revenir.`,
           `$u(0) = ${fr(u0)}$.`
         ),
@@ -1299,19 +1423,33 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Pour une suite géométrique, c'est le QUOTIENT $\\frac{u(n+1)}{u(n)}$ qu'il faut montrer constant.",
-    tags: ["stmg", "maths", "suites", "open", "template"],
+    tags: ["stmg", "maths", "suites", "template"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
       const t = pick([4, 5, 8, 10, 15, 20, 25, 30] as const);
       const hausse = Math.random() < 0.5;
+      const contexte = contexteGeo(hausse);
       const q = 1 + (hausse ? t : -t) / 100;
+      const bonne = `chaque année, on multiplie par le même nombre : elle est géométrique de raison $${fr(q)}$`;
+      const raisonTaux = `chaque année, on multiplie par le même nombre : elle est géométrique de raison $${fr(t / 100)}$`;
+      const arithmetique = `chaque année, on ajoute le même nombre : elle est arithmétique de raison $${hausse ? t : -t}$`;
       return {
+        // Plus de question ouverte (règle du 27/10) : l'angle reste le POURQUOI et la
+        // raison ; le deuxième item fait trier les méthodes de démonstration.
         text:
           `Chaque année, ${contexte.sujet} ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$. ` +
-          `Explique pourquoi la suite qui le modélise est géométrique, et donne sa raison.`,
-        format: "open",
-        expected: ["quotient", "multiplie", "coefficient", "constant", fr(q)],
-        comparator: "contains_keyword",
+          `Que dire de la suite qui modélise cette évolution, et pourquoi ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          raisonTaux,
+          arithmetique,
+          `elle ${hausse ? "augmente" : "diminue"} chaque année : cela suffit pour dire qu'elle est géométrique`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        choiceDiagnostics: [
+          { choice: raisonTaux, cause: "a oublié le $1$ : la raison est le coefficient multiplicateur, pas le taux" },
+          { choice: arithmetique, cause: "un pourcentage porte sur la valeur du moment : la quantité ajoutée change chaque année" },
+        ],
         explanation: exp(
           "Une suite est géométrique lorsque le quotient $\\dfrac{u(n+1)}{u(n)}$ est CONSTANT.",
           "On traduit le pourcentage en coefficient multiplicateur : si le passage d'un terme au suivant est toujours une multiplication par le même nombre, la suite est géométrique.",
@@ -1324,8 +1462,8 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
   },
 
   {
-    // ANGLE 2 — TRIER les méthodes, quand le premier item fait rédiger. La
-    // question ouverte récompense l'élève qui écrit la démonstration ; celui-ci
+    // ANGLE 2 — TRIER les méthodes, quand le premier item fait justifier la
+    // nature de la suite et sa raison. Celui-ci
     // met les quatre façons de s'y prendre côte à côte. Deux pièges y logent :
     // le test de la DIFFÉRENCE, qui prouverait autre chose, et le contrôle sur
     // « les trois premiers termes », qui ne prouve rien du tout.
@@ -1340,9 +1478,9 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Démontrer, c'est valable pour TOUT $n$ : un calcul sur les premiers termes ne fait que suggérer.",
     tags: ["stmg", "maths", "suites", "piege", "template"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
       const t = pick([4, 5, 8, 10, 15, 20, 25, 30] as const);
       const hausse = Math.random() < 0.5;
+      const contexte = contexteGeo(hausse);
       const q = 1 + (hausse ? t : -t) / 100;
       const bonne =
         `calculer le quotient $\\dfrac{u(n+1)}{u(n)}$ pour tout $n$, et montrer qu'il vaut toujours $${fr(q)}$`;
@@ -1365,7 +1503,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `Une ${hausse ? "hausse" : "baisse"} de $${t}\\,\\%$ multiplie par $${fr(q)}$ : ` +
             `$u(n+1) = ${fr(q)} \\times u(n)$, donc $\\dfrac{u(n+1)}{u(n)} = ${fr(q)}$ quel que soit $n$. ` +
             `⚠️ La DIFFÉRENCE, elle, n'est pas constante ici : elle vaut $${fr(Math.round((q - 1) * 100) / 100)} \\times u(n)$, ` +
-            `donc elle grandit avec $u(n)$. Et un contrôle sur trois termes ne serait qu'une vérification, pas une preuve.`,
+            `donc elle change avec $u(n)$. Et un contrôle sur trois termes ne serait qu'une vérification, pas une preuve.`,
           `On montre que le quotient $\\dfrac{u(n+1)}{u(n)}$ vaut $${fr(q)}$ pour tout $n$.`
         ),
         choiceDiagnostics: [
@@ -1467,8 +1605,8 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         comparator: "mcq_exact",
         explanation: exp(
           "Sur plusieurs périodes, ce sont les COEFFICIENTS MULTIPLICATEURS qui se multiplient entre eux — jamais les pourcentages qui s'additionnent.",
-          "On élève le coefficient à la puissance du nombre d'années, puis on retire $1$ pour lire le taux global en pourcentage.",
-          `$${fr(q)}^2 = ${fr(q2)}$, donc l'évolution globale vaut $${fr(q2)} - 1 = ${fr(Math.round((q2 - 1) * 10000) / 10000)}$, ` +
+          "On multiplie le coefficient par lui-même, une fois par année, puis on retire $1$ pour lire le taux global en pourcentage.",
+          `$${fr(q)} \\times ${fr(q)} = ${fr(q2)}$, donc l'évolution globale vaut $${fr(q2)} - 1 = ${fr(Math.round((q2 - 1) * 10000) / 10000)}$, ` +
             `soit ${hausse ? "+" : "−"}$${fr(Math.abs(global))}\\,\\%$. ` +
             `⚠️ Doubler le taux donnerait ${hausse ? "+" : "−"}$${Math.abs(naif)}\\,\\%$ : ` +
             `${hausse
@@ -1504,14 +1642,14 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Une baisse de $t\\,\\%$ donne $q = 1 - \\frac{t}{100}$, jamais un nombre négatif.",
     tags: ["stmg", "maths", "suites", "evolutions", "template", "short"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
       const t = pick([2, 3, 5, 8, 10, 12, 15, 20, 25, 30, 40] as const);
       const hausse = Math.random() < 0.5;
+      const contexte = contexteGeo(hausse);
       const q = 1 + (hausse ? t : -t) / 100;
       return {
         text:
           `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$ par an. ` +
-          `Quelle est la raison de la suite géométrique qui le modélise ?`,
+          `Quelle est la raison de la suite géométrique qui modélise cette évolution ?`,
         format: "short",
         expected: [fr(q)],
         comparator: "number_equal",
@@ -1542,9 +1680,9 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "D'abord le quotient des deux valeurs, ensuite son écart à $1$ — et l'on multiplie par $100$.",
     tags: ["stmg", "maths", "suites", "template", "short"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
       const t = pick([5, 10, 15, 20, 25, 40, 50] as const);
       const hausse = Math.random() < 0.5;
+      const contexte = contexteGeo(hausse);
       const q = 1 + (hausse ? t : -t) / 100;
       // Le premier terme est choisi pour que la seconde valeur tombe juste.
       const u0 = pick([200, 400, 800, 1000, 2000] as const);
@@ -1629,8 +1767,8 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Multiplier par un nombre entre $0$ et $1$ fait DIMINUER, sans jamais rendre les termes négatifs.",
     tags: ["stmg", "maths", "suites", "piege", "template"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
       const baisse = Math.random() < 0.5;
+      const contexte = contexteGeo(!baisse);
       const u0 = pick([200, 400, 500, 1000, 2000] as const);
       const bonne = baisse
         ? "sa raison est comprise entre $0$ et $1$"
@@ -1638,7 +1776,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
       return {
         text:
           `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} suit une suite géométrique ` +
-          `de premier terme $${u0}$, à termes tous positifs, et l'on constate qu'${baisse ? "il diminue" : "il augmente"} ` +
+          `de premier terme $${u0}$, à termes tous positifs, et l'on constate que cette grandeur ${baisse ? "diminue" : "augmente"} ` +
           `d'année en année. Que peut-on dire de sa raison ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -1687,9 +1825,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "On représente une suite par des POINTS isolés $(n\\,;\\,u(n))$, jamais par une courbe continue.",
     tags: ["stmg", "maths", "suites", "canvas", "template"],
     generate: () => {
-      const u0 = pick([20, 40, 60, 100, 150] as const);
-      const r = pick([10, 15, 20, 25, 30, -10, -15] as const);
-      const termes = termesArith(u0, r, 7);
+      const termes = termesArithLisibles();
       const rang = randomInt(1, 6);
       return {
         text:
@@ -1739,9 +1875,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Existe-t-il un terme de rang $2{,}5$ ? Le rang d'une suite est un nombre ENTIER.",
     tags: ["stmg", "maths", "suites", "canvas", "piege", "template"],
     generate: () => {
-      const u0 = pick([20, 40, 60, 100, 150] as const);
-      const r = pick([10, 15, 20, 25, 30, -10, -15] as const);
-      const termes = termesArith(u0, r, 7);
+      const termes = termesArithLisibles();
       const rang = randomInt(2, 4);
       const bonne =
         "non : une suite n'a de valeur qu'aux rangs ENTIERS, le tracé inventerait des termes qui n'existent pas";
@@ -1763,7 +1897,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On se demande si la valeur intermédiaire aurait un sens : entre le rang $2$ et le rang $3$, y a-t-il un rang $2{,}5$ ?",
           `Le point mis en évidence est celui de rang $${rang}$, de valeur $${fr(termes[rang])}$. ` +
             `Relier les points ferait lire, au rang $${rang}{,}5$, une valeur de $${fr(Math.round((termes[rang] + termes[rang + 1]) / 2 * 100) / 100)}$ — ` +
-            `or ce rang n'existe pas : on ne compte pas deux mois et demi de relevés mensuels. ` +
+            `or ce rang n'existe pas : un rang compte des étapes entières, jamais $${rang}$ étapes et demie. ` +
             `Une ligne pointillée est parfois tracée pour guider l'œil, mais elle ne fait pas partie de la suite.`,
           `Non : la suite n'existe qu'aux rangs entiers.`
         ),
@@ -1774,7 +1908,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           },
           {
             choice: "non : c'est interdit parce que les points ne sont pas alignés",
-            cause: "même parfaitement alignés — cas d'une suite arithmétique — les points ne se relient pas : la raison est le domaine, pas l'alignement",
+            cause: "même parfaitement alignés — cas d'une suite arithmétique — les points ne se relient pas : ce qui l'empêche, c'est que la suite n'existe qu'aux rangs entiers, pas l'alignement",
           },
         ],
       };
@@ -1795,10 +1929,9 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Le rang se lit en abscisse, la valeur du terme en ordonnée.",
     tags: ["stmg", "maths", "suites", "canvas", "template", "short"],
     generate: () => {
-      const u0 = pick([30, 50, 80, 120] as const);
-      const q = pick([1.2, 1.25, 1.5, 0.8] as const);
-      const termes = termesGeo(u0, q, 7).map((v) => Math.round(v));
-      const rang = randomInt(1, 6);
+      // ⛔ La valeur doit SE LIRE : « 187 » ne se lit pas sur une grille. Voir `termesArithLisibles`.
+      const termes = termesLisibles();
+      const rang = randomInt(1, termes.length - 1);
       return {
         text: `Lis sur le graphique la valeur de $u(${rang})$.`,
         format: "short",
@@ -1831,16 +1964,10 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "On part de l'axe VERTICAL : on repère la valeur, on va jusqu'au point, puis on descend lire son rang.",
     tags: ["stmg", "maths", "suites", "canvas", "template", "short"],
     generate: () => {
-      const u0 = pick([30, 50, 80, 120] as const);
-      const q = pick([1.2, 1.25, 1.5, 0.8] as const);
-      // Les valeurs doivent être deux à deux distinctes : sinon la valeur
-      // cherchée désigne deux points, et la question a deux réponses.
-      let termes = termesGeo(u0, q, 7).map((v) => Math.round(v));
-      for (let essai = 0; essai < 20; essai++) {
-        if (new Set(termes).size === termes.length) break;
-        termes = termesGeo(pick([30, 50, 80, 120] as const), q, 7).map((v) => Math.round(v));
-      }
-      const rang = randomInt(1, 6);
+      // ⛔ Des entiers lisibles, et une suite strictement monotone : la valeur
+      // cherchée ne désigne qu'un seul point, donc la question a une seule réponse.
+      const termes = termesLisibles();
+      const rang = randomInt(1, termes.length - 1);
       return {
         text:
           `Sur ce graphique, pour quel RANG la suite prend-elle la valeur $${fr(termes[rang])}$ ?`,
@@ -1853,7 +1980,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On repère la valeur sur l'axe vertical, on avance horizontalement jusqu'au point, puis on descend lire son rang sur l'axe horizontal.",
           `La hauteur $${fr(termes[rang])}$ n'est atteinte que par un seul point, celui de rang $${rang}$ : ` +
             `c'est donc $u(${rang}) = ${fr(termes[rang])}$. ` +
-            `${q > 1 ? "La suite étant croissante" : "La suite étant décroissante"}, chaque valeur ne correspond qu'à un rang.`,
+            `${termes[1] > termes[0] ? "La suite étant croissante" : "La suite étant décroissante"}, chaque valeur ne correspond qu'à un rang.`,
           `C'est le rang $${rang}$.`
         ),
       };
@@ -1931,9 +2058,11 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     generate: () => {
       const arithmetique = Math.random() < 0.5;
       const u0 = pick([40, 60, 80, 100] as const);
+      // ⛔ Termes exacts, jamais arrondis : le corrigé dit que le quotient « reste le
+      // même », ce que des termes arrondis à l'entier démentiraient.
       const termes = arithmetique
         ? termesArith(u0, pick([15, 20, 25, 30] as const), 7)
-        : termesGeo(u0, pick([1.2, 1.25, 1.3] as const), 7).map((v) => Math.round(v));
+        : termesGeo(u0, pick([1.2, 1.25, 1.3] as const), 7);
       const nature = arithmetique ? "arithmétique" : "géométrique";
       const bonne = `non : le graphique permet de CONJECTURER, il faut ensuite le démontrer par le calcul`;
       return {
@@ -2158,10 +2287,12 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         comparator: "mcq_exact",
         explanation: exp(
           "Une croissance linéaire correspond à une variation ABSOLUE constante ; une croissance exponentielle à une variation RELATIVE constante.",
-          "On repère si l'énoncé donne une quantité (avec une unité) ou un pourcentage.",
+          "On repère si l'énoncé donne une quantité (avec une unité), ou un pourcentage ou un coefficient.",
           lineaire
             ? "L'énoncé donne une quantité fixe, dans l'unité de la grandeur : on ajoute toujours le même nombre."
-            : "L'énoncé donne un pourcentage : on multiplie toujours par le même coefficient.",
+            : phrase.includes("double")
+              ? "« Double » veut dire « est multiplié par $2$ » : on multiplie toujours par le même coefficient."
+              : "L'énoncé donne un pourcentage : on multiplie toujours par le même coefficient.",
           `Il s'agit d'une croissance ${lineaire ? "linéaire, modélisée par une suite arithmétique" : "exponentielle, modélisée par une suite géométrique"}.`
         ),
       };
@@ -2224,9 +2355,10 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         comparator: "mcq_exact",
         explanation: exp(
           "Un versement FIXE fait croître le capital d'une suite arithmétique : la même somme chaque année. Un POURCENTAGE le fait croître d'une suite géométrique : la somme ajoutée grandit avec le capital.",
-          "On calcule les deux à l'échéance : $c + f \\times n$ d'un côté, $c \\times (1 + t/100)^n$ de l'autre.",
-          `Placement fixe : $${capital} + ${fixe} \\times ${annees} = ${lineaire}$ €. ` +
-            `Placement à $${t}\\,\\%$ : $${capital} \\times ${fr(Math.round(Math.pow(1 + t / 100, annees) * 10000) / 10000)} \\approx ${expo}$ €. ` +
+          // ⛔ Pas de $c \times q^n$ : le terme général attend la terminale. On passe par le tableur.
+          "On calcule les deux à l'échéance, de proche en proche au tableur : on ajoute le même montant d'un côté, on multiplie par le même coefficient de l'autre.",
+          `Sur $${annees}$ lignes de tableur, le placement fixe atteint $${lineaire}$ € ` +
+            `et le placement à $${t}\\,\\%$ atteint environ $${expo}$ €. ` +
             `Pourtant, la première année, le fixe rapporte $${fixe}$ € contre seulement $${Math.round((capital * t) / 100)}$ € pour le pourcentage : ` +
             `il part DEVANT, et se fait rattraper parce que l'autre porte chaque année sur un montant plus gros.`,
           `C'est le placement à $${t}\\,\\%$, avec environ $${expo}$ € contre $${lineaire}$ €.`
@@ -2259,7 +2391,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Il faut DEUX informations pour définir la suite : le premier terme et la relation de récurrence.",
     tags: ["stmg", "maths", "suites", "modelisation", "template"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
+      const contexte = pick(CONTEXTES_GEO_HAUSSE);
       const u0 = pick([1000, 1200, 1500, 2000, 2500, 5000] as const);
       const t = pick([2, 3, 5, 8, 10, 15] as const);
       const q = 1 + t / 100;
@@ -2368,8 +2500,8 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         explanation: exp(
           "Avec des intérêts composés, les intérêts d'une année s'ajoutent au capital et produisent à leur tour des intérêts l'année suivante.",
           "On multiplie par le coefficient une fois par année écoulée, de proche en proche.",
-          `$u(1) = ${fr(Math.round(termes[1] * 100) / 100)}$ ; $u(2) = ${fr(Math.round(termes[2] * 100) / 100)}$ ; ` +
-            `$u(3) = ${fr(Math.round(termes[3] * 100) / 100)}$.`,
+          `$u(1) = ${fr(termes[1])}$ ; $u(2) = ${fr(termes[2])}$ ; ` +
+            `$u(3) ${egalOuEnviron(termes[3], Math.round(termes[3] * 100) / 100)} ${fr(Math.round(termes[3] * 100) / 100)}$.`,
           `Au bout de 3 ans, le capital vaut environ $${fr(Math.round(termes[3]))}$ €.`
         ),
       };
@@ -2398,10 +2530,12 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
       const t = pick([4, 5, 10, 20] as const);
       const annees = pick([2, 3, 4] as const);
       const q = 1 + t / 100;
-      const composes = Math.round(capital * Math.pow(q, annees) * 100) / 100;
+      const exacts = termesGeo(capital, q, annees + 1);
+      const composes = Math.round(exacts[annees] * 100) / 100;
       const simples = capital + (capital * t * annees) / 100;
       const ecart = Math.round((composes - simples) * 100) / 100;
-      const termes = termesGeo(capital, q, annees + 1).map((v) => Math.round(v * 100) / 100);
+      const termes = exacts.map((v) => Math.round(v * 100) / 100);
+      const compose = egalOuEnviron(exacts[annees], composes) === "=" ? "on arrive à" : "on arrive à environ";
       return {
         text:
           `Un capital de $${capital}$ € est placé à $${t}\\,\\%$ par an pendant $${annees}$ ans. ` +
@@ -2414,8 +2548,9 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         explanation: exp(
           "À intérêts SIMPLES, le pourcentage porte chaque année sur le capital INITIAL : la même somme s'ajoute, c'est une suite arithmétique. À intérêts COMPOSÉS, il porte sur le capital ACQUIS : les intérêts rapportent à leur tour, c'est une suite géométrique.",
           "On calcule les deux montants finaux, puis on prend leur différence.",
-          `Intérêts simples : $${capital} + ${annees} \\times ${fr((capital * t) / 100)} = ${fr(simples)}$ €. ` +
-            `Intérêts composés : $${capital} \\times ${fr(q)}^{${annees}} = ${fr(composes)}$ €. ` +
+          // ⛔ Pas de $c \times q^n$ : le terme général attend la terminale.
+          `Intérêts simples : on ajoute $${fr((capital * t) / 100)}$ € chaque année, ce qui donne $${fr(simples)}$ € au bout de $${annees}$ ans. ` +
+            `Intérêts composés : en multipliant par $${fr(q)}$ chaque année, ${compose} $${fr(composes)}$ €. ` +
             `Écart : $${fr(composes)} - ${fr(simples)} = ${fr(ecart)}$ €. ` +
             `Cet écart vient uniquement des intérêts qui ont eux-mêmes produit des intérêts — sur $${annees}$ ans il reste modeste, ` +
             `sur vingt ans il devient l'essentiel du gain.`,
@@ -2437,36 +2572,45 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Une réponse en contexte redonne la grandeur, l'unité et le moment.",
-    tags: ["stmg", "maths", "suites", "open", "template"],
+    tags: ["stmg", "maths", "suites", "template"],
     generate: () => {
       const contexte = pick(CONTEXTES_GEO);
       const rang = randomInt(3, 8);
       const valeur = pick([1250, 1830, 2460, 3120, 4570, 6890] as const);
+      // Plus de question ouverte (règle du 27/10). L'angle : ce que l'égalité DIT,
+      // un niveau atteint et non une évolution. Le deuxième item, lui, fait repérer
+      // ce qui manque à une conclusion (la date, l'unité).
+      const bonne = `Au bout de $${rang}$ ans, ${contexte.sujet} atteint $${valeur}$ ${contexte.unite}.`;
+      const hausseTotale = `En $${rang}$ ans, ${contexte.sujet} a varié de $${valeur}$ ${contexte.unite}.`;
+      const hausseAnnuelle = `Chaque année, ${contexte.sujet} varie de $${valeur}$ ${contexte.unite}.`;
+      const inversion = `Au bout de $${valeur}$ ans, ${contexte.sujet} atteint $${rang}$ ${contexte.unite}.`;
       return {
         text:
-          `On modélise ${contexte.sujet} par une suite, et l'on a calculé $u(${rang}) = ${valeur}$. ` +
-          `Rédige la phrase de conclusion qui répond à la question, dans le contexte.`,
-        format: "open",
-        // ⚠️ Pas de mot-clé à un seul chiffre : `contains_keyword` valide sur la
-        // sous-chaîne, et « 5 » apparaîtrait dans presque toute réponse.
-        // ⛔ Pas de « ans » : `contains_keyword` valide sur la sous-chaîne, et
-        // « ans » est contenu dans « dans ». Toute phrase le contenant passait.
-        expected: [String(valeur), contexte.unite, "annees", "années"],
-        comparator: "contains_keyword",
+          `On modélise ${contexte.sujet} par une suite $u$, où $u(n)$ est la valeur au bout de $n$ années. ` +
+          `On a calculé $u(${rang}) = ${valeur}$. Quelle phrase traduit ce résultat ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [hausseTotale, hausseAnnuelle, inversion]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation: exp(
           "Un résultat de calcul ne devient une réponse que replacé dans le contexte : la grandeur, l'unité et le moment.",
-          "On reprend l'énoncé et on remplace la question par le résultat.",
-          `$u(${rang})$ désigne la valeur au bout de $${rang}$ années, et elle vaut $${valeur}$.`,
-          `Par exemple : « Au bout de ${rang} ans, ${contexte.sujet} vaudra environ ${valeur} ${contexte.unite}. »`
+          "On lit l'égalité comme une phrase : entre parenthèses le moment, après le signe égal la valeur atteinte à ce moment.",
+          `$u(${rang})$ désigne la valeur au bout de $${rang}$ années, et elle vaut $${valeur}$ ${contexte.unite}. ` +
+            `C'est un niveau atteint : l'égalité ne dit rien de ce qui a été gagné ou perdu depuis le départ.`,
+          `« ${bonne} »`
         ),
+        choiceDiagnostics: [
+          { choice: hausseTotale, cause: "a pris le terme pour une variation : pour l'obtenir, il faudrait retrancher $u(0)$" },
+          { choice: hausseAnnuelle, cause: "a pris le terme pour la raison : $u(n)$ est une valeur, pas un écart" },
+          { choice: inversion, cause: "a interverti le rang et le terme : le moment est entre parenthèses" },
+        ],
       };
     },
   },
 
   {
-    // ANGLE 2 — TRIER les conclusions, quand le premier item fait rédiger.
-    // L'ouverte est jugée par mots-clés : elle récompense celui qui écrit et ne
-    // dit rien à celui qui reste bloqué. Ici les quatre phrases sont posées, et
+    // ANGLE 2 — TRIER les conclusions, quand le premier item fait traduire une
+    // égalité. Ici les quatre phrases sont posées, et
     // trois échouent chacune sur un point précis : le rang pris pour une année,
     // l'unité oubliée, et la valeur donnée sans le moment.
     kind: "template",
@@ -2616,8 +2760,9 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "L'horizontale du seuil est tracée : cherche le premier point situé au-dessus.",
     tags: ["stmg", "maths", "suites", "seuil", "canvas", "template", "short"],
     generate: () => {
-      const u0 = pick([40, 60, 80, 120] as const);
-      const r = pick([25, 30, 40, 50] as const);
+      // Petits entiers : la grille et les chiffres de l'axe restent lisibles.
+      const u0 = randomInt(2, 6);
+      const r = pick([2, 3] as const);
       const termes = termesArith(u0, r, 8);
       const rang = randomInt(2, 6);
       const seuil = Math.round((termes[rang - 1] + termes[rang]) / 2);
@@ -2654,8 +2799,9 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Lis la valeur du terme, lis le seuil, et fais la différence.",
     tags: ["stmg", "maths", "suites", "canvas", "template", "short"],
     generate: () => {
-      const u0 = pick([40, 60, 80, 120] as const);
-      const r = pick([25, 30, 40, 50] as const);
+      // Petits entiers : la question se résout en LISANT deux hauteurs sur la grille.
+      const u0 = randomInt(2, 6);
+      const r = pick([2, 3] as const);
       const termes = termesArith(u0, r, 8);
       // ⛔ LA MARGE SE CHOISIT D'ABORD, LE SEUIL S'EN DÉDUIT. En tirant le seuil
       // dans une liste fixe, aucun terme ne le dépassait sur certaines suites :
@@ -2663,7 +2809,7 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
       // sous une question qui dit « dépasse ». Ici l'écart est posé, donc
       // toujours positif et lisible.
       const rang = randomInt(4, 7);
-      const marge = pick([15, 20, 25, 30] as const);
+      const marge = pick([2, 3, 4, 5] as const);
       const seuil = termes[rang] - marge;
       return {
         text:
@@ -2700,21 +2846,29 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     hint: "Un algorithme de seuil compte les tours de boucle tant que la condition n'est pas atteinte.",
     tags: ["stmg", "maths", "suites", "seuil", "algorithmique", "template", "short"],
     generate: () => {
-      const contexte = pick(CONTEXTES_GEO);
+      // ⛔ Seuls les contextes qui peuvent croître (voir `tpl_2`) : la valeur d'un
+      // véhicule ou un stock d'invendus n'augmentent pas de 20 % par an.
+      const contexte = pick([
+        { sujet: "un capital placé", unite: "€" },
+        { sujet: "le chiffre d'affaires d'une enseigne", unite: "k€" },
+        { sujet: "le nombre d'abonnés d'une plateforme", unite: "abonnés" },
+      ] as const);
       const u0 = pick([1000, 1500, 2000, 3000] as const);
       const t = pick([10, 20, 25, 50] as const);
       const q = 1 + t / 100;
       const cible = Math.round(u0 * pick([1.5, 2, 2.5] as const));
       let valeur = u0;
       let n = 0;
-      while (valeur < cible && n < 60) {
+      // ⛔ « dépasser » est STRICT : avec t = 50 et cible = 1,5 × u0, la valeur
+      // ÉGALE la cible au bout d'un an, et il en faut deux pour la dépasser.
+      while (valeur <= cible && n < 60) {
         valeur = Math.round(valeur * q * 100) / 100;
         n++;
       }
       return {
         text:
           `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} vaut $${u0}$ ${contexte.unite} ` +
-          `et augmente de $${t}\\,\\%$ par an. Au bout de combien d'années dépassera-t-${contexte.unite === "€" || contexte.unite === "k€" ? "il" : "il"} $${cible}$ ${contexte.unite} ?`,
+          `et augmente de $${t}\\,\\%$ par an. Au bout de combien d'années dépassera-t-on $${cible}$ ${contexte.unite} ?`,
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",

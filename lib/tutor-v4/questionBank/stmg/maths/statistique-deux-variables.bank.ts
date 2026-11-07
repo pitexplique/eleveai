@@ -829,7 +829,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
             ? `Les écarts vont de $${Math.min(...ecarts)}$ à $${Math.max(...ecarts)}$ : ils tournent autour de $${a}$, ` +
               `la dispersion est celle des relevés, pas de la forme.`
             : `Le premier écart vaut $${ecarts[0]}$ et le dernier $${ecarts[ecarts.length - 1]}$, ` +
-              `soit environ $${Math.round((ecarts[ecarts.length - 1] / ecarts[0]) * 10) / 10}$ fois plus : la croissance s'emballe.`,
+              `soit environ $${String(Math.round((ecarts[ecarts.length - 1] / ecarts[0]) * 10) / 10).replace(".", "{,}")}$ fois plus : la croissance s'emballe.`,
           affine
             ? "L'ajustement affine est pertinent."
             : "L'ajustement affine n'est pas pertinent : il faudrait d'abord linéariser."

@@ -64,23 +64,53 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
 
 /* ───────────────────────── fabriques de figures ───────────────────────── */
 
-/** Une courbe d'évolution donnée par ses points, sur des années entières. */
+/**
+ * Une courbe d'évolution donnée par ses points, sur des années entières.
+ *
+ * ⛔ GRADUATIONS (05/11/2026). Le canvas gradue depuis `xmin` de 1 en 1, et écrit
+ * un chiffre d'ordonnée tous les `ceil(16 × ymax / hauteur)`. Avec `xmin` en
+ * x,5 et un cadre 0 → 220 sur 260, il écrivait « 2017,5 » et « 14, 28, 42 » :
+ * aucune valeur demandée ne se lisait sur une graduation. On choisit donc :
+ *  · `xmin` entier, un an avant le premier point : les chiffres d'ordonnée, posés
+ *    contre l'axe, ne recouvrent aucun point ;
+ *  · un cadre et une hauteur qui donnent un pas de 10 (de 20 au-delà de 200), avec
+ *    16,5 unités entre deux chiffres : `espacer` en exige 16, et 16 pile se joue
+ *    à l'arrondi près.
+ * ⛔ Sa grille native trace une ligne par ENTIER : 200 lignes sur 330, soit un
+ * aplat gris. On la coupe et on trace une ligne par graduation écrite, comme des
+ * courbes placées AVANT la série : les pointillés de `misesEnEvidence`, dessinés
+ * après, entailleraient le trait de la série.
+ */
 function canvasSerie(
   valeurs: number[],
   anneeDebut: number,
   titre: string,
   miseEnEvidence?: { x?: number; y?: number }
 ): CanvasFigure {
-  const ymax = Math.max(...valeurs);
+  const maxi = Math.max(...valeurs);
+  const ymax = maxi > 180 ? 320 : Math.max(120, Math.ceil((maxi * 1.1) / 20) * 20);
+  const pasY = ymax > 200 ? 20 : 10;
+  const xmin = anneeDebut - 1;
+  const xmax = anneeDebut + valeurs.length - 1;
+  const GRILLE = "#e8edf3";
+  const grille: NonNullable<Extract<CanvasFigure, { kind: "fonctionGraphique" }>["courbes"]> = [];
+  for (let y = pasY; y <= ymax; y += pasY) {
+    grille.push({ id: `gy-${y}`, type: "points", couleur: GRILLE, points: [{ x: xmin, y }, { x: xmax, y }] });
+  }
+  for (let x = xmin + 1; x <= xmax; x++) {
+    grille.push({ id: `gx-${x}`, type: "points", couleur: GRILLE, points: [{ x, y: 0 }, { x, y: ymax }] });
+  }
   return {
     kind: "fonctionGraphique",
     titre,
-    xmin: anneeDebut - 0.5,
-    xmax: anneeDebut + valeurs.length - 0.5,
+    xmin,
+    xmax,
     ymin: 0,
-    ymax: Math.ceil((ymax * 1.2) / 10) * 10,
-    grille: true,
+    ymax,
+    size: { width: 320, height: (16.5 * ymax) / pasY },
+    grille: false,
     courbes: [
+      ...grille,
       {
         id: "serie",
         type: "points",
@@ -144,6 +174,15 @@ function canvasParabole(a: number, r1: number, r2: number, titre: string): Canva
   };
 }
 
+/** Équation réduite $y = ax + b$ écrite proprement. */
+function droiteTex(a: number, b: number): string {
+  // ⛔ Un distracteur peut avoir a = 0 ou b = 0 : jamais « y = 0x + 2 » ni « y = 3x + 0 ».
+  const x = a === 0 ? "" : `${a === 1 ? "" : a === -1 ? "-" : a}x`;
+  if (b === 0) return `$y = ${x || "0"}$`;
+  if (x === "") return `$y = ${b}$`;
+  return `$y = ${x} ${b > 0 ? "+" : "-"} ${Math.abs(b)}$`;
+}
+
 /** Trinôme $ax^2 + bx + c$ écrit proprement : termes nuls omis, pas de « 1x ». */
 function trinomeTex(a: number, b: number, c: number): string {
   const tete = `${a === 1 ? "" : a === -1 ? "-" : a}x^2`;
@@ -159,10 +198,11 @@ function trinomeTex(a: number, b: number, c: number): string {
  *  club atteint-ELLE son maximum » et « le nombre de commandes dépasse-t-ELLE ».
  *  Un réservoir ne doit jamais laisser deviner le genre de ce qu'il range. */
 const SERIES = [
-  { titre: "Chiffre d'affaires mensuel (k€)", grandeur: "le chiffre d'affaires", unite: "k€", pronom: "il" },
-  { titre: "Nombre de commandes par mois", grandeur: "le nombre de commandes", unite: "commandes", pronom: "il" },
+  // ⛔ L'axe porte des ANNÉES : pas de grandeur « mensuelle » lue « en 2021 ».
+  { titre: "Chiffre d'affaires annuel (k€)", grandeur: "le chiffre d'affaires annuel", unite: "k€", pronom: "il" },
+  { titre: "Nombre de commandes par an", grandeur: "le nombre de commandes par an", unite: "commandes", pronom: "il" },
   { titre: "Effectif du club, par année", grandeur: "l'effectif du club", unite: "adhérents", pronom: "il" },
-  { titre: "Fréquentation du magasin (centaines de clients)", grandeur: "la fréquentation", unite: "centaines de clients", pronom: "elle" },
+  { titre: "Fréquentation annuelle du magasin (centaines de clients)", grandeur: "la fréquentation annuelle", unite: "centaines de clients", pronom: "elle" },
 ] as const;
 
 /** Séries dont l'AXE porte une échelle : la valeur lue n'est pas la valeur
@@ -1167,9 +1207,11 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
       // Croissance jusqu'au sommet, décroissance ensuite : le maximum est unique.
       // ⚠️ Le départ et les deux pentes sont tirés, pas figés : avec des valeurs
       // constantes, ce gabarit ne produisait que neuf graphiques différents.
-      const depart = randomInt(2, 8) * 10;
       const montee = randomInt(2, 5) * 10;
       const descente = randomInt(1, 4) * 10;
+      // ⛔ Le départ tient compte de la descente : sinon la dernière valeur passait sous
+      // zéro (un effectif de −40, hors du cadre qui commence à l'origine).
+      const depart = Math.max(randomInt(2, 8) * 10, 10 - sommet * montee + (5 - sommet) * descente);
       const valeurs = Array.from({ length: 6 }, (_, k) =>
         k <= sommet ? depart + k * montee : depart + sommet * montee - (k - sommet) * descente
       );
@@ -1399,8 +1441,7 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     generate: () => {
       const a = pick([1, 2, 3, -1, -2, -3] as const);
       const b = pick([1, 2, 3, 4, 5, -1, -2, -3] as const);
-      const ecrire = (coef: number, ord: number) =>
-        `$y = ${coef === 1 ? "" : coef === -1 ? "-" : coef}x ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)}$`;
+      const ecrire = droiteTex;
       return {
         text: `Lis graphiquement l'équation réduite de la droite tracée.`,
         format: "qcm",
@@ -1574,8 +1615,7 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
       const xB = xA + randomInt(2, 4);
       const yA = a * xA + b;
       const yB = a * xB + b;
-      const ecrire = (coef: number, ord: number) =>
-        `$y = ${coef === 1 ? "" : coef === -1 ? "-" : coef}x ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)}$`;
+      const ecrire = droiteTex;
       return {
         text:
           `La droite tracée passe par $A(${xA}\\,;\\,${yA})$ et $B(${xB}\\,;\\,${yB})$. ` +
@@ -1594,7 +1634,7 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
         explanation: exp(
           "L'équation réduite d'une droite non verticale s'écrit $y = ax + b$.",
           "On calcule $a$ avec les deux points, puis on détermine $b$ en remplaçant les coordonnées de l'un d'eux.",
-          `$a = \\dfrac{${yB} - ${yA}}{${xB} - ${xA}} = \\dfrac{${yB - yA}}{${xB - xA}} = ${a}$, ` +
+          `$a = \\dfrac{${yB} - ${yA < 0 ? `(${yA})` : yA}}{${xB} - ${xA}} =\\dfrac{${yB - yA}}{${xB - xA}} = ${a}$, ` +
             `puis $${yA} = ${a} \\times ${xA} + b$ donne $b = ${b}$.`,
           `L'équation réduite est ${ecrire(a, b)}.`
         ),

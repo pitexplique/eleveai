@@ -81,12 +81,22 @@ function loiBinomiale(n: number, p: number, k: number): number {
   return binom(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
 }
 
+/** « = » si la valeur tombe juste à d décimales, « \approx » sinon : un arrondi n'est pas une égalité. */
+function egal(x: number, d: number): string {
+  return Math.abs(Math.round(x * 10 ** d) / 10 ** d - x) < 1e-12 ? "=" : "\\approx";
+}
+
+/** Une valeur hors LaTeX : virgule décimale et vrai signe moins (« −1,5 », jamais « -1.5 »). */
+function nb(v: number): string {
+  return fr(v).replace("-", "−");
+}
+
 /** La loi de probabilité, en tableau. */
 function canvasLoi(valeurs: readonly number[], probas: readonly number[], titre: string): CanvasFigure {
   return {
     kind: "tableau_donnees",
     title: titre,
-    headers: ["xᵢ", ...valeurs.map((v) => String(v))],
+    headers: ["xᵢ", ...valeurs.map(nb)],
     rows: [{ label: "P(X = xᵢ)", values: probas.map((p) => fr(Math.round(p * 10000) / 10000)) }],
   };
 }
@@ -96,7 +106,7 @@ function canvasTrianglePascal(nMax: number): CanvasFigure {
   return {
     kind: "tableau_donnees",
     title: "Triangle de Pascal",
-    caption: "Chaque terme est la somme de celui du dessus et de son voisin de gauche",
+    caption: "Chaque terme est la somme de deux termes de la ligne du dessus : celui de la même colonne et celui de la colonne de gauche",
     headers: ["n \\ k", ...Array.from({ length: nMax + 1 }, (_, k) => String(k))],
     rows: Array.from({ length: nMax + 1 }, (_, n) => ({
       label: String(n),
@@ -161,8 +171,8 @@ const EPREUVES = [
   { sujet: "un smartphone vendu", verbe: "est retourné au magasin", qualite: "retournés au magasin", qualiteSing: "retourné au magasin", nom: "smartphones", singulier: "smartphone", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
   { sujet: "une facture émise par l'entreprise", verbe: "est payée en retard", qualite: "payées en retard", qualiteSing: "payée en retard", nom: "factures", singulier: "facture", genre: "f", obs: "on examine", pp: "examinées", lot: "un dossier" },
   { sujet: "un assuré auto", verbe: "déclare un sinistre dans l'année", qualite: "ayant déclaré un sinistre", qualiteSing: "ayant déclaré un sinistre", nom: "assurés", singulier: "assuré", genre: "m", obs: "on tire au sort", pp: "tirés au sort", lot: "un portefeuille" },
-  { sujet: "un passager du vol Saint-Denis – Paris", verbe: "est absent à l'embarquement", qualite: "absents à l'embarquement", qualiteSing: "absent à l'embarquement", nom: "passagers", singulier: "passager", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
-  { sujet: "une bouteille de jus de goyave remplie par la machine", verbe: "est mal remplie", qualite: "mal remplies", qualiteSing: "mal remplie", nom: "bouteilles", singulier: "bouteille", genre: "f", obs: "on contrôle", pp: "contrôlées", lot: "un carton" },
+  { sujet: "un passager du vol Paris – Nice", verbe: "est absent à l'embarquement", qualite: "absents à l'embarquement", qualiteSing: "absent à l'embarquement", nom: "passagers", singulier: "passager", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
+  { sujet: "une bouteille de jus de pomme remplie par la machine", verbe: "est mal remplie", qualite: "mal remplies", qualiteSing: "mal remplie", nom: "bouteilles", singulier: "bouteille", genre: "f", obs: "on contrôle", pp: "contrôlées", lot: "un carton" },
   { sujet: "une barquette de letchis", verbe: "contient un fruit abîmé", qualite: "contenant un fruit abîmé", qualiteSing: "contenant un fruit abîmé", nom: "barquettes", singulier: "barquette", genre: "f", obs: "on ouvre", pp: "ouvertes", lot: "une cagette" },
   { sujet: "un œuf livré à la pâtisserie", verbe: "est fêlé", qualite: "fêlés", qualiteSing: "fêlé", nom: "œufs", singulier: "œuf", genre: "m", obs: "on examine", pp: "examinés", lot: "une boîte" },
   { sujet: "un e-mail de la lettre d'information", verbe: "est ouvert par son destinataire", qualite: "ouverts par leur destinataire", qualiteSing: "ouvert par son destinataire", nom: "e-mails", singulier: "e-mail", genre: "m", obs: "on suit", pp: "suivis", lot: "un envoi" },
@@ -171,18 +181,18 @@ const EPREUVES = [
   { sujet: "une carte à gratter", verbe: "est gagnante", qualite: "gagnantes", qualiteSing: "gagnante", nom: "cartes à gratter", singulier: "carte à gratter", genre: "f", obs: "on achète", pp: "achetées", lot: "un paquet" },
   { sujet: "un lancer franc de Noa", verbe: "est réussi", qualite: "réussis", qualiteSing: "réussi", nom: "lancers francs", singulier: "lancer franc", genre: "m", obs: "on observe", pp: "observés", lot: "" },
   { sujet: "un tir au but de l'équipe du lycée", verbe: "est marqué", qualite: "marqués", qualiteSing: "marqué", nom: "tirs au but", singulier: "tir au but", genre: "m", obs: "on observe", pp: "observés", lot: "" },
-  { sujet: "une graine de vanille", verbe: "germe", qualite: "ayant germé", qualiteSing: "ayant germé", nom: "graines", singulier: "graine", genre: "f", obs: "on sème", pp: "semées", lot: "" },
-  { sujet: "un vol au départ de Roland-Garros", verbe: "part en retard", qualite: "partis en retard", qualiteSing: "parti en retard", nom: "vols", singulier: "vol", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
+  { sujet: "un patient du cabinet médical", verbe: "manque son rendez-vous", qualite: "ayant manqué leur rendez-vous", qualiteSing: "ayant manqué son rendez-vous", nom: "patients", singulier: "patient", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
+  { sujet: "une vidéo publiée par la chaîne", verbe: "dépasse mille vues", qualite: "dépassant mille vues", qualiteSing: "dépassant mille vues", nom: "vidéos", singulier: "vidéo", genre: "f", obs: "on suit", pp: "suivies", lot: "" },
   { sujet: "un vélo en libre-service", verbe: "est en panne", qualite: "en panne", qualiteSing: "en panne", nom: "vélos", singulier: "vélo", genre: "m", obs: "on vérifie", pp: "vérifiés", lot: "une station" },
   { sujet: "une personne du panel", verbe: "se dit satisfaite du service", qualite: "satisfaites du service", qualiteSing: "satisfaite du service", nom: "personnes", singulier: "personne", genre: "f", obs: "on interroge", pp: "interrogées", lot: "un panel" },
   { sujet: "un emprunteur de la banque", verbe: "rembourse en retard", qualite: "remboursant en retard", qualiteSing: "remboursant en retard", nom: "emprunteurs", singulier: "emprunteur", genre: "m", obs: "on examine", pp: "examinés", lot: "un portefeuille" },
   { sujet: "un pneu fabriqué à l'usine", verbe: "présente un défaut", qualite: "présentant un défaut", qualiteSing: "présentant un défaut", nom: "pneus", singulier: "pneu", genre: "m", obs: "on contrôle", pp: "contrôlés", lot: "un stock" },
   { sujet: "un client du snack", verbe: "prend un dessert", qualite: "prenant un dessert", qualiteSing: "prenant un dessert", nom: "clients", singulier: "client", genre: "m", obs: "on observe", pp: "observés", lot: "une file d'attente" },
   { sujet: "une fléchette lancée par Tom", verbe: "atteint le centre de la cible", qualite: "atteignant le centre", qualiteSing: "atteignant le centre", nom: "fléchettes", singulier: "fléchette", genre: "f", obs: "on observe", pp: "observées", lot: "" },
-  { sujet: "une mangue de la cagette", verbe: "est trop mûre", qualite: "trop mûres", qualiteSing: "trop mûre", nom: "mangues", singulier: "mangue", genre: "f", obs: "on examine", pp: "examinées", lot: "une cagette" },
+  { sujet: "une pêche de la cagette", verbe: "est trop mûre", qualite: "trop mûres", qualiteSing: "trop mûre", nom: "pêches", singulier: "pêche", genre: "f", obs: "on examine", pp: "examinées", lot: "une cagette" },
   { sujet: "un appel reçu au service client", verbe: "est résolu dès le premier contact", qualite: "résolus dès le premier contact", qualiteSing: "résolu dès le premier contact", nom: "appels", singulier: "appel", genre: "m", obs: "on écoute", pp: "écoutés", lot: "" },
   { sujet: "une voiture au contrôle technique", verbe: "doit passer une contre-visite", qualite: "devant passer une contre-visite", qualiteSing: "devant passer une contre-visite", nom: "voitures", singulier: "voiture", genre: "f", obs: "on suit", pp: "suivies", lot: "un garage" },
-  { sujet: "un client de l'hôtel de Saint-Gilles", verbe: "annule sa réservation", qualite: "ayant annulé leur réservation", qualiteSing: "ayant annulé sa réservation", nom: "clients", singulier: "client", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
+  { sujet: "un client de l'hôtel d'Annecy", verbe: "annule sa réservation", qualite: "ayant annulé leur réservation", qualiteSing: "ayant annulé sa réservation", nom: "clients", singulier: "client", genre: "m", obs: "on suit", pp: "suivis", lot: "" },
 ] as const;
 
 type Epreuve = (typeof EPREUVES)[number];
@@ -287,27 +297,27 @@ const suite = (a: number, b: number) => (k: number) => {
 };
 const deZero = (k: number) => range(0, k - 1);
 const SITS: Sit[] = [
-  { intro: "Un supermarché de Saint-Denis organise un jeu promotionnel à la caisse.", X: "le gain, en euros, d'un client", court: "le gain", u: " €", mot: "euros", moy: "le gain moyen par client", ind: "clients", vals: parmi([0, 2, 5, 10, 20, 50]) },
+  { intro: "Un supermarché organise un jeu promotionnel à la caisse.", X: "le gain, en euros, d'un client", court: "le gain", u: " €", mot: "euros", moy: "le gain moyen par client", ind: "clients", vals: parmi([0, 2, 5, 10, 20, 50]) },
   { intro: "Une station-service vend des cartes à gratter.", X: "le montant gagné, en euros, avec une carte", court: "le montant gagné", u: " €", mot: "euros", moy: "le montant moyen gagné par carte", ind: "cartes", vals: parmi([0, 1, 2, 5, 10, 20]) },
   { intro: "Pour la tombola d'une association, on achète un billet.", X: "la valeur, en euros, du lot gagné", court: "la valeur du lot", u: " €", mot: "euros", moy: "la valeur moyenne d'un lot par billet", ind: "billets", vals: parmi([0, 5, 10, 15, 20, 50]) },
   { intro: "À la kermesse du lycée, on fait tourner une roue.", X: "le gain, en euros, d'un tour de roue", court: "le gain", u: " €", mot: "euros", moy: "le gain moyen par tour", ind: "tours de roue", vals: parmi([0, 1, 2, 3, 5, 10]) },
   { intro: "Le service client d'un site de vente en ligne reçoit des réclamations.", X: "le nombre de réclamations reçues en une journée", court: "le nombre de réclamations", u: "", mot: "réclamations", moy: "le nombre moyen de réclamations par jour", ind: "journées", vals: suite(0, 2) },
-  { intro: "Un livreur de Saint-Pierre fait sa tournée.", X: "le nombre de colis livrés en retard pendant une tournée", court: "le nombre de colis en retard", u: "", mot: "colis", moy: "le nombre moyen de colis en retard par tournée", ind: "tournées", vals: suite(0, 1) },
-  { intro: "Une usine du Port fabrique des pièces par lots de dix.", X: "le nombre de pièces défectueuses dans un lot", court: "le nombre de pièces défectueuses", u: "", mot: "pièces", moy: "le nombre moyen de pièces défectueuses par lot", ind: "lots", vals: deZero },
-  { intro: "Une boutique de vêtements de Saint-Paul suit les achats de ses clients.", X: "le nombre d'articles achetés par un client", court: "le nombre d'articles achetés", u: "", mot: "articles", moy: "le nombre moyen d'articles par client", ind: "clients", vals: suite(1, 2) },
+  { intro: "Un livreur de Bordeaux fait sa tournée.", X: "le nombre de colis livrés en retard pendant une tournée", court: "le nombre de colis en retard", u: "", mot: "colis", moy: "le nombre moyen de colis en retard par tournée", ind: "tournées", vals: suite(0, 1) },
+  { intro: "Une usine de la Sarthe fabrique des pièces par lots de dix.", X: "le nombre de pièces défectueuses dans un lot", court: "le nombre de pièces défectueuses", u: "", mot: "pièces", moy: "le nombre moyen de pièces défectueuses par lot", ind: "lots", vals: deZero },
+  { intro: "Une boutique de vêtements suit les achats de ses clients.", X: "le nombre d'articles achetés par un client", court: "le nombre d'articles achetés", u: "", mot: "articles", moy: "le nombre moyen d'articles par client", ind: "clients", vals: suite(1, 2) },
   { intro: "Une imprimerie surveille sa machine principale.", X: "le nombre de pannes de la machine en une semaine", court: "le nombre de pannes", u: "", mot: "pannes", moy: "le nombre moyen de pannes par semaine", ind: "semaines", vals: deZero },
-  { intro: "Un hôtel de Saint-Gilles enregistre les annulations de réservation.", X: "le nombre d'annulations en une journée", court: "le nombre d'annulations", u: "", mot: "annulations", moy: "le nombre moyen d'annulations par jour", ind: "journées", vals: deZero },
+  { intro: "Un hôtel de Biarritz enregistre les annulations de réservation.", X: "le nombre d'annulations en une journée", court: "le nombre d'annulations", u: "", mot: "annulations", moy: "le nombre moyen d'annulations par jour", ind: "journées", vals: deZero },
   { intro: "Une commerciale démarche des entreprises.", X: "le nombre de contrats qu'elle signe en une journée", court: "le nombre de contrats signés", u: "", mot: "contrats", moy: "le nombre moyen de contrats signés par jour", ind: "journées", vals: deZero },
   { intro: "Une compagnie d'assurance étudie ses contrats habitation.", X: "le montant, en euros, remboursé à un assuré dans l'année", court: "le montant remboursé", u: " €", mot: "euros", moy: "le montant moyen remboursé par assuré", ind: "assurés", vals: parmi([0, 100, 200, 500, 1000, 2000]) },
   { intro: "À la caisse d'une grande surface, on observe la file d'attente.", X: "le nombre de clients qui attendent à un instant donné", court: "le nombre de clients en attente", u: "", mot: "clients", moy: "le nombre moyen de clients en attente", ind: "instants", vals: suite(0, 2) },
   { intro: "Le standard d'une mairie reçoit des appels.", X: "le nombre d'appels reçus en dix minutes", court: "le nombre d'appels", u: "", mot: "appels", moy: "le nombre moyen d'appels par tranche de dix minutes", ind: "tranches de dix minutes", vals: suite(0, 3) },
   { intro: "Une entreprise suit le paiement de ses factures.", X: "le retard de paiement d'une facture, en jours", court: "le retard de paiement", u: " jours", mot: "jours", moy: "le retard moyen de paiement par facture", ind: "factures", vals: parmi([0, 5, 10, 15, 30, 45, 60]) },
-  { intro: "Un food truck vend des bouchons et des samoussas sur le front de mer.", X: "la recette d'une soirée, en centaines d'euros", court: "la recette", u: " centaines d'euros", mot: "centaines d'euros", moy: "la recette moyenne par soirée, en centaines d'euros", ind: "soirées", vals: suite(2, 4) },
+  { intro: "Un food truck vend des burgers et des frites près du stade.", X: "la recette d'une soirée, en centaines d'euros", court: "la recette", u: " centaines d'euros", mot: "centaines d'euros", moy: "la recette moyenne par soirée, en centaines d'euros", ind: "soirées", vals: suite(2, 4) },
   { intro: "Un épargnant place une somme sur un produit risqué.", X: "le gain, en euros, réalisé au bout d'un an", court: "le gain réalisé", u: " €", mot: "euros", moy: "le gain moyen par placement", ind: "placements", vals: parmi([-200, -100, 0, 50, 100, 200, 300]) },
-  { intro: "Une pizzeria de Saint-André livre à domicile.", X: "le nombre de livraisons en retard en une soirée", court: "le nombre de livraisons en retard", u: "", mot: "livraisons", moy: "le nombre moyen de livraisons en retard par soirée", ind: "soirées", vals: deZero },
+  { intro: "Une pizzeria livre à domicile.", X: "le nombre de livraisons en retard en une soirée", court: "le nombre de livraisons en retard", u: "", mot: "livraisons", moy: "le nombre moyen de livraisons en retard par soirée", ind: "soirées", vals: deZero },
   { intro: "Une station de vélos en libre-service est vérifiée chaque matin.", X: "le nombre de vélos en panne", court: "le nombre de vélos en panne", u: "", mot: "vélos", moy: "le nombre moyen de vélos en panne par matin", ind: "matinées", vals: deZero },
   { intro: "Un magasin d'électronique enregistre les retours de smartphones.", X: "le nombre de smartphones retournés en une journée", court: "le nombre de retours", u: "", mot: "smartphones", moy: "le nombre moyen de retours par jour", ind: "journées", vals: deZero },
-  { intro: "Une salle de sport de Saint-Denis enregistre les inscriptions.", X: "le nombre de nouveaux abonnés en une journée", court: "le nombre de nouveaux abonnés", u: "", mot: "abonnés", moy: "le nombre moyen de nouveaux abonnés par jour", ind: "journées", vals: deZero },
+  { intro: "Une salle de sport enregistre les inscriptions.", X: "le nombre de nouveaux abonnés en une journée", court: "le nombre de nouveaux abonnés", u: "", mot: "abonnés", moy: "le nombre moyen de nouveaux abonnés par jour", ind: "journées", vals: deZero },
   { intro: "Une agence immobilière verse une prime mensuelle à ses agents.", X: "la prime, en euros, d'un agent pour un mois", court: "la prime", u: " €", mot: "euros", moy: "la prime moyenne par mois", ind: "mois", vals: parmi([0, 100, 200, 300, 500, 800]) },
   { intro: "Une enseigne de meubles livre ses clients à domicile.", X: "le délai de livraison d'une commande, en jours", court: "le délai de livraison", u: " jours", mot: "jours", moy: "le délai moyen de livraison", ind: "commandes", vals: suite(1, 3) },
   { intro: "Après un achat en ligne, chaque client donne une note de satisfaction.", X: "la note donnée par un client", court: "la note", u: "", mot: "points", moy: "la note moyenne des clients", ind: "clients", vals: suite(1, 1) },
@@ -315,9 +325,9 @@ const SITS: Sit[] = [
   { intro: "Au jeu de l'oie, une case « bonus » fait avancer le pion d'un nombre de cases tiré au hasard.", X: "le nombre de cases dont le pion avance", court: "le nombre de cases", u: " cases", mot: "cases", moy: "le nombre moyen de cases gagnées", ind: "parties", vals: parmi([1, 2, 3, 4, 5, 6, 8]) },
   { intro: "Au club de fléchettes, Tom lance une fléchette sur la cible.", X: "le nombre de points marqués", court: "le nombre de points", u: " points", mot: "points", moy: "le nombre moyen de points par fléchette", ind: "lancers", vals: parmi([0, 5, 10, 15, 25, 50]) },
   { intro: "Au loto de la fête du village, on joue un carton.", X: "le gain, en euros, du carton", court: "le gain", u: " €", mot: "euros", moy: "le gain moyen par carton", ind: "cartons", vals: parmi([0, 5, 10, 20, 50, 100]) },
-  { intro: "Un marchand de letchis de Saint-André vend ses fruits en barquettes.", X: "le nombre de letchis abîmés dans une barquette", court: "le nombre de letchis abîmés", u: "", mot: "letchis", moy: "le nombre moyen de letchis abîmés par barquette", ind: "barquettes", vals: deZero },
+  { intro: "Un cabinet médical suit les rendez-vous manqués.", X: "le nombre de rendez-vous manqués en une journée", court: "le nombre de rendez-vous manqués", u: "", mot: "rendez-vous", moy: "le nombre moyen de rendez-vous manqués par jour", ind: "journées", vals: deZero },
   { intro: "Un gîte de Cilaos note la météo de ses semaines de location.", X: "le nombre de jours de pluie dans une semaine", court: "le nombre de jours de pluie", u: "", mot: "jours", moy: "le nombre moyen de jours de pluie par semaine", ind: "semaines", vals: suite(0, 2) },
-  { intro: "Le car jaune qui relie Saint-Pierre au Tampon arrive parfois en retard.", X: "le retard du car, en minutes", court: "le retard du car", u: " min", mot: "minutes", moy: "le retard moyen du car", ind: "trajets", vals: parmi([0, 5, 10, 15, 20, 30]) },
+  { intro: "Le bus qui relie la gare au centre-ville arrive parfois en retard.", X: "le retard du bus, en minutes", court: "le retard du bus", u: " min", mot: "minutes", moy: "le retard moyen du bus", ind: "trajets", vals: parmi([0, 5, 10, 15, 20, 30]) },
   { intro: "Léa ouvre un booster de cartes Pokémon.", X: "le nombre de cartes rares du booster", court: "le nombre de cartes rares", u: "", mot: "cartes rares", moy: "le nombre moyen de cartes rares par booster", ind: "boosters", vals: deZero },
 ];
 /** Une loi tirée : une situation, k valeurs, k probabilités en centièmes. */
@@ -370,8 +380,8 @@ const CONTENANTS = [
   { pose: (N: number) => `Une station-service a reçu un paquet de $${N}$ cartes à gratter`, el: "cartes", verbe: "font gagner", el1: "carte", verbe1: "fait gagner", tire: "On achète une carte au hasard" },
   { pose: (N: number) => `Une urne de la fête de l'école contient $${N}$ jetons indiscernables au toucher`, el: "jetons", verbe: "valent", el1: "jeton", verbe1: "vaut", tire: "On tire un jeton au hasard" },
   { pose: (N: number) => `Pour la tombola du club de foot, on a vendu $${N}$ billets`, el: "billets", verbe: "font gagner", el1: "billet", verbe1: "fait gagner", tire: "On prend un billet au hasard" },
-  { pose: (N: number) => `Une boulangerie de Saint-Leu cache des bons d'achat sous $${N}$ galettes`, el: "galettes", verbe: "cachent un bon qui fait gagner", el1: "galette", verbe1: "cache un bon qui fait gagner", tire: "Un client achète une galette au hasard" },
-  { pose: (N: number) => `Au jeu des canards de la fête foraine de Saint-Pierre, $${N}$ canards flottent sur l'eau`, el: "canards", verbe: "font gagner", el1: "canard", verbe1: "fait gagner", tire: "On pêche un canard au hasard" },
+  { pose: (N: number) => `Une boulangerie cache des bons d'achat sous $${N}$ galettes`, el: "galettes", verbe: "cachent un bon qui fait gagner", el1: "galette", verbe1: "cache un bon qui fait gagner", tire: "Un client achète une galette au hasard" },
+  { pose: (N: number) => `Au jeu des canards d'une fête foraine, $${N}$ canards flottent sur l'eau`, el: "canards", verbe: "font gagner", el1: "canard", verbe1: "fait gagner", tire: "On pêche un canard au hasard" },
   { pose: (N: number) => `Une marque de yaourts a imprimé $${N}$ codes sous ses couvercles`, el: "codes", verbe: "font gagner", el1: "code", verbe1: "fait gagner", tire: "On ouvre un yaourt au hasard" },
   { pose: (N: number) => `Pour fidéliser ses clients, une librairie propose $${N}$ cartes à retourner`, el: "cartes", verbe: "offrent", el1: "carte", verbe1: "offre", tire: "Un client retourne une carte au hasard" },
   { pose: (N: number) => `Au stand d'un salon professionnel, une urne contient $${N}$ tickets`, el: "tickets", verbe: "valent", el1: "ticket", verbe1: "vaut", tire: "Un visiteur tire un ticket au hasard" },
@@ -379,17 +389,17 @@ const CONTENANTS = [
 
 /** Les jeux payants : une mise, un lot, une probabilité de gagner. */
 const JEUX = [
-  { intro: "Une enseigne de La Réunion lance un jeu à gratter.", paye: "La carte coûte", gagne: "Une carte gagnante rapporte" },
+  { intro: "Une enseigne de jardinerie lance un jeu à gratter.", paye: "La carte coûte", gagne: "Une carte gagnante rapporte" },
   { intro: "À la kermesse du lycée, un stand propose une roue de la fortune.", paye: "Un tour de roue coûte", gagne: "Le secteur doré fait gagner" },
   { intro: "Une association vend des tickets de tombola pour financer un voyage.", paye: "Le ticket coûte", gagne: "Un ticket gagnant rapporte un lot d'une valeur de" },
   { intro: "Un centre commercial installe une machine à pince.", paye: "Une partie coûte", gagne: "Attraper la peluche rapporte un bon d'achat de" },
   { intro: "Une marque de boissons lance un jeu concours par SMS.", paye: "Le SMS coûte", gagne: "Un SMS gagnant rapporte" },
   { intro: "Au loto de la fête du village, on joue un carton.", paye: "Le carton coûte", gagne: "Un carton gagnant rapporte" },
-  { intro: "Une fête foraine de Saint-Pierre propose la pêche aux canards.", paye: "La partie coûte", gagne: "Un canard marqué fait gagner" },
+  { intro: "Une fête foraine propose la pêche aux canards.", paye: "La partie coûte", gagne: "Un canard marqué fait gagner" },
   { intro: "Un club de basket organise un défi aux lancers francs.", paye: "L'inscription au défi coûte", gagne: "Réussir le défi fait gagner" },
   { intro: "Un magasin de jouets vend des pochettes surprises.", paye: "La pochette coûte", gagne: "Une pochette contenant le jouet vedette vaut" },
   { intro: "Un comité d'entreprise organise une loterie de Noël.", paye: "Le billet coûte", gagne: "Un billet gagnant rapporte un bon de" },
-  { intro: "Une boulangerie de Saint-Leu propose le jeu de la galette gagnante.", paye: "La participation coûte", gagne: "Une participation gagnante rapporte" },
+  { intro: "Une boulangerie propose le jeu de la galette gagnante.", paye: "La participation coûte", gagne: "Une participation gagnante rapporte" },
   { intro: "Au stand de fléchettes de la kermesse, on tente de toucher le centre.", paye: "Les trois fléchettes coûtent", gagne: "Toucher le centre fait gagner" },
   { intro: "Une radio locale organise un jeu par téléphone.", paye: "L'appel coûte", gagne: "Un appel gagnant rapporte" },
   { intro: "Un club de supporters vend des enveloppes surprises.", paye: "L'enveloppe coûte", gagne: "Une enveloppe gagnante contient" },
@@ -406,15 +416,15 @@ function probaMots(c: number): string {
 /** Deux options aléatoires à comparer (gestion d'abord). */
 const DECISIONS = [
   { intro: "Une entreprise hésite entre deux campagnes publicitaires.", A: "la campagne radio", B: "la campagne sur les réseaux sociaux" },
-  { intro: "Un agriculteur de Saint-Joseph choisit sa culture pour la saison.", A: "la vanille", B: "le curcuma" },
+  { intro: "Un agriculteur choisit sa culture pour la saison.", A: "le blé", B: "le colza" },
   { intro: "Une jeune entreprise ne peut préparer qu'un seul des deux appels d'offres reçus.", A: "l'appel d'offres de la mairie", B: "l'appel d'offres de la région" },
-  { intro: "Un food truck choisit son emplacement du samedi.", A: "le marché de Saint-Paul", B: "le front de mer de Saint-Pierre" },
+  { intro: "Un food truck choisit son emplacement du samedi.", A: "le marché du centre-ville", B: "le parking du stade" },
   { intro: "Une librairie compare deux opérations commerciales pour la rentrée.", A: "l'opération « cartable complet »", B: "l'opération « carte fidélité »" },
   { intro: "Un club de football reçoit deux propositions de sponsor.", A: "le sponsor local", B: "le sponsor national" },
-  { intro: "Une agence de voyages choisit le circuit à mettre en avant.", A: "le circuit du Piton de la Fournaise", B: "le circuit de Mafate" },
-  { intro: "Un artisan choisit le salon professionnel où exposer.", A: "le salon de Saint-Denis", B: "le salon de Paris" },
-  { intro: "Une pâtisserie choisit le produit vedette du week-end.", A: "le gâteau patate", B: "les macatias garnis" },
-  { intro: "Un vendeur de glaces choisit sa plage du dimanche.", A: "la plage de l'Hermitage", B: "la plage de Boucan Canot" },
+  { intro: "Une agence de voyages choisit le circuit à mettre en avant.", A: "le circuit des châteaux de la Loire", B: "le circuit des gorges du Verdon" },
+  { intro: "Un artisan choisit le salon professionnel où exposer.", A: "le salon de Lyon", B: "le salon de Paris" },
+  { intro: "Une pâtisserie choisit le produit vedette du week-end.", A: "le fraisier", B: "la tarte aux pommes" },
+  { intro: "Un vendeur de glaces choisit sa plage du dimanche.", A: "la grande plage", B: "la plage du port" },
   { intro: "Une start-up choisit entre deux applications à développer.", A: "l'application de covoiturage", B: "l'application de livraison" },
   { intro: "Un organisateur d'évènements choisit la formule de son festival.", A: "la formule en plein air", B: "la formule en salle" },
   { intro: "Un investisseur compare deux projets.", A: "le projet hôtelier", B: "le projet de panneaux solaires" },
@@ -424,15 +434,15 @@ const DECISIONS = [
 /** Un gain certain contre un gain aléatoire. */
 const CERTAINS = [
   { intro: "Un commercial choisit sa rémunération pour un contrat.", sur: "une commission fixe de", alea: "une prime de", cond: "si le client signe" },
-  { intro: "Un éleveur de la Plaine des Cafres vend son lait.", sur: "un prix garanti par la coopérative de", alea: "une vente directe au marché de", cond: "si les cours montent" },
-  { intro: "Un artiste expose au marché de Saint-Paul.", sur: "un forfait versé par la mairie de", alea: "une vente de tableau de", cond: "si un tableau se vend" },
+  { intro: "Un éleveur du Jura vend son lait.", sur: "un prix garanti par la coopérative de", alea: "une vente directe au marché de", cond: "si les cours montent" },
+  { intro: "Un artiste expose au marché de Noël.", sur: "un forfait versé par la mairie de", alea: "une vente de tableau de", cond: "si un tableau se vend" },
   { intro: "Une graphiste indépendante discute avec un client.", sur: "un forfait de", alea: "une facture de", cond: "si le projet aboutit" },
   { intro: "Un candidat de jeu télévisé peut s'arrêter ou continuer.", sur: "repartir avec", alea: "tenter la dernière question pour", cond: "s'il répond juste" },
   { intro: "Un vendeur de glaces négocie avec le gérant d'une plage.", sur: "un fixe de", alea: "une part des ventes estimée à", cond: "s'il fait beau" },
   { intro: "Un groupe de musique est invité dans un festival.", sur: "un cachet fixe de", alea: "une part de la billetterie de", cond: "si le concert affiche complet" },
   { intro: "Un photographe couvre un mariage.", sur: "un forfait de", alea: "une vente de photos estimée à", cond: "si les mariés achètent l'album" },
   { intro: "Une entreprise du BTP choisit sa stratégie pour un chantier.", sur: "une sous-traitance assurée de", alea: "le marché complet de", cond: "si elle remporte l'appel d'offres" },
-  { intro: "Un pêcheur de Saint-Gilles vend sa pêche du jour.", sur: "un prix garanti par un restaurant de", alea: "une vente à la criée de", cond: "si la pêche est bonne" },
+  { intro: "Un pêcheur breton vend sa pêche du jour.", sur: "un prix garanti par un restaurant de", alea: "une vente à la criée de", cond: "si la pêche est bonne" },
   { intro: "Une créatrice de vidéos négocie un partenariat.", sur: "un paiement fixe de", alea: "un bonus de", cond: "si la vidéo dépasse cent mille vues" },
   { intro: "Un agent immobilier choisit son mode de rémunération.", sur: "des honoraires fixes de", alea: "une commission de", cond: "si la maison se vend dans le mois" },
 ];
@@ -442,11 +452,11 @@ const ASSUR = [
   { bien: "le vol d'un scooter", sinistre: "le scooter est volé" },
   { bien: "la casse d'un smartphone", sinistre: "le smartphone est cassé" },
   { bien: "un dégât des eaux dans un appartement", sinistre: "un dégât des eaux survient" },
-  { bien: "l'annulation d'un voyage à Maurice", sinistre: "le voyage est annulé" },
+  { bien: "l'annulation d'un voyage à Rome", sinistre: "le voyage est annulé" },
   { bien: "la panne d'un ordinateur portable", sinistre: "l'ordinateur tombe en panne" },
   { bien: "le bris de glace d'une voiture", sinistre: "un pare-brise est brisé" },
-  { bien: "la perte d'un bagage sur un vol Paris – Saint-Denis", sinistre: "le bagage est perdu" },
-  { bien: "les dégâts d'un cyclone sur une serre agricole", sinistre: "un cyclone abîme la serre" },
+  { bien: "la perte d'un bagage sur un vol Paris – Marseille", sinistre: "le bagage est perdu" },
+  { bien: "les dégâts d'une tempête sur une serre agricole", sinistre: "une tempête abîme la serre" },
 ];
 
 /** Le décor d'une loi binomiale B(n ; p), en trois tournures. */
@@ -735,7 +745,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         canvas: {
           kind: "tableau_donnees",
           title: `${maj(S.court)} — ${total} ${S.ind}`,
-          headers: ["Valeur de X", ...v.map((x) => String(x))],
+          headers: ["Valeur de X", ...v.map(nb)],
           rows: [{ label: "Effectif", values: eff.map((e) => String(e)) }],
         } satisfies CanvasFigure,
         explanation: exp(
@@ -764,12 +774,12 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     microId: "va_dresser_loi",
     difficulty: 3,
     theme: "neutral",
-    hint: "Regroupe d'abord toutes les boules qui portent le même gain, puis divise par le total.",
+    hint: "Compte les cas qui donnent exactement ce gain, puis divise par le nombre total de cas.",
     tags: ["stmg", "maths", "probabilites", "template", "short"],
     generate: () => {
       // Une composition (urne, roue, enveloppes, cartes à gratter…) dans un
-      // décor tiré ; la valeur demandée peut regrouper DEUX lots différents de
-      // même montant — c'est le piège du dénombrement.
+      // décor tiré ; chaque montant est distinct : on compte les cas d'un seul
+      // montant, puis on divise par le total.
       const ct = pick(CONTENANTS);
       const k = randomInt(3, 4);
       const v = shuffle([0, 2, 5, 10, 20, 50]).slice(0, k).sort((a, b) => a - b);
@@ -836,7 +846,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         canvas: {
           kind: "tableau_donnees",
           title: `Loi de X : ${L.s.court}`,
-          headers: ["xᵢ", ...L.v.map((v) => String(v))],
+          headers: ["xᵢ", ...L.v.map(nb)],
           rows: [{ label: "P(X = xᵢ)", values: L.c.map((c, j) => (j === i ? "p" : f4(c / 100))) }],
         } satisfies CanvasFigure,
         explanation: exp(
@@ -875,7 +885,9 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const j = (i + randomInt(1, k - 1)) % k;
       if (cas === 1) c[i] += pick(c[i] > 10 ? [-10, -5, 5, 10] : [5, 10]);
       if (cas === 2) {
-        const d = pick([5, 10]);
+        // ⛔ La case augmentée ne dépasse jamais 1 : la seule anomalie du tableau
+        // reste la probabilité négative, celle dont parle le corrigé.
+        const d = c[i] + c[j] > 90 ? 5 : pick([5, 10]);
         c[j] += c[i] + d;
         c[i] = -d;
       }
@@ -899,13 +911,13 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         canvas: {
           kind: "tableau_donnees",
           title: "Tableau proposé",
-          headers: ["xᵢ", ...L.v.map((v) => String(v))],
-          rows: [{ label: "P(X = xᵢ)", values: c.map((x) => f4(x / 100)) }],
+          headers: ["xᵢ", ...L.v.map(nb)],
+          rows: [{ label: "P(X = xᵢ)", values: c.map((x) => nb(x / 100)) }],
         } satisfies CanvasFigure,
         explanation: exp(
           "Une loi de probabilité associe à chaque valeur une probabilité comprise entre $0$ et $1$, et la somme de ces probabilités vaut $1$, ni plus ni moins.",
           "On vérifie que chaque case est entre $0$ et $1$, puis on additionne toute la ligne et l'on compare le total à $1$.",
-          `$${c.map((x) => tx(x / 100)).join(" + ")} = ${pc(S)}$. ` +
+          `$${c.map((x) => (x < 0 ? `(${tx(x / 100)})` : tx(x / 100))).join(" + ")} = ${pc(S)}$. ` +
             (cas === 0
               ? "Le total fait exactement $1$ et toutes les cases sont positives : c'est bien une loi de probabilité."
               : cas === 1
@@ -1409,7 +1421,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       return {
         text: `${q}\n\n${maj(situation)}.`,
         format: "qcm",
-        choices: shuffle(["oui", "non"]),
+        choices: shuffle(["oui", "non", "on ne peut pas le savoir avec ces informations"]),
         expected: [bernoulli ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation: exp(
@@ -2246,7 +2258,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       return {
         text: `${q}\n\n${maj(situation)}.`,
         format: "qcm",
-        choices: shuffle(["oui", "non"]),
+        choices: shuffle(["oui", "non", "on ne peut pas le savoir avec ces informations"]),
         expected: [binomiale ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation: exp(
@@ -2303,7 +2315,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "On teste les trois conditions sur chaque situation : le nombre d'épreuves est-il fixé d'avance, les épreuves sont-elles indépendantes, et compte-t-on bien des succès ?",
           `La bonne situation les vérifie toutes. Les trois autres échouent chacune sur un point : ` +
             `le tirage sans remise détruit l'INDÉPENDANCE ; « jusqu'au premier succès » ne fixe pas le NOMBRE d'épreuves ; ` +
-            `une fréquence n'est pas un COMPTAGE de succès (elle vaut $X$ divisé par $${n}$).`,
+            `une fréquence n'est pas un COMPTAGE de succès (elle vaut le nombre de succès divisé par $${n}$).`,
           `$X$ suit une loi binomiale dans le cas du prélèvement avec remise, où l'on compte les succès.`
         ),
         choiceDiagnostics: [
@@ -2590,7 +2602,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     microId: "vaT_bin_contre_exemple",
     difficulty: 3,
     theme: "neutral",
-    hint: "Après le premier tirage, il reste une pièce défectueuse de moins ET une pièce de moins dans le lot.",
+    hint: "Après le premier tirage, le lot compte un succès de moins ET une unité de moins au total.",
     tags: ["stmg", "maths", "probabilites", "piege", "template", "short"],
     generate: () => {
       const lot = pick([10, 12, 15, 20] as const);
@@ -2598,7 +2610,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const apres = (defectueuses - 1) / (lot - 1);
       const ep = pick(EPS_LOT);
       const q = pick([
-        `Quelle est alors la probabilité que le second soit lui aussi ${ep.genre === "f" ? "une" : "un"} ${ep.singulier} ${ep.qualiteSing} ? (arrondi au centième)`,
+        `Quelle est alors la probabilité que le second tirage donne lui aussi ${unSucces(ep)} ? (arrondi au centième)`,
         `Calcule la probabilité que le second tirage donne encore ${unSucces(ep)}, arrondie au centième.`,
         `Avec quelle probabilité obtient-on de nouveau ${unSucces(ep)} au second tirage ? (arrondi au centième)`,
       ]);
@@ -2612,7 +2624,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
         explanation: exp(
           "Deux épreuves sont indépendantes lorsque le résultat de la première ne change pas les probabilités de la seconde. Un tirage SANS REMISE détruit cette propriété — et c'est pour cela qu'il ne relève pas de la loi binomiale.",
           "On recompte le lot après le premier prélèvement : une unité de moins au total, et une de moins parmi les succès.",
-          `Au départ : $\\dfrac{${defectueuses}}{${lot}} = ${fr(Math.round((defectueuses / lot) * 10000) / 10000)}$. ` +
+          `Au départ : $\\dfrac{${defectueuses}}{${lot}} ${egal(defectueuses / lot, 4)} ${fr(Math.round((defectueuses / lot) * 10000) / 10000)}$. ` +
             `Après le premier prélèvement, il reste $${defectueuses - 1}$ ${ep.qualite} sur $${lot - 1}$ : ` +
             `$\\dfrac{${defectueuses - 1}}{${lot - 1}} \\approx ${fr(Math.round(apres * 10000) / 10000)}$.`,
           `La probabilité passe de $${fr(Math.round((defectueuses / lot) * 100) / 100)}$ à $${fr(Math.round(apres * 100) / 100)}$ : ` +
@@ -2809,7 +2821,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     microId: "vaT_formule_pascal",
     difficulty: 3,
     theme: "neutral",
-    hint: "Chaque terme du triangle est la somme de celui juste au-dessus et de son voisin de gauche.",
+    hint: "Chaque terme du triangle est la somme de deux termes de la ligne du dessus : celui de la même colonne et celui de la colonne de gauche.",
     tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
     generate: () => {
       const n = randomInt(4, 10);
@@ -3013,8 +3025,8 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "Les valeurs extrêmes ne correspondent qu'à un seul chemin : $\\binom{n}{0} = \\binom{n}{n} = 1$.",
           "On applique $P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}$, avec un coefficient égal à $1$.",
           k === 0
-            ? `$P(X = 0) = (1 - ${fr(p)})^{${n}} = ${fr(Math.round(valeur * 100000) / 100000)}$.`
-            : `$P(X = ${n}) = ${fr(p)}^{${n}} = ${fr(Math.round(valeur * 100000) / 100000)}$.`,
+            ? `$P(X = 0) = (1 - ${fr(p)})^{${n}} ${egal(valeur, 5)} ${fr(Math.round(valeur * 100000) / 100000)}$.`
+            : `$P(X = ${n}) = ${fr(p)}^{${n}} ${egal(valeur, 5)} ${fr(Math.round(valeur * 100000) / 100000)}$.`,
           `$P(X = ${k}) \\approx ${fr(Math.round(valeur * 1000) / 1000)}$.`
         ),
       };

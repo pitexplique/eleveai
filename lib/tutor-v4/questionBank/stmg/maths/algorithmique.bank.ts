@@ -88,17 +88,28 @@ function pseudo(lignes: readonly string[]): string {
   return "```\n" + lignes.join("\n") + "\n```";
 }
 
-/** Le tableau de déroulement d'un programme, colonne par tour de boucle. */
+/**
+ * Le tableau de déroulement d'un programme, colonne par tour de boucle.
+ *
+ * ⛔ Les tours se comptent à partir de 1 : une colonne « Tour 0 » montrait N = 1
+ * alors que la boucle avait déjà tourné une fois. Si la première colonne donne
+ * la valeur initiale (`avecDepart`), elle s'appelle « départ ».
+ * ⛔ Un canvas ne donne jamais la réponse : l'appelant met « ? » à sa place.
+ */
 function canvasTrace(
   variables: readonly string[],
   valeurs: readonly (readonly (string | number)[])[],
-  titre: string
+  titre: string,
+  avecDepart = false
 ): CanvasFigure {
   return {
     kind: "tableau_donnees",
     title: titre,
     caption: "Valeur des variables après chaque tour de boucle",
-    headers: ["Tour", ...valeurs[0].map((_, k) => String(k))],
+    headers: [
+      "Tour",
+      ...valeurs[0].map((_, k) => (avecDepart ? (k === 0 ? "départ" : String(k)) : String(k + 1))),
+    ],
     rows: variables.map((v, i) => ({ label: v, values: [...valeurs[i]] })),
   };
 }
@@ -232,11 +243,19 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(compte)],
         comparator: "number_equal",
+        // ⛔ Tous les « oui » visibles donneraient le compte : seules les deux
+        // premières valeurs servent de modèle, l'élève fait le reste.
+        // « Les valeurs » : « les stocks parcourues » était faux.
         canvas: {
           kind: "tableau_donnees",
-          title: `Les ${g.nom} parcourues`,
+          title: `Les valeurs de la liste ${g.variable}`,
           headers: ["Valeur", ...donnees.map((v) => String(v))],
-          rows: [{ label: `> ${seuil} ?`, values: donnees.map((v) => (v > seuil ? "oui" : "non")) }],
+          rows: [
+            {
+              label: `> ${seuil} ?`,
+              values: donnees.map((v, k) => (k >= 2 ? "?" : v > seuil ? "oui" : "non")),
+            },
+          ],
         } satisfies CanvasFigure,
         explanation: exp(
           "Un COMPTEUR est une variable qu'on augmente de $1$ à chaque occurrence d'un évènement : il compte, il n'additionne pas.",
@@ -265,10 +284,19 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "algorithmique", "python", "diagnostic", "template"],
     generate: () => {
       const g = pick(GRANDEURS);
-      const donnees = Array.from({ length: 6 }, () => randomInt(5, 40));
-      const seuil = randomInt(12, 25);
-      const attendu = donnees.filter((v) => v > seuil).length;
-      const dernierDepasse = donnees[donnees.length - 1] > seuil;
+      // ⛔ On écarte les tirages où le programme faux tombe juste : « il devrait
+      // afficher 1, il affiche 1 » ne laisserait aucune erreur à chercher.
+      let donnees: number[];
+      let seuil: number;
+      let attendu: number;
+      let dernierDepasse: boolean;
+      do {
+        donnees = Array.from({ length: 6 }, () => randomInt(5, 40));
+        seuil = randomInt(12, 25);
+        const s = seuil;
+        attendu = donnees.filter((v) => v > s).length;
+        dernierDepasse = donnees[donnees.length - 1] > seuil;
+      } while (attendu === (dernierDepasse ? 1 : 0));
       const lignes = [
         `${g.variable} = [${donnees.join(", ")}]`,
         `for v in ${g.variable}:`,
@@ -280,7 +308,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const bonne = `la ligne \`c = 0\` est DANS la boucle : le compteur repart de zéro à chaque tour`;
       return {
         text:
-          `Ce programme devait compter les ${g.nom} supérieures à $${seuil}$ — il devrait afficher $${attendu}$. ` +
+          `Ce programme devait compter les valeurs de la liste \`${g.variable}\` supérieures à $${seuil}$ — il devrait afficher $${attendu}$. ` +
           `Il affiche $${dernierDepasse ? 1 : 0}$. Où est l'erreur ?\n\n${code(lignes)}`,
         format: "qcm",
         choices: shuffle([
@@ -337,10 +365,16 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
-        canvas: canvasTrace(["v", "s"], [donnees, cumuls], "Déroulement de la boucle"),
+        // ⛔ Le dernier cumul EST la réponse : la trace s'arrête au 3e tour de 5,
+        // l'élève la termine.
+        canvas: canvasTrace(
+          ["v", "s"],
+          [donnees, cumuls.map((c, k) => (k < 3 ? c : "?"))],
+          "Déroulement de la boucle, à compléter"
+        ),
         explanation: exp(
           "Un ACCUMULATEUR cumule les valeurs rencontrées : initialisé à $0$, il reçoit `s = s + v` à chaque tour.",
-          "On suit le tableau de déroulement : la variable `s` grandit de la valeur lue à chaque passage.",
+          "On complète le tableau de déroulement : la variable `s` grandit de la valeur lue à chaque passage.",
           `${donnees.join(" + ")} = ${total}.`,
           `Le programme affiche ${total}.`
         ),
@@ -438,14 +472,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `Ce programme simule une loi de Bernoulli de paramètre $${fr(p)}$. ` +
           `Par quoi faut-il remplacer \`???\` ?\n\n${code(lignes)}`,
         format: "qcm",
-        choices: makeChoices(`r < ${fr(p).replace(",", ".")}`, [
-          `r > ${fr(p).replace(",", ".")}`,
-          `r == ${fr(p).replace(",", ".")}`,
-          `r < ${fr(Math.round((1 - p) * 100) / 100).replace(",", ".")}`,
-          `r > ${fr(Math.round((1 - p) * 100) / 100).replace(",", ".")}`,
-          `r * ${fr(p).replace(",", ".")} < 1`,
+        // ⛔ Du Python : entre accents graves, sinon le point s'affiche nu.
+        choices: makeChoices(`\`r < ${fr(p).replace(",", ".")}\``, [
+          `\`r > ${fr(p).replace(",", ".")}\``,
+          `\`r == ${fr(p).replace(",", ".")}\``,
+          `\`r < ${fr(Math.round((1 - p) * 100) / 100).replace(",", ".")}\``,
+          `\`r > ${fr(Math.round((1 - p) * 100) / 100).replace(",", ".")}\``,
+          `\`r * ${fr(p).replace(",", ".")} < 1\``,
         ]),
-        expected: [`r < ${fr(p).replace(",", ".")}`],
+        expected: [`\`r < ${fr(p).replace(",", ".")}\``],
         comparator: "mcq_exact",
         explanation: exp(
           "`random()` rend un nombre pris au hasard, uniformément, entre $0$ et $1$ : la probabilité de tomber dans un intervalle est égale à sa longueur.",
@@ -844,13 +879,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       // (Frédéric, 15/08/2026, après avoir montré trois sujets de bac.)
       // D'où deux tirages ici : la NATURE de la suite, et la LIGNE effacée —
       // initialisation, condition d'arrêt, évolution ou comptage.
+      // ⛔ Un tonnage et non une proportion : les seuils (double, triple, +250
+      // par an…) dépasseraient 100 %.
       const cas = pick([
         { grandeur: "un capital placé", depart: 150000, annee: 1682 },
         { grandeur: "un capital placé", depart: 2500, annee: 2015 },
         { grandeur: "le chiffre d'affaires d'une enseigne", depart: 1200, annee: 2019 },
         { grandeur: "le nombre d'adhérents", depart: 800, annee: 2021 },
         { grandeur: "la valeur d'un portefeuille", depart: 5000, annee: 2018 },
-        { grandeur: "la proportion de déchets recyclés", depart: 65, annee: 2012 },
+        { grandeur: "le tonnage de déchets recyclés d'une ville", depart: 650, annee: 2012 },
       ] as const);
       const geometrique = Math.random() < 0.5;
       const t = pick([2, 3, 4, 5, 6, 8, 10] as const);
@@ -940,7 +977,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Le nombre de tours compte des ANNÉES écoulées depuis l'année de départ : il faut les additionner.",
-    tags: ["stmg", "maths", "algorithmique", "suites", "seuil", "bac", "open", "template"],
+    tags: ["stmg", "maths", "algorithmique", "suites", "seuil", "bac", "template"],
     generate: () => {
       const cas = pick([
         { grandeur: "la proportion de déchets recyclés", annee: 2012, seuil: "75 %" },
@@ -949,14 +986,21 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         { grandeur: "le nombre d'abonnés", annee: 2018, seuil: "60 milliers" },
       ] as const);
       const n = randomInt(5, 22);
+      const bonne = `le seuil est atteint pour la première fois en ${cas.annee + n}`;
       return {
         text:
           `Un algorithme de seuil portant sur ${cas.grandeur} de l'année $${cas.annee} + n$ ` +
-          `se termine avec $n = ${n}$, le seuil étant $${cas.seuil}$. ` +
-          `Interprète ce résultat dans le contexte de l'exercice.`,
-        format: "open",
-        expected: [String(cas.annee + n), "annee", "année", "a partir", "à partir", cas.seuil.split(" ")[0]],
-        comparator: "contains_keyword",
+          `se termine avec $n = ${n}$, le seuil étant ${cas.seuil}. ` +
+          `Que signifie ce résultat ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `le seuil est atteint pour la première fois en ${cas.annee + n - 1}`,
+          `${cas.grandeur} vaut ${n} en ${cas.annee + n}`,
+          `le seuil a été dépassé pendant ${n} années de suite`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation: exp(
           "Un algorithme de seuil rend un NOMBRE D'ÉTAPES, pas une date : il faut l'ajouter à l'année de départ pour répondre à la question posée.",
           "On traduit la variable de comptage en années, puis on nomme l'année atteinte et le seuil franchi.",
@@ -1002,8 +1046,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         comparator: "number_equal",
         canvas: canvasTrace(
           ["u"],
-          [suite.slice(0, n)],
-          "Déroulement partiel — valeur de u après chaque tour"
+          [[...suite.slice(0, n), "?"]],
+          "Déroulement partiel — valeur de u après chaque tour",
+          true
         ),
         explanation: exp(
           "Dérouler un algorithme, c'est noter la valeur de chaque variable après chaque instruction : c'est la méthode sûre pour prévoir une sortie.",
@@ -1045,15 +1090,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         `Fin Tant que`,
         `Afficher C`,
       ];
-      // ⚠️ On n'arrondit QUE pour l'affichage : en arrondissant la valeur
-      // courante à chaque tour, la trace dérivait de quelques centimes et ne
-      // tombait plus sur la réponse attendue.
-      const valeurs: number[] = [];
-      let c = depart;
-      for (let k = 0; k < tours; k++) {
-        c = c * q;
-        valeurs.push(Math.round(c * 100) / 100);
-      }
+      // ⛔ La dernière valeur EST la réponse : seuls les deux premiers tours sont
+      // donnés. Ils tombent juste au centième ; repartir d'une valeur plus
+      // tardive, arrondie, décalerait la réponse d'un centime.
+      const valeurs = Array.from({ length: tours }, (_, k) =>
+        k < 2 ? fr(depart * Math.pow(q, k + 1)) : "?"
+      );
       const resultat = Math.round(depart * Math.pow(q, tours) * 100) / 100;
       return {
         text:
@@ -1065,7 +1107,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         canvas: canvasTrace(
           ["N", "C"],
           [Array.from({ length: tours }, (_, k) => k + 1), valeurs],
-          "Déroulement de l'algorithme"
+          "Déroulement de l'algorithme, à compléter"
         ),
         explanation: exp(
           "La flèche « ← » désigne l'AFFECTATION dans un algorithme écrit en langage naturel : « C ← C × 1,1 » se lit « C reçoit C multiplié par 1,1 ». C'est la notation employée dans les sujets de bac.",
@@ -1273,8 +1315,14 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     hint: "Ce programme cherche un maximum : il garde la plus grande valeur rencontrée jusque-là.",
     tags: ["stmg", "maths", "algorithmique", "python", "canvas", "template", "short"],
     generate: () => {
-      const donnees = shuffle(Array.from({ length: 6 }, () => randomInt(10, 95)));
-      const maxi = Math.max(...donnees);
+      // ⛔ Le maximum n'est jamais dans les deux premières valeurs : seuls ces
+      // deux tours sont donnés dans le tableau, qui ne doit pas montrer la réponse.
+      let donnees: number[];
+      let maxi: number;
+      do {
+        donnees = shuffle(Array.from({ length: 6 }, () => randomInt(10, 95)));
+        maxi = Math.max(...donnees);
+      } while (donnees.indexOf(maxi) < 2);
       const lignes = [
         `L = [${donnees.join(", ")}]`,
         `m = L[0]`,
@@ -1294,10 +1342,14 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(maxi)],
         comparator: "number_equal",
-        canvas: canvasTrace(["v", "m"], [donnees, courants], "Déroulement — maximum courant"),
+        canvas: canvasTrace(
+          ["v", "m"],
+          [donnees, courants.map((c, k) => (k < 2 ? c : "?"))],
+          "Déroulement — maximum courant, à compléter"
+        ),
         explanation: exp(
           "Itérer sur une liste, c'est examiner chaque élément à tour de rôle. Ici la variable `m` retient le plus grand élément rencontré depuis le début.",
-          "On suit le tableau : `m` ne change que lorsqu'une valeur plus grande apparaît.",
+          "On complète le tableau : `m` ne change que lorsqu'une valeur plus grande apparaît.",
           `Le plus grand élément de la liste est ${maxi}.`,
           `Le programme affiche ${maxi}.`
         ),
@@ -1452,6 +1504,70 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 3 — SUPPRIMER un élément, l'autre moitié du libellé. Les deux items
+    // précédents ne font qu'ajouter. Ici le piège est la différence entre les
+    // deux écritures : `remove` reçoit une VALEUR, `pop` reçoit une POSITION
+    // (et, sans argument, retire le dernier élément).
+    kind: "template",
+    id: "stmg_algo_liste_modifier_tpl_3",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_listes",
+    microId: "algo_liste_modifier",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "`remove` reçoit la valeur à retirer ; `pop` reçoit sa position, en comptant à partir de $0$.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template"],
+    generate: () => {
+      // Valeurs deux à deux distinctes : `remove` n'efface que la première
+      // occurrence, et une valeur en double ne ferait que brouiller la lecture.
+      const depart = shuffle(Array.from({ length: 41 }, (_, k) => k + 10)).slice(0, 5);
+      const sans = (i: number) => depart.filter((_, k) => k !== i);
+      const liste = (l: readonly number[]) => `[${l.join(", ")}]`;
+      const mode = pick(["remove", "pop_position", "pop_fin"] as const);
+      const i = randomInt(1, 3);
+      const retire = mode === "pop_fin" ? 4 : i;
+      const instruction =
+        mode === "remove" ? `L.remove(${depart[i]})` : mode === "pop_position" ? `L.pop(${i})` : `L.pop()`;
+      const lignes = [`L = ${liste(depart)}`, instruction, `print(L)`];
+      const bonne = liste(sans(retire));
+      // Pour `pop(i)`, le piège est de compter à partir de 1 : on retirerait
+      // l'élément placé juste avant.
+      const decale = liste(sans(i - 1));
+      return {
+        text: `Que contient la liste \`L\` à la fin ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: makeChoices(
+          bonne,
+          mode === "pop_position"
+            ? [decale, liste(sans(4)), liste(depart)]
+            : mode === "remove"
+              ? [liste(sans(4)), liste(sans(0)), liste(depart)]
+              : [liste(sans(0)), liste(sans(3)), liste(depart)]
+        ),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "`L.remove(v)` retire de la liste la première valeur égale à `v`. `L.pop(i)` retire l'élément placé à l'indice `i`, et `L.pop()` retire le dernier. Dans les trois cas, la liste perd un élément.",
+          "On repère si l'instruction désigne une valeur ou une position, puis on retire l'élément concerné.",
+          mode === "remove"
+            ? `\`${instruction}\` retire la valeur $${depart[i]}$, où qu'elle se trouve dans la liste.`
+            : mode === "pop_position"
+              ? `\`${instruction}\` retire l'élément d'indice $${i}$. Les indices commencent à $0$ : c'est le ${i + 1}ᵉ élément, soit $${depart[i]}$.`
+              : `\`${instruction}\`, sans argument, retire le dernier élément, soit $${depart[4]}$.`,
+          `La liste contient ${bonne}.`
+        ),
+        choiceDiagnostics:
+          mode === "pop_position"
+            ? [{ choice: decale, cause: "a compté les positions à partir de $1$ : les indices commencent à $0$" }]
+            : mode === "pop_fin"
+              ? [{ choice: liste(sans(0)), cause: "`pop()` sans argument retire le DERNIER élément, pas le premier" }]
+              : [{ choice: liste(depart), cause: "`remove` modifie la liste elle-même : la valeur n'y est plus" }],
+      };
+    },
+  },
+
   /* ═══════════════ algo_fct_entrees_sorties ═══════════════ */
 
   {
@@ -1574,7 +1690,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `Cette fonction doit appliquer une remise de $${t}\\,\\%$ et RENVOYER le nouveau prix. ` +
           `Est-elle correcte ?\n\n${code(lignes)}`,
         format: "qcm",
-        choices: shuffle(["oui", "non"]),
+        choices: shuffle(["oui", "non", "on ne peut pas le savoir sans connaître le prix"]),
         expected: [correcte ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation: exp(
@@ -1950,7 +2066,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const op = pick(["somme", "coef", "diff"] as const);
       const t = pick([5, 10, 20] as const);
       const formule =
-        op === "somme" ? "=B2+B3+B4" : op === "coef" ? `=B2*${fr(1 + t / 100).replace(",", ".")}` : "=B4-B2";
+        op === "somme" ? "=B2+B3+B4" : op === "coef" ? `=B2*${fr(1 + t / 100)}` : "=B4-B2"; // ⛔ virgule : tableur français
       const resultat =
         op === "somme"
           ? valeurs[0] + valeurs[1] + valeurs[2]
@@ -2006,7 +2122,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     generate: () => {
       const t = pick([2, 5, 10, 15, 20, 25] as const);
       const hausse = Math.random() < 0.5;
-      const q = fr(hausse ? 1 + t / 100 : 1 - t / 100).replace(",", ".");
+      const q = fr(hausse ? 1 + t / 100 : 1 - t / 100); // ⛔ virgule : tableur français
       const bonne = `le contenu de B2 ${hausse ? "augmenté" : "diminué"} de $${t}\\,\\%$`;
       return {
         text: `Que calcule la formule \`=B2*${q}\` saisie dans une feuille de calcul ?`,
@@ -2022,9 +2138,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         explanation: exp(
           "Multiplier par un coefficient, c'est appliquer une évolution : $1 + \\dfrac{t}{100}$ pour une hausse, $1 - \\dfrac{t}{100}$ pour une baisse. Le coefficient se lit donc comme un pourcentage.",
           "On compare le coefficient à $1$ : au-dessus, c'est une hausse ; en dessous, une baisse. L'écart à $1$ donne le taux.",
-          `Le coefficient $${q.replace(".", ",")}$ est ${hausse ? "supérieur" : "inférieur"} à $1$, et son écart à $1$ vaut $${fr(t / 100)}$ : ` +
+          `Le coefficient $${q}$ est ${hausse ? "supérieur" : "inférieur"} à $1$, et son écart à $1$ vaut $${fr(t / 100)}$ : ` +
             `c'est une ${hausse ? "hausse" : "baisse"} de $${t}\\,\\%$. ` +
-            `Prendre seulement $${t}\\,\\%$ du contenu s'écrirait \`=B2*${fr(t / 100).replace(",", ".")}\`, ce qui est tout autre chose.`,
+            `Prendre seulement $${t}\\,\\%$ du contenu s'écrirait \`=B2*${fr(t / 100)}\`, ce qui est tout autre chose.`,
           `La formule calcule ${bonne}.`
         ),
         choiceDiagnostics: [
@@ -2052,7 +2168,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "tableur", "template"],
     generate: () => {
       const t = pick([2, 2.5, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25] as const);
-      const q = fr(1 + t / 100).replace(",", ".");
+      const q = fr(1 + t / 100); // ⛔ virgule : tableur français
       const geometrique = Math.random() < 0.5;
       const r = pick([20, 40, 50, 75, 100, 120, 150, 200, 250, 300] as const);
       // ⛔⛔ ENTRE ACCENTS GRAVES, TOUJOURS. Nue, la référence `=$B$2+250`
@@ -2064,14 +2180,14 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       return {
         text:
           `La cellule B2 contient la valeur initiale. Chaque année, la grandeur ` +
-          `${geometrique ? `augmente de $${t}\\,\\%$` : `augmente de $${r}$ unités`}. ` +
+          `${geometrique ? `augmente de $${fr(t)}\\,\\%$` : `augmente de $${r}$ unités`}. ` +
           `Quelle formule saisir en B3 pour pouvoir la recopier vers le bas ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           geometrique ? `\`=B3*${q}\`` : `\`=B3+${r}\``,
           geometrique ? `\`=$B$2*${q}\`` : `\`=$B$2+${r}\``,
           geometrique ? `\`=B2+${q}\`` : `\`=B2*${r}\``,
-          geometrique ? `\`=B2*${t}\`` : `\`=B2+${r}*A3\``,
+          geometrique ? `\`=B2*${fr(t)}\`` : `\`=B2+${r}*A3\``,
           geometrique ? `\`B2*${q}\`` : `\`B2+${r}\``,
         ]),
         expected: [bonne],
@@ -2165,7 +2281,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "tab_adressage",
     difficulty: 3,
     theme: "neutral",
-    hint: "Les $ figent la référence : elle ne bouge pas à la recopie.",
+    hint: "Les signes `$` figent la référence : elle ne bouge pas à la recopie.",
     tags: ["stmg", "maths", "tableur", "template"],
     generate: () => {
       const ligne = randomInt(2, 5);
@@ -2184,19 +2300,36 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `La formule \`${formule}\` est saisie en D${ligne}, puis recopiée vers le bas jusqu'en D${ligne + decalage}. ` +
           `Que contient alors D${ligne + decalage} ?`,
         format: "qcm",
-        choices: makeChoices(`\`${resultat}\``, [
-          `\`=B${ligne}*C${ligne}\``,
-          `\`=B${ligne + decalage}*C${ligne}\``,
-          `\`=B${ligne}*C${ligne + decalage}\``,
-          `\`=B${ligne + decalage + 1}*C${ligne + decalage + 1}\``,
-        ]),
+        // ⛔ Des pièges de la même forme que la bonne réponse : sinon, elle était
+        // le seul choix avec un `$` et se devinait sans raisonner.
+        choices: makeChoices(
+          `\`${resultat}\``,
+          type === "relatif"
+            ? [
+                `\`=B${ligne}*C${ligne}\``,
+                `\`=B${ligne + decalage}*C${ligne}\``,
+                `\`=B${ligne}*C${ligne + decalage}\``,
+                `\`=B${ligne + decalage + 1}*C${ligne + decalage + 1}\``,
+              ]
+            : type === "absolu"
+              ? [
+                  `\`=B${ligne}*$C$1\``,
+                  `\`=B${ligne + decalage}*$C$${1 + decalage}\``,
+                  `\`=B${ligne + decalage + 1}*$C$1\``,
+                ]
+              : [
+                  `\`=B${ligne}*C$1\``,
+                  `\`=B${ligne + decalage}*C$${1 + decalage}\``,
+                  `\`=B${ligne + decalage + 1}*C$1\``,
+                ]
+        ),
         expected: [`\`${resultat}\``],
         comparator: "mcq_exact",
         explanation: exp(
           "Une référence RELATIVE (B2) se décale à la recopie ; une référence ABSOLUE (`$B$2`) reste figée ; une référence MIXTE ne fige que la partie précédée du `$`.",
           "On regarde chaque référence séparément et l'on applique le décalage aux seules parties non figées.",
           type === "relatif"
-            ? `Les deux références sont relatives : elles descendent de ${decalage} ligne(s).`
+            ? `Les deux références sont relatives : elles descendent de ${decalage} ${decalage > 1 ? "lignes" : "ligne"}.`
             : type === "absolu"
               ? `\`$C$1\` est entièrement figée : seule \`B${ligne}\` descend.`
               : `\`C$1\` a sa LIGNE figée : elle reste en ligne 1, tandis que \`B${ligne}\` descend.`,
@@ -2403,12 +2536,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
+        // ⛔ Un tableau et non un graphique : le camembert affiché désignait la
+        // bonne réponse.
         canvas: {
-          kind: "stat_graph",
-          graphType: cas === "repartition" ? "camembert" : "barres",
-          title: `Les données à représenter`,
-          data: labels.map((label, k) => ({ label, value: valeurs[k] })),
-          display: { showValues: true, showLabels: true },
+          kind: "tableau_donnees",
+          title: "Les données à représenter",
+          headers: [cas === "repartition" ? "Rayon" : cas === "evolution" ? "Année" : "Magasin", ...labels],
+          rows: [{ label: "CA (k€)", values: valeurs.map((v) => String(v)) }],
         } satisfies CanvasFigure,
         explanation: exp(
           "Le choix d'une représentation dépend de la question posée : parts d'un tout, évolution dans le temps, ou comparaison entre catégories.",
@@ -2878,14 +3012,17 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       // que trois questions réellement distinctes.
       const seuil = pick([200, 300, 500, 800, 1000, 1500] as const);
       const jours = pick([2, 3, 5, 7, 14, 30] as const);
+      // ⛔ Tirages séparés : avec `jours`, on lisait « avant 30 h ou après 36 h ».
+      const mensualites = pick([3, 4, 6, 10, 12] as const);
+      const heure = pick([8, 9, 10, 11, 12, 14] as const);
       const phrases = [
         { texte: `« Le colis part sous ${jours} jours ou la commande est annulée »`, exclusif: true },
         { texte: `« Les articles en promotion ou coûtant plus de ${seuil} € sont signalés »`, exclusif: false },
         { texte: `« Vous serez remboursé sous ${jours} jours ou échangé, au choix »`, exclusif: true },
         { texte: `« On sélectionne les clients de Paris ou ceux dépensant plus de ${seuil} € »`, exclusif: false },
-        { texte: `« Le paiement se fait en une fois ou en ${jours} mensualités »`, exclusif: true },
+        { texte: `« Le paiement se fait en une fois ou en ${mensualites} mensualités »`, exclusif: true },
         { texte: `« Les salariés cadres ou ayant plus de ${jours} ans d'ancienneté sont concernés »`, exclusif: false },
-        { texte: `« La livraison a lieu avant ${jours} h ou après ${jours + 6} h »`, exclusif: true },
+        { texte: `« La livraison a lieu avant ${heure} h ou après ${heure + 4} h »`, exclusif: true },
         { texte: `« On garde les lots de plus de ${seuil} g ou mal étiquetés »`, exclusif: false },
       ] as const;
       const p = pick(phrases);
@@ -2947,7 +3084,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         },
         {
           affirmation: `« Deux évènements de probabilités $${fr(d)}$ et $${fr(Math.round((1 - d) * 100) / 100)}$ sont toujours indépendants »`,
-          contre: "deux évènements incompatibles, dont l'intersection est vide alors que le produit des probabilités ne l'est pas",
+          contre: "deux évènements incompatibles : la probabilité de leur intersection est nulle, alors que le produit de leurs probabilités ne l'est pas",
         },
         {
           affirmation: `« Une suite croissante finit toujours par dépasser $${seuil}$ »`,
@@ -3067,6 +3204,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const t = pick([5, 8, 10, 12, 15, 20, 25] as const);
       const q = fr(1 + t / 100);
       const s = pick([2, 3, 4, 5, 10, 20] as const);
+      // Au plus 0,4 : deux évènements de probabilité supérieure à 0,5 ne peuvent
+      // pas être incompatibles, et la phrase n'aurait plus d'objet.
+      const p = pick([1, 2, 3, 4] as const);
       const cas = pick([
         {
           prop: `si une suite géométrique à termes positifs a une raison supérieure à $${s}$, alors elle est croissante`,
@@ -3074,8 +3214,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           vraie: false,
         },
         {
-          prop: `si deux évènements de probabilité supérieure à $0{,}${s}$ sont incompatibles, alors leur intersection est vide`,
-          rec: `si l'intersection de deux évènements de probabilité supérieure à $0{,}${s}$ est vide, alors ils sont incompatibles`,
+          prop: `si deux évènements de probabilité supérieure à $0{,}${p}$ sont incompatibles, alors leur intersection est vide`,
+          rec: `si l'intersection de deux évènements de probabilité supérieure à $0{,}${p}$ est vide, alors ils sont incompatibles`,
           vraie: true,
         },
         {
@@ -3084,8 +3224,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           vraie: false,
         },
         {
-          prop: `si la dérivée est positive sur $[0\\,;\\,${s}]$, alors la fonction y est croissante`,
-          rec: `si une fonction est croissante sur $[0\\,;\\,${s}]$, alors sa dérivée y est positive`,
+          prop: `si la dérivée d'une fonction est positive sur $[0\\,;\\,${s}]$, alors la fonction y est croissante`,
+          rec: `si une fonction dérivable est croissante sur $[0\\,;\\,${s}]$, alors sa dérivée y est positive`,
           vraie: true,
         },
         {
@@ -3102,7 +3242,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       return {
         text: `On considère la proposition : « ${cas.prop} ».\n\nSa réciproque — « ${cas.rec} » — est-elle vraie ?`,
         format: "qcm",
-        choices: shuffle(["oui", "non"]),
+        choices: shuffle(["oui", "non", "on ne peut pas savoir"]),
         expected: [cas.vraie ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation: exp(
@@ -3146,9 +3286,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           nonB: "le prix n'est pas multiplié par 1,2",
         },
         {
-          a: "la suite est géométrique de raison 2",
+          // ⛔ « à termes positifs » : de raison 2 et de premier terme négatif,
+          // une suite géométrique décroît.
+          a: "la suite à termes positifs est géométrique de raison 2",
           b: "la suite est croissante",
-          nonA: "la suite n'est pas géométrique de raison 2",
+          nonA: "la suite à termes positifs n'est pas géométrique de raison 2",
           nonB: "la suite n'est pas croissante",
         },
         {
@@ -3158,10 +3300,10 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           nonB: "le nombre est strictement négatif",
         },
         {
-          a: "la dérivée est positive sur un intervalle",
-          b: "la fonction est croissante sur cet intervalle",
-          nonA: "la dérivée n'est pas positive sur cet intervalle",
-          nonB: "la fonction n'est pas croissante sur cet intervalle",
+          a: "la dérivée de f est positive sur l'intervalle I",
+          b: "f est croissante sur l'intervalle I",
+          nonA: "la dérivée de f n'est pas positive sur l'intervalle I",
+          nonB: "f n'est pas croissante sur l'intervalle I",
         },
         {
           a: "le client commande plus de 200 €",
@@ -3217,7 +3359,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const s = pick([5, 10, 20, 50, 100, 200] as const);
       const t = pick([5, 10, 15, 20, 25, 30] as const);
       const cas = pick([
-        { a: `la raison d'une suite géométrique à termes positifs est supérieure à $${1 + s / 100}$`, b: "la suite est croissante" },
+        { a: `la raison d'une suite géométrique à termes positifs est supérieure à $${fr(1 + s / 100)}$`, b: "la suite est croissante" },
         { a: `un nombre est supérieur à $${s}$`, b: "ce nombre est positif" },
         { a: `deux évènements de probabilité $0{,}${t}$ sont incompatibles`, b: "leur intersection est vide" },
         { a: `une fonction est affine de coefficient directeur $${s}$`, b: "sa courbe est une droite" },
@@ -3274,7 +3416,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         `une fonction est constante et sa courbe est une droite horizontale`,
       ];
       const nonEquivalences = [
-        `une suite est géométrique de raison $2$ et elle est croissante`,
+        `une suite à termes positifs est géométrique de raison $2$ et elle est croissante`,
         `un nombre est le carré d'un entier et il est positif`,
         `une fonction est affine de coefficient directeur $3$ et sa courbe est une droite`,
         `un nombre est supérieur à $10$ et il est positif`,

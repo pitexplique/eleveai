@@ -86,7 +86,41 @@ function polynome(a: number, b: number, c: number, d: number): string {
   return m.length === 0 ? "0" : m.join(" ").replace(/\s+/g, " ").trim();
 }
 
-/** Parabole seule, ou parabole + une droite (sécante ou tangente). */
+/** Nombre dans un calcul : un négatif entre parenthèses, jamais « 3 × -2 ». */
+function par(n: number): string {
+  return n < 0 ? `(${fr(n)})` : fr(n);
+}
+
+/** Le nom sans son article : « table » pour « une table », « panier » pour « un panier ». */
+function nomProd(p: { un: string }): string {
+  return p.un.replace(/^une? /, "");
+}
+
+/**
+ * Bornes verticales entières, alignées sur le pas des chiffres de l'axe : le
+ * canvas écrit un chiffre tous les `pas` en partant de `ymin`.
+ */
+function cadreY(bas: number, haut: number): { ymin: number; ymax: number } {
+  let ymin = Math.floor(bas);
+  let ymax = Math.ceil(haut);
+  for (let i = 0; i < 4; i++) {
+    const pas = Math.max(1, Math.ceil((16 * (ymax - ymin)) / 260));
+    const u = Math.floor(ymin / pas) * pas;
+    const v = Math.ceil(ymax / pas) * pas;
+    if (u === ymin && v === ymax) break;
+    ymin = u;
+    ymax = v;
+  }
+  return { ymin, ymax };
+}
+
+/**
+ * Parabole seule, ou parabole + une droite (sécante ou tangente).
+ *
+ * ⛔ La fenêtre suit le sommet et les points marqués. Figée de -6 à 6, avec une
+ * hauteur prise aux abscisses paires, elle montait à 200 et laissait hors du
+ * cadre le sommet d'abscisse impaire (-27 pour un ymin de -26).
+ */
 function canvasParaboleDroite(
   a: number,
   b: number,
@@ -96,14 +130,15 @@ function canvasParaboleDroite(
   marques?: { x: number; label?: string }[]
 ): CanvasFigure {
   const f = (x: number) => a * x * x + b * x + c;
-  const echantillon = [-6, -4, -2, 0, 2, 4, 6].map(f);
+  const sommet = a === 0 ? 0 : -b / (2 * a);
+  const xs = (marques ?? []).map((m) => m.x);
+  const hauteurs = [f(sommet), f(sommet + 3), 0, ...xs.map(f)];
   return {
     kind: "fonctionGraphique",
     titre,
-    xmin: -6,
-    xmax: 6,
-    ymin: Math.floor(Math.min(...echantillon, 0)) - 2,
-    ymax: Math.ceil(Math.max(...echantillon, 0)) + 2,
+    xmin: Math.floor(Math.min(sommet - 3, -1, ...xs.map((x) => x - 1))),
+    xmax: Math.ceil(Math.max(sommet + 3, 1, ...xs.map((x) => x + 1))),
+    ...cadreY(Math.min(...hauteurs) - 2, Math.max(...hauteurs) + 2),
     grille: true,
     courbes: [
       { id: "f", type: "quadratique", a, b, c },
@@ -138,7 +173,9 @@ function canvasCourbePoints(
     xmax,
     ymin: Math.floor(Math.min(...ys, 0) - marge),
     ymax: Math.ceil(Math.max(...ys, 0) + marge),
-    grille: true,
+    // ⛔ Le canvas trace une ligne par unité : au-delà de 40 unités, la grille
+    // devenait un aplat gris qui noyait la courbe.
+    grille: xmax - xmin <= 40 && Math.max(...ys, 0) - Math.min(...ys, 0) <= 30,
     courbes: [
       { id: "f", type: "points", points },
       ...(options?.droite
@@ -872,35 +909,36 @@ const anciens: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Le coût marginal, c'est ce que coûte À PEU PRÈS l'unité suivante.",
-    tags: ["stmg", "maths", "derivation", "gestion", "open", "template"],
+    tags: ["stmg", "maths", "derivation", "gestion", "template", "short"],
     generate: () => {
+      // ANGLE 1 — ESTIMER avec le coût marginal : donner sens au nombre, c'est
+      // savoir ce qu'il ajoute au coût total quand on produit une unité de plus.
       const prod = pick(PRODUCTIONS);
       const q = pick([20, 40, 50, 80, 100, 120, 150, 200] as const);
       const marginal = pick([3, 5, 8, 12, 15, 18, 24, 30] as const);
+      const total = q * pick([25, 30, 40, 50, 60] as const);
       return {
         text:
           `Une entreprise produit ${prod.objet}. Son coût total de production, en euros, est $C(x)$ pour $x$ ${prod.unite}. ` +
-          `On a calculé $C'(${q}) = ${marginal}$. Explique ce que ce nombre signifie pour l'entreprise.`,
-        format: "open",
-        // ⛔ Pas de nombre nu en mot-clé : `contains_keyword` valide sur la
-        // SOUS-CHAÎNE, donc « 8 » accepterait « 18 », « 80 » et « je sais pas 8 ».
-        // Les trois mots de gestion suffisent à reconnaître une explication juste.
-        expected: ["marginal", "unite suivante", "unité suivante", "supplementaire", "supplémentaire"],
-        comparator: "contains_keyword",
+          `On sait que $C(${q}) = ${total}$ et $C'(${q}) = ${marginal}$. ` +
+          `À l'aide du coût marginal, estime le coût total de $${q + 1}$ ${prod.unite}, en euros.`,
+        format: "short",
+        expected: [String(total + marginal)],
+        comparator: "number_equal",
         explanation: exp(
           "Dans un cadre économique, le nombre dérivé du coût total est le COÛT MARGINAL : le coût approximatif de l'unité supplémentaire.",
-          "On traduit la vitesse instantanée de variation du coût en langage de gestion.",
-          `$C'(${q}) = ${marginal}$ signifie qu'au niveau de production de $${q}$ ${prod.unite}, ` +
-            `le coût augmente d'environ $${marginal}$ € par unité supplémentaire produite.`,
-          `Par exemple : « Produire la ${q + 1}ᵉ unité coûterait environ ${marginal} € de plus. »`
+          "On ajoute au coût total de $q$ unités le coût marginal, qui estime ce que coûte l'unité suivante.",
+          `$C'(${q}) = ${marginal}$ : à partir de $${q}$ ${prod.unite}, produire ${prod.un} de plus coûte environ $${marginal}$ €. ` +
+            `Donc $C(${q + 1}) \\approx C(${q}) + C'(${q}) = ${total} + ${marginal} = ${total + marginal}$.`,
+          `Le coût total de $${q + 1}$ ${prod.unite} est d'environ $${total + marginal}$ €.`
         ),
       };
     },
   },
 
   {
-    // ANGLE 2 — DÉCIDER avec le coût marginal, au lieu de l'expliquer. Le
-    // premier item est une ouverte, jugée par mots-clés ; celui-ci pose la
+    // ANGLE 2 — DÉCIDER avec le coût marginal, au lieu d'estimer un coût. Le
+    // premier item ajoute le marginal au total ; celui-ci pose la
     // question que se pose vraiment l'entreprise : au prix de vente actuel,
     // a-t-on intérêt à produire une unité de plus ? La réponse tient à une
     // comparaison — marginal contre prix — et c'est là que le nombre dérivé
@@ -940,7 +978,7 @@ const anciens: TutorBankItemV4[] = [
       return {
         text:
           `Une entreprise produit ${prod.objet}. On a calculé $C'(${q}) = ${marginal}$, ` +
-          `où $C$ est le coût total en euros. Chaque ${prod.un.slice(3)} se vend $${prix}$ €. ` +
+          `où $C$ est le coût total en euros. Chaque ${nomProd(prod)} se vend $${prix}$ €. ` +
           `L'entreprise a-t-elle intérêt à produire ${prod.un} de plus ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -956,7 +994,7 @@ const anciens: TutorBankItemV4[] = [
         explanation: exp(
           "Le coût marginal $C'(q)$ est ce que coûte la production d'une unité supplémentaire à partir du niveau $q$. La décision de produire cette unité se prend en le comparant au PRIX auquel elle sera vendue.",
           "On compare deux nombres et deux seulement : le coût marginal et le prix de vente unitaire. Le coût total, lui, ne dit rien sur l'unité suivante.",
-          `La ${prod.un.slice(3)} suivante coûte $${marginal}$ € et se vend $${prix}$ €. ` +
+          `L'unité suivante coûte $${marginal}$ € et se vend $${prix}$ €. ` +
             (rentable
               ? `Elle laisse donc $${prix - marginal}$ € de marge : la produire augmente le bénéfice.`
               : `Elle fait donc perdre $${marginal - prix}$ € : la produire diminue le bénéfice.`) +
@@ -1002,8 +1040,8 @@ const anciens: TutorBankItemV4[] = [
       const f = (x: number) => a * x * x + b * x + c;
       const pente = 2 * a * x0 + b;
       const ord = f(x0) - pente * x0;
-      const ecrire = (p: number, o: number) =>
-        `$y = ${p === 1 ? "" : p === -1 ? "-" : p}x ${o >= 0 ? "+" : "-"} ${Math.abs(o)}$`;
+      // ⛔ `polynome` omet les termes nuls : jamais « y = 0x + 0 » ni « y = 3x + 0 ».
+      const ecrire = (p: number, o: number) => `$y = ${polynome(0, 0, p, o)}$`;
       return {
         text:
           `Soit $f(x) = ${polynome(0, a, b, c)}$. ` +
@@ -1033,7 +1071,7 @@ const anciens: TutorBankItemV4[] = [
           "La tangente au point d'abscisse $a$ a pour coefficient directeur $f'(a)$ et passe par le point de coordonnées $(a\\,;\\,f(a))$.",
           "On calcule d'abord la pente avec la dérivée, puis l'ordonnée à l'origine en utilisant le point de contact.",
           `$f'(x) = ${polynome(0, 0, 2 * a, b)}$, donc $f'(${x0}) = ${fr(pente)}$. ` +
-            `Le point de contact est $(${x0}\\,;\\,${fr(f(x0))})$, d'où $${fr(f(x0))} = ${fr(pente)} \\times ${x0} + p$ et $p = ${fr(ord)}$.`,
+            `Le point de contact est $(${x0}\\,;\\,${fr(f(x0))})$, d'où $${fr(f(x0))} = ${fr(pente)} \\times ${par(x0)} + p$ et $p = ${fr(ord)}$.`,
           `L'équation réduite est ${ecrire(pente, ord)}.`
         ),
         choiceDiagnostics: [
@@ -1073,7 +1111,7 @@ const anciens: TutorBankItemV4[] = [
       return {
         text:
           `La tangente à la courbe de $f$ au point d'abscisse $${x0}$ a pour équation ` +
-          `$y = ${pente === 1 ? "" : pente === -1 ? "-" : pente}x ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)}$. ` +
+          `$y = ${polynome(0, 0, pente, ord)}$. ` +
           `Que vaut $f(${x0})$ ?`,
         format: "short",
         expected: [fr(f(x0))],
@@ -1089,7 +1127,7 @@ const anciens: TutorBankItemV4[] = [
         explanation: exp(
           "Une tangente touche la courbe au point de contact : en $x_0$, la fonction et la tangente prennent la MÊME valeur. Autrement dit, $f(x_0)$ s'obtient en remplaçant $x$ par $x_0$ dans l'équation de la tangente.",
           "On substitue $x_0$ dans l'équation de la droite — c'est un simple calcul, sans avoir besoin de connaître $f$.",
-          `$y = ${pente} \\times ${x0} ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)} = ${fr(f(x0))}$, donc $f(${x0}) = ${fr(f(x0))}$. ` +
+          `$y = ${pente} \\times ${par(x0)}${ord === 0 ? "" : ` ${ord > 0 ? "+" : "-"} ${Math.abs(ord)}`} = ${fr(f(x0))}$, donc $f(${x0}) = ${fr(f(x0))}$. ` +
             `Au passage, le coefficient directeur donne l'autre information : $f'(${x0}) = ${fr(pente)}$. ` +
             `Une équation de tangente porte donc les DEUX nombres à la fois.`,
           `$f(${x0}) = ${fr(f(x0))}$.`
@@ -1246,21 +1284,25 @@ const anciens: TutorBankItemV4[] = [
       const x = randomInt(-4, 5);
       const surLaDroite = Math.random() < 0.5;
       const y = pente * x + ord + (surLaDroite ? 0 : pick([1, -1, 2, -2] as const));
+      // ⛔ La parabole est construite pour que la droite la touche vraiment : avec
+      // a x² + c tiré au hasard, la « tangente tracée » coupait la courbe en deux points.
       const a = pick([1, -1] as const);
-      const c = pick([0, 1, -1] as const);
+      const contact = randomInt(-1, 1);
+      const b = pente - 2 * a * contact;
+      const c = pente * contact + ord - a * contact * contact - b * contact;
       return {
         text:
-          `La tangente tracée a pour équation $y = ${pente === 1 ? "" : pente === -1 ? "-" : pente}x ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)}$. ` +
+          `La tangente tracée a pour équation $y = ${polynome(0, 0, pente, ord)}$. ` +
           `Le point $M(${x}\\,;\\,${y})$ appartient-il à cette tangente ?`,
         format: "qcm",
         choices: shuffle(["oui", "non"]),
         expected: [surLaDroite ? "oui" : "non"],
         comparator: "mcq_exact",
-        canvas: canvasParaboleDroite(a, 0, c, { pente, ordonnee: ord, id: "tan" }, "La tangente d'équation donnée"),
+        canvas: canvasParaboleDroite(a, b, c, { pente, ordonnee: ord, id: "tan" }, "La tangente d'équation donnée", [{ x: contact }]),
         explanation: exp(
           "Un point appartient à une droite si, et seulement si, ses coordonnées vérifient l'équation de cette droite.",
           "On remplace $x$ par l'abscisse du point et l'on compare le résultat à son ordonnée.",
-          `Pour $x = ${x}$ : $${pente} \\times ${x} ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)} = ${pente * x + ord}$, ` +
+          `Pour $x = ${x}$ : $${pente} \\times ${par(x)}${ord === 0 ? "" : ` ${ord > 0 ? "+" : "-"} ${Math.abs(ord)}`} = ${pente * x + ord}$, ` +
             `alors que l'ordonnée de $M$ vaut $${y}$.`,
           surLaDroite
             ? `Les deux coïncident : $M$ appartient à la tangente.`
@@ -1552,7 +1594,7 @@ const anciens: TutorBankItemV4[] = [
         explanation: exp(
           "La dérivée d'une somme est la somme des dérivées ; la dérivée d'une constante est nulle.",
           "On dérive terme à terme, sans oublier de faire disparaître le terme constant.",
-          `$(${a}x^2)' = ${2 * a}x$ ; $(${b}x)' = ${b}$ ; $(${c})' = 0$.`,
+          `$(${polynome(0, a, 0, 0)})' = ${2 * a}x$ ; $(${polynome(0, 0, b, 0)})' = ${b}$ ; $(${c})' = 0$.`,
           `$f'(x) = ${polynome(0, 0, 2 * a, b)}$.`
         ),
         choiceDiagnostics: [
@@ -1604,7 +1646,7 @@ const anciens: TutorBankItemV4[] = [
           "On dérive une somme terme à terme. Un terme CONSTANT ne varie pas : sa courbe est une droite horizontale, sa pente vaut $0$, et il disparaît de la dérivée.",
           "On dérive chaque morceau séparément, et l'on vérifie qu'aucune constante n'a survécu au passage.",
           `$${a === 1 ? "" : a === -1 ? "-" : a}x^2 \\to ${2 * a}x$ ; ` +
-            `$${b >= 0 ? "+" : "-"} ${Math.abs(b)}x \\to ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$ ; ` +
+            `$${b >= 0 ? "+" : "-"} ${Math.abs(b) === 1 ? "" : Math.abs(b)}x \\to ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$ ; ` +
             `$${c >= 0 ? "+" : "-"} ${Math.abs(c)} \\to 0$. ` +
             `Donc $f'(x) = ${juste}$, sans le $${c >= 0 ? c : `(${c})`}$.`,
           `L'erreur est d'avoir gardé la constante : $f'(x) = ${juste}$.`
@@ -1942,8 +1984,8 @@ const anciens: TutorBankItemV4[] = [
         explanation: exp(
           "Le nombre dérivé mesure une variation instantanée. En gestion, $C'(x)$ est le COÛT MARGINAL : ce que coûte, approximativement, la production d'une unité supplémentaire à partir du niveau $x$.",
           "On distingue trois nombres qui se ressemblent : le coût TOTAL $C(x)$, le coût MOYEN $\\dfrac{C(x)}{x}$, et le coût MARGINAL $C'(x)$.",
-          `Ici $C(${x0}) = ${fr(total)}$ € au total, soit $${fr(Math.round((total / x0) * 100) / 100)}$ € en moyenne par ${prod.un.slice(3)}. ` +
-            `Mais $C'(${x0}) = ${fr(marginal)}$ € : c'est le coût ${prod.genre === 'f' ? 'de la' : 'du'} ${prod.un.slice(3)} SUIVANT${prod.genre === 'f' ? 'E' : ''}. ` +
+          `Ici $C(${x0}) = ${fr(total)}$ € au total, soit $${fr(Math.round((total / x0) * 100) / 100)}$ € en moyenne par ${nomProd(prod)}. ` +
+            `Mais $C'(${x0}) = ${fr(marginal)}$ € : c'est le coût ${prod.genre === 'f' ? 'de la' : 'du'} ${nomProd(prod)} SUIVANT${prod.genre === 'f' ? 'E' : ''}. ` +
             `Vérification : $C(${x0 + 1}) - C(${x0}) = ${fr(Math.round((a * (x0 + 1) * (x0 + 1) + b * (x0 + 1) + c - total) * 100) / 100)}$ €, ` +
             `tout proche de $${fr(marginal)}$.`,
           `$C'(${x0})$ est le coût de l'unité suivante, environ $${fr(marginal)}$ €.`
@@ -1995,7 +2037,7 @@ const anciens: TutorBankItemV4[] = [
         explanation: exp(
           "La dérivée de $x^n$ est $nx^{n-1}$, appliquée terme à terme.",
           "On traite chaque terme séparément, en n'oubliant pas que la constante disparaît.",
-          `$(${a}x^3)' = ${3 * a}x^2$ ; $(${b}x^2)' = ${2 * b}x$ ; $(${c}x)' = ${c}$ ; $(${d})' = 0$.`,
+          `$(${polynome(a, 0, 0, 0)})' = ${3 * a}x^2$ ; $(${polynome(0, b, 0, 0)})' = ${2 * b}x$ ; $(${polynome(0, 0, c, 0)})' = ${c}$ ; $(${d})' = 0$.`,
           `$f'(x) = ${polynome(0, 3 * a, 2 * b, c)}$.`
         ),
       };
@@ -2043,8 +2085,8 @@ const anciens: TutorBankItemV4[] = [
           "Dériver $x^n$ donne $nx^{n-1}$ : l'exposant descend en facteur ET il baisse d'un rang. Les deux gestes vont ensemble ; en oublier un donne une expression du même degré que $f$, ce qui est impossible pour une dérivée de polynôme.",
           "On dérive terme à terme, en vérifiant que le degré a bien baissé de un.",
           `$${a === 1 ? "" : a === -1 ? "-" : a}x^3 \\to ${3 * a}x^2$ (et non $${3 * a}x^3$) ; ` +
-            `$${b >= 0 ? "+" : "-"} ${Math.abs(b)}x^2 \\to ${b >= 0 ? "+" : "-"} ${Math.abs(2 * b)}x$ ; ` +
-            `$${c >= 0 ? "+" : "-"} ${Math.abs(c)}x \\to ${c >= 0 ? "+" : "-"} ${Math.abs(c)}$ ; ` +
+            `$${b >= 0 ? "+" : "-"} ${Math.abs(b) === 1 ? "" : Math.abs(b)}x^2 \\to ${b >= 0 ? "+" : "-"} ${Math.abs(2 * b)}x$ ; ` +
+            `$${c >= 0 ? "+" : "-"} ${Math.abs(c) === 1 ? "" : Math.abs(c)}x \\to ${c >= 0 ? "+" : "-"} ${Math.abs(c)}$ ; ` +
             `$${d >= 0 ? "+" : "-"} ${Math.abs(d)} \\to 0$. ` +
             `Donc $f'(x) = ${juste}$ — un degré 2, pas un degré 3.`,
           `Il a bien fait descendre les exposants, mais il ne les a pas baissés : $f'(x) = ${juste}$.`
@@ -2131,7 +2173,7 @@ const anciens: TutorBankItemV4[] = [
           "Une tangente horizontale a un coefficient directeur nul. Comme ce coefficient est le nombre dérivé, chercher une tangente horizontale revient à résoudre $f'(x) = 0$.",
           "On écrit la dérivée, on l'égale à zéro, et l'on résout — pour un polynôme du second degré, c'est une équation du premier degré.",
           `$f'(x) = ${polynome(0, 0, 2 * a, b)}$. ` +
-            `On résout $${2 * a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = 0$, soit $${2 * a}x = ${-b}$, donc $x = ${x0}$. ` +
+            `On résout $${polynome(0, 0, 2 * a, b)} = 0$, soit $${2 * a}x = ${-b}$, donc $x = ${x0}$. ` +
             `En ce point, la parabole atteint son ${a > 0 ? "MINIMUM" : "MAXIMUM"} : la dérivée change de signe en le traversant.`,
           `La tangente est horizontale en $x = ${x0}$.`
         ),
@@ -2369,7 +2411,7 @@ const anciens: TutorBankItemV4[] = [
           "On résout $B'(x) > 0$, ce qui donne l'intervalle de croissance. Comme le coefficient devant $x$ est négatif, l'inégalité se retourne à la division.",
           `$-${pente}x + ${ordonnee} > 0$ donne $${pente}x < ${ordonnee}$, donc $x < ${xOpt}$. ` +
             `Le bénéfice augmente jusqu'à $${xOpt}$ ${prod.unite}, puis il diminue : ` +
-            `au-delà, $B'(x)$ devient négative — chaque ${prod.un.slice(3)} supplémentaire rapporte moins qu'${prod.genre === "f" ? "elle" : "il"} ne coûte.`,
+            `au-delà, $B'(x)$ devient négative — chaque ${nomProd(prod)} supplémentaire rapporte moins qu'${prod.genre === "f" ? "elle" : "il"} ne coûte.`,
           `Le bénéfice augmente jusqu'à $${xOpt}$ ${prod.unite}.`
         ),
       };
@@ -2610,7 +2652,7 @@ const anciens: TutorBankItemV4[] = [
         explanation: exp(
           "Un tableau de variations se sépare aux abscisses où la dérivée s'annule : ce sont les seuls points où le sens peut changer.",
           "On dérive, on résout $f'(x) = 0$, et l'on porte la solution comme colonne de séparation. Les deux sens se déduisent ensuite du signe de $f'$ de part et d'autre.",
-          `$f'(x) = ${polynome(0, 0, 2 * a, b)}$. On résout $${2 * a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = 0$, ` +
+          `$f'(x) = ${polynome(0, 0, 2 * a, b)}$. On résout $${polynome(0, 0, 2 * a, b)} = 0$, ` +
             `d'où $x = ${racine}$. ` +
             `Comme $a = ${a}$ est ${a > 0 ? "positif" : "négatif"}, $f'$ est ${a > 0 ? "négative avant et positive après" : "positive avant et négative après"} : ` +
             `$f$ ${a > 0 ? "décroît puis croît, avec un MINIMUM" : "croît puis décroît, avec un MAXIMUM"} en $x = ${racine}$.`,
@@ -2632,7 +2674,8 @@ const anciens: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "L'extremum est atteint là où la dérivée s'annule : trouve d'abord cette abscisse.",
-    tags: ["stmg", "maths", "derivation", "canvas", "template", "short"],
+    // ⛔ Sans figure : la parabole, avec son sommet marqué, donnait la valeur à lire.
+    tags: ["stmg", "maths", "derivation", "template", "short"],
     generate: () => {
       const a = pick([1, 2, 3, -1, -2, -3] as const);
       const racine = randomInt(-4, 5);
@@ -2646,7 +2689,6 @@ const anciens: TutorBankItemV4[] = [
         format: "short",
         expected: [fr(f(racine))],
         comparator: "number_equal",
-        canvas: canvasParaboleDroite(a, b, c, null, "Courbe de f", [{ x: racine, label: a > 0 ? "minimum" : "maximum" }]),
         explanation: exp(
           "Un extremum d'une fonction dérivable est atteint là où la dérivée s'annule en changeant de signe.",
           "On dérive, on annule, on résout, puis on calcule l'image de la valeur trouvée.",
@@ -2936,36 +2978,39 @@ const anciens: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Une conclusion reprend la quantité, la grandeur optimisée et son unité.",
-    tags: ["stmg", "maths", "derivation", "gestion", "open", "template"],
+    tags: ["stmg", "maths", "derivation", "gestion", "template", "short"],
     generate: () => {
+      // ANGLE 1 — COMPLÉTER la conclusion : l'élève place lui-même le bon nombre
+      // au bon endroit, la quantité ou le montant, sans les confondre.
       const prod = pick(PRODUCTIONS);
       const xOpt = pick([12, 18, 25, 30, 45, 60, 75] as const);
       const valeur = pick([420, 680, 950, 1250, 1840, 2300] as const);
       const nature = pick(["bénéfice maximal", "coût minimal"] as const);
+      const surLaQuantite = Math.random() < 0.5;
+      const phrase = surLaQuantite
+        ? `Pour … ${prod.unite}, on obtient un ${nature} de $${valeur}$ €.`
+        : `Pour $${xOpt}$ ${prod.unite}, on obtient un ${nature} de … €.`;
       return {
         text:
           `Une étude sur la production ${prod.objet} conduit à $x = ${xOpt}$ et à un ${nature} de $${valeur}$ €. ` +
-          `Rédige la phrase de conclusion, dans le contexte.`,
-        format: "open",
-        // ⛔ Pas de « € » seul en mot-clé : un caractère, validé par toute
-        // réponse citant un montant. « euros » écrit en toutes lettres reste.
-        expected: [String(xOpt), String(valeur), prod.unite, "euros"],
-        comparator: "contains_keyword",
+          `Quel nombre complète cette conclusion ? « ${phrase} »`,
+        format: "short",
+        expected: [String(surLaQuantite ? xOpt : valeur)],
+        comparator: "number_equal",
         explanation: exp(
           "Un résultat de calcul ne devient une réponse que replacé dans le contexte : la quantité, la grandeur optimisée, son unité.",
           "On reprend les termes de l'énoncé et l'on y insère les valeurs trouvées.",
           `La valeur $${xOpt}$ est une QUANTITÉ (en ${prod.unite}) ; la valeur $${valeur}$ est un MONTANT (en euros). ` +
             `Les confondre est l'erreur la plus fréquente en fin de problème.`,
-          `Par exemple : « Pour ${xOpt} ${prod.unite}, on obtient un ${nature} de ${valeur} €. »`
+          `« Pour $${xOpt}$ ${prod.unite}, on obtient un ${nature} de $${valeur}$ €. »`
         ),
       };
     },
   },
 
   {
-    // ANGLE 2 — TRIER les conclusions, quand le premier item fait RÉDIGER.
-    // L'ouverte est jugée par mots-clés : elle récompense celui qui écrit, et
-    // laisse démuni celui qui ne sait pas par où commencer. Ici les quatre
+    // ANGLE 2 — TRIER les conclusions, quand le premier item en fait COMPLÉTER une.
+    // Ici les quatre
     // phrases sont posées, et trois échouent chacune sur un point précis :
     // l'unité oubliée, la quantité prise pour le montant, l'extremum inversé.
     kind: "template",
@@ -3059,22 +3104,26 @@ const anciens: TutorBankItemV4[] = [
       const ord = pick([1, 2, 3, -1, -2, -3, 0, 5] as const);
       const x = randomInt(-4, 5);
       const y = pente * x + ord;
+      // ⛔ La parabole est construite pour que la droite la touche vraiment.
       const a = pick([1, -1] as const);
-      const c = pick([0, 1, -1] as const);
+      const contact = randomInt(-1, 1);
+      const b = pente - 2 * a * contact;
+      const c = pente * contact + ord - a * contact * contact - b * contact;
       return {
         text:
           `La tangente tracée a pour équation ` +
-          `$y = ${pente === 1 ? "" : pente === -1 ? "-" : pente}x ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)}$. ` +
+          `$y = ${polynome(0, 0, pente, ord)}$. ` +
           `Quelle est l'ordonnée du point de cette tangente d'abscisse $${x}$ ?`,
         format: "short",
         expected: [fr(y)],
         comparator: "number_equal",
         canvas: canvasParaboleDroite(
           a,
-          0,
+          b,
           c,
           { pente, ordonnee: ord, id: "tan" },
-          "La tangente d'équation donnée"
+          "La tangente d'équation donnée",
+          [{ x: contact }]
         ),
         explanation: exp(
           "Une équation de droite $y = ax + b$ associe à chaque abscisse une ordonnée, et une seule : il suffit de remplacer $x$ pour l'obtenir.",

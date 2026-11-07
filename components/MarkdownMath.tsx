@@ -48,12 +48,24 @@ const NBSP = "\u00a0";
 const UNITE = "(?:km|dm|cm|mm|m|mL|cL|dL|L|kg|mg|g|min|ms|h|s|ans|pas)(?:[²³]|(?![\\wàâéèêîôû’'])|$)|[%€°]";
 const AVANT_UNITE = new RegExp(`(^|\\d) (?=${UNITE})`, "g");
 
+/**
+ * ⛔ « 1, 05 » (05/11/2026). En formule, KaTeX lit la virgule comme une ponctuation
+ * et met une espace derrière : les banques écrivent `$1,05$` (leur `fr()` sert aussi
+ * aux réponses attendues). On protège donc la virgule décimale à l'affichage. Une
+ * liste (`1,2,3`) n'est pas touchée.
+ */
+function virgulesDecimales(formule: string): string {
+  return formule.replace(/(?<![\d,])\d+,\d+(?![\d,])/g, (nombre) => nombre.replace(",", "{,}"));
+}
+
 function espacesInsecables(texte: string): string {
   return texte
     .split(/(\$\$[\s\S]*?\$\$|\$[^$]*\$|`[^`]*`)/)
     .map((morceau, i) =>
       i % 2 === 1
-        ? morceau
+        ? morceau.startsWith("$")
+          ? virgulesDecimales(morceau)
+          : morceau
         : morceau
             .replace(/ ([?!;:»%])/g, `${NBSP}$1`)
             .replace(/« /g, `«${NBSP}`)

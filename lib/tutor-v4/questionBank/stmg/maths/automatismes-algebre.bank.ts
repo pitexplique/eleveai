@@ -91,6 +91,15 @@ function facteur(r: number): string {
   return r > 0 ? `(x - ${r})` : `(x + ${-r})`;
 }
 
+/** Un monôme seul : « x », « -x », « 3x », jamais « 1x » ni « -1x ». */
+function monome(coef: number, partie = "x"): string {
+  return `${coef === 1 ? "" : coef === -1 ? "-" : coef}${partie}`;
+}
+
+function pgcd(a: number, b: number): number {
+  return b === 0 ? Math.abs(a) : pgcd(b, a % b);
+}
+
 /* ─────────────────── réservoirs de contexte ─────────────────── */
 
 const FORMULES = [
@@ -103,7 +112,7 @@ const FORMULES = [
   },
   {
     nom: "le prix TTC",
-    litteral: "P_{TTC} = P_{HT} \\times (1 + t)",
+    litteral: "P_{TTC} = P_{HT} \\times \\left(1 + \\dfrac{t}{100}\\right)",
     variables: ["P_{HT}", "t"],
     calcule: (p: number, t: number) => p * (1 + t / 100),
     legende: "prix hors taxes $P_{HT}$ en euros et taux $t$ en pourcentage",
@@ -148,8 +157,8 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         explanation: exp(
           "Développer un produit de deux binômes : chaque terme du premier multiplie chaque terme du second.",
           "On écrit les quatre produits, puis on regroupe les termes en $x$.",
-          `$${a}x \\times ${c}x = ${A}x^2$ ; $${a}x \\times (${d}) = ${a * d}x$ ; ` +
-            `$(${b}) \\times ${c}x = ${b * c}x$ ; $(${b}) \\times (${d}) = ${C}$. ` +
+          `$${monome(a)} \\times ${monome(c)} = ${monome(A, "x^2")}$ ; $${monome(a)} \\times (${d}) = ${monome(a * d)}$ ; ` +
+            `$(${b}) \\times ${monome(c)} = ${monome(b * c)}$ ; $(${b}) \\times (${d}) = ${C}$. ` +
             `En regroupant : $${trinome(A, B, C)}$.`,
           `Le résultat développé est $${trinome(A, B, C)}$.`
         ),
@@ -195,8 +204,8 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         explanation: exp(
           "En développant $(ax + b)(cx + d)$, le terme en $x$ rassemble DEUX produits : le premier terme par le second de l'autre parenthèse, et réciproquement. Son coefficient vaut $ad + bc$.",
           "On repère les deux produits croisés, on les calcule séparément, puis on les additionne — sans oublier les signes.",
-          `Produits croisés : $${a}x \\times ${d >= 0 ? d : `(${d})`} = ${a * d}x$ et ` +
-            `$${b >= 0 ? b : `(${b})`} \\times ${c}x = ${b * c}x$. ` +
+          `Produits croisés : $${monome(a)} \\times ${d >= 0 ? d : `(${d})`} = ${monome(a * d)}$ et ` +
+            `$${b >= 0 ? b : `(${b})`} \\times ${monome(c)} = ${monome(b * c)}$. ` +
             `Au total : $${a * d} ${b * c >= 0 ? "+" : "-"} ${Math.abs(b * c)} = ${coefX}$.`,
           `Le coefficient du terme en $x$ vaut $${coefX}$.`
         ),
@@ -240,7 +249,7 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         explanation: exp(
           "$(u + v)^2 = u^2 + 2uv + v^2$.",
           "On identifie $u$ et $v$, puis on écrit les trois termes sans oublier le double produit.",
-          `Avec $u = ${a}x$ et $v = ${signe * b}$ : $u^2 = ${A}x^2$, $2uv = ${B}x$, $v^2 = ${C}$.`,
+          `Avec $u = ${monome(a)}$ et $v = ${signe * b}$ : $u^2 = ${monome(A, "x^2")}$, $2uv = ${B}x$, $v^2 = ${C}$.`,
           `Le développement est $${trinome(A, B, C)}$.`
         ),
         choiceDiagnostics: [
@@ -341,9 +350,20 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
     hint: "Cherche ce qui est présent dans TOUS les termes, nombre comme lettre.",
     tags: ["stmg", "maths", "algebre", "factorisation", "template"],
     generate: () => {
+      // ⛔ a et b premiers entre eux : avec k = 3, a = 2, b = −4, on attendait
+      // 3x(2x − 4) pour 6x² − 12x, qui n'est pas complètement factorisé (6x).
+      const premiersEntreEux = (x: number, y: number): boolean => {
+        let [u, v] = [Math.abs(x), Math.abs(y)];
+        while (v !== 0) [u, v] = [v, u % v];
+        return u === 1;
+      };
       const k = pick([2, 3, 4, 5, 6] as const);
-      const a = randomInt(1, 5);
-      const b = pick([-6, -5, -4, -3, -2, 2, 3, 4, 5, 6] as const);
+      let a: number;
+      let b: number;
+      do {
+        a = randomInt(1, 5);
+        b = pick([-6, -5, -4, -3, -2, 2, 3, 4, 5, 6] as const);
+      } while (!premiersEntreEux(a, b));
       return {
         text: `Factorise : $${trinome(k * a, k * b, 0)}$`,
         format: "qcm",
@@ -359,7 +379,7 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         explanation: exp(
           "Factoriser, c'est mettre en évidence un facteur présent dans tous les termes.",
           "On cherche le plus grand facteur commun aux coefficients, et la plus petite puissance de $x$ présente partout.",
-          `$${trinome(k * a, k * b, 0)} = ${k}x \\times ${a}x + ${k}x \\times (${b}) = ${k}x(${binome(a, b)})$.`,
+          `$${trinome(k * a, k * b, 0)} = ${k}x \\times ${a === 1 ? "" : a}x + ${k}x \\times ${b < 0 ? `(${b})` : b} = ${k}x(${binome(a, b)})$.`,
           `La forme factorisée est $${k}x(${binome(a, b)})$.`
         ),
         choiceDiagnostics: [
@@ -450,7 +470,8 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "algebre", "factorisation", "template"],
     generate: () => {
       const a = pick([1, 2, 3, 4, 5] as const);
-      const b = pick([1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const);
+      // ⛔ a et b premiers entre eux : (2x - 4)(2x + 4) n'est pas factorisé complètement.
+      const b = pick([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter((v) => pgcd(v, a) === 1));
       const A = a * a;
       const C = b * b;
       return {
@@ -461,14 +482,14 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
           `$(${binome(a, b)})^2$`,
           `$(${binome(A, -C)})(${binome(A, C)})$`,
           `$(${binome(a, -C)})(${binome(a, C)})$`,
-          `$${a}x(${binome(a, -C)})$`,
+          `$${monome(a)}(${binome(a, -C)})$`,
         ]),
         expected: [`$(${binome(a, -b)})(${binome(a, b)})$`],
         comparator: "mcq_exact",
         explanation: exp(
           "$u^2 - v^2 = (u - v)(u + v)$ : c'est la seule identité qui factorise une différence.",
           "On reconnaît les deux carrés, on identifie $u$ et $v$, puis on écrit le produit.",
-          `$${A}x^2 = (${a}x)^2$ et $${C} = ${b}^2$, donc $u = ${a}x$ et $v = ${b}$, ` +
+          `${a === 1 ? "$x^2$ est le carré de $x$" : `$${A}x^2 = (${a}x)^2$`} et $${C} = ${b}^2$, donc $u = ${monome(a)}$ et $v = ${b}$, ` +
             `d'où $(${binome(a, -b)})(${binome(a, b)})$.`,
           `La forme factorisée est $(${binome(a, -b)})(${binome(a, b)})$.`
         ),
@@ -499,8 +520,10 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
     hint: "$a^2 - b^2$ se factorise. $a^2 + b^2$, non : cherche le signe.",
     tags: ["stmg", "maths", "algebre", "piege", "template"],
     generate: () => {
-      const [n1, n2, n3] = shuffle([2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3);
+      const [n1, n3] = shuffle([2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 2);
       const m = pick([2, 3, 5] as const);
+      // ⛔ n2 premier avec m : le corrigé n'écrit pas (2x - 4)(2x + 4) comme forme finale.
+      const n2 = pick([2, 3, 4, 5, 6, 7, 8, 9].filter((v) => pgcd(v, m) === 1 && v !== n1 && v !== n3));
       const p = pick([4, 6, 7] as const);
       const bonne = `$x^2 + ${n3 * n3}$`;
       return {
@@ -529,6 +552,58 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
           {
             choice: `$${p * p}x^2 - 1$`,
             cause: `$1$ est un carré, celui de $1$ : $${p * p}x^2 - 1$ se factorise bien`,
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 3 — l'AUTRE identité. Le libellé dit « une identité remarquable » : les
+    // deux premiers gabarits ne travaillaient que la différence de deux carrés.
+    kind: "template",
+    id: "stmg_alg_facteur_identite_tpl_carre",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_developper_factoriser",
+    microId: "auto_alg_factoriser_identite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Trois termes dont deux carrés : pense à $u^2 + 2uv + v^2 = (u + v)^2$ ou à $u^2 - 2uv + v^2 = (u - v)^2$.",
+    tags: ["stmg", "maths", "algebre", "factorisation", "template"],
+    generate: () => {
+      // ⛔ a et b premiers entre eux : (2x + 2)² n'est pas factorisé complètement.
+      const a = pick([1, 1, 2, 3] as const);
+      const b = pick([1, 2, 3, 4, 5, 6].filter((v) => pgcd(v, a) === 1));
+      const s = pick([1, -1] as const);
+      const bonne = `$(${binome(a, s * b)})^2$`;
+      const u = monome(a);
+      return {
+        text: `Factorise : $${trinome(a * a, s * 2 * a * b, b * b)}$`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `$(${binome(a, -s * b)})^2$`,
+          `$(${binome(a, -b)})(${binome(a, b)})$`,
+          `$(${binome(a, s * 2 * b)})^2$`,
+          `$(${binome(a * a, s * b * b)})^2$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `$u^2 ${s > 0 ? "+" : "-"} 2uv + v^2 = (u ${s > 0 ? "+" : "-"} v)^2$.`,
+          "On repère les deux carrés, on identifie $u$ et $v$, puis on vérifie le terme du milieu.",
+          `$u = ${u}$ et $v = ${b}$. Le terme du milieu vaut bien $2 \\times ${u} \\times ${b} = ${monome(2 * a * b)}$, ` +
+            `${s > 0 ? "précédé d'un plus" : "précédé d'un moins"}.`,
+          `La forme factorisée est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$(${binome(a, -s * b)})^2$`,
+            cause: "s'est trompé de signe : c'est le signe du terme du milieu qui décide",
+          },
+          {
+            choice: `$(${binome(a, -b)})(${binome(a, b)})$`,
+            cause: "a utilisé la différence de deux carrés, alors que l'expression a trois termes",
           },
         ],
       };
@@ -627,7 +702,7 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
           "Mettre en équation, c'est écrire la même grandeur de deux façons. Ici, le coût total au bout de $x$ mois vaut « inscription $+$ mensualité $\\times$ nombre de mois » pour chacune des offres.",
           "On écrit les deux coûts, on pose l'égalité, puis on regroupe les $x$ d'un côté et les nombres de l'autre.",
           `« ${offres.a} » : $${f} + ${p}x$. « ${offres.b} » : $${g} + ${q}x$. ` +
-            `L'égalité $${f} + ${p}x = ${g} + ${q}x$ donne $${p - q}x = ${g - f}$, donc $x = \\dfrac{${g - f}}{${p - q}} = ${x}$.`,
+            `L'égalité $${f} + ${p}x = ${g} + ${q}x$ donne ${p - q === 1 ? `$x = ${x}$.` : `$${p - q}x = ${g - f}$, donc $x = \\dfrac{${g - f}}{${p - q}} = ${x}$.`}`,
           `Les deux offres coûtent la même chose au bout de $${x}$ mois — ` +
             `avant, « ${offres.a} » est plus avantageuse ; après, c'est « ${offres.b} ».`
         ),
@@ -767,7 +842,7 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: makeChoices(`$x = ${r}$ ou $x = -${r}$`, [
           `$x = ${r}$`,
-          `$x = ${carre / 2}$`,
+          `$x = ${fr(carre / 2)}$`,
           `$x = -${r}$`,
           `$x = ${carre}$ ou $x = -${carre}$`,
           `pas de solution`,
@@ -786,7 +861,7 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
             cause: "a oublié la solution négative",
           },
           {
-            choice: `$x = ${carre / 2}$`,
+            choice: `$x = ${fr(carre / 2)}$`,
             cause: "a divisé par 2 au lieu de chercher une racine carrée",
           },
         ],
@@ -1152,8 +1227,9 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         explanation: exp(
           "Le signe d'un produit est le produit des signes de ses facteurs. Un facteur $(x - r)$ est négatif avant $r$ et positif après.",
           "On place $x$ entre les deux racines, on donne son signe à chaque facteur, puis on multiplie — sans oublier le coefficient devant.",
-          `Pour $${r1} < x < ${r2}$ : $x ${r1 >= 0 ? "-" : "+"} ${Math.abs(r1)}$ est POSITIF (on a dépassé $${r1}$) ` +
-            `et $x ${r2 >= 0 ? "-" : "+"} ${Math.abs(r2)}$ est NÉGATIF (on n'a pas atteint $${r2}$). ` +
+          // `facteur()` écrit « x » et non « x - 0 » quand la racine est nulle.
+          `Pour $${r1} < x < ${r2}$ : $${facteur(r1).replace(/[()]/g, "")}$ est POSITIF (on a dépassé $${r1}$) ` +
+            `et $${facteur(r2).replace(/[()]/g, "")}$ est NÉGATIF (on n'a pas atteint $${r2}$). ` +
             `Leur produit est donc négatif, et multiplié par $${a}$ il devient ${bonne}. ` +
             `Vérification en $x = ${fr(milieu)}$ : $f(${fr(milieu)}) = ${fr(a * (milieu - r1) * (milieu - r2))}$.`,
           `Entre les racines, $f(x)$ est ${bonne}.`
@@ -1210,8 +1286,8 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
           caption: "Signe de chaque facteur sur les trois intervalles",
           headers: ["x", `]-∞ ; ${r1}[`, `]${r1} ; ${r2}[`, `]${r2} ; +∞[`],
           rows: [
-            { label: `x ${r1 >= 0 ? "-" : "+"} ${Math.abs(r1)}`, values: ["−", "+", "+"] },
-            { label: `x ${r2 >= 0 ? "-" : "+"} ${Math.abs(r2)}`, values: ["−", "−", "+"] },
+            { label: facteur(r1).replace(/[()]/g, ""), values: ["−", "+", "+"] },
+            { label: facteur(r2).replace(/[()]/g, ""), values: ["−", "−", "+"] },
             { label: "P(x)", values: ["?", "?", "?"] },
           ],
           highlight: { col: zone === "avant" ? 1 : zone === "entre" ? 2 : 3 },
@@ -1338,7 +1414,7 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         explanation: exp(
           "Un signe moins devant une parenthèse change le signe de chacun des termes de cette parenthèse.",
           "On distribue le moins, puis on regroupe les termes semblables.",
-          `$(${binome(a, b)}) - (${binome(c, d)}) = ${binome(a, b)} ${-c >= 0 ? "+" : "-"} ${Math.abs(c)}x ${-d >= 0 ? "+" : "-"} ${Math.abs(d)} = ${binome(A, B)}$.`,
+          `$(${binome(a, b)}) - (${binome(c, d)}) = ${binome(a, b)} - ${monome(c)} ${-d >= 0 ? "+" : "-"} ${Math.abs(d)} = ${binome(A, B)}$.`,
           `L'expression réduite est $${binome(A, B)}$.`
         ),
         choiceDiagnostics: [
@@ -1380,11 +1456,11 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
       const bonne = `le $-$ devant la parenthèse change AUSSI le signe de $${d}$, qui devient $+${-d}$`;
       return {
         text:
-          `Un élève écrit : « $(${binome(a, b)}) - (${binome(c, d)}) = ${binome(a, b)} - ${c}x ${d >= 0 ? "+" : "-"} ${Math.abs(d)} = ${binome(justeA, fauxB)}$ ». ` +
+          `Un élève écrit : « $(${binome(a, b)}) - (${binome(c, d)}) = ${binome(a, b)} - ${monome(c)} ${d >= 0 ? "+" : "-"} ${Math.abs(d)} = ${binome(justeA, fauxB)}$ ». ` +
           `Où est l'erreur ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
-          `il ne fallait pas changer le signe de $${c}x$`,
+          `il ne fallait pas changer le signe de $${monome(c)}$`,
           "il fallait additionner les deux parenthèses au lieu de les soustraire",
           "il n'y a pas d'erreur : le calcul est juste",
         ]),
@@ -1393,20 +1469,94 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         explanation: exp(
           "Soustraire une parenthèse, c'est ajouter l'opposé de TOUT son contenu : chacun de ses termes change de signe, sans exception.",
           "On réécrit la soustraction en distribuant le moins sur chaque terme, puis on regroupe les termes semblables.",
-          `$-(${binome(c, d)}) = -${c}x + ${-d}$, et non $-${c}x ${d >= 0 ? "+" : "-"} ${Math.abs(d)}$. ` +
+          `$-(${binome(c, d)}) = -${monome(c)} + ${-d}$, et non $-${monome(c)} ${d >= 0 ? "+" : "-"} ${Math.abs(d)}$. ` +
             `Le calcul juste donne donc $${binome(justeA, justeB)}$, et non $${binome(justeA, fauxB)}$ : ` +
             `l'écart vaut $${justeB - fauxB}$, soit deux fois $${Math.abs(d)}$.`,
           `L'erreur porte sur le second terme de la parenthèse : le résultat correct est $${binome(justeA, justeB)}$.`
         ),
         choiceDiagnostics: [
           {
-            choice: `il ne fallait pas changer le signe de $${c}x$`,
+            choice: `il ne fallait pas changer le signe de $${monome(c)}$`,
             cause: "ce terme-là est bien traité : c'est le suivant qui a gardé son signe",
           },
           {
             choice: "il n'y a pas d'erreur : le calcul est juste",
             cause: `le premier terme a bien changé de signe, le second non — d'où un écart de $${justeB - fauxB}$`,
           },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 3 — les FRACTIONS. Le libellé dit « (signes, fractions) » : les deux
+    // premiers gabarits ne travaillaient que les signes. Une lettre sur un nombre,
+    // avec le même dénominateur, ou un dénominateur multiple de l'autre.
+    kind: "template",
+    id: "stmg_alg_litteral_tpl_fractions",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_formules",
+    microId: "auto_alg_litteral",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Comme avec des nombres : il faut le même dénominateur, puis on ajoute ou on retranche les numérateurs.",
+    tags: ["stmg", "maths", "algebre", "fractions", "template"],
+    generate: () => {
+      let a = 1;
+      let b = 1;
+      let d = 2;
+      let k = 1;
+      let s = 1;
+      let n = 1;
+      let D = 2;
+      // ⛔ Fractions de l'énoncé et résultat irréductibles, résultat positif : sinon
+      // l'énoncé écrit « 5x/5 » et la bonne réponse est encore à simplifier.
+      do {
+        k = pick([1, 1, 2, 3]);
+        d = pick([2, 3, 4, 5, 6]);
+        a = randomInt(1, 7);
+        b = randomInt(1, 7);
+        s = pick([1, -1]);
+        D = d * k;
+        n = a * k + s * b;
+      } while (n <= 0 || pgcd(n, D) !== 1 || pgcd(a, d) !== 1 || pgcd(b, D) !== 1 || (k === 1 && a === b));
+      const fx = (num: number, den: number) => `\\dfrac{${monome(num)}}{${den}}`;
+      const signe = s > 0 ? "+" : "-";
+      const expression = `${fx(a, d)} ${signe} ${fx(b, D)}`;
+      const bonne = `$${fx(n, D)}$`;
+      const nSigneFaux = a * k - s * b;
+      const sansDenominateurCommun = a + s * b;
+      return {
+        text: `Réduis l'expression : $${expression}$`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          ...(sansDenominateurCommun > 0 ? [`$${fx(sansDenominateurCommun, d + D)}$`] : []),
+          ...(nSigneFaux > 0 ? [`$${fx(nSigneFaux, D)}$`] : []),
+          `$\\dfrac{${monome(n, "x^2")}}{${D}}$`,
+          `$${fx(n, D * d)}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On ajoute ou on retranche deux fractions quand elles ont le même dénominateur : on garde ce dénominateur et on opère sur les numérateurs.",
+          k === 1
+            ? "Les dénominateurs sont déjà égaux : on opère directement sur les numérateurs."
+            : `On écrit d'abord la première fraction avec le dénominateur $${D}$.`,
+          k === 1
+            ? `$${expression} = \\dfrac{${monome(a)} ${signe} ${monome(b)}}{${D}} = ${fx(n, D)}$.`
+            : `$${fx(a, d)} = ${fx(a * k, D)}$, donc $${expression} = \\dfrac{${monome(a * k)} ${signe} ${monome(b)}}{${D}} = ${fx(n, D)}$.`,
+          `L'expression réduite est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          ...(sansDenominateurCommun > 0
+            ? [
+                {
+                  choice: `$${fx(sansDenominateurCommun, d + D)}$`,
+                  cause: "a opéré sur les numérateurs et sur les dénominateurs séparément",
+                },
+              ]
+            : []),
         ],
       };
     },
@@ -1538,6 +1688,53 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 3 — une INÉGALITÉ. Le libellé dit « une égalité ou une inégalité » : les
+    // deux premiers gabarits n'isolaient que dans une égalité. Toutes les lettres
+    // sont positives, donc le sens ne change jamais : c'est ce que l'on fait dire.
+    kind: "template",
+    id: "stmg_alg_isoler_tpl_inegalite",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_formules",
+    microId: "auto_alg_isoler_variable",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On isole comme dans une égalité. Ajouter, retrancher, ou diviser par un nombre positif ne change pas le sens de l'inégalité.",
+    tags: ["stmg", "maths", "algebre", "formules", "inegalite", "template"],
+    generate: () => {
+      const cas = pick([
+        { formule: "R - C \\geqslant B", isoler: "R", bonne: "R \\geqslant B + C", faux: ["R \\leqslant B + C", "R \\geqslant B - C", "R \\geqslant C - B"], geste: "on ajoute $C$ aux deux membres" },
+        { formule: "p \\times q \\geqslant C", isoler: "q", bonne: "q \\geqslant \\dfrac{C}{p}", faux: ["q \\leqslant \\dfrac{C}{p}", "q \\geqslant C \\times p", "q \\geqslant C - p"], geste: "on divise les deux membres par $p$, qui est positif" },
+        { formule: "p \\times q \\geqslant C", isoler: "p", bonne: "p \\geqslant \\dfrac{C}{q}", faux: ["p \\leqslant \\dfrac{C}{q}", "p \\geqslant C \\times q", "p \\geqslant \\dfrac{q}{C}"], geste: "on divise les deux membres par $q$, qui est positif" },
+        { formule: "v \\times t \\leqslant d", isoler: "t", bonne: "t \\leqslant \\dfrac{d}{v}", faux: ["t \\geqslant \\dfrac{d}{v}", "t \\leqslant d \\times v", "t \\leqslant \\dfrac{v}{d}"], geste: "on divise les deux membres par $v$, qui est positif" },
+        { formule: "a + b \\leqslant M", isoler: "a", bonne: "a \\leqslant M - b", faux: ["a \\geqslant M - b", "a \\leqslant M + b", "a \\leqslant b - M"], geste: "on retranche $b$ aux deux membres" },
+        { formule: "f + u \\times x \\leqslant C", isoler: "x", bonne: "x \\leqslant \\dfrac{C - f}{u}", faux: ["x \\geqslant \\dfrac{C - f}{u}", "x \\leqslant \\dfrac{C}{u} - f", "x \\leqslant \\dfrac{C - u}{f}"], geste: "on retranche $f$, puis on divise par $u$, qui est positif" },
+        { formule: "2(L + l) \\leqslant P", isoler: "L", bonne: "L \\leqslant \\dfrac{P}{2} - l", faux: ["L \\geqslant \\dfrac{P}{2} - l", "L \\leqslant P - 2l", "L \\leqslant 2P - l"], geste: "on divise par $2$, puis on retranche $l$" },
+        { formule: "\\dfrac{A}{B} \\geqslant T", isoler: "A", bonne: "A \\geqslant T \\times B", faux: ["A \\leqslant T \\times B", "A \\geqslant \\dfrac{T}{B}", "A \\geqslant T + B"], geste: "on multiplie les deux membres par $B$, qui est positif" },
+      ] as const);
+      return {
+        text: `Toutes les lettres sont positives. Dans l'inégalité $${cas.formule}$, isole $${cas.isoler}$.`,
+        format: "qcm",
+        choices: makeChoices(`$${cas.bonne}$`, cas.faux.map((f) => `$${f}$`)),
+        expected: [`$${cas.bonne}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On isole une lettre dans une inégalité comme dans une égalité. Le sens ne change que si l'on multiplie ou divise par un nombre négatif.",
+          "On défait les opérations une à une, en appliquant la même aux deux membres.",
+          `Ici, ${cas.geste} : le sens reste le même.`,
+          `On obtient $${cas.bonne}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${cas.faux[0]}$`,
+            cause: "a changé le sens de l'inégalité alors que rien de négatif n'intervient",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════ auto_alg_application_formule ═══════════ */
 
   {
@@ -1567,7 +1764,9 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
             "Une application numérique consiste à remplacer chaque lettre de la formule par la valeur donnée.",
             "On substitue, puis on effectue le calcul dans l'ordre des priorités.",
             `$B = ${r} - ${c} = ${fr(r - c)}$.`,
-            `Le bénéfice est de $${fr(r - c)}$ €.`
+            r < c
+              ? `Le bénéfice est de $${fr(r - c)}$ € : ce mois-ci, c'est une perte de $${fr(c - r)}$ €.`
+              : `Le bénéfice est de $${fr(r - c)}$ €.`
           ),
         };
       }

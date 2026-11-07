@@ -103,17 +103,19 @@ const ENTREPRISES = [
   "le magasin Cap Sud",
   "la société Rivage",
   "l'atelier Bertin",
-  "la librairie Le Margouillat",
+  "la librairie Le Marque-Page",
   "le garage Delmas",
 ] as const;
 
 /** Phrases où un pourcentage dit tantôt une PART, tantôt une ÉVOLUTION.
  *  Rangées ici — et non dans un générateur — parce que deux items s'en
- *  servent : l'un fait juger une phrase, l'autre fait trouver l'intruse. */
+ *  servent : l'un fait juger une phrase, l'autre fait trouver l'intruse.
+ *  ⛔ Ni TVA, ni rendement, ni taux de marge : ces taux décrivent une évolution ou
+ *  se rapportent à un coût, ce ne sont pas des parts d'un tout. */
 const PHRASES_POURCENTAGE = [
   { phrase: "$32\\,\\%$ des clients de l'enseigne ont moins de 30 ans", reponse: "une proportion" },
   { phrase: "les ventes ont progressé de $32\\,\\%$ en un an", reponse: "une évolution" },
-  { phrase: "le taux de TVA appliqué est de $20\\,\\%$", reponse: "une proportion" },
+  { phrase: "$20\\,\\%$ des salariés de l'entreprise travaillent à temps partiel", reponse: "une proportion" },
   { phrase: "le prix du carburant a baissé de $12\\,\\%$ depuis janvier", reponse: "une évolution" },
   { phrase: "la part de marché de l'entreprise est de $18\\,\\%$", reponse: "une proportion" },
   { phrase: "le nombre d'adhérents a augmenté de $18\\,\\%$", reponse: "une évolution" },
@@ -121,12 +123,24 @@ const PHRASES_POURCENTAGE = [
   { phrase: "le chiffre d'affaires a chuté de $45\\,\\%$ au dernier trimestre", reponse: "une évolution" },
   { phrase: "$62\\,\\%$ des commandes sont livrées en moins de 48 heures", reponse: "une proportion" },
   { phrase: "les délais de livraison se sont allongés de $62\\,\\%$ en six mois", reponse: "une évolution" },
-  { phrase: "le taux de marge de l'entreprise s'élève à $28\\,\\%$", reponse: "une proportion" },
+  { phrase: "$28\\,\\%$ du chiffre d'affaires provient de la vente en ligne", reponse: "une proportion" },
   { phrase: "la marge a progressé de $28\\,\\%$ par rapport à l'an dernier", reponse: "une évolution" },
   { phrase: "$7\\,\\%$ des articles du stock sont invendus", reponse: "une proportion" },
   { phrase: "le stock d'invendus a fondu de $7\\,\\%$ ce mois-ci", reponse: "une évolution" },
-  { phrase: "le taux de rendement du placement est de $3\\,\\%$", reponse: "une proportion" },
+  { phrase: "$3\\,\\%$ des colis expédiés sont retournés par les clients", reponse: "une proportion" },
   { phrase: "le nombre de réclamations a reculé de $3\\,\\%$ en un an", reponse: "une évolution" },
+  { phrase: "$40\\,\\%$ des adhérents du club de sport ont moins de 25 ans", reponse: "une proportion" },
+  { phrase: "le nombre d'inscrits au club de sport a bondi de $40\\,\\%$ en deux ans", reponse: "une évolution" },
+  { phrase: "$15\\,\\%$ des patients du cabinet médical viennent pour un vaccin", reponse: "une proportion" },
+  { phrase: "le nombre de consultations a augmenté de $15\\,\\%$ depuis l'an dernier", reponse: "une évolution" },
+  { phrase: "$9\\,\\%$ de l'électricité consommée dans la ville vient du solaire", reponse: "une proportion" },
+  { phrase: "la consommation d'électricité de la ville a reculé de $9\\,\\%$ en cinq ans", reponse: "une évolution" },
+  { phrase: "$70\\,\\%$ des écoutes du morceau se font sur téléphone", reponse: "une proportion" },
+  { phrase: "le nombre d'écoutes du morceau a grimpé de $70\\,\\%$ en une semaine", reponse: "une évolution" },
+  { phrase: "$24\\,\\%$ des déchets de l'usine sont recyclés", reponse: "une proportion" },
+  { phrase: "le volume de déchets de l'usine a diminué de $24\\,\\%$ depuis 2020", reponse: "une évolution" },
+  { phrase: "$12\\,\\%$ des élèves du lycée viennent à vélo", reponse: "une proportion" },
+  { phrase: "le nombre d'élèves du lycée a augmenté de $12\\,\\%$ par rapport à l'an dernier", reponse: "une évolution" },
 ] as const;
 
 const GRANDEURS = [
@@ -1237,7 +1251,8 @@ const anciens: TutorBankItemV4[] = [
       return {
         text: `Dans la phrase suivante, le pourcentage exprime-t-il une proportion ou une évolution ?\n\n« ${cas.phrase} »`,
         format: "qcm",
-        choices: shuffle(["une proportion", "une évolution"]),
+        // ⛔ Trois choix au moins, même si la réponse est toujours l'une des deux premières.
+        choices: shuffle(["une proportion", "une évolution", "ni l'une ni l'autre"]),
         expected: [cas.reponse],
         comparator: "mcq_exact",
         explanation: exp(
@@ -1618,42 +1633,6 @@ const anciens: TutorBankItemV4[] = [
     },
   },
 
-  {
-    kind: "template",
-    id: "stmg_evo_compensation_open_1",
-    niveau: "stmg",
-    matiere: "maths",
-    notionId: "auto_evo_enchainees",
-    microId: "auto_evo_piege_compensation",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Pense à ce sur quoi porte la seconde évolution : ce n'est plus le prix de départ.",
-    tags: ["stmg", "maths", "evolutions", "open", "template"],
-    generate: () => {
-      const t = pick([10, 20, 25, 50] as const);
-      const contexte = pick([
-        "un commerçant qui solde puis remonte ses prix",
-        "un salaire baissé en période de crise puis revalorisé",
-        "un loyer diminué puis réaugmenté",
-        "le nombre d'adhérents d'un club qui chute puis remonte",
-      ] as const);
-      return {
-        text:
-          `On considère ${contexte} : une baisse de $${t}\\,\\%$, suivie d'une hausse de $${t}\\,\\%$. ` +
-          `Explique pourquoi on ne revient PAS à la valeur de départ.`,
-        format: "open",
-        expected: ["multiplient", "produit", "coefficient", "plus petite", "valeur plus petite", "pas la meme base", "pas la même base"],
-        comparator: "contains_keyword",
-        explanation: exp(
-          "Les taux d'évolution ne s'additionnent pas : ce sont les coefficients multiplicateurs qui se composent.",
-          "On observe surtout que la seconde évolution ne porte pas sur la même valeur que la première.",
-          `La hausse de $${t}\\,\\%$ s'applique à une valeur DÉJÀ diminuée : elle rend moins que ce que la baisse avait retiré. Le coefficient global vaut $${fr((1 - t / 100) * (1 + t / 100))}$, donc strictement moins que $1$.`,
-          "On ne revient pas à la valeur de départ parce que les deux pourcentages ne portent pas sur la même base."
-        ),
-      };
-    },
-  },
-
   /* ═══════════════════════ auto_indice_interpreter ═══════════════════════ */
 
   {
@@ -1686,15 +1665,16 @@ const anciens: TutorBankItemV4[] = [
           highlight: { col: 4 },
         } satisfies CanvasFigure,
         format: "qcm",
+        // ⛔ Chaque choix porte son sujet : la question n'en donne pas.
         choices: makeChoices(
-          `${t > 0 ? "augmenté" : "diminué"} de $${Math.abs(t)}\\,\\%$ depuis ${annee}`,
+          `le chiffre d'affaires a ${t > 0 ? "augmenté" : "diminué"} de $${Math.abs(t)}\\,\\%$ depuis ${annee}`,
           [
-            `${t > 0 ? "diminué" : "augmenté"} de $${Math.abs(t)}\\,\\%$ depuis ${annee}`,
-            `${t > 0 ? "augmenté" : "diminué"} de $${indice}\\,\\%$ depuis ${annee}`,
-            `été multiplié par $${indice}$ depuis ${annee}`,
+            `le chiffre d'affaires a ${t > 0 ? "diminué" : "augmenté"} de $${Math.abs(t)}\\,\\%$ depuis ${annee}`,
+            `le chiffre d'affaires a ${t > 0 ? "augmenté" : "diminué"} de $${indice}\\,\\%$ depuis ${annee}`,
+            `le chiffre d'affaires a été multiplié par $${indice}$ depuis ${annee}`,
           ]
         ),
-        expected: [`${t > 0 ? "augmenté" : "diminué"} de $${Math.abs(t)}\\,\\%$ depuis ${annee}`],
+        expected: [`le chiffre d'affaires a ${t > 0 ? "augmenté" : "diminué"} de $${Math.abs(t)}\\,\\%$ depuis ${annee}`],
         comparator: "mcq_exact",
         explanation: exp(
           "Un indice de base $100$ ramène l'année de référence à $100$ : l'écart à $100$ se lit directement en pourcentage.",
@@ -1704,7 +1684,7 @@ const anciens: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `${t > 0 ? "augmenté" : "diminué"} de $${indice}\\,\\%$ depuis ${annee}`,
+            choice: `le chiffre d'affaires a ${t > 0 ? "augmenté" : "diminué"} de $${indice}\\,\\%$ depuis ${annee}`,
             cause: "a lu l'indice comme un pourcentage d'évolution, sans le comparer à 100",
           },
         ],
@@ -1976,42 +1956,20 @@ const anciens: TutorBankItemV4[] = [
     },
   },
 
-  {
-    kind: "template",
-    id: "stmg_indice_comparer_open_1",
-    niveau: "stmg",
-    matiere: "maths",
-    notionId: "auto_indice",
-    microId: "auto_indice_comparer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Demande-toi ce que la mise en base $100$ fait disparaître.",
-    tags: ["stmg", "maths", "indices", "open", "template"],
-    generate: () => {
-      const paire = pick([
-        "le chiffre d'affaires d'une entreprise, en millions d'euros, et son nombre de salariés",
-        "le prix du carburant, en euros par litre, et le nombre de véhicules vendus",
-        "la production d'une usine, en tonnes, et sa consommation d'électricité, en MWh",
-        "le nombre d'abonnés d'un service et son chiffre d'affaires, en milliers d'euros",
-      ] as const);
-      return {
-        text:
-          `On veut comparer l'évolution de deux grandeurs qui n'ont pas la même unité : ${paire}. ` +
-          `Explique pourquoi on les ramène en base $100$ la même année.`,
-        format: "open",
-        expected: ["comparer", "meme base", "même base", "unite", "unité", "evolution relative", "évolution relative", "pourcentage"],
-        comparator: "contains_keyword",
-        explanation: exp(
-          "Un indice de base $100$ exprime chaque valeur en pourcentage de la valeur de référence.",
-          "On observe que l'unité disparaît : il ne reste qu'une évolution relative, comparable d'une série à l'autre.",
-          "Deux grandeurs mesurées en euros et en tonnes ne se comparent pas ; leurs indices, eux, se lisent tous les deux comme des pourcentages d'une même situation de départ.",
-          "On les ramène en base $100$ pour comparer leurs ÉVOLUTIONS, indépendamment des unités et des ordres de grandeur."
-        ),
-      };
-    },
-  },
 ];
 
 // 28/10 : les micros de proportions et d'évolutions sont renforcées (générateurs
 // à nombreuses tournures) ; leurs anciens gabarits et leurs « open » sont retirés.
-export const proportionsEvolutionsBank: TutorBankItemV4[] = fusionnerRenfort(anciens, renfortStmg);
+// ⛔ 05/11 : sauf ceux-ci, qui posent un geste que le renfort n'a pas : le geste simple de
+// valeur initiale, TTC → HT, le calcul d'un indice, le taux entre deux indices quelconques.
+const GABARITS_GARDES = [
+  "stmg_evo_initiale_tpl_1",
+  "stmg_evo_initiale_tpl_2",
+  "stmg_evo_initiale_tpl_apres_hausse",
+  "stmg_indice_interpreter_tpl_1",
+  "stmg_indice_interpreter_tpl_2",
+  "stmg_indice_calculer_tpl_1",
+  "stmg_indice_calculer_tpl_2",
+  "stmg_indice_vers_taux_tpl_1",
+];
+export const proportionsEvolutionsBank: TutorBankItemV4[] = fusionnerRenfort(anciens, renfortStmg, GABARITS_GARDES);

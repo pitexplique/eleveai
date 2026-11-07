@@ -50,6 +50,10 @@ function fr(n: number): string {
   return String(arrondi).replace(".", ",");
 }
 
+/**
+ * Un montant arrondi au centime, SANS son unité : il sert aussi dans les tableaux,
+ * dont le titre porte « (€) » ou « (k€) ». ⛔ Dans une phrase, écrire `$${eur(x)}$ €`.
+ */
 function eur(n: number): string {
   return fr(Math.round(n * 100) / 100);
 }
@@ -329,23 +333,36 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "suites", "template", "short"],
     generate: () => {
       const grandeur = pick(GRANDEURS_GEO);
-      const u0 = pick([100, 200, 400, 800, 1000] as const);
-      const q = pick([1.5, 2, 3, 0.5] as const);
-      const n = randomInt(3, 5);
-      const valeur = Math.round(u0 * Math.pow(q, n));
+      // ⛔ Seules les combinaisons où la valeur affichée est EXACTE : arrondie
+      // (100 × 0,5⁵ = 3,125 affiché 3), la division ne redonnait pas u0, et le
+      // corrigé écrivait une égalité fausse. qⁿ doit aussi s'écrire en entier
+      // dans le corrigé (au plus 4 décimales).
+      const combinaisons: { u0: number; q: number; n: number }[] = [];
+      for (const u of [100, 200, 400, 800, 1000]) {
+        for (const r of [1.5, 2, 3, 0.5]) {
+          for (const e of [3, 4, 5]) {
+            const puissance = Math.pow(r, e);
+            if (Number.isInteger(u * puissance) && Number.isInteger(puissance * 10000)) {
+              combinaisons.push({ u0: u, q: r, n: e });
+            }
+          }
+        }
+      }
+      const { u0, q, n } = pick(combinaisons);
+      const valeur = u0 * Math.pow(q, n);
       return {
         text:
           `${grandeur.sujet.charAt(0).toUpperCase()}${grandeur.sujet.slice(1)} suit une suite géométrique ` +
-          `de raison $${fr(q)}$. Au bout de $${n}$ ans, il vaut $${valeur}$ ${grandeur.unite}. ` +
-          `Quelle était sa valeur au départ ?`,
+          `de raison $${fr(q)}$. Au bout de $${n}$ ans, on relève $${valeur}$ ${grandeur.unite}. ` +
+          `Quelle était la valeur au départ ?`,
         format: "short",
         expected: [fr(u0)],
         comparator: "number_equal",
         explanation: exp(
           "Le terme général d'une suite géométrique s'écrit $u(n) = u_0 \\times q^n$. Cette égalité se lit dans les deux sens : elle donne $u(n)$ à partir de $u_0$, et $u_0$ à partir de $u(n)$.",
           "On divise la valeur connue par la raison élevée à la puissance du rang.",
-          `$u_0 = \\dfrac{${valeur}}{${fr(q)}^{${n}}} = \\dfrac{${valeur}}{${fr(Math.round(Math.pow(q, n) * 10000) / 10000)}} = ${fr(u0)}$. ` +
-            `⚠️ Diviser par $${fr(q)} \\times ${n}$ au lieu de $${fr(q)}^{${n}}$ donnerait ` +
+          `$u_0 = \\dfrac{${valeur}}{${fr(q)}^{${n}}} = \\dfrac{${valeur}}{${fr(Math.pow(q, n))}} = ${fr(u0)}$. ` +
+            `⚠️ Diviser par $${fr(q)} \\times ${n}$ au lieu de $${fr(q)}^{${n}}$ donnerait environ ` +
             `$${fr(Math.round((valeur / (q * n)) * 100) / 100)}$ : une raison géométrique se compose par PUISSANCES, pas par produits.`,
           `La valeur de départ était $${fr(u0)}$ ${grandeur.unite}.`
         ),
@@ -380,10 +397,16 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
         b = a * q;
         c = b * q;
       } else {
-        a = randomInt(2, 9);
-        b = a + randomInt(3, 8);
-        c = b + randomInt(9, 16); // ni même différence, ni même quotient
+        // Les différences ne sont jamais égales (b - a ≤ 8 < 9 ≤ c - b), mais les
+        // quotients peuvent l'être : 2, 6, 18 ou 5, 10, 20 sont géométriques.
+        // On retire donc les cas où b × b = a × c.
+        do {
+          a = randomInt(2, 9);
+          b = a + randomInt(3, 8);
+          c = b + randomInt(9, 16);
+        } while (b * b === a * c);
       }
+      const signeQuotient = (num: number, den: number) => ((num * 1000) % den === 0 ? "=" : "\\approx");
       const bonne =
         nature === "arithmetique"
           ? "consécutifs d'une suite arithmétique"
@@ -405,8 +428,8 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
           "Trois nombres sont consécutifs d'une suite arithmétique si $b - a = c - b$, et d'une suite géométrique si $\\dfrac{b}{a} = \\dfrac{c}{b}$.",
           "On teste les deux conditions, dans cet ordre.",
           `Différences : $${b} - ${a} = ${b - a}$ et $${c} - ${b} = ${c - b}$. ` +
-            `Quotients : $\\dfrac{${b}}{${a}} = ${fr(Math.round((b / a) * 1000) / 1000)}$ et ` +
-            `$\\dfrac{${c}}{${b}} = ${fr(Math.round((c / b) * 1000) / 1000)}$.`,
+            `Quotients : $\\dfrac{${b}}{${a}} ${signeQuotient(b, a)} ${fr(Math.round((b / a) * 1000) / 1000)}$ et ` +
+            `$\\dfrac{${c}}{${b}} ${signeQuotient(c, b)} ${fr(Math.round((c / b) * 1000) / 1000)}$.`,
           `Ces trois nombres sont ${bonne}.`
         ),
       };
@@ -734,7 +757,7 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
       const demiSomme = Math.round(((u0 + u2) / 2) * 100) / 100;
       return {
         text:
-          `Sur ${placement}, un capital passe de $${eur(u0)}$ à $${eur(u2)}$ en deux ans, ` +
+          `Sur ${placement}, un capital passe de $${eur(u0)}$ € à $${eur(u2)}$ € en deux ans, ` +
           `avec le MÊME pourcentage d'augmentation chaque année. ` +
           `Quel était le capital au bout d'un an, en euros ?`,
         format: "short",
@@ -744,10 +767,10 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
           "Quand le même pourcentage s'applique chaque année, les montants forment une suite GÉOMÉTRIQUE. Le terme du milieu est alors la moyenne géométrique des deux autres : $u_1 = \\sqrt{u_0 \\times u_2}$.",
           "On multiplie les deux montants connus et l'on prend la racine carrée — surtout pas la demi-somme, qui suppose une progression par ajouts égaux.",
           `$\\sqrt{${fr(u0)} \\times ${fr(u2)}} = \\sqrt{${fr(Math.round(u0 * u2 * 100) / 100)}} = ${fr(u1)}$ €. ` +
-            `Vérification : le coefficient annuel vaut $${fr(q)}$, appliqué deux fois il donne bien $${eur(u2)}$. ` +
-            `⚠️ La demi-somme donnerait $${eur(demiSomme)}$ — soit $${eur(Math.round((demiSomme - u1) * 100) / 100)}$ de trop : ` +
+            `Vérification : le coefficient annuel vaut $${fr(q)}$, appliqué deux fois il donne bien $${eur(u2)}$ €. ` +
+            `⚠️ La demi-somme donnerait $${eur(demiSomme)}$ € — soit $${eur(Math.round((demiSomme - u1) * 100) / 100)}$ € de trop : ` +
             `elle décrit une progression par ajouts égaux, pas par pourcentage.`,
-          `Le capital valait $${eur(u1)}$ au bout d'un an.`
+          `Le capital valait $${eur(u1)}$ € au bout d'un an.`
         ),
       };
     },
@@ -919,7 +942,11 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
           "Le nombre de termes d'une somme allant du rang $p$ au rang $n$ vaut $n - p + 1$. Le « $+1$ » vient de ce que les deux extrémités sont INCLUSES.",
           "On soustrait les deux rangs — cela donne le nombre de PAS — puis on ajoute $1$ pour compter le terme de départ.",
           `De $${depart}$ à $${dernier}$ : $${dernier} - ${depart} = ${dernier - depart}$ pas, donc $${dernier - depart} + 1 = ${nbTermes}$ termes. ` +
-            `⚠️ Répondre $${dernier - depart}$ est l'erreur classique${depart === 0 ? `, et répondre $${dernier}$ en est une autre : $u(0)$ compte pour un terme` : ""}. ` +
+            // ⛔ Avec un départ à 0, le nombre de pas ÉGALE le dernier rang : l'ancien
+            // texte disait « répondre 9 est une erreur, et répondre 9 en est une autre ».
+            (depart === 0
+              ? `⚠️ Répondre $${dernier}$ est l'erreur classique : c'est le nombre de pas, et $u(0)$ compte pour un terme. `
+              : `⚠️ Répondre $${dernier - depart}$ est l'erreur classique : c'est le nombre de pas. Répondre $${dernier + 1}$ reviendrait à compter $u(0)$, absent de cette somme. `) +
             `Dans la formule $\\text{nombre de termes} \\times \\dfrac{\\text{premier} + \\text{dernier}}{2}$, ` +
             `un terme oublié fausse tout le résultat sans que rien ne le signale.`,
           `Il y a $${nbTermes}$ termes.`
@@ -1110,12 +1137,12 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
       const bonne = `« Combien a-t-on versé AU TOTAL au bout de $${duree}$ ans ? »`;
       return {
         text:
-          `Sur ${placement}, on verse $${eur(montant)}$ au début de chaque année pendant $${duree}$ ans. ` +
+          `Sur ${placement}, on verse $${eur(montant)}$ € au début de chaque année pendant $${duree}$ ans. ` +
           `Laquelle de ces questions demande le calcul d'une SOMME de termes ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           `« Combien vaut le versement de la $${duree}$ᵉ année ? »`,
-          `« Au bout de combien d'années le versement annuel dépasse-t-il $${eur(montant * 2)}$ ? »`,
+          `« Au bout de combien d'années le versement annuel dépasse-t-il $${eur(montant * 2)}$ € ? »`,
           `« Quel est le taux d'évolution d'un versement à l'autre ? »`,
         ]),
         expected: [bonne],
@@ -1124,7 +1151,7 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
           "Un TERME répond à « combien à telle date » ; une SOMME répond à « combien en tout depuis le début ». Le mot qui les sépare est « au total », ou « cumulé ».",
           "On se demande si la réponse tient en une valeur relevée à une date, ou s'il faut additionner toutes les valeurs.",
           `« Au total au bout de $${duree}$ ans » cumule les $${duree}$ versements : c'est une somme, ` +
-            `qui vaut ici $${duree} \\times ${eur(montant)} = ${eur(montant * duree)}$ de versements. ` +
+            `qui vaut ici $${duree} \\times ${eur(montant)} = ${eur(montant * duree)}$ € de versements. ` +
             `Les trois autres questions portent sur UNE valeur : un versement précis, un rang de dépassement, un taux. ` +
             `⚠️ La valeur ACQUISE, elle, serait encore autre chose : la somme des versements PLUS les intérêts de chacun.`,
           `C'est la question qui demande le total versé.`
@@ -1215,8 +1242,8 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
       const gain = Math.round(acquise) - verse;
       return {
         text:
-          `Sur ${placement} rémunéré à $${t}\\,\\%$ par an, on verse $${eur(versement)}$ au début de chaque année ` +
-          `pendant $${n}$ ans. La valeur acquise à la fin vaut $${eur(Math.round(acquise))}$. ` +
+          `Sur ${placement} rémunéré à $${t}\\,\\%$ par an, on verse $${eur(versement)}$ € au début de chaque année ` +
+          `pendant $${n}$ ans. La valeur acquise à la fin vaut $${eur(Math.round(acquise))}$ €, à l'euro près. ` +
           `Combien les intérêts ont-ils rapporté, en euros ?`,
         format: "short",
         expected: [String(gain)],
@@ -1224,12 +1251,12 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
         explanation: exp(
           "La valeur acquise rassemble deux choses : l'argent qu'on a versé, et les intérêts que chaque versement a produits jusqu'à la fin. Le gain est donc la valeur acquise diminuée du total versé.",
           "On calcule d'abord le total versé — une simple multiplication —, puis on le retranche à la valeur acquise.",
-          `Total versé : $${n} \\times ${eur(versement)} = ${eur(verse)}$. ` +
-            `Valeur acquise : $${eur(Math.round(acquise))}$. ` +
-            `Gain : $${eur(Math.round(acquise))} - ${eur(verse)} = ${eur(gain)}$. ` +
+          `Total versé : $${n} \\times ${eur(versement)} = ${eur(verse)}$ €. ` +
+            `Valeur acquise : $${eur(Math.round(acquise))}$ €. ` +
+            `Gain : $${eur(Math.round(acquise))} - ${eur(verse)} = ${eur(gain)}$ €. ` +
             `Chaque versement n'a pas travaillé le même temps : le premier a produit des intérêts pendant $${n}$ ans, ` +
             `le dernier pendant un an seulement. C'est ce qui fait de la valeur acquise une SOMME, et non un simple produit.`,
-          `Les intérêts ont rapporté $${eur(gain)}$.`
+          `Les intérêts ont rapporté $${eur(gain)}$ €.`
         ),
       };
     },
@@ -1237,9 +1264,12 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
 
   /* ═══════════════ suiteT_somme_emprunt ═══════════════ */
   //
-  // Le remboursement par mensualités constantes est un CONTEXTE, pas un contenu
+  // Le remboursement par échéances constantes est un CONTEXTE, pas un contenu
   // nouveau : la demande mathématique reste « calculer une somme de termes
   // consécutifs », capacité explicitement attendue.
+  //
+  // ⛔ La micro s'intitule « emprunt à annuités constantes » : les deux gabarits
+  // tirent donc des annuités autant que des mensualités.
 
   {
     kind: "template",
@@ -1250,11 +1280,13 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     microId: "suiteT_somme_emprunt",
     difficulty: 3,
     theme: "neutral",
-    hint: "Le coût total est la somme de toutes les mensualités ; le coût du crédit est ce total moins le capital emprunté.",
+    hint: "Le total remboursé est la somme de toutes les échéances ; le coût du crédit est ce total moins le capital emprunté.",
     tags: ["stmg", "maths", "suites", "terminale", "gestion", "template", "short"],
     generate: () => {
       const capital = pick([6000, 8000, 9000, 12000, 15000] as const);
-      const mois = pick([24, 36, 48, 60] as const);
+      const annuel = Math.random() < 0.5;
+      const nom = annuel ? "annuités" : "mensualités";
+      const mois = annuel ? pick([4, 5, 6, 8] as const) : pick([24, 36, 48, 60] as const);
       // ⚠️ La mensualité se DÉDUIT du capital et de la durée : tirée
       // indépendamment, elle donnait des crédits à coût nul (15 000 € en
       // 60 × 250 €) voire NÉGATIF (15 000 € en 24 × 220 € : −9 720 €).
@@ -1266,14 +1298,14 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
       const cout = total - capital;
       return {
         text:
-          `Un emprunt de $${capital}$ € est remboursé par $${mois}$ mensualités constantes de $${mensualite}$ €. ` +
+          `Un emprunt de $${capital}$ € est remboursé par $${mois}$ ${nom} constantes de $${mensualite}$ €. ` +
           `Quel est le coût total du crédit, c'est-à-dire ce que l'emprunteur paie EN PLUS du capital emprunté ?`,
         format: "short",
         expected: [fr(cout)],
         comparator: "number_equal",
         explanation: exp(
-          "Le total remboursé est la somme de toutes les mensualités ; le coût du crédit est la différence entre ce total et le capital emprunté.",
-          "On additionne les mensualités — elles sont constantes, la somme est donc un produit —, puis on retire le capital.",
+          `Le total remboursé est la somme de toutes les ${nom} ; le coût du crédit est la différence entre ce total et le capital emprunté.`,
+          `On additionne les ${nom} — elles sont constantes, la somme est donc un produit —, puis on retire le capital.`,
           `Total remboursé : $${mois} \\times ${mensualite} = ${fr(total)}$ €. ` +
             `Coût du crédit : $${fr(total)} - ${capital} = ${fr(cout)}$ €.`,
           `Le crédit coûte $${fr(cout)}$ €.`
@@ -1296,29 +1328,34 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     microId: "suiteT_somme_emprunt",
     difficulty: 3,
     theme: "neutral",
-    hint: "Total remboursé $=$ capital $+$ coût du crédit. La mensualité, c'est ce total divisé par le nombre de mois.",
+    hint: "Total remboursé $=$ capital $+$ coût du crédit. Chaque échéance, c'est ce total divisé par le nombre d'échéances.",
     tags: ["stmg", "maths", "suites", "template", "short"],
     generate: () => {
-      const mois = pick([24, 36, 48, 60] as const);
-      const mensualite = pick([150, 180, 200, 240, 250, 300] as const);
+      const annuel = Math.random() < 0.5;
+      const nom = annuel ? "annuité" : "mensualité";
+      const mois = annuel ? pick([4, 5, 6, 8] as const) : pick([24, 36, 48, 60] as const);
+      const mensualite = annuel
+        ? pick([1500, 1800, 2000, 2400, 2500, 3000] as const)
+        : pick([150, 180, 200, 240, 250, 300] as const);
       const total = mensualite * mois;
       const cout = pick([600, 900, 1200, 1500] as const);
       const capital = total - cout;
+      const partCapital = Math.round((capital / mois) * 100) / 100;
       return {
         text:
-          `Un crédit de $${eur(capital)}$ est remboursé en $${mois}$ mensualités égales, ` +
-          `et le coût du crédit s'élève à $${eur(cout)}$. Quelle est la mensualité, en euros ?`,
+          `Un crédit de $${eur(capital)}$ € est remboursé en $${mois}$ ${nom}s égales, ` +
+          `et le coût du crédit s'élève à $${eur(cout)}$ €. Quelle est ${annuel ? "l'annuité" : "la mensualité"}, en euros ?`,
         format: "short",
         expected: [String(mensualite)],
         comparator: "number_equal",
         explanation: exp(
-          "Le TOTAL remboursé est la somme de toutes les mensualités. Il se compose du capital emprunté et du coût du crédit — ce que la banque prélève en plus.",
-          "On additionne le capital et le coût pour obtenir le total remboursé, puis on le divise par le nombre de mensualités.",
-          `Total remboursé : $${eur(capital)} + ${eur(cout)} = ${eur(total)}$. ` +
-            `Mensualité : $\\dfrac{${total}}{${mois}} = ${eur(mensualite)}$. ` +
-            `⚠️ Diviser le seul capital par $${mois}$ donnerait $${eur(Math.round((capital / mois) * 100) / 100)}$ : ` +
+          `Le TOTAL remboursé est la somme de toutes les ${nom}s. Il se compose du capital emprunté et du coût du crédit — ce que la banque prélève en plus.`,
+          `On additionne le capital et le coût pour obtenir le total remboursé, puis on le divise par le nombre de ${nom}s.`,
+          `Total remboursé : $${eur(capital)} + ${eur(cout)} = ${eur(total)}$ €. ` +
+            `Chaque ${nom} : $\\dfrac{${total}}{${mois}} = ${eur(mensualite)}$ €. ` +
+            `⚠️ Diviser le seul capital par $${mois}$ donnerait ${Math.abs(capital / mois - partCapital) < 1e-6 ? "" : "environ "}$${eur(partCapital)}$ € : ` +
             `on oublierait le coût du crédit, qui est précisément ce qui distingue un emprunt d'un simple étalement.`,
-          `La mensualité est de $${eur(mensualite)}$.`
+          `Chaque ${nom} est de $${eur(mensualite)}$ €.`
         ),
       };
     },
@@ -1404,8 +1441,8 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
       const bonne = `le placement $B$, parce que sa raison est plus grande`;
       return {
         text:
-          `Placement $A$ : $${eur(aA)}$ à $${tA}\\,\\%$ par an. ` +
-          `Placement $B$ : $${eur(aB)}$ à $${tB}\\,\\%$ par an. ` +
+          `Placement $A$ : $${eur(aA)}$ € à $${tA}\\,\\%$ par an. ` +
+          `Placement $B$ : $${eur(aB)}$ € à $${tB}\\,\\%$ par an. ` +
           `Sur une très longue durée, lequel finit par l'emporter ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -1418,9 +1455,9 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
         explanation: exp(
           "Deux suites géométriques à termes positifs finissent toujours par se classer selon leur RAISON : celle qui multiplie le plus vite dépasse l'autre, quel que soit son retard de départ.",
           "On compare les raisons, pas les premiers termes : l'avance initiale est fixe, l'écart de raison se compose année après année.",
-          `$A$ part avec $${eur(aA - aB)}$ d'avance, mais gagne seulement $${tA}\\,\\%$ par an contre $${tB}\\,\\%$ pour $B$. ` +
+          `$A$ part avec $${eur(aA - aB)}$ € d'avance, mais gagne seulement $${tA}\\,\\%$ par an contre $${tB}\\,\\%$ pour $B$. ` +
             `Le croisement se produit au bout de $${croisement}$ ans, et l'écart ne cesse ensuite de se creuser : ` +
-            `au rang $${croisement + 10}$, $A$ vaut $${eur(Math.round(A[croisement + 10]))}$ contre $${eur(Math.round(B[croisement + 10]))}$ pour $B$. ` +
+            `au rang $${croisement + 10}$, $A$ vaut environ $${eur(Math.round(A[croisement + 10]))}$ € contre $${eur(Math.round(B[croisement + 10]))}$ € pour $B$. ` +
             `⚠️ Sur les toutes premières années, $A$ est bel et bien devant — c'est ce qui rend le piège efficace.`,
           `C'est $B$ qui l'emporte : à long terme, seule la raison compte.`
         ),
@@ -1507,9 +1544,11 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
       while (n < 7 && B[n] <= A[n]) n++;
       return {
         text:
-          `Le projet A rapporte $${a0}$ € la première année puis $${r}$ € de plus chaque année. ` +
-          `Le projet B rapporte $${b0}$ € la première année, puis est multiplié par $${fr(q)}$ chaque année. ` +
-          `À partir de quelle année le projet B rapporte-t-il plus que le projet A ?`,
+          // ⛔ « L'année 0 », comme dans le tableau : avec « la première année », la
+          // réponse était décalée d'un an pour qui comptait celle-ci comme l'année 1.
+          `Le projet A rapporte $${a0}$ € l'année $0$, puis $${r}$ € de plus chaque année. ` +
+          `Le projet B rapporte $${b0}$ € l'année $0$, puis ce montant est multiplié par $${fr(q)}$ chaque année. ` +
+          `À partir de quelle année du tableau le projet B rapporte-t-il plus que le projet A ?`,
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
@@ -1607,7 +1646,7 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
         "les intérêts SIMPLES forment une suite arithmétique, les COMPOSÉS une suite géométrique";
       return {
         text:
-          `Un capital de $${eur(capital)}$ est placé à $${t}\\,\\%$ par an. ` +
+          `Un capital de $${eur(capital)}$ € est placé à $${t}\\,\\%$ par an. ` +
           `Quelle est la nature des suites décrivant sa valeur, selon que les intérêts sont simples ou composés ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -1620,11 +1659,11 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
         explanation: exp(
           "À intérêts SIMPLES, le pourcentage porte toujours sur le capital de départ : la même somme s'ajoute chaque année, donc la suite est ARITHMÉTIQUE. À intérêts COMPOSÉS, il porte sur le capital acquis : on multiplie par le même coefficient, donc la suite est GÉOMÉTRIQUE.",
           "On se demande ce qui se répète à l'identique : une somme ajoutée, ou un coefficient appliqué.",
-          `Simples : on ajoute $${eur(interetAnnuel)}$ chaque année — raison $r = ${fr(interetAnnuel)}$. ` +
+          `Simples : on ajoute $${eur(interetAnnuel)}$ € chaque année — raison $r = ${fr(interetAnnuel)}$. ` +
             `Composés : on multiplie par $${fr(1 + t / 100)}$ chaque année — raison $q = ${fr(1 + t / 100)}$. ` +
             `C'est pour cela que l'écart entre les deux ne cesse de grandir : l'un progresse en ligne droite, ` +
-            `l'autre s'accélère. Au bout de $10$ ans, les simples donnent $${eur(capital + 10 * interetAnnuel)}$ ` +
-            `contre $${eur(Math.round(capital * Math.pow(1 + t / 100, 10)))}$ pour les composés.`,
+            `l'autre s'accélère. Au bout de $10$ ans, les simples donnent $${eur(capital + 10 * interetAnnuel)}$ € ` +
+            `contre environ $${eur(Math.round(capital * Math.pow(1 + t / 100, 10)))}$ € pour les composés.`,
           `Simples : arithmétique. Composés : géométrique.`
         ),
         choiceDiagnostics: [

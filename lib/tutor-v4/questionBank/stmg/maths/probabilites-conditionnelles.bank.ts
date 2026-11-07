@@ -12,9 +12,11 @@
 // probabilités totales relèvent du programme de la classe terminale. »
 //
 // Les items de PREMIÈRE se calculent donc uniquement sur un TABLEAU CROISÉ
-// d'effectifs. L'ARBRE n'apparaît qu'à partir de la notion proba_arbre, et les
-// probabilités totales seulement dans proba_arbre_calcul. Un élève de première
-// qui tombe sur un arbre travaille hors programme.
+// d'effectifs. L'ARBRE PONDÉRÉ des probabilités conditionnelles n'apparaît qu'à
+// partir de la notion proba_arbre, et les probabilités totales seulement dans
+// proba_arbre_calcul. Seule exception en première : proba_epreuves_independantes,
+// où l'arbre de deux épreuves répétées (mêmes probabilités à chaque niveau) est
+// demandé par ses micros.
 //
 // ⭐ Les situations viennent du contrôle qualité et du diagnostic — celles que
 // le BO nomme : « des situations issues de differents domaines (économique,
@@ -51,6 +53,11 @@ function shuffle<T>(arr: readonly T[]): T[] {
 function fr(n: number): string {
   const arrondi = Math.round(n * 100000) / 100000;
   return String(arrondi).replace(".", ",");
+}
+
+/** « = » si la valeur tombe juste à d décimales, « \approx » sinon : un arrondi n'est pas une égalité. */
+function egal(x: number, d: number): string {
+  return Math.abs(Math.round(x * 10 ** d) / 10 ** d - x) < 1e-12 ? "=" : "\\approx";
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]): string[] {
@@ -223,41 +230,41 @@ const CONTEXTES: readonly Contexte[] = [
   // premiers — une PROVENANCE en ligne et un ÉTAT en colonne, chacun dit par
   // un attribut `L` / `C` (« est fabriquée sur la chaîne 1 », « est conforme »)
   // — pour que chaque gabarit reste grammatical sans retouche.
-  // Gestion, commerce, RH, transports d'abord ; touche réunionnaise quand elle
-  // vient d'elle-même.
-  { sujet: "Satisfaction dans deux magasins", lignes: ["Magasin de Saint-Denis", "Magasin de Saint-Pierre"], colonnes: ["Satisfait", "Insatisfait"], individu: "clients", genre: "m", courtL: ["St-Denis", "St-Pierre"], courtC: ["Satisfait", "Insatisfait"], L: ["interrogé* au magasin de Saint-Denis", "interrogé* au magasin de Saint-Pierre"], C: ["satisfait*", "insatisfait*"] },
+  // Gestion, commerce, RH, transports, santé, sport, numérique. ⛔ La Réunion
+  // reste autour de 4 % : deux décors sur quarante et un.
+  { sujet: "Satisfaction dans deux magasins", lignes: ["Magasin de Lyon", "Magasin de Nantes"], colonnes: ["Satisfait", "Insatisfait"], individu: "clients", genre: "m", courtL: ["Lyon", "Nantes"], courtC: ["Satisfait", "Insatisfait"], L: ["interrogé* au magasin de Lyon", "interrogé* au magasin de Nantes"], C: ["satisfait*", "insatisfait*"] },
   { sujet: "Formation des salariés", lignes: ["Siège social", "Usine"], colonnes: ["Formé", "Non formé"], individu: "salariés", genre: "m", courtL: ["Siège", "Usine"], courtC: ["Formé", "Non formé"], L: ["employé* au siège social", "employé* à l'usine"], C: ["formé*", "non formé*"] },
   { sujet: "Service client par téléphone", lignes: ["Plateforme Nord", "Plateforme Sud"], colonnes: ["Résolu", "Non résolu"], individu: "appels", genre: "m", courtL: ["Pf Nord", "Pf Sud"], courtC: ["Résolu", "Non résolu"], L: ["traité* par la plateforme Nord", "traité* par la plateforme Sud"], C: ["résolu*", "non résolu*"] },
-  { sujet: "Règlement des factures", lignes: ["Agence de Saint-Paul", "Agence du Port"], colonnes: ["Payée à l'échéance", "Payée en retard"], individu: "factures", genre: "f", courtL: ["St-Paul", "Le Port"], courtC: ["À l'échéance", "Retard"], L: ["émise* par l'agence de Saint-Paul", "émise* par l'agence du Port"], C: ["payée* à l'échéance", "payée* en retard"] },
+  { sujet: "Règlement des factures", lignes: ["Agence de Lille", "Agence de Toulouse"], colonnes: ["Payée à l'échéance", "Payée en retard"], individu: "factures", genre: "f", courtL: ["Lille", "Toulouse"], courtC: ["À l'échéance", "Retard"], L: ["émise* par l'agence de Lille", "émise* par l'agence de Toulouse"], C: ["payée* à l'échéance", "payée* en retard"] },
   { sujet: "Livraisons de deux transporteurs", lignes: ["Transporteur Rapido", "Transporteur Écofret"], colonnes: ["Intacte", "Endommagée"], individu: "livraisons", genre: "f", courtL: ["Rapido", "Écofret"], courtC: ["Intacte", "Abîmée"], L: ["assurée* par le transporteur Rapido", "assurée* par le transporteur Écofret"], C: ["intacte*", "endommagée*"] },
   { sujet: "Ponctualité du car jaune", lignes: ["Ligne Est", "Ligne Sud"], colonnes: ["À l'heure", "En retard"], individu: "trajets", genre: "m", courtL: ["Est", "Sud"], courtC: ["Ponctuel", "Retard"], L: ["effectué* sur la ligne Est", "effectué* sur la ligne Sud"], C: ["à l'heure", "en retard"] },
-  { sujet: "Vols au départ de Roland-Garros", lignes: ["Compagnie Alizé", "Compagnie Cyclone"], colonnes: ["Ponctuel", "Retardé"], individu: "vols", genre: "m", courtL: ["Alizé", "Cyclone"], courtC: ["Ponctuel", "Retardé"], L: ["assuré* par la compagnie Alizé", "assuré* par la compagnie Cyclone"], C: ["parti* à l'heure", "retardé*"] },
+  { sujet: "Vols au départ de Lyon", lignes: ["Compagnie Azur", "Compagnie Horizon"], colonnes: ["Ponctuel", "Retardé"], individu: "vols", genre: "m", courtL: ["Azur", "Horizon"], courtC: ["Ponctuel", "Retardé"], L: ["assuré* par la compagnie Azur", "assuré* par la compagnie Horizon"], C: ["parti* à l'heure", "retardé*"] },
   { sujet: "Recrutement d'une entreprise", lignes: ["Site d'emploi", "Candidature spontanée"], colonnes: ["Retenue", "Non retenue"], individu: "candidatures", genre: "f", courtL: ["Site", "Spontanée"], courtC: ["Retenue", "Écartée"], L: ["reçue* par un site d'emploi", "envoyée* spontanément"], C: ["retenue*", "non retenue*"] },
   { sujet: "Visiteurs d'un site marchand", lignes: ["Réseaux sociaux", "Moteur de recherche"], colonnes: ["Acheteur", "Non acheteur"], individu: "visiteurs", genre: "m", courtL: ["Réseaux", "Recherche"], courtC: ["Acheteur", "Non acheteur"], L: ["arrivé* par les réseaux sociaux", "arrivé* par un moteur de recherche"], C: ["devenu* acheteur*", "reparti* sans acheter"] },
   { sujet: "Abonnements de deux salles de sport", lignes: ["Salle du centre-ville", "Salle de la zone commerciale"], colonnes: ["Fidèle", "Résilié"], individu: "abonnés", genre: "m", courtL: ["Centre", "Zone"], courtC: ["Fidèle", "Résilié"], L: ["inscrit* à la salle du centre-ville", "inscrit* à la salle de la zone commerciale"], C: ["resté* fidèle*", "parti*"] },
   { sujet: "Demandes de crédit", lignes: ["Banque en ligne", "Agence bancaire"], colonnes: ["Accordé", "Refusé"], individu: "dossiers", genre: "m", courtL: ["En ligne", "Agence"], courtC: ["Accordé", "Refusé"], L: ["déposé* à la banque en ligne", "déposé* en agence bancaire"], C: ["accepté*", "refusé*"] },
   { sujet: "Retours d'articles", lignes: ["Vente en ligne", "Vente en boutique"], colonnes: ["Gardé", "Retourné"], individu: "articles", genre: "m", courtL: ["Web", "Boutique"], courtC: ["Gardé", "Retourné"], L: ["vendu* en ligne", "vendu* en boutique"], C: ["gardé* par le client", "retourné*"] },
-  { sujet: "Enquête auprès des touristes", lignes: ["Métropole", "Étranger"], colonnes: ["Satisfait", "Déçu"], individu: "touristes", genre: "m", courtL: ["Métropole", "Étranger"], courtC: ["Content", "Déçu"], L: ["venu* de métropole", "venu* de l'étranger"], C: ["satisfait*", "déçu*"] },
+  { sujet: "Enquête auprès des touristes", lignes: ["France", "Étranger"], colonnes: ["Satisfait", "Déçu"], individu: "touristes", genre: "m", courtL: ["France", "Étranger"], courtC: ["Content", "Déçu"], L: ["venu* de France", "venu* de l'étranger"], C: ["satisfait*", "déçu*"] },
   { sujet: "Cagettes de letchis", lignes: ["Producteur de Saint-André", "Producteur de Sainte-Suzanne"], colonnes: ["Calibre extra", "Calibre standard"], individu: "cagettes", genre: "f", courtL: ["St-André", "Ste-Suzanne"], courtC: ["Extra", "Standard"], L: ["livrée* par le producteur de Saint-André", "livrée* par le producteur de Sainte-Suzanne"], C: ["de calibre extra", "de calibre standard"] },
-  { sujet: "Embouteillage d'eau", lignes: ["Usine du Port", "Usine de Bras-Panon"], colonnes: ["Bien bouchée", "Mal bouchée"], individu: "bouteilles", genre: "f", courtL: ["Le Port", "Bras-Panon"], courtC: ["Bouchée", "Fuite"], L: ["remplie* à l'usine du Port", "remplie* à l'usine de Bras-Panon"], C: ["bien bouchée*", "mal bouchée*"] },
+  { sujet: "Embouteillage d'eau", lignes: ["Usine d'Auvergne", "Usine des Alpes"], colonnes: ["Bien bouchée", "Mal bouchée"], individu: "bouteilles", genre: "f", courtL: ["Auvergne", "Alpes"], courtC: ["Bouchée", "Fuite"], L: ["remplie* à l'usine d'Auvergne", "remplie* à l'usine des Alpes"], C: ["bien bouchée*", "mal bouchée*"] },
   { sujet: "Passages en caisse", lignes: ["Caisse rapide", "Caisse classique"], colonnes: ["Payé par carte", "Payé en espèces"], individu: "tickets", genre: "m", courtL: ["Rapide", "Classique"], courtC: ["Carte", "Espèces"], L: ["édité* en caisse rapide", "édité* en caisse classique"], C: ["payé* par carte", "payé* en espèces"] },
   { sujet: "Réservations d'un hôtel", lignes: ["Site de l'hôtel", "Agence de voyages"], colonnes: ["Honorée", "Annulée"], individu: "réservations", genre: "f", courtL: ["Site", "Agence"], courtC: ["Honorée", "Annulée"], L: ["faite* sur le site de l'hôtel", "faite* par une agence de voyages"], C: ["honorée*", "annulée*"] },
-  { sujet: "Devenir des stagiaires", lignes: ["Lycée de Saint-Denis", "Lycée du Tampon"], colonnes: ["Embauché", "Non embauché"], individu: "stagiaires", genre: "m", courtL: ["St-Denis", "Le Tampon"], courtC: ["Embauché", "Non embauché"], L: ["issu* du lycée de Saint-Denis", "issu* du lycée du Tampon"], C: ["embauché*", "non embauché*"] },
+  { sujet: "Devenir des stagiaires", lignes: ["Filière commerce", "Filière gestion"], colonnes: ["Embauché", "Non embauché"], individu: "stagiaires", genre: "m", courtL: ["Commerce", "Gestion"], courtC: ["Embauché", "Non embauché"], L: ["issu* de la filière commerce", "issu* de la filière gestion"], C: ["embauché*", "non embauché*"] },
   { sujet: "Fiabilité de smartphones", lignes: ["Usine Alpha", "Usine Bêta"], colonnes: ["Sans panne", "En panne"], individu: "smartphones", genre: "m", courtL: ["Alpha", "Bêta"], courtC: ["Sans panne", "Panne"], L: ["fabriqué* à l'usine Alpha", "fabriqué* à l'usine Bêta"], C: ["sans panne", "en panne"] },
-  { sujet: "Clients d'une banque", lignes: ["Agence de Saint-Pierre", "Banque en ligne"], colonnes: ["Épargnant", "Non épargnant"], individu: "clients", genre: "m", courtL: ["Agence", "En ligne"], courtC: ["Épargnant", "Non épargnant"], L: ["rattaché* à l'agence de Saint-Pierre", "rattaché* à la banque en ligne"], C: ["épargnant*", "non épargnant*"] },
+  { sujet: "Rendez-vous chez le médecin", lignes: ["Prise en ligne", "Prise par téléphone"], colonnes: ["Venu", "Absent"], individu: "patients", genre: "m", courtL: ["En ligne", "Téléphone"], courtC: ["Venu", "Absent"], L: ["inscrit* en ligne", "inscrit* par téléphone"], C: ["venu* au rendez-vous", "absent* au rendez-vous"] },
   { sujet: "Location de voitures", lignes: ["Agence de l'aéroport", "Agence du centre"], colonnes: ["Rendue à l'heure", "Rendue en retard"], individu: "voitures", genre: "f", courtL: ["Aéroport", "Centre"], courtC: ["À l'heure", "En retard"], L: ["louée* à l'agence de l'aéroport", "louée* à l'agence du centre"], C: ["rendue* à l'heure", "rendue* en retard"] },
   { sujet: "Deux fournisseurs de pneus", lignes: ["Fournisseur Atlas", "Fournisseur Boréal"], colonnes: ["Conforme", "Défectueux"], individu: "pneus", genre: "m", courtL: ["Atlas", "Boréal"], courtC: ["Conforme", "Défectueux"], L: ["livré* par le fournisseur Atlas", "livré* par le fournisseur Boréal"], C: ["conforme*", "défectueux"] },
   { sujet: "Livraison de plats cuisinés", lignes: ["Cuisine centrale", "Cuisine de quartier"], colonnes: ["Livré chaud", "Livré tiède"], individu: "plats", genre: "m", courtL: ["Centrale", "Quartier"], courtC: ["Chaud", "Tiède"], L: ["préparé* par la cuisine centrale", "préparé* par la cuisine de quartier"], C: ["livré* chaud*", "livré* tiède*"] },
-  { sujet: "Cotisations d'une association", lignes: ["Antenne de Saint-Leu", "Antenne de Saint-Benoît"], colonnes: ["À jour", "En retard"], individu: "adhérents", genre: "m", courtL: ["St-Leu", "St-Benoît"], courtC: ["À jour", "Retard"], L: ["inscrit* à l'antenne de Saint-Leu", "inscrit* à l'antenne de Saint-Benoît"], C: ["à jour de cotisation", "en retard de cotisation"] },
+  { sujet: "Licenciés d'un club omnisports", lignes: ["Section judo", "Section natation"], colonnes: ["Réinscrit", "Non réinscrit"], individu: "licenciés", genre: "m", courtL: ["Judo", "Natation"], courtC: ["Réinscrit", "Parti"], L: ["inscrit* en section judo", "inscrit* en section natation"], C: ["réinscrit* pour la saison suivante", "non réinscrit* pour la saison suivante"] },
   { sujet: "Ordinateurs reconditionnés", lignes: ["Atelier Est", "Atelier Ouest"], colonnes: ["Sans défaut", "Avec défaut"], individu: "ordinateurs", genre: "m", courtL: ["Est", "Ouest"], courtC: ["Sans défaut", "Défaut"], L: ["reconditionné* par l'atelier Est", "reconditionné* par l'atelier Ouest"], C: ["sans défaut", "défectueux"] },
   { sujet: "Campagnes de courriels", lignes: ["Campagne promo", "Lettre d'info"], colonnes: ["Ouvert", "Ignoré"], individu: "courriels", genre: "m", courtL: ["Promo", "Lettre"], courtC: ["Ouvert", "Ignoré"], L: ["envoyé* pour la campagne promo", "envoyé* avec la lettre d'info"], C: ["ouvert*", "ignoré*"] },
-  { sujet: "Récolte de melons", lignes: ["Exploitation de Saint-Paul", "Exploitation de Saint-Louis"], colonnes: ["Premier choix", "Second choix"], individu: "melons", genre: "m", courtL: ["St-Paul", "St-Louis"], courtC: ["Premier", "Second"], L: ["récolté* à Saint-Paul", "récolté* à Saint-Louis"], C: ["classé* en premier choix", "classé* en second choix"] },
+  { sujet: "Récolte de melons", lignes: ["Exploitation de Cavaillon", "Exploitation du Poitou"], colonnes: ["Premier choix", "Second choix"], individu: "melons", genre: "m", courtL: ["Cavaillon", "Poitou"], courtC: ["Premier", "Second"], L: ["récolté* à Cavaillon", "récolté* dans le Poitou"], C: ["classé* en premier choix", "classé* en second choix"] },
   { sujet: "Absences dans une entreprise", lignes: ["Équipe de jour", "Équipe de nuit"], colonnes: ["Jamais absent", "Absent"], individu: "employés", genre: "m", courtL: ["Jour", "Nuit"], courtC: ["Présent", "Absent"], L: ["affecté* à l'équipe de jour", "affecté* à l'équipe de nuit"], C: ["toujours présent*", "absent* au moins une fois"] },
   { sujet: "Billets de concert", lignes: ["Billetterie en ligne", "Guichet"], colonnes: ["Utilisé", "Non utilisé"], individu: "billets", genre: "m", courtL: ["En ligne", "Guichet"], courtC: ["Utilisé", "Inutilisé"], L: ["acheté* en ligne", "acheté* au guichet"], C: ["utilisé*", "non utilisé*"] },
   { sujet: "Contrôle de flacons", lignes: ["Laboratoire Alizé", "Laboratoire Corail"], colonnes: ["Dosage correct", "Dosage incorrect"], individu: "flacons", genre: "m", courtL: ["Alizé", "Corail"], courtC: ["Correct", "Incorrect"], L: ["contrôlé* par le laboratoire Alizé", "contrôlé* par le laboratoire Corail"], C: ["correctement dosé*", "mal dosé*"] },
   { sujet: "Réussite en BTS", lignes: ["Bac STMG", "Autre bac"], colonnes: ["Diplômé", "Non diplômé"], individu: "étudiants", genre: "m", courtL: ["STMG", "Autre"], courtC: ["Diplômé", "Non diplômé"], L: ["titulaire* d'un bac STMG", "titulaire* d'un autre bac"], C: ["diplômé*", "non diplômé*"] },
-  { sujet: "Contrôle technique", lignes: ["Centre de Saint-Denis", "Centre de Saint-Pierre"], colonnes: ["Accepté", "Contre-visite"], individu: "véhicules", genre: "m", courtL: ["St-Denis", "St-Pierre"], courtC: ["Accepté", "Contre-visite"], L: ["contrôlé* au centre de Saint-Denis", "contrôlé* au centre de Saint-Pierre"], C: ["accepté*", "envoyé* en contre-visite"] },
-  { sujet: "Sacs de sucre", lignes: ["Sucrerie de Bois-Rouge", "Sucrerie du Gol"], colonnes: ["Poids exact", "Poids insuffisant"], individu: "sacs", genre: "m", courtL: ["Bois-Rouge", "Le Gol"], courtC: ["Exact", "Insuffisant"], L: ["produit* à la sucrerie de Bois-Rouge", "produit* à la sucrerie du Gol"], C: ["au poids exact", "d'un poids insuffisant"] },
+  { sujet: "Contrôle technique", lignes: ["Centre de Reims", "Centre d'Angers"], colonnes: ["Accepté", "Contre-visite"], individu: "véhicules", genre: "m", courtL: ["Reims", "Angers"], courtC: ["Accepté", "Contre-visite"], L: ["contrôlé* au centre de Reims", "contrôlé* au centre d'Angers"], C: ["accepté*", "envoyé* en contre-visite"] },
+  { sujet: "Utilisateurs d'une application", lignes: ["Téléphone Android", "iPhone"], colonnes: ["Actif", "Inactif"], individu: "utilisateurs", genre: "m", courtL: ["Android", "iPhone"], courtC: ["Actif", "Inactif"], L: ["équipé* d'un téléphone Android", "équipé* d'un iPhone"], C: ["encore actif*", "inactif*"] },
   { sujet: "Prospection commerciale", lignes: ["Démarchage téléphonique", "Salon professionnel"], colonnes: ["Converti", "Non converti"], individu: "prospects", genre: "m", courtL: ["Téléphone", "Salon"], courtC: ["Converti", "Perdu"], L: ["contacté* par téléphone", "rencontré* sur un salon"], C: ["devenu* client*", "perdu*"] },
   { sujet: "Locations de vélos", lignes: ["Station de la plage", "Station de la gare"], colonnes: ["Rendu en bon état", "Rendu abîmé"], individu: "vélos", genre: "m", courtL: ["Plage", "Gare"], courtC: ["Bon état", "Abîmé"], L: ["loué* à la station de la plage", "loué* à la station de la gare"], C: ["rendu* en bon état", "rendu* abîmé*"] },
   { sujet: "Dossiers de sinistre", lignes: ["Déclaration en ligne", "Déclaration en agence"], colonnes: ["Remboursé", "Refusé"], individu: "sinistres", genre: "m", courtL: ["En ligne", "Agence"], courtC: ["Remboursé", "Refusé"], L: ["déclaré* en ligne", "déclaré* en agence"], C: ["remboursé*", "refusé*"] },
@@ -286,17 +293,20 @@ type Tableau = {
  *
  * Construction : on choisit le total, la marge de ligne et la marge de
  * colonne comme des fractions rondes du total ; la case $a$ vaut alors
- * $\frac{\text{ligne} \times \text{colonne}}{\text{total}}$, entière par
- * construction, et l'indépendance est exacte.
+ * $\frac{\text{ligne} \times \text{colonne}}{\text{total}}$.
+ *
+ * ⛔ Cette case n'est PAS toujours entière : 250 × 250 ÷ 1 000 = 62,5. Arrondie,
+ * elle cassait l'indépendance que l'énoncé affirme. On retire donc le tirage.
  */
 function tirerTableauIndependant(): Tableau {
   const ctx = pick(CONTEXTES);
-  const total = pick([1000, 2000, 4000, 5000] as const);
-  const p = pick([0.2, 0.25, 0.4, 0.5, 0.6, 0.75, 0.8] as const);
-  const q = pick([0.2, 0.25, 0.4, 0.5, 0.6, 0.75, 0.8] as const);
-  const ligne1 = Math.round(total * p);
-  const col1 = Math.round(total * q);
-  const a = Math.round((ligne1 * col1) / total);
+  let total: number, ligne1: number, col1: number;
+  do {
+    total = pick([1000, 2000, 4000, 5000] as const);
+    ligne1 = Math.round(total * pick([0.2, 0.25, 0.4, 0.5, 0.6, 0.75, 0.8] as const));
+    col1 = Math.round(total * pick([0.2, 0.25, 0.4, 0.5, 0.6, 0.75, 0.8] as const));
+  } while ((ligne1 * col1) % total !== 0);
+  const a = (ligne1 * col1) / total;
   const b = ligne1 - a;
   const c = col1 - a;
   const d = total - a - b - c;
@@ -413,7 +423,7 @@ const URNES: readonly Urne[] = [
   { contenant: "Un classeur", objets: "dossiers clients", dont: "sont incomplets", oui: "Incomplet", non: "Complet", un: "un dossier incomplet" },
   { contenant: "Une palette", objets: "colis", dont: "sont abîmés", oui: "Abîmé", non: "Intact", un: "un colis abîmé" },
   { contenant: "Un panier", objets: "letchis", dont: "sont abîmés", oui: "Abîmé", non: "Sain", un: "un letchi abîmé" },
-  { contenant: "Une cagette", objets: "mangues", dont: "sont trop mûres", oui: "Trop mûre", non: "Bonne", un: "une mangue trop mûre" },
+  { contenant: "Une cagette", objets: "pêches", dont: "sont trop mûres", oui: "Trop mûre", non: "Bonne", un: "une pêche trop mûre" },
   { contenant: "Un sac", objets: "billes", dont: "sont rouges", oui: "Rouge", non: "Autre", un: "une bille rouge" },
   { contenant: "Un lot", objets: "clés USB", dont: "sont défectueuses", oui: "Défectueuse", non: "Bonne", un: "une clé USB défectueuse" },
   { contenant: "Un stock", objets: "smartphones", dont: "sont en panne", oui: "Panne", non: "OK", un: "un smartphone en panne" },
@@ -425,7 +435,7 @@ const URNES: readonly Urne[] = [
   { contenant: "Un paquet", objets: "tickets à gratter", dont: "sont gagnants", oui: "Gagnant", non: "Perdant", un: "un ticket gagnant" },
   { contenant: "Un carton", objets: "gobelets", dont: "sont fendus", oui: "Fendu", non: "Intact", un: "un gobelet fendu" },
   { contenant: "Un stock", objets: "tee-shirts", dont: "sont mal imprimés", oui: "Raté", non: "Réussi", un: "un tee-shirt mal imprimé" },
-  { contenant: "Une caisse", objets: "ananas", dont: "sont trop mûrs", oui: "Trop mûr", non: "Bon", un: "un ananas trop mûr" },
+  { contenant: "Une caisse", objets: "melons", dont: "sont trop mûrs", oui: "Trop mûr", non: "Bon", un: "un melon trop mûr" },
   { contenant: "Une urne", objets: "jetons", dont: "sont bleus", oui: "Bleu", non: "Autre", un: "un jeton bleu" },
   { contenant: "Un lot", objets: "vis", dont: "sont tordues", oui: "Tordue", non: "Droite", un: "une vis tordue" },
   { contenant: "Un paquet", objets: "enveloppes", dont: "sont mal affranchies", oui: "Mal affr.", non: "Bien affr.", un: "une enveloppe mal affranchie" },
@@ -469,7 +479,7 @@ const REPETITIONS: readonly Repetition[] = [
   { intro: "Un livreur effectue {n} livraisons", chaque: "À chaque livraison", evt: "client absent", non: "client présent" },
   { intro: "Une boutique accueille {n} visiteurs", chaque: "Pour chaque visiteur", evt: "achat", non: "pas d'achat" },
   { intro: "Un site envoie {n} courriels publicitaires", chaque: "Pour chaque courriel", evt: "courriel ouvert", non: "non ouvert" },
-  { intro: "Le car jaune effectue {n} trajets", chaque: "À chaque trajet", evt: "retard", non: "à l'heure" },
+  { intro: "Un bus de ville effectue {n} trajets", chaque: "À chaque trajet", evt: "retard", non: "à l'heure" },
   { intro: "Une machine fabrique {n} pièces", chaque: "Pour chaque pièce", evt: "défaut", non: "sans défaut" },
   { intro: "Une boutique en ligne reçoit {n} commandes", chaque: "Pour chaque commande", evt: "paiement refusé", non: "paiement accepté" },
   { intro: "Une joueuse de basket tente {n} lancers francs", chaque: "À chaque lancer", evt: "panier", non: "raté" },
@@ -492,7 +502,7 @@ const REPETITIONS: readonly Repetition[] = [
   { intro: "Une joueuse lance {n} fléchettes", chaque: "À chaque lancer", evt: "dans la cible", non: "hors cible" },
   { intro: "Un assureur traite {n} dossiers", chaque: "Pour chaque dossier", evt: "fraude", non: "dossier honnête" },
   { intro: "Une serveuse sert {n} tables", chaque: "À chaque table", evt: "dessert commandé", non: "pas de dessert" },
-  { intro: "Un producteur de letchis vend {n} cagettes au marché", chaque: "Pour chaque cagette", evt: "cagette refusée", non: "acceptée" },
+  { intro: "Un médecin reçoit {n} patients", chaque: "Pour chaque patient", evt: "arrêt de travail", non: "pas d'arrêt" },
   { intro: "Une plateforme publie {n} annonces", chaque: "Pour chaque annonce", evt: "annonce signalée", non: "non signalée" },
 ];
 
@@ -529,7 +539,7 @@ const PAIRES_INDEP: readonly PaireIndep[] = [
   { intro: "Une équipe de football joue un match", A: "elle gagne le match", B: "le tirage au sort du coup d'envoi lui est favorable" },
   { intro: "Une enseigne choisit au hasard un client dans chacun de ses deux magasins", A: "le client du premier magasin a la carte de fidélité", B: "le client du second magasin a la carte de fidélité" },
   { intro: "Un recruteur reçoit deux candidates qui ne se connaissent pas", A: "Léa est embauchée", B: "Maëlle est embauchée" },
-  { intro: "Un producteur de letchis vend sur deux marchés, Saint-Paul et Saint-Pierre", A: "il vend tout à Saint-Paul", B: "il vend tout à Saint-Pierre" },
+  { intro: "Un hôpital dispose de deux groupes électrogènes qui fonctionnent séparément", A: "le groupe 1 démarre du premier coup", B: "le groupe 2 démarre du premier coup" },
   { intro: "Une entreprise envoie deux colis par deux transporteurs différents", A: "le premier colis arrive en retard", B: "le second colis arrive en retard" },
   { intro: "Un étudiant passe deux entretiens dans deux entreprises différentes", A: "le premier entretien est réussi", B: "le second entretien est réussi" },
   { intro: "Un festival organise deux concerts en plein air, à un mois d'écart", A: "le premier concert affiche complet", B: "le second concert affiche complet" },
@@ -562,7 +572,7 @@ const TESTS: readonly TestDiag[] = [
   { sujet: "Filtre anti-spam", objets: "courriels", mal: "Vrai spam", bien: "Courriel normal", sig: "Classé spam", nonSig: "Boîte de réception", fp: "classés en spam alors qu'ils sont normaux", fn: "laissés en boîte de réception alors que ce sont des spams", vp: "spams bien classés en spam", signales: "classés en spam", pct: "est vraiment du spam" },
   { sujet: "Détection de fraude bancaire", objets: "paiements", mal: "Frauduleux", bien: "Honnête", sig: "Bloqué", nonSig: "Accepté", fp: "bloqués alors qu'ils sont honnêtes", fn: "acceptés alors qu'ils sont frauduleux", vp: "frauduleux et bien bloqués", signales: "bloqués", pct: "est réellement frauduleux" },
   { sujet: "Détecteur de faux billets", objets: "billets", mal: "Faux billet", bien: "Vrai billet", sig: "Refusé", nonSig: "Accepté", fp: "refusés alors qu'ils sont vrais", fn: "acceptés alors qu'ils sont faux", vp: "faux et bien refusés", signales: "refusés", pct: "est réellement faux" },
-  { sujet: "Tri optique de letchis", objets: "letchis", mal: "Abîmé", bien: "Sain", sig: "Écarté", nonSig: "Gardé", fp: "écartés alors qu'ils sont sains", fn: "gardés alors qu'ils sont abîmés", vp: "abîmés et bien écartés", signales: "écartés", pct: "est réellement abîmé" },
+  { sujet: "Contrôle antidopage", objets: "sportifs", mal: "Dopé", bien: "Non dopé", sig: "Test positif", nonSig: "Test négatif", fp: "testés positifs alors qu'ils ne sont pas dopés", fn: "testés négatifs alors qu'ils sont dopés", vp: "dopés et testés positifs", signales: "testés positifs", pct: "est réellement dopé" },
   { sujet: "Scanner à bagages", objets: "bagages", mal: "Objet interdit", bien: "Sans objet interdit", sig: "Fouillé", nonSig: "Non fouillé", fp: "fouillés alors qu'ils ne contiennent rien d'interdit", fn: "non fouillés alors qu'ils contiennent un objet interdit", vp: "contenant un objet interdit et bien fouillés", signales: "fouillés", pct: "contient réellement un objet interdit" },
   { sujet: "Logiciel de vérification des factures", objets: "factures", mal: "Erronée", bien: "Correcte", sig: "Alerte", nonSig: "Pas d'alerte", fp: "signalées par une alerte alors qu'elles sont correctes", fn: "passées sans alerte alors qu'elles sont erronées", vp: "erronées et bien signalées", signales: "signalées par une alerte", pct: "est réellement erroné" },
   { sujet: "Contrôle des déclarations de sinistre", objets: "dossiers", mal: "Frauduleux", bien: "Honnête", sig: "Suspect", nonSig: "Non suspect", fp: "jugés suspects alors qu'ils sont honnêtes", fn: "jugés non suspects alors qu'ils sont frauduleux", vp: "frauduleux et bien jugés suspects", signales: "jugés suspects", pct: "est réellement frauduleux" },
@@ -570,7 +580,7 @@ const TESTS: readonly TestDiag[] = [
   { sujet: "Portique antivol d'un magasin", objets: "passages", mal: "Article non payé", bien: "Rien à signaler", sig: "Alarme", nonSig: "Pas d'alarme", fp: "suivis d'une alarme alors que tout est payé", fn: "passés sans alarme alors qu'un article n'est pas payé", vp: "suivis d'une alarme à juste titre", signales: "suivis d'une alarme", pct: "cache réellement un article non payé" },
   { sujet: "Test de dépistage", objets: "personnes", mal: "Malade", bien: "Non malade", sig: "Test positif", nonSig: "Test négatif", fp: "testées positives alors qu'elles ne sont pas malades", fn: "testées négatives alors qu'elles sont malades", vp: "malades et testées positives", signales: "testées positives", pct: "est réellement malade" },
   { sujet: "Contrôle de bouteilles par caméra", objets: "bouteilles", mal: "Mal remplie", bien: "Bien remplie", sig: "Éjectée", nonSig: "Gardée", fp: "éjectées alors qu'elles sont bien remplies", fn: "gardées alors qu'elles sont mal remplies", vp: "mal remplies et bien éjectées", signales: "éjectées", pct: "est réellement mal rempli" },
-  { sujet: "Contrôle des tickets dans le car jaune", objets: "voyageurs", mal: "Sans titre valable", bien: "En règle", sig: "Verbalisé", nonSig: "Non verbalisé", fp: "verbalisés alors qu'ils sont en règle", fn: "non verbalisés alors qu'ils sont sans titre valable", vp: "sans titre et bien verbalisés", signales: "verbalisés", pct: "voyage réellement sans titre valable" },
+  { sujet: "Contrôle des billets dans le train", objets: "voyageurs", mal: "Sans titre valable", bien: "En règle", sig: "Verbalisé", nonSig: "Non verbalisé", fp: "verbalisés alors qu'ils sont en règle", fn: "non verbalisés alors qu'ils sont sans titre valable", vp: "sans titre et bien verbalisés", signales: "verbalisés", pct: "voyage réellement sans titre valable" },
   { sujet: "Détecteur de pannes de smartphones", objets: "smartphones", mal: "En panne", bien: "En état", sig: "Renvoyé à l'atelier", nonSig: "Vendu", fp: "renvoyés à l'atelier alors qu'ils marchent", fn: "vendus alors qu'ils sont en panne", vp: "en panne et bien renvoyés", signales: "renvoyés à l'atelier", pct: "est réellement en panne" },
 ];
 
@@ -965,7 +975,11 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "Dans une même population de référence, les deux issues se partagent le total : leurs probabilités font $1$.",
     tags: ["stmg", "maths", "probabilites", "canvas", "piege", "template", "short"],
     generate: () => {
-      const t = tirerTableau();
+      // ⛔ Un quotient en 0,xx5 (350 ÷ 400 = 0,875) s'arrondit à 0,88 et son
+      // complément à 0,13 : la somme fait 1,01 et « retirer à 1 », la méthode
+      // enseignée, ne donnerait pas la réponse attendue. On retire le tirage.
+      let t = tirerTableau();
+      while ((t.a * 1000) % t.ligne1 === 0 && (t.a * 1000) / t.ligne1 % 10 === 5) t = tirerTableau();
       const c = t.ctx;
       // Sur la ligne 1 : P_A(B) = a/ligne1 et P_A(non B) = b/ligne1.
       const pAB = t.a / t.ligne1;
@@ -1005,7 +1019,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "La phrase doit dire DANS QUELLE population on se place.",
-    tags: ["stmg", "maths", "probabilites", "canvas", "open", "template"],
+    tags: ["stmg", "maths", "probabilites", "canvas", "template"],
     generate: () => {
       // Rare : plusieurs leurres tombent sur le même pourcentage → on retire un tableau.
       for (let essai = 0; ; essai++) {
@@ -1210,7 +1224,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const fauxPositif = Math.round((sains * fausseAlerte) / 100);
       const vraiNegatif = sains - fauxPositif;
       // ⭐ 15/10/2026 — quatorze dispositifs de contrôle (anti-spam, fraude
-      // bancaire, faux billets, tri de letchis…) et cinq questions : la micro
+      // bancaire, faux billets, antidopage…) et cinq questions : la micro
       // ne servait que trois phrases, toutes sur des « lots ».
       const T = pick(TESTS);
       const quoi = pick(["fauxPositif", "fauxNegatif", "signales", "vraiPositif", "partSignales"] as const);
@@ -1350,7 +1364,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       return {
         text:
           `${u.contenant} contient $${total}$ ${u.objets}, dont $${defauts}$ ${u.dont}. ` +
-          `On en prélève deux, l'un après l'autre, SANS remise. Que peut-on dire de l'arbre représentant cette expérience ?`,
+          // ⛔ Pas de « l'un après l'autre » : les objets sont souvent féminins.
+          `On en prélève deux successivement, SANS remise. Que peut-on dire de l'arbre représentant cette expérience ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           "les probabilités du second niveau sont les mêmes sur les deux branches",
@@ -1509,11 +1524,20 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fr(Math.round(auMoinsUn * 1000) / 1000)],
         comparator: "number_equal",
-        canvas: canvasArbre(ctx, p, p, p, `Répétition de ${n} épreuves identiques et indépendantes (p = ${fr(p)})`),
+        // ⛔ L'arbre ne dessine que deux niveaux : au-delà, le titre le dit.
+        canvas: canvasArbre(
+          ctx,
+          p,
+          p,
+          p,
+          n === 2
+            ? `Répétition de 2 épreuves identiques et indépendantes (p = ${fr(p)})`
+            : `Les 2 premières épreuves sur ${n} : l'arbre continue de la même façon (p = ${fr(p)})`
+        ),
         explanation: exp(
           "La répétition de $n$ épreuves identiques et indépendantes se représente par un arbre où chaque niveau porte les mêmes probabilités. L'évènement « au moins un » est le contraire de « aucun ».",
           "On calcule d'abord la probabilité qu'aucun ne convienne — un seul chemin —, puis on prend le complément à $1$.",
-          `Aucun : $(1 - ${fr(p)})^{${n}} = ${fr(Math.round(aucun * 10000) / 10000)}$. ` +
+          `Aucun : $(1 - ${fr(p)})^{${n}} ${egal(aucun, 4)} ${fr(Math.round(aucun * 10000) / 10000)}$. ` +
             `Au moins un : $1 - ${fr(Math.round(aucun * 10000) / 10000)} \\approx ${fr(Math.round(auMoinsUn * 1000) / 1000)}$.`,
           `La probabilité vaut environ $${fr(Math.round(auMoinsUn * 1000) / 1000)}$.`
         ),
@@ -1539,7 +1563,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "probabilites", "template"],
     generate: () => {
       const r = pick(REPETITIONS);
-      const n = pick([3, 4, 5, 6] as const);
+      // ⛔ n ≤ 4 : c'est la borne écrite dans la micro.
+      const n = pick([3, 4] as const);
       const p = pick([0.1, 0.2, 0.25, 0.3] as const);
       const bonne =
         `parce que le contraire de « au moins un » est « AUCUN », un seul cas — au lieu des $${n}$ cas à additionner`;
@@ -1560,8 +1585,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "On identifie le contraire de l'évènement cherché, on calcule sa probabilité — souvent d'un seul produit — puis on la retire à $1$.",
           `« Au moins un » couvre $${n}$ situations : exactement un, exactement deux, … jusqu'à $${n}$. ` +
             `Son contraire n'en couvre qu'une : AUCUN, dont la probabilité est le produit ` +
-            `$(1 - ${fr(p)})^{${n}} = ${fr(Math.round(Math.pow(1 - p, n) * 10000) / 10000)}$. ` +
-            `D'où $1 - ${fr(Math.round(Math.pow(1 - p, n) * 10000) / 10000)} = ${fr(Math.round((1 - Math.pow(1 - p, n)) * 10000) / 10000)}$.`,
+            `$(1 - ${fr(p)})^{${n}} ${egal(Math.pow(1 - p, n), 4)} ${fr(Math.round(Math.pow(1 - p, n) * 10000) / 10000)}$. ` +
+            `D'où $1 - ${fr(Math.round(Math.pow(1 - p, n) * 10000) / 10000)} ${egal(Math.pow(1 - p, n), 4)} ${fr(Math.round((1 - Math.pow(1 - p, n)) * 10000) / 10000)}$.`,
           `On passe par le contraire parce qu'« aucun » est un cas unique, alors qu'« au moins un » en rassemble $${n}$.`
         ),
         choiceDiagnostics: [
@@ -1599,8 +1624,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const defauts = pick([4, 5, 8, 10] as const);
       const p = defauts / total;
       const mode = avecRemise
-        ? pick(["AVEC remise", "en remettant le premier avant de tirer le second"] as const)
-        : pick(["SANS remise", "l'un après l'autre, sans remettre le premier"] as const);
+        ? pick(["AVEC remise", "en remettant le premier tirage avant le second"] as const)
+        : pick(["SANS remise", "successivement, sans remise entre les deux prélèvements"] as const);
       return {
         text:
           `${u.contenant} contient $${total}$ ${u.objets}, dont $${defauts}$ ${u.dont}. ` +
@@ -1663,7 +1688,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       return {
         text:
           `${u.contenant} contient $${total}$ ${u.objets}, dont $${defauts}$ ${u.dont}. ` +
-          `On en prélève deux au hasard, ${pick(["SANS remise", "l'un après l'autre, sans remettre le premier"] as const)}. ` +
+          `On en prélève deux au hasard, ${pick(["SANS remise", "successivement, sans remise entre les deux prélèvements"] as const)}. ` +
           `Quelle est la probabilité que les DEUX ${dontSubj(u)} ? (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(sansRemise * 1000) / 1000)],
@@ -2500,7 +2525,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           `On choisit ${unInd(ctx)} au hasard. D'après cet arbre, les évènements « ${ilElle(ctx)} est ${sg(ctx.L[0])} » ` +
           `et « ${ilElle(ctx)} est ${sg(ctx.C[0])} » sont-ils indépendants ?`,
         format: "qcm",
-        choices: shuffle(["oui", "non"]),
+        choices: shuffle(["oui", "non", "on ne peut pas conclure avec cet arbre"]),
         expected: [independants ? "oui" : "non"],
         comparator: "mcq_exact",
         canvas: canvasArbre(ctx, p1, pCommune, pC2, `Arbre pondéré — ${ctx.sujet}`),
@@ -2555,7 +2580,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "On calcule la probabilité conditionnelle, puis la probabilité simple : si les deux coïncident, la condition n'a rien changé.",
           `Sur ce tableau : $P_A(B) = \\dfrac{${t.a}}{${t.ligne1}} = ${fr(Math.round((t.a / t.ligne1) * 1000) / 1000)}$ et ` +
             `$P(B) = \\dfrac{${t.col1}}{${t.total}} = ${fr(Math.round((t.col1 / t.total) * 1000) / 1000)}$ : les deux sont égales. ` +
-            `⛔ Indépendant n'est pas incompatible : ici $P(A \\cap B) = ${fr(Math.round((t.a / t.total) * 1000) / 1000)}$, qui n'est pas nul.`,
+            `⛔ Indépendant n'est pas incompatible : ici $P(A \\cap B) = ${fr(t.a / t.total)}$, qui n'est pas nul.`,
           `Si $A$ et $B$ sont indépendants, alors $P_A(B) = P(B)$.`
         ),
         choiceDiagnostics: [
@@ -2676,7 +2701,14 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     generate: () => {
       // Un tirage sur deux est EXACTEMENT indépendant : sinon la réponse serait
       // toujours « non » et l'élève cocherait sans calculer.
-      const t = Math.random() < 0.5 ? tirerTableauIndependant() : tirerTableau();
+      const tirer = () => (Math.random() < 0.5 ? tirerTableauIndependant() : tirerTableau());
+      // ⛔ Deux valeurs différentes peuvent s'afficher identiques au millième, et
+      // le corrigé écrirait « les deux valeurs diffèrent » sous deux mêmes nombres.
+      const illisible = (x: Tableau) =>
+        x.a * x.total !== x.ligne1 * x.col1 &&
+        Math.round((x.a / x.total) * 1000) === Math.round(((x.ligne1 * x.col1) / (x.total * x.total)) * 1000);
+      let t = tirer();
+      while (illisible(t)) t = tirer();
       const pA = t.ligne1 / t.total;
       const pB = t.col1 / t.total;
       const pInter = t.a / t.total;
@@ -2688,17 +2720,17 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           `$B$ : « ${ilElle(t.ctx)} est ${sg(t.ctx.C[0])} ». ` +
           `Ces deux évènements sont-ils indépendants ?`,
         format: "qcm",
-        choices: shuffle(["oui", "non"]),
+        choices: shuffle(["oui", "non", "on ne peut pas conclure avec ce tableau"]),
         expected: [independants ? "oui" : "non"],
         comparator: "mcq_exact",
         canvas: canvasTableau(t),
         explanation: exp(
           "Justifier l'indépendance demande un CALCUL : on compare $P(A \\cap B)$ et $P(A) \\times P(B)$. L'égalité signifie l'indépendance, la différence la dépendance.",
           "On calcule les trois probabilités à partir du tableau, puis on compare.",
-          `$P(A) = \\dfrac{${t.ligne1}}{${t.total}} \\approx ${fr(Math.round(pA * 1000) / 1000)}$ ; ` +
-            `$P(B) = \\dfrac{${t.col1}}{${t.total}} \\approx ${fr(Math.round(pB * 1000) / 1000)}$ ; ` +
-            `$P(A) \\times P(B) \\approx ${fr(Math.round(produit * 1000) / 1000)}$. ` +
-            `Or $P(A \\cap B) = \\dfrac{${t.a}}{${t.total}} \\approx ${fr(Math.round(pInter * 1000) / 1000)}$.`,
+          `$P(A) = \\dfrac{${t.ligne1}}{${t.total}} ${egal(pA, 3)} ${fr(Math.round(pA * 1000) / 1000)}$ ; ` +
+            `$P(B) = \\dfrac{${t.col1}}{${t.total}} ${egal(pB, 3)} ${fr(Math.round(pB * 1000) / 1000)}$ ; ` +
+            `$P(A) \\times P(B) ${egal(produit, 3)} ${fr(Math.round(produit * 1000) / 1000)}$. ` +
+            `Or $P(A \\cap B) = \\dfrac{${t.a}}{${t.total}} ${egal(pInter, 3)} ${fr(Math.round(pInter * 1000) / 1000)}$.`,
           independants
             ? "Les deux valeurs coïncident : les évènements sont indépendants."
             : "Les deux valeurs diffèrent : les évènements ne sont pas indépendants."

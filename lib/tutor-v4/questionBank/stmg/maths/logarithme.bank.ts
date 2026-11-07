@@ -328,7 +328,11 @@ export const logarithmeBank: TutorBankItemV4[] = [
               ]),
         expected: [question === "variation" ? "croissante" : `$\\log(${a}) < \\log(${b})$`],
         comparator: "mcq_exact",
-        canvas: canvasCourbe((x) => Math.log10(x), 0.2, 100, "Courbe de la fonction logarithme décimal", { pas: 0.5 }),
+        // ⛔ La courbe va jusqu'aux nombres comparés : a et b montent à 400 et 4 000.
+        canvas:
+          question === "variation" || b <= 100
+            ? canvasCourbe((x) => Math.log10(x), 0.2, 100, "Courbe de la fonction logarithme décimal", { pas: 0.5 })
+            : canvasCourbe((x) => Math.log10(x), 0.2, Math.ceil(b * 1.1), "Courbe de la fonction logarithme décimal", { pas: (b * 1.1) / 300 }),
         explanation: exp(
           "La fonction logarithme décimal est strictement croissante sur $]0\\,;\\,+\\infty[$ : elle conserve donc l'ordre des nombres.",
           question === "variation"
@@ -771,8 +775,20 @@ export const logarithmeBank: TutorBankItemV4[] = [
     hint: "On applique $\\log$ aux deux membres : l'exposant descend et devient un facteur.",
     tags: ["stmg", "maths", "logarithme", "template", "short"],
     generate: () => {
-      const a = pick([2, 3, 5, 1.05, 1.1, 1.2, 1.25, 1.5, 4, 1.8] as const);
-      const b = pick([50, 100, 200, 500, 1000, 2000] as const);
+      // ⛔ L'élève divise les valeurs du TABLEAU, arrondies au dix-millième.
+      // On ne garde que les équations où ce calcul et la vraie valeur donnent le
+      // même centième : 1,05^x = 50 attendait 80,18, le tableau donne 80,14.
+      const table = (v: number) => Math.round(Math.log10(v) * 10000) / 10000;
+      const equations: { a: number; b: number }[] = [];
+      for (const base of [2, 3, 5, 1.05, 1.1, 1.2, 1.25, 1.5, 4, 1.8]) {
+        for (const cibleB of [50, 100, 200, 500, 1000, 2000]) {
+          const vraie = Math.log10(cibleB) / Math.log10(base);
+          if (Math.round(vraie * 100) === Math.round((table(cibleB) / table(base)) * 100)) {
+            equations.push({ a: base, b: cibleB });
+          }
+        }
+      }
+      const { a, b } = pick(equations);
       const x = Math.log10(b) / Math.log10(a);
       const distracteurs = [2, 3, 5, 100, 1.1, 1.5].filter((v) => v !== a && v !== b);
       return {
@@ -1037,7 +1053,7 @@ export const logarithmeBank: TutorBankItemV4[] = [
     microId: "logT_nombre_annuites",
     difficulty: 3,
     theme: "neutral",
-    hint: "On cherche le premier ENTIER d'années : le résultat du logarithme se plafonne à l'entier supérieur.",
+    hint: "On compte des années complètes : on prend l'entier juste au-dessus du résultat du logarithme.",
     tags: ["stmg", "maths", "logarithme", "gestion", "canvas", "template", "short"],
     generate: () => {
       const placement = pick(PLACEMENTS);
@@ -1051,7 +1067,8 @@ export const logarithmeBank: TutorBankItemV4[] = [
         text:
           `${placement.sujet.charAt(0).toUpperCase()}${placement.sujet.slice(1)} vaut $${depart}$ ${placement.unite} ` +
           `et augmente de $${t}\\,\\%$ par an. ` +
-          `Au bout de combien d'années ENTIÈRES dépassera-t-il $${fr(cible)}$ ${placement.unite} ?`,
+          // ⛔ Tournure neutre : le sujet peut être féminin (la population d'une commune).
+          `Au bout de combien d'années ENTIÈRES le seuil de $${fr(cible)}$ ${placement.unite} sera-t-il dépassé ?`,
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
@@ -1061,9 +1078,9 @@ export const logarithmeBank: TutorBankItemV4[] = [
         }),
         explanation: exp(
           "La recherche d'un nombre d'annuités revient à résoudre $u_0 q^n > C$, c'est-à-dire $q^n > \\dfrac{C}{u_0}$ : on applique le logarithme décimal.",
-          "On isole $n$, puis on prend le premier entier strictement supérieur au seuil obtenu — une année entamée compte.",
-          `$n > \\dfrac{\\log\\left(\\frac{${fr(cible)}}{${depart}}\\right)}{\\log(${fr(q)})} \\approx ${fr(Math.round(seuil * 100) / 100)}$, ` +
-            `donc $n = ${n}$.`,
+          "On isole $n$, puis on prend le premier entier strictement supérieur au seuil obtenu.",
+          `$n > \\dfrac{\\log\\left(\\frac{${fr(cible)}}{${depart}}\\right)}{\\log(${fr(q)})} \\approx ${fr(Math.round(seuil * 100) / 100)}$. ` +
+            `On compte des années complètes : au bout de $${n - 1}$ années, le seuil n'est pas encore franchi ; au bout de $${n}$ années, il l'est.`,
           `Le seuil est dépassé au bout de $${n}$ années.`
         ),
       };
@@ -1071,11 +1088,10 @@ export const logarithmeBank: TutorBankItemV4[] = [
   },
 
   {
-    // ANGLE 2 — la DURÉE D'UN REMBOURSEMENT, où la cible n'est plus un multiple
-    // du départ mais une somme à atteindre. Le premier item cherche un seuil de
-    // capitalisation ; celui-ci part d'un versement annuel et demande combien
-    // d'annuités il faut — c'est le mot même du libellé, et la question la plus
-    // fréquente en gestion.
+    // ANGLE 2 — un OBJECTIF en valeur, où la cible n'est plus un multiple du
+    // départ mais une somme ronde. Le premier item donne un seuil tiré comme un
+    // multiple ; ici l'élève doit former lui-même le quotient objectif ÷ départ
+    // avant d'appliquer le logarithme.
     // ⚠️ Sans figure : le premier item porte déjà la courbe et son seuil.
     kind: "template",
     id: "stmg_log_annuites_tpl_2",
@@ -1110,7 +1126,7 @@ export const logarithmeBank: TutorBankItemV4[] = [
           "On forme d'abord le quotient objectif sur départ, puis on divise son logarithme par celui du coefficient, et l'on prend l'entier supérieur.",
           `$\\dfrac{${objectif}}{${depart}} \\approx ${fr(Math.round((objectif / depart) * 10000) / 10000)}$, ` +
             `donc $n \\geqslant \\dfrac{\\log\\left(${fr(Math.round((objectif / depart) * 10000) / 10000)}\\right)}{\\log(${fr(q)})} \\approx ${fr(Math.round(seuil * 100) / 100)}$. ` +
-            `Une année entamée ne compte pas : il faut $${n}$ années complètes.`,
+            `On compte des années complètes : au bout de $${n - 1}$ années, l'objectif n'est pas encore atteint ; au bout de $${n}$ années, il l'est.`,
           `Au bout de $${n}$ années, l'objectif de $${objectif}$ ${placement.unite} est atteint.`
         ),
       };

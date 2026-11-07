@@ -169,19 +169,50 @@ const PRODS: Prod[] = [
   { qui: "Un potier", unites: "vases", un: "un vase", f: false },
   { qui: "Une imprimeuse", unites: "affiches", un: "une affiche", f: true },
   { qui: "Un gérant de laboratoire cosmétique", unites: "flacons de crème", un: "un flacon", f: false },
-  { qui: "Une fabricante de skateboards", unites: "planches", un: "une planche", f: true },
+  { qui: "Un atelier de skateboards", unites: "planches", un: "une planche", f: true },
   { qui: "Un traiteur", unites: "plateaux-repas", un: "un plateau-repas", f: false },
   { qui: "Une apicultrice", unites: "pots de miel", un: "un pot", f: false },
   { qui: "Un maroquinier", unites: "sacs à main", un: "un sac", f: false },
-  { qui: "Une installatrice de panneaux solaires", unites: "panneaux", un: "un panneau", f: false },
+  { qui: "Une usine de panneaux solaires", unites: "panneaux", un: "un panneau", f: false },
   { qui: "Un responsable de production pharmaceutique", unites: "lots de vaccins", un: "un lot", f: false },
-  { qui: "Une agente de voyages", unites: "séjours", un: "un séjour", f: false },
-  { qui: "Un développeur d’applications", unites: "licences", un: "une licence", f: true },
+  // ⛔ Que des objets qu'on fabrique : « un gérant de salle de sport fabrique ses
+  // abonnements par séries », « 80 licences » n'ont pas de sens en coût de production.
+  { qui: "Un atelier de bagagerie", unites: "valises", un: "une valise", f: true },
+  { qui: "Une usine de casques audio", unites: "casques", un: "un casque", f: false },
   { qui: "Une luthière", unites: "guitares", un: "une guitare", f: true },
-  { qui: "Un gérant de salle de sport", unites: "abonnements", un: "un abonnement", f: false },
+  { qui: "Un atelier d’articles de sport", unites: "tapis de yoga", un: "un tapis", f: false },
   { qui: "Une coopérative de vanille de La Réunion", unites: "kilos de vanille", un: "un kilo", f: false },
 ];
 const vendus = (P: Prod) => `vendu${P.f ? "e" : ""}s`;
+/** « de vases », « d’affiches ». */
+const deUnites = (P: Prod) => (/^[aeiouh]/i.test(P.unites) ? `d’${P.unites}` : `de ${P.unites}`);
+
+/**
+ * Coût unitaire plausible (en euros) de ce qui se fabrique PAR SÉRIES.
+ *
+ * ⛔ Le coût était en centimes, tiré de 20 à 400 pour tous : une guitare à 20
+ * centimes. Le vivant et les lots (baguettes, miel, vanille, vaccins) n'y sont
+ * pas : on ne « fabrique » pas des kilos de vanille par séries.
+ */
+const COUT_SERIE: Record<string, [number, number]> = {
+  tables: [60, 200],
+  vélos: [120, 400],
+  bracelets: [5, 30],
+  robes: [20, 90],
+  "jeux de société": [6, 25],
+  chaises: [25, 90],
+  vases: [10, 40],
+  affiches: [2, 8],
+  "flacons de crème": [3, 15],
+  planches: [25, 80],
+  "sacs à main": [30, 150],
+  panneaux: [80, 250],
+  valises: [25, 90],
+  casques: [15, 70],
+  guitares: [150, 600],
+  "tapis de yoga": [8, 30],
+};
+const PRODS_SERIE = PRODS.filter((P) => COUT_SERIE[P.unites] !== undefined);
 
 type Temps = { qui: string; quoi: string; court: string; L: string; t: string };
 
@@ -439,7 +470,8 @@ function genCarrePrimitive() {
   const eq = (s: string) => `$${F}(${v}) = ${s}$`;
   const bon = poly([[a, 2]], v);
   return qcm(
-    `${intro} ${pick([`Laquelle de ces expressions peut être celle de $${F}(${v})$ ?`, `Quelle fonction a pour dérivée $${F}'(${v})$ ?`, `Parmi ces quatre fonctions, laquelle convient ?`])}`,
+    // ⛔ La consigne dit le geste : on dérive chaque choix. Ce n'est pas une primitive.
+    `${intro} ${pick([`Dérive chaque expression : laquelle peut être celle de $${F}(${v})$ ?`, `En dérivant chaque proposition, trouve la fonction qui a pour dérivée $${F}'(${v})$.`, `Dérive ces quatre fonctions : laquelle convient ?`])}`,
     eq(bon),
     [eq(poly([[2 * a, 2]], v)), eq(poly([[4 * a, 2]], v)), eq(poly([[2 * a, 3]], v)), eq(poly([[a, 1]], v))],
     expl("$(kx^2)' = 2kx$.", "on dérive chaque proposition et on garde celle qui redonne la dérivée de l’énoncé.", `$(${bon})' = ${poly([[2 * a, 1]], v)}$.`, `${eq(bon)} convient.`)
@@ -535,7 +567,8 @@ function genCubeTangente() {
     `${pick(METIERS)} a tracé la courbe d’équation $y = ${poly([[a, 3]])}$ et sa tangente au point A d’abscisse $${x0}$. ${pick(["Quel est le coefficient directeur de cette tangente ?", `Que vaut le nombre dérivé en $${x0}$ ?`, "Calcule la pente de la droite verte."])}`,
     m,
     expl("le coefficient directeur de la tangente en $a$ est $f'(a)$.", `$f'(x) = ${poly([[3 * a, 2]])}$.`, `$f'(${x0}) = ${n(3 * a)} \\times ${x0 < 0 ? `(${x0})` : x0}^2 = ${n(m)}$.`, `le coefficient directeur vaut ${n(m)}.`),
-    graphe((x) => a * x ** 3, -2.5, 2.5, { droites: [{ m, p: y0 - m * x0 }], points: [{ x: x0, y: y0, label: "A" }] })
+    // ⛔ Bornes entières : de -2,5 à 2,5, le canvas posait ses graduations sur -2,5 ; -1,5…
+    graphe((x) => a * x ** 3, Math.min(-2, x0 - 1), Math.max(2, x0 + 1), { droites: [{ m, p: y0 - m * x0 }], points: [{ x: x0, y: y0, label: "A" }] })
   );
 }
 
@@ -1684,7 +1717,7 @@ function beneficeConcave() {
 function genOptQuantite() {
   const o = beneficeConcave();
   return court(
-    `${o.P.qui} estime le bénéfice, en euros, pour $x$ ${o.P.unites} ${vendus(o.P)} : $B(x) = ${o.B}$. ${pick(["Pour quelle quantité le bénéfice est-il maximal ?", `Combien de ${o.P.unites} faut-il vendre pour un bénéfice maximal ?`, "Quelle quantité rend le bénéfice maximal ?"])}`,
+    `${o.P.qui} estime le bénéfice, en euros, pour $x$ ${o.P.unites} ${vendus(o.P)} : $B(x) = ${o.B}$. ${pick(["Pour quelle quantité le bénéfice est-il maximal ?", `Combien ${deUnites(o.P)} faut-il vendre pour un bénéfice maximal ?`, "Quelle quantité rend le bénéfice maximal ?"])}`,
     o.xs,
     expl("le bénéfice est maximal là où $B'$ s’annule en passant de + à −.", "on dérive, on résout $B'(x) = 0$, puis on vérifie le signe.", `$B'(x) = ${poly([[-2 * o.a, 1], [o.b, 0]])}$ s’annule en $x = ${o.xs}$ ; positive avant, négative après.`, `le bénéfice est maximal pour ${o.xs} ${o.P.unites}.`)
   );
@@ -1725,27 +1758,28 @@ function genOptCubique() {
   if (!Number.isInteger(1.5 * sr)) return genOptQuantite();
   const M = r + rint(3, 6);
   return court(
-    `${P.qui} produit $x$ centaines de ${P.unites}, avec $x$ entre 0 et ${M}. Le bénéfice, en milliers d’euros, est $B(x) = ${tex(p)}$. On admet que $B'(x) = -3(${xMoins(r)})(${xMoins(-s)})$. ${pick(["Pour quelle valeur de $x$ le bénéfice est-il maximal ?", "Combien de centaines d’unités faut-il produire pour un bénéfice maximal ?"])}`,
+    `${P.qui} produit $x$ centaines ${deUnites(P)}, avec $x$ entre 0 et ${M}. Le bénéfice, en milliers d’euros, est $B(x) = ${tex(p)}$. On admet que $B'(x) = -3(${xMoins(r)})(${xMoins(-s)})$. ${pick(["Pour quelle valeur de $x$ le bénéfice est-il maximal ?", "Combien de centaines d’unités faut-il produire pour un bénéfice maximal ?"])}`,
     r,
     expl("le bénéfice est maximal là où $B'$ s’annule en passant de + à −.", "on étudie le signe de $B'$ sur $[0\\,;" + M + "]$.", `sur $[0\\,;${M}]$, $x + ${s} > 0$ : $B'(x)$ a le signe de $-3(x - ${r})$, positif avant ${r}, négatif après.`, `le bénéfice est maximal pour $x = ${r}$, soit ${r} centaines.`)
   );
 }
 
-const PRIX: Array<[string, string]> = [
-  ["Une organisatrice de concerts fixe le prix $p$ d’un billet, en euros", "billets"],
-  ["Un gérant de salle de sport fixe le prix $p$ de l’abonnement mensuel, en euros", "abonnés"],
-  ["Une restauratrice fixe le prix $p$ du menu du jour, en euros", "menus"],
-  ["Un hôtelier fixe le prix $p$ d’une nuit, en euros", "réservations"],
-  ["Une professeure de yoga fixe le prix $p$ d’un cours, en euros", "inscriptions"],
-  ["Un loueur de vélos fixe le prix $p$ d’une location, en euros", "locations"],
-  ["Une gérante de cinéma fixe le prix $p$ d’une place, en euros", "entrées"],
-  ["Un éditeur fixe le prix $p$ d’un abonnement à son magazine, en euros", "abonnés"],
+/** ⛔ Chaque situation a sa fourchette de prix optimal : tiré de 4 à 30 pour tous, on voyait une nuit d’hôtel à 13 €. */
+const PRIX: Array<[string, string, number, number]> = [
+  ["Une organisatrice de concerts fixe le prix $p$ d’un billet, en euros", "billets", 18, 60],
+  ["Un gérant de salle de sport fixe le prix $p$ de l’abonnement mensuel, en euros", "abonnés", 15, 45],
+  ["Une restauratrice fixe le prix $p$ du menu du jour, en euros", "menus", 11, 25],
+  ["Un hôtelier fixe le prix $p$ d’une nuit, en euros", "réservations", 55, 140],
+  ["Une professeure de yoga fixe le prix $p$ d’un cours, en euros", "inscriptions", 8, 25],
+  ["Un loueur de vélos fixe le prix $p$ d’une location, en euros", "locations", 8, 30],
+  ["Une gérante de cinéma fixe le prix $p$ d’une place, en euros", "entrées", 6, 14],
+  ["Un éditeur fixe le prix $p$ d’un abonnement à son magazine, en euros", "abonnés", 25, 80],
 ];
 
 function genOptPrix() {
-  const [phrase, qui] = pick(PRIX);
+  const [phrase, qui, prixMin, prixMax] = pick(PRIX);
   const k = pick([2, 4, 5, 10, 20]);
-  const ps = rint(4, 30);
+  const ps = rint(prixMin, prixMax);
   const N0 = 2 * k * ps;
   return court(
     `${phrase}. Une étude de marché prévoit $${N0} - ${k}p$ ${qui}. La recette est donc $R(p) = ${poly([[-k, 2], [N0, 1]], "p")}$. ${pick(["Quel prix rend la recette maximale ?", "Pour quel prix $p$ la recette est-elle maximale ?"])}`,
@@ -1754,12 +1788,17 @@ function genOptPrix() {
   );
 }
 
-function coutConvexe() {
-  const P = pick(PRODS);
-  const a = pick([0.5, 1, 2, 0.1, 0.2, 5]);
+function coutConvexe(): { P: Prod; a: number; xs: number; b: number; c: number; cmin: number; C: string } {
+  const P = pick(PRODS_SERIE);
+  const [lo, hi] = COUT_SERIE[P.unites];
   const xs = rint(2, 16) * 5;
+  // ⛔ L'écart au minimum reste à l’échelle du produit : sinon une série d’un seul
+  // bracelet coûtait 30 000 €.
+  const possibles = [0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5].filter((v) => v * xs * xs >= 0.5 * hi && v * xs * xs <= 4 * hi);
+  if (possibles.length === 0) return coutConvexe();
+  const a = pick(possibles);
   const b = 2 * a * xs;
-  const cmin = rint(20, 400);
+  const cmin = rint(lo, hi);
   const c = a * xs * xs + cmin;
   return { P, a, xs, b, c, cmin, C: poly([[a, 2], [-b, 1], [c, 0]]) };
 }
@@ -1767,7 +1806,7 @@ function coutConvexe() {
 function genCoutMinQ() {
   const o = coutConvexe();
   return court(
-    `${o.P.qui} fabrique ses ${o.P.unites} par séries. Pour une série de $x$ ${o.P.unites}, le coût unitaire est $C(x) = ${o.C}$ centimes. ${pick(["Pour quelle taille de série ce coût est-il minimal ?", "Quelle valeur de $x$ rend ce coût minimal ?"])}`,
+    `${o.P.qui} fabrique ses ${o.P.unites} par séries. Pour une série de $x$ ${o.P.unites}, le coût unitaire est $C(x) = ${o.C}$ euros. ${pick(["Pour quelle taille de série ce coût est-il minimal ?", "Quelle valeur de $x$ rend ce coût minimal ?"])}`,
     o.xs,
     expl("le coût est minimal là où $C'$ s’annule en passant de − à +.", "on dérive, puis on résout $C'(x) = 0$.", `$C'(x) = ${poly([[2 * o.a, 1], [-o.b, 0]])}$ s’annule en $${o.xs}$ ; négative avant, positive après.`, `le coût est minimal pour ${o.xs} ${o.P.unites}.`)
   );
@@ -1776,9 +1815,9 @@ function genCoutMinQ() {
 function genCoutMinVal() {
   const o = coutConvexe();
   return court(
-    `${o.P.qui} fabrique ses ${o.P.unites} par séries. Pour une série de $x$ ${o.P.unites}, le coût unitaire est $C(x) = ${o.C}$ centimes ; il est minimal pour $x = ${o.xs}$. ${pick(["Quel est ce coût minimal ?", "Combien vaut le coût unitaire minimal, en centimes ?"])}`,
+    `${o.P.qui} fabrique ses ${o.P.unites} par séries. Pour une série de $x$ ${o.P.unites}, le coût unitaire est $C(x) = ${o.C}$ euros ; il est minimal pour $x = ${o.xs}$. ${pick(["Quel est ce coût minimal ?", "Combien vaut le coût unitaire minimal, en euros ?"])}`,
     o.cmin,
-    expl("le coût minimal est $C(x_0)$, où $x_0$ annule $C'$.", "on remplace $x$ par la valeur trouvée.", `$C(${o.xs}) = ${n(o.a)} \\times ${o.xs}^2 - ${n(o.b)} \\times ${o.xs} + ${n(o.c)} = ${n(o.cmin)}$.`, `le coût minimal vaut ${n(o.cmin)} centimes.`)
+    expl("le coût minimal est $C(x_0)$, où $x_0$ annule $C'$.", "on remplace $x$ par la valeur trouvée.", `$C(${o.xs}) = ${n(o.a)} \\times ${o.xs}^2 - ${n(o.b)} \\times ${o.xs} + ${n(o.c)} = ${n(o.cmin)}$.`, `le coût minimal vaut ${n(o.cmin)} €.`)
   );
 }
 
@@ -1832,9 +1871,14 @@ function genConclBenef() {
 }
 
 function genConclCout() {
-  const P = pick(PRODS);
+  const P = pick(PRODS_SERIE);
   const xs = rint(2, 20) * 5;
-  const C = rint(5, 90);
+  const [coutMin, coutMax] = COUT_SERIE[P.unites];
+  // ⛔ Différents de la taille de série : sinon le piège qui les échange coïncide avec la bonne phrase.
+  const C = (() => {
+    const v = rint(coutMin, coutMax);
+    return v === xs ? v + 1 : v;
+  })();
   const bon = `En fabriquant des séries de ${xs} ${P.unites}, le coût unitaire est minimal : ${C} €.`;
   return qcm(
     `${P.qui} cherche la taille de série qui rend le coût unitaire minimal. Le calcul donne un minimum en $x = ${xs}$, avec $C(${xs}) = ${C}$ €. ${pick(["Quelle conclusion faut-il écrire ?", "Quelle phrase répond au problème ?"])}`,
