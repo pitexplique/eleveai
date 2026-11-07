@@ -1,0 +1,501 @@
+{
+  "mm": {
+    "1": 10,
+    "2": 7,
+    "3": 5,
+    "4": 3,
+    "5": 2
+  },
+  "noms": {
+    "lettres": {
+      "1": "Lettres géantes",
+      "2": "Lettres grandes",
+      "3": "Lettres moyennes",
+      "4": "Lettres petites",
+      "5": "Belles lettres"
+    },
+    "nombres": {
+      "1": "Chiffres géants",
+      "2": "Chiffres grands",
+      "3": "Nombres moyens",
+      "4": "Nombres petits",
+      "5": "Beaux nombres"
+    }
+  },
+  "pages": [
+    {
+      "cahier": "lettres",
+      "palier": 0,
+      "nom": "Page de garde",
+      "base": "couverture-lettres"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 0,
+      "nom": "Mon escalier",
+      "base": "escalier-lettres"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 0,
+      "nom": "Mes médailles",
+      "base": "medailles-lettres"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre a",
+      "base": "cahier-ecriture-lettre-a"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre c",
+      "base": "cahier-ecriture-lettre-c"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre d",
+      "base": "cahier-ecriture-lettre-d"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre e",
+      "base": "cahier-ecriture-lettre-e"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre f",
+      "base": "cahier-ecriture-lettre-f"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre g",
+      "base": "cahier-ecriture-lettre-g"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre h",
+      "base": "cahier-ecriture-lettre-h"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre i",
+      "base": "cahier-ecriture-lettre-i"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre k",
+      "base": "cahier-ecriture-lettre-k"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre l",
+      "base": "cahier-ecriture-lettre-l"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre m",
+      "base": "cahier-ecriture-lettre-m"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre n",
+      "base": "cahier-ecriture-lettre-n"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre o",
+      "base": "cahier-ecriture-lettre-o"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre p",
+      "base": "cahier-ecriture-lettre-p"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre q",
+      "base": "cahier-ecriture-lettre-q"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre r",
+      "base": "cahier-ecriture-lettre-r"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre s",
+      "base": "cahier-ecriture-lettre-s"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre t",
+      "base": "cahier-ecriture-lettre-t"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre u",
+      "base": "cahier-ecriture-lettre-u"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Lettre y",
+      "base": "cahier-ecriture-lettre-y"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 1,
+      "nom": "Diplôme du palier 1",
+      "base": "lettres-diplome-1"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 2,
+      "nom": "Les lettres qui ont une grande boucle",
+      "base": "lettres-2-01"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 2,
+      "nom": "Les lettres rondes",
+      "base": "lettres-2-02"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 2,
+      "nom": "Les lettres rondes qui montent ou qui descendent",
+      "base": "lettres-2-03"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 2,
+      "nom": "Les lettres qui montent et qui redescendent",
+      "base": "lettres-2-04"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 2,
+      "nom": "Les lettres avec des ponts",
+      "base": "lettres-2-05"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 2,
+      "nom": "Les dernières lettres",
+      "base": "lettres-2-06"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 2,
+      "nom": "J'attache deux lettres",
+      "base": "lettres-2-07"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 2,
+      "nom": "J'attache encore deux lettres",
+      "base": "lettres-2-08"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 2,
+      "nom": "Diplôme du palier 2",
+      "base": "lettres-diplome-2"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 3,
+      "nom": "Mes premiers mots",
+      "base": "lettres-3-01"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 3,
+      "nom": "D'autres mots",
+      "base": "lettres-3-02"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 3,
+      "nom": "Encore des mots",
+      "base": "lettres-3-03"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 3,
+      "nom": "Diplôme du palier 3",
+      "base": "lettres-diplome-3"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 4,
+      "nom": "Des mots plus longs",
+      "base": "lettres-4-01"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 4,
+      "nom": "Encore plus longs",
+      "base": "lettres-4-02"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 4,
+      "nom": "Les mots les plus longs",
+      "base": "lettres-4-03"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 4,
+      "nom": "Diplôme du palier 4",
+      "base": "lettres-diplome-4"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 5,
+      "nom": "Mes premières phrases",
+      "base": "lettres-5-01"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 5,
+      "nom": "Encore des phrases",
+      "base": "lettres-5-02"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 5,
+      "nom": "Regarde tout ce chemin !",
+      "base": "chemin-lettres"
+    },
+    {
+      "cahier": "lettres",
+      "palier": 5,
+      "nom": "Diplôme du palier 5",
+      "base": "lettres-diplome-5"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 0,
+      "nom": "Page de garde",
+      "base": "couverture-nombres"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 0,
+      "nom": "Mon escalier",
+      "base": "escalier-nombres"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 0,
+      "nom": "Mes médailles",
+      "base": "medailles-nombres"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 0",
+      "base": "cahier-ecriture-chiffre-0"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 1",
+      "base": "cahier-ecriture-chiffre-1"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 2",
+      "base": "cahier-ecriture-chiffre-2"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 3",
+      "base": "cahier-ecriture-chiffre-3"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 4",
+      "base": "cahier-ecriture-chiffre-4"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 5",
+      "base": "cahier-ecriture-chiffre-5"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 6",
+      "base": "cahier-ecriture-chiffre-6"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 7",
+      "base": "cahier-ecriture-chiffre-7"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 8",
+      "base": "cahier-ecriture-chiffre-8"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Chiffre 9",
+      "base": "cahier-ecriture-chiffre-9"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 1,
+      "nom": "Diplôme du palier 1",
+      "base": "nombres-diplome-1"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 2,
+      "nom": "Les chiffres, plus petits",
+      "base": "nombres-2-01"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 2,
+      "nom": "Encore les chiffres",
+      "base": "nombres-2-02"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 2,
+      "nom": "Dix, et ce qui vient après",
+      "base": "nombres-2-03"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 2,
+      "nom": "Je continue à compter",
+      "base": "nombres-2-04"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 2,
+      "nom": "Encore deux, et voici vingt",
+      "base": "nombres-2-05"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 2,
+      "nom": "Les dizaines",
+      "base": "nombres-2-06"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 2,
+      "nom": "Les dizaines, encore",
+      "base": "nombres-2-07"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 2,
+      "nom": "Diplôme du palier 2",
+      "base": "nombres-diplome-2"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 3,
+      "nom": "Dizaines et unités",
+      "base": "nombres-3-01"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 3,
+      "nom": "Dizaines et unités, encore",
+      "base": "nombres-3-02"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 3,
+      "nom": "Cent !",
+      "base": "nombres-3-03"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 3,
+      "nom": "Diplôme du palier 3",
+      "base": "nombres-diplome-3"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 4,
+      "nom": "Les centaines",
+      "base": "nombres-4-01"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 4,
+      "nom": "Les centaines, jusqu'à neuf cents",
+      "base": "nombres-4-02"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 4,
+      "nom": "Centaines, dizaines et unités",
+      "base": "nombres-4-03"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 4,
+      "nom": "Diplôme du palier 4",
+      "base": "nombres-diplome-4"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 5,
+      "nom": "Les grands nombres",
+      "base": "nombres-5-01"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 5,
+      "nom": "Des nombres de ma vie",
+      "base": "nombres-5-02"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 5,
+      "nom": "Regarde tout ce chemin !",
+      "base": "chemin-nombres"
+    },
+    {
+      "cahier": "nombres",
+      "palier": 5,
+      "nom": "Diplôme du palier 5",
+      "base": "nombres-diplome-5"
+    }
+  ]
+}

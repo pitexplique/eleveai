@@ -69,6 +69,11 @@ ENCOURAGEMENTS = [
 
 ESPACE = 2.9  # en interlignes, d'un modèle au suivant : de l'air pour une main lente
 
+# Les smileys du bas de page (le cahier par paliers remplace cette liste).
+IL_MAX = 155  # interligne maximal, en px
+NB_MODELES = 4  # modèles par ligne
+BILANS = [("grand", "Super !"), ("sourire", "Bien"), ("droit", "Encore un peu")]
+
 
 def etoile(d, cx, cy, r, couleur=JAUNE_BORD, largeur=8):
     pts = []
@@ -128,7 +133,7 @@ def bande(d, spec, y_base, il, titre, mode, y_titre):
 
     gauche = min(x for t in spec["traits"] for x, _ in t)
     bx = x0 + 70 + max(0.0, -gauche) * il
-    for i in range(4):
+    for i in range(NB_MODELES):
         traits = points_lettre(spec, bx, y_base, il)
         if mode == "modele" and i == 0:
             tracer_lettre(d, spec, bx, y_base, il, BLEU, 16)
@@ -177,7 +182,7 @@ def construire(glyphe, rang):
     # ⭐ Interligne plafonné à 155 px ≈ 13 mm, plus grand que la fiche CP.
     hb = (H - 560 - 1110) / 3
     monte = max(3.0, haut + 0.15)
-    il = min(155, int((hb - 72 - 60) / (monte + prof)))
+    il = min(IL_MAX, int((hb - 72 - 60) / (monte + prof)))
 
     img = Image.new("RGB", (W, H), (255, 255, 255))
     d = ImageDraw.Draw(img)
@@ -217,15 +222,20 @@ def construire(glyphe, rang):
     # ── Les trois lignes ─────────────────────────────────────────────────────
     for k, (titre, mode) in enumerate([("1. Je regarde, puis je repasse", "modele"),
                                        ("2. Je repasse encore", "pointille"),
-                                       ("3. J'écris tout seul !", "seul")]):
+                                       ("3. À moi d'écrire !", "seul")]):
         haut_bande = 1110 + k * hb
-        bande(d, spec, haut_bande + 72 + monte * il, il, titre, mode, haut_bande)
+        # ⛔ La hampe du « d », son point vert et son « 2 » mordaient le titre : la ligne
+        # descend juste assez, sans jamais rejoindre le titre suivant.
+        depart = max(t[0][1] for t in spec["traits"])
+        besoin = 72 if len(spec["traits"]) > 1 else 19
+        place = 72 + (monte - depart) * il
+        recul = max(0, min(70 + besoin - place, hb - 72 - (monte + prof) * il - 10))
+        bande(d, spec, haut_bande + 72 + recul + monte * il, il, titre, mode, haut_bande)
 
     # ── Le bas : comment je me sens, et le mot du maître ─────────────────────
     yb = H - 540
     d.text((MARGE, yb), "Je colorie mon smiley :", font=police("ariblk.ttf", 48), fill=NAVY)
-    for k, (bouche, mot) in enumerate([("grand", "Super !"), ("sourire", "Bien"),
-                                        ("droit", "Encore un peu")]):
+    for k, (bouche, mot) in enumerate(BILANS):
         cx = MARGE + 110 + k * 360
         smiley(d, cx, yb + 165, 72, bouche)
         f = police("arialbd.ttf", 38)

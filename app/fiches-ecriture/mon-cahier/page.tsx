@@ -1,84 +1,84 @@
 // « Mon cahier d'écriture » — /fiches-ecriture/mon-cahier
 //
-// ⭐ 03/11/2026 — Frédéric, en 6e : un élève avec AESH, en attente d'ULIS, ne
-// sait pas écrire ; on ne lui achète pas de cahier. Une page A4 par chiffre puis
-// par lettre, ludique (Ti Margo, étoiles, smileys), à imprimer. Les pages sont
-// faites par `python manim/fiche_ecriture_ulis.py` (mêmes tracés que les vidéos).
-// La liste se lit sur le DISQUE : une lettre ajoutée apparait sans toucher ici.
+// ⭐ 03/11/2026 — Frédéric, en 6e : un élève avec AESH, en attente d'ULIS, ne sait
+// pas écrire ; on ne lui achète pas de cahier.
+// ⭐ 06/11/2026 — il l'a donné à deux élèves d'ULIS : « pour une fois ils étaient
+// fiers ». Nouvelle philosophie : deux cahiers (lettres, nombres), 5 paliers où
+// l'écriture rapetisse, des médailles et un diplôme à chaque marche.
+// Les pages sont faites par `python manim/fiche_ecriture_paliers.py` (mêmes tracés
+// que les vidéos), qui écrit aussi le sommaire lu ici : rien à toucher à l'ajout
+// d'une lettre.
 import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Mon cahier d'écriture à imprimer — chiffres et lettres en cursive | EleveAI",
+  title: "Mon cahier d'écriture à imprimer — lettres et nombres, 5 paliers | EleveAI",
   description:
-    "Un cahier d'écriture gratuit à imprimer : les 10 chiffres puis les lettres en cursive, une page A4 chacun, avec la méthode en images, des étoiles et des smileys à colorier. Pour le CP, l'ULIS et les élèves qui apprennent à écrire.",
+    "Deux cahiers d'écriture gratuits à imprimer, les lettres et les nombres : 5 paliers où l'écriture rapetisse peu à peu, de la lettre géante à la phrase, du chiffre aux grands nombres. Médailles et diplômes à gagner. Pour le CP, l'ULIS et les élèves qui apprennent à écrire.",
   alternates: { canonical: "https://www.eleveai.fr/fiches-ecriture/mon-cahier" },
 };
 
-const DOSSIER = "/fiches-ecriture/mon-cahier";
+const DOSSIER = "/fiches-ecriture/mon-cahier-paliers";
 
-type Page = { glyphe: string; chiffre: boolean; base: string };
+type Cahier = "lettres" | "nombres";
+type PageCahier = { cahier: Cahier; palier: number; nom: string; base: string };
+type Sommaire = {
+  mm: Record<string, number>;
+  noms: Record<Cahier, Record<string, string>>;
+  pages: PageCahier[];
+};
 
-function pages(): Page[] {
-  const dir = path.join(process.cwd(), "public", "fiches-ecriture", "mon-cahier");
-  let fichiers: string[] = [];
+function lireSommaire(): Sommaire | null {
   try {
-    fichiers = fs.readdirSync(dir);
+    const f = path.join(process.cwd(), "public", "fiches-ecriture", "mon-cahier-paliers", "sommaire.json");
+    return JSON.parse(fs.readFileSync(f, "utf-8")) as Sommaire;
   } catch {
-    return [];
+    return null;
   }
-  return fichiers
-    .map((f) => /^cahier-ecriture-(chiffre|lettre)-(\w)\.pdf$/.exec(f))
-    .filter((m): m is RegExpExecArray => Boolean(m))
-    .map((m) => ({ glyphe: m[2], chiffre: m[1] === "chiffre", base: `cahier-ecriture-${m[1]}-${m[2]}` }))
-    // Les chiffres d'abord, puis l'alphabet : l'ordre du cahier.
-    .sort((a, b) => Number(b.chiffre) - Number(a.chiffre) || a.glyphe.localeCompare(b.glyphe));
 }
 
+const PRESENTATION: Record<Cahier, { titre: string; chemin: string }> = {
+  lettres: { titre: "Les lettres", chemin: "Les lettres, puis les syllabes, les mots et les phrases." },
+  nombres: { titre: "Les nombres", chemin: "Les chiffres, puis les dizaines, les centaines et les grands nombres." },
+};
+
 const CONSEILS = [
-  ["🐢", "Lentement d'abord", "La vitesse viendra seule. Un tracé lent et juste vaut mieux que dix rapides."],
-  ["🟢", "Toujours le point vert", "On part du point vert et on suit la flèche orange : c'est le sens qui s'apprend, pas seulement la forme."],
+  ["🏆", "La réussite d'abord", "On repasse avant d'écrire seul. Chaque page peut se finir, et chaque palier se termine par un diplôme et une médaille."],
+  ["🪜", "Une marche à la fois", "On ne change de palier que lorsque le précédent est facile. Rien ne presse : on peut refaire une page autant de fois qu'on veut."],
+  ["🟢", "Toujours le point vert", "On part du point vert : c'est le sens du geste qui s'apprend, pas seulement la forme."],
   ["⏱️", "10 minutes par jour", "Une page par séance, pas plus. Mieux vaut tous les jours un peu que longtemps une fois."],
-  ["⭐", "On colorie, on félicite", "Une étoile par ligne finie, un smiley à la fin. On ne barre pas : on recommence à côté."],
+  ["⭐", "On colorie, on félicite", "Une étoile par ligne finie. On ne barre pas : on recommence à côté."],
   ["🎬", "La vidéo avant la feuille", "Regarder d'abord le crayon tracer dans la vidéo, puis écrire. Le doigt peut tracer en l'air avec la vidéo."],
 ];
 
-export default function MonCahier() {
-  const liste = pages();
-  const chiffres = liste.filter((p) => p.chiffre);
-  const lettres = liste.filter((p) => !p.chiffre);
-
-  const grille = (titre: string, items: Page[]) => (
-    <section className="mt-10">
-      <h2 className="text-xl font-black text-slate-900">
-        {titre} <span className="text-sm font-bold text-slate-400">({items.length})</span>
-      </h2>
-      <div className="mt-3 grid grid-cols-3 gap-4 sm:grid-cols-5 lg:grid-cols-6">
-        {items.map((p) => (
-          <a
-            key={p.base}
-            href={`${DOSSIER}/${p.base}.pdf`}
-            target="_blank"
-            rel="noopener"
-            className="group block rounded-xl bg-white p-2 shadow-sm ring-1 ring-slate-200 transition hover:shadow-lg hover:ring-amber-400"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`${DOSSIER}/${p.base}.png`}
-              alt={`Page d'écriture : ${p.chiffre ? "le chiffre" : "la lettre"} ${p.glyphe}`}
-              loading="lazy"
-              className="aspect-[210/297] w-full rounded object-cover"
-            />
-            <span className="mt-1 block text-center text-2xl font-black text-slate-800 group-hover:text-amber-600">
-              {p.glyphe}
-            </span>
-          </a>
-        ))}
-      </div>
-    </section>
+function Vignette({ page }: { page: PageCahier }) {
+  return (
+    <a
+      href={`${DOSSIER}/${page.base}.pdf`}
+      target="_blank"
+      rel="noopener"
+      className="group block rounded-xl bg-white p-2 shadow-sm ring-1 ring-slate-200 transition hover:shadow-lg hover:ring-amber-400"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`${DOSSIER}/${page.base}.png`}
+        alt={`Page du cahier : ${page.nom}`}
+        loading="lazy"
+        className="aspect-[210/297] w-full rounded object-cover"
+      />
+      <span className="mt-1 block text-center text-xs font-bold leading-tight text-slate-700 group-hover:text-amber-700">
+        {page.nom}
+      </span>
+    </a>
   );
+}
+
+export default function MonCahier() {
+  const sommaire = lireSommaire();
+  const pages = sommaire?.pages ?? [];
+  const cahiers: Cahier[] = ["lettres", "nombres"];
 
   return (
     <main className="min-h-screen bg-[#fffaf0] text-slate-800">
@@ -86,23 +86,44 @@ export default function MonCahier() {
         <p className="text-sm font-bold uppercase tracking-wide text-amber-700">Fiches d&apos;écriture · à imprimer</p>
         <h1 className="mt-1 text-3xl font-black text-slate-900">Mon cahier d&apos;écriture</h1>
         <p className="mt-3 max-w-3xl text-lg text-slate-700">
-          Les 10 chiffres, puis les lettres en cursive : une page A4 pour chacun. Ti Margo encourage, la méthode est
-          en images, et on colorie une étoile à chaque ligne finie. Pensé pour les élèves qui apprennent à écrire —
-          au CP, en ULIS, ou en 6e avec leur AESH.
+          Deux cahiers gratuits, les lettres et les nombres. L&apos;écriture commence très grande, puis elle rapetisse
+          marche après marche, jusqu&apos;à la taille d&apos;un cahier ordinaire. Pensés pour que chaque élève réussisse
+          et en soit fier : au CP, en ULIS, ou en 6e avec son AESH.
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a
-            href={`${DOSSIER}/mon-cahier-d-ecriture-complet.pdf`}
-            target="_blank"
-            rel="noopener"
-            className="rounded-2xl bg-amber-500 px-6 py-4 text-lg font-black text-white shadow transition hover:bg-amber-600"
-          >
-            🖨️ Imprimer tout le cahier ({liste.length + 3} pages)
-          </a>
+        {/* Les deux cahiers entiers : ce que la plupart des visiteurs viennent chercher. */}
+        <section className="mt-6 grid gap-4 sm:grid-cols-2">
+          {cahiers.map((c) => {
+            const liste = pages.filter((p) => p.cahier === c);
+            return (
+              <div key={c} className="flex gap-4 rounded-2xl border-2 border-amber-200 bg-white p-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${DOSSIER}/couverture-${c}.png`}
+                  alt={`Page de garde du cahier : ${PRESENTATION[c].titre}`}
+                  className="aspect-[210/297] w-24 shrink-0 rounded object-cover ring-1 ring-slate-200 sm:w-28"
+                />
+                <div className="min-w-0">
+                  <h2 className="text-xl font-black text-slate-900">{PRESENTATION[c].titre}</h2>
+                  <p className="mt-1 text-sm text-slate-700">{PRESENTATION[c].chemin}</p>
+                  <a
+                    href={`${DOSSIER}/mon-cahier-${c}.pdf`}
+                    target="_blank"
+                    rel="noopener"
+                    className="mt-3 inline-block rounded-xl bg-amber-500 px-4 py-3 font-black text-white shadow transition hover:bg-amber-600"
+                  >
+                    🖨️ Imprimer le cahier ({liste.length} pages)
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </section>
+
+        <div className="mt-4">
           <Link
             href="/video?classe=cp"
-            className="rounded-2xl border-2 border-amber-400 bg-white px-6 py-4 text-lg font-black text-amber-700 transition hover:bg-amber-50"
+            className="inline-block rounded-xl border-2 border-amber-400 bg-white px-4 py-3 font-black text-amber-700 transition hover:bg-amber-50"
           >
             🎬 Les vidéos du geste
           </Link>
@@ -123,37 +144,56 @@ export default function MonCahier() {
           </ul>
         </section>
 
-        {/* ⭐ « Je veux qu'à la fin, elle se sente valorisée » (Frédéric, 03/11) :
-            le cahier à son nom, le tableau de réussite, un diplôme par étape. */}
-        <section className="mt-10">
-          <h2 className="text-xl font-black text-slate-900">Pour se sentir fier : la couverture et les diplômes</h2>
-          <div className="mt-3 grid grid-cols-3 gap-4 sm:grid-cols-5 lg:grid-cols-6">
-            {[
-              ["cahier-ecriture-couverture", "Couverture + tableau de réussite"],
-              ["cahier-ecriture-diplome-chiffres", "Diplôme des chiffres"],
-              ["cahier-ecriture-diplome-lettres", "Diplôme des lettres"],
-            ].map(([base, nom]) => (
-              <a
-                key={base}
-                href={`${DOSSIER}/${base}.pdf`}
-                target="_blank"
-                rel="noopener"
-                className="group block rounded-xl bg-white p-2 shadow-sm ring-1 ring-slate-200 transition hover:shadow-lg hover:ring-amber-400"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`${DOSSIER}/${base}.png`} alt={nom} loading="lazy" className="aspect-[210/297] w-full rounded object-cover" />
-                <span className="mt-1 block text-center text-sm font-black text-slate-800 group-hover:text-amber-600">{nom}</span>
-              </a>
-            ))}
-          </div>
-        </section>
+        {cahiers.map((c) => (
+          <section key={c} className="mt-12">
+            <h2 className="text-2xl font-black text-slate-900">{PRESENTATION[c].titre}, page par page</h2>
 
-        {grille("Les chiffres", chiffres)}
-        {grille("Les lettres", lettres)}
+            <h3 className="mt-5 text-lg font-black text-slate-900">Pour commencer</h3>
+            <div className="mt-2 grid grid-cols-3 gap-3 sm:grid-cols-5 lg:grid-cols-6">
+              {pages.filter((p) => p.cahier === c && p.palier === 0).map((p) => <Vignette key={p.base} page={p} />)}
+            </div>
 
-        <p className="mt-10 text-sm text-slate-500">
-          Les lettres b, j, v, w, x, z et les pages « j&apos;écris des mots » arrivent : le cahier se complète au fil des
-          vidéos.
+            {[1, 2, 3, 4, 5].map((n) => {
+              const liste = pages.filter((p) => p.cahier === c && p.palier === n);
+              return (
+                <div key={n} className="mt-7">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                    <h3 className="text-lg font-black text-slate-900">
+                      Palier {n} · {sommaire?.noms[c][String(n)]}{" "}
+                      <span className="text-sm font-bold text-slate-500">
+                        (lignes de {sommaire?.mm[String(n)]} mm)
+                      </span>
+                    </h3>
+                    <a
+                      href={`${DOSSIER}/${c}-palier-${n}.pdf`}
+                      target="_blank"
+                      rel="noopener"
+                      className="rounded-lg bg-amber-100 px-3 py-1.5 text-sm font-black text-amber-800 transition hover:bg-amber-200"
+                    >
+                      🖨️ Imprimer ce palier ({liste.length} pages)
+                    </a>
+                  </div>
+                  <div className="mt-2 grid grid-cols-3 gap-3 sm:grid-cols-5 lg:grid-cols-6">
+                    {liste.map((p) => <Vignette key={p.base} page={p} />)}
+                  </div>
+                </div>
+              );
+            })}
+          </section>
+        ))}
+
+        <p className="mt-10 text-sm text-slate-600">
+          Les lettres b, j, v, w, x et z arrivent : le cahier se complète au fil des vidéos. Un élève a déjà commencé le
+          premier cahier ? Il reste disponible :{" "}
+          <a
+            href="/fiches-ecriture/mon-cahier/mon-cahier-d-ecriture-complet.pdf"
+            target="_blank"
+            rel="noopener"
+            className="font-bold text-amber-700 underline"
+          >
+            l&apos;ancien cahier, en très grandes lettres
+          </a>
+          .
         </p>
       </div>
     </main>
