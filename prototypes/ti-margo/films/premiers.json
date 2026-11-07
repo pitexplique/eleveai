@@ -1,0 +1,7 @@
+{
+  "voix": "4e-premier-{ep}-short",
+  "sons": "public/sons/4e-premier-{ep}-short",
+  "sortie": "manim/sorties/4e/maths/divisibilite/{num}-{ep}",
+  "nom": "eleveai-maths-4e-premier-{ep}-short",
+  "episodes": { "definition": "08", "determiner": "09", "decomposer": "10", "defi": "11" }
+}
