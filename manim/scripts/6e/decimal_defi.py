@@ -207,13 +207,21 @@ class DecimalDefiBase(PaysageDecimal):
             sc.play(*[FadeIn(c, scale=1.5) for c in ch], run_time=0.35)
 
         def apres(sc):
-            g = sc.gros("0,05", fs=60).move_to(P(-3.4, -1.55))
+            g = sc.gros("0,05", fs=60).move_to(P(-3.4, -0.85))
             lg = sc.ligne_rep(0, ["Le 0", "des dixièmes"])
+            lg.scale_to_fit_height(0.42)
+            if lg.width > 6.0:
+                lg.scale_to_fit_width(6.0)
+            lg.move_to(P(-3.4, -1.95))
             sc.au_mot("Le 0")
             sc.play(FadeIn(lg[0], shift=UP * 0.1), Indicate(ch[1], color=VERT_OK, scale_factor=1.9), run_time=0.3)
             sc.au_mot("des dixièmes")
             sc.play(FadeIn(lg[1], shift=UP * 0.1), run_time=0.3)
             lg2 = sc.ligne_rep(1, ["garde sa place :", "0,05."])
+            lg2.scale_to_fit_height(0.42)
+            if lg2.width > 6.0:
+                lg2.scale_to_fit_width(6.0)
+            lg2.move_to(P(-3.4, -2.6))
             sc.au_mot("garde sa place")
             sc.play(FadeIn(lg2[0], shift=UP * 0.1), run_time=0.3)
             sc.au_mot("0,05")
@@ -282,8 +290,8 @@ class DecimalDefiBase(PaysageDecimal):
         nom = self.t("Liam écrit :", 36)
         self.col(nom, 2.2, xl=0.6)
         self.play(FadeIn(li, shift=UP * 0.2), FadeIn(nom), run_time=0.35)
-        t1 = TableauNum(larg=1.25, h=0.8, fs_ent=22).move_to(P(-2.6, 1.0))
-        t2 = TableauNum(larg=1.25, h=0.8, fs_ent=22).move_to(P(-2.6, -0.6))
+        t1 = TableauNum(larg=1.6, h=0.85, fs_ent=28).move_to(P(-2.45, 1.0))
+        t2 = TableauNum(larg=1.6, h=0.85, fs_ent=28).move_to(P(-2.45, -0.6))
         hors_audit(t2.entetes)
         t2.entetes.set_opacity(0)
         c1 = [t1.chiffre(0, 7, BLEU_D), t1.chiffre(1, 1, AMBRE_D), t1.chiffre(2, 1, ROSE_D)]
@@ -330,8 +338,8 @@ class DecimalDefiBase(PaysageDecimal):
         self.clear()
         self.add_mascotte()
         rangs = ("Dizaines", "Unités", "Dixièmes", "Centièmes")
-        t1 = TableauNum(rangs, larg=1.3, h=0.85, fs_ent=22, virgule_apres=1).move_to(P(-3.5, 1.2))
-        t2 = TableauNum(rangs, larg=1.3, h=0.85, virgule_apres=1).move_to(P(-3.5, -0.35))
+        t1 = TableauNum(rangs, larg=1.45, h=0.85, fs_ent=26, virgule_apres=1).move_to(P(-3.55, 1.5))
+        t2 = TableauNum(rangs, larg=1.45, h=0.85, virgule_apres=1).move_to(P(-3.55, 0.1))
         hors_audit(t2.entetes)
         cols = ("#34d399", BLEU_D, AMBRE_D, ROSE_D)
         c1 = [t1.chiffre(i, v, cols[i]) for i, v in enumerate((1, 0, 2, 0))]
@@ -344,10 +352,22 @@ class DecimalDefiBase(PaysageDecimal):
             sc.play(*[FadeIn(c, scale=1.5) for c in c1 + c2], run_time=0.35)
 
         def apres(sc):
-            sc.rep(0, avec=[Indicate(c1[3], color=VERT_OK, scale_factor=2.0)])
+            # l'explication sous les tableaux, à gauche : sous les cartes, elle était minuscule
+            # sur quatre lignes courtes : sur deux, bornées à 6 de large, elles restaient petites
+            l1 = VGroup(sc.t("Un zéro à la fin", 36, VERT_OK).move_to(P(-3.6, -0.95)),
+                        sc.t("ne change rien :", 36, VERT_OK).move_to(P(-3.6, -1.5)))
+            l2 = sc.ligne([("20 centièmes,", ROSE_D), ("ce sont", VERT_OK)], 36, buff=0.16).move_to(P(-3.6, -2.1))
+            l2.add(sc.t("2 dixièmes.", 36, AMBRE_D).move_to(P(-3.6, -2.7)))
+            sc.au_mot("Un zéro")
+            sc.play(FadeIn(l1, shift=UP * 0.1), Indicate(c1[3], color=VERT_OK, scale_factor=2.0), run_time=0.35)
             cad = SurroundingRectangle(VGroup(t1.cases[2], t2.cases[2]), color=AMBRE_D, buff=0.06, stroke_width=6)
-            sc.rep(1, avec=[Create(cad)])
-            sc.rep_fin()
+            sc.au_mot("20 centièmes")
+            sc.play(FadeIn(l2[0], shift=UP * 0.1), Indicate(c1[2], color=ROSE_D), run_time=0.3)
+            sc.au_mot("ce sont")
+            sc.play(FadeIn(l2[1], shift=UP * 0.1), run_time=0.25)
+            sc.au_mot("2 dixièmes")
+            sc.play(FadeIn(l2[2], shift=UP * 0.1), Create(cad), run_time=0.3)
+            sc.rep_fini()
 
         self.question_pause("06-question", "06b-reponse", ["10,20 est-il égal à 10,2 ?"],
                             [self.t("oui", 34), self.choix("non, il est plus grand"),
