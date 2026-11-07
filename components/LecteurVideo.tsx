@@ -13,7 +13,7 @@
 // avant et montre « À toi ! » avec le lien vers l'entraînement.
 
 import Link from "next/link";
-import { useRef, useState, type VideoHTMLAttributes } from "react";
+import { useEffect, useRef, useState, type VideoHTMLAttributes } from "react";
 import { useEleve } from "@/context/EleveContext";
 import { signalerActivite } from "@/lib/activite";
 
@@ -31,15 +31,28 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "4e-relatif-calcul": 8.4,
   "4e-relatif-probleme": 8.4,
   "4e-relatif-defi": 8.4,
-  // Shorts Relatifs : « Mets » mesuré dans chaque mp4 + 0,15 s. Aucun silence entre « f r » et
-  // « Mets », et timeupdate arrête jusqu'à 0,25 s après le seuil : on vise la fin du « r » (07/11).
-  "4e-relatif-addition-short": 4.65,
-  "4e-relatif-soustraction-short": 4.64,
-  "4e-relatif-multiplication-short": 4.59,
-  "4e-relatif-division-short": 4.64,
-  "4e-relatif-calcul-short": 4.64,
-  "4e-relatif-probleme-short": 4.69,
-  "4e-relatif-defi-short": 4.65,
+  // Shorts en dessin animé : aucun silence entre « f r » et « Mets un pouce ». La coupe vaut
+  // « Mets », mesuré dans chaque mp4, + 0,03 s, car l'arrêt précis dépasse de 0,02 s au plus (07/11).
+  "4e-relatif-addition-short": 4.54,
+  "4e-relatif-soustraction-short": 4.52,
+  "4e-relatif-multiplication-short": 4.47,
+  "4e-relatif-division-short": 4.52,
+  "4e-relatif-calcul-short": 4.52,
+  "4e-relatif-probleme-short": 4.57,
+  "4e-relatif-defi-short": 4.54,
+  "4e-puissance-comprendre-short": 4.22,
+  "4e-puissance-calculer-short": 4.21,
+  "4e-puissance-dix-short": 4.22,
+  "4e-puissance-zero-negatif-short": 4.23,
+  "4e-puissance-notation-scientifique-short": 4.24,
+  "4e-puissance-comparer-short": 4.21,
+  "4e-puissance-calcul-short": 4.22,
+  "4e-puissance-defi-short": 4.23,
+  "3e-puissance-defi-short": 4.21,
+  "seconde-puissance-produit-quotient-short": 4.21,
+  "seconde-puissance-enchainer-short": 4.22,
+  "premiere-puissance-cinq-regles-short": 4.22,
+  "ti-margo-3d-mes-vues-doublent-short": 4.46,
   // Triangles 6e : mesuré dans les mp4, la pause après « point f r » (07/11).
   "6e-triangle-nommer": 8.4,
   "6e-triangle-sommet-cote": 8.4,
@@ -50,15 +63,16 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "6e-triangle-angle-manquant": 8.4,
   "6e-triangle-possible-ou-non": 8.4,
   "6e-triangle-propriete-defi": 8.4,
-  "6e-triangle-nommer-short": 4.2,
-  "6e-triangle-sommet-cote-short": 4.2,
-  "6e-triangle-type-cote-short": 4.2,
-  "6e-triangle-type-angle-short": 4.2,
-  "6e-triangle-defi-short": 4.2,
-  "6e-triangle-somme-angle-short": 4.2,
-  "6e-triangle-angle-manquant-short": 4.2,
-  "6e-triangle-possible-ou-non-short": 4.2,
-  "6e-triangle-propriete-defi-short": 4.2,
+  // Shorts Triangles : même calcul que les shorts Relatifs ci-dessus.
+  "6e-triangle-nommer-short": 4.21,
+  "6e-triangle-sommet-cote-short": 4.21,
+  "6e-triangle-type-cote-short": 4.23,
+  "6e-triangle-type-angle-short": 4.21,
+  "6e-triangle-defi-short": 4.23,
+  "6e-triangle-somme-angle-short": 4.21,
+  "6e-triangle-angle-manquant-short": 4.21,
+  "6e-triangle-possible-ou-non-short": 4.21,
+  "6e-triangle-propriete-defi-short": 4.21,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {
@@ -99,6 +113,38 @@ export default function LecteurVideo({ videoId, children, suite, retour, ...prop
       }
     }
   };
+  // Arrêt précis pour les vidéos de la table, dont la coupe tombe entre deux mots :
+  // timeupdate ne passe que toutes les 0,25 s. On vérifie donc à chaque image pendant la
+  // lecture ; timeupdate reste le filet si l'onglet passe en arrière-plan. Les autres vidéos
+  // gardent timeupdate : à 3,6 s, un arrêt exact couperait la fin de « point f r ».
+  const surveillerRef = useRef(surveiller);
+  useEffect(() => {
+    surveillerRef.current = surveiller;
+  });
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || COUPE_PAR_VIDEO[videoId] === undefined) return;
+    let image = 0;
+    const boucle = () => {
+      surveillerRef.current();
+      if (!v.paused && !v.ended) image = requestAnimationFrame(boucle);
+    };
+    const lancer = () => {
+      cancelAnimationFrame(image);
+      image = requestAnimationFrame(boucle);
+    };
+    const arreter = () => cancelAnimationFrame(image);
+    v.addEventListener("play", lancer);
+    v.addEventListener("pause", arreter);
+    v.addEventListener("ended", arreter);
+    if (!v.paused) lancer();
+    return () => {
+      arreter();
+      v.removeEventListener("play", lancer);
+      v.removeEventListener("pause", arreter);
+      v.removeEventListener("ended", arreter);
+    };
+  }, [videoId]);
   const revoir = () => {
     const v = ref.current;
     setFini(false);
