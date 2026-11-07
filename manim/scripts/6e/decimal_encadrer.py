@@ -322,8 +322,9 @@ class DecimalEncadrerBase(PaysageDecimal):
         lp = loupe(0.36).move_to(haut.x(4.755) + P(-0.5, 0.6))
         l2 = self.t("On zoome encore :", 36, AMBRE_D)
         self.col(l2, 1.45)
-        lz = hors_audit(VGroup(DashedLine(haut.x(4.75), d.x(4.75) + UP * 0.3, color=AMBRE_D),
-                               DashedLine(haut.x(4.76), d.x(4.76) + UP * 0.3, color=AMBRE_D)))
+        # les pointillés partent sous les étiquettes 4,75 / 4,76 pour ne pas les frôler
+        lz = hors_audit(VGroup(DashedLine(haut.x(4.75) + DOWN * 0.8, d.x(4.75) + UP * 0.3, color=AMBRE_D),
+                               DashedLine(haut.x(4.76) + DOWN * 0.8, d.x(4.76) + UP * 0.3, color=AMBRE_D)))
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(lp, scale=0.5), run_time=0.4)
         self.play(Create(lz), FadeIn(d), FadeIn(hors_audit(etiquette(d, 4.75, "4,75", 30, VOISIN))),
                   FadeIn(hors_audit(etiquette(d, 4.76, "4,76", 30, VOISIN))), run_time=0.5)
