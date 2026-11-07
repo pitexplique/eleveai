@@ -32,6 +32,13 @@ const DIRE = (L: number, l: number, h: number, u: string) => [
   `Un pavé droit a pour dimensions ${L} ${u} (longueur), ${l} ${u} (largeur) et ${h} ${u} (hauteur).`,
 ];
 
+// 07/11/2026 : ★1 à 12 mots et ★2 à 15 mots au plus (REGLES-6E) : les dimensions en
+// liste, 9 mots, dans le style de vision-espace.bank.ts. Le mot « pavé » vient de la notion.
+const DIRE_COURT = (L: number, l: number, h: number, u: string) => [
+  `Longueur ${L} ${u}, largeur ${l} ${u}, hauteur ${h} ${u}.`,
+  `Long : ${L} ${u}, large : ${l} ${u}, haut : ${h} ${u}.`,
+  `L = ${L} ${u}, l = ${l} ${u}, h = ${h} ${u}.`,
+];
 /** Les faces : leur nom et leurs deux dimensions. */
 const FACES = (L: number, l: number, h: number) => [
   { nom: "du dessus", a: L, b: l }, { nom: "du dessous", a: L, b: l }, { nom: "de devant", a: L, b: h }, { nom: "de derrière", a: L, b: h }, { nom: "de gauche", a: l, b: h }, { nom: "de droite", a: l, b: h },
@@ -55,13 +62,13 @@ export const patronPaveBank = [
     const { L, l, h, u } = dims();
     const F = un(FACES(L, l, h));
     const juste = sur(F.a, F.b, u);
-    return choix(`${un(DIRE(L, l, h, u))} ${un([`Quelles sont les dimensions de la face ${F.nom} ?`, `Quelle est la taille du rectangle de la face ${F.nom} ?`, `Dans son patron, quel rectangle dessine-t-on pour la face ${F.nom} ?`, `Quel rectangle du patron correspond à la face ${F.nom} ?`, `Que mesure la face ${F.nom} ?`])}`, juste, [sur(L, l, u), sur(L, h, u), sur(l, h, u), sur(L, L, u), sur(h, h, u), sur(l, l, u)], expliquer(DEF, "on repère les deux arêtes qui bordent cette face.", `la face ${F.nom} est bordée par ${F.a} ${u} et ${F.b} ${u}.`, `elle mesure ${juste}.`));
+    return choix(`${un(DIRE_COURT(L, l, h, u))} ${un([`Face ${F.nom} ?`, `Taille ${F.nom} ?`, `Rectangle ${F.nom} ?`, `Mesure ${F.nom} ?`])}`, juste, [sur(L, l, u), sur(L, h, u), sur(l, h, u), sur(L, L, u), sur(h, h, u), sur(l, l, u)], expliquer(DEF, "on repère les deux arêtes qui bordent cette face.", `la face ${F.nom} est bordée par ${F.a} ${u} et ${F.b} ${u}.`, `elle mesure ${juste}.`));
   }),
   tpl(1, "L'aire d'un rectangle : ses deux dimensions multipliées.", () => {
     const { L, l, h, u } = dims();
     const F = un(FACES(L, l, h));
     const A = F.a * F.b;
-    return court(`${un(DIRE(L, l, h, u))} ${un([`Quelle est l'aire de la face ${F.nom} ?`, `Calcule l'aire de la face ${F.nom}.`, `Quelle aire occupe la face ${F.nom} sur le patron ?`, `Combien vaut l'aire de sa face ${F.nom} ?`, `Trouve l'aire du rectangle de la face ${F.nom}.`])}`, A, `${u}²`, expliquer(DEF, "on repère les deux dimensions de la face, puis on les multiplie.", `${F.a} × ${F.b} = ${A}.`, `l'aire est ${A} ${u}².`));
+    return court(`${un(DIRE_COURT(L, l, h, u))} Aire ${F.nom} ?`, A, `${u}²`, expliquer(DEF, "on repère les deux dimensions de la face, puis on les multiplie.", `${F.a} × ${F.b} = ${A}.`, `l'aire est ${A} ${u}².`));
   }),
   tpl(1, "Lis les longueurs écrites autour de la face colorée.", () => {
     const { L, l, h, u } = dims();
@@ -73,7 +80,7 @@ export const patronPaveBank = [
     const juste = sur(dim[0], dim[1], u);
     return choix(un([
       "Quelles sont les dimensions de la face colorée ?", "Sur ce patron, que mesure la face colorée ?", "Quelle est la taille du rectangle coloré ?", "Quel rectangle est coloré sur ce patron ?", "Ce patron a une face colorée. Quelles sont ses dimensions ?",
-      "Lis ce patron de pavé droit. Quelle est la taille de la face colorée ?", "Regarde la face colorée de ce patron. Que mesure-t-elle ?", "Donne les dimensions de la face colorée.", "Choisis les dimensions du rectangle coloré.", "Combien mesure le rectangle coloré de ce patron ?",
+      "Lis ce patron. Quelle est la taille de la face colorée ?", "Regarde la face colorée de ce patron. Que mesure-t-elle ?", "Donne les dimensions de la face colorée.", "Choisis les dimensions du rectangle coloré.", "Combien mesure le rectangle coloré de ce patron ?",
     ]), juste, [sur(L, l, u), sur(L, h, u), sur(l, h, u), sur(L, L, u), sur(h, h, u)], expliquer(DEF, "on reporte les longueurs écrites sur les côtés qui se recollent.", `la face colorée a pour côtés ${dim[0]} ${u} et ${dim[1]} ${u}.`, `elle mesure ${juste}.`), figure([P], "Le patron d'un pavé droit, une face colorée"));
   }),
 
@@ -83,7 +90,7 @@ export const patronPaveBank = [
     for (const k of [0, 1, 2, 3]) P.pieces[k].fond = "#fde68a";
     P.cotes = [cotePiece(P.pieces[0], 3, `${h} ${u}`)];
     const B = 2 * (L + l);
-    return court(`${un(DIRE(L, l, h, u))} ${un(["Quelle est la longueur totale de la bande colorée de son patron ?", "Combien mesure la bande colorée, d'un bout à l'autre ?", "Que mesure la bande colorée, dans le sens de la longueur ?", "Calcule la longueur de la bande colorée de ce patron.", "La bande colorée fait le tour du pavé. Quelle est sa longueur ?"])}`, B, u, expliquer(DEF, "la bande met bout à bout les quatre faces du tour : longueur, largeur, longueur, largeur.", `${L} + ${l} + ${L} + ${l} = ${B}.`, `la bande mesure ${B} ${u}.`), figure([P], "Le patron d'un pavé droit, la bande de quatre faces colorée"));
+    return court(`${un(DIRE_COURT(L, l, h, u))} ${un(["Longueur de la bande colorée ?", "Combien mesure la bande colorée ?", "Que mesure la bande colorée ?", "Calcule la longueur de cette bande.", "Bande colorée : quelle longueur ?"])}`, B, u, expliquer(DEF, "la bande met bout à bout les quatre faces du tour : longueur, largeur, longueur, largeur.", `${L} + ${l} + ${L} + ${l} = ${B}.`, `la bande mesure ${B} ${u}.`), figure([P], "Le patron d'un pavé droit, la bande de quatre faces colorée"));
   }),
   tpl(2, "Faces opposées égales, un couvercle de chaque côté de la bande, et les bords qui se recollent.", () => {
     // Pas plus haut que long : le couvercle trop large resterait seul à l'échelle, les autres dépliages seraient minuscules.
@@ -97,25 +104,25 @@ export const patronPaveBank = [
       patronPave(L, l, h, { defaut: "face_manquante" }),
       patronPave(L, l, h, { defaut: "bande_desordonnee" }),
     ];
-    return comparer(`${un(DIRE(L, l, h, u))} ${un(["Lequel de ces dépliages est un patron de ce pavé ?", "Quel dépliage donne ce pavé une fois plié ?", "Quel est le bon patron ?", "Lequel se plie pour former ce pavé ?", "Choisis le dépliage qui referme ce pavé."])}`, vrai, faux, expliquer(DEF, "on vérifie : 6 faces, faces opposées égales, un couvercle de chaque côté de la bande.", "un seul dépliage respecte les trois conditions.", "c'est le seul qui se referme."), "Quatre dépliages, A, B, C et D, dont un seul est un patron du pavé");
+    return comparer(`${un(DIRE_COURT(L, l, h, u))} ${un(["Quel dépliage est son patron ?", "Quel dépliage donne ce pavé ?", "Quel est le bon patron ?", "Lequel se plie en ce pavé ?", "Quel dépliage referme ce pavé ?"])}`, vrai, faux, expliquer(DEF, "on vérifie : 6 faces, faces opposées égales, un couvercle de chaque côté de la bande.", "un seul dépliage respecte les trois conditions.", "c'est le seul qui se referme."), "Quatre dépliages, A, B, C et D, dont un seul est un patron du pavé");
   }),
   tpl(2, "Largeur totale : la bande. Hauteur totale : hauteur + deux fois la largeur.", () => {
     const { L, l, h, u } = dims();
     const X = 2 * (L + l);
     const Y = h + 2 * l;
     const juste = sur(X, Y, u);
-    return choix(`${un(DIRE(L, l, h, u))} ${un(["Son patron en croix tient dans quel rectangle, au plus juste ?", "Quel est le plus petit rectangle qui contient son patron en croix ?", "Quelles sont les dimensions du rectangle qui entoure son patron en croix ?", "Dans quel rectangle minimal dessine-t-on ce patron en croix ?", "Quel rectangle entoure au plus juste ce patron en croix ?"])}`, juste, [sur(X, h, u), sur(L + l, Y, u), sur(X, h + l, u), sur(2 * L + l, Y, u), sur(L, l, u)], expliquer(DEF, "d'un côté, la bande de quatre faces ; de l'autre, la hauteur et les deux couvercles.", `${L} + ${l} + ${L} + ${l} = ${X} ; ${l} + ${h} + ${l} = ${Y}.`, `le rectangle mesure ${juste}.`), figure([patronPave(L, l, h)], "Le patron en croix d'un pavé droit"));
+    return choix(`${un(DIRE_COURT(L, l, h, u))} ${un(["Quel rectangle entoure ce patron ?", "Plus petit rectangle autour du patron ?", "Ce patron tient dans quel rectangle ?", "Rectangle minimal autour du patron ?"])}`, juste, [sur(X, h, u), sur(L + l, Y, u), sur(X, h + l, u), sur(2 * L + l, Y, u), sur(L, l, u)], expliquer(DEF, "d'un côté, la bande de quatre faces ; de l'autre, la hauteur et les deux couvercles.", `${L} + ${l} + ${L} + ${l} = ${X} ; ${l} + ${h} + ${l} = ${Y}.`, `le rectangle mesure ${juste}.`), figure([patronPave(L, l, h)], "Le patron en croix d'un pavé droit"));
   }),
   tpl(2, "Deux faces partagent une arête : retrouve les trois dimensions du pavé.", () => {
     const { L, l, h, u } = dims();
     const juste = sur(l, h, u);
     return choix(un([
-      `Le patron d'un pavé droit a des faces de ${sur(L, l, u)} et de ${sur(L, h, u)}. Quelle est la dimension de sa 3e sorte de face ?`,
-      `Un pavé droit a une face de ${sur(L, l, u)} et une autre de ${sur(L, h, u)}. Que mesure sa troisième sorte de face ?`,
-      `Faces d'un pavé droit : ${sur(L, l, u)} et ${sur(L, h, u)}. Quelle est la troisième sorte de face ?`,
-      `Sur un patron de pavé droit, il y a des rectangles de ${sur(L, l, u)} et de ${sur(L, h, u)}. Quels rectangles manquent ?`,
-      `Pour finir un patron de pavé droit, on a tracé ${sur(L, l, u)} et ${sur(L, h, u)}. Quel rectangle reste à tracer ?`,
-      `Patron de pavé droit : deux sortes de faces sont ${sur(L, l, u)} et ${sur(L, h, u)}. Quelle est la dernière ?`,
+      `Faces : ${sur(L, l, u)} et ${sur(L, h, u)}. Troisième face ?`,
+      `Pavé : ${sur(L, l, u)} et ${sur(L, h, u)}. Quelle troisième face ?`,
+      `Faces ${sur(L, l, u)} et ${sur(L, h, u)}. Et la dernière ?`,
+      `${sur(L, l, u)} et ${sur(L, h, u)} : quelle troisième face ?`,
+      `Patron : ${sur(L, l, u)} et ${sur(L, h, u)}. Quel rectangle manque ?`,
+      `Déjà tracés : ${sur(L, l, u)} et ${sur(L, h, u)}. Que manque-t-il ?`,
     ]), juste, [sur(L, l, u), sur(L, h, u), sur(L, L, u), sur(l, l, u), sur(h, h, u), sur(L, l + h, u)], expliquer(DEF, `l'arête commune aux deux faces est ${L} ${u} : les deux autres dimensions sont ${l} ${u} et ${h} ${u}.`, "la troisième sorte de face utilise ces deux dimensions.", `elle mesure ${juste}.`));
   }),
 
@@ -123,7 +130,7 @@ export const patronPaveBank = [
     const { L, l, h } = dims();
     const O = un(["une boîte à chaussures", "un coffret de jeu", "un carton de déménagement", "une boîte à outils", "une ruche d'exposition", "un aquarium", "une boîte à violon", "un écrin à bijoux", "une boîte à graines", "un coffre de plongée"]);
     const A = 2 * (L * l + L * h + l * h);
-    return court(`On découpe le patron d'${O} en forme de pavé droit : ${L} cm de long, ${l} cm de large, ${h} cm de haut. ${un(["Quelle surface de matériau faut-il, sans compter les chutes ?", "Quelle est l'aire totale de son patron ?", "Quelle aire de carton faut-il sans les chutes ?", "Combien de cm² couvre ce patron ?"])}`, A, "cm²", expliquer(DEF, "on calcule les trois sortes de faces, chacune deux fois.", `2 × (${L} × ${l} + ${L} × ${h} + ${l} × ${h}) = ${A}.`, `il faut ${A} cm².`), figure([patronPave(L, l, h)], "Le patron de la boîte"));
+    return court(`Patron d'${O}, un pavé droit : long ${L} cm, large ${l} cm, haut ${h} cm. ${un(["Quelle surface de matériau faut-il ?", "Quelle est l'aire totale de son patron ?", "Quelle aire de carton faut-il ?", "Combien de cm² couvre ce patron ?"])}`, A, "cm²", expliquer(DEF, "on calcule les trois sortes de faces, chacune deux fois.", `2 × (${L} × ${l} + ${L} × ${h} + ${l} × ${h}) = ${A}.`, `il faut ${A} cm².`), figure([patronPave(L, l, h)], "Le patron de la boîte"));
   }),
   tpl(3, "Calcule le rectangle qui entoure le patron, puis compare à la feuille, dans les deux sens.", () => {
     const { L, l, h } = dims();
@@ -134,20 +141,20 @@ export const patronPaveBank = [
     const b = assez ? Math.min(X, Y) + entre(0, 6) : Math.min(X, Y) + entre(0, 8);
     // La feuille peut se tourner : on juge dans les deux sens, jamais sur le tirage.
     const tient = (X <= a && Y <= b) || (X <= b && Y <= a);
-    const W = un(["Une emballeuse", "Un graphiste", "Une pâtissière", "Un luthier", "Une fleuriste", "Un maquettiste", "Une libraire", "Un apiculteur", "Une costumière", "Un horloger"]);
+    const O = un(["une boîte", "un coffret", "un carton", "un étui"]);
     const juste = tient ? "Oui, la feuille suffit" : "Non, la feuille est trop petite";
-    return choix(`${W} veut dessiner d'un seul tenant, en croix, le patron d'une boîte de ${L} cm sur ${l} cm sur ${h} cm (longueur, largeur, hauteur). Sa feuille mesure ${a} cm sur ${b} cm. ${un(["Le patron tient-il sur la feuille ?", "La feuille est-elle assez grande ?", "Peut-on le tracer sur cette feuille ?", "Cette feuille convient-elle ?"])}`, juste, [tient ? "Non, la feuille est trop petite" : "Oui, la feuille suffit", "Oui, mais seulement sans les couvercles", "On ne peut pas savoir"], expliquer(DEF, "le patron en croix tient dans un rectangle : la bande d'un côté, hauteur et couvercles de l'autre.", `${X} cm sur ${Y} cm, à comparer à ${a} cm sur ${b} cm.`, `${juste.toLowerCase()}.`));
+    return choix(`Patron en croix d'${O} : long ${L} cm, large ${l} cm, haut ${h} cm. Feuille de ${a} cm sur ${b} cm. ${un(["Le patron tient-il dessus ?", "Est-elle assez grande ?", "Peut-on le tracer dessus ?", "Cette feuille convient-elle ?"])}`, juste, [tient ? "Non, la feuille est trop petite" : "Oui, la feuille suffit", "Oui, mais seulement sans les couvercles", "On ne peut pas savoir"], expliquer(DEF, "le patron en croix tient dans un rectangle : la bande d'un côté, hauteur et couvercles de l'autre.", `${X} cm sur ${Y} cm, à comparer à ${a} cm sur ${b} cm.`, `${juste.toLowerCase()}.`));
   }),
   tpl(3, "Sans couvercle : on retire une face longueur × largeur.", () => {
     const { L, l, h } = dims();
-    const O = un(["un bac à fleurs", "une jardinière", "un plateau de rangement", "un bac à sable", "un casier à bouteilles", "un bac de pêcheur", "une caisse à outils ouverte", "un bassin à poissons", "un présentoir de boulangerie", "un tiroir"]);
+    const O = un(["un bac à fleurs", "une jardinière", "un plateau de rangement", "un bac à sable", "un casier à bouteilles", "un bac de pêcheur", "une caisse à outils", "un bassin à poissons", "un présentoir de boulangerie", "un tiroir"]);
     const A = L * l + 2 * L * h + 2 * l * h;
-    return court(`On fabrique ${O} sans couvercle, en forme de pavé droit : ${L} dm de long, ${l} dm de large et ${h} dm de haut. ${un(["Quelle est l'aire de son patron ?", "Quelle surface de matériau faut-il ?", "Quelle aire de plaque faut-il sans les chutes ?", "Combien de dm² couvre son patron ?"])}`, A, "dm²", expliquer(DEF, "il reste 5 faces : le fond et les 4 faces du tour.", `${L} × ${l} + 2 × ${L} × ${h} + 2 × ${l} × ${h} = ${A}.`, `il faut ${A} dm².`));
+    return court(`${O.charAt(0).toUpperCase() + O.slice(1)} en pavé droit, sans couvercle : long ${L} dm, large ${l} dm, haut ${h} dm. ${un(["Quelle est l'aire de son patron ?", "Quelle surface de matériau faut-il ?", "Quelle aire de plaque faut-il ?", "Combien de dm² couvre son patron ?"])}`, A, "dm²", expliquer(DEF, "il reste 5 faces : le fond et les 4 faces du tour.", `${L} × ${l} + 2 × ${L} × ${h} + 2 × ${l} × ${h} = ${A}.`, `il faut ${A} dm².`));
   }),
   tpl(3, "Longueur de la bande = 2 × (longueur + largeur).", () => {
     const { L, l } = dims();
     const B = 2 * (L + l);
     const O = un(["une boîte de bonbons", "une valise en carton", "un coffret à crayons", "une boîte de pizzas", "une boîte de thé", "un coffret de dés", "un carton à dessins", "une boîte de biscuits", "un étui à flûte", "un emballage de ballon"]);
-    return court(`Le tour d'${O} en pavé droit est une bande de carton de ${B} cm de long. La boîte mesure ${L} cm de long. ${un(["Quelle est sa largeur ?", "Combien mesure-t-elle en largeur ?", "Que vaut sa largeur ?", "Quelle largeur faut-il tracer sur le patron ?"])}`, l, "cm", expliquer(DEF, "la bande vaut deux longueurs et deux largeurs.", `${B} ÷ 2 = ${L + l} ; ${L + l} − ${L} = ${l}.`, `la largeur est ${l} cm.`));
+    return court(`Le tour d'${O} en pavé droit est une bande de ${B} cm. Longueur : ${L} cm. ${un(["Quelle est sa largeur ?", "Combien mesure-t-il en largeur ?", "Que vaut sa largeur ?", "Quelle largeur tracer sur le patron ?"])}`, l, "cm", expliquer(DEF, "la bande vaut deux longueurs et deux largeurs.", `${B} ÷ 2 = ${L + l} ; ${L + l} − ${L} = ${l}.`, `la largeur est ${l} cm.`));
   }),
 ];

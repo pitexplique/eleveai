@@ -153,13 +153,13 @@ const OBJETS: [RegExp, string][] = [
 const corrRepresentation: CorrecteurMaths = (q) => {
   const t = q.text;
   let m: RegExpMatchArray | null;
-  if ((m = t.match(/pavé droit de (\d+) cm de long, (\d+) cm de large et (\d+) cm de haut, avec des pailles/))) {
+  if ((m = t.match(/en pailles : (\d+) cm de long, (\d+) cm de large, (\d+) cm de haut\./))) {
     const [L, l, h] = [Number(m[1]), Number(m[2]), Number(m[3])];
     const r = String(q.expected[0]).match(/^(\d+) cm$/);
     if (!r) return [`réponse sans unité : ${q.expected[0]}`];
     return Number(r[1]) === 4 * (L + l + h) ? [] : [`longueur attendue ${q.expected[0]}, recalculée ${4 * (L + l + h)} cm (12 arêtes)`];
   }
-  if ((m = t.match(/(\d+) cm de long, (\d+) cm de large et (\d+) cm de haut\. Combien de faces de (\d+) cm sur (\d+) cm/))) {
+  if ((m = t.match(/de (\d+) cm sur (\d+) cm sur (\d+) cm\. Combien de faces de (\d+) cm sur (\d+) cm/))) {
     const d = [m[1], m[2], m[3]].map(Number);
     const [a, b] = [Number(m[4]), Number(m[5])];
     const paires = [[d[0], d[1]], [d[0], d[2]], [d[1], d[2]]].filter(([x, y]) => (x === a && y === b) || (x === b && y === a)).length;

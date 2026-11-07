@@ -90,6 +90,26 @@ export default function DroitesCanvas({ figure }: Props) {
     figure.lines.map((line) => [line.id, line])
   );
 
+  // 07/11/2026 : la marque d'angle droit se dessine en haut à droite du point, là où
+  // va son nom : le nom passe alors en dessous, du côté le plus loin des droites.
+  const surAngleDroit = (p: { x: number; y: number }) =>
+    showRightAngleMarkers &&
+    (figure.markers?.rightAngles ?? []).some((m) => Math.hypot(m.x - p.x, m.y - p.y) < 3);
+  const ecartAuxDroites = (x: number, y: number) =>
+    Math.min(
+      ...figure.lines.map(({ from: a, to: b }) => {
+        const n = Math.hypot(b.x - a.x, b.y - a.y) || 1;
+        return Math.abs((b.x - a.x) * (a.y - y) - (a.x - x) * (b.y - a.y)) / n;
+      }),
+    );
+  const placeNom = (p: { x: number; y: number }) => {
+    if (!surAngleDroit(p)) return { x: p.x + 12, y: p.y - 10 };
+    const aGauche = ecartAuxDroites(p.x - 16, p.y + 17) >= ecartAuxDroites(p.x + 16, p.y + 17);
+    return aGauche
+      ? { x: p.x - 10, y: p.y + 22, textAnchor: "end" as const }
+      : { x: p.x + 10, y: p.y + 22 };
+  };
+
   return (
     <div className="mx-auto w-full max-w-[360px] rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
       <svg
@@ -316,8 +336,7 @@ export default function DroitesCanvas({ figure }: Props) {
 
                   {showLabels && point.label ? (
                     <text
-                      x={point.x + 12}
-                      y={point.y - 10}
+                      {...placeNom(point)}
                       fontSize="15"
                       fontWeight="900"
                       fill={colors.text}
@@ -363,8 +382,7 @@ export default function DroitesCanvas({ figure }: Props) {
 
                   {showLabels && point.label ? (
                     <text
-                      x={point.x + 12}
-                      y={point.y - 10}
+                      {...placeNom(point)}
                       fontSize="15"
                       fontWeight="900"
                       fill={colors.text}

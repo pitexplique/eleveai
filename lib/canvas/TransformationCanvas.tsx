@@ -440,7 +440,9 @@ export default function TransformationCanvas({ figure }: Props) {
               côtés. Le défaut touchait les six dessins de symétrie de la 6e —
               et il ne se voyait pas, le texte débordant sur du blanc. Mesuré au
               rendu (rectangle du texte contre rectangle du svg). */}
-          bleu : départ · rouge : image
+          {/* 07/11/2026 : « rouge : image » affirmait la réponse quand la question
+              demande si le rouge est bien l'image, et restait affiché sans rouge. */}
+          {figure.image ? "bleu : départ · rouge : à comparer" : "bleu : figure de départ"}
         </text>
       </svg>
     </div>

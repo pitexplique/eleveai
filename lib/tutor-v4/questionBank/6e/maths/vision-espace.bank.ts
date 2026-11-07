@@ -181,6 +181,17 @@ const COMBIEN_CUBES = [
   "Calcule le nombre de cubes.",
 ];
 const ctxV = (p: Prenom = pickV(PRENOMS)) => pickV(CUBES_VIE).dit(p);
+// 07/11/2026 : ★3 à 25 mots au plus (REGLES-6E) : une situation de 9 mots au plus, et
+// les dimensions en liste, comme à ★2. La figure montre le reste.
+function ctx3V(p: Prenom) {
+  for (let k = 0; k < 40; k++) {
+    const t = ctxV(p);
+    if (motsV(t) <= 9) return t;
+  }
+  return `${p.nom} empile des cubes.`;
+}
+const listeDims = (L: number, l: number, h: number) => shuffle([`longueur ${L}`, `largeur ${l}`, `hauteur ${h}`]).join(", ");
+const pavePlein = (L: number, l: number, h: number) => `Pavé plein : ${listeDims(L, l, h)}.`;
 const VUES = [
   { nom: "de dessus", dit: "vue de dessus (on voit la longueur et la largeur)", a: 0, b: 1 },
   { nom: "de face", dit: "vue de face (on voit la longueur et la hauteur)", a: 0, b: 2 },
@@ -240,7 +251,7 @@ function genVisionVues(etoile: 2 | 3 | 4): QV {
     const ns = VUES.map((w) => dims[w.a] * dims[w.b]);
     if (new Set(ns).size === 3)
       return qcmV(
-        `${ctxV(p)} ${IlV(p)} forme un pavé plein de ${direPave(L, l, hh)}. Quelle vue contient ${n} carreaux ?`,
+        `${ctx3V(p)} ${pavePlein(L, l, hh)} Quelle vue contient ${n} carreaux ?`,
         `la vue ${vue.nom}`,
         VUES.filter((w) => w !== vue).map((w) => `la vue ${w.nom}`).concat("aucune des trois"),
         `Vue de dessus : ${L} × ${l} = ${ns[0]} carreaux. Vue de face : ${L} × ${hh} = ${ns[1]}. Vue de droite : ${l} × ${hh} = ${ns[2]}. C’est la vue ${vue.nom}.`,
@@ -257,7 +268,7 @@ function genVisionVues(etoile: 2 | 3 | 4): QV {
     );
   }
   return courteV(
-    `${ctxV(p)} ${IlV(p)} forme un pavé plein de ${direPave(L, l, hh)}. ${pickV([`Combien de carreaux contient sa ${vue.dit} ?`, `Sur sa ${vue.dit}, combien de carreaux y a-t-il ?`, `${p.nom} dessine la ${vue.dit}. Combien de carreaux ?`])}`,
+    `${ctx3V(p)} ${pavePlein(L, l, hh)} ${pickV([`Combien de carreaux contient sa vue ${vue.nom} ?`, `Sur sa vue ${vue.nom}, combien de carreaux ?`, `Dessine sa vue ${vue.nom} : combien de carreaux ?`])}`,
     n, "carreau",
     `Cette vue montre un rectangle de ${dims[vue.a]} sur ${dims[vue.b]} : ${dims[vue.a]} × ${dims[vue.b]} = ${n} carreaux. La troisième dimension part vers l’arrière et ne se voit pas.`,
     assemblage(pave(L, l, hh)),
@@ -295,7 +306,7 @@ function genVisionDenombrer(etoile: 2 | 3 | 4 | 5): QV {
     }
     if (famille === "etages") {
       return courteV(
-        `${ctxV(p)} Chaque étage est un rectangle de ${L} cubes sur ${l}. Il y a ${h} étages identiques. ${pickV(["Combien de cubes en tout ?", "Combien de cubes a-t-" + ilV(p) + " utilisés ?"])}`,
+        `${p.nom} empile des cubes. Chaque étage est un rectangle de ${L} cubes sur ${l}. Il y a ${h} étages identiques. ${pickV(["Combien de cubes en tout ?", "Combien de cubes utilise-t-" + ilV(p) + " ?"])}`,
         L * l * h, "cube",
         `Un étage contient ${L} × ${l} = ${L * l} cubes. Avec ${h} étages : ${L * l} × ${h} = ${L * l * h} cubes.`,
         assemblage(pave(L, l, h)),
@@ -303,14 +314,14 @@ function genVisionDenombrer(etoile: 2 | 3 | 4 | 5): QV {
     }
     if (famille === "ajouter") {
       return courteV(
-        `${ctxV(p)} ${IlV(p)} a déjà un pavé plein de ${direPave(L, l, h)}. ${IlV(p)} ajoute un étage identique par-dessus. ${pickV(["Combien de cubes faut-il ajouter ?", "Combien de cubes ajoute-t-" + ilV(p) + " ?"])}`,
+        `${p.nom} a déjà un pavé plein : ${listeDims(L, l, h)}. ${IlV(p)} ajoute un étage identique par-dessus. ${pickV(["Combien de cubes faut-il ajouter ?", "Combien de cubes ajoute-t-" + ilV(p) + " ?"])}`,
         L * l, "cube",
         `Un étage est un rectangle de ${L} sur ${l} : ${L} × ${l} = ${L * l} cubes à ajouter.`,
         assemblage(pave(L, l, h)),
       );
     }
     return courteV(
-      `${ctxV(p)} ${IlV(p)} forme un pavé plein de ${direPave(L, l, h)}. ${pickV(["Combien de cubes contient-il ?", "Combien de cubes a-t-" + ilV(p) + " utilisés ?", "Compte les cubes, même ceux qu’on ne voit pas. Combien y en a-t-il ?"])}`,
+      `${ctx3V(p)} ${pavePlein(L, l, h)} ${pickV(["Combien de cubes contient-il ?", "Combien de cubes a-t-" + ilV(p) + " utilisés ?", "Compte tous les cubes, même cachés."])}`,
       L * l * h, "cube",
       `Un étage contient ${L} × ${l} = ${L * l} cubes, et il y a ${h} étages : ${L * l} × ${h} = ${L * l * h} cubes. Les cubes cachés comptent aussi.`,
       assemblage(pave(L, l, h)),
@@ -422,7 +433,7 @@ function genVisionRepresentation(etoile: 2 | 3 | 4 | "objets"): QV {
     const L = randomInt(4, 12), l = randomInt(2, 8), h = randomInt(2, 9);
     if (famille === "arêtes") {
       return {
-        text: `Pour une maquette, ${p.nom} fabrique le squelette d’un pavé droit de ${L} cm de long, ${l} cm de large et ${h} cm de haut, avec des pailles. ${pickV(["Quelle longueur de paille faut-il en tout ?", "Combien de centimètres de paille utilise-t-" + ilV(p) + " ?"])}`,
+        text: `${p.nom} fait un squelette de pavé en pailles : ${L} cm de long, ${l} cm de large, ${h} cm de haut. ${pickV(["Quelle longueur de paille faut-il ?", "Combien de cm de paille ?"])}`,
         format: "short",
         expected: [`${4 * (L + l + h)} cm`],
         comparator: "number_equal",
@@ -432,7 +443,7 @@ function genVisionRepresentation(etoile: 2 | 3 | 4 | "objets"): QV {
     const [a, b, nom] = pickV([[L, l, "longueur et largeur"], [L, h, "longueur et hauteur"], [l, h, "largeur et hauteur"]] as const);
     if (L === l || L === h || l === h) return genVisionRepresentation(3);
     return qcmV(
-      `${p.nom} dessine le patron d’une boîte en forme de pavé droit : ${L} cm de long, ${l} cm de large et ${h} cm de haut. Combien de faces de ${a} cm sur ${b} cm a ce patron ?`,
+      `${p.nom} trace le patron d’un pavé droit de ${L} cm sur ${l} cm sur ${h} cm. Combien de faces de ${a} cm sur ${b} cm ?`,
       "2 faces",
       ["1 face", "4 faces", "6 faces"],
       `Un pavé a 6 faces, égales deux à deux (faces opposées). Les faces de ${a} cm sur ${b} cm (${nom}) sont 2 : celle de devant et celle de derrière, ou celle du dessus et celle du dessous.`,
@@ -531,7 +542,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     microId: "vision_vues",
     difficulty: 3,
     theme: "neutral",
-    text: "Toujours le même pavé (4 de long, 3 de large, 2 de haut). Combien de carreaux contient sa vue de droite, où l'on voit la largeur et la hauteur ?",
+    text: "Un pavé a 4 cubes de long, 3 de large, 2 de haut. Combien de carreaux contient sa vue de droite ?",
     format: "short",
     expected: ["6 carreaux"],
     comparator: "number_equal",

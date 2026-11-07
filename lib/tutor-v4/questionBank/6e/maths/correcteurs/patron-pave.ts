@@ -14,7 +14,7 @@ const dims = (q: Q) => {
 };
 const sur = (a: number, b: number, u: string) => `${a} ${u} sur ${b} ${u}`;
 const faceDe = (t: string, L: number, l: number, h: number): [number, number] | null =>
-  /face du dess/.test(t) ? [L, l] : /face de (devant|derrière)/.test(t) ? [L, h] : /face de (gauche|droite)/.test(t) ? [l, h] : null;
+  /\bdu dess(us|ous)\b/.test(t) ? [L, l] : /\bde (devant|derrière)\b/.test(t) ? [L, h] : /\bde (gauche|droite)\b/.test(t) ? [l, h] : null;
 const aireAttendue = (q: Q, x: number, u: string) => {
   const e = String(q.expected[0]).replace(/[  ]/g, " ");
   const m = e.match(/^([\d ]+) (\S+)$/);
