@@ -599,6 +599,8 @@ export const CORRECTEURS: CorrecteursMaths = {
   fraction_rationnel_tpl_3: corrigerVersFraction,
   fraction_rationnel_tpl_4: corrigerVersFraction,
   fraction_rationnel_tpl_2: corrigerRationnelOuiNon,
+  fraction_rationnel_tpl_contexte_ecriture: corrigerVersFraction,
+  fraction_rationnel_tpl_contexte_est_rationnel: corrigerRationnelOuiNon,
   "4e_fraction_rationnel_canvas_grid_tpl_1": corrigerGrille,
   // comparer
   fraction_comparer_tpl_1: corrigerPlusGrande,

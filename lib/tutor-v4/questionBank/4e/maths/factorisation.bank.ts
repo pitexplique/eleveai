@@ -604,11 +604,25 @@ export const factorisationBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Mets le facteur commun devant la parenthèse.",
     tags: ["litteral_factorisation", "simple", "template"],
+    // 03/11/2026 : sans situation à ★2 (le club, les tenues… : litteral_factoriser_simple_tpl_situation, ★3).
     generate: () => {
-      if (Math.random() < 0.3) return genSituationFacto(SITU_B);
       const c = tirageNombre({ signe: 1 });
       return questionFacto(randomChoice(FACTO)(c.e), c);
     },
+  },
+  {
+    kind: "template",
+    id: "litteral_factoriser_simple_tpl_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factoriser_simple",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Mets le facteur commun (le nombre de groupes) devant la parenthèse.",
+    tags: ["litteral_factorisation", "simple", "situation", "template"],
+    // 03/11/2026 : la situation de l'ancien tpl_1 (★2), réservée à ★3.
+    generate: () => genSituationFacto(SITU_B),
   },
   {
     kind: "template",

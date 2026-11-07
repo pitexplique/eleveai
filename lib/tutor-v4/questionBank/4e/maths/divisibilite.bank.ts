@@ -179,20 +179,65 @@ export const divisibiliteBank: TutorBankItemV4[] = [
         "Que peut-on en déduire ?",
         "Quelle affirmation est exacte ?",
       ]);
-      const ctxs = PARTAGES.filter((p) => p.max >= m);
-      const purs = [
+      // 03/11/2026 : ★2 sans situation et en 15 mots au plus (les PARTAGES sont
+      // montés dans 4e_div_multiple_diviseur_tpl_1_situation, ★3).
+      const intro = randomChoice([
         `On sait que ${d} × ${k} = ${m}.`,
-        `La division de ${m} par ${d} tombe juste : ${m} ÷ ${d} = ${k}.`,
-        `On compare les nombres ${m} et ${d}.`,
+        `${m} ÷ ${d} = ${k}, sans reste.`,
         `Dans la table de ${d}, on trouve ${m}.`,
-      ];
-      let intro: string;
-      if (tireContexte(ctxs.length, purs.length)) {
-        const P = randomChoice(ctxs);
-        intro = `${P.qui} a ${m} ${P.objets}. ${cap(P.pr)} peut les ${P.mise} de ${d} : ${P.pr} obtient ${k} ${P.groupes}, sans qu'il en reste.`;
-      } else {
-        intro = randomChoice(purs);
-      }
+        `${k} × ${d} = ${m}.`,
+        `${d} divise ${m}.`,
+        `${m} = ${d} × ${k}.`,
+      ]);
+      const correct = `${m} est un multiple de ${d}`;
+      // ⚠️ Un leurre « m est un multiple de x » doit être FAUX : 42 est bien un
+      // multiple de 7 (= 6 + 1). On prend le premier x > d qui ne divise pas m.
+      let x = d + 1;
+      while (m % x === 0) x++;
+      return {
+        text: `${intro} ${question}`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `${d} est un multiple de ${m}`,
+          `${m} est un diviseur de ${d}`,
+          `${m} et ${d} n'ont aucun lien`,
+          `${d} n'est pas un diviseur de ${m}`,
+          `${m} est un multiple de ${x}`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : un nombre est MULTIPLE d'un autre lorsqu'il s'obtient en le multipliant par un entier. L'autre en est alors un DIVISEUR.\n\n" +
+          "Méthode : on regarde lequel des deux est le plus grand — le multiple est toujours le plus grand.\n\n" +
+          `Calcul : $${d} \\times ${k} = ${m}$, donc ${m} est un multiple de ${d}, et ${d} est un diviseur de ${m}.\n\n` +
+          "Conclusion : ⭐ c'est une SEULE relation dite dans les deux sens, comme « parent » et « enfant ». Les deux mots ne s'échangent jamais.",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_div_multiple_diviseur_tpl_1_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "divisibilite",
+    microId: "div_multiple_diviseur",
+    difficulty: 3,
+    // 03/11/2026 : les PARTAGES (métiers) de tpl_1_reconnaitre, montés à ★3.
+    theme: "neutral",
+    hint: "Le multiple est le GRAND, le diviseur est le PETIT.",
+    tags: ["divisibilite", "multiple", "qcm", "template"],
+    generate: () => {
+      const d = randomInt(3, 12);
+      const k = randomInt(3, 12);
+      const m = d * k;
+      const question = randomChoice([
+        "Quelle phrase est juste ?",
+        "Laquelle de ces phrases est vraie ?",
+        "Que peut-on en déduire ?",
+        "Quelle affirmation est exacte ?",
+      ]);
+      const P = randomChoice(PARTAGES.filter((p) => p.max >= m));
+      const intro = `${P.qui} a ${m} ${P.objets}. ${cap(P.pr)} peut les ${P.mise} de ${d} : ${P.pr} obtient ${k} ${P.groupes}, sans qu'il en reste.`;
       const correct = `${m} est un multiple de ${d}`;
       // ⚠️ Un leurre « m est un multiple de x » doit être FAUX : 42 est bien un
       // multiple de 7 (= 6 + 1). On prend le premier x > d qui ne divise pas m.
@@ -285,43 +330,75 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     hint: "Ces trois critères ne regardent QUE le chiffre des unités.",
     tags: ["divisibilite", "critere", "qcm", "template"],
     generate: () => {
-      const purs = 6;
-      const enContexte = tireContexte(PARTAGES.length * 3, purs);
-      const P = randomChoice(PARTAGES);
-      const n = enContexte ? randomInt(40, P.max) : randomInt(120, 9800);
+      // 03/11/2026 : ★2 sans situation, en 15 mots au plus (les PARTAGES sont
+      // montés dans 4e_div_critere_2_5_10_tpl_1_situation, ★3).
+      const n = randomInt(120, 9800);
       const par2 = n % 2 === 0;
       const par5 = n % 5 === 0;
       const par10 = n % 10 === 0;
-      const L = enContexte
-        ? {
-            tous: `des ${P.groupes} de 2, de 5 et de 10`,
-            c5: `des ${P.groupes} de 5 seulement`,
-            c2: `des ${P.groupes} de 2 seulement`,
-            aucun: "aucune de ces trois tailles",
-            piege: `des ${P.groupes} de 2 et de 10 seulement`,
-          }
-        : {
-            tous: "par 2, par 5 et par 10",
-            c5: "par 5 seulement",
-            c2: "par 2 seulement",
-            aucun: "par aucun des trois",
-            piege: "par 2 et par 10 seulement",
-          };
+      const L = {
+        tous: "par 2, par 5 et par 10",
+        c5: "par 5 seulement",
+        c2: "par 2 seulement",
+        aucun: "par aucun des trois",
+        piege: "par 2 et par 10 seulement",
+      };
       const correct = par10 ? L.tous : par5 ? L.c5 : par2 ? L.c2 : L.aucun;
-      const text = enContexte
-        ? randomChoice([
-            `${P.qui} a ${n} ${P.objets}. ${cap(P.pr)} hésite entre des ${P.groupes} de 2, de 5 ou de 10. Avec ${lesquels(P)} la répartition tombe-t-elle juste ?`,
-            `Avec ses ${n} ${P.objets}, ${min1(P.qui)} veut faire des ${P.groupes} de 2, de 5 ou de 10, sans reste. Quelles tailles conviennent ?`,
-            `${n} ${P.objets} à ${P.mise} de 2, de 5 ou de 10 : dans quels cas n'y a-t-il aucun reste ?`,
-          ])
-        : randomChoice([
-            `Le nombre ${n} est-il divisible par 2, par 5, par 10 ?`,
-            `Par lesquels des nombres 2, 5 et 10 peut-on diviser ${n} sans reste ?`,
-            `Sans poser de division, dis si ${n} est divisible par 2, par 5 et par 10.`,
-            `${n} est-il pair ? Est-il un multiple de 5 ? de 10 ? Choisis la bonne réponse.`,
-            `Parmi 2, 5 et 10, quels sont les diviseurs de ${n} ?`,
-            `Regarde le chiffre des unités de ${n} : par quels nombres parmi 2, 5 et 10 est-il divisible ?`,
-          ]);
+      const text = randomChoice([
+        `Le nombre ${n} est-il divisible par 2, par 5, par 10 ?`,
+        `Par lesquels des nombres 2, 5 et 10 peut-on diviser ${n} sans reste ?`,
+        `Sans poser de division, dis si ${n} est divisible par 2, 5 et 10.`,
+        `${n} est-il un multiple de 2, de 5, de 10 ?`,
+        `Parmi 2, 5 et 10, quels sont les diviseurs de ${n} ?`,
+        `Regarde le chiffre des unités de ${n}. Par quoi est-il divisible ?`,
+        `Teste ${n} avec les critères par 2, par 5 et par 10.`,
+        `Divise ${n} par 2, 5 et 10 de tête. Lesquels tombent juste ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(correct, [L.tous, L.c5, L.c2, L.aucun, L.piege]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : les critères par 2, 5 et 10 ne regardent QUE le chiffre des unités — le reste du nombre ne compte pas.\n\n" +
+          "Méthode : par 2 si le chiffre des unités est 0, 2, 4, 6 ou 8 ; par 5 s'il est 0 ou 5 ; par 10 s'il est 0.\n\n" +
+          `Calcul : ${n} se termine par ${n % 10}, donc il est ${par2 ? "" : "non "}divisible par 2, ${par5 ? "" : "non "}divisible par 5, ${par10 ? "" : "non "}divisible par 10.\n\n` +
+          `Conclusion : la réponse est « ${correct} ». ⭐ Un nombre divisible par 10 l'est forcément par 2 ET par 5 — c'est le seul cas où les trois tombent ensemble.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_div_critere_2_5_10_tpl_1_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "divisibilite",
+    microId: "div_critere_2_5_10",
+    difficulty: 3,
+    // 03/11/2026 : les PARTAGES (métiers) de tpl_1_lequel, montés à ★3.
+    theme: "neutral",
+    hint: "Ces trois critères ne regardent QUE le chiffre des unités.",
+    tags: ["divisibilite", "critere", "qcm", "template"],
+    generate: () => {
+      const P = randomChoice(PARTAGES);
+      const n = randomInt(40, P.max);
+      const par2 = n % 2 === 0;
+      const par5 = n % 5 === 0;
+      const par10 = n % 10 === 0;
+      const L = {
+        tous: `des ${P.groupes} de 2, de 5 et de 10`,
+        c5: `des ${P.groupes} de 5 seulement`,
+        c2: `des ${P.groupes} de 2 seulement`,
+        aucun: "aucune de ces trois tailles",
+        piege: `des ${P.groupes} de 2 et de 10 seulement`,
+      };
+      const correct = par10 ? L.tous : par5 ? L.c5 : par2 ? L.c2 : L.aucun;
+      const text = randomChoice([
+        `${P.qui} a ${n} ${P.objets}. ${cap(P.pr)} hésite entre des ${P.groupes} de 2, de 5 ou de 10. Avec ${lesquels(P)} la répartition tombe-t-elle juste ?`,
+        `Avec ses ${n} ${P.objets}, ${min1(P.qui)} veut faire des ${P.groupes} de 2, de 5 ou de 10, sans reste. Quelles tailles conviennent ?`,
+        `${n} ${P.objets} à ${P.mise} de 2, de 5 ou de 10 : dans quels cas n'y a-t-il aucun reste ?`,
+      ]);
       return {
         text,
         format: "qcm",

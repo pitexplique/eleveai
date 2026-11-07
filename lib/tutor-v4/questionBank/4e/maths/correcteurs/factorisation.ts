@@ -193,6 +193,7 @@ export const CORRECTEURS: CorrecteursMaths = avecReglesLitteral({
   litteral_facteur_commun_tpl_2: cLeFacteurCommun,
   litteral_facteur_commun_tpl_3: cLeFacteurCommun,
   litteral_factoriser_simple_tpl_1: cFactoriserSituation,
+  litteral_factoriser_simple_tpl_situation: cFactoriserSituation,
   litteral_factoriser_simple_tpl_2: cFactoriser,
   litteral_factoriser_simple_tpl_3: cFactoriserAire,
   litteral_factoriser_verifier_tpl_1: cFactorisationProposee,

@@ -58,6 +58,26 @@ import type {
 
 type Genere = TutorGeneratedQuestionV4;
 
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric : « le contexte est
+   réservé aux trois étoiles », lib/tutor-v4/questionBank/6e/REGLES-6E.md, visé
+   aussi en 4e). Les gabarits ★1-★2 tournent en MODE SIMPLE : seulement les
+   objets du cours (dé, roue, cartes, jetons, boules, sac de billes, urne,
+   lettres d'un mot), décrits en une phrase courte ; ni car scolaire, ni
+   playlist, ni bonbons, ni kermesse. Les mêmes générateurs, hors mode simple,
+   gardent leurs situations pour ★3 et plus. */
+let SIMPLE = false;
+/** Le générateur `g`, tiré en mode simple. */
+function simple(g: () => Genere): () => Genere {
+  return () => {
+    SIMPLE = true;
+    try {
+      return g();
+    } finally {
+      SIMPLE = false;
+    }
+  };
+}
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -423,9 +443,65 @@ const FABRIQUES_NUM: Array<() => UniversNum> = [
   },
 ];
 
+/** Mode simple : les objets du cours, une phrase courte. */
+const FABRIQUES_NUM_SIMPLES: Array<() => UniversNum> = [
+  () => {
+    const n = randomChoice([4, 6, 8, 10, 12, 20]);
+    return {
+      n,
+      desc: `On lance un dé à ${n} faces numérotées de 1 à ${n}.`,
+      evt: (p) => `obtenir ${p}`,
+      seul: (k) => `obtenir ${k}`,
+      action: "lancer le dé et noter le nombre obtenu",
+      canvas: n === 6 ? deCanvas() : undefined,
+    };
+  },
+  () => {
+    const n = randomChoice([5, 8, 10, 12, 16]);
+    return {
+      n,
+      desc: `Une roue a ${n} secteurs égaux numérotés de 1 à ${n}.`,
+      evt: (p) => `obtenir ${p}`,
+      seul: (k) => `obtenir le secteur ${k}`,
+      action: "faire tourner la roue et lire le numéro",
+      canvas: roueNumCanvas(n),
+    };
+  },
+  () => {
+    const n = randomChoice([10, 12, 15, 20, 24, 30]);
+    return {
+      n,
+      desc: `On tire une carte numérotée de 1 à ${n}.`,
+      evt: (p) => `tirer une carte portant ${p}`,
+      seul: (k) => `tirer la carte numéro ${k}`,
+      action: "tirer une carte au hasard et lire son numéro",
+    };
+  },
+  () => {
+    const n = randomChoice([10, 12, 15, 18, 20, 25]);
+    return {
+      n,
+      desc: `On pioche un jeton numéroté de 1 à ${n}.`,
+      evt: (p) => `piocher un jeton portant ${p}`,
+      seul: (k) => `piocher le jeton numéro ${k}`,
+      action: "piocher un jeton au hasard",
+    };
+  },
+  () => {
+    const n = randomChoice([20, 30, 40, 50]);
+    return {
+      n,
+      desc: `On tire une boule numérotée de 1 à ${n}.`,
+      evt: (p) => `tirer une boule portant ${p}`,
+      seul: (k) => `tirer la boule numéro ${k}`,
+      action: "tirer une boule au hasard",
+    };
+  },
+];
+
 function tirerUniversNum(ok?: (n: number) => boolean): UniversNum {
   for (let essai = 0; essai < 200; essai++) {
-    const u = randomChoice(FABRIQUES_NUM)();
+    const u = randomChoice(SIMPLE ? FABRIQUES_NUM_SIMPLES : FABRIQUES_NUM)();
     if (!ok || ok(u.n)) return u;
   }
   return FABRIQUES_NUM[0]();
@@ -612,10 +688,11 @@ const evtOu = (sc: Scene, g1: Groupe, g2: Groupe) => `${sc.verbe} ${g1.art} ${g1
 function habiller(scene: Scene, compo: Compo[]): Sac {
   const total = compo.reduce((s, c) => s + c.n, 0);
   const liste = joinEt(compo.map((c) => qte(c.n, c.g)));
-  const desc =
-    randomChoice([`${cap(scene.lieu)} ${scene.contient} ${liste}.`, `Dans ${scene.lieu}, il y a ${liste}.`]) +
-    " " +
-    scene.tirage;
+  const desc = SIMPLE
+    ? `${cap(scene.lieu)} contient ${liste}. On en tire ${scene.groupes[0].art} au hasard.`
+    : randomChoice([`${cap(scene.lieu)} ${scene.contient} ${liste}.`, `Dans ${scene.lieu}, il y a ${liste}.`]) +
+      " " +
+      scene.tirage;
   const canvas =
     scene.dessin && total <= 30
       ? billesCanvas(compo.flatMap((c) => Array.from({ length: c.n }, () => ({ couleur: c.g.hex }))))
@@ -625,7 +702,9 @@ function habiller(scene: Scene, compo: Compo[]): Sac {
 
 /** Une scène à k catégories ; `comptes` impose les effectifs (sinon tirés dans les bornes). */
 function tirerSac(k: number, filtre?: (s: Scene) => boolean, comptes?: number[]): Sac {
-  const scenes = SCENES.filter((s) => s.groupes.length >= k && (!filtre || filtre(s)));
+  const scenes = SCENES.filter(
+    (s) => s.groupes.length >= k && (!filtre || filtre(s)) && (!SIMPLE || ["sac", "urne", "jetons"].includes(s.id)),
+  );
   const scene = randomChoice(scenes);
   const gs = shuffle(scene.groupes).slice(0, k);
   const compo = gs.map((g, i) => ({ g, n: comptes?.[i] ?? randomInt(...(g.nb ?? scene.nb)) }));
@@ -660,7 +739,9 @@ function tirerMot(distinct = false): Mot {
   return {
     w,
     lettres: w.split(""),
-    desc: cartes
+    desc: SIMPLE
+      ? `Chaque lettre du mot ${w} est sur ${cartes ? "une carte. On en tire une" : "un jeton. On en tire un"}.`
+      : cartes
       ? `On écrit chaque lettre du mot ${w} sur une carte (une lettre par carte), on mélange les cartes et on en tire une au hasard.`
       : `Les lettres du mot ${w} sont écrites sur des jetons identiques, une lettre par jeton, puis placées dans un sac. On en tire un au hasard.`,
     action: cartes ? "tirer une carte et lire la lettre écrite dessus" : "tirer un jeton du sac et lire sa lettre",
@@ -892,15 +973,26 @@ const SITUATIONS_DET = [
   "mesurer à la règle un segment tracé de 7 cm",
 ];
 
+/** Mode simple : des actions courtes, sans situation de la vie. */
+const SITUATIONS_ALEA_SIMPLES = [
+  "lancer un dé", "lancer un dé à 12 faces", "lancer une pièce", "tirer une carte au hasard",
+  "tirer une boule dans une urne", "faire tourner une roue", "piocher un jeton sans regarder",
+  "tirer une bille dans un sac", "lancer deux fois une pièce", "tirer un jeton les yeux fermés",
+];
+const SITUATIONS_DET_SIMPLES = [
+  "calculer 7 × 8", "convertir 3 km en mètres", "multiplier 12 par 10", "diviser 100 par 4",
+  "calculer le double de 45", "compter les côtés d'un hexagone", "additionner 25 et 17",
+  "compter les lettres du mot BANANE", "calculer l'aire d'un carré de 3 cm", "ranger 5 nombres dans l'ordre",
+];
 function genVocabAleatoire(): Genere {
   const alea = Math.random() < 0.5;
-  const s = randomChoice(alea ? SITUATIONS_ALEA : SITUATIONS_DET);
+  const s = randomChoice(SIMPLE ? (alea ? SITUATIONS_ALEA_SIMPLES : SITUATIONS_DET_SIMPLES) : alea ? SITUATIONS_ALEA : SITUATIONS_DET);
   const t = randomInt(0, 3);
   const text = [
     `« ${cap(s)} » : est-ce une expérience aléatoire ?`,
     `Peut-on dire que « ${s} » est une expérience aléatoire ?`,
-    `Si l'on recommence « ${s} » dans les mêmes conditions, obtient-on toujours le même résultat ?`,
-    `Le résultat de l'action « ${s} » dépend-il du hasard ?`,
+    SIMPLE ? `On recommence « ${s} ». Obtient-on toujours le même résultat ?` : `Si l'on recommence « ${s} » dans les mêmes conditions, obtient-on toujours le même résultat ?`,
+    `Le résultat de « ${s} » dépend-il du hasard ?`,
   ][t];
   const oui = t === 2 ? !alea : alea;
   return {
@@ -1521,8 +1613,10 @@ const SITUATIONS_EQUI: Array<() => SitEqui> = [
   },
 ];
 
+/** Mode simple : sans penalty, météo, partie de jeu, roulette ni classe. */
+const SITUATIONS_EQUI_SIMPLES = SITUATIONS_EQUI.filter((_, i) => ![10, 11, 14, 15, 16].includes(i));
 function genEquiSituation(): Genere {
-  const s = randomChoice(SITUATIONS_EQUI)();
+  const s = randomChoice(SIMPLE ? SITUATIONS_EQUI_SIMPLES : SITUATIONS_EQUI)();
   const text = `${s.ctx} ${randomChoice([
     "Les issues sont-elles équiprobables ?",
     "Est-ce une situation d'équiprobabilité ?",
@@ -1576,16 +1670,19 @@ function genEquiRoue(): Genere {
     const N = nb.reduce((s, x) => s + x, 0);
     noms = cs.map((c) => c.ms);
     const liste = joinEt(cs.map((c, i) => (nb[i] === 1 ? `1 secteur ${c.ms}` : `${nb[i]} secteurs ${c.mp}`)));
-    ctx = `La roue ${lieu} est partagée en ${N} secteurs égaux : ${liste}. On la fait tourner et on note la couleur obtenue.`;
+    ctx = SIMPLE
+      ? `Une roue est partagée en ${N} secteurs égaux : ${liste}.`
+      : `La roue ${lieu} est partagée en ${N} secteurs égaux : ${liste}. On la fait tourner et on note la couleur obtenue.`;
     raison = oui ? `chaque couleur occupe ${r} secteur${r > 1 ? "s" : ""} sur ${N}` : `les couleurs n'occupent pas le même nombre de secteurs (${nb.join(", ")})`;
     canvas = roueCanvas(cs.flatMap((c, i) => Array.from({ length: nb[i] }, () => ({ label: c.ms, poids: 1, couleur: c.hex }))));
   } else {
     const cs = shuffle(COULEURS.filter((c) => c.ms !== "blanc")).slice(0, 3);
     noms = cs.map((c) => c.ms);
     oui = Math.random() < 0.4;
+    const Roue = SIMPLE ? "Une roue" : `La roue ${lieu}`;
     ctx = oui
-      ? `La roue ${lieu} est partagée en 3 secteurs de même taille : un ${cs[0].ms}, un ${cs[1].ms} et un ${cs[2].ms}. On note la couleur obtenue.`
-      : `La roue ${lieu} est partagée en 3 secteurs : ${leCoul(cs[0])} occupe la moitié de la roue, ${leCoul(cs[1])} et ${leCoul(cs[2])} un quart chacun. On note la couleur obtenue.`;
+      ? `${Roue} est partagée en 3 secteurs de même taille : un ${cs[0].ms}, un ${cs[1].ms} et un ${cs[2].ms}. On note la couleur obtenue.`
+      : `${Roue} est partagée en 3 secteurs : ${leCoul(cs[0])} occupe la moitié de la roue, ${leCoul(cs[1])} et ${leCoul(cs[2])} un quart chacun. On note la couleur obtenue.`;
     raison = oui ? "les trois secteurs ont la même taille" : `le secteur ${cs[0].ms} est deux fois plus grand que chacun des deux autres`;
     canvas = roueCanvas(cs.map((c, i) => ({ label: c.ms, poids: oui ? 1 : i === 0 ? 2 : 1, couleur: c.hex })));
   }
@@ -1682,10 +1779,10 @@ function genEquiChaqueIssue(): Genere {
   } else {
     n = randomInt(3, 6);
     const cs = shuffle(COULEURS).slice(0, n);
-    desc = `Une roue ${randomChoice(LIEUX_ROUE)} est partagée en ${n} secteurs égaux, de couleurs ${joinEt(cs.map((c) => c.ms))}.`;
+    desc = `Une roue${SIMPLE ? "" : " " + randomChoice(LIEUX_ROUE)} est partagée en ${n} secteurs égaux, de couleurs ${joinEt(cs.map((c) => c.ms))}.`;
     canvas = roueCanvas(cs.map((c) => ({ label: c.ms, poids: 1, couleur: c.hex })));
   }
-  const text = `${desc} ${randomChoice([
+  const text = `${desc} ${randomChoice(SIMPLE ? ["Quelle est la probabilité de chaque issue ?", "Quelle probabilité a chaque issue ?"] : [
     "Toutes les issues sont équiprobables. Quelle est la probabilité de chacune d'elles ?",
     "Quelle est la probabilité de chaque issue ?",
     "Les issues étant équiprobables, quelle probabilité a chacune d'elles ?",
@@ -1926,7 +2023,12 @@ function genConvDecimal(): Genere {
   const F = `${n}/${d}`;
   const ctx = randomChoice(CONTEXTES_PROBA);
   const dec = fr(n / d);
-  const text = randomChoice([
+  const text = SIMPLE ? randomChoice([
+    `Une probabilité est ${F}. Écris-la sous forme décimale.`,
+    `P(A) est ${F}. Quelle est son écriture décimale ?`,
+    `Une probabilité vaut ${F}. Quel nombre décimal lui est égal ?`,
+    `La probabilité de A est ${F}. Écris-la en décimal.`,
+  ]) : randomChoice([
     `La probabilité ${ctx.e} est ${F}. Écris cette probabilité sous forme décimale.`,
     `La probabilité ${ctx.e} vaut ${F}. Quelle est son écriture décimale ?`,
     `On sait que la probabilité ${ctx.e} est égale à ${F}. Donne-la sous la forme d'un nombre décimal.`,
@@ -1953,7 +2055,12 @@ function genConvPourcentQcm(): Genere {
   const p = (100 * n) / d;
   const ctx = randomChoice(CONTEXTES_PROBA);
   const correct = `${fr(p)} %`;
-  const text = randomChoice([
+  const text = SIMPLE ? randomChoice([
+    `Une probabilité est ${F}. Écris-la en pourcentage.`,
+    `P(A) est ${F}. À quel pourcentage cela correspond-il ?`,
+    `Une probabilité vaut ${F}. Exprime-la en pourcentage.`,
+    `La probabilité de A est ${F}. Quel pourcentage est-ce ?`,
+  ]) : randomChoice([
     `La probabilité ${ctx.e} est ${F}. À quel pourcentage cela correspond-il ?`,
     `La probabilité ${ctx.e} est ${F}. Exprime-la en pourcentage.`,
     `La probabilité ${ctx.e} vaut ${F}. Quel pourcentage de chances cela représente-t-il ?`,
@@ -2146,7 +2253,7 @@ const LIEUX_JEU = [
 ];
 
 function genCompDeuxJeux(): Genere {
-  const [A, B] = shuffle(JEUX).slice(0, 2);
+  const [A, B] = SIMPLE ? shuffle(["la roue A", "la roue B"]) : shuffle(JEUX).slice(0, 2);
   const lieu = randomChoice(LIEUX_JEU);
   const type = randomChoice(["denom", "denom", "num", "num", "egal"] as const);
   let n1: number, d1: number, n2: number, d2: number;
@@ -2168,7 +2275,7 @@ function genCompDeuxJeux(): Genere {
   const plus = Math.random() < 0.65;
   const egal = "autant de chances aux deux jeux";
   const correct = Math.abs(v1 - v2) < 1e-9 ? egal : (v1 > v2) === plus ? cap(A) : cap(B);
-  const text = `${lieu}, la probabilité de gagner ${a(A)} est ${n1}/${d1}, et celle de gagner ${a(B)} est ${n2}/${d2}. ${
+  const text = `${SIMPLE ? "La" : `${lieu}, la`} probabilité de gagner ${a(A)} est ${n1}/${d1}, et celle de gagner ${a(B)} est ${n2}/${d2}. ${
     plus
       ? randomChoice(["À quel jeu a-t-on le plus de chances de gagner ?", "Quel jeu vaut-il mieux choisir pour gagner ?"])
       : "À quel jeu a-t-on le moins de chances de gagner ?"
@@ -2686,7 +2793,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_issue",
     difficulty: 1,
     theme: "neutral",
-    text: "Combien y a-t-il d’issues possibles lorsqu’on lance un dé équilibré à 6 faces ?",
+    text: "On lance un dé équilibré à 6 faces. Combien d’issues possibles ?",
     format: "qcm",
     choices: ["2", "4", "6", "12"],
     expected: ["6"],
@@ -2710,7 +2817,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Chaque objet est une issue : additionne les effectifs de toutes les catégories.",
     tags: ["proba_experience", "issue", "billes", "template"],
-    generate: genIssueTotalSac,
+    generate: simple(genIssueTotalSac),
   },
     {
     kind: "fixed",
@@ -2753,7 +2860,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_evenement",
     difficulty: 1,
     theme: "neutral",
-    text: "Lorsqu’on lance un dé à 6 faces, l’événement « obtenir un nombre inférieur à 7 » est...",
+    text: "Avec un dé à 6 faces, « obtenir un nombre inférieur à 7 » est...",
     format: "qcm",
     choices: ["impossible", "certain", "contraire", "vide"],
     expected: ["certain"],
@@ -2804,7 +2911,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     // d'issues : une phrase qui désigne les mêmes issues que la bonne réponse
     // (« strictement inférieur à 6 » pour « inférieur ou égal à 5 ») n'est
     // jamais proposée comme piège.
-    generate: genEvtContraireQcm,
+    generate: simple(genEvtContraireQcm),
   },
     {
     kind: "fixed",
@@ -2874,7 +2981,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     // ⛔ RÉPARÉ LE 30/08/2026 (le contexte entrait dans le texte), puis le
     // 04/10/2026 : le nombre de secteurs de chaque couleur est écrit dans
     // l'énoncé, et une roue sur trois a des secteurs de tailles différentes.
-    generate: genEquiRoue,
+    generate: simple(genEquiRoue),
   },
 
   // =========================
@@ -2913,7 +3020,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Probabilité = nombre de cas favorables / nombre de cas possibles.",
     tags: ["proba_experience", "billes", "fraction", "template"],
-    generate: genCalcSacQcm,
+    generate: simple(genCalcSacQcm),
   },
   {
     kind: "template",
@@ -3277,7 +3384,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Expérience = l'action ; issue = un résultat ; événement = un ensemble d’issues.",
     tags: ["proba_experience", "vocabulaire", "template"],
-    generate: genVocabNature,
+    generate: simple(genVocabNature),
   },
   {
     kind: "template",
@@ -3290,7 +3397,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un événement certain a pour probabilité 1, un impossible 0.",
     tags: ["proba_experience", "vocabulaire", "template"],
-    generate: genVocabProba01,
+    generate: simple(genVocabProba01),
   },
   {
     kind: "fixed",
@@ -3352,7 +3459,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_issue",
     difficulty: 1,
     theme: "neutral",
-    text: "Une roue est partagée en 4 secteurs de couleurs différentes. Combien d’issues a-t-elle ?",
+    text: "Une roue a 4 secteurs de couleurs différentes. Combien d’issues ?",
     format: "qcm",
     choices: ["4", "2", "1", "8"],
     expected: ["4"],
@@ -3398,7 +3505,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Liste tous les résultats possibles, puis compte-les.",
     tags: ["proba_experience", "issue", "template"],
-    generate: genIssueNombre,
+    generate: simple(genIssueNombre),
   },
   {
     kind: "template",
@@ -3411,7 +3518,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe en revue toutes les issues et garde celles qui réalisent l'événement.",
     tags: ["proba_experience", "issue", "template"],
-    generate: genIssueFavorables,
+    generate: simple(genIssueFavorables),
   },
   {
     kind: "fixed",
@@ -3525,7 +3632,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     // manquait la troisième réponse — POSSIBLE. Avec seulement « certain » et
     // « impossible », l'élève apprenait un faux dilemme.
     // ⭐ 04/10/2026 : dés, roues, cartes, sacs, mots — plus seulement le dé.
-    generate: genEvtNature3,
+    generate: simple(genEvtNature3),
   },
   {
     kind: "template",
@@ -3706,7 +3813,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     // ⛔ RÉPARÉ LE 30/08/2026 : tantôt on demande si c'est équiprobable, tantôt
     // COMBIEN il faut ajouter pour que ça le devienne. ⭐ 04/10/2026 : dix-sept
     // scènes au lieu du seul sac de billes rouges et bleues.
-    generate: genEquiSac,
+    generate: simple(genEquiSac),
   },
   {
     kind: "fixed",
@@ -3796,7 +3903,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Probabilité = cas favorables ÷ cas possibles.",
     tags: ["proba_experience", "fraction", "template"],
-    generate: genCalcSimpleCourt,
+    generate: simple(genCalcSimpleCourt),
   },
   {
     kind: "template",
@@ -4259,7 +4366,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une expérience est aléatoire quand, recommencée, elle peut donner un autre résultat.",
     tags: ["proba_experience", "vocabulaire", "template"],
-    generate: genVocabAleatoire,
+    generate: simple(genVocabAleatoire),
   },
   {
     kind: "template",
@@ -4272,7 +4379,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une issue est un résultat que l'expérience peut réellement donner.",
     tags: ["proba_experience", "vocabulaire", "issue", "template"],
-    generate: genVocabIssuePossible,
+    generate: simple(genVocabIssuePossible),
   },
   {
     kind: "template",
@@ -4285,7 +4392,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Toutes les issues, sans en oublier, sans en ajouter.",
     tags: ["proba_experience", "issue", "template"],
-    generate: genIssueListe,
+    generate: simple(genIssueListe),
   },
   {
     kind: "template",
@@ -4298,7 +4405,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Toutes les issues le réalisent ? certain. Aucune ? impossible.",
     tags: ["proba_experience", "evenement", "certain", "impossible", "template"],
-    generate: genEvtCertImp,
+    generate: simple(genEvtCertImp),
   },
   {
     kind: "template",
@@ -4311,7 +4418,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "L'issue obtenue vérifie-t-elle la condition de l'événement ?",
     tags: ["proba_experience", "evenement", "template"],
-    generate: genEvtRealise,
+    generate: simple(genEvtRealise),
   },
   {
     kind: "template",
@@ -4337,7 +4444,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une issue est-elle favorisée (objet truqué, secteur plus grand, effectif plus nombreux) ?",
     tags: ["proba_experience", "equiprobabilite", "template"],
-    generate: genEquiSituation,
+    generate: simple(genEquiSituation),
   },
   {
     kind: "template",
@@ -4350,7 +4457,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "En situation d'équiprobabilité, chaque issue a pour probabilité 1 ÷ (nombre d'issues).",
     tags: ["proba_experience", "equiprobabilite", "fraction", "template"],
-    generate: genEquiChaqueIssue,
+    generate: simple(genEquiChaqueIssue),
   },
   {
     kind: "template",
@@ -4363,7 +4470,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une fraction est une division : divise le numérateur par le dénominateur.",
     tags: ["proba_experience", "decimal", "template"],
-    generate: genConvDecimal,
+    generate: simple(genConvDecimal),
   },
   {
     kind: "template",
@@ -4376,7 +4483,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Écris la fraction en décimal, puis multiplie par 100.",
     tags: ["proba_experience", "pourcentage", "template"],
-    generate: genConvPourcentQcm,
+    generate: simple(genConvPourcentQcm),
   },
   {
     kind: "template",
@@ -4389,7 +4496,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Même total pour tous : compare les effectifs.",
     tags: ["proba_experience", "comparer", "billes", "template"],
-    generate: genCompSacQcm,
+    generate: simple(genCompSacQcm),
   },
   {
     kind: "template",
@@ -4402,7 +4509,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Même dénominateur : compare les numérateurs. Même numérateur : le plus petit dénominateur gagne.",
     tags: ["proba_experience", "comparer", "template"],
-    generate: genCompDeuxJeux,
+    generate: simple(genCompDeuxJeux),
   },
   {
     kind: "template",

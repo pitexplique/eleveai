@@ -181,6 +181,39 @@ const CALCULE: ((e: string) => string)[] = [
   (e) => `Calcule et donne le résultat sous la forme la plus simple : $${e}$.`,
 ];
 
+/* ===========================================================================
+   ★1-★2 : DES QUESTIONS SIMPLES, SANS HISTOIRE — 03/11/2026
+   ⛔ Frédéric (03/11, en testant ses élèves) : « d'abord des questions
+   simples, le contexte est réservé aux trois étoiles ». Modèle : 6e
+   fractions-calcul.bank.ts (f10674bf). Les gabarits ★1-★2 appellent leur
+   générateur dans `simple(étoile, …)` : les situations (PARTS, DUOS,
+   MESURES, NOMBRES_EN_SITUATION, GRILLES, enSituations…) y sont vides, les
+   « Un élève… » écartés, et l'énoncé tiré tient en 12 mots à ★1, 15 à ★2
+   (REGLES-6E.md, visé aussi en 4e). Les mêmes générateurs gardent leurs
+   situations quand un gabarit ★3 ou plus les appelle.
+=========================================================================== */
+let SIMPLE: 0 | 1 | 2 = 0;
+function simple<T>(etoile: 1 | 2, gen: () => T): T {
+  const avant = SIMPLE;
+  SIMPLE = etoile;
+  try {
+    return gen();
+  } finally {
+    SIMPLE = avant;
+  }
+}
+/** Les situations, sauf dans un gabarit ★1-★2. */
+const ctx = <T,>(xs: T[]): T[] => (SIMPLE ? [] : xs);
+const nbMots = (t: string) => t.trim().split(/\s+/).length;
+const MOTS_MAX = { 1: 12, 2: 15 } as const;
+/** Un énoncé parmi `textes` ; à ★1-★2 : sans personnage, et court. */
+function enonce(textes: string[]): string {
+  if (!SIMPLE) return randomChoice(textes);
+  const neutres = textes.filter((t) => !/élève|camarade/.test(t));
+  const courts = neutres.filter((t) => nbMots(t) <= MOTS_MAX[SIMPLE as 1 | 2]);
+  return randomChoice(courts.length ? courts : neutres.length ? neutres : textes);
+}
+
 /* ---------------------------------------------------------------------------
    LES SITUATIONS. Les groupes nominaux portent leur article contracté
    (« du roman », « de l'étape »), pour que les questions s'accordent.
@@ -403,7 +436,7 @@ function enoncesEgale(F: string): string[] {
     `Quelle fraction repère le même point que ${F} sur une droite graduée ?`,
     `Quelle écriture fractionnaire est égale à ${F} ?`,
     `Une seule de ces fractions est égale à ${F}. Laquelle ?`,
-    ...PARTS.flatMap((p) => [
+    ...ctx(PARTS).flatMap((p) => [
       `${p.s(F)} Quelle autre fraction ${p.tout} représente la même part ?`,
       `${p.s(F)} Un camarade écrit cette part autrement. Quelle écriture est juste ?`,
       `${p.s(F)} Quelle fraction ${p.tout} est égale à cette part ?`,
@@ -430,7 +463,7 @@ function genEgaleQcm(niveau: 1 | 2): Genere {
   const Ft = tf(F.n, F.d);
   const Bt = tf(bonne.n, bonne.d);
   return {
-    text: randomChoice(enoncesEgale($m(Ft))),
+    text: enonce(enoncesEgale($m(Ft))),
     format: "qcm",
     choices,
     expected,
@@ -470,7 +503,7 @@ function genEgaleManquant(): Genere {
     `Quelle valeur de $${L}$ rend l'égalité $${eg(L)}$ vraie ?`,
     `Détermine $${L}$ sachant que $${eg(L)}$.`,
     `Complète : $${eg("\\ldots")}$.`,
-    ...PARTS.flatMap((p) => [
+    ...ctx(PARTS).flatMap((p) => [
       surNum
         ? `${p.s($m(Ft))} Écris cette part avec le dénominateur ${T.d} : quel est le numérateur ?`
         : `${p.s($m(Ft))} Écris cette part avec le numérateur ${T.n} : quel est le dénominateur ?`,
@@ -482,7 +515,7 @@ function genEgaleManquant(): Genere {
       ? `$${Ft} = \\frac{${base.n} \\times ${k2}}{${base.d} \\times ${k2}} = ${tf(T.n, T.d)}$`
       : `$${Ft} = ${tf(base.n, base.d)} = \\frac{${base.n} \\times ${k2}}{${base.d} \\times ${k2}} = ${tf(T.n, T.d)}$`;
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     expected: [String(rep)],
     comparator: "number_equal",
@@ -543,13 +576,13 @@ function genEgalesOuiNon(niveau: 2 | 3): { g: Genere; a: Q; b: Q } {
     `L'égalité $${at} = ${bt}$ est-elle vraie ?`,
     `Les fractions ${A} et ${B} représentent-elles la même proportion ?`,
     `Sur une droite graduée, ${A} et ${B} repèrent-elles le même point ?`,
-    ...DUOS.flatMap((s) => suites.map((suite) => `${s(A, B)} ${suite}`)),
+    ...ctx(DUOS).flatMap((s) => suites.map((suite) => `${s(A, B)} ${suite}`)),
   ];
   return {
     a,
     b,
     g: {
-      text: randomChoice(textes),
+      text: enonce(textes),
       format: "qcm",
       choices: ["oui", "non"],
       expected: [rep],
@@ -583,7 +616,7 @@ function enoncesSimplifier(F: string): string[] {
     `Réduis la fraction ${F} : quelle fraction obtiens-tu ?`,
     `Un élève doit simplifier ${F} au maximum. Quel résultat doit-il trouver ?`,
     `Donne l'écriture irréductible de ${F}.`,
-    ...PARTS.flatMap((p) => [
+    ...ctx(PARTS).flatMap((p) => [
       `${p.s(F)} Simplifie cette fraction au maximum.`,
       `${p.s(F)} Écris cette part ${p.tout} sous forme irréductible.`,
       `${p.s(F)} Quelle fraction irréductible ${p.tout} cela représente-t-il ?`,
@@ -618,7 +651,7 @@ function genSimplifierQcm(niveau: 1 | 2): Genere {
     { n: base.n, d: base.d + 1 },
   ]);
   return {
-    text: randomChoice(enoncesSimplifier($m(tf(F.n, F.d)))),
+    text: enonce(enoncesSimplifier($m(tf(F.n, F.d)))),
     format: "qcm",
     choices,
     expected,
@@ -632,7 +665,7 @@ function genSimplifierCourt(niveau: 1 | 2): { g: Genere; F: Q } {
   return {
     F,
     g: {
-      text: randomChoice(enoncesSimplifier($m(tf(F.n, F.d)))),
+      text: enonce(enoncesSimplifier($m(tf(F.n, F.d)))),
       format: "short",
       expected: [pq(base)],
       // 08/10/2026 : « simplifie au maximum » — `fraction_decimal_equivalent` acceptait « 2/4 » pour « 1/2 ».
@@ -658,13 +691,13 @@ function genSimplifierPgcd(): Genere {
     `Trouve le plus grand diviseur commun au numérateur et au dénominateur de ${F}.`,
     `Quel diviseur commun permet de rendre ${F} irréductible d'un seul coup ?`,
     `${n} et ${d} sont le numérateur et le dénominateur d'une fraction. Quel est le plus grand nombre qui les divise tous les deux ?`,
-    ...PARTS.flatMap((p) => [
+    ...ctx(PARTS).flatMap((p) => [
       `${p.s(F)} Pour simplifier cette fraction en une seule étape, par quel nombre faut-il diviser son numérateur et son dénominateur ?`,
       `${p.s(F)} Quel est le plus grand nombre qui divise à la fois ${n} et ${d} ?`,
     ]),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     expected: [String(k)],
     comparator: "number_equal",
@@ -706,7 +739,7 @@ function genIrreductible(): Genere {
     [`La fraction ${F} est-elle écrite sous sa forme la plus simple ?`, true],
     [`Existe-t-il un nombre, autre que 1, qui divise à la fois ${n} et ${d} ?`, false],
     [`${n} et ${d} ont-ils un diviseur commun autre que 1 ?`, false],
-    ...PARTS.flatMap((p): [string, boolean][] => [
+    ...ctx(PARTS).flatMap((p): [string, boolean][] => [
       [`${p.s(F)} Cette fraction est-elle irréductible ?`, true],
       [`${p.s(F)} Peut-on simplifier cette fraction ?`, false],
     ]),
@@ -769,7 +802,7 @@ function enoncesVersDecimal(F: string, x: Q): string[] {
     `Effectue la division ${x.n} ÷ ${x.d} et donne le résultat sous forme décimale.`,
     `Écris le nombre ${F} avec une virgule.`,
     `Quelle écriture décimale correspond à la fraction ${F} ?`,
-    ...MESURES.flatMap((me) => [
+    ...ctx(MESURES).flatMap((me) => [
       `${me.s(F)} Écris ${me.nom} sous forme décimale.`,
       `${me.s(F)} Quelle est ${me.nom} en écriture décimale, en ${me.unite} ?`,
       `${me.s(F)} Exprime ${me.nom} par un nombre décimal.`,
@@ -812,7 +845,7 @@ function genVersDecimalQcm(niveau: 1 | 2 | 3): Genere {
   const [colle, ...autres] = piegesDecimaux(x);
   const { choices, expected } = qcmTextes(bonne, [colle, ...shuffle(autres)], ["0,3", "1,5", "2,5", "0,15"]);
   return {
-    text: randomChoice(enoncesVersDecimal($m(tf(x.n, x.d)), x)),
+    text: enonce(enoncesVersDecimal($m(tf(x.n, x.d)), x)),
     format: "qcm",
     choices,
     expected,
@@ -827,7 +860,7 @@ function genVersDecimalCourt(sur: 10 | 100): Genere {
   const x = { n, d: sur };
   const v = n / sur;
   return {
-    text: randomChoice(enoncesVersDecimal($m(tf(n, sur)), x)),
+    text: enonce(enoncesVersDecimal($m(tf(n, sur)), x)),
     format: "short",
     // 08/10/2026 : plus de variante « 0.3 » (point anglais) ; `number_equal` accepte « 0.3 » tapé.
     expected: [virgule(v)],
@@ -869,13 +902,13 @@ function genVersFraction(): Genere {
     `Parmi ces fractions, laquelle vaut ${D} ?`,
     `Quelle fraction simplifiée représente ${D} ?`,
     `Une calculatrice affiche ${D}. De quelle fraction irréductible s'agit-il ?`,
-    ...MESURES.flatMap((me) => [
+    ...ctx(MESURES).flatMap((me) => [
       `${me.s(D)} Écris ${me.nom} sous forme de fraction irréductible.`,
       `${me.s(D)} Quelle fraction ${me.deUnite} est-ce ?`,
     ]),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "qcm",
     choices,
     expected,
@@ -986,7 +1019,7 @@ const SITUATIONS_NEG: ((X: string) => string)[] = [
 
 /** Chaque situation, suivie de chaque question. */
 const enSituations = (sits: ((x: string) => string)[], X: string, questions: string[]) =>
-  sits.flatMap((s) => questions.map((qu) => `${s(X)} ${qu}`));
+  ctx(sits).flatMap((s) => questions.map((qu) => `${s(X)} ${qu}`));
 
 /** Le dénominateur réduit n'a que des 2 et des 5 : la division tombe juste. */
 function divisionFinie(d: number): boolean {
@@ -1039,7 +1072,7 @@ function genSurCentVersPourcent(): Genere {
     ]),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     // `number_equal` accepte « 37 », « 37 % », « 37% » ; refuse « 0,37 » et « 0,37 % ».
     expected: [pourcent(p)],
@@ -1063,14 +1096,23 @@ const DECIMAUX_SITUATION: Q[] = [
 function genFractionVersDecimalSituation(): Genere {
   const x = randomChoice(DECIMAUX_SITUATION);
   const F = $m(tf(x.n, x.d));
-  const textes = enSituations(SITUATIONS_PART, F, [
+  // ★1 sans histoire (03/11/2026) : les mêmes questions, posées sur la fraction seule.
+  const nues = [
+    `Écris ${F} sous forme décimale.`,
+    `Quel nombre décimal est égal à ${F} ?`,
+    `Calcule ${x.n} ÷ ${x.d} pour écrire ${F} avec une virgule.`,
+    `Donne l'écriture décimale de ${F}.`,
+    `Pose la division ${x.n} ÷ ${x.d} : quel décimal donne ${F} ?`,
+    `${F} = ${x.n} ÷ ${x.d}. Quel nombre décimal est-ce ?`,
+  ];
+  const textes = SIMPLE ? nues : enSituations(SITUATIONS_PART, F, [
     "Écris cette fraction sous forme décimale.",
     `Quel nombre décimal est égal à ${F} ?`,
     "Donne l'écriture décimale de cette part.",
     `Calcule ${x.n} ÷ ${x.d} pour écrire cette part avec une virgule.`,
   ]);
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     expected: [virgule(x.n / x.d)],
     comparator: "number_equal",
@@ -1133,7 +1175,7 @@ function genFractionVersPourcentQcm(niveau: 2 | 3): Genere {
           "Quel pourcentage correspond exactement à cette part ?",
         ];
   return {
-    text: randomChoice([...enoncesPourcent(F), ...enSituations(SITUATIONS_PART, F, questions)]),
+    text: enonce([...enoncesPourcent(F), ...enSituations(SITUATIONS_PART, F, questions)]),
     format: "qcm",
     choices,
     expected,
@@ -1174,7 +1216,7 @@ function genDecimalVersPourcentQcm(): Genere {
     ]),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "qcm",
     choices,
     expected,
@@ -1208,7 +1250,7 @@ function genNegatifVersDecimal(): Genere {
     ]),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     expected: [virgule(v)],
     comparator: "number_equal",
@@ -1257,7 +1299,7 @@ function genArrondiQuotient(): Genere {
     ]),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     expected: [virgule(arr)],
     comparator: "number_equal",
@@ -1295,7 +1337,7 @@ function genEcriturePeriodique(): Genere {
     ]),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "qcm",
     choices,
     expected,
@@ -1337,7 +1379,7 @@ function genDecimalVersFractionTapee(): Genere {
     ...situations,
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     // « irréductible » : SEULE la fraction simplifiée passe (exact_text), pas 75/100.
     expected: reponsesTapees(x),
@@ -1374,7 +1416,7 @@ function genPourcentVersFraction(): Genere {
     ]),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     expected: reponsesTapees(x),
     comparator: "exact_text",
@@ -1418,7 +1460,7 @@ function genEcritureFractionnaire(niveau: 1 | 2): Genere {
     `${X} est un nombre rationnel. Laquelle de ces fractions lui est égale ?`,
     `Parmi ces écritures, laquelle est égale à ${X} ?`,
     `Écris ${X} sous la forme $\\frac{a}{b}$, avec $a$ et $b$ entiers.`,
-    ...situations.flatMap((c) => [
+    ...ctx(situations).flatMap((c) => [
       `${c.s(X)} Écris ce nombre sous la forme d'une fraction.`,
       `${c.s(X)} Quelle fraction est égale à ce nombre ?`,
     ]),
@@ -1433,7 +1475,7 @@ function genEcritureFractionnaire(niveau: 1 | 2): Genere {
     tfFrac,
   );
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "qcm",
     choices,
     expected,
@@ -1460,7 +1502,7 @@ function genEstRationnel(): Genere {
       `L'écriture ${X} a-t-elle un sens ? Autrement dit, est-ce un nombre rationnel ?`,
     ];
     return {
-      text: randomChoice(textes),
+      text: enonce(textes),
       format: "qcm",
       choices: ["oui", "non"],
       expected: ["non"],
@@ -1500,13 +1542,13 @@ function genEstRationnel(): Genere {
     `Un élève affirme que ${X} est un nombre rationnel. A-t-il raison ?`,
     `Peut-on dire que ${X} est un nombre rationnel ?`,
     `Est-il vrai que ${X} est un nombre rationnel ?`,
-    ...NOMBRES_EN_SITUATION.filter((c) => c.signe === "tous" || (c.signe === "neg") === negatif).flatMap((c) => [
+    ...ctx(NOMBRES_EN_SITUATION).filter((c) => c.signe === "tous" || (c.signe === "neg") === negatif).flatMap((c) => [
       `${c.s(X)} Ce nombre est-il rationnel ?`,
       `${c.s(X)} Ce nombre peut-il s'écrire comme le quotient de deux entiers ?`,
     ]),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
@@ -1560,13 +1602,13 @@ function genGrille(): Genere {
         "Compte les cases : quelle fraction irréductible de la grille est colorée ?",
         `La grille compte ${total} cases. Quelle fraction irréductible représente la partie colorée ?`,
         `${shaded} cases sur ${total} sont colorées. Écris cette part sous forme de fraction irréductible.`,
-        ...GRILLES.flatMap((g) => [
+        ...ctx(GRILLES).flatMap((g) => [
           `${g} Quelle fraction de la grille cela représente-t-il ? Donne-la sous forme irréductible.`,
           `${g} Écris cette part sous forme de fraction irréductible.`,
         ]),
       ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     expected: [pq(r)],
     // 08/10/2026 : « fraction irréductible » — `fraction_decimal_equivalent` acceptait « 2/4 » pour « 1/2 ».
@@ -1595,7 +1637,7 @@ function enoncesPlusGrande(A: string, B: string, grand: boolean): string[] {
     `On place ${A} et ${B} sur une droite graduée. Laquelle est la plus à ${grand ? "droite" : "gauche"} ?`,
     `Quelle est la plus ${mot} des deux fractions ${A} et ${B} ?`,
     `On range ${A} et ${B} dans l'ordre croissant. Laquelle vient en ${grand ? "dernier" : "premier"} ?`,
-    ...DUOS.flatMap((s) => [
+    ...ctx(DUOS).flatMap((s) => [
       `${s(A, B)} Laquelle de ces deux fractions est la plus ${mot} ?`,
       `${s(A, B)} Quelle est la plus ${mot} des deux parts ?`,
     ]),
@@ -1610,7 +1652,7 @@ function enoncesSigne(A: string, B: string): string[] {
     `Place le bon signe (<, > ou =) entre ${A} et ${B}.`,
     `${A} est-elle plus petite (<), plus grande (>) ou égale (=) à ${B} ? Réponds par un signe.`,
     `Compare les fractions ${A} et ${B} à l'aide d'un signe <, > ou =.`,
-    ...DUOS.flatMap((s) => [
+    ...ctx(DUOS).flatMap((s) => [
       `${s(A, B)} Compare ces deux fractions : réponds par <, > ou =.`,
       `${s(A, B)} Complète par <, > ou = : ${A} … ${B}.`,
     ]),
@@ -1673,7 +1715,7 @@ function genPlusGrande(niveau: 2 | 3): Genere {
   const signe = g > dr ? ">" : g < dr ? "<" : "=";
   const correct = g === dr ? "elles sont égales" : (g > dr) === grand ? A : B;
   return {
-    text: randomChoice(enoncesPlusGrande(A, B, grand)),
+    text: enonce(enoncesPlusGrande(A, B, grand)),
     format: "qcm",
     choices: [A, B, "elles sont égales"],
     expected: [correct],
@@ -1693,7 +1735,7 @@ function genSigne(): { g: Genere; a: Q; b: Q } {
     // ⛔ 08/10/2026 : c'était une réponse courte à MOT-CLÉ (« < ») : « <> » ou « 1/2 < 3 >… »
     // passaient. Le choix entre les trois signes devient un QCM.
     g: {
-      text: randomChoice(enoncesSigne($m(tf(a.n, a.d)), $m(tf(b.n, b.d)))),
+      text: enonce(enoncesSigne($m(tf(a.n, a.d)), $m(tf(b.n, b.d)))),
       format: "qcm",
       choices: ["<", "=", ">"],
       expected: [signe],
@@ -1737,7 +1779,7 @@ function genFractionContreDecimal(): Genere {
     ...DUO_MESURES.map((s) => `${s(x, y)} Quel est le plus ${mot} de ces deux nombres ?`),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "qcm",
     choices: [F, D, "ils sont égaux"],
     expected: [correct],
@@ -1869,7 +1911,7 @@ function genSommeQcm(niveau: 2 | 3 | 4): Genere {
   const { termes, forme, r } = tirerSomme(niveau);
   const { choices, expected } = qcmQ(r, piegesSomme(termes, r));
   return {
-    text: randomChoice(enoncesSomme(termes, forme)),
+    text: enonce(enoncesSomme(termes, forme)),
     format: "qcm",
     choices,
     expected,
@@ -1881,7 +1923,7 @@ function genSommeQcm(niveau: 2 | 3 | 4): Genere {
 function genSommeCourt(niveau: 2 | 3, canvas = false): Genere {
   const { termes, forme, r } = tirerSomme(niveau, canvas);
   const D = termes.reduce((acc, t) => ppcm(acc, t.x.d), 1);
-  const text = randomChoice(enoncesSomme(termes, forme));
+  const text = enonce(enoncesSomme(termes, forme));
   const g: Genere = {
     text,
     format: "short",
@@ -1946,7 +1988,7 @@ function genFoisEntier(): Genere {
     { n: A.n, d: a.d },
   ]);
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "qcm",
     choices,
     expected,
@@ -1978,7 +2020,7 @@ function tirerProduit() {
           ...PARMI.map((c) => `${c.s($m(tq(b)), $m(tq(a)))} ${c.q}`),
         ]
       : CALCULE.map((c) => c(e));
-  return { A, B, r, text: randomChoice(textes) };
+  return { A, B, r, text: enonce(textes) };
 }
 
 function explProduit(A: Q, B: Q, r: Q) {
@@ -2028,7 +2070,7 @@ function genFoisEntierJuste(): Genere {
     ...FOIS.map((c) => `${c.s(A, total)} ${c.q}`),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     expected: [String(r)],
     comparator: "number_equal",
@@ -2103,7 +2145,7 @@ function genInverseCourt(): Genere {
   const attendu = reponsesTapees(inv);
   if (inv.d === 1) attendu.push(`${inv.n}/1`);
   return {
-    text: randomChoice(enoncesInverse(xt, $m(xt), entier)),
+    text: enonce(enoncesInverse(xt, $m(xt), entier)),
     format: "short",
     expected: attendu,
     comparator: "fraction_decimal_equivalent",
@@ -2121,7 +2163,7 @@ function genInverseQcm(genres: string[]): Genere {
     { n: x.d, d: Math.abs(x.n) + 1 },
   ]);
   return {
-    text: randomChoice(enoncesInverse(xt, $m(xt), entier)),
+    text: enonce(enoncesInverse(xt, $m(xt), entier)),
     format: "qcm",
     choices,
     expected,
@@ -2271,7 +2313,7 @@ function genDiviserRevientA(): Genere {
     { n: x.d + 1, d: Math.abs(x.n) },
   ]);
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "qcm",
     choices,
     expected,
@@ -2302,7 +2344,8 @@ function tirerFractionDe(): { g: Genere; f: Q } {
   const f: Q = enMots ? { n: fm.n, d: fm.d } : tirerFraction(6);
   const N = f.d * randomInt(3, 15);
   const r = (N / f.d) * f.n;
-  const u = randomChoice(UNITES_NUES);
+  // ★1-★2 : des grandeurs sans histoire (ni prix, ni élèves).
+  const u = randomChoice(SIMPLE ? ["", "", " km", " kg", " L", " minutes", " cm", " g"] : UNITES_NUES);
   const F = $m(tq(f));
   const textes = enMots
     ? [
@@ -2325,7 +2368,7 @@ function tirerFractionDe(): { g: Genere; f: Q } {
   return {
     f,
     g: {
-      text: randomChoice(textes),
+      text: enonce(textes),
       format: "short",
       expected: [String(r)],
       comparator: "number_equal",
@@ -2404,7 +2447,7 @@ function genQuantiteInverse(): Genere {
     ...INVERSES_QUANTITE.map((c) => `${c.s(F, v)} ${c.q}`),
   ];
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "short",
     expected: [String(total)],
     comparator: "number_equal",
@@ -2473,7 +2516,7 @@ function explOppose(xt: string, x: Q, opp: Q, forme: string) {
 function genOpposeCourt(): Genere {
   const { x, xt, opp, forme } = tirerOppose(["+", "-", "num", "den"]);
   return {
-    text: randomChoice(enoncesOppose(xt, $m(xt))),
+    text: enonce(enoncesOppose(xt, $m(xt))),
     format: "short",
     expected: reponsesTapees(opp),
     comparator: "fraction_decimal_equivalent",
@@ -2490,7 +2533,7 @@ function genOpposeQcm(formes: string[]): Genere {
     { n: opp.n, d: opp.d + 1 },
   ]);
   return {
-    text: randomChoice(enoncesOppose(xt, $m(xt))),
+    text: enonce(enoncesOppose(xt, $m(xt))),
     format: "qcm",
     choices,
     expected,
@@ -2625,7 +2668,7 @@ function genDefiErreur(): Genere {
   ];
   const majuscule = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   return {
-    text: randomChoice(textes),
+    text: enonce(textes),
     format: "qcm",
     choices: shuffle(Object.values(LECONS_DEFI)).map(majuscule),
     expected: [majuscule(lecon)],
@@ -2737,7 +2780,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Deux fractions sont égales si on multiplie haut et bas par le même nombre.",
     tags: ["fraction_nombre", "egales", "template"],
-    generate: () => genEgaleQcm(1),
+    generate: () => simple(1, () => genEgaleQcm(1)),
   },
 
   // =========================
@@ -2775,7 +2818,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche un diviseur commun.",
     tags: ["fraction_nombre", "simplifier", "template"],
-    generate: () => genSimplifierCourt(2).g,
+    generate: () => simple(2, () => genSimplifierCourt(2).g),
   },
   {
     kind: "fixed",
@@ -2840,7 +2883,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Calcule le numérateur divisé par le dénominateur.",
     tags: ["fraction_nombre", "decimal", "template"],
-    generate: () => genVersDecimalQcm(2),
+    generate: () => simple(2, () => genVersDecimalQcm(2)),
   },
 
   // =========================
@@ -3067,7 +3110,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Échange le numérateur et le dénominateur.",
     tags: ["fraction_nombre", "inverse", "template"],
-    generate: () => genInverseCourt(),
+    generate: () => simple(2, () => genInverseCourt()),
   },
 
   // =========================
@@ -3208,7 +3251,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Change seulement le signe.",
     tags: ["fraction_nombre", "oppose", "template"],
-    generate: () => genOpposeCourt(),
+    generate: () => simple(2, () => genOpposeCourt()),
   },
 
   // =========================
@@ -3264,7 +3307,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Observe si les deux parties colorées représentent la même proportion.",
     tags: ["fraction_nombre", "egales", "canvas", "compare", "template"],
-    generate: () => {
+    generate: () => simple(2, () => {
       const { g, a, b } = genEgalesOuiNon(2);
       return {
         ...g,
@@ -3276,7 +3319,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           ],
         }),
       };
-    },
+    }),
   },
 
   {
@@ -3292,7 +3335,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     tags: ["fraction_nombre", "simplifier", "canvas", "bar", "template"],
     // ⚠️ Avant le 30/09, la fraction de DÉPART était acceptée comme réponse :
     // l'élève qui recopiait l'énoncé avait juste. Seule l'irréductible compte.
-    generate: () => {
+    generate: () => simple(2, () => {
       const { g, F } = genSimplifierCourt(2);
       return {
         ...g,
@@ -3301,7 +3344,7 @@ export const fractionsBank: TutorBankItemV4[] = [
           fraction: { numerator: F.n, denominator: F.d, label: frac(F.n, F.d) },
         }),
       };
-    },
+    }),
   },
 
   {
@@ -3343,7 +3386,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     tags: ["fraction_nombre", "addition", "canvas", "bar", "template"],
     // Le dessin montre les deux TERMES, pas le résultat (l'ancienne barre
     // dessinait la somme : la réponse était sous les yeux de l'élève).
-    generate: () => genSommeCourt(2, true),
+    generate: () => simple(2, () => genSommeCourt(2, true)),
   },
 
   {
@@ -3371,7 +3414,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un rationnel peut s’écrire comme quotient de deux entiers.",
     tags: ["fraction_nombre", "rationnel", "canvas", "grid", "template"],
-    generate: () => genGrille(),
+    generate: () => simple(2, () => genGrille()),
   },
 
   {
@@ -3514,7 +3557,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Multiplie le haut et le bas par le même nombre.",
     tags: ["fraction_nombre", "egales", "template"],
-    generate: () => genEgaleQcm(2),
+    generate: () => simple(2, () => genEgaleQcm(2)),
   },
   {
     kind: "template",
@@ -3527,7 +3570,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Quel nombre a-t-on utilisé pour passer du dénominateur de départ à l’autre ?",
     tags: ["fraction_nombre", "egales", "numerateur", "template"],
-    generate: () => genEgaleManquant(),
+    generate: () => simple(2, () => genEgaleManquant()),
   },
   {
     kind: "template",
@@ -3599,7 +3642,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Divise le haut et le bas par leur diviseur commun.",
     tags: ["fraction_nombre", "simplifier", "template"],
-    generate: () => genSimplifierQcm(2),
+    generate: () => simple(2, () => genSimplifierQcm(2)),
   },
   {
     kind: "template",
@@ -3637,7 +3680,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     // ⛔ 08/10/2026 : ouverte à mots-clés (« 6 », « 2/3 ») → réponse numérique.
-    text: "Pour simplifier $\\frac{12}{18}$ en une seule étape, par quel nombre divise-t-on le numérateur et le dénominateur ?",
+    text: "Par quel nombre divise-t-on 12 et 18 pour simplifier $\\frac{12}{18}$ en une étape ?",
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -3728,7 +3771,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Diviser par 10 décale la virgule d’un rang.",
     tags: ["fraction_nombre", "decimal", "template"],
-    generate: () => genVersDecimalCourt(10),
+    generate: () => simple(2, () => genVersDecimalCourt(10)),
   },
   {
     kind: "template",
@@ -3741,7 +3784,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Diviser par 100 décale la virgule de deux rangs.",
     tags: ["fraction_nombre", "decimal", "template"],
-    generate: () => genVersDecimalCourt(100),
+    generate: () => simple(2, () => genVersDecimalCourt(100)),
   },
   {
     kind: "template",
@@ -3905,7 +3948,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Tout nombre qui s’écrit comme quotient de deux entiers est rationnel.",
     tags: ["fraction_nombre", "rationnel", "template"],
-    generate: () => genEstRationnel(),
+    generate: () => simple(2, () => genEstRationnel()),
   },
   {
     kind: "template",
@@ -3918,7 +3961,35 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un entier se met sur 1 ; un décimal sur 10, 100… selon le nombre de chiffres après la virgule.",
     tags: ["fraction_nombre", "rationnel", "qcm", "template"],
+    generate: () => simple(2, () => genEcritureFractionnaire(2)),
+  },
+  // ⭐ 03/11/2026 — ★1-★2 sans histoire : les nombres « en situation » (pluie,
+  // altitude, température…) passent ici, à ★3.
+  {
+    kind: "template",
+    id: "fraction_rationnel_tpl_contexte_ecriture",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_rationnel",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un entier se met sur 1 ; un décimal sur 10, 100… selon le nombre de chiffres après la virgule.",
+    tags: ["fraction_nombre", "rationnel", "qcm", "contexte", "template"],
     generate: () => genEcritureFractionnaire(2),
+  },
+  {
+    kind: "template",
+    id: "fraction_rationnel_tpl_contexte_est_rationnel",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_rationnel",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un rationnel s'écrit comme le quotient de deux entiers, avec un dénominateur non nul.",
+    tags: ["fraction_nombre", "rationnel", "qcm", "contexte", "template"],
+    generate: () => genEstRationnel(),
   },
   {
     kind: "fixed",
@@ -4027,7 +4098,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Même dénominateur : on compare les numérateurs.",
     tags: ["fraction_nombre", "comparer", "template"],
-    generate: () => genPlusGrande(2),
+    generate: () => simple(2, () => genPlusGrande(2)),
   },
   {
     kind: "template",
@@ -4125,7 +4196,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Même dénominateur : additionne les numérateurs.",
     tags: ["fraction_nombre", "addition", "qcm", "template"],
-    generate: () => genSommeQcm(2),
+    generate: () => simple(2, () => genSommeQcm(2)),
   },
   {
     kind: "template",
@@ -4235,7 +4306,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un entier multiplie seulement le numérateur.",
     tags: ["fraction_nombre", "produit", "entier", "qcm", "template"],
-    generate: () => genFoisEntier(),
+    generate: () => simple(2, () => genFoisEntier()),
   },
   {
     kind: "template",
@@ -4381,7 +4452,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     tags: ["fraction_nombre", "inverse", "qcm", "template"],
     // ⚠️ Jamais une fraction égale à 1 : son inverse s'écrit comme elle
     // (`tirerFraction` donne toujours n < d, donc n ≠ d).
-    generate: () => genInverseQcm(["frac", "-frac", "decimal"]),
+    generate: () => simple(2, () => genInverseQcm(["frac", "-frac", "decimal"])),
   },
   {
     kind: "template",
@@ -4394,7 +4465,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "L’inverse d’un entier n est 1/n.",
     tags: ["fraction_nombre", "inverse", "entier", "qcm", "template"],
-    generate: () => genInverseQcm(["entier", "-entier", "unitaire"]),
+    generate: () => simple(2, () => genInverseQcm(["entier", "-entier", "unitaire"])),
   },
   {
     kind: "fixed",
@@ -4591,7 +4662,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Divise par le dénominateur, multiplie par le numérateur.",
     tags: ["fraction_nombre", "quantite", "template"],
-    generate: () => genFractionDe(),
+    generate: () => simple(2, () => genFractionDe()),
   },
   {
     kind: "template",
@@ -4760,7 +4831,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On change uniquement le signe.",
     tags: ["fraction_nombre", "oppose", "qcm", "template"],
-    generate: () => genOpposeQcm(["+", "den"]),
+    generate: () => simple(2, () => genOpposeQcm(["+", "den"])),
   },
   {
     kind: "template",
@@ -4773,7 +4844,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "L’opposé d’un nombre négatif est positif.",
     tags: ["fraction_nombre", "oppose", "negatif", "qcm", "template"],
-    generate: () => genOpposeQcm(["-", "num"]),
+    generate: () => simple(2, () => genOpposeQcm(["-", "num"])),
   },
   {
     kind: "fixed",
@@ -4972,7 +5043,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Divise le numérateur et le dénominateur par un même nombre : 2, 3 ou 5.",
     tags: ["fraction_nombre", "simplifier", "qcm", "template"],
-    generate: () => genSimplifierQcm(1),
+    generate: () => simple(1, () => genSimplifierQcm(1)),
   },
   {
     kind: "template",
@@ -4985,7 +5056,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une fraction est un quotient : divise le numérateur par le dénominateur.",
     tags: ["fraction_nombre", "decimal", "qcm", "template"],
-    generate: () => genVersDecimalQcm(1),
+    generate: () => simple(1, () => genVersDecimalQcm(1)),
   },
 
   // ---------- FRACTION_DECIMAL, RENFORCÉE LE 25/10/2026 ----------
@@ -5003,7 +5074,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un pourcentage, c'est une fraction sur 100 : 37 sur 100, c'est 37 %.",
     tags: ["fraction_nombre", "decimal", "pourcentage", "contexte", "template"],
-    generate: () => genSurCentVersPourcent(),
+    generate: () => simple(1, () => genSurCentVersPourcent()),
   },
   {
     kind: "template",
@@ -5016,7 +5087,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La barre de fraction veut dire « divisé par » : calcule le numérateur ÷ le dénominateur.",
     tags: ["fraction_nombre", "decimal", "contexte", "template"],
-    generate: () => genFractionVersDecimalSituation(),
+    generate: () => simple(1, () => genFractionVersDecimalSituation()),
   },
   {
     kind: "template",
@@ -5029,7 +5100,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Calcule d'abord l'écriture décimale, puis multiplie-la par 100.",
     tags: ["fraction_nombre", "decimal", "pourcentage", "qcm", "contexte", "template"],
-    generate: () => genFractionVersPourcentQcm(2),
+    generate: () => simple(2, () => genFractionVersPourcentQcm(2)),
   },
   {
     kind: "template",
@@ -5042,7 +5113,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Pour écrire un décimal en pourcentage, on le multiplie par 100.",
     tags: ["fraction_nombre", "decimal", "pourcentage", "qcm", "contexte", "template"],
-    generate: () => genDecimalVersPourcentQcm(),
+    generate: () => simple(2, () => genDecimalVersPourcentQcm()),
   },
   {
     kind: "template",
@@ -5055,7 +5126,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Divise sans le signe, puis remets le « − » devant le résultat.",
     tags: ["fraction_nombre", "decimal", "negatif", "contexte", "template"],
-    generate: () => genNegatifVersDecimal(),
+    generate: () => simple(2, () => genNegatifVersDecimal()),
   },
   {
     kind: "template",
@@ -5133,7 +5204,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un entier se met sur 1 ; un décimal sur 10, 100… selon le nombre de chiffres après la virgule.",
     tags: ["fraction_nombre", "rationnel", "qcm", "template"],
-    generate: () => genEcritureFractionnaire(1),
+    generate: () => simple(1, () => genEcritureFractionnaire(1)),
   },
   {
     kind: "template",

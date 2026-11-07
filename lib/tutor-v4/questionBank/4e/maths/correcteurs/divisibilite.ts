@@ -327,6 +327,9 @@ export const CORRECTEURS: CorrecteursMaths = avecRegleMotsCles({
   "4e_div_multiple_diviseur_tpl_1_reconnaitre": corrigerReconnaitre,
   "4e_div_multiple_diviseur_tpl_2_tester": corrigerTesterMultiple,
   "4e_div_critere_2_5_10_tpl_1_lequel": corrigerCriteres([2, 5, 10]),
+  // 03/11/2026 : les situations montées à ★3 (mêmes questions, mêmes correcteurs).
+  "4e_div_critere_2_5_10_tpl_1_situation": corrigerCriteres([2, 5, 10]),
+  "4e_div_multiple_diviseur_tpl_1_situation": corrigerReconnaitre,
   "4e_div_critere_2_5_10_tpl_2_unite_manquante": corrigerUniteManquante,
   "4e_div_critere_3_9_tpl_1_somme": corrigerCriteres([3, 9]),
   "4e_div_critere_3_9_tpl_2_lequel": corrigerLequel39,
