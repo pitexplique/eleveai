@@ -55,7 +55,12 @@ const BANQUES: Record<string, any[]> = {
   premiere: mathsPremiereQuestionBank,
   stmg: mathsStmgQuestionBank,
 };
-const [classe, ...demandees] = process.argv.slice(2);
+// ⭐ 07/11/2026 — « --lettres » neutralise AUSSI les noms de points (ABC, [AB], Ĉ).
+// En géométrie, tirer d'autres lettres faisait compter une phrase comme neuve :
+// triangles 6e tout verts sans l'option, 8 à 17 répétitions sur 20 à ★1-★2 avec.
+const ARGS = process.argv.slice(2);
+const AVEC_LETTRES = ARGS.includes("--lettres");
+const [classe, ...demandees] = ARGS.filter((a) => a !== "--lettres");
 const B = BANQUES[classe];
 // « toutes » : chaque notion de la banque, dans l'ordre où elle apparaît.
 const notions = demandees[0] === "toutes" && B ? [...new Set(B.map((i) => i.notionId as string))] : demandees;
@@ -70,7 +75,7 @@ const SEUIL_REPETITIONS = 4;
 // aussi : sans cette ligne, « #³ » et « #⁴ » comptaient pour deux squelettes
 // (signalé par l'agent des puissances, 30/09/2026).
 const squelette = (t: string) =>
-  t
+  (AVEC_LETTRES ? t.replace(/\\widehat\{[A-Z]+\}/g, "^L").replace(/\b[A-Z]{1,4}\b/g, "L") : t)
     .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g, "#")
     .replace(/[−-]?\d+(?:[,.]\d+)?/g, "#")
     .replace(/\s+/g, " ")
