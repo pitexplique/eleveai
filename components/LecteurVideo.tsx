@@ -53,6 +53,9 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "seconde-puissance-enchainer-short": 4.22,
   "premiere-puissance-cinq-regles-short": 4.22,
   "ti-margo-3d-mes-vues-doublent-short": 4.46,
+  // Divisibilité 4e : paysage = même fin que les Relatifs ; short = « Mets » (75,63 s) + 0,03 s.
+  "4e-div-diviseurs": 8.4,
+  "4e-div-diviseurs-short": 4.17,
   // Triangles 6e : mesuré dans les mp4, la pause après « point f r » (07/11).
   "6e-triangle-nommer": 8.4,
   "6e-triangle-sommet-cote": 8.4,
