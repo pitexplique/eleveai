@@ -113,3 +113,22 @@ Ton validé : Ti Margo complice, gag sur les maths, un défi et pas un mini-cour
 - Paysage 04, vers 2:25 : la rature sur −3 traverse aussi le signe moins.
 
 **Pour la session Triangles :** dans `short.js`, la barre du rebours ne s'affiche jamais (`#rebours{display:none}` reprend le dessus). Surchargé dans `relatifs.js` pour cette série ; les autres shorts du socle ont le même défaut.
+
+
+## ÉTAT FINAL au 07/11 (après la passe finale) : remplace la section précédente
+
+**Les 14 vidéos sont rendues, contrôlées (bords à 0, durées vidéo et son) et sur R2 (49 fichiers vérifiés). Rien n'est poussé, rien sur YouTube, le coach n'est pas branché.**
+Commits : `85a37826` (02), `95ccf4e5` (06), `f6bfbec8` (07), `67603203` (passe finale : manifeste, table R2, bilans, coupes, miniatures).
+
+- R2 : envoyé par `r2-videos.ps1 -Rclone "copy manim/sorties/4e/maths/relatifs R2:4e/maths/relatifs …"`, PAS par `-Envoyer` : ce dernier aurait aussi envoyé les Triangles, le film de Noël et le CP, non validés.
+- Manifeste et tables : committés sous forme HEAD + nos 14 entrées. La copie de travail de `videos-r2.json` reste plus riche (Triangles…), c'est normal.
+- Chapitres : « On vérifie » (07 s, 04) retiré, « Étape 2 » et « Étape 3 » (09 s, 06) réunies, car YouTube refuse tous les chapitres s'il y en a un de moins de 10 s.
+- Coupe de fin mesurée sur les mp4, après « point f r » : paysage 8,4 s, short 4,1 s. Les 4,7 s de `4e-equation-probleme-short` paraissent couper le « f r » (arrêt à 2,30 s dans le clip, le mot finit à 2,68 s) : à contrôler, non modifié.
+- `pas_avant: 2026-12-01` dans les 14 entrées et `Validé : non` dans les 7 `publication.md` restent en place.
+
+**Il reste, sur l'ordre de Frédéric :**
+1. Écoute (liste « À écouter ou à trancher » plus haut).
+2. Push, le soir.
+3. Après le push seulement, en production :
+   `node scripts/brancher-videos-coach.mjs --id 4e-relatif-addition,4e-relatif-addition-short,4e-relatif-soustraction,4e-relatif-soustraction-short,4e-relatif-multiplication,4e-relatif-multiplication-short,4e-relatif-division,4e-relatif-division-short,4e-relatif-calcul,4e-relatif-calcul-short,4e-relatif-probleme,4e-relatif-probleme-short,4e-relatif-defi,4e-relatif-defi-short --ecrire`
+4. YouTube : date à choisir à la place du `pas_avant` de prudence.
