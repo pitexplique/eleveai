@@ -198,11 +198,11 @@ class DecimalDiviserParEntierBase(PaysageDecimal):
         self.play(FadeIn(l3, shift=UP * 0.1), run_time=0.3)
         # les 5 morceaux : 5 lignes ; chaque morceau reçoit 1 unité, puis 5 dixièmes
         ys = [0.75 - 0.62 * k for k in range(5)]
-        etiq = VGroup(*[hors_audit(Text(f"morceau {k + 1}", font_size=20, color=GRIS)).move_to(P(-5.85, y))
+        etiq = VGroup(*[hors_audit(Text(f"morceau {k + 1}", font_size=27, color=GRIS)).move_to(P(-4.35, y), aligned_edge=RIGHT)
                         for k, y in enumerate(ys)])
         self.play(FadeIn(etiq), run_time=0.3)
         self.au_mot("1, et il reste")
-        self.play(*[unites[k].animate.scale(0.75).move_to(P(-4.75, ys[k])) for k in range(5)], run_time=0.6)
+        self.play(*[unites[k].animate.scale(0.75).move_to(P(-4.0, ys[k])) for k in range(5)], run_time=0.6)
         self.au_mot("il reste 2")
         self.play(Indicate(VGroup(unites[5], unites[6]), color=ROUGE_ERREUR, scale_factor=1.2), run_time=0.5)
         self.au_mot("Les 2 unités")
@@ -226,7 +226,7 @@ class DecimalDiviserParEntierBase(PaysageDecimal):
         for k in range(5):
             for j in range(5):
                 b = tous[5 * k + j]
-                anims.append(b.animate.scale(0.75).move_to(P(-4.15 + 0.15 * j, ys[k])))
+                anims.append(b.animate.scale(0.75).move_to(P(-3.4 + 0.15 * j, ys[k])))
         self.play(*anims, run_time=0.8)
         self.au_mot("Chaque morceau")
         lg = self.t("Chaque morceau :", 34)
@@ -377,8 +377,8 @@ class DecimalDiviserParEntierBase(PaysageDecimal):
         a, b = c.ligne.get_start(), c.ligne.get_end()
         etq = VGroup(*[hors_audit(Text("1,75", font_size=28, color=VERT_OK)).move_to(a + (b - a) * (k + 0.5) / 4 + UP * 0.45)
                        for k in range(4)])
-        tot = BraceBetweenPoints(b + DOWN * 0.3, a + DOWN * 0.3, color=BLEU_D)
-        sept = hors_audit(Text("7", font_size=40, color=BLEU_D, weight=BOLD)).next_to(tot, DOWN, buff=0.12)
+        tot = BraceBetweenPoints(b + DOWN * 0.55, a + DOWN * 0.55, color=BLEU_D)
+        sept = hors_audit(Text("7", font_size=40, color=BLEU_D, weight=BOLD)).next_to(tot, DOWN, buff=0.2)
         self.add(c, cp)
         self.au_mot("On vérifie")
         l1 = self.t("On vérifie :", 40, JAUNE_TITRE)
