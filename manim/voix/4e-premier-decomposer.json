@@ -1,0 +1,17 @@
+{
+  "00-garde": "Décomposer en facteurs premiers. Comment casser un nombre en briques ?",
+  "01-situation": "Nathan est ingénieur en cybersécurité : il protège les paiements en ligne. Ses codes secrets reposent sur une idée simple : tout nombre se casse en nombres premiers, comme un mur en briques. Commençons par 84.",
+  "02-casser": "On divise par le plus petit nombre premier possible. 84 divisé par 2 égale 42. 42 divisé par 2 égale 21. 21 n'est pas pair : on passe à 3. 21 divisé par 3 égale 7. 7 est premier : 7 divisé par 7 égale 1. On s'arrête.",
+  "03-resultat": "Donc 84 égale 2 fois 2 fois 3 fois 7. Et c'est la seule décomposition possible, à l'ordre près.",
+  "04-controle": "Deux contrôles. Chaque facteur est premier : 2, 2, 3 et 7. Et le produit redonne 84 : 2 fois 2, 4 ; fois 3, 12 ; fois 7, 84.",
+  "04q-question": "Question ! Quelle est la décomposition de 60 ? A : 2 fois 2 fois 15. B : 2 fois 2 fois 3 fois 5. C : 4 fois 3 fois 5. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B. Dans A, 15 n'est pas premier. Dans C, 4 n'est pas premier. 2 fois 2 fois 3 fois 5 égale 60.",
+  "05-fraction": "À quoi ça sert ? À simplifier une fraction d'un coup. 84 sur 126. 84 égale 2 fois 2 fois 3 fois 7. 126 égale 2 fois 3 fois 3 fois 7. On barre un 2, un 3 et un 7, en haut et en bas. Il reste 2 sur 3.",
+  "06-piege": "Le piège : garder un facteur qui n'est pas premier. 84 égale 2 fois 6 fois 7 : c'est juste, mais 6 se casse encore en 2 fois 3. Et on n'écrit jamais fois 1 : 1 n'est pas premier.",
+  "06q-question": "Question ! Quelle est la décomposition de 45 ? A : 3 fois 3 fois 5. B : 5 fois 9. C : 3 fois 15. Mets pause, et choisis !",
+  "06r-reponse": "Réponse A : 3 fois 3 fois 5. 9 et 15 ne sont pas premiers : ils se cassent encore.",
+  "07-defi": "À toi de jouer. Décompose 90 en facteurs premiers. Mets pause, et cherche !",
+  "07b-correction": "Correction. 90 divisé par 2 égale 45. 45 divisé par 3 égale 15. 15 divisé par 3 égale 5. 5 est premier. Donc 90 égale 2 fois 3 fois 3 fois 5.",
+  "08-finale": "Ce que tu as appris. On divise par le plus petit nombre premier, encore et encore, jusqu'à 1. On vérifie que chaque facteur est premier, et que le produit redonne le nombre. La décomposition est unique.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

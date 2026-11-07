@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. J'ai 24 tournesols à planter en rectangle. Tu paries que je trouve tous les rectangles, sans en oublier un seul ?",
+  "01-paires": "Ma méthode : par paires. 1 rangée de 24. 2 rangées de 12. 3 rangées de 8. 4 rangées de 6.",
+  "02-stop": "5 rangées ? Il en reste 4 : non. 6 rangées ? C'est 6 fois 4 : déjà trouvé ! Les paires se croisent : j'arrête.",
+  "03-liste": "Les diviseurs de 24 : 1, 2, 3, 4, 6, 8, 12, 24. Huit. Aucun oublié !",
+  "03q-question": "Question ! Lequel n'est pas un diviseur de 24 ? A : 6. B : 8. C : 9. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : 9. 24 divisé par 9 : 2, et il reste 6.",
+  "04-question": "À toi : combien de diviseurs a 30 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

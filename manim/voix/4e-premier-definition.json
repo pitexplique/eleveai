@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les nombres premiers. Pourquoi certains nombres ne se cassent pas ?",
+  "01-situation": "Mia est mosaïste : elle assemble des petits carreaux pour faire des tableaux. Avec 12 carreaux, elle fait des rectangles : 2 rangées de 6, 3 rangées de 4. Avec 7 carreaux, impossible : une seule rangée de 7.",
+  "02-diviseurs": "12 a six diviseurs : 1, 2, 3, 4, 6, 12. 7 n'en a que deux : 1 et 7. Un nombre premier a exactement deux diviseurs : 1 et lui-même.",
+  "03-un": "Et 1 ? Il n'a qu'un seul diviseur : lui-même. Pas deux. Donc 1 n'est pas premier.",
+  "03q-question": "Question ! Lequel est premier ? A : 9. B : 15. C : 17. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : 17. Ses seuls diviseurs sont 1 et 17. 9 égale 3 fois 3, et 15 égale 3 fois 5.",
+  "04-liste": "La liste jusqu'à 30, à connaître : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29. Dix nombres premiers. 2 est le seul qui soit pair.",
+  "05-piege": "Le piège : croire qu'un nombre impair est premier. 9, 15, 21, 27 sont impairs, mais tous divisibles par 3. Ils ne sont pas premiers.",
+  "05q-question": "Question ! 1 est-il premier ? A : oui, il est divisible par 1 et par lui-même. B : non, il n'a qu'un seul diviseur. C : oui, c'est le premier nombre. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : non. 1 n'a qu'un seul diviseur. Il en faut exactement deux.",
+  "06-defi": "À toi de jouer. Mia a 21 carreaux, puis 23. Lequel est premier ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 21 égale 3 fois 7 : Mia peut faire 3 rangées de 7. 21 n'est pas premier. 23 n'a que deux diviseurs, 1 et 23 : une seule rangée. 23 est premier.",
+  "07-finale": "Ce que tu as appris. Un nombre premier a exactement deux diviseurs : 1 et lui-même. 1 n'est pas premier. Jusqu'à 30 : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

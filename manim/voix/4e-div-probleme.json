@@ -1,0 +1,17 @@
+{
+  "00-garde": "Problèmes de divisibilité. Faire des lots, ou se donner rendez-vous ?",
+  "01-situation": "Adam anime un planétarium. Pour un atelier, il a 48 cartes du ciel et 36 boussoles. Il veut faire des kits identiques, sans rien laisser. Combien de kits, au plus ?",
+  "02-diviseurs": "Des kits sans reste : on cherche un diviseur commun. Diviseurs de 48 : 1, 2, 3, 4, 6, 8, 12, 16, 24, 48. Diviseurs de 36 : 1, 2, 3, 4, 6, 9, 12, 18, 36.",
+  "03-plus-grand": "Les diviseurs communs : 1, 2, 3, 4, 6, 12. Le plus grand : 12. Adam fait 12 kits, avec 4 cartes et 3 boussoles chacun.",
+  "03q-question": "Question ! 20 bracelets et 30 badges, en lots identiques, sans reste. Combien de lots, au plus ? A : 5. B : 10. C : 60. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : 10. 10 divise 20 et 30, et aucun nombre plus grand ne divise les deux. 60, c'est un multiple : l'autre problème.",
+  "04-rdv": "L'autre problème. Dans le ciel d'Adam, deux comètes imaginaires reviennent : l'une tous les 6 ans, l'autre tous les 8 ans. Elles viennent de passer ensemble. Quand repasseront-elles ensemble ?",
+  "05-multiples": "Cette fois, on cherche un multiple commun. Multiples de 6 : 6, 12, 18, 24. Multiples de 8 : 8, 16, 24. Le premier commun : 24. Dans 24 ans.",
+  "06-piege": "Le piège : confondre les deux. Faire des lots sans reste : un diviseur commun, le plus grand. Se retrouver ensemble : un multiple commun, le plus petit.",
+  "06q-question": "Question ! Deux bus passent à un arrêt, l'un toutes les 10 minutes, l'autre toutes les 15. Ils viennent de passer ensemble. Dans combien de minutes, au plus tôt, repasseront-ils ensemble ? A : 5. B : 30. C : 150. Mets pause, et choisis !",
+  "06r-reponse": "Réponse B : 30. Multiples de 10 : 10, 20, 30. Multiples de 15 : 15, 30. 5, c'est un diviseur commun : l'autre problème. 150, c'est un multiple commun, mais pas le plus petit.",
+  "07-defi": "À toi de jouer. Adam a 60 étoiles autocollantes et 45 fusées. Combien de kits identiques, au plus, sans rien laisser ? Mets pause, et cherche !",
+  "07b-correction": "Correction. On cherche le plus grand diviseur commun de 60 et 45. 15 divise les deux : 60 égale 15 fois 4, 45 égale 15 fois 3. Aucun nombre plus grand ne marche. 15 kits, avec 4 étoiles et 3 fusées chacun.",
+  "08-finale": "Ce que tu as appris. Des lots sans reste : le plus grand diviseur commun. Se retrouver ensemble : le plus petit multiple commun. On lit bien la question avant de choisir.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Divisible par 2, par 5, par 10. Comment savoir sans poser la division ?",
+  "01-situation": "Hugo est pâtissier. Ce matin, il a fait 3 640 macarons. Il a des boîtes de 2, de 5 et de 10. Lesquelles seront toutes pleines ?",
+  "02-unites": "Le secret : on ne regarde que le dernier chiffre, celui des unités. Le reste du nombre ne compte pas.",
+  "03-regles": "Divisible par 2 : le chiffre des unités est 0, 2, 4, 6 ou 8. Par 5 : il est 0 ou 5. Par 10 : il est 0.",
+  "04-hugo": "3 640 finit par 0. Donc il est divisible par 2, par 5 et par 10. Toutes les boîtes seront pleines !",
+  "04q-question": "Question ! 2 735 est divisible par… A : 2. B : 5. C : 10. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : 5. Il finit par 5. Pas par 0, donc pas par 10. Et 5 est impair, donc pas par 2.",
+  "05-dix": "Remarque : divisible par 10, c'est forcément divisible par 2 et par 5. Le 0 coche les trois cases.",
+  "06-piege": "Le piège : additionner les chiffres. Pour 2, 5 et 10, la somme ne sert à rien. Seul le dernier chiffre décide.",
+  "06q-question": "Question ! 4 518 est-il divisible par 2 ? A : oui, il finit par 8. B : non, il est trop grand. C : on ne peut pas savoir sans poser. Mets pause, et choisis !",
+  "06r-reponse": "Réponse A : oui. 8 est pair, donc 4 518 est divisible par 2.",
+  "07-defi": "À toi de jouer. Hugo fait ensuite 1 255 macarons, puis 908. Pour chacun : par 2, par 5, par 10 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 1 255 finit par 5 : divisible par 5, mais ni par 2 ni par 10. 908 finit par 8 : divisible par 2, mais ni par 5 ni par 10.",
+  "08-finale": "Ce que tu as appris. Pour 2, 5 et 10, on ne regarde que le chiffre des unités. Par 2 : 0, 2, 4, 6 ou 8. Par 5 : 0 ou 5. Par 10 : 0.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo, gardien de phare. Mes deux phares viennent de clignoter ensemble. Tu paries qu'ils ne le referont plus jamais ?",
+  "01-rythmes": "Le rouge clignote toutes les 6 secondes. Le vert, toutes les 8. Rouge : 6, 12, 18, 24. Vert : 8, 16, 24.",
+  "02-ensemble": "24 ! Ensemble, à nouveau. Le plus petit multiple commun de 6 et 8 : 24 secondes. Perdu, ils recommencent !",
+  "02q-question": "Question ! Un phare toutes les 4 secondes, un autre toutes les 6. Ensemble au bout de… A : 10 secondes. B : 12 secondes. C : 24 secondes. Mets pause, et choisis !",
+  "02r-reponse": "Réponse B : 12. Multiples de 4 : 4, 8, 12. Multiples de 6 : 6, 12. 24 marche aussi, mais 12 vient avant.",
+  "03-question": "À toi : un phare toutes les 9 secondes, un autre toutes les 12. Ils clignotent ensemble. Dans combien de secondes, au plus tôt, recommencent-ils ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

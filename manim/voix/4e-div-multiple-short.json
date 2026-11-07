@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Multiple ou diviseur ? Tout le monde les mélange. Tu paries que tu ne te tromperas plus jamais, après ce film ?",
+  "01-caisses": "J'empile 42 caisses en piles de 6. 1, 2, 3… 7 piles, et il n'en reste aucune. 6 fois 7 égale 42.",
+  "02-mots": "Alors 42 est un multiple de 6. Et 6 est un diviseur de 42. Le grand, c'est le multiple. Le petit, c'est le diviseur.",
+  "03-oups": "Maintenant, 45 caisses. Piles de 6 : 7 piles… et 3 caisses qui restent. Oups ! 45 n'est pas un multiple de 6.",
+  "03q-question": "Question ! 8 fois 4 égale 32. Que peut-on dire ? A : 32 est un diviseur de 8. B : 8 est un diviseur de 32. C : 8 est un multiple de 32. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : 8 est un diviseur de 32 ! Le petit divise le grand.",
+  "04-question": "À toi : 56 est-il un multiple de 8 ? Écris ton calcul. Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

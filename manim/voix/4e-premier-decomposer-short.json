@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Avec mon marteau, je casse le nombre 84 en briques incassables. Tu paries que j'y arrive ?",
+  "01-casse": "Bam ! 84, c'est 2 fois 42. Bam ! 42, c'est 2 fois 21. Bam ! 21, c'est 3 fois 7.",
+  "02-briques": "Et 7 ? Je tape, je tape… il ne casse pas ! 7 est premier. Mes briques : 2, 2, 3 et 7. 84 égale 2 fois 2 fois 3 fois 7.",
+  "02q-question": "Question ! Laquelle est la décomposition de 12 ? A : 2 fois 6. B : 2 fois 2 fois 3. C : 3 fois 4. Mets pause, et choisis !",
+  "02r-reponse": "Réponse B ! 6 et 4 se cassent encore. 2 et 3, non.",
+  "03-question": "À toi : casse 150 en facteurs premiers. Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Lister tous les diviseurs. Comment n'en oublier aucun ?",
+  "01-situation": "Rose est paysagiste : elle dessine des jardins. Elle veut planter 36 rosiers en rectangle, avec des rangées toutes pareilles. Quelles rangées peut-elle faire ?",
+  "02-paires": "Chaque rectangle, c'est une paire de diviseurs. 1 rangée de 36. 2 rangées de 18. 3 rangées de 12. 4 rangées de 9.",
+  "03-croiser": "Et 5 rangées ? 36 divisé par 5 : il reste 1. Non. 6 rangées de 6 : c'est un carré. Les deux nombres se croisent : on s'arrête.",
+  "04-liste": "Les diviseurs de 36 : 1, 2, 3, 4, 6, 9, 12, 18, 36. Neuf diviseurs. On les a trouvés par paires : aucun n'a été oublié.",
+  "04q-question": "Question ! Lequel n'est pas un diviseur de 36 ? A : 12. B : 8. C : 9. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : 8. 36 divisé par 8 : 4, et il reste 4. Les autres tombent juste : 3 fois 12, 4 fois 9.",
+  "05-piege": "Le piège : chercher au hasard. On trouve 2, 3, 6… et on oublie 18 ou 36. Et n'oublie jamais 1 et le nombre lui-même : tout nombre plus grand que 1 a ces deux diviseurs.",
+  "05q-question": "Question ! Combien de diviseurs a 10 ? A : 2. B : 3. C : 4. Mets pause, et choisis !",
+  "05r-reponse": "Réponse C : 4. 1 fois 10, et 2 fois 5. Donc 1, 2, 5 et 10.",
+  "06-defi": "À toi de jouer. Rose a maintenant 28 tulipes. Liste tous les diviseurs de 28. Mets pause, et cherche !",
+  "06b-correction": "Correction. 1 fois 28, 2 fois 14, 4 fois 7. 3, 5 et 6 ne tombent pas juste. Les diviseurs de 28 : 1, 2, 4, 7, 14, 28. Six diviseurs.",
+  "07-finale": "Ce que tu as appris. On cherche les diviseurs par paires, en partant de 1. On s'arrête quand les deux nombres se croisent. Et 1 et le nombre lui-même sont toujours des diviseurs.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Divisible par 3 et par 9. Que cache la somme des chiffres ?",
+  "01-situation": "Théo est logisticien : il organise les livraisons d'un grand entrepôt. 4 275 colis arrivent. Il veut les charger par piles de 3, ou par piles de 9, sans qu'il en reste.",
+  "02-somme": "Pour 3 et 9, le dernier chiffre ne suffit pas. On additionne tous les chiffres. 4 plus 2 plus 7 plus 5 égale 18.",
+  "03-regle": "Si la somme est divisible par 3, le nombre l'est aussi. Si la somme est divisible par 9, le nombre l'est aussi. 18 égale 9 fois 2 : 4 275 est divisible par 3 et par 9.",
+  "03q-question": "Question ! 1 302 est-il divisible par 3 ? A : oui, la somme fait 6. B : non, il finit par 2. C : non, la somme fait 5. Mets pause, et choisis !",
+  "03r-reponse": "Réponse A : oui. 1 plus 3 plus 0 plus 2 égale 6, et 6 est divisible par 3.",
+  "04-sens": "Attention au sens. 9 est un multiple de 3. Donc tout multiple de 9 est un multiple de 3. Mais l'inverse est faux : 6 est divisible par 3, et pas par 9.",
+  "05-piege": "Le piège : croire que divisible par 3, c'est aussi par 9. Prends 4 281. 4 plus 2 plus 8 plus 1 égale 15. 15 est divisible par 3, pas par 9. Donc 4 281 : par 3, oui ; par 9, non.",
+  "05q-question": "Question ! 738 est divisible par… A : 3 seulement. B : 3 et 9. C : 9 seulement. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : 3 et 9. 7 plus 3 plus 8 égale 18. Et C était impossible : divisible par 9, c'est toujours divisible par 3.",
+  "06-defi": "À toi de jouer. Théo reçoit 5 130 colis, puis 2 024. Par 3 ? Par 9 ? Mets pause, et cherche !",
+  "06b-correction": "Correction. 5 130 : 5 plus 1 plus 3 plus 0 égale 9 ; divisible par 3 et par 9. 2 024 : 2 plus 0 plus 2 plus 4 égale 8 ; ni par 3, ni par 9.",
+  "07-finale": "Ce que tu as appris. Pour 3 et 9, on additionne les chiffres. Si la somme est divisible par 3, ou par 9, le nombre aussi. Divisible par 9, c'est divisible par 3 ; l'inverse est faux.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

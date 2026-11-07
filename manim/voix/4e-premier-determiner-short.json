@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Certaines cigales dorment sous terre pendant 17 ans. Tu paries qu'elles ont choisi un nombre premier ?",
+  "01-cigales": "17 ans, ou 13 ans selon les espèces. 13 et 17 sont premiers. Un prédateur qui revient tous les 2, 3 ou 4 ans les croise rarement.",
+  "02-test": "Mon test, pour les nombres jusqu'à 100 : je divise par 2, 3, 5 et 7. Si rien ne tombe juste, il est premier.",
+  "02q-question": "Question ! 91 est-il premier ? A : oui. B : non, 91 égale 7 fois 13. C : non, 91 égale 3 fois 31. Mets pause, et choisis !",
+  "02r-reponse": "Réponse B ! 91 divisé par 7 égale 13. Le test par 7, tout le monde l'oublie.",
+  "03-question": "À toi : combien y a-t-il de nombres premiers entre 80 et 100 ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

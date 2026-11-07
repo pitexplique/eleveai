@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Ce coffre a un code à 3 chiffres. Tu paries que je l'ouvre du premier coup ?",
+  "01-indices": "Le code : 7, un chiffre caché, 5. Indice : divisible par 9. 7 plus 5 égale 12. Pour aller à 18, il manque 6.",
+  "02-ouvert": "7, 6, 5 : 765. Clic ! 7 plus 6 plus 5 égale 18, divisible par 9. Ouvert du premier coup !",
+  "02q-question": "Question ! Un nombre divisible par 9 est-il toujours divisible par 3 ? A : oui. B : non. C : seulement s'il est pair. Mets pause, et choisis !",
+  "02r-reponse": "Réponse A : oui ! 9 égale 3 fois 3. L'inverse est faux : 6 est divisible par 3, pas par 9.",
+  "03-question": "À toi : le code 3, chiffre caché, 0 est divisible par 9 et par 10. Quel est le chiffre caché ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

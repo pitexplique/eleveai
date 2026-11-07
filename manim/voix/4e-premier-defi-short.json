@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. 60 a beaucoup de diviseurs. Tu paries que je les compte sans en écrire un seul ?",
+  "01-casse": "D'abord, je casse 60 : 2 fois 2 fois 3 fois 5.",
+  "02-choix": "Un diviseur, c'est un choix. Zéro, un ou deux 2 : 3 choix. Zéro ou un 3 : 2 choix. Zéro ou un 5 : 2 choix. 3 fois 2 fois 2 égale 12.",
+  "03-verif": "Je vérifie : 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60. Douze ! Gagné.",
+  "03q-question": "Question ! 18 égale 2 fois 3 fois 3. Combien a-t-il de diviseurs ? A : 3. B : 5. C : 6. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : 6. 2 choix pour le 2, 3 choix pour le 3. 2 fois 3 égale 6.",
+  "04-question": "À toi : combien de diviseurs a 100 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

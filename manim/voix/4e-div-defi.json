@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis de divisibilité. Peux-tu ouvrir le cadenas ?",
+  "01-situation": "Chloé crée des escape games. Dans sa salle, un cadenas attend un code : 2, un chiffre caché, 6. L'indice : le code est divisible par 9.",
+  "02-somme": "Divisible par 9 : la somme des chiffres doit l'être. 2 plus 6 égale 8. Il manque 1 pour arriver à 9. Le chiffre caché est 1 : le code est 216.",
+  "02q-question": "Question ! Le code 4, chiffre caché, 5 est divisible par 3. Lequel de ces chiffres convient ? A : 3. B : 2. C : 4. Mets pause, et choisis !",
+  "02r-reponse": "Réponse A : 3. 4 plus 3 plus 5 égale 12, divisible par 3. Avec 2, la somme fait 11 ; avec 4, 13.",
+  "03-deux": "Deuxième cadenas, deux indices : divisible par 5 et par 9. Le code : 8, un chiffre caché, 5. Il finit par 5 : divisible par 5, c'est fait. Par 9 : 8 plus 5 égale 13. Pour arriver à 18, il manque 5. Le code est 855.",
+  "04-vrai-faux": "Dernière salle : une affirmation. « Un nombre qui finit par 9 est divisible par 3. » Vrai ou faux ? Un seul exemple qui ne marche pas suffit : 19. 1 plus 9 égale 10, pas divisible par 3. Faux !",
+  "04q-question": "Question ! « Tout multiple de 9 est un multiple de 3. » A : vrai. B : faux. C : seulement s'il est pair. Mets pause, et choisis !",
+  "04r-reponse": "Réponse A : vrai. 9 égale 3 fois 3. Donc un multiple de 9 est aussi un multiple de 3.",
+  "05-piege": "Le piège : prouver avec des exemples. 9, 39 et 69 finissent par 9 et sont divisibles par 3. Ça ne prouve rien : un seul contre-exemple, comme 19, suffit à dire faux.",
+  "06-defi": "À toi de jouer. Dernier cadenas : 5, un chiffre caché, 0. Le code est divisible par 9 et par 10. Quel est le chiffre caché ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Il finit par 0 : divisible par 10, c'est fait. Par 9 : 5 plus 0 égale 5. Pour arriver à 9, il manque 4. Le code est 540.",
+  "07-finale": "Ce que tu as appris. Un chiffre caché se trouve avec la somme des chiffres. Divisible par 9, c'est divisible par 3. Un seul contre-exemple suffit pour dire faux.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

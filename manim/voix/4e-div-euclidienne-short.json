@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. J'ai 47 cookies, et des boîtes de 6. Ce qui reste, je le mange. Tu paries qu'il m'en restera plus de 6 ?",
+  "01-boites": "6, 12, 18, 24, 30, 36, 42 : 7 boîtes pleines. 47 moins 42 : il me reste 5 cookies. Miam.",
+  "02-jamais": "Plus de 6 ? Impossible ! Avec 6 cookies, je remplirais une boîte de plus. Le reste est toujours plus petit que la boîte. 47 égale 6 fois 7, plus 5.",
+  "02q-question": "Question ! 50 cookies, boîtes de 8. Combien j'en mange ? A : 2. B : 6. C : 10. Mets pause, et choisis !",
+  "02r-reponse": "Réponse A : 2. 8 fois 6 égale 48. Il m'en reste 2. Petit goûter…",
+  "03-question": "À toi : 100 cookies, boîtes de 7. Combien de cookies me restent ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

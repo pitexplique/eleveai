@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo, le magicien. 123 456 789. Tu paries que je sais s'il est divisible par 9, en trois secondes ?",
+  "01-tour": "Mon tour : j'additionne les chiffres. 1 plus 2 plus 3… jusqu'à 9 : 45. Et 45 égale 9 fois 5. Abracadabra : divisible par 9 !",
+  "02-regle": "Si la somme des chiffres est divisible par 9, le nombre aussi. Pareil pour 3. Pas de magie : c'est un critère.",
+  "02q-question": "Question ! 2 024 est-il divisible par 3 ? A : oui. B : non, la somme fait 8. C : oui, il est pair. Mets pause, et choisis !",
+  "02r-reponse": "Réponse B : non. 2 plus 0 plus 2 plus 4 égale 8. 8 n'est pas divisible par 3.",
+  "03-question": "À toi : dans 5, chiffre caché, 2, quel chiffre cacher pour obtenir un multiple de 9 ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
