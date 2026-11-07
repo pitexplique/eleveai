@@ -10,6 +10,12 @@ Notions `decimal_nombre` (6 micros) et `decimal_calcul` (6 micros jouées en 6e)
 ## État
 - Coach vérifié avant les vidéos : `9850db39`, non poussé. Squelettes ≥ 234 par micro, ≤ 3,9 répétitions sur 20 à chaque étoile, avec et sans la réponse, avec `--lettres`. Corrigés : « 1 centimètres », défi ★2 hors notion (disque en 60°), 6 tournures de plus en lire_ecrire ★2, « Compte les virgules ».
 - Étape 1 : voix écrites dans `manim/voix/6e-decimal-<slug>[-short].json`, montrées en entier le 07/11, **en attente du oui de Frédéric**. Rien n'est généré ni rendu.
+- 07/11 : VOIX VALIDÉES par Frédéric telles quelles (« Oui, enchaîne »). Bascule de session à 71 % de contexte, juste après : **rien n'est encore généré ni rendu**.
+- ⏳ RESTE, dans l'ordre :
+  1. Générer les 24 voix : pour chaque `manim/voix/6e-decimal-<slug>[-short].json`, `powershell -File scripts/generer-voix.ps1 -Fichier <json> -Debit <d>` (WAV dans `public/sons/6e-decimal-<slug>[-short]/`), puis pour les paysages `powershell -File scripts/marques_dump.ps1 -Fichier <json> -Sortie manim/scripts/6e/decimal_<slug_souligné>_marques.json -Debit <d>` (même débit que la voix). ⚠️ Le débit des triangles n'est pas noté : le retrouver avant (comparer la durée de `public/sons/6e-triangle-nommer/00-garde.wav` à une génération d'essai, ou chercher l'appel dans l'historique de la série Triangles). Shorts : les instants des mots viennent de `python scripts/ti-margo-cues.py decimaux <épisode>`.
+  2. Pilotes de l'épisode 01 `lire-ecrire` : paysage `manim/scripts/6e/decimal_lire_ecrire.py` (calquée sur `triangle_nommer.py` : `PaysageProp` de `prop_commun`, `self.dire`, `self.au_mot`, `FinTriangles` ou équivalent pour la fin du 05/11) ; short `films/decimaux.js` (+ `.json`) depuis `_modele`. Contrôles : dry run AUDIT, `verifier-bords-video.py`, planches relues.
+  3. Montrer les deux pilotes (aperçu `manim/sorties/apercu-decimaux.html`, port 3900, à l'arrêt) et attendre la validation du FORMAT.
+  4. Les 22 autres sans redemander, puis manifeste, fiches YouTube, R2, bilans, `COUPE_PAR_VIDEO` ; coach après le push.
 - Les deux paysages « Tout comprendre » (`6e-decimal-nombre`, `6e-decimal-calcul`) et leurs 4 shorts Manim RESTENT : elles sont en ligne (hv_ZFkFVk00, QFQsyW-CXw8), couvrent la notion entière et servent de révision. La nouvelle série est par micro ; ne pas les refaire.
 - `decimal_diviser_par_decimal` : masquée en 6e (hors France, `micros-masquees.ts`), travaillée en 5e (`quotient_decimaux`). Pas de vidéo dans ce lot.
 

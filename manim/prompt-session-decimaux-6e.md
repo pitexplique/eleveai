@@ -5,7 +5,7 @@ Réponds en français. Série : notions `decimal_nombre` et `decimal_calcul`, 12
 ## Où on en est
 Lis `manim/REPRISE-decimaux.md` : état, slugs, décors, ceintures, choix à garder. Le coach est vérifié (`9850db39`). Les 24 voix sont dans `manim/voix/6e-decimal-<slug>[-short].json`.
 
-**Si Frédéric n'a pas encore validé les voix : ne génère rien, ne rends rien.** Colle-lui les voix qu'il veut relire et attends son oui (mémoire `script-video-se-valide-a-deux`). Ses retouches vont dans les JSON, puis dans la reprise.
+**Les voix sont VALIDÉES (07/11, « Oui, enchaîne ») : ne les redemande pas.** Commence par la ligne « ⏳ RESTE » de la reprise (génération des voix, puis pilotes de l'épisode 01).
 
 ## Après son oui, dans l'ordre (modèle : série Triangles)
 1. Voix générées (même outil que les triangles : voir l'en-tête de `manim/scripts/6e/triangle_nommer.py`).
