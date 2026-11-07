@@ -215,6 +215,26 @@ const SIT_TEMP: Sit[] = [
     varie: ["De combien la température a-t-elle varié dans la journée ?", "Quelle est la variation de température ?"],
     fin: "il fait alors",
   },
+  {
+    s: [-30, -15], d: [2, 8], u: " °C",
+    depart: (v) => `Une pharmacienne contrôle son congélateur à vaccins : il affiche ${v}.`,
+    hausse: (d) => `Pendant une coupure, la température monte de ${d}.`,
+    baisse: (d) => `Après un réglage, la température baisse de ${d}.`,
+    q: ["Quelle température affiche alors le congélateur ?", "Quelle est la nouvelle température du congélateur ?"],
+    apres: (v) => `Une heure plus tard, il affiche ${v}.`,
+    varie: ["De combien la température du congélateur a-t-elle varié ?", "Quelle est la variation de température du congélateur ?"],
+    fin: "le congélateur affiche alors",
+  },
+  {
+    s: [-18, 4], d: [2, 10], u: " °C",
+    depart: (v) => `Sur un sommet des Alpes, un météorologue relève ${v} à l’aube.`,
+    hausse: (d) => `En fin de matinée, la température gagne ${d}.`,
+    baisse: (d) => `Dans la nuit suivante, la température perd ${d}.`,
+    q: ["Quelle température mesure-t-il alors ?", "Quelle est sa nouvelle mesure ?"],
+    apres: (v) => `Le lendemain, il relève ${v}.`,
+    varie: ["De combien la température a-t-elle varié entre ses deux relevés ?", "Quelle est la variation de température entre ses deux relevés ?"],
+    fin: "il mesure alors",
+  },
 ];
 
 const SIT_ALT: Sit[] = [
@@ -265,7 +285,7 @@ const SIT_ALT: Sit[] = [
     baisse: (d) => `Il descend de ${d} étages.`,
     q: ["À quel niveau s’arrête-t-il ?", "Quel niveau affiche l’écran de l’ascenseur ?"],
     apres: (v) => `Il s’arrête ensuite au niveau ${v}.`,
-    varie: ["Quelle est la variation de niveau de l’ascenseur ?", "De combien d’étages s’est-il déplacé, en nombre relatif ?"],
+    varie: ["Quelle est la variation de niveau de l’ascenseur ?", "De combien d’étages s’est-il déplacé ?"],
     fin: "l’ascenseur s’arrête au niveau",
   },
   {
@@ -277,6 +297,26 @@ const SIT_ALT: Sit[] = [
     apres: (v) => `Un mois plus tard, il est à ${v}.`,
     varie: ["De combien le niveau du lac a-t-il varié ?", "Quelle est la variation du niveau du lac ?"],
     fin: "le niveau du lac est alors à",
+  },
+  {
+    s: [-40, -5], d: [2, 15], u: " m", max: -1,
+    depart: (v) => `Une biologiste marine filme une tortue à ${v} par rapport à la surface.`,
+    hausse: (d) => `La tortue remonte de ${d}.`,
+    baisse: (d) => `La tortue descend encore de ${d}.`,
+    q: ["Où est alors la tortue par rapport à la surface ?", "Quel nombre relatif donne la nouvelle position de la tortue ?"],
+    apres: (v) => `Une minute plus tard, la tortue est à ${v}.`,
+    varie: ["De combien la position de la tortue a-t-elle varié ?", "Quelle est la variation de la position de la tortue ?"],
+    fin: "la tortue est alors à",
+  },
+  {
+    s: [-40, -8], d: [2, 12], u: " m", max: -2,
+    depart: (v) => `Une conductrice de métro quitte une station située à ${v} par rapport à la rue.`,
+    hausse: (d) => `La voie remonte de ${d}.`,
+    baisse: (d) => `La voie descend de ${d}.`,
+    q: ["Où se trouve la station suivante par rapport à la rue ?", "Quel nombre relatif donne la position de la station suivante ?"],
+    apres: (v) => `La station suivante est à ${v}.`,
+    varie: ["De combien la position de la rame a-t-elle varié ?", "Quelle est la variation de position de la rame ?"],
+    fin: "la station suivante est à",
   },
 ];
 
@@ -321,6 +361,16 @@ const SIT_ARGENT: Sit[] = [
     varie: ["De combien le budget a-t-il varié ?", "Quelle est la variation du budget ?"],
     fin: "le budget est alors de",
   },
+  {
+    s: [-200, 200], pas: 10, d: [50, 300], u: " €",
+    depart: (v) => `Le bilan du mois d’une agricultrice est de ${v}.`,
+    hausse: (d) => `La vente de sa récolte rapporte ${d}.`,
+    baisse: (d) => `L’achat de semences lui coûte ${d}.`,
+    q: ["Quel est alors son bilan ?", "Où en est maintenant son bilan ?"],
+    apres: (v) => `À la fin du mois, son bilan est de ${v}.`,
+    varie: ["De combien son bilan a-t-il varié ?", "Quelle est la variation de son bilan ?"],
+    fin: "son bilan est alors de",
+  },
 ];
 
 const SIT_SCORE: Sit[] = [
@@ -354,6 +404,26 @@ const SIT_SCORE: Sit[] = [
     varie: ["De combien son score a-t-il varié ?", "Quelle est la variation de son score sur ce trou ?"],
     fin: "son score est alors de",
   },
+  {
+    s: [-24, -3], d: [2, 9], u: " dB", max: 6,
+    depart: (v) => `Sur sa table de mixage, une ingénieure du son règle une guitare à ${v}.`,
+    hausse: (d) => `Elle monte le volume de ${d}.`,
+    baisse: (d) => `Elle baisse le volume de ${d}.`,
+    q: ["À combien la guitare est-elle réglée maintenant ?", "Quel est le nouveau réglage de la guitare ?"],
+    apres: (v) => `Au refrain, la guitare est réglée à ${v}.`,
+    varie: ["De combien le réglage a-t-il varié ?", "Quelle est la variation du réglage ?"],
+    fin: "la guitare est alors réglée à",
+  },
+  {
+    s: [-12, 12], d: [2, 10], u: " images",
+    depart: (v) => `Au cinéma, une technicienne du son mesure le décalage du son par rapport à l’image : ${v}.`,
+    hausse: (d) => `Elle avance le son de ${d}.`,
+    baisse: (d) => `Elle recule le son de ${d}.`,
+    q: ["Quel est maintenant le décalage ?", "Où en est le décalage du son ?"],
+    apres: (v) => `Après un réglage, le décalage est de ${v}.`,
+    varie: ["De combien le décalage a-t-il varié ?", "Quelle est la variation du décalage ?"],
+    fin: "le décalage est alors de",
+  },
 ];
 
 const SIT_REUNION: Sit[] = [
@@ -379,7 +449,7 @@ const SIT_REUNION: Sit[] = [
   },
   {
     s: [-12, -2], d: [1, 6], u: " m", max: -1,
-    depart: (v) => `Dans le lagon de Saint-Gilles, un plongeur observe les coraux à ${v} par rapport à la surface.`,
+    depart: (v) => `Au large de Saint-Gilles, un plongeur observe les coraux à ${v} par rapport à la surface.`,
     hausse: (d) => `Il remonte de ${d}.`,
     baisse: (d) => `Il descend encore de ${d}.`,
     q: ["Où se trouve-t-il alors par rapport à la surface ?", "Quelle est sa nouvelle altitude, en nombre relatif ?"],
@@ -388,7 +458,7 @@ const SIT_REUNION: Sit[] = [
     fin: "il se trouve alors à",
   },
   {
-    s: [1800, 2200], pas: 10, d: [150, 700], u: " m", min: 1000,
+    s: [1800, 2200], pas: 10, d: [150, 700], u: " m", min: 1000, max: 2200,
     depart: (v) => `Au Maïdo, à La Réunion, un groupe de marcheurs part de ${v} d’altitude.`,
     hausse: (d) => `Le groupe remonte de ${d}.`,
     baisse: (d) => `Le groupe descend de ${d} dans le sentier.`,
@@ -415,17 +485,27 @@ function tirerDans(c: Sit, [lo, hi]: [number, number]) {
 }
 
 /** Tire un contexte, une valeur de départ et une (ou deux) variation(s) plausibles. */
-function tirerSit(sits: Sit[], nbVar: 1 | 2 = 1, ok: (s: number, d: number) => boolean = () => true) {
+function tirerSit(sits: Sit[], nbVar: 1 | 2 = 1, ok: (s: number, d: number) => boolean = () => true, lue = false) {
   for (let k = 0; k < 300; k++) {
     const c = randomChoice(sits);
     const s = tirerSit0(c);
     const ds = Array.from({ length: nbVar }, () => randomChoice([-1, 1]) * tirerDans(c, c.d));
     let v = s;
     let bon = s !== 0 && ok(s, ds[0]);
+    let negatifVu = s < 0;
     for (const d of ds) {
       v += d;
+      if (v < 0) negatifVu = true;
       if ((c.min !== undefined && v < c.min) || (c.max !== undefined && v > c.max)) bon = false;
     }
+    // 07/11/2026 : « 250 € + 190 € + 50 € » n'exerce pas les relatifs. Un négatif se voit
+    // dans les valeurs, ou dans la réponse quand on lit une variation (sauf les deux
+    // situations d'altitude réunionnaises, toujours au-dessus de zéro).
+    if (c.s[0] < 0 && !negatifVu && !(lue && ds[0] < 0)) bon = false;
+    // Variation lue : la réponse n'est pas un nombre déjà écrit (de −10 à −20 : −10).
+    if (lue && (abs(ds[0]) === abs(s) || abs(ds[0]) === abs(v))) bon = false;
+    // Valeur finale cherchée : idem (−40 + 80 = 40).
+    if (!lue && nbVar === 1 && (abs(v) === abs(s) || abs(v) === abs(ds[0]))) bon = false;
     if (bon) return { c, s, ds, f: v };
   }
   const c = SIT_TEMP[0];
@@ -454,7 +534,7 @@ function situVariation(sits: Sit[], ok?: (s: number, d: number) => boolean): Q {
 
 /** « Il fait -3 °C, puis 4 °C. De combien a-t-elle varié ? » : valeur finale − valeur initiale. */
 function situVariationLue(sits: Sit[]): Q {
-  const { c, s, ds, f } = tirerSit(sits, 1);
+  const { c, s, ds, f } = tirerSit(sits, 1, undefined, true);
   const d = ds[0];
   const text = `${c.depart(u(s, c.u))} ${c.apres(u(f, c.u))} ${randomChoice(c.varie)} ${randomChoice(SUFFIXES_VAR)}`;
   return court(
@@ -475,7 +555,7 @@ function problemeNombre(): Q {
   do {
     a = nz(1, 15);
     d = nz(1, 12);
-  } while (a + d === 0);
+  } while (a + d === 0 || (a > 0 && a + d > 0)); // 07/11/2026 : 13 + 10 n'exerce pas les relatifs.
   const f = a + d;
   const D = abs(d);
   const text = randomChoice([
@@ -518,11 +598,11 @@ function problemeVariation(): Q {
   do {
     a = nz(1, 15);
     f = nz(1, 15);
-  } while (a === f);
+  } while (a === f || (a > 0 && f > 0) || abs(f - a) === abs(a) || abs(f - a) === abs(f)); // 07/11/2026 : un négatif, et pas de réponse déjà écrite.
   const d = f - a;
   const text = randomChoice([
     () => `Un nombre passe de ${a} à ${f}. Quelle est sa variation ?`,
-    () => `Un nombre passe de ${a} à ${f}. De combien a-t-il varié ?`,
+    () => `Un nombre passe de ${a} à ${f}. De combien a-t-il varié, avec le signe ?`,
     () => `Un nombre passe de ${a} à ${f}. Donne sa variation en nombre relatif.`,
     () => `Sur une droite graduée, on va de ${a} à ${f}. Quelle est la variation ?`,
     () => `On va de ${a} à ${f}. Quelle est la variation, en nombre relatif ?`,
@@ -534,7 +614,7 @@ function problemeVariation(): Q {
     () => `Calcule la variation quand on passe de ${a} à ${f}.`,
     () => `On passe de ${a} à ${f}. Écris la variation avec son signe.`,
     () => `Le nombre ${a} devient ${f}. Quelle est la variation ?`,
-    () => `Le nombre ${a} devient ${f}. De combien a-t-il changé ?`,
+    () => `Le nombre ${a} devient ${f}. De combien a-t-il changé, avec le signe ?`,
     () => `Quelle variation mène de ${a} à ${f} ?`,
     () => `Quel nombre ajouter à ${a} pour obtenir ${f} ?`,
     () => `Trouve la variation de ${a} à ${f}.`,
@@ -557,7 +637,16 @@ function problemeVariation(): Q {
 
 /** Deux variations successives. */
 function situDouble(sits: Sit[]): Q {
-  const { c, s, ds, f } = tirerSit(sits, 2);
+  // 07/11/2026 : « Elle remonte de 80 m. Ensuite, elle descend de 80 m. » rendait la valeur
+  // de départ ; « Après un orage, il monte… Ensuite, après un orage, il monte… » se lisait mal.
+  let t = tirerSit(sits, 2);
+  for (let k = 0; k < 60; k++) {
+    const [x, y] = t.ds;
+    const redite = x * y > 0 && /^(?:Après|Sur le trou|Posé|Remis|On chauffe|On plonge|Un nuage|Pendant|En fin|Dans la nuit|La vente|L’achat|La voie)/.test(phraseVar(t.c, x));
+    if (abs(x) !== abs(y) && !redite && ![t.s, x, y].some((v) => abs(v) === abs(t.f))) break;
+    t = tirerSit(sits, 2);
+  }
+  const { c, s, ds, f } = t;
   const [d1, d2] = ds;
   const text = `${c.depart(u(s, c.u))} ${phraseVar(c, d1)} Ensuite, ${lc(phraseVar(c, d2))} ${randomChoice(c.q)}`;
   return court(
@@ -671,6 +760,12 @@ const ECARTS_ALT: Ecart[] = [
     q: ["Quelle différence d’altitude sépare les deux sportifs ?", "Quel est l’écart d’altitude entre l’alpiniste et le spéléologue ?"],
     fin: "la différence est de",
   },
+  {
+    h: [800, 3000], l: [-430, -100], pas: 10, u: " m",
+    t: (h, l) => `Une géographe compare un sommet à ${h} d’altitude et le bord d’un lac salé à ${l}.`,
+    q: ["Quelle différence d’altitude sépare ces deux lieux ?", "Quel est l’écart d’altitude entre le sommet et le lac ?"],
+    fin: "la différence est de",
+  },
 ];
 
 function situEcart(table: Ecart[]): Q {
@@ -680,7 +775,7 @@ function situEcart(table: Ecart[]): Q {
   const l = tir(c.l);
   const h = c.duree ? l + randomInt(c.duree[0], c.duree[1]) : tir(c.h);
   const e = h - l;
-  const suffixe = randomChoice(["", " Écris le calcul avec des nombres relatifs.", " Pense à la soustraction « la plus haute moins la plus basse »."]);
+  const suffixe = randomChoice(["", " Écris le calcul avec des nombres relatifs, puis donne le résultat.", " Pense à la soustraction « la plus haute moins la plus basse »."]);
   const text = `${c.t(u(h, c.u), u(l, c.u))} ${randomChoice(c.q)}${suffixe}`;
   return court(
     text,
@@ -779,16 +874,36 @@ const REPETS: Repet[] = [
     tSuite: (k, n) => `Il se réchauffe de ${k} °C par minute pendant ${n} minutes.`,
     qFin: ["Quelle est sa température à la fin ?", "À quelle température est-il alors ?"],
   },
+  {
+    k: [2, 5], n: [2, 6], sg: -1, u: " °C",
+    t: (k, n) => `Dans une chambre froide, une technicienne fait baisser la température de ${k} °C par heure pendant ${n} heures.`,
+    q: ["Quelle est la variation totale de température ?", "De combien la température a-t-elle varié en tout ?"],
+    s: [-4, 10], depart: (v) => `Une technicienne du froid mesure ${v} dans une chambre froide.`,
+    tSuite: (k, n) => `La température y baisse de ${k} °C par heure pendant ${n} heures.`,
+    qFin: ["Quelle température mesure-t-elle à la fin ?", "Quelle est la température à la fin ?"],
+  },
 ];
+
+/* 07/11/2026 : « De combien varie-t-il ? » attend −10, et « 10 » était refusé sans que rien
+   ne l'annonce : une réponse signée se demande toujours. Et avec un plafond de ★3 plus petit
+   que le plus petit k de la situation, k restait figé : −10 à toutes les questions du
+   sous-marin, du compte et du glacier. Les grands k passent alors par les multiples de 5. */
+const avecSigne = (t: string) =>
+  /nombre relatif/.test(t) ? t : `${t} ${randomChoice(["Donne un nombre relatif.", "Réponds par un nombre relatif.", "Donne un nombre avec son signe."])}`;
+function tirerK([lo, hi]: [number, number], maxK?: number) {
+  if (!maxK) return randomInt(lo, hi);
+  if (lo < maxK) return randomInt(lo, Math.min(hi, maxK));
+  return 5 * randomInt(Math.ceil(lo / 5), Math.floor(hi / 5));
+}
 
 /** Variation répétée sans départ : (−k) × n. */
 function situProduit(maxK?: number): Q {
   const c = randomChoice(REPETS);
-  const k = randomInt(c.k[0], maxK ? Math.min(c.k[1], Math.max(c.k[0], maxK)) : c.k[1]);
+  const k = tirerK(c.k, maxK);
   const n = randomInt(c.n[0], c.n[1]);
   const v = c.sg * k;
   const r = v * n;
-  const text = `${c.t(k, n)} ${randomChoice(c.q)} ${randomChoice(["Donne un nombre relatif.", "Réponds par un nombre relatif.", ""])}`.trim();
+  const text = avecSigne(`${c.t(k, n)} ${randomChoice(c.q)}`);
   return court(
     text,
     r,
@@ -1015,7 +1130,7 @@ const PHRASES_DIFF: ((a: number, b: number, e: string) => string)[] = [
   (_a, _b, e) => `Transforme ${e} en addition, puis calcule.`,
   (_a, _b, e) => `Réécris ${e} avec une addition, puis calcule.`,
   (_a, _b, e) => `En ajoutant l’opposé, calcule ${e}.`,
-  (_a, _b, e) => `Remplace la soustraction par une addition : ${e}`,
+  (_a, _b, e) => `Remplace la soustraction par une addition, puis calcule : ${e}`,
   (a, b) => `Quel nombre ajouter à ${b} pour obtenir ${a} ?`,
   (a, b) => `Complète : ${p(b)} + … = ${a}`,
   (a, b) => `Trouve le nombre manquant : ${p(b)} + … = ${a}`,
@@ -1156,8 +1271,12 @@ function genMultiplicationTrois(): Q {
 
 /** « (-4) × … = 20 » : le facteur manquant. */
 function genFacteurManquant(): Q {
-  const a = nz(2, 9);
-  const x = nz(2, 9);
+  let a = 0;
+  let x = 0;
+  do {
+    a = nz(2, 9);
+    x = nz(2, 9);
+  } while (a > 0 && x > 0); // 07/11/2026 : … × 8 = 24 n'exerce pas les relatifs.
   const r = a * x;
   const forme = randomInt(0, 2);
   const e = forme === 0 ? `${t0(a)} × … = ${r}` : `… × ${p(a)} = ${r}`;
@@ -1256,7 +1375,7 @@ const PARTAGES: Partage[] = [
   { k: [2, 6], n: [2, 6], u: " m", t: (T, n) => `Un plongeur est descendu de ${T} m en ${n} paliers identiques.`, q: ["Quelle est la variation d’altitude à chaque palier ?", "De combien varie son altitude à chaque palier ?"] },
   { k: [2, 8], n: [2, 7], u: " cm", t: (T, n) => `Le niveau d’un lac a baissé de ${T} cm en ${n} jours, de la même quantité chaque jour.`, q: ["Quelle est la variation du niveau par jour ?", "De combien le niveau varie-t-il chaque jour ?"] },
   { k: [10, 30], n: [2, 6], u: " m", t: (T, n) => `Un glacier a perdu ${T} m de longueur en ${n} ans, régulièrement.`, q: ["Quelle est la variation de sa longueur par an ?", "De combien sa longueur varie-t-elle chaque année ?"] },
-  { k: [2, 6], n: [2, 5], u: " points", t: (T, n) => `En ${n} manches, une équipe a perdu ${T} points, autant à chaque manche.`, q: ["Quelle est la variation de son score à chaque manche ?", "Combien de points, en nombre relatif, a-t-elle eus par manche ?"] },
+  { k: [2, 6], n: [2, 5], u: " points", t: (T, n) => `En ${n} manches, une équipe a perdu ${T} points, autant à chaque manche.`, q: ["Quelle est la variation de son score à chaque manche ?", "De combien son score varie-t-il à chaque manche ?"] },
   { k: [10, 40], n: [2, 6], u: " m", t: (T, n) => `Un sous-marin descend de ${T} m en ${n} minutes, à vitesse constante.`, q: ["Quelle est la variation de son altitude par minute ?", "De combien son altitude varie-t-elle chaque minute ?"] },
   { k: [10, 40], n: [2, 6], u: " €", t: (T, n) => `En ${n} mois, le solde d’un compte a baissé de ${T} €, de la même somme chaque mois.`, q: ["Quelle est la variation du solde par mois ?", "De combien le solde varie-t-il chaque mois ?"] },
   { k: [20, 50], n: [2, 5], u: " m", t: (T, n) => `Une montgolfière perd ${T} m d’altitude en ${n} minutes, régulièrement.`, q: ["Quelle est la variation de son altitude par minute ?", "De combien son altitude varie-t-elle chaque minute ?"] },
@@ -1266,19 +1385,19 @@ const PARTAGES: Partage[] = [
 
 function situPartage(maxK?: number): Q {
   const c = randomChoice(PARTAGES);
-  const k = randomInt(c.k[0], maxK ? Math.max(c.k[0], Math.min(c.k[1], maxK)) : c.k[1]);
+  const k = tirerK(c.k, maxK);
   const n = randomInt(c.n[0], c.n[1]);
   const T = k * n;
   const r = -k;
-  const text = `${c.t(T, n)} ${randomChoice(c.q)}`;
+  const text = avecSigne(`${c.t(T, n)} ${randomChoice(c.q)}`);
   return court(
     text,
     r,
     expl(
       "partager une variation en parts égales, c’est diviser.",
-      `une baisse de ${T} s’écrit ${-T} ; on la divise par ${n}.`,
+      `une perte de ${T} s’écrit ${-T} ; on la divise par ${n}.`,
       `${p(-T)} ÷ ${n} = ${r}.`,
-      `la variation est ${u(r, c.u)} à chaque fois.`
+      `à chaque fois, on obtient ${u(r, c.u)}.`
     )
   );
 }
@@ -1495,7 +1614,7 @@ const REGLES_ERREURS: { regle: string; possible: (e: string) => boolean }[] = [
   { regle: "la somme de deux nombres négatifs est négative", possible: (e) => e.includes(" + ") },
   { regle: "la multiplication est prioritaire sur l’addition", possible: (e) => e.includes("×") && / [+-] /.test(e) },
   { regle: "le quotient de deux nombres de signes contraires est négatif", possible: (e) => e.includes("÷") },
-  { regle: "pour deux nombres de signes contraires, le résultat prend le signe du plus éloigné de zéro", possible: (e) => / [+-] /.test(e) },
+  { regle: "pour une somme de deux nombres de signes contraires, le résultat prend le signe du plus éloigné de zéro", possible: (e) => / [+-] /.test(e) },
   { regle: "quand on retire plus que ce qu’on a, le résultat est négatif", possible: (e) => e.includes(" - ") },
 ];
 const majuscule = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -1527,7 +1646,7 @@ const ERREURS: (() => Erreur)[] = [
   },
   () => {
     const g = randomInt(5, 12), s = randomInt(2, g - 1);
-    return { e: `${t0(-g)} + ${s}`, juste: s - g, faux: g - s, regle: "pour deux nombres de signes contraires, le résultat prend le signe du plus éloigné de zéro", mots: ["signe", "éloigné", "distance", "négatif"] };
+    return { e: `${t0(-g)} + ${s}`, juste: s - g, faux: g - s, regle: "pour une somme de deux nombres de signes contraires, le résultat prend le signe du plus éloigné de zéro", mots: ["signe", "éloigné", "distance", "négatif"] };
   },
   () => {
     const a = randomInt(2, 8), b = randomInt(a + 2, 15);
@@ -1582,12 +1701,16 @@ function genLaquelle(): Q {
     [`${b} × ${p(a)}`, b * a],
     [`${p(a)} + ${b}`, a + b],
     [`${p(a)} - ${p(-b)}`, a + b],
+    [`${p(a)} + ${p(a)}`, 2 * a],
+    [`${p(-b)} + ${p(-b)}`, -2 * b],
+    [`${p(-b)} × ${p(-b)}`, b * b],
   ];
   const cherche = randomChoice(["positif", "négatif"] as const);
   const bons = exprs.filter(([, v]) => (cherche === "positif" ? v > 0 : v < 0));
   const autres = exprs.filter(([, v]) => (cherche === "positif" ? v < 0 : v > 0));
   const bon = randomChoice(bons);
-  const leurres = shuffle(autres).slice(0, 3);
+  // 07/11/2026 : (−8) × (−7) et (−7) × (−8), deux leurres de même valeur, s'éliminaient d'un coup.
+  const leurres = shuffle(autres).filter(([, v], i, l) => l.findIndex(([, w]) => w === v) === i).slice(0, 3);
   const valeurs = [bon, ...leurres].map(([s, v]) => `${s} = ${v}`).join(" ; ");
   const text = randomChoice([
     `Laquelle de ces expressions est égale à un nombre ${cherche} ?`,
@@ -1780,7 +1903,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     choices: ["-9", "9", "-1", "1"],
     expected: ["-9"],
     comparator: "mcq_exact",
-    hint: "Deux pertes s’additionnent.",
+    hint: "Même signe : on additionne les distances à zéro et on garde ce signe.",
     explanation: "(-5) + (-4) = -9.",
     tags: ["relatif", "addition", "signe"],
   },
@@ -1817,7 +1940,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     ],
     expected: ["Les deux nombres sont négatifs : on additionne leurs distances à zéro (5 + 4 = 9) et le résultat reste négatif."],
     comparator: "mcq_exact",
-    hint: "Deux nombres négatifs s’additionnent comme deux pertes.",
+    hint: "Regarde le signe des deux nombres, puis leurs distances à zéro.",
     explanation:
       "On additionne deux nombres négatifs : les distances à zéro s’additionnent et le résultat reste négatif. Donc (-5) + (-4) = -9.",
     tags: ["relatif", "addition", "qcm"],
@@ -1889,7 +2012,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     format: "qcm",
     choices: [
       "Soustraire -3 revient à ajouter son opposé, 3 : 5 + 3 = 8.",
-      "Deux signes « moins » côte à côte s'annulent toujours, même dans 5 - 3.",
+      "Deux signes « moins » côte à côte s’annulent toujours, même dans 5 - 3.",
       "On soustrait les distances à zéro : 5 - 3 = 2, puis on change le signe.",
       "Soustraire un nombre négatif revient à soustraire son opposé : 5 - 3.",
     ],
@@ -1963,7 +2086,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     // ⛔ 08/10/2026 : question ouverte à mots-clés (« deux », « positif ») devenue un QCM sur les mêmes pièges.
-    text: "Pourquoi le produit de deux nombres négatifs est-il positif ?",
+    text: "Quelle règle donne le signe de (-3) × (-4) ?",
     format: "qcm",
     choices: [
       "Les deux facteurs ont le même signe, et un produit de deux nombres de même signe est positif.",
@@ -1975,7 +2098,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Pense à la règle des signes.",
     explanation:
-      "D’après la règle des signes, le produit de deux nombres de même signe est positif. Deux nombres négatifs ont le même signe, donc leur produit est positif.",
+      "D’après la règle des signes, le produit de deux nombres de même signe est positif. Ici, -3 et -4 ont le même signe, donc (-3) × (-4) = 12.",
     tags: ["relatif", "multiplication", "qcm"],
   },
 
@@ -2041,7 +2164,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     // ⛔ 08/10/2026 : ouverte à mots-clés vagues → QCM sur les mêmes pièges.
-    text: "Comment détermine-t-on le signe d’un quotient de deux nombres relatifs ?",
+    text: "Comment trouve-t-on le signe de (-20) ÷ (-4) ?",
     format: "qcm",
     choices: [
       "Même signe : quotient positif ; signes différents : quotient négatif.",
@@ -2053,7 +2176,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "C’est la même règle que pour le produit.",
     explanation:
-      "Si les deux nombres ont le même signe, le quotient est positif. S’ils ont des signes différents, le quotient est négatif.",
+      "Si les deux nombres ont le même signe, le quotient est positif. S’ils ont des signes différents, le quotient est négatif. Ici, -20 et -4 ont le même signe, donc (-20) ÷ (-4) = 5.",
     tags: ["relatif", "division", "qcm"],
   },
 
@@ -2087,7 +2210,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_calcul",
     difficulty: 3,
     theme: "neutral",
-    hint: "Respecte les priorités opératoires.",
+    hint: "Parenthèses d’abord, puis × et ÷, puis + et −. Une variation répétée se traduit par un produit.",
     tags: ["relatif", "calcul", "template"],
     generate: () => genCalcul(3, 0),
   },
@@ -2100,7 +2223,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
-    hint: "Commence par les parenthèses, puis multiplication ou division.",
+    hint: "Parenthèses d’abord, puis × et ÷, puis + et −. Une moyenne : la somme des valeurs ÷ leur nombre.",
     tags: ["relatif", "calcul", "priorites", "template"],
     generate: () => genCalcul(4, 0),
   },
@@ -2265,7 +2388,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     choices: ["-10", "10", "-6", "6"],
     expected: ["-10"],
     comparator: "mcq_exact",
-    hint: "Deux nombres négatifs s’additionnent comme deux pertes.",
+    hint: "Même signe : on additionne les distances à zéro et on garde ce signe.",
     explanation:
       "Définition : additionner deux relatifs de même signe garde ce signe.\n\n" +
       "Méthode : les deux sont négatifs, on additionne les distances à zéro.\n\n" +
@@ -2352,7 +2475,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_addition",
     difficulty: 2,
     theme: "neutral",
-    hint: "On compare les distances à zéro et on garde le signe du plus grand.",
+    hint: "On compare les distances à zéro et on garde le signe du plus éloigné de zéro.",
     tags: ["relatif", "addition", "signes_contraires", "template"],
     generate: () => genAddition("contraires", false), // 03/11/2026 : sans situation
   },
@@ -2446,7 +2569,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_soustraction",
     difficulty: 3,
     theme: "neutral",
-    hint: "Soustraire un négatif augmente le résultat.",
+    hint: "Soustraire un nombre négatif, c’est ajouter son opposé. Une variation : valeur finale moins valeur de départ.",
     tags: ["relatif", "soustraction", "oppose", "template"],
     generate: () => genSoustraction("moinsNeg"),
   },
@@ -2732,7 +2855,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_calcul",
     difficulty: 3,
     theme: "neutral",
-    hint: "Effectue la multiplication avant la soustraction.",
+    hint: "Parenthèses d’abord, puis × et ÷, puis + et −. Une variation répétée se traduit par un produit.",
     tags: ["relatif", "calcul", "priorites", "template"],
     generate: () => genCalcul(3, randomChoice([2, 3, 6])),
   },
@@ -2745,7 +2868,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
-    hint: "La multiplication passe avant l’addition.",
+    hint: "Parenthèses d’abord, puis × et ÷, puis + et −. Une moyenne : la somme des valeurs ÷ leur nombre.",
     tags: ["relatif", "calcul", "priorites", "template"],
     generate: () => genCalcul(4, randomChoice([1, 4])),
   },
@@ -2758,7 +2881,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
-    hint: "Calcule d’abord la parenthèse, puis la division.",
+    hint: "Parenthèses d’abord, puis × et ÷, puis + et −. Une moyenne : la somme des valeurs ÷ leur nombre.",
     tags: ["relatif", "calcul", "parentheses", "template"],
     generate: () => genCalcul(4, randomChoice([2, 6])),
   },
@@ -2771,7 +2894,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
-    hint: "Parenthèse d’abord, puis multiplication.",
+    hint: "Parenthèses d’abord, puis × et ÷, puis + et −. Une moyenne : la somme des valeurs ÷ leur nombre.",
     tags: ["relatif", "calcul", "parentheses", "template"],
     generate: () => genCalcul(4, randomChoice([3, 5, 7])),
   },
@@ -2861,7 +2984,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_probleme",
     difficulty: 3,
     theme: "neutral",
-    hint: "Sous le niveau de la mer, l’altitude est négative.",
+    hint: "En dessous du niveau de référence (mer, sol, surface), la valeur est négative.",
     tags: ["relatif", "probleme", "altitude", "template"],
     generate: () => {
       const x = Math.random();
@@ -2963,14 +3086,14 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Laquelle de ces expressions est égale à un nombre positif ?",
     format: "qcm",
-    choices: ["(-4) × (-2)", "(-4) × 2", "(-4) + (-2)", "(-4) - 2"],
+    choices: ["(-4) × (-2)", "(-4) × 2", "(-4) + 2", "(-4) - 2"],
     expected: ["(-4) × (-2)"],
     comparator: "mcq_exact",
-    hint: "Cherche le produit de deux nombres négatifs.",
+    hint: "Applique la règle des signes à chaque expression.",
     explanation:
       "Définition : le produit de deux négatifs est positif.\n\n" +
       "Méthode : on évalue chaque expression.\n\n" +
-      "Calcul : (-4) × (-2) = 8 ; les autres donnent -8, -6 et -6.\n\n" +
+      "Calcul : (-4) × (-2) = 8 ; les autres donnent -8, -2 et -6.\n\n" +
       "Conclusion : (-4) × (-2) est positive.",
     tags: ["relatif", "defi", "signe", "qcm"],
   },
@@ -3061,7 +3184,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_operation_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Respecte les priorités : multiplication avant addition.",
+    hint: "Parenthèses d’abord, puis × et ÷, puis + et −.",
     tags: ["relatif", "defi", "calcul", "template"],
     generate: () => {
       const o = avecNegatif(randomChoice(FORMES_5));
@@ -3126,7 +3249,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_addition",
     difficulty: 1,
     theme: "neutral",
-    hint: "Une hausse s’ajoute avec un nombre positif, une baisse avec un nombre négatif.",
+    hint: "Regarde les signes : même signe, on additionne les distances à zéro ; signes contraires, on les soustrait.",
     tags: ["relatif", "addition", "situation", "template"],
     // 03/11/2026 : sans situation (elles passent dans relatif_addition_tpl_situation, ★3).
     generate: () => (Math.random() < 0.5 ? genAddition("contraires", false) : genAddition("simple", false)),
@@ -3153,7 +3276,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_soustraction",
     difficulty: 1,
     theme: "neutral",
-    hint: "La variation se calcule par : valeur finale moins valeur initiale.",
+    hint: "Soustraire un nombre, c’est ajouter son opposé.",
     tags: ["relatif", "soustraction", "situation", "template"],
     // 03/11/2026 : sans situation (elles passent dans relatif_soustraction_tpl_situation, ★3).
     generate: () => (Math.random() < 0.5 ? genSoustraction("moinsNeg", false) : genSoustraction("simple", false)),
@@ -3180,7 +3303,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_multiplication",
     difficulty: 1,
     theme: "neutral",
-    hint: "Une même baisse répétée plusieurs fois : c’est un produit par un nombre négatif.",
+    hint: "Trouve d’abord le signe, puis multiplie les distances à zéro.",
     tags: ["relatif", "multiplication", "situation", "template"],
     // 03/11/2026 : sans situation (elles passent dans relatif_multiplication_tpl_situation, ★3).
     generate: () => genMultiplication("simple", false),
@@ -3220,7 +3343,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_division",
     difficulty: 2,
     theme: "neutral",
-    hint: "Partager une baisse en parts égales : on divise un nombre négatif.",
+    hint: "Trouve d’abord le signe, puis divise les distances à zéro.",
     tags: ["relatif", "division", "situation", "template"],
     // 03/11/2026 : sans situation (elles passent dans relatif_division_tpl_situation, ★3).
     generate: () => (Math.random() < 0.5 ? genDivision("negPos", false) : genDivision("simple", false)),
@@ -3260,7 +3383,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_probleme",
     difficulty: 4,
     theme: "neutral",
-    hint: "Une variation répétée est un produit ; les produits se calculent avant les additions.",
+    hint: "Une variation répétée est un produit. Une moyenne : la somme des valeurs ÷ leur nombre. × avant +.",
     tags: ["relatif", "probleme", "priorites", "template"],
     generate: () => randomChoice([situRepetee, situBareme, situMoyenne, () => situProduit()])(),
   },

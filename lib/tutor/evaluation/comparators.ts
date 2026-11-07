@@ -65,10 +65,17 @@ export function compareAnswer(args: {
       return args.expected.some((exp) => String(exp).trim() === String(args.answer).trim());
 
     case "exact_text":
-    case "number_equal":
+    case "number_equal": {
+      // 07/11/2026 : un élève de 4e écrit ses relatifs entre parenthèses : « (−5) », « (+5) »,
+      // « + 5 » sont la même réponse que « −5 » et « 5 ».
+      const nu = args.answer
+        .trim()
+        .replace(/^\(\s*([+\-−–]?\s*\d[\d\s.,]*?)\s*\)$/, "$1")
+        .replace(/^\+\s*/, "");
       return args.expected.some(
-        (exp) => normalize(exp) === a || answersMatch(args.answer, exp)
+        (exp) => normalize(exp) === a || answersMatch(nu, exp)
       );
+    }
 
     case "fraction_decimal_equivalent":
       return args.expected.some((exp) => {

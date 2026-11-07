@@ -173,7 +173,7 @@ function valeurMots(t: string): number | null {
 }
 
 /* ── Les situations ────────────────────────────────────────────────────────── */
-const UNITE = String.raw`°C|cm|m|€|points?|coups?|étages?|%`;
+const UNITE = String.raw`°C|cm|m|€|points?|coups?|étages?|dB|images?|%`;
 const MONTANT = new RegExp(String.raw`(${NB})\s?(?:${UNITE})(?![\p{L}²³])`, "gu");
 const HAUSSE = /(?<!\p{L})(?:(?:re)?monte|gagne|augmente|réchauffe|rapporte|recharg|reçoit|virement|bonus|répond juste|de plus que le par|avance)/u;
 const BAISSE = /(?<!\p{L})(?:baiss|descend|plonge(?!u)|perd|refroidit|diminue|débité|rachète|achète|piège|coûte|se trompe|de moins que le par|recule|prélevé|retire|chute)/u;
@@ -309,7 +309,7 @@ function verifierNombre(q: Q, v: number | null): string[] {
 
 /** Calcul écrit, consigne en mots, ou situation : la réponse numérique. */
 function corrigerNombre(q: Q): string[] {
-  const v = valeurMots(q.text) ?? (/\d\s?(?:°C|m|cm|€|points?|coups?|étages?|%)(?!\p{L})|niveau|moyen|réponses?|cartes|l’an|flèche|erreurs/u.test(q.text) ? valeurSituation(q.text) : null) ?? valeurCalcul(q.text);
+  const v = valeurMots(q.text) ?? (/\d\s?(?:°C|m|cm|€|points?|coups?|étages?|dB|images?|%)(?!\p{L})|niveau|moyen|réponses?|cartes|l’an|flèche|erreurs/u.test(q.text) ? valeurSituation(q.text) : null) ?? valeurCalcul(q.text);
   return [...ecritureRelatifs(q), ...verifierNombre(q, v)];
 }
 
