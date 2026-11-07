@@ -212,6 +212,11 @@ class PaysageDecimal(VoixDecimale, FinTriangles, PaysageProp):
     identite = "Maths 6e — EleveAI"
     ceinture = "verte"
 
+    def coche(self, couleur=VERT_OK, taille=0.22):
+        """Coche un peu plus petite : posée à 0,33 du bord de la carte, la taille 0,22
+        touchait la fin d'un choix long (« … 9 centièmes✓ »)."""
+        return super().coche(couleur, taille * 0.75)
+
     def choix(self, s, fs=30):
         """Un choix long (« 6 unités et 9 dixièmes ») : posé d'un bloc à sa lettre, que la
         voix lit aussitôt. Sans cela, la synchro le découpe en morceaux et la carte

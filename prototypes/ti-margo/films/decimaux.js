@@ -133,8 +133,8 @@ FILMS['lire-ecrire']=function(outils){
 
   function dessiner(T){ const c=tab.c; tab.effacer(); const W=tab.W;
     if(T>=com){ /* le défi : quatre rangs, rien de rempli (la réponse reste à l'élève) */
-      if(T>=tQ1) ecrire(c,'4 unités',W/2-150,95,76*Math.max(1,pop(T,tQ1)),CRAIE.u);
-      if(T>=tQ2) ecrire(c,'et 4 millièmes',W/2+150,95+0,76*Math.max(1,pop(T,tQ2)),CRAIE.m,'left');
+      if(T>=tQ1) ecrire(c,'4 unités',W/2,70,66*Math.max(1,pop(T,tQ1)),CRAIE.u);
+      if(T>=tQ2) ecrire(c,'et 4 millièmes',W/2,165,66*Math.max(1,pop(T,tQ2)),CRAIE.m);
       cases(c,RANGS4,48,270,240,200,()=>({}),40);
       if(T>=tRep) ecrire(c,'= ?',W/2,640,96*Math.max(1,pop(T,tRep)),CRAIE.d);
       tab.maj(); return; }
