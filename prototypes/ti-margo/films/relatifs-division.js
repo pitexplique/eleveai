@@ -48,7 +48,8 @@ FILMS.division=function({el,$,mots,jetons,panneau,carte,legende,fin,lisse}){
     [cof,[]],
     [cof+7.78,[[cof+7.79,NEG('−')],[cof+8.12,NEG('12')]]],
     [cop+3.02,[[cop+3.89,NEG('(−')],[cop+4.2,NEG('12)')+' '],[cop+4.97,'÷ '],[cop+5.23,POS('3')+' '],[cop+5.6,'= '],[cop+5.78,OK('−')],[cop+6.09,OK('4')]]],
-    [c,[[c+2.08,NEG('(−')],[c+2.34,NEG('36)')+' '],[c+4.78,'÷ '],[c+4.78,NEG('(−4)')+' '],[c+7.11,'= ?']]]
+    /* Les données seulement : l'opération, c'est à l'élève de la trouver */
+    [c,[[c+4.78,'4 m par jour, '],[c+7.11,'? jours']]]
   ];
 
   const css=document.createElement('style');

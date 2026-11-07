@@ -48,6 +48,7 @@ FILMS.soustraction=function({el,$,mots,jetons,panneau,carte,legende,fin,lisse}){
     [c,[[c+2.05,POS('2')+' '],[c+3.67,'− '],[c+3.67,'('+NEG('−')],[c+3.67,NEG('6')+') '],[c+5.42,'− '],[c+5.42,'('+POS('+')],[c+5.42,POS('4')+') '],[c+7.4,'= ?']]]
   ];
 
+  const FONDU=document.createElement('div'); FONDU.style.cssText='position:fixed;inset:0;z-index:6;background:#d6efff;opacity:0;pointer-events:none;'; document.body.appendChild(FONDU);
   const css=document.createElement('style');
   css.textContent=`#panneau{top:auto!important;bottom:120px!important;}
     .choix.bon{transform:scale(1.05)!important;}
@@ -192,6 +193,8 @@ FILMS.soustraction=function({el,$,mots,jetons,panneau,carte,legende,fin,lisse}){
       reponse:[[r+1.05,r+1.05,'8'+N+'!',[r+1.05]]],suite:[[r+2.36,r+2.8,'Regarde.']] },
 
     jouer(P,T,cam){
+      /* Un fondu entre le plouf et la question finale : plus de coupe sèche */
+      { const u=T<c?lisse((T-c+.35)/.35):1-lisse((T-c)/.4); FONDU.style.opacity=(T>c-.35&&T<c+.4)?String(u):'0'; }
       const vise=(x,yW,Y,d,e=.04)=>{ cam.x=x; cam.y=yW+(Y-960)/(2637/d); cam.d=d; cam.e=e; };
       scene.taille=.55; scene.cacherOmbre=true; scene.z=0;
 

@@ -224,9 +224,9 @@ FILMS.defi=function({el,$,mots,jetons,panneau,carte,legende,fin,lisse}){
     if(T<q+.1){ let a=0; for(const [d,e] of RET) a+=Math.PI*lisse((T-d)/(e-d)); return a; }
     if(T<r+1.05){ const u=(T-q-.1)/(r+1.05-q-.1); const v=(u-.9)/.1; return Math.PI*2*8*(u<.9?u/.95:.9/.95+(1-(1-v)*(1-v))*.05/.95); }
     if(T<cou+.35) return 0;
-    if(T<cou+2.51) return Math.PI*(dalle(T)-4);
+    if(T<cou+2.51) return Math.PI*4*(dalle(T)-4)/94; /* 2 tours pendant le sprint : à 94 demi-tours, l'image clignotait */
     if(T<c+5.6){ const dd=dalle(T); const n=Math.floor(dd+1e-6); return Math.PI*(n+lisse((dd-n)*1.15)); }
-    if(T<f-.05){ const u=(T-c-5.6)/(f-.05-c-5.6); return Math.PI*2*5*lisse(u); }
+    if(T<f-.05){ const u=(T-c-5.6)/(f-.05-c-5.6); return Math.PI*2*2*lisse(u); }
     return 0; };
 
   /* Le ciel se couche pendant le film */
@@ -407,7 +407,7 @@ FILMS.defi=function({el,$,mots,jetons,panneau,carte,legende,fin,lisse}){
           $('boiteD').style.visibility=voirD?'':'hidden'; $('valD').textContent=String(n);
           let s=''; for(const [t,v] of SIGNES) if(T>=t) s=v;
           /* Pendant la course, l'écran suit la pancarte */
-          if(T>=cou+.35&&T<cou+6) s=compteur(T)%2?'−':'+';
+          if(T>=cou+.35&&T<cou+2.51) s='…'; /* trop vite pour lire : pas de signe faux à côté du compteur */ else if(T>=cou+2.51&&T<cou+6) s=compteur(T)%2?'−':'+';
           const e=$('valS'); e.textContent=s; e.style.color=s==='−'?'#ff922b':(s==='+'?'#74c0fc':'#ffe066');
         }
       }

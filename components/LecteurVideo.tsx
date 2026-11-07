@@ -22,7 +22,7 @@ const COUPE_FIN = 3.6; // secondes retirées à la fin : « Et abonne-toi ! »
 // après « Entraîne-toi sur éleveai point f r. » (mesuré dans le WAV de fin et le mp4).
 const COUPE_PAR_VIDEO: Record<string, number> = {
   "4e-equation-probleme": 8.6,
-  "4e-equation-probleme-short": 4.7,
+  "4e-equation-probleme-short": 4.2,
   // Relatifs 4e : mesuré dans les mp4, la pause après « point f r » (07/11).
   "4e-relatif-addition": 8.4,
   "4e-relatif-soustraction": 8.4,

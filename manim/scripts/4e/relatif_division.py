@@ -432,8 +432,9 @@ class RelatifDivision4e(PaysageRel):
         c1 = RoundedRectangle(width=6.0, height=1.3, corner_radius=0.14, stroke_color=PIEGE, stroke_width=4, fill_color=FOND_CARTE, fill_opacity=1).move_to(P(-3.3, 1.2))
         e1 = F("(−18) ÷ (−6) = −3", 40).move_to(c1)
         self.dire_eq(e1, "Moins 18 divisé par moins 6, ce n'est pas moins 3.", avec=[FadeIn(c1)], echelle=1.1)
-        barre = self.barrer(VGroup(*e1.atomes[-2:]), sw=7)
-        self.play(Create(barre), run_time=0.15)
+        # La rature ne traverse que le chiffre ; le moins passe en rouge avec lui.
+        barre = self.barrer(e1.atomes[-1], sw=7)
+        self.play(Create(barre), e1.atomes[-2].animate.set_color(PIEGE), e1.atomes[-1].animate.set_color(PIEGE), run_time=0.15)
         c2 = RoundedRectangle(width=6.0, height=1.3, corner_radius=0.14, stroke_color=VERT_OK, stroke_width=4, fill_color=FOND_CARTE, fill_opacity=1).move_to(P(3.3, 1.2))
         e2 = F("(−18) ÷ (−6) = 3", 40).move_to(c2)
         tete = e2.atomes[:-1]

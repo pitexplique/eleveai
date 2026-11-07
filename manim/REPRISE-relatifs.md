@@ -132,3 +132,13 @@ Commits : `85a37826` (02), `95ccf4e5` (06), `f6bfbec8` (07), `67603203` (passe f
 3. Après le push seulement, en production :
    `node scripts/brancher-videos-coach.mjs --id 4e-relatif-addition,4e-relatif-addition-short,4e-relatif-soustraction,4e-relatif-soustraction-short,4e-relatif-multiplication,4e-relatif-multiplication-short,4e-relatif-division,4e-relatif-division-short,4e-relatif-calcul,4e-relatif-calcul-short,4e-relatif-probleme,4e-relatif-probleme-short,4e-relatif-defi,4e-relatif-defi-short --ecrire`
 4. YouTube : date à choisir à la place du `pas_avant` de prudence.
+
+
+## Défauts corrigés le 07/11 après le rapport (« corrige les défauts »)
+- Short 02, vers 72 s : fondu entre le plouf et la question finale, plus de coupe sèche.
+- Short 04, vers 83 s : le panneau écrit « 4 m par jour, ? jours » et ne donne plus l'opération.
+- Short 07, vers 54 s : la pancarte fait 2 tours pendant le sprint au lieu de 47, et 2 au lieu de 5 à la fin ; l'écran SIGNE affiche « … » pendant le sprint.
+- Paysage 04, vers 2:25 : la rature ne traverse que le 3, le moins passe en rouge.
+- Short 06 : écharpe gardée, elle ne cache rien et va avec la neige. Elle reste à son appréciation.
+- `4e-equation-probleme-short` : coupe 4,7 → 4,2 s.
+Tout est sur R2 (49 fichiers vérifiés, à la taille). Reste à écouter : les bruitages des shorts, et le son en général.
