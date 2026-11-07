@@ -1,0 +1,17 @@
+{
+  "00-garde": "Arrondir un nombre décimal. Comment trouver le nombre rond le plus proche ?",
+  "01-situation": "Voici Sami. Il est météorologue. Son thermomètre affiche 23 virgule 7 degrés. À la radio, il annonce un nombre entier. Lequel ?",
+  "02-droite": "On place 23 virgule 7 sur une droite, entre 23 et 24. Il est plus près de 24. L'arrondi à l'unité est 24.",
+  "03-regle": "La règle : pour arrondir à l'unité, on regarde le chiffre des dixièmes. De 0 à 4, on garde l'unité. De 5 à 9, on monte à l'unité suivante. Ici, c'est 7 : on monte à 24.",
+  "04-garder": "Demain, il fera 18 virgule 3 degrés. Le chiffre des dixièmes est 3. On garde 18.",
+  "05-question": "Question ! Quel est l'arrondi à l'unité de 12 virgule 5 ? A : 12. B : 13. C : 12 virgule 5. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Le chiffre des dixièmes est 5. De 5 à 9, on monte : 13.",
+  "06-dixieme": "Sami mesure la pluie : 4 virgule 382 millimètres. Il arrondit au dixième. On regarde le chiffre juste après, celui des centièmes : 8. On monte : 4 virgule 4 millimètres.",
+  "07-piege": "Attention au 9 ! Arrondis 3 virgule 96 au dixième. Le chiffre des centièmes est 6 : on monte. 9 dixièmes, plus 1 dixième, font 10 dixièmes, donc une unité. On obtient 4 virgule 0, c'est-à-dire 4.",
+  "08-question": "Question ! Quel est l'arrondi au dixième de 7 virgule 64 ? A : 7 virgule 6. B : 7 virgule 7. C : 8. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Le chiffre des centièmes est 4. On garde 7 virgule 6.",
+  "09-defi": "À toi de jouer ! Le vent souffle à 45 virgule 58 kilomètres par heure. Arrondis ce nombre à l'unité, puis au dixième. Mets pause, et cherche !",
+  "09b-correction": "Correction. À l'unité : le chiffre des dixièmes est 5, on monte : 46. Au dixième : le chiffre des centièmes est 8, on monte : 45 virgule 6.",
+  "10-finale": "Ce que tu as appris. Pour arrondir, on regarde le chiffre juste après le rang voulu. De 0 à 4, on garde. De 5 à 9, on monte.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

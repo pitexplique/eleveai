@@ -1,0 +1,15 @@
+{
+  "00-garde": "Défis sur les nombres décimaux. Sauras-tu ouvrir toutes les portes ?",
+  "01-situation": "Voici Tom. Il crée des escape games. Ses énigmes cachent des nombres décimaux. Trois portes t'attendent.",
+  "02-porte1": "Porte 1 : trouve le nombre. Indices : 2 unités, 8 centièmes, 5 dixièmes. On range chaque chiffre à sa place : unités, dixièmes, centièmes. Le nombre est 2 virgule 58.",
+  "03-question": "Question ! Unités : 0. Dixièmes : 0. Centièmes : 5. Quel est le nombre ? A : 0 virgule 5. B : 5. C : 0 virgule 05. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. Le 0 des dixièmes garde sa place : 0 virgule 05.",
+  "04-porte2": "Porte 2 : avec les étiquettes 5, 3 et 1, écris le plus grand nombre possible, avec un chiffre après la virgule. Le plus gros chiffre va au rang le plus fort. 5, puis 3, puis la virgule, puis 1 : 53 virgule 1.",
+  "05-porte3": "Porte 3 : vrai ou faux ? Liam écrit : 7 virgule 11 est plus grand que 7 virgule 5, car il a plus de chiffres. Faux ! Aux dixièmes : 1 contre 5. 7 virgule 5 est le plus grand.",
+  "06-question": "Question ! 10 virgule 20 est-il égal à 10 virgule 2 ? A : oui. B : non, il est plus grand. C : non, il est plus petit. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. Un zéro à la fin ne change rien : 20 centièmes, ce sont 2 dixièmes.",
+  "07-defi": "À toi de jouer ! Dernière porte. Avec les étiquettes 9, 8 et 6, écris le plus petit nombre possible, avec deux chiffres après la virgule. Mets pause, et cherche !",
+  "07b-correction": "Correction. Pour le plus petit, le plus petit chiffre va au rang le plus fort. 6 aux unités, puis 8, puis 9 : 6 virgule 89. La porte s'ouvre !",
+  "08-finale": "Ce que tu as appris. Chaque chiffre a sa place : unités, dixièmes, centièmes. Le plus gros chiffre au rang le plus fort donne le plus grand nombre. Plus de chiffres ne veut pas dire plus grand.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

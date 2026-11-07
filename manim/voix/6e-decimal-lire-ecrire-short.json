@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Dicte-moi un nombre, je l'écris. Trois unités et cinq centièmes ? Facile : 3 virgule 5 ! Tu paries que c'est juste ?",
+  "01-cases": "On vérifie avec les cases. Unités : 3. Dixièmes : 5. Centièmes : vide. Oups ! Mon 5 est tombé dans la case des dixièmes.",
+  "02-question": "Question ! Que fallait-il écrire ? A : 3 virgule 5. B : 3 virgule 05. C : 3 virgule 50. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Un 0 garde la place des dixièmes : 3 virgule 05.",
+  "03-encore": "Encore un ! Deux unités et sept dixièmes. Cette fois, je fais attention : 2 virgule 7. Bravo moi !",
+  "04-commentaire": "À toi : écris en chiffres quatre unités et quatre millièmes. Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

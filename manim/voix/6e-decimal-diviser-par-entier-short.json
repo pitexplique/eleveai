@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je partage 10 euros entre 4 copains. 10 divisé par 4 : 2, et il reste 2. Chacun a 2 euros, et je garde les 2 euros qui restent ! Tu paries que c'est juste ?",
+  "01-copains": "Mes copains protestent ! Les 2 euros qui restent, ce sont 20 pièces de 10 centimes. On peut encore les partager.",
+  "02-question": "Question ! Combien chacun doit-il avoir ? A : 2 euros. B : 2 virgule 5 euros. C : 2 virgule 2 euros. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 20 pièces divisées par 4 : 5 pièces de 10 centimes chacun, 0 virgule 5 euro. Chacun a 2 virgule 5 euros.",
+  "03-snif": "Et 4 fois 2 virgule 5, ça fait bien 10. Je ne garde rien... Snif !",
+  "04-commentaire": "À toi : je partage 7 euros entre 4 copains. Combien pour chacun ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

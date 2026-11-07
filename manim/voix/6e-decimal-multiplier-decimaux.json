@@ -1,0 +1,17 @@
+{
+  "00-garde": "Multiplier deux nombres décimaux. Combien de chiffres après la virgule ?",
+  "01-situation": "Voici Anaïs. Elle est carreleuse. Elle pose des carreaux sur un mur. Une zone mesure 0 virgule 3 mètre sur 0 virgule 6 mètre. Quelle est son aire ?",
+  "02-carre": "On dessine un carré de 1 mètre de côté. On le coupe en 10 sur la largeur, et en 10 sur la hauteur : 100 petits carreaux. Chacun vaut 0 virgule 01 mètre carré.",
+  "03-zone": "La zone fait 3 carreaux sur 6. 3 fois 6, ça fait 18 petits carreaux. 18 centièmes : 0 virgule 18 mètre carré.",
+  "04-methode": "La méthode : on oublie les virgules. 3 fois 6, ça fait 18. On compte les chiffres après la virgule : un dans 0 virgule 3, un dans 0 virgule 6. Deux en tout. Le résultat a deux chiffres après la virgule : 0 virgule 18.",
+  "05-question": "Question ! Combien font 0 virgule 4 fois 0 virgule 2 ? A : 0 virgule 8. B : 0 virgule 08. C : 8. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 4 fois 2, ça fait 8. Deux chiffres après la virgule : 0 virgule 08.",
+  "06-grand": "Avec de plus grands nombres : 2 virgule 6 fois 7 virgule 4. On calcule 26 fois 74 : 1 924. Un chiffre après la virgule, plus un : deux. Résultat : 19 virgule 24. Ordre de grandeur : 3 fois 7, ça fait 21. C'est proche.",
+  "07-piege": "Surprise ! Multiplier ne rend pas toujours plus grand. 0 virgule 3 fois 0 virgule 6, ça fait 0 virgule 18. C'est plus petit que les deux nombres. Multiplier par un nombre plus petit que 1, c'est en prendre une partie.",
+  "08-question": "Question ! 2 virgule 5 fois 0 virgule 8 est-il plus petit ou plus grand que 2 virgule 5 ? A : plus petit. B : plus grand. C : égal. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 0 virgule 8 est plus petit que 1. Le résultat est plus petit que 2 virgule 5 : c'est 2.",
+  "09-defi": "À toi de jouer ! Une plaque de carrelage mesure 1 virgule 2 mètre sur 0 virgule 5 mètre. Quelle est son aire ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 12 fois 5, ça fait 60. Deux chiffres après la virgule : 0 virgule 60, c'est-à-dire 0 virgule 6 mètre carré.",
+  "10-finale": "Ce que tu as appris. On multiplie sans les virgules. On compte les chiffres après la virgule des deux nombres. Le résultat en a autant. Multiplier par moins de 1 rend plus petit.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

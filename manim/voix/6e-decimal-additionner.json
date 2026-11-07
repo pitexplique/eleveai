@@ -1,0 +1,17 @@
+{
+  "00-garde": "Additionner et soustraire des nombres décimaux. Comment poser le calcul ?",
+  "01-situation": "Voici Romain. Il est boulanger. Pour son pain, il verse 2 virgule 35 kilogrammes de farine blanche, puis 1 virgule 4 kilogramme de farine complète. Combien en tout ?",
+  "02-sens": "On ajoute les unités aux unités, les dixièmes aux dixièmes, les centièmes aux centièmes. C'est pour ça qu'on pose virgule sous virgule.",
+  "03-pose": "On pose 2 virgule 35 plus 1 virgule 4, virgule sous virgule. En bas, il manque un chiffre : 1 virgule 4, c'est 1 virgule 40. Centièmes : 5 plus 0, 5. Dixièmes : 3 plus 4, 7. Unités : 2 plus 1, 3. On descend la virgule : 3 virgule 75 kilogrammes.",
+  "04-retenue": "Avec une retenue : 0 virgule 6 plus 0 virgule 9. Dixièmes : 6 plus 9, ça fait 15 dixièmes. 10 dixièmes font une unité. J'écris 5, et je retiens 1 aux unités. Résultat : 1 virgule 5.",
+  "05-question": "Question ! Combien font 2 virgule 8 plus 1 virgule 35 ? A : 1 virgule 63. B : 4 virgule 15. C : 3 virgule 43. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 2 virgule 8, c'est 2 virgule 80. 2 virgule 80 plus 1 virgule 35, ça fait 4 virgule 15.",
+  "06-soustraction": "Romain avait 3 virgule 2 kilogrammes de beurre. Il en utilise 1 virgule 5. Combien en reste-t-il ? On pose 3 virgule 2 moins 1 virgule 5. Dixièmes : 2 moins 5, impossible. On casse une unité en 10 dixièmes : 12 dixièmes. 12 moins 5, 7. Il reste 2 unités. 2 moins 1, 1. Il reste 1 virgule 7 kilogramme.",
+  "07-piege": "Attention ! 5 moins 2 virgule 75. Où est la virgule de 5 ? Elle est cachée : 5, c'est 5 virgule 00. On pose virgule sous virgule, et on calcule : 2 virgule 25. On vérifie : 2 virgule 25 plus 2 virgule 75, ça fait 5.",
+  "08-question": "Question ! Combien font 7 moins 2 virgule 4 ? A : 5 virgule 4. B : 4 virgule 6. C : 5 virgule 6. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 7, c'est 7 virgule 0. 7 virgule 0 moins 2 virgule 4, ça fait 4 virgule 6.",
+  "09-defi": "À toi de jouer ! Romain a 8 virgule 5 kilogrammes de sucre. Il en utilise 2 virgule 75 pour des brioches, puis 1 virgule 6 pour des tartes. Combien lui en reste-t-il ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Il utilise 2 virgule 75 plus 1 virgule 6 : 4 virgule 35. Il reste 8 virgule 50 moins 4 virgule 35 : 4 virgule 15 kilogrammes.",
+  "10-finale": "Ce que tu as appris. On pose virgule sous virgule. On complète avec des zéros. Puis on calcule comme avec des entiers, et on descend la virgule.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

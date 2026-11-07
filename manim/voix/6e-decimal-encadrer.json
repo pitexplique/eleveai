@@ -1,0 +1,16 @@
+{
+  "00-garde": "Encadrer et intercaler un nombre décimal. Entre quels nombres se trouve-t-il ?",
+  "01-situation": "Voici Lina. Elle pilote un robot sur la planète Mars. Aujourd'hui, le robot a roulé 7 virgule 38 mètres.",
+  "02-unite": "Encadrer à l'unité, c'est trouver les deux entiers qui l'entourent. 7 virgule 38 est entre 7 et 8. 7 est plus petit que 7 virgule 38, qui est plus petit que 8.",
+  "03-dixieme": "On zoome entre 7 et 8. On voit les dixièmes : 7 virgule 1, 7 virgule 2, 7 virgule 3... 7 virgule 38 est entre 7 virgule 3 et 7 virgule 4. C'est l'encadrement au dixième.",
+  "04-question": "Question ! Quel est l'encadrement à l'unité de 12 virgule 6 ? A : entre 12 et 13. B : entre 11 et 12. C : entre 12 virgule 5 et 12 virgule 7. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 12 virgule 6 est entre les entiers 12 et 13.",
+  "05-intercaler": "Lina cherche un nombre entre 4 virgule 7 et 4 virgule 8. On dirait qu'il n'y en a pas. Mais 4 virgule 7, c'est 4 virgule 70. Et 4 virgule 8, c'est 4 virgule 80. Entre les deux : 4 virgule 71, 4 virgule 72... et 4 virgule 75. Intercaler, c'est ça.",
+  "06-zoom": "Et entre 4 virgule 75 et 4 virgule 76 ? On zoome encore : 4 virgule 755, par exemple. On peut toujours zoomer. Entre deux nombres décimaux, il y en a toujours d'autres.",
+  "07-question": "Question ! Quel nombre est entre 2 virgule 3 et 2 virgule 4 ? A : 2 virgule 5. B : 2 virgule 35. C : 2 virgule 03. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 2 virgule 35 est entre 2 virgule 30 et 2 virgule 40.",
+  "08-defi": "À toi de jouer ! Le robot a roulé 15 virgule 04 mètres. Encadre ce nombre à l'unité, puis au dixième. Mets pause, et cherche !",
+  "08b-correction": "Correction. À l'unité : entre 15 et 16. Au dixième : 15 virgule 04 a 0 dixième et 4 centièmes. Il est entre 15 virgule 0 et 15 virgule 1.",
+  "09-finale": "Ce que tu as appris. Encadrer, c'est trouver les deux voisins qui entourent le nombre. Pour intercaler, on ajoute des zéros et on zoome. Entre deux décimaux, il y en a toujours d'autres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

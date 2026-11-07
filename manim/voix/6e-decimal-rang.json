@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le rang d'un chiffre. Que vaut chaque chiffre d'un nombre décimal ?",
+  "01-situation": "Voici Malik. Il est chronométreur aux courses d'athlétisme. Une coureuse franchit la ligne en 12 virgule 47 secondes. Que veut dire chaque chiffre ?",
+  "02-tableau": "On range les chiffres dans un tableau. Avant la virgule : 1 dizaine et 2 unités. Après la virgule : 4 dixièmes et 7 centièmes.",
+  "03-valeur": "Chaque rang vaut 10 fois moins que celui de gauche. Un dixième, c'est une unité coupée en 10. Un centième, c'est un dixième coupé en 10. Le 7 vaut 7 centièmes de seconde : c'est tout petit !",
+  "04-question": "Question ! Dans 12 virgule 47, quel chiffre est au rang des dixièmes ? A : 2. B : 4. C : 7. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Le premier chiffre après la virgule est celui des dixièmes : 4.",
+  "05-milliemes": "Le chronomètre de Malik est très précis : 12 virgule 476 secondes. Le troisième chiffre après la virgule, 6, est au rang des millièmes.",
+  "06-piege": "Attention aux noms ! Dizaines et dixièmes se ressemblent. Les dizaines sont à gauche de la virgule. Les dixièmes sont à droite. Dans 35 virgule 81, le chiffre des dizaines est 3. Le chiffre des dixièmes est 8.",
+  "07-question": "Question ! Dans 69 virgule 073, quel chiffre est au rang des centièmes ? A : 0. B : 7. C : 3. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Dixièmes : 0. Centièmes : 7. Millièmes : 3.",
+  "08-defi": "À toi de jouer ! Dans 805 virgule 316, quel chiffre est au rang des dizaines ? Et quel chiffre est au rang des millièmes ? Mets pause, et cherche !",
+  "08b-correction": "Correction. À gauche de la virgule : 5 unités, 0 dizaine, 8 centaines. Le chiffre des dizaines est 0. À droite : 3 dixièmes, 1 centième, 6 millièmes. Le chiffre des millièmes est 6.",
+  "09-finale": "Ce que tu as appris. On part de la virgule. À gauche : unités, dizaines, centaines. À droite : dixièmes, centièmes, millièmes. Chaque rang vaut 10 fois moins que celui de gauche.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

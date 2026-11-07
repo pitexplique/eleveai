@@ -1,0 +1,18 @@
+{
+  "00-garde": "Lire et écrire un nombre décimal. Où se place chaque chiffre ?",
+  "01-situation": "Voici Léna. Elle est vétérinaire. Elle pèse un chaton : 1 kilogramme, et un peu plus. Elle dit : 1 unité et 4 dixièmes. Comment l'écrire ?",
+  "02-dixiemes": "Prends une unité. Coupe-la en 10 parts égales. Chaque part est un dixième. 4 parts, ce sont 4 dixièmes.",
+  "03-ecrire": "Les unités vont avant la virgule. Les dixièmes vont juste après. Le chaton pèse 1 virgule 4 kilogramme.",
+  "04-centiemes": "Coupe encore un dixième en 10 : ce sont des centièmes. Ils vont au deuxième rang après la virgule. Un lapin pèse 2 unités, 3 dixièmes et 5 centièmes. On écrit 2 virgule 35 kilogrammes.",
+  "05-question": "Question ! Comment écrire 7 dixièmes ? A : 7 virgule 10. B : 0 virgule 7. C : 0 virgule 07. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Les dixièmes vont juste après la virgule : 0 virgule 7.",
+  "06-fraction": "7 dixièmes s'écrit aussi 7 sur 10. Et 25 sur 10 ? 10 dixièmes font une unité. 25 dixièmes, ce sont 2 unités et 5 dixièmes : 2 virgule 5.",
+  "07-zero": "Attention au zéro ! Un chat pèse 2 kilogrammes et 9 centièmes. Il n'y a aucun dixième. On écrit un 0 à sa place : 2 virgule 09. Sans le zéro, 2 virgule 9, ce seraient 9 dixièmes. C'est bien plus !",
+  "08-question": "Question ! Comment se lit 6 virgule 09 ? A : 6 unités et 9 dixièmes. B : 6 unités et 9 centièmes. C : 9 unités et 6 centièmes. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Le 0 est au rang des dixièmes. Le 9 est au rang des centièmes.",
+  "09-piege": "Autre piège : 34 sur 100 ne s'écrit pas 34 virgule 100. 34 sur 100, ce sont 34 centièmes. Le dernier chiffre, 4, va au rang des centièmes : 0 virgule 34.",
+  "10-defi": "À toi de jouer ! Un chiot pèse 4 kilogrammes et 8 centièmes. Écris ce nombre. Puis écris 125 sur 100 avec une virgule. Mets pause, et cherche !",
+  "10b-correction": "Correction. 4 kilogrammes et 8 centièmes : aucun dixième, donc un 0. 4 virgule 08. Et 125 centièmes : 100 centièmes font une unité. Il reste 25 centièmes : 1 virgule 25.",
+  "11-finale": "Ce que tu as appris. Avant la virgule : les unités. Juste après : les dixièmes, puis les centièmes. S'il manque un rang, on écrit 0.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

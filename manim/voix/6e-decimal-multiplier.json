@@ -1,0 +1,17 @@
+{
+  "00-garde": "Multiplier un nombre décimal par un entier. Où mettre la virgule ?",
+  "01-situation": "Voici Lucas. Il est jardinier paysagiste. Il plante 3 rangées de fleurs. Chaque rangée mesure 2 virgule 4 mètres. Quelle longueur en tout ?",
+  "02-sens": "3 fois 2 virgule 4, c'est 2 virgule 4 plus 2 virgule 4 plus 2 virgule 4. 3 fois 2 unités : 6 unités. 3 fois 4 dixièmes : 12 dixièmes, soit 1 unité et 2 dixièmes. En tout : 7 virgule 2 mètres.",
+  "03-methode": "La méthode rapide : on oublie la virgule. 24 fois 3, ça fait 72. 2 virgule 4 a un chiffre après la virgule. Le résultat aussi : 7 virgule 2.",
+  "04-verifier": "On vérifie avec un ordre de grandeur. 2 virgule 4 est entre 2 et 3. Donc le résultat est entre 6 et 9. 7 virgule 2 convient. 72, non !",
+  "05-question": "Question ! Combien font 1 virgule 5 fois 4 ? A : 6. B : 4 virgule 20. C : 60. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 15 fois 4, ça fait 60. Un chiffre après la virgule : 6 virgule 0, c'est-à-dire 6.",
+  "06-fois10": "Lucas achète 10 sacs de terreau de 3 virgule 47 kilogrammes. Multiplier par 10, c'est rendre chaque chiffre dix fois plus grand. Chaque chiffre monte d'un rang. 3 unités deviennent 3 dizaines. 4 dixièmes deviennent 4 unités. 7 centièmes deviennent 7 dixièmes. Résultat : 34 virgule 7 kilogrammes.",
+  "07-raccourci": "Le raccourci : la virgule se décale d'un rang vers la droite. Fois 100 : deux rangs. 3 virgule 47 fois 100, ça fait 347. Attention : on n'ajoute pas un zéro ! 3 virgule 470, ce serait faux.",
+  "08-question": "Question ! Combien font 0 virgule 8 fois 100 ? A : 0 virgule 800. B : 8. C : 80. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. Chaque chiffre monte de deux rangs : 8 dixièmes deviennent 8 dizaines. 80.",
+  "09-defi": "À toi de jouer ! Lucas achète 6 rosiers à 4 virgule 25 euros. Combien paie-t-il ? Vérifie avec un ordre de grandeur. Mets pause, et cherche !",
+  "09b-correction": "Correction. 425 fois 6, ça fait 2 550. Deux chiffres après la virgule : 25 virgule 50 euros. Ordre de grandeur : 4 fois 6, ça fait 24. C'est proche : bravo !",
+  "10-finale": "Ce que tu as appris. On multiplie sans la virgule, puis on remet autant de chiffres après la virgule. Fois 10, chaque chiffre monte d'un rang. On vérifie avec un ordre de grandeur.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

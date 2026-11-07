@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je coupe une pizza carrée. Je prends 0 virgule 5 de la largeur, et 0 virgule 5 de la hauteur. Multiplier, ça agrandit toujours. Alors j'aurai plus que la moitié ! Tu paries ?",
+  "01-coupe": "Je découpe... Hé ! Mon morceau, c'est un petit carré dans le coin. Un quart de la pizza !",
+  "02-question": "Question ! Combien font 0 virgule 5 fois 0 virgule 5 ? A : 2 virgule 5. B : 0 virgule 25. C : 1. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 5 fois 5, ça fait 25. Deux chiffres après la virgule : 0 virgule 25. Un quart !",
+  "03-lecon": "Multiplier par moins de 1, ça rapetisse ! La prochaine fois, je prends toute la hauteur : 0 virgule 5 fois 1, la moitié. Miam !",
+  "04-commentaire": "À toi : combien font 0 virgule 4 fois 0 virgule 5 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

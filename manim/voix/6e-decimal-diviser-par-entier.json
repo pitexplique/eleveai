@@ -1,0 +1,17 @@
+{
+  "00-garde": "Diviser un nombre décimal par un entier. Comment partager quand ça ne tombe pas juste ?",
+  "01-situation": "Voici Yasmine. Elle est régisseuse de concerts. Elle a 7 virgule 5 mètres de câble. Elle le coupe en 5 morceaux égaux. Combien mesure chaque morceau ?",
+  "02-sens": "7 virgule 5, ce sont 7 unités et 5 dixièmes. On partage d'abord les unités : 7 divisé par 5, 1, et il reste 2. Les 2 unités qui restent font 20 dixièmes. Avec les 5 dixièmes, ça fait 25 dixièmes. 25 divisé par 5, 5. Chaque morceau mesure 1 virgule 5 mètre.",
+  "03-potence": "On le pose. 7 divisé par 5 : 1, il reste 2. On abaisse le 5. Quand on passe la virgule, on met la virgule au résultat. 25 divisé par 5 : 5. Résultat : 1 virgule 5.",
+  "04-question": "Question ! Combien font 3 virgule 6 divisé par 2 ? A : 1 virgule 3. B : 1 virgule 8. C : 18. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 3 divisé par 2 : 1, il reste 1. 1 unité et 6 dixièmes font 16 dixièmes. 16 divisé par 2 : 8. 1 virgule 8.",
+  "05-continuer": "Et si ça ne tombe pas juste ? 7 divisé par 4 : 1, il reste 3. On continue après la virgule. 3 unités, ce sont 30 dixièmes. 30 divisé par 4 : 7, il reste 2. 2 dixièmes, ce sont 20 centièmes. 20 divisé par 4 : 5. Résultat : 1 virgule 75.",
+  "06-verif": "On vérifie : 1 virgule 75 fois 4, ça fait 7. C'est juste.",
+  "07-par10": "Diviser par 10, c'est rendre chaque chiffre dix fois plus petit : il descend d'un rang. 45 virgule 3 divisé par 10, ça fait 4 virgule 53.",
+  "08-question": "Question ! Combien font 814 virgule 6 divisé par 100 ? A : 81 virgule 46. B : 8 virgule 146. C : 81 460. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Chaque chiffre descend de deux rangs : 8 centaines deviennent 8 unités. 8 virgule 146.",
+  "09-defi": "À toi de jouer ! Yasmine partage 9 litres d'eau entre 4 musiciens. Combien de litres pour chacun ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 9 divisé par 4 : 2, il reste 1. 1 unité, ce sont 10 dixièmes. 10 divisé par 4 : 2, il reste 2. 2 dixièmes, ce sont 20 centièmes. 20 divisé par 4 : 5. Chacun reçoit 2 virgule 25 litres.",
+  "10-finale": "Ce que tu as appris. On divise rang par rang. Quand on passe la virgule, on la met au résultat. Si ça ne tombe pas juste, on continue avec les dixièmes, puis les centièmes.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

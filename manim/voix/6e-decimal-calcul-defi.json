@@ -1,0 +1,17 @@
+{
+  "00-garde": "Défis de calcul avec les décimaux. Moitié, double, pourcentage : sauras-tu tout calculer ?",
+  "01-situation": "Voici Inès. Elle tient un magasin de jeux vidéo. Chaque jour, elle calcule des moitiés, des doubles et des réductions.",
+  "02-moitie": "Défi 1 : un jeu d'occasion coûte 7 euros. Inès le vend à moitié prix. La moitié, c'est diviser par 2. 7 divisé par 2, ça fait 3 virgule 5. Le jeu coûte 3 virgule 50 euros.",
+  "03-double": "Défi 2 : une manette coûte 24 virgule 5 euros. Un client en prend deux. Le double, c'est fois 2. 24 virgule 5 fois 2, ça fait 49 euros.",
+  "04-question": "Question ! Quel est le quart de 10 ? A : 2 virgule 5. B : 2 virgule 4. C : 40. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Le quart, c'est la moitié de la moitié. La moitié de 10 : 5. La moitié de 5 : 2 virgule 5.",
+  "05-pourcent": "Défi 3 : les soldes ! Un jeu à 36 euros a 10 % de réduction. 10 %, c'est un dixième : on divise par 10. 36 divisé par 10, ça fait 3 virgule 6. La réduction est de 3 virgule 60 euros.",
+  "06-nouveau-prix": "Le nouveau prix : 36 moins 3 virgule 6, ça fait 32 virgule 4. Le jeu coûte 32 virgule 40 euros.",
+  "07-question": "Question ! Combien font 50 % de 18 euros ? A : 9 euros. B : 1 virgule 8 euro. C : 36 euros. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 50 %, c'est la moitié. 18 divisé par 2, ça fait 9.",
+  "08-ordre": "Défi 4, sans poser : 4 virgule 9 fois 2, c'est plus proche de 8 ou de 10 ? 4 virgule 9, c'est presque 5. 5 fois 2, ça fait 10. Le calcul exact donne 9 virgule 8 : tout près de 10.",
+  "09-defi": "À toi de jouer ! Une console coûte 250 euros. Inès fait 10 % de réduction. Quel est le nouveau prix ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 10 % de 250, c'est 250 divisé par 10 : 25 euros. Le nouveau prix : 250 moins 25, 225 euros.",
+  "10-finale": "Ce que tu as appris. La moitié : diviser par 2. Le double : fois 2. Le quart : la moitié de la moitié. 10 % : diviser par 10. Un ordre de grandeur vérifie le résultat.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

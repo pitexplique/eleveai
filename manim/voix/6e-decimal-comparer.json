@@ -1,0 +1,17 @@
+{
+  "00-garde": "Comparer des nombres décimaux. Comment savoir lequel est le plus grand ?",
+  "01-situation": "Voici Sofia. Elle est biologiste marine. Elle mesure des tortues de mer. La tortue Perle : 0 virgule 7 mètre. La tortue Corail : 0 virgule 65 mètre. Laquelle est la plus grande ?",
+  "02-piege": "Beaucoup pensent : 65 est plus grand que 7, donc Corail est plus grande. C'est faux ! Après la virgule, on ne compare pas comme des entiers.",
+  "03-methode": "On compare rang par rang, en partant de la gauche. Les unités : 0 et 0, égalité. Les dixièmes : 7 et 6. 7 est plus grand. Donc 0 virgule 7 est plus grand que 0 virgule 65. Perle est la plus grande.",
+  "04-zero": "Une astuce : un zéro à la fin ne change pas le nombre. 0 virgule 7, c'est 0 virgule 70. 70 centièmes contre 65 centièmes : 70 gagne.",
+  "05-question": "Question ! Quel nombre est le plus grand ? A : 0 virgule 45. B : 0 virgule 5. C : 0 virgule 405. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Au rang des dixièmes : 5 contre 4. 0 virgule 5 gagne.",
+  "06-unites": "D'abord les unités ! 3 virgule 06 et 2 virgule 9 : 3 unités contre 2. 3 virgule 06 est le plus grand, même avec son petit 0.",
+  "07-ranger": "Sofia range trois tortues, de la plus petite à la plus grande : 0 virgule 65, puis 0 virgule 7, puis 0 virgule 72. 0 virgule 65 est plus petit que 0 virgule 7, qui est plus petit que 0 virgule 72.",
+  "08-question": "Question ! Compare 12 virgule 13 et 12 virgule 2. A : 12 virgule 13 est plus petit. B : 12 virgule 13 est plus grand. C : ils sont égaux. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Les unités sont égales. Aux dixièmes : 1 contre 2. 12 virgule 13 est plus petit que 12 virgule 2.",
+  "09-defi": "À toi de jouer ! Range ces tailles de la plus petite à la plus grande : 1 virgule 5 ; 1 virgule 05 ; 1 virgule 45. Mets pause, et cherche !",
+  "09b-correction": "Correction. Les unités sont toutes égales à 1. Aux dixièmes : 5, 0 et 4. Le plus petit est 1 virgule 05, puis 1 virgule 45, puis 1 virgule 5.",
+  "10-finale": "Ce que tu as appris. On compare rang par rang, en partant de la gauche. Un zéro à la fin ne change rien : 0 virgule 7 égale 0 virgule 70. Plus de chiffres ne veut pas dire plus grand.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

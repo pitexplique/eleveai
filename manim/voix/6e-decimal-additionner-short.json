@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'ai 5 euros. J'achète des bonbons à 2 virgule 75 euros. 5 moins 2, ça fait 3, et je garde les 75 centimes. Il me reste 3 virgule 75 euros ! Tu paries ?",
+  "01-verif": "Je vérifie : 3 virgule 75 plus 2 virgule 75, ça fait 6 virgule 5. C'est plus que mes 5 euros ! Il y a un problème.",
+  "02-question": "Question ! Combien me reste-t-il ? A : 3 virgule 75 euros. B : 2 virgule 25 euros. C : 3 virgule 25 euros. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 5 euros, c'est 5 virgule 00. 5 virgule 00 moins 2 virgule 75, ça fait 2 virgule 25.",
+  "03-ouf": "Et 2 virgule 25 plus 2 virgule 75, ça fait bien 5. Ouf, mon porte-monnaie est d'accord !",
+  "04-commentaire": "À toi : j'ai 10 euros. J'achète un livre à 6 virgule 40 euros. Combien me reste-t-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

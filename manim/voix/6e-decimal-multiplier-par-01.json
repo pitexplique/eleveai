@@ -1,0 +1,17 @@
+{
+  "00-garde": "Multiplier par 0 virgule 1, 0 virgule 01 ou 0 virgule 001. Pourquoi le nombre devient-il plus petit ?",
+  "01-situation": "Voici Kenzo. Il fabrique des maquettes pour le cinéma. Une vraie tour mesure 37 mètres. Sa maquette doit être 10 fois plus petite. Il calcule 37 fois 0 virgule 1.",
+  "02-sens": "0 virgule 1, c'est un dixième. Prendre un dixième de 37, c'est partager 37 en 10. Multiplier par 0 virgule 1, c'est diviser par 10.",
+  "03-valeur": "Chaque chiffre devient dix fois plus petit : il descend d'un rang. 3 dizaines deviennent 3 unités. 7 unités deviennent 7 dixièmes. 37 fois 0 virgule 1, ça fait 3 virgule 7. La maquette mesure 3 virgule 7 mètres.",
+  "04-raccourci": "Le raccourci : la virgule se décale d'un rang vers la gauche.",
+  "05-question": "Question ! Combien font 52 fois 0 virgule 1 ? A : 520. B : 5 virgule 2. C : 0 virgule 52. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Chaque chiffre descend d'un rang : 5 dizaines deviennent 5 unités. 5 virgule 2.",
+  "06-001": "Pour un petit décor, Kenzo fait 100 fois plus petit : fois 0 virgule 01. Chaque chiffre descend de deux rangs. 37 fois 0 virgule 01, ça fait 0 virgule 37 mètre. Et fois 0 virgule 001 : trois rangs. 37 fois 0 virgule 001, ça fait 0 virgule 037 mètre.",
+  "07-piege": "Attention ! Multiplier par 0 virgule 1 ne rend jamais plus grand. Si ton résultat grandit, tu t'es trompé de sens. 370, c'est 37 fois 10, pas 37 fois 0 virgule 1.",
+  "08-question": "Question ! Combien font 5 virgule 2 fois 0 virgule 01 ? A : 0 virgule 52. B : 0 virgule 052. C : 520. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Chaque chiffre descend de deux rangs : 5 unités deviennent 5 centièmes. 0 virgule 052.",
+  "09-defi": "À toi de jouer ! Un vrai camion mesure 12 virgule 5 mètres. Kenzo multiplie par 0 virgule 01 pour sa maquette. Combien mesure-t-elle ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Chaque chiffre descend de deux rangs. 1 dizaine devient 1 dixième. 2 unités deviennent 2 centièmes. 5 dixièmes deviennent 5 millièmes. La maquette mesure 0 virgule 125 mètre.",
+  "10-finale": "Ce que tu as appris. Fois 0 virgule 1, c'est diviser par 10 : chaque chiffre descend d'un rang. Fois 0 virgule 01 : deux rangs. Fois 0 virgule 001 : trois rangs. Le nombre devient plus petit.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

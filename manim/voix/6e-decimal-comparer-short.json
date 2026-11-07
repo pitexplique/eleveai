@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Trois bouteilles de jus : 1 virgule 5 litre, 1 virgule 25 litre et 1 virgule 125 litre. Je prends la plus grosse : celle qui a le plus de chiffres ! Tu paries que j'ai raison ?",
+  "01-verser": "On verse chaque bouteille dans un pot. Oh non ! Mon pot est le moins rempli.",
+  "02-question": "Question ! Quelle bouteille contient le plus de jus ? A : 1 virgule 125 litre. B : 1 virgule 25 litre. C : 1 virgule 5 litre. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! Avec des zéros : 1 virgule 500, 1 virgule 250, 1 virgule 125. 500 millièmes, c'est le plus.",
+  "03-lecon": "J'ai compris : le plus de chiffres, ce n'est pas le plus grand !",
+  "04-commentaire": "À toi : range du plus petit au plus grand : 2 virgule 3 ; 2 virgule 03 ; 2 virgule 33. Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

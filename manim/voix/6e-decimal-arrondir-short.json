@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Mon gâteau pèse 2 virgule 46 kilogrammes. Je l'arrondis à l'unité, en deux fois. Au dixième : 2 virgule 5. Puis à l'unité : 3 ! Tu paries que c'est juste ?",
+  "01-droite": "On place 2 virgule 46 sur la droite. Il est entre 2 et 3... et bien plus près de 2 !",
+  "02-question": "Question ! Quel est l'arrondi à l'unité de 2 virgule 46 ? A : 2. B : 3. C : 2 virgule 5. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! On regarde seulement le chiffre des dixièmes : 4. On garde 2.",
+  "03-lecon": "Ma faute : j'ai arrondi deux fois. Le 2 virgule 5 m'a trompé. On arrondit en une seule fois !",
+  "04-commentaire": "À toi : arrondis 7 virgule 45 à l'unité. Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'offre 4 glaces à mes copains. Une glace coûte 1 virgule 5 euro. 15 fois 4, ça fait 60. Je paie 60 euros ! Tu paries ?",
+  "01-marchand": "60 euros pour 4 glaces ? Le marchand rigole. Une glace coûte moins de 2 euros. Alors 4 glaces coûtent moins de 8 euros !",
+  "02-question": "Question ! Combien je paie ? A : 60 euros. B : 6 euros. C : 0 virgule 6 euro. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 1 virgule 5 a un chiffre après la virgule. Le prix aussi : 6 virgule 0. 6 euros.",
+  "03-ouf": "J'avais oublié de remettre la virgule. Ouf, mon porte-monnaie respire !",
+  "04-commentaire": "À toi : combien coûtent 6 croissants à 1 virgule 2 euro ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
