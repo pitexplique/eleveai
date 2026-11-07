@@ -1,7 +1,7 @@
 // Les annonces de la banderole rouge (supabase/banderole_realisations.sql).
-// Relues toutes les 10 minutes : une ligne ajoutée dans Supabase défile
-// sans redéployer. Liste vide si la table n'existe pas encore : le composant
-// prend alors sa liste de secours.
+// Relues toutes les 10 minutes. La banderole est fixe depuis le 05/11 : elle
+// affiche la PREMIÈRE ligne, modifiable dans Supabase sans redéployer. Liste vide
+// si la table n'existe pas encore : le composant prend alors sa phrase de secours.
 
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
