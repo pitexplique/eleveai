@@ -68,7 +68,7 @@ export const COTE_DIVOIRE_6E: ProgrammePays = {
       texte: "Nombres décimaux relatifs : ℤ et 𝔻, opposé, comparaison, droite graduée (lire, graduer, placer), somme de deux décimaux relatifs.",
       couverture: "complete",
       micros: [
-        ...m("5e", "relatif_lire", "relatif_signe", "relatif_oppose", "relatif_comparer", "relatif_placer", "relatif_addition"),
+        ...m("5e", "relatif_lire", "relatif_signe", "relatif_oppose", "relatif_comparer", "relatif_placer", "relatif_addition", "relatif_defi"),
         ...m("seconde", "reels_ensembles"),
       ],
     },
@@ -134,7 +134,7 @@ export const COTE_DIVOIRE_6E: ProgrammePays = {
       texte: "Triangles : rectangle, isocèle, équilatéral ; hauteur, médiane, médiatrice d'un côté ; construire (compas, règle) ; périmètre et aire.",
       couverture: "complete",
       micros: [
-        ...m("6e", "triangle_type_cote", "triangle_type_angle", "mediatrice_construire"),
+        ...m("6e", "triangle_type_cote", "triangle_type_angle", "triangle_defi", "mediatrice_construire"),
         ...m("5e", "triangle_construire", "aire_triangle"),
         ...m("4e", "triangle_droites", "aire_perimetre_triangle", "mediane_triangle"),
       ],
@@ -180,6 +180,7 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
       texte: "Nombres premiers : puissance d'exposant entier d'un entier naturel, priorité de la puissance, (a × b)ⁿ = aⁿ × bⁿ, aⁿ × aᵐ = aⁿ⁺ᵐ ; division euclidienne (égalité, encadrement de a entre deux multiples consécutifs de b) ; reconnaître un nombre premier (2 ou 3 chiffres), décomposer en produit de facteurs premiers.",
       couverture: "complete",
       micros: [
+        ...m("5e", "puissance_simple_notation", "puissance_simple_calculer"),
         ...m("4e", "puissance_comprendre", "puissance_calculer", "puissance_calcul", "div_euclidienne", "premier_definition", "premier_determiner", "premier_decomposer"),
         ...m("3e", "entier_puissance_calcul"),
         ...m("seconde", "puiss_meme_exposant"),
@@ -227,7 +228,7 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
       code: "C3-L1", domaine: GPLAN,
       texte: "Angles : adjacents, complémentaires, supplémentaires, opposés par le sommet ; somme des angles d'un triangle (calculer le troisième angle).",
       couverture: "complete",
-      micros: m("5e", "angle_paires", "triangle_somme_angle"),
+      micros: [...m("5e", "angle_paires", "triangle_somme_angle"), ...m("6e", "triangle_angle_manquant", "triangle_propriete_defi")],
     },
     {
       code: "C3-L2", domaine: GPLAN,
@@ -243,7 +244,7 @@ export const COTE_DIVOIRE_5E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("5e", "triangle_inegalite", "triangle_nature", "triangle_construire"),
-        ...m("6e", "bissectrice_construire", "sym_axe"),
+        ...m("6e", "bissectrice_construire", "sym_axe", "triangle_possible_ou_non"),
       ],
       note: "La bissectrice se construit chez nous par pliage ou au rapporteur : manque la construction au compas.",
     },
@@ -421,6 +422,7 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       texte: "Racines carrées : ℝ, racine carrée d'un positif, √(a²) = |a|, valeur absolue, propriétés (produit, quotient), expressions conjuguées et quotient sans radical au dénominateur, sommes et produits avec radicaux.",
       couverture: "complete",
       micros: [
+        ...m("5e", "relatif_valeur_absolue"),
         ...m("3e", "entier_racine_comprendre", "entier_racine_calculer"),
         ...m("seconde", "racine_carre_de_a2", "racine_produit", "racine_simplification", "racine_somme", "valeur_absolue_distance", "ir_difference_carres", "racine_denominateur_rationnel"),
       ],

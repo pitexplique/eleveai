@@ -93,7 +93,7 @@ export const SENEGAL_6E: ProgrammePays = {
       micros: [
         ...m("cm2", "calcul_priorite"),
         ...m("6e", "algebre_barres"),
-        ...m("5e", "litteral_expression_comprendre", "litteral_substituer"),
+        ...m("5e", "litteral_expression_comprendre", "litteral_substituer", "puissance_simple_litteral"),
       ],
     },
     {
@@ -106,7 +106,7 @@ export const SENEGAL_6E: ProgrammePays = {
       code: "AN 8", domaine: AN,
       texte: "Nombres décimaux relatifs : ℤ et 𝔻, lecture, signe, opposé, comparaison.",
       couverture: "complete",
-      micros: m("5e", "relatif_lire", "relatif_signe", "relatif_oppose", "relatif_comparer", "relatif_placer"),
+      micros: m("5e", "relatif_lire", "relatif_signe", "relatif_oppose", "relatif_comparer", "relatif_placer", "relatif_defi"),
     },
     {
       code: "AN 9", domaine: AN,
@@ -124,7 +124,7 @@ export const SENEGAL_6E: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("cm2", "droite_reconnaitre"),
-        ...m("6e", "distance_definition", "distance_milieu", "distance_inegalite", "aire_longueur_mesurer", "aire_perimetre_figure"),
+        ...m("6e", "distance_definition", "distance_milieu", "distance_inegalite", "triangle_possible_ou_non", "aire_longueur_mesurer", "aire_perimetre_figure"),
       ],
     },
     {
@@ -164,7 +164,7 @@ export const SENEGAL_6E: ProgrammePays = {
       texte: "Polygones : triangles (vocabulaire, droites remarquables, triangles particuliers et leurs axes de symétrie) ; parallélogramme, trapèze, rectangle, losange, carré : description, construction.",
       couverture: "complete",
       micros: [
-        ...m("6e", "triangle_nommer", "triangle_sommet_cote", "triangle_type_cote", "triangle_type_angle", "quadrilatere_nommer_vocabulaire", "quadrilatere_identifier_nature", "quadrilatere_lire_propriete", "quadrilatere_completer_construire", "sym_axe"),
+        ...m("6e", "triangle_nommer", "triangle_sommet_cote", "triangle_type_cote", "triangle_type_angle", "triangle_defi", "quadrilatere_nommer_vocabulaire", "quadrilatere_identifier_nature", "quadrilatere_lire_propriete", "quadrilatere_completer_construire", "sym_axe"),
         ...m("5e", "triangle_construire"),
         ...m("4e", "triangle_droites", "mediane_triangle"),
       ],
@@ -210,7 +210,7 @@ export const SENEGAL_5E: ProgrammePays = {
       code: "AN 1", domaine: AN,
       texte: "Puissances dans 𝔻 : écriture, calcul, puissances de 10.",
       couverture: "complete",
-      micros: m("4e", "puissance_comprendre", "puissance_calculer", "puissance_dix", "puissance_calcul"),
+      micros: [...m("5e", "puissance_simple_notation", "puissance_simple_valeurs", "puissance_simple_calculer"), ...m("4e", "puissance_comprendre", "puissance_calculer", "puissance_dix", "puissance_calcul")],
     },
     {
       code: "AN 2", domaine: AN,
@@ -248,7 +248,7 @@ export const SENEGAL_5E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("5e", "relatif_addition", "relatif_soustraction", "relatif_calcul", "relatif_comparer"),
-        ...m("4e", "relatif_multiplication", "relatif_division", "equation_resoudre_simple", "inequation_college"),
+        ...m("4e", "relatif_multiplication", "relatif_division", "relatif_operation_defi", "equation_resoudre_simple", "inequation_college"),
         ...m("seconde", "inequation_resoudre"),
       ],
       note: "Pas de micro sur la suppression des parenthèses (a − (b − c) = a − b + c).",
@@ -291,7 +291,7 @@ export const SENEGAL_5E: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("5e", "triangle_somme_angle", "triangle_nature", "triangle_construire"),
-        ...m("6e", "circonscrit_concourantes", "circonscrit_construire"),
+        ...m("6e", "triangle_angle_manquant", "triangle_propriete_defi", "circonscrit_concourantes", "circonscrit_construire"),
         ...m("4e", "triangle_droites", "orthocentre"),
       ],
     },

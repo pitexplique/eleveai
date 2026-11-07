@@ -57,7 +57,7 @@ export const BELGIQUE_S1: ProgrammePays = {
       code: "1.2 Sv1", domaine: GEO, texte: "Les figures, leurs composantes, caractéristiques et propriétés : triangles, quadrilatères, polygones réguliers, angles particuliers ; médiatrice, bissectrice, droites remarquables du triangle (identifier, définir, propriétés) ; quadrilatères à axe(s) ou centre de symétrie.",
       couverture: "complete",
       micros: [
-        ...m("6e", "triangle_type_cote", "triangle_type_angle", "quadrilatere_identifier_nature", "angle_reconnaitre", "mediatrice_definition", "bissectrice_definition", "circonscrit_concourantes", "sym_axe"),
+        ...m("6e", "triangle_sommet_cote", "triangle_type_cote", "triangle_type_angle", "triangle_defi", "quadrilatere_identifier_nature", "angle_reconnaitre", "mediatrice_definition", "bissectrice_definition", "circonscrit_concourantes", "sym_axe"),
         ...m("5e", "para_diagonales", "polygone_regulier_reconnaitre"),
         ...m("4e", "triangle_droites", "mediane_triangle", "centre_gravite", "orthocentre"),
       ],
@@ -83,14 +83,14 @@ export const BELGIQUE_S1: ProgrammePays = {
     },
     {
       code: "1.3 Sv2", domaine: GEO, texte: "Les angles et leurs propriétés : complémentaires, supplémentaires, opposés par le sommet ; somme des angles d'un triangle et d'un quadrilatère.",
-      couverture: "partielle", micros: [...m("5e", "angle_paires", "triangle_somme_angle")], note: "La somme des angles d'un quadrilatère (360°) n'a pas de micro.",
+      couverture: "partielle", micros: [...m("5e", "angle_paires", "triangle_somme_angle"), ...m("6e", "triangle_angle_manquant", "triangle_propriete_defi")], note: "La somme des angles d'un quadrilatère (360°) n'a pas de micro.",
     },
     {
       code: "1.3 SF1", domaine: GEO, texte: "Construire l'image d'un triangle ou d'un quadrilatère par les quatre isométries (rotation de ±90°) ; retrouver les éléments caractéristiques quand la figure et son image sont données.",
       couverture: "partielle", micros: [...m("6e", "sym_figure"), ...m("5e", "sym_centrale_figure"), ...m("4e", "sym_translation", "sym_rotation")],
       note: "On reconnaît une rotation sans en construire l'image ; retrouver l'axe, le centre ou la translation à partir d'une figure et de son image n'est pas entraîné.",
     },
-    { code: "1.3 SF2", domaine: GEO, texte: "Déterminer l'amplitude d'un angle avec les angles complémentaires, supplémentaires, opposés par le sommet et la somme des angles du triangle et du quadrilatère.", couverture: "partielle", micros: [...m("5e", "angle_paires", "triangle_somme_angle"), ...m("6e", "triangle_angle_manquant")], note: "La somme des angles d'un quadrilatère (360°) n'a pas de micro." },
+    { code: "1.3 SF2", domaine: GEO, texte: "Déterminer l'amplitude d'un angle avec les angles complémentaires, supplémentaires, opposés par le sommet et la somme des angles du triangle et du quadrilatère.", couverture: "partielle", micros: [...m("5e", "angle_paires", "triangle_somme_angle"), ...m("6e", "triangle_angle_manquant", "triangle_propriete_defi")], note: "La somme des angles d'un quadrilatère (360°) n'a pas de micro." },
     { code: "1.3 SF3", domaine: GEO, texte: "Utiliser des propriétés pour construire : terminer une figure sous contraintes (droites remarquables, symétries) ; cercle inscrit et cercle circonscrit à un triangle.", couverture: "partielle", micros: [...m("6e", "circonscrit_construire", "quadrilatere_completer_construire"), ...m("4e", "cercle_inscrit")], note: "Le cercle inscrit s'utilise ; sa construction n'est pas entraînée." },
     { code: "1.3 SF4", domaine: GEO, texte: "Justifier l'amplitude d'un angle en utilisant des propriétés.", couverture: "partielle", micros: [...m("5e", "angle_paires"), ...m("6e", "bissectrice_probleme")], note: "On calcule l'angle, on ne rédige pas la justification." },
     {
@@ -133,14 +133,14 @@ export const BELGIQUE_S1: ProgrammePays = {
     {
       code: "3.2 Sv1", domaine: NBR, texte: "Les opérations et leurs propriétés : vocabulaire (terme, facteur, dividende, reste, base, exposant) ; addition d'entiers sur la droite ; règles des signes pour × et ÷ ; puissance à exposant naturel ; commutativité, associativité, neutre, absorbant ; justifier le calcul mental (×5, ×9, ×11) ; carrés jusqu'à 15² ; principes d'équivalence d'une égalité.",
       couverture: "partielle",
-      micros: [...m("5e", "relatif_addition"), ...m("4e", "relatif_multiplication", "relatif_division", "puissance_comprendre", "pythagore_carre_racine", "equation_resoudre_simple"), ...m("6e", "entier_strategie_mentale", "entier_division_posee"), ...m("3e", "entier_racine_carre_parfait"), ...m("ce2", "ce2_add_sous_vocabulaire", "ce2_multiplication_vocabulaire"), ...m("ce1", "ce1_multiplication_commutativite")],
-      note: "L'associativité, l'élément neutre et l'élément absorbant n'ont pas de micro.",
+      micros: [...m("5e", "relatif_addition"), ...m("4e", "relatif_multiplication", "relatif_division", "relatif_operation_defi", "puissance_comprendre", "pythagore_carre_racine", "equation_resoudre_simple"), ...m("5e", "puissance_simple_notation", "puissance_simple_valeurs"), ...m("6e", "entier_strategie_mentale", "entier_division_posee"), ...m("3e", "entier_racine_carre_parfait"), ...m("ce2", "ce2_add_sous_vocabulaire", "ce2_multiplication_vocabulaire"), ...m("ce1", "ce1_multiplication_commutativite")],
+      note: "L'associativité, l'élément neutre et l'élément absorbant n'ont pas de micro ; les carrés de 13² à 15² ne sont pas entraînés (micro : de 0 à 12).",
     },
-    { code: "3.2 SF1", domaine: NBR, texte: "Exploiter des expressions algébriques : réduire les termes semblables, produit de monômes du 1er degré ; valeur numérique.", couverture: "complete", micros: [...m("5e", "litteral_reduire", "litteral_substituer"), ...m("4e", "litteral_expression_reduire")] },
+    { code: "3.2 SF1", domaine: NBR, texte: "Exploiter des expressions algébriques : réduire les termes semblables, produit de monômes du 1er degré ; valeur numérique.", couverture: "complete", micros: [...m("5e", "litteral_reduire", "litteral_substituer", "puissance_simple_litteral"), ...m("4e", "litteral_expression_reduire")] },
     { code: "3.2 SF2", domaine: NBR, texte: "Résoudre une équation ax = b, ax + b = c (a, b, c entiers), vérifier la solution, écrire une équation de solution donnée.", couverture: "partielle", micros: m("4e", "equation_resoudre_simple", "equation_verifier"), note: "Écrire soi-même une équation de solution donnée n'est pas entraîné." },
     {
       code: "3.2 SF3", domaine: NBR, texte: "Procédures de calcul : fractions équivalentes, simplifier, rendre irréductible ; les quatre opérations sur les entiers ; propriétés et distributivité ; priorités ; puissance de base et exposant naturels.",
-      couverture: "complete", micros: [...m("5e", "fraction_egale", "fraction_simplifier", "litteral_distributivite"), ...m("4e", "relatif_calcul", "puissance_calculer"), ...m("cm2", "calcul_priorite")],
+      couverture: "complete", micros: [...m("5e", "fraction_egale", "fraction_simplifier", "litteral_distributivite"), ...m("4e", "relatif_calcul", "relatif_operation_defi", "puissance_calculer"), ...m("5e", "puissance_simple_calculer"), ...m("cm2", "calcul_priorite")],
     },
     { code: "3.2 SF4", domaine: NBR, texte: "Utiliser une calculatrice ; estimer l'ordre de grandeur d'un résultat ; vérifier sa plausibilité.", couverture: "partielle", micros: [...m("4e", "ordre_estimer", "ordre_vraisemblance"), ...m("6e", "entier_calcul_verifier")], note: "L'usage de la calculatrice n'est pas entraîné par le coach." },
     { code: "3.2 C1", domaine: NBR, texte: "Résoudre des problèmes : traduire par un schéma, une expression ou une équation ; associer une situation à une équation ; rédiger un énoncé.", couverture: "partielle", micros: [...m("6e", "algebre_barres"), ...m("4e", "equation_traduire", "equation_probleme")], note: "Rédiger un énoncé n'est pas entraîné." },
@@ -243,13 +243,13 @@ export const BELGIQUE_S3: ProgrammePays = {
   version: VERSION,
   contenus: [
     { code: "1.1 Sv1", domaine: GEO, texte: "Vers les figures semblables : configuration de Thalès, égalités de rapports, parallélisme justifié par des rapports égaux.", couverture: "complete", micros: m("3e", "thales_configuration", "thales_rapport", "thales_reciproque") },
-    { code: "1.1 Sv2", domaine: GEO, texte: "Distances : condition d'existence d'un triangle (inégalité triangulaire), vérifier si trois longueurs conviennent.", couverture: "complete", micros: m("3e", "triangle_inegalite") },
+    { code: "1.1 Sv2", domaine: GEO, texte: "Distances : condition d'existence d'un triangle (inégalité triangulaire), vérifier si trois longueurs conviennent.", couverture: "complete", micros: [...m("3e", "triangle_inegalite"), ...m("6e", "triangle_possible_ou_non")] },
     { code: "1.1 Sv3", domaine: GEO, texte: "Le théorème de Pythagore : l'énoncer, écrire les relations d'un triangle rectangle donné.", couverture: "complete", micros: [...m("3e", "pythagore_reconnaitre"), ...m("4e", "pythagore_calculer_hypotenuse")] },
     {
       code: "1.1 SF1", domaine: GEO, texte: "Calculer : longueur par Thalès ou triangles semblables ; longueurs possibles du 3e côté ; côtés d'un triangle rectangle ; distance de deux points dans un repère ; diagonale d'un rectangle, d'un cube, d'un pavé.",
       couverture: "complete", micros: [...m("3e", "thales_calculer_longueur", "triangle_inegalite", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_solide"), ...m("4e", "triangle_semblable"), ...m("seconde", "repere_distance")],
     },
-    { code: "1.1 SF2", domaine: GEO, texte: "Justifier : parallélisme par des longueurs, constructibilité d'un triangle, triangle rectangle (réciproque de Pythagore) ou non (contraposée).", couverture: "complete", micros: [...m("3e", "thales_reciproque", "pythagore_reciproque", "triangle_inegalite"), ...m("4e", "pythagore_reciproque_conclure")] },
+    { code: "1.1 SF2", domaine: GEO, texte: "Justifier : parallélisme par des longueurs, constructibilité d'un triangle, triangle rectangle (réciproque de Pythagore) ou non (contraposée).", couverture: "complete", micros: [...m("3e", "thales_reciproque", "pythagore_reciproque", "triangle_inegalite"), ...m("4e", "pythagore_reciproque_conclure"), ...m("6e", "triangle_possible_ou_non")] },
     { code: "1.1 C1", domaine: GEO, texte: "Résoudre un problème avec Thalès ou Pythagore et justifier chaque étape en langage courant et mathématique.", couverture: "complete", micros: m("3e", "thales_rediger", "pythagore_rediger", "thales_defi", "pythagore_defi") },
     {
       code: "2.1 Sv1", domaine: GRA, texte: "Du proportionnel à la relation entre variables : sur un graphique, image, zéro, ordonnée à l'origine, minimum, maximum, croissance, signe ; fonction du 1er degré : zéro, ordonnée à l'origine, signe et valeur du taux de variation, trois représentations, reconnaître le modèle linéaire.",

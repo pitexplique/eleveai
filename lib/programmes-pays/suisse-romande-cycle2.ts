@@ -177,7 +177,7 @@ export const SUISSE_7_8H: ProgrammePays = {
     c("MSN 22-i", NB, "Diverses écritures d'un même nombre (la moitié = 1/2 = 0,5 = 5 dixièmes…) ; moitié, tiers, quart, trois quarts, dixième d'une quantité.", "complete",
       [...m("cm2", "fraction_lire", "fraction_representer", "fraction_decimale", "decimal_fraction", "fraction_equivalente", "fraction_quantite"), ...m("6e", "fraction_decimal")]),
     c("MSN 22-j", NB, "Écriture des nombres à l'aide de puissances (8 = 2³…).", "complete",
-      m("4e", "puissance_comprendre"), "Chez nous en 4e."),
+      [...m("5e", "puissance_simple_notation", "puissance_simple_ecrire"), ...m("4e", "puissance_comprendre")], "Carré et cube en 5e chez nous (programme 2026), les autres exposants en 4e."),
     NUMERATIONS,
     PROBLEMES,
     c("MSN 23-a", OP, "Traduire un problème en opérations (+, −, ×, ÷), avec parenthèses au besoin ; lire, utiliser et élaborer des tableaux de valeurs ; lire des représentations graphiques.", "complete",

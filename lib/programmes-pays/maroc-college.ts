@@ -82,7 +82,7 @@ export const MAROC_1AC: ProgrammePays = {
       code: "S1-4", domaine: AN,
       texte: "Nombres décimaux relatifs : ranger dans l'ordre croissant ou décroissant, graduer une droite.",
       couverture: "complete",
-      micros: m("5e", "relatif_lire", "relatif_comparer", "relatif_placer", "relatif_oppose"),
+      micros: m("5e", "relatif_lire", "relatif_comparer", "relatif_placer", "relatif_oppose", "relatif_defi"),
     },
     {
       code: "S1-5", domaine: AN,
@@ -98,7 +98,7 @@ export const MAROC_1AC: ProgrammePays = {
       texte: "Multiplication et division des relatifs : produit de plusieurs facteurs, inverse, écriture a/b, valeurs approchées et encadrement d'un quotient.",
       couverture: "complete",
       micros: [
-        ...m("4e", "relatif_multiplication", "relatif_division", "fraction_inverse"),
+        ...m("4e", "relatif_multiplication", "relatif_division", "relatif_operation_defi", "fraction_inverse"),
         ...m("6e", "decimal_arrondir", "decimal_encadrer"),
         ...m("5e", "approx_encadrer_quotient", "approx_defaut_exces"),
       ],
@@ -107,8 +107,8 @@ export const MAROC_1AC: ProgrammePays = {
       code: "S1-7", domaine: AN,
       texte: "Puissances d'un relatif, propriétés, puissances de 10 ; savoir lire l'écriture scientifique donnée par la calculatrice.",
       couverture: "complete",
-      micros: m("4e", "puissance_comprendre", "puissance_calculer", "puissance_dix", "puissance_notation_scientifique", "puissance_calcul"),
-      note: "Chez nous, les puissances commencent en 4e.",
+      micros: [...m("5e", "puissance_simple_notation", "puissance_simple_calculer"), ...m("4e", "puissance_comprendre", "puissance_calculer", "puissance_dix", "puissance_notation_scientifique", "puissance_calcul")],
+      note: "Chez nous, le carré et le cube sont en 5e (programme 2026), les autres exposants et les puissances de 10 en 4e.",
     },
     {
       code: "S1-8", domaine: AG,
@@ -124,7 +124,7 @@ export const MAROC_1AC: ProgrammePays = {
       texte: "Le triangle : somme des angles égale à 180°, triangles particuliers ; construire un triangle de côtés connus ; inégalité triangulaire.",
       couverture: "complete",
       micros: [
-        ...m("6e", "triangle_somme_angle", "triangle_angle_manquant", "triangle_possible_ou_non"),
+        ...m("6e", "triangle_somme_angle", "triangle_angle_manquant", "triangle_possible_ou_non", "triangle_propriete_defi"),
         ...m("5e", "triangle_nature", "triangle_inegalite", "triangle_construire"),
       ],
     },
