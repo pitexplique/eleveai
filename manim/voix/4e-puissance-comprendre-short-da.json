@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Plie une feuille en deux. Encore. Et encore. Combien de couches ?",
+  "01-pliages": "1 pliage : 2 couches. 2 pliages : 2 fois 2, 4 couches.",
+  "01q-question": "Question ! Après 3 pliages, combien de couches ? A : 6. B : 8. C : 9. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 8. 2 fois 2 fois 2 : 2 puissance 3.",
+  "02-suite": "4 pliages : 16 couches. 5 pliages : 2 fois 2 fois 2 fois 2 fois 2. On écrit 2 puissance 5 : 32 couches. Pas 2 fois 5 !",
+  "03-question": "Après 7 pliages, combien de couches ? Écris-le avec une puissance, et réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
