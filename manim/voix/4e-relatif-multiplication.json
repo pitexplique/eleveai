@@ -1,0 +1,19 @@
+{
+  "00-garde": "Multiplier des nombres relatifs. Pourquoi moins par moins, ça fait plus ?",
+  "01-glacier": "Léa est glaciologue : elle mesure les glaciers. Celui-ci perd 4 mètres d'épaisseur par an. Perdre, c'est moins 4. Dans 3 ans, de combien aura-t-il changé ? Moins 4 fois 3.",
+  "02-differents": "Une perte répétée 3 fois : moins 4, moins 4, moins 4. En tout, moins 12. Moins 4 fois 3 égale moins 12.",
+  "03-methode": "La méthode : le signe d'abord. Signes différents : le résultat est négatif. Puis les distances à zéro : 4 fois 3, 12. Résultat : moins 12.",
+  "03q-question": "Question ! Que vaut 6 fois moins 3 ? A : 18. B : moins 18. C : 3. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : moins 18. Signes différents, donc négatif. Et 6 fois 3, 18.",
+  "04-passe": "Maintenant, le mystère. Un autre glacier perd 5 mètres par an : moins 5. Remontons le temps. Il y a 2 ans, c'est le temps moins 2. Il y a 2 ans, ce glacier était-il plus épais, ou moins épais ?",
+  "05-film": "Plus épais, bien sûr : il n'avait pas encore perdu ces 10 mètres. Il avait 10 mètres de plus. Moins 5 fois moins 2 égale plus 10. Une perte, en remontant le temps, ça redonne de la glace.",
+  "06-suite": "Regarde aussi cette suite. Moins 5 fois 2 : moins 10. Fois 1 : moins 5. Fois zéro : zéro. À chaque ligne, on monte de 5. Alors, fois moins 1 : 5. Fois moins 2 : 10. La suite continue toute seule.",
+  "07-table": "La règle des signes tient dans une table. Plus par plus : plus. Moins par moins : plus. Plus par moins, et moins par plus : moins. Deux signes identiques donnent plus. Deux signes différents donnent moins.",
+  "08-piege": "Le piège : appliquer cette table à une addition. Moins 5 fois moins 2, c'est 10. Mais moins 5 plus moins 2, c'est moins 7. La table, c'est seulement pour multiplier.",
+  "08q-question": "Question ! Que vaut moins 7 fois moins 1 ? A : moins 7. B : 7. C : moins 8. Mets pause, et choisis !",
+  "08r-reponse": "Réponse B : 7. Deux signes identiques : positif. Et 7 fois 1, 7.",
+  "09-defi": "À toi de jouer. Moins 4 fois moins 3. Et moins 1 fois 9. Mets pause, et cherche !",
+  "09b-correction": "Correction. Moins 4 fois moins 3 : signes identiques, positif, 12. Moins 1 fois 9 : signes différents, négatif, moins 9.",
+  "10-finale": "Ce que tu as appris. Le signe d'abord, puis les distances à zéro. Deux signes identiques donnent plus. Deux signes différents donnent moins.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

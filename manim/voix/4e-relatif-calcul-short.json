@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Bienvenue au jeu des 3 portes ! Derrière la bonne : la fête. Derrière les deux autres : plouf, dans la piscine !",
+  "01-situation": "Le calcul est au tableau : moins 2 plus 3 fois moins 4. Sur chaque porte, un résultat.",
+  "01q-question": "Question ! Quelle porte je dois ouvrir ? A : moins 4. B : moins 14. C : 10. Mets pause, et choisis !",
+  "02-porte-a": "J'essaie la porte A. Moins 2 plus 3 : 1. 1 fois moins 4 : moins 4. Plouf ! On n'a pas le droit de lire de gauche à droite.",
+  "03-porte-c": "La porte C. 3 fois 4 : 12. Moins 2 plus 12 : 10. Plouf ! J'ai oublié le moins du 4.",
+  "01r-reponse": "Réponse B : moins 14 ! La multiplication d'abord. 3 fois moins 4 : moins 12. Moins 2 plus moins 12 : moins 14. C'est la fête !",
+  "05-question": "À toi : moins 5 fois 2, plus moins 3 fois moins 4. Quel résultat ? Réponds en commentaire !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

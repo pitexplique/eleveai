@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Cet ascenseur est complètement fou. Tu paries que tu ne devines pas où il va me déposer ?",
+  "01-situation": "Je suis au parking, au niveau moins 3. J'appuie sur le bouton : plus 7.",
+  "01q-question": "Question ! À quel niveau je sors ? A : moins 10. B : 4. C : 10. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : niveau 4 ! Regarde.",
+  "02-trajet": "3 étages pour arriver à zéro, le rez-de-chaussée. Encore 4 étages : niveau 4. Moins 3 plus 7 égale 4.",
+  "03-fou": "Mais l'ascenseur s'emballe ! Moins 5 : je tombe au niveau moins 1. Encore moins 4 : niveau moins 5. Au secours, c'est la cave !",
+  "04-sauve": "Plus 5 : zéro pile ! Je saute dehors. Moins 5 plus 5, ça fait zéro.",
+  "05-question": "À toi : je pars du niveau 2. Moins 5, plus 9, moins 7. À quel niveau j'arrive ? Réponds en commentaire !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

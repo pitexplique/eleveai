@@ -1,0 +1,18 @@
+{
+  "00-garde": "Soustraire des nombres relatifs. Pourquoi enlever un nombre peut-il faire augmenter ?",
+  "01-meteo": "Mathis est météorologue. Ce matin, il compare deux villes. À Lyon, il fait 5 degrés. À Montréal, moins 3 degrés. Quel est l'écart de température ?",
+  "02-thermometre": "Sur le thermomètre, de moins 3 à zéro, il y a 3 degrés. De zéro à 5, il y a 5 degrés. En tout, 8 degrés d'écart.",
+  "03-calcul": "Un écart se calcule par une soustraction : 5 moins, entre parenthèses, moins 3. Et le résultat doit être 8. Donc enlever moins 3, c'est comme ajouter 3.",
+  "04-regle": "Voilà la règle : soustraire un nombre, c'est ajouter son opposé. L'opposé de moins 3, c'est 3. 5 moins, entre parenthèses, moins 3, devient 5 plus 3. Résultat : 8.",
+  "05-deux-moins": "Attention, ces deux moins ne disent pas la même chose. Le premier est une opération : on soustrait. Le second est un signe : celui du nombre moins 3.",
+  "05q-question": "Question ! 4 moins, entre parenthèses, moins 6 : ça revient à quel calcul ? A : 4 moins 6. B : 4 plus 6. C : moins 4 plus 6. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : 4 plus 6, donc 10. On ajoute l'opposé de moins 6.",
+  "06-baisse": "Autre soustraction. Il fait 6 degrés, et la température baisse de 9 degrés. 6 moins 9. On réécrit : 6 plus moins 9. Signes contraires : 9 moins 6, 3. Et 9 est le plus éloigné de zéro, avec un signe moins. Résultat : moins 3. Il fait moins 3 degrés.",
+  "07-piege": "Le piège : changer le signe du premier nombre. Dans moins 4 moins 3, seul le second nombre change. Moins 4 plus moins 3 : moins 7. Le moins 4, lui, ne bouge pas.",
+  "07q-question": "Question ! Que vaut moins 2 moins, entre parenthèses, moins 5 ? A : moins 7. B : 3. C : 7. Mets pause, et choisis !",
+  "07r-reponse": "Réponse B : 3. On ajoute l'opposé de moins 5 : moins 2 plus 5, 3. Le moins 7, c'est le piège.",
+  "08-defi": "À toi de jouer. Au sommet d'une montagne, il fait moins 7 degrés. Dans la vallée, 4 degrés. Quel est l'écart ? Et combien font moins 1 moins 6 ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 4 moins, entre parenthèses, moins 7 : 4 plus 7, 11 degrés d'écart. Moins 1 moins 6 : moins 1 plus moins 6, moins 7.",
+  "09-finale": "Ce que tu as appris. Soustraire, c'est ajouter l'opposé. Seul le second nombre change de signe. Ensuite, c'est une addition.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

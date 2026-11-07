@@ -1,0 +1,7 @@
+{
+  "voix": "4e-relatif-{ep}-short",
+  "sons": "public/sons/4e-relatif-{ep}-short",
+  "sortie": "manim/sorties/4e/maths/relatifs/{num}-{ep}",
+  "nom": "eleveai-maths-4e-relatif-{ep}-short",
+  "episodes": { "addition": "01", "soustraction": "02", "multiplication": "03", "division": "04", "calcul": "05", "probleme": "06", "defi": "07" }
+}

@@ -1,0 +1,19 @@
+{
+  "00-garde": "Diviser des nombres relatifs. Faut-il apprendre une nouvelle règle ?",
+  "01-plongee": "Nour est biologiste marine. Elle plonge pour observer des tortues. À la surface, sa position est zéro. Trois minutes plus tard, elle est à moins 12 mètres. De combien change sa position à chaque minute ? Moins 12 divisé par 3.",
+  "02-partage": "Les 12 mètres se partagent en 3 minutes : moins 4, moins 4, moins 4. Moins 12 divisé par 3 égale moins 4 : elle descend de 4 mètres par minute.",
+  "03-lien": "Vérifions avec une multiplication : moins 4 fois 3 égale moins 12. Diviser, c'est défaire une multiplication. Donc la division suit la même table des signes. Rien de nouveau à apprendre !",
+  "04-methode": "Le signe d'abord : moins 12 et 3 ont des signes différents, le résultat est négatif. Puis les distances à zéro : 12 divisé par 3, 4. Résultat : moins 4.",
+  "04q-question": "Question ! Que vaut 15 divisé par moins 3 ? A : 5. B : moins 5. C : 12. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : moins 5. Signes différents, donc négatif. Et 15 divisé par 3, 5.",
+  "05-temps": "Nour veut maintenant atteindre moins 20 mètres. Sa position change de moins 5 mètres par minute. Combien de minutes lui faut-il ? Moins 20 divisé par moins 5.",
+  "06-minutes": "Sur le dessin. Une minute : moins 5. Deux minutes : moins 10. Trois minutes : moins 15. Quatre minutes : moins 20. Il lui faut 4 minutes. Moins 20 divisé par moins 5 égale 4. Signes identiques : le résultat est positif.",
+  "07-verifier": "On vérifie : 4 fois moins 5, moins 20. C'est juste.",
+  "08-piege": "Le piège : croire que deux négatifs donnent un résultat négatif. Moins 18 divisé par moins 6, ce n'est pas moins 3. C'est 3. Car 3 fois moins 6, moins 18.",
+  "08q-question": "Question ! Que vaut moins 36 divisé par moins 9 ? A : moins 4. B : 4. C : moins 45. Mets pause, et choisis !",
+  "08r-reponse": "Réponse B : 4. Signes identiques, donc positif. Et 4 fois moins 9 donne bien moins 36.",
+  "09-defi": "À toi de jouer. Moins 24 divisé par 6. Et moins 35 divisé par moins 7. Mets pause, et cherche !",
+  "09b-correction": "Correction. Moins 24 divisé par 6 : signes différents, négatif : moins 4. Moins 35 divisé par moins 7 : signes identiques, positif : 5.",
+  "10-finale": "Ce que tu as appris. Diviser suit la même règle que multiplier. Deux signes identiques donnent plus. Deux signes différents donnent moins. Et pour vérifier, on multiplie.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,18 @@
+{
+  "00-garde": "Additionner des nombres relatifs. Comment ajouter des nombres négatifs sans se tromper de signe ?",
+  "01-jeu": "Inès est conceptrice de jeux vidéo. Dans son jeu, on gagne des points avec les bonus, et on en perd dans les pièges. Un joueur a moins 3 points. Il attrape un bonus de 7 points. Son score ? Moins 3 plus 7.",
+  "02-droite": "Sur la droite graduée, on part de moins 3. Ajouter 7, c'est avancer de 7 vers la droite. 3 pas pour arriver à zéro. Encore 4 pas : on arrive à 4. Moins 3 plus 7 égale 4.",
+  "03-contraires": "Regarde les deux nombres. Moins 3 et 7 ont des signes contraires : ils se compensent. On soustrait les distances à zéro : 7 moins 3, 4. Et on garde le signe du plus éloigné de zéro : ici 7, qui est positif.",
+  "03q-question": "Question ! Que vaut moins 8 plus 5 ? A : moins 13. B : moins 3. C : 3. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : moins 3. Signes contraires : 8 moins 5, 3. Et moins 8 est le plus éloigné de zéro, donc le résultat est négatif.",
+  "04-pieges": "Nouvelle partie, on repart de zéro. Le joueur tombe dans deux pièges de suite : moins 5 points, puis moins 4 points. Moins 5 plus moins 4. On recule de 5, puis encore de 4 : moins 9.",
+  "05-meme-signe": "Deux nombres de même signe se mettent bout à bout. On additionne les distances à zéro : 5 plus 4, 9. Et on garde leur signe : moins 9.",
+  "06-piege": "Le piège : dire plus 9, parce que moins et moins, ça ferait plus. Non ! Cette règle-là, c'est pour multiplier. Ici, deux pertes font une plus grosse perte.",
+  "06q-question": "Question ! Que vaut moins 6 plus moins 7 ? A : 13. B : moins 1. C : moins 13. Mets pause, et choisis !",
+  "06r-reponse": "Réponse C : moins 13. Même signe : 6 plus 7, 13, et on garde le signe moins. Le 13 positif, c'est le piège.",
+  "07-opposes": "Un cas à part : moins 6 plus 6. Ce sont deux nombres opposés. On part de moins 6, on avance de 6, et on revient à zéro. Le bonus annule exactement le piège.",
+  "08-defi": "À toi de jouer. Deux calculs. Moins 8 plus moins 2. Et 9 plus moins 4. Mets pause, et cherche !",
+  "08b-correction": "Correction. Moins 8 plus moins 2 : même signe, 8 plus 2, 10, et on garde le signe moins : moins 10. 9 plus moins 4 : signes contraires, 9 moins 4, 5, et 9 est le plus éloigné de zéro : le résultat est 5.",
+  "09-finale": "Ce que tu as appris. Même signe : on additionne les distances à zéro et on garde le signe. Signes contraires : on les soustrait et on garde le signe du plus éloigné de zéro. Deux opposés font zéro.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo, et je pars en montgolfière. Mon défi : enlever, ça fait toujours baisser ? Tu paries ?",
+  "01-situation": "Mon altitude : 5. Regarde ma nacelle. Les petits ballons valent plus 1 : ils tirent vers le haut. Les sacs de sable valent moins 1 : ils tirent vers le bas.",
+  "01q-question": "Question ! J'enlève 3 sacs de sable. Quelle est mon altitude ? A : 2. B : 8. C : 5. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 8 ! Regarde.",
+  "02-sacs": "J'enlève un sac : je monte à 6. Deux sacs : 7. Trois sacs : 8. J'ai enlevé, et je suis monté !",
+  "03-calcul": "Enlever 3 sacs, c'est retirer moins 3. 5 moins, entre parenthèses, moins 3, égale 8. Retirer moins 3, c'est comme ajouter 3.",
+  "04-ballons": "Et si j'enlève 9 petits ballons, qui valent plus 1 chacun ? 8 moins 9 : moins 1. Aïe, je suis dans la mer !",
+  "05-question": "À toi : je suis à l'altitude 2. J'enlève 6 sacs de sable, puis 4 petits ballons. Quelle est mon altitude ? Réponds en commentaire !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

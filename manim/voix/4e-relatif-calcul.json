@@ -1,0 +1,18 @@
+{
+  "00-garde": "Calculer avec des relatifs. Par quelle opération commencer ?",
+  "01-robot": "Sami est ingénieur en robotique. Au concours de robots, chaque faute coûte 3 points, et un bonus en rapporte 5. Son robot fait 4 fautes et gagne un bonus. Son score : moins 3 fois 4, plus 5.",
+  "02-ordre": "L'ordre est toujours le même. D'abord les parenthèses. Puis les multiplications et les divisions. Enfin les additions et les soustractions. On ne lit pas de gauche à droite sans réfléchir.",
+  "03-calcul": "Ici, la multiplication passe d'abord. Moins 3 fois 4 : moins 12. Il reste moins 12 plus 5. Signes contraires : 12 moins 5, 7, avec le signe du plus éloigné de zéro. Le robot finit à moins 7.",
+  "04-piege": "Le piège : ajouter d'abord 4 plus 5, 9. Puis moins 3 fois 9 : moins 27. Faux ! Ça voudrait dire 9 fautes, et le robot n'en a fait que 4.",
+  "04q-question": "Question ! Que vaut 10 plus moins 2 fois 3 ? A : 24. B : 4. C : 16. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : 4. La multiplication d'abord : moins 2 fois 3, moins 6. Puis 10 plus moins 6, 4.",
+  "05-reecrire": "Autre calcul, avec plusieurs moins : moins 2 fois moins 3, plus moins 4. On réécrit le calcul entier à chaque étape. Moins 2 fois moins 3 : 6. Il reste 6 plus moins 4. Résultat : 2.",
+  "06-parentheses": "Et avec des parenthèses ? 3 fois, entre parenthèses, moins 2 plus 6. La parenthèse d'abord : moins 2 plus 6, 4. Puis 3 fois 4, 12. Sans les parenthèses, 3 fois moins 2, plus 6, ça donnerait zéro.",
+  "07-division": "Une division aussi passe avant l'addition. 8 plus moins 12 divisé par 4. Moins 12 divisé par 4 : moins 3. Puis 8 plus moins 3 : 5.",
+  "07q-question": "Question ! Dans moins 6 moins 2 fois moins 5, par quoi commence-t-on ? A : moins 6 moins 2. B : 2 fois moins 5. C : moins 5 moins 6. Mets pause, et choisis !",
+  "07r-reponse": "Réponse B : 2 fois moins 5, moins 10. Il reste moins 6 moins, entre parenthèses, moins 10. Donc moins 6 plus 10 : 4.",
+  "08-defi": "À toi de jouer. Moins 4 fois 5, plus 8. Et 6 moins 3 fois, entre parenthèses, moins 2. Mets pause, et cherche !",
+  "08b-correction": "Correction. Moins 4 fois 5 : moins 20. Moins 20 plus 8 : moins 12. Ensuite, 3 fois moins 2 : moins 6. Et 6 moins, entre parenthèses, moins 6 : 6 plus 6, 12.",
+  "09-finale": "Ce que tu as appris. D'abord les parenthèses. Puis les multiplications et les divisions. Enfin les additions et les soustractions. Et on réécrit tout le calcul à chaque étape.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

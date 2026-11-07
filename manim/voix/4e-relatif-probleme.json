@@ -1,0 +1,18 @@
+{
+  "00-garde": "Résoudre un problème avec des relatifs. Comment passer de l'histoire au calcul ?",
+  "01-refuge": "Clara est guide de haute montagne. Elle prépare la course de demain. Au petit matin, il fait moins 2 degrés au refuge. Dans la journée, la température monte de 7 degrés. Combien fera-t-il ?",
+  "02-traduire": "Première étape : traduire. Une hausse, une montée, un gain : un nombre positif. Une baisse, une descente, une perte : un nombre négatif.",
+  "03-calculer": "Deuxième étape : calculer. On part de moins 2 et on ajoute 7. Moins 2 plus 7 : 5.",
+  "04-repondre": "Dernière étape : répondre avec l'unité, et contrôler. Il fera 5 degrés. On est passé au-dessus de zéro : c'est normal, avec une hausse de 7 degrés.",
+  "04q-question": "Question ! Il fait 3 degrés, et la température baisse de 8 degrés. Quel calcul faut-il faire ? A : 3 plus 8. B : 3 plus moins 8. C : moins 3 plus 8. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : 3 plus moins 8, moins 5. Il fait moins 5 degrés.",
+  "05-repetee": "Le soir, il fait 5 degrés, et ça baisse de 3 degrés par heure, pendant 4 heures. Une baisse qui se répète, c'est une multiplication : moins 3 fois 4, moins 12. Puis 5 plus moins 12 : moins 7. Il fera moins 7 degrés.",
+  "06-variation": "Et une variation ? Au départ, Clara est à 1 200 mètres. Au sommet, à 3 100 mètres. Une variation, c'est l'arrivée moins le départ. 3 100 moins 1 200 : plus 1 900 mètres. Au retour, 1 200 moins 3 100 : moins 1 900 mètres. Le signe dit le sens.",
+  "06q-question": "Question ! Le matin, il fait moins 6 degrés. À midi, 2 degrés. Quelle est la variation ? A : moins 4. B : 8. C : moins 8. Mets pause, et choisis !",
+  "06r-reponse": "Réponse B : 8. Arrivée moins départ : 2 moins, entre parenthèses, moins 6. Donc 2 plus 6, 8 degrés de hausse.",
+  "07-piege": "Le piège : oublier le signe dans la réponse. Répondre 7 degrés au lieu de moins 7 degrés. Pour Clara, ça change tout : à 7 degrés, une veste suffit. À moins 7 degrés, il faut tout l'équipement.",
+  "08-defi": "À toi de jouer. Une cordée part de 1 500 mètres. Elle monte de 400 mètres, puis elle redescend de 200 mètres par heure pendant 3 heures. À quelle altitude arrive-t-elle ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 1 500 plus 400, plus moins 200 fois 3. La multiplication d'abord : moins 600. Puis 1 900 plus moins 600 : 1 300. La cordée arrive à 1 300 mètres.",
+  "09-finale": "Ce que tu as appris. On traduit : une hausse est positive, une baisse est négative. On calcule dans le bon ordre. On répond avec l'unité, et on contrôle.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

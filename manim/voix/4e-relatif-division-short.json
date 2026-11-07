@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Un trésor est enterré ici, à moins 20 mètres ! J'ai ma pelle. Je te lance un défi.",
+  "01-situation": "Chaque jour, je creuse de 5 mètres vers le bas : moins 5 par jour.",
+  "01q-question": "Question ! En combien de jours j'atteins le trésor ? A : moins 4. B : 4. C : 15. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 4 jours ! Un nombre de jours, c'est positif.",
+  "02-creuse": "Jour 1 : moins 5. Jour 2 : moins 10. Jour 3 : moins 15. Jour 4 : moins 20. Moins 20 divisé par moins 5, ça fait 4.",
+  "03-coffre": "Le coffre ! Je l'ouvre… Un papier ? Il est écrit : tu dois 12 euros. Moins 12 !",
+  "04-copains": "Heureusement, mes 2 copains sont là. On est 3 : moins 12 divisé par 3, moins 4. Chacun doit 4 euros. Eh, revenez !",
+  "05-question": "À toi : un autre trésor, à moins 36 mètres. Je creuse 4 mètres par jour. Combien de jours ? Réponds en commentaire !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

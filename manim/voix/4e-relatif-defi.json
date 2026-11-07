@@ -1,0 +1,17 @@
+{
+  "00-garde": "Défis sur les relatifs. Sauras-tu démasquer les erreurs ?",
+  "01-histoire": "Lou est historienne des sciences. Il y a 2 000 ans, en Chine, on calculait déjà avec des baguettes : rouges pour les positifs, noires pour les négatifs. Mais en Europe, il y a quelques siècles, on les appelait encore les nombres absurdes.",
+  "02-cahier": "Imagine un vieux cahier rempli d'erreurs. Mène l'enquête avec Lou. Première erreur : moins 4 fois moins 3 égale moins 12. Faux ! Signes identiques : le résultat est positif. Plus 12.",
+  "03-erreur2": "Deuxième erreur : 5 moins, entre parenthèses, moins 3, égale 2. Faux ! On ajoute l'opposé : 5 plus 3, 8.",
+  "03q-question": "Question ! Dans le cahier : moins 6 plus moins 2 égale 8. D'où vient l'erreur ? A : la règle de la multiplication, utilisée pour une addition. B : une erreur de priorité. C : un oubli de parenthèses. Mets pause, et choisis !",
+  "03r-reponse": "Réponse A. Le résultat est moins 8. Moins et moins ne donnent plus que pour multiplier.",
+  "04-compter": "Troisième énigme, sans calculer : quel est le signe de moins 2 fois moins 3 fois moins 1 ? L'astuce : on compte les moins. Il y en a 3. Deux moins font un plus, et il en reste un. Le résultat est négatif. Vérifions : moins 2 fois moins 3, 6. Et 6 fois moins 1, moins 6.",
+  "05-pair": "La règle : un nombre pair de moins, résultat positif. Un nombre impair de moins, résultat négatif. Moins 1, quatre fois de suite : 4 moins, c'est pair. Le résultat est 1.",
+  "05q-question": "Question ! Quel est le signe de moins 1 fois 2 fois moins 3 fois moins 4 fois 5 ? A : positif. B : négatif. C : on ne peut pas savoir. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : négatif. Il y a 3 moins : c'est impair. Le 2 et le 5 ne comptent pas, ils sont positifs.",
+  "06-efface": "Dernière énigme : un nombre effacé. Quelque chose, fois moins 4, égale 20. Le résultat est positif et moins 4 est négatif : le nombre cherché est donc négatif. C'est moins 5.",
+  "07-defi": "À toi de jouer. Trois affaires. Un : moins 3 fois moins 5 est-il plus grand que moins 3 plus moins 5 ? Deux : quel est le signe de moins 1, sept fois de suite ? Trois : quel nombre, multiplié par moins 6, donne moins 30 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Un : moins 3 fois moins 5, 15. Moins 3 plus moins 5, moins 8. Donc oui, plus grand. Deux : 7 moins, c'est impair : négatif. Trois : c'est 5, car 5 fois moins 6, moins 30.",
+  "08-finale": "Ce que tu as appris. Avant de calculer, on regarde l'opération. Dans un produit, on compte les moins : pair, positif ; impair, négatif. Et on vérifie par une multiplication.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
