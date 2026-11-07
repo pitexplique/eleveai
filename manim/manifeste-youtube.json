@@ -58491,8 +58491,9 @@
       "serie": "Maths 4e",
       "type": "short",
       "renvoie_vers": "4e-puissance-comprendre",
-      "fichier": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.mp4",
-      "miniature": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.png",
+      "fichier": "4e/maths/puissances/dessin-anime/01-comprendre/eleveai-maths-4e-puissance-comprendre-short-dessin-anime.mp4",
+      "ancien_fichier": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.mp4",
+      "miniature": "4e/maths/puissances/dessin-anime/01-comprendre/eleveai-maths-4e-puissance-comprendre-short-dessin-anime-miniature.png",
       "titre": "Plie une feuille en deux : combien de couches ? 📄 — 4e #Shorts",
       "accroche": "Plie une feuille en deux. Encore. Et encore. 1 pliage : 2 couches. 2 pliages : 4 couches. 5 pliages : 2 × 2 × 2 × 2 × 2 = 2⁵, soit 32 couches. Pas 2 × 5 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Après 7 pliages, combien de couches ? Écris-le avec une puissance. Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
       "tags": [
@@ -58789,8 +58790,9 @@
       "serie": "Maths 4e",
       "type": "short",
       "renvoie_vers": "4e-puissance-calculer",
-      "fichier": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.mp4",
-      "miniature": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.png",
+      "fichier": "4e/maths/puissances/dessin-anime/02-calculer/eleveai-maths-4e-puissance-calculer-short-dessin-anime.mp4",
+      "ancien_fichier": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.mp4",
+      "miniature": "4e/maths/puissances/dessin-anime/02-calculer/eleveai-maths-4e-puissance-calculer-short-dessin-anime-miniature.png",
       "titre": "Ma calculatrice est-elle cassée ? 🧮 — 4e #Shorts",
       "accroche": "Ma calculatrice dit : −2⁴ = −16. Elle est cassée ? Non ! Sans parenthèses, la puissance passe d'abord : 2⁴ = 16, puis le moins devant. Avec des parenthèses : (−2)⁴ = 16.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et −1¹⁰⁰, sans parenthèses ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
       "tags": [
@@ -58811,7 +58813,7 @@
       ],
       "questions": [
         {
-          "t": "00:22",
+          "t": "00:23",
           "question": "(−3)² = ?",
           "choix": [
             "−9",
@@ -59044,8 +59046,9 @@
       "serie": "Maths 4e",
       "type": "short",
       "renvoie_vers": "4e-puissance-dix",
-      "fichier": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.mp4",
-      "miniature": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.png",
+      "fichier": "4e/maths/puissances/dessin-anime/03-dix/eleveai-maths-4e-puissance-dix-short-dessin-anime.mp4",
+      "ancien_fichier": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.mp4",
+      "miniature": "4e/maths/puissances/dessin-anime/03-dix/eleveai-maths-4e-puissance-dix-short-dessin-anime-miniature.png",
       "titre": "Un milliard de vues : combien de zéros ? 📱 — 4e #Shorts",
       "accroche": "10 vues : 10¹. 100 vues : 10². 1 000 vues : 10³. L'exposant compte les zéros. Un milliard de vues : un 1 suivi de 9 zéros, 10⁹ !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 10¹⁰⁰ : combien de zéros ? Ce nombre porte un nom célèbre. Lequel ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_dix&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
       "tags": [
@@ -59320,8 +59323,9 @@
       "serie": "Maths 4e",
       "type": "short",
       "renvoie_vers": "4e-puissance-zero-negatif",
-      "fichier": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.mp4",
-      "miniature": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.png",
+      "fichier": "4e/maths/puissances/dessin-anime/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short-dessin-anime.mp4",
+      "ancien_fichier": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.mp4",
+      "miniature": "4e/maths/puissances/dessin-anime/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short-dessin-anime-miniature.png",
       "titre": "2026 puissance 0, ça fait combien ? 🤯 — 4e #Shorts",
       "accroche": "2026⁰ : un indice, ce n'est pas 0. Descends l'escalier des puissances de 3 : 3² = 9, 3¹ = 3. À chaque marche, on divise par 3. 3⁰ = 3 ÷ 3 = 1 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 1 000 000⁰ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
       "tags": [
@@ -59683,8 +59687,9 @@
       "serie": "Maths 4e",
       "type": "short",
       "renvoie_vers": "4e-puissance-notation-scientifique",
-      "fichier": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.mp4",
-      "miniature": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.png",
+      "fichier": "4e/maths/puissances/dessin-anime/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short-dessin-anime.mp4",
+      "ancien_fichier": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.mp4",
+      "miniature": "4e/maths/puissances/dessin-anime/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short-dessin-anime-miniature.png",
       "titre": "8 milliards d'humains, sans aligner les zéros 🌍 — 4e #Shorts",
       "accroche": "8 milliards : un 8 suivi de 9 zéros. On écrit 8 × 10⁹. Et le minuscule ? Un globule rouge : 0,000 007 mètre, 7 × 10⁻⁶.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : La Terre pèse environ 6 suivi de 24 zéros kilogrammes. Écris-le en notation scientifique. Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_notation_scientifique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
       "tags": [
@@ -59846,8 +59851,9 @@
       "serie": "Maths 4e",
       "type": "short",
       "renvoie_vers": "4e-puissance-comparer",
-      "fichier": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.mp4",
-      "miniature": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.png",
+      "fichier": "4e/maths/puissances/dessin-anime/06-comparer/eleveai-maths-4e-puissance-comparer-short-dessin-anime.mp4",
+      "ancien_fichier": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.mp4",
+      "miniature": "4e/maths/puissances/dessin-anime/06-comparer/eleveai-maths-4e-puissance-comparer-short-dessin-anime-miniature.png",
       "titre": "9 × 10⁵ contre 2 × 10⁶ : qui gagne ? 🥊 — 4e #Shorts",
       "accroche": "9 × 10⁵ contre 2 × 10⁶ : pas celui que tu crois ! Écrits en entier : 900 000 contre 2 000 000. L'exposant décide d'abord : 6 bat 5.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 9,9 × 10⁻⁴ contre 1 × 10⁻³ : lequel est le plus grand ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
       "tags": [
@@ -60102,8 +60108,9 @@
       "serie": "Maths 4e",
       "type": "short",
       "renvoie_vers": "4e-puissance-calcul",
-      "fichier": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.mp4",
-      "miniature": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.png",
+      "fichier": "4e/maths/puissances/dessin-anime/07-calcul/eleveai-maths-4e-puissance-calcul-short-dessin-anime.mp4",
+      "ancien_fichier": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.mp4",
+      "miniature": "4e/maths/puissances/dessin-anime/07-calcul/eleveai-maths-4e-puissance-calcul-short-dessin-anime-miniature.png",
       "titre": "10² × 10⁴ = 10⁸ ? Perdu ! 🎯 — 4e #Shorts",
       "accroche": "100 × 10 000 : 2 zéros plus 4 zéros, 6 zéros. 1 000 000, c'est 10⁶. On additionne les exposants.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 10⁷ ÷ 10³ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calcul&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
       "tags": [
@@ -60281,8 +60288,9 @@
       "serie": "Maths 2de",
       "type": "short",
       "renvoie_vers": "seconde-puissance-produit-quotient",
-      "fichier": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.mp4",
-      "miniature": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.png",
+      "fichier": "seconde/maths/puissances/dessin-anime/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short-dessin-anime.mp4",
+      "ancien_fichier": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.mp4",
+      "miniature": "seconde/maths/puissances/dessin-anime/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short-dessin-anime-miniature.png",
       "titre": "Une clé secrète : combien de possibilités ? 🔐 — 2de #Shorts",
       "accroche": "3 bits : 2³, 8 clés. On ajoute 4 bits : × 2⁴. On additionne les exposants : 2⁷, soit 128 clés.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et une clé de 128 bits : combien de clés ? Écris-le avec une puissance. Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_produit_quotient&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #seconde #lycée",
       "tags": [
@@ -60530,8 +60538,9 @@
       "serie": "Maths 2de",
       "type": "short",
       "renvoie_vers": "seconde-puissance-enchainer",
-      "fichier": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.mp4",
-      "miniature": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.png",
+      "fichier": "seconde/maths/puissances/dessin-anime/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short-dessin-anime.mp4",
+      "ancien_fichier": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.mp4",
+      "miniature": "seconde/maths/puissances/dessin-anime/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short-dessin-anime-miniature.png",
       "titre": "Une expression géante, une seule puissance ✈️ — 2de #Shorts",
       "accroche": "(2³)² = 2⁶. Fois 2⁴ : 2¹⁰. Divisé par 2⁷ : 2³. 8 ! Une étape à la fois, comme la check-list d'une pilote.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et (3⁴)² ÷ 3⁸ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_expression_composee&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #seconde #lycée",
       "tags": [
@@ -60688,8 +60697,9 @@
       "serie": "Maths 4e",
       "type": "short",
       "renvoie_vers": "4e-puissance-defi",
-      "fichier": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.mp4",
-      "miniature": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.png",
+      "fichier": "4e/maths/puissances/dessin-anime/11-defi/eleveai-maths-4e-puissance-defi-short-dessin-anime.mp4",
+      "ancien_fichier": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.mp4",
+      "miniature": "4e/maths/puissances/dessin-anime/11-defi/eleveai-maths-4e-puissance-defi-short-dessin-anime-miniature.png",
       "titre": "1 000 € ou 1 centime doublé 20 fois ? 💶 — 4e #Shorts",
       "accroche": "1 centime. Doublé : 2. Encore : 4. Encore : 8. Ça ne ressemble à rien. Mais doublé 20 fois : 2²⁰ = 1 048 576 centimes, plus de 10 000 euros ! Le centime gagne.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et doublé 30 fois, ça fait combien d'euros ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
       "tags": [
@@ -60710,7 +60720,7 @@
       ],
       "questions": [
         {
-          "t": "00:12",
+          "t": "00:13",
           "question": "1 centime doublé 10 fois ?",
           "choix": [
             "20 centimes",
@@ -60862,8 +60872,9 @@
       "serie": "Maths 3e",
       "type": "short",
       "renvoie_vers": "3e-puissance-defi",
-      "fichier": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.mp4",
-      "miniature": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.png",
+      "fichier": "3e/maths/puissances/dessin-anime/12-defi/eleveai-maths-3e-puissance-defi-short-dessin-anime.mp4",
+      "ancien_fichier": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.mp4",
+      "miniature": "3e/maths/puissances/dessin-anime/12-defi/eleveai-maths-3e-puissance-defi-short-dessin-anime-miniature.png",
       "titre": "2³ × 3³ = 6³ : ça a l'air faux, non ? 🤔 — 3e #Shorts",
       "accroche": "Vérifions. 2³ = 8. 3³ = 27. 8 × 27 = 216. Et 6³ = 216. C'est juste !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 4³ × 5³, ça fait combien ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #3e #collège",
       "tags": [
@@ -60884,7 +60895,7 @@
       ],
       "questions": [
         {
-          "t": "00:24",
+          "t": "00:25",
           "question": "2⁵ × 5⁵ ?",
           "choix": [
             "7⁵",
@@ -61126,8 +61137,9 @@
       "serie": "Maths 1re",
       "type": "short",
       "renvoie_vers": "premiere-puissance-cinq-regles",
-      "fichier": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.mp4",
-      "miniature": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.png",
+      "fichier": "premiere/maths/puissances/dessin-anime/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short-dessin-anime.mp4",
+      "ancien_fichier": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.mp4",
+      "miniature": "premiere/maths/puissances/dessin-anime/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short-dessin-anime-miniature.png",
       "titre": "2³ × 2⁴ = 4⁷ : tu signes ? ✍️ — 1re #Shorts",
       "accroche": "Écris les facteurs : sept facteurs 2, soit 2⁷ = 128. Et 4⁷ ? 16 384, beaucoup trop ! La base ne change pas.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : Et 3⁴ × 3⁵, ça s'écrit comment ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #1re #lycée",
       "tags": [

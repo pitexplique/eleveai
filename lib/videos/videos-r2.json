@@ -338,9 +338,9 @@
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&microId=entier_puissance_defi&display=simple"
  },
  "3e-puissance-defi-short": {
-  "fichier": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.mp4",
-  "poster": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.png",
-  "vignette": "3e/maths/puissances/12-defi/eleveai-maths-3e-puissance-defi-short.vignette.webp",
+  "fichier": "3e/maths/puissances/dessin-anime/12-defi/eleveai-maths-3e-puissance-defi-short-dessin-anime.mp4",
+  "poster": "3e/maths/puissances/dessin-anime/12-defi/eleveai-maths-3e-puissance-defi-short-dessin-anime-miniature.png",
+  "vignette": "3e/maths/puissances/dessin-anime/12-defi/eleveai-maths-3e-puissance-defi-short-dessin-anime-miniature.vignette.webp",
   "titre": "2³ × 3³ = 6³ : ça a l'air faux, non ? 🤔 — 3e #Shorts",
   "short": true,
   "youtube": null,
@@ -1849,9 +1849,9 @@
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calcul&display=simple"
  },
  "4e-puissance-calcul-short": {
-  "fichier": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.mp4",
-  "poster": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.png",
-  "vignette": "4e/maths/puissances/07-calcul/eleveai-maths-4e-puissance-calcul-short.vignette.webp",
+  "fichier": "4e/maths/puissances/dessin-anime/07-calcul/eleveai-maths-4e-puissance-calcul-short-dessin-anime.mp4",
+  "poster": "4e/maths/puissances/dessin-anime/07-calcul/eleveai-maths-4e-puissance-calcul-short-dessin-anime-miniature.png",
+  "vignette": "4e/maths/puissances/dessin-anime/07-calcul/eleveai-maths-4e-puissance-calcul-short-dessin-anime-miniature.vignette.webp",
   "titre": "10² × 10⁴ = 10⁸ ? Perdu ! 🎯 — 4e #Shorts",
   "short": true,
   "youtube": null,
@@ -1867,9 +1867,9 @@
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_calculer&display=simple"
  },
  "4e-puissance-calculer-short": {
-  "fichier": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.mp4",
-  "poster": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.png",
-  "vignette": "4e/maths/puissances/02-calculer/eleveai-maths-4e-puissance-calculer-short.vignette.webp",
+  "fichier": "4e/maths/puissances/dessin-anime/02-calculer/eleveai-maths-4e-puissance-calculer-short-dessin-anime.mp4",
+  "poster": "4e/maths/puissances/dessin-anime/02-calculer/eleveai-maths-4e-puissance-calculer-short-dessin-anime-miniature.png",
+  "vignette": "4e/maths/puissances/dessin-anime/02-calculer/eleveai-maths-4e-puissance-calculer-short-dessin-anime-miniature.vignette.webp",
   "titre": "Ma calculatrice est-elle cassée ? 🧮 — 4e #Shorts",
   "short": true,
   "youtube": null,
@@ -1885,9 +1885,9 @@
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comparer&display=simple"
  },
  "4e-puissance-comparer-short": {
-  "fichier": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.mp4",
-  "poster": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.png",
-  "vignette": "4e/maths/puissances/06-comparer/eleveai-maths-4e-puissance-comparer-short.vignette.webp",
+  "fichier": "4e/maths/puissances/dessin-anime/06-comparer/eleveai-maths-4e-puissance-comparer-short-dessin-anime.mp4",
+  "poster": "4e/maths/puissances/dessin-anime/06-comparer/eleveai-maths-4e-puissance-comparer-short-dessin-anime-miniature.png",
+  "vignette": "4e/maths/puissances/dessin-anime/06-comparer/eleveai-maths-4e-puissance-comparer-short-dessin-anime-miniature.vignette.webp",
   "titre": "9 × 10⁵ contre 2 × 10⁶ : qui gagne ? 🥊 — 4e #Shorts",
   "short": true,
   "youtube": null,
@@ -1903,9 +1903,9 @@
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_comprendre&display=simple"
  },
  "4e-puissance-comprendre-short": {
-  "fichier": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.mp4",
-  "poster": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.png",
-  "vignette": "4e/maths/puissances/01-comprendre/eleveai-maths-4e-puissance-comprendre-short.vignette.webp",
+  "fichier": "4e/maths/puissances/dessin-anime/01-comprendre/eleveai-maths-4e-puissance-comprendre-short-dessin-anime.mp4",
+  "poster": "4e/maths/puissances/dessin-anime/01-comprendre/eleveai-maths-4e-puissance-comprendre-short-dessin-anime-miniature.png",
+  "vignette": "4e/maths/puissances/dessin-anime/01-comprendre/eleveai-maths-4e-puissance-comprendre-short-dessin-anime-miniature.vignette.webp",
   "titre": "Plie une feuille en deux : combien de couches ? 📄 — 4e #Shorts",
   "short": true,
   "youtube": null,
@@ -1921,9 +1921,9 @@
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_defi&display=simple"
  },
  "4e-puissance-defi-short": {
-  "fichier": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.mp4",
-  "poster": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.png",
-  "vignette": "4e/maths/puissances/11-defi/eleveai-maths-4e-puissance-defi-short.vignette.webp",
+  "fichier": "4e/maths/puissances/dessin-anime/11-defi/eleveai-maths-4e-puissance-defi-short-dessin-anime.mp4",
+  "poster": "4e/maths/puissances/dessin-anime/11-defi/eleveai-maths-4e-puissance-defi-short-dessin-anime-miniature.png",
+  "vignette": "4e/maths/puissances/dessin-anime/11-defi/eleveai-maths-4e-puissance-defi-short-dessin-anime-miniature.vignette.webp",
   "titre": "1 000 € ou 1 centime doublé 20 fois ? 💶 — 4e #Shorts",
   "short": true,
   "youtube": null,
@@ -1939,9 +1939,9 @@
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_dix&display=simple"
  },
  "4e-puissance-dix-short": {
-  "fichier": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.mp4",
-  "poster": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.png",
-  "vignette": "4e/maths/puissances/03-dix/eleveai-maths-4e-puissance-dix-short.vignette.webp",
+  "fichier": "4e/maths/puissances/dessin-anime/03-dix/eleveai-maths-4e-puissance-dix-short-dessin-anime.mp4",
+  "poster": "4e/maths/puissances/dessin-anime/03-dix/eleveai-maths-4e-puissance-dix-short-dessin-anime-miniature.png",
+  "vignette": "4e/maths/puissances/dessin-anime/03-dix/eleveai-maths-4e-puissance-dix-short-dessin-anime-miniature.vignette.webp",
   "titre": "Un milliard de vues : combien de zéros ? 📱 — 4e #Shorts",
   "short": true,
   "youtube": null,
@@ -1957,9 +1957,9 @@
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_notation_scientifique&display=simple"
  },
  "4e-puissance-notation-scientifique-short": {
-  "fichier": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.mp4",
-  "poster": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.png",
-  "vignette": "4e/maths/puissances/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short.vignette.webp",
+  "fichier": "4e/maths/puissances/dessin-anime/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short-dessin-anime.mp4",
+  "poster": "4e/maths/puissances/dessin-anime/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short-dessin-anime-miniature.png",
+  "vignette": "4e/maths/puissances/dessin-anime/05-notation-scientifique/eleveai-maths-4e-puissance-notation-scientifique-short-dessin-anime-miniature.vignette.webp",
   "titre": "8 milliards d'humains, sans aligner les zéros 🌍 — 4e #Shorts",
   "short": true,
   "youtube": null,
@@ -1975,9 +1975,9 @@
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple"
  },
  "4e-puissance-zero-negatif-short": {
-  "fichier": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.mp4",
-  "poster": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.png",
-  "vignette": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short.vignette.webp",
+  "fichier": "4e/maths/puissances/dessin-anime/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short-dessin-anime.mp4",
+  "poster": "4e/maths/puissances/dessin-anime/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short-dessin-anime-miniature.png",
+  "vignette": "4e/maths/puissances/dessin-anime/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short-dessin-anime-miniature.vignette.webp",
   "titre": "2026 puissance 0, ça fait combien ? 🤯 — 4e #Shorts",
   "short": true,
   "youtube": null,
@@ -8992,9 +8992,9 @@
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple"
  },
  "premiere-puissance-cinq-regles-short": {
-  "fichier": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.mp4",
-  "poster": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.png",
-  "vignette": "premiere/maths/puissances/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short.vignette.webp",
+  "fichier": "premiere/maths/puissances/dessin-anime/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short-dessin-anime.mp4",
+  "poster": "premiere/maths/puissances/dessin-anime/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short-dessin-anime-miniature.png",
+  "vignette": "premiere/maths/puissances/dessin-anime/13-cinq-regles/eleveai-maths-premiere-puissance-cinq-regles-short-dessin-anime-miniature.vignette.webp",
   "titre": "2³ × 2⁴ = 4⁷ : tu signes ? ✍️ — 1re #Shorts",
   "short": true,
   "youtube": null,
@@ -9496,9 +9496,9 @@
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_expression_composee&display=simple"
  },
  "seconde-puissance-enchainer-short": {
-  "fichier": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.mp4",
-  "poster": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.png",
-  "vignette": "seconde/maths/puissances/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short.vignette.webp",
+  "fichier": "seconde/maths/puissances/dessin-anime/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short-dessin-anime.mp4",
+  "poster": "seconde/maths/puissances/dessin-anime/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short-dessin-anime-miniature.png",
+  "vignette": "seconde/maths/puissances/dessin-anime/10-enchainer/eleveai-maths-seconde-puissance-enchainer-short-dessin-anime-miniature.vignette.webp",
   "titre": "Une expression géante, une seule puissance ✈️ — 2de #Shorts",
   "short": true,
   "youtube": null,
@@ -9523,9 +9523,9 @@
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=puissances_2de&microId=puiss_produit_quotient&display=simple"
  },
  "seconde-puissance-produit-quotient-short": {
-  "fichier": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.mp4",
-  "poster": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.png",
-  "vignette": "seconde/maths/puissances/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short.vignette.webp",
+  "fichier": "seconde/maths/puissances/dessin-anime/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short-dessin-anime.mp4",
+  "poster": "seconde/maths/puissances/dessin-anime/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short-dessin-anime-miniature.png",
+  "vignette": "seconde/maths/puissances/dessin-anime/08-produit-quotient/eleveai-maths-seconde-puissance-produit-quotient-short-dessin-anime-miniature.vignette.webp",
   "titre": "Une clé secrète : combien de possibilités ? 🔐 — 2de #Shorts",
   "short": true,
   "youtube": null,

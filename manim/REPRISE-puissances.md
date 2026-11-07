@@ -97,4 +97,4 @@ Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des age
 - ⏳ À contrôler après le 23/11 : 26 `url` au manifeste, journal `manim/sorties/publication-auto.log`, puis committer ces `url` par chemin (`git hash-object`).
 
 ## Shorts en dessin animé (07/11)
-Voir `manim/prompt-reprise-shorts-puissances-dessin-anime.md`. Les Manim ne sont pas touchés ; remplacement à trancher par Frédéric.
+Voir `manim/prompt-reprise-shorts-puissances-dessin-anime.md`. Bascule faite le 07/11 : les 12 shorts au manifeste, sur R2 et dans la publication armée sont en dessin animé. Les mp4 Manim restent sur le disque et sur R2.

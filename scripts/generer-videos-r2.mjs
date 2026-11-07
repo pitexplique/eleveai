@@ -74,7 +74,13 @@ for (const v of manifeste.videos) {
 
 // Les MP4 rendus hors manifeste (tout le CP, par exemple) : clé = nom du fichier
 // sans « eleveai- », titre tiré du nom. Ils sont sur R2 comme les autres.
-const connus = new Set(Object.values(table).map((v) => v.fichier));
+// `ancien_fichier` : le rendu qu'une entrée a remplacé (shorts puissances Manim →
+// dessin animé, 07/11/2026). Il reste sur le disque et sur R2, mais ne revient pas
+// dans la table sous un titre automatique.
+const connus = new Set([
+  ...Object.values(table).map((v) => v.fichier),
+  ...manifeste.videos.map((v) => v.ancien_fichier).filter(Boolean),
+]);
 // ⛔ 26/10/2026 : un dossier qui contient un fichier `.brouillon` (lot pas encore
 // validé, ex. vidéos CM fractions) reste hors table tant que la passe finale ne
 // l'a pas retiré.
@@ -82,7 +88,8 @@ const parcourir = (dir) => fs.existsSync(path.join(dir, ".brouillon")) ? [] : fs
   e.isDirectory()
     // _avant-marges : les originaux gardés avant la marge noire (24/10), jamais publiés.
     ? e.name === "partial_movie_files" || e.name.startsWith("480p") || e.name === "_avant-marges" ? [] : parcourir(path.join(dir, e.name))
-    : e.name.endsWith(".mp4") ? [path.join(dir, e.name)] : []);
+    // _muet.mp4 : l'image sans le son d'un film Ti Margo, jamais publiée.
+    : e.name.endsWith(".mp4") && !e.name.startsWith("_") ? [path.join(dir, e.name)] : []);
 // Les vidéos publiées AVANT le manifeste, téléchargées depuis YouTube (19/10) :
 // manim/sorties/<classe>/maths/youtube/<ID YouTube>.mp4, titre et format dans
 // manim/youtube-r2.json. Le coach les trouve par leur ID YouTube.
