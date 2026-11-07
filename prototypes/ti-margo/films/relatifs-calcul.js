@@ -59,11 +59,11 @@ FILMS.calcul=function({el,$,mots,jetons,panneau,carte,legende,fin,lisse}){
     {de:a+2.07,pa:['A',a],l1:A1,l2:A2,barre:a+7.64},
     {de:cc+.65,pa:['C',cc+.65],l1:C1,l2:C2,barre:cc+6.19},
     {de:cc+8.34,pa:['C',cc],l1:OUBLI},
-    {de:r,pa:['B',r+.62],l1:R00},
+    {de:r+.62,pa:['B',r+.62],l1:R00},
     {de:r+2.9,pa:['B',r],l1:R0},
     {de:r+3.15,pa:['B',r],l1:R0b},
     {de:r+5.62,pa:['B',r],l1:R1,l2:R2,juste:r+10.86},
-    {de:c,l1:F_TOI}
+    {de:c+.7,l1:F_TOI}
   ];
 
   const css=document.createElement('style');
