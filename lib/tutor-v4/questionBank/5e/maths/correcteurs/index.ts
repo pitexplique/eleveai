@@ -20,6 +20,7 @@ import { CORRECTEURS as valeursApprochees } from "./valeurs-approchees";
 import { CORRECTEURS as volumes } from "./volumes";
 import { CORRECTEURS as polygonesReguliers } from "./polygones-reguliers";
 import { CORRECTEURS as airesLosangeTrapeze } from "./aires-losange-trapeze";
+import { CORRECTEURS as quotientDecimaux } from "./quotient-decimaux";
 import { CORRECTEURS as patronPrismeCylindre } from "./patron-prisme-cylindre";
 import { CORRECTEURS as statMode } from "./stat-mode";
 
@@ -48,4 +49,5 @@ export const CORRECTEURS_5E: CorrecteursMaths = {
   ...volumes,
   ...polygonesReguliers,
   ...airesLosangeTrapeze,
+  ...quotientDecimaux,
 };

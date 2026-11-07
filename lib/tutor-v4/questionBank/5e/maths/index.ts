@@ -3,6 +3,7 @@
 import { tenir375 } from "@/lib/tutor-v4/questionBank/tenir-375";
 import { polygonesReguliersBank } from "./polygones-reguliers.bank";
 import { airesLosangeTrapezeBank } from "./aires-losange-trapeze.bank";
+import { quotientDecimauxBank } from "./quotient-decimaux.bank";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { nombresRelatifsBank } from "./nombres-relatifs.bank";
@@ -59,6 +60,7 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...tenir375(statModeBank),
   ...tenir375(patronPrismeCylindreBank),
   ...airesLosangeTrapezeBank,
+  ...tenir375(quotientDecimauxBank),
 ];
 
 export function getMaths5eQuestionBank(args?: {

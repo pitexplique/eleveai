@@ -802,6 +802,12 @@ export const microSkills: MicroSkillSource[] = [
   /* ======================
      QUOTIENT DE DEUX DÉCIMAUX (06/11/2026)
   ========================= */
+{
+  id: "quotient_decimaux",
+  label: "Diviser par un nombre décimal",
+  notionId: "decimal_quotient",
+  prerequis: [],
+},
 
   /* ======================
      VALEURS APPROCHÉES (05/11/2026)

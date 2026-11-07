@@ -51,8 +51,9 @@ const MICROS_MASQUEES: Record<string, Record<string, Record<string, Masquage>>> 
       "ce1_tri_ensembles",
     ]),
     /* Diviser par un décimal : le BO de 6e s'arrête au diviseur « entier non nul inférieur à 10 »
-       (`6e/bo-objectifs.ts`). Le cycle 4 cite le « quotient de nombres décimaux » sans en dire la
-       classe (`docs/bo-maths-cycle4-recopie.md`, p. 131) : en 6e, elle reste masquée. */
+       (`6e/bo-objectifs.ts`). Le cycle 4 cite le « quotient de nombres décimaux »
+       (`docs/bo-maths-cycle4-recopie.md`, p. 131) : en France, il se travaille en 5e
+       (`quotient_decimaux`, 06/11/2026). En 6e, elle reste masquée. */
     "6e": lot("hors_france", "Maroc, Suisse, Sénégal, Côte d'Ivoire", [
       "decimal_diviser_par_decimal",
     ]),

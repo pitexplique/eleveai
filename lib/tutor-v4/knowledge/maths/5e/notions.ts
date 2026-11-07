@@ -57,6 +57,16 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  // 06/11/2026 : le « quotient de nombres décimaux » du cycle 4. Le BO de 6e s'arrête au
+  // diviseur entier, et aucune micro de 5e à 3e ne le demandait.
+  {
+    id: "decimal_quotient",
+    label: "Quotient de deux décimaux",
+    boId: "BO5N1",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
+
   // 05/11/2026 : demandée par le Maroc, la Côte d'Ivoire, la Belgique et le Québec.
   // En France, seul l'encadrement reste visible (voir micros-masquees.ts).
   {
