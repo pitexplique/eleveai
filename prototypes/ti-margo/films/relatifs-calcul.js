@@ -264,7 +264,7 @@ FILMS.calcul=function({el,$,mots,jetons,panneau,carte,legende,fin,lisse}){
   gerbe(T_FETE,0,1.8,{n:50,vy:8.5,vx:3.4,g:8,conf:true,z:.5,dur:2.4});
   const anneaux=[[PLOUF_D,5.25],[TP_A.pl,-3],[TP_C.pl,3]].map(([t,x])=>{ const m=cyl(1,1,.02,0xffffff,x,YE+.02,.4); m.material=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.7,depthWrite:false}); return {m,t}; });
   /* Le « PLOUF » de bande dessinée : écrit quand la voix le dit */
-  const bdPlouf=[[TP_A.pl,-3],[TP_C.pl,3]].map(([t,x])=>({t,x,m:plaque('PLOUF !',{w:3.5,h:1.15,fond:'#ffe066',coul:'#e03131',bord:'#e03131',fs:.66},x,1.2,1.9)}));
+  const bdPlouf=[[TP_A.pl,-3],[TP_C.pl,3]].map(([t,x])=>({t,x,m:plaque('PLOUF !',{w:2.5,h:.84,fond:'#ffe066',coul:'#e03131',bord:'#e03131',fs:.66},x,1.5,1.9)}));
 
   /* La pluie de confettis, à partir de la bonne porte */
   const PLUIE=[]; for(let i=0;i<150;i++){ const m=boite(.2,.32,.02,COUL_C[i%COUL_C.length],0,0,0); m.visible=false; PLUIE.push({m,x:-5.4+((i*.7548776)%1)*10.8,ph:((i*.5698403)%1)*14,z:-.9+((i*.3247)%1)*2.8,i}); }
@@ -326,7 +326,7 @@ FILMS.calcul=function({el,$,mots,jetons,panneau,carte,legende,fin,lisse}){
       const voitC=(T>=sit+1.79&&T<a+3.48)||(T>=a+7.64&&T<cc+3.44)||(T>=cc+6.19&&T<r+7.5);
       const titreVu=T<acc+13.35||T>=sit; dedans(TITRE1,titreVu&&T>=acc+4.55&&T<sit+1.13); dedans(TITRE2,titreVu&&T>=acc+4.92&&T<sit+1.13);
       dedans(TCALC,voitC); dedans(TA,T>=a+3.48&&T<a+7.64); dedans(TC,T>=cc+3.44&&T<cc+6.19);
-      dedans(TR2,T>=r+7.5&&T<r+10.86); dedans(TR3,T>=r+10.86&&T<c); dedans(TTOI,T>=c);
+      dedans(TR2,T>=r+7.5&&T<r+10.86); dedans(TR3,T>=r+10.86&&T<c); dedans(TTOI,T>=c&&T<c+4.7);
       HL_G.visible=voitC&&T>=a+2.11&&T<a+3.48;
       HL_F.visible=voitC&&((T>=cc+.91&&T<cc+3.44)||(T>=r+3.15));
       /* Le moins du 4 : il tombe du tableau pendant l'erreur, puis revient en grand */
