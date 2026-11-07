@@ -1,0 +1,16 @@
+{
+  "00-garde": "Nommer un triangle. Comment retrouver un triangle parmi des milliers ?",
+  "01-situation": "Voici Nora. Elle est infographiste 3D. Ses personnages de dessin animé sont faits de milliers de petits triangles. Elle veut déplacer un seul triangle. Comment le retrouver ?",
+  "02-sommets": "Un triangle a trois sommets, trois points. Nora leur donne un nom : A, B et C. Elle écrit : triangle A B C.",
+  "03-trois-lettres": "Pour nommer un triangle, on prend ses trois sommets. Trois lettres, ni plus, ni moins.",
+  "04-ordre": "L'ordre des lettres ne compte pas. Voici le triangle D E F. On peut dire aussi F E D, ou E F D. C'est le même triangle : les sommets n'ont pas bougé.",
+  "05-question": "Question ! Un triangle a pour sommets R, S et T. Quel est son nom ? A : triangle R S. B : triangle T R S. C : triangle R S T U. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. T R S : ce sont bien les trois sommets. L'ordre ne compte pas.",
+  "06-piege": "Attention ! Deux lettres ne nomment pas un triangle. A B entre crochets, c'est un segment, un seul côté. Et une lettre en trop, c'est un autre point.",
+  "07-question": "Question ! Voici le triangle K L M. Le point P est-il un de ses sommets ? A : oui. B : non. C : on ne peut pas savoir. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Les sommets sont les trois lettres du nom : K, L et M. P n'en fait pas partie.",
+  "08-defi": "À toi de jouer ! Un triangle a pour sommets G, H et T. Trouve trois noms différents pour ce triangle. Mets pause, et cherche !",
+  "08b-correction": "Correction. Par exemple : G H T, T G H et H T G. Il y en a d'autres. Il faut toujours les trois lettres, une seule fois chacune.",
+  "09-finale": "Ce que tu as appris. Un triangle se nomme avec ses trois sommets. L'ordre des lettres ne compte pas. Deux lettres, ce n'est qu'un côté.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

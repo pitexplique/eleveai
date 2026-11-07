@@ -1,0 +1,18 @@
+{
+  "00-garde": "Reconnaître un triangle par ses côtés. Comment trier des triangles sans se tromper ?",
+  "01-situation": "Voici Awa. Elle est styliste. Elle coud une veste avec des morceaux de tissu en triangle. Pour les trier, elle mesure leurs côtés.",
+  "02-equilateral": "Premier morceau : 5 centimètres, 5 centimètres, 5 centimètres. Les trois côtés ont la même longueur. C'est un triangle équilatéral.",
+  "03-isocele": "Deuxième morceau : 7 centimètres, 7 centimètres et 4 centimètres. Deux côtés ont la même longueur. C'est un triangle isocèle.",
+  "04-quelconque": "Troisième morceau : 6 centimètres, 5 centimètres et 4 centimètres. Trois longueurs différentes. C'est un triangle quelconque.",
+  "05-codage": "Sur un dessin, on code. Des petits traits identiques veulent dire : même longueur. Trois côtés codés pareil : équilatéral. Deux côtés codés pareil : isocèle. Aucun codage : quelconque.",
+  "06-question": "Question ! Un triangle a des côtés de 6 centimètres, 9 centimètres et 6 centimètres. Quelle est sa nature ? A : équilatéral. B : isocèle. C : quelconque. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 6 et 6 : deux côtés égaux. Il est isocèle.",
+  "07-sommet-principal": "Dans un triangle isocèle, les deux côtés égaux partent du même point : le sommet principal. Le troisième côté s'appelle la base. Voici le triangle K L M. K L et L M sont égaux. Il est isocèle en L.",
+  "08-piege": "Attention ! On ne juge pas à l'œil. Ces deux côtés semblent égaux. On mesure : 6 centimètres, et 6 centimètres et demi. Ils sont différents. Ce triangle est quelconque.",
+  "09-question": "Question ! Les trois côtés d'un triangle portent le même codage. Quelle est sa nature la plus précise ? A : isocèle. B : équilatéral. C : quelconque. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. Trois côtés égaux : il est équilatéral.",
+  "10-defi": "À toi de jouer ! Un triangle est isocèle en A. Le côté A B mesure 8 centimètres. La base B C mesure 5 centimètres. Combien mesure le côté A C ? Quel est le périmètre du triangle ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Isocèle en A : les côtés A B et A C sont égaux. Donc A C mesure 8 centimètres. Le périmètre : 8 plus 8 plus 5, 21 centimètres.",
+  "11-finale": "Ce que tu as appris. Trois côtés égaux : équilatéral. Deux côtés égaux : isocèle. Aucun côté égal : quelconque. On lit les mesures et les codages, jamais à l'œil.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

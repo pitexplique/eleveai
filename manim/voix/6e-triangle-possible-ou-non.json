@@ -1,0 +1,18 @@
+{
+  "00-garde": "Un triangle est-il toujours possible ? Trois longueurs font-elles toujours un triangle ?",
+  "01-situation": "Voici Zoé. Elle fabrique des cadres de vélo. Un cadre de vélo est fait de triangles. Zoé teste d'abord une maquette, avec trois baguettes.",
+  "02-non": "Premier essai : 2 centimètres, 3 centimètres et 6 centimètres. Zoé pose la grande. Elle attache les petites à chaque bout. Elles tournent, tournent, et ne se rejoignent pas !",
+  "03-pourquoi": "Pourquoi ? 2 plus 3 : 5. Les deux petites font 5 centimètres, moins que 6. Il manque 1 centimètre.",
+  "04-oui": "Deuxième essai : 4 centimètres, 5 centimètres et 7 centimètres. 4 plus 5 : 9. C'est plus grand que 7. Les baguettes se rejoignent : le triangle existe !",
+  "05-test": "Le test : on ajoute les deux plus petites longueurs. Le résultat doit être plus grand que la troisième.",
+  "06-question": "Question ! Peut-on construire un triangle de côtés 1 centimètre, 2 centimètres et 10 centimètres ? A : oui. B : non. C : oui, si on trace très grand. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 1 plus 2 : 3. C'est bien plus petit que 10.",
+  "07-plat": "Le cas piège : 3 centimètres, 4 centimètres et 7 centimètres. 3 plus 4 : 7, tout juste ! Les baguettes se couchent sur la grande. Le triangle est tout plat : ce n'est pas un vrai triangle.",
+  "08-piege": "Attention ! Prends bien les deux plus petites. Avec 6, 2 et 3 : 6 plus 2 fait 8, plus grand que 3. Ça ne prouve rien ! Il faut ajouter 2 et 3 : 5, moins que 6.",
+  "09-question": "Question ! 6 centimètres, 8 centimètres et 10 centimètres : le triangle existe-t-il ? A : oui, 6 plus 8 dépasse 10. B : non, 10 est trop grand. C : non, il serait tout plat. Mets pause, et choisis !",
+  "09b-reponse": "Réponse A. 6 plus 8 : 14, plus grand que 10. Le triangle existe.",
+  "10-defi": "À toi de jouer ! Zoé a deux baguettes de 5 centimètres et 9 centimètres. Pour la troisième, elle hésite : 3 centimètres, 4 centimètres ou 6 centimètres. Laquelle ferme le triangle ? Mets pause, et cherche !",
+  "10b-correction": "Correction. 3 plus 5 : 8, moins que 9. Non. 4 plus 5 : 9, tout plat. Non. 5 plus 6 : 11, plus grand que 9. Oui : c'est la baguette de 6 centimètres.",
+  "11-finale": "Ce que tu as appris. Trois longueurs ne font pas toujours un triangle. On ajoute les deux plus petites : le résultat doit dépasser la plus grande. S'il est égal, le triangle est tout plat.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

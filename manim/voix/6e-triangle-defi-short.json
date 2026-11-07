@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Ce carré est un puzzle vieux de plus de 200 ans. Il vient de Chine : le tangram. Tu paries qu'il cache un secret ?",
+  "01-pieces": "Je le casse en 7 pièces. Un carré, une pièce penchée, et 5 triangles. 2 petits, 1 moyen, 2 grands.",
+  "02-question": "Question ! Ces 5 triangles, de quelle famille sont-ils ? A : équilatéraux. B : rectangles isocèles. C : quelconques. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. Les 5 ont un angle droit et deux côtés égaux. Petits ou grands, c'est la même forme !",
+  "03-figures": "Avec ces 7 pièces, je fais un chat. Puis un bateau.",
+  "04-commentaire": "À toi : dans le grand triangle, combien mesure chacun des deux petits angles ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

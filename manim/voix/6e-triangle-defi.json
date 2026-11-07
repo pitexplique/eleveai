@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les triangles. Un triangle peut-il avoir deux noms à la fois ?",
+  "01-situation": "Voici Samira. Elle est pâtissière. Elle coupe un gâteau carré en deux, par la diagonale. Elle obtient deux parts en triangle. Quel est leur nom ?",
+  "02-deux-noms": "Regardons les côtés : deux côtés égaux, ceux du carré. Il est isocèle. Regardons les angles : un coin du carré, 90 degrés. Il est rectangle. Il est les deux : rectangle isocèle !",
+  "03-methode": "La méthode : d'abord les côtés, puis les angles. Les petits traits donnent un nom. Le petit carré en donne un autre.",
+  "04-question": "Question ! Ce triangle porte un petit carré, et aucun petit trait. Quelle est sa nature ? A : rectangle. B : isocèle. C : rectangle isocèle. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Il y a un seul codage : l'angle droit. Aucun côté n'est codé égal.",
+  "05-equilateral": "Et un triangle équilatéral ? Il a trois côtés égaux, donc au moins deux. Il est aussi isocèle ! Mais on dit équilatéral : c'est plus précis. L'inverse est faux : un isocèle n'est pas toujours équilatéral.",
+  "06-piege": "Attention ! Ce triangle a l'air rectangle. Ce n'est pas une preuve. Un dessin peut tromper. Il faut le petit carré, ou une mesure de 90 degrés.",
+  "07-question": "Question ! Un triangle équilatéral peut-il être rectangle ? A : oui, s'il est grand. B : oui, s'il est bien tourné. C : non, jamais. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Ses trois angles sont égaux : 60 degrés chacun. Aucun n'est droit.",
+  "08-defi": "À toi de jouer ! Un triangle est isocèle en S. Son périmètre mesure 20 centimètres. Sa base mesure 6 centimètres. Combien mesure chacun des deux côtés égaux ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Sans la base, il reste 20 moins 6 : 14 centimètres. Les deux côtés égaux se partagent 14. 14 divisé par 2 : 7. Chaque côté mesure 7 centimètres.",
+  "09-finale": "Ce que tu as appris. On lit les côtés, puis les angles. Un triangle peut être rectangle et isocèle à la fois. Un équilatéral est aussi isocèle. Et un dessin ne prouve rien sans codage.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

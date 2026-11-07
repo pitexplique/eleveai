@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Salut ! Mes trois copains me parlent de leur triangle. Un seul ment. Tu paries que tu le trouves ?",
+  "01-copains": "Lou dit : mon triangle a un angle de 179 degrés. Max dit : le mien a deux angles droits. Zia dit : le mien a des angles de 90, 45 et 45 degrés.",
+  "02-question": "Question ! Qui ment ? A : Lou. B : Max. C : Zia. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : Max ! 90 plus 90 : 180. Il ne reste rien pour le troisième angle. Ses côtés montent, et ne se rejoignent jamais !",
+  "03-zia": "Zia dit vrai : 90 plus 45 plus 45 : 180.",
+  "04-lou": "Et Lou ? Vrai aussi ! Il reste 1 degré pour les deux autres angles. On dirait un trait, mais c'est bien un triangle !",
+  "05-commentaire": "À toi : le plus grand angle de mon triangle mesure 60 degrés. Combien mesurent les deux autres ? Réponds en commentaire !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

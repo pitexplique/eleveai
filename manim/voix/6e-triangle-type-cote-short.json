@@ -1,0 +1,10 @@
+{
+  "00-accroche": "Salut ! J'ai 9 bâtonnets. Je veux faire un triangle, et je dois tous les utiliser. Combien de triangles différents ? Tu paries ?",
+  "01-equilateral": "Premier essai : 3, 3 et 3. Trois côtés égaux : équilatéral !",
+  "02-question": "Question ! Deuxième essai : 4, 4 et 1. Quel triangle ? A : équilatéral. B : isocèle. C : quelconque. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : deux côtés égaux, isocèle ! Tout pointu, comme une part de pizza.",
+  "03-quelconque": "Troisième essai : 2, 3 et 4. Trois longueurs différentes : quelconque !",
+  "04-rate": "Et 5, 2 et 2 ? Aïe ! Ça ne ferme pas ! Avec 9 bâtonnets, il n'y a que 3 triangles. Un de chaque famille.",
+  "05-commentaire": "À toi : avec 12 bâtonnets, combien de triangles différents ? Réponds en commentaire !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

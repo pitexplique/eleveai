@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Tu paries que ce triangle a plusieurs noms ? Ses sommets s'appellent M, E et R. C'est le triangle M E R !",
+  "01-robot": "Je change l'ordre : R M E. On dirait un nom de robot ! Mais c'est toujours le même triangle.",
+  "02-question": "Question ! Avec ces trois lettres, combien de noms différents pour ce même triangle ? A : 3. B : 6. C : 9. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : 6 noms ! M E R. M R E. E M R. E R M. R M E. R E M. Toujours le même triangle !",
+  "03-cote": "Mais M E tout seul, ce n'est plus un triangle. C'est juste un côté !",
+  "04-commentaire": "À toi : je pose un quatrième point, D. Avec M, E, R et D, combien de triangles différents peux-tu nommer ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

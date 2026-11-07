@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Mon horloge cache des triangles. Tu paries que tu ne les as jamais vus ? Je choisis 3 nombres, je les relie, et je regarde les angles.",
+  "01-aigu": "12, 4 et 8. Trois angles aigus : triangle acutangle.",
+  "02-droit": "12, 3 et 6. Regarde le coin en 3 : un angle droit ! Triangle rectangle.",
+  "03-question": "Question ! 12, 1 et 2 : quel triangle ? A : rectangle. B : obtusangle. C : acutangle. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. Le coin en 1 est très ouvert, plus de 90 degrés : obtusangle !",
+  "04-commentaire": "À toi : relie 12, 5 et 6. Il a l'air bizarre ! Combien mesure l'angle en 5 ? Prends ton équerre, et réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

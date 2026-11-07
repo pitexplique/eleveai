@@ -1,0 +1,17 @@
+{
+  "00-garde": "Trouver l'angle qui manque. Comment trouver un angle sans le mesurer ?",
+  "01-situation": "Voici Maëlle. Elle est charpentière. Elle prépare le toit d'une cabane. Elle connaît deux angles du triangle : 30 degrés et 80 degrés. Elle cherche le troisième, sans le mesurer.",
+  "02-methode": "Deux gestes. Un : j'ajoute les deux angles connus. 30 plus 80 : 110. Deux : je retire de 180. 180 moins 110 : 70. Le troisième angle mesure 70 degrés.",
+  "03-verifier": "On vérifie : 30 plus 80 plus 70 : 180. C'est bon.",
+  "04-question": "Question ! Un triangle a des angles de 40 degrés et 60 degrés. Combien mesure le troisième ? A : 100 degrés. B : 80 degrés. C : 140 degrés. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 40 plus 60 : 100. 180 moins 100 : 80 degrés.",
+  "05-piege": "Attention ! Ne t'arrête pas à l'addition. 100, ce sont les deux angles connus ensemble. Il faut encore retirer de 180.",
+  "06-rectangle": "Dans un triangle rectangle, le petit carré veut dire 90 degrés. Un autre angle mesure 40 degrés. 40 plus 90 : 130. 180 moins 130 : 50 degrés.",
+  "07-question": "Question ! Un triangle rectangle a un angle de 35 degrés. Combien mesure le troisième ? A : 145 degrés. B : 65 degrés. C : 55 degrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 90 plus 35 : 125. 180 moins 125 : 55 degrés.",
+  "08-isocele": "Et un triangle isocèle ? Ses deux angles du bas sont égaux. L'angle du haut mesure 40 degrés. 180 moins 40 : 140. On partage en deux : 140 divisé par 2, 70. Chaque angle du bas mesure 70 degrés.",
+  "09-defi": "À toi de jouer ! Le toit de la cabane est un triangle isocèle. L'angle du haut mesure 100 degrés. Combien mesurent les deux angles du bas ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 180 moins 100 : 80. Les deux angles du bas se partagent 80. 80 divisé par 2 : 40. Chacun mesure 40 degrés.",
+  "10-finale": "Ce que tu as appris. Pour trouver l'angle qui manque, on ajoute les deux angles connus, puis on retire de 180. Dans un triangle isocèle, les deux angles du bas sont égaux.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

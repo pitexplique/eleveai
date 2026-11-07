@@ -1,0 +1,18 @@
+{
+  "00-garde": "Sommets et côtés d'un triangle. Que voit un astronome entre trois étoiles ?",
+  "01-situation": "Voici Karim. Il est astronome. Une nuit, il relie trois étoiles très brillantes : Véga, Deneb et Altaïr. Un triangle apparaît dans le ciel. On l'appelle le triangle d'été.",
+  "02-sommets": "Chaque étoile est un sommet. Un sommet, c'est un point. Ce triangle a trois sommets.",
+  "03-cotes": "Chaque trait relie deux étoiles. C'est un côté. Un côté, c'est un segment. Ce triangle a trois côtés.",
+  "04-noms": "Sur le cahier, on met des lettres. Voici le triangle A B C. Ses sommets sont A, B et C. Ses côtés s'écrivent avec deux lettres entre crochets : A B, B C et C A.",
+  "05-angles": "À chaque sommet, il y a un angle. Trois sommets, trois côtés, trois angles.",
+  "06-question": "Question ! Dans le triangle E F G, quel segment n'est pas un côté ? A : E F. B : F G. C : E H. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. H n'est pas un sommet du triangle. E H n'est donc pas un de ses côtés.",
+  "07-oppose": "Maintenant, le côté opposé. Mets-toi sur le sommet A, et regarde en face. Le côté que tu vois ne touche pas A : c'est B C. C'est le côté opposé au sommet A.",
+  "08-piege": "Attention ! Un sommet est un point : une seule lettre, A. Un côté est un segment : deux lettres et des crochets, A B. Ne les confonds pas.",
+  "09-question": "Question ! Dans le triangle D E F, quel est le côté opposé au sommet F ? A : D E. B : E F. C : D F. Mets pause, et choisis !",
+  "09b-reponse": "Réponse A. D E est le seul côté qui ne touche pas F.",
+  "10-defi": "À toi de jouer ! Voici le triangle R S T. Quel sommet est opposé au côté S T ? Et quel côté est opposé au sommet S ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Le côté S T ne touche pas R : le sommet opposé est R. Le côté qui ne touche pas S, c'est R T : c'est le côté opposé à S.",
+  "11-finale": "Ce que tu as appris. Un triangle a trois sommets, trois côtés et trois angles. Un sommet est un point, un côté est un segment. Le côté opposé à un sommet ne touche pas ce sommet.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

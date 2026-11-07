@@ -1,0 +1,18 @@
+{
+  "00-garde": "Reconnaître un triangle par ses angles. Que cache le profil d'une rampe de skate ?",
+  "01-situation": "Voici Théo. Il construit des rampes de skate. Vu de côté, ce tremplin est un triangle. Pour le classer, Théo regarde ses angles.",
+  "02-rectangle": "Ce triangle a un angle droit : 90 degrés. On le code avec un petit carré. C'est un triangle rectangle.",
+  "03-obtusangle": "Ici, le plus grand angle mesure 120 degrés. C'est plus que 90 : il est obtus. Le triangle est obtusangle.",
+  "04-acutangle": "Et là : 45 degrés, 63 degrés et 72 degrés. Les trois angles sont aigus, moins de 90 degrés. Le triangle est acutangle.",
+  "05-methode": "La méthode : on regarde le plus grand angle. Droit : rectangle. Obtus : obtusangle. Aigu : acutangle.",
+  "06-question": "Question ! Un triangle a des angles de 30 degrés, 40 degrés et 110 degrés. Quel est son type ? A : rectangle. B : obtusangle. C : acutangle. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 110, c'est plus que 90. Cet angle est obtus.",
+  "07-piege": "Attention ! Ce triangle a deux angles aigus : 35 degrés et 25 degrés. Il n'est pas acutangle pour autant ! Son troisième angle mesure 120 degrés. Pour être acutangle, il faut trois angles aigus.",
+  "08-piege-oeil": "Autre piège : cet angle a l'air droit. Sans petit carré et sans mesure, on ne peut rien dire. L'équerre tranche : ici, il mesure 86 degrés. Le triangle n'est pas rectangle.",
+  "09-question": "Question ! Un triangle a des angles de 70 degrés, 60 degrés et 50 degrés. Quel est son type ? A : rectangle. B : obtusangle. C : acutangle. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. Le plus grand angle mesure 70 degrés, moins que 90. Les trois angles sont aigus.",
+  "10-defi": "À toi de jouer ! Théo dessine trois tremplins. Le premier : 90 degrés, 60 degrés et 30 degrés. Le deuxième : 100 degrés, 50 degrés et 30 degrés. Le troisième : 80 degrés, 60 degrés et 40 degrés. Quel est le type de chacun ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Le premier a un angle de 90 degrés : rectangle. Le deuxième a un angle de 100 degrés : obtusangle. Le troisième a un plus grand angle de 80 degrés : acutangle.",
+  "11-finale": "Ce que tu as appris. Un angle droit : triangle rectangle. Un angle obtus : triangle obtusangle. Trois angles aigus : triangle acutangle. C'est le plus grand angle qui décide.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

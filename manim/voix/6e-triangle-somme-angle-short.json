@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je vais te faire un tour de magie. Dessine n'importe quel triangle. Tu paries que je devine la somme de ses angles sans le regarder ?",
+  "01-tour": "Abracadabra ! Je déchire les trois coins. Je les colle côte à côte. Une ligne droite : 180 degrés !",
+  "02-encore": "Un autre triangle, tout pointu. Je déchire. Je colle. Encore 180 degrés !",
+  "03-question": "Question ! Un triangle grand comme un stade, et un triangle petit comme une fourmi. Lequel a la plus grande somme d'angles ? A : le stade. B : la fourmi. C : ils ont la même. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C : 180 degrés pour tous les deux ! Ce n'est pas de la magie : ce sont des maths.",
+  "04-commentaire": "À toi : je déchire les 4 coins d'une figure à 4 côtés. Combien de degrés en tout ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

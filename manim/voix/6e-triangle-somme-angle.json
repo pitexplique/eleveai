@@ -1,0 +1,19 @@
+{
+  "00-garde": "La somme des angles d'un triangle. Que se passe-t-il si on recolle ses trois coins ?",
+  "01-situation": "Voici Lucie. Elle est guide dans un musée des sciences. Elle donne un triangle en papier à chaque enfant. Sa consigne : déchire les trois coins.",
+  "02-coins": "On pose les trois coins côte à côte, les pointes ensemble. Surprise : ils forment une ligne droite. C'est un angle plat.",
+  "03-180": "Un angle plat mesure 180 degrés. Donc les trois angles du triangle font 180 degrés en tout. Ici : 40 degrés, plus 60 degrés, plus 80 degrés : 180 degrés.",
+  "04-tous": "Petit ou grand, pointu ou aplati : c'est vrai pour tous les triangles. Ça ne dépend pas de la taille.",
+  "05-question": "Question ! On agrandit un triangle : ses côtés deviennent deux fois plus longs. Combien font ses trois angles en tout ? A : 90 degrés. B : 180 degrés. C : 360 degrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. La somme ne change jamais : 180 degrés, pour tous les triangles.",
+  "06-deux-autres": "Un angle mesure 100 degrés. Combien font les deux autres ensemble ? 180 moins 100 : 80 degrés.",
+  "07-rectangle": "Dans un triangle rectangle, l'angle droit prend déjà 90 degrés. Les deux autres font 90 degrés à eux deux. Par exemple : 35 degrés et 55 degrés.",
+  "08-question": "Question ! Un triangle a un angle de 120 degrés. Combien font ses deux autres angles ensemble ? A : 60 degrés. B : 180 degrés. C : 300 degrés. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 180 moins 120 : 60 degrés.",
+  "09-piege": "Attention ! Au rapporteur, tu trouveras peut-être 179 ou 181 degrés. La règle n'est pas fausse. C'est ta mesure : elle n'est jamais parfaite.",
+  "10-histoire": "Blaise Pascal aurait trouvé cette règle tout seul, vers 12 ans, d'après sa sœur. Sans rapporteur, juste en cherchant.",
+  "11-defi": "À toi de jouer ! Un triangle a des angles de 70 degrés, 60 degrés et 50 degrés. Un autre a des angles de 70 degrés, 60 degrés et 60 degrés. Lequel peut exister ? Mets pause, et cherche !",
+  "11b-correction": "Correction. 70 plus 60 plus 50 : 180. Ce triangle existe. 70 plus 60 plus 60 : 190. Ce n'est pas 180 : ce triangle n'existe pas.",
+  "12-finale": "Ce que tu as appris. Dans tout triangle, les trois angles font 180 degrés en tout. Cela ne dépend pas de la taille. Dans un triangle rectangle, les deux autres angles font 90 degrés à eux deux.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
