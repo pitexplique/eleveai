@@ -64344,6 +64344,1358 @@
       "centres": [
         "histoire-geographie"
       ]
+    },
+    {
+      "id": "6e-triangle-nommer",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_nommer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer.mp4",
+      "miniature": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer.png",
+      "titre": "Comment retrouver un triangle parmi des milliers ? — Nommer un triangle — épisode 1 · Maths 6e",
+      "accroche": "Nora est infographiste 3D. Ses personnages sont faits de milliers de petits triangles. Elle veut en déplacer un seul : comment le retrouver ?\n\nDans cette vidéo :\n• un triangle se nomme avec ses trois sommets\n• trois lettres, ni plus, ni moins\n• l'ordre des lettres ne compte pas\n• deux lettres, ce n'est qu'un côté\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trouve trois noms différents pour le triangle de sommets G, H et T.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_nommer&display=simple\n\n📐 Épisode 1 sur 9 de la série Triangles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment retrouver un triangle ?"
+        ],
+        [
+          "00:21",
+          "Trois sommets, trois lettres"
+        ],
+        [
+          "00:39",
+          "L'ordre des lettres"
+        ],
+        [
+          "00:52",
+          "Question 1"
+        ],
+        [
+          "01:19",
+          "Le piège"
+        ],
+        [
+          "01:32",
+          "Question 2"
+        ],
+        [
+          "02:00",
+          "À toi de jouer"
+        ],
+        [
+          "02:11",
+          "Correction"
+        ],
+        [
+          "02:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure",
+      "tags": [
+        "nommer un triangle",
+        "sommet",
+        "infographiste",
+        "jeu vidéo",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Un triangle a pour sommets R, S et T. Quel est son nom ?",
+          "choix": [
+            "triangle RS",
+            "triangle TRS",
+            "triangle RSTU"
+          ],
+          "reponse": 1,
+          "explication": "TRS : les trois sommets. L'ordre ne compte pas."
+        },
+        {
+          "t": "01:32",
+          "question": "Voici le triangle KLM. Le point P est-il un de ses sommets ?",
+          "choix": [
+            "oui",
+            "non",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "Les sommets sont K, L et M. P n'en fait pas partie."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-triangle-nommer-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_nommer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-triangle-nommer",
+      "fichier": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer-short.mp4",
+      "miniature": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer-short-miniature.png",
+      "titre": "Tu paries que ce triangle a plusieurs noms ? #maths #6e",
+      "accroche": "Le triangle MER a un drôle de nom de robot : RME. Combien de noms peut-il porter ? Et M E tout seul, est-ce encore un triangle ?\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : je pose un quatrième point, S. Avec M, E, R et S, combien de triangles différents peux-tu nommer ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_nommer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #triangles #6e #collège",
+      "tags": [
+        "nommer un triangle",
+        "sommet",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "film d'animation 3D",
+        "Ti Margo",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Avec ces trois lettres, combien de noms différents pour ce même triangle ?",
+          "choix": [
+            "3",
+            "6",
+            "9"
+          ],
+          "reponse": 1,
+          "explication": "6 noms : M E R, M R E, E M R, E R M, R M E, R E M."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-sommet-cote",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_sommet_cote",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote.mp4",
+      "miniature": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote.png",
+      "titre": "Que voit un astronome entre trois étoiles ? — Sommets et côtés d'un triangle — épisode 2 · Maths 6e",
+      "accroche": "Karim est astronome. Une nuit, il relie trois étoiles très brillantes : Véga, Deneb et Altaïr. Un triangle apparaît dans le ciel : le triangle d'été.\n\nDans cette vidéo :\n• un sommet est un point, un côté est un segment\n• trois sommets, trois côtés, trois angles\n• écrire un côté avec deux lettres entre crochets\n• le côté opposé à un sommet\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : dans le triangle R S T, quel sommet est opposé au côté S T, et quel côté est opposé au sommet S ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_sommet_cote&display=simple\n\n📐 Épisode 2 sur 9 de la série Triangles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un triangle dans le ciel"
+        ],
+        [
+          "00:22",
+          "Sommets et côtés"
+        ],
+        [
+          "00:41",
+          "Les noms sur le cahier"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:28",
+          "Le côté opposé"
+        ],
+        [
+          "01:43",
+          "Le piège"
+        ],
+        [
+          "01:54",
+          "Question 2"
+        ],
+        [
+          "02:18",
+          "À toi de jouer"
+        ],
+        [
+          "02:33",
+          "Correction"
+        ],
+        [
+          "02:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure",
+      "tags": [
+        "sommet",
+        "côté",
+        "côté opposé",
+        "segment",
+        "astronome",
+        "triangle d'été",
+        "étoiles",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Dans le triangle EFG, quel segment n'est pas un côté ?",
+          "choix": [
+            "[EF]",
+            "[FG]",
+            "[EH]"
+          ],
+          "reponse": 2,
+          "explication": "H n'est pas un sommet du triangle : [EH] n'est pas un côté."
+        },
+        {
+          "t": "01:54",
+          "question": "Dans le triangle DEF, quel est le côté opposé au sommet F ?",
+          "choix": [
+            "[DE]",
+            "[EF]",
+            "[DF]"
+          ],
+          "reponse": 0,
+          "explication": "[DE] est le seul côté qui ne touche pas F."
+        }
+      ],
+      "centres": [
+        "espace"
+      ]
+    },
+    {
+      "id": "6e-triangle-sommet-cote-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_sommet_cote",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-triangle-sommet-cote",
+      "fichier": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote-short.mp4",
+      "miniature": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote-short-miniature.png",
+      "titre": "Tu sais compter les triangles ? Tu paries que tu vas en oublier un ? #maths #6e",
+      "accroche": "Un triangle, un trait : combien de triangles maintenant ? Il y en a un que tout le monde oublie.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec 3 traits depuis le sommet, combien de triangles ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_sommet_cote&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #triangles #6e #collège",
+      "tags": [
+        "compter les triangles",
+        "sommet",
+        "côté",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "film d'animation 3D",
+        "Ti Margo",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Combien de triangles maintenant ?",
+          "choix": [
+            "2",
+            "3",
+            "4"
+          ],
+          "reponse": 1,
+          "explication": "3 : celui de gauche, celui de droite, et le grand que tout le monde oublie."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-type-cote",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_type_cote",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote.mp4",
+      "miniature": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote.png",
+      "titre": "Comment trier des triangles sans se tromper ? — Reconnaître un triangle par ses côtés · Maths 6e",
+      "accroche": "Awa est styliste. Elle coud une veste avec des morceaux de tissu en triangle. Pour les trier, elle mesure leurs côtés.\n\nDans cette vidéo :\n• équilatéral : trois côtés égaux\n• isocèle : deux côtés égaux, le sommet principal, la base\n• quelconque : trois longueurs différentes\n• lire le codage, ne jamais juger à l'œil\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un triangle est isocèle en A, [AB] mesure 8 cm et la base [BC] 5 cm : combien mesure [AC], et quel est le périmètre ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_type_cote&display=simple\n\n📐 Épisode 3 sur 9 de la série Triangles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Trier des morceaux de tissu"
+        ],
+        [
+          "00:19",
+          "Équilatéral"
+        ],
+        [
+          "00:31",
+          "Isocèle"
+        ],
+        [
+          "00:43",
+          "Quelconque"
+        ],
+        [
+          "00:55",
+          "Le codage"
+        ],
+        [
+          "01:13",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "Sommet principal et base"
+        ],
+        [
+          "02:01",
+          "Le piège"
+        ],
+        [
+          "02:17",
+          "Question 2"
+        ],
+        [
+          "02:45",
+          "À toi de jouer"
+        ],
+        [
+          "03:07",
+          "Correction"
+        ],
+        [
+          "03:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure",
+      "tags": [
+        "triangle équilatéral",
+        "triangle isocèle",
+        "triangle quelconque",
+        "codage",
+        "styliste",
+        "couture",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Un triangle a des côtés de 6 cm, 9 cm et 6 cm. Quelle est sa nature ?",
+          "choix": [
+            "équilatéral",
+            "isocèle",
+            "quelconque"
+          ],
+          "reponse": 1,
+          "explication": "6 et 6 : deux côtés égaux, il est isocèle."
+        },
+        {
+          "t": "02:17",
+          "question": "Les trois côtés portent le même codage. Quelle est sa nature la plus précise ?",
+          "choix": [
+            "isocèle",
+            "équilatéral",
+            "quelconque"
+          ],
+          "reponse": 1,
+          "explication": "Trois côtés égaux : il est équilatéral."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-triangle-type-cote-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_type_cote",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-triangle-type-cote",
+      "fichier": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote-short.mp4",
+      "miniature": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote-short-miniature.png",
+      "titre": "9 bâtonnets : combien de triangles différents ? Tu paries ? #maths #6e",
+      "accroche": "Avec 9 bâtonnets, tous utilisés : 3-3-3, 4-4-1, 2-3-4. Et 5-2-2 ? Aïe, ça ne ferme pas ! Un triangle de chaque famille.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec 12 bâtonnets, combien de triangles différents ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_type_cote&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #triangles #6e #collège",
+      "tags": [
+        "bâtonnets",
+        "équilatéral",
+        "isocèle",
+        "quelconque",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "film d'animation 3D",
+        "Ti Margo",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Deuxième essai : 4, 4 et 1. Quel triangle ?",
+          "choix": [
+            "équilatéral",
+            "isocèle",
+            "quelconque"
+          ],
+          "reponse": 1,
+          "explication": "Deux côtés égaux : isocèle."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-type-angle",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_type_angle",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle.mp4",
+      "miniature": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle.png",
+      "titre": "Que cache le profil d'une rampe de skate ? — Reconnaître un triangle par ses angles · Maths 6e",
+      "accroche": "Théo construit des rampes de skate. Vu de côté, son tremplin est un triangle. Pour le classer, il regarde ses angles.\n\nDans cette vidéo :\n• rectangle : un angle droit\n• obtusangle : un angle obtus\n• acutangle : trois angles aigus\n• c'est le plus grand angle qui décide\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois tremplins, 90° 60° 30°, 100° 50° 30° et 80° 60° 40° : quel est le type de chacun ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_type_angle&display=simple\n\n📐 Épisode 4 sur 9 de la série Triangles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le profil d'une rampe de skate"
+        ],
+        [
+          "00:19",
+          "Rectangle"
+        ],
+        [
+          "00:29",
+          "Obtusangle"
+        ],
+        [
+          "00:40",
+          "Acutangle"
+        ],
+        [
+          "00:53",
+          "La méthode"
+        ],
+        [
+          "01:04",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "Le piège des deux angles aigus"
+        ],
+        [
+          "01:50",
+          "Le piège de l'œil"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:39",
+          "À toi de jouer"
+        ],
+        [
+          "03:06",
+          "Correction"
+        ],
+        [
+          "03:22",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure",
+      "tags": [
+        "triangle rectangle",
+        "obtusangle",
+        "acutangle",
+        "angle droit",
+        "skate",
+        "rampe",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "Un triangle a des angles de 30°, 40° et 110°. Quel est son type ?",
+          "choix": [
+            "rectangle",
+            "obtusangle",
+            "acutangle"
+          ],
+          "reponse": 1,
+          "explication": "110, c'est plus que 90 : cet angle est obtus."
+        },
+        {
+          "t": "02:06",
+          "question": "Un triangle a des angles de 70°, 60° et 50°. Quel est son type ?",
+          "choix": [
+            "rectangle",
+            "obtusangle",
+            "acutangle"
+          ],
+          "reponse": 2,
+          "explication": "Le plus grand angle mesure 70° : les trois angles sont aigus."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "6e-triangle-type-angle-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_type_angle",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-triangle-type-angle",
+      "fichier": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle-short.mp4",
+      "miniature": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle-short-miniature.png",
+      "titre": "Mon horloge cache des triangles : tu paries que tu ne les as jamais vus ? #maths #6e",
+      "accroche": "Je choisis 3 nombres sur l'horloge, je les relie, et je regarde les angles. 12-4-8 ? 12-3-6 ? 12-1-2 ? Trois familles de triangles.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : relie 12, 5 et 6. Combien mesure l'angle en 5 ? Prends ton équerre ! Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_type_angle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #triangles #6e #collège",
+      "tags": [
+        "horloge",
+        "rectangle",
+        "obtusangle",
+        "acutangle",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture blanche",
+        "film d'animation 3D",
+        "Ti Margo",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "12, 1 et 2 : quel triangle ?",
+          "choix": [
+            "rectangle",
+            "obtusangle",
+            "acutangle"
+          ],
+          "reponse": 1,
+          "explication": "Le coin en 1 est très ouvert, plus de 90° : obtusangle."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-defi",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi.mp4",
+      "miniature": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi.png",
+      "titre": "Un triangle peut-il avoir deux noms à la fois ? — Défis sur les triangles — épisode 5 · Maths 6e",
+      "accroche": "Samira est pâtissière. Elle coupe un gâteau carré en deux, par la diagonale. Elle obtient deux parts en triangle. Quel est leur nom ?\n\nDans cette vidéo :\n• d'abord les côtés, puis les angles\n• rectangle et isocèle à la fois\n• un équilatéral est aussi isocèle\n• un dessin ne prouve rien sans codage\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un triangle est isocèle en S, son périmètre mesure 20 cm et sa base 6 cm : combien mesure chacun des deux côtés égaux ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_defi&display=simple\n\n📐 Épisode 5 sur 9 de la série Triangles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le gâteau coupé en deux"
+        ],
+        [
+          "00:20",
+          "Deux noms à la fois"
+        ],
+        [
+          "00:36",
+          "La méthode"
+        ],
+        [
+          "00:46",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "L'équilatéral est aussi isocèle"
+        ],
+        [
+          "01:34",
+          "Le piège"
+        ],
+        [
+          "01:48",
+          "Question 2"
+        ],
+        [
+          "02:17",
+          "À toi de jouer"
+        ],
+        [
+          "02:34",
+          "Correction"
+        ],
+        [
+          "02:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/triangle-figure",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-figure",
+      "tags": [
+        "triangle rectangle isocèle",
+        "codage",
+        "périmètre",
+        "pâtissière",
+        "gâteau",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:46",
+          "question": "Ce triangle porte un petit carré, et aucun petit trait. Quelle est sa nature ?",
+          "choix": [
+            "rectangle",
+            "isocèle",
+            "rectangle isocèle"
+          ],
+          "reponse": 0,
+          "explication": "Un seul codage : l'angle droit. Aucun côté n'est codé égal."
+        },
+        {
+          "t": "01:48",
+          "question": "Un triangle équilatéral peut-il être rectangle ?",
+          "choix": [
+            "oui, s'il est grand",
+            "oui, s'il est bien tourné",
+            "non, jamais"
+          ],
+          "reponse": 2,
+          "explication": "Ses trois angles mesurent 60° : aucun n'est droit."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-defi-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_figure",
+      "microId": "triangle_defi",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-triangle-defi",
+      "fichier": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi-short.mp4",
+      "miniature": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi-short-miniature.png",
+      "titre": "Ce puzzle a plus de 200 ans : tu paries qu'il cache un secret ? #maths #6e",
+      "accroche": "Le tangram vient de Chine. Un carré, cassé en 7 pièces, dont 5 triangles. Petits ou grands, ils ont un secret. Et avec les 7 pièces, je fais un chat, puis un bateau.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : dans le grand triangle, combien mesure chacun des deux petits angles ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #triangles #6e #collège",
+      "tags": [
+        "tangram",
+        "puzzle",
+        "rectangle isocèle",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "film d'animation 3D",
+        "Ti Margo",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Ces 5 triangles, de quelle famille sont-ils ?",
+          "choix": [
+            "équilatéraux",
+            "rectangles isocèles",
+            "quelconques"
+          ],
+          "reponse": 1,
+          "explication": "Les 5 ont un angle droit et deux côtés égaux."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-somme-angle",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_propriete",
+      "microId": "triangle_somme_angle",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle.mp4",
+      "miniature": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle.png",
+      "titre": "Que se passe-t-il si on recolle ses trois coins ? — La somme des angles d'un triangle · Maths 6e",
+      "accroche": "Lucie est guide dans un musée des sciences. Elle donne un triangle en papier à chaque enfant. Sa consigne : déchire les trois coins.\n\nDans cette vidéo :\n• les trois coins recollés forment un angle plat\n• dans tout triangle, les trois angles font 180°\n• ça ne dépend pas de la taille\n• dans un triangle rectangle, les deux autres font 90°\n• l'histoire de Blaise Pascal\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 70° 60° 50°, ou 70° 60° 60° : quel triangle peut exister ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/triangle-propriete\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-propriete\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_somme_angle&display=simple\n\n📐 Épisode 6 sur 9 de la série Triangles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les coins déchirés"
+        ],
+        [
+          "00:19",
+          "Les trois coins côte à côte"
+        ],
+        [
+          "00:29",
+          "180 degrés"
+        ],
+        [
+          "00:53",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Les deux autres angles"
+        ],
+        [
+          "01:36",
+          "Le triangle rectangle"
+        ],
+        [
+          "01:50",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "Le piège du rapporteur"
+        ],
+        [
+          "02:32",
+          "Blaise Pascal"
+        ],
+        [
+          "02:42",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:22",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/triangle-propriete",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-propriete",
+      "tags": [
+        "somme des angles",
+        "180 degrés",
+        "angle plat",
+        "Blaise Pascal",
+        "musée",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "On agrandit un triangle : ses côtés deviennent deux fois plus longs. Combien font ses trois angles en tout ?",
+          "choix": [
+            "90°",
+            "180°",
+            "360°"
+          ],
+          "reponse": 1,
+          "explication": "La somme ne change jamais : 180°, pour tous les triangles."
+        },
+        {
+          "t": "01:50",
+          "question": "Un triangle a un angle de 120°. Combien font ses deux autres angles ensemble ?",
+          "choix": [
+            "60°",
+            "180°",
+            "300°"
+          ],
+          "reponse": 0,
+          "explication": "180 − 120 = 60°."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "6e-triangle-somme-angle-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_propriete",
+      "microId": "triangle_somme_angle",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-triangle-somme-angle",
+      "fichier": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle-short.mp4",
+      "miniature": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle-short-miniature.png",
+      "titre": "Tu paries que je devine la somme des angles de ton triangle sans le regarder ? #maths #6e",
+      "accroche": "Un tour de magie : je déchire les trois coins d'un triangle et je les colle côte à côte. Une ligne droite ! Et sur un autre triangle ? Encore. Ce n'est pas de la magie : ce sont des maths.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : je déchire les 4 coins d'une figure à 4 côtés. Combien de degrés en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_somme_angle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #triangles #6e #collège",
+      "tags": [
+        "tour de magie",
+        "somme des angles",
+        "180 degrés",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "film d'animation 3D",
+        "Ti Margo",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Un triangle grand comme un stade, un triangle petit comme une fourmi : lequel a la plus grande somme d'angles ?",
+          "choix": [
+            "le stade",
+            "la fourmi",
+            "ils ont la même"
+          ],
+          "reponse": 2,
+          "explication": "180° pour tous les deux."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-angle-manquant",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_propriete",
+      "microId": "triangle_angle_manquant",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant.mp4",
+      "miniature": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant.png",
+      "titre": "Comment trouver un angle sans le mesurer ? — Trouver l'angle qui manque — épisode 7 · Maths 6e",
+      "accroche": "Maëlle est charpentière. Elle prépare le toit d'une cabane. Elle connaît deux angles du triangle : 30° et 80°. Elle cherche le troisième, sans le mesurer.\n\nDans cette vidéo :\n• deux gestes : on ajoute, puis on retire de 180\n• vérifier son résultat\n• dans un triangle rectangle, le petit carré vaut 90°\n• dans un triangle isocèle, les angles du bas sont égaux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le toit est isocèle, l'angle du haut mesure 100° : combien mesurent les deux angles du bas ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/triangle-propriete\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-propriete\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_angle_manquant&display=simple\n\n📐 Épisode 7 sur 9 de la série Triangles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le toit de Maëlle"
+        ],
+        [
+          "00:22",
+          "La méthode en deux gestes"
+        ],
+        [
+          "00:48",
+          "Question 1"
+        ],
+        [
+          "01:20",
+          "Le piège : ne pas s'arrêter à l'addition"
+        ],
+        [
+          "01:31",
+          "Le triangle rectangle"
+        ],
+        [
+          "01:48",
+          "Question 2"
+        ],
+        [
+          "02:22",
+          "Le triangle isocèle"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/triangle-propriete",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-propriete",
+      "tags": [
+        "angle manquant",
+        "somme des angles",
+        "180 degrés",
+        "charpentière",
+        "toit",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "Un triangle a des angles de 40° et 60°. Combien mesure le troisième ?",
+          "choix": [
+            "100°",
+            "80°",
+            "140°"
+          ],
+          "reponse": 1,
+          "explication": "40 + 60 = 100, et 180 − 100 = 80°."
+        },
+        {
+          "t": "01:48",
+          "question": "Un triangle rectangle a un angle de 35°. Combien mesure le troisième ?",
+          "choix": [
+            "145°",
+            "65°",
+            "55°"
+          ],
+          "reponse": 2,
+          "explication": "90 + 35 = 125, et 180 − 125 = 55°."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-angle-manquant-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_propriete",
+      "microId": "triangle_angle_manquant",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-triangle-angle-manquant",
+      "fichier": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant-short.mp4",
+      "miniature": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant-short-miniature.png",
+      "titre": "J'ai mangé un coin de ce triangle : tu paries que je le retrouve ? #maths #6e",
+      "accroche": "Oups, j'ai croqué un coin du biscuit ! 50°, 60°, et le troisième a disparu. Pas grave : 3 angles, ça fait 180°.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : un triangle isocèle a un angle de 40°. Combien mesurent les deux autres ? Attention, il y a 2 solutions ! Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_angle_manquant&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #triangles #6e #collège",
+      "tags": [
+        "biscuit",
+        "angle manquant",
+        "180 degrés",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "film d'animation 3D",
+        "Ti Margo",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Il reste 90° et 35°. Quel coin j'ai mangé ?",
+          "choix": [
+            "55°",
+            "65°",
+            "145°"
+          ],
+          "reponse": 0,
+          "explication": "90 + 35 = 125, et 180 − 125 = 55°."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-possible-ou-non",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_propriete",
+      "microId": "triangle_possible_ou_non",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non.mp4",
+      "miniature": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non.png",
+      "titre": "Trois longueurs font-elles toujours un triangle ? — Triangle possible ou non — épisode 8 · Maths 6e",
+      "accroche": "Zoé fabrique des cadres de vélo, faits de triangles. Elle teste d'abord une maquette, avec trois baguettes. Parfois, elles ne se rejoignent pas !\n\nDans cette vidéo :\n• pourquoi 2, 3 et 6 ne se rejoignent pas\n• le test : les deux plus petites doivent dépasser la plus grande\n• le cas piège : 3, 4 et 7, tout plat\n• prendre bien les deux plus petites\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : deux baguettes de 5 cm et 9 cm : laquelle ferme le triangle, 3 cm, 4 cm ou 6 cm ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/triangle-propriete\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-propriete\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_possible_ou_non&display=simple\n\n📐 Épisode 8 sur 9 de la série Triangles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Zoé et ses vélos"
+        ],
+        [
+          "00:19",
+          "Premier essai : 2, 3 et 6"
+        ],
+        [
+          "00:34",
+          "Pourquoi ça ne ferme pas"
+        ],
+        [
+          "00:45",
+          "Deuxième essai, et le test"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:37",
+          "Le cas tout plat : 3, 4 et 7"
+        ],
+        [
+          "01:54",
+          "Le piège : les deux plus petites"
+        ],
+        [
+          "02:11",
+          "Question 2"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:22",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/triangle-propriete",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-propriete",
+      "tags": [
+        "inégalité triangulaire",
+        "construire un triangle",
+        "longueurs",
+        "vélo",
+        "cadre de vélo",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Peut-on construire un triangle de côtés 1 cm, 2 cm et 10 cm ?",
+          "choix": [
+            "oui",
+            "non",
+            "oui, si on trace très grand"
+          ],
+          "reponse": 1,
+          "explication": "1 + 2 = 3, bien plus petit que 10."
+        },
+        {
+          "t": "02:11",
+          "question": "6 cm, 8 cm et 10 cm : le triangle existe-t-il ?",
+          "choix": [
+            "oui, 6 + 8 dépasse 10",
+            "non, 10 est trop grand",
+            "non, il serait tout plat"
+          ],
+          "reponse": 0,
+          "explication": "6 + 8 = 14, plus grand que 10 : le triangle existe."
+        }
+      ],
+      "centres": [
+        "transports",
+        "sport"
+      ]
+    },
+    {
+      "id": "6e-triangle-possible-ou-non-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_propriete",
+      "microId": "triangle_possible_ou_non",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-triangle-possible-ou-non",
+      "fichier": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non-short.mp4",
+      "miniature": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non-short-miniature.png",
+      "titre": "2 m, 3 m et 6 m : tu paries que mon toit tient ? #maths #6e",
+      "accroche": "Je construis ma cabane avec trois planches. Elles tournent, tournent, et ne se touchent pas. Mon toit est raté ! Puis 3, 4 et 7 : tout plat, bonjour la pluie.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : deux planches de 3 m et 7 m, la troisième mesure un nombre entier de mètres. Combien de longueurs possibles pour fermer mon toit ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_possible_ou_non&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #triangles #6e #collège",
+      "tags": [
+        "cabane",
+        "planches",
+        "construire un triangle",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "film d'animation 3D",
+        "Ti Margo",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Planches de 3 m, 4 m et 7 m. Que se passe-t-il ?",
+          "choix": [
+            "un beau toit",
+            "un toit tout plat",
+            "elles ne se touchent pas"
+          ],
+          "reponse": 1,
+          "explication": "3 + 4 = 7, tout juste : les planches se couchent."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-propriete-defi",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_propriete",
+      "microId": "triangle_propriete_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi.mp4",
+      "miniature": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi.png",
+      "titre": "Peut-on croire tout ce qu'on lit sur les triangles ? — Défis sur les angles — épisode 9 · Maths 6e",
+      "accroche": "Sarah est journaliste. Son métier : vérifier ce qu'on lit en ligne. Aujourd'hui, elle teste quatre phrases sur les triangles.\n\nDans cette vidéo :\n• deux angles droits, c'est impossible\n• un équilatéral a trois angles de 60°\n• un angle de 179°, c'est possible\n• les angles ne donnent pas la longueur des côtés\n• ne pas mélanger les deux tests\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un triangle avec un angle de 100° et un de 90°, puis un triangle de côtés 5 cm, 5 cm et 9 cm : vrai ou faux ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/triangle-propriete\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-propriete\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_propriete_defi&display=simple\n\n📐 Épisode 9 sur 9 de la série Triangles d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sarah vérifie"
+        ],
+        [
+          "00:20",
+          "Deux angles droits"
+        ],
+        [
+          "00:38",
+          "L'équilatéral"
+        ],
+        [
+          "00:51",
+          "Question 1"
+        ],
+        [
+          "01:28",
+          "Un angle de 179 degrés"
+        ],
+        [
+          "01:44",
+          "Question 2"
+        ],
+        [
+          "02:17",
+          "Angles et longueurs"
+        ],
+        [
+          "02:30",
+          "Ne pas mélanger les deux tests"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "03:05",
+          "Correction"
+        ],
+        [
+          "03:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/triangle-propriete",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/triangle-propriete",
+      "tags": [
+        "somme des angles",
+        "vrai ou faux",
+        "journaliste",
+        "esprit critique",
+        "fausses informations",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "Un triangle a des angles de 90°, 45° et 45°. Est-ce possible ?",
+          "choix": [
+            "oui, le total fait 180",
+            "non, deux angles sont égaux",
+            "non, 45 est trop petit"
+          ],
+          "reponse": 0,
+          "explication": "90 + 45 + 45 = 180 : c'est un triangle rectangle isocèle."
+        },
+        {
+          "t": "01:44",
+          "question": "Un triangle isocèle a deux angles du bas de 95°. Est-ce possible ?",
+          "choix": [
+            "oui",
+            "non, 95 + 95 dépasse 180",
+            "oui, s'il est très grand"
+          ],
+          "reponse": 1,
+          "explication": "95 + 95 = 190 : c'est déjà plus que 180."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-triangle-propriete-defi-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "triangle_propriete",
+      "microId": "triangle_propriete_defi",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-triangle-propriete-defi",
+      "fichier": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi-short.mp4",
+      "miniature": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi-short-miniature.png",
+      "titre": "Un seul de mes copains ment : tu paries que tu le trouves ? #maths #6e",
+      "accroche": "Lou, Max et Zia me parlent de leur triangle : 179°, deux angles droits, 90-45-45. Un seul ment. Le calcul le démasque.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : le plus grand angle de mon triangle mesure 60°. Combien mesurent les deux autres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_propriete_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #triangles #6e #collège",
+      "tags": [
+        "qui ment",
+        "copains",
+        "somme des angles",
+        "triangles",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "eleveai",
+        "ceinture jaune",
+        "film d'animation 3D",
+        "Ti Margo",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Qui ment ?",
+          "choix": [
+            "Lou",
+            "Max",
+            "Zia"
+          ],
+          "reponse": 1,
+          "explication": "Max : 90 + 90 = 180, il ne reste rien pour le troisième angle."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

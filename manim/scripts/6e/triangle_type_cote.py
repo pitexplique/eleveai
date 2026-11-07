@@ -401,7 +401,7 @@ class TriangleTypeCoteBase(FinTriangles, PaysageProp):
         l5 = self.bloc(["Quel est le périmètre", "du triangle ?"], 34, ORANGE_RETENUE)
         self.col(l5, -0.55, xl=0.4)
         self.play(FadeIn(l5, shift=UP * 0.1), run_time=0.35)
-        self.pause_defi(y=-1.3)
+        self.pause_defi(y=-1.55)
 
     def ecran_correction(self):
         self.ecran("10b-correction", 0.65)

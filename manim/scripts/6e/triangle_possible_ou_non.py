@@ -334,7 +334,7 @@ class TrianglePossibleBase(CalculAuMot, FinTriangles, PaysageProp):
         def apres(sc):
             sc.play(*b.tourner(ag, ad, 0.35))
 
-        ca = self.t("oui, 6 + 8 > 10", 32)
+        ca = self.t("oui, 6 + 8 > 10", 27)
         ca._pas_audit = True  # il attend « 10 » : jamais en avance ; la coche le resserre à la réponse
         self.question_pause("09-question", "09b-reponse", ["6 cm, 8 cm et 10 cm :", "le triangle existe-t-il ?"],
                             [ca, self.t("non, 10 est trop grand", 30), self.t("non, il serait tout plat", 30)], 0,

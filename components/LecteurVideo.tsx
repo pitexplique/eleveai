@@ -22,7 +22,7 @@ const COUPE_FIN = 3.6; // secondes retirées à la fin : « Et abonne-toi ! »
 // après « Entraîne-toi sur éleveai point f r. » (mesuré dans le WAV de fin et le mp4).
 const COUPE_PAR_VIDEO: Record<string, number> = {
   "4e-equation-probleme": 8.6,
-  "4e-equation-probleme-short": 4.2,
+  "4e-equation-probleme-short": 4.7,
   // Relatifs 4e : mesuré dans les mp4, la pause après « point f r » (07/11).
   "4e-relatif-addition": 8.4,
   "4e-relatif-soustraction": 8.4,
@@ -38,6 +38,25 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "4e-relatif-calcul-short": 4.1,
   "4e-relatif-probleme-short": 4.1,
   "4e-relatif-defi-short": 4.1,
+  // Triangles 6e : mesuré dans les mp4, la pause après « point f r » (07/11).
+  "6e-triangle-nommer": 8.4,
+  "6e-triangle-sommet-cote": 8.4,
+  "6e-triangle-type-cote": 8.4,
+  "6e-triangle-type-angle": 8.4,
+  "6e-triangle-defi": 8.4,
+  "6e-triangle-somme-angle": 8.4,
+  "6e-triangle-angle-manquant": 8.4,
+  "6e-triangle-possible-ou-non": 8.4,
+  "6e-triangle-propriete-defi": 8.4,
+  "6e-triangle-nommer-short": 4.2,
+  "6e-triangle-sommet-cote-short": 4.2,
+  "6e-triangle-type-cote-short": 4.2,
+  "6e-triangle-type-angle-short": 4.2,
+  "6e-triangle-defi-short": 4.2,
+  "6e-triangle-somme-angle-short": 4.2,
+  "6e-triangle-angle-manquant-short": 4.2,
+  "6e-triangle-possible-ou-non-short": 4.2,
+  "6e-triangle-propriete-defi-short": 4.2,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

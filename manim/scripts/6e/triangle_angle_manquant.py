@@ -100,7 +100,7 @@ class TriangleAngleManquantBase(FinTriangles, PaysageProp):
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.3)
         self.au_mot("30 degrés")
         sb = secteur(B, A, C, 1.0, C_COINS[1])
-        e30 = mesure(B, A, C, "30°", 1.45, 34, C_COINS[1])
+        e30 = mesure(B, A, C, "30°", 1.75, 34, C_COINS[1])
         v1 = etq("30°", 50, C_COINS[1]).move_to(P(4.15, 1.0))
         self.play(FadeIn(sb), FadeIn(e30, scale=1.3), FadeIn(v1, scale=1.3), run_time=0.3)
         self.au_mot("80 degrés")
@@ -110,7 +110,7 @@ class TriangleAngleManquantBase(FinTriangles, PaysageProp):
         self.play(FadeIn(sc_), FadeIn(e80, scale=1.3), FadeIn(v2, scale=1.3), run_time=0.3)
         self.au_mot("Elle cherche")
         l2 = VGroup(*[etq(x, 30, JAUNE_TITRE) for x in ("Elle cherche", "le troisième,", "sans le mesurer.")]).arrange(DOWN, buff=0.12).move_to(P(4.75, -0.6))
-        d = etq("?", 56, JAUNE_TITRE).next_to(A, UP, buff=0.05)
+        d = etq("?", 56, JAUNE_TITRE).next_to(A, UR, buff=0.08)
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(d, scale=1.6), run_time=0.35)
         self.attendre_voix()
 
@@ -120,7 +120,7 @@ class TriangleAngleManquantBase(FinTriangles, PaysageProp):
         f = self.toit()
         A, B, C = f.sommets
         sb, sc_ = secteur(B, A, C, 1.0, C_COINS[1]), secteur(C, A, B, 0.6, C_COINS[2])
-        e30, e80 = mesure(B, A, C, "30°", 1.45, 34, C_COINS[1]), mesure(C, A, B, "80°", 1.0, 34, C_COINS[2])
+        e30, e80 = mesure(B, A, C, "30°", 1.75, 34, C_COINS[1]), mesure(C, A, B, "80°", 1.0, 34, C_COINS[2])
         d = etq("?", 56, JAUNE_TITRE).next_to(A, UP, buff=0.08)
         self.add(f, sb, sc_, e30, e80, d)
         self.au_mot("Deux gestes")
@@ -153,7 +153,7 @@ class TriangleAngleManquantBase(FinTriangles, PaysageProp):
         f = self.toit()
         A, B, C = f.sommets
         sb, sc_, sa = secteur(B, A, C, 1.0, C_COINS[1]), secteur(C, A, B, 0.6, C_COINS[2]), secteur(A, B, C, 0.62, VERT_OK)
-        self.add(f, sb, sc_, sa, mesure(B, A, C, "30°", 1.45, 34, C_COINS[1]), mesure(C, A, B, "80°", 1.0, 34, C_COINS[2]),
+        self.add(f, sb, sc_, sa, mesure(B, A, C, "30°", 1.75, 34, C_COINS[1]), mesure(C, A, B, "80°", 1.0, 34, C_COINS[2]),
                  etq("70°", 42, VERT_OK).next_to(A, UP, buff=0.12))
         self.au_mot("On vérifie")
         tit = self.t("On vérifie :", 44, JAUNE_TITRE)
@@ -231,7 +231,7 @@ class TriangleAngleManquantBase(FinTriangles, PaysageProp):
         self.col(l2, 2.05, xl=0.1)
         cd = coin_droit(B, A, C, 0.42)
         self.play(Create(cd), run_time=0.25)
-        e90 = etq("90°", 36, AMBRE).move_to(B + P(0.9, 0.34))
+        e90 = etq("90°", 36, AMBRE).move_to(B + P(1.1, 0.34))
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(e90, scale=1.4), run_time=0.3)
         self.au_mot("Un autre angle")
         l3 = self.t("Un autre angle mesure 40°.", 36, C_COINS[2])
@@ -258,8 +258,8 @@ class TriangleAngleManquantBase(FinTriangles, PaysageProp):
         cd = coin_droit(B, A, C, 0.36)
         s2 = secteur(C, A, B, 0.95, C_COINS[2])
         e2 = mesure(C, A, B, "35°", 1.4, 30, C_COINS[2])
-        d = etq("?", 46, JAUNE_TITRE).next_to(A, RIGHT, buff=0.12)
-        rep = etq("55°", 38, VERT_OK).next_to(A, RIGHT, buff=0.12)
+        d = etq("?", 46, JAUNE_TITRE).next_to(A, UR, buff=0.08)
+        rep = etq("55°", 38, VERT_OK).next_to(A, UR, buff=0.08)
 
         def avant(sc):
             sc.play(FadeIn(f), Create(cd), FadeIn(d), run_time=0.3)

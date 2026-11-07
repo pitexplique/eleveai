@@ -12830,5 +12830,167 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
+ },
+ "6e-triangle-angle-manquant": {
+  "fichier": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant.mp4",
+  "poster": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant.png",
+  "vignette": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant.vignette.webp",
+  "titre": "Comment trouver un angle sans le mesurer ? — Trouver l'angle qui manque — épisode 7 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_angle_manquant&display=simple"
+ },
+ "6e-triangle-angle-manquant-short": {
+  "fichier": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant-short.mp4",
+  "poster": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant-short-miniature.png",
+  "vignette": "6e/maths/triangles/07-angle-manquant/eleveai-maths-6e-triangle-angle-manquant-short-miniature.vignette.webp",
+  "titre": "J'ai mangé un coin de ce triangle : tu paries que je le retrouve ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_angle_manquant&display=simple"
+ },
+ "6e-triangle-defi": {
+  "fichier": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi.mp4",
+  "poster": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi.png",
+  "vignette": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi.vignette.webp",
+  "titre": "Un triangle peut-il avoir deux noms à la fois ? — Défis sur les triangles — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_defi&display=simple"
+ },
+ "6e-triangle-defi-short": {
+  "fichier": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi-short.mp4",
+  "poster": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi-short-miniature.png",
+  "vignette": "6e/maths/triangles/05-defi/eleveai-maths-6e-triangle-defi-short-miniature.vignette.webp",
+  "titre": "Ce puzzle a plus de 200 ans : tu paries qu'il cache un secret ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_defi&display=simple"
+ },
+ "6e-triangle-nommer": {
+  "fichier": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer.mp4",
+  "poster": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer.png",
+  "vignette": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer.vignette.webp",
+  "titre": "Comment retrouver un triangle parmi des milliers ? — Nommer un triangle — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_nommer&display=simple"
+ },
+ "6e-triangle-nommer-short": {
+  "fichier": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer-short.mp4",
+  "poster": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer-short-miniature.png",
+  "vignette": "6e/maths/triangles/01-nommer/eleveai-maths-6e-triangle-nommer-short-miniature.vignette.webp",
+  "titre": "Tu paries que ce triangle a plusieurs noms ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_nommer&display=simple"
+ },
+ "6e-triangle-possible-ou-non": {
+  "fichier": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non.mp4",
+  "poster": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non.png",
+  "vignette": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non.vignette.webp",
+  "titre": "Trois longueurs font-elles toujours un triangle ? — Triangle possible ou non — épisode 8 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_possible_ou_non&display=simple"
+ },
+ "6e-triangle-possible-ou-non-short": {
+  "fichier": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non-short.mp4",
+  "poster": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non-short-miniature.png",
+  "vignette": "6e/maths/triangles/08-possible-ou-non/eleveai-maths-6e-triangle-possible-ou-non-short-miniature.vignette.webp",
+  "titre": "2 m, 3 m et 6 m : tu paries que mon toit tient ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_possible_ou_non&display=simple"
+ },
+ "6e-triangle-propriete-defi": {
+  "fichier": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi.mp4",
+  "poster": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi.png",
+  "vignette": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi.vignette.webp",
+  "titre": "Peut-on croire tout ce qu'on lit sur les triangles ? — Défis sur les angles — épisode 9 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_propriete_defi&display=simple"
+ },
+ "6e-triangle-propriete-defi-short": {
+  "fichier": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi-short.mp4",
+  "poster": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi-short-miniature.png",
+  "vignette": "6e/maths/triangles/09-propriete-defi/eleveai-maths-6e-triangle-propriete-defi-short-miniature.vignette.webp",
+  "titre": "Un seul de mes copains ment : tu paries que tu le trouves ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_propriete_defi&display=simple"
+ },
+ "6e-triangle-somme-angle": {
+  "fichier": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle.mp4",
+  "poster": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle.png",
+  "vignette": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle.vignette.webp",
+  "titre": "Que se passe-t-il si on recolle ses trois coins ? — La somme des angles d'un triangle · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_somme_angle&display=simple"
+ },
+ "6e-triangle-somme-angle-short": {
+  "fichier": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle-short.mp4",
+  "poster": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle-short-miniature.png",
+  "vignette": "6e/maths/triangles/06-somme-angle/eleveai-maths-6e-triangle-somme-angle-short-miniature.vignette.webp",
+  "titre": "Tu paries que je devine la somme des angles de ton triangle sans le regarder ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_propriete&microId=triangle_somme_angle&display=simple"
+ },
+ "6e-triangle-sommet-cote": {
+  "fichier": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote.mp4",
+  "poster": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote.png",
+  "vignette": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote.vignette.webp",
+  "titre": "Que voit un astronome entre trois étoiles ? — Sommets et côtés d'un triangle — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_sommet_cote&display=simple"
+ },
+ "6e-triangle-sommet-cote-short": {
+  "fichier": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote-short.mp4",
+  "poster": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote-short-miniature.png",
+  "vignette": "6e/maths/triangles/02-sommet-cote/eleveai-maths-6e-triangle-sommet-cote-short-miniature.vignette.webp",
+  "titre": "Tu sais compter les triangles ? Tu paries que tu vas en oublier un ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_sommet_cote&display=simple"
+ },
+ "6e-triangle-type-angle": {
+  "fichier": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle.mp4",
+  "poster": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle.png",
+  "vignette": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle.vignette.webp",
+  "titre": "Que cache le profil d'une rampe de skate ? — Reconnaître un triangle par ses angles · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_type_angle&display=simple"
+ },
+ "6e-triangle-type-angle-short": {
+  "fichier": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle-short.mp4",
+  "poster": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle-short-miniature.png",
+  "vignette": "6e/maths/triangles/04-type-angle/eleveai-maths-6e-triangle-type-angle-short-miniature.vignette.webp",
+  "titre": "Mon horloge cache des triangles : tu paries que tu ne les as jamais vus ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_type_angle&display=simple"
+ },
+ "6e-triangle-type-cote": {
+  "fichier": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote.mp4",
+  "poster": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote.png",
+  "vignette": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote.vignette.webp",
+  "titre": "Comment trier des triangles sans se tromper ? — Reconnaître un triangle par ses côtés · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_type_cote&display=simple"
+ },
+ "6e-triangle-type-cote-short": {
+  "fichier": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote-short.mp4",
+  "poster": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote-short-miniature.png",
+  "vignette": "6e/maths/triangles/03-type-cote/eleveai-maths-6e-triangle-type-cote-short-miniature.vignette.webp",
+  "titre": "9 bâtonnets : combien de triangles différents ? Tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_type_cote&display=simple"
  }
 }

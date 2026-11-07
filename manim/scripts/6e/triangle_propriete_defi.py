@@ -240,7 +240,7 @@ class TriangleProprieteDefiBase(CalculAuMot, FinTriangles, PaysageProp):
         def apres(sc):
             sc.play(Create(c1), Create(c2), run_time=0.3)
 
-        c2_ = self.t("non, 95 + 95 > 180", 30)
+        c2_ = self.t("non, 95 + 95 > 180", 24)
         c2_._pas_audit = True  # il attend « 180 » : jamais en avance ; la coche le resserre à la réponse
         self.question_pause("06-question", "06b-reponse", ["Un triangle isocèle a deux", "angles du bas de 95°.", "Est-ce possible ?"],
                             [self.t("oui", 34), c2_, self.t("oui, s'il est très grand", 30)], 1,
@@ -275,7 +275,7 @@ class TriangleProprieteDefiBase(CalculAuMot, FinTriangles, PaysageProp):
         self.play(FadeIn(pet, scale=0.7), FadeIn(lp), run_time=0.35)
         self.au_mot("un grand")
         gra = tri_arcs(3.2, P(-1.6, -0.7))
-        lg = self.t("un grand triangle", 30, AMBRE).next_to(gra, DOWN, buff=0.2).set_x(-1.6)
+        lg = self.t("un grand triangle", 26, AMBRE).next_to(gra, DOWN, buff=0.2).set_x(-1.6).set_y(lp.get_y())
         self.play(FadeIn(gra, scale=0.7), FadeIn(lg), run_time=0.35)
         self.au_mot("peuvent")
         l2 = self.bloc(["peuvent avoir", "les mêmes angles."], 40, VERT_OK)
