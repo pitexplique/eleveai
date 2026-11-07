@@ -87,6 +87,32 @@ const CONSIGNES: ((e: string) => string)[] = [
   (e) => `Quel est le résultat de ${e} ?`,
   (e) => `Sans calculatrice, calcule ${e}.`,
   (e) => `Complète l’égalité : ${e} = …`,
+  // 07/11/2026 : l'élève reconnaît la PHRASE. Des consignes courtes, sans situation.
+  (e) => `Combien fait ${e} ?`,
+  (e) => `Combien vaut ${e} ?`,
+  (e) => `Résultat de ${e} ?`,
+  (e) => `${e} = ?`,
+  (e) => `Trouve la valeur de ${e}.`,
+  (e) => `Donne le résultat : ${e}`,
+  (e) => `Écris le résultat de ${e}.`,
+  (e) => `Calcule de tête : ${e}`,
+  (e) => `Que donne ${e} ?`,
+  (e) => `Trouve le résultat de ${e}.`,
+  (e) => `Quelle est la valeur de ${e} ?`,
+  (e) => `À toi : ${e} = …`,
+  (e) => `Quel nombre est égal à ${e} ?`,
+  (e) => `Écris le nombre égal à ${e}.`,
+  (e) => `Remplace les points : ${e} = …`,
+  (e) => `Fais ce calcul : ${e}`,
+  (e) => `Écris la valeur de ${e}.`,
+  (e) => `Réduis ${e} à un seul nombre.`,
+  (e) => `Écris ${e} avec un seul nombre.`,
+  (e) => `Cherche la valeur de ${e}.`,
+  (e) => `Détermine la valeur de ${e}.`,
+  (e) => `Donne le nombre égal à ${e}.`,
+  (e) => `Essaie : ${e} = …`,
+  (e) => `Mentalement, que vaut ${e} ?`,
+  (e) => `Au brouillon, calcule ${e}.`,
   (e) => {
     const L = randomChoice(LETTRES);
     return `On pose ${L} = ${e}. Calcule ${L}.`;
@@ -443,6 +469,92 @@ function situVariationLue(sits: Sit[]): Q {
   );
 }
 
+/** ★2 (03/11/2026) : la variation SANS situation. « Un nombre vaut -3. Il augmente de 7. Que vaut-il ? » */
+function problemeNombre(): Q {
+  let a = 0, d = 0;
+  do {
+    a = nz(1, 15);
+    d = nz(1, 12);
+  } while (a + d === 0);
+  const f = a + d;
+  const D = abs(d);
+  const text = randomChoice([
+    () => `Un nombre vaut ${a}. Il ${d > 0 ? "augmente" : "diminue"} de ${D}. Que vaut-il ?`,
+    () => `Un nombre vaut ${a}. Il ${d > 0 ? "augmente" : "diminue"} de ${D}. Quel est le nouveau nombre ?`,
+    () => `Un nombre vaut ${a}. Il ${d > 0 ? "augmente" : "diminue"} de ${D}. Que vaut-il maintenant ?`,
+    () => `Sur une droite graduée, pars de l’abscisse ${a} et ${d > 0 ? "avance" : "recule"} de ${D}. Où arrives-tu ?`,
+    () => `Pars de l’abscisse ${a} et ${d > 0 ? "avance" : "recule"} de ${D}. Quelle abscisse atteins-tu ?`,
+    // 07/11/2026 : toujours sans situation, et courtes.
+    () => `Un nombre vaut ${a}. On lui ${d > 0 ? "ajoute" : "retire"} ${D}. Que devient-il ?`,
+    () => `Au départ, le nombre est ${a}. Il ${d > 0 ? "augmente" : "diminue"} de ${D}. Quelle est sa valeur ?`,
+    () => `Départ : ${a}. Variation : ${d}. Arrivée ?`,
+    () => `Valeur de départ : ${a}. Variation : ${d}. Valeur d’arrivée ?`,
+    () => `On part de ${a}. La variation est ${d}. Où arrive-t-on ?`,
+    () => `On part de ${a} et on ${d > 0 ? "monte" : "descend"} de ${D}. Où arrive-t-on ?`,
+    () => `Le nombre ${a} ${d > 0 ? "augmente" : "diminue"} de ${D}. Quel nombre obtient-on ?`,
+    () => `${d > 0 ? "Augmente" : "Diminue"} ${a} de ${D}.`,
+    () => `Quel nombre obtient-on si ${a} ${d > 0 ? "augmente" : "diminue"} de ${D} ?`,
+    () => `${a} ${d > 0 ? "augmente" : "diminue"} de ${D} : quel est le résultat ?`,
+    () => `Si on ${d > 0 ? "augmente" : "diminue"} ${a} de ${D}, que trouve-t-on ?`,
+    () => `Un point est en ${a}. Il ${d > 0 ? "avance" : "recule"} de ${D}. Où est-il ?`,
+    () => `Le point A est à l’abscisse ${a}. Il ${d > 0 ? "avance" : "recule"} de ${D}. Sa nouvelle abscisse ?`,
+    () => `Écris le calcul, puis réponds : ${a} ${d > 0 ? "augmente" : "diminue"} de ${D}.`,
+    () => `Traduis par un calcul, puis réponds : ${a} ${d > 0 ? "augmente" : "diminue"} de ${D}.`,
+  ])();
+  return court(
+    text,
+    f,
+    expl(
+      "une hausse se traduit par l’ajout d’un nombre positif, une baisse par l’ajout d’un nombre négatif.",
+      `on part de ${a} et on ajoute ${d}.`,
+      `${p(a)} + ${p(d)} = ${f}.`,
+      `on obtient ${f}.`
+    )
+  );
+}
+/** ★2 (03/11/2026) : la variation lue SANS situation. « Un nombre passe de -13 à -22. Quelle est sa variation ? » */
+function problemeVariation(): Q {
+  let a = 0, f = 0;
+  do {
+    a = nz(1, 15);
+    f = nz(1, 15);
+  } while (a === f);
+  const d = f - a;
+  const text = randomChoice([
+    () => `Un nombre passe de ${a} à ${f}. Quelle est sa variation ?`,
+    () => `Un nombre passe de ${a} à ${f}. De combien a-t-il varié ?`,
+    () => `Un nombre passe de ${a} à ${f}. Donne sa variation en nombre relatif.`,
+    () => `Sur une droite graduée, on va de ${a} à ${f}. Quelle est la variation ?`,
+    () => `On va de ${a} à ${f}. Quelle est la variation, en nombre relatif ?`,
+    // 07/11/2026 : toujours sans situation, et courtes.
+    () => `De ${a} à ${f}, quelle est la variation ?`,
+    () => `Départ : ${a}. Arrivée : ${f}. Quelle est la variation ?`,
+    () => `Valeur de départ : ${a}. Valeur d’arrivée : ${f}. Variation ?`,
+    () => `Arrivée : ${f}. Départ : ${a}. Calcule arrivée moins départ.`,
+    () => `Calcule la variation quand on passe de ${a} à ${f}.`,
+    () => `On passe de ${a} à ${f}. Écris la variation avec son signe.`,
+    () => `Le nombre ${a} devient ${f}. Quelle est la variation ?`,
+    () => `Le nombre ${a} devient ${f}. De combien a-t-il changé ?`,
+    () => `Quelle variation mène de ${a} à ${f} ?`,
+    () => `Quel nombre ajouter à ${a} pour obtenir ${f} ?`,
+    () => `Trouve la variation de ${a} à ${f}.`,
+    () => `Un point passe de l’abscisse ${a} à l’abscisse ${f}. Quelle est sa variation ?`,
+    () => `Un point va de ${a} à ${f}. Variation, avec le signe ?`,
+    () => `Complète : ${p(a)} + … = ${f}`,
+    () => `Trouve la variation : ${p(a)} + … = ${f}`,
+  ])();
+  return court(
+    text,
+    d,
+    expl(
+      "la variation est la valeur finale moins la valeur initiale.",
+      `on calcule ${f} - ${p(a)}.`,
+      `${p(f)} - ${p(a)} = ${p(f)} + ${p(-a)} = ${d}.`,
+      `la variation est ${d > 0 ? "une hausse" : "une baisse"} : ${d}.`
+    )
+  );
+}
+
 /** Deux variations successives. */
 function situDouble(sits: Sit[]): Q {
   const { c, s, ds, f } = tirerSit(sits, 2);
@@ -782,11 +894,32 @@ const PHRASES_SOMME: ((a: number, b: number) => string)[] = [
   (a, b) => `Ajoute ${b} à ${a}.`,
   (a, b) => `Additionne les nombres ${a} et ${b}.`,
   (a, b) => `Quel nombre obtient-on en ajoutant ${b} à ${a} ?`,
-  (a, b) =>
-    `Sur une droite graduée, on part du point d’abscisse ${a} et on ${b > 0 ? "avance" : "recule"} de ${u(abs(b), " unités")}. Quelle est l’abscisse du point d’arrivée ?`,
+  // 03/11/2026 : plus court (★1 en 12 mots).
+  (a, b) => `Pars de l’abscisse ${a} et ${b > 0 ? "avance" : "recule"} de ${abs(b)}. Où arrives-tu ?`,
+  // 07/11/2026
+  (a, b) => `Ajoute ${b} au nombre ${a}.`,
+  (a, b) => `Fais la somme de ${a} et de ${b}.`,
+  (a, b) => `Calcule la somme de ${a} et de ${b}.`,
+  (a, b) => `Donne la somme de ${a} et de ${b}.`,
+  (a, b) => `Trouve la somme de ${a} et de ${b}.`,
+  (a, b) => `Que vaut la somme de ${a} et de ${b} ?`,
+  (a, b) => `Écris la somme de ${a} et de ${b}, puis calcule-la.`,
+  (a, b) => `Combien fait ${a} plus ${b} ?`,
+  (a, b) => `Que donne ${a} plus ${b} ?`,
+  (a, b) => `${a} et ${b} : quelle est leur somme ?`,
+  (a, b) => `À ${a}, ajoute ${b}.`,
+  (a, b) => `Au nombre ${a}, ajoute ${b}.`,
+  (a, b) => `Quel est le total de ${a} et de ${b} ?`,
+  (a, b) => `Pars de ${a} et ${b > 0 ? "avance" : "recule"} de ${abs(b)}. Où arrives-tu ?`,
+  (a, b) => `Effectue l’addition de ${a} et de ${b}.`,
+  (a, b) => `Calcule l’addition de ${a} et de ${b}.`,
 ];
 
-function genAddition(kind: "simple" | "libre" | "negatifs" | "contraires"): Q {
+/* ⛔⛔ 03/11/2026 — D'ABORD DES QUESTIONS SIMPLES (Frédéric) : à ★1-★2, le
+   calcul ou une phrase de calcul, sans situation (température, compte, score…).
+   `situation = false` remplace la branche « situation » par une phrase de
+   calcul ; les situations passent dans les gabarits ★3 « _tpl_situation ». */
+function genAddition(kind: "simple" | "libre" | "negatifs" | "contraires", situation = true): Q {
   let a = 0;
   let b = 0;
   const max = kind === "simple" ? 9 : 15;
@@ -812,7 +945,7 @@ function genAddition(kind: "simple" | "libre" | "negatifs" | "contraires"): Q {
   const explanation = expl(REGLE_SOMME(a, b), meth, `${e} = ${r}.`, `${e} = ${r}.`);
   const x = Math.random();
   if (x < 0.45) return court(poser(e), r, explanation);
-  if (x < 0.7) return court(randomChoice(PHRASES_SOMME)(a, b), r, explanation);
+  if (x < 0.7 || !situation) return court(randomChoice(PHRASES_SOMME)(a, b), r, explanation);
   const ok =
     kind === "negatifs"
       ? (s: number, d: number) => s < 0 && d < 0
@@ -868,9 +1001,27 @@ const PHRASES_DIFF: ((a: number, b: number, e: string) => string)[] = [
   (a, b) => `Quel nombre faut-il ajouter à ${b} pour obtenir ${a} ?`,
   (_a, _b, e) => `Écris ${e} sous la forme d’une addition, puis donne le résultat.`,
   (a, b) => `Soustrais ${b} de ${a}.`,
+  // 07/11/2026
+  (a, b) => `Soustrais ${b} à ${a}.`,
+  (a, b) => `Enlève ${b} à ${a}.`,
+  (a, b) => `Retire ${b} de ${a}.`,
+  (a, b) => `À ${a}, enlève ${b}.`,
+  (a, b) => `À ${a}, soustrais ${b}.`,
+  (a, b) => `Donne la différence de ${a} et de ${b}.`,
+  (a, b) => `Trouve la différence de ${a} et de ${b}.`,
+  (a, b) => `Que vaut la différence de ${a} et de ${b} ?`,
+  (a, b) => `Combien fait ${a} moins ${b} ?`,
+  (a, b) => `Que donne ${a} moins ${b} ?`,
+  (_a, _b, e) => `Transforme ${e} en addition, puis calcule.`,
+  (_a, _b, e) => `Réécris ${e} avec une addition, puis calcule.`,
+  (_a, _b, e) => `En ajoutant l’opposé, calcule ${e}.`,
+  (_a, _b, e) => `Remplace la soustraction par une addition : ${e}`,
+  (a, b) => `Quel nombre ajouter à ${b} pour obtenir ${a} ?`,
+  (a, b) => `Complète : ${p(b)} + … = ${a}`,
+  (a, b) => `Trouve le nombre manquant : ${p(b)} + … = ${a}`,
 ];
 
-function genSoustraction(kind: "simple" | "libre" | "moinsNeg"): Q {
+function genSoustraction(kind: "simple" | "libre" | "moinsNeg", situation = true): Q {
   let a = 0;
   let b = 0;
   do {
@@ -895,7 +1046,7 @@ function genSoustraction(kind: "simple" | "libre" | "moinsNeg"): Q {
   );
   const x = Math.random();
   if (x < 0.45) return court(poser(e), r, explanation);
-  if (x < 0.72) return court(randomChoice(PHRASES_DIFF)(a, b, e), r, explanation);
+  if (x < 0.72 || !situation) return court(randomChoice(PHRASES_DIFF)(a, b, e), r, explanation);
   return situVariationLue(SIT_TOUTES);
 }
 
@@ -935,9 +1086,25 @@ const PHRASES_PRODUIT: ((a: number, b: number) => string)[] = [
   (a, b) => `Quel nombre obtient-on en multipliant ${a} par ${b} ?`,
   (a, b) =>
     b === 2 ? `Quel est le double de ${a} ?` : b === 3 ? `Quel est le triple de ${a} ?` : `Calcule le produit des nombres ${a} et ${b}.`,
+  // 07/11/2026
+  (a, b) => `Calcule le produit de ${a} par ${b}.`,
+  (a, b) => `Donne le produit de ${a} par ${b}.`,
+  (a, b) => `Trouve le produit de ${a} par ${b}.`,
+  (a, b) => `Que vaut le produit de ${a} par ${b} ?`,
+  (a, b) => `Écris le produit de ${a} par ${b}, puis calcule-le.`,
+  (a, b) => `Combien fait ${a} fois ${b} ?`,
+  (a, b) => `Que donne ${a} fois ${b} ?`,
+  (a, b) => `Que vaut ${a} fois ${b} ?`,
+  (a, b) => `Calcule ${a} fois ${b}.`,
+  (a, b) => `Multiplie ${a} et ${b} entre eux.`,
+  (a, b) => `Prends ${a}, multiplie-le par ${b}.`,
+  (a, b) => `Trouve le signe, puis calcule ${t0(a)} × ${p(b)}.`,
+  (a, b) => `Le signe d’abord : calcule ${t0(a)} × ${p(b)}.`,
+  (a, b) => `Effectue la multiplication : ${t0(a)} × ${p(b)}`,
+  (a, b) => `Donne le résultat de la multiplication ${t0(a)} × ${p(b)}.`,
 ];
 
-function genMultiplication(kind: "simple" | "libre"): Q {
+function genMultiplication(kind: "simple" | "libre", situation = true): Q {
   const m = kind === "simple" ? 6 : 10;
   let a = 0;
   let b = 0;
@@ -955,7 +1122,7 @@ function genMultiplication(kind: "simple" | "libre"): Q {
   );
   const x = Math.random();
   if (x < 0.45) return court(poser(e), r, explanation);
-  if (x < 0.7) return court(randomChoice(PHRASES_PRODUIT)(a, b), r, explanation);
+  if (x < 0.7 || !situation) return court(randomChoice(PHRASES_PRODUIT)(a, b), r, explanation);
   return situProduit(kind === "simple" ? 6 : undefined);
 }
 
@@ -1068,6 +1235,18 @@ const PHRASES_QUOT: ((D: number, d: number) => string)[] = [
   (D, d) =>
     d > 0 ? `On partage ${D} en ${d} parts égales. Que vaut chaque part ?` : `Calcule le quotient ${t0(D)} ÷ ${p(d)} en commençant par son signe.`,
   (D, d) => (d === 2 ? `Quelle est la moitié de ${D} ?` : `Donne le résultat de la division de ${D} par ${d}.`),
+  // 07/11/2026
+  (D, d) => `Que vaut le quotient de ${D} par ${d} ?`,
+  (D, d) => `Calcule le quotient de ${D} par ${d}.`,
+  (D, d) => `Donne le quotient de ${D} par ${d}.`,
+  (D, d) => `Trouve le quotient de ${D} par ${d}.`,
+  (D, d) => `Que donne ${D} divisé par ${d} ?`,
+  (D, d) => `Calcule ${D} divisé par ${d}.`,
+  (D, d) => `Effectue la division de ${D} par ${d}.`,
+  (D, d) => `Le signe d’abord : calcule ${t0(D)} ÷ ${p(d)}.`,
+  (D, d) => `Effectue la division : ${t0(D)} ÷ ${p(d)}`,
+  (D, d) => `Trouve le signe, puis calcule ${t0(D)} ÷ ${p(d)}.`,
+  (D, d) => `Trouve le nombre manquant : … × ${p(d)} = ${D}`,
 ];
 
 type Partage = { k: [number, number]; n: [number, number]; t: (T: number, n: number) => string; q: string[]; u: string };
@@ -1104,7 +1283,7 @@ function situPartage(maxK?: number): Q {
   );
 }
 
-function genDivision(kind: "simple" | "libre" | "negPos"): Q {
+function genDivision(kind: "simple" | "libre" | "negPos", situation = true): Q {
   let q = 0;
   let d = 0;
   if (kind === "negPos") {
@@ -1127,7 +1306,7 @@ function genDivision(kind: "simple" | "libre" | "negPos"): Q {
   );
   const x = Math.random();
   if (x < 0.45) return court(poser(e), q, explanation);
-  if (x < 0.7) return court(randomChoice(PHRASES_QUOT)(D, d), q, explanation);
+  if (x < 0.7 || !situation) return court(randomChoice(PHRASES_QUOT)(D, d), q, explanation);
   return situPartage(kind === "simple" ? 6 : undefined);
 }
 
@@ -1496,6 +1675,76 @@ function genManquant0(): Q {
 }
 
 const banqueRelatifs: TutorBankItemV4[] = [
+  {
+    kind: "template",
+    id: "relatif_addition_tpl_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_addition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une hausse s’ajoute, une baisse se retire : traduis-les par une somme de relatifs.",
+    tags: ["relatif", "addition", "situation", "template"],
+    // 03/11/2026 : les situations (températures, comptes, altitudes, scores), réservées à ★3.
+    generate: () => situVariation(SIT_TOUTES),
+  },
+  {
+    kind: "template",
+    id: "relatif_soustraction_tpl_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_soustraction",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La variation, c’est la valeur finale moins la valeur de départ.",
+    tags: ["relatif", "soustraction", "situation", "template"],
+    // 03/11/2026 : les situations, réservées à ★3.
+    generate: () => situVariationLue(SIT_TOUTES),
+  },
+  {
+    kind: "template",
+    id: "relatif_multiplication_tpl_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_multiplication",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une même variation répétée plusieurs fois se traduit par un produit.",
+    tags: ["relatif", "multiplication", "situation", "template"],
+    // 03/11/2026 : les situations, réservées à ★3.
+    generate: () => situProduit(6),
+  },
+  {
+    kind: "template",
+    id: "relatif_division_tpl_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_division",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Partager une baisse en parts égales, c’est diviser un nombre négatif.",
+    tags: ["relatif", "division", "situation", "template"],
+    // 03/11/2026 : les situations, réservées à ★3.
+    generate: () => situPartage(6),
+  },
+  {
+    kind: "template",
+    id: "relatif_probleme_tpl_situation_3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Repère la valeur de départ et la variation, puis calcule.",
+    tags: ["relatif", "probleme", "situation", "template"],
+    // 03/11/2026 : les situations des anciens gabarits ★2 (tpl_situation_1, tpl_variation_1).
+    generate: () => (Math.random() < 0.5 ? situVariation(SIT_TOUTES) : situVariationLue(SIT_TOUTES)),
+  },
   // =========================
   // RELATIF_ADDITION
   // =========================
@@ -1546,7 +1795,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne en tenant compte des signes.",
     tags: ["relatif", "addition", "template"],
-    generate: () => genAddition("libre"),
+    generate: () => genAddition("libre", false), // 03/11/2026 : sans situation
   },
   {
     kind: "fixed",
@@ -1624,7 +1873,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Soustraire un nombre revient à ajouter son opposé.",
     tags: ["relatif", "soustraction", "template"],
-    generate: () => genSoustraction("libre"),
+    generate: () => genSoustraction("libre", false), // 03/11/2026 : sans situation
   },
   {
     kind: "fixed",
@@ -1702,7 +1951,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Détermine d’abord le signe, puis multiplie les distances à zéro.",
     tags: ["relatif", "multiplication", "template"],
-    generate: () => genMultiplication("libre"),
+    generate: () => genMultiplication("libre", false), // 03/11/2026 : sans situation
   },
   {
     kind: "fixed",
@@ -1893,13 +2142,13 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_probleme",
     difficulty: 2,
     theme: "neutral",
-    text: "Il fait -2 °C le matin. La température augmente de 7 °C. Quelle est la température finale ?",
+    text: "Un nombre vaut -2. Il augmente de 7. Que vaut-il ?",
     format: "qcm",
     choices: ["5", "-5", "9", "-9"],
     expected: ["5"],
     comparator: "mcq_exact",
     hint: "Calcule -2 + 7.",
-    explanation: "-2 + 7 = 5. La température finale est 5 °C.",
+    explanation: "-2 + 7 = 5. Le nombre vaut 5.",
     tags: ["relatif", "probleme", "temperature"],
   },
   {
@@ -2079,7 +2328,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Deux nombres négatifs : on additionne et on garde le signe −.",
     tags: ["relatif", "addition", "template"],
-    generate: () => genAddition("negatifs"),
+    generate: () => genAddition("negatifs", false), // 03/11/2026 : sans situation
   },
   {
     kind: "template",
@@ -2105,7 +2354,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On compare les distances à zéro et on garde le signe du plus grand.",
     tags: ["relatif", "addition", "signes_contraires", "template"],
-    generate: () => genAddition("contraires"),
+    generate: () => genAddition("contraires", false), // 03/11/2026 : sans situation
   },
 
   // ---------- RELATIF_SOUSTRACTION ----------
@@ -2186,7 +2435,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Transforme la soustraction en addition de l’opposé.",
     tags: ["relatif", "soustraction", "template"],
-    generate: () => genSoustraction("libre"),
+    generate: () => genSoustraction("libre", false), // 03/11/2026 : sans situation
   },
   {
     kind: "template",
@@ -2293,7 +2542,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Détermine le signe, puis multiplie les distances à zéro.",
     tags: ["relatif", "multiplication", "template"],
-    generate: () => genMultiplication("libre"),
+    generate: () => genMultiplication("libre", false), // 03/11/2026 : sans situation
   },
   {
     kind: "template",
@@ -2537,17 +2786,17 @@ const banqueRelatifs: TutorBankItemV4[] = [
     microId: "relatif_probleme",
     difficulty: 2,
     theme: "neutral",
-    text: "Un compte bancaire est à -30 €. On y dépose 50 €. Quel est le nouveau solde ?",
+    text: "Un nombre vaut -30. On lui ajoute 50. Quel nombre obtient-on ?",
     format: "qcm",
     choices: ["20", "-20", "80", "-80"],
     expected: ["20"],
     comparator: "mcq_exact",
     hint: "Calcule -30 + 50.",
     explanation:
-      "Définition : un dépôt correspond à une addition.\n\n" +
-      "Méthode : on ajoute 50 au solde de départ.\n\n" +
+      "Définition : ajouter un nombre, c’est faire une addition.\n\n" +
+      "Méthode : on ajoute 50 à -30.\n\n" +
       "Calcul : -30 + 50 = 20.\n\n" +
-      "Conclusion : le nouveau solde est 20 €.",
+      "Conclusion : on obtient 20.",
     tags: ["relatif", "probleme", "argent", "qcm"],
   },
   {
@@ -2866,7 +3115,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Sur une droite graduée : ajouter un positif fait avancer, ajouter un négatif fait reculer.",
     tags: ["relatif", "addition", "template"],
-    generate: () => genAddition("simple"),
+    generate: () => genAddition("simple", false),
   },
   {
     kind: "template",
@@ -2879,7 +3128,8 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une hausse s’ajoute avec un nombre positif, une baisse avec un nombre négatif.",
     tags: ["relatif", "addition", "situation", "template"],
-    generate: () => (Math.random() < 0.5 ? situVariation(SIT_TOUTES) : genAddition("simple")),
+    // 03/11/2026 : sans situation (elles passent dans relatif_addition_tpl_situation, ★3).
+    generate: () => (Math.random() < 0.5 ? genAddition("contraires", false) : genAddition("simple", false)),
   },
   {
     kind: "template",
@@ -2892,7 +3142,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Soustraire un nombre, c’est ajouter son opposé.",
     tags: ["relatif", "soustraction", "template"],
-    generate: () => genSoustraction("simple"),
+    generate: () => genSoustraction("simple", false),
   },
   {
     kind: "template",
@@ -2905,7 +3155,8 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La variation se calcule par : valeur finale moins valeur initiale.",
     tags: ["relatif", "soustraction", "situation", "template"],
-    generate: () => (Math.random() < 0.5 ? situVariationLue(SIT_TOUTES) : genSoustraction("simple")),
+    // 03/11/2026 : sans situation (elles passent dans relatif_soustraction_tpl_situation, ★3).
+    generate: () => (Math.random() < 0.5 ? genSoustraction("moinsNeg", false) : genSoustraction("simple", false)),
   },
   {
     kind: "template",
@@ -2918,7 +3169,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Même signe → positif ; signes contraires → négatif.",
     tags: ["relatif", "multiplication", "template"],
-    generate: () => genMultiplication("simple"),
+    generate: () => genMultiplication("simple", false),
   },
   {
     kind: "template",
@@ -2931,7 +3182,8 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une même baisse répétée plusieurs fois : c’est un produit par un nombre négatif.",
     tags: ["relatif", "multiplication", "situation", "template"],
-    generate: () => (Math.random() < 0.5 ? situProduit(6) : genMultiplication("simple")),
+    // 03/11/2026 : sans situation (elles passent dans relatif_multiplication_tpl_situation, ★3).
+    generate: () => genMultiplication("simple", false),
   },
   {
     kind: "template",
@@ -2957,7 +3209,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Même signe → quotient positif ; signes contraires → quotient négatif.",
     tags: ["relatif", "division", "template"],
-    generate: () => genDivision("simple"),
+    generate: () => genDivision("simple", false),
   },
   {
     kind: "template",
@@ -2970,7 +3222,8 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Partager une baisse en parts égales : on divise un nombre négatif.",
     tags: ["relatif", "division", "situation", "template"],
-    generate: () => (Math.random() < 0.5 ? situPartage(6) : genDivision("simple")),
+    // 03/11/2026 : sans situation (elles passent dans relatif_division_tpl_situation, ★3).
+    generate: () => (Math.random() < 0.5 ? genDivision("negPos", false) : genDivision("simple", false)),
   },
   {
     kind: "template",
@@ -2983,7 +3236,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une hausse s’ajoute avec un nombre positif, une baisse avec un nombre négatif.",
     tags: ["relatif", "probleme", "template"],
-    generate: () => situVariation(SIT_TOUTES),
+    generate: () => problemeNombre(), // 03/11/2026 : sans situation (★3 : relatif_probleme_tpl_situation_3)
   },
   {
     kind: "template",
@@ -2996,7 +3249,7 @@ const banqueRelatifs: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Variation = valeur finale − valeur initiale.",
     tags: ["relatif", "probleme", "variation", "template"],
-    generate: () => situVariationLue(SIT_TOUTES),
+    generate: () => problemeVariation(), // 03/11/2026 : sans situation (★3 : relatif_probleme_tpl_situation_3)
   },
   {
     kind: "template",
