@@ -4,7 +4,15 @@ Notions du coach `divisibilite` (7 micros) et `nombre_premier` (4 micros). Une p
 
 Modèle : la série Relatifs 4e (`manim/REPRISE-relatifs.md`, à lire en entier). Règles : `manim/REGLES.md`. Shorts : socle commun `prototypes/ti-margo/LISEZ-MOI.md` + `scripts/ti-margo-short.mjs` (ne pas recopier de page).
 
-## ✅ 07/11 après-midi : Frédéric a VALIDÉ les 22 voix (« Oui, lance le pilote »)
+## ✅ 07/11 fin d'après-midi : PILOTE 05 RENDU (`304dce63`), en attente du oui de Frédéric
+
+- Paysage `manim/scripts/4e/div_diviseurs.py` (3 min 01) et short `prototypes/ti-margo/films/divisibilite.js` (`FILMS.diviseurs`, 1 min 20), dans `manim/sorties/4e/maths/divisibilite/05-diviseurs/` (+ miniature, `publication.md` Validé : non). Coupes de fin dans `components/LecteurVideo.tsx` (8,4 et 4,17).
+- `films/divisibilite.json` couvre les épisodes 01 à 07 (`4e-div-<ép>-short`) ; les 08 à 11 iront dans une série `premiers` (`4e-premier-<ép>-short`). Les autres films : `films/divisibilite-<ép>.js`, ils réutilisent `voixDe`, `poserTableau`, `tournesol`, `rect`, `fleche`, `gestes`, `poserMiniature` (copiés de `decimaux.js`, avec « ÷ » qui consomme « divisé par »).
+- Paysage : `massif(l, c)`, `en_vrac`, `colorer_paire`, `table_paires`, `liste` + `arcs` dans `div_diviseurs.py` : à déplacer dans un `div_commun.py` pour les épisodes suivants.
+- Pièges vus : `lg` à x = 3,2 déborde avec `insister` (mettre `maxw=5.6`) ; question-pause : couper la question en deux lignes (`eq_dans_q(0, …)` deux fois) ; la machine partagée rend le dry run lent (jusqu'à 10 min).
+- Après son oui : les 20 autres, sans redemander.
+
+## (historique) 07/11 après-midi : Frédéric a VALIDÉ les 22 voix (« Oui, lance le pilote »)
 
 Pilote = épisode 05 `diviseurs` (paysage + short). **Rien n'est encore généré** : la génération de voix a été interrompue avant d'écrire quoi que ce soit (`public/sons/4e-div-*` n'existe pas).
 
