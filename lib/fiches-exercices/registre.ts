@@ -202,6 +202,16 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
       "Lire et dessiner une fraction, comprendre l'unité, reconnaître une fraction plus grande que 1, la placer sur la droite, comparer, trouver des fractions égales en regroupant les parts, passer aux dixièmes, aux centièmes et au « pour cent ». Des crêpes, des billes, un saut sans élan, un calendrier, un match de football, les planètes et une mosaïque.",
   },
   // ── fin CM1 : fractions ──
+  "maths/cm2/tableau": {
+    titre: "Lire, compléter et interpréter un tableau : 20 exercices corrigés",
+    resume:
+      "Lire une case au croisement d'une ligne et d'une colonne, retrouver une case effacée grâce au total, comparer, calculer un écart, vérifier un total de deux façons. Un cinéma, un car scolaire, un château fort, une kermesse, le Piton de la Fournaise, un refuge, une bibliothèque et les médailles des Jeux de Paris 2024.",
+  },
+  "maths/cm2/graphique": {
+    titre: "Lire un graphique : 20 exercices corrigés",
+    resume:
+      "Lire une barre sur un axe gradué, même au milieu de deux graduations, lire une courbe qui monte et qui descend, lire un diagramme circulaire avec la moitié et le quart, compléter une barre, trouver une erreur, vérifier un total. Des animaux soignés, la marée, du miel, de la neige, les Jeux olympiques, une rivière en crue et la durée du jour.",
+  },
   // ─── CM2 : fractions (25/10/2026) ───
   // Une feuille par notion du coach CM2 : fraction, fraction_mixte, fraction_calcul.
   "maths/cm2/fraction": {
@@ -218,16 +228,6 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     titre: "Calculer avec les fractions : 20 exercices corrigés",
     resume:
       "Additionner et soustraire des fractions de même dénominateur, ou dont un dénominateur est multiple de l'autre, multiplier une fraction par un entier, prendre une fraction d'une quantité. Une pizza, des billes, une grenouille, un match de football, une kermesse, un refuge pour tortues et une haie à planter.",
-  },
-  "maths/cm2/tableau": {
-    titre: "Lire, compléter et interpréter un tableau : 20 exercices corrigés",
-    resume:
-      "Lire une case au croisement d'une ligne et d'une colonne, retrouver une case effacée grâce au total, comparer, calculer un écart, vérifier un total de deux façons. Un cinéma, un car scolaire, un château fort, une kermesse, le Piton de la Fournaise, un refuge, une bibliothèque et les médailles des Jeux de Paris 2024.",
-  },
-  "maths/cm2/graphique": {
-    titre: "Lire un graphique : 20 exercices corrigés",
-    resume:
-      "Lire une barre sur un axe gradué, même au milieu de deux graduations, lire une courbe qui monte et qui descend, lire un diagramme circulaire avec la moitié et le quart, compléter une barre, trouver une erreur, vérifier un total. Des animaux soignés, la marée, du miel, de la neige, les Jeux olympiques, une rivière en crue et la durée du jour.",
   },
   "maths/6e/stat-enquete": {
     titre: "Mener une enquête : 20 exercices corrigés",
@@ -1249,47 +1249,52 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Déduire les variations du signe de f′, dresser le tableau, trouver un maximum ou un minimum (bornes comprises), optimiser, prévoir. Un four, une plongeuse, un freinage, une étape du Tour, une épidémie, un festival, le gel des abricotiers.",
   },
-  // ─── STMG : séries statistiques à deux variables (Tle, 22/10/2026) ───
-  "maths/stmg/stat-nuage": {
-    titre: "Nuage de points et point moyen : 20 exercices corrigés",
-    resume:
-      "Lire un point d'un nuage, construire le nuage d'un tableau (même sur un axe qui ne part pas de 0), calculer et placer le point moyen G, décrire la tendance et repérer un point isolé. Le SMIC, les abonnés de Netflix, les entrées au cinéma, la population mondiale, la taille des enfants et les records du marathon.",
-  },
   // ─── STMG : données, croisement de deux variables, échantillonnage (1re, 22/10/2026) ───
   "maths/stmg/donnees-tableau-croise": {
     titre: "Le tableau croisé d'effectifs : 20 exercices corrigés",
     resume:
       "Lire une case et une marge, calculer les marges, compléter un tableau, le dresser à partir de données brutes, trouver l'erreur. Clients d'une enseigne, salariés d'une PME, colis en retard, crédits d'une banque, festival ; le jeu de 52 cartes, les planètes, les régions de France, le calendrier 2026, les médailles de Paris 2024.",
   },
-  "maths/stmg/stat-ajustement": {
-    titre: "Ajustement affine : 20 exercices corrigés",
-    resume:
-      "Juger si un ajustement affine est pertinent, tracer une droite au jugé par le point moyen, trouver son équation par deux points ou par G, calculer une valeur de y ou de x, et critiquer le modèle (nuage qui se courbe, point isolé, valeur absurde). Le CO₂ de Mauna Loa, un food truck, la masse salariale d'une PME, un festival, une voiture électrique.",
-  },
   "maths/stmg/donnees-frequences": {
     titre: "Fréquences marginales et conditionnelles : 20 exercices corrigés",
     resume:
       "Calculer une fréquence marginale et une fréquence conditionnelle (« parmi les … »), compléter un tableau à partir de pourcentages, comparer deux groupes, corriger une phrase de la presse. Publicité, assurance, recrutement, mutuelle, concession automobile ; l'ONU, les médailles de Paris 2024, le jeu de 52 cartes, le calendrier 2026.",
-  },
-  "maths/stmg/stat-moindres-carres": {
-    titre: "La méthode des moindres carrés : 20 exercices corrigés",
-    resume:
-      "Les écarts verticaux, la somme des carrés des écarts calculée à la main dans un tableau, comparer deux droites, utiliser la droite de la calculatrice (qui passe par G), mesurer l'effet d'un point isolé. Les abonnés de Spotify, l'eau d'un hôtel, le coût de production d'une usine, l'attente aux caisses d'un supermarché.",
   },
   "maths/stmg/donnees-filtres": {
     titre: "Filtrer des données, ET, OU, NON : 20 exercices corrigés",
     resume:
       "Garder les lignes d'un fichier qui répondent à un critère, combiner deux critères avec ET et avec OU sans compter deux fois, prendre le contraire avec NON, sur un extrait de tableur ou un tableau croisé. Fichier du personnel, épicerie, logements, paiements par carte, fichier clients ; les planètes, les régions de France, le calendrier 2026.",
   },
-  "maths/stmg/stat-interpoler": {
-    titre: "Interpoler et extrapoler : 20 exercices corrigés",
-    resume:
-      "Estimer une valeur avec une droite d'ajustement, par le calcul ou sur le graphique, dire si c'est une interpolation ou une extrapolation, trouver à partir de quand un seuil est franchi, et juger les limites d'une extrapolation. La taille des enfants, la population mondiale, le record du 100 m, une droite d'étalonnage de laboratoire, la fonte d'un glacier.",
-  },
   "maths/stmg/auto-donnees-graphiques": {
     titre: "Lire des données chiffrées et des graphiques : 20 exercices corrigés",
     resume:
       "Automatismes : origine et pas d'un axe, axe tronqué, diagramme en barres, en bâtons, circulaire, diagramme en boîte (médiane, quartiles), passer du graphique au tableau et inversement. Boulangerie, budget d'association, salaires, chiffre d'affaires, publicité trompeuse ; les régions de France, la Coupe du monde 2026, les plus hautes tours.",
+  },
+  "maths/stmg/va-echantillonnage": {
+    titre: "La fluctuation d'échantillonnage : 20 exercices corrigés",
+    resume:
+      "Observer la fluctuation sur des simulations, calculer 1 ÷ √n et l'intervalle où tombent environ 95 % des fréquences, décider si une observation est fréquente ou rare, choisir la taille d'un échantillon. Contrôle qualité, sondages, banque, e-commerce ; le don du sang, les naissances, la présidentielle de 2022, la roulette du casino.",
+  },
+  // ─── STMG : séries statistiques à deux variables (Tle, 22/10/2026) ───
+  "maths/stmg/stat-nuage": {
+    titre: "Nuage de points et point moyen : 20 exercices corrigés",
+    resume:
+      "Lire un point d'un nuage, construire le nuage d'un tableau (même sur un axe qui ne part pas de 0), calculer et placer le point moyen G, décrire la tendance et repérer un point isolé. Le SMIC, les abonnés de Netflix, les entrées au cinéma, la population mondiale, la taille des enfants et les records du marathon.",
+  },
+  "maths/stmg/stat-ajustement": {
+    titre: "Ajustement affine : 20 exercices corrigés",
+    resume:
+      "Juger si un ajustement affine est pertinent, tracer une droite au jugé par le point moyen, trouver son équation par deux points ou par G, calculer une valeur de y ou de x, et critiquer le modèle (nuage qui se courbe, point isolé, valeur absurde). Le CO₂ de Mauna Loa, un food truck, la masse salariale d'une PME, un festival, une voiture électrique.",
+  },
+  "maths/stmg/stat-moindres-carres": {
+    titre: "La méthode des moindres carrés : 20 exercices corrigés",
+    resume:
+      "Les écarts verticaux, la somme des carrés des écarts calculée à la main dans un tableau, comparer deux droites, utiliser la droite de la calculatrice (qui passe par G), mesurer l'effet d'un point isolé. Les abonnés de Spotify, l'eau d'un hôtel, le coût de production d'une usine, l'attente aux caisses d'un supermarché.",
+  },
+  "maths/stmg/stat-interpoler": {
+    titre: "Interpoler et extrapoler : 20 exercices corrigés",
+    resume:
+      "Estimer une valeur avec une droite d'ajustement, par le calcul ou sur le graphique, dire si c'est une interpolation ou une extrapolation, trouver à partir de quand un seuil est franchi, et juger les limites d'une extrapolation. La taille des enfants, la population mondiale, le record du 100 m, une droite d'étalonnage de laboratoire, la fonte d'un glacier.",
   },
   "maths/stmg/stat-changement-variable": {
     titre: "Changement de variable : 20 exercices corrigés",
@@ -1676,11 +1681,6 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     titre: "Contre-exemple, réciproque, contraposée : 20 exercices corrigés",
     resume:
       "Automatismes : réfuter par un contre-exemple, écrire et tester une réciproque, utiliser une contraposée, reconnaître une condition nécessaire ou suffisante. Une vente en ligne, un match de football, un lycée, une usine, un jury d'examen, une banque.",
-  },
-  "maths/stmg/va-echantillonnage": {
-    titre: "La fluctuation d'échantillonnage : 20 exercices corrigés",
-    resume:
-      "Observer la fluctuation sur des simulations, calculer 1 ÷ √n et l'intervalle où tombent environ 95 % des fréquences, décider si une observation est fréquente ou rare, choisir la taille d'un échantillon. Contrôle qualité, sondages, banque, e-commerce ; le don du sang, les naissances, la présidentielle de 2022, la roulette du casino.",
   },
 };
 
