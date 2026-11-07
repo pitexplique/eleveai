@@ -27,7 +27,14 @@ Notions `decimal_nombre` (6 micros) et `decimal_calcul` (6 micros jouées en 6e)
   - ✅ Pilotes 01 contrôlés et corrigés (`96e1cb36`) : short, « et 4 millièmes » sur sa ligne (il sortait de l'ardoise) ; paysage, coche plus petite (`PaysageDecimal.coche`, elle touchait « … 9 centièmes »). Paysage : 0 instant au bord, audit propre. ⚠️ `verifier-bords-video.py` sur un short = 100 % d'alertes (décor plein cadre) : planche relue à la place.
   - ✅ **FORMAT VALIDÉ par Frédéric** (« Oui, lance les 22 »). Instants des 12 shorts générés d'un coup (`462634b0`).
   - ⏳ 6 agents lancés (02-03, 04-05, 06-07, 08-09, 10-11, 12), cahier des charges : `side-session-notes/local_1d486d00-…/decimaux-brief-agents.md`. Chacun : scène `decimal_<slug_>.py`, film `films/decimaux-<slug>.js`, rendus, contrôles, commit de ses fichiers. Ils ne touchent ni au manifeste, ni à `lib/videos`, ni à R2.
-  - Reste ensuite (session principale) : relire leurs planches, aperçu des 24, manifeste, fiches YouTube, R2, bilans, `COUPE_PAR_VIDEO` ; coach après le push.
+- 07/11 soir : ✅ **LES 24 VIDÉOS SONT RENDUES**, chacune contrôlée par son agent : audit propre (seul « 974 »), 0 instant au bord pour les paysages, planches relues et défauts corrigés puis re-rendus.
+  - Commits, sans push : `71761242` (02-03), `3b020ce9` et `c2999142` (04-05), `01729247`, `f468170c` et `597b2e04` (06-07), `87a27ad0` (08-09), `5d4eb74b` et `c8de2617` (10-11), `3b4af2e3` et `be8e8cdf` (12).
+  - Aperçu des 24 : `manim/sorties/apercu-decimaux.html` (port 3900, à l'arrêt).
+  - Ceintures des shorts : blanche pour 01, 02 et 05, jaune pour les autres (d'après cette reprise).
+  - ⏳ Défaut mineur NON corrigé : dans les paysages 02 et 03, les entêtes du petit tableau de « Ce que tu as appris » (6 colonnes) sont petites. À corriger et re-rendre.
+  - « Mets » de la fin de chaque short (en secondes depuis le début du film, AVANT d'ajouter les 0,03 s de `COUPE_PAR_VIDEO`) : 02 = 70,33 ; 03 = 72,25 ; 04 = 65,49 ; 05 = 74,87 ; 06 = 65,31 ; 07 = 85,34 ; 08 = 69,81 ; 09 = 77,97 ; 10 = 74,62 ; 11 = 74,05 ; 12 = 65,39. Le 01 reste à mesurer. ⚠️ À vérifier au son de chaque mp4 (la règle dit « mesuré au son »).
+  - Les dossiers `manim/scripts/6e/media-dec-NN` ne sont pas suivis par git et peuvent être supprimés.
+  - RESTE : corriger les entêtes des paysages 02 et 03, manifeste (`6e-decimal-<slug>[-short]`, `micro_id`, `centres`, `questions`, `pas_avant`), `python scripts/fiches-youtube.py`, R2, bilans, `COUPE_PAR_VIDEO`, puis Frédéric écoute. Coach APRÈS le push. Rien sur YouTube sans son ordre.
 - Les deux paysages « Tout comprendre » (`6e-decimal-nombre`, `6e-decimal-calcul`) et leurs 4 shorts Manim RESTENT : elles sont en ligne (hv_ZFkFVk00, QFQsyW-CXw8), couvrent la notion entière et servent de révision. La nouvelle série est par micro ; ne pas les refaire.
 - `decimal_diviser_par_decimal` : masquée en 6e (hors France, `micros-masquees.ts`), travaillée en 5e (`quotient_decimaux`). Pas de vidéo dans ce lot.
 
