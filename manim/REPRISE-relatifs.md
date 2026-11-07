@@ -84,3 +84,32 @@ Ton validé : Ti Margo complice, gag sur les maths, un défi et pas un mini-cour
 - Le socle `short.js` / `personnage.js` est partagé avec les Triangles 6e : ne pas y changer un rendu. Surcharger dans `relatifs.js` (déjà fait pour `#panneau` et le zoom du bon choix).
 - `manim/scripts/4e/media-rel-NN/` n'est pas ignoré par git : ne pas l'ajouter. Le supprimer une fois le mp4 copié.
 - Commit PAR CHEMIN, pas de push sans son ordre.
+
+
+## ÉTAT au 07/11 (session de fabrication), à lire en premier
+
+**Fait et committé, rien de poussé :**
+- Voix des 12 vidéos, marques, instants ; le pari dans les accroches (`38370b9e`).
+- Les 7 shorts rendus et contrôlés, barre du compte à rebours comprise : `prototypes/ti-margo/films/relatifs-<ep>.js`. Miniature et `publication.md` (`Validé : non`) à côté de chaque mp4.
+- Paysages 01, 03, 04, 05 rendues et contrôlées (`fd9ea102`, `6be768a9`, `ffb7c9b6`).
+- Robustesse du coach : les 7 micros au vert, 51 gabarits justes (`beca46be`).
+
+**En cours à ce moment :** paysages 02, 06, 07 (`manim/scripts/4e/relatif_<slug>.py`). Regarder si le mp4 existe dans `manim/sorties/4e/maths/relatifs/NN-<slug>/` et si le script est committé. Sinon, reprendre avec `manim/BRIEF-relatifs-paysage.md` (une session par épisode, le script en cours peut déjà exister).
+
+**Reste, dans l'ordre :**
+1. `python manim/miniature_relatifs.py` : les 7 miniatures des paysages (outil prêt, essayé sur 01 et 03, non committé).
+2. `python manim/passe_relatifs.py temps`, puis `python manim/passe_relatifs.py manifeste` : ajoute les 14 entrées avec `pas_avant: 2026-12-01`, date de prudence (outil prêt, jamais lancé, non committé). Committer selon la mémoire du manifeste : blob depuis HEAD + nos entrées, sans `-- manifeste`.
+3. `python scripts/vignettes-videos.py`, `python scripts/fiches-youtube.py relatif`, `.\scripts2-videos.ps1 -Envoyer`, `node scripts/generer-videos-r2.mjs` (écrit aussi les bilans).
+4. `COUPE_PAR_VIDEO` dans `components/LecteurVideo.tsx` pour les 14 ids : paysage ≈ 8,6 s et short ≈ 4,7 s, à recaler sur le WAV de fin.
+5. Push sur son ordre, le soir, PUIS `node scripts/brancher-videos-coach.mjs --id <les 14 ids> --ecrire`.
+6. Rapport final.
+
+**À écouter ou à trancher par Frédéric (rien n'a été écouté, images seulement) :**
+- Bruitages ajoutés aux shorts (bips, plouf, fanfare), à écouter sous la voix.
+- Short 04, vers 83 s : le panneau écrit (−36) ÷ (−4) = ?, ce qui donne l'opération de la question en commentaire.
+- Short 07, vers 54 s : la pancarte tourne très vite pendant la course.
+- Short 02, vers 72 s : coupe sèche vers la question finale.
+- Short 06 : écharpe rouge ajoutée à Ti Margo, à retirer si elle gêne.
+- Paysage 04, vers 2:25 : la rature sur −3 traverse aussi le signe moins.
+
+**Pour la session Triangles :** dans `short.js`, la barre du rebours ne s'affiche jamais (`#rebours{display:none}` reprend le dessus). Surchargé dans `relatifs.js` pour cette série ; les autres shorts du socle ont le même défaut.
