@@ -5,6 +5,7 @@ import { CORRECTEURS as algoEvenement } from "./algo-evenement";
 import { CORRECTEURS as angles } from "./angles";
 import { CORRECTEURS as calculLitteral } from "./calcul-litteral";
 import { CORRECTEURS as conversions } from "./conversions";
+import { CORRECTEURS as puissanceSimple } from "./puissance-simple";
 import { CORRECTEURS as divisibilite } from "./divisibilite";
 import { CORRECTEURS as fractions } from "./fractions";
 import { CORRECTEURS as nombresRelatifs } from "./nombres-relatifs";
@@ -32,6 +33,7 @@ export const CORRECTEURS_5E: CorrecteursMaths = {
   ...angles,
   ...calculLitteral,
   ...conversions,
+  ...puissanceSimple,
   ...divisibilite,
   ...fractions,
   ...nombresRelatifs,

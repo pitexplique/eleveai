@@ -37,6 +37,15 @@ export const notions: NotionSource[] = [
     prerequis: ["relatif_nombre"],
     levels: [1, 2, 3],
   },
+  // 07/11/2026 : le programme de cycle 4 (arrêté du 18/02/2026), en vigueur en 5e depuis la rentrée
+  // 2026, place ici le carré, le cube et les puissances simples. Exposant quelconque : 4e.
+  {
+    id: "puissance_simple",
+    label: "Carré, cube et puissances simples",
+    boId: "BO5N1",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
   // Les critères de divisibilité sont au programme de 5e et manquaient : ils
   // servent à simplifier les fractions, ce qui vient juste après.
   // Ajoutés le 04/08/2026.

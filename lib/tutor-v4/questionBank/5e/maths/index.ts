@@ -29,6 +29,7 @@ import { evaluationNationale4eBank } from "./evaluation-nationale-4e.bank";
 // Conversions et durées : la notion `grandeur_conversion`, ajoutée le 15/08
 // parce que `BO5M1 « Grandeurs et mesures »` ne portait que les aires.
 import { conversionsBank } from "./conversions.bank";
+import { puissanceSimpleBank } from "./puissance-simple.bank";
 import { patronPrismeCylindreBank } from "./patron-prisme-cylindre.bank";
 import { statModeBank } from "./stat-mode.bank";
 
@@ -53,6 +54,7 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...algoEvenementBank,
   ...evaluationNationale4eBank,
   ...conversionsBank,
+  ...puissanceSimpleBank,
   ...polygonesReguliersBank,
   ...tenir375(statModeBank),
   ...tenir375(patronPrismeCylindreBank),

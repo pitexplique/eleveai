@@ -36,6 +36,40 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     CARRÉ, CUBE ET PUISSANCES SIMPLES (07/11/2026)
+  ========================= */
+  {
+    id: "puissance_simple_notation",
+    label: "Comprendre la notation du carré et du cube",
+    notionId: "puissance_simple",
+    prerequis: [],
+  },
+  {
+    id: "puissance_simple_valeurs",
+    label: "Connaître les carrés de 0 à 12 et le cube de 10",
+    notionId: "puissance_simple",
+    prerequis: ["puissance_simple_notation"],
+  },
+  {
+    id: "puissance_simple_ecrire",
+    label: "Écrire un nombre sous la forme d’une puissance 2 ou 3",
+    notionId: "puissance_simple",
+    prerequis: ["puissance_simple_valeurs"],
+  },
+  {
+    id: "puissance_simple_calculer",
+    label: "Calculer une expression avec des puissances simples",
+    notionId: "puissance_simple",
+    prerequis: ["puissance_simple_valeurs"],
+  },
+  {
+    id: "puissance_simple_litteral",
+    label: "Calculer une expression littérale avec une puissance simple",
+    notionId: "puissance_simple",
+    prerequis: ["puissance_simple_calculer", "litteral_substituer"],
+  },
+
+  /* =========================
      NOMBRES RELATIFS
   ========================= */
   {
