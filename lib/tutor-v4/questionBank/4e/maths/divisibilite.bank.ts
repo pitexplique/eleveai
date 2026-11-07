@@ -189,21 +189,34 @@ export const divisibiliteBank: TutorBankItemV4[] = [
         `${d} divise ${m}.`,
         `${m} = ${d} × ${k}.`,
       ]);
-      const correct = `${m} est un multiple de ${d}`;
       // ⚠️ Un leurre « m est un multiple de x » doit être FAUX : 42 est bien un
       // multiple de 7 (= 6 + 1). On prend le premier x > d qui ne divise pas m.
       let x = d + 1;
       while (m % x === 0) x++;
+      // 07/11/2026 : la relation se dit dans LES DEUX SENS. La bonne phrase était
+      // toujours « m est un multiple de d » : l'élève choisissait la forme sans
+      // lire. Une fois sur deux, c'est « d est un diviseur de m » qui est juste.
+      const sensDiviseur = Math.random() < 0.5;
+      const correct = sensDiviseur ? `${d} est un diviseur de ${m}` : `${m} est un multiple de ${d}`;
+      const leurres = sensDiviseur
+        ? [
+            `${m} est un diviseur de ${d}`,
+            `${d} est un multiple de ${m}`,
+            `${m} et ${d} n'ont aucun lien`,
+            `${d} n'est pas un diviseur de ${m}`,
+            `${x} est un diviseur de ${m}`,
+          ]
+        : [
+            `${d} est un multiple de ${m}`,
+            `${m} est un diviseur de ${d}`,
+            `${m} et ${d} n'ont aucun lien`,
+            `${d} n'est pas un diviseur de ${m}`,
+            `${m} est un multiple de ${x}`,
+          ];
       return {
         text: `${intro} ${question}`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          `${d} est un multiple de ${m}`,
-          `${m} est un diviseur de ${d}`,
-          `${m} et ${d} n'ont aucun lien`,
-          `${d} n'est pas un diviseur de ${m}`,
-          `${m} est un multiple de ${x}`,
-        ]),
+        choices: makeChoices(correct, leurres),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -238,21 +251,34 @@ export const divisibiliteBank: TutorBankItemV4[] = [
       ]);
       const P = randomChoice(PARTAGES.filter((p) => p.max >= m));
       const intro = `${P.qui} a ${m} ${P.objets}. ${cap(P.pr)} peut les ${P.mise} de ${d} : ${P.pr} obtient ${k} ${P.groupes}, sans qu'il en reste.`;
-      const correct = `${m} est un multiple de ${d}`;
       // ⚠️ Un leurre « m est un multiple de x » doit être FAUX : 42 est bien un
       // multiple de 7 (= 6 + 1). On prend le premier x > d qui ne divise pas m.
       let x = d + 1;
       while (m % x === 0) x++;
+      // 07/11/2026 : la relation se dit dans LES DEUX SENS. La bonne phrase était
+      // toujours « m est un multiple de d » : l'élève choisissait la forme sans
+      // lire. Une fois sur deux, c'est « d est un diviseur de m » qui est juste.
+      const sensDiviseur = Math.random() < 0.5;
+      const correct = sensDiviseur ? `${d} est un diviseur de ${m}` : `${m} est un multiple de ${d}`;
+      const leurres = sensDiviseur
+        ? [
+            `${m} est un diviseur de ${d}`,
+            `${d} est un multiple de ${m}`,
+            `${m} et ${d} n'ont aucun lien`,
+            `${d} n'est pas un diviseur de ${m}`,
+            `${x} est un diviseur de ${m}`,
+          ]
+        : [
+            `${d} est un multiple de ${m}`,
+            `${m} est un diviseur de ${d}`,
+            `${m} et ${d} n'ont aucun lien`,
+            `${d} n'est pas un diviseur de ${m}`,
+            `${m} est un multiple de ${x}`,
+          ];
       return {
         text: `${intro} ${question}`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          `${d} est un multiple de ${m}`,
-          `${m} est un diviseur de ${d}`,
-          `${m} et ${d} n'ont aucun lien`,
-          `${d} n'est pas un diviseur de ${m}`,
-          `${m} est un multiple de ${x}`,
-        ]),
+        choices: makeChoices(correct, leurres),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
