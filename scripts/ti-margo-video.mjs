@@ -4,6 +4,9 @@
 //   node scripts/ti-margo-video.mjs film               → le MP4 complet avec la voix
 //   node scripts/ti-margo-video.mjs maths controle 1 8 → idem pour l'encouragement avant un test de maths (paysage)
 //   node scripts/ti-margo-video.mjs maths film
+//   node scripts/ti-margo-video.mjs cahier controle 2 12 → « Ton cahier t'attend » (paysage)
+//   node scripts/ti-margo-video.mjs cahier miniature
+//   node scripts/ti-margo-video.mjs cahier film
 import { chromium } from 'playwright-core';
 import { spawn, spawnSync } from 'node:child_process';
 import { mkdirSync, existsSync, rmSync } from 'node:fs';
@@ -22,6 +25,12 @@ const FILMS = {
     largeur: 1920, hauteur: 1080, sons: 'ti-margo-3d-encouragement-maths', sortie: 'encouragement-test-maths', nom: 'eleveai-ti-margo-3d-encouragement-test-maths',
     // Le 2e clip est coupé dans son silence (à 1,4 s), pour laisser le temps d'une vraie respiration
     pistes: (A) => [['01-salut', A.s], ['02-respire', A.r, 0, 1.4], ['02-respire', A.rb, 1.4], ['03-consigne', A.c], ['04-allez', A.a]],
+    tics: () => [],
+    supprimerMuet: true,
+  },
+  cahier: {
+    largeur: 1920, hauteur: 1080, sons: 'ti-margo-3d-cahier-ecriture', sortie: 'cahier-ecriture', nom: 'eleveai-ti-margo-3d-cahier-ecriture',
+    pistes: (A) => [['01-montagne', A.c1], ['02-secret', A.c2], ['03-grandes', A.c3], ['04-rapetissent', A.c4], ['05-compter', A.c5], ['06-age', A.c6], ['07-cahier', A.c7], ['08-allez', A.c8]],
     tics: () => [],
     supprimerMuet: true,
   },
@@ -61,6 +70,27 @@ if (mode === 'controle') {
     const m = document.createElement('div');
     m.textContent = 'Film d’animation 3D';
     m.style.cssText = 'position:fixed;z-index:9;left:44px;width:990px;text-align:center;bottom:60px;white-space:nowrap;background:#17452a;color:#fff;font-weight:800;font-size:64px;line-height:1;padding:24px 0;border-radius:999px;';
+    document.body.append(m);
+  });
+  await page.screenshot({ path: path.join(SORTIE, NOM + '-miniature.png') });
+} else if (mode === 'miniature' && cle === 'cahier') {
+  // PNG paysage 1920×1080 : le titre, les deux vraies couvertures, Ti Margo pouce levé, et la mention obligatoire
+  mkdirSync(SORTIE, { recursive: true });
+  await page.evaluate(() => {
+    window.tiMargo.aller(50.6);
+    for (const id of ['site', 'gratuit', 'medaille', 'diplome']) document.getElementById(id).style.display = 'none';
+    document.getElementById('feuille2d').style.display = 'none';
+    const c = document.getElementById('cadre');
+    c.style.cssText += 'font-size:118px;line-height:1.1;text-align:center;top:176px;';
+    c.innerHTML = 'Ton <span style="color:#d9480f">cahier</span><br>t’attend';
+    const place = (id, gauche, angle) => {
+      const e = document.getElementById(id);
+      e.style.cssText += `display:block;visibility:visible;top:356px;height:520px;width:368px;left:${gauche}px;transform:rotate(${angle}deg);`;
+    };
+    place('couvL', 110, -3); place('couvN', 560, 3);
+    const m = document.createElement('div');
+    m.textContent = 'Film d’animation 3D';
+    m.style.cssText = 'position:fixed;z-index:9;left:38px;width:1016px;text-align:center;bottom:44px;white-space:nowrap;background:#17452a;color:#fff;font-weight:800;font-size:64px;line-height:1;padding:24px 0;border-radius:999px;';
     document.body.append(m);
   });
   await page.screenshot({ path: path.join(SORTIE, NOM + '-miniature.png') });

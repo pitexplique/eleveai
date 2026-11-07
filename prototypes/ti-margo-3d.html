@@ -42,6 +42,7 @@
   <button data-a="danse">Danser</button>
   <button data-a="marche">Marcher</button>
 </div>
+<script src="ti-margo-traces-cahier.js"></script>
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -457,7 +458,7 @@ function boucle(now){
   requestAnimationFrame(boucle);
 }
 const FILM_DEMANDE=new URLSearchParams(location.search).get('video');
-const MODE_VIDEO=FILM_DEMANDE==='mur'||FILM_DEMANDE==='maths';
+const MODE_VIDEO=FILM_DEMANDE==='mur'||FILM_DEMANDE==='maths'||FILM_DEMANDE==='cahier';
 if(!MODE_VIDEO) requestAnimationFrame(boucle);
 
 /* ============================================================
@@ -858,8 +859,395 @@ function preparerEncouragement(){
   renderer.setPixelRatio(1); renderer.setSize(1920,1080); camera.aspect=1920/1080; camera.updateProjectionMatrix();
 }
 
+/* ============================================================
+   « TON CAHIER T'ATTEND » (paysage 1920×1080) : pour inciter à se
+   lancer dans l'écriture. Tout dépend de l'instant T (s).
+   ⛔ Les lettres et les chiffres dessinés viennent de TRACES_CAHIER
+   (les mêmes que le cahier), jamais d'une police.
+   ============================================================ */
+function preparerCahier(){
+  document.body.classList.add('video');
+  document.getElementById('barre').style.display='none';
+  controls.enabled=false;
+  scene.video=true; scene.taille=.82; scene.x=0; scene.ry=-.2;
+  let graineV=5151; Math.random=()=> (graineV=(graineV*16807)%2147483647)/2147483647;
+  const lisse=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+  const TR=window.TRACES_CAHIER;
+
+  /* Départ de chaque clip. Chaque clip finit déjà par ~0,8 s de silence : la respiration entre deux phrases fait ~1 s. */
+  const A={ c1:.4, c2:6.65, c3:17.4, c4:25.7, c5:31.8, c6:40.3, c7:46, c8:59 };
+  const FIN=66.6, TAILLE_AVANT=.82, TAILLE_APRES=1;
+  window.tiMargoClips=A; window.tiMargoFin=FIN;
+
+  /* ---- Décor : le même que « Avant ton test de maths » ---- */
+  const sol=new THREE.Mesh(new THREE.PlaneGeometry(60,30),toon(0x8fd14a)); sol.rotation.x=-Math.PI/2; sol.position.set(0,-.002,-5); scene3d.add(sol);
+  const css=document.createElement('style');
+  css.textContent=`
+  body.video{background:linear-gradient(#8fd8ff 0%,#d3f1ff 55%,#fff6d6 100%);}
+  body.video canvas{z-index:2;}
+  .fd{position:fixed;z-index:1;}
+  #astre{left:1650px;top:44px;width:150px;height:150px;border-radius:50%;background:#ffd23f;box-shadow:0 0 70px #ffe27a;}
+  .nuage{height:64px;border-radius:40px;background:#fff;opacity:.95;}
+  .nuage::before,.nuage::after{content:"";position:absolute;background:#fff;border-radius:50%;}
+  .nuage::before{width:92px;height:92px;left:22%;top:-44px;}.nuage::after{width:66px;height:66px;left:56%;top:-28px;}
+  .colline{border-radius:50%;}
+  #halo{width:900px;height:900px;margin:-450px 0 0 -450px;border-radius:50%;background:radial-gradient(circle,#fff6b8 0%,#fff6b8cc 45%,#fff6b800 70%);opacity:0;}
+  #cadre{position:fixed;z-index:3;left:38px;width:1016px;top:190px;transform:translateY(-50%);background:#fff;border:8px solid #17452a;border-radius:44px;padding:20px 36px;
+    color:#17452a;font-weight:800;font-size:72px;line-height:1.14;text-align:left;display:none;white-space:nowrap;}
+  #cadre .ligne{display:block;}
+  #cadre.calme{top:50%;font-size:84px;line-height:1.3;padding:44px 40px;}
+  #cadre .fort{color:#d9480f;}
+  #feuille2d{position:fixed;inset:auto;z-index:3;left:38px;top:372px;width:1016px;height:688px;border:8px solid #17452a;border-radius:36px;}
+  .bloc7{position:fixed;z-index:3;}
+  #site{left:38px;top:370px;width:1016px;height:216px;background:#fff;border:8px solid #f5a50a;border-radius:36px;padding:4px 34px;color:#17452a;font-weight:800;white-space:nowrap;}
+  #site .grand{font-size:122px;line-height:1.08;}
+  #site .petit{font-size:48px;line-height:1.14;color:#2f6f3f;}
+  #gratuit{left:694px;top:400px;width:336px;height:112px;line-height:104px;text-align:center;background:#2f9a3a;color:#fff;font-weight:800;font-size:68px;border-radius:999px;}
+  .couv{top:596px;height:456px;width:322px;border:4px solid #17452a;border-radius:12px;background:#fff;object-fit:cover;box-shadow:0 8px 18px #17452a55;}
+  #couvL{left:44px;}#couvN{left:376px;}
+  #diplome{left:730px;top:600px;height:446px;width:315px;border:4px solid #17452a;border-radius:12px;background:#fff;object-fit:cover;box-shadow:0 8px 18px #17452a55;}
+  #medaille{left:584px;top:876px;width:150px;height:186px;}
+  .mot{visibility:hidden;}.mot.vu{visibility:visible;}`;
+  document.head.append(css);
+  const fd=(id,style='',cl='')=>{const d=document.createElement('div');if(id)d.id=id;d.className='fd '+cl;d.style.cssText=style;document.body.append(d);return d;};
+  fd('astre');
+  fd('','left:1120px;top:120px;width:210px;','nuage'); fd('','left:1400px;top:70px;width:170px;','nuage');
+  fd('','left:-180px;top:470px;width:1200px;height:420px;background:#b5e486;','colline');
+  fd('','left:760px;top:500px;width:1500px;height:420px;background:#a6dc74;','colline');
+  const halo=fd('halo');
+  const cadre=document.createElement('div'); cadre.id='cadre'; document.body.append(cadre);
+
+  /* ---- La feuille de cahier ---- */
+  const FW=1000, FH=672;
+  const feuille2d=document.createElement('canvas'); feuille2d.id='feuille2d'; feuille2d.width=FW; feuille2d.height=FH; document.body.append(feuille2d);
+  const g2=feuille2d.getContext('2d');
+  function papier(esp,base){
+    g2.fillStyle='#fffdf5'; g2.fillRect(0,0,FW,FH);
+    g2.strokeStyle='#bcd6ee'; g2.lineWidth=2;
+    for(let y=base%esp;y<FH;y+=esp){ g2.beginPath(); g2.moveTo(0,y); g2.lineTo(FW,y); g2.stroke(); }
+    g2.strokeStyle='#8fb6dc'; g2.lineWidth=4; g2.beginPath(); g2.moveTo(0,base); g2.lineTo(FW,base); g2.stroke();
+  }
+  /* Longueurs des traits, pour un tracé qui avance à vitesse constante */
+  const longueur=m=>{ if(m._l) return m._l; let L=0; for(const t of m.traits) for(let i=1;i<t.length;i++) L+=Math.hypot(t[i][0]-t[i-1][0],t[i][1]-t[i-1][1]); return m._l=L||1; };
+  /* Dessine le mot m (repère en interlignes, y vers le haut) jusqu'à la fraction p ; rend la pointe du crayon. */
+  function tracer(m,x,y,u,{p=1,coul='#17452a',ep=Math.max(3,u*.14)}={}){
+    const L=longueur(m)*Math.max(0,Math.min(1,p)); let fait=0, pointe=null;
+    g2.strokeStyle=coul; g2.fillStyle=coul; g2.lineWidth=ep; g2.lineCap='round'; g2.lineJoin='round';
+    const X=v=>x+v[0]*u, Y=v=>y-v[1]*u;
+    if(p<=0){ const d=m.traits[0][0]; return {x:X(d),y:Y(d)}; }
+    for(const t of m.traits){
+      if(fait>=L) break;
+      g2.beginPath(); g2.moveTo(X(t[0]),Y(t[0])); pointe={x:X(t[0]),y:Y(t[0])};
+      for(let i=1;i<t.length;i++){
+        const d=Math.hypot(t[i][0]-t[i-1][0],t[i][1]-t[i-1][1]);
+        if(fait+d>=L&&p<1){ const r=(L-fait)/(d||1), q=[t[i-1][0]+(t[i][0]-t[i-1][0])*r,t[i-1][1]+(t[i][1]-t[i-1][1])*r]; g2.lineTo(X(q),Y(q)); pointe={x:X(q),y:Y(q)}; fait=L; break; }
+        g2.lineTo(X(t[i]),Y(t[i])); pointe={x:X(t[i]),y:Y(t[i])}; fait+=d;
+      }
+      g2.stroke();
+    }
+    if(p>=1) for(const q of m.points){ g2.beginPath(); g2.arc(X(q),Y(q),ep*.72,0,Math.PI*2); g2.fill(); }
+    return pointe;
+  }
+  /* Un glyphe entier, déplacé, tourné, agrandi autour de son centre */
+  function glyphe(cle,cx,y,u,{dx=0,dy=0,rot=0,z=1,coul,ep}={}){
+    const m=TR[cle], cy=(m.haut+m.bas)/2*u;
+    g2.save(); g2.translate(cx+dx,y-cy+dy); g2.rotate(rot); g2.scale(z,z);
+    tracer(m,-m.largeur*u/2,cy,u,{coul,ep}); g2.restore();
+  }
+  function pointVert(x,y,r,T){
+    const z=1+.14*Math.sin(T*4.2);
+    g2.fillStyle='#22c55e55'; g2.beginPath(); g2.arc(x,y,r*1.55*z,0,Math.PI*2); g2.fill();
+    g2.fillStyle='#22c55e'; g2.strokeStyle='#14602a'; g2.lineWidth=4; g2.beginPath(); g2.arc(x,y,r*z,0,Math.PI*2); g2.fill(); g2.stroke();
+  }
+  /* Le crayon de Ti Margo, la mine sur (x,y) */
+  function crayon2d(x,y,z=1){
+    g2.save(); g2.translate(x,y); g2.rotate(.72); g2.scale(z,z);
+    g2.lineJoin='round'; g2.strokeStyle='#17452a'; g2.lineWidth=4;
+    g2.fillStyle='#ee6f6c'; g2.beginPath(); g2.roundRect(-15,-196,30,28,10); g2.fill(); g2.stroke();
+    g2.fillStyle='#5f8fae'; g2.fillRect(-15,-172,30,16); g2.strokeRect(-15,-172,30,16);
+    g2.fillStyle='#f5a50a'; g2.fillRect(-15,-156,30,110); g2.strokeRect(-15,-156,30,110);
+    g2.fillStyle='#f3cf9a'; g2.beginPath(); g2.moveTo(-15,-46); g2.lineTo(15,-46); g2.lineTo(0,0); g2.closePath(); g2.fill(); g2.stroke();
+    g2.fillStyle='#2a2a30'; g2.beginPath(); g2.moveTo(-5,-15); g2.lineTo(5,-15); g2.lineTo(0,0); g2.closePath(); g2.fill();
+    g2.restore();
+  }
+
+  /* ---- Les images, clip par clip (t : secondes depuis le début du clip) ---- */
+  const GL1=[['a',190,205,'#d9480f',0],['g',500,205,'#2f9a3a',1.3],['r',810,205,'#1c5f9e',2.6],['5',190,630,'#f5a50a',3.9],['3',500,630,'#c2255c',5.2],['8',810,630,'#7048e8',6.5]];
+  const C1_L=.82, C1_C=3.2, C1_B=3.7; /* « lettres », « chiffres », « ne veulent pas rester en place » */
+  function dessinLettresChiffres(t,T,estompe=1){
+    GL1.forEach(([c,cx,y,coul,ph],i)=>{
+      const debut=i<3?C1_L:C1_C, ap=lisse((t-debut)/.3); if(ap<=0) return;
+      const e=lisse((t-C1_B)/.4)*(1-lisse((t-6.1)/.7))*(i<3?.55:1);
+      const tremble=estompe*(1-e);
+      g2.globalAlpha=estompe;
+      glyphe(c,cx,y,130,{coul,ep:17,z:ap,
+        dx:Math.sin(T*19+ph)*2.6*tremble+Math.sin(T*3.1+ph)*30*e,
+        dy:Math.cos(T*23+ph)*2.2*tremble-Math.abs(Math.sin(T*6.2+ph))*50*e,
+        rot:Math.sin(T*5+ph)*.2*e+Math.sin(T*17+ph)*.012*tremble});
+      g2.globalAlpha=1;
+    });
+  }
+  function clip1(t,T){ papier(65,630); dessinLettresChiffres(t,T); }
+
+  const L_U=186, L_X=(FW-TR.l.largeur*L_U)/2, L_Y=634;
+  function clip2(t,T){
+    papier(62,L_Y);
+    if(t<2.4) dessinLettresChiffres(99,T,1-lisse((t-1.5)/.8));
+    const m=TR.l, ap=lisse((t-2.55)/.35), larg=6+lisse((t-3.9)/.8)*44;
+    if(ap>0){
+      g2.globalAlpha=ap;
+      tracer(m,L_X,L_Y,L_U,{coul:'#d9bf8a',ep:larg+8});
+      tracer(m,L_X,L_Y,L_U,{coul:'#fbeec8',ep:larg});
+      g2.globalAlpha=1;
+    }
+    const pm=(t-8.2)/3.1;
+    const pointe=tracer(m,L_X,L_Y,L_U,{p:pm,coul:'#17452a',ep:15});
+    const dep=tracer(m,L_X,L_Y,L_U,{p:0});
+    if(t>=7.5) pointVert(dep.x,dep.y,22,T);
+    if(pm>0) tracer(m,L_X,L_Y,L_U,{p:pm,coul:'#17452a',ep:15});
+    if(t>=5.95){
+      const desc=1-lisse((t-5.95)/1.3), ap2=lisse((t-5.95)/.3);
+      g2.globalAlpha=ap2; crayon2d(pointe.x+desc*120,pointe.y-desc*160); g2.globalAlpha=1;
+    }
+  }
+
+  const M_U=470, M_X=(FW-TR.m.largeur*M_U)/2, M_Y=606;
+  function clip3(t,T){
+    papier(117.5,M_Y);
+    const m=TR.m, pts=m.traits[0], X=v=>M_X+v[0]*M_U, Y=v=>M_Y-v[1]*M_U;
+    const f=lisse((t-2.8)/.7);
+    if(f>0){
+      g2.globalAlpha=f;
+      g2.beginPath(); g2.moveTo(X(pts[0]),M_Y); for(const q of pts) g2.lineTo(X(q),Y(q)); g2.lineTo(X(pts[pts.length-1]),M_Y); g2.closePath();
+      g2.save(); g2.fillStyle='#a8c98f'; g2.fill(); g2.clip();
+      /* La neige sur le haut de chaque arrondi */
+      for(let i=2;i<pts.length-2;i++) if(pts[i][1]>pts[i-1][1]&&pts[i][1]>=pts[i+1][1]&&pts[i][1]>.5){
+        const cx=X(pts[i]), cy=Y(pts[i]);
+        g2.fillStyle='#ffffff'; g2.beginPath(); g2.moveTo(cx-190,cy-6);
+        g2.lineTo(cx+190,cy-6); g2.lineTo(cx+190,cy+66);
+        for(let k=7;k>=0;k--) g2.lineTo(cx-190+k*380/8,cy+(k%2?88:52));
+        g2.closePath(); g2.fill();
+      }
+      g2.restore(); g2.globalAlpha=1;
+    }
+    tracer(m,M_X,M_Y,M_U,{p:(t-.2)/2.6,coul:'#17452a',ep:34});
+  }
+
+  const MARCHES=[62,47,35,25,17];
+  function clip4(t,T){
+    papier(44,616);
+    let x=32;
+    const H=88, dep=x, bas=FH;
+    MARCHES.forEach((u,i)=>{
+      const w=TR.ami.largeur*u+24, y=616-i*H;
+      g2.fillStyle=i%2?'#ffe0a3':'#ffe8ba'; g2.fillRect(x,y,FW-x,bas-y);
+      g2.strokeStyle='#c78f2c'; g2.lineWidth=5; g2.beginPath(); g2.moveTo(x,i?y+H:y); g2.lineTo(x,y); g2.lineTo(FW,y); g2.stroke();
+      x+=w;
+    });
+    x=dep;
+    MARCHES.forEach((u,i)=>{
+      const w=TR.ami.largeur*u+24, y=616-i*H-9;
+      const debut=.15+i*.58;
+      if(t>=debut) tracer(TR.ami,x+12,y,u,{p:(t-debut)/.56,coul:'#17452a'});
+      x+=w;
+    });
+  }
+
+  const ESP5=64, B5A=320, B5B=576, U5=128;
+  const X5TON=48, X5PRE=X5TON+(TR.ton.largeur+.9)*ESP5;
+  function clip5(t,T){
+    papier(ESP5,B5B);
+    if(t>=1.6) tracer(TR['10'],110,B5A,U5,{p:(t-1.6)/1,coul:'#d9480f'});
+    if(t>=3.0) tracer(TR['100'],450,B5A,U5,{p:(t-3.0)/1.1,coul:'#1c5f9e'});
+    /* « ton » puis « prénom » : à la vitesse où la voix les dit */
+    if(t>=5.72) tracer(TR.ton,X5TON,B5B,ESP5,{p:(t-5.72)/.5,coul:'#17452a',ep:10});
+    if(t>=5.95) tracer(TR.prenom,X5PRE,B5B,ESP5,{p:(t-5.95)/1.5,coul:'#17452a',ep:10});
+  }
+
+  /* Clip 7 : les vraies couvertures, l'adresse, la médaille et le diplôme */
+  const bloc=(tag,id,cl,html='')=>{const d=document.createElement(tag);d.id=id;d.className='bloc7 '+cl;if(html)d.innerHTML=html;document.body.append(d);return d;};
+  const site=bloc('div','site','','<div class="grand">eleveai.fr</div><div class="petit">/fiches-ecriture/mon-cahier</div>');
+  const gratuit=bloc('div','gratuit','','gratuit');
+  const IMG='../public/fiches-ecriture/mon-cahier-paliers/';
+  const couvL=bloc('img','couvL','couv'); couvL.src=IMG+'couverture-lettres.png';
+  const couvN=bloc('img','couvN','couv'); couvN.src=IMG+'couverture-nombres.png';
+  const diplome=bloc('img','diplome',''); diplome.src=IMG+'lettres-diplome-1.png';
+  const medaille=bloc('div','medaille','',`<svg viewBox="0 0 150 186" width="150" height="186"><path d="M44 6h26l14 62H58z" fill="#d9480f" stroke="#17452a" stroke-width="5" stroke-linejoin="round"/><path d="M106 6H80L66 68h26z" fill="#1c5f9e" stroke="#17452a" stroke-width="5" stroke-linejoin="round"/><circle cx="75" cy="118" r="60" fill="#f5c211" stroke="#17452a" stroke-width="6"/><circle cx="75" cy="118" r="45" fill="#ffe066" stroke="#c78f2c" stroke-width="4"/><path d="M75 86l9.6 20.4 22.4 2.8-16.4 15.4 4.2 22.1L75 135.6l-19.8 11.1 4.2-22.1L43 109.200l22.400-2.800z" fill="#f5a50a" stroke="#c78f2c" stroke-width="3" stroke-linejoin="round"/></svg>`);
+  const BLOCS7=[site,gratuit,couvL,couvN,diplome,medaille];
+  function apparait(e,t,c,r=0){ const v=t>=c; e.style.visibility=v?'visible':'hidden'; if(v){ const u=lisse((t-c)/.32), z=u+Math.sin(u*Math.PI)*.1; e.style.transform=`rotate(${r}deg) scale(${z})`; } }
+
+  function clip8(t,T){
+    const Y=330, X0=170;
+    papier(66,Y);
+    g2.strokeStyle='#17452a'; g2.lineWidth=5; g2.setLineDash([4,22]); g2.lineCap='round'; g2.beginPath(); g2.moveTo(X0+60,Y); g2.lineTo(FW-70,Y); g2.stroke(); g2.setLineDash([]);
+    pointVert(X0,Y,34,T);
+    if(t>=1.5){ const desc=1-lisse((t-1.5)/1.9); g2.globalAlpha=lisse((t-1.5)/.3); crayon2d(X0+desc*170,Y-desc*150); g2.globalAlpha=1; }
+    /* L'adresse du cahier reste à l'écran jusqu'au bout : le film finit sur le téléchargement */
+    g2.fillStyle='#fff'; g2.beginPath(); g2.roundRect(30,480,FW-60,162,28); g2.fill();
+    g2.strokeStyle='#f5a50a'; g2.lineWidth=8; g2.stroke();
+    g2.fillStyle='#17452a'; g2.textAlign='center'; g2.textBaseline='middle';
+    g2.font='800 84px "Segoe UI", sans-serif'; g2.fillText('eleveai.fr',FW/2,535);
+    g2.fillStyle='#2f6f3f'; g2.font='800 46px "Segoe UI", sans-serif'; g2.fillText('/fiches-ecriture/mon-cahier',FW/2,600);
+  }
+
+  /* ---- Le texte : chaque mot apparaît quand la voix le dit, jamais avant.
+     Phrases : [début, fin, texte] mesurés sur la voix (silencedetect) ; « / » va à la ligne, « * » met un mot en valeur. ---- */
+  const G=(c,...segs)=>({clip:c,de:A[c]+segs[0][0],segs:segs.map(([a,b,t])=>[A[c]+a,A[c]+b,t])});
+  const GROUPES=[
+    G('c1',[.106,1.453,'Il y a des lettres / qui font'],[1.515,1.853,'peur.']),
+    G('c1',[2.786,3.555,'Et des chiffres'],[3.6,4.144,'/ qui ne veulent'],[4.2,5.38,'/ pas rester en place.']),
+    G('c2',[.098,1.543,'Je vais te dire / un *secret.']),
+    G('c2',[2.436,3.133,'Une lettre,'],[3.302,4.847,'c’est juste / un petit *chemin.']),
+    G('c2',[5.781,7.319,'Tu poses ton crayon / sur le'],[7.375,8.043,'*point *vert,']),
+    G('c2',[8.196,8.987,'et tu marches,'],[9.205,9.879,'/ tout doucement.']),
+    G('c3',[.101,.671,'Au début,'],[.9,2.732,'tes lettres / seront grandes / comme des'],[2.79,3.2,'*montagnes.']),
+    G('c3',[4.056,4.886,'C’est très *bien.']),
+    G('c3',[5.806,7.417,'Ta main est en train / d’apprendre.']),
+    G('c4',[.101,.63,'Et puis,'],[.797,1.892,'/ jour après jour,'],[2.051,3.002,'/ elles *rapetissent.']),
+    G('c4',[3.866,4.345,'Et toi,'],[4.59,5.239,'/ tu *grandis.']),
+    G('c5',[.106,.747,'Un jour,'],[.995,1.876,'tu écris *10.'],[2.83,3.357,'/ Puis *100.']),
+    G('c5',[4.241,4.95,'Et un matin,'],[5.2,5.7,'/ tu écris'],[5.75,6.38,'*ton *prénom,'],[6.541,7.599,'/ avec ta main à toi.']),
+    G('c6',[.106,1.013,'Il n’y a pas d’âge'],[1.09,1.942,'/ pour commencer.'],[2.826,4.218,'/ Il y a juste un crayon,'],[4.381,4.796,'/ et toi.']),
+    G('c7',[.146,1.169,'Ton cahier t’attend,'],[1.343,2.927,'/ sur eleveai.fr.']),
+    G('c7',[3.861,4.727,'Il est *gratuit.']),
+    G('c7',[5.602,8.113,'Demande à un adulte / de l’imprimer avec toi.']),
+    G('c7',[8.991,9.917,'À chaque marche,'],[10.147,11.587,'/ tu gagnes une médaille'],[11.636,12.075,'/ et un diplôme.']),
+    G('c8',[.106,.456,'Allez.']),
+    G('c8',[1.425,3.4,'Pose ton crayon / sur le point vert.']),
+    G('c8',[4.323,5.511,'Je suis avec toi.'])
+  ];
+  const PAROLE=GROUPES.flatMap(g=>g.segs.map(p=>[p[0],p[1]]));
+  const parle=T=>PAROLE.some(p=>T>=p[0]&&T<=p[1]);
+  const syllabes=w=>Math.max(1,(w.match(/[aeiouyàâäéèêëîïôöùûü]+/gi)||[]).length);
+  function mots(cont,segs,T){
+    if(cont._cle!==segs){ cont._cle=segs; cont.innerHTML=''; cont._m=[];
+      let li=document.createElement('span'); li.className='ligne'; cont.append(li);
+      for(const [a,b,t] of segs){
+        const toks=t.split(' ').filter(Boolean), total=toks.filter(w=>w!=='/').reduce((s,w)=>s+syllabes(w),0); let av=0;
+        for(const w0 of toks){
+          if(w0==='/'){ li=document.createElement('span'); li.className='ligne'; cont.append(li); continue; }
+          const w=w0.replace(/^\*/,''), sp=document.createElement('span');
+          sp.className='mot'+(w0[0]==='*'?' fort':''); sp.textContent=w+' '; li.append(sp);
+          cont._m.push({sp,t:a+(b-a)*av/total+(av?.05:0)}); av+=syllabes(w);
+        }
+      }
+    }
+    for(const m of cont._m) m.sp.classList.toggle('vu',T>=m.t);
+  }
+
+  /* Yeux fermés : même précaution que le film « maths » */
+  const clos=yeux.map(y=>{ const t=new THREE.Mesh(new THREE.TorusGeometry(.125,.013,8,24,Math.PI),C.noir); t.position.set(0,.015,.232); t.rotation.z=Math.PI; t.visible=false; y.paup.parent.add(t); return t; });
+
+  const SAUTS=[A.c8+4.1,A.c8+5.65], FF=A.c8+3.9;
+  let camX=-1.5,camY=1.82,camD=7.35,dernierT=-1;
+  const regardeFeuille=(P,f=1)=>{ P.tetY=-.3*f; P.regY=-.36*f; P.regX=.1*f; P.tetZ=.03; };
+  const mainOuverte=(P,T)=>{ P.gesteD='ouverte'; P.md.set(.86,2.02+Math.sin(T*3)*.05,.5); P.cd.set(.72,1.58,.2); };
+  const pouce=P=>{ P.gesteD='pouce'; P.md.set(.95,2.32,.45); P.cd.set(.74,1.7,.14); P.tetZ=-.14; P.paupiere=-1.1; };
+
+  window.tiMargoFilm=function(P,T){
+    scene.couper=dernierT<0; dernierT=T;
+    /* Il grandit sur « tu grandis » (clip 4), puis reste à cette taille ; il s'écarte un peu pour que le crayon ne touche pas les cadres */
+    const gr0=lisse((T-A.c4-4.55)/1.7);
+    scene.taille=TAILLE_AVANT+(TAILLE_APRES-TAILLE_AVANT)*gr0;
+    scene.x=.12*gr0; scene.ry=-.2;
+    P.jaw=parle(T)?.24+.42*Math.abs(Math.sin(T*9.3)*Math.sin(T*3.7+1)):.2;
+    scene.souffle=0;
+    let b=0;
+
+    if(T<A.c2){ /* Il regarde les lettres, gentiment */
+      const t=T-A.c1; regardeFeuille(P); mainOuverte(P,T);
+      if(t>C1_B){ P.paupiere=-1.12; P.tetZ=.03+Math.sin(T*2.6)*.05; }
+    } else if(T<A.c3){
+      const t=T-A.c2;
+      if(t<1.8){ /* Le secret, la main près de la bouche */
+        P.gesteD='ouverte'; P.md.set(.7,2.6,.66); P.cd.set(.84,1.86,.28); P.tetZ=.1; P.tetY=.06; P.tetX=.05;
+      } else if(t<5.7){ regardeFeuille(P); mainOuverte(P,T); }
+      else { regardeFeuille(P); mainOuverte(P,T); P.mg.set(-.86,2.36,.5); P.cg.set(-.76,1.72,.14); }
+    } else if(T<A.c4){
+      const t=T-A.c3;
+      if(t<4){ const e=lisse((t-1.3)/.7); P.gesteD='ouverte'; P.md.set(.88+.2*e,2.05+.62*e,.36); P.cd.set(.76+.1*e,1.62+.3*e,.1); P.mg.set(-.82-.08*e,2.14+.5*e,.34); P.cg.set(-.72-.08*e,1.62+.25*e,.1); P.tetY=-.12; P.regY=-.3; }
+      else if(t<5.7){ pouce(P); }
+      else { P.gesteD='ouverte'; P.md.set(.84,2.05,.5); P.cd.set(.72,1.6,.2); P.tetX=.05+Math.sin((t-5.7)*4.6)*.13; P.tetY=-.04; P.paupiere=-1.1; }
+    } else if(T<A.c5){
+      const t=T-A.c4;
+      if(t<3.8){ regardeFeuille(P); mainOuverte(P,T); }
+      else { const e=lisse((t-4.4)/1.3); P.gesteD='ouverte'; P.md.set(.9+.08*e,2.0+.42*e,.38); P.cd.set(.74,1.6+.18*e,.12); P.mg.set(-.82-.04*e,2.14+.28*e,.34); P.tetX=-.05*e; P.tetY=.02; P.paupiere=-1.12; }
+    } else if(T<A.c6){
+      const t=T-A.c5;
+      if(t<6.45){ regardeFeuille(P); mainOuverte(P,T); }
+      else { P.gesteD='ouverte'; P.md.set(.92,2.5+Math.sin(T*3)*.02,.52); P.cd.set(.78,1.8,.18); P.tetY=.14; P.regY=.42; P.regX=-.1; P.paupiere=-1.1; }
+    } else if(T<A.c7){ /* Calme ; il montre son crayon, puis toi */
+      const t=T-A.c6;
+      b=.5-.5*Math.cos((T-A.c6)/4.4*Math.PI*2); scene.souffle=b*.5;
+      if(t<3.4){ P.gesteD='ouverte'; P.mg.set(-.68,1.2+.2*b,.24); P.cg.set(-.64,1.72+.14*b,.06); P.md.set(.7,1.2+.2*b,.24); P.cd.set(.66,1.72+.14*b,.06); P.tetY=0; }
+      else { P.mg.set(-.76,2.62,.62); P.cg.set(-.74,1.9,.2); P.tetY=-.14; P.regY=-.46; P.regX=-.26;
+        if(t<4.25){ P.gesteD='ouverte'; P.md.set(.7,1.2,.24); P.cd.set(.66,1.72,.06); }
+        else { P.gesteD='index'; P.md.set(.48,2.2,1); P.cd.set(.72,1.72,.42); P.tetY=-.02; P.regY=0; P.regX=0; P.paupiere=-1.1; } }
+    } else if(T<A.c8){
+      const t=T-A.c7;
+      if(t<3.7){ regardeFeuille(P,.8); mainOuverte(P,T); }
+      else if(t<5.5){ pouce(P); }
+      else if(t<8.9){ P.gesteD='ouverte'; P.md.set(.84,2.05,.5); P.cd.set(.72,1.6,.2); P.tetX=.03+Math.sin(T*3.6)*.05; P.tetY=-.02; P.paupiere=-1.1; }
+      else if(t<10.9){ regardeFeuille(P,.8); mainOuverte(P,T); }
+      else { regardeFeuille(P,.8); pouce(P); P.tetZ=-.06; }
+    } else {
+      const t=T-A.c8;
+      if(t<1.3){ mainOuverte(P,T); P.tetY=-.02; P.paupiere=-1.1; }
+      else if(T<FF){ regardeFeuille(P); mainOuverte(P,T); P.mg.set(-.86,2.28,.52); P.cg.set(-.76,1.7,.14); }
+      else { /* Le pouce levé, et deux sauts de joie */
+        P.md.set(1.02,2.62,.46); P.cd.set(.88,1.92,.1); P.mg.set(-.9,2.3,.32); P.cg.set(-.8,1.75,.08);
+        P.tetZ=-.1; P.tetY=-.04; P.paupiere=-1.14; P.qEnroule=.92;
+        for(const s of SAUTS) if(T>=s&&T<s+1.5){ ACTIONS.saut.f(T-s,P); P.sautY*=.62; P.md.y-=.3*P.sautY; P.mg.y-=.3*P.sautY; }
+        P.gesteD='pouce';
+        P.jaw=parle(T)?P.jaw+.12:.5;
+      }
+    }
+
+    yeux.forEach((y,i)=>{ const f=y.paup.rotation.x>1.15; y.globe.visible=!f; clos[i].visible=f; });
+
+    /* Caméra : il reste à droite, les pieds entiers dans le cadre ; elle recule pour les sauts */
+    const fin=T>=FF-.4, cX=fin?-1.85:-1.5, cY=fin?2.2:1.82, cD=fin?8.9:7.35, kc=scene.couper?1:.05;
+    camX+=(cX-camX)*kc; camY+=(cY-camY)*kc; camD+=(cD-camD)*kc;
+    camera.fov=32; camera.updateProjectionMatrix();
+    camera.position.set(camX,camY+.25,camD); camera.lookAt(camX,camY,0);
+
+    /* Le halo de la respiration */
+    const env=lisse((T-A.c6)/.8)*(1-lisse((T-A.c7+.3)/.6));
+    const p=new THREE.Vector3(scene.x,1.9,0).project(camera);
+    halo.style.left=((p.x+1)/2*1920)+'px'; halo.style.top=((1-p.y)/2*1080)+'px';
+    halo.style.opacity=env*(.6+.4*b); halo.style.transform=`scale(${.76+.34*b})`;
+
+    /* La feuille */
+    const dansC6=T>=A.c6&&T<A.c7, dansC7=T>=A.c7&&T<A.c8;
+    feuille2d.style.display=(dansC6||dansC7)?'none':'block';
+    if(T<A.c2) clip1(T-A.c1,T);
+    else if(T<A.c3) clip2(T-A.c2,T);
+    else if(T<A.c4) clip3(T-A.c3,T);
+    else if(T<A.c5) clip4(T-A.c4,T);
+    else if(T<A.c6) clip5(T-A.c5,T);
+    else if(T>=A.c8) clip8(T-A.c8,T);
+
+    /* Clip 7 */
+    for(const e of BLOCS7) e.style.display=dansC7?'block':'none';
+    if(dansC7){
+      const t=T-A.c7;
+      apparait(couvL,t,.5,-2); apparait(couvN,t,.75,2);
+      apparait(site,t,1.6); apparait(gratuit,t,4.28);
+      apparait(medaille,t,11.05); apparait(diplome,t,11.8,2);
+    }
+
+    /* Écrits : un groupe reste affiché jusqu'au suivant */
+    let gr=null; for(const g of GROUPES) if(T>=g.de) gr=g;
+    cadre.style.display=gr?'block':'none';
+    if(gr){ cadre.classList.toggle('calme',gr.clip==='c6'); mots(cadre,gr.segs,T); }
+  };
+  action={nom:'film',t:0,def:{d:1e9,f:(t,P)=>window.tiMargoFilm(P,window.tiMargoT)}};
+  renderer.setPixelRatio(1); renderer.setSize(1920,1080); camera.aspect=1920/1080; camera.updateProjectionMatrix();
+}
+
 if(FILM_DEMANDE==='mur') preparerVideo();
 if(FILM_DEMANDE==='maths') preparerEncouragement();
+if(FILM_DEMANDE==='cahier') preparerCahier();
 
 /* Pour vérifier une pose précise et, plus tard, exporter des images vers une vidéo */
 window.tiMargo={ jouer, lancerScene, arreterScene, avancer(sec){ for(let i=0;i<sec*60;i++) pas(1/60); renderer.render(scene3d,camera); }, camera, controls,
