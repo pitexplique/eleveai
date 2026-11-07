@@ -182,7 +182,742 @@ function accords(q: Q): string[] {
   return p;
 }
 
+// =====================================================================
+// ⭐ 07/11/2026 — LES GABARITS « À PLUSIEURS FAÇONS ». Chaque gabarit a sa liste
+// de règles : un motif de phrase (avec renvois \1 : une lettre doit revenir à la
+// même place, sinon la phrase est illisible) et le calcul refait d'après ce motif.
+// Une tournure qu'aucune règle ne lit est un défaut, jamais une réponse devinée.
+// La figure, quand il y en a une, est relue à part : le centre au centre, les
+// sommets sur le cercle (sauf si la question porte sur le sommet écarté), les
+// lettres de l'énoncé dessinées, la longueur demandée non écrite sur le dessin.
+// =====================================================================
+type R = { q: string } | { oui: boolean } | { vrai: boolean } | { n: number } | { l: number; u?: string } | { t: string[] } | { err: string };
+type Regle = [RegExp, (m: RegExpMatchArray, q: Q) => R];
+const n1 = (): R => ({ n: 1 });
+const n3 = (): R => ({ n: 3 });
+const vrai = (): R => ({ vrai: true });
+const faux = (): R => ({ vrai: false });
+const oui = (): R => ({ oui: true });
+const non = (): R => ({ oui: false });
+const dans = (nom: string, ...l: string[]) => l.every((x) => nom.includes(x)) && new Set(l).size === l.length;
+const hors = (msg: string): R => ({ err: msg });
+
+function juger(q: Q, r: R): string[] {
+  if ("err" in r) return [r.err];
+  if ("q" in r) return q.comparator === "mcq_exact" ? qcm(q, r.q) : [`comparateur ${q.comparator}`];
+  if ("oui" in r) return qcm(q, r.oui ? "oui" : "non");
+  if ("vrai" in r) return qcm(q, r.vrai ? "vrai" : "faux");
+  if ("l" in r) return attendu(q, r.l, r.u ?? "cm");
+  if ("n" in r) {
+    const p: string[] = [];
+    if (q.expected[0] !== String(r.n)) p.push(`réponse attendue ${q.expected[0]}, recalculée ${r.n}`);
+    if (q.comparator !== "number_equal") p.push(`comparateur ${q.comparator}`);
+    return p;
+  }
+  const p: string[] = [];
+  if (q.comparator !== "exact_text") p.push(`comparateur ${q.comparator}`);
+  if (!r.t.includes(String(q.expected[0]))) p.push(`réponse attendue « ${q.expected[0]} », recalculée « ${r.t.join(" / ")} »`);
+  for (const x of r.t) if (!q.expected.includes(x)) p.push(`l’écriture « ${x} » n’est pas acceptée`);
+  return p;
+}
+
+// ----- Lecture de la figure
+type Pt = { label: string; x: number; y: number };
+function lireFig(q: Q) {
+  const c = q.canvas as any;
+  if (!c || c.kind !== "cercle") return null;
+  const pts: Pt[] = c.points ?? [];
+  const centre = pts.filter((p) => p.x === c.circle.cx && p.y === c.circle.cy);
+  const sommets = pts.filter((p) => !centre.includes(p));
+  const horsCercle = sommets.filter((p) => Math.abs(Math.hypot(p.x - c.circle.cx, p.y - c.circle.cy) - c.circle.r) > 2);
+  const longueur = (c.segments ?? []).find((s: any) => s.label);
+  return { centre, sommets, horsCercle, rayons: (c.segments ?? []).filter((s: any) => s.kind === "rayon"), longueur };
+}
+const centreFig = (q: Q) => lireFig(q)?.centre[0]?.label ?? "?";
+/** La longueur écrite sur la figure, lue sur le dessin : « 7 cm » → 7. */
+const rayonFig = (q: Q) => Number(String(lireFig(q)?.longueur?.label ?? "").match(/^(\d+) cm$/)?.[1] ?? NaN);
+function figureRelue(q: Q): string[] {
+  const f = lireFig(q);
+  if (!q.canvas) return [];
+  if (!f) return [`canvas inattendu : ${(q.canvas as any).kind}`];
+  const p: string[] = [];
+  if (f.centre.length !== 1) p.push("pas exactement un point au centre du cercle dessiné");
+  if (f.sommets.length !== 3) p.push(`${f.sommets.length} sommets dessinés`);
+  if (f.horsCercle.length > 1) p.push("plusieurs sommets hors du cercle");
+  if (f.horsCercle.length === 1 && !/circonscrit au triangle|bien le cercle circonscrit|n’est pas sur le cercle|sommets du triangle sont sur le cercle/.test(q.text)) p.push(`le sommet ${f.horsCercle[0].label} est hors du cercle sans que la question le demande`);
+  const labels = [...f.centre, ...f.sommets].map((x) => x.label);
+  for (const m of q.text.matchAll(/(?<![\p{L}’])([A-Z]{1,3})(?![\p{L}’])/gu))
+    for (const l of m[1]) if (!labels.includes(l)) p.push(`lettre ${l} absente de la figure`);
+  if (f.longueur) {
+    const lab = String(f.longueur.label);
+    const vers = f.longueur.to;
+    // La longueur écrite sur le rayon dessiné est celle du texte, quand le texte la nomme…
+    const ecrite = q.text.match(new RegExp(`\\b[A-Z]${vers} (?:= |mesure )(\\d+) cm`));
+    if (ecrite && `${ecrite[1]} cm` !== lab) p.push(`longueur dessinée « ${lab} », écrite « ${ecrite[1]} cm »`);
+    // … et le dessin n'écrit pas la longueur demandée.
+    const demande = q.text.match(/(?:mesure|Donne|Calcule|Écris) ([A-Z])([A-Z]) ?[?.]/);
+    if (demande && demande[2] === vers) p.push(`la figure donne la longueur demandée ${demande[0]}`);
+  }
+  return p;
+}
+
+/** Le correcteur d'un gabarit : la première règle dont le motif lit la phrase. */
+function parRegles(regles: Regle[]) {
+  return (q: Q): string[] => {
+    for (const [re, f] of regles) {
+      const m = q.text.match(re);
+      if (m) return [...juger(q, f(m, q)), ...figureRelue(q)];
+    }
+    return [`tournure inconnue du correcteur : ${q.text}`];
+  };
+}
+const num = (s: string) => Number(s);
+
+// ----- CONCOURANTES, ★2
+const C2_COMPTER = parRegles([
+  [/^Combien de médiatrices a un triangle \?$/, n3],
+  [/^Chaque côté d’un triangle a combien de médiatrices \?$/, n1],
+  [/^En combien de points se coupent les trois médiatrices d’un triangle \?$/, n1],
+  [/^Les médiatrices du triangle [A-Z]{3} ont combien de points communs \?$/, n1],
+  [/^Combien de médiatrices passent par le centre du cercle circonscrit \?$/, n3],
+  [/^Deux médiatrices d’un triangle se coupent en combien de points \?$/, n1],
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. Combien passent par \1 \?$/, n3],
+  [/^Combien de sommets de [A-Z]{3} sont sur son cercle circonscrit \?$/, n3],
+]);
+const C2_VRAI_FAUX = parRegles([
+  [/^Vrai ou faux : les trois médiatrices d’un triangle se coupent en un même point\.$/, vrai],
+  [/^Vrai ou faux : les médiatrices d’un triangle sont toujours parallèles\.$/, faux],
+  [/^Vrai ou faux : les médiatrices d’un triangle sont concourantes\.$/, vrai],
+  [/^Vrai ou faux : le point de concours est toujours le milieu d’un côté\.$/, faux],
+  [/^Vrai ou faux : le point de concours est toujours à l’intérieur du triangle\.$/, faux],
+  [/^Vrai ou faux : le point de concours est à égale distance des trois sommets\.$/, vrai],
+  [/^Vrai ou faux : le point de concours est à égale distance des trois côtés\.$/, faux],
+  [/^Vrai ou faux : le point de concours est le centre du cercle circonscrit\.$/, vrai],
+  [/^Vrai ou faux : un triangle a seulement deux médiatrices\.$/, faux],
+  [/^Vrai ou faux : concourantes veut dire : qui passent par un même point\.$/, vrai],
+]);
+const C2_MOT = parRegles([
+  [/^Trois droites passent par un même point\. Comment sont-elles \?$/, () => ({ q: "concourantes" })],
+  [/^Quel mot veut dire « qui passent par un même point » \?$/, () => ({ q: "concourantes" })],
+  [/^Complète : les trois médiatrices d’un triangle sont …$/, () => ({ q: "concourantes" })],
+  [/^Comment s’appelle le point où se coupent les médiatrices \?$/, () => ({ q: "le point de concours" })],
+  [/^Le point de concours des médiatrices est le centre de quoi \?$/, () => ({ q: "du cercle circonscrit" })],
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. Que représente \1 \?$/, () => ({ q: "le centre du cercle circonscrit" })],
+  [/^Quel cercle a pour centre le point de concours des médiatrices \?$/, () => ({ q: "le cercle circonscrit" })],
+  [/^Où est le point de concours par rapport aux sommets \?$/, () => ({ q: "à la même distance des trois" })],
+]);
+const rayonParmi = (q: Q): R => {
+  const o = centreFig(q);
+  const r = (q.choices ?? []).filter((c) => c.includes(o));
+  return r.length === 1 ? { q: r[0] } : hors(`${r.length} propositions passent par le centre`);
+};
+const C2_FIGURE = parRegles([
+  [/^Observe la figure\. Quel point est le centre du cercle \?$/, (_, q) => ({ q: centreFig(q) })],
+  [/^Sur la figure, quel point est à égale distance des trois sommets \?$/, (_, q) => ({ q: centreFig(q) })],
+  [/^Les médiatrices de ce triangle se coupent en quel point \?$/, (_, q) => ({ q: centreFig(q) })],
+  [/^Observe la figure\. Écris la lettre du point de concours des médiatrices\.$/, (_, q) => ({ t: [centreFig(q)] })],
+  [/^Sur la figure, quelle longueur est égale à ([A-Z])([A-Z]) \?$/, (m, q) => {
+    if (m[1] !== centreFig(q)) return hors("la longueur n’est pas un rayon");
+    const r = (q.choices ?? []).filter((c) => c[0] === m[1] && c[1] !== m[2]);
+    return r.length === 1 ? { q: r[0] } : hors(`${r.length} rayons proposés`);
+  }],
+  [/^Sur la figure, quel segment est un rayon du cercle \?$/, (_, q) => rayonParmi(q)],
+  [/^Sur la figure, quels points sont à égale distance de ([A-Z]) \?$/, (m, q) => {
+    if (m[1] !== centreFig(q)) return hors("ce point n’est pas le centre");
+    const [x, y, z] = lireFig(q)!.sommets.map((s) => s.label);
+    return { q: `${x}, ${y} et ${z}` };
+  }],
+  [/^Sur la figure, combien de rayons égaux sont tracés \?$/, (_, q) => ({ n: lireFig(q)!.rayons.length })],
+]);
+const C2_EGALITE = parRegles([
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. Quelle égalité est juste \?$/, (m) => ({ q: `${m[1]}${m[2]} = ${m[1]}${m[3]}` })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. Complète : \1\2 = …$/, (m) => ({ t: [`${m[1]}${m[3]}`, `${m[3]}${m[1]}`] })],
+  [/^([A-Z])([A-Z]) = \1([A-Z])\. Sur quelle médiatrice est \1 \?$/, (m) => ({ q: `celle de [${m[2]}${m[3]}]` })],
+  [/^([A-Z]) est à égale distance de ([A-Z]) et de ([A-Z])\. Sur quelle médiatrice est-il \?$/, (m) => ({ q: `celle de [${m[2]}${m[3]}]` })],
+  [/^Quelle médiatrice passe par ([A-Z]) si \1([A-Z]) = \1([A-Z]) \?$/, (m) => ({ q: `celle de [${m[2]}${m[3]}]` })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. De quels points est-il à égale distance \?$/, (m) => ({ q: `${m[2]} et ${m[3]}` })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. \1\2 = (\d+) cm\. Combien mesure \1\3 \?$/, (m) => ({ l: num(m[4]) })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. Que dire de \1\2 et de \1\3 \?$/, () => ({ q: "elles sont égales" })],
+]);
+const distance = (nom: string, x: string, y: string, v: string): R => (dans(nom, x, y) ? { l: num(v) } : hors("les longueurs ne vont pas du centre à deux sommets différents"));
+const C2_LONGUEUR = parRegles([
+  [/^Les médiatrices de ([A-Z]{3}) se coupent en ([A-Z])\. \2([A-Z]) = (\d+) cm\. Combien mesure \2([A-Z]) \?$/, (m) => distance(m[1], m[3], m[5], m[4])],
+  [/^([A-Z]) est sur les trois médiatrices de ([A-Z]{3})\. \1([A-Z]) = (\d+) cm\. Donne \1([A-Z])\.$/, (m) => distance(m[2], m[3], m[5], m[4])],
+  [/^([A-Z]) est le centre du cercle circonscrit à ([A-Z]{3})\. \1([A-Z]) = (\d+) cm\. Calcule \1([A-Z])\.$/, (m) => distance(m[2], m[3], m[5], m[4])],
+  [/^Observe la figure\. Le rayon ([A-Z])([A-Z]) mesure (\d+) cm\. Combien mesure \1([A-Z]) \?$/, (m, q) => (m[2] !== m[4] && num(m[3]) === rayonFig(q) ? { l: num(m[3]) } : hors("rayon demandé ou longueur dessinée incohérents"))],
+  [/^Sur la figure, ([A-Z])([A-Z]) = (\d+) cm\. Quelle autre longueur vaut \3 cm \?$/, (m, q) => {
+    const r = (q.choices ?? []).filter((c) => c[0] === m[1] && c[1] !== m[2]);
+    return r.length === 1 ? { q: r[0] } : hors("pas un seul autre rayon proposé");
+  }],
+  [/^Sur la figure, tous les rayons sont égaux\. ([A-Z])([A-Z]) = (\d+) cm\. Écris \1([A-Z])\.$/, (m) => (m[2] !== m[4] ? { l: num(m[3]) } : hors("même rayon"))],
+]);
+
+// ----- CONCOURANTES, ★3
+const C3_CHAINE = parRegles([
+  [/^([A-Z]) est sur les médiatrices de \[([A-Z])([A-Z])\] et de \[\3([A-Z])\]\. \1\2 = (\d+) cm\. Combien mesure \1\4 \?$/, (m) => ({ l: num(m[5]) })],
+  [/^Les médiatrices de \[([A-Z])([A-Z])\] et de \[\2([A-Z])\] se coupent en ([A-Z])\. \4\3 = (\d+) cm\. Calcule \4\1\.$/, (m) => ({ l: num(m[5]) })],
+  [/^([A-Z])([A-Z]) = \1([A-Z]) et \1\3 = \1([A-Z])\. \1\2 mesure (\d+) cm\. Combien mesure \1\4 \?$/, (m) => ({ l: num(m[5]) })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\], puis sur celle de \[\3([A-Z])\]\. \1\2 = (\d+) cm\. Que vaut \1\4 \?$/, (m) => ({ l: num(m[5]) })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. \1\2 = \1([A-Z]) et \1\4 = (\d+) cm\. Donne \1\3\.$/, (m) => ({ l: num(m[5]) })],
+  [/^([A-Z])([A-Z]) = (\d+) cm\. \1 est sur la médiatrice de \[([A-Z])\2\]\. Combien mesure \1\4 \?$/, (m) => ({ l: num(m[3]) })],
+]);
+const C3_TEST = parRegles([
+  [/^Triangle [A-Z]{3} : ([A-Z])([A-Z]) = (\d+) cm, \1([A-Z]) = (\d+) cm et \1([A-Z]) = (\d+) cm\. (.+)$/, (m) => {
+    const [o, a, b, c] = [m[1], m[2], m[4], m[6]];
+    const [la, lb, lc] = [num(m[3]), num(m[5]), num(m[7])];
+    const fin = m[8];
+    const paires: string[] = [];
+    if (la === lb) paires.push(`${a}${b}`);
+    if (la === lc) paires.push(`${a}${c}`);
+    if (lb === lc) paires.push(`${b}${c}`);
+    const toutes = paires.length === 3;
+    if (fin === `Sur quelle médiatrice est ${o} ?` || fin === `Quelle médiatrice passe par ${o} ?`) {
+      if (toutes) return { q: "les trois médiatrices" };
+      return paires.length === 1 ? { q: `celle de [${paires[0]}]` } : hors("aucune paire égale");
+    }
+    if (fin === `${o} est-il le centre du cercle circonscrit à ${a}${b}${c} ?`) return { oui: toutes };
+    const med = fin.match(/est-il sur la médiatrice de \[([A-Z])([A-Z])\] \?$/);
+    if (med) return { oui: paires.includes(`${med[1]}${med[2]}`) };
+    if (fin === `Un cercle de centre ${o} passe par ${a}. Passe-t-il par ${b} et ${c} ?`) return { oui: toutes };
+    if (fin === `Les trois médiatrices passent-elles par ${o} ?`) return { oui: toutes };
+    if (fin === `Combien de médiatrices de ${a}${b}${c} passent par ${o} ?`) return { n: paires.length };
+    if (fin === `Combien de sommets sont sur le cercle de centre ${o} passant par ${a} ?`) return { n: [la, lb, lc].filter((x) => x === la).length };
+    return hors(`fin de phrase inconnue : ${fin}`);
+  }],
+]);
+const MED = /^Les médiatrices de ([A-Z]{3}) se coupent en ([A-Z])\./.source;
+const C3_SOMME = parRegles([
+  [new RegExp(`${MED} \\2([A-Z]) = (\\d+) cm\\. Calcule \\2[A-Z] \\+ \\2[A-Z] \\+ \\2[A-Z]\\.$`), (m) => ({ l: 3 * num(m[4]) })],
+  [new RegExp(`${MED} \\2[A-Z] \\+ \\2[A-Z] = (\\d+) cm\\. Combien mesure \\2[A-Z] \\?$`), (m) => ({ l: num(m[3]) / 2 })],
+  [new RegExp(`${MED} \\2[A-Z] \\+ \\2[A-Z] \\+ \\2[A-Z] = (\\d+) cm\\. Combien mesure \\2[A-Z] \\?$`), (m) => ({ l: num(m[3]) / 3 })],
+  [new RegExp(`${MED} \\2[A-Z] = (\\d+) cm\\. Calcule \\2[A-Z] \\+ \\2[A-Z]\\.$`), (m) => ({ l: 2 * num(m[3]) })],
+  [new RegExp(`${MED} \\2[A-Z] = \\d+ cm\\. Calcule \\2[A-Z] − \\2[A-Z]\\.$`), () => ({ l: 0 })],
+  [/^Le cercle circonscrit à [A-Z]{3} a pour centre ([A-Z])\. \1[A-Z] \+ \1[A-Z] = (\d+) cm\. Quel est son rayon \?$/, (m) => ({ l: num(m[2]) / 2 })],
+  [/^Le cercle circonscrit à [A-Z]{3} a pour centre ([A-Z])\. \1[A-Z] \+ \1[A-Z] \+ \1[A-Z] = (\d+) cm\. Quel est son rayon \?$/, (m) => ({ l: num(m[2]) / 3 })],
+]);
+/** Accords de la situation : Une … Elle, Un … Il ; premier/première selon le nom. */
+function accordsSituation(q: Q): string[] {
+  const t = q.text;
+  const p: string[] = [];
+  const f = /^Une /.test(t);
+  if (/(?:^|\. )Elle est/.test(t) && !f) p.push("« Elle » après un nom masculin");
+  if (/(?:^|\. )Il est/.test(t) && f) p.push("« Il » après un nom féminin");
+  if (/est-elle/.test(t) && !f) p.push("« est-elle » après un nom masculin");
+  if (/est-il/.test(t) && f) p.push("« est-il » après un nom féminin");
+  const lieuF = /trois (balises|bouées|écoles)/.test(t);
+  if (/du premier|du dernier/.test(t) && lieuF) p.push("« du premier » après un nom féminin");
+  if (/de la première|de la dernière/.test(t) && !lieuF) p.push("« de la première » après un nom masculin");
+  return p;
+}
+const C3_SITUATION_BRUT = parRegles([
+  [/à égale distance de trois [\p{L}]+\. (?:Elle|Il) est à (\d+) (m|km) (?:du premier|de la première)\. À quelle distance est-(?:elle|il) (?:du dernier|de la dernière) \?$/u, (m) => ({ l: num(m[1]), u: m[2] })],
+  [/à la même distance de trois [\p{L}]+ : (\d+) (m|km)\. Quel est le diamètre du cercle passant par les trois \?$/u, (m) => ({ l: 2 * num(m[1]), u: m[2] })],
+]);
+const C3_SITUATION = (q: Q) => [...C3_SITUATION_BRUT(q), ...accordsSituation(q)];
+const C3_PREUVE = parRegles([
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. Pourquoi \1\2 = \1\3 \?$/, (m) => ({ q: `tout point de cette médiatrice est à égale distance de ${m[2]} et de ${m[3]}` })],
+  [/^Les médiatrices de \[([A-Z])([A-Z])\] et de \[\1([A-Z])\] se coupent en ([A-Z])\. Quelle médiatrice passe aussi par \4 \?$/, (m) => ({ q: `celle de [${m[2]}${m[3]}]` })],
+  [/^Pour prouver que les médiatrices sont concourantes, combien en prend-on au départ \?$/, () => ({ n: 2 })],
+  [/^La preuve part de deux médiatrices qui se coupent en ([A-Z])\. Que reste-t-il à prouver \?$/, (m) => ({ q: `la troisième médiatrice passe aussi par ${m[1]}` })],
+  [/^([A-Z])([A-Z]) = \1([A-Z]) et \1\3 = \1([A-Z])\. Que peut-on écrire \?$/, (m) => ({ q: `${m[1]}${m[2]} = ${m[1]}${m[4]}` })],
+  [/^([A-Z])([A-Z]) = \1([A-Z]) et \1\3 = \1([A-Z])\. Complète : \1\2 = …$/, (m) => ({ t: [`${m[1]}${m[4]}`, `${m[4]}${m[1]}`, `${m[1]}${m[3]}`, `${m[3]}${m[1]}`] })],
+  [/^([A-Z])([A-Z]) = \1([A-Z])\. Sur quelle médiatrice est \1 \?$/, (m) => ({ q: `celle de [${m[2]}${m[3]}]` })],
+  [/^([A-Z]) est à égale distance de ([A-Z]) et de ([A-Z])\. Sur quelle médiatrice est-il \?$/, (m) => ({ q: `celle de [${m[2]}${m[3]}]` })],
+]);
+const C3_FIGURE = parRegles([
+  [/^Observe la figure : ([A-Z])([A-Z]) = (\d+) cm\. Calcule \1([A-Z]) \+ \1([A-Z])\.$/, (m, q) => (num(m[3]) === rayonFig(q) ? { l: 2 * num(m[3]) } : hors("longueur dessinée différente"))],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. Quelle est la nature du triangle \1\2\3 \?$/, (m) => ({ q: `isocèle en ${m[1]}` })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. Le triangle \1\2\3 est-il isocèle \?$/, oui],
+  [/^Sur la figure, combien de triangles sont isocèles en ([A-Z]) \?$/, (m, q) => (m[1] === centreFig(q) ? { n: lireFig(q)!.rayons.length } : hors("ce point n’est pas le centre"))],
+  [/^Sur la figure, combien d’autres segments ont la même longueur que \[([A-Z])[A-Z]\] \?$/, (m, q) => (m[1] === centreFig(q) ? { n: lireFig(q)!.rayons.length - 1 } : hors("ce segment n’est pas un rayon"))],
+  [/^Sur la figure, quel triangle est isocèle en ([A-Z]) \?$/, (m, q) => {
+    const r = (q.choices ?? []).filter((c) => c.startsWith(m[1]));
+    return r.length === 1 && m[1] === centreFig(q) ? { q: r[0] } : hors("pas un seul triangle de sommet principal le centre");
+  }],
+]);
+
+// ----- CONCOURANTES, ★4
+const C4_ARGUMENT = parRegles([
+  [/^Dans la preuve, ([A-Z])([A-Z]) = \1([A-Z]) et \1\3 = \1([A-Z])\. Quel argument place \1 sur la médiatrice de \[\2\4\] \?$/, (m) => ({ q: `${m[1]}${m[2]} = ${m[1]}${m[4]}, donc ${m[1]} est à égale distance de ${m[2]} et de ${m[4]}` })],
+  [/^Pourquoi écrit-on ([A-Z])([A-Z]) = \1([A-Z]) quand \1 est sur la médiatrice de \[\2\3\] \?$/, () => ({ q: "un point de la médiatrice est à égale distance des extrémités" })],
+  [/^Que montre-t-on à la fin de la preuve \?$/, () => ({ q: "la troisième médiatrice passe par le point commun des deux autres" })],
+  [/^Quel sens de la propriété sert à la fin de la preuve \?$/, () => ({ q: "à égale distance, donc sur la médiatrice" })],
+  [/^Quel sens de la propriété sert au début de la preuve \?$/, () => ({ q: "sur la médiatrice, donc à égale distance" })],
+  [/^Pourquoi la preuve part-elle de deux médiatrices seulement \?$/, () => ({ q: "on ne peut pas supposer ce qu’on veut démontrer" })],
+  [/^Pourquoi deux médiatrices d’un triangle se coupent-elles toujours \?$/, () => ({ q: "les deux côtés ne sont pas parallèles" })],
+  [/^([A-Z]) est sur les médiatrices de \[([A-Z])([A-Z])\] et de \[\3([A-Z])\]\. Que sait-on de la médiatrice de \[\2\4\] sans la tracer \?$/, (m) => ({ q: `elle passe par ${m[1]}` })],
+]);
+const perimetre = (r: number, c: number): R => ({ l: 2 * r + c });
+const C4_PERIMETRE = parRegles([
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. \1\2 = (\d+) cm et \2\3 = (\d+) cm\. Quel est le périmètre du triangle \1\2\3 \?$/, (m) => perimetre(num(m[4]), num(m[5]))],
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. \1[A-Z] = (\d+) cm et ([A-Z])([A-Z]) = (\d+) cm\. Quel est le périmètre du triangle \1\3\4 \?$/, (m) => perimetre(num(m[2]), num(m[5]))],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. Le triangle \1\2\3 a pour périmètre (\d+) cm, et \2\3 = (\d+) cm\. Combien mesure \1\2 \?$/, (m) => ({ l: (num(m[4]) - num(m[5])) / 2 })],
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. Le triangle \1([A-Z])([A-Z]) a pour périmètre (\d+) cm, et \2\3 = (\d+) cm\. Combien mesure \1[A-Z] \?$/, (m) => ({ l: (num(m[4]) - num(m[5])) / 2 })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. \1\2 = (\d+) cm\. Le triangle \1\2\3 a pour périmètre (\d+) cm\. Combien mesure \2\3 \?$/, (m) => ({ l: num(m[5]) - 2 * num(m[4]) })],
+]);
+const C4_RAISONNEMENT = parRegles([
+  [/« ([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\], donc \1\2 = \1([A-Z])\. »/, (m) => ({ oui: m[4] === m[3] })],
+  [/« ([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\], donc \1 est le milieu de \[\2\3\]\. »/, non],
+  [/« ([A-Z])([A-Z]) = \1([A-Z]), donc \1 est sur la médiatrice de \[\2\3\]\. »/, oui],
+  [/« ([A-Z])([A-Z]) = \1([A-Z]), donc \1 est le milieu de \[\2\3\]\. »/, non],
+  [/« ([A-Z])([A-Z]) = \1([A-Z]) et \1\3 = \1([A-Z]), donc \1\2 = \1\4\. »/, oui],
+  [/« ([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\], donc \1\2 = \2\3\. »/, non],
+  [/« ([A-Z]) est sur les médiatrices de \[([A-Z])([A-Z])\] et de \[\3([A-Z])\], donc \1\2 = \1\4\. »/, oui],
+  [/« Les médiatrices de ([A-Z]{3}) se coupent en [A-Z], donc \1 est équilatéral\. »/, non],
+]);
+const C4_FORCEMENT = parRegles([
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. A-t-on forcément \1\2 = \1([A-Z]) \?$/, (m) => ({ oui: m[4] === m[3] })],
+  [/^([A-Z]) est sur les médiatrices de \[([A-Z])([A-Z])\] et de \[\2([A-Z])\]\. A-t-on forcément \1\3 = \1\4 \?$/, oui],
+  [/^([A-Z])[A-Z] = \1[A-Z]\. \1 est-il forcément le centre du cercle circonscrit à [A-Z]{3} \?$/, non],
+  [/^([A-Z])[A-Z] = \1[A-Z] = \1[A-Z]\. \1 est-il le centre du cercle circonscrit à [A-Z]{3} \?$/, oui],
+  [/^([A-Z])([A-Z]) = \1([A-Z]) = \1([A-Z])\. \1 est-il sur la médiatrice de \[\3\4\] \?$/, oui],
+  [/^([A-Z])([A-Z]) = \1([A-Z])\. \1 est-il forcément sur la médiatrice de \[\2\3\] \?$/, oui],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. \1 est-il forcément le milieu de \[\2\3\] \?$/, non],
+  [/^([A-Z]) est le milieu de \[([A-Z])([A-Z])\]\. \1 est-il sur la médiatrice de \[\2\3\] \?$/, oui],
+]);
+/** Trois mesures dont une seule s'écarte : la lettre fausse et la bonne valeur. */
+function mesureFausse(m: RegExpMatchArray) {
+  const v = [num(m[2]), num(m[4]), num(m[6])];
+  const l = [m[1], m[3], m[5]];
+  const k = v.findIndex((x, i) => v.filter((y) => y === x).length === 1 && i >= 0);
+  return { k, lettre: l[k], bonne: v[(k + 1) % 3], distinctes: new Set(v).size };
+}
+const LU = /se coupent en ([A-Z])\. On mesure \1([A-Z]) = (\d+) cm, \1([A-Z]) = (\d+) cm et \1([A-Z]) = (\d+) cm\./.source;
+const lectureC4 = (m: RegExpMatchArray) => mesureFausse([m[0], m[2], m[3], m[4], m[5], m[6], m[7]] as unknown as RegExpMatchArray);
+const C4_MESURE = parRegles([
+  [new RegExp(`${LU} (?:Quelle mesure est fausse|Quelle longueur faut-il mesurer à nouveau) \\?$`), (m) => {
+    const f = lectureC4(m);
+    return f.distinctes === 2 ? { q: `${m[1]}${f.lettre}` } : hors("il faut exactement une mesure fausse");
+  }],
+  [new RegExp(`${LU} Quelle valeur devrait-on lire à la place de la mesure fausse \\?$`), (m) => {
+    const f = lectureC4(m);
+    return f.distinctes === 2 ? { l: f.bonne } : hors("il faut exactement une mesure fausse");
+  }],
+  [new RegExp(`${LU} Ces trois mesures peuvent-elles être toutes justes \\?$`), (m) => ({ oui: lectureC4(m).distinctes === 1 })],
+  [/^([A-Z]) est sur les médiatrices de \[([A-Z])([A-Z])\] et de \[\3([A-Z])\]\. On lit \1\2 = (\d+) cm et \1\4 = (\d+) cm\. Est-ce possible \?$/, (m) => ({ oui: m[5] === m[6] })],
+  [/^Dans le triangle ([A-Z]{3}), ([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. On lit \2\3 = \d+ cm et \2([A-Z]) = \d+ cm\. Est-ce possible \?$/, (m) => (dans(m[1], m[3], m[4], m[5]) ? { oui: true } : hors("le point lu n’est pas le troisième sommet"))],
+]);
+const C4_SANS_TRACER = parRegles([
+  [/^Seules les médiatrices de \[([A-Z])([A-Z])\] et de \[\1([A-Z])\] sont tracées\. Elles se coupent en ([A-Z])\. Quelle autre médiatrice passe par \4 \?$/, (m) => ({ q: `celle de [${m[2]}${m[3]}]` })],
+  [/^Les médiatrices de \[([A-Z])([A-Z])\] et de \[\1([A-Z])\] se coupent en ([A-Z])\. (.+)$/, (m) => {
+    const [, , b, c, o, fin] = m;
+    if (fin === "Quelle égalité peut-on écrire sans mesurer ?") return { q: `${o}${b} = ${o}${c}` };
+    if (/^Combien de médiatrices faut-il encore tracer/.test(fin)) return { n: 0 };
+    if (fin === `On trace la médiatrice de [${b}${c}] : elle passe à côté de ${o}. Que conclure ?`) return { q: "le tracé manque de précision" };
+    const lo = fin.match(new RegExp(`^${o}${b} = (\\d+) cm\\. Combien mesure ${o}${c} \\?$`));
+    if (lo) return { l: num(lo[1]) };
+    const so = fin.match(new RegExp(`^${o}[A-Z] = (\\d+) cm\\. Calcule ${o}${b} \\+ ${o}${c}\\.$`));
+    if (so) return { l: 2 * num(so[1]) };
+    return hors(`fin de phrase inconnue : ${fin}`);
+  }],
+]);
+
+// ----- CONCOURANTES, ★5
+const P5 = "^Preuve pour le triangle ([A-Z]{3}) : ";
+const C5_ORDRE = parRegles([
+  [new RegExp(`${P5}on a écrit ([A-Z])([A-Z]) = \\2([A-Z]) et \\2\\4 = \\2([A-Z])\\. Quel pas vient ensuite \\?$`), (m) => ({ q: `${m[2]}${m[3]} = ${m[2]}${m[5]}` })],
+  [new RegExp(`${P5}on vient d’écrire ([A-Z])([A-Z]) = \\2([A-Z])\\. Quel pas vient ensuite \\?$`), (m) => ({ q: `${m[2]} est sur la médiatrice de [${m[3]}${m[4]}]` })],
+  [new RegExp(`${P5}quel pas vient juste avant « ([A-Z]) est sur la médiatrice de \\[([A-Z])([A-Z])\\] » \\?$`), (m) => ({ q: `${m[2]}${m[3]} = ${m[2]}${m[4]}` })],
+  [new RegExp(`${P5}quel est le dernier pas \\?$`), (m, q) => {
+    const r = (q.choices ?? []).filter((c) => /est sur la médiatrice/.test(c));
+    return r.length === 1 && dans(m[1], ...(r[0].match(/\[([A-Z])([A-Z])\]/) ?? []).slice(1)) ? { q: r[0] } : hors("le dernier pas n’est pas proposé");
+  }],
+  [new RegExp(`${P5}quelle phrase ne fait pas partie de la preuve \\?$`), (_, q) => {
+    const r = (q.choices ?? []).filter((c) => /est le milieu de/.test(c));
+    return r.length === 1 ? { q: r[0] } : hors("pas d’intrus unique");
+  }],
+  [new RegExp(`${P5}([A-Z]) est sur les médiatrices de \\[([A-Z])([A-Z])\\] et de \\[\\4([A-Z])\\]\\. Quelle égalité ne vient pas directement d’une de ces deux médiatrices \\?$`), (m) => ({ q: `${m[2]}${m[3]} = ${m[2]}${m[5]}` })],
+]);
+const C5_PERIMETRES = parRegles([
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. Le triangle \1([A-Z])([A-Z]) a pour périmètre (\d+) cm\. \2\3 = (\d+) cm et \3([A-Z]) = (\d+) cm\. Quel est le périmètre du triangle \1\3\6 \?$/, (m) => ({ l: num(m[4]) - num(m[5]) + num(m[7]) })],
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. Le triangle \1([A-Z])([A-Z]) a pour périmètre (\d+) cm, et \2\3 = (\d+) cm\. Quel est le diamètre du cercle circonscrit \?$/, (m) => ({ l: num(m[4]) - num(m[5]) })],
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. \1[A-Z] \+ \1[A-Z] \+ \1[A-Z] = (\d+) cm et ([A-Z])([A-Z]) = (\d+) cm\. Quel est le périmètre du triangle \1\3\4 \?$/, (m) => perimetre(num(m[2]) / 3, num(m[5]))],
+  [/^Le cercle circonscrit à [A-Z]{3} a pour centre ([A-Z]) et pour diamètre (\d+) cm\. ([A-Z])([A-Z]) = (\d+) cm\. Quel est le périmètre du triangle \1\3\4 \?$/, (m) => ({ l: num(m[2]) + num(m[5]) })],
+  [/^Les médiatrices de ([A-Z]{3}) se coupent en ([A-Z])\. Le triangle \1 a pour périmètre (\d+) cm et \2[A-Z] = (\d+) cm\. Calcule la somme des périmètres de \2[A-Z]{2}, \2[A-Z]{2} et \2[A-Z]{2}\.$/, (m) => ({ l: num(m[3]) + 6 * num(m[4]) })],
+]);
+const C5_QUATRE = parRegles([
+  [/^([A-Z]) est sur les médiatrices de \[([A-Z])([A-Z])\], \[\3([A-Z])\] et \[\4([A-Z])\]\. (.+)$/, (m) => {
+    const [, o, a, , , d, fin] = m;
+    const lo = fin.match(new RegExp(`^${o}${a} = (\\d+) cm\\. Combien mesure ${o}${d} \\?$`));
+    if (lo) return { l: num(lo[1]) };
+    if (new RegExp(`^Par combien des points [A-Z], [A-Z], [A-Z] et ${d} passe le cercle de centre ${o} passant par ${a} \\?$`).test(fin)) return { n: 4 };
+    if (/^Sur quelle autre médiatrice est forcément/.test(fin)) return { q: `celle de [${a}${d}]` };
+    return hors(`fin de phrase inconnue : ${fin}`);
+  }],
+  [/^([A-Z]) est sur les médiatrices de \[([A-Z])([A-Z])\], \[\3([A-Z])\], \[\4([A-Z])\] et \[\5([A-Z])\]\. \1\2 = (\d+) cm\. Combien mesure \1\6 \?$/, (m) => ({ l: num(m[7]) })],
+  [/^([A-Z]) est sur les médiatrices de \[([A-Z])([A-Z])\] et de \[([A-Z])([A-Z])\]\. \1\2 = \d+ cm\. Peut-on en déduire \1([A-Z]) \?$/, (m) => ({ oui: [m[2], m[3], m[4], m[5]].filter((x, i, t) => t.indexOf(x) === i).length === 3 && m[3] === m[4] && m[6] === m[5] })],
+]);
+const C5_SENS = parRegles([
+  [/^On écrit : « ([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\], donc \1\2 = \1\3 »\. Quel sens/, () => ({ q: "sur la médiatrice, donc à égale distance" })],
+  [/^On écrit : « ([A-Z])([A-Z]) = \1([A-Z]), donc \1 est sur la médiatrice de \[\2\3\] »\. Quel sens/, () => ({ q: "à égale distance, donc sur la médiatrice" })],
+  [/^Quelle phrase utilise le sens « à égale distance, donc sur la médiatrice » \?$/, (_, q) => {
+    const r = (q.choices ?? []).filter((c) => /^[A-Z]{2} = [A-Z]{2}, donc [A-Z] est sur la médiatrice/.test(c));
+    return r.length === 1 ? { q: r[0] } : hors(`${r.length} phrases dans ce sens`);
+  }],
+  [/^Quelle phrase utilise le sens « sur la médiatrice, donc à égale distance » \?$/, (_, q) => {
+    const r = (q.choices ?? []).filter((c) => /^[A-Z] est sur la médiatrice de \[[A-Z]{2}\], donc [A-Z]{2} = [A-Z]{2}$/.test(c));
+    return r.length === 1 ? { q: r[0] } : hors(`${r.length} phrases dans ce sens`);
+  }],
+  [/Quel pas de la preuve utilise le sens « à égale distance, donc sur la médiatrice » \?$/, () => ({ q: "le dernier" })],
+  [/^Sans quel sens de la propriété la preuve s’arrête-t-elle avant la troisième médiatrice \?$/, () => ({ q: "à égale distance, donc sur la médiatrice" })],
+]);
+const C5_ISOCELE = parRegles([
+  [/^Le triangle ([A-Z]{3}) est isocèle en ([A-Z])\. Quel sommet est sur la médiatrice de \[([A-Z])([A-Z])\] \?$/, (m) => (dans(m[1], m[2], m[3], m[4]) ? { q: m[2] } : hors("segment hors du triangle"))],
+  [/^([A-Z])([A-Z]) = \1([A-Z])\. Sur quelle médiatrice est le point \1 \?$/, (m) => ({ q: `celle de [${m[2]}${m[3]}]` })],
+  [/^Le triangle [A-Z]{3} est isocèle en ([A-Z])\. ([A-Z]) est le centre de son cercle circonscrit, distinct de \1\. Quelle droite est la médiatrice de \[[A-Z]{2}\] \?$/, (m) => ({ q: `(${m[2]}${m[1]})` })],
+  [/^Le triangle [A-Z]{3} est équilatéral\. Combien de ses sommets sont chacun sur une médiatrice \?$/, n3],
+  [/^Le triangle [A-Z]{3} est isocèle en [A-Z]\. ([A-Z]) est le centre de son cercle circonscrit\. \1[A-Z] = (\d+) cm\. Combien mesure \1[A-Z] \?$/, (m) => ({ l: num(m[2]) })],
+  [/^Le triangle [A-Z]{3} est isocèle en [A-Z]\. Le centre de son cercle circonscrit est-il sur la médiatrice de \[[A-Z]{2}\] \?$/, oui],
+]);
+const C5_COMPTE = parRegles([
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. \1\2 = (\d+) cm et \1([A-Z]) = (\d+) cm\. Par combien de sommets de [A-Z]{3} passe le cercle de centre \1 et de rayon (\d+) cm \?$/, (m) => {
+    const dist = [num(m[4]), num(m[4]), num(m[6])];
+    return { n: dist.filter((d) => d === num(m[7])).length };
+  }],
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. \1[A-Z] = (\d+) cm\. Par combien de sommets passe le cercle de centre \1 et de rayon (\d+) cm \?$/, (m) => ({ n: m[2] === m[3] ? 3 : 0 })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. \1\2 = (\d+) cm et \1([A-Z]) = (\d+) cm\. De combien faut-il changer le rayon pour passer de \2 à \5 \?$/, (m) => ({ l: num(m[6]) - num(m[4]) })],
+]);
+
+// ----- CONSTRUIRE, ★2
+const K2_MOT = parRegles([
+  [/^Par quels points passe le cercle circonscrit à un triangle \?$/, () => ({ q: "par les trois sommets" })],
+  [/^Le cercle circonscrit à ([A-Z])([A-Z])([A-Z]) passe par quels points \?$/, (m) => ({ q: `${m[1]}, ${m[2]} et ${m[3]}` })],
+  [/^Combien de sommets sont sur le cercle circonscrit \?$/, n3],
+  [/^Le point ([A-Z]) est-il sur le cercle circonscrit à ([A-Z]{3}) \?$/, (m) => ({ oui: m[2].includes(m[1]) })],
+  [/^Le centre ([A-Z]) est-il sur le cercle circonscrit à [A-Z]{3} \?$/, non],
+  [/^Comment s’appelle le cercle qui passe par les trois sommets \?$/, () => ({ q: "le cercle circonscrit" })],
+  [/^Quel instrument trace le cercle circonscrit \?$/, () => ({ q: "le compas" })],
+  [/^Quels instruments tracent une médiatrice \?$/, () => ({ q: "la règle graduée et l’équerre" })],
+]);
+const K2_CENTRE = parRegles([
+  [/^Où est le centre du cercle circonscrit \?$/, () => ({ q: "au point de concours des médiatrices" })],
+  [/^Le centre du cercle circonscrit est sur combien de médiatrices \?$/, n3],
+  [/^Il faut au moins combien de médiatrices pour trouver le centre \?$/, () => ({ n: 2 })],
+  [/^Quelles droites trace-t-on pour trouver le centre \?$/, () => ({ q: "les médiatrices des côtés" })],
+  [/^Une seule médiatrice suffit-elle pour trouver le centre \?$/, non],
+  [/^Deux médiatrices suffisent-elles pour trouver le centre \?$/, oui],
+  [/^Le rayon du cercle circonscrit va de quel point à quel point \?$/, () => ({ q: "du centre à un sommet" })],
+  [/^Dans un triangle, une médiatrice se trace pour quel élément \?$/, () => ({ q: "un côté" })],
+]);
+const K2_FIGURE = parRegles([
+  [/^Observe la figure\. Quel point est le centre du cercle \?$/, (_, q) => ({ q: centreFig(q) })],
+  [/^Sur la figure, quels points sont sur le cercle \?$/, (_, q) => {
+    const [x, y, z] = lireFig(q)!.sommets.map((s) => s.label);
+    return { q: `${x}, ${y} et ${z}` };
+  }],
+  [/^Sur la figure, quel segment est un rayon \?$/, (_, q) => rayonParmi(q)],
+  [/^Sur la figure, quel segment est un côté du triangle \?$/, (_, q) => {
+    const o = centreFig(q);
+    const r = (q.choices ?? []).filter((c) => !c.includes(o));
+    return r.length === 1 ? { q: r[0] } : hors(`${r.length} côtés proposés`);
+  }],
+  [/^Observe la figure\. Ce cercle est-il (?:circonscrit au triangle|bien le cercle circonscrit) \?$/, (_, q) => ({ oui: lireFig(q)!.horsCercle.length === 0 })],
+  [/^Observe la figure\. Quel sommet n’est pas sur le cercle \?$/, (_, q) => {
+    const h = lireFig(q)!.horsCercle;
+    return h.length === 1 ? { q: h[0].label } : hors("il faut un seul sommet hors du cercle");
+  }],
+  [/^Sur la figure, combien de sommets du triangle sont sur le cercle \?$/, (_, q) => ({ n: 3 - lireFig(q)!.horsCercle.length })],
+]);
+const CER = "^Cercle circonscrit à [A-Z]{3} : centre ([A-Z])";
+const K2_RAYON = parRegles([
+  [new RegExp(`${CER}, rayon (\\d+) cm\\. Combien mesure \\1[A-Z] \\?$`), (m) => ({ l: num(m[2]) })],
+  [new RegExp(`${CER}\\. \\1[A-Z] = (\\d+) cm\\. Quel est le rayon \\?$`), (m) => ({ l: num(m[2]) })],
+  [new RegExp(`${CER}, diamètre (\\d+) cm\\. Combien mesure \\1[A-Z] \\?$`), (m) => ({ l: num(m[2]) / 2 })],
+  [new RegExp(`${CER}, rayon (\\d+) cm\\. Quel est son diamètre \\?$`), (m) => ({ l: 2 * num(m[2]) })],
+  [new RegExp(`${CER}\\. \\1[A-Z] = (\\d+) cm\\. Quel écart de compas faut-il \\?$`), (m) => ({ l: num(m[2]) })],
+  [/^Observe la figure\. Le compas s’ouvre de [A-Z] à un sommet\. Quel écart prend-il \?$/, (_, q) => ({ l: rayonFig(q) })],
+  [/^Sur la figure, quel est le diamètre du cercle \?$/, (_, q) => ({ l: 2 * rayonFig(q) })],
+  [/^Observe la figure\. Combien mesure [A-Z]{2} \?$/, (_, q) => ({ l: rayonFig(q) })],
+]);
+const K2_ORDRE = parRegles([
+  [/^Quelle est la première étape pour tracer le cercle circonscrit \?$/, () => ({ q: "tracer deux médiatrices" })],
+  [/^Que fait-on juste après avoir tracé deux médiatrices \?$/, () => ({ q: "marquer leur point d’intersection" })],
+  [/^Que fait-on juste après avoir marqué le centre \?$/, () => ({ q: "ouvrir le compas jusqu’à un sommet" })],
+  [/^Quelle est la dernière étape du tracé \?$/, () => ({ q: "tracer le cercle" })],
+  [/^Où pique-t-on le compas pour le cercle circonscrit \?$/, () => ({ q: "sur le centre" })],
+  [/^Jusqu’où ouvre-t-on le compas pour le cercle circonscrit \?$/, () => ({ q: "jusqu’à un sommet" })],
+  [/^Le compas est piqué au centre\. Où pose-t-on la mine \?$/, () => ({ q: "sur un sommet" })],
+  [/^Quelle étape se fait au compas \?$/, () => ({ q: "tracer le cercle" })],
+]);
+const K2_VRAI_FAUX = parRegles([
+  [/^Vrai ou faux : le cercle circonscrit passe par les trois sommets\.$/, vrai],
+  [/^Vrai ou faux : le cercle circonscrit passe par les milieux des côtés\.$/, faux],
+  [/^Vrai ou faux : le cercle circonscrit est tracé à l’intérieur du triangle\.$/, faux],
+  [/^Vrai ou faux : le rayon va du centre à un sommet\.$/, vrai],
+  [/^Vrai ou faux : chaque triangle a un seul cercle circonscrit\.$/, vrai],
+  [/^Vrai ou faux : le centre est le point de concours des médiatrices\.$/, vrai],
+  [/^Vrai ou faux : deux médiatrices suffisent pour trouver le centre\.$/, vrai],
+  [/^Vrai ou faux : une seule médiatrice suffit pour trouver le centre\.$/, faux],
+  [/^Vrai ou faux : le diamètre du cercle vaut deux rayons\.$/, vrai],
+]);
+
+// ----- CONSTRUIRE, ★3
+const K3_ETAPE = parRegles([
+  [/^Dans le triangle [A-Z]{3}, on a tracé les médiatrices de \[[A-Z]{2}\] et de \[[A-Z]{2}\]\. Que fait-on ensuite \?$/, (_, q) => {
+    const r = (q.choices ?? []).filter((c) => /^nommer [A-Z] le point où elles se coupent$/.test(c));
+    return r.length === 1 ? { q: r[0] } : hors("étape absente");
+  }],
+  [/^([A-Z]) est le point d’intersection de deux médiatrices de [A-Z]{3}\. Que fait-on ensuite \?$/, (m) => ({ q: `pointer le compas en ${m[1]} et l’ouvrir jusqu’à un sommet` })],
+  [/^Le compas est pointé en ([A-Z]) et ouvert jusqu’à [A-Z]\. Que reste-t-il à faire \?$/, () => ({ q: "tracer le cercle" })],
+  [/^On veut le cercle circonscrit à [A-Z]{3}\. Que fait-on d’abord \?$/, () => ({ q: "tracer deux médiatrices" })],
+  [/^Pour le triangle [A-Z]{3}, peut-on choisir n’importe quels côtés pour tracer les deux médiatrices \?$/, oui],
+  [/^Le compas est pointé en [A-Z] et ouvert jusqu’au milieu de \[[A-Z]{2}\]\. Le cercle passera-t-il par [A-Z] \?$/, non],
+  [/^Le compas est pointé en [A-Z]\. On l’ouvre jusqu’à [A-Z] au lieu de [A-Z]\. Le cercle circonscrit change-t-il \?$/, non],
+  [/^On a trouvé [A-Z] avec deux médiatrices de [A-Z]{3}\. Comment vérifier sa place \?$/, () => ({ q: "tracer la troisième médiatrice" })],
+]);
+const K3_MESURES = parRegles([
+  [/^Le cercle circonscrit à [A-Z]{3} a pour centre ([A-Z])\. \1[A-Z] = (\d+) cm\. Quel est son diamètre \?$/, (m) => ({ l: 2 * num(m[2]) })],
+  [/^Le diamètre du cercle circonscrit à [A-Z]{3} mesure (\d+) cm\. Quel écart de compas faut-il \?$/, (m) => ({ l: num(m[1]) / 2 })],
+  [/^Le compas est réglé à (\d+) cm pour tracer le cercle circonscrit à [A-Z]{3}\. Combien vaut ([A-Z])[A-Z] \+ \2[A-Z] si \2 est le centre \?$/, (m) => ({ l: 2 * num(m[1]) })],
+  [/^On règle le compas sur ([A-Z])[A-Z] = (\d+) cm\. \1 est le centre du cercle circonscrit à [A-Z]{3}\. Combien mesure \1[A-Z] \?$/, (m) => ({ l: num(m[2]) })],
+  [/^Le cercle circonscrit à [A-Z]{3} a pour centre ([A-Z])\. \1[A-Z] \+ \1[A-Z] = (\d+) cm\. Quel écart de compas faut-il \?$/, (m) => ({ l: num(m[2]) / 2 })],
+  [/^Le cercle circonscrit à [A-Z]{3} a pour centre ([A-Z])\. \1[A-Z] \+ \1[A-Z] \+ \1[A-Z] = (\d+) cm\. Quel écart de compas faut-il \?$/, (m) => ({ l: num(m[2]) / 3 })],
+  [/^Le diamètre du cercle circonscrit à [A-Z]{3} mesure (\d+) cm\. ([A-Z]) est son centre\. Calcule \2[A-Z] \+ \2[A-Z] \+ \2[A-Z]\.$/, (m) => ({ l: (3 * num(m[1])) / 2 })],
+]);
+const lieuDe = (d: number, r: number) => (d === r ? "sur le cercle" : d < r ? "à l’intérieur du cercle" : "à l’extérieur du cercle");
+const POS = /^Cercle circonscrit à [A-Z]{3} : centre ([A-Z]), rayon (\d+) cm\. ([A-Z]) est à (\d+) cm de \1\./.source;
+const DEB = /^Cercle de centre ([A-Z]), rayon (\d+) cm\. \1([A-Z]) = (\d+) cm, \1([A-Z]) = (\d+) cm et \1([A-Z]) = (\d+) cm\./.source;
+const compteSur = (m: RegExpMatchArray) => [m[4], m[6], m[8]].filter((v) => v === m[2]);
+const K3_POSITION = parRegles([
+  [new RegExp(`${POS} \\3 est-il sur le cercle \\?$`), (m) => ({ oui: m[2] === m[4] })],
+  [new RegExp(`${POS} Où est \\3 \\?$`), (m) => ({ q: lieuDe(num(m[4]), num(m[2])) })],
+  [/^Cercle circonscrit à ([A-Z]{3}) : centre ([A-Z]), rayon (\d+) cm\. ([A-Z]) est-il à \3 cm de \2 \?$/, (m) => ({ oui: m[1].includes(m[4]) })],
+  [new RegExp(`${DEB} Ce cercle est-il circonscrit à [A-Z]{3} \\?$`), (m) => ({ oui: compteSur(m).length === 3 })],
+  [new RegExp(`${DEB} Quel sommet est hors du cercle \\?$`), (m) => {
+    const h = [[m[3], m[4]], [m[5], m[6]], [m[7], m[8]]].filter(([, v]) => v !== m[2]);
+    return h.length === 1 ? { q: h[0][0] } : hors("il faut un seul sommet hors du cercle");
+  }],
+  [new RegExp(`${DEB} Combien de sommets sont sur le cercle \\?$`), (m) => ({ n: compteSur(m).length })],
+]);
+const K3_METIER_BRUT = parRegles([
+  [/^(?:Une|Un) [^.]+ veut un cercle passant par trois [\p{L}]+\. Quelles droites trace-t-(?:elle|il) pour trouver le centre \?$/u, () => ({ q: "deux médiatrices" })],
+  [/trace un cercle passant par trois [\p{L}]+\. Le centre est à (\d+) (cm|m|km) de l’(?:un d’eux|une d’elles)\. À quelle distance est-il des autres \?$/u, (m) => ({ l: num(m[1]), u: m[2] })],
+  [/trace un cercle passant par trois [\p{L}]+\. Le centre est à (\d+) (cm|m|km) de l’(?:un d’eux|une d’elles)\. Quel est le diamètre du cercle \?$/u, (m) => ({ l: 2 * num(m[1]), u: m[2] })],
+]);
+function accordsMetier(q: Q): string[] {
+  const t = q.text;
+  const p: string[] = [];
+  if (/^Une /.test(t) && /trace-t-il/.test(t)) p.push("« trace-t-il » après un nom féminin");
+  if (/^Un /.test(t) && /trace-t-elle/.test(t)) p.push("« trace-t-elle » après un nom masculin");
+  const lieuF = /trois (colonnes|antennes|pierres|bornes)/.test(t);
+  if (/l’un d’eux/.test(t) && lieuF) p.push("« l’un d’eux » après un nom féminin");
+  if (/l’une d’elles/.test(t) && !lieuF) p.push("« l’une d’elles » après un nom masculin");
+  return p;
+}
+const K3_METIER = (q: Q) => [...K3_METIER_BRUT(q), ...accordsMetier(q)];
+const K3_VERIF = parRegles([
+  [/^On a tracé deux médiatrices de [A-Z]{3}\. La troisième passe à côté de [A-Z]\. Que faut-il faire \?$/, () => ({ q: "reprendre le tracé avec plus de soin" })],
+  [/^La troisième médiatrice de [A-Z]{3} passe bien par [A-Z]\. Que montre ce résultat \?$/, () => ({ q: "le tracé est précis" })],
+  [/^À quoi sert la troisième médiatrice, une fois le centre trouvé \?$/, () => ({ q: "à vérifier le tracé" })],
+  [/^On mesure ([A-Z])[A-Z] = (\d+) cm, \1[A-Z] = (\d+) cm et \1[A-Z] = (\d+) cm\. Le centre du cercle circonscrit à [A-Z]{3} est-il bien placé \?$/, (m) => ({ oui: m[2] === m[3] && m[3] === m[4] })],
+  [/^Le cercle de centre [A-Z] passe par [A-Z] et [A-Z], mais pas par [A-Z]\. Que faut-il revoir \?$/, () => ({ q: "revoir la place du centre" })],
+]);
+
+// ----- CONSTRUIRE, ★4
+const K4_ERREUR = parRegles([
+  [/Il pique le compas en ([A-Z])\. Quelle est son erreur \?$/, () => ({ q: "il faut piquer au centre" })],
+  [/Il ouvre le compas jusqu’au milieu de \[[A-Z]{2}\]\. Quelle est son erreur \?$/, () => ({ q: "il faut ouvrir jusqu’à un sommet" })],
+  [/Il trace une seule médiatrice, puis place [A-Z] dessus au hasard\. Quelle est son erreur \?$/, () => ({ q: "il faut deux médiatrices pour trouver le centre" })],
+  [/Il prend le milieu de \[[A-Z]{2}\] pour centre\. Quelle est son erreur \?$/, () => ({ q: "le centre est là où les médiatrices se coupent" })],
+  [/Il pique le compas en ([A-Z]) et l’ouvre de la longueur de \[[A-Z]{2}\]\. Quelle est son erreur \?$/, (m) => ({ q: `il faut ouvrir de ${m[1]} à un sommet` })],
+  [/Il trace les médiatrices de \[([A-Z]{2})\] et de \[\1\]\. Quelle est son erreur \?$/, () => ({ q: "il a pris deux fois le même côté" })],
+]);
+const CC = "^Le cercle circonscrit à [A-Z]{3} a pour centre ([A-Z])";
+const K4_PERIMETRE = parRegles([
+  [new RegExp(`${CC} et pour rayon (\\d+) cm\\. ([A-Z])([A-Z]) = (\\d+) cm\\. Quel est le périmètre du triangle \\1\\3\\4 \\?$`), (m) => perimetre(num(m[2]), num(m[5]))],
+  [new RegExp(`${CC} et pour diamètre (\\d+) cm\\. ([A-Z])([A-Z]) = (\\d+) cm\\. Quel est le périmètre du triangle \\1\\3\\4 \\?$`), (m) => ({ l: num(m[2]) + num(m[5]) })],
+  [new RegExp(`${CC}\\. Le triangle \\1([A-Z])([A-Z]) a pour périmètre (\\d+) cm et \\2\\3 = (\\d+) cm\\. Quel est le rayon du cercle \\?$`), (m) => ({ l: (num(m[4]) - num(m[5])) / 2 })],
+  [new RegExp(`${CC}\\. Le triangle \\1([A-Z])([A-Z]) a pour périmètre (\\d+) cm et \\2\\3 = (\\d+) cm\\. Quel est le diamètre du cercle \\?$`), (m) => ({ l: num(m[4]) - num(m[5]) })],
+  [new RegExp(`${CC} et pour rayon (\\d+) cm\\. Le triangle \\1([A-Z])([A-Z]) a pour périmètre (\\d+) cm\\. Combien mesure \\3\\4 \\?$`), (m) => ({ l: num(m[5]) - 2 * num(m[2]) })],
+  [new RegExp(`${CC}\\. Quel écart de compas faut-il, si \\1([A-Z]) \\+ \\1([A-Z]) \\+ \\2\\3 = (\\d+) cm et \\2\\3 = (\\d+) cm \\?$`), (m) => ({ l: (num(m[4]) - num(m[5])) / 2 })],
+]);
+const K4_AUTRES = parRegles([
+  [/^Combien de cercles circonscrits a un triangle \?$/, n1],
+  [/^On déplace le sommet [A-Z] de [A-Z]{3}\. Le centre du cercle circonscrit peut-il changer \?$/, oui],
+  [/^Deux triangles différents peuvent-ils avoir le même cercle circonscrit \?$/, oui],
+  [/^Les points [A-Z], [A-Z], [A-Z] et [A-Z] sont sur un même cercle\. Combien de triangles ont ces points pour sommets \?$/, () => ({ n: 4 })],
+  [/^[A-Z] est un autre point du cercle circonscrit à [A-Z]{3}, de centre ([A-Z])\. Quel est le centre du cercle circonscrit à [A-Z]{3} \?$/, (m) => ({ q: m[1] })],
+  [/^[A-Z] est un autre point du cercle circonscrit à [A-Z]{3}, de centre ([A-Z])\. \1[A-Z] = (\d+) cm\. Combien mesure \1[A-Z] \?$/, (m) => ({ l: num(m[2]) })],
+  [/^[A-Z] est un autre point du cercle circonscrit à [A-Z]{3}, de centre [A-Z]\. Est-il forcément sur la médiatrice de \[[A-Z]{2}\] \?$/, non],
+]);
+const K4_PASSE = parRegles([
+  [/^Un cercle de centre ([A-Z]) passe par ([A-Z]) et ([A-Z])\. Quelle médiatrice passe par \1 \?$/, (m) => ({ q: `celle de [${m[2]}${m[3]}]` })],
+  [/^Un cercle de centre [A-Z] passe par [A-Z], [A-Z] et [A-Z]\. Combien de médiatrices de [A-Z]{3} passent par [A-Z] \?$/, n3],
+  [/^Un cercle de centre ([A-Z]) passe par ([A-Z]) et ([A-Z])\. \1\2 = (\d+) cm\. Combien mesure \1\3 \?$/, (m) => ({ l: num(m[4]) })],
+  [/^Un cercle de centre ([A-Z]) passe par ([A-Z]) et ([A-Z]), mais pas par ([A-Z])\. \1 est-il sur la médiatrice de \[\2\4\] \?$/, non],
+  [/^Un cercle de centre ([A-Z]) passe par ([A-Z]) et ([A-Z])\. Le triangle \1\2\3 est-il isocèle \?$/, oui],
+  [/^Un cercle de centre ([A-Z]) passe par ([A-Z]) et ([A-Z])\. Quelle égalité est juste \?$/, (m) => ({ q: `${m[1]}${m[2]} = ${m[1]}${m[3]}` })],
+]);
+const K4_FIGURE = parRegles([
+  [/^Observe la figure\. Quel est le diamètre du cercle \?$/, (_, q) => ({ l: 2 * rayonFig(q) })],
+  [/^Sur la figure, calcule ([A-Z])[A-Z] \+ \1[A-Z] \+ \1[A-Z]\.$/, (_, q) => ({ l: 3 * rayonFig(q) })],
+  [/^Sur la figure, [A-Z]{2} = (\d+) cm\. Quel est le périmètre du triangle [A-Z]{3} \?$/, (m, q) => perimetre(rayonFig(q), num(m[1]))],
+  [/^Observe la figure\. Pour tracer ce cercle, quel écart de compas faut-il \?$/, (_, q) => ({ l: rayonFig(q) })],
+  [/^Observe la figure\. De combien faut-il agrandir le rayon pour un diamètre de (\d+) cm \?$/, (m, q) => ({ l: num(m[1]) / 2 - rayonFig(q) })],
+]);
+const K4_CORDE = parRegles([
+  [/attache une corde de (\d+) m au point ([A-Z])\. Tendue, elle atteint les [\p{L}]+ [A-Z], [A-Z] et [A-Z]\. Quelle distance sépare \2 de [A-Z] \?$/u, (m) => ({ l: num(m[1]), u: "m" })],
+  [/attache une corde de (\d+) m au point [A-Z]\. Tendue, elle atteint les [\p{L}]+ [A-Z], [A-Z] et [A-Z]\. Quel est le diamètre du cercle tracé \?$/u, (m) => ({ l: 2 * num(m[1]), u: "m" })],
+]);
+
+// ----- CONSTRUIRE, ★5
+function corrigerProgramme(q: Q): string[] {
+  const t = q.text;
+  const mot = [/tracer les médiatrices de/, /nommer [A-Z] le point d’intersection/, /ouvrir le compas de/, /tracer le cercle de centre/];
+  const debut = t.match(/^Pour le triangle [A-Z]{3}, voici un programme : (.+)\. Quelle étape manque \?$/);
+  if (!debut) return [`tournure inconnue du correcteur : ${t}`];
+  const absentes = mot.filter((re) => !re.test(debut[1]));
+  if (absentes.length !== 1) return [`${absentes.length} étapes manquent dans le texte`];
+  const r = (q.choices ?? []).filter((c) => absentes[0].test(c));
+  return r.length === 1 ? qcm(q, r[0]) : ["l’étape manquante n’est pas proposée une seule fois"];
+}
+const K5_POURQUOI = parRegles([
+  [/^Pourquoi peut-on ouvrir le compas jusqu’à n’importe quel sommet de [A-Z]{3} \?$/, () => ({ q: "les trois distances au centre sont égales" })],
+  [/^Pourquoi le centre du cercle circonscrit à [A-Z]{3} est-il sur la médiatrice de \[([A-Z])([A-Z])\] \?$/, (m) => ({ q: `il est à égale distance de ${m[1]} et de ${m[2]}` })],
+  [/^Pourquoi le milieu de \[([A-Z])([A-Z])\] n’est-il pas toujours le centre du cercle circonscrit \?$/, (_, q) => {
+    const r = (q.choices ?? []).filter((c) => /^il n’est pas toujours à la même distance de [A-Z]$/.test(c));
+    return r.length === 1 ? { q: r[0] } : hors("raison absente");
+  }],
+  [/^Pourquoi le cercle de centre ([A-Z]) passant par ([A-Z]) passe-t-il aussi par ([A-Z]), si \1 est sur les trois médiatrices \?$/, (m) => ({ q: `${m[1]}${m[2]} = ${m[1]}${m[3]}` })],
+  [/^Pourquoi trace-t-on des médiatrices pour trouver le centre, et pas des hauteurs \?$/, () => ({ q: "la médiatrice rassemble les points à égale distance de deux sommets" })],
+]);
+const K5_CALCUL = parRegles([
+  [new RegExp(`${CC}\\. Le triangle \\1([A-Z])([A-Z]) a pour périmètre (\\d+) cm, \\2\\3 = (\\d+) cm et \\2([A-Z]) = (\\d+) cm\\. Quel est le périmètre de \\1\\2\\6 \\?$`), (m) => ({ l: num(m[4]) - num(m[5]) + num(m[7]) })],
+  [new RegExp(`${CC} et pour diamètre (\\d+) cm\\. [A-Z]{3} a pour périmètre (\\d+) cm\\. Calcule la somme des périmètres de \\1[A-Z]{2}, \\1[A-Z]{2} et \\1[A-Z]{2}\\.$`), (m) => ({ l: num(m[3]) + 3 * num(m[2]) })],
+  [new RegExp(`${CC}\\. La somme \\1[A-Z] \\+ \\1[A-Z] \\+ \\1[A-Z] vaut (\\d+) cm\\. Quel est le diamètre du cercle \\?$`), (m) => ({ l: (2 * num(m[2])) / 3 })],
+  [new RegExp(`${CC}\\. Le compas est ouvert de \\d+ cm\\. On l’ouvre encore de (\\d+) cm\\. De combien grandit le diamètre \\?$`), (m) => ({ l: 2 * num(m[2]) })],
+  [new RegExp(`${CC} et pour diamètre \\d+ cm\\. ([A-Z])([A-Z]) = (\\d+) cm\\. De combien le périmètre de \\1\\2\\3 dépasse-t-il le diamètre \\?$`), (m) => ({ l: num(m[4]) })],
+]);
+const SUR4 = "^Les points ([A-Z]), ([A-Z]), ([A-Z]) et ([A-Z]) sont sur un cercle de centre ([A-Z])\\.";
+const K5_QUATRE = parRegles([
+  [new RegExp(`${SUR4} La médiatrice de \\[\\1\\4\\] passe-t-elle par \\5 \\?$`), oui],
+  [new RegExp(`${SUR4} Combien de segments reliant deux de ces points ont une médiatrice passant par \\5 \\?$`), () => ({ n: 6 })],
+  [new RegExp(`${SUR4} \\5\\1 = (\\d+) cm\\. Lesquels de ces points sont à \\6 cm de \\5 \\?$`), () => ({ q: "les quatre" })],
+  [/^Les médiatrices de \[([A-Z])([A-Z])\] et de \[\2([A-Z])\] se coupent en ([A-Z]), et \4([A-Z]) = \4\1\. \5 est-il sur le cercle de centre \4 passant par \1 \?$/, oui],
+  [/^Les médiatrices de \[([A-Z])([A-Z])\] et de \[\2([A-Z])\] se coupent en ([A-Z]), et \4([A-Z]) = \4\1 \+ 1 cm\. \5 est-il sur le cercle de centre \4 passant par \1 \?$/, non],
+]);
+const K5_MORCEAU = parRegles([
+  [/marque trois points ([A-Z]), ([A-Z]) et ([A-Z]) sur son bord\. Comment retrouver le centre \?$/, (m) => ({ q: `tracer les médiatrices de [${m[1]}${m[2]}] et de [${m[2]}${m[3]}]` })],
+  [/marque trois points ([A-Z]), ([A-Z]) et ([A-Z]) sur son bord\. Les médiatrices de \[\1\2\] et de \[\2\3\] se coupent en ([A-Z]), et \4\1 = (\d+) cm\. Quel est le diamètre de (?:l’assiette|la roue|le plat|le cadran|le hublot) \?$/, (m) => ({ l: 2 * num(m[5]) })],
+]);
+const TR = /^Sur un tracé, ([A-Z])([A-Z]) = (\d+) cm, \1([A-Z]) = (\d+) cm et \1([A-Z]) = (\d+) cm\./.source;
+const K5_RAYON = parRegles([
+  [new RegExp(`${TR} Par combien de sommets passe le cercle de centre \\1 et de rayon (\\d+) cm \\?$`), (m) => ({ n: [m[3], m[5], m[7]].filter((v) => v === m[8]).length })],
+  [new RegExp(`${TR} Où est \\6 par rapport au cercle de centre \\1 passant par \\2 \\?$`), (m) => ({ q: num(m[7]) === num(m[3]) ? "sur le cercle" : num(m[7]) > num(m[3]) ? "à l’extérieur" : "à l’intérieur" })],
+  [new RegExp(`${TR} Que peut-on dire de \\1 \\?$`), (m) => (m[3] === m[5] && m[5] !== m[7] ? { q: `il est sur la médiatrice de [${m[2]}${m[4]}] seulement` } : hors("les distances ne donnent pas une seule médiatrice"))],
+  [new RegExp(`${TR} De combien faut-il rapprocher \\6 de \\1 pour que \\1 soit le centre \\?$`), (m) => (m[3] === m[5] ? { l: num(m[7]) - num(m[3]) } : hors("les deux premières distances diffèrent"))],
+  [new RegExp(`${TR} Combien de médiatrices du triangle passent par \\1 \\?$`), (m) => ({ n: m[3] === m[5] && m[5] === m[7] ? 3 : m[3] === m[5] || m[5] === m[7] || m[3] === m[7] ? 1 : 0 })],
+]);
+
+const C4_INEGALITE = parRegles([
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. \1[A-Z] = (\d+) cm\. Le côté \[[A-Z]{2}\] peut-il mesurer (\d+) cm \?$/, (m) => ({ oui: num(m[3]) <= 2 * num(m[2]) })],
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. \1[A-Z] = (\d+) cm\. Quelle est la plus grande longueur possible pour un côté \?$/, (m) => ({ l: 2 * num(m[2]) })],
+  [/^Les médiatrices de [A-Z]{3} se coupent en ([A-Z])\. \1[A-Z] = (\d+) cm\. Quelle longueur est possible pour \[[A-Z]{2}\] \?$/, (m, q) => {
+    const r = (q.choices ?? []).filter((c) => parseInt(c) <= 2 * num(m[2]));
+    return r.length === 1 ? { q: r[0] } : hors(`${r.length} longueurs possibles`);
+  }],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\] et sur le segment \[\2\3\]\. Quel est ce point \?$/, (m) => ({ q: `le milieu de [${m[2]}${m[3]}]` })],
+  [/^Le centre ([A-Z]) du cercle circonscrit à [A-Z]{3} est sur le côté \[[A-Z]{2}\]\. \1[A-Z] = (\d+) cm\. Combien mesure [A-Z]{2} \?$/, (m) => ({ l: 2 * num(m[2]) })],
+]);
+const DEUX_POINTS = parRegles([
+  [/^([A-Z]) et ([A-Z]) sont sur la médiatrice de \[([A-Z])([A-Z])\]\. \1\3 = (\d+) cm et \2\4 = (\d+) cm\. Calcule \1\4 \+ \2\3\.$/, (m) => ({ l: num(m[5]) + num(m[6]) })],
+  [/^([A-Z]) et ([A-Z]) sont sur la médiatrice de \[([A-Z])([A-Z])\]\. \1\3 = (\d+) cm et \2\4 = (\d+) cm\. Quel est le périmètre du quadrilatère \3\1\4\2 \?$/, (m) => ({ l: 2 * (num(m[5]) + num(m[6])) })],
+  [/^([A-Z]) et ([A-Z]) sont sur la médiatrice de \[([A-Z])([A-Z])\]\. Quelle droite est la médiatrice de \[\3\4\] \?$/, (m) => ({ q: `(${m[1]}${m[2]})` })],
+  [/^([A-Z])([A-Z]) = \1([A-Z]) et ([A-Z])\2 = \4\3\. Quelle droite est la médiatrice de \[\2\3\] \?$/, (m) => ({ q: `(${m[1]}${m[4]})` })],
+  [/^([A-Z]) et ([A-Z]) sont sur la médiatrice de \[([A-Z])([A-Z])\]\. La droite \(\1\2\) coupe \[\3\4\] en un point\. Quel est ce point \?$/, (m) => ({ q: `le milieu de [${m[3]}${m[4]}]` })],
+  [/^Combien de points sont à égale distance de [A-Z] et de [A-Z] \?$/, () => ({ q: "une infinité" })],
+  [/^([A-Z]) et ([A-Z]) sont sur la médiatrice de \[([A-Z])([A-Z])\]\. \1\3 = (\d+) cm et \2\3 = (\d+) cm\. A-t-on \1\4 = \2\4 \?$/, (m) => ({ oui: m[5] === m[6] })],
+]);
+const C5_CAS = parRegles([
+  [/^[A-Z], [A-Z] et [A-Z] sont alignés\. Combien de points sont à égale distance des trois \?$/, () => ({ n: 0 })],
+  [/^[A-Z], [A-Z] et [A-Z] ne sont pas alignés\. Combien de points sont à égale distance des trois \?$/, n1],
+  [/^Les médiatrices de \[[A-Z]{2}\] et de \[[A-Z]{2}\] sont parallèles\. Que dire de/, () => ({ q: "ils sont alignés" })],
+  [/^Les médiatrices de \[[A-Z]{2}\] et de \[[A-Z]{2}\] se coupent\. Que dire de/, () => ({ q: "ils ne sont pas alignés" })],
+  [/^[A-Z], [A-Z] et [A-Z] sont alignés\. Comment sont les médiatrices de/, () => ({ q: "parallèles" })],
+  [/^[A-Z], [A-Z] et [A-Z] ne sont pas alignés\. Combien de cercles passent par les trois \?$/, n1],
+]);
+const DEP = /^La preuve part des médiatrices de \[([A-Z])([A-Z])\] et de \[\1([A-Z])\], qui se coupent en ([A-Z])\./.source;
+const C5_VARIANTE = parRegles([
+  [new RegExp(`${DEP} Quelles égalités obtient-on \\?$`), (m) => ({ q: `${m[4]}${m[1]} = ${m[4]}${m[2]} et ${m[4]}${m[1]} = ${m[4]}${m[3]}` })],
+  [new RegExp(`${DEP} Quelle est la conclusion \\?$`), (m) => ({ q: `${m[4]} est sur la médiatrice de [${m[2]}${m[3]}]` })],
+  [new RegExp(`${DEP} Quelle égalité donne la conclusion \\?$`), (m) => ({ q: `${m[4]}${m[2]} = ${m[4]}${m[3]}` })],
+  [/^La preuve part des médiatrices de \[([A-Z])([A-Z])\] et de \[([A-Z])\2\]\. Quelle médiatrice reste à étudier \?$/, (m) => ({ q: `celle de [${m[1]}${m[3]}]` })],
+  [/^La preuve part des médiatrices de \[([A-Z])([A-Z])\] et de \[([A-Z])\2\], qui se coupent en ([A-Z])\. Quelle égalité obtient-on à la fin \?$/, (m) => ({ q: `${m[4]}${m[1]} = ${m[4]}${m[3]}` })],
+]);
+const MIL = /^Le centre ([A-Z]) du cercle circonscrit à [A-Z]{3} est le milieu de \[([A-Z])([A-Z])\]\./.source;
+const RAY = /^Le cercle circonscrit à [A-Z]{3} a pour rayon (\d+) cm\./.source;
+const K4_DIAMETRE = parRegles([
+  [new RegExp(`${MIL} \\2\\3 = (\\d+) cm\\. Quel est le rayon \\?$`), (m) => ({ l: num(m[4]) / 2 })],
+  [new RegExp(`${MIL} \\2\\3 = (\\d+) cm\\. Combien mesure \\1[A-Z] \\?$`), (m) => ({ l: num(m[4]) / 2 })],
+  [new RegExp(`${MIL} \\1[A-Z] = (\\d+) cm\\. Combien mesure \\2\\3 \\?$`), (m) => ({ l: 2 * num(m[4]) })],
+  [new RegExp(`${RAY} Un côté peut-il mesurer (\\d+) cm \\?$`), (m) => ({ oui: num(m[2]) <= 2 * num(m[1]) })],
+  [new RegExp(`${RAY} Quelle est la plus grande longueur possible pour un côté \\?$`), (m) => ({ l: 2 * num(m[1]) })],
+  [new RegExp(`${MIL} Le segment \\[\\2\\3\\] est-il un diamètre du cercle \\?$`), oui],
+  [new RegExp(`${MIL} Comment appelle-t-on \\[\\2\\3\\] pour ce cercle \\?$`), () => ({ q: "un diamètre" })],
+]);
+const K5_CERCLES = parRegles([
+  [/^Deux cercles passent par ([A-Z]) et ([A-Z])\. Où sont leurs centres \?$/, (m) => ({ q: `sur la médiatrice de [${m[1]}${m[2]}]` })],
+  [/^Combien de cercles passent par [A-Z] et [A-Z] \?$/, () => ({ q: "une infinité" })],
+  [/^[A-Z], [A-Z] et [A-Z] ne sont pas alignés\. Combien de cercles passent par ces trois points \?$/, n1],
+  [/^[A-Z], [A-Z] et [A-Z] sont alignés\. Combien de cercles passent par ces trois points \?$/, () => ({ n: 0 })],
+  [/^([A-Z]) est sur la médiatrice de \[([A-Z])([A-Z])\]\. Le cercle de centre \1 passant par \2 passe-t-il par \3 \?$/, oui],
+  [/^Le cercle de centre ([A-Z]) passant par ([A-Z]) passe aussi par ([A-Z])\. \1 est-il sur la médiatrice de \[\2\3\] \?$/, oui],
+]);
+
 export const CORRECTEURS: CorrecteursMaths = {
+  circonscrit_concourantes_tpl_inegalite: C4_INEGALITE,
+  circonscrit_concourantes_tpl_deux_points: DEUX_POINTS,
+  circonscrit_concourantes_tpl_cas: C5_CAS,
+  circonscrit_concourantes_tpl_variante: C5_VARIANTE,
+  circonscrit_construire_tpl_diametre: K4_DIAMETRE,
+  circonscrit_construire_tpl_cercles: K5_CERCLES,
+  circonscrit_concourantes_tpl_compter: C2_COMPTER,
+  circonscrit_concourantes_tpl_vrai_faux: C2_VRAI_FAUX,
+  circonscrit_concourantes_tpl_mot: C2_MOT,
+  circonscrit_concourantes_tpl_figure: C2_FIGURE,
+  circonscrit_concourantes_tpl_egalite: C2_EGALITE,
+  circonscrit_concourantes_tpl_longueur: C2_LONGUEUR,
+  circonscrit_concourantes_tpl_chaine: C3_CHAINE,
+  circonscrit_concourantes_tpl_test: C3_TEST,
+  circonscrit_concourantes_tpl_somme: C3_SOMME,
+  circonscrit_concourantes_tpl_situation: C3_SITUATION,
+  circonscrit_concourantes_tpl_preuve_pas: C3_PREUVE,
+  circonscrit_concourantes_tpl_isocele: C3_FIGURE,
+  circonscrit_concourantes_tpl_argument: C4_ARGUMENT,
+  circonscrit_concourantes_tpl_perimetre: C4_PERIMETRE,
+  circonscrit_concourantes_tpl_raisonnement: C4_RAISONNEMENT,
+  circonscrit_concourantes_tpl_forcement: C4_FORCEMENT,
+  circonscrit_concourantes_tpl_mesure: C4_MESURE,
+  circonscrit_concourantes_tpl_sans_tracer: C4_SANS_TRACER,
+  circonscrit_concourantes_tpl_ordre: C5_ORDRE,
+  circonscrit_concourantes_tpl_perimetres: C5_PERIMETRES,
+  circonscrit_concourantes_tpl_quatre_points: C5_QUATRE,
+  circonscrit_concourantes_tpl_sens: C5_SENS,
+  circonscrit_concourantes_tpl_isocele_defi: C5_ISOCELE,
+  circonscrit_concourantes_tpl_compte_cercle: C5_COMPTE,
+  circonscrit_construire_tpl_mot: K2_MOT,
+  circonscrit_construire_tpl_centre: K2_CENTRE,
+  circonscrit_construire_tpl_figure: K2_FIGURE,
+  circonscrit_construire_tpl_rayon: K2_RAYON,
+  circonscrit_construire_tpl_ordre: K2_ORDRE,
+  circonscrit_construire_tpl_vrai_faux: K2_VRAI_FAUX,
+  circonscrit_construire_tpl_etape: K3_ETAPE,
+  circonscrit_construire_tpl_mesures: K3_MESURES,
+  circonscrit_construire_tpl_position: K3_POSITION,
+  circonscrit_construire_tpl_metier: K3_METIER,
+  circonscrit_construire_tpl_verif: K3_VERIF,
+  circonscrit_construire_tpl_erreur: K4_ERREUR,
+  circonscrit_construire_tpl_perimetre: K4_PERIMETRE,
+  circonscrit_construire_tpl_autres_points: K4_AUTRES,
+  circonscrit_construire_tpl_passe_par: K4_PASSE,
+  circonscrit_construire_tpl_figure_calcul: K4_FIGURE,
+  circonscrit_construire_tpl_corde: K4_CORDE,
+  circonscrit_construire_tpl_programme: corrigerProgramme,
+  circonscrit_construire_tpl_pourquoi: K5_POURQUOI,
+  circonscrit_construire_tpl_calcul: K5_CALCUL,
+  circonscrit_construire_tpl_quatre_points: K5_QUATRE,
+  circonscrit_construire_tpl_morceau: K5_MORCEAU,
+  circonscrit_construire_tpl_rayon_faux: K5_RAYON,
   circonscrit_concourantes_tpl_1: corrigerDistanceSommet,
   circonscrit_concourantes_tpl_ouverte: corrigerPreuve,
   circonscrit_construire_tpl_1: corrigerDistanceSommet,

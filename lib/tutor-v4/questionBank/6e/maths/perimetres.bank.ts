@@ -194,7 +194,7 @@ function genRectangle(etoile: 1 | 2 | 3, qcm = false) {
       // La longueur en mètres, la largeur en centimètres : on répond en cm.
       Lg = Math.round(Lg / 10) * 10;
       uL = "m";
-      consigne = "\nDonne la réponse en centimètres.";
+      consigne = "\nRéponds en centimètres.";
     } else {
       Lg = tirer(o.L[0], o.L[1], pick([1, 2]));
       lg = Math.min(tirer(o.l[0], o.l[1], 1), Lg - 1);
@@ -209,9 +209,9 @@ function genRectangle(etoile: 1 | 2 | 3, qcm = false) {
     : Math.random() < 0.75 || qcm || etoile === 3
     ? pick([
         `${maj(o.nom)} mesure ${A} de long et ${B} de large.\nQuel est son périmètre ?`,
-        `${p.nom} veut poser ${o.tour} autour ${du(o.nom)}. ${pron} mesure ${A} sur ${B}.\nQuelle longueur lui faut-il ?`,
+        `${p.nom} pose ${o.tour} autour ${du(o.nom)}. ${pron} mesure ${A} sur ${B}.\nQuelle longueur faut-il ?`,
         `${p.nom} mesure ${o.nom} : longueur ${A}, largeur ${B}.\nCalcule son périmètre.`,
-        `Longueur : ${A}. Largeur : ${B}. Ce sont les mesures ${du(o.nom)} ${de(p.nom)}.\nQuel est le périmètre de ce rectangle ?`,
+        `Longueur : ${A}. Largeur : ${B}. C’est ${leNom(o.nom)} ${de(p.nom)}.\nQuel est le périmètre de ce rectangle ?`,
       ])
     : pick([`Calcule le périmètre d’un rectangle de longueur ${A} et de largeur ${B}.`, `Un rectangle mesure ${A} sur ${B}. Quel est son périmètre ?`]);
   // Le périmètre est calculé dans l'unité de la largeur (celle de la réponse).
@@ -465,7 +465,7 @@ function genFigure(etoile: 1 | 2 | 3 | 4) {
     const c = tirer(o.min, o.max);
     const per = f.n * c;
     return {
-      text: `${o.quoi(f.nom)} de côté ${L(c, o.u)}.\n${pick(["Quel est son périmètre ?", `${p.nom} veut en faire le tour. Quelle longueur cela fait-il ?`, "Calcule son périmètre."])}`,
+      text: `${o.quoi(f.nom)} de côté ${L(c, o.u)}.\n${pick(["Quel est son périmètre ?", `${p.nom} en fait le tour. Quelle longueur ?`, "Calcule son périmètre."])}`,
       format: "short" as const,
       expected: avecUnite(per, o.u),
       comparator: "number_equal" as const,
@@ -473,7 +473,7 @@ function genFigure(etoile: 1 | 2 | 3 | 4) {
     };
   }
   const o = pick(ENCLOS);
-  const n = randomInt(4, 6);
+  const n = randomInt(4, 5); // 07/11/2026 : 6 côtés dépassaient les 25 mots de ★3.
   const dec = o.max <= 10 ? 1 : 0;
   const vals = Array.from({ length: n }, () => tirer(o.min, o.max, Math.random() < 0.5 ? dec : 0));
   const s = vals.map((x) => L(x, o.u));
@@ -481,7 +481,7 @@ function genFigure(etoile: 1 | 2 | 3 | 4) {
   return {
     text: pick([
       `${maj(o.nom)} a ${n} côtés. Ils mesurent ${listeCotes(s)}.\nQuel est son périmètre ?`,
-      `${p.nom} fait le tour ${du(o.nom)}, qui a ${n} côtés : ${listeCotes(s)}.\nQuelle distance parcourt-${il(p)} ?`,
+      `${p.nom} fait le tour ${du(o.nom)} : ${listeCotes(s)}.\nQuelle distance parcourt-${il(p)} ?`,
       `Les ${n} côtés ${du(o.nom)} mesurent ${listeCotes(s)}.\nCalcule son périmètre.`,
     ]),
     format: "short" as const,
@@ -539,6 +539,11 @@ function genFigureQuadrillage(etoile: 4 | 5) {
 }
 
 // ----- PROBLÈMES : faire le tour, laisser un portail, faire plusieurs tours.
+/** « un ourlet » → « d’ourlet », « une clôture » → « de clôture ». */
+function deMatiere(tour: string) {
+  const m = tour.replace(/^(un|une|du|de la) /, "");
+  return /^[aeiouéèêh]/i.test(m) ? `d’${m}` : `de ${m}`;
+}
 const OUVERTURES = ["un portail", "une entrée", "une barrière qui s’ouvre", "un passage"];
 function genProbleme(etoile: 2 | 3 | 4 | 5) {
   const p = pick(PRENOMS);
@@ -591,7 +596,7 @@ function genProbleme(etoile: 2 | 3 | 4 | 5) {
       text: pick([
         `${p.nom} veut poser ${tour} autour ${du(nom)} de ${dims}.\nQuelle longueur lui faut-il ?`,
         `${maj(nom)} mesure ${dims}. On veut l’entourer avec ${tour}.\nQuelle longueur faut-il prévoir ?`,
-        `${p.nom} veut décorer ${leNom(nom)}. ${maj(leNom(nom))} mesure ${dims}.\nQuelle longueur de ${tour.replace(/^(un|une|du|de la) /, "")} faut-il pour en faire le tour ?`,
+        `${p.nom} veut décorer ${leNom(nom)} de ${dims}.\nQuelle longueur ${deMatiere(tour)} faut-il pour le tour ?`,
       ]),
       format: "short" as const,
       expected: avecUnite(per, u),
@@ -717,6 +722,184 @@ function genDefiMemePerimetre() {
     explanation: expl(`Le carré : 4 × ${L(c, u)} = ${L(4 * c, u)}. Le rectangle ${bon} : 2 × (${L(bonA, u)} + ${L(s - bonA, u)}) = ${L(4 * c, u)}. Même périmètre, forme différente.`),
   };
 }
+
+/* ⭐ 07/11/2026 — ★1 DE « FIGURE » : UN SEUL GESTE, PLUSIEURS QUESTIONS. Mesuré :
+   5,2 répétitions sur 20, tout passait par « Additionne les côtés du triangle ».
+   Six façons de demander la même idée (tout le tour, tous les côtés) : lire un
+   triangle dessiné, lire un quadrilatère dessiné, choisir le calcul, dire combien
+   de côtés additionner, calculer une somme écrite, compter le contour sur des
+   carreaux. Pas d'histoire : la figure remplace la lecture. Les figures sont À
+   L'ÉCHELLE des longueurs écrites : le correcteur le vérifie. */
+type PtFig = { x: number; y: number };
+/** Met des points (repère mathématique, y vers le haut) dans le cadre du dessin. */
+function cadrerFigure(pts: PtFig[], W = 320, H = 250, m = 42): PtFig[] {
+  const xs = pts.map((q) => q.x);
+  const ys = pts.map((q) => q.y);
+  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  const k = Math.min((W - 2 * m) / (x1 - x0), (H - 2 * m) / (y1 - y0));
+  const ox = (W - (x1 - x0) * k) / 2;
+  const oy = (H - (y1 - y0) * k) / 2;
+  return pts.map((q) => ({ x: Math.round(ox + (q.x - x0) * k), y: Math.round(H - oy - (q.y - y0) * k) }));
+}
+const UNITES_DESSIN: { u: U; min: number; max: number }[] = [
+  { u: "cm", min: 3, max: 12 }, { u: "cm", min: 4, max: 15 }, { u: "m", min: 3, max: 20 }, { u: "mm", min: 15, max: 60 },
+];
+/** Un triangle à trois côtés différents, bien ouvert, dessiné à l'échelle. */
+function triangleDessine() {
+  const o = pick(UNITES_DESSIN);
+  for (;;) {
+    // Le plus grand côté en base : un triangle pointu faisait se chevaucher les étiquettes.
+    const trio = [randomInt(o.min, o.max), randomInt(o.min, o.max), randomInt(o.min, o.max)].sort((u, v) => u - v);
+    const [a, b] = shuffle(trio.slice(0, 2));
+    const c = trio[2];
+    if (new Set(trio).size !== 3) continue;
+    const x = (b * b + c * c - a * a) / (2 * c);
+    const h2 = b * b - x * x;
+    if (h2 <= 0 || Math.sqrt(h2) < 0.35 * Math.max(a, b, c)) continue;
+    const [A, B, C] = cadrerFigure([{ x: 0, y: 0 }, { x: c, y: 0 }, { x, y: Math.sqrt(h2) }]);
+    return {
+      vals: [c, a, b],
+      u: o.u,
+      nom: "triangle",
+      canvas: {
+        kind: "triangle" as const,
+        size: { width: 320, height: 250 },
+        points: { A, B, C },
+        sideLabels: { AB: L(c, o.u), BC: L(a, o.u), CA: L(b, o.u) },
+        display: { showPoints: true, showLabels: false, showSides: true, showAngles: false },
+      },
+    };
+  }
+}
+/** Un trapèze rectangle à côtés entiers (triplet 3-4-5) : le dessin dit vrai sur les 4 longueurs. */
+function quadrilatereDessine() {
+  const u: U = pick(["cm", "cm", "m"]);
+  for (;;) {
+    const k = randomInt(1, 2);
+    const t = randomInt(2, 12);
+    const [bas, oblique, haut, droit] = [t + 3 * k, 5 * k, t, 4 * k];
+    if (new Set([bas, oblique, haut, droit]).size !== 4) continue;
+    // Le côté droit à gauche ou à droite, pour que le dessin ne soit pas toujours le même.
+    const gauche = Math.random() < 0.5;
+    const [A, B, C, D] = cadrerFigure(
+      gauche
+        ? [{ x: 0, y: 0 }, { x: bas, y: 0 }, { x: t, y: droit }, { x: 0, y: droit }]
+        : [{ x: 0, y: 0 }, { x: bas, y: 0 }, { x: bas, y: droit }, { x: 3 * k, y: droit }],
+    );
+    const [bc, da] = gauche ? [oblique, droit] : [droit, oblique];
+    return {
+      vals: [bas, bc, haut, da],
+      u,
+      nom: "quadrilatère",
+      canvas: {
+        kind: "quadrilatere" as const,
+        size: { width: 320, height: 250 },
+        points: { A, B, C, D },
+        sideLabels: { AB: L(bas, u), BC: L(bc, u), CD: L(haut, u), DA: L(da, u) },
+        display: { showPoints: true, showLabels: false, showSides: true, showAngles: false },
+      },
+    };
+  }
+}
+function genFigureLue(f: ReturnType<typeof triangleDessine> | ReturnType<typeof quadrilatereDessine>) {
+  const per = f.vals.reduce((a, b) => a + b, 0);
+  const n = f.vals.length;
+  const ce = f.nom === "triangle" ? "ce triangle" : "ce quadrilatère";
+  return {
+    text: `${pick([`Observe ${ce}.`, `Regarde ${ce}.`, `Lis les côtés de ${ce}.`, `Voici ${ce.replace("ce ", "un ")}.`])} ${pick(["Calcule son périmètre.", "Trouve son périmètre.", "Quel est son périmètre ?", `Additionne ses ${n} côtés.`, "Combien mesure son tour ?", "Donne son périmètre."])}`,
+    format: "short" as const,
+    expected: avecUnite(per, f.u),
+    comparator: "number_equal" as const,
+    explanation: expl(`On additionne les ${n} côtés écrits sur la figure : ${f.vals.map((v) => L(v, f.u)).join(" + ")} = ${L(per, f.u)}.`),
+    canvas: f.canvas,
+  };
+}
+function genFigureCalculChoisi() {
+  const f = Math.random() < 0.5 ? triangleDessine() : quadrilatereDessine();
+  const ce = f.nom === "triangle" ? "ce triangle" : "ce quadrilatère";
+  const v = f.vals;
+  const bon = v.join(" + ");
+  return {
+    text: pick([
+      `Quel calcul donne le périmètre de ${ce} ?`,
+      `Choisis le calcul du périmètre de ${ce}.`,
+      `Quelle addition donne le périmètre de ${ce} ?`,
+      `Quel calcul donne le tour de ${ce} ?`,
+      `Trouve le bon calcul pour le tour de ${ce}.`,
+      `Pour le périmètre de ${ce}, quel calcul faut-il ?`,
+    ]),
+    format: "qcm" as const,
+    choices: shuffle([bon, v.join(" × "), v.slice(0, -1).join(" + "), v.slice(1).join(" + ")]),
+    expected: [bon],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`Le périmètre, c’est tout le tour : on additionne tous les côtés, sans en oublier. ${bon}.`),
+    canvas: f.canvas,
+  };
+}
+const NB_COTES: [string, number][] = [["triangle", 3], ["quadrilatère", 4], ["rectangle", 4], ["carré", 4], ["losange", 4], ["pentagone", 5], ["hexagone", 6], ["octogone", 8]];
+function genFigureCombienDeCotes() {
+  const [f, n] = pick(NB_COTES);
+  const juste = String(n);
+  return {
+    text: pick([
+      `Périmètre d’un ${f} : combien de côtés faut-il additionner ?`,
+      `Combien de côtés additionne-t-on pour un ${f} ?`,
+      `Pour le périmètre d’un ${f}, combien de côtés compte-t-on ?`,
+      `Un ${f} a combien de côtés à additionner ?`,
+      `Combien de longueurs additionner pour le tour d’un ${f} ?`,
+      `Le tour d’un ${f} : combien de côtés ?`,
+    ]),
+    format: "qcm" as const,
+    choices: shuffle([juste, ...shuffle(["3", "4", "5", "6", "8"].filter((x) => x !== juste)).slice(0, 3)]),
+    expected: [juste],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`Un ${f} a ${n} côtés. Pour faire tout le tour, on additionne ces ${n} longueurs.`),
+  };
+}
+function genFigureSommeEcrite() {
+  const o = pick(UNITES_SIMPLES.filter((x) => x.u !== "km"));
+  const n = randomInt(3, 4);
+  let vals: number[];
+  do vals = Array.from({ length: n }, () => tirer(o.min, Math.min(o.max, 60)));
+  while (2 * Math.max(...vals) >= vals.reduce((a, b) => a + b, 0)); // le plus grand côté reste plus court que les autres réunis
+  const s = vals.map((v) => L(v, o.u)).join(" + ");
+  const per = vals.reduce((a, b) => a + b, 0);
+  return {
+    text: pick([
+      `Calcule : ${s}.`,
+      `Additionne ces côtés : ${s}.`,
+      `Périmètre de la figure : ${s} = ?`,
+      `Complète : ${s} = …`,
+      `Trouve le périmètre : ${s}.`,
+      `Le tour fait ${s}. Combien ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(per, o.u),
+    comparator: "number_equal" as const,
+    explanation: expl(`${s} = ${L(per, o.u)}. On garde l’unité : c’est une longueur.`),
+  };
+}
+function genFigureCarreauxNus() {
+  const cells = polyomino(randomInt(2, 4));
+  const nb = perimetreCarreaux(cells);
+  const u: U = pick(["cm", "cm", "m"]);
+  return {
+    text: `${pick([`Chaque carreau a un côté de 1 ${u}.`, `Un carreau a un côté de 1 ${u}.`])} ${pick(["Calcule le périmètre.", "Quel est le périmètre ?", "Trouve le périmètre.", "Combien mesure le contour ?", "Mesure le contour.", "Donne le périmètre."])}`,
+    format: "short" as const,
+    expected: avecUnite(nb, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`On compte les côtés de carreaux sur le contour : il y en a ${nb}. Chacun mesure 1 ${u}, donc ${L(nb, u)}.`),
+    canvas: {
+      kind: "figure_libre" as const,
+      grid: { rows: 6, cols: 6, filledCells: cells },
+      display: { showGrid: true, showFilled: true, showPerimeter: true },
+    },
+  };
+}
+/** Un gabarit ★1 de la micro « figure ». */
+const gabaritFigure1 = (id: string, hint: string, generate: () => any): TutorBankItemV4 => ({
+  kind: "template", id, niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_figure", difficulty: 1, theme: "neutral", hint, tags: ["aire_perimetre", "figure", "template"], generate,
+});
 
 export const perimetresBank: TutorBankItemV4[] = [
   // =========================
@@ -2179,4 +2362,12 @@ export const perimetresBank: TutorBankItemV4[] = [
   { kind: "fixed", id: "aire_perimetre_probleme_topup_4", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_probleme", difficulty: 3, theme: "neutral",
     text: "Le périmètre d’un carré est 24 cm. Quelle est la longueur de son côté ?", format: "short", expected: ["6 cm"], comparator: "number_equal",
     hint: "Périmètre ÷ 4.", explanation: expl("Pour un carré, côté = périmètre ÷ 4 = 24 ÷ 4 = 6, donc le côté mesure 6 cm."), tags: ["aire_perimetre", "probleme", "carre", "inverse"] },
+
+  // ===== 07/11/2026 — AIRE_PERIMETRE_FIGURE, ★1 : six façons de poser la même idée =====
+  gabaritFigure1("aire_perimetre_figure_tpl_triangle_lu", "Additionne les trois longueurs écrites sur la figure.", () => genFigureLue(triangleDessine())),
+  gabaritFigure1("aire_perimetre_figure_tpl_quadrilatere_lu", "Additionne les quatre longueurs écrites sur la figure.", () => genFigureLue(quadrilatereDessine())),
+  gabaritFigure1("aire_perimetre_figure_tpl_calcul_choisi", "Le périmètre, c’est TOUS les côtés, additionnés.", genFigureCalculChoisi),
+  gabaritFigure1("aire_perimetre_figure_tpl_combien_cotes", "Autant de longueurs à additionner que de côtés.", genFigureCombienDeCotes),
+  gabaritFigure1("aire_perimetre_figure_tpl_somme_ecrite", "Additionne, et garde l’unité.", genFigureSommeEcrite),
+  gabaritFigure1("aire_perimetre_figure_tpl_carreaux_nus", "Suis le contour et compte les côtés de carreaux.", genFigureCarreauxNus),
 ];

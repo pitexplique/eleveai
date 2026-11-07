@@ -38,7 +38,7 @@ function verifierLongueur(q: Q, justeM: number, p: string[]) {
     if (justes.length !== 1) p.push(`${justes.length} propositions justes : ${justes.join(" | ")}`);
   }
   // L'unité de la réponse : celle demandée, sinon celle des données.
-  const demandee = q.text.match(/Donne la réponse en ([a-zà-ÿ]+)/);
+  const demandee = q.text.match(/(?:Donne la réponse|Réponds) en ([a-zà-ÿ]+)/);
   const unites: Record<string, string> = { millimètres: "mm", centimètres: "cm", mètres: "m", kilomètres: "km" };
   const ls = longueursDuTexte(q.text);
   if (demandee) {
@@ -94,7 +94,7 @@ function corrigerRectangle(q: Q): string[] {
   if (!/rectang/.test(q.text)) return [...p, "le texte ne dit pas « rectangle »"];
   const ls = longueursDuTexte(q.text);
   if (ls.length !== 2) return [...p, `il faut une longueur et une largeur, lu : ${ls.length}`];
-  if (ls[0].u !== ls[1].u && !/Donne la réponse en/.test(q.text)) p.push("deux unités sans dire celle de la réponse");
+  if (ls[0].u !== ls[1].u && !/(?:Donne la réponse|Réponds) en/.test(q.text)) p.push("deux unités sans dire celle de la réponse");
   if (egal(enM(ls[0]), enM(ls[1]))) p.push("longueur = largeur : c'est un carré");
   verifierLongueur(q, 2 * (enM(ls[0]) + enM(ls[1])), p);
   return p;
@@ -151,6 +151,62 @@ function corrigerFigure(q: Q): string[] {
     if (a + b <= c) p.push("triangle impossible : le plus grand côté dépasse la somme des deux autres");
   }
   verifierLongueur(q, ls.reduce((s, l) => s + enM(l), 0), p);
+  return p;
+}
+
+// 07/11/2026 : ★1, le dessin porte les longueurs. On les relit sur la figure.
+/** Les longueurs écrites sur la figure, et le contrôle : le dessin est-il à leur échelle ? */
+function longueursDuDessin(q: Q, p: string[]) {
+  const c = q.canvas as any;
+  if (c?.kind !== "triangle" && c?.kind !== "quadrilatere") return null;
+  const cotes: [string, string][] = c.kind === "triangle" ? [["A", "B"], ["B", "C"], ["C", "A"]] : [["A", "B"], ["B", "C"], ["C", "D"], ["D", "A"]];
+  const lus = cotes.map(([x, y]) => {
+    const l = longueurAttendue(String(c.sideLabels?.[x + y] ?? ""));
+    return l ? { ...l, px: Math.hypot(c.points[x].x - c.points[y].x, c.points[x].y - c.points[y].y) } : null;
+  });
+  if (lus.some((l) => !l)) return null;
+  const ls = lus as { v: number; u: string; px: number }[];
+  if (new Set(ls.map((l) => l.u)).size !== 1) p.push("deux unités sur la figure");
+  const r = ls.map((l) => l.px / l.v);
+  if (Math.max(...r) / Math.min(...r) > 1.05) p.push(`figure pas à l’échelle : ${ls.map((l) => l.v).join(", ")}`);
+  const m = ls.map(enM);
+  if (2 * Math.max(...m) >= m.reduce((a, b) => a + b, 0)) p.push("figure impossible : un côté dépasse les autres réunis");
+  return ls;
+}
+const nomDuDessin = (q: Q) => ((q.canvas as any)?.kind === "triangle" ? "triangle" : "quadrilatère");
+function corrigerFigureLue(q: Q): string[] {
+  const p = communes(q);
+  const ls = longueursDuDessin(q, p);
+  if (!ls) return [...p, "longueurs de la figure illisibles"];
+  if (!q.text.includes(nomDuDessin(q))) p.push("le texte ne nomme pas la figure dessinée");
+  if (longueursDuTexte(q.text).length) p.push("longueurs écrites dans le texte ET sur la figure");
+  const annonce = q.text.match(/ses (\d) côtés/);
+  if (annonce && Number(annonce[1]) !== ls.length) p.push("le texte annonce un autre nombre de côtés");
+  if (!/[Cc]alcule son périmètre|[Tt]rouve son périmètre|Quel est son périmètre|Additionne ses|mesure son tour|Donne son périmètre/.test(q.text)) return [...p, "question non reconnue"];
+  verifierLongueur(q, ls.reduce((s, l) => s + enM(l), 0), p);
+  return p;
+}
+function corrigerCalculChoisi(q: Q): string[] {
+  const p = communes(q);
+  const ls = longueursDuDessin(q, p);
+  if (!ls) return [...p, "longueurs de la figure illisibles"];
+  if (!q.text.includes(nomDuDessin(q))) p.push("le texte ne nomme pas la figure dessinée");
+  if (!/calcul|addition/.test(q.text) || !/périmètre|tour/.test(q.text)) return [...p, "question non reconnue"];
+  const voulu = ls.map((l) => l.v).sort((a, b) => a - b).join();
+  const justes = (q.choices ?? []).filter((c) => /^\d+(?: \+ \d+)+$/.test(c) && c.split(" + ").map(Number).sort((a, b) => a - b).join() === voulu);
+  if (justes.length !== 1) p.push(`${justes.length} calculs justes : ${justes.join(" | ")}`);
+  else if (q.expected[0] !== justes[0]) p.push(`réponse ${q.expected[0]}, recalculée ${justes[0]}`);
+  return p;
+}
+const COTES_PAR_NOM: Record<string, number> = { triangle: 3, quadrilatère: 4, rectangle: 4, carré: 4, losange: 4, pentagone: 5, hexagone: 6, octogone: 8 };
+function corrigerCombienDeCotes(q: Q): string[] {
+  const p = communes(q);
+  const noms = Object.keys(COTES_PAR_NOM).filter((k) => q.text.toLowerCase().includes(`un ${k}`));
+  if (noms.length !== 1) return [...p, `figure illisible : ${noms.join(", ")}`];
+  if (!/combien de (côtés|longueurs)/i.test(q.text)) return [...p, "question non reconnue"];
+  const juste = String(COTES_PAR_NOM[noms[0]]);
+  if (q.expected[0] !== juste) p.push(`réponse ${q.expected[0]}, recalculée ${juste}`);
+  if ((q.choices ?? []).filter((c) => c === juste).length !== 1) p.push("la bonne réponse n’est pas proposée une seule fois");
   return p;
 }
 
@@ -245,6 +301,12 @@ export const CORRECTEURS: CorrecteursMaths = {
   aire_perimetre_comprendre_tpl_situation: corrigerComprendre,
   aire_perimetre_carre_tpl_situation: corrigerCarre,
   aire_perimetre_figure_tpl_situation: corrigerFigure,
+  aire_perimetre_figure_tpl_triangle_lu: corrigerFigureLue,
+  aire_perimetre_figure_tpl_quadrilatere_lu: corrigerFigureLue,
+  aire_perimetre_figure_tpl_calcul_choisi: corrigerCalculChoisi,
+  aire_perimetre_figure_tpl_combien_cotes: corrigerCombienDeCotes,
+  aire_perimetre_figure_tpl_somme_ecrite: corrigerFigure,
+  aire_perimetre_figure_tpl_carreaux_nus: corrigerFigure,
   aire_perimetre_carre_tpl_1: corrigerCarre,
   aire_perimetre_carre_tpl_2: corrigerCarre,
   aire_perimetre_carre_qcm_tpl_1: corrigerCarre,

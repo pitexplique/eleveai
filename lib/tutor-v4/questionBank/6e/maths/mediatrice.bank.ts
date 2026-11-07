@@ -74,12 +74,15 @@ function segmentEtDroite(opts: {
   // (xCoupe, A.y). Avant, elle était centrée à mi-hauteur du cadre et passait
   // à 4,6 px du milieu — le correcteur l'a vu.
   const pente = 110 / 240;
+  // ⭐ 07/11/2026 : le nom de la droite s'écrit au milieu de from-to. Pris en bas du
+  // cadre, il ne recouvre plus la marque d'angle droit ni le point du haut ; la droite,
+  // prolongée jusqu'aux bords par le canvas, reste la même.
   const haut = opts.perpendiculaire
-    ? { x: xCoupe, y: 45 }
-    : { x: xCoupe - pente * (A.y - 45), y: 45 };
+    ? { x: xCoupe, y: 215 }
+    : { x: xCoupe + pente * (215 - A.y), y: 215 };
   const bas = opts.perpendiculaire
-    ? { x: xCoupe, y: 285 }
-    : { x: xCoupe + pente * (285 - A.y), y: 285 };
+    ? { x: xCoupe, y: 295 }
+    : { x: xCoupe + pente * (295 - A.y), y: 295 };
 
   const points: DroitesCanvasData["points"] = [
     { x: A.x, y: A.y, label: na },
@@ -202,11 +205,11 @@ const LIEUX: Lieux[] = [
   { quoi: "une poubelle", entre: "deux bancs", u: "m", min: 3, max: 15 },
   { quoi: "un lampadaire", entre: "deux portails", u: "m", min: 6, max: 30 },
   { quoi: "une table de pique-nique", entre: "deux barbecues", u: "m", min: 5, max: 25 },
-  { quoi: "un plot", entre: "les deux buts du terrain", u: "m", min: 20, max: 60 },
+  { quoi: "un plot", entre: "les deux buts", u: "m", min: 20, max: 60 },
   { quoi: "une bouée", entre: "deux plongeoirs", u: "m", min: 8, max: 25 },
   { quoi: "une ruche", entre: "deux pommiers", u: "m", min: 5, max: 30 },
   { quoi: "une antenne", entre: "deux villages", u: "km", min: 2, max: 12 },
-  { quoi: "un point de rendez-vous", entre: "deux arrêts de bus", u: "m", min: 50, max: 300 },
+  { quoi: "un abri", entre: "deux arrêts de bus", u: "m", min: 50, max: 300 },
   { quoi: "un arrosoir", entre: "deux bacs à fleurs", u: "m", min: 2, max: 8 },
   { quoi: "un tapis de gym", entre: "deux espaliers", u: "m", min: 4, max: 12 },
   { quoi: "un feu de camp", entre: "deux tentes", u: "m", min: 6, max: 20 },
@@ -236,6 +239,14 @@ function courtM(intros: string[], questions: string[], max: number) {
   const paires = intros.flatMap((i) => questions.map((q) => (i ? `${i} ${q}` : q))).filter((t) => motsM(t) <= max);
   return paires.length ? pick(paires) : [...questions].sort((x, y) => motsM(x) - motsM(y))[0];
 }
+// ⭐ 07/11/2026 : compte comme la mesure (« = », « : », « ? » ne sont pas des mots).
+const motsV = (t: string) => t.trim().split(/\s+/).filter((x) => /[\p{L}\d]/u.test(x)).length;
+/** Une phrase prise parmi celles qui tiennent en `max` mots. */
+function tient(phrases: string[], max: number) {
+  const ok = phrases.filter((t) => motsV(t) <= max);
+  return ok.length ? pick(ok) : [...phrases].sort((x, y) => motsV(x) - motsV(y))[0];
+}
+const croise = (a: string[], b: string[]) => a.flatMap((x) => b.map((y) => `${x} ${y}`));
 
 // ----- MEDIATRICE_DEFINITION
 function genMedDefinition(): Q {
@@ -291,7 +302,7 @@ function genMedFigure(): Q {
   const c = choixMediatrice(s);
   const rep = perpendiculaire && parMilieu ? c.oui : perpendiculaire ? c.pasMilieu : parMilieu ? c.pasPerp : c.aucune;
   return {
-    text: courtM([`Observe la figure.`, `Regarde la figure.`, `${M} est le milieu de ${s}.`, `Sur la figure, ${M} est le milieu de ${s}.`, ``], [`La droite (d) est-elle la médiatrice de ${s} ?`, `(d) est-elle la médiatrice de ${s} ?`], 15),
+    text: courtM([`Observe la figure.`, `Regarde la figure.`, `${M} est le milieu de ${s}.`, `Sur la figure, ${M} est le milieu de ${s}.`, ``], [`La droite (d) est-elle la médiatrice de ${s} ?`, `(d) est-elle la médiatrice de ${s} ?`, `Peut-on dire que (d) est la médiatrice de ${s} ?`, `Cette droite (d) convient-elle comme médiatrice de ${s} ?`], 15),
     format: "qcm",
     choices: shuffle(Object.values(c)),
     expected: [rep],
@@ -308,7 +319,7 @@ function genMedMesures(): Q {
   const [E, F, K] = lettres(3);
   const P = prenom();
   const s = `[${E}${F}]`;
-  const L = randomInt(4, 16) + (Math.random() < 0.3 ? 0.5 : 0);
+  const L = randomInt(4, 16);
   const milieu = L / 2;
   const parMilieu = Math.random() < 0.55;
   const x = parMilieu ? milieu : pick([milieu - 1, milieu + 1, milieu - 0.5, milieu + 1.5]);
@@ -317,7 +328,8 @@ function genMedMesures(): Q {
   const c = choixMediatrice(s);
   const rep = perp && parMilieu ? c.oui : perp ? c.pasMilieu : parMilieu ? c.pasPerp : c.aucune;
   return {
-    text: `${pick([`${P.nom} trace un segment ${s} de ${fr(L)} cm.`, `Le segment ${s} mesure ${fr(L)} cm.`, `Sur une feuille, ${P.nom} mesure ${E}${F} = ${fr(L)} cm.`])} Une droite (d) coupe ${s} au point ${K}, avec ${E}${K} = ${fr(x)} cm, et fait avec ${s} un angle de ${angle}°. ${pick([`(d) est-elle la médiatrice de ${s} ?`, `Est-ce la médiatrice de ${s} ?`])}`,
+    // 07/11/2026 : 34 mots ramenés à 25 au plus (★3).
+    text: `${pick([`${P.nom} trace un segment ${s} de ${fr(L)} cm.`, `Le segment ${s} mesure ${fr(L)} cm.`, `Sur une feuille, ${P.nom} mesure ${E}${F} = ${fr(L)} cm.`, `${P.nom} dessine ${s}, long de ${fr(L)} cm.`])} ${pick([`(d) coupe ${s} en ${K}, à ${angle}°, avec ${E}${K} = ${fr(x)} cm.`, `À ${angle}°, (d) coupe ${s} en ${K}, avec ${E}${K} = ${fr(x)} cm.`])} ${pick([`(d) est-elle sa médiatrice ?`, `Est-ce la médiatrice de ${s} ?`, `Est-ce sa médiatrice ?`])}`,
     format: "qcm",
     choices: shuffle(Object.values(c)),
     expected: [rep],
@@ -387,9 +399,17 @@ function genMedDistance(situation = false): Q {
   const d = enSituation ? distanceLieux(l) : randomInt(3, 14) + (Math.random() < 0.3 ? 0.5 : 0);
   const u = enSituation ? l.u : "cm";
   const [X, Y] = Math.random() < 0.5 ? [E, F] : [F, E];
+  // 07/11/2026 : ★3 ramené à 25 mots au plus ; ★2 à plusieurs tournures.
+  const qui = cap(pick(QUI_PLACE)(P));
   const text = enSituation
-    ? `${cap(l.entre)} sont aux points ${E} et ${F}. ${cap(pick(QUI_PLACE)(P))} place ${l.quoi} au point ${K}, sur la médiatrice de ${s}. On mesure ${K}${X} = ${fr(d)} ${u}. ${pick([`Combien mesure ${K}${Y} ?`, `À quelle distance de ${Y} se trouve le point ${K} ?`])}`
-    : courtM([`${K} est sur la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`, `Le point ${K} est sur la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`], [`Combien mesure ${K}${Y} ?`, `Que vaut ${K}${Y} ?`, `Trouve ${K}${Y}.`, `Calcule ${K}${Y}.`, `Donne la longueur ${K}${Y}.`], 15);
+    ? tient(
+        croise(
+          croise([`${cap(l.entre)} sont en ${E} et ${F}.`], [`${cap(l.quoi)} est en ${K}, sur la médiatrice de ${s}.`, `${qui} place ${l.quoi} en ${K}, sur la médiatrice de ${s}.`]),
+          [`${K}${X} = ${fr(d)} ${u}. Combien mesure ${K}${Y} ?`, `${K}${X} = ${fr(d)} ${u}. À quelle distance de ${Y} est ${K} ?`, `${K}${X} = ${fr(d)} ${u}. Quelle est la distance ${K}${Y} ?`],
+        ),
+        25,
+      )
+    : courtM([`${K} est sur la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`, `Le point ${K} est sur la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`, `${K} appartient à la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`, `${K}${X} = ${fr(d)} ${u}, et ${K} est sur la médiatrice de ${s}.`], [`Combien mesure ${K}${Y} ?`, `Que vaut ${K}${Y} ?`, `Trouve ${K}${Y}.`, `Calcule ${K}${Y}.`, `Donne la longueur ${K}${Y}.`], 16);
   return {
     text,
     format: "short",
@@ -405,8 +425,16 @@ function genMedTrajet(): Q {
   // K hors du segment : KE plus grand que la moitié de EF.
   const a = Math.round((b / 2 + Math.max(1, Math.round(b * pick([0.2, 0.4, 0.6])))) * 2) / 2;
   if (Math.random() < 0.5) {
+    // 07/11/2026 : 46 mots ramenés à 25 au plus (★3) ; [EF] n'y est plus mesuré, on n'en a pas besoin.
+    const objet = pick(LIEUX.filter((x) => x.u === u && motsV(x.quoi) <= 2));
     return {
-      text: `${cap(l.entre)} sont en ${E} et en ${F}, avec ${E}${F} = ${fr(b)} ${u}. ${cap(l.quoi)} est au point ${K}, sur la médiatrice de ${s}, avec ${K}${E} = ${fr(a)} ${u}. ${P.nom} va de ${E} à ${K}, puis de ${K} à ${F}. ${pick(["Quelle distance parcourt-" + il(P) + " ?", "Combien de chemin fait-" + il(P) + " ?"])}`,
+      text: tient(
+        croise(
+          [`${cap(objet.quoi)} est en ${K}, sur la médiatrice de ${s}. ${K}${E} = ${fr(a)} ${u}.`, `${K}${E} = ${fr(a)} ${u}. ${cap(objet.quoi)} est en ${K}, sur la médiatrice de ${s}.`],
+          [`${P.nom} va de ${E} à ${K}, puis à ${F}. Quelle distance parcourt-${il(P)} ?`, `${P.nom} va de ${E} à ${K}, puis à ${F}. Combien de chemin fait-${il(P)} ?`, `${P.nom} va de ${E} à ${K}, puis à ${F}. Calcule son trajet.`],
+        ),
+        25,
+      ),
       format: "short",
       expected: [`${fr(2 * a)} ${u}`],
       comparator: "number_equal",
@@ -414,7 +442,7 @@ function genMedTrajet(): Q {
     };
   }
   return {
-    text: `Le point ${K} est sur la médiatrice de ${s}. On sait que ${K}${E} = ${fr(a)} cm et ${E}${F} = ${fr(b)} cm. ${pick([`Quel est le périmètre du triangle ${E}${F}${K} ?`, `Calcule le périmètre du triangle ${E}${F}${K}.`])}`,
+    text: `${pick([`Le point ${K} est`, `${K} est`])} sur la médiatrice de ${s}. ${K}${E} = ${fr(a)} cm et ${E}${F} = ${fr(b)} cm. ${pick([`Quel est le périmètre du triangle ${E}${F}${K} ?`, `Calcule le périmètre du triangle ${E}${F}${K}.`, `Trouve le périmètre de ${E}${F}${K}.`])}`,
     format: "short",
     expected: [`${fr(2 * a + b)} cm`],
     comparator: "number_equal",
@@ -450,25 +478,25 @@ function genMedSens(): Q {
   const s = `[${E}${F}]`;
   const cas = pick([
     {
-      q: `${P.nom} dit : « ${M}${E} = ${M}${F}, donc ${M} est le milieu de ${s}. » Où est l’erreur ?`,
+      q: pick([`${P.nom} dit : « ${M}${E} = ${M}${F}, donc ${M} est le milieu de ${s}. » Où est l’erreur ?`, `${M}${E} = ${M}${F}, donc ${M} est le milieu de ${s}, écrit ${P.nom}. Que faut-il corriger ?`]),
       juste: `${M} est seulement sur la médiatrice de ${s}, pas forcément sur le segment`,
       faux: [`il n’y a pas d’erreur`, `il faudrait ${M}${E} + ${M}${F} = ${E}${F}`, `${M} n’est jamais sur la médiatrice`],
       r: `De ${M}${E} = ${M}${F}, on déduit que ${M} est sur la MÉDIATRICE de ${s}, une droite entière. Pour être le milieu, ${M} devrait aussi être sur le segment.`,
     },
     {
-      q: `On sait que ${M}${E} = ${M}${F}. Que peut-on en déduire ?`,
+      q: pick([`${M}${E} = ${M}${F}. Que peut-on en déduire ?`, `${P.nom} mesure : ${M}${E} = ${M}${F}. Que peut-${il(P)} en déduire ?`]),
       juste: `${M} est sur la médiatrice de ${s}`,
       faux: [`${M} est le milieu de ${s}`, `${M} est sur le segment ${s}`, "on ne peut rien en déduire"],
       r: `Tout point à égale distance de ${E} et de ${F} est sur la médiatrice de ${s}. C’est ce sens de la propriété qui sert à démontrer.`,
     },
     {
-      q: `Le point ${M} est sur la médiatrice de ${s}. Que peut-on en déduire ?`,
+      q: pick([`Le point ${M} est sur la médiatrice de ${s}. Que peut-on en déduire ?`, `${P.nom} place ${M} sur la médiatrice de ${s}. Quelle égalité est sûre ?`]),
       juste: `${M}${E} = ${M}${F}`,
       faux: [`${M} est le milieu de ${s}`, `${M}${E} + ${M}${F} = ${E}${F}`, `${M}${E} = ${E}${F}`],
       r: `Tout point de la médiatrice de ${s} est à égale distance de ${E} et de ${F} : ${M}${E} = ${M}${F}, où que soit ${M} sur cette droite.`,
     },
     {
-      q: `Un point ${M} n’est PAS sur la médiatrice de ${s}. Que peut-on dire de ${M}${E} et ${M}${F} ?`,
+      q: pick([`Un point ${M} n’est PAS sur la médiatrice de ${s}. Que peut-on dire de ${M}${E} et ${M}${F} ?`, `${P.nom} place ${M} hors de la médiatrice de ${s}. Compare ${M}${E} et ${M}${F}.`]),
       juste: `elles sont différentes`,
       faux: [`elles sont égales quand même`, `${M}${E} + ${M}${F} = ${E}${F}`, "on ne peut rien dire"],
       r: `La médiatrice contient TOUS les points à égale distance de ${E} et de ${F}, et eux seuls. Un point qui n’y est pas est plus près de l’un des deux.`,
@@ -491,7 +519,7 @@ function genMedCompas(): Q {
   if (Math.random() < 0.35) {
     const juste = `la médiatrice de ${s}`;
     return {
-      text: courtM([`On plie la feuille : ${E} vient sur ${F}.`, `Plie la feuille pour poser ${E} sur ${F}.`], ["Que représente le pli ?", "Quelle droite trace le pli ?", "Quelle droite forme le pli ?"], 15),
+      text: courtM([`On plie la feuille : ${E} vient sur ${F}.`, `Plie la feuille pour poser ${E} sur ${F}.`, `Plie la feuille : ${F} se pose sur ${E}.`], ["Que représente le pli ?", "Quelle droite trace le pli ?", "Quelle droite forme le pli ?", "Que trace le pli ?"], 16),
       format: "qcm",
       choices: shuffle([juste, `le segment ${s}`, `la perpendiculaire à ${s} passant par ${E}`, `une parallèle à ${s}`]),
       expected: [juste],
@@ -504,7 +532,7 @@ function genMedCompas(): Q {
   const juste = Math.min(L, Math.floor(demi) + randomInt(1, 3));
   const fausses = [...new Set([demi, Math.max(1, Math.floor(demi) - 1), Math.max(1, Math.floor(demi / 2))])].filter((x) => x <= demi && x !== juste);
   return {
-    text: courtM([`${s} mesure ${fr(L)} cm.`, `Le segment ${s} mesure ${fr(L)} cm.`], ["Quel écartement de compas convient pour sa médiatrice ?", "Quelle ouverture de compas pour tracer sa médiatrice ?", "Choisis l’écartement du compas pour tracer sa médiatrice.", "Quel écartement choisir pour tracer sa médiatrice ?"], 15),
+    text: courtM([`${s} mesure ${fr(L)} cm.`, `Le segment ${s} mesure ${fr(L)} cm.`, `${E}${F} = ${fr(L)} cm.`], ["Quel écartement de compas convient pour sa médiatrice ?", "Quelle ouverture de compas pour tracer sa médiatrice ?", "Choisis l’écartement du compas pour tracer sa médiatrice.", "Quel écartement choisir pour tracer sa médiatrice ?", "Quel écartement permet aux arcs de se couper ?"], 16),
     format: "qcm",
     choices: shuffle([`${fr(juste)} cm`, ...fausses.slice(0, 3).map((x) => `${fr(x)} cm`)]),
     expected: [`${fr(juste)} cm`],
@@ -519,7 +547,7 @@ const SUPPORTS: Support[] = [
   { phrase: "sur son cahier", u: "cm", min: 4, max: 18 },
   { phrase: "sur une planche", u: "cm", min: 30, max: 120 },
   { phrase: "sur une affiche", u: "cm", min: 20, max: 80 },
-  { phrase: "sur le sol de la cour, à la craie", u: "m", min: 2, max: 12 },
+  { phrase: "à la craie dans la cour", u: "m", min: 2, max: 12 },
   { phrase: "sur une bande de papier", u: "cm", min: 10, max: 40 },
   { phrase: "sur le tableau", u: "cm", min: 40, max: 150 },
 ];
@@ -527,10 +555,11 @@ function genMedMilieu(): Q {
   const [E, F] = lettres(2);
   const P = prenom();
   const sp = pick(SUPPORTS);
-  const L = randomInt(sp.min, sp.max) + (sp.u === "m" && Math.random() < 0.4 ? 0.5 : 0);
+  const L = randomInt(sp.min, sp.max);
   const demi = L / 2;
   return {
-    text: `${P.nom} trace un segment [${E}${F}] de ${fr(L)} ${sp.u} ${sp.phrase}. ${cap(il(P))} veut tracer sa médiatrice à la règle graduée et à l’équerre. ${pick([`À quelle distance de ${E} doit-${il(P)} poser l’équerre ?`, `À combien de ${E} se trouve le point où poser l’équerre ?`])}`,
+    // 07/11/2026 : 40 mots ramenés à 25 au plus (★3).
+    text: `${P.nom} trace un segment [${E}${F}] de ${fr(L)} ${sp.u} ${sp.phrase}. ${pick([`Pour sa médiatrice, à quelle distance de ${E} pose-t-${il(P)} l’équerre ?`, `Pour tracer sa médiatrice, à combien de ${E} pose-t-${il(P)} l’équerre ?`, `Où poser l’équerre pour sa médiatrice : à combien de ${E} ?`])}`,
     format: "short",
     expected: [`${fr(demi)} ${sp.u}`],
     comparator: "number_equal",
@@ -772,6 +801,577 @@ function genMedDefiRaisons(): Q {
     explanation: expl(`La médiatrice de [${E}${F}] donne les points à égale distance de ${E} et de ${F} ; celle de [${F}${G}], à égale distance de ${F} et de ${G}. Leur croisement est à égale distance des trois (la troisième y passe aussi).`),
   };
 }
+
+// =====================================================================
+// ⭐ 07/11/2026 — LA MÊME PHRASE REVENAIT (scripts/mesurer-squelettes-coach.ts
+// --lettres : jusqu'à 12 répétitions sur 20). Pour tomber à 4 au plus, il faut une
+// quarantaine de phrases à peu près équiprobables par étoile : chaque gabarit
+// ci-dessous pose une AUTRE question (lire la figure, trouver la droite, vrai ou
+// faux, compléter, calculer, prendre la question par l'autre bout).
+// ★1 : 12 mots au plus. ★2 : 15 mots au plus. Aucun prénom, aucun objet à ★1-★2.
+// Correcteurs : correcteurs/mediatrice.ts, section du 07/11.
+// =====================================================================
+const qc = (text: string, juste: string, faux: string[], calcul: string, canvas?: DroitesCanvasData): Q => ({
+  text, format: "qcm", choices: shuffle([juste, ...faux]), expected: [juste], comparator: "mcq_exact", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
+});
+const ouiNon = (text: string, oui: boolean, calcul: string, canvas?: DroitesCanvasData) => qc(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
+const vraiFaux = (text: string, vrai: boolean, calcul: string) => qc(text, vrai ? "vrai" : "faux", [vrai ? "faux" : "vrai"], calcul);
+/** Réponse courte : une longueur avec son unité. */
+const lg = (text: string, v: number, u: string, calcul: string, canvas?: DroitesCanvasData): Q => ({
+  text, format: "short", expected: [`${fr(v)} ${u}`], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
+});
+/** Réponse courte en degrés. */
+const dg = (text: string, v: number, calcul: string, canvas?: DroitesCanvasData): Q => ({
+  text, format: "short", expected: [`${v}°`, String(v)], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
+});
+/** Réponse courte : un nombre sans unité. */
+const nb = (text: string, n: number, calcul: string): Q => ({
+  text, format: "short", expected: [String(n)], comparator: "number_equal", explanation: expl(calcul),
+});
+/** Réponse courte en lettres : toutes les écritures justes sont acceptées. */
+const lt = (text: string, justes: string[], calcul: string): Q => ({
+  text, format: "short", expected: justes, comparator: "exact_text", explanation: expl(calcul),
+});
+const DEF_COURTE = (s: string) => `La médiatrice de ${s} est perpendiculaire à ${s} et passe par son milieu.`;
+
+// ----- MEDIATRICE_DEFINITION, ★1
+function genDefVraiFaux(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const cas = pick([
+    { f: `passe par son milieu`, v: true },
+    { f: `est perpendiculaire à ${s}`, v: true },
+    { f: `coupe ${s} en son milieu`, v: true },
+    { f: `coupe ${s} à angle droit`, v: true },
+    { f: `est une droite`, v: true },
+    { f: `est parallèle à ${s}`, v: false },
+    { f: `passe par le point ${E}`, v: false },
+    { f: `est un segment`, v: false },
+    { f: `coupe ${s} en biais`, v: false },
+  ]);
+  const enonce = `la médiatrice de ${s} ${cas.f}`;
+  return vraiFaux(pick([`Vrai ou faux : ${enonce}.`, `${cap(enonce)}. Vrai ou faux ?`]), cas.v, `${DEF_COURTE(s)} La phrase est donc ${cas.v ? "vraie" : "fausse"}.`);
+}
+function genDefCompleter(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const r = DEF_COURTE(s);
+  return pick([
+    () => qc(pick([`Complète : la médiatrice de ${s} est … à ${s}.`, `Quel mot manque : la médiatrice de ${s} est … à ${s} ?`]), "perpendiculaire", ["parallèle", "égale", "extérieure"], r),
+    () => qc(pick([`Complète : la médiatrice de ${s} passe par son …`, `Quel mot manque : la médiatrice de ${s} passe par son … ?`]), "milieu", ["sommet", "côté", "rayon"], r),
+    () => qc(pick([`Complète : la médiatrice de ${s} est une …`, `Quel mot manque : la médiatrice de ${s} est une … ?`]), "droite", ["demi-droite", "longueur", "mesure"], `${r} C’est une droite : elle se prolonge sans fin.`),
+    () => dg(pick([`Combien de degrés entre ${s} et sa médiatrice ?`, `Quel angle en degrés fait la médiatrice avec ${s} ?`]), 90, `${r} L’angle est droit : 90°.`),
+    () => qc(pick([`Quelle sorte d’angle forme la médiatrice avec ${s} ?`, `La médiatrice de ${s} forme quel angle avec ${s} ?`]), "un angle droit", ["un angle aigu", "un angle obtus", "un angle plat"], r),
+    () => qc(pick([`Par quel point de ${s} passe sa médiatrice ?`, `Quel point de ${s} est sur sa médiatrice ?`]), "son milieu", [E, F, `aucun point de ${s}`], r),
+  ])();
+}
+/** [EF], son milieu et trois droites : la médiatrice, une perpendiculaire à côté du milieu, une penchée par le milieu. */
+function figureTroisDroites(noms: { a: string; b: string; m: string }, labels: { med: string; cote: string; penchee: string }): DroitesCanvasData {
+  const sens = pick([1, -1]);
+  const pente = 110 / 240;
+  const xCote = M.x + sens * 55;
+  const xPenchee = (y: number) => M.x - sens * pente * (A.y - y);
+  // Le nom d'une droite s'écrit au milieu de from-to : on les prend en haut du cadre pour les séparer.
+  const droite = (label: string, from: { x: number; y: number }, to: { x: number; y: number }, color: string) => ({
+    id: label.replace(/[()]/g, ""), type: "droite" as const, from, to, color, label, display: { showLabel: true, extend: true },
+  });
+  const COULEURS: Record<string, string> = { "(d1)": "#2563eb", "(d2)": "#059669", "(d3)": "#d97706" };
+  return {
+    kind: "droites",
+    size: { width: 340, height: 320 },
+    lines: [
+      { id: "AB", type: "segment", from: A, to: B },
+      droite(labels.med, { x: M.x, y: 55 }, { x: M.x, y: 95 }, COULEURS[labels.med]),
+      droite(labels.cote, { x: xCote, y: 55 }, { x: xCote, y: 95 }, COULEURS[labels.cote]),
+      droite(labels.penchee, { x: xPenchee(55), y: 55 }, { x: xPenchee(95), y: 95 }, COULEURS[labels.penchee]),
+    ],
+    points: [
+      { x: A.x, y: A.y, label: noms.a },
+      { x: B.x, y: B.y, label: noms.b },
+      { x: M.x, y: M.y, label: noms.m, color: "#ef4444", highlight: true },
+    ],
+    markers: {
+      rightAngles: [
+        { x: M.x, y: A.y, lineA: "AB", lineB: labels.med.replace(/[()]/g, "") },
+        { x: xCote, y: A.y, lineA: "AB", lineB: labels.cote.replace(/[()]/g, "") },
+      ],
+    },
+    display: { showLabels: true, showPoints: true, showRightAngleMarkers: true },
+  };
+}
+function genDefTroisDroites(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const [med, cote, penchee] = shuffle(["(d1)", "(d2)", "(d3)"]);
+  const canvas = figureTroisDroites({ a: E, b: F, m: K }, { med, cote, penchee });
+  const choix = (juste: string) => shuffle(["(d1)", "(d2)", "(d3)"]).filter((x) => x !== juste);
+  const r = `${K} est le milieu de ${s}. ${med} passe par ${K} avec un angle droit : c’est la médiatrice. ${cote} a un angle droit, mais à côté de ${K}. ${penchee} passe par ${K}, mais en biais.`;
+  const mode = pick(["med", "med", "penchee", "cote"] as const);
+  if (mode === "med")
+    return qc(pick([`${K} est le milieu de ${s}. Quelle droite est sa médiatrice ?`, `${K} est le milieu de ${s}. Trouve sa médiatrice.`, `Observe la figure. Quelle droite est la médiatrice de ${s} ?`, `Regarde les marques. Quelle droite est la médiatrice de ${s} ?`, `Choisis la médiatrice de ${s} sur la figure.`]), med, choix(med), r, canvas);
+  if (mode === "penchee")
+    return qc(pick([`Quelle droite coupe ${s} en son milieu, mais en biais ?`, `Quelle droite passe par ${K} sans angle droit ?`]), penchee, choix(penchee), r, canvas);
+  return qc(pick([`Quelle droite est perpendiculaire à ${s}, mais loin du milieu ?`, `Quelle droite fait un angle droit, à côté de ${K} ?`]), cote, choix(cote), r, canvas);
+}
+function genDefNombre(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const canvas = segmentEtDroite({ perpendiculaire: true, parMilieu: true, labelDroite: "(d)", marquerMilieu: true, noms: { a: E, b: F, m: K } });
+  const intros = [`(d) est la médiatrice de ${s}.`, `${s} a pour médiatrice (d).`];
+  if (Math.random() < 0.2)
+    return dg(tient(croise(intros, ["Combien mesure l’angle marqué ?", "Quelle est la mesure de l’angle marqué ?"]), 12), 90, `La médiatrice est perpendiculaire à ${s} : l’angle marqué est droit, il mesure 90°.`, canvas);
+  const demi = randomInt(2, 10);
+  const L = 2 * demi;
+  const verbes = (X: string) => [`Calcule ${X}.`, `Combien mesure ${X} ?`, `Trouve ${X}.`, `Que vaut ${X} ?`];
+  if (Math.random() < 0.6) {
+    const X = pick([`${E}${K}`, `${K}${F}`]);
+    return lg(tient(croise(intros.flatMap((i) => [`${i} ${s} mesure ${L} cm.`, `${i} ${E}${F} = ${L} cm.`]), verbes(X)), 12), demi, "cm", `${K} est le milieu de ${s} : ${X} = ${L} ÷ 2 = ${demi} cm.`, canvas);
+  }
+  const X = pick([`${K}${F}`, `${E}${F}`]);
+  const v = X === `${E}${F}` ? L : demi;
+  return lg(tient(croise(intros.map((i) => `${i} ${E}${K} = ${demi} cm.`), verbes(X)), 12), v, "cm", `${K} est le milieu de ${s}, donc ${K}${F} = ${E}${K} = ${demi} cm et ${E}${F} = ${L} cm.`, canvas);
+}
+function genDefNom(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const juste = `la médiatrice de ${s}`;
+  const faux = [`une parallèle à ${s}`, `le milieu de ${s}`, `le prolongement de ${s}`];
+  const r = DEF_COURTE(s);
+  if (Math.random() < 0.2)
+    return qc(pick(["Combien de conditions doit remplir une médiatrice ?", "Une médiatrice doit remplir combien de conditions ?", "Pour être une médiatrice, combien de conditions faut-il ?"]), "2", ["1", "3", "4"], `Deux conditions : être perpendiculaire au segment, et passer par son milieu.`);
+  const txt = tient(
+    [
+      ...croise([`(d) est perpendiculaire à ${s} en son milieu.`, `(d) coupe ${s} en son milieu, à angle droit.`], ["Comment s’appelle (d) ?", "Que représente (d) ?", `Quel nom donner à (d) ?`]),
+      `Perpendiculaire à ${s} en son milieu : quelle droite est-ce ?`,
+      `Droite perpendiculaire à ${s} par son milieu : comment l’appelle-t-on ?`,
+      `Perpendiculaire à ${s} par son milieu : quel nom porte cette droite ?`,
+    ],
+    12,
+  );
+  return qc(txt, juste, faux, r);
+}
+
+// ----- MEDIATRICE_DEFINITION, ★2
+function genDefLireFigure(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const perp = Math.random() < 0.5;
+  const mil = Math.random() < 0.5;
+  const canvas = segmentEtDroite({ perpendiculaire: perp, parMilieu: mil, labelDroite: "(d)", marquerMilieu: true, noms: { a: E, b: F, m: K } });
+  const mode = pick(["perp", "milieu", "manque", "manque"] as const);
+  if (mode === "perp")
+    return ouiNon(pick([`Sur la figure, (d) est-elle perpendiculaire à ${s} ?`, `(d) fait-elle un angle droit avec ${s} ?`, `Regarde la marque. (d) est-elle perpendiculaire à ${s} ?`]), perp, perp ? "La marque d’angle droit le montre." : "Il n’y a pas de marque d’angle droit : la droite est penchée.", canvas);
+  if (mode === "milieu")
+    return ouiNon(pick([`${K} est le milieu de ${s}. (d) passe-t-elle par ${K} ?`, `${K} est le milieu de ${s}. (d) coupe-t-elle ${s} en ${K} ?`, `Sur la figure, ${K} est le milieu. (d) passe-t-elle par ${K} ?`]), mil, mil ? `(d) coupe ${s} en ${K}, son milieu.` : `(d) coupe ${s} à côté de ${K}.`, canvas);
+  const reps = { rien: "rien : c’est la médiatrice", milieu: `passer par ${K}`, perp: `être perpendiculaire à ${s}`, deux: "les deux conditions" };
+  const juste = perp && mil ? reps.rien : perp ? reps.milieu : mil ? reps.perp : reps.deux;
+  return qc(
+    pick([`${K} est le milieu de ${s}. Que manque-t-il à (d) ?`, `${K} est le milieu. Que manque-t-il à (d) pour être médiatrice ?`, `Pour être médiatrice de ${s}, que manque-t-il à (d) ? ${K} est le milieu.`, `${K} est le milieu de ${s}. Que faut-il encore à (d) ?`]),
+    juste, Object.values(reps).filter((x) => x !== juste),
+    `Il faut un angle droit et passer par le milieu ${K}. Ici : ${perp ? "angle droit oui" : "angle droit non"}, ${mil ? "milieu oui" : "milieu non"}.`, canvas,
+  );
+}
+function genDefMesuresCourtes(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const ang = Math.random() < 0.55 ? 90 : pick([60, 70, 75, 80, 100, 110, 120]);
+  const mil = Math.random() < 0.55;
+  const d = mil
+    ? pick([`(d) coupe ${s} en son milieu, à ${ang}°.`, `(d) coupe ${s} en ${K}, à ${ang}°, avec ${E}${K} = ${K}${F}.`, `À ${ang}°, (d) coupe ${s} en son milieu.`])
+    : pick([`(d) coupe ${s} à ${ang}°, mais pas en son milieu.`, `(d) coupe ${s} à ${ang}°, à côté de son milieu.`, `(d) coupe ${s} à ${ang}°, en ${E}.`]);
+  return ouiNon(
+    tient(croise([d], [`Est-ce la médiatrice de ${s} ?`, `Est-ce sa médiatrice ?`, `(d) est-elle sa médiatrice ?`, `(d) est-elle la médiatrice de ${s} ?`]), 15),
+    ang === 90 && mil,
+    `Il faut un angle de 90° ET le milieu. Ici : ${ang}°, ${mil ? "par le milieu" : "pas par le milieu"}.`,
+  );
+}
+function genDefNombreK(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const intros = [`La médiatrice de ${s} le coupe en ${K}.`, `La médiatrice de ${s} coupe ${s} en ${K}.`, `${s} et sa médiatrice se coupent en ${K}.`];
+  const verbes = (X: string) => [`Calcule ${X}.`, `Combien mesure ${X} ?`, `Trouve ${X}.`, `Que vaut ${X} ?`];
+  const L = randomInt(4, 18);
+  if (Math.random() < 0.6) {
+    const X = pick([`${E}${K}`, `${K}${F}`]);
+    return lg(tient(croise(intros.flatMap((i) => [`${i} ${s} mesure ${L} cm.`, `${i} ${E}${F} = ${L} cm.`]), verbes(X)), 15), L / 2, "cm", `${K} est le milieu de ${s} : ${X} = ${L} ÷ 2 = ${fr(L / 2)} cm.`);
+  }
+  const demi = L / 2;
+  const X = pick([`${K}${F}`, `${E}${F}`]);
+  return lg(tient(croise(intros.map((i) => `${i} ${E}${K} = ${fr(demi)} cm.`), verbes(X)), 15), X === `${E}${F}` ? L : demi, "cm", `${K} est le milieu de ${s}, donc ${K}${F} = ${E}${K} = ${fr(demi)} cm et ${E}${F} = ${L} cm.`);
+}
+function genDefCombien(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const fem = ["une seule", "une infinité", "deux", "aucune"];
+  const mas = ["un seul", "une infinité", "deux", "aucun"];
+  const cas = pick([
+    { t: `Combien de droites passent par le milieu de ${s} ?`, j: "une infinité", c: fem, r: `Par un point, il passe une infinité de droites.` },
+    { t: `Combien de droites sont perpendiculaires à ${s} ?`, j: "une infinité", c: fem, r: `Il y en a une en chaque point de ${s}, et même au-delà.` },
+    { t: `Combien de droites perpendiculaires à ${s} passent par son milieu ?`, j: "une seule", c: fem, r: `C’est la médiatrice de ${s} : elle est unique.` },
+    { t: `Combien de médiatrices a le segment ${s} ?`, j: "une seule", c: fem, r: `${s} a un seul milieu, et une seule perpendiculaire y passe.` },
+    { t: `Combien de droites passent par ${E} et sont perpendiculaires à ${s} ?`, j: "une seule", c: fem, r: `Par un point, il passe une seule perpendiculaire à une droite.` },
+    { t: `Combien de milieux a le segment ${s} ?`, j: "un seul", c: mas, r: `Un segment a un seul milieu.` },
+    { t: `Combien de points de ${s} sont sur sa médiatrice ?`, j: "un seul", c: mas, r: `La médiatrice coupe ${s} en un seul point : son milieu.` },
+    { t: `${s} et sa médiatrice ont combien de points communs ?`, j: "un seul", c: mas, r: `Ils se coupent en un seul point : le milieu de ${s}.` },
+  ]);
+  return qc(cas.t, cas.j, cas.c.filter((x) => x !== cas.j), cas.r);
+}
+function genDefManque(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const r = DEF_COURTE(s);
+  const VRAIES = [`elle passe par le milieu de ${s}`, `elle est perpendiculaire à ${s}`, `elle coupe ${s} à angle droit`, `c’est une droite`];
+  const FAUSSES = [`elle passe par ${E}`, `elle est parallèle à ${s}`, `elle passe par ${F}`, `c’est un segment`, `elle coupe ${s} en biais`];
+  return pick([
+    () => qc(pick([`Une droite passe par le milieu de ${s}. Que lui manque-t-il pour être sa médiatrice ?`, `Une droite passe par le milieu de ${s}. Que faut-il encore pour sa médiatrice ?`]), `être perpendiculaire à ${s}`, [`passer par ${E}`, `être parallèle à ${s}`, "rien"], r),
+    () => qc(pick([`Une droite est perpendiculaire à ${s}. Que lui manque-t-il pour être sa médiatrice ?`, `Une droite est perpendiculaire à ${s}. Que faut-il encore pour sa médiatrice ?`]), `passer par le milieu de ${s}`, [`passer par ${E}`, `être parallèle à ${s}`, "rien"], r),
+    () => ouiNon(`Une droite passe par ${E} et est perpendiculaire à ${s}. Est-ce sa médiatrice ?`, false, r),
+    () => ouiNon(`Une droite passe par le milieu de ${s}, en biais. Est-ce sa médiatrice ?`, false, r),
+    () => ouiNon(`Une droite est perpendiculaire à ${s}, en son milieu. Est-ce sa médiatrice ?`, true, r),
+    () => qc(pick([`Quelle phrase est vraie sur la médiatrice de ${s} ?`, `Coche la phrase vraie sur la médiatrice de ${s}.`]), pick(VRAIES), shuffle(FAUSSES).slice(0, 3), r),
+    () => qc(pick([`Quelle phrase est fausse sur la médiatrice de ${s} ?`, `Coche la phrase fausse sur la médiatrice de ${s}.`, `Trouve l’erreur sur la médiatrice de ${s}.`]), pick(FAUSSES), shuffle(VRAIES).slice(0, 3), r),
+  ])();
+}
+
+// ----- MEDIATRICE_DEFINITION, ★3 : une situation simple
+const BOUTS = ["deux arbres", "deux poteaux", "deux plots", "deux piquets", "deux bornes", "deux lampadaires", "deux maisons", "deux bancs"];
+const TRAITS = ["une rue", "une allée", "une clôture", "une haie", "une ficelle", "une ligne de craie", "une corde", "une barrière"];
+function genDefSituation(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const bout = cap(pick(BOUTS));
+  const trait = pick(TRAITS);
+  const intro = `${bout} sont en ${E} et ${F}.`;
+  const r = DEF_COURTE(s);
+  if (Math.random() < 0.35)
+    return qc(tient(croise([`${intro} ${cap(trait)} coupe ${s} en son milieu, à 90°.`], [`Que représente ${trait.replace(/^une /, "cette ")} pour ${s} ?`, `Que représente-t-elle pour ${s} ?`]), 25), "sa médiatrice", ["son milieu", "une parallèle à ce segment", "son prolongement"], r);
+  const cas = pick([
+    { d: `coupe ${s} en son milieu, à 90°.`, oui: true },
+    { d: `coupe ${s} en son milieu, à ${pick([60, 70, 80, 110, 120])}°.`, oui: false },
+    { d: `coupe ${s} à 90°, à côté de son milieu.`, oui: false },
+  ]);
+  return ouiNon(tient(croise([`${intro} ${cap(trait)} ${cas.d}`], [`Est-ce la médiatrice de ${s} ?`, `Est-ce sa médiatrice ?`, `${cap(trait.replace(/^une /, "cette "))} est-elle la médiatrice de ${s} ?`]), 25), cas.oui, r);
+}
+function genDefSituationCalcul(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const bout = cap(pick(BOUTS));
+  const trait = cap(pick(TRAITS.filter((x) => motsV(x) <= 2)));
+  const L = randomInt(4, 40);
+  const mode = pick(["distance", "distance", "angle", "inverse"] as const);
+  if (mode === "inverse") {
+    const x = randomInt(2, 25);
+    return lg(tient(croise([`${trait} est la médiatrice de ${s}. Elle coupe ${s} à ${x} m de ${E}.`], [`Combien mesure ${E}${F} ?`, `Quelle est la longueur de ${s} ?`, `Calcule ${E}${F}.`]), 25), 2 * x, "m", `Elle coupe ${s} en son milieu : ${E}${F} = 2 × ${x} = ${2 * x} m.`);
+  }
+  const intro = `${bout} sont en ${E} et ${F}, avec ${E}${F} = ${L} m. ${trait} est la médiatrice de ${s}.`;
+  if (mode === "angle") return dg(tient(croise([intro], [`Quel angle fait-elle avec ${s} ?`, `Quel angle, en degrés, fait-elle avec ${s} ?`]), 25), 90, `La médiatrice est perpendiculaire à ${s} : 90°.`);
+  return lg(tient(croise([intro], [`À quelle distance de ${E} coupe-t-elle ${s} ?`, `À combien de ${E} coupe-t-elle ${s} ?`]), 25), L / 2, "m", `Elle coupe ${s} en son milieu : ${L} ÷ 2 = ${fr(L / 2)} m.`);
+}
+
+// ----- MEDIATRICE_PROPRIETE, ★2
+function genPropDeduire(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const [X, Y] = Math.random() < 0.5 ? [E, F] : [F, E];
+  const intros = [`${K} est sur la médiatrice de ${s}.`, `Le point ${K} est sur la médiatrice de ${s}.`, `${K} appartient à la médiatrice de ${s}.`];
+  const r = `Tout point de la médiatrice de ${s} est à égale distance de ${E} et de ${F} : ${K}${E} = ${K}${F}.`;
+  if (Math.random() < 0.35)
+    return lt(tient(croise(intros, [`Quelle longueur est égale à ${K}${X} ?`, `Écris la longueur égale à ${K}${X}.`]), 15), [`${K}${Y}`, `${Y}${K}`], r);
+  return qc(
+    tient(croise(intros, ["Que peut-on en déduire ?", "Quelle égalité est vraie ?", `Que sait-on de ${K}${E} et ${K}${F} ?`]), 15),
+    `${K}${E} = ${K}${F}`, [`${K} est le milieu de ${s}`, `${K}${E} + ${K}${F} = ${E}${F}`, `${K}${E} = ${E}${F}`], r,
+  );
+}
+function genPropReciproqueCourte(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const r = `Si ${K}${E} = ${K}${F}, ${K} est à égale distance de ${E} et de ${F} : il est sur la médiatrice de ${s}.`;
+  if (Math.random() < 0.5) {
+    const a = randomInt(3, 12);
+    const eg = Math.random() < 0.5;
+    const b = eg ? a : a + pick([1, 2, 3]);
+    const [u, v] = Math.random() < 0.5 ? [a, b] : [b, a];
+    return ouiNon(
+      tient(croise([`${K}${E} = ${u} cm et ${K}${F} = ${v} cm.`, `${K}${F} = ${v} cm et ${K}${E} = ${u} cm.`], [`${K} est-il sur la médiatrice de ${s} ?`, `${K} appartient-il à la médiatrice de ${s} ?`, `Le point ${K} est-il sur la médiatrice de ${s} ?`]), 15),
+      eg, eg ? r : `${u} cm et ${v} cm : ${K} n’est pas à égale distance de ${E} et de ${F}.`,
+    );
+  }
+  const juste = `sur la médiatrice de ${s}`;
+  return qc(
+    pick([`${K}${E} = ${K}${F}. Où est ${K} ?`, `${K}${E} = ${K}${F}. Où se trouve le point ${K} ?`, `Que déduis-tu de ${K}${E} = ${K}${F} pour le point ${K} ?`, `${K} est à égale distance de ${E} et ${F}. Où est ${K} ?`, `${K} est aussi près de ${E} que de ${F}. Où est ${K} ?`]),
+    juste, [`au milieu de ${s}`, `sur le segment ${s}`, `sur la droite (${E}${F})`], r,
+  );
+}
+/** La médiatrice (d) de [EF] et des points placés dessus (`sur`) ou à côté, à la hauteur donnée. */
+function figurePoints(E: string, F: string, pts: { label: string; sur: boolean; hauteur: number; traits?: boolean }[]) {
+  const f = segmentEtDroite({ perpendiculaire: true, parMilieu: true, labelDroite: "(d)", noms: { a: E, b: F } });
+  for (const pt of pts) {
+    const x = pt.sur ? M.x : M.x + pick([-70, -45, 45, 70]);
+    f.points?.push({ x, y: pt.hauteur, label: pt.label, color: "#7c3aed", highlight: true });
+    if (pt.traits) f.lines.push({ id: `${pt.label}A`, type: "segment", from: { x, y: pt.hauteur }, to: A, dashed: true, color: "#7c3aed" }, { id: `${pt.label}B`, type: "segment", from: { x, y: pt.hauteur }, to: B, dashed: true, color: "#7c3aed" });
+  }
+  return f;
+}
+function genPropFigure(): Q {
+  const [E, F, K, T] = lettres(4);
+  const s = `[${E}${F}]`;
+  const intros = [`(d) est la médiatrice de ${s}.`, `Sur la figure, (d) est la médiatrice de ${s}.`, `${s} a pour médiatrice (d).`];
+  const mode = pick(["longueur", "egal", "lequel"] as const);
+  if (mode === "longueur") {
+    const v = randomInt(3, 14);
+    const [X, Y] = Math.random() < 0.5 ? [E, F] : [F, E];
+    return lg(tient(croise(intros.map((i) => `${i} ${K}${X} = ${v} cm.`), [`Trouve ${K}${Y}.`, `Calcule ${K}${Y}.`, `Combien mesure ${K}${Y} ?`]), 15), v, "cm", `${K} est sur (d), la médiatrice : ${K}${Y} = ${K}${X} = ${v} cm.`, figurePoints(E, F, [{ label: K, sur: true, hauteur: pick([60, 75, 90]), traits: true }]));
+  }
+  if (mode === "egal") {
+    const sur = Math.random() < 0.5;
+    return ouiNon(
+      tient(croise(intros, [`${K} est-il à égale distance de ${E} et ${F} ?`, `A-t-on ${K}${E} = ${K}${F} ?`, `Regarde ${K}. A-t-on ${K}${E} = ${K}${F} ?`]), 15),
+      sur, sur ? `${K} est sur la médiatrice : ${K}${E} = ${K}${F}.` : `${K} n’est pas sur la médiatrice : il est plus près d’une extrémité.`,
+      figurePoints(E, F, [{ label: K, sur, hauteur: pick([60, 75, 90]), traits: true }]),
+    );
+  }
+  const haut = Math.random() < 0.5;
+  return qc(
+    tient(croise(intros, [`Quel point est à égale distance de ${E} et ${F} ?`, `Quel point est aussi près de ${E} que de ${F} ?`]), 15),
+    K, [T, "aucun des deux"], `${K} est sur la médiatrice : il est à égale distance de ${E} et de ${F}. ${T} n’y est pas.`,
+    figurePoints(E, F, [{ label: K, sur: true, hauteur: haut ? 70 : 285 }, { label: T, sur: false, hauteur: haut ? 270 : 70 }]),
+  );
+}
+function genPropSommeTriangle(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const i = `${K} est sur la médiatrice de ${s}.`;
+  const v = randomInt(3, 14);
+  const r = `${K} est sur la médiatrice de ${s} : ${K}${E} = ${K}${F}.`;
+  return pick([
+    () => lg(`${i} ${K}${E} + ${K}${F} = ${2 * v} cm. ${pick([`Calcule ${K}${E}.`, `Trouve ${K}${F}.`, `Combien mesure ${K}${E} ?`])}`, v, "cm", `${r} Chacune vaut ${2 * v} ÷ 2 = ${v} cm.`),
+    () => lg(`${i} ${K}${E} = ${v} cm. ${pick([`Calcule ${K}${E} + ${K}${F}.`, `Que vaut ${K}${E} + ${K}${F} ?`])}`, 2 * v, "cm", `${r} La somme vaut ${v} + ${v} = ${2 * v} cm.`),
+    () => qc(`${i} ${pick([`Quelle est la nature du triangle ${E}${F}${K} ?`, `Comment est le triangle ${E}${F}${K} ?`])}`, `isocèle en ${K}`, [`isocèle en ${E}`, `isocèle en ${F}`, `rectangle en ${K}`], `${r} Deux côtés égaux partent de ${K}.`),
+    () => qc(`Le triangle ${E}${F}${K} est isocèle en ${K}. ${pick([`Où se trouve ${K} ?`, `Sur quelle droite est ${K} ?`])}`, `sur la médiatrice de ${s}`, [`sur la droite (${E}${F})`, `sur la parallèle à ${s}`, `au milieu de ${s}`], `Isocèle en ${K} : ${K}${E} = ${K}${F}, donc ${K} est sur la médiatrice de ${s}.`),
+  ])();
+}
+function genPropVraiFaux(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const cas = pick([
+    { f: `si ${K}${E} = ${K}${F}, ${K} est sur la médiatrice de ${s}`, v: true },
+    { f: `si ${K} est sur la médiatrice de ${s}, alors ${K}${E} = ${K}${F}`, v: true },
+    { f: `si ${K}${E} = ${K}${F}, ${K} est le milieu de ${s}`, v: false },
+    { f: `si ${K} est sur la médiatrice de ${s}, ${K} est sur ${s}`, v: false },
+    { f: `si ${K} est sur la médiatrice de ${s}, alors ${K}${E} + ${K}${F} = ${E}${F}`, v: false },
+    { f: `le milieu de ${s} est à égale distance de ${E} et ${F}`, v: true },
+    { f: `tout point de la médiatrice de ${s} est sur ${s}`, v: false },
+  ]);
+  return vraiFaux(pick([`Vrai ou faux : ${cas.f}.`, `${cap(cas.f)}. Vrai ou faux ?`]), cas.v, `Être sur la médiatrice de ${s}, c’est être à égale distance de ${E} et de ${F}. Le milieu de ${s} est un de ces points, mais il y en a d’autres, hors du segment.`);
+}
+
+// ----- MEDIATRICE_PROPRIETE, ★5
+function genPropPerimetre(): Q {
+  const [E, F, K, T] = lettres(4);
+  const s = `[${E}${F}]`;
+  const l = pick(LIEUX.filter((x) => x.u === "m" && x.max >= 15));
+  const situation = Math.random() < 0.4;
+  const u = situation ? "m" : "cm";
+  const a = randomInt(5, 14);
+  const mode = pick(["triangle", "triangle", "quadri", "somme"] as const);
+  const intro = situation ? `${cap(l.entre)} sont en ${E} et ${F}. ${cap(l.quoi)} est en ${K}, sur la médiatrice de ${s}.` : `${K} est sur la médiatrice de ${s}.`;
+  if (mode === "triangle") {
+    const b = randomInt(3, 2 * a - 2);
+    const P = 2 * a + b;
+    const [X] = Math.random() < 0.5 ? [E] : [F];
+    return lg(
+      `${intro} ${pick([`Le triangle ${E}${F}${K} a pour périmètre ${P} ${u}.`, `Le périmètre de ${E}${F}${K} est ${P} ${u}.`, `Le tour du triangle ${E}${F}${K} mesure ${P} ${u}.`])} ${E}${F} = ${b} ${u}. ${pick([`Combien mesure ${K}${X} ?`, `Calcule ${K}${X}.`, `Déduis-en ${K}${X}.`])}`,
+      a, u, `${K}${E} = ${K}${F}. Les deux côtés égaux font ${P} − ${b} = ${P - b} ${u}, donc chacun mesure ${P - b} ÷ 2 = ${a} ${u}.`,
+    );
+  }
+  const c = randomInt(5, 14);
+  const deux = `${K} et ${T} sont sur la médiatrice de ${s}, de part et d’autre de ${s}. ${K}${E} = ${a} cm et ${T}${F} = ${c} cm.`;
+  if (mode === "quadri")
+    return lg(`${deux} ${pick([`Quel est le périmètre du quadrilatère ${E}${K}${F}${T} ?`, `Calcule le périmètre de ${E}${K}${F}${T}.`])}`, 2 * (a + c), "cm", `${K}${F} = ${K}${E} = ${a} cm et ${T}${E} = ${T}${F} = ${c} cm. Périmètre : ${a} + ${a} + ${c} + ${c} = ${2 * (a + c)} cm.`);
+  return lg(`${deux} ${pick([`Combien mesure ${K}${F} + ${T}${E} ?`, `Calcule ${K}${F} + ${T}${E}.`])}`, a + c, "cm", `${K}${F} = ${K}${E} = ${a} cm et ${T}${E} = ${T}${F} = ${c} cm. Somme : ${a + c} cm.`);
+}
+function genPropCote(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const l = pick(LIEUX);
+  const a = l.u === "km" ? randomInt(2, 9) : randomInt(3, 15);
+  const b = a + pick([1, 2, 3]);
+  const [dE, dF] = Math.random() < 0.5 ? [a, b] : [b, a];
+  const pres = dE < dF ? E : F;
+  const pourquoi = `${K} n’est pas à égale distance de ${E} et de ${F} : il n’est pas sur la médiatrice. Il est du côté de l’extrémité la plus proche.`;
+  const mode = pick(["cote", "proche", "lieu", "compare"] as const);
+  if (mode === "cote")
+    return qc(
+      `${pick([`Un point ${K} vérifie ${K}${E} = ${dE} cm et ${K}${F} = ${dF} cm.`, `On mesure ${K}${E} = ${dE} cm et ${K}${F} = ${dF} cm.`])} ${pick([`De quel côté de la médiatrice de ${s} se trouve ${K} ?`, `Où est ${K} par rapport à la médiatrice de ${s} ?`])}`,
+      `du côté de ${pres}`, [`du côté de ${pres === E ? F : E}`, `sur la médiatrice de ${s}`, "on ne peut pas savoir"], pourquoi,
+    );
+  if (mode === "proche")
+    return qc(`${K} est à ${dE} cm de ${E} et à ${dF} cm de ${F}. ${pick([`${K} est-il plus près de ${E} ou de ${F} ?`, `De quelle extrémité de ${s} ${K} est-il le plus proche ?`])}`, `de ${pres}`, [`de ${pres === E ? F : E}`, "des deux pareil"], pourquoi);
+  if (mode === "lieu")
+    return qc(`${cap(l.entre)} sont en ${E} et ${F}. ${cap(l.quoi)} est en ${K}, avec ${K}${E} = ${dE} ${l.u} et ${K}${F} = ${dF} ${l.u}. ${pick([`De quel côté de la médiatrice de ${s} est ${K} ?`, `Où est ${K} par rapport à la médiatrice de ${s} ?`])}`, `du côté de ${pres}`, [`du côté de ${pres === E ? F : E}`, `sur la médiatrice de ${s}`, "on ne peut pas savoir"], pourquoi);
+  const cote = pick([E, F]);
+  const autre = cote === E ? F : E;
+  return qc(
+    pick([`${K} est du côté de ${cote} par rapport à la médiatrice de ${s}. Compare ${K}${E} et ${K}${F}.`, `La médiatrice de ${s} coupe le plan en deux parties. ${K} est dans la partie qui contient ${cote}. Quelle phrase est juste ?`]),
+    `${K}${cote} < ${K}${autre}`, [`${K}${cote} > ${K}${autre}`, `${K}${E} = ${K}${F}`, "on ne peut pas savoir"], `Du côté de ${cote}, on est plus près de ${cote} que de ${autre}.`,
+  );
+}
+function genPropTableau(): Q {
+  const [E, F, R, S, T] = lettres(5);
+  const s = `[${E}${F}]`;
+  const mode = pick(["sur", "sur", "pasSur", "combien"] as const);
+  const nbEg = mode === "sur" ? 1 : mode === "pasSur" ? 2 : randomInt(0, 3);
+  const noms = shuffle([R, S, T]);
+  const data = noms.map((n, i) => {
+    const a = randomInt(3, 12);
+    const b = i < nbEg ? a : a + pick([1, 2, 3, 4]);
+    const [u, v] = Math.random() < 0.5 ? [a, b] : [b, a];
+    return { n, eg: i < nbEg, txt: `${n}${E} = ${u} cm et ${n}${F} = ${v} cm.` };
+  });
+  const lignes = shuffle(data).map((d) => d.txt).join(" ");
+  const intro = pick(["", "Voici trois points. ", "On mesure trois points. "]);
+  const r = `Un point est sur la médiatrice de ${s} quand ses distances à ${E} et à ${F} sont égales.`;
+  const ordre = shuffle([R, S, T]);
+  if (mode === "sur") return qc(`${intro}${lignes} ${pick([`Quel point est sur la médiatrice de ${s} ?`, `Quel point appartient à la médiatrice de ${s} ?`])}`, data[0].n, ordre.filter((x) => x !== data[0].n), r);
+  if (mode === "pasSur") return qc(`${intro}${lignes} ${pick([`Quel point n’est PAS sur la médiatrice de ${s} ?`, `Quel point est hors de la médiatrice de ${s} ?`])}`, data[2].n, ordre.filter((x) => x !== data[2].n), r);
+  return nb(`${intro}${lignes} ${pick([`Combien de ces points sont sur la médiatrice de ${s} ?`, `Sur la médiatrice de ${s}, combien de ces points trouve-t-on ?`])}`, nbEg, `${r} Ici : ${nbEg}.`);
+}
+function genPropCercle(): Q {
+  const [E, F, K] = lettres(3);
+  const s = `[${E}${F}]`;
+  const r = randomInt(3, 12);
+  return pick([
+    () => {
+      const juste = `oui : ${K}${E} = ${K}${F}, ce sont deux rayons de même longueur`;
+      return qc(`${pick([`Deux cercles de même rayon, de centres ${E} et ${F}, se coupent en ${K}.`, `Deux cercles de rayon ${r} cm ont pour centres ${E} et ${F}. Ils se coupent en ${K}.`])} ${K} est-il sur la médiatrice de ${s} ?`, juste, [`non : ${K} n’est pas sur ${s}`, `oui : ${K} est le milieu de ${s}`, "on ne peut pas savoir"], `${K} est sur les deux cercles : ${K}${E} et ${K}${F} sont deux rayons égaux, donc ${K} est sur la médiatrice de ${s}.`);
+    },
+    () => {
+      const r2 = r + pick([1, 2, 3]);
+      const juste = `non : ${K}${E} et ${K}${F} sont différentes`;
+      return qc(`${pick([`Le cercle de centre ${E} a pour rayon ${r} cm, celui de centre ${F} a pour rayon ${r2} cm. Ils se coupent en ${K}.`, `Un cercle de centre ${E} et de rayon ${r} cm coupe en ${K} un cercle de centre ${F} et de rayon ${r2} cm.`])} ${K} est-il sur la médiatrice de ${s} ?`, juste, [`oui : ${K} est sur les deux cercles`, `oui : ${K} est le milieu de ${s}`, "on ne peut pas savoir"], `${K}${E} = ${r} cm et ${K}${F} = ${r2} cm : ${K} n’est pas à égale distance de ${E} et de ${F}.`);
+    },
+    () => qc(pick([`Un cercle de centre ${K} passe par ${E} et par ${F}. Où se trouve ${K} ?`, `${E} et ${F} sont sur un cercle de centre ${K}. Sur quelle droite est ${K} ?`]), `sur la médiatrice de ${s}`, [`sur la droite (${E}${F})`, `au milieu de ${s}`, `sur la perpendiculaire à ${s} en ${E}`], `${K}${E} et ${K}${F} sont deux rayons : ${K} est à égale distance de ${E} et de ${F}.`),
+    () => lg(pick([`${E} et ${F} sont sur un cercle de centre ${K} et de rayon ${r} cm. Combien mesure ${K}${E} + ${K}${F} ?`, `Un cercle de centre ${K} et de rayon ${r} cm passe par ${E} et ${F}. Calcule ${K}${E} + ${K}${F}.`]), 2 * r, "cm", `${K}${E} et ${K}${F} sont deux rayons : ${r} + ${r} = ${2 * r} cm.`),
+    () => ouiNon(pick([`${K} est sur la médiatrice de ${s}. Le cercle de centre ${K} passe par ${E}. Passe-t-il par ${F} ?`, `Un cercle de centre ${K} passe par ${E}, et ${K} est sur la médiatrice de ${s}. ${F} est-il sur ce cercle ?`]), true, `${K}${F} = ${K}${E} : ${F} est à la même distance de ${K} que ${E}, il est sur le cercle.`),
+  ])();
+}
+function genPropArgument(): Q {
+  const [E, F, K, G] = lettres(4);
+  const s = `[${E}${F}]`;
+  return pick([
+    () => qc(pick([`Pour prouver que ${K} est sur la médiatrice de ${s}, que suffit-il de montrer ?`, `Quelle égalité prouve que ${K} est sur la médiatrice de ${s} ?`]), `${K}${E} = ${K}${F}`, [`${K}${E} + ${K}${F} = ${E}${F}`, `${K}${E} = ${E}${F}`, `${K}${F} = ${E}${F}`], `Un point à égale distance de ${E} et de ${F} est sur la médiatrice de ${s}.`),
+    () => qc(pick([`Que faut-il mesurer pour savoir si ${K} est sur la médiatrice de ${s} ?`, `Sans tracer la médiatrice de ${s}, que mesurer pour savoir si ${K} y est ?`]), `les distances ${K}${E} et ${K}${F}`, [`la distance ${K}${E} seulement`, `la longueur ${E}${F} seulement`, `la longueur ${E}${F} et la distance ${K}${E}`], `Il suffit de comparer ${K}${E} et ${K}${F}.`),
+    () => qc(pick([`${K} est sur la médiatrice de ${s} et aussi sur le segment ${s}. Que peut-on dire de ${K} ?`, `Le point ${K} est à la fois sur ${s} et sur sa médiatrice. Qui est ${K} ?`]), `${K} est le milieu de ${s}`, [`${K} est en ${E}`, `${K} est en ${F}`, "on ne peut rien dire"], `La médiatrice coupe ${s} en un seul point : son milieu.`),
+    () => qc(pick([`${K} est sur la médiatrice de ${s} et sur celle de [${F}${G}]. Compare ${K}${E} et ${K}${G}.`, `${K} est sur les médiatrices de ${s} et de [${F}${G}]. Que peut-on dire de ${K}${E} et ${K}${G} ?`]), `${K}${E} = ${K}${G}`, [`${K}${E} > ${K}${G}`, `${K}${E} < ${K}${G}`, "on ne peut pas savoir"], `${K}${E} = ${K}${F} et ${K}${F} = ${K}${G}, donc ${K}${E} = ${K}${G}.`),
+    () => qc(pick([`${K} et ${G} sont à égale distance de ${E} et de ${F}. Que représente (${K}${G}) ?`, `${K}${E} = ${K}${F} et ${G}${E} = ${G}${F}. Quelle est la droite (${K}${G}) ?`]), `la médiatrice de ${s}`, [`la parallèle à ${s} passant par ${K}`, `la droite (${E}${F})`, "une droite quelconque"], `${K} et ${G} sont sur la médiatrice de ${s} : par deux points, il ne passe qu’une droite.`),
+  ])();
+}
+
+// ----- MEDIATRICE_CONSTRUIRE, ★2
+function genConsOutils(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const RE = "la règle graduée";
+  const EQ = "l’équerre";
+  const pourquoi = `La règle graduée donne le milieu de ${s}, l’équerre donne l’angle droit, le compas garde le même écartement.`;
+  return pick([
+    () => qc(pick([`Règle graduée ou équerre : quel outil donne le milieu de ${s} ?`, `Pour le milieu de ${s}, prends-tu la règle graduée ou l’équerre ?`]), RE, [EQ], pourquoi),
+    () => qc(pick([`Règle graduée ou équerre : quel outil donne l’angle droit ?`, `Pour l’angle droit, prends-tu la règle graduée ou l’équerre ?`]), EQ, [RE], pourquoi),
+    () => qc(pick([`Pour mesurer ${E}${F}, quel outil prends-tu ?`, `Quel outil mesure la longueur ${E}${F} ?`]), RE, [EQ, "le compas", "le rapporteur"], pourquoi),
+    () => qc(pick([`Quel outil garde le même écartement depuis ${E} et ${F} ?`, `Quel outil trace des arcs depuis ${E} et ${F} ?`]), "le compas", [RE, EQ, "le rapporteur"], pourquoi),
+    () => qc(pick([`Sans compas, quels outils tracent la médiatrice de ${s} ?`, `Sans compas, avec quoi trace-t-on la médiatrice de ${s} ?`]), "la règle graduée et l’équerre", ["la règle graduée seule", "l’équerre seule", "le rapporteur seul"], pourquoi),
+    () => qc(pick([`Au compas, combien de fois change-t-on l’écartement ?`, `Entre ${E} et ${F}, combien de fois change-t-on l’écartement ?`]), "jamais", ["une fois", "deux fois", "à chaque arc"], "On garde le même écartement : les points obtenus sont à égale distance des deux extrémités."),
+  ])();
+}
+function genConsEtapes(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const r = `À l’équerre : le milieu d’abord, puis la perpendiculaire en ce point. Au compas : deux arcs de même écartement depuis ${E} et ${F}, puis on joint les deux points obtenus.`;
+  return pick([
+    () => qc(pick([`À l’équerre, que fait-on en premier pour la médiatrice de ${s} ?`, `Que marque-t-on d’abord pour tracer la médiatrice à l’équerre ?`]), `le milieu de ${s}`, [`un arc depuis ${E}`, `une parallèle à ${s}`, `le point ${E}`], r),
+    () => qc(pick([`Le milieu de ${s} est marqué. Que trace-t-on à l’équerre ?`, `Le milieu de ${s} est placé. Que trace-t-on ensuite ?`]), `la perpendiculaire à ${s} en ce point`, [`la parallèle à ${s} en ce point`, `la perpendiculaire à ${s} en ${E}`, `un cercle de centre ${E}`], r),
+    () => qc(pick([`Au compas, de quels points partent les arcs ?`, `Pour la médiatrice de ${s}, d’où partent les arcs ?`]), `de ${E} et de ${F}`, [`du milieu de ${s}`, `de ${E} seulement`, `de ${F} seulement`], r),
+    () => qc(pick([`Les arcs se coupent en deux points. Que fait-on ensuite ?`, `Deux points sont trouvés au compas. Que fait-on ensuite ?`]), "on joint ces deux points", ["on efface ces deux points", "on change l’écartement", "on trace un cercle"], r),
+    () => qc(pick([`Au compas, que garde-t-on identique depuis ${E} et ${F} ?`, `Que ne change-t-on pas entre l’arc de ${E} et celui de ${F} ?`]), "l’écartement", ["le centre de l’arc", "la position de la pointe"], r),
+    () => qc(pick([`Au compas, combien de points faut-il pour tracer la médiatrice ?`, `Combien de points d’intersection faut-il pour tracer la médiatrice ?`]), "2", ["1", "3", "4"], `Par deux points, il passe une seule droite : la médiatrice de ${s}.`),
+    () => qc(pick([`On joint les deux points d’intersection des arcs. Qu’obtient-on ?`, `Quelle droite joint les deux points d’intersection des arcs ?`]), `la médiatrice de ${s}`, [`une parallèle à ${s}`, `le segment ${s}`, `la perpendiculaire à ${s} en ${E}`], r),
+  ])();
+}
+function genConsMilieuNombre(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const L = randomInt(4, 20);
+  const donnee = pick([`${s} mesure ${L} cm.`, `Le segment ${s} mesure ${L} cm.`]);
+  const X = pick([E, F]);
+  if (Math.random() < 0.65)
+    return lg(
+      `${donnee} ${pick([`À quelle distance de ${X} poser l’équerre ?`, `À combien de ${X} est son milieu ?`, `Où poser l’équerre : à combien de ${X} ?`, `Son milieu est à combien de ${X} ?`])}`,
+      L / 2, "cm", `L’équerre se pose au milieu : ${L} ÷ 2 = ${fr(L / 2)} cm.`,
+    );
+  const x = randomInt(2, 12);
+  return lg(
+    pick([`Le milieu de ${s} est à ${x} cm de ${X}. Combien mesure ${s} ?`, `L’équerre est posée au milieu de ${s}, à ${x} cm de ${X}. Calcule ${E}${F}.`, `Le milieu de ${s} est à ${x} cm de ${X}. Trouve ${E}${F}.`]),
+    2 * x, "cm", `Le segment mesure deux fois ${x} cm : ${2 * x} cm.`,
+  );
+}
+function genConsEcartement(): Q {
+  const [E, F] = lettres(2);
+  const s = `[${E}${F}]`;
+  const L = randomInt(4, 16);
+  const demi = L / 2;
+  const donnee = pick([`${s} mesure ${L} cm.`, `${E}${F} = ${L} cm.`]);
+  const grand = () => Math.floor(demi) + randomInt(1, 3);
+  const petit = () => Math.max(1, Math.ceil(demi) - randomInt(1, 2));
+  const r = `L’écartement doit dépasser la moitié de ${E}${F} : plus de ${L} ÷ 2 = ${fr(demi)} cm.`;
+  return pick([
+    () => {
+      const ok = Math.random() < 0.5;
+      const x = ok ? grand() : petit();
+      return ouiNon(`${donnee} ${pick([`Un écartement de ${x} cm convient-il ?`, `Avec ${x} cm d’écartement, les arcs se coupent-ils ?`, `Peut-on tracer la médiatrice en ouvrant de ${x} cm ?`])}`, ok, r);
+    },
+    () => lg(`${donnee} ${pick(["L’écartement du compas doit dépasser combien ?", "L’écartement du compas doit être plus grand que combien ?", "Quelle longueur l’écartement du compas doit-il dépasser ?"])}`, demi, "cm", r),
+    () => {
+      const x = Math.max(1, Math.ceil(demi) - 1);
+      const bons = [Math.floor(demi) + 1, Math.floor(demi) + 2, Math.floor(demi) + 3];
+      return qc(`${donnee} ${pick(["Quel écartement est trop petit ?", "Quel écartement ne convient pas ?", "Avec quel écartement les arcs ne se coupent-ils pas ?"])}`, `${x} cm`, bons.map((b) => `${b} cm`), r);
+    },
+    () => {
+      const cas = pick([{ t: "vaut la moitié de", n: 1 }, { t: "vaut moins que la moitié de", n: 0 }, { t: "vaut plus que la moitié de", n: 2 }]);
+      return qc(`L’écartement ${cas.t} ${s}. ${pick(["Combien de points communs ont les arcs ?", "Les arcs se coupent combien de fois ?"])}`, String(cas.n), ["0", "1", "2", "3"].filter((x) => x !== String(cas.n)), r);
+    },
+  ])();
+}
+function genConsArcs(): Q {
+  const [E, F, S, T] = lettres(4);
+  const s = `[${E}${F}]`;
+  const x = randomInt(4, 12);
+  const canvas: DroitesCanvasData = {
+    kind: "droites",
+    size: { width: 340, height: 320 },
+    lines: [{ id: "AB", type: "segment", from: A, to: B }],
+    points: [
+      { x: A.x, y: A.y, label: E },
+      { x: B.x, y: B.y, label: F },
+      { x: M.x, y: A.y - 105, label: S, color: "#7c3aed", highlight: true },
+      { x: M.x, y: A.y + 105, label: T, color: "#7c3aed", highlight: true },
+    ],
+    display: { showLabels: true, showPoints: true },
+  };
+  const r = `${S} et ${T} sont à égale distance de ${E} et de ${F} : ils sont sur la médiatrice de ${s}.`;
+  return pick([
+    () => qc(pick([`Les arcs depuis ${E} et ${F} se coupent en ${S} et ${T}. Que représente (${S}${T}) ?`, `Les arcs de même écartement se coupent en ${S} et ${T}. Qu’est-ce que (${S}${T}) ?`]), `la médiatrice de ${s}`, [`une parallèle à ${s}`, `la perpendiculaire à ${s} en ${E}`, `le segment ${s}`], r, canvas),
+    () => qc(pick([`Les arcs se coupent en ${S} et ${T}. Quelle droite faut-il tracer ?`, `Les arcs se coupent en ${S} et ${T}. Quelle droite est la médiatrice ?`]), `(${S}${T})`, [`(${E}${F})`, `(${E}${S})`, `(${F}${T})`], r, canvas),
+    () => {
+      const Y = pick([E, F]);
+      return lg(`${pick([`Écartement de ${x} cm.`, `Compas ouvert de ${x} cm.`])} Les arcs se coupent en ${S}. ${pick([`Combien mesure ${S}${Y} ?`, `Trouve ${S}${Y}.`])}`, x, "cm", `${S} est sur les deux arcs : il est à ${x} cm de ${E} et de ${F}.`, canvas);
+    },
+    () => lg(`${pick([`Écartement de ${x} cm.`, `Compas ouvert de ${x} cm.`])} Les arcs se coupent en ${S}. Calcule ${S}${E} + ${S}${F}.`, 2 * x, "cm", `${S}${E} = ${S}${F} = ${x} cm : la somme vaut ${2 * x} cm.`, canvas),
+    () => lg(pick([`Même écartement depuis ${E} et ${F}. ${S}${E} = ${x} cm. Combien mesure ${S}${F} ?`, `${S} est à ${x} cm de ${E}. Même écartement : à combien de ${F} est-il ?`]), x, "cm", `Le même écartement donne la même distance : ${S}${F} = ${S}${E} = ${x} cm.`, canvas),
+  ])();
+}
+
+const gabarit = (microId: string, id: string, difficulty: number, hint: string, tag: string, generate: () => Q) =>
+  ({ kind: "template", id, niveau: "6e", matiere: "maths", notionId: "mediatrice_segment", microId, difficulty, theme: "neutral", hint, tags: ["mediatrice_segment", tag, "template"], generate }) as TutorBankItemV4;
 
 export const mediatriceBank: TutorBankItemV4[] = [
   // =========================
@@ -1460,4 +2060,37 @@ export const mediatriceBank: TutorBankItemV4[] = [
     tags: ["mediatrice_segment", "defi", "template", "qcm"],
     generate: () => genMedDefiRaisons(),
   },
+
+  // =========================
+  // ⭐ 07/11/2026 — d'autres questions, pour que la phrase ne revienne plus
+  // =========================
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_vrai_faux", 1, "Deux conditions : perpendiculaire au segment, et passer par son milieu.", "definition", () => genDefVraiFaux()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_completer", 1, "Pense à l’angle droit et au milieu.", "definition", () => genDefCompleter()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_trois_droites", 1, "Cherche la marque d’angle droit, puis le milieu.", "definition", () => genDefTroisDroites()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_nombre", 1, "La médiatrice coupe le segment en son milieu, à angle droit.", "definition", () => genDefNombre()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_nom", 1, "Perpendiculaire + par le milieu : quel mot de ce chapitre ?", "definition", () => genDefNom()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_lire_figure", 2, "Regarde la marque d’angle droit, puis le milieu.", "definition", () => genDefLireFigure()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_mesures_courtes", 2, "Il faut 90° ET le milieu.", "definition", () => genDefMesuresCourtes()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_nombre_k", 2, "La médiatrice coupe le segment en son milieu.", "definition", () => genDefNombreK()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_combien", 2, "Un seul milieu, et une seule perpendiculaire en ce point.", "definition", () => genDefCombien()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_manque", 2, "Vérifie les deux conditions, une par une.", "definition", () => genDefManque()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_situation", 3, "Il faut 90° ET le milieu.", "definition", () => genDefSituation()),
+  gabarit("mediatrice_definition", "mediatrice_definition_tpl_situation_calcul", 3, "La médiatrice coupe le segment en son milieu, à angle droit.", "definition", () => genDefSituationCalcul()),
+
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_deduire", 2, "Sur la médiatrice, on est à égale distance des deux extrémités.", "propriete", () => genPropDeduire()),
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_reciproque_courte", 2, "Compare les deux distances.", "propriete", () => genPropReciproqueCourte()),
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_figure", 2, "Un point de (d) est à égale distance des deux extrémités.", "propriete", () => genPropFigure()),
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_somme_triangle", 2, "Les deux distances sont égales.", "propriete", () => genPropSommeTriangle()),
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_vrai_faux", 2, "Être sur la médiatrice, c’est être à égale distance. Pas forcément au milieu.", "propriete", () => genPropVraiFaux()),
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_perimetre", 5, "Remplace une distance par l’autre : elles sont égales.", "propriete", () => genPropPerimetre()),
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_cote", 5, "Compare les deux distances : le point est du côté de la plus petite.", "propriete", () => genPropCote()),
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_tableau", 5, "Pour chaque point, compare ses deux distances.", "propriete", () => genPropTableau()),
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_cercle", 5, "Deux rayons d’un même cercle ont la même longueur.", "propriete", () => genPropCercle()),
+  gabarit("mediatrice_propriete", "mediatrice_propriete_tpl_argument", 5, "Traduis « sur la médiatrice » par une égalité de longueurs.", "propriete", () => genPropArgument()),
+
+  gabarit("mediatrice_construire", "mediatrice_construire_tpl_outils", 2, "Règle graduée : le milieu. Équerre : l’angle droit. Compas : l’écartement.", "construire", () => genConsOutils()),
+  gabarit("mediatrice_construire", "mediatrice_construire_tpl_etapes", 2, "Les deux conditions se construisent l’une après l’autre.", "construire", () => genConsEtapes()),
+  gabarit("mediatrice_construire", "mediatrice_construire_tpl_milieu_nombre", 2, "L’équerre se pose au milieu du segment.", "construire", () => genConsMilieuNombre()),
+  gabarit("mediatrice_construire", "mediatrice_construire_tpl_ecartement", 2, "L’écartement doit dépasser la moitié du segment.", "construire", () => genConsEcartement()),
+  gabarit("mediatrice_construire", "mediatrice_construire_tpl_arcs", 2, "Le même écartement donne la même distance.", "construire", () => genConsArcs()),
 ];

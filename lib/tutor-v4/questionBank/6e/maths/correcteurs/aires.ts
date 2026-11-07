@@ -420,7 +420,737 @@ function corrigerCarreInverse(q: Q): string[] {
   return verifierReponse(q, r, u);
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// ⭐ 07/11/2026 — CORRECTEURS DES GABARITS « À PLUSIEURS FAÇONS » (bank : même
+// section). Même contrat : ils relisent le texte, les propositions et la figure
+// (quadrillage ou côtés écrits), recalculent, et une tournure inconnue est un
+// DÉFAUT, jamais une réponse devinée. Le nombre seul ou l'unité : lireReponse.
+// ═══════════════════════════════════════════════════════════════════════════
+const AL = "dm|cm|m"; // les trois unités de longueur des énoncés nus
+const NBA = NB;
+const inconnue = (q: Q) => [`tournure non reconnue : « ${q.text} »`];
+
+/** La proposition attendue est bien `juste`, et elle est proposée. */
+function estLaJuste(q: Q, juste: string | undefined): string[] {
+  if (juste === undefined) return ["bonne proposition introuvable"];
+  const p: string[] = [];
+  if (q.expected[0] !== juste) p.push(`attendu « ${q.expected[0]} », recalculé « ${juste} »`);
+  if (q.format === "qcm" && !(q.choices ?? []).includes(juste)) p.push(`« ${juste} » n'est pas proposé : ${(q.choices ?? []).join(" | ")}`);
+  return p;
+}
+/** Un nombre sans unité attendu (nombre de carreaux, de rangées, de fois). */
+function verifierNombre(q: Q, v: number): string[] {
+  const r = lireReponse(q.expected[0]);
+  return egal(r.v, v) ? [] : [`attendu « ${q.expected[0]} », recalculé ${v}`];
+}
+/** Vrai/faux ou oui/non, selon les propositions. */
+function verifierVrai(q: Q, vrai: boolean): string[] {
+  const c = q.choices ?? [];
+  const mots = c.includes("oui") ? ["oui", "non"] : ["vrai", "faux"];
+  if (!mots.every((m) => c.includes(m))) return [`propositions inattendues : ${c.join(" | ")}`];
+  return estLaJuste(q, vrai ? mots[0] : mots[1]);
+}
+function sansPrenom(t: string): string[] {
+  return PRENOMS.some((x) => new RegExp(`(^|[^\\p{L}])${x.nom}(?![\\p{L}])`, "u").test(t)) ? ["prénom dans un énoncé nu"] : [];
+}
+/** Pour une proposition du type « 6 × 4 » : sa valeur (× et + seulement, avec une parenthèse). */
+function valeurCalcul(s: string): number | null {
+  const m = s.match(/^(\d+) × \((\d+) \+ (\d+)\)$/);
+  if (m) return Number(m[1]) * (Number(m[2]) + Number(m[3]));
+  const f = s.match(/^(\d+) ([×+]) (\d+)$/);
+  if (f) return f[2] === "×" ? Number(f[1]) * Number(f[3]) : Number(f[1]) + Number(f[3]);
+  return null;
+}
+/** Le QCM de calcul : un seul vaut l'aire, c'est l'attendu, et aucune valeur n'est en double. */
+function verifierCalculs(q: Q, a: number, b: number): string[] {
+  const c = q.choices ?? [];
+  const vals = c.map(valeurCalcul);
+  if (vals.some((v) => v === null)) return [`calcul illisible parmi : ${c.join(" | ")}`];
+  if (new Set(vals).size !== vals.length) return [`deux calculs de même valeur : ${c.join(" | ")}`];
+  const juste = c.find((x) => {
+    const f = x.match(/^(\d+) × (\d+)$/);
+    return f && ((Number(f[1]) === a && Number(f[2]) === b) || (Number(f[1]) === b && Number(f[2]) === a));
+  });
+  return estLaJuste(q, juste);
+}
+
+// ----- Le quadrillage
+type Cel = [number, number];
+const casesFig = (q: Q): Cel[] | null => {
+  const c = q.canvas as { kind?: string; grid?: { filledCells?: Cel[] } } | undefined;
+  return c?.kind === "figure_libre" ? (c.grid?.filledCells ?? []) : null;
+};
+/** Les morceaux d'un seul tenant, de gauche à droite. */
+function morceaux(cs: Cel[]): Cel[][] {
+  const reste = new Map(cs.map((c) => [c.join(","), c] as const));
+  const out: Cel[][] = [];
+  while (reste.size) {
+    const [cle, dep] = [...reste.entries()][0];
+    reste.delete(cle);
+    const bloc: Cel[] = [dep];
+    for (let i = 0; i < bloc.length; i++) {
+      const [r, c] = bloc[i];
+      for (const k of [`${r + 1},${c}`, `${r - 1},${c}`, `${r},${c + 1}`, `${r},${c - 1}`]) {
+        const v = reste.get(k);
+        if (v) {
+          reste.delete(k);
+          bloc.push(v);
+        }
+      }
+    }
+    out.push(bloc);
+  }
+  return out.sort((x, y) => Math.min(...x.map((c) => c[1])) - Math.min(...y.map((c) => c[1])));
+}
+function cadre(cs: Cel[]) {
+  const rs = cs.map((c) => c[0]);
+  const ks = cs.map((c) => c[1]);
+  return { rangees: Math.max(...rs) - Math.min(...rs) + 1, colonnes: Math.max(...ks) - Math.min(...ks) + 1 };
+}
+const estPlein = (cs: Cel[]) => {
+  const { rangees, colonnes } = cadre(cs);
+  return cs.length === rangees * colonnes;
+};
+const unCarreau = (t: string) => t.match(new RegExp(`\\b1 (${AIRE})`))?.[1] ?? null;
+
+// ----- aire_comprendre ★1
+const LIT: Record<string, string> = { cm: "centimètre", dm: "décimètre", m: "mètre" };
+function corrigerComprendreSens(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  let m: RegExpMatchArray | null;
+  // Une unité de…
+  if ((m = t.match(/unité (d’aire|de longueur|de volume)/))) {
+    const ok = (c: string) => (m![1] === "d’aire" ? /²$/.test(c) : m![1] === "de volume" ? /³$/.test(c) : /^(dm|cm|m)$/.test(c));
+    return [...p, ...estLaJuste(q, (q.choices ?? []).filter(ok).length === 1 ? (q.choices ?? []).find(ok) : undefined)];
+  }
+  // Une mesure écrite : quelle grandeur ?
+  if ((m = t.match(new RegExp(`(${NBA}) (${AL})([²³]?)`))) && /Que mesure|mesure quoi|Quelle grandeur|Choisis ce que mesure/.test(t)) {
+    return [...p, ...estLaJuste(q, m[3] === "²" ? "une aire" : m[3] === "³" ? "un volume" : "une longueur")];
+  }
+  if (m && /est-il une aire|Est-ce une aire|est-ce une aire/.test(t)) return [...p, ...verifierVrai(q, m[3] === "²")];
+  // Ce que mesure l'aire ou le périmètre d'une figure.
+  if ((m = t.match(/(aire|périmètre) d’un (carré|rectangle|triangle|losange|hexagone)/i)) && /mesure/.test(t))
+    return [...p, ...estLaJuste(q, /aire/i.test(m[1]) ? "son intérieur" : "son contour")];
+  // « On mesure un volume en cm². Vrai ou faux ? »
+  if (/Vrai ou faux/.test(t)) {
+    const g = t.match(/(une aire|un périmètre|un volume)/i)?.[1].toLowerCase();
+    const u = t.match(new RegExp(`\\b(${AL})([²³]?)(?![a-zà-ÿ])`, "i"));
+    if (!g || !u) return inconnue(q);
+    const juste = g === "une aire" ? "²" : g === "un volume" ? "³" : "";
+    return [...p, ...verifierVrai(q, u[2] === juste)];
+  }
+  // Lire et écrire une unité.
+  if ((m = t.match(new RegExp(`(?:se lit|lit-on|cette unité :) «? ?(${AL})²`)))) return [...p, ...estLaJuste(q, `${LIT[m[1]]} carré`)];
+  if ((m = t.match(/(centimètre|décimètre|mètre) carré/))) {
+    const u = Object.keys(LIT).find((k) => LIT[k] === m![1]);
+    return [...p, ...estLaJuste(q, `${u}²`)];
+  }
+  // 1 cm², le carré de 1 cm de côté.
+  if ((m = t.match(new RegExp(`carré de 1 (${AL}) de côté|Côté 1 (${AL})`)))) return [...p, ...estLaJuste(q, `1 ${m[1] ?? m[2]}²`)];
+  if ((m = t.match(new RegExp(`\\b1 (${AL})²`))) && /côté/.test(t) && !/carreaux/.test(t)) return [...p, ...estLaJuste(q, `1 ${m[1]}`)];
+  // Combien de carreaux de 1 cm² pour couvrir une aire.
+  if (/carreaux/.test(t)) {
+    const a = mesures(t, AIRE).filter((x) => x.v !== 1);
+    if (a.length !== 1 || !unCarreau(t) || unCarreau(t) !== a[0].u) return ["il faut une aire et un carreau de 1 dans la même unité"];
+    return [...p, ...verifierNombre(q, a[0].v)];
+  }
+  return inconnue(q);
+}
+
+// ----- aire_compter
+function corrigerDeuxFigures(q: Q): string[] {
+  const t = q.text;
+  const cs = casesFig(q);
+  if (!cs) return ["il faut un quadrillage"];
+  if (new Set(cs.map((c) => c.join(","))).size !== cs.length) return ["deux cases coloriées au même endroit"];
+  const ms = morceaux(cs);
+  if (ms.length !== 2) return [`il faut deux figures, lu : ${ms.length}`];
+  const [g, d] = [ms[0].length, ms[1].length];
+  const p = sansPrenom(t);
+  if (/[Mm]ême aire/.test(t)) return [...p, ...verifierVrai(q, g === d)];
+  const u = unCarreau(t);
+  if (/aire totale/.test(t)) return u ? [...p, ...verifierReponse(q, g + d, u)] : ["unité du carreau absente"];
+  if (/en tout/.test(t)) return [...p, ...verifierNombre(q, g + d)];
+  const cote = t.match(/figure de (gauche|droite)/)?.[1];
+  if (cote) return u ? [...p, ...verifierReponse(q, cote === "gauche" ? g : d, u)] : ["unité du carreau absente"];
+  if (/écart|différence/.test(t)) return [...p, ...verifierNombre(q, Math.abs(g - d))];
+  const grand = /plus grande|le plus/.test(t);
+  if (!grand && !/plus petite|le moins/.test(t)) return inconnue(q);
+  const c = q.choices ?? [];
+  const juste = g === d ? c.find((x) => /même aire/.test(x)) : (g > d) === grand ? c.find((x) => /gauche/.test(x)) : c.find((x) => /droite/.test(x));
+  return [...p, ...estLaJuste(q, juste)];
+}
+function corrigerCompterFigure(q: Q): string[] {
+  const t = q.text;
+  const cs = casesFig(q);
+  if (!cs) return ["il faut un quadrillage"];
+  if (new Set(cs.map((c) => c.join(","))).size !== cs.length) return ["deux cases coloriées au même endroit"];
+  if (morceaux(cs).length !== 1) return ["la figure n'est pas d'un seul tenant"];
+  const n = cs.length;
+  const p = sansPrenom(t);
+  const u = unCarreau(t);
+  if (u && q.format === "qcm") return [...p, ...verifierQcm(q, n, u), ...verifierReponse(q, n, u)];
+  if (u) return [...p, ...verifierReponse(q, n, u)];
+  if (/carreau|carreaux/.test(t)) return [...p, ...verifierNombre(q, n)];
+  return inconnue(q);
+}
+function corrigerCompterTexte(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  const u = unCarreau(t);
+  if (!u) return ["carreau de 1 absent"];
+  const a = mesures(t, AIRE).filter((x) => !(x.v === 1 && x.u === u));
+  const n = comptes(t);
+  if (a.length === 1) {
+    if (a[0].u !== u) return ["l'aire et le carreau n'ont pas la même unité"];
+    return [...p, ...verifierNombre(q, a[0].v)];
+  }
+  if (a.length) return ["deux aires à couvrir"];
+  if (n.length === 1) return [...p, ...verifierReponse(q, n[0], u)];
+  if (n.length !== 2) return [`il faut un ou deux comptes, lu : ${n.join(", ")}`];
+  let m: RegExpMatchArray | null;
+  if ((m = t.match(/enlève (\d+) carreaux à (\d+) carreaux/))) return [...p, ...verifierReponse(q, Number(m[2]) - Number(m[1]), u)];
+  if (/moins/.test(t)) return [...p, ...verifierReponse(q, n[0] - n[1], u)];
+  if (/plus|ajoute/.test(t)) return [...p, ...verifierReponse(q, n[0] + n[1], u)];
+  return inconnue(q);
+}
+function corrigerCompterRectangle(q: Q): string[] {
+  const t = q.text;
+  const cs = casesFig(q);
+  if (!cs || !estPlein(cs)) return ["il faut un rectangle plein sur quadrillage"];
+  const { rangees, colonnes } = cadre(cs);
+  const p = sansPrenom(t);
+  if (rangees === colonnes) p.push("rangées et colonnes égales : c'est un carré");
+  const u = unCarreau(t);
+  if (u) return [...p, ...verifierReponse(q, cs.length, u)];
+  if (/\bcalcul\b/.test(t)) return [...p, ...verifierCalculs(q, rangees, colonnes)];
+  if (/rangées/.test(t)) return [...p, ...verifierNombre(q, rangees)];
+  if (/rangée/.test(t)) return [...p, ...verifierNombre(q, colonnes)];
+  if (/carreaux/.test(t)) return [...p, ...verifierNombre(q, cs.length)];
+  return inconnue(q);
+}
+function corrigerCompterRangees(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  const cs = casesFig(q);
+  if (cs) {
+    if (!estPlein(cs)) return ["le rectangle du quadrillage n'est pas plein"];
+    const { rangees: r, colonnes: c } = cadre(cs);
+    if (/ajoute une rangée|rangée de plus/.test(t)) return [...p, ...verifierNombre(q, (r + 1) * c)];
+    if (/enlève une rangée|rangée de moins/.test(t)) return [...p, ...verifierNombre(q, (r - 1) * c)];
+    const u = unCarreau(t);
+    return u ? [...p, ...verifierReponse(q, r * c, u)] : inconnue(q);
+  }
+  // « 4 rangées de 5 carreaux » ou « Chaque rangée a 5 carreaux … Il y a 4 rangées ».
+  let m = t.match(/(\d+) rangées de (\d+) carreaux/);
+  if (!m) {
+    const x = t.match(/Chaque rangée a (\d+) carreaux.*Il y a (\d+) rangées/);
+    if (x) m = [x[0], x[2], x[1]] as unknown as RegExpMatchArray;
+  }
+  if (!m) return inconnue(q);
+  const [a, b] = [Number(m[1]), Number(m[2])];
+  if (/\bcalcul\b/.test(t)) return [...p, ...verifierCalculs(q, a, b)];
+  const u = unCarreau(t);
+  if (!u) return ["carreau de 1 absent"];
+  return [...p, ...(q.format === "qcm" ? verifierQcm(q, a * b, u) : []), ...verifierReponse(q, a * b, u)];
+}
+function corrigerCompterValeur(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  let m: RegExpMatchArray | null;
+  const cs = casesFig(q);
+  if (cs) {
+    if ((m = t.match(new RegExp(`carreau vaut (\\d+) (${AIRE})`)))) return [...p, ...verifierReponse(q, cs.length * Number(m[1]), m[2])];
+    return inconnue(q);
+  }
+  if (/demi/.test(t)) {
+    const u = unCarreau(t);
+    if (!u) return ["carreau de 1 absent"];
+    const h = t.match(/(\d+) (?:demis|demi-carreaux)/);
+    if (!h) return inconnue(q);
+    if (Number(h[1]) % 2) return ["un nombre impair de demi-carreaux ne fait pas un compte entier"];
+    const e = t.match(/(\d+) (?:entiers|carreaux entiers|carreaux et)/);
+    return [...p, ...verifierReponse(q, (e ? Number(e[1]) : 0) + Number(h[1]) / 2, u)];
+  }
+  // n carreaux égaux couvrent X : l'aire d'un carreau.
+  const a = mesures(t, AIRE);
+  const n = t.match(/(\d+) carreaux/);
+  if (a.length !== 1 || !n) return inconnue(q);
+  const v = a[0].v / Number(n[1]);
+  if (!Number.isInteger(v)) return [`${a[0].v} ÷ ${n[1]} ne tombe pas juste`];
+  return [...p, ...verifierReponse(q, v, a[0].u)];
+}
+function corrigerCompterManque(q: Q): string[] {
+  const t = q.text;
+  const cs = casesFig(q);
+  if (!cs) return ["il faut un quadrillage"];
+  const p = sansPrenom(t);
+  const n = cs.length;
+  const u = unCarreau(t);
+  let m: RegExpMatchArray | null;
+  if (/rectangle/.test(t)) {
+    const { rangees, colonnes } = cadre(cs);
+    const k = rangees * colonnes - n;
+    if (k < 1) return ["le rectangle est déjà complet"];
+    return u ? [...p, ...verifierReponse(q, k, u)] : [...p, ...verifierNombre(q, k)];
+  }
+  if ((m = t.match(/(ajoute|enlève) (\d+) carreaux/))) {
+    const v = m[1] === "ajoute" ? n + Number(m[2]) : n - Number(m[2]);
+    return u ? [...p, ...verifierReponse(q, v, u)] : [...p, ...verifierNombre(q, v)];
+  }
+  // « pour faire 20 cm² », « Il faut 20 cm² ».
+  const a = mesures(t, AIRE).filter((x) => x.v !== 1);
+  if (a.length === 1 && /manque|ajouter/.test(t)) {
+    if (a[0].v <= n) return ["l'aire visée est déjà atteinte"];
+    return [...p, ...verifierNombre(q, a[0].v - n)];
+  }
+  return inconnue(q);
+}
+
+// ----- aire_rectangle et aire_carre
+/** Les deux côtés d'une figure à côtés écrits (un seul pour un carré). */
+function cotesQuad(q: Q): { L: number; l: number; u: string; carre: boolean } | null {
+  const lab = (q.canvas as { kind?: string; sideLabels?: Record<string, string>; points?: Record<string, { x: number; y: number }> } | undefined);
+  if (lab?.kind !== "quadrilatere" || !lab.sideLabels) return null;
+  const ls = Object.values(lab.sideLabels).flatMap((s) => mesures(s, LONGUEUR));
+  if (!ls.length || ls.length > 2 || new Set(ls.map((x) => x.u)).size !== 1) return null;
+  return { L: ls[0].v, l: ls[1]?.v ?? ls[0].v, u: ls[0].u, carre: ls.length === 1 };
+}
+/** La figure dessinée a la forme annoncée (un carré est carré, un rectangle plus large que haut). */
+function formeDessinee(q: Q, carre: boolean): string[] {
+  const pts = (q.canvas as { points?: Record<string, { x: number; y: number }> } | undefined)?.points;
+  if (!pts) return [];
+  const w = Math.abs(pts.B.x - pts.A.x);
+  const h = Math.abs(pts.C.y - pts.B.y);
+  if (carre && w !== h) return ["carré dessiné non carré"];
+  if (!carre && w <= h) return ["rectangle dessiné plus haut que large"];
+  return [];
+}
+function corrigerQuad(q: Q, carre: boolean): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  const dit = carre ? /carré/ : /rectangle/;
+  // Le quadrillage.
+  const cs = casesFig(q);
+  if (cs) {
+    if (!estPlein(cs)) return ["figure non pleine"];
+    const { rangees: a, colonnes: b } = cadre(cs);
+    if (carre !== (a === b)) return [`figure de ${a} sur ${b} pour un ${carre ? "carré" : "rectangle"}`];
+    if (/\bcalcul\b/.test(t)) return [...p, ...verifierCalculs(q, a, b)];
+    const u2 = unCarreau(t);
+    if (u2) return [...p, ...verifierReponse(q, a * b, u2)];
+    const u = t.match(new RegExp(`1 (${AL}) de côté`))?.[1];
+    if (!u) return inconnue(q);
+    if (/longueur/.test(t)) return [...p, ...verifierReponse(q, Math.max(a, b), u)];
+    if (/largeur/.test(t)) return [...p, ...verifierReponse(q, Math.min(a, b), u)];
+    if (/le côté/.test(t)) return [...p, ...verifierReponse(q, a, u)];
+    return dit.test(t) ? [...p, ...verifierReponse(q, a * b, `${u}²`)] : inconnue(q);
+  }
+  // Les côtés écrits sur la figure.
+  const f = cotesQuad(q);
+  if (q.canvas && !f) return ["figure illisible"];
+  if (f) {
+    if (f.carre !== carre) return ["la figure et le texte ne parlent pas de la même forme"];
+    p.push(...formeDessinee(q, carre));
+    const A = f.L * f.l;
+    const u2 = `${f.u}²`;
+    if (/\bcalcul\b/.test(t)) return [...p, ...verifierCalculs(q, f.L, f.l)];
+    const a = mesures(t, AIRE);
+    if (/Vrai ou faux|Est-ce juste/.test(t)) return a.length === 1 ? [...p, ...(a[0].u === u2 ? [] : ["unité annoncée fausse"]), ...verifierVrai(q, egal(a[0].v, A))] : inconnue(q);
+    if (q.format === "qcm") return [...p, ...verifierQcm(q, A, u2), ...verifierReponse(q, A, u2)];
+    return [...p, ...verifierReponse(q, A, u2)];
+  }
+  // Le texte seul.
+  const ls = mesures(t, LONGUEUR);
+  if (/formule|× …|multiplié par/.test(t)) {
+    if (/formule/.test(t)) return [...p, ...estLaJuste(q, carre ? "côté × côté" : "longueur × largeur")];
+    return [...p, ...estLaJuste(q, carre ? "côté" : "largeur")];
+  }
+  if (/= …/.test(t)) {
+    if (ls.length !== 2 || ls[0].u !== ls[1].u) return ["il faut deux longueurs de même unité"];
+    if (!t.includes(`… ${ls[0].u}²`)) return ["l'unité du résultat n'est pas celle des côtés"];
+    return [...p, ...verifierReponse(q, ls[0].v * ls[1].v, `${ls[0].u}²`)];
+  }
+  if (!ls.length && !mesures(t, AIRE).length) return inconnue(q);
+  if (/\bcalcul\b/.test(t)) {
+    if (ls.length !== (carre ? 1 : 2)) return ["côtés illisibles"];
+    return [...p, ...verifierCalculs(q, ls[0].v, ls[ls.length - 1].v)];
+  }
+  if (/Vrai/.test(t)) {
+    const a = mesures(t, AIRE);
+    if (a.length !== 1 || ls.length !== (carre ? 1 : 2)) return inconnue(q);
+    if (a[0].u !== `${ls[0].u}²`) return ["unité annoncée fausse"];
+    return [...p, ...verifierVrai(q, egal(a[0].v, ls[0].v * ls[ls.length - 1].v))];
+  }
+  return inconnue(q);
+}
+function corrigerRectangleDeuxPas(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  const ls = mesures(t, LONGUEUR);
+  const a = mesures(t, AIRE);
+  let m: RegExpMatchArray | null;
+  const aireDe = (L: number, l: number, u: string) => {
+    const r = [...p, ...verifierReponse(q, L * l, `${u}²`)];
+    if (L === l) r.push("longueur et largeur égales");
+    if (l > L) r.push("la largeur dépasse la longueur");
+    return r;
+  };
+  if (/double|fois plus grande/.test(t)) {
+    if (ls.length !== 1) return inconnue(q);
+    const k = /double/.test(t) ? 2 : Number(t.match(/(\d+) fois plus grande/)?.[1]);
+    return aireDe(ls[0].v * k, ls[0].v, ls[0].u);
+  }
+  if (/de plus/.test(t)) return ls.length === 2 ? aireDe(ls[0].v + ls[1].v, ls[0].v, ls[0].u) : inconnue(q);
+  if (/de moins/.test(t)) return ls.length === 2 ? aireDe(ls[0].v, ls[0].v - ls[1].v, ls[0].u) : inconnue(q);
+  if (/Périmètre|de tour/.test(t)) {
+    if (ls.length !== 2) return inconnue(q);
+    const l = ls[0].v / 2 - ls[1].v;
+    if (l <= 0) return ["le périmètre est trop court pour cette longueur"];
+    return aireDe(ls[1].v, l, ls[0].u);
+  }
+  if (a.length === 1 && ls.length === 1) {
+    const r = a[0].v / ls[0].v;
+    if (!Number.isInteger(r)) return [`${a[0].v} ÷ ${ls[0].v} ne tombe pas juste`];
+    if (a[0].u !== `${ls[0].u}²`) return ["unités non assorties"];
+    const chercheLargeur = /largeur\.$|Largeur \?$/.test(t);
+    if (chercheLargeur === r > ls[0].v) return ["longueur plus petite que la largeur"];
+    return [...p, ...verifierReponse(q, r, ls[0].u)];
+  }
+  if ((m = t.match(/(\d+) rectangles/)) && ls.length === 2) return [...p, ...verifierReponse(q, Number(m[1]) * ls[0].v * ls[1].v, `${ls[0].u}²`)];
+  return inconnue(q);
+}
+function corrigerCarreDeuxPas(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  if (!/carré/i.test(t)) return ["le texte ne dit pas carré"];
+  const ls = mesures(t, LONGUEUR);
+  const a = mesures(t, AIRE);
+  let m: RegExpMatchArray | null;
+  if (a.length === 1 && !ls.length) {
+    const c = Math.sqrt(a[0].v);
+    if (!Number.isInteger(c)) return [`${a[0].v} n'est pas le carré d'un entier`];
+    const u = a[0].u.replace("²", "");
+    return [...p, ...verifierReponse(q, /périmètre|tour/.test(t) ? 4 * c : c, u)];
+  }
+  if (a.length || !ls.length) return inconnue(q);
+  const u2 = `${ls[0].u}²`;
+  if (/périmètre|Périmètre|de tour/.test(t)) {
+    if (ls[0].v % 4) return ["le périmètre n'est pas un multiple de 4"];
+    const c = ls[0].v / 4;
+    return [...p, ...verifierReponse(q, c * c, u2)];
+  }
+  if ((m = t.match(/(\d+) carrés/))) return [...p, ...verifierReponse(q, Number(m[1]) * ls[0].v * ls[0].v, u2)];
+  if (/double/.test(t)) return [...p, ...verifierReponse(q, 4 * ls[0].v * ls[0].v, u2)];
+  if (/gagne/.test(t)) return [...p, ...verifierReponse(q, (ls[0].v + ls[1].v) ** 2, u2)];
+  if (ls.length !== 2) return inconnue(q);
+  const [x, y] = [ls[0].v ** 2, ls[1].v ** 2];
+  if (x === y) return ["deux carrés identiques"];
+  if (/[Éé]cart/.test(t)) return [...p, ...verifierReponse(q, Math.abs(x - y), u2)];
+  if (/totale/.test(t)) return [...p, ...verifierReponse(q, x + y, u2)];
+  return inconnue(q);
+}
+
+// ----- aire_comparer
+const EN_CM2: Record<string, number> = { "cm²": 1, "dm²": 100, "m²": 10000 };
+const SIGNES = ["<", ">", "="];
+function verifierSigne(q: Q): string[] {
+  const a = mesures(q.text, AIRE);
+  if (a.length !== 2) return [`il faut deux aires, lu : ${a.length}`];
+  const [x, y] = [a[0].v * EN_CM2[a[0].u], a[1].v * EN_CM2[a[1].u]];
+  if (!SIGNES.every((s) => (q.choices ?? []).includes(s))) return ["il manque un signe"];
+  return estLaJuste(q, egal(x, y) ? "=" : x < y ? "<" : ">");
+}
+function corrigerComparerSigne(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  const a = mesures(t, AIRE);
+  if (a.length !== 2) return [`il faut deux aires, lu : ${a.length}`];
+  if (a[0].u !== a[1].u) return ["unités différentes à cette étoile"];
+  if ((q.choices ?? []).includes("<")) return [...p, ...verifierSigne(q)];
+  if (/Vrai ou faux/.test(t)) {
+    let vrai: boolean;
+    if (/plus grand que|dépasse| > /.test(t)) vrai = a[0].v > a[1].v;
+    else if (/plus petit que| < /.test(t)) vrai = a[0].v < a[1].v;
+    else return inconnue(q);
+    if (a[0].v === a[1].v) return ["deux aires égales dans un vrai/faux"];
+    return [...p, ...verifierVrai(q, vrai)];
+  }
+  if (/écart|différence|dépasse/.test(t)) return [...p, ...verifierReponse(q, Math.abs(a[0].v - a[1].v), a[0].u)];
+  return inconnue(q);
+}
+function corrigerComparerListe(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  if (/Range ces aires|Classe ces aires/.test(t)) {
+    const c = q.choices ?? [];
+    const croissant = /de la plus petite à la plus grande/.test(t);
+    if (!croissant && !/de la plus grande à la plus petite/.test(t)) return inconnue(q);
+    const lit = (s: string) => mesures(s, AIRE).map((x) => x.v);
+    const u = new Set(c.flatMap((s) => mesures(s, AIRE).map((x) => x.u)));
+    if (u.size !== 1) return ["unités différentes dans le rangement"];
+    const justes = c.filter((s) => lit(s).every((v, i, l) => i === 0 || (croissant ? l[i - 1] < v : l[i - 1] > v)));
+    if (new Set(c.map((s) => [...lit(s)].sort((x, y) => x - y).join())).size !== 1) return ["les propositions ne rangent pas les mêmes aires"];
+    return [...p, ...estLaJuste(q, justes.length === 1 ? justes[0] : undefined)];
+  }
+  const src = q.format === "qcm" ? (q.choices ?? []).join(" ; ") : t;
+  const a = mesures(src, AIRE);
+  if (a.length < 3 && q.format !== "qcm") return [`il faut au moins trois aires, lu : ${a.length}`];
+  if (new Set(a.map((x) => x.u)).size !== 1) return ["unités différentes"];
+  if (new Set(a.map((x) => x.v)).size !== a.length) return ["deux aires égales dans la liste"];
+  const asc = a.map((x) => x.v).sort((x, y) => x - y);
+  let r: number;
+  if (/au milieu/.test(t)) r = asc[1];
+  else if (/plus grande/.test(t)) r = asc[asc.length - 1];
+  else if (/plus petite/.test(t)) r = asc[0];
+  else return inconnue(q);
+  return [...p, ...(q.format === "qcm" ? verifierQcm(q, r, a[0].u) : []), ...verifierReponse(q, r, a[0].u)];
+}
+function corrigerComparerFigures(q: Q): string[] {
+  return corrigerDeuxFigures(q);
+}
+function corrigerComparerSimple(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  const grand = /[Pp]lus grand/.test(t);
+  if (!grand && !/[Pp]lus petit/.test(t)) return inconnue(q);
+  const c = q.choices ?? [];
+  let m: RegExpMatchArray | null;
+  if ((m = t.match(/A : (\d+) carreaux\. (?:Figure )?B : (\d+) carreaux/))) {
+    const [a, b] = [Number(m[1]), Number(m[2])];
+    if (a === b) return ["deux comptes égaux"];
+    return [...p, ...estLaJuste(q, (a > b) === grand ? "la figure A" : "la figure B")];
+  }
+  if (/largeur|Largeurs/.test(t)) {
+    const ls = mesures(t, LONGUEUR);
+    if (ls.length !== 2 || !/Même longueur/.test(t)) return inconnue(q);
+    return [...p, ...estLaJuste(q, `largeur ${grand ? Math.max(ls[0].v, ls[1].v) : Math.min(ls[0].v, ls[1].v)} ${ls[0].u}`)];
+  }
+  // Des carrés : leurs côtés, dans le texte (« côté 3 cm ou 5 cm ») ou dans les propositions.
+  if (/carré/.test(t)) {
+    const vals = c.map((x) => mesures(x, LONGUEUR)[0]);
+    if (vals.some((x) => !x) || new Set(vals.map((x) => x.u)).size !== 1) return [`propositions illisibles : ${c.join(" | ")}`];
+    const lus = mesures(t, LONGUEUR);
+    if (lus.length && lus.length !== vals.length) return ["texte et propositions ne citent pas les mêmes carrés"];
+    if (new Set(vals.map((x) => x.v)).size !== vals.length) return ["deux carrés identiques"];
+    const v = vals.map((x) => x.v);
+    return [...p, ...estLaJuste(q, `côté ${grand ? Math.max(...v) : Math.min(...v)} ${vals[0].u}`)];
+  }
+  return inconnue(q);
+}
+function corrigerComparerCalcule(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  const c = q.choices ?? [];
+  const NBU = `(${NBA}) (${AL})`;
+  const carre = t.match(new RegExp(`[Cc]arré de côté ${NBU}`));
+  const rect = t.match(new RegExp(`[Rr]ectangle de ${NBU} sur ${NBU}`));
+  const grand = /Plus grande/.test(t);
+  if (carre && rect) {
+    const Ac = val(carre[1]) ** 2;
+    const Ar = val(rect[1]) * val(rect[3]);
+    if (carre[2] !== rect[2] || rect[2] !== rect[4]) return ["unités différentes"];
+    if (/Même aire/.test(t)) return [...p, ...verifierVrai(q, Ac === Ar)];
+    if (!grand && !/Plus petite/.test(t)) return inconnue(q);
+    return [...p, ...estLaJuste(q, Ac === Ar ? "la même aire" : (Ac > Ar) === grand ? "le carré" : "le rectangle")];
+  }
+  const A = t.match(new RegExp(`A : ${NBU} sur ${NBU}`));
+  const B = t.match(new RegExp(`B : ${NBU} sur ${NBU}`));
+  if (!A || !B) return inconnue(q);
+  const [x, y] = [val(A[1]) * val(A[3]), val(B[1]) * val(B[3])];
+  if (val(A[1]) === val(B[1]) && val(A[3]) === val(B[3])) return ["deux rectangles identiques"];
+  if (/Même aire/.test(t)) return [...p, ...verifierVrai(q, x === y)];
+  if (/Compare\./.test(t)) return [...p, ...estLaJuste(q, x === y ? "aires égales" : x > y ? "aire de A > aire de B" : "aire de A < aire de B")];
+  if (!grand && !/Plus petite/.test(t)) return inconnue(q);
+  return [...p, ...estLaJuste(q, x === y ? "la même aire" : (x > y) === grand ? "le rectangle A" : "le rectangle B"), ...(c.length === 3 ? [] : ["il faut trois propositions"])];
+}
+function corrigerComparerUnites(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  const a = mesures(t, AIRE);
+  if (a.length !== 2) return [`il faut deux aires, lu : ${a.length}`];
+  if ((q.choices ?? []).includes("<")) return [...p, ...verifierSigne(q)];
+  const [x, y] = [a[0].v * EN_CM2[a[0].u], a[1].v * EN_CM2[a[1].u]];
+  if (egal(x, y)) return ["les deux aires sont égales"];
+  const grand = /plus grande/.test(t);
+  if (!grand && !/plus petite/.test(t)) return inconnue(q);
+  const r = (x > y) === grand ? a[0] : a[1];
+  return [...p, ...verifierReponse(q, r.v, r.u)];
+}
+function corrigerComparerEcart(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  if (/Range ces aires|Classe ces aires|plus grande aire|plus petite aire|plus grande de|plus petite de|plus grande :|plus petite :/.test(t)) return corrigerComparerListe(q);
+  const a = mesures(t, AIRE);
+  let m: RegExpMatchArray | null;
+  if ((m = t.match(/A : (\S+) (cm²|dm²|m²)\. B : (\d+) fois plus (grande|petite)/))) {
+    const r = m[4] === "grande" ? val(m[1]) * Number(m[3]) : val(m[1]) / Number(m[3]);
+    if (!Number.isInteger(r)) return ["le partage ne tombe pas juste"];
+    return [...p, ...verifierReponse(q, r, m[2])];
+  }
+  if (a.length !== 2) return [`il faut deux aires, lu : ${a.length}`];
+  if (a[0].u !== a[1].u) return ["unités différentes"];
+  if (/fois/.test(t)) {
+    const [G, P] = [Math.max(a[0].v, a[1].v), Math.min(a[0].v, a[1].v)];
+    if (!Number.isInteger(G / P)) return [`${G} ÷ ${P} ne tombe pas juste`];
+    return [...p, ...verifierNombre(q, G / P)];
+  }
+  if (/manque|dépasse|différence|Écart/.test(t)) return [...p, ...verifierReponse(q, Math.abs(a[0].v - a[1].v), a[0].u)];
+  return inconnue(q);
+}
+
+// ----- aire_probleme ★2
+function corrigerProblemeNeuf(q: Q): string[] {
+  const t = q.text;
+  const p = sansPrenom(t);
+  const NBU = `(${NBA}) (${AL})`;
+  const a = mesures(t, AIRE);
+  const ls = mesures(t, LONGUEUR);
+  const unites = new Set([...ls.map((x) => x.u), ...a.map((x) => x.u.replace("²", ""))]);
+  if (unites.size > 1) return [`plusieurs unités dans le problème : ${[...unites].join(", ")}`];
+  const u = [...unites][0];
+  if (!u) return inconnue(q);
+  const u2 = `${u}²`;
+  const rect = t.match(new RegExp(`rectangles? de ${NBU} sur ${NBU}`, "i"));
+  const carres = [...t.matchAll(new RegExp(`carrés? de (?:côté )?${NBU}|carrés? de ${NBU} de côté`, "gi"))].map((m) => val(m[1] ?? m[3]));
+  let m: RegExpMatchArray | null;
+  const R = rect ? { L: val(rect[1]), l: val(rect[3]) } : null;
+  if (R && R.L <= R.l) return ["longueur et largeur à l'envers ou égales"];
+  const verifie = (v: number, un = u2) => [...p, ...verifierReponse(q, v, un)];
+
+  // Les carreaux.
+  if (/Combien de carrés de 1|carrés de 1/.test(t)) {
+    if (R) return [...p, ...verifierNombre(q, R.L * R.l)];
+    const c = t.match(new RegExp(`carré de (?:côté )?${NBU}`));
+    return c ? [...p, ...verifierNombre(q, val(c[1]) ** 2)] : inconnue(q);
+  }
+  if (/carreaux?/.test(t)) {
+    if (R) {
+      const k = a[0]?.v;
+      if (a.length !== 1 || (R.L * R.l) % k) return ["le partage en carreaux ne tombe pas juste"];
+      return [...p, ...verifierNombre(q, (R.L * R.l) / k)];
+    }
+    if (a.length !== 2) return inconnue(q);
+    const [G, P] = [Math.max(a[0].v, a[1].v), Math.min(a[0].v, a[1].v)];
+    if (G % P) return ["le partage en carreaux ne tombe pas juste"];
+    return [...p, ...verifierNombre(q, G / P)];
+  }
+  // Modifier un côté.
+  if (R && (m = t.match(/La (longueur|largeur) (double|triple)/))) return verifie((m[2] === "double" ? 2 : 3) * R.L * R.l);
+  if (R && (m = t.match(new RegExp(`ajoute ${NBU} à la (longueur|largeur)`)))) return verifie(m[3] === "longueur" ? (R.L + val(m[1])) * R.l : R.L * (R.l + val(m[1])));
+  if (R && (m = t.match(new RegExp(`(longueur|largeur) gagne ${NBU}`)))) {
+    const k = val(m[2]);
+    if (/gagnée/.test(t)) return verifie(m[1] === "longueur" ? k * R.l : k * R.L);
+    return verifie(m[1] === "longueur" ? (R.L + k) * R.l : R.L * (R.l + k));
+  }
+  if (/Son côté double/.test(t) && carres.length === 1) return verifie(4 * carres[0] ** 2);
+  if ((m = t.match(new RegExp(`gagne ${NBU} de côté`))) && carres.length === 1) return verifie((carres[0] + val(m[1])) ** 2);
+  // Partager.
+  if ((m = t.match(/coupé en (\d+) parts/))) {
+    const tout = R ? R.L * R.l : carres.length === 1 ? carres[0] ** 2 : NaN;
+    const r = tout / Number(m[1]);
+    if (!Number.isInteger(r)) return ["le partage ne tombe pas juste"];
+    return verifie(r);
+  }
+  // Enlever une figure.
+  if (/moins/.test(t)) {
+    if (R && carres.length === 1) {
+      if (carres[0] >= R.l) return ["le carré retiré ne tient pas"];
+      return verifie(R.L * R.l - carres[0] ** 2);
+    }
+    if (carres.length === 2) {
+      if (carres[1] >= carres[0]) return ["le carré retiré ne tient pas"];
+      return verifie(carres[0] ** 2 - carres[1] ** 2);
+    }
+    return inconnue(q);
+  }
+  // Colorier, couvrir : ce qui reste.
+  if (/reste/.test(t)) {
+    if (R && a.length === 1) return a[0].v < R.L * R.l ? verifie(R.L * R.l - a[0].v) : ["la part coloriée dépasse le rectangle"];
+    if (a.length === 2) return a[0].v > a[1].v ? verifie(a[0].v - a[1].v) : ["la part faite dépasse le total"];
+    return inconnue(q);
+  }
+  // Retrouver un côté, un périmètre, une aire.
+  if (/[Pp]érimètre|de tour|son tour/.test(t) && a.length === 1 && /carré/i.test(t)) {
+    const c = Math.sqrt(a[0].v);
+    return Number.isInteger(c) ? verifie(4 * c, u) : [`${a[0].v} n'est pas le carré d'un entier`];
+  }
+  if (/[Pp]érimètre|de tour/.test(t)) {
+    if (/carré/i.test(t) && ls.length === 1) {
+      if (ls[0].v % 4) return ["périmètre non multiple de 4"];
+      return verifie((ls[0].v / 4) ** 2);
+    }
+    if (ls.length === 2) {
+      const autre = ls[0].v / 2 - ls[1].v;
+      if (autre <= 0) return ["périmètre trop court"];
+      return verifie(ls[1].v * autre);
+    }
+    return inconnue(q);
+  }
+  if (a.length === 1 && ls.length === 1) {
+    const r = a[0].v / ls[0].v;
+    return Number.isInteger(r) ? verifie(r, u) : [`${a[0].v} ÷ ${ls[0].v} ne tombe pas juste`];
+  }
+  if (a.length === 1 && /carré/i.test(t) && /côté/.test(t)) {
+    const c = Math.sqrt(a[0].v);
+    return Number.isInteger(c) ? verifie(c, u) : [`${a[0].v} n'est pas le carré d'un entier`];
+  }
+  // Assembler.
+  if (/total|des deux|réunit/i.test(t)) {
+    if (a.length === 2) return verifie(a[0].v + a[1].v);
+    const n = Number(t.match(/\b(\d+) (?:carrés|rectangles)\b/)?.[1] ?? 1);
+    if (R && carres.length === 1) return verifie(R.L * R.l + carres[0] ** 2);
+    if (R) return verifie(n * R.L * R.l);
+    if (carres.length === 1) return verifie(n * carres[0] ** 2);
+    return inconnue(q);
+  }
+  if ((m = t.match(/l’aire de (\d+) (carrés|rectangles)/))) {
+    if (R) return verifie(Number(m[1]) * R.L * R.l);
+    if (carres.length === 1) return verifie(Number(m[1]) * carres[0] ** 2);
+  }
+  return inconnue(q);
+}
+
 export const CORRECTEURS: CorrecteursMaths = {
+  // ⭐ 07/11/2026
+  aire_comprendre_tpl_e1_mesure: corrigerComprendreSens,
+  aire_comprendre_tpl_e1_vrai: corrigerComprendreSens,
+  aire_comprendre_tpl_e1_unite: corrigerComprendreSens,
+  aire_compter_tpl_e1_figure: corrigerCompterFigure,
+  aire_compter_tpl_e1_texte: corrigerCompterTexte,
+  aire_compter_tpl_e1_deux: corrigerDeuxFigures,
+  aire_compter_tpl_e1_rect: corrigerCompterRectangle,
+  aire_compter_tpl_e2_rangees: corrigerCompterRangees,
+  aire_compter_tpl_e2_valeur: corrigerCompterValeur,
+  aire_compter_tpl_e2_manque: corrigerCompterManque,
+  aire_rectangle_tpl_e1_calcul: (q) => corrigerQuad(q, false),
+  aire_rectangle_tpl_e1_lire: (q) => corrigerQuad(q, false),
+  aire_rectangle_tpl_e1_grille: (q) => corrigerQuad(q, false),
+  aire_rectangle_tpl_e2_calcul: (q) => corrigerQuad(q, false),
+  aire_rectangle_tpl_e2_lire: (q) => corrigerQuad(q, false),
+  aire_rectangle_tpl_e2_grille: (q) => corrigerQuad(q, false),
+  aire_rectangle_tpl_e2_deuxpas: corrigerRectangleDeuxPas,
+  aire_carre_tpl_e1_calcul: (q) => corrigerQuad(q, true),
+  aire_carre_tpl_e1_lire: (q) => corrigerQuad(q, true),
+  aire_carre_tpl_e1_grille: (q) => corrigerQuad(q, true),
+  aire_carre_tpl_e2_calcul: (q) => corrigerQuad(q, true),
+  aire_carre_tpl_e2_lire: (q) => corrigerQuad(q, true),
+  aire_carre_tpl_e2_grille: (q) => corrigerQuad(q, true),
+  aire_carre_tpl_e2_deuxpas: corrigerCarreDeuxPas,
+  aire_comparer_tpl_e1_signe: corrigerComparerSigne,
+  aire_comparer_tpl_e1_liste: corrigerComparerListe,
+  aire_comparer_tpl_e1_figures: corrigerComparerFigures,
+  aire_comparer_tpl_e1_simple: corrigerComparerSimple,
+  aire_comparer_tpl_e2_figures: corrigerComparerFigures,
+  aire_comparer_tpl_e2_calcule: corrigerComparerCalcule,
+  aire_comparer_tpl_e2_unites: corrigerComparerUnites,
+  aire_comparer_tpl_e2_ecart: corrigerComparerEcart,
+  aire_probleme_tpl_e2_assembler: corrigerProblemeNeuf,
+  aire_probleme_tpl_e2_reste: corrigerProblemeNeuf,
+  aire_probleme_tpl_e2_retrouver: corrigerProblemeNeuf,
+  aire_probleme_tpl_e2_carreaux: corrigerProblemeNeuf,
+  aire_probleme_tpl_e2_modifier: corrigerProblemeNeuf,
   aire_defi_tpl_e4: corrigerDefiPieges,
   aire_defi_tpl_1: corrigerCoteManquant,
   aire_defi_tpl_2: corrigerCarreInverse,

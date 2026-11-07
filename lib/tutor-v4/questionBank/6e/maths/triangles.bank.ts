@@ -91,6 +91,16 @@ function situation(nom: string, o: Objet, P: Prenom) {
   ]);
 }
 
+/** 07/11/2026 : la même, en 8 mots au plus, pour les énoncés qui dépassaient 25 mots à ★3. */
+function situationCourte(nom: string, o: Objet, P: Prenom) {
+  return pick([
+    `${P.nom} dessine ${o.nom} : triangle ${nom}.`,
+    `${cap(o.nom)} forme le triangle ${nom}.`,
+    `Le triangle ${nom} représente ${o.nom}.`,
+    `${cap(o.nom)} : c’est le triangle ${nom}.`,
+  ]);
+}
+
 /* ⛔⛔ 03/11/2026 — D'ABORD LE GESTE NU (Frédéric, ../REGLES-6E.md) : à ★1 et
    ★2, ni prénom, ni objet (voile, pignon, tissu…), ni histoire — « Dans le
    triangle CMS, Ĉ = 61° et M̂ = 50°. Calcule l'angle en S. », 12 mots au plus
@@ -485,11 +495,11 @@ function genTypeCoteLongueurs(ctx = false): Q {
     };
   const donnees = pick([
     `Ses côtés mesurent ${fr(lAB)} ${u}, ${fr(lBC)} ${u} et ${fr(lCA)} ${u}.`,
-    `On mesure ${lg(A, B)} = ${fr(lAB)} ${u}, ${lg(B, C)} = ${fr(lBC)} ${u} et ${lg(C, A)} = ${fr(lCA)} ${u}.`,
-    `${P.nom} mesure ses côtés : ${fr(lAB)} ${u}, ${fr(lBC)} ${u} et ${fr(lCA)} ${u}.`,
+    `${lg(A, B)} = ${fr(lAB)} ${u}, ${lg(B, C)} = ${fr(lBC)} ${u} et ${lg(C, A)} = ${fr(lCA)} ${u}.`,
+    `Mesures : ${fr(lAB)} ${u}, ${fr(lBC)} ${u} et ${fr(lCA)} ${u}.`,
   ]);
   return {
-    text: `${situation(N, o, P)} ${donnees} ${pick(QUESTION_NATURE)}`,
+    text: `${situationCourte(N, o, P)} ${donnees} ${pick(QUESTION_NATURE)}`,
     format: "qcm",
     choices: shuffle([...NATURES_COTES]),
     expected: [n],
@@ -513,7 +523,7 @@ function genTypeCoteCodages(ctx = false): Q {
   if (Math.random() < 0.5) {
     return {
       text: ctx
-        ? `${situation(N, o, P)} ${pick(["Observe les codages de la figure.", "Regarde les petits traits sur les côtés.", `${P.nom} a codé les côtés de même longueur.`])} ${pick(QUESTION_NATURE)}`
+        ? `${situationCourte(N, o, P)} ${pick(["Observe les codages de la figure.", "Regarde les petits traits sur les côtés.", `${P.nom} a codé les côtés de même longueur.`])} ${pick(QUESTION_NATURE)}`
         : pick([
             `Observe les codages. Le triangle ${N} est-il équilatéral, isocèle ou quelconque ?`,
             `Lis les codages du triangle ${N}. Quelle est sa nature la plus précise ?`,
@@ -558,7 +568,7 @@ function genTypeCoteCodages(ctx = false): Q {
           })()
         : `Ses côtés ont 3 longueurs différentes.`;
   return {
-    text: `${situation(N, o, P)} ${phrase} ${pick(QUESTION_NATURE)}`,
+    text: `${situationCourte(N, o, P)} ${phrase} ${pick(QUESTION_NATURE)}`,
     format: "qcm",
     choices: shuffle([...NATURES_COTES]),
     expected: [n],
@@ -837,28 +847,28 @@ function genDefiReconnaissance(ctx = false): Q {
   let pourquoi: string;
   if (n === "équilatéral") {
     const [a] = longueurs(o, "équilatéral");
-    donnees = `Ses côtés mesurent ${fr(a)} ${u}, ${fr(a)} ${u} et ${fr(a)} ${u}.`;
+    donnees = `Côtés : ${fr(a)} ${u}, ${fr(a)} ${u} et ${fr(a)} ${u}.`;
     pourquoi = "Ses trois côtés sont égaux : il est équilatéral. Ses trois angles mesurent alors 60°, il ne peut pas être rectangle.";
   } else if (n === "rectangle isocèle") {
     const [a] = longueurs(o, "équilatéral");
-    donnees = `Deux de ses côtés mesurent chacun ${fr(a)} ${u}, et l’angle entre eux est droit.`;
+    donnees = `Deux côtés de ${fr(a)} ${u}, avec un angle droit entre eux.`;
     pourquoi = "Il a deux côtés égaux (isocèle) ET un angle droit (rectangle) : c’est un triangle rectangle isocèle.";
   } else if (n === "rectangle") {
     const k = o.u === "m" && o.max <= 10 ? 0.5 : o.u === "cm" && o.max <= 15 ? 0.5 : pick([1, 2, 3]);
     const [a, b, c] = pick(TRIPLETS_DROITS.filter((tr) => tr[2] * k <= o.max * 1.5)).map((x) => x * k);
-    donnees = `Ses côtés mesurent ${fr(a)} ${u}, ${fr(b)} ${u} et ${fr(c)} ${u}. Il a un angle droit.`;
+    donnees = `Côtés : ${fr(a)} ${u}, ${fr(b)} ${u} et ${fr(c)} ${u}. Un angle droit.`;
     pourquoi = "Il a un angle droit, et ses trois côtés sont différents : il est rectangle (mais pas isocèle).";
   } else if (n === "isocèle") {
     const [a, b] = longueurs(o, "isocèle");
-    donnees = `Ses côtés mesurent ${fr(a)} ${u}, ${fr(b)} ${u} et ${fr(a)} ${u}. Il n’a pas d’angle droit.`;
+    donnees = `Côtés : ${fr(a)} ${u}, ${fr(b)} ${u} et ${fr(a)} ${u}. Pas d’angle droit.`;
     pourquoi = "Deux côtés seulement sont égaux, et il n’a pas d’angle droit : il est isocèle.";
   } else {
     const [a, b, c] = longueurs(o, "quelconque");
-    donnees = `Ses côtés mesurent ${fr(a)} ${u}, ${fr(b)} ${u} et ${fr(c)} ${u}. Il n’a pas d’angle droit.`;
+    donnees = `Côtés : ${fr(a)} ${u}, ${fr(b)} ${u} et ${fr(c)} ${u}. Pas d’angle droit.`;
     pourquoi = "Ses trois côtés sont différents, et il n’a pas d’angle droit : il est quelconque.";
   }
   return {
-    text: `${situation(N, o, P)} ${donnees} ${pick(["Quelle est sa nature la plus précise ?", "Choisis le nom le plus précis."])}`,
+    text: `${situationCourte(N, o, P)} ${donnees} ${pick(["Quel mot le décrit le mieux ?", "Choisis le nom le plus précis."])}`,
     format: "qcm",
     choices: quatreDont(n, NATURES_DEFI),
     expected: [n],
@@ -1104,7 +1114,7 @@ function genAngleManquantQcm(ctx = false): Q {
   const pieges = [180 - a, 180 - b, a + b, 90 - Math.min(a, b), rep + 10, rep - 10].filter((x) => x > 0 && x < 180 && x !== rep);
   return {
     ...(ctx
-      ? { text: `${situation(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Combien mesure l’angle en ${cache} ?`, `Trouve l’angle en ${cache}.`])}` }
+      ? { text: `${situationCourte(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Combien mesure l’angle en ${cache} ?`, `Trouve l’angle en ${cache}.`])}` }
       : angleManquantNu(t)),
     format: "qcm",
     choices: shuffle([`${rep}°`, ...shuffle([...new Set(pieges)]).slice(0, 3).map((x) => `${x}°`)]),
@@ -1120,7 +1130,7 @@ function genAngleManquantCourt(ctx = false): Q {
   const b = vals[V];
   return {
     ...(ctx
-      ? { text: `${situation(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Calcule l’angle en ${cache}.`, `Combien mesure l’angle en ${cache} ?`, `Quel est le troisième angle ?`])}` }
+      ? { text: `${situationCourte(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Calcule l’angle en ${cache}.`, `Combien mesure l’angle en ${cache} ?`, `Quel est le troisième angle ?`])}` }
       : angleManquantNu(t)),
     format: "short",
     expected: [`${rep}°`],
@@ -1143,7 +1153,7 @@ function genAngleManquantFigure(): Q {
     const k = (["A", "B", "C"] as const)[noms.indexOf(cache)];
     lab[k] = "?";
     return {
-      text: `${situation(N, o, P)} Observe la figure. ${pick([`Calcule l’angle en ${map[cache]}.`, `Combien mesure l’angle en ${map[cache]} ?`, `Quelle est la mesure de l’angle marqué « ? » ?`])}`,
+      text: `${situationCourte(N, o, P)} Observe la figure. ${pick([`Calcule l’angle en ${map[cache]}.`, `Combien mesure l’angle en ${map[cache]} ?`, `Quelle est la mesure de l’angle marqué « ? » ?`])}`,
       format: "short",
       expected: [`${rep}°`],
       comparator: "number_equal",
@@ -1159,7 +1169,7 @@ function genAngleManquantFigure(): Q {
     const donneSommet = Math.random() < 0.5;
     const pts = pointsParAngles(base, base);
     return {
-      text: `${situation(N, o, P)} Ce triangle est isocèle en ${S}. ${donneSommet ? `L’angle en ${S} mesure ${sommet}°.` : `L’angle en ${U} mesure ${base}°.`} ${donneSommet ? `Combien mesure l’angle en ${U} ?` : `Combien mesure l’angle en ${S} ?`}`,
+      text: `${situationCourte(N, o, P)} Ce triangle est isocèle en ${S}. ${donneSommet ? `L’angle en ${S} mesure ${sommet}°.` : `L’angle en ${U} mesure ${base}°.`} ${donneSommet ? `Combien mesure l’angle en ${U} ?` : `Combien mesure l’angle en ${S} ?`}`,
       format: "short",
       expected: [`${donneSommet ? base : sommet}°`],
       comparator: "number_equal",
@@ -1178,7 +1188,7 @@ function genAngleManquantFigure(): Q {
   const autre = 90 - aigu;
   const [U, V, S] = shuffle([X, Y, Z]);
   return {
-    text: `${situation(N, o, P)} Ce triangle est rectangle en ${S}, et l’angle en ${U} mesure ${aigu}°. ${pick([`Combien mesure l’angle en ${V} ?`, `Calcule l’angle en ${V}.`])}`,
+    text: `${situationCourte(N, o, P)} Ce triangle est rectangle en ${S}, et l’angle en ${U} mesure ${aigu}°. ${pick([`Combien mesure l’angle en ${V} ?`, `Calcule l’angle en ${V}.`])}`,
     format: "short",
     expected: [`${autre}°`],
     comparator: "number_equal",
@@ -1220,7 +1230,7 @@ function questionPossible(m: Materiau, ls: [number, number, number]) {
   const P = prenom();
   const [a, b, c] = ls.map((x) => `${fr(x)} ${m.u}`);
   return pick([
-    `${P.nom} a trois ${m.nom} de ${a}, ${b} et ${c}. Peut-on fabriquer un triangle avec ces trois ${m.nom} ?`,
+    `${P.nom} a trois ${m.nom} de ${a}, ${b} et ${c}. Peut-on en faire un triangle ?`,
     `Avec trois ${m.nom} de ${a}, ${b} et ${c}, ${P.nom} veut construire un triangle. Est-ce possible ?`,
     `Peut-on construire un triangle dont les côtés mesurent ${a}, ${b} et ${c} ?`,
     `${P.nom} veut tracer un triangle de côtés ${a}, ${b} et ${c}. Y arrivera-t-${P.f ? "elle" : "il"} ?`,
@@ -1389,7 +1399,7 @@ function genDefiIsoceleAngles(): Q {
   const mode = pick(["sommet", "base", "equi", "rectIso"] as const);
   if (mode === "equi")
     return {
-      text: `${situation(N, o, P)} Ce triangle est équilatéral. ${pick(["Combien mesure chacun de ses angles ?", `Combien mesure l’angle en ${S} ?`])}`,
+      text: `${situationCourte(N, o, P)} Ce triangle est équilatéral. ${pick(["Combien mesure chacun de ses angles ?", `Combien mesure l’angle en ${S} ?`])}`,
       format: "short",
       expected: ["60°"],
       comparator: "number_equal",
@@ -1397,7 +1407,7 @@ function genDefiIsoceleAngles(): Q {
     };
   if (mode === "rectIso")
     return {
-      text: `${situation(N, o, P)} Ce triangle est rectangle et isocèle en ${S}. Combien mesure l’angle en ${U} ?`,
+      text: `${situationCourte(N, o, P)} Ce triangle est rectangle et isocèle en ${S}. Combien mesure l’angle en ${U} ?`,
       format: "short",
       expected: ["45°"],
       comparator: "number_equal",
@@ -1407,7 +1417,7 @@ function genDefiIsoceleAngles(): Q {
     const sommet = randomInt(20, 150);
     const base = (180 - sommet) / 2;
     return {
-      text: `${situation(N, o, P)} Ce triangle est isocèle en ${S}, et l’angle en ${S} mesure ${sommet}°. Combien mesure l’angle en ${U} ?`,
+      text: `${situationCourte(N, o, P)} Ce triangle est isocèle en ${S}, et l’angle en ${S} mesure ${sommet}°. Combien mesure l’angle en ${U} ?`,
       format: "short",
       expected: [`${fr(base)}°`],
       comparator: "number_equal",
@@ -1416,7 +1426,7 @@ function genDefiIsoceleAngles(): Q {
   }
   const base = randomInt(15, 85);
   return {
-    text: `${situation(N, o, P)} Ce triangle est isocèle en ${S}, et l’angle en ${U} mesure ${base}°. Combien mesure l’angle en ${S} ?`,
+    text: `${situationCourte(N, o, P)} Ce triangle est isocèle en ${S}, et l’angle en ${U} mesure ${base}°. Combien mesure l’angle en ${S} ?`,
     format: "short",
     expected: [`${180 - 2 * base}°`],
     comparator: "number_equal",
@@ -3424,6 +3434,118 @@ function genProprieteMelange(): Q {
   );
 }
 
+// ----- TRIANGLE_PROPRIETE_DEFI, ★1, 07/11/2026 : compléter à 180°, puis raisonner sur la place qui reste.
+function genProprieteComplete(): Q {
+  const { a, b, rep } = deuxAnglesRonds();
+  const mode = pick(["trou", "trou", "soustraction", "verifier"] as const);
+  if (mode === "trou")
+    return court(
+      pick([
+        `Complète : ${a}° + ${b}° + … = 180°.`,
+        `Trouve le nombre caché : ${a}° + ${b}° + … = 180°.`,
+        `${a}° + ${b}° + … = 180°. Écris l’angle qui manque.`,
+        `Quel angle manque : ${a}° + ${b}° + … = 180° ?`,
+        `Écris le nombre caché : ${a}° + … + ${b}° = 180°.`,
+        `Complète : … + ${a}° + ${b}° = 180°.`,
+      ]),
+      `${rep}°`,
+      `${a} + ${b} = ${a + b}. 180 − ${a + b} = ${rep}°.`,
+    );
+  if (mode === "soustraction")
+    return court(
+      pick([`Calcule : 180° − ${a}° − ${b}°.`, `Combien fait 180° − ${a}° − ${b}° ?`, `Trouve l’angle : 180° − ${a}° − ${b}°.`]),
+      `${rep}°`,
+      `180 − ${a} = ${180 - a}, puis ${180 - a} − ${b} = ${rep}°.`,
+    );
+  const juste = Math.random() < 0.5;
+  const c = juste ? rep : rep + pick([-10, 10, 20]);
+  const s = a + b + c;
+  return ouiNon(
+    pick([`${a}° + ${b}° + ${c}° : est-ce 180° ?`, `Additionne ${a}°, ${b}° et ${c}°. Trouves-tu 180° ?`, `Calcule ${a}° + ${b}° + ${c}°. Trouves-tu 180° ?`]),
+    s === 180,
+    `${a} + ${b} + ${c} = ${s}.`,
+  );
+}
+function genProprietePlace(): Q {
+  const mode = pick(["reste", "droit", "obtus", "aigus", "deuxObtus"] as const);
+  if (mode === "reste") {
+    const a = pick([20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]);
+    return court(
+      pick([
+        `Un angle vaut ${a}°. Combien reste-t-il pour les 2 autres ?`,
+        `Un angle mesure ${a}°. Les 2 autres font combien ?`,
+        `Un angle de ${a}° : combien pour les 2 autres ?`,
+        `Un triangle a un angle de ${a}°. Combien font les 2 autres ?`,
+      ]),
+      `${180 - a}°`,
+      `Les trois angles font 180°. 180 − ${a} = ${180 - a}°.`,
+    );
+  }
+  if (mode === "droit") {
+    const a = pick([20, 30, 40, 50, 60, 70, 100, 110, 120, 130]);
+    return ouiNon(
+      pick([`Un triangle a un angle de ${a}°. Peut-il avoir un angle droit ?`, `Un angle mesure ${a}°. Un angle droit est-il encore possible ?`, `Avec un angle de ${a}°, un angle droit est-il possible ?`]),
+      a < 90,
+      `${a} + 90 = ${a + 90}. ${a < 90 ? "On reste sous 180° : il reste de la place." : "On dépasse 180° : c’est impossible."}`,
+    );
+  }
+  if (mode === "obtus") {
+    const a = pick([20, 30, 40, 50, 60, 70, 100, 110, 120, 130]);
+    return ouiNon(
+      // Au-delà de 90° : le triangle a DÉJÀ un angle obtus, on demande donc un AUTRE.
+      a < 90
+        ? pick([`Un triangle a un angle de ${a}°. Peut-il avoir un angle obtus ?`, `Un angle mesure ${a}°. Un angle obtus est-il possible ?`, `Avec un angle de ${a}°, un angle obtus est-il possible ?`])
+        : pick([`Un angle de ${a}° : un autre angle obtus est-il possible ?`, `Un angle mesure ${a}°. Un autre angle obtus est-il possible ?`, `Avec un angle de ${a}°, un autre angle obtus est-il possible ?`]),
+      a < 90,
+      a < 90 ? `Il reste ${180 - a}° : un angle de plus de 90° peut y tenir.` : `${a}° est déjà obtus. Un deuxième angle obtus ferait dépasser 180°.`,
+    );
+  }
+  const a = pick([90, 100, 110, 120, 130, 140, 150]);
+  if (mode === "aigus")
+    return ouiNon(
+      pick([`Un angle mesure ${a}°. Les 2 autres sont-ils aigus ?`, `Un angle de ${a}° : les 2 autres sont-ils aigus ?`]),
+      true,
+      `Il reste ${180 - a}° pour les deux autres : chacun fait moins de 90°.`,
+    );
+  return ouiNon(
+    pick([`Un angle mesure ${a}°. Les 2 autres peuvent-ils être obtus ?`, `Un angle de ${a}° : les 2 autres peuvent-ils être obtus ?`]),
+    false,
+    `Il reste ${180 - a}° pour les deux autres : aucun ne dépasse 90°.`,
+  );
+}
+
+// ----- TRIANGLE_DEFI, ★2, 07/11/2026 : déduire la nature ou une mesure d'une seule information.
+const QUESTION_NOM_PRECIS = ["Quel mot le décrit le mieux ?", "Choisis le nom le plus précis.", "Quel est son nom le plus précis ?", "Quelle est sa nature la plus précise ?", "Trouve son nom le plus précis."];
+function genDefiDeduire(): Q {
+  const mode = pick(["deuxAngles", "isocele", "rectangle", "mesure"] as const);
+  const nature = (debut: string, r: NatureCodee, pourquoi: string) =>
+    qcm(`${debut} ${pick(QUESTION_NOM_PRECIS)}`, r, NATURES_CODEES.filter((x) => x !== r), pourquoi);
+  if (mode === "deuxAngles") {
+    const b = pick([30, 40, 45, 45, 50, 60, 60, 70, 75]);
+    const r: NatureCodee = b === 60 ? "équilatéral" : b === 45 ? "rectangle isocèle" : "isocèle";
+    return nature(`Un triangle a 2 angles de ${b}°.`, r, `Le troisième angle mesure 180 − ${b} − ${b} = ${180 - 2 * b}°. Il est donc ${r}.`);
+  }
+  if (mode === "isocele") {
+    const a = pick([60, 90, 100, 110, 120, 130]);
+    const r: NatureCodee = a === 60 ? "équilatéral" : a === 90 ? "rectangle isocèle" : "isocèle";
+    return nature(
+      `Un triangle isocèle a un angle de ${a}°.`,
+      r,
+      a === 60 ? "Isocèle avec un angle de 60° : les deux autres font aussi 60°, il est équilatéral." : a === 90 ? "Isocèle avec un angle de 90° : c’est un triangle rectangle isocèle." : `Il est isocèle, et aucun angle n’est droit : ${a}° est obtus.`,
+    );
+  }
+  if (mode === "rectangle") {
+    const a = pick([30, 35, 40, 45, 45, 50, 60, 70]);
+    const r: NatureCodee = a === 45 ? "rectangle isocèle" : "rectangle";
+    return nature(`Un triangle rectangle a un angle de ${a}°.`, r, `Le troisième angle mesure 90 − ${a} = ${90 - a}°. ${a === 45 ? "Deux angles égaux : il est aussi isocèle." : "Les trois angles sont différents : il est seulement rectangle."}`);
+  }
+  const cas = pick([
+    { t: pick(["Un triangle a 3 côtés égaux. Combien mesure chaque angle ?", "Un triangle a 3 côtés égaux. Trouve la mesure d’un angle."]), r: "60°", p: "Équilatéral : trois angles égaux, 180 ÷ 3 = 60°." },
+    { t: pick(["Un triangle rectangle a 2 côtés égaux. Combien mesure chaque angle aigu ?", "Un triangle rectangle a 2 côtés égaux. Trouve la mesure d’un angle aigu."]), r: "45°", p: "Les deux angles aigus sont égaux et font 90° à eux deux : 90 ÷ 2 = 45°." },
+  ]);
+  return court(cas.t, cas.r, cas.p);
+}
+
 /** Un gabarit de ces séries : mêmes champs que les autres, le code en moins. */
 function gabarit(
   id: string,
@@ -3506,6 +3628,10 @@ const GABARITS_07_11: TutorBankItemV4[] = [
   gabarit("triangle_propriete_defi_tpl_isocele_nu", P_, "triangle_propriete_defi", 2, "Isocèle : deux angles égaux. Rectangle : un angle de 90°.", ["defi", "angle_mesure"], genProprieteIsocele2),
   gabarit("triangle_propriete_defi_tpl_au_plus", P_, "triangle_propriete_defi", 2, "Deux grands angles feraient déjà 180° ou plus.", ["defi", "angle_mesure"], genProprieteAuPlus),
   gabarit("triangle_propriete_defi_tpl_melange", P_, "triangle_propriete_defi", 2, "Angles : il faut 180°. Côtés : les 2 petits dépassent le grand.", ["defi"], genProprieteMelange),
+
+  gabarit("triangle_propriete_defi_tpl_complete_nu", P_, "triangle_propriete_defi", 1, "Les trois angles font 180° : enlève ce que tu connais.", ["defi", "angle_mesure"], genProprieteComplete),
+  gabarit("triangle_propriete_defi_tpl_place_nue", P_, "triangle_propriete_defi", 1, "Regarde ce qu’il reste de 180° pour les autres angles.", ["defi", "angle_mesure"], genProprietePlace),
+  gabarit("triangle_defi_tpl_deduire", F, "triangle_defi", 2, "Cherche le troisième angle : les trois font 180°.", ["defi", "angle_mesure"], genDefiDeduire),
 ];
 
 export const trianglesBank: TutorBankItemV4[] = [

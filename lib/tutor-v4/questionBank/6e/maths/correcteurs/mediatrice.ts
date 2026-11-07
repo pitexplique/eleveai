@@ -118,8 +118,8 @@ function corrigerMesures(q: Q): string[] {
   if (!s) return ["segment illisible"];
   const [E] = s;
   const L = longueursLues(t)[0]?.v;
-  const x = t.match(new RegExp(`${E}([A-Z]) = (\\d+(?:,\\d+)?) cm, et fait`))?.[2];
-  const ang = t.match(/un angle de (\d+)°/)?.[1];
+  const x = t.match(new RegExp(`avec ${E}([A-Z]) = (\\d+(?:,\\d+)?) cm`))?.[2];
+  const ang = t.match(/[àÀ] (\d+)°/)?.[1];
   if (L === undefined || !x || !ang) return ["longueur, position ou angle illisible"];
   if (num(x) <= 0 || num(x) >= L) p.push(`le point de coupe n’est pas sur le segment (${x} cm sur ${L} cm)`);
   jugerMediatrice(q, num(ang) === 90, egal(num(x), L / 2), p);
@@ -151,7 +151,7 @@ function corrigerDistance(q: Q): string[] {
   const t = q.text;
   decimalesOk(t, p);
   const s = t.match(/médiatrice de \[([A-Z])([A-Z])\]/)?.slice(1, 3);
-  const K = t.match(/\b([A-Z])(?: est)?,? sur la médiatrice/)?.[1];
+  const K = t.match(/\b([A-Z])(?: est)?,? sur la médiatrice/)?.[1] ?? t.match(/\b([A-Z]) appartient à la médiatrice/)?.[1];
   if (!s || !K) return ["segment ou point illisible"];
   const ls = longueursNommees(t);
   const ks = Object.keys(ls);
@@ -159,7 +159,7 @@ function corrigerDistance(q: Q): string[] {
   if (!plausible(ls[ks[0]])) p.push("distance peu plausible");
   const Y = s.find((x) => x !== ks[0][1])!;
   const fin = t.split(/(?<=[.?]) /).pop() ?? "";
-  if (!fin.includes(`${K}${Y}`) && !fin.includes(`de ${Y} se trouve`)) p.push(`on ne demande pas la distance ${K}${Y}`);
+  if (!fin.includes(`${K}${Y}`) && !fin.includes(`de ${Y} est`)) p.push(`on ne demande pas la distance ${K}${Y}`);
   verifierMesure(q, ls[ks[0]].v, ls[ks[0]].u, p);
   return p;
 }
@@ -173,12 +173,13 @@ function corrigerTrajet(q: Q): string[] {
   const ls = longueursNommees(t);
   const base = ls[E + F];
   const kE = Object.entries(ls).find(([k]) => k !== E + F && k[1] === E);
-  if (!base || !kE) return ["longueurs illisibles"];
+  if (!kE) return ["longueurs illisibles"];
   const a = kE[1].v;
-  if (kE[1].u !== base.u) p.push("unités différentes");
-  if (!(a > base.v / 2)) p.push(`${kE[0]} = ${a} trop court : le point serait sur le segment ou n’existerait pas`);
-  if (/va de .* puis de/.test(t)) verifierMesure(q, Math.round(2 * a * 100) / 100, base.u, p);
-  else if (/périmètre du triangle/.test(t)) verifierMesure(q, Math.round((2 * a + base.v) * 100) / 100, base.u, p);
+  // Le trajet (07/11/2026) n'a plus besoin de EF ; s'il est écrit, il doit tenir.
+  if (base && kE[1].u !== base.u) p.push("unités différentes");
+  if (base && !(a > base.v / 2)) p.push(`${kE[0]} = ${a} trop court : le point serait sur le segment ou n’existerait pas`);
+  if (/va de .* puis à/.test(t)) verifierMesure(q, Math.round(2 * a * 100) / 100, kE[1].u, p);
+  else if (base && /périmètre (?:du triangle|de [A-Z]{3})/.test(t)) verifierMesure(q, Math.round((2 * a + base.v) * 100) / 100, base.u, p);
   else p.push("question non reconnue");
   return p;
 }
@@ -197,9 +198,9 @@ function corrigerSens(q: Q): string[] {
   const t = q.text;
   let juste: (c: string) => boolean;
   if (/donc [A-Z] est le milieu/.test(t)) juste = (c) => /seulement sur la médiatrice/.test(c);
-  else if (/On sait que ([A-Z]{2}) = ([A-Z]{2})\. Que peut-on en déduire/.test(t)) juste = (c) => /est sur la médiatrice/.test(c);
-  else if (/est sur la médiatrice de .*\. Que peut-on en déduire/.test(t)) juste = (c) => /^([A-Z])([A-Z]) = \1([A-Z])$/.test(c);
-  else if (/n’est PAS sur la médiatrice/.test(t)) juste = (c) => c === "elles sont différentes";
+  else if (/([A-Z]{2}) = ([A-Z]{2})\. Que peut-(?:on|il|elle) en déduire/.test(t)) juste = (c) => /est sur la médiatrice/.test(c);
+  else if (/(?:est sur|sur) la médiatrice de .*\. (?:Que peut-on en déduire|Quelle égalité est sûre)/.test(t)) juste = (c) => /^([A-Z])([A-Z]) = \1([A-Z])$/.test(c);
+  else if (/n’est PAS sur la médiatrice|hors de la médiatrice/.test(t)) juste = (c) => c === "elles sont différentes";
   else return ["question non reconnue"];
   uneSeuleJuste(q, juste, p);
   return p;
@@ -214,7 +215,7 @@ function corrigerCompas(q: Q): string[] {
     uneSeuleJuste(q, (c) => /^la médiatrice de/.test(c), p);
     return p;
   }
-  const L = t.match(/mesure (\d+(?:,\d+)?) cm/)?.[1];
+  const L = t.match(/(?:mesure|[A-Z]{2} =) (\d+(?:,\d+)?) cm/)?.[1];
   if (!L) return ["longueur illisible"];
   uneSeuleJuste(
     q,
@@ -334,7 +335,594 @@ function corrigerDefiRaisons(q: Q): string[] {
   return p;
 }
 
+// =====================================================================
+// ⭐ 07/11/2026 — les gabarits « d'autres questions » (voir mediatrice.bank.ts).
+// Chacun reconnaît sa tournure ; une tournure inconnue est un défaut.
+
+/** Vérifie la réponse d'un oui/non ou vrai/faux : la seule proposition juste. */
+const reponseBool = (q: Q, v: boolean, p: string[], oui = "oui", non = "non") => uneSeuleJuste(q, (c) => c === (v ? oui : non), p);
+const egalTexte = (q: Q, attendu: string, p: string[]) => uneSeuleJuste(q, (c) => c === attendu, p);
+
+// ----- DEFINITION ★1
+function corrigerDefVraiFaux(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  let v: boolean;
+  if (/passe par son milieu|est perpendiculaire à \[|coupe \[..\] en son milieu|coupe \[..\] à angle droit|est une droite/.test(t)) v = true;
+  else if (/est parallèle à \[|passe par le point [A-Z]|est un segment|coupe \[..\] en biais/.test(t)) v = false;
+  else return ["affirmation non reconnue"];
+  reponseBool(q, v, p, "vrai", "faux");
+  return p;
+}
+function corrigerDefCompleter(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  if (/est … à \[/.test(t)) egalTexte(q, "perpendiculaire", p);
+  else if (/passe par son …/.test(t)) egalTexte(q, "milieu", p);
+  else if (/est une …/.test(t)) egalTexte(q, "droite", p);
+  else if (/degrés/.test(t)) verifierMesure(q, 90, "°", p);
+  else if (/sorte d’angle|forme quel angle/.test(t)) egalTexte(q, "un angle droit", p);
+  else if (/Par quel point de|Quel point de/.test(t)) egalTexte(q, "son milieu", p);
+  else return ["question non reconnue"];
+  return p;
+}
+/** Les droites (d1), (d2), (d3) de la figure : perpendiculaire à [EF] ? par son milieu ? */
+function lireTroisDroites(q: Q, E: string, F: string, p: string[]) {
+  const f = q.canvas && q.canvas.kind === "droites" ? (q.canvas as DroitesCanvasData) : null;
+  if (!f) return null;
+  const e = f.points?.find((x) => x.label === E);
+  const ff = f.points?.find((x) => x.label === F);
+  if (!e || !ff) {
+    p.push(`figure sans les points ${E} et ${F}`);
+    return null;
+  }
+  const marques = f.markers?.rightAngles ?? [];
+  return f.lines
+    .filter((l) => /^\(d\d\)$/.test(l.label ?? ""))
+    .map((l) => {
+      const a = l.from as Pt;
+      const b = l.to as Pt;
+      const [ux, uy, vx, vy] = [b.x - a.x, b.y - a.y, ff.x - e.x, ff.y - e.y];
+      const perp = Math.abs(ux * vx + uy * vy) / (Math.hypot(ux, uy) * Math.hypot(vx, vy)) < 0.02;
+      const mil = Math.abs(ux * ((e.y + ff.y) / 2 - a.y) - uy * ((e.x + ff.x) / 2 - a.x)) / Math.hypot(ux, uy) < 1.5;
+      if (perp !== marques.some((m) => m.lineB === l.id)) p.push(`figure : marque d’angle droit fausse sur ${l.label}`);
+      return { label: l.label!, perp, mil };
+    });
+}
+function corrigerDefTroisDroites(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const s = segmentDe(t) ?? (() => {
+    // « Quelle droite passe par K sans angle droit ? » : le segment se lit sur la figure.
+    const f = q.canvas as DroitesCanvasData | undefined;
+    const pts = f?.points ?? [];
+    return pts.length >= 2 ? [pts[0].label ?? "", pts[1].label ?? ""] : null;
+  })();
+  if (!s) return ["segment illisible"];
+  const K = (q.canvas as DroitesCanvasData | undefined)?.points?.[2];
+  const nomK = t.match(/\b([A-Z]) est le milieu/)?.[1] ?? t.match(/par ([A-Z]) sans|à côté de ([A-Z])/)?.slice(1).find(Boolean);
+  if (nomK && K?.label !== nomK) p.push(`figure : le milieu s’appelle ${K?.label}, pas ${nomK}`);
+  const ds = lireTroisDroites(q, s[0], s[1], p);
+  if (!ds || ds.length !== 3) return [...p, "figure illisible"];
+  let cherche: (d: { perp: boolean; mil: boolean }) => boolean;
+  if (/médiatrice/.test(t)) cherche = (d) => d.perp && d.mil;
+  else if (/en biais|sans angle droit/.test(t)) cherche = (d) => !d.perp && d.mil;
+  else if (/loin du milieu|à côté de/.test(t)) cherche = (d) => d.perp && !d.mil;
+  else return ["question non reconnue"];
+  const justes = ds.filter(cherche);
+  if (justes.length !== 1) return [...p, `${justes.length} droite(s) conviennent`];
+  egalTexte(q, justes[0].label, p);
+  return p;
+}
+/** « (d) est la médiatrice de [EF]. EF = 10 cm. Calcule EK » : le milieu, dans les deux sens. */
+function corrigerNombreMilieu(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  decimalesOk(t, p);
+  const s = segmentDe(t);
+  if (!s) return ["segment illisible"];
+  const [E, F] = s;
+  if (q.canvas) {
+    const lu = lireDroites(q, E, F, p);
+    if (!lu || !lu.perp || !lu.parMilieu) p.push("figure : (d) n’est pas la médiatrice");
+  }
+  if (/angle marqué/.test(t)) {
+    verifierMesure(q, 90, "°", p);
+    return p;
+  }
+  const estEF = (x: string) => x === E + F || x === F + E;
+  const seg = t.match(/\[[A-Z]{2}\] mesure (\d+(?:,\d+)?) cm/)?.[1];
+  const ls = longueursNommees(t);
+  const donnees = Object.entries(ls);
+  const fin = t.split(/(?<=[.?]) /).pop() ?? "";
+  const cible = fin.match(/\b([A-Z]{2})\b/)?.[1];
+  if (!cible) return [...p, "longueur demandée illisible"];
+  let L: number;
+  if (seg) L = num(seg);
+  else if (donnees.length === 1) L = estEF(donnees[0][0]) ? donnees[0][1].v : 2 * donnees[0][1].v;
+  else return [...p, "donnée illisible"];
+  if (!estEF(cible) && !cible.includes(E) && !cible.includes(F)) p.push(`${cible} n’est pas une moitié de [${E}${F}]`);
+  verifierMesure(q, estEF(cible) ? L : L / 2, "cm", p);
+  return p;
+}
+function corrigerDefNom(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  if (/conditions/.test(t)) {
+    egalTexte(q, "2", p);
+    return p;
+  }
+  const s = segmentDe(t);
+  if (!s) return ["segment illisible"];
+  if (/perpendiculaire à \[..\] (?:en|par) son milieu|coupe \[..\] en son milieu, à angle droit/i.test(t)) egalTexte(q, `la médiatrice de [${s[0]}${s[1]}]`, p);
+  else return ["description non reconnue"];
+  return p;
+}
+
+// ----- DEFINITION ★2
+function corrigerDefLireFigure(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const s = segmentDe(t);
+  const f = q.canvas as DroitesCanvasData | undefined;
+  const E = s?.[0] ?? f?.points?.[0]?.label;
+  const F = s?.[1] ?? f?.points?.[1]?.label;
+  if (!E || !F) return ["segment illisible"];
+  const lu = lireDroites(q, E, F, p);
+  if (!lu) return [...p, "figure illisible"];
+  const K = t.match(/\b([A-Z]) est le milieu/)?.[1];
+  if (K) {
+    const m = lu.pt(K);
+    const [e, ff] = [lu.pt(E)!, lu.pt(F)!];
+    if (!m || Math.abs(m.x - (e.x + ff.x) / 2) > 1 || Math.abs(m.y - (e.y + ff.y) / 2) > 1) p.push(`figure : ${K} n’est pas au milieu`);
+  }
+  if (/manque-t-il|encore à/.test(t)) {
+    uneSeuleJuste(
+      q,
+      (c) => {
+        if (/^rien/.test(c)) return lu.perp && lu.parMilieu;
+        if (/^passer par/.test(c)) return lu.perp && !lu.parMilieu;
+        if (/^être perpendiculaire/.test(c)) return !lu.perp && lu.parMilieu;
+        if (/^les deux/.test(c)) return !lu.perp && !lu.parMilieu;
+        return false;
+      },
+      p,
+    );
+  } else if (/perpendiculaire à|angle droit avec/.test(t)) reponseBool(q, lu.perp, p);
+  else if (/passe-t-elle par|coupe-t-elle/.test(t)) reponseBool(q, lu.parMilieu, p);
+  else return [...p, "question non reconnue"];
+  return p;
+}
+/** Une droite décrite par son angle et sa position : est-ce la médiatrice ? */
+function milieuDecrit(t: string): boolean | null {
+  if (/pas en son milieu|à côté de son milieu|, en [A-Z]\./.test(t)) return false;
+  if (/en son milieu/.test(t)) return true;
+  const eg = t.match(/en ([A-Z]), à \d+°, avec ([A-Z])([A-Z]) = ([A-Z])([A-Z])/);
+  if (eg && eg[3] === eg[1] && eg[4] === eg[1] && eg[2] !== eg[5]) return true;
+  return null;
+}
+function corrigerDefMesuresCourtes(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const ang = t.match(/[àÀ] (\d+)°/)?.[1];
+  const mil = milieuDecrit(t);
+  if (!ang || mil === null) return ["angle ou position illisible"];
+  reponseBool(q, num(ang) === 90 && mil, p);
+  return p;
+}
+function corrigerDefCombien(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  let a: string;
+  if (/droites passent par le milieu de|droites sont perpendiculaires à/.test(t)) a = "une infinité";
+  else if (/droites perpendiculaires à \[..\] passent par son milieu|médiatrices a|droites passent par [A-Z] et sont perpendiculaires/.test(t)) a = "une seule";
+  else if (/milieux a|points de \[..\] sont sur sa médiatrice|points communs/.test(t)) a = "un seul";
+  else return ["question non reconnue"];
+  egalTexte(q, a, p);
+  return p;
+}
+const defVraie = (c: string): boolean | null => {
+  if (/^elle passe par le milieu|^elle est perpendiculaire|^elle coupe \[..\] à angle droit|^c’est une droite/.test(c)) return true;
+  if (/^elle passe par [A-Z]$|^elle est parallèle|^c’est un segment|^elle coupe \[..\] en biais/.test(c)) return false;
+  return null;
+};
+function corrigerDefManque(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  if (/Une droite passe par le milieu de \[..\]\. Que/.test(t)) uneSeuleJuste(q, (c) => /^être perpendiculaire/.test(c), p);
+  else if (/Une droite est perpendiculaire à \[..\]\. Que/.test(t)) uneSeuleJuste(q, (c) => /^passer par le milieu/.test(c), p);
+  else if (/passe par [A-Z] et est perpendiculaire|en biais\. Est-ce/.test(t)) reponseBool(q, false, p);
+  else if (/est perpendiculaire à \[..\], en son milieu\. Est-ce/.test(t)) reponseBool(q, true, p);
+  else if (/phrase (?:est )?vraie/.test(t)) uneSeuleJuste(q, (c) => defVraie(c) === true, p);
+  else if (/phrase (?:est )?fausse|Trouve l’erreur/.test(t)) uneSeuleJuste(q, (c) => defVraie(c) === false, p);
+  else return ["question non reconnue"];
+  if (/phrase|erreur/.test(t) && (q.choices ?? []).some((c) => defVraie(c) === null)) p.push("proposition non reconnue");
+  return p;
+}
+
+// ----- DEFINITION ★3
+function corrigerDefSituation(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const ang = t.match(/à (\d+)°/)?.[1];
+  const mil = milieuDecrit(t);
+  if (!ang || mil === null) return ["angle ou position illisible"];
+  const est = num(ang) === 90 && mil;
+  if (/Que représente/.test(t)) {
+    if (!est) p.push("on demande ce que représente une droite qui n’est pas la médiatrice");
+    egalTexte(q, "sa médiatrice", p);
+  } else if (/médiatrice/.test(t)) reponseBool(q, est, p);
+  else return ["question non reconnue"];
+  return p;
+}
+function corrigerDefSituationCalcul(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  decimalesOk(t, p);
+  const s = segmentDe(t);
+  if (!s || !/est la médiatrice de/.test(t)) return ["segment illisible"];
+  const coupe = t.match(/coupe \[..\] à (\d+(?:,\d+)?) m de ([A-Z])/);
+  if (coupe) {
+    if (!/Combien mesure [A-Z]{2}|longueur de \[|Calcule [A-Z]{2}/.test(t)) p.push("question non reconnue");
+    verifierMesure(q, 2 * num(coupe[1]), "m", p);
+    return p;
+  }
+  if (/Quel angle/.test(t)) {
+    verifierMesure(q, 90, "°", p);
+    return p;
+  }
+  const L = longueursNommees(t)[s[0] + s[1]];
+  if (!L || !/distance de [A-Z] coupe-t-elle|combien de [A-Z] coupe-t-elle/.test(t)) return [...p, "question non reconnue"];
+  verifierMesure(q, L.v / 2, L.u, p);
+  return p;
+}
+
+// ----- PROPRIETE ★2
+function corrigerPropDeduire(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const s = t.match(/médiatrice de \[([A-Z])([A-Z])\]/)?.slice(1, 3);
+  const K = t.match(/\b([A-Z]) (?:est sur|appartient à) la médiatrice/)?.[1];
+  if (!s || !K) return ["segment ou point illisible"];
+  const dem = t.match(/égale à ([A-Z])([A-Z])/);
+  if (dem) {
+    if (dem[1] !== K || !s.includes(dem[2])) p.push("longueur demandée illisible");
+    const Y = s.find((x) => x !== dem[2]);
+    if (q.comparator !== "exact_text" || !q.expected.includes(`${K}${Y}`) || !q.expected.includes(`${Y}${K}`)) p.push(`il faut accepter ${K}${Y} et ${Y}${K}`);
+    return p;
+  }
+  if (!/en déduire|égalité est vraie|Que sait-on/.test(t)) return ["question non reconnue"];
+  egalTexte(q, `${K}${s[0]} = ${K}${s[1]}`, p);
+  return p;
+}
+function corrigerPropReciproqueCourte(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const vs = Object.values(longueursNommees(t));
+  if (vs.length === 2) {
+    reponseBool(q, egal(vs[0].v, vs[1].v), p);
+    return p;
+  }
+  if (/[A-Z]{2} = [A-Z]{2}\. Où|de [A-Z]{2} = [A-Z]{2} pour|égale distance de|aussi près de/.test(t)) uneSeuleJuste(q, (c) => /^sur la médiatrice de/.test(c), p);
+  else return ["question non reconnue"];
+  return p;
+}
+function corrigerPropFigure(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const s = segmentDe(t);
+  if (!s) return ["segment illisible"];
+  const [E, F] = s;
+  const lu = lireDroites(q, E, F, p);
+  if (!lu || !lu.perp || !lu.parMilieu) return [...p, "figure : (d) n’est pas la médiatrice"];
+  const dist = (l: string) => {
+    const a = lu.pt(l);
+    const [e, ff] = [lu.pt(E)!, lu.pt(F)!];
+    return a ? Math.abs(Math.hypot(a.x - e.x, a.y - e.y) - Math.hypot(a.x - ff.x, a.y - ff.y)) : null;
+  };
+  const ls = longueursNommees(t);
+  const donnees = Object.keys(ls);
+  if (donnees.length === 1) {
+    const K = donnees[0][0];
+    const d = dist(K);
+    if (d === null || d > 1) p.push(`figure : ${K} n’est pas sur (d)`);
+    const fin = t.split(/(?<=[.?]) /).pop() ?? "";
+    if (!fin.includes(K + (donnees[0][1] === E ? F : E))) p.push("on ne demande pas l’autre distance");
+    verifierMesure(q, ls[donnees[0]].v, ls[donnees[0]].u, p);
+    return p;
+  }
+  if (/Quel point est/.test(t)) {
+    uneSeuleJuste(q, (c) => /^[A-Z]$/.test(c) && (dist(c) ?? 99) < 1, p);
+    return p;
+  }
+  const K = t.match(/\b([A-Z]) est-il à égale distance/)?.[1] ?? t.match(/A-t-on ([A-Z])[A-Z] =/)?.[1];
+  if (!K) return [...p, "question non reconnue"];
+  const d = dist(K);
+  if (d === null) return [...p, `figure sans ${K}`];
+  reponseBool(q, d < 1, p);
+  return p;
+}
+function corrigerPropSommeTriangle(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const s = t.match(/(?:médiatrice de )\[([A-Z])([A-Z])\]/)?.slice(1, 3);
+  const iso = t.match(/isocèle en ([A-Z])\./)?.[1];
+  if (iso) {
+    const c = (q.choices ?? []).find((x) => /^sur la médiatrice de/.test(x));
+    if (!c) return ["pas de proposition « sur la médiatrice »"];
+    const m = c.match(/\[([A-Z])([A-Z])\]/);
+    if (!m || m[1] === iso || m[2] === iso) p.push("la médiatrice n’est pas celle du côté opposé");
+    egalTexte(q, c, p);
+    return p;
+  }
+  const K = t.match(/\b([A-Z]) est sur la médiatrice/)?.[1];
+  if (!s || !K) return ["segment ou point illisible"];
+  const somme = t.match(/([A-Z])([A-Z]) \+ ([A-Z])([A-Z]) = (\d+) cm/);
+  if (somme) {
+    verifierMesure(q, num(somme[5]) / 2, "cm", p);
+    return p;
+  }
+  const ls = longueursNommees(t);
+  const u = Object.values(ls);
+  if (u.length === 1 && /\+/.test(t)) {
+    verifierMesure(q, 2 * u[0].v, u[0].u, p);
+    return p;
+  }
+  if (/nature du triangle|Comment est le triangle/.test(t)) {
+    egalTexte(q, `isocèle en ${K}`, p);
+    return p;
+  }
+  return ["question non reconnue"];
+}
+function corrigerPropVraiFaux(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  let v: boolean;
+  if (/si [A-Z]{2} = [A-Z]{2}, [A-Z] est sur la médiatrice|alors ([A-Z])[A-Z] = \1[A-Z]|le milieu de \[..\] est à égale distance/i.test(t) && !/\+/.test(t)) v = true;
+  else if (/si [A-Z]{2} = [A-Z]{2}, [A-Z] est le milieu|, [A-Z] est sur \[|alors [A-Z]{2} \+|tout point de la médiatrice de \[..\] est sur/i.test(t)) v = false;
+  else return ["affirmation non reconnue"];
+  reponseBool(q, v, p, "vrai", "faux");
+  return p;
+}
+
+// ----- PROPRIETE ★5
+function corrigerPropPerimetre(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  decimalesOk(t, p);
+  const s = t.match(/médiatrice de \[([A-Z])([A-Z])\]/)?.slice(1, 3);
+  if (!s) return ["segment illisible"];
+  const [E, F] = s;
+  const per = t.match(/(?:périmètre|tour)[^.]*?(\d+) (cm|m)\b/);
+  const ls = longueursNommees(t);
+  if (per && ls[E + F]) {
+    const [P, b] = [num(per[1]), ls[E + F].v];
+    if (per[2] !== ls[E + F].u) p.push("unités différentes");
+    const a = (P - b) / 2;
+    if (!(2 * a > b)) p.push("le triangle n’existe pas");
+    const fin = t.split(/(?<=[.?]) /).pop() ?? "";
+    if (!/\b[A-Z][A-Z]\b/.test(fin)) p.push("longueur demandée illisible");
+    verifierMesure(q, a, per[2], p);
+    return p;
+  }
+  const dem = /de part et d’autre/.test(t);
+  const d = Object.entries(ls);
+  if (!dem || d.length !== 2) return [...p, "question non reconnue"];
+  const [a, c] = [d[0][1].v, d[1][1].v];
+  if (/périmètre/.test(t)) verifierMesure(q, 2 * (a + c), "cm", p);
+  else if (/[A-Z]{2} \+ [A-Z]{2}/.test(t)) verifierMesure(q, a + c, "cm", p);
+  else return [...p, "question non reconnue"];
+  return p;
+}
+function corrigerPropCote(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const cote = t.match(/du côté de ([A-Z]) par rapport|dans la partie qui contient ([A-Z])/);
+  if (cote) {
+    const C = cote[1] ?? cote[2];
+    const s = t.match(/médiatrice de \[([A-Z])([A-Z])\]/)?.slice(1, 3);
+    const K = t.match(/([A-Z]) est (?:du côté|dans la partie)/)?.[1];
+    if (!s || !K || !s.includes(C)) return ["côté illisible"];
+    const autre = s.find((x) => x !== C);
+    egalTexte(q, `${K}${C} < ${K}${autre}`, p);
+    return p;
+  }
+  const nommees = longueursNommees(t);
+  let E: string, F: string, dE: number, dF: number;
+  const ecrit = t.match(/([A-Z]) est à (\d+) cm de ([A-Z]) et à (\d+) cm de ([A-Z])/);
+  if (ecrit) [E, dE, F, dF] = [ecrit[3], num(ecrit[2]), ecrit[5], num(ecrit[4])];
+  else {
+    const c = Object.entries(nommees);
+    if (c.length !== 2) return ["distances illisibles"];
+    [E, dE, F, dF] = [c[0][0][1], c[0][1].v, c[1][0][1], c[1][1].v];
+  }
+  if (egal(dE, dF)) return ["les distances sont égales : il n’y a pas de côté"];
+  const pres = dE < dF ? E : F;
+  if (/De quel côté|Où est/.test(t)) egalTexte(q, `du côté de ${pres}`, p);
+  else if (/plus près|plus proche/.test(t)) egalTexte(q, `de ${pres}`, p);
+  else return ["question non reconnue"];
+  return p;
+}
+function corrigerPropTableau(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const s = t.match(/médiatrice de \[([A-Z])([A-Z])\]/)?.slice(1, 3);
+  if (!s) return ["segment illisible"];
+  const ls = longueursNommees(t);
+  const parPoint = new Map<string, number[]>();
+  for (const [k, v] of Object.entries(ls)) {
+    if (!s.includes(k[1])) return [`${k} ne va pas vers une extrémité`];
+    parPoint.set(k[0], [...(parPoint.get(k[0]) ?? []), v.v]);
+  }
+  if (parPoint.size !== 3 || [...parPoint.values()].some((x) => x.length !== 2)) return ["il faut deux distances pour trois points"];
+  const sur = [...parPoint.entries()].filter(([, v]) => egal(v[0], v[1])).map(([n]) => n);
+  const hors = [...parPoint.keys()].filter((n) => !sur.includes(n));
+  if (/Combien de ces points|combien de ces points/.test(t)) {
+    if (num(q.expected[0]) !== sur.length) p.push(`réponse ${q.expected[0]}, recomptée ${sur.length}`);
+  } else if (/n’est PAS sur|hors de/.test(t)) {
+    if (hors.length !== 1) return [`${hors.length} points hors de la médiatrice`];
+    egalTexte(q, hors[0], p);
+  } else if (/Quel point (?:est sur|appartient)/.test(t)) {
+    if (sur.length !== 1) return [`${sur.length} points sur la médiatrice`];
+    egalTexte(q, sur[0], p);
+  } else return ["question non reconnue"];
+  return p;
+}
+function corrigerPropCercle(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  if (/\bse coupent en\b|coupe en [A-Z]/.test(t) && /est-il sur la médiatrice/.test(t)) {
+    const rs = [...t.matchAll(/rayon (\d+) cm/g)].map((m) => num(m[1]));
+    const memes = /même rayon|Deux cercles de rayon/.test(t) || (rs.length === 2 && egal(rs[0], rs[1]));
+    uneSeuleJuste(q, (c) => (memes ? /^oui : .*deux rayons/.test(c) : /^non : .* différentes$/.test(c)), p);
+    return p;
+  }
+  if (/Où se trouve|Sur quelle droite/.test(t)) uneSeuleJuste(q, (c) => /^sur la médiatrice de/.test(c), p);
+  else if (/[A-Z]{2} \+ [A-Z]{2}/.test(t)) {
+    const r = t.match(/rayon (\d+) cm/)?.[1];
+    if (!r) return ["rayon illisible"];
+    verifierMesure(q, 2 * num(r), "cm", p);
+  } else if (/Passe-t-il par|est-il sur ce cercle/.test(t)) reponseBool(q, true, p);
+  else return ["question non reconnue"];
+  return p;
+}
+function corrigerPropArgument(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const s = t.match(/médiatrices? de \[([A-Z])([A-Z])\]/)?.slice(1, 3);
+  if (/Pour prouver|Quelle égalité prouve/.test(t)) {
+    const K = t.match(/que ([A-Z]) est sur/)?.[1];
+    if (!s || !K) return ["segment ou point illisible"];
+    egalTexte(q, `${K}${s[0]} = ${K}${s[1]}`, p);
+  } else if (/mesurer/.test(t)) uneSeuleJuste(q, (c) => /^les distances/.test(c), p);
+  else if (/aussi sur le segment|à la fois sur/.test(t)) uneSeuleJuste(q, (c) => /est le milieu de/.test(c), p);
+  else if (/Compare|Que peut-on dire de/.test(t)) {
+    // Sur les deux médiatrices : KE = KF et KF = KG, donc KE = KG.
+    const m = t.match(/([A-Z]{2}) et ([A-Z]{2})(?: \?|\.)$/);
+    if (!m || m[1][0] !== m[2][0]) return ["longueurs à comparer illisibles"];
+    egalTexte(q, `${m[1]} = ${m[2]}`, p);
+  } else if (/Que représente|Quelle est la droite/.test(t)) uneSeuleJuste(q, (c) => /^la médiatrice de/.test(c), p);
+  else return ["question non reconnue"];
+  return p;
+}
+
+// ----- CONSTRUIRE ★2
+function corrigerConsOutils(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  if (/Pour mesurer|mesure la longueur|le milieu de \[..\]/.test(t) && !/l’angle droit/.test(t)) egalTexte(q, "la règle graduée", p);
+  else if (/l’angle droit/.test(t)) egalTexte(q, "l’équerre", p);
+  else if (/même écartement|trace des arcs/.test(t)) egalTexte(q, "le compas", p);
+  else if (/Sans compas/.test(t)) egalTexte(q, "la règle graduée et l’équerre", p);
+  else if (/combien de fois change-t-on/.test(t)) egalTexte(q, "jamais", p);
+  else return ["question non reconnue"];
+  return p;
+}
+function corrigerConsEtapes(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  if (/en premier|Que marque-t-on d’abord/.test(t)) uneSeuleJuste(q, (c) => /^le milieu de/.test(c), p);
+  else if (/Le milieu de \[..\] est (?:marqué|placé)/.test(t)) uneSeuleJuste(q, (c) => /^la perpendiculaire à .* en ce point$/.test(c), p);
+  else if (/partent les arcs/.test(t)) uneSeuleJuste(q, (c) => /^de [A-Z] et de [A-Z]$/.test(c), p);
+  else if (/Que fait-on ensuite/.test(t)) egalTexte(q, "on joint ces deux points", p);
+  else if (/garde-t-on identique|Que ne change-t-on pas/.test(t)) egalTexte(q, "l’écartement", p);
+  else if (/combien de points|Combien de points/.test(t)) egalTexte(q, "2", p);
+  else if (/Qu’obtient-on|Quelle droite joint/.test(t)) uneSeuleJuste(q, (c) => /^la médiatrice de/.test(c), p);
+  else return ["question non reconnue"];
+  return p;
+}
+function corrigerConsMilieuNombre(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  decimalesOk(t, p);
+  const direct = t.match(/(?:\[..\] mesure|[A-Z]{2} =) (\d+(?:,\d+)?) cm\./)?.[1];
+  if (direct && /équerre|milieu/.test(t)) {
+    verifierMesure(q, num(direct) / 2, "cm", p);
+    return p;
+  }
+  const x = t.match(/à (\d+) cm de [A-Z]/)?.[1];
+  if (!x || !/milieu/.test(t)) return [...p, "question non reconnue"];
+  verifierMesure(q, 2 * num(x), "cm", p);
+  return p;
+}
+function corrigerConsEcartement(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const moitie = t.match(/L’écartement (vaut la moitié|vaut moins que la moitié|vaut plus que la moitié) de/)?.[1];
+  if (moitie) {
+    egalTexte(q, moitie === "vaut la moitié" ? "1" : moitie.includes("moins") ? "0" : "2", p);
+    return p;
+  }
+  const L = t.match(/(?:\[..\] mesure|[A-Z]{2} =) (\d+) cm\./)?.[1];
+  if (!L) return ["longueur illisible"];
+  const demi = num(L) / 2;
+  const x = t.match(/(?:écartement de|Avec|en ouvrant de) (\d+) cm/)?.[1];
+  if (x) {
+    if (egal(num(x), demi)) p.push("écartement égal à la moitié : oui ou non serait discutable");
+    reponseBool(q, num(x) > demi, p);
+  } else if (/dépasser|plus grand que/.test(t)) verifierMesure(q, demi, "cm", p);
+  else if (/trop petit|ne convient pas|ne se coupent-ils pas/.test(t))
+    uneSeuleJuste(
+      q,
+      (c) => {
+        const m = mesure(c);
+        return Boolean(m && m.v <= demi);
+      },
+      p,
+    );
+  else return ["question non reconnue"];
+  return p;
+}
+function corrigerConsArcs(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const f = q.canvas && q.canvas.kind === "droites" ? (q.canvas as DroitesCanvasData) : null;
+  if (!f || !f.points || f.points.length !== 4) return ["figure illisible"];
+  const [e, ff, s1, s2] = f.points;
+  const mx = (e.x + ff.x) / 2;
+  if (Math.abs(s1.x - mx) > 1 || Math.abs(s2.x - mx) > 1) p.push("figure : les points d’intersection ne sont pas sur la médiatrice");
+  if (f.lines.some((l) => l.id !== "AB")) p.push("figure : elle ne doit pas tracer la médiatrice");
+  const [S, T] = [s1.label, s2.label];
+  if (/Que représente|Qu’est-ce que/.test(t)) uneSeuleJuste(q, (c) => /^la médiatrice de/.test(c), p);
+  else if (/Quelle droite/.test(t)) egalTexte(q, `(${S}${T})`, p);
+  else {
+    const e2 = t.match(/(?:Écartement de|Compas ouvert de|[A-Z]{2} =|est à) (\d+) cm/)?.[1];
+    if (!e2) return [...p, "écartement illisible"];
+    if (/[A-Z]{2} \+ [A-Z]{2}/.test(t)) verifierMesure(q, 2 * num(e2), "cm", p);
+    else if (/Combien mesure|Trouve|à combien de/.test(t)) verifierMesure(q, num(e2), "cm", p);
+    else return [...p, "question non reconnue"];
+  }
+  return p;
+}
+
 export const CORRECTEURS: CorrecteursMaths = {
+  mediatrice_definition_tpl_vrai_faux: corrigerDefVraiFaux,
+  mediatrice_definition_tpl_completer: corrigerDefCompleter,
+  mediatrice_definition_tpl_trois_droites: corrigerDefTroisDroites,
+  mediatrice_definition_tpl_nombre: corrigerNombreMilieu,
+  mediatrice_definition_tpl_nom: corrigerDefNom,
+  mediatrice_definition_tpl_lire_figure: corrigerDefLireFigure,
+  mediatrice_definition_tpl_mesures_courtes: corrigerDefMesuresCourtes,
+  mediatrice_definition_tpl_nombre_k: corrigerNombreMilieu,
+  mediatrice_definition_tpl_combien: corrigerDefCombien,
+  mediatrice_definition_tpl_manque: corrigerDefManque,
+  mediatrice_definition_tpl_situation: corrigerDefSituation,
+  mediatrice_definition_tpl_situation_calcul: corrigerDefSituationCalcul,
+  mediatrice_propriete_tpl_deduire: corrigerPropDeduire,
+  mediatrice_propriete_tpl_reciproque_courte: corrigerPropReciproqueCourte,
+  mediatrice_propriete_tpl_figure: corrigerPropFigure,
+  mediatrice_propriete_tpl_somme_triangle: corrigerPropSommeTriangle,
+  mediatrice_propriete_tpl_vrai_faux: corrigerPropVraiFaux,
+  mediatrice_propriete_tpl_perimetre: corrigerPropPerimetre,
+  mediatrice_propriete_tpl_cote: corrigerPropCote,
+  mediatrice_propriete_tpl_tableau: corrigerPropTableau,
+  mediatrice_propriete_tpl_cercle: corrigerPropCercle,
+  mediatrice_propriete_tpl_argument: corrigerPropArgument,
+  mediatrice_construire_tpl_outils: corrigerConsOutils,
+  mediatrice_construire_tpl_etapes: corrigerConsEtapes,
+  mediatrice_construire_tpl_milieu_nombre: corrigerConsMilieuNombre,
+  mediatrice_construire_tpl_ecartement: corrigerConsEcartement,
+  mediatrice_construire_tpl_arcs: corrigerConsArcs,
   mediatrice_propriete_tpl_distance: corrigerDistance,
   mediatrice_propriete_tpl_distance_situation: corrigerDistance,
   mediatrice_propriete_tpl_1: corrigerTrajet,

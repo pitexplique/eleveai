@@ -142,24 +142,22 @@ function genVolumeGrandeur() {
 // ─── volume_compter, volume_assemblage ──────────────────────────────────────
 // Des solides faits de cubes UNITÉS (1 cm³, 1 dm³ ou 1 m³) : le volume est le
 // nombre de cubes, suivi de l'unité du cube.
-const CONSTRUCTIONS: { intro: (p: Prenom) => string; u: string; quoi: string }[] = [
-  { intro: (p) => `${p.nom} construit une tour avec des cubes en bois de 1 cm³.`, u: "cm³", quoi: "la tour" },
-  { intro: (p) => `${p.nom} fait un escalier avec des cubes emboîtables de 1 cm³.`, u: "cm³", quoi: "l’escalier" },
-  { intro: (p) => `${p.nom} construit un château avec des cubes de 1 cm³.`, u: "cm³", quoi: "le château" },
-  { intro: (p) => `${p.nom} empile de gros cubes en mousse de 1 dm³.`, u: "dm³", quoi: "la pile" },
-  { intro: (p) => `${p.nom} construit un robot avec des cubes magnétiques de 1 cm³.`, u: "cm³", quoi: "le robot" },
-  { intro: (p) => `${p.nom} bâtit une pyramide avec des sucres en forme de cube de 1 cm³.`, u: "cm³", quoi: "la pyramide" },
-  { intro: (p) => `${p.nom} construit un mur avec des briques cubiques de 1 dm³.`, u: "dm³", quoi: "le mur" },
-  { intro: (p) => `${p.nom} remplit un coffre avec des cubes en plastique de 1 dm³.`, u: "dm³", quoi: "le tas de cubes" },
-  { intro: () => `Sur un chantier, on empile des blocs de béton cubiques de 1 m³.`, u: "m³", quoi: "le tas de blocs" },
-  { intro: () => `Au port, on range des caisses cubiques de 1 m³.`, u: "m³", quoi: "le tas de caisses" },
-  { intro: (p) => `${p.nom} fabrique une maison de poupée avec des cubes de 1 cm³.`, u: "cm³", quoi: "la maison" },
-  { intro: (p) => `Au centre de loisirs, ${p.nom} construit une cabane avec des cubes en carton de 1 dm³.`, u: "dm³", quoi: "la cabane" },
+// 07/11/2026 : intros de 10 mots au plus, l'énoncé ★3 tient en 25 mots.
+const CONSTRUCTIONS: { intro: (p: Prenom) => string; u: string }[] = [
+  { intro: (p) => `${p.nom} construit une tour en cubes de 1 cm³.`, u: "cm³" },
+  { intro: (p) => `${p.nom} fait un escalier en cubes de 1 cm³.`, u: "cm³" },
+  { intro: (p) => `${p.nom} construit un château en cubes de 1 cm³.`, u: "cm³" },
+  { intro: (p) => `${p.nom} empile des cubes en mousse de 1 dm³.`, u: "dm³" },
+  { intro: (p) => `${p.nom} construit un robot en cubes de 1 cm³.`, u: "cm³" },
+  { intro: (p) => `${p.nom} bâtit une pyramide en sucres de 1 cm³.`, u: "cm³" },
+  { intro: (p) => `${p.nom} monte un mur en briques cubiques de 1 dm³.`, u: "dm³" },
+  { intro: (p) => `${p.nom} remplit un coffre de cubes de 1 dm³.`, u: "dm³" },
+  { intro: () => `Sur un chantier, on empile des cubes de 1 m³.`, u: "m³" },
+  { intro: () => `Au port, on range des caisses cubiques de 1 m³.`, u: "m³" },
+  { intro: (p) => `${p.nom} fait une maison en cubes de 1 cm³.`, u: "cm³" },
+  { intro: (p) => `${p.nom} construit une cabane en cubes de 1 dm³.`, u: "dm³" },
 ];
-const ETAGES = ["au premier étage", "au deuxième", "au troisième", "au quatrième"];
-const duQuoi = (quoi: string) => quoi.replace(/^le /, "du ").replace(/^la /, "de la ").replace(/^l’/, "de l’");
-const questionVolume = (quoi: string) =>
-  pick([`Quel est le volume ${duQuoi(quoi)} ?`, "Calcule le volume total.", `Combien mesure le volume ${duQuoi(quoi)} ?`, `Calcule le volume ${duQuoi(quoi)}.`]);
+const questionVolume = () => pick(["Quel est le volume ?", "Calcule le volume total.", "Quel volume obtient-on ?", "Combien mesure le volume ?"]);
 
 function genVolumeCompterEtages() {
   const c = pick(CONSTRUCTIONS);
@@ -168,11 +166,11 @@ function genVolumeCompterEtages() {
   const n = randomInt(2, 3);
   const k: number[] = [];
   for (let i = 0; i < n; i++) k.push(randomInt(1, i === 0 ? 9 : k[i - 1]));
-  const morceaux = k.map((x, i) => (i === 0 ? `${x} cube${x > 1 ? "s" : ""} ${ETAGES[i]}` : `${x} ${ETAGES[i]}`));
-  const liste = morceaux.slice(0, -1).join(", ") + " et " + morceaux[morceaux.length - 1];
+  const cubes = `${k[0]} cube${k[0] > 1 ? "s" : ""} en bas`;
+  const liste = n === 2 ? `${cubes}, ${k[1]} en haut` : `${cubes}, ${k[1]} au milieu et ${k[2]} en haut`;
   const total = k.reduce((a, b) => a + b, 0);
   return {
-    text: `${c.intro(p)} Il y a ${liste}. ${questionVolume(c.quoi)}`,
+    text: `${c.intro(p)} ${liste}. ${questionVolume()}`,
     format: "short" as const,
     expected: avecUnite(total, c.u),
     comparator: "number_equal" as const,
@@ -191,13 +189,13 @@ function genVolumeCompterCouches(qcm: boolean) {
   const forme = triple
     ? pick([
         `Le solide a ${a} couches de ${b} rangées de ${d} cubes.`,
-        `Les cubes forment un pavé : ${a} couches de ${b} rangées de ${d} cubes.`,
+        `Le pavé a ${a} couches de ${b} rangées de ${d} cubes.`,
       ])
     : pick([`Le solide a ${a} étages de ${b} cubes.`, `La construction a ${a} couches de ${b} cubes.`]);
   const calc = triple
     ? `Une couche contient ${b} × ${d} = ${b * d} cubes. Il y a ${a} couches : ${a} × ${b * d} = ${total} cubes. Le volume est ${total} ${c.u}.`
     : `${a} étages de ${b} cubes : ${a} × ${b} = ${total} cubes. Le volume est ${total} ${c.u}.`;
-  const text = `${c.intro(p)} ${forme} ${questionVolume(c.quoi)}`;
+  const text = `${c.intro(p)} ${forme} ${questionVolume()}`;
   if (!qcm) return { text, format: "short" as const, expected: avecUnite(total, c.u), comparator: "number_equal" as const, explanation: expl(calc) };
   return {
     text,
@@ -215,21 +213,15 @@ function genVolumeCompterCouches(qcm: boolean) {
   };
 }
 
-const MORCEAUX = ["l’un", "le deuxième", "le troisième"];
 function genVolumeAssembler() {
   const c = pick(CONSTRUCTIONS);
   const p = pick(PRENOMS);
   // 03/11/2026 (★3) : deux morceaux, pour rester vers 25 mots.
-  const n: number = 2;
-  const k = Array.from({ length: n }, () => randomInt(2, 12));
+  const k = [randomInt(2, 12), randomInt(2, 12)];
   const total = k.reduce((a, b) => a + b, 0);
-  const liste =
-    n === 2
-      ? `l’un de ${k[0]} cubes, l’autre de ${k[1]} cubes`
-      : k.map((x, i) => `${MORCEAUX[i]} de ${x} cubes`).join(", ").replace(/, (le troisième)/, " et $1");
   const sujet = /^(Sur|Au port)/.test(c.intro(p)) ? "On" : Il(p);
-  const text = `${c.intro(p)} ${sujet} assemble ${n === 2 ? "deux" : "trois"} morceaux : ${liste}. ${pick([
-    "Quel est le volume du solide obtenu ?",
+  const text = `${c.intro(p)} ${sujet} assemble deux morceaux : ${k[0]} cubes et ${k[1]} cubes. ${pick([
+    "Quel est le volume obtenu ?",
     "Calcule le volume de l’assemblage.",
     "Quel volume obtient-on en tout ?",
   ])}`;
@@ -250,7 +242,7 @@ function genVolumeAssemblerRetirer() {
   const r = randomInt(1, Math.min(a, 9));
   const total = a + b - r;
   const sujet = /^(Sur|Au port)/.test(c.intro(p)) ? "On" : Il(p);
-  const text = `${c.intro(p)} Le solide a d’abord ${a} cubes. ${sujet} ajoute ${b} cubes, puis ${sujet === "On" ? "on" : il(p)} retire ${r} cube${r > 1 ? "s" : ""}. ${questionVolume(c.quoi)}`;
+  const text = `${c.intro(p)} ${sujet} pose ${a} cubes, ajoute ${b} cubes, puis retire ${r} cube${r > 1 ? "s" : ""}. ${questionVolume()}`;
   return {
     text,
     format: "short" as const,
@@ -268,37 +260,33 @@ function genVolumeAssemblerEtages() {
   const d = randomInt(2, 9);
   const total = a * b + d;
   const sujet = /^(Sur|Au port)/.test(c.intro(p)) ? "On" : Il(p);
-  const text = `${c.intro(p)} ${sujet} assemble un bloc de ${a} étages de ${b} cubes et un petit morceau de ${d} cubes. ${pick([
-    "Quel est le volume du solide obtenu ?",
-    "Calcule le volume de l’assemblage.",
-    "Quel volume obtient-on en tout ?",
-  ])}`;
+  const text = `${c.intro(p)} ${sujet} pose ${a} étages de ${b} cubes, puis ${d} cubes. ${questionVolume()}`;
   return {
     text,
     format: "qcm" as const,
     choices: makeChoices(`${total} ${c.u}`, [`${a + b + d} ${c.u}`, `${a * b} ${c.u}`, `${a * b * d} ${c.u}`, `${a * (b + d)} ${c.u}`, `${total + 1} ${c.u}`]),
     expected: [`${total} ${c.u}`],
     comparator: "mcq_exact" as const,
-    explanation: expl(`Le bloc contient ${a} × ${b} = ${a * b} cubes. On ajoute le petit morceau : ${a * b} + ${d} = ${total}. Le volume est ${total} ${c.u}.`),
+    explanation: expl(`Les étages contiennent ${a} × ${b} = ${a * b} cubes. On ajoute les autres cubes : ${a * b} + ${d} = ${total}. Le volume est ${total} ${c.u}.`),
   };
 }
 
 // ─── volume_comparer ────────────────────────────────────────────────────────
 type CtxDeuxVolumes = { u: string; min: number; max: number; phrase: (p: Prenom, q: Prenom, a: string, b: string) => string };
 const CTX_DEUX_VOLUMES: CtxDeuxVolumes[] = [
-  { u: "dm³", min: 30, max: 90, phrase: (p, q, a, b) => `Le carton de déménagement ${de(p.nom)} a un volume de ${a}. Celui ${de(q.nom)} a un volume de ${b}.` },
+  { u: "dm³", min: 30, max: 90, phrase: (p, q, a, b) => `Le carton de déménagement ${de(p.nom)} fait ${a}. Celui ${de(q.nom)} fait ${b}.` },
   { u: "dm³", min: 20, max: 120, phrase: (p, q, a, b) => `L’aquarium ${de(p.nom)} contient ${a} d’eau. Celui ${de(q.nom)} en contient ${b}.` },
   { u: "m³", min: 2, max: 9, phrase: (p, q, a, b) => `La piscine gonflable ${de(p.nom)} contient ${a} d’eau. Celle ${de(q.nom)} en contient ${b}.` },
-  { u: "cm³", min: 200, max: 450, phrase: (p, q, a, b) => `Le pot de confiture ${de(p.nom)} a un volume de ${a}. Celui ${de(q.nom)} a un volume de ${b}.` },
-  { u: "dm³", min: 15, max: 35, phrase: (p, q, a, b) => `Le sac à dos ${de(p.nom)} a un volume de ${a}. Celui ${de(q.nom)} a un volume de ${b}.` },
-  { u: "dm³", min: 40, max: 100, phrase: (p, q, a, b) => `Pour les vacances, la valise ${de(p.nom)} a un volume de ${a}. Celle ${de(q.nom)} a un volume de ${b}.` },
-  { u: "dm³", min: 150, max: 350, phrase: (p, q, a, b) => `Le frigo des parents ${de(p.nom)} a un volume de ${a}. Celui des parents ${de(q.nom)} a un volume de ${b}.` },
-  { u: "m³", min: 3, max: 15, phrase: (_p, _q, a, b) => `La citerne de la ferme contient ${a} d’eau de pluie. Celle du voisin en contient ${b}.` },
-  { u: "cm³", min: 600, max: 1500, phrase: (p, q, a, b) => `La boîte à goûter ${de(p.nom)} a un volume de ${a}. Celle ${de(q.nom)} a un volume de ${b}.` },
-  { u: "dm³", min: 300, max: 800, phrase: (p, q, a, b) => `La niche du chien ${de(p.nom)} a un volume de ${a}. Celle du chien ${de(q.nom)} a un volume de ${b}.` },
+  { u: "cm³", min: 200, max: 450, phrase: (p, q, a, b) => `Le pot de confiture ${de(p.nom)} fait ${a}. Celui ${de(q.nom)} fait ${b}.` },
+  { u: "dm³", min: 15, max: 35, phrase: (p, q, a, b) => `Le sac à dos ${de(p.nom)} fait ${a}. Celui ${de(q.nom)} fait ${b}.` },
+  { u: "dm³", min: 40, max: 100, phrase: (p, q, a, b) => `La valise ${de(p.nom)} fait ${a}. Celle ${de(q.nom)} fait ${b}.` },
+  { u: "dm³", min: 150, max: 350, phrase: (p, q, a, b) => `Le frigo des parents ${de(p.nom)} fait ${a}. Celui des parents ${de(q.nom)} fait ${b}.` },
+  { u: "m³", min: 3, max: 15, phrase: (_p, _q, a, b) => `La citerne de la ferme contient ${a} d’eau. Celle du voisin en contient ${b}.` },
+  { u: "cm³", min: 600, max: 1500, phrase: (p, q, a, b) => `La boîte à goûter ${de(p.nom)} fait ${a}. Celle ${de(q.nom)} fait ${b}.` },
+  { u: "dm³", min: 300, max: 800, phrase: (p, q, a, b) => `La niche du chien ${de(p.nom)} fait ${a}. Celle du chien ${de(q.nom)} fait ${b}.` },
   { u: "m³", min: 20, max: 45, phrase: (p, q, a, b) => `La chambre ${de(p.nom)} contient ${a} d’air. Celle ${de(q.nom)} en contient ${b}.` },
   { u: "cm³", min: 30, max: 90, phrase: (p, q, a, b) => `La pâte à modeler ${de(p.nom)} occupe ${a}. Celle ${de(q.nom)} occupe ${b}.` },
-  { u: "m³", min: 10, max: 30, phrase: (_p, _q, a, b) => `Sur le chantier, la benne du premier camion contient ${a} de sable. Celle du second en contient ${b}.` },
+  { u: "m³", min: 10, max: 30, phrase: (_p, _q, a, b) => `La benne du premier camion contient ${a} de sable. Celle du second en contient ${b}.` },
 ];
 const QUESTIONS_DEUX_VOLUMES: { q: string; grand: boolean }[] = [
   { q: "Quel est le plus grand des deux volumes ?", grand: true },
@@ -361,7 +349,7 @@ function genVolumeComparerPiles() {
   const egal = `${o.f ? "elles" : "ils"} ont le même volume`;
   const juste = V1 === V2 ? egal : (V1 > V2) === grand ? celui(p) : celui(q);
   const Le = o.f ? "La" : "Le";
-  const text = `Tous les cubes sont pareils. ${Le} ${o.nom} ${de(p.nom)} a ${a} ${mot} de ${b} cubes. ${o.f ? "Celle" : "Celui"} ${de(q.nom)} a ${c} ${mot} de ${d} cubes. ${o.f ? "Laquelle" : "Lequel"} a le plus ${grand ? "grand" : "petit"} volume ?`;
+  const text = `Mêmes cubes. ${Le} ${o.nom} ${de(p.nom)} : ${a} ${mot} de ${b} cubes. ${o.f ? "Celle" : "Celui"} ${de(q.nom)} : ${c} ${mot} de ${d} cubes. ${o.f ? "Laquelle" : "Lequel"} a le plus ${grand ? "grand" : "petit"} volume ?`;
   return {
     text,
     format: "qcm" as const,
@@ -388,7 +376,7 @@ const FICHES: { de: string; longueur: Mesure; aire: Mesure; volume: Mesure; mass
   { de: "de la boîte à bijoux", longueur: [8, 15, "cm"], aire: [60, 150, "cm²"], volume: [300, 900, "cm³"], masse: [150, 400, "g"] },
   { de: "de la trousse", longueur: [18, 22, "cm"], aire: [100, 150, "cm²"], volume: [700, 1200, "cm³"], masse: [100, 300, "g"] },
   { de: "du bac à fleurs", longueur: [50, 100, "cm"], aire: [10, 25, "dm²"], volume: [20, 60, "dm³"], masse: [3, 9, "kg"] },
-  { de: "du sac de couchage roulé", longueur: [40, 50, "cm"], aire: [4, 8, "dm²"], volume: [10, 20, "dm³"], masse: [1, 2, "kg"] },
+  { de: "du sac de couchage", longueur: [40, 50, "cm"], aire: [4, 8, "dm²"], volume: [10, 20, "dm³"], masse: [1, 2, "kg"] },
   { de: "de la niche du chien", longueur: [70, 110, "cm"], aire: [50, 90, "dm²"], volume: [300, 700, "dm³"], masse: [15, 30, "kg"] },
 ];
 const tirerMesure = (m: Mesure) => `${nf(randomInt(m[0], m[1]))} ${m[2]}`;
@@ -402,9 +390,9 @@ function genVolumeLireMesures(combien: 2 | 4) {
   const liste = toutes.slice(0, -1).join(", ") + " et " + toutes[toutes.length - 1];
   const nombre = combien === 2 ? "deux" : "quatre";
   const text = pick([
-    `Sur la fiche ${f.de} ${de(p.nom)}, on lit ${nombre} mesures : ${liste}. Laquelle est son volume ?`,
+    `Sur la fiche ${f.de} ${de(p.nom)}, on lit : ${liste}. Laquelle est le volume ?`,
     `${p.nom} a noté ${nombre} mesures ${f.de} : ${liste}. Écris celle qui donne le volume.`,
-    `Voici ${nombre} mesures ${f.de} : ${liste}. Quel est le volume ${f.de} ?`,
+    `Voici ${nombre} mesures ${f.de} : ${liste}. Quel est son volume ?`,
   ]);
   return {
     text,
@@ -510,7 +498,6 @@ const maj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 function genVolumePave() {
   const o = pick(PAVES);
-  const p = pick(PRENOMS);
   const [a, b, h] = [tirerIntervalle(o.L), tirerIntervalle(o.l), tirerIntervalle(o.h)];
   // La longueur reste la plus grande des deux côtés du fond.
   const [L, l] = [Math.max(a, b), Math.min(a, b)];
@@ -522,9 +509,10 @@ function genVolumePave() {
     `${L} ${u} sur ${l} ${u}, et ${h} ${u} de hauteur`,
     `${h} ${u} de haut, ${L} ${u} de long et ${l} ${u} de large`,
   ]);
-  const sujet = `${maj(leMot(o))} ${de(p.nom)}`;
+  const sujet = maj(leMot(o));
+  // 07/11/2026 : sans prénom et, pour les cubes, trois dimensions serrées : 25 mots au plus.
   const text = parCubes
-    ? `${sujet} est un pavé droit : ${dims}. Combien de cubes de 1 ${u}³ faut-il pour ${o.f ? "la" : "le"} remplir ?`
+    ? `${sujet} est un pavé de ${L} ${u} sur ${l} ${u} sur ${h} ${u}. Combien de cubes de 1 ${u}³ pour ${o.f ? "la" : "le"} remplir ?`
     : `${sujet} est un pavé droit : ${dims}. ${pick(["Quel est son volume ?", "Calcule son volume.", "Combien mesure son volume ?"])}`;
   return {
     text,
@@ -690,9 +678,8 @@ function genVolumeGrandeurSimple() {
   };
 }
 
-/** ★2 : des cubes DESSINÉS, en escalier (une rangée de face) ou en une couche à plat : aucun cube caché. */
-function genVolumeCompterFigure() {
-  const u = pick(["cm³", "cm³", "dm³", "m³"]);
+/** Des cubes à DESSINER, en escalier (une rangée de face) ou en une couche à plat : aucun cube caché. */
+function tirerFigure() {
   const nEtages = randomInt(1, 3);
   const k: number[] = [];
   for (let i = 0; i < nEtages; i++) k.push(randomInt(1, i === 0 ? 6 : k[i - 1]));
@@ -711,12 +698,23 @@ function genVolumeCompterFigure() {
     k.forEach((n, z) => {
       for (let x = 0; x < n; x++) cubes.push({ x, y: 0, z });
     });
-  const total = cubes.length;
+  return { cubes, k, total: cubes.length };
+}
+
+/** ★2 : compter les cubes dessinés. */
+function genVolumeCompterFigure() {
+  const u = pick(["cm³", "cm³", "dm³", "m³"]);
+  const { cubes, k, total } = tirerFigure();
   return {
     text: pick([
       `Chaque cube mesure 1 ${u}. Quel est le volume du solide ?`,
       `Un cube mesure 1 ${u}. Compte les cubes. Quel est le volume ?`,
       `Les cubes font 1 ${u}. Calcule le volume du solide.`,
+      `Un cube vaut 1 ${u}. Écris le volume du solide.`,
+      `Compte les cubes de 1 ${u}. Écris le volume.`,
+      `Ce solide est fait de cubes de 1 ${u}. Quel est son volume ?`,
+      `Cubes de 1 ${u} : quel est le volume ?`,
+      `Trouve le volume du solide. Un cube mesure 1 ${u}.`,
     ]),
     format: "short" as const,
     expected: avecUnite(total, u),
@@ -740,7 +738,16 @@ function genVolumeComparerSimple() {
   const mot = grand ? "grand" : "petit";
   const r = grand ? Math.max(a, b) : Math.min(a, b);
   return {
-    text: pick([`Écris le plus ${mot} : ${A} ou ${B}.`, `Quel volume est le plus ${mot} : ${A} ou ${B} ?`, `Écris le volume le plus ${mot} : ${A} ou ${B}.`]),
+    text: pick([
+      `Écris le plus ${mot} : ${A} ou ${B}.`,
+      `Quel volume est le plus ${mot} : ${A} ou ${B} ?`,
+      `Écris le volume le plus ${mot} : ${A} ou ${B}.`,
+      `${A} ou ${B} : quel est le plus ${mot} ?`,
+      `Entre ${A} et ${B}, écris le plus ${mot}.`,
+      `Trouve le plus ${mot} volume : ${A} ou ${B}.`,
+      `Compare ${A} et ${B}. Écris le plus ${mot}.`,
+      `Recopie le plus ${mot} : ${A} ou ${B}.`,
+    ]),
     format: "short" as const,
     expected: avecUnite(r, ctx.u),
     comparator: "number_equal" as const,
@@ -761,8 +768,13 @@ function genVolumeAssemblerSimple() {
   return {
     text: pick([
       `Un cube mesure 1 ${u}. On assemble ${liste}. Calcule le volume.`,
-      `Les cubes font 1 ${u}. On assemble ${liste}. Quel est le volume ?`,
+      `Les cubes font 1 ${u}. On assemble ${liste}. Quel volume obtient-on ?`,
       `Un cube mesure 1 ${u}. On colle ${liste}. Calcule le volume.`,
+      `On assemble ${liste} de 1 ${u}. Calcule le volume.`,
+      `Assemble ${liste} de 1 ${u}. Quel est le volume ?`,
+      `Colle ensemble ${liste} de 1 ${u}. Écris le volume.`,
+      `Quel volume font ${liste} de 1 ${u} collés ensemble ?`,
+      `${liste} de 1 ${u} sont assemblés. Calcule le volume total.`,
     ]),
     format: "short" as const,
     expected: avecUnite(total, u),
@@ -779,11 +791,642 @@ function genVolumeLireSimple(combien: 2 | 4) {
   const toutes = shuffle([vol, ...autres]);
   const liste = toutes.slice(0, -1).join(", ") + " ou " + toutes[toutes.length - 1];
   return {
-    text: pick([`Quelle mesure est un volume : ${liste} ?`, `Écris la mesure de volume : ${liste}.`]),
+    text: pick([
+      `Quelle mesure est un volume : ${liste} ?`,
+      `Écris la mesure de volume : ${liste}.`,
+      `Trouve le volume : ${liste}.`,
+      `${liste} : quelle mesure est un volume ?`,
+      `${liste} : écris le volume.`,
+      `Recopie le volume : ${liste}.`,
+      `Où est le volume : ${liste} ?`,
+      `Écris le volume parmi ${liste}.`,
+    ]),
     format: "short" as const,
     expected: avecUnite(Number(vol.split(" ").slice(0, -1).join("").replace(",", ".")), vol.split(" ").pop()!),
     comparator: "number_equal" as const,
     explanation: expl(`Un volume s’écrit avec une unité cube (cm³, dm³, m³). La seule mesure de ce genre est ${vol}. Les autres sont une longueur, une aire ou une masse.`),
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ⭐ 07/11/2026 — LA PHRASE NE REVIENT PLUS À ★1-★2 (voir triangles.bank.ts).
+// De vrais modes (ajouter, enlever, multiplier, retrouver un morceau, partager,
+// comparer des unités, reconnaître une grandeur…), chacun avec environ 8
+// tournures, sans contexte ni prénom. Correcteurs : correcteurs/volumes.ts.
+// ═══════════════════════════════════════════════════════════════════════════
+const unitePiochee = () => pick(["cm³", "cm³", "dm³", "m³"]);
+const compteEnPhrase = (f: { k: number[]; total: number; cubes: { y: number }[] }) =>
+  f.k.length > 1 ? `${f.cubes.some((c) => c.y > 0) ? "rangée par rangée" : "étage par étage"} : ${f.k.join(" + ")} = ${f.total}` : `il y en a ${f.total}`;
+const figureCubes = (cubes: { x: number; y: number; z: number }[]) => ({ kind: "solide_3d" as const, solide: "assemblage_cubes" as const, cubes, display: { showLabels: false } });
+
+// ─── volume_compter ★2 ──────────────────────────────────────────────────────
+/** Le solide dessiné, et combien de cubes ajouter pour atteindre un volume. */
+function genVolumeCompterAjouter() {
+  const f = tirerFigure();
+  const u = unitePiochee();
+  const a = randomInt(2, 6);
+  const N = `${f.total + a} ${u}`;
+  return {
+    text: pick([
+      `Un cube mesure 1 ${u}. Combien de cubes ajouter pour obtenir ${N} ?`,
+      `Cubes de 1 ${u}. Il faut ${N}. Combien de cubes manquent ?`,
+      `Le solide doit faire ${N}. Un cube vaut 1 ${u}. Combien en ajouter ?`,
+      `Pour atteindre ${N}, combien de cubes de 1 ${u} faut-il ajouter ?`,
+      `Complète ce solide jusqu’à ${N}. Combien de cubes de 1 ${u} poses-tu ?`,
+      `Il manque des cubes de 1 ${u} pour faire ${N}. Combien ?`,
+      `Écris le nombre de cubes de 1 ${u} à ajouter pour avoir ${N}.`,
+      `Ajoute des cubes de 1 ${u} pour avoir ${N}. Combien en faut-il ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(a, "cubes"),
+    comparator: "number_equal" as const,
+    explanation: expl(`On compte les cubes dessinés, ${compteEnPhrase(f)}. Il en faut ${f.total + a} : ${f.total + a} − ${f.total} = ${a}. Il faut ajouter ${a} cubes.`),
+    canvas: figureCubes(f.cubes),
+  };
+}
+
+/** Le solide dessiné, moins quelques cubes. */
+function genVolumeCompterEnlever() {
+  let f = tirerFigure();
+  const r = randomInt(2, 4);
+  while (f.total < r + 2) f = tirerFigure();
+  const u = unitePiochee();
+  const reste = f.total - r;
+  return {
+    text: pick([
+      `On enlève ${r} cubes de 1 ${u}. Quel volume reste-t-il ?`,
+      `On retire ${r} cubes de 1 ${u}. Calcule le volume restant.`,
+      `Enlève ${r} cubes de 1 ${u}. Quel est le nouveau volume ?`,
+      `Retire ${r} cubes de 1 ${u}. Écris le volume qui reste.`,
+      `Chaque cube fait 1 ${u}. On retire ${r} cubes. Que vaut le nouveau volume ?`,
+      `Un cube vaut 1 ${u}. Sans ${r} cubes, quel est le volume ?`,
+      `Le solide perd ${r} cubes de 1 ${u}. Quel est son volume maintenant ?`,
+      `Tu enlèves ${r} cubes de 1 ${u}. Que vaut le volume ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(reste, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`On compte les cubes dessinés, ${compteEnPhrase(f)}. On en enlève ${r} : ${f.total} − ${r} = ${reste}. Le volume est ${reste} ${u}.`),
+    canvas: figureCubes(f.cubes),
+  };
+}
+
+/** Des rangées, des étages ou des couches : on multiplie, sans dessin. */
+function genVolumeCompterRangees() {
+  const u = unitePiochee();
+  const a = randomInt(2, 5);
+  const b = randomInt(2, 6);
+  const total = a * b;
+  return {
+    text: pick([
+      `Le solide a ${a} rangées de ${b} cubes de 1 ${u}. Quel est son volume ?`,
+      `${a} rangées de ${b} cubes de 1 ${u}. Calcule le volume.`,
+      `Un solide : ${a} étages de ${b} cubes de 1 ${u}. Quel volume ?`,
+      `On empile ${a} couches de ${b} cubes de 1 ${u}. Calcule le volume.`,
+      `${a} couches de ${b} cubes, chaque cube fait 1 ${u}. Quel volume ?`,
+      `Multiplie : ${a} rangées de ${b} cubes de 1 ${u}. Écris le volume.`,
+      `Écris le volume de ${a} étages de ${b} cubes de 1 ${u}.`,
+      `Quel volume font ${a} rangées de ${b} cubes de 1 ${u} ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(total, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`${a} fois ${b} cubes : ${a} × ${b} = ${total} cubes de 1 ${u}. Le volume est ${total} ${u}.`),
+  };
+}
+
+/** Un nombre de cubes donné : le volume s'en déduit, sans dessin. */
+function genVolumeCompterNombre() {
+  const u = unitePiochee();
+  const n = randomInt(4, 15);
+  return {
+    text: pick([
+      `Un solide contient ${n} cubes de 1 ${u}. Quel est son volume ?`,
+      `${n} cubes de 1 ${u} forment un solide. Calcule son volume.`,
+      `Avec ${n} cubes de 1 ${u}, quel volume obtient-on ?`,
+      `On empile ${n} cubes de 1 ${u}. Quel volume cela fait-il ?`,
+      `Écris le volume de ${n} cubes de 1 ${u}.`,
+      `Quel volume occupent ${n} cubes de 1 ${u} ?`,
+      `Compte : ${n} cubes de 1 ${u}. Quel volume ?`,
+      `Que vaut le volume de ${n} cubes de 1 ${u} ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(n, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`Chaque cube a un volume de 1 ${u}. ${n} cubes font ${n} ${u}.`),
+  };
+}
+
+/** Le cube dessiné ne vaut pas 1 : on compte, puis on multiplie. */
+function genVolumeCompterGrosCube() {
+  let f = tirerFigure();
+  while (f.total > 12) f = tirerFigure();
+  const u = unitePiochee();
+  const c = pick([2, 3, 5]);
+  const V = f.total * c;
+  return {
+    text: pick([
+      `Attention, chaque cube fait ${c} ${u}. Quel est le volume ?`,
+      `Ici, un cube vaut ${c} ${u}. Quel est le volume total ?`,
+      `Volume d’un cube : ${c} ${u}. Quel est le volume du solide ?`,
+      `Les cubes font ${c} ${u} chacun. Calcule le volume total.`,
+      `Ces cubes mesurent ${c} ${u} chacun. Trouve le volume.`,
+      `Multiplie : un cube vaut ${c} ${u}. Écris le volume du solide.`,
+      `Chaque cube vaut ${c} ${u}. Compte-les et écris le volume.`,
+      `Compte les cubes. Chacun fait ${c} ${u}. Quel est le volume ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(V, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`On compte les cubes, ${compteEnPhrase(f)}. Chacun vaut ${c} ${u} : ${f.total} × ${c} = ${V}. Le volume est ${V} ${u}.`),
+    canvas: figureCubes(f.cubes),
+  };
+}
+
+/** Le solide dessiné, en QCM : le piège est l'unité carrée, ou un cube oublié. */
+function genVolumeCompterQcmFigure() {
+  const f = tirerFigure();
+  const u = unitePiochee();
+  const n = f.total;
+  return {
+    text: pick([
+      `Cubes de 1 ${u}. Choisis le bon volume.`,
+      `Choisis le volume du solide. Un cube fait 1 ${u}.`,
+      `Un cube fait 1 ${u}. Quelle écriture donne le volume ?`,
+      `Quelle proposition donne le volume ? Un cube fait 1 ${u}.`,
+      `Regarde le solide. Un cube fait 1 ${u}. Choisis son volume.`,
+      `Coche le volume de ce solide fait de cubes de 1 ${u}.`,
+      `Ce solide a des cubes de 1 ${u}. Coche son volume.`,
+      `Quel volume correspond au dessin ? Un cube fait 1 ${u}.`,
+    ]),
+    format: "qcm" as const,
+    choices: makeChoices(`${n} ${u}`, [`${n} ${u.replace("³", "²")}`, `${n + 1} ${u}`, `${n - 1} ${u}`, `${n + 2} ${u}`]),
+    expected: [`${n} ${u}`],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`On compte les cubes, ${compteEnPhrase(f)}. Le volume est ${n} ${u}, avec le petit 3 d’une unité cube.`),
+    canvas: figureCubes(f.cubes),
+  };
+}
+
+// ─── volume_assemblage ★2 ───────────────────────────────────────────────────
+/** Le volume total et un morceau : retrouver l'autre morceau. */
+function genVolumeAssemblerManque() {
+  const u = unitePiochee();
+  const t = randomInt(8, 30);
+  const a = randomInt(2, t - 2);
+  const T = `${t} ${u}`;
+  const A = `${a} ${u}`;
+  return {
+    text: pick([
+      `Deux morceaux font ${T} en tout. L’un fait ${A}. Et l’autre ?`,
+      `Un solide de ${T} a deux morceaux. L’un fait ${A}. Et l’autre ?`,
+      `${T} au total. Un morceau fait ${A}. Quel est le volume de l’autre ?`,
+      `On assemble ${A} et un autre morceau : on obtient ${T}. Volume de l’autre ?`,
+      `Calcule le morceau manquant : ${A} + ? = ${T}.`,
+      `Complète : ${A} + ? = ${T}.`,
+      `Il manque un morceau pour passer de ${A} à ${T}. Quel volume ?`,
+      `Un assemblage fait ${T}. On retire un morceau de ${A}. Quel volume reste-t-il ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(t - a, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`Les deux morceaux font ${T} ensemble : ${t} − ${a} = ${t - a}. L’autre morceau fait ${t - a} ${u}.`),
+  };
+}
+
+/** Couper en morceaux égaux : le chemin inverse de l'assemblage (÷). */
+function genVolumeAssemblerPartage() {
+  const u = unitePiochee();
+  const n = randomInt(2, 5);
+  const v = randomInt(2, 9);
+  const V = `${n * v} ${u}`;
+  return {
+    text: pick([
+      `On coupe ${V} en ${n} morceaux égaux. Quel volume a un morceau ?`,
+      `Partage ${V} en ${n} morceaux égaux. Calcule le volume d’un morceau.`,
+      `Un solide de ${V} donne ${n} morceaux égaux. Quel volume par morceau ?`,
+      `${n} morceaux égaux font ${V}. Quel est le volume d’un morceau ?`,
+      `En ${n} morceaux égaux, ${V} donne quel volume par morceau ?`,
+      `Écris le volume d’un morceau : ${V} coupés en ${n} morceaux égaux.`,
+      `On sépare ${V} en ${n} blocs égaux. Que vaut un bloc ?`,
+      `${V} pour ${n} morceaux égaux : combien pour un morceau ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(v, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`Les morceaux sont égaux, on partage : ${n * v} ÷ ${n} = ${v}. Un morceau fait ${v} ${u}.`),
+  };
+}
+
+/** Deux volumes déjà écrits en unités cubes : on les additionne. */
+function genVolumeAssemblerAjout() {
+  const u = unitePiochee();
+  const a = randomInt(3, 25);
+  const b = randomInt(2, 20);
+  const A = `${a} ${u}`;
+  const B = `${b} ${u}`;
+  return {
+    text: pick([
+      `Un solide de ${A} est collé à un solide de ${B}. Volume total ?`,
+      `Deux solides font ${A} et ${B}. On les colle. Quel est le volume ?`,
+      `Écris le volume total de deux solides : ${A} et ${B}.`,
+      `Assemble deux morceaux de ${A} et ${B}. Quel volume obtiens-tu ?`,
+      `Un morceau de ${A}, un morceau de ${B}. Quel volume ensemble ?`,
+      `On ajoute ${B} à un solide de ${A}. Quel est le nouveau volume ?`,
+      `Un solide de ${A} grandit de ${B}. Quel volume a-t-il maintenant ?`,
+      `${A} puis ${B} : quel volume après assemblage ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(a + b, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`Assembler, c’est additionner les volumes : ${a} + ${b} = ${a + b}. Le volume est ${a + b} ${u}.`),
+  };
+}
+
+/** Plusieurs blocs identiques : on multiplie. */
+function genVolumeAssemblerFois() {
+  const u = unitePiochee();
+  const n = randomInt(2, 6);
+  const v = randomInt(2, 9);
+  const V = `${v} ${u}`;
+  return {
+    text: pick([
+      `On assemble ${n} blocs de ${V}. Quel est le volume ?`,
+      `${n} blocs de ${V} sont collés. Calcule le volume total.`,
+      `Calcule le volume de ${n} morceaux de ${V} chacun.`,
+      `Colle ${n} blocs de ${V}. Écris le volume obtenu.`,
+      `Chaque bloc fait ${V}. On en assemble ${n}. Quel volume obtient-on ?`,
+      `Chaque morceau fait ${V}. On en colle ${n}. Calcule le volume.`,
+      `Avec ${n} morceaux de ${V}, quel volume construis-tu ?`,
+      `Quel volume font ${n} blocs de ${V} collés ensemble ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(n * v, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`${n} blocs identiques : ${n} × ${v} = ${n * v}. Le volume est ${n * v} ${u}.`),
+  };
+}
+
+/** Les mêmes cubes, une autre forme : le volume ne change pas. */
+function genVolumeAssemblerForme() {
+  const u = unitePiochee();
+  const v = randomInt(6, 30);
+  const V = `${v} ${u}`;
+  const d = randomInt(1, 4);
+  return {
+    text: pick([
+      `Un solide fait ${V}. On refait une tour avec ses cubes. Son volume ?`,
+      `On démonte un solide de ${V}. On remonte tous les cubes autrement. Son volume ?`,
+      `Un solide de ${V} change de forme, avec les mêmes cubes. Son volume ?`,
+      `Les cubes d’un solide de ${V} forment un mur. Quel est son volume ?`,
+      `Avec les mêmes cubes, ${V} devient un escalier. Quel est son volume ?`,
+      `Un mur de ${V} devient une tour, mêmes cubes. Quel volume ?`,
+      `Une tour de ${V} devient un mur, avec les mêmes cubes. Volume du mur ?`,
+      `On empile autrement les cubes d’un solide de ${V}. Que vaut son volume ?`,
+    ]),
+    format: "qcm" as const,
+    choices: makeChoices(V, [`${v + d} ${u}`, `${v - d} ${u}`, `${v * 2} ${u}`, `${v} ${u.replace("³", "²")}`]),
+    expected: [V],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`Le nombre de cubes ne change pas : la forme change, le volume reste ${V}.`),
+  };
+}
+
+// ─── volume_comparer ★2 ─────────────────────────────────────────────────────
+/** Le signe entre deux volumes (parfois égaux). */
+function genVolumeComparerSigne() {
+  const u = unitePiochee();
+  const a = randomInt(5, 90);
+  let b = randomInt(5, 90);
+  if (Math.random() < 0.15) b = a;
+  const A = `${a} ${u}`;
+  const B = `${b} ${u}`;
+  const juste = a < b ? "<" : a > b ? ">" : "=";
+  return {
+    text: pick([
+      `Compare ${A} et ${B}. Choisis le signe.`,
+      `Quel signe mettre entre ${A} et ${B} ?`,
+      `${A} … ${B} : quel signe convient ?`,
+      `Complète avec un signe : ${A} … ${B}.`,
+      `Choisis <, > ou = : ${A} … ${B}.`,
+      `Écris le bon signe : ${A} … ${B}.`,
+      `Entre ${A} et ${B}, quel signe faut-il ?`,
+      `Quel signe compare ${A} et ${B} ?`,
+    ]),
+    format: "qcm" as const,
+    choices: shuffle(["<", ">", "="]),
+    expected: [juste],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`Même unité : on compare ${a} et ${b}. On écrit ${A} ${juste} ${B}.`),
+  };
+}
+
+/** L'écart entre deux volumes. */
+function genVolumeComparerEcart() {
+  const u = unitePiochee();
+  const lo = randomInt(4, 40);
+  const hi = lo + randomInt(2, 25);
+  const L = `${lo} ${u}`;
+  const H = `${hi} ${u}`;
+  return {
+    text: pick([
+      `Calcule l’écart entre ${L} et ${H}.`,
+      `Quelle est la différence entre ${H} et ${L} ?`,
+      `De combien ${H} dépasse ${L} ?`,
+      `Combien faut-il ajouter à ${L} pour avoir ${H} ?`,
+      `${H} et ${L} : quel écart ?`,
+      `Il manque combien à ${L} pour faire ${H} ?`,
+      `Écris l’écart entre ${H} et ${L}.`,
+      `De combien ${L} est plus petit que ${H} ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(hi - lo, u),
+    comparator: "number_equal" as const,
+    explanation: expl(`On soustrait le plus petit du plus grand : ${hi} − ${lo} = ${hi - lo}. L’écart est ${hi - lo} ${u}.`),
+  };
+}
+
+/** Deux unités différentes : le plus grand nombre n'est pas le plus grand volume. */
+function genVolumeComparerUnites() {
+  const [petite, grande] = pick([["cm³", "dm³"], ["dm³", "m³"], ["cm³", "m³"]]);
+  const g = randomInt(1, 9);
+  const n = randomInt(10, 99);
+  const grand = Math.random() < 0.5;
+  const M = grand ? "grand" : "petit";
+  const [X, Y] = shuffle([`${g} ${grande}`, `${n} ${petite}`]);
+  const juste = grand ? { v: g, u: grande } : { v: n, u: petite };
+  return {
+    text: pick([
+      `Attention aux unités. Quel est le plus ${M} : ${X} ou ${Y} ?`,
+      `Regarde les unités. Écris le plus ${M} : ${X} ou ${Y}.`,
+      `Les unités changent : ${X} ou ${Y}. Quel est le plus ${M} ?`,
+      `${X} ou ${Y} : regarde l’unité. Écris le plus ${M}.`,
+      `Unités différentes : ${X} et ${Y}. Trouve le plus ${M}.`,
+      `Lis bien l’unité. Le plus ${M} est-il ${X} ou ${Y} ?`,
+      `Entre ${X} et ${Y}, l’unité compte. Écris le plus ${M}.`,
+      `Avec ces unités, quel est le plus ${M} : ${X} ou ${Y} ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(juste.v, juste.u),
+    comparator: "number_equal" as const,
+    explanation: expl(`Un cube de 1 ${grande} est bien plus gros qu’un cube de 1 ${petite} : 1 ${grande} dépasse même 99 ${petite}. Donc ${g} ${grande} est plus grand que ${n} ${petite}. Le plus ${M} est ${juste.v} ${juste.u}.`),
+  };
+}
+
+/** Quatre volumes : choisir le plus grand ou le plus petit. */
+function genVolumeComparerParmi() {
+  const u = unitePiochee();
+  const vals = new Set<number>();
+  while (vals.size < 4) vals.add(randomInt(5, 95));
+  const v = [...vals];
+  const grand = Math.random() < 0.5;
+  const M = grand ? "grand" : "petit";
+  const r = grand ? Math.max(...v) : Math.min(...v);
+  return {
+    text: pick([
+      `Choisis le plus ${M} volume.`,
+      `Coche le plus ${M}.`,
+      `Parmi ces volumes, écris le plus ${M}.`,
+      `Trouve le volume le plus ${M}.`,
+      `Clique sur le plus ${M} volume.`,
+      `Lis ces quatre volumes. Choisis le plus ${M}.`,
+      `Repère le plus ${M} volume.`,
+      `Compare ces volumes. Coche le plus ${M}.`,
+    ]),
+    format: "qcm" as const,
+    choices: shuffle(v.map((x) => `${x} ${u}`)),
+    expected: [`${r} ${u}`],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`Même unité : on compare les nombres. Le plus ${M} est ${r} ${u}.`),
+  };
+}
+
+/** Un volume entre deux autres. */
+function genVolumeComparerEntre() {
+  const u = unitePiochee();
+  const a = randomInt(12, 60);
+  const b = a + randomInt(4, 20);
+  const dedans = randomInt(a + 1, b - 1);
+  const A = `${a} ${u}`;
+  const B = `${b} ${u}`;
+  return {
+    text: pick([
+      `Quel volume est entre ${A} et ${B} ?`,
+      `Choisis un volume compris entre ${A} et ${B}.`,
+      `Trouve le volume plus grand que ${A} et plus petit que ${B}.`,
+      `Plus grand que ${A}, plus petit que ${B} : quel volume ?`,
+      `Entre ${A} et ${B}, quel volume trouves-tu ?`,
+      `Coche le volume situé entre ${A} et ${B}.`,
+      `Quelle mesure tombe entre ${A} et ${B} ?`,
+      `Un volume dépasse ${A} et reste sous ${B}. Choisis-le.`,
+    ]),
+    format: "qcm" as const,
+    choices: makeChoices(`${dedans} ${u}`, [`${a - randomInt(1, 8)} ${u}`, `${b + randomInt(1, 8)} ${u}`, `${b + randomInt(9, 20)} ${u}`, `${a - randomInt(9, 11)} ${u}`]),
+    expected: [`${dedans} ${u}`],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`On cherche un nombre plus grand que ${a} et plus petit que ${b} : c’est ${dedans}. Le volume est ${dedans} ${u}.`),
+  };
+}
+
+/** Le solide dessiné comparé à un volume écrit : oui ou non. */
+function genVolumeComparerFigure() {
+  const f = tirerFigure();
+  const u = unitePiochee();
+  let n = f.total + pick([-3, -2, -1, 1, 2, 3]);
+  if (n < 2) n = f.total + randomInt(1, 3);
+  const N = `${n} ${u}`;
+  const t = pick([
+    { p: `Un cube mesure 1 ${u}. Le volume dépasse-t-il ${N} ?`, plus: true },
+    { p: `Cubes de 1 ${u}. Ce volume est-il plus grand que ${N} ?`, plus: true },
+    { p: `Cubes de 1 ${u}. Ce volume est-il plus petit que ${N} ?`, plus: false },
+    { p: `Ce solide fait-il plus de ${N} ? Un cube vaut 1 ${u}.`, plus: true },
+    { p: `Ce solide fait-il moins de ${N} ? Un cube vaut 1 ${u}.`, plus: false },
+    { p: `Un cube fait 1 ${u}. Le solide est-il au-dessus de ${N} ?`, plus: true },
+    { p: `Un cube fait 1 ${u}. Le solide est-il en dessous de ${N} ?`, plus: false },
+    { p: `Le volume passe-t-il ${N} ? Chaque cube fait 1 ${u}.`, plus: true },
+  ]);
+  const oui = t.plus ? f.total > n : f.total < n;
+  return {
+    text: t.p,
+    format: "qcm" as const,
+    choices: shuffle(["oui", "non"]),
+    expected: [oui ? "oui" : "non"],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`On compte les cubes, ${compteEnPhrase(f)}. Le volume est ${f.total} ${u}, à comparer à ${N} : la réponse est ${oui ? "oui" : "non"}.`),
+    canvas: figureCubes(f.cubes),
+  };
+}
+
+// ─── volume_lire ★1 ─────────────────────────────────────────────────────────
+const nombreALire = () => randomInt(12, 59); // ★1 : pas de « quatre-vingt-dix-sept » à déchiffrer dans le nombre juste.
+const piegesDeLecture = (n: number) => {
+  const inverse = Number(String(n).split("").reverse().join(""));
+  return [inverse, n + 100, n * 10].filter((x) => x !== n && x > 0);
+};
+
+/** Des lettres vers les chiffres. */
+function genVolumeLireEnChiffres() {
+  const u = pick(["cm³", "dm³", "m³"]);
+  const n = nombreALire();
+  const L = `${enLettres(n)} ${UNITES_MOTS[u]}`;
+  return {
+    text: pick([
+      `Écris en chiffres : « ${L} ».`,
+      `Comment écrire « ${L} » ?`,
+      `Quelle écriture correspond à « ${L} » ?`,
+      `Choisis l’écriture de « ${L} ».`,
+      `Trouve l’écriture chiffrée de « ${L} ».`,
+      `« ${L} » : quelle mesure est-ce ?`,
+      `Que vaut « ${L} » en chiffres ?`,
+      `Coche la mesure « ${L} ».`,
+    ]),
+    format: "qcm" as const,
+    choices: makeChoices(`${n} ${u}`, [`${n} ${u.replace("³", "²")}`, ...piegesDeLecture(n).map((x) => `${nf(x)} ${u}`)]),
+    expected: [`${n} ${u}`],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`« ${L} » s’écrit ${n} ${u}. « Cube » se note avec le petit 3.`),
+  };
+}
+
+/** Des chiffres vers les lettres. */
+function genVolumeLireADire() {
+  const u = pick(["cm³", "dm³", "m³"]);
+  const n = nombreALire();
+  const N = `${n} ${u}`;
+  const L = `${enLettres(n)} ${UNITES_MOTS[u]}`;
+  return {
+    text: pick([
+      `Comment lit-on ${N} ?`,
+      `Lis ${N}. Que dis-tu ?`,
+      `Comment se lit ${N} ?`,
+      `Choisis la lecture de ${N}.`,
+      `${N} se lit comment ?`,
+      `Que dit-on pour ${N} ?`,
+      `Quelle lecture convient pour ${N} ?`,
+      `Lis à voix haute : ${N}.`,
+    ]),
+    format: "qcm" as const,
+    choices: makeChoices(L, [`${enLettres(n)} ${UNITES_MOTS[u].replace(" cubes", " carrés")}`, ...piegesDeLecture(n).filter((x) => x < 1000).map((x) => `${enLettres(x)} ${UNITES_MOTS[u]}`)]),
+    expected: [L],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`${N} se lit « ${L} ». Le petit 3 se dit « cube ».`),
+  };
+}
+
+const MESURES_DIVERSES: { u: string; g: string }[] = [
+  { u: "cm³", g: "un volume" },
+  { u: "dm³", g: "un volume" },
+  { u: "m³", g: "un volume" },
+  { u: "cm³", g: "un volume" },
+  { u: "cm²", g: "une aire" },
+  { u: "m²", g: "une aire" },
+  { u: "cm", g: "une longueur" },
+  { u: "m", g: "une longueur" },
+  { u: "kg", g: "une masse" },
+  { u: "g", g: "une masse" },
+];
+
+/** Quelle grandeur donne cette mesure ? */
+function genVolumeLireGrandeur() {
+  const m = pick(MESURES_DIVERSES);
+  const N = `${randomInt(2, 99)} ${m.u}`;
+  return {
+    text: pick([
+      `Que mesure ${N} ?`,
+      `${N} : c’est quelle grandeur ?`,
+      `Quelle grandeur donne ${N} ?`,
+      `${N} mesure quoi ?`,
+      `Choisis la grandeur de ${N}.`,
+      `À quelle grandeur correspond ${N} ?`,
+      `Que donne la mesure ${N} ?`,
+      `Lis ${N}. Quelle grandeur est-ce ?`,
+    ]),
+    format: "qcm" as const,
+    choices: shuffle(["un volume", "une aire", "une longueur", "une masse"]),
+    expected: [m.g],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`Le petit 3 donne un volume, le petit 2 une aire ; cm et m donnent une longueur, g et kg une masse. ${N} donne ${m.g}.`),
+  };
+}
+
+/** Un volume, c'est un nombre de cubes unités. */
+function genVolumeLireEnCubes() {
+  const u = pick(["cm³", "dm³", "m³"]);
+  const n = randomInt(5, 60);
+  const N = `${n} ${u}`;
+  return {
+    text: pick([
+      `${N}, c’est combien de cubes de 1 ${u} ?`,
+      `Combien de cubes de 1 ${u} dans ${N} ?`,
+      `Un solide fait ${N}. Combien de cubes de 1 ${u} ?`,
+      `Écris le nombre de cubes de 1 ${u} dans ${N}.`,
+      `${N} = combien de cubes de 1 ${u} ?`,
+      `Pour faire ${N}, combien de cubes de 1 ${u} ?`,
+      `Il faut combien de cubes de 1 ${u} pour ${N} ?`,
+      `Lis ${N}. Combien de cubes de 1 ${u} ?`,
+    ]),
+    format: "short" as const,
+    expected: avecUnite(n, "cubes"),
+    comparator: "number_equal" as const,
+    explanation: expl(`Un cube de 1 ${u} compte pour 1. ${N} correspond donc à ${n} cubes.`),
+  };
+}
+
+const NOMS_UNITES: { s: string; nom: string }[] = [
+  { s: "cm", nom: "centimètre" },
+  { s: "dm", nom: "décimètre" },
+  { s: "m", nom: "mètre" },
+];
+
+/** Le nom de l'unité. */
+function genVolumeLireNomUnite() {
+  const o = pick(NOMS_UNITES);
+  const autre = pick(NOMS_UNITES.filter((x) => x.s !== o.s));
+  const carre = Math.random() < 0.2;
+  const S = `${o.s}${carre ? "²" : "³"}`;
+  const juste = `${o.nom} ${carre ? "carré" : "cube"}`;
+  return {
+    text: pick([
+      `Que veut dire ${S} ?`,
+      `Que signifie le symbole ${S} ?`,
+      `Quel nom porte l’unité ${S} ?`,
+      `${S} se dit comment ?`,
+      `Quel est le nom de ${S} ?`,
+      `Donne le nom de l’unité ${S}.`,
+      `Lis l’unité ${S}. Que dis-tu ?`,
+      `Choisis le nom de ${S}.`,
+    ]),
+    format: "qcm" as const,
+    choices: makeChoices(juste, [`${o.nom} cube`, `${o.nom} carré`, o.nom, `${autre.nom} ${carre ? "carré" : "cube"}`]),
+    expected: [juste],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`${S} se lit « ${juste} » : le petit ${carre ? "2 se dit « carré »" : "3 se dit « cube »"}.`),
+  };
+}
+
+/** Cette mesure est-elle un volume ? */
+function genVolumeLireOuiNon() {
+  const m = pick(MESURES_DIVERSES);
+  const N = `${randomInt(2, 99)} ${m.u}`;
+  const estVolume = m.g === "un volume";
+  const vraiFaux = Math.random() < 0.25;
+  const text = vraiFaux
+    ? pick([`${N} est un volume. Vrai ou faux ?`, `Vrai ou faux : ${N} est un volume.`])
+    : pick([
+        `Est-ce un volume : ${N} ?`,
+        `${N} est-il un volume ?`,
+        `${N} : est-ce un volume ?`,
+        `Cette mesure est-elle un volume : ${N} ?`,
+        `${N} donne-t-il un volume ?`,
+        `Peut-on dire que ${N} est un volume ?`,
+      ]);
+  return {
+    text,
+    format: "qcm" as const,
+    choices: shuffle(vraiFaux ? ["vrai", "faux"] : ["oui", "non"]),
+    expected: [vraiFaux ? (estVolume ? "vrai" : "faux") : estVolume ? "oui" : "non"],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`Un volume s’écrit avec le petit 3 (cm³, dm³, m³). ${N} donne ${m.g}.`),
   };
 }
 
@@ -1657,7 +2300,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_assemblage",
     difficulty: 3,
     theme: "neutral",
-    hint: "Compte d’abord les cubes du bloc, puis ajoute le petit morceau.",
+    hint: "Compte d’abord les cubes des étages, puis ajoute les autres.",
     tags: ["volume_solide", "assemblage", "qcm", "template"],
     generate: () => genVolumeAssemblerEtages(),
   },
@@ -1828,4 +2471,47 @@ export const volumesBank: TutorBankItemV4[] = [
   { kind: "fixed", id: "volume_defi_topup_4", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 3, theme: "neutral",
     text: "Défi : combien de cubes de 1 cm³ faut-il pour remplir entièrement une boîte de 2 cm × 3 cm × 2 cm ?", format: "short", expected: ["12 cubes"], comparator: "number_equal",
     hint: "Calcule le volume de la boîte.", explanation: expl("Le volume de la boîte est 2 × 3 × 2 = 12 cm³. Il faut donc 12 cubes de 1 cm³ pour la remplir."), tags: ["volume_solide", "defi"] },
+
+  // ⭐ 07/11/2026 — les modes neufs de ★1-★2 (voir plus haut).
+  ...(
+    [
+      ["volume_compter", "volume_compter_tpl_e2_ajouter", 2, "Compte les cubes dessinés, puis cherche ce qui manque.", genVolumeCompterAjouter],
+      ["volume_compter", "volume_compter_tpl_e2_enlever", 2, "Compte les cubes dessinés, puis enlève.", genVolumeCompterEnlever],
+      ["volume_compter", "volume_compter_tpl_e2_rangees", 2, "Multiplie le nombre de rangées par le nombre de cubes.", genVolumeCompterRangees],
+      ["volume_compter", "volume_compter_tpl_e2_nombre", 2, "Un cube de 1 compte pour 1 : le volume est le nombre de cubes.", genVolumeCompterNombre],
+      ["volume_compter", "volume_compter_tpl_e2_gros_cube", 2, "Compte les cubes, puis multiplie par le volume d’un cube.", genVolumeCompterGrosCube],
+      ["volume_compter", "volume_compter_qcm_tpl_e2_figure", 2, "Compte les cubes. Un volume s’écrit avec le petit 3.", genVolumeCompterQcmFigure],
+      ["volume_assemblage", "volume_assemblage_tpl_e2_manque", 2, "Du volume total, enlève le morceau connu.", genVolumeAssemblerManque],
+      ["volume_assemblage", "volume_assemblage_tpl_e2_partage", 2, "Des morceaux égaux : divise le volume par le nombre de morceaux.", genVolumeAssemblerPartage],
+      ["volume_assemblage", "volume_assemblage_tpl_e2_ajout", 2, "Assembler, c’est additionner les volumes.", genVolumeAssemblerAjout],
+      ["volume_assemblage", "volume_assemblage_tpl_e2_fois", 2, "Des blocs identiques : multiplie.", genVolumeAssemblerFois],
+      ["volume_assemblage", "volume_assemblage_qcm_tpl_e2_forme", 2, "Les mêmes cubes donnent le même volume.", genVolumeAssemblerForme],
+      ["volume_comparer", "volume_comparer_qcm_tpl_e2_signe", 2, "Même unité : compare les deux nombres.", genVolumeComparerSigne],
+      ["volume_comparer", "volume_comparer_tpl_e2_ecart", 2, "Soustrais le plus petit du plus grand.", genVolumeComparerEcart],
+      ["volume_comparer", "volume_comparer_tpl_e2_unites", 2, "Regarde l’unité : 1 m³ est plus gros que 1 dm³, et 1 dm³ plus gros que 1 cm³.", genVolumeComparerUnites],
+      ["volume_comparer", "volume_comparer_qcm_tpl_e2_parmi", 2, "Même unité : compare les nombres.", genVolumeComparerParmi],
+      ["volume_comparer", "volume_comparer_qcm_tpl_e2_entre", 2, "Cherche un nombre entre les deux nombres donnés.", genVolumeComparerEntre],
+      ["volume_comparer", "volume_comparer_qcm_tpl_e2_figure", 2, "Compte les cubes, puis compare.", genVolumeComparerFigure],
+      ["volume_lire", "volume_lire_qcm_tpl_e1_chiffres", 1, "« Cube » se note avec le petit 3.", genVolumeLireEnChiffres],
+      ["volume_lire", "volume_lire_qcm_tpl_e1_dire", 1, "Le petit 3 se dit « cube ».", genVolumeLireADire],
+      ["volume_lire", "volume_lire_qcm_tpl_e1_grandeur", 1, "Regarde l’unité : le petit 3 donne un volume.", genVolumeLireGrandeur],
+      ["volume_lire", "volume_lire_tpl_e1_cubes", 1, "Un cube de 1 compte pour 1.", genVolumeLireEnCubes],
+      ["volume_lire", "volume_lire_qcm_tpl_e1_nom", 1, "Le petit 3 se dit « cube », le petit 2 « carré ».", genVolumeLireNomUnite],
+      ["volume_lire", "volume_lire_qcm_tpl_e1_oui_non", 1, "Un volume s’écrit avec le petit 3.", genVolumeLireOuiNon],
+    ] as const
+  ).map(
+    ([microId, id, difficulty, hint, generate]): TutorBankItemV4 => ({
+      kind: "template",
+      id,
+      niveau: "6e",
+      matiere: "maths",
+      notionId: "volume_solide",
+      microId,
+      difficulty,
+      theme: "neutral",
+      hint,
+      tags: ["volume_solide", microId.replace("volume_", ""), "template"],
+      generate: () => generate(),
+    }),
+  ),
 ];

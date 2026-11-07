@@ -27,7 +27,7 @@
 // triangle se construit. Le BO les range dans deux chapitres différents, et
 // l'élève ne les rencontre pas au même moment de l'année.
 
-import type { TutorBankItemV4, DroitesCanvasData } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, TutorGeneratedQuestionV4, DroitesCanvasData } from "@/lib/tutor-v4/types";
 import { PRENOMS, pick, de, il, Il, nf, avecUnite, deuxPrenoms, type Prenom } from "./aires.bank";
 
 function shuffle<T>(arr: T[]): T[] {
@@ -261,15 +261,15 @@ const OUVERTES_DEFINITION: CasRaisonnement[] = [
 // Une situation, puis la donnée écrite comme en classe : « M est le milieu de
 // [AB] » et une longueur.
 const SITUATIONS_MILIEU: { u: string; lo: number; hi: number; phrase: (n: Prenom, A: string, B: string, M: string) => string }[] = [
-  { u: "cm", lo: 4, hi: 24, phrase: (n, A, B, M) => `Sur son cahier, ${n.nom} trace un segment [${A}${B}]. ${Il(n)} place le point ${M}, milieu de [${A}${B}].` },
-  { u: "m", lo: 4, hi: 30, phrase: (n, A, B, M) => `${n.nom} tend une corde entre deux piquets ${A} et ${B}. ${Il(n)} fait un nœud en ${M}, le milieu de [${A}${B}].` },
-  { u: "m", lo: 10, hi: 80, phrase: (n, A, B, M) => `Un pont relie la rive ${A} à la rive ${B}. ${n.nom} s’arrête en ${M}, le milieu de [${A}${B}].` },
-  { u: "km", lo: 6, hi: 40, phrase: (n, A, B, M) => `${n.nom} fait une randonnée en ligne droite du village ${A} au village ${B}. Le refuge ${M} est le milieu de [${A}${B}].` },
-  { u: "cm", lo: 10, hi: 30, phrase: (n, A, B, M) => `${n.nom} pose sa règle de ${A} à ${B} et marque le point ${M}, milieu de [${A}${B}].` },
-  { u: "m", lo: 20, hi: 100, phrase: (n, A, B, M) => `Au stade, ${n.nom} court en ligne droite du plot ${A} au plot ${B}. Le plot ${M} est le milieu de [${A}${B}].` },
-  { u: "dm", lo: 6, hi: 30, phrase: (n, A, B, M) => `${n.nom} veut scier une planche [${A}${B}] en deux morceaux égaux. ${Il(n)} trace le point ${M}, milieu de [${A}${B}].` },
-  { u: "cm", lo: 6, hi: 20, phrase: (n, A, B, M) => `${n.nom} plie une bande de papier [${A}${B}] pour amener ${A} sur ${B}. Le pli passe par ${M}, le milieu de [${A}${B}].` },
-  { u: "m", lo: 6, hi: 40, phrase: (n, A, B, M) => `Dans le jardin, une allée droite va du portail ${A} à la porte ${B}. ${n.nom} plante un arbre en ${M}, le milieu de [${A}${B}].` },
+  { u: "cm", lo: 4, hi: 24, phrase: (n, A, B, M) => `Sur son cahier, ${n.nom} trace [${A}${B}]. Le point ${M} est le milieu de [${A}${B}].` },
+  { u: "m", lo: 4, hi: 30, phrase: (n, A, B, M) => `${n.nom} tend une corde de ${A} à ${B}. Le nœud ${M} est le milieu de [${A}${B}].` },
+  { u: "m", lo: 10, hi: 80, phrase: (n, A, B, M) => `Un pont relie les rives ${A} et ${B}. ${n.nom} s’arrête en ${M}, le milieu de [${A}${B}].` },
+  { u: "km", lo: 6, hi: 40, phrase: (n, A, B, M) => `${n.nom} marche du village ${A} au village ${B}. Le refuge ${M} est le milieu de [${A}${B}].` },
+  { u: "cm", lo: 10, hi: 30, phrase: (n, A, B, M) => `${n.nom} pose sa règle de ${A} à ${B}. ${M} est le milieu de [${A}${B}].` },
+  { u: "m", lo: 20, hi: 100, phrase: (n, A, B, M) => `${n.nom} court du plot ${A} au plot ${B}. Le plot ${M} est le milieu de [${A}${B}].` },
+  { u: "dm", lo: 6, hi: 30, phrase: (n, A, B, M) => `${n.nom} scie une planche [${A}${B}] en deux morceaux égaux. ${M} est le milieu de [${A}${B}].` },
+  { u: "cm", lo: 6, hi: 20, phrase: (n, A, B, M) => `${n.nom} plie une bande de papier [${A}${B}]. Le pli passe par ${M}, le milieu de [${A}${B}].` },
+  { u: "m", lo: 6, hi: 40, phrase: (n, A, B, M) => `Une allée va de ${A} à ${B}. ${n.nom} plante un arbre en ${M}, le milieu de [${A}${B}].` },
 ];
 
 /** À ★1-★2 (`simple`) : « M est le milieu de [AB]. AB = 12 cm. Combien mesure AM ? »
@@ -281,6 +281,11 @@ const MILIEU_SIMPLE: typeof SITUATIONS_MILIEU = [
   { u: "mm", lo: 10, hi: 80, phrase: (_n, A, B, M) => `${M} est le milieu de [${A}${B}].` },
   { u: "km", lo: 6, hi: 40, phrase: (_n, A, B, M) => `Le point ${M} est le milieu de [${A}${B}].` },
   { u: "dm", lo: 6, hi: 30, phrase: (_n, A, B, M) => `${M} est le milieu de [${A}${B}].` },
+  // 07/11/2026 : deux autres façons de le dire (le correcteur les lit aussi).
+  { u: "cm", lo: 4, hi: 24, phrase: (_n, A, B, M) => `Le milieu de [${A}${B}] est ${M}.` },
+  { u: "m", lo: 4, hi: 40, phrase: (_n, A, B, M) => `[${A}${B}] a pour milieu ${M}.` },
+  { u: "km", lo: 6, hi: 40, phrase: (_n, A, B, M) => `Le milieu de [${A}${B}] est ${M}.` },
+  { u: "mm", lo: 10, hi: 80, phrase: (_n, A, B, M) => `[${A}${B}] a pour milieu ${M}.` },
 ];
 function genDistanceMilieu(etoile: 1 | 2, simple = false) {
   // « Le point M… » coûte deux mots : seulement à ★2.
@@ -298,9 +303,9 @@ function genDistanceMilieu(etoile: 1 | 2, simple = false) {
   const cherche = versLeTout ? `${A}${B}` : pick([`${A}${M}`, `${M}${B}`, `${M}${A}`, `${B}${M}`]);
   const r = versLeTout ? total : demi;
   // 03/11/2026 : à ★1-★2, des questions courtes (12 / 15 mots au plus).
-  const question = pick(simple ? [`Combien mesure ${cherche} ?`, `Calcule ${cherche}.`, `Trouve ${cherche}.`, `Donne ${cherche}.`] : [`Combien mesure ${cherche} ?`, `Quelle est la longueur ${cherche} ?`, `Calcule ${cherche}.`]);
+  const question = pick(simple ? [`Combien mesure ${cherche} ?`, `Calcule ${cherche}.`, `Trouve ${cherche}.`, `Donne ${cherche}.`, `Que mesure ${cherche} ?`, `Que vaut ${cherche} ?`] : [`Combien mesure ${cherche} ?`, `Quelle est la longueur ${cherche} ?`, `Calcule ${cherche}.`]);
   return {
-    text: simple ? `${s.phrase(n, A, B, M)} ${donnee}. ${question}` : `${s.phrase(n, A, B, M)} On sait que ${donnee}. ${question}`,
+    text: `${s.phrase(n, A, B, M)} ${donnee}. ${question}`, // 07/11/2026 : plus de « On sait que » (★3 : 25 mots au plus)
     format: "short" as const,
     expected: avecUnite(r, s.u),
     comparator: "number_equal" as const,
@@ -324,8 +329,8 @@ function genDistanceEstMilieu() {
   const e = cas === "inegal" ? d + pick([1, 2, 3]) : d;
   const position =
     cas === "hors"
-      ? pick([`${n.nom} place un point ${P} au-dessus du segment [${A}${B}], hors de la droite (${A}${B}).`, `${n.nom} dessine un triangle ${A}${B}${P}.`])
-      : pick([`${n.nom} place un point ${P} sur le segment [${A}${B}].`, `Les points ${A}, ${P} et ${B} sont alignés dans cet ordre : ${P} est sur le segment [${A}${B}].`]);
+      ? pick([`${n.nom} place un point ${P} hors de la droite (${A}${B}).`, `${n.nom} dessine un triangle ${A}${B}${P}.`])
+      : pick([`${n.nom} place un point ${P} sur le segment [${A}${B}].`, `${A}, ${P} et ${B} sont alignés : ${P} est sur le segment [${A}${B}].`]);
   const oui = `oui : ${P} est sur [${A}${B}] et ${P}${A} = ${P}${B}`;
   const nonInegal = `non : ${P}${A} et ${P}${B} ne sont pas égales`;
   const nonHors = `non : ${P} n’est pas sur le segment [${A}${B}]`;
@@ -365,13 +370,16 @@ const OUVERTES_MILIEU: CasRaisonnement[] = [
 ];
 
 // ─── distance_inegalite ─────────────────────────────────────────────────────
-const LIEUX_TRAJET: { u: string; lo: number; hi: number; phrase: (n: Prenom, A: string, B: string, C: string) => string }[] = [
-  { u: "m", lo: 150, hi: 900, phrase: (n, A, B, C) => `La maison ${de(n.nom)} est au point ${A}, l’école au point ${B} et la boulangerie au point ${C}.` },
-  { u: "km", lo: 3, hi: 30, phrase: (_n, A, B, C) => `Trois villages sont placés aux points ${A}, ${B} et ${C}.` },
-  { u: "m", lo: 5, hi: 40, phrase: (n, A, B, C) => `Dans le parc, ${n.nom} repère trois arbres : ${A}, ${B} et ${C}.` },
-  { u: "cm", lo: 3, hi: 12, phrase: (n, A, B, C) => `Sur son cahier, ${n.nom} place trois points ${A}, ${B} et ${C}.` },
-  { u: "km", lo: 2, hi: 15, phrase: (n, A, B, C) => `En vélo, ${n.nom} part du camping ${A} pour aller au lac ${B}. ${Il(n)} peut passer par la ferme ${C}.` },
-  { u: "m", lo: 20, hi: 120, phrase: (n, A, B, C) => `Au stade, ${n.nom} pose trois plots ${A}, ${B} et ${C}.` },
+// 07/11/2026 : ★3 en 25 mots au plus (une phrase, trois longueurs, une question).
+const LIEUX_TRAJET: { u: string; lo: number; hi: number; phrase: (n: Prenom, A: string, B: string) => string }[] = [
+  { u: "m", lo: 150, hi: 900, phrase: (n, A, B) => `${n.nom} marche de ${A} à ${B}.` },
+  { u: "km", lo: 3, hi: 30, phrase: (_n, A, B) => `Un car va de ${A} à ${B}.` },
+  { u: "m", lo: 5, hi: 40, phrase: (n, A, B) => `${n.nom} court de ${A} à ${B}.` },
+  { u: "cm", lo: 3, hi: 12, phrase: (_n, A, B) => `Un trajet va de ${A} à ${B}.` },
+  { u: "km", lo: 2, hi: 15, phrase: (n, A, B) => `${n.nom} roule de ${A} à ${B}.` },
+  { u: "m", lo: 20, hi: 120, phrase: (n, A, B) => `${n.nom} nage de ${A} à ${B}.` },
+  { u: "km", lo: 2, hi: 15, phrase: (_n, A, B) => `Un drone vole de ${A} à ${B}.` },
+  { u: "km", lo: 3, hi: 30, phrase: (_n, A, B) => `Un bateau va de ${A} à ${B}.` },
 ];
 
 function tirerTrajet() {
@@ -388,15 +396,15 @@ function tirerTrajet() {
 
 function genDistanceInegalite() {
   const { l, n, A, B, C, ac, cb, ab, aligne } = tirerTrajet();
-  const donnees = shuffle([`${A}${C} = ${ac} ${l.u}`, `${C}${B} = ${cb} ${l.u}`, `${A}${B} = ${ab} ${l.u}`]).join(", ").replace(/, ([^,]*)$/, " et $1");
-  const forme = pick(["segment", "alignes", "detour", "longueur"] as const);
-  const intro = `${l.phrase(n, A, B, C)} On sait que ${donnees}.`;
+  const donnees = shuffle([`${A}${C} = ${ac} ${l.u}`, `${C}${B} = ${cb} ${l.u}`, `${A}${B} = ${ab} ${l.u}`]).join(", ");
+  const forme = pick(["segment", "alignes", "detour", "rallonge", "longueur", "combien"] as const);
+  const intro = `${l.phrase(n, A, B)} ${donnees}.`;
   const expliq = aligne
     ? `${A}${C} + ${C}${B} = ${ac} + ${cb} = ${ac + cb} = ${A}${B} : il y a égalité, donc ${C} est sur le segment [${A}${B}].`
     : `${A}${C} + ${C}${B} = ${ac} + ${cb} = ${ac + cb}, plus grand que ${A}${B} = ${ab} : pas d’égalité, ${C} n’est pas sur le segment [${A}${B}].`;
-  if (forme === "longueur") {
+  if (forme === "longueur" || forme === "combien") {
     return {
-      text: `${intro} De combien le trajet ${A} → ${C} → ${B} est-il plus long que le trajet direct de ${A} à ${B} ?`,
+      text: `${intro} ${forme === "longueur" ? `De combien le trajet par ${C} est-il plus long ?` : `Combien de plus en passant par ${C} ?`}`,
       format: "short" as const,
       expected: avecUnite(ac + cb - ab, l.u),
       comparator: "number_equal" as const,
@@ -405,11 +413,13 @@ function genDistanceInegalite() {
   }
   const q =
     forme === "segment"
-      ? `Le point ${C} appartient-il au segment [${A}${B}] ?`
+      ? `${C} est-il sur le segment [${A}${B}] ?`
       : forme === "alignes"
-        ? `Les points ${A}, ${B} et ${C} sont-ils alignés ?`
-        : `Passer par ${C} pour aller de ${A} à ${B}, est-ce un détour ?`;
-  const oui = forme === "detour" ? !aligne : aligne;
+        ? `${A}, ${B} et ${C} sont-ils alignés ?`
+        : forme === "detour"
+          ? `Passer par ${C}, est-ce un détour ?`
+          : `Le trajet par ${C} rallonge-t-il le chemin ?`;
+  const oui = forme === "detour" || forme === "rallonge" ? !aligne : aligne;
   return {
     text: `${intro} ${q}`,
     format: "qcm" as const,
@@ -500,6 +510,332 @@ const OUVERTES_DEFI: CasRaisonnement[] = [
     r: (A: string, B: string) => `On construit d'abord le milieu M de [${A}${B}] au compas — deux arcs depuis ${A}, deux depuis ${B}, on joint les intersections. On recommence ensuite sur [${A}M], puis sur [M${B}] : chaque moitié se coupe en deux, ce qui donne quatre parts égales.`,
   },
 ];
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ⭐ 07/11/2026 — distance_milieu : LA MÊME PHRASE REVENAIT À ★1-★2
+// (scripts/mesurer-squelettes-coach.ts --lettres : 7,8 et 5,7 répétitions sur 20).
+// Une autre lettre ou un autre nombre ne fait pas une autre question : chaque
+// gabarit ci-dessous demande AUTRE CHOSE (lire la figure, juger une égalité,
+// compléter, passer de la moitié au tout, soustraire, changer d'unité, lire une
+// droite graduée). ★1 : 12 mots au plus ; ★2 : 15 ; ni prénom ni objet
+// (../REGLES-6E.md). Correcteurs : correcteurs/distances.ts, section du 07/11.
+// ═══════════════════════════════════════════════════════════════════════════
+type G = TutorGeneratedQuestionV4;
+const qc = (text: string, juste: string, faux: string[], calcul: string, canvas?: DroitesCanvasData): G => ({
+  text, format: "qcm", choices: shuffle([juste, ...faux]), expected: [juste], comparator: "mcq_exact", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
+});
+/** Une longueur : le nombre seul est accepté aussi (comparateur number_equal). */
+const lg = (text: string, v: number, u: string, calcul: string, canvas?: DroitesCanvasData): G => ({
+  text, format: "short", expected: avecUnite(v, u), comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
+});
+const nb = (text: string, n: number, calcul: string): G => ({ text, format: "short", expected: [nf(n)], comparator: "number_equal", explanation: expl(calcul) });
+/** Une réponse en lettres : toutes les écritures justes (MB et BM). */
+const lt = (text: string, justes: string[], calcul: string, canvas?: DroitesCanvasData): G => ({
+  text, format: "short", expected: justes, comparator: "exact_text", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
+});
+const ouiNon = (text: string, oui: boolean, calcul: string, canvas?: DroitesCanvasData) => qc(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
+const vraiFaux = (text: string, vrai: boolean, calcul: string, canvas?: DroitesCanvasData) => qc(text, vrai ? "vrai" : "faux", [vrai ? "faux" : "vrai"], calcul, canvas);
+
+/**
+ * [AB] avec des points posés dessus (0 = A, 1 = B). Aucun point n'est mis en avant :
+ * le dessin ne désigne pas la réponse. `cote` : une longueur écrite, sur un trait
+ * tiré sous le segment (pour ne pas recouvrir les lettres).
+ */
+function segmentPoints(A: string, B: string, pts: { label: string; frac: number }[], cote?: { de: number; a: number; texte: string }): DroitesCanvasData {
+  const [xa, xb, y] = [45, 295, 110];
+  const x = (f: number) => xa + (xb - xa) * f;
+  const lines: DroitesCanvasData["lines"] = [{ id: "AB", type: "segment", from: { x: xa, y }, to: { x: xb, y }, display: { showLabel: false } }];
+  if (cote) lines.push({ id: "cote", type: "segment", from: { x: x(cote.de), y: y + 50 }, to: { x: x(cote.a), y: y + 50 }, label: cote.texte, color: "#2563eb", dashed: true, display: { showLabel: true } });
+  return {
+    kind: "droites",
+    size: { width: 340, height: 200 },
+    lines,
+    points: [{ x: xa, y, label: A }, { x: xb, y, label: B }, ...pts.map((p) => ({ x: x(p.frac), y, label: p.label }))],
+    display: { showLabels: true, showPoints: true },
+  };
+}
+/** Le milieu et ses moitiés, avec des écritures variées (AM ou MA). */
+function tirerMilieu() {
+  const [A, B] = lettres(2);
+  const M = pick(LETTRES_MILIEU);
+  const [x, y] = shuffle([pick([`${A}${M}`, `${M}${A}`]), pick([`${M}${B}`, `${B}${M}`])]);
+  return { A, B, M, x, y, AB: pick([`${A}${B}`, `${B}${A}`]) };
+}
+const introMilieu = (A: string, B: string, M: string) => pick([`${M} est le milieu de [${A}${B}].`, `Le milieu de [${A}${B}] est ${M}.`, `[${A}${B}] a pour milieu ${M}.`]);
+const uniteMilieu = () => pick(["cm", "cm", "cm", "m", "mm", "dm", "km"]);
+const envers = (s: string) => s[1] + s[0];
+
+// ----- DISTANCE_MILIEU, ★1
+/** Une moitié est donnée, on demande l'AUTRE : pas de calcul, l'égalité seule. */
+function genMilAutre(): G {
+  const { A, B, M, x, y } = tirerMilieu();
+  const u = uniteMilieu();
+  const v = randomInt(2, 30);
+  const d = `${x} = ${v} ${u}`;
+  const pourquoi = `Les deux moitiés d’un segment ont la même longueur : ${v} ${u}.`;
+  const fig = segment(A, B, { milieu: { label: M, sur: true } });
+  return pick([
+    () => lg(`${M} est le milieu de [${A}${B}]. ${d}. Et ${y} ?`, v, u, pourquoi, fig),
+    () => lg(`${d}. ${M} est le milieu de [${A}${B}]. Combien mesure ${y} ?`, v, u, pourquoi, fig),
+    () => lg(`${d} et ${M} est le milieu de [${A}${B}]. Calcule ${y}.`, v, u, pourquoi, fig),
+    () => lg(`[${A}${B}] a pour milieu ${M}. Si ${d}, que vaut ${y} ?`, v, u, pourquoi, fig),
+    () => lg(`L’une des moitiés de [${A}${B}] mesure ${v} ${u}. Combien mesure l’autre ?`, v, u, pourquoi),
+    () => lg(`Une moitié de [${A}${B}] mesure ${v} ${u}. Que mesure l’autre ?`, v, u, pourquoi),
+    () => lg(`[${A}${B}] est coupé en deux moitiés. L’une mesure ${v} ${u}. Et l’autre ?`, v, u, pourquoi),
+    () => lg(`Les moitiés de [${A}${B}] sont égales. L’une fait ${v} ${u}. Et l’autre ?`, v, u, pourquoi),
+  ])();
+}
+/** Deux points sur le segment : lequel est le milieu ? La réponse se LIT sur le dessin. */
+function genMilFigure(): G {
+  const [A, B] = lettres(2);
+  const [M, K] = shuffle(LETTRES_MILIEU).slice(0, 2);
+  const fig = segmentPoints(A, B, [{ label: M, frac: 0.5 }, { label: K, frac: pick([0.2, 0.25, 0.75, 0.8]) }]);
+  const pourquoi = `${M} est à égale distance de ${A} et de ${B} : c’est le milieu. ${K} est plus près d’une extrémité.`;
+  const s = `[${A}${B}]`;
+  const faux = [K, A, B];
+  return pick([
+    () => qc(`Observe la figure. Quel point est le milieu de ${s} ?`, M, faux, pourquoi, fig),
+    () => qc(`Regarde la figure. Où est le milieu de ${s} ?`, M, faux, pourquoi, fig),
+    () => qc(`Quel point coupe ${s} en deux parts égales ?`, M, faux, pourquoi, fig),
+    () => qc(`Trouve le milieu de ${s} sur la figure.`, M, faux, pourquoi, fig),
+    () => qc(`Sur la figure, quel point est le milieu de ${s} ?`, M, faux, pourquoi, fig),
+    () => qc(`Quel point est à égale distance de ${A} et de ${B} ?`, M, faux, pourquoi, fig),
+    () => lt(`Écris la lettre du milieu de ${s}.`, [M], pourquoi, fig),
+    () => lt(`Lis la figure. Écris le nom du milieu de ${s}.`, [M], pourquoi, fig),
+  ])();
+}
+/** Un seul point sur le segment : est-ce le milieu ? */
+function genMilFigureOui(): G {
+  const [A, B] = lettres(2);
+  const P = pick(LETTRES_MILIEU);
+  const oui = Math.random() < 0.5;
+  const fig = segmentPoints(A, B, [{ label: P, frac: oui ? 0.5 : pick([0.2, 0.25, 0.3, 0.7, 0.75, 0.8]) }]);
+  const pourquoi = oui ? `${P} est à égale distance de ${A} et de ${B} : c’est le milieu.` : `${P} est plus près d’une extrémité : ce n’est pas le milieu.`;
+  const s = `[${A}${B}]`;
+  return pick([
+    () => ouiNon(`Observe la figure. ${P} est-il le milieu de ${s} ?`, oui, pourquoi, fig),
+    () => ouiNon(`Regarde la figure. Le point ${P} coupe-t-il ${s} en deux parts égales ?`, oui, pourquoi, fig),
+    () => ouiNon(`Sur la figure, ${P} est-il le milieu de ${s} ?`, oui, pourquoi, fig),
+    () => ouiNon(`${P} est-il à égale distance de ${A} et de ${B} ?`, oui, pourquoi, fig),
+    () => ouiNon(`Le milieu de ${s} est-il ${P} ?`, oui, pourquoi, fig),
+    () => ouiNon(`${P} partage-t-il ${s} en deux longueurs égales ?`, oui, pourquoi, fig),
+    () => vraiFaux(`Vrai ou faux : ${P} est le milieu de ${s}.`, oui, pourquoi, fig),
+    () => vraiFaux(`Sur ce dessin, ${P} est le milieu de ${s} : vrai ou faux ?`, oui, pourquoi, fig),
+  ])();
+}
+/** Juger une égalité : les moitiés sont égales, le segment entier ne l'est à aucune. */
+function genMilEgalite(): G {
+  const { A, B, M, x, y, AB } = tirerMilieu();
+  const juste = Math.random() < 0.5;
+  const eq = juste ? `${x} = ${y}` : shuffle([pick([x, y]), AB]).join(" = ");
+  const intro = introMilieu(A, B, M);
+  const pourquoi = `Les deux moitiés sont égales : ${A}${M} = ${M}${B}. Le segment entier ${A}${B} vaut le double.`;
+  return pick([
+    () => ouiNon(`${intro} A-t-on ${eq} ?`, juste, pourquoi),
+    () => ouiNon(`${intro} Est-ce que ${eq} ?`, juste, pourquoi),
+    () => ouiNon(`${intro} ${eq} est-il juste ?`, juste, pourquoi),
+    () => ouiNon(`${intro} L’égalité ${eq} est-elle juste ?`, juste, pourquoi),
+    () => vraiFaux(`${intro} ${eq} : vrai ou faux ?`, juste, pourquoi),
+    () => vraiFaux(`${intro} Vrai ou faux : ${eq}.`, juste, pourquoi),
+  ])();
+}
+/** Compléter : quelle longueur est égale à celle-ci ? La réponse est un NOM, pas un nombre. */
+function genMilCompleter(): G {
+  const { A, B, M, x, y, AB } = tirerMilieu();
+  const intro = introMilieu(A, B, M);
+  const pourquoi = `${M} coupe le segment en deux longueurs égales : ${x} = ${y}.`;
+  const faux = [AB, `2 × ${AB}`];
+  return pick([
+    () => qc(`${intro} Quelle longueur est égale à ${x} ?`, y, faux, pourquoi),
+    () => qc(`${intro} Trouve la longueur égale à ${x}.`, y, faux, pourquoi),
+    () => qc(`${intro} Choisis la longueur égale à ${x}.`, y, faux, pourquoi),
+    () => qc(`${intro} ${x} est égal à quelle longueur ?`, y, faux, pourquoi),
+    () => lt(`${intro} Complète : ${x} = …`, [y, envers(y)], pourquoi),
+    () => lt(`${intro} Écris l’autre moitié que ${x}.`, [y, envers(y)], pourquoi),
+  ])();
+}
+/** Le tout et la moitié : « deux fois », « le double », « la moitié ». */
+function genMilDouble(): G {
+  const { A, B, M, x, y, AB } = tirerMilieu();
+  const intro = introMilieu(A, B, M);
+  const court = `[${A}${B}] a pour milieu ${M}.`;
+  const pourquoi = `${M} coupe [${A}${B}] en deux moitiés égales : ${AB} = 2 × ${x}.`;
+  const mots = ["la moitié", "le double", "le tiers", "le quart"];
+  return pick([
+    () => nb(`${intro} ${AB} vaut combien de fois ${x} ?`, 2, pourquoi),
+    () => nb(`${intro} Complète : ${AB} = … × ${x}.`, 2, pourquoi),
+    () => lt(`${court} ${x} est la moitié de quelle longueur ?`, [`${A}${B}`, `${B}${A}`], pourquoi),
+    () => lt(`${court} ${AB} est le double de quelle longueur ?`, [x, envers(x), y, envers(y)], pourquoi),
+    () => qc(`${intro} Choisis : ${x} est … de ${AB}.`, "la moitié", mots.filter((m) => m !== "la moitié"), pourquoi),
+    () => qc(`${intro} Choisis : ${AB} est … de ${x}.`, "le double", mots.filter((m) => m !== "le double"), pourquoi),
+  ])();
+}
+/** La définition, à juger phrase par phrase. Les phrases sont dans le correcteur aussi. */
+function genMilVrai(): G {
+  const [A, B] = lettres(2);
+  const s = `[${A}${B}]`;
+  const pourquoi = `Le milieu de ${s} est un seul point, sur ${s}. Il coupe ${s} en deux parts égales.`;
+  const [t, v] = pick([
+    [`le milieu de ${s} est sur ${s}.`, true],
+    [`le milieu coupe ${s} en deux parts égales.`, true],
+    [`${s} a un seul milieu.`, true],
+    [`les deux moitiés de ${s} ont la même longueur.`, true],
+    [`${s} a deux milieux.`, false],
+    [`le milieu coupe ${s} en trois parts égales.`, false],
+    [`le milieu de ${s} est hors de ${s}.`, false],
+    [`le milieu de ${s} est toujours le point ${A}.`, false],
+  ] as const);
+  if (Math.random() < 0.15)
+    return qc(pick([`Combien de milieux a le segment ${s} ?`, `${s} a combien de milieux ?`]), "1", ["2", "3", "4"], pourquoi);
+  return vraiFaux(`Vrai ou faux : ${t}`, v, pourquoi);
+}
+
+// ----- DISTANCE_MILIEU, ★2
+/** Un point quelconque du segment : on soustrait (et ce n'est pas forcément le milieu). */
+function genMilReste(): G {
+  const [A, B] = shuffle(lettres(2));
+  const P = pick(LETTRES_MILIEU);
+  const u = pick(["cm", "cm", "m", "mm", "dm"]);
+  const ab = randomInt(8, 30);
+  // Assez loin des extrémités : les lettres ne se chevauchent pas sur la figure.
+  let ap = randomInt(Math.ceil(0.2 * ab), Math.floor(0.75 * ab)) + pick([0, 0, 0.5]);
+  if (ap === ab / 2) ap += 1;
+  const pb = ab - ap;
+  const [x, y] = [`${A}${P}`, pick([`${P}${B}`, `${B}${P}`])];
+  const fig = segmentPoints(A, B, [{ label: P, frac: ap / ab }]);
+  const [AB, a] = [`${A}${B} = ${nf(ab)} ${u}`, `${x} = ${nf(ap)} ${u}`];
+  const pourquoi = `${P} est sur [${A}${B}] : ${A}${P} + ${P}${B} = ${A}${B}. Donc ${P}${B} = ${nf(ab)} − ${nf(ap)} = ${nf(pb)} ${u}.`;
+  return pick([
+    () => lg(`${P} est sur [${A}${B}]. ${AB} et ${a}. Calcule ${y}.`, pb, u, pourquoi, fig),
+    () => lg(`${P} est un point de [${A}${B}]. ${AB} et ${a}. Trouve ${y}.`, pb, u, pourquoi, fig),
+    () => lg(`${AB}. ${P} est sur [${A}${B}] et ${a}. Que mesure ${y} ?`, pb, u, pourquoi, fig),
+    () => lg(`Sur [${A}${B}], on place ${P}. ${AB} et ${a}. Calcule ${y}.`, pb, u, pourquoi, fig),
+    () => lg(`${P} est entre ${A} et ${B}. ${AB} et ${a}. Calcule ${y}.`, pb, u, pourquoi, fig),
+    () => lg(`[${A}${B}] mesure ${nf(ab)} ${u}. ${P} est dessus, à ${nf(ap)} ${u} de ${A}. Combien mesure ${y} ?`, pb, u, pourquoi, fig),
+  ])();
+}
+/** Est-ce le milieu ? Les deux conditions : sur le segment, et à égale distance. */
+function genMilVerdict(): G {
+  const [A, B] = lettres(2);
+  const P = pick(LETTRES_MILIEU);
+  const u = pick(["cm", "cm", "m", "km"]);
+  const a = randomInt(2, 15);
+  const cas = pick(["oui", "oui", "inegal", "hors"] as const);
+  const b = cas === "inegal" ? a + pick([1, 2, 3]) : a;
+  const oui = cas === "oui";
+  const [pa, pb] = [`${P}${A} = ${a} ${u}`, `${P}${B} = ${b} ${u}`];
+  const pourquoi = cas === "hors" ? `${P} n’est pas sur [${A}${B}] : ce n’est pas le milieu, même à égale distance.` : oui ? `${P} est sur [${A}${B}] et ${a} = ${b} : c’est le milieu.` : `${a} ≠ ${b} : les deux longueurs diffèrent.`;
+  if (cas === "hors")
+    return pick([
+      () => ouiNon(`${P} n’est pas sur [${A}${B}]. ${P}${A} = ${P}${B} = ${a} ${u}. Est-ce le milieu ?`, false, pourquoi),
+      () => ouiNon(`${P} est hors de [${A}${B}]. ${P}${A} = ${P}${B} = ${a} ${u}. Est-ce le milieu ?`, false, pourquoi),
+    ])();
+  return pick([
+    () => ouiNon(`${P} est sur [${A}${B}]. ${A}${B} = ${a + b} ${u} et ${P}${A} = ${a} ${u}. Est-ce le milieu ?`, oui, pourquoi),
+    () => ouiNon(`${pa} et ${pb}. ${P} est sur [${A}${B}]. Est-ce le milieu ?`, oui, pourquoi),
+    () => ouiNon(`${P} est entre ${A} et ${B}. ${pa}, ${pb}. Est-ce le milieu ?`, oui, pourquoi),
+    () => ouiNon(`Sur [${A}${B}], ${pa} et ${pb}. ${P} est-il le milieu ?`, oui, pourquoi),
+    () => ouiNon(`${P} est sur [${A}${B}]. ${pa}. ${pb}. Milieu ou non ?`, oui, pourquoi),
+    () => ouiNon(`${A}${B} = ${a + b} ${u}. ${P} est sur [${A}${B}] et ${P}${A} = ${a} ${u}. Est-ce le milieu ?`, oui, pourquoi),
+  ])();
+}
+/** Sur une droite graduée : le milieu se trouve en partant de la moitié de l'écart. */
+function genMilGraduation(): G {
+  const [A, B] = lettres(2);
+  const a = randomInt(0, 20);
+  const b = a + 2 * randomInt(2, 10);
+  const r = (a + b) / 2;
+  const pourquoi = `Entre ${a} et ${b}, l’écart est ${b - a}. Sa moitié : ${(b - a) / 2}. Le milieu est à ${a} + ${(b - a) / 2} = ${r}.`;
+  return nb(
+    pick([
+      `${A} est à la graduation ${a}, ${B} à ${b}. Quelle graduation pour le milieu ?`,
+      `Droite graduée : ${A} à ${a}, ${B} à ${b}. Où est le milieu de [${A}${B}] ?`,
+      `Droite graduée : ${A} à ${a}, ${B} à ${b}. Quelle graduation pour le milieu ?`,
+      `Sur une droite graduée, ${A} est à ${a} et ${B} à ${b}. Trouve le milieu.`,
+      `Les graduations de ${A} et ${B} sont ${a} et ${b}. Où est le milieu ?`,
+      `Graduation de ${A} : ${a}. Graduation de ${B} : ${b}. Calcule celle du milieu.`,
+    ]),
+    r,
+    pourquoi,
+  );
+}
+const CONVERSIONS = [
+  { de: "m", vers: "cm", f: 100 },
+  { de: "cm", vers: "mm", f: 10 },
+  { de: "km", vers: "m", f: 1000 },
+  { de: "dm", vers: "cm", f: 10 },
+];
+/** La moitié, puis un changement d'unité. */
+function genMilUnites(): G {
+  const { A, B, M, x, AB } = tirerMilieu();
+  const c = pick(CONVERSIONS);
+  const v = randomInt(1, 9);
+  const r = (v / 2) * c.f;
+  const intro = introMilieu(A, B, M);
+  const q = pick([`Donne ${x} en ${c.vers}.`, `Calcule ${x} en ${c.vers}.`, `Écris ${x} en ${c.vers}.`, `Combien mesure ${x} en ${c.vers} ?`, `${x} mesure combien de ${c.vers} ?`, `Réponds en ${c.vers} : ${x} = …`]);
+  return lg(`${intro} ${AB} = ${v} ${c.de}. ${q}`, r, c.vers, `${x} = ${v} ÷ 2 = ${nf(v / 2)} ${c.de}. Et 1 ${c.de} = ${nf(c.f)} ${c.vers}, donc ${x} = ${nf(r)} ${c.vers}.`);
+}
+/** La somme des deux moitiés : c'est le segment entier. */
+function genMilSomme(): G {
+  const { A, B, M, x, y } = tirerMilieu();
+  const u = uniteMilieu();
+  const intro = introMilieu(A, B, M);
+  const v = 2 * randomInt(2, 20);
+  const s = `${x} + ${y}`;
+  const donneLaSomme = `La somme vaut ${v} ${u}, en deux moitiés égales : ${v} ÷ 2 = ${v / 2} ${u}.`;
+  const donneMoitie = `Les deux moitiés sont égales : ${v} + ${v} = ${2 * v} ${u}.`;
+  return pick([
+    () => lg(`${intro} ${s} = ${v} ${u}. Calcule ${x}.`, v / 2, u, donneLaSomme),
+    () => lg(`${intro} ${s} = ${v} ${u}. Combien mesure ${y} ?`, v / 2, u, donneLaSomme),
+    () => lg(`${intro} La somme ${s} vaut ${v} ${u}. Trouve ${y}.`, v / 2, u, donneLaSomme),
+    () => lg(`${intro} ${x} = ${v} ${u}. Calcule ${s}.`, 2 * v, u, donneMoitie),
+    () => lg(`${intro} ${x} = ${v} ${u}. Que vaut ${s} ?`, 2 * v, u, donneMoitie),
+  ])();
+}
+/** L'égalité juste (ou la seule fausse) parmi quatre : le correcteur les évalue toutes. */
+function genMilIntrus(): G {
+  const { A, B, M, x, y, AB } = tirerMilieu();
+  const intro = introMilieu(A, B, M);
+  const vraies = [`${x} = ${y}`, `${AB} = 2 × ${x}`, `${AB} = 2 × ${y}`, `${x} = ${AB} ÷ 2`, `${y} = ${AB} ÷ 2`];
+  const fausses = [`${x} = ${AB}`, `${AB} = ${y}`, `${AB} = ${x} ÷ 2`, `${x} = 2 × ${AB}`, `${x} = 2 × ${y}`];
+  const pourquoi = `${M} est le milieu : ${A}${M} = ${M}${B}, et ${A}${B} en vaut le double.`;
+  const cherche = pick([true, true, true, true, false, false]);
+  const q = cherche
+    ? pick(["Quelle égalité est juste ?", "Choisis l’égalité juste.", "Coche l’égalité vraie.", "Une seule égalité est juste : laquelle ?"])
+    : pick(["Quelle égalité est fausse ?", "Trouve l’égalité fausse."]);
+  const [bonnes, autres] = cherche ? [vraies, fausses] : [fausses, vraies];
+  return qc(`${intro} ${q}`, pick(bonnes), shuffle(autres).slice(0, 3), pourquoi);
+}
+/** Une longueur ÉCRITE sur la figure, et le texte dit où est le milieu. */
+function genMilFigureCote(): G {
+  const { A, B, M, x, AB } = tirerMilieu();
+  const u = pick(["cm", "cm", "m", "mm"]);
+  const total = 2 * randomInt(3, 20);
+  const moitieDonnee = Math.random() < 0.5;
+  // La longueur écrite : [AM] ou [MB] quand on cherche le tout, [AB] quand on cherche la moitié.
+  const cote = moitieDonnee
+    ? { ...(Math.random() < 0.5 ? { de: 0, a: 0.5 } : { de: 0.5, a: 1 }), texte: `${nf(total / 2)} ${u}` }
+    : { de: 0, a: 1, texte: `${nf(total)} ${u}` };
+  const fig = segmentPoints(A, B, [{ label: M, frac: 0.5 }], cote);
+  const cherche = moitieDonnee ? AB : x;
+  const r = moitieDonnee ? total : total / 2;
+  const pourquoi = moitieDonnee ? `La figure donne une moitié. Le segment entier vaut le double : 2 × ${nf(total / 2)} = ${nf(total)} ${u}.` : `La figure donne le segment entier. Une moitié : ${nf(total)} ÷ 2 = ${nf(total / 2)} ${u}.`;
+  const intro = introMilieu(A, B, M);
+  return lg(
+    pick([
+      `${intro} Lis la figure. Calcule ${cherche}.`,
+      `Lis la figure. ${intro} Combien mesure ${cherche} ?`,
+      `${intro} Regarde la longueur écrite. Calcule ${cherche}.`,
+      `La figure donne une longueur. ${intro} Calcule ${cherche}.`,
+      `${intro} Observe la longueur écrite. Trouve ${cherche}.`,
+    ]),
+    r, u, pourquoi, fig,
+  );
+}
+
+const gabMilieu = (id: string, difficulty: 1 | 2, hint: string, generate: () => G): TutorBankItemV4 => ({
+  kind: "template", id, niveau: "6e", matiere: "maths", notionId: "distance_segment", microId: "distance_milieu", difficulty, theme: "neutral", hint, tags: ["distance_segment", "milieu", "template"], generate,
+});
 
 export const distancesBank: TutorBankItemV4[] = [
   // =========================
@@ -1004,4 +1340,21 @@ export const distancesBank: TutorBankItemV4[] = [
     // les mêmes pièges, lettres et personne variées. Voir genDistanceOuverte.
     generate: () => genDistanceOuverte(OUVERTES_DEFI),
   },
+  // =========================
+  // ⭐ 07/11/2026 — DISTANCE_MILIEU ★1-★2 : d'autres questions, pas d'autres lettres
+  // =========================
+  gabMilieu("distance_milieu_tpl_e1_autre", 1, "Les deux moitiés ont la même longueur.", genMilAutre),
+  gabMilieu("distance_milieu_tpl_e1_figure", 1, "Le milieu est à égale distance des deux bouts.", genMilFigure),
+  gabMilieu("distance_milieu_tpl_e1_figure_oui", 1, "Compare les deux parts du segment.", genMilFigureOui),
+  gabMilieu("distance_milieu_tpl_e1_egalite", 1, "Les moitiés sont égales ; le segment entier vaut le double.", genMilEgalite),
+  gabMilieu("distance_milieu_tpl_e1_complete", 1, "Cherche l’autre moitié.", genMilCompleter),
+  gabMilieu("distance_milieu_tpl_e1_double", 1, "Le segment entier vaut deux moitiés.", genMilDouble),
+  gabMilieu("distance_milieu_tpl_e1_vrai", 1, "Le milieu : un seul point, sur le segment, deux parts égales.", genMilVrai),
+  gabMilieu("distance_milieu_tpl_e2_reste", 2, "Le segment entier, moins le morceau connu.", genMilReste),
+  gabMilieu("distance_milieu_tpl_e2_verdict", 2, "Deux conditions : sur le segment, et à égale distance.", genMilVerdict),
+  gabMilieu("distance_milieu_tpl_e2_graduation", 2, "Calcule l’écart, prends sa moitié, ajoute-la au départ.", genMilGraduation),
+  gabMilieu("distance_milieu_tpl_e2_unites", 2, "D’abord la moitié, ensuite l’unité.", genMilUnites),
+  gabMilieu("distance_milieu_tpl_e2_somme", 2, "Les deux moitiés ensemble font le segment entier.", genMilSomme),
+  gabMilieu("distance_milieu_tpl_e2_intrus", 2, "Essaie chaque égalité avec un nombre, par exemple 10 et 5.", genMilIntrus),
+  gabMilieu("distance_milieu_tpl_e2_figure", 2, "Lis la longueur écrite : est-ce le tout ou une moitié ?", genMilFigureCote),
 ];

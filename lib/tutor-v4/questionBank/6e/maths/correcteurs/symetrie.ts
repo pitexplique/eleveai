@@ -251,7 +251,358 @@ const corrDefi: CorrecteurMaths = (q) => {
   return corrigerMesure(q) ?? [`question non reconnue : ${t}`];
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// ⭐ 07/11/2026 — LES GABARITS « À VRAIS MODES » DE ★1-★2. Même principe : on
+// relit le texte et le canvas, on recalcule, et une tournure non reconnue est un
+// défaut (jamais une réponse devinée).
+// ═══════════════════════════════════════════════════════════════════════════
+const ouiNon = (q: Q, oui: boolean, quoi: string) => uneSeule(q, (x) => x === (oui ? "oui" : "non"), quoi);
+const vraiFaux = (q: Q, vrai: boolean, quoi: string) => uneSeule(q, (x) => x === (vrai ? "vrai" : "faux"), quoi);
+/** Le côté de l'axe où est un point (y vers le bas, comme le canvas). */
+function coteLu(pts: Pt[], axe: any): string | null {
+  const s = new Set(pts.map((a) => Math.sign(Math.round(cote(a, axe) * 1e6))).filter((x) => x !== 0));
+  if (s.size !== 1) return null;
+  const v = [...s][0];
+  if (axe.type === "vertical") return v < 0 ? "à gauche" : "à droite";
+  if (axe.type === "horizontal") return v < 0 ? "au-dessus" : "au-dessous";
+  return null;
+}
+const CONTRAIRES: Record<string, string> = { "à gauche": "à droite", "à droite": "à gauche", "au-dessus": "au-dessous", "au-dessous": "au-dessus" };
+const memeEnsemble = (A: Pt[], B: Pt[]) => cle(A) === cle(B);
+/** Une figure et son image, axe compris. */
+function figureEtImage(q: Q): { src: Pt[]; img: Pt[]; axe: any; p: string[] } | string[] {
+  const c = lireCanvas(q);
+  if (!c || !c.img || !c.axe) return ["il faut un canvas avec la figure, son image et l'axe"];
+  if (c.img.length !== c.src.length) return ["la figure rouge n'a pas autant de sommets que la bleue"];
+  return { src: c.src, img: c.img, axe: c.axe, p: [...c.problemes] };
+}
+
+// ─── SYM_RECONNAITRE ★1-★2 ──────────────────────────────────────────────────
+const corrRecGlissement: CorrecteurMaths = (q) => {
+  const f = figureEtImage(q);
+  if (Array.isArray(f)) return f;
+  const { defaut } = defautDuDessin(f.src, f.img, f.axe);
+  if (defaut !== "aucun" && defaut !== "glisse") return [...f.p, `dessin ni symétrique ni glissé : ${defaut}`];
+  return [...f.p, ...uneSeule(q, (x) => x === (defaut === "aucun" ? "une symétrie" : "un glissement"), "symétrie ou glissement")];
+};
+const corrRecCote: CorrecteurMaths = (q) => {
+  const c = lireCanvas(q);
+  if (!c || !c.axe || c.img) return ["il faut la figure bleue et l'axe, sans image"];
+  const m = q.text.match(/(à gauche|à droite|au-dessus|au-dessous) de \(d\)/);
+  if (!m) return [`côté non lu : ${q.text}`];
+  const lu = coteLu(c.src, c.axe);
+  const p = [...c.problemes];
+  if (lu !== m[1]) p.push(`le texte dit « ${m[1]} », le dessin « ${lu} »`);
+  return [...p, ...uneSeule(q, (x) => x === `${CONTRAIRES[m[1]]} de (d)`, "le côté de l’image")];
+};
+/** Les phrases du vrai-faux, relues : chacune a sa vérité, indépendante du gabarit. */
+const VERITES: [RegExp, boolean][] = [
+  [/l’image est de l’autre côté de l’axe/, true],
+  [/l’image est plus grande/, false],
+  [/l’image a la même (forme|taille)/, true],
+  [/l’image reste du même côté/, false],
+  [/l’axe est une droite/, true],
+  [/l’axe est un point/, false],
+  [/la figure est retournée/, true],
+  [/la figure glisse sans se retourner/, false],
+  [/se superposent par pliage/, true],
+  [/toujours vertical/, false],
+  [/peut être horizontal/, true],
+  [/à la même distance de l’axe/, true],
+  [/coupe le segment \[([A-Z])\1'\] en son milieu/, true],
+  [/\[([A-Z])\1'\] est perpendiculaire à l’axe/, true],
+  [/\[([A-Z])\1'\] est parallèle à l’axe/, false],
+  [/un point de l’axe est sa propre image/, true],
+  [/un point de l’axe n’a pas d’image/, false],
+  [/de même forme sont toujours symétriques/, false],
+  [/une figure glissée est son image/, false],
+  [/vérifier chaque sommet/, true],
+];
+const corrRecVraiFaux: CorrecteurMaths = (q) => {
+  const v = VERITES.filter(([re]) => re.test(q.text));
+  if (v.length !== 1) return [`phrase non reconnue (${v.length} règles) : ${q.text}`];
+  return vraiFaux(q, v[0][1], "la phrase");
+};
+const corrRecPliage: CorrecteurMaths = (q) => {
+  if (!/pli/i.test(q.text)) return [`tournure non reconnue : ${q.text}`];
+  const f = figureEtImage(q);
+  if (Array.isArray(f)) return f;
+  return [...f.p, ...ouiNon(q, memeEnsemble(f.src.map((s) => reflechir(s, f.axe)), f.img), "le pliage")];
+};
+const RAISONS: Record<string, RegExp> = {
+  juste: /^Oui : il est bien placé/,
+  memeCote: /^Non : du même côté/,
+  distance: /^Non : pas à la même distance/,
+  decale: /^Non : pas juste en face/,
+};
+const corrPointVerif: CorrecteurMaths = (q) => {
+  const f = figureEtImage(q);
+  if (Array.isArray(f)) return f;
+  if (f.src.length !== 1) return [...f.p, "il faut un seul point"];
+  const cv = q.canvas as any;
+  const M = cv.source.label;
+  if (cv.image.label !== `${M}'`) f.p.push(`noms du dessin : ${M} et ${cv.image.label}`);
+  for (const m of q.text.matchAll(/\b([A-Z])'/g)) if (m[1] !== M) f.p.push(`le texte parle de ${m[1]}', le dessin de ${M}'`);
+  const a = f.src[0], b = f.img[0], j = reflechir(a, f.axe);
+  const [ka, kb] = [cote(a, f.axe), cote(b, f.axe)];
+  let cas: keyof typeof RAISONS;
+  if (memePoint(b, j)) cas = "juste";
+  else if (Math.sign(ka) === Math.sign(kb)) cas = "memeCote";
+  else if (!egal(Math.abs(ka), Math.abs(kb))) {
+    // Pas la bonne distance : il doit rester juste en face, sinon deux raisons seraient vraies.
+    const face = f.axe.type === "vertical" ? egal(a.y, b.y) : egal(a.x, b.x);
+    if (!face) f.p.push("ni à la bonne distance ni en face : deux raisons à la fois");
+    cas = "distance";
+  } else cas = "decale";
+  if ((q.choices ?? []).some((x) => /^Oui :/.test(x))) return [...f.p, ...uneSeule(q, (x) => RAISONS[cas].test(x), `la raison (${cas})`)];
+  return [...f.p, ...ouiNon(q, cas === "juste", "le point image")];
+};
+const LIRE_ERREUR = (x: string): Defaut | null => (/glissé/.test(x) ? "glisse" : /pas à la même distance/.test(x) ? "distance" : /seul sommet/.test(x) ? "sommet" : /plus grande/.test(x) ? "autre" : null);
+const corrRecDefaut: CorrecteurMaths = (q) => {
+  const f = figureEtImage(q);
+  if (Array.isArray(f)) return f;
+  const { defaut } = defautDuDessin(f.src, f.img, f.axe);
+  if (defaut === "aucun" || defaut === "autre") return [...f.p, `dessin sans le défaut attendu : ${defaut}`];
+  for (const x of q.choices ?? []) if (!LIRE_ERREUR(x)) f.p.push(`proposition non reconnue : ${x}`);
+  return [...f.p, ...uneSeule(q, (x) => LIRE_ERREUR(x) === defaut, `l’erreur (${defaut})`)];
+};
+const corrCompterBons: CorrecteurMaths = (q) => {
+  const f = figureEtImage(q);
+  if (Array.isArray(f)) return f;
+  const bons = f.src.filter((s, i) => memePoint(reflechir(s, f.axe), f.img[i])).length;
+  return [...f.p, ...uneSeule(q, (x) => x === `${bons} sommet${bons > 1 ? "s" : ""}`, `les sommets bien placés (${bons})`)];
+};
+const corrAxeCache: CorrecteurMaths = (q) => {
+  const c = lireCanvas(q);
+  if (!c || !c.img) return ["il faut la figure et son image"];
+  if (c.axe) return ["l'axe doit rester caché"];
+  if (c.img.length !== c.src.length) return ["pas autant de sommets"];
+  const memes = (f: (a: Pt, b: Pt) => number) => new Set(c.src.map((a, i) => Math.round(f(a, c.img![i]) * 1e6))).size === 1;
+  const v = memes((a, b) => a.y - b.y) && egal(c.src[0].y, c.img[0].y) && memes((a, b) => a.x + b.x);
+  const h = memes((a, b) => a.x - b.x) && egal(c.src[0].x, c.img[0].x) && memes((a, b) => a.y + b.y);
+  // Oblique : la droite y = x + k (ou x + y = k) renvoie chaque point sur son image.
+  const d1 = c.src.every((a, i) => egal(c.img![i].x, a.y - (c.src[0].y - c.img![0].x)) && egal(c.img![i].y, a.x + (c.src[0].y - c.img![0].x)));
+  const d2 = c.src.every((a, i) => egal(c.img![i].x, (c.src[0].x + c.img![0].y) - a.y) && egal(c.img![i].y, (c.src[0].x + c.img![0].y) - a.x));
+  const dir = v ? "vertical" : h ? "horizontal" : d1 || d2 ? "oblique" : null;
+  if (!dir) return [...c.problemes, "aucun axe vertical, horizontal ou oblique ne relie le bleu au rouge"];
+  return [...c.problemes, ...uneSeule(q, (x) => x === dir, `la direction de l’axe (${dir})`)];
+};
+
+// ─── SYM_POINT ★2 ───────────────────────────────────────────────────────────
+const corrPointCote: CorrecteurMaths = (q) => {
+  const c = lireCanvas(q);
+  if (!c || !c.axe || c.src.length !== 1 || c.img) return ["il faut un point et l'axe"];
+  const M = (q.canvas as any).source.label;
+  const p = [...c.problemes];
+  if (!new RegExp(`\\b${M}'|de ${M}\\b`).test(q.text)) p.push(`le point du dessin (${M}) n'est pas celui du texte`);
+  const ici = coteLu(c.src, c.axe);
+  if (!ici) return [...p, "le point est sur l'axe"];
+  const la = CONTRAIRES[ici];
+  const d = Math.abs(cote(c.src[0], c.axe));
+  const car = `${d} carreau${d > 1 ? "x" : ""}`;
+  if (/côté|où tombe/.test(q.text)) return [...p, ...uneSeule(q, (x) => x === `${la} de (d)`, "le côté")];
+  if (/place|Où placer|Où faut-il construire/.test(q.text)) return [...p, ...uneSeule(q, (x) => x === `${car} ${la} de (d)`, "la place")];
+  return [...p, `tournure non reconnue : ${q.text}`];
+};
+const corrPointSansFigure: CorrecteurMaths = (q) => {
+  const m = q.text.match(/(\d+) carreaux (à gauche|à droite|au-dessus|au-dessous) de \(d\)/);
+  if (!m) return [`distance non lue : ${q.text}`];
+  return uneSeule(q, (x) => x === `${m[1]} carreaux ${CONTRAIRES[m[2]]} de (d)`, "la place de l’image");
+};
+const corrPointMoitie: CorrecteurMaths = (q) => {
+  const m = q.text.match(/(\d+) carreaux/);
+  if (!m) return [`longueur non lue : ${q.text}`];
+  const e = Number(m[1]);
+  if (e % 2) return [`${e} carreaux : la moitié n'est pas un nombre entier`];
+  if (!/\(d\)|moitié/.test(q.text)) return [`tournure non reconnue : ${q.text}`];
+  return reponse(q, e / 2, "carreau");
+};
+const corrPointCm: CorrecteurMaths = (q) => {
+  const m = q.text.match(/(\d+(?:,\d+)?) cm/);
+  if (!m) return [`distance non lue : ${q.text}`];
+  const d = val(m[1]);
+  const seg = /\[([A-Z])\1'\]/.test(q.text);
+  if (!seg && !/Et [A-Z]' \?|[A-Z]' à \(d\)|de \(d\) est [A-Z]'|[A-Z]' est à combien/.test(q.text)) return [`tournure non reconnue : ${q.text}`];
+  return reponse(q, seg ? 2 * d : d, "cm");
+};
+const corrPointConfondu: CorrecteurMaths = (q) => {
+  const c = lireCanvas(q);
+  if (!c || !c.axe || c.src.length !== 1) return ["il faut un point et l'axe"];
+  const sur = egal(cote(c.src[0], c.axe), 0);
+  if (/bouge-t-il|Faut-il déplacer/.test(q.text)) return [...c.problemes, ...ouiNon(q, !sur, "le point bouge")];
+  if (/même endroit|confondu|propre symétrique|lui-même|reste-t-il à sa place|tombe-t-il exactement/.test(q.text)) return [...c.problemes, ...ouiNon(q, sur, "le point reste")];
+  return [...c.problemes, `tournure non reconnue : ${q.text}`];
+};
+
+// ─── SYM_PROPRIETE ★2 ───────────────────────────────────────────────────────
+const corrPropChange: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const garde = /longueurs|angles|aire|périmètre|forme|taille/.test(t) ? true : /position|sens/.test(t) ? false : null;
+  if (garde === null) return [`grandeur non reconnue : ${t}`];
+  if (/peut-elle changer/.test(t)) return ouiNon(q, !garde, "ce qui peut changer");
+  if (/conserve-t-elle|ont-elles toujours/.test(t)) return ouiNon(q, garde, "ce qui est conservé");
+  return [`tournure non reconnue : ${t}`];
+};
+const corrPropMesure: CorrecteurMaths = (q) => {
+  const m = q.text.match(/(périmètre|aire|rayon|diamètre) de (\d+) (cm²|cm)/);
+  if (!m) return [`mesure non lue : ${q.text}`];
+  if ((m[1] === "aire") !== (m[3] === "cm²")) return [`unité « ${m[3]} » pour ${m[1]}`];
+  if (!new RegExp(`(${m[1]}|aire) de son image|image a (quel|quelle) ${m[1]}`).test(q.text)) return [`tournure non reconnue : ${q.text}`];
+  return reponse(q, Number(m[2]), m[3]);
+};
+const corrPropNature: CorrecteurMaths = (q) => {
+  const m = q.text.match(/(?:d’un|, un) (carré|rectangle|triangle|cercle|losange|segment)(?= |$)/);
+  if (!m) return [`figure non lue : ${q.text}`];
+  const p: string[] = [];
+  if (m[1] === "carré" && (q.choices ?? []).some((x) => /rectangle|losange/.test(x))) p.push("un carré est aussi un rectangle et un losange : deux réponses justes");
+  return [...p, ...uneSeule(q, (x) => x === `un ${m[1]}`, "l’image de la figure")];
+};
+const corrPropVerifier: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const n = [...t.matchAll(/(\d+) ?(cm|°)/g)];
+  if (n.length !== 2 || n[0][2] !== n[1][2]) return [`deux mesures attendues : ${t}`];
+  if (!/possible|justes|peuvent-ils|peut-il/.test(t)) return [`tournure non reconnue : ${t}`];
+  if (n[0][2] === "°" && [n[0], n[1]].some((x) => Number(x[1]) <= 0 || Number(x[1]) >= 180)) return [`angle impossible : ${t}`];
+  return ouiNon(q, n[0][1] === n[1][1], "les deux mesures");
+};
+const corrPropCorrespondant: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const nom = t.match(/\b([A-Z]{3})\b/)?.[1];
+  const nomP = t.match(/\b([A-Z])'([A-Z])'([A-Z])'/);
+  if (!nom || !nomP) return [`triangle non lu : ${t}`];
+  const p: string[] = [];
+  if (nomP.slice(1, 4).join("") !== nom) p.push(`${nom} et son image ${nomP[0]} n'ont pas les mêmes lettres`);
+  const s = t.match(/\[([A-Z])([A-Z])\]/);
+  if (s) {
+    if (!nom.includes(s[1]) || !nom.includes(s[2])) p.push(`[${s[1]}${s[2]}] n'est pas un côté de ${nom}`);
+    return [...p, ...uneSeule(q, (x) => x === `[${s[1]}'${s[2]}']`, "le segment image")];
+  }
+  const a = t.match(/l’angle ([A-Z])([A-Z])([A-Z])/);
+  if (!a) return [...p, `tournure non reconnue : ${t}`];
+  if (a.slice(1, 4).some((l) => !nom.includes(l))) p.push(`angle ${a[0]} hors de ${nom}`);
+  // Un angle se reconnaît à son sommet (la lettre du milieu).
+  const sommet = (x: string) => x.match(/^l’angle ([A-Z])'([A-Z])'([A-Z])'$/)?.[2];
+  return [...p, ...uneSeule(q, (x) => sommet(x) === a[2], "l’angle image")];
+};
+const corrPropRetour: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const m = t.match(/(\d+(?:,\d+)?) ?(cm²|cm|°)/);
+  if (!m) return [`mesure non lue : ${t}`];
+  if (!/image/.test(t)) return [`tournure non reconnue : ${t}`];
+  if (m[2] === "°" && (val(m[1]) <= 0 || val(m[1]) >= 180)) return [`angle impossible : ${t}`];
+  return reponse(q, val(m[1]), m[2]);
+};
+
+// ─── SYM_AXE ★1-★2 ──────────────────────────────────────────────────────────
+// Les figures nommées sans précision, avec la table des axes. Le cercle en a une infinité.
+const AXES_LARGE: [RegExp, number][] = [...AXES, [/un rectangle|le rectangle/, 2], [/un losange|le losange/, 2], [/un triangle isocèle|le triangle isocèle/, 1], [/un cercle/, Infinity], [/le carré/, 4]];
+const axesDe = (t: string) => AXES_LARGE.find(([re]) => re.test(t.replace(/^Un /, "un ")))?.[1];
+const corrAxeNomme: CorrecteurMaths = (q) => {
+  const k = axesDe(q.text);
+  if (k === undefined) return [`figure inconnue : ${q.text}`];
+  if (!/axe de symétrie|plier|Plie|pliage|symétrique/.test(q.text)) return [`tournure non reconnue : ${q.text}`];
+  return ouiNon(q, k > 0, `une figure à ${k} axes`);
+};
+const corrAxePli: CorrecteurMaths = (q) => {
+  const c = lireCanvas(q);
+  if (!c || c.axe || c.img) return ["il faut la figure seule, sans droite"];
+  const k0 = cle(c.src);
+  const { rows, cols } = (q.canvas as any).grid;
+  let v = false, h = false;
+  for (let i = 0; i <= 2 * Math.max(rows, cols); i++) {
+    if (cle(c.src.map((p) => reflechir(p, { type: "vertical", x: i / 2 }))) === k0) v = true;
+    if (cle(c.src.map((p) => reflechir(p, { type: "horizontal", y: i / 2 }))) === k0) h = true;
+  }
+  if (v && h) return [...c.problemes, "la figure a les deux plis : deux réponses justes"];
+  const juste = v ? "un pli vertical" : h ? "un pli horizontal" : "aucun pli";
+  return [...c.problemes, ...uneSeule(q, (x) => x === juste, `le pli (${juste})`)];
+};
+const VOCAB: [RegExp, string][] = [
+  [/une droite ou un point/, "une droite"],
+  [/en combien de parties/, "2 parties"],
+  [/Quel geste/, "plier"],
+  [/plusieurs axes/, "oui"],
+  [/peut-il être (horizontal|oblique)/, "oui"],
+  [/que font les deux parties/, "elles se superposent"],
+  [/n’avoir aucun axe/, "oui"],
+  [/la même aire/, "oui"],
+  [/traverse-t-il la figure/, "oui"],
+];
+const corrAxeVocab: CorrecteurMaths = (q) => {
+  const v = VOCAB.filter(([re]) => re.test(q.text));
+  if (v.length !== 1) return [`question non reconnue : ${q.text}`];
+  return uneSeule(q, (x) => x === v[0][1], "le vocabulaire de l’axe");
+};
+const corrAxeIntrus: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const veutAxe = /a un axe|se plie en deux|peut se plier/.test(t);
+  const veutSans = /aucun axe|sans axe|ne se plie/.test(t);
+  if (veutAxe === veutSans) return [`question non reconnue : ${t}`];
+  const nb = (x: string) => axesDe(/^[A-Z]$/.test(x) ? `lettre ${x}` : x);
+  for (const x of q.choices ?? []) if (nb(x) === undefined) return [`proposition inconnue : ${x}`];
+  return uneSeule(q, (x) => (veutAxe ? nb(x)! > 0 : nb(x) === 0), veutAxe ? "celle qui a un axe" : "celle sans axe");
+};
+const corrAxeDiagonale: CorrecteurMaths = (q) => {
+  const t = q.text;
+  if (!/diagonale/.test(t)) return [`tournure non reconnue : ${t}`];
+  const oui = /losange non carré|un carré|d’un carré/.test(t) ? true : /rectangle non carré/.test(t) ? false : null;
+  if (oui === null) return [`figure non lue : ${t}`];
+  return ouiNon(q, oui, "la diagonale");
+};
+const corrAxeComparer: CorrecteurMaths = (q) => {
+  const m = q.text.match(/(le [a-zéè ]+?) (?:ou|et) (le [a-zéè ]+?)(?: \?|\.|,)/);
+  if (!m) return [`figures non lues : ${q.text}`];
+  const [a, b] = [axesDe(m[1]), axesDe(m[2])];
+  if (a === undefined || b === undefined) return [`figure inconnue : ${q.text}`];
+  const juste = a === b ? "autant l’un que l’autre" : a > b ? m[1] : m[2];
+  return uneSeule(q, (x) => x === juste, `la comparaison (${a} et ${b})`);
+};
+const corrAxeVerite: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const k = axesDe(t);
+  if (k === undefined) return [`figure inconnue : ${t}`];
+  const dit = /n’a aucun axe/.test(t) ? 0 : Number(t.match(/ a (\d) axes? de symétrie/)?.[1] ?? NaN);
+  if (Number.isNaN(dit)) return [`nombre d'axes non lu : ${t}`];
+  return vraiFaux(q, dit === k, `${k} axes`);
+};
+
 export const CORRECTEURS: CorrecteursMaths = {
+  "6e_sym_reconnaitre_tpl_glissement": corrRecGlissement,
+  "6e_sym_reconnaitre_tpl_cote_image": corrRecCote,
+  "6e_sym_reconnaitre_tpl_vrai_faux": corrRecVraiFaux,
+  "6e_sym_reconnaitre_tpl_point_verif": corrPointVerif,
+  "6e_sym_reconnaitre_tpl_pliage": corrRecPliage,
+  "6e_sym_reconnaitre_tpl_quel_defaut": corrRecDefaut,
+  "6e_sym_reconnaitre_tpl_point_raison": corrPointVerif,
+  "6e_sym_reconnaitre_tpl_compter_bons": corrCompterBons,
+  "6e_sym_reconnaitre_tpl_vrai_faux_2": corrRecVraiFaux,
+  "6e_sym_reconnaitre_tpl_axe_cache": corrAxeCache,
+
+  "6e_sym_point_tpl_cote": corrPointCote,
+  "6e_sym_point_tpl_sans_figure": corrPointSansFigure,
+  "6e_sym_point_tpl_moitie": corrPointMoitie,
+  "6e_sym_point_tpl_centimetres_2": corrPointCm,
+  "6e_sym_point_tpl_confondu": corrPointConfondu,
+  "6e_sym_point_tpl_verif": corrPointVerif,
+
+  "6e_sym_propriete_tpl_change": corrPropChange,
+  "6e_sym_propriete_tpl_mesure_image": corrPropMesure,
+  "6e_sym_propriete_tpl_nature": corrPropNature,
+  "6e_sym_propriete_tpl_verifier": corrPropVerifier,
+  "6e_sym_propriete_tpl_correspondant": corrPropCorrespondant,
+  "6e_sym_propriete_tpl_retour": corrPropRetour,
+
+  "6e_sym_axe_tpl_lettre": corrAxeNomme,
+  "6e_sym_axe_tpl_figure_nommee": corrAxeNomme,
+  "6e_sym_axe_tpl_pli_dessin": corrAxePli,
+  "6e_sym_axe_tpl_vocabulaire": corrAxeVocab,
+  "6e_sym_axe_tpl_intrus": corrAxeIntrus,
+  "6e_sym_axe_tpl_compter_dessin_2": corrAxe,
+  "6e_sym_axe_tpl_droite_dessin": corrAxe,
+  "6e_sym_axe_tpl_diagonale": corrAxeDiagonale,
+  "6e_sym_axe_tpl_comparer": corrAxeComparer,
+  "6e_sym_axe_tpl_verite": corrAxeVerite,
+
   "6e_sym_reconnaitre_tpl_1_axe_vertical": corrImage,
   "6e_sym_reconnaitre_tpl_2_axe_horizontal": corrImage,
   "6e_sym_reconnaitre_tpl_3_piege_non": corrImage,

@@ -1,7 +1,7 @@
 import type { CorrecteursMaths } from "./types";
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS } from "../entiers.bank";
-import { accordPronom, lireReponse, mesures, val, verifierQcm, verifierReponse, LONGUEUR } from "./aires";
+import { accordPronom, lireReponse, mesures, val, verifierQcm, verifierReponse, AIRE, LONGUEUR } from "./aires";
 
 // LES CORRECTEURS DE volumes.bank.ts (06/10/2026, voir types.ts).
 // Chacun relit les nombres et les unités du texte que voit l'élève, refait le
@@ -169,7 +169,7 @@ function corrigerComparerPiles(q: Q): string[] {
   const v1 = Number(m[0][1]) * Number(m[0][2]);
   const v2 = Number(m[1][1]) * Number(m[1][2]);
   const p = verifierQuiGagne(q, v1, v2, s);
-  if (!/cubes sont pareils/.test(q.text)) p.push("rien ne dit que les cubes sont identiques");
+  if (!/Mêmes cubes/.test(q.text)) p.push("rien ne dit que les cubes sont identiques");
   return p;
 }
 
@@ -289,6 +289,216 @@ function corrigerDefiInverse(q: Q): string[] {
   return [...p, ...accordPronom(q.text)];
 }
 
+// ─── ⭐ 07/11/2026 : les modes neufs de ★1-★2 ────────────────────────────────
+
+/** Le solide dessiné : le nombre de cubes, ou les défauts de la figure. */
+function compterFigure(q: Q): { n: number; p: string[] } {
+  const c = q.canvas as { kind?: string; cubes?: { x: number; y: number; z: number }[]; display?: { showLabels?: boolean } } | undefined;
+  if (!c || c.kind !== "solide_3d" || !c.cubes?.length) return { n: NaN, p: ["figure de cubes absente"] };
+  const p: string[] = [];
+  if (c.display?.showLabels !== false) p.push("l'étiquette de la figure donne le compte");
+  const cle = (x: number, y: number, z: number) => `${x},${y},${z}`;
+  const ici = new Set(c.cubes.map((k) => cle(k.x, k.y, k.z)));
+  if (ici.size !== c.cubes.length) p.push("deux cubes à la même place");
+  if (c.cubes.some((k) => k.y !== 0) && c.cubes.some((k) => k.z !== 0)) p.push("un cube peut être caché derrière un autre");
+  if (c.cubes.some((k) => k.z > 0 && !ici.has(cle(k.x, k.y, k.z - 1)))) p.push("un cube flotte");
+  if (c.cubes.length > 18) p.push("trop de cubes à compter");
+  return { n: c.cubes.length, p };
+}
+
+/** « 1 cm³ » et un autre volume, dans la même unité. */
+function uniteEtVolume(t: string): { v: number; u: string } | string {
+  const m = mesures(t, VOLUME);
+  const un = m.filter((x) => x.v === 1);
+  const autres = m.filter((x) => x.v !== 1);
+  if (un.length !== 1 || autres.length !== 1) return `il faut le cube de 1 et un volume, lu : ${m.length}`;
+  if (un[0].u !== autres[0].u) return "le cube unité et le volume n'ont pas la même unité";
+  return autres[0];
+}
+
+function corrigerCompterAjouter(q: Q): string[] {
+  const f = compterFigure(q);
+  const l = uniteEtVolume(q.text);
+  if (typeof l === "string") return [...f.p, l];
+  if (!/ajout|manqu|poses-tu/i.test(q.text)) return [...f.p, "tournure non reconnue"];
+  if (l.v <= f.n) return [...f.p, "il n'y a rien à ajouter"];
+  return [...f.p, ...verifierReponse(q, l.v - f.n, "cubes")];
+}
+
+function corrigerCompterEnlever(q: Q): string[] {
+  const f = compterFigure(q);
+  const m = q.text.match(/(?:enlèves?|retire|perd|sans) (\d+) cubes/i);
+  const u = [...q.text.matchAll(new RegExp(`\\b1 (${VOLUME})`, "g"))].map((x) => x[1]);
+  if (!m || u.length !== 1) return [...f.p, "tournure non reconnue"];
+  const reste = f.n - Number(m[1]);
+  if (reste < 1) return [...f.p, "il ne reste aucun cube"];
+  return [...f.p, ...verifierReponse(q, reste, u[0])];
+}
+
+function corrigerCompterGrosCube(q: Q): string[] {
+  const f = compterFigure(q);
+  const m = mesures(q.text, VOLUME);
+  if (m.length !== 1 || m[0].v < 2) return [...f.p, `il faut le volume d'un cube, lu : ${m.length}`];
+  return [...f.p, ...verifierReponse(q, f.n * m[0].v, m[0].u)];
+}
+
+function corrigerCompterQcmFigure(q: Q): string[] {
+  const f = compterFigure(q);
+  const m = mesures(q.text, VOLUME);
+  if (m.length !== 1 || m[0].v !== 1) return [...f.p, "le cube unité est absent ou en double"];
+  return [...f.p, ...verifierReponse(q, f.n, m[0].u), ...verifierQcm(q, f.n, m[0].u)];
+}
+
+/** Deux volumes dans la même unité, dans l'ordre du texte. */
+function deuxVolumes(t: string): { a: number; b: number; u: string } | string {
+  const m = mesures(t, VOLUME);
+  if (m.length !== 2) return `il faut deux volumes, lu : ${m.length}`;
+  if (m[0].u !== m[1].u) return "les deux volumes ne sont pas dans la même unité";
+  return { a: m[0].v, b: m[1].v, u: m[0].u };
+}
+
+function corrigerAssemblerManque(q: Q): string[] {
+  const d = deuxVolumes(q.text);
+  if (typeof d === "string") return [d];
+  if (d.a === d.b) return ["les deux volumes sont égaux"];
+  if (!/autre|manqu|\?\s*=|retire/.test(q.text)) return ["tournure non reconnue"];
+  return verifierReponse(q, Math.abs(d.a - d.b), d.u);
+}
+
+function corrigerAssemblerPartage(q: Q): string[] {
+  const m = mesures(q.text, VOLUME);
+  const n = q.text.match(/(\d+) (?:morceaux|blocs) égaux/);
+  if (m.length !== 1 || !n) return ["tournure non reconnue"];
+  const v = m[0].v / Number(n[1]);
+  if (!Number.isInteger(v)) return ["le partage ne tombe pas juste"];
+  return verifierReponse(q, v, m[0].u);
+}
+
+function corrigerAssemblerAjout(q: Q): string[] {
+  const d = deuxVolumes(q.text);
+  if (typeof d === "string") return [d];
+  if (!/coll|total|assembl|ensemble|ajoute|grandit/i.test(q.text)) return ["tournure non reconnue"];
+  return verifierReponse(q, d.a + d.b, d.u);
+}
+
+function corrigerAssemblerFois(q: Q): string[] {
+  const m = mesures(q.text, VOLUME);
+  const n = q.text.match(/(\d+) (?:blocs|morceaux) de/) ?? q.text.match(/en (?:assemble|colle) (\d+)/);
+  if (m.length !== 1 || !n) return ["tournure non reconnue"];
+  return verifierReponse(q, Number(n[1]) * m[0].v, m[0].u);
+}
+
+function corrigerAssemblerForme(q: Q): string[] {
+  const m = mesures(q.text, VOLUME);
+  if (m.length !== 1) return [`il faut un seul volume, lu : ${m.length}`];
+  if (!/mêmes cubes|tous les cubes|ses cubes|les cubes d’un/i.test(q.text)) return ["rien ne dit que les cubes sont les mêmes"];
+  return [...verifierReponse(q, m[0].v, m[0].u), ...verifierQcm(q, m[0].v, m[0].u)];
+}
+
+function corrigerComparerSigne(q: Q): string[] {
+  const d = deuxVolumes(q.text);
+  if (typeof d === "string") return [d];
+  const juste = d.a < d.b ? "<" : d.a > d.b ? ">" : "=";
+  const p = q.expected[0] === juste ? [] : [`attendu « ${q.expected[0]} », recalculé « ${juste} »`];
+  if ([...(q.choices ?? [])].sort().join() !== ["<", "=", ">"].join()) p.push(`propositions : ${(q.choices ?? []).join(" | ")}`);
+  return p;
+}
+
+function corrigerComparerEcart(q: Q): string[] {
+  const d = deuxVolumes(q.text);
+  if (typeof d === "string") return [d];
+  const t = q.text;
+  const p: string[] = [];
+  if (!/écart|différence|dépasse|ajouter|manque|plus petit que/.test(t)) return ["tournure non reconnue"];
+  if (/dépasse/.test(t) && d.a <= d.b) p.push("le premier volume ne dépasse pas le second");
+  if (/ajouter|manque|plus petit que/.test(t) && d.a >= d.b) p.push("le premier volume n'est pas le plus petit");
+  return [...p, ...verifierReponse(q, Math.abs(d.a - d.b), d.u)];
+}
+
+// Table propre au correcteur : les volumes rapportés au cm³.
+const EN_CM3: Record<string, number> = { "cm³": 1, "dm³": 1000, "m³": 1000000 };
+
+function corrigerComparerUnites(q: Q): string[] {
+  const m = mesures(q.text, VOLUME);
+  if (m.length !== 2) return [`il faut deux volumes, lu : ${m.length}`];
+  if (m[0].u === m[1].u) return ["les deux volumes ont la même unité"];
+  if (!(m[0].u in EN_CM3) || !(m[1].u in EN_CM3)) return ["unité inconnue"];
+  const s = sens(q.text);
+  if (!s) return ["sens illisible"];
+  const [x, y] = m.map((o) => o.v * EN_CM3[o.u]);
+  if (x === y) return ["les deux volumes sont égaux"];
+  const juste = (x > y) === (s === "grand") ? m[0] : m[1];
+  return verifierReponse(q, juste.v, juste.u);
+}
+
+function corrigerComparerParmi(q: Q): string[] {
+  const s = sens(q.text);
+  if (!s) return ["sens illisible"];
+  const c = (q.choices ?? []).map((x) => lireReponse(x));
+  if (c.length !== 4 || new Set(c.map((x) => x.u)).size !== 1 || new Set(c.map((x) => x.v)).size !== 4) return [`propositions mal formées : ${(q.choices ?? []).join(" | ")}`];
+  const v = s === "grand" ? Math.max(...c.map((x) => x.v)) : Math.min(...c.map((x) => x.v));
+  return verifierReponse(q, v, c[0].u);
+}
+
+function corrigerComparerEntre(q: Q): string[] {
+  const d = deuxVolumes(q.text);
+  if (typeof d === "string") return [d];
+  if (d.a >= d.b) return ["les bornes sont dans le mauvais ordre"];
+  const dedans = (q.choices ?? []).filter((x) => {
+    const r = lireReponse(x);
+    return r.u === d.u && r.v > d.a && r.v < d.b;
+  });
+  if (dedans.length !== 1 || dedans[0] !== q.expected[0]) return [`volumes entre les bornes : ${dedans.join(" | ") || "aucun"} ; attendu « ${q.expected[0]} »`];
+  return (q.choices ?? []).some((x) => lireReponse(x).v <= 0) ? ["un volume nul ou négatif"] : [];
+}
+
+function corrigerComparerFigure(q: Q): string[] {
+  const f = compterFigure(q);
+  const l = uniteEtVolume(q.text);
+  if (typeof l === "string") return [...f.p, l];
+  const plus = /dépasse|plus grand|plus de|au-dessus|passe-t-il/.test(q.text);
+  const moins = /plus petit|moins de|en dessous/.test(q.text);
+  if (plus === moins) return [...f.p, "tournure non reconnue"];
+  if (l.v === f.n) return [...f.p, "le volume dessiné égale le volume écrit"];
+  const juste = (plus ? f.n > l.v : f.n < l.v) ? "oui" : "non";
+  return [...f.p, ...(q.expected[0] === juste ? [] : [`attendu « ${q.expected[0]} », recalculé « ${juste} »`])];
+}
+
+function corrigerLireGrandeur(q: Q): string[] {
+  const m = mesures(q.text, `${VOLUME}|${AIRE}|kg|g|${LONGUEUR}`);
+  if (m.length !== 1) return [`il faut une seule mesure, lu : ${m.length}`];
+  const u = m[0].u;
+  const juste = u.endsWith("³") ? "un volume" : u.endsWith("²") ? "une aire" : /g$/.test(u) ? "une masse" : "une longueur";
+  return q.expected[0] === juste ? [] : [`attendu « ${q.expected[0]} », il faut « ${juste} »`];
+}
+
+function corrigerLireEnCubes(q: Q): string[] {
+  const l = uniteEtVolume(q.text);
+  if (typeof l === "string") return [l];
+  return verifierReponse(q, l.v, "cubes");
+}
+
+// Table propre au correcteur : le nom des unités.
+const NOM_UNITE: Record<string, string> = { cm: "centimètre", dm: "décimètre", m: "mètre" };
+
+function corrigerLireNomUnite(q: Q): string[] {
+  const m = [...q.text.matchAll(/(?<!\p{L})(cm|dm|m)([²³])/gu)];
+  if (m.length !== 1) return [`il faut un seul symbole, lu : ${m.length}`];
+  const juste = `${NOM_UNITE[m[0][1]]} ${m[0][2] === "³" ? "cube" : "carré"}`;
+  const p = q.expected[0] === juste ? [] : [`attendu « ${q.expected[0]} », il faut « ${juste} »`];
+  if ((q.choices ?? []).filter((c) => c === juste).length !== 1) p.push("la bonne réponse manque aux propositions");
+  return p;
+}
+
+function corrigerLireOuiNon(q: Q): string[] {
+  const m = mesures(q.text, `${VOLUME}|${AIRE}|kg|g|${LONGUEUR}`);
+  if (m.length !== 1) return [`il faut une seule mesure, lu : ${m.length}`];
+  if (!/volume/.test(q.text)) return ["tournure non reconnue"];
+  const estVolume = m[0].u.endsWith("³");
+  const juste = /Vrai ou faux/i.test(q.text) ? (estVolume ? "vrai" : "faux") : estVolume ? "oui" : "non";
+  return q.expected[0] === juste ? [] : [`attendu « ${q.expected[0]} », il faut « ${juste} »`];
+}
+
 export const CORRECTEURS: CorrecteursMaths = {
   volume_comparer_tpl_1: corrigerComparerDeux,
   volume_comparer_qcm_tpl_1: corrigerComparerPiles,
@@ -312,4 +522,28 @@ export const CORRECTEURS: CorrecteursMaths = {
   volume_assemblage_qcm_tpl_1: corrigerCubes,
   volume_unite_tpl_1: corrigerUniteOuGrandeur,
   volume_unite_tpl_2: corrigerUniteOuGrandeur,
+  // ⭐ 07/11/2026 : les modes neufs de ★1-★2.
+  volume_compter_tpl_e2_ajouter: corrigerCompterAjouter,
+  volume_compter_tpl_e2_enlever: corrigerCompterEnlever,
+  volume_compter_tpl_e2_rangees: corrigerCubes,
+  volume_compter_tpl_e2_nombre: corrigerCubes,
+  volume_compter_tpl_e2_gros_cube: corrigerCompterGrosCube,
+  volume_compter_qcm_tpl_e2_figure: corrigerCompterQcmFigure,
+  volume_assemblage_tpl_e2_manque: corrigerAssemblerManque,
+  volume_assemblage_tpl_e2_partage: corrigerAssemblerPartage,
+  volume_assemblage_tpl_e2_ajout: corrigerAssemblerAjout,
+  volume_assemblage_tpl_e2_fois: corrigerAssemblerFois,
+  volume_assemblage_qcm_tpl_e2_forme: corrigerAssemblerForme,
+  volume_comparer_qcm_tpl_e2_signe: corrigerComparerSigne,
+  volume_comparer_tpl_e2_ecart: corrigerComparerEcart,
+  volume_comparer_tpl_e2_unites: corrigerComparerUnites,
+  volume_comparer_qcm_tpl_e2_parmi: corrigerComparerParmi,
+  volume_comparer_qcm_tpl_e2_entre: corrigerComparerEntre,
+  volume_comparer_qcm_tpl_e2_figure: corrigerComparerFigure,
+  volume_lire_qcm_tpl_e1_chiffres: corrigerLireLettres,
+  volume_lire_qcm_tpl_e1_dire: corrigerLireLettres,
+  volume_lire_qcm_tpl_e1_grandeur: corrigerLireGrandeur,
+  volume_lire_tpl_e1_cubes: corrigerLireEnCubes,
+  volume_lire_qcm_tpl_e1_nom: corrigerLireNomUnite,
+  volume_lire_qcm_tpl_e1_oui_non: corrigerLireOuiNon,
 };

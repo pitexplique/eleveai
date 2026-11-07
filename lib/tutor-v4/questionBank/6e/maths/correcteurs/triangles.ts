@@ -478,7 +478,7 @@ function corrigerDefiReconnaissance(q: Q): string[] {
   decimalesOk(t, p);
   if (!QUESTION_PRECISE.test(t)) p.push("la question ne demande pas la nature la plus précise");
   let n: string;
-  const ri = t.match(/Deux de ses côtés mesurent chacun (\d+(?:,\d+)?) (cm|m), et l’angle entre eux est droit/);
+  const ri = t.match(/Deux côtés de (\d+(?:,\d+)?) (cm|m), avec un angle droit entre eux/);
   if (ri) {
     n = "rectangle isocèle";
     plausibles([{ v: num(ri[1]), u: ri[2] }], p);
@@ -488,8 +488,8 @@ function corrigerDefiReconnaissance(q: Q): string[] {
     plausibles(ls, p);
     const [x, y, z] = ls.map((l) => l.v).sort((u, v) => u - v);
     if (x + y <= z) p.push(`triangle impossible : ${x} + ${y} ≤ ${z}`);
-    const droit = /[Ii]l a un angle droit/.test(t);
-    const pasDroit = /n’a pas d’angle droit/.test(t);
+    const droit = /\b[Uu]n angle droit/.test(t);
+    const pasDroit = /[Pp]as d’angle droit/.test(t);
     // Trois côtés égaux : jamais d'angle droit (trois angles de 60°), inutile de le dire.
     if (droit && pasDroit) return [...p, "angle droit annoncé et nié"];
     if (!droit && !pasDroit && !(x === y && y === z)) return [...p, "on ne sait pas s’il a un angle droit"];
@@ -1668,6 +1668,80 @@ function corrigerProprieteNeuf(q: Q): string[] {
   return p;
 }
 
+/** ★1 : compléter à 180°, soustraire, ou vérifier qu'une somme fait 180°. */
+function corrigerProprieteComplete(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const lus = anglesLus(t);
+  if (/est-ce 180°|Trouves-tu 180°/.test(t)) {
+    if (lus.length !== 4 || lus[3] !== 180) return ["trois angles et 180° attendus"];
+    verdict(q, lus[0] + lus[1] + lus[2] === 180, p);
+    return p;
+  }
+  let r: number;
+  if (/180° −/.test(t)) {
+    if (lus.length !== 3 || lus[0] !== 180) return ["calcul illisible"];
+    r = lus[0] - lus[1] - lus[2];
+  } else if (/…/.test(t) && /= 180°/.test(t)) {
+    if (lus.length !== 3 || lus[2] !== 180) return ["calcul illisible"];
+    r = 180 - lus[0] - lus[1];
+  } else return ["question non reconnue"];
+  if (r <= 0) p.push("angle impossible");
+  verifierMesure(q, r, "°", p);
+  return p;
+}
+/** ★1 : un angle est donné, que reste-t-il pour les autres ? */
+function corrigerProprietePlace(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const lus = anglesLus(t);
+  if (lus.length !== 1) return ["un angle attendu"];
+  const a = lus[0];
+  if (a <= 0 || a >= 180) return ["angle impossible"];
+  if (/sont-ils aigus/.test(t)) {
+    if (a < 90) return ["avec un angle aigu, la réponse n’est pas sûre"];
+    verdict(q, true, p);
+  } else if (/peuvent-ils être obtus/.test(t)) verdict(q, false, p);
+  else if (/angle droit/.test(t)) verdict(q, a + 90 < 180, p);
+  else if (/angle obtus/.test(t)) verdict(q, a < 90, p);
+  else if (/2 autres/.test(t)) verifierMesure(q, 180 - a, "°", p);
+  else return ["question non reconnue"];
+  return p;
+}
+/** ★2 : la nature ou une mesure, déduite d'une seule information. */
+function corrigerDefiDeduire(q: Q): string[] {
+  const p: string[] = [];
+  const t = q.text;
+  const lus = anglesLus(t);
+  let m: RegExpMatchArray | null;
+  let n: string | undefined;
+  if ((m = t.match(/Un triangle a 2 angles de (\d+)°/))) {
+    const b = num(m[1]);
+    if (2 * b >= 180) return ["deux angles trop grands"];
+    n = b === 60 ? "équilatéral" : b === 45 ? "rectangle isocèle" : "isocèle";
+  } else if ((m = t.match(/Un triangle isocèle a un angle de (\d+)°/))) {
+    const a = num(m[1]);
+    // Un angle aigu autre que 60° : base ou sommet ? La nature ne serait pas unique.
+    if (a < 90 && a !== 60) return ["nature ambiguë"];
+    if (a >= 180) return ["angle impossible"];
+    n = a === 60 ? "équilatéral" : a === 90 ? "rectangle isocèle" : "isocèle";
+  } else if ((m = t.match(/Un triangle rectangle a un angle de (\d+)°/))) {
+    const a = num(m[1]);
+    if (a >= 90) return ["un triangle rectangle n’a qu’un angle de 90° ou plus"];
+    n = a === 45 ? "rectangle isocèle" : "rectangle";
+  }
+  if (n) {
+    if (!/le mieux|plus précis/.test(t)) p.push("la question ne demande pas la nature la plus précise");
+    uneSeuleJuste(q, (c) => c === n, p);
+    return p;
+  }
+  if (lus.length) return ["angle inattendu dans le texte"];
+  if (/^Un triangle a 3 côtés égaux\./.test(t)) verifierMesure(q, 60, "°", p);
+  else if (/^Un triangle rectangle a 2 côtés égaux\./.test(t)) verifierMesure(q, 45, "°", p);
+  else return ["question non reconnue"];
+  return p;
+}
+
 /** ★3 : le métier et deux angles : on retrouve le troisième, on en déduit le type. */
 function corrigerTypeAngleMetier(q: Q): string[] {
   const p: string[] = [];
@@ -1784,6 +1858,9 @@ export const CORRECTEURS: CorrecteursMaths = {
   triangle_propriete_defi_tpl_isocele_nu: corrigerProprieteNeuf,
   triangle_propriete_defi_tpl_au_plus: corrigerProprieteNeuf,
   triangle_propriete_defi_tpl_melange: corrigerProprieteNeuf,
+  triangle_propriete_defi_tpl_complete_nu: corrigerProprieteComplete,
+  triangle_propriete_defi_tpl_place_nue: corrigerProprietePlace,
+  triangle_defi_tpl_deduire: corrigerDefiDeduire,
 };
 
 // Outils partagés avec les autres correcteurs de géométrie.
