@@ -557,7 +557,433 @@ const corrDefi: CorrecteurMaths = (q) => {
   return p;
 };
 
+// =====================================================================
+// ⭐ 07/11/2026 — CORRECTEURS DES GABARITS « À PLUSIEURS FAÇONS » (bank : section
+// du 07/11). Même contrat : on relit le texte et les codages, on refait le
+// raisonnement. Une tournure non reconnue est un défaut.
+// =====================================================================
+const NON_RECONNUE = (t: string) => [`question non reconnue : ${t}`];
+/** Oui/non ou vrai/faux : une seule proposition, celle du verdict recalculé. */
+function verdictBool(q: Q, vrai: boolean): string[] {
+  const c = q.choices ?? [];
+  const mot = c.includes("vrai") ? (vrai ? "vrai" : "faux") : vrai ? "oui" : "non";
+  return uneSeule(q, (x) => x === mot, `le verdict (${mot})`);
+}
+const figureDe = (q: Q) => {
+  const cv = q.canvas as any;
+  return cv?.kind === "quadrilatere" ? cv : null;
+};
+/** Le côté « AB » du canvas écrit avec les noms affichés, rangé : [EF]. */
+const coteAffiche = (cv: any, s: string) => {
+  const nom = (k: string) => cv.labels?.[k] ?? k;
+  return `[${[nom(s[0]), nom(s[1])].sort().join("")}]`;
+};
+const natureLue = (cv: any) => lireCodages(cv);
+const REP_NATURE = (n: string) => (n === "aucune" ? "quadrilatère quelconque" : n);
+/** Dans un tour, le segment écrit est-il un côté du quadrilatère nommé ? */
+const est4Lettres = (c: string[] | null) => c && new Set(c).size === 4;
+const toujoursA = (nat: string, phrase: string) => {
+  const f = classer(phrase);
+  return !!f && f.every((k) => A_TOUJOURS[nat].includes(k));
+};
+
+// ----- IDENTIFIER_NATURE
+const corrIdLire: CorrecteurMaths = (q) => {
+  const cv = figureDe(q);
+  if (!cv) return ["il faut une figure codée"];
+  if (!/précis/.test(q.text)) return ["la question ne demande pas le nom le plus précis"];
+  const { nature, problemes } = natureLue(cv);
+  return [...problemes, ...uneSeule(q, (x) => x === REP_NATURE(nature), `la nature (${nature})`)];
+};
+const corrIdOuiNon: CorrecteurMaths = (q) => {
+  const cv = figureDe(q);
+  if (!cv) return ["il faut une figure codée"];
+  const Y = q.text.match(/\b[Uu]n (carré|rectangle|losange)(?![a-zà-ÿ])/)?.[1];
+  if (!Y) return NON_RECONNUE(q.text);
+  const { nature, problemes } = natureLue(cv);
+  return [...problemes, ...verdictBool(q, nature === "carré" || nature === Y)];
+};
+const corrIdCompter: CorrecteurMaths = (q) => {
+  const cv = figureDe(q);
+  if (!cv) return ["il faut une figure codée"];
+  const m = cv.marks ?? {};
+  const { problemes } = natureLue(cv);
+  let n: number;
+  if (/angles droits|petits carrés/.test(q.text)) n = (m.rightAnglesAt ?? []).length;
+  else if (/côtés/.test(q.text)) n = new Set((m.equalSides ?? []).flat().map(normCote)).size;
+  else return NON_RECONNUE(q.text);
+  return String(q.expected[0]) === String(n) ? problemes : [...problemes, `attendu ${q.expected[0]}, compté ${n}`];
+};
+const corrIdIndice: CorrecteurMaths = (q) => {
+  const cv = figureDe(q);
+  if (!cv) return ["il faut une figure codée"];
+  const Y = q.text.match(/\b(?:[Uu]n|[Cc]e) (carré|rectangle|losange)(?![a-zà-ÿ])/)?.[1];
+  if (!Y) return NON_RECONNUE(q.text);
+  const { nature, problemes } = natureLue(cv);
+  const p = [...problemes];
+  if (nature !== Y) p.push(`le texte dit ${Y}, les codages ${nature}`);
+  const droits = (cv.marks?.rightAnglesAt ?? []).length === 4;
+  const egaux = new Set((cv.marks?.equalSides ?? []).flat().map(normCote)).size === 4;
+  const rep = droits && egaux ? "4 angles droits et 4 côtés égaux" : droits ? "4 angles droits" : egaux ? "4 côtés égaux" : "aucun codage";
+  return [...p, ...uneSeule(q, (x) => x === rep, `les codages lus (${rep})`)];
+};
+const corrIdCode: CorrecteurMaths = (q) => {
+  const t = q.text;
+  if (/petit carré/.test(t)) return uneSeule(q, (x) => x === "un angle droit", "le sens du petit carré");
+  if (/même (petit )?trait/.test(t)) return uneSeule(q, (x) => x === "des côtés égaux", "le sens du même trait");
+  if (/un angle droit/i.test(t)) return uneSeule(q, (x) => x === "un petit carré", "le code d’un angle droit");
+  if (/côtés égaux/.test(t)) return uneSeule(q, (x) => x === "le même petit trait", "le code de côtés égaux");
+  return NON_RECONNUE(t);
+};
+const corrIdSommet: CorrecteurMaths = (q) => {
+  const cv = figureDe(q);
+  if (!cv) return ["il faut une figure codée"];
+  const d: string[] = cv.marks?.rightAnglesAt ?? [];
+  if (d.length !== 1) return [`un seul angle droit codé attendu, lus : ${d.length}`];
+  const rep = cv.labels?.[d[0]] ?? d[0];
+  return [...natureLue(cv).problemes, ...uneSeule(q, (x) => x === rep, `le sommet codé (${rep})`)];
+};
+const corrIdCoteCode: CorrecteurMaths = (q) => {
+  const cv = figureDe(q);
+  if (!cv) return ["il faut une figure codée"];
+  const paire: string[] = cv.marks?.equalSides?.[0] ?? [];
+  if (paire.length !== 2) return ["une paire de côtés codés attendue"];
+  const [a, b] = paire.map((s) => coteAffiche(cv, s));
+  const lu = q.text.match(/\[[A-Z]{2}\]/)?.[0];
+  if (lu !== a && lu !== b) return [`${lu} n’est pas un côté codé (${a}, ${b})`];
+  const rep = lu === a ? b : a;
+  return [...natureLue(cv).problemes, ...uneSeule(q, (x) => x === rep, `le côté codé comme ${lu}`)];
+};
+const corrManqueCode: CorrecteurMaths = (q) => {
+  const cv = figureDe(q);
+  if (!cv) return ["il faut une figure codée"];
+  if (!/carré/.test(q.text)) return NON_RECONNUE(q.text);
+  const { nature, problemes } = natureLue(cv);
+  if (nature !== "rectangle" && nature !== "losange") return [...problemes, `figure de départ inattendue : ${nature}`];
+  const atteint = (x: string) => {
+    const f = classer(x);
+    return !!f && deduire(new Set(f), nature).nature === "carré";
+  };
+  return [...problemes, ...uneSeule(q, atteint, "le codage qui fait un carré")];
+};
+
+// ----- DEFI, ★2
+const CHOIX_NATURE = (q: Q, rep: string) => uneSeule(q, (x) => x === rep, `la nature (${rep})`);
+const corrDefiNomPrecis: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const c = nomDuTexte(t);
+  if (!est4Lettres(c)) return [`nom du quadrilatère introuvable : ${t}`];
+  if (!/précis/.test(t)) return ["la question ne demande pas le nom le plus précis"];
+  let m: RegExpMatchArray | null;
+  if (/losange (?:[A-Z]{4} )?avec un angle droit/i.test(t)) return CHOIX_NATURE(q, "carré");
+  if ((m = t.match(/(?:osange [A-Z]{4} : un angle|est un losange\. Un de ses angles) mesure (\d+)°/))) return CHOIX_NATURE(q, Number(m[1]) === 90 ? "carré" : "losange");
+  const consec = (x: string, y: string) => {
+    const [u, v] = [x.split("").sort().join(""), y.split("").sort().join("")];
+    return estCote(c!, u) && estCote(c!, v) && u !== v && u.split("").some((l) => v.includes(l));
+  };
+  if ((m = t.match(/\[([A-Z]{2})\] et \[([A-Z]{2})\] mesurent \d+ cm/))) {
+    if (!consec(m[1], m[2])) return ["les deux côtés ne sont pas consécutifs"];
+    return CHOIX_NATURE(q, "carré");
+  }
+  if ((m = t.match(/\[([A-Z]{2})\] = (\d+) cm, \[([A-Z]{2})\] = (\d+) cm/))) {
+    if (!consec(m[1], m[3])) return ["les deux côtés ne sont pas consécutifs"];
+    return CHOIX_NATURE(q, m[2] === m[4] ? "carré" : "rectangle");
+  }
+  return NON_RECONNUE(t);
+};
+/** Longueur en cm attendue. */
+function attenduCm(q: Q, v: number): string[] {
+  if (!Number.isInteger(v) || v <= 0) return [`longueur impossible : ${v}`];
+  return String(q.expected[0]) === `${v} cm` ? [] : [`attendu « ${q.expected[0]} », recalculé ${v} cm`];
+}
+const corrPerimetre: CorrecteurMaths = (q) => {
+  const t = q.text;
+  let m: RegExpMatchArray | null;
+  if ((m = t.match(/[Rr]ectangle.*?(?:de|mesure) (\d+) cm sur (\d+) cm/))) {
+    if (m[1] === m[2]) return ["rectangle aux côtés égaux"];
+    return attenduCm(q, 2 * (Number(m[1]) + Number(m[2])));
+  }
+  if ((m = t.match(/périmètre (\d+) cm, longueur (\d+) cm/))) return attenduCm(q, Number(m[1]) / 2 - Number(m[2]));
+  if ((m = t.match(/(?:un |de )périmètre (?:de )?(\d+) cm/))) return attenduCm(q, Number(m[1]) / 4);
+  if ((m = t.match(/(?:des côtés de|de côté) (\d+) cm/))) {
+    // « Carré de côté 5 cm : longueur du tour » ou « des 4 côtés ».
+    if (/périmètre|tour|4 côtés/.test(t)) return attenduCm(q, 4 * Number(m[1]));
+  }
+  return NON_RECONNUE(t);
+};
+const corrDefiInclusion: CorrecteurMaths = (q) => {
+  const [x, y] = [...q.text.matchAll(NATS)].map((m) => m[1]);
+  if (!x || !y || x === y) return [`deux figures attendues : ${q.text}`];
+  return verdictBool(q, A_TOUJOURS[y].every((f) => A_TOUJOURS[x].includes(f)));
+};
+const corrDefiCompte: CorrecteurMaths = (q) => {
+  const t = q.text;
+  let m: RegExpMatchArray | null;
+  let n: number;
+  if ((m = t.match(/Rectangle de (\d+) cm sur (\d+) cm\. Combien de côtés de (\d+) cm/))) {
+    if (m[1] === m[2] || (m[3] !== m[1] && m[3] !== m[2])) return ["longueur demandée hors du rectangle"];
+    n = 2;
+  } else if ((m = t.match(/(?:Carré|Losange) de côté (\d+) cm\. Combien de côtés mesurent (\d+) cm/))) {
+    if (m[1] !== m[2]) return ["longueur demandée différente du côté"];
+    n = 4;
+  } else if (/paires de côtés opposés/.test(t)) n = 2;
+  else if (/combien de côtés égaux/.test(t)) n = 4;
+  else if (/combien de diagonales/.test(t)) n = 2;
+  else return NON_RECONNUE(t);
+  return String(q.expected[0]) === String(n) ? [] : [`attendu ${q.expected[0]}, recalculé ${n}`];
+};
+const corrDefiPenche: CorrecteurMaths = (q) => {
+  const cv = figureDe(q);
+  if (!cv) return ["il faut une figure codée"];
+  const Y = q.text.match(/\b[Uu]n (carré|rectangle|losange)(?![a-zà-ÿ])/)?.[1];
+  if (!Y) return NON_RECONNUE(q.text);
+  const { nature, problemes } = natureLue(cv);
+  return [...problemes, ...verdictBool(q, nature === "carré" || nature === Y)];
+};
+const corrDefiIntrus: CorrecteurMaths = (q) => {
+  const Y = q.text.match(/\b[Uu]n (rectangle|losange)(?![a-zà-ÿ])/)?.[1];
+  if (!Y) return NON_RECONNUE(q.text);
+  for (const x of q.choices ?? []) if (!classer(x)) return [`proposition non reconnue : ${x}`];
+  return uneSeule(q, (x) => !toujoursA(Y, x), `la propriété qu’un ${Y} n’a pas toujours`);
+};
+
+// ----- COMPLETER_CONSTRUIRE
+const corrCompFaut: CorrecteurMaths = (q) => {
+  const Y = q.text.match(/\b[Uu]n (carré|rectangle|losange)(?![a-zà-ÿ])/)?.[1];
+  const prop = q.text.match(/4 angles droits|4 côtés égaux/)?.[0];
+  if (!Y || !prop) return NON_RECONNUE(q.text);
+  return verdictBool(q, toujoursA(Y, prop));
+};
+const corrCompOutil: CorrecteurMaths = (q) => {
+  const t = q.text;
+  if (/angle droit|coin/.test(t)) return uneSeule(q, (x) => x === "une équerre", "l’instrument de l’angle droit");
+  if (/côté|mesures-tu/.test(t)) return uneSeule(q, (x) => x === "une règle graduée", "l’instrument de la longueur");
+  return NON_RECONNUE(t);
+};
+const corrCompSommet: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const N = t.match(/(?<![A-Za-zÀ-ÿ])[A-Z]{4}(?![A-Za-zÀ-ÿ])/)?.[0];
+  if (!N) return [`nom du quadrilatère introuvable : ${t}`];
+  const trou = t.match(/([A-Z]*)…([A-Z]*)/);
+  let manque: string[];
+  if (trou) {
+    const vus = trou[1] + trou[2];
+    if (vus.length !== 3) return [`le trou du nom laisse ${vus.length} lettres`];
+    if (`${trou[1]}?${trou[2]}`.split("").some((l, i) => l !== "?" && l !== N[i])) return ["le nom troué ne suit pas le nom du quadrilatère"];
+    manque = N.split("").filter((l) => !vus.includes(l));
+  } else {
+    const m = t.match(/([A-Z]), ([A-Z]) et ([A-Z])/);
+    if (!m) return NON_RECONNUE(t);
+    const vus = m.slice(1, 4);
+    if (vus.some((l) => !N.includes(l))) return ["une lettre placée n’est pas un sommet"];
+    manque = N.split("").filter((l) => !vus.includes(l));
+  }
+  if (manque.length !== 1) return [`${manque.length} lettres manquent`];
+  return q.expected[0] === manque[0] ? [] : [`attendu ${q.expected[0]}, recalculé ${manque[0]}`];
+};
+const corrCompCoteSuivant: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const N = t.match(/(?<![A-Za-zÀ-ÿ])[A-Z]{4}(?![A-Za-zÀ-ÿ])/)?.[0];
+  if (!N) return [`nom du quadrilatère introuvable : ${t}`];
+  const c = N.split("");
+  const cote = (i: number) => `[${[c[i % 4], c[(i + 1) % 4]].sort().join("")}]`;
+  const tous = [0, 1, 2, 3].map(cote);
+  if (/termine/.test(t)) return uneSeule(q, (x) => x === cote(3), "le côté qui termine le tour");
+  if (/tu as tracé/.test(t)) {
+    const faits = [...t.matchAll(/\[[A-Z]{2}\]/g)].map((m) => m[0]);
+    if (faits.length !== 3 || faits.some((f) => !tous.includes(f))) return ["trois côtés du quadrilatère attendus"];
+    return uneSeule(q, (x) => tous.includes(x) && !faits.includes(x), "le côté qui manque");
+  }
+  const lu = t.match(/\[[A-Z]{2}\]/)?.[0];
+  const i = tous.indexOf(lu ?? "");
+  if (i < 0 || i === 3) return [`côté de départ inattendu : ${lu}`];
+  return uneSeule(q, (x) => x === cote(i + 1), `le côté après ${lu}`);
+};
+const corrCompReste: CorrecteurMaths = (q) => {
+  const k = Number(q.text.match(/\b([1-3]) (?:côtés?|angles? droits?|sommets?)/)?.[1]);
+  if (!k) return NON_RECONNUE(q.text);
+  return String(q.expected[0]) === String(4 - k) ? [] : [`attendu ${q.expected[0]}, recalculé ${4 - k}`];
+};
+const corrCompLongueur: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const c = nomDuTexte(t);
+  if (!est4Lettres(c)) return [`nom du quadrilatère introuvable : ${t}`];
+  const v = Number(t.match(/(\d+) cm/)?.[1]);
+  const segsLus = [...t.matchAll(/\[([A-Z])([A-Z])\]/g)].map((m) => [m[1], m[2]].sort().join(""));
+  const p: string[] = [];
+  for (const s of segsLus) if (!estCote(c!, s)) p.push(`[${s}] n’est pas un côté de ${c!.join("")}`);
+  if (/[Rr]ectangle/.test(t)) {
+    if (segsLus.length !== 2) return ["deux côtés attendus"];
+    const opp = segsLus[0].split("").map((l) => oppose(c!, l)).sort().join("");
+    if (opp !== segsLus[1]) p.push("le côté demandé n’est pas opposé au côté donné");
+  } else if (!/carré|Carré|losange|Losange/.test(t)) return NON_RECONNUE(t);
+  return [...p, ...attenduCm(q, v)];
+};
+const corrCompDevient: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const d = t.match(/\b[Uu]n (rectangle|losange)(?![a-zà-ÿ])/)?.[1];
+  const prop = t.match(/4 côtés égaux|4 angles droits|un angle droit|des côtés opposés parallèles/)?.[0];
+  if (!d || !prop || !/précis/.test(t)) return NON_RECONNUE(t);
+  const { nature } = deduire(new Set(classer(prop) ?? []), d);
+  return CHOIX_NATURE(q, nature);
+};
+const corrCompEquerre: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const c = nomDuTexte(t);
+  if (!est4Lettres(c)) return [`nom du quadrilatère introuvable : ${t}`];
+  if (!/[Rr]ectangle|[Cc]arré/.test(t)) return ["figure sans angles droits"];
+  if (/instrument/.test(t)) {
+    const S = t.match(/angle droit en ([A-Z])/)?.[1];
+    if (!S || !c!.includes(S)) return ["sommet de l’angle droit introuvable"];
+    return uneSeule(q, (x) => x === "une équerre", "l’instrument");
+  }
+  if (/degrés/.test(t)) return q.expected[0] === "90°" && q.comparator === "number_equal" ? [] : [`attendu ${q.expected[0]}`];
+  if (/quel angle/.test(t)) return uneSeule(q, (x) => x === "un angle droit", "l’angle");
+  return NON_RECONNUE(t);
+};
+const corrCompDiag: CorrecteurMaths = (q) => {
+  const Y = q.text.match(/d’un (rectangle|losange)/)?.[1];
+  if (!Y) return NON_RECONNUE(q.text);
+  return uneSeule(q, (x) => {
+    const f = classer(`diagonales ${x}`);
+    return !!f && f.every((k) => A_TOUJOURS[Y].includes(k));
+  }, `les diagonales d’un ${Y}`);
+};
+const corrCompManque: CorrecteurMaths = (q) => {
+  const t = q.text;
+  if (!/carré/.test(t)) return NON_RECONNUE(t);
+  const depart = /4 angles droits|[Rr]ectangle/.test(t) ? "rectangle" : /4 côtés égaux|[Ll]osange/.test(t) ? "losange" : null;
+  if (!depart) return NON_RECONNUE(t);
+  for (const x of q.choices ?? []) if (!classer(x)) return [`proposition non reconnue : ${x}`];
+  return uneSeule(q, (x) => deduire(new Set(classer(x) ?? []), depart).nature === "carré", "ce qui fait un carré");
+};
+
+// ----- LIEN_PROPRIETE, ★1
+const corrLienOuiNon: CorrecteurMaths = (q) => {
+  const Y = q.text.match(/\b(?:[Uu]n|[Tt]out) (carré|rectangle|losange)(?![a-zà-ÿ])/)?.[1];
+  const prop = q.text.match(/4 angles droits|4 côtés égaux/)?.[0];
+  if (!Y || !prop) return NON_RECONNUE(q.text);
+  return verdictBool(q, toujoursA(Y, prop));
+};
+const corrLienDevinette: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const f = new Set<Fait>();
+  if (/4 angles droits/.test(t)) f.add("R");
+  if (/4 côtés égaux/.test(t)) f.add("L");
+  if (/aucun angle droit/.test(t)) f.add("NR");
+  if (/côtés inégaux/.test(t)) f.add("NL");
+  if (!f.size) return NON_RECONNUE(t);
+  const { nature, contradiction } = deduire(f);
+  return contradiction ? ["la description se contredit"] : CHOIX_NATURE(q, nature);
+};
+const corrLienPropDeNat: CorrecteurMaths = (q) => {
+  const Y = q.text.match(/\b(?:[Uu]n|[Tt]out) (carré|rectangle|losange)(?![a-zà-ÿ])/)?.[1];
+  if (!Y) return NON_RECONNUE(q.text);
+  const juste = (x: string) => {
+    if (/aucun|seulement|3 côtés/.test(x)) return false;
+    return x.split(" et ").every((b) => toujoursA(Y, b));
+  };
+  return uneSeule(q, juste, `ce qu’a toujours un ${Y}`);
+};
+const corrLienFaitUn: CorrecteurMaths = (q) => {
+  const Y = q.text.match(/\b[Uu]n (carré|rectangle|losange)(?![a-zà-ÿ])/)?.[1];
+  if (!Y) return NON_RECONNUE(q.text);
+  return uneSeule(q, (x) => deduire(lireListe(x).faits).nature === Y, `ce qui donne un ${Y}`);
+};
+
+// ----- NOMMER_VOCABULAIRE, ★2
+const corrNommerSommets: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const c = nomDuTexte(t);
+  let m: RegExpMatchArray | null;
+  if ((m = t.match(/\[([A-Z])([A-Z])\] et \[([A-Z])([A-Z])\]/))) {
+    const [u, v] = [m[1] + m[2], m[3] + m[4]];
+    const commun = u.split("").filter((l) => v.includes(l));
+    if (commun.length !== 1) return [`${commun.length} sommet(s) commun(s)`];
+    return uneSeule(q, (x) => x === commun[0], "le sommet commun");
+  }
+  if (!est4Lettres(c)) return [`nom du quadrilatère introuvable : ${t}`];
+  if ((m = t.match(/(?:voisin(?:e)? de|un voisin de|relié à|partent de|touchent) ([A-Z])\b/))) {
+    const P = m[1];
+    if (!c!.includes(P)) return [`${P} n’est pas un sommet`];
+    if (/combien/i.test(t)) {
+      const n = /diagonales/.test(t) ? 1 : /côtés/.test(t) ? 2 : 0;
+      if (!n) return NON_RECONNUE(t);
+      return String(q.expected[0]) === String(n) ? [] : [`attendu ${q.expected[0]}, recalculé ${n}`];
+    }
+    return uneSeule(q, (x) => c!.includes(x) && x !== P && voisins(c!, x, P), `un voisin de ${P}`);
+  }
+  return NON_RECONNUE(t);
+};
+const corrNommerSegment: CorrecteurMaths = (q) => {
+  const t = q.text;
+  const c = nomDuTexte(t);
+  if (!est4Lettres(c)) return [`nom du quadrilatère introuvable : ${t}`];
+  const s = segs(t)[0];
+  if (!s) return NON_RECONNUE(t);
+  const p = canvasNomme(q, c!);
+  const cote = estCote(c!, s);
+  const diag = estDiagonale(c!, s);
+  if (!cote && !diag) return [...p, `[${s}] n’est ni un côté ni une diagonale`];
+  if ((q.choices ?? []).includes("un sommet")) return [...p, ...uneSeule(q, (x) => x === (cote ? "un côté" : "une diagonale"), "la nature du segment")];
+  if (/un côté/.test(t)) return [...p, ...verdictBool(q, cote)];
+  if (/une diagonale/.test(t)) return [...p, ...verdictBool(q, diag)];
+  return [...p, ...NON_RECONNUE(t)];
+};
+
+// ----- DISTINGUER, ★2
+const corrDistFigure: CorrecteurMaths = (q) => {
+  const cv = figureDe(q);
+  if (!cv) return ["il faut une figure codée"];
+  const nats = new Set([...q.text.toLowerCase().matchAll(NATS)].map((m) => m[1]));
+  if (nats.size !== 2) return [`deux figures attendues : ${q.text}`];
+  const { nature, problemes } = natureLue(cv);
+  if (!nats.has(nature)) return [...problemes, `les codages disent ${nature}, hors du choix`];
+  if (nature === "carré") return [...problemes, "un carré serait aussi l’autre figure : question ambiguë"];
+  return [...problemes, ...uneSeule(q, (x) => x === nature, `la nature (${nature})`)];
+};
+
 export const CORRECTEURS: CorrecteursMaths = {
+  quadrilatere_identifier_nature_tpl_n1_lire: corrIdLire,
+  quadrilatere_identifier_nature_tpl_n1_ouinon: corrIdOuiNon,
+  quadrilatere_identifier_nature_tpl_n1_compter: corrIdCompter,
+  quadrilatere_identifier_nature_tpl_n1_indice: corrIdIndice,
+  quadrilatere_identifier_nature_tpl_n1_code: corrIdCode,
+  quadrilatere_identifier_nature_tpl_n1_sommet: corrIdSommet,
+  quadrilatere_identifier_nature_tpl_n2_lire: corrIdLire,
+  quadrilatere_identifier_nature_tpl_n2_ouinon: corrIdOuiNon,
+  quadrilatere_identifier_nature_tpl_n2_compter: corrIdCompter,
+  quadrilatere_identifier_nature_tpl_n2_indice: corrIdIndice,
+  quadrilatere_identifier_nature_tpl_n2_cote_code: corrIdCoteCode,
+  quadrilatere_identifier_nature_tpl_n2_manque: corrManqueCode,
+  quadrilatere_defi_tpl_n2_nom_precis: corrDefiNomPrecis,
+  quadrilatere_defi_tpl_n2_perimetre: corrPerimetre,
+  quadrilatere_defi_tpl_n2_inclusion: corrDefiInclusion,
+  quadrilatere_defi_tpl_n2_compte: corrDefiCompte,
+  quadrilatere_defi_tpl_n2_penche: corrDefiPenche,
+  quadrilatere_defi_tpl_n2_intrus: corrDefiIntrus,
+  quadrilatere_completer_construire_tpl_n1_faut: corrCompFaut,
+  quadrilatere_completer_construire_tpl_n1_outil: corrCompOutil,
+  quadrilatere_completer_construire_tpl_n1_sommet: corrCompSommet,
+  quadrilatere_completer_construire_tpl_n1_cote_suivant: corrCompCoteSuivant,
+  quadrilatere_completer_construire_tpl_n1_reste: corrCompReste,
+  quadrilatere_completer_construire_tpl_n1_longueur: corrCompLongueur,
+  quadrilatere_completer_construire_tpl_n2_devient: corrCompDevient,
+  quadrilatere_completer_construire_tpl_n2_equerre: corrCompEquerre,
+  quadrilatere_completer_construire_tpl_n2_total: corrPerimetre,
+  quadrilatere_completer_construire_tpl_n2_diagonales: corrCompDiag,
+  quadrilatere_completer_construire_tpl_n2_manque: corrCompManque,
+  quadrilatere_completer_construire_tpl_n2_manque_code: corrManqueCode,
+  quadrilatere_lien_propriete_tpl_n1_ouinon: corrLienOuiNon,
+  quadrilatere_lien_propriete_tpl_n1_devinette: corrLienDevinette,
+  quadrilatere_lien_propriete_tpl_n1_propriete: corrLienPropDeNat,
+  quadrilatere_lien_propriete_tpl_n1_fait_un: corrLienFaitUn,
+  quadrilatere_nommer_vocabulaire_tpl_n2_sommets: corrNommerSommets,
+  quadrilatere_nommer_vocabulaire_tpl_n2_segment: corrNommerSegment,
+  quadrilatere_distinguer_tpl_n2_figure: corrDistFigure,
+  quadrilatere_distinguer_tpl_n3_figure: corrDistFigure,
+  quadrilatere_lien_propriete_tpl_n2_ouinon: corrLienOuiNon,
+
   quadrilatere_distinguer_tpl_1: corrDistinguer,
   quadrilatere_distinguer_tpl_verifier: corrDistinguer,
   quadrilatere_distinguer_qcm_tpl_carre_ou_rectangle: corrDistinguer,

@@ -122,15 +122,15 @@ function nomsFaux(s: readonly string[]): string[] {
    ★2 en 15 au plus. Les gabarits ★1-★2 tirent leur énoncé jusqu'à tenir dans
    la limite (`court`) ; à ★1-★2 la figure n'a plus de phrase d'introduction
    la plupart du temps (le nom EFGH suffit). */
-const nbMots = (t: string) => t.trim().split(/\s+/).filter((w) => /[\p{L}\d]/u.test(w)).length;
+const nbMots = (t: string) => t.trim().split(/\s+/).length;
 function court(lim: number, tirage: () => QG): QG {
   let q = tirage();
-  for (let i = 0; i < 80 && nbMots(q.text) > lim; i++) q = tirage();
+  for (let i = 0; i < 800 && nbMots(q.text) > lim; i++) q = tirage();
   return q;
 }
 function qcmQ(text: string, bonne: string, leurres: string[], explication: string, canvas?: QuadrilatereCanvasData): QG {
   return {
-    text: text.trim(),
+    text: text.trim().replace(/( : )([A-ZÉ])(?=[a-zéèêîû’])/g, (_, a: string, l: string) => a + l.toLowerCase()),
     format: "qcm",
     choices: shuffle([bonne, ...leurres]),
     expected: [bonne],
@@ -140,7 +140,7 @@ function qcmQ(text: string, bonne: string, leurres: string[], explication: strin
   };
 }
 function mesureQ(text: string, v: number, u: string, explication: string): QG {
-  return { text: text.trim(), format: "short", expected: [`${v} ${u}`], comparator: "number_equal", explanation: expl(explication) };
+  return { text: text.trim().replace(/( : )([A-ZÉ])(?=[a-zéèêîû’])/g, (_, a: string, l: string) => a + l.toLowerCase()), format: "short", expected: [`${v} ${u}`], comparator: "number_equal", explanation: expl(explication) };
 }
 /** « E, F, G et H » */
 function listeEt(s: readonly string[]) {
@@ -328,7 +328,7 @@ const QUESTIONS_AFFIRMER = [
 function genQuadNature(etoile: 1 | 2 | 3 | 4): QG {
   const s = sommetsQuadrilatere();
   const N = s.join("");
-  const ctx = ctxQuad(N, undefined, etoile);
+  const ctx = etoile <= 2 ? "" : ctxQuad(N, undefined, etoile);
   if (etoile <= 2) {
     const nature = pick(["carré", "rectangle", "losange", "quelconque"] as const);
     const canvas = dessinQuad(nature, s, etoile === 2);
@@ -466,7 +466,7 @@ function genQuadLien(etoile: 1 | 2 | 3): QG {
   const props = pick(DONNEES_LIEN[etoile - 1]);
   const rep = natureForcee(props) as Nat;
   return qcmQ(
-    `${ctxQuad(N, undefined, etoile)} ${N} a ${dire(props)}. ${pick(QUESTIONS_LIEN)(N)}`,
+    `${etoile === 3 && Math.random() < 0.6 ? "" : ctxQuad(N, undefined, etoile)} ${N} a ${dire(props)}. ${pick(QUESTIONS_LIEN)(N)}`,
     rep,
     ["carré", "rectangle", "losange", "quadrilatère quelconque"].filter((x) => x !== rep),
     `${raisons(props)} ${POURQUOI_NAT[rep]}`,
@@ -535,7 +535,7 @@ function genQuadConclusion(etoile: 2 | 3 | 4): QG {
   const [p, p2] = [pick(PRENOMS), pick(PRENOMS)];
   const d = pick(DONNEES_CONCLUSION[etoile - 2]);
   const v = verdict(d.props, d.affirme);
-  return qcmQ(`${ctxQuad(N, p2, etoile)} ${N} a ${dire(d.props)}. ${questionVerdict(p, N, d.affirme, etoile <= 2)}`, v.bonne, v.leurres, v.pq);
+  return qcmQ(`${etoile === 3 && Math.random() < 0.6 ? "" : ctxQuad(N, p2, etoile)} ${N} a ${dire(d.props)}. ${questionVerdict(p, N, d.affirme, etoile <= 2)}`, v.bonne, v.leurres, v.pq);
 }
 
 // ─── QUADRILATERE_PROPRIETE_DEFI : inclusions, départ + propriété en plus ──
@@ -862,7 +862,7 @@ function genQuadDistinguer(etoile: 2 | 3 | 5): QG {
     const dit = (k: Prop) => (enCommun ? DIT[k][0] : SI[k]!);
     return qcmQ(`${ctxQuad(N, undefined, etoile)} ${question}`, dit(bonne), leurres.map(dit), pq);
   }
-  const ctx = pick(CONTEXTES_DESSIN)(pick(PRENOMS), N);
+  const ctx = etoile === 3 ? "" : pick(CONTEXTES_DESSIN)(pick(PRENOMS), N);
   const question = pick([
     `Quelle est la nature la plus précise de ${N} ?`,
     `Que peut-on affirmer sur ${N} ?`,
@@ -976,6 +976,617 @@ function genQuadDefi(etoile: 2 | 3 | 4 | 5, forcer?: "perimetre" | "eleve"): QG 
     o.u,
     `${donne} et ${cherche} sont deux côtés consécutifs du rectangle. Le périmètre compte deux fois chacun : ${donne} + ${cherche} = ${2 * (L + l)} ÷ 2 = ${L + l} ${o.u}. Donc ${cherche} = ${L + l} − ${vd} = ${vc} ${o.u}.`,
   );
+}
+
+// =====================================================================
+// ⭐ 07/11/2026 — LA MÊME PHRASE REVENAIT (scripts/mesurer-squelettes-coach.ts
+// --lettres) : jusqu'à 15 répétitions sur 20 à ★1-★2. Il faut une quarantaine de
+// phrases à peu près équiprobables par étoile : ces gabarits posent la question
+// de plusieurs FAÇONS (lire la figure, oui/non, compter les codages, ce qui
+// manque, la question prise par l'autre bout). ★1 : 12 mots au plus. ★2 : 15 au
+// plus. Aucun prénom, aucune situation (../REGLES-6E.md). Un carré est aussi
+// rectangle et losange : un QCM de nature demande le nom le plus précis.
+// Correcteurs : correcteurs/quadrilateres.ts (section du 07/11).
+// =====================================================================
+type NatCodee = "carré" | "rectangle" | "losange" | "quelconque";
+const ouiNonQ = (text: string, oui: boolean, calcul: string, canvas?: QuadrilatereCanvasData) => qcmQ(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
+const vraiFauxQ = (text: string, vrai: boolean, calcul: string, canvas?: QuadrilatereCanvasData) => qcmQ(text, vrai ? "vrai" : "faux", [vrai ? "faux" : "vrai"], calcul, canvas);
+function nombreQ(text: string, n: number, calcul: string, canvas?: QuadrilatereCanvasData): QG {
+  return { text, format: "short", expected: [String(n)], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}) };
+}
+function lettreQ(text: string, l: string, calcul: string): QG {
+  return { text, format: "short", expected: [l], comparator: "exact_text", explanation: expl(calcul) };
+}
+/** Le dessin de la nature, avec les codages qui la prouvent. */
+function figureCodee(nature: NatCodee, s: readonly string[], penche: boolean): QuadrilatereCanvasData {
+  const c = dessinQuad(nature, s, penche);
+  if (nature === "carré") c.marks = { rightAnglesAt: QUATRE_ANGLES, equalSides: QUATRE_COTES };
+  if (nature === "rectangle") c.marks = { rightAnglesAt: QUATRE_ANGLES };
+  if (nature === "losange") c.marks = { equalSides: QUATRE_COTES };
+  return c;
+}
+const NOM_NATURE = (n: NatCodee) => (n === "quelconque" ? "quadrilatère quelconque" : n);
+const PREUVE: Record<NatCodee, string> = {
+  carré: "Quatre angles droits ET quatre côtés codés égaux : c’est un carré.",
+  rectangle: "Quatre angles droits codés, et les côtés ne sont pas codés égaux : c’est un rectangle.",
+  losange: "Quatre côtés codés égaux, et aucun angle droit : c’est un losange.",
+  quelconque: "Aucun angle droit, aucun côté égal n’est codé : c’est un quadrilatère quelconque.",
+};
+/** Le côté du canvas (« AB ») avec ses vrais noms de sommets. */
+const coteNomme = (s: readonly string[], k: 0 | 1 | 2 | 3) => seg(s[k], s[(k + 1) % 4]);
+
+// ----- QUADRILATERE_IDENTIFIER_NATURE
+function genIdLire(penche: boolean): QG {
+  const s = sommetsQuadrilatere();
+  const nature = pick(["carré", "rectangle", "losange", "quelconque"] as const);
+  const rep = NOM_NATURE(nature);
+  return qcmQ(
+    pick([
+      "Observe les codages. Donne le nom le plus précis.",
+      "Regarde la figure. Quel est son nom le plus précis ?",
+      "Lis les codages. Choisis le nom le plus précis.",
+      "Quel est le nom le plus précis de cette figure ?",
+      "Coche le nom le plus précis de cette figure.",
+      "D’après les codages, quel est le nom le plus précis ?",
+      "Quel nom précis donner à cette figure codée ?",
+      "Cette figure codée : quel est son nom le plus précis ?",
+    ]),
+    rep,
+    ["carré", "rectangle", "losange", "quadrilatère quelconque"].filter((x) => x !== rep),
+    PREUVE[nature],
+    figureCodee(nature, s, penche),
+  );
+}
+function genIdOuiNon(penche: boolean): QG {
+  const s = sommetsQuadrilatere();
+  const nature = pick(["carré", "rectangle", "rectangle", "losange", "losange", "quelconque"] as const);
+  // ★1 : un carré n'est interrogé que sur « carré ». ★2 : le piège de l'inclusion arrive.
+  const Y = nature === "carré" && !penche ? "carré" : pick(["carré", "rectangle", "losange"] as const);
+  const vrai = nature === "carré" || nature === Y;
+  const c = figureCodee(nature, s, penche);
+  const pq = `${PREUVE[nature]} ${nature === "carré" && Y !== "carré" ? `Un carré est aussi un ${Y}.` : ""}`.trim();
+  if (Math.random() < 0.6)
+    return ouiNonQ(
+      pick([
+        `Cette figure est-elle un ${Y} ?`,
+        `Observe les codages. Est-ce un ${Y} ?`,
+        `Regarde les codages. Cette figure est-elle un ${Y} ?`,
+        `Peut-on appeler cette figure un ${Y} ?`,
+        `Ce quadrilatère codé est-il un ${Y} ?`,
+      ]),
+      vrai,
+      pq,
+      c,
+    );
+  return vraiFauxQ(pick([`Vrai ou faux : cette figure est un ${Y}.`, `Cette figure est un ${Y}. Vrai ou faux ?`, `Lis les codages. C’est un ${Y} : vrai ou faux ?`]), vrai, pq, c);
+}
+function genIdCompter(penche: boolean): QG {
+  const s = sommetsQuadrilatere();
+  if (Math.random() < 0.55) {
+    const k = randomInt(1, 4);
+    const c = dessinQuad("rectangle", s, penche);
+    c.marks = { rightAnglesAt: shuffle([...QUATRE_ANGLES]).slice(0, k) };
+    return nombreQ(
+      pick(["Combien d’angles droits sont codés ?", "Compte les angles droits codés sur la figure.", "Compte les petits carrés de la figure.", "Combien de petits carrés vois-tu ?", "Écris le nombre d’angles droits codés."]),
+      k,
+      `Un petit carré code un angle droit. La figure en porte ${k}.`,
+      c,
+    );
+  }
+  const quatre = Math.random() < 0.5;
+  const c = dessinQuad(quatre ? "losange" : "rectangle", s, penche);
+  c.marks = { equalSides: quatre ? QUATRE_COTES : [pick([["AB", "CD"], ["BC", "DA"]] as [CoteQ, CoteQ][])] };
+  const k = quatre ? 4 : 2;
+  return nombreQ(
+    pick(["Combien de côtés portent un trait ?", "Compte les côtés codés sur la figure.", "Combien de côtés ont un codage ?", "Écris le nombre de côtés codés."]),
+    k,
+    `Les petits traits sont sur ${k} côtés : ces ${k} côtés ont la même longueur.`,
+    c,
+  );
+}
+function genIdIndice(penche: boolean): QG {
+  const s = sommetsQuadrilatere();
+  const Y = pick(["carré", "rectangle", "losange"] as const);
+  const rep = { carré: "4 angles droits et 4 côtés égaux", rectangle: "4 angles droits", losange: "4 côtés égaux" }[Y];
+  return qcmQ(
+    pick([
+      `Cette figure est un ${Y}. Que montrent ses codages ?`,
+      `Quels codages font de cette figure un ${Y} ?`,
+      `Lis les codages de ce ${Y}. Que disent-ils ?`,
+      `Ce ${Y} est codé. Quels codages vois-tu ?`,
+      `Regarde ce ${Y}. Quels codages porte-t-il ?`,
+      `Que disent les codages de ce ${Y} ?`,
+    ]),
+    rep,
+    ["4 angles droits et 4 côtés égaux", "4 angles droits", "4 côtés égaux", "aucun codage"].filter((x) => x !== rep),
+    PREUVE[Y],
+    figureCodee(Y, s, penche),
+  );
+}
+function genIdCode(): QG {
+  const ANGLE = ["un angle droit", "des côtés égaux", "un milieu", "un sommet"];
+  const FORME = ["un petit carré", "le même petit trait", "une flèche", "un point"];
+  const mode = pick(["carre", "trait", "angle", "cote"] as const);
+  if (mode === "carre")
+    return qcmQ(pick(["Que veut dire un petit carré dans un coin ?", "Un petit carré dans un coin code quoi ?", "Sur une figure, un petit carré veut dire :"]), "un angle droit", ANGLE.slice(1), "Le petit carré dans un coin code un angle droit.");
+  if (mode === "trait")
+    return qcmQ(pick(["Le même petit trait sur deux côtés veut dire quoi ?", "Deux côtés portent le même trait. Que veut dire ce code ?", "Le même trait sur deux côtés code :"]), "des côtés égaux", ANGLE.filter((x) => x !== "des côtés égaux"), "Deux côtés qui portent le même petit trait ont la même longueur.");
+  if (mode === "angle")
+    return qcmQ(pick(["Comment code-t-on un angle droit ?", "Quel codage montre un angle droit ?", "Un angle droit se code avec :"]), "un petit carré", FORME.slice(1), "On code un angle droit par un petit carré dans le coin.");
+  return qcmQ(pick(["Comment code-t-on deux côtés égaux ?", "Quel codage montre deux côtés égaux ?", "Deux côtés égaux se codent avec :"]), "le même petit trait", FORME.filter((x) => x !== "le même petit trait"), "On code deux côtés égaux par le même petit trait sur chacun.");
+}
+function genIdSommet(penche: boolean): QG {
+  const s = sommetsQuadrilatere();
+  const k = randomInt(0, 3);
+  const c = dessinQuad("rectangle", s, penche);
+  c.marks = { rightAnglesAt: [QUATRE_ANGLES[k]] };
+  return qcmQ(
+    pick(["Quel sommet porte l’angle droit codé ?", "À quel sommet est le petit carré ?", "Où est codé l’angle droit ?", "Trouve le sommet où l’angle droit est codé.", "Lis la figure : quel sommet a le petit carré ?", "Quel point porte le petit carré ?"]),
+    s[k],
+    s.filter((_, i) => i !== k),
+    `Le petit carré est dans le coin de sommet ${s[k]} : c’est là qu’est codé l’angle droit.`,
+    c,
+  );
+}
+function genIdCoteCode(): QG {
+  const s = sommetsQuadrilatere();
+  const k = randomInt(0, 3) as 0 | 1 | 2 | 3;
+  const opp = ((k + 2) % 4) as 0 | 1 | 2 | 3;
+  const c = dessinQuad("rectangle", s, true);
+  c.marks = { equalSides: [[(["AB", "BC", "CD", "DA"] as CoteQ[])[k], (["AB", "BC", "CD", "DA"] as CoteQ[])[opp]]] };
+  const S = coteNomme(s, k);
+  const juste = coteNomme(s, opp);
+  return qcmQ(
+    pick([
+      `Quel côté a le même code que ${S} ?`,
+      `Quel côté porte le même trait que ${S} ?`,
+      `${S} est codé. Quel autre côté l’est aussi ?`,
+      `Cherche le côté codé comme ${S}.`,
+      `Lis les codages : quel côté est égal à ${S} ?`,
+      `D’après le codage, quel côté a la même longueur que ${S} ?`,
+    ]),
+    juste,
+    ([0, 1, 2, 3] as const).filter((i) => i !== k && i !== opp).map((i) => coteNomme(s, i)).concat(seg(s[0], s[2])),
+    `${S} et ${juste} portent le même petit trait : ils ont la même longueur.`,
+    c,
+  );
+}
+function genManqueCode(): QG {
+  const s = sommetsQuadrilatere();
+  const nat = pick(["rectangle", "losange"] as const);
+  const rep = nat === "rectangle" ? "4 côtés égaux" : "un angle droit";
+  return qcmQ(
+    pick([
+      "Quel codage manque pour un carré ?",
+      "Que faut-il coder en plus pour un carré ?",
+      "Pour obtenir un carré, quel code ajouter ?",
+      "Ajoute un code pour obtenir un carré. Lequel ?",
+      "Cette figure devient un carré avec quel code ?",
+      `Quel codage manque à ce ${nat} pour être un carré ?`,
+    ]),
+    rep,
+    ["4 côtés égaux", "un angle droit", "une diagonale"].filter((x) => x !== rep),
+    nat === "rectangle" ? "Les 4 angles droits sont déjà codés. Avec 4 côtés égaux en plus, c’est un carré." : "Les 4 côtés égaux sont déjà codés. Un losange qui a un angle droit est un carré.",
+    figureCodee(nat, s, true),
+  );
+}
+
+// ----- QUADRILATERE_DEFI, ★2
+function genDefiNomPrecis(): QG {
+  const s = sommetsQuadrilatere();
+  const N = s.join("");
+  const [P, Q, R] = tour(s, randomInt(0, 3), pick([1, -1] as const));
+  const choix = (r: string) => ["carré", "rectangle", "losange", "quadrilatère quelconque"].filter((x) => x !== r);
+  const mode = pick(["losangeDroit", "rectEgaux", "rectValeurs", "losangeAngle"] as const);
+  if (mode === "losangeDroit")
+    return qcmQ(
+      pick([`Losange ${N} avec un angle droit. Quel est son nom le plus précis ?`, `${N} est un losange avec un angle droit. Donne son nom le plus précis.`]),
+      "carré",
+      choix("carré"),
+      "Un losange qui a un angle droit a ses 4 angles droits : c’est un carré.",
+    );
+  if (mode === "rectEgaux") {
+    const a = randomInt(3, 12);
+    return qcmQ(
+      pick([`Rectangle ${N} : ${seg(P, Q)} et ${seg(Q, R)} mesurent ${a} cm. Nom le plus précis ?`, `Dans le rectangle ${N}, ${seg(P, Q)} et ${seg(Q, R)} mesurent ${a} cm. Son nom précis ?`]),
+      "carré",
+      choix("carré"),
+      `${seg(P, Q)} et ${seg(Q, R)} se touchent en ${Q} et ont la même longueur. Un rectangle à deux côtés consécutifs égaux est un carré.`,
+    );
+  }
+  if (mode === "rectValeurs") {
+    const a = randomInt(3, 12);
+    const b = a + randomInt(1, 6);
+    return qcmQ(
+      pick([`Rectangle ${N} : ${seg(P, Q)} = ${a} cm, ${seg(Q, R)} = ${b} cm. Nom le plus précis ?`, `${N} a 4 angles droits. ${seg(P, Q)} = ${a} cm, ${seg(Q, R)} = ${b} cm. Nom précis ?`]),
+      "rectangle",
+      choix("rectangle"),
+      `4 angles droits, et deux côtés consécutifs de longueurs différentes : c’est un rectangle, pas un carré.`,
+    );
+  }
+  const x = pick([60, 70, 80, 90, 100, 110, 120]);
+  const r = x === 90 ? "carré" : "losange";
+  return qcmQ(
+    pick([`Losange ${N} : un angle mesure ${x}°. Quel est son nom le plus précis ?`, `${N} est un losange. Un de ses angles mesure ${x}°. Son nom précis ?`]),
+    r,
+    choix(r),
+    x === 90 ? "Un losange qui a un angle droit est un carré." : `Un angle de ${x}° n’est pas droit : ce losange n’est pas un carré.`,
+  );
+}
+function genDefiPerimetre(): QG {
+  const c = randomInt(3, 15);
+  const l = randomInt(2, 8);
+  const L = l + randomInt(2, 7);
+  const P4 = 4 * c;
+  const PR = 2 * (L + l);
+  const carre = `4 × ${c} = ${P4} cm`;
+  const rect = `2 × (${L} + ${l}) = ${PR} cm`;
+  const cas: [string, number, string][] = [
+    [`Un carré a des côtés de ${c} cm. Calcule son périmètre.`, P4, `Les 4 côtés sont égaux : ${carre}.`],
+    [`Calcule le périmètre d’un losange de côté ${c} cm.`, P4, `Les 4 côtés sont égaux : ${carre}.`],
+    [`Quel est le périmètre d’un carré de côté ${c} cm ?`, P4, `Les 4 côtés sont égaux : ${carre}.`],
+    [`Rectangle de ${L} cm sur ${l} cm. Calcule son périmètre.`, PR, `Deux longueurs et deux largeurs : ${rect}.`],
+    [`Un rectangle mesure ${L} cm sur ${l} cm. Quel est son périmètre ?`, PR, `Deux longueurs et deux largeurs : ${rect}.`],
+    [`Un carré a un périmètre de ${P4} cm. Combien mesure un côté ?`, c, `${P4} ÷ 4 = ${c} cm.`],
+    [`Losange de périmètre ${P4} cm. Trouve la longueur d’un côté.`, c, `${P4} ÷ 4 = ${c} cm.`],
+    [`Rectangle : périmètre ${PR} cm, longueur ${L} cm. Trouve la largeur.`, l, `${PR} ÷ 2 = ${L + l} cm, puis ${L + l} − ${L} = ${l} cm.`],
+  ];
+  const [t, v, pq] = pick(cas);
+  return mesureQ(t, v, "cm", pq);
+}
+function genDefiInclusion(): QG {
+  const [X, Y] = shuffle(["carré", "rectangle", "losange"] as const);
+  const vrai = X === "carré";
+  const pq = vrai ? `Un carré a tout ce qu’a un ${Y}.` : `Un ${X} peut avoir ${X === "rectangle" ? "des côtés de longueurs différentes" : "aucun angle droit"} : ce n’est pas toujours un ${Y}.`;
+  if (Math.random() < 0.5) return ouiNonQ(pick([`Un ${X} est-il toujours un ${Y} ?`, `Peut-on dire : « tout ${X} est un ${Y} » ?`]), vrai, pq);
+  return vraiFauxQ(pick([`Vrai ou faux : tout ${X} est un ${Y}.`, `Tout ${X} est un ${Y}. Vrai ou faux ?`]), vrai, pq);
+}
+function genDefiCompte(): QG {
+  const c = randomInt(3, 12);
+  const l = randomInt(2, 6);
+  const L = l + randomInt(2, 7);
+  const cas: [string, number, string][] = [
+    [`Rectangle de ${L} cm sur ${l} cm. Combien de côtés de ${l} cm ?`, 2, "Dans un rectangle, les côtés opposés ont la même longueur : 2 côtés par longueur."],
+    [`Rectangle de ${L} cm sur ${l} cm. Combien de côtés de ${L} cm ?`, 2, "Dans un rectangle, les côtés opposés ont la même longueur : 2 côtés par longueur."],
+    [`Carré de côté ${c} cm. Combien de côtés mesurent ${c} cm ?`, 4, "Les 4 côtés d’un carré sont égaux."],
+    [`Losange de côté ${c} cm. Combien de côtés mesurent ${c} cm ?`, 4, "Les 4 côtés d’un losange sont égaux."],
+    ["Un rectangle a combien de paires de côtés opposés ?", 2, "Deux paires : chaque côté a un seul côté opposé."],
+    ["Un losange a combien de côtés égaux ?", 4, "Les 4 côtés d’un losange sont égaux."],
+    ["Un carré a combien de diagonales ?", 2, "Tout quadrilatère a 2 diagonales."],
+  ];
+  const [t, n, pq] = pick(cas);
+  return nombreQ(t, n, pq);
+}
+function genDefiPenche(): QG {
+  const s = sommetsQuadrilatere();
+  const nature = pick(["carré", "rectangle", "losange"] as const);
+  const Y = nature === "carré" ? "carré" : pick([nature, "carré"] as const);
+  const vrai = nature === Y;
+  const c = figureCodee(nature, s, true);
+  return Math.random() < 0.75
+    ? ouiNonQ(
+        pick([`Cette figure est penchée. Est-ce encore un ${Y} ?`, `On a tourné la figure. Est-ce toujours un ${Y} ?`, `Penchée ou non, cette figure est-elle un ${Y} ?`, `Ne regarde que les codages. Est-ce un ${Y} ?`, `Seuls les codages comptent. Cette figure est-elle un ${Y} ?`]),
+        vrai,
+        `Tourner une figure ne change pas sa nature. ${PREUVE[nature]}`,
+        c,
+      )
+    : vraiFauxQ(`Même penchée, cette figure est un ${Y}. Vrai ou faux ?`, vrai, `Tourner une figure ne change pas sa nature. ${PREUVE[nature]}`, c);
+}
+function genDefiIntrus(): QG {
+  const Y = pick(["rectangle", "losange"] as const);
+  const faux = Y === "rectangle" ? "4 côtés égaux" : "4 angles droits";
+  const vrais = Y === "rectangle" ? ["4 angles droits", "des côtés opposés parallèles", "des côtés opposés de même longueur"] : ["4 côtés égaux", "des côtés opposés parallèles", "des diagonales perpendiculaires"];
+  return qcmQ(
+    pick([`Un ${Y} a toujours ces propriétés, sauf une. Laquelle ?`, `Quelle propriété manque parfois à un ${Y} ?`, `Trouve l’intrus pour un ${Y}.`, `Quelle propriété reste incertaine pour un ${Y} ?`]),
+    faux,
+    vrais,
+    Y === "rectangle" ? "Un rectangle a 4 côtés égaux seulement si c’est un carré." : "Un losange a 4 angles droits seulement si c’est un carré.",
+  );
+}
+
+// ----- QUADRILATERE_COMPLETER_CONSTRUIRE, ★1
+function genCompFaut(): QG {
+  const Y = pick(["carré", "rectangle", "losange"] as const);
+  const prop = pick(["4 angles droits", "4 côtés égaux"] as const);
+  const oui = Y === "carré" || (Y === "rectangle") === (prop === "4 angles droits");
+  return ouiNonQ(
+    pick([`Pour tracer un ${Y}, faut-il ${prop} ?`, `Un ${Y} se trace-t-il toujours avec ${prop} ?`]),
+    oui,
+    oui ? `Tout ${Y} a ${prop}.` : `Un ${Y} peut ne pas avoir ${prop} : ce n’est pas exigé.`,
+  );
+}
+function genCompOutil(): QG {
+  if (Math.random() < 0.5)
+    return qcmQ(pick(["Quel instrument trace un angle droit ?", "Avec quoi vérifies-tu un angle droit ?", "Quel outil vérifie le coin d’un carré ?", "Tu traces un coin de rectangle. Quel instrument prends-tu ?"]), "une équerre", ["un compas", "une règle graduée", "une gomme"], "L’équerre a un angle droit : elle sert à le tracer et à le vérifier.");
+  const s = sommetsQuadrilatere();
+  return qcmQ(pick(["Quel instrument mesure un côté ?", `Avec quoi mesures-tu ${seg(s[0], s[1])} ?`, `Tu traces un côté de ${randomInt(3, 9)} cm. Quel instrument prends-tu ?`, "Quel outil donne la longueur d’un côté ?"]), "une règle graduée", ["un rapporteur", "un compas", "une gomme"], "Une longueur se mesure et se trace à la règle graduée.");
+}
+function genCompSommet(): QG {
+  const s = sommetsQuadrilatere();
+  const N = s.join("");
+  const k = randomInt(0, 3);
+  const X = s[k];
+  const autres = s.filter((_, i) => i !== k);
+  const [a, b, c] = autres;
+  const trou = `${s.slice(0, k).join("")}…${s.slice(k + 1).join("")}`;
+  return lettreQ(
+    pick([
+      `On a placé ${a}, ${b} et ${c}. Quel sommet manque à ${N} ?`,
+      `${N} : ${a}, ${b} et ${c} sont placés. Quel point reste à placer ?`,
+      `Tu as placé ${a}, ${b} et ${c}. Quelle lettre manque pour ${N} ?`,
+      `Pour écrire ${N}, tu as ${trou}. Quelle lettre manque ?`,
+      `Quel sommet de ${N} reste à placer après ${a}, ${b} et ${c} ?`,
+    ]),
+    X,
+    `${N} a quatre sommets : ${listeEt(s)}. Il manque ${X}.`,
+  );
+}
+function genCompCoteSuivant(): QG {
+  const s = sommetsQuadrilatere();
+  const N = s.join("");
+  const mode = pick(["suit", "suit", "ferme", "manque"] as const);
+  if (mode === "suit") {
+    const k = randomInt(0, 2) as 0 | 1 | 2;
+    const S = coteNomme(s, k);
+    const juste = coteNomme(s, (k + 1) as 1 | 2 | 3);
+    return qcmQ(
+      pick([`Tu traces ${N} dans l’ordre. Quel côté suit ${S} ?`, `Dans ${N}, quel côté part de ${s[k + 1]} après ${S} ?`, `Tour de ${N} : après ${S}, quel côté vient ?`]),
+      juste,
+      [seg(s[0], s[2]), seg(s[1], s[3]), S],
+      `On fait le tour dans l’ordre des lettres : après ${S}, on part de ${s[k + 1]} : c’est ${juste}.`,
+    );
+  }
+  const dernier = coteNomme(s, 3);
+  if (mode === "ferme")
+    return qcmQ(
+      pick([`Quel dernier côté termine ${N} ?`, `Quel côté termine le tour de ${N} ?`]),
+      dernier,
+      [seg(s[0], s[2]), seg(s[1], s[3]), coteNomme(s, 1)],
+      `Le tour part de ${s[0]} et finit en ${s[3]} : le côté qui revient à ${s[0]} est ${dernier}.`,
+    );
+  const k = randomInt(0, 3) as 0 | 1 | 2 | 3;
+  const faits = ([0, 1, 2, 3] as const).filter((i) => i !== k).map((i) => coteNomme(s, i));
+  return qcmQ(
+    `Pour ${N}, tu as tracé ${faits[0]}, ${faits[1]} et ${faits[2]}. Quel côté manque ?`,
+    coteNomme(s, k),
+    [seg(s[0], s[2]), seg(s[1], s[3]), faits[0]],
+    `Les côtés de ${N} sont ${[0, 1, 2, 3].map((i) => coteNomme(s, i as 0 | 1 | 2 | 3)).join(", ")}. Il manque ${coteNomme(s, k)}.`,
+  );
+}
+function genCompReste(): QG {
+  const k = randomInt(1, 3);
+  const Y = pick(["carré", "rectangle", "losange"] as const);
+  const s = sommetsQuadrilatere();
+  const cas: [string, string][] = [
+    [`Un ${Y} a ${k} ${k === 1 ? "côté tracé" : "côtés tracés"}. Combien en manque-t-il ?`, "côtés"],
+    [`Tu as tracé ${k} ${k === 1 ? "côté" : "côtés"} d’un ${Y}. Combien en reste-t-il ?`, "côtés"],
+    [`Tu as codé ${k} ${k === 1 ? "angle droit" : "angles droits"} d’un rectangle. Combien en reste-t-il ?`, "angles droits"],
+    [`${k} ${k === 1 ? "angle droit est tracé" : "angles droits sont tracés"}. Combien en manque-t-il pour un carré ?`, "angles droits"],
+    [`Tu as placé ${k} ${k === 1 ? "sommet" : "sommets"} de ${s.join("")}. Combien en reste-t-il ?`, "sommets"],
+  ];
+  const [t, quoi] = pick(cas);
+  return nombreQ(t, 4 - k, `Il y a 4 ${quoi} en tout : 4 − ${k} = ${4 - k}.`);
+}
+function genCompLongueur(): QG {
+  const s = sommetsQuadrilatere();
+  const N = s.join("");
+  const [P, Q, R, T] = tour(s, randomInt(0, 3), pick([1, -1] as const));
+  const c = randomInt(3, 12);
+  if (Math.random() < 0.6) {
+    const d = pick([seg(Q, R), seg(R, T), seg(T, P)]);
+    const nat = pick(["carré", "losange"] as const);
+    return mesureQ(
+      pick([`Trace le ${nat} ${N} de côté ${c} cm. Combien mesure ${d} ?`, `${nat === "carré" ? "Carré" : "Losange"} ${N} de côté ${c} cm. Quelle longueur pour ${d} ?`, `Tu reportes ${c} cm pour le ${nat} ${N}. Combien mesure ${d} ?`]),
+      c,
+      "cm",
+      `Les 4 côtés d’un ${nat} ont la même longueur : ${d} mesure ${c} cm.`,
+    );
+  }
+  return mesureQ(
+    pick([`Rectangle ${N} : ${seg(P, Q)} mesure ${c} cm. Combien mesure ${seg(R, T)} ?`, `Construis le rectangle ${N}. ${seg(P, Q)} mesure ${c} cm. Trace ${seg(R, T)} : sa longueur ?`]),
+    c,
+    "cm",
+    `Dans un rectangle, les côtés opposés ont la même longueur. ${seg(R, T)} est opposé à ${seg(P, Q)}.`,
+  );
+}
+
+// ----- QUADRILATERE_COMPLETER_CONSTRUIRE, ★2
+function genCompDevient(): QG {
+  const s = sommetsQuadrilatere();
+  const N = s.join("");
+  const cas = pick<{ d: "rectangle" | "losange"; prop: string; r: "carré" | "rectangle" | "losange"; pq: string }>([
+    { d: "rectangle", prop: "4 côtés égaux", r: "carré", pq: "Un rectangle à 4 côtés égaux est un carré." },
+    { d: "losange", prop: "4 angles droits", r: "carré", pq: "Un losange à 4 angles droits est un carré." },
+    { d: "losange", prop: "un angle droit", r: "carré", pq: "Un losange qui a un angle droit a ses 4 angles droits : c’est un carré." },
+    { d: "rectangle", prop: "des côtés opposés parallèles", r: "rectangle", pq: "C’est vrai de tout rectangle : cela n’apprend rien de plus." },
+    { d: "losange", prop: "des côtés opposés parallèles", r: "losange", pq: "C’est vrai de tout losange : cela n’apprend rien de plus." },
+  ]);
+  return court(15, () =>
+    qcmQ(
+      pick([`Un ${cas.d} a aussi ${cas.prop}. Quel est son nom le plus précis ?`, `Que devient un ${cas.d} qui a ${cas.prop} ? Nom le plus précis ?`, `${N} est un ${cas.d} avec ${cas.prop}. Nom le plus précis ?`, `Complète avec le nom le plus précis : un ${cas.d} avec ${cas.prop} est un…`]),
+      cas.r,
+      ["carré", "rectangle", "losange"].filter((x) => x !== cas.r),
+      cas.pq,
+    ),
+  );
+}
+function genCompEquerre(): QG {
+  const s = sommetsQuadrilatere();
+  const N = s.join("");
+  const [P, Q, R] = tour(s, randomInt(0, 3), pick([1, -1] as const));
+  const Y = pick(["carré", "rectangle"] as const);
+  const mode = pick(["outil", "angle", "degres"] as const);
+  if (mode === "outil")
+    return qcmQ(
+      pick([`Rectangle ${N} : ${seg(P, Q)} est tracé. Quel instrument donne l’angle droit en ${Q} ?`, `Tu traces l’angle droit en ${Q} du rectangle ${N}. Quel instrument prends-tu ?`]),
+      "une équerre",
+      ["un compas", "une règle graduée", "une gomme"],
+      `${seg(P, Q)} et ${seg(Q, R)} font un angle droit en ${Q} : l’équerre le trace.`,
+    );
+  if (mode === "angle")
+    return qcmQ(
+      pick([`${Y === "carré" ? "Carré" : "Rectangle"} ${N} : quel angle traces-tu en ${Q} ?`, `Dans le ${Y} ${N}, quel angle dois-tu tracer en ${Q} ?`]),
+      "un angle droit",
+      ["un angle aigu", "un angle obtus", "un angle plat"],
+      `Tous les angles d’un ${Y} sont droits.`,
+    );
+  return {
+    text: pick([`${Y === "carré" ? "Carré" : "Rectangle"} ${N} : combien de degrés traces-tu en ${Q} ?`, `Angle en ${Q} du ${Y} ${N} : combien de degrés ?`]),
+    format: "short",
+    expected: ["90°", "90"],
+    comparator: "number_equal",
+    explanation: expl(`Tous les angles d’un ${Y} sont droits : 90°.`),
+  };
+}
+function genCompTotal(): QG {
+  const c = randomInt(3, 12);
+  const l = randomInt(2, 7);
+  const L = l + randomInt(2, 6);
+  const cas: [string, number, string][] = [
+    [`Carré de côté ${c} cm : quelle longueur de trait pour les 4 côtés ?`, 4 * c, `4 × ${c} = ${4 * c} cm.`],
+    [`Tu traces un losange de côté ${c} cm. Quelle est la longueur du tour ?`, 4 * c, `4 × ${c} = ${4 * c} cm.`],
+    [`Rectangle de ${L} cm sur ${l} cm : longueur totale des 4 côtés ?`, 2 * (L + l), `2 × (${L} + ${l}) = ${2 * (L + l)} cm.`],
+    [`Carré de périmètre ${4 * c} cm à tracer. Quelle longueur pour un côté ?`, c, `${4 * c} ÷ 4 = ${c} cm.`],
+    [`Losange de périmètre ${4 * c} cm à tracer. Quelle longueur pour un côté ?`, c, `${4 * c} ÷ 4 = ${c} cm.`],
+    [`Trace un carré de périmètre ${4 * c} cm. Combien mesure chaque côté ?`, c, `${4 * c} ÷ 4 = ${c} cm.`],
+  ];
+  const [t, v, pq] = pick(cas);
+  return mesureQ(t, v, "cm", pq);
+}
+function genCompDiag(): QG {
+  const Y = pick(["rectangle", "losange"] as const);
+  const rep = Y === "rectangle" ? "de même longueur" : "perpendiculaires";
+  return qcmQ(
+    pick([`Les diagonales d’un ${Y} sont toujours :`, `Tu traces les diagonales d’un ${Y}. Elles sont toujours :`, `Comment sont toujours les diagonales d’un ${Y} ?`, `Choisis ce qui est sûr pour les diagonales d’un ${Y}.`]),
+    rep,
+    ["de même longueur", "perpendiculaires", "de longueurs différentes", "parallèles"].filter((x) => x !== rep),
+    Y === "rectangle" ? "Les diagonales d’un rectangle ont la même longueur. Elles sont perpendiculaires seulement si c’est un carré." : "Les diagonales d’un losange sont perpendiculaires. Elles ont la même longueur seulement si c’est un carré.",
+  );
+}
+function genCompManque(): QG {
+  const s = sommetsQuadrilatere();
+  const N = s.join("");
+  const Y = pick(["rectangle", "losange"] as const);
+  const t =
+    Y === "rectangle"
+      ? pick([`${N} a 4 angles droits. Que manque-t-il pour un carré ?`, `Que manque-t-il au rectangle ${N} pour être un carré ?`, `Rectangle ${N} : que faut-il de plus pour un carré ?`])
+      : pick([`${N} a 4 côtés égaux. Que manque-t-il pour un carré ?`, `Que manque-t-il au losange ${N} pour être un carré ?`, `Losange ${N} : que faut-il de plus pour un carré ?`]);
+  const rep = Y === "rectangle" ? "4 côtés égaux" : "un angle droit";
+  return qcmQ(
+    t,
+    rep,
+    [Y === "rectangle" ? "un angle droit" : "4 côtés égaux", "des côtés opposés parallèles", "des côtés opposés de même longueur"],
+    Y === "rectangle" ? "Il a déjà ses angles droits. Avec 4 côtés égaux, c’est un carré." : "Il a déjà ses 4 côtés égaux. Avec un angle droit, c’est un carré.",
+  );
+}
+
+// ----- QUADRILATERE_LIEN_PROPRIETE, ★1
+function genLienOuiNon(): QG {
+  const Y = pick(["carré", "rectangle", "losange"] as const);
+  const prop = pick(["4 angles droits", "4 côtés égaux"] as const);
+  const vrai = Y === "carré" || (Y === "rectangle") === (prop === "4 angles droits");
+  const pq = vrai ? `Tout ${Y} a ${prop}.` : `Un ${Y} n’a pas toujours ${prop}.`;
+  return Math.random() < 0.67
+    ? ouiNonQ(pick([`Un ${Y} a-t-il toujours ${prop} ?`, `Tout ${Y} a-t-il ${prop} ?`]), vrai, pq)
+    : vraiFauxQ(`Vrai ou faux : un ${Y} a toujours ${prop}.`, vrai, pq);
+}
+function genLienDevinette(): QG {
+  const choix = (r: string) => ["carré", "rectangle", "losange", "quadrilatère quelconque"].filter((x) => x !== r);
+  const cas: [string, string, string][] = [
+    ["Quelle figure a 4 côtés égaux et 4 angles droits ?", "carré", POURQUOI_NAT.carré],
+    ["J’ai 4 angles droits et 4 côtés égaux. Qui suis-je ?", "carré", POURQUOI_NAT.carré],
+    ["J’ai 4 côtés égaux et aucun angle droit. Qui suis-je ?", "losange", POURQUOI_NAT.losange],
+    ["Figure à 4 côtés égaux et aucun angle droit : son nom ?", "losange", POURQUOI_NAT.losange],
+    ["J’ai 4 angles droits et des côtés inégaux. Qui suis-je ?", "rectangle", POURQUOI_NAT.rectangle],
+    ["Figure à 4 angles droits et côtés inégaux : son nom ?", "rectangle", POURQUOI_NAT.rectangle],
+  ];
+  const [t, r, pq] = pick(cas);
+  return qcmQ(t, r, choix(r), pq);
+}
+function genLienPropDeNat(): QG {
+  const Y = pick(["carré", "rectangle", "losange"] as const);
+  const rep = { carré: "4 angles droits et 4 côtés égaux", rectangle: "4 angles droits", losange: "4 côtés égaux" }[Y];
+  const leurres = { carré: ["aucun angle droit", "3 côtés égaux"], rectangle: ["aucun angle droit", "3 angles droits seulement"], losange: ["aucun côté égal", "3 côtés égaux"] }[Y];
+  return qcmQ(
+    pick([`Que possède toujours un ${Y} ?`, `Choisis la propriété d’un ${Y}.`, `Quelle propriété a toujours un ${Y} ?`, `Coche ce qui est vrai pour tout ${Y}.`, `Un ${Y} a toujours :`]),
+    rep,
+    leurres,
+    POURQUOI_NAT[Y],
+  );
+}
+function genLienFaitUn(): QG {
+  const Y = pick(["carré", "rectangle", "losange"] as const);
+  const TROIS = ["4 angles droits", "4 côtés égaux", "4 angles droits et 4 côtés égaux"];
+  const rep = { carré: TROIS[2], rectangle: TROIS[0], losange: TROIS[1] }[Y];
+  return qcmQ(
+    pick([`Que faut-il à un quadrilatère pour être un ${Y} ?`, `Quelle propriété fait d’un quadrilatère un ${Y} ?`, `Pour être sûr d’avoir un ${Y}, il faut :`, `Quelles propriétés donnent un ${Y} ?`]),
+    rep,
+    TROIS.filter((x) => x !== rep),
+    POURQUOI_NAT[Y],
+  );
+}
+
+// ----- QUADRILATERE_NOMMER_VOCABULAIRE, ★2
+function genNommerSommets(): QG {
+  const s = sommetsQuadrilatere();
+  const N = s.join("");
+  const [P, Q, R, T] = tour(s, randomInt(0, 3), 1);
+  const mode = pick(["voisin", "commun", "partent"] as const);
+  if (mode === "voisin")
+    return qcmQ(
+      pick([`Quel sommet de ${N} est voisin de ${P} ?`, `Dans ${N}, quelle lettre est voisine de ${P} ?`, `Choisis un voisin de ${P} dans ${N}.`, `Quel sommet est relié à ${P} par un côté de ${N} ?`]),
+      pick([Q, T]),
+      [R, P],
+      `Les voisins de ${P} sont les lettres juste avant et juste après dans le tour : ${Q} et ${T}. ${R} est le sommet opposé.`,
+    );
+  if (mode === "commun")
+    return qcmQ(
+      pick([`Dans ${N}, ${seg(P, Q)} et ${seg(Q, R)} ont quel sommet commun ?`, `Quel sommet est commun à ${seg(P, Q)} et ${seg(Q, R)} ?`, `${seg(P, Q)} et ${seg(Q, R)} se touchent en quel point ?`]),
+      Q,
+      [P, R, T],
+      `${Q} est la seule lettre écrite dans les deux segments.`,
+    );
+  const diag = Math.random() < 0.5;
+  return nombreQ(
+    diag ? pick([`Combien de diagonales partent de ${P} dans ${N} ?`, `Dans ${N}, combien de diagonales touchent ${P} ?`]) : pick([`Combien de côtés partent de ${P} dans ${N} ?`, `Dans ${N}, combien de côtés touchent ${P} ?`]),
+    diag ? 1 : 2,
+    diag ? `Une seule diagonale part de ${P} : elle va au sommet opposé ${R}.` : `Deux côtés partent de ${P} : vers ${Q} et vers ${T}.`,
+  );
+}
+function genNommerSegment(): QG {
+  const s = sommetsQuadrilatere();
+  const N = s.join("");
+  const [P, Q, R] = tour(s, randomInt(0, 3), 1);
+  const estCote = Math.random() < 0.5;
+  const S = estCote ? seg(P, Q) : seg(P, R);
+  const voirFig = Math.random() < 0.5 ? dessinQuad("quelconque", s, false) : undefined;
+  const pq = estCote ? `${S} relie deux sommets voisins : c’est un côté.` : `${S} relie deux sommets opposés : c’est une diagonale.`;
+  const quoi = pick(["côté", "diagonale"] as const);
+  const dit = quoi === "côté" ? "un côté" : "une diagonale";
+  const vrai = (quoi === "côté") === estCote;
+  const r = Math.random();
+  if (r < 0.4) return ouiNonQ(pick([`${S} est-il ${dit} de ${N} ?`, `Dans ${N}, ${S} est-il ${dit} ?`]), vrai, pq, voirFig);
+  if (r < 0.7) return vraiFauxQ(pick([`Vrai ou faux : ${S} est ${dit} de ${N}.`, `${S} est ${dit} de ${N}. Vrai ou faux ?`]), vrai, pq, voirFig);
+  return qcmQ(pick([`Dans ${N}, ${S} est :`, `Que représente ${S} dans ${N} ?`, `Pour ${N}, ${S} s’appelle :`]), estCote ? "un côté" : "une diagonale", [estCote ? "une diagonale" : "un côté", "un sommet"], pq, voirFig);
+}
+
+// ----- QUADRILATERE_DISTINGUER, ★2
+function genDistFigure(): QG {
+  const s = sommetsQuadrilatere();
+  const nat = pick(["rectangle", "losange"] as const);
+  const [x, y] = shuffle(["carré", nat]);
+  return qcmQ(
+    pick([`${x[0].toUpperCase()}${x.slice(1)} ou ${y} ? Lis les codages.`, `Cette figure : ${x} ou ${y} ?`, `Lis les codages. Est-ce un ${x} ou un ${y} ?`, `Choisis entre ${x} et ${y} d’après les codages.`, `D’après ses codages, cette figure est-elle un ${x} ou un ${y} ?`]),
+    nat,
+    ["carré"],
+    PREUVE[nat],
+    figureCodee(nat, s, Math.random() < 0.5),
+  );
+}
+
+/** Un gabarit de ces deux notions, en une ligne. */
+function gq(id: string, notionId: string, microId: string, difficulty: number, hint: string, tags: string[], generate: () => QG): TutorBankItemV4 {
+  return { kind: "template", id, niveau: "6e", matiere: "maths", notionId, microId, difficulty, theme: "neutral", hint, tags, generate } as TutorBankItemV4;
 }
 
 export const quadrilateresBank: TutorBankItemV4[] = [
@@ -1246,9 +1857,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       kind: "quadrilatere",
       points: {
         A: { x: 160, y: 45 },
-        B: { x: 255, y: 120 },
+        B: { x: 255, y: 125 },
         C: { x: 160, y: 205 },
-        D: { x: 65, y: 120 },
+        D: { x: 65, y: 125 },
       },
       display: {
         showPoints: true,
@@ -1324,10 +1935,10 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     canvas: {
       kind: "quadrilatere",
       points: {
-        A: { x: 70, y: 85 },
-        B: { x: 245, y: 60 },
-        C: { x: 270, y: 185 },
-        D: { x: 95, y: 210 },
+        A: { x: 60, y: 100 },
+        B: { x: 220, y: 50 },
+        C: { x: 285, y: 175 },
+        D: { x: 120, y: 215 },
       },
       display: {
         showPoints: true,
@@ -1360,10 +1971,10 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     canvas: {
       kind: "quadrilatere",
       points: {
-        A: { x: 95, y: 80 },
-        B: { x: 220, y: 55 },
-        C: { x: 250, y: 165 },
-        D: { x: 125, y: 190 },
+        A: { x: 80, y: 85 },
+        B: { x: 230, y: 55 },
+        C: { x: 250, y: 155 },
+        D: { x: 100, y: 185 },
       },
       display: {
         showPoints: true,
@@ -1490,7 +2101,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On ne conclut que sur ce qui est codé, jamais sur l’allure du dessin.",
     tags: ["quadrilatere", "template", "nature", "canvas", "codage"],
-    generate: () => genQuadNature(3),
+    generate: () => court(25, () => genQuadNature(3)),
   },
 
   // =========================
@@ -1566,9 +2177,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       kind: "quadrilatere",
       points: {
         A: { x: 160, y: 50 },
-        B: { x: 250, y: 120 },
+        B: { x: 250, y: 125 },
         C: { x: 160, y: 200 },
-        D: { x: 70, y: 120 },
+        D: { x: 70, y: 125 },
       },
       display: {
         showPoints: true,
@@ -1854,7 +2465,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Diagonales de même longueur : rectangle. Perpendiculaires : losange. Les deux : carré.",
     tags: ["quadrilatere", "template", "proprietes", "diagonales"],
-    generate: () => genQuadLien(3),
+    generate: () => court(25, () => genQuadLien(3)),
   },
 
   // =========================
@@ -1942,9 +2553,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       kind: "quadrilatere",
       points: {
         A: { x: 160, y: 45 },
-        B: { x: 255, y: 120 },
+        B: { x: 255, y: 125 },
         C: { x: 160, y: 205 },
-        D: { x: 65, y: 120 },
+        D: { x: 65, y: 125 },
       },
       display: {
         showPoints: true,
@@ -2005,7 +2616,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche la propriété qui manque ou la propriété en plus.",
     tags: ["quadrilatere", "template", "distinguer"],
-    generate: () => genQuadDistinguer(3),
+    generate: () => court(25, () => genQuadDistinguer(3)),
   },
   {
     kind: "template",
@@ -2119,9 +2730,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       kind: "quadrilatere",
       points: {
         A: { x: 160, y: 45 },
-        B: { x: 255, y: 120 },
+        B: { x: 255, y: 125 },
         C: { x: 160, y: 205 },
-        D: { x: 65, y: 120 },
+        D: { x: 65, y: 125 },
       },
       display: {
         showPoints: true,
@@ -2208,7 +2819,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Pense au losange aplati et au rectangle allongé : ont-ils ces propriétés ?",
     tags: ["quadrilatere", "template", "conclusion"],
-    generate: () => genQuadConclusion(3),
+    generate: () => court(25, () => genQuadConclusion(3)),
   },
 
   // =========================
@@ -2301,9 +2912,9 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       kind: "quadrilatere",
       points: {
         A: { x: 160, y: 45 },
-        B: { x: 255, y: 120 },
+        B: { x: 255, y: 125 },
         C: { x: 160, y: 205 },
-        D: { x: 65, y: 120 },
+        D: { x: 65, y: 125 },
       },
       display: {
         showPoints: true,
@@ -2392,7 +3003,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche l’information manquante pour conclure ou construire.",
     tags: ["quadrilatere", "template", "completer"],
-    generate: () => genQuadCompleter(3),
+    generate: () => court(25, () => genQuadCompleter(3)),
   },
   {
     kind: "template",
@@ -2631,7 +3242,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un carré a toutes les propriétés du rectangle ET du losange.",
     tags: ["quadrilatere", "defi", "template", "inclusion"],
-    generate: () => genQuadProprieteDefi(3),
+    generate: () => court(25, () => genQuadProprieteDefi(3)),
   },
   {
     kind: "template",
@@ -3127,7 +3738,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Trois angles droits suffisent pour un rectangle ; un losange à angle droit est un carré.",
     tags: ["quadrilatere_figure", "defi", "template"],
-    generate: () => genQuadDefi(3),
+    generate: () => court(25, () => genQuadDefi(3)),
   },
   {
     kind: "template",
@@ -3165,7 +3776,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Les sommets sont donnés dans l’ordre du tour : deux lettres voisines forment un côté.",
     tags: ["quadrilatere_figure", "vocabulaire", "qcm", "template"],
-    generate: () => genQuadVocabulaire(3),
+    generate: () => court(25, () => genQuadVocabulaire(3)),
   },
   {
     kind: "template",
@@ -3232,6 +3843,54 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     tags: ["quadrilatere_figure", "distinguer", "qcm", "template", "raisonnement"],
     generate: () => genQuadDistinguer(5),
   },
+
+  // =========================
+  // ⭐ 07/11/2026 — PLUSIEURS FAÇONS PAR ÉTOILE (voir la section au-dessus de la banque).
+  // =========================
+  gq("quadrilatere_identifier_nature_tpl_n1_lire", "quadrilatere_figure", "quadrilatere_identifier_nature", 1, "Lis les petits carrés et les petits traits.", ["quadrilatere_figure", "nature", "canvas", "template"], () => genIdLire(false)),
+  gq("quadrilatere_identifier_nature_tpl_n1_ouinon", "quadrilatere_figure", "quadrilatere_identifier_nature", 1, "Seuls les codages comptent.", ["quadrilatere_figure", "nature", "canvas", "template"], () => genIdOuiNon(false)),
+  gq("quadrilatere_identifier_nature_tpl_n1_compter", "quadrilatere_figure", "quadrilatere_identifier_nature", 1, "Compte les codages un par un.", ["quadrilatere_figure", "nature", "canvas", "template"], () => genIdCompter(false)),
+  gq("quadrilatere_identifier_nature_tpl_n1_indice", "quadrilatere_figure", "quadrilatere_identifier_nature", 1, "Petit carré : angle droit. Petit trait : côtés égaux.", ["quadrilatere_figure", "nature", "canvas", "template"], () => genIdIndice(false)),
+  gq("quadrilatere_identifier_nature_tpl_n1_code", "quadrilatere_figure", "quadrilatere_identifier_nature", 1, "Petit carré : angle droit. Même trait : côtés égaux.", ["quadrilatere_figure", "nature", "template"], genIdCode),
+  gq("quadrilatere_identifier_nature_tpl_n1_sommet", "quadrilatere_figure", "quadrilatere_identifier_nature", 1, "Cherche le petit carré dans un coin.", ["quadrilatere_figure", "nature", "canvas", "template"], () => genIdSommet(false)),
+  gq("quadrilatere_identifier_nature_tpl_n2_lire", "quadrilatere_figure", "quadrilatere_identifier_nature", 2, "Une figure penchée garde sa nature.", ["quadrilatere_figure", "nature", "canvas", "template"], () => genIdLire(true)),
+  gq("quadrilatere_identifier_nature_tpl_n2_ouinon", "quadrilatere_figure", "quadrilatere_identifier_nature", 2, "Un carré est aussi un rectangle et un losange.", ["quadrilatere_figure", "nature", "canvas", "template"], () => genIdOuiNon(true)),
+  gq("quadrilatere_identifier_nature_tpl_n2_compter", "quadrilatere_figure", "quadrilatere_identifier_nature", 2, "Compte les codages un par un.", ["quadrilatere_figure", "nature", "canvas", "template"], () => genIdCompter(true)),
+  gq("quadrilatere_identifier_nature_tpl_n2_indice", "quadrilatere_figure", "quadrilatere_identifier_nature", 2, "Petit carré : angle droit. Petit trait : côtés égaux.", ["quadrilatere_figure", "nature", "canvas", "template"], () => genIdIndice(true)),
+  gq("quadrilatere_identifier_nature_tpl_n2_cote_code", "quadrilatere_figure", "quadrilatere_identifier_nature", 2, "Cherche le côté qui porte le même petit trait.", ["quadrilatere_figure", "nature", "canvas", "template"], genIdCoteCode),
+  gq("quadrilatere_identifier_nature_tpl_n2_manque", "quadrilatere_figure", "quadrilatere_identifier_nature", 2, "Un carré a 4 angles droits et 4 côtés égaux.", ["quadrilatere_figure", "nature", "canvas", "template"], genManqueCode),
+
+  gq("quadrilatere_defi_tpl_n2_nom_precis", "quadrilatere_figure", "quadrilatere_defi", 2, "Un losange à angle droit, un rectangle à côtés consécutifs égaux : un carré.", ["quadrilatere_figure", "defi", "template"], genDefiNomPrecis),
+  gq("quadrilatere_defi_tpl_n2_perimetre", "quadrilatere_figure", "quadrilatere_defi", 2, "Le périmètre est la somme des 4 côtés.", ["quadrilatere_figure", "defi", "perimetre", "template"], genDefiPerimetre),
+  gq("quadrilatere_defi_tpl_n2_inclusion", "quadrilatere_figure", "quadrilatere_defi", 2, "Un carré a tout ce qu’ont le rectangle et le losange.", ["quadrilatere_figure", "defi", "template"], genDefiInclusion),
+  gq("quadrilatere_defi_tpl_n2_compte", "quadrilatere_figure", "quadrilatere_defi", 2, "Rectangle : côtés opposés égaux. Carré et losange : 4 côtés égaux.", ["quadrilatere_figure", "defi", "template"], genDefiCompte),
+  gq("quadrilatere_defi_tpl_n2_penche", "quadrilatere_figure", "quadrilatere_defi", 2, "Tourner une figure ne change pas sa nature.", ["quadrilatere_figure", "defi", "canvas", "template"], genDefiPenche),
+  gq("quadrilatere_defi_tpl_n2_intrus", "quadrilatere_figure", "quadrilatere_defi", 2, "Cherche ce que seul le carré a toujours.", ["quadrilatere_figure", "defi", "template"], genDefiIntrus),
+
+  gq("quadrilatere_completer_construire_tpl_n1_faut", "quadrilatere_propriete", "quadrilatere_completer_construire", 1, "Carré : les deux. Rectangle : les angles. Losange : les côtés.", ["quadrilatere_propriete", "construire", "template"], genCompFaut),
+  gq("quadrilatere_completer_construire_tpl_n1_outil", "quadrilatere_propriete", "quadrilatere_completer_construire", 1, "L’équerre pour l’angle droit, la règle pour la longueur.", ["quadrilatere_propriete", "construire", "template"], genCompOutil),
+  gq("quadrilatere_completer_construire_tpl_n1_sommet", "quadrilatere_propriete", "quadrilatere_completer_construire", 1, "Le nom contient les 4 sommets.", ["quadrilatere_propriete", "construire", "template"], genCompSommet),
+  gq("quadrilatere_completer_construire_tpl_n1_cote_suivant", "quadrilatere_propriete", "quadrilatere_completer_construire", 1, "On tourne dans l’ordre des lettres du nom.", ["quadrilatere_propriete", "construire", "template"], genCompCoteSuivant),
+  gq("quadrilatere_completer_construire_tpl_n1_reste", "quadrilatere_propriete", "quadrilatere_completer_construire", 1, "Il y en a 4 en tout.", ["quadrilatere_propriete", "construire", "template"], genCompReste),
+  gq("quadrilatere_completer_construire_tpl_n1_longueur", "quadrilatere_propriete", "quadrilatere_completer_construire", 1, "Carré et losange : 4 côtés égaux. Rectangle : côtés opposés égaux.", ["quadrilatere_propriete", "construire", "template"], genCompLongueur),
+  gq("quadrilatere_completer_construire_tpl_n2_devient", "quadrilatere_propriete", "quadrilatere_completer_construire", 2, "Rectangle ET losange : carré.", ["quadrilatere_propriete", "construire", "template"], genCompDevient),
+  gq("quadrilatere_completer_construire_tpl_n2_equerre", "quadrilatere_propriete", "quadrilatere_completer_construire", 2, "Les angles d’un carré et d’un rectangle sont droits.", ["quadrilatere_propriete", "construire", "template"], genCompEquerre),
+  gq("quadrilatere_completer_construire_tpl_n2_total", "quadrilatere_propriete", "quadrilatere_completer_construire", 2, "Le tour est la somme des 4 côtés.", ["quadrilatere_propriete", "construire", "perimetre", "template"], genCompTotal),
+  gq("quadrilatere_completer_construire_tpl_n2_diagonales", "quadrilatere_propriete", "quadrilatere_completer_construire", 2, "Rectangle : même longueur. Losange : perpendiculaires.", ["quadrilatere_propriete", "construire", "template"], genCompDiag),
+  gq("quadrilatere_completer_construire_tpl_n2_manque", "quadrilatere_propriete", "quadrilatere_completer_construire", 2, "Un carré a 4 angles droits et 4 côtés égaux.", ["quadrilatere_propriete", "construire", "template"], genCompManque),
+  gq("quadrilatere_completer_construire_tpl_n2_manque_code", "quadrilatere_propriete", "quadrilatere_completer_construire", 2, "Regarde ce qui est déjà codé.", ["quadrilatere_propriete", "construire", "canvas", "template"], genManqueCode),
+
+  gq("quadrilatere_lien_propriete_tpl_n1_ouinon", "quadrilatere_propriete", "quadrilatere_lien_propriete", 1, "Carré : les deux. Rectangle : les angles. Losange : les côtés.", ["quadrilatere_propriete", "lien", "template"], genLienOuiNon),
+  gq("quadrilatere_lien_propriete_tpl_n1_devinette", "quadrilatere_propriete", "quadrilatere_lien_propriete", 1, "Regarde d’abord les angles droits, puis les côtés.", ["quadrilatere_propriete", "lien", "template"], genLienDevinette),
+  gq("quadrilatere_lien_propriete_tpl_n1_propriete", "quadrilatere_propriete", "quadrilatere_lien_propriete", 1, "Carré : les deux. Rectangle : les angles. Losange : les côtés.", ["quadrilatere_propriete", "lien", "template"], genLienPropDeNat),
+  gq("quadrilatere_lien_propriete_tpl_n1_fait_un", "quadrilatere_propriete", "quadrilatere_lien_propriete", 1, "Carré : les deux. Rectangle : les angles. Losange : les côtés.", ["quadrilatere_propriete", "lien", "template"], genLienFaitUn),
+
+  gq("quadrilatere_nommer_vocabulaire_tpl_n2_sommets", "quadrilatere_figure", "quadrilatere_nommer_vocabulaire", 2, "Deux lettres voisines dans le nom sont deux sommets voisins.", ["quadrilatere_figure", "vocabulaire", "template"], genNommerSommets),
+  gq("quadrilatere_nommer_vocabulaire_tpl_n2_segment", "quadrilatere_figure", "quadrilatere_nommer_vocabulaire", 2, "Un côté relie deux voisins, une diagonale deux opposés.", ["quadrilatere_figure", "vocabulaire", "template"], genNommerSegment),
+
+  gq("quadrilatere_distinguer_tpl_n3_figure", "quadrilatere_figure", "quadrilatere_distinguer", 3, "Pour un carré, il faut 4 angles droits ET 4 côtés égaux codés.", ["quadrilatere_figure", "distinguer", "canvas", "template"], genDistFigure),
+  gq("quadrilatere_lien_propriete_tpl_n2_ouinon", "quadrilatere_propriete", "quadrilatere_lien_propriete", 2, "Carré : les deux. Rectangle : les angles. Losange : les côtés.", ["quadrilatere_propriete", "lien", "template"], genLienOuiNon),
+  gq("quadrilatere_distinguer_tpl_n2_figure", "quadrilatere_figure", "quadrilatere_distinguer", 2, "Pour un carré, il faut 4 angles droits ET 4 côtés égaux codés.", ["quadrilatere_figure", "distinguer", "canvas", "template"], genDistFigure),
 ];
 
 type QuadrilatereCanvasSideLabel6e = "AB" | "BC" | "CD" | "DA";
