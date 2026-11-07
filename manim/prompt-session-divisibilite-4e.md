@@ -4,7 +4,19 @@ Notions du coach `divisibilite` (7 micros) et `nombre_premier` (4 micros). Une p
 
 Modèle : la série Relatifs 4e (`manim/REPRISE-relatifs.md`, à lire en entier). Règles : `manim/REGLES.md`. Shorts : socle commun `prototypes/ti-margo/LISEZ-MOI.md` + `scripts/ti-margo-short.mjs` (ne pas recopier de page).
 
-## ⏳ ÉTAT : voix écrites, EN ATTENTE DE SON OUI
+## ✅ 07/11 après-midi : Frédéric a VALIDÉ les 22 voix (« Oui, lance le pilote »)
+
+Pilote = épisode 05 `diviseurs` (paysage + short). **Rien n'est encore généré** : la génération de voix a été interrompue avant d'écrire quoi que ce soit (`public/sons/4e-div-*` n'existe pas).
+
+Commandes exactes, dans l'ordre (depuis la racine du dépôt) :
+1. Voix : `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generer-voix.ps1 -Fichier manim/voix/4e-div-diviseurs.json -Debit -6`, idem `4e-div-diviseurs-short.json` (sort dans `public/sons/<nom>/`, en arrière-plan si long).
+2. Marques paysage : `powershell -File scripts/marques_dump.ps1 -Fichier manim/voix/4e-div-diviseurs.json -Sortie <tmp> -Debit -6`, puis `python manim/scripts/4e/equation_commun.py manim/voix/4e-div-diviseurs.json <tmp>.cues.tsv manim/scripts/4e/div_diviseurs_marques.json`.
+3. Script : `manim/scripts/4e/div_diviseurs.py`, classe `DivDiviseurs4e(PaysageRel)` importée de `relatif_commun` (ou un `div_commun.py` qui réexporte `relatif_commun` + une grille de rosiers). Modèle ligne à ligne : `relatif_multiplication.py` (API : `self.ecran`, `self.dit(self.lg(...), "phrase exacte")`, `F`/`E` + `self.dire_eq`, `self.au`, `self.insister`, `question_pause(cle_q, cle_r, [ligne], [3 E], bonne, [réponse], avant_q, autres_r)`, `finale_colonne`, `page_abonnement("08-abonne")`). Ceinture orange. Visuel : les rosiers en rectangles 1×36, 2×18, 3×12, 4×9, 6×6, chaque paire de diviseurs qui s'allume ; les deux listes qui se croisent.
+4. `AUDIT=1 BORDS=1 python -m manim render --dry_run …` (0 AUDIT-AVANCE, 0 RETARD, 0 BORD), brouillon `-ql` + planche, UN rendu `-qh --disable_caching --media_dir manim/scripts/4e/media-div-05`, copie vers `manim/sorties/4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs.mp4`, `python scripts/verifier-bords-video.py` = 0, planche finale.
+5. Short : `prototypes/ti-margo/films/divisibilite.js` (copie de `_modele.js`) + `divisibilite.json` (`voix: 4e-{ep}-short`… attention : les voix s'appellent `4e-div-<ep>-short` et `4e-premier-<ep>-short`, prévoir le préfixe dans le JSON ou deux séries `divisibilite` / `premiers`) ; film `FILMS.diviseurs` (décor jardin de tournesols, Ti Margo plante 24 tournesols en rectangles, PARI dans l'accroche) ; `python scripts/ti-margo-cues.py divisibilite diviseurs`, `controle`, `miniature` (« TU PARIES ? », ceinture, « Film d'animation 3D »), `film`, `publication.md` (`Validé : non`).
+6. Montrer les deux pilotes à Frédéric (sans lancer la lecture), attendre son oui, puis les 20 autres sans redemander.
+
+## (historique) voix écrites, en attente de son oui
 
 - Les 22 voix sont dans `manim/voix/4e-div-<slug>[-short].json` et `manim/voix/4e-premier-<slug>[-short].json`, collées en entier à Frédéric le 07/11.
 - **Rien n'est généré ni rendu** (ni WAV, ni marques, ni script Manim, ni film). On attend sa validation (mémoire `script-video-se-valide-a-deux`). S'il corrige une phrase : corriger le JSON, puis seulement après générer la voix.
