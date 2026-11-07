@@ -38,7 +38,7 @@ const RECTS = ["Un tapis", "Un jardin", "Une planche", "Un drapeau", "Une affich
 const decimalProduit: TutorBankItemV4[] = [
   D(1, 1, HINT_D, () => {
     const { a, b, s1, s2, dec, p } = tirer(1, 1, false);
-    return { text: tournure(["", "Compte les virgules.", "Pense aux décimales."], CALC(`${fr(a)} × ${fr(b)}`)), ...qcmN(p, [arr(p * 10), s1 * s2, arr(p * 100), arr(a + b), arr(p / 10)], "", 0.01), explanation: explD(a, b, s1, s2, dec, p) };
+    return { text: tournure(["", "Compte les chiffres après la virgule.", "Pense aux décimales."], CALC(`${fr(a)} × ${fr(b)}`)), ...qcmN(p, [arr(p * 10), s1 * s2, arr(p * 100), arr(a + b), arr(p / 10)], "", 0.01), explanation: explD(a, b, s1, s2, dec, p) };
   }),
   D(2, 1, "Additionne les chiffres après la virgule des deux nombres.", () => {
     const [d1, d2] = un<[1 | 2, 1 | 2]>([[1, 1], [1, 2], [2, 1], [2, 2]]);

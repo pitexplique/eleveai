@@ -256,6 +256,13 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false, ctx = false): TutorGenerate
         `Choisis l'écriture à virgule de ${f}.`,
         `${f} est égal à :`,
         `Écris ${f} avec une virgule. Quelle réponse est juste ?`,
+        // 07/11/2026 : six tournures de plus, ★2 revenait 4,4 fois sur 20 au texte seul.
+        `Quel nombre vaut ${f} ?`,
+        `Trouve le nombre à virgule égal à ${f}.`,
+        `${f} s'écrit aussi :`,
+        `Avec une virgule, ${f} s'écrit :`,
+        `Coche l'écriture décimale de ${f}.`,
+        `Quel est le bon nombre pour ${f} ?`,
       ]);
       return qcm(
         intro,
@@ -413,7 +420,8 @@ function genLireEcrire(etoile: 1 | 2, enQcm = false, ctx = false): TutorGenerate
     s: ["Une durée vaut", "Une durée est de"],
   };
   const debut = ctx ? m.debut(p) : choix(DEBUTS[m.u]);
-  const text = `${debut} ${a} ${m.mot} et ${k} ${rangMot}. ${choix(
+  // 07/11/2026 : « 1 centimètres » corrigé — au singulier quand a = 1.
+  const text = `${debut} ${a} ${a > 1 ? m.mot : m.mot.replace(/s$/, "")} et ${k} ${rangMot}. ${choix(
     ctx ? [`Écris cette mesure en ${m.mot} avec une virgule.`, `Quelle est cette mesure, écrite avec une virgule ?`] : ["Écris cette mesure avec une virgule.", `Écris cette mesure en ${m.u}.`],
   )}`;
   return courte(
@@ -572,7 +580,7 @@ const DUELS = [
   { u: "kg", min: 2, max: 6, sens: "max", phrase: (a: string, b: string, A: Prenom, B: Prenom) => `Au verger, ${A.nom} a cueilli ${a} kg de pommes et ${B.nom} ${b} kg. Qui en a cueilli le plus ?` },
   { u: "m", min: 1, max: 1, sens: "max", phrase: (a: string, b: string, A: Prenom, B: Prenom) => `Au saut en hauteur, ${A.nom} a franchi ${a} m et ${B.nom} ${b} m. Qui a sauté le plus haut ?` },
   { u: "s", min: 41, max: 59, sens: "min", phrase: (a: string, b: string, A: Prenom, B: Prenom) => `En descente de ski, ${A.nom} a mis ${a} s et ${B.nom} ${b} s. Qui a été le plus rapide ?` },
-  { u: "kg", min: 3, max: 6, sens: "max", phrase: (a: string, b: string, A: Prenom, B: Prenom) => `Le lapin ${de(A)} pèse ${a} kg et celui ${de(B)} ${b} kg. Quel lapin est le plus lourd : celui ${de(A)} ou celui ${de(B)} ?` },
+  { u: "kg", min: 3, max: 6, sens: "max", phrase: (a: string, b: string, A: Prenom, B: Prenom) => `${A.nom} a un lapin de ${a} kg et ${B.nom} un lapin de ${b} kg. Qui a le lapin le plus lourd ?` },
 ] as const;
 
 function explComparer(a: number, b: number) {
@@ -666,12 +674,11 @@ function genComparer(etoile: 1 | 2 | 3, enQcm = false): TutorGeneratedQuestionV4
     const gagnant = (d.sens === "max") === x > y ? A : B;
     const valeur = gagnant === A ? x : y;
     if (forme === "duel") {
-      const lapin = text.startsWith("Le lapin");
-      const bonne = lapin ? `celui ${de(gagnant)}` : gagnant.nom;
-      const autre = lapin ? `celui ${de(gagnant === A ? B : A)}` : (gagnant === A ? B : A).nom;
+      const bonne = gagnant.nom;
+      const autre = (gagnant === A ? B : A).nom;
       return qcm(text, bonne, [autre], `${explComparer(x, y)} La réponse est donc ${bonne}.`);
     }
-    const qNombre = text.replace(/Qui[^?]*\?|Quel lapin[^?]*\?/, d.sens === "max" ? "Quelle est la plus grande des deux mesures ?" : "Quelle est la plus petite des deux mesures ?");
+    const qNombre = text.replace(/Qui[^?]*\?/,d.sens === "max" ? "Quelle est la plus grande des deux mesures ?" : "Quelle est la plus petite des deux mesures ?");
     return courte(qNombre, valeur, `${explComparer(x, y)} La ${d.sens === "max" ? "plus grande" : "plus petite"} mesure est ${fmt(valeur)} ${d.u}.`, d.u, d.u === "€" ? 2 : undefined);
   }
 
@@ -2701,24 +2708,18 @@ export const decimauxBank: TutorBankItemV4[] = [
     microId: "decimal_calcul_defi",
     difficulty: 2,
     theme: "neutral",
-    text: "Comment partager un disque en 6 parts parfaitement égales ?",
+    // 07/11/2026 : remplace « partager un disque en 6 parts (angles de 60°) », hors notion.
+    text: "Sans poser : 4,9 × 2 est plus proche de 8 ou de 10 ?",
     format: "qcm",
-    choices: [
-      "couper au hasard",
-      "faire 3 parts",
-      "faire des angles de 60°",
-      "faire 2 parts",
-    ],
-    expected: ["faire des angles de 60°"],
+    choices: ["de 8", "de 10"],
+    expected: ["de 10"],
     comparator: "mcq_exact",
-    hint: "360 ÷ 6 = 60°.",
+    hint: "4,9 est presque 5.",
     explanation:
-      "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
-      "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
-      "Calcul : " +
-      ("Un cercle mesure 360°. Pour faire 6 parts égales, on partage 360 par 6, ce qui donne 60°. Il faut donc faire des secteurs de 60°.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["decimal_nombre", "defi", "geometrie", "qcm"],
+      "Méthode : on remplace 4,9 par un nombre rond proche.\n\n" +
+      "Calcul : 4,9 est presque 5, et 5 × 2 = 10. Le calcul exact donne 4,9 × 2 = 9,8, tout près de 10.\n\n" +
+      "Conclusion : 4,9 × 2 est plus proche de 10.",
+    tags: ["decimal_calcul", "defi", "ordre_de_grandeur", "qcm"],
   },
   {
     kind: "fixed",
