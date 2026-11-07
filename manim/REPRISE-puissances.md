@@ -95,3 +95,6 @@ Sorties : `manim/sorties/<classe>/maths/puissances/NN-<slug>/`. Rapports des age
 - Fin des vidéos : ancienne phrase (« Et abonne-toi »), gardée : pas de re-rendu (règle du 05/11).
 - ⏳ Frédéric, dans Studio, une fois la paysage en ligne : « Vidéo similaire » des 12 shorts = sa paysage (l'API ne le fait pas).
 - ⏳ À contrôler après le 23/11 : 26 `url` au manifeste, journal `manim/sorties/publication-auto.log`, puis committer ces `url` par chemin (`git hash-object`).
+
+## Shorts en dessin animé (07/11)
+Voir `manim/prompt-reprise-shorts-puissances-dessin-anime.md`. Les Manim ne sont pas touchés ; remplacement à trancher par Frédéric.

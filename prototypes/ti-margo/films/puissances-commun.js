@@ -7,6 +7,8 @@
   .ex{color:#e8590c;}.ba{color:#1971c2;}.pi{color:#c92a2a;}
   .expo{display:inline-block;font-size:.66em;vertical-align:.55em;line-height:0;color:#e8590c;}
   .barre{text-decoration:line-through;text-decoration-color:#c92a2a;text-decoration-thickness:8px;}
+  /* Cartes empilées : plus étroites, pour que la bonne réponse grossisse sans sortir du cadre */
+  body:not(.cartes-en-ligne) .choix{margin-left:70px;margin-right:70px;}
   body.cartes-en-ligne #cA,body.cartes-en-ligne #cB,body.cartes-en-ligne #cC{display:inline-flex;width:27%;margin:8px 8px;box-sizing:border-box;}`; document.head.append(css); }
 
 function gestes(P,T){ return {
