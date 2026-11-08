@@ -75,7 +75,7 @@ FILMS.determiner=function(outils){
   const cig3d=determinerForet(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55,fond:'#1f3b2a',bois:0x6b4a2b});
   panneau.style.display='none';
   const css=document.createElement('style');
-  css.textContent='#pause .ligne,#cq .ligne{display:block;} #carte .choix{font-size:54px;margin:8px 44px;}'; document.head.append(css);
+  css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;} #carte .choix{font-size:54px;margin:8px 44px;}'; document.head.append(css);
 
   /* Les instants */
   const tCertaines=mot('00-accroche','Certaines'), tCigales=mot('00-accroche','cigales'), tTerre=mot('00-accroche','terre'), t17a=mot('00-accroche','17'), tParie=mot('00-accroche','paries'), tPremierA=mot('00-accroche','premier');

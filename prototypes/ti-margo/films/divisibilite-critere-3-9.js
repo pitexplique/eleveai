@@ -87,7 +87,7 @@ FILMS['critere-3-9']=function(outils){
   c39PoserScene(); const cos=c39Costume();
   const tab=poserTableau({L:4.4,H:3,x:0,y:4.55,fond:'#2a1846',bois:0xd4a017});
   panneau.style.display='none';
-  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} body.video{background:#1b1033;}'; document.head.append(css);
+  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;} body.video{background:#1b1033;}'; document.head.append(css);
 
   /* Les instants */
   const tMagicien=mot('00-accroche','magicien'), tN=[entree('00-accroche',7),entree('00-accroche',10),entree('00-accroche',14)];

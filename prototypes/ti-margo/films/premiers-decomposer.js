@@ -84,7 +84,7 @@ FILMS.decomposer=function(outils){
   decompChantier(); decompCostume();
   const tab=poserTableau({L:4.4,H:3,x:0,y:4.55,fond:'#2b3036',bois:0xf59f00});
   panneau.style.display='none';
-  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;}'; document.head.append(css);
+  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;}'; document.head.append(css);
 
   /* Les écrits : exactement ce que dit la voix (on garde les instants de chaque mot) */
   const a0=dit('00-accroche'), a1=dit('01-casse'), a2=dit('02-briques'), a3=dit('03-question'), qd=dit('02q-question'), rd=dit('02r-reponse');

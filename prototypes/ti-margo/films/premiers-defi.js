@@ -75,7 +75,7 @@ FILMS.defi=function(outils){
   const tab=poserTableau({L:4.4,H:3,x:0,y:4.55,fond:'#1a1446',bois:0x7048e8});
   const ampoules=defiPlateau(tab);
   panneau.style.display='none';
-  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;}'; document.head.append(css);
+  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;}'; document.head.append(css);
 
   /* Les instants */
   const tSalut=mot('00-accroche','Salut'), t60=mot('00-accroche','60'), tDiv=mot('00-accroche','diviseurs'), tParie=mot('00-accroche','paries'), tEcrire=mot('00-accroche','écrire');

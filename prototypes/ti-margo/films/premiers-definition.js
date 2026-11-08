@@ -56,7 +56,7 @@ FILMS.definition=function(outils){
 
   definitionRue(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55,fond:'#1f3a4d',bois:0x7a4b24});
   panneau.style.display='none';
-  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;}'; document.head.append(css);
+  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;}'; document.head.append(css);
 
   /* Les instants */
   const tPour=mot('00-accroche','Pour'), t13=mot('00-accroche','13'), tRect=mot('00-accroche','rectangle'), tParie=mot('00-accroche','paries');

@@ -105,7 +105,7 @@ FILMS.diviseurs=function(outils){
 
   poserJardin(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55});
   panneau.style.display='none';
-  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;}'; document.head.append(css);
+  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;}'; document.head.append(css);
 
   /* Les instants */
   const tJai=mot('00-accroche','J\'ai'), t24=mot('00-accroche','24'), tRect=mot('00-accroche','rectangle'), tParie=mot('00-accroche','paries');

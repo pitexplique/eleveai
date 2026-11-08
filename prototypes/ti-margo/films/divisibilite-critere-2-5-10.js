@@ -59,7 +59,7 @@ FILMS['critere-2-5-10']=function(outils){
   const stade=c2510PoserStade();
   const tab=poserTableau({L:4.4,H:3,x:0,y:4.55,fond:'#0b1220',bois:0x212529});
   panneau.style.display='none';
-  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;}'; document.head.append(css);
+  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;}'; document.head.append(css);
 
   /* Les instants */
   const tCe=mot('00-accroche','Ce'), t7=mot('00-accroche','7'), tNb=mot('00-accroche','384'), tParie=mot('00-accroche','paries'),

@@ -79,7 +79,7 @@ FILMS.euclidienne=function(outils){
   poserCuisineCookies(); poserToqueCookies(); const miettes=poserMiettesCookies(), enMain=poserCookieMainCookies();
   const tab=poserTableau({L:4.4,H:3,x:0,y:4.72,pieds:false,fond:'#2b3a33',bois:0x9c6b3c});
   panneau.style.display='none';
-  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;}'; document.head.append(css);
+  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;}'; document.head.append(css);
 
   /* Les instants */
   const tJai=mot('00-accroche','J\'ai'), t47=mot('00-accroche','47'), tBoite=mot('00-accroche','boîtes'), t6a=mot('00-accroche','6');

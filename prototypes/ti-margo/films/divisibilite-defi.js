@@ -132,7 +132,7 @@ FILMS.defi=function(outils){
   defiSalle(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55,fond:'#1f3a2b',bois:0x5c3a1e});
   const cof=defiCoffre();
   panneau.style.display='none';
-  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} body.video{background:#3f3a4a;}'; document.head.append(css);
+  const css=document.createElement('style'); css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;} body.video{background:#3f3a4a;}'; document.head.append(css);
 
   /* Les instants */
   const tCe=mot('00-accroche','Ce'), tCoffre=mot('00-accroche','coffre'), t3ch=mot('00-accroche','chiffres'), tParie=mot('00-accroche','paries'), tCoup=mot('00-accroche','coup');

@@ -53,7 +53,7 @@ FILMS.multiple=function(outils){
   multipleQuai(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55,fond:'#22343f',bois:0x6b4a2b});
   panneau.style.display='none';
   const css=document.createElement('style');
-  css.textContent='#pause .ligne,#cq .ligne{display:block;} #carte .choix{font-size:54px;margin:8px 44px;}'; document.head.append(css);
+  css.textContent='#pause .ligne,#cq .ligne{display:block;} div#rebours{display:block;} #carte .choix{font-size:54px;margin:8px 44px;}'; document.head.append(css);
 
   /* Les instants */
   const tMultiple=mot('00-accroche','Multiple'), tOu=mot('00-accroche','ou'), tDiv=mot('00-accroche','diviseur'), tMelange=mot('00-accroche','mélange'), tParie=mot('00-accroche','paries');
