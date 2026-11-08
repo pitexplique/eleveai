@@ -31,10 +31,17 @@ Notions `decimal_nombre` (6 micros) et `decimal_calcul` (6 micros jouées en 6e)
   - Commits, sans push : `71761242` (02-03), `3b020ce9` et `c2999142` (04-05), `01729247`, `f468170c` et `597b2e04` (06-07), `87a27ad0` (08-09), `5d4eb74b` et `c8de2617` (10-11), `3b4af2e3` et `be8e8cdf` (12).
   - Aperçu des 24 : `manim/sorties/apercu-decimaux.html` (port 3900, à l'arrêt).
   - Ceintures des shorts : blanche pour 01, 02 et 05, jaune pour les autres (d'après cette reprise).
-  - ⏳ Défaut mineur NON corrigé : dans les paysages 02 et 03, les entêtes du petit tableau de « Ce que tu as appris » (6 colonnes) sont petites. À corriger et re-rendre.
+  - ✅ (corrigé le 08/11, voir plus bas) Défaut mineur : dans les paysages 02 et 03, les entêtes du petit tableau de « Ce que tu as appris » (6 colonnes) sont petites. À corriger et re-rendre.
   - « Mets » de la fin de chaque short (en secondes depuis le début du film, AVANT d'ajouter les 0,03 s de `COUPE_PAR_VIDEO`) : 02 = 70,33 ; 03 = 72,25 ; 04 = 65,49 ; 05 = 74,87 ; 06 = 65,31 ; 07 = 85,34 ; 08 = 69,81 ; 09 = 77,97 ; 10 = 74,62 ; 11 = 74,05 ; 12 = 65,39. Le 01 reste à mesurer. ⚠️ À vérifier au son de chaque mp4 (la règle dit « mesuré au son »).
   - Les dossiers `manim/scripts/6e/media-dec-NN` ne sont pas suivis par git et peuvent être supprimés.
   - RESTE : corriger les entêtes des paysages 02 et 03, manifeste (`6e-decimal-<slug>[-short]`, `micro_id`, `centres`, `questions`, `pas_avant`), `python scripts/fiches-youtube.py`, R2, bilans, `COUPE_PAR_VIDEO`, puis Frédéric écoute. Coach APRÈS le push. Rien sur YouTube sans son ordre.
+- 08/11 matin : ✅ **PASSE FINALE FAITE, commit `2a953103`, sans push.**
+  - Paysages 02 et 03 : finale refaite (`PaysageDecimal.finale_haut` : tableau en pleine largeur sous le titre, lignes d'une phrase dessous) ; dans la 03, « 0,7 » et « = 0,70. » sont maintenant à la même taille. Re-rendues en HD, audit propre (seul « 974 »), 0 instant au bord, finale relue à l'image.
+  - Miniatures des 12 paysages : `python manim/miniature_decimaux.py` (« COMPRENDRE … EN N MIN », ceinture verte). Vignettes webp faites.
+  - Manifeste : `python manim/passe_decimaux.py temps` puis `… manifeste` (24 entrées, `pas_avant` 2026-12-01 provisoire ; temps des chapitres et des questions mesurés dans l'audio des mp4 ; « On vérifie » de la 11 fondu, il durait moins de 10 s). Fiches : `python scripts/fiches-youtube.py 6e-decimal-`.
+  - R2 : `.\scripts\r2-videos.ps1 -Rclone "copy manim/sorties/6e/maths/decimaux R2:6e/maths/decimaux --include *.{mp4,png,webp} -q"` (PAS `-Envoyer`, qui enverrait les chantiers des autres) ; `check --one-way` : 84 fichiers identiques. Table R2 et bilans : `node scripts/generer-videos-r2.mjs`, seules nos 24 clés committées.
+  - `COUPE_PAR_VIDEO` : paysages 8,4 s (pause après « point f r » de 2,42 à 3,38 s dans le clip de fin) ; shorts = « Mets » mesuré au son de chaque mp4 (corrélation des WAV, score 0,99) + 0,03 s, soit 4,21 à 4,24 s. « Mets » du 01 : 70,25 s.
+  - ⏳ RESTE : (1) son écoute des 24 ; (2) push, le soir, sur son ordre ; (3) APRÈS le push seulement : `node scripts/brancher-videos-coach.mjs --classe 6e --notion decimal_nombre --ecrire` puis `--notion decimal_calcul` ; (4) YouTube sur son ordre, `pas_avant` à confirmer.
 - Les deux paysages « Tout comprendre » (`6e-decimal-nombre`, `6e-decimal-calcul`) et leurs 4 shorts Manim RESTENT : elles sont en ligne (hv_ZFkFVk00, QFQsyW-CXw8), couvrent la notion entière et servent de révision. La nouvelle série est par micro ; ne pas les refaire.
 - `decimal_diviser_par_decimal` : masquée en 6e (hors France, `micros-masquees.ts`), travaillée en 5e (`quotient_decimaux`). Pas de vidéo dans ce lot.
 

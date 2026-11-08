@@ -5,6 +5,8 @@ Réponds en français. Série : notions `decimal_nombre` et `decimal_calcul`, 12
 ## Où on en est
 Lis `manim/REPRISE-decimaux.md` : état, slugs, décors, ceintures, choix à garder. Le coach est vérifié (`9850db39`). Les 24 voix sont dans `manim/voix/6e-decimal-<slug>[-short].json`.
 
+**08/11 : PASSE FINALE FAITE (`2a953103`) : 24 vidéos au manifeste, sur R2, fiches, bilans et coupes. Reste son écoute, le push, puis le coach (étape 5). Voir le bloc « 08/11 matin » de la reprise.**
+
 **07/11 soir : les 24 vidéos sont RENDUES et contrôlées, et le format est validé par Frédéric.** Lis le bloc « 07/11 soir » de la reprise. Commence par le défaut mineur des paysages 02 et 03 (entêtes de la finale), puis enchaîne l'étape 4 à partir du manifeste : manifeste, fiches YouTube, R2, bilans, `COUPE_PAR_VIDEO`. Ne refais aucune des vidéos.
 
 ## Après son oui, dans l'ordre (modèle : série Triangles)
