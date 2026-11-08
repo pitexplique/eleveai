@@ -543,6 +543,132 @@
   "short": false,
   "youtube": null
  },
+ "4e-div-critere-2-5-10": {
+  "fichier": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10.mp4",
+  "poster": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10.png",
+  "vignette": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10.vignette.webp",
+  "titre": "Un seul chiffre suffit — Divisible par 2, par 5, par 10 — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_critere_2_5_10&display=simple"
+ },
+ "4e-div-critere-2-5-10-short": {
+  "fichier": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10-short.mp4",
+  "poster": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10-short-miniature.vignette.webp",
+  "titre": "7 384 615 est-il divisible par 5 ? Tu paries que je réponds en 1 seconde ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_critere_2_5_10&display=simple"
+ },
+ "4e-div-critere-3-9": {
+  "fichier": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9.mp4",
+  "poster": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9.png",
+  "vignette": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9.vignette.webp",
+  "titre": "Le secret de la somme des chiffres — Divisible par 3 et par 9 — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_critere_3_9&display=simple"
+ },
+ "4e-div-critere-3-9-short": {
+  "fichier": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9-short.mp4",
+  "poster": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9-short-miniature.vignette.webp",
+  "titre": "123 456 789 divisible par 9 ? Tu paries que je le sais en 3 secondes ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_critere_3_9&display=simple"
+ },
+ "4e-div-defi": {
+  "fichier": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi.mp4",
+  "poster": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi.png",
+  "vignette": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi.vignette.webp",
+  "titre": "Ouvre les cadenas de l'escape game — Défis de divisibilité — épisode 7 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_defi&display=simple"
+ },
+ "4e-div-defi-short": {
+  "fichier": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi-short.mp4",
+  "poster": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi-short-miniature.vignette.webp",
+  "titre": "Code 7 ? 5, divisible par 9 : tu paries que j'ouvre le coffre du premier coup ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_defi&display=simple"
+ },
+ "4e-div-diviseurs": {
+  "fichier": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs.mp4",
+  "poster": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs.png",
+  "vignette": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs.vignette.webp",
+  "titre": "Comment n'en oublier aucun ? — Lister tous les diviseurs — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_lister_diviseurs&display=simple"
+ },
+ "4e-div-diviseurs-short": {
+  "fichier": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs-short.mp4",
+  "poster": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs-short-miniature.vignette.webp",
+  "titre": "24 tournesols en rectangle : tu paries que je n'en oublie aucun ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_lister_diviseurs&display=simple"
+ },
+ "4e-div-euclidienne": {
+  "fichier": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne.mp4",
+  "poster": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne.png",
+  "vignette": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne.vignette.webp",
+  "titre": "Que faire de ce qui reste ? — La division euclidienne — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_euclidienne&display=simple"
+ },
+ "4e-div-euclidienne-short": {
+  "fichier": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne-short.mp4",
+  "poster": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne-short-miniature.vignette.webp",
+  "titre": "47 cookies, boîtes de 6 : tu paries qu'il m'en reste plus de 6 ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_euclidienne&display=simple"
+ },
+ "4e-div-multiple": {
+  "fichier": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple.mp4",
+  "poster": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple.png",
+  "vignette": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple.vignette.webp",
+  "titre": "Deux mots pour une seule relation — Multiples et diviseurs — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_multiple_diviseur&display=simple"
+ },
+ "4e-div-multiple-short": {
+  "fichier": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple-short.mp4",
+  "poster": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple-short-miniature.vignette.webp",
+  "titre": "Multiple ou diviseur : tu paries que tu ne te tromperas plus jamais ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_multiple_diviseur&display=simple"
+ },
+ "4e-div-probleme": {
+  "fichier": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme.mp4",
+  "poster": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme.png",
+  "vignette": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme.vignette.webp",
+  "titre": "Diviseur commun ou multiple commun ? — Problèmes de divisibilité — épisode 6 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_probleme&display=simple"
+ },
+ "4e-div-probleme-short": {
+  "fichier": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme-short.mp4",
+  "poster": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme-short-miniature.vignette.webp",
+  "titre": "Mes 2 phares clignotent ensemble : tu paries qu'ils ne le referont plus jamais ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_probleme&display=simple"
+ },
  "4e-equation-defi": {
   "fichier": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi.mp4",
   "poster": "4e/maths/equations/07-defi/eleveai-maths-4e-equation-defi.png",
@@ -1010,6 +1136,78 @@
   "short": false,
   "youtube": "x2n_wQ9d0AY",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&display=simple"
+ },
+ "4e-premier-decomposer": {
+  "fichier": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer.mp4",
+  "poster": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer.png",
+  "vignette": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer.vignette.webp",
+  "titre": "Casser un nombre en briques — Décomposer en facteurs premiers — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_decomposer&display=simple"
+ },
+ "4e-premier-decomposer-short": {
+  "fichier": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer-short.mp4",
+  "poster": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer-short-miniature.vignette.webp",
+  "titre": "Je casse 84 en briques incassables : tu paries que j'y arrive ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_decomposer&display=simple"
+ },
+ "4e-premier-defi": {
+  "fichier": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi.mp4",
+  "poster": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi.png",
+  "vignette": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi.vignette.webp",
+  "titre": "Compter les diviseurs sans les écrire — Défis sur les nombres premiers — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_defi&display=simple"
+ },
+ "4e-premier-defi-short": {
+  "fichier": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi-short.mp4",
+  "poster": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi-short-miniature.vignette.webp",
+  "titre": "Les diviseurs de 60, sans en écrire un seul : tu paries ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_defi&display=simple"
+ },
+ "4e-premier-definition": {
+  "fichier": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition.mp4",
+  "poster": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition.png",
+  "vignette": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition.vignette.webp",
+  "titre": "Les nombres qui ne se cassent pas — Les nombres premiers — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_definition&display=simple"
+ },
+ "4e-premier-definition-short": {
+  "fichier": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition-short.mp4",
+  "poster": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition-short-miniature.vignette.webp",
+  "titre": "13 musiciens en rectangle : tu paries que j'y arrive ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_definition&display=simple"
+ },
+ "4e-premier-determiner": {
+  "fichier": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner.mp4",
+  "poster": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner.png",
+  "vignette": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner.vignette.webp",
+  "titre": "N'oublie jamais le test par 7 — Reconnaître un nombre premier — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_determiner&display=simple"
+ },
+ "4e-premier-determiner-short": {
+  "fichier": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner-short.mp4",
+  "poster": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner-short-miniature.png",
+  "vignette": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner-short-miniature.vignette.webp",
+  "titre": "Des cigales qui dorment 17 ans : tu paries qu'elles ont choisi un nombre premier ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_determiner&display=simple"
  },
  "4e-proba-calculer-fraction": {
   "fichier": "4e/maths/probabilites/05-calculer-fraction/eleveai-maths-4e-proba-calculer-fraction.mp4",
