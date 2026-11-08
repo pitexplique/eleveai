@@ -233,7 +233,8 @@
         "Shorts",
         "2de"
       ],
-      "miniature": "seconde/maths/fr/eleveai-maths-seconde-repere-coordonnees-short.png"
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-repere-coordonnees-short.png",
+      "url": "https://youtube.com/shorts/6G4TGfuSPmg"
     },
     {
       "id": "puissances",
@@ -526,7 +527,8 @@
         "erreur",
         "2de",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/jYm6mP-K3lA"
     },
     {
       "id": "eq-balance",
@@ -1084,7 +1086,8 @@
         "fractions égales",
         "révisions",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/4QvQH0yTklk"
     },
     {
       "id": "bases-fractions-simplifier",
@@ -1453,7 +1456,8 @@
         "statistiques",
         "esprit critique",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/rRv5gyGyqSg"
     },
     {
       "id": "sondages-racine",
@@ -1632,7 +1636,8 @@
         "Shorts"
       ],
       "fichier": "maths-en-vrai/maths/shorts/fr/fonctions/eleveai-maths-en-vrai-fonctions-short-quand.mp4",
-      "miniature": "maths-en-vrai/maths/fr/eleveai-maths-en-vrai-fonctions-short-quand.png"
+      "miniature": "maths-en-vrai/maths/fr/eleveai-maths-en-vrai-fonctions-short-quand.png",
+      "url": "https://youtube.com/shorts/xqCoeaGuxX4"
     },
     {
       "id": "bases-fonctions-jusquou",
@@ -6129,7 +6134,8 @@
         "terminale",
         "spécialité maths",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/4RIt5j59Pp4"
     },
     {
       "id": "terminale-continuite-tvi-short-unicite",
@@ -7094,8 +7100,8 @@
           "explication": "Le théorème part de l'angle droit ; seule la réciproque le prouve."
         }
       ],
-      "url": "https://youtu.be/IV4gWGe597Q",
-      "a_remplacer": true
+      "url": "https://youtu.be/E64f6HmaFr4",
+      "ancienne_url": "https://youtu.be/IV4gWGe597Q"
     },
     {
       "id": "4e-pythagore-reciproque-short",
@@ -7136,8 +7142,8 @@
           "explication": "36 + 64 = 100 = 10² : le coin est droit."
         }
       ],
-      "url": "https://youtube.com/shorts/9JazsOkfeDA",
-      "a_remplacer": true
+      "url": "https://youtube.com/shorts/NXVnYoIo7Fc",
+      "ancienne_url": "https://youtube.com/shorts/9JazsOkfeDA"
     },
     {
       "id": "4e-pythagore-rediger",
@@ -7231,8 +7237,8 @@
           "explication": "La réciproque prouve l'angle droit ; le théorème calcule une longueur."
         }
       ],
-      "url": "https://youtu.be/cBgnO9A9cG8",
-      "a_remplacer": true
+      "url": "https://youtu.be/1JDKfd9k3kA",
+      "ancienne_url": "https://youtu.be/cBgnO9A9cG8"
     },
     {
       "id": "4e-pythagore-rediger-short",
@@ -7273,8 +7279,8 @@
           "explication": "On cherche l'angle droit : c'est la réciproque."
         }
       ],
-      "url": "https://youtube.com/shorts/eIi_u2MlcnM",
-      "a_remplacer": true
+      "url": "https://youtube.com/shorts/kPTPqGyGres",
+      "ancienne_url": "https://youtube.com/shorts/eIi_u2MlcnM"
     },
     {
       "id": "4e-pythagore-defi-cube",
@@ -7356,8 +7362,8 @@
           "explication": "24 sur les faces + 24 en biais = 48 (56 = tous les triangles)."
         }
       ],
-      "url": "https://youtu.be/EN_5t2Jzp2s",
-      "a_remplacer": true
+      "url": "https://youtu.be/G0m9NOVZNzU",
+      "ancienne_url": "https://youtu.be/EN_5t2Jzp2s"
     },
     {
       "id": "4e-pythagore-defi-cube-short",
@@ -7397,8 +7403,8 @@
           "explication": "[AB] et [BC] sont deux arêtes de la face : l'angle droit est en B."
         }
       ],
-      "url": "https://youtube.com/shorts/fnROirX3tIY",
-      "a_remplacer": true
+      "url": "https://youtube.com/shorts/yCygJjFVkeY",
+      "ancienne_url": "https://youtube.com/shorts/fnROirX3tIY"
     },
     {
       "id": "3e-trigo-trigonometrie",
@@ -56448,7 +56454,8 @@
         }
       ],
       "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-1/eleveai-francais-cp-pas-a-pas-chiffre-1.png",
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/hXIz4QekyUc"
     },
     {
       "id": "cp-pas-a-pas-chiffre-2",
@@ -56537,7 +56544,8 @@
         }
       ],
       "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-2/eleveai-francais-cp-pas-a-pas-chiffre-2.png",
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/_VWgY_nJDig"
     },
     {
       "id": "cp-pas-a-pas-chiffre-3",
