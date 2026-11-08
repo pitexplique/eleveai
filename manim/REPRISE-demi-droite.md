@@ -26,3 +26,9 @@ Si les rapports sont perdus : vérifier sur disque les mp4 en sortie, relancer l
 6. Coach : APRÈS le push seulement : `node scripts/brancher-videos-coach.mjs --classe 6e --notion demi_droite_graduee --ecrire`, puis cm1 et cm2 `--notion nombre_decimal`. Avant : lecture seule (sans `--ecrire`).
 7. Mémoire `serie-6e-demi-droite-graduee.md` + ligne MEMORY.md ; commit par chemin (scripts, voix, marques, sons, sorties, films, outils, REPRISE) ; rapport final en français.
 - Remarque : « Inès » est le prénom de trois métiers différents (trail, game designer, conductrice de bus) ; à signaler à Frédéric, pas un défaut.
+
+## ✅ 08/11 matin : SÉRIE FINIE, commits `0c0224f4` (coach CM) et `05ee33fd` (vidéos), sans push
+- Rendues et relues : 01 lire 5 min 21, 02 placer 4 min 10, 03 fraction 4 min 34, 04 graduer 4 min 22 ; CM1/CM2 4 min 37 ; short Ti Margo CM « Le bus rate l'école » 1 min 30 (voix débit −6). Audits propres (seul « 974 »), 0 instant au bord, planches relues.
+- Miniatures + vignettes, manifeste (8 entrées, `pas_avant` 2026-12-01 ; CM2 paysage et short `meme_video_que` CM1), fiches YouTube, R2 (22 fichiers identiques), table R2 + bilans (nos clés seules), `COUPE_PAR_VIDEO` (8,2 / 4,22).
+- ⏳ RESTE : (1) son écoute ; (2) push le soir, sur son ordre ; (3) APRÈS le push : `node scripts/brancher-videos-coach.mjs --id 6e-demi-droite-lire,6e-demi-droite-placer,6e-demi-droite-fraction,6e-demi-droite-graduer,cm1-decimal-droite,cm1-decimal-droite-short,cm2-decimal-droite,cm2-decimal-droite-short --ecrire` (lecture seule vérifiée : 8 à brancher) ; (4) YouTube sur son ordre.
+- Non suivis, à jeter si on veut : `manim/scripts/cm1/decimal_droite_short*.py/.json/.tsv` (ancien short Manim jamais rendu, remplacé par le film Ti Margo ; sa voix a été réécrite), dossiers `media-demi-droite-0N`, `media-decimal-droite*`.
