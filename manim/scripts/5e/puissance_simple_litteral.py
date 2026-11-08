@@ -246,10 +246,10 @@ class PuissanceSimpleLitteral5e(PaysageDiv):
         sat = satellite(0.62).move_to(P(-2.85, 2.1))
         self.dit(self.L("Clara est ingénieure spatiale.", 3.0, 38, CIEL), "Clara est ingénieure spatiale.",
                  avec=[FadeIn(p, shift=UP * 0.3)])
-        self.dit(self.L("Elle conçoit les panneaux solaires", 2.3, 38), "Elle conçoit les panneaux solaires",
+        self.dit(self.L("Elle conçoit les panneaux", 2.3, 36), "Elle conçoit les panneaux",
                  avec=[FadeIn(ciel)])
         self.play(FadeIn(sat, scale=0.8), run_time=0.4)
-        self.dit(self.L("carrés d'un satellite.", 1.7, 38), "carrés d'un satellite.",
+        self.dit(self.L("solaires carrés d'un satellite.", 1.7, 36), "solaires carrés d'un satellite.",
                  avec=[Indicate(sat.ailes, color=CELLULE_ON, scale_factor=1.1)])
         grand = carre_lettre(2.5, P(-3.4, -1.15))
         ligne = self.L("Si le côté mesure c mètres,", 0.75, 38)
@@ -261,6 +261,7 @@ class PuissanceSimpleLitteral5e(PaysageDiv):
         cs = [i for i, a in enumerate(aire.atomes) if a.original_text == "c"]
         rempli = grand.sq.copy().set_fill(CELLULE_ON, 0.85).set_stroke(WHITE, 5)
         dedans = M("c²", 64).sans_audit().move_to(grand.sq)
+        dedans.atomes[0].set_color("#0b1f4d")  # lisible sur le carré bleu clair
         self.geste(aire, "l'aire est c fois c : c au carré.",
                    {cs[0]: lambda: [Indicate(grand.bas, color=BASE_C, scale_factor=1.5)],
                     cs[1]: lambda: [FadeIn(grand.gauche, scale=1.4)],
@@ -467,9 +468,9 @@ class PuissanceSimpleLitteral5e(PaysageDiv):
         self.clear()
         self.add_mascotte()
         self.XL = -2.2
-        cote = 0.5
-        ga = carre_lettre(3 * cote, P(-5.3, 0.6), "a", 38)
-        gb = carre_lettre(3 * cote, P(-3.05, 0.6), "a", 38)
+        cote = 0.45  # carrés un peu plus petits : le « a » du second ne colle plus au premier
+        ga = carre_lettre(3 * cote, P(-5.55, 0.6), "a", 38)
+        gb = carre_lettre(3 * cote, P(-3.3, 0.6), "a", 38)
         pa, pb = panneau(3, cote, ga.sq.get_center()), panneau(3, cote, gb.sq.get_center())
         fois2 = T("2 panneaux", 30, CIEL, audit=False).next_to(VGroup(ga, gb), UP, buff=0.3)
         self.add(ga, gb)

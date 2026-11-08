@@ -295,10 +295,10 @@ class PuissanceSimpleValeurs5e(PaysageRel):
         og = P(-4.85, -3.05)
         grand_p = plaque(12, og, 0.215, 0.1)
         grand_m = carre_plein(12, og, 0.215)
-        self.dit(self.lg("Karim est chef pâtissier.", 2.9, 3.0, 42, CIEL), "Karim est chef pâtissier.",
+        self.dit(self.lg("Karim est chef pâtissier.", 2.9, 3.0, 42, CIEL, maxw=7.0), "Karim est chef pâtissier.",
                  avec=[FadeIn(k, shift=UP * 0.3)])
-        self.dit(self.lg("Il range ses macarons en carrés", 2.9, 2.2, 36), "Il range ses macarons en carrés")
-        self.dit(self.lg("sur des plaques :", 2.9, 1.6, 36), "sur des plaques :")
+        self.dit(self.lg("Il range ses macarons", 2.9, 2.2, 38, maxw=7.0), "Il range ses macarons")
+        self.dit(self.lg("en carrés sur des plaques :", 2.9, 1.6, 38, maxw=7.0), "en carrés sur des plaques :")
         l = self.lg("1 sur 1, 2 sur 2, 3 sur 3,", 2.9, 0.7, 40)
         pop = lambda g: lambda: [FadeIn(g[0]), LaggedStart(*[FadeIn(m, scale=0.4) for m in g[1]], lag_ratio=0.2)]  # noqa: E731
         self.poser_avec(l, "1 sur 1, 2 sur 2, 3 sur 3,", {2: pop(petits[0]), 6: pop(petits[1]), 10: pop(petits[2])})
@@ -360,9 +360,10 @@ class PuissanceSimpleValeurs5e(PaysageRel):
         self.add(fond)
         b = [bordure(n, o, pas) for n in (1, 2, 3, 4)]
         xr = 2.75
-        self.dit(self.lg("Une astuce pour vérifier :", xr, 3.0, 42, CIEL), "Une astuce pour vérifier :")
-        self.dit(self.lg("d'un carré au suivant,", xr, 2.3, 38), "d'un carré au suivant,")
-        l = self.lg("Karim ajoute une bordure.", xr, 1.7, 38)
+        mw = 7.4  # la colonne va de -0,95 à 6,45 : la plaque est à gauche de -2,4
+        self.dit(self.lg("Une astuce pour vérifier :", xr, 3.0, 42, CIEL, maxw=mw), "Une astuce pour vérifier :")
+        self.dit(self.lg("d'un carré au suivant,", xr, 2.3, 38, maxw=mw), "d'un carré au suivant,")
+        l = self.lg("Karim ajoute une bordure.", xr, 1.7, 38, maxw=mw)
         teinter(l, {"bordure": SAVEURS[1]})
         self.dit(l, "Karim ajoute une bordure.")
         pop = lambda g: lambda: [LaggedStart(*[FadeIn(m, scale=0.4) for m in g], lag_ratio=0.12)]  # noqa: E731
@@ -379,7 +380,7 @@ class PuissanceSimpleValeurs5e(PaysageRel):
         e3.atomes[1].set_color(SAVEURS[3])
         e3.atomes[5].set_color(JUSTE)
         self.poser_avec(e3, "Puis 7 de plus : 16.", {1: pop(b[3])}, rt=0.3)
-        f = self.lg("On ajoute les nombres impairs.", xr, -1.8, 42, JAUNE_TITRE)
+        f = self.lg("On ajoute les nombres impairs.", xr, -1.8, 38, JAUNE_TITRE, maxw=6.8)  # insister l'agrandit de 8 %
         self.dit(f, "On ajoute les nombres impairs.")
         self.insister(f, 1.08, 0.2)
         self.attendre_voix(marge=0.8)
@@ -430,11 +431,12 @@ class PuissanceSimpleValeurs5e(PaysageRel):
         e4.mis_sur_egal(e3.egal.get_center()[0], -0.35)
         e4.atomes[0].set_color(WHITE)
         self.dit(e4, "1 000.")
-        l5 = self.lg("Une caisse de 10 sur 10 sur 10", xr, -1.3, 36)
+        l5 = self.lg("Une caisse de 10 sur 10 sur 10", xr, -1.25, 35, maxw=7.4)
         self.dit(l5, "Une caisse de 10 sur 10 sur 10", avec=[FadeIn(cs, shift=UP * 0.3)])
-        l6 = self.lg("contient 1 000 morceaux de sucre.", xr, -1.9, 36)
+        l6 = self.lg("contient 1 000 morceaux", xr, -1.85, 35, maxw=7.4)
         teinter(l6, {"1": JUSTE, "000": JUSTE})
-        self.dit(l6, "contient 1 000 morceaux de sucre.")
+        self.dit(l6, "contient 1 000 morceaux")
+        self.dit(self.lg("de sucre.", xr, -2.45, 35), "de sucre.")
         self.play(Circumscribe(cs, color=JUSTE), run_time=0.6)
         self.attendre_voix(marge=0.8)
 
@@ -524,10 +526,11 @@ class PuissanceSimpleValeurs5e(PaysageRel):
                                                              3: lambda: [FadeIn(pa), Create(ga), FadeIn(qa, scale=1.4)]})
         l2 = self.pw("et 12² ?", xr, 1.15, 44)
         self.poser_avec(l2, "et 12 au carré ?", {2: lambda: [FadeIn(pb), Create(gb), FadeIn(qb, scale=1.4)]})
-        l3 = self.lg("Et quel nombre, au carré,", xr, 0.0, 42)
-        self.dit(l3, "Et quel nombre, au carré,", avec=[FadeIn(pc), FadeIn(qc, scale=1.4)])
-        l4 = self.pw("donne 64 ?", xr, -0.7, 44)
-        self.poser_avec(l4, "donne 64 ?", {1: lambda: [FadeIn(n64, scale=1.3),
+        l3 = self.lg("Et quel nombre,", xr, 0.0, 44)
+        self.dit(l3, "Et quel nombre,", avec=[FadeIn(pc), FadeIn(qc, scale=1.4)])
+        l4 = self.pw("au carré, donne 64 ?", xr, -0.7, 44)
+        i64 = next(i for i, a in enumerate(l4.atomes) if a.original_text == "64")
+        self.poser_avec(l4, "au carré, donne 64 ?", {i64: lambda: [FadeIn(n64, scale=1.3),
                                                       LaggedStart(*[FadeIn(m, scale=0.4) for b in mc for m in b], lag_ratio=0.01)]})
         pz = T("Mets pause, et cherche !", 38, ORANGE_RETENUE).move_to(P(3.2, -1.45))  # plus bas, il touchait le « 64 »
         self.au("Mets pause", Write(pz), rt=0.5)

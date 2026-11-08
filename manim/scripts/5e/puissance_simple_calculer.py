@@ -372,7 +372,7 @@ class PuissanceSimpleCalculer5e(PaysageRel):
         self.play(FadeOut(haut), FadeOut(gauche), run_time=0.2)
         l3 = self.ligne("En tout : 6² + 4²", x, 0.1, 46)
         self.poser(l3, "En tout : 6 au carré plus 4 au carré,", {0: (lambda: [Indicate(g.cloture, color=PAILLE), Indicate(p.cloture, color=PAILLE)], 0.4)})
-        l4_ = self.ligne("= 36 + 16 = 52 m²", x, -0.75, 48, verts=(5, 6, 7))
+        l4_ = self.ligne("= 36 + 16 = 52 m²", x + 0.15, -0.75, 44, verts=(5, 6, 7))
         cadre = SurroundingRectangle(VGroup(g, p), color=VERT_OK, buff=0.12, stroke_width=4)
         self.poser(l4_, "36 plus 16 : 52 mètres carrés.", {idx(l4_, "52"): (lambda: [Create(cadre)], 0.35)})
         self.play(Create(self.cadre_vert(VGroup(*l4_.atomes[5:]))), run_time=0.25)

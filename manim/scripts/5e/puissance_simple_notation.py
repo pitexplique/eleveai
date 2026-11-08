@@ -43,6 +43,17 @@ HEROS = ["CHHHC", "CKSKC", "BBBBB", "CBBBC", "CDCDC"]
 TEINTES = {"C": CIEL_P, "H": "#92400e", "K": "#1e293b", "S": "#f1c27d", "B": "#2563eb", "D": "#57534e"}
 
 
+JAMBAGES = set("gjpqyçQ,;()/[]")
+
+
+def ligne_de_base(e):
+    """La ligne de base d'une ligne PE : le bas médian de ses mots SANS jambage (None s'il n'y en a pas)."""
+    bas = [a.get_bottom()[1] for a in e.atomes
+           if a.original_text not in EXPOS and not (set(a.original_text) & JAMBAGES)
+           and any(ch.isalnum() for ch in a.original_text)]
+    return float(np.median(bas)) if bas else None
+
+
 def PE(s, fs=60, c=WHITE, lettres="", audit=True, base_c=BASE_C):
     """Une ligne (Eq) dont les exposants ² ³ deviennent un VRAI chiffre orange relevé,
     à 0,6 de la taille : .expos ; l'atome garde « ² » pour entrer au mot « carré »."""
@@ -167,11 +178,19 @@ class PuissanceSimpleNotation5e(PaysageRel):
     def L(self, s, xl, y, fs=36, c=WHITE, lettres="", maxw=None, base_c=None):
         """Une ligne de la colonne, alignée à gauche en xl, jamais au bord ni sur Ti Margo."""
         e = PE(s, fs, c, lettres=lettres, base_c=base_c)
+        h0 = e.height
         if maxw is None:
             maxw = (6.45 if y > -1.7 else 5.15) - xl
         if e.width > maxw:
             e.scale_to_fit_width(maxw)
         e.move_to(P(0, y)).align_to(P(xl, 0), LEFT)
+        # Interlignes réguliers : la ligne est posée sur sa LIGNE DE BASE, pas sur le centre de sa
+        # boîte (une ligne sans jambage, p g j…, tombait plus bas qu'une ligne qui en a).
+        b = ligne_de_base(e)
+        if b is not None:
+            ref = Text("Hp", font_size=fs)
+            k = (ref.get_center()[1] - ref[0].get_bottom()[1]) * e.height / h0
+            e.shift(UP * ((y - k) - b))
         return e
 
     def ph_eq(self, i, s, phrase, n=1, lettres="", couleur=None, premier=False, avec=()):
@@ -234,9 +253,10 @@ class PuissanceSimpleNotation5e(PaysageRel):
         xl = -0.4
         self.dit(self.L("Lucas est créateur", xl, 2.95, 42, CIEL), "Lucas est créateur", avec=[FadeIn(p, shift=UP * 0.3)])
         self.dit(self.L("de jeux vidéo.", xl, 2.35, 42, CIEL), "de jeux vidéo.")
-        self.dit(self.L("Il dessine un héros en pixels,", xl, 1.4, 36), "Il dessine un héros en pixels,")
-        l3 = self.L("sur une grille", xl, 0.8, 38)
-        self.poser_avec(l3, "sur une grille", {2: lambda: [FadeIn(g, scale=0.85)]}, rt=0.14)
+        self.dit(self.L("Il dessine un héros", xl, 1.4, 38), "Il dessine un héros")
+        l3 = self.L("en pixels, sur une grille", xl, 0.8, 38)
+        i_grille = next(i for i, a in enumerate(l3.atomes) if a.original_text == "grille")
+        self.poser_avec(l3, "en pixels, sur une grille", {i_grille: lambda: [FadeIn(g, scale=0.85)]}, rt=0.14)
         l3b = teinter(self.L("de 5 pixels de large", xl, 0.2, 38), {"5": BASE_C})
         self.poser_avec(l3b, "de 5 pixels de large", {1: lambda: [FadeIn(haut, shift=DOWN * 0.15)]}, rt=0.14)
         l4 = teinter(self.L("et 5 pixels de haut.", xl, -0.4, 38), {"5": BASE_C})
