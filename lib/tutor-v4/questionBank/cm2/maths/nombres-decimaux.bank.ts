@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/cm2/nombres-decimaux.bank.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { gabaritsDecimalDroite } from "../../cm1/maths/decimal-droite.gen";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -678,90 +679,26 @@ export const nombresDecimauxBank: TutorBankItemV4[] = [
       "0,5 est la moitié de 1.",
       "0,5 se place au milieu entre 0 et 1."
     ),
+    // ⛔ 08/11/2026 : la figure montrait déjà « 0,5 » à sa place. La droite vide suffit.
     canvas: numberLineCanvas({
       min: 0,
       max: 1,
-      step: 0.1,
-      value: 0.5,
-      label: "0,5",
+      step: 1,
     }),
     tags: ["cm2", "nombre_decimal", "droite_graduee", "canvas"],
   },
 
-  {
-    kind: "template",
-    id: "cm2_decimal_droite_tpl_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_droite",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Chaque graduation vaut 0,1.",
-    tags: ["cm2", "nombre_decimal", "droite_graduee", "template", "canvas"],
-    generate: () => {
-      const tenth = randomInt(1, 9);
-      const value = tenth / 10;
-
-      return {
-        text: `Quelle valeur est placée sur la droite graduée ?`,
-        format: "short",
-        expected: expectedDecimal(value),
-        comparator: "number_equal",
-        explanation: exp(
-          "Sur une droite graduée, chaque point correspond à un nombre.",
-          "Ici, chaque graduation vaut un dixième.",
-          `Le point est placé à ${formatComma(value)}.`,
-          `La réponse est ${formatComma(value)}.`
-        ),
-        canvas: numberLineCanvas({
-          min: 0,
-          max: 1,
-          step: 0.1,
-          value,
-          label: "?",
-        }),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_decimal_droite_tpl_2_intervalle",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_droite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Repère l’intervalle entre deux entiers.",
-    tags: ["cm2", "nombre_decimal", "droite_graduee", "template", "canvas"],
-    generate: () => {
-      const start = randomInt(1, 5);
-      const tenth = randomChoice([2, 4, 5, 7, 8]);
-      const value = start + tenth / 10;
-
-      return {
-        text: "Quelle valeur est indiquée par le point sur la droite graduée ?",
-        format: "short",
-        expected: expectedDecimal(value),
-        comparator: "number_equal",
-        explanation: exp(
-          "Un nombre décimal peut se placer entre deux entiers.",
-          "On part de l’entier puis on avance de dixièmes.",
-          `Le point est placé à ${formatComma(value)}.`,
-          `La réponse est ${formatComma(value)}.`
-        ),
-        canvas: numberLineCanvas({
-          min: start,
-          max: start + 1,
-          step: 0.1,
-          value,
-          label: "?",
-        }),
-      };
-    },
-  },
+  // ⛔ 08/11/2026 : 3 squelettes, 18 répétitions sur 20, et la figure écrivait
+  // chaque dixième (la réponse sous le point « ? ») → générateurs communs CM1/CM2.
+  ...gabaritsDecimalDroite("cm2", {
+    lire2: "cm2_decimal_droite_tpl_1",
+    placer2: "cm2_decimal_droite_tpl_3_placer",
+    lire3: "cm2_decimal_droite_tpl_2_intervalle",
+    placer3: "cm2_decimal_droite_tpl_4_placer_entre_entiers",
+    verifier: "cm2_decimal_droite_tpl_5_verifier",
+    fraction: "cm2_decimal_droite_tpl_6_fraction",
+    zero: "cm2_decimal_droite_tpl_7_zero_final",
+  }),
 
   // ============================================================
   // DECIMAL_ARRONDIR

@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/cm1/decimaux.bank.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { gabaritsDecimalDroite } from "./decimal-droite.gen";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -74,7 +75,11 @@ function droiteGradueeFractionCanvas(data: {
     kind: "number_line" as const,
     min: 0,
     max: 1,
-    step: 1 / data.denominator,
+    // ⛔ 08/11/2026 : `step: 1/10` écrivait chaque dixième sous son trait, et
+    // « 0,7 » s'affichait juste sous le point « ? ». Seuls 0 et 1 sont écrits ;
+    // les dixièmes restent de petits traits sans nombre.
+    step: 1,
+    minorStep: 1 / data.denominator,
     points: [
       {
         value: data.numerator / data.denominator,
@@ -2654,201 +2659,17 @@ export const decimauxBank: TutorBankItemV4[] = [
     tags: ["cm1", "decimal", "droite", "open", "erreur", "canvas"],
   },
 
-  {
-    kind: "template",
-    id: "cm1_decimal_droite_tpl_001_identifier_decimal",
-    niveau: "cm1",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_droite",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le trait indique le nombre de dixièmes.",
-    tags: ["cm1", "decimal", "droite", "identifier", "template", "canvas"],
-    generate: () => {
-      const numerator = randomInt(1, 9);
-      const correct = `0,${numerator}`;
-
-      return {
-        text: `Une droite de 0 à 1 est partagée en 10 parts égales. Le point est au ${numerator}e trait après 0. Quel nombre décimal représente-t-il ?`,
-        format: "qcm",
-        choices: makeChoices(correct, [
-          `0,0${numerator}`,
-          `${numerator},0`,
-          `${numerator}/100`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Sur une droite partagée en 10 parts égales, chaque part représente un dixième.",
-          "On compte le nombre de traits depuis 0.",
-          `Le point est au ${numerator}e trait, donc il représente ${numerator} dixième${numerator > 1 ? "s" : ""}.`,
-          `Le nombre décimal est ${correct}.`
-        ),
-        canvas: droiteGradueeFractionCanvas({
-          denominator: 10,
-          numerator,
-          label: "?",
-        }),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm1_decimal_droite_tpl_002_numero_trait",
-    niveau: "cm1",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_droite",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "0,6 signifie 6 dixièmes : on avance de 6 traits.",
-    tags: ["cm1", "decimal", "droite", "trait", "template", "qcm", "canvas"],
-    generate: () => {
-      const numerator = randomInt(1, 9);
-      const decimal = `0,${numerator}`;
-      const correct = `${numerator}e trait`;
-
-      return {
-        text: `Sur une droite de 0 à 1 partagée en 10 parts égales, à quel trait après 0 se place ${decimal} ?`,
-        format: "qcm",
-        choices: makeChoices(correct, [
-          "1er trait",
-          "10e trait",
-          `${Math.max(1, 10 - numerator)}e trait`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un nombre décimal en dixièmes indique une position sur une droite graduée.",
-          "Le chiffre des dixièmes indique le nombre de traits à compter.",
-          `${decimal} signifie ${numerator} dixième${numerator > 1 ? "s" : ""}.`,
-          `Il se place au ${numerator}e trait après 0.`
-        ),
-        canvas: droiteGradueeFractionCanvas({
-          denominator: 10,
-          numerator,
-          label: "?",
-        }),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm1_decimal_droite_tpl_003_verifier_position",
-    niveau: "cm1",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_droite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Vérifie le chiffre des dixièmes.",
-    tags: ["cm1", "decimal", "droite", "verifier", "template", "qcm", "canvas"],
-    generate: () => {
-      const numerator = randomInt(2, 8);
-      const wrongTrait = numerator + randomChoice([-1, 1]);
-      const decimal = `0,${numerator}`;
-
-      return {
-        text: `Une droite de 0 à 1 est partagée en 10 parts égales. Un élève place ${decimal} au ${wrongTrait}e trait après 0. A-t-il raison ?`,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: ["non"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Sur une droite graduée en dixièmes, le chiffre des dixièmes indique le bon trait.",
-          "On doit compter les traits depuis 0.",
-          `${decimal} se place au ${numerator}e trait, pas au ${wrongTrait}e.`,
-          "L’élève n’a pas raison."
-        ),
-        canvas: droiteGradueeFractionCanvas({
-          denominator: 10,
-          numerator,
-          label: "?",
-        }),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm1_decimal_droite_tpl_004_fraction_lien",
-    niveau: "cm1",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_droite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Une fraction sur 10 peut se lire en dixièmes.",
-    tags: ["cm1", "decimal", "droite", "fraction", "template", "qcm", "canvas"],
-    generate: () => {
-      const numerator = randomInt(1, 9);
-      const fraction = `${numerator}/10`;
-      const correct = `0,${numerator}`;
-
-      return {
-        text: `Le point placé en ${fraction} sur une droite graduée correspond à quel nombre décimal ?`,
-        format: "qcm",
-        choices: makeChoices(correct, [
-          `0,0${numerator}`,
-          `${numerator},10`,
-          `${numerator},0`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une fraction décimale peut être placée sur une droite graduée.",
-          "Un dénominateur 10 indique des dixièmes.",
-          `${fraction} signifie ${numerator} dixième${numerator > 1 ? "s" : ""}.`,
-          `Le nombre décimal correspondant est ${correct}.`
-        ),
-        canvas: droiteGradueeFractionCanvas({
-          denominator: 10,
-          numerator,
-          label: "?",
-        }),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm1_decimal_droite_tpl_005_zero_final",
-    niveau: "cm1",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_droite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Un zéro final ne change pas la valeur.",
-    tags: ["cm1", "decimal", "droite", "zero_final", "template", "qcm", "canvas"],
-    generate: () => {
-      const numerator = randomInt(1, 9);
-      const n1 = `0,${numerator}`;
-      const n2 = `0,${numerator}0`;
-
-      return {
-        text: `Sur une droite graduée, ${n1} et ${n2} se placent-ils au même endroit ?`,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: ["oui"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un zéro final après la virgule ne change pas la valeur du nombre.",
-          `${n1} et ${n2} représentent le même nombre.`,
-          "Ils se placent donc au même endroit sur la droite graduée.",
-          "La bonne réponse est oui."
-        ),
-        canvas: droiteGradueeFractionCanvas({
-          denominator: 10,
-          numerator,
-          label: "?",
-        }),
-      };
-    },
-  },
+  // ⛔ 08/11/2026 : 9 squelettes, 15 répétitions sur 20 → générateurs communs CM1/CM2
+  // (decimal-droite.gen.ts), mêmes ids, plus deux gabarits ★3 (lire, placer).
+  ...gabaritsDecimalDroite("cm1", {
+    lire2: "cm1_decimal_droite_tpl_001_identifier_decimal",
+    placer2: "cm1_decimal_droite_tpl_002_numero_trait",
+    verifier: "cm1_decimal_droite_tpl_003_verifier_position",
+    fraction: "cm1_decimal_droite_tpl_004_fraction_lien",
+    zero: "cm1_decimal_droite_tpl_005_zero_final",
+    lire3: "cm1_decimal_droite_tpl_006_lire_situation",
+    placer3: "cm1_decimal_droite_tpl_007_placer_entre_entiers",
+  }),
     // ============================================================
   // DECIMAL_ARRONDIR
   // Arrondir un nombre décimal simple
