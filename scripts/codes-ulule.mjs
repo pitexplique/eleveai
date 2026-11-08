@@ -3,7 +3,7 @@
 //
 //   node scripts/codes-ulule.mjs --nombre 40 --duree 1 --type famille
 //   node scripts/codes-ulule.mjs --nombre 10 --duree 12 --type cadeau --lot ulule-cadeau-1an
-//   node scripts/codes-ulule.mjs --nombre 1 --duree 12 --type classe --eleves 28
+//   node scripts/codes-ulule.mjs --nombre 1 --duree 12 --type classe --eleves 30
 //   … --inserer   écrit aussi les codes dans Supabase (table codes_abonnement)
 //
 // Sortie dans docs/codes-ulule/ (ignoré par git : les codes ne quittent pas ce poste) :

@@ -20,8 +20,9 @@ Aucune variable Vercel à ajouter. `/code` ne dépend pas de `VENTE.ouverte` : U
 
 ```
 node scripts/codes-ulule.mjs --nombre 40 --duree 1 --type famille --lot ulule-famille-1m
+node scripts/codes-ulule.mjs --nombre 20 --duree 3 --type famille --lot ulule-famille-3m
 node scripts/codes-ulule.mjs --nombre 15 --duree 12 --type cadeau --lot ulule-cadeau-1an
-node scripts/codes-ulule.mjs --nombre 1 --duree 12 --type classe --eleves 28 --lot ulule-classe-college-x
+node scripts/codes-ulule.mjs --nombre 1 --duree 12 --type classe --eleves 30 --lot ulule-classe-college-x
 ```
 
 Chaque commande écrit `docs/codes-ulule/<lot>.csv` (pour l'envoi) et `<lot>.sql` (à coller dans Supabase).
@@ -56,4 +57,4 @@ update abonnements set acces_jusquau = now() where statut = 'code' and email = '
 - Licence classe : le code est enregistré au compte du prof, mais rien ne s'ouvre tout seul. La page lui
   demande d'écrire par /contact.
 - Essai local sans base : configuration `eleveai-codes` de `.claude/launch.json` (port 3600, `CODES_ESSAI=1`),
-  codes MARGO-TEST-FAM2, -CAD6, -UNAN, -KAZ3 (classe), -PR57 (déjà utilisé). Jamais actif en production.
+  codes MARGO-TEST-FAM2 (1 mois), -TR3M (3 mois), -CAD6, -UNAN, -KAZ3 (classe 30), -PR57 (déjà utilisé). Jamais actif en production.

@@ -40,9 +40,10 @@ function memoire(): Memoire {
     g.__codesEssai = {
       codes: new Map<string, CodeEnMemoire>([
         ["MARGO-TEST-FAM2", code(1, "famille")],
+        ["MARGO-TEST-TR3M", code(3, "cadeau")],
         ["MARGO-TEST-CAD6", code(6, "cadeau")],
         ["MARGO-TEST-UNAN", code(12, "cadeau")],
-        ["MARGO-TEST-KAZ3", code(12, "classe", 28)],
+        ["MARGO-TEST-KAZ3", code(12, "classe", 30)],
         // Déjà utilisé par un autre compte, pour voir le message.
         ["MARGO-TEST-PR57", { ...code(2, "famille"), utilise: true, utilise_par: "un-autre-compte" }],
       ]),
