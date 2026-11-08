@@ -4,6 +4,24 @@ Notions du coach `divisibilite` (7 micros) et `nombre_premier` (4 micros). Une p
 
 Modèle : la série Relatifs 4e (`manim/REPRISE-relatifs.md`, à lire en entier). Règles : `manim/REGLES.md`. Shorts : socle commun `prototypes/ti-margo/LISEZ-MOI.md` + `scripts/ti-margo-short.mjs` (ne pas recopier de page).
 
+## ✅ ÉTAT FINAL 08/11 matin (après la passe finale) : à lire en premier
+
+**Les 22 vidéos sont rendues, contrôlées et sur R2 (77 fichiers vérifiés à la taille). Rien n'est poussé, rien sur YouTube, le coach n'est pas branché, rien n'a été écouté.**
+Commits : `92aff69f` (manifeste HEAD + 22 entrées, `manim/miniature_divisibilite.py`, `manim/passe_divisibilite.py`), `1bfeb0fe` (les 10 films, barre du compte à rebours), `820415f9` (table R2 + feuilles bilan, HEAD + nos 22 entrées).
+
+- Miniatures des 11 paysages : `python manim/miniature_divisibilite.py` (« COMPRENDRE X », « EN N MIN » lu dans le mp4, ceinture), regardées ; vignettes webp refaites (`scripts/vignettes-videos.py`).
+- Manifeste : 22 entrées `4e-div-*` et `4e-premier-*`, `pas_avant: 2026-12-01` (prudence). Chapitres et questions relevés dans l'AUDIO des mp4 (`python manim/passe_divisibilite.py temps`, puis `manifeste`), pas estimés ; les chapitres de moins de 10 s sont réunis automatiquement (2-5-10, 08, 10). Playlists Cycle 4 + CRPE : calculées par `publier-youtube.mjs` depuis la classe. `fiche-youtube.md` dans chaque dossier (`scripts/fiches-youtube.py 4e-div`, `4e-premier`).
+- Barre du compte à rebours : `div#rebours{display:block;}` ajouté au style de chacun des 10 autres films (seul `divisibilite-probleme.js` l'avait) ; les 10 shorts re-rendus, barre vue sur les 11, planches 01, 03, 09 regardées, durées image = son, `_muet.mp4` effacés. Coupes de `LecteurVideo.tsx` recontrôlées (mp4 − (« Mets » + 0,03)) : écarts ≤ 0,01 s, rien changé.
+- R2 : `scripts/r2-videos.ps1 -Rclone "copy manim/sorties/4e/maths/divisibilite R2:4e/maths/divisibilite --include *.{mp4,png,jpg,webp}"` (jamais `-Envoyer`), puis `check --size-only` : 0 différence.
+- `Validé : non` reste dans les 11 `publication.md`.
+
+**Il reste, sur l'ordre de Frédéric SEULEMENT :**
+1. Écoute : les bruitages des shorts, et le son en général (rien n'a été écouté).
+2. Push, le soir.
+3. Après le push seulement, en production :
+   `node scripts/brancher-videos-coach.mjs --id 4e-div-multiple,4e-div-multiple-short,4e-div-critere-2-5-10,4e-div-critere-2-5-10-short,4e-div-critere-3-9,4e-div-critere-3-9-short,4e-div-euclidienne,4e-div-euclidienne-short,4e-div-diviseurs,4e-div-diviseurs-short,4e-div-probleme,4e-div-probleme-short,4e-div-defi,4e-div-defi-short,4e-premier-definition,4e-premier-definition-short,4e-premier-determiner,4e-premier-determiner-short,4e-premier-decomposer,4e-premier-decomposer-short,4e-premier-defi,4e-premier-defi-short --ecrire`
+4. YouTube : date à choisir à la place du `pas_avant` de prudence.
+
 ## ✅ 08/11 4 h 30 : LES 22 VIDÉOS RENDUES ET COMMITTÉES (pas poussées)
 
 Frédéric a dit « ok » au pilote 05 ; les 20 autres faites sans redemander, un agent par épisode.
