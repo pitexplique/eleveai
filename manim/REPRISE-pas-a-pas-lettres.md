@@ -59,5 +59,8 @@ Mis à jour le 08/11 vers 15 h 30 :
 - Rien n'est encore copié dans sorties, envoyé sur R2 ni mis au manifeste.
 - Les WAV `public/sons/cp-pas-a-pas-lettre-*` et les dossiers `manim/scripts/cp/media-pap-*` ne sont PAS dans git
   (comme pour les chiffres) : ne pas les committer.
+- Outils prêts dans `C:\Users\FRED\AppData\Local\Claude-Data\claude_pzs8sxrjxfjjc\side-session-notes\local_6863753c-8533-4a44-9164-e0f03f9326cb\` :
+  `rendre.sh <lettres>` (rendus en parallèle) et `controle.py <lettres>` (durées, bords, `planche-<x>.png`).
+  ⚠️ Changer la variable `S` (dossier des journaux) en tête des deux fichiers pour pointer vers ton scratchpad.
 👉 Prochaine étape : rendre les 20 lettres par lots de 5
 (i f a m g, puis c d e h k, puis l n o p q, puis r s t u y), contrôler chaque planche, et enchaîner sur « Reste à faire ».
