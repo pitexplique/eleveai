@@ -52,7 +52,7 @@ Le message de promesse, à envoyer **la semaine avant** :
 ## 4. Le reste à faire
 
 - [ ] Saisir la grille des contreparties sur Ulule (`page-ulule.md`, section 6) : 4,95 € / 12 € / 22 € / 39 €, et les mêmes « à offrir ».
-- [ ] Trancher le prix de la licence classe (proposé : 60 € pour 30 élèves, soit 2 € par élève et par an).
+- [x] Licence classe : **60 € pour 30 élèves pendant 1 an** (validé le 08/11).
 - [ ] Coller la description (`description-ulule.html`) et la vidéo https://youtu.be/HQ7B3ElMH8Y.
 - [ ] Ajouter **l'anecdote d'un élève** (sans prénom) au texte, s'il en a une.
 - [ ] Une fois la page créée : mettre **le lien Ulule dans la description YouTube** de la vidéo de présentation.
