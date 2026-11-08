@@ -62157,7 +62157,8 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-reconnaitre-short",
@@ -62204,11 +62205,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-traduire",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-25",
       "notionId": "equation_resolution",
       "microId": "equation_traduire",
       "classe": "4e",
@@ -62305,11 +62307,12 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-traduire-short",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-25",
       "notionId": "equation_resolution",
       "microId": "equation_traduire",
       "classe": "4e",
@@ -62352,11 +62355,12 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-resoudre-simple",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-26",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_simple",
       "classe": "4e",
@@ -62461,11 +62465,12 @@
       "centres": [
         "animaux",
         "chiens-chats"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-resoudre-simple-short",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-26",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_simple",
       "classe": "4e",
@@ -62507,11 +62512,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-resoudre-reduction",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-27",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_reduction",
       "classe": "4e",
@@ -62613,11 +62619,12 @@
       "centres": [
         "course-trail",
         "sport"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-resoudre-reduction-short",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-27",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_reduction",
       "classe": "4e",
@@ -62659,11 +62666,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-resoudre-distributivite",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-28",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_distributivite",
       "classe": "4e",
@@ -62761,11 +62769,12 @@
       "centres": [
         "electro-dj",
         "musique"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-resoudre-distributivite-short",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-28",
       "notionId": "equation_resolution",
       "microId": "equation_resoudre_distributivite",
       "classe": "4e",
@@ -62807,11 +62816,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-verifier",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-29",
       "notionId": "equation_resolution",
       "microId": "equation_verifier",
       "classe": "4e",
@@ -62913,11 +62923,12 @@
       "centres": [
         "espace",
         "sciences"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-verifier-short",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-29",
       "notionId": "equation_resolution",
       "microId": "equation_verifier",
       "classe": "4e",
@@ -62959,11 +62970,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-defi",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-30",
       "notionId": "equation_resolution",
       "microId": "equation_defi",
       "classe": "4e",
@@ -63059,11 +63071,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-defi-short",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-11-30",
       "notionId": "equation_resolution",
       "microId": "equation_defi",
       "classe": "4e",
@@ -63105,11 +63118,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-probleme",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-12-01",
       "notionId": "equation_resolution",
       "microId": "equation_probleme",
       "classe": "4e",
@@ -63214,11 +63228,12 @@
       ],
       "centres": [
         "nature-ecologie"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-equation-probleme-short",
-      "pas_avant": "2026-11-24",
+      "pas_avant": "2026-12-01",
       "notionId": "equation_resolution",
       "microId": "equation_probleme",
       "classe": "4e",
@@ -63260,11 +63275,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-addition",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-09",
       "notionId": "relatif_operation",
       "microId": "relatif_addition",
       "classe": "4e",
@@ -63368,11 +63384,12 @@
       ],
       "centres": [
         "jeux-video"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-addition-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-09",
       "notionId": "relatif_operation",
       "microId": "relatif_addition",
       "classe": "4e",
@@ -63415,11 +63432,12 @@
       ],
       "centres": [
         "jeux-video"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-soustraction",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-13",
       "notionId": "relatif_operation",
       "microId": "relatif_soustraction",
       "classe": "4e",
@@ -63523,11 +63541,12 @@
       ],
       "centres": [
         "meteo-climat"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-soustraction-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-13",
       "notionId": "relatif_operation",
       "microId": "relatif_soustraction",
       "classe": "4e",
@@ -63570,11 +63589,12 @@
       ],
       "centres": [
         "meteo-climat"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-multiplication",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-17",
       "notionId": "relatif_operation",
       "microId": "relatif_multiplication",
       "classe": "4e",
@@ -63683,11 +63703,12 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-multiplication-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-17",
       "notionId": "relatif_operation",
       "microId": "relatif_multiplication",
       "classe": "4e",
@@ -63731,11 +63752,12 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-division",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-21",
       "notionId": "relatif_operation",
       "microId": "relatif_division",
       "classe": "4e",
@@ -63839,11 +63861,12 @@
       ],
       "centres": [
         "animaux"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-division-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-21",
       "notionId": "relatif_operation",
       "microId": "relatif_division",
       "classe": "4e",
@@ -63886,11 +63909,12 @@
       ],
       "centres": [
         "animaux"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-calcul",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-25",
       "notionId": "relatif_operation",
       "microId": "relatif_calcul",
       "classe": "4e",
@@ -63994,11 +64018,12 @@
       ],
       "centres": [
         "technologie-ia"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-calcul-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-25",
       "notionId": "relatif_operation",
       "microId": "relatif_calcul",
       "classe": "4e",
@@ -64041,11 +64066,12 @@
       ],
       "centres": [
         "technologie-ia"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-probleme",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-29",
       "notionId": "relatif_operation",
       "microId": "relatif_probleme",
       "classe": "4e",
@@ -64146,11 +64172,12 @@
       "centres": [
         "sport",
         "nature-ecologie"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-probleme-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-29",
       "notionId": "relatif_operation",
       "microId": "relatif_probleme",
       "classe": "4e",
@@ -64194,11 +64221,12 @@
       "centres": [
         "sport",
         "nature-ecologie"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-defi",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-02",
       "notionId": "relatif_operation",
       "microId": "relatif_operation_defi",
       "classe": "4e",
@@ -64298,11 +64326,12 @@
       ],
       "centres": [
         "histoire-geographie"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-relatif-defi-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-02",
       "notionId": "relatif_operation",
       "microId": "relatif_operation_defi",
       "classe": "4e",
@@ -64345,11 +64374,12 @@
       ],
       "centres": [
         "histoire-geographie"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-nommer",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-09",
       "notionId": "triangle_figure",
       "microId": "triangle_nommer",
       "classe": "6e",
@@ -64440,11 +64470,12 @@
       "centres": [
         "jeux-video",
         "art-design"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-nommer-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-09",
       "notionId": "triangle_figure",
       "microId": "triangle_nommer",
       "classe": "6e",
@@ -64486,11 +64517,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-sommet-cote",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-12",
       "notionId": "triangle_figure",
       "microId": "triangle_sommet_cote",
       "classe": "6e",
@@ -64587,11 +64619,12 @@
       ],
       "centres": [
         "espace"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-sommet-cote-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-12",
       "notionId": "triangle_figure",
       "microId": "triangle_sommet_cote",
       "classe": "6e",
@@ -64634,11 +64667,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-type-cote",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-16",
       "notionId": "triangle_figure",
       "microId": "triangle_type_cote",
       "classe": "6e",
@@ -64742,11 +64776,12 @@
       ],
       "centres": [
         "art-design"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-type-cote-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-16",
       "notionId": "triangle_figure",
       "microId": "triangle_type_cote",
       "classe": "6e",
@@ -64790,11 +64825,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-type-angle",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-20",
       "notionId": "triangle_figure",
       "microId": "triangle_type_angle",
       "classe": "6e",
@@ -64898,11 +64934,12 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-type-angle-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-20",
       "notionId": "triangle_figure",
       "microId": "triangle_type_angle",
       "classe": "6e",
@@ -64946,11 +64983,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-defi",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-24",
       "notionId": "triangle_figure",
       "microId": "triangle_defi",
       "classe": "6e",
@@ -65046,11 +65084,12 @@
       "centres": [
         "cuisine",
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-defi-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-24",
       "notionId": "triangle_figure",
       "microId": "triangle_defi",
       "classe": "6e",
@@ -65093,11 +65132,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-somme-angle",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-28",
       "notionId": "triangle_propriete",
       "microId": "triangle_somme_angle",
       "classe": "6e",
@@ -65201,11 +65241,12 @@
       "centres": [
         "sciences",
         "histoire-geographie"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-somme-angle-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-28",
       "notionId": "triangle_propriete",
       "microId": "triangle_somme_angle",
       "classe": "6e",
@@ -65248,11 +65289,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-angle-manquant",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-02",
       "notionId": "triangle_propriete",
       "microId": "triangle_angle_manquant",
       "classe": "6e",
@@ -65348,11 +65390,12 @@
       "centres": [
         "art-design",
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-angle-manquant-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-02",
       "notionId": "triangle_propriete",
       "microId": "triangle_angle_manquant",
       "classe": "6e",
@@ -65395,11 +65438,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-possible-ou-non",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-04",
       "notionId": "triangle_propriete",
       "microId": "triangle_possible_ou_non",
       "classe": "6e",
@@ -65499,11 +65543,12 @@
       "centres": [
         "transports",
         "sport"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-possible-ou-non-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-04",
       "notionId": "triangle_propriete",
       "microId": "triangle_possible_ou_non",
       "classe": "6e",
@@ -65546,11 +65591,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-propriete-defi",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-05",
       "notionId": "triangle_propriete",
       "microId": "triangle_propriete_defi",
       "classe": "6e",
@@ -65650,11 +65696,12 @@
       "centres": [
         "reseaux-sociaux",
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-triangle-propriete-defi-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-05",
       "notionId": "triangle_propriete",
       "microId": "triangle_propriete_defi",
       "classe": "6e",
@@ -65697,11 +65744,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-lire-ecrire",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-10",
       "notionId": "decimal_nombre",
       "microId": "decimal_lire_ecrire",
       "classe": "6e",
@@ -65801,11 +65849,12 @@
       ],
       "centres": [
         "animaux"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-lire-ecrire-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-10",
       "notionId": "decimal_nombre",
       "microId": "decimal_lire_ecrire",
       "classe": "6e",
@@ -65848,11 +65897,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-rang",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-14",
       "notionId": "decimal_nombre",
       "microId": "decimal_rang",
       "classe": "6e",
@@ -65950,11 +66000,12 @@
       "centres": [
         "sport",
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-rang-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-14",
       "notionId": "decimal_nombre",
       "microId": "decimal_rang",
       "classe": "6e",
@@ -65997,11 +66048,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-comparer",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-18",
       "notionId": "decimal_nombre",
       "microId": "decimal_comparer",
       "classe": "6e",
@@ -66101,11 +66153,12 @@
       ],
       "centres": [
         "animaux-marins"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-comparer-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-18",
       "notionId": "decimal_nombre",
       "microId": "decimal_comparer",
       "classe": "6e",
@@ -66148,11 +66201,12 @@
       ],
       "centres": [
         "cuisine"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-arrondir",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-22",
       "notionId": "decimal_nombre",
       "microId": "decimal_arrondir",
       "classe": "6e",
@@ -66248,11 +66302,12 @@
       ],
       "centres": [
         "meteo-climat"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-arrondir-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-22",
       "notionId": "decimal_nombre",
       "microId": "decimal_arrondir",
       "classe": "6e",
@@ -66295,11 +66350,12 @@
       ],
       "centres": [
         "cuisine"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-encadrer",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-26",
       "notionId": "decimal_nombre",
       "microId": "decimal_encadrer",
       "classe": "6e",
@@ -66395,11 +66451,12 @@
       ],
       "centres": [
         "espace"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-encadrer-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-26",
       "notionId": "decimal_nombre",
       "microId": "decimal_encadrer",
       "classe": "6e",
@@ -66442,11 +66499,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-defi",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-30",
       "notionId": "decimal_nombre",
       "microId": "decimal_defi",
       "classe": "6e",
@@ -66538,11 +66596,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-defi-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-30",
       "notionId": "decimal_nombre",
       "microId": "decimal_defi",
       "classe": "6e",
@@ -66585,11 +66644,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-additionner",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-03",
       "notionId": "decimal_calcul",
       "microId": "decimal_additionner",
       "classe": "6e",
@@ -66690,11 +66750,12 @@
       "centres": [
         "cuisine",
         "argent-budget"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-additionner-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-03",
       "notionId": "decimal_calcul",
       "microId": "decimal_additionner",
       "classe": "6e",
@@ -66737,11 +66798,12 @@
       ],
       "centres": [
         "argent-budget"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-multiplier",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-04",
       "notionId": "decimal_calcul",
       "microId": "decimal_multiplier",
       "classe": "6e",
@@ -66841,11 +66903,12 @@
       ],
       "centres": [
         "nature-ecologie"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-multiplier-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-04",
       "notionId": "decimal_calcul",
       "microId": "decimal_multiplier",
       "classe": "6e",
@@ -66888,11 +66951,12 @@
       ],
       "centres": [
         "argent-budget"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-multiplier-decimaux",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-06",
       "notionId": "decimal_calcul",
       "microId": "decimal_multiplier_decimaux",
       "classe": "6e",
@@ -66992,11 +67056,12 @@
       ],
       "centres": [
         "construction"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-multiplier-decimaux-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-06",
       "notionId": "decimal_calcul",
       "microId": "decimal_multiplier_decimaux",
       "classe": "6e",
@@ -67039,11 +67104,12 @@
       ],
       "centres": [
         "cuisine"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-multiplier-par-01",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-07",
       "notionId": "decimal_calcul",
       "microId": "decimal_multiplier_par_01",
       "classe": "6e",
@@ -67139,11 +67205,12 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-multiplier-par-01-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-07",
       "notionId": "decimal_calcul",
       "microId": "decimal_multiplier_par_01",
       "classe": "6e",
@@ -67186,11 +67253,12 @@
       ],
       "centres": [
         "dinosaures"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-diviser-par-entier",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-08",
       "notionId": "decimal_calcul",
       "microId": "decimal_diviser_par_entier",
       "classe": "6e",
@@ -67286,11 +67354,12 @@
       ],
       "centres": [
         "musique"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-diviser-par-entier-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-08",
       "notionId": "decimal_calcul",
       "microId": "decimal_diviser_par_entier",
       "classe": "6e",
@@ -67333,11 +67402,12 @@
       ],
       "centres": [
         "argent-budget"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-calcul-defi",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-09",
       "notionId": "decimal_calcul",
       "microId": "decimal_calcul_defi",
       "classe": "6e",
@@ -67438,11 +67508,12 @@
       "centres": [
         "jeux-video",
         "argent-budget"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-decimal-calcul-defi-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-09",
       "notionId": "decimal_calcul",
       "microId": "decimal_calcul_defi",
       "classe": "6e",
@@ -67486,11 +67557,12 @@
       "centres": [
         "jeux-video",
         "argent-budget"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-multiple",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-11",
       "notionId": "divisibilite",
       "microId": "div_multiple_diviseur",
       "classe": "4e",
@@ -67592,11 +67664,12 @@
       "centres": [
         "musique",
         "art-design"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-multiple-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-11",
       "notionId": "divisibilite",
       "microId": "div_multiple_diviseur",
       "classe": "4e",
@@ -67641,11 +67714,12 @@
       "centres": [
         "musique",
         "art-design"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-critere-2-5-10",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-15",
       "notionId": "divisibilite",
       "microId": "div_critere_2_5_10",
       "classe": "4e",
@@ -67738,11 +67812,12 @@
       ],
       "centres": [
         "cuisine"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-critere-2-5-10-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-15",
       "notionId": "divisibilite",
       "microId": "div_critere_2_5_10",
       "classe": "4e",
@@ -67786,11 +67861,12 @@
       ],
       "centres": [
         "cuisine"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-critere-3-9",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-19",
       "notionId": "divisibilite",
       "microId": "div_critere_3_9",
       "classe": "4e",
@@ -67887,11 +67963,12 @@
       ],
       "centres": [
         "transports"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-critere-3-9-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-19",
       "notionId": "divisibilite",
       "microId": "div_critere_3_9",
       "classe": "4e",
@@ -67935,11 +68012,12 @@
       ],
       "centres": [
         "transports"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-euclidienne",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-23",
       "notionId": "divisibilite",
       "microId": "div_euclidienne",
       "classe": "4e",
@@ -68036,11 +68114,12 @@
       ],
       "centres": [
         "corps-sante"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-euclidienne-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-23",
       "notionId": "divisibilite",
       "microId": "div_euclidienne",
       "classe": "4e",
@@ -68084,11 +68163,12 @@
       ],
       "centres": [
         "corps-sante"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-diviseurs",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-27",
       "notionId": "divisibilite",
       "microId": "div_lister_diviseurs",
       "classe": "4e",
@@ -68184,11 +68264,12 @@
       ],
       "centres": [
         "nature-ecologie"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-diviseurs-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-11-27",
       "notionId": "divisibilite",
       "microId": "div_lister_diviseurs",
       "classe": "4e",
@@ -68232,7 +68313,8 @@
       ],
       "centres": [
         "nature-ecologie"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-probleme",
@@ -68337,7 +68419,8 @@
       ],
       "centres": [
         "espace"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-probleme-short",
@@ -68385,11 +68468,12 @@
       ],
       "centres": [
         "espace"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-defi",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-03",
       "notionId": "divisibilite",
       "microId": "div_defi",
       "classe": "4e",
@@ -68485,11 +68569,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-div-defi-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-03",
       "notionId": "divisibilite",
       "microId": "div_defi",
       "classe": "4e",
@@ -68533,11 +68618,12 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-premier-definition",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-05",
       "notionId": "nombre_premier",
       "microId": "premier_definition",
       "classe": "4e",
@@ -68629,11 +68715,12 @@
       ],
       "centres": [
         "art-design"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-premier-definition-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-05",
       "notionId": "nombre_premier",
       "microId": "premier_definition",
       "classe": "4e",
@@ -68676,11 +68763,12 @@
       ],
       "centres": [
         "art-design"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-premier-determiner",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-06",
       "notionId": "nombre_premier",
       "microId": "premier_determiner",
       "classe": "4e",
@@ -68777,11 +68865,12 @@
       "centres": [
         "animaux",
         "sciences"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-premier-determiner-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-06",
       "notionId": "nombre_premier",
       "microId": "premier_determiner",
       "classe": "4e",
@@ -68825,11 +68914,12 @@
       "centres": [
         "animaux",
         "sciences"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-premier-decomposer",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-07",
       "notionId": "nombre_premier",
       "microId": "premier_decomposer",
       "classe": "4e",
@@ -68925,11 +69015,12 @@
       ],
       "centres": [
         "technologie-ia"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-premier-decomposer-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-07",
       "notionId": "nombre_premier",
       "microId": "premier_decomposer",
       "classe": "4e",
@@ -68973,11 +69064,12 @@
       ],
       "centres": [
         "technologie-ia"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-premier-defi",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-08",
       "notionId": "nombre_premier",
       "microId": "premier_defi",
       "classe": "4e",
@@ -69074,11 +69166,12 @@
       ],
       "centres": [
         "jeux-video"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "4e-premier-defi-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-08",
       "notionId": "nombre_premier",
       "microId": "premier_defi",
       "classe": "4e",
@@ -69122,7 +69215,8 @@
       ],
       "centres": [
         "jeux-video"
-      ]
+      ],
+      "prioritaire": true
     },
     {
       "id": "6e-demi-droite-lire",

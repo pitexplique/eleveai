@@ -650,7 +650,8 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
   // Une vidéo datée (`pas_avant`, calendrier validé par Frédéric) passe avant les
   // autres prioritaires : sa date tient même si la file est longue.
   const prioritaires = candidats.filter((x) => x.prioritaire)
-    .sort((a, b) => (b.pas_avant ? 1 : 0) - (a.pas_avant ? 1 : 0));
+    // 08/11 : la plus ancienne date d'abord (un retard ne passe plus derrière le jour).
+    .sort((a, b) => (a.pas_avant ?? "9999").localeCompare(b.pas_avant ?? "9999"));
   for (const v of prioritaires) {
     if (choisis.length >= limite || choisis.includes(v)) continue;
     if (v.type === "longue") {
