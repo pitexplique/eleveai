@@ -3044,6 +3044,96 @@
   "youtube": null,
   "coach": "/coach/serie?classe=5e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire&display=simple"
  },
+ "5e-puissance-calculer": {
+  "fichier": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer.mp4",
+  "poster": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer.png",
+  "vignette": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer.vignette.webp",
+  "titre": "3 + 4², ça ne fait pas 49 — Calculer avec des carrés et des cubes — épisode 4 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_calculer&display=simple"
+ },
+ "5e-puissance-calculer-short": {
+  "fichier": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer-short.mp4",
+  "poster": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer-short-miniature.png",
+  "vignette": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer-short-miniature.vignette.webp",
+  "titre": "2 + 3² = 25 : tu paries que j'ai gagné la peluche ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_calculer&display=simple"
+ },
+ "5e-puissance-ecrire": {
+  "fichier": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire.mp4",
+  "poster": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire.png",
+  "vignette": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire.vignette.webp",
+  "titre": "64 est un carré… et un cube ! Écrire un nombre avec un exposant — épisode 3 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_ecrire&display=simple"
+ },
+ "5e-puissance-ecrire-short": {
+  "fichier": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire-short.mp4",
+  "poster": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire-short-miniature.png",
+  "vignette": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire-short-miniature.vignette.webp",
+  "titre": "64 lanternes : tu paries que j'en fais un carré, et aussi un cube ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_ecrire&display=simple"
+ },
+ "5e-puissance-litteral": {
+  "fichier": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral.mp4",
+  "poster": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral.png",
+  "vignette": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral.vignette.webp",
+  "titre": "3x² avec x = 2, ça ne fait pas 36 — Une lettre au carré — épisode 5 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_litteral&display=simple"
+ },
+ "5e-puissance-litteral-short": {
+  "fichier": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral-short.mp4",
+  "poster": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral-short-miniature.png",
+  "vignette": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral-short-miniature.vignette.webp",
+  "titre": "Ma machine : x entre, x² + 1 sort. Avec 3, tu paries qu'elle sort 7 ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_litteral&display=simple"
+ },
+ "5e-puissance-notation": {
+  "fichier": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation.mp4",
+  "poster": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation.png",
+  "vignette": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation.vignette.webp",
+  "titre": "5², ce n'est pas 5 × 2 — Le carré et le cube — épisode 1 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_notation&display=simple"
+ },
+ "5e-puissance-notation-short": {
+  "fichier": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation-short.mp4",
+  "poster": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation-short-miniature.png",
+  "vignette": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation-short-miniature.vignette.webp",
+  "titre": "3 au cube, ça fait 9 ? Tu paries que c'est faux ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_notation&display=simple"
+ },
+ "5e-puissance-valeurs": {
+  "fichier": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs.mp4",
+  "poster": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs.png",
+  "vignette": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs.vignette.webp",
+  "titre": "Les carrés de 0 à 12, et l'astuce pour ne plus les oublier — épisode 2 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_valeurs&display=simple"
+ },
+ "5e-puissance-valeurs-short": {
+  "fichier": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs-short.mp4",
+  "poster": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs-short-miniature.png",
+  "vignette": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs-short-miniature.vignette.webp",
+  "titre": "12 au carré sans calculatrice : tu paries que tu le connais ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_valeurs&display=simple"
+ },
  "5e-relatif-nombre": {
   "fichier": "5e/maths/paysage/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre.mp4",
   "poster": "5e/maths/paysage/fr/relatif-nombre/eleveai-maths-5e-relatif-nombre.png",

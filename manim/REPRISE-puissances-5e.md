@@ -24,12 +24,32 @@ Réponses des questions en commentaire : 01 64 = 4³ ; 02 121 ; 03 49 = 7², 27 
 - Sorties : `manim/sorties/5e/maths/puissance-simple/NN-<slug>/eleveai-maths-5e-puissance-<slug>[-short].mp4`, miniatures, `publication.md` du short (`Validé : non`).
 - Passe finale : `manim/miniature_puissances_5e.py` (miniatures des paysages), `manim/passe_puissances_5e.py` (`temps`, puis `manifeste` : 10 entrées en AJOUT, `pas_avant: 2026-12-01`).
 
-## État au 08/11 (passage de main, session à 67 % de contexte)
-- 5 agents lancés (un par épisode, paysage puis short) sur `manim/BRIEF-puissances-5e.md`. Chacun committe PAR CHEMIN ses fichiers (script, marques, film, cues, publication.md) et écrit son rapport dans le dossier de notes de la session mère : `C:/Users/FRED/AppData/Local/Claude-Data/claude_pzs8sxrjxfjjc/side-session-notes/local_648c2a45-f9e1-4258-b678-117b00718a34/puissances-5e-NN.md` (questions, chapitres, coupes de fin, défauts).
-- Au passage : short 01 rendu et contrôlé (65,1 s) ; paysage 05 dry run propre, brouillon en cours ; 01, 02, 03 en dry run ou rendu ; 04 sans nouvelles. Fini = mp4 dans la sortie + rapport `puissances-5e-NN.md` + commit. Si plus rien ne bouge pendant 30 min dans un épisode : le reprendre soi-même depuis son script.
-- Outils prêts, NON committés : `manim/miniature_puissances_5e.py`, `manim/passe_puissances_5e.py` (round-trip du manifeste vérifié identique), cette note.
+## État au 08/11 à 09:40 : SÉRIE FINIE (10 vidéos relues, sur R2, au manifeste)
+| NN | paysage | short | coupe paysage / short |
+|---|---|---|---|
+| 01 notation | 191,9 s | 65,1 s | 8,4 / 4,17 |
+| 02 valeurs | 212,4 s | 74,4 s | 8,4 / 4,16 |
+| 03 ecrire | 202,2 s | 71,3 s | 8,4 / 4,17 |
+| 04 calculer | 193,9 s | 67,6 s | 8,4 / 4,17 |
+| 05 litteral | 178,9 s | 66,5 s | 8,4 / 4,18 |
 
-## Reste, dans l'ordre
+- Commits des agents : `24118f76` (01), `0df87f6f` (02), `a445ca3d` (03), `11cc6a20` (04), `e757335a` (05) ; relecture des paysages `b2a14f99` ; shorts relus `8d620f03` ; passe finale (manifeste, `videos-r2.json`, coupes, cette note) : commit suivant.
+- Toutes les planches HD regardées, `verifier-bords-video.py` = 0 sur les 5 paysages, aucun chapitre de moins de 10 s.
+- Corrigés à la relecture : interlignes (01), colonnes trop étroites (02), « 52 m² » collé au cadre (04), c² bleu sur bleu (05) ; short 03 : bords, lanternes coupées en haut, chiffres 8/4 rognés (police plus grande que sa toile) ; short 05 : jetons rognés ; miniatures des shorts 01, 03, 05.
+- ⚠️ Le piège des chiffres rognés : `ecran3d(l, h)` a une toile de l×256 px ; une police fixe de 150-200 px y déborde. Toujours `Math.round(h*0.85)`.
+- Coupe paysage : la fin de `page_abonnement` est identique partout (pause après « point f r » de 8,64 à 7,72 s avant la fin) → 8,4 s, comme les Relatifs (le 8,99 du rapport 05 coupait le « f r »).
+- R2 : `5e/maths/puissance-simple/` envoyé (35 fichiers, 183 Mo), `videos-r2.json` régénéré (10 entrées).
+- Manifeste : 10 entrées en AJOUT, `pas_avant: 2026-12-01`, `Validé : non` dans les publication.md (hors git). Fiches YouTube écrites.
+- Coach en lecture : les 10 vidéos sont prêtes à brancher, micros reconnues, rien écrit.
+
+## Reste
+1. Frédéric écoute les 10 vidéos (voix écrites sans relecture à deux, bruitages des shorts).
+2. Push du soir (avec la notion 5e `puissance_simple` du coach, pas encore poussée).
+3. APRÈS le push et sur son ordre : `node scripts/brancher-videos-coach.mjs --id 5e-puissance-notation,…,5e-puissance-litteral-short --ecrire` (PRODUCTION).
+4. YouTube sur son ordre seulement (paysage avant le short), `pas_avant` à confirmer.
+5. `lib/videos/mots-videos.json`, `bilans-videos.json`, `bilans-notions.json` ont été régénérés aussi par `generer-videos-r2.mjs` : non committés ici (fichiers partagés avec d'autres sessions) ; ils partiront avec la prochaine régénération committée.
+
+## Ancienne liste (faite)
 1. Relire soi-même les planches des 10 vidéos (paysage : `ffmpeg … fps=1/8,tile` ; short : `python scripts/ti-margo-planche.py`), corriger tout défaut mineur, re-rendre.
 2. `python manim/miniature_puissances_5e.py` (puis les regarder), `python scripts/vignettes-videos.py`.
 3. `python manim/passe_puissances_5e.py temps`, vérifier les questions et chapitres contre les rapports des agents, puis `python manim/passe_puissances_5e.py manifeste`. `python scripts/fiches-youtube.py 5e-puissance`.

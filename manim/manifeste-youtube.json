@@ -69967,6 +69967,759 @@
         "transports"
       ],
       "meme_video_que": "cm1-decimal-droite-short"
+    },
+    {
+      "id": "5e-puissance-notation",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_notation",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation.mp4",
+      "miniature": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation.png",
+      "titre": "5², ce n'est pas 5 × 2 — Le carré et le cube — épisode 1 · Maths 5e",
+      "accroche": "Lucas est créateur de jeux vidéo. Il dessine un héros sur une grille de 5 pixels sur 5 : combien de pixels ? Puis il construit un coffre de 3 blocs sur 3 sur 3. Deux écritures pour aller vite : le carré et le cube.\n\nDans cette vidéo :\n• 5 × 5 s'écrit 5² et se lit « 5 au carré »\n• 3 × 3 × 3 s'écrit 3³ et se lit « 3 au cube »\n• l'exposant compte les facteurs : 5² n'est pas 5 × 2, x² n'est pas x + x\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : écrire 6 × 6 avec un exposant, puis 2³ sous forme de produit.\n\nPour s'entraîner, la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_notation&display=simple\n\n🔢 Épisode 1 sur 5 de la série Carré et cube d'EleveAI, en 5e (nouveau programme 2026).",
+      "chapitres": [
+        [
+          "00:00",
+          "Lucas, créateur de jeux vidéo"
+        ],
+        [
+          "00:20",
+          "Le carré"
+        ],
+        [
+          "00:33",
+          "Le cube"
+        ],
+        [
+          "00:51",
+          "Question 1"
+        ],
+        [
+          "01:16",
+          "L'exposant"
+        ],
+        [
+          "01:31",
+          "Le piège"
+        ],
+        [
+          "01:49",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "À toi de jouer"
+        ],
+        [
+          "02:33",
+          "Correction"
+        ],
+        [
+          "02:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "carré",
+        "cube",
+        "exposant",
+        "notation puissance",
+        "au carré",
+        "au cube",
+        "pixels",
+        "créateur de jeux vidéo",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "Comment écrire 7 × 7 ?",
+          "choix": [
+            "7²",
+            "7 × 2",
+            "2²"
+          ],
+          "reponse": 0,
+          "explication": "Le 7 est multiplié par lui-même : 7 × 7 = 7²."
+        },
+        {
+          "t": "01:49",
+          "question": "Quel produit est égal à 4³ ?",
+          "choix": [
+            "4 × 3",
+            "4 × 4 × 4",
+            "3 × 3 × 3 × 3"
+          ],
+          "reponse": 1,
+          "explication": "Avec l'exposant 3, le 4 est écrit trois fois."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "5e-puissance-notation-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_notation",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-puissance-notation",
+      "fichier": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation-short.mp4",
+      "miniature": "5e/maths/puissance-simple/01-notation/eleveai-maths-5e-puissance-notation-short-miniature.png",
+      "titre": "3 au cube, ça fait 9 ? Tu paries que c'est faux ? #maths #5e",
+      "accroche": "Ti Margo pose des dés : 3 rangées de 3, c'est 3², 9 dés. Mais un cube a une hauteur : 3 couches de 9, 27 dés.\n3³ = 3 × 3 × 3 = 27 : le carré et le cube, empilés sous tes yeux.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche.\n👉 À toi : combien de dés pour un cube de 4 dés de côté ? Écris-le avec un exposant. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_notation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #5e #collège",
+      "tags": [
+        "dés",
+        "cube",
+        "carré",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "Combien vaut 2³ ?",
+          "choix": [
+            "6",
+            "8",
+            "9"
+          ],
+          "reponse": 1,
+          "explication": "2 × 2 × 2 = 8, pas 2 × 3."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "5e-puissance-valeurs",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_valeurs",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs.mp4",
+      "miniature": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs.png",
+      "titre": "Les carrés de 0 à 12, et l'astuce pour ne plus les oublier — épisode 2 · Maths 5e",
+      "accroche": "Karim est chef pâtissier. Il range ses macarons en carrés : 1 sur 1, 2 sur 2… jusqu'à 12 sur 12. Combien de macarons sur chaque plaque ? Les carrés de 0 à 12, une astuce pour les vérifier, et les cubes à connaître.\n\nDans cette vidéo :\n• les carrés de 0 à 12 : 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144\n• l'astuce de la bordure : on ajoute les nombres impairs\n• 2³ = 8, 3³ = 27, 10³ = 1 000 : avec 10, l'exposant compte les zéros\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : 11², 12², et le nombre dont le carré vaut 64.\n\nPour s'entraîner, la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_valeurs&display=simple\n\n🔢 Épisode 2 sur 5 de la série Carré et cube d'EleveAI, en 5e (nouveau programme 2026).",
+      "chapitres": [
+        [
+          "00:00",
+          "Karim, chef pâtissier"
+        ],
+        [
+          "00:22",
+          "Les carrés de 1 à 6"
+        ],
+        [
+          "00:34",
+          "Les carrés de 7 à 12"
+        ],
+        [
+          "00:55",
+          "L'astuce de la bordure"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:38",
+          "Trois cubes à connaître"
+        ],
+        [
+          "01:53",
+          "Le piège"
+        ],
+        [
+          "02:08",
+          "Question 2"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:43",
+          "Correction"
+        ],
+        [
+          "02:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "carrés de 0 à 12",
+        "tables des carrés",
+        "cube",
+        "10 au cube",
+        "calcul mental",
+        "macarons",
+        "chef pâtissier",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Combien vaut 7² ?",
+          "choix": [
+            "14",
+            "49",
+            "77"
+          ],
+          "reponse": 1,
+          "explication": "7 × 7 = 49 ; 14, c'est 7 × 2 : le piège."
+        },
+        {
+          "t": "02:08",
+          "question": "Quel nombre, au carré, donne 81 ?",
+          "choix": [
+            "8",
+            "9",
+            "27"
+          ],
+          "reponse": 1,
+          "explication": "9 × 9 = 81."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "5e-puissance-valeurs-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_valeurs",
+      "classe": "5e",
+      "ceinture": "blanche",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-puissance-valeurs",
+      "fichier": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs-short.mp4",
+      "miniature": "5e/maths/puissance-simple/02-valeurs/eleveai-maths-5e-puissance-valeurs-short-miniature.png",
+      "titre": "12 au carré sans calculatrice : tu paries que tu le connais ? #maths #5e",
+      "accroche": "Ti Margo pose des dalles en carré : 3 sur 3, 4 sur 4, 5 sur 5. Son astuce : une bordure pour passer au carré suivant.\n25 + 11 = 36, 36 + 13 = 49… jusqu'à 12² = 144 dalles.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche.\n👉 À toi : combien font 11² ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_valeurs&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #5e #collège",
+      "tags": [
+        "dalles",
+        "carrés",
+        "calcul mental",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:32",
+          "question": "Combien vaut 9² ?",
+          "choix": [
+            "18",
+            "81",
+            "99"
+          ],
+          "reponse": 1,
+          "explication": "9 × 9 = 81, pas 9 × 2."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "5e-puissance-ecrire",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_ecrire",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire.mp4",
+      "miniature": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire.png",
+      "titre": "64 est un carré… et un cube ! Écrire un nombre avec un exposant — épisode 3 · Maths 5e",
+      "accroche": "Sarah est éclairagiste : elle installe les lumières des concerts. Avec 64 projecteurs, peut-elle faire un carré parfait ? Et ranger 64 boîtiers dans une caisse en cube ? Écrire un nombre comme un carré ou comme un cube.\n\nDans cette vidéo :\n• 64 = 8 × 8 = 8² et 64 = 4 × 4 × 4 = 4³\n• avec 10, on compte les zéros : 100 = 10², 1 000 = 10³\n• le piège : 64 n'est pas 32² ; 50 est entre 7² et 8², ce n'est pas un carré\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : écrire 81 comme un carré, 27 comme un cube, et 1 000 avec un exposant.\n\nPour s'entraîner, la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_ecrire&display=simple\n\n🔢 Épisode 3 sur 5 de la série Carré et cube d'EleveAI, en 5e (nouveau programme 2026).",
+      "chapitres": [
+        [
+          "00:00",
+          "Sarah, éclairagiste"
+        ],
+        [
+          "00:21",
+          "64, un carré"
+        ],
+        [
+          "00:40",
+          "64, un cube"
+        ],
+        [
+          "00:56",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Avec 10, on compte les zéros"
+        ],
+        [
+          "01:37",
+          "Le piège"
+        ],
+        [
+          "01:54",
+          "Question 2"
+        ],
+        [
+          "02:26",
+          "À toi de jouer"
+        ],
+        [
+          "02:38",
+          "Correction"
+        ],
+        [
+          "02:54",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "écrire avec un exposant",
+        "carré parfait",
+        "cube",
+        "puissance de 10",
+        "projecteurs",
+        "concert",
+        "éclairagiste",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Comment écrire 125 avec un exposant ?",
+          "choix": [
+            "5²",
+            "5³",
+            "25²"
+          ],
+          "reponse": 1,
+          "explication": "5 × 5 = 25, puis 25 × 5 = 125 : 125 = 5³."
+        },
+        {
+          "t": "01:54",
+          "question": "50 est-il un carré ?",
+          "choix": [
+            "Oui, 25²",
+            "Non, il est entre 7² et 8²",
+            "Oui, 5²"
+          ],
+          "reponse": 1,
+          "explication": "7² = 49 et 8² = 64 : 50 est entre les deux."
+        }
+      ],
+      "centres": [
+        "musique",
+        "art-design"
+      ]
+    },
+    {
+      "id": "5e-puissance-ecrire-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_ecrire",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-puissance-ecrire",
+      "fichier": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire-short.mp4",
+      "miniature": "5e/maths/puissance-simple/03-ecrire/eleveai-maths-5e-puissance-ecrire-short-miniature.png",
+      "titre": "64 lanternes : tu paries que j'en fais un carré, et aussi un cube ? #maths #5e",
+      "accroche": "Ti Margo a 64 lanternes. D'abord un carré : 8 rangées de 8, 64 = 8². Puis un cube : 4 sur 4, et 4 étages, 64 = 4³.\nUn même nombre, deux écritures avec un exposant.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : écris 49 comme un carré, et 27 comme un cube. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_ecrire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #5e #collège",
+      "tags": [
+        "lanternes",
+        "carré",
+        "cube",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:32",
+          "question": "100 égale…",
+          "choix": [
+            "50²",
+            "10²",
+            "10³"
+          ],
+          "reponse": 1,
+          "explication": "10 × 10 = 100 : deux zéros, exposant 2."
+        }
+      ],
+      "centres": [
+        "musique",
+        "art-design"
+      ]
+    },
+    {
+      "id": "5e-puissance-calculer",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_calculer",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer.mp4",
+      "miniature": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer.png",
+      "titre": "3 + 4², ça ne fait pas 49 — Calculer avec des carrés et des cubes — épisode 4 · Maths 5e",
+      "accroche": "Inès est soigneuse dans un zoo. Elle prépare deux enclos carrés pour des tortues, de 6 m et de 4 m de côté : quelle surface couvrir de paille ? Un calcul avec des carrés, et la règle qui dit par où commencer.\n\nDans cette vidéo :\n• 6² + 4² = 36 + 16 = 52\n• la puissance passe en premier : 3 + 4² = 3 + 16 = 19\n• le carré ne porte que sur le nombre juste avant : 2 × 5² = 50, pas 100\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 4 + 3³ et 3 × 2².\n\nPour s'entraîner, la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_calculer&display=simple\n\n🔢 Épisode 4 sur 5 de la série Carré et cube d'EleveAI, en 5e (nouveau programme 2026).",
+      "chapitres": [
+        [
+          "00:00",
+          "Inès, soigneuse dans un zoo"
+        ],
+        [
+          "00:22",
+          "Deux enclos carrés"
+        ],
+        [
+          "00:41",
+          "La puissance d'abord"
+        ],
+        [
+          "00:54",
+          "Question 1"
+        ],
+        [
+          "01:21",
+          "Avec une multiplication"
+        ],
+        [
+          "01:38",
+          "Le piège"
+        ],
+        [
+          "01:53",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "À toi de jouer"
+        ],
+        [
+          "02:30",
+          "Correction"
+        ],
+        [
+          "02:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "priorités opératoires",
+        "calculer avec des puissances",
+        "carré",
+        "cube",
+        "aire d'un carré",
+        "zoo",
+        "soigneuse animalière",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Combien vaut 2 + 5² ?",
+          "choix": [
+            "49",
+            "27",
+            "12"
+          ],
+          "reponse": 1,
+          "explication": "D'abord 5² = 25, puis 2 + 25 = 27."
+        },
+        {
+          "t": "01:53",
+          "question": "Combien vaut 10² − 6² ?",
+          "choix": [
+            "16",
+            "64",
+            "4"
+          ],
+          "reponse": 1,
+          "explication": "100 − 36 = 64 ; ce n'est pas 4²."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "5e-puissance-calculer-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_calculer",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-puissance-calculer",
+      "fichier": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer-short.mp4",
+      "miniature": "5e/maths/puissance-simple/04-calculer/eleveai-maths-5e-puissance-calculer-short-miniature.png",
+      "titre": "2 + 3² = 25 : tu paries que j'ai gagné la peluche ? #maths #5e",
+      "accroche": "Au stand de la fête foraine, Ti Margo répond 25 à 2 + 3². Raté : le carré passe d'abord, 2 + 9 = 11.\nDeuxième essai, 2 × 3² = 18 : la peluche est à lui ?\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : combien font 10² − 2³ ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #5e #collège",
+      "tags": [
+        "fête foraine",
+        "priorités opératoires",
+        "carré",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "Combien vaut 2 × 5² ?",
+          "choix": [
+            "100",
+            "50",
+            "20"
+          ],
+          "reponse": 1,
+          "explication": "5² = 25, puis 2 × 25 = 50."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "5e-puissance-litteral",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_litteral",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "longue",
+      "fichier": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral.mp4",
+      "miniature": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral.png",
+      "titre": "3x² avec x = 2, ça ne fait pas 36 — Une lettre au carré — épisode 5 · Maths 5e",
+      "accroche": "Clara est ingénieure spatiale. Les panneaux solaires de son satellite sont carrés : si le côté mesure c mètres, l'aire est c². Et si c vaut 3 ? Remplacer une lettre par un nombre dans une expression avec un carré ou un cube.\n\nDans cette vidéo :\n• on remplace la lettre par sa valeur : c² = 3² = 9\n• puis la puissance d'abord : x² + 5 = 16 + 5 = 21 pour x = 4\n• le carré ne porte que sur la lettre : 3x² = 12 pour x = 2, pas 36\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : x² − 1 pour x = 10, et a³ + 1 pour a = 3.\n\nPour s'entraîner, la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_litteral&display=simple\n\n🔢 Épisode 5 sur 5 de la série Carré et cube d'EleveAI, en 5e (nouveau programme 2026).",
+      "chapitres": [
+        [
+          "00:00",
+          "Clara, ingénieure spatiale"
+        ],
+        [
+          "00:22",
+          "Remplacer la lettre"
+        ],
+        [
+          "00:34",
+          "Une autre formule"
+        ],
+        [
+          "00:49",
+          "Question 1"
+        ],
+        [
+          "01:15",
+          "Le volume d'un cube"
+        ],
+        [
+          "01:25",
+          "Le piège"
+        ],
+        [
+          "01:40",
+          "Question 2"
+        ],
+        [
+          "02:06",
+          "À toi de jouer"
+        ],
+        [
+          "02:21",
+          "Correction"
+        ],
+        [
+          "02:32",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "expression littérale",
+        "substituer",
+        "lettre au carré",
+        "x au carré",
+        "aire et volume",
+        "satellite",
+        "ingénieure spatiale",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "Si x = 5, combien vaut x² ?",
+          "choix": [
+            "10",
+            "25",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "5 × 5 = 25 ; 10, c'est 5 × 2 : le piège."
+        },
+        {
+          "t": "01:40",
+          "question": "Si a = 3, combien vaut 2a² ?",
+          "choix": [
+            "36",
+            "12",
+            "18"
+          ],
+          "reponse": 2,
+          "explication": "3² = 9, puis 2 × 9 = 18."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "5e-puissance-litteral-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "puissance_simple",
+      "microId": "puissance_simple_litteral",
+      "classe": "5e",
+      "ceinture": "jaune",
+      "serie": "Maths 5e",
+      "type": "short",
+      "renvoie_vers": "5e-puissance-litteral",
+      "fichier": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral-short.mp4",
+      "miniature": "5e/maths/puissance-simple/05-litteral/eleveai-maths-5e-puissance-litteral-short-miniature.png",
+      "titre": "Ma machine : x entre, x² + 1 sort. Avec 3, tu paries qu'elle sort 7 ? #maths #5e",
+      "accroche": "Ti Margo a construit une machine : tu mets x, elle sort x² + 1. Avec 3 : 3² = 9, plus 1, 10. Pas 7 !\nRemplacer la lettre, puis le carré d'abord.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : si x vaut 10, combien vaut 2 × x² ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=puissance_simple&microId=puissance_simple_litteral&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #5e #collège",
+      "tags": [
+        "machine",
+        "expression littérale",
+        "x au carré",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "puissances",
+        "carré et cube",
+        "maths",
+        "5e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Je mets 5. Que sort la machine ?",
+          "choix": [
+            "11",
+            "26",
+            "36"
+          ],
+          "reponse": 1,
+          "explication": "5² = 25, plus 1 : 26."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
     }
   ]
 }

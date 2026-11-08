@@ -132,6 +132,18 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "cm2-decimal-droite": 8.2,
   "cm1-decimal-droite-short": 4.22,
   "cm2-decimal-droite-short": 4.22,
+  // Carré et cube 5e (08/11) : paysage = même fin que les Relatifs (pause après « point f r »
+  // de 8,64 à 7,72 s avant la fin, mesurée dans les 5 mp4) ; short = « Mets » + 0,03 s.
+  "5e-puissance-notation": 8.4,
+  "5e-puissance-notation-short": 4.17,
+  "5e-puissance-valeurs": 8.4,
+  "5e-puissance-valeurs-short": 4.16,
+  "5e-puissance-ecrire": 8.4,
+  "5e-puissance-ecrire-short": 4.17,
+  "5e-puissance-calculer": 8.4,
+  "5e-puissance-calculer-short": 4.17,
+  "5e-puissance-litteral": 8.4,
+  "5e-puissance-litteral-short": 4.18,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {
