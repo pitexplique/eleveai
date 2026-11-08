@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le carré et le cube. Comment écrire vite un nombre multiplié par lui-même ?",
+  "01-situation": "Lucas est créateur de jeux vidéo. Il dessine un héros en pixels, sur une grille de 5 pixels de large et 5 pixels de haut. Combien de pixels en tout ?",
+  "02-carre": "5 rangées de 5 pixels : 5 fois 5, 25. Un nombre multiplié par lui-même : on écrit 5, avec un petit 2 en haut. On lit 5 au carré.",
+  "03-cube": "Dans son jeu, Lucas construit aussi un coffre en blocs : 3 blocs de long, 3 de large, 3 de haut. 3 fois 3 fois 3 : 27 blocs. On écrit 3, avec un petit 3 en haut. On lit 3 au cube.",
+  "03q-question": "Question ! Comment écrire 7 fois 7 ? A : 7 au carré. B : 7 fois 2. C : 2 au carré. Mets pause, et choisis !",
+  "03r-reponse": "Réponse A : 7 au carré. Le 7 est multiplié par lui-même.",
+  "04-exposant": "Le petit nombre en haut s'appelle l'exposant. Il compte combien de fois le nombre est écrit dans le produit. Exposant 2 : au carré, deux fois. Exposant 3 : au cube, trois fois.",
+  "05-piege": "Le piège : 5 au carré, ce n'est pas 5 fois 2. 5 fois 2, c'est 10. 5 au carré, c'est 5 fois 5 : 25. Avec une lettre, pareil : x au carré, c'est x fois x, pas x plus x.",
+  "05q-question": "Question ! Quel produit est égal à 4 au cube ? A : 4 fois 3. B : 4 fois 4 fois 4. C : 3 fois 3 fois 3 fois 3. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : 4 fois 4 fois 4. Avec l'exposant 3, le 4 est écrit trois fois.",
+  "06-defi": "À toi de jouer. Écris 6 fois 6 avec un exposant. Puis écris 2 au cube sous forme de produit, et calcule-le. Mets pause, et cherche !",
+  "06b-correction": "Correction. 6 fois 6, c'est 6 au carré : 36. 2 au cube, c'est 2 fois 2 fois 2 : 8. Pas 6 !",
+  "07-finale": "Ce que tu as appris. Un nombre au carré, c'est ce nombre fois lui-même. Au cube, le même nombre est écrit trois fois dans le produit. L'exposant compte les facteurs : il ne multiplie pas.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

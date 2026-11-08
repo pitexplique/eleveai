@@ -1,0 +1,16 @@
+{
+  "00-garde": "Une lettre au carré. Comment calculer x au carré, quand on connaît x ?",
+  "01-situation": "Clara est ingénieure spatiale. Elle conçoit les panneaux solaires carrés d'un satellite. Si le côté mesure c mètres, l'aire est c fois c : c au carré. Et si c vaut 3 ?",
+  "02-remplacer": "On remplace la lettre par le nombre. c au carré, avec c égal 3 : 3 au carré, 3 fois 3, 9. Le panneau fait 9 mètres carrés.",
+  "03-somme": "Une autre formule : x au carré plus 5. Pour x égal 4 : 4 au carré plus 5. D'abord 4 au carré, 16. Puis 16 plus 5 : 21.",
+  "03q-question": "Question ! Si x vaut 5, combien vaut x au carré ? A : 10. B : 25. C : 7. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : 25. 5 fois 5. 10, c'est 5 fois 2 : le piège.",
+  "04-cube": "Pour une boîte cubique d'arête a, le volume est a au cube. Avec a égal 2 : 2 fois 2 fois 2, 8 mètres cubes.",
+  "05-piege": "Le piège : 3 x au carré, avec x égal 2. Le carré ne porte que sur x. 2 au carré, 4, puis 3 fois 4 : 12. Pas 6 au carré, 36 !",
+  "05q-question": "Question ! Si a vaut 3, combien vaut 2 a au carré ? A : 36. B : 12. C : 18. Mets pause, et choisis !",
+  "05r-reponse": "Réponse C : 18. 3 au carré, 9. Puis 2 fois 9.",
+  "06-defi": "À toi de jouer. Pour x égal 10, calcule x au carré moins 1. Puis, pour a égal 3, calcule a au cube plus 1. Mets pause, et cherche !",
+  "06b-correction": "Correction. 10 au carré, 100, moins 1 : 99. 3 au cube, 27, plus 1 : 28.",
+  "07-finale": "Ce que tu as appris. Pour calculer une expression avec une lettre, on remplace la lettre par sa valeur. Puis la puissance d'abord. Le carré ne porte que sur la lettre juste avant lui.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

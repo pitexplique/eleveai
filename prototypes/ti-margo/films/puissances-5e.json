@@ -1,0 +1,7 @@
+{
+  "voix": "5e-puissance-{ep}-short",
+  "sons": "public/sons/5e-puissance-{ep}-short",
+  "sortie": "manim/sorties/5e/maths/puissance-simple/{num}-{ep}",
+  "nom": "eleveai-maths-5e-puissance-{ep}-short",
+  "episodes": { "notation": "01", "valeurs": "02", "ecrire": "03", "calculer": "04", "litteral": "05" }
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les carrés de 0 à 12. Faut-il vraiment les connaître par cœur ?",
+  "01-situation": "Karim est chef pâtissier. Il range ses macarons en carrés sur des plaques : 1 sur 1, 2 sur 2, 3 sur 3, jusqu'à 12 sur 12. Combien de macarons sur chaque plaque ?",
+  "02-petits": "1 au carré : 1. 2 au carré : 4. 3 au carré : 9. 4 au carré : 16. 5 au carré : 25. 6 au carré : 36.",
+  "03-grands": "7 au carré : 49. 8 au carré : 64. 9 au carré : 81. 10 au carré : 100. 11 au carré : 121. 12 au carré : 144. Et 0 au carré : 0.",
+  "04-astuce": "Une astuce pour vérifier : d'un carré au suivant, Karim ajoute une bordure. 1, puis 3 de plus : 4. Puis 5 de plus : 9. Puis 7 de plus : 16. On ajoute les nombres impairs.",
+  "04q-question": "Question ! Combien vaut 7 au carré ? A : 14. B : 49. C : 77. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B : 49. 7 fois 7. 14, c'est 7 fois 2 : le piège.",
+  "05-cubes": "Trois cubes à connaître : 2 au cube, 8. 3 au cube, 27. Et 10 au cube : 10 fois 10 fois 10, 1 000. Une caisse de 10 sur 10 sur 10 contient 1 000 morceaux de sucre.",
+  "06-piege": "Le piège : 10 au cube, ce n'est pas 30. 10 au carré, c'est 100 : deux zéros. 10 au cube, c'est 1 000 : trois zéros. Avec 10, l'exposant compte les zéros.",
+  "06q-question": "Question ! Quel nombre, au carré, donne 81 ? A : 8. B : 9. C : 27. Mets pause, et choisis !",
+  "06r-reponse": "Réponse B : 9, car 9 fois 9 égale 81.",
+  "07-defi": "À toi de jouer. Combien valent 11 au carré et 12 au carré ? Et quel nombre, au carré, donne 64 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 11 au carré : 11 fois 11, 121. 12 au carré : 12 fois 12, 144. Et 8 fois 8 égale 64 : c'est 8.",
+  "08-finale": "Ce que tu as appris. Les carrés de 0 à 12 : 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144. Les cubes : 2 au cube, 8 ; 3 au cube, 27 ; 10 au cube, 1 000.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

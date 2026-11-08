@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. 2 plus 3 au carré : 25 ! Tu paries que j'ai gagné la peluche ?",
+  "01-oups": "Raté ! Le carré passe d'abord. 3 au carré : 9. Puis 2 plus 9 : 11.",
+  "02-produit": "Deuxième essai : 2 fois 3 au carré. D'abord 3 au carré, 9. Puis 2 fois 9 : 18. Gagné !",
+  "02q-question": "Question ! Combien vaut 2 fois 5 au carré ? A : 100. B : 50. C : 20. Mets pause, et choisis !",
+  "02r-reponse": "Réponse B : 50 ! 5 au carré, 25. Puis 2 fois 25.",
+  "03-question": "À toi : combien font 10 au carré moins 2 au cube ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

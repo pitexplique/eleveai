@@ -1,0 +1,16 @@
+{
+  "00-garde": "Écrire un nombre avec un exposant. Comment savoir si un nombre est un carré, ou un cube ?",
+  "01-situation": "Sarah est éclairagiste : elle installe les lumières des concerts. Pour un mur de lumière, elle a 64 projecteurs. Peut-elle les ranger en un carré parfait ?",
+  "02-carre": "Elle cherche un nombre qui, multiplié par lui-même, donne 64. 7 fois 7 : 49, trop petit. 8 fois 8 : 64 ! 8 rangées de 8. Donc 64 égale 8 au carré.",
+  "03-cube": "Pour la tournée, elle range 64 boîtiers dans une caisse en cube : 4 de long, 4 de large, 4 de haut. 4 fois 4 fois 4 : 64. Donc 64 égale aussi 4 au cube.",
+  "03q-question": "Question ! Comment écrire 125 avec un exposant ? A : 5 au carré. B : 5 au cube. C : 25 au carré. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : 5 au cube. 5 fois 5 : 25. Puis 25 fois 5 : 125.",
+  "04-dix": "Avec 10, c'est facile : on compte les zéros. 100 a deux zéros : 10 au carré. 1 000 a trois zéros : 10 au cube.",
+  "05-piege": "Le piège : diviser par l'exposant. 64, ce n'est pas 32 au carré ! 32 au carré, c'est 32 fois 32 : plus de 1 000. Le bon test : multiplier le nombre par lui-même.",
+  "05q-question": "Question ! 50 est-il un carré ? A : Oui, 25 au carré. B : Non, il est entre 7 au carré et 8 au carré. C : Oui, 5 au carré. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : 7 au carré égale 49, et 8 au carré égale 64. 50 est entre les deux : ce n'est pas un carré.",
+  "06-defi": "À toi de jouer. Écris 81 comme un carré, 27 comme un cube, et 1 000 avec un exposant. Mets pause, et cherche !",
+  "06b-correction": "Correction. 9 fois 9 égale 81 : 81 égale 9 au carré. 3 fois 3 fois 3 égale 27 : 27 égale 3 au cube. 1 000 a trois zéros : 10 au cube.",
+  "07-finale": "Ce que tu as appris. Pour écrire un nombre comme un carré, on cherche le nombre qui, multiplié par lui-même, le donne. Pour un cube, le même facteur trois fois. Avec 10, l'exposant compte les zéros.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

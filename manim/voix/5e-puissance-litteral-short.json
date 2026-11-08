@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Voici ma machine : tu mets x, elle sort x au carré plus 1. Avec 3, tu paries qu'elle sort 7 ?",
+  "01-calcul": "Je mets 3. Elle calcule 3 au carré : 9. Puis plus 1 : 10. Pas 7 !",
+  "02-autre": "Je mets 4. 4 au carré, 16. Plus 1 : 17.",
+  "02q-question": "Question ! Je mets 5. Que sort la machine ? A : 11. B : 26. C : 36. Mets pause, et choisis !",
+  "02r-reponse": "Réponse B : 26 ! 5 au carré, 25. Plus 1.",
+  "03-question": "À toi : si x vaut 10, combien vaut 2 fois x au carré ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
