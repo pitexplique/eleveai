@@ -4,7 +4,12 @@ Notions du coach `divisibilite` (7 micros) et `nombre_premier` (4 micros). Une p
 
 Modèle : la série Relatifs 4e (`manim/REPRISE-relatifs.md`, à lire en entier). Règles : `manim/REGLES.md`. Shorts : socle commun `prototypes/ti-margo/LISEZ-MOI.md` + `scripts/ti-margo-short.mjs` (ne pas recopier de page).
 
-## ✅ ÉTAT FINAL 08/11 matin (après la passe finale) : à lire en premier
+## ✅ 08/11 : POUSSÉ (`11cc6a20`) ET BRANCHÉ AU COACH, sur l'ordre de Frédéric (« pousse »)
+
+- Les 22 vidéos sont au coach en production (`brancher-videos-coach.mjs --id … --remplacer --ecrire`) : 19 nouvelles lignes, et 3 shorts YouTube de la série « bases » (autre classe) remplacés par nos shorts R2 sur `premier_definition`, `premier_determiner`, `premier_decomposer`. Relecture : 22 branchées, 0 à brancher. Pages /video/<id> en 200.
+- Reste : son écoute (bruitages des shorts, son en général), puis YouTube (date à fixer à la place du `pas_avant` 2026-12-01).
+
+## ÉTAT FINAL 08/11 matin (après la passe finale)
 
 **Les 22 vidéos sont rendues, contrôlées et sur R2 (77 fichiers vérifiés à la taille). Rien n'est poussé, rien sur YouTube, le coach n'est pas branché, rien n'a été écouté.**
 Commits : `92aff69f` (manifeste HEAD + 22 entrées, `manim/miniature_divisibilite.py`, `manim/passe_divisibilite.py`), `1bfeb0fe` (les 10 films, barre du compte à rebours), `820415f9` (table R2 + feuilles bilan, HEAD + nos 22 entrées).
