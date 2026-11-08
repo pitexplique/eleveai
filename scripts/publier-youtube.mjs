@@ -83,6 +83,12 @@ const JOURNAL = path.join(SORTIES, ".publiees.json");
 const COUT = { insert: 1600, thumbnail: 50, playlistItem: 50, list: 1 };
 const QUOTA_JOUR = 10000;
 
+// 08/11/2026 : Frédéric a d’abord dit « on va laisser sans les
+// miniatures » (sa capture : des shorts sans miniature faisaient plus de vues),
+// puis, le même jour : « mets les miniatures ok ». Réglage gardé : false = aucune
+// miniature sur les shorts (envoi et rattrapage), les paysages gardent la leur.
+const MINIATURE_SHORTS = true;
+
 // ─── .env.local ───────────────────────────────────────────────────────────────
 function chargeEnv() {
   const p = path.join(RACINE, ".env.local");
@@ -323,6 +329,7 @@ async function rattraperMiniaturesRefusees(token, journal) {
 // l'onglet Shorts ne la prend que si elle est reposée une fois le short en ligne :
 // alors seulement YouTube crée `sardefault.jpg`. Contrôler cette image est gratuit.
 async function rattraperMiniaturesShorts(token, m, journal, max) {
+  if (!MINIATURE_SHORTS) return 0;
   const maintenant = new Date().toISOString();
   const aVoir = m.videos.filter(
     (v) => v.type === "short" && v.url && cheminMiniature(v.miniature) && !(journal[v.id]?.publieLe > maintenant),
@@ -773,7 +780,7 @@ async function main() {
     .filter((v) => fs.existsSync(path.join(SORTIES, v.fichier)))
     // Frédéric, 01/11 : « fais attention de bien mettre les miniatures dans les
     // shorts ». Un short sans sa miniature n'est jamais envoyé.
-    .filter((v) => v.type !== "short" || cheminMiniature(v.miniature))
+    .filter((v) => v.type !== "short" || !MINIATURE_SHORTS || cheminMiniature(v.miniature))
     // YouTube refuse un titre de plus de 100 caractères ou avec < > : le 04/11,
     // Pythagore ép. 5 (112) a bloqué tout l'envoi du jour.
     .filter((v) => {
@@ -885,7 +892,8 @@ async function main() {
       if (publieA) console.log(`  programmée : ${heureReunion(publieA)} (heure de La Réunion)`);
       process.stdout.write(` ok (${videoId})\n`);
 
-      const mini = v.miniature ? await poserMiniatureAvecReprises(token, videoId, v.miniature) : "sans objet";
+      const mini = v.type === "short" && !MINIATURE_SHORTS ? "sans (choix du 08/11)"
+        : v.miniature ? await poserMiniatureAvecReprises(token, videoId, v.miniature) : "sans objet";
       const noms = playlistsDe(v, m);
       for (const nom of noms) await ajouterAPlaylist(token, await idPlaylist(nom), videoId);
       const pl = noms.join(" + ");
