@@ -1,0 +1,7 @@
+{
+  "voix": "commun-cm-decimal-droite-short",
+  "sons": "public/sons/commun-cm-decimal-droite-short",
+  "sortie": "manim/sorties/cm1/maths/nombres-decimaux/decimal-droite",
+  "nom": "eleveai-maths-cm1-decimal-droite-short",
+  "episodes": { "bus": "01" }
+}

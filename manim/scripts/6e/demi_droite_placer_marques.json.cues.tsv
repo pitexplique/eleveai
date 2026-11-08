@@ -1,0 +1,496 @@
+﻿00-garde	0.1014375	Placer
+00-garde	0.6414375	un
+00-garde	0.7364375	nombre
+00-garde	1.1014375	décimal
+00-garde	1.6914375	sur
+00-garde	1.9614375	une
+00-garde	2.1314375	demi-droite
+00-garde	2.8164375	graduée
+01-situation	0.1014375	Voici
+01-situation	0.6214375	Karim
+01-situation	2.0714375	Il
+01-situation	2.2514375	est
+01-situation	2.3364375	infirmier
+01-situation	3.9664375	Il
+01-situation	4.1514375	prend
+01-situation	4.4064375	la
+01-situation	4.5564375	température
+01-situation	5.3164375	d'une
+01-situation	5.5664375	patiente
+01-situation	6.4914375	38,3 
+01-situation	7.1164375	38,3 
+01-situation	7.5864375	38,3 
+01-situation	7.9264375	degrés
+01-situation	9.2914375	Son
+01-situation	9.5714375	thermomètre
+01-situation	10.2814375	est
+01-situation	10.4014375	gradué
+01-situation	10.9564375	de
+01-situation	11.1064375	35 à
+01-situation	11.7664375	35 à
+01-situation	11.8514375	42
+01-situation	13.3914375	À
+01-situation	13.4814375	partir
+01-situation	14.0414375	de
+01-situation	14.1964375	38 degrés
+01-situation	14.6814375	38 degrés
+01-situation	15.3564375	on
+01-situation	15.4764375	parle
+01-situation	15.8014375	de
+01-situation	15.9264375	fièvre
+01-situation	17.4264375	Alors
+01-situation	18.1164375	où
+01-situation	18.2214375	se
+01-situation	18.4414375	trouve
+01-situation	18.7514375	38,3 
+01-situation	19.3014375	38,3 
+01-situation	19.7714375	38,3 
+01b-apprendre	0.1014375	Ce
+01b-apprendre	0.3464375	que
+01b-apprendre	0.5314375	tu
+01b-apprendre	0.7114375	vas
+01b-apprendre	0.8964375	apprendre
+01b-apprendre	1.7214375	trouver
+01b-apprendre	2.2464375	le
+01b-apprendre	2.3964375	pas
+01b-apprendre	2.8414375	puis
+01b-apprendre	3.1164375	placer
+01b-apprendre	3.6014375	un
+01b-apprendre	3.7014375	nombre
+01b-apprendre	4.0314375	à
+01b-apprendre	4.1214375	virgule
+01b-apprendre	4.9314375	saut
+01b-apprendre	5.2214375	après
+01b-apprendre	5.5314375	saut
+02-pas	0.1014375	D'abord
+02-pas	0.8914375	je
+02-pas	1.1064375	trouve
+02-pas	1.4014375	le
+02-pas	1.5414375	pas
+02-pas	2.6864375	Entre
+02-pas	2.9914375	0 et
+02-pas	3.3414375	0 et
+02-pas	3.4464375	1
+02-pas	3.7964375	je
+02-pas	4.0064375	compte
+02-pas	4.3164375	les
+02-pas	4.4364375	sauts
+02-pas	4.9514375	pas
+02-pas	5.1564375	les
+02-pas	5.3114375	traits
+02-pas	5.8264375	10 sauts
+02-pas	6.0064375	10 sauts
+02-pas	6.5264375	tous
+02-pas	6.7314375	égaux
+02-pas	8.0564375	Chaque
+02-pas	8.4014375	petit
+02-pas	8.7664375	saut
+02-pas	9.0414375	vaut
+02-pas	9.2414375	un
+02-pas	9.3564375	dixième
+02-pas	10.1764375	0,1
+02-pas	10.4864375	0,1
+02-pas	10.9364375	0,1
+02-pas	11.9864375	Le
+02-pas	12.2114375	pas
+02-pas	12.3864375	vaut
+02-pas	12.5564375	0,1
+02-pas	12.9314375	0,1
+02-pas	13.4164375	0,1
+03-placer	0.1014375	Je
+03-placer	0.3214375	veux
+03-placer	0.4814375	placer
+03-placer	0.9564375	2,3
+03-placer	1.1264375	2,3
+03-placer	1.6264375	2,3
+03-placer	2.8564375	2,3
+03-placer	3.0664375	2,3
+03-placer	3.5764375	2,3
+03-placer	4.1064375	c'est
+03-placer	4.3314375	2 unités
+03-placer	4.5064375	2 unités
+03-placer	5.0814375	et
+03-placer	5.2364375	3 dixièmes
+03-placer	5.5214375	3 dixièmes
+03-placer	6.3364375	2 plus
+03-placer	6.5214375	2 plus
+03-placer	6.8614375	0,3
+03-placer	7.2364375	0,3
+03-placer	7.6964375	0,3
+03-placer	8.9264375	Je
+03-placer	9.1514375	pars
+03-placer	9.4614375	de
+03-placer	9.6064375	0
+03-placer	10.9264375	2 grands
+03-placer	11.1414375	2 grands
+03-placer	11.4164375	sauts
+03-placer	11.9314375	1
+03-placer	12.2814375	puis
+03-placer	12.5864375	2
+03-placer	13.7364375	Puis
+03-placer	14.0414375	3 petits
+03-placer	14.3114375	3 petits
+03-placer	14.6614375	sauts
+03-placer	15.8814375	2,1
+03-placer	16.0914375	2,1
+03-placer	16.5764375	2,1
+03-placer	16.6914375	2,2
+03-placer	16.8714375	2,2
+03-placer	17.3714375	2,2
+03-placer	18.5214375	2,3
+03-placer	18.7314375	2,3
+03-placer	19.2264375	2,3
+03-placer	19.5464375	Je
+03-placer	19.7064375	marque
+03-placer	20.0914375	le
+03-placer	20.2414375	point
+04-question	0.1014375	Question
+04-question	1.6314375	Quel
+04-question	1.8864375	point
+04-question	2.1964375	a
+04-question	2.3014375	pour
+04-question	2.5564375	abscisse
+04-question	3.1114375	2,3 
+04-question	3.2864375	2,3 
+04-question	3.7814375	2,3 
+04-question	5.0114375	Le
+04-question	5.2314375	point
+04-question	5.5414375	A
+04-question	5.8914375	le
+04-question	6.1014375	point
+04-question	6.3964375	B
+04-question	6.8414375	ou
+04-question	6.9364375	le
+04-question	7.0764375	point
+04-question	7.3714375	C
+04-question	8.5964375	Mets
+04-question	8.8064375	pause
+04-question	9.4364375	et
+04-question	9.5464375	choisis
+04b-reponse	0.1014375	Réponse
+04b-reponse	0.6614375	A
+04b-reponse	0.7514375	2 grands
+04b-reponse	0.9264375	2 grands
+04b-reponse	1.2014375	sauts
+04b-reponse	1.7164375	puis
+04b-reponse	2.0214375	3 petits
+04b-reponse	2.2864375	3 petits
+04b-reponse	2.6364375	sauts
+04b-reponse	3.8564375	B
+04b-reponse	4.0814375	est
+04b-reponse	4.1914375	sur
+04b-reponse	4.4814375	2,2 
+04b-reponse	4.6564375	2,2 
+04b-reponse	5.1664375	2,2 
+04b-reponse	5.6164375	on
+04b-reponse	5.7364375	a
+04b-reponse	5.8914375	compté
+04b-reponse	6.2864375	les
+04b-reponse	6.4414375	traits
+04b-reponse	6.9764375	pas
+04b-reponse	7.1864375	les
+04b-reponse	7.3264375	sauts
+05-demi	0.1014375	Attention
+05-demi	0.9664375	le
+05-demi	1.1564375	pas
+05-demi	1.3364375	ne
+05-demi	1.4864375	vaut
+05-demi	1.6514375	pas
+05-demi	1.8314375	toujours
+05-demi	2.2364375	0,1
+05-demi	2.5764375	0,1
+05-demi	3.0314375	0,1
+05-demi	4.0814375	Ici
+05-demi	4.7414375	entre
+05-demi	5.0164375	0 et
+05-demi	5.3614375	0 et
+05-demi	5.4664375	1
+05-demi	5.8164375	il
+05-demi	5.9764375	n'y
+05-demi	6.1714375	a
+05-demi	6.2764375	que
+05-demi	6.4464375	2 sauts
+05-demi	6.6164375	2 sauts
+05-demi	7.8314375	Le
+05-demi	8.0564375	pas
+05-demi	8.2314375	vaut
+05-demi	8.4014375	0,5
+05-demi	8.7764375	0,5
+05-demi	9.2564375	0,5
+05-demi	10.6464375	Je
+05-demi	10.8764375	place
+05-demi	11.2464375	1,5 
+05-demi	11.3514375	1,5 
+05-demi	11.8464375	1,5 
+05-demi	12.5364375	1 grand
+05-demi	12.6764375	1 grand
+05-demi	12.9464375	saut
+05-demi	13.4664375	puis
+05-demi	13.7364375	un
+05-demi	13.9264375	saut
+05-demi	14.1814375	de
+05-demi	14.3264375	0,5
+05-demi	14.6814375	0,5
+05-demi	15.1314375	0,5
+05b-entre	0.1014375	Et
+05b-entre	0.2364375	2,2 
+05b-entre	0.4114375	2,2 
+05b-entre	0.9114375	2,2 
+05b-entre	2.0614375	Aucun
+05b-entre	2.4264375	trait
+05b-entre	2.6664375	ne
+05b-entre	2.8214375	porte
+05b-entre	3.2264375	2,2
+05b-entre	3.4114375	2,2
+05b-entre	3.9164375	2,2
+05b-entre	5.0664375	Il
+05b-entre	5.2514375	est
+05b-entre	5.3564375	entre
+05b-entre	5.7214375	2 et
+05b-entre	5.9314375	2 et
+05b-entre	6.0114375	2,5
+05b-entre	6.1814375	2,5
+05b-entre	6.6764375	2,5
+05b-entre	7.3664375	plus
+05b-entre	7.6164375	près
+05b-entre	7.8664375	de
+05b-entre	8.0064375	2
+05b-entre	9.1514375	Je
+05b-entre	9.3764375	place
+05b-entre	9.7014375	2,2 
+05b-entre	9.8714375	2,2 
+05b-entre	10.3514375	2,2 
+05b-entre	10.5414375	ici
+06-question	0.1014375	Question
+06-question	1.6314375	Sur
+06-question	1.9414375	cette
+06-question	2.2214375	droite
+06-question	2.9814375	le
+06-question	3.1714375	pas
+06-question	3.3514375	vaut
+06-question	3.5164375	0,5
+06-question	3.8714375	0,5
+06-question	4.3214375	0,5
+06-question	5.7064375	Où
+06-question	5.8364375	se
+06-question	6.0464375	place
+06-question	6.4364375	3,7 
+06-question	6.7314375	3,7 
+06-question	7.2164375	3,7 
+06-question	8.5714375	A
+06-question	8.9214375	entre
+06-question	9.2014375	3 et
+06-question	9.5414375	3 et
+06-question	9.6264375	3,5
+06-question	9.8814375	3,5
+06-question	10.3264375	3,5
+06-question	11.7164375	B
+06-question	12.1614375	entre
+06-question	12.4414375	3,5 
+06-question	12.7214375	3,5 
+06-question	13.1664375	3,5 
+06-question	13.5364375	et
+06-question	13.6214375	4
+06-question	15.0064375	C
+06-question	15.5314375	7 traits
+06-question	15.8414375	7 traits
+06-question	16.1114375	après
+06-question	16.4414375	3
+06-question	17.6714375	Mets
+06-question	17.8814375	pause
+06-question	18.5114375	et
+06-question	18.6214375	choisis
+06b-reponse	0.1014375	Réponse
+06b-reponse	0.6264375	B
+06b-reponse	0.8364375	3,7 
+06b-reponse	1.0964375	3,7 
+06b-reponse	1.5814375	3,7 
+06b-reponse	1.8814375	est
+06b-reponse	1.9714375	plus
+06b-reponse	2.2514375	grand
+06b-reponse	2.5414375	que
+06b-reponse	2.7264375	3,5
+06b-reponse	2.9814375	3,5
+06b-reponse	3.4764375	3,5
+06b-reponse	4.1664375	et
+06b-reponse	4.2764375	plus
+06b-reponse	4.5014375	petit
+06b-reponse	4.8764375	que
+06b-reponse	5.0464375	4
+06b-reponse	6.4264375	7 traits
+06b-reponse	6.7564375	7 traits
+06b-reponse	7.0364375	après
+06b-reponse	7.3664375	3
+06b-reponse	7.9014375	c'est
+06b-reponse	8.1264375	un
+06b-reponse	8.3214375	pas
+06b-reponse	8.5064375	de
+06b-reponse	8.6564375	0,1
+06b-reponse	9.0064375	0,1
+06b-reponse	9.4614375	0,1
+06b-reponse	10.5114375	Ici
+06b-reponse	11.1714375	le
+06b-reponse	11.3614375	pas
+06b-reponse	11.5414375	vaut
+06b-reponse	11.7064375	0,5
+06b-reponse	12.0714375	0,5
+06b-reponse	12.5164375	0,5
+07-zoom	0.1014375	Revenons
+07-zoom	0.6164375	au
+07-zoom	0.7264375	thermomètre
+07-zoom	1.4664375	de
+07-zoom	1.6064375	Karim
+07-zoom	3.0464375	Pour
+07-zoom	3.3214375	être
+07-zoom	3.5914375	précis
+07-zoom	4.3414375	je
+07-zoom	4.5564375	zoome
+07-zoom	4.7764375	entre 38 et 39
+07-zoom	5.0414375	entre 38 et 39
+07-zoom	5.6014375	entre 38 et 39
+07-zoom	5.6864375	entre 38 et 39
+07-zoom	7.3214375	L'écart
+07-zoom	7.8314375	est
+07-zoom	7.9514375	coupé
+07-zoom	8.3414375	en
+07-zoom	8.4514375	10 petits
+07-zoom	8.5914375	10 petits
+07-zoom	8.9514375	sauts
+07-zoom	9.4714375	le
+07-zoom	9.6764375	pas
+07-zoom	9.8564375	vaut
+07-zoom	10.0214375	0,1
+07-zoom	10.3764375	0,1
+07-zoom	10.8314375	0,1
+07-zoom	11.8814375	38,3
+07-zoom	12.4414375	38,3
+07-zoom	12.9514375	38,3
+07-zoom	13.4814375	c'est
+07-zoom	13.7114375	38 plus
+07-zoom	14.2564375	38 plus
+07-zoom	14.5964375	3 dixièmes
+07-zoom	14.8714375	3 dixièmes
+07-zoom	15.6864375	3 petits
+07-zoom	15.9914375	3 petits
+07-zoom	16.3464375	sauts
+07-zoom	16.6264375	après
+07-zoom	16.9564375	38
+07-zoom	18.5214375	C'est
+07-zoom	18.7664375	plus
+07-zoom	19.0264375	que
+07-zoom	19.2214375	38
+07-zoom	20.1014375	la
+07-zoom	20.2814375	patiente
+07-zoom	20.8564375	a
+07-zoom	20.9614375	de
+07-zoom	21.0814375	la
+07-zoom	21.2114375	fièvre
+08-defi	0.1014375	Ton
+08-defi	0.3214375	défi
+08-defi	1.6764375	Une
+08-defi	1.8714375	heure
+08-defi	2.0664375	plus
+08-defi	2.3014375	tard
+08-defi	2.9014375	Karim
+08-defi	3.3564375	lit
+08-defi	3.5514375	37,8 
+08-defi	4.1114375	37,8 
+08-defi	4.5714375	37,8 
+08-defi	4.7614375	degrés
+08-defi	6.1264375	Combien
+08-defi	6.6864375	de
+08-defi	6.8264375	petits
+08-defi	7.1814375	sauts
+08-defi	7.4564375	après
+08-defi	7.7914375	37
+08-defi	9.4414375	Et
+08-defi	9.5764375	la
+08-defi	9.7214375	fièvre
+08-defi	10.1964375	est-elle
+08-defi	10.5414375	tombée
+08-defi	11.8664375	Mets
+08-defi	12.0764375	pause
+08-defi	12.7064375	et
+08-defi	12.8014375	cherche
+08b-correction	0.1014375	Correction
+08b-correction	1.7414375	37,8
+08b-correction	2.3264375	37,8
+08b-correction	2.8214375	37,8
+08b-correction	3.3914375	c'est
+08b-correction	3.6164375	37 plus
+08b-correction	4.2014375	37 plus
+08b-correction	4.5714375	8 dixièmes
+08b-correction	4.8064375	8 dixièmes
+08b-correction	5.6364375	8 petits
+08b-correction	5.8564375	8 petits
+08b-correction	6.2114375	sauts
+08b-correction	6.4864375	après
+08b-correction	6.8164375	37
+08b-correction	8.4664375	37,8 
+08b-correction	9.0514375	37,8 
+08b-correction	9.5414375	37,8 
+08b-correction	9.7864375	est
+08b-correction	9.8964375	avant
+08b-correction	10.2314375	38
+08b-correction	11.1164375	la
+08b-correction	11.2964375	fièvre
+08b-correction	11.7864375	est
+08b-correction	11.8664375	tombée
+09-finale	0.1014375	Ce
+09-finale	0.3464375	que
+09-finale	0.5314375	tu
+09-finale	0.7514375	as
+09-finale	0.8414375	appris
+09-finale	2.2314375	D'abord
+09-finale	3.0114375	je
+09-finale	3.2264375	trouve
+09-finale	3.5214375	le
+09-finale	3.6714375	pas
+09-finale	4.1164375	je
+09-finale	4.3264375	compte
+09-finale	4.6364375	les
+09-finale	4.7564375	sauts
+09-finale	5.2714375	pas
+09-finale	5.4764375	les
+09-finale	5.6314375	traits
+09-finale	6.8464375	2,3
+09-finale	7.0564375	2,3
+09-finale	7.5664375	2,3
+09-finale	8.0964375	c'est
+09-finale	8.3214375	2 grands
+09-finale	8.5014375	2 grands
+09-finale	8.7714375	sauts
+09-finale	9.2864375	puis
+09-finale	9.5914375	3 petits
+09-finale	9.8564375	3 petits
+09-finale	10.2064375	sauts
+09-finale	11.4264375	Si
+09-finale	11.6914375	aucun
+09-finale	12.0314375	trait
+09-finale	12.2714375	ne
+09-finale	12.4264375	porte
+09-finale	12.8064375	mon
+09-finale	12.9864375	nombre
+09-finale	13.6164375	je
+09-finale	13.8064375	le
+09-finale	13.9464375	place
+09-finale	14.3414375	entre
+09-finale	14.6214375	deux
+09-finale	14.7964375	traits
+09-finale	16.0064375	Et
+09-finale	16.1364375	pour
+09-finale	16.3664375	être
+09-finale	16.6414375	précis
+09-finale	17.3864375	je
+09-finale	17.6014375	zoome
+09-finale	17.8164375	entre
+09-finale	18.0964375	deux
+09-finale	18.2714375	unités
+10-abonne	0.1014375	Entraîne-toi
+10-abonne	0.8764375	sur
+10-abonne	1.1514375	éleveai
+10-abonne	1.5814375	point
+10-abonne	1.8964375	f
+10-abonne	2.1314375	r
+10-abonne	3.3764375	Et
+10-abonne	3.5064375	abonne-toi

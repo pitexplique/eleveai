@@ -3710,6 +3710,15 @@
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_rang&display=simple"
  },
+ "6e-demi-droite-fraction": {
+  "fichier": "6e/maths/demi-droite-graduee/03-fraction/eleveai-maths-6e-demi-droite-fraction.mp4",
+  "poster": "6e/maths/demi-droite-graduee/03-fraction/eleveai-maths-6e-demi-droite-fraction.png",
+  "vignette": "6e/maths/demi-droite-graduee/03-fraction/eleveai-maths-6e-demi-droite-fraction.vignette.webp",
+  "titre": "3/4 de litre : jusqu'où verser le lait ? — Placer une fraction — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_fraction&display=simple"
+ },
  "6e-demi-droite-graduee": {
   "fichier": "6e/maths/paysage/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-graduee.mp4",
   "poster": "6e/maths/paysage/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-graduee.png",
@@ -3718,6 +3727,33 @@
   "short": false,
   "youtube": "975J99l0A8w",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&display=simple"
+ },
+ "6e-demi-droite-graduer": {
+  "fichier": "6e/maths/demi-droite-graduee/04-graduer/eleveai-maths-6e-demi-droite-graduer.mp4",
+  "poster": "6e/maths/demi-droite-graduee/04-graduer/eleveai-maths-6e-demi-droite-graduer.png",
+  "vignette": "6e/maths/demi-droite-graduee/04-graduer/eleveai-maths-6e-demi-droite-graduer.vignette.webp",
+  "titre": "Comment graduer une barre de vie en quarts ? — Graduer une demi-droite — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_graduer&display=simple"
+ },
+ "6e-demi-droite-lire": {
+  "fichier": "6e/maths/demi-droite-graduee/01-lire/eleveai-maths-6e-demi-droite-lire.mp4",
+  "poster": "6e/maths/demi-droite-graduee/01-lire/eleveai-maths-6e-demi-droite-lire.png",
+  "vignette": "6e/maths/demi-droite-graduee/01-lire/eleveai-maths-6e-demi-droite-lire.vignette.webp",
+  "titre": "Où est le ravitaillement du trail ? — Lire une abscisse — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_lire&display=simple"
+ },
+ "6e-demi-droite-placer": {
+  "fichier": "6e/maths/demi-droite-graduee/02-placer/eleveai-maths-6e-demi-droite-placer.mp4",
+  "poster": "6e/maths/demi-droite-graduee/02-placer/eleveai-maths-6e-demi-droite-placer.png",
+  "vignette": "6e/maths/demi-droite-graduee/02-placer/eleveai-maths-6e-demi-droite-placer.vignette.webp",
+  "titre": "38,3 °C : où est-ce sur le thermomètre ? — Placer un nombre décimal — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_placer&display=simple"
  },
  "6e-demi-droite-short-fraction": {
   "fichier": "6e/maths/shorts/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-short-fraction.mp4",
@@ -5076,6 +5112,24 @@
   "youtube": "_-GyjUG7noI",
   "coach": null
  },
+ "cm1-decimal-droite": {
+  "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.mp4",
+  "poster": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.png",
+  "vignette": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.vignette.webp",
+  "titre": "L'école est à 0,7 km : où s'arrête le bus ? — Un décimal sur une droite graduée · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_decimal&microId=decimal_droite&display=simple"
+ },
+ "cm1-decimal-droite-short": {
+  "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short.mp4",
+  "poster": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short-miniature.png",
+  "vignette": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short-miniature.vignette.webp",
+  "titre": "Tu paries que mon bus s'arrête pile à l'école ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_decimal&microId=decimal_droite&display=simple"
+ },
  "cm1-frac-comparer": {
   "fichier": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer.mp4",
   "poster": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer.png",
@@ -5597,6 +5651,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
+ },
+ "cm2-decimal-droite": {
+  "fichier": "cm2/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm2-decimal-droite.mp4",
+  "poster": "cm2/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm2-decimal-droite.png",
+  "vignette": "cm2/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm2-decimal-droite.vignette.webp",
+  "titre": "L'école est à 0,7 km : où s'arrête le bus ? — Un décimal sur une droite graduée · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=nombre_decimal&microId=decimal_droite&display=simple"
+ },
+ "cm2-decimal-droite-short": {
+  "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short.mp4",
+  "poster": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short-miniature.png",
+  "vignette": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short-miniature.vignette.webp",
+  "titre": "Tu paries que mon bus s'arrête pile à l'école ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=nombre_decimal&microId=decimal_droite&display=simple"
  },
  "cm2-frac-comparer": {
   "fichier": "cm2/maths/fractions/04-comparer/eleveai-maths-cm2-frac-comparer.mp4",

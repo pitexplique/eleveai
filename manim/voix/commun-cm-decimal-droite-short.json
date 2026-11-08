@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Aujourd'hui, je conduis le bus. L'école est à 0 virgule 7 kilomètre. Facile : je compte 7 traits. 1, 2, 3, 4, 5, 6, 7. Stop ! Tu paries que c'est l'école ?",
+  "01-rate": "Oups ! L'école est plus loin. J'ai compté le trait du départ : mon bus est à 0 virgule 6.",
+  "02-question": "Question ! Pour aller de 0 à 0 virgule 7, combien de sauts fait le bus ? A : 6 sauts. B : 7 sauts. C : 8 sauts. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Chaque saut vaut 1 dixième. 7 sauts : 0 virgule 7.",
+  "03-encore": "Je repars de 0, et je compte les sauts : 0 virgule 1, 0 virgule 2, 0 virgule 3, 0 virgule 4, 0 virgule 5, 0 virgule 6, 0 virgule 7. Stop ! L'école ! Bravo moi !",
+  "04-commentaire": "À toi : la route va de 3 à 4 kilomètres. Le bus part de 3 et fait 4 sauts. À quel kilomètre est-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

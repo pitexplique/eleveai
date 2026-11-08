@@ -1,0 +1,18 @@
+{
+  "00-garde": "Placer un nombre décimal sur une demi-droite graduée.",
+  "01-situation": "Voici Karim. Il est infirmier. Il prend la température d'une patiente : 38,3 degrés. Son thermomètre est gradué de 35 à 42. À partir de 38 degrés, on parle de fièvre. Alors, où se trouve 38,3 ?",
+  "01b-apprendre": "Ce que tu vas apprendre : trouver le pas, puis placer un nombre à virgule, saut après saut.",
+  "02-pas": "D'abord, je trouve le pas. Entre 0 et 1, je compte les sauts, pas les traits : 10 sauts, tous égaux. Chaque petit saut vaut un dixième : 0,1. Le pas vaut 0,1.",
+  "03-placer": "Je veux placer 2,3. 2,3, c'est 2 unités et 3 dixièmes : 2 plus 0,3. Je pars de 0. 2 grands sauts : 1, puis 2. Puis 3 petits sauts. 2,1. 2,2. 2,3. Je marque le point.",
+  "04-question": "Question ! Quel point a pour abscisse 2,3 ? Le point A, le point B, ou le point C ? Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 2 grands sauts, puis 3 petits sauts. B est sur 2,2 : on a compté les traits, pas les sauts.",
+  "05-demi": "Attention : le pas ne vaut pas toujours 0,1. Ici, entre 0 et 1, il n'y a que 2 sauts. Le pas vaut 0,5. Je place 1,5 : 1 grand saut, puis un saut de 0,5.",
+  "05b-entre": "Et 2,2 ? Aucun trait ne porte 2,2. Il est entre 2 et 2,5, plus près de 2. Je place 2,2 ici.",
+  "06-question": "Question ! Sur cette droite, le pas vaut 0,5. Où se place 3,7 ? A : entre 3 et 3,5. B : entre 3,5 et 4. C : 7 traits après 3. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 3,7 est plus grand que 3,5, et plus petit que 4. 7 traits après 3, c'est un pas de 0,1. Ici, le pas vaut 0,5.",
+  "07-zoom": "Revenons au thermomètre de Karim. Pour être précis, je zoome entre 38 et 39. L'écart est coupé en 10 petits sauts : le pas vaut 0,1. 38,3, c'est 38 plus 3 dixièmes : 3 petits sauts après 38. C'est plus que 38 : la patiente a de la fièvre.",
+  "08-defi": "Ton défi ! Une heure plus tard, Karim lit 37,8 degrés. Combien de petits sauts après 37 ? Et la fièvre est-elle tombée ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 37,8, c'est 37 plus 8 dixièmes : 8 petits sauts après 37. 37,8 est avant 38 : la fièvre est tombée.",
+  "09-finale": "Ce que tu as appris. D'abord, je trouve le pas : je compte les sauts, pas les traits. 2,3, c'est 2 grands sauts, puis 3 petits sauts. Si aucun trait ne porte mon nombre, je le place entre deux traits. Et pour être précis, je zoome entre deux unités.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

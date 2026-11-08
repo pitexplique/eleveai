@@ -1,0 +1,547 @@
+﻿00-garde	0.1014375	Placer
+00-garde	0.6414375	un
+00-garde	0.7364375	nombre
+00-garde	1.1014375	décimal
+00-garde	1.6914375	sur
+00-garde	1.9614375	une
+00-garde	2.1364375	droite
+00-garde	2.4664375	graduée
+00-garde	3.9564375	Où
+00-garde	4.0864375	se
+00-garde	4.3064375	trouve
+00-garde	4.5964375	0,7 
+00-garde	4.9664375	0,7 
+00-garde	5.4514375	0,7 
+01-situation	0.1014375	Voici
+01-situation	0.6114375	Inès
+01-situation	1.3364375	conductrice
+01-situation	2.1014375	de
+01-situation	2.2414375	bus
+01-situation	3.5514375	Sa
+01-situation	3.8014375	ligne
+01-situation	4.1014375	part
+01-situation	4.3714375	du
+01-situation	4.5114375	dépôt
+01-situation	5.1264375	au
+01-situation	5.2514375	kilomètre
+01-situation	5.9114375	0
+01-situation	7.2164375	La
+01-situation	7.4264375	gare
+01-situation	7.7214375	est
+01-situation	7.8264375	au
+01-situation	7.9864375	kilomètre
+01-situation	8.6114375	1
+01-situation	9.6614375	Entre
+01-situation	9.9514375	les
+01-situation	10.0964375	deux
+01-situation	10.5414375	la
+01-situation	10.7464375	route
+01-situation	11.0064375	est
+01-situation	11.0864375	partagée
+01-situation	11.6964375	en
+01-situation	11.8064375	10 parts
+01-situation	11.9464375	10 parts
+01-situation	12.1814375	égales
+01-situation	13.6314375	L'arrêt
+01-situation	14.0514375	de
+01-situation	14.1864375	l'école
+01-situation	14.6314375	est
+01-situation	14.7364375	à
+01-situation	14.8864375	0,7 
+01-situation	15.2464375	0,7 
+01-situation	15.7264375	0,7 
+01-situation	16.0214375	kilomètre
+01-situation	17.6714375	Où
+01-situation	17.7964375	est-il
+02-methode	0.1014375	De
+02-methode	0.2914375	0 à
+02-methode	0.6564375	0 à
+02-methode	0.7264375	1
+02-methode	1.0764375	la
+02-methode	1.2814375	route
+02-methode	1.5464375	est
+02-methode	1.6214375	partagée
+02-methode	2.2314375	en
+02-methode	2.3414375	10 parts
+02-methode	2.4814375	10 parts
+02-methode	2.7164375	égales
+02-methode	4.1664375	Chaque
+02-methode	4.4914375	part
+02-methode	5.0964375	c'est
+02-methode	5.3264375	1 dixième
+02-methode	5.5164375	1 dixième
+02-methode	6.3414375	0,1
+02-methode	6.6514375	0,1
+02-methode	7.1064375	0,1
+02-methode	8.1564375	Et
+02-methode	8.2864375	0,7
+02-methode	8.6564375	0,7
+02-methode	9.1514375	0,7
+02-methode	9.8264375	c'est
+02-methode	10.0514375	7 dixièmes
+02-methode	10.3464375	7 dixièmes
+02-methode	11.8814375	On
+02-methode	12.0314375	part
+02-methode	12.3414375	de
+02-methode	12.4914375	0
+02-methode	13.1114375	et
+02-methode	13.2114375	on
+02-methode	13.3264375	fait
+02-methode	13.5414375	7 sauts
+02-methode	13.8314375	7 sauts
+02-methode	14.3464375	0,1
+02-methode	14.6514375	0,1
+02-methode	15.1164375	0,1
+02-methode	15.4664375	0,2
+02-methode	15.7714375	0,2
+02-methode	16.2464375	0,2
+02-methode	16.6964375	0,3
+02-methode	17.0014375	0,3
+02-methode	17.4714375	0,3
+02-methode	18.0064375	0,4
+02-methode	18.3164375	0,4
+02-methode	18.7914375	0,4
+02-methode	19.4464375	0,5
+02-methode	19.7564375	0,5
+02-methode	20.2164375	0,5
+02-methode	20.9014375	0,6
+02-methode	21.2064375	0,6
+02-methode	21.6664375	0,6
+02-methode	22.3414375	0,7
+02-methode	22.6464375	0,7
+02-methode	23.0964375	0,7
+02-methode	24.4514375	L'école
+02-methode	24.8964375	est
+02-methode	24.9864375	là
+03-piege	0.1014375	Attention
+03-piege	0.7714375	au
+03-piege	0.8814375	piège
+03-piege	2.3064375	Le
+03-piege	2.5214375	trait
+03-piege	2.7914375	du
+03-piege	2.9464375	0
+03-piege	3.5664375	c'est
+03-piege	3.7814375	le
+03-piege	3.9364375	départ
+03-piege	4.6864375	on
+03-piege	4.8114375	ne
+03-piege	4.9614375	le
+03-piege	5.1114375	compte
+03-piege	5.4264375	pas
+03-piege	6.5764375	Si
+03-piege	6.8414375	tu
+03-piege	7.0114375	comptes
+03-piege	7.3314375	les
+03-piege	7.4864375	traits
+03-piege	7.7764375	jusqu'à
+03-piege	8.1914375	l'école
+03-piege	8.9614375	tu
+03-piege	9.1914375	en
+03-piege	9.3064375	trouves
+03-piege	9.6014375	8
+03-piege	10.1914375	faux
+03-piege	11.4064375	On
+03-piege	11.5614375	compte
+03-piege	11.8764375	les
+03-piege	11.9914375	sauts
+03-piege	13.2114375	Il
+03-piege	13.3914375	y
+03-piege	13.5164375	a
+03-piege	13.6064375	7 sauts
+03-piege	13.8964375	7 sauts
+03-piege	14.4114375	0,7
+03-piege	14.7164375	0,7
+03-piege	15.1664375	0,7
+04-question	0.1014375	Question
+04-question	1.6314375	Le
+04-question	1.8564375	bus
+04-question	2.0664375	est
+04-question	2.1764375	au
+04-question	2.3314375	point
+04-question	2.6264375	bleu
+04-question	3.8314375	Quel
+04-question	4.0664375	nombre
+04-question	5.4364375	A
+04-question	5.7864375	0,7
+04-question	6.1064375	0,7
+04-question	6.5564375	0,7
+04-question	7.9114375	B
+04-question	8.3614375	0,06
+04-question	8.6814375	0,06
+04-question	9.1314375	0,06
+04-question	9.5014375	0,06
+04-question	10.8564375	C
+04-question	11.3814375	0,6
+04-question	11.7014375	0,6
+04-question	12.1514375	0,6
+04-question	13.5014375	Mets
+04-question	13.7114375	pause
+04-question	14.3414375	et
+04-question	14.4514375	choisis
+04b-reponse	0.1014375	Réponse
+04b-reponse	0.6414375	C
+04b-reponse	1.8664375	Depuis
+04b-reponse	2.3264375	0
+04b-reponse	2.9314375	il
+04b-reponse	3.0864375	y
+04b-reponse	3.2114375	a
+04b-reponse	3.2914375	6 sauts
+04b-reponse	3.5364375	6 sauts
+04b-reponse	3.7914375	de
+04b-reponse	3.9214375	1 dixième
+04b-reponse	4.0264375	1 dixième
+04b-reponse	4.8514375	0,6
+04b-reponse	5.1614375	0,6
+04b-reponse	5.6114375	0,6
+04b-reponse	6.9614375	Pas
+04b-reponse	7.1714375	0,7 
+04b-reponse	7.5314375	0,7 
+04b-reponse	8.0264375	0,7 
+04b-reponse	8.6964375	le
+04b-reponse	8.8914375	trait
+04b-reponse	9.1414375	du
+04b-reponse	9.2814375	départ
+04b-reponse	9.6814375	ne
+04b-reponse	9.8364375	compte
+04b-reponse	10.1514375	pas
+05-centiemes	0.1014375	Autre
+05-centiemes	0.4014375	piège
+05-centiemes	1.0814375	0,08
+05-centiemes	1.3914375	0,08
+05-centiemes	1.8514375	0,08
+05-centiemes	2.2364375	0,08
+05-centiemes	2.8314375	ce
+05-centiemes	3.0614375	n'est
+05-centiemes	3.2064375	pas
+05-centiemes	3.3864375	0,8 
+05-centiemes	3.7414375	0,8 
+05-centiemes	4.1914375	0,8 
+05-centiemes	5.4364375	0,8
+05-centiemes	5.7914375	0,8
+05-centiemes	6.2864375	0,8
+05-centiemes	6.8514375	c'est
+05-centiemes	7.1014375	8 dixièmes
+05-centiemes	7.3614375	8 dixièmes
+05-centiemes	8.1964375	8 grands
+05-centiemes	8.4764375	8 grands
+05-centiemes	8.7464375	sauts
+05-centiemes	9.9664375	Mais
+05-centiemes	10.1864375	0,08
+05-centiemes	10.5514375	0,08
+05-centiemes	11.0164375	0,08
+05-centiemes	11.4164375	0,08
+05-centiemes	12.0064375	c'est
+05-centiemes	12.2564375	8
+05-centiemes	12.4864375	centièmes
+05-centiemes	13.3964375	bien
+05-centiemes	13.6714375	plus
+05-centiemes	13.8814375	petit
+05-centiemes	15.2564375	On
+05-centiemes	15.4064375	coupe
+05-centiemes	15.6564375	le
+05-centiemes	15.8064375	premier
+05-centiemes	16.1914375	saut
+05-centiemes	16.4764375	en
+05-centiemes	16.5864375	10 petits
+05-centiemes	16.7264375	10 petits
+05-centiemes	17.0914375	pas.
+05-centiemes	17.3014375	0,08 
+05-centiemes	17.6614375	0,08 
+05-centiemes	18.1464375	0,08 
+05-centiemes	18.5464375	0,08 
+05-centiemes	18.7914375	est
+05-centiemes	18.8814375	là
+05-centiemes	19.3064375	avant
+05-centiemes	19.5964375	0,1
+05-centiemes	19.9414375	0,1
+05-centiemes	20.4364375	0,1
+05-centiemes	20.7864375	tout
+05-centiemes	20.9864375	près
+05-centiemes	21.2314375	du
+05-centiemes	21.3714375	dépôt
+06-milieu	0.1014375	L'arrêt
+06-milieu	0.5164375	du
+06-milieu	0.6564375	marché
+06-milieu	1.1314375	est
+06-milieu	1.2414375	au
+06-milieu	1.3964375	milieu
+06-milieu	1.8164375	de
+06-milieu	1.9414375	la
+06-milieu	2.0864375	route
+06-milieu	2.6964375	0,5 
+06-milieu	3.0464375	0,5 
+06-milieu	3.5114375	0,5 
+06-milieu	3.8364375	kilomètre
+06-milieu	5.4814375	5 dixièmes
+06-milieu	5.8714375	5 dixièmes
+06-milieu	6.6864375	c'est
+06-milieu	6.9064375	la
+06-milieu	7.0464375	moitié
+06-milieu	7.5064375	de
+06-milieu	7.6714375	1
+06-milieu	8.7214375	Sur
+06-milieu	9.0264375	le
+06-milieu	9.1764375	panneau
+06-milieu	9.7864375	Inès
+06-milieu	10.1964375	lit
+06-milieu	10.3864375	0,50
+06-milieu	10.7364375	0,50
+06-milieu	11.1864375	0,50
+06-milieu	12.8014375	C'est
+06-milieu	13.0464375	le
+06-milieu	13.1864375	même
+06-milieu	13.4314375	nombre
+06-milieu	14.8014375	Le
+06-milieu	15.0214375	zéro
+06-milieu	15.4164375	à
+06-milieu	15.5014375	la
+06-milieu	15.6464375	fin
+06-milieu	15.8914375	ne
+06-milieu	16.0464375	change
+06-milieu	16.3964375	rien
+06-milieu	16.9064375	même
+06-milieu	17.1814375	place
+07-apres	0.1014375	Au
+07-apres	0.2414375	bout
+07-apres	0.4314375	de
+07-apres	0.5814375	10 sauts
+07-apres	0.7414375	10 sauts
+07-apres	1.2564375	on
+07-apres	1.3764375	arrive
+07-apres	1.7814375	à
+07-apres	1.8664375	1
+07-apres	2.2164375	10 dixièmes
+07-apres	2.4714375	10 dixièmes
+07-apres	3.2864375	c'est
+07-apres	3.5114375	1 kilomètre
+07-apres	3.6964375	1 kilomètre
+07-apres	5.3664375	Le
+07-apres	5.5914375	bus
+07-apres	5.7714375	continue
+07-apres	7.2664375	Entre
+07-apres	7.5564375	le
+07-apres	7.7164375	kilomètre
+07-apres	8.4014375	3 et
+07-apres	8.7414375	3 et
+07-apres	8.8214375	le
+07-apres	8.9814375	kilomètre
+07-apres	9.6314375	4
+07-apres	10.2864375	encore
+07-apres	10.6914375	10 parts
+07-apres	10.8264375	10 parts
+07-apres	11.0614375	égales
+07-apres	12.5114375	On
+07-apres	12.6614375	part
+07-apres	12.9714375	de
+07-apres	13.1214375	3
+07-apres	13.6564375	et
+07-apres	13.7614375	on
+07-apres	13.8714375	fait
+07-apres	14.0864375	7 sauts
+07-apres	14.3764375	7 sauts
+07-apres	14.8914375	3,7 
+07-apres	15.1864375	3,7 
+07-apres	15.6564375	3,7 
+07-apres	15.9464375	kilomètres
+07-apres	17.5964375	C'est
+07-apres	17.8414375	3 unités
+07-apres	18.1014375	3 unités
+07-apres	18.6564375	et
+07-apres	18.8114375	7 dixièmes
+07-apres	19.1114375	7 dixièmes
+08-question	0.1014375	Question
+08-question	1.6314375	Cette
+08-question	1.9814375	droite
+08-question	2.3714375	va
+08-question	2.5614375	de
+08-question	2.6964375	2 à
+08-question	2.9014375	2 à
+08-question	2.9864375	3
+08-question	4.2164375	Où
+08-question	4.3464375	est
+08-question	4.4364375	le
+08-question	4.5714375	point
+08-question	4.8714375	bleu
+08-question	6.0714375	A
+08-question	6.4214375	0,4
+08-question	6.7414375	0,4
+08-question	7.2064375	0,4
+08-question	8.5914375	B
+08-question	9.0414375	2,4
+08-question	9.2514375	2,4
+08-question	9.7164375	2,4
+08-question	11.0964375	C
+08-question	11.6214375	2,5
+08-question	11.8314375	2,5
+08-question	12.2814375	2,5
+08-question	13.6714375	Mets
+08-question	13.8814375	pause
+08-question	14.5114375	et
+08-question	14.6214375	choisis
+08b-reponse	0.1014375	Réponse
+08b-reponse	0.6164375	B
+08b-reponse	1.7414375	On
+08b-reponse	1.8914375	part
+08b-reponse	2.2014375	de
+08b-reponse	2.3464375	2
+08b-reponse	2.7914375	pas
+08b-reponse	2.9914375	de
+08b-reponse	3.1364375	0
+08b-reponse	4.4514375	Puis
+08b-reponse	4.7864375	4 sauts
+08b-reponse	5.1214375	4 sauts
+08b-reponse	5.3964375	de
+08b-reponse	5.5214375	1 dixième
+08b-reponse	5.6364375	1 dixième
+08b-reponse	6.4564375	2,4
+08b-reponse	6.6614375	2,4
+08b-reponse	7.1264375	2,4
+09-defi	0.1014375	À
+09-defi	0.1914375	toi
+09-defi	0.4514375	de
+09-defi	0.5964375	jouer
+09-defi	1.8764375	Inès
+09-defi	2.2714375	doit
+09-defi	2.4964375	placer
+09-defi	2.9914375	un
+09-defi	3.0914375	arrêt
+09-defi	3.4764375	à
+09-defi	3.5764375	4,6 
+09-defi	3.9164375	4,6 
+09-defi	4.4064375	4,6 
+09-defi	4.6514375	kilomètres
+09-defi	6.3214375	La
+09-defi	6.5464375	droite
+09-defi	6.9014375	va
+09-defi	7.0914375	de
+09-defi	7.2264375	4 à
+09-defi	7.5914375	4 à
+09-defi	7.6764375	5
+09-defi	9.0814375	À
+09-defi	9.1864375	quel
+09-defi	9.4514375	trait
+09-defi	9.7314375	après
+09-defi	10.0814375	4
+09-defi	11.4614375	A
+09-defi	11.8114375	le
+09-defi	12.0214375	4e
+09-defi	12.6564375	trait
+09-defi	13.8714375	B
+09-defi	14.3214375	le
+09-defi	14.5314375	6e
+09-defi	15.0314375	trait
+09-defi	16.2464375	C
+09-defi	16.7714375	le
+09-defi	16.9814375	7e
+09-defi	17.4914375	trait
+09-defi	18.7064375	Mets
+09-defi	18.9164375	pause
+09-defi	19.5464375	et
+09-defi	19.6414375	cherche
+09b-correction	0.1014375	Correction
+09b-correction	1.7414375	4,6
+09b-correction	2.0864375	4,6
+09b-correction	2.5814375	4,6
+09b-correction	3.2614375	c'est
+09b-correction	3.5064375	4 unités
+09b-correction	3.8264375	4 unités
+09b-correction	4.3114375	et
+09b-correction	4.4664375	6 dixièmes
+09b-correction	4.7664375	6 dixièmes
+09b-correction	6.2814375	On
+09b-correction	6.4314375	part
+09b-correction	6.7414375	de
+09b-correction	6.8864375	4
+09b-correction	7.5414375	et
+09b-correction	7.6414375	on
+09b-correction	7.7514375	fait
+09b-correction	7.9714375	6 sauts
+09b-correction	8.2164375	6 sauts
+09b-correction	8.7314375	4,1
+09b-correction	9.0814375	4,1
+09b-correction	9.5464375	4,1
+09b-correction	9.8964375	4,2
+09b-correction	10.2414375	4,2
+09b-correction	10.7214375	4,2
+09b-correction	11.1664375	4,3
+09b-correction	11.5114375	4,3
+09b-correction	11.9864375	4,3
+09b-correction	12.5164375	4,4
+09b-correction	12.8664375	4,4
+09b-correction	13.3414375	4,4
+09b-correction	14.0014375	4,5
+09b-correction	14.3514375	4,5
+09b-correction	14.8114375	4,5
+09b-correction	15.4964375	4,6
+09b-correction	15.8464375	4,6
+09b-correction	16.3064375	4,6
+09b-correction	17.6564375	Réponse
+09b-correction	18.1714375	B
+09b-correction	18.5964375	le
+09b-correction	18.8014375	6e
+09b-correction	19.3064375	trait
+09b-correction	19.5764375	après
+09b-correction	19.9214375	4
+10-finale	0.1014375	Ce
+10-finale	0.3464375	que
+10-finale	0.5314375	tu
+10-finale	0.7514375	as
+10-finale	0.8414375	appris
+10-finale	2.2314375	Entre
+10-finale	2.5464375	deux
+10-finale	2.7014375	entiers
+10-finale	3.4414375	10 parts
+10-finale	3.6064375	10 parts
+10-finale	3.8414375	égales
+10-finale	4.5864375	chaque
+10-finale	4.8764375	saut
+10-finale	5.1264375	vaut
+10-finale	5.3264375	1 dixième
+10-finale	5.4364375	1 dixième
+10-finale	6.2564375	0,1
+10-finale	6.5664375	0,1
+10-finale	7.0164375	0,1
+10-finale	8.0664375	Pour
+10-finale	8.3564375	placer
+10-finale	8.8114375	0,7
+10-finale	9.1614375	0,7
+10-finale	9.6564375	0,7
+10-finale	10.3264375	on
+10-finale	10.4464375	part
+10-finale	10.7064375	de
+10-finale	10.8564375	0 et
+10-finale	11.2414375	0 et
+10-finale	11.3614375	on
+10-finale	11.4714375	fait
+10-finale	11.6914375	7 sauts
+10-finale	11.9814375	7 sauts
+10-finale	13.1964375	On
+10-finale	13.3464375	compte
+10-finale	13.6614375	les
+10-finale	13.7764375	sauts
+10-finale	14.2964375	pas
+10-finale	14.5014375	le
+10-finale	14.6414375	trait
+10-finale	14.8864375	du
+10-finale	15.0264375	départ
+10-finale	16.5114375	Et
+10-finale	16.6464375	0,5 
+10-finale	17.0064375	0,5 
+10-finale	17.4864375	0,5 
+10-finale	17.8214375	et
+10-finale	17.9014375	0,50 
+10-finale	18.2614375	0,50 
+10-finale	18.7414375	0,50 
+10-finale	19.3064375	sont
+10-finale	19.5514375	à
+10-finale	19.6864375	la
+10-finale	19.8364375	même
+10-finale	20.0964375	place
+11-abonne	0.1014375	Entraîne-toi
+11-abonne	0.8764375	sur
+11-abonne	1.1514375	éleveai
+11-abonne	1.5814375	point
+11-abonne	1.8964375	f
+11-abonne	2.1314375	r
+11-abonne	3.3764375	Et
+11-abonne	3.5064375	abonne-toi

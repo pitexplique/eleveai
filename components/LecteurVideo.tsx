@@ -122,6 +122,16 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "6e-decimal-diviser-par-entier-short": 4.24,
   "6e-decimal-calcul-defi": 8.4,
   "6e-decimal-calcul-defi-short": 4.21,
+  // Demi-droite graduée 6e + decimal_droite CM1/CM2 (08/11) : paysage = pause après
+  // « point f r » (clip de fin + 2,9 s) ; short = « Mets » (86,05 s) + 0,03 s.
+  "6e-demi-droite-lire": 8.2,
+  "6e-demi-droite-placer": 8.2,
+  "6e-demi-droite-fraction": 8.2,
+  "6e-demi-droite-graduer": 8.2,
+  "cm1-decimal-droite": 8.2,
+  "cm2-decimal-droite": 8.2,
+  "cm1-decimal-droite-short": 4.22,
+  "cm2-decimal-droite-short": 4.22,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

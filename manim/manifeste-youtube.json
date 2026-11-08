@@ -69123,6 +69123,756 @@
       "centres": [
         "jeux-video"
       ]
+    },
+    {
+      "id": "6e-demi-droite-lire",
+      "pas_avant": "2026-12-01",
+      "notionId": "demi_droite_graduee",
+      "microId": "abscisse_lire",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/demi-droite-graduee/01-lire/eleveai-maths-6e-demi-droite-lire.mp4",
+      "miniature": "6e/maths/demi-droite-graduee/01-lire/eleveai-maths-6e-demi-droite-lire.png",
+      "titre": "Où est le ravitaillement du trail ? — Lire une abscisse — épisode 1 · Maths 6e",
+      "accroche": "Inès organise des courses de trail. Sur son plan, le sentier devient une demi-droite graduée. Où est le ravitaillement ? Et le photographe ?\n\nDans cette vidéo :\n• l'origine vaut 0, les traits sont à la même distance\n• avant de lire, je trouve le pas : ce que vaut un saut\n• je compte les SAUTS depuis l'origine, pas les traits\n• un pas de 1, de 0,5, de 0,1 : on le calcule\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : 0 et 1 avec 5 sauts entre les deux : quelle est l'abscisse du point F ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/demi-droite-graduee\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/demi-droite-graduee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_lire&display=simple\n\n🔢 Épisode 1 sur 4 de la série « Repérer sur une demi-droite graduée » d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où est-on sur le parcours ?"
+        ],
+        [
+          "00:35",
+          "L'origine et l'abscisse"
+        ],
+        [
+          "00:49",
+          "Trouver le pas"
+        ],
+        [
+          "01:06",
+          "Lire une abscisse"
+        ],
+        [
+          "01:26",
+          "Question 1"
+        ],
+        [
+          "02:00",
+          "Un pas de 0,5"
+        ],
+        [
+          "02:34",
+          "Question 2"
+        ],
+        [
+          "03:08",
+          "Un pas de 0,1"
+        ],
+        [
+          "03:44",
+          "Question 3"
+        ],
+        [
+          "04:19",
+          "À toi de jouer"
+        ],
+        [
+          "04:35",
+          "Correction"
+        ],
+        [
+          "04:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/demi-droite-graduee",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/demi-droite-graduee",
+      "tags": [
+        "lire une abscisse",
+        "pas d'une graduation",
+        "trail",
+        "course à pied",
+        "organisatrice de courses",
+        "demi-droite graduée",
+        "abscisse",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:26",
+          "question": "On lit 0 et 20, avec 4 sauts entre les deux. Que vaut le pas ?",
+          "choix": [
+            "1 km",
+            "4 km",
+            "5 km"
+          ],
+          "reponse": 2,
+          "explication": "20 ÷ 4 = 5 : un saut vaut 5 km. Un saut ne vaut pas toujours 1."
+        },
+        {
+          "t": "02:34",
+          "question": "Le pas vaut 0,5. Quelle est l'abscisse du point S ?",
+          "choix": [
+            "4",
+            "2",
+            "2,5"
+          ],
+          "reponse": 1,
+          "explication": "Je compte les sauts : 0,5 ; 1 ; 1,5 ; 2. 4 compte les traits, 2,5 compte le trait de l'origine."
+        },
+        {
+          "t": "03:44",
+          "question": "Le pas vaut 0,1. Quelle est l'abscisse du point M ?",
+          "choix": [
+            "13",
+            "1,3",
+            "4"
+          ],
+          "reponse": 1,
+          "explication": "10 sauts de 0,1 mènent à 1, puis 3 sauts : 1,3."
+        }
+      ],
+      "centres": [
+        "sport",
+        "course-trail"
+      ]
+    },
+    {
+      "id": "6e-demi-droite-placer",
+      "pas_avant": "2026-12-01",
+      "notionId": "demi_droite_graduee",
+      "microId": "abscisse_placer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/demi-droite-graduee/02-placer/eleveai-maths-6e-demi-droite-placer.mp4",
+      "miniature": "6e/maths/demi-droite-graduee/02-placer/eleveai-maths-6e-demi-droite-placer.png",
+      "titre": "38,3 °C : où est-ce sur le thermomètre ? — Placer un nombre décimal — épisode 2 · Maths 6e",
+      "accroche": "Karim est infirmier. Il prend la température d'une patiente : 38,3 degrés. Son thermomètre est gradué. À partir de 38, c'est la fièvre. Où se trouve 38,3 ?\n\nDans cette vidéo :\n• d'abord le pas : 10 sauts entre 0 et 1, chacun vaut 0,1\n• 2,3 : 2 grands sauts, puis 3 petits sauts\n• quand le pas vaut 0,5 : placer entre deux traits\n• zoomer entre 38 et 39 pour être précis\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 37,8 degrés : combien de petits sauts après 37 ? La fièvre est-elle tombée ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/demi-droite-graduee\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/demi-droite-graduee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_placer&display=simple\n\n🔢 Épisode 2 sur 4 de la série « Repérer sur une demi-droite graduée » d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où se trouve 38,3 ?"
+        ],
+        [
+          "00:34",
+          "D'abord, le pas"
+        ],
+        [
+          "00:49",
+          "Placer 2,3"
+        ],
+        [
+          "01:11",
+          "Question 1"
+        ],
+        [
+          "01:36",
+          "Un pas de 0,5"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:45",
+          "Le zoom du thermomètre"
+        ],
+        [
+          "03:09",
+          "À toi de jouer"
+        ],
+        [
+          "03:25",
+          "Correction"
+        ],
+        [
+          "03:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/demi-droite-graduee",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/demi-droite-graduee",
+      "tags": [
+        "placer un nombre décimal",
+        "demi-droite graduée",
+        "thermomètre",
+        "fièvre",
+        "infirmier",
+        "santé",
+        "demi-droite graduée",
+        "abscisse",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "Quel point a pour abscisse 2,3 ?",
+          "choix": [
+            "le point A",
+            "le point B",
+            "le point C"
+          ],
+          "reponse": 0,
+          "explication": "2 grands sauts, puis 3 petits sauts. B est sur 2,2 : on a compté les traits, pas les sauts."
+        },
+        {
+          "t": "02:06",
+          "question": "Le pas vaut 0,5. Où se place 3,7 ?",
+          "choix": [
+            "entre 3 et 3,5",
+            "entre 3,5 et 4",
+            "7 traits après 3"
+          ],
+          "reponse": 1,
+          "explication": "3,7 est plus grand que 3,5 et plus petit que 4. 7 traits après 3, ce serait un pas de 0,1."
+        }
+      ],
+      "centres": [
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "6e-demi-droite-fraction",
+      "pas_avant": "2026-12-01",
+      "notionId": "demi_droite_graduee",
+      "microId": "abscisse_fraction",
+      "classe": "6e",
+      "ceinture": "orange",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/demi-droite-graduee/03-fraction/eleveai-maths-6e-demi-droite-fraction.mp4",
+      "miniature": "6e/maths/demi-droite-graduee/03-fraction/eleveai-maths-6e-demi-droite-fraction.png",
+      "titre": "3/4 de litre : jusqu'où verser le lait ? — Placer une fraction — épisode 3 · Maths 6e",
+      "accroche": "Chloé est pâtissière. Sa recette de crêpes dit : 3 quarts de litre de lait. Son verre doseur est gradué en quarts. Jusqu'où verser ?\n\nDans cette vidéo :\n• le dénominateur : en combien de parts égales on coupe l'unité\n• le numérateur : combien de sauts on fait depuis 0\n• 7/4 dépasse 1 : 4 quarts font 1\n• le piège : compter les sauts, pas les traits ; en dixièmes, 7/10 = 0,7\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : place 5/3 sur une droite où l'unité est coupée en 3.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/demi-droite-graduee\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/demi-droite-graduee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_fraction&display=simple\n\n🔢 Épisode 3 sur 4 de la série « Repérer sur une demi-droite graduée » d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où se trouve 3/4 ?"
+        ],
+        [
+          "00:23",
+          "Le verre doseur couché"
+        ],
+        [
+          "00:36",
+          "Le dénominateur"
+        ],
+        [
+          "00:51",
+          "Le numérateur"
+        ],
+        [
+          "01:05",
+          "Question 1"
+        ],
+        [
+          "01:39",
+          "7/4, plus grand que 1"
+        ],
+        [
+          "02:00",
+          "Question 2"
+        ],
+        [
+          "02:30",
+          "Le piège des traits"
+        ],
+        [
+          "02:45",
+          "En dixièmes"
+        ],
+        [
+          "03:03",
+          "Question 3"
+        ],
+        [
+          "03:31",
+          "À toi de jouer"
+        ],
+        [
+          "03:47",
+          "Correction"
+        ],
+        [
+          "04:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/demi-droite-graduee",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/demi-droite-graduee",
+      "tags": [
+        "placer une fraction",
+        "fraction sur une demi-droite",
+        "numérateur",
+        "dénominateur",
+        "pâtissière",
+        "cuisine",
+        "demi-droite graduée",
+        "abscisse",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:05",
+          "question": "L'unité est coupée en 5. Le point est sur le 2e trait après 0. Son abscisse ?",
+          "choix": [
+            "3/5",
+            "2/5",
+            "2"
+          ],
+          "reponse": 1,
+          "explication": "On compte les sauts depuis 0 : 2 sauts d'un cinquième. Le trait de 0 ne compte pas."
+        },
+        {
+          "t": "02:00",
+          "question": "Entre quels nombres entiers se place 9/4 ?",
+          "choix": [
+            "entre 0 et 1",
+            "entre 9 et 10",
+            "entre 2 et 3"
+          ],
+          "reponse": 2,
+          "explication": "4 quarts font 1, 8 quarts font 2 : 9/4, c'est 2 plus 1 quart."
+        },
+        {
+          "t": "03:03",
+          "question": "Droite graduée en dixièmes : quel nombre est au 3e trait après 0 ?",
+          "choix": [
+            "3/4",
+            "3/10",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "Chaque saut vaut 1 dixième : 3/10. 3/4 n'est pas là !"
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-demi-droite-graduer",
+      "pas_avant": "2026-12-01",
+      "notionId": "demi_droite_graduee",
+      "microId": "abscisse_graduer",
+      "classe": "6e",
+      "ceinture": "orange",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/demi-droite-graduee/04-graduer/eleveai-maths-6e-demi-droite-graduer.mp4",
+      "miniature": "6e/maths/demi-droite-graduee/04-graduer/eleveai-maths-6e-demi-droite-graduer.png",
+      "titre": "Comment graduer une barre de vie en quarts ? — Graduer une demi-droite — épisode 4 · Maths 6e",
+      "accroche": "Inès est game designer. Dans son jeu, le héros a une barre de vie. Elle veut la graduer en quarts : où tracer les traits pour que chaque quart soit juste ?\n\nDans cette vidéo :\n• choisir l'unité : la longueur qui vaut 1\n• trouver le pas : 12 cm ÷ 4 = 3 cm\n• reporter le pas : des sauts tous égaux\n• une demi-droite continue après 1\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 8 cm pour 1, gradué en quarts : tous les combien de cm, et où écrire 3/4 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/demi-droite-graduee\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/demi-droite-graduee\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=demi_droite_graduee&microId=abscisse_graduer&display=simple\n\n🔢 Épisode 4 sur 4 de la série « Repérer sur une demi-droite graduée » d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment graduer en quarts ?"
+        ],
+        [
+          "00:32",
+          "Choisir l'unité"
+        ],
+        [
+          "00:45",
+          "Trouver le pas"
+        ],
+        [
+          "00:57",
+          "Reporter le pas"
+        ],
+        [
+          "01:26",
+          "Question 1"
+        ],
+        [
+          "01:52",
+          "Le piège des sauts inégaux"
+        ],
+        [
+          "02:11",
+          "Une demi-droite"
+        ],
+        [
+          "02:35",
+          "Question 2"
+        ],
+        [
+          "03:14",
+          "À toi de jouer"
+        ],
+        [
+          "03:33",
+          "Correction"
+        ],
+        [
+          "03:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/demi-droite-graduee",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/demi-droite-graduee",
+      "tags": [
+        "graduer une demi-droite",
+        "graduer un segment",
+        "pas",
+        "unité",
+        "game designer",
+        "jeux vidéo",
+        "demi-droite graduée",
+        "abscisse",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:26",
+          "question": "Pour couper la barre en 4 parts égales, combien de traits à l'intérieur ?",
+          "choix": [
+            "4",
+            "3",
+            "5"
+          ],
+          "reponse": 1,
+          "explication": "Les deux bouts sont déjà là : 4 parts, mais 3 traits à l'intérieur."
+        },
+        {
+          "t": "02:35",
+          "question": "10 cm valent 1, gradués en cinquièmes. À combien de cm du 0 est le trait 3/5 ?",
+          "choix": [
+            "3 cm",
+            "6 cm",
+            "5 cm"
+          ],
+          "reponse": 1,
+          "explication": "Un saut mesure 10 ÷ 5 = 2 cm ; trois sauts : 3 × 2 = 6 cm."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "cm1-decimal-droite",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_decimal",
+      "microId": "decimal_droite",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.mp4",
+      "miniature": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.png",
+      "titre": "L'école est à 0,7 km : où s'arrête le bus ? — Un décimal sur une droite graduée · Maths CM1",
+      "accroche": "Inès est conductrice de bus. Sa ligne part du dépôt, au kilomètre 0, jusqu'à la gare, au kilomètre 1. La route est partagée en 10 parts égales. L'arrêt de l'école est à 0,7 km : où est-il ?\n\nDans cette vidéo :\n• 10 parts égales entre deux entiers : chaque saut vaut 1 dixième, 0,1\n• 0,7 : on part de 0 et on fait 7 sauts\n• le piège : on compte les sauts, pas le trait du départ\n• 0,08 n'est pas 0,8 ; 0,5 et 0,50, c'est la même place\n• entre 2 et 3 : on part de 2, pas de 0\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : placer 4,6 km sur une droite qui va de 4 à 5.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm1/nombre-decimal\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_decimal&microId=decimal_droite&display=simple",
+      "chapitres": [
+        [
+          "00:00",
+          "Où se trouve 0,7 ?"
+        ],
+        [
+          "00:27",
+          "La méthode : 10 parts, 7 sauts"
+        ],
+        [
+          "00:54",
+          "Le piège des traits"
+        ],
+        [
+          "01:11",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "0,08 ou 0,8 ?"
+        ],
+        [
+          "02:07",
+          "Le milieu : 0,5"
+        ],
+        [
+          "02:27",
+          "Après 1"
+        ],
+        [
+          "02:48",
+          "Question 2"
+        ],
+        [
+          "03:18",
+          "À toi de jouer"
+        ],
+        [
+          "03:41",
+          "Correction"
+        ],
+        [
+          "04:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm1/nombre-decimal",
+      "tags": [
+        "placer un nombre décimal",
+        "droite graduée",
+        "dixièmes",
+        "conductrice de bus",
+        "transports",
+        "nombres décimaux",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "Le bus est au point bleu. Quel nombre ?",
+          "choix": [
+            "0,7",
+            "0,06",
+            "0,6"
+          ],
+          "reponse": 2,
+          "explication": "Depuis 0, il y a 6 sauts de 1 dixième : 0,6. Pas 0,7 : le trait du départ ne compte pas."
+        },
+        {
+          "t": "02:48",
+          "question": "Cette droite va de 2 à 3. Où est le point bleu ?",
+          "choix": [
+            "0,4",
+            "2,4",
+            "2,5"
+          ],
+          "reponse": 1,
+          "explication": "On part de 2, pas de 0. Puis 4 sauts de 1 dixième : 2,4."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "cm1-decimal-droite-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_decimal",
+      "microId": "decimal_droite",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-decimal-droite",
+      "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short.mp4",
+      "miniature": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short-miniature.png",
+      "titre": "Tu paries que mon bus s'arrête pile à l'école ? #maths #cm1",
+      "accroche": "Ti Margo conduit le bus. L'école est à 0,7 km : il compte 7 traits... et s'arrête trop tôt ! Le trait du départ ne compte pas : on compte les SAUTS de 0,1.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : la route va de 3 à 4 km. Le bus part de 3 et fait 4 sauts. À quel kilomètre est-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_decimal&microId=decimal_droite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #cm1",
+      "tags": [
+        "droite graduée",
+        "dixièmes",
+        "bus",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture blanche",
+        "nombres décimaux",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:28",
+          "question": "Pour aller de 0 à 0,7, combien de sauts fait le bus ?",
+          "choix": [
+            "6 sauts",
+            "7 sauts",
+            "8 sauts"
+          ],
+          "reponse": 1,
+          "explication": "Chaque saut vaut 1 dixième. 7 sauts : 0,7."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "cm2-decimal-droite",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_decimal",
+      "microId": "decimal_droite",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm2-decimal-droite.mp4",
+      "miniature": "cm2/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm2-decimal-droite.png",
+      "titre": "L'école est à 0,7 km : où s'arrête le bus ? — Un décimal sur une droite graduée · Maths CM2",
+      "accroche": "Inès est conductrice de bus. Sa ligne part du dépôt, au kilomètre 0, jusqu'à la gare, au kilomètre 1. La route est partagée en 10 parts égales. L'arrêt de l'école est à 0,7 km : où est-il ?\n\nDans cette vidéo :\n• 10 parts égales entre deux entiers : chaque saut vaut 1 dixième, 0,1\n• 0,7 : on part de 0 et on fait 7 sauts\n• le piège : on compte les sauts, pas le trait du départ\n• 0,08 n'est pas 0,8 ; 0,5 et 0,50, c'est la même place\n• entre 2 et 3 : on part de 2, pas de 0\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : placer 4,6 km sur une droite qui va de 4 à 5.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/cm2/nombre-decimal\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=nombre_decimal&microId=decimal_droite&display=simple",
+      "chapitres": [
+        [
+          "00:00",
+          "Où se trouve 0,7 ?"
+        ],
+        [
+          "00:27",
+          "La méthode : 10 parts, 7 sauts"
+        ],
+        [
+          "00:54",
+          "Le piège des traits"
+        ],
+        [
+          "01:11",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "0,08 ou 0,8 ?"
+        ],
+        [
+          "02:07",
+          "Le milieu : 0,5"
+        ],
+        [
+          "02:27",
+          "Après 1"
+        ],
+        [
+          "02:48",
+          "Question 2"
+        ],
+        [
+          "03:18",
+          "À toi de jouer"
+        ],
+        [
+          "03:41",
+          "Correction"
+        ],
+        [
+          "04:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/cm2/nombre-decimal",
+      "tags": [
+        "placer un nombre décimal",
+        "droite graduée",
+        "dixièmes",
+        "conductrice de bus",
+        "transports",
+        "nombres décimaux",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "Le bus est au point bleu. Quel nombre ?",
+          "choix": [
+            "0,7",
+            "0,06",
+            "0,6"
+          ],
+          "reponse": 2,
+          "explication": "Depuis 0, il y a 6 sauts de 1 dixième : 0,6. Pas 0,7 : le trait du départ ne compte pas."
+        },
+        {
+          "t": "02:48",
+          "question": "Cette droite va de 2 à 3. Où est le point bleu ?",
+          "choix": [
+            "0,4",
+            "2,4",
+            "2,5"
+          ],
+          "reponse": 1,
+          "explication": "On part de 2, pas de 0. Puis 4 sauts de 1 dixième : 2,4."
+        }
+      ],
+      "centres": [
+        "transports"
+      ],
+      "meme_video_que": "cm1-decimal-droite"
+    },
+    {
+      "id": "cm2-decimal-droite-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_decimal",
+      "microId": "decimal_droite",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-decimal-droite",
+      "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short.mp4",
+      "miniature": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite-short-miniature.png",
+      "titre": "Tu paries que mon bus s'arrête pile à l'école ? #maths #cm2",
+      "accroche": "Ti Margo conduit le bus. L'école est à 0,7 km : il compte 7 traits... et s'arrête trop tôt ! Le trait du départ ne compte pas : on compte les SAUTS de 0,1.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : la route va de 3 à 4 km. Le bus part de 3 et fait 4 sauts. À quel kilomètre est-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=nombre_decimal&microId=decimal_droite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #cm2",
+      "tags": [
+        "droite graduée",
+        "dixièmes",
+        "bus",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture blanche",
+        "nombres décimaux",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:28",
+          "question": "Pour aller de 0 à 0,7, combien de sauts fait le bus ?",
+          "choix": [
+            "6 sauts",
+            "7 sauts",
+            "8 sauts"
+          ],
+          "reponse": 1,
+          "explication": "Chaque saut vaut 1 dixième. 7 sauts : 0,7."
+        }
+      ],
+      "centres": [
+        "transports"
+      ],
+      "meme_video_que": "cm1-decimal-droite-short"
     }
   ]
 }

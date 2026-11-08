@@ -1,0 +1,20 @@
+{
+  "00-garde": "Placer une fraction. Sur une demi-droite graduée, où se trouve 3 quarts ?",
+  "01-situation": "Voici Chloé, pâtissière. Ce matin, elle prépare des crêpes. Sa recette dit : 3 quarts de litre de lait. Son verre doseur est gradué en quarts. Jusqu'où verser le lait ?",
+  "02-coucher": "Couchons le verre doseur : ses traits deviennent une demi-droite graduée. Le fond du verre, c'est 0. Le haut, c'est 1 litre. Entre les deux, 4 parts égales.",
+  "03-denominateur": "Dans 3 quarts, regarde le 4, en bas : c'est le dénominateur. Il dit en combien de parts égales on coupe l'unité. Ici, 4 parts. Chaque saut vaut 1 quart.",
+  "04-numerateur": "Le 3, en haut, c'est le numérateur. Il dit combien de sauts on fait depuis 0. 1 saut, 2 sauts, 3 sauts : on est sur 3 quarts. Chloé verse le lait jusque-là.",
+  "05-question": "Question ! Ici, l'unité est coupée en 5 parts égales. Le point est sur le 2e trait après 0. Quelle est son abscisse ? A : 3 cinquièmes. B : 2 cinquièmes. C : 2. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B : 2 cinquièmes. On compte les sauts depuis 0 : 2 sauts d'un cinquième. Le trait de 0 ne compte pas.",
+  "06-sept-quarts": "Pour la fête de l'école, Chloé fait beaucoup de crêpes. Il lui faut 7 quarts de litre. 7 sauts d'un quart ! 4 sauts : on arrive pile sur 1. 4 quarts égale 1. Encore 3 sauts : 7 quarts. Donc 7 quarts égale 1 plus 3 quarts.",
+  "07-question": "Question ! Entre quels nombres entiers se place 9 quarts ? A : entre 0 et 1. B : entre 9 et 10. C : entre 2 et 3. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C : entre 2 et 3. 4 quarts font 1, 8 quarts font 2. Et 9 quarts, c'est 2 plus 1 quart.",
+  "08-piege": "Attention au piège ! On compte les sauts, pas les traits. Si je compte le trait de 0, j'en trouve 4 jusqu'à 3 quarts. Faux ! Depuis 0, il y a 3 sauts.",
+  "09-dixiemes": "Et si l'unité est coupée en 10 ? Même geste : chaque saut vaut 1 dixième. 7 sauts : 7 dixièmes. En dessous, on écrit aussi 0,7. La fraction au-dessus, le décimal en dessous : c'est le même point.",
+  "10-question": "Question ! Sur cette droite graduée en dixièmes, quel nombre est au 3e trait après 0 ? A : 3 quarts. B : 3 dixièmes. C : 3. Mets pause, et choisis !",
+  "10b-reponse": "Réponse B : 3 dixièmes. Ici, chaque saut vaut 1 dixième. 3 quarts n'est pas là !",
+  "11-defi": "Ton défi ! Une autre recette demande 5 tiers de litre de lait. Sur cette droite, l'unité est coupée en 3. Place 5 tiers. Mets pause, et cherche !",
+  "11b-correction": "Correction. Le dénominateur 3 : l'unité est coupée en 3. Le numérateur 5 : 5 sauts depuis 0. 3 sauts, on est sur 1. Encore 2 sauts : 5 tiers égale 1 plus 2 tiers, entre 1 et 2.",
+  "12-finale": "Ce que tu as appris. Le dénominateur dit en combien de parts égales on coupe l'unité. Le numérateur dit combien de sauts on fait depuis 0. On compte les sauts, pas les traits. 7 quarts égale 1 plus 3 quarts : entre 1 et 2.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

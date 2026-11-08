@@ -1,0 +1,504 @@
+﻿00-garde	0.1014375	Placer
+00-garde	0.6214375	une
+00-garde	0.7614375	fraction
+00-garde	2.3164375	Sur
+00-garde	2.6514375	une
+00-garde	2.8214375	demi-droite
+00-garde	3.5114375	graduée
+00-garde	4.3014375	où
+00-garde	4.4064375	se
+00-garde	4.6214375	trouve
+00-garde	4.9364375	3 quarts
+00-garde	5.2014375	3 quarts
+01-situation	0.1014375	Voici
+01-situation	0.6264375	Chloé
+01-situation	1.2714375	pâtissière
+01-situation	3.1014375	Ce
+01-situation	3.3414375	matin
+01-situation	3.9914375	elle
+01-situation	4.1564375	prépare
+01-situation	4.6414375	des
+01-situation	4.7764375	crêpes
+01-situation	6.1314375	Sa
+01-situation	6.3814375	recette
+01-situation	6.9114375	dit
+01-situation	7.3564375	3 quarts
+01-situation	7.6614375	3 quarts
+01-situation	7.9814375	de
+01-situation	8.1214375	litre
+01-situation	8.4514375	de
+01-situation	8.5864375	lait
+01-situation	9.7164375	Son
+01-situation	10.0064375	verre
+01-situation	10.2714375	doseur
+01-situation	10.7364375	est
+01-situation	10.8564375	gradué
+01-situation	11.4064375	en
+01-situation	11.5314375	quarts
+01-situation	12.8814375	Jusqu'où
+01-situation	13.4664375	verser
+01-situation	13.8914375	le
+01-situation	14.0314375	lait
+02-coucher	0.1014375	Couchons
+02-coucher	0.6014375	le
+02-coucher	0.7514375	verre
+02-coucher	1.0464375	doseur
+02-coucher	1.8214375	ses
+02-coucher	2.0364375	traits
+02-coucher	2.3014375	deviennent
+02-coucher	2.7464375	une
+02-coucher	2.9214375	demi-droite
+02-coucher	3.5614375	graduée
+02-coucher	5.0514375	Le
+02-coucher	5.2714375	fond
+02-coucher	5.5314375	du
+02-coucher	5.6714375	verre
+02-coucher	6.2664375	c'est
+02-coucher	6.4914375	0
+02-coucher	7.8064375	Le
+02-coucher	8.0364375	haut
+02-coucher	8.3864375	c'est
+02-coucher	8.6114375	1 litre
+02-coucher	8.7814375	1 litre
+02-coucher	10.1364375	Entre
+02-coucher	10.4264375	les
+02-coucher	10.5714375	deux
+02-coucher	11.0164375	4 parts
+02-coucher	11.3714375	4 parts
+02-coucher	11.6064375	égales
+03-denominateur	0.1014375	Dans
+03-denominateur	0.3464375	3 quarts
+03-denominateur	0.6164375	3 quarts
+03-denominateur	1.2314375	regarde
+03-denominateur	1.7664375	le
+03-denominateur	1.9264375	4
+03-denominateur	2.5814375	en
+03-denominateur	2.7064375	bas
+03-denominateur	3.1514375	c'est
+03-denominateur	3.3714375	le
+03-denominateur	3.5114375	dénominateur
+03-denominateur	5.4414375	Il
+03-denominateur	5.6314375	dit
+03-denominateur	5.8364375	en
+03-denominateur	5.9614375	combien
+03-denominateur	6.4664375	de
+03-denominateur	6.6064375	parts
+03-denominateur	6.8464375	égales
+03-denominateur	7.2714375	on
+03-denominateur	7.3864375	coupe
+03-denominateur	7.6214375	l'unité
+03-denominateur	9.1064375	Ici
+03-denominateur	9.7664375	4 parts
+03-denominateur	10.1214375	4 parts
+03-denominateur	11.4614375	Chaque
+03-denominateur	11.7714375	saut
+03-denominateur	12.0364375	vaut
+03-denominateur	12.2414375	1 quart
+03-denominateur	12.3664375	1 quart
+04-numerateur	0.1014375	Le
+04-numerateur	0.3164375	3
+04-numerateur	0.8514375	en
+04-numerateur	0.9764375	haut
+04-numerateur	1.3264375	c'est
+04-numerateur	1.5414375	le
+04-numerateur	1.6864375	numérateur
+04-numerateur	3.4764375	Il
+04-numerateur	3.6664375	dit
+04-numerateur	3.8364375	combien
+04-numerateur	4.3414375	de
+04-numerateur	4.4714375	sauts
+04-numerateur	4.7564375	on
+04-numerateur	4.8664375	fait
+04-numerateur	5.1014375	depuis
+04-numerateur	5.4514375	0
+04-numerateur	6.7564375	1 saut
+04-numerateur	6.9314375	1 saut
+04-numerateur	7.4464375	2 sauts
+04-numerateur	7.6564375	2 sauts
+04-numerateur	8.1764375	3 sauts
+04-numerateur	8.4714375	3 sauts
+04-numerateur	8.9864375	on
+04-numerateur	9.1064375	est
+04-numerateur	9.2664375	sur
+04-numerateur	9.5664375	3 quarts
+04-numerateur	9.8314375	3 quarts
+04-numerateur	11.1814375	Chloé
+04-numerateur	11.6164375	verse
+04-numerateur	12.0214375	le
+04-numerateur	12.1614375	lait
+04-numerateur	12.3314375	jusque-là
+05-question	0.1014375	Question
+05-question	1.6314375	Ici
+05-question	2.2914375	l'unité
+05-question	2.8764375	est
+05-question	2.9764375	coupée
+05-question	3.3564375	en
+05-question	3.4664375	5 parts
+05-question	3.7964375	5 parts
+05-question	4.0314375	égales
+05-question	5.4764375	Le
+05-question	5.6964375	point
+05-question	6.0114375	est
+05-question	6.1164375	sur
+05-question	6.3564375	le
+05-question	6.5064375	2e
+05-question	6.9714375	trait
+05-question	7.2514375	après
+05-question	7.5864375	0
+05-question	8.8964375	Quelle
+05-question	9.2214375	est
+05-question	9.3114375	son
+05-question	9.5214375	abscisse
+05-question	11.1164375	A
+05-question	11.4664375	3
+05-question	11.7414375	cinquièmes
+05-question	13.3864375	B
+05-question	13.8364375	2
+05-question	14.0264375	cinquièmes
+05-question	15.6714375	C
+05-question	16.1914375	2
+05-question	16.3814375	Mets
+05-question	16.5564375	pause
+05-question	17.1914375	et
+05-question	17.2964375	choisis
+05b-reponse	0.1014375	Réponse
+05b-reponse	0.6214375	B
+05b-reponse	1.0464375	2
+05b-reponse	1.2364375	cinquièmes
+05b-reponse	2.8814375	On
+05b-reponse	3.0314375	compte
+05b-reponse	3.3514375	les
+05b-reponse	3.4864375	sauts
+05b-reponse	3.7614375	depuis
+05b-reponse	4.1164375	0
+05b-reponse	4.7214375	2 sauts
+05b-reponse	4.9214375	2 sauts
+05b-reponse	5.1664375	d'un
+05b-reponse	5.3314375	cinquième
+05b-reponse	6.9714375	Le
+05b-reponse	7.1914375	trait
+05b-reponse	7.4564375	de
+05b-reponse	7.6064375	0
+05b-reponse	7.9814375	ne
+05b-reponse	8.1414375	compte
+05b-reponse	8.4564375	pas
+06-sept-quarts	0.1014375	Pour
+06-sept-quarts	0.3614375	la
+06-sept-quarts	0.5064375	fête
+06-sept-quarts	0.8414375	de
+06-sept-quarts	1.0064375	l'école
+06-sept-quarts	1.7764375	Chloé
+06-sept-quarts	2.2214375	fait
+06-sept-quarts	2.4364375	beaucoup
+06-sept-quarts	2.8014375	de
+06-sept-quarts	2.9364375	crêpes
+06-sept-quarts	4.2964375	Il
+06-sept-quarts	4.4664375	lui
+06-sept-quarts	4.6864375	faut
+06-sept-quarts	4.9064375	7 quarts
+06-sept-quarts	5.2114375	7 quarts
+06-sept-quarts	5.5164375	de
+06-sept-quarts	5.6514375	litre
+06-sept-quarts	7.0014375	7 sauts
+06-sept-quarts	7.3114375	7 sauts
+06-sept-quarts	7.5514375	d'un
+06-sept-quarts	7.7314375	quart
+06-sept-quarts	9.0864375	4 sauts
+06-sept-quarts	9.4264375	4 sauts
+06-sept-quarts	9.9364375	on
+06-sept-quarts	10.0614375	arrive
+06-sept-quarts	10.4414375	pile
+06-sept-quarts	10.6964375	sur
+06-sept-quarts	10.9764375	1
+06-sept-quarts	12.0264375	4 quarts
+06-sept-quarts	12.3814375	4 quarts
+06-sept-quarts	12.6364375	égale
+06-sept-quarts	13.0464375	1
+06-sept-quarts	14.0964375	Encore
+06-sept-quarts	14.5264375	3 sauts
+06-sept-quarts	14.7814375	3 sauts
+06-sept-quarts	15.2964375	7 quarts
+06-sept-quarts	15.6014375	7 quarts
+06-sept-quarts	16.9564375	Donc
+06-sept-quarts	17.3014375	7 quarts
+06-sept-quarts	17.6014375	7 quarts
+06-sept-quarts	17.8664375	égale
+06-sept-quarts	18.2964375	1 plus
+06-sept-quarts	18.4064375	1 plus
+06-sept-quarts	18.7314375	3 quarts
+06-sept-quarts	19.0364375	3 quarts
+07-question	0.1014375	Question
+07-question	1.6314375	Entre
+07-question	1.9464375	quels
+07-question	2.1714375	nombres
+07-question	2.5264375	entiers
+07-question	2.9864375	se
+07-question	3.2014375	place
+07-question	3.6064375	9 quarts
+07-question	3.8564375	9 quarts
+07-question	5.2064375	A
+07-question	5.5564375	entre
+07-question	5.8314375	0 et
+07-question	6.1914375	0 et
+07-question	6.2914375	1
+07-question	7.3414375	B
+07-question	7.7914375	entre
+07-question	8.0764375	9 et
+07-question	8.3564375	9 et
+07-question	8.4364375	10
+07-question	9.6964375	C
+07-question	10.2214375	entre
+07-question	10.5114375	2 et
+07-question	10.7114375	2 et
+07-question	10.7964375	3
+07-question	12.0264375	Mets
+07-question	12.2364375	pause
+07-question	12.8664375	et
+07-question	12.9764375	choisis
+07b-reponse	0.1014375	Réponse
+07b-reponse	0.6414375	C
+07b-reponse	1.1664375	entre
+07b-reponse	1.4564375	2 et
+07b-reponse	1.6564375	2 et
+07b-reponse	1.7414375	3
+07b-reponse	2.9714375	4 quarts
+07b-reponse	3.3264375	4 quarts
+07b-reponse	3.5864375	font
+07b-reponse	3.8464375	1
+07b-reponse	4.1964375	8 quarts
+07b-reponse	4.4114375	8 quarts
+07b-reponse	4.6964375	font
+07b-reponse	4.9364375	2
+07b-reponse	6.0814375	Et 9
+07b-reponse	6.4814375	Et 9
+07b-reponse	6.7264375	quarts
+07b-reponse	7.3414375	c'est
+07b-reponse	7.5664375	2 plus
+07b-reponse	7.7214375	2 plus
+07b-reponse	8.0714375	1 quart
+07b-reponse	8.1814375	1 quart
+08-piege	0.1014375	Attention
+08-piege	0.7714375	au
+08-piege	0.8814375	piège
+08-piege	2.3064375	On
+08-piege	2.4564375	compte
+08-piege	2.7714375	les
+08-piege	2.8864375	sauts
+08-piege	3.4064375	pas
+08-piege	3.6164375	les
+08-piege	3.7714375	traits
+08-piege	4.9814375	Si
+08-piege	5.2714375	je
+08-piege	5.4464375	compte
+08-piege	5.7664375	le
+08-piege	5.9064375	trait
+08-piege	6.1714375	de
+08-piege	6.3264375	0
+08-piege	6.9464375	j'en
+08-piege	7.2014375	trouve
+08-piege	7.5114375	4
+08-piege	7.9114375	jusqu'à
+08-piege	8.3264375	3 quarts
+08-piege	8.5914375	3 quarts
+08-piege	9.9464375	Faux
+08-piege	11.1614375	Depuis
+08-piege	11.6214375	0
+08-piege	12.2264375	il
+08-piege	12.3814375	y
+08-piege	12.5014375	a
+08-piege	12.5864375	3 sauts
+08-piege	12.8364375	3 sauts
+09-dixiemes	0.1014375	Et
+09-dixiemes	0.2364375	si
+09-dixiemes	0.4814375	l'unité
+09-dixiemes	1.0264375	est
+09-dixiemes	1.1414375	coupée
+09-dixiemes	1.5164375	en
+09-dixiemes	1.6264375	10
+09-dixiemes	2.8864375	Même
+09-dixiemes	3.1964375	geste
+09-dixiemes	3.9164375	chaque
+09-dixiemes	4.2064375	saut
+09-dixiemes	4.4564375	vaut
+09-dixiemes	4.6564375	1 dixième
+09-dixiemes	4.7664375	1 dixième
+09-dixiemes	6.2914375	7 sauts
+09-dixiemes	6.6064375	7 sauts
+09-dixiemes	7.1264375	7 dixièmes
+09-dixiemes	7.4364375	7 dixièmes
+09-dixiemes	8.9714375	En
+09-dixiemes	9.1214375	dessous
+09-dixiemes	9.7964375	on
+09-dixiemes	9.9214375	écrit
+09-dixiemes	10.3414375	aussi
+09-dixiemes	10.6564375	0,7
+09-dixiemes	10.9964375	0,7
+09-dixiemes	11.4464375	0,7
+09-dixiemes	12.8014375	La
+09-dixiemes	13.0064375	fraction
+09-dixiemes	13.6164375	au-dessus
+09-dixiemes	14.3814375	le
+09-dixiemes	14.5714375	décimal
+09-dixiemes	15.1464375	en
+09-dixiemes	15.2614375	dessous
+09-dixiemes	15.9314375	c'est
+09-dixiemes	16.1514375	le
+09-dixiemes	16.2864375	même
+09-dixiemes	16.5264375	point
+10-question	0.1014375	Question
+10-question	1.6314375	Sur
+10-question	1.9364375	cette
+10-question	2.2214375	droite
+10-question	2.5864375	graduée
+10-question	3.1364375	en
+10-question	3.2464375	dixièmes
+10-question	4.0714375	quel
+10-question	4.3114375	nombre
+10-question	4.6414375	est
+10-question	4.7464375	au
+10-question	4.8964375	3e
+10-question	5.4614375	trait
+10-question	5.7414375	après
+10-question	6.0714375	0
+10-question	7.3714375	A
+10-question	7.7214375	3 quarts
+10-question	8.0314375	3 quarts
+10-question	9.3814375	B
+10-question	9.8314375	3 dixièmes
+10-question	10.1114375	3 dixièmes
+10-question	11.6314375	C
+10-question	12.1514375	3
+10-question	12.4264375	Mets
+10-question	12.5964375	pause
+10-question	13.2264375	et
+10-question	13.3364375	choisis
+10b-reponse	0.1014375	Réponse
+10b-reponse	0.6214375	B
+10b-reponse	1.0464375	3 dixièmes
+10b-reponse	1.3264375	3 dixièmes
+10b-reponse	2.8464375	Ici
+10b-reponse	3.5064375	chaque
+10b-reponse	3.8014375	saut
+10b-reponse	4.0464375	vaut
+10b-reponse	4.2464375	1 dixième
+10b-reponse	4.3564375	1 dixième
+10b-reponse	5.8814375	3 quarts
+10b-reponse	6.1914375	3 quarts
+10b-reponse	6.4764375	n'est
+10b-reponse	6.6364375	pas
+10b-reponse	6.8064375	là
+11-defi	0.1014375	Ton
+11-defi	0.3214375	défi
+11-defi	1.6764375	Une
+11-defi	1.8714375	autre
+11-defi	2.0964375	recette
+11-defi	2.6064375	demande
+11-defi	3.0314375	5 tiers
+11-defi	3.3664375	5 tiers
+11-defi	3.7414375	de
+11-defi	3.8814375	litre
+11-defi	4.2314375	de
+11-defi	4.3664375	lait
+11-defi	5.4914375	Sur
+11-defi	5.8014375	cette
+11-defi	6.0814375	droite
+11-defi	6.8414375	l'unité
+11-defi	7.4164375	est
+11-defi	7.5164375	coupée
+11-defi	7.8864375	en
+11-defi	8.0014375	3
+11-defi	9.2314375	Place
+11-defi	9.6364375	5 tiers
+11-defi	9.9814375	5 tiers
+11-defi	11.3814375	Mets
+11-defi	11.5914375	pause
+11-defi	12.2214375	et
+11-defi	12.3164375	cherche
+11b-correction	0.1014375	Correction
+11b-correction	1.7414375	Le
+11b-correction	1.9614375	dénominateur
+11b-correction	2.8464375	3
+11b-correction	3.3814375	l'unité
+11b-correction	3.9614375	est
+11b-correction	4.0564375	coupée
+11b-correction	4.4314375	en
+11b-correction	4.5414375	3
+11b-correction	5.7714375	Le
+11b-correction	5.9914375	numérateur
+11b-correction	6.7164375	5
+11b-correction	7.4164375	5 sauts
+11b-correction	7.7514375	5 sauts
+11b-correction	8.0014375	depuis
+11b-correction	8.3464375	0
+11b-correction	9.6464375	3 sauts
+11b-correction	9.9414375	3 sauts
+11b-correction	10.4564375	on
+11b-correction	10.5764375	est
+11b-correction	10.7364375	sur
+11b-correction	11.0114375	1
+11b-correction	12.0614375	Encore
+11b-correction	12.4814375	2 sauts
+11b-correction	12.6514375	2 sauts
+11b-correction	13.1714375	5 tiers
+11b-correction	13.5214375	5 tiers
+11b-correction	13.8464375	égale
+11b-correction	14.1764375	1 plus
+11b-correction	14.2864375	1 plus
+11b-correction	14.5814375	2 tiers
+11b-correction	14.7414375	2 tiers
+11b-correction	15.4214375	entre
+11b-correction	15.6764375	1 et
+11b-correction	15.8014375	1 et
+11b-correction	15.8864375	2
+12-finale	0.1014375	Ce
+12-finale	0.3464375	que
+12-finale	0.5314375	tu
+12-finale	0.7514375	as
+12-finale	0.8414375	appris
+12-finale	2.2314375	Le
+12-finale	2.4564375	dénominateur
+12-finale	3.3664375	dit
+12-finale	3.5714375	en
+12-finale	3.6964375	combien
+12-finale	4.2014375	de
+12-finale	4.3414375	parts
+12-finale	4.5764375	égales
+12-finale	5.0064375	on
+12-finale	5.1214375	coupe
+12-finale	5.3514375	l'unité
+12-finale	6.8364375	Le
+12-finale	7.0614375	numérateur
+12-finale	7.8314375	dit
+12-finale	8.0014375	combien
+12-finale	8.5064375	de
+12-finale	8.6364375	sauts
+12-finale	8.9214375	on
+12-finale	9.0314375	fait
+12-finale	9.2664375	depuis
+12-finale	9.6164375	0
+12-finale	10.9214375	On
+12-finale	11.0714375	compte
+12-finale	11.3864375	les
+12-finale	11.5014375	sauts
+12-finale	12.0214375	pas
+12-finale	12.2314375	les
+12-finale	12.3864375	traits
+12-finale	13.5964375	7 quarts
+12-finale	13.9214375	7 quarts
+12-finale	14.1864375	égale
+12-finale	14.6164375	1 plus
+12-finale	14.7264375	1 plus
+12-finale	15.0514375	3 quarts
+12-finale	15.3564375	3 quarts
+12-finale	15.9714375	entre
+12-finale	16.2264375	1 et
+12-finale	16.3514375	1 et
+12-finale	16.4364375	2
+13-abonne	0.1014375	Entraîne-toi
+13-abonne	0.8764375	sur
+13-abonne	1.1514375	éleveai
+13-abonne	1.5814375	point
+13-abonne	1.8964375	f
+13-abonne	2.1314375	r
+13-abonne	3.3764375	Et
+13-abonne	3.5064375	abonne-toi

@@ -1,0 +1,22 @@
+{
+  "00-garde": "Lire l'abscisse d'un point. Comment savoir où l'on est, sur un parcours ?",
+  "01-situation": "Voici Inès. Elle organise des courses de trail. Le long du sentier, elle plante des bornes : 0 au départ, puis 1 kilomètre, 2 kilomètres. Où mettre le ravitaillement ? Et le photographe ? Sur son plan, le sentier devient une demi-droite graduée.",
+  "01b-apprendre": "Ce que tu vas apprendre : lire l'abscisse d'un point, en comptant les sauts depuis l'origine.",
+  "02-origine": "Le départ, c'est l'origine de la demi-droite. Son nombre est 0. Ensuite, les traits sont tous à la même distance. Chaque point a un nombre : on l'appelle son abscisse.",
+  "03-pas": "Avant de lire, je trouve le pas : ce que vaut un saut, d'un trait au suivant. Je prends deux nombres écrits : 0 et 3. Entre les deux, il y a 3 sauts. 3 divisé par 3, égale 1. Le pas vaut 1 kilomètre.",
+  "04-lire-un": "Le ravitaillement est au point R. Je compte les sauts depuis l'origine : 1, 2, 3, 4, 5. L'abscisse de R est 5 : le ravitaillement est au kilomètre 5. Attention : le trait du départ ne compte pas. On compte les sauts, et non les traits.",
+  "05-question": "Question ! Sur le plan d'un grand trail, on lit 0 et 20, avec 4 sauts entre les deux. Que vaut le pas ? A : 1 kilomètre. B : 4 kilomètres. C : 5 kilomètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 20 divisé par 4, égale 5. Un saut vaut 5 kilomètres. Un saut ne vaut pas toujours 1 : on le calcule.",
+  "06-demi-pas": "Voici le plan du petit parcours. On lit 0 et 1, avec 2 sauts entre les deux. 1 divisé par 2, égale 0,5. Ici, le pas vaut 0,5 : un demi-kilomètre.",
+  "07-demi-lire": "Le photographe est au point P. Je compte les sauts depuis l'origine : 0,5 ; 1 ; 1,5. L'abscisse de P est 1,5. Attention : il y a 3 sauts, mais l'abscisse est 1,5, et non 3 !",
+  "08-question": "Question ! Le pas vaut 0,5. Les secouristes sont au point S. Quelle est son abscisse ? A : 4. B : 2. C : 2,5. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Je compte les sauts : 0,5 ; 1 ; 1,5 ; 2. L'abscisse de S est 2. A compte les traits. C compte aussi le trait de l'origine.",
+  "09-dixiemes-pas": "Pour le premier kilomètre, Inès fait un plan plus précis. On lit 0 et 1, avec 10 sauts entre les deux. 1 divisé par 10, égale 0,1. Ici, le pas vaut 0,1.",
+  "10-dixiemes-lire": "Le poste d'eau est au point E. Je compte les sauts depuis l'origine : 0,1 ; 0,2 ; 0,3 ; 0,4 ; 0,5 ; 0,6. Il y a 6 sauts de 0,1 : 6 dixièmes. L'abscisse de E est 0,6.",
+  "11-question": "Question ! Le pas vaut 0,1. Le podium est au point M. Quelle est son abscisse ? A : 13. B : 1,3. C : 4. Mets pause, et choisis !",
+  "11b-reponse": "Réponse B. 10 sauts de 0,1 m'amènent à 1. Puis encore 3 sauts : 1,1 ; 1,2 ; 1,3. A compte les traits. C croit que le pas vaut 1.",
+  "12-defi": "À toi de jouer ! Sur le plan de la course des enfants, on lit 0 et 1, avec 5 sauts entre les deux. L'arrivée est au point F. Quelle est son abscisse ? Mets pause, et cherche !",
+  "12b-correction": "Correction. D'abord le pas : 1 divisé par 5, égale 0,2. Puis je compte les sauts depuis l'origine : 0,2 ; 0,4 ; 0,6. L'abscisse de F est 0,6 : les enfants courent 0,6 kilomètre.",
+  "13-finale": "Ce que tu as appris. L'origine vaut 0. Avant de lire, je trouve le pas : ce que vaut un saut. Puis je compte les sauts depuis l'origine, et non les traits.",
+  "14-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

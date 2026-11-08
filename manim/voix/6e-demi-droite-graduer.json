@@ -1,0 +1,19 @@
+{
+  "00-garde": "Graduer une demi-droite. Comment tracer des traits tous à la même distance ?",
+  "01-situation": "Voici Inès. Elle est game designer : elle invente des jeux vidéo. Dans son jeu, le héros a une barre de vie. Inès veut la graduer en quarts. Où tracer les traits, pour que chaque quart soit juste ?",
+  "02-apprendre": "Dans cette vidéo, tu vas apprendre à graduer : choisir l'unité, trouver le pas, et faire des sauts tous égaux.",
+  "03-unite": "D'abord, on choisit l'unité : la longueur qui vaut 1. Inès prend 12 centimètres. Au début de la barre, elle écrit 0. Au bout, elle écrit 1.",
+  "04-pas": "En quarts, c'est 4 parts égales. Je divise : 12 divisé par 4, égale 3. Un saut mesure 3 centimètres : c'est le pas.",
+  "05-reporter": "Je pose la règle contre la barre. Je pars de 0, et je reporte le pas : à 3 centimètres, à 6, à 9, et à 12. Chaque saut fait 3 centimètres : tous les sauts sont égaux.",
+  "06-ecrire": "J'enlève la règle, et j'écris les nombres sous les traits. Un saut : un quart. Deux sauts : deux quarts, la moitié. Trois sauts : trois quarts. Quatre sauts : on arrive à 1.",
+  "07-question": "Question ! Pour couper la barre en 4 parts égales, combien de traits trace-t-on à l'intérieur ? A : 4. B : 3. C : 5. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B : 3 traits. Les deux bouts sont déjà là : 4 parts, mais 3 traits à l'intérieur.",
+  "08-piege": "Attention au piège ! Un stagiaire a gradué une barre à l'œil. Ses sauts mesurent 2 centimètres, puis 5, puis 2, puis 3. Les sauts ne sont pas égaux : c'est faux ! Son trait un quart devrait être à 3 centimètres.",
+  "09-demi-droite": "Une demi-droite, elle, continue après 1. Pour la barre des niveaux, Inès choisit 2 centimètres pour 1. Je pars de l'origine, 0. Je reporte le même saut de 2 centimètres, encore et encore. Sous les traits, j'écris 1, 2, 3, 4, 5. Et la flèche dit : ça continue !",
+  "10-question": "Question ! Un segment de 10 centimètres vaut 1. On le gradue en cinquièmes. À combien de centimètres du 0 est le trait trois cinquièmes ? A : 3 centimètres. B : 6 centimètres. C : 5 centimètres. Mets pause, et choisis !",
+  "10b-reponse": "Réponse B : 6 centimètres. Un saut mesure 10 divisé par 5, égale 2 centimètres. Trois sauts : 3 fois 2, égale 6 centimètres.",
+  "11-defi": "À toi de jouer ! Inès dessine la barre du bouclier : 8 centimètres pour 1, graduée en quarts. Tous les combien de centimètres trace-t-elle un trait ? Et où écrit-elle trois quarts ? Mets pause, et cherche !",
+  "11b-correction": "Correction. 8 divisé par 4, égale 2 : un trait tous les 2 centimètres. À 2, à 4, à 6 centimètres. Trois quarts, c'est trois sauts : 3 fois 2, égale 6. Trois quarts est à 6 centimètres du 0.",
+  "12-finale": "Ce que tu as appris. Je choisis l'unité : la longueur qui vaut 1. Je divise pour trouver le pas : 12 divisé par 4, égale 3 centimètres. Je reporte le pas à la règle : tous les sauts sont égaux. Puis j'écris les nombres sous les traits.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
