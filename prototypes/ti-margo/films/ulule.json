@@ -1,0 +1,8 @@
+{
+  "format": "paysage",
+  "voix": "ulule-{ep}",
+  "sons": "public/sons/ulule-{ep}",
+  "sortie": "manim/sorties/ulule",
+  "nom": "{ep}",
+  "episodes": { "presentation": "01" }
+}

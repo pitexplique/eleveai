@@ -80,3 +80,42 @@ Sous-titre (133 caractères) :
 ```text
 Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent les maths, de la GS à la terminale, vérifiés un par un.
 ```
+
+## Changement après la bascule
+
+- 07/11 : Frédéric a mis une contrepartie à **4,95 €** sur Ulule, soit le prix d'un mois d'abonnement famille. À confirmer : 4,95 € = 1 mois offert, à la place du « Merci » à 5 €. Les autres contreparties restent : 10 € = 2 mois, 25 € = 6 mois, 50 € = 1 an.
+
+- 07/11 : **le texte final de la description** est celui que Frédéric a collé sur Ulule. Il ajoute des intertitres (« Deux limites à dépasser », « À quoi servira la collecte », « Rejoindre le projet ») et une **licence classe à partir de 2 € par élève et par an** (⚠️ à mettre en cohérence avec la contrepartie à 300 € de `page-ulule.md`). Il remplace la « Description finale » ci-dessus.
+
+- 07/11 : **vidéo de présentation RENDUE** : `manim/sorties/ulule/presentation.mp4` (1 min 53, 1920 × 1080), planche `presentation-planche.png` relue, aperçu sur le port 3900 en pause. Reste à l'écouter (Frédéric). Non committés : `prototypes/ti-margo/films/ulule*`, `manim/voix/ulule-presentation.json`, `public/sons/ulule-presentation/`, `manim/sorties/ulule/`, et l'option paysage dans `scripts/ti-margo-short.mjs`, `prototypes/ti-margo/short.js`, `scripts/ti-margo-planche.py` (vérifiée sans effet sur les shorts verticaux). Committer PAR CHEMIN après son écoute. Défauts connus : photo de Frédéric un peu floue (240 px), captures du coach illisibles en petit, la vue parent est la maquette de `/parents` (pas de vert, orange, gris par compétence).
+
+- 07/11 soir : **vidéo v2 rendue** (2 min 22) : scènes 6-7 avec les quatre postes financés, 4,95 € = 1 mois, camembert à la fin (« Et voici où vont les huit mille euros »). Planche relue, carte des usages corrigée. Reste : son écoute, le commit PAR CHEMIN, puis YouTube « non répertoriée » sur son ordre. Images aussi : `photo-profil.png` (Ti Margo + sa photo, « Maths en dessin animé ») et `image-principale.png` (« Ti Margo : les maths en dessin animé », « De la GS à la terminale »), non committées dans leur dernière version.
+
+- 08/11 : **v3 demandée** (agent `a16e48ecac8f79af5`) :
+  - scène 4 : « Et le coach suit le programme de ton pays, partout où l'on apprend les maths en français », avec 7 drapeaux et leurs noms ;
+  - scène 9 : « Alors ? On les finit ensemble ? », ton joyeux et montant, Ti Margo bras ouverts.
+
+  Nouvelles images, non committées :
+  - `photo-profil-rond.png`, l'avatar pensé pour le rond, avec « Maths animées ! » ;
+  - `banniere-profil.png`, la bannière du profil en 1920 × 420.
+
+  Après son écoute : committer PAR CHEMIN, puis envoyer sur YouTube en « non répertoriée » sur son ordre.
+
+- 08/11 : **NOUVELLE STRATÉGIE.** Ulule jugeait 8 000 € trop ambitieux.
+  - Objectif **3 000 € = le collège vérifié avant le brevet 2027**.
+  - Étapes ensuite : 5 000 € = l'école primaire, 8 000 € = le lycée. Plus de palier pub ni pays.
+  - **Ordinateur retiré** de la page et de la vidéo : « les gens ne financent pas un ordinateur ».
+  - **« Étudiants en maths, futurs professeurs »**.
+  - **Qualité dite en positif** (« label qualité »), jamais « une erreur = un enfant qui apprend faux ».
+  - **IA écrite « Outils d'animation »**.
+- Camembert 3 000 € : étudiants 1 400 / cotisations 720 / outils 640 / Ulule 240. Script `camembert3000.mjs` dans le scratchpad de l'ancienne session.
+- Texte final mis en forme : `description-ulule.html` (Ctrl+A / Ctrl+C / Ctrl+V dans Ulule). Il remplace les descriptions précédentes.
+- Fond de page Ulule : couleur unie `C6E9FB` (`fond-page.png` en réserve).
+- Vidéo v5 en BASSE DÉFINITION : `manim/sorties/ulule/presentation-bd.mp4` (2 min 20). Option `BD=1` dans `scripts/ti-margo-short.mjs`. Le HD attend sa validation.
+- Il manque une vraie anecdote d'élève (sans prénom) à ajouter au texte.
+
+- 08/11 : **vidéo HD FINALE (v6)** rendue : `manim/sorties/ulule/presentation.mp4` (2 min 18, 30,9 Mo), planche relue.
+  - Scène 7 : « 3 000 € = tous les dessins animés du collège », « Relus par un futur professeur ».
+  - Rien n'est committé. ✅ En ligne (non répertoriée), mise par lui : https://youtu.be/HQ7B3ElMH8Y — à coller dans Ulule et dans la description YouTube (lien Ulule à ajouter).
+  - Description réécrite autour du résultat : « finir les dessins animés du collège », avec la relecture comme garantie et des contreparties à tarif fondateur. **Le prix fondateur de l'abonnement d'un an est à fixer.**
+  - Session [codes-ulule] lancée : codes d'abonnement, page /code et carte cadeau. Mise en ligne dès qu'Ulule accepte, sur son ordre.

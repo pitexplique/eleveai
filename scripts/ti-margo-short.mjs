@@ -2,7 +2,7 @@
 //   node scripts/ti-margo-short.mjs <série> <épisode> controle 1 12 30  → une image PNG par instant (s), dans le dossier CONTROLE
 //   node scripts/ti-margo-short.mjs <série> <épisode> film              → le MP4 complet avec la voix
 //   node scripts/ti-margo-short.mjs <série> <épisode> mix               → refait seulement le son
-//   node scripts/ti-margo-short.mjs <série> <épisode> miniature         → le PNG 1080×1920, si le film définit window.tiMargoMiniature
+//   node scripts/ti-margo-short.mjs <série> <épisode> miniature         → le PNG 1080×1920 (1920×1080 en paysage), si le film définit window.tiMargoMiniature
 // La série se décrit dans prototypes/ti-margo/films/<série>.json. Mode d'emploi : prototypes/ti-margo/LISEZ-MOI.md
 import { chromium } from 'playwright-core';
 import { spawn, spawnSync } from 'node:child_process';
@@ -16,18 +16,23 @@ const RACINE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CONFIG = JSON.parse(readFileSync(path.join(RACINE, 'prototypes/ti-margo/films', serie + '.json'), 'utf8'));
 const num = CONFIG.episodes[ep];
 if (!num) throw new Error('épisode inconnu : ' + ep);
+/* "format": "paysage" dans le JSON : 1920×1080 (sinon le short vertical 1080×1920, inchangé) */
+const PAYSAGE = CONFIG.format === 'paysage';
 const remplir = (s) => s.replaceAll('{ep}', ep).replaceAll('{num}', num);
-const PAGE = 'file:///' + path.join(RACINE, 'prototypes/ti-margo/page.html').replace(/\\/g, '/') + `?serie=${serie}&video=${ep}`;
+const PAGE = 'file:///' + path.join(RACINE, 'prototypes/ti-margo/page.html').replace(/\\/g, '/') + `?serie=${serie}&video=${ep}` + (PAYSAGE ? '&format=paysage' : '');
 const SONS = path.join(RACINE, remplir(CONFIG.sons));
 const SORTIE = path.join(RACINE, remplir(CONFIG.sortie));
-const NOM = remplir(CONFIG.nom);
+/* BD=1 : brouillon basse définition (moitié de la taille, encodage rapide), sortie <nom>-bd.mp4 */
+const BD = process.env.BD === '1';
+const NOM = remplir(CONFIG.nom) + (BD ? '-bd' : '');
 const IPS = 30;
 
 const nav = await chromium.launch({ channel: 'chrome', headless: true, args: ['--use-angle=d3d11', '--ignore-gpu-blocklist', '--enable-webgl', '--allow-file-access-from-files'] });
-const page = await nav.newPage({ viewport: { width: 1080, height: 1920 } });
+const page = await nav.newPage({ viewport: PAYSAGE ? { width: 1920, height: 1080 } : { width: 1080, height: 1920 }, deviceScaleFactor: BD ? 0.5 : 1 });
 page.on('pageerror', (e) => console.error('ERREUR PAGE', e.message));
 await page.goto(PAGE);
-await page.waitForFunction(() => window.tiMargo && window.tiMargoFilm, null, { timeout: 60000 });
+/* Un film qui charge des images met window.tiMargoPret à false, puis à true quand elles sont prêtes */
+await page.waitForFunction(() => window.tiMargo && window.tiMargoFilm && window.tiMargoPret !== false, null, { timeout: 120000 });
 
 if (mode === 'controle') {
   const dossier = process.env.CONTROLE;
@@ -45,9 +50,9 @@ if (mode === 'controle') {
 } else if (mode === 'film' || mode === 'mix') {
   mkdirSync(SORTIE, { recursive: true });
   const { CLIPS, FIN, TICS } = await page.evaluate(() => ({ CLIPS: window.tiMargoClips, FIN: window.tiMargoFin, TICS: window.tiMargoTics }));
-  const muet = path.join(SORTIE, '_muet.mp4');
+  const muet = path.join(SORTIE, BD ? '_muet-bd.mp4' : '_muet.mp4');
   const ff = mode === 'mix' ? null : spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(IPS), '-c:v', 'mjpeg', '-i', '-',
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p', muet], { stdio: ['pipe', 'inherit', 'inherit'] });
+    '-c:v', 'libx264', '-preset', BD ? 'veryfast' : 'medium', '-crf', BD ? '28' : '18', '-pix_fmt', 'yuv420p', muet], { stdio: ['pipe', 'inherit', 'inherit'] });
   const n = mode === 'mix' ? 0 : Math.round(FIN * IPS), debut = Date.now();
   for (let i = 0; i < n; i++) {
     await page.evaluate((T) => window.tiMargo.image(T), i / IPS);

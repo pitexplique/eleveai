@@ -6,6 +6,8 @@
    Mode d'emploi : LISEZ-MOI.md
    ============================================================ */
 const VIDEO=new URLSearchParams(location.search).get('video'); const MODE_VIDEO=!!VIDEO;
+/* Format : vertical 1080×1920 par défaut ; ?format=paysage donne 1920×1080 (le JSON de la série dit "format": "paysage") */
+const PAYSAGE=new URLSearchParams(location.search).get('format')==='paysage', LARGEUR=PAYSAGE?1920:1080, HAUTEUR=PAYSAGE?1080:1920;
 if(!MODE_VIDEO) requestAnimationFrame(boucle);
 
 const lisse=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
@@ -145,7 +147,7 @@ function preparerVideo(){
     if(f){ const t=T-A[film.finClip]; for(const [id,d] of [['f1',.1],['f2',1.15],['f3',2.35],['f4',3.33],['f5',3.33],['f6',4.14]]) $(id).style.visibility=t>=d?'':'hidden'; }
   };
   action={nom:'film',t:0,def:{d:1e9,f:(t,P)=>window.tiMargoFilm(P,window.tiMargoT)}};
-  renderer.setPixelRatio(1); renderer.setSize(1080,1920); camera.aspect=1080/1920; camera.updateProjectionMatrix();
+  renderer.setPixelRatio(1); renderer.setSize(LARGEUR,HAUTEUR); camera.aspect=LARGEUR/HAUTEUR; camera.updateProjectionMatrix();
 }
 
 /* ---- Décor commun : le sol et des projecteurs, de xMin à xMax ---- */

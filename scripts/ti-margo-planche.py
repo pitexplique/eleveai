@@ -14,6 +14,11 @@ LARGE, HAUT, COLONNES = 240, 427, 6
 
 
 def assembler(fichiers, legendes):
+    global LARGE, HAUT, COLONNES
+    # Un film paysage (plus large que haut) : vignettes couchées, 4 par ligne ; le vertical ne change pas
+    l0, h0 = Image.open(fichiers[0]).size
+    if l0 > h0:
+        LARGE, HAUT, COLONNES = 427, 240, 4
     lignes = (len(fichiers) + COLONNES - 1) // COLONNES
     planche = Image.new("RGB", (COLONNES * LARGE, lignes * HAUT), "white")
     for i, f in enumerate(fichiers):
