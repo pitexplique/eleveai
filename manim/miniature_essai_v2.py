@@ -2015,7 +2015,80 @@ for _n in range(10):
     }
 
 
+# ⭐ 08/11/2026 — « Écrire la lettre x pas à pas » : la même miniature que les
+# chiffres, mais la lettre est la CURSIVE de la vidéo (les points du chemin de
+# `lettre_<x>.py`), jamais une police : tout en cursive.
+def _points_lettre(x):
+    import importlib
+    sys.path.insert(0, str(RACINE / "manim" / "scripts" / "cp"))
+    sys.path.insert(0, str(RACINE / "manim" / "scripts" / "seconde"))
+    pap = importlib.import_module("pas_a_pas_lettres")
+    traits = pap.chemin(x)
+    return [[tuple(t.point_from_proportion(min(max(i / 200, 1e-3), 1 - 1e-3))[:2]) for i in range(201)]
+            for t in traits]
+
+
+def _acc_lettre(x, duree):
+    def acc(d):
+        from miniature_short_signes import ceinture
+        orange, vert = (234, 106, 20), (34, 160, 80)
+        traits = _points_lettre(x)
+        xs = [p[0] for t in traits for p in t]
+        ys = [p[1] for t in traits for p in t]
+        # La lettre entre y = 335 et 615, x = 60 et 520 ; la ligne de base rouge
+        # suit le y = 0 de la lettre.
+        e = min(255 / (max(ys) - min(ys)), 400 / (max(xs) - min(xs)), 170)
+        cx, cy = (max(xs) + min(xs)) / 2, (max(ys) + min(ys)) / 2
+        px = lambda p: (290 + (p[0] - cx) * e, 472 - (p[1] - cy) * e)
+        base = px((0, 0))[1]
+        for y in range(330, 620, 30):
+            d.line([(60, y), (520, y)], fill=(170, 200, 235), width=2)
+        d.line([(60, base), (520, base)], fill=(200, 80, 90), width=3)
+        # ⭐ Tracé 4× plus grand puis réduit : un trait PIL direct est crénelé.
+        k, ep = 4, 20
+        calque = Image.new("RGBA", (W * k, H * k), (0, 0, 0, 0))
+        dc = ImageDraw.Draw(calque)
+        for t in traits:
+            pts = [(px(p)[0] * k, px(p)[1] * k) for p in t]
+            dc.line(pts, fill=orange, width=ep * k, joint="curve")
+            for q in pts[:: max(1, len(pts) // 60)] + [pts[-1]]:
+                r = ep * k / 2
+                dc.ellipse([q[0] - r, q[1] - r, q[0] + r, q[1] + r], fill=orange)
+        calque = calque.resize((W, H), Image.LANCZOS)
+        d._image.paste(calque, (0, 0), calque)
+        g = police("ariblk.ttf", 46)
+        d.text((570, 360), "pas à pas,", font=g, fill=NAVY)
+        d.text((570, 420), "tout", font=g, fill=NAVY)
+        d.text((570, 480), "doucement", font=g, fill=vert)
+        ceinture(d, 700, 565, larg=100)
+        d.text((770, 590), "ceinture blanche", font=police("arialbd.ttf", 24), fill=NAVY)
+    return acc
+
+
+def _duree_min(x):
+    import subprocess
+    f = (RACINE / "manim" / "sorties" / "cp" / "francais" / "paysage" / "fr" / "pas-a-pas"
+         / f"lettre-{x}" / f"eleveai-francais-cp-pas-a-pas-lettre-{x}.mp4")
+    if not f.exists():
+        return 4
+    s = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                              str(f)], capture_output=True, text=True).stdout.strip())
+    return max(1, round(s / 60))
+
+
+for _x in "acdefghiklmnopqrstuy":
+    ESSAIS[f"eleveai-francais-cp-pas-a-pas-lettre-{_x}"] = {
+        "badge": "BELLE ÉCRITURE · CP", "duree": None,
+        "titre": ["ÉCRIRE LA", f"LETTRE {_x}"],
+        "accroche": _acc_lettre(_x, None),
+        "dossier": f"cp/francais/paysage/fr/pas-a-pas/lettre-{_x}",
+        "lettre": _x,
+    }
+
+
 def construire(nom, spec):
+    if spec.get("lettre") and not spec.get("duree"):
+        spec = {**spec, "duree": f"EN {_duree_min(spec['lettre'])} MIN"}
     img = fond()
     d = ImageDraw.Draw(img)
     mascotte(img)
