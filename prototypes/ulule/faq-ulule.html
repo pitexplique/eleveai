@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>FAQ Ulule</title>
+<style>
+body{max-width:720px;margin:40px auto;font-family:Arial,sans-serif;line-height:1.5;color:#222;padding:0 16px}
+.entree{border-top:1px solid #ddd;padding:14px 0}
+.q{font-weight:bold;margin:0 0 6px}
+.r{margin:0}
+button{font-size:12px;margin-left:8px;cursor:pointer;vertical-align:middle}
+.aide{color:#666;font-size:14px}
+</style>
+</head><body>
+
+<h2>FAQ de la collecte Ulule</h2>
+<p class="aide">Une entrée = une question Ulule. Les boutons « Copier » copient seulement la question ou seulement la réponse, à coller dans le champ correspondant.</p>
+
+<div class="entree">
+<p class="q">Pour quel âge, quelles classes ?</p>
+<p class="r">La collecte finance d'abord les dessins animés du collège, de la 6e à la 3e. Si les étapes suivantes sont atteintes, viendront l'école primaire (5 000 €), puis le lycée (8 000 €). Le coach, lui, couvre déjà le programme du CP à la terminale.</p>
+</div>
+
+<div class="entree">
+<p class="q">Qu'est-ce que le coach, et que voit le parent ?</p>
+<p class="r">Le coach propose à votre enfant des exercices courts, notion par notion, avec la vidéo qui explique chaque étape. Il suit ses progrès compétence après compétence. Vous voyez ce qu'il maîtrise déjà et ce qui reste à travailler.</p>
+</div>
+
+<div class="entree">
+<p class="q">Puis-je essayer avant de contribuer ?</p>
+<p class="r">Oui, et c'est même conseillé. Le test est gratuit sur eleveai.fr/coach, sans compte et sans carte bancaire. Il ne garde pas de suivi : le suivi des progrès dans la durée vient avec l'abonnement.</p>
+</div>
+
+<div class="entree">
+<p class="q">Quand et comment vais-je recevoir ma contrepartie ?</p>
+<p class="r">Après la fin de la collecte, chaque contributeur reçoit un code personnel. Il suffit de l'activer sur eleveai.fr/code. Les mois d'abonnement démarrent le jour de l'activation, pas avant.</p>
+</div>
+
+<div class="entree">
+<p class="q">Comment offrir l'abonnement à un petit-enfant ?</p>
+<p class="r">Choisissez une contrepartie « à offrir » : 1 mois, 3 mois, 6 mois ou 1 an, au même prix que les autres. Vous recevez un code cadeau et une carte Ti Margo à imprimer, avec votre nom. Les parents de l'enfant activent le code sur eleveai.fr/code quand ils le souhaitent.</p>
+</div>
+
+<div class="entree">
+<p class="q">Et si l'objectif n'est pas atteint ?</p>
+<p class="r">La collecte fonctionne en tout ou rien. Si les 3 000 € ne sont pas réunis, Ulule rembourse intégralement chaque contributeur. Vous ne payez que si le projet se réalise.</p>
+</div>
+
+<div class="entree">
+<p class="q">Les vidéos sont-elles fiables ?</p>
+<p class="r">C'est notre garantie qualité. Chaque dessin animé est relu par un étudiant en maths, futur professeur, avant d'arriver devant votre enfant. Je l'écris et le valide moi-même en tant que professeur de maths, et une vidéo n'est mise en ligne qu'une fois vérifiée.</p>
+</div>
+
+<div class="entree">
+<p class="q">Mon enfant suit le programme d'un autre pays : est-ce adapté ?</p>
+<p class="r">Le coach suit le programme français. Les notions du collège sont très proches dans la plupart des pays où l'on apprend les maths en français, et vous pouvez choisir vous-même la classe et les notions à travailler. Le plus simple est d'essayer gratuitement sur eleveai.fr/coach avant de contribuer.</p>
+</div>
+
+<div class="entree">
+<p class="q">Je suis enseignant : comment équiper ma classe ?</p>
+<p class="r">Choisissez la contrepartie « Licence classe » : 60 € pour suivre jusqu'à 30 élèves pendant 1 an. Après la collecte, vous recevez un code, et je mets la classe en place avec vous. Les vidéos sont aussi pensées pour être projetées en classe.</p>
+</div>
+
+<div class="entree">
+<p class="q">Que se passe-t-il à la fin de l'abonnement ?</p>
+<p class="r">Rien ne vous est prélevé : un abonnement reçu avec un code ne se renouvelle pas tout seul. À la fin, vous choisissez librement de continuer, au prix normal de 4,95 € par mois, ou d'arrêter. Le test gratuit et les vidéos en accès libre restent disponibles.</p>
+</div>
+
+<div class="entree">
+<p class="q">Pourquoi des dessins animés ?</p>
+<p class="r">Parce que les enfants les regardent avec plaisir. Ti Margo, un petit caméléon, donne envie d'apprendre en quelques minutes, puis une vidéo explique chaque étape et le coach fait pratiquer. Mes élèves les regardent de leur plein gré, et c'est ce qui m'a donné envie d'aller plus loin.</p>
+</div>
+
+<div class="entree">
+<p class="q">Que deviennent mes données et celles de mon enfant ?</p>
+<p class="r">Aucune donnée n'est vendue, il n'y a aucune publicité et aucun profilage. La base qui contient les données des élèves est hébergée dans l'Union européenne. Tout est détaillé sur eleveai.fr/politique-confidentialite.</p>
+</div>
+
+<script>
+document.querySelectorAll('.q, .r').forEach(function (el) {
+  var b = document.createElement('button');
+  b.textContent = el.classList.contains('q') ? 'Copier la question' : 'Copier la réponse';
+  b.onclick = function () {
+    var texte = el.firstChild.textContent.trim();
+    navigator.clipboard.writeText(texte).then(function () {
+      b.textContent = 'Copié ✓';
+      setTimeout(function () { b.textContent = el.classList.contains('q') ? 'Copier la question' : 'Copier la réponse'; }, 1500);
+    });
+  };
+  el.appendChild(b);
+});
+</script>
+
+</body></html>
