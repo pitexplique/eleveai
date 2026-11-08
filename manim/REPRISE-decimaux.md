@@ -43,8 +43,9 @@ Notions `decimal_nombre` (6 micros) et `decimal_calcul` (6 micros jouées en 6e)
   - `COUPE_PAR_VIDEO` : paysages 8,4 s (pause après « point f r » de 2,42 à 3,38 s dans le clip de fin) ; shorts = « Mets » mesuré au son de chaque mp4 (corrélation des WAV, score 0,99) + 0,03 s, soit 4,21 à 4,24 s. « Mets » du 01 : 70,25 s.
   - ⏳ RESTE (mis à jour plus bas) : (1) son écoute des 24 ; (2) push, le soir, sur son ordre ; (3) APRÈS le push seulement : `node scripts/brancher-videos-coach.mjs --classe 6e --notion decimal_nombre --ecrire` puis `--notion decimal_calcul` ; (4) YouTube sur son ordre, `pas_avant` à confirmer.
 - 08/11 : ✅ **Frédéric a écouté les 24 vidéos : rien à corriger.**
-  - ✅ 08/11 6 h 46 : il a dit « Oui, ce soir » pour le push puis le coach. Programmé dans la session `local_ea592fe1` à 17 h 07 heure du poste (19 h 07 à La Réunion) ; si la session est fermée, le faire à la main ce soir.
-  - ⏳ RESTE : (2) push ce soir (accordé) ; (3) APRÈS le push seulement : `node scripts/brancher-videos-coach.mjs --classe 6e --notion decimal_nombre --ecrire` puis `--notion decimal_calcul` ; (4) YouTube sur son ordre, `pas_avant` (2026-12-01 provisoire) à confirmer.
+  - ✅ 08/11 matin : **POUSSÉ** (`0df87f6f`), puis coach branché (`brancher-videos-coach.mjs`, écrit en production, aucun fichier) : 10 vidéos pour `decimal_nombre`, 7 pour `decimal_calcul` ; relance à blanc : 0 à brancher ; pages /video en 200.
+  - Non branchés : 7 shorts dessin animé dont la micro a déjà un short Manim en ligne (le coach n'en montre qu'un ; les Manim sont gardés) : lire-ecrire, comparer, additionner, multiplier, multiplier-par-01, diviser-par-entier, calcul-defi. Ils restent sur le site (/video/<clé>) et partiront sur YouTube.
+  - ⏳ RESTE : YouTube sur son ordre, `pas_avant` (2026-12-01 provisoire) à confirmer.
 - Les deux paysages « Tout comprendre » (`6e-decimal-nombre`, `6e-decimal-calcul`) et leurs 4 shorts Manim RESTENT : elles sont en ligne (hv_ZFkFVk00, QFQsyW-CXw8), couvrent la notion entière et servent de révision. La nouvelle série est par micro ; ne pas les refaire.
 - `decimal_diviser_par_decimal` : masquée en 6e (hors France, `micros-masquees.ts`), travaillée en 5e (`quotient_decimaux`). Pas de vidéo dans ce lot.
 
