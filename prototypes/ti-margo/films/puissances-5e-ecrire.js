@@ -47,7 +47,7 @@ FILMS.ecrire=function(outils){
   const CUBE=L.map((_,i)=>{ const j=Math.floor(i/16), k=Math.floor((i%16)/4), ii=i%4; const lx=(ii-1.5)*PC, lz=(1.5-k)*PC;
     return [CX+lx*Math.cos(RY)+lz*Math.sin(RY),.2+j*PC,CZ-lx*Math.sin(RY)+lz*Math.cos(RY)]; });
   /* La fin : elles s'envolent dans le ciel */
-  const CIEL=L.map((_,i)=>[-1.8+Math.random()*4.4,7+Math.random()*3,-2.5-Math.random()*2]);
+  const CIEL=L.map((_,i)=>[-1.8+Math.random()*4.4,13+Math.random()*3,-2.5-Math.random()*2]);  /* assez haut pour sortir du cadre */
 
   /* Les instants : rangée r du carré, étage j du cube */
   const tRang=rg=>m(X,1)+rg*(m(X,6)+.3-m(X,1))/8;
@@ -73,8 +73,9 @@ FILMS.ecrire=function(outils){
   const cadreMur=(()=>{ const w=8*PAS, h=8*.34, x0=XW-w/2, y0=YH+.17-h; const g=new THREE.BufferGeometry().setFromPoints([[x0,y0],[x0+w,y0],[x0+w,y0+h],[x0,y0+h],[x0,y0]].map(([a,b])=>new THREE.Vector3(a,b,ZW+.02))); const l=new THREE.Line(g,jaune); scene3d.add(l); return l; })();
   const cadreCube=(()=>{ const b=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(4*PC,4*PC,4*PC)),jaune); b.position.set(CX,.2-PC/2+2*PC,CZ); b.rotation.y=RY; scene3d.add(b); return b; })();
   /* Les « 8 » et les « 4 » écrits à côté des lanternes, en bleu */
-  function chiffre(s,pos){ const e=ecran3d(.42,.42,pos); e.ecrire(s,(g,w,h)=>{ g.fillStyle='#74c0fc'; g.font='800 190px "Segoe UI"'; g.textAlign='center'; g.textBaseline='middle'; g.fillText(s,w/2,h/2+8); }); return e.mesh; }
-  const huitG=chiffre('8',[XW-4*PAS-.32,YH+.17-4*.34,ZW+.03]), huitH=chiffre('8',[XW,4.83,ZW+.03]);
+  /* police à la taille de la toile (190 px dans 108 px rognait le haut et le bas du chiffre) */
+  function chiffre(s,pos){ const e=ecran3d(.6,.6,pos); e.ecrire(s,(g,w,h)=>{ g.fillStyle='#74c0fc'; g.font=`800 ${Math.round(h*.88)}px "Segoe UI"`; g.textAlign='center'; g.textBaseline='middle'; g.fillText(s,w/2,h/2+h*.05); }); return e.mesh; }
+  const huitG=chiffre('8',[XW-4*PAS-.32,YH+.17-4*.34,ZW+.03]), huitH=chiffre('8',[XW,4.98,ZW+.03]);  /* au-dessus de la barre du portique, sans la toucher */
   /* Un point du cube : coordonnées locales (lx, y, lz) → scène */
   const toW=(lx,py,lz)=>[CX+lx*Math.cos(RY)+lz*Math.sin(RY),py,CZ-lx*Math.sin(RY)+lz*Math.cos(RY)];
   const h=2*PC;
@@ -119,10 +120,10 @@ FILMS.ecrire=function(outils){
       const g=gestes(PO,T), dansQ=T>=q&&T<qu, dansF=T>=f;
       document.body.classList.toggle('vxA',T>=m(Q,6)||T>=r); document.body.classList.toggle('vxB',T>=m(Q,10)||T>=r); document.body.classList.toggle('vxC',T>=m(Q,14)||T>=r);
       scene.ry=0; scene.z=-.5; scene.x=-1.6;
-      cam.x=0; cam.e=.04; cam.d=11.6; cam.y=2.25;
-      if(dansQ){ cam.d=12; cam.y=3.1; }
+      cam.x=0; cam.e=.04; cam.d=13.4; cam.y=2.35;
+      if(dansQ){ cam.d=13.2; cam.y=3.1; }
       /* Le cube : la caméra monte un peu pour qu'on voie le dessus */
-      if(T>=y&&T<q){ const v=lisse((T-y)/1.2); cam.e=.04+.2*v; cam.y=2.25-.45*v; cam.d=11.6+1.4*v; }
+      if(T>=y&&T<q){ const v=lisse((T-y)/1.2); cam.e=.04+.2*v; cam.y=2.35-.45*v; cam.d=13.4+.8*v; }
       poserLanternes(T);
       etoiles.forEach((e,i)=>{ e.scale.setScalar(.75+.35*Math.sin(T*2.3+i*1.7)); });
       ampoules.forEach((b,i)=>{ b.visible=Math.sin(T*3+i)>-.6; });
@@ -143,8 +144,9 @@ FILMS.ecrire=function(outils){
       else if(T<f){ T<m(D,12)?g.reflechit():g.montre(); }
       else { T-f<2.35?g.ouvre():g.pouce(); }
 
-      if(dansF){ scene.x=0; scene.z=0; scene.ry=-.12; cam.d=12; cam.y=3.9; cam.e=.1; }
-      if(window.MINI){ cam.x=.15; cam.y=3.3; cam.d=13.2; cam.e=.04; PO.jaw=.62; g.pouce(); }
+      /* Fin : les lanternes sont parties dans le ciel (cachées, plus de lanternes figées coupées en haut) ; recul pour écarter le portique du bord droit */
+      if(dansF){ scene.x=0; scene.z=0; scene.ry=-.12; cam.d=13.4; cam.y=3.9; cam.e=.1; L.forEach(l=>{ l.g.visible=false; }); }
+      if(window.MINI){ cam.x=.15; cam.y=3.3; cam.d=13.2; cam.e=.04; PO.jaw=.62; g.pouce(); huitH.visible=false; }
 
       const voirP=(T>=m(X,3)&&T<q)||(T>=m(D,3)&&T<f);
       panneau.style.display=voirP?'block':'none';

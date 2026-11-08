@@ -164,7 +164,7 @@ FILMS.notation=function(outils){
       else if(T<f){ T<m(D,17)?g.montre():g.pouce(); }
       else { T-f<2.35?g.ouvre():g.pouce(); }
 
-      if(window.MINI){ cam.x=.12; cam.y=2.7; cam.d=10.8; cam.e=.2; PO.jaw=.62; g.reflechit(); }
+      if(window.MINI){ cam.x=.12; cam.y=2.7; cam.d=11.6; cam.e=.2; PO.jaw=.62; g.reflechit(); }
 
       const voirP=(T>=m(C0,5)&&T<q&&!(T>=cu&&T<m(CU,8)))||(T>=m(R,3)&&T<d)||(T>=m(D,9)&&T<f);
       panneau.style.display=voirP?'block':'none';

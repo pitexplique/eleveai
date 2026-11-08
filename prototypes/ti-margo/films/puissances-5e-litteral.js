@@ -62,7 +62,7 @@ FILMS.litteral=function(outils){
     const e=ecran3d(.5,.5,[0,0,.285],g,240); scene3d.add(g); g.visible=false; return {g,e}; }
   const tokIn=jeton(), tokOut=jeton();
   const BL='#1971c2',VE='#2f9a3a',OR='#e8590c',BLC='#e8f2ff';
-  function ecrireJeton(t,s,coul){ t.e.ecrire(s+coul,(g,w,h)=>{ g.fillStyle=coul; g.font=`900 ${s.length>2?118:(s.length>1?150:180)}px "Segoe UI"`; g.textAlign='center'; g.textBaseline='middle'; g.fillText(s,w/2,h/2+8); }); }
+  function ecrireJeton(t,s,coul){ t.e.ecrire(s+coul,(g,w,h)=>{ g.fillStyle=coul; g.font=`900 ${Math.round(h*(s.length>2?.5:(s.length>1?.7:.86)))}px "Segoe UI"`; g.textAlign='center'; g.textBaseline='middle'; g.fillText(s,w/2,h/2+h*.05); }); }  /* police à la taille de la toile : 150-180 px dans 120 px rognaient le haut */
 
   /* Les passages dans la machine : [nombre, instant du nombre, début du calcul, fin, sortie, instant de la sortie] */
   const PASSAGES=[
