@@ -18,7 +18,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
-const DUREES = [1, 2, 6, 12];
+const DUREES = [1, 2, 3, 6, 12];
 const TYPES = ["famille", "cadeau", "classe"];
 const RACINE = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -57,7 +57,7 @@ export const nouveauCode = () => `MARGO-${bloc()}-${bloc()}`;
 const libelleDuree = (m) => (m === 12 ? "1 an" : `${m} mois`);
 function libelle(o) {
   if (o.type === "classe") return `Licence classe, ${o.eleves} élèves, ${libelleDuree(o.duree)}`;
-  if (o.type === "cadeau") return `${libelleDuree(o.duree)} offert${o.duree === 12 ? "" : "s"}, suivi famille`;
+  if (o.type === "cadeau") return `${libelleDuree(o.duree)} offert${o.duree > 1 && o.duree !== 12 ? "s" : ""}, suivi famille`;
   return `Suivi famille, ${libelleDuree(o.duree)}`;
 }
 

@@ -1,0 +1,62 @@
+# Ulule : la liste d'avant-lancement
+
+> 08/11/2026. Objectif 3 000 € = tous les dessins animés du collège, relus, avant le brevet 2027.
+> Frédéric remplit Ulule lui-même. Les cases cochées sont faites.
+
+## 1. Le calendrier proposé
+
+| Date | Ce qui se passe |
+|---|---|
+| **dim. 08/11 → ven. 13/11** | Page complétée sur Ulule (contreparties, description, vidéo), envoi à Ulule pour relecture. Demande du SIRET. |
+| **sam. 14/11 → lun. 23/11** | Ulule relit et accepte. Pendant ce temps : la liste des 100 promesses (partie 3), les messages prêts (`page-ulule.md`, section 9). |
+| **Jour où Ulule accepte** | Sur son ordre : exécuter le SQL des codes, pousser `/code`, faire un essai de bout en bout avec un vrai code. |
+| **mar. 24/11, 19 h (La Réunion)** | **Lancement.** Message personnel aux 100 promesses dans la première heure. But : 30 % (900 €) le premier jour. |
+| **jeu. 26/11 → dim. 06/12** | Presse locale, groupes de parents, collègues. Un message d'avancement tous les 3 ou 4 jours, avec un nouveau short Ti Margo. |
+| **lun. 07/12 → dim. 20/12** | Relance « sous le sapin » pour les grands-parents (versions « à offrir »). |
+| **dim. 20/12, minuit** | **Fin de la collecte** (27 jours). |
+| **lun. 21/12 → mar. 22/12** | Envoi des codes et des cartes à imprimer : ils arrivent **avant Noël**. |
+| **janvier 2027** | Ulule verse l'argent (quelques semaines après la fin). Les étudiants relecteurs commencent. |
+| **avant fin juin 2027** | Tous les dessins animés du collège en ligne, relus, avant le brevet. |
+
+Pourquoi 27 jours et pas 35 : finir avant Noël permet d'envoyer les cadeaux à temps, et une collecte courte garde l'élan. Si Ulule accepte après le 24/11, on décale le lancement, mais on garde la fin au **20/12**.
+
+## 2. Le SIRET
+
+- [ ] Créer la micro-entreprise sur le guichet unique : **formalites.entreprises.gouv.fr** (gratuit). Activité : édition de contenus pédagogiques en ligne / vente d'abonnements.
+- [ ] Le SIRET arrive en général en une à deux semaines : le demander **cette semaine**.
+- [x] Cumul d'activités : accord du rectorat (07/11).
+- [ ] Le saisir sur Ulule (porteur de projet) et sur Stripe.
+- [ ] Choisir le versement libératoire de l'impôt si possible (simple à déclarer, budget déjà prévu : 720 € de cotisations et impôts).
+
+## 3. Une centaine de promesses avant le jour 1
+
+Une collecte qui fait 30 % le premier jour réussit presque toujours. Le but : **100 personnes** qui ont dit « oui, je donne le jour du lancement ».
+
+Faire une liste (un tableur suffit : nom, lien, montant promis, prévenu le, a donné) :
+
+| Cercle | Combien viser | Comment |
+|---|---|---|
+| Famille | 15 | Appel ou message personnel |
+| Amis | 20 | Message personnel, pas un message groupé |
+| Collègues (son collège et d'autres) | 20 | De vive voix, ou par courriel personnel |
+| Anciens collègues, formation, amis de fac | 15 | Message personnel |
+| Abonnés de la chaîne @eleveai974 qui commentent | 10 | Réponse à leurs commentaires, communauté YouTube |
+| Réseau local (associations, club, quartier, église…) | 20 | Message personnel au responsable |
+
+Le message de promesse, à envoyer **la semaine avant** :
+
+> Bonjour [prénom], je lance le mardi 24 novembre une collecte Ulule pour finir les dessins animés de maths du collège avec Ti Margo, avant le brevet. Les premières heures comptent beaucoup : est-ce que je peux compter sur toi ce jour-là, même pour 4,95 € ? Je t'envoie le lien le matin même. Merci !
+
+⚠️ Devoir de réserve : ne pas solliciter les parents de ses propres élèves par les canaux de l'établissement (Pronote, ENT, cahier de liaison). La page publique et les réseaux personnels suffisent.
+
+## 4. Le reste à faire
+
+- [ ] Saisir la grille des contreparties sur Ulule (`page-ulule.md`, section 6) : 4,95 € / 12 € / 22 € / 39 €, et les mêmes « à offrir ».
+- [ ] Trancher le prix de la licence classe (proposé : 60 € pour 30 élèves, soit 2 € par élève et par an).
+- [ ] Coller la description (`description-ulule.html`) et la vidéo https://youtu.be/HQ7B3ElMH8Y.
+- [ ] Ajouter **l'anecdote d'un élève** (sans prénom) au texte, s'il en a une.
+- [ ] Une fois la page créée : mettre **le lien Ulule dans la description YouTube** de la vidéo de présentation.
+- [ ] Codes : commit `2540ac7a` (SQL, page /code, script CSV, carte cadeau), pas poussé, SQL pas exécuté. Mise en ligne dès qu'Ulule accepte, sur son ordre. La durée de 3 mois a été ajoutée le 08/11.
+- [ ] Le film de remerciement Ti Margo (le même pour tous), à préparer pendant la collecte.
+- [ ] Presse locale : Clicanoo, Réunion la 1ère, Le Quotidien, avec le lien de la page.
+- [ ] Facultatif : `eleveai.fr/ulule` vers le coach avec `utm_source=ulule`, pour compter les visiteurs venus de la collecte.

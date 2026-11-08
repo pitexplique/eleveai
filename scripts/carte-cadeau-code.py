@@ -99,7 +99,7 @@ def carte(code: str, mois: int, de: str = "") -> Image.Image:
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--code")
-    p.add_argument("--duree", type=int, choices=[1, 2, 6, 12])
+    p.add_argument("--duree", type=int, choices=[1, 2, 3, 6, 12])
     p.add_argument("--de", default="", help="« De la part de » imprimé (sinon une ligne à remplir)")
     p.add_argument("--csv", help="le CSV d'un lot de scripts/codes-ulule.mjs")
     p.add_argument("--sortie", default=str(SORTIE))

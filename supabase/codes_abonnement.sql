@@ -8,7 +8,7 @@
 create table if not exists public.codes_abonnement (
   -- MARGO-XXXX-XXXX, alphabet sans 0, O, 1, I, L (scripts/codes-ulule.mjs).
   code text primary key check (code ~ '^MARGO-[2-9A-HJKMNP-Z]{4}-[2-9A-HJKMNP-Z]{4}$'),
-  duree_mois integer not null check (duree_mois in (1, 2, 6, 12)),
+  duree_mois integer not null check (duree_mois in (1, 2, 3, 6, 12)),
   type text not null check (type in ('famille', 'cadeau', 'classe')),
   -- Seulement pour une licence classe.
   nb_eleves integer check (nb_eleves is null or nb_eleves > 0),

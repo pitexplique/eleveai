@@ -27,7 +27,7 @@ const dateLongue = (iso?: string | null) =>
 function ceQueDonne(v: { duree_mois: number; type: TypeCode; nb_eleves: number | null }) {
   const d = libelleDuree(v.duree_mois);
   if (v.type === "classe") return `une licence classe pour ${v.nb_eleves} élèves, pendant ${d}`;
-  return `${d} de suivi famille${v.type === "cadeau" ? (v.duree_mois === 12 ? " offert" : " offerts") : ""}`;
+  return `${d} de suivi famille${v.type === "cadeau" ? (v.duree_mois > 1 && v.duree_mois !== 12 ? " offerts" : " offert") : ""}`;
 }
 
 export default function CodeClient() {

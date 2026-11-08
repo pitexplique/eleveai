@@ -119,3 +119,17 @@ Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent 
   - Rien n'est committé. ✅ En ligne (non répertoriée), mise par lui : https://youtu.be/HQ7B3ElMH8Y — à coller dans Ulule et dans la description YouTube (lien Ulule à ajouter).
   - Description réécrite autour du résultat : « finir les dessins animés du collège », avec la relecture comme garantie et des contreparties à tarif fondateur. **Le prix fondateur de l'abonnement d'un an est à fixer.**
   - Session [codes-ulule] lancée : codes d'abonnement, page /code et carte cadeau. Mise en ligne dès qu'Ulule accepte, sur son ordre.
+
+- 08/11 : **prix fondateur 1 an = 39 €** (proposé par Frédéric). Grille des contreparties proposée, à saisir sur Ulule :
+  - 4,95 € = 1 mois ;
+  - 12 € = 3 mois ;
+  - 22 € = 6 mois ;
+  - 39 € = 1 an ;
+  - chacune existe aussi « à offrir », au même prix.
+
+- 08/11 (session fille) : **grille à 39 € intégrée.**
+  - `page-ulule.md` réécrite pour la stratégie 3 000 € : sous-titre collège, objectif, contreparties 4,95 / 12 / 22 / 39 € et les mêmes « à offrir », FAQ et messages réseaux. Les sections 5 et 7 renvoient à `description-ulule.html` et `video-ulule-voix.md`.
+  - `description-ulule.html` : « Comment soutenir » donne 3 mois 12 €, 6 mois 22 €, **1 an 39 € au lieu de 59,40 €**.
+  - Codes : la durée **3 mois** manquait (SQL, `codes-ulule.mjs`, carte cadeau), ajoutée ; « 1 mois offerts » corrigé en « offert ».
+  - Licence classe proposée à **60 € pour 30 élèves** (= 2 €/élève/an) : à trancher par lui.
+  - Liste d'avant-lancement : **`avant-lancement.md`** (SIRET, 100 promesses, calendrier : lancement mar. 24/11, fin dim. 20/12, codes envoyés avant Noël).
