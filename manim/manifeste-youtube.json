@@ -67485,6 +67485,1642 @@
         "jeux-video",
         "argent-budget"
       ]
+    },
+    {
+      "id": "4e-div-multiple",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_multiple_diviseur",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple.mp4",
+      "miniature": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple.png",
+      "titre": "Deux mots pour une seule relation — Multiples et diviseurs — épisode 1 · Maths 4e",
+      "accroche": "Awa est chorégraphe. Elle a 42 danseurs et veut des rangs de 6, tous complets. Est-ce possible ? Et avec 45 danseurs ?\n\nDans cette vidéo :\n• 6 × 7 = 42 : 42 est un multiple de 6, et 6 est un diviseur de 42\n• le multiple est toujours le plus grand des deux\n• le test : on divise, et le reste doit valoir zéro\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 72 est-il un multiple de 9 ? 5 est-il un diviseur de 32 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_multiple_diviseur&display=simple\n\n🔢 Épisode 1 sur 7 de la série Divisibilité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Awa, chorégraphe"
+        ],
+        [
+          "00:18",
+          "7 rangs de 6"
+        ],
+        [
+          "00:29",
+          "Multiple et diviseur"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:15",
+          "Et si ça ne tombe pas juste ?"
+        ],
+        [
+          "01:29",
+          "Le test du reste"
+        ],
+        [
+          "01:42",
+          "Le piège"
+        ],
+        [
+          "01:53",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "À toi de jouer"
+        ],
+        [
+          "02:41",
+          "Correction"
+        ],
+        [
+          "02:59",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite",
+      "tags": [
+        "multiple",
+        "diviseur",
+        "multiple et diviseur",
+        "reste",
+        "danse",
+        "chorégraphe",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "On sait que 8 × 5 = 40. Quelle phrase est vraie ?",
+          "choix": [
+            "8 est un multiple de 40",
+            "8 est un diviseur de 40",
+            "40 est un diviseur de 8"
+          ],
+          "reponse": 1,
+          "explication": "Le diviseur est le petit, le multiple est le grand."
+        },
+        {
+          "t": "01:53",
+          "question": "56 ÷ 7 = 8, sans reste. Que peut-on dire ?",
+          "choix": [
+            "56 est un multiple de 7",
+            "7 est un multiple de 56",
+            "56 et 7 n'ont aucun lien"
+          ],
+          "reponse": 0,
+          "explication": "Le reste vaut zéro, et 56 est le plus grand."
+        }
+      ],
+      "centres": [
+        "musique",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-div-multiple-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_multiple_diviseur",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-div-multiple",
+      "fichier": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple-short.mp4",
+      "miniature": "4e/maths/divisibilite/01-multiple/eleveai-maths-4e-div-multiple-short-miniature.png",
+      "titre": "Multiple ou diviseur : tu paries que tu ne te tromperas plus jamais ? #maths #4e",
+      "accroche": "Ti Margo empile 42 caisses en piles de 6 : 7 piles, il n'en reste aucune. 42 est un multiple de 6, et 6 est un diviseur de 42.\nLe grand, c'est le multiple ; le petit, c'est le diviseur. Et avec 45 caisses ? 3 restent : 45 n'est pas un multiple de 6.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : 56 est-il un multiple de 8 ? Écris ton calcul. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_multiple_diviseur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #divisibilite #4e #collège",
+      "tags": [
+        "caisses",
+        "multiple",
+        "diviseur",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "8 × 4 = 32. Que peut-on dire ?",
+          "choix": [
+            "32 est un diviseur de 8",
+            "8 est un diviseur de 32",
+            "8 est un multiple de 32"
+          ],
+          "reponse": 1,
+          "explication": "Le petit divise le grand : 8 est un diviseur de 32."
+        }
+      ],
+      "centres": [
+        "musique",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-div-critere-2-5-10",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_critere_2_5_10",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10.mp4",
+      "miniature": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10.png",
+      "titre": "Un seul chiffre suffit — Divisible par 2, par 5, par 10 — épisode 2 · Maths 4e",
+      "accroche": "Hugo est pâtissier. Ce matin, il a fait 3 640 macarons, et il a des boîtes de 2, de 5 et de 10. Lesquelles seront toutes pleines ? Pas besoin de poser la division.\n\nDans cette vidéo :\n• on ne regarde que le chiffre des unités\n• par 2 : 0, 2, 4, 6 ou 8 ; par 5 : 0 ou 5 ; par 10 : 0\n• le piège : additionner les chiffres ne sert à rien ici\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 1 255 et 908 : divisibles par 2, par 5, par 10 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_critere_2_5_10&display=simple\n\n🔢 Épisode 2 sur 7 de la série Divisibilité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Hugo, pâtissier"
+        ],
+        [
+          "00:21",
+          "Le chiffre des unités et les trois règles"
+        ],
+        [
+          "00:43",
+          "Les boîtes d'Hugo"
+        ],
+        [
+          "00:54",
+          "Question 1"
+        ],
+        [
+          "01:21",
+          "Divisible par 10 et le piège"
+        ],
+        [
+          "01:41",
+          "Question 2"
+        ],
+        [
+          "02:11",
+          "À toi de jouer"
+        ],
+        [
+          "02:27",
+          "Correction"
+        ],
+        [
+          "02:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite",
+      "tags": [
+        "critères de divisibilité",
+        "divisible par 2",
+        "divisible par 5",
+        "divisible par 10",
+        "chiffre des unités",
+        "pâtissier",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "2 735 est divisible par…",
+          "choix": [
+            "2",
+            "5",
+            "10"
+          ],
+          "reponse": 1,
+          "explication": "Il finit par 5 : divisible par 5, mais ni par 10 ni par 2."
+        },
+        {
+          "t": "01:41",
+          "question": "4 518 est-il divisible par 2 ?",
+          "choix": [
+            "oui, il finit par 8",
+            "non, il est trop grand",
+            "on ne peut pas savoir sans poser"
+          ],
+          "reponse": 0,
+          "explication": "8 est pair, donc 4 518 est divisible par 2."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "4e-div-critere-2-5-10-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_critere_2_5_10",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-div-critere-2-5-10",
+      "fichier": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10-short.mp4",
+      "miniature": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10-short-miniature.png",
+      "titre": "7 384 615 est-il divisible par 5 ? Tu paries que je réponds en 1 seconde ? #maths #4e",
+      "accroche": "Ti Margo affiche un nombre à 7 chiffres sur l'écran géant du stade, et parie de dire en une seconde s'il est divisible par 5.\nSon secret : sa loupe ne regarde que le dernier chiffre. Par 2 : 0, 2, 4, 6 ou 8. Par 5 : 0 ou 5. Par 10 : 0.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : quel est le plus petit nombre à 4 chiffres divisible par 2, par 5 et par 10 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_critere_2_5_10&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #divisibilite #4e #collège",
+      "tags": [
+        "loupe",
+        "critères de divisibilité",
+        "chiffre des unités",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:39",
+          "question": "4 730 est divisible par…",
+          "choix": [
+            "2 seulement",
+            "5 seulement",
+            "2, 5 et 10"
+          ],
+          "reponse": 2,
+          "explication": "Il finit par 0 : le 0 coche les trois cases."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "4e-div-critere-3-9",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_critere_3_9",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9.mp4",
+      "miniature": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9.png",
+      "titre": "Le secret de la somme des chiffres — Divisible par 3 et par 9 — épisode 3 · Maths 4e",
+      "accroche": "Théo est logisticien. 4 275 colis arrivent à l'entrepôt : peut-il les charger par piles de 3, ou de 9, sans qu'il en reste ? Cette fois, le dernier chiffre ne suffit pas.\n\nDans cette vidéo :\n• on additionne tous les chiffres : 4 + 2 + 7 + 5 = 18\n• si la somme est divisible par 3 (ou par 9), le nombre aussi\n• divisible par 9, c'est divisible par 3 ; l'inverse est faux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 5 130 et 2 024 : divisibles par 3 ? par 9 ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_critere_3_9&display=simple\n\n🔢 Épisode 3 sur 7 de la série Divisibilité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Théo, logisticien"
+        ],
+        [
+          "00:22",
+          "La somme des chiffres"
+        ],
+        [
+          "00:33",
+          "La règle"
+        ],
+        [
+          "00:50",
+          "Question 1"
+        ],
+        [
+          "01:20",
+          "Attention au sens"
+        ],
+        [
+          "01:35",
+          "Le piège"
+        ],
+        [
+          "01:57",
+          "Question 2"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:43",
+          "Correction"
+        ],
+        [
+          "03:00",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite",
+      "tags": [
+        "critères de divisibilité",
+        "divisible par 3",
+        "divisible par 9",
+        "somme des chiffres",
+        "logistique",
+        "logisticien",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "1 302 est-il divisible par 3 ?",
+          "choix": [
+            "oui, la somme fait 6",
+            "non, il finit par 2",
+            "non, la somme fait 5"
+          ],
+          "reponse": 0,
+          "explication": "1 + 3 + 0 + 2 = 6, et 6 est divisible par 3."
+        },
+        {
+          "t": "01:57",
+          "question": "738 est divisible par…",
+          "choix": [
+            "3 seulement",
+            "3 et 9",
+            "9 seulement"
+          ],
+          "reponse": 1,
+          "explication": "7 + 3 + 8 = 18. Et divisible par 9, c'est toujours divisible par 3."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "4e-div-critere-3-9-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_critere_3_9",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-div-critere-3-9",
+      "fichier": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9-short.mp4",
+      "miniature": "4e/maths/divisibilite/03-critere-3-9/eleveai-maths-4e-div-critere-3-9-short-miniature.png",
+      "titre": "123 456 789 divisible par 9 ? Tu paries que je le sais en 3 secondes ? #maths #4e",
+      "accroche": "Ti Margo, magicien, devine en trois secondes si 123 456 789 est divisible par 9.\nSon tour : additionner les chiffres. 45 = 9 × 5, donc divisible par 9. Pas de magie : c'est un critère, et il marche aussi pour 3.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : dans 5, chiffre caché, 2, quel chiffre cacher pour obtenir un multiple de 9 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_critere_3_9&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #divisibilite #4e #collège",
+      "tags": [
+        "magicien",
+        "critères de divisibilité",
+        "somme des chiffres",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:40",
+          "question": "2 024 est-il divisible par 3 ?",
+          "choix": [
+            "oui",
+            "non, la somme fait 8",
+            "oui, il est pair"
+          ],
+          "reponse": 1,
+          "explication": "2 + 0 + 2 + 4 = 8, et 8 n'est pas divisible par 3."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "4e-div-euclidienne",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_euclidienne",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne.mp4",
+      "miniature": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne.png",
+      "titre": "Que faire de ce qui reste ? — La division euclidienne — épisode 4 · Maths 4e",
+      "accroche": "Jules est pharmacien. Il a 47 comprimés à ranger dans des plaquettes de 6. Combien de plaquettes pleines ? Et combien de comprimés restent ?\n\nDans cette vidéo :\n• 47 = 6 × 7 + 5 : dividende, diviseur, quotient, reste\n• le reste est toujours plus petit que le diviseur\n• le piège : une égalité juste qui n'est pas la division euclidienne\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 154 gélules, par boîtes de 12 : écris la division euclidienne.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_euclidienne&display=simple\n\n🔢 Épisode 4 sur 7 de la série Divisibilité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Jules, pharmacien"
+        ],
+        [
+          "00:18",
+          "On remplit les plaquettes"
+        ],
+        [
+          "00:36",
+          "On l'écrit"
+        ],
+        [
+          "00:51",
+          "La condition sur le reste"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:30",
+          "Le piège"
+        ],
+        [
+          "01:50",
+          "Question 2"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:45",
+          "Correction"
+        ],
+        [
+          "03:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite",
+      "tags": [
+        "division euclidienne",
+        "quotient",
+        "reste",
+        "dividende",
+        "pharmacie",
+        "pharmacien",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "50 ÷ 8 : quel est le reste ?",
+          "choix": [
+            "2",
+            "6",
+            "10"
+          ],
+          "reponse": 0,
+          "explication": "8 × 6 = 48, il reste 2, et 2 est plus petit que 8."
+        },
+        {
+          "t": "01:50",
+          "question": "Laquelle est la division euclidienne de 89 par 7 ?",
+          "choix": [
+            "89 = 7 × 11 + 12",
+            "89 = 7 × 12 + 5",
+            "89 = 7 × 13 − 2"
+          ],
+          "reponse": 1,
+          "explication": "5 est plus petit que 7. Dans la première, le reste 12 est trop grand ; dans la troisième, on enlève."
+        }
+      ],
+      "centres": [
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "4e-div-euclidienne-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_euclidienne",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-div-euclidienne",
+      "fichier": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne-short.mp4",
+      "miniature": "4e/maths/divisibilite/04-euclidienne/eleveai-maths-4e-div-euclidienne-short-miniature.png",
+      "titre": "47 cookies, boîtes de 6 : tu paries qu'il m'en reste plus de 6 ? #maths #4e",
+      "accroche": "Ti Margo range 47 cookies par boîtes de 6, et il mange ce qui reste. Peut-il en rester plus de 6 ?\nImpossible : avec 6 cookies, il remplirait une boîte de plus. 47 = 6 × 7 + 5, et le reste est toujours plus petit que le diviseur.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : 100 cookies, boîtes de 7. Combien de cookies me restent ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_euclidienne&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #divisibilite #4e #collège",
+      "tags": [
+        "cookies",
+        "division euclidienne",
+        "reste",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "50 cookies, boîtes de 8. Combien j'en mange ?",
+          "choix": [
+            "2",
+            "6",
+            "10"
+          ],
+          "reponse": 0,
+          "explication": "8 × 6 = 48 : il en reste 2."
+        }
+      ],
+      "centres": [
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "4e-div-diviseurs",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_lister_diviseurs",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs.mp4",
+      "miniature": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs.png",
+      "titre": "Comment n'en oublier aucun ? — Lister tous les diviseurs — épisode 5 · Maths 4e",
+      "accroche": "Rose est paysagiste. Elle veut planter 36 rosiers en rectangle, avec des rangées toutes pareilles. Quelles rangées peut-elle faire ? Chaque rectangle, c'est une paire de diviseurs.\n\nDans cette vidéo :\n• on cherche les diviseurs par paires, en partant de 1\n• on s'arrête quand les deux nombres se croisent\n• 1 et le nombre lui-même sont toujours des diviseurs\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : la liste de tous les diviseurs de 28.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_lister_diviseurs&display=simple\n\n🔢 Épisode 5 sur 7 de la série Divisibilité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Rose, paysagiste"
+        ],
+        [
+          "00:18",
+          "Des paires de diviseurs"
+        ],
+        [
+          "00:31",
+          "Quand s'arrêter ?"
+        ],
+        [
+          "00:46",
+          "Les 9 diviseurs de 36"
+        ],
+        [
+          "01:01",
+          "Question 1"
+        ],
+        [
+          "01:28",
+          "Le piège"
+        ],
+        [
+          "01:42",
+          "Question 2"
+        ],
+        [
+          "02:04",
+          "À toi de jouer"
+        ],
+        [
+          "02:16",
+          "Correction"
+        ],
+        [
+          "02:36",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite",
+      "tags": [
+        "diviseurs",
+        "lister les diviseurs",
+        "paires de diviseurs",
+        "jardin",
+        "paysagiste",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Lequel n'est pas un diviseur de 36 ?",
+          "choix": [
+            "12",
+            "8",
+            "9"
+          ],
+          "reponse": 1,
+          "explication": "36 ÷ 8 = 4, et il reste 4."
+        },
+        {
+          "t": "01:42",
+          "question": "Combien de diviseurs a 10 ?",
+          "choix": [
+            "2",
+            "3",
+            "4"
+          ],
+          "reponse": 2,
+          "explication": "1 × 10 et 2 × 5 : 1, 2, 5 et 10."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-div-diviseurs-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_lister_diviseurs",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-div-diviseurs",
+      "fichier": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs-short.mp4",
+      "miniature": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs-short-miniature.png",
+      "titre": "24 tournesols en rectangle : tu paries que je n'en oublie aucun ? #maths #4e",
+      "accroche": "Ti Margo veut planter 24 tournesols en rectangle. Combien de rectangles possibles ?\nSa méthode : chercher les diviseurs par paires, et s'arrêter quand les paires se croisent.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : combien de diviseurs a 30 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_lister_diviseurs&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #divisibilite #4e #collège",
+      "tags": [
+        "tournesols",
+        "diviseurs",
+        "paires de diviseurs",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:47",
+          "question": "Lequel n'est pas un diviseur de 24 ?",
+          "choix": [
+            "6",
+            "8",
+            "9"
+          ],
+          "reponse": 2,
+          "explication": "24 ÷ 9 = 2, et il reste 6."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "4e-div-probleme",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_probleme",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme.mp4",
+      "miniature": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme.png",
+      "titre": "Diviseur commun ou multiple commun ? — Problèmes de divisibilité — épisode 6 · Maths 4e",
+      "accroche": "Adam anime un planétarium. Avec 48 cartes du ciel et 36 boussoles, combien de kits identiques peut-il faire, au plus ? Et deux comètes qui reviennent tous les 6 et tous les 8 ans : quand repasseront-elles ensemble ?\n\nDans cette vidéo :\n• des lots sans reste : le plus grand diviseur commun\n• se retrouver ensemble : le plus petit multiple commun\n• on lit bien la question avant de choisir\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 60 étoiles autocollantes et 45 fusées : combien de kits identiques, au plus ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_probleme&display=simple\n\n🔢 Épisode 6 sur 7 de la série Divisibilité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Adam, animateur de planétarium"
+        ],
+        [
+          "00:22",
+          "Les diviseurs de 48 et de 36"
+        ],
+        [
+          "00:44",
+          "Le plus grand diviseur commun"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:31",
+          "Deux comètes"
+        ],
+        [
+          "01:46",
+          "Le premier multiple commun"
+        ],
+        [
+          "02:05",
+          "Le piège"
+        ],
+        [
+          "02:18",
+          "Question 2"
+        ],
+        [
+          "03:04",
+          "À toi de jouer"
+        ],
+        [
+          "03:19",
+          "Correction"
+        ],
+        [
+          "03:41",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite",
+      "tags": [
+        "problème",
+        "diviseur commun",
+        "multiple commun",
+        "PGCD",
+        "planétarium",
+        "astronomie",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "20 bracelets et 30 badges, en lots identiques, sans reste. Combien de lots, au plus ?",
+          "choix": [
+            "5",
+            "10",
+            "60"
+          ],
+          "reponse": 1,
+          "explication": "10 divise 20 et 30, et aucun nombre plus grand ne divise les deux."
+        },
+        {
+          "t": "02:18",
+          "question": "Deux bus, toutes les 10 et toutes les 15 minutes. Ensemble de nouveau dans…",
+          "choix": [
+            "5 minutes",
+            "30 minutes",
+            "150 minutes"
+          ],
+          "reponse": 1,
+          "explication": "Multiples de 10 : 10, 20, 30. Multiples de 15 : 15, 30."
+        }
+      ],
+      "centres": [
+        "espace"
+      ]
+    },
+    {
+      "id": "4e-div-probleme-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_probleme",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-div-probleme",
+      "fichier": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme-short.mp4",
+      "miniature": "4e/maths/divisibilite/06-probleme/eleveai-maths-4e-div-probleme-short-miniature.png",
+      "titre": "Mes 2 phares clignotent ensemble : tu paries qu'ils ne le referont plus jamais ? #maths #4e",
+      "accroche": "Ti Margo, gardien de phare : le rouge clignote toutes les 6 secondes, le vert toutes les 8. Quand clignotent-ils de nouveau ensemble ?\nSa méthode : écrire les multiples de chacun, et prendre le premier commun.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : un phare toutes les 9 secondes, un autre toutes les 12. Ils clignotent ensemble. Dans combien de secondes, au plus tôt, recommencent-ils ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #divisibilite #4e #collège",
+      "tags": [
+        "phares",
+        "multiple commun",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Un phare toutes les 4 secondes, un autre toutes les 6. Ensemble au bout de…",
+          "choix": [
+            "10 secondes",
+            "12 secondes",
+            "24 secondes"
+          ],
+          "reponse": 1,
+          "explication": "Multiples de 4 : 4, 8, 12. Multiples de 6 : 6, 12. 24 marche aussi, mais 12 vient avant."
+        }
+      ],
+      "centres": [
+        "espace"
+      ]
+    },
+    {
+      "id": "4e-div-defi",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi.mp4",
+      "miniature": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi.png",
+      "titre": "Ouvre les cadenas de l'escape game — Défis de divisibilité — épisode 7 · Maths 4e",
+      "accroche": "Chloé crée des escape games. Un cadenas attend un code : 2, un chiffre caché, 6. L'indice : le code est divisible par 9. Trois salles, trois cadenas, et une affirmation à démasquer.\n\nDans cette vidéo :\n• un chiffre caché se trouve avec la somme des chiffres\n• divisible par 9, c'est divisible par 3\n• un seul contre-exemple suffit pour dire faux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le code 5, chiffre caché, 0 est divisible par 9 et par 10 : quel est le chiffre caché ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_defi&display=simple\n\n🔢 Épisode 7 sur 7 de la série Divisibilité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Chloé, créatrice d'escape games"
+        ],
+        [
+          "00:17",
+          "Premier cadenas"
+        ],
+        [
+          "00:32",
+          "Question 1"
+        ],
+        [
+          "01:02",
+          "Deux indices"
+        ],
+        [
+          "01:26",
+          "Vrai ou faux ?"
+        ],
+        [
+          "01:45",
+          "Question 2"
+        ],
+        [
+          "02:13",
+          "Le piège"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "03:01",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/divisibilite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/divisibilite",
+      "tags": [
+        "défi",
+        "chiffre caché",
+        "critères de divisibilité",
+        "contre-exemple",
+        "escape game",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:32",
+          "question": "Le code 4 ? 5 est divisible par 3. Quel chiffre convient ?",
+          "choix": [
+            "3",
+            "2",
+            "4"
+          ],
+          "reponse": 0,
+          "explication": "4 + 3 + 5 = 12, divisible par 3."
+        },
+        {
+          "t": "01:45",
+          "question": "« Tout multiple de 9 est un multiple de 3. »",
+          "choix": [
+            "vrai",
+            "faux",
+            "seulement s'il est pair"
+          ],
+          "reponse": 0,
+          "explication": "9 = 3 × 3 : un multiple de 9 est aussi un multiple de 3."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-div-defi-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "divisibilite",
+      "microId": "div_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-div-defi",
+      "fichier": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi-short.mp4",
+      "miniature": "4e/maths/divisibilite/07-defi/eleveai-maths-4e-div-defi-short-miniature.png",
+      "titre": "Code 7 ? 5, divisible par 9 : tu paries que j'ouvre le coffre du premier coup ? #maths #4e",
+      "accroche": "Ti Margo doit ouvrir un coffre au trésor : le code est 7, un chiffre caché, 5, et il est divisible par 9.\nSa méthode : la somme des chiffres. 7 + 5 = 12, il manque 6 pour arriver à 18 : le code est 765.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : le code 3, chiffre caché, 0 est divisible par 9 et par 10. Quel est le chiffre caché ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #divisibilite #4e #collège",
+      "tags": [
+        "coffre",
+        "chiffre caché",
+        "critères de divisibilité",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "divisibilité",
+        "multiples et diviseurs",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Un nombre divisible par 9 est-il toujours divisible par 3 ?",
+          "choix": [
+            "oui",
+            "non",
+            "seulement s'il est pair"
+          ],
+          "reponse": 0,
+          "explication": "9 = 3 × 3. L'inverse est faux : 6 est divisible par 3, pas par 9."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-premier-definition",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_premier",
+      "microId": "premier_definition",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition.mp4",
+      "miniature": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition.png",
+      "titre": "Les nombres qui ne se cassent pas — Les nombres premiers — épisode 1 · Maths 4e",
+      "accroche": "Mia est mosaïste. Avec 12 carreaux, elle fait des rectangles : 2 rangées de 6, 3 rangées de 4. Avec 7 carreaux, impossible : une seule rangée. Pourquoi certains nombres ne se cassent pas ?\n\nDans cette vidéo :\n• un nombre premier a exactement deux diviseurs : 1 et lui-même\n• 1 n'est pas premier\n• jusqu'à 30 : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 21 carreaux, puis 23 : lequel est premier ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/nombre-premier\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/nombre-premier\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_definition&display=simple\n\n🔢 Épisode 1 sur 4 de la série Nombres premiers d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Mia, mosaïste"
+        ],
+        [
+          "00:23",
+          "Exactement deux diviseurs et le cas de 1"
+        ],
+        [
+          "00:46",
+          "Question 1"
+        ],
+        [
+          "01:13",
+          "La liste jusqu'à 30"
+        ],
+        [
+          "01:29",
+          "Le piège"
+        ],
+        [
+          "01:42",
+          "Question 2"
+        ],
+        [
+          "02:11",
+          "À toi de jouer"
+        ],
+        [
+          "02:22",
+          "Correction"
+        ],
+        [
+          "02:40",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/nombre-premier",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/nombre-premier",
+      "tags": [
+        "nombres premiers",
+        "nombre premier",
+        "diviseurs",
+        "définition",
+        "mosaïque",
+        "mosaïste",
+        "divisibilité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:46",
+          "question": "Lequel est premier ?",
+          "choix": [
+            "9",
+            "15",
+            "17"
+          ],
+          "reponse": 2,
+          "explication": "17 n'a que deux diviseurs ; 9 = 3 × 3 et 15 = 3 × 5."
+        },
+        {
+          "t": "01:42",
+          "question": "1 est-il premier ?",
+          "choix": [
+            "oui, il est divisible par 1 et par lui-même",
+            "non, il n'a qu'un seul diviseur",
+            "oui, c'est le premier nombre"
+          ],
+          "reponse": 1,
+          "explication": "Il faut exactement deux diviseurs ; 1 n'en a qu'un."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-premier-definition-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_premier",
+      "microId": "premier_definition",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-premier-definition",
+      "fichier": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition-short.mp4",
+      "miniature": "4e/maths/divisibilite/08-definition/eleveai-maths-4e-premier-definition-short-miniature.png",
+      "titre": "13 musiciens en rectangle : tu paries que j'y arrive ? #maths #4e",
+      "accroche": "Ti Margo veut ranger 13 musiciens en rectangle pour la parade. Avec 12, facile : 2 rangées de 6, ou 3 rangées de 4.\nAvec 13, il en reste toujours 1 : une seule longue file. 13 est un nombre premier : il n'a que deux diviseurs, 1 et lui-même.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : combien y a-t-il de nombres premiers entre 1 et 30 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_definition&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombrespremiers #4e #collège",
+      "tags": [
+        "parade",
+        "nombres premiers",
+        "diviseurs",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "divisibilité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:39",
+          "question": "Lequel est premier ?",
+          "choix": [
+            "21",
+            "19",
+            "27"
+          ],
+          "reponse": 1,
+          "explication": "21 = 3 × 7 et 27 = 3 × 9 ; 19 n'a que deux diviseurs."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-premier-determiner",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_premier",
+      "microId": "premier_determiner",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner.mp4",
+      "miniature": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner.png",
+      "titre": "N'oublie jamais le test par 7 — Reconnaître un nombre premier — épisode 2 · Maths 4e",
+      "accroche": "Salomé est entomologiste. Certaines cigales restent sous terre 13 ans ou 17 ans : deux nombres premiers. Mais 59, 77 ou 91 : premiers, ou pas ? Le crible d'Ératosthène donne la méthode.\n\nDans cette vidéo :\n• le crible d'Ératosthène : on barre les multiples de 2, 3, 5 et 7\n• sous 100, on teste 2, 3, 5 et 7, car 11 × 11 = 121\n• le piège : 91 = 7 × 13\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 49, 83 et 87 : lesquels sont premiers ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/nombre-premier\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/nombre-premier\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_determiner&display=simple\n\n🔢 Épisode 2 sur 4 de la série Nombres premiers d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Salomé, entomologiste"
+        ],
+        [
+          "00:23",
+          "Pourquoi 13 et 17 ?"
+        ],
+        [
+          "00:38",
+          "Le crible d'Ératosthène"
+        ],
+        [
+          "00:54",
+          "On s'arrête à 7"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:48",
+          "Le piège"
+        ],
+        [
+          "02:11",
+          "Question 2"
+        ],
+        [
+          "02:42",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Correction"
+        ],
+        [
+          "03:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/nombre-premier",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/nombre-premier",
+      "tags": [
+        "nombres premiers",
+        "reconnaître un nombre premier",
+        "crible d'Ératosthène",
+        "cigales",
+        "insectes",
+        "entomologiste",
+        "divisibilité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Pour savoir si 59 est premier, quels nombres faut-il tester ?",
+          "choix": [
+            "2, 3, 5 et 7",
+            "tous les nombres jusqu'à 59",
+            "seulement 2"
+          ],
+          "reponse": 0,
+          "explication": "Aucun ne divise 59 : il est premier."
+        },
+        {
+          "t": "02:11",
+          "question": "77 est-il premier ?",
+          "choix": [
+            "oui, il est impair",
+            "non, 77 = 7 × 11",
+            "oui, 7 + 7 = 14"
+          ],
+          "reponse": 1,
+          "explication": "Le test par 7 le démasque : 77 ÷ 7 = 11."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-premier-determiner-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_premier",
+      "microId": "premier_determiner",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-premier-determiner",
+      "fichier": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner-short.mp4",
+      "miniature": "4e/maths/divisibilite/09-determiner/eleveai-maths-4e-premier-determiner-short-miniature.png",
+      "titre": "Des cigales qui dorment 17 ans : tu paries qu'elles ont choisi un nombre premier ? #maths #4e",
+      "accroche": "Certaines cigales restent 13 ou 17 ans sous terre : deux nombres premiers. Un prédateur qui revient tous les 2, 3 ou 4 ans les croise rarement.\nLe test de Ti Margo jusqu'à 100 : diviser par 2, 3, 5 et 7. Et le test par 7, tout le monde l'oublie : 91 = 7 × 13.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : combien y a-t-il de nombres premiers entre 80 et 100 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_determiner&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombrespremiers #4e #collège",
+      "tags": [
+        "cigales",
+        "nombres premiers",
+        "crible",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "divisibilité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "91 est-il premier ?",
+          "choix": [
+            "oui",
+            "non, 91 = 7 × 13",
+            "non, 91 = 3 × 31"
+          ],
+          "reponse": 1,
+          "explication": "91 ÷ 7 = 13. Le test par 7, tout le monde l'oublie."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-premier-decomposer",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_premier",
+      "microId": "premier_decomposer",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer.mp4",
+      "miniature": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer.png",
+      "titre": "Casser un nombre en briques — Décomposer en facteurs premiers — épisode 3 · Maths 4e",
+      "accroche": "Nathan est ingénieur en cybersécurité : il protège les paiements en ligne. Ses codes secrets reposent sur une idée simple : tout nombre se casse en nombres premiers, comme un mur en briques. Commençons par 84.\n\nDans cette vidéo :\n• on divise par le plus petit nombre premier, encore et encore, jusqu'à 1\n• 84 = 2 × 2 × 3 × 7, une seule décomposition à l'ordre près\n• à quoi ça sert : simplifier une fraction d'un coup\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : décompose 90 en facteurs premiers.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/nombre-premier\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/nombre-premier\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_decomposer&display=simple\n\n🔢 Épisode 3 sur 4 de la série Nombres premiers d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Nathan, ingénieur en cybersécurité"
+        ],
+        [
+          "00:23",
+          "On casse 84"
+        ],
+        [
+          "00:47",
+          "Le résultat"
+        ],
+        [
+          "00:57",
+          "Deux contrôles"
+        ],
+        [
+          "01:13",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Simplifier une fraction"
+        ],
+        [
+          "02:10",
+          "Le piège"
+        ],
+        [
+          "02:26",
+          "Question 2"
+        ],
+        [
+          "02:54",
+          "À toi de jouer et correction"
+        ],
+        [
+          "03:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/nombre-premier",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/nombre-premier",
+      "tags": [
+        "décomposition en facteurs premiers",
+        "facteurs premiers",
+        "nombres premiers",
+        "simplifier une fraction",
+        "cybersécurité",
+        "ingénieur",
+        "divisibilité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Quelle est la décomposition de 60 ?",
+          "choix": [
+            "2 × 2 × 15",
+            "2 × 2 × 3 × 5",
+            "4 × 3 × 5"
+          ],
+          "reponse": 1,
+          "explication": "15 et 4 ne sont pas premiers."
+        },
+        {
+          "t": "02:26",
+          "question": "Quelle est la décomposition de 45 ?",
+          "choix": [
+            "3 × 3 × 5",
+            "5 × 9",
+            "3 × 15"
+          ],
+          "reponse": 0,
+          "explication": "9 et 15 ne sont pas premiers : ils se cassent encore."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "4e-premier-decomposer-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_premier",
+      "microId": "premier_decomposer",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-premier-decomposer",
+      "fichier": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer-short.mp4",
+      "miniature": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer-short-miniature.png",
+      "titre": "Je casse 84 en briques incassables : tu paries que j'y arrive ? #maths #4e",
+      "accroche": "Ti Margo, sur son chantier, casse le nombre 84 à coups de marteau : 2 × 42, 2 × 21, 3 × 7.\nLe 7 ne casse pas : il est premier. Ses briques : 84 = 2 × 2 × 3 × 7.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : casse 150 en facteurs premiers. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_decomposer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombrespremiers #4e #collège",
+      "tags": [
+        "marteau",
+        "décomposition en facteurs premiers",
+        "facteurs premiers",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "nombres premiers",
+        "divisibilité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "Laquelle est la décomposition de 12 ?",
+          "choix": [
+            "2 × 6",
+            "2 × 2 × 3",
+            "3 × 4"
+          ],
+          "reponse": 1,
+          "explication": "6 et 4 se cassent encore ; 2 et 3, non."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "4e-premier-defi",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_premier",
+      "microId": "premier_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi.mp4",
+      "miniature": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi.png",
+      "titre": "Compter les diviseurs sans les écrire — Défis sur les nombres premiers — épisode 4 · Maths 4e",
+      "accroche": "Elsa organise des tournois de jeux vidéo. 36 joueurs sont inscrits, et elle veut des équipes de même taille. Combien de tailles d'équipe sont possibles ? C'est le nombre de diviseurs de 36, et on peut le compter sans les écrire.\n\nDans cette vidéo :\n• on décompose en facteurs premiers : 36 = 2 × 2 × 3 × 3\n• pour chaque facteur, un choix de plus que le nombre de fois où il apparaît\n• on multiplie les choix : 3 × 3 = 9 diviseurs\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 72 = 2 × 2 × 2 × 3 × 3 : combien de tailles d'équipe possibles ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/nombre-premier\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/nombre-premier\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_defi&display=simple\n\n🔢 Épisode 4 sur 4 de la série Nombres premiers d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Elsa, organisatrice de tournois"
+        ],
+        [
+          "00:23",
+          "Commençons par 12"
+        ],
+        [
+          "00:38",
+          "Vérifions"
+        ],
+        [
+          "00:49",
+          "Question 1"
+        ],
+        [
+          "01:22",
+          "Les équipes d'Elsa"
+        ],
+        [
+          "01:40",
+          "Le piège"
+        ],
+        [
+          "01:54",
+          "Question 2"
+        ],
+        [
+          "02:21",
+          "À toi de jouer"
+        ],
+        [
+          "02:38",
+          "Correction"
+        ],
+        [
+          "02:54",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/nombre-premier",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/nombre-premier",
+      "tags": [
+        "nombre de diviseurs",
+        "décomposition en facteurs premiers",
+        "défi",
+        "jeux vidéo",
+        "tournoi",
+        "e-sport",
+        "nombres premiers",
+        "divisibilité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "45 = 3 × 3 × 5. Combien a-t-il de diviseurs ?",
+          "choix": [
+            "3",
+            "5",
+            "6"
+          ],
+          "reponse": 2,
+          "explication": "3 choix pour le 3, 2 choix pour le 5 : 3 × 2 = 6."
+        },
+        {
+          "t": "01:54",
+          "question": "Un nombre s'écrit 2 × 3 × 5. Combien a-t-il de diviseurs ?",
+          "choix": [
+            "3",
+            "6",
+            "8"
+          ],
+          "reponse": 2,
+          "explication": "Deux choix pour chaque facteur : 2 × 2 × 2 = 8."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "4e-premier-defi-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "nombre_premier",
+      "microId": "premier_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-premier-defi",
+      "fichier": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi-short.mp4",
+      "miniature": "4e/maths/divisibilite/11-defi/eleveai-maths-4e-premier-defi-short-miniature.png",
+      "titre": "Les diviseurs de 60, sans en écrire un seul : tu paries ? #maths #4e",
+      "accroche": "Sur le plateau d'un jeu télévisé, Ti Margo parie qu'il compte les diviseurs de 60 sans les écrire.\nSa méthode : 60 = 2 × 2 × 3 × 5. Un diviseur, c'est un choix : 0, 1 ou 2 fois le 2, 0 ou 1 fois le 3, 0 ou 1 fois le 5. 3 × 2 × 2 = 12 diviseurs.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture verte.\n👉 À toi : combien de diviseurs a 100 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=nombre_premier&microId=premier_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombrespremiers #4e #collège",
+      "tags": [
+        "jeu télévisé",
+        "nombre de diviseurs",
+        "facteurs premiers",
+        "Ti Margo",
+        "dessin animé",
+        "film d'animation 3D",
+        "nombres premiers",
+        "divisibilité",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "18 = 2 × 3 × 3. Combien a-t-il de diviseurs ?",
+          "choix": [
+            "3",
+            "5",
+            "6"
+          ],
+          "reponse": 2,
+          "explication": "2 choix pour le 2, 3 choix pour le 3 : 2 × 3 = 6."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
     }
   ]
 }
