@@ -96,6 +96,32 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "6e-triangle-angle-manquant-short": 4.21,
   "6e-triangle-possible-ou-non-short": 4.21,
   "6e-triangle-propriete-defi-short": 4.21,
+  // Décimaux 6e : paysage = même fin que les Triangles (pause après « point f r » de 2,42 à 3,38 s
+  // dans le clip de fin, mesurée dans chaque mp4) ; short = « Mets », mesuré au son de chaque mp4, + 0,03 s (08/11).
+  "6e-decimal-lire-ecrire": 8.4,
+  "6e-decimal-lire-ecrire-short": 4.22,
+  "6e-decimal-rang": 8.4,
+  "6e-decimal-rang-short": 4.23,
+  "6e-decimal-comparer": 8.4,
+  "6e-decimal-comparer-short": 4.21,
+  "6e-decimal-arrondir": 8.4,
+  "6e-decimal-arrondir-short": 4.21,
+  "6e-decimal-encadrer": 8.4,
+  "6e-decimal-encadrer-short": 4.22,
+  "6e-decimal-defi": 8.4,
+  "6e-decimal-defi-short": 4.21,
+  "6e-decimal-additionner": 8.4,
+  "6e-decimal-additionner-short": 4.22,
+  "6e-decimal-multiplier": 8.4,
+  "6e-decimal-multiplier-short": 4.21,
+  "6e-decimal-multiplier-decimaux": 8.4,
+  "6e-decimal-multiplier-decimaux-short": 4.22,
+  "6e-decimal-multiplier-par-01": 8.4,
+  "6e-decimal-multiplier-par-01-short": 4.24,
+  "6e-decimal-diviser-par-entier": 8.4,
+  "6e-decimal-diviser-par-entier-short": 4.24,
+  "6e-decimal-calcul-defi": 8.4,
+  "6e-decimal-calcul-defi-short": 4.21,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

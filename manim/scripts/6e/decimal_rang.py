@@ -416,18 +416,18 @@ class DecimalRangBase(PaysageDecimal):
     # ── 09 : ce que tu as appris ────────────────────────────────────────────
     def ecran_finale(self):
         self.ecran("09-finale", 0.65)
-        tb = tableau(R6, 2, larg=1.15, h=0.9, fs_ent=24)
+        tb = tableau(R6, 2, larg=2.0, h=0.85, fs_ent=30)
         fl = VGroup(Arrow(tb.virgule.get_center() + DOWN * 0.55, tb.cases[0].get_bottom() + DOWN * 0.35, color=VERT_D,
                           buff=0, stroke_width=5),
                     Arrow(tb.virgule.get_center() + DOWN * 0.55, tb.cases[5].get_bottom() + DOWN * 0.35, color=AMBRE_D,
                           buff=0, stroke_width=5))
         fig = VGroup(tb, fl)
         self.add(fig)
-        lignes = self.finale_colonne(figure=fig, textes=[
+        lignes = self.finale_haut(fig, [
             ("On part de la virgule.",),
-            ("À gauche : unités,", "dizaines, centaines."),
-            ("À droite : dixièmes,", "centièmes, millièmes."),
-            ("Chaque rang vaut 10 fois", "moins que celui de gauche.")], fs=34)
+            ("À gauche : unités, dizaines, centaines.",),
+            ("À droite : dixièmes, centièmes, millièmes.",),
+            ("Chaque rang vaut 10 fois moins que celui de gauche.",)], fs=34)
         self.au_mot("On part")
         self.montrer_ligne(lignes[0], Indicate(tb.virgule, color=ROUGE_ERREUR, scale_factor=1.8))
         self.au_mot("À gauche")

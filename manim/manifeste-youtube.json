@@ -65696,6 +65696,1795 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-decimal-lire-ecrire",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_lire_ecrire",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire.mp4",
+      "miniature": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire.png",
+      "titre": "Comment écrire le poids d'un chaton ? — Lire et écrire un décimal — épisode 1 · Maths 6e",
+      "accroche": "Léna est vétérinaire. Elle pèse un chaton : 1 kilogramme, et un peu plus. Elle dit « 1 unité et 4 dixièmes ». Comment l'écrire ?\n\nDans cette vidéo :\n• une unité coupée en 10 : les dixièmes, puis les centièmes\n• avant la virgule les unités, juste après les dixièmes\n• 7/10 = 0,7 et 25/10 = 2,5\n• s'il manque un rang, on écrit 0 : 2,09\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : écris 4 kilogrammes et 8 centièmes, puis 125/100 avec une virgule.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_lire_ecrire&display=simple\n\n🔢 Épisode 1 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment écrire 1 unité et 4 dixièmes ?"
+        ],
+        [
+          "00:20",
+          "Les dixièmes"
+        ],
+        [
+          "00:40",
+          "Les centièmes"
+        ],
+        [
+          "00:57",
+          "Question 1"
+        ],
+        [
+          "01:23",
+          "Des fractions aux décimaux"
+        ],
+        [
+          "01:39",
+          "Attention au zéro"
+        ],
+        [
+          "01:58",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "Le piège de 34/100"
+        ],
+        [
+          "02:45",
+          "À toi de jouer"
+        ],
+        [
+          "03:01",
+          "Correction"
+        ],
+        [
+          "03:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre",
+      "tags": [
+        "lire un nombre décimal",
+        "écrire un nombre décimal",
+        "dixièmes",
+        "centièmes",
+        "vétérinaire",
+        "animaux",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "Comment écrire 7 dixièmes ?",
+          "choix": [
+            "7,10",
+            "0,7",
+            "0,07"
+          ],
+          "reponse": 1,
+          "explication": "Les dixièmes vont juste après la virgule : 0,7."
+        },
+        {
+          "t": "01:58",
+          "question": "Comment se lit 6,09 ?",
+          "choix": [
+            "6 unités et 9 dixièmes",
+            "6 unités et 9 centièmes",
+            "9 unités et 6 centièmes"
+          ],
+          "reponse": 1,
+          "explication": "Le 0 est au rang des dixièmes. Le 9 est au rang des centièmes."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "6e-decimal-lire-ecrire-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_lire_ecrire",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-lire-ecrire",
+      "fichier": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire-short.mp4",
+      "miniature": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire-short-miniature.png",
+      "titre": "Tu paries que j'écris bien 3 unités et 5 centièmes ? #maths #6e",
+      "accroche": "On me dicte 3 unités et 5 centièmes. J'écris 3,5 sans réfléchir... Les cases du tableau ne sont pas d'accord !\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : écris en chiffres 4 unités et 4 millièmes. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_lire_ecrire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "écrire un décimal",
+        "dictée de nombres",
+        "centièmes",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture blanche",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Que fallait-il écrire ?",
+          "choix": [
+            "3,5",
+            "3,05",
+            "3,50"
+          ],
+          "reponse": 1,
+          "explication": "Un 0 garde la place des dixièmes : 3,05."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-decimal-rang",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_rang",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang.mp4",
+      "miniature": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang.png",
+      "titre": "Que veut dire chaque chiffre de 12,47 secondes ? — Le rang d'un chiffre — épisode 2 · Maths 6e",
+      "accroche": "Malik est chronométreur aux courses d'athlétisme. Une coureuse franchit la ligne en 12,47 secondes. Que veut dire chaque chiffre ?\n\nDans cette vidéo :\n• le tableau : centaines, dizaines, unités, dixièmes, centièmes, millièmes\n• chaque rang vaut 10 fois moins que celui de gauche\n• le troisième chiffre après la virgule : les millièmes\n• dizaines ou dixièmes ? ne pas confondre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : dans 805,316, quel chiffre est au rang des dizaines ? Et au rang des millièmes ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_rang&display=simple\n\n🔢 Épisode 2 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Que veut dire chaque chiffre ?"
+        ],
+        [
+          "00:19",
+          "Le tableau de numération"
+        ],
+        [
+          "00:30",
+          "10 fois moins à chaque rang"
+        ],
+        [
+          "00:46",
+          "Question 1"
+        ],
+        [
+          "01:10",
+          "Les millièmes"
+        ],
+        [
+          "01:22",
+          "Dizaines ou dixièmes ?"
+        ],
+        [
+          "01:41",
+          "Question 2"
+        ],
+        [
+          "02:04",
+          "À toi de jouer"
+        ],
+        [
+          "02:19",
+          "Correction"
+        ],
+        [
+          "02:37",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre",
+      "tags": [
+        "rang d'un chiffre",
+        "tableau de numération",
+        "dixièmes",
+        "centièmes",
+        "millièmes",
+        "chronométreur",
+        "athlétisme",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:46",
+          "question": "Dans 12,47, quel chiffre est au rang des dixièmes ?",
+          "choix": [
+            "2",
+            "4",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "Le premier chiffre après la virgule est celui des dixièmes : 4."
+        },
+        {
+          "t": "01:41",
+          "question": "Dans 69,073, quel chiffre est au rang des centièmes ?",
+          "choix": [
+            "0",
+            "7",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "Dixièmes : 0. Centièmes : 7. Millièmes : 3."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-decimal-rang-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_rang",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-rang",
+      "fichier": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang-short.mp4",
+      "miniature": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang-short-miniature.png",
+      "titre": "Le code du coffre-fort : tu paries qu'il s'ouvre ? #maths #6e",
+      "accroche": "Le code du coffre : les chiffres des dixièmes, des centièmes et des millièmes de 5,762. Je tape 5, 7, 6... Bip ! Raté.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : le nouveau code, ce sont les dixièmes, les centièmes et les millièmes de 806,415. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_rang&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "rang d'un chiffre",
+        "code secret",
+        "millièmes",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture blanche",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Quel est le bon code ?",
+          "choix": [
+            "7, 6, 2",
+            "5, 7, 6",
+            "2, 6, 7"
+          ],
+          "reponse": 0,
+          "explication": "Après la virgule : 7 dixièmes, 6 centièmes, 2 millièmes. Le code est 7, 6, 2."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-decimal-comparer",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_comparer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer.mp4",
+      "miniature": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer.png",
+      "titre": "0,7 m ou 0,65 m : quelle tortue est la plus grande ? — Comparer des décimaux — épisode 3 · Maths 6e",
+      "accroche": "Sofia est biologiste marine. Elle mesure deux tortues de mer : Perle, 0,7 mètre, et Corail, 0,65 mètre. Laquelle est la plus grande ?\n\nDans cette vidéo :\n• le piège : 65 est plus grand que 7, mais 0,65 est plus petit que 0,7\n• comparer rang par rang, en partant de la gauche\n• un zéro à la fin ne change rien : 0,7 = 0,70\n• ranger des nombres décimaux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : range 1,5 ; 1,05 et 1,45 de la plus petite à la plus grande.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_comparer&display=simple\n\n🔢 Épisode 3 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quelle tortue est la plus grande ?"
+        ],
+        [
+          "00:25",
+          "Le piège"
+        ],
+        [
+          "00:37",
+          "Rang par rang"
+        ],
+        [
+          "00:57",
+          "L'astuce du zéro"
+        ],
+        [
+          "01:12",
+          "Question 1"
+        ],
+        [
+          "01:41",
+          "D'abord les unités"
+        ],
+        [
+          "01:54",
+          "Ranger des nombres"
+        ],
+        [
+          "02:14",
+          "Question 2"
+        ],
+        [
+          "02:46",
+          "À toi de jouer"
+        ],
+        [
+          "03:01",
+          "Correction"
+        ],
+        [
+          "03:17",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre",
+      "tags": [
+        "comparer des nombres décimaux",
+        "ranger des décimaux",
+        "plus grand",
+        "plus petit",
+        "biologiste marine",
+        "tortues",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Quel nombre est le plus grand ?",
+          "choix": [
+            "0,45",
+            "0,5",
+            "0,405"
+          ],
+          "reponse": 1,
+          "explication": "Au rang des dixièmes : 5 contre 4. 0,5 gagne."
+        },
+        {
+          "t": "02:14",
+          "question": "Compare 12,13 et 12,2.",
+          "choix": [
+            "12,13 est plus petit",
+            "12,13 est plus grand",
+            "ils sont égaux"
+          ],
+          "reponse": 0,
+          "explication": "Les unités sont égales. Aux dixièmes : 1 contre 2. 12,13 est plus petit que 12,2."
+        }
+      ],
+      "centres": [
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "6e-decimal-comparer-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_comparer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-comparer",
+      "fichier": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer-short.mp4",
+      "miniature": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer-short-miniature.png",
+      "titre": "La bouteille avec le plus de chiffres a le plus de jus ? #maths #6e",
+      "accroche": "Trois bouteilles : 1,5 litre, 1,25 litre et 1,125 litre. Je prends celle qui a le plus de chiffres... Mon pot est le moins rempli !\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : range du plus petit au plus grand : 2,3 ; 2,03 ; 2,33. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "comparer des décimaux",
+        "litres",
+        "bouteilles",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture jaune",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Quelle bouteille contient le plus de jus ?",
+          "choix": [
+            "1,125 litre",
+            "1,25 litre",
+            "1,5 litre"
+          ],
+          "reponse": 2,
+          "explication": "Avec des zéros : 1,500, 1,250, 1,125. 500 millièmes, c'est le plus."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-decimal-arrondir",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_arrondir",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir.mp4",
+      "miniature": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir.png",
+      "titre": "23,7 °C : quel nombre entier annoncer à la radio ? — Arrondir un décimal — épisode 4 · Maths 6e",
+      "accroche": "Sami est météorologue. Son thermomètre affiche 23,7 degrés. À la radio, il annonce un nombre entier. Lequel ?\n\nDans cette vidéo :\n• arrondir à l'unité : le nombre entier le plus proche\n• la règle : de 0 à 4 on garde, de 5 à 9 on monte\n• arrondir au dixième : on regarde les centièmes\n• le piège du 9 : 3,96 arrondi au dixième donne 4\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le vent souffle à 45,58 km/h : arrondis à l'unité, puis au dixième.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_arrondir&display=simple\n\n🔢 Épisode 4 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quel nombre annoncer ?"
+        ],
+        [
+          "00:20",
+          "Sur la droite graduée"
+        ],
+        [
+          "00:32",
+          "La règle"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Arrondir au dixième"
+        ],
+        [
+          "01:41",
+          "Le piège du 9"
+        ],
+        [
+          "02:01",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "02:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre",
+      "tags": [
+        "arrondir un nombre décimal",
+        "arrondi à l'unité",
+        "arrondi au dixième",
+        "valeur approchée",
+        "météorologue",
+        "météo",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "Quel est l'arrondi à l'unité de 12,5 ?",
+          "choix": [
+            "12",
+            "13",
+            "12,5"
+          ],
+          "reponse": 1,
+          "explication": "Le chiffre des dixièmes est 5. De 5 à 9, on monte : 13."
+        },
+        {
+          "t": "02:01",
+          "question": "Quel est l'arrondi au dixième de 7,64 ?",
+          "choix": [
+            "7,6",
+            "7,7",
+            "8"
+          ],
+          "reponse": 0,
+          "explication": "Le chiffre des centièmes est 4. On garde 7,6."
+        }
+      ],
+      "centres": [
+        "meteo-climat"
+      ]
+    },
+    {
+      "id": "6e-decimal-arrondir-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_arrondir",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-arrondir",
+      "fichier": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir-short.mp4",
+      "miniature": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir-short-miniature.png",
+      "titre": "Arrondir deux fois, c'est permis ? #maths #6e",
+      "accroche": "Mon gâteau pèse 2,46 kilogrammes. J'arrondis au dixième, 2,5, puis à l'unité : 3 ! Sur la droite graduée, il est pourtant bien plus près de 2...\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : arrondis 7,45 à l'unité. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_arrondir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "arrondir",
+        "arrondi à l'unité",
+        "gâteau",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture jaune",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Quel est l'arrondi à l'unité de 2,46 ?",
+          "choix": [
+            "2",
+            "3",
+            "2,5"
+          ],
+          "reponse": 0,
+          "explication": "On regarde seulement le chiffre des dixièmes : 4. On garde 2."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-decimal-encadrer",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_encadrer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer.mp4",
+      "miniature": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer.png",
+      "titre": "Y a-t-il un nombre entre 4,7 et 4,8 ? — Encadrer et intercaler — épisode 5 · Maths 6e",
+      "accroche": "Lina pilote un robot sur la planète Mars. Aujourd'hui, le robot a roulé 7,38 mètres. Entre quels nombres se trouve-t-il ?\n\nDans cette vidéo :\n• encadrer à l'unité : 7 < 7,38 < 8\n• encadrer au dixième : on zoome entre 7 et 8\n• intercaler : entre 4,7 et 4,8, il y a 4,75\n• entre deux décimaux, il y en a toujours d'autres\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le robot a roulé 15,04 mètres : encadre ce nombre à l'unité, puis au dixième.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_encadrer&display=simple\n\n🔢 Épisode 5 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Entre quels nombres ?"
+        ],
+        [
+          "00:17",
+          "Encadrer à l'unité"
+        ],
+        [
+          "00:31",
+          "Encadrer au dixième"
+        ],
+        [
+          "00:48",
+          "Question 1"
+        ],
+        [
+          "01:15",
+          "Intercaler"
+        ],
+        [
+          "01:43",
+          "On peut toujours zoomer"
+        ],
+        [
+          "02:00",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "À toi de jouer"
+        ],
+        [
+          "02:42",
+          "Correction"
+        ],
+        [
+          "02:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre",
+      "tags": [
+        "encadrer un nombre décimal",
+        "intercaler",
+        "droite graduée",
+        "encadrement",
+        "robot",
+        "Mars",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "Quel est l'encadrement à l'unité de 12,6 ?",
+          "choix": [
+            "entre 12 et 13",
+            "entre 11 et 12",
+            "entre 12,5 et 12,7"
+          ],
+          "reponse": 0,
+          "explication": "12,6 est entre les entiers 12 et 13."
+        },
+        {
+          "t": "02:00",
+          "question": "Quel nombre est entre 2,3 et 2,4 ?",
+          "choix": [
+            "2,5",
+            "2,35",
+            "2,03"
+          ],
+          "reponse": 1,
+          "explication": "2,35 est entre 2,30 et 2,40."
+        }
+      ],
+      "centres": [
+        "espace"
+      ]
+    },
+    {
+      "id": "6e-decimal-encadrer-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_encadrer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-encadrer",
+      "fichier": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer-short.mp4",
+      "miniature": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer-short-miniature.png",
+      "titre": "Aucun nombre entre 4,7 et 4,8 : tu paries ? #maths #6e",
+      "accroche": "Je parie qu'il n'y a aucun nombre entre 4,7 et 4,8 : ils sont collés ! Ma loupe zoome sur la droite graduée...\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : entre 4,7 et 4,8, combien y a-t-il de nombres avec deux chiffres après la virgule ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_encadrer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "intercaler",
+        "droite graduée",
+        "loupe",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture blanche",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Lequel est entre 4,7 et 4,8 ?",
+          "choix": [
+            "4,65",
+            "4,75",
+            "4,85"
+          ],
+          "reponse": 1,
+          "explication": "4,75, pile au milieu."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-decimal-defi",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi.mp4",
+      "miniature": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi.png",
+      "titre": "Sauras-tu ouvrir les trois portes de l'escape game ? — Défis sur les décimaux — épisode 6 · Maths 6e",
+      "accroche": "Tom crée des escape games. Ses énigmes cachent des nombres décimaux. Trois portes t'attendent.\n\nDans cette vidéo :\n• retrouver un nombre à partir de ses chiffres et de leurs rangs\n• le plus grand nombre : le plus gros chiffre au rang le plus fort\n• vrai ou faux : plus de chiffres ne veut pas dire plus grand\n• 10,20 = 10,2\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : avec les étiquettes 9, 8 et 6, écris le plus petit nombre possible avec deux chiffres après la virgule.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_defi&display=simple\n\n🔢 Épisode 6 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois portes à ouvrir"
+        ],
+        [
+          "00:16",
+          "Porte 1"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:01",
+          "Porte 2"
+        ],
+        [
+          "01:19",
+          "Porte 3"
+        ],
+        [
+          "01:36",
+          "Question 2"
+        ],
+        [
+          "02:03",
+          "À toi de jouer"
+        ],
+        [
+          "02:20",
+          "Correction"
+        ],
+        [
+          "02:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-nombre",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-nombre",
+      "tags": [
+        "nombres décimaux",
+        "défis",
+        "énigmes",
+        "escape game",
+        "plus grand nombre",
+        "rang",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Unités : 0. Dixièmes : 0. Centièmes : 5. Quel est le nombre ?",
+          "choix": [
+            "0,5",
+            "5",
+            "0,05"
+          ],
+          "reponse": 2,
+          "explication": "Le 0 des dixièmes garde sa place : 0,05."
+        },
+        {
+          "t": "01:36",
+          "question": "10,20 est-il égal à 10,2 ?",
+          "choix": [
+            "oui",
+            "non, il est plus grand",
+            "non, il est plus petit"
+          ],
+          "reponse": 0,
+          "explication": "Un zéro à la fin ne change rien : 20 centièmes, ce sont 2 dixièmes."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-decimal-defi-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_nombre",
+      "microId": "decimal_defi",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-defi",
+      "fichier": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi-short.mp4",
+      "miniature": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi-short-miniature.png",
+      "titre": "Avec 3, 7 et 2, tu paries que j'écris le plus grand nombre ? #maths #6e",
+      "accroche": "Avec les étiquettes 3, 7 et 2, je fabrique le plus grand nombre à deux chiffres après la virgule : 2,37 ! Hmm... j'ai tout fait à l'envers.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : avec 4, 1 et 7, écris le plus petit nombre avec un seul chiffre après la virgule. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "étiquettes",
+        "plus grand nombre",
+        "défi",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture jaune",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Quel est le plus grand ?",
+          "choix": [
+            "2,37",
+            "7,32",
+            "3,72"
+          ],
+          "reponse": 1,
+          "explication": "Le plus gros chiffre au rang le plus fort : 7, puis 3, puis 2. 7,32."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-decimal-additionner",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_additionner",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner.mp4",
+      "miniature": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner.png",
+      "titre": "Pourquoi pose-t-on virgule sous virgule ? — Additionner et soustraire — épisode 7 · Maths 6e",
+      "accroche": "Romain est boulanger. Il verse 2,35 kilogrammes de farine blanche, puis 1,4 kilogramme de farine complète. Combien en tout ?\n\nDans cette vidéo :\n• unités avec unités, dixièmes avec dixièmes : virgule sous virgule\n• compléter avec des zéros : 1,4 = 1,40\n• la retenue : 10 dixièmes font une unité\n• soustraire : 5 − 2,75, la virgule cachée de 5\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 8,5 kg de sucre, moins 2,75 kg pour des brioches, moins 1,6 kg pour des tartes : combien en reste-t-il ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_additionner&display=simple\n\n🔢 Épisode 7 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de farine en tout ?"
+        ],
+        [
+          "00:22",
+          "Virgule sous virgule"
+        ],
+        [
+          "00:32",
+          "Poser l'addition"
+        ],
+        [
+          "00:56",
+          "La retenue"
+        ],
+        [
+          "01:15",
+          "Question 1"
+        ],
+        [
+          "01:48",
+          "La soustraction"
+        ],
+        [
+          "02:19",
+          "La virgule cachée"
+        ],
+        [
+          "02:43",
+          "Question 2"
+        ],
+        [
+          "03:13",
+          "À toi de jouer"
+        ],
+        [
+          "03:32",
+          "Correction"
+        ],
+        [
+          "03:48",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul",
+      "tags": [
+        "addition de décimaux",
+        "soustraction de décimaux",
+        "poser une opération",
+        "virgule sous virgule",
+        "boulanger",
+        "pain",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:15",
+          "question": "Combien font 2,8 + 1,35 ?",
+          "choix": [
+            "1,63",
+            "4,15",
+            "3,43"
+          ],
+          "reponse": 1,
+          "explication": "2,8, c'est 2,80. 2,80 + 1,35, ça fait 4,15."
+        },
+        {
+          "t": "02:43",
+          "question": "Combien font 7 − 2,4 ?",
+          "choix": [
+            "5,4",
+            "4,6",
+            "5,6"
+          ],
+          "reponse": 1,
+          "explication": "7, c'est 7,0. 7,0 − 2,4, ça fait 4,6."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-decimal-additionner-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_additionner",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-additionner",
+      "fichier": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner-short.mp4",
+      "miniature": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner-short-miniature.png",
+      "titre": "5 € − 2,75 € : il me reste 3,75 €, tu paries ? #maths #6e",
+      "accroche": "J'ai 5 euros. J'achète des bonbons à 2,75 euros. 5 moins 2, ça fait 3, et je garde les 75 centimes... Je vérifie : ça fait plus que mes 5 euros !\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : j'ai 10 euros. J'achète un livre à 6,40 euros. Combien me reste-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_additionner&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "soustraction",
+        "rendre la monnaie",
+        "euros",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture jaune",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Combien me reste-t-il ?",
+          "choix": [
+            "3,75 euros",
+            "2,25 euros",
+            "3,25 euros"
+          ],
+          "reponse": 1,
+          "explication": "5 euros, c'est 5,00. 5,00 − 2,75, ça fait 2,25."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-decimal-multiplier",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_multiplier",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier.mp4",
+      "miniature": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier.png",
+      "titre": "2,4 × 3 : où mettre la virgule ? — Multiplier un décimal par un entier — épisode 8 · Maths 6e",
+      "accroche": "Lucas est jardinier paysagiste. Il plante 3 rangées de fleurs de 2,4 mètres chacune. Quelle longueur en tout ?\n\nDans cette vidéo :\n• 3 × 2,4, c'est 2,4 + 2,4 + 2,4\n• la méthode : multiplier sans la virgule, puis la remettre\n• vérifier avec un ordre de grandeur\n• × 10, × 100 : chaque chiffre monte d'un ou deux rangs\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 6 rosiers à 4,25 euros : combien Lucas paie-t-il ? Vérifie avec un ordre de grandeur.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier&display=simple\n\n🔢 Épisode 8 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quelle longueur en tout ?"
+        ],
+        [
+          "00:20",
+          "Une addition répétée"
+        ],
+        [
+          "00:40",
+          "La méthode rapide"
+        ],
+        [
+          "00:55",
+          "L'ordre de grandeur"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:38",
+          "Multiplier par 10"
+        ],
+        [
+          "02:05",
+          "Le raccourci"
+        ],
+        [
+          "02:25",
+          "Question 2"
+        ],
+        [
+          "02:51",
+          "À toi de jouer"
+        ],
+        [
+          "03:07",
+          "Correction"
+        ],
+        [
+          "03:27",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul",
+      "tags": [
+        "multiplier un décimal",
+        "multiplication",
+        "multiplier par 10",
+        "ordre de grandeur",
+        "jardinier paysagiste",
+        "jardin",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Combien font 1,5 × 4 ?",
+          "choix": [
+            "6",
+            "4,20",
+            "60"
+          ],
+          "reponse": 0,
+          "explication": "15 × 4, ça fait 60. Un chiffre après la virgule : 6,0, c'est-à-dire 6."
+        },
+        {
+          "t": "02:25",
+          "question": "Combien font 0,8 × 100 ?",
+          "choix": [
+            "0,800",
+            "8",
+            "80"
+          ],
+          "reponse": 2,
+          "explication": "Chaque chiffre monte de deux rangs : 8 dixièmes deviennent 8 dizaines. 80."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "6e-decimal-multiplier-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_multiplier",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-multiplier",
+      "fichier": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier-short.mp4",
+      "miniature": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier-short-miniature.png",
+      "titre": "4 glaces à 1,5 € : je paie 60 €, tu paries ? #maths #6e",
+      "accroche": "J'offre 4 glaces à 1,5 euro. 15 fois 4, ça fait 60 : je paie 60 euros ! Le marchand rigole...\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : combien coûtent 6 croissants à 1,2 euro ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "multiplication",
+        "virgule",
+        "glaces",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture jaune",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Combien je paie ?",
+          "choix": [
+            "60 euros",
+            "6 euros",
+            "0,6 euro"
+          ],
+          "reponse": 1,
+          "explication": "1,5 a un chiffre après la virgule. Le prix aussi : 6,0. 6 euros."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-decimal-multiplier-decimaux",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_multiplier_decimaux",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux.mp4",
+      "miniature": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux.png",
+      "titre": "0,3 × 0,6 : pourquoi est-ce plus petit ? — Multiplier deux décimaux — épisode 9 · Maths 6e",
+      "accroche": "Anaïs est carreleuse. Elle pose des carreaux sur une zone de 0,3 mètre sur 0,6 mètre. Quelle est son aire ?\n\nDans cette vidéo :\n• un carré de 1 m coupé en 100 petits carreaux\n• compter les chiffres après la virgule des deux nombres\n• 2,6 × 7,4 = 19,24, vérifié par un ordre de grandeur\n• multiplier par moins de 1 rend plus petit\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une plaque de carrelage mesure 1,2 m sur 0,5 m : quelle est son aire ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier_decimaux&display=simple\n\n🔢 Épisode 9 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quelle est l'aire ?"
+        ],
+        [
+          "00:21",
+          "Le carré coupé en 100"
+        ],
+        [
+          "00:34",
+          "La zone de 3 sur 6"
+        ],
+        [
+          "00:46",
+          "La méthode"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:35",
+          "Avec de plus grands nombres"
+        ],
+        [
+          "01:59",
+          "Plus petit !"
+        ],
+        [
+          "02:18",
+          "Question 2"
+        ],
+        [
+          "02:48",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul",
+      "tags": [
+        "multiplier deux décimaux",
+        "produit de décimaux",
+        "aire",
+        "chiffres après la virgule",
+        "carreleuse",
+        "carrelage",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Combien font 0,4 × 0,2 ?",
+          "choix": [
+            "0,8",
+            "0,08",
+            "8"
+          ],
+          "reponse": 1,
+          "explication": "4 × 2, ça fait 8. Deux chiffres après la virgule : 0,08."
+        },
+        {
+          "t": "02:18",
+          "question": "2,5 × 0,8 est-il plus petit ou plus grand que 2,5 ?",
+          "choix": [
+            "plus petit",
+            "plus grand",
+            "égal"
+          ],
+          "reponse": 0,
+          "explication": "0,8 est plus petit que 1. Le résultat est plus petit que 2,5 : c'est 2."
+        }
+      ],
+      "centres": [
+        "construction"
+      ]
+    },
+    {
+      "id": "6e-decimal-multiplier-decimaux-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_multiplier_decimaux",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-multiplier-decimaux",
+      "fichier": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux-short.mp4",
+      "miniature": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux-short-miniature.png",
+      "titre": "0,5 × 0,5 de pizza : plus que la moitié, tu paries ? #maths #6e",
+      "accroche": "Je prends 0,5 de la largeur et 0,5 de la hauteur d'une pizza carrée. Multiplier, ça agrandit toujours... Hé ! Mon morceau est tout petit.\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : combien font 0,4 × 0,5 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier_decimaux&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "multiplier deux décimaux",
+        "pizza",
+        "un quart",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture jaune",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Combien font 0,5 × 0,5 ?",
+          "choix": [
+            "2,5",
+            "0,25",
+            "1"
+          ],
+          "reponse": 1,
+          "explication": "5 × 5, ça fait 25. Deux chiffres après la virgule : 0,25. Un quart !"
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-decimal-multiplier-par-01",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_multiplier_par_01",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01.mp4",
+      "miniature": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01.png",
+      "titre": "Pourquoi ça rétrécit ? — Multiplier par 0,1 ; 0,01 ; 0,001 — épisode 10 · Maths 6e",
+      "accroche": "Kenzo fabrique des maquettes pour le cinéma. Une vraie tour mesure 37 mètres. Sa maquette doit être 10 fois plus petite : 37 × 0,1.\n\nDans cette vidéo :\n• 0,1, c'est un dixième : multiplier par 0,1, c'est diviser par 10\n• chaque chiffre descend d'un rang\n• × 0,01 : deux rangs ; × 0,001 : trois rangs\n• le résultat ne grandit jamais\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un camion de 12,5 mètres, multiplié par 0,01 pour la maquette : combien mesure-t-elle ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier_par_01&display=simple\n\n🔢 Épisode 10 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Pourquoi ça rétrécit ?"
+        ],
+        [
+          "00:26",
+          "Un dixième"
+        ],
+        [
+          "00:39",
+          "Chaque chiffre descend"
+        ],
+        [
+          "01:04",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "× 0,01 et × 0,001"
+        ],
+        [
+          "01:59",
+          "Jamais plus grand"
+        ],
+        [
+          "02:16",
+          "Question 2"
+        ],
+        [
+          "02:48",
+          "À toi de jouer"
+        ],
+        [
+          "03:05",
+          "Correction"
+        ],
+        [
+          "03:23",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul",
+      "tags": [
+        "multiplier par 0,1",
+        "multiplier par 0,01",
+        "diviser par 10",
+        "valeur des chiffres",
+        "maquettiste",
+        "cinéma",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "Combien font 52 × 0,1 ?",
+          "choix": [
+            "520",
+            "5,2",
+            "0,52"
+          ],
+          "reponse": 1,
+          "explication": "Chaque chiffre descend d'un rang : 5 dizaines deviennent 5 unités. 5,2."
+        },
+        {
+          "t": "02:16",
+          "question": "Combien font 5,2 × 0,01 ?",
+          "choix": [
+            "0,52",
+            "0,052",
+            "520"
+          ],
+          "reponse": 1,
+          "explication": "Chaque chiffre descend de deux rangs : 5 unités deviennent 5 centièmes. 0,052."
+        }
+      ],
+      "centres": [
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "6e-decimal-multiplier-par-01-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_multiplier_par_01",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-multiplier-par-01",
+      "fichier": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01-short.mp4",
+      "miniature": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01-short-miniature.png",
+      "titre": "Fois 0,1 : mon dinosaure va devenir géant, tu paries ? #maths #6e",
+      "accroche": "Ma machine multiplie par 0,1. J'y mets mon dinosaure de 40 centimètres : il va sortir géant ! Bzzz...\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : mon dinosaure géant mesure 25 mètres. Je le passe × 0,01 : combien mesure-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier_par_01&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "multiplier par 0,1",
+        "rétrécir",
+        "dinosaure",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture jaune",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Combien mesure-t-il maintenant ?",
+          "choix": [
+            "400 centimètres",
+            "4 centimètres",
+            "0,4 centimètre"
+          ],
+          "reponse": 1,
+          "explication": "× 0,1, c'est diviser par 10. Chaque chiffre descend d'un rang : 4 centimètres."
+        }
+      ],
+      "centres": [
+        "dinosaures"
+      ]
+    },
+    {
+      "id": "6e-decimal-diviser-par-entier",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_diviser_par_entier",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier.mp4",
+      "miniature": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier.png",
+      "titre": "Comment partager 7,5 m de câble en 5 ? — Diviser un décimal par un entier — épisode 11 · Maths 6e",
+      "accroche": "Yasmine est régisseuse de concerts. Elle coupe 7,5 mètres de câble en 5 morceaux égaux. Combien mesure chaque morceau ?\n\nDans cette vidéo :\n• partager les unités, puis les dixièmes\n• poser la division : la virgule au résultat quand on passe la virgule\n• quand ça ne tombe pas juste, on continue : 7 ÷ 4 = 1,75\n• ÷ 10, ÷ 100 : chaque chiffre descend d'un ou deux rangs\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 9 litres d'eau partagés entre 4 musiciens : combien pour chacun ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_diviser_par_entier&display=simple\n\n🔢 Épisode 11 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment partager ?"
+        ],
+        [
+          "00:22",
+          "Partager rang par rang"
+        ],
+        [
+          "00:48",
+          "Poser la division"
+        ],
+        [
+          "01:07",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Quand ça ne tombe pas juste"
+        ],
+        [
+          "02:15",
+          "Diviser par 10"
+        ],
+        [
+          "02:28",
+          "Question 2"
+        ],
+        [
+          "03:02",
+          "À toi de jouer"
+        ],
+        [
+          "03:15",
+          "Correction"
+        ],
+        [
+          "03:38",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul",
+      "tags": [
+        "division décimale",
+        "diviser un décimal",
+        "division posée",
+        "quotient",
+        "régisseuse",
+        "concert",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:07",
+          "question": "Combien font 3,6 ÷ 2 ?",
+          "choix": [
+            "1,3",
+            "1,8",
+            "18"
+          ],
+          "reponse": 1,
+          "explication": "3 ÷ 2 : 1, il reste 1. 1 unité et 6 dixièmes font 16 dixièmes. 16 ÷ 2 : 8. 1,8."
+        },
+        {
+          "t": "02:28",
+          "question": "Combien font 814,6 ÷ 100 ?",
+          "choix": [
+            "81,46",
+            "8,146",
+            "81 460"
+          ],
+          "reponse": 1,
+          "explication": "Chaque chiffre descend de deux rangs : 8 centaines deviennent 8 unités. 8,146."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "6e-decimal-diviser-par-entier-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_diviser_par_entier",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-diviser-par-entier",
+      "fichier": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier-short.mp4",
+      "miniature": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier-short-miniature.png",
+      "titre": "10 € entre 4 copains : je garde 2 €, tu paries ? #maths #6e",
+      "accroche": "Je partage 10 euros entre 4 copains : 2 euros chacun, et je garde les 2 euros qui restent ! Mes copains protestent...\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : je partage 7 euros entre 4 copains. Combien pour chacun ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_diviser_par_entier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "division",
+        "partage",
+        "euros",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture jaune",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Combien chacun doit-il avoir ?",
+          "choix": [
+            "2 euros",
+            "2,5 euros",
+            "2,2 euros"
+          ],
+          "reponse": 1,
+          "explication": "20 pièces divisées par 4 : 5 pièces de 10 centimes chacun, 0,5 euro. Chacun a 2,5 euros."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-decimal-calcul-defi",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_calcul_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi.mp4",
+      "miniature": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi.png",
+      "titre": "Moitié, double, 10 % : sauras-tu tout calculer ? — Défis de calcul — épisode 12 · Maths 6e",
+      "accroche": "Inès tient un magasin de jeux vidéo. Chaque jour, elle calcule des moitiés, des doubles et des réductions.\n\nDans cette vidéo :\n• la moitié : diviser par 2 ; le double : × 2\n• le quart : la moitié de la moitié\n• 10 % : diviser par 10 ; 50 % : la moitié\n• un ordre de grandeur sans poser : 4,9 × 2\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une console à 250 euros, avec 10 % de réduction : quel est le nouveau prix ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_calcul_defi&display=simple\n\n🔢 Épisode 12 sur 12 de la série Nombres décimaux d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sauras-tu tout calculer ?"
+        ],
+        [
+          "00:19",
+          "La moitié"
+        ],
+        [
+          "00:36",
+          "Le double"
+        ],
+        [
+          "00:51",
+          "Question 1"
+        ],
+        [
+          "01:21",
+          "10 % de réduction"
+        ],
+        [
+          "01:41",
+          "Le nouveau prix"
+        ],
+        [
+          "01:51",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "Sans poser"
+        ],
+        [
+          "02:37",
+          "À toi de jouer"
+        ],
+        [
+          "02:52",
+          "Correction"
+        ],
+        [
+          "03:07",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/decimal-calcul",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/decimal-calcul",
+      "tags": [
+        "calcul avec les décimaux",
+        "moitié",
+        "double",
+        "pourcentage",
+        "réduction",
+        "jeux vidéo",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "Quel est le quart de 10 ?",
+          "choix": [
+            "2,5",
+            "2,4",
+            "40"
+          ],
+          "reponse": 0,
+          "explication": "Le quart, c'est la moitié de la moitié. La moitié de 10 : 5. La moitié de 5 : 2,5."
+        },
+        {
+          "t": "01:51",
+          "question": "Combien font 50 % de 18 euros ?",
+          "choix": [
+            "9 euros",
+            "1,8 euro",
+            "36 euros"
+          ],
+          "reponse": 0,
+          "explication": "50 %, c'est la moitié. 18 ÷ 2, ça fait 9."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-decimal-calcul-defi-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "decimal_calcul",
+      "microId": "decimal_calcul_defi",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-decimal-calcul-defi",
+      "fichier": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi-short.mp4",
+      "miniature": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi-short-miniature.png",
+      "titre": "Moins 25 % : je retire 25 €, tu paries ? #maths #6e",
+      "accroche": "Les soldes ! Un jeu à 40 euros, moins 25 %. Je retire 25 euros : il coûte 15 euros ! La vendeuse sourit...\n\nFilm d'animation 3D, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : un jeu à 45 euros, moins 10 %. Quel est le nouveau prix ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_calcul_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #decimaux #6e #collège",
+      "tags": [
+        "pourcentage",
+        "soldes",
+        "un quart",
+        "Ti Margo",
+        "film d'animation 3D",
+        "ceinture jaune",
+        "nombres décimaux",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Quelle est la réduction ?",
+          "choix": [
+            "25 euros",
+            "10 euros",
+            "4 euros"
+          ],
+          "reponse": 1,
+          "explication": "Le quart de 40 : 40 ÷ 4, ça fait 10. Le jeu coûte 30 euros."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "argent-budget"
+      ]
     }
   ]
 }

@@ -497,16 +497,18 @@ class DecimalComparerBase(PaysageDecimal):
     # ── 10 : ce que tu as appris ────────────────────────────────────────────
     def ecran_finale(self):
         self.ecran("10-finale", 0.65)
-        g, rg, ch = lignes_num(R3, ["0,70", "0,65"], larg=1.4, h=0.8, fs_ent=22)
+        g, rg, ch = lignes_num(R3, ["0,70", "0,65"], larg=2.2, h=0.8, fs_ent=30)
         fig = VGroup(g, *[c for k in range(2) for c in ch[k] if c is not None])
         self.add(fig)
-        lignes = self.finale_colonne(figure=fig, textes=[
-            ("On compare rang par rang,", "en partant de la gauche."),
+        lignes = self.finale_haut(fig, [
+            ("On compare rang par rang, en partant de la gauche.",),
             ("Un zéro à la fin ne change rien :", "0,7"),
-            ("Plus de chiffres ne veut pas", "dire plus grand.")], fs=34)
-        # la ligne « 0,7 égale 0,70 » : 0,70 vient à son mot, à droite de 0,7
+            ("Plus de chiffres ne veut pas dire plus grand.",)], fs=34)
+        # la ligne « 0,7 égale 0,70 » : 0,70 vient à son mot, à droite de 0,7, À LA MÊME TAILLE
         b = lignes[1][1]
-        suite = self.t("= 0,70.", 34).next_to(b[1], RIGHT, buff=0.2)
+        suite = self.t("= 0,70.", 34)
+        suite.scale(b[1].height / self.t("0,7", 34).height).next_to(b[1], RIGHT, buff=0.2)
+        suite.align_to(b[1], DOWN)
         self.au_mot("On compare")
         self.montrer_ligne(lignes[0], Indicate(fig, scale_factor=1.04))
         self.au_mot("Un zéro")

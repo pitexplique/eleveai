@@ -3215,6 +3215,42 @@
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple"
  },
+ "6e-decimal-additionner": {
+  "fichier": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner.mp4",
+  "poster": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner.png",
+  "vignette": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner.vignette.webp",
+  "titre": "Pourquoi pose-t-on virgule sous virgule ? — Additionner et soustraire — épisode 7 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_additionner&display=simple"
+ },
+ "6e-decimal-additionner-short": {
+  "fichier": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner-short.mp4",
+  "poster": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner-short-miniature.png",
+  "vignette": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner-short-miniature.vignette.webp",
+  "titre": "5 € − 2,75 € : il me reste 3,75 €, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_additionner&display=simple"
+ },
+ "6e-decimal-arrondir": {
+  "fichier": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir.mp4",
+  "poster": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir.png",
+  "vignette": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir.vignette.webp",
+  "titre": "23,7 °C : quel nombre entier annoncer à la radio ? — Arrondir un décimal — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_arrondir&display=simple"
+ },
+ "6e-decimal-arrondir-short": {
+  "fichier": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir-short.mp4",
+  "poster": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir-short-miniature.png",
+  "vignette": "6e/maths/decimaux/04-arrondir/eleveai-maths-6e-decimal-arrondir-short-miniature.vignette.webp",
+  "titre": "Arrondir deux fois, c'est permis ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_arrondir&display=simple"
+ },
  "6e-decimal-calcul": {
   "fichier": "6e/maths/paysage/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul.mp4",
   "poster": "6e/maths/paysage/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul.png",
@@ -3223,6 +3259,24 @@
   "short": false,
   "youtube": "QFQsyW-CXw8",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&display=simple"
+ },
+ "6e-decimal-calcul-defi": {
+  "fichier": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi.mp4",
+  "poster": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi.png",
+  "vignette": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi.vignette.webp",
+  "titre": "Moitié, double, 10 % : sauras-tu tout calculer ? — Défis de calcul — épisode 12 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_calcul_defi&display=simple"
+ },
+ "6e-decimal-calcul-defi-short": {
+  "fichier": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi-short.mp4",
+  "poster": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi-short-miniature.png",
+  "vignette": "6e/maths/decimaux/12-calcul-defi/eleveai-maths-6e-decimal-calcul-defi-short-miniature.vignette.webp",
+  "titre": "Moins 25 % : je retire 25 €, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_calcul_defi&display=simple"
  },
  "6e-decimal-calcul-short-01": {
   "fichier": "6e/maths/shorts/fr/decimal-calcul/eleveai-maths-6e-decimal-calcul-short-01.mp4",
@@ -3269,6 +3323,150 @@
   "youtube": "rh1ecggp2YE",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_diviser_par_entier&display=simple"
  },
+ "6e-decimal-comparer": {
+  "fichier": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer.mp4",
+  "poster": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer.png",
+  "vignette": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer.vignette.webp",
+  "titre": "0,7 m ou 0,65 m : quelle tortue est la plus grande ? — Comparer des décimaux — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_comparer&display=simple"
+ },
+ "6e-decimal-comparer-short": {
+  "fichier": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer-short.mp4",
+  "poster": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer-short-miniature.png",
+  "vignette": "6e/maths/decimaux/03-comparer/eleveai-maths-6e-decimal-comparer-short-miniature.vignette.webp",
+  "titre": "La bouteille avec le plus de chiffres a le plus de jus ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_comparer&display=simple"
+ },
+ "6e-decimal-defi": {
+  "fichier": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi.mp4",
+  "poster": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi.png",
+  "vignette": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi.vignette.webp",
+  "titre": "Sauras-tu ouvrir les trois portes de l'escape game ? — Défis sur les décimaux — épisode 6 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_defi&display=simple"
+ },
+ "6e-decimal-defi-short": {
+  "fichier": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi-short.mp4",
+  "poster": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi-short-miniature.png",
+  "vignette": "6e/maths/decimaux/06-defi/eleveai-maths-6e-decimal-defi-short-miniature.vignette.webp",
+  "titre": "Avec 3, 7 et 2, tu paries que j'écris le plus grand nombre ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_defi&display=simple"
+ },
+ "6e-decimal-diviser-par-entier": {
+  "fichier": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier.mp4",
+  "poster": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier.png",
+  "vignette": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier.vignette.webp",
+  "titre": "Comment partager 7,5 m de câble en 5 ? — Diviser un décimal par un entier — épisode 11 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_diviser_par_entier&display=simple"
+ },
+ "6e-decimal-diviser-par-entier-short": {
+  "fichier": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier-short.mp4",
+  "poster": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier-short-miniature.png",
+  "vignette": "6e/maths/decimaux/11-diviser-par-entier/eleveai-maths-6e-decimal-diviser-par-entier-short-miniature.vignette.webp",
+  "titre": "10 € entre 4 copains : je garde 2 €, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_diviser_par_entier&display=simple"
+ },
+ "6e-decimal-encadrer": {
+  "fichier": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer.mp4",
+  "poster": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer.png",
+  "vignette": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer.vignette.webp",
+  "titre": "Y a-t-il un nombre entre 4,7 et 4,8 ? — Encadrer et intercaler — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_encadrer&display=simple"
+ },
+ "6e-decimal-encadrer-short": {
+  "fichier": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer-short.mp4",
+  "poster": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer-short-miniature.png",
+  "vignette": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer-short-miniature.vignette.webp",
+  "titre": "Aucun nombre entre 4,7 et 4,8 : tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_encadrer&display=simple"
+ },
+ "6e-decimal-lire-ecrire": {
+  "fichier": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire.mp4",
+  "poster": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire.png",
+  "vignette": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire.vignette.webp",
+  "titre": "Comment écrire le poids d'un chaton ? — Lire et écrire un décimal — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_lire_ecrire&display=simple"
+ },
+ "6e-decimal-lire-ecrire-short": {
+  "fichier": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire-short.mp4",
+  "poster": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire-short-miniature.png",
+  "vignette": "6e/maths/decimaux/01-lire-ecrire/eleveai-maths-6e-decimal-lire-ecrire-short-miniature.vignette.webp",
+  "titre": "Tu paries que j'écris bien 3 unités et 5 centièmes ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_lire_ecrire&display=simple"
+ },
+ "6e-decimal-multiplier": {
+  "fichier": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier.mp4",
+  "poster": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier.png",
+  "vignette": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier.vignette.webp",
+  "titre": "2,4 × 3 : où mettre la virgule ? — Multiplier un décimal par un entier — épisode 8 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier&display=simple"
+ },
+ "6e-decimal-multiplier-decimaux": {
+  "fichier": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux.mp4",
+  "poster": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux.png",
+  "vignette": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux.vignette.webp",
+  "titre": "0,3 × 0,6 : pourquoi est-ce plus petit ? — Multiplier deux décimaux — épisode 9 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier_decimaux&display=simple"
+ },
+ "6e-decimal-multiplier-decimaux-short": {
+  "fichier": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux-short.mp4",
+  "poster": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux-short-miniature.png",
+  "vignette": "6e/maths/decimaux/09-multiplier-decimaux/eleveai-maths-6e-decimal-multiplier-decimaux-short-miniature.vignette.webp",
+  "titre": "0,5 × 0,5 de pizza : plus que la moitié, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier_decimaux&display=simple"
+ },
+ "6e-decimal-multiplier-par-01": {
+  "fichier": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01.mp4",
+  "poster": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01.png",
+  "vignette": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01.vignette.webp",
+  "titre": "Pourquoi ça rétrécit ? — Multiplier par 0,1 ; 0,01 ; 0,001 — épisode 10 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier_par_01&display=simple"
+ },
+ "6e-decimal-multiplier-par-01-short": {
+  "fichier": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01-short.mp4",
+  "poster": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01-short-miniature.png",
+  "vignette": "6e/maths/decimaux/10-multiplier-par-01/eleveai-maths-6e-decimal-multiplier-par-01-short-miniature.vignette.webp",
+  "titre": "Fois 0,1 : mon dinosaure va devenir géant, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier_par_01&display=simple"
+ },
+ "6e-decimal-multiplier-short": {
+  "fichier": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier-short.mp4",
+  "poster": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier-short-miniature.png",
+  "vignette": "6e/maths/decimaux/08-multiplier/eleveai-maths-6e-decimal-multiplier-short-miniature.vignette.webp",
+  "titre": "4 glaces à 1,5 € : je paie 60 €, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_calcul&microId=decimal_multiplier&display=simple"
+ },
  "6e-decimal-nombre": {
   "fichier": "6e/maths/paysage/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre.mp4",
   "poster": "6e/maths/paysage/fr/decimal-nombre/eleveai-maths-6e-decimal-nombre.png",
@@ -3295,6 +3493,24 @@
   "short": true,
   "youtube": "27goai4IrnQ",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_comparer&display=simple"
+ },
+ "6e-decimal-rang": {
+  "fichier": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang.mp4",
+  "poster": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang.png",
+  "vignette": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang.vignette.webp",
+  "titre": "Que veut dire chaque chiffre de 12,47 secondes ? — Le rang d'un chiffre — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_rang&display=simple"
+ },
+ "6e-decimal-rang-short": {
+  "fichier": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang-short.mp4",
+  "poster": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang-short-miniature.png",
+  "vignette": "6e/maths/decimaux/02-rang/eleveai-maths-6e-decimal-rang-short-miniature.vignette.webp",
+  "titre": "Le code du coffre-fort : tu paries qu'il s'ouvre ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_rang&display=simple"
  },
  "6e-demi-droite-graduee": {
   "fichier": "6e/maths/paysage/fr/demi-droite-graduee/eleveai-maths-6e-demi-droite-graduee.mp4",

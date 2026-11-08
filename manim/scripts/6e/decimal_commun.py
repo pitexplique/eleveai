@@ -217,6 +217,26 @@ class PaysageDecimal(VoixDecimale, FinTriangles, PaysageProp):
         touchait la fin d'un choix long (« … 9 centièmes✓ »)."""
         return super().coche(couleur, taille * 0.75)
 
+    def finale_haut(self, figure, textes, fs=34, buff_fig=0.45):
+        """« Ce que tu as appris » quand la figure est large (tableau de 6 rangs) : la
+        figure en pleine largeur sous le titre, les lignes d'une seule phrase dessous.
+        Avec finale_colonne, le tableau tassé à gauche avait des entêtes minuscules.
+        textes : une ligne = un tuple de morceaux posés côte à côte."""
+        tit = self.t("Ce que tu as appris", 46, JAUNE_TITRE).to_edge(UP, buff=0.45)
+        if figure.width > 12.6:
+            figure.scale_to_fit_width(12.6)
+        figure.set_x(0).align_to(P(0, tit.get_bottom()[1] - 0.3), UP)
+        self.play(Write(tit), run_time=0.7)
+        lignes = VGroup()
+        for morceaux in textes:
+            bloc = VGroup(*[self.t(x, fs) for x in morceaux]).arrange(RIGHT, buff=0.2)
+            lignes.add(VGroup(self.coche(), bloc).arrange(RIGHT, buff=0.25))
+        lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.36)
+        if lignes.width > 11.0:
+            lignes.scale_to_fit_width(11.0)
+        lignes.next_to(figure, DOWN, buff=buff_fig).set_x(-0.4)
+        return lignes
+
     def choix(self, s, fs=30):
         """Un choix long (« 6 unités et 9 dixièmes ») : posé d'un bloc à sa lettre, que la
         voix lit aussitôt. Sans cela, la synchro le découpe en morceaux et la carte
