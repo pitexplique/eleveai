@@ -4,6 +4,17 @@ Notions du coach `divisibilite` (7 micros) et `nombre_premier` (4 micros). Une p
 
 Modèle : la série Relatifs 4e (`manim/REPRISE-relatifs.md`, à lire en entier). Règles : `manim/REGLES.md`. Shorts : socle commun `prototypes/ti-margo/LISEZ-MOI.md` + `scripts/ti-margo-short.mjs` (ne pas recopier de page).
 
+## ⏳ 08/11 4 h : 21 VIDÉOS SUR 22 RENDUES ET COMMITTÉES, reste la paysage 08
+
+Frédéric a dit « ok » au pilote 05 ; les 20 autres faites sans redemander, un agent par épisode.
+- Faits, contrôlés (planches regardées, bords 0 sur les paysages), committés, PAS poussés : paysages 01, 02, 03, 04, 06, 07, 09, 10, 11 et les 10 shorts (01-04, 06-11), avec miniature et `publication.md` (`Validé : non`) dans `manim/sorties/4e/maths/divisibilite/NN-<slug>/`.
+- Commits : `ec9f1363` (`div_commun.py`, série `premiers`), puis un par épisode (`3d6a065d` 01, `2c40b05a` 02, `f5898ad5` 03, `af0db4e5` 04, `50bb7abc` 06, `b83d795b` 07, `bd99f9d4` 09, `4ed42af3` 10, `87bdf918` 11), `bdb6d5a1` (les 20 coupes de `COUPE_PAR_VIDEO`, les `-cues.js`).
+- ⏳ **Paysage 08** `manim/scripts/4e/premier_definition.py` (`PremierDefinition4e`) : en cours (dry run + brouillon). Sa boucle `tas()` tournait sans fin (27 carreaux au hasard dans une zone trop petite) : corrigée avec un garde-fou. Le short 08, sa miniature et son `publication.md` sont faits. À la fin : mp4 `eleveai-maths-4e-premier-definition.mp4` dans `08-definition/`, `verifier-bords-video.py` = 0, supprimer `manim/scripts/4e/media-div-08-ql` et `media-div-08`, committer `premier_definition.py` + `premier_definition_marques.json` + `prototypes/ti-margo/films/premiers-definition.js`. Sa coupe (8,4 et 4,17) est déjà dans `LecteurVideo.tsx`.
+- Fichiers des shorts : `films/divisibilite-<ep>.js` (01-07), `films/premiers.js` + `premiers.json` + `premiers-<ep>.js` (08-11, sorties `NN-<ep>`).
+- Pièges vus : le cache `media/texts` partagé par plusieurs rendus en parallèle donne des SVG vides → lancer le dry run avec son propre `--media_dir` ; `lg` à x > 1 réduit le texte sans `maxw` ; la barre du compte à rebours des shorts est invisible (`#rebours`), réactivée dans `divisibilite-probleme.js` seulement ; `equation_commun.py` perd deux mots muets de suite (contourné dans `premier_defi.py`) ; `verifier-bords-video.py` compte des « bords » sur tous les shorts 3D (le décor remplit l'image), c'est normal.
+- Finales : léger retard (0,5-0,8 s) de la première ligne de « Ce que tu as appris », comme sur le pilote validé.
+- Reste ensuite (sur l'ordre de Frédéric) : son écoute (bruitages des shorts, rien n'a été écouté), passe finale comme les Relatifs (miniatures paysage, manifeste en AJOUT, `fiches-youtube.py`, R2 par `rclone copy` du seul dossier `divisibilite`), push le soir, PUIS `brancher-videos-coach.mjs --ecrire`, YouTube.
+
 ## ✅ 07/11 fin d'après-midi : PILOTE 05 RENDU (`304dce63`), en attente du oui de Frédéric
 
 - Paysage `manim/scripts/4e/div_diviseurs.py` (3 min 01) et short `prototypes/ti-margo/films/divisibilite.js` (`FILMS.diviseurs`, 1 min 20), dans `manim/sorties/4e/maths/divisibilite/05-diviseurs/` (+ miniature, `publication.md` Validé : non). Coupes de fin dans `components/LecteurVideo.tsx` (8,4 et 4,17).
