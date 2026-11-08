@@ -12,6 +12,7 @@ import {
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorMode, TutorQuestionOption } from "@/lib/tutor-v4/types";
 import BoutonVideoCompetence from "./BoutonVideoCompetence";
+import AQuoiCaSert from "./AQuoiCaSert";
 
 type TutorSimpleViewProps = {
   classe: Classe;
@@ -327,8 +328,9 @@ export default function TutorSimpleView({
                  notion et l'énoncé, où il ne se lit ni comme un bouton ni comme
                  un dessin — juste comme une tache. Frédéric, 27/08 : « il faut
                  juste enlever une icône que je vois sur la 3e ligne ». */
-              <div className="mb-5 flex justify-center gap-2 empty:hidden" data-hors-apercu="">
+              <div className="mb-5 flex flex-wrap items-center justify-center gap-2 empty:hidden" data-hors-apercu="">
                 <BoutonVideoCompetence matiere={matiere} classe={classe} microId={currentQuestion.microId} notionId={currentQuestion.notionId} />
+                <AQuoiCaSert matiere={matiere} classe={classe} notionId={currentQuestion.notionId} />
               </div>
             ) : null}
 

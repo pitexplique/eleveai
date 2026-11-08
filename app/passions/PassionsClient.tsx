@@ -18,6 +18,8 @@ import {
   type TrancheAge,
 } from "@/lib/videos/centres-interet";
 import { chargerPassions, enregistrerPassions, remettrePlusTard } from "@/lib/passions";
+import { NOTIONS_COACH } from "@/lib/matrice/notions.generated";
+import { notionsDuCentre, type MetierMontre } from "@/lib/matrice/metiers";
 
 export type VideoPassion = {
   id: string;
@@ -287,6 +289,7 @@ function Ressources({
                   : `Pas encore de vidéo sur « ${l.nom} » : ta passion est notée, elle donne des idées de vidéos !`}
               </p>
             )}
+            {centre && <MetiersDuCentre centre={centre} classe={classe} />}
             {liste.length === 0 && !precision && (
               <p className="mt-2 text-slate-500">Pas encore de vidéo sur ce thème. Ta passion est notée !</p>
             )}
@@ -324,5 +327,45 @@ function Ressources({
         );
       })}
     </>
+  );
+}
+
+/**
+ * « 💼 Des métiers qui en ont besoin » (08/11/2026) : trois métiers de la
+ * passion, pris dans la matrice métiers (lib/matrice/metiers.ts) sur des notions
+ * DIFFÉRENTES de sa classe, chacun avec sa porte vers le coach.
+ * Non connecté : la 6e (la classe de Frédéric, et la plus nombreuse ici).
+ */
+function MetiersDuCentre({ centre, classe }: { centre: string; classe: string | null }) {
+  const cle = classe === "terminale" ? "terminale-spe" : classe && NOTIONS_COACH.maths[classe] ? classe : "6e";
+  const choisis = useMemo(() => {
+    const notions = NOTIONS_COACH.maths[cle] ?? [];
+    const vus = new Set<string>();
+    const out: { notionId: string; label: string; metier: MetierMontre }[] = [];
+    for (const { notionId, metiers } of notionsDuCentre(cle, notions.map((n) => n.id), centre)) {
+      const m = metiers.find((x) => !vus.has(x.id));
+      if (!m) continue;
+      vus.add(m.id);
+      out.push({ notionId, label: notions.find((n) => n.id === notionId)?.label ?? notionId, metier: m });
+    }
+    // Étalés sur l'année : le début, le milieu et la fin du programme.
+    if (out.length <= 3) return out;
+    return [out[0], out[Math.floor(out.length / 2)], out[out.length - 1]];
+  }, [cle, centre]);
+  if (!choisis.length) return null;
+  return (
+    <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+      {choisis.map(({ notionId, label, metier }) => (
+        <Link
+          key={notionId}
+          href={`/coach/serie?classe=${encodeURIComponent(cle)}&matiere=maths&notion=${encodeURIComponent(notionId)}&display=simple`}
+          className="flex flex-col gap-1 rounded-2xl border border-violet-200 bg-violet-50 p-3 hover:border-violet-400"
+        >
+          <span className="text-xs font-bold uppercase text-violet-700">💼 {label}</span>
+          <span className="text-sm font-semibold text-slate-800">{metier.phrase}</span>
+          <span className="mt-auto text-xs font-bold text-emerald-700">🎯 Je m&apos;entraîne →</span>
+        </Link>
+      ))}
+    </div>
   );
 }

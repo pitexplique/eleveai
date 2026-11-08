@@ -121,6 +121,7 @@ import { MarkdownMath } from "@/components/MarkdownMath";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import FloatingCoach from "@/components/FloatingCoach";
 import BandeauPassions from "./BandeauPassions";
+import AQuoiCaSert from "./AQuoiCaSert";
 import Image from "next/image";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -2426,6 +2427,7 @@ function handleInputKeyDown(
                   <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-900">
                     {starPoints(currentQuestion.meta.starLevel)} pts
                   </span>
+                  <AQuoiCaSert matiere={matiere} classe={classe} notionId={currentQuestion.notionId} />
                 </div>
               </div>
 
