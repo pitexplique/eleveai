@@ -1,13 +1,13 @@
 /* Série Relatifs 4e : les 7 shorts. Décor commun, puis un FILMS.<épisode> par film. */
 /* La barre du compte à rebours : short.js la laisse en display:none. Plus spécifique que #rebours, et le style en ligne la cache hors du rebours. */
 { const css=document.createElement('style'); css.textContent='div#rebours{display:block;}'; document.head.append(css); }
-/* La miniature verticale : la question, la ceinture, la mention « Film d'animation 3D » */
+/* La miniature verticale : la question, la ceinture, la mention « Dessin animé » */
 function poserMiniature({$,carte,legende,panneau},t,html){ window.tiMargoMiniature=()=>{ window.MINI=true; window.tiMargo.aller(t);
   carte.style.display='none'; panneau.style.display='none'; $('titre').style.display='none';
   legende.style.cssText+=';display:block;top:60px;left:50px;right:50px;font-size:100px;line-height:1.1;padding:30px;'; legende.innerHTML=html;
   const e=$('echelle'); e.style.display='flex'; e.style.top='535px';
-  const m=document.createElement('div'); m.className='cv'; m.textContent="Film d’animation 3D";
-  m.style.cssText='left:176px;right:176px;bottom:36px;text-align:center;font-size:66px;background:#17452a;color:#fff;border-radius:999px;padding:14px 0;z-index:6;'; document.body.append(m); }; }
+  const m=document.createElement('div'); m.className='cv'; m.textContent="Dessin animé";
+  m.style.cssText='left:250px;right:250px;bottom:36px;text-align:center;font-size:72px;background:#17452a;color:#fff;border-radius:999px;padding:14px 0;z-index:6;'; document.body.append(m); }; }
 
 /* ---- Décor partagé : la droite graduée dressée, numérotée de −N à N, dans un studio ---- */
 function poserDroite(N,GRAD){

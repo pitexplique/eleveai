@@ -37,8 +37,8 @@ function poserMiniature({$,carte,legende,panneau},t,html,dessin=''){ window.tiMa
   legende.style.cssText+=';display:block;top:60px;left:50px;right:50px;font-size:92px;line-height:1.08;padding:26px;'; legende.innerHTML=html;
   const e=$('echelle'); e.style.display='flex'; e.style.top='560px';
   if(dessin){ const d=document.createElement('div'); d.className='cv'; d.innerHTML=dessin; d.style.cssText='left:44px;top:732px;z-index:4;'; document.body.append(d); }
-  const m=document.createElement('div'); m.className='cv'; m.textContent='Film d’animation 3D';
-  m.style.cssText='left:176px;right:176px;bottom:36px;text-align:center;font-size:66px;background:#17452a;color:#fff;border-radius:999px;padding:14px 0;z-index:6;'; document.body.append(m); }; }
+  const m=document.createElement('div'); m.className='cv'; m.textContent='Dessin animé';
+  m.style.cssText='left:250px;right:250px;bottom:36px;text-align:center;font-size:72px;background:#17452a;color:#fff;border-radius:999px;padding:14px 0;z-index:6;'; document.body.append(m); }; }
 const PARI='<div style="color:#e8590c;font-size:136px;margin-top:10px">TU PARIES ?</div>';
 
 /* ---- Le panneau du jardinier : une ardoise sur pieds, écrite à la craie à chaque image ---- */

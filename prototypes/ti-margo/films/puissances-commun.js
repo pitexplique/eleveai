@@ -19,13 +19,13 @@ function gestes(P,T){ return {
   oups(){ P.gesteD='ouverte'; P.md.set(.98,2.42,.5); P.mg.set(-.98,2.42,.5); P.cd.set(.82,1.7,.2); P.cg.set(-.82,1.7,.2); P.tetZ=.16+Math.sin(T*2)*.03; P.tetX=-.06; P.paupiere=-1.25; }
 }; }
 
-/* La miniature verticale : la question, la ceinture, la mention « Film d'animation 3D » */
+/* La miniature verticale : la question, la ceinture, la mention « Dessin animé » */
 function poserMiniature({$,carte,legende,panneau},t,html){ window.tiMargoMiniature=()=>{ window.MINI=true; window.tiMargo.aller(t);
   carte.style.display='none'; panneau.style.display='none'; $('titre').style.display='none'; $('fin').style.display='none';
   legende.style.cssText+=';display:block;top:60px;left:50px;right:50px;font-size:92px;line-height:1.08;padding:26px;'; legende.innerHTML=html;
   const e=$('echelle'); e.style.display='flex'; e.style.top='500px';
-  const m=document.createElement('div'); m.className='cv'; m.textContent='Film d’animation 3D';
-  m.style.cssText='left:176px;right:176px;bottom:36px;text-align:center;font-size:66px;background:#17452a;color:#fff;border-radius:999px;padding:14px 0;z-index:6;'; document.body.append(m); }; }
+  const m=document.createElement('div'); m.className='cv'; m.textContent='Dessin animé';
+  m.style.cssText='left:250px;right:250px;bottom:36px;text-align:center;font-size:72px;background:#17452a;color:#fff;border-radius:999px;padding:14px 0;z-index:6;'; document.body.append(m); }; }
 
 /* Les instants d'un film, depuis les durées des clips.
    attentes : { clip: silence après lui } (défaut .25 s). Renvoie clips, A (début de chaque clip), CL (les cues),
