@@ -93,6 +93,7 @@ Directive de Frédéric, 07/11/2026 : « on va créer paysage normalement et sho
 - **Ce qui reste valable pour le short :** un défi et pas un mini-cours, sa ceinture, une question-pause, la question en commentaire, la paysage publiée avant lui, le script validé à deux.
 - **Le gag porte sur les maths :** l'image concrète et l'objet mathématique restent synchrones (règle ci-dessous), le calcul n'est pas remplacé par l'histoire.
 - **Shorts Manim déjà rendus ou en ligne :** on les garde, sans les refaire.
+- **⛔ Miniature (Frédéric, 08/11/2026) :** toute miniature de short en dessin animé porte la mention **« Film d'animation 3D »** dans le bandeau du bas. Elle est posée par `window.tiMargoMiniature` dans le fichier commun de la série (`prototypes/ti-margo/films/<serie>.js`, classe `cv`) : toute nouvelle série la reprend. Un short sans cette mention n'est pas envoyé.
 
 ### ⛔ Le short CEINTURE BLANCHE : la règle
 
