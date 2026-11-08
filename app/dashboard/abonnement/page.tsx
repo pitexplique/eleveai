@@ -10,6 +10,7 @@ type Statut = {
   acces: boolean;
   enseignant: boolean;
   formule: "mensuel" | "annee" | null;
+  statut: string;
   accesJusquau: string | null;
   finProgrammee: boolean;
   portail: boolean;
@@ -57,7 +58,9 @@ export default function AbonnementPage() {
           {statut?.enseignant && <p className="font-bold">Votre adresse académique vous donne accès à la vidéothèque, à titre personnel.</p>}
           {statut && !statut.enseignant && statut.acces && (
             <>
-              <p className="text-xl font-black">Le suivi famille, {statut.formule === "annee" ? "année scolaire" : "au mois"}</p>
+              <p className="text-xl font-black">
+                Le suivi famille, {statut.statut === "code" ? "ouvert par un code" : statut.formule === "annee" ? "année scolaire" : "au mois"}
+              </p>
               <Link href="/suivi" className="mt-3 inline-flex rounded-full bg-sky-700 px-6 py-3 font-black text-white hover:bg-sky-800">Le suivi de mon enfant</Link>
               <p className="mt-3 text-slate-600">
                 {statut.finProgrammee ? `Accès jusqu'au ${fin}, sans nouveau prélèvement.` : `Prochain prélèvement le ${fin}.`}
@@ -68,6 +71,9 @@ export default function AbonnementPage() {
             <>
               <p className="text-xl font-black">Aucun abonnement en cours</p>
               <Link href="/abonnement" className="mt-4 inline-flex rounded-full bg-sky-700 px-6 py-3 font-black text-white hover:bg-sky-800">Voir le suivi famille</Link>
+              <p className="mt-3 text-slate-600">
+                Un code reçu avec Ulule ou une carte cadeau ? <Link href="/code" className="font-bold underline">Activer mon code</Link>
+              </p>
             </>
           )}
           {statut?.portail && (

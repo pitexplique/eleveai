@@ -62,6 +62,16 @@
         "manim/sorties"
       ],
       "port": 3900
+    },
+    {
+      "name": "eleveai-codes",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "set NEXT_DIST_DIR=.next-6&& set CODES_ESSAI=1&& node scripts/dev-second-poste.mjs --port 3600"
+      ],
+      "port": 3600,
+      "autoPort": false
     }
   ]
 }
