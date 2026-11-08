@@ -628,14 +628,23 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
   const notions = new Set();
   // `a_remplacer` (Pythagore refaites, 01/11) : une paysage et son short par
   // jour passent juste après les films, jusqu'à ce qu'il n'y en ait plus.
-  const refaite = candidats.find((v) => v.a_remplacer && v.type === "longue");
+  // ⛔ 08/11, Frédéric : « ça fait plusieurs fois qu'on met Pythagore en avant ».
+  // Une refaite au plus tous les 5 jours ; entre-temps elle attend son tour.
+  const JOURS_ENTRE_REFAITES = 5;
+  const derniereRefaite = Math.max(0, ...Object.entries(journal)
+    .filter(([id]) => /pythagore/.test(id) || m.videos.find((x) => x.id === id)?.ancienne_url)
+    .map(([, j]) => Date.parse(j.publieLe)));
+  const refaiteAutorisee = Date.now() + 86400e3 - derniereRefaite >= JOURS_ENTRE_REFAITES * 86400e3;
+  const refaite = refaiteAutorisee && candidats.find((v) => v.a_remplacer && v.type === "longue");
   if (refaite && choisis.length < limite && choisis.filter((x) => x.type === "longue").length < 2) {
     choisis.push(refaite);
     notions.add(refaite.notionId);
     const sonShort = candidats.find((v) => v.a_remplacer && v.renvoie_vers === refaite.id);
     if (sonShort && choisis.length < limite) choisis.push(sonShort);
   }
-  candidats = candidats.filter((v) => !v.a_remplacer);
+  // Le short d'une refaite (même sans `a_remplacer`) attend sa paysage refaite.
+  const refaitesEnAttente = new Set(candidats.filter((v) => v.a_remplacer).map((v) => v.id));
+  candidats = candidats.filter((v) => !v.a_remplacer && !refaitesEnAttente.has(v.renvoie_vers));
   // `prioritaire` (nouveautés que Frédéric veut voir sortir, 02/11) : avant la
   // rotation des classes, une paysage n'occupant jamais plus de 2 places.
   // Une vidéo datée (`pas_avant`, calendrier validé par Frédéric) passe avant les
@@ -657,7 +666,8 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
   candidats = candidats.filter((v) => !choisis.includes(v));
   for (const k of classes) {
     if (choisis.length >= limite) break;
-    const liste = parClasse.get(k).filter((v) => !notions.has(v.notionId));
+    // 08/11 : `parClasse` est construit avant le tri des refaites : on les écarte ici.
+    const liste = parClasse.get(k).filter((v) => !notions.has(v.notionId) && candidats.includes(v));
     // 1. Un short dont la paysage est déjà en ligne.
     const short = liste.find((v) => v.type === "short" && v.renvoie_vers && enLigne(v.renvoie_vers));
     if (short) { choisis.push(short); notions.add(short.notionId); continue; }
@@ -791,17 +801,30 @@ async function main() {
   // --programmer : une vidéo par créneau, le lendemain (paysages d'abord, donc
   // toujours plusieurs heures avant leur short).
   // --creneau 20:30 : une seule vidéo, demain à cette heure (rattrapage à la main).
+  // --jour 2026-11-08 (08/11) : avec --creneau, un autre jour que demain ;
+  // plusieurs créneaux séparés par des virgules = une vidéo par créneau.
   const creneau = lire("--creneau", null);
+  const jourChoisi = lire("--jour", horairesDeDemain(1)[0].slice(0, 10));
   const horaires = creneau
-    ? [new Date(`${horairesDeDemain(1)[0].slice(0, 10)}T${creneau}:00+04:00`).toISOString()]
+    ? creneau.split(",").map((h) => new Date(`${jourChoisi}T${h}:00+04:00`).toISOString())
     : args.includes("--programmer") ? horairesDeDemain(aFaire.length) : null;
+  if (creneau && horaires.length < aFaire.length) aFaire = aFaire.slice(0, horaires.length);
 
   // La tâche Windows réessaie chaque heure (le 02/11, l'horloge du PC a sauté
   // 12 h 30 et rien n'est parti) : si demain a déjà ses vidéos, on s'arrête.
   if (horaires && !creneau) {
     const demain = heureReunion(horaires[0]).split(" ")[0];
-    const deja = Object.values(journal).filter((j) => j.publieLe > new Date().toISOString());
-    if (deja.some((j) => heureReunion(j.publieLe).split(" ")[0] === demain)) {
+    const deja = Object.values(journal).filter((j) => j.publieLe > new Date().toISOString())
+      .filter((j) => heureReunion(j.publieLe).split(" ")[0] === demain);
+    // 08/11 : un jour où l'on a déplacé une ou deux vidéos à la main n'est pas
+    // « plein » : on complète les créneaux restés libres.
+    if (deja.length && deja.length < limite) {
+      const pris = new Set(deja.map((j) => j.publieLe));
+      const libres = horairesDeDemain(CRENEAUX_REUNION.length).filter((h) => !pris.has(h));
+      aFaire = aFaire.slice(0, Math.min(libres.length, limite - deja.length));
+      horaires.splice(0, horaires.length, ...libres.slice(0, aFaire.length));
+      console.log(`Demain a déjà ${deja.length} vidéo(s) : je complète ${aFaire.length} créneau(x) libre(s).`);
+    } else if (deja.length) {
       console.log(`Demain (${demain}) a déjà ses vidéos programmées.`);
       // Les essais de chaque heure rattrapent les shorts sortis depuis le dernier.
       if (!dryRun) {
