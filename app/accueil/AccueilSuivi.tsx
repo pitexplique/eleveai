@@ -25,7 +25,9 @@
 // future page « Familles », jamais dans le coach ni le mode classe.
 // ⛔ Page serveur, statique : les compteurs viennent du programme et de R2.
 
+import Image from "next/image";
 import Link from "next/link";
+import { COLLECTE } from "@/lib/collecte";
 import { Roboto_Slab } from "next/font/google";
 import { CollinesAccueil, MontgolfiereAccueil, SoleilAccueil } from "@/components/accueil/dessins/PaysageAccueil";
 import {
@@ -216,14 +218,38 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             texte (« EleveAI », « CP à Terminale »…), qui se mêlait au titre.
             ⭐ 01/11 : un paysage de maths dessiné (« plus joli IXL », « avec un
             beau dessin ») : le ciel sur ordinateur, les collines partout. */}
-        <SoleilAccueil className="absolute left-6 top-6 hidden h-24 w-24 lg:block xl:left-16" />
+        {/* 08/11 : Ti Margo a pris sa place à gauche du titre ; le soleil ne
+            reste que sur les très grands écrans, où ils ne se touchent pas. */}
+        <SoleilAccueil className="absolute left-16 top-6 hidden h-24 w-24 2xl:block" />
         <MontgolfiereAccueil className="absolute right-4 top-4 hidden h-40 w-44 lg:block xl:right-14" />
         <CollinesAccueil className="absolute inset-x-0 bottom-0 h-[170px] w-full sm:h-[230px]" />
         <div className="relative mx-auto max-w-6xl px-4 pb-[150px] pt-6 text-center sm:pb-[210px] sm:pt-6">
-          {/* Comme IXL : le titre seul, tout en haut, sur une ligne (ordinateur). */}
-          <h1 className={`${slab.className} text-3xl font-light leading-tight text-sky-700 sm:text-4xl lg:whitespace-nowrap lg:text-5xl`}>
-            <span className="font-bold text-teal-700">EleveAI</span> <span className="font-bold">c&apos;est</span> l&apos;apprentissage personnalisé
-          </h1>
+          {/* ⭐ 08/11/2026 — LE TITRE FAIT ÉCHO À LA COLLECTE ULULE (« le site qui
+              suit chaque compétence de votre enfant en maths, avec des dessins
+              animés »), sans son superlatif « le premier site » (improuvable)
+              et « du CP » (le coach commence au CP, pas en grande section).
+              Avant : « EleveAI c'est l'apprentissage personnalisé » — Ti Margo
+              et les dessins animés n'apparaissaient nulle part.
+              Ti Margo montre le titre du doigt. */}
+          <div className="flex items-center justify-center gap-3 sm:gap-5">
+            <Image
+              src="/cahier-vacances/ti-margo-cahier-sac-a-dos.png"
+              alt="Ti Margo, le caméléon des dessins animés d'EleveAI"
+              width={1122}
+              height={1402}
+              priority
+              sizes="128px"
+              className="h-24 w-auto shrink-0 sm:h-32 lg:h-36"
+            />
+            <div className="text-left">
+              <h1 className={`${slab.className} text-2xl font-light leading-tight text-sky-700 sm:text-4xl lg:text-5xl`}>
+                <span className="font-bold text-teal-700">EleveAI</span> suit <span className="font-bold">chaque compétence</span> de votre enfant en maths
+              </h1>
+              <p className="mt-2 text-base font-bold text-slate-700 sm:text-xl">
+                Avec les <span className="text-orange-600">dessins animés de Ti Margo</span>, du CP à la terminale.
+              </p>
+            </div>
+          </div>
           {/* ⭐ 03/11/2026 — Frédéric : « EleveAI adaptée à huit pays
               francophones, à mettre dans la page d'accueil ». Sous le titre,
               visible de tous ; les 8 pays du plan, voir lib/aventure/pays.ts.
@@ -248,6 +274,14 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               ))}
             </span>
           </Link>
+          {/* 08/11 : sur TÉLÉPHONE, le bouton arrivait après les trois nuages, à
+              plus d'un écran et demi du haut. Il est répété ici, téléphone seul. */}
+          <Link
+            href="/coach-ia/maths"
+            className="mt-5 inline-block rounded-full bg-teal-700 px-7 py-3.5 text-lg font-black text-white shadow-lg hover:bg-teal-800 sm:hidden"
+          >
+            Essayer le coach gratuitement
+          </Link>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <Nuage Icone={GraduationCap} titre="Tout le programme">
               Du CP à la Terminale : {totalMicros.toLocaleString("fr-FR")} micro-compétences de maths et {totalVideos.toLocaleString("fr-FR")}+ vidéos, rangées comme le programme officiel.
@@ -263,12 +297,31 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               résultats (le suivi). */}
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/coach-ia/maths" className="rounded-full bg-teal-700 px-8 py-4 text-lg font-black text-white shadow-lg hover:bg-teal-800">
-              Commencer avec le coach de maths
+              Essayer le coach gratuitement
             </Link>
             <Link href="/auth/signin?inscription=1" className="rounded-full bg-white px-8 py-4 text-lg font-black text-teal-800 shadow ring-2 ring-teal-600 hover:bg-teal-50">
               Créer un compte pour garder mes résultats
             </Link>
           </div>
+          {/* 08/11 : les mots de la collecte (« gratuitement, sans compte »). */}
+          <p className="mt-2 text-sm font-bold text-slate-600">Sans compte et sans abonnement.</p>
+          {/* ⭐ PRÉVU POUR LA COLLECTE (lib/collecte.ts), ÉTEINT : Frédéric, 08/11 —
+              « ne mets pas Ulule sur l'accueil maintenant, mais prévois-le ».
+              Une ligne, pas un bandeau (⛔ la banderole rouge reste retirée). */}
+          {(COLLECTE.enLigne || COLLECTE.codesActifs) && (
+            <p className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm font-bold">
+              {COLLECTE.enLigne && (
+                <Link href="/ulule" className="text-orange-700 underline">
+                  Ti Margo sur Ulule : aidez-nous à finir les dessins animés du collège
+                </Link>
+              )}
+              {COLLECTE.codesActifs && (
+                <Link href="/code" className="text-teal-800 underline">
+                  Un code reçu ou une carte cadeau ? Activer mon code
+                </Link>
+              )}
+            </p>
+          )}
           {/* ⭐ 31/10/2026 — Frédéric : « le prof, il voit quelque chose pour
               lui » : les automatismes et les fiches d'exercices tout de suite,
               puis les vidéos et le calcul rapide. Accès directs, même style. */}

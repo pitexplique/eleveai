@@ -41,7 +41,13 @@ import { track } from "@vercel/analytics";
 export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) {
   const pathname = usePathname();
   // En haut, c'est le layout qui la rend : sur l'accueil seulement.
-  if (place === "haut" && pathname !== "/accueil") return null;
+  // ⛔ 08/11/2026 — RETIRÉE DU HAUT DU TÉLÉPHONE (accord de Frédéric sur le
+  // diagnostic « l'accueil vu par un parent ») : la campagne CRPE est datée
+  // (24/10, aucun inscrit) et, sur téléphone, c'était la première chose qu'un
+  // parent lisait, avant même le titre. Pour la remettre : passer à false
+  // la ligne `const RETIREE_DU_HAUT` (et la condition qui la lit).
+  const RETIREE_DU_HAUT = true;
+  if (place === "haut" && (RETIREE_DU_HAUT || pathname !== "/accueil")) return null;
   return (
     // ⭐ 17/10, suite : « la bannière a trop de hauteur — il y a 2 ou 3
     // commits tu avais fait une bannière d'une bonne hauteur en fond bleu

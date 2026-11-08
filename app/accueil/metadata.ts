@@ -12,7 +12,9 @@ import type { Metadata } from "next";
 const HERO = "/images/accueil-eleveai-reunion.webp";
 
 // Le titre tel qu'il doit apparaître dans Google, au caractère près.
-const TITRE = "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac";
+// ⭐ 08/11/2026 : « exercices et cahiers gratuits » vendait des fiches (contraire
+// au virage du 31/10) ; le titre suit le nouveau <h1> : le suivi, Ti Margo.
+const TITRE = "EleveAI — le coach qui suit chaque compétence en maths, du CP au Bac";
 
 // ⭐ LA PROMESSE, ÉCRITE UNE FOIS (19/08). Elle était recopiée à la main sur
 // trois surfaces — meta, OpenGraph, Twitter — et la troisième avait déjà
@@ -57,8 +59,10 @@ const TITRE = "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac";
 // promet plus).
 // ⭐ 03/11/2026 : le projet en quatre phrases (coach, vidéos, 8 pays puis 40,
 // gratuit pour l'élève) → la promesse le suit.
+// ⭐ 08/11/2026 : nouveau <h1> (« EleveAI suit chaque compétence de votre enfant
+// en maths ») et les dessins animés de Ti Margo → la promesse le suit.
 const PROMESSE =
-  "EleveAI : le coach de maths avec ses vidéos, du CP à la Terminale, adapté à 8 pays francophones et bientôt 40. Gratuit pour chaque élève.";
+  "EleveAI suit chaque compétence de votre enfant en maths, avec les dessins animés de Ti Margo, du CP à la terminale. Gratuit pour chaque élève.";
 
 export const metadata: Metadata = {
   // ⭐ `absolute` ET NON une simple chaîne. Le layout applique le gabarit
