@@ -62,6 +62,155 @@ export type ChiffreDuJour = {
 
 /** L'ÉDITION DE LA SEMAINE : les Unes datées, la plus récente semaine en tête. */
 export const EDITION: UneJournal[] = [
+  // ── Semaine du lundi 9 au dimanche 15 novembre 2026 ──
+  // Écrite le 08/11 (Frédéric : « mets à jour le journal même s'il n'apparaît
+  // pas ») : le Journal n'est plus monté sur /accueil (AccueilSuivi), il vit sur
+  // /accueil-journal. Les semaines du 26/10 au 08/11 sont restées au tirage.
+  // ⛔ donnees.ts ne prend que les vidéos qui ont un ID YouTube (`youtube` dans
+  // videos-r2.json) : les séries Angles 6e, Puissances, Convexité, Dénombrement,
+  // encore sans ID ce jour-là, ne pouvaient pas faire la Une. Paysages et shorts
+  // ci-dessous : tous publiés, tous avec miniature.
+  {
+    date: "2026-11-09",
+    paysage: "6e-prop-reconnaitre",
+    short: "6e-prop-reconnaitre-short",
+    classe: "6e",
+    utile: "Deux grandeurs sont proportionnelles quand on passe de l'une à l'autre en multipliant toujours par le même nombre : 2 fois plus d'articles, 2 fois plus cher.",
+    defi: {
+      classe: "6e",
+      coach: "6e",
+      question: "3 croissants coûtent 3,60 €. Au même prix l'unité, combien coûtent 6 croissants ?",
+      juste: "7,20 €",
+      faux: ["6,60 €", "3,60 €"],
+      explication:
+        "6 croissants, c'est 2 fois plus que 3 croissants : on paie 2 fois plus, 3,60 × 2 = 7,20 €. Ajouter 3 € (6,60 €) ne marche pas : on multiplie, on n'ajoute pas.",
+    },
+    chiffre: {
+      chiffre: "× 2",
+      texte: "Un vélo qui roule 2 fois plus longtemps à la même vitesse parcourt 2 fois plus de distance. Mais un enfant 2 fois plus âgé n'est pas 2 fois plus grand : tout n'est pas proportionnel.",
+    },
+  },
+  {
+    date: "2026-11-10",
+    paysage: "4e-expression-traduire",
+    short: "4e-expression-traduire-short",
+    classe: "4e",
+    utile: "On écrit dans l'ordre de la phrase : « le double de x, augmenté de 3 » donne 2x + 3, mais « le double de la somme de x et de 3 » donne 2(x + 3).",
+    defi: {
+      classe: "4e",
+      coach: "4e",
+      question: "Quelle expression traduit « le double d'un nombre x, diminué de 7 » ?",
+      juste: "2x − 7",
+      faux: ["2(x − 7)", "7 − 2x"],
+      explication:
+        "On prend d'abord le double du nombre, 2x, puis on lui enlève 7 : 2x − 7. 2(x − 7), ce serait le double de « x diminué de 7 ». Pour x = 10 : 2x − 7 = 13, mais 2(x − 7) = 6.",
+    },
+    chiffre: {
+      chiffre: "820",
+      texte: "Vers l'an 820, à Bagdad, le savant al-Khwârizmî écrit un livre pour résoudre les équations. Son titre contient le mot « al-jabr » : c'est de là que vient le mot « algèbre ».",
+    },
+  },
+  {
+    date: "2026-11-11",
+    paysage: "terminale-proba-arbre",
+    short: "terminale-proba-arbre-short",
+    classe: "Terminale",
+    utile: "Sur un arbre pondéré, on multiplie les probabilités le long d'un chemin, puis on additionne les chemins qui mènent au même résultat.",
+    defi: {
+      classe: "Terminale",
+      coach: "terminale-spe",
+      question: "Sur un arbre, P(A) = 0,3 et la probabilité de B sachant A vaut 0,2. Combien vaut P(A ∩ B) ?",
+      juste: "0,06",
+      faux: ["0,5", "0,1"],
+      explication:
+        "On suit le chemin A puis B : on multiplie les probabilités des branches, 0,3 × 0,2 = 0,06. Additionner (0,3 + 0,2 = 0,5) est l'erreur classique.",
+    },
+    chiffre: {
+      chiffre: "1/4",
+      theme: "probabilites",
+      texte: "On lance deux pièces : la probabilité d'obtenir deux fois pile est 1/2 × 1/2 = 1/4. On multiplie le long des branches de l'arbre : ce n'est ni 1/2, ni 1/3.",
+    },
+  },
+  {
+    date: "2026-11-12",
+    paysage: "bases-nombres-premiers",
+    short: "bases-nombres-premiers-short",
+    classe: "Les bases",
+    utile: "Un nombre premier n'a que deux diviseurs, 1 et lui-même : 12 billes se rangent en rectangle, 13 billes seulement en une ligne.",
+    defi: {
+      classe: "4e",
+      coach: "4e",
+      question: "Lequel de ces nombres est premier ?",
+      juste: "29",
+      faux: ["21", "27"],
+      explication:
+        "21 = 3 × 7 et 27 = 3 × 9 : ils ont d'autres diviseurs que 1 et eux-mêmes. 29 n'est divisible ni par 2, ni par 3, ni par 5, et 6 × 6 = 36 dépasse déjà 29 : il est premier.",
+    },
+    chiffre: {
+      chiffre: "41 024 320",
+      texte: "Le nombre de chiffres du plus grand nombre premier connu, 2¹³⁶ ²⁷⁹ ⁸⁴¹ − 1, trouvé en octobre 2024 par un passionné et des milliers d'ordinateurs. Imprimé, il remplirait des dizaines de livres.",
+    },
+  },
+  {
+    date: "2026-11-13",
+    paysage: "seconde-isoler-une-lettre",
+    classe: "Seconde",
+    utile: "De v = d ÷ t, on tire aussi d = v × t et t = d ÷ v : une seule formule en donne trois.",
+    defi: {
+      classe: "Seconde",
+      coach: "seconde",
+      question: "On sait que v = d ÷ t. Comment s'écrit le temps t ?",
+      juste: "t = d ÷ v",
+      faux: ["t = v × d", "t = v ÷ d"],
+      explication:
+        "On multiplie les deux côtés par t : v × t = d. Puis on divise par v : t = d ÷ v. Vérification : 100 km à 50 km/h, cela fait 100 ÷ 50 = 2 h.",
+    },
+    chiffre: {
+      chiffre: "300 000 km/s",
+      texte: "La vitesse de la lumière, à peu près. Avec t = d ÷ v, on trouve le temps qu'elle met pour venir du Soleil, à 150 millions de km : 500 secondes, un peu plus de 8 minutes.",
+    },
+  },
+  {
+    // Samedi : une vidéo de la playlist CRPE (pour les futurs professeurs des écoles).
+    date: "2026-11-14",
+    paysage: "4e-proba-frequence-repeter",
+    short: "4e-proba-frequence-repeter-short",
+    classe: "4e · CRPE",
+    utile: "Un dé n'a pas de mémoire : après trois 6 de suite, la probabilité d'obtenir 6 au lancer suivant reste 1 chance sur 6.",
+    defi: {
+      classe: "4e",
+      coach: "4e",
+      question: "Une pièce bien équilibrée est tombée 5 fois de suite sur pile. Quelle est la probabilité d'obtenir pile au 6e lancer ?",
+      juste: "1 chance sur 2",
+      faux: ["Moins de 1 chance sur 2", "1 chance sur 64"],
+      explication:
+        "La pièce ne se souvient pas des lancers d'avant : chaque lancer est une nouvelle expérience, avec 1 chance sur 2 pour pile. 1 chance sur 64, c'est la probabilité d'avoir 6 piles de suite AVANT de commencer.",
+    },
+    chiffre: {
+      chiffre: "26 fois",
+      theme: "probabilites",
+      texte: "Le 18 août 1913, au casino de Monte-Carlo, la bille tombe 26 fois de suite sur le noir. Des joueurs perdent des fortunes sur le rouge, persuadés qu'il « doit » sortir : la roulette n'a pas de mémoire.",
+    },
+  },
+  {
+    date: "2026-11-15",
+    paysage: "youtube-OT7gGCthbAs",
+    classe: "Première",
+    utile: "Le discriminant Δ = b² − 4ac dit combien de solutions a l'équation ax² + bx + c = 0 : deux s'il est positif, une s'il est nul, aucune s'il est négatif.",
+    defi: {
+      classe: "Première",
+      coach: "premiere-spe",
+      question: "Pour l'équation x² + 2x + 5 = 0, on trouve Δ = 2² − 4 × 1 × 5 = −16. Combien a-t-elle de solutions réelles ?",
+      juste: "Aucune",
+      faux: ["Deux", "Une seule"],
+      explication:
+        "Δ = −16 est négatif : l'équation n'a aucune solution réelle. La parabole y = x² + 2x + 5 reste tout entière au-dessus de l'axe des abscisses.",
+    },
+    chiffre: {
+      chiffre: "4,9 × t²",
+      texte: "La distance, en mètres, parcourue en t secondes par un objet en chute libre (sans l'air qui freine) : une fonction du second degré. Lâché d'une falaise de 44 m, il touche le sol en 3 s environ.",
+    },
+  },
   // ── Semaine du lundi 19 au dimanche 25 octobre 2026 ──
   // ⭐ Lundi et mardi : la Diagonale des Fous, qui vient de finir (15-18/10).
   // Frédéric, 19/10 : « on pourrait pas faire la une sur la Diagonale des fous
