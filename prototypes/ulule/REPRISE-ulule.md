@@ -139,3 +139,4 @@ Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent 
   - Label et certifications : « pas encore de label », programmes officiels (dont 2026), relecture par étudiants futurs professeurs.
   - ODD : cocher le **4 « Éducation de qualité »** seulement.
   - 09/11, sa demande : l'impact dit aussi que Ti Margo **aide d'abord les élèves en difficulté** et que **« mes classes adorent ! »** (478 car.).
+  - 09/11, sa précision : **chaque dessin animé est relu par lui ET par un étudiant** (pas seulement par l'étudiant). Corrigé dans l'impact (479 car.), le label et `description-ulule.html`. Le texte déjà collé sur Ulule est à corriger par lui.
