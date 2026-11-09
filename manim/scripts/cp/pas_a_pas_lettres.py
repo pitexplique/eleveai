@@ -364,8 +364,15 @@ class _PasAPasLettre(Scene):
 
             def cout(i):
                 g, d = " ".join(mots[:i]), " ".join(mots[i:])
-                return abs(len(g) - len(d)) - (8 if g[-1] in ",:!." else 0)
+                # ⛔ Une ligne coupée après la virgule restait plus large que la
+                # limite et touchait la petite lettre du coin (g, lot 1 du 08/11).
+                trop = any(Text(s, font_size=taille).width > largeur_max for s in (g, d))
+                return abs(len(g) - len(d)) - (8 if g[-1] in ",:!." else 0) + (1000 if trop else 0)
             i = min(range(1, len(mots)), key=cout)
+            if cout(i) >= 500 and taille > 34:
+                # ⛔ Aucune coupe en deux lignes ne tient (g, n) : la police baisse
+                # un peu plutôt que de déborder ou de passer à trois lignes.
+                return self.texte(t, taille - 2, couleur, nom, largeur_max)
             m = VGroup(Text(" ".join(mots[:i]), font_size=taille, color=couleur),
                        Text(" ".join(mots[i:]), font_size=taille, color=couleur)
                        ).arrange(DOWN, buff=0.2)
@@ -381,9 +388,28 @@ class _PasAPasLettre(Scene):
                 t[i].set_color(JAUNE_TITRE)
         d = dessin_du_mot(mot)
         d.height = hauteur_dessin
-        if d.width > 2.6 * hauteur_dessin:
-            d.width = 2.6 * hauteur_dessin
+        # ⛔ À la Q3 (dessins de 1,9 de haut), une clé de 2,6 × la hauteur faisait
+        # 5 unités de large à côté d'une petite lune (c, contrôle du 08/11).
+        if d.width > (1.8 if vertical else 2.6) * hauteur_dessin:
+            d.width = (1.8 if vertical else 2.6) * hauteur_dessin
         g = VGroup(d, t).arrange(DOWN, buff=0.35) if vertical else VGroup(t, d).arrange(RIGHT, buff=0.5)
+        if vertical:
+            # ⛔ La boîte de la goutte s'arrête 0,31 AU-DESSUS du bas de sa courbe :
+            # les « tt » de « goutte » touchaient le dessin (g, contrôle du 08/11).
+            # On mesure le vrai bas sur la courbe, et le mot descend d'autant.
+            bas = min(m.point_from_proportion(a)[1] for m in d.family_members_with_points()
+                      if len(m.points) for a in np.linspace(0, 1, 120))
+            if bas < d.get_bottom()[1] - 0.01:
+                t.shift(DOWN * (d.get_bottom()[1] - bas))
+                g.move_to(ORIGIN)
+        else:
+            # ⛔ Même défaut à gauche pour la lune : « lune » touchait son dessin
+            # (u, « u comme dans… », contrôle du 09/11). Le dessin part d'autant.
+            gauche = min(m.point_from_proportion(a)[0] for m in d.family_members_with_points()
+                         if len(m.points) for a in np.linspace(0, 1, 120))
+            if gauche < d.get_left()[0] - 0.05:
+                d.shift(RIGHT * (d.get_left()[0] - gauche))
+                g.move_to(ORIGIN)
         return g, t
 
     # ── la question à deux choix ─────────────────────────────────────────────
@@ -393,6 +419,16 @@ class _PasAPasLettre(Scene):
         sous = self.texte(titre_q, 40, WHITE, "question").next_to(titre, DOWN, buff=0.3)
         gauche.move_to(LEFT * x_choix + UP * y_choix)
         droite.move_to(RIGHT * x_choix + UP * y_choix)
+        # ⭐ « Bravo ! » viendra SOUS les choix : s'il finirait trop bas (sous la
+        # barre du lecteur), les choix montent d'autant, dès leur arrivée.
+        h_bravo = Text("Bravo !", font_size=72).height
+        bas_bravo = min(SurroundingRectangle(c, buff=0.3, stroke_width=8, corner_radius=0.2).get_bottom()[1]
+                        for c in (gauche, droite)) - 0.25 - h_bravo
+        if bas_bravo < -config.frame_height / 2 + 0.6:
+            for c in (gauche, droite):
+                c.shift(UP * (-config.frame_height / 2 + 0.6 - bas_bravo))
+        assert max(gauche.get_top()[1], droite.get_top()[1]) + 0.35 < sous.get_bottom()[1], \
+            f"les choix touchent la question ({clip_q})"
         for c in (gauche, droite):
             verifier(c, "choix")
         d = self.dire(clip_q)
@@ -419,8 +455,17 @@ class _PasAPasLettre(Scene):
             bravo.get_left()[0] < c.get_right()[0] and bravo.get_right()[0] > c.get_left()[0]
             and bravo.get_bottom()[1] < c.get_top()[1] and bravo.get_top()[1] > c.get_bottom()[1]
             for c in (gauche, droite, cadre)), f"« Bravo ! » chevauche un choix ({clip_rep})"
+        assert bravo.get_bottom()[1] > -config.frame_height / 2 + 0.55,             f"« Bravo ! » trop près du bas ({clip_rep}) : {bravo.get_bottom()[1]:.2f} cadre {cadre.get_bottom()[1]:.2f} g {gauche.get_bottom()[1]:.2f} d {droite.get_bottom()[1]:.2f} h {bravo.height:.2f}"
         d = self.dire(clip_rep)
-        anims = [Create(cadre), faux.animate.set_opacity(0.25)]
+        # ⛔ PAS `set_opacity` : il remplit les tracés creux (lettre, tomate, sac
+        # devenaient des formes pleines, contrôle du lot 1 du 08/11). On n'estompe
+        # que ce qui est déjà visible : le trait, et le remplissage s'il y en a un.
+        terne = faux.copy()
+        for s in terne.family_members_with_points():
+            s.set_stroke(opacity=0.25 * s.get_stroke_opacity())
+            if s.get_fill_opacity() > 0:
+                s.set_fill(opacity=0.25 * s.get_fill_opacity())
+        anims = [Create(cadre), Transform(faux, terne)]
         if a_la_reponse is not None:
             # ⛔ Construite ICI, après le placement des choix : préparée avant,
             # `.animate` gardait l'ancienne place et la lettre sautait au centre.
@@ -497,9 +542,25 @@ class _PasAPasLettre(Scene):
         echelle = min(5.8 / bloc.height, 11.0 / bloc.width, 3.0)
         bloc.scale(echelle)
         bloc.move_to(DOWN * 0.75)
-        if bloc.get_top()[1] > 2.1:
-            bloc.shift(DOWN * (bloc.get_top()[1] - 2.1))
-        assert bloc.get_bottom()[1] > -3.85, f"réglure hors cadre : {bloc.get_bottom()[1]:.2f}"
+        # ⛔ Contrôle du lot 1 (08/11) : le haut du f (et le crayon, 0,66 au-dessus
+        # de sa pointe) mordait sur une consigne de deux lignes. Plafond = le bas
+        # d'une consigne de deux lignes ; la lettre rapetisse s'il le faut.
+        bas_consigne = self.texte("Je fais une grande boucle vers la gauche, puis je redescends jusqu'en bas.",
+                                  40, nom="mesure", largeur_max=HAUT).to_edge(UP, buff=0.55).get_bottom()[1]
+        plafond = bas_consigne - 0.25
+        # 0,95 et non 0,7 : à 0,7 le crayon passait à 5 px de « gauche » (f).
+        marge_stylo = 0.95 + forme.get_stroke_width() / 100 / 2
+
+        def haut_utile():
+            return max(lignes_r.get_top()[1], forme.get_top()[1] + marge_stylo)
+        for _ in range(60):
+            if haut_utile() > plafond:
+                bloc.shift(DOWN * (haut_utile() - plafond))
+            if bloc.get_bottom()[1] >= -3.85:
+                break
+            bloc.scale(0.97, about_point=[bloc.get_center()[0], plafond, 0])
+        assert bloc.get_bottom()[1] > -3.86, f"réglure hors cadre : {bloc.get_bottom()[1]:.2f}"
+        assert haut_utile() <= plafond + 0.01, f"lettre sous la consigne : {haut_utile():.2f} > {plafond:.2f}"
         modele = forme.copy().set_stroke(color=GREY_D)
         les_traits = list(forme.submobjects)
         rappel = chemin(x, stroke_width=8, color=JAUNE_TITRE)
@@ -540,6 +601,8 @@ class _PasAPasLettre(Scene):
         points_verts = []
         for k, (phrase, trait, fin) in enumerate(MORCEAUX[x]):
             nouvelle = self.texte(phrase, 40, BLEU_CALCUL, "morceau", HAUT).to_edge(UP, buff=0.55)
+            assert nouvelle.get_left()[0] > rappel.get_right()[0] + 0.3, f"consigne sur la lettre du coin ({nouvelle.get_left()[0]:.2f} / {rappel.get_right()[0]:.2f}) : {phrase}"
+            assert nouvelle.get_bottom()[1] >= plafond + 0.12, f"consigne sur la lettre : {phrase}"
             d = self.dire(f"09-morceau-{k}")
             self.play(FadeOut(consigne), FadeIn(nouvelle), run_time=0.3)
             consigne = nouvelle
@@ -688,8 +751,9 @@ class _PasAPasLettre(Scene):
         # ⭐ À la réponse, la lettre s'allume DANS le bon mot : on voit pourquoi.
         allume = lambda: AnimationGroup(*[t_bon[i].animate.set_color(JAUNE_TITRE)  # noqa: E731
                                           for i in (pos_bon if isinstance(pos_bon, tuple) else (pos_bon,))])
-        # Les choix s'écartent : « Bravo ! » passe ENTRE eux sans toucher les mots.
-        self.question("20-q3", "21-q3-rep", g, dr, bon_d, titre_q, y_choix=-1.0,
+        # Les choix s'écartent, et montent (−0,6, plus −1,0) : « Bravo ! », dessous,
+        # finissait à 30 px du bas, sous la barre du lecteur YouTube (contrôle du 08/11).
+        self.question("20-q3", "21-q3-rep", g, dr, bon_d, titre_q, y_choix=-0.6,
                       a_la_reponse=allume, x_choix=4.0)
 
         # ── 8. LA FICHE ──────────────────────────────────────────────────────

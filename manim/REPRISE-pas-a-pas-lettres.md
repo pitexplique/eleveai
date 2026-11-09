@@ -51,16 +51,28 @@ Contrôle de chaque rendu :
    par où ça part, creux ou voûte à chaque étape, où ça lève, et à quelle hauteur ça croise. »
 
 ## État des rendus
-Mis à jour le 08/11 vers 15 h 30 :
-- Lot 1 rendu en hq : **i f a m g**. Durée et bords OK (vidéo ≈ audio + 1,5 s, rien sur les bords).
-  ⛔ Ce lot est À RE-RENDRE : à la question 2, « Bravo ! » touchait le cadre d'une lettre large (m).
-  C'est corrigé APRÈS le rendu : « Bravo ! » passe sous les choix, avec un assert qui arrête le rendu s'il touche un choix.
-- Les 20 lettres passent `--dry_run` (tous les asserts de mise en page) avec cette correction.
-- Rien n'est encore copié dans sorties, envoyé sur R2 ni mis au manifeste.
-- Les WAV `public/sons/cp-pas-a-pas-lettre-*` et les dossiers `manim/scripts/cp/media-pap-*` ne sont PAS dans git
-  (comme pour les chiffres) : ne pas les committer.
-- Outils prêts dans `C:\Users\FRED\AppData\Local\Claude-Data\claude_pzs8sxrjxfjjc\side-session-notes\local_6863753c-8533-4a44-9164-e0f03f9326cb\` :
-  `rendre.sh <lettres>` (rendus en parallèle) et `controle.py <lettres>` (durées, bords, `planche-<x>.png`).
-  ⚠️ Changer la variable `S` (dossier des journaux) en tête des deux fichiers pour pointer vers ton scratchpad.
-👉 Prochaine étape : rendre les 20 lettres par lots de 5
-(i f a m g, puis c d e h k, puis l n o p q, puis r s t u y), contrôler chaque planche, et enchaîner sur « Reste à faire ».
+Mis à jour le 08/11 vers 19 h (session de reprise, relève à 67 % de contexte) :
+- Le contrôle des planches a trouvé 6 défauts, tous corrigés dans le gabarit, chacun avec son assert :
+  1. la lettre ou le dessin écarté d'une question devenait une forme PLEINE (`set_opacity` remplit les tracés creux) → on n'estompe que le trait ;
+  2. le haut du f (et le crayon, 0,66 au-dessus de sa pointe) mordait sur une consigne de deux lignes → plafond sous la consigne (marge crayon 0,95), la lettre rapetisse ;
+  3. une consigne coupée après la virgule restait plus large que la limite et touchait la lettre du coin (g) → coupe qui tient, sinon la police baisse jusqu'à 34 ;
+  4. la clé de la Q3 (c) faisait 5 unités de large → dessins de la Q3 ≤ 1,8 × leur hauteur ;
+  5. « Bravo ! » de la Q3 finissait à 30 px du bas (sous la barre du lecteur) → choix de la Q3 à y = −0,6, et les choix montent si « Bravo ! » finirait à moins de 0,6 du bas ;
+  6. la boîte du dessin de la goutte s'arrête 0,31 au-dessus de sa courbe : les « tt » de « goutte » touchaient le dessin (Q3 du g) → le mot se place sous le VRAI bas de la courbe.
+  7. même défaut de boîte à GAUCHE pour la lune : « lune » touchait son dessin (u, « u comme dans… ») → le dessin part du vrai bord gauche.
+- ✅ Re-rendues en hq, contrôlées (durée, bords, marge de « Bravo ! » ≥ 80 px, planches regardées) et COPIÉES dans
+  `manim/sorties/.../lettre-<x>/` : **i f a m c d e h k l n o p q r s t y** (18), journaux dans `journaux/`.
+- ⛔ **g** (défaut 6) et **u** (défaut 7) sont À RE-RENDRE : `bash rendre.sh g u` (~25 min), puis contrôle
+  (`controle.py g u`, regarder les planches, `bravo.py gu`), copie du MP4 et du journal.
+- Journaux des rendus validés (ils portent les TEMPS du manifeste) : dans le dossier de notes
+  `C:/Users/FRED/AppData/Local/Claude-Data/claude_pzs8sxrjxfjjc/side-session-notes/local_a701a38e-b492-4973-a529-0e88c031ea9d/journaux/`.
+  Le rendu de g écrira le sien dans le `S` de `rendre.sh` : le copier au même endroit.
+- Outils (même dossier de notes) : `rendre.sh`, `controle.py`, `bravo.py` (marge de « Bravo ! » en px). Changer `S` en tête de chacun.
+- Rien n'est encore fait pour : miniatures, R2, manifeste, `generer-videos-r2.mjs`.
+- Les WAV `public/sons/cp-pas-a-pas-lettre-*` et les dossiers `manim/scripts/cp/media-pap-*` ne sont PAS dans git : ne pas les committer.
+- Liste des voix à relire pour Frédéric (morceaux + Q3) : `voix-lettres-a-relire.md` dans le même dossier de notes.
+
+👉 Suite : re-rendre g et u → miniatures → R2 lettre par lettre → manifeste (journaux ci-dessus) →
+`node scripts/generer-videos-r2.mjs` → commit PAR CHEMIN (nos lignes seulement) → donner à Frédéric la liste des voix et
+lui demander la description en courbures de b j v w x z.
+
