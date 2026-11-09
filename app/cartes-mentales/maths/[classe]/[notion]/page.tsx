@@ -178,14 +178,16 @@ function BulleVierge({ numero, titre, ecartMm, id }: { numero: number; titre: st
   );
 }
 
-// Peu de bulles (4 au plus) : elles sont grandes, on écrit plus gros.
-function BulleRemplieContenu({ numero, titre, b, grand }: { numero: number; titre: string; b: BulleRemplie; grand: boolean }) {
+// Peu de bulles (4 au plus) : elles sont grandes, on écrit plus gros. À 6 (la
+// rangée du milieu ne porte que la notion), les bulles sont hautes : 14 px.
+function BulleRemplieContenu({ numero, titre, b, nb }: { numero: number; titre: string; b: BulleRemplie; nb: number }) {
+  const taille = nb <= 4 ? "text-[15px]" : nb === 6 ? "text-[14px]" : "text-[13px]";
   return (
     <>
-      <p className={`${grand ? "text-[15px]" : "text-[13px]"} font-black leading-tight text-slate-900`}>
+      <p className={`${taille} font-black leading-tight text-slate-900`}>
         {numero}. <TexteMaths texte={titre} />
       </p>
-      <div className={`mt-2 flex flex-1 flex-col justify-evenly gap-2 leading-snug ${grand ? "text-[15px]" : "text-[13px]"}`}>
+      <div className={`mt-2 flex flex-1 flex-col justify-evenly gap-2 leading-snug ${taille}`}>
         <p className="rounded-lg bg-teal-50 px-2 py-1.5 font-bold text-teal-950 [print-color-adjust:exact]">
           <TexteMaths texte={b.regle} />
         </p>
@@ -250,7 +252,7 @@ function CarteMentale({
                   style={{ flex: "1 1 0" } as CSSProperties}
                 >
                   {remplies ? (
-                    <BulleRemplieContenu numero={debut + c + 1} titre={micros[c]} b={remplies[debut + c]} grand={micros.length <= 4} />
+                    <BulleRemplieContenu numero={debut + c + 1} titre={micros[c]} b={remplies[debut + c]} nb={micros.length} />
                   ) : (
                     <BulleVierge numero={debut + c + 1} titre={micros[c]} ecartMm={ecartMm} id={`${idFace}-b${c}`} />
                   )}
@@ -275,8 +277,18 @@ function decouper(micros: string[], remplie: boolean): { faces: Face[]; verso: b
   // question au prof » : la carte remplie la garde aussi au verso.
   if (micros.length <= 8) return { faces: [{ debut: 0, micros, retiens: false }], verso: true };
   const faces: Face[] = [];
+  // ⭐ 09/11 soir — la carte remplie : faces ÉQUILIBRÉES (9 → 5 + 4), plus de
+  // dernière face à une bulle géante presque vide.
+  if (remplie) {
+    const nb = Math.ceil(micros.length / 8);
+    for (let f = 0, i = 0; f < nb; f++) {
+      const t = Math.ceil((micros.length - i) / (nb - f));
+      faces.push({ debut: i, micros: micros.slice(i, i + t), retiens: false });
+      i += t;
+    }
+    return { faces, verso: true };
+  }
   for (let i = 0; i < micros.length; i += 8) faces.push({ debut: i, micros: micros.slice(i, i + 8), retiens: false });
-  if (remplie) return { faces, verso: true };
   const derniere = faces[faces.length - 1];
   if (derniere.micros.length <= 5) {
     derniere.retiens = true;
