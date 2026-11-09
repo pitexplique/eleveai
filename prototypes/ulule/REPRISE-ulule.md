@@ -141,3 +141,4 @@ Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent 
   - 09/11, sa demande : l'impact dit aussi que Ti Margo **aide d'abord les élèves en difficulté** et que **« mes classes adorent ! »** (478 car.).
   - 09/11, sa précision : **chaque dessin animé est relu par lui ET par un étudiant** (pas seulement par l'étudiant). Corrigé dans l'impact (479 car.), le label et `description-ulule.html`. Le texte déjà collé sur Ulule est à corriger par lui.
   - ODD 4, « Expliquez comment vous agissez » : accès (test gratuit sans compte, 4,95 €/mois, vidéos libres sur YouTube), pour tous (coach qui se lit et s'écoute, petites étapes), qualité (programmes officiels, relu par lui et un étudiant).
+  - Fuseau horaire Ulule : **La Réunion (UTC+4)**, à défaut Maurice ou Dubaï (même heure).
