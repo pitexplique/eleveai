@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { BookOpen, Network, PencilLine, Play } from "lucide-react";
 import { libelleClasse } from "@/lib/fiches/registre";
 import NOTIONS from "@/lib/videos/bilans-notions.json";
+import { carteRemplie } from "@/lib/cartes/cartes-remplies";
+import TexteMaths from "@/components/cartes/TexteMaths";
 
 // ─── Le hub des CARTES MENTALES (27/10/2026) ──────────────────────────────────
 // Frédéric : « créer un hub carte mentale comme le hub vidéos ou fiches
@@ -86,10 +88,11 @@ export default function CartesMentalesPage() {
                     <Network className="h-5 w-5" />
                   </span>
                   <span className="min-w-0">
-                    <span className="block font-black leading-tight text-slate-900 group-hover:text-teal-800">{n.notion}</span>
+                    <span className="block font-black leading-tight text-slate-900 group-hover:text-teal-800"><TexteMaths texte={n.notion} /></span>
                     <span className="text-sm text-slate-500">
                       {n.micros.length} compétence{n.micros.length > 1 ? "s" : ""}
-                      {n.micros.length > (["seconde", "premiere", "premiere-spe", "terminale-spe", "stmg"].includes(n.classe) ? 4 : 7) ? " · carte sur 2 pages" : ""}
+                      {n.micros.length > 8 ? " · carte sur 2 faces" : ""}
+                      {carteRemplie(n.cle, n.micros.length) ? <span className="ml-1.5 rounded-full bg-amber-100 px-1.5 py-0.5 text-[11px] font-black text-amber-800">remplie</span> : null}
                     </span>
                   </span>
                 </Link>

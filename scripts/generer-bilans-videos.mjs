@@ -42,7 +42,8 @@ console.log(`${Object.keys(bilans).length} feuilles bilan → ${path.relative(RA
 // qu'il y ait des vidéos ou non.
 const KNOW = path.join(RACINE, "lib", "tutor-v4", "knowledge", "maths");
 // Le texte affiché sur papier, sans LaTeX : « $\\mathbb{R}$ » → « R ».
-const SYMBOLES = { cap: "∩", cup: "∪", times: "×", mapsto: "↦", to: "→", leqslant: "⩽", geqslant: "⩾", leq: "≤", geq: "≥", le: "≤", ge: "≥", ne: "≠", neq: "≠", infty: "∞", in: "∈", pi: "π", cdot: "·", ldots: "…", dots: "…", approx: "≈", pm: "±", Delta: "Δ", alpha: "α", theta: "θ", lambda: "λ", sigma: "σ", mu: "μ" };
+// (09/11 : cos, sin, tan… gardés en clair ; ils disparaissaient : « ^2 x + ^2 x = 1 ».)
+const SYMBOLES = { cos: "cos", sin: "sin", tan: "tan", ln: "ln", exp: "exp", log: "log", cap: "∩", cup: "∪", times: "×", mapsto: "↦", to: "→", leqslant: "⩽", geqslant: "⩾", leq: "≤", geq: "≥", le: "≤", ge: "≥", ne: "≠", neq: "≠", infty: "∞", in: "∈", pi: "π", cdot: "·", ldots: "…", dots: "…", approx: "≈", pm: "±", Delta: "Δ", alpha: "α", theta: "θ", lambda: "λ", sigma: "σ", mu: "μ" };
 const clair = (t) =>
   t
     .replace(/\\(["\\])/g, "$1")
