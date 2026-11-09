@@ -268,13 +268,15 @@ function CarteMentale({
 // Jusqu'à 8 micros : une face de carte, et tout le verso pour « ce que je
 // retiens ». Au-delà : des faces de 8 bulles ; la dernière, si elle en a 5 au
 // plus, garde le bas de la page pour « ce que je retiens » (en haut 1 2 3, au
-// milieu 4 5) ; sinon le verso suit. La carte remplie n'a pas d'encadrés.
+// milieu 4 5) ; sinon le verso suit. La carte remplie a toujours son verso.
 type Face = { debut: number; micros: string[]; retiens: boolean };
 function decouper(micros: string[], remplie: boolean): { faces: Face[]; verso: boolean } {
-  if (micros.length <= 8) return { faces: [{ debut: 0, micros, retiens: false }], verso: !remplie };
+  // ⭐ 09/11 soir — Frédéric aime la page entière « ce que je retiens » + « la
+  // question au prof » : la carte remplie la garde aussi au verso.
+  if (micros.length <= 8) return { faces: [{ debut: 0, micros, retiens: false }], verso: true };
   const faces: Face[] = [];
   for (let i = 0; i < micros.length; i += 8) faces.push({ debut: i, micros: micros.slice(i, i + 8), retiens: false });
-  if (remplie) return { faces, verso: false };
+  if (remplie) return { faces, verso: true };
   const derniere = faces[faces.length - 1];
   if (derniere.micros.length <= 5) {
     derniere.retiens = true;
