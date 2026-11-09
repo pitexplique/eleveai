@@ -133,3 +133,8 @@ Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent 
   - Codes : la durée **3 mois** manquait (SQL, `codes-ulule.mjs`, carte cadeau), ajoutée ; « 1 mois offerts » corrigé en « offert ».
   - Licence classe proposée à **60 € pour 30 élèves** (= 2 €/élève/an) : **validé par lui le 08/11**.
   - Liste d'avant-lancement : **`avant-lancement.md`** (SIRET, 100 promesses, calendrier : lancement mar. 24/11, fin dim. 20/12, codes envoyés avant Noël).
+
+- 09/11 (session fille « champs restants ») : textes donnés pour la page « Impact et défis ».
+  - Impact (476 car., le compteur Ulule affiche déjà 9/500 à vide) : décrochage au collège, surtout en 4e ; 1 500 vidéos, 500 visites/jour ; 3 000 € pour le collège avant le brevet 2027, relu par un étudiant en maths futur professeur, rémunéré ; puis primaire 5 000 €, lycée 8 000 €.
+  - Label et certifications : « pas encore de label », programmes officiels (dont 2026), relecture par étudiants futurs professeurs.
+  - ODD : cocher le **4 « Éducation de qualité »** seulement.
