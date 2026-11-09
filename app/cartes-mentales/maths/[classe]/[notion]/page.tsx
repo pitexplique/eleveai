@@ -198,9 +198,10 @@ function BulleRemplieContenu({ numero, titre, b, nb }: { numero: number; titre: 
           <TexteMaths texte={b.regle} />
         </p>
         {b.figure && (
-          // Le dessin du coach, réduit : le cadre et l’ombre des fiches sautent,
-          // la hauteur est bornée (le svg garde ses proportions).
-          <div className={`flex ${nb <= 4 ? "h-[40mm]" : "h-[28mm]"} min-h-0 shrink-0 justify-center [&>div]:h-full [&>div]:w-auto [&>div]:max-w-full [&>div]:border-0 [&>div]:p-0 [&>div]:shadow-none [&_svg]:h-full [&_svg]:w-auto [&_svg]:max-w-full`}>
+          // Le dessin du coach, réduit : le cadre et l’ombre des fiches sautent.
+          // ⛔ 09/11 : sa hauteur est SOUPLE (la place qui reste, 18 à 40 mm) — fixe
+          // à 40 mm, il poussait le piège hors d’une bulle au texte long.
+          <div className={`flex min-h-[18mm] flex-1 basis-0 ${nb <= 4 ? "max-h-[40mm]" : "max-h-[28mm]"} justify-center [&>div]:h-full [&>div]:w-auto [&>div]:max-w-full [&>div]:border-0 [&>div]:p-0 [&>div]:shadow-none [&_svg]:h-full [&_svg]:w-auto [&_svg]:max-w-full`}>
             <CanvasRenderer figure={b.figure} />
           </div>
         )}
