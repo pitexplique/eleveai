@@ -37,6 +37,21 @@ export async function GET(req: Request) {
     return NextResponse.json({ ok: false, error: "Impossible de charger tes notions." }, { status: 500 });
   }
 
+  // Titre lisible de chaque notion travaillée (classe|notion → titre), même
+  // sans scores par micro : le tableau du Coach et la tuile « Dernier Coach »
+  // affichaient sinon l'identifiant brut (« entier_nombre »).
+  const titres: Record<string, string> = {};
+  for (const s of data ?? []) {
+    if (!s.notion_id || (s.matiere ?? "maths") !== "maths") continue;
+    const cle = `${s.classe}|${s.notion_id}`;
+    if (titres[cle]) continue;
+    try {
+      titres[cle] = notionLabel(s.notion_id, s.classe as never, "maths");
+    } catch {
+      titres[cle] = s.notion_id;
+    }
+  }
+
   const notions = new Map<
     string,
     { classe: string; notion: string; derniere: string; scores: Record<string, { j: number; t: number }> }
@@ -85,5 +100,5 @@ export async function GET(req: Request) {
     })
     .filter((n) => n.micros.length > 0);
 
-  return NextResponse.json({ ok: true, notions: resultat });
+  return NextResponse.json({ ok: true, notions: resultat, titres });
 }

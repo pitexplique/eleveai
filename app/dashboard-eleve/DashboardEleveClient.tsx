@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { useEleve } from "@/context/EleveContext";
-import CarteMesNotions from "./CarteMesNotions";
+import CarteMesNotions, { type Notion as NotionCompris } from "./CarteMesNotions";
 import CartePassions from "./CartePassions";
 import CarteAvatar from "./CarteAvatar";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
@@ -193,6 +193,8 @@ export default function DashboardEleveClient() {
   const [messagesProf, setMessagesProf] = useState<MessageProf[]>([]);
   const [avisRepondus, setAvisRepondus] = useState<AvisRepondu[]>([]);
   const [bulletin, setBulletin] = useState<Bulletin | null>(null);
+  const [mesNotions, setMesNotions] = useState<NotionCompris[] | null>(null);
+  const [titresNotions, setTitresNotions] = useState<Record<string, string>>({});
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -292,6 +294,24 @@ export default function DashboardEleveClient() {
       })
       .catch(() => {});
   }, [eleve?.token]);
+
+  // Notions et micros compris (version élève du bilan prof) + titres lisibles
+  // des notions pour le tableau du Coach.
+  useEffect(() => {
+    if (!eleve?.token) return;
+    fetch("/api/mes-notions", {
+      headers: { Authorization: `Bearer ${eleve.token}` },
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        setMesNotions(d?.ok ? (d.notions as NotionCompris[]) : []);
+        if (d?.ok && d.titres) setTitresNotions(d.titres as Record<string, string>);
+      })
+      .catch(() => setMesNotions([]));
+  }, [eleve?.token]);
+
+  const titreNotion = (classe: string, notionId: string) =>
+    titresNotions[`${classe}|${notionId}`] ?? notionId;
 
   // Bulletin de l'élève (notes /20, progression, assiduité, appréciation).
   useEffect(() => {
@@ -415,10 +435,9 @@ export default function DashboardEleveClient() {
               fin de composant. */}
         </div>
 
-        <CarteAvatar />
-        <CartePassions />
-        <CarteCodeParent />
-
+        {/* ⭐ EN HAUT (09/11/2026, Frédéric : « il faut mettre la moyenne
+            générale et en dessous les notions » ; « les parents doivent voir
+            du premier coup ce qui va et ce qui va pas »). */}
         {bulletin && (
           <div className="mt-6">
             <h2 className="mb-3 text-xl font-black text-slate-900">
@@ -427,6 +446,13 @@ export default function DashboardEleveClient() {
             <BulletinDashboard bulletin={bulletin} />
           </div>
         )}
+
+        <CarteMesNotions notions={mesNotions} />
+
+        <CarteAvatar />
+        <CartePassions />
+        <CarteCodeParent />
+
 
         {messagesProf.length > 0 && (
           <div className="mt-6 rounded-[2rem] border border-amber-200 bg-white p-6 shadow-xl">
@@ -560,7 +586,6 @@ export default function DashboardEleveClient() {
               </div>
             )}
 
-            {eleve?.token ? <CarteMesNotions token={eleve.token} /> : null}
 
             {/* ⛔ LA TUILE « MES POINTS AVIS » N'EST PLUS ICI (29/08/2026).
                 Frédéric : « enlève avis et mets-le que en bas ». Elle ouvrait
@@ -675,7 +700,7 @@ export default function DashboardEleveClient() {
                 </p>
                 {dernierTutor ? (
                   <p className="mt-2 text-sm font-bold text-slate-500">
-                    {dernierTutor.notion_id} · {dernierTutor.classe}
+                    {titreNotion(dernierTutor.classe, dernierTutor.notion_id)} · {dernierTutor.classe}
                   </p>
                 ) : null}
               </div>
@@ -696,7 +721,7 @@ export default function DashboardEleveClient() {
 
 
 
-            <div className="mt-6 grid gap-6 xl:grid-cols-2">
+            <div className="mt-6 grid gap-6">
               <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
@@ -839,7 +864,7 @@ export default function DashboardEleveClient() {
                 )}
               </div>
 
-              <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100 xl:col-span-2">
+              <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <h2 className="text-2xl font-black">Défis du jour</h2>
@@ -918,7 +943,7 @@ export default function DashboardEleveClient() {
               </div>
             </div>
 
-              <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100 xl:col-span-2">
+              <div className="mt-6 rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <h2 className="text-2xl font-black">Coach de maths — séries d&apos;exercices</h2>
@@ -958,7 +983,7 @@ export default function DashboardEleveClient() {
                               {formatDate(r.created_at)}
                             </td>
                             <td className="px-4 py-3 font-bold">{r.classe}</td>
-                            <td className="px-4 py-3 font-bold">{r.notion_id}</td>
+                            <td className="px-4 py-3 font-bold">{titreNotion(r.classe, r.notion_id)}</td>
                             <td className="px-4 py-3 font-bold capitalize">{r.mode ?? "—"}</td>
                             <td className="px-4 py-3 font-black">
                               {r.score_sur_20 ?? "—"}/20
