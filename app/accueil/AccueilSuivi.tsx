@@ -221,7 +221,9 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
         {/* 08/11 : Ti Margo a pris sa place à gauche du titre ; le soleil ne
             reste que sur les très grands écrans, où ils ne se touchent pas. */}
         <SoleilAccueil className="absolute left-16 top-6 hidden h-24 w-24 2xl:block" />
-        <MontgolfiereAccueil className="absolute right-4 top-4 hidden h-40 w-44 lg:block xl:right-14" />
+        {/* 09/11 : le titre, plus long, passait sous la montgolfière (1024 px) :
+            elle ne reste, comme le soleil, que sur les très grands écrans. */}
+        <MontgolfiereAccueil className="absolute right-14 top-4 hidden h-40 w-44 2xl:block" />
         <CollinesAccueil className="absolute inset-x-0 bottom-0 h-[170px] w-full sm:h-[230px]" />
         <div className="relative mx-auto max-w-6xl px-4 pb-[150px] pt-6 text-center sm:pb-[210px] sm:pt-6">
           {/* ⭐ 08/11/2026 — LE TITRE FAIT ÉCHO À LA COLLECTE ULULE (« le site qui
@@ -231,7 +233,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               Avant : « EleveAI c'est l'apprentissage personnalisé » — Ti Margo
               et les dessins animés n'apparaissaient nulle part.
               Ti Margo montre le titre du doigt. */}
-          <div className="flex items-center justify-center gap-3 sm:gap-5">
+          <div className="mx-auto flex max-w-5xl items-center justify-center gap-3 sm:gap-5">
             <Image
               src="/cahier-vacances/ti-margo-cahier-sac-a-dos.png"
               alt="Ti Margo, le caméléon des dessins animés d'EleveAI"
