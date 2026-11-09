@@ -37,6 +37,7 @@ import NOTIONS from "@/lib/videos/bilans-notions.json";
 import BoutonImprimer from "@/components/BoutonImprimer";
 import ModeTableau from "@/components/cartes/ModeTableau";
 import TexteMaths from "@/components/cartes/TexteMaths";
+import { CanvasRenderer } from "@/lib/canvas";
 import { enClair } from "@/lib/cartes/texte-maths";
 import { carteRemplie, type BulleRemplie } from "@/lib/cartes/cartes-remplies";
 
@@ -196,6 +197,13 @@ function BulleRemplieContenu({ numero, titre, b, nb }: { numero: number; titre: 
         <p className="rounded-lg bg-teal-50 px-2 py-1.5 font-bold text-teal-950 [print-color-adjust:exact]">
           <TexteMaths texte={b.regle} />
         </p>
+        {b.figure && (
+          // Le dessin du coach, réduit : le cadre et l’ombre des fiches sautent,
+          // la hauteur est bornée (le svg garde ses proportions).
+          <div className={`flex ${nb <= 4 ? "h-[40mm]" : "h-[28mm]"} min-h-0 shrink-0 justify-center [&>div]:h-full [&>div]:w-auto [&>div]:max-w-full [&>div]:border-0 [&>div]:p-0 [&>div]:shadow-none [&_svg]:h-full [&_svg]:w-auto [&_svg]:max-w-full`}>
+            <CanvasRenderer figure={b.figure} />
+          </div>
+        )}
         <p className="text-slate-800">
           <span className="mr-1 text-[10px] font-black uppercase tracking-wide text-sky-700">Exemple</span>
           <TexteMaths texte={b.exemple} />
@@ -277,15 +285,21 @@ function CarteMentale({
 // plus, garde le bas de la page pour « ce que je retiens » (en haut 1 2 3, au
 // milieu 4 5) ; sinon le verso suit. La carte remplie a toujours son verso.
 type Face = { debut: number; micros: string[]; retiens: boolean };
-function decouper(micros: string[], remplie: boolean): { faces: Face[]; verso: boolean } {
+// ⭐ 09/11 soir — Frédéric : « si il y a 7 8 micros alors tu utilises 2 feuilles
+// si graphique », puis « de 5 à 8 deux feuilles, surtout si dessin ; si pas
+// dessin, à toi de décider » : une carte remplie qui porte un dessin met 4
+// bulles au plus par face (5 → 3 + 2, 8 → 4 + 4), le dessin a la place de se
+// lire. Sans dessin, 8 par face : le texte seul y tient (audit du 09/11).
+function decouper(micros: string[], remplie: boolean, dessins = false): { faces: Face[]; verso: boolean } {
+  const parFace = remplie && dessins ? 4 : 8;
   // ⭐ 09/11 soir — Frédéric aime la page entière « ce que je retiens » + « la
   // question au prof » : la carte remplie la garde aussi au verso.
-  if (micros.length <= 8) return { faces: [{ debut: 0, micros, retiens: false }], verso: true };
+  if (micros.length <= parFace) return { faces: [{ debut: 0, micros, retiens: false }], verso: true };
   const faces: Face[] = [];
   // ⭐ 09/11 soir — la carte remplie : faces ÉQUILIBRÉES (9 → 5 + 4), plus de
   // dernière face à une bulle géante presque vide.
   if (remplie) {
-    const nb = Math.ceil(micros.length / 8);
+    const nb = Math.ceil(micros.length / parFace);
     for (let f = 0, i = 0; f < nb; f++) {
       const t = Math.ceil((micros.length - i) / (nb - f));
       faces.push({ debut: i, micros: micros.slice(i, i + t), retiens: false });
@@ -300,6 +314,29 @@ function decouper(micros: string[], remplie: boolean): { faces: Face[]; verso: b
     return { faces, verso: false };
   }
   return { faces, verso: true };
+}
+
+// ⭐ 09/11 soir — Frédéric : « il faut inclure pub pour eleveai, le coach et les
+// vidéos dessin animé », « fais proposition ». Un bandeau en bas du verso (là
+// où il y a de la place), imprimé avec la feuille : le Coach et les vidéos de
+// chaque micro. Dessin animé jusqu'à la 5e (à partir de la 4e, les shorts sont
+// en Manim) ; « /coach » est l'adresse dite dans les vidéos.
+const DESSIN_ANIME = new Set(["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e"]);
+function PubEleveAI({ classe }: { classe: string }) {
+  const videos = DESSIN_ANIME.has(classe) ? "une vidéo et un dessin animé" : "une vidéo courte";
+  return (
+    <aside className="mt-3 flex shrink-0 items-center gap-3 rounded-xl border-2 border-teal-600 bg-teal-50 px-3 py-2 [print-color-adjust:exact]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/cahier-vacances/ti-margo.png" alt="" className="h-14 w-auto shrink-0" />
+      <div className="min-w-0 text-[13px] leading-snug text-teal-950">
+        <p className="text-[15px] font-black">Révise chaque bulle sur eleveai.fr/coach</p>
+        <p>
+          <strong>Le Coach</strong> te donne des exercices à ta mesure et te suit, micro par micro. Pour chaque bulle de
+          cette carte : {videos}.
+        </p>
+      </div>
+    </aside>
+  );
 }
 
 // Une face = une feuille A4 (210 × 297 mm, marges de 10 mm). À l'écran, une
@@ -335,7 +372,7 @@ export default async function PageCarteMentale({ params, searchParams }: Props) 
   const ecartMm = ECART_MM(n.classe);
   const pilote = carteRemplie(n.cle, n.micros.length);
   const remplies = pilote && version !== "a-completer" ? pilote : null;
-  const { faces, verso } = decouper(n.micros, Boolean(remplies));
+  const { faces, verso } = decouper(n.micros, Boolean(remplies), Boolean(remplies?.some((b) => b.figure)));
   const nbFeuilles = faces.length + (verso ? 1 : 0);
 
   return (
@@ -434,6 +471,7 @@ export default async function PageCarteMentale({ params, searchParams }: Props) 
           <section className={`${FEUILLE} ${SUIVANTE}`} data-face>
             <Encadre id="verso-retiens" titre={`Ce que je retiens de toute la notion « ${n.notion} »`} ecartMm={ecartMm} className="flex-[4]" />
             <Encadre id="verso-question" titre="Ma question pour le prof" ecartMm={ecartMm} className="mt-4 flex-1" />
+            <PubEleveAI classe={n.classe} />
           </section>
         ) : null}
       </main>

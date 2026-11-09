@@ -24,8 +24,18 @@
 import SIXIEME from "./remplies/6e.json";
 import QUATRIEME from "./remplies/4e.json";
 import CM2 from "./remplies/cm2.json";
+import type { CanvasFigure } from "@/lib/tutor-v4/types";
+// Les dessins des cartes de 6e et de 4e, à part des textes : { "<classe>/<notion>":
+// { "<n° de bulle à partir de 0>": figure } }. Un dessin écrit à la main ici l'emporte.
+import FIGURES_6E from "./remplies/figures-6e.json";
+import FIGURES_4E from "./remplies/figures-4e.json";
 
-export type BulleRemplie = { regle: string; exemple: string; piege: string };
+// ⭐ 09/11 soir — Frédéric : « mettre dans les cartes mentales les graphiques
+// si possible et là où c’est nécessaire ». `figure` = un petit dessin du moteur
+// du coach (lib/canvas, même forme que les fiches), posé entre la règle et
+// l’exemple : seulement quand le dessin MONTRE ce que le texte dit (droite
+// graduée, angle, figure codée, diagramme), jamais pour décorer.
+export type BulleRemplie = { regle: string; exemple: string; piege: string; figure?: CanvasFigure };
 
 const ECRITES_A_LA_MAIN: Record<string, BulleRemplie[]> = {
   // ── 6e ──────────────────────────────────────────────────────────────────
@@ -187,41 +197,121 @@ const ECRITES_A_LA_MAIN: Record<string, BulleRemplie[]> = {
       regle: "a^2 = a × a ; la racine carrée fait l’inverse : √49 = 7 car 7^2 = 49.",
       exemple: "6^2 = 36 ; √81 = 9 ; √50 ≈ 7,07.",
       piege: "6^2 = 36, pas 12.",
+      figure: {
+        // 6^2 est une AIRE : un carré de 6 sur 6, 36 carreaux qu'on peut compter.
+        kind: "figure_libre",
+        size: { width: 196, height: 196, cellSize: 30 },
+        grid: {
+          rows: 6,
+          cols: 6,
+          filledCells: Array.from({ length: 36 }, (_, i) => [Math.floor(i / 6), i % 6] as [number, number]),
+        },
+        display: { showGrid: true, showFilled: true },
+        colors: { filled: "#bfdbfe", border: "#2563eb" },
+      },
     },
     {
       regle: "L’hypoténuse est le côté en face de l’angle droit : le plus long.",
       exemple: "ABC rectangle en A : l’hypoténuse est [BC].",
       piege: "L’hypoténuse ne touche PAS l’angle droit.",
+      // Posé autrement que d'habitude : l'hypoténuse suit l'ANGLE DROIT, pas la feuille.
+      figure: {
+        kind: "triangle",
+        size: { width: 240, height: 196 },
+        points: { A: { x: 200, y: 45 }, B: { x: 35, y: 45 }, C: { x: 200, y: 155 } },
+        labels: { A: "A", B: "B", C: "C" },
+        sideLabels: { BC: "hypoténuse" },
+        display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+        marks: { rightAngleAt: "A" },
+      },
     },
     {
       regle: "Hypoténuse^2 = somme des carrés des deux autres côtés.",
       exemple: "Côtés 6 et 8 : BC^2 = 36 + 64 = 100, donc BC = √100 = 10.",
       piege: "Ne pas oublier la racine carrée à la fin.",
+      figure: {
+        kind: "triangle",
+        size: { width: 240, height: 196 },
+        points: { A: { x: 35, y: 160 }, B: { x: 205, y: 160 }, C: { x: 35, y: 33 } },
+        labels: { A: "A", B: "B", C: "C" },
+        sideLabels: { AB: "8", CA: "6", BC: "?" },
+        display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+        marks: { rightAngleAt: "A" },
+      },
     },
     {
       regle: "Côté de l’angle droit^2 = hypoténuse^2 − autre côté^2.",
       exemple: "Hypoténuse 13, côté 5 : AB^2 = 169 − 25 = 144, donc AB = 12.",
       piege: "On SOUSTRAIT : le résultat est plus petit que l’hypoténuse.",
+      figure: {
+        kind: "triangle",
+        size: { width: 240, height: 196 },
+        points: { A: { x: 35, y: 150 }, B: { x: 205, y: 150 }, C: { x: 35, y: 79 } },
+        labels: { A: "A", B: "B", C: "C" },
+        sideLabels: { AB: "?", CA: "5", BC: "13" },
+        display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+        marks: { rightAngleAt: "A" },
+      },
     },
     {
       regle: "On calcule séparément le carré du plus grand côté et la somme des deux autres carrés.",
       exemple: "3, 4, 5 : 5^2 = 25 et 3^2 + 4^2 = 9 + 16 = 25.",
       piege: "N’écrire l’égalité qu’après avoir fait les deux calculs.",
+      figure: {
+        // L'égalité est un PARTAGE : 9 et 16 remplissent exactement 25.
+        kind: "schema_barre",
+        size: { width: 240, height: 200 },
+        total: "25",
+        parts: [
+          { label: "3²", value: "9", color: "#2563eb" },
+          { label: "4²", value: "16", color: "#dc2626" },
+        ],
+        questionLabel: "9 + 16 = 25 = 5²",
+        display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+      },
     },
     {
       regle: "Si le carré du plus grand côté égale la somme des deux autres, le triangle est rectangle.",
       exemple: "Échelle de 2,5 m, pied à 1,5 m, haut à 2 m : 6,25 = 2,25 + 4, le mur est droit.",
       piege: "Si les deux résultats diffèrent, le triangle N’EST PAS rectangle.",
+      // L'échelle de l'exemple : le mur, le sol, l'échelle.
+      figure: {
+        kind: "triangle",
+        size: { width: 240, height: 235 },
+        points: { A: { x: 45, y: 205 }, B: { x: 165, y: 205 }, C: { x: 45, y: 45 } },
+        labels: { A: "", B: "", C: "" },
+        sideLabels: { AB: "1,5 m", CA: "2 m", BC: "2,5 m" },
+        display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+        marks: { rightAngleAt: "A" },
+      },
     },
     {
       regle: "Rédiger : le triangle rectangle, le théorème, le calcul, la conclusion avec l’unité.",
       exemple: "« ABC est rectangle en A, donc d’après le théorème de Pythagore : BC^2 = AB^2 + AC^2. »",
       piege: "Théorème : on SAIT que l’angle est droit. Réciproque : on le PROUVE.",
+      // Le triangle de la phrase rédigée : le codage dit qu'on SAIT que l'angle en A est droit.
+      figure: {
+        kind: "triangle",
+        size: { width: 240, height: 196 },
+        points: { A: { x: 45, y: 160 }, B: { x: 195, y: 160 }, C: { x: 45, y: 40 } },
+        labels: { A: "A", B: "B", C: "C" },
+        display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+        marks: { rightAngleAt: "A" },
+      },
     },
     {
       regle: "Défi : trouver le triangle rectangle caché dans la figure.",
       exemple: "Écran de 16 × 12 cm : diagonale = √(256 + 144) = √400 = 20 cm.",
       piege: "Arrondir seulement à la fin.",
+      // Le triangle caché : la diagonale de l'écran (16 × 12) coupe le rectangle en deux.
+      figure: {
+        kind: "quadrilatere",
+        size: { width: 240, height: 190 },
+        points: { A: { x: 30, y: 30 }, B: { x: 190, y: 30 }, C: { x: 190, y: 150 }, D: { x: 30, y: 150 } },
+        labels: { A: "A", B: "B", C: "C", D: "D" },
+        sideLabels: { AB: "16 cm", AD: "12 cm" },
+        display: { showPoints: true, showLabels: true, showSides: true, showDiagonals: true },
+      },
     },
   ],
 
@@ -415,12 +505,22 @@ const ECRITES_A_LA_MAIN: Record<string, BulleRemplie[]> = {
   ],
 };
 
-export const CARTES_REMPLIES: Record<string, BulleRemplie[]> = {
+const BASE: Record<string, BulleRemplie[]> = {
   ...(SIXIEME as Record<string, BulleRemplie[]>),
   ...(QUATRIEME as Record<string, BulleRemplie[]>),
   ...(CM2 as Record<string, BulleRemplie[]>),
   ...ECRITES_A_LA_MAIN,
 };
+
+type Figures = Record<string, Record<string, CanvasFigure>>;
+const FIGURES: Figures = { ...(FIGURES_6E as unknown as Figures), ...(FIGURES_4E as unknown as Figures) };
+
+export const CARTES_REMPLIES: Record<string, BulleRemplie[]> = Object.fromEntries(
+  Object.entries(BASE).map(([cle, bulles]) => {
+    const f = FIGURES[cle];
+    return [cle, f ? bulles.map((b, i) => (b.figure || !f[i] ? b : { ...b, figure: f[i] })) : bulles];
+  }),
+);
 
 // La carte remplie d'une notion, si elle existe ET correspond encore aux micros.
 export function carteRemplie(cle: string, nbMicros: number): BulleRemplie[] | null {
