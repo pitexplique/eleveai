@@ -62,6 +62,12 @@ Vidéo de présentation : **https://youtu.be/HQ7B3ElMH8Y** (non répertoriée).
 Même abonnement, au même prix. Vous recevez un **code cadeau** et une **carte Ti Margo à imprimer**, avec le nom de la personne qui offre (« De la part de Papi et Mamie »). Pour Noël, un anniversaire, des petits-enfants, un neveu, un filleul.
 Titres conseillés sur Ulule : « 1 mois à offrir », « 3 mois à offrir », « 6 mois à offrir », « 1 an à offrir ».
 
+**69 € · Duo famille à offrir**
+Deux codes d'un an au tarif fondateur, pour deux enfants ou pour en offrir un. Avec deux cartes Ti Margo à imprimer.
+
+**99 € · 1 an + visio avec Frédéric** *(20 places)*
+1 an d'abonnement famille et une visio de 30 minutes, en janvier 2027, pour parler des progrès de votre enfant.
+
 **60 € · Licence classe, 1 an** *(enseignants, écoles, associations)*
 Le suivi de toute la classe pendant 1 an, jusqu'à 30 élèves (2 € par élève et par an), et le nom de l'école sur le mur des soutiens.
 
