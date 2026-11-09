@@ -146,3 +146,4 @@ Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent 
   - 09/11 : « 30 minutes, ça fait léger » → **deux visios de 45 min** (janvier et avril 2027), **15 places**.
 - 09/11 : **ajout « 1 an, offre des 50 premiers » à 29 €** (50 places). Pour rester à 10 contreparties : **« 3 mois à offrir » et « 6 mois à offrir » retirés** (le duo à 69 € les remplace). Description : « Les 50 premiers l'ont pour 29 € », « Offrez : 1 mois ou 1 an en version cadeau ».
 - 09/11 : **8 contreparties saisies sur Ulule** : 4,95 / 12 / 22 / 29 (50 premiers) / 39 / 60 (classe) / 69 (duo) / 99 (2 visios). Les « à offrir » (1 mois, 1 an) ne sont pas saisies : conseillé d'ajouter au moins « 1 an à offrir » (cible grands-parents, Noël), sinon corriger la ligne « Offrez » de la description.
+  - Ulule Assist : « Ta gamme est prête : rien à ajouter ». On **garde 8 contreparties** ; ligne « Offrez » de la description réécrite autour du duo.
