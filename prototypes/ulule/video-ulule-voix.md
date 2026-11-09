@@ -36,3 +36,19 @@ Une à deux secondes chacun, pris dans des vidéos déjà faites :
 
 - **Votre vraie voix** à la place de Julie pour la scène 3 (« Je suis Frédéric… ») ? Un enregistrement au téléphone de 15 s suffit, et ça rend la collecte plus humaine. Sinon, Ti Margo vous présente, comme ci-dessus.
 - **L'image principale de la page** (1280 × 720) : je la fais après la vidéo, à partir de son plus bel écran.
+
+## ⏳ Proposition v7 (09/11, relecture « CEO ») : À VALIDER À DEUX avant tout rendu
+
+Pourquoi : la vidéo est vue **sur la page Ulule**. Elle doit finir sur la contrepartie, pas envoyer le spectateur hors d'Ulule, et ne pas promettre le programme de chaque pays alors que la FAQ dit « programme français ».
+
+| # | Avant (v6) | Après (v7 proposée) |
+|---|---|---|
+| 4 | « … Et le coach suit le programme de ton pays, partout où l'on apprend les maths en français. » + 7 drapeaux | « … Et en classe, ton prof peut me projeter au tableau ! » ; image : Ti Margo sur un tableau de classe, sans drapeaux |
+| 7 | « … Et chacun est relu par un étudiant en maths, futur professeur. … » | « … Et chacun est relu par Frédéric et par un étudiant en maths, futur professeur. … » ; écrit : ✅ Relus par Frédéric et un futur professeur |
+| 10 → 8 | Le camembert arrive après « On les finit ensemble ? » | Le camembert passe **juste après la scène 7** (« Et voici où vont les trois mille euros. ») |
+| 8 → 9 | « Mais d'abord, fais le test… eleveai.fr slash coach. » | « Fais le test : c'est gratuit, sans compte, sur eleveai.fr slash coach. » |
+| 9 → 10 | « Alors ? On les finit ensemble ? » | « Alors ? On les finit ensemble ? Choisis ta contrepartie, juste à côté de cette vidéo. Les cinquante premiers ont l'année à vingt-neuf euros ! » ; écrit : 29 € · les 50 premiers |
+| 11 | Ti Margo : les maths en dessin animé · Soutenez-nous sur Ulule · eleveai.fr | Choisissez votre contrepartie sur cette page · eleveai.fr |
+
+En option, scène 3 : **sa vraie voix**, 15 s enregistrées au téléphone (« Je suis Frédéric, professeur de maths… »). Ce n'est pas la voix clonée qu'il a écartée.
+Après sa validation : rendu `node scripts/ti-margo-short.mjs ulule presentation film` (`BD=1` d'abord). La vidéo aura un **nouveau lien YouTube**, à recoller dans Ulule.

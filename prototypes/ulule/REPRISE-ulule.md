@@ -151,3 +151,32 @@ Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent 
 
 - 09/11 : **parrainage** (son idée) : 60 € = une classe, 500 € = un collège (10 classes, 300 élèves, 1 an, visio de lancement) dans un pays francophone qui manque de moyens ; « éducation libre et universelle ». Ajouté à `page-ulule.md` (section 6) et à `description-ulule.html` (nouvelle partie « Parrainez une classe ou un collège »). Avec les 8 contreparties saisies, on arrive à 10. Reste : trouver un ou deux collèges partenaires avant le lancement.
 - 09/11 : **image `tableau-de-bord-eleve.png`** (1400 px de large) tirée de ses captures : passions, bulletin, compétences. À insérer dans la description Ulule, après « Ça marche déjà ». Les captures avec 0/15, les identifiants bruts (`entier_nombre`) et les messages d'élève ont été écartées.
+
+- 09/11 soir : **relecture « CEO + donateur inconnu »**, validée par lui (« applique tout »). Le détail est dans `relecture-ceo-ulule-09-11.md` (dossier de notes des sessions).
+  - **Titre** : « Ti Margo : les maths du collège en dessin animé ». **Sous-titre** : « Votre enfant aime les dessins animés, moins les maths ? Ti Margo lui explique tout le collège, et un coach vous montre ses progrès. » ⛔ Le sous-titre en ligne commençait par « Le premier site… » (superlatif) : à remplacer sur Ulule.
+  - **Description réécrite** (`description-ulule.html`) :
+    - le gain et le prix viennent dès les deux premières lignes, avec le test gratuit ;
+    - nouvelles parties « Qui je suis », « Notre conseil pour choisir » et « À vous de jouer » (contrepartie à droite, 29 € pour les 50 premiers, codes avant Noël, tout ou rien) ;
+    - calendrier de janvier à juin, et « chaque euro au-delà de 3 000 € » ;
+    - les passages **surlignés en jaune** sont à fournir par lui : anecdote, lien d'un short, témoignage de parent, « 90 heures » si 15 €/h, « je ne me verse rien » si c'est vrai.
+  - ⛔ **Plus de « au lieu de 59,40 € »** (prix jamais pratiqué) : on écrit « le prix normal sera de 4,95 € par mois ». ⛔ Plus de « logiciels et IA » ni de « en dessous des plateformes du marché ».
+  - **Parrainage** (sa demande) : « Offrez un collège, en Afrique ou ailleurs » à **500 €, soit 1 € par élève et par an, jusqu'à 500 élèves** (avant : 10 classes, 300 élèves). Sa phrase : « L'éducation est libre et universelle, mais elle doit être financée. » Le matériel (connexion, projecteur) reste celui du collège. Il faut un collège partenaire confirmé avant le 24/11, sinon ne citer aucun pays.
+  - **Titres des 10 contreparties** à recopier sur Ulule : `page-ulule.md`, section 6.
+  - **FAQ** : « Comment offrir » réécrite autour du duo ; nouvelles entrées « Un abonnement, c'est pour combien d'enfants ? », « Tous les dessins animés sont-ils déjà prêts ? » et « Je n'ai pas d'enfant au collège, puis-je aider ? » ; la relecture est faite par lui ET par un étudiant.
+  - **`plan-30-jours.md`** (nouveau) :
+    - le calendrier du 16/11 au 22/12, pour 150 contacts et 100 promesses ;
+    - les objectifs chiffrés : 900 € le 24/11, 1 500 € le 01/12, 2 200 € le 08/12, 3 000 € le 15/12 ;
+    - les 6 actualités Ulule, déjà rédigées ;
+    - les messages pour le premier cercle, WhatsApp, Facebook, les groupes de parents (avec l'accord de leurs administrateurs), les grands-parents, les collègues et la presse ;
+    - les règles du devoir de réserve.
+  - **Vidéo** : voix v7 **proposée, pas rendue**, à valider à deux (`video-ulule-voix.md`, fin du fichier) :
+    - les drapeaux « programme de ton pays » sont retirés ;
+    - la relecture est faite « par Frédéric et un étudiant » ;
+    - le camembert passe avant l'invitation au test ;
+    - la fin devient « Choisis ta contrepartie, juste à côté de cette vidéo ».
+    Après le rendu, la vidéo aura un nouveau lien YouTube.
+  - **Images refaites** (scripts copiés dans le scratchpad de cette session) :
+    - `image-principale.png` : badge « Dessin animé » et « Tout le collège, avant le brevet » ;
+    - `budget-camembert.png` : « Outils d'animation, pendant 3 mois », sans « IA ».
+  - Reste : refaire `tableau-de-bord-eleve.png` sur un **compte de démonstration** où des notions sont comprises (l'actuelle montre 10/20 et « 0 / 6 micros compris ») ; envisager une page `eleveai.fr/ulule` (Ti Margo, « Essayez », « Revenir à la collecte »).
+  - `budget.md` est marqué obsolète (il décrit l'ancien objectif de 8 000 €).

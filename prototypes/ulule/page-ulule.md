@@ -9,11 +9,15 @@
 
 ## 1. Titre du projet (≤ 50 caractères)
 
-**Ti Margo : les maths en dessin animé**
+**Ti Margo : les maths du collège en dessin animé** (47 caractères ; 09/11, au lieu de « Ti Margo : les maths en dessin animé »)
 
 ## 2. Sous-titre / phrase d'accroche (≤ 135 caractères)
 
-**Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent les maths du collège, relus un par un, avant le brevet.**
+**Votre enfant aime les dessins animés, moins les maths ? Ti Margo lui explique tout le collège, et un coach vous montre ses progrès.** (131 caractères)
+
+Variante (125) : Des dessins animés qui expliquent les maths du collège, et un coach qui vous montre ce que votre enfant maîtrise. Dès 4,95 €.
+
+⛔ 09/11 : le sous-titre en ligne commençait par « Le premier site qui… » : superlatif invérifiable, à remplacer sur Ulule.
 
 ## 3. Catégorie et tags
 
@@ -40,11 +44,23 @@ Vidéo de présentation : **https://youtu.be/HQ7B3ElMH8Y** (non répertoriée).
 
 ## 6. Contreparties
 
-> **Tarif fondateur**, réservé aux contributeurs. Prix normal de l'abonnement famille : 4,95 € par mois, soit 59,40 € par an.
+> **Tarif fondateur**, réservé aux contributeurs. Le prix normal de l'abonnement famille **sera** de 4,95 € par mois. ⛔ 09/11 : ne plus écrire « au lieu de 59,40 € » (prix jamais pratiqué, Stripe fermé).
 > Chaque contrepartie donne un **code** à activer sur **eleveai.fr/code**. Les mois offerts démarrent le jour où le code est activé.
 > Toutes comprennent aussi le **film de remerciement de Ti Margo**, le même pour tous, et le **nom sur le mur des soutiens** (si le contributeur le souhaite).
 
 À saisir sur Ulule, dans cet ordre. Pour chaque contrepartie : titre, prix, description.
+
+**Titres à recopier sur Ulule (09/11)** : la description de chaque contrepartie ne change pas, sauf « au lieu de 59,40 € ».
+- 4,95 € · `1 mois de suivi avec Ti Margo`
+- 12 € · `3 mois de suivi avec Ti Margo`
+- 22 € · `6 mois de suivi avec Ti Margo`
+- 29 € · `⭐ 1 an de suivi : prix des 50 premiers`
+- 39 € · `1 an de suivi : tarif fondateur`
+- 60 € · `Enseignant : licence pour votre classe, 1 an`
+- 60 € · `Offrez une classe à un collège partenaire`
+- 69 € · `🎁 Duo : 1 an pour vous + 1 an à offrir`
+- 99 € · `1 an de suivi + 2 visios avec Frédéric`
+- 500 € · `Offrez un collège, en Afrique ou ailleurs`
 
 **4,95 € · 1 mois avec Ti Margo**
 1 mois d'abonnement famille : le coach suit votre enfant, compétence après compétence, et vous montre ce qu'il maîtrise.
@@ -56,10 +72,10 @@ Vidéo de présentation : **https://youtu.be/HQ7B3ElMH8Y** (non répertoriée).
 6 mois d'abonnement famille, soit une demi-année scolaire.
 
 **29 € · 1 an, offre des 50 premiers** *(50 places)*
-1 an d'abonnement famille à 29 € au lieu de 59,40 €, réservé aux 50 premiers contributeurs. Ensuite, le tarif fondateur reste à 39 €.
+1 an d'abonnement famille à 29 € (le prix normal sera de 4,95 € par mois), réservé aux 50 premiers contributeurs. Ensuite, le tarif fondateur reste à 39 €.
 
 **39 € · 1 an avec Ti Margo** ⭐ *(la contrepartie phare)*
-1 an d'abonnement famille, au tarif fondateur de 39 € au lieu de 59,40 €. Toute l'année scolaire, jusqu'au brevet.
+1 an d'abonnement famille, au tarif fondateur de 39 € (le prix normal sera de 4,95 € par mois). Toute l'année scolaire, jusqu'au brevet.
 
 **🎁 Les mêmes, « à offrir » : 4,95 € · 12 € · 22 € · 39 €**
 Même abonnement, au même prix. Vous recevez un **code cadeau** et une **carte Ti Margo à imprimer**, avec le nom de la personne qui offre (« De la part de Papi et Mamie »). Pour Noël, un anniversaire, des petits-enfants, un neveu, un filleul.
@@ -74,13 +90,13 @@ Deux codes d'un an au tarif fondateur, pour deux enfants ou pour en offrir un. A
 **60 € · Licence classe, 1 an** *(enseignants, écoles, associations)*
 Le suivi de toute la classe pendant 1 an, jusqu'à 30 élèves (2 € par élève et par an), et le nom de l'école sur le mur des soutiens.
 
-**60 € · Parrainer une classe dans un pays qui manque de moyens** *(09/11, son idée)*
-Une classe de collège, jusqu'à 30 élèves, dans un pays francophone où les élèves et les professeurs n'ont pas les moyens de s'abonner : le suivi de toute la classe pendant 1 an, et les dessins animés projetés en classe. Le collège est choisi avec des enseignants sur place. Des nouvelles de la classe en cours d'année et votre nom sur le mur des soutiens. Une façon de participer à une éducation libre et universelle.
+**60 € · Offrez une classe à un collège partenaire** *(09/11, son idée)*
+Une classe de collège, jusqu'à 30 élèves, en Afrique ou ailleurs, dans un collège où ni les familles ni les professeurs ne peuvent payer un abonnement : le suivi de toute la classe pendant 1 an, et les dessins animés projetés en classe. Le collège est choisi avec des enseignants sur place. Des nouvelles de la classe en cours d'année et votre nom sur le mur des soutiens. Une façon de participer à une éducation libre et universelle.
 
-**500 € · Parrainer un collège dans un pays qui manque de moyens** *(10 places)*
-Tout un collège, jusqu'à 10 classes et 300 élèves, suivi pendant 1 an (moins de 2 € par élève), avec une visio pour lancer le projet avec ses professeurs. Des nouvelles du collège en cours d'année et votre nom, ou celui de votre entreprise, sur le mur des soutiens.
+**500 € · Offrez un collège, en Afrique ou ailleurs** *(10 places)*
+Tout un collège, jusqu'à 500 élèves, suivi pendant 1 an : **1 € par élève et par an** (09/11, son idée), avec une visio pour lancer le projet avec ses professeurs. Des nouvelles du collège en cours d'année et votre nom, ou celui de votre entreprise, sur le mur des soutiens. L'accès au site et le suivi sont offerts ; le matériel (connexion, projecteur) reste celui du collège. « L'éducation est libre et universelle, mais elle doit être financée. »
 
-Livraison du parrainage : un code `--type classe` par classe (`--eleves 30`), remis au professeur référent du collège choisi. ⚠️ Avant le lancement : avoir au moins un ou deux collèges partenaires prêts (contacts d'enseignants francophones : Madagascar, Comores, Sénégal…).
+Livraison du parrainage : un code `--type classe` par classe (`--eleves 30`) ; pour un collège, jusqu'à 17 classes de 30, remis au professeur référent du collège choisi. ⚠️ Avant le lancement : avoir au moins un collège partenaire confirmé (un enseignant sur place qui dit oui), sinon ne citer aucun pays ; un ou deux collèges partenaires prêts (contacts d'enseignants francophones : Madagascar, Comores, Sénégal…).
 
 **[1 000 €] · Partenaire** *(entreprises, mairies, comités d'entreprise)*
 Votre logo sur la page des partenaires et **10 abonnements famille d'un an** à offrir (salariés, familles en difficulté…).
@@ -105,16 +121,16 @@ La collecte finance d'abord les dessins animés du **collège**, de la 6e à la 
 Oui : beaucoup sont déjà en accès libre sur eleveai.fr et sur la chaîne YouTube @eleveai974.
 
 **Quand mon abonnement démarre-t-il ?**
-Le jour où vous activez votre code sur **eleveai.fr/code**. Vous recevez le code par courriel [à la fin de la collecte].
+Le jour où vous activez votre code sur **eleveai.fr/code**. Vous recevez le code par courriel les 21 et 22/12, avant Noël.
 
 **Je peux tester avant ?**
 Oui, et c'est même conseillé : le test est gratuit sur **eleveai.fr/coach**, sans compte, sans abonnement et sans carte bancaire. Seul le suivi des progrès dans la durée demande un abonnement.
 
 **Je veux offrir l'abonnement à mes petits-enfants, comment faire ?**
-Choisissez une contrepartie « à offrir ». Vous recevez un code cadeau et une carte Ti Margo à imprimer. Les parents de l'enfant entrent le code sur eleveai.fr/code.
+Choisissez le duo à 69 € : deux codes d'un an et deux cartes Ti Margo à imprimer, un pour votre famille et un à offrir. Les parents de l'enfant entrent le code sur eleveai.fr/code.
 
 **Qui relit les dessins animés ?**
-Des étudiants en maths de La Réunion, futurs professeurs. Une vidéo n'est mise en ligne qu'une fois vérifiée, et je garde la validation finale.
+Moi, et un étudiant en maths de La Réunion, futur professeur. Une vidéo n'est mise en ligne qu'une fois vérifiée.
 
 **Les outils d'animation remplacent-ils le professeur ?**
 Non. Ils aident à **fabriquer** les vidéos plus vite. Chaque script est écrit et validé par un enseignant, et chaque vidéo est relue avant d'arriver devant un enfant.
@@ -131,6 +147,8 @@ Oui, c'est fait pour ça : les vidéos sont conçues pour être **projetées en 
 ---
 
 ## 9. Messages pour les réseaux (lancement)
+
+⛔ 09/11 : les messages à jour (premier cercle, WhatsApp, Facebook, groupes de parents, grands-parents, collègues, presse, actualités) sont dans **`plan-30-jours.md`**. Ceux ci-dessous sont l'ancienne version.
 
 **Facebook / Instagram (parents)**
 > Votre enfant aime les dessins animés ? 🎬 Ici, c'est Ti Margo, un petit caméléon, qui explique les maths. Je suis prof de maths à La Réunion et je veux finir tous les dessins animés du collège avant le brevet, chacun relu par un futur professeur. Dès 4,95 €, votre enfant reçoit un mois de suivi ; 39 € pour un an au tarif fondateur. 👉 [lien Ulule]

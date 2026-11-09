@@ -5,6 +5,8 @@
 
 ## 1. Le calendrier proposé
 
+> ⛔ 09/11 : le plan détaillé jour par jour, les relances, les 6 actualités Ulule et tous les messages sont dans **`plan-30-jours.md`**. Viser 150 contacts pour 100 promesses ; annoncer les 50 places à 29 € dans le message de promesse.
+
 | Date | Ce qui se passe |
 |---|---|
 | **dim. 08/11 → ven. 13/11** | Page complétée sur Ulule (contreparties, description, vidéo), envoi à Ulule pour relecture. Demande du SIRET. |
@@ -45,7 +47,7 @@ Faire une liste (un tableur suffit : nom, lien, montant promis, prévenu le, a d
 
 Le message de promesse, à envoyer **la semaine avant** :
 
-> Bonjour [prénom], je lance le mardi 24 novembre une collecte Ulule pour finir les dessins animés de maths du collège avec Ti Margo, avant le brevet. Les premières heures comptent beaucoup : est-ce que je peux compter sur toi ce jour-là, même pour 4,95 € ? Je t'envoie le lien le matin même. Merci !
+> Bonjour [prénom] ! Le mardi 24 novembre à 19 h, je lance une collecte Ulule pour finir les dessins animés de maths du collège avec Ti Margo, mon petit caméléon, avant le brevet. Les premières heures décident de tout : est-ce que je peux compter sur toi ce soir-là ? Les 50 premiers ont un an de suivi pour leur enfant (ou à offrir) à 29 €, et ça commence à 4,95 €. Je t'envoie le lien le jour même. Merci 🙏
 
 ⚠️ Devoir de réserve : ne pas solliciter les parents de ses propres élèves par les canaux de l'établissement (Pronote, ENT, cahier de liaison). La page publique et les réseaux personnels suffisent.
 
@@ -55,6 +57,12 @@ Le message de promesse, à envoyer **la semaine avant** :
 - [x] Licence classe : **60 € pour 30 élèves pendant 1 an** (validé le 08/11).
 - [ ] Coller la description (`description-ulule.html`) et la vidéo https://youtu.be/HQ7B3ElMH8Y.
 - [ ] Ajouter **l'anecdote d'un élève** (sans prénom) au texte, s'il en a une.
+- [ ] 09/11 : remplir ou supprimer les passages **surlignés en jaune** de `description-ulule.html` (anecdote, lien d'un short dessin animé, témoignage de parent, « 90 heures » si 15 €/h confirmé, « je ne me verse rien » si c'est vrai), puis recoller toute la description.
+- [ ] 09/11 : demander 2 ou 3 témoignages à des parents de son entourage (pas ceux de ses élèves).
+- [ ] 09/11 : remplacer sur Ulule le titre, le sous-titre (« Le premier site… » à retirer) et les titres des 10 contreparties (`page-ulule.md`, section 6).
+- [ ] 09/11 : refaire l'image du tableau de bord sur un **compte de démonstration** avec des notions comprises (l'actuelle montre 10/20 et « 0 / 6 micros compris »).
+- [ ] 09/11 : un collège partenaire confirmé pour « Offrez un collège » (500 € = 1 € par élève et par an).
+- [ ] 09/11 : valider la voix v7 de la vidéo (`video-ulule-voix.md`), puis rendu et nouveau lien YouTube à recoller.
 - [ ] Une fois la page créée : mettre **le lien Ulule dans la description YouTube** de la vidéo de présentation.
 - [ ] Codes : commit `2540ac7a` (SQL, page /code, script CSV, carte cadeau), pas poussé, SQL pas exécuté. Mise en ligne dès qu'Ulule accepte, sur son ordre. La durée de 3 mois a été ajoutée le 08/11.
 - [ ] Le film de remerciement Ti Margo (le même pour tous), à préparer pendant la collecte.

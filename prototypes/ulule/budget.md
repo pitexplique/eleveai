@@ -1,3 +1,5 @@
+> ⛔ **OBSOLÈTE depuis le 08/11** : ce budget décrit l'ancien objectif de 8 000 € avec l'ordinateur. Le budget en vigueur est celui de `description-ulule.html` (3 000 € : étudiants 1 400, cotisations 720, outils d'animation 640, Ulule 240). Garder ce fichier seulement pour les tarifs (étudiant ≈ 15 €/h, Ulule ≈ 8 %, cotisations ≈ 24 %).
+
 # Budget réaliste — campagne Ulule EleveAI × Ti Margo
 
 > Document de travail interne (pas pour la page publique). Prix TTC, relevés le 07/11/2026.
