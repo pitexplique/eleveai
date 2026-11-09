@@ -24,6 +24,7 @@
 import SIXIEME from "./remplies/6e.json";
 import QUATRIEME from "./remplies/4e.json";
 import CM2 from "./remplies/cm2.json";
+import CINQUIEME from "./remplies/5e.json";
 import type { CanvasFigure } from "@/lib/tutor-v4/types";
 // Les dessins des cartes de 6e et de 4e, à part des textes : { "<classe>/<notion>":
 // { "<n° de bulle à partir de 0>": figure } }. Un dessin écrit à la main ici l'emporte.
@@ -509,6 +510,8 @@ const BASE: Record<string, BulleRemplie[]> = {
   ...(SIXIEME as Record<string, BulleRemplie[]>),
   ...(QUATRIEME as Record<string, BulleRemplie[]>),
   ...(CM2 as Record<string, BulleRemplie[]>),
+  // Le JSON élargit les `kind` des dessins en simple chaîne : passage par unknown.
+  ...(CINQUIEME as unknown as Record<string, BulleRemplie[]>),
   ...ECRITES_A_LA_MAIN,
 };
 
