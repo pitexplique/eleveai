@@ -172,6 +172,7 @@ const ligne = new Tube(scene3d, () => .025, corde, { seg: 40, rad: 6, trait: nul
 const NB_LOUPS = 8, R_CERCLE = 3.6;
 const loups = Array.from({ length: NB_LOUPS }, (_, i) => creerBete(scene3d, i === 1 ? { pelage: 0x6e6f74, ventre: 0xd9d8d2, iris: 0xd9a03a, oreilles: .3, echelle: 1.02, queueEnRond: false, tache: 0xf2f1ec }
   : { pelage: [0xc8cac8, 0xbfc2c0, 0xd2d3cf, 0xb5b8b8][i % 4], ventre: 0xf2f1ec, iris: 0xd9a03a, oreilles: .3, echelle: .92 + (i % 3) * .04, queueEnRond: false }));
+loups.forEach(l => { l.souffle.visible = false; }); /* jamais placés : ils restaient en (0,0,0), petites boules blanches sur la neige */
 
 /* ---------- Le vieil homme ---------- */
 const vieux = personnage(scene3d, { peau: 0xe0b394, cheveu: 0xe9e9ec, haut: 0x7a5636, bas: 0x4a3a2c, chaussure: 0x2e2018, coiffure: 'court', echelle: 1.12, iris: 0x2f4a5e });
@@ -211,7 +212,7 @@ const P_DEBOUT = Vx(0, .12, -1.78);
 const versMonde = (loc, pos, h) => pos.clone().add(rotY(loc, h));
 const P_PIED = plat(versMonde(Vx(-1.3, 0, -1.3), arretP.p, arretP.h));
 const gdir = plat(P_PIED.clone().sub(C0)).normalize(), perp = Vx(gdir.z, 0, -gdir.x);
-const P_GAP = C0.clone().addScaledVector(gdir, R_CERCLE + .7), P_FILLE = C0.clone().addScaledVector(gdir, .5), P_STOP = P_FILLE.clone().addScaledVector(gdir, 1.25);
+const P_GAP = C0.clone().addScaledVector(gdir, R_CERCLE + .7), P_FILLE = C0.clone().addScaledVector(gdir, .5), P_STOP = P_FILLE.clone().addScaledVector(gdir, 1.25).addScaledVector(perp, -.6); /* un peu de côté : les gros plans sur elle restent dégagés */
 const H_FILLE = Math.atan2(gdir.x, gdir.z);
 const centre = new THREE.Group(); scene3d.add(centre);
 const epave = creerTraineau(centre, true);
@@ -227,7 +228,7 @@ for (const s of [-1, 1]) {
 const gant = new THREE.Group(); centre.add(gant); gant.position.copy(surSol(P_FILLE.clone().addScaledVector(perp, .55).addScaledVector(gdir, .1), .14)); gant.rotation.y = H_FILLE - .9;
 dur(gant, ell(.13, .07, .17), feutre(0x3b2a20, { f: .5 }), [0, 0, .12]); dur(gant, new THREE.CylinderGeometry(.08, .09, .22, 10).rotateX(Math.PI / 2), feutre(0x6e4d30, { f: .8 }), [0, 0, -.06]);
 const echarpeVent = new Tube(scene3d, u => .07 * (1 - u * .4), rouge, { seg: 20, rad: 8, trait: null });
-const ANCRE = surSol(P_FILLE.clone().addScaledVector(perp, -1.05).addScaledVector(gdir, .1), .2);
+const ANCRE = surSol(P_FILLE.clone().addScaledVector(perp, -1.05).addScaledVector(gdir, .1), .08);
 
 /* ---------- La cabane ---------- */
 const cabane = new THREE.Group(); scene3d.add(cabane); cabane.position.copy(surSol(CABANE, -.1)); cabane.rotation.y = -Math.PI / 2; /* sa façade regarde vers -x */
@@ -248,7 +249,7 @@ const cabane = new THREE.Group(); scene3d.add(cabane); cabane.position.copy(surS
   const feu = new THREE.PointLight(0xffb86a, 0, 16, 1.6); feu.position.set(-1.2, 1.8, 3.4); cabane.add(feu); cabane.userData.feu = feu;
 }
 const fumee = Array.from({ length: 16 }, () => { const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: rondDoux('rgba(235,235,240,.7)', 'rgba(235,235,240,0)'), transparent: true, depthWrite: false })); scene3d.add(s); return s; });
-const CHEMINEE = cabane.localToWorld(Vx(1.8, 5.6, -.6));
+const CHEMINEE = cabane.localToWorld(Vx(1.8, 5.6, -.6)), fumeeNuit = new THREE.Color(0x4a5778);
 
 /* ---------- Les écrits : le titre et la fin ---------- */
 const st = document.createElement('style');
@@ -285,7 +286,10 @@ const REPERES = [
   [F6 + 16.4, P_PIED, arretP.h],
   [F6 + 18, plat(POS_TRAIN_ARRET), arretP.h]];
 function placeVieux(T) {
-  if (T < REPERES[0][0] || T >= REPERES.at(-1)[0]) { const t = poseTraineau(T); return { p: versMonde(P_DEBOUT, t.p, t.h), h: t.h, aBord: true }; }
+  if (T < REPERES[0][0] || T >= REPERES.at(-1)[0]) { const t = poseTraineau(T), p = versMonde(P_DEBOUT, t.p, t.h);
+    /* arrivé à la cabane, il descend du traîneau : deux pas de côté, pour ne pas rester debout au-dessus de la petite */
+    const kD = T > P7 ? ss(P8 + 6, P8 + 8, T) : 0; if (kD > 0) { p.addScaledVector(latAngle(t.h), -2.1 * kD).addScaledVector(dirAngle(t.h), .5 * kD); p.y = L(p.y, H(p.x, p.z), kD); }
+    return { p, h: t.h, aBord: true, descend: kD > 0 && kD < 1 }; }
   let i = 0; while (i < REPERES.length - 2 && REPERES[i + 1][0] <= T) i++;
   const [ta, pa, ha] = REPERES[i], [tb, pb, hb] = REPERES[i + 1], u = (T - ta) / (tb - ta), ue = ss(0, 1, u);
   const lin = Math.min(1, Math.max(0, u)), mouv = pa.distanceTo(pb) > .01;
@@ -340,16 +344,16 @@ const PLANS_S = [
   [0, u => ({ p: Vx(-22, H(-22, 16) + 3.2, 16).lerp(Vx(-25, H(-25, 13) + 3, 13), u), c: Vx(-52, 1.8, -1), f: 28 })],
   [20, (u, T, x) => ({ p: x.tp.clone().addScaledVector(x.av, 5 - u * 3).addScaledVector(x.lat, 9).add(Vx(0, 2.4, 0)), c: x.tp.clone().addScaledVector(x.av, 2.2).add(Vx(0, 1.2, 0)), f: 38 })],
   [33, (u, T, x) => ({ p: x.tv.clone().addScaledVector(x.av, 3.4).addScaledVector(x.lat, 1.4).add(Vx(0, .05, 0)), c: x.tv.clone().add(Vx(0, -.12, 0)), f: 30 })],
-  [40, (u, T, x) => ({ p: x.tv.clone().addScaledVector(x.av, -2).addScaledVector(x.lat, 1.9).add(Vx(0, 1.1, 0)), c: surSol(CABANE, 2.5), f: 30 })],
+  [40, (u, T, x) => ({ p: x.tv.clone().addScaledVector(x.av, -3.2).addScaledVector(x.lat, 1.4).add(Vx(0, 2.6, 0)), c: surSol(CABANE, 5), f: 34 })],
   [A.p3, (u, T, x) => ({ p: x.tv.clone().addScaledVector(x.av, 3.2).addScaledVector(x.lat, -1.1).add(Vx(0, .1, 0)), c: x.tv.clone().add(Vx(0, -.1, 0)), f: 32 })],
   [A.p3 + 4, (u, T, x) => ({ p: x.tv.clone().addScaledVector(plat(C0.clone().sub(x.tv)).normalize(), 1.2).add(Vx(0, .25, 0)), c: C0.clone().add(Vx(0, H(C0.x, C0.z) + .9, 0)), f: L(22, 17, u) })],
   [A.p3 + 8.5, (u, T, x) => ({ p: x.tv.clone().addScaledVector(plat(C0.clone().sub(x.tv)).normalize(), 3.3).add(Vx(0, .05, 0)), c: x.tv.clone().add(Vx(0, -.25, 0)), f: 32 })],
   [P4 + 2, (u, T, x) => ({ p: x.tp.clone().addScaledVector(plat(x.tp.clone().sub(C0)).normalize(), 11).add(Vx(0, 7, 0)), c: x.tp.clone().lerp(C0, .4).add(Vx(0, 1, 0)), f: 44 })],
-  [P4 + 14, (u, T, x) => { const w = mondeDe(loups[1].tt), dw = plat(w.clone().sub(C0)).normalize(); return { p: w.clone().addScaledVector(dw, -2.5).addScaledVector(Vx(dw.z, 0, -dw.x), .9).add(Vx(0, .25, 0)), c: x.vp.clone().add(Vx(0, 1.8, 0)), f: 34 }; }],
+  [P4 + 14, (u, T, x) => { const w = mondeDe(loups[1].tt), dw = plat(w.clone().sub(C0)).normalize(); return { p: w.clone().addScaledVector(dw, -3.6).addScaledVector(Vx(dw.z, 0, -dw.x), 1.1).add(Vx(0, .35, 0)), c: x.vp.clone().add(Vx(0, 1.8, 0)), f: 34 }; }],
   [P4 + 24, (u, T, x) => ({ p: x.vp.clone().addScaledVector(gdir, 4.6).add(Vx(0, 3.3, 0)), c: surSol(C0, .6), f: 38 })],
   [P5 + 7, (u, T, x) => ({ p: surSol(C0.clone().addScaledVector(rotY(gdir, 1.25), 9), 5.2), c: surSol(P_FILLE.clone().lerp(P_STOP, .5), 1.7), f: 38 })],
   [P5 + 16, (u, T, x) => ({ p: x.tv.clone().addScaledVector(gdir, -3.2).addScaledVector(perp, .6).add(Vx(0, -.1, 0)), c: x.tv.clone().add(Vx(0, -.2, 0)), f: 32 })],
-  [P5 + 24, (u, T, x) => ({ p: x.tf.clone().addScaledVector(gdir, 1.0).addScaledVector(perp, 1.0).add(Vx(0, .14, 0)), c: x.tf.clone().add(Vx(0, -.04, 0)), f: 38 })],
+  [P5 + 24, (u, T, x) => ({ p: x.tf.clone().addScaledVector(gdir, 1.05).addScaledVector(perp, .3).add(Vx(0, .12, 0)), c: x.tf.clone().add(Vx(0, -.04, 0)), f: 38 })],
   [P5 + 32, (u, T, x) => ({ p: x.tf.clone().addScaledVector(gdir, .85).addScaledVector(perp, .45).add(Vx(0, .12, 0)), c: x.tf.clone().add(Vx(0, .03, 0)), f: L(30, 25, u) })],
   [P5 + 36, (u, T, x) => ({ p: x.tv.clone().addScaledVector(gdir, -2.6).addScaledVector(perp, .9).add(Vx(0, -.25, 0)), c: x.tv.clone().add(Vx(0, -.15, 0)), f: 34 })],
   [P6, (u, T, x) => { const m = P_FILLE.clone().lerp(P_STOP, .5); return { p: surSol(m.clone().addScaledVector(perp, 6.2).addScaledVector(gdir, 1), 3), c: surSol(m, 1.7), f: 38 }; }],
@@ -361,8 +365,9 @@ const PLANS_S = [
   [P7 + 12, (u, T, x) => ({ p: x.tp.clone().addScaledVector(x.av, -3).addScaledVector(x.lat, -13).add(Vx(0, 2.6, 0)), c: x.tp.clone().addScaledVector(x.av, -4.5).add(Vx(0, 1.2, 0)), f: 42 })],
   [P7 + 21, (u, T, x) => ({ p: Vx(x.tp.x - 10, x.tp.y + 5, x.tp.z + 22), c: Vx(x.tp.x + 14, x.tp.y + 2, x.tp.z - 2), f: 40 })],
   [P8, (u, T, x) => ({ p: surSol(Vx(33, 0, -15), 6), c: surSol(Vx(42, 0, 3), 1.5), f: 44 })],
-  [P8 + 10, (u, T, x) => ({ p: x.tf.clone().addScaledVector(x.av, 1.1).addScaledVector(x.lat, .5).add(Vx(0, 2.2, 0)), c: x.tf, f: 30 })],
-  [P8 + 14, (u, T, x) => ({ p: x.tf.clone().addScaledVector(x.av, 1.1).addScaledVector(x.lat, .5).add(Vx(0, 2.2, 0)), c: x.tf.clone().lerp(x.tf.clone().addScaledVector(x.av, 20).add(Vx(0, 16, 0)), ss(0, .6, u)), f: 38 })]];
+  [P8 + 10, (u, T, x) => ({ p: x.tf.clone().addScaledVector(x.av, .55).addScaledVector(x.lat, -.35).add(Vx(0, 2.6, 0)), c: x.tf, f: 20 })],
+  /* ce qu'elle voit : le ciel, et l'étoile bleue (raccord sur son regard) */
+  [P8 + 14, (u, T, x) => ({ p: x.tf.clone().addScaledVector(x.av, .2).add(Vx(0, .35, 0)), c: x.tf.clone().addScaledVector(x.av, 20).add(Vx(0, L(11, 16, ss(0, 1, u)), 0)), f: 40 })]];
 function filmerS(T, x) {
   let i = PLANS_S.length - 1; while (i > 0 && PLANS_S[i][0] > T) i--;
   const fin = (PLANS_S[i + 1] || [FIN])[0], u = Math.min(1, Math.max(0, (T - PLANS_S[i][0]) / (fin - PLANS_S[i][0])));
@@ -409,12 +414,15 @@ window.film = { FIN, clips, son, image(T0) {
   const regard = cible => { const y = tourne(0, angleVers(vp.p, cible) - vp.h, 1); return Math.max(-1.3, Math.min(1.3, y)); };
   let P = { h: 1.15, lean: 0, ry: 0, tX: .05, tY: 0, lid: -.55, sourcil: .15, sourire: 0, parle: 0, kneeZ: .05,
     mg: Vx(-.55, .9, .15), md: Vx(.55, .9, .15), pg: Vx(-.22, 0, .02), pd: Vx(.22, 0, .02) };
+  if (vp.aBord && vp.descend) { const s = Math.sin(phaseM * 1.3); P.pg = Vx(-.21, Math.max(0, s) * .12, .02 + s * .26); P.pd = Vx(.21, Math.max(0, -s) * .12, .02 - s * .26); }
   if (vp.aBord) {
     Object.assign(P, { mg: Vx(-.45, 1.4, .3), md: Vx(.45, 1.4, .3), lean: .08 });
     const yLoups = regard(C0), kL = ss(A.p3 + 1, A.p3 + 3, T) * (1 - ss(P4 + 10, P4 + 13, T));
     P.tY = yLoups * .7 * kL; P.ry = yLoups * .3 * kL;
     if (T > A.p3 + 3.5 && T < A.p3 + 5) { P.mg.z = .1; P.md.z = .1; P.lean = -.05; }
     if (T > P7 + 13 && T < P7 + 19) { const k = ss(P7 + 13, P7 + 14.5, T) * (1 - ss(P7 + 17.5, P7 + 19, T)); P.ry = .7 * k; P.tY = 1.1 * k; P.md = Vx(.6, 1.2, -.1).lerp(Vx(.45, 1.4, .3), 1 - k); }
+    /* arrivé à la cabane : il lâche la poignée (sinon ses bras passent au-dessus de la petite dans le dernier gros plan) */
+    const kLache = ss(P8 + 6, P8 + 8, T); if (kLache > 0) { P.mg = P.mg.clone().lerp(Vx(-.55, .9, .15), kLache); P.md = P.md.clone().lerp(Vx(.55, .9, .15), kLache); P.lean = L(P.lean, 0, kLache); }
     P.tX += Math.sin(T * 2.3) * .01 * Math.min(1, v);
     if (T >= A['p3-vieux'] && T < F['p3-vieux']) { P.parle = bouge(T, 0) * .5; P.sourcil = -.2; }
   } else if (marche > .05) {
@@ -468,13 +476,13 @@ window.film = { FIN, clips, son, image(T0) {
   const Pf = { h: .62, lean: -.05, kneeZ: .45, pg: Vx(-.22, 0, .7), pd: Vx(.22, 0, .7), mg: Vx(-.3, .7, .45), md: Vx(.3, .7, .45), lid: yeux, sourire: 0, parle: .06, sourcil: .1, tX: -.32, regX: -.2 };
   if (tf0.etat === 'assise' && T < P5 + 26) { Pf.tX = .08; Pf.lean = .08; }
   if (tf0.etat === 'monte' || tf0.etat === 'bras') { Pf.tX = -.4; Pf.tY = -.3; Pf.regX = -.25; }
-  if (tf0.etat === 'pose' || tf0.etat === 'couchee') { Pf.h = .9; Pf.kneeZ = .05; Pf.pg = Vx(-.15, 0, .05); Pf.pd = Vx(.15, 0, .05); Pf.tX = 0; Pf.regX = -.3; Pf.lid = L(-.5, .25, ss(P8 + 9, P8 + 13, T)); }
+  if (tf0.etat === 'pose' || tf0.etat === 'couchee') { Pf.h = .9; Pf.kneeZ = .05; Pf.pg = Vx(-.15, 0, .05); Pf.pd = Vx(.15, 0, .05); Pf.mg = Vx(-.34, .55, .1); Pf.md = Vx(.34, .55, .1); Pf.tX = 0; Pf.regX = -.3; Pf.lid = L(-.5, .25, ss(P8 + 9, P8 + 13, T)); }
   if (yeux < 0 && (T % 5.1) < .14) Pf.lid = 1.2;
   fille.poser(Pf);
   givreCils.visible = T < P6 + 12;
   const kE = ss(A6 + 2.6, A6 + 5.4, T); echarpeFille.visible = kE > 0; echarpeFille.scale.setScalar(Math.max(.01, kE));
   const kVent = T < A6 + 2.6 ? 1 : 0;
-  const pe = [ANCRE.clone()]; for (let k = 1; k <= 4; k++) pe.push(ANCRE.clone().addScaledVector(perp, -k * .25).add(Vx(Math.sin(T * 3 + k) * .06 * k, .05 * k + Math.sin(T * 4.3 + k * 1.7) * .05 * k, Math.cos(T * 2.6 + k) * .05 * k)));
+  const pe = [ANCRE.clone()]; for (let k = 1; k <= 4; k++) pe.push(ANCRE.clone().addScaledVector(perp, -k * .25).add(Vx(Math.sin(T * 3 + k) * .06 * k, .02 * k + Math.sin(T * 4.3 + k * 1.7) * .05 * k, Math.cos(T * 2.6 + k) * .05 * k)));
   echarpeVent.maj(kVent ? pe : pe.map(() => Vx(0, -50, 0)));
   peaux.visible = true; const kc = ss(F6 + 11, F6 + 12.6, T); couverture.visible = kc > 0; couverture.scale.set(1, 1, Math.max(.01, kc));
 
@@ -491,8 +499,9 @@ window.film = { FIN, clips, son, image(T0) {
   });
 
   /* La cabane, la fumée, les étoiles, les flocons, l'ombre */
+  const nuitF = ss(P8, P8 + 14, T); /* la fumée n'est pas éclairée : on l'assombrit avec la nuit */
   cabane.userData.feu.intensity = L(.4, 9, ss(P7 + 18, P8 + 8, T));
-  fumee.forEach((s, k) => { const c = (T * .12 + k / fumee.length) % 1; s.position.copy(CHEMINEE).add(Vx(c * 3.2 + Math.sin(T * .5 + k) * .3, c * 6, -c * 1.4)); s.scale.setScalar(.8 + c * 3.2); s.material.opacity = Math.sin(Math.PI * c) * .5; });
+  fumee.forEach((s, k) => { const c = (T * .12 + k / fumee.length) % 1; s.position.copy(CHEMINEE).add(Vx(c * 3.2 + Math.sin(T * .5 + k) * .3, c * 6, -c * 1.4)); s.scale.setScalar(.8 + c * 3.2); s.material.opacity = Math.sin(Math.PI * c) * .5 * (1 - .55 * nuitF); s.material.color.setRGB(1, 1, 1).lerp(fumeeNuit, nuitF); });
   const x = { tp: tr.p, av: dirAngle(tr.h), lat: latAngle(tr.h), vp: vp.p, vh: vp.h, tv: vieux.tt.localToWorld(Vx(0, 0, 0)), tf: fille.tt.localToWorld(Vx(0, 0, 0)) };
   filmerS(T, x);
   const foyer = T < 20 ? Vx(-50, 0, 0) : T < P4 + 2 ? tr.p : T < P7 ? surSol(C0.clone().lerp(P_PIED, .4)) : T < P8 ? tr.p : surSol(Vx(42, 0, 3));

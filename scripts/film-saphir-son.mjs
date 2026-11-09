@@ -5,7 +5,8 @@ import { writeFileSync } from 'node:fs';
 
 const TAUX = 44100;
 
-export function fabriquerSonSaphir(chemin, duree, son = {}) {
+// repliques = [[début, durée]...] : le fond (vent, clochette, chiens) s'efface pendant que le vieil homme parle.
+export function fabriquerSonSaphir(chemin, duree, son = {}, repliques = []) {
   const { vitesse = [], vent = [[0, 1]], coeur = [], souffles = [], notes = [] } = son;
   const n = Math.round(duree * TAUX), g = new Float32Array(n), d = new Float32Array(n);
   let graine = 2026; const hasard = () => ((graine = (graine * 16807) % 2147483647) / 2147483647) * 2 - 1;
@@ -57,6 +58,9 @@ export function fabriquerSonSaphir(chemin, duree, son = {}) {
   }
   /* Grand espace : quelques échos lointains */
   for (const [r, a] of [[.23, .25], [.41, .17], [.67, .1]]) { const k = Math.round(r * TAUX); for (let i = n - 1; i >= k; i--) { g[i] += d[i - k] * a * .5; d[i] += g[i - k] * a * .5; } }
+  /* Sous les répliques : le fond descend à 30 % (-10 dB), avec 0,4 s d'entrée et de sortie */
+  for (const [t0, dt] of repliques) { const a = Math.max(0, Math.round((t0 - .6) * TAUX)), b = Math.min(n, Math.round((t0 + dt + .8) * TAUX));
+    for (let i = a; i < b; i++) { const t = i / TAUX, k = ss(t0 - .6, t0 - .2, t) * (1 - ss(t0 + dt + .4, t0 + dt + .8, t)), f = 1 - .7 * k; g[i] *= f; d[i] *= f; } }
   let max = 0; for (let i = 0; i < n; i++) max = Math.max(max, Math.abs(g[i]), Math.abs(d[i]));
   const fois = .8 / max;
   const buf = Buffer.alloc(44 + n * 4);

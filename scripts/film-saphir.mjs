@@ -106,11 +106,14 @@ if (mode === 'controle') {
   }
 
   const fond = path.join(TRAVAIL, `_son-${partie}.wav`);
-  fabriquerSonSaphir(fond, FIN, son);
+  const durees = JSON.parse(DUREES);
+  fabriquerSonSaphir(fond, FIN, son, clips.map(([id, t]) => [t, durees[id] ?? 2]));
   const entrees = ['-i', muet, '-i', fond], filtres = ['[1:a]aresample=44100,volume=1[f]'], noms = ['[f]'];
   clips.forEach(([id, t], i) => {
     const w = path.join(DOSSIER_VOIX, id + '.wav'); if (!existsSync(w)) throw new Error(w);
-    entrees.push('-i', w); filtres.push(`[${i + 2}:a]aresample=44100,aformat=channel_layouts=stereo,adelay=${Math.round(t * 1000)}:all=1[v${i}]`); noms.push(`[v${i}]`);
+    /* les voix sortent très bas (crête vers -14 dB) : on amène chaque réplique à -3 dB de crête */
+    const crete = Number((spawnSync('ffmpeg', ['-hide_banner', '-i', w, '-af', 'volumedetect', '-f', 'null', '-'], { encoding: 'utf8' }).stderr.match(/max_volume: (-?[\d.]+) dB/) || [0, -3])[1]);
+    entrees.push('-i', w); filtres.push(`[${i + 2}:a]aresample=44100,aformat=channel_layouts=stereo,volume=${(-3 - crete).toFixed(1)}dB,adelay=${Math.round(t * 1000)}:all=1[v${i}]`); noms.push(`[v${i}]`);
   });
   filtres.push(`${noms.join('')}amix=inputs=${noms.length}:normalize=0:duration=longest,atrim=0:${FIN},alimiter=limit=0.95[a]`);
   const finale = path.join(SORTIE, P.nom + '.mp4');
