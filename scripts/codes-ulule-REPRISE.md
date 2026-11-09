@@ -1,6 +1,6 @@
 # Reprise : codes Ulule (contreparties à activer sur eleveai.fr/code)
 
-État au 08/11/2026. Commits `2540ac7a` (construction) et `f49c9054` (3 mois, classe 30) ; la session Ulule a
+État au 09/11/2026. Commits `2540ac7a` (construction) et `f49c9054` (3 mois, classe 30) ; la session Ulule a
 ajouté la durée de 3 mois dans `e6ab665d`. **Rien n'est poussé** (push du soir par le chef d'orchestre),
 **le SQL n'est pas exécuté**. On attend qu'Ulule accepte le projet (lancement prévu le 24/11).
 
@@ -18,8 +18,9 @@ ajouté la durée de 3 mois dans `e6ab665d`. **Rien n'est poussé** (push du soi
 
 ## Grille Ulule (de la session Ulule)
 
-4,95 € = 1 mois, 12 € = 3 mois, 22 € = 6 mois, 39 € = 1 an, chacune aussi « à offrir » ;
-licence classe 60 € = 30 élèves, 1 an.
+Saisie sur Ulule le 09/11 : 4,95 € = 1 mois, 12 € = 3 mois, 22 € = 6 mois, 29 € = 1 an (50 premiers),
+39 € = 1 an, 60 € = licence classe 30 élèves 1 an, 69 € = duo (2 codes d'un an), 99 € = 1 an + 2 visios.
+Pas de « à offrir » séparé : le duo en tient lieu. Correspondance code par contrepartie : procédure, étape 3.
 
 ## Choix faits, à ne pas défaire
 
@@ -41,7 +42,7 @@ licence classe 60 € = 30 élèves, 1 an.
 
 ## Reste à faire (rien d'urgent)
 
-1. L'avis de Frédéric sur la carte cadeau (exemples dans `docs/codes-ulule/cartes/exemples/`).
+1. ✅ Carte cadeau validée par Frédéric le 09/11 (« on la garde »), telle que dans `docs/codes-ulule/cartes/exemples/`.
 2. Quand Ulule accepte : suivre `scripts/codes-ulule-mise-en-ligne.md` (SQL, essai en ligne).
 3. Après la collecte : lots de codes, cartes, envoi aux contributeurs.
 4. Non testé faute de tables en base : la vraie connexion et l'écriture Supabase (étape 5 de la procédure).

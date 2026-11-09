@@ -18,10 +18,26 @@ Aucune variable Vercel à ajouter. `/code` ne dépend pas de `VENTE.ouverte` : U
 
 ## 3. Après la collecte : un lot de codes par contrepartie
 
+Les 8 contreparties saisies sur Ulule le 09/11 (les nombres ci-dessous sont des exemples : prendre
+ceux de l'export Ulule) :
+
+| Contrepartie | Codes à créer |
+|---|---|
+| 4,95 € : 1 mois | 1 code `--duree 1 --type famille` |
+| 12 € : 3 mois | 1 code `--duree 3 --type famille` |
+| 22 € : 6 mois | 1 code `--duree 6 --type famille` |
+| 29 € : 1 an (50 premiers) | 1 code `--duree 12 --type famille` |
+| 39 € : 1 an | 1 code `--duree 12 --type famille` |
+| 60 € : licence classe | 1 code `--duree 12 --type classe --eleves 30` |
+| 69 € : duo | **2 codes** `--duree 12 --type cadeau` (un à garder, un à offrir, avec carte) |
+| 99 € : 1 an + 2 visios | 1 code `--duree 12 --type famille` ; noter la famille pour les visios (janvier, avril 2027) |
+
 ```
-node scripts/codes-ulule.mjs --nombre 40 --duree 1 --type famille --lot ulule-famille-1m
-node scripts/codes-ulule.mjs --nombre 20 --duree 3 --type famille --lot ulule-famille-3m
-node scripts/codes-ulule.mjs --nombre 15 --duree 12 --type cadeau --lot ulule-cadeau-1an
+node scripts/codes-ulule.mjs --nombre 40 --duree 1 --type famille --lot ulule-1m
+node scripts/codes-ulule.mjs --nombre 20 --duree 3 --type famille --lot ulule-3m
+node scripts/codes-ulule.mjs --nombre 15 --duree 6 --type famille --lot ulule-6m
+node scripts/codes-ulule.mjs --nombre 50 --duree 12 --type famille --lot ulule-1an
+node scripts/codes-ulule.mjs --nombre 20 --duree 12 --type cadeau --lot ulule-duo
 node scripts/codes-ulule.mjs --nombre 1 --duree 12 --type classe --eleves 30 --lot ulule-classe-college-x
 ```
 
@@ -29,10 +45,10 @@ Chaque commande écrit `docs/codes-ulule/<lot>.csv` (pour l'envoi) et `<lot>.sql
 Ou ajouter `--inserer` : les codes partent directement dans Supabase.
 ⛔ Un code n'existe qu'une fois inséré : coller le `.sql` AVANT d'envoyer le CSV.
 
-## 4. Les cartes « à offrir »
+## 4. Les cartes « à offrir » (carte validée par Frédéric le 09/11)
 
 ```
-python scripts/carte-cadeau-code.py --csv docs/codes-ulule/ulule-cadeau-1an.csv
+python scripts/carte-cadeau-code.py --csv docs/codes-ulule/ulule-duo.csv
 ```
 
 Une carte PNG par code (A6, 300 ppp) et un PDF du lot, dans `docs/codes-ulule/cartes/`.
