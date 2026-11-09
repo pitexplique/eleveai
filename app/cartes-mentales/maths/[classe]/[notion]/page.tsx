@@ -306,6 +306,10 @@ function decouper(micros: string[], remplie: boolean): { faces: Face[]; verso: b
 // feuille posée sur la page ; à l'impression, la page elle-même. Seules les
 // faces qui en suivent une autre forcent un saut de page (pas de page blanche
 // à la fin).
+// ⛔ 09/11 — à l'écran, une feuille plus étroite que l'A4 (panneau, tablette,
+// téléphone) faisait déborder le texte des bulles : elle rétrécissait, pas le
+// texte. Elle garde donc au moins 210 mm (la largeur imprimée, celle que
+// l'audit vérifie) et la page défile sur le côté si l'écran est plus étroit.
 const FEUILLE =
   "flex flex-col bg-white aspect-[210/297] min-w-[210mm] p-[4.76%] print:min-w-0 shadow-md ring-1 ring-slate-200 print:aspect-auto print:h-[277mm] print:p-0 print:shadow-none print:ring-0 break-inside-avoid";
 const SUIVANTE = "mt-8 print:mt-0 print:break-before-page";
@@ -314,10 +318,6 @@ function Encadre({ id, titre, ecartMm, className }: { id: string; titre: string;
   return (
     <section className={`flex min-h-0 flex-col ${className}`}>
       <h2 className="text-base font-black">
-// ⛔ 09/11 — à l'écran, une feuille plus étroite que l'A4 (panneau, tablette,
-// téléphone) faisait déborder le texte des bulles : elle rétrécissait, pas le
-// texte. Elle garde donc au moins 210 mm (la largeur imprimée, celle que
-// l'audit vérifie) et la page défile sur le côté si l'écran est plus étroit.
         <TexteMaths texte={titre} />
       </h2>
       <div className="mt-1.5 flex min-h-0 flex-1 flex-col rounded-xl border-2 border-slate-400 px-3 pb-2 pt-0">
