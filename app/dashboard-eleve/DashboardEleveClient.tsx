@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { useEleve } from "@/context/EleveContext";
-import ClassementAvis from "@/components/points/ClassementAvis";
+import CarteMesNotions from "./CarteMesNotions";
 import CartePassions from "./CartePassions";
 import CarteAvatar from "./CarteAvatar";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
@@ -86,48 +86,6 @@ type RevisionFocusRow = {
   matiere: string;
 };
 
-type ResultatEnglishMaths = {
-  id: string;
-  code_etablissement: string;
-  code_utilisateur: string;
-  nom: string | null;
-  niveau: string | null;
-  jour: number | null;
-  theme: string | null;
-  score: number;
-  total: number;
-  pourcentage: number | null;
-  created_at: string;
-};
-
-type ResultatDictee = {
-  id: string;
-  code_etablissement: string;
-  code_utilisateur: string;
-  nom: string | null;
-  classe: string | null;
-  score: number;
-  total: number;
-  pourcentage: number | null;
-  details: unknown;
-  created_at: string;
-};
-
-// Un rituel de langue (anglais du jour, espagnol du jour…) — table partagée
-// resultats_langue_du_jour, la colonne `langue` distingue.
-type ResultatLangue = {
-  id: string;
-  code_etablissement: string;
-  code_utilisateur: string;
-  nom: string | null;
-  langue: string;
-  niveau: string | null;
-  score: number;
-  total: number;
-  pourcentage: number | null;
-  created_at: string;
-};
-
 type ResultatDefiJour = {
   id: string;
   code_etablissement: string;
@@ -196,18 +154,6 @@ function getPct(score: number, total: number) {
   return Math.round((Number(score) / Number(total)) * 100);
 }
 
-const MATIERE_LABELS: Record<string, string> = {
-  maths: "🔢 Maths",
-  francais: "📚 Français",
-  english: "🇬🇧 English",
-  espagnol: "🇪🇸 Espagnol",
-};
-
-function matiereLabel(matiere: string | null | undefined) {
-  if (!matiere) return "—";
-  return MATIERE_LABELS[matiere] ?? matiere;
-}
-
 function getBest<T extends { score: number; total: number }>(items: T[]) {
   if (items.length === 0) return null;
 
@@ -242,9 +188,6 @@ export default function DashboardEleveClient() {
     ResultatDefiJour[]
   >([]);
 
-  const [resultatsEnglish, setResultatsEnglish] = useState<ResultatEnglishMaths[]>([]);
-  const [resultatsDictee, setResultatsDictee] = useState<ResultatDictee[]>([]);
-  const [resultatsLangue, setResultatsLangue] = useState<ResultatLangue[]>([]);
   const [resultatsTutor, setResultatsTutor] = useState<ResultatTutor[]>([]);
   const [pointsAvis, setPointsAvis] = useState(0);
   const [messagesProf, setMessagesProf] = useState<MessageProf[]>([]);
@@ -297,12 +240,7 @@ export default function DashboardEleveClient() {
         // Toutes matières confondues, triées par date : resultatsParcours[0]
         // est bien le dernier parcours, quelle que soit la matière.
         setResultatsParcours(
-          ([
-            ...(r.parcours_maths ?? []),
-            ...(r.parcours_english ?? []),
-            ...(r.parcours_espagnol ?? []),
-            ...(r.parcours_francais ?? []),
-          ] as ResultatParcours[]).sort(
+          ([...(r.parcours_maths ?? [])] as ResultatParcours[]).sort(
             (a, b) =>
               new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
           )
@@ -312,15 +250,20 @@ export default function DashboardEleveClient() {
           (r.calcul_rapide ?? []) as ResultatCalculRapide[]
         );
 
-        setResultatsDefisJour((r.defis_jour ?? []) as ResultatDefiJour[]);
+        // Tableau de bord élève : MATHS SEULEMENT (09/11/2026, Frédéric :
+        // « on se concentre que sur les maths ») — plus de français, d'anglais,
+        // d'espagnol, de dictée ni de rituels de langue.
+        setResultatsDefisJour(
+          ((r.defis_jour ?? []) as ResultatDefiJour[]).filter(
+            (d) => !d.matiere || d.matiere === "maths"
+          )
+        );
 
-        setResultatsEnglish((r.english_maths ?? []) as ResultatEnglishMaths[]);
-
-        setResultatsDictee((r.dictee ?? []) as ResultatDictee[]);
-
-        setResultatsLangue((r.langue_du_jour ?? []) as ResultatLangue[]);
-
-        setResultatsTutor((r.tutor ?? []) as ResultatTutor[]);
+        setResultatsTutor(
+          ((r.tutor ?? []) as ResultatTutor[]).filter(
+            (t) => !t.matiere || t.matiere === "maths"
+          )
+        );
 
         setPointsAvis(typeof data.pointsAvis === "number" ? data.pointsAvis : 0);
       } catch (err) {
@@ -376,43 +319,7 @@ export default function DashboardEleveClient() {
   );
 
   const dernierDefiJour = resultatsDefisJour[0] ?? null;
-  const meilleurDefiJour = useMemo(
-    () => getBest(resultatsDefisJour),
-    [resultatsDefisJour]
-  );
 
-  const dernierEnglish = resultatsEnglish[0] ?? null;
-  const meilleurEnglish = useMemo(() => getBest(resultatsEnglish), [resultatsEnglish]);
-
-  const dernierDictee = resultatsDictee[0] ?? null;
-  const meilleurDictee = useMemo(() => getBest(resultatsDictee), [resultatsDictee]);
-
-  // Les rituels de langue, résumés PAR LANGUE : sessions, jours distincts
-  // (la « série »), mots pratiqués (somme des totaux), dernier score.
-  const rituelsLangue = useMemo(() => {
-    const CONFIG = [
-      { langue: "anglais", label: "L'anglais du jour", drapeau: "🇬🇧", href: "/anglais-du-jour" },
-      { langue: "espagnol", label: "L'espagnol du jour", drapeau: "🇪🇸", href: "/espagnol-du-jour" },
-    ];
-    return CONFIG.map((c) => {
-      const lignes = resultatsLangue
-        .filter((r) => r.langue === c.langue)
-        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
-      const jours = new Set(lignes.map((r) => r.created_at.slice(0, 10)));
-      const motsPratiques = lignes.reduce((s, r) => s + (Number(r.total) || 0), 0);
-      const best = getBest(lignes);
-      return {
-        ...c,
-        sessions: lignes.length,
-        jours: jours.size,
-        motsPratiques,
-        dernier: lignes[0] ?? null,
-        meilleurPct: best ? getPct(best.score, best.total) : null,
-      };
-    });
-  }, [resultatsLangue]);
-
-  const aUnRituelLangue = resultatsLangue.length > 0;
 
   const dernierTutor = resultatsTutor[0] ?? null;
   const meilleurTutor = useMemo(
@@ -442,9 +349,6 @@ export default function DashboardEleveClient() {
     resultatsParcours.length +
     resultatsCalculRapide.length +
     resultatsDefisJour.length +
-    resultatsEnglish.length +
-    resultatsDictee.length +
-    resultatsLangue.length +
     resultatsTutor.length;
 
   if (!eleve) {
@@ -586,7 +490,7 @@ export default function DashboardEleveClient() {
                   🎯 Tu veux des exercices pour travailler ? C&apos;est ici !
                 </h2>
                 <p className="mt-2 max-w-3xl text-sm font-semibold leading-relaxed text-slate-600">
-                  Le Coach te propose des milliers d&apos;exercices corrigés,
+                  Le Coach de maths te propose des milliers d&apos;exercices corrigés,
                   du CP à la Terminale. Choisis ta classe, une notion, et
                   entraîne-toi à ton rythme — chaque exercice est corrigé pas à
                   pas. Tes scores s&apos;afficheront ensuite sur cette page.
@@ -597,12 +501,6 @@ export default function DashboardEleveClient() {
                     className="rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-indigo-500"
                   >
                     🔢 Exercices de maths
-                  </Link>
-                  <Link
-                    href="/coach-ia/francais"
-                    className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-sky-500"
-                  >
-                    📚 Exercices de français
                   </Link>
                   <Link
                     href="/parcours"
@@ -662,6 +560,8 @@ export default function DashboardEleveClient() {
               </div>
             )}
 
+            {eleve?.token ? <CarteMesNotions token={eleve.token} /> : null}
+
             {/* ⛔ LA TUILE « MES POINTS AVIS » N'EST PLUS ICI (29/08/2026).
                 Frédéric : « enlève avis et mets-le que en bas ». Elle ouvrait
                 la rangée de statistiques — première tuile, la seule en dégradé
@@ -670,7 +570,7 @@ export default function DashboardEleveClient() {
                 page, avec le bouton.
                 ⚠️ La grille passe de six colonnes à CINQ : sans ça, les cinq
                 tuiles restantes laissaient un trou en bout de rangée. */}
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            <div className="mt-6 grid gap-4 md:grid-cols-3 xl:grid-cols-7">
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-emerald-100">
                 <p className="text-sm font-black uppercase text-emerald-700">
                   Dernière évaluation
@@ -684,7 +584,6 @@ export default function DashboardEleveClient() {
 
                 {dernierParcours ? (
                   <p className="mt-2 text-sm font-bold text-slate-500">
-                    {matiereLabel(dernierParcours.matiere)} ·{" "}
                     {formatDate(dernierParcours.created_at)}
                   </p>
                 ) : null}
@@ -703,7 +602,6 @@ export default function DashboardEleveClient() {
 
                 {meilleurParcours ? (
                   <p className="mt-2 text-sm font-bold text-slate-500">
-                    {matiereLabel(meilleurParcours.matiere)} ·{" "}
                     {getPct(meilleurParcours.score, meilleurParcours.total)} %
                     de réussite
                   </p>
@@ -782,42 +680,6 @@ export default function DashboardEleveClient() {
                 ) : null}
               </div>
 
-              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-cyan-100">
-                <p className="text-sm font-black uppercase text-cyan-700">
-                  Dernier English
-                </p>
-                <p className="mt-3 text-3xl font-black">
-                  {dernierEnglish ? `${dernierEnglish.score} / ${dernierEnglish.total}` : "—"}
-                </p>
-                {dernierEnglish ? (
-                  <p className="mt-2 text-sm font-bold text-slate-500">
-                    {dernierEnglish.theme ?? `Jour ${dernierEnglish.jour}`}
-                  </p>
-                ) : null}
-              </div>
-
-              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-rose-100">
-                <p className="text-sm font-black uppercase text-rose-700">
-                  Dernière dictée
-                </p>
-                <p className="mt-3 text-3xl font-black">
-                  {dernierDictee ? `${dernierDictee.score} / ${dernierDictee.total}` : "—"}
-                </p>
-                {dernierDictee ? (
-                  <p className="mt-2 text-sm font-bold text-slate-500">
-                    {formatDate(dernierDictee.created_at)}
-                    {meilleurDictee
-                      ? ` · record ${meilleurDictee.score}/${meilleurDictee.total}`
-                      : ""}
-                  </p>
-                ) : (
-                  <p className="mt-2 text-sm font-bold text-slate-500">
-                    <Link href="/dictee-du-jour" className="text-rose-700 underline underline-offset-2">
-                      Faire la dictée du jour →
-                    </Link>
-                  </p>
-                )}
-              </div>
 
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-purple-100">
                 <p className="text-sm font-black uppercase text-purple-700">
@@ -827,93 +689,12 @@ export default function DashboardEleveClient() {
                 <p className="mt-3 text-3xl font-black">{totalActivites}</p>
 
                 <p className="mt-2 text-sm font-bold text-slate-500">
-                  Évaluations + calcul + défis + English + dictée + langues
+                  Évaluations + calcul + défis + Coach
                 </p>
               </div>
             </div>
 
-            {/* ── RITUELS DE LANGUE — l'anglais du jour, l'espagnol du jour.
-                Table partagée resultats_langue_du_jour. Toujours affiché : si
-                l'élève n'a rien fait, il voit l'invitation à commencer. ────── */}
-            <div className="mt-6 rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-indigo-100">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 className="text-2xl font-black text-slate-900">
-                  🗓️ Tes rituels de langue
-                </h2>
-                <span className="text-sm font-bold text-slate-400">5 mots par jour</span>
-              </div>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                {rituelsLangue.map((r) => (
-                  <div
-                    key={r.langue}
-                    className="rounded-3xl border border-indigo-100 bg-indigo-50/40 p-4"
-                  >
-                    <div className="flex items-center justify-between">
-                      <p className="text-base font-black text-slate-900">
-                        <span aria-hidden>{r.drapeau}</span> {r.label}
-                      </p>
-                      {r.jours > 0 && (
-                        <span className="rounded-full bg-orange-100 px-2.5 py-1 text-xs font-black text-orange-700">
-                          🔥 {r.jours} jour{r.jours > 1 ? "s" : ""}
-                        </span>
-                      )}
-                    </div>
 
-                    {r.dernier ? (
-                      <>
-                        <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-                          <div>
-                            <p className="text-2xl font-black text-indigo-700">
-                              {r.dernier.score}/{r.dernier.total}
-                            </p>
-                            <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
-                              Dernier
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-2xl font-black text-slate-800">{r.motsPratiques}</p>
-                            <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
-                              Mots vus
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-2xl font-black text-emerald-600">
-                              {r.meilleurPct ?? 0}%
-                            </p>
-                            <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
-                              Record
-                            </p>
-                          </div>
-                        </div>
-                        <p className="mt-2 text-xs font-bold text-slate-400">
-                          {r.sessions} session{r.sessions > 1 ? "s" : ""} · dernier{" "}
-                          {formatDate(r.dernier.created_at)}
-                        </p>
-                        <Link
-                          href={r.href}
-                          className="mt-3 inline-block text-sm font-black text-indigo-700 underline underline-offset-2"
-                        >
-                          Continuer →
-                        </Link>
-                      </>
-                    ) : (
-                      <p className="mt-3 text-sm font-semibold text-slate-500">
-                        Pas encore commencé —{" "}
-                        <Link href={r.href} className="text-indigo-700 underline underline-offset-2">
-                          fais tes 5 premiers mots →
-                        </Link>
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {eleve?.token ? (
-              <div className="mt-6">
-                <ClassementAvis token={eleve.token} />
-              </div>
-            ) : null}
 
             <div className="mt-6 grid gap-6 xl:grid-cols-2">
               <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
@@ -921,26 +702,16 @@ export default function DashboardEleveClient() {
                   <div>
                     <h2 className="text-2xl font-black">Évaluation annuelle</h2>
                     <p className="mt-1 text-sm font-semibold text-slate-600">
-                      Historique de toutes tes évaluations : maths, français, English, espagnol.
+                      Historique de tes évaluations de maths.
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      { href: "/parcours", label: "🔢 Maths" },
-                      { href: "/parcours-francais", label: "📚 Français" },
-                      { href: "/parcours-english-maths", label: "🇬🇧 English" },
-                      { href: "/parcours-espagnol", label: "🇪🇸 Espagnol" },
-                    ].map((l) => (
-                      <Link
-                        key={l.href}
-                        href={l.href}
-                        className="rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-black text-white shadow-lg hover:bg-emerald-500"
-                      >
-                        {l.label}
-                      </Link>
-                    ))}
-                  </div>
+                  <Link
+                    href="/parcours"
+                    className="rounded-2xl bg-emerald-600 px-4 py-2 text-sm font-black text-white shadow-lg hover:bg-emerald-500"
+                  >
+                    🔢 Faire mon évaluation
+                  </Link>
                 </div>
 
                 {resultatsParcours.length === 0 ? (
@@ -953,8 +724,7 @@ export default function DashboardEleveClient() {
                       <thead>
                         <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
                           <th className="px-4 py-3 font-black">Date</th>
-                          <th className="px-4 py-3 font-black">Matière</th>
-                          <th className="px-4 py-3 font-black">Classe</th>
+                                                    <th className="px-4 py-3 font-black">Classe</th>
                           <th className="px-4 py-3 font-black">Score</th>
                           <th className="px-4 py-3 font-black">Réussite</th>
                         </tr>
@@ -973,9 +743,6 @@ export default function DashboardEleveClient() {
                                 {formatDate(r.created_at)}
                               </td>
 
-                              <td className="px-4 py-3 font-bold">
-                                {matiereLabel(r.matiere)}
-                              </td>
 
                               <td className="px-4 py-3 font-bold">
                                 {(r.classe ?? r.niveau ?? "—").toString().toUpperCase()}
@@ -1216,75 +983,6 @@ export default function DashboardEleveClient() {
                 )}
               </div>
 
-              <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100 xl:col-span-2">
-                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <h2 className="text-2xl font-black">English Maths</h2>
-                    <p className="mt-1 text-sm font-semibold text-slate-600">
-                      Historique des mini-défis English Maths.
-                    </p>
-                  </div>
-                  <Link
-                    href="/english-maths"
-                    className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500"
-                  >
-                    Refaire un défi English
-                  </Link>
-                </div>
-
-                {resultatsEnglish.length === 0 ? (
-                  <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
-                    Aucun défi English enregistré pour le moment.
-                  </div>
-                ) : (
-                  <div className="overflow-x-auto">
-                    <table className="w-full min-w-[560px] border-collapse text-left text-sm">
-                      <thead>
-                        <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
-                          <th className="px-4 py-3 font-black">Date</th>
-                          <th className="px-4 py-3 font-black">Jour</th>
-                          <th className="px-4 py-3 font-black">Thème</th>
-                          <th className="px-4 py-3 font-black">Score</th>
-                          <th className="px-4 py-3 font-black">Réussite</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {resultatsEnglish.map((r) => {
-                          const pct = getPct(r.score, r.total);
-                          return (
-                            <tr key={r.id} className="border-b border-slate-100 hover:bg-cyan-50/60">
-                              <td className="px-4 py-3 font-bold text-slate-700">
-                                {formatDate(r.created_at)}
-                              </td>
-                              <td className="px-4 py-3 font-bold">
-                                {r.jour ? `Jour ${r.jour}` : "—"}
-                              </td>
-                              <td className="px-4 py-3 font-bold">
-                                {r.theme ?? "—"}
-                              </td>
-                              <td className="px-4 py-3 font-black">
-                                {r.score} / {r.total}
-                              </td>
-                              <td className="px-4 py-3">
-                                <span className={[
-                                  "rounded-full px-3 py-1 font-black",
-                                  pct >= 80
-                                    ? "bg-emerald-100 text-emerald-800"
-                                    : pct >= 50
-                                      ? "bg-amber-100 text-amber-800"
-                                      : "bg-red-100 text-red-800",
-                                ].join(" ")}>
-                                  {pct} %
-                                </span>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
@@ -1322,19 +1020,6 @@ export default function DashboardEleveClient() {
                 Coach de maths
               </Link>
 
-              <Link
-                href="/english-maths"
-                className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500"
-              >
-                English Maths
-              </Link>
-
-              <Link
-                href="/dictee-du-jour"
-                className="rounded-2xl bg-rose-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-rose-500"
-              >
-                Dictée du jour
-              </Link>
             </div>
 
           </>
@@ -1353,7 +1038,7 @@ export default function DashboardEleveClient() {
               — le bloc des réponses de l'équipe, ouvert avant les résultats.
 
             ⭐ RIEN N'EST SUPPRIMÉ, tout est réuni ici, après les outils — le
-            coach, le parcours, le calcul rapide, la dictée. C'est-à-dire au
+            coach, le parcours, le calcul rapide. C'est-à-dire au
             moment où l'élève a effectivement quelque chose à dire.
 
             ⚠️ ET C'EST HORS DU TERNAIRE `loading`, volontairement : une
