@@ -53,6 +53,8 @@ Pour regarder : `python scripts/ti-margo-planche.py <dossier ou mp4> <planche.pn
 ## Les règles
 
 - Les règles des vidéos sont dans `manim/REGLES.md`, section « Les nouveaux shorts sont en DESSIN ANIMÉ ».
+- **⛔⛔ Shorts en dessin animé : 6e, 5e et classes en dessous seulement** (09/11). À partir de la 4e, le short se fait en Manim.
+- **⛔ Question-pause : la bonne réponse tirée au hasard entre A, B et C, pas toujours B** (09/11), voir `manim/REGLES.md`, section « QUESTIONS-PAUSES ».
 - **Un décor, un geste ou un objet qui sert à deux séries remonte dans `short.js` ou `personnage.js`**, sans changer le rendu des films déjà faits. Sinon, il reste dans le fichier de la série.
 - Deux sessions ne modifient pas `personnage.js` ou `short.js` en même temps : y faire de petits changements, puis contrôler.
 - Tout est écrit à l'instant T : `image(T)` donne toujours la même image.
