@@ -138,3 +138,4 @@ Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent 
   - Impact (476 car., le compteur Ulule affiche déjà 9/500 à vide) : décrochage au collège, surtout en 4e ; 1 500 vidéos, 500 visites/jour ; 3 000 € pour le collège avant le brevet 2027, relu par un étudiant en maths futur professeur, rémunéré ; puis primaire 5 000 €, lycée 8 000 €.
   - Label et certifications : « pas encore de label », programmes officiels (dont 2026), relecture par étudiants futurs professeurs.
   - ODD : cocher le **4 « Éducation de qualité »** seulement.
+  - 09/11, sa demande : l'impact dit aussi que Ti Margo **aide d'abord les élèves en difficulté** et que **« mes classes adorent ! »** (478 car.).
