@@ -74,6 +74,14 @@ Deux codes d'un an au tarif fondateur, pour deux enfants ou pour en offrir un. A
 **60 € · Licence classe, 1 an** *(enseignants, écoles, associations)*
 Le suivi de toute la classe pendant 1 an, jusqu'à 30 élèves (2 € par élève et par an), et le nom de l'école sur le mur des soutiens.
 
+**60 € · Parrainer une classe dans un pays qui manque de moyens** *(09/11, son idée)*
+Une classe de collège, jusqu'à 30 élèves, dans un pays francophone où les élèves et les professeurs n'ont pas les moyens de s'abonner : le suivi de toute la classe pendant 1 an, et les dessins animés projetés en classe. Le collège est choisi avec des enseignants sur place. Des nouvelles de la classe en cours d'année et votre nom sur le mur des soutiens. Une façon de participer à une éducation libre et universelle.
+
+**500 € · Parrainer un collège dans un pays qui manque de moyens** *(10 places)*
+Tout un collège, jusqu'à 10 classes et 300 élèves, suivi pendant 1 an (moins de 2 € par élève), avec une visio pour lancer le projet avec ses professeurs. Des nouvelles du collège en cours d'année et votre nom, ou celui de votre entreprise, sur le mur des soutiens.
+
+Livraison du parrainage : un code `--type classe` par classe (`--eleves 30`), remis au professeur référent du collège choisi. ⚠️ Avant le lancement : avoir au moins un ou deux collèges partenaires prêts (contacts d'enseignants francophones : Madagascar, Comores, Sénégal…).
+
 **[1 000 €] · Partenaire** *(entreprises, mairies, comités d'entreprise)*
 Votre logo sur la page des partenaires et **10 abonnements famille d'un an** à offrir (salariés, familles en difficulté…).
 
