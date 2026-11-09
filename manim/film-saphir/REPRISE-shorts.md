@@ -16,3 +16,12 @@ Demande de Frédéric le 09/11 : « fais deux shorts de l'épisode 1 puis de l'�
 - Plan du centre : hors du cercle, un loup de dos bouche l'image ; dedans (rayon 4,2, angle −2,2 rad de `gdir`) c'est propre.
 - Gros plan des yeux : la chapka qu'il tient entre par le haut à gauche si le champ s'ouvre ; viser plus bas.
 - La planche de contrôle se pose image par image (pas besoin d'une grille pleine).
+
+## Épisode 2 — fait le 09/11
+56 s, 9 extraits : titre au feu, réveil (yeux saphir, écharpe), page des calculs (8 loups, 360° ÷ 8 = 45°, r ≈ 4 pas, P = 2 × π × r), le compas, « Hier, les loups… » et les huit rayons, « Et le milieu, c'était toi », les loups immobiles (téléobjectif depuis la fenêtre), « Les maths, ça sert simplement… », le cristal à six branches, carton « SAPHIR — à suivre » + énigme « Réponds en commentaire ! ».
+Publication (sur ordre de Frédéric relayé le 09/11) : `manim/sorties/ti-margo/saphir-short-episode-2/` (MP4 + `publication.md`, `Validé : oui`) ; c'est la session de l'épisode 2 qui programme YouTube.
+
+Pièges de l'épisode 2 :
+- Le crayon et la règle posés à côté du cahier entrent dans le cadre serré des calculs : `short-episode2.js` les pousse de 0,7 m pendant ce seul passage.
+- Vu d'en haut, le compas est caché par sa main et par sa tête : filmer depuis l'autre côté de la table (on voit la petite regarder le cercle).
+- Dehors, depuis la fenêtre : caméra à x = 6,15 (au-delà du montant central), sinon le montant coupe l'image.

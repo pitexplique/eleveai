@@ -60,9 +60,10 @@ const DUREES = existsSync(dureesVoix) ? readFileSync(dureesVoix, 'utf8') : '{}';
 /* La scène de l'épisode, lue sans être modifiée sur le disque : la caméra passe par window.cameraShort,
    et les plans verticaux sont collés dans le bloc de la scène (ils voient ses noms), juste avant sa première image. */
 let scene = P.fichiers.map((f) => readFileSync(path.join(RACINE, 'prototypes/film-saphir', f), 'utf8')).join('\n');
-const appel = scene.match(/filmerS?\(T, ?(\w+)\);/);
-if (!appel) throw new Error("Appel de la caméra introuvable dans la scène (filmerS(T, x) ou filmer(...))");
-scene = scene.replace(appel[0], `(window.cameraShort ? window.cameraShort(T, ${appel[1]}) : ${appel[0].replace(/;$/, '')});`);
+/* l'appel filmerS(T, x) ou filmerS(T, { ... }) : son argument n'est évalué qu'une fois */
+const appel = scene.match(/filmerS\(T, ?([^;]+)\);/);
+if (!appel) throw new Error('Appel de la caméra introuvable dans la scène (filmerS(T, …);)');
+scene = scene.replace(appel[0], `((X) => window.cameraShort ? window.cameraShort(T, X) : filmerS(T, X))(${appel[1]});`);
 const derniere = scene.lastIndexOf('window.film.image(0);');
 if (derniere < 0) throw new Error('Fin du bloc de la scène introuvable (window.film.image(0);)');
 const plans = readFileSync(path.join(RACINE, 'prototypes/film-saphir', P.short), 'utf8');
