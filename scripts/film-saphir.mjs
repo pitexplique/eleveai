@@ -2,6 +2,7 @@
 //   node scripts/film-saphir.mjs <partie> controle 3 12 30   → une image par instant + _planche.jpg, dans manim/film-saphir/controle/<partie>
 //   node scripts/film-saphir.mjs <partie> film               → le MP4, avec le son
 //   node scripts/film-saphir.mjs <partie> mix                → refait seulement le son (l'image muette existe déjà)
+//   node scripts/film-saphir.mjs <partie> brouillon          → le MP4 en basse définition (960 × 540), plus rapide, pour relire avant le vrai rendu
 //   Les voix d'une partie : node scripts/film-saphir-voix.mjs <partie>. Mode d'emploi : manim/film-noel/BIBLE.md
 // Le modèle de Ti Margo est repris de prototypes/ti-margo-3d.html, avec un rendu feutrine.
 import { chromium } from 'playwright-core';
@@ -15,7 +16,8 @@ const TRAVAIL = path.join(RACINE, 'manim/film-saphir');
 const SORTIE = path.join(RACINE, 'manim/sorties/saphir');
 const IPS = 12;
 const PARTIES = {
-  episode1: { fichiers: ['../film-noel/commun.js', 'episode1.js'], nom: 'eleveai-saphir-partie-1-episode-1-le-cercle-des-loups', voix: 'episode1' }
+  episode1: { fichiers: ['../film-noel/commun.js', 'episode1.js'], nom: 'eleveai-saphir-partie-1-episode-1-le-cercle-des-loups', voix: 'episode1' },
+  episode2: { fichiers: ['../film-noel/commun.js', 'episode2.js'], nom: 'eleveai-saphir-partie-1-episode-2-le-milieu-du-cercle', voix: 'episode2' }
 };
 const [partie, mode, ...reste] = process.argv.slice(2);
 const P = PARTIES[partie]; if (!P) throw new Error('Partie inconnue : ' + partie + ' (au choix : ' + Object.keys(PARTIES).join(', ') + ')');
@@ -68,7 +70,8 @@ const pagePath = path.join(TRAVAIL, `_page-${partie}.html`);
 writeFileSync(pagePath, html);
 
 const nav = await chromium.launch({ channel: 'chrome', headless: true, args: ['--use-angle=d3d11', '--ignore-gpu-blocklist', '--enable-webgl'] });
-const page = await nav.newPage({ viewport: { width: 1920, height: 1080 } });
+const BROUILLON = mode === 'brouillon';
+const page = await nav.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: BROUILLON ? .5 : 1 });
 page.on('pageerror', (e) => console.error('ERREUR PAGE', e.message));
 page.on('console', (m) => { if (m.type() === 'error') console.error('CONSOLE', m.text()); });
 await page.goto('file:///' + pagePath.replace(/\\/g, '/'));
@@ -91,7 +94,7 @@ if (mode === 'controle') {
   console.log('Contrôle écrit dans', dossier);
 } else {
   const { FIN, clips, son } = await page.evaluate(() => ({ FIN: window.film.FIN, clips: window.film.clips || [], son: window.film.son }));
-  const muet = path.join(TRAVAIL, `_muet-${partie}.mp4`);
+  const muet = path.join(TRAVAIL, `_muet-${partie}${BROUILLON ? '-brouillon' : ''}.mp4`);
   if (mode !== 'mix') {
     const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(IPS), '-c:v', 'mjpeg', '-i', '-',
       '-r', '24', '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-pix_fmt', 'yuv420p', muet], { stdio: ['pipe', 'inherit', 'inherit'] });
@@ -116,7 +119,7 @@ if (mode === 'controle') {
     entrees.push('-i', w); filtres.push(`[${i + 2}:a]aresample=44100,aformat=channel_layouts=stereo,volume=${(-3 - crete).toFixed(1)}dB,adelay=${Math.round(t * 1000)}:all=1[v${i}]`); noms.push(`[v${i}]`);
   });
   filtres.push(`${noms.join('')}amix=inputs=${noms.length}:normalize=0:duration=longest,atrim=0:${FIN},alimiter=limit=0.95[a]`);
-  const finale = path.join(SORTIE, P.nom + '.mp4');
+  const finale = path.join(SORTIE, P.nom + (BROUILLON ? '-brouillon' : '') + '.mp4');
   const r = spawnSync('ffmpeg', ['-y', '-loglevel', 'error', ...entrees, '-filter_complex', filtres.join(';'), '-map', '0:v', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', finale], { stdio: 'inherit' });
   if (r.status !== 0) throw new Error('Mélange du son échoué');
   console.log('FINI', finale);

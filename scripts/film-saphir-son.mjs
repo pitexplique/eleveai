@@ -36,8 +36,8 @@ export function fabriquerSonSaphir(chemin, duree, son = {}, repliques = []) {
     for (let j = 0; j < 1.6 * TAUX && i0 + j < n; j++) { const t = j / TAUX, e = Math.exp(-t * 4.2) * Math.min(1, t * 900) * force;
       const s = (Math.sin(6.2832 * 2093 * t) + .5 * Math.sin(6.2832 * 3140 * t) * Math.exp(-t * 3) + .25 * Math.sin(6.2832 * 5230 * t) * Math.exp(-t * 8)) * e; g[i0 + j] += s * .8; d[i0 + j] += s; }
   }
-  /* Halètement : petits souffles rapides quand les chiens avancent, plus lents à l'arrêt */
-  for (let t0 = 0; t0 < duree; t0 += .33) {
+  /* Halètement : petits souffles rapides quand les chiens avancent, plus lents à l'arrêt (chiens: false = aucun, épisode 2 dans la cabane) */
+  if (son.chiens !== false) for (let t0 = 0; t0 < duree; t0 += .33) {
     const v = vit(t0), f = .006 + .012 * Math.min(1, v); if (v < .05 && (Math.floor(t0 / .33) % 3)) continue;
     const i0 = Math.round(t0 * TAUX); let x = 0;
     for (let j = 0; j < .16 * TAUX && i0 + j < n; j++) { const t = j / TAUX; x += .25 * (hasard() - x); const e = Math.sin(Math.PI * t / .16) ** 2 * f; g[i0 + j] += x * e * 1.2; d[i0 + j] += x * e * .8; }
@@ -56,8 +56,25 @@ export function fabriquerSonSaphir(chemin, duree, son = {}, repliques = []) {
     for (let j = 0; j < 3.2 * TAUX && i0 + j < n; j++) { const t = j / TAUX, e = Math.exp(-t * 1.9) * Math.min(1, t * 300) * .06 * force;
       const s = (Math.sin(6.2832 * f * t) + .3 * Math.sin(6.2832 * f * 2.01 * t) * Math.exp(-t * 3) + .12 * Math.sin(6.2832 * f * 4.2 * t) * Math.exp(-t * 7)) * e; g[i0 + j] += s * (m % 2 ? 1 : .8); d[i0 + j] += s * (m % 2 ? .8 : 1); }
   }
-  /* Grand espace : quelques échos lointains */
-  for (const [r, a] of [[.23, .25], [.41, .17], [.67, .1]]) { const k = Math.round(r * TAUX); for (let i = n - 1; i >= k; i--) { g[i] += d[i - k] * a * .5; d[i] += g[i - k] * a * .5; } }
+  /* Dans la cabane (épisode 2) : feu de bois, crayon sur le papier, pas sur le plancher, petits chocs de bois */
+  const { feu = null, crayon = [], pas = [], toc = [], respire = [] } = son;
+  if (feu) { let r1 = 0, r2 = 0, pop = 0;
+    for (let i = 0; i < n; i++) { const t = i / TAUX, b = hasard(), nv = courbe(feu, t);
+      r1 += .02 * (b - r1); r2 += .02 * (r1 - r2);
+      if (hasard() > .99965) pop = .5 + .5 * Math.abs(hasard()); pop *= .992;
+      const s = r2 * 3 * nv * .5 + (b * pop) * nv * .16; g[i] += s * 1.05; d[i] += s * .9; } }
+  for (const [a, b] of crayon) { let c1 = 0, c2 = 0;
+    for (let i = Math.round(a * TAUX); i < Math.min(n, b * TAUX); i++) { const t = i / TAUX; c1 += .5 * (hasard() - c1); c2 += .12 * (c1 - c2);
+      const e = ss(a, a + .3, t) * (1 - ss(b - .3, b, t)) * (.55 + .45 * Math.abs(Math.sin(t * 11.3) * Math.sin(t * 3.1 + 1))) * .05; g[i] += (c1 - c2) * e; d[i] += (c1 - c2) * e * .8; } }
+  for (const [t0, f = 1] of pas.map(x => [].concat(x))) { const i0 = Math.round(t0 * TAUX);
+    for (let j = 0; j < .18 * TAUX && i0 + j < n; j++) { const t = j / TAUX, e = Math.exp(-t * 30) * Math.min(1, t * 600) * .09 * f, s = Math.sin(6.2832 * (75 - t * 60) * t) * e + hasard() * e * .15; g[i0 + j] += s; d[i0 + j] += s; } }
+  for (const [t0, f = 1] of toc.map(x => [].concat(x))) { const i0 = Math.round(t0 * TAUX);
+    for (let j = 0; j < .3 * TAUX && i0 + j < n; j++) { const t = j / TAUX, e = Math.exp(-t * 26) * Math.min(1, t * 900) * .1 * f, s = (Math.sin(6.2832 * 310 * t) + .4 * Math.sin(6.2832 * 720 * t) * Math.exp(-t * 40)) * e; g[i0 + j] += s; d[i0 + j] += s * .9; } }
+  /* respiration lente (le chien endormi, la petite) : [début, fin, période] */
+  for (const [a, b, per = 3.2] of respire) { let x = 0;
+    for (let i = Math.round(a * TAUX); i < Math.min(n, b * TAUX); i++) { const t = i / TAUX; x += .08 * (hasard() - x); const e = Math.sin(Math.PI * ((t - a) % per) / per) ** 4 * .05 * ss(a, a + 1, t) * (1 - ss(b - 1, b, t)); g[i] += x * e; d[i] += x * e; } }
+  /* Grand espace : quelques échos lointains (echos: false dans la cabane) */
+  if (son.echos !== false) for (const [r, a] of [[.23, .25], [.41, .17], [.67, .1]]) { const k = Math.round(r * TAUX); for (let i = n - 1; i >= k; i--) { g[i] += d[i - k] * a * .5; d[i] += g[i - k] * a * .5; } }
   /* Sous les répliques : le fond descend à 30 % (-10 dB), avec 0,4 s d'entrée et de sortie */
   for (const [t0, dt] of repliques) { const a = Math.max(0, Math.round((t0 - .6) * TAUX)), b = Math.min(n, Math.round((t0 + dt + .8) * TAUX));
     for (let i = a; i < b; i++) { const t = i / TAUX, k = ss(t0 - .6, t0 - .2, t) * (1 - ss(t0 + dt + .4, t0 + dt + .8, t)), f = 1 - .7 * k; g[i] *= f; d[i] *= f; } }
