@@ -8,7 +8,10 @@
 // Frédéric, le même jour : « pilote classe 6eme ou 4eme, mes classes », « et
 // fait pour 4eme puissance et autre notion et 6eme », « cartes mentales remplit
 // c’est mieux » : 3 notions de 6e, 3 de 4e (dont les puissances), 5 de seconde.
-// ⛔ PILOTE, à valider par Frédéric AVANT de remplir les 477 cartes.
+// ⭐ 09/11 soir — « j'aime la carte mentale de 4eme sur les puissances »,
+// « continue ! » : toutes les notions de 6e et de 4e sont remplies, dans
+// lib/cartes/remplies/<classe>.json (même forme). Les cartes écrites ici, à la
+// main, l'emportent sur celles des fichiers.
 //
 // Collège : phrases courtes, un seul calcul par exemple (ses 6e lisent mal).
 // Une bulle par micro, DANS L'ORDRE de lib/videos/bilans-notions.json (une carte
@@ -16,9 +19,12 @@
 // Notation : « ^2 », « ^(…) » pour les exposants, « _A » ou « _{…} » pour les
 // indices (components/cartes/TexteMaths.tsx).
 
+import SIXIEME from "./remplies/6e.json";
+import QUATRIEME from "./remplies/4e.json";
+
 export type BulleRemplie = { regle: string; exemple: string; piege: string };
 
-export const CARTES_REMPLIES: Record<string, BulleRemplie[]> = {
+const ECRITES_A_LA_MAIN: Record<string, BulleRemplie[]> = {
   // ── 6e ──────────────────────────────────────────────────────────────────
   "6e/fraction_nombre": [
     {
@@ -404,6 +410,12 @@ export const CARTES_REMPLIES: Record<string, BulleRemplie[]> = {
       piege: "« Positif sachant malade » n’est pas « malade sachant positif ».",
     },
   ],
+};
+
+export const CARTES_REMPLIES: Record<string, BulleRemplie[]> = {
+  ...(SIXIEME as Record<string, BulleRemplie[]>),
+  ...(QUATRIEME as Record<string, BulleRemplie[]>),
+  ...ECRITES_A_LA_MAIN,
 };
 
 // La carte remplie d'une notion, si elle existe ET correspond encore aux micros.

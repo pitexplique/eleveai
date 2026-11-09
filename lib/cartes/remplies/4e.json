@@ -1,0 +1,1121 @@
+{
+ "4e/fraction_nombre": [
+  {
+   "regle": "On multiplie ou on divise le haut et le bas par le même nombre.",
+   "exemple": "2/3 = 8/12 (× 4 en haut et en bas) ; en croix : 2 × 12 = 3 × 8 = 24.",
+   "piege": "Ajouter le même nombre en haut et en bas ne marche pas : 2/3 ≠ 3/4."
+  },
+  {
+   "regle": "On divise le haut et le bas par un même diviseur, jusqu’à ne plus pouvoir.",
+   "exemple": "18/24 = 9/12 (÷ 2) = 3/4 (÷ 3).",
+   "piege": "S’arrêter trop tôt : 9/12 se simplifie encore par 3."
+  },
+  {
+   "regle": "a/b = a ÷ b : on divise le haut par le bas.",
+   "exemple": "3/4 = 3 ÷ 4 = 0,75 ; 7/20 = 7 ÷ 20 = 0,35.",
+   "piege": "3/4 ne vaut pas 3,4 : on calcule 3 ÷ 4 = 0,75."
+  },
+  {
+   "regle": "Un nombre rationnel s’écrit a/b (a et b entiers, b ≠ 0) ; il a plusieurs écritures.",
+   "exemple": "0,6 = 6/10 = 3/5 ; 1,25 = 125/100 = 5/4 ; −2 = −2/1.",
+   "piege": "1/3 = 0,333… sans fin : 0,33 n’est qu’une valeur approchée."
+  },
+  {
+   "regle": "On met les fractions au même dénominateur, puis on compare les numérateurs.",
+   "exemple": "2/3 = 10/15 et 3/5 = 9/15, donc 2/3 > 3/5.",
+   "piege": "Plus le bas est grand, plus les parts sont petites : 1/3 < 1/2."
+  }
+ ],
+ "4e/fraction_calcul": [
+  {
+   "regle": "On met au même dénominateur, puis on additionne les numérateurs ; le bas ne change pas.",
+   "exemple": "1/4 + 2/3 = 3/12 + 8/12 = 11/12.",
+   "piege": "On n’ajoute pas les bas : 1/2 + 1/3 = 5/6, pas 2/5."
+  },
+  {
+   "regle": "On multiplie les hauts entre eux et les bas entre eux.",
+   "exemple": "2/3 × 5/7 = 10/21 ; 3/4 × 2/9 = 6/36 = 1/6.",
+   "piege": "Inutile de mettre au même dénominateur pour multiplier."
+  },
+  {
+   "regle": "Prendre les 3/4 de 20, c’est 3/4 × 20 = (20 ÷ 4) × 3.",
+   "exemple": "Les 2/5 de 250 g de farine : 250 ÷ 5 × 2 = 100 g.",
+   "piege": "« de » veut dire « × » : 2/5 de 250, ce n’est pas 250 ÷ 2/5."
+  },
+  {
+   "regle": "L’inverse de a/b est b/a (a et b non nuls) : leur produit vaut 1.",
+   "exemple": "Inverse de 3/7 : 7/3, car 3/7 × 7/3 = 1 ; inverse de 5 : 1/5.",
+   "piege": "L’inverse n’est pas l’opposé : l’inverse de 2 est 1/2, pas −2."
+  },
+  {
+   "regle": "Diviser par une fraction, c’est multiplier par son inverse.",
+   "exemple": "2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6.",
+   "piege": "On retourne la DEUXIÈME fraction, pas la première."
+  },
+  {
+   "regle": "L’opposé de a/b est −a/b : leur somme vaut 0.",
+   "exemple": "Opposé de 3/4 : −3/4, car 3/4 + (−3/4) = 0 ; opposé de −2/5 : 2/5.",
+   "piege": "On change le signe, on ne retourne pas : l’opposé de 3/4 n’est pas 4/3."
+  },
+  {
+   "regle": "Défi : traduire « les … de » par × et calculer ce qui reste à partir du tout, 1.",
+   "exemple": "Club : 1/3 du budget en maillots, 1/4 en ballons ; reste 1 − 7/12 = 5/12.",
+   "piege": "Le tout vaut 1 = 12/12 : on enlève 4/12 + 3/12 = 7/12."
+  }
+ ],
+ "4e/reperage": [
+  {
+   "regle": "On trouve le pas (valeur d’un petit trait), puis on compte les traits depuis 0.",
+   "exemple": "Pas de 0,5 : A est 3 traits à gauche de 0, donc A a pour abscisse −1,5.",
+   "piege": "Un trait ne vaut pas toujours 1 : cherche d’abord le pas."
+  },
+  {
+   "regle": "Positif à droite de 0, négatif à gauche ; on avance du bon nombre de pas.",
+   "exemple": "Pas de 0,2 : B d’abscisse −0,6 est 3 traits à gauche de 0.",
+   "piege": "Placer −0,6 à droite de 0 : les négatifs sont à gauche."
+  },
+  {
+   "regle": "Pour placer a/b, on partage chaque unité en b parts égales et on en compte a.",
+   "exemple": "7/3 : unité en 3 parts, on compte 7 parts ; 7/3 est entre 2 et 3.",
+   "piege": "C’est le bas qui donne le nombre de parts, pas le haut."
+  },
+  {
+   "regle": "Un point s’écrit (abscisse ; ordonnée) : d’abord l’axe horizontal, puis le vertical.",
+   "exemple": "A(3 ; −2) : 3 vers la droite, puis 2 vers le bas.",
+   "piege": "Inverser les deux : (3 ; −2) et (−2 ; 3) sont deux points différents."
+  },
+  {
+   "regle": "Dans un pavé, un point a 3 coordonnées : (abscisse ; ordonnée ; altitude).",
+   "exemple": "Carton de 4 cm × 3 cm × 2 cm, origine A : le sommet opposé est G(4 ; 3 ; 2).",
+   "piege": "Oublier l’altitude : un point en haut du carton n’a pas 0 en 3e."
+  },
+  {
+   "regle": "Latitude : N ou S de l’équateur, de 0° à 90° ; longitude : E ou O de Greenwich, 0° à 180°.",
+   "exemple": "Paris : environ 49° N et 2° E ; Le Cap : environ 34° S et 18° E.",
+   "piege": "Parallèles → latitude ; méridiens → longitude. Ne pas les mélanger."
+  },
+  {
+   "regle": "Défi : faire un schéma et noter le pas avant tout calcul.",
+   "exemple": "Bus à 2,4 km, gare à −1,2 km de la maison : 2,4 − (−1,2) = 3,6 km entre eux.",
+   "piege": "Oublier le signe : 2,4 − 1,2 = 1,2 km est faux ici."
+  }
+ ],
+ "4e/vision_espace": [
+  {
+   "regle": "Prisme et cylindre : 2 bases égales ; pyramide et cône : 1 base et un sommet.",
+   "exemple": "Boîte de camembert : cylindre ; tente canadienne : prisme à base triangulaire.",
+   "piege": "Pyramide ≠ prisme : la pyramide a une seule base et finit en pointe."
+  },
+  {
+   "regle": "Une vue, c’est ce qu’on voit en regardant le solide bien en face, de dessus ou de côté.",
+   "exemple": "Verre cylindrique debout : de face un rectangle, de dessus un disque.",
+   "piege": "Une vue est à plat : pas de perspective, pas de profondeur."
+  },
+  {
+   "regle": "Cavalière : face avant en vraie grandeur, fuyantes réduites ; patron : faces à plat.",
+   "exemple": "Cube de 4 cm : fuyantes de 2 cm (× 0,5) ; son patron : 6 carrés de 4 cm.",
+   "piege": "Les arêtes cachées se tracent en pointillés."
+  },
+  {
+   "regle": "On trace la base régulière, puis un triangle isocèle identique sur chaque côté.",
+   "exemple": "Base carrée de 6 cm, arêtes latérales de 5 cm : 1 carré + 4 triangles 6 cm, 5 cm, 5 cm.",
+   "piege": "Les 4 triangles doivent être identiques pour se rejoindre au sommet."
+  },
+  {
+   "regle": "Pavé coupé parallèlement à une face : un rectangle ; cylindre coupé comme la base : un disque.",
+   "exemple": "Bûche (cylindre) en rondelles : des disques ; plaque de beurre (pavé) : des rectangles.",
+   "piege": "Cylindre coupé dans sa longueur : un rectangle, pas un disque."
+  },
+  {
+   "regle": "Défi : imaginer le pliage face par face et repérer les faces qui se font face.",
+   "exemple": "Dé : faces opposées font 7 ; face 2 en dessous → 5 au-dessus, car 2 + 5 = 7.",
+   "piege": "Sur un patron, deux faces opposées ne se touchent jamais."
+  }
+ ],
+ "4e/divisibilite": [
+  {
+   "regle": "a est un multiple de b si a = b × k (k entier) ; alors b est un diviseur de a.",
+   "exemple": "36 = 4 × 9 : 36 est un multiple de 4, et 4 est un diviseur de 36.",
+   "piege": "Ne pas inverser : 4 est un diviseur de 36, pas un multiple."
+  },
+  {
+   "regle": "Par 2 : chiffre des unités pair ; par 5 : il finit par 0 ou 5 ; par 10 : il finit par 0.",
+   "exemple": "340 : divisible par 2, 5 et 10 ; 735 : par 5, mais pas par 2 ni par 10.",
+   "piege": "Divisible par 5 ne veut pas dire par 10 : 35 ÷ 10 = 3,5."
+  },
+  {
+   "regle": "Par 3 (ou 9) : la somme des chiffres est divisible par 3 (ou 9).",
+   "exemple": "4 815 : 4 + 8 + 1 + 5 = 18, donc divisible par 3 et par 9.",
+   "piege": "Le dernier chiffre ne sert à rien ici : 13 finit par 3, pas divisible par 3."
+  },
+  {
+   "regle": "a = b × q + r avec r < b : q est le quotient, r le reste.",
+   "exemple": "53 œufs en boîtes de 6 : 53 = 6 × 8 + 5 → 8 boîtes, 5 œufs restent.",
+   "piege": "Le reste est plus petit que le diviseur : 53 = 6 × 7 + 11 ne va pas."
+  },
+  {
+   "regle": "On cherche les produits égaux au nombre, en testant 1, 2, 3… dans l’ordre.",
+   "exemple": "36 = 1 × 36 = 2 × 18 = 3 × 12 = 4 × 9 = 6 × 6 : 9 diviseurs.",
+   "piege": "Oublier 1 et le nombre lui-même : ce sont aussi des diviseurs."
+  },
+  {
+   "regle": "Partage égal sans reste : on cherche un diviseur commun aux deux nombres.",
+   "exemple": "24 roses, 36 tulipes, bouquets identiques : au plus 12 (2 roses, 3 tulipes).",
+   "piege": "Prendre un diviseur d’un seul nombre : 8 divise 24, pas 36."
+  },
+  {
+   "regle": "Défi : écrire les multiples de chaque nombre et chercher le premier commun.",
+   "exemple": "Bus toutes les 12 min, tram toutes les 18 min, ensemble à 8 h : revus à 8 h 36.",
+   "piege": "12 × 18 = 216 min est commun, mais ce n’est pas le premier."
+  }
+ ],
+ "4e/nombre_premier": [
+  {
+   "regle": "Un nombre premier a exactement 2 diviseurs : 1 et lui-même.",
+   "exemple": "Jusqu’à 30 : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29.",
+   "piege": "1 n’est pas premier (un seul diviseur) ; 2 est premier et pair."
+  },
+  {
+   "regle": "On barre les multiples de 2, 3, 5 et 7 ; ce qui reste (sauf 1) est premier.",
+   "exemple": "91 = 7 × 13 : pas premier ; 97 n’est divisible ni par 2, 3, 5, ni 7 : premier.",
+   "piege": "Impair ne veut pas dire premier : 51 = 3 × 17."
+  },
+  {
+   "regle": "On divise par 2, 3, 5, 7… tant qu’on peut, jusqu’à obtenir 1.",
+   "exemple": "360 = 2 × 2 × 2 × 3 × 3 × 5 = 2^3 × 3^2 × 5.",
+   "piege": "360 = 4 × 90 n’est pas fini : 4 et 90 ne sont pas premiers."
+  },
+  {
+   "regle": "Défi : décomposer les deux nombres pour simplifier une fraction d’un coup.",
+   "exemple": "84/126 = (2^2 × 3 × 7)/(2 × 3^2 × 7) = 2/3.",
+   "piege": "On barre seulement les facteurs présents en haut ET en bas."
+  }
+ ],
+ "4e/ordre_grandeur": [
+  {
+   "regle": "nano 10^(−9), micro 10^(−6), milli 10^(−3), kilo 10^3, méga 10^6, giga 10^9.",
+   "exemple": "Clé USB de 64 Go = 64 × 10^9 octets ; 5 mm = 5 × 10^(−3) m.",
+   "piege": "Confondre milli et micro : 1 mm = 1 000 µm."
+  },
+  {
+   "regle": "On donne la puissance de 10 la plus proche de la mesure, dans une unité fixée.",
+   "exemple": "Épaisseur d’un cheveu : environ 10^(−4) m ; longueur d’une salle de classe : 10^1 m.",
+   "piege": "Mélanger les unités : 1 mm = 10^(−3) m, pas 10^3 m."
+  },
+  {
+   "regle": "On arrondit chaque nombre à un nombre simple, puis on calcule de tête.",
+   "exemple": "48 × 213 ≈ 50 × 200 = 10 000 (valeur exacte : 10 224).",
+   "piege": "Compter les zéros : 50 × 200 = 10 000, pas 1 000."
+  },
+  {
+   "regle": "On estime le résultat de tête : s’il est très loin, il y a une erreur.",
+   "exemple": "« Un cycliste roule à 250 km/h » : faux, un cycliste roule vers 20 km/h.",
+   "piege": "Croire la calculatrice sans réfléchir : une virgule mal tapée change tout."
+  },
+  {
+   "regle": "Défi : arrondir chaque donnée, puis faire un seul calcul simple.",
+   "exemple": "Cœur à 70 battements/min, 1 jour = 1 440 min : 70 × 1 400 = 98 000 ≈ 10^5.",
+   "piege": "Convertir d’abord : 1 jour = 24 × 60 = 1 440 min, pas 24."
+  }
+ ],
+ "4e/prop_proportionnalite": [
+  {
+   "regle": "Proportionnel si on passe d’une grandeur à l’autre en multipliant toujours par le même nombre.",
+   "exemple": "Pommes à 2,50 € le kg : 2 kg → 5 € ; 4 kg → 10 € : proportionnel.",
+   "piege": "Âge et taille augmentent ensemble, mais ne sont pas proportionnels."
+  },
+  {
+   "regle": "On multiplie par le coefficient, ou on additionne deux colonnes.",
+   "exemple": "3 L → 4,50 € et 5 L → 7,50 €, donc 8 L → 4,50 + 7,50 = 12 €.",
+   "piege": "Ajouter le même nombre partout ne marche pas : il faut multiplier."
+  },
+  {
+   "regle": "Proportionnalité : les points sont alignés sur une droite qui passe par l’origine.",
+   "exemple": "Essence : 10 L → 18 €, 20 L → 36 € ; points alignés avec (0 ; 0).",
+   "piege": "Droite qui ne passe pas par 0 (prise en charge d’un taxi) : pas proportionnel."
+  },
+  {
+   "regle": "Coefficient : on multiplie par k ; passage à l’unité : on cherche d’abord le prix d’un.",
+   "exemple": "5 croissants pour 6 € : 1 croissant = 6 ÷ 5 = 1,20 € ; 8 croissants = 9,60 €.",
+   "piege": "Ne pas faire 5 ÷ 6 : on veut des euros pour UN croissant."
+  },
+  {
+   "regle": "On multiplie les deux nombres en diagonale, puis on divise par le troisième.",
+   "exemple": "3 h → 210 km ; 5 h → 5 × 210 ÷ 3 = 350 km.",
+   "piege": "Multiplier les deux nombres d’une même ligne : c’est en diagonale."
+  },
+  {
+   "regle": "On repère les deux grandeurs, on fait un tableau, puis on calcule.",
+   "exemple": "Recette pour 4 : 300 g de farine ; pour 6 : 300 ÷ 4 × 6 = 450 g.",
+   "piege": "Vérifier d’abord que la situation est bien proportionnelle."
+  },
+  {
+   "regle": "Si y est proportionnel à x, alors y = k × x, avec k le coefficient.",
+   "exemple": "Planche à 12 € le mètre : prix = 12 × longueur ; 3,5 m → 42 €.",
+   "piege": "Le coefficient se trouve par k = y ÷ x, pas x ÷ y."
+  },
+  {
+   "regle": "Défi : ramener à l’unité pour comparer deux offres.",
+   "exemple": "Lessive : 2 L à 7 € (3,50 €/L) ou 3 L à 9,90 € (3,30 €/L) : le 3 L gagne.",
+   "piege": "Le prix le plus bas n’est pas forcément le moins cher au litre."
+  }
+ ],
+ "4e/prop_ratio": [
+  {
+   "regle": "Un ratio a : b compare deux quantités : a parts de l’une pour b parts de l’autre.",
+   "exemple": "Sirop et eau en ratio 1 : 7 : 1 verre de sirop pour 7 verres d’eau.",
+   "piege": "1 : 7 ne veut pas dire 1/7 de sirop : c’est 1/8 du mélange."
+  },
+  {
+   "regle": "a : b = c : d revient à a/b = c/d : on multiplie les deux termes par le même nombre.",
+   "exemple": "Chorale, filles : garçons = 3 : 2 ; 12 filles → 8 garçons, car 3/2 = 12/8.",
+   "piege": "Garder l’ordre : 3 : 2 n’est pas 2 : 3."
+  },
+  {
+   "regle": "Ratio a : b : c : on multiplie (ou on divise) les trois termes par le même nombre.",
+   "exemple": "Béton 1 : 2 : 3 (ciment, sable, gravier) ; 5 seaux de ciment → 5 : 10 : 15.",
+   "piege": "Changer un seul terme : il faut multiplier les trois."
+  },
+  {
+   "regle": "On additionne les parts, on trouve la valeur d’une part, puis on multiplie.",
+   "exemple": "60 € selon 2 : 3 → 5 parts ; 1 part = 60 ÷ 5 = 12 € → 24 € et 36 €.",
+   "piege": "On divise par le TOTAL des parts (ici 5), pas par 2 ni par 3."
+  },
+  {
+   "regle": "Défi : trouver la valeur d’UNE part à partir de la donnée connue.",
+   "exemple": "Bleu : jaune = 2 : 5 ; 6 L de bleu → 1 part = 3 L ; jaune = 15 L, total 21 L.",
+   "piege": "La donnée est le bleu seul, pas le total : on divise 6 par 2."
+  }
+ ],
+ "4e/prop_pourcentages": [
+  {
+   "regle": "t % de A = A × t ÷ 100 ; une part en % = part ÷ total × 100.",
+   "exemple": "30 % de 50 m = 50 × 30 ÷ 100 = 15 m ; 12 filles sur 30 élèves = 40 %.",
+   "piege": "25 % de 80 ne fait pas 25 : c’est 25 pour 100, donc 20."
+  },
+  {
+   "regle": "10 % : on divise par 10 ; 20 % = 2 × 10 % ; 5 % = moitié de 10 % ; 100 % = tout.",
+   "exemple": "Sur 60 € : 10 % = 6 € ; 20 % = 12 € ; 30 % = 18 € ; 5 % = 3 € ; 200 % = 120 €.",
+   "piege": "5 % n’est pas « diviser par 5 » : 5 % de 60 = 3, pas 12."
+  },
+  {
+   "regle": "Hausse de t % : × (1 + t ÷ 100) ; baisse de t % : × (1 − t ÷ 100).",
+   "exemple": "Vélo à 250 € soldé à −20 % : 250 × 0,8 = 200 €. Loyer +3 % : × 1,03.",
+   "piege": "Baisser de 20 %, c’est × 0,8, pas × 0,2."
+  },
+  {
+   "regle": "Taux d’évolution = (nouvelle valeur − ancienne) ÷ ancienne × 100.",
+   "exemple": "Abonnés : 400 → 500 : (500 − 400) ÷ 400 × 100 = 25 % de hausse.",
+   "piege": "On divise par la valeur de DÉPART, pas par la nouvelle."
+  },
+  {
+   "regle": "Défi : deux évolutions de suite, on enchaîne les coefficients.",
+   "exemple": "+10 % puis −10 % sur 100 € : 100 × 1,1 × 0,9 = 99 €.",
+   "piege": "+10 % puis −10 % ne ramène pas au prix de départ."
+  }
+ ],
+ "4e/prop_echelle": [
+  {
+   "regle": "Échelle 1/100 : 1 cm sur le plan représente 100 cm en vrai.",
+   "exemple": "Plan au 1/200 : 1 cm représente 200 cm, soit 2 m.",
+   "piege": "Les deux nombres sont dans la MÊME unité : 1 cm pour 200 cm, pas 200 m."
+  },
+  {
+   "regle": "Longueur réelle = longueur sur le plan × le nombre du bas de l’échelle.",
+   "exemple": "Carte au 1/25 000 : 4 cm → 4 × 25 000 = 100 000 cm = 1 km.",
+   "piege": "Bien convertir : 100 000 cm = 1 km, pas 100 km."
+  },
+  {
+   "regle": "Longueur sur le plan = longueur réelle ÷ le nombre du bas, dans la même unité.",
+   "exemple": "Cuisine de 4 m au 1/50 : 400 cm ÷ 50 = 8 cm sur le plan.",
+   "piege": "Convertir d’abord en cm : 4 ÷ 50 = 0,08 n’est pas en cm."
+  },
+  {
+   "regle": "Rapport k : chaque longueur est multipliée par k (k > 1 agrandit, k < 1 réduit).",
+   "exemple": "Photo 10 cm × 15 cm, k = 2 : 20 cm × 30 cm ; k = 0,5 : 5 cm × 7,5 cm.",
+   "piege": "Agrandir, c’est multiplier, pas ajouter : +2 cm partout déforme."
+  },
+  {
+   "regle": "Longueurs × k, donc aires × k^2.",
+   "exemple": "Carré de 3 cm, k = 2 : aire 9 cm² → 36 cm², soit × 4.",
+   "piege": "Longueurs doublées : l’aire est × 4, pas × 2."
+  },
+  {
+   "regle": "Longueurs × k, donc volumes × k^3.",
+   "exemple": "Cube de 2 cm, k = 3 : volume 8 cm³ → 216 cm³, soit × 27.",
+   "piege": "Longueurs triplées : le volume est × 27, pas × 3 ni × 9."
+  },
+  {
+   "regle": "Défi : passer par les longueurs réelles avant de calculer l’aire.",
+   "exemple": "Plan au 1/100 : bassin de 10 cm × 5 cm ; en vrai 10 m × 5 m = 50 m².",
+   "piege": "Les aires ne sont pas × 100 mais × 100^2 = 10 000."
+  }
+ ],
+ "4e/litteral_expression": [
+  {
+   "regle": "Une lettre remplace un nombre inconnu ou qui change ; 3x veut dire 3 × x.",
+   "exemple": "x croissants à 1,20 € : 1,2x euros. Pour x = 5 : 1,2 × 5 = 6 €.",
+   "piege": "3x n’est pas « 3 et x » collés : si x = 4, 3x = 12, pas 34."
+  },
+  {
+   "regle": "On traduit mot à mot : « le double » = 2 ×, « de plus » = +, « le carré » = ^2.",
+   "exemple": "Taxi : 3 € de départ + 1,50 € par km : 3 + 1,5x euros pour x km.",
+   "piege": "Périmètre d’un carré de côté c : 4c, pas c^4."
+  },
+  {
+   "regle": "On remplace la lettre par sa valeur, puis on suit les priorités.",
+   "exemple": "Pour x = 4 : 5x − 2 = 5 × 4 − 2 = 18 ; x^2 + 1 = 16 + 1 = 17.",
+   "piege": "x^2 pour x = 4 : 4 × 4 = 16, pas 4 × 2 = 8."
+  },
+  {
+   "regle": "On regroupe les termes de même famille : les x ensemble, les nombres ensemble.",
+   "exemple": "3x + 5 + 2x − 1 = 5x + 4 ; x × x = x^2.",
+   "piege": "3x + 2 ne fait pas 5x : ce sont deux familles différentes."
+  },
+  {
+   "regle": "Défi : écrire l’expression, la réduire, puis tester une valeur.",
+   "exemple": "Côtés x et x + 3 : x + x + (x + 3) + (x + 3) = 4x + 6 ; x = 2 donne 14 cm.",
+   "piege": "Un rectangle a 4 côtés : ne compter qu’une longueur et une largeur."
+  }
+ ],
+ "4e/litteral_distributivite": [
+  {
+   "regle": "k(a + b) = ka + kb : on multiplie k par CHAQUE terme.",
+   "exemple": "3(x + 4) = 3x + 12 ; −2(x − 5) = −2x + 10.",
+   "piege": "3(x + 4) ≠ 3x + 4 : le 3 multiplie aussi le 4."
+  },
+  {
+   "regle": "(a + b)(c + d) = ac + ad + bc + bd : chaque terme par chaque terme.",
+   "exemple": "(x + 2)(x + 3) = x^2 + 3x + 2x + 6 = x^2 + 5x + 6.",
+   "piege": "Il y a 4 produits : n’en oublie aucun."
+  },
+  {
+   "regle": "Après avoir développé, on regroupe les x^2, les x et les nombres.",
+   "exemple": "2(x + 1) + 3(x − 2) = 2x + 2 + 3x − 6 = 5x − 4.",
+   "piege": "−(x − 3) = −x + 3 : le − change TOUS les signes dedans."
+  },
+  {
+   "regle": "Un produit avec une parenthèse se développe ; une somme sans parenthèse est déjà développée.",
+   "exemple": "4(x − 1) et (x + 2)(x − 1) sont à développer ; 4x − 4 l’est déjà.",
+   "piege": "3 + (x + 1) n’est pas un produit : on enlève juste les parenthèses."
+  },
+  {
+   "regle": "Défi : calculer de tête en coupant un nombre en deux morceaux.",
+   "exemple": "Fleuriste : 21 bouquets à 15 € : 20 × 15 + 1 × 15 = 300 + 15 = 315 €.",
+   "piege": "Ne pas oublier le « 1 × 15 » : 20 × 15 seul donne 300."
+  }
+ ],
+ "4e/litteral_identite_remarquable": [
+  {
+   "regle": "(a + b)^2 = (a + b)(a + b) : en développant, on trouve a^2 + 2ab + b^2.",
+   "exemple": "(x + 3)^2 = (x + 3)(x + 3) = x^2 + 3x + 3x + 9 = x^2 + 6x + 9.",
+   "piege": "(x + 3)^2 ≠ x^2 + 9 : il manque le double produit 6x."
+  },
+  {
+   "regle": "Trois formes à repérer : (a + b)^2, (a − b)^2 et (a + b)(a − b).",
+   "exemple": "(x − 5)^2 : 2e forme ; (x + 4)(x − 4) : 3e forme ; (x + 4)(x + 5) : aucune.",
+   "piege": "(a + b)(a − b) n’est pas un carré : les deux signes sont différents."
+  },
+  {
+   "regle": "(a − b)^2 = a^2 − 2ab + b^2 ; (a + b)(a − b) = a^2 − b^2.",
+   "exemple": "(x − 4)^2 = x^2 − 8x + 16 ; (x + 6)(x − 6) = x^2 − 36.",
+   "piege": "(x − 4)^2 : le dernier terme est + 16, pas − 16."
+  },
+  {
+   "regle": "Une des trois formes : on applique l’identité ; sinon, double distributivité.",
+   "exemple": "(2x + 1)^2 = 4x^2 + 4x + 1 ; (x + 1)(x + 7) = x^2 + 8x + 7.",
+   "piege": "(2x)^2 = 4x^2, pas 2x^2 : le 2 aussi est au carré."
+  },
+  {
+   "regle": "Défi : calculer de tête un carré ou un produit avec une identité.",
+   "exemple": "102^2 = (100 + 2)^2 = 10 000 + 400 + 4 = 10 404 ; 21 × 19 = 400 − 1 = 399.",
+   "piege": "(a + b)^2 ≠ a^2 + b^2 : 102^2 n’est pas 10 004."
+  }
+ ],
+ "4e/litteral_factorisation": [
+  {
+   "regle": "Le facteur commun est le nombre ou la lettre présent dans CHAQUE terme.",
+   "exemple": "Dans 6x + 15, 3 est commun : 6x = 3 × 2x et 15 = 3 × 5.",
+   "piege": "Dans 3x + 5, le 3 n’est pas commun : 5 n’est pas un multiple de 3."
+  },
+  {
+   "regle": "ka + kb = k(a + b) : on sort le facteur commun devant la parenthèse.",
+   "exemple": "6x + 15 = 3(2x + 5) ; x^2 + 4x = x(x + 4).",
+   "piege": "7x + 7 = 7(x + 1) : ne pas oublier le 1 dans la parenthèse."
+  },
+  {
+   "regle": "On développe le résultat : on doit retrouver l’expression de départ.",
+   "exemple": "4(x − 3) = 4x − 12 : la factorisation de 4x − 12 est juste.",
+   "piege": "2x + 3 ≠ 2(x + 3) : en développant, on trouve 2x + 6."
+  },
+  {
+   "regle": "Défi : repérer le facteur commun pour calculer vite.",
+   "exemple": "17 × 23 + 17 × 77 = 17 × (23 + 77) = 17 × 100 = 1 700.",
+   "piege": "Inutile de calculer 17 × 23 puis 17 × 77 : c’est long et risqué."
+  }
+ ],
+ "4e/equation_resolution": [
+  {
+   "regle": "Une équation est une égalité avec une inconnue ; la résoudre, c’est trouver x.",
+   "exemple": "3x + 2 = 14 est une équation ; x = 4 marche : 3 × 4 + 2 = 14.",
+   "piege": "3x + 2 tout seul n’est pas une équation : il n’y a pas de signe =."
+  },
+  {
+   "regle": "On choisit l’inconnue x, puis on écrit deux quantités égales.",
+   "exemple": "4 places de ciné à x € + 6 € de pop-corn = 42 € : 4x + 6 = 42.",
+   "piege": "Dire ce que x représente : « x = prix d’une place en € »."
+  },
+  {
+   "regle": "On fait la même opération des deux côtés pour isoler x.",
+   "exemple": "x + 7 = 12 donne x = 12 − 7 = 5 ; 3x = 18 donne x = 18 ÷ 3 = 6.",
+   "piege": "3x = 18 : on divise par 3, on ne retire pas 3."
+  },
+  {
+   "regle": "On met les x d’un côté, les nombres de l’autre, puis on isole x.",
+   "exemple": "5x − 3 = 2x + 9 : 5x − 2x = 9 + 3, donc 3x = 12 et x = 4.",
+   "piege": "Pour enlever 2x à droite, on fait − 2x des DEUX côtés."
+  },
+  {
+   "regle": "On développe d’abord, puis on résout comme d’habitude.",
+   "exemple": "3(x + 2) = 21 : 3x + 6 = 21, donc 3x = 15 et x = 5.",
+   "piege": "3(x + 2) = 3x + 6, pas 3x + 2."
+  },
+  {
+   "regle": "On remplace x par la valeur trouvée de chaque côté : on doit trouver pareil.",
+   "exemple": "4x − 1 = 2x + 7 avec x = 4 : 16 − 1 = 15 et 8 + 7 = 15 : c’est juste.",
+   "piege": "Tester dans l’équation de DÉPART, pas dans une ligne du calcul."
+  },
+  {
+   "regle": "Choisir x, écrire l’équation, la résoudre, vérifier, répondre par une phrase.",
+   "exemple": "Guitare = 3 fois le ukulélé ; les deux : 240 €. x + 3x = 240, donc x = 60 €.",
+   "piege": "Répondre à tout : ukulélé 60 €, guitare 3 × 60 = 180 €."
+  },
+  {
+   "regle": "Défi : prendre pour x la plus petite des quantités.",
+   "exemple": "Trois nombres qui se suivent font 81 : x + (x + 1) + (x + 2) = 81, donc x = 26.",
+   "piege": "x = 26 n’est que le 1er : les nombres sont 26, 27 et 28."
+  }
+ ],
+ "4e/thales_theoreme": [
+  {
+   "regle": "Il faut deux droites qui se coupent en A et deux droites parallèles qui les coupent.",
+   "exemple": "M sur [AB], N sur [AC], (MN) // (BC) : triangle AMN dans le triangle ABC.",
+   "piege": "Sans parallèles données, on ne peut pas utiliser Thalès."
+  },
+  {
+   "regle": "Petit triangle sur grand triangle, côté par côté : AM/AB = AN/AC = MN/BC.",
+   "exemple": "AM = 3, AB = 6, AN = 2, AC = 4 : AM/AB = 3/6 = 0,5 et AN/AC = 2/4 = 0,5.",
+   "piege": "On écrit AM/AB, pas AM/MB : on prend le côté ENTIER."
+  },
+  {
+   "regle": "On écrit l’égalité des rapports, puis on fait un produit en croix.",
+   "exemple": "AM/AB = MN/BC : 3/6 = MN/8, donc MN = 3 × 8 ÷ 6 = 4 cm.",
+   "piege": "AB = AM + MB : ne pas prendre MB à la place de AB."
+  },
+  {
+   "regle": "On calcule chaque rapport à part, puis on compare les résultats.",
+   "exemple": "AM/AB = 2/5 = 0,4 et AN/AC = 3/7,5 = 0,4 : les rapports sont égaux.",
+   "piege": "Ne pas arrondir avant de comparer : 0,33 et 0,34 ne sont pas égaux."
+  },
+  {
+   "regle": "Points alignés dans le même ordre et AM/AB = AN/AC : alors (MN) // (BC).",
+   "exemple": "Étagère : AM/AB = 0,4 et AN/AC = 0,4, points dans le même ordre : (MN) // (BC).",
+   "piege": "Rapports différents : les droites ne sont PAS parallèles."
+  },
+  {
+   "regle": "On écrit : les données, le théorème utilisé, le calcul, la conclusion.",
+   "exemple": "(BM) et (CN) se coupent en A, (MN) // (BC) ; d’après Thalès, 3/6 = MN/8 : MN = 4 cm.",
+   "piege": "Longueur : théorème de Thalès ; parallèles : sa réciproque."
+  },
+  {
+   "regle": "Défi : repérer les parallèles cachées dans une situation réelle.",
+   "exemple": "Bâton de 1 m, ombre de 2 m ; ombre de l’arbre 12 m : arbre = 12 × 1 ÷ 2 = 6 m.",
+   "piege": "Associer chaque objet à SON ombre : bâton avec bâton, arbre avec arbre."
+  }
+ ],
+ "4e/trigo_cosinus": [
+  {
+   "regle": "Hypoténuse : en face de l’angle droit. Côté adjacent : il touche l’angle, sans être l’hypoténuse.",
+   "exemple": "ABC rectangle en B, AB = 4, BC = 3, AC = 5 : pour BÂC, l’adjacent est AB = 4.",
+   "piege": "L’hypoténuse touche aussi l’angle, mais ce n’est pas le côté adjacent."
+  },
+  {
+   "regle": "cos(angle) = côté adjacent ÷ hypoténuse.",
+   "exemple": "AB = 4 cm, AC = 5 cm : cos(BÂC) = 4 ÷ 5 = 0,8.",
+   "piege": "Un cosinus est entre 0 et 1 : si on trouve 1,25, on a inversé."
+  },
+  {
+   "regle": "Adjacent = hypoténuse × cos(angle) ; hypoténuse = adjacent ÷ cos(angle).",
+   "exemple": "Hypoténuse 10 cm, angle 60° : adjacent = 10 × cos(60°) = 10 × 0,5 = 5 cm.",
+   "piege": "La calculatrice doit être réglée en degrés (mode DEG)."
+  },
+  {
+   "regle": "Si cos(Â) est connu, alors Â = cos⁻¹(valeur) à la calculatrice.",
+   "exemple": "cos(Â) = 3 ÷ 5 = 0,6, donc Â = cos⁻¹(0,6) ≈ 53,1°.",
+   "piege": "Taper cos⁻¹ (ou Arccos), pas cos : cos(0,6) ne donne pas l’angle."
+  },
+  {
+   "regle": "Faire un schéma, repérer l’angle droit, puis l’adjacent et l’hypoténuse.",
+   "exemple": "Échelle de 5 m, angle de 70° avec le sol : pied à 5 × cos(70°) ≈ 1,7 m du mur.",
+   "piege": "Le cosinus ne marche que dans un triangle rectangle."
+  },
+  {
+   "regle": "Défi : trouver l’angle d’une pente à partir de deux longueurs.",
+   "exemple": "Rampe de 4 m qui avance de 3,9 m au sol : cos = 3,9 ÷ 4 = 0,975, angle ≈ 12,8°.",
+   "piege": "La rampe (4 m) est l’hypoténuse, pas le sol."
+  }
+ ],
+ "4e/triangle_figure": [
+  {
+   "regle": "Un triangle existe si son plus grand côté est plus petit que la somme des deux autres.",
+   "exemple": "3, 4 et 6 cm : 6 < 3 + 4 = 7, il existe. 2, 3 et 6 cm : 6 > 2 + 3 = 5, impossible.",
+   "piege": "Comparer le PLUS GRAND côté à la somme des deux autres, pas un côté au hasard."
+  },
+  {
+   "regle": "Dans un triangle, la somme des trois angles vaut toujours 180°.",
+   "exemple": "Angles de 50° et 70° : le troisième vaut 180° − 50° − 70° = 60°.",
+   "piege": "Ne pas mesurer au rapporteur quand on demande de calculer."
+  },
+  {
+   "regle": "Hauteur : part d’un sommet, coupe le côté opposé à angle droit. Médiatrice : milieu d’un côté, à angle droit.",
+   "exemple": "[BC] = 8 cm : sa médiatrice passe à 4 cm de B ; la hauteur issue de A passe par A.",
+   "piege": "La hauteur passe par un sommet, pas forcément par le milieu du côté."
+  },
+  {
+   "regle": "Triangles égaux : 3 côtés égaux, ou 2 côtés et l’angle entre eux, ou 1 côté et ses 2 angles.",
+   "exemple": "AB = DE = 5 cm, AC = DF = 4 cm, l’angle BAC = l’angle EDF = 40° : ABC et DEF sont égaux.",
+   "piege": "Trois angles égaux ne suffisent pas : la taille peut être différente."
+  },
+  {
+   "regle": "On écrit les étapes dans l’ordre : un côté d’abord, puis le 3e sommet au compas ou au rapporteur.",
+   "exemple": "Tracer [AB] de 6 cm ; arc de centre A de rayon 4 cm ; arc de centre B de rayon 5 cm ; C au croisement.",
+   "piege": "Oublier une mesure : celui qui lit doit pouvoir refaire la figure."
+  },
+  {
+   "regle": "Triangles semblables : mêmes angles, et longueurs proportionnelles.",
+   "exemple": "Côtés 3, 4, 5 cm et 6, 8, 10 cm : tout est multiplié par 2, ils sont semblables.",
+   "piege": "Semblables ne veut pas dire égaux : la taille peut changer."
+  },
+  {
+   "regle": "Défi : écrire la donnée, la propriété utilisée, puis la conclusion.",
+   "exemple": "ABC isocèle en A, l’angle ABC = 65° : l’angle ACB aussi, donc l’angle BAC = 180° − 130° = 50°.",
+   "piege": "Une figure qui « a l’air » isocèle ne prouve rien : il faut une donnée."
+  }
+ ],
+ "4e/quadrilatere_parallelogramme": [
+  {
+   "regle": "Un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.",
+   "exemple": "ABCD avec (AB) // (CD) et (AD) // (BC) : c’est un parallélogramme.",
+   "piege": "L’ordre des lettres compte : ABCD se lit en tournant autour de la figure."
+  },
+  {
+   "regle": "Ses côtés opposés ont la même longueur ; ses angles opposés sont égaux.",
+   "exemple": "ABCD parallélogramme, AB = 7 cm, l’angle ABC = 110° : CD = 7 cm et l’angle CDA = 110°.",
+   "piege": "Deux angles voisins ne sont pas égaux : ensemble, ils font 180°."
+  },
+  {
+   "regle": "Les diagonales d’un parallélogramme se coupent en leur milieu.",
+   "exemple": "ABCD de centre O, AC = 10 cm : AO = OC = 10 ÷ 2 = 5 cm.",
+   "piege": "Les diagonales n’ont pas forcément la même longueur (seulement dans un rectangle)."
+  },
+  {
+   "regle": "Pour le prouver : côtés opposés parallèles, ou de même longueur, ou diagonales de même milieu.",
+   "exemple": "[AC] et [BD] ont le même milieu I : donc ABCD est un parallélogramme.",
+   "piege": "Un seul couple de côtés opposés égaux ne suffit pas, sauf s’ils sont parallèles."
+  },
+  {
+   "regle": "Aire = base × hauteur, la hauteur étant perpendiculaire à la base.",
+   "exemple": "Base 8 cm, hauteur 5 cm : A = 8 × 5 = 40 cm².",
+   "piege": "Prendre le côté penché au lieu de la hauteur."
+  },
+  {
+   "regle": "On repère le parallélogramme, puis on utilise ses côtés, ses angles ou ses diagonales.",
+   "exemple": "Jardin en parallélogramme de côtés 12 m et 7 m : clôture = 2 × (12 + 7) = 38 m.",
+   "piege": "Il y a 2 côtés de 12 m ET 2 côtés de 7 m."
+  },
+  {
+   "regle": "Défi : coder la figure, puis chercher la propriété qui relie les données à la question.",
+   "exemple": "ABCD parallélogramme, l’angle DAB = 75° : l’angle ABC = 180° − 75° = 105°.",
+   "piege": "Confondre angles opposés (égaux) et angles voisins (total 180°)."
+  }
+ ],
+ "4e/sym_transformation": [
+  {
+   "regle": "Symétrie axiale : on plie le long de l’axe ; un point et son image sont à même distance de l’axe.",
+   "exemple": "A est à 3 cm de la droite (d) : son symétrique A’ est à 3 cm de l’autre côté.",
+   "piege": "Le segment [AA’] coupe l’axe à angle droit, jamais en biais."
+  },
+  {
+   "regle": "Symétrie centrale de centre O : O est le milieu de [AA’] ; c’est un demi-tour autour de O.",
+   "exemple": "OA = 4 cm : on prolonge [AO] de 4 cm après O ; on obtient A’ avec AA’ = 8 cm.",
+   "piege": "On ne plie pas : on fait un demi-tour autour du point O."
+  },
+  {
+   "regle": "Une translation fait glisser la figure : même direction, même sens, même longueur pour tous.",
+   "exemple": "Translation qui envoie A sur B, 5 cm vers la droite : chaque point glisse de 5 cm vers la droite.",
+   "piege": "La figure glisse sans tourner ni se retourner."
+  },
+  {
+   "regle": "Une rotation fait tourner la figure autour d’un centre, d’un angle donné, dans un sens donné.",
+   "exemple": "En 15 min, la grande aiguille tourne de 90° autour du centre : de « 12 » à « 3 ».",
+   "piege": "Préciser le sens (celui des aiguilles ou l’inverse) : l’image change."
+  },
+  {
+   "regle": "Ces transformations gardent les longueurs, les angles, les aires et l’alignement.",
+   "exemple": "Un carré de 3 cm de côté a pour image un carré de 3 cm de côté, d’aire 3 × 3 = 9 cm².",
+   "piege": "Seul le sens peut changer : la symétrie axiale retourne la figure."
+  },
+  {
+   "regle": "Défi : repérer ce qui ne bouge pas (axe, centre) et ce qui bouge pour nommer la transformation.",
+   "exemple": "Frise d’un carrelage : chaque motif est décalé de 20 cm vers la droite, c’est une translation.",
+   "piege": "Une figure retournée vient d’une symétrie axiale, pas d’une translation."
+  }
+ ],
+ "4e/aire_perimetre": [
+  {
+   "regle": "Le périmètre est la longueur du tour d’une figure : on additionne les longueurs des côtés.",
+   "exemple": "Côtés de 3 cm, 4 cm et 5 cm : P = 3 + 4 + 5 = 12 cm.",
+   "piege": "Un périmètre est une longueur : en cm ou en m, jamais en cm²."
+  },
+  {
+   "regle": "Rectangle : P = 2 × (longueur + largeur).",
+   "exemple": "Terrain de foot de 100 m sur 60 m : P = 2 × (100 + 60) = 320 m.",
+   "piege": "Oublier le × 2 : 100 + 60 = 160 m, ce n’est que la moitié du tour."
+  },
+  {
+   "regle": "Carré : P = 4 × côté.",
+   "exemple": "Nappe carrée de 1,5 m de côté : P = 4 × 1,5 = 6 m de dentelle.",
+   "piege": "4 × côté, pas côté × côté (ça, c’est l’aire)."
+  },
+  {
+   "regle": "On additionne les trois côtés ; un côté manquant se trouve parfois avec Pythagore.",
+   "exemple": "Triangle rectangle de côtés 6 et 8 cm : √(36 + 64) = 10 cm ; P = 6 + 8 + 10 = 24 cm.",
+   "piege": "Ne pas oublier le troisième côté quand il n’est pas écrit."
+  },
+  {
+   "regle": "On suit le contour et on additionne les bords extérieurs ; un demi-cercle mesure π × d ÷ 2.",
+   "exemple": "Carré de 4 cm coiffé d’un demi-cercle : P = 3 × 4 + 3,14 × 4 ÷ 2 = 12 + 6,28 = 18,28 cm.",
+   "piege": "Les traits intérieurs ne font pas partie du tour."
+  },
+  {
+   "regle": "On repère ce qui fait le tour (clôture, bordure, cadre), puis on calcule le périmètre.",
+   "exemple": "Enclos de 12 m sur 8 m : 2 × (12 + 8) = 40 m de grillage ; à 3 € le mètre : 120 €.",
+   "piege": "Retirer la largeur du portail si l’énoncé le demande."
+  },
+  {
+   "regle": "Défi : écrire le périmètre avec une lettre, puis résoudre l’équation.",
+   "exemple": "Rectangle de périmètre 30 cm, longueur 9 cm : 2 × (9 + ℓ) = 30, donc 9 + ℓ = 15 et ℓ = 6 cm.",
+   "piege": "Diviser d’abord par 2 : 9 + ℓ = 15, pas 30."
+  }
+ ],
+ "4e/aire_surface": [
+  {
+   "regle": "L’aire mesure la surface à l’intérieur d’une figure, en unités carrées (cm², m²).",
+   "exemple": "Un rectangle couvert par 12 carreaux de 1 cm² a une aire de 12 cm².",
+   "piege": "Aire et périmètre sont différents : même aire ne veut pas dire même tour."
+  },
+  {
+   "regle": "Rectangle : A = longueur × largeur.",
+   "exemple": "Chambre de 4 m sur 3,5 m : A = 4 × 3,5 = 14 m².",
+   "piege": "Mettre les deux longueurs dans la même unité avant de multiplier."
+  },
+  {
+   "regle": "Carré : A = côté × côté = côté^2.",
+   "exemple": "Carreau de 20 cm de côté : A = 20 × 20 = 400 cm².",
+   "piege": "côté^2 ≠ côté × 2 : 20^2 = 400, pas 40."
+  },
+  {
+   "regle": "Triangle : A = base × hauteur ÷ 2.",
+   "exemple": "Voile de bateau de base 3 m et de hauteur 4 m : A = 3 × 4 ÷ 2 = 6 m².",
+   "piege": "Oublier le ÷ 2 : le triangle est la moitié d’un rectangle."
+  },
+  {
+   "regle": "Parallélogramme : A = base × hauteur (la hauteur est perpendiculaire à la base).",
+   "exemple": "Base 6 cm, hauteur 4 cm, côté penché 5 cm : A = 6 × 4 = 24 cm².",
+   "piege": "Ne pas prendre le côté penché : 6 × 5 = 30 cm² est faux."
+  },
+  {
+   "regle": "On découpe la figure en morceaux simples, puis on ajoute (ou on retire) leurs aires.",
+   "exemple": "Plaque de 10 cm × 6 cm percée d’un trou carré de 2 cm : 60 − 4 = 56 cm².",
+   "piege": "Ne pas compter deux fois une même partie."
+  },
+  {
+   "regle": "On calcule l’aire, puis on répond à la vraie question (quantité, prix, nombre de pots).",
+   "exemple": "Mur de 5 m × 2,4 m = 12 m² ; 1 L de peinture couvre 4 m² : il faut 12 ÷ 4 = 3 L.",
+   "piege": "Pour un achat, arrondir au-dessus : 2,5 pots → il en faut 3."
+  },
+  {
+   "regle": "Défi : comparer des aires en les calculant, jamais à l’œil.",
+   "exemple": "Pizza ronde de 30 cm : π × 15 × 15 ≈ 707 cm² ; pizza carrée de 26 cm : 26 × 26 = 676 cm².",
+   "piege": "Dans π × r × r, prendre le rayon (15 cm), pas le diamètre."
+  }
+ ],
+ "4e/volume_solide": [
+  {
+   "regle": "Le volume mesure la place occupée par un solide, en cm³, m³ ou litres.",
+   "exemple": "Un pavé fait de 24 petits cubes de 1 cm³ a un volume de 24 cm³.",
+   "piege": "Volume en cm³, aire en cm² : ne pas les mélanger."
+  },
+  {
+   "regle": "Prisme ou cylindre : volume = aire de la base × hauteur.",
+   "exemple": "Base de 15 cm² et hauteur de 4 cm : V = 15 × 4 = 60 cm³.",
+   "piege": "La base est la face qui se répète, pas forcément celle du dessous."
+  },
+  {
+   "regle": "Pavé droit : V = longueur × largeur × hauteur.",
+   "exemple": "Aquarium de 50 cm × 30 cm × 40 cm : V = 60 000 cm³ = 60 L.",
+   "piege": "Les trois dimensions dans la même unité avant de multiplier."
+  },
+  {
+   "regle": "Prisme droit : V = aire de la base × hauteur du prisme.",
+   "exemple": "Tente : base triangle 2 × 1,5 ÷ 2 = 1,5 m² ; longueur 3 m : V = 1,5 × 3 = 4,5 m³.",
+   "piege": "Ne pas oublier le ÷ 2 dans l’aire du triangle de base."
+  },
+  {
+   "regle": "Cylindre : V = π × r^2 × h.",
+   "exemple": "Boîte de conserve, r = 4 cm, h = 10 cm : V = π × 16 × 10 ≈ 502,7 cm³.",
+   "piege": "Prendre le rayon : diamètre 8 cm → r = 4 cm, et r^2 = 4 × 4."
+  },
+  {
+   "regle": "Pyramide : V = aire de la base × hauteur ÷ 3.",
+   "exemple": "Base carrée de 6 m de côté, hauteur 5 m : V = 36 × 5 ÷ 3 = 60 m³.",
+   "piege": "Oublier le ÷ 3 : la pyramide remplit le tiers du prisme."
+  },
+  {
+   "regle": "Cône : V = π × r^2 × h ÷ 3.",
+   "exemple": "Cornet de glace, r = 3 cm, h = 12 cm : V = π × 9 × 12 ÷ 3 ≈ 113,1 cm³.",
+   "piege": "Le cône vaut le tiers du cylindre de même base et même hauteur."
+  },
+  {
+   "regle": "1 dm³ = 1 L et 1 cm³ = 1 mL ; d’une unité de volume à la suivante : × 1 000.",
+   "exemple": "2,5 m³ = 2 500 dm³ = 2 500 L ; canette de 330 cm³ = 330 mL = 0,33 L.",
+   "piege": "Pour les volumes, c’est × 1 000 à chaque rang, pas × 10."
+  },
+  {
+   "regle": "Défi : calculer le volume, puis le convertir en litres pour conclure.",
+   "exemple": "Piscine 8 m × 4 m × 1,5 m = 48 m³ = 48 000 L ; à 2 000 L/h, il faut 24 h.",
+   "piege": "Convertir AVANT de diviser : m³ et L ne se mélangent pas."
+  }
+ ],
+ "4e/grandeur_composee": [
+  {
+   "regle": "Une grandeur produit multiplie deux grandeurs : énergie (kWh) = puissance (kW) × durée (h).",
+   "exemple": "Radiateur de 2 kW allumé 3 h : 2 × 3 = 6 kWh.",
+   "piege": "Durée en heures : 30 min = 0,5 h, pas 0,30 h."
+  },
+  {
+   "regle": "Une grandeur quotient divise deux grandeurs : vitesse = distance ÷ durée.",
+   "exemple": "150 km en 2 h : v = 150 ÷ 2 = 75 km/h.",
+   "piege": "1 h 30 min = 1,5 h, pas 1,3 h."
+  },
+  {
+   "regle": "Quotient : unité « par » (km/h, €/kg) ; produit : unités collées (kWh).",
+   "exemple": "Tomates à 12 € les 4 kg : 12 ÷ 4 = 3 €/kg, soit 3 euros par kilo.",
+   "piege": "km/h se lit « kilomètre PAR heure » : des km divisés par des h."
+  },
+  {
+   "regle": "Longueurs : × 10 d’une unité à la suivante ; aires : × 100.",
+   "exemple": "3 m = 300 cm ; 3 m² = 30 000 cm² ; 1 m² = 100 dm².",
+   "piege": "Pour les aires, c’est × 100 par rang : 1 m² ≠ 100 cm²."
+  },
+  {
+   "regle": "On garde les unités dans le calcul : si l’unité trouvée est fausse, le calcul l’est aussi.",
+   "exemple": "Durée = distance ÷ vitesse : 120 km ÷ 80 km/h = 1,5 h, c’est bien une durée.",
+   "piege": "Des km × h pour une vitesse : on a multiplié au lieu de diviser."
+  },
+  {
+   "regle": "Défi : convertir dans les bonnes unités avant de calculer.",
+   "exemple": "Coureur à 18 km/h : 18 000 m ÷ 3 600 s = 5 m/s.",
+   "piege": "De km/h à m/s, on divise par 3,6, pas par 3 600."
+  }
+ ],
+ "4e/stat_donnee": [
+  {
+   "regle": "On croise la bonne ligne et la bonne colonne : la case donne l’effectif cherché.",
+   "exemple": "Tableau des pointures : sous « 38 », on lit 7 → 7 élèves chaussent du 38.",
+   "piege": "Ne pas confondre la ligne des valeurs et la ligne des effectifs."
+  },
+  {
+   "regle": "On lit le titre et les axes, puis on va du haut de la barre vers l’axe des effectifs.",
+   "exemple": "Diagramme des sports : la barre « natation » monte à 12 → 12 élèves nagent.",
+   "piege": "Regarder l’échelle : un carreau peut valoir 2 ou 5, pas toujours 1."
+  },
+  {
+   "regle": "La hauteur d’un rectangle donne l’effectif ; la classe modale a le plus haut rectangle.",
+   "exemple": "Tailles : le plus haut rectangle est [150 ; 160[ avec 9 élèves → classe modale.",
+   "piege": "La classe modale est l’intervalle [150 ; 160[, pas l’effectif 9."
+  },
+  {
+   "regle": "L’effectif = le nombre de fois qu’une valeur apparaît ; l’effectif total = la somme.",
+   "exemple": "Notes : 12, 15, 12, 9, 12 → effectif de 12 : 3 ; effectif total : 5.",
+   "piege": "Barrer les valeurs au fur et à mesure pour n’en oublier aucune."
+  },
+  {
+   "regle": "Fréquence = effectif ÷ effectif total ; pour un pourcentage, on multiplie par 100.",
+   "exemple": "6 élèves sur 24 viennent à vélo : 6 ÷ 24 = 0,25, soit 25 %.",
+   "piege": "Diviser par l’effectif TOTAL, pas par un autre effectif."
+  },
+  {
+   "regle": "Défi : repérer d’abord ce que représente chaque case ou chaque axe.",
+   "exemple": "Croissants vendus : lundi 40, mardi 35, mercredi 25. Part du lundi : 40 ÷ 100 = 40 %.",
+   "piege": "Calculer l’effectif total avant la fréquence."
+  }
+ ],
+ "4e/stat_statistique": [
+  {
+   "regle": "Moyenne = somme des valeurs ÷ nombre de valeurs.",
+   "exemple": "Temps au 50 m : 8 s, 9 s, 10 s, 9 s → 36 ÷ 4 = 9 s.",
+   "piege": "Avec des effectifs, multiplier chaque valeur par son effectif avant d’ajouter."
+  },
+  {
+   "regle": "On range les valeurs ; la médiane coupe la série en deux moitiés de même effectif.",
+   "exemple": "Prix : 3, 5, 7, 8, 12 € → médiane 7 € ; 3, 5, 7, 9 € → (5 + 7) ÷ 2 = 6 €.",
+   "piege": "Ranger les valeurs dans l’ordre AVANT de chercher le milieu."
+  },
+  {
+   "regle": "Étendue = plus grande valeur − plus petite valeur.",
+   "exemple": "Températures de 12 °C à 27 °C → étendue : 27 − 12 = 15 °C.",
+   "piege": "L’étendue est un écart, pas la plus grande valeur."
+  },
+  {
+   "regle": "Moyenne : le niveau ; médiane : partage en deux ; étendue : les valeurs sont-elles dispersées ?",
+   "exemple": "Médiane 1,60 m : au moins la moitié des joueurs mesure 1,60 m ou moins.",
+   "piege": "Une valeur très grande change la moyenne, mais pas la médiane."
+  },
+  {
+   "regle": "On calcule la somme visée (moyenne × nombre de notes), puis on retire la somme déjà faite.",
+   "exemple": "Viser 14 de moyenne sur 4 notes ; déjà 12 + 15 + 13 = 40 → il faut 56 − 40 = 16.",
+   "piege": "Multiplier par le nombre TOTAL de notes : 14 × 4, pas 14 × 3."
+  },
+  {
+   "regle": "Défi : partir de la somme totale = moyenne × effectif.",
+   "exemple": "5 musiciens, âge moyen 30 ans ; un 6e de 36 ans arrive → (150 + 36) ÷ 6 = 31 ans.",
+   "piege": "Pas (30 + 36) ÷ 2 = 33 : les effectifs comptent."
+  }
+ ],
+ "4e/proba_experience": [
+  {
+   "regle": "Expérience aléatoire : on connaît les issues possibles, mais pas le résultat à l’avance.",
+   "exemple": "Dé : issues 1 à 6 ; l’événement « obtenir un nombre pair » regroupe 2, 4 et 6.",
+   "piege": "Une issue est UN résultat ; un événement peut en regrouper plusieurs."
+  },
+  {
+   "regle": "On liste TOUS les résultats possibles, sans oubli et sans doublon.",
+   "exemple": "Pièce : 2 issues (pile, face). Roue rouge, vert, bleu, jaune : 4 issues.",
+   "piege": "Lister dans l’ordre pour n’oublier aucune issue."
+  },
+  {
+   "regle": "Certain : arrive toujours (p = 1) ; impossible : jamais (p = 0) ; contraire : « non A ».",
+   "exemple": "Dé : « obtenir 7 » est impossible ; le contraire de « obtenir 6 » est « obtenir 1 à 5 ».",
+   "piege": "Le contraire de « obtenir 6 » n’est pas « obtenir 1 »."
+  },
+  {
+   "regle": "Équiprobable : toutes les issues ont la même chance (dé équilibré, tirage au hasard).",
+   "exemple": "Dé équilibré : 1 chance sur 6 par face. Sac de 3 rouges et 1 bleue : couleurs pas équiprobables.",
+   "piege": "Rouge ou bleu, ce n’est pas 50 % chacun : il faut compter les boules."
+  },
+  {
+   "regle": "p = nombre d’issues favorables ÷ nombre total d’issues, écrit en fraction.",
+   "exemple": "Jeu de 32 cartes, 4 as : p(as) = 4/32 = 1/8.",
+   "piege": "Mettre le nombre TOTAL d’issues en bas, pas celui des issues perdantes."
+  },
+  {
+   "regle": "On divise le haut par le bas, puis on multiplie par 100 pour le pourcentage.",
+   "exemple": "p = 3/4 = 3 ÷ 4 = 0,75, soit 75 % ; p = 1/5 = 0,2, soit 20 %.",
+   "piege": "Une probabilité est entre 0 et 1 : 1,5 ou 150 %, c’est impossible."
+  },
+  {
+   "regle": "On écrit les probabilités sous la même forme (décimale ou même dénominateur).",
+   "exemple": "Tombola A : 3 gagnants sur 10 = 0,3 ; B : 2 sur 5 = 0,4 → B donne plus de chances.",
+   "piege": "Plus de gagnants ne veut pas dire plus de chances : diviser par le total."
+  },
+  {
+   "regle": "Défi : compter les issues favorables et le total avant d’écrire la fraction.",
+   "exemple": "Panier de 5 bananes, 3 mangues, 2 kiwis : p(pas une mangue) = 7/10 = 0,7.",
+   "piege": "p(contraire) = 1 − p : 1 − 3/10 = 7/10, pas 3/7."
+  }
+ ],
+ "4e/proba_frequence": [
+  {
+   "regle": "Fréquence observée = nombre de fois où l’événement arrive ÷ nombre d’essais.",
+   "exemple": "40 lancers de punaise, 14 fois sur la pointe : 14 ÷ 40 = 0,35.",
+   "piege": "Diviser par le nombre d’essais, pas par le nombre d’échecs."
+  },
+  {
+   "regle": "On compare la fréquence observée à la probabilité calculée : proches, pas forcément égales.",
+   "exemple": "Pièce lancée 50 fois : 27 piles → 27 ÷ 50 = 0,54 ; probabilité calculée : 0,5.",
+   "piege": "Ne pas attendre une égalité parfaite : 0,54 et 0,5 sont proches."
+  },
+  {
+   "regle": "Plus on fait d’essais, plus la fréquence se rapproche de la probabilité.",
+   "exemple": "Face 6 : 3 fois sur 10 lancers → 0,3 ; 170 fois sur 1 000 → 0,17, proche de 1/6 ≈ 0,167.",
+   "piege": "Le hasard n’a pas de mémoire : il ne « rattrape » pas au coup suivant."
+  },
+  {
+   "regle": "Sur peu d’essais, la fréquence peut être loin de la probabilité : on ne conclut rien.",
+   "exemple": "4 lancers de pièce, 4 faces : fréquence 4 ÷ 4 = 1, alors que p = 0,5.",
+   "piege": "« 4 faces de suite » ne prouve pas que la pièce est truquée."
+  },
+  {
+   "regle": "Défi : estimer une probabilité inconnue par la fréquence sur BEAUCOUP d’essais.",
+   "exemple": "500 bouchons lancés, 150 retombent debout : p ≈ 150 ÷ 500 = 0,3.",
+   "piege": "C’est une estimation (≈), pas une valeur exacte."
+  }
+ ],
+ "4e/fonction_dependance": [
+  {
+   "regle": "Une grandeur dépend d’une autre si elle change quand l’autre change.",
+   "exemple": "Pommes à 2 € le kg : 3 kg → 2 × 3 = 6 € ; le prix dépend de la masse.",
+   "piege": "Dépendre n’est pas toujours proportionnel : le taxi a une prise en charge."
+  },
+  {
+   "regle": "On applique les étapes dans l’ordre, en partant du nombre choisi.",
+   "exemple": "Choisir 4, × 3, puis + 5 : 4 × 3 = 12 ; 12 + 5 = 17.",
+   "piege": "Garder l’ordre : (4 + 5) × 3 = 27, c’est un autre programme."
+  },
+  {
+   "regle": "Une ligne donne le départ, l’autre le résultat : on lit dans un sens ou dans l’autre.",
+   "exemple": "Vélo loué 3 € + 3 € par heure : 2 h → 9 € ; pour 15 €, on lit 4 h.",
+   "piege": "Ne pas confondre la ligne de départ et la ligne du résultat."
+  },
+  {
+   "regle": "On part de l’axe horizontal, on monte jusqu’à la courbe, puis on lit sur l’axe vertical.",
+   "exemple": "Courbe de température : à 14 h, le point est au niveau de 26 °C.",
+   "piege": "Abscisse en bas, ordonnée à gauche : ne pas inverser les axes."
+  },
+  {
+   "regle": "Formule → tableau → graphique : on calcule des valeurs, puis on place les points.",
+   "exemple": "Prix = 5 × nombre de places : 2 places → 10 € ; on place le point (2 ; 10).",
+   "piege": "Point (2 ; 10) : d’abord l’abscisse 2, puis l’ordonnée 10."
+  },
+  {
+   "regle": "On écrit la formule de la dépendance, puis on remplace par la valeur connue.",
+   "exemple": "Plombier : 40 € + 30 € par heure. 3 h → 40 + 30 × 3 = 40 + 90 = 130 €.",
+   "piege": "La multiplication d’abord : pas (40 + 30) × 3 = 210 €."
+  },
+  {
+   "regle": "Défi : comparer deux formules en calculant pour plusieurs valeurs.",
+   "exemple": "Abonnement A : 10 € ; B : 2 € par film. 5 films : B = 10 €, égalité ; 6 films : A gagne.",
+   "piege": "Le moins cher change selon la valeur : tester plusieurs cas."
+  }
+ ],
+ "4e/algo_programmation": [
+  {
+   "regle": "Une condition est vraie ou fausse : « si … alors » n’agit que si elle est vraie.",
+   "exemple": "Si température > 25 alors dire « Short ! » : 28 → vrai, il le dit ; 20 → faux.",
+   "piege": "« > 25 » est faux pour 25 : écrire « ⩾ 25 » si 25 doit compter."
+  },
+  {
+   "regle": "« Si … alors … sinon … » : un seul des deux blocs s’exécute.",
+   "exemple": "Si âge < 12 alors prix = 5 € sinon prix = 8 € : 10 ans → 5 € ; 14 ans → 8 €.",
+   "piege": "Sans « sinon », rien ne se passe quand la condition est fausse."
+  },
+  {
+   "regle": "Une variable est une boîte qui garde une valeur ; « mettre » la remplace, « ajouter » la change.",
+   "exemple": "Mettre score à 0, puis ajouter 10 trois fois : score = 30.",
+   "piege": "Oublier « mettre score à 0 » au départ : il garde l’ancienne partie."
+  },
+  {
+   "regle": "On découpe : ce qu’on demande, le calcul à faire, ce qu’on affiche.",
+   "exemple": "Demander le côté, mettre périmètre à 4 × côté, dire périmètre : côté 7 → 28.",
+   "piege": "Calculer avec la réponse tapée, pas avec un nombre écrit d’avance."
+  },
+  {
+   "regle": "On change une seule chose à la fois, puis on teste le programme.",
+   "exemple": "Carré : répéter 4 fois (avancer 50, tourner 90°). Hexagone : répéter 6 fois, tourner 60°.",
+   "piege": "Tourner de 360° ÷ nombre de côtés, pas de l’angle intérieur (120°)."
+  },
+  {
+   "regle": "Défi : faire tourner le programme à la main, ligne par ligne, dans un tableau.",
+   "exemple": "x = 1 ; répéter 4 fois : x = x × 2 → 2, 4, 8, 16. À la fin, x = 16.",
+   "piege": "Compter les tours de boucle : 4 tours, pas 3."
+  }
+ ],
+ "4e/triangle_points_remarquables": [
+  {
+   "regle": "Une médiane relie un sommet au milieu du côté opposé.",
+   "exemple": "Dans ABC, I milieu de [BC] et BC = 8 cm : [AI] est une médiane, BI = IC = 4 cm.",
+   "piege": "Une médiane n’est pas forcément perpendiculaire au côté."
+  },
+  {
+   "regle": "Les 3 médianes se coupent en G, le centre de gravité, aux deux tiers de chaque médiane depuis le sommet.",
+   "exemple": "Médiane [AI] de 9 cm : AG = 9 × 2 ÷ 3 = 6 cm et GI = 9 − 6 = 3 cm.",
+   "piege": "Les deux tiers se comptent depuis le SOMMET, pas depuis le milieu."
+  },
+  {
+   "regle": "La bissectrice coupe l’angle en deux angles égaux ; ses points sont à même distance des côtés.",
+   "exemple": "xÔy = 70° → deux angles de 35° ; M sur la bissectrice est à 3 cm de [Ox) et de [Oy).",
+   "piege": "La distance à un côté se mesure perpendiculairement, pas en biais."
+  },
+  {
+   "regle": "Les 3 bissectrices se coupent en I, centre du cercle inscrit, qui touche les 3 côtés.",
+   "exemple": "I est à 2 cm de [AB] : il est aussi à 2 cm de [BC] et de [AC] ; rayon du cercle : 2 cm.",
+   "piege": "Ne pas confondre avec le cercle circonscrit, qui passe par les sommets."
+  },
+  {
+   "regle": "Une hauteur part d’un sommet, perpendiculaire au côté opposé ; les 3 se coupent en H.",
+   "exemple": "Base BC = 10 cm, hauteur issue de A = 6 cm → aire = 10 × 6 ÷ 2 = 30 cm².",
+   "piege": "Avec un angle obtus, l’orthocentre H est à l’extérieur du triangle."
+  }
+ ],
+ "4e/arcs_secteurs": [
+  {
+   "regle": "Longueur de l’arc = périmètre du cercle × angle ÷ 360°.",
+   "exemple": "Pizza de rayon 15 cm, part de 60° : 2 × π × 15 × 60 ÷ 360 = 5π ≈ 15,7 cm de croûte.",
+   "piege": "Prendre 2 × π × r (le périmètre), pas π × r^2 (l’aire)."
+  },
+  {
+   "regle": "Aire du secteur = aire du disque × angle ÷ 360°.",
+   "exemple": "Arroseur de portée 10 m sur 90° : π × 10^2 × 90 ÷ 360 = 25π ≈ 78,5 m².",
+   "piege": "Le rayon au carré : π × 10^2 = 100π, pas 20π."
+  }
+ ],
+ "4e/distance_droite": [
+  {
+   "regle": "La distance d’un point à une droite se mesure sur la perpendiculaire : le plus court chemin.",
+   "exemple": "Nageur en A, plage (d) : il rejoint le bord en H par la perpendiculaire, AH = 30 m.",
+   "piege": "En biais, c’est plus long : AM > AH dès que M n’est pas H."
+  },
+  {
+   "regle": "Entre deux parallèles, la distance se mesure sur une perpendiculaire ; elle est partout la même.",
+   "exemple": "Deux étagères parallèles : 35 cm entre elles, à gauche comme à droite.",
+   "piege": "Mesurer bien perpendiculairement, sinon on trouve trop."
+  }
+ ],
+ "4e/droite_milieux": [
+  {
+   "regle": "La droite qui joint les milieux de deux côtés est parallèle au 3e côté et mesure sa moitié.",
+   "exemple": "I milieu de [AB], J milieu de [AC], BC = 12 cm : (IJ) // (BC) et IJ = 12 ÷ 2 = 6 cm.",
+   "piege": "IJ est la moitié du côté PARALLÈLE à (IJ), pas d’un autre côté."
+  },
+  {
+   "regle": "Une droite par le milieu d’un côté, parallèle à un 2e côté, coupe le 3e en son milieu.",
+   "exemple": "I milieu de [AB], (IJ) // (BC) avec J sur [AC], AC = 10 cm → AJ = 5 cm.",
+   "piege": "Il faut le milieu ET la parallèle : l’un sans l’autre ne suffit pas."
+  }
+ ],
+ "4e/tangente_cercle": [
+  {
+   "regle": "La tangente en T est perpendiculaire au rayon [OT] : le triangle OTA est rectangle en T.",
+   "exemple": "OT = 5 cm, OA = 13 cm : AT^2 = 13^2 − 5^2 = 169 − 25 = 144, donc AT = 12 cm.",
+   "piege": "L’hypoténuse est [OA] : on soustrait, on n’ajoute pas."
+  },
+  {
+   "regle": "Distance d du centre à la droite : d < r, 2 points ; d = r, tangente ; d > r, aucun point.",
+   "exemple": "Rayon 4 cm : d = 3 cm → 2 points ; d = 4 cm → tangente ; d = 6 cm → aucun point.",
+   "piege": "Mesurer d sur la perpendiculaire, pas vers n’importe quel point."
+  }
+ ],
+ "4e/ordre_inequations": [
+  {
+   "regle": "Ajouter, ou multiplier par un positif, garde le sens ; multiplier par un négatif l’inverse.",
+   "exemple": "3 < 5 donc 3 + 2 < 5 + 2 ; mais 3 × (−2) = −6 et 5 × (−2) = −10 : −6 > −10.",
+   "piege": "Par un nombre négatif, on retourne le signe : < devient >."
+  },
+  {
+   "regle": "On isole x comme dans une équation ; si on divise par un négatif, on retourne le signe.",
+   "exemple": "Taxi : 4 € + 3 € par km, budget 19 € : 3x + 4 ⩽ 19, 3x ⩽ 15, donc x ⩽ 5 km.",
+   "piege": "−2x < 6 donne x > −3, pas x < −3."
+  }
+ ]
+}
