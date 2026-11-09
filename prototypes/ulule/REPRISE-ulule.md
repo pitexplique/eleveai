@@ -144,3 +144,4 @@ Votre enfant aime les dessins animés ? Aidez-nous à finir ceux qui apprennent 
   - Fuseau horaire Ulule : **La Réunion (UTC+4)**, à défaut Maurice ou Dubaï (même heure).
 - 09/11 : **deux contreparties ajoutées** (sa proposition) : **69 € Duo famille à offrir** (deux codes d'un an) et **99 € 1 an + visio** (30 min en janvier 2027, limitée à 20 places, au vouvoiement « votre enfant »). Total 11 contreparties, au-delà des 10 conseillées par Ulule : si Ulule tique, retirer « 6 mois à offrir ». Ajoutées à `page-ulule.md` et à `description-ulule.html`.
   - 09/11 : « 30 minutes, ça fait léger » → **deux visios de 45 min** (janvier et avril 2027), **15 places**.
+- 09/11 : **ajout « 1 an, offre des 50 premiers » à 29 €** (50 places). Pour rester à 10 contreparties : **« 3 mois à offrir » et « 6 mois à offrir » retirés** (le duo à 69 € les remplace). Description : « Les 50 premiers l'ont pour 29 € », « Offrez : 1 mois ou 1 an en version cadeau ».

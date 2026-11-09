@@ -55,12 +55,15 @@ Vidéo de présentation : **https://youtu.be/HQ7B3ElMH8Y** (non répertoriée).
 **22 € · 6 mois avec Ti Margo**
 6 mois d'abonnement famille, soit une demi-année scolaire.
 
+**29 € · 1 an, offre des 50 premiers** *(50 places)*
+1 an d'abonnement famille à 29 € au lieu de 59,40 €, réservé aux 50 premiers contributeurs. Ensuite, le tarif fondateur reste à 39 €.
+
 **39 € · 1 an avec Ti Margo** ⭐ *(la contrepartie phare)*
 1 an d'abonnement famille, au tarif fondateur de 39 € au lieu de 59,40 €. Toute l'année scolaire, jusqu'au brevet.
 
 **🎁 Les mêmes, « à offrir » : 4,95 € · 12 € · 22 € · 39 €**
 Même abonnement, au même prix. Vous recevez un **code cadeau** et une **carte Ti Margo à imprimer**, avec le nom de la personne qui offre (« De la part de Papi et Mamie »). Pour Noël, un anniversaire, des petits-enfants, un neveu, un filleul.
-Titres conseillés sur Ulule : « 1 mois à offrir », « 3 mois à offrir », « 6 mois à offrir », « 1 an à offrir ».
+Titres conseillés sur Ulule : « 1 mois à offrir », « 1 an à offrir » (09/11 : 3 et 6 mois à offrir retirés pour rester à 10 contreparties ; le duo à 69 € les remplace).
 
 **69 € · Duo famille à offrir**
 Deux codes d'un an au tarif fondateur, pour deux enfants ou pour en offrir un. Avec deux cartes Ti Margo à imprimer.
