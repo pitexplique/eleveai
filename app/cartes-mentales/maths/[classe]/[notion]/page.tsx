@@ -149,10 +149,15 @@ function centres(rangs: Rang[]) {
 }
 
 function Centre({ texte, seul }: { texte: string; seul: boolean }) {
-  const taille = texte.length <= 18 ? "text-xl" : texte.length <= 32 ? "text-lg" : texte.length <= 50 ? "text-base" : "text-sm";
+  // Entre deux bulles, le centre est étroit (un tiers de la carte) : un mot long
+  // (« Pourcentages ») y débordait du cercle → une taille de moins, moins de marge.
+  const etroitLong = !seul && /\S{12,}/.test(texte);
+  const tailles = ["text-xl", "text-lg", "text-base", "text-sm"];
+  const rang = texte.length <= 18 ? 0 : texte.length <= 32 ? 1 : texte.length <= 50 ? 2 : 3;
+  const taille = tailles[Math.min(3, rang + (etroitLong ? 1 : 0))];
   return (
     <div
-      className={`flex items-center justify-center rounded-[50%] border-[3px] border-teal-600 bg-teal-50 px-4 py-3 text-center font-black leading-tight text-teal-900 ${taille} ${seul ? "min-h-full w-[44%]" : "min-h-[42%] w-full"}`}
+      className={`flex items-center justify-center rounded-[50%] border-[3px] border-teal-600 bg-teal-50 py-3 text-center font-black leading-tight text-teal-900 ${taille} ${seul ? "min-h-full w-[44%]" : "min-h-[42%] w-full"} ${etroitLong ? "px-2" : "px-4"}`}
     >
       <span>
         <TexteMaths texte={texte} />
