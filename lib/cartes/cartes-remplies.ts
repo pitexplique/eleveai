@@ -12,6 +12,8 @@
 // « continue ! » : toutes les notions de 6e et de 4e sont remplies, dans
 // lib/cartes/remplies/<classe>.json (même forme). Les cartes écrites ici, à la
 // main, l'emportent sur celles des fichiers.
+// ⭐ 09/11 — CM2 aussi (31 notions, lib/cartes/remplies/cm2.json), plus simple
+// encore : mots du quotidien, pas de lettres, « ÷ » pour diviser.
 //
 // Collège : phrases courtes, un seul calcul par exemple (ses 6e lisent mal).
 // Une bulle par micro, DANS L'ORDRE de lib/videos/bilans-notions.json (une carte
@@ -21,6 +23,7 @@
 
 import SIXIEME from "./remplies/6e.json";
 import QUATRIEME from "./remplies/4e.json";
+import CM2 from "./remplies/cm2.json";
 
 export type BulleRemplie = { regle: string; exemple: string; piege: string };
 
@@ -415,6 +418,7 @@ const ECRITES_A_LA_MAIN: Record<string, BulleRemplie[]> = {
 export const CARTES_REMPLIES: Record<string, BulleRemplie[]> = {
   ...(SIXIEME as Record<string, BulleRemplie[]>),
   ...(QUATRIEME as Record<string, BulleRemplie[]>),
+  ...(CM2 as Record<string, BulleRemplie[]>),
   ...ECRITES_A_LA_MAIN,
 };
 
