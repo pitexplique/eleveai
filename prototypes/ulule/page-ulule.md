@@ -65,8 +65,8 @@ Titres conseillés sur Ulule : « 1 mois à offrir », « 3 mois à offrir », �
 **69 € · Duo famille à offrir**
 Deux codes d'un an au tarif fondateur, pour deux enfants ou pour en offrir un. Avec deux cartes Ti Margo à imprimer.
 
-**99 € · 1 an + visio avec Frédéric** *(20 places)*
-1 an d'abonnement famille et une visio de 30 minutes, en janvier 2027, pour parler des progrès de votre enfant.
+**99 € · 1 an + 2 visios avec Frédéric** *(15 places)*
+1 an d'abonnement famille et deux visios de 45 minutes : en janvier 2027 pour faire le point, en avril 2027 pour préparer la fin d'année ou le brevet.
 
 **60 € · Licence classe, 1 an** *(enseignants, écoles, associations)*
 Le suivi de toute la classe pendant 1 an, jusqu'à 30 élèves (2 € par élève et par an), et le nom de l'école sur le mur des soutiens.
