@@ -28,7 +28,8 @@
 // ⚠️ PAS DE QUESTION À RÉDIGER : `applyMathsKeyboardFree` retire les items
 // `format: "open"`. Un CE1 clique, il ne tape pas.
 
-import type { ReperageCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { CanvasFigure, DifficultyLevel, ReperageCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { cap, entre, etapes, gab, melange, prenom, qcm, qcmN, un } from "./geo-outils-ce1";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -63,7 +64,11 @@ Calcul : ${calcul}
 Conclusion : ${conclusion}`;
 }
 
-export const reperageBank: TutorBankItemV4[] = [
+/** « de le bureau » → « du bureau », « à le bureau » → « au bureau ». */
+const du = (l: string) => (l.startsWith("le ") ? "du " + l.slice(3) : "de " + l);
+const au = (l: string) => (l.startsWith("le ") ? "au " + l.slice(3) : "à " + l);
+
+const anciens: TutorBankItemV4[] = [
   /* =========================================================
      CE1_ESPACE_POSITIONS — le vocabulaire des positions
   ========================================================= */
@@ -248,7 +253,7 @@ export const reperageBank: TutorBankItemV4[] = [
       const etape = lieux[1];
       const arrivee = lieux[2];
       return {
-        text: `Sur le plan de l'école, Kevin part de ${depart}, passe devant ${etape}, puis s'arrête à ${arrivee}. Où finit-il son trajet ?`,
+        text: `Sur le plan de l'école, Kevin part ${du(depart)}. Il passe devant ${etape}, puis s'arrête ${au(arrivee)}. Où finit-il son trajet ?`,
         format: "qcm",
         choices: makeChoices(arrivee, [depart, etape, lieux[3], lieux[4]]),
         expected: [arrivee],
@@ -256,8 +261,8 @@ export const reperageBank: TutorBankItemV4[] = [
         explanation: exp(
           "Un plan sert à décrire un trajet : on suit les étapes dans l'ordre.",
           "On repère le point de départ, puis on avance d'étape en étape.",
-          `Kevin part de ${depart}, passe devant ${etape} sans s'arrêter, et termine à ${arrivee}.`,
-          `Il finit à ${arrivee}.`,
+          `Kevin part ${du(depart)}, passe devant ${etape} sans s'arrêter, et termine ${au(arrivee)}.`,
+          `Il finit ${au(arrivee)}.`,
         ),
       };
     },
@@ -574,3 +579,264 @@ export const reperageBank: TutorBankItemV4[] = [
     },
   },
 ];
+
+/* ═════════════════════════════════════════════════════════════════════════
+   GABARITS DU 10/11/2026 — robustesse et dessins (assemblages, quadrillage).
+   Mesuré ce jour-là : 2 à 5 squelettes pour ces cinq micros, 15 à 18
+   répétitions sur 20. Les trois micros d'espace (positions, situer,
+   représentation) passaient déjà : leurs gabarits sont gardés tels quels.
+   Ici, le dessin porte la question : la tour de cubes à compter, le quadrillage
+   avec ses lettres et ses nombres, le chemin fléché de Pic.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+const NR = "reperage";
+const g = (micro: string, id: string, d: DifficultyLevel, hint: string, gen: Parameters<typeof gab>[5]) => gab(NR, micro, id, d, hint, gen);
+const COLS = ["A", "B", "C", "D", "E", "F", "G"];
+const HEROS = ["Pic", "Nina", "Téo", "Zoé", "Ravi"];
+const il = (h: string) => (h === "Nina" || h === "Zoé" ? "elle" : "il");
+/** « aller au trésor », « aller à la clé ». */
+const TRESORS = ["au trésor", "à la clé", "au gâteau", "à la pomme", "au ballon", "à l'étoile", "au panier de letchis", "à la cabane"];
+const AMBIANCE = ["", "C'est le jeu du robot.", "C'est la course au trésor.", "Direction le goûter !", "On joue sur le tapis de la classe.", "Pic cherche des graines."];
+
+/* ─────────────── ce1_espace_assemblages ─────────────── */
+const RA = "ce1_espace_assemblages";
+
+/** Une rangée de colonnes de cubes, toutes visibles : hauteurs 1 à 4. */
+function rangee(hauteurs: number[]): CanvasFigure {
+  const cubes: { x: number; y: number; z: number }[] = [];
+  hauteurs.forEach((h, x) => {
+    for (let z = 0; z < h; z++) cubes.push({ x, y: 0, z });
+  });
+  return { kind: "solide_3d", solide: "assemblage_cubes", cubes, display: { showLabels: false, showDimensions: false } } as CanvasFigure;
+}
+
+function compterCubes() {
+  const n = entre(2, 4);
+  const h = Array.from({ length: n }, () => entre(1, 4));
+  const total = h.reduce((a, b) => a + b, 0);
+  const p = prenom();
+  const debut = un([`${p} a construit cet escalier de cubes.`, `${p} empile des cubes pour faire un château.`, `Voici la tour de cubes de ${p}.`, `Pic a posé ces cubes en bois.`, `${p} construit un mur avec des cubes.`, `Au jardin d'enfants, ${p} a fait cette construction.`]);
+  return {
+    text: `${debut} ${un(["Combien de cubes a-t-il fallu ?", "Combien de cubes en tout ?", "Compte les cubes.", "Il y a combien de cubes ?"])}`,
+    ...qcmN(total, [total - 1, total + 1, n, Math.max(...h) * n]),
+    canvas: rangee(h),
+    explanation: etapes("on compte colonne par colonne, de bas en haut.", `${h.join(" + ")} = ${total}.`, `Il y a ${total} cubes.`),
+  };
+}
+
+function cubesAAjouter() {
+  const n = entre(2, 4);
+  const haut = entre(2, 4);
+  const h = Array.from({ length: n }, () => entre(1, haut));
+  if (h.every((x) => x === haut)) h[0] = haut - 1;
+  const manque = h.reduce((a, b) => a + (haut - b), 0);
+  return {
+    text: `${un([`${prenom()} veut que toutes les colonnes aient ${haut} cubes.`, `Pour finir son mur, ${prenom()} veut ${haut} cubes dans chaque colonne.`, `Le maçon veut un mur de ${haut} cubes de haut partout.`])} ${un(["Combien de cubes faut-il ajouter ?", "Combien de cubes manque-t-il ?"])}`,
+    ...qcmN(manque, [manque + 1, manque - 1, haut * n, h.reduce((a, b) => a + b, 0)]),
+    canvas: rangee(h),
+    explanation: etapes(`on regarde ce qui manque dans chaque colonne pour arriver à ${haut}.`, h.map((x) => haut - x).join(" + ") + ` = ${manque}.`, `Il faut ajouter ${manque} cubes.`),
+  };
+}
+
+/* ─────────────── ce1_reperage_cases_noeuds ─────────────── */
+const RC = "ce1_reperage_cases_noeuds";
+
+function caseOuNoeud() {
+  const surNoeud = Math.random() < 0.5;
+  const x = entre(1, 4) + (surNoeud ? 0 : 0.5);
+  const y = entre(1, 3) + (surNoeud ? 0 : 0.5);
+  const h = un(HEROS);
+  const juste = surNoeud ? "sur un nœud" : "dans une case";
+  return {
+    text: `${un([`${h} est sur le quadrillage.`, `Voici ${h} sur le quadrillage.`, `${h} joue sur le quadrillage.`])} ${un([`Est-${il(h)} sur un nœud ou dans une case ?`, `Où est ${h} : sur un nœud ou dans une case ?`])}`,
+    ...qcm(juste, [surNoeud ? "dans une case" : "sur un nœud", "sur un trait, entre deux nœuds"]),
+    canvas: { kind: "reperage", grid: { rows: 4, cols: 5 }, points: [{ x, y, label: h, color: "#ef4444" }], display: { showCoordinates: false, showAxes: false } } as CanvasFigure,
+    explanation: etapes("un nœud est un point où deux traits se croisent ; une case est un petit carré.", surNoeud ? "Le point rouge est là où deux traits se croisent." : "Le point rouge est au milieu d'un petit carré.", `${h} est ${juste}.`),
+  };
+}
+
+function compterCases() {
+  const rows = entre(2, 4);
+  const cols = entre(3, 5);
+  const cas = un(["toutes", "coloriees"] as const);
+  const k = entre(2, Math.min(7, rows * cols - 1));
+  const cells = melange(Array.from({ length: rows * cols }, (_, i) => [Math.floor(i / cols), i % cols] as [number, number])).slice(0, k);
+  const juste = cas === "toutes" ? rows * cols : k;
+  const p = prenom();
+  return {
+    text: cas === "toutes"
+      ? `${un([`${p} dessine un quadrillage.`, `Voici le tapis de jeu de ${p}.`, `La maîtresse a tracé ce quadrillage.`])} ${un(["Combien de cases y a-t-il ?", "Compte toutes les cases.", "Combien de petits carrés en tout ?"])}`
+      : `${un([`${p} a colorié des cases.`, `Pic a peint des cases en bleu.`, `${p} joue à la bataille navale.`])} ${un(["Combien de cases sont coloriées ?", "Compte les cases coloriées."])}`,
+    ...qcmN(juste, cas === "toutes" ? [(rows + 1) * (cols + 1), rows + cols, juste + 1, juste - 1] : [k + 1, k - 1, rows * cols - k]),
+    canvas: { kind: "figure_libre", size: { cellSize: 30, padding: 10 }, grid: { rows, cols, filledCells: cas === "toutes" ? [] : cells }, display: { showGrid: true, showFilled: true } } as CanvasFigure,
+    explanation: etapes("une case est un petit carré du quadrillage.", cas === "toutes" ? `${rows} rangées de ${cols} cases.` : `On compte les cases coloriées, une par une.`, `Il y a ${juste} cases.`),
+  };
+}
+
+/* ─────────────── ce1_reperage_coordonnees ─────────────── */
+const RD = "ce1_reperage_coordonnees";
+
+/** Un quadrillage : colonnes A, B, C…, lignes 1, 2, 3… ; quelques personnages sur des nœuds. */
+function carte(nb: number) {
+  const cols = 5;
+  const rows = 4;
+  const pris = new Set<string>();
+  const persos = melange([...HEROS]).slice(0, nb).map((label) => {
+    let x = 0;
+    let y = 0;
+    // Deux personnages jamais voisins sur une même ligne : leurs noms se chevauchaient.
+    do {
+      x = entre(0, cols);
+      y = entre(1, rows);
+    } while ([...pris].some((c) => {
+      const [a, b] = c.split(",").map(Number);
+      return (b === y && Math.abs(a - x) < 2) || (a === x && Math.abs(b - y) < 1);
+    }));
+    pris.add(`${x},${y}`);
+    return { x, y, label };
+  });
+  const canvas = { kind: "reperage", grid: { rows, cols, xLabels: COLS.slice(0, cols + 1), yLabels: ["", "1", "2", "3", "4"] }, points: persos.map((q) => ({ ...q, color: "#ef4444" })), display: { showAxes: false } } as CanvasFigure;
+  return { persos, canvas };
+}
+const nomCase = (x: number, y: number) => `colonne ${COLS[x]}, ligne ${y}`;
+
+function ouEst(ctx: boolean) {
+  const { persos, canvas } = carte(ctx ? 3 : 2);
+  const c = un(persos);
+  const faux = [nomCase(Math.min(c.x + 1, 5), c.y), nomCase(Math.max(c.x - 1, 0), c.y), nomCase(c.x, c.y === 4 ? 3 : c.y + 1), ...persos.filter((q) => q !== c).map((q) => nomCase(q.x, q.y))];
+  const debut = ctx ? un(["On joue à cache-cache sur le quadrillage.", "Voici le plan du parc.", "La troupe se cache dans le jardin.", "Voici la carte du trésor."]) : un(["Regarde le quadrillage.", ""]);
+  return {
+    text: `${debut} ${un([`Où est ${c.label} ?`, `Où se trouve ${c.label} ?`, `Donne la place de ${c.label}.`])}`.trim(),
+    ...qcm(nomCase(c.x, c.y), faux),
+    canvas,
+    explanation: etapes("on descend jusqu'à la lettre de la colonne, puis on va à gauche jusqu'au nombre de la ligne.", `${c.label} est sur la colonne ${COLS[c.x]} et la ligne ${c.y}.`, `${nomCase(c.x, c.y)}.`),
+  };
+}
+
+function quiEst() {
+  const { persos, canvas } = carte(3);
+  const c = un(persos);
+  return {
+    text: `${un(["Regarde le quadrillage.", "Voici le plan de la cour.", "La troupe joue au parc."])} ${un([`Qui est en ${nomCase(c.x, c.y)} ?`, `Qui se trouve en ${nomCase(c.x, c.y)} ?`])}`,
+    ...qcm(c.label, [...persos.filter((q) => q !== c).map((q) => q.label), un(HEROS.filter((h) => !persos.some((q) => q.label === h)))]),
+    canvas,
+    explanation: etapes("on trouve la colonne, puis la ligne, et on regarde qui est au croisement.", `Au croisement de ${COLS[c.x]} et ${c.y}, il y a ${c.label}.`, `C'est ${c.label}.`),
+  };
+}
+
+function lireNombres() {
+  const x = entre(1, 5);
+  const y = entre(1, 4);
+  const xy = (a: number, b: number) => `colonne ${a}, ligne ${b}`;
+  const h = un(HEROS);
+  return {
+    text: `${un([`${h} est sur le quadrillage.`, `Où est ${h} ?`, `On cherche ${h}.`])} ${un(["Donne sa colonne, puis sa ligne.", "Lis la colonne en bas, puis la ligne à gauche.", "Quelle est sa place ?"])}`,
+    ...qcm(xy(x, y), [x !== y ? xy(y, x) : xy(x + 1, y), xy(x + 1, y), xy(x, y + 1), xy(x - 1, y)].filter((v) => v !== xy(x, y))),
+    canvas: { kind: "reperage", grid: { rows: 5, cols: 6 }, points: [{ x, y, label: h, color: "#ef4444" }], display: { showAxes: false } } as CanvasFigure,
+    explanation: etapes("on lit d'abord la colonne (en bas), puis la ligne (à gauche).", `Colonne ${x}, ligne ${y}. Attention : « colonne ${y}, ligne ${x} » est une autre place.`, `${xy(x, y)}.`),
+  };
+}
+
+/* ─────────────── ce1_reperage_deplacement ─────────────── */
+const RM = "ce1_reperage_deplacement";
+type Pas = { direction: "haut" | "bas" | "gauche" | "droite"; count: number };
+const FLECHE: Record<Pas["direction"], string> = { haut: "en haut", bas: "en bas", gauche: "à gauche", droite: "à droite" };
+const phrase = (p: Pas) => `${p.count} case${p.count > 1 ? "s" : ""} ${FLECHE[p.direction]}`;
+/** « 1 case en bas, 2 cases à gauche, puis 1 case en haut » : un seul « puis », la phrase reste courte. */
+const suite = (pas: Pas[]) => (pas.length < 2 ? pas.map(phrase).join("") : `${pas.slice(0, -1).map(phrase).join(", ")}, puis ${phrase(pas[pas.length - 1])}`);
+
+/** Un chemin qui reste dans le quadrillage 6 × 5. */
+function chemin(nb: number) {
+  for (;;) {
+    let x = entre(0, 6);
+    let y = entre(0, 5);
+    const depart = { x, y };
+    const pas: Pas[] = [];
+    let ok = true;
+    let derniere = "";
+    for (let k = 0; k < nb; k++) {
+      const dir = un((["haut", "bas", "gauche", "droite"] as const).filter((d) => d !== derniere && !(derniere === "haut" && d === "bas") && !(derniere === "bas" && d === "haut") && !(derniere === "gauche" && d === "droite") && !(derniere === "droite" && d === "gauche")));
+      const c = entre(1, 3);
+      x += dir === "droite" ? c : dir === "gauche" ? -c : 0;
+      y += dir === "haut" ? c : dir === "bas" ? -c : 0;
+      if (x < 0 || x > 6 || y < 0 || y > 5) ok = false;
+      pas.push({ direction: dir, count: c });
+      derniere = dir;
+    }
+    if (ok && (x !== depart.x || y !== depart.y)) return { depart, pas, arrivee: { x, y } };
+  }
+}
+const place = (x: number, y: number) => `colonne ${x}, ligne ${y}`;
+
+function ouArrive(nb: number, dessine: boolean) {
+  const { depart, pas, arrivee } = chemin(nb);
+  const h = un(HEROS);
+  const faux = [place(arrivee.y, arrivee.x), place(arrivee.x + 1, arrivee.y), place(arrivee.x, arrivee.y + 1), place(arrivee.x - 1, arrivee.y), place(arrivee.x, Math.max(0, arrivee.y - 1))].filter((v) => v !== place(arrivee.x, arrivee.y));
+  return {
+    text: `${un(AMBIANCE)} ${h} est en ${place(depart.x, depart.y)}. ${dessine ? un(["Suis les flèches.", "Suis le chemin fléché.", "Les flèches montrent son chemin."]) : `${cap(il(h))} va : ${suite(pas)}.`} ${un([`Où arrive ${h} ?`, "Quelle est la place d'arrivée ?", "Où finit le chemin ?"])}`.trim(),
+    ...qcm(place(arrivee.x, arrivee.y), faux),
+    canvas: { kind: "reperage", grid: { rows: 5, cols: 6 }, path: dessine ? { start: { ...depart, label: h }, steps: pas, showArrows: true } : undefined, points: dessine ? [] : [{ ...depart, label: h, color: "#ef4444" }], target: dessine ? { ...arrivee, label: "?", hidden: false } : undefined, display: { showAxes: false } } as CanvasFigure,
+    explanation: etapes("on fait les déplacements un par un, dans l'ordre.", pas.map(phrase).join(", puis ") + ".", `On arrive en ${place(arrivee.x, arrivee.y)}.`),
+  };
+}
+
+function quelChemin() {
+  const { depart, pas, arrivee } = chemin(2);
+  const h = un(HEROS);
+  const t = un(TRESORS);
+  const juste = pas.map(phrase).join(", puis ");
+  const inverse = (d: Pas["direction"]) => (d === "haut" ? "bas" : d === "bas" ? "haut" : d === "gauche" ? "droite" : "gauche");
+  const faux = [
+    pas.map((p) => phrase({ ...p, direction: inverse(p.direction) })).join(", puis "),
+    pas.map((p, k) => phrase({ ...p, count: p.count + (k === 0 ? 1 : 0) })).join(", puis "),
+    [phrase({ direction: pas[0].direction, count: pas[1].count }), phrase({ direction: pas[1].direction, count: pas[0].count })].join(", puis "),
+  ];
+  return {
+    text: `${un(AMBIANCE)} ${h} veut aller ${t} (★). ${un([`Quel chemin doit-${il(h)} suivre ?`, "Quel est le bon chemin ?", "Comment y aller ?"])}`.trim(),
+    ...qcm(juste, faux),
+    canvas: { kind: "reperage", grid: { rows: 5, cols: 6 }, points: [{ ...depart, label: h, color: "#ef4444" }, { ...arrivee, label: "★", color: "#f59e0b" }], display: { showAxes: false } } as CanvasFigure,
+    explanation: etapes("on compte les cases d'abord dans un sens, puis dans l'autre.", `Il faut : ${juste}.`, `Le bon chemin : ${juste}.`),
+  };
+}
+
+/* ─────────────── ce1_reperage_defi ─────────────── */
+const RF = "ce1_reperage_defi";
+
+function plusCourt() {
+  let a = { x: 0, y: 0 };
+  let b = { x: 0, y: 0 };
+  do {
+    a = { x: entre(0, 6), y: entre(0, 5) };
+    b = { x: entre(0, 6), y: entre(0, 5) };
+  } while (a.x === b.x || a.y === b.y || Math.abs(a.x - b.x) + Math.abs(a.y - b.y) < 4);
+  const n = Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+  const h = un(HEROS);
+  const t = un(TRESORS);
+  return {
+    text: `${un(["Défi !", "Pic lance un défi.", `${prenom()} lance un défi.`])} ${h} veut aller ${t} (★), sans passer en biais. ${un(["Combien de cases au minimum ?", "Quel est le plus petit nombre de cases ?"])}`,
+    ...qcmN(n, [n + 1, n + 2, Math.abs(a.x - b.x), Math.abs(a.y - b.y), n - 1]),
+    canvas: { kind: "reperage", grid: { rows: 5, cols: 6 }, points: [{ ...a, label: h, color: "#ef4444" }, { ...b, label: "★", color: "#f59e0b" }], display: { showAxes: false } } as CanvasFigure,
+    explanation: etapes("on compte les cases à faire de côté, puis celles en haut ou en bas.", `${Math.abs(a.x - b.x)} de côté + ${Math.abs(a.y - b.y)} en hauteur = ${n}.`, `${n} cases au minimum.`),
+  };
+}
+
+/* ─────────────── la banque ─────────────── */
+const nouveaux: TutorBankItemV4[] = [
+  g(RA, "ce1_espace_assemblages_tpl_1", 4, "Compte colonne par colonne, de bas en haut.", () => (Math.random() < 0.6 ? compterCubes() : cubesAAjouter())),
+  g(RA, "ce1_espace_assemblages_tpl_2", 4, "Regarde ce qui manque dans chaque colonne.", () => (Math.random() < 0.5 ? cubesAAjouter() : compterCubes())),
+
+  g(RC, "ce1_reperage_cases_tpl_1", 3, "Une case est un petit carré ; un nœud, un croisement de traits.", () => compterCases()),
+  g(RC, "ce1_reperage_cases_tpl_2", 3, "Un nœud est là où deux traits se croisent.", () => caseOuNoeud()),
+
+  g(RD, "ce1_reperage_coordonnees_tpl_1", 4, "Lis d'abord la colonne, puis la ligne.", () => (Math.random() < 0.5 ? lireNombres() : quiEst())),
+  g(RD, "ce1_reperage_coordonnees_tpl_2", 3, "Descends jusqu'à la lettre, puis va à gauche jusqu'au nombre.", () => ouEst(Math.random() < 0.5)),
+
+  g(RM, "ce1_reperage_deplacement_tpl_1", 4, "Fais les déplacements l'un après l'autre.", () => (Math.random() < 0.5 ? ouArrive(3, false) : quelChemin())),
+  g(RM, "ce1_reperage_deplacement_tpl_2", 3, "Suis les flèches, case par case.", () => ouArrive(2, true)),
+  g(RM, "ce1_reperage_deplacement_tpl_3", 3, "Compte les cases de côté, puis en hauteur.", () => quelChemin()),
+
+  g(RF, "ce1_reperage_defi_tpl_1", 5, "Fais les déplacements l'un après l'autre.", () => (Math.random() < 0.5 ? ouArrive(4, false) : plusCourt())),
+];
+
+const REMPLACES = new Set(nouveaux.map((i) => i.id).concat(["ce1_espace_assemblages_tpl_1", "ce1_reperage_cases_tpl_1", "ce1_reperage_coordonnees_tpl_1", "ce1_reperage_deplacement_tpl_1", "ce1_reperage_defi_tpl_1"]));
+export const reperageBank: TutorBankItemV4[] = [...anciens.filter((i) => !REMPLACES.has(i.id)), ...nouveaux];

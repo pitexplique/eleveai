@@ -25,7 +25,8 @@
 // ⚠️ PAS DE QUESTION À RÉDIGER : `applyMathsKeyboardFree` retire les items
 // `format: "open"`. Un CE1 clique, il ne tape pas.
 
-import type { Solide3DCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { DifficultyLevel, Solide3DCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { type Solide, cap, dessinSolide, entre, etapes, gab, prenom, qcm, qcmN, tournure, un } from "./geo-outils-ce1";
 
 function randomChoice<T>(items: readonly T[]): T {
   return items[Math.floor(Math.random() * items.length)];
@@ -66,7 +67,7 @@ const SOLIDES = [
   { nom: "une pyramide", objet: "une tente à quatre faces" },
 ] as const;
 
-export const solidesBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* =========================================================
      CE1_SOLIDE_RECONNAITRE — repérer les solides autour de soi
   ========================================================= */
@@ -559,3 +560,262 @@ export const solidesBank: TutorBankItemV4[] = [
     },
   },
 ];
+
+/* ═════════════════════════════════════════════════════════════════════════
+   GABARITS DU 10/11/2026 — robustesse et dessins.
+   Mesuré ce jour-là : 5 à 8 squelettes par micro, 12 à 16 répétitions sur 20,
+   et 3 % des énoncés avec un dessin. Chaque gabarit montre maintenant le SOLIDE
+   (sauf quand le dessin donnerait la réponse) et tire un objet, une situation,
+   une tournure. Les six solides du CE1 seulement : cube, pavé, boule, cylindre,
+   cône, pyramide (à base carrée). Les items figés sont gardés ; les anciens
+   gabarits sont remplacés (mêmes ids).
+   ═════════════════════════════════════════════════════════════════════════ */
+
+const NS = "solides";
+const g = (micro: string, id: string, d: DifficultyLevel, hint: string, gen: Parameters<typeof gab>[5]) => gab(NS, micro, id, d, hint, gen);
+
+const LES6: Solide[] = ["cube", "pave_droit", "boule", "cylindre", "cone", "pyramide"];
+const NOM: Record<string, string> = { cube: "un cube", pave_droit: "un pavé", boule: "une boule", cylindre: "un cylindre", cone: "un cône", pyramide: "une pyramide" };
+const OBJETS: Record<string, string[]> = {
+  cube: ["un dé à jouer", "un glaçon", "un cube de construction", "un casse-tête en cube"],
+  pave_droit: ["une boîte à chaussures", "une brique de lait", "une boîte de céréales", "une gomme", "un morceau de sucre"],
+  boule: ["une balle de tennis", "une bille", "une orange", "un ballon de foot", "une boule de Noël"],
+  cylindre: ["une boîte de conserve", "un rouleau d'essuie-tout", "une bougie", "une pile", "un tambour"],
+  cone: ["un chapeau de fête", "un cornet de glace", "un plot de sport", "un plot de chantier"],
+  pyramide: ["une pyramide d'Égypte", "le toit d'une tour du château", "un presse-papier pointu"],
+};
+const VOIR = ["", "Regarde ce solide.", "Observe ce solide.", "Regarde bien le dessin."];
+const FACES: Record<string, number> = { cube: 6, pave_droit: 6, pyramide: 5 };
+const SOMMETS: Record<string, number> = { cube: 8, pave_droit: 8, pyramide: 5 };
+const ARETES: Record<string, number> = { cube: 12, pave_droit: 12, pyramide: 8 };
+const PLATES: Record<string, number> = { cylindre: 2, cone: 1, boule: 0 };
+const POLY: Solide[] = ["cube", "pave_droit", "pyramide"];
+/** « de faces », « d'arêtes ». */
+const de = (mot: string) => (/^[aeéèiouy]/.test(mot) ? `d'${mot}` : `de ${mot}`);
+const LE_S: Record<string, string> = { cube: "ce cube", pave_droit: "ce pavé", pyramide: "cette pyramide", boule: "cette boule", cylindre: "ce cylindre", cone: "ce cône" };
+
+/* ─────────────── ce1_solide_reconnaitre ─────────────── */
+const SR = "ce1_solide_reconnaitre";
+
+/** Un objet du quotidien → son solide (texte seul : un dessin donnerait la réponse). */
+function objetVersSolide() {
+  const s = un(LES6);
+  const o = un(OBJETS[s]);
+  const p = prenom();
+  const debut = un([`${p} range ${o} dans le placard.`, `Au marché, ${p} trouve ${o}.`, `Dans la chambre de ${p}, il y a ${o}.`, `Pour la kermesse, ${p} apporte ${o}.`, `Pic le paille-en-queue regarde ${o}.`, `${p} met ${o} dans son sac.`]);
+  return {
+    text: `${debut} ${un([`Quel solide a cette forme ?`, `C'est quel solide ?`, `Sa forme, c'est quel solide ?`])}`,
+    ...qcm(NOM[s], LES6.filter((x) => x !== s).map((x) => NOM[x])),
+    explanation: etapes("on imagine l'objet dans sa main : ses faces, ses coins, s'il roule.", `${cap(o)} a la forme d'${NOM[s]}.`, `C'est ${NOM[s]}.`),
+  };
+}
+
+/** Le solide dessiné → l'objet qui a cette forme. */
+function solideVersObjet(ctx: boolean) {
+  const s = un(LES6);
+  const juste = un(OBJETS[s]);
+  const faux = LES6.filter((x) => x !== s).map((x) => un(OBJETS[x]));
+  const debut = ctx ? un([`${prenom()} cherche un objet de cette forme.`, `La maîtresse montre ce solide.`, `${prenom()} a construit ce solide.`, `Pic a trouvé ce solide dans le jardin.`]) : un(VOIR);
+  return {
+    text: `${debut} ${un(["Quel objet a cette forme ?", "Lequel a la même forme ?", "Quel objet lui ressemble ?"])}`.trim(),
+    ...qcm(juste, faux),
+    canvas: dessinSolide(s),
+    explanation: etapes("on regarde le solide : ses faces, ses coins, s'il roule.", `Ce solide est ${NOM[s]}, comme ${juste}.`, `C'est ${juste}.`),
+  };
+}
+
+/* ─────────────── ce1_solide_nommer ─────────────── */
+const SN = "ce1_solide_nommer";
+
+function nommerSolide() {
+  const s = un(LES6);
+  return {
+    text: tournure(VOIR, ["Comment s'appelle ce solide ?", "Quel est ce solide ?", "Quel est le nom de ce solide ?", "C'est quel solide ?"]).trim(),
+    ...qcm(NOM[s], LES6.filter((x) => x !== s).map((x) => NOM[x])),
+    canvas: dessinSolide(s),
+    explanation: etapes("on regarde ses faces, ses sommets, et s'il roule.", `C'est ${NOM[s]}.`, `Ce solide est ${NOM[s]}.`),
+  };
+}
+
+function aRaison() {
+  const s = un(LES6);
+  const dit = Math.random() < 0.45 ? s : un(LES6.filter((x) => x !== s));
+  const p = prenom();
+  const juste = dit === s ? "oui, c'est vrai" : `non, c'est ${NOM[s]}`;
+  const faux = dit === s ? [`non, c'est ${NOM[un(LES6.filter((x) => x !== s))]}`, "on ne peut pas savoir"] : ["oui, c'est vrai", `non, c'est ${NOM[un(LES6.filter((x) => x !== s && x !== dit))]}`];
+  return {
+    text: `${p} dit : « C'est ${NOM[dit]}. » ${un(["Est-ce juste ?", "Est-ce vrai ?", "Qu'en penses-tu ?"])}`,
+    ...qcm(juste, faux),
+    canvas: dessinSolide(s),
+    explanation: etapes("on vérifie le nom avec les faces et les sommets du dessin.", `Le dessin montre ${NOM[s]}.`, cap(juste) + "."),
+  };
+}
+
+/* ─────────────── ce1_solide_faces ─────────────── */
+const SF = "ce1_solide_faces";
+
+function compterFaces(ctx: boolean) {
+  const s = un<Solide>(["cube", "pave_droit", "pyramide", "cube", "cylindre", "cone"]);
+  const plates = s === "cylindre" || s === "cone";
+  const n = plates ? PLATES[s] : FACES[s];
+  const mot = plates ? "faces plates" : "faces";
+  const debut = ctx ? un([`${prenom()} peint toutes les faces de ${LE_S[s]}.`, `${prenom()} colle une gommette sur chaque face.`, `Le chef cuisinier fait un gâteau de cette forme.`, `${prenom()} a fabriqué ${LE_S[s]} en carton.`]) : un(VOIR);
+  return {
+    text: `${debut} ${un([`Combien a-t-il de ${mot} ?`, `Combien de ${mot} en tout ?`, `Compte ses ${mot}, même cachées.`])}`.trim().replace("a-t-il", s === "pyramide" ? "a-t-elle" : "a-t-il"),
+    ...qcmN(n, plates ? [n + 1, n + 2, 3] : [n - 3, n + 1, n - 1, 8, 12].filter((v) => v !== n)),
+    canvas: dessinSolide(s),
+    explanation: etapes("on compte les faces qu'on voit, puis celles qui sont cachées derrière et dessous.", s === "pyramide" ? "4 triangles autour, et le carré dessous." : plates ? (s === "cylindre" ? "Un disque en haut, un disque en bas." : "Un disque dessous.") : "Devant, derrière, dessus, dessous, à gauche, à droite.", `Il y a ${n} ${mot}.`),
+  };
+}
+
+function natureFaces() {
+  const s = un(LES6);
+  const cas = un(["forme", "roule"] as const);
+  if (cas === "roule" || !(s in FACES)) {
+    const roule = s === "boule" || s === "cylindre" || s === "cone";
+    const juste = roule ? "oui, il peut rouler" : "non, il ne roule pas";
+    return {
+      text: `${un([`${prenom()} veut faire rouler ce solide.`, `Pic pousse ce solide avec son bec.`, `${prenom()} pose ce solide sur une pente.`])} ${un(["Peut-il rouler ?", "Va-t-il rouler ?", "Roule-t-il ?"])}`,
+      ...qcm(juste, [roule ? "non, il ne roule pas" : "oui, il peut rouler", "seulement s'il est petit"]),
+      canvas: dessinSolide(s),
+      explanation: etapes("un solide roule s'il a une partie courbe.", roule ? "Ce solide a une surface courbe." : "Ce solide n'a que des faces plates.", cap(juste) + "."),
+    };
+  }
+  const juste = s === "cube" ? "des carrés" : s === "pave_droit" ? "des rectangles" : "des triangles et un carré";
+  return {
+    text: tournure(VOIR, ["De quelle forme sont ses faces ?", "Ses faces sont…", "Quelle forme ont ses faces ?"]).trim(),
+    ...qcm(juste, ["des carrés", "des rectangles", "des triangles et un carré", "des disques"].filter((x) => x !== juste)),
+    canvas: dessinSolide(s),
+    explanation: etapes("on regarde chaque face comme une figure plane.", s === "pyramide" ? "Autour : des triangles. Dessous : un carré." : s === "cube" ? "Toutes ses faces sont des carrés pareils." : "Ses faces sont des rectangles.", `Ce sont ${juste}.`),
+  };
+}
+
+/* ─────────────── ce1_solide_sommets_aretes ─────────────── */
+const SA = "ce1_solide_sommets_aretes";
+
+function compterSommetsAretes(ctx: boolean) {
+  const s = un(POLY);
+  const quoi = un(["sommets", "arêtes"] as const);
+  const n = quoi === "sommets" ? SOMMETS[s] : ARETES[s];
+  const autre = quoi === "sommets" ? ARETES[s] : SOMMETS[s];
+  const debut = ctx
+    ? un([`${prenom()} met une gommette sur chaque ${quoi === "sommets" ? "sommet" : "arête"} de ${LE_S[s]}.`, `${prenom()} compte les ${quoi} de ${LE_S[s]}.`, `Une fourmi marche sur ${LE_S[s]}.`, `Pic examine ${LE_S[s]}.`])
+    : un(VOIR);
+  return {
+    text: `${debut} ${un([`Combien ${de(quoi)} en tout ?`, `Combien a-t-il ${de(quoi)} ?`, `Il y a combien ${de(quoi)} ?`])}`.trim().replace("a-t-il", s === "pyramide" ? "a-t-elle" : "a-t-il"),
+    ...qcmN(n, [autre, FACES[s], n + 1, n - 1]),
+    canvas: dessinSolide(s),
+    explanation: etapes(quoi === "sommets" ? "un sommet est un coin pointu." : "une arête est un trait où deux faces se touchent.", s === "pyramide" ? (quoi === "sommets" ? "4 coins en bas et la pointe en haut." : "4 arêtes en bas et 4 qui montent vers la pointe.") : quoi === "sommets" ? "4 coins devant et 4 derrière." : "4 devant, 4 derrière, 4 qui les relient.", `Il y a ${n} ${quoi}.`),
+  };
+}
+
+function vocabulaire() {
+  const cas = un([
+    { q: "le coin pointu d'un solide", r: "un sommet" },
+    { q: "le trait où deux faces se touchent", r: "une arête" },
+    { q: "une partie plate du solide", r: "une face" },
+  ]);
+  const s = un(POLY);
+  return {
+    text: `${un(VOIR)} ${un([`Comment appelle-t-on ${cas.q} ?`, `Quel nom donne-t-on à ${cas.q} ?`.replace("à le ", "au "), `${cap(cas.q)}, c'est…`])}`.trim(),
+    ...qcm(cas.r, ["un sommet", "une arête", "une face", "un centre"].filter((x) => x !== cas.r)),
+    canvas: dessinSolide(s),
+    explanation: etapes("face = partie plate ; arête = trait ; sommet = coin.", `${cap(cas.q)} s'appelle ${cas.r}.`, `C'est ${cas.r}.`),
+  };
+}
+
+/* ─────────────── ce1_solide_construire ─────────────── */
+const SC = "ce1_solide_construire";
+
+function pailles(ctx: boolean) {
+  const s = un(POLY);
+  const quoi = un(["pailles", "boules"] as const);
+  const n = quoi === "pailles" ? ARETES[s] : SOMMETS[s];
+  const p = prenom();
+  const debut = ctx
+    ? un([`${p} construit ${LE_S[s].replace(/^ce |^cette /, (m) => (m === "ce " ? "un " : "une "))} avec des pailles et de la pâte à modeler.`, `À l'atelier, ${p} fabrique ce solide avec des pailles et des boules de pâte.`, `Pour la fête, ${p} construit ce solide en pailles.`])
+    : `On construit ce solide avec des pailles et des boules de pâte à modeler.`;
+  const q = quoi === "pailles" ? ["Combien faut-il de pailles ?", "Combien de pailles en tout ?"] : ["Combien faut-il de boules de pâte ?", "Combien de boules de pâte en tout ?"];
+  return {
+    text: `${debut} ${un(q)}`,
+    ...qcmN(n, [quoi === "pailles" ? SOMMETS[s] : ARETES[s], FACES[s], n + 1, n - 1]),
+    canvas: dessinSolide(s),
+    explanation: etapes("une paille par arête, une boule par sommet.", quoi === "pailles" ? `Ce solide a ${ARETES[s]} arêtes.` : `Ce solide a ${SOMMETS[s]} sommets.`, `Il faut ${n} ${quoi === "pailles" ? "pailles" : "boules"}.`),
+  };
+}
+
+function facesADecouper() {
+  const s = un(POLY);
+  const p = prenom();
+  const cas = s === "cube" ? { mot: "carrés", n: 6 } : s === "pave_droit" ? { mot: "rectangles", n: 6 } : un([{ mot: "triangles", n: 4 }, { mot: "carrés", n: 1 }]);
+  return {
+    text: `${un([`${p} veut fabriquer ce solide en carton.`, `${p} construit ce solide en collant des faces.`, `La maîtresse fabrique ce solide pour la classe.`, `Pour un cadeau, ${p} fabrique une boîte de cette forme.`, `${p} fabrique ce solide pour le spectacle de marionnettes.`])} ${un([`Combien de ${cas.mot} faut-il découper ?`, `Combien de ${cas.mot} en tout ?`])}`,
+    ...qcmN(cas.n, [cas.n + 1, cas.n - 1, cas.n === 1 ? 4 : cas.n === 4 ? 5 : 4, 8]),
+    canvas: dessinSolide(s),
+    explanation: etapes("une pièce de carton par face, même pour les faces cachées.", s === "pyramide" ? "4 triangles autour, 1 carré dessous." : `${s === "cube" ? "Le cube" : "Le pavé"} a 6 faces.`, `Il faut ${cas.n} ${cas.n > 1 ? cas.mot : cas.mot.slice(0, -1)}.`),
+  };
+}
+
+/* ─────────────── ce1_solide_defi ─────────────── */
+const SD = "ce1_solide_defi";
+
+function plusieursSolides() {
+  const s = un<Solide>(["cube", "pave_droit", "cube"]);
+  const k = entre(2, 4);
+  const quoi = un(["faces", "sommets", "arêtes"] as const);
+  const u = quoi === "faces" ? FACES[s] : quoi === "sommets" ? SOMMETS[s] : ARETES[s];
+  const n = k * u;
+  const objet = s === "cube" ? un(["dés", "glaçons", "cubes en bois"]) : un(["boîtes à chaussures", "briques de lait", "boîtes de céréales"]);
+  return {
+    text: `${un([`${prenom()} a ${k} ${objet} de cette forme.`, `Sur la table, il y a ${k} ${objet} de cette forme.`, `Pic a trouvé ${k} ${objet} identiques.`])} ${un([`Combien ${de(quoi)} en tout ?`, `Combien ${de(quoi)} cela fait-il en tout ?`])}`,
+    ...qcmN(n, [u, n + u, n - u, k + u]),
+    canvas: dessinSolide(s),
+    explanation: etapes(`on compte les ${quoi} d'un seul solide, puis on ajoute ${k} fois.`, `Un solide : ${u}. ${Array.from({ length: k }, () => u).join(" + ")} = ${n}.`, `${n} ${quoi} en tout.`),
+  };
+}
+
+const DEVINETTES_S: { s: string; t: string }[] = [
+  { s: "boule", t: "Je roule partout. Je n'ai aucune face plate." },
+  { s: "cylindre", t: "Je roule tout droit. J'ai deux faces plates en forme de disque." },
+  { s: "cone", t: "J'ai une pointe et une seule face plate, un disque." },
+  { s: "cube", t: "J'ai 6 faces, toutes des carrés pareils." },
+  { s: "pave_droit", t: "J'ai 6 faces rectangles. Je ne roule pas." },
+  { s: "pyramide", t: "J'ai une pointe, des faces triangles et un carré dessous." },
+  { s: "pyramide", t: "J'ai 5 sommets et 8 arêtes." },
+  { s: "cube", t: "J'ai 8 sommets, 12 arêtes et mes faces sont des carrés." },
+  { s: "cone", t: "Je roule en tournant en rond. J'ai une pointe." },
+  { s: "cylindre", t: "Je ressemble à une boîte de conserve." },
+];
+function devinetteSolide() {
+  const d = un(DEVINETTES_S);
+  return {
+    text: `${un(["Devinette !", `${prenom()} pose une devinette.`, "Pic pose une devinette.", "Écoute bien."])} « ${d.t} » ${un(["Qui suis-je ?", "Quel solide suis-je ?"])}`,
+    ...qcm(NOM[d.s], LES6.filter((x) => x !== d.s).map((x) => NOM[x])),
+    explanation: etapes("on vérifie chaque indice, l'un après l'autre.", `Seul ${NOM[d.s].replace(/^un |^une /, "le ")} répond à tous les indices.`.replace("le boule", "la boule").replace("le pyramide", "la pyramide"), `C'est ${NOM[d.s]}.`),
+  };
+}
+
+/* ─────────────── la banque ─────────────── */
+const nouveaux: TutorBankItemV4[] = [
+  g(SR, "ce1_solide_reconnaitre_tpl_1", 3, "Imagine l'objet dans ta main : roule-t-il ? a-t-il des coins ?", () => (Math.random() < 0.5 ? objetVersSolide() : solideVersObjet(true))),
+  g(SR, "ce1_solide_reconnaitre_tpl_2", 2, "Regarde si le solide a des coins, ou s'il roule.", () => solideVersObjet(false)),
+
+  g(SN, "ce1_solide_nommer_tpl_1", 3, "Regarde les faces du dessin.", () => aRaison()),
+  g(SN, "ce1_solide_nommer_tpl_2", 2, "Regarde ses faces, et s'il a une pointe.", () => nommerSolide()),
+
+  g(SF, "ce1_solide_faces_tpl_1", 3, "Regarde chaque face comme une figure plane.", () => (Math.random() < 0.5 ? natureFaces() : compterFaces(true))),
+  g(SF, "ce1_solide_faces_tpl_2", 2, "N'oublie pas les faces cachées.", () => compterFaces(false)),
+  g(SF, "ce1_solide_faces_tpl_3", 2, "Regarde chaque face comme une figure plane.", () => natureFaces()),
+
+  g(SA, "ce1_solide_aretes_tpl_1", 4, "Sommet = coin. Arête = trait.", () => compterSommetsAretes(true)),
+  g(SA, "ce1_solide_aretes_tpl_2", 3, "Sommet = coin. Arête = trait. Face = partie plate.", () => (Math.random() < 0.5 ? vocabulaire() : compterSommetsAretes(false))),
+
+  g(SC, "ce1_solide_construire_tpl_1", 4, "Une paille par arête, une boule par sommet.", () => pailles(true)),
+  g(SC, "ce1_solide_construire_tpl_2", 3, "Une pièce de carton par face.", () => (Math.random() < 0.6 ? facesADecouper() : pailles(false))),
+  g(SC, "ce1_solide_construire_tpl_3", 3, "Une paille par arête, une boule par sommet.", () => pailles(true)),
+
+  g(SD, "ce1_solide_defi_tpl_1", 5, "Compte pour un seul solide, puis ajoute.", () => plusieursSolides()),
+  g(SD, "ce1_solide_defi_tpl_2", 5, "Vérifie chaque indice.", () => devinetteSolide()),
+];
+
+export const solidesBank: TutorBankItemV4[] = [...anciens.filter((i) => i.kind !== "template"), ...nouveaux];

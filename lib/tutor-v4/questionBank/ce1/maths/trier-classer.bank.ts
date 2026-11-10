@@ -180,7 +180,8 @@ function deuxEnsembles(condition: (z: Deux) => boolean = () => true): Deux {
 const lis = ["Regarde le dessin.", "Lis le dessin.", "Observe les ensembles.", ""];
 
 function quiDansA() {
-  const z = deuxEnsembles((y) => y.seulB.length + y.dehors.length >= 2);
+  // Deux mauvais choix au moins, quel que soit le cercle tiré (le 10/11 : parfois un seul).
+  const z = deuxEnsembles((y) => y.seulB.length + y.dehors.length >= 2 && y.seulA.length + y.dehors.length >= 2);
   const [k, dans] = un<[Critere, Objet[]]>([[z.a, [...z.seulA, ...z.ab]], [z.b, [...z.seulB, ...z.ab]]]);
   const juste = un(dans);
   const faux = z.l.filter((x) => !sat(x, k));

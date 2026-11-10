@@ -24,10 +24,13 @@
 // `format: "open"`. Un CE1 clique, il ne tape pas.
 
 import type {
+  CanvasFigure,
+  DifficultyLevel,
   StatGraphCanvasData,
   TableauDonneesCanvasData,
   TutorBankItemV4,
 } from "@/lib/tutor-v4/types";
+import { cap, entre, etapes, gab, melange, prenom, qcm, qcmN, un } from "./geo-outils-ce1";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -74,7 +77,7 @@ const ENQUETES = [
   { sujet: "les moyens de venir à l'école", items: ["à pied", "en car", "en voiture", "à vélo"] },
 ] as const;
 
-export const donneesBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* =========================================================
      CE1_DONNEES_LIRE_TABLEAU — lire une case
   ========================================================= */
@@ -577,3 +580,285 @@ export const donneesBank: TutorBankItemV4[] = [
     },
   },
 ];
+
+/* ═════════════════════════════════════════════════════════════════════════
+   GABARITS DU 10/11/2026 — robustesse et dessins.
+   Mesuré ce jour-là : 2 à 6 squelettes par micro hors « lire un tableau »,
+   jusqu'à 19 répétitions sur 20. Les diagrammes n'avaient PAS d'axe gradué
+   (`showAxis` absent) : sans valeur écrite sur les barres, on ne pouvait pas
+   les lire. Les enquêtes changent (goûters, sports, couleurs, livres lus,
+   météo de la semaine…), les tournures aussi, et chaque énoncé a son dessin.
+   « Lire un tableau » (déjà robuste) est gardé tel quel.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+const ND = "donnees";
+const g = (micro: string, id: string, d: DifficultyLevel, hint: string, gen: Parameters<typeof gab>[5]) => gab(ND, micro, id, d, hint, gen);
+
+/** Une enquête : un sujet, des réponses, l'unité comptée, qui a répondu. */
+type Enquete = { sujet: string; items: string[]; unite: string; qui: string; enquete?: boolean };
+const ENQ: Enquete[] = [
+  { sujet: "le goûter préféré", items: ["pomme", "gâteau", "yaourt", "pain"], unite: "élèves", qui: "la classe" , enquete: true },
+  { sujet: "le sport préféré", items: ["foot", "danse", "judo", "natation"], unite: "élèves", qui: "la classe" , enquete: true },
+  { sujet: "la couleur préférée", items: ["rouge", "bleu", "vert", "jaune"], unite: "élèves", qui: "la classe" , enquete: true },
+  { sujet: "l'animal préféré", items: ["chien", "chat", "lapin", "poisson"], unite: "élèves", qui: "la classe" , enquete: true },
+  { sujet: "le jeu de la récréation", items: ["ballon", "billes", "corde", "loup"], unite: "élèves", qui: "l'école" , enquete: true },
+  { sujet: "le moyen de venir à l'école", items: ["à pied", "en car", "en voiture", "à vélo"], unite: "élèves", qui: "l'école" , enquete: true },
+  { sujet: "les livres lus ce mois-ci", items: ["Nina", "Téo", "Zoé", "Ravi"], unite: "livres", qui: "la bibliothèque" },
+  { sujet: "les billes gagnées", items: ["Lina", "Tom", "Inès", "Noé"], unite: "billes", qui: "la récré" },
+  { sujet: "les points au jeu de l'oie", items: ["Nina", "Téo", "Zoé", "Ravi"], unite: "points", qui: "la partie" },
+  { sujet: "le métier rêvé", items: ["pompier", "vétérinaire", "maîtresse", "cuisinier"], unite: "élèves", qui: "la classe" , enquete: true },
+  { sujet: "les jours de pluie", items: ["janvier", "février", "mars", "avril"], unite: "jours", qui: "le carnet météo" },
+  { sujet: "les fleurs plantées", items: ["lundi", "mardi", "jeudi", "vendredi"], unite: "fleurs", qui: "le jardin de l'école" },
+  { sujet: "les crêpes vendues", items: ["sucre", "chocolat", "confiture", "miel"], unite: "crêpes", qui: "la kermesse" },
+  { sujet: "le fruit préféré", items: ["letchis", "mangue", "banane", "fraise"], unite: "élèves", qui: "la classe" , enquete: true },
+];
+const enquete = (n = 4) => {
+  const e = un(ENQ);
+  return { ...e, items: e.items.slice(0, n) };
+};
+/** Des valeurs toutes différentes, multiples du pas. */
+function valeurs(n: number, pas: number, max: number) {
+  const tout = Array.from({ length: Math.floor(max / pas) }, (_, k) => (k + 1) * pas);
+  return melange(tout).slice(0, n);
+}
+const barres = (e: { items: string[]; unite: string }, v: number[], pas: number, titre?: string): CanvasFigure =>
+  ({ kind: "stat_graph", graphType: "barres", title: titre, data: e.items.map((label, k) => ({ label, value: v[k] })), display: { showValues: false, showLabels: true, showAxis: true, step: pas, axeY: e.unite } }) as CanvasFigure;
+const table = (e: { items: string[]; unite: string }, v: (number | string)[], titre?: string, cell?: number): CanvasFigure =>
+  ({ kind: "tableau_donnees", title: titre, headers: ["", `Nombre de ${e.unite}`], rows: e.items.map((it, k) => ({ values: [it, v[k]] })), ...(cell !== undefined ? { highlight: { cell: { row: cell, col: 1 } } } : {}) }) as CanvasFigure;
+const intro = (e: Enquete, quoi: string) =>
+  un(e.enquete ? [`Voici ${quoi} sur ${e.sujet}.`, `${cap(e.qui)} a fait une enquête : ${e.sujet}.`, `${prenom()} a noté ${e.sujet} dans ${quoi}.`] : [`Voici ${quoi} : ${e.sujet}.`, `${cap(quoi)} montre ${e.sujet}.`, `${prenom()} a noté ${e.sujet} dans ${quoi}.`]);
+/** « de élèves » → « d'élèves ». */
+const deU = (u: string) => (/^[aeéiou]/.test(u) ? `d'${u}` : `de ${u}`);
+/** Un QCM chiffré avec l'unité, accordée : « 1 élève », « 3 élèves ». */
+function qcmU(n: number, faux: number[], u: string) {
+  const r = qcmN(n, faux, u);
+  const s1 = (x: string) => x.replace(/^1 (\S+)s$/, "1 $1");
+  return { ...r, choices: (r.choices ?? []).map(s1), expected: r.expected.map(s1) };
+}
+const q = (s: string) => `« ${s} »`;
+
+/* ─────────────── ce1_donnees_double_entree ─────────────── */
+const DE = "ce1_donnees_double_entree";
+const DOUBLES = [
+  { lignes: ["CP", "CE1", "CE2"], cols: ["Filles", "Garçons"], unite: "élèves", sujet: "les élèves de l'école" },
+  { lignes: ["lundi", "mardi", "jeudi"], cols: ["Soleil", "Pluie"], unite: "heures", sujet: "la météo de la semaine" },
+  { lignes: ["Nina", "Téo", "Zoé"], cols: ["Billes", "Cartes"], unite: "objets", sujet: "les trésors de la récré" },
+  { lignes: ["matin", "midi", "soir"], cols: ["Vélos", "Voitures"], unite: "véhicules", sujet: "ce qui passe devant l'école" },
+  { lignes: ["Ravi", "Lina", "Tom"], cols: ["Lu", "Écrit"], unite: "pages", sujet: "les pages de la semaine" },
+  { lignes: ["CE1 A", "CE1 B", "CE1 C"], cols: ["Cantine", "Maison"], unite: "élèves", sujet: "le repas de midi" },
+  { lignes: ["Équipe rouge", "Équipe bleue", "Équipe verte"], cols: ["Match 1", "Match 2"], unite: "points", sujet: "le tournoi de l'école" },
+];
+function doubleEntree(mode: "case" | "ligne" | "plus") {
+  const d = un(DOUBLES);
+  const v = d.lignes.map(() => [entre(2, 15), entre(2, 15)]);
+  const li = entre(0, 2);
+  const co = entre(0, 1);
+  const canvas = { kind: "tableau_donnees", title: cap(d.sujet), headers: ["", ...d.cols], rows: d.lignes.map((l, k) => ({ values: [l, ...v[k]] })) } as CanvasFigure;
+  if (mode === "case") {
+    const n = v[li][co];
+    return {
+      text: `${un(["Lis le tableau.", "Regarde ce tableau.", ""])} ${un([`Ligne ${q(d.lignes[li])}, colonne ${q(d.cols[co])} : quel nombre lis-tu ?`, `Quel nombre est au croisement de ${q(d.lignes[li])} et ${q(d.cols[co])} ?`])}`.trim(),
+      ...qcmN(n, [v[li][1 - co], v[(li + 1) % 3][co], v[li][0] + v[li][1]]),
+      canvas,
+      explanation: etapes("on suit la ligne, puis on descend la colonne.", `Ligne ${d.lignes[li]}, colonne ${d.cols[co]} : ${n}.`, `On lit ${n}.`),
+    };
+  }
+  if (mode === "ligne") {
+    const t = v[li][0] + v[li][1];
+    return {
+      text: `${un(["Regarde ce tableau.", `Voici ${d.sujet}.`])} ${un([`Combien en tout pour ${q(d.lignes[li])} ?`, `Ajoute les deux cases de la ligne ${q(d.lignes[li])}. Combien trouves-tu ?`])}`,
+      ...qcmN(t, [v[li][0], v[li][1], t + 10, t - 1, t + 1]),
+      canvas,
+      explanation: etapes("on additionne les nombres de la ligne.", `${v[li][0]} + ${v[li][1]} = ${t}.`, `${t} en tout.`),
+    };
+  }
+  // Qui a le plus dans une colonne ?
+  const col = v.map((r) => r[co]);
+  if (new Set(col).size < 3) return doubleEntree("case");
+  const plus = Math.random() < 0.6;
+  const k = col.indexOf(plus ? Math.max(...col) : Math.min(...col));
+  return {
+    text: `${un(["Regarde ce tableau.", `Voici ${d.sujet}.`])} ${un([`Dans la colonne ${q(d.cols[co])}, quelle ligne a le ${plus ? "plus grand" : "plus petit"} nombre ?`, `Colonne ${q(d.cols[co])} : qui a le ${plus ? "plus" : "moins"} ?`])}`,
+    ...qcm(d.lignes[k], d.lignes.filter((_, j) => j !== k)),
+    canvas,
+    explanation: etapes(`on lit seulement la colonne ${d.cols[co]}.`, `${d.lignes.map((l, j) => `${l} : ${col[j]}`).join(", ")}.`, `C'est ${q(d.lignes[k])}.`),
+  };
+}
+
+/* ─────────────── ce1_donnees_lire_graphique ─────────────── */
+const LG = "ce1_donnees_lire_graphique";
+function lireBarre(pas: number) {
+  const e = enquete(entre(3, 4));
+  const v = valeurs(e.items.length, pas, pas === 1 ? 10 : pas * 8);
+  const i = entre(0, e.items.length - 1);
+  const traits = v[i] / pas;
+  return {
+    text: `${intro(e, "ce diagramme")} ${un([`Combien pour ${q(e.items[i])} ?`, `Quelle est la valeur de la barre ${q(e.items[i])} ?`, `Jusqu'à quel nombre monte la barre ${q(e.items[i])} ?`])}`,
+    ...qcmU(v[i], [pas > 1 ? traits : v[i] + 1, v[i] + pas, v[i] - pas, v[(i + 1) % v.length]], e.unite),
+    canvas: barres(e, v, pas),
+    explanation: etapes(pas > 1 ? `l'axe avance de ${pas} en ${pas} : on lit le nombre, on ne compte pas les traits.` : "on suit le haut de la barre jusqu'à l'axe.", `La barre ${e.items[i]} arrive à ${v[i]}.`, `${v[i]} ${e.unite}.`),
+  };
+}
+function quelleBarre() {
+  const e = enquete(4);
+  const pas = un([1, 2, 5]);
+  const v = valeurs(4, pas, pas === 1 ? 10 : pas * 8);
+  const i = entre(0, 3);
+  return {
+    text: `${intro(e, "ce diagramme")} ${un([`Quelle barre vaut ${v[i]} ?`, `Pour quelle réponse compte-t-on ${v[i]} ${e.unite} ?`])}`,
+    ...qcm(e.items[i], e.items.filter((_, j) => j !== i)),
+    canvas: barres(e, v, pas),
+    explanation: etapes("on cherche sur l'axe le nombre, puis la barre qui arrive à cette hauteur.", `${v[i]} : c'est la barre ${e.items[i]}.`, `C'est ${q(e.items[i])}.`),
+  };
+}
+
+/* ─────────────── ce1_donnees_interpreter ─────────────── */
+const IN = "ce1_donnees_interpreter";
+function interpreter(sorte: "barres" | "tableau") {
+  const e = enquete(4);
+  const pas = sorte === "barres" ? un([1, 2]) : 1;
+  const v = valeurs(4, pas, sorte === "barres" ? pas * 9 : 20);
+  const [i, j] = melange([0, 1, 2, 3]);
+  const canvas = sorte === "barres" ? barres(e, v, pas) : table(e, v);
+  const quoi = sorte === "barres" ? "ce diagramme" : "ce tableau";
+  const cas = un(["ecart", "somme", "plus", "moins"] as const);
+  if (cas === "ecart") {
+    const [a, b] = v[i] > v[j] ? [i, j] : [j, i];
+    const d = v[a] - v[b];
+    return {
+      text: `${intro(e, quoi)} ${un([`Combien de plus pour ${q(e.items[a])} que pour ${q(e.items[b])} ?`, `Quel est l'écart entre ${q(e.items[a])} et ${q(e.items[b])} ?`])}`,
+      ...qcmU(d, [v[a] + v[b], v[a], v[b], d + 1, d - 1], e.unite),
+      canvas,
+      explanation: etapes("on lit les deux nombres, puis on cherche l'écart.", `${v[a]} − ${v[b]} = ${d}.`, `${d} ${e.unite} de plus.`),
+    };
+  }
+  if (cas === "somme") {
+    const s = v[i] + v[j];
+    return {
+      text: `${intro(e, quoi)} ${un([`Combien en tout pour ${q(e.items[i])} et ${q(e.items[j])} ?`, `On réunit ${q(e.items[i])} et ${q(e.items[j])}. Combien cela fait-il ?`])}`,
+      ...qcmU(s, [Math.abs(v[i] - v[j]), s + 1, s - 1, s + pas * 2], e.unite),
+      canvas,
+      explanation: etapes("on lit les deux nombres, puis on les ajoute.", `${v[i]} + ${v[j]} = ${s}.`, `${s} ${e.unite}.`),
+    };
+  }
+  const plus = cas === "plus";
+  const k = v.indexOf(plus ? Math.max(...v) : Math.min(...v));
+  return {
+    text: `${intro(e, quoi)} ${un([`Quelle réponse a le ${plus ? "plus" : "moins"} ${deU(e.unite)} ?`, `Où y a-t-il le ${plus ? "plus" : "moins"} ${deU(e.unite)} ?`])}`,
+    ...qcm(e.items[k], e.items.filter((_, x) => x !== k)),
+    canvas,
+    explanation: etapes(`on cherche la ${sorte === "barres" ? "barre" : "valeur"} la ${plus ? "plus grande" : "plus petite"}.`, `${e.items.map((it, x) => `${it} : ${v[x]}`).join(", ")}.`, `C'est ${q(e.items[k])}.`),
+  };
+}
+
+/* ─────────────── ce1_donnees_completer_tableau ─────────────── */
+const CT = "ce1_donnees_completer_tableau";
+const BATONS = (n: number) => Array.from({ length: Math.floor(n / 5) }, () => "|||||").concat(n % 5 ? ["|".repeat(n % 5)] : []).join(" ");
+function caseEffacee() {
+  const e = enquete(entre(3, 4));
+  const v = valeurs(e.items.length, 1, 15);
+  const i = entre(0, e.items.length - 1);
+  const total = v.reduce((a, b) => a + b, 0);
+  const lignes = e.items.map((it, k) => ({ values: [it, k === i ? "?" : v[k]] }));
+  return {
+    text: `${un([`${cap(e.sujet)} : ${total} ${e.unite} en tout.`, `Pour ${e.sujet}, on compte ${total} ${e.unite} en tout.`])} ${un(["Quel nombre manque dans le tableau ?", "Que faut-il écrire à la place de « ? » ?"])}`,
+    ...qcmN(v[i], [total, total - v[i] + 1, v[i] + 1, v[i] - 1]),
+    canvas: { kind: "tableau_donnees", title: cap(e.sujet), headers: ["", `Nombre de ${e.unite}`], rows: [...lignes, { values: ["Total", total] }], highlight: { cell: { row: i, col: 1 } } } as CanvasFigure,
+    explanation: etapes("on ajoute les nombres connus, puis on cherche ce qui manque pour aller au total.", `${v.filter((_, k) => k !== i).join(" + ")} = ${total - v[i]} ; de ${total - v[i]} à ${total}, il manque ${v[i]}.`, `On écrit ${v[i]}.`),
+  };
+}
+function compterBatons() {
+  const e = enquete(entre(3, 4));
+  const v = valeurs(e.items.length, 1, 14);
+  const i = entre(0, e.items.length - 1);
+  return {
+    text: `${prenom()} a fait un trait par réponse. ${un([`Quel nombre écrire pour ${q(e.items[i])} ?`, `Combien de traits pour ${q(e.items[i])} ?`])}`,
+    ...qcmN(v[i], [v[i] + 1, v[i] - 1, Math.ceil(v[i] / 5), v[i] + 5]),
+    canvas: { kind: "tableau_donnees", title: cap(e.sujet), caption: "||||| = 5 traits", headers: ["", "Traits", "Nombre"], rows: e.items.map((it, k) => ({ values: [it, BATONS(v[k]), k === i ? "?" : v[k]] })), highlight: { cell: { row: i, col: 2 } } } as CanvasFigure,
+    explanation: etapes("on compte les traits par paquets de 5.", `${BATONS(v[i])} : ${Math.floor(v[i] / 5) ? `${Math.floor(v[i] / 5)} paquet${v[i] >= 10 ? "s" : ""} de 5 et ` : ""}${v[i] % 5} trait${v[i] % 5 > 1 ? "s" : ""}.`, `On écrit ${v[i]}.`),
+  };
+}
+
+/* ─────────────── ce1_donnees_produire ─────────────── */
+const PR = "ce1_donnees_produire";
+function barreFausse() {
+  const e = enquete(4);
+  const pas = un([1, 2]);
+  const v = valeurs(4, pas, pas * 8);
+  const i = entre(0, 3);
+  const dessin = v.map((x, k) => (k === i ? (x + pas <= pas * 9 && !v.includes(x + pas) ? x + pas : x - pas) : x));
+  if (dessin[i] <= 0 || v.includes(dessin[i])) return barreFausse();
+  const h = prenom();
+  return {
+    text: `${h} a compté : ${e.items.map((it, k) => `${it} ${v[k]}`).join(", ")}. ${un(["Voici le diagramme tracé.", "Voici son diagramme."])} ${un(["Quelle barre est fausse ?", "Une barre est fausse. Laquelle ?"])}`,
+    ...qcm(e.items[i], e.items.filter((_, k) => k !== i)),
+    canvas: barres(e, dessin, pas, cap(e.sujet)),
+    explanation: etapes("on compare chaque barre au nombre compté.", `La barre ${e.items[i]} monte à ${dessin[i]} au lieu de ${v[i]}.`, `C'est la barre ${q(e.items[i])}.`),
+  };
+}
+function hauteurBarre() {
+  const e = enquete(4);
+  const pas = un([2, 5]);
+  const v = valeurs(4, pas, pas * 8);
+  const i = v.findIndex((x) => x >= 2 * pas);
+  const dessin = v.map((x, k) => (k === i ? 0 : x));
+  const fin = { ...e, items: e.items.map((it, k) => (k === i ? `${it} ?` : it)) };
+  return {
+    text: `${prenom()} finit le diagramme. Il reste la barre ${q(e.items[i])} : ${v[i]} ${e.unite}. Chaque trait de l'axe vaut ${pas}. ${un(["La barre doit monter de combien de traits ?", "Combien de traits doit-elle monter ?"])}`,
+    ...qcmU(v[i] / pas, [v[i], v[i] / pas + 1, v[i] / pas - 1], "traits"),
+    canvas: barres(fin, dessin, pas, `Axe de ${pas} en ${pas}`),
+    explanation: etapes(`chaque trait vaut ${pas}.`, `${v[i]} = ${v[i] / pas} × ${pas}.`, `La barre monte jusqu'au trait ${v[i] / pas}.`),
+  };
+}
+/* ─────────────── ce1_donnees_defi ─────────────── */
+const DF = "ce1_donnees_defi";
+function defiTotal() {
+  const e = enquete(entre(3, 4));
+  const pas = un([2, 5]);
+  const v = valeurs(e.items.length, pas, pas * 6);
+  const n = v.reduce((a, b) => a + b, 0);
+  return {
+    text: `${un(["Défi !", "Pic lance un défi.", `${prenom()} lance un défi.`])} ${intro(e, "ce diagramme")} ${un([`Combien ${deU(e.unite)} en tout ?`, `Combien ${deU(e.unite)} au total ?`])}`,
+    ...qcmU(n, [v.reduce((a, b) => a + b / pas, 0), n + pas, n - pas, Math.max(...v)], e.unite),
+    canvas: barres(e, v, pas),
+    explanation: etapes(`on lit chaque barre (l'axe va de ${pas} en ${pas}), puis on ajoute tout.`, `${v.join(" + ")} = ${n}.`, `${n} ${e.unite} en tout.`),
+  };
+}
+function defiAutant() {
+  const e = enquete(4);
+  const v = valeurs(4, 1, 15);
+  const [i, j] = melange([0, 1, 2, 3]);
+  const [a, b] = v[i] > v[j] ? [i, j] : [j, i];
+  const d = v[a] - v[b];
+  return {
+    text: `${un(["Défi !", "Attention, défi !"])} ${intro(e, "ce tableau")} ${un([`Combien ${deU(e.unite)} faut-il ajouter à ${q(e.items[b])} pour en avoir autant que ${q(e.items[a])} ?`, `Combien ${deU(e.unite)} manque-t-il à ${q(e.items[b])} pour égaler ${q(e.items[a])} ?`])}`,
+    ...qcmU(d, [v[a] + v[b], v[a], d + 1, d - 1], e.unite),
+    canvas: table(e, v, cap(e.sujet)),
+    explanation: etapes("on cherche ce qui manque au plus petit pour égaler le plus grand.", `${v[b]} + ${d} = ${v[a]}.`, `Il en manque ${d}.`),
+  };
+}
+
+/* ─────────────── la banque ─────────────── */
+const nouveaux: TutorBankItemV4[] = [
+  g(DE, "ce1_donnees_double_entree_tpl_1", 4, "Suis la ligne avec le doigt, puis descends la colonne.", () => doubleEntree(un(["case", "case", "plus"] as const))),
+  g(DE, "ce1_donnees_double_entree_tpl_2", 4, "Additionne les deux nombres de la ligne.", () => doubleEntree(un(["ligne", "ligne", "plus"] as const))),
+
+  g(LG, "ce1_donnees_graphique_tpl_1", 3, "Repère la barre, puis lis sa hauteur sur l'axe.", () => (Math.random() < 0.65 ? lireBarre(1) : quelleBarre())),
+  g(LG, "ce1_donnees_graphique_tpl_2", 4, "Ne compte pas les traits : regarde ce que vaut chacun.", () => lireBarre(un([2, 5, 10]))),
+  g(LG, "ce1_donnees_graphique_tpl_3", 5, "Lis le nombre sur l'axe, pas le nombre de traits.", () => (Math.random() < 0.5 ? lireBarre(un([5, 10])) : quelleBarre())),
+
+  g(IN, "ce1_donnees_interpreter_tpl_1", 4, "Lis les deux nombres, puis compare-les.", () => interpreter("barres")),
+  g(IN, "ce1_donnees_interpreter_tpl_2", 4, "Lis toutes les valeurs avant de répondre.", () => interpreter("tableau")),
+
+  g(CT, "ce1_donnees_completer_tpl_1", 4, "Ajoute les nombres connus, puis cherche ce qui manque.", () => caseEffacee()),
+  g(CT, "ce1_donnees_completer_tpl_2", 4, "Compte les traits par paquets de 5.", () => compterBatons()),
+
+  g(PR, "ce1_donnees_produire_tpl_1", 4, "Compare chaque barre au nombre compté.", () => barreFausse()),
+  g(PR, "ce1_donnees_produire_tpl_2", 4, "Regarde de combien en combien avance l'axe.", () => hauteurBarre()),
+
+  g(DF, "ce1_donnees_defi_tpl_1", 5, "Lis chaque barre, puis ajoute tout.", () => defiTotal()),
+  g(DF, "ce1_donnees_defi_tpl_2", 5, "Combien manque-t-il au plus petit ?", () => defiAutant()),
+];
+
+const GARDES = new Set(["ce1_donnees_lire_tableau_tpl_1", "ce1_donnees_lire_tableau_tpl_2"]);
+export const donneesBank: TutorBankItemV4[] = [...anciens.filter((i) => i.kind !== "template" || GARDES.has(i.id)), ...nouveaux];

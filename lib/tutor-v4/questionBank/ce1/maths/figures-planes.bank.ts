@@ -27,10 +27,34 @@
 // `format: "open"`. Un CE1 clique, il ne tape pas.
 
 import type {
+  CanvasFigure,
+  DifficultyLevel,
   QuadrilatereCanvasData,
   TriangleCanvasData,
   TutorBankItemV4,
 } from "@/lib/tutor-v4/types";
+import {
+  ANGLES_DROITS,
+  COTES,
+  type Forme,
+  SOMMETS_DROITS,
+  cap,
+  dessin,
+  entre,
+  etapes,
+  gab,
+  lettres,
+  melange,
+  piece,
+  pieceAngle,
+  planche,
+  plancheAngles,
+  prenom,
+  qcm,
+  qcmN,
+  tournure,
+  un,
+} from "./geo-outils-ce1";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -69,7 +93,7 @@ Calcul : ${calcul}
 Conclusion : ${conclusion}`;
 }
 
-export const figuresPlanesBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* =========================================================
      CE1_FIGURE_RECONNAITRE — les quatre figures de référence
      LE piège : la figure penchée.
@@ -924,3 +948,622 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     },
   },
 ];
+
+/* ═════════════════════════════════════════════════════════════════════════
+   GABARITS DU 10/11/2026 — robustesse et dessins.
+   Mesuré ce jour-là (scripts/mesurer-squelettes-coach.ts) : 3 à 8 squelettes
+   par micro, 12 à 19 répétitions sur 20, et 10 % des énoncés avec un dessin.
+   Chaque gabarit tire désormais une FIGURE dessinée (carré souvent penché : le
+   piège de la notion), une situation, une tournure. Le dessin porte la question,
+   il ne la résout pas : aucun code d'angle droit quand on demande de le vérifier.
+   Les items figés sont gardés ; les anciens gabarits sont remplacés (mêmes ids).
+   ═════════════════════════════════════════════════════════════════════════ */
+
+const NP = "figures_planes";
+const g = (micro: string, id: string, d: DifficultyLevel, hint: string, gen: Parameters<typeof gab>[5]) => gab(NP, micro, id, d, hint, gen);
+
+const REGARDE = ["", "Regarde le dessin.", "Observe bien.", "Regarde bien."];
+const LE: Partial<Record<Forme, string>> = { carre: "le carré", rectangle: "le rectangle", triangle: "le triangle", cercle: "le cercle", triangle_rectangle: "le triangle rectangle" };
+const UN: Partial<Record<Forme, string>> = { carre: "un carré", rectangle: "un rectangle", triangle: "un triangle", cercle: "un cercle", triangle_rectangle: "un triangle rectangle" };
+const POURQUOI: Partial<Record<Forme, string>> = {
+  carre: "4 côtés de la même longueur et 4 angles droits",
+  rectangle: "4 angles droits, et les côtés d'en face de la même longueur",
+  triangle: "3 côtés et 3 sommets",
+  cercle: "une ligne courbe, sans côté ni sommet",
+  triangle_rectangle: "3 côtés et un angle droit",
+};
+const fig = (k: number) => `la figure ${k}`;
+const figs = (n: number) => Array.from({ length: n }, (_, k) => fig(k + 1));
+const ang = (k: number) => `l'angle ${k}`;
+const angs = (n: number) => Array.from({ length: n }, (_, k) => ang(k + 1));
+
+/** Des situations d'enfant autour d'une forme dessinée. */
+const SITU_FORME = [
+  (p: string) => `${p} a découpé cette forme dans du papier.`,
+  (p: string) => `${p} a dessiné cette forme à la craie, dans la cour.`,
+  (p: string) => `Sur le cerf-volant de ${p}, il y a cette forme.`,
+  (p: string) => `${p} a collé cette gommette sur son cahier.`,
+  (p: string) => `Sur le drapeau du château de ${p}, on voit cette forme.`,
+  (p: string) => `${p} a trouvé cette forme dans la boîte de jeux.`,
+  (p: string) => `La boulangère a fait un biscuit de cette forme pour ${p}.`,
+  (p: string) => `Sur la porte de la cabane de ${p}, il y a cette forme.`,
+  (_: string) => `Pic le paille-en-queue a vu cette forme sur un panneau.`,
+  (p: string) => `${p} a peint cette forme sur la fusée en carton.`,
+  (p: string) => `Au marché, ${p} voit un tapis avec cette forme.`,
+  (p: string) => `Sur la carte au trésor de ${p}, il y a cette forme.`,
+];
+const situ = () => un(SITU_FORME)(prenom());
+
+/* ─────────────── ce1_figure_reconnaitre ─────────────── */
+const MR = "ce1_figure_reconnaitre";
+const BASE4: Forme[] = ["carre", "rectangle", "triangle", "cercle"];
+
+function nommerFigure(ctx: boolean) {
+  const f = un(BASE4);
+  const canvas = dessin([piece(f, { penche: f === "carre" ? Math.random() < 0.6 : Math.random() < 0.3 })], "Une figure à reconnaître.");
+  const q = ["Comment s'appelle cette forme ?", "Quel est le nom de cette figure ?", "Quelle est cette figure ?", "C'est quelle figure ?", "Quel nom lui donner ?"];
+  return {
+    text: ctx ? `${situ()} ${un(q)}` : tournure(REGARDE, q),
+    ...qcm(UN[f]!, BASE4.filter((x) => x !== f).map((x) => UN[x]!)),
+    canvas,
+    explanation: etapes(
+      "on compte les côtés, puis on regarde les angles. Une figure penchée garde son nom.",
+      `Cette figure a ${POURQUOI[f]}.`,
+      `C'est ${UN[f]}.`,
+    ),
+  };
+}
+
+/** Une planche de figures numérotées : où est le … ? */
+function trouverDansPlanche() {
+  const cible = un<Forme>(["carre", "rectangle", "triangle", "cercle", "carre"]);
+  const voisins: Forme[] =
+    cible === "carre" ? ["rectangle", "losange", "triangle", "cercle", "hexagone"]
+    : cible === "rectangle" ? ["losange", "triangle", "cercle", "quadri", "hexagone"]
+    : cible === "triangle" ? ["carre", "rectangle", "cercle", "losange", "pentagone"]
+    : ["carre", "rectangle", "triangle", "hexagone", "losange"];
+  const formes = melange([cible, ...melange(voisins).slice(0, 3)]);
+  const k = formes.indexOf(cible) + 1;
+  const canvas = planche(formes.map((f) => ({ f, o: { penche: f === cible && f === "carre" ? Math.random() < 0.5 : false } })), "Quatre figures numérotées.");
+  const x = LE[cible]!;
+  return {
+    text: tournure(REGARDE, [`Où est ${x} ?`, `Quel numéro porte ${x} ?`, `Trouve ${x}.`, `Montre ${x}.`, `Pic cherche ${x}. Lequel est-ce ?`, `Lequel est ${x} ?`]),
+    ...qcm(fig(k), figs(4).filter((c) => c !== fig(k))),
+    canvas,
+    explanation: etapes(`on cherche ${POURQUOI[cible]}.`, `La figure ${k} a ${POURQUOI[cible]}.`, `C'est la figure ${k}.`),
+  };
+}
+
+/** Combien de carrés (ou de triangles, de cercles) sur la planche ? */
+function combienDeFormes(ctx: boolean) {
+  const cible = un<Forme>(["carre", "triangle", "cercle"]);
+  const autres: Forme[] = cible === "carre" ? ["rectangle", "losange", "triangle", "cercle"] : cible === "triangle" ? ["carre", "rectangle", "cercle", "losange"] : ["carre", "triangle", "rectangle", "hexagone"];
+  const n = entre(1, 3);
+  const formes = melange([...Array.from({ length: n }, () => cible), ...melange(autres).slice(0, 4 - n)]);
+  const canvas = planche(formes.map((f) => ({ f, o: { penche: f === "carre" && Math.random() < 0.5 } })), "Quatre figures.");
+  const pl = { carre: "carrés", triangle: "triangles", cercle: "cercles" }[cible as "carre" | "triangle" | "cercle"];
+  const debut = ctx ? un([`${prenom()} range des gommettes.`, `${prenom()} trie les formes du jeu.`, `Sur la fresque de l'école, il y a ces formes.`, `${prenom()} fait un collage pour la fête.`, `Pic a caché ces formes dans le jardin.`]) : un(REGARDE);
+  return {
+    text: `${debut} ${un([`Combien de ${pl} vois-tu ?`, `Compte les ${pl}.`, `Il y a combien de ${pl} ?`])}`.trim(),
+    ...qcmN(n, [n + 1, n - 1, 4, n + 2]),
+    canvas,
+    explanation: etapes(`on regarde chaque figure : est-ce ${UN[cible]} ?`, `Un carré penché reste un carré.`, `Il y a ${n} ${n > 1 ? pl : pl.slice(0, -1)}.`),
+  };
+}
+
+/* ─────────────── ce1_figure_triangle_rectangle ─────────────── */
+const MT = "ce1_figure_triangle_rectangle";
+
+function trouverTriangleRectangle(ctx: boolean) {
+  const formes = melange<Forme>(["triangle_rectangle", "triangle", "triangle"]);
+  const k = formes.indexOf("triangle_rectangle") + 1;
+  const canvas = planche(formes.map((f) => ({ f, o: { rotation: un([0, 0, 20, -20, 90, 180]) } })), "Trois triangles numérotés, sans code.");
+  const debut = ctx
+    ? un([`${prenom()} veut une voile de bateau avec un angle droit.`, `Le menuisier cherche une équerre en bois.`, `${prenom()} fabrique un fanion avec un angle droit.`, `Pour son toit de cabane, ${prenom()} veut un coin bien droit.`, `${prenom()} cherche une part de gâteau avec un angle droit.`])
+    : un(REGARDE);
+  const q = ctx ? [`Quel triangle choisir ?`, `Quelle figure prendre ?`, `Lequel convient ?`] : [`Lequel est un triangle rectangle ?`, `Où est le triangle rectangle ?`, `Quel triangle a un angle droit ?`, `Trouve le triangle rectangle.`];
+  return {
+    text: `${debut} ${un(q)}`.trim(),
+    ...qcm(fig(k), figs(3).filter((c) => c !== fig(k))),
+    canvas,
+    explanation: etapes("on pose l'équerre dans chaque coin.", `Seule la figure ${k} a un coin qui colle à l'équerre.`, `C'est la figure ${k}.`),
+  };
+}
+
+function estRectangle() {
+  const oui = Math.random() < 0.5;
+  const canvas = dessin([piece(oui ? "triangle_rectangle" : "triangle", { rotation: un([0, 15, -15, 90, 180, 30]) })], "Un triangle, sans code.");
+  const juste = oui ? "oui, il a un angle droit" : "non, il n'a pas d'angle droit";
+  const faux = oui ? ["non, il n'a pas d'angle droit", "non, il a quatre côtés", "oui, il a quatre angles droits"] : ["oui, il a un angle droit", "oui, il a trois côtés", "non, il a quatre côtés"];
+  return {
+    text: tournure(["", "Prends ton équerre.", "Vérifie avec l'équerre.", `${prenom()} montre ce triangle.`], ["Est-ce un triangle rectangle ?", "Ce triangle est-il rectangle ?", "A-t-il un angle droit ?", "Est-ce un triangle rectangle, oui ou non ?"]).trim(),
+    ...qcm(juste, faux),
+    canvas,
+    explanation: etapes("on pose le coin de l'équerre sur chaque sommet.", oui ? "Un coin colle exactement à l'équerre." : "Aucun coin ne colle exactement à l'équerre.", cap(juste) + "."),
+  };
+}
+
+function ouEstAngleDroit() {
+  const [A, B, C] = lettres(3);
+  const canvas = dessin([piece("triangle_rectangle", { noms: [A, B, C], rotation: un([0, 90, 180, 270, 20, -20]) })], "Un triangle rectangle nommé, sans code.");
+  const question = un(["angle", "angle", "cotes", "sommets"] as const);
+  if (question === "angle") {
+    return {
+      text: tournure([`Le triangle ${A}${B}${C} est rectangle.`, `${prenom()} a tracé le triangle ${A}${B}${C}.`, `Voici le triangle ${A}${B}${C}.`], ["Où est son angle droit ?", "À quel sommet est l'angle droit ?", "Quel sommet a l'angle droit ?"]),
+      ...qcm(`en ${A}`, [`en ${B}`, `en ${C}`, "il n'y en a pas"]),
+      canvas,
+      explanation: etapes("on pose l'équerre dans chaque coin.", `Le coin ${A} colle à l'équerre.`, `L'angle droit est en ${A}.`),
+    };
+  }
+  const mot = question === "cotes" ? "côtés" : "sommets";
+  return {
+    text: `Le triangle ${A}${B}${C} est rectangle en ${A}. ${un([`Combien a-t-il de ${mot} ?`, `Combien de ${mot} vois-tu ?`, `Il a combien de ${mot} ?`])}`,
+    ...qcmN(3, [4, 2, 1]),
+    canvas,
+    explanation: etapes("un triangle rectangle reste un triangle.", `Ses ${mot} : ${question === "cotes" ? `[${A}${B}], [${B}${C}], [${C}${A}]` : `${A}, ${B}, ${C}`}.`, `Il en a 3.`),
+  };
+}
+
+function vraiFauxTriangle() {
+  const vrais = ["Il a un angle droit.", "Il a trois côtés.", "Il a trois sommets.", "C'est un triangle."];
+  const faux = ["Il a quatre angles droits.", "Il a quatre côtés.", "Il a deux angles droits.", "C'est un rectangle.", "Il n'a pas de sommet."];
+  const v = un(vrais);
+  const canvas = dessin([piece("triangle_rectangle", { codes: true, rotation: un([0, 90, 180, 270, 25]) })], "Un triangle rectangle codé.");
+  return {
+    text: tournure([`${prenom()} a tracé ce triangle rectangle.`, "Voici un triangle rectangle.", "Regarde ce triangle rectangle."], ["Quelle phrase est vraie ?", "Quelle phrase est juste ?", "Que peut-on dire ?"]),
+    ...qcm(v, melange(faux).slice(0, 3)),
+    canvas,
+    explanation: etapes("un triangle rectangle est un triangle avec UN angle droit.", "Il a 3 côtés, 3 sommets et un seul angle droit.", `La phrase vraie : « ${v} »`),
+  };
+}
+
+/* ─────────────── ce1_figure_decrire ─────────────── */
+const MD = "ce1_figure_decrire";
+const A_COMPTER: Forme[] = ["carre", "rectangle", "triangle", "triangle_rectangle", "losange", "quadri", "pentagone", "hexagone", "maison"];
+
+function compterCotes(ctx: boolean) {
+  const f = un(A_COMPTER);
+  const mot = un(["côtés", "sommets"]);
+  const n = COTES[f];
+  const canvas = dessin([piece(f, { penche: Math.random() < 0.3 })], "Une figure à décrire.");
+  const q = [`Combien de ${mot} a cette figure ?`, `Compte ses ${mot}.`, `Combien de ${mot} vois-tu ?`, `Elle a combien de ${mot} ?`];
+  return {
+    text: ctx ? `${situ()} ${un(q)}` : tournure(REGARDE, q),
+    ...qcmN(n, [n + 1, n - 1, n + 2, n * 2]),
+    canvas,
+    explanation: etapes(`on fait le tour de la figure en comptant les ${mot}.`, `Un côté est un trait, un sommet est un coin. Il y a autant de côtés que de sommets.`, `Il y a ${n} ${mot}.`),
+  };
+}
+
+function nommerElement() {
+  const f = un<Forme>(["carre", "rectangle", "triangle", "quadri", "pentagone", "maison", "cercle"]);
+  const quoi = f === "cercle" ? "centre" : un(["côté", "sommet"]);
+  const p = piece(f);
+  if (quoi === "côté") p.segments.push({ a: "f0", b: "f1", couleur: "#dc2626", epais: true });
+  else if (quoi === "sommet") p.points.push({ id: "rouge", x: p.points[1].x, y: p.points[1].y, nom: " ", couleur: "#dc2626" });
+  else p.points[0] = { ...p.points[0], couleur: "#dc2626", nom: " ", cache: false };
+  const canvas = dessin([p], "Une figure avec un élément en rouge.");
+  const objet = quoi === "côté" ? "le trait rouge" : "le point rouge";
+  const juste = quoi === "côté" ? "un côté" : quoi === "sommet" ? "un sommet" : "le centre";
+  return {
+    text: tournure(REGARDE, [`Comment s'appelle ${objet} ?`, `Comment appelle-t-on ${objet} ?`, `Que montre ${objet} ?`, `${cap(objet)}, c'est quoi ?`]).trim(),
+    ...qcm(juste, ["un côté", "un sommet", "le centre", "un angle droit"].filter((x) => x !== juste)),
+    canvas,
+    explanation: etapes("un côté est un trait de la figure ; un sommet est un coin ; le centre est le milieu du cercle.", `Ici, ${objet} est ${juste}.`, `C'est ${juste}.`),
+  };
+}
+
+function quelleFigureA() {
+  const formes = melange<Forme>(un([["triangle", "carre", "pentagone"], ["triangle", "rectangle", "hexagone"], ["carre", "pentagone", "hexagone"], ["triangle", "pentagone", "hexagone"], ["triangle", "carre", "hexagone"]] as Forme[][]));
+  const cible = un(formes);
+  const k = formes.indexOf(cible) + 1;
+  const n = COTES[cible];
+  const mot = un(["côtés", "sommets"]);
+  return {
+    text: tournure(REGARDE, [`Quelle figure a ${n} ${mot} ?`, `Trouve la figure qui a ${n} ${mot}.`, `Laquelle a ${n} ${mot} ?`, `${prenom()} cherche une figure à ${n} ${mot}. Laquelle ?`]).trim(),
+    ...qcm(fig(k), figs(3).filter((c) => c !== fig(k))),
+    canvas: planche(formes.map((f) => ({ f })), "Trois figures numérotées."),
+    explanation: etapes(`on compte les ${mot} de chaque figure.`, `La figure ${k} a ${n} ${mot}.`, `C'est la figure ${k}.`),
+  };
+}
+
+/* ─────────────── ce1_angle_droit ─────────────── */
+const MA = "ce1_angle_droit";
+const PAS_DROITS = [35, 45, 55, 60, 125, 135, 145];
+
+function angleEstDroit() {
+  const droit = Math.random() < 0.5;
+  const d = droit ? 90 : un(PAS_DROITS);
+  const canvas = dessin([pieceAngle(d)], "Un angle, sans code.");
+  const juste = droit ? "oui, il est droit" : "non, il n'est pas droit";
+  return {
+    text: tournure(["", "Prends ton équerre.", `${prenom()} pose son équerre.`, "Vérifie avec l'équerre."], ["Cet angle est-il droit ?", "Est-ce un angle droit ?", "Cet angle colle-t-il au coin de l'équerre ?", "Angle droit ou pas ?"]).trim(),
+    ...qcm(juste, [droit ? "non, il n'est pas droit" : "oui, il est droit", "on ne peut pas savoir"]),
+    canvas,
+    explanation: etapes("on pose le coin de l'équerre sur le sommet, un bord sur un côté.", droit ? "L'autre côté colle à l'équerre." : d < 90 ? "L'angle est plus fermé que l'équerre." : "L'angle est plus ouvert que l'équerre.", cap(juste) + "."),
+  };
+}
+
+function quelAngleDroit(ctx: boolean) {
+  const n = un([3, 4]);
+  const degs = melange([90, ...melange(PAS_DROITS).slice(0, n - 1)]);
+  const k = degs.indexOf(90) + 1;
+  const debut = ctx ? un([`Le menuisier vérifie ses coins.`, `${prenom()} plie des pailles.`, `La maîtresse a tracé ces angles.`, `${prenom()} ouvre les branches d'un compas.`, `Pic a posé des brindilles sur le sol.`]) : un(["Prends ton équerre.", "Vérifie avec l'équerre.", ""]);
+  return {
+    text: `${debut} ${un(["Quel angle est droit ?", "Lequel est un angle droit ?", "Où est l'angle droit ?", "Trouve l'angle droit."])}`.trim(),
+    ...qcm(ang(k), angs(n).filter((c) => c !== ang(k))),
+    canvas: plancheAngles(degs, "Des angles numérotés, sans code."),
+    explanation: etapes("on pose l'équerre sur chaque angle.", `L'angle ${k} colle exactement au coin de l'équerre.`, `C'est l'angle ${k}.`),
+  };
+}
+
+const AVEC_DROITS: Forme[] = ["carre", "rectangle", "triangle_rectangle", "triangle", "losange", "maison", "trapeze_rectangle", "quadri"];
+function compterAnglesDroits(ctx: boolean) {
+  const f = un(AVEC_DROITS);
+  const n = ANGLES_DROITS[f];
+  const canvas = dessin([piece(f, { penche: Math.random() < 0.4 })], "Une figure, sans code d'angle droit.");
+  const debut = ctx
+    ? un([`Le menuisier a scié cette planche.`, `${prenom()} a découpé ce morceau de carton.`, `Voici le plan du jardin de ${prenom()}.`, `La couturière a coupé ce tissu.`, `${prenom()} a construit ce cadre pour une photo.`, `Voici une dalle de la piscine.`])
+    : un(REGARDE);
+  return {
+    text: `${debut} ${un(["Combien la figure a-t-elle d'angles droits ?", "Combien d'angles droits vois-tu ?", "Compte les angles droits de la figure.", "Il y a combien d'angles droits ?"])}`.trim(),
+    ...qcm(String(n), ["0", "1", "2", "3", "4"].filter((x) => x !== String(n))),
+    canvas,
+    explanation: etapes("on pose l'équerre dans chaque coin, un par un.", n ? `${n} coin${n > 1 ? "s collent" : " colle"} à l'équerre.` : "Aucun coin ne colle à l'équerre.", `Il y a ${n} angle${n > 1 ? "s" : ""} droit${n > 1 ? "s" : ""}.`),
+  };
+}
+
+/* ─────────────── ce1_angle_aigu_obtus ─────────────── */
+const MO = "ce1_angle_aigu_obtus";
+const nature = (d: number) => (d === 90 ? "un angle droit" : d < 90 ? "un angle aigu" : "un angle obtus");
+const SITU_ANGLE = [
+  (p: string) => `${p} ouvre ses ciseaux comme ça.`,
+  (_: string) => `Pic le paille-en-queue ouvre son bec comme ça.`,
+  (p: string) => `${p} ouvre un livre comme ça.`,
+  (p: string) => `Les aiguilles de la pendule de ${p} font cet angle.`,
+  (p: string) => `${p} ouvre l'éventail comme ça.`,
+  (p: string) => `Au zoo, le crocodile ouvre la gueule comme ça. ${p} regarde.`,
+  (p: string) => `${p} écarte les branches du compas comme ça.`,
+  (p: string) => `Le toit de la cabane de ${p} fait cet angle.`,
+  (p: string) => `${p} plie son bras comme ça.`,
+  (_: string) => `Le pont-levis du château s'ouvre comme ça.`,
+];
+
+function natureAngle(ctx: boolean) {
+  const d = un([30, 40, 50, 60, 70, 90, 110, 120, 135, 150]);
+  const canvas = dessin([pieceAngle(d)], "Un angle, sans code.");
+  const q = ["Quel angle est-ce ?", "Aigu, droit ou obtus ?", "Comment s'appelle cet angle ?", "Quel est cet angle ?"];
+  return {
+    text: ctx ? `${un(SITU_ANGLE)(prenom())} ${un(q)}` : tournure(["", "Compare avec l'équerre.", "Regarde cet angle."], q).trim(),
+    ...qcm(nature(d), ["un angle aigu", "un angle droit", "un angle obtus"].filter((x) => x !== nature(d))),
+    canvas,
+    explanation: etapes("on compare l'angle au coin de l'équerre.", d === 90 ? "Il colle exactement au coin." : d < 90 ? "Il est plus fermé que le coin : il est pointu." : "Il est plus ouvert que le coin.", `C'est ${nature(d)}.`),
+  };
+}
+
+function trouverAigu(ctx: boolean) {
+  const degs = melange([un([30, 45, 60]), 90, un([120, 135, 150])]);
+  const cible = un(["aigu", "obtus", "droit"] as const);
+  const d = degs.find((x) => (cible === "droit" ? x === 90 : cible === "aigu" ? x < 90 : x > 90))!;
+  const k = degs.indexOf(d) + 1;
+  const debut = ctx ? un([`${prenom()} trace trois angles.`, `Trois amis ouvrent leurs ciseaux.`, `Pic a posé trois brindilles.`, `${prenom()} plie trois pailles.`, `La maîtresse dessine trois angles.`]) : "";
+  const q = cible === "aigu" ? ["Quel angle est aigu ?", "Lequel est plus petit que l'angle droit ?", "Trouve l'angle aigu."] : cible === "obtus" ? ["Quel angle est obtus ?", "Lequel est plus grand que l'angle droit ?", "Trouve l'angle obtus."] : ["Quel angle est droit ?", "Trouve l'angle droit."];
+  return {
+    text: `${debut} ${un(q)}`.trim(),
+    ...qcm(ang(k), angs(3).filter((c) => c !== ang(k))),
+    canvas: plancheAngles(degs, "Trois angles numérotés, sans code."),
+    explanation: etapes("on compare chaque angle au coin de l'équerre.", `L'angle ${k} est ${cible === "aigu" ? "plus fermé" : cible === "obtus" ? "plus ouvert" : "exactement comme le coin"}.`, `C'est l'angle ${k}.`),
+  };
+}
+
+/* ─────────────── ce1_angle_droit_code ─────────────── */
+const MC = "ce1_angle_droit_code";
+const CODABLES: Forme[] = ["carre", "rectangle", "triangle_rectangle", "maison", "trapeze_rectangle"];
+
+function compterCodes(ctx: boolean) {
+  const f = un(CODABLES);
+  const tous = SOMMETS_DROITS[f];
+  const dessines = Math.random() < 0.5;
+  const sur = dessines ? melange(tous).slice(0, entre(1, tous.length)) : [];
+  const canvas = dessin([piece(f, { codes: dessines, codesSur: sur, penche: Math.random() < 0.3 })], dessines ? "Une figure avec des codes d'angle droit." : "Une figure sans code.");
+  if (dessines) {
+    const n = sur.length;
+    return {
+      text: tournure(ctx ? [`${prenom()} a codé sa figure.`, `La maîtresse a codé ce dessin.`] : REGARDE, ["Combien d'angles sont codés droits ?", "Combien de petits carrés de code vois-tu ?", "Combien d'angles droits sont codés ?"]).trim(),
+      ...qcm(String(n), ["0", "1", "2", "3", "4"].filter((x) => x !== String(n))),
+      canvas,
+      explanation: etapes("le petit carré dans un coin dit : « cet angle est droit ».", `On compte les petits carrés : ${n}.`, `${n} angle${n > 1 ? "s sont codés" : " est codé"}.`),
+    };
+  }
+  const n = tous.length;
+  return {
+    text: tournure(ctx ? [`${prenom()} vérifie ce dessin à l'équerre.`, `${prenom()} doit coder cette figure.`] : ["Vérifie avec l'équerre.", ""], ["Combien de petits carrés de code faut-il dessiner ?", "Combien d'angles droits faut-il coder ?", "Combien de codes faut-il ?"]).trim(),
+    ...qcm(String(n), ["0", "1", "2", "3", "4"].filter((x) => x !== String(n))),
+    canvas,
+    explanation: etapes("on code chaque angle droit par un petit carré.", `Cette figure a ${n} angle${n > 1 ? "s" : ""} droit${n > 1 ? "s" : ""}.`, `Il faut ${n} code${n > 1 ? "s" : ""}.`),
+  };
+}
+
+function quelAngleCode() {
+  const f = un<Forme>(["triangle_rectangle", "trapeze_rectangle", "triangle_rectangle", "quadri"]);
+  const noms = lettres(COTES[f]);
+  if (f === "quadri") {
+    // Aucun code : on ne sait pas tant qu'on n'a pas vérifié.
+    const canvas = dessin([piece("quadri", { noms })], "Une figure nommée, sans code.");
+    const X = un(noms);
+    const juste = "on ne sait pas, il faut vérifier à l'équerre";
+    return {
+      text: tournure([`La figure ${noms.join("")} n'a aucun code.`, `${prenom()} n'a codé aucun angle.`], [`Que sait-on de l'angle en ${X} ?`, `L'angle en ${X} est-il droit ?`]),
+      ...qcm(juste, ["il est droit, c'est sûr", "il n'est jamais droit", "il est droit s'il est en bas"]),
+      canvas,
+      explanation: etapes("le code dit qu'un angle est droit ; sans code, on vérifie.", "Pas de petit carré : le dessin ne dit rien.", "Il faut vérifier à l'équerre."),
+    };
+  }
+  const k = un(SOMMETS_DROITS[f]);
+  const canvas = dessin([piece(f, { noms, codes: true, codesSur: [k], rotation: un([0, 90, 180, 15, -15]) })], "Une figure nommée, un angle codé.");
+  return {
+    text: tournure([`Voici la figure ${noms.join("")}.`, `${prenom()} a codé un angle.`, "Regarde le code."], ["Quel angle est codé droit ?", "Où est l'angle codé droit ?", "Quel sommet porte le code ?"]),
+    ...qcm(`l'angle en ${noms[k]}`, noms.filter((x) => x !== noms[k]).map((x) => `l'angle en ${x}`)),
+    canvas,
+    explanation: etapes("on cherche le petit carré dans un coin.", `Le petit carré est en ${noms[k]}.`, `L'angle en ${noms[k]} est droit.`),
+  };
+}
+
+/* ─────────────── ce1_figure_proprietes ─────────────── */
+const MP = "ce1_figure_proprietes";
+
+function coteEnFace(niveau: 3 | 4) {
+  const carre = Math.random() < 0.4;
+  const noms = lettres(4);
+  const [A, B, C, D] = noms;
+  const L = entre(4, 9);
+  const l = carre ? L : entre(2, L - 1);
+  const longueurs: [number, string][] = carre ? [[0, `${L} cm`]] : [[0, `${L} cm`], [1, `${l} cm`]];
+  const canvas = dessin([piece(carre ? "carre" : "rectangle", { noms, codes: true, longueurs, dims: [L, l], rotation: un([0, 0, 10, -10]) })], carre ? "Un carré codé, un côté mesuré." : "Un rectangle codé, deux côtés mesurés.");
+  const nomFig = carre ? `le carré ${A}${B}${C}${D}` : `le rectangle ${A}${B}${C}${D}`;
+  const cote = carre ? un([[C, D], [B, C], [D, A]]) : un([[C, D], [D, A]]);
+  const juste = carre ? L : cote[0] === C ? L : l;
+  const debut = niveau === 4 ? un([`${cap(prenom())} a tracé ${nomFig}.`, `Le jardinier dessine ${nomFig} pour un potager.`, `Voici ${nomFig}, le plan d'une cabane.`, `${prenom()} découpe ${nomFig} dans du carton.`]) : `Voici ${nomFig}.`;
+  return {
+    text: `${debut} ${un([`Combien mesure le côté [${cote[0]}${cote[1]}] ?`, `Quelle est la longueur de [${cote[0]}${cote[1]}] ?`, `[${cote[0]}${cote[1]}] mesure combien ?`])}`,
+    ...qcmN(juste, [carre ? L * 2 : L + l, carre ? L + 1 : juste === L ? l : L, juste + 1, juste * 2], "cm"),
+    canvas,
+    explanation: etapes(carre ? "dans un carré, les 4 côtés ont la même longueur." : "dans un rectangle, les côtés d'en face ont la même longueur.", carre ? `[${cote[0]}${cote[1]}] mesure comme [${A}${B}].` : `[${cote[0]}${cote[1]}] est en face de [${cote[0] === C ? A + B : B + C}].`, `[${cote[0]}${cote[1]}] mesure ${juste} cm.`),
+  };
+}
+
+function combienMesurent() {
+  const carre = Math.random() < 0.5;
+  const L = entre(3, 9);
+  const canvas = dessin([piece(carre ? "carre" : "rectangle", { codes: true, egalites: true, longueurs: [[0, `${L} cm`]], rotation: un([0, 0, 15, -15]) })], "Une figure codée, un côté mesuré.");
+  const n = carre ? 4 : 2;
+  const quoi = carre ? "ce carré" : "ce rectangle";
+  return {
+    text: tournure([`${prenom()} a tracé ${quoi}.`, `Voici ${quoi}.`, `Regarde ${quoi}.`, `La maîtresse montre ${quoi}.`], [`Combien de côtés mesurent ${L} cm ?`, `Combien de ses côtés font ${L} cm ?`]),
+    ...qcm(String(n), ["1", "2", "3", "4"].filter((x) => x !== String(n))),
+    canvas,
+    explanation: etapes("les petits traits sur les côtés montrent les longueurs égales.", carre ? "Dans un carré, les 4 côtés sont égaux." : "Dans un rectangle, le côté d'en face a la même longueur.", `${n} côtés mesurent ${L} cm.`),
+  };
+}
+
+function phraseVraie() {
+  const carre = Math.random() < 0.5;
+  const canvas = dessin([piece(carre ? "carre" : "rectangle", { codes: true, egalites: true, penche: Math.random() < 0.5 })], "Une figure codée.");
+  const vrais = carre ? ["Ses 4 côtés ont la même longueur.", "Il a 4 angles droits.", "Il a 4 sommets."] : ["Ses côtés d'en face ont la même longueur.", "Il a 4 angles droits.", "Il a 4 sommets."];
+  const faux = carre ? ["Il a 2 angles droits.", "Il a 3 côtés.", "Ses côtés ont des longueurs différentes.", "Il n'a pas d'angle droit."] : ["Ses 4 côtés ont la même longueur.", "Il a 3 angles droits.", "Il a 5 sommets.", "Il n'a pas d'angle droit."];
+  const v = un(vrais);
+  return {
+    text: tournure([`Voici ${carre ? "un carré" : "un rectangle"}.`, `${prenom()} a codé ${carre ? "ce carré" : "ce rectangle"}.`, `Regarde ${carre ? "ce carré" : "ce rectangle"} et ses codes.`], ["Quelle phrase est vraie ?", "Quelle phrase est juste ?", "Que peut-on dire ?"]),
+    ...qcm(v, melange(faux).slice(0, 3)),
+    canvas,
+    explanation: etapes("on lit les codes : petits carrés = angles droits, petits traits = longueurs égales.", carre ? "4 angles droits et 4 côtés égaux." : "4 angles droits, côtés d'en face égaux.", `Vrai : « ${v} »`),
+  };
+}
+
+/* ─────────────── ce1_figure_construire (sur quadrillage) ─────────────── */
+const MB = "ce1_figure_construire";
+
+/** Un carré ou un rectangle commencé sur quadrillage : le contour tracé s'arrête. */
+function quadrillage(L: number, l: number, cotesTraces: number): CanvasFigure {
+  const tour: [number, number][] = [[1 + l, 1], [1 + l, 1 + L], [1, 1 + L], [1, 1], [1 + l, 1]];
+  return {
+    kind: "figure_libre",
+    size: { cellSize: 24, padding: 10 },
+    grid: { rows: l + 2, cols: L + 2, filledCells: [] },
+    perimeterPath: tour.slice(0, cotesTraces + 1),
+    display: { showGrid: true, showFilled: false, showPerimeter: true, showVertices: false },
+    colors: { perimeter: "#dc2626" },
+  } as CanvasFigure;
+}
+
+function coteQuiManque(niveau: 3 | 4) {
+  const carre = Math.random() < 0.5;
+  const L = carre ? entre(3, 7) : entre(4, 9);
+  const l = carre ? L : entre(2, Math.min(L - 1, 6));
+  const traces = niveau === 3 ? 3 : 2;
+  const canvas = quadrillage(L, l, traces);
+  // Côtés tracés dans l'ordre : bas, droite, haut. Il manque la gauche (et le haut à ★4).
+  const demande = traces === 3 ? "gauche" : un(["gauche", "haut"]);
+  const juste = demande === "gauche" ? l : L;
+  const nom = carre ? "un carré" : "un rectangle";
+  const debut = niveau === 4
+    ? un([`${prenom()} commence ${nom} pour le plan de sa cabane.`, `Le jardinier trace ${nom} pour un potager.`, `${prenom()} dessine ${nom} : le tapis de sa chambre.`, `Pour la kermesse, ${prenom()} trace ${nom}.`, `${prenom()} dessine ${nom} : l'aquarium des poissons rouges.`])
+    : un([`${prenom()} trace ${nom} sur le quadrillage.`, `Voici ${nom} commencé.`, `${prenom()} a presque fini ${nom}.`]);
+  const ou = demande === "gauche" ? "de gauche" : "du haut";
+  return {
+    text: `${debut} ${un([`Combien de carreaux doit mesurer le côté ${ou} ?`, `Le côté ${ou} fera combien de carreaux ?`, `Pour finir, combien de carreaux faut-il au côté ${ou} ?`])}`,
+    ...qcmN(juste, [juste + 1, juste - 1, carre ? juste + 2 : demande === "gauche" ? L : l], "carreaux"),
+    canvas,
+    explanation: etapes(carre ? "dans un carré, les 4 côtés ont la même longueur." : "dans un rectangle, les côtés d'en face ont la même longueur.", `Le côté ${demande === "gauche" ? "de droite" : "du bas"} mesure ${juste} carreaux.`, `Il faut tracer ${juste} carreaux.`),
+  };
+}
+
+/* ─────────────── ce1_figure_compas ─────────────── */
+const MK = "ce1_figure_compas";
+
+function ouPiquer() {
+  const [O, A, B] = lettres(3);
+  const p = piece("cercle", { centre: O });
+  p.points.push({ id: "pA", x: 2, y: 0, nom: A }, { id: "pB", x: -1.41, y: 1.41, nom: B });
+  const canvas = dessin([p], "Un cercle, son centre et deux points du cercle.");
+  return {
+    text: tournure(["", `${prenom()} veut tracer ce cercle.`, "Regarde ce cercle.", `${prenom()} veut refaire ce cercle.`, "Tu prends ton compas."], ["Où pique-t-on la pointe du compas ?", "Où poser la pointe du compas ?", "Où faut-il piquer la pointe ?"]).trim(),
+    ...qcm(`au point ${O}`, [`au point ${A}`, `au point ${B}`, "n'importe où"]),
+    canvas,
+    explanation: etapes("la pointe du compas se pose au centre du cercle.", `Le centre est le point ${O}, au milieu.`, `On pique au point ${O}.`),
+  };
+}
+
+function rayonDiametre() {
+  const [O, A, B] = lettres(3);
+  const r = entre(2, 6);
+  const cas = un(["diametre", "rayon", "rayon"] as const);
+  const p = piece("cercle", { centre: O });
+  p.points.push({ id: "pA", x: 2, y: 0, nom: A });
+  p.segments.push({ a: "fO", b: "pA", texte: `${r} cm`, couleur: "#dc2626" });
+  if (cas === "rayon") p.points.push({ id: "pB", x: -1.41, y: -1.41, nom: B });
+  else {
+    p.points.push({ id: "pB", x: -2, y: 0, nom: B });
+    p.segments.push({ a: "fO", b: "pB", pointille: true, couleur: "#64748b" });
+  }
+  const canvas = dessin([p], "Un cercle, son centre, un rayon mesuré.");
+  const debut = un([`${prenom()} écarte son compas de ${r} cm.`, `${prenom()} a tracé ce cercle de centre ${O}.`, `${prenom()} trace une roue de vélo en carton.`, `Le chef cuisinier dessine une tarte ronde.`, `${prenom()} dessine le hublot d'une fusée.`]);
+  if (cas === "rayon") {
+    return {
+      text: `${debut} ${un([`Combien mesure [${O}${B}] ?`, `Quelle est la longueur de [${O}${B}] ?`])}`,
+      ...qcmN(r, [r * 2, r + 1, r - 1], "cm"),
+      canvas,
+      explanation: etapes("tous les points du cercle sont à la même distance du centre.", `${B} est sur le cercle, comme ${A}.`, `[${O}${B}] mesure ${r} cm.`),
+    };
+  }
+  return {
+    text: `${debut} ${un([`Combien mesure [${A}${B}], d'un bord à l'autre ?`, `Quelle est la longueur de [${A}${B}] ?`])}`,
+    ...qcmN(2 * r, [r, 2 * r + 1, r + 2], "cm"),
+    canvas,
+    explanation: etapes(`[${A}${B}] passe par le centre ${O}.`, `${r} cm + ${r} cm = ${2 * r} cm.`, `[${A}${B}] mesure ${2 * r} cm.`),
+  };
+}
+
+/* ─────────────── ce1_figure_defi ─────────────── */
+const MF = "ce1_figure_defi";
+const DEVINETTES: { f: Forme; t: string }[] = [
+  { f: "carre", t: "J'ai 4 côtés de la même longueur et 4 angles droits." },
+  { f: "carre", t: "Mes 4 côtés sont égaux. Mes 4 coins sont droits." },
+  { f: "rectangle", t: "J'ai 4 angles droits, mais mes côtés ne sont pas tous égaux." },
+  { f: "rectangle", t: "J'ai 4 angles droits. Deux de mes côtés sont plus longs." },
+  { f: "triangle_rectangle", t: "J'ai 3 côtés et un angle droit." },
+  { f: "triangle", t: "J'ai 3 côtés et aucun angle droit." },
+  { f: "cercle", t: "Je n'ai ni côté ni sommet. On me trace au compas." },
+  { f: "losange", t: "J'ai 4 côtés égaux, mais aucun angle droit." },
+  { f: "hexagone", t: "J'ai 6 côtés et 6 sommets." },
+];
+
+function devinette() {
+  const d = un(DEVINETTES);
+  // Pas deux figures qui répondent à la même devinette.
+  const pool = (["carre", "rectangle", "triangle_rectangle", "triangle", "cercle", "losange", "hexagone"] as Forme[]).filter((x) => x !== d.f && !(d.f === "triangle" && x === "triangle_rectangle"));
+  const formes = melange([d.f, ...melange(pool).slice(0, 3)]);
+  const k = formes.indexOf(d.f) + 1;
+  const debut = un(["Devinette !", `${prenom()} pose une devinette.`, "Pic pose une devinette.", "Qui suis-je ?"]);
+  return {
+    text: `${debut} « ${d.t} » ${un(debut === "Qui suis-je ?" ? ["Quelle figure est-ce ?", "Laquelle est-ce ?"] : ["Quelle figure est-ce ?", "Qui suis-je ?", "Laquelle est-ce ?"])}`,
+    ...qcm(fig(k), figs(4).filter((c) => c !== fig(k))),
+    canvas: planche(formes.map((f) => ({ f, o: { codes: f === "carre" || f === "rectangle" || f === "triangle_rectangle" } })), "Quatre figures numérotées."),
+    explanation: etapes("on vérifie chaque indice sur chaque figure.", `La figure ${k} a tout ce que dit la devinette.`, `C'est la figure ${k}.`),
+  };
+}
+
+/** Des figures cachées dans une figure : compter TOUS les carrés, tous les triangles. */
+function figuresCachees() {
+  const cas = un(["bande2", "bande3", "carre4", "diag", "mediane"] as const);
+  const pts: { id: string; x: number; y: number; cache: boolean }[] = [];
+  const P = (id: string, x: number, y: number) => pts.push({ id, x, y, cache: true });
+  const segments: { a: string; b: string }[] = [];
+  let polys: string[][] = [];
+  let juste = 0;
+  let quoi = "carrés";
+  let pourquoi = "";
+  if (cas === "bande2" || cas === "bande3") {
+    const n = cas === "bande2" ? 2 : 3;
+    for (let i = 0; i <= n; i++) P(`h${i}`, i * 2, 2), P(`b${i}`, i * 2, 0);
+    polys = [[`b0`, `b${n}`, `h${n}`, `h0`]];
+    for (let i = 1; i < n; i++) segments.push({ a: `b${i}`, b: `h${i}` });
+    juste = n;
+    pourquoi = `${n} petits carrés ; la grande figure est un rectangle, pas un carré.`;
+  } else if (cas === "carre4") {
+    for (const [i, x] of [0, 2, 4].entries()) for (const [j, y] of [0, 2, 4].entries()) P(`q${i}${j}`, x, y);
+    polys = [["q00", "q20", "q22", "q02"]];
+    segments.push({ a: "q10", b: "q12" }, { a: "q01", b: "q21" });
+    juste = 5;
+    pourquoi = "4 petits carrés, et le grand carré tout autour : 4 + 1 = 5.";
+  } else if (cas === "diag") {
+    const h = un([2.4, 4]);
+    P("a", 0, 0), P("b", 4, 0), P("c", 4, h), P("d", 0, h);
+    polys = [["a", "b", "c", "d"]];
+    segments.push({ a: "a", b: "c" });
+    juste = 2;
+    quoi = "triangles";
+    pourquoi = "le trait coupe la figure en 2 triangles.";
+  } else {
+    P("a", 0, 0), P("b", 4, 0), P("c", 2, 3.2), P("m", 2, 0);
+    polys = [["a", "b", "c"]];
+    segments.push({ a: "c", b: "m" });
+    juste = 3;
+    quoi = "triangles";
+    pourquoi = "2 petits triangles, et le grand triangle tout entier : 2 + 1 = 3.";
+  }
+  const canvas = { kind: "construction", points: pts, polygones: polys.map((s) => ({ sommets: s })), segments, largeur: 280, description: "Une figure découpée." } as CanvasFigure;
+  return {
+    text: `${un(["Attention, défi !", `${prenom()} lance un défi.`, "Pic a un défi pour toi.", "Regarde bien, c'est un piège."])} ${un([`Combien de ${quoi} vois-tu en tout ?`, `Compte tous les ${quoi}, même les grands.`, `Il y a combien de ${quoi} en tout ?`])}`,
+    ...qcmN(juste, [juste - 1, juste + 1, juste + 2]),
+    canvas,
+    explanation: etapes(`on compte les petits ${quoi}, puis on cherche les grands.`, pourquoi, `Il y a ${juste} ${quoi}.`),
+  };
+}
+
+/* ─────────────── la banque ─────────────── */
+const nouveaux: TutorBankItemV4[] = [
+  g(MR, "ce1_figure_reconnaitre_tpl_1", 3, "Compte les côtés. Une figure penchée garde son nom.", () => nommerFigure(true)),
+  g(MR, "ce1_figure_reconnaitre_tpl_2", 2, "Regarde les côtés et les coins de chaque figure.", () => trouverDansPlanche()),
+  g(MR, "ce1_figure_reconnaitre_tpl_3", 2, "Compte les côtés, puis regarde les coins.", () => nommerFigure(false)),
+  g(MR, "ce1_figure_reconnaitre_tpl_4", 3, "Un carré penché reste un carré.", () => combienDeFormes(true)),
+
+  g(MT, "ce1_figure_triangle_rectangle_tpl_1", 4, "Pose l'équerre dans chaque coin.", () => ouEstAngleDroit()),
+  g(MT, "ce1_figure_triangle_rectangle_tpl_2", 3, "Pose l'équerre dans les coins de chaque triangle.", () => trouverTriangleRectangle(Math.random() < 0.5)),
+  g(MT, "ce1_figure_triangle_rectangle_tpl_3", 3, "Un triangle rectangle a un angle droit.", () => estRectangle()),
+  g(MT, "ce1_figure_triangle_rectangle_tpl_4", 4, "Un triangle rectangle : 3 côtés, un angle droit.", () => vraiFauxTriangle()),
+
+  g(MD, "ce1_figure_decrire_tpl_1", 3, "Fais le tour de la figure en comptant.", () => compterCotes(true)),
+  g(MD, "ce1_figure_decrire_tpl_2", 2, "Un côté est un trait, un sommet est un coin.", () => nommerElement()),
+  g(MD, "ce1_figure_decrire_tpl_3", 3, "Compte sur chaque figure.", () => quelleFigureA()),
+  g(MD, "ce1_figure_decrire_tpl_4", 2, "Fais le tour de la figure en comptant.", () => compterCotes(false)),
+
+  g(MA, "ce1_angle_droit_tpl_1", 3, "Pose le coin de l'équerre sur chaque angle.", () => quelAngleDroit(Math.random() < 0.5)),
+  g(MA, "ce1_angle_droit_tpl_2", 2, "Pose le coin de l'équerre sur le sommet.", () => angleEstDroit()),
+  g(MA, "ce1_angle_droit_tpl_3", 4, "Vérifie chaque coin avec l'équerre.", () => compterAnglesDroits(true)),
+  g(MA, "ce1_angle_droit_tpl_4", 3, "Vérifie chaque coin avec l'équerre.", () => compterAnglesDroits(false)),
+
+  g(MO, "ce1_angle_aigu_obtus_tpl_1", 4, "Compare chaque angle au coin de l'équerre.", () => trouverAigu(Math.random() < 0.5)),
+  g(MO, "ce1_angle_aigu_obtus_tpl_2", 3, "Plus fermé que l'équerre : aigu. Plus ouvert : obtus.", () => natureAngle(Math.random() < 0.5)),
+  g(MO, "ce1_angle_aigu_obtus_tpl_3", 4, "Plus fermé que l'équerre : aigu. Plus ouvert : obtus.", () => natureAngle(true)),
+
+  g(MC, "ce1_angle_droit_code_tpl_1", 4, "Le petit carré dans un coin veut dire : angle droit.", () => quelAngleCode()),
+  g(MC, "ce1_angle_droit_code_tpl_2", 3, "Un petit carré par angle droit.", () => compterCodes(Math.random() < 0.5)),
+  g(MC, "ce1_angle_droit_code_tpl_3", 4, "Un petit carré par angle droit.", () => compterCodes(true)),
+
+  g(MP, "ce1_figure_proprietes_tpl_1", 4, "Les côtés d'en face ont la même longueur.", () => coteEnFace(4)),
+  g(MP, "ce1_figure_proprietes_tpl_2", 4, "Lis les codes : petits carrés et petits traits.", () => (Math.random() < 0.5 ? phraseVraie() : combienMesurent())),
+  g(MP, "ce1_figure_proprietes_tpl_3", 3, "Les côtés d'en face ont la même longueur.", () => coteEnFace(3)),
+  g(MP, "ce1_figure_proprietes_tpl_4", 3, "Lis les codes : petits carrés et petits traits.", () => phraseVraie()),
+
+  g(MB, "ce1_figure_construire_tpl_1", 4, "Le côté d'en face a la même longueur.", () => coteQuiManque(4)),
+  g(MB, "ce1_figure_construire_tpl_2", 3, "Compte les carreaux du côté d'en face.", () => coteQuiManque(3)),
+
+  g(MK, "ce1_figure_compas_tpl_1", 4, "Tous les points du cercle sont à la même distance du centre.", () => rayonDiametre()),
+  g(MK, "ce1_figure_compas_tpl_2", 2, "La pointe se pose au centre.", () => ouPiquer()),
+
+  g(MF, "ce1_figure_defi_tpl_1", 5, "Vérifie chaque indice sur chaque figure.", () => devinette()),
+  g(MF, "ce1_figure_defi_tpl_2", 5, "Compte les petits, puis les grands.", () => figuresCachees()),
+];
+
+export const figuresPlanesBank: TutorBankItemV4[] = [...anciens.filter((i) => i.kind !== "template"), ...nouveaux];

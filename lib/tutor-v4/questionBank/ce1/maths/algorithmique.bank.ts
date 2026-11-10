@@ -23,7 +23,8 @@
 // ⚠️ PAS DE QUESTION À RÉDIGER : `applyMathsKeyboardFree` retire les items
 // `format: "open"`. Un CE1 clique, il ne tape pas.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { CanvasFigure, DifficultyLevel, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { cap, entre, etapes, gab, prenom, qcm, qcmN, un } from "./geo-outils-ce1";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -54,7 +55,7 @@ Calcul : ${calcul}
 Conclusion : ${conclusion}`;
 }
 
-export const algorithmiqueBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* =========================================================
      CE1_ALGO_INSTRUCTION — suivre un programme
      LE piège : « pivoter » ne fait pas avancer.
@@ -367,3 +368,256 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 ];
+
+/* ═════════════════════════════════════════════════════════════════════════
+   GABARITS DU 10/11/2026 — robustesse et dessins.
+   Mesuré ce jour-là : 2 à 7 squelettes par micro, 13 à 19 répétitions sur 20,
+   et AUCUN dessin. Le programme se MONTRE maintenant en blocs (canvas
+   `scratch`), et le chemin se lit sur un quadrillage fléché (canvas
+   `reperage`). Le robot change : robot de la classe, coccinelle, petit train,
+   tortue, Pic le paille-en-queue… Les items figés sont gardés ; les anciens
+   gabarits sont remplacés (mêmes ids).
+   ═════════════════════════════════════════════════════════════════════════ */
+
+const NA = "algorithmique";
+const g = (micro: string, id: string, d: DifficultyLevel, hint: string, gen: Parameters<typeof gab>[5]) => gab(NA, micro, id, d, hint, gen);
+const ROBOTS: [string, boolean][] = [["le robot de la classe", false], ["la coccinelle robot", true], ["le petit train", false], ["la tortue", true], ["Pic le paille-en-queue", false], ["la fourmi", true], ["le robot-chien", false], ["la voiture télécommandée", true], ["le robot Bip", false], ["la souris robot", true]];
+/** Un robot, avec ses pronoms : r = son nom, il = « il »/« elle ». */
+function robot() {
+  const [r, f] = un(ROBOTS);
+  return { r, il: f ? "elle" : "il", Il: f ? "Elle" : "Il" };
+}
+/** « de le robot » → « du robot ». */
+const de = (r: string) => (r.startsWith("le ") ? "du " + r.slice(3) : "de " + r);
+const cases = (n: number) => `${n} case${n > 1 ? "s" : ""}`;
+
+type Bloc = { type: "event" | "move" | "turn" | "repeat"; text?: string; value?: string | number; times?: number; children?: Bloc[] };
+const DEPART: Bloc = { type: "event", text: "▶ départ" };
+const avance = (n: number): Bloc => ({ type: "move", value: cases(n) });
+const recule = (n: number): Bloc => ({ type: "turn", text: `reculer de ${cases(n)}` });
+const tourne = (sens: "droite" | "gauche"): Bloc => ({ type: "turn", text: `tourner d'un quart de tour à ${sens}` });
+const programme = (blocs: Bloc[], titre = "Le programme"): CanvasFigure => ({ kind: "scratch", title: titre, blocks: [DEPART, ...blocs], display: { compact: true } }) as CanvasFigure;
+
+/* ─────────────── ce1_algo_instruction ─────────────── */
+const AI = "ce1_algo_instruction";
+
+/** Le robot est sur une piste numérotée : avancer, reculer. */
+function surLaPiste(ctx: boolean) {
+  const { r, il, Il } = robot();
+  const depart = entre(0, 5);
+  const a = entre(2, 6);
+  const b = entre(1, a - 1);
+  const avecTroisieme = !ctx ? false : Math.random() < 0.5;
+  const c = avecTroisieme ? entre(1, 4) : 0;
+  const arrivee = depart + a - b + c;
+  const blocs = [avance(a), recule(b), ...(avecTroisieme ? [avance(c)] : [])];
+  const debut = ctx ? un([`Sur la piste numérotée, ${r} est sur la case ${depart}.`, `${cap(r)} part de la case ${depart} de la piste.`, `C'est la course ! ${cap(r)} est sur la case ${depart}.`]) : `${cap(r)} est sur la case ${depart}.`;
+  return {
+    text: `${debut} ${un([`${Il} suit ce programme.`, "Voici son programme.", "On lance ce programme."])} ${un([`Sur quelle case arrive-t-${il} ?`, `Où s'arrête-t-${il} ?`, "Quelle est sa case d'arrivée ?"])}`,
+    ...qcmN(arrivee, [depart + a + b + c, arrivee + 1, arrivee - 1, a - b + c]),
+    canvas: programme(blocs),
+    explanation: etapes("on fait les instructions dans l'ordre, une par une.", `${depart} + ${a} = ${depart + a}, puis ${depart + a} − ${b} = ${depart + a - b}${avecTroisieme ? `, puis + ${c} = ${arrivee}` : ""}.`, `${Il} arrive sur la case ${arrivee}.`),
+  };
+}
+
+/** Un programme avec des virages : combien de cases en tout ? combien d'instructions ? */
+function lireProgramme() {
+  const n = entre(2, 3);
+  const pas = Array.from({ length: n }, () => entre(1, 5));
+  const sens = Array.from({ length: n - 1 }, () => un(["droite", "gauche"] as const));
+  const blocs: Bloc[] = [];
+  pas.forEach((p, k) => {
+    blocs.push(avance(p));
+    if (k < n - 1) blocs.push(tourne(sens[k]));
+  });
+  const { r, il } = robot();
+  const total = pas.reduce((a, b) => a + b, 0);
+  const cas = un(["cases", "cases", "virages", "instructions"] as const);
+  const juste = cas === "cases" ? total : cas === "virages" ? n - 1 : blocs.length;
+  const q = cas === "cases" ? [`De combien de cases avance-t-${il} en tout ?`, `Combien de cases parcourt-${il} ?`] : cas === "virages" ? [`Combien de fois tourne-t-${il} ?`, `Combien de virages fait-${il} ?`] : ["Combien d'instructions y a-t-il après le départ ?", "Compte les instructions sous « départ »."];
+  return {
+    text: `${un([`Voici le programme ${de(r)}.`, `${prenom()} a écrit ce programme pour ${r}.`, `${cap(r)} suit ce programme.`])} ${un(q)}`,
+    ...qcmN(juste, cas === "cases" ? [total + n - 1, total + 1, total - 1, blocs.length] : [juste + 1, juste - 1, total]),
+    canvas: programme(blocs),
+    explanation: etapes(cas === "cases" ? "on additionne les « avancer » ; tourner ne fait pas avancer." : "on lit les blocs un par un.", cas === "cases" ? `${pas.join(" + ")} = ${total}.` : `On compte : ${juste}.`, `La réponse : ${juste}.`),
+  };
+}
+
+/* ─────────────── ce1_algo_deplacement (codage en flèches) ─────────────── */
+const AD = "ce1_algo_deplacement";
+type Dir = "haut" | "bas" | "gauche" | "droite";
+const FL: Record<Dir, string> = { haut: "↑", bas: "↓", gauche: "←", droite: "→" };
+const code = (pas: { direction: Dir; count: number }[]) => pas.map((p) => FL[p.direction].repeat(p.count)).join(" ");
+
+function cheminFleche(nb: number) {
+  for (;;) {
+    let x = entre(1, 5); // x ≤ 5 : le nom écrit à droite du point ne sort pas du cadre
+    let y = entre(1, 5);
+    const start = { x, y };
+    const steps: { direction: Dir; count: number }[] = [];
+    let prec: Dir | "" = "";
+    let ok = true;
+    // Le chemin ne repasse jamais par un nœud déjà vu : sinon les flèches se
+    // chevauchent et le dessin devient illisible.
+    const vus = new Set([`${x},${y}`]);
+    for (let k = 0; k < nb; k++) {
+      const opp: Record<string, Dir> = { haut: "bas", bas: "haut", gauche: "droite", droite: "gauche" };
+      const d = un((["haut", "bas", "gauche", "droite"] as Dir[]).filter((v) => v !== prec && v !== opp[prec as string]));
+      const c = entre(2, 3); // une flèche d'une seule case est trop courte pour se lire
+      x += d === "droite" ? c : d === "gauche" ? -c : 0;
+      y += d === "haut" ? c : d === "bas" ? -c : 0;
+      if (x < 1 || x > 5 || y < 1 || y > 5) ok = false;
+      for (let p = 1; p <= c; p++) {
+        const cle = `${x - (d === "droite" ? c - p : d === "gauche" ? p - c : 0)},${y - (d === "haut" ? c - p : d === "bas" ? p - c : 0)}`;
+        if (vus.has(cle)) ok = false;
+        vus.add(cle);
+      }
+      steps.push({ direction: d, count: c });
+      prec = d;
+    }
+    const loin = Math.abs(x - start.x) + Math.abs(y - start.y) >= 3;
+    if (ok && loin) return { start, steps, fin: { x, y } };
+  }
+}
+
+function quelCode(nb: number) {
+  const { start, steps, fin } = cheminFleche(nb);
+  const h = un(["Pic", "Nina", "Téo", "Zoé", "Ravi", "le robot"]);
+  const juste = code(steps);
+  const inv: Record<Dir, Dir> = { haut: "bas", bas: "haut", gauche: "droite", droite: "gauche" };
+  const faux = [
+    code(steps.map((s, k) => (k === 0 ? { ...s, direction: inv[s.direction] } : s))),
+    code(steps.map((s, k) => (k === steps.length - 1 ? { ...s, count: s.count + 1 } : s))),
+    code(steps.map((s, k) => (k === 0 ? { ...s, count: s.count === 1 ? 2 : s.count - 1 } : s))),
+    code([...steps].reverse()),
+  ];
+  return {
+    text: `${un(["", "C'est le jeu du robot.", "On code un chemin.", "Direction le trésor !"])} ${un([`Quel code fait le chemin ${de(h)} ?`, `Quel code de flèches décrit ce chemin ?`, `${prenom()} veut coder ce chemin. Quel code choisir ?`])}`.trim(),
+    ...qcm(juste, faux),
+    canvas: { kind: "reperage", grid: { rows: 6, cols: 7 }, path: { start: { ...start, label: h }, steps, showArrows: true }, target: { ...fin, label: "★", hidden: false }, display: { showAxes: false, showCoordinates: false } } as CanvasFigure,
+    explanation: etapes("une flèche = une case, dans le sens de la flèche.", steps.map((s) => `${cases(s.count)} ${s.direction === "haut" ? "vers le haut" : s.direction === "bas" ? "vers le bas" : s.direction === "gauche" ? "à gauche" : "à droite"}`).join(", puis ") + ".", `Le code : ${juste}.`),
+  };
+}
+
+function combienDeFleches() {
+  const { start, steps, fin } = cheminFleche(entre(2, 3));
+  const n = steps.reduce((a, s) => a + s.count, 0);
+  const [h, court] = un([["Pic", "Pic"], ["la tortue", "Tortue"], ["le robot", "Robot"], ["la fourmi", "Fourmi"], ["Nina", "Nina"], ["Téo", "Téo"]] as const);
+  return {
+    text: `${un([`${prenom()} code le chemin ${de(h)} avec des flèches.`, `On écrit le code du chemin ${de(h)}.`, `Pour aller à l'étoile, il faut coder le chemin.`])} ${un(["Combien de flèches faut-il ?", "Combien de flèches en tout ?"])}`,
+    ...qcmN(n, [steps.length, n + 1, n - 1]),
+    canvas: { kind: "reperage", grid: { rows: 6, cols: 7 }, path: { start: { ...start, label: court }, steps, showArrows: true }, target: { ...fin, label: "★", hidden: false }, display: { showAxes: false, showCoordinates: false } } as CanvasFigure,
+    explanation: etapes("une flèche par case parcourue.", steps.map((s) => s.count).join(" + ") + ` = ${n}.`, `Il faut ${n} flèches.`),
+  };
+}
+
+/* ─────────────── ce1_algo_repetition ─────────────── */
+const AR = "ce1_algo_repetition";
+
+function repeterAvancer(avecFin: boolean) {
+  const fois = entre(2, 5);
+  const a = entre(2, 5);
+  const b = avecFin ? entre(1, 4) : 0;
+  const n = fois * a + b;
+  const { r, il } = robot();
+  const blocs: Bloc[] = [{ type: "repeat", times: fois, children: [avance(a)] }, ...(avecFin ? [avance(b)] : [])];
+  return {
+    text: `${un([`Voici le programme ${de(r)}.`, `${prenom()} programme ${r}.`, `${cap(r)} part de la case 0.`])} ${un([`De combien de cases avance-t-${il} en tout ?`, `Combien de cases parcourt-${il} ?`, `Sur quelle case arrive-t-${il} ?`])}`,
+    ...qcmN(n, [fois + a + b, a + b, n + a, n - a]),
+    canvas: programme(blocs),
+    explanation: etapes("« répéter » fait la même chose plusieurs fois.", `${Array.from({ length: fois }, () => a).join(" + ")} = ${fois * a}${avecFin ? `, puis + ${b} = ${n}` : ""}.`, `${n} cases.`),
+  };
+}
+
+function figureTracee() {
+  const cote = entre(2, 5);
+  const cas = un(["carre", "aller_retour", "escalier"] as const);
+  const { r, il, Il } = robot();
+  if (cas === "carre") {
+    return {
+      text: `${cap(r)} laisse une trace en roulant. ${un([`Quelle figure dessine-t-${il} ?`, "Quelle forme trace ce programme ?"])}`,
+      ...qcm("un carré", ["un triangle", "un trait droit", "un rectangle très long"]),
+      canvas: programme([{ type: "repeat", times: 4, children: [avance(cote), tourne("droite")] }]),
+      explanation: etapes("on suit la boucle 4 fois.", `4 côtés de ${cases(cote)}, et 4 quarts de tour : ${il} revient au départ.`, "C'est un carré."),
+    };
+  }
+  if (cas === "aller_retour") {
+    const fois = entre(2, 4);
+    return {
+      text: `${cap(r)} est sur la case 0. ${un([`Où est-${il} à la fin ?`, `Sur quelle case finit-${il} ?`])}`,
+      ...qcm("sur la case 0", [`sur la case ${cote}`, `sur la case ${2 * cote}`, `sur la case ${fois * cote}`]),
+      canvas: programme([{ type: "repeat", times: fois, children: [avance(cote), recule(cote)] }]),
+      explanation: etapes(`à chaque tour, ${il} avance puis recule d'autant.`, `+${cote} puis −${cote} : ${il} revient sur 0, ${fois} fois.`, `${Il} finit sur la case 0.`),
+    };
+  }
+  const fois = entre(2, 4);
+  return {
+    text: `${cap(r)} monte un escalier. ${un([`De combien de cases avance-t-${il} en tout ?`, `Combien de cases parcourt-${il} ?`])}`,
+    ...qcmN(fois * 2, [fois, fois * 2 + 1, fois + 2]),
+    canvas: programme([{ type: "repeat", times: fois, children: [avance(1), tourne("gauche"), avance(1), tourne("droite")] }]),
+    explanation: etapes(`dans la boucle, ${il} avance 2 fois d'une case.`, `${fois} fois 2 cases = ${fois * 2} cases.`, `${fois * 2} cases.`),
+  };
+}
+
+/** Écrire plus court avec « répéter » : combien de fois ? */
+function combienDeFois() {
+  const a = entre(2, 4);
+  const fois = entre(3, 6);
+  return {
+    text: `${prenom()} a écrit ${fois} fois « avancer de ${cases(a)} ». ${un(["Avec « répéter », combien de fois faut-il répéter ?", "Quel nombre écrire dans « répéter … fois » ?"])}`,
+    ...qcmN(fois, [a, fois * a, fois - 1, fois + 1]),
+    canvas: programme(Array.from({ length: fois }, () => avance(a)), "Le programme long"),
+    explanation: etapes("« répéter » remplace des blocs identiques mis à la suite.", `Il y a ${fois} blocs pareils.`, `Répéter ${fois} fois : avancer de ${cases(a)}.`),
+  };
+}
+
+/* ─────────────── ce1_algo_defi ─────────────── */
+const AF = "ce1_algo_defi";
+
+function nombreManquant() {
+  const depart = entre(0, 4);
+  const a = entre(2, 5);
+  const x = entre(1, 5);
+  const cible = depart + a + x;
+  const { r } = robot();
+  return {
+    text: `${un(["Défi !", "Pic lance un défi.", `${prenom()} lance un défi.`])} ${cap(r)} part de la case ${depart} et doit arriver sur la case ${cible}. ${un(["Quel nombre manque dans le programme ?", "Que faut-il écrire à la place de « ? » ?"])}`,
+    ...qcmN(x, [cible - depart, cible, x + 1, x - 1]),
+    canvas: programme([avance(a), { type: "move", value: "? cases" }]),
+    explanation: etapes("on calcule sa case après le premier bloc.", `${depart} + ${a} = ${depart + a}. De ${depart + a} à ${cible}, il manque ${x}.`, `Il faut écrire ${x}.`),
+  };
+}
+
+function ouRegarde() {
+  const sens = un(["droite", "gauche"] as const);
+  const n = entre(1, 4);
+  const net = sens === "droite" ? n % 4 : (4 - (n % 4)) % 4;
+  const reponses = ["vers le haut, comme au départ", "vers la droite", "vers le bas", "vers la gauche"];
+  const juste = reponses[net];
+  const { r, il, Il } = robot();
+  return {
+    text: `${un(["Défi !", "Attention, défi !"])} ${cap(r)} regarde vers le haut de la feuille. ${un([`Vers où regarde-t-${il} à la fin ?`, `Vers où est-${il} tourné${il === "elle" ? "e" : ""} à la fin ?`])}`,
+    ...qcm(juste, reponses.filter((x) => x !== juste)),
+    canvas: programme(n > 1 ? [{ type: "repeat", times: n, children: [tourne(sens)] }] : [tourne(sens)]),
+    explanation: etapes("un quart de tour à droite : haut → droite → bas → gauche → haut.", `${n} quart${n > 1 ? "s" : ""} de tour à ${sens}.`, `${Il} regarde ${juste}.`),
+  };
+}
+
+/* ─────────────── la banque ─────────────── */
+const nouveaux: TutorBankItemV4[] = [
+  g(AI, "ce1_algo_instruction_tpl_1", 4, "Tourner ne fait pas avancer.", () => (Math.random() < 0.5 ? lireProgramme() : surLaPiste(true))),
+  g(AI, "ce1_algo_instruction_tpl_2", 3, "Fais les instructions dans l'ordre.", () => surLaPiste(false)),
+  g(AI, "ce1_algo_instruction_tpl_3", 3, "Lis les blocs un par un.", () => lireProgramme()),
+
+  g(AD, "ce1_algo_deplacement_tpl_1", 4, "Une flèche = une case.", () => (Math.random() < 0.6 ? quelCode(3) : combienDeFleches())),
+  g(AD, "ce1_algo_deplacement_tpl_2", 3, "Une flèche = une case, dans le sens de la flèche.", () => (Math.random() < 0.6 ? quelCode(2) : combienDeFleches())),
+
+  g(AR, "ce1_algo_repetition_tpl_1", 4, "« Répéter 3 fois », c'est faire 3 fois la même chose.", () => (Math.random() < 0.6 ? repeterAvancer(false) : combienDeFois())),
+  g(AR, "ce1_algo_repetition_tpl_2", 5, "Suis la boucle, tour après tour.", () => (Math.random() < 0.5 ? repeterAvancer(true) : figureTracee())),
+  g(AR, "ce1_algo_repetition_tpl_3", 4, "« Répéter » remplace des blocs pareils.", () => combienDeFois()),
+
+  g(AF, "ce1_algo_defi_tpl_1", 5, "Un quart de tour à droite : haut, droite, bas, gauche.", () => ouRegarde()),
+  g(AF, "ce1_algo_defi_tpl_2", 5, "Calcule où il est après le premier bloc.", () => (Math.random() < 0.5 ? nombreManquant() : figureTracee())),
+];
+
+export const algorithmiqueBank: TutorBankItemV4[] = [...anciens.filter((i) => i.kind !== "template"), ...nouveaux];
