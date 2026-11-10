@@ -304,7 +304,7 @@ export const exercicesCosinus4e: FicheExercicesData = {
             "Le câble d'un télésiège monte en ligne droite du départ $D$ à l'arrivée $A$, sur $1\\,200$ m, avec un angle de $22°$ par rapport à l'horizontale. On note $H$ le point à la hauteur de $D$, à la verticale de $A$ : le triangle $DHA$ est rectangle en $H$.\na) Calculer la distance horizontale $DH$, au mètre.\nb) Une carte montre les distances horizontales. Combien de mètres « manque »-t-elle par rapport au câble ?",
           reponses: [
             { question: "a)", attendu: "1113", tolerance: 0.5 },
-            { question: "b)", attendu: "87", tolerance: 0.5 },
+            { question: "b)", attendu: "87", tolerance: 0.5, unite: "m" },
           ],
           correction:
             "a) Dans le triangle $DHA$ rectangle en $H$, l'hypoténuse est le câble $[AD]$, $1\\,200$ m. Je me place en $D$ : le côté adjacent est $[DH]$, la distance horizontale.\n$\\cos \\widehat{D} = \\dfrac{DH}{AD}$, donc $DH = 1\\,200 \\times \\cos 22° \\approx 1\\,113$ m.\nb) La carte affiche environ $1\\,113$ m, soit $1\\,200 - 1\\,113 = 87$ m de moins que le câble.\n⛔ Le piège : diviser au lieu de multiplier, $1\\,200 \\div \\cos 22° \\approx 1\\,294$ m. La distance au sol serait plus longue que le câble : impossible.\nRéponse : la distance horizontale est d'environ $1\\,113$ m, $87$ m de moins que le câble.",
@@ -395,8 +395,8 @@ export const exercicesCosinus4e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "4180", tolerance: 0.5 },
             { question: "b)", attendu: "26262", tolerance: 0.5 },
-            { question: "c) Paris", attendu: "1094", tolerance: 0.5 },
-            { question: "c) équat", attendu: "1668", tolerance: 0.5 },
+            { question: "c) Paris", attendu: "1094", tolerance: 0.5, unite: "km" },
+            { question: "c) équat", attendu: "1668", tolerance: 0.5, unite: "km" },
           ],
           correction:
             "Je me place en $P$. L'angle droit est en $H$ : l'hypoténuse est $[OP]$, le rayon de la Terre. Le côté adjacent est $[PH]$, le rayon du cercle de Paris.\na) $\\cos \\widehat{P} = \\dfrac{PH}{OP}$, donc $PH = 6\\,371 \\times \\cos 49° \\approx 4\\,180$ km.\nb) La longueur d'un cercle de rayon $r$ est $2 \\times \\pi \\times r$ : $2 \\times \\pi \\times PH \\approx 26\\,262$ km, avec la valeur de $PH$ gardée en mémoire.\nc) Paris fait ce tour en $24$ h : $26\\,262 \\div 24 \\approx 1\\,094$ km/h. À l'équateur, le cercle a pour rayon $6\\,371$ km : $2 \\times \\pi \\times 6\\,371 \\approx 40\\,030$ km, soit environ $1\\,668$ km/h.\n⛔ Le piège : prendre le rayon de la Terre pour celui du cercle de Paris. Plus on monte vers le pôle, plus le cercle rétrécit, et le cosinus mesure ce rétrécissement : $\\cos 49° \\approx 0{,}66$.\nRéponse : le cercle de Paris a un rayon d'environ $4\\,180$ km et une longueur d'environ $26\\,262$ km ; Paris tourne à environ $1\\,094$ km/h, contre $1\\,668$ km/h à l'équateur.",

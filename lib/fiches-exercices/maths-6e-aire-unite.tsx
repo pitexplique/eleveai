@@ -303,7 +303,7 @@ export const exercicesAireUnite6e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "10" },
             { question: "b)", attendu: "10" },
-            { question: "c)", attendu: "100" },
+            { question: "c)", attendu: "100", unite: "dm²" },
           ],
           figure: plan("dm", [
             { grille: [0, 0, 10, 10] },
@@ -319,10 +319,10 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         {
           enonce: "Convertis.\na) $4$ dm² en cm²\nb) $6$ m² en dm²\nc) $800$ cm² en dm²\nd) $250$ dm² en m²",
           reponses: [
-            { question: "a)", attendu: "400" },
-            { question: "b)", attendu: "600" },
-            { question: "c)", attendu: "8" },
-            { question: "d)", attendu: "2,5" },
+            { question: "a)", attendu: "400", unite: "cm²" },
+            { question: "b)", attendu: "600", unite: "dm²" },
+            { question: "c)", attendu: "8", unite: "dm²" },
+            { question: "d)", attendu: "2,5", unite: "m²" },
           ],
           correction:
             "Entre deux unités voisines, il y a toujours $100$ petits carrés.\na) $1$ dm² $= 100$ cm². $4 \\times 100 = 400$ cm².\nb) $1$ m² $= 100$ dm². $6 \\times 100 = 600$ dm².\nc) Il faut $100$ cm² pour $1$ dm². $800 \\div 100 = 8$ dm².\nd) Il faut $100$ dm² pour $1$ m². $250 \\div 100 = 2{,}5$ m².\n⛔ Le piège : multiplier par $10$, comme pour les longueurs. Pour les aires, c'est $100$.\nRéponse : a) $400$ cm² ; b) $600$ dm² ; c) $8$ dm² ; d) $2{,}5$ m².",
@@ -422,8 +422,8 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         {
           enonce: "Une nappe a une aire de $1{,}5$ m².\nUne serviette a une aire de $16$ dm².\na) Écris l'aire de la nappe en dm².\nb) Écris l'aire de la serviette en cm².\nc) Sans rien perdre, combien de serviettes peut-on découper dans la nappe ?",
           reponses: [
-            { question: "a)", attendu: "150" },
-            { question: "b)", attendu: "1600" },
+            { question: "a)", attendu: "150", unite: "dm²" },
+            { question: "b)", attendu: "1600", unite: "cm²" },
             { question: "c)", attendu: "9" },
           ],
           correction:
@@ -434,7 +434,7 @@ export const exercicesAireUnite6e: FicheExercicesData = {
         {
           enonce: "Un carreau de faïence est un carré de $20$ cm de côté.\na) Combien de carrés de $1$ dm de côté contient-il ? Donne son aire en dm².\nb) On veut couvrir $2$ m² de mur. Combien de carreaux faut-il ?",
           reponses: [
-            { question: "a)", attendu: "4" },
+            { question: "a)", attendu: "4", unite: "dm²" },
             { question: "b)", attendu: "50" },
           ],
           figure: plan("cm", [
@@ -493,7 +493,7 @@ export const exercicesAireUnite6e: FicheExercicesData = {
           enonce: "Tom dit : « $1$ dm $= 10$ cm, donc $1$ dm² $= 10$ cm². »\na) Sur le dessin, les cases orange sont celles que Tom a comptées. Qu'a-t-il oublié ?\nb) Combien de cm² y a-t-il vraiment dans $1$ dm² ?\nc) Convertis $5$ dm² en cm².",
           reponses: [
             { question: "b)", attendu: "100" },
-            { question: "c)", attendu: "500" },
+            { question: "c)", attendu: "500", unite: "cm²" },
           ],
           figure: carreCent("dm", 10, false),
           correction:
@@ -519,7 +519,7 @@ export const exercicesAireUnite6e: FicheExercicesData = {
           enonce:
             "Nina a un bac potager carré de $1$ m de côté.\nUne salade a besoin d'un carré de $20$ cm de côté, soit $4$ dm².\na) Quelle est l'aire du bac, en dm² ?\nb) Combien de salades peut-elle planter au plus ?\nc) Elle plante $12$ salades. Dans le reste, elle sème des radis : un radis par dm². Combien de radis ?",
           reponses: [
-            { question: "a)", attendu: "100" },
+            { question: "a)", attendu: "100", unite: "dm²" },
             { question: "b)", attendu: "25" },
             { question: "c)", attendu: "52" },
           ],
@@ -542,7 +542,7 @@ export const exercicesAireUnite6e: FicheExercicesData = {
             { question: "a)", attendu: "36" },
             { question: "b)", attendu: "8" },
             { question: "c)", attendu: "28" },
-            { question: "d)", attendu: "0,36" },
+            { question: "d)", attendu: "0,36", unite: "dm²" },
           ],
           figure: plan("cm", [
             { grille: [0, 0, 6, 6] },

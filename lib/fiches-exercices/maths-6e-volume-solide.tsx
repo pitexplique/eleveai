@@ -252,7 +252,7 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
           enonce:
             "Complète.\na) Un solide de $16$ cubes de $1$ cm³ a un volume de … cm³.\nb) Une benne contient $9$ m³ de sable. Cela fait combien de cubes de $1$ m³ ?\nc) Dans « $45$ cm³ », quel nombre dit le volume ? Quelle est l'unité ?",
           reponses: [
-            { question: "a)", attendu: "16" },
+            { question: "a)", attendu: "16", unite: "cm³" },
             { question: "b)", attendu: "9" },
             { question: "c) nb", attendu: "45" },
             { question: "c) unité", attendu: ["cm³", "cm3"] },
@@ -366,7 +366,7 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
           enonce:
             "Un jardin partagé a un bac à terre. Il mesure $3$ m de long, $2$ m de large et $1$ m de haut.\na) Quel est le volume du bac, en m³ ?\nb) Un camion livre $8$ m³ de terre. Le bac peut-il tout contenir ?\nc) Combien de m³ restent sur le camion ?",
           reponses: [
-            { question: "a)", attendu: "6" },
+            { question: "a)", attendu: "6", unite: "m³" },
             { question: "b)", attendu: ["non"] },
             { question: "c)", attendu: "2" },
           ],
@@ -451,7 +451,7 @@ export const exercicesVolumeSolide6e: FicheExercicesData = {
           enonce:
             "La famille Martin déménage.\nLa caisse du camion mesure $4$ m de long, $2$ m de large et $2$ m de haut.\na) Quel est le volume de la caisse, en m³ ?\nb) Il faut charger une armoire de $2$ m³, un canapé de $3$ m³ et $8$ cartons de $1$ m³. Quel volume cela fait-il ?\nc) Y a-t-il assez de place ? Combien de m³ restent libres ?",
           reponses: [
-            { question: "a)", attendu: "16" },
+            { question: "a)", attendu: "16", unite: "m³" },
             { question: "b)", attendu: "13" },
             { question: "c)", attendu: ["oui"] },
             { question: "c) reste", attendu: "3" },

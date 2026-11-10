@@ -425,7 +425,7 @@ export const exercicesEntierCalculPose6e: FicheExercicesData = {
           enonce:
             "Un apiculteur a $14$ ruches. Chaque ruche donne $18$ kg de miel dans l'année.\na) Combien de kilos de miel récolte-t-il ?\nb) Il met le miel en pots de $1$ kg. Il vend chaque pot $9$ €. Combien gagne-t-il en tout ?\nc) Il a dépensé $1\\,395$ € pour son matériel. Que lui reste-t-il ?",
           reponses: [
-            { question: "a)", attendu: "252" },
+            { question: "a)", attendu: "252", unite: "kg" },
             { question: "b)", attendu: "2268" },
             { question: "c)", attendu: "873" },
           ],

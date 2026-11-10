@@ -267,7 +267,7 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
           enonce: "Toutes les caisses de pommes pèsent la même masse. Complète les deux cases vides.",
           reponses: [
             { question: "caisses", attendu: "5" },
-            { question: "kg", attendu: "144" },
+            { question: "kg", attendu: "144", unite: "kg" },
           ],
           figure: tableau(["Caisses", "2", "?", "8"], ["Pommes (kg)", "36", "90", "?"], true),
           correction:
@@ -388,7 +388,7 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "1,8" },
             { question: "b)", attendu: "5,4 ; 9" },
-            { question: "c)", attendu: "5" },
+            { question: "c)", attendu: "5", unite: "kg" },
           ],
           correction:
             "a) Je passe à l'unité : $3{,}60 \\div 2 = 1{,}80$. Un kilogramme coûte $1{,}80$ €.\nb) $3 \\times 1{,}80 = 5{,}40$ € et $5 \\times 1{,}80 = 9$ €.\nc) $9$ €, c'est le prix de $5$ kg : je l'ai trouvé au b).\n⭐ Autre chemin : je remonte des euros vers les kilogrammes, je divise. $9 \\div 1{,}80 = 5$.\n⛔ Le piège : prendre $3{,}60$ € pour le prix d'un kilogramme. C'est le prix de $2$ kg.\nRéponse : $1{,}80$ € ; $5{,}40$ € et $9$ € ; $5$ kg.",
@@ -400,8 +400,8 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "1,5" },
             { question: "b)", attendu: "15" },
-            { question: "c) cm", attendu: "90" },
-            { question: "c) m", attendu: "0,9" },
+            { question: "c) cm", attendu: "90", unite: "cm" },
+            { question: "c) m", attendu: "0,9", unite: "m" },
           ],
           correction:
             "a) Je passe à l'unité : $6 \\div 4 = 1{,}5$. Il avance de $1{,}5$ cm en une minute.\nb) $10 \\times 1{,}5 = 15$ cm.\nc) $1$ heure, c'est $60$ minutes. $60 \\times 1{,}5 = 90$ cm.\nEt $90$ cm $= 0{,}9$ m : moins d'un mètre en une heure !\n⛔ Le piège du c) : calculer avec $1$ au lieu de $60$. L'allure est donnée en MINUTES : je mets l'heure en minutes.\nRéponse : $1{,}5$ cm ; $15$ cm ; $90$ cm, soit $0{,}9$ m.",
@@ -458,7 +458,7 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "20 ; 100 ; 1000" },
             { question: "b)", attendu: "500" },
-            { question: "c)", attendu: "7" },
+            { question: "c)", attendu: "7", unite: "km" },
           ],
           correction:
             "a) Le coefficient est $2$ : je multiplie les tours par $2$.\n$10 \\times 2 = 20$ m ; $50 \\times 2 = 100$ m ; $500 \\times 2 = 1\\,000$ m.\nb) $1$ km $= 1\\,000$ m. C'est la réponse du a) : il faut $500$ tours.\nc) $3\\,500 \\times 2 = 7\\,000$ m, soit $7$ km.\n⛔ Le piège du b) : chercher « $1$ km » sans le convertir en mètres. Le coefficient est en mètres.\nRéponse : $20$ m, $100$ m, $1\\,000$ m ; $500$ tours ; $7$ km.",
@@ -470,8 +470,8 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
           enonce: "À la station, l'essence coûte $1{,}80$ € le litre (un modèle).\na) Combien coûtent $10$ L ? Et $45$ L ?\nb) Avec $27$ €, combien de litres peut-on mettre ?\nc) La voiture consomme $5$ L pour faire $100$ km. Avec les litres du b), combien de kilomètres peut-elle faire ?",
           reponses: [
             { question: "a)", attendu: "18 ; 81" },
-            { question: "b)", attendu: "15" },
-            { question: "c)", attendu: "300" },
+            { question: "b)", attendu: "15", unite: "L" },
+            { question: "c)", attendu: "300", unite: "km" },
           ],
           correction:
             "a) Le coefficient est $1{,}80$ : le prix d'UN litre.\n$10 \\times 1{,}80 = 18$ € et $45 \\times 1{,}80 = 81$ €.\nb) Je remonte des euros vers les litres : je divise. $27 \\div 1{,}80 = 15$ L.\n⭐ Contrôle : $15 \\times 1{,}80 = 27$.\nc) $15$ L, c'est $3$ fois $5$ L. La voiture roule $3$ fois $100$ km : $3 \\times 100 = 300$ km.\n⛔ Le piège du b) : multiplier $27$ par $1{,}80$. Je cherche des litres : je divise.\nRéponse : $18$ € et $81$ € ; $15$ L ; $300$ km.",

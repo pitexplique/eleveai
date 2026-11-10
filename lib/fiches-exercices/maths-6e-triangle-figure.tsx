@@ -495,8 +495,8 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
           enonce: "Un panneau « danger » est un triangle. Ses trois côtés mesurent $70$ cm. Les mesures sont des modèles.\na) Quelle est sa nature, selon ses côtés ?\nb) Calcule la longueur de sa bordure rouge, en cm puis en m.\nc) Mesure un de ses angles au rapporteur. Le triangle est-il rectangle, obtusangle ou aigu ?",
           reponses: [
             { question: "a)", attendu: ["équilatéral"] },
-            { question: "b) cm", attendu: "210" },
-            { question: "b) m", attendu: "2,1" },
+            { question: "b) cm", attendu: "210", unite: "cm" },
+            { question: "b) m", attendu: "2,1", unite: "m" },
             { question: "c)", attendu: ["aigu"] },
           ],
           figure: tri({ A: [0, 0], B: [70, 0], C: [35, 60.6218] }, { cotes: { AB: "70 cm", BC: "70 cm", CA: "70 cm" }, egaux: ["AB", "BC", "CA"] }),
@@ -523,7 +523,7 @@ export const exercicesTriangleFigure6e: FicheExercicesData = {
           enonce: "Un potager a la forme d'un triangle $ABC$. $AC = BC = 9$ m et $AB = 6$ m.\na) Quelle est sa nature, selon ses côtés ?\nb) Combien de mètres de grillage faut-il pour l'entourer ?\nc) Le jardinier dit : « Le coin en $C$ est droit. » On a mesuré cet angle sur le plan. A-t-il raison ?\nd) Les deux autres angles mesurent environ $71°$. Quelle est la nature du triangle, selon ses angles ?",
           reponses: [
             { question: "a)", attendu: ["isocèle en C"] },
-            { question: "b)", attendu: "24" },
+            { question: "b)", attendu: "24", unite: "m" },
             { question: "c)", attendu: ["non"] },
             { question: "d)", attendu: ["aigu"] },
           ],

@@ -395,8 +395,8 @@ export const exercicesEchelles4e: FicheExercicesData = {
           enonce:
             "Une carte de randonnée est à l'échelle $\\dfrac{1}{20\\,000}$.\na) Que représente $1$ cm sur cette carte, en centimètres, puis en mètres ?\nb) Que représentent $5$ cm sur cette carte ?\nc) Cette carte est-elle une réduction ou un agrandissement de la réalité ?",
           reponses: [
-            { question: "a) cm", attendu: "20000" },
-            { question: "a) m", attendu: "200" },
+            { question: "a) cm", attendu: "20000", unite: "cm" },
+            { question: "a) m", attendu: "200", unite: "m" },
             { question: "b)", attendu: ["1", "1000", "100000"] },
             { question: "c)", attendu: ["réduction", "une réduction"] },
           ],
@@ -409,9 +409,9 @@ export const exercicesEchelles4e: FicheExercicesData = {
           enonce:
             "Un lac mesure $1$ km de long. On le cherche sur trois cartes : au $\\dfrac{1}{10\\,000}$, au $\\dfrac{1}{40\\,000}$ et au $\\dfrac{1}{200\\,000}$.\na) Quelle longueur, en cm, le lac a-t-il sur chaque carte ?\nb) Sur quelle carte paraît-il le plus grand ? Laquelle montre le plus de détails ?",
           reponses: [
-            { question: "a) 10k", attendu: "10" },
-            { question: "a) 40k", attendu: "2,5" },
-            { question: "a) 200k", attendu: "0,5" },
+            { question: "a) 10k", attendu: "10", unite: "cm" },
+            { question: "a) 40k", attendu: "2,5", unite: "cm" },
+            { question: "a) 200k", attendu: "0,5", unite: "cm" },
             { question: "b) grand", attendu: "1/10000" },
             { question: "b) détail", attendu: "1/10000" },
           ],
@@ -433,7 +433,7 @@ export const exercicesEchelles4e: FicheExercicesData = {
         {
           enonce: "Un terrain de rugby mesure $100$ m entre ses deux lignes d'essai. On le dessine sur un plan à l'échelle $\\dfrac{1}{2\\,000}$. Quelle est sa longueur sur le plan, en cm ?",
           reponses: [
-            { attendu: "5" },
+            { attendu: "5", unite: "cm" },
           ],
           correction:
             "Je vais de la réalité vers le plan : le plan est plus petit, donc je divise par $2\\,000$.\nMais d'abord je convertis, pour avoir les deux longueurs dans la même unité : $100$ m $= 100 \\times 100 = 10\\,000$ cm.\n$10\\,000 \\div 2\\,000 = 5$ cm.\n⛔ Le piège : diviser les mètres directement, $100 \\div 2\\,000 = 0{,}05$, et écrire « $0{,}05$ cm ». Ce $0{,}05$ est en MÈTRES : $0{,}05$ m, ce sont bien $5$ cm. Je convertis AVANT de diviser.\nRéponse : le terrain mesure $5$ cm sur le plan.",
@@ -505,8 +505,8 @@ export const exercicesEchelles4e: FicheExercicesData = {
           enonce:
             "Sur une carte à l'échelle $\\dfrac{1}{100\\,000}$, un itinéraire à vélo mesure $13{,}5$ cm.\na) Quelle est sa longueur réelle, en cm puis en km ?\nb) Un autre itinéraire fait $21$ km. Quelle longueur a-t-il sur la carte ?\nc) Compléter : sur cette carte, $1$ cm représente…",
           reponses: [
-            { question: "a) cm", attendu: "1350000" },
-            { question: "a) km", attendu: "13,5" },
+            { question: "a) cm", attendu: "1350000", unite: "cm" },
+            { question: "a) km", attendu: "13,5", unite: "km" },
             { question: "b)", attendu: "21" },
             { question: "c)", attendu: ["1", "1000", "100000"] },
           ],
@@ -558,7 +558,7 @@ export const exercicesEchelles4e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "1/250" },
             { question: "b)", attendu: "6" },
-            { question: "c)", attendu: "7,2" },
+            { question: "c)", attendu: "7,2", unite: "mm" },
           ],
           correction:
             "a) Je mets les deux longueurs dans la même unité : $28$ m $= 2\\,800$ cm. Puis je divise la réalité par le plan : $2\\,800 \\div 11{,}2 = 250$. L'échelle est $\\dfrac{1}{250}$.\nb) Vers le plan, je divise : $15$ m $= 1\\,500$ cm, et $1\\,500 \\div 250 = 6$ cm.\nc) $1{,}8$ m $= 180$ cm, et $180 \\div 250 = 0{,}72$ cm, soit $7{,}2$ mm.\n⭐ Contrôle : $11{,}2 \\div 6 \\approx 1{,}87$ et $28 \\div 15 \\approx 1{,}87$. Le plan a bien la forme du terrain.\n⛔ Le piège : diviser $28$ par $11{,}2$ et annoncer une échelle $\\dfrac{1}{2{,}5}$. Des mètres et des centimètres ne se divisent pas entre eux : je convertis d'abord.\nRéponse : l'échelle est $\\dfrac{1}{250}$ ; la largeur mesure $6$ cm ; le rayon mesure $7{,}2$ mm.",
@@ -571,7 +571,7 @@ export const exercicesEchelles4e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: ["800", "0,8", "80000"] },
             { question: "b)", attendu: "1/80000" },
-            { question: "c)", attendu: "6,8" },
+            { question: "c)", attendu: "6,8", unite: "km" },
           ],
           correction:
             "a) $3$ cm pour $2{,}4$ km : je ramène à $1$ cm en divisant par $3$. $2{,}4 \\div 3 = 0{,}8$ km, soit $800$ m.\nb) Je convertis dans la même unité : $0{,}8$ km $= 80\\,000$ cm. Donc $1$ cm représente $80\\,000$ cm : l'échelle est $\\dfrac{1}{80\\,000}$.\nc) Je vais vers la réalité : $8{,}5 \\times 0{,}8 = 6{,}8$ km.\n⭐ Autre chemin : $8{,}5 \\times 80\\,000 = 680\\,000$ cm $= 6{,}8$ km.\n⛔ Le piège : écrire l'échelle « $\\dfrac{3}{2{,}4}$ ». Une échelle compare deux longueurs dans la MÊME unité, avec $1$ en haut.\nRéponse : $1$ cm représente $800$ m ; l'échelle est $\\dfrac{1}{80\\,000}$ ; les refuges sont à $6{,}8$ km.",
@@ -610,10 +610,10 @@ export const exercicesEchelles4e: FicheExercicesData = {
           enonce:
             "Un aquarium a la forme d'un pavé droit de $40$ cm de long, $25$ cm de large et $30$ cm de haut.\na) Calculer son volume en cm³, puis en litres.\nb) Le magasin vend un modèle agrandi avec le rapport $2$. Quelles sont ses dimensions et son volume, en litres ?\nc) Le vendeur dit : « deux fois plus grand, donc deux fois plus d'eau ». A-t-il raison ?",
           reponses: [
-            { question: "a) cm³", attendu: "30000" },
-            { question: "a) L", attendu: "30" },
+            { question: "a) cm³", attendu: "30000", unite: "cm³" },
+            { question: "a) L", attendu: "30", unite: "L" },
             { question: "b) dim.", attendu: "80 ; 50 ; 60" },
-            { question: "b) L", attendu: "240" },
+            { question: "b) L", attendu: "240", unite: "L" },
             { question: "c)", attendu: ["non", "faux"] },
           ],
           correction:
@@ -640,7 +640,7 @@ export const exercicesEchelles4e: FicheExercicesData = {
           enonce:
             "Un marathon mesure $42{,}195$ km. Un club veut reporter le tracé de la course, déplié, sur une ficelle, à l'échelle d'une carte.\na) Convertir $42{,}195$ km en cm.\nb) Quelle longueur de ficelle faut-il pour une carte au $\\dfrac{1}{25\\,000}$ ? au $\\dfrac{1}{50\\,000}$ ? au $\\dfrac{1}{100\\,000}$ ? Arrondir au cm.\nc) La ficelle doit tenir sur une table de $50$ cm. Quelle carte choisir ?\nd) À quelle échelle la ficelle mesurerait-elle exactement $1$ m ?",
           reponses: [
-            { question: "a)", attendu: "4219500" },
+            { question: "a)", attendu: "4219500", unite: "cm" },
             { question: "b) 25k", attendu: "169", tolerance: 0.5 },
             { question: "b) 50k", attendu: "84", tolerance: 0.5 },
             { question: "b) 100k", attendu: "42", tolerance: 0.5 },
@@ -676,9 +676,9 @@ export const exercicesEchelles4e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "4" },
             { question: "b) ×", attendu: "64" },
-            { question: "b) g", attendu: "32" },
+            { question: "b) g", attendu: "32", unite: "g" },
             { question: "c) ×", attendu: "512" },
-            { question: "c) g", attendu: "256" },
+            { question: "c) g", attendu: "256", unite: "g" },
             { question: "d)", attendu: "8" },
           ],
           correction:
@@ -691,9 +691,9 @@ export const exercicesEchelles4e: FicheExercicesData = {
           enonce:
             "Entre août 2022 et juillet 2023, environ $9\\,000$ km² de forêt ont été détruits en Amazonie brésilienne. On veut représenter cette surface sur une carte au $\\dfrac{1}{1\\,000\\,000}$.\na) Que représente $1$ cm sur cette carte, en km ?\nb) Que représente un carré de $1$ cm de côté sur la carte ? Donner son aire réelle en km².\nc) Quelle aire, en cm², les $9\\,000$ km² occupent-ils sur la carte ? Donner la largeur d'un rectangle de $10$ cm de long qui la représente.\nd) Inès répond : « $1$ cm pour $10$ km, donc $9\\,000$ km² font $900$ cm² ». Quelle est son erreur ?",
           reponses: [
-            { question: "a)", attendu: "10" },
-            { question: "b)", attendu: "100" },
-            { question: "c) cm²", attendu: "90" },
+            { question: "a)", attendu: "10", unite: "km" },
+            { question: "b)", attendu: "100", unite: "km²" },
+            { question: "c) cm²", attendu: "90", unite: "cm²" },
             { question: "c) larg.", attendu: "9" },
           ],
           correction:

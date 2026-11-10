@@ -686,7 +686,7 @@ export const exercicesStatStatistique5e: FicheExercicesData = {
           enonce:
             "Une station météo a relevé la pluie tombée chaque mois (en mm) : janvier $60$, février $48$, mars $45$, avril $54$, mai $72$, juin $39$.\na) Représente ces données par un diagramme en barres.\nb) Calcule la pluie moyenne par mois.\nc) Quels mois ont été plus pluvieux que la moyenne ?\nd) Pour montrer la part de chaque mois dans la pluie des six mois, quel diagramme choisir ? Et pour voir comment la pluie change d'un mois à l'autre ?",
           reponses: [
-            { question: "b)", attendu: "53" },
+            { question: "b)", attendu: "53", unite: "mm" },
             { question: "c)", attendu: "janvier ; avril ; mai" },
             { question: "d) parts", attendu: ["circulaire", "diagramme circulaire", "un diagramme circulaire", "le circulaire"] },
             { question: "d) évol.", attendu: ["barres", "diagramme en barres", "un diagramme en barres", "les barres", "points reliés", "des points reliés"] },

@@ -429,9 +429,9 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
           enonce:
             "Une famille pèse ses déchets pendant une semaine (en kg). Voici le diagramme circulaire.\na) Combien de kg de verre ?\nb) Quel déchet pèse le plus lourd ?\nc) Combien pèsent tous les déchets de la semaine ?\nd) Quel déchet fait exactement le quart du total ?",
           reponses: [
-            { question: "a)", attendu: "2" },
+            { question: "a)", attendu: "2", unite: "kg" },
             { question: "b)", attendu: ["épluchures", "les épluchures"] },
-            { question: "c)", attendu: "20" },
+            { question: "c)", attendu: "20", unite: "kg" },
             { question: "d)", attendu: ["autres", "les autres"] },
           ],
           figure: camembert([
@@ -607,7 +607,7 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
             "Une famille note l'eau utilisée en un jour (en litres). Douche : $80$ L. WC : $40$ L. Linge : $30$ L. Cuisine : $30$ L.\na) Quel usage consomme le plus ?\nb) Combien de litres en tout dans la journée ?\nc) Vrai ou faux : « La douche consomme deux fois plus que les WC. »\nd) Vrai ou faux : « La douche consomme plus que tout le reste réuni. »",
           reponses: [
             { question: "a)", attendu: ["douche", "la douche"] },
-            { question: "b)", attendu: "180" },
+            { question: "b)", attendu: "180", unite: "L" },
             { question: "c)", attendu: ["vrai", "oui"] },
             { question: "d)", attendu: ["faux", "non"] },
           ],
@@ -735,8 +735,8 @@ export const exercicesStatDonnee6e: FicheExercicesData = {
           enonce:
             "La cantine pèse chaque semaine la nourriture jetée (en kg). Voici les cinq premières semaines.\na) Combien de kg jetés la semaine $3$ ?\nb) De combien le poids a-t-il baissé entre la semaine $1$ et la semaine $5$ ?\nc) Entre quelles semaines la baisse est-elle la plus forte ?\nd) Le défi est réussi si le poids baisse d'au moins un tiers. Est-il réussi ?",
           reponses: [
-            { question: "a)", attendu: "30" },
-            { question: "b)", attendu: "18" },
+            { question: "a)", attendu: "30", unite: "kg" },
+            { question: "b)", attendu: "18", unite: "kg" },
             { question: "c)", attendu: ["S2 et S3", "entre S2 et S3", "2 ; 3"] },
             { question: "d)", attendu: ["oui", "vrai"] },
           ],

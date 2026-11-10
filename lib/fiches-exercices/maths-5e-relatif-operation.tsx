@@ -650,8 +650,8 @@ export const exercicesRelatifOperation5e: FicheExercicesData = {
             "Une spéléologue prend l'entrée d'une grotte comme repère : l'altitude $0$. Elle descend un puits de $42$ m, remonte de $15$ m le long d'une galerie, puis redescend de $27{,}5$ m jusqu'à une rivière souterraine (chiffres d'un modèle).\na) Écris le calcul de son altitude finale avec des nombres relatifs, puis calcule-la étape par étape.\nb) Une deuxième équipe l'attend à l'altitude $-31$ m. Combien de mètres les séparent ?\nc) De combien de mètres doit-elle remonter pour ressortir de la grotte ?",
           reponses: [
             { question: "a)", attendu: "-54,5" },
-            { question: "b)", attendu: "23,5" },
-            { question: "c)", attendu: "54,5" },
+            { question: "b)", attendu: "23,5", unite: "m" },
+            { question: "c)", attendu: "54,5", unite: "m" },
           ],
           correction:
             "a) Descendre, c'est ajouter un négatif ; remonter, un positif : $0 + (-42) + 15 + (-27{,}5)$.\nAprès le puits : $0 + (-42) = -42$.\nAprès la galerie : $-42 + 15 = -27$.\nÀ la rivière : $-27 + (-27{,}5) = -54{,}5$. Elle est à $-54{,}5$ m.\nb) L'écart, c'est la plus haute moins la plus basse : $-31 - (-54{,}5) = -31 + 54{,}5 = 23{,}5$. Elles sont à $23{,}5$ m l'une de l'autre.\nc) De $-54{,}5$ à $0$ : $0 - (-54{,}5) = 54{,}5$. Elle doit remonter de $54{,}5$ m.\n⭐ Contrôle : elle est descendue de $42 + 27{,}5 = 69{,}5$ m et remontée de $15$ m, et $69{,}5 - 15 = 54{,}5$.\n⛔ Le piège du b) : calculer $-31 - 54{,}5 = -85{,}5$. On enlève $-54{,}5$, pas $54{,}5$ ; et une distance n'est jamais négative.\nRéponse : a) $-54{,}5$ m ; b) $23{,}5$ m ; c) $54{,}5$ m.",

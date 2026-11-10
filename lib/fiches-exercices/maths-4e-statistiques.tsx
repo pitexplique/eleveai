@@ -290,7 +290,7 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         {
           enonce: "Une classe a planté sept jeunes chênes. Un an plus tard, elle mesure leur hauteur, en cm, arbre par arbre : $64$, $81$, $58$, $90$, $72$, $69$, $77$. Déterminer la hauteur médiane.",
           reponses: [
-            { attendu: "72" },
+            { attendu: "72", unite: "cm" },
           ],
           correction:
             "Je RANGE d'abord, du plus petit au plus grand : $58$, $64$, $69$, $72$, $77$, $81$, $90$.\nIl y a $7$ valeurs, un nombre impair : la médiane est la valeur du milieu, la $4^e$, avec $3$ valeurs de chaque côté.\nDonc la médiane est $72$ cm.\n⛔ Le piège : prendre la $4^e$ valeur de la liste non rangée, $90$ : c'est le plus grand chêne, pas celui du milieu.\nRéponse : la hauteur médiane est $72$ cm : au moins la moitié des chênes mesure $72$ cm ou moins.",
@@ -310,7 +310,7 @@ export const exercicesStatistiques4e: FicheExercicesData = {
         {
           enonce: "Une vétérinaire pèse les six chats d'un refuge, de C1 à C6, en kg : $4{,}2$ ; $3{,}6$ ; $5{,}1$ ; $4{,}8$ ; $3{,}9$ ; $4{,}5$. Calculer l'étendue de cette série.",
           reponses: [
-            { attendu: "1,5" },
+            { attendu: "1,5", unite: "kg" },
           ],
           correction:
             "L'étendue mesure l'écart entre les deux extrêmes : la plus grande valeur moins la plus petite.\nLe chat le plus lourd pèse $5{,}1$ kg (C3), le plus léger $3{,}6$ kg (C2).\nÉtendue : $5{,}1 - 3{,}6 = 1{,}5$ kg.\n⛔ Le piège : faire « dernière moins première » dans la liste, $4{,}5 - 4{,}2 = 0{,}3$. Les extrêmes ne sont ni au début ni à la fin : je les cherche.\nRéponse : l'étendue est $1{,}5$ kg : entre le chat le plus léger et le plus lourd, il y a $1{,}5$ kg.",
@@ -377,9 +377,9 @@ export const exercicesStatistiques4e: FicheExercicesData = {
           enonce:
             "Un apiculteur a récolté du miel dans ses sept ruches. Le diagramme donne la masse récoltée dans chaque ruche, en kg.\na) Calculer la masse moyenne récoltée par ruche.\nb) Déterminer la médiane.\nc) Calculer l'étendue.\nd) Combien de ruches ont donné plus que la moyenne ?",
           reponses: [
-            { question: "a)", attendu: "21" },
-            { question: "b)", attendu: "21" },
-            { question: "c)", attendu: "18" },
+            { question: "a)", attendu: "21", unite: "kg" },
+            { question: "b)", attendu: "21", unite: "kg" },
+            { question: "c)", attendu: "18", unite: "kg" },
             { question: "d)", attendu: "3" },
           ],
           figure: barres([{ label: "R1", value: 18 }, { label: "R2", value: 25 }, { label: "R3", value: 12 }, { label: "R4", value: 30 }, { label: "R5", value: 21 }, { label: "R6", value: 16 }, { label: "R7", value: 25 }]),

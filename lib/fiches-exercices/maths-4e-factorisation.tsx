@@ -647,8 +647,8 @@ export const exercicesFactorisation4e: FicheExercicesData = {
           reponses: [
             { question: "a) dév.", attendu: ["4x+1000", "1000+4x"], exact: true },
             { question: "a) fact.", attendu: ["4(x+250)", "4(250+x)"], exact: true },
-            { question: "c) relais", attendu: "1250" },
-            { question: "c) piste", attendu: "1000" },
+            { question: "c) relais", attendu: "1250", unite: "m" },
+            { question: "c) piste", attendu: "1000", unite: "m" },
           ],
           figure: bandes(4, ["x", "250"], "4 relayeurs : la même distance chacun"),
           correction:

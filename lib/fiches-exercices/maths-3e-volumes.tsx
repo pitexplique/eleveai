@@ -383,7 +383,7 @@ export const exercicesVolumes3e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "30" },
             { question: "b)", attendu: "120" },
-            { question: "c)", attendu: "120" },
+            { question: "c)", attendu: "120", unite: "cm³" },
           ],
           figure: pave(6, 5, 4, {}, { grille: true }),
           correction:
@@ -394,7 +394,7 @@ export const exercicesVolumes3e: FicheExercicesData = {
         {
           enonce: "Un carton de déménagement est un pavé droit de $55$ cm de long, $35$ cm de large et $30$ cm de haut. Calculer son volume en cm³.",
           reponses: [
-            { attendu: "57750" },
+            { attendu: "57750", unite: "cm³" },
           ],
           correction:
             "Le carton est un pavé droit : je multiplie ses trois dimensions.\nJe calcule d'abord l'aire du fond : $55 \\times 35 = 1\\,925$ cm².\nPuis je multiplie par la hauteur : $V = 1\\,925 \\times 30 = 57\\,750$ cm³.\n⛔ Le piège : écrire $55 + 35 + 30 = 120$. Une somme de centimètres donne des centimètres, jamais des cm³ : l'unité trahit l'erreur.\nRéponse : $V = 57\\,750$ cm³.",
@@ -491,8 +491,8 @@ export const exercicesVolumes3e: FicheExercicesData = {
           enonce:
             "Le bassin d'une piscine municipale est un pavé droit de $25$ m de long, $12{,}5$ m de large et $1{,}8$ m de profondeur.\na) Calculer son volume en m³.\nb) Combien de litres d'eau faut-il pour le remplir ?\nc) La pompe débite $50$ m³ par heure. Combien de temps faut-il pour le remplir ? Répondre en heures et minutes.",
           reponses: [
-            { question: "a)", attendu: "562,5" },
-            { question: "b)", attendu: "562500" },
+            { question: "a)", attendu: "562,5", unite: "m³" },
+            { question: "b)", attendu: "562500", unite: "L" },
             { question: "c)", attendu: ["11h15min", "11h15", "675min", "11,25h"] },
           ],
           correction:
@@ -519,9 +519,9 @@ export const exercicesVolumes3e: FicheExercicesData = {
             "Une cuve de récupération d'eau de pluie est un cylindre de $1{,}2$ m de diamètre et $1{,}5$ m de haut.\na) Calculer son volume exact en m³, puis arrondi au millième.\nb) Combien de litres contient-elle pleine, arrondi au litre ?\nc) Elle est remplie aux trois quarts. Combien de litres contient-elle, arrondi au litre ?",
           reponses: [
             { question: "a) exact", attendu: "0,54π" },
-            { question: "a) arr.", attendu: "1,696", tolerance: 0.0005 },
-            { question: "b)", attendu: "1696", tolerance: 0.5 },
-            { question: "c)", attendu: "1272", tolerance: 0.5 },
+            { question: "a) arr.", attendu: "1,696", tolerance: 0.0005, unite: "m³" },
+            { question: "b)", attendu: "1696", tolerance: 0.5, unite: "L" },
+            { question: "c)", attendu: "1272", tolerance: 0.5, unite: "L" },
           ],
           correction:
             "a) Rayon : $1{,}2 \\div 2 = 0{,}6$ m. Aire de la base : $\\pi \\times 0{,}6^2 = 0{,}36\\pi$ m². $V = 0{,}36\\pi \\times 1{,}5 = 0{,}54\\pi \\approx 1{,}696$ m³.\nb) $1$ m³ $= 1\\,000$ L : $0{,}54\\pi \\times 1\\,000 = 540\\pi \\approx 1\\,696$ L.\nc) $\\dfrac{3}{4} \\times 540\\pi = 405\\pi \\approx 1\\,272$ L. Je pars de la valeur exacte, pas de l'arrondi.\n⛔ Le piège : oublier de diviser le diamètre par $2$. Avec $1{,}2$ comme rayon, on trouverait $2{,}16\\pi \\approx 6{,}786$ m³, quatre fois trop.\nRéponse : $0{,}54\\pi \\approx 1{,}696$ m³ ; environ $1\\,696$ L pleine ; environ $1\\,272$ L aux trois quarts.",
@@ -533,8 +533,8 @@ export const exercicesVolumes3e: FicheExercicesData = {
             "Un ballon de football de taille 5, celle des matchs d'adultes, a une circonférence comprise entre $68$ et $70$ cm (Lois du jeu, loi 2). On prend $69$ cm.\na) Calculer son rayon, arrondi au centième.\nb) Calculer son volume, arrondi au cm³, puis en litres, arrondi au dixième.\nc) Un élève écrit $V = 4\\pi r^2$. Qu'a-t-il calculé ?",
           reponses: [
             { question: "a)", attendu: "10,98", tolerance: 0.005 },
-            { question: "b) cm³", attendu: "5547", tolerance: 0.5 },
-            { question: "b) L", attendu: "5,5", tolerance: 0.05 },
+            { question: "b) cm³", attendu: "5547", tolerance: 0.5, unite: "cm³" },
+            { question: "b) L", attendu: "5,5", tolerance: 0.05, unite: "L" },
           ],
           correction:
             "a) La circonférence est le tour du ballon, le périmètre d'un grand cercle : $2\\pi r = 69$. Donc $r = \\dfrac{69}{2\\pi} \\approx 10{,}98$ cm.\nb) $V = \\dfrac{4}{3}\\pi r^3$. Je tape $r$ avec la valeur gardée par la calculatrice, pas avec l'arrondi : $V \\approx 5\\,547$ cm³. Comme $1\\,000$ cm³ $= 1$ L, $V \\approx 5{,}5$ L.\nc) $4\\pi r^2 \\approx 1\\,515$ : c'est l'AIRE du cuir du ballon, en cm², pas son volume. Il manque le cube du rayon, et le facteur $\\dfrac{1}{3}$.\n⛔ Le piège : prendre $69$ cm pour le diamètre, ou pour le rayon. La circonférence fait le tour : je la divise par $2\\pi$ pour retrouver le rayon.\nRéponse : $r \\approx 10{,}98$ cm ; $V \\approx 5\\,547$ cm³, environ $5{,}5$ L.",
@@ -545,7 +545,7 @@ export const exercicesVolumes3e: FicheExercicesData = {
           enonce:
             "La pyramide de Khéops, en Égypte, a une base carrée d'environ $230$ m de côté ; à sa construction, elle mesurait environ $147$ m de haut.\na) Calculer son volume d'origine en m³.\nb) Combien de bassins de piscine de $562{,}5$ m³ pourrait-on remplir avec ce volume ?",
           reponses: [
-            { question: "a)", attendu: "2592100" },
+            { question: "a)", attendu: "2592100", unite: "m³" },
             { question: "b)", attendu: "4608", tolerance: 0.5 },
           ],
           correction:
@@ -574,10 +574,10 @@ export const exercicesVolumes3e: FicheExercicesData = {
           enonce:
             "Une cuve à eau est un pavé droit de $2{,}5$ m sur $2$ m sur $1{,}6$ m. Un bureau d'études en fait une maquette à l'échelle $\\dfrac{1}{20}$.\na) Calculer le volume de la vraie cuve, en m³ puis en litres.\nb) Par combien faut-il diviser ce volume pour obtenir celui de la maquette ?\nc) Combien de litres contient la maquette ? Vérifier en calculant ses dimensions.",
           reponses: [
-            { question: "a) m³", attendu: "8" },
-            { question: "a) L", attendu: "8000" },
+            { question: "a) m³", attendu: "8", unite: "m³" },
+            { question: "a) L", attendu: "8000", unite: "L" },
             { question: "b)", attendu: "8000" },
-            { question: "c)", attendu: "1" },
+            { question: "c)", attendu: "1", unite: "L" },
           ],
           correction:
             "a) $V = 2{,}5 \\times 2 \\times 1{,}6 = 8$ m³, soit $8 \\times 1\\,000 = 8\\,000$ L.\nb) Toutes les longueurs sont divisées par $20$ : $k = \\dfrac{1}{20}$. Le volume est multiplié par $k^3 = \\dfrac{1}{20 \\times 20 \\times 20} = \\dfrac{1}{8\\,000}$ : on le divise par $8\\,000$.\nc) $8\\,000 \\div 8\\,000 = 1$ L. Vérification : la maquette mesure $250 \\div 20 = 12{,}5$ cm, $200 \\div 20 = 10$ cm et $160 \\div 20 = 8$ cm. $12{,}5 \\times 10 \\times 8 = 1\\,000$ cm³ $= 1$ dm³ $= 1$ L.\n⛔ Le piège : diviser le volume par $20$ et annoncer $400$ L pour une maquette qu'on tient dans une main.\nRéponse : $8$ m³, soit $8\\,000$ L ; on divise par $8\\,000$ ; la maquette contient $1$ L.",
@@ -677,7 +677,7 @@ export const exercicesVolumes3e: FicheExercicesData = {
             { question: "a) cône", attendu: "94,25", tolerance: 0.005 },
             { question: "a) boule", attendu: "113,10", tolerance: 0.005 },
             { question: "b)", attendu: ["oui", "vrai"] },
-            { question: "b) cm³", attendu: "18,85", tolerance: 0.005 },
+            { question: "b) cm³", attendu: "18,85", tolerance: 0.005, unite: "cm³" },
             { question: "c)", attendu: "12" },
           ],
           correction:

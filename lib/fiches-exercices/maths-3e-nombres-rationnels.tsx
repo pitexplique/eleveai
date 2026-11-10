@@ -192,7 +192,7 @@ export const exercicesRationnels3e: FicheExercicesData = {
             "Un marathon mesure $42{,}195$ km.\na) Écris cette distance sous forme de fraction irréductible.\nb) Une coureuse a parcouru les $\\dfrac{2}{5}$ du marathon. Combien de kilomètres a-t-elle parcourus ?",
           reponses: [
             { question: "a)", attendu: ["8439/200"], exact: true },
-            { question: "b)", attendu: "16,878" },
+            { question: "b)", attendu: "16,878", unite: "km" },
           ],
           correction:
             "a) Trois chiffres après la virgule : ce sont des millièmes. $42{,}195 = \\dfrac{42\\,195}{1\\,000}$.\n$42\\,195$ se termine par $5$ : il est divisible par $5$, comme $1\\,000$. $\\dfrac{42\\,195}{1\\,000} = \\dfrac{8\\,439}{200}$.\n$8\\,439$ est impair et ne se termine ni par $0$ ni par $5$ : il n'a aucun diviseur commun avec $200 = 2 \\times 2 \\times 2 \\times 5 \\times 5$. La fraction est irréductible.\nRéponse : $42{,}195 = \\dfrac{8\\,439}{200}$.\nb) Les $\\dfrac{2}{5}$ de $42{,}195$ : $42{,}195 \\times 2 = 84{,}39$, puis $84{,}39 \\div 5 = 16{,}878$.\nRéponse : elle a parcouru $16{,}878$ km.",
@@ -298,7 +298,7 @@ export const exercicesRationnels3e: FicheExercicesData = {
             { question: "a)", attendu: "11/15" },
             { question: "b)", attendu: ["oui", "vrai"] },
             { question: "c)", attendu: "4/15" },
-            { question: "d)", attendu: "12" },
+            { question: "d)", attendu: "12", unite: "km" },
           ],
           correction:
             "a) $\\dfrac{2}{5} + \\dfrac{1}{3} = \\dfrac{6}{15} + \\dfrac{5}{15} = \\dfrac{11}{15}$. Réponse : elle a fait les $\\dfrac{11}{15}$ du parcours.\nb) Je compare à $\\dfrac{1}{2}$ en trentièmes : $\\dfrac{11}{15} = \\dfrac{22}{30}$ et $\\dfrac{1}{2} = \\dfrac{15}{30}$. $22 > 15$. Réponse : oui, elle a dépassé la moitié.\nc) Le parcours entier, c'est $1 = \\dfrac{15}{15}$. $1 - \\dfrac{11}{15} = \\dfrac{4}{15}$. Réponse : il lui reste les $\\dfrac{4}{15}$ du parcours.\nd) Les $\\dfrac{4}{15}$ de $45$ km : $45 \\div 15 = 3$, puis $3 \\times 4 = 12$. Réponse : il lui reste $12$ km.\n⭐ Contrôle : les $\\dfrac{11}{15}$ de $45$ km font $33$ km, et $33 + 12 = 45$.\n⛔ Le piège : écrire $\\dfrac{2}{5} + \\dfrac{1}{3} = \\dfrac{3}{8}$. C'est moins que $\\dfrac{2}{5}$ tout seul : elle aurait reculé pendant la deuxième heure !",

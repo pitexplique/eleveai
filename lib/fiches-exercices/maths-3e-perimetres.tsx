@@ -381,8 +381,8 @@ export const exercicesPerimetres3e: FicheExercicesData = {
         {
           enonce: "Un triangle a pour côtés $45$ cm, $0{,}6$ m et $750$ mm. Calculer son périmètre, en centimètres puis en mètres.",
           reponses: [
-            { question: "cm", attendu: "180" },
-            { question: "m", attendu: "1,8" },
+            { question: "cm", attendu: "180", unite: "cm" },
+            { question: "m", attendu: "1,8", unite: "m" },
           ],
           correction:
             "On n'additionne que des longueurs écrites dans la MÊME unité. Je convertis tout en centimètres.\n$0{,}6$ m $= 60$ cm, car $1$ m $= 100$ cm.\n$750$ mm $= 75$ cm, car $10$ mm $= 1$ cm.\nPuis je fais le tour : $45 + 60 + 75 = 180$ cm, soit $1{,}8$ m.\n⛔ Le piège : additionner les nombres tels quels, $45 + 0{,}6 + 750 = 795{,}6$. Ce résultat ne veut rien dire : il mélange des centimètres, des mètres et des millimètres.\nRéponse : le périmètre vaut $180$ cm, soit $1{,}8$ m.",
@@ -722,7 +722,7 @@ export const exercicesPerimetres3e: FicheExercicesData = {
             "On assimile l'équateur à un cercle de rayon $6\\,378$ km.\na) Calculer la longueur de l'équateur, au kilomètre près.\nb) On tend une corde tout autour de l'équateur, collée au sol. Puis on l'allonge pour qu'elle flotte partout à $1$ m au-dessus du sol. De combien de mètres faut-il l'allonger ?\nc) Même question avec une corde autour d'un ballon de rayon $11$ cm. Qu'observe-t-on ?",
           reponses: [
             { question: "a)", attendu: "40074", tolerance: 0.5 },
-            { question: "b)", attendu: "6,28", tolerance: 0.005 },
+            { question: "b)", attendu: "6,28", tolerance: 0.005, unite: "m" },
             { question: "c)", attendu: "6,28", tolerance: 0.005 },
           ],
           correction:

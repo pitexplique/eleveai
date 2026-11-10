@@ -584,7 +584,7 @@ export const exercicesRatio4e: FicheExercicesData = {
           enonce: "Pour un bon compost, un jardinier vise le ratio matières brunes : matières vertes $= 2 : 1$ (feuilles mortes et carton d'un côté, épluchures et tonte de l'autre ; chiffres d'un modèle). Dans son bac, il y a $30$ L de matières brunes et $24$ L de matières vertes.\na) Écris le ratio brunes : vertes de son bac, simplifié.\nb) Il n'enlève rien. Combien de litres de matières brunes doit-il ajouter pour atteindre le ratio $2 : 1$ ?",
           reponses: [
             { question: "a)", attendu: ["5 : 4"], exact: true },
-            { question: "b)", attendu: "18" },
+            { question: "b)", attendu: "18", unite: "L" },
           ],
           figure: comparer([{ nom: "brunes", parts: 5, valeur: "30 L" }, { nom: "vertes", parts: 4, valeur: "24 L" }], "6 L", ""),
           correction:
@@ -678,7 +678,7 @@ export const exercicesRatio4e: FicheExercicesData = {
             { question: "b) 1 t", attendu: "2,5" },
             { question: "c)", attendu: "5,25" },
             { question: "d) min", attendu: "420" },
-            { question: "d) km", attendu: "25,2" },
+            { question: "d) km", attendu: "25,2", unite: "km" },
             { question: "e)", attendu: "17" },
           ],
           figure: engrenages(50, 20),

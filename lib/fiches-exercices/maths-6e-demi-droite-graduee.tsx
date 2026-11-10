@@ -445,11 +445,11 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         {
           enonce: "Maëlle trace un segment de $12$ cm. Elle en fait une demi-droite graduée de $0$ à $3$. L'origine $0$ est à gauche, le nombre $3$ au bout.\na) Combien de centimètres mesure une unité ?\nb) À combien de centimètres de l'origine sont $1$ et $2$ ?\nc) Elle place A$(0{,}5)$, B$(1{,}5)$ et C$(2{,}25)$. À combien de centimètres de l'origine sont-ils ?",
           reponses: [
-            { question: "a)", attendu: "4" },
+            { question: "a)", attendu: "4", unite: "cm" },
             { question: "b)", attendu: "4 ; 8" },
-            { question: "c) A", attendu: "2" },
-            { question: "c) B", attendu: "6" },
-            { question: "c) C", attendu: "9" },
+            { question: "c) A", attendu: "2", unite: "cm" },
+            { question: "c) B", attendu: "6", unite: "cm" },
+            { question: "c) C", attendu: "9", unite: "cm" },
           ],
           correction:
             "a) De $0$ à $3$, il y a $3$ unités dans $12$ cm.\nUne unité mesure $12 \\div 3 = 4$ cm.\nb) $1$ est à $4$ cm de l'origine. $2$ est à $2 \\times 4 = 8$ cm.\nc) Une demi-unité mesure $4 \\div 2 = 2$ cm. A est à $2$ cm.\nB : $1{,}5$ unité, c'est $4 + 2 = 6$ cm.\nC : un quart d'unité mesure $4 \\div 4 = 1$ cm. C est à $8 + 1 = 9$ cm.\n⛔ Le piège : placer A à $0{,}5$ cm. Ici, l'unité ne mesure pas $1$ cm, mais $4$ cm.\nRéponse : a) $4$ cm ; b) $4$ cm et $8$ cm ; c) A à $2$ cm, B à $6$ cm, C à $9$ cm.",
@@ -502,7 +502,7 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
         {
           enonce: "Voici le cadran d'une balance de cuisine. Il est dessiné comme une demi-droite graduée en grammes.\na) Combien de grammes vaut une graduation ?\nb) Combien pèse la farine ?\nc) On pèse ensuite $250$ g de sucre, puis $125$ g de beurre. Où s'arrête l'aiguille à chaque fois ?",
           reponses: [
-            { question: "a)", attendu: "50" },
+            { question: "a)", attendu: "50", unite: "g" },
             { question: "b)", attendu: "650" },
           ],
           figure: demiDroite(0, 1000, 50, [{ value: 650, label: "farine" }], { nombres: 200 }),
@@ -571,8 +571,8 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "12,5" },
             { question: "b)", attendu: "7" },
-            { question: "c) 3/8", attendu: "37,5" },
-            { question: "c) 1/2", attendu: "50" },
+            { question: "c) 3/8", attendu: "37,5", unite: "cm" },
+            { question: "c) 1/2", attendu: "50", unite: "cm" },
             { question: "d)", attendu: "5/8" },
           ],
           correction:
@@ -584,12 +584,12 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
           titre: "Le saut en longueur",
           enonce: "Au saut en longueur, on mesure les sauts en mètres. Voici un morceau de demi-droite graduée, de $4$ m à $6$ m.\na) Combien vaut une graduation ? Écris-le en m, puis en cm.\nb) Lis la longueur des sauts de Nina et de Kylian.\nc) Sofia saute $5{,}05$ m. Entre quelles graduations se place-t-elle ?\nd) Range les trois sauts, du plus long au plus court.\ne) Kylian vise $5{,}5$ m. Combien de centimètres lui manque-t-il ?",
           reponses: [
-            { question: "a) m", attendu: "0,1" },
-            { question: "a) cm", attendu: "10" },
+            { question: "a) m", attendu: "0,1", unite: "m" },
+            { question: "a) cm", attendu: "10", unite: "cm" },
             { question: "b)", attendu: "4,8 ; 5,3" },
             { question: "c)", attendu: ["5 ; 5,1", "entre 5 et 5,1"] },
             { question: "d)", attendu: ["Kylian, Sofia, Nina", "Kylian ; Sofia ; Nina", "Kylian > Sofia > Nina"], exact: true },
-            { question: "e)", attendu: "20" },
+            { question: "e)", attendu: "20", unite: "cm" },
           ],
           figure: demiDroite(4, 6, 0.1, [
             { value: 4.8, label: "Nina" },

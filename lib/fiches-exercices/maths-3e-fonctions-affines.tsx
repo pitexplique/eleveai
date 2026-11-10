@@ -400,10 +400,10 @@ export const exercicesFonctionsAffines3e: FicheExercicesData = {
             "Depuis 1993, des satellites mesurent le niveau moyen des océans. De 1993 à 2023, il est monté en moyenne de $3{,}3$ mm par an. On note $n(t)$ la hausse, en mm, $t$ années après 1993 : $n(t) = 3{,}3t$.\na) La fonction $n$ est-elle linéaire ? Que représente $3{,}3$ ?\nb) Calculer la hausse en 2023.\nc) Si ce rythme restait le même, quelle serait la hausse en 2050 ?\nd) De 2014 à 2023, la mer est en fait montée d'environ $4{,}7$ mm par an. À partir de 2023, on modélise la hausse par $m(x) = 4{,}7x + 99$, avec $x$ le nombre d'années après 2023. Pourquoi $m$ n'est-elle pas linéaire ? Calculer la hausse prévue en 2050.\ne) Quel écart entre les deux prévisions pour 2050 ?",
           reponses: [
             { question: "a)", attendu: ["oui", "vrai"] },
-            { question: "b)", attendu: "99" },
-            { question: "c)", attendu: "188,1" },
-            { question: "d)", attendu: "225,9" },
-            { question: "e)", attendu: "37,8" },
+            { question: "b)", attendu: "99", unite: "mm" },
+            { question: "c)", attendu: "188,1", unite: "mm" },
+            { question: "d)", attendu: "225,9", unite: "mm" },
+            { question: "e)", attendu: "37,8", unite: "mm" },
           ],
           correction:
             "a) Oui : $n(t) = 3{,}3t$ est de la forme $at$, avec $b = 0$ — en 1993, point de départ des mesures, la hausse vaut $0$. $a = 3{,}3$ : la mer monte de $3{,}3$ mm chaque année.\nb) 2023, c'est $t = 30$ : $n(30) = 3{,}3 \\times 30 = 99$ mm, à peu près $10$ cm.\nc) 2050, c'est $t = 2050 - 1993 = 57$ : $n(57) = 3{,}3 \\times 57 = 188{,}1$ mm, près de $19$ cm.\nd) Ici l'origine est 2023, et la mer a déjà monté de $99$ mm : $b = 99$, pas $0$, donc $m$ est affine, pas linéaire. 2050, c'est $x = 27$ : $m(27) = 4{,}7 \\times 27 + 99 = 126{,}9 + 99 = 225{,}9$ mm, environ $23$ cm.\ne) $225{,}9 - 188{,}1 = 37{,}8$ mm : près de $4$ cm de plus, seulement parce que le rythme s'est accéléré.\n⛔ Le piège au d) : remplacer $x$ par $57$, les années depuis 1993. Dans $m$, on compte depuis 2023 : chaque fonction a SON point de départ, ici $x = 27$.\nRéponse : $n$ est linéaire ; $99$ mm en 2023 ; $188{,}1$ mm en 2050 au rythme ancien ; $m$ est affine, $225{,}9$ mm ; $37{,}8$ mm d'écart.",

@@ -419,7 +419,7 @@ export const exercicesPuissances3e: FicheExercicesData = {
             { question: "a) 3", attendu: "8" },
             { question: "a) n", attendu: "2^n" },
             { question: "b) nb", attendu: "1024" },
-            { question: "b) m", attendu: "0,1024" },
+            { question: "b) m", attendu: "0,1024", unite: "m" },
             { question: "c)", attendu: "4,4×10^5" },
           ],
           correction:

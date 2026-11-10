@@ -260,10 +260,10 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         {
           enonce: "Convertis.\na) $4{,}2$ km en m\nb) $356$ cm en m\nc) $7{,}5$ cm en mm\nd) $80$ mm en cm",
           reponses: [
-            { question: "a)", attendu: "4200" },
-            { question: "b)", attendu: "3,56" },
-            { question: "c)", attendu: "75" },
-            { question: "d)", attendu: "8" },
+            { question: "a)", attendu: "4200", unite: "m" },
+            { question: "b)", attendu: "3,56", unite: "m" },
+            { question: "c)", attendu: "75", unite: "mm" },
+            { question: "d)", attendu: "8", unite: "cm" },
           ],
           correction:
             "Je regarde d'abord le sens : vers une unité plus petite, le nombre devient plus grand ; vers une plus grande, il devient plus petit.\na) $1$ km $= 1\\,000$ m. Du km au m, l'unité est plus petite : je multiplie par $1\\,000$. $4{,}2 \\times 1\\,000 = 4\\,200$ m.\nb) $1$ m $= 100$ cm. Du cm au m, l'unité est plus grande : je divise par $100$. $356 \\div 100 = 3{,}56$ m.\nc) $1$ cm $= 10$ mm : $7{,}5 \\times 10 = 75$ mm.\nd) $80 \\div 10 = 8$ cm.\n⛔ Le piège du a) : « ajouter trois zéros » et écrire $4{,}2000$. Ce nombre vaut toujours $4{,}2$. Multiplier par $1\\,000$, c'est déplacer la virgule de trois rangs : c'est ce que montre le tableau.\nRéponse : a) $4\\,200$ m ; b) $3{,}56$ m ; c) $75$ mm ; d) $8$ cm.",
@@ -282,10 +282,10 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         {
           enonce: "Convertis.\na) $3{,}05$ kg en g\nb) $650$ g en kg\nc) $2$ t en kg (une tonne vaut $1\\,000$ kg)\nd) $0{,}8$ t en kg",
           reponses: [
-            { question: "a)", attendu: "3050" },
-            { question: "b)", attendu: "0,65" },
-            { question: "c)", attendu: "2000" },
-            { question: "d)", attendu: "800" },
+            { question: "a)", attendu: "3050", unite: "g" },
+            { question: "b)", attendu: "0,65", unite: "kg" },
+            { question: "c)", attendu: "2000", unite: "kg" },
+            { question: "d)", attendu: "800", unite: "kg" },
           ],
           correction:
             "a) $1$ kg $= 1\\,000$ g : je multiplie par $1\\,000$. $3{,}05 \\times 1\\,000 = 3\\,050$ g.\nb) Du g au kg, l'unité est plus grande : je divise par $1\\,000$. $650 \\div 1\\,000 = 0{,}65$ kg.\nc) $2 \\times 1\\,000 = 2\\,000$ kg.\nd) $0{,}8 \\times 1\\,000 = 800$ kg.\n⛔ Le piège du a) : enlever la virgule et écrire $305$ g. Dans le tableau, le $3$ est dans la colonne des kg : il faut aller jusqu'à la colonne des g, trois rangs plus loin, donc un zéro de plus.\nRéponse : a) $3\\,050$ g ; b) $0{,}65$ kg ; c) $2\\,000$ kg ; d) $800$ kg.",
@@ -298,10 +298,10 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         {
           enonce: "Convertis.\na) $1{,}5$ L en cL\nb) $250$ mL en L\nc) $33$ cL en mL\nd) $4$ dL en L",
           reponses: [
-            { question: "a)", attendu: "150" },
-            { question: "b)", attendu: "0,25" },
-            { question: "c)", attendu: "330" },
-            { question: "d)", attendu: "0,4" },
+            { question: "a)", attendu: "150", unite: "cL" },
+            { question: "b)", attendu: "0,25", unite: "L" },
+            { question: "c)", attendu: "330", unite: "mL" },
+            { question: "d)", attendu: "0,4", unite: "L" },
           ],
           correction:
             "a) $1$ L $= 100$ cL : $1{,}5 \\times 100 = 150$ cL.\nb) $1$ L $= 1\\,000$ mL. Du mL au L, je divise par $1\\,000$ : $250 \\div 1\\,000 = 0{,}25$ L.\nc) $1$ cL $= 10$ mL : $33 \\times 10 = 330$ mL.\nd) $1$ L $= 10$ dL : $4 \\div 10 = 0{,}4$ L.\n⛔ Le piège du b) : diviser par $100$ et écrire $2{,}5$ L. $2{,}5$ L, c'est plus que deux bouteilles d'un litre, alors que $250$ mL tiennent dans un verre. Entre le mL et le L, il y a trois rangs : dL, cL, mL.\nRéponse : a) $150$ cL ; b) $0{,}25$ L ; c) $330$ mL ; d) $0{,}4$ L.",
@@ -353,8 +353,8 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
             { question: "a) gomme", attendu: "3,8" },
             { question: "b) clé", attendu: "63" },
             { question: "b) gomme", attendu: "38" },
-            { question: "c) mm", attendu: "25" },
-            { question: "c) cm", attendu: "2,5" },
+            { question: "c) mm", attendu: "25", unite: "mm" },
+            { question: "c) cm", attendu: "2,5", unite: "cm" },
           ],
           figure: regle(7, [
             { de: 0, a: 6.3, label: "clé" },
@@ -428,8 +428,8 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         {
           enonce: "Amir prépare son sac de randonnée. Il y met une gourde pleine de $1{,}2$ kg, un pique-nique de $850$ g, une polaire de $400$ g et une trousse de secours de $0{,}25$ kg. Le sac vide pèse $1{,}1$ kg.\na) Quelle est la masse du sac rempli, en grammes, puis en kilogrammes ?\nb) Pour un enfant, on conseille un sac de $4$ kg au plus (un modèle). Le sac d'Amir respecte-t-il ce conseil ?",
           reponses: [
-            { question: "a) g", attendu: "3800" },
-            { question: "a) kg", attendu: "3,8" },
+            { question: "a) g", attendu: "3800", unite: "g" },
+            { question: "a) kg", attendu: "3,8", unite: "kg" },
             { question: "b)", attendu: ["oui", "vrai"] },
           ],
           correction:
@@ -449,8 +449,8 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
         {
           enonce: "Dans une planche de $2{,}4$ m, un menuisier coupe $3$ morceaux de $65$ cm.\na) Quelle longueur de planche reste-t-il, en cm puis en m ?\nb) Peut-il couper un quatrième morceau de $65$ cm ?",
           reponses: [
-            { question: "a) cm", attendu: "45" },
-            { question: "a) m", attendu: "0,45" },
+            { question: "a) cm", attendu: "45", unite: "cm" },
+            { question: "a) m", attendu: "0,45", unite: "m" },
             { question: "b)", attendu: ["non", "faux"] },
           ],
           correction:
@@ -562,10 +562,10 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
           titre: "Le trail",
           enonce: "Un trail compte trois étapes : $12{,}5$ km, puis $8\\,400$ m, puis $9{,}1$ km. Nora part à $7$ h $45$ et arrive à $11$ h $20$.\na) Quelle est la longueur totale du trail, en km ?\nb) Combien de temps a duré sa course, en heures et minutes, puis en minutes ?\nc) À chacun des $2$ ravitaillements, elle boit $3$ gobelets de $20$ cL. Quelle quantité d'eau a-t-elle bue, en L ?\nd) Le soir, sa montre affiche « $30\\,000$ » pour la distance. Dans quelle unité ? Est-ce cohérent ?",
           reponses: [
-            { question: "a)", attendu: "30" },
+            { question: "a)", attendu: "30", unite: "km" },
             { question: "b) h min", attendu: ["3h35", "3h35min"] },
             { question: "b) min", attendu: "215" },
-            { question: "c)", attendu: "1,2" },
+            { question: "c)", attendu: "1,2", unite: "L" },
             { question: "d) unité", attendu: ["mètres", "mètre", "en mètres", "m"] },
           ],
           correction:
@@ -581,8 +581,8 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
           titre: "La citronnade de la fête",
           enonce: "Pour la fête de l'école, on prépare une citronnade pour $20$ personnes : $3$ L d'eau, $45$ cL de jus de citron et $600$ g de sucre.\na) Quel volume de liquide obtient-on, en cL, puis en L ?\nb) On la sert dans des verres de $15$ cL. Combien de verres peut-on remplir ?\nc) Pour $50$ personnes, il faut $2{,}5$ fois plus de sucre. Le sucre se vend en paquets de $1$ kg. Combien de paquets faut-il acheter ?\nd) Lou affirme : « $3{,}45$ L, c'est $34{,}5$ cL ». Explique son erreur.",
           reponses: [
-            { question: "a) cL", attendu: "345" },
-            { question: "a) L", attendu: "3,45" },
+            { question: "a) cL", attendu: "345", unite: "cL" },
+            { question: "a) L", attendu: "3,45", unite: "L" },
             { question: "b)", attendu: "23" },
             { question: "c)", attendu: "2" },
           ],
@@ -622,7 +622,7 @@ export const exercicesGrandeurConversion5e: FicheExercicesData = {
           reponses: [
             { question: "a) jour", attendu: "3" },
             { question: "a) an", attendu: "1095" },
-            { question: "b)", attendu: "13,14" },
+            { question: "b)", attendu: "13,14", unite: "kg" },
             { question: "c)", attendu: "2" },
             { question: "d)", attendu: ["non", "faux"] },
           ],

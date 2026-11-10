@@ -622,7 +622,7 @@ export const exercicesEquations4e: FicheExercicesData = {
             { question: "a) élec.", attendu: "32000" },
             { question: "a) ess.", attendu: "28500" },
             { question: "b)", attendu: "30000 + 40x ; 23000 + 110x" },
-            { question: "c) km", attendu: "100000" },
+            { question: "c) km", attendu: "100000", unite: "km" },
             { question: "c) €", attendu: "34000" },
             { question: "d) ans", attendu: "100000/12000", tolerance: 0.35 },
           ],

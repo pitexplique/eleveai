@@ -385,7 +385,7 @@ export const exercicesFonctions3e: FicheExercicesData = {
           reponses: [
             { question: "V(1)", attendu: "100" },
             { question: "V(2)", attendu: "128" },
-            { question: "V(3)", attendu: "108" },
+            { question: "V(3)", attendu: "108", unite: "cm³" },
             { question: "c)", attendu: "2" },
             { question: "d)", attendu: "2" },
           ],

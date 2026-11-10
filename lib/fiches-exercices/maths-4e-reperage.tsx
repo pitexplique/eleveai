@@ -840,7 +840,7 @@ export const exercicesReperage4e: FicheExercicesData = {
             { question: "a) Nord", attendu: ["mont Blanc", "le mont Blanc"] },
             { question: "a) équ.", attendu: ["Kilimandjaro", "le Kilimandjaro"] },
             { question: "b)", attendu: "49" },
-            { question: "c)", attendu: "694" },
+            { question: "c)", attendu: "694", unite: "m" },
           ],
           correction:
             "a) La lettre de la latitude donne l'hémisphère : seul le mont Blanc (46° N ; 7° E) est au Nord. La lettre de la longitude dit l'est ou l'ouest : le mont Blanc et le Kilimandjaro (3° S ; 37° E) sont à l'est de Greenwich, l'Aconcagua (33° S ; 70° O) à l'ouest. Le plus proche de l'équateur est le Kilimandjaro, à 3° seulement.\nb) Le mont Blanc est à 46° au nord de l'équateur, le Kilimandjaro à 3° au sud : de part et d'autre, j'additionne. $46 + 3 = 49$ degrés.\nc) Le sommet est SUR la surface de la Terre : la latitude et la longitude suffisent, le relief donne le reste. L'hélicoptère, lui, peut quitter la surface : il faut un troisième nombre, son altitude. Il vole $5\\,500 - 4\\,806 = 694$ m au-dessus du sommet.\nd) (87° N ; 28° E) voudrait dire 87° au nord de l'équateur : à 3° seulement du pôle Nord, dans l'océan Arctique. Sur un méridien, 1° vaut environ 111 km : ce point est à $(90 - 87) \\times 111 = 333$ km environ du pôle, à des milliers de kilomètres de l'Himalaya.\n⛔ Le piège : inverser latitude et longitude. L'ordre est toujours (latitude ; longitude), et une latitude de 87° place le point presque au pôle.\nRéponse : le mont Blanc ; le mont Blanc et le Kilimandjaro ; le Kilimandjaro ; 49° ; il faut l'altitude, l'hélicoptère est 694 m au-dessus du sommet ; près du pôle Nord, dans l'océan Arctique.",

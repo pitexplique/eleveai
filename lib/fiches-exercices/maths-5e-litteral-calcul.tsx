@@ -388,7 +388,7 @@ export const exercicesLitteralCalcul5e: FicheExercicesData = {
         {
           enonce: "Le périmètre d'un rectangle de longueur $L$ et de largeur $l$ est $P = 2L + 2l$.\na) Que signifie $2L$ ?\nb) Calcule $P$ pour $L = 7$ et $l = 4{,}5$ (en cm).\nc) Calcule $P$ pour $L = 12$ et $l = 12$. Que remarques-tu ?",
           reponses: [
-            { question: "b)", attendu: "23" },
+            { question: "b)", attendu: "23", unite: "cm" },
             { question: "c)", attendu: "48" },
           ],
           correction:
@@ -487,7 +487,7 @@ export const exercicesLitteralCalcul5e: FicheExercicesData = {
           enonce: "Un triangle isocèle a deux côtés de longueur $a$ (en cm) et un troisième côté de $5$ cm.\na) Écris son périmètre en fonction de $a$, puis réduis l'expression.\nb) Calcule le périmètre pour $a = 6{,}5$.\nc) Pour quelle valeur de $a$, parmi $4$, $5$ et $6$, le périmètre vaut-il $17$ cm ?",
           reponses: [
             { question: "a)", attendu: ["2a+5", "5+2a"], exact: true },
-            { question: "b)", attendu: "18" },
+            { question: "b)", attendu: "18", unite: "cm" },
             { question: "c)", attendu: "6" },
           ],
           figure: triangle({ A: [2.5, 6], B: [0, 0], C: [5, 0] }, { cotes: { AB: "a", CA: "a", BC: "5 cm" } }),

@@ -553,8 +553,8 @@ export const exercicesPropRatioPourcentage5e: FicheExercicesData = {
           enonce: "Pour peindre un plafond en bleu ciel, on mélange de la peinture blanche et de la peinture bleue dans le ratio blanc : bleu $= 3 : 1$.\na) Avec $6$ L de blanc, combien faut-il de bleu ?\nb) Il faut $10$ L de peinture en tout. Combien de litres de chaque couleur faut-il ?\nc) Quel pourcentage du mélange est de la peinture bleue ?\nd) Léa mélange $4$ L de blanc et $1$ L de bleu. Sa teinte sera-t-elle plus claire ou plus foncée que le bleu ciel ?",
           reponses: [
             { question: "a)", attendu: "2" },
-            { question: "b) blanc", attendu: "7,5" },
-            { question: "b) bleu", attendu: "2,5" },
+            { question: "b) blanc", attendu: "7,5", unite: "L" },
+            { question: "b) bleu", attendu: "2,5", unite: "L" },
             { question: "c)", attendu: "25 %" },
             { question: "d)", attendu: ["plus claire", "claire"] },
           ],

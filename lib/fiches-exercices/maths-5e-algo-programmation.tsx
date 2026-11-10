@@ -350,7 +350,7 @@ export const exercicesAlgoProgrammation5e: FicheExercicesData = {
             "Une cycliste roule à $15$ km/h : elle met $4$ minutes pour faire $1$ km (vitesse choisie pour l'exercice). Ce programme calcule la durée d'un trajet, quand on tape la distance en km.\na) Quelle est l'entrée du programme ? Quelle est sa sortie ?\nb) On répond $12$. Que dit le lutin ?\nc) Le lutin a dit $30$. Quelle distance avait-on tapée ?",
           reponses: [
             { question: "b)", attendu: "48" },
-            { question: "c)", attendu: "7,5" },
+            { question: "c)", attendu: "7,5", unite: "km" },
           ],
           figure: scratch(["quand drapeau vert cliqué", "demander 'Distance ?'", "mettre km à réponse", "mettre minutes à km * 4", "dire minutes"]),
           correction:
@@ -476,7 +476,7 @@ export const exercicesAlgoProgrammation5e: FicheExercicesData = {
             "Un robot aspirateur part d'un coin de la pièce en regardant vers la droite. Un pas vaut $10$ cm. Il exécute dans l'ordre : avancer de 30 ; tourner à gauche de 90° ; avancer de 20 ; tourner à gauche de 90° ; avancer de 10 ; tourner à droite de 90° ; avancer de 10.\na) Dessine son trajet sur du papier quadrillé, un carreau pour $10$ pas.\nb) Quelle distance a-t-il parcourue, en pas, puis en mètres ?\nc) À la fin, est-il plus à droite ou plus à gauche que son départ ? De combien de pas ?\nd) Vers où regarde-t-il à la fin ?",
           reponses: [
             { question: "b) pas", attendu: "70" },
-            { question: "b) m", attendu: "7" },
+            { question: "b) m", attendu: "7", unite: "m" },
             { question: "c) côté", attendu: ["à droite", "droite", "plus à droite"] },
             { question: "c) pas", attendu: "20" },
             { question: "d)", attendu: ["vers le haut", "le haut", "haut", "en haut"] },
@@ -625,7 +625,7 @@ export const exercicesAlgoProgrammation5e: FicheExercicesData = {
             "Une tondeuse robot tond une pelouse en allers et retours. Elle part en regardant vers la droite, et un pas vaut $10$ cm.\na) Suis le premier tour de boucle et dessine le trajet.\nb) Quelle longueur la tondeuse parcourt-elle en tout ? Donne-la en pas, puis en mètres.\nc) Où arrive-t-elle par rapport à son point de départ ?\nd) Combien de tours de boucle faudrait-il pour qu'elle monte de $100$ pas ?",
           reponses: [
             { question: "b) pas", attendu: "280" },
-            { question: "b) m", attendu: "28" },
+            { question: "b) m", attendu: "28", unite: "m" },
             { question: "c)", attendu: "40" },
             { question: "d)", attendu: "5" },
           ],

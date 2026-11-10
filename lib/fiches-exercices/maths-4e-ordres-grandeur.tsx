@@ -604,10 +604,10 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
           enonce:
             "La lumière parcourt environ $3 \\times 10^{8}$ mètres par seconde. L'informaticienne Grace Hopper distribuait à ses élèves des bouts de fil électrique d'une trentaine de centimètres, en disant : « voici une nanoseconde ».\na) Quelle distance la lumière parcourt-elle en $1$ ns ? Explique le fil de Grace Hopper.\nb) Un processeur cadencé à $3$ GHz effectue $3 \\times 10^{9}$ cycles par seconde. Quelle distance la lumière parcourt-elle pendant un cycle ?\nc) Un élève affirme : « en une microseconde, la lumière parcourt $300$ km ». Vrai ou faux ? Corrige.",
           reponses: [
-            { question: "a) cm", attendu: "30" },
-            { question: "b) cm", attendu: "10" },
+            { question: "a) cm", attendu: "30", unite: "cm" },
+            { question: "b) cm", attendu: "10", unite: "cm" },
             { question: "c)", attendu: ["faux", "non"] },
-            { question: "c) m", attendu: "300" },
+            { question: "c) m", attendu: "300", unite: "m" },
           ],
           correction:
             "a) Distance $=$ vitesse $\\times$ durée, avec $1$ ns $= 10^{-9}$ s : $3 \\times 10^{8} \\times 10^{-9} = 3 \\times 10^{8+(-9)} = 3 \\times 10^{-1}$ m $= 0{,}3$ m, soit $30$ cm. Le fil a la longueur que parcourt la lumière en une nanoseconde : Grace Hopper faisait TOUCHER une durée.\nb) En une seconde, $3 \\times 10^{9}$ cycles : pendant un cycle, la lumière parcourt $\\dfrac{3 \\times 10^{8}}{3 \\times 10^{9}} = 10^{8-9} = 10^{-1}$ m, soit $10$ cm. Pendant un cycle, même la lumière n'a pas le temps de traverser l'ordinateur.\nc) $1$ µs $= 10^{-6}$ s : $3 \\times 10^{8} \\times 10^{-6} = 3 \\times 10^{2} = 300$ m. L'élève annonce $300$ km, mille fois trop : c'est FAUX. $300$ km, c'est la distance parcourue en une MILLIseconde.\n⛔ Le piège : confondre micro et milli. Ils se suivent sur l'échelle des préfixes, à trois rangs l'un de l'autre : un facteur $1\\,000$.\nRéponse : $30$ cm en une nanoseconde ; $10$ cm pendant un cycle ; en une microseconde, $300$ m et non $300$ km.",
@@ -653,8 +653,8 @@ export const exercicesOrdresGrandeur4e: FicheExercicesData = {
           enonce:
             "Un bassin olympique mesure $50$ m de long, $25$ m de large et au moins $2$ m de profondeur. Un compte-gouttes de pharmacie délivre $20$ gouttes d'eau par millilitre.\na) Calcule le volume d'un bassin de $2$ m de profondeur, en m³, puis en litres. On rappelle que $1$ m³ $= 1\\,000$ L.\nb) Combien de gouttes d'eau contient-il ? Écris le résultat avec une puissance de dix, puis en mots.\nc) Un élève trouve $5 \\times 10^{7}$ gouttes. Quel facteur le sépare du bon résultat ? Quelle conversion a-t-il oubliée ?",
           reponses: [
-            { question: "a) m³", attendu: "2500" },
-            { question: "a) L", attendu: "2500000" },
+            { question: "a) m³", attendu: "2500", unite: "m³" },
+            { question: "a) L", attendu: "2500000", unite: "L" },
             { question: "b)", attendu: "5×10^10" },
             { question: "c)", attendu: "1000" },
           ],

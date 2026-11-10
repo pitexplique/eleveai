@@ -584,9 +584,9 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
             "a) Un carré de $1$ cm de côté est découpé en carrés de $1$ mm de côté (figure). Combien y en a-t-il ? En déduire combien de mm² vaut $1$ cm².\nb) Convertir : $6$ cm² en mm² ; $45\\,000$ cm² en m² ; $3{,}2$ dm² en cm².",
           reponses: [
             { question: "a)", attendu: "100" },
-            { question: "b) mm²", attendu: "600" },
-            { question: "b) m²", attendu: "4,5" },
-            { question: "b) cm²", attendu: "320" },
+            { question: "b) mm²", attendu: "600", unite: "mm²" },
+            { question: "b) m²", attendu: "4,5", unite: "m²" },
+            { question: "b) cm²", attendu: "320", unite: "cm²" },
           ],
           figure: grilleMm(false),
           correction:
@@ -693,9 +693,9 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
           enonce:
             "Un terrain de basket aux normes internationales est un rectangle de $28$ m sur $15$ m.\na) Calculer son aire en m².\nb) Convertir cette aire en cm².\nc) Pour repeindre le sol, une peinture couvre $12$ m² par litre. Combien de litres faut-il ?\nd) Elle est vendue en pots de $2{,}5$ L. Combien de pots faut-il acheter ?",
           reponses: [
-            { question: "a)", attendu: "420" },
-            { question: "b)", attendu: "4200000" },
-            { question: "c)", attendu: "35" },
+            { question: "a)", attendu: "420", unite: "m²" },
+            { question: "b)", attendu: "4200000", unite: "cm²" },
+            { question: "c)", attendu: "35", unite: "L" },
             { question: "d)", attendu: "14" },
           ],
           correction:
@@ -761,8 +761,8 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
           reponses: [
             { question: "a) class", attendu: "84" },
             { question: "a) éco", attendu: "42" },
-            { question: "b) L", attendu: "15330" },
-            { question: "b) m³", attendu: "15,33" },
+            { question: "b) L", attendu: "15330", unite: "L" },
+            { question: "b) m³", attendu: "15,33", unite: "m³" },
           ],
           correction:
             "a) Le débit est de $12$ L pour UNE minute. En $7$ min : $12 \\times 7 = 84$ L. Avec le pommeau économe : $6 \\times 7 = 42$ L.\nUnités : des L/min multipliés par des min donnent des L. Sur le dessin, chaque volume est l'AIRE d'un rectangle : le débit en hauteur, la durée en largeur.\nb) Économie par douche : $84 - 42 = 42$ L. En un an : $42 \\times 365 = 15\\,330$ L.\n$1$ m³ $= 1\\,000$ L, donc $15\\,330$ L $= 15\\,330 \\div 1\\,000 = 15{,}33$ m³.\n⛔ Le piège : écrire le résultat en « L/min ». $84$ L/min serait un débit ; le volume d'une douche se mesure en litres : les minutes se sont simplifiées.\nRéponse : $84$ L et $42$ L par douche ; $15\\,330$ L, soit $15{,}33$ m³ par an.",
@@ -829,8 +829,8 @@ export const exercicesGrandeursComposees4e: FicheExercicesData = {
             "Le Rhône, à Beaucaire, a un débit moyen d'environ $1\\,700$ m³/s. En France, chaque habitant utilise en moyenne environ $150$ L d'eau par jour à la maison, et la France métropolitaine compte environ $66$ millions d'habitants.\na) Quel volume d'eau passe à Beaucaire en une journée, c'est-à-dire en $86\\,400$ s ?\nb) Quel volume d'eau les habitants utilisent-ils à la maison en une journée ? Donner le résultat en litres, puis en m³.\nc) Combien de temps faut-il au Rhône pour débiter ce volume ? Arrondir à la minute.\nd) Vérifier par les unités que le calcul du c) donne bien une durée.",
           reponses: [
             { question: "a)", attendu: "146880000" },
-            { question: "b) L", attendu: "9900000000" },
-            { question: "b) m³", attendu: "9900000" },
+            { question: "b) L", attendu: "9900000000", unite: "L" },
+            { question: "b) m³", attendu: "9900000", unite: "m³" },
             { question: "c)", attendu: ["97", "1h37", "1h37min"], tolerance: 0.5 },
           ],
           correction:

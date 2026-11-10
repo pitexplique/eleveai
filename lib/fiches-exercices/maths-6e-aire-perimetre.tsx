@@ -381,8 +381,8 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         {
           enonce: "Un tapis de yoga est un rectangle.\nIl mesure $1{,}8$ m de long et $60$ cm de large.\nQuel est son périmètre, en cm puis en m ?",
           reponses: [
-            { question: "en cm", attendu: "480" },
-            { question: "en m", attendu: "4,8" },
+            { question: "en cm", attendu: "480", unite: "cm" },
+            { question: "en m", attendu: "4,8", unite: "m" },
           ],
           figure: plan("m", [
             { poly: [[0, 0], [1.8, 0], [1.8, 0.6], [0, 0.6]], fond: "vert" },
@@ -496,8 +496,8 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
         {
           enonce: "On encadre une affiche de $50$ cm sur $70$ cm avec une baguette de bois.\na) Quelle longueur de baguette faut-il, en cm puis en m ?\nb) La baguette coûte $6$ € le mètre. Quel est le prix ?",
           reponses: [
-            { question: "a) cm", attendu: "240" },
-            { question: "a) m", attendu: "2,4" },
+            { question: "a) cm", attendu: "240", unite: "cm" },
+            { question: "a) m", attendu: "2,4", unite: "m" },
             { question: "b)", attendu: "14,4" },
           ],
           correction:
@@ -612,8 +612,8 @@ export const exercicesAirePerimetre6e: FicheExercicesData = {
           enonce:
             "Nina veut faire le tour de sa fenêtre avec une guirlande de $5$ m.\nLa fenêtre est un rectangle de $90$ cm de large et $1{,}2$ m de haut.\na) Quel est le périmètre de la fenêtre, en cm puis en m ?\nb) La guirlande est-elle assez longue ? Combien en reste-t-il ?\nc) La porte-fenêtre mesure $90$ cm sur $2{,}1$ m. La guirlande suffit-elle ?",
           reponses: [
-            { question: "a) cm", attendu: "420" },
-            { question: "a) m", attendu: "4,2" },
+            { question: "a) cm", attendu: "420", unite: "cm" },
+            { question: "a) m", attendu: "4,2", unite: "m" },
             { question: "b)", attendu: ["oui"] },
             { question: "b) reste", attendu: ["80 cm", "0,8 m"] },
             { question: "c)", attendu: ["non"] },

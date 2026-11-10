@@ -673,8 +673,8 @@ export const exercicesThales4e: FicheExercicesData = {
           enonce:
             "Selon le GIEC (2021), le niveau moyen des mers pourrait monter de $0{,}28$ m à $1{,}01$ m d'ici 2100, selon nos émissions. Sur une plage en pente régulière, le pied de la dune $C$ est $3$ m plus haut que la mer, et à $24$ m à l'horizontale du bord de l'eau $A$ : le point $B$ est sous $C$, au niveau de la mer. Si la mer monte de $MN = 0{,}6$ m, le nouveau bord de l'eau est en $N$, sur la pente, à la verticale du point $M$ de $[AB]$.\na) Pourquoi $(MN) // (BC)$ ?\nb) De combien de mètres le bord de l'eau avance-t-il (la longueur $AM$) ? Quelle largeur de plage reste-t-il devant la dune ?\nc) Même question si la mer monte de $1$ m.",
           reponses: [
-            { question: "b) AM", attendu: "4,8" },
-            { question: "b) reste", attendu: "19,2" },
+            { question: "b) AM", attendu: "4,8", unite: "m" },
+            { question: "b) reste", attendu: "19,2", unite: "m" },
             { question: "c) AM", attendu: "8" },
           ],
           correction:

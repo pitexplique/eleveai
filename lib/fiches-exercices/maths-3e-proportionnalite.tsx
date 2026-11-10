@@ -294,7 +294,7 @@ export const exercicesProportionnalite3e: FicheExercicesData = {
           enonce:
             "Un verre doseur contient $80$ cL de lait.\na) On en verse $25\\,\\%$ dans un bol. Combien de centilitres reste-t-il dans le verre ?\nb) On rajoute dans le verre $25\\,\\%$ DE CE QU'IL CONTIENT. Combien contient-il maintenant ?\nc) Est-on revenu aux $80$ cL de départ ? Combien manque-t-il ?\nd) Par quel nombre la quantité de lait a-t-elle été multipliée en tout ?",
           reponses: [
-            { question: "a)", attendu: "60" },
+            { question: "a)", attendu: "60", unite: "cL" },
             { question: "b)", attendu: "75" },
             { question: "c)", attendu: ["non", "faux"] },
             { question: "c) écart", attendu: "5" },
@@ -318,7 +318,7 @@ export const exercicesProportionnalite3e: FicheExercicesData = {
         {
           enonce: "Un bus parcourt $27$ km en $36$ min. Quelle est sa vitesse moyenne, en km/h ?",
           reponses: [
-            { attendu: "45" },
+            { attendu: "45", unite: "km" },
           ],
           correction:
             "La durée doit être en heures : $36$ min $= 36 \\div 60 = 0{,}6$ h.\nVitesse $= 27 \\div 0{,}6 = 45$.\nRéponse : la vitesse moyenne du bus est $45$ km/h.\n⭐ Autre chemin, par proportionnalité : en $36$ min il fait $27$ km, donc en $12$ min il fait $9$ km, et en $60$ min il fait $5 \\times 9 = 45$ km.\n⛔ Le piège : calculer $27 \\div 36 = 0{,}75$ et répondre « $0{,}75$ km/h ». Ce nombre est en kilomètres par MINUTE.",

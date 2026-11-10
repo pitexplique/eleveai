@@ -581,9 +581,9 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
         {
           enonce: "On peut convertir en multipliant par $0{,}1$, $0{,}01$ ou $0{,}001$.\na) $1$ cm $= 0{,}01$ m. Combien de mètres font $175$ cm ?\nb) $1$ mm $= 0{,}1$ cm. Combien de centimètres font $8$ mm ?\nc) $1$ g $= 0{,}001$ kg. Combien de kilogrammes font $2\\,450$ g ?",
           reponses: [
-            { question: "a)", attendu: "1,75" },
-            { question: "b)", attendu: "0,8" },
-            { question: "c)", attendu: "2,45" },
+            { question: "a)", attendu: "1,75", unite: "m" },
+            { question: "b)", attendu: "0,8", unite: "cm" },
+            { question: "c)", attendu: "2,45", unite: "kg" },
           ],
           correction:
             "a) $175 \\times 0{,}01$, c'est $175 \\div 100 = 1{,}75$. Cela fait $1{,}75$ m.\nb) $8 \\times 0{,}1$, c'est $8 \\div 10 = 0{,}8$. Cela fait $0{,}8$ cm.\nc) $2\\,450 \\times 0{,}001$, c'est $2\\,450 \\div 1\\,000 = 2{,}45$. Cela fait $2{,}45$ kg.\n⭐ Contrôle : $175$ cm, c'est moins de $2$ m. Le résultat $1{,}75$ m va bien.\n⛔ Le piège du c) : multiplier par $1\\,000$. Un kilogramme contient beaucoup de grammes : le nombre doit baisser.\nRéponse : a) $1{,}75$ m ; b) $0{,}8$ cm ; c) $2{,}45$ kg.",
@@ -713,9 +713,9 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
           titre: "L'eau de la douche",
           enonce: "Dans cet exercice, une douche normale utilise $12{,}5$ L d'eau par minute. Avec un pommeau économe, elle utilise $7{,}5$ L par minute. Nora se douche $8$ minutes par jour.\na) Combien de litres utilise-t-elle avec la douche normale ? Avec le pommeau économe ?\nb) Combien de litres économise-t-elle par jour ?\nc) Et en $30$ jours ?\nd) $1\\,000$ L d'eau coûtent $4$ €. Combien coûte $1$ L ? Combien économise-t-elle en $30$ jours ?",
           reponses: [
-            { question: "a) norm.", attendu: "100" },
-            { question: "a) éco.", attendu: "60" },
-            { question: "b)", attendu: "40" },
+            { question: "a) norm.", attendu: "100", unite: "L" },
+            { question: "a) éco.", attendu: "60", unite: "L" },
+            { question: "b)", attendu: "40", unite: "L" },
             { question: "c)", attendu: "1200" },
             { question: "d) 1 L", attendu: "0,004" },
             { question: "d) 30 j", attendu: "4,8" },

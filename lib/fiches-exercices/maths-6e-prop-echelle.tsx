@@ -246,8 +246,8 @@ export const exercicesPropEchelle6e: FicheExercicesData = {
           enonce: "Sur une carte de randonnée, l'échelle est dessinée : $1$ cm représente $500$ m.\na) Que représente le trait a) de $2$ cm ?\nb) Et le trait b) de $4$ cm ? Donne la réponse en m, puis en km.",
           reponses: [
             { question: "a)", attendu: "1000" },
-            { question: "b) m", attendu: "2000" },
-            { question: "b) km", attendu: "2" },
+            { question: "b) m", attendu: "2000", unite: "m" },
+            { question: "b) km", attendu: "2", unite: "km" },
           ],
           figure: plan(40, "1 cm ↔ 500 m", [
             { nom: "a)", cm: 2, label: "2 cm" },
@@ -290,8 +290,8 @@ export const exercicesPropEchelle6e: FicheExercicesData = {
         {
           enonce: "Une voiture miniature est à l'échelle $\\dfrac{1}{10}$. Elle mesure $40$ cm de long.\na) Que veut dire l'échelle $\\dfrac{1}{10}$ ?\nb) Quelle est la longueur de la vraie voiture, en cm puis en m ?",
           reponses: [
-            { question: "b) cm", attendu: "400" },
-            { question: "b) m", attendu: "4" },
+            { question: "b) cm", attendu: "400", unite: "cm" },
+            { question: "b) m", attendu: "4", unite: "m" },
           ],
           correction:
             "a) $1$ cm sur la miniature représente $10$ cm en vrai.\nLes deux longueurs sont dans la MÊME unité.\nb) Je multiplie par $10$ : $40 \\times 10 = 400$ cm.\nEt $400$ cm $= 4$ m.\n⛔ Le piège : lire « $1$ cm pour $10$ m ». Avec une fraction, on garde la même unité.\nRéponse : la vraie voiture mesure $400$ cm, soit $4$ m.",
@@ -399,7 +399,7 @@ export const exercicesPropEchelle6e: FicheExercicesData = {
         {
           enonce: "Une maquette de maison est à l'échelle $\\dfrac{1}{50}$.\na) Sur la maquette, la maison mesure $12$ cm de haut. Quelle est sa vraie hauteur, en m ?\nb) La vraie porte mesure $2$ m de haut. Combien mesure-t-elle sur la maquette ?",
           reponses: [
-            { question: "a)", attendu: "6" },
+            { question: "a)", attendu: "6", unite: "m" },
             { question: "b)", attendu: "4" },
           ],
           correction:
@@ -425,8 +425,8 @@ export const exercicesPropEchelle6e: FicheExercicesData = {
         {
           enonce: "Sur une carte de randonnée, $1$ cm représente $250$ m. Le sentier a trois parties : $3$ cm, puis $4$ cm, puis $1$ cm. Quelle est la longueur réelle du sentier, en m puis en km ?",
           reponses: [
-            { question: "m", attendu: "2000" },
-            { question: "km", attendu: "2" },
+            { question: "m", attendu: "2000", unite: "m" },
+            { question: "km", attendu: "2", unite: "km" },
           ],
           correction:
             "Je multiplie chaque partie par $250$.\n$3 \\times 250 = 750$ m.\n$4 \\times 250 = 1\\,000$ m.\n$1 \\times 250 = 250$ m.\nJ'additionne : $750 + 1\\,000 + 250 = 2\\,000$ m.\nEt $2\\,000$ m $= 2$ km.\n⭐ Plus court : $3 + 4 + 1 = 8$ cm, et $8 \\times 250 = 2\\,000$ m.\nRéponse : le sentier mesure $2\\,000$ m, soit $2$ km.",
@@ -479,8 +479,8 @@ export const exercicesPropEchelle6e: FicheExercicesData = {
             { question: "a)", attendu: "200 ; 300" },
             { question: "b)", attendu: "500" },
             { question: "c)", attendu: "7" },
-            { question: "d) m", attendu: "850" },
-            { question: "d) cm", attendu: "17" },
+            { question: "d) m", attendu: "850", unite: "m" },
+            { question: "d) cm", attendu: "17", unite: "cm" },
           ],
           correction:
             "a) Je multiplie par $50$.\nDépart vers chêne : $4 \\times 50 = 200$ m.\nChêne vers puits : $6 \\times 50 = 300$ m.\nb) $200 + 300 = 500$ m.\nc) Réalité vers carte : je divise. $350 \\div 50 = 7$ cm.\nd) En mètres : $500 + 350 = 850$ m.\nSur la carte : $4 + 6 + 7 = 17$ cm.\n⭐ Contrôle : $17 \\times 50 = 850$ m.\nRéponse : $200$ m et $300$ m ; $500$ m ; $7$ cm ; $850$ m, soit $17$ cm.",
@@ -495,7 +495,7 @@ export const exercicesPropEchelle6e: FicheExercicesData = {
           titre: "La maquette d'avion",
           enonce: "Une maquette d'avion est à l'échelle $\\dfrac{1}{100}$.\na) La maquette mesure $45$ cm de long. Quelle est la longueur du vrai avion, en m ?\nb) Les ailes du vrai avion mesurent $36$ m d'un bout à l'autre. Combien sur la maquette ?\nc) La maquette tient-elle sur une table de $80$ cm de large ?",
           reponses: [
-            { question: "a)", attendu: "45" },
+            { question: "a)", attendu: "45", unite: "m" },
             { question: "b)", attendu: "36" },
             { question: "c)", attendu: ["oui", "vrai"] },
           ],

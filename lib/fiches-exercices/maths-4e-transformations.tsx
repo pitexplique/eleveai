@@ -589,8 +589,8 @@ export const exercicesTransformations4e: FicheExercicesData = {
             { question: "b)", attendu: "7,5" },
             { question: "c) où ?", attendu: ["au sommet", "sommet", "en haut", "tout en haut"] },
             { question: "c) trans", attendu: ["symétrie de centre O", "un symétrie de centre O", "une symétrie de centre O", "la symétrie de centre O", "symétrie centrale", "un symétrie centrale", "une symétrie centrale", "la symétrie centrale", "demi-tour", "un demi-tour", "une demi-tour", "la demi-tour"] },
-            { question: "d) 7,5", attendu: "60" },
-            { question: "d) 15", attendu: "120" },
+            { question: "d) 7,5", attendu: "60", unite: "m" },
+            { question: "d) 15", attendu: "120", unite: "m" },
           ],
           correction:
             "a) Les $32$ cabines se partagent le tour complet, $360°$ : $360 \\div 32 = 11{,}25°$. La rotation de centre $O$, le moyeu, et d'angle $11{,}25°$ envoie chaque cabine sur la suivante.\nb) Un quart de tour prend un quart du temps : $30 \\div 4 = 7{,}5$ minutes. Sur le schéma, la roue tourne dans le sens contraire des aiguilles d'une montre : la cabine passe de $P$, en bas, à $Q$, à la hauteur du centre.\nc) Au bout de $15$ minutes, la moitié du tour : $180°$. La cabine est au point le plus haut, $R$. Une rotation de $180°$ est une symétrie centrale : $R$ est le symétrique de $P$ par rapport à $O$.\nd) La rotation conserve les distances : la cabine reste toujours à $120 \\div 2 = 60$ m de $O$. Au bout de $7{,}5$ minutes, elle est à la hauteur de $O$ : elle est montée de $60$ m. Au bout de $15$ minutes, de tout le diamètre : $120$ m.\n⭐ Le schéma est à l'échelle : un carreau vaut $15$ m, et le rayon mesure $4$ carreaux.\n⛔ Le piège au d) : répondre $30$ m au bout d'un quart de tour, le quart de $120$ m. La cabine est montée d'un RAYON, $60$ m : la moitié de la hauteur, en un quart du temps.\nRéponse : la rotation de centre $O$ et d'angle $11{,}25°$ ; $7{,}5$ minutes ; au sommet, le symétrique du départ par rapport à $O$ ; $60$ m, puis $120$ m.",

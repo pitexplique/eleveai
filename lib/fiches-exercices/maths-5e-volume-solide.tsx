@@ -428,11 +428,11 @@ export const exercicesVolumeSolide5e: FicheExercicesData = {
         {
           enonce: "Complète.\na) $3$ L $=$ … dm³ $=$ … cm³\nb) $2{,}5$ m³ $=$ … L\nc) $750$ cm³ $=$ … L\nd) $4\\,500$ L $=$ … m³",
           reponses: [
-            { question: "a) dm³", attendu: "3" },
-            { question: "a) cm³", attendu: "3000" },
-            { question: "b)", attendu: "2500" },
-            { question: "c)", attendu: "0,75" },
-            { question: "d)", attendu: "4,5" },
+            { question: "a) dm³", attendu: "3", unite: "dm³" },
+            { question: "a) cm³", attendu: "3000", unite: "cm³" },
+            { question: "b)", attendu: "2500", unite: "L" },
+            { question: "c)", attendu: "0,75", unite: "L" },
+            { question: "d)", attendu: "4,5", unite: "m³" },
           ],
           correction:
             "Les trois égalités à connaître : $1$ L $= 1$ dm³ ; $1$ dm³ $= 1\\,000$ cm³ ; $1$ m³ $= 1\\,000$ L.\nPourquoi $1\\,000$ ? Un cube de $1$ dm d'arête mesure $10$ cm sur $10$ cm sur $10$ cm : $10 \\times 10 \\times 10 = 1\\,000$ petits cubes de $1$ cm³.\na) $3$ L $= 3$ dm³ $= 3 \\times 1\\,000 = 3\\,000$ cm³.\nb) $2{,}5$ m³ $= 2{,}5 \\times 1\\,000 = 2\\,500$ L.\nc) $750$ cm³ $= 750 \\div 1\\,000 = 0{,}75$ L : un peu moins d'un litre, c'est normal.\nd) $4\\,500$ L $= 4\\,500 \\div 1\\,000 = 4{,}5$ m³.\n⛔ Le piège : multiplier par $10$ ou par $100$, comme pour les longueurs ou les aires. Pour les volumes, on passe d'une unité à la suivante en multipliant par $1\\,000$.\nRéponse : a) $3$ dm³ et $3\\,000$ cm³ ; b) $2\\,500$ L ; c) $0{,}75$ L ; d) $4{,}5$ m³.",
@@ -496,8 +496,8 @@ export const exercicesVolumeSolide5e: FicheExercicesData = {
           enonce:
             "Un aquarium a la forme d'un pavé droit : $60$ cm de long, $30$ cm de large et $40$ cm de haut (mesures intérieures).\na) Calcule son volume en cm³, puis en litres.\nb) On le remplit d'eau jusqu'à $5$ cm du bord. Quel volume d'eau contient-il, en litres ?\nc) On le remplit avec un seau de $9$ L. Combien de seaux faut-il ?",
           reponses: [
-            { question: "a) cm³", attendu: "72000" },
-            { question: "a) L", attendu: "72" },
+            { question: "a) cm³", attendu: "72000", unite: "cm³" },
+            { question: "a) L", attendu: "72", unite: "L" },
             { question: "b)", attendu: "63" },
             { question: "c)", attendu: "7" },
           ],
@@ -531,8 +531,8 @@ export const exercicesVolumeSolide5e: FicheExercicesData = {
             "Une tente a la forme d'un prisme droit couché. Sa base est un triangle (en orange) de $1{,}6$ m de large au sol et de $1{,}2$ m de haut. La tente mesure $2$ m de long.\na) Calcule l'aire du triangle.\nb) Calcule le volume de la tente en m³, puis en litres.\nc) Le modèle pour trois personnes a le même triangle, mais il mesure $3$ m de long. Quel est son volume ?",
           reponses: [
             { question: "a)", attendu: "0,96" },
-            { question: "b) m³", attendu: "1,92" },
-            { question: "b) L", attendu: "1920" },
+            { question: "b) m³", attendu: "1,92", unite: "m³" },
+            { question: "b) L", attendu: "1920", unite: "L" },
             { question: "c)", attendu: "2,88" },
           ],
           figure: prisme([[0, 0], [1.6, 0], [0.8, 1.2]], 2, {
@@ -571,8 +571,8 @@ export const exercicesVolumeSolide5e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "12000" },
             { question: "b)", attendu: "2160" },
-            { question: "c) cm³", attendu: "14160" },
-            { question: "c) L", attendu: "14,16" },
+            { question: "c) cm³", attendu: "14160", unite: "cm³" },
+            { question: "c) L", attendu: "14,16", unite: "L" },
           ],
           figure: prisme([[0, 0], [24, 0], [24, 25], [12, 34], [0, 25]], 20, {
             traits: [
@@ -594,8 +594,8 @@ export const exercicesVolumeSolide5e: FicheExercicesData = {
           enonce:
             "Une piscine a la forme d'un pavé droit de $10$ m de long, $4$ m de large et $1{,}5$ m de profondeur.\na) Calcule son volume en m³.\nb) Combien de litres d'eau faut-il pour la remplir ?\nc) Un tuyau d'arrosage débite $15$ L par minute. Combien de minutes faut-il pour la remplir ? Et combien d'heures, environ ?",
           reponses: [
-            { question: "a)", attendu: "60" },
-            { question: "b)", attendu: "60000" },
+            { question: "a)", attendu: "60", unite: "m³" },
+            { question: "b)", attendu: "60000", unite: "L" },
             { question: "c) min", attendu: "4000" },
             { question: "c) h", attendu: "67", tolerance: 0.5 },
           ],
@@ -673,11 +673,11 @@ export const exercicesVolumeSolide5e: FicheExercicesData = {
           enonce:
             "Une cuve de récupération d'eau de pluie est un cylindre de $0{,}4$ m de rayon et de $1$ m de haut. On prend $\\pi \\approx 3{,}14$.\na) Calcule l'aire du fond de la cuve, en m².\nb) Calcule le volume de la cuve en m³, puis en litres.\nc) La cuve contient déjà $100$ L. Un orage y envoie $450$ L. Va-t-elle déborder ? De combien de litres ?\nd) Une fois la cuve pleine, combien d'arrosoirs de $10$ L peut-on remplir entièrement ?",
           reponses: [
-            { question: "a)", attendu: "0,5024" },
-            { question: "b) m³", attendu: "0,5024" },
-            { question: "b) L", attendu: "502,4" },
+            { question: "a)", attendu: "0,5024", unite: "m²" },
+            { question: "b) m³", attendu: "0,5024", unite: "m³" },
+            { question: "b) L", attendu: "502,4", unite: "L" },
             { question: "c)", attendu: ["oui", "vrai"] },
-            { question: "c) L", attendu: ["47,6", "48"], tolerance: 0.5 },
+            { question: "c) L", attendu: ["47,6", "48"], tolerance: 0.5, unite: "L" },
             { question: "d)", attendu: "50" },
           ],
           figure: cylindres([{ r: 0.4, h: 1, rayon: "0,4 m", hauteur: "1 m" }]),
@@ -716,8 +716,8 @@ export const exercicesVolumeSolide5e: FicheExercicesData = {
           reponses: [
             { question: "a) bas", attendu: "3617", tolerance: 0.5 },
             { question: "a) haut", attendu: "1206", tolerance: 0.5 },
-            { question: "b) cm³", attendu: "4823", tolerance: 0.5 },
-            { question: "b) L", attendu: "4,8", tolerance: 0.05 },
+            { question: "b) cm³", attendu: "4823", tolerance: 0.5, unite: "cm³" },
+            { question: "b) L", attendu: "4,8", tolerance: 0.05, unite: "L" },
             { question: "c)", attendu: "301", tolerance: 0.5 },
           ],
           figure: cylindres(

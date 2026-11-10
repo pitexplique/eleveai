@@ -149,7 +149,7 @@ export const exercicesStatistiques3e: FicheExercicesData = {
         {
           enonce: "Voici les tailles, en cm, des sept joueurs d'une équipe de volley, de J1 à J7 : $186$, $201$, $194$, $178$, $205$, $190$, $197$. Calculer l'étendue de cette série.",
           reponses: [
-            { attendu: "27" },
+            { attendu: "27", unite: "cm" },
           ],
           correction:
             "L'étendue mesure l'écart entre les deux extrêmes : la plus grande valeur moins la plus petite.\nLa plus grande taille est $205$ cm (J5), la plus petite $178$ cm (J4).\nÉtendue : $205 - 178 = 27$ cm.\n⛔ Le piège : répondre $205$, la valeur maximale. L'étendue n'est pas un maximum, c'est un ÉCART.\n⛔ Autre piège : faire « dernière moins première » dans la liste non rangée, $197 - 186 = 11$.\nRéponse : l'étendue est $27$ cm : entre le plus petit et le plus grand joueur, il y a $27$ cm.",
@@ -202,9 +202,9 @@ export const exercicesStatistiques3e: FicheExercicesData = {
           enonce:
             "Reprendre les hauteurs de pluie de Paris de l'exercice 2, en mm, de janvier à décembre : $48$, $42$, $45$, $46$, $69$, $51$, $59$, $58$, $45$, $55$, $54$, $62$.\na) Calculer la hauteur de pluie sur l'année, puis la moyenne par mois, au dixième.\nb) Déterminer la médiane.\nc) Moyenne et médiane sont-elles proches ? Qu'est-ce que cela dit de la série ?",
           reponses: [
-            { question: "a) total", attendu: "634" },
-            { question: "a) moy.", attendu: "52,8", tolerance: 0.05 },
-            { question: "b)", attendu: "52,5" },
+            { question: "a) total", attendu: "634", unite: "mm" },
+            { question: "a) moy.", attendu: "52,8", tolerance: 0.05, unite: "mm" },
+            { question: "b)", attendu: "52,5", unite: "mm" },
             { question: "c)", attendu: ["oui", "vrai"] },
           ],
           correction:
@@ -256,7 +256,7 @@ export const exercicesStatistiques3e: FicheExercicesData = {
         {
           enonce: "Sur six semaines, la pluie moyenne relevée par une station est de $12$ mm par semaine. Les cinq premières semaines ont donné $8$, $15$, $10$, $14$ et $9$ mm. Combien de millimètres sont tombés la sixième semaine ?",
           reponses: [
-            { attendu: "16" },
+            { attendu: "16", unite: "mm" },
           ],
           correction:
             "Une moyenne de $12$ sur $6$ semaines, c'est un total de $12 \\times 6 = 72$ mm.\nLes cinq semaines connues font $8 + 15 + 10 + 14 + 9 = 56$ mm.\nLa sixième a donc reçu $72 - 56 = 16$ mm.\n⭐ Je vérifie : $\\dfrac{56 + 16}{6} = \\dfrac{72}{6} = 12$.\n⛔ Le piège : répondre $12$, « la moyenne ». Les cinq premières semaines ont une moyenne de $11{,}2$ : il faut compenser.\nRéponse : $16$ mm la sixième semaine.",
@@ -267,8 +267,8 @@ export const exercicesStatistiques3e: FicheExercicesData = {
           enonce:
             "Pendant dix jours d'août, une station météo relève la pluie tombée chaque jour, en mm : $0$, $2$, $0$, $1$, $3$, $0$, $85$, $2$, $1$, $0$. Le septième jour, un orage a éclaté.\na) Calculer la moyenne et la médiane.\nb) Combien de jours ont reçu plus que la moyenne ?\nc) Quel indicateur décrit le mieux « une journée ordinaire » ? Lequel permet de retrouver la quantité d'eau tombée en tout ?",
           reponses: [
-            { question: "a) moy.", attendu: "9,4" },
-            { question: "a) méd.", attendu: "1" },
+            { question: "a) moy.", attendu: "9,4", unite: "mm" },
+            { question: "a) méd.", attendu: "1", unite: "mm" },
             { question: "b)", attendu: "1" },
             { question: "c) jour", attendu: ["médiane", "la médiane"] },
             { question: "c) total", attendu: ["moyenne", "la moyenne"] },

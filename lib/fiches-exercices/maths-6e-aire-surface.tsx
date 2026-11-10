@@ -434,9 +434,9 @@ export const exercicesAireSurface6e: FicheExercicesData = {
         {
           enonce: "Un panneau d'affichage mesure $1{,}5$ m sur $1$ m.\nOn y colle des affiches carrées de $50$ cm de côté.\na) Quelle est l'aire du panneau, en m² puis en dm² ?\nb) Quelle est l'aire d'une affiche, en dm² ?\nc) Combien d'affiches peut-on coller, sans les superposer ?",
           reponses: [
-            { question: "a) m²", attendu: "1,5" },
-            { question: "a) dm²", attendu: "150" },
-            { question: "b)", attendu: "25" },
+            { question: "a) m²", attendu: "1,5", unite: "m²" },
+            { question: "a) dm²", attendu: "150", unite: "dm²" },
+            { question: "b)", attendu: "25", unite: "dm²" },
             { question: "c)", attendu: "6" },
           ],
           figure: plan("cm", [

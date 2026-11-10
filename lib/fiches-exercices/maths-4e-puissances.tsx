@@ -550,7 +550,7 @@ export const exercicesPuissances4e: FicheExercicesData = {
           enonce:
             "Un bassin olympique mesure $50$ m de long et $25$ m de large ; on prend $2$ m de profondeur.\na) Calcule son volume en m³. Sachant que $1$ m³ $= 10^{3}$ L et $1$ L $= 10^{3}$ mL, écris ce volume en litres, puis en millilitres, en notation scientifique.\nb) Il faut $20$ gouttes d'eau pour faire $1$ mL. Quel est le volume d'une goutte, en mL ? Écris-le en notation scientifique.\nc) Combien de gouttes faut-il pour remplir le bassin ?",
           reponses: [
-            { question: "a) m³", attendu: "2500" },
+            { question: "a) m³", attendu: "2500", unite: "m³" },
             { question: "a) L", attendu: ["2,5×10^6"], exact: true },
             { question: "a) mL", attendu: ["2,5×10^9"], exact: true },
             { question: "b)", attendu: ["5×10^(-2)"], exact: true },

@@ -615,12 +615,12 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
           enonce:
             "Pour $4$ personnes, une recette de crêpes demande $250$ g de farine, $3$ œufs et $50$ cl de lait.\na) Combien faut-il de chaque ingrédient pour $12$ personnes ?\nb) Et pour $8$ personnes ?\nc) Une boîte contient $6$ œufs. Combien de boîtes faut-il acheter pour $12$ personnes ?",
           reponses: [
-            { question: "a) g", attendu: "750" },
+            { question: "a) g", attendu: "750", unite: "g" },
             { question: "a) œufs", attendu: "9" },
-            { question: "a) cl", attendu: "150" },
-            { question: "b) g", attendu: "500" },
+            { question: "a) cl", attendu: "150", unite: "cl" },
+            { question: "b) g", attendu: "500", unite: "g" },
             { question: "b) œufs", attendu: "6" },
-            { question: "b) cl", attendu: "100" },
+            { question: "b) cl", attendu: "100", unite: "cl" },
             { question: "c)", attendu: "2" },
           ],
           correction:
@@ -688,9 +688,9 @@ export const exercicesEntierCalculMental6e: FicheExercicesData = {
           enonce:
             "Sur la piste du stade, un tour mesure $400$ m. Lina s'entraîne pour courir $10$ km.\na) Combien de mètres fait-elle en $8$ tours ?\nb) $10$ km, c'est $10\\,000$ m. Combien de tours faut-il pour faire $10$ km ?\nc) Lina a déjà fait $17$ tours. Combien de mètres lui reste-t-il ?",
           reponses: [
-            { question: "a)", attendu: "3200" },
+            { question: "a)", attendu: "3200", unite: "m" },
             { question: "b)", attendu: "25" },
-            { question: "c)", attendu: "3200" },
+            { question: "c)", attendu: "3200", unite: "m" },
           ],
           correction:
             "a) $8 \\times 400$ : je calcule $8 \\times 4 = 32$, puis j'ajoute deux zéros. Elle fait $3\\,200$ m.\nb) $5$ tours font $5 \\times 400 = 2\\,000$ m.\nEt $10\\,000$ m, c'est $5$ fois $2\\,000$ m. Il faut donc $5 \\times 5 = 25$ tours.\nc) Il lui reste $25 - 17 = 8$ tours. C'est $3\\,200$ m, comme au a) !\n⭐ Autre chemin : $17 \\times 400 = 6\\,800$, et $10\\,000 - 6\\,800 = 3\\,200$.\n⛔ Le piège au b) : diviser $10$ par $400$. Je passe d'abord les kilomètres en mètres.\nRéponse : a) $3\\,200$ m ; b) $25$ tours ; c) $3\\,200$ m.",

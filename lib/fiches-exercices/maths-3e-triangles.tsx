@@ -614,7 +614,7 @@ export const exercicesTriangles3e: FicheExercicesData = {
             "À vol d'oiseau, Paris est à $391$ km de Lyon, Lyon à $278$ km de Marseille, et Paris à $660$ km de Marseille.\na) Ces trois villes forment-elles un vrai triangle ?\nb) Un avion va de Paris à Marseille avec une escale à Lyon, en ligne droite à chaque fois. Combien de kilomètres fait-il de plus que le vol direct ?\nc) Que peut-on dire de la position de Lyon ?\nd) Un site affiche : Paris-Lyon $391$ km, Lyon-Marseille $278$ km, Paris-Marseille $680$ km. Pourquoi est-ce forcément faux ?",
           reponses: [
             { question: "a)", attendu: ["oui", "vrai"] },
-            { question: "b)", attendu: "9" },
+            { question: "b)", attendu: "9", unite: "km" },
           ],
           correction:
             "a) Le plus grand côté est Paris-Marseille, $660$ km. $391 + 278 = 669$, et $669 > 660$ : c'est un vrai triangle, de justesse.\nb) Avec l'escale : $391 + 278 = 669$ km. En direct : $660$ km. Il fait $669 - 660 = 9$ km de plus.\nc) La somme dépasse à peine le grand côté : le triangle est presque aplati. Lyon est presque sur la ligne droite de Paris à Marseille, le détour ne fait que $9$ km sur $660$.\nd) $391 + 278 = 669$, et $669 < 680$ : le trajet avec escale serait plus COURT que le vol direct. Or la ligne droite est le plus court chemin : c'est impossible.\n⛔ Le piège : croire que « presque plat » veut dire « pas un triangle ». Tant que $669 > 660$, même de peu, les trois villes ne sont pas alignées.\nRéponse : un vrai triangle, très aplati ; l'escale à Lyon rallonge le trajet de $9$ km seulement.",

@@ -541,8 +541,8 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
             "La cantine pèse le pain jeté chaque jour. Lundi : $2{,}5$ kg. Mardi : $1\\,800$ g. Jeudi : $3$ kg. Vendredi : $900$ g. Le mercredi, la cantine est fermée.\na) Écris toutes les masses en grammes.\nb) Construis le tableau des relevés.\nc) Combien de pain jeté dans la semaine ? Donne la réponse en g, puis en kg.\nd) Faut-il écrire « $0$ » pour le mercredi ?",
           reponses: [
             { question: "a)", attendu: "2500 ; 1800 ; 3000 ; 900" },
-            { question: "c) g", attendu: "8200" },
-            { question: "c) kg", attendu: "8,2" },
+            { question: "c) g", attendu: "8200", unite: "g" },
+            { question: "c) kg", attendu: "8,2", unite: "kg" },
             { question: "d)", attendu: ["non"] },
           ],
           correction:

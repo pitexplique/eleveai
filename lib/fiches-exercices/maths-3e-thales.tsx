@@ -555,7 +555,7 @@ export const exercicesThales3e: FicheExercicesData = {
           enonce:
             "Sur la Streif, la piste de descente de Kitzbühel (Autriche), le passage de la Mausefalle atteint une pente de $85$ % : pour $100$ m parcourus à l'horizontale, on descend de $85$ m. On le modélise par une pente droite $[AC]$ : $B$ est au niveau de $A$, à la verticale de $C$, avec $AB = 100$ m et $BC = 85$ m. Un skieur est en $N$, sur la pente ; $M$ est au niveau de $A$, à la verticale de $N$, avec $AM = 40$ m.\na) De combien de mètres le skieur est-il plus haut que $A$ ?\nb) Quelle distance de piste lui reste-t-il jusqu'en $A$ ? Arrondir au dixième.\nc) Un autre skieur est $51$ m plus haut que $A$. À quelle distance horizontale de $A$ est-il ?",
           reponses: [
-            { question: "a)", attendu: "34" },
+            { question: "a)", attendu: "34", unite: "m" },
             { question: "b)", attendu: "52,5", tolerance: 0.05 },
             { question: "c)", attendu: "60" },
           ],

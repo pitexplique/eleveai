@@ -286,8 +286,8 @@ export const exercicesRacineCarree3e: FicheExercicesData = {
           enonce:
             "Un carreau carré a une aire de $0{,}09$ m².\na) Quelle est la longueur de son côté, en mètres puis en centimètres ?\nb) Combien de ces carreaux faut-il, alignés, pour couvrir une bande de $3{,}6$ m de long ?\nc) Une pièce carrée de $12{,}96$ m² est carrelée avec ces carreaux. Combien en faut-il ?",
           reponses: [
-            { question: "a) m", attendu: "0,3" },
-            { question: "a) cm", attendu: "30" },
+            { question: "a) m", attendu: "0,3", unite: "m" },
+            { question: "a) cm", attendu: "30", unite: "cm" },
             { question: "b)", attendu: "12" },
             { question: "c)", attendu: "144" },
           ],
@@ -371,7 +371,7 @@ export const exercicesRacineCarree3e: FicheExercicesData = {
           reponses: [
             { question: "b)", attendu: "44 ; 45" },
             { question: "c)", attendu: "44,72", tolerance: 0.005 },
-            { question: "d)", attendu: "15,28", tolerance: 0.005 },
+            { question: "d)", attendu: "15,28", tolerance: 0.005, unite: "m" },
           ],
           correction:
             "a) La diagonale coupe le rectangle en deux triangles rectangles. Par le théorème de Pythagore : $d^2 = 40^2 + 20^2 = 1\\,600 + 400 = 2\\,000$. Donc $d = \\sqrt{2\\,000}$ m.\nb) $44^2 = 1\\,936$ et $45^2 = 2\\,025$. Comme $1\\,936 < 2\\,000 < 2\\,025$, j'ai $44 < d < 45$.\nc) À la calculatrice, $\\sqrt{2\\,000} \\approx 44{,}72$ m. C'est bien entre $44$ et $45$.\nd) En longeant deux côtés : $40 + 20 = 60$ m. Il gagne $60 - 44{,}72 = 15{,}28$ m.\n⛔ Le piège : écrire $\\sqrt{40^2 + 20^2} = 40 + 20 = 60$. C'est justement le trajet qu'il évite : la racine d'une somme de carrés n'est pas la somme.\nRéponse : la diagonale mesure $\\sqrt{2\\,000} \\approx 44{,}72$ m, soit $15{,}28$ m de moins que le tour par les côtés.",

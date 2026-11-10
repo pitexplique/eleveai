@@ -364,9 +364,9 @@ export const exercicesFractionsCalcul4e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "1/60" },
             { question: "b)", attendu: "1/120" },
-            { question: "c) douce", attendu: "30" },
-            { question: "c) gelée", attendu: "20" },
-            { question: "c) liq.", attendu: "10" },
+            { question: "c) douce", attendu: "30", unite: "L" },
+            { question: "c) gelée", attendu: "20", unite: "L" },
+            { question: "c) liq.", attendu: "10", unite: "L" },
             { question: "d)", attendu: "117" },
           ],
           correction:

@@ -525,9 +525,9 @@ export const exercicesAires4e: FicheExercicesData = {
         {
           enonce: "On carrelle le sol d'une pièce rectangulaire de $4$ m sur $3$ m avec des carreaux carrés de $50$ cm de côté.\na) Calculer l'aire de la pièce en m², puis en cm².\nb) Calculer l'aire d'un carreau en cm².\nc) Combien faut-il de carreaux, sans compter les chutes ?",
           reponses: [
-            { question: "a) m²", attendu: "12" },
-            { question: "a) cm²", attendu: "120000" },
-            { question: "b)", attendu: "2500" },
+            { question: "a) m²", attendu: "12", unite: "m²" },
+            { question: "a) cm²", attendu: "120000", unite: "cm²" },
+            { question: "b)", attendu: "2500", unite: "cm²" },
             { question: "c)", attendu: "48" },
           ],
           correction:
@@ -630,7 +630,7 @@ export const exercicesAires4e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "100" },
             { question: "b)", attendu: "80" },
-            { question: "c)", attendu: "51200" },
+            { question: "c)", attendu: "51200", unite: "L" },
           ],
           correction:
             "a) Deux pans de $10 \\times 5 = 50$ m² chacun : $2 \\times 50 = 100$ m² de tuiles.\nb) Vu d'en haut, le toit recouvre le rectangle de la maison : $10 \\times 8 = 80$ m².\nPourquoi moins que les tuiles ? Chaque pan est penché : ses $5$ m de pente ne couvrent que $4$ m au sol, la moitié des $8$ m. Sur le pignon dessiné, $5$ m de pente, $4$ m au sol et $3$ m de haut.\nc) La pluie tombe verticalement : le toit reçoit ce qui tomberait sur les $80$ m² de sol qu'il abrite. Chaque m² reçoit $640$ L par an, donc $80 \\times 640 = 51\\,200$ L.\n⛔ Le piège : compter l'aire des tuiles, $100 \\times 640 = 64\\,000$ L. Un toit penché ne reçoit pas plus de pluie qu'un toit plat de même surface au sol.\nRéponse : $100$ m² de tuiles, $80$ m² au sol, et environ $51\\,200$ L d'eau par an.",
@@ -680,8 +680,8 @@ export const exercicesAires4e: FicheExercicesData = {
           enonce:
             "Deux sœurs héritent d'un champ triangulaire. Un côté, le long de la route, mesure $120$ m ; le sommet opposé est à $80$ m de la route.\na) Calculer l'aire du champ en m², puis en hectares.\nb) Lina propose de couper le champ en ligne droite, du sommet jusqu'au MILIEU du côté de la route. Les deux parts ont-elles la même aire ?\nc) Sarah propose plutôt une clôture parallèle à la route, à mi-chemin du sommet, donc à $40$ m de la route. Calculer l'aire de la part du haut. Ce partage est-il juste ?",
           reponses: [
-            { question: "a) m²", attendu: "4800" },
-            { question: "a) ha", attendu: "0,48" },
+            { question: "a) m²", attendu: "4800", unite: "m²" },
+            { question: "a) ha", attendu: "0,48", unite: "ha" },
             { question: "b)", attendu: ["oui", "vrai"] },
             { question: "c) aire", attendu: "1200" },
             { question: "c) juste", attendu: ["non", "faux"] },

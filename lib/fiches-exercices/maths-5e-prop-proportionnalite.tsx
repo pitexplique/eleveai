@@ -253,7 +253,7 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
           enonce: "Le graphique donne le prix payé (en €, axe vertical) selon la masse de pommes achetée (en kg, axe horizontal).\na) Lis le prix de $3$ kg de pommes.\nb) Quelle masse de pommes achète-t-on avec $8$ € ?\nc) Le prix est-il proportionnel à la masse ? Donne le coefficient.",
           reponses: [
             { question: "a)", attendu: "6" },
-            { question: "b)", attendu: "4" },
+            { question: "b)", attendu: "4", unite: "kg" },
             { question: "c)", attendu: ["oui", "vrai"] },
             { question: "c) coef.", attendu: "2" },
           ],
@@ -340,11 +340,11 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
         {
           enonce: "Aya (en bleu) et Noé (en orange) partent en randonnée, chacun à son rythme, toujours le même. Le graphique donne la distance parcourue (en km, axe vertical) selon la durée de marche (en heures, axe horizontal).\na) Pourquoi la distance est-elle proportionnelle à la durée, pour chacun ?\nb) Lis la distance parcourue par chacun en $2$ h.\nc) Calcule le coefficient de chacun. Que représente-t-il ?\nd) Le refuge est à $12$ km. Combien de temps met chacun pour y arriver ?",
           reponses: [
-            { question: "b) Aya", attendu: "8" },
-            { question: "b) Noé", attendu: "6" },
+            { question: "b) Aya", attendu: "8", unite: "km" },
+            { question: "b) Noé", attendu: "6", unite: "km" },
             { question: "c) Aya", attendu: "4" },
-            { question: "c) Noé", attendu: "3" },
-            { question: "d) Aya", attendu: "3" },
+            { question: "c) Noé", attendu: "3", unite: "km" },
+            { question: "d) Aya", attendu: "3", unite: "km" },
             { question: "d) Noé", attendu: "4" },
           ],
           figure: repere([-1, 4, -1, 13], [{ pts: [[0, 0], [3, 12]] }, { pts: [[0, 0], [3, 9]], couleur: ORANGE }], [], undefined, true),
@@ -412,7 +412,7 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
           enonce: "Au pressoir d'un village, $10$ kg de pommes donnent $6$ L de jus (un modèle). La quantité de jus est proportionnelle à la masse de pommes.\na) Quelle quantité de jus donne $1$ kg de pommes ?\nb) Une famille apporte $45$ kg de pommes. Combien de litres de jus obtient-elle ?\nc) Un voisin veut $15$ L de jus. Quelle masse de pommes doit-il apporter ?\nd) Le jus des $45$ kg est versé dans des bouteilles de $75$ cL. Combien de bouteilles remplit-on ?",
           reponses: [
             { question: "a)", attendu: "0,6" },
-            { question: "b)", attendu: "27" },
+            { question: "b)", attendu: "27", unite: "L" },
             { question: "c)", attendu: "25" },
             { question: "d)", attendu: "36" },
           ],
@@ -425,7 +425,7 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
           titre: "Le robinet qui goutte",
           enonce: "Un robinet qui goutte perd $0{,}5$ L d'eau en $20$ minutes (un modèle). L'eau perdue est proportionnelle à la durée.\na) Combien de litres perd-il en $1$ heure ?\nb) En $1$ jour ?\nc) En $1$ an, soit $365$ jours ?\nd) Une douche de $5$ minutes utilise $60$ L (exercice 4). À combien de douches correspond l'eau perdue en un an ?",
           reponses: [
-            { question: "a)", attendu: "1,5" },
+            { question: "a)", attendu: "1,5", unite: "L" },
             { question: "b)", attendu: "36" },
             { question: "c)", attendu: "13140" },
             { question: "d)", attendu: "219" },
@@ -467,8 +467,8 @@ export const exercicesPropProportionnalite5e: FicheExercicesData = {
           titre: "Les pas de Tom",
           enonce: "Tom compte ses pas : $10$ pas mesurent $8$ m. Ses pas ont toujours la même longueur.\na) Quelle est la longueur d'un pas de Tom, en mètres puis en centimètres ?\nb) Un tour de piste d'athlétisme mesure $400$ m. Combien de pas fait-il pour un tour ?\nc) Le soir, sa montre a compté $9\\,000$ pas. Quelle distance a-t-il parcourue, en kilomètres ?\nd) Il veut marcher $10$ km. Combien de pas doit-il faire ?",
           reponses: [
-            { question: "a) en m", attendu: "0,8" },
-            { question: "a) en cm", attendu: "80" },
+            { question: "a) en m", attendu: "0,8", unite: "m" },
+            { question: "a) en cm", attendu: "80", unite: "cm" },
             { question: "b)", attendu: "500" },
             { question: "c)", attendu: "7,2" },
             { question: "d)", attendu: "12500" },

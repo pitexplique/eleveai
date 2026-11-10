@@ -550,7 +550,7 @@ export const exercicesTransformations3e: FicheExercicesData = {
             { question: "b) larg.", attendu: ["1,5 m", "150cm"] },
             { question: "b) haut.", attendu: ["112,5cm", "1,125 m"] },
             { question: "c) ×", attendu: "5625" },
-            { question: "c) m²", attendu: "1,6875" },
+            { question: "c) m²", attendu: "1,6875", unite: "m²" },
             { question: "d)", attendu: ["4 m", "400cm"] },
           ],
           correction:
@@ -601,9 +601,9 @@ export const exercicesTransformations3e: FicheExercicesData = {
           enonce:
             "Une carte de randonnée est à l'échelle $\\dfrac{1}{25\\,000}$ : elle est une réduction du terrain, de rapport $\\dfrac{1}{25\\,000}$.\na) Sur la carte, un sentier mesure $4{,}8$ cm. Quelle est sa longueur réelle, en km ?\nb) Un lac occupe $3$ cm² sur la carte. Quelle est son aire réelle, en m², puis en hectares ?\nc) Un randonneur calcule : « $3 \\times 25\\,000 = 75\\,000$ cm², soit $7{,}5$ m² ». Qu'en penser ?",
           reponses: [
-            { question: "a)", attendu: "1,2" },
-            { question: "b) m²", attendu: "187500" },
-            { question: "b) ha", attendu: "18,75" },
+            { question: "a)", attendu: "1,2", unite: "km" },
+            { question: "b) m²", attendu: "187500", unite: "m²" },
+            { question: "b) ha", attendu: "18,75", unite: "ha" },
           ],
           correction:
             "a) Du terrain à la carte, les longueurs sont divisées par $25\\,000$ ; de la carte au terrain, je multiplie : $4{,}8 \\times 25\\,000 = 120\\,000$ cm, soit $1{,}2$ km.\nb) Les aires, elles, sont multipliées par le CARRÉ : $25\\,000^2 = 625\\,000\\,000$.\n$3 \\times 625\\,000\\,000 = 1\\,875\\,000\\,000$ cm². Comme $1$ m² $= 10\\,000$ cm², cela fait $187\\,500$ m².\nEt $1$ ha $= 10\\,000$ m² : le lac couvre $18{,}75$ ha.\nc) Il a multiplié l'aire par $25\\,000$ au lieu de $25\\,000^2$. Un lac de $7{,}5$ m², c'est une flaque : le résultat est absurde.\n⛔ Le piège : l'échelle d'une carte vaut pour les LONGUEURS. Pour une aire, elle compte deux fois.\nRéponse : le sentier mesure $1{,}2$ km et le lac $187\\,500$ m², soit $18{,}75$ ha.",

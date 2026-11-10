@@ -250,10 +250,10 @@ export const exercicesAires3e: FicheExercicesData = {
         {
           enonce: "Convertir.\na) $3$ m² en cm²\nb) $45\\,000$ cm² en m²\nc) $2{,}5$ ha en m²\nd) $0{,}6$ km² en ha",
           reponses: [
-            { question: "a)", attendu: "30000" },
-            { question: "b)", attendu: "4,5" },
-            { question: "c)", attendu: "25000" },
-            { question: "d)", attendu: "60" },
+            { question: "a)", attendu: "30000", unite: "cm²" },
+            { question: "b)", attendu: "4,5", unite: "m²" },
+            { question: "c)", attendu: "25000", unite: "m²" },
+            { question: "d)", attendu: "60", unite: "ha" },
           ],
           correction:
             "Pour convertir une aire, je repars d'un carré. Un carré de $1$ m de côté mesure $100$ cm sur $100$ cm : il contient $100 \\times 100$ petits carrés de $1$ cm de côté, donc $1$ m² $= 10\\,000$ cm².\na) $3 \\times 10\\,000 = 30\\,000$ cm².\nb) Dans l'autre sens, je divise : $45\\,000 \\div 10\\,000 = 4{,}5$ m².\nc) Un hectare est un carré de $100$ m de côté : $1$ ha $= 100 \\times 100 = 10\\,000$ m². Donc $2{,}5$ ha $= 25\\,000$ m².\nd) $1$ km² est un carré de $1\\,000$ m de côté : $1\\,000 \\times 1\\,000 = 1\\,000\\,000$ m², c'est-à-dire $100$ ha. Donc $0{,}6$ km² $= 60$ ha.\n⛔ Le piège : multiplier par $100$, comme pour une longueur, et écrire $3$ m² $= 300$ cm². Les centimètres se comptent dans les DEUX sens du carré : $100$ en longueur ET $100$ en largeur.\nRéponse : $30\\,000$ cm² ; $4{,}5$ m² ; $25\\,000$ m² ; $60$ ha.",
@@ -269,8 +269,8 @@ export const exercicesAires3e: FicheExercicesData = {
         {
           enonce: "Un tableau blanc mesure $2{,}5$ m de long et $80$ cm de large.\na) Calculer son aire en m².\nb) Calculer son aire en cm², et vérifier que les deux réponses disent la même chose.",
           reponses: [
-            { question: "a)", attendu: "2" },
-            { question: "b)", attendu: "20000" },
+            { question: "a)", attendu: "2", unite: "m²" },
+            { question: "b)", attendu: "20000", unite: "cm²" },
           ],
           correction:
             "Avant de multiplier, je mets les deux longueurs dans la MÊME unité : une aire en m² demande des mètres, une aire en cm² des centimètres.\na) $80$ cm $= 0{,}8$ m, donc $\\mathcal{A} = 2{,}5 \\times 0{,}8 = 2$ m².\nb) $2{,}5$ m $= 250$ cm, donc $\\mathcal{A} = 250 \\times 80 = 20\\,000$ cm².\nContrôle : $2$ m² $= 2 \\times 10\\,000 = 20\\,000$ cm². Les deux calculs mesurent bien la même surface.\n⛔ Le piège : multiplier les nombres tels quels, $2{,}5 \\times 80 = 200$. Deux cents quoi ? Un mètre fois un centimètre n'est pas une unité d'aire : ce nombre ne veut rien dire.\nRéponse : $2$ m², soit $20\\,000$ cm².",
@@ -496,7 +496,7 @@ export const exercicesAires3e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "30" },
             { question: "b)", attendu: "40000" },
-            { question: "c)", attendu: "120" },
+            { question: "c)", attendu: "120", unite: "m²" },
           ],
           correction:
             "a) Sur le plan : $\\mathcal{A} = 6 \\times 5 = 30$ cm².\nb) L'échelle $\\dfrac{1}{200}$ veut dire que chaque longueur réelle est $200$ fois plus grande. C'est un agrandissement de rapport $k = 200$ : les aires sont multipliées par $k^2 = 200^2 = 40\\,000$.\nc) L'aire réelle vaut $30 \\times 40\\,000 = 1\\,200\\,000$ cm². Je convertis : $1$ m² $= 10\\,000$ cm², donc $1\\,200\\,000 \\div 10\\,000 = 120$ m².\nVérification par les longueurs : $6 \\times 200 = 1\\,200$ cm $= 12$ m et $5 \\times 200 = 1\\,000$ cm $= 10$ m, puis $12 \\times 10 = 120$ m². Les deux chemins se rejoignent.\n⛔ Le piège : multiplier l'aire par $200$ seulement, $30 \\times 200 = 6\\,000$ cm², soit $0{,}6$ m² : un jardin plus petit qu'un tapis de bain !\nRéponse : $30$ cm² sur le plan, une aire multipliée par $40\\,000$, et $120$ m² en vrai.",
@@ -592,11 +592,11 @@ export const exercicesAires3e: FicheExercicesData = {
           enonce:
             "Un terrain de football de match international mesure $105$ m sur $68$ m.\na) Calculer son aire en m², puis en hectares.\nb) Un terrain de football fait-il un hectare ?\nc) En juillet 2022, les incendies de La Teste-de-Buch et de Landiras, en Gironde, ont brûlé environ $20\\,800$ ha de forêt. Combien de terrains de football cela représente-t-il ? Et combien de km² ?",
           reponses: [
-            { question: "a) m²", attendu: "7140" },
-            { question: "a) ha", attendu: "0,714" },
+            { question: "a) m²", attendu: "7140", unite: "m²" },
+            { question: "a) ha", attendu: "0,714", unite: "ha" },
             { question: "b)", attendu: ["non", "faux"] },
             { question: "c) nb", attendu: "29000", tolerance: 200 },
-            { question: "c) km²", attendu: "208" },
+            { question: "c) km²", attendu: "208", unite: "km²" },
           ],
           correction:
             "a) Le terrain est un rectangle : $\\mathcal{A} = 105 \\times 68 = 7\\,140$ m².\nUn hectare est un carré de $100$ m de côté : $1$ ha $= 10\\,000$ m². Donc $7\\,140 \\div 10\\,000 = 0{,}714$ ha.\nb) Non : un terrain de football, c'est à peu près les trois quarts d'un hectare. Sur le dessin, le carré d'un hectare est à peine moins long que le terrain, mais bien plus large.\nc) Je divise la surface brûlée par celle d'un terrain, les deux en hectares : $20\\,800 \\div 0{,}714 \\approx 29\\,132$, soit environ $29\\,000$ terrains de football.\nEn km² : $1$ km² est un carré de $1\\,000$ m de côté, soit $1\\,000\\,000$ m² $= 100$ ha. Donc $20\\,800 \\div 100 = 208$ km², à peu près deux fois la surface de Paris.\n⛔ Le piège : diviser par $100$ au lieu de $10\\,000$ au a), et trouver $71{,}4$ ha pour un seul terrain : plus de soixante-dix hectares, c'est absurde. Entre m² et hectares, il y a $100 \\times 100$.\nRéponse : $7\\,140$ m², soit $0{,}714$ ha, moins d'un hectare ; la forêt brûlée représente environ $29\\,000$ terrains, soit $208$ km².",
@@ -642,7 +642,7 @@ export const exercicesAires3e: FicheExercicesData = {
             "Le pignon d'une maison est un mur formé d'un rectangle de $6$ m de large sur $2{,}5$ m de haut, surmonté d'un triangle de $1{,}5$ m de haut. Il est percé d'une fenêtre de $1{,}2$ m sur $1$ m, qu'on ne peint pas.\na) Calculer l'aire à peindre.\nb) On passe deux couches. Un litre de peinture couvre $10$ m² par couche. Combien de litres faut-il ?\nc) La peinture se vend en pots de $2{,}5$ L. Combien de pots acheter ?",
           reponses: [
             { question: "a)", attendu: "18,3" },
-            { question: "b)", attendu: "3,66" },
+            { question: "b)", attendu: "3,66", unite: "L" },
             { question: "c)", attendu: "2" },
           ],
           correction:
@@ -664,10 +664,10 @@ export const exercicesAires3e: FicheExercicesData = {
           enonce:
             "Un panneau solaire mesure environ $1{,}7$ m sur $1$ m.\na) Calculer l'aire d'un panneau en m², puis en cm².\nb) Une centrale solaire occupe un terrain rectangulaire de $250$ m sur $120$ m. Calculer son aire en m², puis en hectares.\nc) Les panneaux couvrent $40$ % du terrain : il faut des allées, et de l'espace pour que les rangées ne se fassent pas d'ombre. Combien de panneaux y a-t-il, au maximum ?\nd) Une seconde centrale a un terrain deux fois plus long ET deux fois plus large. Combien de panneaux peut-elle accueillir ?",
           reponses: [
-            { question: "a) m²", attendu: "1,7" },
-            { question: "a) cm²", attendu: "17000" },
-            { question: "b) m²", attendu: "30000" },
-            { question: "b) ha", attendu: "3" },
+            { question: "a) m²", attendu: "1,7", unite: "m²" },
+            { question: "a) cm²", attendu: "17000", unite: "cm²" },
+            { question: "b) m²", attendu: "30000", unite: "m²" },
+            { question: "b) ha", attendu: "3", unite: "ha" },
             { question: "c)", attendu: "7058" },
             { question: "d)", attendu: "28235" },
           ],

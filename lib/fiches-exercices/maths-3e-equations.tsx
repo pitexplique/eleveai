@@ -425,11 +425,11 @@ export const exercicesEquations3e: FicheExercicesData = {
           enonce:
             "Dans une étape du Tour de France, un coureur échappé roule à $45$ km/h. Le peloton passe au même panneau $6$ minutes plus tard et roule à $54$ km/h. L'arrivée est à $25$ km de ce panneau.\na) Quelle avance, en km, l'échappé a-t-il quand le peloton passe au panneau ?\nb) On note $t$ le temps, en heures, depuis le passage du peloton. Exprimer la distance au panneau du peloton, puis celle de l'échappé.\nc) Au bout de combien de minutes le peloton rattrape-t-il l'échappé ? À quelle distance du panneau ?\nd) L'échappé gagne-t-il l'étape ?",
           reponses: [
-            { question: "a)", attendu: "4,5" },
+            { question: "a)", attendu: "4,5", unite: "km" },
             { question: "b) pel.", attendu: "54t" },
             { question: "b) éch.", attendu: "4,5+45t" },
             { question: "c) min", attendu: "30" },
-            { question: "c) km", attendu: "27" },
+            { question: "c) km", attendu: "27", unite: "km" },
             { question: "d)", attendu: ["oui", "vrai"] },
           ],
           correction:

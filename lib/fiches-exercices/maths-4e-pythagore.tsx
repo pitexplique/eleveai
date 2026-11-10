@@ -341,7 +341,7 @@ export const exercicesPythagore4e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "26,18", tolerance: 0.005 },
             { question: "b)", attendu: "25,15", tolerance: 0.005 },
-            { question: "c)", attendu: "8,56", tolerance: 0.005 },
+            { question: "c)", attendu: "8,56", tolerance: 0.005, unite: "m" },
           ],
           correction:
             "a) Les coins du terrain sont des angles droits : la longueur, la largeur et la diagonale forment un triangle rectangle, dont l'hypoténuse est la DIAGONALE.\nD'après le théorème de Pythagore, $d^2 = 23{,}77^2 + 10{,}97^2 = 565{,}0129 + 120{,}3409 = 685{,}3538$.\n$d = \\sqrt{685{,}3538} \\approx 26{,}18$ m.\nb) $s^2 = 23{,}77^2 + 8{,}23^2 = 565{,}0129 + 67{,}7329 = 632{,}7458$, et $s = \\sqrt{632{,}7458} \\approx 25{,}15$ m.\nc) En longeant les lignes : $23{,}77 + 10{,}97 = 34{,}74$ m. Par la diagonale : environ $26{,}18$ m. Il économise $34{,}74 - 26{,}18 = 8{,}56$ m.\n⛔ Le piège : croire que la diagonale vaut la somme des deux côtés, $34{,}74$ m. C'est le détour ; la ligne droite est toujours plus courte.\nRéponse : environ $26{,}18$ m en double, $25{,}15$ m en simple, et $8{,}56$ m économisés.",
@@ -356,7 +356,7 @@ export const exercicesPythagore4e: FicheExercicesData = {
           enonce:
             "De face, une tente de bivouac est un triangle isocèle $GDS$ : les piquets $G$ et $D$ sont au sol, à $GD = 1{,}4$ m l'un de l'autre, et les deux pans de toile mesurent $DS = SG = 1{,}2$ m jusqu'au sommet $S$. Le point $H$ est le milieu de $[GD]$, et $(SH)$ est verticale.\na) Calculer la hauteur $SH$ de la tente, en cm (arrondie à l'unité).\nb) Assis, un randonneur mesure $90$ cm. Tient-il assis au milieu de la tente ?\nc) Quelle longueur de pans faudrait-il pour une tente de $1$ m de haut, avec la même largeur au sol ? Arrondir au centimètre SUPÉRIEUR.",
           reponses: [
-            { question: "a)", attendu: "97", tolerance: 0.5 },
+            { question: "a)", attendu: "97", tolerance: 0.5, unite: "cm" },
             { question: "b)", attendu: ["oui", "vrai"] },
             { question: "c)", attendu: "1,23" },
           ],

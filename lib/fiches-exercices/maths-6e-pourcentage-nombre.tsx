@@ -580,8 +580,8 @@ export const exercicesPourcentageNombre6e: FicheExercicesData = {
           reponses: [
             { question: "a) 10 %", attendu: "6" },
             { question: "a) 5 %", attendu: "3" },
-            { question: "b)", attendu: "21" },
-            { question: "c)", attendu: "39" },
+            { question: "b)", attendu: "21", unite: "L" },
+            { question: "c)", attendu: "39", unite: "L" },
           ],
           correction:
             "a) $10\\,\\%$ de $60$ : $60 \\div 10 = 6$ L. Et $5\\,\\%$, c'est la moitié : $3$ L.\nb) $35\\,\\%$, c'est $10\\,\\% + 10\\,\\% + 10\\,\\% + 5\\,\\%$. Donc $6 + 6 + 6 + 3 = 21$ L.\nc) $60 - 21 = 39$ L.\n⭐ Contrôle : il manque $65\\,\\%$. Et $65\\,\\%$ de $60$, c'est $6 \\times 6 + 3 = 39$ L.\n⛔ Le piège : répondre $35$ L. Le réservoir contient $35\\,\\%$ de $60$ L, pas $35$ L.\nRéponse : a) $6$ L et $3$ L ; b) $21$ L ; c) $39$ L.",

@@ -267,7 +267,7 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
         {
           enonce: "Le segment $[PQ]$ est posé au-dessus d'une règle graduée en cm.\nLis sa longueur $PQ$.",
           reponses: [
-            { attendu: "6,5" },
+            { attendu: "6,5", unite: "cm" },
           ],
           figure: geo({ segs: [{ de: [1, 0.6], vers: [7.5, 0.6] }], points: [{ en: [1, 0.6], nom: "P" }, { en: [7.5, 0.6], nom: "Q" }], regle: { de: 0, a: 10, y: 0 } }),
           correction:
@@ -396,7 +396,7 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
           enonce: "Un randonneur va de $A$ à $B$ en passant par le refuge $R$.\n$AR = 3{,}2$ km et $RB = 4{,}1$ km. En ligne droite, $AB = 5{,}8$ km.\na) Quelle est la longueur de son trajet ?\nb) Combien de kilomètres fait-il de plus que la ligne droite ?\nc) Le refuge est-il sur le segment $[AB]$ ?",
           reponses: [
             { question: "a)", attendu: "7,3" },
-            { question: "b)", attendu: "1,5" },
+            { question: "b)", attendu: "1,5", unite: "km" },
             { question: "c)", attendu: ["non", "faux"] },
           ],
           figure: geo({ segs: [{ de: [0, 0], vers: [2.334, 2.19], couleur: VERT }, { de: [2.334, 2.19], vers: [5.8, 0], couleur: VERT }, { de: [0, 0], vers: [5.8, 0], couleur: GRIS, pointilles: true }], points: [{ en: [0, 0], nom: "A", vers: "gauche" }, { en: [2.334, 2.19], nom: "R" }, { en: [5.8, 0], nom: "B", vers: "droite" }], cotes: [{ de: [0, 0], vers: [2.334, 2.19], t: "3,2 km" }, { de: [2.334, 2.19], vers: [5.8, 0], t: "4,1 km" }, { de: [0, 0], vers: [5.8, 0], t: "5,8 km", cote: -1 }] }),
@@ -448,7 +448,7 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: ["oui", "vrai"] },
             { question: "b)", attendu: ["non", "faux"] },
-            { question: "c)", attendu: "200" },
+            { question: "c)", attendu: "200", unite: "m" },
           ],
           figure: geo({ segs: [{ de: [0, 0], vers: [400, 0], couleur: VERT }, { de: [400, 0], vers: [400, 300], couleur: VERT }, { de: [0, 0], vers: [400, 300], couleur: ORANGE, pointilles: true }], points: [{ en: [0, 0], nom: "E", vers: "gauche" }, { en: [400, 0], nom: "C", vers: "droite" }, { en: [400, 300], nom: "S", vers: "droite" }], cotes: [{ de: [0, 0], vers: [400, 0], t: "400 m", cote: -1 }, { de: [400, 0], vers: [400, 300], t: "300 m", cote: -1 }] }),
           correction:
@@ -462,8 +462,8 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: ["oui", "vrai"] },
             { question: "b)", attendu: "2,25" },
-            { question: "c) km", attendu: "0,45" },
-            { question: "c) m", attendu: "450" },
+            { question: "c) km", attendu: "0,45", unite: "km" },
+            { question: "c) m", attendu: "450", unite: "m" },
           ],
           figure: geo({ segs: [{ de: [0, 0], vers: [4.5, 0], couleur: GRIS }], points: [{ en: [0, 0], nom: "S1" }, { en: [1.8, 0], nom: "S2" }, { en: [4.5, 0], nom: "S3" }], cotes: [{ de: [0, 0], vers: [1.8, 0], t: "1,8 km", cote: -1 }, { de: [1.8, 0], vers: [4.5, 0], t: "2,7 km", cote: -1 }] }),
           correction:

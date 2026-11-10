@@ -302,8 +302,8 @@ export const exercicesPerimetres4e: FicheExercicesData = {
           enonce: "Calculer le périmètre de chaque rectangle.\na) Un rectangle de $14$ cm sur $6{,}5$ cm.\nb) Un rectangle de $1{,}2$ m sur $45$ cm. Donner le résultat en cm, puis en m.",
           reponses: [
             { question: "a)", attendu: "41" },
-            { question: "b) cm", attendu: "330" },
-            { question: "b) m", attendu: "3,3" },
+            { question: "b) cm", attendu: "330", unite: "cm" },
+            { question: "b) m", attendu: "3,3", unite: "m" },
           ],
           correction:
             "a) Sur le tour d'un rectangle, la longueur et la largeur passent chacune DEUX fois. $P = 2 \\times (14 + 6{,}5) = 2 \\times 20{,}5 = 41$ cm.\nJe vérifie en faisant le tour : $14 + 6{,}5 + 14 + 6{,}5 = 41$.\nb) Les deux longueurs ne sont pas dans la même unité : je convertis d'abord. $1{,}2$ m $= 120$ cm.\n$P = 2 \\times (120 + 45) = 2 \\times 165 = 330$ cm, soit $3{,}3$ m.\n⛔ Le piège au b) : calculer $2 \\times (1{,}2 + 45) = 92{,}4$. Ce nombre mélange des mètres et des centimètres : il ne veut rien dire.\nRéponse : $41$ cm ; $330$ cm, soit $3{,}3$ m.",
@@ -449,8 +449,8 @@ export const exercicesPerimetres4e: FicheExercicesData = {
         {
           enonce: "Un quadrilatère a pour côtés $0{,}4$ m, $25$ cm, $300$ mm et $2{,}2$ dm. Calculer son périmètre, en centimètres puis en mètres.",
           reponses: [
-            { question: "cm", attendu: "117" },
-            { question: "m", attendu: "1,17" },
+            { question: "cm", attendu: "117", unite: "cm" },
+            { question: "m", attendu: "1,17", unite: "m" },
           ],
           correction:
             "On n'additionne que des longueurs écrites dans la MÊME unité. Je convertis tout en centimètres.\n$0{,}4$ m $= 40$ cm, car $1$ m $= 100$ cm.\n$300$ mm $= 30$ cm, car $10$ mm $= 1$ cm.\n$2{,}2$ dm $= 22$ cm, car $1$ dm $= 10$ cm.\nPuis je fais le tour : $40 + 25 + 30 + 22 = 117$ cm, soit $1{,}17$ m.\n⛔ Le piège : additionner les nombres tels quels, $0{,}4 + 25 + 300 + 2{,}2 = 327{,}6$. Ce résultat mélange quatre unités : il ne veut rien dire.\nRéponse : le périmètre vaut $117$ cm, soit $1{,}17$ m.",
@@ -702,8 +702,8 @@ export const exercicesPerimetres4e: FicheExercicesData = {
           enonce:
             "Un panneau a la forme d'un octogone régulier (huit côtés égaux) de $30$ cm de côté. On colle un ruban réfléchissant sur tout son bord.\na) Quelle longueur de ruban faut-il, en cm puis en m ?\nb) Un panneau en forme de triangle équilatéral a le même périmètre. Quel est son côté ?\nc) Même question pour un panneau carré.",
           reponses: [
-            { question: "a) cm", attendu: "240" },
-            { question: "a) m", attendu: "2,4" },
+            { question: "a) cm", attendu: "240", unite: "cm" },
+            { question: "a) m", attendu: "2,4", unite: "m" },
             { question: "b)", attendu: "80" },
             { question: "c)", attendu: "60" },
           ],

@@ -646,9 +646,9 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
           enonce: "Une randonnée fait $18$ km. Le premier jour, on parcourt $\\dfrac{1}{3}$ du trajet. Le deuxième jour, on parcourt $\\dfrac{4}{9}$ du trajet. Le troisième jour, on finit.\na) Quelle fraction du trajet reste-t-il pour le troisième jour ?\nb) Combien de kilomètres parcourt-on chaque jour ?\nc) Vérifie : la somme fait-elle $18$ km ?",
           reponses: [
             { question: "a)", attendu: "2/9" },
-            { question: "b) j1", attendu: "6" },
-            { question: "b) j2", attendu: "8" },
-            { question: "b) j3", attendu: "4" },
+            { question: "b) j1", attendu: "6", unite: "km" },
+            { question: "b) j2", attendu: "8", unite: "km" },
+            { question: "b) j3", attendu: "4", unite: "km" },
             { question: "c)", attendu: ["oui", "vrai"] },
           ],
           correction:

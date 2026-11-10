@@ -701,7 +701,7 @@ export const exercicesSolides4e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: ["prisme droit à base triangulaire", "un prisme droit à base triangulaire", "prisme à base triangulaire", "prisme triangulaire", "prisme droit triangulaire"] },
             { question: "a) fac.", attendu: "5" },
-            { question: "b)", attendu: "5" },
+            { question: "b)", attendu: "5", unite: "cm" },
           ],
           figure: aPlat([{ pts: [[0, 0], [3, 0], [3, 8], [0, 8]] }, { pts: [[3, 0], [7, 0], [7, 8], [3, 8]] }, { pts: [[7, 0], [12, 0], [12, 8], [7, 8]] }, { pts: [[3, 8], [7, 8], [3, 11]] }, { pts: [[3, 0], [3, -3], [7, 0]] }], [{ de: [0, 0], a: [0, 8], texte: "8 cm", cote: "g" }, { de: [0, 0], a: [3, 0], texte: "3 cm", cote: "b" }, { de: [3, 8], a: [7, 8], texte: "4 cm", cote: "b" }, { de: [3, 8], a: [3, 11], texte: "3 cm", cote: "g" }, { de: [3, 11], a: [7, 8], texte: "5 cm", cote: "hd" }, { de: [7, 0], a: [12, 0], texte: "?", cote: "b" }], 14),
           correction:
@@ -895,7 +895,7 @@ export const exercicesSolides4e: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "54" },
             { question: "c) nb", attendu: "81" },
-            { question: "c) aire", attendu: "3,24" },
+            { question: "c) aire", attendu: "3,24", unite: "m²" },
           ],
           correction:
             "a) Chaque marche a $3 \\times 3 = 9$ colonnes. Le 2e : $9 \\times 2 = 18$ cubes ; le 1er : $9 \\times 3 = 27$ ; le 3e : $9 \\times 1 = 9$. En tout $18 + 27 + 9 = 54$ cubes.\nb) De face, je vois les trois marches en escalier : 3 colonnes de 2 carrés, 3 de 3, puis 3 de 1. De droite, je vois la plus haute marche, celle du 1er, qui dépasse les autres : un carré de 3 cubes sur 3.\nc) Je compte les carrés à peindre, côté par côté.\nDevant : $3 \\times 2 + 3 \\times 3 + 3 \\times 1 = 18$ carrés, et autant derrière : 18.\nDessus : une case par colonne, $9 \\times 3 = 27$ carrés.\nCôtés : à gauche, le 2e, $3 \\times 2 = 6$ ; à droite, le 3e, $3 \\times 1 = 3$.\nContremarches : le 1er dépasse le 2e d'un cube, $3 \\times 1 = 3$ ; il dépasse le 3e de deux cubes, $3 \\times 2 = 6$.\nEn tout $18 + 18 + 27 + 6 + 3 + 3 + 6 = 81$ carrés. Un carré a une aire de $0{,}2 \\times 0{,}2 = 0{,}04$ m², donc $81 \\times 0{,}04 = 3{,}24$ m².\n⛔ Le piège : oublier les contremarches, ces côtés du 1er qui dépassent des deux autres marches. De face, on ne les voit pas.\nRéponse : 54 cubes ; 81 carrés à peindre, soit 3,24 m².",
