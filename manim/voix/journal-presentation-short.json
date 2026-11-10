@@ -1,0 +1,10 @@
+{
+  "00-accroche": "2 bonnes actions, qui doublent chaque jour : combien au bout d'un mois ?",
+  "01-jours": "Jour 1 : j'aide 2 amis. Jour 2 : chacun en aide 2 : 4. Jour 3 : 8. Jour 4 : 16.",
+  "02q-question": "Question ! Le 10e jour, combien de bonnes actions ce jour-là ? A : mille vingt-quatre. B : 20. C : 100. Mets pause, et choisis !",
+  "02r-reponse": "Réponse A : mille vingt-quatre. C'est 2 puissance 10, et pas 2 fois 10 !",
+  "03-mois": "Et le jour 30 ? 2 puissance 30 : plus d'un milliard en un seul jour ! Et plus de 2 milliards en tout.",
+  "04-planete": "Toute la planète, 8 milliards d'humains, en 32 jours. C'est l'article à la Une du Journal d'éleveai : comprendre le monde, et le changer.",
+  "05-commentaire": "À toi : 3 bonnes actions, qui triplent chaque jour. Combien le 4e jour ? Réponds en commentaire !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

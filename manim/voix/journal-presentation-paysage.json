@@ -1,0 +1,23 @@
+{
+  "00-situation": "Ce matin, dans le bus, Lina a fait tomber ses crayons. Je les ai ramassés. Et à la récré, Sam avait oublié son goûter : je lui ai donné la moitié du mien. Deux petites bonnes actions. Est-ce que ça peut changer le monde ?",
+  "01-journal": "Pour le savoir, j'ouvre le Journal d'éleveai. Son nom : comprendre le monde, et le changer. Chaque jour, des articles sur l'espace, la santé, l'argent, le sport, la planète… et les maths qui les expliquent.",
+  "02-une": "Aujourd'hui, à la Une : deux bonnes actions par jour, et la planète entière change en un mois. Je lis l'article. Le premier jour, je fais 2 bonnes actions. Le deuxième jour, Lina et Sam en font chacun 2 : ça fait 4. Le troisième jour : 8. Chaque jour, le nombre double.",
+  "03q-question": "Sous l'article, il y a son défi. Question ! Le 5e jour, combien de bonnes actions sont faites ce jour-là ? A : 10. B : 32. C : 25. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : 32. On double chaque jour : 2, 4, 8, 16, 32. C'est 2 puissance 5, et pas 2 fois 5.",
+  "04-semaine": "Au début, c'est minuscule. Le 7e jour : 128 bonnes actions ce jour-là. Pas de quoi changer le monde… Attends un peu.",
+  "05-maths": "Dans l'article, un encadré : Les maths derrière. Jour 2 : 2 au carré, 4. Jour 3 : 2 au cube, 8. Et le jour 30 : 2 puissance 30. Un milliard soixante-treize millions sept cent quarante et un mille huit cent vingt-quatre ! Plus d'un milliard, en un seul jour.",
+  "06q-question": "Question ! Et en tout ? Après 3 jours, combien de bonnes actions depuis le début ? A : 8. B : 16. C : 14. Mets pause, et choisis !",
+  "06r-reponse": "Réponse C : 14. On additionne les trois jours : 2 plus 4 plus 8. Et regarde : 14, c'est 2 puissance 4, moins 2.",
+  "07-total": "Même astuce au bout de 30 jours : le total, c'est 2 puissance 31, moins 2. Deux milliards cent quarante-sept millions quatre cent quatre-vingt-trois mille six cent quarante-six bonnes actions !",
+  "08q-question": "Question ! La Terre compte environ 8 milliards d'habitants. En combien de temps la chaîne toucherait-elle tout le monde ? A : environ 32 jours. B : environ 4 ans. C : environ mille ans. Mets pause, et choisis !",
+  "08r-reponse": "Réponse A : environ 32 jours ! Au bout de 32 jours, le total dépasse 8 milliards. Toute la planète, en un mois.",
+  "09-vraie-vie": "Bien sûr, dans la vraie vie, la chaîne se casse souvent. Mais même si chacun ne transmettait qu'une fois par semaine, il faudrait 32 semaines : moins d'un an. C'est comme ça que se propagent un virus, une rumeur… ou une idée généreuse.",
+  "10-metier": "D'ailleurs, ces calculs, c'est le métier d'une épidémiologiste : elle suit la façon dont les maladies se propagent.",
+  "11-agir": "Et l'article finit par une phrase qui change le monde : Et toi, tu peux… Lance la chaîne aujourd'hui : fais une bonne action à deux personnes, et demande-leur d'en faire autant. Demain, compte combien ont continué.",
+  "12-chiffres": "Dans le journal, il y a aussi les chiffres clés. Par exemple : trois cent mille kilomètres par seconde, la vitesse de la lumière.",
+  "13-nouvelles": "Puis les autres nouvelles : le Soleil que tu vois a 8 minutes de retard. Ton cœur bat environ cent mille fois par jour.",
+  "14-mission": "Et chaque jour, une mission. Un jour, le défi dehors : mesure la hauteur d'un arbre, sans y grimper, avec son ombre. Le lendemain, la bonne action du jour : économise l'eau de ta douche.",
+  "15-appris": "Ce que tu as appris. Ce qui double chaque jour devient vite gigantesque. Et un article du journal se lit en trois temps : comprendre, se tester, agir.",
+  "16-rendez-vous": "Le journal change chaque jour. Pour le trouver, clique sur le bandeau où je lis mon journal, en haut de toutes les pages.",
+  "17-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
