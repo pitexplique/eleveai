@@ -70929,6 +70929,777 @@
         "espace",
         "sciences"
       ]
+    },
+    {
+      "id": "4e-distrib-simple",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_simple",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple.mp4",
+      "miniature": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple.png",
+      "titre": "3(x + 4) : le 3 multiplie tout — La distributivité simple — épisode 1 · Maths 4e",
+      "accroche": "Lucas est menuisier. Il fabrique 3 étagères identiques : pour chacune, une planche de x décimètres et une petite planche de 4 décimètres. Combien de bois en tout ? Deux façons de compter, un même résultat.\n\nDans cette vidéo :\n• 3(x + 4) = 3x + 12 : le nombre devant la parenthèse multiplie chaque terme\n• on vérifie avec x = 10\n• le piège : 3x + 4, le 3 a oublié le 4\n• avec un moins : 4(x − 3) = 4x − 12\n• un nombre négatif devant : −2(x − 5) = −2x + 10\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : développe 6(2x − 5).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_simple&display=simple\n\n🔢 Épisode 1 sur 5 de la série Distributivité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Lucas, menuisier"
+        ],
+        [
+          "00:23",
+          "Première façon : 3 paquets"
+        ],
+        [
+          "00:34",
+          "Deuxième façon : ranger les planches"
+        ],
+        [
+          "00:47",
+          "Développer"
+        ],
+        [
+          "01:07",
+          "On vérifie"
+        ],
+        [
+          "01:20",
+          "Le piège"
+        ],
+        [
+          "01:34",
+          "Question 1"
+        ],
+        [
+          "02:03",
+          "Avec un moins"
+        ],
+        [
+          "02:30",
+          "Un nombre négatif devant"
+        ],
+        [
+          "02:53",
+          "Question 2"
+        ],
+        [
+          "03:24",
+          "À toi de jouer"
+        ],
+        [
+          "03:35",
+          "Correction"
+        ],
+        [
+          "03:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite",
+      "tags": [
+        "distributivité",
+        "distributivité simple",
+        "développer",
+        "calcul littéral",
+        "menuisier",
+        "étagères",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:34",
+          "question": "Que donne 5(x + 2) ?",
+          "choix": [
+            "5x + 2",
+            "x + 10",
+            "5x + 10"
+          ],
+          "reponse": 2,
+          "explication": "Le 5 multiplie x, et il multiplie aussi le 2."
+        },
+        {
+          "t": "02:53",
+          "question": "Que donne −3(x + 4) ?",
+          "choix": [
+            "−3x + 12",
+            "−3x − 12",
+            "−3x + 4"
+          ],
+          "reponse": 1,
+          "explication": "−3 × 4, c'est −12."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-distrib-simple-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_simple",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-distrib-simple",
+      "fichier": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple-short.mp4",
+      "miniature": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple-short.png",
+      "titre": "7 × 13 de tête en 5 secondes : tu paries que tu n'y arrives pas ? ⚡ — 4e #Shorts",
+      "accroche": "7 × 13, de tête, en 5 secondes. Le secret : 13, c'est 10 + 3. 7 × 10 = 70, 7 × 3 = 21, et 70 + 21 = 91.\n7(10 + 3) = 7 × 10 + 7 × 3 : c'est la distributivité, et elle marche aussi avec une lettre.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : calcule 8 × 12 de tête, avec le secret. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_simple&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #distributivité #4e #collège",
+      "tags": [
+        "calcul mental",
+        "calcul éclair",
+        "7 × 13",
+        "distributivité",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "Que donne 7(x + 3) ?",
+          "choix": [
+            "7x + 21",
+            "7x + 3",
+            "x + 21"
+          ],
+          "reponse": 0,
+          "explication": "Le 7 multiplie x, et il multiplie aussi le 3."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-distrib-double",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_double",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double.mp4",
+      "miniature": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double.png",
+      "titre": "4 morceaux, rien d'oublié — La double distributivité — épisode 2 · Maths 4e",
+      "accroche": "Inès est photographe. Elle encadre une photo dans un passe-partout de x + 4 centimètres sur x + 2 centimètres. Quelle est son aire ? On découpe le cadre en 4 morceaux.\n\nDans cette vidéo :\n• (x + 4)(x + 2) = x² + 2x + 4x + 8 = x² + 6x + 8\n• la méthode : chaque terme multiplie chaque terme, 4 flèches\n• le piège : x² + 8, les deux morceaux du milieu oubliés\n• avec un moins : (x − 2)(x + 5) = x² + 3x − 10\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : développe (2x + 1)(x + 3).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_double&display=simple\n\n🔢 Épisode 2 sur 5 de la série Distributivité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Inès, photographe"
+        ],
+        [
+          "00:22",
+          "L'aire du cadre"
+        ],
+        [
+          "00:33",
+          "4 morceaux"
+        ],
+        [
+          "00:45",
+          "On réduit"
+        ],
+        [
+          "01:00",
+          "La méthode : 4 flèches"
+        ],
+        [
+          "01:13",
+          "On vérifie"
+        ],
+        [
+          "01:27",
+          "Question 1"
+        ],
+        [
+          "02:01",
+          "Le piège"
+        ],
+        [
+          "02:13",
+          "Avec un moins"
+        ],
+        [
+          "02:43",
+          "Question 2"
+        ],
+        [
+          "03:16",
+          "À toi de jouer"
+        ],
+        [
+          "03:28",
+          "Correction"
+        ],
+        [
+          "03:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite",
+      "tags": [
+        "double distributivité",
+        "développer",
+        "produit de deux parenthèses",
+        "calcul littéral",
+        "photographe",
+        "aire d'un rectangle",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:27",
+          "question": "Que donne (x + 5)(x + 1) ?",
+          "choix": [
+            "x² + 5",
+            "x² + 6x + 5",
+            "x² + 5x + 5"
+          ],
+          "reponse": 1,
+          "explication": "x + 5x, c'est 6x."
+        },
+        {
+          "t": "02:43",
+          "question": "Que donne (x − 3)(x + 4) ?",
+          "choix": [
+            "x² − 12",
+            "x² − x − 12",
+            "x² + x − 12"
+          ],
+          "reponse": 2,
+          "explication": "4x − 3x, c'est x."
+        }
+      ],
+      "centres": [
+        "photo",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-distrib-double-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_double",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-distrib-double",
+      "fichier": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double-short.mp4",
+      "miniature": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double-short.png",
+      "titre": "Un potager de 12 m sur 13 : son aire de tête, en 4 morceaux 🥕 — 4e #Shorts",
+      "accroche": "Un potager de 12 mètres sur 13. Son aire, de tête ? 12 = 10 + 2, 13 = 10 + 3 : on le coupe en 4 morceaux. 100 + 30 + 20 + 6 = 156 mètres carrés.\nLa double distributivité, dessinée : chaque morceau compte.\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : calcule 11 × 14 de tête, avec les 4 morceaux. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_double&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #distributivité #4e #collège",
+      "tags": [
+        "potager",
+        "4 morceaux",
+        "aire",
+        "double distributivité",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Que donne (x + 1)(x + 3) ?",
+          "choix": [
+            "x² + 3",
+            "x² + 4x + 4",
+            "x² + 4x + 3"
+          ],
+          "reponse": 2,
+          "explication": "4 morceaux : x², 3x, x et 3."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-distrib-reduire",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_reduire",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire.mp4",
+      "miniature": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire.png",
+      "titre": "Les x avec les x — Développer et réduire — épisode 3 · Maths 4e",
+      "accroche": "Sarah est maître-nageuse. Une série, c'est x longueurs de crawl et 4 longueurs de dos. Elle en prévoit 3, puis 5 longueurs pour finir. Combien de longueurs en tout ? D'abord on développe, puis on réduit.\n\nDans cette vidéo :\n• 3(x + 4) + 5 = 3x + 12 + 5 = 3x + 17\n• réduire : les x avec les x, les nombres avec les nombres\n• deux parenthèses : 2(x + 3) + 4(x − 1) = 6x + 2\n• le moins devant : 10 − 3(x − 1) = 13 − 3x\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : développe et réduis 5(x + 2) + 3(x − 4).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_reduire&display=simple\n\n🔢 Épisode 3 sur 5 de la série Distributivité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sarah, maître-nageuse"
+        ],
+        [
+          "00:25",
+          "Écrire, puis développer"
+        ],
+        [
+          "00:37",
+          "Puis réduire"
+        ],
+        [
+          "00:48",
+          "Ranger par familles"
+        ],
+        [
+          "00:59",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Avec deux parenthèses"
+        ],
+        [
+          "01:54",
+          "Un moins devant la parenthèse"
+        ],
+        [
+          "02:13",
+          "Question 2"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite",
+      "tags": [
+        "développer et réduire",
+        "réduire une expression",
+        "distributivité",
+        "calcul littéral",
+        "maître-nageuse",
+        "natation",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "Que donne 2(x + 5) + 3 ?",
+          "choix": [
+            "2x + 13",
+            "2x + 8",
+            "15x"
+          ],
+          "reponse": 0,
+          "explication": "2x + 10, plus 3."
+        },
+        {
+          "t": "02:13",
+          "question": "Que donne 8 − 2(x − 4) ?",
+          "choix": [
+            "6x − 24",
+            "16 − 2x",
+            "−2x"
+          ],
+          "reponse": 1,
+          "explication": "−2 × (−4) = +8, et 8 + 8 = 16."
+        }
+      ],
+      "centres": [
+        "natation",
+        "sport"
+      ]
+    },
+    {
+      "id": "4e-distrib-reduire-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_reduire",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-distrib-reduire",
+      "fichier": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire-short.mp4",
+      "miniature": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire-short.png",
+      "titre": "3x + 5 + 2x + 1 = 11x ? Non ! Le tri des chaussettes 🧦 — 4e #Shorts",
+      "accroche": "3x + 5 + 2x + 1, ça fait 11x ? Non ! On range comme des chaussettes : les x avec les x, les nombres avec les nombres. 3x + 2x = 5x, 5 + 1 = 6 : résultat 5x + 6.\nRéduire, c'est trier par familles.\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : développe et réduis 4(x + 1) + 2x. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_reduire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #distributivité #4e #collège",
+      "tags": [
+        "chaussettes",
+        "réduire",
+        "les x avec les x",
+        "développer et réduire",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Que donne 2(x + 3) + x ?",
+          "choix": [
+            "3x + 6",
+            "2x + 6",
+            "9x"
+          ],
+          "reponse": 0,
+          "explication": "2x + 6, plus x : 3x + 6."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "mode"
+      ]
+    },
+    {
+      "id": "4e-distrib-reconnaitre",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_reconnaitre",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre.mp4",
+      "miniature": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre.png",
+      "titre": "Produit ou somme ? — Développer ou pas ? — épisode 4 · Maths 4e",
+      "accroche": "Karim est cuisinier dans une cantine. Pour 4 tables, il prévoit x crêpes et 2 compotes par table. Sur sa liste : 4(x + 2). Son collègue écrit 4x + 8. Qui a raison ?\n\nDans cette vidéo :\n• 4(x + 2) est un produit, 4x + 8 est une somme : la même quantité\n• on regarde la dernière opération\n• développer, c'est passer du produit à la somme\n• le piège : 3 + (x + 1), rien ne multiplie la parenthèse\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : 6(x + 1) et 6x + 1 : laquelle est un produit ? Sont-elles égales ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_reconnaitre&display=simple\n\n🔢 Épisode 4 sur 5 de la série Distributivité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Karim, cuisinier de cantine"
+        ],
+        [
+          "00:26",
+          "Un produit, une somme"
+        ],
+        [
+          "00:40",
+          "La dernière opération"
+        ],
+        [
+          "01:05",
+          "Quand développer ?"
+        ],
+        [
+          "01:17",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "Le piège"
+        ],
+        [
+          "02:02",
+          "Déjà développée"
+        ],
+        [
+          "02:14",
+          "Question 2"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite",
+      "tags": [
+        "produit ou somme",
+        "dernière opération",
+        "reconnaître une expression",
+        "développer",
+        "distributivité",
+        "cuisinier",
+        "cantine",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:17",
+          "question": "Laquelle faut-il développer ?",
+          "choix": [
+            "5x + 7",
+            "3x − 1",
+            "2(x + 6)"
+          ],
+          "reponse": 2,
+          "explication": "Le 2 multiplie une parenthèse : c'est un produit."
+        },
+        {
+          "t": "02:14",
+          "question": "Laquelle est déjà développée ?",
+          "choix": [
+            "7x − 2",
+            "7(x − 2)",
+            "x(x + 1)"
+          ],
+          "reponse": 0,
+          "explication": "C'est une somme : plus rien à distribuer."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "4e-distrib-reconnaitre-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_reconnaitre",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-distrib-reconnaitre",
+      "fichier": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre-short.mp4",
+      "miniature": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre-short.png",
+      "titre": "2 × 3 + 4 : le caissier du cinéma a-t-il raison ? 🍿 — 4e #Shorts",
+      "accroche": "2 amis au cinéma. Chacun prend une place à 3 euros et un pop-corn à 4 euros. Le caissier tape 2 × 3 + 4 = 10 euros : un seul pop-corn est payé ! Il fallait 2 × (3 + 4) = 14 euros.\nLa parenthèse change tout : c'est un produit.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : 3x + 2 : produit ou somme ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #distributivité #4e #collège",
+      "tags": [
+        "cinéma",
+        "caissier",
+        "produit ou somme",
+        "parenthèses",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "5(x + 1), c'est quoi ?",
+          "choix": [
+            "une somme",
+            "une différence",
+            "un produit"
+          ],
+          "reponse": 2,
+          "explication": "La dernière opération est la multiplication par 5."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "4e-distrib-defi",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi.mp4",
+      "miniature": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi.png",
+      "titre": "4 × 2,99 de tête en 2 secondes — Défis de distributivité — épisode 5 · Maths 4e",
+      "accroche": "Chloé est vendeuse dans une boulangerie. Un client achète 4 tartes à 2,99 euros : elle calcule de tête, en 2 secondes. Trois défis : calculer de tête, trouver l'erreur, écrire un problème.\n\nDans cette vidéo :\n• 4 × 2,99 = 4 × 3 − 4 × 0,01 = 11,96\n• trouver l'erreur : 5(x − 3) n'est pas 5x − 3\n• l'erreur de signe : −2(x − 4) = −2x + 8\n• écrire un problème : 3(x + 2) + 2(x + 5) = 5x + 16\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : calcule de tête 7 × 1,99.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_defi&display=simple\n\n🔢 Épisode 5 sur 5 de la série Distributivité d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Chloé, vendeuse en boulangerie"
+        ],
+        [
+          "00:20",
+          "Défi 1 : calculer de tête"
+        ],
+        [
+          "00:48",
+          "Question 1"
+        ],
+        [
+          "01:25",
+          "Défi 2 : trouver l'erreur"
+        ],
+        [
+          "01:42",
+          "L'erreur de signe"
+        ],
+        [
+          "01:58",
+          "Question 2"
+        ],
+        [
+          "02:32",
+          "Défi 3 : écrire un problème"
+        ],
+        [
+          "02:47",
+          "Développer et réduire"
+        ],
+        [
+          "03:04",
+          "À toi de jouer"
+        ],
+        [
+          "03:15",
+          "Correction"
+        ],
+        [
+          "03:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-distributivite",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-distributivite",
+      "tags": [
+        "défi",
+        "calcul mental",
+        "trouver l'erreur",
+        "distributivité",
+        "calcul littéral",
+        "vendeuse",
+        "boulangerie",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "Combien coûtent 6 croissants à 0,99 euro ?",
+          "choix": [
+            "5,94 euros",
+            "6,06 euros",
+            "5,99 euros"
+          ],
+          "reponse": 0,
+          "explication": "6 × 1 = 6, moins 6 × 0,01 = 0,06."
+        },
+        {
+          "t": "01:58",
+          "question": "Où est l'erreur ? 3(2x + 5) = 6x + 8",
+          "choix": [
+            "6x est faux",
+            "8 est faux, il faut 15",
+            "il n'y a pas d'erreur"
+          ],
+          "reponse": 1,
+          "explication": "3 × 5, c'est 15 : 6x + 15."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "4e-distrib-defi-short",
+      "pas_avant": "2026-12-01",
+      "notionId": "litteral_distributivite",
+      "microId": "litteral_distributivite_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-distrib-defi",
+      "fichier": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi-short.mp4",
+      "miniature": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi-short.png",
+      "titre": "3 jeux vidéo à 19,99 € : le prix de tête en 5 secondes 🎮 — 4e #Shorts",
+      "accroche": "3 jeux vidéo à 19,99 euros. Combien en tout, de tête, en 5 secondes ? 19,99, c'est 20 − 0,01. 3 × 20 = 60, 3 × 0,01 = 0,03 : 60 − 0,03 = 59,97 euros.\nLe prix rond : la distributivité au service du calcul mental.\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : 4 places de concert à 24,99 euros. Combien en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #distributivité #4e #collège",
+      "tags": [
+        "prix rond",
+        "jeux vidéo",
+        "calcul mental",
+        "19,99",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "Et 5 livres à 9,99 euros ?",
+          "choix": [
+            "45,99 euros",
+            "50,05 euros",
+            "49,95 euros"
+          ],
+          "reponse": 2,
+          "explication": "5 × 10 = 50, moins 5 × 0,01 = 0,05."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "argent-budget"
+      ]
     }
   ]
 }

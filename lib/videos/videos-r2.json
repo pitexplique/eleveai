@@ -543,6 +543,96 @@
   "short": false,
   "youtube": null
  },
+ "4e-distrib-defi": {
+  "fichier": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi.mp4",
+  "poster": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi.png",
+  "vignette": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi.vignette.webp",
+  "titre": "4 × 2,99 de tête en 2 secondes — Défis de distributivité — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_defi&display=simple"
+ },
+ "4e-distrib-defi-short": {
+  "fichier": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi-short.mp4",
+  "poster": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi-short.png",
+  "vignette": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi-short.vignette.webp",
+  "titre": "3 jeux vidéo à 19,99 € : le prix de tête en 5 secondes 🎮 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_defi&display=simple"
+ },
+ "4e-distrib-double": {
+  "fichier": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double.mp4",
+  "poster": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double.png",
+  "vignette": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double.vignette.webp",
+  "titre": "4 morceaux, rien d'oublié — La double distributivité — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_double&display=simple"
+ },
+ "4e-distrib-double-short": {
+  "fichier": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double-short.mp4",
+  "poster": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double-short.png",
+  "vignette": "4e/maths/distributivite/02-double/eleveai-maths-4e-distrib-double-short.vignette.webp",
+  "titre": "Un potager de 12 m sur 13 : son aire de tête, en 4 morceaux 🥕 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_double&display=simple"
+ },
+ "4e-distrib-reconnaitre": {
+  "fichier": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre.mp4",
+  "poster": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre.png",
+  "vignette": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre.vignette.webp",
+  "titre": "Produit ou somme ? — Développer ou pas ? — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_reconnaitre&display=simple"
+ },
+ "4e-distrib-reconnaitre-short": {
+  "fichier": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre-short.mp4",
+  "poster": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre-short.png",
+  "vignette": "4e/maths/distributivite/04-reconnaitre/eleveai-maths-4e-distrib-reconnaitre-short.vignette.webp",
+  "titre": "2 × 3 + 4 : le caissier du cinéma a-t-il raison ? 🍿 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_reconnaitre&display=simple"
+ },
+ "4e-distrib-reduire": {
+  "fichier": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire.mp4",
+  "poster": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire.png",
+  "vignette": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire.vignette.webp",
+  "titre": "Les x avec les x — Développer et réduire — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_reduire&display=simple"
+ },
+ "4e-distrib-reduire-short": {
+  "fichier": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire-short.mp4",
+  "poster": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire-short.png",
+  "vignette": "4e/maths/distributivite/03-reduire/eleveai-maths-4e-distrib-reduire-short.vignette.webp",
+  "titre": "3x + 5 + 2x + 1 = 11x ? Non ! Le tri des chaussettes 🧦 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_reduire&display=simple"
+ },
+ "4e-distrib-simple": {
+  "fichier": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple.mp4",
+  "poster": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple.png",
+  "vignette": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple.vignette.webp",
+  "titre": "3(x + 4) : le 3 multiplie tout — La distributivité simple — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_simple&display=simple"
+ },
+ "4e-distrib-simple-short": {
+  "fichier": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple-short.mp4",
+  "poster": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple-short.png",
+  "vignette": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple-short.vignette.webp",
+  "titre": "7 × 13 de tête en 5 secondes : tu paries que tu n'y arrives pas ? ⚡ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_distributivite&microId=litteral_distributivite_simple&display=simple"
+ },
  "4e-div-critere-2-5-10": {
   "fichier": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10.mp4",
   "poster": "4e/maths/divisibilite/02-critere-2-5-10/eleveai-maths-4e-div-critere-2-5-10.png",

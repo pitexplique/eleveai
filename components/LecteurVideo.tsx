@@ -77,6 +77,19 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "4e-premier-decomposer-short": 4.17,
   "4e-premier-defi": 8.4,
   "4e-premier-defi-short": 4.16,
+  // Distributivité 4e (10/11, `python manim/passe_distributivite.py coupes`) : paysage = milieu de la
+  // pause entre « point f r. » et « Et si » (silence vérifié au son de chaque mp4) ; short = « Mets »
+  // (marques du clip de fin, recalées sur le mp4) + 0,03 s.
+  "4e-distrib-simple": 7.0,
+  "4e-distrib-simple-short": 3.72,
+  "4e-distrib-double": 7.0,
+  "4e-distrib-double-short": 3.73,
+  "4e-distrib-reduire": 7.0,
+  "4e-distrib-reduire-short": 3.74,
+  "4e-distrib-reconnaitre": 7.0,
+  "4e-distrib-reconnaitre-short": 3.74,
+  "4e-distrib-defi": 7.0,
+  "4e-distrib-defi-short": 3.73,
   // Triangles 6e : mesuré dans les mp4, la pause après « point f r » (07/11).
   "6e-triangle-nommer": 8.4,
   "6e-triangle-sommet-cote": 8.4,

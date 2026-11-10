@@ -282,9 +282,12 @@ export const METIERS_4E: Record<string, LienMetier[]> = {
     M("preparateur-physique", "calcule la fréquence cardiaque maximale avec la formule 220 − âge."),
   ],
   litteral_distributivite: [
-    F("vendeur", "calcule 4 × 2,99 € de tête : 4 × 3 − 4 × 0,01 = 11,96 €."),
-    M("menuisier", "calcule les baguettes de 3 cadres : 3 × 2 × (L + l)."),
+    F("vendeur", "calcule 4 × 2,99 € de tête : 4 × 3 − 4 × 0,01 = 11,96 €.", V),
+    M("menuisier", "compte le bois de 3 étagères identiques : 3(x + 4) = 3x + 12.", V),
     F("carreleur", "calcule une pièce en L en la découpant en deux rectangles."),
+    F("photographe", "calcule l'aire d'un cadre de x + 4 sur x + 2 : 4 morceaux, x² + 6x + 8.", V),
+    F("maitre-nageur", "prépare 3 séries de x + 4 longueurs, plus 5 : 3(x + 4) + 5 = 3x + 17.", V),
+    M("cuisinier", "prévoit x crêpes et 2 compotes par table pour 4 tables : 4(x + 2) = 4x + 8.", V),
   ],
   litteral_identite_remarquable: [
     F("architecte", "agrandit une terrasse carrée de 2 m sur chaque côté : son aire devient (a + 2)²."),
