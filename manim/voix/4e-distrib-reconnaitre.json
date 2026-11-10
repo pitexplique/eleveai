@@ -1,0 +1,17 @@
+{
+  "00-garde": "Développer ou pas ? Comment reconnaître une expression à développer ?",
+  "01-cantine": "Karim est cuisinier dans une cantine. Pour 4 tables, il prévoit x crêpes et 2 compotes par table. Sur sa liste, il écrit : 4 fois, entre parenthèses, x plus 2. Son collègue écrit : 4 x plus 8. Qui a raison ?",
+  "02-deux": "Les deux ! C'est la même quantité, écrite de deux façons. 4 fois, entre parenthèses, x plus 2, c'est un produit. 4 x plus 8, c'est une somme.",
+  "03-derniere": "Comment savoir ? On regarde la dernière opération. Dans 4 fois, entre parenthèses, x plus 2, on calcule d'abord la parenthèse, puis on multiplie : la dernière opération est une multiplication. C'est un produit. Dans 4 x plus 8, la dernière opération est une addition. C'est une somme.",
+  "04-regle": "Développer, c'est passer du produit à la somme. Il faut développer quand un nombre multiplie une parenthèse qui contient une addition ou une soustraction.",
+  "04q-question": "Question ! Laquelle faut-il développer ? A : 5 x plus 7. B : 3 x moins 1. C : 2 fois, entre parenthèses, x plus 6. Mets pause, et choisis !",
+  "04r-reponse": "Réponse C. Le 2 multiplie une parenthèse : c'est un produit.",
+  "05-piege": "Le piège : 3 plus, entre parenthèses, x plus 1. Il y a une parenthèse, mais rien ne la multiplie : la dernière opération est une addition. Pas de distributivité : on enlève la parenthèse, et on trouve x plus 4.",
+  "06-developpee": "Et une expression déjà développée ? C'est une somme, sans parenthèse à distribuer. Comme 4 x plus 8, ou x au carré plus 3 x.",
+  "06q-question": "Question ! Laquelle est déjà développée ? A : 7 x moins 2. B : 7 fois, entre parenthèses, x moins 2. C : x fois, entre parenthèses, x plus 1. Mets pause, et choisis !",
+  "06r-reponse": "Réponse A : 7 x moins 2. C'est une somme : plus rien à distribuer.",
+  "07-defi": "À toi de jouer. 6 fois, entre parenthèses, x plus 1, et 6 x plus 1. Laquelle est un produit ? Sont-elles égales ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le produit, c'est 6 fois, entre parenthèses, x plus 1. Développé, il donne 6 x plus 6, pas 6 x plus 1. Elles ne sont pas égales.",
+  "08-finale": "Ce que tu as appris. Un produit finit par une multiplication, une somme par une addition. Un nombre devant une parenthèse : il faut développer.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,18 @@
+{
+  "00-garde": "Développer et réduire. Comment arriver à l'expression la plus simple ?",
+  "01-piscine": "Sarah est maître-nageuse. Elle prépare l'entraînement du club. Une série, c'est x longueurs de crawl et 4 longueurs de dos. Elle prévoit 3 séries, puis 5 longueurs pour finir. Combien de longueurs en tout ?",
+  "02-ecrire": "Ça s'écrit : 3 fois, entre parenthèses, x plus 4, plus 5.",
+  "03-developper": "D'abord, on développe : 3 x plus 12, plus 5.",
+  "04-reduire": "Puis on réduit : on regroupe les nombres. 12 plus 5 : 17. Résultat : 3 x plus 17 longueurs.",
+  "05-familles": "Réduire, c'est ranger par familles : les x avec les x, les nombres avec les nombres. Les x ne se mélangent jamais avec les nombres.",
+  "05q-question": "Question ! Que donne 2 fois, entre parenthèses, x plus 5, plus 3 ? A : 2 x plus 13. B : 2 x plus 8. C : 15 x. Mets pause, et choisis !",
+  "05r-reponse": "Réponse A : 2 x plus 13. 2 x plus 10, plus 3.",
+  "06-deux": "Avec deux parenthèses. Sarah ajoute un 2e groupe : 2 fois, entre parenthèses, x plus 3, plus 4 fois, entre parenthèses, x moins 1. On développe chaque morceau : 2 x plus 6, plus 4 x moins 4. Les x : 2 x plus 4 x, 6 x. Les nombres : 6 moins 4, 2. Résultat : 6 x plus 2.",
+  "07-moins": "Attention au moins devant une parenthèse : 10 moins 3 fois, entre parenthèses, x moins 1. Le moins 3 multiplie tout : moins 3 x, plus 3. Donc 10 moins 3 x plus 3. Résultat : 13 moins 3 x.",
+  "07q-question": "Question ! Que donne 8 moins 2 fois, entre parenthèses, x moins 4 ? A : 6 x moins 24. B : 16 moins 2 x. C : moins 2 x. Mets pause, et choisis !",
+  "07r-reponse": "Réponse B : 16 moins 2 x. Moins 2 fois moins 4 : plus 8. Et 8 plus 8 : 16.",
+  "08-defi": "À toi de jouer. Développe et réduis : 5 fois, entre parenthèses, x plus 2, plus 3 fois, entre parenthèses, x moins 4. Mets pause, et cherche !",
+  "08b-correction": "Correction. 5 x plus 10, plus 3 x moins 12. Les x : 8 x. Les nombres : 10 moins 12, moins 2. Résultat : 8 x moins 2.",
+  "09-finale": "Ce que tu as appris. D'abord on développe, puis on réduit : les x avec les x, les nombres avec les nombres. Un moins devant la parenthèse change tous les signes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

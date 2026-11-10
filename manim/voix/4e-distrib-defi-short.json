@@ -1,0 +1,8 @@
+{
+  "00-accroche": "3 jeux vidéo à 19,99 euros. Combien en tout, de tête ? Tu as 5 secondes.",
+  "01-astuce": "19,99, c'est 20 moins 0,01. 3 fois 20 : 60. 3 fois 0,01 : 0,03. 60 moins 0,03 : 59,97 euros.",
+  "01q-question": "Question ! Et 5 livres à 9,99 euros ? A : 45,99 euros. B : 50,05 euros. C : 49,95 euros. Mets pause, et choisis !",
+  "01r-reponse": "Réponse C : 49,95 euros. 5 fois 10 : 50. Moins 5 fois 0,01 : moins 0,05.",
+  "02-question": "À toi. 4 places de concert à 24,99 euros. Combien en tout ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

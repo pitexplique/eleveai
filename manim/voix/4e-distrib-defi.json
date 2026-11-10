@@ -1,0 +1,17 @@
+{
+  "00-garde": "Défis de distributivité. Calculer de tête, trouver l'erreur, écrire un problème.",
+  "01-vendeuse": "Chloé est vendeuse dans une boulangerie. Un client achète 4 tartes à 2,99 euros. Elle calcule de tête, en 2 secondes.",
+  "02-astuce": "Son astuce : 2,99, c'est 3 moins 0,01. 4 fois 3 : 12. 4 fois 0,01 : 0,04. 12 moins 0,04 : 11,96 euros. 4 fois, entre parenthèses, 3 moins 0,01, égale 4 fois 3, moins 4 fois 0,01.",
+  "02q-question": "Question ! Combien coûtent 6 croissants à 0,99 euro ? A : 5,94 euros. B : 6,06 euros. C : 5,99 euros. Mets pause, et choisis !",
+  "02r-reponse": "Réponse A : 5,94 euros. 6 fois 1 : 6. Moins 6 fois 0,01 : moins 0,06.",
+  "03-erreur": "Deuxième défi : trouver l'erreur. Tom a écrit : 5 fois, entre parenthèses, x moins 3, égale 5 x moins 3. Il a oublié de multiplier le 3 ! Le bon résultat : 5 x moins 15.",
+  "04-signe": "Léa a écrit : moins 2 fois, entre parenthèses, x moins 4, égale moins 2 x moins 8. Le signe est faux : moins 2 fois moins 4, c'est plus 8. Le bon résultat : moins 2 x plus 8.",
+  "04q-question": "Question ! Où est l'erreur ? 3 fois, entre parenthèses, 2 x plus 5, égale 6 x plus 8. A : 6 x est faux. B : 8 est faux, il faut 15. C : il n'y a pas d'erreur. Mets pause, et choisis !",
+  "04r-reponse": "Réponse B. 3 fois 5, c'est 15, pas 8. Le bon résultat : 6 x plus 15.",
+  "05-probleme": "Troisième défi : écrire un problème. Chloé range des boîtes de biscuits. 3 cartons de x plus 2 boîtes, et 2 cartons de x plus 5 boîtes. Combien de boîtes en tout ?",
+  "06-modeliser": "On écrit : 3 fois, entre parenthèses, x plus 2, plus 2 fois, entre parenthèses, x plus 5. On développe : 3 x plus 6, plus 2 x plus 10. On réduit : 5 x plus 16 boîtes.",
+  "07-defi": "À toi de jouer. Calcule de tête 7 fois 1,99. Mets pause, et cherche !",
+  "07b-correction": "Correction. 1,99, c'est 2 moins 0,01. 7 fois 2 : 14. 7 fois 0,01 : 0,07. 14 moins 0,07 : 13,93.",
+  "08-finale": "Ce que tu as appris. La distributivité sert à calculer de tête, à repérer les erreurs, et à écrire un problème. Toujours : chaque terme, avec son signe.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
