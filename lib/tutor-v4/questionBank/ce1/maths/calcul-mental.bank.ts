@@ -20,7 +20,8 @@
 // ⚠️ CE QUI N'EST PAS DU CE1, et que la synthèse d'attendus laissait croire :
 // multiplier par 4 ou par 8, multiplier par un nombre entier de dizaines,
 // décomposer un facteur entre 11 et 99, ajouter 8, 18, 28, 38 ou 39. Tout cela
-// est du CE2. On s'en tient au texte.
+// est du CE2. On s'en tient au texte (le 39 de l'identifiant de micro reste,
+// mais on n'ajoute que 9, 19 et 29).
 //
 // Le champ numérique reste sous 1 000 : nombres en jeu ET résultats.
 //
@@ -28,39 +29,104 @@
 // élèves enlèvent souvent 1 avant d'ajouter 10, ou oublient d'enlever. Même
 // chose pour 19 et 29.
 //
+// ⛔ 10/11/2026 — LES SQUELETTES. Chaque micro servait un ou deux énoncés
+// (« Combien font # + # ? ») : 17 à 19 répétitions sur 20. Chaque gabarit tire
+// désormais une famille × une tournure (la troupe, l'ardoise, le furet, Pic…)
+// × une situation d'enfant ; ★1-★2 restent des calculs nus, dits autrement.
+// Les dessins (jetons, matériel de numération, un seul paquet) montrent ce
+// qu'on SAIT, jamais le résultat. Outils : ./calcul-outils-ce1.ts.
+// Mesure : scripts/mesurer-squelettes-coach.ts ce1 calcul_mental.
+//
 // ⚠️ PAS DE QUESTION À RÉDIGER : `applyMathsKeyboardFree` retire les items
 // `format: "open"`. Un CE1 clique, il ne tape pas.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { DifficultyLevel, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import {
+  type Q,
+  ri,
+  rc,
+  pile,
+  maj,
+  pl,
+  exp,
+  court,
+  qcmTexte,
+  nombreOuQcm,
+  erreurs,
+  enfant,
+  deuxEnfants,
+  le,
+  direCalcul,
+  direTrou,
+  chose,
+  choseDessinable,
+  de,
+  dessinObjets,
+  dessinUnPaquet,
+  dessinJetons,
+  dessinQuantite,
+  dessinNombre,
+  dessinBarre,
+  dessinArgent,
+} from "./calcul-outils-ce1";
 
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function gab(
+  id: string,
+  microId: string,
+  difficulty: DifficultyLevel,
+  hint: string,
+  tags: string[],
+  generate: () => Q,
+): TutorBankItemV4 {
+  return {
+    kind: "template",
+    id,
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId,
+    difficulty,
+    theme: "neutral",
+    hint,
+    tags: ["ce1", "calcul_mental", ...tags, "template"],
+    generate,
+  };
 }
 
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
+/* =========================================================
+   LES PAQUETS DES TABLES : un contenant, ce qu'il contient,
+   et le dessin quand il existe.
+========================================================= */
+type Paquet = { un: string; des: string; quoi: string; objet?: Parameters<typeof dessinUnPaquet>[0] };
+const PAQUETS: readonly Paquet[] = [
+  { un: "sachet", des: "sachets", quoi: "billes" },
+  { un: "filet", des: "filets", quoi: "ballons", objet: "ballon" },
+  { un: "panier", des: "paniers", quoi: "pommes", objet: "pomme" },
+  { un: "bocal", des: "bocaux", quoi: "poissons", objet: "poisson" },
+  { un: "vase", des: "vases", quoi: "fleurs", objet: "fleur" },
+  { un: "régime", des: "régimes", quoi: "bananes", objet: "banane" },
+  { un: "pile", des: "piles", quoi: "livres", objet: "livre" },
+  { un: "garage", des: "garages", quoi: "petites voitures", objet: "voiture" },
+  { un: "branche", des: "branches", quoi: "oiseaux", objet: "oiseau" },
+  { un: "boîte", des: "boîtes", quoi: "crayons" },
+  { un: "assiette", des: "assiettes", quoi: "crêpes" },
+  { un: "coffre de pirate", des: "coffres de pirate", quoi: "pièces d'or" },
+  { un: "nid de dinosaure", des: "nids de dinosaure", quoi: "œufs" },
+  { un: "wagon", des: "wagons", quoi: "enfants" },
+  { un: "équipe", des: "équipes", quoi: "joueurs" },
+  { un: "pochette", des: "pochettes", quoi: "images" },
+  { un: "page", des: "pages", quoi: "étoiles dorées", objet: "etoile" },
+  { un: "panier", des: "paniers", quoi: "chatons", objet: "chat" },
+  { un: "tas", des: "tas", quoi: "feuilles d'automne", objet: "feuille" },
+  { un: "boîte", des: "boîtes", quoi: "papillons en papier", objet: "papillon" },
+  { un: "port", des: "ports", quoi: "petits bateaux", objet: "bateau" },
+];
+const paquet = () => rc(PAQUETS);
 
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
-
-function exp(definition: string, methode: string, calcul: string, conclusion: string) {
-  return `Définition : ${definition}
-
-Méthode : ${methode}
-
-Calcul : ${calcul}
-
-Conclusion : ${conclusion}`;
-}
+/** Le dessin d'UN paquet, s'il se dessine (5 objets au plus) ; les billes d'un
+ *  sachet sont des jetons. */
+const unPaquet = (p: Paquet, k: number) =>
+  p.objet && k <= 5 ? dessinUnPaquet(p.objet, k, `1 ${p.un}`) : p.quoi === "billes" && k <= 10 ? dessinJetons(k) : undefined;
 
 export const calculMentalBank: TutorBankItemV4[] = [
   /* =========================================================
@@ -90,71 +156,129 @@ export const calculMentalBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "calcul_mental", "tables_addition"],
   },
-  {
-    kind: "template",
-    id: "ce1_calcul_tables_addition_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_tables_addition",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Cherche ce qu'il faut ajouter pour atteindre le total.",
-    tags: ["ce1", "calcul_mental", "tables_addition", "template"],
-    generate: () => {
-      const a = randomInt(2, 9);
-      const b = randomInt(2, 9);
-      const total = a + b;
-      const trou = randomChoice(["premier", "second"] as const);
-      return {
-        text: trou === "premier"
-          ? `Quel nombre manque : … + ${b} = ${total} ?`
-          : `Quel nombre manque : ${a} + … = ${total} ?`,
-        format: "short",
-        expected: [String(trou === "premier" ? a : b)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une table d'addition se lit dans les deux sens : on peut retrouver le total ou l'un des deux termes.",
-          "On part du terme connu et on compte jusqu'au total.",
-          `${a} + ${b} = ${total}, donc le nombre qui manque est ${trou === "premier" ? a : b}.`,
-          `Il manque ${trou === "premier" ? a : b}.`,
+  gab(
+    "ce1_calcul_tables_addition_tpl_1",
+    "ce1_calcul_tables_addition",
+    2,
+    "Cherche ce qu'il faut ajouter pour atteindre le total.",
+    ["tables_addition"],
+    () => {
+      const a = ri(2, 9);
+      const b = ri(2, 9);
+      const t = a + b;
+      const p = enfant();
+      const famille = rc(["somme", "somme", "trou", "trou", "difference"] as const);
+      if (famille === "somme") {
+        const dessin = pile(0.6);
+        const text = dessin
+          ? rc([
+              `${p.nom} pose ${a} jetons rouges, puis ${b} jetons bleus. Combien de jetons en tout ?`,
+              `Voici les jetons de ${p.nom} : ${a} rouges et ${b} bleus. Combien y en a-t-il ?`,
+              `Compte les jetons : ${a} + ${b}. Combien cela fait-il ?`,
+              `${p.nom} remplit les cases : ${a} jetons rouges et ${b} bleus. Combien de jetons ?`,
+            ])
+          : direCalcul(`${a} + ${b}`);
+        return nombreOuQcm(
+          text,
+          t,
+          erreurs(t),
+          exp(
+            "Une table d'addition donne la somme de deux petits nombres.",
+            a + b > 10 ? "On complète d'abord jusqu'à 10, puis on ajoute ce qui reste." : "On part du plus grand et on compte le reste.",
+            a + b > 10 ? `${a} + ${10 - a} = 10, puis 10 + ${b - (10 - a)} = ${t}.` : `${a} + ${b} = ${t}.`,
+            `${a} + ${b} = ${t}.`,
+          ),
+          dessin ? dessinJetons(a, b) : undefined,
+        );
+      }
+      if (famille === "trou") {
+        const dessin = pile(0.5);
+        const premier = pile();
+        const text = dessin
+          ? rc([
+              `${p.nom} a déjà ${a} jetons. ${maj(p.il)} en veut ${t}. Combien de jetons doit-${p.il} encore poser ?`,
+              `Il y a ${a} jetons dans les cases. Combien faut-il en ajouter pour en avoir ${t} ?`,
+              `${p.nom} veut ${t} jetons. ${maj(p.il)} en a posé ${a}. Combien lui en manque-t-il ?`,
+            ])
+          : direTrou(premier ? `… + ${b} = ${t}` : `${a} + … = ${t}`);
+        const rep = dessin || !premier ? b : a;
+        const connu = dessin || !premier ? a : b;
+        const jetons = !dessin && pile(0.5) ? dessinJetons(connu) : undefined;
+        return court(
+          text,
+          rep,
+          exp(
+            "Une table d'addition se lit dans les deux sens : on peut retrouver un des deux nombres.",
+            "On part du nombre connu et on avance jusqu'au total.",
+            `De ${connu} à ${t}, il y a ${rep} : ${connu} + ${rep} = ${t}.`,
+            `Il manque ${rep}.`,
+          ),
+          dessin ? dessinJetons(a) : jetons,
+        );
+      }
+      if (pile(0.5)) {
+        return nombreOuQcm(
+          rc([
+            `${p.nom} a ces ${t} jetons. ${maj(p.il)} en enlève ${a}. Combien lui en reste-t-il ?`,
+            `Voici ${t} jetons. ${p.nom} en retire ${a}. Combien en reste-t-il ?`,
+          ]),
+          b,
+          erreurs(b, t + a),
+          exp(
+            "Une soustraction se calcule avec la table d'addition, lue à l'envers.",
+            `On cherche ce qu'il faut ajouter à ${a} pour aller jusqu'à ${t}.`,
+            `${a} + ${b} = ${t}, donc ${t} - ${a} = ${b}.`,
+            `${t} - ${a} = ${b}.`,
+          ),
+          dessinJetons(t),
+        );
+      }
+      return nombreOuQcm(
+        direCalcul(`${t} - ${a}`),
+        b,
+        erreurs(b, t + a),
+        exp(
+          "Une soustraction se calcule avec la table d'addition, lue à l'envers.",
+          `On cherche ce qu'il faut ajouter à ${a} pour aller jusqu'à ${t}.`,
+          `${a} + ${b} = ${t}, donc ${t} - ${a} = ${b}.`,
+          `${t} - ${a} = ${b}.`,
         ),
-      };
+      );
     },
-  },
+  ),
 
   /* =========================================================
-     CE1_CALCUL_TABLES_MULTIPLICATION — dans les deux sens
+     CE1_CALCUL_TABLES_MULTIPLICATION — tables de 2, 3, 4, 5, 10
   ========================================================= */
-  {
-    kind: "template",
-    id: "ce1_calcul_tables_multiplication_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_tables_multiplication",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Récite la table jusqu'au résultat.",
-    tags: ["ce1", "calcul_mental", "tables_multiplication", "template"],
-    generate: () => {
-      const a = randomChoice([2, 3, 4, 5, 10] as const);
-      const b = randomInt(2, 10);
-      const p = a * b;
-      return {
-        text: `Quel nombre manque : ${a} × … = ${p} ?`,
-        format: "short",
-        expected: [String(b)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une table de multiplication se lit dans les deux sens : on peut retrouver le produit ou l'un des facteurs.",
-          `On récite la table de ${a} jusqu'à tomber sur ${p}.`,
-          `${a} × ${b} = ${p} : il faut ${b} fois ${a} pour arriver à ${p}.`,
-          `Il manque ${b}.`,
-        ),
-      };
+  gab(
+    "ce1_calcul_tables_multiplication_tpl_1",
+    "ce1_calcul_tables_multiplication",
+    3,
+    "Récite la table jusqu'au résultat.",
+    ["tables_multiplication"],
+    () => {
+      const a = rc([2, 3, 4, 5, 10] as const);
+      const b = ri(2, 10);
+      const prod = a * b;
+      const pq = paquet();
+      const p = enfant();
+      const situation = pile(0.6);
+      const explication = exp(
+        "Une table de multiplication se lit dans les deux sens : on peut retrouver un des deux nombres.",
+        `On récite la table de ${a} jusqu'à tomber sur ${prod}.`,
+        `${a} × ${b} = ${prod} : il faut ${b} fois ${a} pour arriver à ${prod}.`,
+        `Il en faut ${b}.`,
+      );
+      if (!situation) return court(direTrou(`${a} × … = ${prod}`), b, explication, prod <= 40 && pile(0.5) ? dessinJetons(prod) : undefined);
+      const text = rc([
+        `Dans chaque ${pq.un}, il y a ${a} ${pq.quoi}. ${p.nom} veut ${prod} ${pq.quoi}. Combien de ${pq.des} lui faut-il ?`,
+        `${p.nom} range ${prod} ${pq.quoi} par ${pq.des} de ${a}. Combien de ${pq.des} remplit-${p.il} ?`,
+        `Un ${pq.un} contient ${a} ${pq.quoi}. Combien de ${pq.des} pour avoir ${prod} ${pq.quoi} ?`,
+        `Pic le paille-en-queue compte ${prod} ${pq.quoi}, rangés par ${pq.des} de ${a}. Combien de ${pq.des} voit-il ?`,
+      ]);
+      return nombreOuQcm(text, b, erreurs(b, prod - a, a), explication, unPaquet(pq, a));
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_FAITS_MULTIPLICATIFS — les faits à connaître
@@ -183,34 +307,56 @@ export const calculMentalBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "calcul_mental", "faits", "remarquable"],
   },
-  {
-    kind: "template",
-    id: "ce1_calcul_faits_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_faits_multiplicatifs",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Compte de 25 en 25.",
-    tags: ["ce1", "calcul_mental", "faits", "template"],
-    generate: () => {
-      const n = randomInt(1, 4);
-      const p = n * 25;
-      return {
-        text: `Combien font ${n} × 25 ?`,
-        format: "short",
-        expected: [String(p)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Les multiples de 25 se retiennent par cœur : 25, 50, 75, 100.",
-          "On compte de 25 en 25 autant de fois qu'il le faut.",
-          `${Array.from({ length: n }, (_, i) => (i + 1) * 25).join(", ")} : le ${n}ᵉ est ${p}.`,
-          `${n} × 25 = ${p}.`,
-        ),
-      };
+  gab(
+    "ce1_calcul_faits_tpl_1",
+    "ce1_calcul_faits_multiplicatifs",
+    3,
+    "Compte de 25 en 25 : 25, 50, 75, 100.",
+    ["faits"],
+    () => {
+      const n = ri(1, 4);
+      const prod = n * 25;
+      const p = enfant();
+      const explication = exp(
+        "Les multiples de 25 se retiennent par cœur : 25, 50, 75, 100.",
+        "On compte de 25 en 25 autant de fois qu'il le faut.",
+        `${Array.from({ length: n }, (_, i) => (i + 1) * 25).join(", ")} : ${n} fois 25 font ${prod}.`,
+        `${n} × 25 = ${prod}.`,
+      );
+      const famille = rc(["nu", "repete", "situation", "situation"] as const);
+      if (famille === "nu") return nombreOuQcm(direCalcul(`${n} × 25`), prod, [prod + 25, prod - 25, n * 20, n + 25], explication, pile(0.5) ? dessinBarre({ total: "?", parts: Array.from({ length: n }, () => ({ label: "", value: "25" })) }) : undefined);
+      if (famille === "repete") {
+        return nombreOuQcm(
+          direCalcul(Array.from({ length: Math.max(2, n) }, () => "25").join(" + ")),
+          Math.max(2, n) * 25,
+          [Math.max(2, n) * 25 + 25, Math.max(2, n) * 25 - 25, Math.max(2, n) * 20],
+          exp(
+            "Les multiples de 25 se retiennent par cœur : 25, 50, 75, 100.",
+            "On compte de 25 en 25.",
+            `${Array.from({ length: Math.max(2, n) }, (_, i) => (i + 1) * 25).join(", ")}.`,
+            `Cela fait ${Math.max(2, n) * 25}.`,
+          ),
+        );
+      }
+      const s = rc([
+        { avant: `La boulangère range ses croissants par plateaux de 25. ${p.nom} l'aide à remplir ${pl(n, "plateau", "plateaux")}.`, q: "Combien de croissants cela fait-il ?" },
+        { avant: `${p.nom} achète ${pl(n, "sachet", "sachets")} de 25 billes.`, q: "Combien de billes a-t-" + p.il + " ?" },
+        { avant: `Au cirque, chaque rangée a 25 places. ${p.nom} et ses amis remplissent ${pl(n, "rangée", "rangées")}.`, q: "Combien de places sont prises ?" },
+        { avant: `Le jardinier plante 25 fleurs dans chaque bac. ${p.nom} compte ${pl(n, "bac", "bacs")} pleins.`, q: "Combien de fleurs y a-t-il ?" },
+        { avant: `Dans la fusée de ${p.nom}, chaque étage a 25 hublots. La fusée a ${pl(n, "étage", "étages")}.`, q: "Combien de hublots en tout ?" },
+        { avant: `${p.nom} donne 25 graines par jour à Pic le paille-en-queue, pendant ${pl(n, "jour", "jours")}.`, q: "Combien de graines cela fait-il ?" },
+        { avant: `${p.nom} colle 25 images sur chaque page de son album. ${maj(p.il)} remplit ${pl(n, "page", "pages")}.`, q: "Combien d'images a-t-" + p.il + " collées ?" },
+      ]);
+      const dessin = pile(0.6);
+      return nombreOuQcm(
+        `${s.avant} ${s.q}`,
+        prod,
+        [prod + 25, prod - 25, n * 20, n + 25],
+        explication,
+        dessin ? dessinBarre({ total: "?", parts: Array.from({ length: n }, () => ({ label: "", value: "25" })) }) : undefined,
+      );
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_DOUBLES_MOITIES — les doubles et les moitiés
@@ -237,190 +383,331 @@ export const calculMentalBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "calcul_mental", "doubles", "remarquable"],
   },
-  {
-    kind: "template",
-    id: "ce1_calcul_doubles_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_doubles_moities",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Sépare les dizaines et les unités avant de doubler.",
-    tags: ["ce1", "calcul_mental", "doubles", "template"],
-    generate: () => {
-      const cherche = randomChoice(["double", "moitié"] as const);
-      if (cherche === "double") {
-        const n = randomChoice([...Array.from({ length: 15 }, (_, i) => i + 1), 20, 25, 30, 35, 40, 45, 50, 100, 200, 300]);
-        return {
-          text: `Quel est le double de ${n} ?`,
-          format: "short",
-          expected: [String(n * 2)],
-          comparator: "number_equal",
-          explanation: exp(
-            "Le double d'un nombre, c'est ce nombre pris deux fois.",
-            "On additionne le nombre avec lui-même.",
-            `${n} + ${n} = ${n * 2}.`,
-            `Le double de ${n} est ${n * 2}.`,
-          ),
-        };
+  gab(
+    "ce1_calcul_doubles_tpl_1",
+    "ce1_calcul_doubles_moities",
+    3,
+    "Sépare les dizaines et les unités avant de doubler.",
+    ["doubles"],
+    () => {
+      const p = enfant();
+      const [a, b] = deuxEnfants();
+      if (pile()) {
+        const n = rc([...Array.from({ length: 15 }, (_, i) => i + 1), 20, 25, 30, 35, 40, 45, 50, 100, 200, 300, 400, 500]);
+        const d = n * 2;
+        const explication = exp(
+          "Le double d'un nombre, c'est ce nombre pris deux fois.",
+          n > 10 && n % 10 ? "On double les dizaines, puis les unités, et on réunit." : "On additionne le nombre avec lui-même.",
+          n > 10 && n % 10 ? `${n} = ${n - (n % 10)} + ${n % 10}. ${n - (n % 10)} + ${n - (n % 10)} = ${2 * (n - (n % 10))}, ${n % 10} + ${n % 10} = ${2 * (n % 10)}. En tout ${d}.` : `${n} + ${n} = ${d}.`,
+          `Le double de ${n} est ${d}.`,
+        );
+        const c = choseDessinable();
+        if (n <= 10 && pile(0.7)) {
+          return nombreOuQcm(
+            rc([
+              `Voici les ${c.pl} de ${a.nom}. ${b.nom} en a autant. Combien de ${c.pl} ont-ils à eux deux ?`,
+              `${a.nom} a ces ${c.pl}. Pic en apporte encore autant. Combien de ${c.pl} en tout ?`,
+              `${a.nom} veut le double de ces ${c.pl}. Combien de ${c.pl} cela fait-il ?`,
+            ]),
+            d,
+            [d + 1, d - 1, n + 1, n],
+            explication,
+            dessinObjets(c.objet!, n),
+          );
+        }
+        const text = rc([
+          `${p.nom} cherche le double de ${n}. Que trouve-t-${p.il} ?`,
+          pile() ? `Quel est le double de ${n} ?` : `Le double de ${n}, c'est combien ?`,
+          direCalcul(`${n} + ${n}`),
+          `${a.nom} a ${pl(n, c.sg, c.pl)}. ${b.nom} en a deux fois plus. Combien ${b.nom} en a-t-${b.il} ?`,
+          `${p.nom} double le nombre ${n}. Quel nombre trouve-t-${p.il} ?`,
+          `Pic le paille-en-queue dit « ${n} ». Ravi répond par son double. Que dit Ravi ?`,
+        ]);
+        return nombreOuQcm(text, d, [d + 10, d - 10, n + 2, d + 1], explication, n >= 11 && n <= 50 && pile(0.4) ? dessinNombre(n) : undefined);
       }
-      const moitie = randomChoice([...Array.from({ length: 15 }, (_, i) => i + 1), 20, 25, 30, 40, 50, 100, 150, 200]);
-      const n = moitie * 2;
-      return {
-        text: `Quelle est la moitié de ${n} ?`,
-        format: "short",
-        expected: [String(moitie)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La moitié d'un nombre, c'est ce qu'on obtient en le partageant en deux parts égales.",
-          "On cherche le nombre qui, ajouté à lui-même, redonne le nombre de départ.",
-          `${moitie} + ${moitie} = ${n}. La moitié de ${n} est donc ${moitie}.`,
-          `La moitié de ${n} est ${moitie}.`,
-        ),
-      };
+      const m = rc([...Array.from({ length: 15 }, (_, i) => i + 1), 20, 25, 30, 40, 50, 100, 150, 200, 250]);
+      const n = m * 2;
+      const explication = exp(
+        "La moitié d'un nombre, c'est ce qu'on obtient en le partageant en deux parts égales.",
+        "On cherche le nombre qui, ajouté à lui-même, redonne le nombre de départ.",
+        `${m} + ${m} = ${n}. La moitié de ${n} est donc ${m}.`,
+        `La moitié de ${n} est ${m}.`,
+      );
+      const c = chose();
+      if (n <= 30 && pile(0.7)) {
+        return nombreOuQcm(
+          rc([
+            `${a.nom} et ${b.nom} se partagent ces ${c.pl} en deux parts égales. Combien de ${c.pl} chacun ?`,
+            `${a.nom} partage ces ${c.pl} en deux tas pareils. Combien de ${c.pl} dans chaque tas ?`,
+            `${a.nom} donne la moitié de ses ${c.pl} à ${b.nom}. Combien en donne-t-${a.il} ?`,
+          ]),
+          m,
+          [m + 1, m - 1, n, m + 2],
+          explication,
+          dessinQuantite(c, n),
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          pile() ? `Quelle est la moitié de ${n} ?` : `La moitié de ${n}, c'est combien ?`,
+          `${p.nom} cherche la moitié de ${n}. Que trouve-t-${p.il} ?`,
+          `${p.nom} partage ${n} en deux parts égales. Combien dans chaque part ?`,
+          `${a.nom} et ${b.nom} se partagent ${n} ${c.pl} à parts égales. Combien chacun en reçoit-il ?`,
+          `${p.nom} donne ${n} graines à Pic le paille-en-queue. Il en mange la moitié. Combien en mange-t-il ?`,
+        ]),
+        m,
+        [m + 10, m - 1, n, m + 5],
+        explication,
+      );
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_COMPLEMENTS_100 — compléter à la dizaine
      ou à la centaine supérieure. C'est la procédure du CP,
      réinvestie toute l'année, et l'appui du rendu de monnaie.
   ========================================================= */
-  {
-    kind: "template",
-    id: "ce1_calcul_complements_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_complements_100",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Regarde le chiffre des unités et complète-le à 10.",
-    tags: ["ce1", "calcul_mental", "complements", "template"],
-    generate: () => {
-      const d = randomInt(1, 9);
-      const u = randomInt(1, 9);
+  gab(
+    "ce1_calcul_complements_tpl_1",
+    "ce1_calcul_complements_100",
+    3,
+    "Regarde le chiffre des unités et complète-le à 10.",
+    ["complements"],
+    () => {
+      const d = ri(1, 9);
+      const u = ri(1, 9);
       const n = d * 10 + u;
       const manque = 10 - u;
-      return {
-        text: `Combien faut-il ajouter à ${n} pour atteindre la dizaine supérieure ?`,
-        format: "short",
-        expected: [String(manque)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La dizaine supérieure est la dizaine juste après le nombre.",
-          "On regarde le chiffre des unités et on cherche son complément à 10.",
-          `${n}, c'est ${d} dizaines et ${u} unités. Le complément de ${u} à 10 est ${manque} : ${n} + ${manque} = ${(d + 1) * 10}.`,
-          `Il faut ajouter ${manque}.`,
-        ),
-      };
+      const cible = (d + 1) * 10;
+      const p = enfant();
+      const c = chose();
+      const explication = exp(
+        "La dizaine supérieure est la dizaine juste après le nombre.",
+        "On regarde le chiffre des unités et on cherche son complément à 10.",
+        `${n}, c'est ${d} dizaines et ${u} unités. Il manque ${manque} unités pour faire une dizaine de plus : ${n} + ${manque} = ${cible}.`,
+        `Il faut ajouter ${manque}.`,
+      );
+      const famille = rc(["dessin", "dessin", "trou", "phrase", "situation"] as const);
+      if (famille === "dessin") {
+        return nombreOuQcm(
+          rc([
+            `Voici ${n} en barres et en cubes. Combien de cubes faut-il ajouter pour faire une barre de plus ?`,
+            `${p.nom} a construit ${n} avec ses cubes. Combien de cubes lui manque-t-il pour arriver à ${cible} ?`,
+            `Il y a ${n} cubes. Combien en faut-il encore pour avoir ${cible} cubes ?`,
+          ]),
+          manque,
+          [u, manque + 1, manque - 1, cible],
+          explication,
+          dessinNombre(n),
+        );
+      }
+      if (famille === "trou") return court(direTrou(`${n} + … = ${cible}`), manque, explication);
+      if (famille === "phrase") {
+        return nombreOuQcm(
+          rc([
+            `Combien faut-il ajouter à ${n} pour atteindre la dizaine supérieure ?`,
+            `De ${n}, combien faut-il pour arriver à ${cible} ?`,
+            `${p.nom} compte ${n}, puis s'arrête à ${cible}. Combien a-t-${p.il} ajouté ?`,
+          ]),
+          manque,
+          [u, manque + 1, manque - 1],
+          explication,
+          pile(0.5) ? dessinNombre(n) : undefined,
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en veut ${cible}. Combien lui en manque-t-il ?`,
+          `Au jeu de l'oie, ${p.nom} est sur la case ${n}. Combien de cases pour arriver à la case ${cible} ?`,
+          `La boîte de ${p.nom} se ferme quand il y a ${cible} ${c.pl}. Il y en a ${n}. Combien faut-il en ajouter ?`,
+        ]),
+        manque,
+        [u, manque + 1, manque - 1],
+        explication,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_complements_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_complements_100",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Combien manque-t-il pour arriver à la centaine juste après ?",
-    tags: ["ce1", "calcul_mental", "complements", "template"],
-    generate: () => {
-      const c = randomInt(1, 8);
-      const reste = randomInt(1, 9) * 10;
+  ),
+  gab(
+    "ce1_calcul_complements_tpl_2",
+    "ce1_calcul_complements_100",
+    4,
+    "Combien manque-t-il pour arriver à la centaine juste après ?",
+    ["complements"],
+    () => {
+      const c = ri(1, 8);
+      const reste = ri(1, 9) * 10;
       const n = c * 100 + reste;
       const manque = 100 - reste;
-      return {
-        text: `Combien faut-il ajouter à ${n} pour atteindre la centaine supérieure ?`,
-        format: "short",
-        expected: [String(manque)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La centaine supérieure est la centaine juste après le nombre.",
-          "On regarde ce qui dépasse la centaine, puis on cherche son complément à 100.",
-          `${n} dépasse ${c * 100} de ${reste}. Le complément de ${reste} à 100 est ${manque} : ${n} + ${manque} = ${(c + 1) * 100}.`,
-          `Il faut ajouter ${manque}.`,
-        ),
-      };
+      const cible = (c + 1) * 100;
+      const p = enfant();
+      const explication = exp(
+        "La centaine supérieure est la centaine juste après le nombre.",
+        "On regarde ce qui dépasse la centaine, puis on cherche son complément à 100.",
+        `${n} dépasse ${c * 100} de ${reste}. Pour faire 100, il manque ${manque} : ${n} + ${manque} = ${cible}.`,
+        `Il faut ajouter ${manque}.`,
+      );
+      const barre = () => dessinBarre({ total: String(cible), parts: [{ label: "", value: String(n) }, { label: "", unknown: true }] });
+      const famille = rc(["dessin", "trou", "phrase", "situation", "situation"] as const);
+      if (famille === "dessin") {
+        return nombreOuQcm(
+          rc([
+            `Voici ${n} en plaques et en barres. Combien faut-il ajouter pour faire une plaque de plus ?`,
+            `${p.nom} a posé ${n} avec son matériel. Combien lui manque-t-il pour arriver à ${cible} ?`,
+          ]),
+          manque,
+          [reste, manque + 10, manque - 10, manque / 10],
+          explication,
+          dessinNombre(n),
+        );
+      }
+      if (famille === "trou") return court(direTrou(`${n} + … = ${cible}`), manque, explication);
+      if (famille === "phrase") {
+        return nombreOuQcm(
+          rc([
+            `${p.nom} cherche combien ajouter à ${n} pour atteindre la centaine supérieure. Que trouve-t-${p.il} ?`,
+            `${p.nom} compte de ${n} à ${cible}. Combien a-t-${p.il} ajouté ?`,
+          ]),
+          manque,
+          [reste, manque + 10, manque - 10],
+          explication,
+          pile(0.5) ? barre() : undefined,
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          `La boulangère a cuit ${n} pains. ${p.nom} lui dit qu'il en faut ${cible}. Combien doit-elle encore en cuire ?`,
+          `La fusée de ${p.nom} est à ${n} mètres. Elle doit monter à ${cible} mètres. Combien de mètres lui reste-t-il ?`,
+          `Au marché, ${p.nom} compte ${n} mangues. Le marchand en veut ${cible}. Combien doit-il en apporter ?`,
+          `${p.nom} a ${n} points au jeu. On gagne à ${cible} points. Combien de points lui manque-t-il ?`,
+          `Le château de ${p.nom} a ${n} briques. Il en faut ${cible}. Combien de briques manque-t-il ?`,
+        ]),
+        manque,
+        [reste, manque + 10, manque - 10],
+        explication,
+        pile(0.6) ? barre() : undefined,
+      );
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_DIZAINES_CENTAINES — ajouter des dizaines
      ou des centaines entières
   ========================================================= */
-  {
-    kind: "template",
-    id: "ce1_calcul_dizaines_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_dizaines_centaines",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "On ne touche qu'aux dizaines, ou qu'aux centaines.",
-    tags: ["ce1", "calcul_mental", "dizaines", "template"],
-    generate: () => {
-      const rang = randomChoice([10, 100] as const);
-      const c = randomInt(1, 5);
-      const d = randomInt(1, 4);
-      const u = randomInt(1, 9);
-      const n = c * 100 + d * 10 + u;
-      const combien = randomInt(1, 4) * rang;
-      const total = n + combien;
-      return {
-        text: `Combien font ${n} + ${combien} ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          rang === 10
-            ? "Ajouter un nombre entier de dizaines, c'est ajouter des dizaines aux dizaines."
-            : "Ajouter un nombre entier de centaines, c'est ajouter des centaines aux centaines.",
-          "On s'appuie sur la numération : seul le rang concerné change.",
-          `${n} + ${combien} = ${total}. Les autres rangs ne bougent pas.`,
-          `Cela fait ${total}.`,
-        ),
-      };
+  gab(
+    "ce1_calcul_dizaines_tpl_1",
+    "ce1_calcul_dizaines_centaines",
+    3,
+    "On ne touche qu'aux dizaines, ou qu'aux centaines.",
+    ["dizaines"],
+    () => {
+      const rang = rc([10, 100] as const);
+      const n = ri(1, 5) * 100 + ri(1, 4) * 10 + ri(1, 9);
+      const k = ri(1, 4);
+      const ajout = k * rang;
+      const total = n + ajout;
+      const p = enfant();
+      const explication = exp(
+        rang === 10
+          ? "Ajouter un nombre entier de dizaines, c'est ajouter des dizaines aux dizaines."
+          : "Ajouter un nombre entier de centaines, c'est ajouter des centaines aux centaines.",
+        "On s'appuie sur la numération : seul le rang concerné change.",
+        `${ajout}, c'est ${k} ${rang === 10 ? (k > 1 ? "dizaines" : "dizaine") : k > 1 ? "centaines" : "centaine"}. ${n} + ${ajout} = ${total}. Les autres chiffres ne bougent pas.`,
+        `Cela fait ${total}.`,
+      );
+      const objet = rang === 10 ? pl(k, "barre", "barres") : pl(k, "plaque", "plaques");
+      const famille = rc(["dessin", "dessin", "nu", "situation"] as const);
+      if (famille === "dessin") {
+        return nombreOuQcm(
+          rc([
+            `Voici le nombre ${n}. On ajoute ${objet}. Quel nombre obtient-on ?`,
+            `${p.nom} a construit ${n}. ${maj(p.il)} ajoute ${objet}. Quel nombre a-t-${p.il} maintenant ?`,
+            `On ajoute ${objet} à ce matériel. Quel nombre obtient-on ?`,
+          ]),
+          total,
+          [n + k, n + ajout * 10 > 999 ? n + 1 : n + ajout * 10, total + rang, total - rang].filter((x) => x <= 1000),
+          explication,
+          dessinNombre(n),
+        );
+      }
+      if (famille === "nu") return nombreOuQcm(direCalcul(`${n} + ${ajout}`), total, [n + k, total + rang, total - rang], explication, pile(0.4) ? dessinNombre(n) : undefined);
+      return nombreOuQcm(
+        rc([
+          `${p.nom} a ${n} perles. ${maj(p.il)} reçoit ${k} ${rang === 10 ? "boîtes de 10" : "sacs de 100"} perles. Combien de perles a-t-${p.il} ?`,
+          `La bibliothèque a ${n} livres. On en apporte ${ajout}. Combien de livres y a-t-il ?`,
+          `Le train transporte ${n} voyageurs. ${ajout} voyageurs montent. Combien sont dans le train ?`,
+          `Pic le paille-en-queue a ${n} graines. Il en trouve ${ajout} de plus. Combien en a-t-il ?`,
+        ]),
+        total,
+        [n + k, total + rang, total - rang],
+        explication,
+      );
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_MULTIPLIER_10 — multiplier par 10
      Le programme l'explique par la numération, pas par « on
      ajoute un zéro » : chaque unité devient une dizaine.
   ========================================================= */
-  {
-    kind: "template",
-    id: "ce1_calcul_multiplier_10_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_multiplier_10",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Chaque chiffre monte d'un rang.",
-    tags: ["ce1", "calcul_mental", "multiplier_10", "template"],
-    generate: () => {
-      const n = randomInt(11, 99);
-      const p = n * 10;
-      return {
-        text: `Combien font 10 × ${n} ?`,
-        format: "short",
-        expected: [String(p)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Multiplier par 10 donne à chaque chiffre une valeur dix fois plus grande.",
-          "Les unités deviennent des dizaines, les dizaines deviennent des centaines.",
-          `Dans ${n}, le ${Math.floor(n / 10)} des dizaines devient ${Math.floor(n / 10)} centaines et le ${n % 10} des unités devient ${n % 10} dizaines : ${p}.`,
-          `10 × ${n} = ${p}.`,
-        ),
-      };
+  gab(
+    "ce1_calcul_multiplier_10_tpl_1",
+    "ce1_calcul_multiplier_10",
+    3,
+    "Chaque unité devient une dizaine, chaque dizaine une centaine.",
+    ["multiplier_10"],
+    () => {
+      const n = pile(0.35) ? ri(2, 9) : ri(11, 99);
+      const r = n * 10;
+      const p = enfant();
+      const d = Math.floor(n / 10);
+      const u = n % 10;
+      const explication = exp(
+        "Multiplier par 10 donne à chaque chiffre une valeur dix fois plus grande.",
+        "Les unités deviennent des dizaines, les dizaines deviennent des centaines.",
+        d
+          ? `Dans ${n}, les ${d} dizaines deviennent ${d} centaines et les ${u} unités deviennent ${u} dizaines : ${r}.`
+          : `${n} unités deviennent ${n} dizaines : ${r}.`,
+        `10 × ${n} = ${r}.`,
+      );
+      const faux = [n + 10, r + 1, n * 100 > 1000 ? r + 10 : n * 100, r - 10];
+      const famille = rc(["nu", "dessin", "dessin", "situation", "dizaines"] as const);
+      if (famille === "nu") return nombreOuQcm(direCalcul(rc([`10 × ${n}`, `${n} × 10`])), r, faux, explication);
+      if (famille === "dessin") {
+        return nombreOuQcm(
+          rc([
+            `Voici le nombre ${n}. ${p.nom} le multiplie par 10 : chaque cube devient une barre, chaque barre une plaque. Quel nombre obtient-${p.il} ?`,
+            `${p.nom} a construit ${n}. ${maj(p.il)} fait la même chose 10 fois. Combien cela fait-il ?`,
+            `Le matériel de ${p.nom} montre ${n}. Combien font 10 fois ce nombre ?`,
+          ]),
+          r,
+          faux,
+          explication,
+          dessinNombre(n),
+        );
+      }
+      if (famille === "dizaines") {
+        return nombreOuQcm(
+          rc([`${p.nom} a ${n} dizaines de billes. Combien de billes cela fait-il ?`, `Quel nombre fait ${n} dizaines ? Aide ${p.nom} !`, `${p.nom} a ${n} barres de dix cubes. Combien de cubes a-t-${p.il} ?`]),
+          r,
+          faux,
+          explication,
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          `${p.nom} a ${n} paquets de 10 images. Combien d'images a-t-${p.il} ?`,
+          `${p.nom} aide le fermier : ${p.il} remplit ${n} boîtes de 10 œufs. Combien d'œufs cela fait-il ?`,
+          `Au cirque, ${p.nom} voit ${n} clowns. Chacun a 10 ballons. Combien de ballons en tout ?`,
+          `La maîtresse de ${p.nom} distribue 10 craies à chacune des ${n} tables. Combien de craies distribue-t-elle ?`,
+          `${p.nom} donne 10 graines par jour à Pic le paille-en-queue, pendant ${n} jours. Combien de graines cela fait-il ?`,
+        ]),
+        r,
+        faux,
+        explication,
+        pile(0.6) ? { kind: "base_dix", dizaines: 1, consigne: "Un paquet de 10" } : undefined,
+      );
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_AJOUTER_9_19_29 — la procédure du programme
@@ -454,36 +741,55 @@ export const calculMentalBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "calcul_mental", "ajouter_9", "methode", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce1_calcul_ajouter_9_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_ajouter_9_19_29_39",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Ajoute la dizaine ronde, puis enlève 1.",
-    tags: ["ce1", "calcul_mental", "ajouter_9", "template"],
-    generate: () => {
-      const ajout = randomChoice([9, 19, 29] as const);
+  gab(
+    "ce1_calcul_ajouter_9_tpl_1",
+    "ce1_calcul_ajouter_9_19_29_39",
+    3,
+    "Ajoute la dizaine ronde, puis enlève 1.",
+    ["ajouter_9"],
+    () => {
+      const ajout = rc([9, 9, 19, 29] as const);
       const rond = ajout + 1;
-      const n = randomInt(23, 400);
+      const dessin = pile(0.6);
+      const n = dessin ? ri(23, 89) : ri(23, 400);
       const total = n + ajout;
-      return {
-        text: `Combien font ${n} + ${ajout} ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          `Ajouter ${ajout}, c'est ajouter ${rond} puis enlever 1.`,
-          "On ajoute d'abord le nombre rond, ce qui est facile, puis on reprend l'unité en trop.",
-          `${n} + ${rond} = ${n + rond}, puis ${n + rond} - 1 = ${total}.`,
-          `${n} + ${ajout} = ${total}.`,
-        ),
-      };
+      const p = enfant();
+      const c = chose();
+      const explication = exp(
+        `Ajouter ${ajout}, c'est ajouter ${rond} puis enlever 1.`,
+        "On ajoute d'abord le nombre rond, ce qui est facile, puis on reprend l'unité en trop.",
+        `${n} + ${rond} = ${n + rond}, puis ${n + rond} - 1 = ${total}.`,
+        `${n} + ${ajout} = ${total}.`,
+      );
+      const faux = [n + rond + 1, n + rond, total - 10, total + 2];
+      if (dessin) {
+        return nombreOuQcm(
+          rc([
+            `Voici le nombre ${n}. ${p.nom} lui ajoute ${ajout}. Quel nombre obtient-${p.il} ?`,
+            `${p.nom} a construit ${n} avec ses cubes. ${maj(p.il)} en ajoute ${ajout}. Combien de cubes a-t-${p.il} ?`,
+            `${p.nom} ajoute ${ajout} cubes à ce matériel. Combien de cubes y a-t-il maintenant ?`,
+          ]),
+          total,
+          faux,
+          explication,
+          dessinNombre(n),
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          direCalcul(`${n} + ${ajout}`),
+          direCalcul(`${n} + ${ajout}`),
+          `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en gagne ${ajout}. Combien en a-t-${p.il} maintenant ?`,
+          `Dans le train de ${p.nom}, il y a ${n} voyageurs. ${ajout} voyageurs montent. Combien sont-ils ?`,
+          `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} avait ${n} pièces d'or. ${maj(p.il)} en trouve ${ajout} dans un coffre. Combien en a-t-${p.il} ?`,
+          `${p.nom} est sur la case ${n} du grand jeu. ${maj(p.il)} avance de ${ajout} cases. Sur quelle case arrive-t-${p.il} ?`,
+        ]),
+        total,
+        faux,
+        explication,
+      );
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_SOUSTRAIRE_9 — l'inverse de la procédure
@@ -516,34 +822,53 @@ export const calculMentalBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "calcul_mental", "soustraire_9", "methode", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce1_calcul_soustraire_9_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_soustraire_9",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Enlève 10, puis rends 1.",
-    tags: ["ce1", "calcul_mental", "soustraire_9", "template"],
-    generate: () => {
-      const n = randomInt(25, 500);
-      const reste = n - 9;
-      return {
-        text: `Combien font ${n} - 9 ?`,
-        format: "short",
-        expected: [String(reste)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Soustraire 9, c'est enlever 10 puis rendre 1.",
-          "On enlève d'abord la dizaine, ce qui est facile, puis on rend l'unité enlevée en trop.",
-          `${n} - 10 = ${n - 10}, puis ${n - 10} + 1 = ${reste}.`,
-          `${n} - 9 = ${reste}.`,
-        ),
-      };
+  gab(
+    "ce1_calcul_soustraire_9_tpl_1",
+    "ce1_calcul_soustraire_9",
+    3,
+    "Enlève 10, puis rends 1.",
+    ["soustraire_9"],
+    () => {
+      const dessin = pile(0.6);
+      const n = dessin ? ri(21, 99) : ri(25, 500);
+      const r = n - 9;
+      const p = enfant();
+      const c = chose();
+      const explication = exp(
+        "Soustraire 9, c'est enlever 10 puis rendre 1.",
+        "On enlève d'abord la dizaine, ce qui est facile, puis on rend l'unité enlevée en trop.",
+        `${n} - 10 = ${n - 10}, puis ${n - 10} + 1 = ${r}.`,
+        `${n} - 9 = ${r}.`,
+      );
+      const faux = [n - 11, n - 10, r + 10, r - 2];
+      if (dessin) {
+        return nombreOuQcm(
+          rc([
+            `Voici le nombre ${n}. ${p.nom} enlève 9 cubes. Combien en reste-t-il ?`,
+            `${p.nom} a construit ${n} avec ses cubes. ${maj(p.il)} en retire 9. Combien en reste-t-il ?`,
+            `${p.nom} retire 9 à ce nombre. Quel nombre obtient-${p.il} ?`,
+          ]),
+          r,
+          faux,
+          explication,
+          dessinNombre(n),
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          direCalcul(`${n} - 9`),
+          direCalcul(`${n} - 9`),
+          `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en donne 9. Combien lui en reste-t-il ?`,
+          `À la piscine, ${p.nom} compte ${n} enfants. 9 enfants sortent de l'eau. Combien restent dans l'eau ?`,
+          `Le dragon garde ${n} pierres précieuses. Le chevalier ${p.nom} en prend 9. Combien en reste-t-il ?`,
+          `${p.nom} est sur la case ${n} du grand jeu. ${maj(p.il)} recule de 9 cases. Sur quelle case arrive-t-${p.il} ?`,
+        ]),
+        r,
+        faux,
+        explication,
+      );
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_SOUSTRAIRE_INFERIEUR_9 — passer par la dizaine
@@ -578,38 +903,66 @@ export const calculMentalBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "calcul_mental", "soustraire", "methode", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce1_calcul_soustraire_inf9_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_soustraire_inferieur_9",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Descends d'abord à la dizaine ronde.",
-    tags: ["ce1", "calcul_mental", "soustraire", "template"],
-    generate: () => {
+  gab(
+    "ce1_calcul_soustraire_inf9_tpl_1",
+    "ce1_calcul_soustraire_inferieur_9",
+    4,
+    "Descends d'abord à la dizaine ronde.",
+    ["soustraire"],
+    () => {
       // Le chiffre des unités est plus petit que ce qu'on retire : c'est là que
       // le passage par la dizaine sert.
-      const u = randomInt(1, 5);
-      const retire = randomInt(u + 1, 8);
-      const n = randomInt(11, 90) * 10 + u;
+      const u = ri(1, 5);
+      const retire = ri(u + 1, 8);
+      const dessin = pile(0.6);
+      const n = (dessin ? ri(2, 9) : ri(11, 90)) * 10 + u;
       const reste = n - retire;
-      return {
-        text: `Combien font ${n} - ${retire} ?`,
-        format: "short",
-        expected: [String(reste)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand il n'y a pas assez d'unités, on descend d'abord jusqu'à la dizaine ronde.",
-          "On enlève ce qu'il faut pour atteindre la dizaine, puis le reste.",
-          `${n} - ${u} = ${n - u}. Il reste à enlever ${retire - u}, car ${retire} = ${u} + ${retire - u} : ${n - u} - ${retire - u} = ${reste}.`,
-          `${n} - ${retire} = ${reste}.`,
-        ),
-      };
+      const p = enfant();
+      const c = chose();
+      const explication = exp(
+        "Quand il n'y a pas assez d'unités, on descend d'abord jusqu'à la dizaine ronde.",
+        "On enlève ce qu'il faut pour atteindre la dizaine, puis le reste.",
+        `${n} - ${u} = ${n - u}. Il reste à enlever ${retire - u}, car ${retire} = ${u} + ${retire - u} : ${n - u} - ${retire - u} = ${reste}.`,
+        `${n} - ${retire} = ${reste}.`,
+      );
+      const faux = [reste + 10, n - u, reste + 2, reste - 1];
+      const famille = rc(["nu", "etape", "situation", "dessin"] as const);
+      if (dessin || famille === "dessin") {
+        return nombreOuQcm(
+          rc([
+            `Voici le nombre ${n}. ${p.nom} enlève ${retire} cubes : il faut casser une barre. Combien reste-t-il de cubes ?`,
+            `${p.nom} a ${n} cubes. ${maj(p.il)} en donne ${retire}. Combien lui en reste-t-il ?`,
+            `${p.nom} retire ${retire} à ce nombre. Quel nombre obtient-${p.il} ?`,
+          ]),
+          reste,
+          faux,
+          explication,
+          dessinNombre(n, { echange: "unites" }),
+        );
+      }
+      if (famille === "etape") {
+        return court(
+          rc([
+            `Pour calculer ${n} - ${retire}, ${p.nom} descend d'abord à ${n - u}. Combien lui reste-t-il à enlever ?`,
+            `${p.nom} calcule ${n} - ${retire}. ${maj(p.il)} enlève d'abord ${u}. Combien doit-${p.il} encore enlever ?`,
+          ]),
+          retire - u,
+          explication,
+        );
+      }
+      if (famille === "nu") return nombreOuQcm(direCalcul(`${n} - ${retire}`), reste, faux, explication);
+      return nombreOuQcm(
+        rc([
+          `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en perd ${retire}. Combien lui en reste-t-il ?`,
+          `La boulangère a ${n} baguettes. Elle en vend ${retire} à ${p.nom}. Combien en reste-t-il ?`,
+          `Le livre a ${n} pages. ${p.nom} est à ${retire} pages de la fin. À quelle page est-${p.il} ?`,
+        ]),
+        reste,
+        faux,
+        explication,
+      );
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_MOITIE_NOMBRE_PAIR — la moitié d'un nombre pair
@@ -638,36 +991,76 @@ export const calculMentalBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "calcul_mental", "moitie", "methode"],
   },
-  {
-    kind: "template",
-    id: "ce1_calcul_moitie_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_moitie_nombre_pair",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Décompose le nombre avant de le partager en deux.",
-    tags: ["ce1", "calcul_mental", "moitie", "template"],
-    generate: () => {
-      const dizaines = randomInt(1, 4) * 2; // dizaines paires : moitié facile
-      const unites = randomInt(1, 4) * 2;
-      const n = dizaines * 10 + unites;
-      const moitie = n / 2;
-      return {
-        text: `Quelle est la moitié de ${n} ?`,
-        format: "short",
-        expected: [String(moitie)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Pour trouver la moitié d'un nombre pair, on le coupe en morceaux dont on connaît les moitiés.",
-          "On décompose en dizaines et unités, on prend la moitié de chaque, puis on additionne.",
-          `${n} = ${dizaines * 10} + ${unites}. La moitié de ${dizaines * 10} est ${(dizaines * 10) / 2}, celle de ${unites} est ${unites / 2}. ${(dizaines * 10) / 2} + ${unites / 2} = ${moitie}.`,
-          `La moitié de ${n} est ${moitie}.`,
-        ),
-      };
+  gab(
+    "ce1_calcul_moitie_tpl_1",
+    "ce1_calcul_moitie_nombre_pair",
+    4,
+    "Décompose le nombre avant de le partager en deux.",
+    ["moitie"],
+    () => {
+      const p = enfant();
+      const [a, b] = deuxEnfants();
+      const c = chose();
+      let n: number;
+      let decomposition: string;
+      if (pile(0.75)) {
+        const dizaines = ri(1, 4) * 2;
+        const unites = ri(1, 4) * 2;
+        n = dizaines * 10 + unites;
+        decomposition = `${n} = ${dizaines * 10} + ${unites}. La moitié de ${dizaines * 10} est ${dizaines * 5}, celle de ${unites} est ${unites / 2}. ${dizaines * 5} + ${unites / 2} = ${n / 2}.`;
+      } else {
+        const cent = ri(1, 4) * 2;
+        const diz = ri(1, 4) * 2;
+        n = cent * 100 + diz * 10;
+        decomposition = `${n} = ${cent * 100} + ${diz * 10}. La moitié de ${cent * 100} est ${cent * 50}, celle de ${diz * 10} est ${diz * 5}. ${cent * 50} + ${diz * 5} = ${n / 2}.`;
+      }
+      const m = n / 2;
+      const explication = exp(
+        "Pour trouver la moitié d'un nombre pair, on le coupe en morceaux dont on connaît les moitiés.",
+        "On décompose le nombre, on prend la moitié de chaque morceau, puis on additionne.",
+        decomposition,
+        `La moitié de ${n} est ${m}.`,
+      );
+      const faux = [m + 10, m - 1, m + 5, n - 2];
+      if (n <= 30 && pile(0.7)) {
+        return nombreOuQcm(
+          rc([
+            `${a.nom} et ${b.nom} se partagent ces ${c.pl} en deux parts égales. Combien de ${c.pl} chacun ?`,
+            `${a.nom} fait deux tas pareils avec ces ${c.pl}. Combien de ${c.pl} dans chaque tas ?`,
+          ]),
+          m,
+          [m + 1, m - 1, n, m + 2],
+          explication,
+          dessinQuantite(c, n),
+        );
+      }
+      if (n < 100 && pile(0.5)) {
+        return nombreOuQcm(
+          rc([
+            `Voici le nombre ${n}. ${p.nom} le partage en deux parts égales. Combien dans chaque part ?`,
+            `${p.nom} partage ces cubes en deux tas égaux. Combien de cubes dans chaque tas ?`,
+            `${p.nom} cherche la moitié du nombre montré par ce matériel. Que trouve-t-${p.il} ?`,
+          ]),
+          m,
+          faux,
+          explication,
+          dessinNombre(n),
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          pile() ? `Quelle est la moitié de ${n} ?` : `La moitié de ${n}, c'est combien ?`,
+          `${p.nom} cherche la moitié de ${n}. Que trouve-t-${p.il} ?`,
+          `${a.nom} et ${b.nom} se partagent ${n} ${c.pl} à parts égales. Combien chacun en reçoit-il ?`,
+          `La vétérinaire soigne ${n} animaux. ${p.nom} l'aide pour la moitié. Combien d'animaux ${p.nom} aide-t-${p.il} à soigner ?`,
+          `La cabane de ${p.nom} a ${n} planches, la moitié sont peintes. Combien de planches sont peintes ?`,
+        ]),
+        m,
+        faux,
+        explication,
+      );
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_DISTRIBUTIVITE — décomposer un facteur
@@ -702,36 +1095,38 @@ export const calculMentalBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "calcul_mental", "distributivite", "methode", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce1_calcul_distributivite_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_distributivite",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Coupe le grand facteur en 10 et le reste.",
-    tags: ["ce1", "calcul_mental", "distributivite", "template"],
-    generate: () => {
-      const grand = randomInt(11, 19);
-      const petit = randomInt(2, 9);
+  gab(
+    "ce1_calcul_distributivite_tpl_1",
+    "ce1_calcul_distributivite",
+    5,
+    "Coupe le grand facteur en 10 et le reste.",
+    ["distributivite"],
+    () => {
+      const grand = ri(11, 19);
+      const petit = ri(2, 9);
       const reste = grand - 10;
       const produit = grand * petit;
-      return {
-        text: `Combien font ${grand} × ${petit} ?`,
-        format: "short",
-        expected: [String(produit)],
-        comparator: "number_equal",
-        explanation: exp(
-          "On peut couper un facteur en deux morceaux plus faciles, puis additionner les deux produits.",
-          "On décompose le plus grand facteur en 10 et ce qui dépasse.",
-          `${grand} = 10 + ${reste}. Donc ${grand} × ${petit} = 10 × ${petit} + ${reste} × ${petit} = ${10 * petit} + ${reste * petit} = ${produit}.`,
-          `${grand} × ${petit} = ${produit}.`,
-        ),
-      };
+      const p = enfant();
+      const explication = exp(
+        "On peut couper un facteur en deux morceaux plus faciles, puis additionner les deux produits.",
+        "On décompose le plus grand facteur en 10 et ce qui dépasse.",
+        `${grand} = 10 + ${reste}. Donc ${grand} × ${petit} = 10 × ${petit} + ${reste} × ${petit} = ${10 * petit} + ${reste * petit} = ${produit}.`,
+        `${grand} × ${petit} = ${produit}.`,
+      );
+      const faux = [10 * petit + reste, produit + petit, produit - petit, grand + petit];
+      const dessin = pile(0.5) ? dessinBarre({ total: `${grand} × ${petit}`, parts: [{ label: `10 × ${petit}` }, { label: `${reste} × ${petit}` }] }) : undefined;
+      const text = rc([
+        direCalcul(`${grand} × ${petit}`),
+        `${p.nom} a ${petit} boîtes de ${grand} crayons. Combien de crayons a-t-${p.il} ?`,
+        `Dans le petit train de ${p.nom}, il y a ${petit} wagons de ${grand} enfants. Combien d'enfants en tout ?`,
+        `Le chef cuisinier fait ${petit} plateaux de ${grand} crêpes pour la fête de ${p.nom}. Combien de crêpes prépare-t-il ?`,
+        `${p.nom} range ${petit} étagères de ${grand} livres. Combien de livres range-t-${p.il} ?`,
+        `Un album a ${grand} pages. ${p.nom} en a ${petit} pareils. Combien de pages en tout ?`,
+        `${p.nom} fait ${petit} tours de ${grand} mètres sur la piste. Combien de mètres court-${p.il} ?`,
+      ]);
+      return nombreOuQcm(dessin ? `${text} Le schéma t'aide à couper le calcul.` : text, produit, faux, explication, dessin);
     },
-  },
+  ),
 
   /* =========================================================
      CE1_CALCUL_DEFI — les défis
@@ -764,532 +1159,981 @@ export const calculMentalBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "calcul_mental", "defi", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce1_calcul_defi_tpl_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Deux étapes : chacune est facile.",
-    tags: ["ce1", "calcul_mental", "defi", "template"],
-    generate: () => {
-      const n = randomInt(30, 300);
-      const dizaines = randomInt(2, 6) * 10;
-      const ajout9 = randomChoice([9, 19] as const);
-      const total = n + dizaines + ajout9;
-      return {
-        text: `Combien font ${n} + ${dizaines} + ${ajout9} ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
+  gab(
+    "ce1_calcul_defi_tpl_1",
+    "ce1_calcul_defi",
+    5,
+    "Deux étapes : chacune est facile.",
+    ["defi"],
+    () => {
+      const p = enfant();
+      const famille = rc(["chaine", "mystere_plus", "mystere_moins", "escalier"] as const);
+      if (famille === "chaine") {
+        const n = ri(30, 300);
+        const diz = ri(2, 6) * 10;
+        const a9 = rc([9, 19] as const);
+        const total = n + diz + a9;
+        const explication = exp(
           "On enchaîne deux procédures faciles au lieu d'un calcul difficile.",
           "On ajoute d'abord les dizaines entières, puis on ajoute le nombre rond et on enlève 1.",
-          `${n} + ${dizaines} = ${n + dizaines}. Puis ${n + dizaines} + ${ajout9 + 1} = ${n + dizaines + ajout9 + 1}, et on enlève 1 : ${total}.`,
+          `${n} + ${diz} = ${n + diz}. Puis ${n + diz} + ${a9 + 1} = ${n + diz + a9 + 1}, et on enlève 1 : ${total}.`,
           `Cela fait ${total}.`,
-        ),
-      };
+        );
+        return nombreOuQcm(
+          rc([
+            direCalcul(`${n} + ${diz} + ${a9}`),
+            `${p.nom} a ${n} images. ${maj(p.il)} en gagne ${diz}, puis encore ${a9}. Combien en a-t-${p.il} ?`,
+            `Le train de ${p.nom} part avec ${n} voyageurs. ${diz} montent à la première gare, ${a9} à la deuxième. Combien sont-ils ?`,
+            `${p.nom} a ${n} points. ${maj(p.il)} gagne ${diz} points, puis ${a9}. Combien de points a-t-${p.il} ?`,
+          ]),
+          total,
+          [total + 2, total + 10, total - 10, n + diz + a9 + 1],
+          explication,
+          pile(0.6) ? dessinBarre({ total: "?", parts: [{ label: "", value: String(n) }, { label: "", value: String(diz) }, { label: "", value: String(a9) }] }) : undefined,
+        );
+      }
+      if (famille === "mystere_plus" || famille === "mystere_moins") {
+        const plus = famille === "mystere_plus";
+        const k = rc([9, 19, 20, 30] as const);
+        const x = ri(25, 300);
+        const r = plus ? x + k : x - 9;
+        const op = plus ? `j'ajoute ${k}` : "j'enlève 9";
+        const explication = exp(
+          "Pour retrouver un nombre mystère, on défait ce qui a été fait.",
+          plus ? `On enlève ${k} au résultat.` : "On rajoute 9 au résultat : on ajoute 10, puis on enlève 1.",
+          plus ? `${r} - ${k} = ${x}. On vérifie : ${x} + ${k} = ${r}.` : `${r} + 9 = ${x}. On vérifie : ${x} - 9 = ${r}.`,
+          `Le nombre mystère est ${x}.`,
+        );
+        return nombreOuQcm(
+          rc([
+            `${p.nom} pense à un nombre. « Si ${op}, je trouve ${r}. » Quel est son nombre ?`,
+            `Devinette de ${p.nom} : « Je pense à un nombre, ${op} et je trouve ${r}. » Quel est ce nombre ?`,
+            `${p.nom} et Ti Margo jouent. Ti Margo pense à un nombre : « ${maj(op)}, je trouve ${r}. » Quel nombre a-t-il en tête ?`,
+          ]),
+          x,
+          plus ? [r + k, x + 1, x - 1, x + 10] : [r - 9, x + 1, x - 1, x - 10],
+          explication,
+          pile(0.6)
+            ? plus
+              ? dessinBarre({ total: String(r), parts: [{ label: "", unknown: true }, { label: "", value: String(k) }] })
+              : dessinBarre({ total: "?", parts: [{ label: "", value: String(r) }, { label: "", value: "9" }] })
+            : undefined,
+        );
+      }
+      const depart = ri(20, 80);
+      const pas = rc([10, 20] as const);
+      const fin = depart + pas + pas - 1;
+      const explication = exp(
+        "On suit les étapes dans l'ordre, chacune est facile.",
+        "On ajoute les dizaines, puis on enlève 1.",
+        `${depart} + ${pas} = ${depart + pas}, puis + ${pas} = ${depart + 2 * pas}, puis - 1 = ${fin}.`,
+        `${p.nom} arrive à ${fin}.`,
+      );
+      return nombreOuQcm(
+        rc([
+          `${p.nom} part de ${depart}. ${maj(p.il)} ajoute ${pas}, encore ${pas}, puis enlève 1. Où arrive-t-${p.il} ?`,
+          `Le robot de ${p.nom} est à ${depart}. Il avance de ${pas}, encore de ${pas}, puis recule de 1. Où est-il ?`,
+        ]),
+        fin,
+        [fin + 2, fin + 10, depart + 2 * pas, fin - 10],
+        explication,
+        pile(0.8) ? dessinNombre(depart) : undefined,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_defi_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Double, puis double encore.",
-    tags: ["ce1", "calcul_mental", "defi", "template"],
-    generate: () => {
-      const n = randomInt(11, 60);
-      const quadruple = n * 4;
-      return {
-        text: `Quel est le double du double de ${n} ?`,
-        format: "short",
-        expected: [String(quadruple)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Doubler deux fois de suite revient à multiplier par quatre.",
-          "On calcule le premier double, puis on double le résultat.",
-          `Le double de ${n} est ${n * 2}. Le double de ${n * 2} est ${quadruple}.`,
-          `Cela fait ${quadruple}.`,
+  ),
+  gab(
+    "ce1_calcul_defi_tpl_2",
+    "ce1_calcul_defi",
+    5,
+    "Double, puis double encore.",
+    ["defi"],
+    () => {
+      const p = enfant();
+      const famille = rc(["double_double", "moitie_moitie", "double_plus"] as const);
+      if (famille === "double_double") {
+        const n = ri(11, 60);
+        const q = n * 4;
+        return nombreOuQcm(
+          rc([
+            `${p.nom} cherche le double du double de ${n}. Que trouve-t-${p.il} ?`,
+            `${p.nom} double ${n}, puis double encore le résultat. Que trouve-t-${p.il} ?`,
+            `La plante de ${p.nom} mesure ${n} cm. Elle double, puis double encore. Combien mesure-t-elle ?`,
+            `Pour ${p.nom}, le magicien double les ${n} lapins de son chapeau, puis double encore. Combien de lapins ?`,
+          ]),
+          q,
+          [n * 2, q + 2, q - 10, n * 3],
+          exp(
+            "Doubler deux fois de suite revient à multiplier par quatre.",
+            "On calcule le premier double, puis on double le résultat.",
+            `Le double de ${n} est ${n * 2}. Le double de ${n * 2} est ${q}.`,
+            `Cela fait ${q}.`,
+          ),
+          pile(0.6) ? dessinBarre({ total: "?", parts: [0, 1, 2, 3].map(() => ({ label: "", value: String(n) })) }) : undefined,
+        );
+      }
+      if (famille === "moitie_moitie") {
+        const q = ri(3, 25);
+        const n = q * 4;
+        return nombreOuQcm(
+          rc([
+            `${p.nom} cherche la moitié de la moitié de ${n}. Que trouve-t-${p.il} ?`,
+            `${p.nom} partage ${n} billes en deux, puis encore en deux. Combien de billes dans chaque petit tas ?`,
+            `Le gâteau de ${p.nom} a ${n} framboises. ${maj(p.il)} en garde la moitié, puis la moitié de ce qui reste. Combien de framboises ?`,
+          ]),
+          q,
+          [n / 2, q + 1, q * 3, q - 1],
+          exp(
+            "Prendre la moitié deux fois de suite, c'est partager en quatre.",
+            "On cherche une première moitié, puis la moitié de ce résultat.",
+            `La moitié de ${n} est ${n / 2}. La moitié de ${n / 2} est ${q}.`,
+            `Cela fait ${q}.`,
+          ),
+          n <= 40 && pile(0.6) ? dessinJetons(n) : pile(0.6) ? dessinBarre({ total: String(n), parts: [0, 1, 2, 3].map(() => ({ label: "", unknown: true })) }) : undefined,
+        );
+      }
+      const n = ri(12, 45);
+      const k = rc([9, 10, 19] as const);
+      const r = n * 2 + k;
+      return nombreOuQcm(
+        rc([
+          `${p.nom} double ${n}, puis ajoute ${k}. Quel nombre trouve-t-${p.il} ?`,
+          `Défi de ${p.nom} : double ${n}, puis ajoute ${k}. Quel est le résultat ?`,
+          `${p.nom} donne ${n} graines à Pic. Le lendemain, Pic en a deux fois plus, puis il en trouve ${k}. Combien en a-t-il ?`,
+        ]),
+        r,
+        [n + k, r + 1, r - 1, r + 10],
+        exp(
+          "On enchaîne deux calculs faciles, dans l'ordre.",
+          k === 10 ? "On double, puis on ajoute la dizaine." : `On double, puis on ajoute ${k + 1} et on enlève 1.`,
+          `Le double de ${n} est ${n * 2}. Puis ${n * 2} + ${k} = ${r}.`,
+          `Cela fait ${r}.`,
         ),
-      };
+        pile(0.5) ? dessinBarre({ total: "?", parts: [{ label: "", value: String(n) }, { label: "", value: String(n) }, { label: "", value: String(k) }] }) : undefined,
+      );
     },
-  },
-  // ============================================================
-  // COMPLÉMENTS DU 09/08/2026 — douze micro-compétences n'avaient qu'une ou
-  // deux questions : à la troisième, l'élève revoyait la première. Tous les
-  // ajouts sont des GÉNÉRATEURS, chacun sur un angle absent de la banque.
-  // ============================================================
+  ),
 
-  {
-    kind: "template",
-    id: "ce1_calcul_tables_addition_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_tables_addition",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "La somme est écrite à GAUCHE : le signe = se lit dans les deux sens.",
-    tags: ["ce1", "calcul_mental", "tables", "piege", "template"],
-    generate: () => {
-      const a = randomInt(2, 9);
-      const b = randomInt(2, 9);
-      return {
-        text: `Quel nombre manque : ${a + b} = ${a} + … ?`,
-        format: "short",
-        expected: [String(b)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une table d'addition se connait dans les deux sens : A + B = C, mais aussi C = A + B.",
-          "On cherche ce qu'il faut ajouter à droite pour retrouver le nombre de gauche.",
-          `${a} et combien font ${a + b} ? Il faut ${b}, car ${a} + ${b} = ${a + b}.`,
-          `Le nombre manquant est ${b}.`,
-        ),
-      };
+  /* =========================================================
+     COMPLÉMENTS DU 09/08/2026, refaits le 10/11/2026 en familles.
+  ========================================================= */
+  gab(
+    "ce1_calcul_tables_addition_tpl_2",
+    "ce1_calcul_tables_addition",
+    4,
+    "Le signe = se lit dans les deux sens.",
+    ["tables", "piege"],
+    () => {
+      const a = ri(2, 9);
+      const b = ri(2, 9);
+      const t = a + b;
+      const p = enfant();
+      const c = chose();
+      const explication = exp(
+        "Une table d'addition se connaît dans les deux sens : A + B = C, mais aussi C = A + B.",
+        "On cherche ce qu'il faut ajouter au nombre connu pour retrouver le total.",
+        `${a} et combien font ${t} ? Il faut ${b}, car ${a} + ${b} = ${t}.`,
+        `Le nombre cherché est ${b}.`,
+      );
+      const famille = rc(["egalite", "gagner", "gagner", "dessin", "cachette"] as const);
+      if (famille === "egalite") return court(direTrou(rc([`${t} = ${a} + …`, `${t} = … + ${a}`, `${t} - … = ${a}`])), b, explication);
+      if (famille === "gagner") {
+        return nombreOuQcm(
+          rc([
+            `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en gagne à la récré. Maintenant ${p.il} en a ${t}. Combien en a-t-${p.il} gagné ?`,
+            `${p.nom} compte ${a} enfants dans le bus. D'autres montent. Maintenant ils sont ${t}. Combien sont montés ?`,
+            `L'aquarium de ${p.nom} a ${a} poissons. ${maj(p.il)} en ajoute. Maintenant il y en a ${t}. Combien en a-t-${p.il} ajouté ?`,
+            `${p.nom} avait ${t} ${c.pl}. ${maj(p.il)} en a donné. Il lui en reste ${a}. Combien en a-t-${p.il} donné ?`,
+          ]),
+          b,
+          [t, b + 1, b - 1, t + a],
+          explication,
+          pile(0.5) ? dessinJetons(a) : undefined,
+        );
+      }
+      if (famille === "dessin") {
+        return nombreOuQcm(
+          rc([
+            `${p.nom} a posé ces jetons. ${maj(p.il)} en veut ${t}. Combien doit-${p.il} encore en poser ?`,
+            `Pour son jeu, ${p.nom} doit avoir ${t} jetons. Voici ses jetons. Combien lui en manque-t-il ?`,
+            `Pic le paille-en-queue a posé ces jetons. Il en faut ${t}. Combien en manque-t-il ?`,
+          ]),
+          b,
+          [t, b + 1, b - 1, a],
+          explication,
+          dessinJetons(a),
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          `Pic a caché ${t} graines dans deux cachettes. ${p.nom} en trouve ${a} dans la première. Combien dans la deuxième ?`,
+          `${p.nom} a ${t} ${c.pl} dans ses deux poches. ${a} sont dans la poche de gauche. Combien dans celle de droite ?`,
+          `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} a ${t} pièces d'or dans deux coffres. Le premier en a ${a}. Combien en a le second ?`,
+        ]),
+        b,
+        [t, b + 1, b - 1, t + a],
+        explication,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_tables_multiplication_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_tables_multiplication",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Les tables du CE1 sont celles de 2, de 5 et de 10.",
-    tags: ["ce1", "calcul_mental", "tables_multiplication", "template"],
-    generate: () => {
-      const table = randomChoice([2, 5, 10]);
-      const k = randomInt(2, 9);
-      return {
-        text: `Combien font ${table} × ${k} ?`,
-        format: "short",
-        expected: [String(table * k)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Les tables de 2, de 5 et de 10 se restituent de mémoire.",
-          "Si le résultat ne vient pas, on compte de table en table.",
-          table === 2
-            ? `On compte de deux en deux, ${k} fois : ${table * k}. C'est aussi le double de ${k}.`
-            : table === 5
-              ? `On compte de cinq en cinq, ${k} fois : ${table * k}. Les résultats se terminent tous par 0 ou par 5.`
-              : `Multiplier par 10, c'est ajouter un zéro : ${k} devient ${table * k}.`,
-          `${table} × ${k} = ${table * k}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_tables_multiplication_tpl_3",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_tables_multiplication",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Cherche dans quelle table se trouve ce résultat.",
-    tags: ["ce1", "calcul_mental", "tables_multiplication", "template"],
-    generate: () => {
-      const table = randomChoice([2, 5, 10]);
-      const k = randomInt(2, 9);
-      const r = table * k;
-      return {
-        text: `Quel nombre manque : … × ${k} = ${r} ?`,
-        format: "short",
-        expected: [String(table)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Connaitre une table dans les deux sens, c'est aussi savoir retrouver un facteur.",
-          "On cherche par combien multiplier le nombre connu pour atteindre le résultat.",
-          `${table} × ${k} = ${r}. Le facteur manquant est donc ${table}.`,
-          `Le nombre manquant est ${table}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_faits_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_faits_multiplicatifs",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Quatre paquets de 25 font 100.",
-    tags: ["ce1", "calcul_mental", "faits_multiplicatifs", "template"],
-    generate: () => {
-      const fait = randomChoice([
-        { texte: "Combien de fois 25 faut-il pour faire 100 ?", reponse: 4, pourquoi: "25 + 25 + 25 + 25 = 100." },
-        { texte: "Combien de fois 50 faut-il pour faire 100 ?", reponse: 2, pourquoi: "50 + 50 = 100." },
-        { texte: "Combien de fois 20 faut-il pour faire 100 ?", reponse: 5, pourquoi: "20, 40, 60, 80, 100 : cinq fois." },
-        { texte: "Combien de fois 10 faut-il pour faire 100 ?", reponse: 10, pourquoi: "Dix dizaines font une centaine." },
+  ),
+  gab(
+    "ce1_calcul_tables_multiplication_tpl_2",
+    "ce1_calcul_tables_multiplication",
+    3,
+    "Les tables du CE1 : 2, 3, 4, 5 et 10.",
+    ["tables_multiplication"],
+    () => {
+      const t = rc([2, 3, 4, 5, 10] as const);
+      const k = ri(2, 9);
+      const r = t * k;
+      const pq = paquet();
+      const p = enfant();
+      const explication = exp(
+        "Les tables de 2, 3, 4, 5 et 10 se restituent de mémoire.",
+        "Si le résultat ne vient pas, on compte de table en table.",
+        t === 10
+          ? `${k} paquets de 10, ce sont ${k} dizaines : ${r}.`
+          : `On compte de ${t} en ${t}, ${k} fois : ${Array.from({ length: k }, (_, i) => (i + 1) * t).join(", ")}.`,
+        `${k} × ${t} = ${r}.`,
+      );
+      const faux = [r + t, r - t, t + k, r + 1];
+      const famille = rc(["nu", "repete", "situation", "situation", "situation"] as const);
+      if (famille === "nu") return nombreOuQcm(direCalcul(rc([`${t} × ${k}`, `${k} × ${t}`])), r, faux, explication);
+      if (famille === "repete") {
+        const f = Math.min(k, 5);
+        return nombreOuQcm(
+          direCalcul(Array.from({ length: f }, () => String(t)).join(" + ")),
+          t * f,
+          [t * f + t, t * f - t, t + f],
+          exp(
+            "Ajouter plusieurs fois le même nombre, c'est le multiplier.",
+            `On compte de ${t} en ${t}.`,
+            `${Array.from({ length: f }, (_, i) => (i + 1) * t).join(", ")} : ${f} fois ${t}, c'est ${f} × ${t}.`,
+            `Cela fait ${t * f}.`,
+          ),
+        );
+      }
+      const dessin = unPaquet(pq, t);
+      const text = rc([
+        `${p.nom} a ${k} ${pq.des} de ${t} ${pq.quoi}. Combien de ${pq.quoi} en tout ?`,
+        `Il y a ${k} ${pq.des}. Dans chaque ${pq.un}, il y a ${t} ${pq.quoi}. Combien de ${pq.quoi} ?`,
+        `${p.nom} prépare ${k} ${pq.des} de ${t} ${pq.quoi}. Combien de ${pq.quoi} cela fait-il ?`,
+        `${k} fois ${t} ${pq.quoi}, combien cela fait-il ?`,
       ]);
-      return {
-        text: fait.texte,
-        format: "short",
-        expected: [String(fait.reponse)],
-        comparator: "number_equal",
-        explanation: exp(
+      return nombreOuQcm(dessin ? `Voici un ${pq.un}. ${text}` : text, r, faux, explication, dessin);
+    },
+  ),
+  gab(
+    "ce1_calcul_tables_multiplication_tpl_3",
+    "ce1_calcul_tables_multiplication",
+    4,
+    "Cherche dans la table le nombre qui convient.",
+    ["tables_multiplication"],
+    () => {
+      const t = rc([2, 3, 4, 5, 10] as const);
+      const k = ri(2, 9);
+      const r = t * k;
+      const pq = paquet();
+      const p = enfant();
+      const explication = exp(
+        "Connaître une table dans les deux sens, c'est aussi savoir retrouver un des deux nombres.",
+        `On cherche quel nombre, pris ${k} fois, donne ${r}.`,
+        `${k} × ${t} = ${r}.`,
+        `Le nombre cherché est ${t}.`,
+      );
+      const famille = rc(["trou", "partage", "partage", "rangs"] as const);
+      if (famille === "trou") return court(direTrou(rc([`… × ${k} = ${r}`, `${r} = ${k} × …`])), t, explication);
+      if (famille === "rangs") {
+        return nombreOuQcm(
+          rc([
+            `Dans la salle, ${r} chaises sont rangées en ${k} rangées pareilles. Combien de chaises par rangée ?`,
+            `Le jardinier plante ${r} salades en ${k} rangs égaux. Combien de salades dans chaque rang ?`,
+            `${r} enfants font ${k} équipes pareilles. Combien d'enfants par équipe ?`,
+          ]),
+          t,
+          [k, t + 1, r - k, t - 1],
+          explication,
+          r <= 40 && pile(0.5) ? dessinJetons(r) : undefined,
+        );
+      }
+      const dessin = pile(0.7) && r <= 40;
+      return nombreOuQcm(
+        rc([
+          `${p.nom} range ${r} ${pq.quoi} dans ${k} ${pq.des}, autant dans chacun. Combien de ${pq.quoi} par ${pq.un} ?`,
+          `On met ${r} ${pq.quoi} dans ${k} ${pq.des} pareils. Combien de ${pq.quoi} dans chaque ${pq.un} ?`,
+          `${k} amis se partagent ${r} ${pq.quoi}, autant chacun. Combien en a chacun ?`,
+        ]),
+        t,
+        [k, t + 1, r - k, t - 1],
+        explication,
+        dessin ? dessinJetons(r) : undefined,
+      );
+    },
+  ),
+  gab(
+    "ce1_calcul_faits_tpl_2",
+    "ce1_calcul_faits_multiplicatifs",
+    4,
+    "Quatre paquets de 25 font 100.",
+    ["faits_multiplicatifs"],
+    () => {
+      const p = enfant();
+      const famille = rc(["combien_de_fois", "argent", "argent", "suite"] as const);
+      if (famille === "combien_de_fois") {
+        const f = rc([
+          { v: 25, cible: 100, k: 4 },
+          { v: 50, cible: 100, k: 2 },
+          { v: 20, cible: 100, k: 5 },
+          { v: 10, cible: 100, k: 10 },
+          { v: 25, cible: 50, k: 2 },
+          { v: 25, cible: 75, k: 3 },
+          { v: 50, cible: 200, k: 4 },
+        ]);
+        const explication = exp(
           "Certains produits se retiennent comme des faits, parce qu'ils reviennent tout le temps.",
-          "On compte de la valeur en la valeur jusqu'à 100.",
-          fait.pourquoi,
-          `Il en faut ${fait.reponse}.`,
+          `On compte de ${f.v} en ${f.v} jusqu'à ${f.cible}.`,
+          `${Array.from({ length: f.k }, (_, i) => (i + 1) * f.v).join(", ")} : ${f.k} fois.`,
+          `Il en faut ${f.k}.`,
+        );
+        return nombreOuQcm(
+          rc([
+            `Combien de fois ${f.v} faut-il pour faire ${f.cible} ?`,
+            `${p.nom} compte de ${f.v} en ${f.v} jusqu'à ${f.cible}. Combien de nombres dit-${p.il} ?`,
+            `Pour faire ${f.cible}, combien de paquets de ${f.v} faut-il ?`,
+            `La fermière range ${f.cible} œufs par plateaux de ${f.v}. Combien de plateaux remplit-elle ?`,
+          ]),
+          f.k,
+          [f.k + 1, f.k - 1, f.k * 2, f.v],
+          explication,
+        );
+      }
+      if (famille === "argent") {
+        const f = rc([
+          { v: 20, code: "20e", k: ri(2, 5) },
+          { v: 10, code: "10e", k: ri(3, 9) },
+          { v: 50, code: "50e", k: 2 },
+          { v: 5, code: "5e", k: ri(2, 6) },
+          { v: 2, code: "2e", k: ri(3, 9) },
+        ] as const);
+        const s = f.v * f.k;
+        return nombreOuQcm(
+          rc([
+            `Voici l'argent de ${p.nom}. Combien d'euros a-t-${p.il} ?`,
+            `${p.nom} casse sa tirelire. Voici ce qu'il y a dedans. Combien d'euros en tout ?`,
+            `Pour la kermesse, ${p.nom} a ces billets et ces pièces. Combien d'euros cela fait-il ?`,
+          ]),
+          s,
+          [s + f.v, s - f.v, f.k, s + 10].filter((x) => x > 0),
+          exp(
+            "Plusieurs billets pareils : on compte de leur valeur en leur valeur.",
+            `On compte de ${f.v} en ${f.v}, autant de fois qu'il y a de ${f.v <= 2 ? "pièces" : "billets"}.`,
+            `${f.k} × ${f.v} = ${s}.`,
+            `Cela fait ${s} €.`,
+          ),
+          { kind: "monnaie", elements: [{ valeur: f.code, nombre: f.k }] },
+          "€",
+        );
+      }
+      const k = ri(1, 6);
+      const r = (k + 1) * 25;
+      return nombreOuQcm(
+        rc([
+          `On compte de 25 en 25 : ${Array.from({ length: k }, (_, i) => (i + 1) * 25).join(", ")}… Quel nombre vient ensuite ?`,
+          `${p.nom} saute de 25 en 25 : ${Array.from({ length: k }, (_, i) => (i + 1) * 25).join(", ")}. Quel est le saut suivant ?`,
+        ]),
+        r,
+        [r + 25, r - 5, k * 25 + 10, r + 5],
+        exp(
+          "Les multiples de 25 se retiennent : 25, 50, 75, 100, 125, 150…",
+          "On ajoute 25 au dernier nombre.",
+          `${k * 25} + 25 = ${r}.`,
+          `Le nombre suivant est ${r}.`,
         ),
-      };
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_doubles_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_doubles_moities",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "On te donne le double : cherche le nombre de départ.",
-    tags: ["ce1", "calcul_mental", "doubles_moities", "template"],
-    generate: () => {
-      const n = randomChoice([5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 40, 50]);
-      const double = n * 2;
-      return {
-        text: `Le double d'un nombre est ${double}. Quel est ce nombre ?`,
-        format: "short",
-        expected: [String(n)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Chercher le nombre dont on connait le double, c'est chercher sa moitié.",
+  ),
+  gab(
+    "ce1_calcul_doubles_tpl_2",
+    "ce1_calcul_doubles_moities",
+    4,
+    "On te donne le double ou la moitié : cherche le nombre de départ.",
+    ["doubles_moities"],
+    () => {
+      const p = enfant();
+      const [a, b] = deuxEnfants();
+      if (pile(0.6)) {
+        const n = rc([5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 20, 25, 30, 40, 50]);
+        const d = n * 2;
+        const explication = exp(
+          "Chercher le nombre dont on connaît le double, c'est chercher sa moitié.",
           "On cherche le nombre qui, ajouté à lui-même, donne le résultat.",
-          `${n} + ${n} = ${double}. Le nombre cherché est donc ${n}.`,
+          `${n} + ${n} = ${d}. Le nombre cherché est donc ${n}.`,
           `C'est ${n}.`,
+        );
+        const c = chose();
+        const dessin = d <= 30 && pile(0.5);
+        return nombreOuQcm(
+          rc([
+            `Le double d'un nombre est ${d}. Quel est ce nombre ?`,
+            `${p.nom} a doublé sa collection : ${p.il} a maintenant ${d} ${c.pl}. Combien en avait-${p.il} avant ?`,
+            `${a.nom} a deux fois plus de ${c.pl} que ${b.nom}. ${a.nom} en a ${d}. Combien ${b.nom} en a-t-${b.il} ?`,
+            `Pic le paille-en-queue pense à un nombre. Son double est ${d}. Quel est ce nombre ?`,
+          ]),
+          n,
+          [d, n + 1, n - 1, n + 2],
+          explication,
+          dessin ? dessinQuantite(c, d) : undefined,
+        );
+      }
+      const m = rc([5, 6, 7, 8, 9, 10, 12, 15, 20, 25, 50, 100]);
+      const n = m * 2;
+      return nombreOuQcm(
+        rc([
+          `La moitié d'un nombre est ${m}. Quel est ce nombre ?`,
+          `${p.nom} a mangé la moitié de ses fraises : ${m}. Combien en avait-${p.il} ?`,
+          `${a.nom} et ${b.nom} ont partagé des billes en deux parts égales. Chacun en a ${m}. Combien y en avait-il ?`,
+        ]),
+        n,
+        [m, n + 1, n - 2, m + 10],
+        exp(
+          "Si on connaît la moitié, on retrouve le nombre en la doublant.",
+          "On ajoute la moitié à elle-même.",
+          `${m} + ${m} = ${n}.`,
+          `Le nombre était ${n}.`,
         ),
-      };
+        n <= 30 && pile(0.5) ? dessinJetons(m) : undefined,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_complements_tpl_3",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_complements_100",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "On complète d'abord les unités, puis les dizaines.",
-    tags: ["ce1", "calcul_mental", "complements", "template"],
-    generate: () => {
-      const dizaines = randomInt(1, 8);
-      const unites = randomInt(1, 9);
+  ),
+  gab(
+    "ce1_calcul_complements_tpl_3",
+    "ce1_calcul_complements_100",
+    4,
+    "On complète d'abord les unités, puis les dizaines.",
+    ["complements"],
+    () => {
+      const dizaines = ri(1, 8);
+      const unites = ri(1, 9);
       const n = dizaines * 10 + unites;
       const manque = 100 - n;
       const versDizaine = 10 - unites;
-      return {
-        text: `Combien faut-il ajouter à ${n} pour atteindre 100 ?`,
-        format: "short",
-        expected: [String(manque)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le complément à 100 se construit en deux temps.",
-          "On complète d'abord les unités jusqu'à la dizaine ronde, puis les dizaines jusqu'à 100.",
-          `De ${n}, il faut ${versDizaine} pour atteindre ${n + versDizaine}. Puis ${100 - n - versDizaine} pour atteindre 100. En tout : ${versDizaine} + ${100 - n - versDizaine} = ${manque}.`,
-          `Il faut ajouter ${manque}.`,
-        ),
-      };
+      const p = enfant();
+      const explication = exp(
+        "Le complément à 100 se construit en deux temps.",
+        "On complète d'abord les unités jusqu'à la dizaine ronde, puis les dizaines jusqu'à 100.",
+        `De ${n}, il faut ${versDizaine} pour atteindre ${n + versDizaine}. Puis ${100 - n - versDizaine} pour atteindre 100. En tout : ${versDizaine} + ${100 - n - versDizaine} = ${manque}.`,
+        `Il faut ajouter ${manque}.`,
+      );
+      const faux = [manque + 10, manque - 10, 100 - dizaines * 10, (10 - dizaines) * 10 + (10 - unites)];
+      const famille = rc(["dessin", "dessin", "dessin", "trou", "situation", "situation"] as const);
+      if (famille === "dessin") {
+        return nombreOuQcm(
+          rc([
+            `Voici ${n} en barres et en cubes. Combien faut-il ajouter pour faire une plaque de 100 ?`,
+            `${p.nom} a construit ${n}. Combien lui manque-t-il pour arriver à 100 ?`,
+            `${p.nom} veut savoir combien il manque à ce nombre pour faire 100. Aide-${le(p)} !`,
+          ]),
+          manque,
+          faux,
+          explication,
+          dessinNombre(n),
+        );
+      }
+      if (famille === "trou") return court(direTrou(rc([`${n} + … = 100`, `100 = ${n} + …`])), manque, explication);
+      return nombreOuQcm(
+        rc([
+          `Le jeu se gagne à 100 points. ${p.nom} a ${n} points. Combien de points lui manque-t-il ?`,
+          `Le livre a 100 pages. ${p.nom} en a lu ${n}. Combien de pages lui reste-t-il à lire ?`,
+          `Le vélo coûte 100 €. ${p.nom} a ${n} € dans sa tirelire. Combien lui manque-t-il ?`,
+          `L'aquarium de ${p.nom} peut avoir 100 poissons. Il y en a ${n}. Combien peut-on encore en mettre ?`,
+          `La course fait 100 mètres. ${p.nom} a couru ${n} mètres. Combien de mètres lui reste-t-il ?`,
+        ]),
+        manque,
+        faux,
+        explication,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_dizaines_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_dizaines_centaines",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Retirer une centaine ne change que le chiffre des centaines.",
-    tags: ["ce1", "calcul_mental", "dizaines_centaines", "piege", "template"],
-    generate: () => {
-      const centaines = randomInt(3, 9);
-      const dizaines = randomInt(0, 9);
-      const unites = randomInt(0, 9);
+  ),
+  gab(
+    "ce1_calcul_dizaines_tpl_2",
+    "ce1_calcul_dizaines_centaines",
+    4,
+    "Ajouter ou retirer 10 ne change que le chiffre des dizaines (sauf s'il passe 9).",
+    ["dizaines_centaines", "piege"],
+    () => {
+      const centaines = ri(3, 9);
+      const dizaines = ri(0, 9);
+      const unites = ri(0, 9);
       const n = centaines * 100 + dizaines * 10 + unites;
-      const pas = randomChoice([10, 100]);
-      const ajoute = randomChoice([true, false]);
+      const pas = rc([10, 100] as const);
+      const ajoute = n + pas <= 999 ? pile() : false;
       const r = ajoute ? n + pas : n - pas;
-      return {
-        text: `Combien font ${n} ${ajoute ? "+" : "-"} ${pas} ?`,
-        format: "short",
-        expected: [String(r)],
-        comparator: "number_equal",
-        explanation: exp(
-          `${ajoute ? "Ajouter" : "Retirer"} ${pas}, c'est ${ajoute ? "ajouter" : "retirer"} ${pas === 10 ? "une dizaine" : "une centaine"}.`,
-          `On change le chiffre des ${pas === 10 ? "dizaines" : "centaines"} de un, sans toucher aux autres rangs.`,
-          pas === 10 && (ajoute ? dizaines === 9 : dizaines === 0)
-            ? `Ici le chiffre des dizaines ${ajoute ? "était déjà à 9 : la dizaine de plus fait changer les centaines" : "était à 0 : il faut emprunter une centaine"}. On obtient ${r}.`
-            : `${n} ${ajoute ? "+" : "-"} ${pas} = ${r} : seul le rang des ${pas === 10 ? "dizaines" : "centaines"} a bougé.`,
-          `${n} ${ajoute ? "+" : "-"} ${pas} = ${r}.`,
-        ),
-      };
+      const p = enfant();
+      const explication = exp(
+        `${ajoute ? "Ajouter" : "Retirer"} ${pas}, c'est ${ajoute ? "ajouter" : "retirer"} ${pas === 10 ? "une dizaine" : "une centaine"}.`,
+        `On change le chiffre des ${pas === 10 ? "dizaines" : "centaines"} de un, sans toucher aux autres chiffres.`,
+        pas === 10 && (ajoute ? dizaines === 9 : dizaines === 0)
+          ? `Ici le chiffre des dizaines ${ajoute ? "était déjà à 9 : la dizaine de plus fait changer les centaines" : "était à 0 : il faut casser une centaine"}. On obtient ${r}.`
+          : `${n} ${ajoute ? "+" : "-"} ${pas} = ${r} : seul le chiffre des ${pas === 10 ? "dizaines" : "centaines"} a bougé.`,
+        `${n} ${ajoute ? "+" : "-"} ${pas} = ${r}.`,
+      );
+      const faux = [ajoute ? n + 1 : n - 1, ajoute ? r + pas : r - pas, ajoute ? n + (pas === 10 ? 100 : 10) : n - (pas === 10 ? 100 : 10)];
+      const famille = rc(["nu", "apres", "dessin", "situation"] as const);
+      if (famille === "nu") return nombreOuQcm(direCalcul(`${n} ${ajoute ? "+" : "-"} ${pas}`), r, faux, explication, pile(0.5) ? dessinNombre(n) : undefined);
+      if (famille === "apres") {
+        return nombreOuQcm(
+          rc([
+            `Quel nombre a ${pas} de ${ajoute ? "plus" : "moins"} que ${n} ?`,
+            `${p.nom} part de ${n} et fait un bond de ${pas} ${ajoute ? "en avant" : "en arrière"}. Où arrive-t-${p.il} ?`,
+            `Compte de ${pas} en ${pas} ${ajoute ? "en avançant" : "en reculant"} : ${n}, … Quel nombre vient ensuite ?`,
+          ]),
+          r,
+          faux,
+          explication,
+          pile(0.4) ? dessinNombre(n) : undefined,
+        );
+      }
+      if (famille === "dessin") {
+        return nombreOuQcm(
+          rc([
+            `Voici ${n} en matériel. On ${ajoute ? "ajoute" : "enlève"} ${pas === 10 ? "une barre" : "une plaque"}. Quel nombre obtient-on ?`,
+            `${p.nom} a construit ${n}. ${maj(p.il)} ${ajoute ? "ajoute" : "enlève"} ${pas === 10 ? "une barre" : "une plaque"}. Quel nombre obtient-${p.il} ?`,
+          ]),
+          r,
+          faux,
+          explication,
+          dessinNombre(n),
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          `Le château de cartes de ${p.nom} a ${n} cartes. ${maj(p.il)} ${ajoute ? "en ajoute" : "en retire"} ${pas}. Combien de cartes a-t-il ?`,
+          `${p.nom} a ${n} points au jeu. ${maj(p.il)} ${ajoute ? "gagne" : "perd"} ${pas} points. Combien de points a-t-${p.il} ?`,
+          `À la bibliothèque de ${p.nom}, il y a ${n} livres. On ${ajoute ? "en achète" : "en donne"} ${pas}. Combien de livres y a-t-il ?`,
+        ]),
+        r,
+        faux,
+        explication,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_dizaines_tpl_3",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_dizaines_centaines",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Compte en dizaines : les unités ne bougent pas.",
-    tags: ["ce1", "calcul_mental", "dizaines_centaines", "template"],
-    generate: () => {
-      const dizaines = randomInt(3, 9);
-      const unites = randomInt(1, 9);
+  ),
+  gab(
+    "ce1_calcul_dizaines_tpl_3",
+    "ce1_calcul_dizaines_centaines",
+    4,
+    "Compte en dizaines : les unités ne bougent pas.",
+    ["dizaines_centaines"],
+    () => {
+      const dizaines = ri(3, 9);
+      const unites = ri(1, 9);
       const n = dizaines * 10 + unites;
-      const pasDizaines = randomInt(1, dizaines - 1);
-      const pas = pasDizaines * 10;
+      const k = ri(1, dizaines - 1);
+      const pas = k * 10;
       const r = n - pas;
-      return {
-        text: `Combien font ${n} - ${pas} ?`,
-        format: "short",
-        expected: [String(r)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Retirer un nombre entier de dizaines ne touche pas au chiffre des unités.",
-          "On compte en dizaines : on retire les dizaines aux dizaines.",
-          `${pas}, c'est ${pasDizaines} dizaines. ${n} en a ${dizaines}. ${dizaines} - ${pasDizaines} = ${dizaines - pasDizaines} dizaines. Les ${unites} unités ne bougent pas : ${r}.`,
-          `${n} - ${pas} = ${r}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_multiplier_10_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_multiplier_10",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Chaque chiffre monte d'un rang : les unités deviennent des dizaines.",
-    tags: ["ce1", "calcul_mental", "multiplier_10", "piege", "template"],
-    generate: () => {
-      const n = randomInt(11, 99);
-      return {
-        text: `Quand on multiplie ${n} par 10, que devient le chiffre des unités de ${n} ?`,
-        format: "qcm",
-        choices: makeChoices("il devient le chiffre des dizaines", [
-          "il reste le chiffre des unités",
-          "il devient le chiffre des centaines",
-          "il disparait",
+      const p = enfant();
+      const c = chose();
+      const explication = exp(
+        "Retirer un nombre entier de dizaines ne touche pas au chiffre des unités.",
+        "On compte en dizaines : on retire les dizaines aux dizaines.",
+        `${pas}, c'est ${k} ${k > 1 ? "dizaines" : "dizaine"}. ${n} en a ${dizaines}. ${dizaines} - ${k} = ${dizaines - k}. Les ${unites} unités ne bougent pas : ${r}.`,
+        `${n} - ${pas} = ${r}.`,
+      );
+      const faux = [n - k, r + 10, r - 10, r + 1];
+      const famille = rc(["nu", "dessin", "dessin", "situation"] as const);
+      if (famille === "nu") return nombreOuQcm(direCalcul(`${n} - ${pas}`), r, faux, explication);
+      if (famille === "dessin") {
+        return nombreOuQcm(
+          rc([
+            `Voici ${n} en barres et en cubes. On enlève ${pl(k, "barre", "barres")}. Quel nombre reste-t-il ?`,
+            `${p.nom} a construit ${n}. ${maj(p.il)} retire ${pl(k, "barre", "barres")} de dix. Quel nombre a-t-${p.il} maintenant ?`,
+          ]),
+          r,
+          faux,
+          explication,
+          dessinNombre(n),
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en donne ${k} ${k > 1 ? "paquets" : "paquet"} de 10. Combien lui en reste-t-il ?`,
+          `Le marchand a ${n} œufs. Il vend ${k} ${k > 1 ? "boîtes" : "boîte"} de 10 œufs à ${p.nom}. Combien d'œufs lui reste-t-il ?`,
+          `${p.nom} compte ${n} enfants dans la cour. ${pas} rentrent en classe. Combien restent dans la cour ?`,
         ]),
-        expected: ["il devient le chiffre des dizaines"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Multiplier par 10, ce n'est pas « ajouter un zéro » : c'est faire monter chaque chiffre d'un rang.",
-          "On regarde où se retrouve chaque chiffre dans le résultat.",
-          `${n} × 10 = ${n * 10}. Le ${n % 10} qui comptait des unités compte maintenant des dizaines, et le ${Math.floor(n / 10)} passe aux centaines. Le zéro qui apparait au bout n'est que la place laissée vide aux unités.`,
-          "Il devient le chiffre des dizaines.",
-        ),
-      };
+        r,
+        faux,
+        explication,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_multiplier_10_tpl_3",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_multiplier_10",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Enlève le zéro du résultat.",
-    tags: ["ce1", "calcul_mental", "multiplier_10", "template"],
-    generate: () => {
-      const n = randomInt(2, 99);
+  ),
+  gab(
+    "ce1_calcul_multiplier_10_tpl_2",
+    "ce1_calcul_multiplier_10",
+    5,
+    "Chaque chiffre monte d'un rang : les unités deviennent des dizaines.",
+    ["multiplier_10", "piege"],
+    () => {
+      const d = ri(1, 9);
+      const u = ri(1, 9);
+      const n = d * 10 + u;
       const r = n * 10;
-      return {
-        text: `Quel nombre manque : … × 10 = ${r} ?`,
-        format: "short",
-        expected: [String(n)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un nombre multiplié par 10 se termine toujours par zéro.",
-          "On retire le zéro final pour retrouver le nombre de départ.",
-          `${r} sans son zéro donne ${n}. On vérifie : ${n} × 10 = ${r}.`,
-          `Le nombre manquant est ${n}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_ajouter_9_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_ajouter_9_19_29_39",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "On a ajouté un de trop : que faut-il faire ensuite ?",
-    tags: ["ce1", "calcul_mental", "ajouter_9", "piege", "template"],
-    generate: () => {
-      const n = randomInt(40, 800);
-      const a = randomChoice([9, 19, 29, 39]);
-      const rond = a + 1;
-      return {
-        text: `Pour calculer ${n} + ${a}, un élève commence par ${n} + ${rond} = ${n + rond}. Que doit-il faire ensuite ?`,
-        format: "qcm",
-        choices: makeChoices("retirer 1", [
-          "ajouter 1",
-          "retirer 10",
-          "ajouter 10",
-          "rien, il a fini",
+      const p = enfant();
+      const dessin = pile(0.45) ? dessinNombre(n) : undefined;
+      const voici = dessin ? `Voici ${n} en matériel. ` : "";
+      const famille = rc(["unites", "dizaines", "chiffre_unites", "chiffre_centaines"] as const);
+      const explication = exp(
+        "Multiplier par 10, ce n'est pas « ajouter un zéro » : c'est faire monter chaque chiffre d'un rang.",
+        "On regarde où se retrouve chaque chiffre dans le résultat.",
+        `${n} × 10 = ${r}. Les ${u} unités deviennent ${u} dizaines, et les ${d} dizaines deviennent ${d} centaines. Le zéro au bout dit qu'il n'y a plus d'unités.`,
+        `${n} × 10 = ${r}.`,
+      );
+      if (famille === "unites" || famille === "dizaines") {
+        const chiffre = famille === "unites" ? u : d;
+        const bonne = famille === "unites" ? `${chiffre} dizaines` : `${chiffre} centaines`;
+        return qcmTexte(
+          rc([
+            `${voici}${p.nom} multiplie ${n} par 10. Que deviennent les ${chiffre} ${famille === "unites" ? "unités" : "dizaines"} ?`,
+            `${voici}Quand on multiplie ${n} par 10, les ${chiffre} ${famille === "unites" ? "unités" : "dizaines"} deviennent…`,
+            `${voici}Pic le paille-en-queue fait ${n} × 10. Que deviennent les ${chiffre} ${famille === "unites" ? "unités" : "dizaines"} de ${n} ?`,
+          ]),
+          bonne,
+          famille === "unites"
+            ? [`${chiffre} unités`, `${chiffre} centaines`, `${chiffre * 10} centaines`]
+            : [`${chiffre} dizaines`, `${chiffre} unités`, `${chiffre * 10} dizaines`],
+          explication,
+          dessin,
+        );
+      }
+      if (famille === "chiffre_unites") {
+        return court(
+          rc([
+            `${voici}${p.nom} se demande : quel est le chiffre des unités de ${n} × 10 ?`,
+            `${voici}${p.nom} calcule ${n} × 10. Quel chiffre écrit-${p.il} aux unités ?`,
+          ]),
+          0,
+          explication,
+          dessin,
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          `${voici}${p.nom} se demande : quel est le chiffre des centaines de ${n} × 10 ?`,
+          `${voici}${p.nom} calcule ${n} × 10. Quel chiffre écrit-${p.il} aux centaines ?`,
         ]),
-        expected: ["retirer 1"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          `Ajouter ${a}, c'est ajouter ${rond} puis retirer 1.`,
-          "On regarde ce qu'on a ajouté en trop.",
-          `Il fallait ajouter ${a}, il a ajouté ${rond} : c'est 1 de trop. En retirant 1 à ${n + rond}, il obtient ${n + a}.`,
-          "Il doit retirer 1.",
-        ),
-      };
+        d,
+        [u, 0, d + 1, 1].filter((x) => x !== d),
+        explication,
+        dessin,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_soustraire_9_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_soustraire_9",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Retirer 9, c'est retirer 10 puis rendre 1.",
-    tags: ["ce1", "calcul_mental", "soustraire_9", "template"],
-    generate: () => {
-      const dizaines = randomInt(3, 9);
-      const n = dizaines * 10 + randomInt(0, 9);
+  ),
+  gab(
+    "ce1_calcul_multiplier_10_tpl_3",
+    "ce1_calcul_multiplier_10",
+    4,
+    "Combien de dizaines y a-t-il dans ce nombre ?",
+    ["multiplier_10"],
+    () => {
+      const n = ri(2, 99);
+      const r = n * 10;
+      const p = enfant();
+      const explication = exp(
+        "Un nombre multiplié par 10 compte des dizaines.",
+        "On cherche combien de dizaines il y a dans le résultat.",
+        `${r}, c'est ${n} dizaines. On vérifie : ${n} × 10 = ${r}.`,
+        `Le nombre cherché est ${n}.`,
+      );
+      const faux = [n + 1, n * 10 > 100 ? Math.floor(n / 10) : n + 10, r, n - 1];
+      const famille = rc(["trou", "paquets", "dizaines", "dessin", "dessin"] as const);
+      if (famille === "trou") return court(direTrou(rc([`… × 10 = ${r}`, `10 × … = ${r}`, `${r} = … × 10`])), n, explication);
+      if (famille === "dizaines") return nombreOuQcm(rc([`Combien de dizaines y a-t-il en tout dans ${r} ? Aide ${p.nom} à trouver.`, `${p.nom} demande : « ${r}, c'est combien de dizaines ? »`, `${p.nom} veut faire ${r} avec des barres de dix. Combien de barres lui faut-il ?`]), n, faux, explication);
+      if (famille === "dessin") {
+        return nombreOuQcm(
+          rc([`${p.nom} a posé ce nombre. Combien de barres de dix faut-il pour le faire ? (Une plaque, c'est 10 barres.)`, `Voici les ${r} cubes de ${p.nom}. Combien de paquets de 10 peut-${p.il} faire ?`]),
+          n,
+          faux,
+          explication,
+          dessinNombre(r),
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          `${p.nom} range ${r} images par paquets de 10. Combien de paquets fait-${p.il} ?`,
+          `${p.nom} aide le fermier à ranger ${r} œufs dans des boîtes de 10. Combien de boîtes remplissent-ils ?`,
+          `Pour la sortie de ${p.nom}, ${r} enfants montent dans des minibus de 10 places, tous pleins. Combien de minibus ?`,
+          `Pic le paille-en-queue mange 10 graines par jour. ${p.nom} lui a gardé ${r} graines. Pour combien de jours en a-t-il ?`,
+        ]),
+        n,
+        faux,
+        explication,
+      );
+    },
+  ),
+  gab(
+    "ce1_calcul_ajouter_9_tpl_2",
+    "ce1_calcul_ajouter_9_19_29_39",
+    5,
+    "On a ajouté un de trop : il faut le reprendre.",
+    ["ajouter_9", "piege"],
+    () => {
+      const n = pile(0.5) ? ri(40, 399) : ri(400, 800);
+      const a = rc([9, 19, 29] as const);
+      const barre = () => dessinBarre({ total: "?", parts: [{ label: "", value: String(n) }, { label: "", value: String(a) }] });
+      const rond = a + 1;
+      const p = enfant();
+      const explication = exp(
+        `Ajouter ${a}, c'est ajouter ${rond} puis retirer 1.`,
+        "On regarde ce qu'on a ajouté en trop.",
+        `Il fallait ajouter ${a}. En ajoutant ${rond}, on ajoute 1 de trop : on le retire. ${n} + ${rond} = ${n + rond}, puis ${n + rond} - 1 = ${n + a}.`,
+        `${n} + ${a} = ${n + a}.`,
+      );
+      const famille = rc(["ensuite", "meme", "erreur", "calcul"] as const);
+      if (famille === "ensuite") {
+        return qcmTexte(
+          rc([
+            `Pour calculer ${n} + ${a}, ${p.nom} commence par ${n} + ${rond} = ${n + rond}. Que doit-${p.il} faire ensuite ?`,
+            `${p.nom} veut ajouter ${a} à ${n}. ${maj(p.il)} a déjà ajouté ${rond}. Que lui reste-t-il à faire ?`,
+          ]),
+          "retirer 1",
+          ["ajouter 1", "retirer 10", "ajouter 10", "rien, c'est fini"],
+          explication,
+          n < 400 ? dessinNombre(n) : undefined,
+        );
+      }
+      if (famille === "meme") {
+        return qcmTexte(
+          rc([`${p.nom} se demande quel calcul donne le même résultat que ${n} + ${a}. Lequel ?`, `${p.nom} cherche un calcul plus facile que ${n} + ${a}. Lequel donne le même résultat ?`]),
+          `${n} + ${rond} - 1`,
+          [`${n} + ${rond} + 1`, `${n} + ${rond} - 10`, `${n} - ${rond} + 1`],
+          explication,
+        );
+      }
+      if (famille === "erreur") {
+        const faux = n + rond + 1;
+        return court(
+          rc([
+            `${p.nom} calcule ${n} + ${a} : ${p.il} ajoute ${rond}, puis ajoute encore 1, et trouve ${faux}. Quel est le bon résultat ?`,
+            `Pic le paille-en-queue a trouvé ${n} + ${a} = ${faux}. Il a ajouté 1 au lieu de l'enlever. Quel est le bon résultat ?`,
+          ]),
+          n + a,
+          explication,
+          pile(0.6) ? barre() : undefined,
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          direCalcul(`${n} + ${a}`),
+          `Le compteur du train de ${p.nom} affiche ${n} km. Le train roule encore ${a} km. Que va afficher le compteur ?`,
+          `${p.nom} a ${n} points au jeu. ${maj(p.il)} gagne ${a} points. Combien de points a-t-${p.il} ?`,
+          `La collection de ${p.nom} a ${n} timbres. ${maj(p.il)} en reçoit ${a}. Combien en a-t-${p.il} ?`,
+        ]),
+        n + a,
+        [n + rond + 1, n + rond, n + a - 10, n + a + 10],
+        explication,
+        pile(0.5) ? barre() : undefined,
+      );
+    },
+  ),
+  gab(
+    "ce1_calcul_soustraire_9_tpl_2",
+    "ce1_calcul_soustraire_9",
+    5,
+    "Retirer 9, c'est retirer 10 puis rendre 1.",
+    ["soustraire_9"],
+    () => {
+      const n = pile(0.4) ? ri(1, 9) * 100 + ri(0, 8) : pile(0.5) ? ri(100, 399) : ri(400, 900);
       const r = n - 9;
-      return {
-        text: `Combien font ${n} - 9 ?`,
-        format: "short",
-        expected: [String(r)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Retirer 9, c'est retirer une dizaine puis rendre l'unité prise en trop.",
-          "On retire 10, puis on ajoute 1.",
-          `${n} - 10 = ${n - 10}, puis ${n - 10} + 1 = ${r}.`,
-          `${n} - 9 = ${r}.`,
-        ),
-      };
+      const p = enfant();
+      const barre = () => dessinBarre({ total: String(n), parts: [{ label: "", unknown: true }, { label: "", value: "9" }] });
+      const explication = exp(
+        "Retirer 9, c'est retirer une dizaine puis rendre l'unité prise en trop.",
+        "On retire 10, puis on ajoute 1.",
+        `${n} - 10 = ${n - 10}, puis ${n - 10} + 1 = ${r}.`,
+        `${n} - 9 = ${r}.`,
+      );
+      const famille = rc(["ensuite", "erreur", "calcul", "calcul"] as const);
+      if (famille === "ensuite") {
+        return qcmTexte(
+          rc([
+            `Pour calculer ${n} - 9, ${p.nom} fait d'abord ${n} - 10 = ${n - 10}. Que doit-${p.il} faire ensuite ?`,
+            `${p.nom} veut enlever 9 à ${n}. ${maj(p.il)} a déjà enlevé 10. Que lui reste-t-il à faire ?`,
+          ]),
+          "ajouter 1",
+          ["enlever 1", "enlever 10", "ajouter 10", "rien, c'est fini"],
+          explication,
+          n < 400 ? dessinNombre(n) : undefined,
+        );
+      }
+      if (famille === "erreur") {
+        return court(
+          rc([
+            `${p.nom} calcule ${n} - 9 : ${p.il} enlève 10, puis enlève encore 1, et trouve ${n - 11}. Quel est le bon résultat ?`,
+            `Pic le paille-en-queue a trouvé ${n} - 9 = ${n - 11}. Il a enlevé 1 au lieu de le rendre. Quel est le bon résultat ?`,
+          ]),
+          r,
+          explication,
+          pile(0.6) ? barre() : undefined,
+        );
+      }
+      return nombreOuQcm(
+        rc([
+          direCalcul(`${n} - 9`),
+          `La bibliothèque a ${n} livres. ${p.nom} et ses amis en empruntent 9. Combien en reste-t-il sur les étagères ?`,
+          `Le dragon de ${p.nom} a ${n} écailles dorées. Il en perd 9. Combien lui en reste-t-il ?`,
+          `${p.nom} a ${n} points au jeu. ${maj(p.il)} perd 9 points. Combien de points lui reste-t-il ?`,
+          `${p.nom} est à la page ${n}. ${maj(p.il)} revient 9 pages en arrière. À quelle page est-${p.il} ?`,
+        ]),
+        r,
+        [n - 11, n - 10, r + 10, r - 10],
+        explication,
+        pile(0.5) ? barre() : undefined,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_soustraire_inf9_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_soustraire_inferieur_9",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Il faut casser une dizaine : les unités ne suffisent pas.",
-    tags: ["ce1", "calcul_mental", "soustraire_inferieur_9", "piege", "template"],
-    generate: () => {
-      const centaines = randomInt(1, 9);
-      const dizaines = randomInt(1, 9);
+  ),
+  gab(
+    "ce1_calcul_soustraire_inf9_tpl_2",
+    "ce1_calcul_soustraire_inferieur_9",
+    5,
+    "Il faut casser une dizaine : les unités ne suffisent pas.",
+    ["soustraire_inferieur_9", "piege"],
+    () => {
+      const centaines = pile(0.5) ? ri(1, 3) : ri(4, 9);
+      const dizaines = ri(1, 9);
       const n = centaines * 100 + dizaines * 10;
-      const b = randomInt(1, 9);
+      const b = ri(1, 9);
       const r = n - b;
-      return {
-        text: `Combien font ${n} - ${b} ?`,
-        format: "short",
-        expected: [String(r)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand il n'y a pas assez d'unités pour retirer, on casse une dizaine.",
-          "On transforme une dizaine en dix unités, puis on retire.",
-          `${n} n'a aucune unité. On casse une dizaine : il reste ${dizaines - 1} dizaine${dizaines - 1 > 1 ? "s" : ""} et 10 unités. 10 - ${b} = ${10 - b}. On obtient ${r}.`,
-          `${n} - ${b} = ${r}.`,
-        ),
-      };
+      const p = enfant();
+      const explication = exp(
+        "Quand il n'y a pas assez d'unités pour retirer, on casse une dizaine.",
+        "On transforme une dizaine en dix unités, puis on retire.",
+        `${n} n'a aucune unité. On casse une dizaine : il reste ${dizaines - 1} ${dizaines - 1 > 1 ? "dizaines" : "dizaine"} et 10 unités. 10 - ${b} = ${10 - b}. On obtient ${r}.`,
+        `${n} - ${b} = ${r}.`,
+      );
+      const faux = [n - 10 + b, r + 10, n - b * 10, r - 1].filter((x) => x !== r);
+      const famille = rc(["calcul", "situation", "dessin"] as const);
+      const barre = () => dessinBarre({ total: String(n), parts: [{ label: "", unknown: true }, { label: "", value: String(b) }] });
+      if (famille === "dessin" && n < 400) {
+        return nombreOuQcm(
+          rc([`Voici ${n} en matériel. ${p.nom} enlève ${b} cubes : il faut casser une barre. Quel nombre reste-t-il ?`, `${p.nom} a construit ${n}. ${maj(p.il)} doit retirer ${b} cubes. Quel nombre reste-t-il ?`]),
+          r,
+          faux,
+          explication,
+          dessinNombre(n, { echange: "unites" }),
+        );
+      }
+      if (famille === "situation") {
+        return nombreOuQcm(
+          rc([
+            `La boulangère a ${n} croissants. Elle en vend ${b} à ${p.nom}. Combien lui en reste-t-il ?`,
+            `${p.nom} a ${n} € dans sa tirelire. ${maj(p.il)} dépense ${b} €. Combien lui reste-t-il ?`,
+            `${p.nom} compte ${n} spectateurs au cirque. ${b} partent avant la fin. Combien restent ?`,
+            `Le livre de ${p.nom} a ${n} pages. ${maj(p.il)} est à ${b} pages de la fin. À quelle page est-${p.il} ?`,
+          ]),
+          r,
+          faux,
+          explication,
+          pile(0.5) ? barre() : undefined,
+        );
+      }
+      return nombreOuQcm(direCalcul(`${n} - ${b}`), r, faux, explication, pile(0.5) ? barre() : undefined);
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_moitie_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_moitie_nombre_pair",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Un nombre impair ne se partage pas en deux parts entières égales.",
-    tags: ["ce1", "calcul_mental", "moitie", "piege", "template"],
-    generate: () => {
-      const pair = randomChoice([true, false]);
-      const n = pair ? randomInt(5, 40) * 2 : randomInt(5, 40) * 2 + 1;
-      return {
-        text: `Peut-on partager ${n} en deux parts entières égales ?`,
-        format: "qcm",
-        choices: shuffle(["oui", "non"]),
-        expected: [pair ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Seuls les nombres pairs se partagent en deux parts entières égales.",
-          "On regarde le chiffre des unités : 0, 2, 4, 6 ou 8 annonce un nombre pair.",
-          pair
-            ? `${n} se termine par ${n % 10} : il est pair. Sa moitié est ${n / 2}, car ${n / 2} + ${n / 2} = ${n}.`
-            : `${n} se termine par ${n % 10} : il est impair. En le partageant en deux, on obtiendrait ${Math.floor(n / 2)} et ${Math.ceil(n / 2)}, qui ne sont pas égaux — il resterait toujours un de côté.`,
-          pair ? `Oui, la moitié est ${n / 2}.` : "Non, ce nombre est impair.",
-        ),
-      };
+  ),
+  gab(
+    "ce1_calcul_moitie_tpl_2",
+    "ce1_calcul_moitie_nombre_pair",
+    4,
+    "Un nombre impair ne se partage pas en deux parts égales.",
+    ["moitie", "piege"],
+    () => {
+      const pair = pile();
+      const petit = pile(0.5);
+      const n = petit ? (pair ? ri(3, 15) * 2 : ri(3, 14) * 2 + 1) : pair ? ri(16, 49) * 2 : ri(16, 49) * 2 + 1;
+      const [a, b] = deuxEnfants();
+      const c = chose();
+      const explication = exp(
+        "Seuls les nombres pairs se partagent en deux parts égales, sans reste.",
+        "On regarde le chiffre des unités : 0, 2, 4, 6 ou 8 annonce un nombre pair.",
+        pair
+          ? `${n} se termine par ${n % 10} : il est pair. Sa moitié est ${n / 2}, car ${n / 2} + ${n / 2} = ${n}.`
+          : `${n} se termine par ${n % 10} : il est impair. En deux tas, on aurait ${Math.floor(n / 2)} et ${Math.ceil(n / 2)} : il en reste toujours un.`,
+        pair ? `Oui, chacun en aura ${n / 2}.` : "Non, il en restera un.",
+      );
+      const bonne = pair ? "oui" : "non";
+      if (petit && pile(0.7)) {
+        return qcmTexte(
+          rc([
+            `${a.nom} et ${b.nom} veulent se partager ces billes sans qu'il en reste. Est-ce possible ?`,
+            `${a.nom} peut-${a.il} partager ces jetons en deux tas pareils ?`,
+            `Pic le paille-en-queue veut faire deux tas pareils avec ces graines. Peut-il y arriver ?`,
+            `${a.nom} range ces jetons deux par deux. Est-ce que chaque jeton aura un copain ?`,
+          ]),
+          bonne,
+          [pair ? "non" : "oui"],
+          explication,
+          dessinJetons(n),
+        );
+      }
+      return qcmTexte(
+        rc([
+          `${a.nom} et ${b.nom} veulent se partager ${n} ${c.pl} sans qu'il en reste. Est-ce possible ?`,
+          `${a.nom} peut-${a.il} partager ${n} ${c.pl} en deux parts égales ?`,
+          `${a.nom} demande : « ${n} est-il un nombre pair ? » Que réponds-tu ?`,
+          `${a.nom} donne ${n} graines à Pic le paille-en-queue. Pic peut-il faire deux tas pareils ?`,
+        ]),
+        bonne,
+        [pair ? "non" : "oui"],
+        explication,
+        n < 100 && pile(0.5) ? dessinNombre(n) : undefined,
+      );
     },
-  },
-  {
-    kind: "template",
-    id: "ce1_calcul_distributivite_tpl_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_distributivite",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Le nombre a été coupé en 10 et le reste : il manque un morceau.",
-    tags: ["ce1", "calcul_mental", "distributivite", "template"],
-    generate: () => {
-      const unites = randomInt(1, 9);
+  ),
+  gab(
+    "ce1_calcul_distributivite_tpl_2",
+    "ce1_calcul_distributivite",
+    5,
+    "Le nombre est coupé en 10 et le reste : il y a deux morceaux à calculer.",
+    ["distributivite"],
+    () => {
+      const unites = ri(1, 9);
       const n = 10 + unites;
-      const k = randomInt(2, 9);
-      const morceauDix = 10 * k;
-      const morceauUnites = unites * k;
-      return {
-        text: `Pour calculer ${n} × ${k}, on coupe ${n} en 10 + ${unites}. On a déjà 10 × ${k} = ${morceauDix}. Quel est le résultat final ?`,
-        format: "short",
-        expected: [String(morceauDix + morceauUnites)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Multiplier une somme, c'est multiplier chaque morceau puis réunir.",
-          "On calcule le second morceau, puis on additionne les deux.",
-          `${unites} × ${k} = ${morceauUnites}. On réunit : ${morceauDix} + ${morceauUnites} = ${morceauDix + morceauUnites}.`,
-          `${n} × ${k} = ${morceauDix + morceauUnites}.`,
-        ),
-      };
+      const k = ri(2, 9);
+      const dix = 10 * k;
+      const morceau = unites * k;
+      const p = enfant();
+      const explication = exp(
+        "Multiplier une somme, c'est multiplier chaque morceau puis réunir.",
+        "On calcule les deux morceaux, puis on les additionne.",
+        `${n} = 10 + ${unites}. 10 × ${k} = ${dix} et ${unites} × ${k} = ${morceau}. On réunit : ${dix} + ${morceau} = ${dix + morceau}.`,
+        `${n} × ${k} = ${dix + morceau}.`,
+      );
+      const famille = rc(["final", "morceau", "decoupage"] as const);
+      if (famille === "final") {
+        return nombreOuQcm(
+          rc([
+            `Pour calculer ${n} × ${k}, on coupe ${n} en 10 + ${unites}. On a déjà 10 × ${k} = ${dix}. Quel est le résultat ?`,
+            `${p.nom} calcule ${n} × ${k}. ${maj(p.il)} a trouvé 10 × ${k} = ${dix}. Quel est le résultat final ?`,
+          ]),
+          dix + morceau,
+          [dix + unites, dix + morceau + k, dix + morceau - k, morceau],
+          explication,
+          pile(0.6) ? dessinBarre({ total: `${n} × ${k}`, parts: [{ label: `10 × ${k}`, value: String(dix) }, { label: `${unites} × ${k}`, unknown: true }] }) : undefined,
+        );
+      }
+      if (famille === "morceau") {
+        return court(
+          rc([
+            `${p.nom} calcule ${n} × ${k} en deux morceaux : 10 × ${k}, puis ${unites} × ${k}. Combien vaut le deuxième morceau ?`,
+            `${p.nom} écrit ${n} × ${k} = 10 × ${k} + ${unites} × ${k}. Combien vaut ${unites} × ${k} ?`,
+          ]),
+          morceau,
+          explication,
+          pile(0.5) ? dessinBarre({ total: `${n} × ${k}`, parts: [{ label: `10 × ${k}` }, { label: `${unites} × ${k}`, unknown: true }] }) : undefined,
+        );
+      }
+      return qcmTexte(
+        rc([`${p.nom} se demande quel découpage est juste pour calculer ${n} × ${k}. Lequel ?`, `${p.nom} veut calculer ${n} × ${k} de tête. Quel découpage doit-${p.il} faire ?`]),
+        `10 × ${k} + ${unites} × ${k}`,
+        [`10 × ${k} + ${unites}`, `10 + ${unites} × ${k}`, `${n} + ${k}`],
+        explication,
+      );
     },
-  },
+  ),
 ];
