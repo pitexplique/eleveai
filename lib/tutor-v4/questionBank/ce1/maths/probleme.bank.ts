@@ -303,8 +303,8 @@ export const problemeBank: TutorBankItemV4[] = [
       const bonne = versLeHaut ? "une addition" : "une soustraction";
       return {
         text: versLeHaut
-          ? `« ${a} a ${grand} images. ${b} en a ${ecart} de plus que ${a}. Combien ${b} a-t-il d'images ? » Quelle opération faut-il faire ?`
-          : `« ${a} a ${grand} images. ${a} en a ${ecart} de plus que ${b}. Combien ${b} a-t-il d'images ? » Quelle opération faut-il faire ?`,
+          ? `« ${a} a ${grand} images. ${b} en a ${ecart} de plus que ${a}. Combien d'images a ${b} ? » Quelle opération faut-il faire ?`
+          : `« ${a} a ${grand} images. ${a} en a ${ecart} de plus que ${b}. Combien d'images a ${b} ? » Quelle opération faut-il faire ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           versLeHaut ? "une soustraction" : "une addition",
@@ -501,7 +501,7 @@ export const problemeBank: TutorBankItemV4[] = [
       const grand = petit + ecart;
       const objet = randomChoice(["billes", "images", "cartes", "autocollants"]);
       return {
-        text: `${a} a ${grand} ${objet} et ${b} en a ${petit}. Combien ${a} en a-t-il de plus que ${b} ?`,
+        text: `${a} a ${grand} ${objet} et ${b} en a ${petit}. Combien en a ${a} de plus que ${b} ?`,
         format: "short",
         expected: [String(ecart)],
         comparator: "number_equal",
@@ -531,7 +531,7 @@ export const problemeBank: TutorBankItemV4[] = [
       const ecart = randomInt(20, 90);
       const petit = grand - ecart;
       return {
-        text: `${a} a ${grand} € dans sa tirelire. ${a} a ${ecart} € de plus que ${b}. Combien ${b} a-t-il dans sa tirelire ?`,
+        text: `${a} a ${grand} € dans sa tirelire. ${a} a ${ecart} € de plus que ${b}. Combien d'euros a ${b} dans sa tirelire ?`,
         format: "short",
         expected: [String(petit)],
         comparator: "number_equal",

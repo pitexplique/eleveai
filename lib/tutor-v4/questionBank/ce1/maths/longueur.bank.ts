@@ -478,6 +478,46 @@ const GABARITS: TutorBankItemV4[] = [
       ),
     );
   }, ["convertir"]),
+  // ⭐ 10/11/2026 — un second gabarit à ★2 et à ★3 : chacun n'en avait qu'un
+  // (4 phrases revues sur 20). La question se prend ici par l'égalité à
+  // compléter, puis par le nombre de règles d'un mètre.
+  gab("ce1_longueur_convertir_tpl_5", "ce1_longueur_convertir_simple", 2, "Chaque mètre vaut 100 cm.", () => {
+    const n = randomInt(2, 9);
+    const p = enfant();
+    const debut = randomChoice([
+      `${p.nom} complète son cahier :`,
+      `Sur le tableau, la maîtresse écrit :`,
+      `Pic le paille-en-queue a caché un nombre :`,
+      `Au jeu du trésor, la carte dit :`,
+      `Dans le carnet de l'architecte, on lit :`,
+      `Le jardinier note pour sa haie :`,
+    ]);
+    return qcm(
+      `${debut} « ${n} m = … cm ». ${randomChoice(["Quel nombre manque ?", "Que faut-il écrire ?", "Complète."])}`,
+      `${n * 100} cm`,
+      [`${n * 10} cm`, `${n} cm`, `${n * 1000} cm`, `${(n + 1) * 100} cm`],
+      exp("1 m = 100 cm.", "On compte 100 cm pour chaque mètre.", `${n} × 100 = ${n * 100}.`, `${n} m = ${n * 100} cm.`),
+    );
+  }, ["convertir"]),
+  gab("ce1_longueur_convertir_tpl_6", "ce1_longueur_convertir_simple", 3, "Une règle d'un mètre, c'est 100 cm.", () => {
+    const n = randomInt(2, 9);
+    const p = enfant();
+    const quoi = randomChoice([
+      "le couloir de l'école", "la piste du cirque", "le filet de volley", "le quai de la gare",
+      "la cour de récréation", "le toboggan géant", "la corde à sauter géante", "le potager",
+      "le pont du bateau pirate", "la tente du camping", "la frise de la classe", "le tapis rouge",
+    ]);
+    return qcm(
+      `${p.nom} mesure ${quoi} : ${n * 100} cm. ${randomChoice([
+        "Combien de règles d'un mètre faut-il mettre bout à bout ?",
+        "Avec combien de règles d'un mètre peut-on le mesurer ?",
+        "Combien de fois la règle d'un mètre ?",
+      ])}`,
+      `${n} règles`,
+      [`${n * 10} règles`, `${n * 100} règles`, `${n + 1} règles`, `${n - 1} règles`].filter((x) => !x.startsWith("1 ") && !x.startsWith("0 ")),
+      exp("1 m = 100 cm.", "On cherche combien de fois 100 cm il y a.", `${n * 100} cm = ${n} fois 100 cm.`, `Il faut ${n} règles d'un mètre.`),
+    );
+  }, ["convertir"]),
   gab("ce1_longueur_convertir_tpl_3", "ce1_longueur_convertir_simple", 4, "Les mètres font des centaines de centimètres ; ajoute les centimètres qui restent.", () => {
     const m = randomInt(1, 8);
     const c = randomInt(5, 95);
