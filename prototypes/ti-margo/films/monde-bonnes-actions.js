@@ -7,9 +7,6 @@
 
 const BA_ROSE='#faa2c1', BA_JAUNE='#ffd43b';
 
-/* Un cœur à la craie, centré en (x,y), de rayon r (z : le zoom d'apparition) */
-function baCoeur(c,x,y,r,coul=BA_ROSE,z=1){ if(z<=0) return; r*=z; c.fillStyle=coul; c.beginPath();
-  c.moveTo(x,y+r*.95); c.bezierCurveTo(x-r*1.6,y-r*.1,x-r*.9,y-r*1.25,x,y-r*.45); c.bezierCurveTo(x+r*.9,y-r*1.25,x+r*1.6,y-r*.1,x,y+r*.95); c.fill(); }
 /* La Terre : un disque bleu et trois continents verts */
 function baTerre(c,x,y,r,z=1){ if(z<=0) return; r*=z; c.save(); c.beginPath(); c.arc(x,y,r,0,7); c.fillStyle='#4dabf7'; c.fill(); c.clip();
   c.fillStyle='#69db7c'; for(const [a,b,s] of [[-.35,-.3,.42],[.38,.05,.36],[-.1,.5,.3],[.5,-.55,.2]]){ c.beginPath(); c.ellipse(x+a*r,y+b*r,s*r,s*r*.7,a,0,7); c.fill(); }

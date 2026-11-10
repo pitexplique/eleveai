@@ -84,3 +84,7 @@ function gestes(P,T){ return {
 /* Une flèche à la craie */
 function fleche(c,x1,y1,x2,y2,coul,ep=9){ c.strokeStyle=coul; c.fillStyle=coul; c.lineWidth=ep; c.lineCap='round'; c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2); c.stroke();
   const a=Math.atan2(y2-y1,x2-x1), h=26; c.beginPath(); c.moveTo(x2,y2); c.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45)); c.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45)); c.closePath(); c.fill(); }
+
+/* Un cœur à la craie (épisodes 01 et 02), centré en (x,y), de rayon r (z : le zoom d'apparition) */
+function baCoeur(c,x,y,r,coul='#faa2c1',z=1){ if(z<=0) return; r*=z; c.fillStyle=coul; c.beginPath();
+  c.moveTo(x,y+r*.95); c.bezierCurveTo(x-r*1.6,y-r*.1,x-r*.9,y-r*1.25,x,y-r*.45); c.bezierCurveTo(x+r*.9,y-r*1.25,x+r*1.6,y-r*.1,x,y+r*.95); c.fill(); }
