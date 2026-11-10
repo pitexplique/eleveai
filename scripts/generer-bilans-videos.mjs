@@ -78,7 +78,6 @@ fs.writeFileSync(sortieN, JSON.stringify(notions) + "\n", "utf8");
 // coach : le client n'a pas à charger les 160 Ko des micros pour savoir si la
 // carte existe.
 const sortieCles = path.join(RACINE, "lib", "cartes", "notions-avec-carte.json");
-fs.writeFileSync(sortieCles, JSON.stringify(Object.keys(notions).sort()) + "
-", "utf8");
+fs.writeFileSync(sortieCles, JSON.stringify(Object.keys(notions).sort()) + "\n", "utf8");
 const toutes = Object.values(notions);
 console.log(`${toutes.length} cartes mentales (une par notion du coach, ${toutes.filter((n) => n.micros.length > 8).length} sur deux pages) → ${path.relative(RACINE, sortieN)}`);
