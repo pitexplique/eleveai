@@ -1,0 +1,16 @@
+{
+  "00-accroche": "Salut ! Moi, c'est Ti Margo. Avec seulement 2 bonnes actions, je peux changer la planète entière en un mois. Si, si !",
+  "01-situation": "Aujourd'hui, je fais une bonne action à 2 amis. Demain, chacun en fait une à 2 autres personnes. Et ainsi de suite, chaque jour.",
+  "01q-question": "Question ! Le 5e jour, combien de bonnes actions sont faites ce jour-là ? A : 10. B : 25. C : 32. Mets pause, et choisis !",
+  "01r-reponse": "Réponse C : 32 ! Regarde.",
+  "02-premiers": "Jour 1 : 2 bonnes actions. Jour 2 : 4. Jour 3 : 8. Jour 4 : 16. Jour 5 : 32. Chaque jour, le nombre double.",
+  "03-piege": "Ce n'est pas 2 fois 5. C'est 2 fois 2 fois 2 fois 2 fois 2 : 2 puissance 5.",
+  "04-ecole": "Jour 7 : 128 bonnes actions. Toute une école !",
+  "05-ville": "Jour 15 : 32 mille 768. Une petite ville !",
+  "06-paris": "Jour 21 : 2 millions 97 mille. À peu près tous les habitants de Paris !",
+  "07-milliard": "Jour 30 : plus d'1 milliard de bonnes actions, en une seule journée !",
+  "08-planete": "Et en comptant tous les jours depuis le début, au 32e jour : plus de 8 milliards. Autant que d'habitants sur Terre !",
+  "09-en-vrai": "En vrai, la chaîne se casse souvent. Mais c'est la force des puissances : ce qui double chaque jour devient gigantesque. Comme un virus, une rumeur… ou une idée généreuse.",
+  "10-question": "À toi : le 10e jour, combien de bonnes actions sont faites ce jour-là ? Réponds en commentaire !",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

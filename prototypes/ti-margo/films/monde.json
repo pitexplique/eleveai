@@ -1,0 +1,7 @@
+{
+  "voix": "monde-{ep}-short",
+  "sons": "public/sons/monde-{ep}-short",
+  "sortie": "manim/sorties/ti-margo/monde-{ep}",
+  "nom": "eleveai-maths-monde-{ep}-short",
+  "episodes": { "bonnes-actions": "01" }
+}
