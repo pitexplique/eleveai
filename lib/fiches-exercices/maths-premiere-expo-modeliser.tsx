@@ -140,8 +140,8 @@ export const exercicesExpoModeliserPremiere: FicheExercicesData = {
         {
           enonce: "On plie en deux, en pensée, une feuille de papier épaisse de $0{,}1$ mm. À chaque pliage, l'épaisseur double.\na) Quelle est l'épaisseur après $10$ pliages ? Donner un ordre de grandeur.\nb) Et après $20$ pliages ?",
           reponses: [
-            { question: "a) mm", attendu: "102,4" },
-            { question: "b) mm", attendu: "104 857,6" },
+            { question: "a) mm", attendu: "102,4", unite: "mm" },
+            { question: "b) mm", attendu: "104 857,6", unite: "mm" },
           ],
           correction:
             "a) $0{,}1 \\times 2^{10} = 0{,}1 \\times 1\\,024 = 102{,}4$ mm : environ $10$ cm.\nb) $0{,}1 \\times 2^{20} = 0{,}1 \\times 1\\,048\\,576 = 104\\,857{,}6$ mm, soit environ $105$ m : la hauteur d'un immeuble d'une trentaine d'étages.\n⭐ En vrai, on ne peut plier une feuille que quelques fois : c'est une expérience de pensée, qui montre la puissance du doublement.",

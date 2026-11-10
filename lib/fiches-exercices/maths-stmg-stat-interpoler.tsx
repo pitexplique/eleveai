@@ -253,9 +253,9 @@ export const exercicesStatInterpolerStmg: FicheExercicesData = {
             [6, 116],
           ]),
           reponses: [
-            { question: "a)", attendu: "106,35", tolerance: 0.01 },
-            { question: "b)", attendu: "83,11", tolerance: 0.01 },
-            { question: "c)", attendu: "196", tolerance: 1 },
+            { question: "a)", attendu: "106,35", tolerance: 0.01, unite: "cm" },
+            { question: "b)", attendu: "83,11", tolerance: 0.01, unite: "cm" },
+            { question: "c)", attendu: "196", tolerance: 1, unite: "cm" },
           ],
           correction:
             "Les âges observés vont de 3 à 6 ans.\na) 4,5 est entre 3 et 6 : interpolation. $y = 6{,}64 \\times 4{,}5 + 76{,}47 = 29{,}88 + 76{,}47 = 106{,}35$ cm.\nb) 1 est avant 3 : extrapolation. $y = 6{,}64 \\times 1 + 76{,}47 = 83{,}11$ cm, contre 75,7 cm : la droite se trompe de $7{,}41$ cm. Avant 3 ans, un enfant grandit bien plus vite que 6,64 cm par an.\nc) $y = 6{,}64 \\times 18 + 76{,}47 = 119{,}52 + 76{,}47 = 195{,}99$, soit environ 196 cm, 20 cm de trop. La croissance s'arrête à l'adolescence : la droite, elle, ne s'arrête jamais.\n⛔ Le piège : croire qu'une droite qui colle parfaitement de 3 à 6 ans colle aussi en dehors. Elle ne décrit que la période observée.\nRéponse : a) $106{,}35$ cm ; b) $83{,}11$ cm, beaucoup trop ; c) environ 196 cm, absurde.",

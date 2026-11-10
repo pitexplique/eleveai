@@ -469,7 +469,7 @@ export const exercicesStatMoindresCarresStmg: FicheExercicesData = {
             { question: "b)", attendu: "4" },
             { question: "c)", attendu: "3,2" },
             { question: "d)", attendu: ["d2", "d_2", "(d2)"] },
-            { question: "e)", attendu: "56,4" },
+            { question: "e)", attendu: "56,4", unite: "m³" },
           ],
           correction:
             "a) $\\bar{x} = \\dfrac{2 + 4 + 6 + 8}{4} = 5$ et $\\bar{y} = \\dfrac{30 + 42 + 50 + 62}{4} = \\dfrac{184}{4} = 46$. Donc $G(5 ; 46)$.\nb) $5 \\times 5 + 21 = 46$ : $d_1$ passe par $G$. Elle donne 31, 41, 51, 61. Écarts : $-1$ ; $1$ ; $-1$ ; $1$. Somme des carrés : $1 + 1 + 1 + 1 = 4$.\nc) $d_2$ donne $30{,}4$ ; $40{,}8$ ; $51{,}2$ ; $61{,}6$. Écarts : $-0{,}4$ ; $1{,}2$ ; $-1{,}2$ ; $0{,}4$. Somme des carrés : $0{,}16 + 1{,}44 + 1{,}44 + 0{,}16 = 3{,}2$.\nd) $3{,}2 < 4$ : on garde $d_2$, la droite des moindres carrés.\ne) 700 nuitées, c'est $x = 7$ : $y = 5{,}2 \\times 7 + 20 = 36{,}4 + 20 = 56{,}4$ m³.\n⛔ Le piège au c) : trouver les écarts de $d_2$ plus grands en 4 et en 6, et conclure qu'elle est moins bonne. On compare les SOMMES, pas les écarts un par un.\nRéponse : a) $G(5 ; 46)$ ; b) 4 ; c) $3{,}2$ ; d) $d_2$ ; e) $56{,}4$ m³.",

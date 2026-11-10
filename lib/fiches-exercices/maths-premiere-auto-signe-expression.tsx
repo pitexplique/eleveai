@@ -343,7 +343,7 @@ export const exercicesAutoSigneExpressionPremiere: FicheExercicesData = {
           reponses: [
             { question: "b)", attendu: ["p < 20", "[5 ; 20[", "]5 ; 20["] },
             { question: "c) prix d'équilibre", attendu: "20 €" },
-            { question: "c) quantité", attendu: "30" },
+            { question: "c) quantité", attendu: "30", unite: "kg" },
             { question: "c) recette", attendu: "600 €" },
           ],
           micros: ["auto_alg_signe_premier_degre"],

@@ -355,7 +355,7 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             "La gérante d'un self-stockage loue des box de rangement. Elle a ajusté le loyer mensuel $y$, en euros, selon la surface $x$ du box, en m² : $y = 6{,}5x + 20$.\na) Quel loyer le modèle donne-t-il pour un box de 12 m² ?\nb) Un client dispose de 150 € par mois. Quelle surface peut-il louer ?\nc) Un concurrent loue 15 m² pour 100 €. Est-il moins cher que le modèle ?",
           reponses: [
             { question: "a)", attendu: "98 €" },
-            { question: "b)", attendu: "20" },
+            { question: "b)", attendu: "20", unite: "m²" },
             { question: "c)", attendu: ["oui", "vrai"] },
           ],
           correction:
@@ -392,7 +392,7 @@ export const exercicesStatAjustementStmg: FicheExercicesData = {
             "Une conseillère en rénovation énergétique a relevé, sur des maisons semblables isolées de 0 à 30 cm, la consommation de chauffage en kWh par mois. Elle l'ajuste par $y = -12x + 450$, où $x$ est l'épaisseur d'isolant en cm.\na) Que donne le modèle pour 20 cm d'isolant ?\nb) Quelle épaisseur faut-il pour descendre sous 300 kWh par mois ?\nc) Que donne le modèle pour 40 cm ? Qu'en penses-tu ?",
           reponses: [
             { question: "a)", attendu: "210" },
-            { question: "b)", attendu: "12,5" },
+            { question: "b)", attendu: "12,5", unite: "cm" },
             { question: "c)", attendu: "-30" },
           ],
           correction:

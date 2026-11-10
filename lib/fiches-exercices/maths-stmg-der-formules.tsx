@@ -155,7 +155,7 @@ export const exercicesDerFormulesStmg: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: ["3x^2", "V'(x) = 3x^2"] },
             { question: "b)", attendu: "75" },
-            { question: "c)", attendu: "7,5" },
+            { question: "c)", attendu: "7,5", unite: "L" },
           ],
           correction:
             "a) $V'(x) = 3x^2$.\nb) $V'(5) = 3 \\times 25 = 75$.\nc) L'écart vaut $0{,}1$ : $75 \\times 0{,}1 = 7{,}5$ litres.\n⛔ Le piège au b) : calculer $(3 \\times 5)^2 = 225$. Le carré porte sur 5 seulement.\nRéponse : a) $3x^2$ ; b) 75 ; c) 7,5.",

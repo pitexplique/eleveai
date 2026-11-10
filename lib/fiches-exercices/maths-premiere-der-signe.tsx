@@ -197,7 +197,7 @@ export const exercicesDerSignePremiere: FicheExercicesData = {
           figure: repere([-1, 7, -7, 7], [{ q: [0, -2, 6], couleur: ORANGE }], [{ x: 3, y: 0, label: "" }], undefined, true),
           reponses: [
             { question: "a) B'(x) = 0 pour x =", attendu: "3" },
-            { question: "b) tonnes", attendu: "3" },
+            { question: "b) tonnes", attendu: "3", unite: "t" },
           ],
           correction:
             "a) $-2x + 6 > 0$ donne $-2x > -6$, donc $x < 3$ : on divise par $-2$, qui est négatif, et le sens de l'inégalité s'inverse.\n$B'(x)$ est positif sur $[0 ; 3[$, nul en $3$, négatif sur $]3 ; 6]$.\nSur le dessin, c'est la même chose : la droite de $B'$ est AU-DESSUS de l'axe avant $3$, en dessous après.\nb) Le bénéfice augmente tant que $B'(x) > 0$, c'est-à-dire jusqu'à $3$ tonnes ; ensuite, il diminue. Le bénéfice est le plus grand pour $3$ tonnes.\nAu-delà, chaque tonne de plus fait BAISSER le bénéfice : il faut par exemple payer des saisonniers en plus, ou brader les tomates.\n⛔ Le dessin est celui de $B'$, pas de $B$ : la droite descend, et pourtant $B$ augmente tant qu'elle est au-dessus de l'axe.",
