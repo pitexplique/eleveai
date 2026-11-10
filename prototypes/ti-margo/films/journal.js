@@ -397,11 +397,13 @@ FILMS.presentation=function(outils){
   }
 
   /* La miniature : Ti Margo, le journal, la question */
-  window.tiMargoMiniature=()=>{ window.MINI=true; window.tiMargo.aller(t.titreU+2);
+  /* Miniature paysage : « COMPRENDRE … » + pastille rouge « EN N MIN », l'accroche maths en grand (jour 30), mention « Dessin animé » */
+  window.tiMargoMiniature=()=>{ window.MINI=true; window.tiMargo.aller(t.seul+.8);
     legende.style.display='none'; $('titre').style.display='none'; $('fin').style.display='none';
-    const m=document.createElement('div'); m.className='cv'; m.innerHTML='Le Journal d’EleveAI<div style="color:#e8590c;font-size:96px;margin-top:6px">COMPRENDRE LE MONDE</div>';
-    m.style.cssText='left:820px;right:40px;top:60px;z-index:6;font-size:84px;line-height:1.05;text-align:center;background:#fff;border:7px solid #17452a;border-radius:36px;padding:20px;'; document.body.append(m);
-    const d=document.createElement('div'); d.className='cv'; d.textContent='Dessin animé'; d.style.cssText='left:660px;right:660px;bottom:36px;text-align:center;font-size:60px;background:#17452a;color:#fff;border-radius:999px;padding:12px 0;z-index:6;'; document.body.append(d); };
+    const m=document.createElement('div'); m.className='cv'; m.innerHTML='Le Journal d’EleveAI<div style="color:#e8590c;font-size:92px;margin-top:2px;white-space:nowrap">COMPRENDRE LE MONDE</div>';
+    m.style.cssText='left:520px;right:50px;top:36px;z-index:6;font-size:62px;line-height:1.05;text-align:center;background:#fff;border:7px solid #17452a;border-radius:36px;padding:16px 20px;'; document.body.append(m);
+    const n=document.createElement('div'); n.className='cv'; n.textContent='EN 5 MIN'; n.style.cssText='right:90px;top:222px;z-index:7;font-size:58px;background:#c92a2a;color:#fff;border-radius:999px;padding:6px 34px;'; document.body.append(n);
+    const d=document.createElement('div'); d.className='cv'; d.textContent='Dessin animé'; d.style.cssText='left:660px;right:660px;bottom:30px;text-align:center;font-size:60px;background:#17452a;color:#fff;border-radius:999px;padding:12px 0;z-index:6;'; document.body.append(d); };
 
   const cuts=[finTitre,...ORDRE.slice(1).map(k=>A[k])];
   return { clips,FIN,titre:'Le Journal d’EleveAI',ceinture:1,finTitre,groupes,finClip:'17-abonne',cuts,
@@ -444,6 +446,6 @@ FILMS.presentation=function(outils){
       else if(en('16-rendez-vous','17-abonne')) T>=t.cli?g.montre():g.ouvre();
       else { T-A['17-abonne']<2.5?g.ouvre():g.pouce(); }
 
-      if(window.MINI){ scene.x=-4.6; scene.ry=.12; cam.x=0; cam.y=2.4; cam.d=9.2; P.jaw=.62; g.fier(); }
+      if(window.MINI){ pg.g.visible=true; pg.g.position.y=2.15; scene.x=-3.05; scene.ry=.18; cam.x=0; cam.y=2.75; cam.d=7.4; P.jaw=.62; g.fier(); }
     } };
 };
