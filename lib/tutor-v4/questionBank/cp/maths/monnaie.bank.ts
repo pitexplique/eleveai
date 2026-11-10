@@ -40,6 +40,7 @@ import type {
   TutorBankItemV4,
   TutorGeneratedQuestionV4,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -50,7 +51,7 @@ function randomChoice<T>(items: readonly T[]): T {
 }
 
 function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {
@@ -65,8 +66,13 @@ const eu = (n: number) => `${n} €`;
 /** Choix numériques (0 à 100), avec ou sans « € », jamais en double. */
 function choixNombres(correct: number, wrongs: readonly number[], euros = true): string[] {
   const f = (n: number) => (euros ? eu(n) : String(n));
-  const ok = Array.from(new Set(wrongs)).filter((w) => Number.isInteger(w) && w >= 0 && w <= 100 && w !== correct);
-  const secours = [correct + 1, correct - 1, correct + 10, correct + 2, correct - 2, correct + 5];
+  // ⛔ 10/11/2026 — vu dans le coach : « Combien de billets vois-tu ? » proposait
+  // 0 et 11 pour 1 billet. Quand on COMPTE des pièces (euros = false), ni 0 ni
+  // « +10 » : un enfant qui compte se trompe d'un ou deux, pas de dix.
+  const ok = Array.from(new Set(wrongs)).filter((w) => Number.isInteger(w) && (euros ? w >= 0 : w > 0) && w <= 100 && w !== correct);
+  const secours = euros
+    ? [correct + 1, correct - 1, correct + 10, correct + 2, correct - 2, correct + 5]
+    : [correct + 1, correct - 1, correct + 2, correct - 2, correct + 3, correct + 4];
   for (const s of secours) if (ok.length < 3 && s > 0 && s <= 100 && s !== correct && !ok.includes(s)) ok.push(s);
   return shuffle([f(correct), ...shuffle(ok).slice(0, 3).map(f)]);
 }

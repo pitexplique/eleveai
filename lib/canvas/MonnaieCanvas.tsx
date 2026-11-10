@@ -402,7 +402,9 @@ export default function MonnaieCanvas({ figure }: Props) {
     <svg
       viewBox={`0 0 ${width} ${height}`}
       width="100%"
-      style={{ maxWidth: width, height: "auto", display: "block", margin: "0 auto" }}
+      // ⭐ 10/11/2026 — vu dans le vrai coach : à 320 px dans un cadre de 768, un
+      // billet faisait la taille d'un mot. Le dessin peut grandir de moitié.
+      style={{ maxWidth: Math.round(width * 1.5), height: "auto", display: "block", margin: "0 auto" }}
       role="img"
       aria-label={figure.consigne ?? "Des pièces et des billets en euros"}
     >
