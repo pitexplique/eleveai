@@ -9,6 +9,7 @@ import { CORRECTEURS as anglesOrientes } from "./angles-orientes";
 import { CORRECTEURS as tangenteReel } from "./tangente-reel";
 import { CORRECTEURS as trigoEquationsFormes } from "./trigo-equations-formes";
 import { CORRECTEURS as barycentre } from "./barycentre";
+import { CORRECTEURS as suites } from "./suites";
 
 export const CORRECTEURS_PREMIERE_SPE: CorrecteursMaths = {
   ...bernoulliRepetition,
@@ -19,4 +20,5 @@ export const CORRECTEURS_PREMIERE_SPE: CorrecteursMaths = {
   ...tangenteReel,
   ...trigoEquationsFormes,
   ...barycentre,
+  ...suites,
 };

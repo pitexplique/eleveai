@@ -11,6 +11,7 @@
 // PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM (bonne réponse en 1re position, mélangée par le moteur).
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+import { renfortSuites } from "./suites-renfort";
 
 // Les premiers termes affichés en ligne, avec les flèches de passage d'un
 // terme au suivant : c'est le canvas qui rend visible le MÉCANISME d'une
@@ -52,7 +53,7 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
   );
 }
 
-export const suitesBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ===================== SUITE_TERMES ===================== */
   {
     kind: "fixed",
@@ -4080,4 +4081,48 @@ export const suitesBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/* 10/11/2026 — Frédéric : « enlève les questions fixes sauf pour des cas
+   spéciaux ». Mesure du 10/11 : 3 à 27 squelettes par micro, 7 à 19
+   répétitions sur 20 à chaque étoile, et 30 questions « open ». Les
+   générateurs de suites-renfort.ts remplacent tout ; on ne garde que des
+   questions de COURS ou des pièges classiques (au plus trois par micro) :
+   rang ≠ valeur, (u_n) ≠ u_n, u_{n+1} ≠ u_n + 1, récurrence ≠ explicite,
+   le terme précédent, la formule explicite d'une récurrence, le rôle de la
+   variable et de la boucle « for », les nombres triangulaires, les formules
+   du cours, la raison 0 ou négative, +10 % puis −10 %, −50 % puis +50 %,
+   la méthode des variations, la formule pour q = 1, 1/n et « décroissante
+   ne veut pas dire vers −∞ ». */
+const CAS_SPECIAUX = new Set([
+  "premiere_suites_reg_fixed_1",
+  "premiere_suites_reg_fixed_6",
+  "premiere_suites_termes_fixed_9",
+  "premiere_suites_termes_fixed_5",
+  "premiere_suites_termes_fixed_11",
+  "premiere_suites_rec_fixed_4",
+  "premiere_suites_algo_fixed_3",
+  "premiere_suites_algo_fixed_5",
+  "premiere_suites_mod_fixed_2",
+  "premiere_suites_arith_fixed_1",
+  "premiere_suites_arith_fixed_10",
+  "premiere_suites_geo_fixed_1",
+  "premiere_suites_geo_fixed_11",
+  "premiere_suites_evo_fixed_4",
+  "premiere_suites_evo_fixed_6",
+  "premiere_suites_var_fixed_3",
+  "premiere_suites_var_fixed_8",
+  "premiere_suites_var_fixed_6",
+  "premiere_suites_sommes_fixed_1",
+  "premiere_suites_sommes_fixed_8",
+  "premiere_suites_sommes_fixed_3",
+  "premiere_suites_sommes_fixed_7",
+  "premiere_suites_sgeo_fixed_1",
+  "premiere_suites_lim_fixed_1",
+  "premiere_suites_lim_fixed_5",
+]);
+
+export const suitesBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortSuites,
 ];
