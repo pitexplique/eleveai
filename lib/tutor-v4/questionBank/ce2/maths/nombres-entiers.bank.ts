@@ -1,70 +1,47 @@
 // lib/tutor-v4/questionBank/ce2/maths/nombres-entiers.bank.ts
 //
-// Première banque écrite à la main pour le CE2. Jusqu'ici, les 132
-// micro-compétences de la classe passaient toutes par un constructeur unique
-// qui aiguillait sur la NOTION et non sur la micro-compétence : « calculer un
-// rendu de monnaie » servait une question sur un ruban. On reprend donc le
-// patron de CM1 et de CM2, une banque par notion.
+// Les nombres entiers du CE2, écrits à la main.
 //
 // PÉRIMÈTRE BO : nombres entiers jusqu'à 10 000 (BO n° 41 du 31 octobre 2024,
-// cycle 2, applicable à la rentrée 2025). Période 1 au-delà de 1 000, période 2
-// au-delà de 10 000.
+// cycle 2, applicable à la rentrée 2025) : lire, écrire, décomposer, comparer,
+// ranger, encadrer, placer sur une droite graduée.
+//
+// ⛔ RÉÉCRITE LE 10/11/2026 (robustesse du coach, cycle 2). Mesurée avec
+// scripts/mesurer-squelettes-coach.ts, six micros sur sept tenaient sur 4 à 6
+// squelettes : un enfant revoyait 15 à 19 fois la même phrase sur 20. Chaque
+// micro a maintenant un générateur PAR ÉTOILE (familles × situations ×
+// tournures), et les items figés d'avant sont devenus des gabarits de même
+// idée, sous le même id.
+//
+// ⭐ LES DESSINS (10/11/2026) : le matériel de numération (`base_dix` :
+// cubes de mille, plaques, barres, cubes) et la droite graduée. ⛔ Ni l'un ni
+// l'autre n'écrit la valeur cherchée : la droite n'écrit que deux ou trois
+// graduations (`valeursEcrites`), jamais celle du point demandé.
 
-import type { NumberLineCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-// La bonne réponse est mise de côté, trois pièges distincts sont tirés ensuite,
-// puis on mélange. Écrire ce helper autrement a coûté cher ailleurs : voir
-// scripts/verifier-generateurs.mjs.
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
-
-function formatNumber(n: number): string {
-  return n.toLocaleString("fr-FR");
-}
-
-function exp(
-  definition: string,
-  methode: string,
-  calcul: string,
-  conclusion: string,
-) {
-  return `Définition : ${definition}
-
-Méthode : ${methode}
-
-Calcul : ${calcul}
-
-Conclusion : ${conclusion}`;
-}
-
-function numberLine(data: Omit<NumberLineCanvasData, "kind">): NumberLineCanvasData {
-  return { kind: "number_line", ...data };
-}
+import type { BaseDixCanvasData, NumberLineCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import {
+  type Etoile,
+  type Q,
+  choix as choixBrut,
+  de,
+  exp,
+  fmt,
+  gabarit,
+  maj,
+  pick,
+  quelquun,
+  deuxPersonnes,
+  rint,
+  shuffle,
+  tirer,
+} from "./outils-nombres-ce2";
 
 // ============================================================
 // ÉCRITURE EN LETTRES — jusqu'à 10 000
-// On suit l'orthographe traditionnelle, celle des banques de CM1 et de CM2
-// (« cinq mille deux cent quarante »), pour que l'élève lise la même chose
-// d'une classe à l'autre. Les trois pièges de l'école y sont : le « et » de
-// vingt et un qui disparaît à quatre-vingt-un, le « s » de quatre-vingts et de
-// deux cents qui tombe dès qu'un nombre suit, et « mille » qui ne s'accorde
-// jamais.
+// L'orthographe traditionnelle, celle des banques de CM1 et de CM2
+// (« cinq mille deux cent quarante »). Les trois pièges de l'école : le « et »
+// de vingt et un, le « s » de quatre-vingts et de deux cents qui tombe dès
+// qu'un nombre suit, et « mille » qui ne s'accorde jamais.
 // ============================================================
 
 const UNITES = [
@@ -77,7 +54,6 @@ const DIZAINES = ["", "", "vingt", "trente", "quarante", "cinquante", "soixante"
 
 function deuxChiffresEnLettres(n: number): string {
   if (n < 20) return UNITES[n];
-
   if (n < 70) {
     const d = Math.floor(n / 10);
     const u = n % 10;
@@ -85,13 +61,11 @@ function deuxChiffresEnLettres(n: number): string {
     if (u === 1) return `${DIZAINES[d]} et un`;
     return `${DIZAINES[d]}-${UNITES[u]}`;
   }
-
   if (n < 80) {
     const reste = n - 60;
     if (reste === 11) return "soixante et onze";
     return `soixante-${UNITES[reste]}`;
   }
-
   const reste = n - 80;
   if (reste === 0) return "quatre-vingts";
   return `quatre-vingt-${UNITES[reste]}`;
@@ -100,874 +74,1446 @@ function deuxChiffresEnLettres(n: number): string {
 function troisChiffresEnLettres(n: number): string {
   const c = Math.floor(n / 100);
   const reste = n % 100;
-
   if (c === 0) return deuxChiffresEnLettres(reste);
-
-  const centaine =
-    c === 1 ? "cent" : reste === 0 ? `${UNITES[c]} cents` : `${UNITES[c]} cent`;
-
+  const centaine = c === 1 ? "cent" : reste === 0 ? `${UNITES[c]} cents` : `${UNITES[c]} cent`;
   return reste === 0 ? centaine : `${centaine} ${deuxChiffresEnLettres(reste)}`;
 }
 
 export function enLettres(n: number): string {
   if (n < 1000) return troisChiffresEnLettres(n);
-
   const milliers = Math.floor(n / 1000);
   const reste = n % 1000;
   const partieMille = milliers === 1 ? "mille" : `${troisChiffresEnLettres(milliers)} mille`;
-
   return reste === 0 ? partieMille : `${partieMille} ${troisChiffresEnLettres(reste)}`;
 }
 
-// Un nombre « à zéros » : le piège de la lecture au CE2, celui qui fait écrire
-// 4 07 ou 470 pour « quatre mille sept ».
+// ============================================================
+// OUTILS
+// ============================================================
+
+const NOTION = "nombre_entier";
+
+/** Aucune proposition au-delà de 10 000 (hors programme du CE2). */
+const dansLeProgramme = (s: string) =>
+  (s.replace(/(\d)\s(?=\d{3})/g, "$1").match(/\d+/g) ?? []).every((x) => Number(x) <= 10000);
+
+/** Les choix, sans aucune proposition au-delà de 10 000. */
+const choix = (correct: string, pieges: readonly string[]) => choixBrut(correct, pieges.filter(dansLeProgramme));
+
+/** Les quatre chiffres d'un nombre de 0 à 9 999 : [milliers, centaines, dizaines, unités]. */
+const chiffresDe = (n: number) => [Math.floor(n / 1000), Math.floor(n / 100) % 10, Math.floor(n / 10) % 10, n % 10];
+
+/** Un nombre à zéro « caché » : le piège qui fait écrire 4 07 ou 470 pour « quatre mille sept ». */
 function nombreAvecZeros(): number {
-  return randomChoice([
-    randomInt(1, 9) * 1000 + randomInt(1, 9),
-    randomInt(1, 9) * 1000 + randomInt(1, 9) * 10,
-    randomInt(1, 9) * 1000 + randomInt(1, 9) * 100,
+  return pick([
+    rint(1, 9) * 1000 + rint(1, 9),
+    rint(1, 9) * 1000 + rint(1, 9) * 10,
+    rint(1, 9) * 1000 + rint(1, 9) * 100,
+    rint(1, 9) * 1000 + rint(1, 9) * 100 + rint(1, 9),
+    rint(1, 9) * 1000 + rint(1, 9) * 10 + rint(1, 9),
   ]);
 }
 
-const RANG_LABELS = [
-  { rang: "unités", puissance: 1 },
-  { rang: "dizaines", puissance: 10 },
-  { rang: "centaines", puissance: 100 },
-  { rang: "milliers", puissance: 1000 },
+/** Un nombre de 4 chiffres tous différents et non nuls. */
+function nombreChiffresDistincts(): number {
+  const c = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 4);
+  return c[0] * 1000 + c[1] * 100 + c[2] * 10 + c[3];
+}
+
+/** Le matériel de numération d'un nombre (le dessin n'écrit jamais le nombre). */
+function materiel(n: number, etiquettes = true): BaseDixCanvasData {
+  const [m, c, d, u] = chiffresDe(n);
+  return {
+    kind: "base_dix",
+    ...(m ? { milliers: m } : {}),
+    ...(c ? { centaines: c } : {}),
+    ...(d ? { dizaines: d } : {}),
+    ...(u ? { unites: u } : {}),
+    etiquettes,
+  };
+}
+
+/** Un nombre que le matériel dessine lisiblement (pas plus de 6 cubes de mille). */
+function nombrePourMateriel(avecZero = false): number {
+  const m = rint(1, 6);
+  const c = avecZero && Math.random() < 0.5 ? 0 : rint(1, 9);
+  const d = avecZero && c !== 0 ? 0 : rint(1, 9);
+  const u = rint(1, 9);
+  return m * 1000 + c * 100 + d * 10 + u;
+}
+
+/** Une droite graduée de `min` à `max`, qui n'écrit QUE les valeurs `ecrites`. */
+function droite(
+  min: number,
+  max: number,
+  pas: number,
+  points: NumberLineCanvasData["points"],
+  ecrites: number[],
+): NumberLineCanvasData {
+  return {
+    kind: "number_line",
+    min,
+    max,
+    step: pas,
+    valeursEcrites: ecrites,
+    points,
+    size: { width: 340, height: 100 },
+    display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+  };
+}
+
+const ROUGE = "#ef4444";
+
+/** « Lou a fabriqué un nombre avec ce matériel. » — dit de beaucoup de façons. */
+function introMateriel(): string {
+  const p = quelquun();
+  return pick([
+    `${p.nom} a fabriqué un nombre avec ce matériel.`,
+    `${p.nom} a posé ce matériel sur sa table.`,
+    `${p.nom} a construit un nombre avec des cubes, des plaques et des barres.`,
+    `Voici le matériel ${de(p.nom)}.`,
+    "Le matériel montre un nombre.",
+    "Pic le paille-en-queue a rangé ce matériel.",
+    `La maîtresse a dessiné le nombre ${de(p.nom)}.`,
+  ]);
+}
+
+/** Des décors d'enfant où un grand nombre a sa place. */
+const DECORS: readonly ((n: string) => string)[] = [
+  (n) => `Au stade, il y a ${n} spectateurs.`,
+  (n) => `La bibliothèque de l'école a ${n} livres.`,
+  (n) => `Le dragon garde un trésor de ${n} pièces d'or.`,
+  (n) => `Le capitaine pirate a caché ${n} perles dans son coffre.`,
+  (n) => `Le puzzle géant de Zoé a ${n} pièces.`,
+  (n) => `Ce soir, le cirque a vendu ${n} billets.`,
+  (n) => `La ruche du jardinier abrite ${n} abeilles.`,
+  (n) => `Pic le paille-en-queue a compté ${n} graines dans le grand sac.`,
+  (n) => `La boulangère a fait ${n} croissants ce mois-ci.`,
+  (n) => `La vétérinaire a soigné ${n} animaux depuis l'ouverture.`,
+  (n) => `Le zoo a reçu ${n} visiteurs pendant les vacances.`,
+  (n) => `Le ballon de l'aventurier vole à ${n} mètres de haut.`,
+  (n) => `Le train a roulé ${n} kilomètres cette semaine.`,
+  (n) => `Pour la kermesse, l'école a imprimé ${n} tickets.`,
+  (n) => `Le grand arbre de la cour a ${n} feuilles.`,
+  (n) => `Le jardinier a planté ${n} bulbes de tulipes.`,
+  (n) => `La course de la ville compte ${n} coureurs.`,
+  (n) => `Le chef cuisinier a cassé ${n} œufs cette année.`,
+  (n) => `L'aquarium de la ville a ${n} poissons.`,
+  (n) => `Le livre de contes géant a ${n} pages.`,
+];
+const decor = (n: number) => pick(DECORS)(fmt(n));
+
+const RANGS = [
+  { rang: "unités", sing: "unité", puissance: 1, index: 3 },
+  { rang: "dizaines", sing: "dizaine", puissance: 10, index: 2 },
+  { rang: "centaines", sing: "centaine", puissance: 100, index: 1 },
+  { rang: "milliers", sing: "millier", puissance: 1000, index: 0 },
 ] as const;
 
-export const nombresEntiersBank: TutorBankItemV4[] = [
-  // ============================================================
-  // ce2_entier_lire_ecrire — Lire et écrire jusqu'à 10 000
-  // ============================================================
+// ============================================================
+// ce2_entier_lire_ecrire — Lire et écrire jusqu'à 10 000
+// ============================================================
 
-  {
-    kind: "fixed",
-    id: "ce2_entier_lire_fixed_001_zero_intercale",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_lire_ecrire",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Comment écrit-on en chiffres : « quatre mille sept » ?",
+/** Les pièges d'orthographe d'un nombre : chacun FAUX dans toutes les orthographes. */
+function ortheFautives(n: number): string[] {
+  const juste = enLettres(n);
+  const fautes = new Set<string>();
+  if (n >= 1000 && n < 2000) fautes.add(`un ${juste}`);
+  if (n >= 2000) fautes.add(juste.replace(" mille", " milles"));
+  if (/ cent /.test(juste)) fautes.add(juste.replace(/ cent /, " cents "));
+  if (/cents$/.test(juste)) fautes.add(juste.replace(/cents$/, "cent"));
+  if (/quatre-vingts$/.test(juste)) fautes.add(juste.replace(/quatre-vingts$/, "quatre-vingt"));
+  if (/quatre-vingt-/.test(juste)) fautes.add(juste.replace("quatre-vingt-", "quatre-vingts-"));
+  if (/ et un$/.test(juste)) fautes.add(juste.replace(/ et un$/, "-un"));
+  return [...fautes].filter((f) => f !== juste);
+}
+
+/** Un nombre où l'orthographe a un piège (mille, cents, quatre-vingts, et un). */
+function nombreAPiege(): number {
+  return pick([
+    rint(1, 9) * 1000 + 80,
+    rint(1, 9) * 1000 + rint(2, 9) * 100,
+    rint(1, 9) * 1000 + rint(2, 9) * 100 + rint(1, 9) * 10 + rint(1, 9),
+    rint(1, 9) * 1000 + rint(1, 9) * 100 + 80 + rint(2, 9),
+    rint(2, 9) * 1000 + rint(2, 9) * 100 + 80,
+    rint(1, 9) * 1000 + rint(1, 9) * 100 + pick([21, 31, 41, 51, 61]),
+  ]);
+}
+
+function lireEnLettres(n: number): Q {
+  const p = quelquun();
+  const correct = enLettres(n);
+  const voisins = [n + 1, n - 1, n + 10, n - 10, n + 100, n - 100, n + 1000].filter((v) => v > 0 && v < 10000).map(enLettres);
+  const text = pick([
+    `Comment lit-on le nombre ${fmt(n)} ?`,
+    `${p.nom} lit le nombre ${fmt(n)} à voix haute. Que dit-${p.il} ?`,
+    `Quelle est l'écriture en lettres de ${fmt(n)} ?`,
+    `${decor(n)} Comment lit-on ce nombre ?`,
+    `Sur le panneau, on voit ${fmt(n)}. Comment le dire ?`,
+    `La maîtresse écrit ${fmt(n)} au tableau. Comment le lit-on ?`,
+  ]);
+  return {
+    text,
     format: "qcm",
-    choices: ["4 007", "4 700", "4 070", "47"],
-    expected: ["4 007"],
+    choices: choix(correct, voisins),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "Il n'y a ni centaine ni dizaine : les deux places restent vides.",
     explanation: exp(
-      "Chaque chiffre occupe une place : milliers, centaines, dizaines, unités.",
-      "On écrit les quatre places, même celles qui n'ont rien : on y met un zéro.",
-      "4 milliers, 0 centaine, 0 dizaine, 7 unités.",
-      "Le nombre s'écrit 4 007.",
+      "Un nombre se lit en commençant par les milliers, puis le reste.",
+      "On sépare les milliers du reste, puis on lit chaque partie.",
+      `${fmt(n)} : ${Math.floor(n / 1000)} mille, puis ${n % 1000}.`,
+      `On lit « ${correct} ».`,
     ),
-    tags: ["ce2", "nombres_entiers", "lecture", "zero", "qcm", "piege"],
-  },
+  };
+}
 
-  {
-    kind: "fixed",
-    id: "ce2_entier_lire_fixed_002_quatre_vingts",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_lire_ecrire",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Comment écrit-on 1 080 en lettres ?",
+function piegesChiffres(n: number): string[] {
+  const m = Math.floor(n / 1000);
+  const reste = n % 1000;
+  return [
+    fmt(m * 1000 + reste * 10),
+    fmt(m * 1000 + Math.floor(reste / 10)),
+    fmt(m * 100 + reste),
+    fmt(Number(`${m}${reste}`)),
+    fmt(n + 900),
+    fmt(n + 90),
+  ];
+}
+
+function ecrireEnChiffres(n: number): Q {
+  const p = quelquun();
+  const lettres = enLettres(n);
+  const correct = fmt(n);
+  const text = pick([
+    `Comment écrit-on en chiffres : « ${lettres} » ?`,
+    `${p.nom} dicte « ${lettres} ». Quel nombre faut-il écrire ?`,
+    `La maîtresse dit « ${lettres} ». Quel nombre écrit-on au tableau ?`,
+    `Pic le paille-en-queue chante « ${lettres} ». Quel nombre chante-t-il ?`,
+    `Sur la carte au trésor, on lit « ${lettres} pas ». Combien de pas, écrit en chiffres ?`,
+    `${p.nom} entend « ${lettres} » à la radio. Comment l'écrire en chiffres ?`,
+  ]);
+  const [m, , , ] = chiffresDe(n);
+  return {
+    text,
     format: "qcm",
-    choices: [
-      "mille quatre-vingts",
-      "un mille quatre-vingt",
-      "mille quatre-vingt",
-      "mille huitante",
-    ],
-    expected: ["mille quatre-vingts"],
+    choices: choix(correct, piegesChiffres(n)),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "« mille » ne prend jamais de « un » devant, et quatre-vingts prend un « s » quand rien ne le suit.",
     explanation: exp(
-      "Mille est invariable et ne s'écrit jamais « un mille ».",
-      "Quatre-vingts prend un « s » lorsqu'aucun nombre ne le suit.",
-      "1 000 donne « mille », 80 donne « quatre-vingts ».",
-      "On écrit « mille quatre-vingts ».",
+      "Chaque rang a sa place : milliers, centaines, dizaines, unités. Une place vide s'écrit avec un zéro.",
+      "On pose les quatre places, puis on remplit celles qu'on entend.",
+      `${m} millier(s), puis ${n % 1000} pour la suite : ${chiffresDe(n).join(" ")}.`,
+      `Le nombre s'écrit ${correct}.`,
     ),
-    tags: ["ce2", "nombres_entiers", "lecture", "orthographe", "qcm", "piege"],
-  },
+  };
+}
 
-  {
-    kind: "template",
-    id: "ce2_entier_lire_tpl_001_chiffres_vers_lettres",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_lire_ecrire",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Lis d'abord les milliers, puis les centaines, les dizaines et les unités.",
-    tags: ["ce2", "nombres_entiers", "lecture", "template"],
-    generate: () => {
-      const n = randomInt(1001, 9999);
-      const correct = enLettres(n);
-
-      // Les pièges sont des nombres voisins : l'élève doit vraiment lire, pas
-      // reconnaître une forme.
-      const voisins = [n + 1, n - 1, n + 10, n - 10, n + 100, n - 100]
-        .filter((v) => v > 0 && v < 10000)
-        .map(enLettres);
-
-      return {
-        text: `Comment lit-on le nombre ${formatNumber(n)} ?`,
-        format: "qcm",
-        choices: makeChoices(correct, voisins),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un nombre se lit classe par classe, en commençant par les milliers.",
-          "On sépare les milliers du reste, puis on lit chaque partie.",
-          `${formatNumber(n)} se découpe en ${Math.floor(n / 1000)} millier(s) et ${n % 1000}.`,
-          `On lit « ${correct} ».`,
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_entier_lire_tpl_002_lettres_vers_chiffres",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_lire_ecrire",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Compte les quatre places : milliers, centaines, dizaines, unités.",
-    tags: ["ce2", "nombres_entiers", "ecriture", "zero", "template"],
-    generate: () => {
-      const n = nombreAvecZeros();
-      const correct = formatNumber(n);
-
-      const milliers = Math.floor(n / 1000);
-      const reste = n % 1000;
-
-      // Les erreurs typiques : décaler le reste d'un rang, ou coller les
-      // chiffres sans respecter les places vides.
-      const pieges = [
-        formatNumber(milliers * 1000 + reste * 10),
-        formatNumber(milliers * 1000 + Math.floor(reste / 10)),
-        formatNumber(milliers * 100 + reste),
-        formatNumber(Number(`${milliers}${reste}`)),
-        formatNumber(n + 900),
-      ].filter((p) => p !== correct);
-
-      return {
-        text: `Comment écrit-on en chiffres : « ${enLettres(n)} » ?`,
-        format: "qcm",
-        choices: makeChoices(correct, pieges),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Chaque rang a sa place, et une place vide s'écrit avec un zéro.",
-          "On pose les quatre places, puis on remplit celles qu'on entend.",
-          `${milliers} millier(s), et ${reste} pour la suite.`,
-          `Le nombre s'écrit ${correct}.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_entier_milliers — Chiffre des… et nombre de…
-  // Le piège central du CE2 : « le chiffre des centaines » n'est pas
-  // « le nombre de centaines ».
-  // ============================================================
-
-  {
-    kind: "fixed",
-    id: "ce2_entier_milliers_fixed_001_chiffre_vs_nombre",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_milliers",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Dans 3 472, quel est le NOMBRE de centaines ?",
+function materielEnLettres(n: number): Q {
+  const correct = enLettres(n);
+  const [m, c, d, u] = chiffresDe(n);
+  const pieges = [
+    enLettres(Number(`${m}${u}${d}${c}`.slice(0, 4)) || n + 1),
+    enLettres(m * 1000 + d * 100 + c * 10 + u),
+    enLettres(m * 1000 + c * 100 + u * 10 + d),
+    enLettres(n + 100),
+    enLettres(n - 10 > 0 ? n - 10 : n + 20),
+  ];
+  const text = `${introMateriel()} ${pick([
+    "Comment lit-on ce nombre ?",
+    "Comment se dit ce nombre ?",
+    "Quel nombre est représenté ? Choisis son écriture en lettres.",
+  ])}`;
+  return {
+    text,
     format: "qcm",
-    choices: ["34", "4", "3", "472"],
-    expected: ["34"],
+    choices: choix(correct, pieges),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "Le nombre de centaines compte toutes les centaines, y compris celles cachées dans les milliers.",
+    canvas: materiel(n),
     explanation: exp(
-      "Le chiffre des centaines est celui qui occupe la place des centaines. Le nombre de centaines compte toutes les centaines du nombre.",
-      "Pour le nombre de centaines, on regarde tout ce qui est à gauche de la place des centaines, cette place comprise.",
-      "3 472 contient 34 centaines, car 34 × 100 = 3 400. Le chiffre des centaines, lui, est 4.",
-      "Le nombre de centaines de 3 472 est 34.",
+      "Un gros cube vaut 1 000, une plaque 100, une barre 10, un petit cube 1.",
+      "On compte chaque sorte de matériel, puis on lit le nombre.",
+      `${m} gros cube(s), ${c} plaque(s), ${d} barre(s), ${u} petit(s) cube(s) : ${fmt(n)}.`,
+      `On lit « ${correct} ».`,
     ),
-    tags: ["ce2", "nombres_entiers", "rangs", "qcm", "piege"],
-  },
+  };
+}
 
-  {
-    kind: "template",
-    id: "ce2_entier_milliers_tpl_001_chiffre_du_rang",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_milliers",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "Compte les places en partant de la droite : unités, dizaines, centaines, milliers.",
-    tags: ["ce2", "nombres_entiers", "rangs", "template"],
-    generate: () => {
-      // Chiffres tous distincts : sinon deux propositions se ressemblent et le
-      // piège « tu as lu la mauvaise place » ne se voit plus.
-      const chiffres = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 4);
-      const n = chiffres[0] * 1000 + chiffres[1] * 100 + chiffres[2] * 10 + chiffres[3];
-      const rang = randomChoice(RANG_LABELS);
-      const correct = String(Math.floor(n / rang.puissance) % 10);
+function materielEnChiffres(n: number): Q {
+  const correct = fmt(n);
+  const [m, c, d, u] = chiffresDe(n);
+  const pieges = [
+    fmt(Number(`${m}${c || ""}${d || ""}${u}`)),
+    fmt(m * 1000 + d * 100 + c * 10 + u),
+    fmt(m * 1000 + u * 100 + d * 10 + c),
+    fmt(n + 1000),
+    fmt(n + 10),
+  ];
+  const text = `${introMateriel()} ${pick([
+    "Quel nombre est dessiné ? Écris-le en chiffres.",
+    "Quel nombre est-ce ?",
+    "Compte le matériel : quel nombre trouves-tu ?",
+    "Quel nombre se cache dans ce dessin ?",
+  ])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, pieges),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: materiel(n),
+    explanation: exp(
+      "Un gros cube vaut 1 000, une plaque 100, une barre 10, un petit cube 1.",
+      "On compte chaque sorte de matériel. S'il en manque une sorte, on écrit un zéro à sa place.",
+      `${m} millier(s), ${c} centaine(s), ${d} dizaine(s), ${u} unité(s).`,
+      `Le nombre est ${correct}.`,
+    ),
+  };
+}
 
+function orthographe(n: number): Q {
+  const p = quelquun();
+  const correct = enLettres(n);
+  const fautes = ortheFautives(n);
+  const text = pick([
+    `Quelle écriture en lettres de ${fmt(n)} est juste ?`,
+    `${p.nom} doit écrire ${fmt(n)} en lettres sur un chèque de jeu. Quelle écriture est correcte ?`,
+    `Attention aux pièges : comment s'écrit ${fmt(n)} en lettres ?`,
+    `Sur l'affiche du cirque, on veut écrire ${fmt(n)} en lettres. Quelle écriture choisir ?`,
+  ]);
+  const voisins = [enLettres(n + 1), enLettres(n + 10)];
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, fautes.length >= 2 ? fautes : [...fautes, ...voisins]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "« Mille » ne prend jamais de « s » et jamais de « un » devant. « Cents » et « quatre-vingts » prennent un « s » seulement quand rien ne les suit.",
+      "On lit le nombre morceau par morceau, en vérifiant chaque piège.",
+      `${fmt(n)} se lit « ${correct} ».`,
+      `L'écriture juste est « ${correct} ».`,
+    ),
+  };
+}
+
+function genLire(d: Etoile): Q {
+  if (d <= 2)
+    return tirer([
+      () => lireEnLettres(rint(1001, 9999)),
+      () => ecrireEnChiffres(Math.random() < 0.5 ? nombreAvecZeros() : rint(1001, 9999)),
+      () => materielEnChiffres(nombrePourMateriel(false)),
+      () => materielEnLettres(nombrePourMateriel(false)),
+    ]);
+  return tirer([
+    () => orthographe(nombreAPiege()),
+    () => ecrireEnChiffres(nombreAvecZeros()),
+    () => materielEnChiffres(nombrePourMateriel(true)),
+    () => materielEnLettres(nombrePourMateriel(true)),
+  ]);
+}
+
+// ============================================================
+// ce2_entier_milliers — Chiffre des… et nombre de…
+// Le piège central : « le chiffre des centaines » n'est pas
+// « le nombre de centaines ».
+// ============================================================
+
+function chiffreDuRang(): Q {
+  const n = nombreChiffresDistincts();
+  const r = pick(RANGS);
+  const ch = chiffresDe(n);
+  const correct = String(ch[r.index]);
+  const p = quelquun();
+  const text = pick([
+    `Dans ${fmt(n)}, quel est le chiffre des ${r.rang} ?`,
+    `${p.nom} écrit ${fmt(n)}. Quel est le chiffre des ${r.rang} ?`,
+    `Quel chiffre est à la place des ${r.rang} dans ${fmt(n)} ?`,
+    `${decor(n)} Quel est le chiffre des ${r.rang} de ce nombre ?`,
+    `Le code du coffre est ${fmt(n)}. Quel est son chiffre des ${r.rang} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, ch.map(String)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Dans un nombre de quatre chiffres, de droite à gauche : unités, dizaines, centaines, milliers.",
+      `On compte les places depuis la droite jusqu'à celle des ${r.rang}.`,
+      `${fmt(n)} : milliers ${ch[0]}, centaines ${ch[1]}, dizaines ${ch[2]}, unités ${ch[3]}.`,
+      `Le chiffre des ${r.rang} est ${correct}.`,
+    ),
+  };
+}
+
+function chiffreDuRangMateriel(): Q {
+  // Des quantités toutes différentes : chaque proposition renvoie à un groupe.
+  const ch = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 4);
+  ch[0] = Math.min(ch[0], 6) || 1;
+  if (new Set(ch).size < 4) return chiffreDuRang();
+  const n = ch[0] * 1000 + ch[1] * 100 + ch[2] * 10 + ch[3];
+  const r = pick(RANGS);
+  const correct = String(ch[r.index]);
+  const text = `${introMateriel()} ${pick([
+    `Quel est le chiffre des ${r.rang} de ce nombre ?`,
+    `Quel chiffre faut-il écrire à la place des ${r.rang} ?`,
+    `Dans ce nombre, quel est le chiffre des ${r.rang} ?`,
+  ])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, ch.map(String)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: materiel(n),
+    explanation: exp(
+      "Gros cube = 1 000, plaque = 100, barre = 10, petit cube = 1.",
+      `Le chiffre des ${r.rang} est le nombre de ${["gros cubes", "plaques", "barres", "petits cubes"][r.index]}.`,
+      `Le nombre dessiné est ${fmt(n)}.`,
+      `Le chiffre des ${r.rang} est ${correct}.`,
+    ),
+  };
+}
+
+function valeurDuChiffre(): Q {
+  const n = nombreChiffresDistincts();
+  const r = pick(RANGS.slice(1));
+  const ch = chiffresDe(n);
+  const chiffre = ch[r.index];
+  const correct = fmt(chiffre * r.puissance);
+  const p = quelquun();
+  const text = pick([
+    `Dans ${fmt(n)}, que vaut le chiffre ${chiffre} ?`,
+    `${p.nom} montre le ${chiffre} de ${fmt(n)}. Combien vaut-il vraiment ?`,
+    `${decor(n)} Dans ce nombre, combien vaut le chiffre ${chiffre} ?`,
+    `Le ${chiffre} de ${fmt(n)} vaut combien d'unités ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [String(chiffre), fmt(chiffre * 10), fmt(chiffre * 100), fmt(chiffre * 1000)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Un chiffre vaut plus ou moins selon sa place.",
+      "On cherche la place du chiffre : unités (1), dizaines (10), centaines (100) ou milliers (1 000).",
+      `${chiffre} est le chiffre des ${r.rang} : ${chiffre} × ${fmt(r.puissance)} = ${correct}.`,
+      `Le chiffre ${chiffre} vaut ${correct}.`,
+    ),
+  };
+}
+
+/** « Combien de centaines EN TOUT ? », dit nu ou en sachets de 10, 100, 1 000. */
+function nombreDeRang(d: Etoile): Q {
+  const n = d >= 4 ? rint(1100, 9899) : nombreChiffresDistincts();
+  const r = pick(d >= 4 ? RANGS.slice(1, 3) : RANGS.slice(1, 4));
+  const combien = Math.floor(n / r.puissance);
+  const ch = chiffresDe(n);
+  const correct = fmt(combien);
+  const pieges = [String(ch[r.index]), fmt(combien + 1), fmt(n % (r.puissance * 10)), fmt(combien * 10), fmt(Math.floor(n / (r.puissance * 10)))];
+  const p = quelquun();
+  const SACHETS: readonly ((n: string, k: string) => string)[] = [
+    (n, k) => `Le jardinier a ${n} graines. Il remplit des sachets de ${k} graines. Combien de sachets pleins peut-il faire ?`,
+    (n, k) => `La boulangère a ${n} bonbons. Elle les met en paquets de ${k}. Combien de paquets pleins ?`,
+    (n, k) => `Pour la kermesse, il y a ${n} tickets. On fait des carnets de ${k} tickets. Combien de carnets pleins ?`,
+    (n, k) => `${p.nom} a ${n} perles. ${maj(p.il)} les range par boîtes de ${k}. Combien de boîtes pleines ?`,
+    (n, k) => `Le pirate a ${n} pièces d'or. Il fait des sacs de ${k} pièces. Combien de sacs pleins ?`,
+    (n, k) => `À la ferme, on a ramassé ${n} œufs. On les met dans des cartons de ${k}. Combien de cartons pleins ?`,
+  ];
+  const text = pick([
+    `Dans ${fmt(n)}, quel est le NOMBRE de ${r.rang} ?`,
+    `Combien y a-t-il de ${r.rang} en tout dans ${fmt(n)} ?`,
+    pick(SACHETS)(fmt(n), fmt(r.puissance)),
+    pick(SACHETS)(fmt(n), fmt(r.puissance)),
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, pieges),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `Le chiffre des ${r.rang} n'est pas le nombre de ${r.rang} : le nombre compte aussi celles cachées dans les rangs plus grands.`,
+      `On garde tout ce qui est à gauche de la place des ${r.rang}, cette place comprise.`,
+      `${fmt(n)} = ${correct} × ${fmt(r.puissance)} + ${fmt(n % r.puissance)}. Le chiffre des ${r.rang}, lui, est ${ch[r.index]}.`,
+      `Il y a ${correct} ${r.rang} en tout.`,
+    ),
+  };
+}
+
+function nombreDeCentainesMateriel(): Q {
+  const m = rint(1, 4);
+  const c = rint(1, 9);
+  const d = rint(0, 9);
+  const u = rint(0, 9);
+  const n = m * 1000 + c * 100 + d * 10 + u;
+  const correct = String(m * 10 + c);
+  const text = `${introMateriel()} ${pick([
+    "Combien de centaines y a-t-il EN TOUT dans ce nombre ?",
+    "Un gros cube, c'est 10 plaques. Combien de centaines en tout, sans compter les barres ni les petits cubes ?",
+    "Si on change chaque gros cube en 10 plaques, combien de plaques de cent aura-t-on ?",
+    "Combien de centaines compte ce nombre, celles des gros cubes comprises ?",
+  ])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [String(c), String(m), String(m + c), String(m * 10 + c + 1), String(m * 100 + c)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: materiel(n),
+    explanation: exp(
+      "Un gros cube de mille vaut 10 plaques de cent.",
+      "On change chaque gros cube en 10 centaines, puis on ajoute les plaques.",
+      `${m} × 10 + ${c} = ${correct}.`,
+      `Il y a ${correct} centaines en tout.`,
+    ),
+  };
+}
+
+function genMilliers(d: Etoile): Q {
+  if (d <= 2) return tirer([chiffreDuRang, chiffreDuRangMateriel, chiffreDuRangMateriel]);
+  if (d === 3) return tirer([() => nombreDeRang(3), valeurDuChiffre, nombreDeCentainesMateriel, chiffreDuRangMateriel]);
+  return tirer([() => nombreDeRang(4), nombreDeCentainesMateriel, valeurDuChiffre]);
+}
+
+// ============================================================
+// ce2_entier_decomposer — Décomposer et recomposer
+// ============================================================
+
+function decompositionAdditive(n: number): string {
+  const ch = chiffresDe(n);
+  return ch
+    .map((c, i) => c * [1000, 100, 10, 1][i])
+    .filter((v) => v > 0)
+    .map(fmt)
+    .join(" + ");
+}
+
+function recomposer(d: Etoile): Q {
+  const n = d >= 3 ? nombreAvecZeros() : rint(1111, 9999);
+  const ch = chiffresDe(n);
+  const morceaux = ch.map((c, i) => c * [1000, 100, 10, 1][i]).filter((v) => v > 0);
+  const ecrits = (d >= 3 ? shuffle(morceaux) : morceaux).map(fmt).join(" + ");
+  const correct = fmt(n);
+  const p = quelquun();
+  const text = pick([
+    `Quel nombre vaut ${ecrits} ?`,
+    `Calcule : ${ecrits} = …`,
+    `${p.nom} additionne ${ecrits}. Quel nombre trouve-t-${p.il} ?`,
+    `Le trésor du pirate : ${ecrits} pièces. Combien de pièces en tout ?`,
+    `Pic ramasse ${ecrits} graines. Combien de graines cela fait-il ?`,
+    `Quel nombre se cache derrière ${ecrits} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, piegesChiffres(n).concat(fmt(n + 100), fmt(n + 1000))),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Chaque morceau remplit un rang : milliers, centaines, dizaines, unités.",
+      "On range les morceaux du plus grand au plus petit et on écrit un zéro pour un rang vide.",
+      `${decompositionAdditive(n)} = ${correct}.`,
+      `Le nombre est ${correct}.`,
+    ),
+  };
+}
+
+function choisirDecomposition(d: Etoile): Q {
+  const n = d >= 3 ? nombreAvecZeros() : nombreChiffresDistincts();
+  const [m, c, dz, u] = chiffresDe(n);
+  const mult = d >= 3 && Math.random() < 0.5;
+  const ecrire = (a: number, b: number, e: number, f: number) =>
+    mult
+      ? `(${a} × 1 000) + (${b} × 100) + (${e} × 10) + ${f}`
+      : [a * 1000, b * 100, e * 10, f].filter((v) => v > 0).map(fmt).join(" + ");
+  const correct = ecrire(m, c, dz, u);
+  const p = quelquun();
+  const text = pick([
+    `Quelle est la décomposition de ${fmt(n)} ?`,
+    `${p.nom} veut décomposer ${fmt(n)}. Quelle écriture est juste ?`,
+    `${decor(n)} Comment décomposer ce nombre ?`,
+    `Quelle écriture est égale à ${fmt(n)} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [ecrire(m, dz, c, u), ecrire(m, c, u, dz), ecrire(c, m, dz, u), ecrire(m, c, dz + 1, u), ecrire(u, dz, c, m)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Décomposer, c'est écrire ce que vaut chaque chiffre.",
+      "On lit les chiffres de gauche à droite : milliers, centaines, dizaines, unités.",
+      `${fmt(n)} : ${m} milliers, ${c} centaines, ${dz} dizaines, ${u} unités.`,
+      `${fmt(n)} = ${correct}.`,
+    ),
+  };
+}
+
+function morceauManquant(d: Etoile): Q {
+  const n = rint(1111, 9999);
+  const ch = chiffresDe(n);
+  const i = rint(d >= 3 ? 0 : 1, 2);
+  const valeurs = ch.map((c, k) => c * [1000, 100, 10, 1][k]);
+  if (valeurs[i] === 0) return recomposer(d);
+  const ecrit = valeurs.map((v, k) => (k === i ? "…" : fmt(v))).join(" + ");
+  const correct = fmt(valeurs[i]);
+  const p = quelquun();
+  const text = pick([
+    `Complète : ${fmt(n)} = ${ecrit}`,
+    `Quel nombre manque ? ${fmt(n)} = ${ecrit}`,
+    `${p.nom} a effacé un morceau : ${fmt(n)} = ${ecrit}. Lequel ?`,
+    `Il manque une pièce au puzzle des nombres : ${fmt(n)} = ${ecrit}. Que vaut-elle ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [String(ch[i]), fmt(ch[i] * 10), fmt(ch[i] * 100), fmt(ch[i] * 1000), fmt(valeurs[i] + [1000, 100, 10][i])]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Dans une décomposition, chaque morceau est la valeur d'un chiffre.",
+      "On regarde quel rang manque, et le chiffre de ce rang dans le nombre.",
+      `${fmt(n)} = ${valeurs.map(fmt).join(" + ")}.`,
+      `Le morceau qui manque est ${correct}.`,
+    ),
+  };
+}
+
+function materielRecomposer(): Q {
+  const n = nombrePourMateriel(Math.random() < 0.5);
+  return materielEnChiffres(n);
+}
+
+/** « 282 dizaines et 3 unités », « 34 centaines et 5 unités ». */
+function ecritureEnUnites(): Q {
+  const n = rint(1100, 9899);
+  const p = quelquun();
+  return tirer([
+    () => {
+      const dz = Math.floor(n / 10);
+      const correct = String(n % 10);
       return {
-        text: `Dans ${formatNumber(n)}, quel est le chiffre des ${rang.rang} ?`,
+        text: pick([
+          `${fmt(n)}, c'est ${fmt(dz)} dizaines et combien d'unités ?`,
+          `Le fermier met ${fmt(n)} œufs dans des boîtes de 10. Il remplit ${fmt(dz)} boîtes. Combien d'œufs restent ?`,
+          `${decor(n)} Cela fait ${fmt(dz)} dizaines et combien d'unités ?`,
+          `${quelquun().nom} range ${fmt(n)} cartes par paquets de 10 : ${fmt(dz)} paquets. Combien de cartes restent seules ?`,
+          `${p.nom} range ${fmt(n)} billes par sacs de 10. ${maj(p.il)} remplit ${fmt(dz)} sacs. Combien de billes restent hors des sacs ?`,
+          `Complète : ${fmt(n)} = ${fmt(dz)} dizaines + … unités.`,
+        ]),
         format: "qcm",
-        choices: makeChoices(correct, chiffres.map(String)),
+        choices: choix(correct, [String(chiffresDe(n)[2]), String(n % 100), String((n % 10) + 1), String(10 - (n % 10))]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
-          "Chaque chiffre a une place : unités, dizaines, centaines, milliers, en partant de la droite.",
-          "On compte les places depuis la droite jusqu'au rang demandé.",
-          `Dans ${formatNumber(n)}, la place des ${rang.rang} est occupée par ${correct}.`,
-          `Le chiffre des ${rang.rang} est ${correct}.`,
+          "Une dizaine vaut 10 unités.",
+          `${fmt(dz)} dizaines font ${fmt(dz * 10)} ; on cherche ce qui manque pour aller jusqu'à ${fmt(n)}.`,
+          `${fmt(n)} − ${fmt(dz * 10)} = ${correct}.`,
+          `Il reste ${correct} unité(s).`,
         ),
       };
     },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_entier_milliers_tpl_002_nombre_de_rang",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_milliers",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "« Combien de » compte aussi celles qui sont cachées dans les rangs plus grands.",
-    tags: ["ce2", "nombres_entiers", "rangs", "template", "piege"],
-    generate: () => {
-      const n = randomInt(1000, 9999);
-      const rang = randomChoice([RANG_LABELS[1], RANG_LABELS[2]]);
-      const nombreDeRang = Math.floor(n / rang.puissance);
-      const chiffreDuRang = nombreDeRang % 10;
-      const correct = String(nombreDeRang);
-
+    () => {
+      const c = rint(11, 99);
+      const u = rint(1, 9);
+      const total = c * 100 + u;
+      const correct = fmt(total);
       return {
-        text: `Dans ${formatNumber(n)}, quel est le NOMBRE de ${rang.rang} ?`,
-        format: "qcm",
-        // ⚠️ Sur certains tirages, « ce qui reste après le rang » ou « le rang
-        // du dessus » retombent sur un autre piège et disparaissent au tri.
-        // Le voisin immédiat, lui, ne peut jamais se confondre.
-        choices: makeChoices(correct, [
-          String(chiffreDuRang),
-          String(n % rang.puissance),
-          String(Math.floor(n / (rang.puissance * 10))),
-          String(nombreDeRang + 1),
-          String(nombreDeRang - 1),
+        text: pick([
+          `Quel nombre fait ${c} centaines et ${u} unités ?`,
+          `${p.nom} a ${c} plaques de cent et ${u} petits cubes. Quel nombre a-t-${p.il} ?`,
+          `Le pirate a ${c} sacs de 100 pièces et ${u} pièces en plus. Combien de pièces en tout ?`,
+          `La bibliothécaire range ${c} étagères de 100 livres et ${u} livres sur la table. Combien de livres ?`,
+          `Complète : ${c} centaines et ${u} unités = …`,
+          `${quelquun().nom} écrit le nombre qui a ${c} centaines et ${u} unités. Lequel ?`,
+          `Pic a ${c} sachets de 100 graines et ${u} graines toutes seules. Combien de graines ?`,
+          `Au cirque, ${c} rangées de 100 places sont pleines, et ${u} personnes sont debout. Combien de spectateurs ?`,
         ]),
+        format: "qcm",
+        choices: choix(correct, [fmt(c * 10 + u), fmt(c * 100 + u * 10), String(c) + String(u), fmt(c * 1000 + u)]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
-          "Le nombre de dizaines ou de centaines compte toutes celles du nombre, pas seulement celles de sa place.",
-          `On enlève ce qui est à droite du rang : on garde tout ce qui vaut au moins ${rang.puissance}.`,
-          `${formatNumber(n)} contient ${correct} ${rang.rang}, car ${correct} × ${rang.puissance} = ${formatNumber(nombreDeRang * rang.puissance)}. Le chiffre des ${rang.rang}, lui, est ${chiffreDuRang}.`,
-          `Le nombre de ${rang.rang} est ${correct}.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_entier_decomposer — Décomposer jusqu'à 10 000
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_entier_decomposer_tpl_001_multiplicative",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_decomposer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Un chiffre par rang, et chaque rang vaut 1 000, 100, 10 ou 1.",
-    tags: ["ce2", "nombres_entiers", "decomposition", "template"],
-    generate: () => {
-      const m = randomInt(1, 9);
-      const c = randomInt(1, 9);
-      const d = randomInt(1, 9);
-      const u = randomInt(1, 9);
-      const n = m * 1000 + c * 100 + d * 10 + u;
-      const correct = `(${m} × 1 000) + (${c} × 100) + (${d} × 10) + ${u}`;
-
-      return {
-        text: `Quelle est la décomposition de ${formatNumber(n)} ?`,
-        format: "qcm",
-        choices: makeChoices(correct, [
-          `(${m} × 1 000) + (${c} × 10) + (${d} × 100) + ${u}`,
-          `(${m} × 100) + (${c} × 10) + (${d} × 1 000) + ${u}`,
-          `(${c} × 1 000) + (${m} × 100) + (${d} × 10) + ${u}`,
-          `(${m} × 1 000) + (${c} × 100) + (${u} × 10) + ${d}`,
-          // ⚠️ Piège de secours : les quatre autres échangent des chiffres, et
-          // retombent sur la bonne réponse dès que deux d'entre eux sont
-          // égaux. Celui-ci change une valeur, donc il diffère toujours.
-          `(${m} × 1 000) + (${c} × 100) + (${d + 1} × 10) + ${u}`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Décomposer un nombre, c'est écrire ce que vaut chacun de ses chiffres.",
-          "On multiplie chaque chiffre par la valeur de sa place.",
-          `${m} milliers valent ${formatNumber(m * 1000)}, ${c} centaines valent ${c * 100}, ${d} dizaines valent ${d * 10}, et il reste ${u} unité(s).`,
-          `${formatNumber(n)} = ${correct}.`,
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_entier_decomposer_tpl_002_recomposer",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_decomposer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Additionne les morceaux, puis relis les quatre places.",
-    tags: ["ce2", "nombres_entiers", "decomposition", "recomposition", "template"],
-    generate: () => {
-      const m = randomInt(1, 9);
-      const c = randomInt(0, 9);
-      const d = randomInt(0, 9);
-      const u = randomInt(0, 9);
-      const n = m * 1000 + c * 100 + d * 10 + u;
-      const correct = formatNumber(n);
-
-      // Les morceaux sont donnés dans le désordre : l'élève doit lire la valeur
-      // de chaque rang, pas l'ordre d'écriture.
-      const morceaux = shuffle([
-        `${formatNumber(m * 1000)}`,
-        `${c * 100}`,
-        `${d * 10}`,
-        `${u}`,
-      ]).join(" + ");
-
-      return {
-        text: `Quel nombre vaut ${morceaux} ?`,
-        format: "qcm",
-        // ⚠️ Le quatrième piège recopiait le premier — `c * 10 + d * 100` et
-        // `d * 100 + c * 10` sont la même somme. Et quand les chiffres des
-        // centaines et des dizaines tombaient égaux, l'échange valait la bonne
-        // réponse : il ne restait que deux pièges, et le QCM trois lignes.
-        choices: makeChoices(correct, [
-          formatNumber(m * 1000 + d * 100 + c * 10 + u),
-          formatNumber(n + 1000),
-          formatNumber(n - 100),
-          formatNumber(n + 10),
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Recomposer, c'est rassembler les morceaux à leur place.",
-          "On additionne les morceaux en respectant le rang de chacun.",
-          `${formatNumber(m * 1000)} + ${c * 100} + ${d * 10} + ${u} = ${correct}.`,
+          "Une centaine vaut 100 unités.",
+          `${c} centaines font ${c} × 100 = ${fmt(c * 100)}. On ajoute les unités.`,
+          `${fmt(c * 100)} + ${u} = ${correct}.`,
           `Le nombre est ${correct}.`,
         ),
       };
     },
-  },
-
-  // ============================================================
-  // ce2_entier_comparer — Comparer et ranger
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_entier_comparer_tpl_001_signe",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_comparer",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "À nombre de chiffres égal, on compare rang par rang en partant de la gauche.",
-    tags: ["ce2", "nombres_entiers", "comparaison", "template"],
-    generate: () => {
-      // On force une différence tardive : deux nombres qui commencent pareil,
-      // sinon la comparaison se joue au premier coup d'œil.
-      const debut = randomInt(1, 9) * 1000 + randomInt(0, 9) * 100;
-      const a = debut + randomInt(0, 9) * 10 + randomInt(0, 9);
-      let b = debut + randomInt(0, 9) * 10 + randomInt(0, 9);
-      while (b === a) b = debut + randomInt(0, 9) * 10 + randomInt(0, 9);
-
-      const correct = a > b ? ">" : "<";
-
+    () => {
+      const c = rint(1, 6);
+      const dz = rint(10, 19);
+      const u = rint(10, 19);
+      const total = c * 100 + dz * 10 + u;
+      const correct = fmt(total);
       return {
-        text: `Quel signe faut-il écrire : ${formatNumber(a)} … ${formatNumber(b)} ?`,
+        text: `${pick([
+          "Attention, il y a plus de 9 barres et plus de 9 petits cubes !",
+          `${quelquun().nom} n'a pas fait ses échanges.`,
+          "Fais les échanges : 10 cubes = 1 barre, 10 barres = 1 plaque.",
+          "Pic a mélangé le matériel sans faire d'échange.",
+        ])} ${pick(["Quel nombre est dessiné ?", "Quel nombre montre ce matériel ?", "Quel nombre est-ce ?"])}`,
         format: "qcm",
-        choices: shuffle([">", "<", "="]),
+        choices: choix(correct, [fmt(c * 100 + (dz % 10) * 10 + (u % 10)), fmt(c * 100 + dz + u), fmt(total - 10), fmt(total + 100), fmt(c * 100 + dz * 10)]),
         expected: [correct],
         comparator: "mcq_exact",
+        canvas: { kind: "base_dix", centaines: c, dizaines: dz, unites: u, etiquettes: true, echange: "unites" },
         explanation: exp(
-          "Comparer deux nombres, c'est dire lequel est le plus grand.",
-          "À nombre de chiffres égal, on compare les milliers, puis les centaines, puis les dizaines, puis les unités.",
-          `Les deux nombres ont les mêmes milliers et les mêmes centaines : la différence se joue sur les dizaines et les unités, ${a % 100} contre ${b % 100}.`,
-          `On écrit ${formatNumber(a)} ${correct} ${formatNumber(b)}.`,
+          "10 petits cubes font 1 barre, 10 barres font 1 plaque.",
+          "On calcule ce que vaut chaque groupe, puis on additionne.",
+          `${c} × 100 + ${dz} × 10 + ${u} = ${fmt(c * 100)} + ${dz * 10} + ${u} = ${correct}.`,
+          `Le nombre est ${correct}.`,
         ),
       };
     },
-  },
+  ]);
+}
 
-  {
-    kind: "template",
-    id: "ce2_entier_comparer_tpl_002_ranger",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_comparer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Cherche d'abord le plus petit, puis le suivant.",
-    tags: ["ce2", "nombres_entiers", "ranger", "template"],
-    generate: () => {
-      const valeurs: number[] = [];
-      while (valeurs.length < 4) {
-        const v = randomInt(1000, 9999);
-        if (!valeurs.includes(v)) valeurs.push(v);
-      }
+function dizainesEnTout(): Q {
+  const n = rint(1100, 9899);
+  const dz = Math.floor(n / 10);
+  const correct = fmt(dz);
+  const p = quelquun();
+  const text = pick([
+    `Combien y a-t-il de dizaines en tout dans ${fmt(n)} ?`,
+    `${p.nom} change ${fmt(n)} petits cubes en barres de dix. Combien de barres peut-${p.il} faire ?`,
+    `On range ${fmt(n)} crayons par boîtes de 10. Combien de boîtes pleines ?`,
+    `${decor(n)} Combien de dizaines entières cela fait-il ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [String(chiffresDe(n)[2]), fmt(dz + 1), fmt(Math.floor(n / 100)), fmt(n % 100), fmt(dz * 10)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Le nombre de dizaines compte toutes les dizaines, aussi celles cachées dans les centaines et les milliers.",
+      "On garde tout ce qui est à gauche du chiffre des unités.",
+      `${fmt(n)} = ${correct} × 10 + ${n % 10}.`,
+      `Il y a ${correct} dizaines en tout.`,
+    ),
+  };
+}
 
-      const croissant = [...valeurs].sort((x, y) => x - y);
-      const correct = croissant.map(formatNumber).join(" < ");
+/** « 3 milliers et 15 centaines », « 4 milliers et 12 dizaines » : des rangs qui débordent. */
+function rangsQuiDebordent(): Q {
+  const m = rint(1, 7);
+  const deCentaines = Math.random() < 0.5;
+  const k = rint(10, 19);
+  const n = m * 1000 + k * (deCentaines ? 100 : 10);
+  const correct = fmt(n);
+  const rang = deCentaines ? "centaines" : "dizaines";
+  const p = quelquun();
+  const text = pick([
+    `Quel nombre fait ${m} milliers et ${k} ${rang} ?`,
+    `${p.nom} a ${m} gros cubes de mille et ${k} ${deCentaines ? "plaques de cent" : "barres de dix"}. Quel nombre a-t-${p.il} ?`,
+    `Complète : ${m} milliers + ${k} ${rang} = …`,
+    `Le pirate a ${m} coffres de 1 000 pièces et ${k} sacs de ${deCentaines ? "100" : "10"} pièces. Combien de pièces en tout ?`,
+    `Pic compte ${m} milliers et ${k} ${rang}. Quel nombre trouve-t-il ?`,
+  ]);
+  const v = deCentaines ? 100 : 10;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(m * 1000 + (k % 10) * v), String(m) + String(k), fmt(m * 1000 + k), fmt(n + 1000), fmt(m * 1000 + k * v * 10)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `10 ${rang} font ${deCentaines ? "1 millier" : "1 centaine"} : un rang qui dépasse 9 déborde sur le rang d'à côté.`,
+      `On calcule ce que valent les ${rang}, puis on ajoute les milliers.`,
+      `${k} × ${v} = ${fmt(k * v)} ; ${fmt(m * 1000)} + ${fmt(k * v)} = ${correct}.`,
+      `Le nombre est ${correct}.`,
+    ),
+  };
+}
 
-      return {
-        text: `Range ces nombres du plus petit au plus grand : ${shuffle(valeurs).map(formatNumber).join(" ; ")}`,
-        format: "qcm",
-        choices: makeChoices(correct, [
-          [...croissant].reverse().map(formatNumber).join(" < "),
-          [croissant[1], croissant[0], croissant[2], croissant[3]].map(formatNumber).join(" < "),
-          [croissant[0], croissant[2], croissant[1], croissant[3]].map(formatNumber).join(" < "),
-          [croissant[0], croissant[1], croissant[3], croissant[2]].map(formatNumber).join(" < "),
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Ranger dans l'ordre croissant, c'est aller du plus petit au plus grand.",
-          "On repère le plus petit, on l'écrit, puis on recommence avec ceux qui restent.",
-          `Le plus petit est ${formatNumber(croissant[0])}, le plus grand est ${formatNumber(croissant[3])}.`,
-          `L'ordre est ${correct}.`,
-        ),
-      };
-    },
-  },
+function genDecomposer(d: Etoile): Q {
+  if (d <= 2) return tirer([() => recomposer(2), () => choisirDecomposition(2), () => morceauManquant(2), materielRecomposer]);
+  if (d <= 4) return tirer([() => recomposer(3), () => choisirDecomposition(3), () => morceauManquant(3), materielRecomposer]);
+  return tirer([ecritureEnUnites, ecritureEnUnites, dizainesEnTout, rangsQuiDebordent]);
+}
 
-  // ============================================================
-  // ce2_entier_encadrer — Encadrer entre dizaines, centaines, milliers
-  // ⚠️ Pas d'arrondi : il n'est pas au programme du cycle 2.
-  // ============================================================
+// ============================================================
+// ce2_entier_comparer — Comparer et ranger
+// ============================================================
 
-  {
-    kind: "template",
-    id: "ce2_entier_encadrer_tpl_001",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_encadrer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Cherche celui juste en dessous, puis celui juste au-dessus.",
-    tags: ["ce2", "nombres_entiers", "encadrement", "template"],
-    generate: () => {
-      const pas = randomChoice([10, 100, 1000]);
-      const nom = pas === 10 ? "dizaines" : pas === 100 ? "centaines" : "milliers";
+/** Deux nombres proches : même millier, souvent même centaine. */
+function deuxProches(): [number, number] {
+  const a = rint(1000, 9899);
+  let b = pick([a + rint(1, 9), a + rint(1, 9) * 10, a + rint(1, 9) * 100, a + rint(1, 3) * 1000]);
+  if (b > 9999) b = a - rint(10, 90);
+  return Math.random() < 0.5 ? [a, b] : [b, a];
+}
 
-      // Le nombre ne doit pas tomber pile sur un multiple du pas : sinon
-      // l'encadrement n'a plus de sens et deux pièges se confondent.
-      let n = randomInt(1001, 9999);
-      while (n % pas === 0) n = randomInt(1001, 9999);
+function signe(): Q {
+  const egal = rint(1000, 9999);
+  const [a, b] = Math.random() < 0.15 ? [egal, egal] : deuxProches();
+  const correct = a < b ? "<" : a > b ? ">" : "=";
+  const p = quelquun();
+  const text = pick([
+    `Quel signe faut-il écrire : ${fmt(a)} … ${fmt(b)} ?`,
+    `Complète avec <, > ou = : ${fmt(a)} … ${fmt(b)}`,
+    `${p.nom} compare ${fmt(a)} et ${fmt(b)}. Quel signe met-${p.il} entre les deux ?`,
+    `Le crocodile ouvre la bouche vers le plus grand. Que faut-il écrire : ${fmt(a)} … ${fmt(b)} ?`,
+    `Pic doit compléter ${fmt(a)} … ${fmt(b)}. Quel signe choisit-il ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle(["<", ">", "="]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "« < » se lit « est plus petit que », « > » se lit « est plus grand que ».",
+      "On compare les chiffres rang par rang, en partant de la gauche, jusqu'au premier qui diffère.",
+      `${fmt(a)} et ${fmt(b)} : le premier chiffre différent décide.`,
+      `${fmt(a)} ${correct} ${fmt(b)}.`,
+    ),
+  };
+}
 
-      const bas = Math.floor(n / pas) * pas;
-      const haut = bas + pas;
-      const correct = `${formatNumber(bas)} < ${formatNumber(n)} < ${formatNumber(haut)}`;
+function quiAPlus(): Q {
+  const [p, q] = deuxPersonnes();
+  const [a, b] = deuxProches();
+  const SCORES: readonly [string, string][] = [
+    ["a marqué", "points au jeu vidéo"],
+    ["a compté", "étoiles dans le ciel"],
+    ["a récolté", "grains de riz pour la poule"],
+    ["a lu", "pages cette année"],
+    ["a fait", "pas aujourd'hui"],
+    ["a gagné", "points à la kermesse"],
+  ];
+  const [v, quoi] = pick(SCORES);
+  const plusGrand = Math.random() < 0.6;
+  const gagnant = (plusGrand ? a > b : a < b) ? p.nom : q.nom;
+  const text = pick([
+    `${p.nom} ${v} ${fmt(a)} ${quoi}. ${q.nom} en ${v} ${fmt(b)}. Qui en a le ${plusGrand ? "plus" : "moins"} ?`,
+    `${p.nom} : ${fmt(a)} ${quoi}. ${q.nom} : ${fmt(b)}. Qui en a le ${plusGrand ? "plus" : "moins"} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([p.nom, q.nom]),
+    expected: [gagnant],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Pour comparer deux nombres de quatre chiffres, on regarde d'abord les milliers.",
+      "Si les milliers sont égaux, on regarde les centaines, puis les dizaines, puis les unités.",
+      `${fmt(a)} ${a < b ? "<" : ">"} ${fmt(b)}.`,
+      `C'est ${gagnant} qui en a le ${plusGrand ? "plus" : "moins"}.`,
+    ),
+  };
+}
 
-      return {
-        text: `Encadre ${formatNumber(n)} entre deux ${nom} qui se suivent.`,
-        format: "qcm",
-        choices: makeChoices(correct, [
-          `${formatNumber(bas - pas)} < ${formatNumber(n)} < ${formatNumber(bas)}`,
-          `${formatNumber(haut)} < ${formatNumber(n)} < ${formatNumber(haut + pas)}`,
-          `${formatNumber(bas)} < ${formatNumber(n)} < ${formatNumber(haut + pas)}`,
-          `${formatNumber(bas - pas)} < ${formatNumber(n)} < ${formatNumber(haut)}`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          `Encadrer un nombre entre deux ${nom}, c'est trouver celle juste en dessous et celle juste au-dessus.`,
-          `On cherche le multiple de ${formatNumber(pas)} le plus proche en dessous, puis on ajoute ${formatNumber(pas)}.`,
-          `${formatNumber(bas)} est juste en dessous de ${formatNumber(n)}, et ${formatNumber(haut)} juste au-dessus.`,
-          `On écrit ${correct}.`,
-        ),
-      };
-    },
-  },
+function ranger(): Q {
+  const base = rint(1, 8) * 1000;
+  const set = new Set<number>();
+  while (set.size < 4) set.add(pick([base + rint(0, 999), base + rint(100, 999), rint(1000, 9999)]));
+  const nombres = [...set];
+  const croissant = Math.random() < 0.6;
+  const tri = [...nombres].sort((x, y) => (croissant ? x - y : y - x));
+  const signeR = croissant ? " < " : " > ";
+  const correct = tri.map(fmt).join(signeR);
+  const p = quelquun();
+  const liste = shuffle(nombres).map(fmt).join(" ; ");
+  const text = pick([
+    `Range ces nombres du plus ${croissant ? "petit au plus grand" : "grand au plus petit"} : ${liste}`,
+    `${p.nom} doit ranger ${liste} dans l'ordre ${croissant ? "croissant" : "décroissant"}. Quel rangement est juste ?`,
+    `Quatre équipes ont ces scores : ${liste}. Range-les du plus ${croissant ? "petit au plus grand" : "grand au plus petit"}.`,
+  ]);
+  const faux1 = [...tri];
+  [faux1[1], faux1[2]] = [faux1[2], faux1[1]];
+  const faux2 = [...tri];
+  [faux2[0], faux2[1]] = [faux2[1], faux2[0]];
+  const faux3 = [...tri].reverse();
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [faux1, faux2, faux3].map((t) => t.map(fmt).join(signeR))),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Ranger, c'est comparer les nombres deux à deux.",
+      "On cherche d'abord le plus petit (ou le plus grand), puis le suivant.",
+      tri.map(fmt).join(signeR),
+      `Le bon rangement est ${correct}.`,
+    ),
+  };
+}
 
-  // ============================================================
-  // ce2_entier_droite — Placer sur une droite graduée
-  // ============================================================
+function plusGrandParmi(): Q {
+  const a = rint(1000, 8999);
+  const [m, c, d, u] = chiffresDe(a);
+  const cands = Array.from(new Set([a, m * 1000 + u * 100 + d * 10 + c, a + rint(1, 9) * 10, a - rint(1, 9) * 100, a + 1000 - rint(1, 9) * 100])).filter((v) => v >= 1000 && v <= 9999).slice(0, 4);
+  if (cands.length < 4) return ranger();
+  const plus = Math.random() < 0.5;
+  const correct = fmt(plus ? Math.max(...cands) : Math.min(...cands));
+  const p = quelquun();
+  const text = pick([
+    `Quel est le plus ${plus ? "grand" : "petit"} de ces nombres ?`,
+    `${p.nom} cherche le plus ${plus ? "grand" : "petit"} nombre de la liste. Lequel ?`,
+    `Le dragon garde le coffre au plus ${plus ? "grand" : "petit"} numéro. Quel coffre garde-t-il ?`,
+    `Quatre fusées ont ces numéros. Laquelle a le plus ${plus ? "grand" : "petit"} numéro ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle(cands.map(fmt)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Pour comparer, on regarde les chiffres de gauche à droite.",
+      "On compare d'abord les milliers, puis les centaines, et ainsi de suite.",
+      [...cands].sort((x, y) => x - y).map(fmt).join(" < "),
+      `Le plus ${plus ? "grand" : "petit"} est ${correct}.`,
+    ),
+  };
+}
 
-  {
-    kind: "template",
-    id: "ce2_entier_droite_tpl_001_lire",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_droite",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Regarde de combien avance chaque graduation.",
-    tags: ["ce2", "nombres_entiers", "droite_graduee", "template", "canvas"],
-    generate: () => {
-      const pas = randomChoice([10, 50, 100]);
-      const depart = randomInt(1, 8) * 1000;
-      const fin = depart + pas * 10;
-      const position = depart + pas * randomInt(1, 9);
-      const correct = formatNumber(position);
+function compareMateriel(): Q {
+  const n = nombrePourMateriel(Math.random() < 0.3);
+  const [p, q] = deuxPersonnes();
+  let autre = pick([n + rint(1, 9) * 10, n - rint(1, 9) * 10, n + rint(1, 9) * 100, n - rint(1, 9), n + rint(1, 9)]);
+  if (autre < 1000 || autre > 9999 || autre === n) autre = n + 100;
+  const plus = Math.random() < 0.6;
+  const gagnant = (plus ? n > autre : n < autre) ? p.nom : q.nom;
+  const text = pick([
+    `Le dessin montre le nombre ${de(p.nom)}. ${q.nom} a écrit ${fmt(autre)}. Qui a le plus ${plus ? "grand" : "petit"} nombre ?`,
+    `${p.nom} a construit ce nombre avec le matériel. ${q.nom}, lui, a le nombre ${fmt(autre)}. Lequel des deux a le plus ${plus ? "grand" : "petit"} nombre ?`,
+    `Le matériel montre les points ${de(p.nom)} au jeu. ${q.nom} a ${fmt(autre)} points. Qui a le ${plus ? "plus" : "moins"} de points ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([p.nom, q.nom]),
+    expected: [gagnant],
+    comparator: "mcq_exact",
+    canvas: materiel(n),
+    explanation: exp(
+      "On lit d'abord le nombre dessiné, puis on compare.",
+      "Gros cube = 1 000, plaque = 100, barre = 10, petit cube = 1.",
+      `Le dessin montre ${fmt(n)} ; ${fmt(n)} ${n < autre ? "<" : ">"} ${fmt(autre)}.`,
+      `C'est ${gagnant}.`,
+    ),
+  };
+}
 
-      return {
-        text: "Quel nombre est repéré par le point rouge sur la droite graduée ?",
-        format: "qcm",
-        choices: makeChoices(correct, [
-          formatNumber(position + pas),
-          formatNumber(position - pas),
-          formatNumber(position + pas * 2),
-          formatNumber(position - pas * 2),
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        canvas: numberLine({
-          min: depart,
-          max: fin,
-          step: pas,
-          points: [{ value: position, label: "?", color: "#ef4444" }],
-          display: { showTicks: true, showValues: true, showPoints: true },
-        }),
-        explanation: exp(
-          "Sur une droite graduée, chaque trait avance toujours de la même valeur.",
-          "On trouve le pas entre deux traits, puis on compte les traits depuis le début.",
-          `La droite part de ${formatNumber(depart)} et avance de ${formatNumber(pas)} à chaque trait. Le point est ${(position - depart) / pas} trait(s) plus loin.`,
-          `Le point repère ${correct}.`,
-        ),
-      };
-    },
-  },
+function comprisEntre(): Q {
+  const a = rint(1000, 7000);
+  const b = a + rint(200, 2000);
+  const dedans = Math.random() < 0.5;
+  let x = dedans ? rint(a + 1, b - 1) : pick([a - rint(1, 300), b + rint(1, 300)]);
+  if (x < 1000) x = b + 50;
+  const correct = x > a && x < b ? "oui" : "non";
+  const p = quelquun();
+  const text = pick([
+    `${fmt(x)} est-il compris entre ${fmt(a)} et ${fmt(b)} ?`,
+    `${p.nom} dit que ${fmt(x)} est entre ${fmt(a)} et ${fmt(b)}. A-t-${p.il} raison ?`,
+    `Le trésor est caché entre la case ${fmt(a)} et la case ${fmt(b)}. Peut-il être à la case ${fmt(x)} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Être compris entre deux nombres, c'est être plus grand que le premier et plus petit que le second.",
+      "On compare le nombre aux deux bornes.",
+      `${fmt(a)} ${x > a ? "<" : ">"} ${fmt(x)} et ${fmt(x)} ${x < b ? "<" : ">"} ${fmt(b)}.`,
+      `La réponse est ${correct}.`,
+    ),
+  };
+}
 
-  // ============================================================
-  // ce2_entier_defi — Le défi de la notion
-  // ============================================================
+function lequelEntre(): Q {
+  const a = rint(1, 8) * 1000 + rint(0, 9) * 100;
+  const b = a + rint(2, 9) * 100;
+  const x = rint(a + 1, b - 1);
+  const pieges = [a - rint(1, 90), b + rint(1, 90), a - 1000 + rint(1, 900), b + 1000 - rint(1, 90)].filter((v) => v > 0 && v <= 9999);
+  const correct = fmt(x);
+  const p = quelquun();
+  const text = pick([
+    `Quel nombre est compris entre ${fmt(a)} et ${fmt(b)} ?`,
+    `${p.nom} pense à un nombre entre ${fmt(a)} et ${fmt(b)}. Lequel peut-ce être ?`,
+    `Le livre a plus de ${fmt(a)} pages et moins de ${fmt(b)}. Combien de pages peut-il avoir ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, pieges.map(fmt)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Un nombre compris entre deux autres est plus grand que le premier et plus petit que le second.",
+      "On compare chaque proposition aux deux bornes.",
+      `${fmt(a)} < ${correct} < ${fmt(b)}.`,
+      `C'est ${correct}.`,
+    ),
+  };
+}
 
-  {
-    kind: "template",
-    id: "ce2_entier_defi_tpl_001_plus_grand_nombre",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_defi",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Pour faire le plus grand nombre, place le plus gros chiffre à la place la plus forte.",
-    tags: ["ce2", "nombres_entiers", "defi", "template"],
-    generate: () => {
-      const chiffres = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 4);
-      const plusGrand = Number([...chiffres].sort((a, b) => b - a).join(""));
-      const plusPetit = Number([...chiffres].sort((a, b) => a - b).join(""));
-      const chercheLePlusGrand = randomChoice([true, false]);
-      const correct = formatNumber(chercheLePlusGrand ? plusGrand : plusPetit);
+function genComparer(d: Etoile): Q {
+  if (d <= 2) return tirer([signe, signe, quiAPlus, compareMateriel]);
+  if (d === 3) return tirer([ranger, plusGrandParmi, compareMateriel, quiAPlus]);
+  return tirer([comprisEntre, lequelEntre, ranger, plusGrandParmi]);
+}
 
-      return {
-        text: `Avec les chiffres ${chiffres.join(", ")} utilisés une seule fois chacun, quel est le plus ${chercheLePlusGrand ? "grand" : "petit"} nombre que l'on peut écrire ?`,
-        format: "qcm",
-        choices: makeChoices(correct, [
-          formatNumber(chercheLePlusGrand ? plusPetit : plusGrand),
-          formatNumber(Number(chiffres.join(""))),
-          formatNumber(Number([...chiffres].sort((a, b) => b - a).reverse().join("")) + 1),
-          formatNumber(Number([...chiffres].sort((a, b) => a - b).join("")) + 10),
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "La place d'un chiffre compte plus que sa valeur : un 9 aux unités pèse 9, aux milliers il pèse 9 000.",
-          chercheLePlusGrand
-            ? "Pour le plus grand nombre, on range les chiffres du plus grand au plus petit."
-            : "Pour le plus petit nombre, on range les chiffres du plus petit au plus grand.",
-          `Les chiffres rangés donnent ${correct}.`,
-          `Le plus ${chercheLePlusGrand ? "grand" : "petit"} nombre est ${correct}.`,
-        ),
-      };
-    },
-  },
+// ============================================================
+// ce2_entier_encadrer — Encadrer
+// ============================================================
 
-  // ============================================================
-  // COMPLÉMENTS DU 09/08/2026 — cinq micro-compétences n'avaient qu'une ou deux
-  // questions. Chaque ajout est un GÉNÉRATEUR, sur un angle absent : le rang
-  // qu'on encadre, la graduation qu'il faut lire avant de placer, et le nombre
-  // mystère décrit par ses rangs.
-  // ============================================================
+const ENCADRER_RANGS = [
+  { nom: "milliers", sing: "millier", pas: 1000, pres: "au millier près", la: "le millier" },
+  { nom: "centaines", sing: "centaine", pas: 100, pres: "à la centaine près", la: "la centaine" },
+  { nom: "dizaines", sing: "dizaine", pas: 10, pres: "à la dizaine près", la: "la dizaine" },
+] as const;
 
-  {
-    kind: "template",
-    id: "ce2_entier_decomposer_tpl_003_ecriture_en_unites",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_decomposer",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Attention : on parle de dizaines, pas du chiffre des dizaines.",
-    tags: ["ce2", "nombres_entiers", "decomposition", "piege", "template"],
-    generate: () => {
-      const n = randomInt(1000, 9999);
-      const dizaines = Math.floor(n / 10);
-      const unitesRestantes = n % 10;
-      return {
-        text: `${formatNumber(n)}, c'est ${formatNumber(dizaines)} dizaines et combien d'unités ?`,
-        format: "short",
-        expected: [String(unitesRestantes)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un nombre s'écrit aussi en unités de numération, et le NOMBRE de dizaines n'est pas le CHIFFRE des dizaines.",
-          "On regarde ce qui reste une fois toutes les dizaines entières comptées.",
-          `${formatNumber(dizaines)} dizaines valent ${formatNumber(dizaines * 10)}. De ${formatNumber(dizaines * 10)} à ${formatNumber(n)}, il reste ${unitesRestantes}. Donc ${formatNumber(n)} = ${formatNumber(dizaines)} dizaines et ${unitesRestantes} unités.`,
-          `Il reste ${unitesRestantes} unités.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_entier_comparer_tpl_003_encadrer_deux_nombres",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "« Compris entre » veut dire plus grand que l'un et plus petit que l'autre.",
-    tags: ["ce2", "nombres_entiers", "comparer", "template"],
-    generate: () => {
-      const bas = randomInt(1000, 8000);
-      const haut = bas + randomInt(200, 1500);
-      const dedans = randomInt(bas + 1, haut - 1);
-      const dehors = randomChoice([bas - randomInt(1, 500), haut + randomInt(1, 500)]);
-      const estDedans = randomChoice([true, false]);
-      const n = estDedans ? dedans : dehors;
-      return {
-        text: `${formatNumber(n)} est-il compris entre ${formatNumber(bas)} et ${formatNumber(haut)} ?`,
-        format: "qcm",
-        choices: shuffle(["oui", "non"]),
-        expected: [estDedans ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Être compris entre deux nombres, c'est être plus grand que le premier ET plus petit que le second.",
-          "On fait les deux comparaisons, pas une seule.",
-          estDedans
-            ? `${formatNumber(n)} est plus grand que ${formatNumber(bas)} et plus petit que ${formatNumber(haut)} : les deux conditions sont remplies.`
-            : n < bas
-              ? `${formatNumber(n)} est plus PETIT que ${formatNumber(bas)} : il est avant l'encadrement, pas dedans.`
-              : `${formatNumber(n)} est plus GRAND que ${formatNumber(haut)} : il est après l'encadrement, pas dedans.`,
-          estDedans ? "Oui, il est bien compris entre les deux." : "Non, il n'est pas compris entre les deux.",
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_entier_encadrer_tpl_002_milliers",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_encadrer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Le millier du dessous se lit dans le chiffre des milliers.",
-    tags: ["ce2", "nombres_entiers", "encadrer", "template"],
-    generate: () => {
-      const milliers = randomInt(1, 8);
-      const reste = randomInt(1, 999);
-      const n = milliers * 1000 + reste;
-      const dessus = (milliers + 1) * 1000;
-      return {
-        text: `Entre quels deux milliers qui se suivent se trouve ${formatNumber(n)} ? Donne celui du DESSUS.`,
-        format: "short",
-        expected: [String(dessus)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Encadrer un nombre entre deux milliers, c'est trouver le millier juste avant et le millier juste après.",
-          "On lit le chiffre des milliers, puis on ajoute un pour obtenir celui du dessus.",
-          `${formatNumber(n)} a ${milliers} millier${milliers > 1 ? "s" : ""} et il reste ${formatNumber(reste)}. Il est donc entre ${formatNumber(milliers * 1000)} et ${formatNumber(dessus)}.`,
-          `Le millier du dessus est ${formatNumber(dessus)}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_entier_encadrer_tpl_003_dizaine_la_plus_proche",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_encadrer",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Regarde le chiffre des unités : plus petit que 5, on descend ; sinon on monte.",
-    tags: ["ce2", "nombres_entiers", "encadrer", "piege", "template"],
-    generate: () => {
-      const dizaines = randomInt(10, 990);
-      const unites = randomChoice([1, 2, 3, 4, 6, 7, 8, 9]);
-      const n = dizaines * 10 + unites;
-      const proche = unites < 5 ? dizaines * 10 : (dizaines + 1) * 10;
-      return {
-        text: `${formatNumber(n)} est entre ${formatNumber(dizaines * 10)} et ${formatNumber((dizaines + 1) * 10)}. De laquelle de ces deux dizaines est-il le plus PROCHE ?`,
-        format: "qcm",
-        choices: shuffle([formatNumber(dizaines * 10), formatNumber((dizaines + 1) * 10)]),
-        expected: [formatNumber(proche)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Entre deux dizaines qui se suivent, un nombre est plus proche de l'une des deux.",
-          "On compare l'écart avec chacune, ou plus vite : on regarde le chiffre des unités.",
-          `${formatNumber(n)} est à ${unites} de ${formatNumber(dizaines * 10)} et à ${10 - unites} de ${formatNumber((dizaines + 1) * 10)}. Comme ${unites} ${unites < 5 ? "est plus petit que" : "dépasse"} 5, il est plus proche de ${formatNumber(proche)}.`,
-          `Il est plus proche de ${formatNumber(proche)}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_entier_droite_tpl_002_pas_de_graduation",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_droite",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Un trait ne vaut pas toujours 1 : regarde d'abord de combien la droite avance.",
-    tags: ["ce2", "nombres_entiers", "droite_graduee", "piege", "template"],
-    generate: () => {
-      // ⛔ LE piège de la droite graduée : lire les traits au lieu de lire la
-      // graduation. Un trait peut valoir 10, 50 ou 100.
-      const pas = randomChoice([10, 50, 100]);
-      const depart = randomInt(0, 20) * pas;
-      const traits = randomInt(2, 8);
-      const arrivee = depart + traits * pas;
-      return {
-        text: `Sur une droite graduée, deux traits voisins sont séparés de ${pas}. On part de ${formatNumber(depart)} et on avance de ${traits} traits. Où arrive-t-on ?`,
-        format: "short",
-        expected: [String(arrivee)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Sur une droite graduée, l'écart entre deux traits voisins n'est pas toujours 1 : il faut le lire.",
-          "On multiplie le nombre de traits parcourus par la valeur d'un trait, puis on ajoute au départ.",
-          `${traits} traits de ${pas} font ${formatNumber(traits * pas)}. En partant de ${formatNumber(depart)} : ${formatNumber(depart)} + ${formatNumber(traits * pas)} = ${formatNumber(arrivee)}. Compter les traits comme des unités aurait donné ${formatNumber(depart + traits)}.`,
-          `On arrive à ${formatNumber(arrivee)}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_entier_droite_tpl_003_placer",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_droite",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Compte combien de traits séparent le départ du nombre cherché.",
-    tags: ["ce2", "nombres_entiers", "droite_graduee", "template"],
-    generate: () => {
-      const pas = randomChoice([10, 100]);
-      const depart = randomInt(0, 30) * pas;
-      const traits = randomInt(2, 9);
-      const cible = depart + traits * pas;
-      return {
-        text: `Une droite est graduée de ${pas} en ${pas} à partir de ${formatNumber(depart)}. Combien de traits faut-il compter pour atteindre ${formatNumber(cible)} ?`,
-        format: "short",
-        expected: [String(traits)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Placer un nombre sur une droite graduée, c'est compter les traits qui le séparent du départ.",
-          "On cherche l'écart, puis on regarde combien de fois la graduation y tient.",
-          `De ${formatNumber(depart)} à ${formatNumber(cible)}, l'écart est de ${formatNumber(cible - depart)}. Chaque trait vaut ${pas} : ${formatNumber(cible - depart)} ÷ ${pas} = ${traits} traits.`,
-          `Il faut compter ${traits} traits.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_entier_defi_tpl_002_nombre_mystere",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Écris les quatre rangs dans l'ordre, en commençant par les milliers.",
-    tags: ["ce2", "nombres_entiers", "defi", "template"],
-    generate: () => {
-      const m = randomInt(1, 9);
-      const c = randomInt(0, 9);
-      const d = randomInt(0, 9);
-      const u = randomInt(0, 9);
-      const n = m * 1000 + c * 100 + d * 10 + u;
-      return {
-        text: `Je suis un nombre à quatre chiffres. J'ai ${m} au rang des milliers, ${c} au rang des centaines, ${d} au rang des dizaines et ${u} au rang des unités. Qui suis-je ?`,
-        format: "short",
-        expected: [String(n)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un nombre est entièrement décrit par le chiffre de chacun de ses rangs.",
-          "On écrit les rangs dans l'ordre, des milliers vers les unités.",
-          `${m} millier${m > 1 ? "s" : ""}, ${c} centaine${c > 1 ? "s" : ""}, ${d} dizaine${d > 1 ? "s" : ""} et ${u} unité${u > 1 ? "s" : ""} : cela donne ${formatNumber(n)}. Autrement dit ${formatNumber(m * 1000)} + ${c * 100} + ${d * 10} + ${u}.`,
-          `Je suis ${formatNumber(n)}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_entier_defi_tpl_003_chiffres_imposes",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce2_entier_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Pour être le plus proche possible, le rang des milliers compte avant tout.",
-    tags: ["ce2", "nombres_entiers", "defi", "piege", "template"],
-    generate: () => {
-      const chiffres = shuffle([randomInt(1, 9), randomInt(1, 9), randomInt(1, 9)]);
-      const tries = [...chiffres].sort((a, b) => b - a);
-      const plusGrand = Number(tries.join(""));
-      const plusPetit = Number([...tries].reverse().join(""));
-      const ecart = plusGrand - plusPetit;
-      return {
-        text: `Avec les chiffres ${chiffres.join(", ")} utilisés une seule fois chacun, on écrit le plus grand nombre possible, puis le plus petit. Quel est l'écart entre les deux ?`,
-        format: "short",
-        expected: [String(ecart)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le rang le plus à gauche pèse le plus lourd : c'est lui qui décide de la taille du nombre.",
-          "On range les chiffres du plus grand au plus petit, puis dans l'autre sens, et on soustrait.",
-          `Le plus grand est ${formatNumber(plusGrand)}, le plus petit ${formatNumber(plusPetit)}. L'écart : ${formatNumber(plusGrand)} − ${formatNumber(plusPetit)} = ${formatNumber(ecart)}.`,
-          `L'écart est ${formatNumber(ecart)}.`,
-        ),
-      };
-    },
-  },
+
+
+function encadrement(d: Etoile): Q {
+  const r = d <= 2 ? pick(ENCADRER_RANGS.slice(0, 2)) : pick(ENCADRER_RANGS);
+  let n = rint(1001, 8989);
+  if (n % r.pas === 0) n += 7;
+  const bas = Math.floor(n / r.pas) * r.pas;
+  const haut = bas + r.pas;
+  const ecrire = (x: number, y: number) => `${fmt(x)} < ${fmt(n)} < ${fmt(y)}`;
+  const correct = ecrire(bas, haut);
+  const p = quelquun();
+  const text = pick([
+    `Encadre ${fmt(n)} entre deux ${r.nom} qui se suivent.`,
+    `Entre quelles ${r.nom === "milliers" ? "milliers" : r.nom} qui se suivent se trouve ${fmt(n)} ?`,
+    `${p.nom} veut encadrer ${fmt(n)} ${r.pres}. Quel encadrement est juste ?`,
+    `${decor(n)} Encadre ce nombre entre deux ${r.nom} qui se suivent.`,
+  ]).replace("Entre quelles milliers", "Entre quels milliers");
+  const avecDessin = r.pas >= 100 && Math.random() < 0.6;
+  return {
+    text: avecDessin ? `${text} Le point rouge le montre sur la droite.` : text,
+    format: "qcm",
+    choices: choix(correct, [ecrire(bas - r.pas, haut), ecrire(bas - r.pas, bas), ecrire(haut, haut + r.pas), ecrire(bas, haut + r.pas)].filter(dansLeProgramme)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    ...(avecDessin
+      ? { canvas: droite(bas - r.pas, haut + r.pas, r.pas / 10, [{ value: n, label: fmt(n), color: ROUGE }], [bas - r.pas, haut + r.pas]) }
+      : {}),
+    explanation: exp(
+      `Encadrer ${r.pres}, c'est trouver ${r.la} juste avant et ${r.pas === 1000 ? "celui" : "celle"} juste après.`,
+      `On garde les chiffres jusqu'au rang des ${r.nom} et on met des zéros après : c'est ${r.la} d'avant. On ajoute ${fmt(r.pas)} pour ${r.pas === 1000 ? "celui" : "celle"} d'après.`,
+      `${fmt(bas)} < ${fmt(n)} < ${fmt(haut)}.`,
+      `L'encadrement est ${correct}.`,
+    ),
+  };
+}
+
+function justeAvantApres(d: Etoile): Q {
+  const r = d <= 2 ? pick(ENCADRER_RANGS.slice(0, 2)) : pick(ENCADRER_RANGS);
+  let n = rint(1001, 8989);
+  if (n % r.pas === 0) n += 3;
+  const bas = Math.floor(n / r.pas) * r.pas;
+  const haut = bas + r.pas;
+  const apres = Math.random() < 0.5;
+  const correct = fmt(apres ? haut : bas);
+  const p = quelquun();
+  const text = pick([
+    `Quel${r.nom === "milliers" ? "" : "le"} est ${r.nom === "milliers" ? "le millier" : `la ${r.sing}`} juste ${apres ? "après" : "avant"} ${fmt(n)} ?`,
+    `${p.nom} encadre ${fmt(n)} ${r.pres}. Quel nombre écrit-${p.il} ${apres ? "à droite" : "à gauche"} ?`,
+    `Complète l'encadrement ${r.pres} : ${apres ? `${fmt(bas)} < ${fmt(n)} < …` : `… < ${fmt(n)} < ${fmt(haut)}`}`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(apres ? bas : haut), fmt(apres ? haut + r.pas : bas - r.pas), fmt(n + (apres ? 1 : -1)), fmt(apres ? n + r.pas : n - r.pas)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `Les ${r.nom} se suivent de ${fmt(r.pas)} en ${fmt(r.pas)}.`,
+      `On cherche ${r.la} juste avant ${fmt(n)}, puis on ajoute ${fmt(r.pas)}.`,
+      `${fmt(bas)} < ${fmt(n)} < ${fmt(haut)}.`,
+      `La réponse est ${correct}.`,
+    ),
+  };
+}
+
+function plusProche(): Q {
+  const r = pick(ENCADRER_RANGS);
+  let n = rint(1001, 9899);
+  const reste = n % r.pas;
+  if (reste === 0 || reste * 2 === r.pas) n += r.pas / 10 > 1 ? r.pas / 10 : 1;
+  const bas = Math.floor(n / r.pas) * r.pas;
+  const haut = bas + r.pas;
+  const correct = fmt(n - bas < haut - n ? bas : haut);
+  const p = quelquun();
+  const text = pick([
+    `${fmt(n)} est entre ${fmt(bas)} et ${fmt(haut)}. Duquel est-il le plus proche ?`,
+    `${p.nom} arrondit ${fmt(n)} ${r.pas === 1000 ? "au millier le plus proche" : `à la ${r.sing} la plus proche`}. Que trouve-t-${p.il} ?`,
+    `Quel${r.pas === 1000 ? " millier" : "le " + r.sing} est le plus proche de ${fmt(n)} ?`,
+    `La fusée est au kilomètre ${fmt(n)}. De quelle borne est-elle la plus proche : ${fmt(bas)} ou ${fmt(haut)} ?`,
+  ]);
+  const avecDessin = Math.random() < 0.5;
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([fmt(bas), fmt(haut)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    ...(avecDessin ? { canvas: droite(bas, haut, r.pas / 10, [{ value: n, label: "?", color: ROUGE }], [bas, haut]) } : {}),
+    explanation: exp(
+      "Le plus proche est celui qui est le moins loin.",
+      "On calcule l'écart avec chacune des deux bornes.",
+      `${fmt(n)} − ${fmt(bas)} = ${fmt(n - bas)} et ${fmt(haut)} − ${fmt(n)} = ${fmt(haut - n)}.`,
+      `${fmt(n)} est plus proche de ${correct}.`,
+    ),
+  };
+}
+
+function genEncadrer(d: Etoile): Q {
+  if (d <= 2) return tirer([() => encadrement(2), () => justeAvantApres(2)]);
+  if (d <= 4) return tirer([() => encadrement(4), () => justeAvantApres(4), plusProche]);
+  return tirer([plusProche, () => encadrement(5), () => justeAvantApres(5)]);
+}
+
+// ============================================================
+// ce2_entier_droite — La droite graduée (toujours dessinée)
+// ============================================================
+
+function choisirDroite(d: Etoile) {
+  const pas = d <= 2 ? pick([10, 100, 1000]) : pick([10, 50, 100, 200, 1000]);
+  const depart = pas === 1000 ? 0 : pas >= 100 ? rint(0, 8) * 1000 : rint(10, 90) * 100;
+  const fin = depart + pas * 10;
+  return { pas, depart, fin };
+}
+
+/** Qui se pose sur la droite : un animal, un jouet, un enfant de la troupe. */
+function quiSurLaDroite(): { sujet: string; e: string } {
+  const p = quelquun();
+  return pick([
+    { sujet: "Pic le paille-en-queue", e: "" },
+    { sujet: "La grenouille", e: "e" },
+    { sujet: `Le robot ${de(p.nom)}`, e: "" },
+    { sujet: "Le kangourou du zoo", e: "" },
+    { sujet: "La coccinelle", e: "e" },
+    { sujet: "Le petit train", e: "" },
+    { sujet: `Le pion ${de(p.nom)}`, e: "" },
+    { sujet: "La fusée de l'astronaute", e: "e" },
+    { sujet: `La toupie ${de(p.nom)}`, e: "e" },
+    { sujet: "Le dragon", e: "" },
+    { sujet: "La sauterelle", e: "e" },
+    { sujet: `La bille ${de(p.nom)}`, e: "e" },
+  ]);
+}
+
+function textePoint(): string {
+  const { sujet, e } = quiSurLaDroite();
+  const arrive = pick([
+    `${sujet} s'est arrêté${e} au point rouge.`,
+    `${sujet} est arrivé${e} au point rouge.`,
+    `${sujet} est posé${e} sur le point rouge.`,
+    `${sujet} a fini sa course au point rouge.`,
+  ]);
+  return `${arrive} ${pick([
+    "Sur quel nombre ?",
+    "Quel nombre est caché sous le point rouge ?",
+    "Quel nombre montre le point rouge ?",
+    "Quel est ce nombre ?",
+    "Quel nombre faut-il écrire à la place du « ? » ?",
+  ])}`;
+}
+
+function lirePoint(d: Etoile): Q {
+  const { pas, depart, fin } = choisirDroite(d);
+  const k = rint(2, 9);
+  const position = depart + pas * k;
+  const ecrites = d <= 2 ? [depart, depart + pas] : pick([[depart, fin], [depart, depart + 5 * pas]]);
+  if (ecrites.includes(position)) return lirePoint(d);
+  const correct = fmt(position);
+  return {
+    text: Math.random() < 0.15 ? "Quel nombre est repéré par le point rouge sur la droite graduée ?" : textePoint(),
+    format: "qcm",
+    choices: choix(correct, [fmt(position + pas), fmt(position - pas), fmt(depart + k), fmt(depart + k * 10), fmt(position + 2 * pas)].filter((s) => s !== fmt(depart))),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: droite(depart, fin, pas, [{ value: position, label: "?", color: ROUGE }], ecrites),
+    explanation: exp(
+      "Sur une droite graduée, chaque trait avance toujours de la même valeur : le pas.",
+      "On trouve le pas avec les nombres écrits, puis on compte les traits jusqu'au point.",
+      `Le pas est ${fmt(pas)}. Le point est ${k} traits après ${fmt(depart)} : ${fmt(depart)} + ${k} × ${fmt(pas)} = ${correct}.`,
+      `Le point repère ${correct}.`,
+    ),
+  };
+}
+
+function trouverPas(): Q {
+  const { pas, depart, fin } = choisirDroite(4);
+  const ecart = rint(2, 5);
+  const ecrites = [depart, depart + ecart * pas];
+  const correct = fmt(pas);
+  const p = quelquun();
+  const text = pick([
+    "De combien en combien cette droite est-elle graduée ?",
+    "D'un trait au suivant, de combien avance-t-on ?",
+    `${p.nom} veut savoir ce que vaut un petit saut d'un trait au suivant. Combien vaut-il ?`,
+    "Pic saute d'un trait au trait suivant. De combien avance-t-il ?",
+    `${quiSurLaDroite().sujet} fait un saut d'un trait. Combien ce saut vaut-il ?`,
+    "Quel est le pas de cette droite graduée ?",
+    `${p.nom} compte de trait en trait sur la droite. De combien en combien compte-t-${p.il} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(pas * ecart), fmt(pas * 10), fmt(pas / 10 >= 1 ? pas / 10 : pas * 2), fmt(pas * 2), fmt(pas * 5)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: droite(depart, fin, pas, [], ecrites),
+    explanation: exp(
+      "Le pas d'une droite graduée est l'écart entre deux traits voisins.",
+      "On prend l'écart entre deux nombres écrits, puis on le partage par le nombre de sauts entre eux.",
+      `De ${fmt(ecrites[0])} à ${fmt(ecrites[1])}, il y a ${fmt(ecart * pas)} pour ${ecart} sauts : ${fmt(ecart * pas)} ÷ ${ecart} = ${correct}.`,
+      `La droite est graduée de ${correct} en ${correct}.`,
+    ),
+  };
+}
+
+function placerLettre(): Q {
+  const { pas, depart, fin } = choisirDroite(4);
+  const ks = shuffle([2, 3, 4, 6, 7, 8, 9]).slice(0, 3);
+  const lettres = ["A", "B", "C"];
+  const points = ks.map((k, i) => ({ value: depart + k * pas, label: lettres[i], color: ["#ef4444", "#2563eb", "#16a34a"][i] }));
+  const cible = rint(0, 2);
+  const valeur = depart + ks[cible] * pas;
+  const p = quelquun();
+  const text = pick([
+    `Quelle lettre est placée sur le nombre ${fmt(valeur)} ?`,
+    `${p.nom} cherche ${fmt(valeur)} sur la droite. Sur quelle lettre doit-${p.il} poser le doigt ?`,
+    `Le trésor est enterré au nombre ${fmt(valeur)}. Quelle lettre marque le trésor ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: [...lettres],
+    expected: [lettres[cible]],
+    comparator: "mcq_exact",
+    canvas: droite(depart, fin, pas, points, [depart, depart + 5 * pas]),
+    explanation: exp(
+      "Chaque trait de la droite avance du même pas.",
+      `On trouve le pas (${fmt(pas)}), puis on compte les traits depuis ${fmt(depart)}.`,
+      `${fmt(valeur)} = ${fmt(depart)} + ${ks[cible]} × ${fmt(pas)} : c'est le ${ks[cible]}e trait.`,
+      `C'est la lettre ${lettres[cible]}.`,
+    ),
+  };
+}
+
+function avancerTraits(): Q {
+  const { pas, depart, fin } = choisirDroite(5);
+  const k = rint(3, 9);
+  const arrivee = depart + k * pas;
+  const correct = fmt(arrivee);
+  const p = quelquun();
+  const { sujet, e } = quiSurLaDroite();
+  const text = pick([
+    `${p.nom} part de ${fmt(depart)} et avance de ${k} traits. Sur quel nombre arrive-t-${p.il} ?`,
+    `${sujet} part de ${fmt(depart)} et fait ${k} sauts d'un trait. Où est-${e ? "elle" : "il"} arrivé${e} ?`,
+    `${sujet} part du point bleu et avance de ${k} traits vers la droite. Sur quel nombre s'arrête-t-${e ? "elle" : "il"} ?`,
+    `${sujet} est au départ. ${maj(e ? "elle" : "il")} avance de ${k} traits. Quel nombre atteint-${e ? "elle" : "il"} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(depart + k), fmt(depart + k * 10), fmt(arrivee + pas), fmt(arrivee - pas), fmt(depart + k * 100)].filter((s) => s !== correct)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: droite(depart, fin, pas, [{ value: depart, label: "départ", color: "#2563eb" }], [depart, depart + pas]),
+    explanation: exp(
+      "Avancer d'un trait, c'est ajouter le pas de la droite.",
+      `Le pas est ${fmt(pas)} : on ajoute ${k} fois ${fmt(pas)}.`,
+      `${fmt(depart)} + ${k} × ${fmt(pas)} = ${correct}.`,
+      `On arrive sur ${correct}.`,
+    ),
+  };
+}
+
+function genDroite(d: Etoile): Q {
+  if (d <= 2) return lirePoint(2);
+  if (d <= 4) return tirer([() => lirePoint(4), trouverPas, placerLettre]);
+  return tirer([avancerTraits, trouverPas, () => lirePoint(5)]);
+}
+
+// ============================================================
+// ce2_entier_defi — Le défi de la notion
+// ============================================================
+
+function chiffresImposes(d: Etoile): Q {
+  const avecZero = d >= 5 && Math.random() < 0.5;
+  const chiffres = avecZero ? [0, ...shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3)] : shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 4);
+  const desc = [...chiffres].sort((a, b) => b - a);
+  const asc = [...chiffres].sort((a, b) => a - b);
+  if (asc[0] === 0) [asc[0], asc[1]] = [asc[1], asc[0]];
+  const grand = Number(desc.join(""));
+  const petit = Number(asc.join(""));
+  const cherche = Math.random() < 0.5;
+  const correct = fmt(cherche ? grand : petit);
+  const p = quelquun();
+  const liste = shuffle(chiffres).join(", ");
+  const text = pick([
+    `Avec les chiffres ${liste}, utilisés une fois chacun, quel est le plus ${cherche ? "grand" : "petit"} nombre de quatre chiffres ?`,
+    `Le cadenas du coffre s'ouvre avec le plus ${cherche ? "grand" : "petit"} nombre fait avec ${liste} (une fois chacun). Quel est le code ?`,
+    `${p.nom} a quatre cartes : ${liste}. ${maj(p.il)} les aligne pour faire le plus ${cherche ? "grand" : "petit"} nombre possible. Lequel ?`,
+    `Le dragon ne laisse passer que le plus ${cherche ? "grand" : "petit"} nombre écrit avec ${liste}. Lequel faut-il dire ?`,
+  ]);
+  const faux = [fmt(cherche ? petit : grand), fmt(Number(chiffres.join("")) || grand - 9), fmt(Number([...asc].reverse().join("")) === grand ? grand - 90 : Number([...asc].reverse().join(""))), fmt(Number([0, ...asc.filter((x) => x !== 0)].join("")) || petit + 9), fmt(cherche ? grand - 9 : petit + 9)];
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, faux.filter((f) => !/^0/.test(f))),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "La place la plus à gauche (les milliers) compte le plus.",
+      cherche
+        ? "Pour le plus grand, on place les chiffres du plus grand au plus petit."
+        : "Pour le plus petit, on place les chiffres du plus petit au plus grand, sans mettre 0 en premier.",
+      `On obtient ${correct}.`,
+      `La réponse est ${correct}.`,
+    ),
+  };
+}
+
+function nombreMystere(d: Etoile): Q {
+  const [m, c, dz, u] = d >= 5 ? [rint(1, 9), rint(0, 9), rint(0, 9), rint(0, 9)] : [rint(1, 9), rint(0, 9), rint(1, 9), rint(0, 9)];
+  const n = m * 1000 + c * 100 + dz * 10 + u;
+  const correct = fmt(n);
+  const indices = shuffle([
+    `mon chiffre des milliers est ${m}`,
+    `mon chiffre des centaines est ${c}`,
+    `mon chiffre des dizaines est ${dz}`,
+    `mon chiffre des unités est ${u}`,
+  ]);
+  const qui = pick(["Je suis un nombre de quatre chiffres", "Pic a caché un nombre de quatre chiffres", "Le nombre secret du château a quatre chiffres"]);
+  const debut = qui.startsWith("Je") ? `${qui} : ` : `${qui}. Indices : `;
+  const text = `${debut}${indices.join(", ")}. ${qui.startsWith("Je") ? "Qui suis-je ?" : "Quel est ce nombre ?"}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(u * 1000 + dz * 100 + c * 10 + m || n + 1), fmt(m * 1000 + dz * 100 + c * 10 + u), fmt(m * 100 + c * 10 + dz), fmt(n + 10), fmt(n + 1000 <= 9999 ? n + 1000 : n - 100)].filter((s) => s !== "0")),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Chaque indice remplit une place du nombre.",
+      "On pose les quatre places et on y range chaque chiffre.",
+      `milliers ${m}, centaines ${c}, dizaines ${dz}, unités ${u}.`,
+      `Le nombre est ${correct}.`,
+    ),
+  };
+}
+
+function ajouterAuMateriel(): Q {
+  const n = nombrePourMateriel(false);
+  const ajouts = [
+    { quoi: "une plaque de cent", v: 100 },
+    { quoi: "une barre de dix", v: 10 },
+    { quoi: "un gros cube de mille", v: 1000 },
+    { quoi: "deux plaques de cent", v: 200 },
+    { quoi: "trois barres de dix", v: 30 },
+  ];
+  const a = pick(ajouts);
+  const ajoute = Math.random() < 0.7;
+  const resultat = ajoute ? n + a.v : n - a.v;
+  if (resultat > 9999 || resultat < 1000) return chiffresImposes(4);
+  const correct = fmt(resultat);
+  const p = quelquun();
+  const text = ajoute
+    ? pick([
+        `${p.nom} ajoute ${a.quoi} au matériel dessiné. Quel nombre obtient-${p.il} ?`,
+        `Pic le paille-en-queue pose ${a.quoi} de plus sur le dessin. Quel est le nouveau nombre ?`,
+        `On ajoute ${a.quoi} à ce matériel. Quel nombre a-t-on maintenant ?`,
+      ])
+    : pick([
+        `${p.nom} enlève ${a.quoi} au matériel dessiné. Quel nombre reste-t-il ?`,
+        `Le chat a fait tomber ${a.quoi} de la table. Quel nombre reste-t-il sur le dessin ?`,
+      ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(n), fmt(ajoute ? n + a.v / 10 || n + 1 : n - a.v / 10 || n - 1), fmt(ajoute ? n + a.v * 10 : n - a.v * 10), fmt(ajoute ? n + 1 : n - 1)].filter((s) => !s.startsWith("-"))),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: materiel(n),
+    explanation: exp(
+      "Gros cube = 1 000, plaque = 100, barre = 10, petit cube = 1.",
+      "On lit le nombre dessiné, puis on ajoute (ou on enlève) ce que vaut le matériel.",
+      `${fmt(n)} ${ajoute ? "+" : "−"} ${fmt(a.v)} = ${correct}.`,
+      `Le nouveau nombre est ${correct}.`,
+    ),
+  };
+}
+
+function ecartGrandPetit(): Q {
+  const chiffres = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3);
+  const grand = Number([...chiffres].sort((a, b) => b - a).join(""));
+  const petit = Number([...chiffres].sort((a, b) => a - b).join(""));
+  const ecart = grand - petit;
+  const correct = fmt(ecart);
+  const p = quelquun();
+  const text = pick([
+    `Avec les chiffres ${chiffres.join(", ")} (une fois chacun), on écrit le plus grand nombre puis le plus petit. Quel est l'écart entre les deux ?`,
+    `${p.nom} fabrique le plus grand et le plus petit nombre avec ${chiffres.join(", ")}. Combien de plus a le grand ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(ecart + 10), fmt(ecart - 1), fmt(grand + petit), fmt(ecart + 100), fmt(grand)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "L'écart entre deux nombres se trouve par une soustraction.",
+      "On écrit le plus grand (chiffres du plus grand au plus petit) et le plus petit, puis on soustrait.",
+      `${fmt(grand)} − ${fmt(petit)} = ${correct}.`,
+      `L'écart est ${correct}.`,
+    ),
+  };
+}
+
+function genDefi(d: Etoile): Q {
+  if (d <= 4) return tirer([() => chiffresImposes(4), () => nombreMystere(4), ajouterAuMateriel]);
+  return tirer([() => chiffresImposes(5), () => nombreMystere(5), ajouterAuMateriel, ecartGrandPetit]);
+}
+
+// ============================================================
+// LA BANQUE — mêmes ids, mêmes micros, mêmes étoiles qu'avant.
+// ============================================================
+
+const item = (id: string, microId: string, difficulty: Etoile, hint: string, gen: (d: Etoile) => Q, tags: string[]): TutorBankItemV4 =>
+  gabarit({ id, notionId: NOTION, microId, difficulty, hint, tags: ["nombres_entiers", ...tags] }, () => gen(difficulty));
+
+export const nombresEntiersBank: TutorBankItemV4[] = [
+  item("ce2_entier_lire_fixed_001_zero_intercale", "ce2_entier_lire_ecrire", 2, "Il y a quatre places : milliers, centaines, dizaines, unités. Une place vide prend un zéro.", genLire, ["lecture", "zero"]),
+  item("ce2_entier_lire_fixed_002_quatre_vingts", "ce2_entier_lire_ecrire", 3, "« mille » ne prend jamais de « s », et quatre-vingts prend un « s » quand rien ne le suit.", genLire, ["lecture", "orthographe"]),
+  item("ce2_entier_lire_tpl_001_chiffres_vers_lettres", "ce2_entier_lire_ecrire", 2, "Lis d'abord les milliers, puis les centaines, les dizaines et les unités.", genLire, ["lecture"]),
+  item("ce2_entier_lire_tpl_002_lettres_vers_chiffres", "ce2_entier_lire_ecrire", 3, "Compte les quatre places : milliers, centaines, dizaines, unités.", genLire, ["ecriture", "zero"]),
+
+  item("ce2_entier_milliers_fixed_001_chiffre_vs_nombre", "ce2_entier_milliers", 3, "Le nombre de centaines compte toutes les centaines, y compris celles cachées dans les milliers.", genMilliers, ["rangs", "piege"]),
+  item("ce2_entier_milliers_tpl_001_chiffre_du_rang", "ce2_entier_milliers", 1, "Compte les places en partant de la droite : unités, dizaines, centaines, milliers.", genMilliers, ["rangs"]),
+  item("ce2_entier_milliers_tpl_002_nombre_de_rang", "ce2_entier_milliers", 4, "« Combien de » compte aussi celles qui sont cachées dans les rangs plus grands.", genMilliers, ["rangs"]),
+
+  item("ce2_entier_decomposer_tpl_001_multiplicative", "ce2_entier_decomposer", 2, "Un chiffre par rang, et chaque rang vaut 1 000, 100, 10 ou 1.", genDecomposer, ["decomposition"]),
+  item("ce2_entier_decomposer_tpl_002_recomposer", "ce2_entier_decomposer", 3, "Range les morceaux du plus grand au plus petit, puis relis les quatre places.", genDecomposer, ["decomposition"]),
+  item("ce2_entier_decomposer_tpl_003_ecriture_en_unites", "ce2_entier_decomposer", 5, "Une dizaine vaut 10 unités, une centaine 100 unités.", genDecomposer, ["decomposition"]),
+
+  item("ce2_entier_comparer_tpl_001_signe", "ce2_entier_comparer", 1, "Compare les chiffres rang par rang, en partant de la gauche.", genComparer, ["comparaison"]),
+  item("ce2_entier_comparer_tpl_002_ranger", "ce2_entier_comparer", 3, "Cherche d'abord le plus petit, puis le suivant.", genComparer, ["comparaison", "rangement"]),
+  item("ce2_entier_comparer_tpl_003_encadrer_deux_nombres", "ce2_entier_comparer", 4, "Compare le nombre à chacune des deux bornes.", genComparer, ["comparaison"]),
+
+  item("ce2_entier_encadrer_tpl_001", "ce2_entier_encadrer", 2, "Cherche celui juste en dessous, puis celui juste au-dessus.", genEncadrer, ["encadrement"]),
+  item("ce2_entier_encadrer_tpl_002_milliers", "ce2_entier_encadrer", 4, "Garde les chiffres jusqu'au rang demandé et mets des zéros après.", genEncadrer, ["encadrement"]),
+  item("ce2_entier_encadrer_tpl_003_dizaine_la_plus_proche", "ce2_entier_encadrer", 5, "Calcule l'écart avec chacune des deux bornes.", genEncadrer, ["encadrement", "arrondi"]),
+
+  item("ce2_entier_droite_tpl_001_lire", "ce2_entier_droite", 2, "Regarde de combien avance chaque graduation.", genDroite, ["droite_graduee", "canvas"]),
+  item("ce2_entier_droite_tpl_003_placer", "ce2_entier_droite", 4, "Trouve d'abord le pas, puis compte les traits.", genDroite, ["droite_graduee", "canvas"]),
+  item("ce2_entier_droite_tpl_002_pas_de_graduation", "ce2_entier_droite", 5, "Un trait de plus, c'est un pas de plus.", genDroite, ["droite_graduee", "canvas"]),
+
+  item("ce2_entier_defi_tpl_001_plus_grand_nombre", "ce2_entier_defi", 4, "Pour faire le plus grand nombre, place le plus gros chiffre à la place la plus forte.", genDefi, ["defi"]),
+  item("ce2_entier_defi_tpl_002_nombre_mystere", "ce2_entier_defi", 5, "Range chaque indice à sa place.", genDefi, ["defi"]),
+  item("ce2_entier_defi_tpl_003_chiffres_imposes", "ce2_entier_defi", 5, "Le chiffre le plus à gauche compte le plus.", genDefi, ["defi"]),
 ];

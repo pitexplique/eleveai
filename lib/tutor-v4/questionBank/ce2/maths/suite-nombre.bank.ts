@@ -1,656 +1,689 @@
 // lib/tutor-v4/questionBank/ce2/maths/suite-nombre.bank.ts
 //
-// Les suites de nombres du CE2, écrites à la main. Quatre micro-compétences qui
-// passaient par le constructeur commun.
+// Les suites de nombres du CE2, écrites à la main.
 //
 // ⚠️ HORS ATTENDUS DE FIN DE CE2 — RÉVISION DU CE1.
 // Relu sur le texte lui-même le 09/08/2026 (BO n° 41 du 31 octobre 2024,
 // applicable à la rentrée 2025) : les suites de nombres sont accrochées aux
-// nombres ordinaux — « utiliser les nombres ordinaux dans le cadre de l'étude
-// de suites de symboles, de formes, de lettres ou de nombres » — et cet
-// objectif s'arrête au CE1, qui traite les suites répétitives ET évolutives
-// (« 1, 2, 4, 7, 11, 16… », « 1, 2, 4, 8, 16… »). La colonne CE2 de « Les
-// nombres entiers » ne le reprend pas.
-// Gardées — feu vert de Frédéric. Une suite qu'on prolonge, c'est du calcul
-// mental déguisé en jeu, et le CE2 en fait tous les jours.
+// nombres ordinaux, et cet objectif s'arrête au CE1. Gardées — feu vert de
+// Frédéric. Une suite qu'on prolonge, c'est du calcul mental déguisé en jeu.
 //
 // CE QU'ON Y TRAVAILLE : continuer une suite, trouver sa règle, reconnaître si
-// elle croît ou décroît. Les nombres restent sous 10 000, et les règles sont
-// des additions ou des soustractions répétées — de 2 en 2, de 5 en 5, de 10 en
-// 10, de 25 en 25, de 100 en 100.
-// ⛔ Pas de suite géométrique au programme, sauf le doublement, qui se dit
-// « on double à chaque fois » et se comprend sans vocabulaire nouveau.
+// elle croît ou décroît. Les nombres restent sous 10 000, les règles sont des
+// additions ou des soustractions répétées (de 2 en 2, de 5 en 5, de 10 en 10,
+// de 20, 25, 50, 100, 1 000 en …). ⛔ Pas de suite géométrique, sauf le
+// doublement (« on double à chaque fois ») et la moitié, aux défis.
 //
-// LE PIÈGE DE LA NOTION : deviner la règle sur le PREMIER écart et ne pas la
-// vérifier ensuite. 2, 4, 6, 10 : l'élève voit « + 2 » sur les deux premiers
-// et continue sans regarder le reste. Une règle se vérifie sur TOUS les écarts,
-// pas sur un seul.
-// Le second : les suites qui descendent. L'élève cherche ce qu'on ajoute, ne
-// trouve pas, et abandonne — alors qu'il fallait chercher ce qu'on enlève.
+// LES PIÈGES : deviner la règle sur le PREMIER écart sans la vérifier ensuite
+// (2, 4, 6, 10) ; et les suites qui descendent, où l'on cherche ce qu'on
+// ajoute au lieu de ce qu'on enlève.
 //
-// ⚠️ PAS DE QUESTION À RÉDIGER. `applyMathsKeyboardFree` retire les items
-// `format: "open"` (cf. ce2/maths/index.ts) : un CE2 clique, il ne tape pas.
+// ⛔ RÉÉCRITE LE 10/11/2026 (robustesse du coach, cycle 2) : 5 à 6 squelettes
+// par micro, 14 à 19 répétitions sur 20. Chaque micro a désormais un
+// générateur par étoile (familles × situations × tournures) ; les items figés
+// sont devenus des gabarits de même idée, sous le même id.
+// ⭐ LE DESSIN : la frise `suite` (sans ses étiquettes « terme 1 » et SANS la
+// règle, qui était la réponse des questions « quelle est la règle ? ») ou la
+// droite graduée où Pic saute de nombre en nombre.
 
-// ⚠️ `SuiteCanvasData` n'est PAS réexporté par `types.ts` — contrairement aux
-// autres canvas. On va le chercher à la source.
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+// ⚠️ `SuiteCanvasData` n'est PAS réexporté par `types.ts`. On va le chercher à la source.
+import type { NumberLineCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type { SuiteCanvasData } from "@/lib/tutor-v4/types_canvas";
+import { type Etoile, type Q, choix, exp, fmt, gabarit, pick, quelquun, rint, shuffle, tirer } from "./outils-nombres-ce2";
 
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+const NOTION = "suite_nombre";
 
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-// La bonne réponse est mise de côté, trois pièges distincts sont tirés ensuite,
-// puis on mélange. L'écrire autrement a rendu des questions impossibles à
-// réussir dans 79 banques : voir scripts/verifier-generateurs.mjs.
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
-
-function suiteCanvas(termes: Array<number | string>, regle?: string): SuiteCanvasData {
+/** La frise des termes, sans étiquette « terme 1 » ni règle écrite. */
+function frise(termes: Array<number | string>): SuiteCanvasData {
   return {
     kind: "suite",
     theme: "nombre",
-    terms: termes,
-    ...(regle ? { rule: regle } : {}),
-    display: { showArrows: true, showRule: Boolean(regle) },
+    terms: termes.map((t) => (typeof t === "number" ? fmt(t) : t)),
+    display: { showArrows: false, showRule: false, showLabels: false, showIcons: false },
   };
 }
 
-function exp(definition: string, methode: string, calcul: string, conclusion: string) {
-  return `Définition : ${definition}
-
-Méthode : ${methode}
-
-Calcul : ${calcul}
-
-Conclusion : ${conclusion}`;
+/** Une droite muette où les termes sont posés : on voit les sauts réguliers. */
+function droiteDesSauts(termes: number[], inconnu: number, pas: number): NumberLineCanvasData {
+  const tous = [...termes, inconnu];
+  const min = Math.min(...tous) - pas;
+  const max = Math.max(...tous) + pas;
+  return {
+    kind: "number_line",
+    min,
+    max,
+    step: pas,
+    valeursEcrites: [],
+    points: [
+      ...termes.map((t) => ({ value: t, label: fmt(t), color: "#2563eb" })),
+      { value: inconnu, label: "?", color: "#ef4444" },
+    ],
+    size: { width: 340, height: 110 },
+    display: { showTicks: true, showValues: false, showPoints: true, showPointLabels: true },
+  };
 }
 
-/** Les pas au programme du CE2 : rien qui demande une table inconnue. */
-const PAS = [2, 5, 10, 25, 50, 100] as const;
+/** Le dessin d'une suite à compléter : la frise, ou la droite quand les labels tiennent. */
+function dessin(termes: number[], affiches: Array<number | string>, inconnu: number, pas: number) {
+  const tient = Math.max(...termes.map((t) => fmt(t).length)) <= 3 && termes.length <= 5;
+  return tient && Math.random() < 0.4 ? droiteDesSauts(termes, inconnu, pas) : frise(affiches);
+}
+
+const PAS_SIMPLES = [2, 5, 10, 100] as const;
+const PAS_CE2 = [2, 5, 10, 20, 25, 50, 100, 1000] as const;
+
+/** Une suite de `n` termes, de pas `pas`, qui reste entre 0 et 10 000. */
+function suite(pas: number, n: number, descend: boolean): number[] {
+  const etendue = pas * (n + 3);
+  const plafond = Math.min(10000 - etendue, pas >= 100 ? 9000 : pas >= 20 ? 2000 : 500);
+  const multiple = Math.random() < 0.6;
+  let depart = rint(0, Math.max(1, Math.floor(plafond / pas))) * pas;
+  if (!multiple && pas < 100) depart += rint(1, pas - 1 || 1);
+  if (descend) depart += etendue;
+  return Array.from({ length: n }, (_, i) => depart + (descend ? -1 : 1) * i * pas);
+}
+
+/** Les mondes où une suite vit — ceux qui marchent dans les deux sens, ou dans un seul. */
+type Monde = { intro: (liste: string) => string; sens: "monte" | "descend" | "les2"; max: number };
+const MONDES: readonly Monde[] = [
+  { intro: (l) => `Pic le paille-en-queue saute de nombre en nombre : ${l}…`, sens: "les2", max: 10000 },
+  { intro: (l) => `Les maisons de la rue des Lilas portent les numéros ${l}…`, sens: "les2", max: 400 },
+  { intro: (l) => `Avant le décollage, l'astronaute compte : ${l}…`, sens: "descend", max: 1000 },
+  { intro: (l) => `Le kangourou du zoo fait des bonds réguliers : ${l}…`, sens: "les2", max: 10000 },
+  { intro: (l) => `La maîtresse a écrit au tableau : ${l}…`, sens: "les2", max: 10000 },
+  { intro: (l) => `Chaque semaine, Lou note la taille de son haricot magique, en cm : ${l}…`, sens: "monte", max: 400 },
+  { intro: (l) => `Mois après mois, Zoé compte les euros de sa tirelire : ${l}…`, sens: "monte", max: 1000 },
+  { intro: (l) => `Les places du cirque sont numérotées ${l}…`, sens: "les2", max: 2000 },
+  { intro: (l) => `Au jeu de piste, les balises portent les nombres ${l}…`, sens: "les2", max: 10000 },
+  { intro: (l) => `Le petit train passe devant les bornes ${l}…`, sens: "les2", max: 10000 },
+  { intro: (l) => `Le dragon recompte ses pièces d'or : ${l}…`, sens: "les2", max: 10000 },
+  { intro: (l) => `Jour après jour, le bonhomme de neige fond. Sa taille en cm : ${l}…`, sens: "descend", max: 200 },
+  { intro: (l) => `Dans le grand livre de contes, Ravi lit les pages ${l}…`, sens: "monte", max: 900 },
+  { intro: (l) => `La boulangère a compté ses croissants : ${l}…`, sens: "les2", max: 2000 },
+  { intro: (l) => `Le pirate compte ses pas sur la carte au trésor : ${l}…`, sens: "monte", max: 10000 },
+  { intro: (l) => `La grenouille saute sur les nénuphars numérotés ${l}…`, sens: "les2", max: 500 },
+  { intro: (l) => `Jour après jour, les bonbons du bocal disparaissent : ${l}…`, sens: "descend", max: 500 },
+  { intro: (l) => `Le score du jeu vidéo de Téo passe à ${l}…`, sens: "monte", max: 10000 },
+];
+
+function monde(descend: boolean, plusGrand: number): Monde {
+  const ok = MONDES.filter((m) => (m.sens === "les2" || m.sens === (descend ? "descend" : "monte")) && plusGrand <= m.max);
+  return pick(ok.length ? ok : MONDES.filter((m) => m.max === 10000 && m.sens === "les2"));
+}
+
+const liste = (termes: Array<number | string>) => termes.map((t) => (typeof t === "number" ? fmt(t) : t)).join(", ");
+
+/** Une phrase d'introduction : la suite nue, une personne qui la récite, ou un monde. */
+function introSuite(termes: Array<number | string>, descend: boolean): string {
+  const p = quelquun();
+  const l = liste(termes);
+  const plusGrand = Math.max(...termes.filter((t): t is number => typeof t === "number"));
+  return pick([
+    `Voici une suite : ${l}…`,
+    `${p.nom} récite une suite : ${l}…`,
+    `${p.nom} a écrit sur son ardoise : ${l}…`,
+    monde(descend, plusGrand).intro(l),
+    monde(descend, plusGrand).intro(l),
+    monde(descend, plusGrand).intro(l),
+  ]);
+}
+
+const sensMot = (descend: boolean) => (descend ? "on enlève" : "on ajoute");
+
+// ============================================================
+// ce2_suite_continuer — Continuer une suite
+// ============================================================
+
+function suivant(d: Etoile): Q {
+  const descend = d >= 3 && Math.random() < 0.45;
+  const pas = d <= 2 ? pick(PAS_SIMPLES) : pick(PAS_CE2);
+  const n = rint(4, 5);
+  const t = suite(pas, n + 1, descend);
+  const montres = t.slice(0, n);
+  const reponse = t[n];
+  const correct = fmt(reponse);
+  const text = `${introSuite(montres, descend)} ${pick([
+    "Quel nombre vient ensuite ?",
+    "Quel est le nombre suivant ?",
+    "Continue : quel nombre faut-il écrire après ?",
+    "Quel nombre viendra juste après ?",
+  ])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(reponse + (descend ? 2 : -2) * pas), fmt(montres[n - 1] + (descend ? pas : -pas)), fmt(reponse + 1), fmt(reponse + (descend ? -10 : 10)), fmt(reponse + (descend ? -pas : pas))].filter((x) => !x.startsWith("-"))),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: dessin(montres, [...montres, "?"], reponse, pas),
+    explanation: exp(
+      `Dans une suite régulière, ${sensMot(descend)} toujours le même nombre.`,
+      "On calcule l'écart entre deux nombres voisins, on vérifie qu'il est toujours le même, puis on continue.",
+      `L'écart est ${fmt(pas)} : ${fmt(montres[n - 1])} ${descend ? "−" : "+"} ${fmt(pas)} = ${correct}.`,
+      `Le nombre suivant est ${correct}.`,
+    ),
+  };
+}
+
+function trou(d: Etoile): Q {
+  const descend = Math.random() < (d >= 4 ? 0.5 : 0.35);
+  const pas = pick(d >= 4 ? PAS_CE2 : PAS_SIMPLES);
+  const n = 5;
+  const t = suite(pas, n, descend);
+  const k = rint(1, n - 2);
+  const affiches: Array<number | string> = t.map((x, i) => (i === k ? "?" : x));
+  const correct = fmt(t[k]);
+  const text = `${introSuite(affiches, descend)} ${pick([
+    "Quel nombre a été effacé ?",
+    "Quel nombre manque ?",
+    "Par quel nombre faut-il remplacer le « ? » ?",
+    "Pic a caché un nombre. Lequel ?",
+  ])}`.replace("…", ".");
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(t[k] + 1), fmt(t[k] - 1), fmt(t[k] + pas), fmt(t[k] - pas), fmt(t[k] + 10)].filter((x) => !x.startsWith("-"))),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise(affiches),
+    explanation: exp(
+      "Une suite régulière avance toujours du même écart.",
+      "On trouve l'écart avec deux nombres voisins connus, puis on remplit le trou.",
+      `L'écart est ${fmt(pas)} : ${fmt(t[k - 1])} ${descend ? "−" : "+"} ${fmt(pas)} = ${correct}.`,
+      `Le nombre qui manque est ${correct}.`,
+    ),
+  };
+}
+
+function deuxSuivants(): Q {
+  const descend = Math.random() < 0.4;
+  const pas = pick(PAS_CE2);
+  const t = suite(pas, 6, descend);
+  const montres = t.slice(0, 4);
+  const correct = `${fmt(t[4])} ; ${fmt(t[5])}`;
+  const text = `${introSuite(montres, descend)} ${pick([
+    "Quels sont les deux nombres suivants ?",
+    "Quels nombres faut-il écrire dans les deux cases vides ?",
+    "Continue la suite avec deux nombres.",
+  ])}`;
+  const pieges = [
+    `${fmt(t[4])} ; ${fmt(t[4] + (descend ? -1 : 1))}`,
+    `${fmt(t[4])} ; ${fmt(t[5] + (descend ? -pas : pas))}`,
+    `${fmt(t[4] + (descend ? -10 : 10))} ; ${fmt(t[5] + (descend ? -20 : 20))}`,
+    `${fmt(t[3])} ; ${fmt(t[4])}`,
+  ].filter((x) => !/-/.test(x));
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, pieges),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise([...montres, "?", "?"]),
+    explanation: exp(
+      `Dans une suite régulière, ${sensMot(descend)} toujours le même nombre.`,
+      "On trouve l'écart, puis on l'applique deux fois.",
+      `${fmt(t[3])} ${descend ? "−" : "+"} ${fmt(pas)} = ${fmt(t[4])}, puis ${fmt(t[4])} ${descend ? "−" : "+"} ${fmt(pas)} = ${fmt(t[5])}.`,
+      `Les deux nombres suivants sont ${correct}.`,
+    ),
+  };
+}
+
+/** Le piège : la règle devinée sur le premier écart seulement. */
+function regleMalVerifiee(): Q {
+  const pas = pick([2, 5, 10]);
+  const a = rint(1, 9) * pas;
+  const t = [a, a + pas, a + 2 * pas, a + 4 * pas];
+  const p = quelquun();
+  const correct = "non, l'écart n'est pas toujours le même";
+  const text = pick([
+    `${p.nom} voit la suite ${liste(t)} et dit : « c'est + ${pas}, donc le suivant est ${fmt(t[3] + pas)} ». La suite est-elle vraiment régulière ?`,
+    `Est-ce que la suite ${liste(t)} avance toujours de ${pas} en ${pas} ?`,
+    `${p.nom} pense que la suite ${liste(t)} avance de ${pas} en ${pas}. A-t-${p.il} raison ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, ["oui, elle avance toujours pareil", `oui, car ${fmt(a + pas)} − ${fmt(a)} = ${pas}`, "on ne peut pas savoir"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise(t),
+    explanation: exp(
+      "Une règle se vérifie sur TOUS les écarts, pas sur le premier seulement.",
+      "On calcule chaque écart entre deux nombres voisins.",
+      `+ ${pas}, + ${pas}, puis + ${2 * pas} : le dernier écart n'est pas le même.`,
+      "La suite n'avance pas toujours du même écart.",
+    ),
+  };
+}
+
+function genContinuer(d: Etoile): Q {
+  if (d <= 2) return tirer([() => suivant(2), () => suivant(2), () => trou(2)]);
+  if (d === 3) return tirer([() => suivant(3), () => trou(3), () => suivant(3)]);
+  return tirer([() => trou(4), deuxSuivants, regleMalVerifiee, () => suivant(4)]);
+}
+
+// ============================================================
+// ce2_suite_regle — Trouver la règle
+// ============================================================
+
+function regle(d: Etoile): Q {
+  const descend = d >= 3 && Math.random() < 0.5;
+  const pas = d <= 2 ? pick([2, 5, 10, 100]) : pick(PAS_CE2);
+  const t = suite(pas, 4, descend);
+  const correct = `${sensMot(descend)} ${fmt(pas)}`;
+  const autres = PAS_CE2.filter((x) => x !== pas);
+  const pieges = [
+    `${sensMot(!descend)} ${fmt(pas)}`,
+    `${sensMot(descend)} ${fmt(pick(autres))}`,
+    `${sensMot(descend)} ${fmt(pas === 10 ? 1 : pas * 10 <= 1000 ? pas * 10 : pas / 10)}`,
+    "on double à chaque fois",
+  ];
+  const text = `${introSuite(t, descend)} ${pick([
+    "Quelle est la règle de cette suite ?",
+    "Comment passe-t-on d'un nombre au suivant ?",
+    "Quelle règle suit cette suite ?",
+    "Que fait-on pour passer d'un nombre au suivant ?",
+  ])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, pieges),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise(t),
+    explanation: exp(
+      "La règle d'une suite dit comment on passe d'un nombre au suivant.",
+      "On calcule l'écart entre deux voisins et on vérifie qu'il est le même partout.",
+      `${liste(t)} : ${descend ? "−" : "+"} ${fmt(pas)} à chaque fois.`,
+      `La règle est : ${correct}.`,
+    ),
+  };
+}
+
+function ecart(d: Etoile): Q {
+  const descend = Math.random() < 0.5;
+  const pas = pick(d >= 4 ? PAS_CE2 : [2, 5, 10, 20, 25, 50, 100]);
+  const t = suite(pas, 4, descend);
+  const correct = fmt(pas);
+  const text = `${introSuite(t, descend)} ${pick([
+    `De combien ${descend ? "diminue" : "augmente"}-t-on à chaque étape ?`,
+    `Combien ${descend ? "enlève" : "ajoute"}-t-on à chaque fois ?`,
+    "Quel est l'écart entre deux nombres qui se suivent ?",
+    `De combien en combien ${descend ? "descend" : "monte"} cette suite ?`,
+  ])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(pas * 2), fmt(pas + 1), fmt(pas * 10), fmt(t[0] % 1000 || pas + 5), fmt(pas === 25 ? 20 : pas + 5)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise(t),
+    explanation: exp(
+      "L'écart, c'est la différence entre deux nombres qui se suivent.",
+      "On soustrait le plus petit du plus grand, et on vérifie sur une autre paire.",
+      `${fmt(Math.max(t[0], t[1]))} − ${fmt(Math.min(t[0], t[1]))} = ${correct}.`,
+      `La suite ${descend ? "diminue" : "augmente"} de ${correct} à chaque étape.`,
+    ),
+  };
+}
+
+function suiteQuiSuitLaRegle(): Q {
+  const descend = Math.random() < 0.4;
+  const pas = pick([5, 10, 20, 25, 50, 100]);
+  const t = suite(pas, 4, descend);
+  const s = descend ? -1 : 1;
+  const mauvaise1 = [t[0], t[0] + s * pas, t[0] + s * 2 * pas, t[0] + s * 4 * pas];
+  const mauvaise2 = [t[0], t[0] + s * (pas + 1), t[0] + s * 2 * (pas + 1), t[0] + s * 3 * (pas + 1)];
+  const mauvaise3 = [t[0], t[0] - s * pas, t[0] - s * 2 * pas, t[0] - s * 3 * pas];
+  const correct = liste(t);
+  const p = quelquun();
+  const text = pick([
+    `Quelle suite suit la règle « ${sensMot(descend)} ${fmt(pas)} » ?`,
+    `${p.nom} doit écrire une suite où ${sensMot(descend)} ${fmt(pas)} à chaque fois. Quelle suite est juste ?`,
+    `La règle du jeu de Pic : « ${sensMot(descend)} ${fmt(pas)} ». Quelle suite la respecte ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [mauvaise1, mauvaise2, mauvaise3].filter((m) => m.every((x) => x >= 0)).map(liste)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Une suite suit sa règle à CHAQUE étape.",
+      "On vérifie chaque écart, du premier au dernier.",
+      `${correct} : ${descend ? "−" : "+"} ${fmt(pas)} à chaque fois.`,
+      `C'est la suite ${correct}.`,
+    ),
+  };
+}
+
+function doubleOuAjoute(): Q {
+  const a = rint(2, 9);
+  const double = Math.random() < 0.5;
+  const t = double ? [a, a * 2, a * 4, a * 8] : [a, a + a, a + 2 * a, a + 3 * a];
+  const correct = double ? "on double à chaque fois" : `on ajoute ${a}`;
+  const text = `${introSuite(t, false)} ${pick(["Quelle est la règle ?", "Comment passe-t-on d'un nombre au suivant ?", "Quelle règle suit cette suite ?"])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, double ? [`on ajoute ${a}`, `on ajoute ${a * 2}`, "on ajoute toujours le même nombre"] : ["on double à chaque fois", `on ajoute ${a * 2}`, `on ajoute ${a + 1}`]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise(t),
+    explanation: exp(
+      "Si les écarts ne sont pas égaux, la règle n'est pas une addition.",
+      "On calcule les écarts ; s'ils grandissent, on essaie de doubler.",
+      double ? `${a} × 2 = ${a * 2}, ${a * 2} × 2 = ${a * 4}, ${a * 4} × 2 = ${a * 8}.` : `+ ${a}, + ${a}, + ${a} : l'écart est toujours ${a}.`,
+      `La règle est : ${correct}.`,
+    ),
+  };
+}
+
+function genRegle(d: Etoile): Q {
+  if (d <= 2) return tirer([() => regle(2), () => ecart(2)]);
+  if (d === 3) return tirer([() => regle(3), () => ecart(3), suiteQuiSuitLaRegle]);
+  return tirer([doubleOuAjoute, suiteQuiSuitLaRegle, () => regle(4), () => ecart(4)]);
+}
+
+// ============================================================
+// ce2_suite_croissante_decroissante
+// ============================================================
+
+function croissanteOuNon(d: Etoile): Q {
+  const descend = Math.random() < 0.5;
+  const pas = d <= 1 ? pick([2, 5, 10]) : pick(PAS_CE2);
+  const t = suite(pas, 4, descend);
+  const correct = descend ? "décroissante" : "croissante";
+  const text = `${introSuite(t, descend)} ${pick([
+    "Cette suite est-elle croissante ou décroissante ?",
+    "Les nombres montent-ils ou descendent-ils ? La suite est…",
+    "Est-ce une suite croissante ou décroissante ?",
+  ])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle(["croissante", "décroissante", "ni l'une ni l'autre"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise(t),
+    explanation: exp(
+      "Une suite croissante monte : chaque nombre est plus grand que le précédent. Une suite décroissante descend.",
+      "On compare chaque nombre au précédent.",
+      `${liste(t)} : ${descend ? "chaque nombre est plus petit" : "chaque nombre est plus grand"} que celui d'avant.`,
+      `La suite est ${correct}.`,
+    ),
+  };
+}
+
+function laquelleCroissante(): Q {
+  const veut = Math.random() < 0.5 ? "croissante" : "décroissante";
+  const pas = pick([2, 5, 10, 100]);
+  const bonne = suite(pas, 4, veut === "décroissante");
+  const inverse = [...bonne].reverse();
+  const melee = [bonne[1], bonne[0], bonne[2], bonne[3]];
+  const melee2 = [bonne[0], bonne[2], bonne[1], bonne[3]];
+  const correct = liste(bonne);
+  const p = quelquun();
+  const text = pick([
+    `Quelle suite est ${veut} ?`,
+    `${p.nom} cherche la suite ${veut}. Laquelle choisir ?`,
+    `Parmi ces suites, laquelle est ${veut} ?`,
+    `Pic ne garde que la suite ${veut}. Laquelle garde-t-il ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [liste(inverse), liste(melee), liste(melee2)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Croissante : les nombres montent du début à la fin. Décroissante : ils descendent du début à la fin.",
+      "Pour chaque suite, on compare chaque nombre au précédent.",
+      `${correct} ${veut === "croissante" ? "monte" : "descend"} à chaque étape.`,
+      `La suite ${veut} est ${correct}.`,
+    ),
+  };
+}
+
+function operationDuSens(): Q {
+  const descend = Math.random() < 0.5;
+  const p = quelquun();
+  const correct = descend ? "une soustraction, à chaque étape" : "une addition, à chaque étape";
+  const text = pick([
+    `Pour continuer une suite ${descend ? "décroissante" : "croissante"} régulière, quelle opération fait-on ?`,
+    `${p.nom} continue une suite qui ${descend ? "descend" : "monte"} toujours du même écart. Que fait-${p.il} à chaque étape ?`,
+    `Une suite régulière ${descend ? "décroissante" : "croissante"} avance en faisant quelle opération ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [descend ? "une addition, à chaque étape" : "une soustraction, à chaque étape", "une multiplication par 10", "aucune, les nombres ne changent pas"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Une suite régulière croissante ajoute toujours le même nombre ; une décroissante enlève toujours le même nombre.",
+      "On regarde si les nombres montent ou descendent.",
+      descend ? "Les nombres descendent : on enlève." : "Les nombres montent : on ajoute.",
+      `C'est ${correct}.`,
+    ),
+  };
+}
+
+function monteEtDescend(): Q {
+  const pas = pick([5, 10, 20, 50, 100]);
+  const a = rint(1, 30) * pas;
+  const reguliere = Math.random() < 0.4;
+  const t = reguliere ? [a, a + pas, a + 2 * pas, a + 3 * pas] : [a, a + pas, a + pas - Math.round(pas / 2), a + 2 * pas];
+  const correct = reguliere ? "oui, elle monte à chaque étape" : "non, elle descend à un moment";
+  const text = `${introSuite(t, false)} ${pick(["Cette suite est-elle croissante ?", "Est-ce que cette suite monte à chaque étape ?", "Peut-on dire que cette suite est croissante ?"])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [
+      reguliere ? "non, elle descend à un moment" : "oui, elle monte à chaque étape",
+      "oui, car elle finit plus haut qu'elle ne commence",
+      "on ne peut pas savoir",
+    ]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise(t),
+    explanation: exp(
+      "Une suite est croissante si CHAQUE nombre est plus grand que celui d'avant.",
+      "On compare chaque nombre au précédent, du premier au dernier.",
+      reguliere ? `+ ${pas} à chaque étape.` : `De ${fmt(t[1])} à ${fmt(t[2])}, la suite descend.`,
+      reguliere ? "Elle est croissante." : "Une seule descente suffit : elle n'est pas croissante.",
+    ),
+  };
+}
+
+function nombreQuiGardeLOrdre(): Q {
+  const pas = pick([10, 20, 25, 50, 100]);
+  const t = suite(pas, 5, false);
+  const k = 2;
+  const avant = t[k - 1];
+  const apres = t[k + 1];
+  const correct = fmt(rint(avant + 1, apres - 1));
+  const p = quelquun();
+  const affiches = t.map((x, i) => (i === k ? "?" : x));
+  const text = pick([
+    `On veut garder la suite croissante : ${liste(affiches)}. Quel nombre peut remplacer le « ? » ?`,
+    `${p.nom} a effacé un nombre de sa suite croissante : ${liste(affiches)}. Quel nombre peut-il y avoir ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(avant - pas), fmt(apres + pas), fmt(Math.max(0, avant - 1)), fmt(apres + 1)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise(affiches),
+    explanation: exp(
+      "Dans une suite croissante, chaque nombre est plus grand que celui d'avant et plus petit que celui d'après.",
+      `Le nombre caché doit être entre ${fmt(avant)} et ${fmt(apres)}.`,
+      `${fmt(avant)} < ${correct} < ${fmt(apres)}.`,
+      `${correct} convient.`,
+    ),
+  };
+}
+
+function genCroissante(d: Etoile): Q {
+  if (d <= 1) return tirer([() => croissanteOuNon(1), laquelleCroissante]);
+  if (d <= 3) return tirer([() => croissanteOuNon(2), laquelleCroissante, operationDuSens]);
+  return tirer([monteEtDescend, nombreQuiGardeLOrdre, laquelleCroissante]);
+}
+
+// ============================================================
+// ce2_suite_defi — Les défis
+// ============================================================
+
+function doublement(): Q {
+  const a = rint(2, 12);
+  const moitie = Math.random() < 0.35;
+  const t = moitie ? [a * 16, a * 8, a * 4, a * 2] : [a, a * 2, a * 4, a * 8];
+  const rep = moitie ? a : a * 16;
+  const correct = fmt(rep);
+  const text = `${introSuite(t, moitie)} ${pick(["Quel nombre vient ensuite ?", "Les écarts changent ! Quel est le nombre suivant ?", "Quel nombre faut-il écrire après ?"])}`;
+  const dernier = t[3];
+  const ecartFin = Math.abs(t[3] - t[2]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(moitie ? dernier - ecartFin : dernier + ecartFin), fmt(moitie ? Math.max(1, rep - 1) : rep + 1), fmt(moitie ? dernier - 2 : dernier * 3), fmt(moitie ? rep * 3 : rep + a)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise([...t, "?"]),
+    explanation: exp(
+      "Quand les écarts ne sont pas égaux, la règle n'est pas une addition.",
+      moitie ? "On essaie de prendre la moitié à chaque fois." : "On essaie de doubler à chaque fois.",
+      moitie ? `${fmt(dernier)} ÷ 2 = ${correct}.` : `${fmt(dernier)} × 2 = ${correct}.`,
+      `Le nombre suivant est ${correct}.`,
+    ),
+  };
+}
+
+function plusLoin(): Q {
+  const pas = pick([2, 5, 10, 20, 25, 50, 100]);
+  const t = suite(pas, 3, false);
+  const k = rint(3, 6);
+  const rep = t[2] + k * pas;
+  const correct = fmt(rep);
+  const text = `${introSuite(t, false)} ${pick([
+    `Quel nombre viendra ${k} étapes après ${fmt(t[2])} ?`,
+    `Si on continue, quel sera le nombre ${k} cases plus loin que ${fmt(t[2])} ?`,
+    `On fait encore ${k} sauts. Sur quel nombre arrive-t-on ?`,
+  ])}`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(rep - pas), fmt(rep + pas), fmt(t[2] + k), fmt(t[2] + k * 10 === rep ? rep + 2 * pas : t[2] + k * 10)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Avancer d'une étape, c'est ajouter l'écart de la suite.",
+      `L'écart est ${fmt(pas)} ; on l'ajoute ${k} fois.`,
+      `${fmt(t[2])} + ${k} × ${fmt(pas)} = ${correct}.`,
+      `On arrive à ${correct}.`,
+    ),
+  };
+}
+
+type Croissance = { quoi: string; verbe: string; unite: string; parQuand: string; quand: string };
+const CROISSANCES: readonly Croissance[] = [
+  { quoi: "Le tournesol de Nina", verbe: "grandit de", unite: "cm", parQuand: "par semaine", quand: "semaines" },
+  { quoi: "Le haricot magique", verbe: "grandit de", unite: "cm", parQuand: "par jour", quand: "jours" },
+  { quoi: "Dans sa tirelire, Téo", verbe: "met", unite: "€", parQuand: "par mois", quand: "mois" },
+  { quoi: "Zoé", verbe: "gagne", unite: "points", parQuand: "par partie", quand: "parties" },
+  { quoi: "La bibliothèque", verbe: "reçoit", unite: "livres", parQuand: "par jour", quand: "jours" },
+  { quoi: "Le chiot de la vétérinaire", verbe: "prend", unite: "g", parQuand: "par semaine", quand: "semaines" },
+  { quoi: "Ravi", verbe: "ajoute à sa collection", unite: "cartes", parQuand: "par semaine", quand: "semaines" },
+  { quoi: "Le bonhomme de neige", verbe: "perd", unite: "cm", parQuand: "par jour", quand: "jours" },
+];
+
+function croissance(): Q {
+  const c = pick(CROISSANCES);
+  const fond = c.quoi === "Le bonhomme de neige";
+  const pas = fond ? pick([2, 5, 10]) : pick([5, 10, 20, 25, 50]);
+  const k = rint(3, 6);
+  const depart = fond ? rint(k + 2, 15) * pas : rint(1, 20) * 10;
+  const rep = fond ? depart - k * pas : depart + k * pas;
+  const correct = `${fmt(rep)} ${c.unite}`;
+  const text = pick([
+    `${c.quoi} ${c.verbe} ${pas} ${c.unite} ${c.parQuand}. Aujourd'hui, on en est à ${fmt(depart)} ${c.unite}. Combien dans ${k} ${c.quand} ?`,
+    `Aujourd'hui : ${fmt(depart)} ${c.unite}. ${c.quoi} ${c.verbe} ${pas} ${c.unite} ${c.parQuand}. Où en sera-t-on dans ${k} ${c.quand} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [rep + (fond ? pas : -pas), fond ? depart - pas : depart + pas, fond ? depart - k : depart + k, depart * k].filter((x) => x > 0).map((x) => `${fmt(x)} ${c.unite}`)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `Chaque fois, on ${fond ? "enlève" : "ajoute"} ${pas} ${c.unite} : c'est une suite régulière.`,
+      `On ${fond ? "enlève" : "ajoute"} ${pas} autant de fois qu'il y a de ${c.quand}.`,
+      `${fmt(depart)} ${fond ? "−" : "+"} ${k} × ${pas} = ${fmt(rep)}.`,
+      `Dans ${k} ${c.quand} : ${correct}.`,
+    ),
+  };
+}
+
+function premierTerme(): Q {
+  const pas = pick([5, 10, 25, 50, 100]);
+  const t = suite(pas, 5, false);
+  const affiches: Array<number | string> = ["?", ...t.slice(1)];
+  const correct = fmt(t[0]);
+  const p = quelquun();
+  const text = pick([
+    `${p.nom} a effacé le PREMIER nombre de sa suite : ${liste(affiches)}. Quel était-il ?`,
+    `Le premier nombre de la suite a disparu : ${liste(affiches)}. Lequel était-ce ?`,
+    `Pic a caché le début de la suite : ${liste(affiches)}. Quel nombre a-t-il caché ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fmt(t[1] + pas), fmt(t[0] + 1), fmt(t[0] - pas), fmt(t[1] - 1)].filter((x) => !x.startsWith("-"))),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: frise(affiches),
+    explanation: exp(
+      "Pour remonter une suite croissante, on fait le chemin à l'envers : on enlève l'écart.",
+      "On trouve l'écart avec deux nombres connus, puis on l'enlève au deuxième nombre.",
+      `L'écart est ${fmt(pas)} : ${fmt(t[1])} − ${fmt(pas)} = ${correct}.`,
+      `Le premier nombre était ${correct}.`,
+    ),
+  };
+}
+
+function genDefiSuite(): Q {
+  return tirer([doublement, plusLoin, croissance, premierTerme]);
+}
+
+// ============================================================
+// LA BANQUE — mêmes ids, mêmes micros, mêmes étoiles qu'avant.
+// ============================================================
+
+const item = (id: string, microId: string, difficulty: Etoile, hint: string, gen: (d: Etoile) => Q, tags: string[]): TutorBankItemV4 =>
+  gabarit({ id, notionId: NOTION, microId, difficulty, hint, tags }, () => gen(difficulty));
 
 export const suiteNombreBank: TutorBankItemV4[] = [
-  /* =========================================================
-     CE2_SUITE_CONTINUER — trouver le terme suivant
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_suite_continuer_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_continuer",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Continue la suite : 5, 10, 15, 20, ...",
-    format: "short",
-    expected: ["25"],
-    comparator: "number_equal",
-    hint: "Regarde ce qu'on ajoute d'un nombre au suivant.",
-    explanation: exp(
-      "Une suite avance en répétant toujours la même opération.",
-      "On cherche l'écart entre deux nombres voisins, puis on vérifie qu'il est le même partout.",
-      "De 5 à 10 : + 5. De 10 à 15 : + 5. De 15 à 20 : + 5. La règle est donc « + 5 », et le suivant est 20 + 5 = 25.",
-      "Le nombre suivant est 25.",
-    ),
-    tags: ["ce2", "suite_nombre", "continuer", "canvas"],
-    canvas: suiteCanvas([5, 10, 15, 20, "?"]),
-  },
-  {
-    kind: "fixed",
-    id: "ce2_suite_continuer_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_continuer",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Un élève voit la suite 2, 4, 6, 10 et annonce « c'est + 2, donc le suivant est 12 ». Pourquoi se trompe-t-il ?",
-    format: "qcm",
-    choices: [
-      "il n'a vérifié la règle que sur les premiers nombres",
-      "il a mal additionné",
-      "il fallait multiplier",
-      "il n'y a pas d'erreur",
-    ],
-    expected: ["il n'a vérifié la règle que sur les premiers nombres"],
-    comparator: "mcq_exact",
-    hint: "Regarde l'écart entre 6 et 10.",
-    explanation: exp(
-      "Une règle n'est valable que si elle marche entre TOUS les nombres voisins de la suite.",
-      "On calcule chaque écart l'un après l'autre, du premier au dernier.",
-      "De 2 à 4 : + 2. De 4 à 6 : + 2. Mais de 6 à 10 : + 4. La règle « + 2 » ne tient pas jusqu'au bout : cette suite ne suit pas une règle unique, ou l'un des nombres est faux.",
-      "Il n'a vérifié la règle que sur les premiers nombres.",
-    ),
-    tags: ["ce2", "suite_nombre", "continuer", "piege", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_suite_continuer_fixed_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_continuer",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Continue la suite : 100, 90, 80, 70, ...",
-    format: "short",
-    expected: ["60"],
-    comparator: "number_equal",
-    hint: "Ici les nombres descendent : cherche ce qu'on enlève.",
-    explanation: exp(
-      "Une suite peut avancer en ajoutant, mais aussi en enlevant toujours la même chose.",
-      "Quand les nombres descendent, on cherche ce qu'on retire à chaque étape.",
-      "De 100 à 90 : − 10. De 90 à 80 : − 10. De 80 à 70 : − 10. La règle est « − 10 », et le suivant est 70 − 10 = 60.",
-      "Le nombre suivant est 60.",
-    ),
-    tags: ["ce2", "suite_nombre", "continuer", "decroissante", "canvas"],
-    canvas: suiteCanvas([100, 90, 80, 70, "?"]),
-  },
-  {
-    kind: "template",
-    id: "ce2_suite_continuer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_continuer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Vérifie l'écart entre CHAQUE paire de nombres voisins.",
-    tags: ["ce2", "suite_nombre", "continuer", "template", "canvas"],
-    generate: () => {
-      const pas = randomChoice(PAS);
-      const monte = randomChoice([true, false]);
-      const depart = monte ? randomInt(1, 40) * pas : randomInt(20, 60) * pas;
-      const termes = [0, 1, 2, 3].map((k) => (monte ? depart + k * pas : depart - k * pas));
-      const suivant = monte ? depart + 4 * pas : depart - 4 * pas;
-      return {
-        text: `Continue la suite : ${termes.join(", ")}, ...`,
-        format: "short",
-        expected: [String(suivant)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une suite avance en répétant toujours la même opération.",
-          "On calcule l'écart entre chaque paire de nombres voisins, et on vérifie qu'il est partout le même.",
-          `${termes.map((t, i) => (i === 0 ? "" : `${monte ? "+" : "−"} ${pas}`)).filter(Boolean).join(", ")} : la règle est « ${monte ? "+" : "−"} ${pas} ». Le suivant est ${termes[3]} ${monte ? "+" : "−"} ${pas} = ${suivant}.`,
-          `Le nombre suivant est ${suivant}.`,
-        ),
-        canvas: suiteCanvas([...termes, "?"]),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_suite_continuer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_continuer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Le trou est au milieu : sers-toi des nombres qui l'entourent.",
-    tags: ["ce2", "suite_nombre", "continuer", "template", "canvas"],
-    generate: () => {
-      const pas = randomChoice(PAS);
-      const depart = randomInt(2, 40) * pas;
-      const termes = [0, 1, 2, 3, 4].map((k) => depart + k * pas);
-      const trou = randomInt(1, 3);
-      const affiches = termes.map((t, i) => (i === trou ? "?" : t));
-      return {
-        text: `Quel nombre manque dans cette suite : ${affiches.join(", ")} ?`,
-        format: "short",
-        expected: [String(termes[trou])],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une suite avance en répétant toujours la même opération : le nombre manquant se déduit de ses voisins.",
-          "On trouve la règle sur les nombres visibles, puis on l'applique au nombre qui précède le trou.",
-          `L'écart entre deux nombres voisins vaut ${pas}. Le nombre juste avant le trou est ${termes[trou - 1]}, donc le manquant est ${termes[trou - 1]} + ${pas} = ${termes[trou]}.`,
-          `Il manque ${termes[trou]}.`,
-        ),
-        canvas: suiteCanvas(affiches),
-      };
-    },
-  },
+  item("ce2_suite_continuer_fixed_1", "ce2_suite_continuer", 2, "Calcule l'écart entre deux nombres voisins.", genContinuer, ["continuer"]),
+  item("ce2_suite_continuer_fixed_2", "ce2_suite_continuer", 4, "Vérifie l'écart sur TOUS les nombres, pas seulement les premiers.", genContinuer, ["continuer", "piege"]),
+  item("ce2_suite_continuer_fixed_3", "ce2_suite_continuer", 3, "Les nombres montent ou descendent ? Cherche ce qu'on ajoute, ou ce qu'on enlève.", genContinuer, ["continuer"]),
+  item("ce2_suite_continuer_tpl_1", "ce2_suite_continuer", 3, "Calcule l'écart entre deux nombres voisins, puis continue.", genContinuer, ["continuer"]),
+  item("ce2_suite_continuer_tpl_2", "ce2_suite_continuer", 4, "Trouve l'écart avec deux nombres voisins connus.", genContinuer, ["continuer"]),
 
-  /* =========================================================
-     CE2_SUITE_REGLE — nommer la règle
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_suite_regle_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_regle",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Quelle est la règle de la suite 7, 17, 27, 37 ?",
-    format: "qcm",
-    choices: ["on ajoute 10", "on ajoute 1", "on ajoute 7", "on multiplie par 2"],
-    expected: ["on ajoute 10"],
-    comparator: "mcq_exact",
-    hint: "Regarde comment change le chiffre des dizaines.",
-    explanation: exp(
-      "La règle d'une suite est l'opération qui fait passer d'un nombre au suivant.",
-      "On calcule l'écart entre deux nombres voisins, puis on le vérifie sur toute la suite.",
-      "De 7 à 17 : + 10. De 17 à 27 : + 10. De 27 à 37 : + 10. Le chiffre des unités ne bouge pas, seul celui des dizaines augmente de 1 à chaque fois.",
-      "La règle est « on ajoute 10 ».",
-    ),
-    tags: ["ce2", "suite_nombre", "regle", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_suite_regle_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_regle",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Quelle est la règle de la suite 3, 6, 12, 24 ?",
-    format: "qcm",
-    choices: [
-      "on double à chaque fois",
-      "on ajoute 3",
-      "on ajoute 6",
-      "on ajoute toujours le même nombre",
-    ],
-    expected: ["on double à chaque fois"],
-    comparator: "mcq_exact",
-    hint: "L'écart grandit : ce n'est pas une addition toujours pareille.",
-    explanation: exp(
-      "Une suite ne progresse pas toujours par addition : elle peut aussi doubler.",
-      "On calcule les écarts : s'ils grandissent, on essaie la multiplication.",
-      "Les écarts valent + 3, + 6, + 12 : ils ne sont pas égaux, donc ce n'est pas une addition régulière. En revanche 3 × 2 = 6, 6 × 2 = 12, 12 × 2 = 24 : on double à chaque fois.",
-      "On double à chaque fois.",
-    ),
-    tags: ["ce2", "suite_nombre", "regle", "piege", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_suite_regle_fixed_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_regle",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Dans la suite 90, 85, 80, 75, de combien diminue-t-on à chaque étape ?",
-    format: "short",
-    expected: ["5"],
-    comparator: "number_equal",
-    hint: "Enlève un nombre à celui qui le précède.",
-    explanation: exp(
-      "Dans une suite décroissante, la règle est ce qu'on retire à chaque étape.",
-      "On soustrait un nombre de celui qui le précède, puis on vérifie sur toute la suite.",
-      "90 − 85 = 5, 85 − 80 = 5, 80 − 75 = 5. On enlève 5 à chaque fois.",
-      "On diminue de 5.",
-    ),
-    tags: ["ce2", "suite_nombre", "regle", "decroissante"],
-  },
-  {
-    kind: "template",
-    id: "ce2_suite_regle_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_regle",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Calcule l'écart, puis vérifie-le partout.",
-    tags: ["ce2", "suite_nombre", "regle", "template", "canvas"],
-    generate: () => {
-      const pas = randomChoice(PAS);
-      const monte = randomChoice([true, false]);
-      const depart = monte ? randomInt(1, 30) * pas : randomInt(20, 60) * pas;
-      const termes = [0, 1, 2, 3].map((k) => (monte ? depart + k * pas : depart - k * pas));
-      const bonne = monte ? `on ajoute ${pas}` : `on enlève ${pas}`;
-      const autrePas = randomChoice(PAS.filter((p) => p !== pas));
-      return {
-        text: `Quelle est la règle de la suite ${termes.join(", ")} ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          monte ? `on enlève ${pas}` : `on ajoute ${pas}`,
-          `on ajoute ${autrePas}`,
-          `on enlève ${autrePas}`,
-          "on double à chaque fois",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "La règle d'une suite est l'opération qui fait passer d'un nombre au suivant.",
-          "On calcule l'écart entre deux nombres voisins, puis on le vérifie sur toute la suite.",
-          // ⚠️ On soustrait toujours le plus petit au plus grand : sur une
-          // suite qui descend, écrire termes[1] − termes[0] donnerait un
-          // nombre négatif, qui n'existe pas encore au CE2.
-          `${monte ? termes[1] : termes[0]} − ${monte ? termes[0] : termes[1]} donne un écart de ${pas}, et les nombres ${monte ? "montent" : "descendent"} : la règle est donc « ${bonne} ».`,
-          `La règle est « ${bonne} ».`,
-        ),
-        canvas: suiteCanvas(termes, bonne),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_suite_regle_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_regle",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "L'écart entre deux nombres voisins, c'est une soustraction.",
-    tags: ["ce2", "suite_nombre", "regle", "template"],
-    generate: () => {
-      const pas = randomChoice(PAS);
-      const monte = randomChoice([true, false]);
-      const depart = monte ? randomInt(1, 30) * pas : randomInt(20, 60) * pas;
-      const termes = [0, 1, 2, 3].map((k) => (monte ? depart + k * pas : depart - k * pas));
-      return {
-        text: `Dans la suite ${termes.join(", ")}, de combien ${monte ? "augmente" : "diminue"}-t-on à chaque étape ?`,
-        format: "short",
-        expected: [String(pas)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La règle d'une suite est l'écart, toujours le même, entre deux nombres voisins.",
-          "On soustrait le plus petit du plus grand entre deux nombres qui se suivent.",
-          `${monte ? termes[1] : termes[0]} − ${monte ? termes[0] : termes[1]} = ${pas}, et c'est le même écart partout dans la suite.`,
-          `On ${monte ? "augmente" : "diminue"} de ${pas}.`,
-        ),
-      };
-    },
-  },
+  item("ce2_suite_regle_fixed_1", "ce2_suite_regle", 2, "Regarde ce qui change d'un nombre au suivant.", genRegle, ["regle"]),
+  item("ce2_suite_regle_fixed_2", "ce2_suite_regle", 4, "Si les écarts grandissent, essaie de doubler.", genRegle, ["regle"]),
+  item("ce2_suite_regle_fixed_3", "ce2_suite_regle", 3, "Soustrais deux nombres voisins.", genRegle, ["regle"]),
+  item("ce2_suite_regle_tpl_1", "ce2_suite_regle", 3, "Les nombres montent ou descendent ?", genRegle, ["regle"]),
+  item("ce2_suite_regle_tpl_2", "ce2_suite_regle", 3, "Soustrais deux nombres voisins, puis vérifie sur une autre paire.", genRegle, ["regle"]),
 
-  /* =========================================================
-     CE2_SUITE_CROISSANTE_DECROISSANTE
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_suite_croissante_decroissante_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_croissante_decroissante",
-    difficulty: 1,
-    theme: "neutral",
-    text: "La suite 12, 24, 36, 48 est-elle croissante ou décroissante ?",
-    format: "qcm",
-    choices: ["croissante", "décroissante", "ni l'une ni l'autre", "on ne peut pas savoir"],
-    expected: ["croissante"],
-    comparator: "mcq_exact",
-    hint: "Les nombres montent-ils ou descendent-ils ?",
-    explanation: exp(
-      "Une suite est croissante quand ses nombres augmentent, décroissante quand ils diminuent.",
-      "On regarde si chaque nombre est plus grand ou plus petit que le précédent.",
-      "12, puis 24, puis 36, puis 48 : chaque nombre est plus grand que celui d'avant. La suite monte, elle est croissante.",
-      "Elle est croissante.",
-    ),
-    tags: ["ce2", "suite_nombre", "croissante", "definition", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_suite_croissante_decroissante_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_croissante_decroissante",
-    difficulty: 4,
-    theme: "neutral",
-    text: "La suite 40, 45, 42, 47 est-elle croissante ?",
-    format: "qcm",
-    choices: [
-      "non, elle monte puis descend",
-      "oui, elle finit plus haut qu'elle ne commence",
-      "oui, tous les nombres sont grands",
-      "on ne peut pas savoir",
-    ],
-    expected: ["non, elle monte puis descend"],
-    comparator: "mcq_exact",
-    hint: "Une suite croissante monte à CHAQUE étape, sans exception.",
-    explanation: exp(
-      "Une suite est croissante seulement si chaque nombre est plus grand que le précédent, sans exception.",
-      "On compare chaque nombre à celui qui le précède, du premier au dernier.",
-      "40 puis 45 : ça monte. Mais 45 puis 42 : ça descend. Il suffit d'une seule descente pour que la suite ne soit plus croissante, même si elle finit plus haut qu'elle n'a commencé.",
-      "Non, elle n'est pas croissante.",
-    ),
-    tags: ["ce2", "suite_nombre", "croissante", "piege", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_suite_croissante_decroissante_fixed_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_croissante_decroissante",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Une suite décroissante avance en faisant quelle opération ?",
-    format: "qcm",
-    choices: [
-      "une soustraction, répétée à chaque étape",
-      "une addition, répétée à chaque étape",
-      "une multiplication",
-      "aucune, elle ne bouge pas",
-    ],
-    expected: ["une soustraction, répétée à chaque étape"],
-    comparator: "mcq_exact",
-    hint: "Pour que les nombres descendent, il faut leur enlever quelque chose.",
-    explanation: exp(
-      "Une suite décroissante diminue à chaque étape : on retire toujours la même quantité.",
-      "On regarde le sens de la suite avant de chercher la règle.",
-      "100, 90, 80 descend parce qu'on enlève 10 à chaque fois. Chercher ce qu'on ajoute ne mènerait à rien : c'est ce qu'on ENLÈVE qu'il faut trouver.",
-      "Une soustraction, répétée à chaque étape.",
-    ),
-    tags: ["ce2", "suite_nombre", "decroissante", "definition", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_suite_croissante_decroissante_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_croissante_decroissante",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compare chaque nombre au précédent.",
-    tags: ["ce2", "suite_nombre", "croissante", "template", "canvas"],
-    generate: () => {
-      const pas = randomChoice(PAS);
-      const monte = randomChoice([true, false]);
-      const depart = monte ? randomInt(1, 30) * pas : randomInt(20, 60) * pas;
-      const termes = [0, 1, 2, 3].map((k) => (monte ? depart + k * pas : depart - k * pas));
-      const bonne = monte ? "croissante" : "décroissante";
-      return {
-        text: `La suite ${termes.join(", ")} est-elle croissante ou décroissante ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          "croissante",
-          "décroissante",
-          "ni l'une ni l'autre",
-          "on ne peut pas savoir",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une suite est croissante quand ses nombres augmentent, décroissante quand ils diminuent.",
-          "On compare chaque nombre à celui qui le précède.",
-          `Chaque nombre est plus ${monte ? "grand" : "petit"} que le précédent : on ${monte ? "ajoute" : "enlève"} ${pas} à chaque étape.`,
-          `Elle est ${bonne}.`,
-        ),
-        canvas: suiteCanvas(termes),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_suite_croissante_decroissante_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_croissante_decroissante",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Il suffit d'une seule descente pour qu'une suite ne soit plus croissante.",
-    tags: ["ce2", "suite_nombre", "croissante", "piege", "template"],
-    generate: () => {
-      const pas = randomChoice([2, 5, 10] as const);
-      const depart = randomInt(4, 40) * pas;
-      const reguliere = randomChoice([true, false]);
-      const termes = reguliere
-        ? [0, 1, 2, 3].map((k) => depart + k * pas)
-        : [depart, depart + pas, depart + pas - Math.floor(pas / 2) - 1, depart + 2 * pas];
-      const bonne = reguliere
-        ? "oui, elle monte à chaque étape"
-        : "non, elle descend à un moment";
-      return {
-        text: `La suite ${termes.join(", ")} est-elle croissante ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          "oui, elle monte à chaque étape",
-          "non, elle descend à un moment",
-          "oui, parce qu'elle finit plus haut qu'elle ne commence",
-          "on ne peut pas savoir",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une suite est croissante seulement si chaque nombre est plus grand que le précédent, sans exception.",
-          "On compare chaque nombre à celui qui le précède, du premier au dernier.",
-          reguliere
-            ? `Chaque nombre est plus grand que le précédent : la suite monte de ${pas} à chaque étape.`
-            : `De ${termes[1]} à ${termes[2]}, la suite descend. Une seule descente suffit : elle n'est pas croissante, même si elle finit plus haut qu'elle n'a commencé.`,
-          `${bonne.charAt(0).toUpperCase() + bonne.slice(1)}.`,
-        ),
-      };
-    },
-  },
+  item("ce2_suite_croissante_decroissante_fixed_1", "ce2_suite_croissante_decroissante", 1, "Les nombres montent-ils ou descendent-ils ?", genCroissante, ["croissante"]),
+  item("ce2_suite_croissante_decroissante_fixed_2", "ce2_suite_croissante_decroissante", 4, "Compare CHAQUE nombre à celui d'avant.", genCroissante, ["croissante", "piege"]),
+  item("ce2_suite_croissante_decroissante_fixed_3", "ce2_suite_croissante_decroissante", 2, "Monter, c'est ajouter ; descendre, c'est enlever.", genCroissante, ["croissante"]),
+  item("ce2_suite_croissante_decroissante_tpl_1", "ce2_suite_croissante_decroissante", 2, "Compare chaque nombre au précédent.", genCroissante, ["croissante"]),
+  item("ce2_suite_croissante_decroissante_tpl_2", "ce2_suite_croissante_decroissante", 4, "Une seule descente suffit pour qu'une suite ne soit pas croissante.", genCroissante, ["croissante"]),
 
-  /* =========================================================
-     CE2_SUITE_DEFI — les défis
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_suite_defi_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Dans la suite 4, 8, 16, 32, quel nombre vient après 32 ?",
-    format: "short",
-    expected: ["64"],
-    comparator: "number_equal",
-    hint: "Les écarts grandissent : essaie la multiplication.",
-    explanation: exp(
-      "Quand les écarts d'une suite grandissent, la règle n'est pas une addition mais un doublement.",
-      "On essaie d'abord l'addition ; si les écarts ne sont pas égaux, on essaie de doubler.",
-      "Les écarts valent + 4, + 8, + 16 : ils ne sont pas égaux. Mais 4 × 2 = 8, 8 × 2 = 16, 16 × 2 = 32. On double à chaque fois, donc le suivant est 32 × 2 = 64.",
-      "Le nombre suivant est 64.",
-    ),
-    tags: ["ce2", "suite_nombre", "defi", "doublement"],
-    canvas: suiteCanvas([4, 8, 16, 32, "?"]),
-  },
-  {
-    kind: "fixed",
-    id: "ce2_suite_defi_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_defi",
-    difficulty: 5,
-    theme: "reunion",
-    text: "Un pied de vanille pousse de 25 cm par mois. Il mesure 40 cm aujourd'hui. Combien mesurera-t-il dans 4 mois, en cm ?",
-    format: "short",
-    expected: ["140"],
-    comparator: "number_equal",
-    hint: "C'est une suite : on ajoute 25 quatre fois.",
-    explanation: exp(
-      "Une croissance régulière est une suite : on ajoute toujours la même chose.",
-      "On calcule d'abord ce qui s'ajoute en tout, puis on l'ajoute à la taille de départ.",
-      "En 4 mois, il pousse de 25 × 4 = 100 cm. Avec les 40 cm de départ : 40 + 100 = 140. On pourrait aussi écrire la suite : 40, 65, 90, 115, 140.",
-      "Il mesurera 140 cm.",
-    ),
-    tags: ["ce2", "suite_nombre", "defi", "reunion", "deux_etapes"],
-  },
-  {
-    kind: "template",
-    id: "ce2_suite_defi_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Trouve d'abord la règle, puis avance de plusieurs étapes d'un coup.",
-    tags: ["ce2", "suite_nombre", "defi", "template", "canvas"],
-    generate: () => {
-      const pas = randomChoice(PAS);
-      const depart = randomInt(2, 20) * pas;
-      const termes = [0, 1, 2].map((k) => depart + k * pas);
-      const saut = randomInt(3, 6);
-      const cible = depart + (2 + saut) * pas;
-      return {
-        text: `Une suite commence par ${termes.join(", ")}. Quel sera le nombre situé ${saut} étapes après ${termes[2]} ?`,
-        format: "short",
-        expected: [String(cible)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une suite avance en répétant la même opération : avancer de plusieurs étapes revient à répéter la règle autant de fois.",
-          "On trouve d'abord la règle, puis on multiplie l'écart par le nombre d'étapes.",
-          `La règle est « + ${pas} ». En ${saut} étapes, on ajoute ${pas} × ${saut} = ${pas * saut}. Donc ${termes[2]} + ${pas * saut} = ${cible}.`,
-          `Le nombre est ${cible}.`,
-        ),
-        canvas: suiteCanvas([...termes, "…", "?"]),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_suite_defi_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "suite_nombre",
-    microId: "ce2_suite_defi",
-    difficulty: 5,
-    theme: "reunion",
-    hint: "Ajoute le même nombre autant de fois qu'il y a d'étapes.",
-    tags: ["ce2", "suite_nombre", "defi", "reunion", "template"],
-    generate: () => {
-      // ⚠️ « mois » ne prend pas de s : le pluriel voyage avec le mot.
-      const contexte = randomChoice([
-        { quoi: "un pied de vanille", verbe: "pousse", unite: "cm", periode: "mois", periodes: "mois" },
-        { quoi: "un plant de canne", verbe: "pousse", unite: "cm", periode: "semaine", periodes: "semaines" },
-        { quoi: "la cagnotte de la classe", verbe: "grossit", unite: "€", periode: "semaine", periodes: "semaines" },
-      ]);
-      const pas = randomChoice([5, 10, 15, 25] as const);
-      const depart = randomInt(2, 12) * 10;
-      const etapes = randomInt(3, 6);
-      const total = depart + pas * etapes;
-      return {
-        text: `${contexte.quoi.charAt(0).toUpperCase() + contexte.quoi.slice(1)} ${contexte.verbe} de ${pas} ${contexte.unite} par ${contexte.periode}. Aujourd'hui, ${contexte.quoi} est à ${depart} ${contexte.unite}. Combien dans ${etapes} ${contexte.periodes}, en ${contexte.unite} ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une progression régulière est une suite : on ajoute toujours la même chose.",
-          "On calcule d'abord ce qui s'ajoute en tout, puis on l'ajoute au point de départ.",
-          `En ${etapes} ${contexte.periodes} : ${pas} × ${etapes} = ${pas * etapes}. Avec le départ : ${depart} + ${pas * etapes} = ${total}.`,
-          `Cela fera ${total} ${contexte.unite}.`,
-        ),
-      };
-    },
-  },
+  item("ce2_suite_defi_fixed_1", "ce2_suite_defi", 5, "Les écarts grandissent : essaie de doubler.", () => genDefiSuite(), ["defi"]),
+  item("ce2_suite_defi_fixed_2", "ce2_suite_defi", 5, "Ajoute l'écart autant de fois qu'il le faut.", () => genDefiSuite(), ["defi"]),
+  item("ce2_suite_defi_tpl_1", "ce2_suite_defi", 5, "Trouve l'écart, puis compte les étapes.", () => genDefiSuite(), ["defi"]),
+  item("ce2_suite_defi_tpl_2", "ce2_suite_defi", 5, "Une suite régulière ajoute toujours la même chose.", () => genDefiSuite(), ["defi"]),
 ];
+

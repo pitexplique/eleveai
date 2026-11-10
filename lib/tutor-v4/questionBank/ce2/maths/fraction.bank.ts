@@ -1,1916 +1,1539 @@
 // lib/tutor-v4/questionBank/ce2/maths/fraction.bank.ts
 //
-// Les fractions du CE2, écrites à la main. Jusqu'ici les huit
-// micro-compétences passaient par le constructeur commun, qui aiguille sur la
-// NOTION : « placer une fraction sur une droite graduée » et « comparer une
-// fraction à l'unité » recevaient la même question.
+// Les fractions du CE2, écrites à la main.
 //
 // PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, applicable à la rentrée 2025, cycle
-// 2), repris mot pour mot du tableau CE2 : « Les fractions rencontrées au CE2
-// ont un dénominateur inférieur ou égal à DOUZE et sont toutes INFÉRIEURES OU
-// ÉGALES À UN. » La banque tire dans {2, 3, 4, 5, 6, 8, 10, 12}.
+// 2), repris du tableau CE2 : « Les fractions rencontrées au CE2 ont un
+// dénominateur inférieur ou égal à DOUZE et sont toutes INFÉRIEURES OU ÉGALES
+// À UN. » La banque tire dans {2, 3, 4, 5, 6, 8, 10, 12}.
 //
-// ⚠️ L'ADDITION DE FRACTIONS EST AU PROGRAMME. Cet en-tête a longtemps affirmé
-// le contraire — « tout cela arrive au CM1 et au CM2 ». C'était faux. Relu
-// contre le tableau du BO le 09/08/2026 : « Additionner et soustraire des
-// fractions » est l'un des quatre attendus de fin de CE2, et le CE1 le prépare
-// déjà avec le dénominateur commun.
+// ⚠️ L'ADDITION DE FRACTIONS EST AU PROGRAMME (relu le 09/08/2026) :
+// « Additionner et soustraire des fractions » est un attendu de fin de CE2, y
+// compris « lorsque le dénominateur de l'une est un MULTIPLE du dénominateur
+// de l'autre » (1/2 + 1/4). Restent hors CE2 : les dénominateurs sans rapport
+// (1/3 + 1/4), la fraction plus grande que 1 et la simplification.
 //
-// Le CE2 va un cran plus loin que le CE1, et le texte le dit : l'élève sait
-// additionner et soustraire « lorsque le dénominateur de l'une est un MULTIPLE
-// du dénominateur de l'autre ». 1/2 + 1/4 est donc au programme — on récrit
-// 1/2 en 2/4 et on retombe sur un partage commun. C'est là que l'égalité de
-// fractions, travaillée juste avant, sert enfin à quelque chose.
+// ⚠️ PAS DE QUESTION À RÉDIGER : tout ce qui se répond par une fraction est
+// écrit directement en `qcm`, avec ses propositions.
 //
-// Restent hors CE2 : les dénominateurs sans rapport entre eux (1/3 + 1/4), la
-// fraction plus grande que 1 et la simplification.
+// ⛔ RÉÉCRITE LE 10/11/2026 (robustesse du coach, cycle 2) : 2 à 39 squelettes
+// par micro, 4 à 19 répétitions sur 20. Chaque micro a désormais un générateur
+// par étoile (familles × situations × tournures) ; les items figés sont devenus
+// des gabarits de même idée, sous le même id. Les gâteaux patate, caris et
+// samoussas d'avant (un décor sur deux) sont redevenus rares.
 //
-// ⚠️ PAS DE QUESTION À RÉDIGER. `applyMathsKeyboardFree` retire les items
-// `format: "open"` au primaire (cf. ce2/maths/index.ts) : un CE2 clique, il ne
-// tape pas. Et une réponse qui EST une fraction (« 3/4 ») ne se convertit pas
-// toute seule en QCM — le convertisseur ne sait fabriquer des propositions que
-// pour des nombres. Donc : tout ce qui se répond par une fraction est écrit
-// directement en `qcm`, avec ses propositions.
+// ⭐ LES DESSINS : barre, disque, rectangle quadrillé (`fraction`) et droite
+// graduée de 0 à 1. ⛔ `showFraction` est TOUJOURS coupé (le canvas écrit
+// sinon « 3/4 » sous la barre — la réponse), et la droite n'écrit que 0 et 1.
+// ⛔ Jamais de dessin à parts inégales : `unequalParts` écrit « les parts ne
+// sont pas égales » en rouge, c'est-à-dire la réponse de ces questions-là.
 
 import type { FractionCanvasData, NumberLineCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { type Etoile, type Q, choix as choixBrut, de, deuxPersonnes, exp, gabarit, maj, pick, quelquun, rint, shuffle, tirer } from "./outils-nombres-ce2";
 
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+const NOTION = "fraction";
+
+/**
+ * Les choix d'une question de fractions : ⛔ aucune fraction hors du CE2 parmi
+ * les pièges (plus grande que 1, partage au-delà de 12 ou en 1, nombre à
+ * virgule). S'il en manque, on complète par des voisines de même partage.
+ */
+function horsCE2(s: string): boolean {
+  if (/\d[.,]\d/.test(s)) return true;
+  for (const m of s.matchAll(/(\d+)\/(\d+)/g)) {
+    const a = Number(m[1]), b = Number(m[2]);
+    if (b < 2 || b > 12 || a > b || a < 1) return true;
+  }
+  return false;
 }
-
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-// La bonne réponse est mise de côté, trois pièges distincts sont tirés ensuite,
-// puis on mélange. L'écrire autrement a rendu des questions impossibles à
-// réussir dans 79 banques : voir scripts/verifier-generateurs.mjs.
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
-
-/** Le nom qui se dit à voix haute : 1/4 se lit « un quart ». */
-function nomFraction(n: number, d: number): string {
-  const noms: Record<number, [string, string]> = {
-    2: ["demi", "demis"],
-    3: ["tiers", "tiers"],
-    4: ["quart", "quarts"],
-    5: ["cinquième", "cinquièmes"],
-    6: ["sixième", "sixièmes"],
-    8: ["huitième", "huitièmes"],
-    10: ["dixième", "dixièmes"],
-    12: ["douzième", "douzièmes"],
+function choix(correct: string, pieges: readonly string[]): string[] {
+  const bons = Array.from(new Set(pieges.filter((x) => x && !horsCE2(x) && x !== correct)));
+  const m = correct.match(/^(\d+)\/(\d+)(.*)$/);
+  if (m) {
+    const n = Number(m[1]), d = Number(m[2]);
+    const voisins = Array.from({ length: d }, (_, i) => i + 1).filter((k) => k !== n).sort((x, y) => Math.abs(x - n) - Math.abs(y - n));
+    for (const k of voisins) {
+      if (new Set(bons.map((x) => { const v = x.match(/^(\d+)\/(\d+)/); return v ? Number(v[1]) / Number(v[2]) : x; })).size >= 4) break;
+      const v = `${k}/${d}${m[3].startsWith(",") ? "" : m[3]}`;
+      if (!bons.includes(v)) bons.push(v);
+    }
+  }
+  // ⛔ jamais deux choix de même valeur (2/4 et 1/2) : on garde le premier.
+  const valeur = (x: string) => {
+    const v = x.match(/^(\d+)\/(\d+)/);
+    return v ? Number(v[1]) / Number(v[2]) : x;
   };
-  const [sing, plur] = noms[d] ?? [`${d}ème`, `${d}èmes`];
-  const chiffres = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"];
-  return `${chiffres[n] ?? n} ${n > 1 ? plur : sing}`;
+  const vus = new Set<number | string>([valeur(correct)]);
+  const uniques = bons.filter((x) => {
+    const v = valeur(x);
+    if (vus.has(v)) return false;
+    vus.add(v);
+    return true;
+  });
+  // Un partage en 2 ou en 3 n'a pas assez de voisines : quelques fractions simples en renfort.
+  if (m) for (const x of ["1/4", "3/4", "1/3", "2/3", "1/2"]) {
+    if (uniques.length >= 3) break;
+    if (!vus.has(valeur(x))) { vus.add(valeur(x)); uniques.push(x); }
+  }
+  return choixBrut(correct, uniques);
 }
 
-// Les couples que le CE2 sait traiter quand les partages diffèrent : le second
-// dénominateur est un MULTIPLE du premier, et il ne dépasse pas douze. Hors de
-// cette liste (1/3 + 1/4), on sort du programme.
-const PAIRES_MULTIPLES = [
-  { d: 2, D: 4 },
-  { d: 2, D: 6 },
-  { d: 2, D: 8 },
-  { d: 2, D: 10 },
-  { d: 2, D: 12 },
-  { d: 3, D: 6 },
-  { d: 3, D: 12 },
-  { d: 4, D: 8 },
-  { d: 4, D: 12 },
-  { d: 5, D: 10 },
-  { d: 6, D: 12 },
+// ============================================================
+// LES MOTS DES FRACTIONS
+// ============================================================
+
+const DEN_NOM: Record<number, [string, string]> = {
+  2: ["demi", "demis"],
+  3: ["tiers", "tiers"],
+  4: ["quart", "quarts"],
+  5: ["cinquième", "cinquièmes"],
+  6: ["sixième", "sixièmes"],
+  8: ["huitième", "huitièmes"],
+  10: ["dixième", "dixièmes"],
+  12: ["douzième", "douzièmes"],
+};
+const NUM = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze"];
+
+/** 3/4 se lit « trois quarts », 1/2 « un demi ». */
+function nom(n: number, d: number): string {
+  const [s, p] = DEN_NOM[d];
+  return `${NUM[n]} ${n > 1 ? p : s}`;
+}
+
+/** « des quarts », « des tiers ». */
+const des = (d: number) => `des ${DEN_NOM[d][1]}`;
+
+const fr = (n: number, d: number) => `${n}/${d}`;
+
+const DENS = [2, 3, 4, 5, 6, 8, 10, 12] as const;
+const DENS_SIMPLES = [2, 3, 4, 5, 6, 8, 10] as const;
+
+// ============================================================
+// LES TOUTS QU'ON PARTAGE
+// ============================================================
+
+type Tout = { nom: string; f: boolean; forme: "circle" | "bar" | "grid" };
+const TOUTS: readonly Tout[] = [
+  { nom: "pizza", f: true, forme: "circle" },
+  { nom: "gâteau", f: false, forme: "circle" },
+  { nom: "tarte aux pommes", f: true, forme: "circle" },
+  { nom: "crêpe géante", f: true, forme: "circle" },
+  { nom: "galette", f: true, forme: "circle" },
+  { nom: "pastèque", f: true, forme: "circle" },
+  { nom: "tablette de chocolat", f: true, forme: "grid" },
+  { nom: "ruban", f: false, forme: "bar" },
+  { nom: "bande de papier", f: true, forme: "bar" },
+  { nom: "baguette", f: true, forme: "bar" },
+  { nom: "drapeau", f: false, forme: "bar" },
+  { nom: "jardin", f: false, forme: "grid" },
+  { nom: "gâteau roulé", f: false, forme: "bar" },
+  { nom: "barre de céréales", f: true, forme: "bar" },
+  { nom: "plaque de biscuits", f: true, forme: "grid" },
+  { nom: "carré de potager", f: false, forme: "grid" },
+  { nom: "tapis de jeu", f: false, forme: "grid" },
+  { nom: "corde à sauter", f: true, forme: "bar" },
+];
+const tout = () => pick(TOUTS);
+const le = (t: Tout) => (t.f ? `la ${t.nom}` : `le ${t.nom}`);
+const un = (t: Tout) => (t.f ? `une ${t.nom}` : `un ${t.nom}`);
+const du = (t: Tout) => (t.f ? `de la ${t.nom}` : `du ${t.nom}`);
+const Le = (t: Tout) => maj(le(t));
+
+/** Celui ou celle qui partage : un enfant, un métier, Pic. */
+function quiPartage(): { qui: string; il: string } {
+  const p = quelquun();
+  return pick([
+    { qui: p.nom, il: p.il },
+    { qui: p.nom, il: p.il },
+    { qui: "La boulangère", il: "elle" },
+    { qui: "Le chef cuisinier", il: "il" },
+    { qui: "La maîtresse", il: "elle" },
+    { qui: "Le jardinier", il: "il" },
+    { qui: "Pic le paille-en-queue", il: "il" },
+    { qui: "Le pirate", il: "il" },
+  ]);
+}
+
+/** Le colorié, le mangé, le planté… selon le tout. */
+function action(t: Tout): { verbe: string; part: string } {
+  if (["pizza", "gâteau", "tarte aux pommes", "crêpe géante", "galette", "pastèque", "tablette de chocolat", "gâteau roulé", "barre de céréales", "plaque de biscuits", "baguette"].includes(t.nom))
+    return pick([{ verbe: "mangé", part: "mangée" }, { verbe: "croqué", part: "croquée" }, { verbe: "colorié", part: "coloriée" }]);
+  if (t.nom === "jardin" || t.nom === "carré de potager") return pick([{ verbe: "planté", part: "plantée" }, { verbe: "colorié", part: "coloriée" }]);
+  return { verbe: "colorié", part: "coloriée" };
+}
+
+/** Une courte phrase d'entrée, pour que la même question ne revienne pas mot pour mot. */
+function entree(): string {
+  const p = quelquun();
+  return pick([
+    `${p.nom} fait ses devoirs.`,
+    `${p.nom} joue à la maîtresse.`,
+    `${p.nom} prépare un jeu pour la classe.`,
+    `Pic le paille-en-queue pose une énigme.`,
+    `${p.nom} interroge son grand frère.`,
+    `${p.nom} s'entraîne avant le contrôle.`,
+    "C'est le défi du jour.",
+    `${p.nom} lance un quiz à la classe.`,
+    "Le maître lance un défi.",
+    "On est au club de maths.",
+    "",
+    "",
+  ]);
+}
+const avec = (s: string) => {
+  const e = entree();
+  if (!e) return s;
+  return `${e} ${s}`;
+};
+
+// ============================================================
+// LES DESSINS (showFraction coupé, toujours)
+// ============================================================
+
+function grille(d: number): { rows: number; cols: number } {
+  if (d === 12) return { rows: 3, cols: 4 };
+  if (d % 2 === 0 && d >= 4) return { rows: 2, cols: d / 2 };
+  return { rows: 1, cols: d };
+}
+
+function dessin(n: number, d: number, forme: Tout["forme"] = "bar"): FractionCanvasData {
+  if (forme === "circle")
+    return { kind: "fraction", model: "circle", fraction: { numerator: n, denominator: d }, display: { showFraction: false }, size: { width: 300, height: 170 } };
+  if (forme === "grid" && d >= 4)
+    return { kind: "fraction", model: "grid", grid: { ...grille(d), shaded: n }, display: { showFraction: false }, size: { width: 300, height: 140 } };
+  return { kind: "fraction", model: "bar", fraction: { numerator: n, denominator: d }, display: { showFraction: false }, size: { width: 320, height: 120 } };
+}
+
+/** Deux bandes identiques, nommées A et B (jamais leur fraction). */
+function deuxBandes(a: [number, number], b: [number, number]): FractionCanvasData {
+  return {
+    kind: "fraction",
+    model: "compare",
+    fractions: [
+      { numerator: a[0], denominator: a[1], label: "A" },
+      { numerator: b[0], denominator: b[1], label: "B" },
+    ],
+    display: { showFraction: true },
+    size: { width: 320, height: 200 },
+  };
+}
+
+/** La droite de 0 à 1, partagée en d : seuls 0 et 1 sont écrits. */
+function droite01(d: number, points: NonNullable<NumberLineCanvasData["points"]>): NumberLineCanvasData {
+  return {
+    kind: "number_line",
+    min: 0,
+    max: 1,
+    step: 1 / d,
+    valeursEcrites: [0, 1],
+    points,
+    size: { width: 340, height: 100 },
+    display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+  };
+}
+
+/** Des fractions pièges autour de n/d : inversée, voisins, mauvais partage. */
+function piegesFraction(n: number, d: number): string[] {
+  return [fr(d, n), fr(n + 1, d), fr(Math.max(1, n - 1), d), fr(n, d + 1), fr(d - n || 1, d), fr(n, n + d)].filter((x) => x !== fr(n, d));
+}
+
+// ============================================================
+// ce2_fraction_unite — Partager en parts égales, l'unité fractionnaire
+// ============================================================
+
+function partsEgales(): Q {
+  const d = pick(DENS_SIMPLES);
+  const t = tout();
+  const { qui } = quiPartage();
+  const correct = "toutes de la même taille";
+  const text = pick([
+    `${qui} partage ${un(t)} en ${d} parts. Pour parler ${d === 3 ? "de tiers" : `de ${DEN_NOM[d][1]}`}, comment doivent être les parts ?`,
+    `Pour que chaque part soit ${nom(1, d).replace("un ", "un ")} ${du(t)}, comment faut-il couper ?`,
+    `On veut des ${DEN_NOM[d][1]} ${du(t)}. Comment doivent être les ${d} parts ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, ["de tailles différentes", "au moins deux pareilles", "peu importe, il faut juste " + d + " parts"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Une fraction partage un tout en parts toutes égales.",
+      "On vérifie que le partage est juste avant de compter les parts.",
+      `Si les parts n'ont pas la même taille, aucune n'est « ${nom(1, d)} ».`,
+      "Les parts doivent être toutes de la même taille.",
+    ),
+  };
+}
+
+function nomDeLaPart(): Q {
+  const d = pick(DENS_SIMPLES);
+  const t = tout();
+  const { qui } = quiPartage();
+  const correct = nom(1, d);
+  const autres = DENS_SIMPLES.filter((x) => x !== d).map((x) => nom(1, x));
+  const text = pick([
+    `${qui} partage ${un(t)} en ${d} parts égales. Comment s'appelle une part ?`,
+    `${Le(t)} est coupé${t.f ? "e" : ""} en ${d} parts égales. Une part, c'est…`,
+    `Le dessin montre ${un(t)} partagé${t.f ? "e" : ""} en parts égales. Comment s'appelle la part coloriée ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [`un ${NUM[d]}`, ...shuffle(autres).slice(0, 3)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: dessin(1, d, t.forme),
+    explanation: exp(
+      `Quand on partage un tout en ${d} parts égales, chaque part est ${nom(1, d)}.`,
+      "On compte les parts égales : leur nombre donne le nom de la part.",
+      `${d} parts égales → ${nom(1, d)}, qui s'écrit ${fr(1, d)}.`,
+      `Une part, c'est ${correct}.`,
+    ),
+  };
+}
+
+function combienDeParts(): Q {
+  const d = pick(DENS);
+  const t = tout();
+  const { qui, il } = quiPartage();
+  const correct = String(d);
+  const text = pick([
+    `${qui} veut couper ${un(t)} en ${DEN_NOM[d][1]}. En combien de parts égales doit-${il} ${t.f ? "la" : "le"} partager ?`,
+    `On partage ${un(t)} en parts égales pour obtenir ${des(d)}. Combien de parts faut-il faire ?`,
+    `Pour avoir des parts d'${nom(1, d).replace(/^un /, "")} ${du(t)}, en combien de parts égales faut-il couper ?`.replace("d'un", "d'un").replace("d'demi", "d'un demi").replace(/d'(tiers|quart|cinquième|sixième|huitième|dixième|douzième)/, "d'un $1"),
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [String(d * 2), String(d + 1), String(d - 1), String(d + 10)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `Le nom de la part dit en combien on a partagé : ${DEN_NOM[d][1]} → ${d} parts.`,
+      "On cherche le nombre de parts égales qui donne ce nom.",
+      `${nom(1, d)} = ${fr(1, d)} : on partage en ${d}.`,
+      `Il faut ${d} parts égales.`,
+    ),
+  };
+}
+
+function combienPourLeTout(d3: boolean): Q {
+  const d = pick(DENS);
+  const t = tout();
+  const { qui, il } = quiPartage();
+  const correct = String(d);
+  const text = d3
+    ? pick([
+        `${qui} a coupé ${un(t)} en ${d} parts égales. Combien de parts faut-il pour avoir ${le(t)} ${t.f ? "entière" : "entier"} ?`,
+        `Combien de ${DEN_NOM[d][1]} faut-il pour faire ${un(t)} ${t.f ? "entière" : "entier"} ?`,
+        `Le dessin montre une part ${du(t)}. Combien de parts comme celle-ci forment ${le(t)} ${t.f ? "entière" : "entier"} ?`,
+        `${qui} a ${nom(1, d)} ${du(t)}. Combien de parts pareilles lui faut-il pour avoir tout${t.f ? "e" : ""} ${le(t)} ?`.replace(`${il} `, ""),
+      ])
+    : `Combien de ${DEN_NOM[d][1]} y a-t-il dans un tout ?`;
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [String(d * 2), String(d + 1), String(d - 1), String(d * 3)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: dessin(1, d, t.forme),
+    explanation: exp(
+      `${nom(1, d)} est une des ${d} parts égales du tout.`,
+      "On compte combien de parts égales forment le tout.",
+      `${d} × ${fr(1, d)} = ${fr(d, d)} = le tout.`,
+      `Il faut ${d} parts.`,
+    ),
+  };
+}
+
+function genUnite(d: Etoile): Q {
+  if (d <= 1) return tirer([partsEgales, nomDeLaPart]);
+  if (d === 2) return tirer([nomDeLaPart, combienDeParts, partsEgales]);
+  return tirer([() => combienPourLeTout(true), combienDeParts, nomDeLaPart]);
+}
+
+// ============================================================
+// ce2_fraction_lire — Lire et écrire une fraction
+// ============================================================
+
+function sensDuDenominateur(): Q {
+  const d = pick(DENS_SIMPLES);
+  const n = rint(1, d - 1);
+  const haut = Math.random() < 0.5;
+  const t = tout();
+  const correct = haut ? `on prend ${n} part${n > 1 ? "s" : ""}` : `le tout est partagé en ${d} parts égales`;
+  const text = pick([
+    `Dans la fraction ${fr(n, d)}, que veut dire le nombre du ${haut ? "haut" : "bas"}, le ${haut ? n : d} ?`,
+    `${maj(quelquun().nom)} a ${fr(n, d)} ${du(t)}. Que dit le ${haut ? n : d} ${haut ? "du haut" : "du bas"} ?`,
+    `Dans ${fr(n, d)} ${du(t)}, à quoi sert le ${haut ? n : d} ?`,
+  ]);
+  const pieges = haut
+    ? [`le tout est partagé en ${n} parts égales`, `il reste ${n} part${n > 1 ? "s" : ""}`, `chaque part vaut ${n}`]
+    : [`on prend ${d} parts`, `il reste ${d} parts`, `chaque part vaut ${d}`];
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, pieges),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Le nombre du bas dit en combien de parts égales on partage ; celui du haut, combien on en prend.",
+      "On lit d'abord le bas (le partage), puis le haut (les parts prises).",
+      `${fr(n, d)} : partagé en ${d}, on prend ${n}.`,
+      `Le ${haut ? n : d} veut dire : ${correct}.`,
+    ),
+  };
+}
+
+function lireLaFraction(d0?: number): Q {
+  const d = d0 ?? pick(DENS);
+  const n = rint(1, d);
+  const correct = nom(n, d);
+  const p = quelquun();
+  const text = pick([
+    `Comment se lit la fraction ${fr(n, d)} ?`,
+    `${p.nom} lit ${fr(n, d)} à voix haute. Que dit-${p.il} ?`,
+    `La maîtresse écrit ${fr(n, d)} au tableau. Comment le lit-on ?`,
+    `Sur la recette, on lit ${fr(n, d)} de tasse de farine. Comment dit-on ${fr(n, d)} ?`,
+  ]);
+  const autres = DENS.filter((x) => x !== d && x >= n);
+  const pieges = [`${NUM[n]} sur ${NUM[d]}`, d > n ? nom(d - n, d) : nom(1, d), n + 1 <= d ? nom(n + 1, d) : nom(n - 1, d)];
+  if (autres.length) pieges.push(nom(n, pick(autres)));
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, pieges),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "On lit d'abord le nombre du haut, puis le nom des parts donné par le nombre du bas.",
+      `Le bas, ${d}, donne ${DEN_NOM[d][1]} ; le haut, ${n}, dit combien.`,
+      `${fr(n, d)} → ${correct}.`,
+      `On lit « ${correct} ».`,
+    ),
+  };
+}
+
+function ecrireLaFraction(): Q {
+  const d = pick(DENS);
+  const n = rint(1, d - 1);
+  const correct = fr(n, d);
+  const p = quelquun();
+  const text = pick([
+    `Comment s'écrit « ${nom(n, d)} » en chiffres ?`,
+    `${p.nom} entend « ${nom(n, d)} ». Quelle fraction écrit-${p.il} ?`,
+    `Le chef cuisinier demande « ${nom(n, d)} » de litre de lait. Quelle fraction est-ce ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, piegesFraction(n, d)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Le nom de la part (quart, tiers…) va en bas, le nombre de parts va en haut.",
+      `« ${DEN_NOM[d][1]} » → ${d} en bas ; « ${NUM[n]} » → ${n} en haut.`,
+      `${nom(n, d)} = ${correct}.`,
+      `On écrit ${correct}.`,
+    ),
+  };
+}
+
+/** Le dessin → la fraction coloriée (ou non coloriée, au ★3). */
+function quelleFractionColoriee(d: Etoile, pasColoriee = false): Q {
+  const den = d <= 2 ? pick(DENS_SIMPLES) : pick(DENS);
+  const n = rint(1, den - 1);
+  const t = tout();
+  const { part } = action(t);
+  const cible = pasColoriee ? den - n : n;
+  const correct = fr(cible, den);
+  const p = quelquun();
+  const quoi = pasColoriee ? (part === "coloriée" ? "n'est PAS coloriée" : `n'est PAS ${part}`) : `est ${part}`;
+  const text = pick([
+    `Le dessin montre ${un(t)}. Quelle fraction ${du(t)} ${quoi} ?`,
+    `${p.nom} regarde ${le(t)} dessiné${t.f ? "e" : ""}. Quelle part ${quoi} ?`,
+    `Quelle fraction ${du(t)} ${quoi} sur le dessin ?`,
+    `Pic le paille-en-queue a dessiné ${un(t)}. Quelle fraction ${quoi} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fr(n === cible ? den - n : n, den), fr(den, cible), fr(cible, den + 1), fr(cible + 1, den), fr(cible, den - cible || den + 2)].filter((x) => x !== correct)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: dessin(n, den, t.forme),
+    explanation: exp(
+      "Le nombre du bas compte toutes les parts égales ; celui du haut, les parts dont on parle.",
+      `On compte les parts : ${den} en tout, ${n} colorées${pasColoriee ? `, donc ${den - n} blanches` : ""}.`,
+      `${cible} parts sur ${den} : ${correct}.`,
+      `La réponse est ${correct}.`,
+    ),
+  };
+}
+
+function leTout(): Q {
+  const d = pick(DENS);
+  const t = tout();
+  const p = quelquun();
+  const correct = fr(d, d);
+  const text = pick([
+    `${p.nom} a mangé toutes les parts ${du(t)}, coupé${t.f ? "e" : ""} en ${d}. Quelle fraction ${du(t)} a-t-${p.il} mangée ?`,
+    `Quelle fraction est égale ${t.f ? "à toute la" : "à tout le"} ${t.nom}, partagé${t.f ? "e" : ""} en ${d} ?`,
+    `Toutes les parts ${du(t)} sont coloriées. Quelle fraction est coloriée ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fr(1, d), fr(d, 1), fr(0, d), fr(d - 1, d)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: dessin(d, d, t.forme),
+    explanation: exp(
+      "Quand on prend toutes les parts, on a le tout.",
+      "Le nombre du haut est alors égal au nombre du bas.",
+      `${d} parts sur ${d} : ${fr(d, d)}.`,
+      `${fr(d, d)} = le tout.`,
+    ),
+  };
+}
+
+function genLire(d: Etoile): Q {
+  if (d <= 1) return tirer([sensDuDenominateur, () => lireLaFraction(pick([2, 3, 4])), () => quelleFractionColoriee(1)]);
+  if (d === 2) return tirer([() => lireLaFraction(), ecrireLaFraction, () => quelleFractionColoriee(2), sensDuDenominateur]);
+  return tirer([() => quelleFractionColoriee(3), () => quelleFractionColoriee(3, true), leTout, ecrireLaFraction]);
+}
+
+// ============================================================
+// ce2_fraction_representer — Représenter une fraction
+// ============================================================
+
+function commentRepresenter(): Q {
+  const d = pick(DENS);
+  const n = rint(1, d - 1);
+  const t = pick(TOUTS.filter((x) => x.forme !== "circle"));
+  const correct = `on partage en ${d} parts égales et on colorie ${n} part${n > 1 ? "s" : ""}`;
+  const p = quelquun();
+  const text = pick([
+    `Pour représenter ${fr(n, d)} ${du(t)}, que fait-on ?`,
+    `${p.nom} veut colorier ${fr(n, d)} ${du(t)}. Comment doit-${p.il} faire ?`,
+    `Comment montrer ${nom(n, d)} ${du(t)} sur un dessin ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [
+      `on partage en ${n} parts égales et on colorie ${d} parts`,
+      `on partage en ${n + d} parts égales et on colorie ${n} part${n > 1 ? "s" : ""}`,
+      `on partage en ${d} parts, même inégales, et on colorie ${n} part${n > 1 ? "s" : ""}`,
+    ]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Le bas dit en combien de parts égales on partage ; le haut, combien on en colorie.",
+      `Pour ${fr(n, d)} : ${d} parts égales, puis ${n} coloriée${n > 1 ? "s" : ""}.`,
+      `${d} en bas, ${n} en haut.`,
+      `On ${correct.replace(/^on /, "")}.`,
+    ),
+  };
+}
+
+function partsAColorier(): Q {
+  const d = pick(DENS);
+  const n = rint(2, d - 1);
+  const t = pick(TOUTS.filter((x) => x.forme !== "circle"));
+  const deja = rint(0, n - 1);
+  const p = quelquun();
+  const reste = n - deja;
+  const correct = String(reste);
+  const text = deja === 0
+    ? pick([
+        `${p.nom} doit colorier ${fr(n, d)} de ce${t.f ? "tte" : ""} ${t.nom}. Combien de parts doit-${p.il} colorier ?`,
+        `Combien de parts faut-il colorier sur le dessin pour montrer ${fr(n, d)} ?`,
+      ])
+    : pick([
+        `${p.nom} veut colorier ${fr(n, d)} ${du(t)}. ${maj(p.il)} a déjà colorié les parts du dessin. Combien de parts doit-${p.il} encore colorier ?`,
+        `Il faut ${fr(n, d)} ${du(t)} en couleur. Le dessin montre ce qui est déjà fait. Combien de parts reste-t-il à colorier ?`,
+      ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [String(n), String(d), String(d - n), String(reste + 1), String(Math.max(1, reste - 1))]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: dessin(deja, d, t.forme),
+    explanation: exp(
+      `${fr(n, d)}, c'est ${n} parts sur ${d}.`,
+      "On compte les parts déjà coloriées et on cherche ce qui manque.",
+      `${n} − ${deja} = ${reste}.`,
+      `Il faut colorier ${reste} part${reste > 1 ? "s" : ""}.`,
+    ),
+  };
+}
+
+function partsInegales(): Q {
+  const d = pick([3, 4, 5, 6]);
+  const n = rint(1, d - 1);
+  const t = tout();
+  const p = quelquun();
+  const correct = "non, les parts ne sont pas égales";
+  const text = pick([
+    `${p.nom} veut colorier ${fr(n, d)} ${du(t)}. ${maj(p.il)} coupe en ${d} parts de tailles différentes et en colorie ${n}. A-t-${p.il} représenté ${fr(n, d)} ?`,
+    `${p.nom} a coupé ${un(t)} en ${d} morceaux, un gros et des petits. Chaque morceau est-il ${nom(1, d)} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, ["oui, il y a bien " + d + " parts", "oui, si on compte bien les morceaux", "on ne peut pas savoir"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Une fraction se fait avec des parts ÉGALES.",
+      "On vérifie que toutes les parts ont la même taille.",
+      `Des parts inégales ne sont pas des ${DEN_NOM[d][1]}.`,
+      "Non : les parts ne sont pas égales.",
+    ),
+  };
+}
+
+function genRepresenter(d: Etoile): Q {
+  if (d <= 2) return tirer([commentRepresenter, () => quelleFractionColoriee(2), partsAColorier]);
+  if (d === 3) return tirer([partsAColorier, commentRepresenter, () => quelleFractionColoriee(3)]);
+  return tirer([partsInegales, partsAColorier, () => quelleFractionColoriee(3, true)]);
+}
+
+// ============================================================
+// ce2_fraction_egalite — Fractions égales
+// ============================================================
+
+const PAIRES = [
+  [1, 2, 2, 4], [1, 2, 3, 6], [1, 2, 4, 8], [1, 2, 5, 10], [1, 2, 6, 12],
+  [1, 3, 2, 6], [2, 3, 4, 6], [1, 3, 4, 12], [1, 4, 2, 8], [3, 4, 6, 8],
+  [1, 4, 3, 12], [1, 5, 2, 10], [2, 5, 4, 10], [3, 5, 6, 10], [1, 6, 2, 12],
+  [5, 6, 10, 12], [2, 4, 4, 8], [3, 6, 6, 12], [3, 4, 9, 12], [2, 3, 8, 12],
 ] as const;
 
-function fractionCanvas(data: Omit<FractionCanvasData, "kind">): FractionCanvasData {
-  return { kind: "fraction", ...data };
+function memeSurface(): Q {
+  const [a, b, c, e] = pick(PAIRES);
+  const correct = fr(c, e);
+  const p = quelquun();
+  const text = avec(pick([
+    `Les bandes A et B sont pareilles, et leurs parties coloriées aussi. La bande A montre ${fr(a, b)}. Quelle fraction montre la bande B ?`,
+    `${p.nom} colorie ${fr(a, b)} de la bande A. Sur la bande B, ${p.il} colorie autant. Quelle fraction de la bande B est coloriée ?`,
+    `Regarde les deux bandes : elles ont la même partie coloriée. A = ${fr(a, b)}. Et B ?`,
+  ]));
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fr(c, b), fr(a, e), fr(e, c), fr(c + 1, e), fr(c - 1 || 1, e)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: deuxBandes([a, b], [c, e]),
+    explanation: exp(
+      "Deux fractions sont égales quand elles couvrent la même partie du même tout.",
+      "On compte les parts de la bande B : combien en tout, combien de coloriées.",
+      `B est partagée en ${e}, ${c} parts sont coloriées : ${fr(a, b)} = ${correct}.`,
+      `La bande B montre ${correct}.`,
+    ),
+  };
 }
 
-function numberLine(data: Omit<NumberLineCanvasData, "kind">): NumberLineCanvasData {
-  return { kind: "number_line", ...data };
+function laquelleEgale(): Q {
+  const [a, b, c, e] = pick(PAIRES);
+  const correct = fr(c, e);
+  const p = quelquun();
+  const t = tout();
+  const text = avec(pick([
+    `Quelle fraction est égale à ${fr(a, b)} ?`,
+    `${p.nom} a ${fr(a, b)} ${du(t)}. Quelle fraction est la même quantité ?`,
+    `Pic dit : « ${fr(a, b)}, c'est pareil que… ». Que doit-il dire ?`,
+    `Laquelle de ces fractions vaut ${nom(a, b)} ?`,
+  ]));
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fr(a + 1, e), fr(c, b + e > 12 ? e - 1 : b + e), fr(b, a), fr(a, e), fr(c + 1, e)].filter((x) => x !== correct && !x.startsWith("0"))),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Deux fractions sont égales quand elles représentent la même part du tout.",
+      `On partage chaque part en ${e / b} : on a ${e / b} fois plus de parts, ${e / b} fois plus petites.`,
+      `${fr(a, b)} = ${fr(a * (e / b), b * (e / b))}.`,
+      `${fr(a, b)} = ${correct}.`,
+    ),
+  };
 }
 
-function exp(definition: string, methode: string, calcul: string, conclusion: string) {
-  return `Définition : ${definition}
-
-Méthode : ${methode}
-
-Calcul : ${calcul}
-
-Conclusion : ${conclusion}`;
+function trouEgalite(): Q {
+  const [a, b, c, e] = pick(PAIRES);
+  const enHaut = Math.random() < 0.7;
+  const correct = String(enHaut ? c : e);
+  const p = quelquun();
+  const ecrit = enHaut ? `${fr(a, b)} = …/${e}` : `${fr(a, b)} = ${c}/…`;
+  const text = avec(pick([
+    `Complète : ${ecrit}`,
+    `Quel nombre manque ? ${ecrit}`,
+    `${p.nom} a effacé un nombre : ${ecrit}. Lequel ?`,
+  ]));
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, enHaut ? [String(a), String(c + 1), String(e - c), String(b), String(c * 2)] : [String(b), String(e + 1), String(e * 2), String(c + b)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: Math.random() < 0.5 ? deuxBandes([a, b], [c, e]) : undefined,
+    explanation: exp(
+      "Pour garder une fraction égale, on multiplie le haut ET le bas par le même nombre.",
+      `De ${b} à ${e}, on multiplie par ${e / b}.`,
+      `${a} × ${e / b} = ${c} et ${b} × ${e / b} = ${e}.`,
+      `${fr(a, b)} = ${fr(c, e)} : il manque ${correct}.`,
+    ),
+  };
 }
 
-export const fractionBank: TutorBankItemV4[] = [
-  /* =========================================================
-     CE2_FRACTION_UNITE — comprendre l'unité
-     Ce qui se joue ici : le tout doit être partagé en parts
-     ÉGALES. C'est la condition que les élèves oublient.
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_unite_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_unite",
-    difficulty: 1,
-    theme: "neutral",
-    text: "On partage un gâteau en 4 parts. Pour parler de quarts, comment doivent être les parts ?",
+function piegeGrandNombre(): Q {
+  const [x, y] = shuffle([2, 3, 4, 5, 6, 8, 10]).slice(0, 2).sort((m, n) => m - n);
+  const p = quelquun();
+  const correct = "non";
+  return {
+    text: pick([
+      `${p.nom} dit : « ${fr(1, y)} est plus grand que ${fr(1, x)}, parce que ${y} est plus grand que ${x} ». A-t-${p.il} raison ?`,
+      `Est-ce que ${fr(1, y)} est plus grand que ${fr(1, x)} parce que ${y} > ${x} ?`,
+    ]),
     format: "qcm",
-    choices: ["toutes égales", "de tailles différentes", "au moins deux pareilles", "peu importe"],
-    expected: ["toutes égales"],
+    choices: shuffle(["oui", "non", "on ne peut pas savoir"]),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "Sinon, une « part » ne voudrait rien dire : la tienne serait plus grosse que la mienne.",
+    canvas: deuxBandes([1, x], [1, y]),
     explanation: exp(
-      "Une fraction partage un tout en parts toutes égales.",
-      "On vérifie d'abord que le partage est équitable, avant de compter les parts.",
-      "Si les parts ne sont pas égales, on ne peut pas dire « un quart » : chaque morceau vaudrait autre chose.",
-      "Les parts doivent être toutes égales.",
+      "Plus on partage en beaucoup de parts, plus chaque part est petite.",
+      "On compare la taille des parts, pas les nombres du bas.",
+      `Une part sur ${y} est plus petite qu'une part sur ${x} : ${fr(1, y)} < ${fr(1, x)}.`,
+      "Non, c'est le contraire.",
     ),
-    tags: ["ce2", "fraction", "unite", "definition", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_unite_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_unite",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Ce disque est partagé en 3 morceaux, mais ils ne sont pas de la même taille. Peut-on dire qu'un morceau est un tiers ?",
-    format: "qcm",
-    choices: ["non", "oui", "oui, si on prend le plus grand", "oui, si on prend le plus petit"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Compte les morceaux, puis regarde s'ils se ressemblent.",
-    explanation: exp(
-      "Une fraction partage un tout en parts toutes égales.",
-      "On compte les parts, mais on vérifie surtout qu'elles sont de même taille.",
-      "Il y a bien 3 morceaux, mais ils sont inégaux. Aucun ne vaut un tiers : trois morceaux inégaux ne font pas trois tiers.",
-      "Non, on ne peut pas parler de tiers ici.",
-    ),
-    tags: ["ce2", "fraction", "unite", "piege", "qcm", "canvas"],
-    canvas: fractionCanvas({
-      model: "circle",
-      fraction: { numerator: 1, denominator: 3 },
-      display: { showFraction: false, showParts: true, unequalParts: true },
-    }),
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_unite_fixed_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_unite",
-    difficulty: 3,
-    theme: "reunion",
-    text: "Maman a coupé un gâteau patate en 8 parts égales. Combien de parts faut-il prendre pour avoir le gâteau entier ?",
-    format: "short",
-    expected: ["8"],
-    comparator: "number_equal",
-    hint: "Le gâteau entier, c'est toutes les parts.",
-    explanation: exp(
-      "Le tout, c'est l'ensemble des parts réunies.",
-      "On regarde en combien de parts le tout a été partagé.",
-      "Le gâteau est partagé en 8 parts. Pour l'avoir entier, il faut les 8 : huit huitièmes font un gâteau.",
-      "Il faut 8 parts.",
-    ),
-    tags: ["ce2", "fraction", "unite", "reunion", "remarquable"],
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_unite_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_unite",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le nombre du bas dit en combien de parts on a partagé.",
-    tags: ["ce2", "fraction", "unite", "template"],
-    generate: () => {
-      const d = randomChoice([2, 3, 4, 5, 6, 8, 10]);
-      const objet = randomChoice(["une tablette de chocolat", "une pizza", "un ruban", "une tarte"]);
-      return {
-        text: `On partage ${objet} en parts égales pour obtenir des ${nomFraction(1, d).split(" ")[1]}. En combien de parts faut-il la partager ?`,
-        format: "short",
-        expected: [String(d)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le nombre du bas d'une fraction dit en combien de parts égales le tout est partagé.",
-          "On écoute le nom de la part : des quarts viennent d'un partage en 4.",
-          `Pour obtenir des ${nomFraction(1, d).split(" ")[1]}, on partage en ${d} parts égales.`,
-          `Il faut ${d} parts.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_unite_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_unite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Regarde bien si toutes les parts se ressemblent.",
-    tags: ["ce2", "fraction", "unite", "piege", "template", "canvas"],
-    generate: () => {
-      const d = randomChoice([3, 4, 5, 6]);
-      const egales = randomChoice([true, false]);
-      return {
-        text: egales
-          ? `Ce disque est partagé en ${d} parts. Peut-on parler de ${nomFraction(1, d).split(" ")[1]} ?`
-          : `Ce disque est partagé en ${d} morceaux de tailles différentes. Peut-on parler de ${nomFraction(1, d).split(" ")[1]} ?`,
-        format: "qcm",
-        choices: makeChoices(egales ? "oui" : "non", ["oui", "non", "seulement pour le plus grand", "on ne peut pas savoir"]),
-        expected: [egales ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une fraction partage un tout en parts toutes égales.",
-          "On compte les parts, puis on vérifie qu'elles ont la même taille.",
-          egales
-            ? `Les ${d} parts sont égales : chacune vaut bien un ${nomFraction(1, d).split(" ")[1].replace(/s$/, "")}.`
-            : `Il y a bien ${d} morceaux, mais ils sont inégaux : aucun ne vaut un ${nomFraction(1, d).split(" ")[1].replace(/s$/, "")}.`,
-          egales ? "Oui." : "Non.",
-        ),
-        canvas: fractionCanvas({
-          model: "circle",
-          fraction: { numerator: 1, denominator: d },
-          display: { showFraction: false, showParts: true, unequalParts: !egales },
-        }),
-      };
-    },
-  },
+  };
+}
 
-  /* =========================================================
-     CE2_FRACTION_LIRE — lire et nommer
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_lire_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_lire",
-    difficulty: 1,
-    theme: "neutral",
-    text: "Dans la fraction 3/4, que veut dire le nombre du bas, le 4 ?",
+function combienDansUn(): Q {
+  const [a, b, c, e] = pick(PAIRES.filter((q) => q[0] === 1));
+  const t = tout();
+  const correct = String(c);
+  const p = quelquun();
+  const text = pick([
+    `Combien de ${DEN_NOM[e][1]} faut-il pour faire ${nom(1, b)} ?`,
+    `${p.nom} a ${nom(1, b)} ${du(t)}. Combien de parts d'${DEN_NOM[e][0].match(/^[aeiou]/) ? "" : ""}un ${DEN_NOM[e][0]} cela fait-il ?`.replace("d'un", "d'un"),
+    `Dans ${nom(1, b)}, combien y a-t-il de ${DEN_NOM[e][1]} ?`,
+  ]);
+  return {
+    text,
     format: "qcm",
-    choices: [
-      "le tout est partagé en 4 parts égales",
-      "on prend 4 parts",
-      "il reste 4 parts",
-      "la part vaut 4",
-    ],
-    expected: ["le tout est partagé en 4 parts égales"],
+    choices: choix(correct, [String(e), String(c + 1), String(b), String(e - b)]),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "Le nombre du bas se lit en dernier : « quarts ».",
+    canvas: deuxBandes([a, b], [c, e]),
     explanation: exp(
-      "Dans une fraction, le nombre du bas dit en combien de parts on partage, celui du haut combien on en prend.",
-      "On lit d'abord le bas pour savoir de quelles parts on parle.",
-      "Le 4 dit que le tout est partagé en 4 parts égales : ce sont des quarts. Le 3 dit qu'on en prend 3.",
-      "Le nombre du bas donne le nombre de parts du partage.",
+      "Une part peut être découpée en parts plus petites, toutes égales.",
+      `On découpe chaque ${DEN_NOM[b][0]} en ${e / b}.`,
+      `${fr(1, b)} = ${fr(c, e)}.`,
+      `Il faut ${correct} ${DEN_NOM[e][1]}.`,
     ),
-    tags: ["ce2", "fraction", "lire", "definition", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_lire_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_lire",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Comment se lit la fraction 1/2 ?",
-    format: "qcm",
-    choices: ["un demi", "un deuxième", "deux uns", "un sur deux parts"],
-    expected: ["un demi"],
-    comparator: "mcq_exact",
-    hint: "C'est la moitié, et elle a un nom bien à elle.",
-    explanation: exp(
-      "Certaines fractions ont un nom particulier, qui ne suit pas la règle des « -ièmes ».",
-      "On retient les trois exceptions : 1/2 se dit un demi, 1/3 un tiers, 1/4 un quart.",
-      "1/2 se lit « un demi », jamais « un deuxième ». À partir de 5, on dit « un cinquième », « un dixième ».",
-      "1/2 se lit un demi.",
-    ),
-    tags: ["ce2", "fraction", "lire", "remarquable", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_lire_fixed_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_lire",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Quelle fraction s'écrit avec le même nombre en haut et en bas, et vaut le tout entier ?",
-    format: "qcm",
-    choices: ["4/4", "1/4", "4/1", "0/4"],
-    expected: ["4/4"],
-    comparator: "mcq_exact",
-    hint: "Prendre toutes les parts, c'est prendre le gâteau entier.",
-    explanation: exp(
-      "Quand on prend autant de parts que le partage en a fait, on a le tout.",
-      "On compare le nombre du haut à celui du bas.",
-      "4/4 veut dire : le tout est partagé en 4 parts, et on prend les 4. On a donc le tout, c'est-à-dire 1.",
-      "4/4 vaut 1.",
-    ),
-    tags: ["ce2", "fraction", "lire", "remarquable", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_lire_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_lire",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le nombre du haut se lit en premier.",
-    tags: ["ce2", "fraction", "lire", "template"],
-    generate: () => {
-      const d = randomChoice([2, 3, 4, 5, 10]);
-      const n = randomInt(1, d - 1);
-      const bonne = nomFraction(n, d);
-      // ⚠️ Quand le numérateur vaut la moitié du dénominateur — 1/2, 2/4 —
-      // le piège `nomFraction(d - n, d)` retombe sur la bonne réponse et
-      // disparait au tri : le QCM se présentait alors à trois lignes sur
-      // 30 % des tirages. Un second dénominateur de secours ferme le trou.
-      const restants = [2, 3, 4, 5, 10].filter((x) => x !== d);
-      const autreD = randomChoice(restants);
-      const autreD2 = randomChoice(restants.filter((x) => x !== autreD));
-      return {
-        text: `Comment se lit la fraction ${n}/${d} ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          nomFraction(n, autreD),
-          nomFraction(n, autreD2),
-          nomFraction(d - n, d),
-          `${n} sur ${d} parts`,
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On lit d'abord le nombre du haut, puis le nom que donne celui du bas.",
-          "Le bas dit de quelles parts il s'agit, le haut combien on en prend.",
-          `Le ${d} du bas donne des ${nomFraction(1, d).split(" ")[1]}, et le ${n} du haut dit qu'on en prend ${n}.`,
-          `${n}/${d} se lit « ${bonne} ».`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_lire_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_lire",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "En combien de parts le tout est-il partagé ? C'est le nombre du bas.",
-    tags: ["ce2", "fraction", "lire", "template", "canvas"],
-    generate: () => {
-      const d = randomChoice([2, 3, 4, 5, 6, 8]);
-      const n = randomInt(1, d - 1);
-      return {
-        text: "Quelle fraction du disque est coloriée ?",
-        format: "qcm",
-        choices: makeChoices(`${n}/${d}`, [
-          `${d}/${n}`,
-          `${d - n}/${d}`,
-          `${n}/${d + 1}`,
-          `${n + 1}/${d}`,
-        ]),
-        expected: [`${n}/${d}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Le nombre du bas compte toutes les parts, celui du haut les parts coloriées.",
-          "On compte d'abord le nombre total de parts, puis celles qui sont coloriées.",
-          `Le disque est partagé en ${d} parts égales et ${n} sont coloriées : c'est ${n}/${d}, soit ${nomFraction(n, d)}.`,
-          `La fraction coloriée est ${n}/${d}.`,
-        ),
-        canvas: fractionCanvas({
-          model: "circle",
-          fraction: { numerator: n, denominator: d },
-          display: { showFraction: false, showParts: true },
-        }),
-      };
-    },
-  },
+  };
+}
 
-  /* =========================================================
-     CE2_FRACTION_REPRESENTER — représenter une fraction
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_representer_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_representer",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Pour représenter 2/5 d'une bande, que fait-on ?",
-    format: "qcm",
-    choices: [
-      "on partage la bande en 5 et on colorie 2 parts",
-      "on partage la bande en 2 et on colorie 5 parts",
-      "on partage la bande en 7 et on colorie 2 parts",
-      "on colorie 2 bandes sur 5 bandes",
-    ],
-    expected: ["on partage la bande en 5 et on colorie 2 parts"],
-    comparator: "mcq_exact",
-    hint: "On partage toujours d'abord, on colorie ensuite.",
-    explanation: exp(
-      "Représenter une fraction, c'est partager le tout puis colorier.",
-      "Le nombre du bas donne le partage, celui du haut le nombre de parts à colorier.",
-      "Pour 2/5 : on partage la bande en 5 parts égales, puis on en colorie 2.",
-      "On partage en 5, on colorie 2.",
-    ),
-    tags: ["ce2", "fraction", "representer", "methode", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_representer_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_representer",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Un élève veut colorier 3/4 d'une bande. Il la partage en 4 et colorie 3 parts... mais ses parts n'ont pas la même taille. A-t-il bien représenté 3/4 ?",
-    format: "qcm",
-    choices: ["non", "oui", "oui, s'il a colorié les 3 plus grandes", "oui, il y a bien 4 parts"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Le nombre de parts est bon. Et leur taille ?",
-    explanation: exp(
-      "Représenter une fraction demande des parts égales, pas seulement le bon nombre de parts.",
-      "On vérifie les deux : combien de parts, et sont-elles de même taille ?",
-      "Il a bien fait 4 parts et en a colorié 3, mais des parts inégales ne sont pas des quarts. Sa figure ne montre pas 3/4.",
-      "Non, le partage doit être en parts égales.",
-    ),
-    tags: ["ce2", "fraction", "representer", "piege", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_representer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_representer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compte les cases coloriées, puis toutes les cases.",
-    tags: ["ce2", "fraction", "representer", "template", "canvas"],
-    generate: () => {
-      const cols = randomChoice([4, 5, 6, 8, 10]);
-      const shaded = randomInt(1, cols - 1);
-      return {
-        text: "Quelle fraction de la bande est coloriée ?",
-        format: "qcm",
-        choices: makeChoices(`${shaded}/${cols}`, [
-          `${cols}/${shaded}`,
-          `${cols - shaded}/${cols}`,
-          `${shaded}/${cols - shaded}`,
-          `${shaded + 1}/${cols}`,
-        ]),
-        expected: [`${shaded}/${cols}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Le nombre du bas compte toutes les parts, celui du haut les parts coloriées.",
-          "On compte les cases coloriées, puis le nombre total de cases.",
-          `La bande a ${cols} cases égales et ${shaded} sont coloriées : la fraction est ${shaded}/${cols}.`,
-          `${shaded}/${cols} de la bande est coloriée.`,
-        ),
-        canvas: fractionCanvas({
-          model: "grid",
-          grid: { rows: 1, cols, shaded },
-          display: { showFraction: false, showParts: true },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_representer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_representer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le nombre du bas dit en combien de parts partager.",
-    tags: ["ce2", "fraction", "representer", "template"],
-    generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10]);
-      const n = randomInt(1, d - 1);
-      return {
-        text: `Pour colorier ${n}/${d} d'une bande, en combien de parts égales faut-il d'abord la partager ?`,
-        format: "short",
-        expected: [String(d)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le nombre du bas donne le partage, celui du haut le nombre de parts coloriées.",
-          "On partage d'abord, on colorie ensuite.",
-          `Pour ${n}/${d}, on partage en ${d} parts égales, puis on en colorie ${n}.`,
-          `Il faut ${d} parts.`,
-        ),
-      };
-    },
-  },
+function genEgalite(d: Etoile): Q {
+  if (d <= 2) return tirer([memeSurface, memeSurface, laquelleEgale]);
+  if (d === 3) return tirer([memeSurface, laquelleEgale, trouEgalite, combienDansUn]);
+  return tirer([trouEgalite, piegeGrandNombre, combienDansUn, laquelleEgale]);
+}
 
-  /* =========================================================
-     CE2_FRACTION_EGALITE — reconnaître deux fractions égales
-     Au CE2 on ne simplifie pas : on constate sur le dessin
-     que deux écritures recouvrent la même surface.
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_egalite_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_egalite",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Sur ces deux bandes identiques, une part de la première est coloriée et deux parts de la seconde. Les surfaces coloriées sont les mêmes. Quelle fraction est égale à 1/2 ?",
+// ============================================================
+// ce2_fraction_add_sous — Additionner et soustraire
+// ============================================================
+
+function additionNue(d: Etoile): Q {
+  const den = pick(d <= 2 ? [4, 5, 6, 8, 10] : DENS);
+  const a = rint(1, den - 2);
+  const b = rint(1, den - a);
+  const moins = d >= 3 && Math.random() < 0.5;
+  const [x, y] = moins ? [a + b, b] : [a, b];
+  const r = moins ? a : a + b;
+  const correct = fr(r, den);
+  const p = quelquun();
+  const op = `${fr(x, den)} ${moins ? "−" : "+"} ${fr(y, den)}`;
+  const text = avec(pick([`Combien font ${op} ?`, `Calcule : ${op} = …`, `${p.nom} calcule ${op}. Que trouve-t-${p.il} ?`, `Quel est le résultat de ${op} ?`]));
+  return {
+    text,
     format: "qcm",
-    choices: ["2/4", "2/2", "1/4", "4/2"],
-    expected: ["2/4"],
+    choices: choix(correct, [moins ? fr(r, 0 || den - den) : fr(x + y, den * 2), fr(r + 1, den), fr(Math.max(1, r - 1), den), moins ? fr(x + y, den) : fr(x + y, den + den), fr(r, den * 2)].filter((s) => !/\/0$/.test(s))),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "Deux quarts couvrent autant qu'un demi.",
     explanation: exp(
-      "Deux fractions sont égales quand elles couvrent la même part du tout.",
-      "On superpose les deux bandes et on compare les surfaces coloriées.",
-      "Couper chaque moitié en deux donne des quarts : la moitié en contient 2. Donc 1/2 = 2/4.",
-      "2/4 est égale à 1/2.",
+      "Quand le partage est le même, on ajoute (ou on enlève) les parts, et le nombre du bas ne change pas.",
+      "On calcule avec les nombres du haut et on garde le nombre du bas.",
+      `${x} ${moins ? "−" : "+"} ${y} = ${r}, et on garde ${den}.`,
+      `${op} = ${correct}.`,
     ),
-    tags: ["ce2", "fraction", "egalite", "remarquable", "qcm", "canvas"],
-    canvas: fractionCanvas({
-      model: "compare",
-      fractions: [
-        { numerator: 1, denominator: 2, label: "1/2" },
-        { numerator: 2, denominator: 4, label: "2/4" },
-      ],
-      display: { showFraction: true, showParts: true },
-    }),
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_egalite_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_egalite",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Un élève dit : « 1/3 est plus grand que 1/2, parce que 3 est plus grand que 2 ». A-t-il raison ?",
+  };
+}
+
+function additionHistoire(d: Etoile): Q {
+  const t = tout();
+  const den = pick(d <= 2 ? [4, 5, 6, 8] : DENS);
+  const a = rint(1, den - 2);
+  const b = rint(1, den - a);
+  const [p, q] = deuxPersonnes();
+  const { verbe, part } = action(t);
+  const r = a + b;
+  const correct = r === den ? `${fr(r, den)}, c'est-à-dire tout${t.f ? "e" : ""} ${le(t)}` : fr(r, den);
+  const text = pick([
+    `${maj(un(t))} est partagé${t.f ? "e" : ""} en ${den} parts égales. ${p.nom} en a ${verbe} ${fr(a, den)} et ${q.nom} ${fr(b, den)}. Quelle part ${du(t)} ont-ils ${part} à eux deux ?`,
+    `${p.nom} a ${verbe} ${fr(a, den)} ${du(t)}, puis encore ${fr(b, den)}. Quelle part ${du(t)} a-t-${p.il} ${part} en tout ?`,
+    `Le dessin montre ce que ${p.nom} a ${verbe}. ${q.nom} en ${verbe === "colorié" ? "colorie" : "prend"} encore ${fr(b, den)}. Quelle part ${du(t)} est ${verbe}${t.f ? "e" : ""} maintenant ?`,
+  ]).replace(/ont-ils/, p.il === "elle" && q.il === "elle" ? "ont-elles" : "ont-ils");
+  return {
+    text,
     format: "qcm",
-    choices: ["non", "oui", "oui, car il y a plus de parts", "on ne peut pas comparer"],
-    expected: ["non"],
+    choices: choix(correct, [fr(r, den * 2), fr(r + 1, den), fr(Math.max(1, r - 1), den), fr(a * b, den)].filter((x) => x !== fr(r, den))),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "Préfères-tu partager un gâteau entre 2 personnes ou entre 3 ?",
+    canvas: dessin(a, den, t.forme),
     explanation: exp(
-      "Plus on partage un tout en parts nombreuses, plus chaque part est petite.",
-      "On compare la taille des parts, pas le nombre du bas.",
-      "Partagé entre 3, le gâteau donne des parts plus petites que partagé entre 2. Donc 1/3 est PLUS PETIT que 1/2.",
-      "Non, c'est l'inverse.",
+      "Les parts ont toutes la même taille : on peut les compter ensemble.",
+      "On ajoute les parts, et le nombre du bas (le partage) ne change pas.",
+      `${fr(a, den)} + ${fr(b, den)} = ${fr(r, den)}.`,
+      `En tout : ${correct}.`,
     ),
-    tags: ["ce2", "fraction", "egalite", "piege", "qcm", "canvas"],
-    canvas: fractionCanvas({
-      model: "compare",
-      fractions: [
-        { numerator: 1, denominator: 2, label: "1/2" },
-        { numerator: 1, denominator: 3, label: "1/3" },
-      ],
-      display: { showFraction: true, showParts: true },
-    }),
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_egalite_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_egalite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Coupe chaque part en deux : combien en obtiens-tu ?",
-    tags: ["ce2", "fraction", "egalite", "template", "canvas"],
-    generate: () => {
-      const base = randomChoice([
-        { n: 1, d: 2, n2: 2, d2: 4 },
-        { n: 1, d: 2, n2: 5, d2: 10 },
-        { n: 1, d: 3, n2: 2, d2: 6 },
-        { n: 1, d: 4, n2: 2, d2: 8 },
-        { n: 2, d: 3, n2: 4, d2: 6 },
-        { n: 3, d: 4, n2: 6, d2: 8 },
+  };
+}
+
+function ceQuiReste(d: Etoile): Q {
+  const t = tout();
+  const den = pick(d <= 3 ? [4, 5, 6, 8, 10] : DENS);
+  const deuxParts = d >= 4 && Math.random() < 0.5;
+  const a = rint(1, den - (deuxParts ? 3 : 2));
+  const b = deuxParts ? rint(1, den - a - 1) : 0;
+  const reste = den - a - b;
+  const [p, q] = deuxPersonnes();
+  const { verbe, part } = action(t);
+  const correct = fr(reste, den);
+  const text = deuxParts
+    ? `${maj(un(t))} est partagé${t.f ? "e" : ""} en ${den} parts égales. ${p.nom} en a ${verbe} ${fr(a, den)} et ${q.nom} ${fr(b, den)}. Quelle part ${du(t)} reste-t-il ?`
+    : pick([
+        `${maj(un(t))} est coupé${t.f ? "e" : ""} en ${den} parts égales. On en a ${verbe} ${fr(a, den)}. Quelle part reste-t-il ?`,
+        `${p.nom} a ${verbe} ${fr(a, den)} ${du(t)}. Quelle fraction ${du(t)} reste-t-il ?`,
+        `Le dessin montre la part ${part} ${du(t)}. Quelle fraction reste-t-il ?`,
       ]);
-      return {
-        text: `Sur ces deux bandes identiques, quelle fraction couvre exactement la même surface que ${base.n}/${base.d} ?`,
-        format: "qcm",
-        choices: makeChoices(`${base.n2}/${base.d2}`, [
-          `${base.d2}/${base.n2}`,
-          `${base.n}/${base.d2}`,
-          `${base.n2}/${base.d}`,
-          `${base.n2 + 1}/${base.d2}`,
-        ]),
-        expected: [`${base.n2}/${base.d2}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Deux fractions sont égales quand elles couvrent la même part du tout.",
-          "On regarde les deux bandes superposées et on compare les surfaces coloriées.",
-          `Les deux surfaces coloriées se recouvrent exactement : ${base.n}/${base.d} = ${base.n2}/${base.d2}.`,
-          `C'est ${base.n2}/${base.d2}.`,
-        ),
-        canvas: fractionCanvas({
-          model: "compare",
-          fractions: [
-            { numerator: base.n, denominator: base.d, label: `${base.n}/${base.d}` },
-            { numerator: base.n2, denominator: base.d2, label: `${base.n2}/${base.d2}` },
-          ],
-          display: { showFraction: true, showParts: true },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_egalite_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_egalite",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Même nombre du haut : c'est le partage qui décide, et il décide à l'envers.",
-    tags: ["ce2", "fraction", "egalite", "comparer", "template", "canvas"],
-    generate: () => {
-      const [petit, grand] = shuffle([2, 3, 4, 5, 6, 8, 10]).slice(0, 2).sort((a, b) => a - b);
-      return {
-        text: `Laquelle de ces deux fractions est la PLUS GRANDE : 1/${petit} ou 1/${grand} ?`,
-        format: "qcm",
-        choices: makeChoices(`1/${petit}`, [`1/${grand}`, "elles sont égales", "on ne peut pas savoir"]),
-        expected: [`1/${petit}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Plus on partage un tout en parts nombreuses, plus chaque part est petite.",
-          "Quand le nombre du haut est le même, on regarde celui du bas — et il décide à l'envers.",
-          `Partager en ${petit} donne des parts plus grosses que partager en ${grand}. Donc 1/${petit} est plus grande que 1/${grand}.`,
-          `1/${petit} est la plus grande.`,
-        ),
-        canvas: fractionCanvas({
-          model: "compare",
-          fractions: [
-            { numerator: 1, denominator: petit, label: `1/${petit}` },
-            { numerator: 1, denominator: grand, label: `1/${grand}` },
-          ],
-          display: { showFraction: true, showParts: true },
-        }),
-      };
-    },
-  },
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [fr(a + b, den), fr(reste, den * 2), fr(reste + 1, den), fr(Math.max(1, reste - 1), den), fr(den, reste)].filter((x) => x !== correct)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    ...(deuxParts ? {} : { canvas: dessin(a, den, t.forme) }),
+    explanation: exp(
+      `Le tout, c'est ${fr(den, den)}.`,
+      "On enlève au tout ce qui est parti.",
+      `${fr(den, den)} − ${deuxParts ? `${fr(a, den)} − ${fr(b, den)}` : fr(a, den)} = ${correct}.`,
+      `Il reste ${correct}.`,
+    ),
+  };
+}
 
-  /* =========================================================
-     CE2_FRACTION_ADD_SOUS — additionner et soustraire
-     Résultat au plus égal à 1. Deux cas, dans cet ordre :
-     le dénominateur COMMUN, puis le dénominateur de l'une
-     MULTIPLE de celui de l'autre (1/2 + 1/4).
-     Ce qui se joue ici : le nombre du bas ne bouge pas. Il dit
-     en combien de parts on a coupé, et personne n'a recoupé
-     entre les deux morceaux. On ajoute des parts, pas des
-     partages : 1/4 + 2/4 = 3/4, jamais 3/8.
-     Et quand les partages diffèrent, on ne les additionne pas
-     davantage : on recoupe le plus grand pour retomber sur le
-     plus fin, et là seulement on compte.
-  ========================================================= */
-  // ⚠️ Les deux premiers items de cette micro étaient figés — une tarte en
-  // cinquièmes, un 2/7 + 3/7. Rien n'y tenait au nombre : ce sont des calculs,
-  // pas des cas remarquables. Devenus les gabarits tpl_7 et tpl_8, en bas de
-  // section. Les quatre `fixed` qui restent gagnent leur place : 5/5 qui vaut
-  // le tout, la marmite, 1/2 + 1/4, et l'exemple littéral du programme.
-  {
-    kind: "fixed",
-    id: "ce2_fraction_add_sous_fixed_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Un gâteau est coupé en 5 parts égales. Kevin en prend 2/5 et Maya 3/5. Quelle part du gâteau ont-ils prise à eux deux ?",
+function quePourLeTout(): Q {
+  const den = pick(DENS);
+  const a = rint(1, den - 1);
+  const correct = fr(den - a, den);
+  const p = quelquun();
+  const t = tout();
+  const text = avec(pick([
+    `Quelle fraction faut-il ajouter à ${fr(a, den)} pour obtenir le tout ?`,
+    `${p.nom} a déjà ${fr(a, den)} ${du(t)}. Quelle fraction lui manque-t-il pour l'avoir en entier ?`,
+    `Complète : ${fr(a, den)} + … = ${fr(den, den)}`,
+  ]));
+  return {
+    text,
     format: "qcm",
-    choices: [
-      "5/5, c'est-à-dire le gâteau entier",
-      "5/10",
-      "6/5",
-      "1/5",
-    ],
-    expected: ["5/5, c'est-à-dire le gâteau entier"],
+    choices: choix(correct, [fr(a, den), fr(den - a, den * 2), fr(den - a + 1, den), fr(den, a), fr(Math.max(1, den - a - 1), den)].filter((x) => x !== correct)),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "Toutes les parts sont prises. Combien y en avait-il ?",
+    canvas: dessin(a, den, t.forme),
     explanation: exp(
-      "Quand le nombre du haut rejoint le nombre du bas, la fraction vaut le tout : 5/5 = 1.",
-      "On additionne les parts prises et on garde le partage.",
-      "2 parts + 3 parts = 5 parts, et le gâteau en comptait 5 : 2/5 + 3/5 = 5/5. Les deux ont pris tout le gâteau, il n'en reste rien.",
-      "Ils ont pris 5/5 du gâteau, c'est-à-dire le gâteau entier.",
+      `Le tout, c'est ${fr(den, den)}.`,
+      "On cherche combien de parts manquent pour arriver à toutes les parts.",
+      `${den} − ${a} = ${den - a}.`,
+      `Il faut ajouter ${correct}.`,
     ),
-    tags: ["ce2", "fraction", "addition", "unite", "piege", "qcm"],
-    canvas: fractionCanvas({
-      model: "compare",
-      fractions: [
-        { numerator: 2, denominator: 5, label: "2/5" },
-        { numerator: 3, denominator: 5, label: "3/5" },
-      ],
-      display: { showFraction: true, showParts: true },
-    }),
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_add_sous_fixed_4",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Une marmite de cari est pleine aux 3/4. La famille en mange 2/4. Quelle part de la marmite reste-t-il ?",
-    format: "qcm",
-    choices: ["1/4", "1/8", "5/4", "1/0"],
-    expected: ["1/4"],
-    comparator: "mcq_exact",
-    hint: "3 parts moins 2 parts. Et la marmite, elle est toujours coupée en 4.",
-    explanation: exp(
-      "Pour soustraire deux fractions qui ont le même nombre du bas, on retire les parts et on garde le partage.",
-      "On enlève le nombre de parts mangées au nombre de parts qu'il y avait.",
-      "3 parts − 2 parts = 1 part, sur une marmite partagée en 4 : 3/4 − 2/4 = 1/4. Le nombre du bas ne se soustrait pas — 4 − 4 ferait 0, et une part sur zéro part ne veut rien dire.",
-      "Il reste 1/4 de la marmite.",
-    ),
-    tags: ["ce2", "fraction", "soustraction", "piege", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_add_sous_fixed_5",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Combien font 1/2 + 1/4 ?",
-    format: "qcm",
-    choices: ["3/4", "2/6", "2/4", "1/6"],
-    expected: ["3/4"],
-    comparator: "mcq_exact",
-    hint: "Les deux partages ne sont pas les mêmes. Coupe la moitié en deux : combien de quarts ça fait ?",
-    explanation: exp(
-      "Pour additionner deux fractions dont les partages diffèrent, on ramène d'abord les deux au même partage.",
-      "Ici, 4 est le double de 2 : chaque demi se recoupe en 2 quarts. On récrit donc 1/2 en 2/4.",
-      "1/2 = 2/4, donc 1/2 + 1/4 = 2/4 + 1/4 = 3/4. Le partage commun est le quart, et on en compte 3.",
-      "1/2 + 1/4 = 3/4.",
-    ),
-    tags: ["ce2", "fraction", "addition", "denominateur_multiple", "piege", "qcm"],
-    canvas: fractionCanvas({
-      model: "compare",
-      fractions: [
-        { numerator: 1, denominator: 2, label: "1/2" },
-        { numerator: 1, denominator: 4, label: "1/4" },
-      ],
-      display: { showFraction: true, showParts: true },
-    }),
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_add_sous_fixed_6",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Un gâteau est partagé en dixièmes. Marc en mange 1/10, Ange 3/10 et Saïd 2/10. Quelle fraction du gâteau reste-t-il ?",
-    format: "qcm",
-    choices: ["4/10", "6/10", "5/10", "4/30"],
-    expected: ["4/10"],
-    comparator: "mcq_exact",
-    hint: "Deux temps : ce qui est mangé, puis ce qui reste sur les 10 parts.",
-    explanation: exp(
-      "Quand plusieurs parts sont prises sur le même partage, on les additionne toutes, puis on retire le total du tout.",
-      "On additionne d'abord les trois parts mangées, ensuite on soustrait du gâteau entier.",
-      "1/10 + 3/10 + 2/10 = 6/10. Le gâteau entier vaut 10/10, donc il reste 10/10 − 6/10 = 4/10. Attention : 6/10 est ce qui a été mangé, pas ce qui reste.",
-      "Il reste 4/10 du gâteau.",
-    ),
-    tags: ["ce2", "fraction", "addition", "soustraction", "probleme", "piege", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_add_sous_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Ajoute les nombres du haut. Celui du bas reste tel quel.",
-    tags: ["ce2", "fraction", "addition", "template", "canvas"],
-    generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10, 12]);
-      const n1 = randomInt(1, d - 2);
-      const n2 = randomInt(1, d - 1 - n1);
-      const somme = n1 + n2;
-      return {
-        text: `Combien font ${n1}/${d} + ${n2}/${d} ?`,
-        format: "qcm",
-        choices: makeChoices(`${somme}/${d}`, [
-          `${somme}/${2 * d}`,
-          `${somme + 1}/${d}`,
-          `${somme - 1}/${d}`,
-          `${d}/${somme}`,
-        ]),
-        expected: [`${somme}/${d}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Deux fractions de même dénominateur s'additionnent en ajoutant les numérateurs.",
-          "On ajoute les nombres du haut, on recopie le nombre du bas.",
-          `${n1} + ${n2} = ${somme}, et le tout reste partagé en ${d} : ${n1}/${d} + ${n2}/${d} = ${somme}/${d}, soit ${nomFraction(somme, d)}.`,
-          `${n1}/${d} + ${n2}/${d} = ${somme}/${d}.`,
-        ),
-        canvas: fractionCanvas({
-          model: "compare",
-          fractions: [
-            { numerator: n1, denominator: d, label: `${n1}/${d}` },
-            { numerator: n2, denominator: d, label: `${n2}/${d}` },
-          ],
-          display: { showFraction: true, showParts: true },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_add_sous_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Retire les nombres du haut. Celui du bas ne bouge pas.",
-    tags: ["ce2", "fraction", "soustraction", "template"],
-    generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10, 12]);
-      const n1 = randomInt(2, d - 1);
-      // On garde n1 + n2 au plus égal à d : le piège « il a additionné » doit
-      // rester une fraction du répertoire du CE2, jamais plus grande que 1.
-      const n2 = randomInt(1, Math.min(n1 - 1, d - n1));
-      const reste = n1 - n2;
-      return {
-        text: `Combien font ${n1}/${d} − ${n2}/${d} ?`,
-        format: "qcm",
-        choices: makeChoices(`${reste}/${d}`, [
-          `${n1 + n2}/${d}`,
-          `${reste + 1}/${d}`,
-          `${d}/${reste}`,
-          `${reste}/${2 * d}`,
-          `${n2}/${d}`,
-        ]),
-        expected: [`${reste}/${d}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Deux fractions de même dénominateur se soustraient en retirant les numérateurs.",
-          "On enlève le nombre du haut de la deuxième au nombre du haut de la première, et on recopie le nombre du bas.",
-          `${n1} − ${n2} = ${reste}, et le tout reste partagé en ${d} : ${n1}/${d} − ${n2}/${d} = ${reste}/${d}.`,
-          `${n1}/${d} − ${n2}/${d} = ${reste}/${d}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_add_sous_tpl_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Il manque des parts pour arriver au tout. Combien ?",
-    tags: ["ce2", "fraction", "addition", "complement", "template"],
-    generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10, 12]);
-      const n = randomInt(1, d - 1);
-      const manque = d - n;
-      return {
-        text: `Quelle fraction faut-il ajouter à ${n}/${d} pour obtenir le tout ?`,
-        format: "qcm",
-        choices: makeChoices(`${manque}/${d}`, [
-          `${n}/${d}`,
-          `${manque}/${2 * d}`,
-          `${d}/${manque}`,
-          `${manque + 1}/${d}`,
-        ]),
-        expected: [`${manque}/${d}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          `Le tout, c'est ${d}/${d} : toutes les parts du partage.`,
-          "On cherche combien de parts il manque pour avoir toutes les parts.",
-          `Il y a ${n} parts sur ${d}, il en manque ${d} − ${n} = ${manque} : ${n}/${d} + ${manque}/${d} = ${d}/${d}, c'est-à-dire 1.`,
-          `Il faut ajouter ${manque}/${d}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_add_sous_tpl_4",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Fais d'abord le total des deux parts prises, puis regarde ce qui reste.",
-    tags: ["ce2", "fraction", "addition", "soustraction", "probleme", "template"],
-    generate: () => {
-      const d = randomChoice([4, 5, 6, 8, 10, 12]);
-      const n1 = randomInt(1, d - 3);
-      const n2 = randomInt(1, d - 2 - n1);
-      const pris = n1 + n2;
-      const reste = d - pris;
-      const objet = randomChoice([
-        { nom: "une bouteille de jus de goyavier", part: "de la bouteille" },
-        { nom: "un paquet de bonbons piments", part: "du paquet" },
-        { nom: "une plaque de chocolat", part: "de la plaque" },
-        { nom: "un gâteau patate", part: "du gâteau" },
-      ]);
-      return {
-        text: `On partage ${objet.nom} en ${d} parts égales. Maya en prend ${n1}/${d} et Ryan ${n2}/${d}. Quelle part ${objet.part} reste-t-il ?`,
-        format: "qcm",
-        choices: makeChoices(`${reste}/${d}`, [
-          `${pris}/${d}`,
-          `${reste}/${2 * d}`,
-          `${reste + 1}/${d}`,
-          `${d}/${reste}`,
-        ]),
-        expected: [`${reste}/${d}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On additionne d'abord les parts prises, puis on les retire du tout.",
-          "Deux étapes : le total pris, puis ce qui reste sur le partage complet.",
-          `${n1}/${d} + ${n2}/${d} = ${pris}/${d}. Le tout vaut ${d}/${d}, donc il reste ${d}/${d} − ${pris}/${d} = ${reste}/${d}.`,
-          `Il reste ${reste}/${d} ${objet.part}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_add_sous_tpl_5",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Les deux partages ne sont pas les mêmes. Recoupe le plus grand pour retomber sur le plus fin.",
-    tags: ["ce2", "fraction", "addition", "denominateur_multiple", "template"],
-    generate: () => {
-      // Le CE2 s'arrête là : le dénominateur de l'une est un MULTIPLE de
-      // l'autre. 1/3 + 1/4 n'est pas de ce niveau, la paire est donc choisie.
-      const { d, D } = randomChoice(PAIRES_MULTIPLES);
-      const k = D / d;
-      const n1 = randomInt(1, d - 1);
-      const n2 = randomInt(1, D - n1 * k);
-      const somme = n1 * k + n2;
-      return {
-        text: `Combien font ${n1}/${d} + ${n2}/${D} ?`,
-        format: "qcm",
-        choices: makeChoices(`${somme}/${D}`, [
-          `${n1 + n2}/${d + D}`,
-          `${n1 + n2}/${D}`,
-          `${n1 + n2}/${d}`,
-          `${somme + 1}/${D}`,
-        ]),
-        expected: [`${somme}/${D}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On ne peut additionner des parts que si elles ont la même taille : il faut d'abord un partage commun.",
-          `${D} est ${k} fois ${d} : chaque part de ${nomFraction(1, d)} se recoupe en ${k} parts de ${nomFraction(1, D)}. On récrit donc la première fraction.`,
-          `${n1}/${d} = ${n1 * k}/${D}, donc ${n1}/${d} + ${n2}/${D} = ${n1 * k}/${D} + ${n2}/${D} = ${somme}/${D}.`,
-          `${n1}/${d} + ${n2}/${D} = ${somme}/${D}.`,
-        ),
-        canvas: fractionCanvas({
-          model: "compare",
-          fractions: [
-            { numerator: n1, denominator: d, label: `${n1}/${d}` },
-            { numerator: n2, denominator: D, label: `${n2}/${D}` },
-          ],
-          display: { showFraction: true, showParts: true },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_add_sous_tpl_6",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Récris d'abord la première fraction avec le partage de la seconde, puis retire.",
-    tags: ["ce2", "fraction", "soustraction", "denominateur_multiple", "template"],
-    generate: () => {
-      const { d, D } = randomChoice(PAIRES_MULTIPLES);
-      const k = D / d;
-      const n1 = randomInt(1, d);
-      const n2 = randomInt(1, n1 * k - 1);
-      const reste = n1 * k - n2;
-      return {
-        text: `Combien font ${n1}/${d} − ${n2}/${D} ?`,
-        format: "qcm",
-        choices: makeChoices(`${reste}/${D}`, [
-          `${n1 * k + n2}/${D}`,
-          `${reste + 1}/${D}`,
-          `${reste}/${d}`,
-          `${D}/${reste}`,
-        ]),
-        expected: [`${reste}/${D}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On ne peut retirer des parts que si elles ont la même taille : il faut d'abord un partage commun.",
-          `${D} est ${k} fois ${d} : on recoupe chaque part de ${nomFraction(1, d)} en ${k}, ce qui donne des parts de ${nomFraction(1, D)}.`,
-          `${n1}/${d} = ${n1 * k}/${D}, donc ${n1}/${d} − ${n2}/${D} = ${n1 * k}/${D} − ${n2}/${D} = ${reste}/${D}.`,
-          `${n1}/${d} − ${n2}/${D} = ${reste}/${D}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_add_sous_tpl_7",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 2,
-    theme: "reunion",
-    hint: "Le gâteau reste coupé pareil. Compte seulement les parts mangées.",
-    tags: ["ce2", "fraction", "addition", "reunion", "template"],
-    generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10, 12]);
-      const n1 = randomInt(1, d - 2);
-      const n2 = randomInt(1, d - 1 - n1);
-      const somme = n1 + n2;
-      // Le participe voyage AVEC l'objet — « un gâteau partagé », « une tarte
-      // partagée ». Et la question se pose au passif : pas de pronom à
-      // accorder sur un prénom, ce qui ne se devine pas.
-      const scene = randomChoice([
-        { prenom: "Léa", objet: "Une tarte à la vanille", partage: "partagée", part: "de la tarte" },
-        { prenom: "Ryan", objet: "Un gâteau patate", partage: "partagé", part: "du gâteau" },
-        { prenom: "Maya", objet: "Une brioche de Saint-André", partage: "partagée", part: "de la brioche" },
-        { prenom: "Kevin", objet: "Un carré de chocolat", partage: "partagé", part: "du carré" },
-      ]);
-      return {
-        text: `${scene.objet} est ${scene.partage} en ${d} parts égales. ${scene.prenom} en mange ${n1}/${d}, puis encore ${n2}/${d}. Quelle part ${scene.part} a été mangée en tout ?`,
-        format: "qcm",
-        choices: makeChoices(`${somme}/${d}`, [
-          `${somme}/${2 * d}`,
-          `${somme}/${d * d}`,
-          `${somme + 1}/${d}`,
-          `${d}/${somme}`,
-        ]),
-        expected: [`${somme}/${d}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Pour additionner deux fractions qui ont le même nombre du bas, on ajoute les parts et on garde le partage.",
-          "On compte les parts prises. Le nombre du bas ne change pas : personne n'a recoupé entre les deux bouchées.",
-          `${n1} part${n1 > 1 ? "s" : ""} + ${n2} part${n2 > 1 ? "s" : ""} = ${somme} parts, sur un tout coupé en ${d} : ${n1}/${d} + ${n2}/${d} = ${somme}/${d}.`,
-          `${scene.prenom} en a mangé ${somme}/${d}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_add_sous_tpl_8",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le nombre du bas dit en combien de parts on a coupé. A-t-on recoupé entre les deux morceaux ?",
-    tags: ["ce2", "fraction", "addition", "denominateur", "piege", "template"],
-    generate: () => {
-      const d = randomChoice([4, 5, 6, 8, 10, 12]);
-      const n1 = randomInt(1, d - 2);
-      const n2 = randomInt(1, d - 1 - n1);
-      return {
-        text: `Pour calculer ${n1}/${d} + ${n2}/${d}, que fait-on des nombres du bas ?`,
-        format: "qcm",
-        choices: makeChoices(`on garde ${d} : le partage n'a pas changé`, [
-          `on les additionne, ça fait ${2 * d}`,
-          `on les multiplie, ça fait ${d * d}`,
-          "on prend le plus petit des deux",
-          "on les enlève, il n'en reste aucun",
-        ]),
-        expected: [`on garde ${d} : le partage n'a pas changé`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Le nombre du bas d'une fraction dit en combien de parts égales le tout est partagé.",
-          "On regarde ce qui a changé entre le début et la fin : le nombre de parts prises, pas le découpage.",
-          `Le tout reste coupé en ${d} : ${n1}/${d} + ${n2}/${d} = ${n1 + n2}/${d}. Additionner les deux ${d} donnerait un partage en ${2 * d}, c'est-à-dire des parts deux fois plus petites — alors que personne n'a recoupé.`,
-          `On garde ${d} au dénominateur.`,
-        ),
-      };
-    },
-  },
+  };
+}
 
-  /* =========================================================
-     CE2_FRACTION_BANDE_UNITE — la bande unité
-     Le report d'une unité de longueur : ce que le BO appelle
-     « exprimer une longueur avec la bande unité ».
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_bande_unite_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_bande_unite",
-    difficulty: 2,
-    theme: "neutral",
-    text: "On mesure un segment avec une bande unité. Le segment est aussi long que 3 quarts de la bande. Quelle est sa longueur ?",
+function nombresDuBas(): Q {
+  const den = pick(DENS);
+  const a = rint(1, den - 2);
+  const b = rint(1, den - a);
+  const correct = `on garde ${den} : le partage ne change pas`;
+  const p = quelquun();
+  return {
+    text: pick([
+      `Pour calculer ${fr(a, den)} + ${fr(b, den)}, que fait-on des nombres du bas ?`,
+      `${p.nom} additionne ${fr(a, den)} et ${fr(b, den)}. Que devient le ${den} du bas ?`,
+    ]),
     format: "qcm",
-    choices: ["3/4 d'unité", "4/3 d'unité", "3 unités", "4 unités"],
-    expected: ["3/4 d'unité"],
+    choices: choix(correct, [`on les additionne : ${den * 2}`, `on les multiplie : ${den * den}`, "on les enlève"]),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "Le nombre de parts prises va en haut, le partage en bas.",
     explanation: exp(
-      "La bande unité sert de règle : on exprime la longueur en parts de bande.",
-      "On compte en combien de parts la bande est partagée, puis combien de parts couvre le segment.",
-      "La bande est partagée en 4 parts et le segment en couvre 3 : il mesure 3/4 d'unité.",
-      "Le segment mesure 3/4 d'unité.",
+      "Le nombre du bas dit en combien de parts on a partagé.",
+      "Ajouter des parts ne change pas leur taille : le partage reste le même.",
+      `${fr(a, den)} + ${fr(b, den)} = ${fr(a + b, den)}.`,
+      `On garde ${den}.`,
     ),
-    tags: ["ce2", "fraction", "bande_unite", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_bande_unite_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_bande_unite",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Deux élèves mesurent le même segment. Léa utilise une bande partagée en 2, Kevin une bande partagée en 4. Léa trouve 1/2, Kevin trouve 2/4. Qui a raison ?",
+  };
+}
+
+/** 1/2 + 1/4 : un dénominateur MULTIPLE de l'autre (au programme du CE2). */
+const MULTIPLES = [[2, 4], [2, 6], [2, 8], [2, 10], [2, 12], [3, 6], [3, 12], [4, 8], [4, 12], [5, 10], [6, 12]] as const;
+
+function partagesMultiples(): Q {
+  const [d1, d2] = pick(MULTIPLES);
+  const k = d2 / d1;
+  const a = rint(1, d1 - 1);
+  const maxB = d2 - a * k;
+  if (maxB < 1) return partagesMultiples();
+  const b = rint(1, Math.min(maxB, d2 - 1));
+  const moins = Math.random() < 0.35 && a * k > b;
+  const r = moins ? a * k - b : a * k + b;
+  const op = `${fr(a, d1)} ${moins ? "−" : "+"} ${fr(b, d2)}`;
+  const correct = fr(r, d2);
+  const p = quelquun();
+  const t = tout();
+  const text = avec(pick([
+    `Combien font ${op} ?`,
+    `Calcule : ${op} = …`,
+    moins
+      ? `${p.nom} avait ${fr(a, d1)} ${du(t)}. ${maj(p.il)} en donne ${fr(b, d2)}. Quelle part lui reste-t-il ?`
+      : `${p.nom} a ${fr(a, d1)} ${du(t)} et reçoit encore ${fr(b, d2)}. Quelle part a-t-${p.il} en tout ?`,
+  ]));
+  return {
+    text,
     format: "qcm",
-    choices: [
-      "les deux, c'est la même longueur",
-      "Léa seulement",
-      "Kevin seulement",
-      "aucun des deux",
-    ],
-    expected: ["les deux, c'est la même longueur"],
+    choices: choix(correct, [fr(moins ? Math.abs(a - b) || 1 : a + b, moins ? d2 : d1 + d2), fr(moins ? Math.abs(a - b) || 1 : a + b, d2), fr(r + 1, d2), fr(r, d1)].filter((x) => x !== correct && !/^0/.test(x))),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "1/2 et 2/4, est-ce que ça couvre pareil ?",
+    canvas: deuxBandes([a, d1], [a * k, d2]),
     explanation: exp(
-      "Une même longueur peut s'écrire avec plusieurs fractions égales.",
-      "On compare les deux résultats en regardant s'ils couvrent la même part de bande.",
-      "1/2 et 2/4 recouvrent exactement la même longueur. Léa a partagé en 2, Kevin en 4 : les deux mesures sont justes et disent la même chose.",
+      "Pour ajouter des parts, il faut qu'elles aient la même taille.",
+      `On change ${fr(a, d1)} en ${DEN_NOM[d2][1]} : chaque ${DEN_NOM[d1][0]} vaut ${k} ${DEN_NOM[d2][1]} (les bandes A et B).`,
+      `${fr(a, d1)} = ${fr(a * k, d2)} ; ${fr(a * k, d2)} ${moins ? "−" : "+"} ${fr(b, d2)} = ${correct}.`,
+      `${op} = ${correct}.`,
+    ),
+  };
+}
+
+function genAddSous(d: Etoile): Q {
+  if (d <= 2) return tirer([() => additionNue(2), () => additionHistoire(2)]);
+  if (d === 3) return tirer([() => additionNue(3), () => additionHistoire(3), () => ceQuiReste(3), nombresDuBas]);
+  if (d === 4) return tirer([quePourLeTout, () => ceQuiReste(4), partagesMultiples, () => additionHistoire(4)]);
+  return tirer([partagesMultiples, partagesMultiples, () => ceQuiReste(5), quePourLeTout]);
+}
+
+// ============================================================
+// ce2_fraction_bande_unite — Mesurer avec une bande unité
+// ============================================================
+
+const SEGMENTS = ["un segment", "un ruban", "un crayon", "une ficelle", "un bâton", "une chenille en papier", "une paille", "une baguette magique"] as const;
+
+function longueurSegment(d: Etoile): Q {
+  const den = pick(d <= 2 ? [2, 3, 4, 5, 6] : DENS);
+  const n = rint(1, den - 1);
+  const s = pick(SEGMENTS);
+  const p = quelquun();
+  const correct = `${fr(n, den)} d'unité`;
+  const text = pick([
+    `La bande unité est partagée en ${den} parts égales. ${maj(s)} couvre la partie coloriée. Quelle est sa longueur ?`,
+    `${p.nom} pose ${s} contre la bande unité dessinée. ${maj(s)} va jusqu'au bout de la partie coloriée. Combien mesure-t-${s.startsWith("une ") ? "elle" : "il"} ?`,
+    `Avec la bande unité, ${p.nom} trouve que ${s.replace(/^un/, "qu'un").replace(/^qu'un /, "qu'un ").replace(/^qu'une/, "qu'une")} mesure autant que la partie coloriée. Quelle est cette longueur ?`.replace("trouve que qu'", "trouve qu'"),
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [`${fr(den, n)} d'unité`, `${n} unités`, `${fr(n, den + 1)} d'unité`, `${fr(den - n, den)} d'unité`].filter((x) => x !== correct)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: dessin(n, den, "bar"),
+    explanation: exp(
+      "La bande unité vaut 1. Partagée en parts égales, chaque part est une fraction de l'unité.",
+      "On compte les parts de la bande (le bas), puis les parts couvertes (le haut).",
+      `${n} parts sur ${den} : ${fr(n, den)}.`,
+      `La longueur est ${correct}.`,
+    ),
+  };
+}
+
+function enCombienPartagee(): Q {
+  const den = pick(DENS);
+  const n = rint(1, den - 1);
+  const s = pick(SEGMENTS);
+  const correct = String(den);
+  const p = quelquun();
+  const text = pick([
+    `${maj(s)} mesure ${fr(n, den)} d'unité. En combien de parts égales la bande unité a-t-elle été partagée ?`,
+    `${p.nom} dit : « ${s} mesure ${nom(n, den)} de la bande unité ». En combien de parts la bande est-elle coupée ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [String(n), String(den + n), String(den * 2), String(den - n || den + 1)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Le nombre du bas dit en combien de parts égales on a partagé la bande unité.",
+      `Dans ${fr(n, den)}, on lit le bas.`,
+      `${fr(n, den)} → ${den} parts.`,
+      `La bande est partagée en ${den}.`,
+    ),
+  };
+}
+
+function deuxBandesMemeLongueur(): Q {
+  const [a, b, c, e] = pick(PAIRES);
+  const [p, q] = deuxPersonnes();
+  const s = pick(SEGMENTS);
+  const correct = "les deux : c'est la même longueur";
+  return {
+    text: `${p.nom} mesure ${s} avec une bande partagée en ${b} : ${fr(a, b)}. ${q.nom} mesure le même avec une bande partagée en ${e} : ${fr(c, e)}. Qui a raison ?`.replace("le même", /^une /.test(s) ? "la même" : "le même"),
+    format: "qcm",
+    choices: choix(correct, [`${p.nom} seulement`, `${q.nom} seulement`, "aucun des deux"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: deuxBandes([a, b], [c, e]),
+    explanation: exp(
+      "Deux fractions égales donnent la même longueur.",
+      "On compare les parties coloriées des deux bandes.",
+      `${fr(a, b)} = ${fr(c, e)}.`,
       "Les deux ont raison.",
     ),
-    tags: ["ce2", "fraction", "bande_unite", "egalite", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_bande_unite_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_bande_unite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Combien de parts le segment couvre-t-il, sur le nombre total de parts ?",
-    tags: ["ce2", "fraction", "bande_unite", "template", "canvas"],
-    generate: () => {
-      const d = randomChoice([2, 3, 4, 5, 6, 8]);
-      const n = randomInt(1, d - 1);
-      return {
-        text: `La bande unité est partagée en ${d} parts égales. Un segment couvre ${n} de ces parts. Quelle est sa longueur ?`,
-        format: "qcm",
-        // ⚠️ `${d - n}/${d}` retombe sur la bonne réponse quand le segment
-        // couvre juste la moitié de la bande — 1/2, 2/4, 3/6, 4/8 — et le QCM
-        // tombait à trois lignes sur 26 % des tirages.
-        choices: makeChoices(`${n}/${d} d'unité`, [
-          `${d}/${n} d'unité`,
-          `${d - n}/${d} d'unité`,
-          `${n}/${d + 1} d'unité`,
-          `${n} unités`,
-        ]),
-        expected: [`${n}/${d} d'unité`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "La bande unité sert de règle : on exprime la longueur en parts de bande.",
-          "Le nombre de parts couvertes va en haut, le nombre de parts du partage en bas.",
-          `La bande est partagée en ${d} parts et le segment en couvre ${n} : il mesure ${n}/${d} d'unité, soit ${nomFraction(n, d)} d'unité.`,
-          `Le segment mesure ${n}/${d} d'unité.`,
-        ),
-        canvas: fractionCanvas({
-          model: "grid",
-          grid: { rows: 1, cols: d, shaded: n },
-          display: { showFraction: false, showParts: true },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_bande_unite_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_bande_unite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le nombre du bas dit en combien de parts la bande est partagée.",
-    tags: ["ce2", "fraction", "bande_unite", "template"],
-    generate: () => {
-      const d = randomChoice([2, 3, 4, 5, 6, 10]);
-      const n = randomInt(1, d - 1);
-      return {
-        text: `Un ruban mesure ${n}/${d} d'unité. En combien de parts égales la bande unité a-t-elle été partagée ?`,
-        format: "short",
-        expected: [String(d)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Dans une fraction, le nombre du bas dit en combien de parts le tout est partagé.",
-          "On lit le nombre du bas, sans se laisser distraire par celui du haut.",
-          `Dans ${n}/${d}, le ${d} du bas dit que la bande est partagée en ${d} parts. Le ${n} dit combien de parts le ruban couvre.`,
-          `La bande est partagée en ${d} parts.`,
-        ),
-      };
-    },
-  },
+  };
+}
 
-  /* =========================================================
-     CE2_FRACTION_DROITE — placer sur une droite graduée
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_droite_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_droite",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Sur une droite graduée, entre 0 et 1, où se place 1/2 ?",
-    format: "qcm",
-    choices: [
-      "exactement au milieu",
-      "juste après le 0",
-      "juste avant le 1",
-      "au-delà du 1",
-    ],
-    expected: ["exactement au milieu"],
-    comparator: "mcq_exact",
-    hint: "Un demi, c'est la moitié du chemin.",
-    explanation: exp(
-      "Sur une droite graduée, une fraction se place entre 0 et 1 selon la part du chemin qu'elle représente.",
-      "On partage le segment de 0 à 1 en autant de parts que l'indique le nombre du bas.",
-      "1/2, c'est une part sur les deux : on est à la moitié du chemin entre 0 et 1.",
-      "1/2 se place au milieu.",
-    ),
-    tags: ["ce2", "fraction", "droite", "remarquable", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_droite_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_droite",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Sur une droite graduée entre 0 et 1, un élève place 3/4 avant 1/2. A-t-il raison ?",
-    format: "qcm",
-    choices: ["non", "oui", "oui, car 3 est plus petit que 4", "on ne peut pas savoir"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Trois quarts du chemin, est-ce avant ou après la moitié ?",
-    explanation: exp(
-      "Plus la fraction est grande, plus elle est loin du 0 sur la droite.",
-      "On compare les deux fractions avant de les placer.",
-      "1/2 vaut 2/4. Or 3/4 est plus grand que 2/4 : 3/4 se place APRÈS 1/2, plus près du 1.",
-      "Non, 3/4 vient après 1/2.",
-    ),
-    tags: ["ce2", "fraction", "droite", "piege", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_droite_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_droite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Compte les graduations depuis le 0.",
-    tags: ["ce2", "fraction", "droite", "template", "canvas"],
-    generate: () => {
-      const d = randomChoice([2, 3, 4, 5, 6, 8, 10]);
-      const n = randomInt(1, d - 1);
-      return {
-        text: "Quelle fraction est marquée par la flèche sur cette droite graduée ?",
-        format: "qcm",
-        choices: makeChoices(`${n}/${d}`, [
-          `${d}/${n}`,
-          `${d - n}/${d}`,
-          `${n}/${d + 1}`,
-          `${n + 1}/${d}`,
-        ]),
-        expected: [`${n}/${d}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Entre 0 et 1, la droite est partagée en autant de parts que le nombre du bas.",
-          "On compte le nombre de graduations entre 0 et 1, puis on compte jusqu'à la flèche.",
-          `Le segment de 0 à 1 est partagé en ${d} parts égales, et la flèche est sur la ${n}ᵉ : c'est ${n}/${d}.`,
-          `La flèche marque ${n}/${d}.`,
-        ),
-        canvas: numberLine({
-          min: 0,
-          max: 1,
-          step: 1 / d,
-          points: [{ value: n / d, label: "?", color: "#ef4444" }],
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_droite_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_droite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le nombre du bas donne le nombre de parts entre 0 et 1.",
-    tags: ["ce2", "fraction", "droite", "template"],
-    generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10]);
-      return {
-        text: `Pour placer des ${nomFraction(1, d).split(" ")[1]} sur une droite graduée, en combien de parts égales faut-il partager le segment entre 0 et 1 ?`,
-        format: "short",
-        expected: [String(d)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Sur une droite graduée, le segment de 0 à 1 se partage en autant de parts que le nombre du bas.",
-          "On écoute le nom de la fraction pour retrouver ce nombre.",
-          `Des ${nomFraction(1, d).split(" ")[1]} viennent d'un partage en ${d}. On partage donc le segment de 0 à 1 en ${d} parts égales.`,
-          `Il faut ${d} parts.`,
-        ),
-      };
-    },
-  },
+function genBandeUnite(d: Etoile): Q {
+  if (d <= 2) return tirer([() => longueurSegment(2), enCombienPartagee]);
+  if (d === 3) return tirer([() => longueurSegment(3), enCombienPartagee, () => longueurSegment(3)]);
+  return tirer([deuxBandesMemeLongueur, () => longueurSegment(4), enCombienPartagee]);
+}
 
-  /* =========================================================
-     CE2_FRACTION_COMPARER — comparer deux fractions
-     Trois cas, ceux du BO, et chacun a sa règle :
-       • même nombre du bas : le plus grand du haut gagne ;
-       • même nombre du haut : le plus grand du bas PERD ;
-       • l'un multiple de l'autre : on récrit, puis on compare.
-     LE PIÈGE est dans le deuxième cas, et il est joli : 1/8 est
-     plus PETIT que 1/6 alors que 8 est plus GRAND que 6. Plus on
-     partage un gâteau en morceaux nombreux, plus les morceaux
-     sont petits. Le nombre du bas ne compte pas des parts : il
-     compte des coups de couteau.
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_comparer_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Laquelle est la plus grande : 5/12 ou 7/12 ?",
-    format: "qcm",
-    choices: ["7/12", "5/12", "elles sont égales", "on ne peut pas savoir"],
-    expected: ["7/12"],
-    comparator: "mcq_exact",
-    hint: "Le partage est le même des deux côtés. Il ne reste qu'à compter les parts.",
-    explanation: exp(
-      "Quand deux fractions ont le même nombre du bas, elles sont faites de parts de même taille.",
-      "On compare alors simplement le nombre de parts, c'est-à-dire les nombres du haut.",
-      "Les deux fractions comptent des douzièmes, tous identiques. 7 douzièmes, c'est plus que 5 douzièmes : 7/12 est la plus grande.",
-      "C'est 7/12.",
-    ),
-    tags: ["ce2", "fraction", "comparer", "meme_denominateur", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_comparer_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Laquelle est la plus grande : 5/12 ou 5/8 ?",
-    format: "qcm",
-    choices: ["5/8", "5/12", "elles sont égales", "on ne peut pas savoir"],
-    expected: ["5/8"],
-    comparator: "mcq_exact",
-    hint: "On prend 5 parts des deux côtés. Où les parts sont-elles les plus grosses ?",
-    explanation: exp(
-      "Quand deux fractions ont le même nombre du haut, on prend autant de parts de chaque côté : c'est la taille des parts qui décide.",
-      "On regarde le nombre du bas — et il décide à l'envers.",
-      "Partager un gâteau en 8 donne des morceaux plus gros qu'en le partageant en 12. Cinq gros morceaux font plus que cinq petits : 5/8 est la plus grande, même si 12 est plus grand que 8.",
-      "C'est 5/8.",
-    ),
-    tags: ["ce2", "fraction", "comparer", "meme_numerateur", "piege", "qcm"],
-    canvas: fractionCanvas({
-      model: "compare",
-      fractions: [
-        { numerator: 5, denominator: 12, label: "5/12" },
-        { numerator: 5, denominator: 8, label: "5/8" },
-      ],
-      display: { showFraction: true, showParts: true },
-    }),
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_comparer_fixed_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Pourquoi 1/8 est-il plus petit que 1/6, alors que 8 est plus grand que 6 ?",
-    format: "qcm",
-    choices: [
-      "parce qu'en partageant en 8, les parts sont plus petites qu'en partageant en 6",
-      "ce n'est pas vrai : 1/8 est plus grand que 1/6",
-      "parce que 8 est un nombre pair",
-      "parce qu'on prend une seule part des deux côtés",
-    ],
-    expected: [
-      "parce qu'en partageant en 8, les parts sont plus petites qu'en partageant en 6",
-    ],
-    comparator: "mcq_exact",
-    hint: "Un gâteau pour 8 invités ou pour 6 : dans quel cas ta part est-elle la plus grosse ?",
-    explanation: exp(
-      "Le nombre du bas ne compte pas des parts prises : il dit en combien de morceaux le tout a été coupé.",
-      "Plus il est grand, plus il y a de morceaux — donc plus chaque morceau est petit.",
-      "Un même gâteau partagé entre 8 personnes donne des parts plus petites que partagé entre 6. Prendre une de ces parts, c'est donc prendre moins : 1/8 est plus petit que 1/6. Le nombre du bas décide à l'envers, et c'est ce qui surprend.",
-      "Parce que couper en 8 donne des parts plus petites que couper en 6.",
-    ),
-    tags: ["ce2", "fraction", "comparer", "meme_numerateur", "piege", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_comparer_fixed_4",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Laquelle est la plus grande : 7/12 ou 5/6 ?",
-    format: "qcm",
-    choices: ["5/6", "7/12", "elles sont égales", "on ne peut pas savoir"],
-    expected: ["5/6"],
-    comparator: "mcq_exact",
-    hint: "12 est le double de 6. Récris 5/6 en douzièmes avant de comparer.",
-    explanation: exp(
-      "Quand un partage est un multiple de l'autre, on récrit les deux fractions avec le même partage.",
-      "On recoupe chaque sixième en deux douzièmes, puis on compare des nombres du haut.",
-      "5/6 = 10/12. On compare alors 7/12 et 10/12 : c'est 10/12 qui est la plus grande. Donc 5/6 dépasse 7/12 — comparer les nombres du haut sans récrire aurait donné le contraire.",
-      "C'est 5/6.",
-    ),
-    tags: ["ce2", "fraction", "comparer", "denominateur_multiple", "piege", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_comparer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Même nombre du bas : les parts ont la même taille, il suffit de les compter.",
-    tags: ["ce2", "fraction", "comparer", "meme_denominateur", "template"],
-    generate: () => {
-      const d = randomChoice([4, 5, 6, 8, 10, 12]);
-      const [petit, grand] = shuffle([...Array(d - 1).keys()].map((i) => i + 1))
-        .slice(0, 2)
-        .sort((a, b) => a - b);
-      return {
-        text: `Laquelle est la plus grande : ${petit}/${d} ou ${grand}/${d} ?`,
-        format: "qcm",
-        choices: makeChoices(`${grand}/${d}`, [
-          `${petit}/${d}`,
-          "elles sont égales",
-          "on ne peut pas savoir",
-        ]),
-        expected: [`${grand}/${d}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Deux fractions de même dénominateur sont faites de parts de même taille.",
-          "On compare le nombre de parts, c'est-à-dire les nombres du haut.",
-          `Les deux comptent des ${nomFraction(2, d).split(" ")[1]}, tous identiques. ${grand} valent plus que ${petit} : ${grand}/${d} est la plus grande.`,
-          `C'est ${grand}/${d}.`,
-        ),
-        canvas: fractionCanvas({
-          model: "compare",
-          fractions: [
-            { numerator: petit, denominator: d, label: `${petit}/${d}` },
-            { numerator: grand, denominator: d, label: `${grand}/${d}` },
-          ],
-          display: { showFraction: true, showParts: true },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_comparer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Même nombre du haut : c'est le nombre du bas qui décide, et il décide à l'envers.",
-    tags: ["ce2", "fraction", "comparer", "meme_numerateur", "piege", "template"],
-    generate: () => {
-      const [petitD, grandD] = shuffle([3, 4, 5, 6, 8, 10, 12])
-        .slice(0, 2)
-        .sort((a, b) => a - b);
-      // Le numérateur commun doit rester sous le plus petit des deux
-      // dénominateurs : les deux fractions restent inférieures à 1.
-      const n = randomInt(1, petitD - 1);
-      return {
-        text: `Laquelle est la plus grande : ${n}/${petitD} ou ${n}/${grandD} ?`,
-        format: "qcm",
-        choices: makeChoices(`${n}/${petitD}`, [
-          `${n}/${grandD}`,
-          "elles sont égales",
-          "on ne peut pas savoir",
-        ]),
-        expected: [`${n}/${petitD}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Quand le nombre du haut est le même, on prend autant de parts des deux côtés : c'est leur taille qui décide.",
-          "On regarde le nombre du bas — plus il est grand, plus les parts sont petites.",
-          `Partager en ${petitD} donne des parts plus grosses que partager en ${grandD}. On en prend ${n} dans les deux cas, donc ${n}/${petitD} est la plus grande — même si ${grandD} est plus grand que ${petitD}.`,
-          `C'est ${n}/${petitD}.`,
-        ),
-        canvas: fractionCanvas({
-          model: "compare",
-          fractions: [
-            { numerator: n, denominator: petitD, label: `${n}/${petitD}` },
-            { numerator: n, denominator: grandD, label: `${n}/${grandD}` },
-          ],
-          display: { showFraction: true, showParts: true },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_comparer_tpl_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Un partage est un multiple de l'autre : récris la première avant de comparer.",
-    tags: ["ce2", "fraction", "comparer", "denominateur_multiple", "template"],
-    generate: () => {
-      const { d, D } = randomChoice(PAIRES_MULTIPLES);
-      const k = D / d;
-      // On tire jusqu'à ce que les deux fractions diffèrent : « elles sont
-      // égales » serait alors juste, et deux réponses vraies feraient deux
-      // bonnes réponses.
-      const n = randomInt(1, d - 1);
-      let m = randomInt(1, D - 1);
-      while (n * k === m) {
-        m = randomInt(1, D - 1);
-      }
-      const premiereGagne = n * k > m;
-      const gagnante = premiereGagne ? `${n}/${d}` : `${m}/${D}`;
-      const perdante = premiereGagne ? `${m}/${D}` : `${n}/${d}`;
-      return {
-        text: `Laquelle est la plus grande : ${n}/${d} ou ${m}/${D} ?`,
-        format: "qcm",
-        choices: makeChoices(gagnante, [
-          perdante,
-          "elles sont égales",
-          "on ne peut pas savoir",
-        ]),
-        expected: [gagnante],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On ne compare deux fractions qu'une fois ramenées au même partage.",
-          `${D} est ${k} fois ${d} : on recoupe chaque part de ${nomFraction(1, d)} en ${k}, et la première fraction se récrit en ${nomFraction(2, D).split(" ")[1]}.`,
-          `${n}/${d} = ${n * k}/${D}. On compare alors ${n * k}/${D} et ${m}/${D} : c'est ${gagnante} qui l'emporte.`,
-          `C'est ${gagnante}.`,
-        ),
-      };
-    },
-  },
+// ============================================================
+// ce2_fraction_droite — Placer une fraction sur la droite graduée
+// ============================================================
 
-  /* =========================================================
-     CE2_FRACTION_COMPARER_UNITE — comparer à 1
-     Au CE2 les fractions sont ≤ 1 : la question est donc
-     « est-ce le tout, ou moins que le tout ? »
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_comparer_unite_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer_unite",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Quand une fraction est-elle égale à 1 ?",
+function lireSurLaDroite(d: Etoile): Q {
+  const den = pick(d <= 2 ? [2, 3, 4, 5] : DENS);
+  const n = rint(1, den - 1);
+  const correct = fr(n, den);
+  const p = quelquun();
+  const text = avec(pick([
+    "Quelle fraction est marquée par le point rouge ?",
+    `${p.nom} a posé un jeton sur la droite. Quelle fraction montre-t-${p.il} ?`,
+    "Pic le paille-en-queue s'est posé sur le point rouge. Sur quelle fraction ?",
+    "La coccinelle s'arrête au point rouge. Quelle fraction est-ce ?",
+    "Quelle fraction se cache sous le « ? » ?",
+  ]));
+  return {
+    text,
     format: "qcm",
-    choices: [
-      "quand le nombre du haut est égal à celui du bas",
-      "quand le nombre du haut est 1",
-      "quand le nombre du bas est 1",
-      "quand les deux nombres sont pairs",
-    ],
-    expected: ["quand le nombre du haut est égal à celui du bas"],
+    choices: choix(correct, [fr(den, n), fr(n + 1, den), fr(Math.max(1, n - 1), den), fr(n, den + 1), fr(n, den * 2 > 12 ? den - 1 : den * 2)].filter((x) => x !== correct)),
+    expected: [correct],
     comparator: "mcq_exact",
-    hint: "Prendre toutes les parts, c'est prendre le tout.",
+    canvas: droite01(den, [{ value: n / den, label: "?", color: "#ef4444" }]),
     explanation: exp(
-      "Une fraction vaut 1 quand on prend autant de parts que le partage en a fait.",
-      "On compare le nombre du haut à celui du bas.",
-      "3/3, 5/5, 10/10 valent toutes 1 : on prend toutes les parts, donc le tout entier.",
-      "La fraction vaut 1 quand haut et bas sont égaux.",
+      "Entre 0 et 1, la droite est partagée en parts égales : chaque part est une fraction de l'unité.",
+      "On compte les parts entre 0 et 1 (le bas), puis les parts de 0 jusqu'au point (le haut).",
+      `${den} parts entre 0 et 1, le point est à ${n} part${n > 1 ? "s" : ""} de 0.`,
+      `Le point montre ${correct}.`,
     ),
-    tags: ["ce2", "fraction", "comparer_unite", "remarquable", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_comparer_unite_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer_unite",
-    difficulty: 4,
-    theme: "reunion",
-    text: "Pour la fête de l'école à Saint-Pierre, on a mangé 7/8 d'un gâteau. En reste-t-il ?",
-    format: "qcm",
-    choices: [
-      "oui, il reste un huitième",
-      "non, le gâteau est fini",
-      "oui, il reste la moitié",
-      "on ne peut pas savoir",
-    ],
-    expected: ["oui, il reste un huitième"],
-    comparator: "mcq_exact",
-    hint: "Le gâteau entier, ce serait 8/8. On en a mangé 7.",
-    explanation: exp(
-      "Une fraction plus petite que 1 ne couvre pas tout le tout.",
-      "On compare la fraction mangée au gâteau entier, qui vaut 8/8.",
-      "Le gâteau entier fait 8 parts, soit 8/8. On en a mangé 7, il en reste donc 1 : un huitième.",
-      "Oui, il reste 1/8 du gâteau.",
-    ),
-    tags: ["ce2", "fraction", "comparer_unite", "reunion", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_comparer_unite_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer_unite",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compare le nombre du haut à celui du bas.",
-    tags: ["ce2", "fraction", "comparer_unite", "template"],
-    generate: () => {
-      const d = randomChoice([2, 3, 4, 5, 6, 8, 10]);
-      const egale = randomChoice([true, false, false]);
-      const n = egale ? d : randomInt(1, d - 1);
-      return {
-        text: `La fraction ${n}/${d} est-elle égale au tout, ou plus petite que le tout ?`,
-        format: "qcm",
-        choices: makeChoices(egale ? "égale au tout" : "plus petite que le tout", [
-          "égale au tout",
-          "plus petite que le tout",
-          "plus grande que le tout",
-        ]),
-        expected: [egale ? "égale au tout" : "plus petite que le tout"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une fraction vaut 1 quand le nombre du haut égale celui du bas.",
-          "On compare les deux nombres de la fraction.",
-          egale
-            ? `Le haut et le bas valent tous les deux ${d} : on prend les ${d} parts sur ${d}, donc le tout entier.`
-            : `Le haut vaut ${n} et le bas ${d}. On prend ${n} parts sur ${d} : il en manque ${d - n} pour avoir le tout.`,
-          egale ? `${n}/${d} est égale au tout.` : `${n}/${d} est plus petite que le tout.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_comparer_unite_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_comparer_unite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le tout, c'est toutes les parts. Combien en manque-t-il ?",
-    tags: ["ce2", "fraction", "comparer_unite", "template"],
-    generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10]);
-      const n = randomInt(1, d - 1);
-      return {
-        text: `On a colorié ${n}/${d} d'une bande. Combien de parts reste-t-il à colorier pour avoir la bande entière ?`,
-        format: "short",
-        expected: [String(d - n)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La bande entière, c'est toutes les parts du partage.",
-          "On retire les parts déjà coloriées du nombre total de parts.",
-          `La bande a ${d} parts et ${n} sont coloriées : ${d} - ${n} = ${d - n}. Il reste ${d - n} parts.`,
-          `Il reste ${d - n} parts à colorier.`,
-        ),
-      };
-    },
-  },
+  };
+}
 
-  /* =========================================================
-     CE2_FRACTION_DEFI — les défis
-     Ce qui ne se réduit pas à appliquer une règle : les
-     erreurs qui reviennent, et les cas où il faut choisir.
-  ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_defi_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_defi",
-    difficulty: 4,
-    theme: "reunion",
-    text: "Deux familles achètent le même gâteau. Chez Malia, on le partage entre 4 personnes ; chez Kevin, entre 6. Qui aura la plus grosse part ?",
+function quelleLettre(): Q {
+  const den = pick([4, 5, 6, 8, 10]);
+  const ks = shuffle(Array.from({ length: den - 1 }, (_, i) => i + 1)).slice(0, 3);
+  const lettres = ["A", "B", "C"];
+  const cible = rint(0, 2);
+  const p = quelquun();
+  const text = avec(pick([
+    `Quelle lettre est placée sur ${fr(ks[cible], den)} ?`,
+    `${p.nom} cherche ${fr(ks[cible], den)} sur la droite. Quelle lettre doit-${p.il} montrer ?`,
+    `Le trésor est caché à ${fr(ks[cible], den)}. Quelle lettre marque le trésor ?`,
+  ]));
+  return {
+    text,
     format: "qcm",
-    choices: [
-      "chez Malia",
-      "chez Kevin",
-      "les parts seront pareilles",
-      "on ne peut pas savoir",
-    ],
-    expected: ["chez Malia"],
+    choices: [...lettres],
+    expected: [lettres[cible]],
     comparator: "mcq_exact",
-    hint: "Le même gâteau, mais partagé entre moins de personnes.",
+    canvas: droite01(den, ks.map((k, i) => ({ value: k / den, label: lettres[i], color: ["#ef4444", "#2563eb", "#16a34a"][i] }))),
     explanation: exp(
-      "Plus on partage un tout entre un grand nombre, plus chaque part est petite.",
-      "On compare le nombre de parts, sachant que le gâteau est le même.",
-      "Chez Malia, chacun a 1/4 du gâteau ; chez Kevin, 1/6. Or un quart est plus gros qu'un sixième : le gâteau y est coupé en moins de morceaux.",
-      "C'est chez Malia que les parts sont les plus grosses.",
+      "Entre 0 et 1, chaque petit trait avance d'une même fraction.",
+      `La droite est partagée en ${den} : on compte ${ks[cible]} traits depuis 0.`,
+      `${fr(ks[cible], den)} : ${ks[cible]} parts sur ${den}.`,
+      `C'est la lettre ${lettres[cible]}.`,
     ),
-    tags: ["ce2", "fraction", "defi", "reunion", "comparer", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_defi_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Un élève colorie 2 cases sur une bande de 6 cases et dit : « j'ai colorié 2/6, donc plus que 1/3 ». A-t-il raison ?",
+  };
+}
+
+function ouEstLeDemi(): Q {
+  const cas = pick([
+    { f: "1/2", rep: "exactement au milieu, entre 0 et 1" },
+    { f: "1/4", rep: "au milieu entre 0 et 1/2" },
+    { f: "3/4", rep: "au milieu entre 1/2 et 1" },
+    { f: "4/4", rep: "sur le 1" },
+  ]);
+  const p = quelquun();
+  const pieges = ["exactement au milieu, entre 0 et 1", "au milieu entre 0 et 1/2", "au milieu entre 1/2 et 1", "sur le 1", "après le 1"].filter((x) => x !== cas.rep);
+  return {
+    text: pick([
+      `Sur une droite graduée de 0 à 1, où se place ${cas.f} ?`,
+      `${p.nom} doit placer ${cas.f} entre 0 et 1. Où le met-${p.il} ?`,
+    ]),
     format: "qcm",
-    choices: [
-      "non, 2/6 et 1/3 c'est pareil",
-      "oui, 2 est plus grand que 1",
-      "oui, 6 est plus grand que 3",
-      "non, 2/6 est plus petit",
-    ],
-    expected: ["non, 2/6 et 1/3 c'est pareil"],
+    choices: choix(cas.rep, pieges),
+    expected: [cas.rep],
     comparator: "mcq_exact",
-    hint: "Groupe les 6 cases deux par deux : combien de groupes ?",
+    canvas: droite01(4, []),
     explanation: exp(
-      "Deux fractions différentes peuvent couvrir exactement la même part du tout.",
-      "On regroupe les cases pour retrouver un partage plus simple.",
-      "Six cases groupées deux par deux font 3 groupes, et les 2 cases coloriées en remplissent exactement 1. Donc 2/6 = 1/3 : c'est la même surface.",
-      "Non, 2/6 et 1/3 valent la même chose.",
+      "Entre 0 et 1, on partage en parts égales.",
+      "1/2 coupe le segment en deux ; 1/4 et 3/4 coupent chaque moitié en deux.",
+      `${cas.f} : ${cas.rep}.`,
+      `${cas.f} se place ${cas.rep}.`,
     ),
-    tags: ["ce2", "fraction", "defi", "egalite", "piege", "qcm", "canvas"],
-    canvas: fractionCanvas({
-      model: "compare",
-      fractions: [
-        { numerator: 2, denominator: 6, label: "2/6" },
-        { numerator: 1, denominator: 3, label: "1/3" },
-      ],
-      display: { showFraction: true, showParts: true },
-    }),
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_defi_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_defi",
-    difficulty: 5,
-    theme: "reunion",
-    hint: "Cherche d'abord ce que vaut une seule part.",
-    tags: ["ce2", "fraction", "defi", "reunion", "template"],
-    generate: () => {
-      const d = randomChoice([2, 3, 4, 5]);
-      const parPart = randomChoice([3, 4, 5, 6, 8, 10]);
-      const total = d * parPart;
-      const objet = randomChoice([
-        { nom: "letchis", lieu: "au marché de Saint-Paul" },
-        { nom: "samoussas", lieu: "au snack de l'Étang-Salé" },
-        { nom: "billes", lieu: "dans la cour" },
-      ]);
-      return {
-        text: `Il y a ${total} ${objet.nom} ${objet.lieu}. On en prend ${nomFraction(1, d)}. Combien cela fait-il de ${objet.nom} ?`,
-        format: "short",
-        expected: [String(parPart)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Prendre une fraction d'une quantité, c'est partager cette quantité puis en prendre des parts.",
-          "On partage d'abord le total en autant de parts que l'indique le nombre du bas.",
-          `On partage ${total} en ${d} parts égales : ${total} ÷ ${d} = ${parPart}. Un ${nomFraction(1, d).split(" ")[1].replace(/s$/, "")} vaut donc ${parPart} ${objet.nom}.`,
-          `Cela fait ${parPart} ${objet.nom}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_fraction_defi_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Le tout, c'est toutes les parts. Compte ce qui manque.",
-    tags: ["ce2", "fraction", "defi", "template", "canvas"],
-    generate: () => {
-      const d = randomChoice([4, 5, 6, 8, 10]);
-      const mange = randomInt(1, d - 1);
-      return {
-        text: `Un gâteau est partagé en ${d} parts égales. On en mange ${mange}. Quelle fraction du gâteau reste-t-il ?`,
-        format: "qcm",
-        choices: makeChoices(`${d - mange}/${d}`, [
-          `${mange}/${d}`,
-          `${d}/${d - mange}`,
-          `${d - mange}/${mange}`,
-          `${d - mange}/${d - 1}`,
-        ]),
-        expected: [`${d - mange}/${d}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          `Le gâteau entier vaut toutes ses parts, ici ${d}/${d}.`,
-          "On compte les parts qui restent, pas celles qui sont mangées.",
-          `Le gâteau a ${d} parts et on en mange ${mange} : il en reste ${d} - ${mange} = ${d - mange}. La fraction qui reste est ${d - mange}/${d}.`,
-          `Il reste ${d - mange}/${d} du gâteau.`,
-        ),
-        canvas: fractionCanvas({
-          model: "grid",
-          grid: { rows: 1, cols: d, shaded: d - mange },
-          display: { showFraction: false, showParts: true },
-        }),
-      };
-    },
-  },
+  };
+}
+
+function avantApres(): Q {
+  const den = pick([4, 6, 8, 10]);
+  const a = rint(1, den - 2);
+  const b = rint(a + 1, den - 1);
+  const p = quelquun();
+  const correct = "non";
+  return {
+    text: pick([
+      `Sur une droite graduée de 0 à 1, ${p.nom} place ${fr(b, den)} avant ${fr(a, den)}. A-t-${p.il} raison ?`,
+      `Entre 0 et 1, ${fr(b, den)} est-il plus près de 0 que ${fr(a, den)} ?`,
+    ]),
+    format: "qcm",
+    choices: shuffle(["oui", "non", "on ne peut pas savoir"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: droite01(den, []),
+    explanation: exp(
+      "Sur la droite, plus on prend de parts, plus on s'éloigne de 0.",
+      "Avec le même partage, on compare les nombres du haut.",
+      `${b} parts > ${a} parts : ${fr(b, den)} est après ${fr(a, den)}.`,
+      `Non : ${fr(a, den)} vient avant ${fr(b, den)}.`,
+    ),
+  };
+}
+
+function enCombienPourPlacer(): Q {
+  const den = pick(DENS);
+  const correct = String(den);
+  const p = quelquun();
+  return {
+    text: pick([
+      `Pour placer ${des(den)} sur une droite graduée, en combien de parts égales faut-il partager le segment de 0 à 1 ?`,
+      `${p.nom} veut placer ${fr(rint(1, den - 1), den)} sur la droite. En combien de parts égales doit-${p.il} couper le segment de 0 à 1 ?`,
+    ]),
+    format: "qcm",
+    choices: choix(correct, [String(den * 2), String(den + 1), String(den - 1), String(Math.max(2, den / 2))]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Le nombre du bas donne le partage du segment de 0 à 1.",
+      `Pour ${des(den)}, on partage en ${den}.`,
+      `${den} parts égales entre 0 et 1.`,
+      `Il faut ${den} parts.`,
+    ),
+  };
+}
+
+function genDroite(d: Etoile): Q {
+  if (d <= 2) return tirer([() => lireSurLaDroite(2), ouEstLeDemi]);
+  if (d === 3) return tirer([() => lireSurLaDroite(3), quelleLettre, enCombienPourPlacer]);
+  return tirer([avantApres, quelleLettre, () => lireSurLaDroite(4)]);
+}
+
+// ============================================================
+// ce2_fraction_comparer — Comparer deux fractions
+// ============================================================
+
+function comparerQuestion(a: [number, number], b: [number, number], avecDessin: boolean): Q {
+  const va = a[0] / a[1];
+  const vb = b[0] / b[1];
+  const plus = Math.random() < 0.6;
+  const correct = va === vb ? "elles sont égales" : (plus ? va > vb : va < vb) ? fr(...a) : fr(...b);
+  const p = quelquun();
+  const t = tout();
+  const [q] = deuxPersonnes().filter((x) => x.nom !== p.nom);
+  const text = avec(pick([
+    `Laquelle est la plus ${plus ? "grande" : "petite"} : ${fr(...a)} ou ${fr(...b)} ?`,
+    `${p.nom} mange ${fr(...a)} ${du(t)}, ${q.nom} ${fr(...b)} ${t.f ? "d'une autre, pareille" : "d'un autre, pareil"}. Quelle part est la plus ${plus ? "grosse" : "petite"} ?`,
+    `Quelle fraction est la plus ${plus ? "grande" : "petite"}, ${fr(...a)} ou ${fr(...b)} ?`,
+    `Pic hésite entre ${fr(...a)} et ${fr(...b)} ${du(t)}. Laquelle est la plus ${plus ? "grosse" : "petite"} part ?`,
+  ]));
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([fr(...a), fr(...b), "elles sont égales"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    ...(avecDessin ? { canvas: deuxBandes(a, b) } : {}),
+    explanation: exp(
+      a[1] === b[1]
+        ? "Avec le même partage, la plus grande fraction est celle qui prend le plus de parts."
+        : a[0] === b[0]
+          ? "Avec le même nombre de parts prises, plus le partage est grand, plus les parts sont petites."
+          : "On écrit les deux fractions avec le même partage, puis on compare les parts.",
+      avecDessin ? "On compare les parties coloriées des bandes A et B." : "On regarde le nombre du bas et le nombre du haut.",
+      `${fr(...a)} ${va > vb ? ">" : va < vb ? "<" : "="} ${fr(...b)}.`,
+      `La réponse est ${correct}.`,
+    ),
+  };
+}
+
+function memeDenominateur(dessiner: boolean): Q {
+  const den = pick(DENS);
+  const [x, y] = shuffle(Array.from({ length: den }, (_, i) => i + 1)).slice(0, 2);
+  return comparerQuestion([x, den], [y, den], dessiner);
+}
+
+function memeNumerateur(): Q {
+  const [d1, d2] = shuffle([3, 4, 5, 6, 8, 10, 12]).slice(0, 2);
+  const n = rint(1, Math.min(d1, d2) - 1);
+  return comparerQuestion([n, d1], [n, d2], Math.random() < 0.3);
+}
+
+function pourquoiPlusPetit(): Q {
+  const [x, y] = shuffle([3, 4, 5, 6, 8, 10]).slice(0, 2).sort((m, n) => m - n);
+  const correct = `parce qu'en partageant en ${y}, les parts sont plus petites qu'en partageant en ${x}`;
+  const p = quelquun();
+  return {
+    text: pick([
+      `Pourquoi ${fr(1, y)} est-il plus petit que ${fr(1, x)}, alors que ${y} est plus grand que ${x} ?`,
+      `${p.nom} s'étonne : ${fr(1, y)} < ${fr(1, x)}, pourtant ${y} > ${x}. Pourquoi ?`,
+    ]),
+    format: "qcm",
+    choices: choix(correct, [`ce n'est pas vrai : ${fr(1, y)} est plus grand que ${fr(1, x)}`, `parce que ${y} est un nombre ${y % 2 ? "impair" : "pair"}`, "parce qu'on prend une seule part des deux côtés"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Plus on partage un tout en beaucoup de parts, plus chaque part est petite.",
+      "On compare la TAILLE des parts.",
+      `Une part sur ${y} < une part sur ${x}.`,
+      `${fr(1, y)} < ${fr(1, x)}.`,
+    ),
+  };
+}
+
+function partagesDifferents(): Q {
+  const [d1, d2] = pick(MULTIPLES);
+  const k = d2 / d1;
+  const a = rint(1, d1 - 1);
+  let b = rint(1, d2 - 1);
+  if (Math.random() < 0.2) b = a * k;
+  return comparerQuestion([a, d1], [b, d2], false);
+}
+
+function genComparer(d: Etoile): Q {
+  if (d <= 2) return tirer([() => memeDenominateur(true), () => memeDenominateur(false)]);
+  if (d <= 4) return tirer([memeNumerateur, pourquoiPlusPetit, memeNumerateur, () => memeDenominateur(false)]);
+  return tirer([partagesDifferents, partagesDifferents, memeNumerateur]);
+}
+
+// ============================================================
+// ce2_fraction_comparer_unite — Comparer une fraction à 1
+// ============================================================
+
+function egaleAuTout(): Q {
+  const den = pick(DENS);
+  const n = Math.random() < 0.4 ? den : rint(1, den - 1);
+  const correct = n === den ? "égale au tout" : "plus petite que le tout";
+  const p = quelquun();
+  const t = tout();
+  const text = avec(pick([
+    `La fraction ${fr(n, den)} est-elle égale au tout, ou plus petite que le tout ?`,
+    `${p.nom} a ${fr(n, den)} ${du(t)}. A-t-${p.il} ${le(t)} ${t.f ? "entière" : "entier"} ?`,
+    `Regarde le dessin : ${fr(n, den)} ${du(t)} est colorié. Est-ce ${t.f ? "toute" : "tout"} ${le(t)} ?`,
+  ]));
+  const ouiNon = text.includes("A-t-") || text.includes("Est-ce to");
+  const c = ouiNon ? (n === den ? "oui" : "non") : correct;
+  return {
+    text,
+    format: "qcm",
+    choices: ouiNon ? shuffle(["oui", "non", "on ne peut pas savoir"]) : shuffle(["égale au tout", "plus petite que le tout", "plus grande que le tout"]),
+    expected: [c],
+    comparator: "mcq_exact",
+    canvas: dessin(n, den, t.forme),
+    explanation: exp(
+      "Une fraction est égale au tout quand le nombre du haut est égal à celui du bas.",
+      "On compare le nombre de parts prises au nombre de parts du partage.",
+      n === den ? `${n} parts sur ${den} : toutes les parts.` : `${n} parts sur ${den} : il en manque ${den - n}.`,
+      n === den ? `${fr(n, den)} est égale au tout.` : `${fr(n, den)} est plus petite que le tout.`,
+    ),
+  };
+}
+
+function quandEgaleA1(): Q {
+  const p = quelquun();
+  const correct = "quand le nombre du haut est égal à celui du bas";
+  return {
+    text: pick([
+      "Quand une fraction est-elle égale au tout ?",
+      `${p.nom} cherche une règle : quand une fraction vaut-elle le tout entier ?`,
+      "Comment reconnaître une fraction qui vaut 1 ?",
+    ]),
+    format: "qcm",
+    choices: choix(correct, ["quand le nombre du haut est 1", "quand le nombre du bas est 1", "quand les deux nombres sont pairs"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Le tout, c'est toutes les parts du partage.",
+      "Si on prend autant de parts qu'il y en a, on a le tout.",
+      "4/4, 6/6, 10/10 valent 1.",
+      `Une fraction vaut 1 ${correct}.`,
+    ),
+  };
+}
+
+function combienPourCompleter(): Q {
+  const den = pick(DENS);
+  const n = rint(1, den - 1);
+  const t = pick(TOUTS.filter((x) => x.forme !== "circle"));
+  const correct = String(den - n);
+  const p = quelquun();
+  const text = pick([
+    `On a colorié ${fr(n, den)} ${du(t)}. Combien de parts reste-t-il à colorier pour l'avoir en entier ?`,
+    `${p.nom} a colorié la partie dessinée ${du(t)}. Combien de parts lui manque-t-il pour tout colorier ?`,
+    `Pour arriver au tout, combien de ${DEN_NOM[den][1]} faut-il ajouter à ${fr(n, den)} ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [String(n), String(den), String(den + n), String(den - n + 1)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: dessin(n, den, t.forme),
+    explanation: exp(
+      `Le tout, c'est ${den} parts sur ${den}.`,
+      "On enlève les parts déjà coloriées au nombre total de parts.",
+      `${den} − ${n} = ${den - n}.`,
+      `Il reste ${den - n} part${den - n > 1 ? "s" : ""}.`,
+    ),
+  };
+}
+
+function enResteTIl(): Q {
+  const den = pick(DENS);
+  const n = rint(den - 3 > 0 ? den - 3 : 1, den);
+  const t = tout();
+  const { verbe } = action(t);
+  const [p, q] = deuxPersonnes();
+  const correct = n === den ? `non, ${le(t)} est fini${t.f ? "e" : ""}` : `oui, il reste ${fr(den - n, den)}`;
+  const text = pick([
+    `À la fête de l'école, on a ${verbe} ${fr(n, den)} ${du(t)}. En reste-t-il ?`,
+    `${p.nom} et ${q.nom} ont ${verbe} ${fr(n, den)} ${du(t)}. Reste-t-il une part ?`,
+    `Pic a picoré ${fr(n, den)} ${du(t)}. En reste-t-il pour les autres ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: choix(correct, [n === den ? `oui, il reste ${fr(1, den)}` : `non, ${le(t)} est fini${t.f ? "e" : ""}`, `oui, il reste ${fr(n, den)}`, "on ne peut pas savoir"].filter((x) => x !== correct)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Le tout entier, c'est quand le nombre du haut est égal au nombre du bas.",
+      `On compare ${n} à ${den}.`,
+      n === den ? `${fr(n, den)} = le tout.` : `${fr(n, den)} < ${fr(den, den)} : il manque ${fr(den - n, den)}.`,
+      `Réponse : ${correct}.`,
+    ),
+  };
+}
+
+function genComparerUnite(d: Etoile): Q {
+  if (d <= 2) return tirer([egaleAuTout, quandEgaleA1, egaleAuTout]);
+  if (d === 3) return tirer([combienPourCompleter, egaleAuTout, enResteTIl]);
+  return tirer([enResteTIl, combienPourCompleter, egaleAuTout]);
+}
+
+// ============================================================
+// ce2_fraction_defi — Défis
+// ============================================================
+
+function plusGrossePart(): Q {
+  const [p, q] = deuxPersonnes();
+  const [x, y] = shuffle([2, 3, 4, 5, 6, 8, 10]).slice(0, 2);
+  const t = tout();
+  const correct = x < y ? `chez ${p.nom}` : `chez ${q.nom}`;
+  return {
+    text: pick([
+      `Deux familles ont ${un(t)} pareil${t.f ? "le" : ""}. Chez ${p.nom}, on ${t.f ? "la" : "le"} partage entre ${x} personnes ; chez ${q.nom}, entre ${y}. Où les parts sont-elles les plus grosses ?`,
+      `${p.nom} partage ${un(t)} avec ${x - 1} ami${x - 1 > 1 ? "s" : ""}, ${q.nom} partage ${un(t)} pareil${t.f ? "le" : ""} avec ${y - 1} ami${y - 1 > 1 ? "s" : ""}. Où la part de chacun est-elle la plus grosse ?`,
+    ]),
+    format: "qcm",
+    choices: shuffle([`chez ${p.nom}`, `chez ${q.nom}`, "les parts sont pareilles"]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Moins on est nombreux à partager, plus la part de chacun est grosse.",
+      "On compare le nombre de parts : le plus petit partage donne les plus grosses parts.",
+      `${fr(1, x)} ${x < y ? ">" : "<"} ${fr(1, y)}.`,
+      `Les parts sont plus grosses ${correct}.`,
+    ),
+  };
+}
+
+function fractionDUneQuantite(): Q {
+  const den = pick([2, 3, 4, 5, 10]);
+  const part = rint(2, 10);
+  const total = den * part;
+  const n = Math.random() < 0.6 ? 1 : rint(2, den - 1 || 1);
+  const rep = n * part;
+  const objet = pick(["billes", "bonbons", "images", "graines", "perles", "coquillages", "cartes", "crayons", "œufs", "fraises"]);
+  const p = quelquun();
+  const correct = String(rep);
+  const qui = pick([`${p.nom} a`, "Pic le paille-en-queue a trouvé", "Le pirate garde", "La fermière a ramassé", "Dans le bocal, il y a"]);
+  return {
+    text: `${qui} ${total} ${objet}. ${pick([`${maj(p.il)} en donne ${nom(n, den)}`, `On en prend ${nom(n, den)}`, `${nom(n, den).replace(/^\w/, (c) => c.toUpperCase())} sont pour Zoé`])}. Combien ${de(objet)} cela fait-il ?`.replace(/^Pic le paille-en-queue a trouvé (.*?)\. (Il|Elle) en donne/, "Pic le paille-en-queue a trouvé $1. Il en donne").replace(/^(Le pirate garde|La fermière a ramassé|Dans le bocal, il y a) (.*?)\. (Il|Elle) en donne/, "$1 $2. On en donne"),
+    format: "qcm",
+    choices: choix(correct, [String(total - rep), String(part + 1), String(total % 2 ? total - part : total / 2 === rep ? total / 2 + den : total / 2), String(rep + den), String(den)]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation: exp(
+      `Prendre ${nom(1, den)}, c'est partager en ${den} parts égales et en prendre une.`,
+      `On partage ${total} en ${den} parts égales, puis on prend ${n} part${n > 1 ? "s" : ""}.`,
+      `${total} ÷ ${den} = ${part}${n > 1 ? ` ; ${n} × ${part} = ${rep}` : ""}.`,
+      `Cela fait ${rep} ${objet}.`,
+    ),
+  };
+}
+
+function egaliteDefi(): Q {
+  const [a, b, c, e] = pick(PAIRES);
+  const p = quelquun();
+  const correct = `non, ${fr(c, e)} et ${fr(a, b)} c'est pareil`;
+  return {
+    text: `${p.nom} colorie ${c} cases sur une bande de ${e} cases et dit : « j'ai colorié ${fr(c, e)}, donc plus que ${fr(a, b)} ». A-t-${p.il} raison ?`,
+    format: "qcm",
+    choices: choix(correct, [`oui, ${c} est plus grand que ${a}`, `oui, ${e} est plus grand que ${b}`, `non, ${fr(c, e)} est plus petit`]),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: deuxBandes([a, b], [c, e]),
+    explanation: exp(
+      "Deux fractions égales couvrent la même partie du tout, même avec des nombres différents.",
+      "On compare les parties coloriées des deux bandes.",
+      `${fr(a, b)} = ${fr(c, e)}.`,
+      "Non : c'est la même quantité.",
+    ),
+  };
+}
+
+function resteApresManger(): Q {
+  const den = pick(DENS);
+  const n = rint(2, den - 1);
+  const t = tout();
+  const { verbe } = action(t);
+  const p = quelquun();
+  const correct = fr(den - n, den);
+  return {
+    text: pick([
+      `${maj(un(t))} est partagé${t.f ? "e" : ""} en ${den} parts égales. On en a ${verbe} ${n}. Quelle fraction ${du(t)} reste-t-il ?`,
+      `${p.nom} a ${verbe} ${n} parts ${du(t)}, coupé${t.f ? "e" : ""} en ${den}. Quelle fraction reste-t-il ?`,
+    ]),
+    format: "qcm",
+    choices: choix(correct, [fr(n, den), fr(den, den - n), fr(den - n, n), fr(1, den - n)].filter((x) => x !== correct)),
+    expected: [correct],
+    comparator: "mcq_exact",
+    canvas: dessin(n, den, t.forme),
+    explanation: exp(
+      `Le tout, c'est ${den} parts sur ${den}.`,
+      "On enlève les parts parties.",
+      `${den} − ${n} = ${den - n} : il reste ${fr(den - n, den)}.`,
+      `Il reste ${correct}.`,
+    ),
+  };
+}
+
+function genDefi(d: Etoile): Q {
+  if (d <= 4) return tirer([plusGrossePart, fractionDUneQuantite, resteApresManger]);
+  return tirer([egaliteDefi, fractionDUneQuantite, resteApresManger, partagesMultiples]);
+}
+
+// ============================================================
+// LA BANQUE — mêmes ids, mêmes micros, mêmes étoiles qu'avant.
+// ============================================================
+
+const item = (id: string, microId: string, difficulty: Etoile, hint: string, gen: (d: Etoile) => Q, tags: string[]): TutorBankItemV4 =>
+  gabarit({ id, notionId: NOTION, microId, difficulty, hint, tags: ["fraction", ...tags] }, () => gen(difficulty));
+
+export const fractionBank: TutorBankItemV4[] = [
+  item("ce2_fraction_unite_fixed_1", "ce2_fraction_unite", 1, "Pour une fraction, les parts doivent être toutes égales.", genUnite, ["unite"]),
+  item("ce2_fraction_unite_fixed_2", "ce2_fraction_unite", 2, "Compte les parts égales : leur nombre donne le nom de la part.", genUnite, ["unite"]),
+  item("ce2_fraction_unite_fixed_3", "ce2_fraction_unite", 3, "Combien de parts égales forment le tout ?", genUnite, ["unite"]),
+  item("ce2_fraction_unite_tpl_1", "ce2_fraction_unite", 2, "Quart → 4 parts, tiers → 3 parts…", genUnite, ["unite"]),
+  item("ce2_fraction_unite_tpl_2", "ce2_fraction_unite", 3, "Le tout, c'est toutes les parts.", genUnite, ["unite"]),
+
+  item("ce2_fraction_lire_fixed_1", "ce2_fraction_lire", 1, "Le bas dit le partage, le haut dit combien on en prend.", genLire, ["lire"]),
+  item("ce2_fraction_lire_fixed_2", "ce2_fraction_lire", 2, "Lis le haut, puis le nom des parts.", genLire, ["lire"]),
+  item("ce2_fraction_lire_fixed_3", "ce2_fraction_lire", 3, "Compte toutes les parts, puis les parts coloriées.", genLire, ["lire"]),
+  item("ce2_fraction_lire_tpl_1", "ce2_fraction_lire", 2, "Le nombre du bas donne le nom des parts.", genLire, ["lire"]),
+  item("ce2_fraction_lire_tpl_2", "ce2_fraction_lire", 3, "Compte toutes les parts, puis celles dont on parle.", genLire, ["lire", "canvas"]),
+
+  item("ce2_fraction_representer_fixed_1", "ce2_fraction_representer", 2, "Partage d'abord en parts égales, puis colorie.", genRepresenter, ["representer"]),
+  item("ce2_fraction_representer_fixed_2", "ce2_fraction_representer", 4, "Les parts doivent être égales.", genRepresenter, ["representer", "piege"]),
+  item("ce2_fraction_representer_tpl_1", "ce2_fraction_representer", 2, "Compte les parts coloriées et toutes les parts.", genRepresenter, ["representer", "canvas"]),
+  item("ce2_fraction_representer_tpl_2", "ce2_fraction_representer", 3, "Le haut dit combien de parts colorier.", genRepresenter, ["representer"]),
+
+  item("ce2_fraction_egalite_fixed_1", "ce2_fraction_egalite", 2, "Compare les parties coloriées des deux bandes.", genEgalite, ["egalite", "canvas"]),
+  item("ce2_fraction_egalite_fixed_2", "ce2_fraction_egalite", 4, "Plus il y a de parts, plus elles sont petites.", genEgalite, ["egalite", "piege"]),
+  item("ce2_fraction_egalite_tpl_1", "ce2_fraction_egalite", 3, "Multiplie le haut et le bas par le même nombre.", genEgalite, ["egalite"]),
+  item("ce2_fraction_egalite_tpl_2", "ce2_fraction_egalite", 4, "Découpe chaque part en parts plus petites.", genEgalite, ["egalite"]),
+
+  item("ce2_fraction_add_sous_fixed_3", "ce2_fraction_add_sous", 3, "Même partage : ajoute les parts, garde le bas.", genAddSous, ["addition"]),
+  item("ce2_fraction_add_sous_fixed_4", "ce2_fraction_add_sous", 4, "Le tout, c'est toutes les parts.", genAddSous, ["soustraction"]),
+  item("ce2_fraction_add_sous_fixed_5", "ce2_fraction_add_sous", 4, "Change d'abord les demis en quarts (ou en sixièmes…).", genAddSous, ["addition"]),
+  item("ce2_fraction_add_sous_fixed_6", "ce2_fraction_add_sous", 5, "Enlève au tout tout ce qui est parti.", genAddSous, ["soustraction"]),
+  item("ce2_fraction_add_sous_tpl_1", "ce2_fraction_add_sous", 2, "Ajoute les nombres du haut, garde celui du bas.", genAddSous, ["addition"]),
+  item("ce2_fraction_add_sous_tpl_2", "ce2_fraction_add_sous", 3, "Enlève les nombres du haut, garde celui du bas.", genAddSous, ["soustraction"]),
+  item("ce2_fraction_add_sous_tpl_3", "ce2_fraction_add_sous", 4, "Combien de parts manquent pour le tout ?", genAddSous, ["addition"]),
+  item("ce2_fraction_add_sous_tpl_4", "ce2_fraction_add_sous", 4, "Additionne ce qui est parti, puis enlève-le au tout.", genAddSous, ["soustraction"]),
+  item("ce2_fraction_add_sous_tpl_5", "ce2_fraction_add_sous", 5, "Écris les deux fractions avec le même partage.", genAddSous, ["addition"]),
+  item("ce2_fraction_add_sous_tpl_6", "ce2_fraction_add_sous", 5, "Écris les deux fractions avec le même partage.", genAddSous, ["soustraction"]),
+  item("ce2_fraction_add_sous_tpl_7", "ce2_fraction_add_sous", 2, "Les parts ont la même taille : compte-les ensemble.", genAddSous, ["addition"]),
+  item("ce2_fraction_add_sous_tpl_8", "ce2_fraction_add_sous", 3, "Le partage ne change pas quand on ajoute des parts.", genAddSous, ["addition"]),
+
+  item("ce2_fraction_bande_unite_fixed_1", "ce2_fraction_bande_unite", 2, "Compte les parts de la bande, puis les parts couvertes.", genBandeUnite, ["mesure"]),
+  item("ce2_fraction_bande_unite_fixed_2", "ce2_fraction_bande_unite", 4, "Deux fractions égales donnent la même longueur.", genBandeUnite, ["mesure"]),
+  item("ce2_fraction_bande_unite_tpl_1", "ce2_fraction_bande_unite", 3, "La bande unité vaut 1.", genBandeUnite, ["mesure", "canvas"]),
+  item("ce2_fraction_bande_unite_tpl_2", "ce2_fraction_bande_unite", 3, "Le bas dit en combien on a partagé la bande.", genBandeUnite, ["mesure"]),
+
+  item("ce2_fraction_droite_fixed_1", "ce2_fraction_droite", 2, "Entre 0 et 1, compte les parts égales.", genDroite, ["droite"]),
+  item("ce2_fraction_droite_fixed_2", "ce2_fraction_droite", 4, "Plus on prend de parts, plus on s'éloigne de 0.", genDroite, ["droite"]),
+  item("ce2_fraction_droite_tpl_1", "ce2_fraction_droite", 3, "Compte les parts entre 0 et 1, puis jusqu'au point.", genDroite, ["droite", "canvas"]),
+  item("ce2_fraction_droite_tpl_2", "ce2_fraction_droite", 3, "Le bas donne le partage du segment de 0 à 1.", genDroite, ["droite"]),
+
+  item("ce2_fraction_comparer_fixed_1", "ce2_fraction_comparer", 2, "Même partage : compare les nombres du haut.", genComparer, ["comparer"]),
+  item("ce2_fraction_comparer_fixed_2", "ce2_fraction_comparer", 4, "Même haut : plus le bas est grand, plus les parts sont petites.", genComparer, ["comparer"]),
+  item("ce2_fraction_comparer_fixed_3", "ce2_fraction_comparer", 4, "Compare la taille des parts.", genComparer, ["comparer", "piege"]),
+  item("ce2_fraction_comparer_fixed_4", "ce2_fraction_comparer", 5, "Écris les deux fractions avec le même partage.", genComparer, ["comparer"]),
+  item("ce2_fraction_comparer_tpl_1", "ce2_fraction_comparer", 2, "Même partage : la plus grande prend le plus de parts.", genComparer, ["comparer", "canvas"]),
+  item("ce2_fraction_comparer_tpl_2", "ce2_fraction_comparer", 4, "Même haut : regarde le partage.", genComparer, ["comparer"]),
+  item("ce2_fraction_comparer_tpl_3", "ce2_fraction_comparer", 5, "Change une des fractions pour avoir le même partage.", genComparer, ["comparer"]),
+
+  item("ce2_fraction_comparer_unite_fixed_1", "ce2_fraction_comparer_unite", 2, "Le tout : le haut est égal au bas.", genComparerUnite, ["unite"]),
+  item("ce2_fraction_comparer_unite_fixed_2", "ce2_fraction_comparer_unite", 4, "Compare le haut au bas.", genComparerUnite, ["unite"]),
+  item("ce2_fraction_comparer_unite_tpl_1", "ce2_fraction_comparer_unite", 2, "Toutes les parts sont-elles prises ?", genComparerUnite, ["unite"]),
+  item("ce2_fraction_comparer_unite_tpl_2", "ce2_fraction_comparer_unite", 3, "Combien de parts manquent pour le tout ?", genComparerUnite, ["unite"]),
+
+  item("ce2_fraction_defi_fixed_1", "ce2_fraction_defi", 4, "Moins on est nombreux, plus la part est grosse.", genDefi, ["defi"]),
+  item("ce2_fraction_defi_fixed_2", "ce2_fraction_defi", 5, "Deux fractions égales couvrent la même partie.", genDefi, ["defi"]),
+  item("ce2_fraction_defi_tpl_1", "ce2_fraction_defi", 5, "Partage la quantité en parts égales.", genDefi, ["defi"]),
+  item("ce2_fraction_defi_tpl_2", "ce2_fraction_defi", 5, "Enlève au tout ce qui est parti.", genDefi, ["defi"]),
 ];
