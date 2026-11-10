@@ -57,10 +57,10 @@ function label(block: ScratchBlockData) {
       return block.text ?? `${block.left ?? ""} ${block.operator ?? ""} ${block.right ?? ""}`;
 
     case "if":
-      return `si ${block.condition}`;
+      return `si ${block.condition} alors`;
 
     case "if_else":
-      return `si ${block.condition} sinon`;
+      return `si ${block.condition} alors`;
 
     case "pen":
       return block.text ?? "stylo en position d’écriture";
@@ -100,14 +100,21 @@ function Block({
       ) : null}
 
       {block.elseChildren?.length ? (
-        <div className="ml-4 space-y-1 border-l-4 border-orange-300 pl-2">
-          <div className="w-fit rounded-xl bg-orange-300 px-3 py-1 text-xs font-black text-slate-900">
+        <>
+          <div
+            className={[
+              "w-fit rounded-xl px-3 py-2 text-sm font-black shadow-sm",
+              colors[block.type] ?? "bg-slate-500 text-white",
+            ].join(" ")}
+          >
             sinon
           </div>
-          {block.elseChildren.map((child, i) => (
-            <Block key={i} block={child} depth={depth + 1} />
-          ))}
-        </div>
+          <div className="border-l-4 border-slate-300 pl-2">
+            {block.elseChildren.map((child, i) => (
+              <Block key={i} block={child} depth={depth + 1} />
+            ))}
+          </div>
+        </>
       ) : null}
     </div>
   );

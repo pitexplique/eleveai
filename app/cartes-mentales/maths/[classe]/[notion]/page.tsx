@@ -120,7 +120,8 @@ type Rang = { cases: (number | "C")[]; poids: number };
 const BAS = 0.3; // la rangée de la notion seule
 const DISPOSITIONS: Record<number, Rang[]> = {
   1: [{ cases: ["C"], poids: BAS }, { cases: [0], poids: 1 }],
-  2: [{ cases: [0, "C", 1], poids: 1 }],
+  // 2 bulles côte à côte = deux colonnes hautes et étroites : l'une au-dessus de l'autre.
+  2: [{ cases: [0], poids: 1 }, { cases: ["C"], poids: BAS }, { cases: [1], poids: 1 }],
   3: [{ cases: [0, 1], poids: 1 }, { cases: ["C"], poids: BAS }, { cases: [2], poids: 1 }],
   4: [{ cases: [0, 1], poids: 1 }, { cases: ["C"], poids: BAS }, { cases: [2, 3], poids: 1 }],
   5: [{ cases: [0, 1, 2], poids: 1 }, { cases: [3, "C", 4], poids: 1 }],
