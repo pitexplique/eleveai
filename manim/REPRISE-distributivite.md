@@ -33,12 +33,20 @@ Modèle : la série Équations 4e (`manim/REPRISE-equations.md`, `manim/brief-ag
 Toutes : audit propre, `verifier-bords-video.py` = 0, planches HD relues par la session chef (10/11). mp4 dans `manim/sorties/4e/maths/distributivite/NN-slug/` (dossier ignoré par git). Aperçu des 8 dernières : `manim/sorties/apercu-distributivite.html` (port 3900) — ⛔ ne PAS écraser `apercu.html`, partagé avec d'autres sessions.
 Piège noté par l'agent 03 : dans `_plan_eq` (equation_commun.py), deux atomes NON DITS consécutifs → le premier disparaît sans alerte d'audit (« 2e » : « 2 » puis « e »). Contourné dans `distrib_reduire.py`, module commun non modifié.
 
-## RESTE (passe finale)
-1. Miniatures (paysage « COMPRENDRE … EN N MIN », short), manifeste `manim/manifeste-youtube.json` en AJOUT depuis HEAD (10 entrées, micro_id rempli pour les shorts, vide/rempli selon `qr-des-fiches-video-paysage-shorts-sur-la-micro`), chapitres par `--dry_run`, `fiches-youtube.py`.
-2. R2 : `rclone copy` du SEUL dossier `manim/sorties/4e/maths/distributivite`.
-3. `COUPE_PAR_VIDEO` (« Mets » + 0,03 s pour chaque short) dans `components/LecteurVideo.tsx`.
-4. Métiers : `V` dans `lib/matrice/metiers-college.ts` pour `litteral_distributivite` (menuisier, photographe, maître-nageur, cuisinier, vendeur).
-5. Coach : `brancher-videos-coach.mjs --ecrire` APRÈS le push du soir, sur son ordre. Pas de YouTube sans son ordre.
+## PASSE FINALE FAITE le 10/11 soir (commit `40b27a2b`, pas poussé)
+- Miniatures : `python manim/miniature_distributivite.py` → 5 paysages « COMPRENDRE … » + « EN 4 MIN » (durée lue dans le mp4) et 5 shorts Manim (badge « DISTRIBUTIVITÉ · 4E », ceinture du short), regardées une à une. Vignettes webp par `scripts/vignettes-videos.py`.
+- `publication.md` (`Validé : non`, paysage + short, question en commentaire et réponse) et `fiche-youtube.md` (`python scripts/fiches-youtube.py 4e-distrib-`) dans chaque dossier `NN-slug/` (ignorés par git).
+- `python manim/passe_distributivite.py temps` (corrélation audio des clips dans chaque mp4, `…/distributivite/temps.json`), puis `manifeste` : 10 entrées `4e-distrib-*`, `pas_avant: 2026-12-01`, `microId` rempli partout (`litteral_distributivite_<slug>`), shorts `renvoie_vers` leur paysage. Chapitres « Écrire le calcul » et « D'abord développer » (03, moins de 10 s) réunis ; le script refuse désormais un chapitre de moins de 10 s. Questions mesurées : 01 01:34, 02:53 ; 02 01:27, 02:43 ; 03 00:59, 02:13 ; 04 01:17, 02:14 ; 05 00:48, 01:58 ; shorts 00:30, 00:31, 00:26, 00:31, 00:30.
+- Manifeste, `lib/videos/videos-r2.json` et `bilans-videos.json` committés en HEAD + nos 10 entrées (la copie de travail de `videos-r2.json` garde les ajouts non commités des autres sessions).
+- `COUPE_PAR_VIDEO` (`python manim/passe_distributivite.py coupes`) : paysages 7,0 s (milieu du silence entre « point f r. » et « Et si », vérifié au son), shorts 3,72 à 3,74 s (« Mets » + 0,03 s).
+- Métiers : `V` sur vendeur et menuisier (phrase du menuisier alignée sur la vidéo), photographe, maître-nageur, cuisinier ajoutés avec `V` ; `scripts/verifier-metiers.ts` vert, `tsc` sans erreur sur ces fichiers.
+- R2 : `r2-videos.ps1 -Rclone "copy manim/sorties/4e/maths/distributivite R2:4e/maths/distributivite --include *.{mp4,png,jpg,webp}"`, `check --size-only` : 0 différence, 30 fichiers.
+
+## RESTE (sur l'ordre de Frédéric)
+1. Push, le soir.
+2. Après le push seulement : `node scripts/brancher-videos-coach.mjs --id 4e-distrib-simple,4e-distrib-simple-short,4e-distrib-double,4e-distrib-double-short,4e-distrib-reduire,4e-distrib-reduire-short,4e-distrib-reconnaitre,4e-distrib-reconnaitre-short,4e-distrib-defi,4e-distrib-defi-short --ecrire`.
+3. YouTube : date à choisir à la place du `pas_avant` de prudence ; paysage avant son short.
+4. Mémoire `serie-distributivite-4e.md`.
 
 ## Reste, dans l'ordre
 1. ~~Paysage 01 et short 01~~ FAITS (voir plus haut). Ancienne consigne, pour mémoire : paysage 01 : `AUDIT=1 BORDS=1 python -m manim render --dry_run manim/scripts/4e/distrib_simple.py DistribSimple4e --media_dir manim/scripts/4e/media-dist-01-audit` (0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; filtrer `tr '\r' '\n' | grep -E "AUDIT-AVANCE|RETARD|BORD|Error|Traceback"`). Points à surveiller : la pose au mot de « 3(x + 4) » sur « 3 fois, entre parenthèses, x plus 4 », `dire_eq(r2, "12. En")` dans `ecran_ranger` (à vérifier), l'écran 02-05 qui garde les planches d'un écran à l'autre, `Indicate` sur des objets REMPLIS (le brief Équations l'interdit : il remplit de vert) → remplacer par un `insister`/`Circumscribe` si ça cache le texte.
