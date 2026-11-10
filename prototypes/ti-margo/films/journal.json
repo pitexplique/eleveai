@@ -1,0 +1,8 @@
+{
+  "format": "paysage",
+  "voix": "journal-{ep}-paysage",
+  "sons": "public/sons/journal-{ep}-paysage",
+  "sortie": "manim/sorties/ti-margo/journal-{ep}",
+  "nom": "eleveai-journal-{ep}-paysage",
+  "episodes": { "presentation": "01" }
+}
