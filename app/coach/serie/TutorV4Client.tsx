@@ -121,7 +121,6 @@ import NOTIONS_AVEC_CARTE from "@/lib/cartes/notions-avec-carte.json";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import FloatingCoach from "@/components/FloatingCoach";
-import BandeauPassions from "./BandeauPassions";
 import AQuoiCaSert from "./AQuoiCaSert";
 import Image from "next/image";
 
@@ -2063,9 +2062,6 @@ function handleInputKeyDown(
             Question suivante →
           </button>
         ) : null}
-        <div className="mx-auto mt-4 max-w-3xl px-2 print:hidden">
-          <BandeauPassions />
-        </div>
         <div className="flex justify-center print:hidden">
           <FloatingCoach enBas />
         </div>
@@ -2084,9 +2080,9 @@ function handleInputKeyDown(
   >
     <div className="mx-auto max-w-7xl">
        {remediationBanner}
-      <div className="mb-3">
-        <BandeauPassions />
-      </div>
+      {/* ⛔ 10/11/2026 — plus de bandeau « Dis-nous ce que tu aimes » ici.
+          Frédéric : « ça n'a rien à faire dans le coach ». Les passions restent
+          sur /passions. */}
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         {/* ⛔ `min-w-0` : SANS LUI LA PAGE EST PLUS LARGE QUE L'ÉCRAN
             (09/09/2026, signalé par Frédéric — « en mode téléphone l'écran est
