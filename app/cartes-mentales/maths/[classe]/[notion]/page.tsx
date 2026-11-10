@@ -40,6 +40,7 @@ import TexteMaths from "@/components/cartes/TexteMaths";
 import { CanvasRenderer } from "@/lib/canvas";
 import { enClair } from "@/lib/cartes/texte-maths";
 import { carteRemplie, type BulleRemplie } from "@/lib/cartes/cartes-remplies";
+import { QRCodeSVG } from "qrcode.react";
 
 type Props = {
   params: Promise<{ classe: string; notion: string }>;
@@ -324,19 +325,35 @@ function decouper(micros: string[], remplie: boolean, dessins = false): { faces:
 // chaque micro. Dessin animé jusqu'à la 5e (à partir de la 4e, les shorts sont
 // en Manim) ; « /coach » est l'adresse dite dans les vidéos.
 const DESSIN_ANIME = new Set(["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e"]);
-function PubEleveAI({ classe }: { classe: string }) {
-  const videos = DESSIN_ANIME.has(classe) ? "une vidéo et un dessin animé" : "une vidéo courte";
+// ⭐ 10/11 — l'encart revu pour des élèves qui lisent difficilement : un titre
+// court et gros, une phrase, l'adresse bien visible, et un QR code qui ouvre
+// LA notion de la carte dans le Coach (pas l'accueil du Coach). Il ne prend que
+// sa hauteur (shrink-0) : les encadrés d'écriture rétrécissent, rien ne déborde.
+function PubEleveAI({ classe, notionId }: { classe: string; notionId: string }) {
+  const videos = DESSIN_ANIME.has(classe) ? "des vidéos et des dessins animés" : "des vidéos courtes";
+  const lien = `https://eleveai.fr/coach/serie?classe=${encodeURIComponent(classe)}&matiere=maths&notion=${encodeURIComponent(notionId)}`;
+  // Sans « display= » : le Coach prend de lui-même le mode de la classe, et le QR
+  // plus court se scanne mieux sur une photocopie.
   return (
-    <aside className="mt-3 flex shrink-0 items-center gap-3 rounded-xl border-2 border-teal-600 bg-teal-50 px-3 py-2 [print-color-adjust:exact]">
+    <aside
+      data-pub
+      className="mt-3 flex shrink-0 items-center gap-3 rounded-2xl border-2 border-teal-600 bg-teal-50 px-3 py-2 [print-color-adjust:exact]"
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/cahier-vacances/ti-margo.png" alt="" className="h-14 w-auto shrink-0" />
-      <div className="min-w-0 text-[13px] leading-snug text-teal-950">
-        <p className="text-[15px] font-black">Révise chaque bulle sur eleveai.fr/coach</p>
-        <p>
-          <strong>Le Coach</strong> te donne des exercices à ta mesure et te suit, micro par micro. Pour chaque bulle de
-          cette carte : {videos}.
+      <img src="/cahier-vacances/ti-margo.png" alt="" className="h-[18mm] w-auto shrink-0" />
+      <div className="min-w-0 flex-1 text-[14px] leading-snug text-teal-950">
+        <p className="text-[17px] font-black leading-tight">Entraîne-toi sur cette notion avec le Coach !</p>
+        <p className="mt-0.5">
+          Des exercices à ta mesure, bulle par bulle, et {videos} pour revoir.
+        </p>
+        <p className="mt-1 inline-block rounded-lg bg-teal-600 px-2 py-0.5 text-[15px] font-black text-white [print-color-adjust:exact]">
+          eleveai.fr/coach
         </p>
       </div>
+      <a href={lien} className="flex shrink-0 flex-col items-center" aria-label="Ouvrir cette notion dans le Coach">
+        <QRCodeSVG value={lien} size={72} level="M" marginSize={0} className="h-[19mm] w-[19mm] bg-white" />
+        <span className="mt-0.5 text-[9px] font-bold text-teal-800">Scanne-moi</span>
+      </a>
     </aside>
   );
 }
@@ -463,6 +480,8 @@ export default async function PageCarteMentale({ params, searchParams }: Props) 
               <>
                 <Encadre id={`f${p}-retiens`} titre="Ce que je retiens de toute la notion" ecartMm={ecartMm} className="mt-4 flex-[3]" />
                 <Encadre id={`f${p}-question`} titre="Ma question pour le prof" ecartMm={ecartMm} className="mt-3 flex-1" />
+                {/* Pas de verso : l'encart du Coach va au bas de la dernière face. */}
+                <PubEleveAI classe={n.classe} notionId={n.cle.split("/")[1]} />
               </>
             ) : null}
           </section>
@@ -473,7 +492,7 @@ export default async function PageCarteMentale({ params, searchParams }: Props) 
           <section className={`${FEUILLE} ${SUIVANTE}`} data-face>
             <Encadre id="verso-retiens" titre={`Ce que je retiens de toute la notion « ${n.notion} »`} ecartMm={ecartMm} className="flex-[4]" />
             <Encadre id="verso-question" titre="Ma question pour le prof" ecartMm={ecartMm} className="mt-4 flex-1" />
-            <PubEleveAI classe={n.classe} />
+            <PubEleveAI classe={n.classe} notionId={n.cle.split("/")[1]} />
           </section>
         ) : null}
       </main>
