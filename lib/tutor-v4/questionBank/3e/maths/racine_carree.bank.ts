@@ -23,6 +23,7 @@
  */
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 /* =========================
    HELPERS
@@ -37,7 +38,7 @@ function randomInt(min: number, max: number) {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 /* =========================

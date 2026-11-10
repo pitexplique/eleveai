@@ -5,6 +5,7 @@ import type {
   TutorGeneratedQuestionV4,
   CanvasProbabilitesData,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomChoice<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -15,7 +16,7 @@ function randomInt(min: number, max: number): number {
 }
 
 function shuffle<T>(arr: readonly T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]): string[] {

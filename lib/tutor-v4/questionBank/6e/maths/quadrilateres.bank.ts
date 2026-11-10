@@ -1,8 +1,9 @@
 import type { TutorBankItemV4, QuadrilatereCanvasData, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS, de, type Prenom } from "./entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function randomInt(min: number, max: number) {
@@ -285,7 +286,7 @@ function genQuadVocabulaire(etoile: 1 | 2 | 3 | 4): QG {
     return qcmQ(
       `${ctx(N)} ${question}`,
       d,
-      [seg(P, Q), seg(Q, R), seg(R, T), seg(T, P)].sort(() => Math.random() - 0.5).slice(0, 3),
+      melangeEnPlace([seg(P, Q), seg(Q, R), seg(R, T), seg(T, P)]).slice(0, 3),
       `Une diagonale relie deux sommets opposés. ${d} relie deux sommets qui ne se suivent pas dans ${N} : c’est une diagonale. Les autres segments sont des côtés.`,
     );
   }

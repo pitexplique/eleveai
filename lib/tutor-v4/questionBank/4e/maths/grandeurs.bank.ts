@@ -40,13 +40,14 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type { TableauDonneesCanvasData } from "@/lib/tutor-v4/types_canvas";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomChoice<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 // ⚠️ On écarte les doublons ET la bonne réponse, puis on coupe à trois : il faut

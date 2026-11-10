@@ -11,10 +11,11 @@
 // une réponse, avec les écritures équivalentes raisonnables dans `expected`.
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 export const tirer = <T,>(t: readonly T[]): T => t[Math.floor(Math.random() * t.length)];
 export const entier = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
-export const melanger = <T,>(t: readonly T[]): T[] => [...t].sort(() => Math.random() - 0.5);
+export const melanger = <T,>(t: readonly T[]): T[] => melangeEnPlace([...t]);
 export const pgcd = (a: number, b: number): number => (b ? pgcd(b, a % b) : Math.abs(a));
 
 export type Enfant = { p: string; f: boolean };

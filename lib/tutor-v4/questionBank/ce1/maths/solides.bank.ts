@@ -27,13 +27,14 @@
 
 import type { DifficultyLevel, Solide3DCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { type Solide, cap, dessinSolide, entre, etapes, gab, prenom, qcm, qcmN, tournure, un } from "./geo-outils-ce1";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomChoice<T>(items: readonly T[]): T {
   return items[Math.floor(Math.random() * items.length)];
 }
 
 function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {

@@ -36,12 +36,13 @@
     ".next-2/types/**/*.ts",
     ".next-3/types/**/*.ts",
     ".next-4/types/**/*.ts",
+    ".next-5/types/**/*.ts",
     ".next-verif-prix/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     ".next/types/**/*.ts",
     "global.d.ts",
     "next-env.d.ts",
-    ".next-5/types/**/*.ts"
+    ".next-6/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

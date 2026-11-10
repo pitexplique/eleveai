@@ -6,6 +6,7 @@ import {
   choix, debut, deuxBarres, droite, e, ecrituresEgales, egaux, enfant, entier, exp, fr, gabarit, il, MAJ, nomParts,
   nomSeul, objet, rang, tIl, tirer, aliment, art,
 } from "./fractions-gabarits-outils";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 /** n/d dessiné en deux unités : la 1re pleine (ou partielle), la 2de avec le reste. */
 const deuxUnites = (n: number, d: number) => deuxBarres([Math.min(n, d), d], [Math.max(n - d, 0), d], ["1re unité", "2e unité"]);
@@ -283,7 +284,7 @@ const droite3: TutorBankItemV4[] = [
     const x = enfant();
     const lettres = ["A", "B", "C", "D"];
     const ns = [...new Set([n, n + 1 < d ? n + 1 : n - 2, n - 1 > 0 ? n - 1 : n + 2, d - n !== n ? d - n : n + 3])].filter((v) => v > 0 && v < d).slice(0, 4);
-    const melange = [...ns].sort(() => Math.random() - 0.5);
+    const melange = melangeEnPlace([...ns]);
     const pts = melange.map((v, i) => ({ n: v, label: lettres[i] }));
     const bon = pts.find((p) => p.n === n)!.label;
     const tournures = [

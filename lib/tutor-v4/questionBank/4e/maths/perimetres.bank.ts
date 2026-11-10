@@ -29,6 +29,7 @@ import type {
   QuadrilatereCanvasData,
   TriangleCanvasData,
 } from "@/lib/tutor-v4/types_canvas";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 type Q = TutorGeneratedQuestionV4;
 
@@ -41,7 +42,7 @@ function randomChoice<T>(arr: readonly T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 // ⚠️ On écarte les doublons ET la bonne réponse, puis on coupe à trois.

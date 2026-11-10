@@ -3,6 +3,7 @@ import type {
   TutorGeneratedQuestionV4,
   ThalesCanvasData,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -45,7 +46,7 @@ const NOMS_THALES: { A: string; B: string; C: string; M: string; N: string }[] =
 ];
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function thalesCanvas(

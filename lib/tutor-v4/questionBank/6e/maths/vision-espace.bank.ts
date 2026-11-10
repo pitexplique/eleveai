@@ -34,9 +34,10 @@
 
 import type { TutorBankItemV4, Solide3DCanvasData, FigureLibreCanvasData, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS, type Prenom } from "./entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function randomInt(min: number, max: number) {
@@ -389,7 +390,7 @@ function genVisionRepresentation(etoile: 2 | 3 | 4 | "objets"): QV {
     // ★2 : le solide nommé directement, sans objet de la vie ni prénom.
     const s = pickV(SOLIDES);
     const [quoi, n] = pickV([["faces", s.faces], ["arêtes", s.aretes], ["sommets", s.sommets]] as const);
-    const autres = [...new Set([4, 5, 6, 8, 9, 12].filter((k) => k !== n))].sort(() => Math.random() - 0.5).slice(0, 3);
+    const autres = melangeEnPlace([...new Set([4, 5, 6, 8, 9, 12].filter((k) => k !== n))]).slice(0, 3);
     const de = `d’${s.nom}`;
     const Nom = s.nom.charAt(0).toUpperCase() + s.nom.slice(1);
     return qcmV(
@@ -411,7 +412,7 @@ function genVisionRepresentation(etoile: 2 | 3 | 4 | "objets"): QV {
     const o = pickV(OBJETS_SOLIDES);
     const s = SOLIDES.find((x) => x.nom === o.solide)!;
     const [quoi, n] = pickV([["faces", s.faces], ["arêtes", s.aretes], ["sommets", s.sommets]] as const);
-    const autres = [...new Set([4, 5, 6, 8, 9, 12].filter((k) => k !== n))].sort(() => Math.random() - 0.5).slice(0, 3);
+    const autres = melangeEnPlace([...new Set([4, 5, 6, 8, 9, 12].filter((k) => k !== n))]).slice(0, 3);
     return qcmV(
       `${p.nom} observe ${o.dit} : c’est ${o.solide}. ${pickV([`Combien ${deQ(quoi)} a ce solide ?`, `Combien ${deQ(quoi)} compte-t-${ilV(p)} ?`])}`,
       `${n} ${quoi}`,

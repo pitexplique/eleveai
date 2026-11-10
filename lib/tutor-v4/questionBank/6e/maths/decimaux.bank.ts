@@ -1,4 +1,5 @@
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 // ═══════════════════════════════════════════════════════════════════════════
 // LES GÉNÉRATEURS VARIÉS (06/10/2026)
@@ -136,7 +137,7 @@ function qcm(text: string, bonne: string, leurres: string[], explication: string
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function formatComma(n: number | string) {

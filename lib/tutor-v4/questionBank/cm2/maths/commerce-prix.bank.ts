@@ -8,6 +8,7 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type { CanvasFigure } from "@/lib/tutor-v4/types_canvas";
 import { entre, eur, exp, fr, gabarits, net, qcm, qcmN, un, v } from "./trous-outils";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 /* ───────────────────────── la monnaie et l'écriture ───────────────────────── */
 
@@ -444,7 +445,7 @@ export const interetSimpleBank: TutorBankItemV4[] = [
 const ft = gabarits("facture_tva", "calculs_commerciaux", ["commerce", "facture"]);
 const ARTICLES = ["Stylos", "Cahiers", "Ampoules", "Pots de peinture", "Sacs de ciment", "Câbles", "Ballons", "Livres", "Chaises", "Bobines de fil", "Plants de tomate", "Cordes de guitare", "Boîtes de vis", "Paires de gants"];
 const trois = () => {
-  const l = [...ARTICLES].sort(() => Math.random() - 0.5);
+  const l = melangeEnPlace([...ARTICLES]);
   return l.slice(0, 3);
 };
 const TVA = [5, 10, 18, 20, 21];

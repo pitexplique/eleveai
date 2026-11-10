@@ -6,6 +6,7 @@
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { court, entre, expl, fabrique, nL, qcm, un } from "../../lycee-commun";
 import { aff, BLEU, droiteL, fracL, interL, nz, repere, va, type Pt } from "./themes-3-pays-ecritures";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const tpl = fabrique("seconde", "fonctions_par_intervalles", "2de_");
 const MP = "fct_par_intervalles";
@@ -40,7 +41,7 @@ const DEF_L = "sur chaque segment, la fonction est affine : le coefficient vaut 
 /** Une ligne brisée continue à sommets entiers, de x = −5 à x = 5, qui reste dans le cadre. */
 function brisee(): Pt[] {
   for (;;) {
-    const xs = [-5, ...[-3, -2, -1, 0, 1, 2, 3].sort(() => Math.random() - 0.5).slice(0, 2).sort((p, q) => p - q), 5];
+    const xs = [-5, ...melangeEnPlace([-3, -2, -1, 0, 1, 2, 3]).slice(0, 2).sort((p, q) => p - q), 5];
     const pts = xs.map((x) => ({ x, y: entre(-5, 5) }));
     const pentes = pts.slice(1).map((p, i) => (p.y - pts[i].y) / (p.x - pts[i].x));
     if (new Set(pentes).size < 3) continue;

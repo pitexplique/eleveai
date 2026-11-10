@@ -118,10 +118,10 @@ const du = (gn: string) => (gn.startsWith("le ") ? "du " + gn.slice(3) : "de " +
  */
 type DocEch = { doc: (P: Prenom) => string; court: string; objets: readonly string[]; ks: readonly number[]; u: "m" | "km"; cmMax: number };
 const DOCS_ECH: readonly DocEch[] = [
-  { doc: (P) => `le plan de la maison ${deP(P.n)}`, court: "le plan", objets: ["le salon", "la cuisine", "le couloir", "la terrasse"], ks: [1, 2], u: "m", cmMax: 8 },
+  { doc: () => "le plan de la maison", court: "le plan", objets: ["le salon", "la cuisine", "le couloir", "la terrasse"], ks: [1, 2], u: "m", cmMax: 8 },
   { doc: () => "le plan du collège", court: "le plan", objets: ["la cour", "le préau", "le gymnase", "le couloir principal"], ks: [2, 5, 10], u: "m", cmMax: 12 },
   { doc: (P) => `le plan du jardin ${deP(P.n)}`, court: "le plan", objets: ["l’allée", "la haie", "le potager", "la pelouse"], ks: [1, 2, 5], u: "m", cmMax: 10 },
-  { doc: () => "le plan d’un stade", court: "le plan", objets: ["la ligne droite de la piste", "la tribune", "le terrain de foot"], ks: [5, 10, 20], u: "m", cmMax: 12 },
+  { doc: () => "le plan d’un stade", court: "le plan", objets: ["la ligne droite", "la tribune", "le terrain de foot"], ks: [5, 10, 20], u: "m", cmMax: 12 },
   { doc: () => "le plan d’un camping", court: "le plan", objets: ["l’allée principale", "la plage du lac", "le chemin des sanitaires"], ks: [10, 20, 25], u: "m", cmMax: 12 },
   { doc: () => "le plan d’un zoo", court: "le plan", objets: ["l’enclos des girafes", "le chemin des visiteurs", "le bassin des otaries"], ks: [10, 20, 50], u: "m", cmMax: 12 },
   { doc: () => "le plan d’un parc", court: "le plan", objets: ["le bassin", "la promenade", "l’aire de jeux"], ks: [10, 20, 50], u: "m", cmMax: 12 },
@@ -133,7 +133,7 @@ const DOCS_ECH: readonly DocEch[] = [
   { doc: () => "une carte routière", court: "la carte", objets: ["la route entre deux villes", "le trajet jusqu’à la plage", "l’autoroute du sud"], ks: [5, 10, 20], u: "km", cmMax: 12 },
   { doc: () => "la carte d’une île", court: "la carte", objets: ["la côte nord", "la route du volcan", "le chemin du phare"], ks: [2, 4, 5], u: "km", cmMax: 12 },
   { doc: () => "une carte de La Réunion", court: "la carte", objets: ["un sentier dans les Hauts", "une route côtière", "un chemin de randonnée"], ks: [2, 4, 5], u: "km", cmMax: 12 },
-  { doc: (P) => `la carte du tour à vélo ${deP(P.n)}`, court: "la carte", objets: ["la première étape", "la descente", "la route du retour"], ks: [1, 2, 5], u: "km", cmMax: 12 },
+  { doc: () => "la carte de la course", court: "la carte", objets: ["la première étape", "la descente", "la route du retour"], ks: [1, 2, 5], u: "km", cmMax: 12 },
   { doc: () => "la carte d’un parc national", court: "la carte", objets: ["la route forestière", "le sentier des cascades", "la piste cyclable"], ks: [1, 2], u: "km", cmMax: 12 },
 ];
 
@@ -289,7 +289,7 @@ export const echelles6eBank: TutorBankItemV4[] = [
         const [r1, r2] = [c1 * k, c2 * k];
         const text = pick([
           `Sur ${docTxt}, ${c1} cm représentent ${nombre(r1)} ${d.u} dans la réalité. Que représentent ${c2} cm ? Réponds en ${d.u}.`,
-          `${P.n} lit sur ${docTxt} : « ${c1} cm pour ${nombre(r1)} ${d.u} ». ${cap(objet)} mesure ${c2} cm sur ${d.court}. Quelle est sa longueur réelle, en ${d.u} ?`,
+          `${cap(d.court)} indique « ${c1} cm pour ${nombre(r1)} ${d.u} ». ${cap(objet)} y mesure ${c2} cm. Quelle est sa longueur réelle, en ${d.u} ?`,
           `Sur ${docTxt}, ${c1} cm correspondent à ${nombre(r1)} ${d.u}. Combien de ${d.u === "m" ? "mètres" : "kilomètres"} représentent ${c2} cm ?`,
         ]);
         return {
@@ -376,10 +376,10 @@ export const echelles6eBank: TutorBankItemV4[] = [
     generate: () => {
       const { d, P, k, cm, reel, docTxt, objet } = tirerDoc();
       const text = pick([
-        `Sur ${docTxt}, on lit : « 1 cm sur ${d.court} correspond à ${k} ${d.u} dans la réalité ». Que représentent ${cm} cm sur ${d.court} ? Réponds en ${d.u}.`,
-        `${P.n} regarde ${docTxt} : 1 cm représente ${k} ${d.u}. ${cap(objet)} mesure ${cm} cm sur ${d.court}. Quelle est sa longueur réelle, en ${d.u} ?`,
+        `Sur ${docTxt}, on lit : « 1 cm pour ${k} ${d.u} ». Que représentent ${cm} cm ? Réponds en ${d.u}.`,
+        `Sur ${d.court}, 1 cm représente ${k} ${d.u}. ${cap(objet)} y mesure ${cm} cm. Quelle est sa longueur réelle, en ${d.u} ?`,
         `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. Combien de ${d.u === "m" ? "mètres" : "kilomètres"} représentent ${cm} cm ?`,
-        `L’échelle ${du(d.court)} est « 1 cm pour ${k} ${d.u} ». ${P.n} mesure ${objet} : ${cm} cm. Quelle longueur cela fait-il en vrai, en ${d.u} ?`,
+        `L’échelle est « 1 cm pour ${k} ${d.u} ». ${P.n} mesure ${objet} : ${cm} cm. Combien cela fait-il en vrai, en ${d.u} ?`,
       ]);
       return {
         text,
@@ -514,7 +514,7 @@ export const echelles6eBank: TutorBankItemV4[] = [
     microId: "echelle_distance_reelle",
     difficulty: 3,
     theme: "reunion",
-    text: "Sur une carte de La Réunion, 1 cm représente 4 km. Saint-Denis et Saint-Pierre sont distants de 13 cm sur la carte. Quelle distance à vol d'oiseau cela fait-il en km ?",
+    text: "Sur une carte de La Réunion, 1 cm représente 4 km. Saint-Denis et Saint-Pierre y sont à 13 cm. Calcule la distance réelle en km.",
     format: "short",
     expected: ["52"],
     comparator: "number_equal",
@@ -595,10 +595,10 @@ export const echelles6eBank: TutorBankItemV4[] = [
       const { d, P, k, cm, reel, docTxt, objet } = tirerDoc(true);
       const motU = d.u === "m" ? "mètres" : "kilomètres";
       const text = pick([
-        `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. ${cap(objet)} mesure ${nombre(cm)} cm sur ${d.court}. Quelle est sa longueur réelle, en ${d.u} ?`,
-        `${P.n} mesure ${objet} sur ${docTxt} : ${nombre(cm)} cm. Sur ${d.court}, 1 cm représente ${k} ${d.u}. Quelle est la vraie longueur, en ${d.u} ?`,
-        `${cap(objet)} mesure ${nombre(cm)} cm sur ${docTxt}, où 1 cm représente ${k} ${d.u}. Calcule sa longueur réelle en ${d.u}.`,
-        `Sur ${docTxt} (1 cm pour ${k} ${d.u}), ${P.n} mesure ${objet} : ${nombre(cm)} cm. Combien de ${motU} cela fait-il en réalité ?`,
+        `Sur ${d.court}, 1 cm représente ${k} ${d.u}. ${cap(objet)} y mesure ${nombre(cm)} cm. Quelle est sa longueur réelle, en ${d.u} ?`,
+        `Sur ${d.court}, ${P.n} mesure ${objet} : ${nombre(cm)} cm. Échelle : 1 cm pour ${k} ${d.u}. Quelle est la vraie longueur, en ${d.u} ?`,
+        `${cap(objet)} mesure ${nombre(cm)} cm sur ${d.court}, où 1 cm représente ${k} ${d.u}. Calcule sa longueur réelle en ${d.u}.`,
+        `Sur ${d.court} (1 cm pour ${k} ${d.u}), ${P.n} mesure ${objet} : ${nombre(cm)} cm. Combien de ${motU} cela fait-il en réalité ?`,
       ]);
       return {
         text,
@@ -802,10 +802,10 @@ export const echelles6eBank: TutorBankItemV4[] = [
     generate: () => {
       const { d, P, k, cm, reel, docTxt, objet } = tirerDoc(true);
       const text = pick([
-        `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. En vrai, ${objet} mesure ${nombre(reel)} ${d.u}. Quelle longueur faut-il tracer sur ${d.court}, en cm ?`,
-        `${P.n} dessine ${docTxt}, où 1 cm représente ${k} ${d.u}. ${cap(objet)} mesure ${nombre(reel)} ${d.u} en réalité. Combien de centimètres doit-${il(P)} tracer ?`,
-        `En réalité, ${objet} mesure ${nombre(reel)} ${d.u}. Sur ${docTxt}, 1 cm représente ${k} ${d.u}. Quelle est sa longueur sur ${d.court}, en cm ?`,
-        `Sur ${docTxt} (1 cm pour ${k} ${d.u}), quelle longueur occupe ${objet}, qui mesure ${nombre(reel)} ${d.u} en vrai ? Réponds en cm.`,
+        `Sur ${d.court}, 1 cm représente ${k} ${d.u}. En vrai, ${objet} mesure ${nombre(reel)} ${d.u}. Quelle longueur faut-il tracer, en cm ?`,
+        `${P.n} dessine ${d.court} : 1 cm représente ${k} ${d.u}. ${cap(objet)} mesure ${nombre(reel)} ${d.u} en vrai. Combien de centimètres doit-${il(P)} tracer ?`,
+        `En réalité, ${objet} mesure ${nombre(reel)} ${d.u}. Sur ${d.court}, 1 cm représente ${k} ${d.u}. Quelle est sa longueur dessinée, en cm ?`,
+        `Échelle : 1 cm pour ${k} ${d.u}. ${cap(objet)} mesure ${nombre(reel)} ${d.u} en vrai. Combien de centimètres sur ${d.court} ?`,
       ]);
       return {
         text,

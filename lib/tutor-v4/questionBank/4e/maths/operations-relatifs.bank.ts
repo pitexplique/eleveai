@@ -19,6 +19,7 @@
  */
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 // ⛔⛔ 30/09/2026 — « DES QUESTIONS REVIENNENT SOUVENT ». Mesuré avant : 11 à 37
 // squelettes d'énoncé par micro, 11 à 18 répétitions sur une série de 20. Les
@@ -43,7 +44,7 @@ function randomChoice<T>(arr: readonly T[]): T {
 }
 
 function shuffle<T>(arr: readonly T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 const abs = Math.abs;

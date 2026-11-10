@@ -64,6 +64,22 @@ export function lireExperience(t0: string): Exp | null {
   return null;
 }
 
+/** 07/11/2026 — ★3 court : le sac ou la roue est seulement DESSINÉ ; l'expérience se lit sur le dessin. */
+function experienceDuDessin(q: Q): Exp | null {
+  const cv: any = q.canvas;
+  if (!cv) return null;
+  const m = new Map<string, number>();
+  if (cv.variant === "billes") for (const el of cv.billes?.elements ?? []) m.set(el.couleur, (m.get(el.couleur) ?? 0) + 1);
+  else if (cv.variant === "roue") {
+    const segs = cv.roue?.segments ?? [];
+    if (!segs.length || segs.some((x: any) => x.poids !== 1 || !x.couleur || x.label)) return null;
+    for (const x of segs) m.set(x.couleur, (m.get(x.couleur) ?? 0) + 1);
+  } else return null;
+  return m.size ? { kind: "urne", contenu: m } : null;
+}
+/** L'expérience du texte ; à défaut, celle du dessin. */
+const lireExp = (q: Q) => lireExperience(q.text) ?? experienceDuDessin(q);
+
 /** Toutes les issues équiprobables de l'expérience. */
 function issues(e: Exp): (number | string)[] {
   if (e.kind === "num") return Array.from({ length: e.b - e.a + 1 }, (_, i) => e.a + i);
@@ -102,8 +118,9 @@ export function lireEvenement(lib: string, e: Exp): ((x: number | string) => boo
   else if ((m = l.match(/inférieur à (\d+)/))) { const k = +m[1]; conds.push((v) => v < k); }
   if ((m = l.match(/multiple de (\d+)/))) { const k = +m[1]; conds.push((v) => v % k === 0); }
   if (/à deux chiffres/.test(l)) conds.push((v) => v >= 10 && v <= 99);
-  if ((m = l.match(/^ne pas obtenir le (?:nombre |numéro )?(\d+)$/))) { const k = +m[1]; conds.push((v) => v !== k); }
-  else if ((m = l.match(/^obtenir le (?:nombre |numéro )?(\d+)$/))) { const k = +m[1]; conds.push((v) => v === k); }
+  // 07/11/2026 : formes courtes du coach ★3 (« le 3 », « pas le 3 »).
+  if ((m = l.match(/^(?:ne pas obtenir|pas) le (?:nombre |numéro )?(\d+)$/))) { const k = +m[1]; conds.push((v) => v !== k); }
+  else if ((m = l.match(/^(?:obtenir )?le (?:nombre |numéro )?(\d+)$/))) { const k = +m[1]; conds.push((v) => v === k); }
   if (!conds.length) return null;
   return (x) => conds.every((f) => f(Number(x)));
 }
@@ -182,7 +199,7 @@ function uneSeule(q: Q, juste: (ch: string) => boolean): string[] {
 
 /** La situation est le texte avant la question (avant le premier « ? » ou la consigne). */
 function experienceEtEvenement(q: Q) {
-  const e = lireExperience(q.text);
+  const e = lireExp(q);
   const evs = guillemets(q.text);
   return { e, evs };
 }
@@ -207,7 +224,7 @@ function corrigerMot(q: Q, echelle: "trois" | "cinq"): string[] {
 
 /** ★3 : quel événement est <mot> ? Chaque proposition est recomptée. */
 function corrigerQuelEvenement(q: Q): string[] {
-  const e = lireExperience(q.text);
+  const e = lireExp(q);
   if (!e) return ["expérience illisible"];
   const consigne = horsGuillemets(q.text).match(/(impossible|certain|peu probable|très probable)/);
   if (!consigne) return ["mot cherché illisible dans la question"];
@@ -230,7 +247,7 @@ function corrigerQuelEvenement(q: Q): string[] {
 
 /** Un nombre d'issues demandé : en tout, favorables, couleurs, issue oubliée. */
 function corrigerCompte(q: Q): string[] {
-  const e = lireExperience(q.text);
+  const e = lireExp(q);
   if (!e) return ["expérience illisible"];
   const p = [...plausible(e), ...verifierCanvas(q, e)];
   const evs = guillemets(q.text);
@@ -265,7 +282,7 @@ function corrigerCompte(q: Q): string[] {
 
 /** Deux événements entre guillemets : lequel a le plus de chances ? */
 function corrigerComparaison(q: Q): string[] {
-  const e = lireExperience(q.text);
+  const e = lireExp(q);
   if (!e) return ["expérience illisible"];
   const p = [...plausible(e), ...verifierCanvas(q, e)];
   const evs = guillemets(q.text);
@@ -304,7 +321,7 @@ function corrigerCouleur(q: Q): string[] {
 
 /** Oui ou non : les deux événements ont-ils autant de chances ? */
 function corrigerAutant(q: Q): string[] {
-  const e = lireExperience(q.text);
+  const e = lireExp(q);
   if (!e) return ["expérience illisible"];
   const p = [...plausible(e), ...verifierCanvas(q, e)];
   const evs = guillemets(q.text);
@@ -543,7 +560,7 @@ function corrigerAffirmation(q: Q): string[] {
 
 /** Combien en ajouter (en enlever) : on essaie 1, 2, 3… en recomptant à chaque fois. */
 function corrigerAjouter(q: Q): string[] {
-  const e = lireExperience(q.text);
+  const e = lireExp(q);
   if (!e || e.kind !== "urne") return ["contenu illisible"];
   const p = [...plausible(e), ...verifierCanvas(q, e)];
   const t = horsGuillemets(q.text);
@@ -562,6 +579,13 @@ function corrigerAjouter(q: Q): string[] {
       const A = compter(evs[0], x);
       return A ? 2 * A.fav === A.tot : null;
     }
+    // 07/11/2026, ★3 court : sans guillemets, les deux couleurs du sac, ou la couleur ajoutée.
+    const tot = [...c.values()].reduce((a, b) => a + b, 0);
+    if (/les deux couleurs aient autant de chances/.test(t) && evs.length === 0 && c.size === 2) {
+      const [a, b] = [...c.values()];
+      return a === b;
+    }
+    if (/une chance sur deux/.test(t) && evs.length === 0) return 2 * (c.get(coul) ?? 0) === tot;
     return null;
   };
   if (cond(e.contenu) !== false) return [...p, "la condition est illisible, ou déjà remplie"];
@@ -767,7 +791,10 @@ function lireSeries(t: string) {
 
 /** ★3 : la série la plus longue renseigne le mieux. */
 function corrigerConfiance(q: Q): string[] {
-  const s = lireSeries(q.text);
+  let s = lireSeries(q.text);
+  // 07/11/2026, ★3 court : « « pile » : Léa 13 fois sur 20, Hugo 260 fois sur 500. »
+  if (!s.length)
+    s = [...q.text.matchAll(new RegExp(`([\\p{L}-]+) ${NB} fois sur ${NB}`, "gu"))].map((m) => ({ nom: m[1], n: val(m[3]), lib: "", k: val(m[2]) }));
   if (s.length !== 2) return [`deux séries attendues (${s.length})`];
   const p: string[] = [];
   for (const x of s) if (x.k > x.n) p.push(`${x.nom} : plus de résultats que d’essais`);

@@ -7,6 +7,7 @@ import type {
   CercleCanvasData,
   FigureLibreCanvasData,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 type Pt = { x: number; y: number };
 type GridCell = [row: number, col: number];
@@ -21,7 +22,7 @@ function randomInt(min: number, max: number): number {
 }
 
 function shuffle<T>(arr: readonly T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]): string[] {

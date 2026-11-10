@@ -12,9 +12,10 @@
 //   repere_distance          — Calculer une distance dans un repere orthonorme
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function shuffle<T>(arr: readonly T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 // Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles

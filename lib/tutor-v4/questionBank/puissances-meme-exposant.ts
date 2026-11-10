@@ -10,12 +10,13 @@
 
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { exposant, type OptsPuissances } from "@/lib/tutor-v4/questionBank/puissances-regles-commun";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const randomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 function randomChoice<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
-const shuffle = <T,>(arr: readonly T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
+const shuffle = <T,>(arr: readonly T[]): T[] => melangeEnPlace([...arr]);
 
 /** Un choix de QCM : ce qu'on lit, et la valeur qu'il vaut. */
 type Choix = { t: string; v: number };

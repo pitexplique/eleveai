@@ -60,23 +60,27 @@ const expl = (d: Div) =>
   etapes(`on multiplie les deux nombres par ${fr(d.k)}, pour rendre le diviseur entier. Le résultat ne change pas.`, `${ecr(d)} = ${fr(d.A)} ÷ ${fr(d.B)} = ${fr(d.q)}.`, `${ecr(d)} = ${fr(d.q)}. On vérifie : ${fr(d.q)} × ${fr(d.b)} = ${fr(d.a)}.`);
 
 /* Les consignes se composent : une aide de méthode, puis une demande. */
-const AIDES = ["", "Rends d'abord le diviseur entier.", "Le diviseur doit devenir entier.", "Pense à multiplier les deux nombres.", "Multiplie les deux nombres par 10 ou 100.", "Commence par changer le diviseur."];
+const AIDES = ["", "Rends d'abord le diviseur entier.", "Le diviseur doit devenir entier.", "Multiplie d'abord les deux nombres.", "Multiplie les deux nombres par 10 ou 100.", "Commence par changer le diviseur."];
+/** ★1 (12 mots au plus) : des aides de 5 mots ; le diviseur a un seul chiffre après la virgule, donc « par 10 ». */
+const AIDES_COURTES = ["", "Rends d'abord le diviseur entier.", "Le diviseur doit devenir entier.", "Multiplie d'abord les deux nombres.", "Multiplie les deux par 10.", "Commence par changer le diviseur."];
 
 function facteur() {
   const d = un<() => Div>([dixieme, centieme, dividendeEntier])();
   return {
-    text: tournure([
-      `Pour calculer ${ecr(d)}, par quel nombre multiplier les deux nombres ?`,
-      `${ecr(d)} : par combien multiplier pour avoir un diviseur entier ?`,
-      `Par combien multiplier ${fr(d.b)} pour qu'il devienne entier ?`,
-      `Dans ${ecr(d)}, comment rendre le diviseur entier ?`,
-      `On veut un diviseur entier dans ${ecr(d)}. On multiplie par combien ?`,
-      `Quel nombre rend ${fr(d.b)} entier ?`,
-      `${ecr(d)} : quel multiplicateur choisir pour le diviseur ?`,
-      `Tu veux calculer ${ecr(d)}. Tu multiplies les deux nombres par combien ?`,
-      `Le diviseur de ${ecr(d)} est ${fr(d.b)}. Par combien le multiplier ?`,
-      `Pour enlever la virgule de ${fr(d.b)}, on multiplie par combien ?`,
-    ], ["Choisis le plus petit qui convient.", "Prends le plus petit possible.", "Le plus petit qui marche."]),
+    // 07/11/2026 : ★1 = 12 mots au plus. « Le plus petit » est dans chaque
+    // phrase (100 rend aussi 0,3 entier : sans lui, deux réponses justes).
+    text: un([
+      `Pour calculer ${ecr(d)}, par quel nombre multiplier ? Le plus petit possible.`,
+      `${ecr(d)} : par combien multiplier, au minimum, pour un diviseur entier ?`,
+      `Quel est le plus petit nombre qui rend ${fr(d.b)} entier ?`,
+      `Dans ${ecr(d)}, comment rendre le diviseur entier ? Choisis le plus petit.`,
+      `Pour un diviseur entier dans ${ecr(d)}, par combien multiplier au moins ?`,
+      `Quel nombre rend ${fr(d.b)} entier ? Prends le plus petit.`,
+      `${ecr(d)} : quel multiplicateur choisir pour le diviseur ? Le plus petit.`,
+      `Tu veux calculer ${ecr(d)}. Tu multiplies par combien, au minimum ?`,
+      `${ecr(d)} : le diviseur doit devenir entier. Par combien, au moins ?`,
+      `Pour enlever la virgule de ${fr(d.b)}, on multiplie par combien, au minimum ?`,
+    ]),
     ...qcm(fr(d.k), ["10", "100", "1 000"]),
     explanation: etapes(`on compte les chiffres après la virgule du diviseur.`, `${fr(d.b)} a ${decs(d.b)} chiffre${decs(d.b) > 1 ? "s" : ""} après la virgule : ${fr(d.b)} × ${fr(d.k)} = ${fr(d.B)}.`, `On multiplie les deux nombres par ${fr(d.k)}.`),
   };
@@ -118,9 +122,9 @@ function trou() {
   return { text, ...qcmN(juste, faux), explanation: expl(d) };
 }
 
-const calcul = (tirer: () => Div) => () => {
+const calcul = (tirer: () => Div, aides = AIDES) => () => {
   const d = tirer();
-  return { text: tournure(AIDES, CALC(ecr(d))), ...qcmN(d.q, leurres(d)), explanation: expl(d) };
+  return { text: tournure(aides, CALC(ecr(d))), ...qcmN(d.q, leurres(d)), explanation: expl(d) };
 };
 
 function verifier() {
@@ -152,7 +156,7 @@ function plusGrand() {
       `Sans calculer, compare à ${fr(d.a)} le résultat de ${ecr(d)}.`,
       `Le résultat de ${ecr(d)} est-il plus grand ou plus petit que ${fr(d.a)} ?`,
       `On divise ${fr(d.a)} par ${fr(d.b)}. Le résultat est-il plus grand ou plus petit que ${fr(d.a)} ?`,
-      `Regarde le diviseur de ${ecr(d)}. Le résultat est-il plus grand ou plus petit que ${fr(d.a)} ?`,
+      `Regarde le diviseur. ${ecr(d)} est-il plus grand ou plus petit que ${fr(d.a)} ?`,
     ]),
     ...qcm(juste, ["plus grand", "plus petit", "égal"]),
     explanation: etapes(`on regarde le diviseur.`, d.b < 1 ? `${fr(d.b)} est plus petit que 1 : il y a plus d'une fois ${fr(d.b)} dans 1, donc le résultat est plus grand.` : `${fr(d.b)} est plus grand que 1 : le résultat est plus petit.`, `${ecr(d)} = ${fr(d.q)}.`),
@@ -223,7 +227,7 @@ const COMPARE: ((a: string, b: string) => string)[] = [
   (a, b) => `Une pastèque pèse ${a} kg. Une mangue pèse ${b} kg. La pastèque est combien de fois plus lourde que la mangue ?`,
   (a, b) => `Un seau contient ${a} L. Une tasse contient ${b} L. Le seau contient combien de fois plus que la tasse ?`,
   (a, b) => `Un arbre a grandi de ${a} m. Une tige a grandi de ${b} m. L’arbre a grandi combien de fois plus que la tige ?`,
-  (a, b) => `La ville A reçoit ${a} m de pluie. La ville B en reçoit ${b} m. La ville A reçoit combien de fois plus de pluie que la ville B ?`,
+  (a, b) => `La ville A reçoit ${a} m de pluie. La ville B en reçoit ${b} m. Combien de fois plus de pluie pour la ville A ?`,
   (a, b) => `Un cheval parcourt ${a} km. Un chien parcourt ${b} km. Le cheval va combien de fois plus loin que le chien ?`,
 ];
 function combienDeFois() {
@@ -239,7 +243,7 @@ export const decimalDiviserParDecimalBank: TutorBankItemV4[] = [
   M(1, 1, HINT, facteur),
   M(2, 1, HINT, divisionEgale),
   M(3, 1, HINT, trou),
-  M(4, 1, HINT, calcul(dixieme)),
+  M(4, 1, HINT, calcul(dixieme, AIDES_COURTES)),
   M(5, 2, HINT, calcul(() => un<() => Div>([centieme, diviseurGrand])())),
   M(6, 2, HINT, calcul(() => un<() => Div>([dividendeEntier, quotientDecimal])())),
   M(7, 2, "Le quotient multiplié par le diviseur redonne le dividende.", verifier),

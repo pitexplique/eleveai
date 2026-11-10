@@ -25,6 +25,7 @@
 
 import type { MonnaieCanvasData, MonnaieElement, MonnaieValeur, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { type Etoile, type Q, type Prenom, choix, de, deuxPersonnes, exp, gabarit, ils, maj, pick, quelquun, rint, shuffle, tirer } from "./outils-nombres-ce2";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const NOTION = "monnaie";
 
@@ -527,7 +528,7 @@ function pieceQuiManque(): Q {
   return {
     text,
     format: "qcm",
-    choices: choix(correct, VALEURS.filter((v) => v !== manque && v <= 1000 && v >= 5).map(court).sort(() => Math.random() - 0.5)),
+    choices: choix(correct, melangeEnPlace(VALEURS.filter((v) => v !== manque && v <= 1000 && v >= 5).map(court))),
     expected: [correct],
     comparator: "mcq_exact",
     canvas: argent(restants, false, manque),

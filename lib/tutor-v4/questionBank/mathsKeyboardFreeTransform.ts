@@ -17,6 +17,7 @@ import type {
   QuestionFormat,
   TutorBankItemV4,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 type Parsed = {
   value: number;
@@ -62,7 +63,7 @@ function withNumber(original: string, parsed: Parsed, newValue: number): string 
 }
 
 function shuffle<T>(items: T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 // On vise 3 distracteurs PÉDAGOGIQUES et variés (pas trois nombres collés à la

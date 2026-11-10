@@ -158,16 +158,37 @@ function ligne(i: Ins, u: Unite): string {
 function progTxt(prog: Ins[], u: Unite = "pas") {
   return prog.map((i) => `– ${ligne(i, u)}`).join("\n");
 }
-function bloc(i: Ins, u: Unite): ScratchBlockData | null {
+/* 07/11/2026 — LE PROGRAMME DANS LES BLOCS, PAS DANS LA PHRASE (Frédéric) : à
+   ★1-★3, l'énoncé ne recopie plus le programme quand les blocs l'affichent ;
+   il garde une phrase d'ouverture et la question (★1 12 mots, ★2 15, ★3 25).
+   Le correcteur relit alors les blocs. Les blocs « avancer » portent leur unité
+   (« avancer de 50 pas ») et les « tourner » leur sens écrit en toutes lettres,
+   pour que les propositions du QCM se lisent comme les blocs. */
+const motsDe = (t: string) => t.trim().split(/\s+/).filter((x) => /[\p{L}\d]/u.test(x)).length;
+/** Retire le tirage tant que l'énoncé dépasse `max` mots. */
+function tenir<T extends { text: string }>(max: number, gen: () => T): () => T {
+  return () => {
+    let q = gen();
+    for (let k = 0; k < 300 && motsDe(q.text) > max; k++) q = gen();
+    return q;
+  };
+}
+function bloc(i: Ins, u: Unite, libre = false): ScratchBlockData | null {
   switch (i.t) {
     case "av":
-      return { type: "move", value: u === "pas" ? i.n : uTxt(i.n, u) };
+      return { type: "move", value: uTxt(i.n, u) };
     case "tg":
-      return { type: "turn", value: i.sens ? `${i.sens === "g" ? "↺" : "↻"} ${i.a}` : i.a };
+      return i.sens
+        ? { type: "turn", value: `${i.sens === "g" ? "↺" : "↻"} ${i.a}`, text: ligne(i, u) }
+        : { type: "turn", value: i.a };
     case "rep": {
-      const enfants = i.corps.map((c) => bloc(c, u));
+      const enfants = i.corps.map((c) => bloc(c, u, libre));
       return enfants.every((e) => e) ? { type: "repeat", times: i.k, children: enfants as ScratchBlockData[] } : null;
     }
+    case "calc":
+    case "act":
+      // Un calcul ou une action de la vie : un bloc qui porte la ligne telle quelle.
+      return libre ? { type: "operator", text: ligne(i, u) } : null;
     case "dire":
       return { type: "say", text: i.s };
     case "stylo":
@@ -187,6 +208,18 @@ function canvasDe(prog: Ins[], u: Unite, titre: string, a?: Acteur): ScratchCanv
   const depart: ScratchBlockData =
     !a || a.nom === "le lutin de Scratch" ? { type: "event" } : { type: "event", text: `quand ${a.nom} démarre` };
   return scratchCanvas(titre, [depart, ...(bs as ScratchBlockData[])]);
+}
+/** 07/11/2026 : les blocs d'un programme de calcul ou d'actions de la vie.
+ *  `depart` : le bloc jaune en tête (son texte, ou celui du drapeau vert si vide) ;
+ *  sans `depart`, une simple liste d'étapes. */
+function canvasLibre(prog: Ins[], titre: string, depart?: string): ScratchCanvasData {
+  const bs = prog.map((i) => bloc(i, "pas", true) as ScratchBlockData);
+  const tete: ScratchBlockData[] = depart === undefined ? [] : [depart ? { type: "event", text: depart } : { type: "event" }];
+  return scratchCanvas(titre, [...tete, ...bs]);
+}
+/** Une liste d'étapes écrites (construction, routine) : une étape par bloc. */
+function canvasEtapes(etapes: string[], titre: string): ScratchCanvasData {
+  return canvasLibre(etapes.map((s): Ins => ({ t: "act", s })), titre);
 }
 
 /** L'exécution d'un programme : ce que les gabarits demandent. */
@@ -247,7 +280,26 @@ const ACTEURS_SIMPLES: Acteur[] = [
 /** Une ouverture simple, sans prénom ni lieu. */
 function introSimple(a: Acteur) {
   // 03/11/2026 : 12 mots (★1) / 15 mots (★2) au plus, programme compris : l'ouverture tient en 3 ou 4 mots.
-  return randomChoice(["Lis ce programme.", "Voici un programme.", `${maj(a.nom)} suit ce programme.`, `Programme ${duA(a)}.`]);
+  // 07/11/2026 : le programme est dans les blocs ; l'ouverture y renvoie.
+  return randomChoice([
+    "Lis ce programme.",
+    "Voici un programme.",
+    "Regarde les blocs.",
+    "Lis les blocs.",
+    `${maj(a.nom)} suit ce programme.`,
+    `${maj(a.nom)} suit ces blocs.`,
+    `Programme ${duA(a)}.`,
+  ]);
+}
+/** ★3 (07/11/2026) : une ouverture courte, un prénom, le programme dans les blocs. */
+function intro3(p: Prenom, a: Acteur) {
+  return randomChoice([
+    `${p.nom} programme ${a.nom}.`,
+    `Voici le programme ${duA(a)} ${de(p.nom)}.`,
+    `${maj(a.nom)} ${de(p.nom)} suit ces blocs.`,
+    `${p.nom} a écrit ce programme pour ${a.nom}.`,
+    `${maj(a.lieu)}, ${a.nom} ${de(p.nom)} suit ce programme.`,
+  ]);
 }
 
 const ORDINAUX = ["première", "deuxième", "troisième", "quatrième", "cinquième", "sixième", "septième", "huitième"];
@@ -357,7 +409,8 @@ function introCalcul(p: Prenom) {
 }
 /** ★1-★2 (03/11/2026) : le programme de calcul, sans prénom ni situation. */
 function introCalculSimple() {
-  return randomChoice(["Programme de calcul.", "Lis ce programme.", "Voici un programme.", "Fais ce calcul."]);
+  // 07/11/2026 : le programme reste écrit (une ligne par calcul) : l'ouverture tient en 1 à 3 mots.
+  return randomChoice(["Programme :", "Calcul :", "Algorithme :", "Programme de calcul :", "Voici le programme :", "Fais ce calcul."]);
 }
 /** ★1 (03/11/2026) : des programmes de CONSTRUCTION (géométrie pure), étapes
  *  distinctes dans l'ordre — à la place des routines de la vie (montées à ★3).
@@ -459,8 +512,15 @@ function programmeFigure(u: Unite, choix: string[]) {
   return { nom, prog, cotes: f.k, perimetre: f.k * c, cote: c, calcul: `${f.k} × ${c}` };
 }
 
+/** « la tortue du logiciel de dessin » → « la tortue » : le nom court, après la phrase d'ouverture (07/11/2026). */
+function court(a: Acteur) {
+  if (a.nom === "le petit robot sous-marin") return "le sous-marin";
+  return a.nom.split(" ").slice(0, 2).join(" ");
+}
+
 const POINTS = ["Nord", "Est", "Sud", "Ouest"];
-const VERS: Record<string, string> = { Nord: "le Nord", Est: "l’Est", Sud: "le Sud", Ouest: "l’Ouest" };
+// 07/11/2026 : dans la phrase, les directions en minuscules (« vers le sud »), comme on les écrit.
+const VERS: Record<string, string> = { Nord: "le nord", Est: "l’est", Sud: "le sud", Ouest: "l’ouest" };
 
 /** Orientation : un départ (Nord, Est…), des quarts et des demi-tours à droite ou à gauche, quelques pas. */
 function questionOrientation(nbTg: number, nbAv: number, titre: string, simple = false) {
@@ -481,15 +541,27 @@ function questionOrientation(nbTg: number, nbAv: number, titre: string, simple =
     }
   const fin = POINTS[executer(prog, cap0).cap / 90];
   const il = ilA(a);
+  const c = court(a);
+  const dep = VERS[POINTS[cap0 / 90]];
+  // 07/11/2026 : le programme est dans les blocs ; la phrase donne le départ et pose la question.
   return {
-    text:
-      `${simple ? "" : `${intro(p, a)}\n`}${simple ? maj(a.nom) : `Au départ, ${a.nom}`} regarde vers ${VERS[POINTS[cap0 / 90]]}.\n${progTxt(prog, a.u)}\n` +
-      randomChoice(simple ? [`Vers où regarde-t-${il} à la fin ?`, `Où regarde-t-${il} à la fin ?`] : [
-        `Vers où ${a.nom} regarde-t-${il} à la fin ?`,
-        `À la fin, dans quelle direction ${a.nom} regarde-t-${il} ?`,
-        `Quelle est la direction ${duA(a)} à la fin du programme ?`,
-        `À la fin, ${a.nom} est tourné${a.f ? "e" : ""} vers quel point cardinal ?`,
-      ]),
+    text: simple
+      ? `${maj(a.nom)} regarde vers ${dep}.\n` +
+        randomChoice([
+          `Vers où regarde-t-${il} à la fin ?`,
+          `Où regarde-t-${il} à la fin ?`,
+          `À la fin, vers où regarde-t-${il} ?`,
+          `Quelle est sa direction à la fin ?`,
+        ])
+      : `${intro3(p, a)}\n` +
+        randomChoice([`Au départ, ${c} regarde vers ${dep}.`, `${maj(c)} part tourné${a.f ? "e" : ""} vers ${dep}.`]) +
+        "\n" +
+        randomChoice([
+          `Vers où ${c} regarde-t-${il} à la fin ?`,
+          `À la fin, dans quelle direction regarde ${c} ?`,
+          `Quelle est sa direction à la fin ?`,
+          `À la fin, ${c} est tourné${a.f ? "e" : ""} vers quel point cardinal ?`,
+        ]),
     format: "qcm" as const,
     choices: makeChoices(fin, POINTS),
     expected: [fin],
@@ -506,13 +578,15 @@ function questionOrientation(nbTg: number, nbAv: number, titre: string, simple =
 
 /** La question « quelle instruction… » sur une liste de lignes distinctes : la question et la bonne ligne. */
 /** `court` (★1-★2, 03/11/2026) : des questions de 6 mots environ. */
-function questionRang(lignes: string[], court = false): { question: string; juste: string } {
+// 07/11/2026 : `court` dit ce qu'on désigne — « bloc » (le programme est dans les blocs) ou « étape ».
+function questionRang(lignes: string[], court: false | "bloc" | "étape" = false): { question: string; juste: string } {
   const n = lignes.length;
   const genre = randomChoice(["rang", "apres", "avant", "derniere"] as const);
+  const quel = court === "bloc" ? "Quel bloc" : "Quelle étape";
   if (genre === "apres") {
     const k = randomInt(0, n - 2);
     return {
-      question: court ? `Quelle ligne suit « ${lignes[k]} » ?` : randomChoice([
+      question: court ? randomChoice([`${quel} suit « ${lignes[k]} » ?`, `${quel} vient après « ${lignes[k]} » ?`]) : randomChoice([
         `Quelle instruction vient juste après « ${lignes[k]} » ?`,
         `Que faut-il faire juste après « ${lignes[k]} » ?`,
       ]),
@@ -522,7 +596,7 @@ function questionRang(lignes: string[], court = false): { question: string; just
   if (genre === "avant") {
     const k = randomInt(1, n - 1);
     return {
-      question: court ? `Quelle ligne précède « ${lignes[k]} » ?` : randomChoice([
+      question: court ? randomChoice([`${quel} précède « ${lignes[k]} » ?`, `${quel} vient avant « ${lignes[k]} » ?`]) : randomChoice([
         `Quelle instruction vient juste avant « ${lignes[k]} » ?`,
         `Qu’est-ce qui est fait juste avant « ${lignes[k]} » ?`,
       ]),
@@ -640,7 +714,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les blocs d’action après le départ.",
     tags: ["algo_programmation", "sequence", "scratch", "template", "canvas"],
-    generate: () => {
+    generate: tenir(15, () => {
       const a = randomChoice(ACTEURS_SIMPLES);
       const prog = programmeSimple(a.u, randomInt(3, 4));
       const nAv = prog.filter((i) => i.t === "av").length;
@@ -652,43 +726,44 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
               randomChoice([
                 "Combien d’instructions y a-t-il ?",
                 "Compte les instructions.",
-                "Combien de lignes compte ce programme ?",
+                "Combien d’instructions suivent le départ ?",
+                "Compte les blocs sous le départ.",
               ]),
               prog.length,
-              "toutes les lignes du programme",
+              "tous les blocs sous le départ",
             ]
           : genre === "avance"
             ? [
                 randomChoice([
-                  "Combien de lignes « avancer » y a-t-il ?",
+                  "Combien de blocs « avancer » y a-t-il ?",
                   `Combien de fois ${a.nom} avance-t-${ilA(a)} ?`,
                 ]),
                 nAv,
-                "les lignes « avancer »",
+                "les blocs « avancer »",
               ]
             : [
                 randomChoice([
-                  "Combien de lignes « tourner » y a-t-il ?",
+                  "Combien de blocs « tourner » y a-t-il ?",
                   `Combien de fois ${a.nom} tourne-t-${ilA(a)} ?`,
                 ]),
                 nTg,
-                "les lignes « tourner »",
+                "les blocs « tourner »",
               ];
 
       return {
-        text: `${introSimple(a)}\n${progTxt(prog, a.u)}\n${question}`,
+        text: `${introSimple(a)}\n${question}`,
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
         explanation: ae(
-          "un programme est une suite d’instructions, une par ligne.",
+          "un programme est une suite d’instructions, une par bloc.",
           `on compte ${quoi}, de haut en bas, sans en oublier.`,
           `on trouve ${n}.`,
           `la réponse est ${n}.`,
         ),
         canvas: canvasDe(prog, a.u, "Programme", a),
       };
-    },
+    }),
   },
 
   {
@@ -702,27 +777,27 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Lis le premier bloc placé sous le drapeau vert.",
     tags: ["algo_programmation", "sequence", "ordre", "template", "canvas"],
-    generate: () => {
+    generate: tenir(15, () => {
       const a = randomChoice(ACTEURS_SIMPLES);
       const prog = programmeSimple(a.u, 3, false);
       const lignes = prog.map((i) => ligne(i, a.u));
-      const { question, juste } = questionRang(lignes, true);
+      const { question, juste } = questionRang(lignes, "bloc");
 
       return {
-        text: `${introSimple(a)}\n${progTxt(prog, a.u)}\n${question}`,
+        text: `${introSimple(a)}\n${question}`,
         format: "qcm",
         choices: makeChoices(juste, lignes),
         expected: [juste],
         comparator: "mcq_exact",
         explanation: ae(
           "un programme s’exécute de haut en bas, une instruction après l’autre.",
-          "on suit les lignes dans l’ordre, en les comptant.",
-          `la bonne ligne est ${cite(juste)}.`,
+          "on suit les blocs dans l’ordre, en les comptant.",
+          `le bon bloc est ${cite(juste)}.`,
           `la réponse est ${cite(juste)}.`,
         ),
         canvas: canvasDe(prog, a.u, "Programme", a),
       };
-    },
+    }),
   },
 
   {
@@ -735,39 +810,43 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     difficulty: 1,
     theme: "neutral",
     hint: "Lis les étapes de haut en bas, dans l’ordre.",
-    tags: ["algo_programmation", "sequence", "ordre", "template"],
-    generate: () => {
+    tags: ["algo_programmation", "sequence", "ordre", "template", "canvas"],
+    generate: tenir(12, () => {
       // 03/11/2026 : ★1 = un programme de construction, sans situation (les
       // routines de la vie sont montées à ★3 : 6e_algo_sequence_tpl_7_routine_situation).
+      // 07/11/2026 : les étapes sont affichées dans les blocs, la phrase pose la question.
       const E = construction();
       const ouverture = randomChoice([
-        "Les étapes :",
-        "Algorithme :",
-        "Programme :",
         "Lis l’algorithme.",
+        "Voici les étapes.",
+        "Lis les étapes.",
+        "Voici un algorithme.",
+        "Regarde les étapes.",
       ]);
-      const texte = `${ouverture}\n${E.map((e) => `– ${e}`).join("\n")}\n`;
+      const texte = `${ouverture}\n`;
+      const canvas = canvasEtapes(E, "Algorithme");
       if (Math.random() < 0.2) {
         return {
           text:
             texte +
             randomChoice([
               "Combien d’étapes y a-t-il ?",
-              "Combien de lignes compte-t-on ?",
+              "Compte les étapes.",
               "Combien d’instructions y a-t-il ?",
             ]),
           format: "short",
           expected: [String(E.length)],
           comparator: "number_equal",
           explanation: ae(
-            "un algorithme est une suite d’instructions, une par ligne.",
-            "on compte les lignes.",
-            `il y a ${E.length} lignes.`,
+            "un algorithme est une suite d’instructions, une par étape.",
+            "on compte les étapes.",
+            `il y a ${E.length} étapes.`,
             `l’algorithme compte ${E.length} instructions.`,
           ),
+          canvas,
         };
       }
-      const { question, juste } = questionRang(E, true);
+      const { question, juste } = questionRang(E, "étape");
       return {
         text: texte + question,
         format: "qcm",
@@ -776,12 +855,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         comparator: "mcq_exact",
         explanation: ae(
           "un algorithme est une suite d’instructions faites dans un ordre précis.",
-          "on lit les lignes de haut en bas.",
-          `la bonne ligne est ${cite(juste)}.`,
+          "on lit les étapes de haut en bas.",
+          `la bonne étape est ${cite(juste)}.`,
           `la réponse est ${cite(juste)}.`,
         ),
+        canvas,
       };
-    },
+    }),
   },
 
   {
@@ -794,20 +874,22 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Lis les étapes de haut en bas, dans l’ordre.",
-    tags: ["algo_programmation", "sequence", "ordre", "template"],
-    generate: () => {
+    tags: ["algo_programmation", "sequence", "ordre", "template", "canvas"],
+    generate: tenir(25, () => {
       // 03/11/2026 : les algorithmes de la vie (cuisine, jardin, sciences,
       // musique…), montés de ★1 à ★3.
+      // 07/11/2026 : les étapes sont affichées dans les blocs, la phrase pose la question.
       const p = pick(PRENOMS);
       const r = randomChoice(ROUTINES);
       const E = r.etapes;
       const ouverture = randomChoice([
         `${p.nom} écrit l’algorithme pour ${r.titre}.`,
         `Voici l’algorithme ${de(p.nom)} pour ${r.titre}.`,
-        `Pour ${r.titre}, ${p.nom} suit ces instructions dans l’ordre.`,
+        `Pour ${r.titre}, ${p.nom} suit ces étapes dans l’ordre.`,
         `${p.nom} note les étapes pour ${r.titre}.`,
       ]);
-      const texte = `${ouverture}\n${E.map((e) => `– ${e}`).join("\n")}\n`;
+      const texte = `${ouverture}\n`;
+      const canvas = canvasEtapes(E, maj(r.titre));
       if (Math.random() < 0.2) {
         return {
           text:
@@ -821,11 +903,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           expected: [String(E.length)],
           comparator: "number_equal",
           explanation: ae(
-            "un algorithme est une suite d’instructions, une par ligne.",
-            "on compte les lignes.",
-            `il y a ${E.length} lignes.`,
+            "un algorithme est une suite d’instructions, une par étape.",
+            "on compte les étapes.",
+            `il y a ${E.length} étapes.`,
             `l’algorithme compte ${E.length} instructions.`,
           ),
+          canvas,
         };
       }
       const { question, juste } = questionRang(E);
@@ -837,12 +920,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         comparator: "mcq_exact",
         explanation: ae(
           "un algorithme est une suite d’instructions faites dans un ordre précis.",
-          "on lit les lignes de haut en bas.",
-          `la bonne ligne est ${cite(juste)}.`,
+          "on lit les étapes de haut en bas.",
+          `la bonne étape est ${cite(juste)}.`,
           `la réponse est ${cite(juste)}.`,
         ),
+        canvas,
       };
-    },
+    }),
   },
 
   {
@@ -854,9 +938,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_sequence",
     difficulty: 3,
     theme: "neutral",
-    hint: "Fais les calculs dans l’ordre des lignes, un par un.",
-    tags: ["algo_programmation", "sequence", "ordre", "programme_calcul", "template"],
-    generate: () => {
+    hint: "Fais les calculs dans l’ordre des blocs, un par un.",
+    tags: ["algo_programmation", "sequence", "ordre", "programme_calcul", "template", "canvas"],
+    generate: tenir(25, () => {
       const p1 = pick(PRENOMS);
       let p2 = pick(PRENOMS);
       while (p2.nom === p1.nom) p2 = pick(PRENOMS);
@@ -895,7 +979,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         `${p1.nom} et ${p2.nom} préparent un tour de magie avec des nombres.`,
         `En classe, ${p1.nom} et ${p2.nom} écrivent chacun un programme de calcul.`,
       ]);
-      const texte = `${ouverture}\nProgramme ${de(p1.nom)} :\n${progTxt(A)}\nProgramme ${de(p2.nom)} :\n${progTxt(B)}\n`;
+      // 07/11/2026 : les deux programmes sont affichés dans les blocs, l'un sous l'autre.
+      const texte = `${ouverture}\n`;
+      const canvas = scratchCanvas("Deux programmes", [
+        ...canvasLibre(A, "", `Programme ${de(p1.nom)}`).blocks,
+        ...canvasLibre(B, "", `Programme ${de(p2.nom)}`).blocks,
+      ]);
       const deroule = `${p1.nom} obtient ${vA} ; ${p2.nom} obtient ${vB}`;
       if (memeQuestion) {
         const juste = vA === vB ? "oui, le même nombre" : "non, deux nombres différents";
@@ -913,6 +1002,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
               ? "ici, changer l’ordre ne change pas le résultat."
               : "ici, changer l’ordre change le résultat : l’ordre est important.",
           ),
+          canvas,
         };
       }
       const s = (A[0] as { n: number }).n;
@@ -936,8 +1026,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `${deroule}.`,
           `${p2.nom} obtient ${vB} : le même calcul dans un autre ordre donne un autre nombre.`,
         ),
+        canvas,
       };
-    },
+    }),
   },
 
   {
@@ -1003,7 +1094,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_deplacement",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans Scratch, le bloc “avancer de 10” signifie que le lutin...",
+    text: "Le bloc « avancer de 10 » signifie que le lutin...",
     format: "qcm",
     choices: [
       "se déplace tout droit",
@@ -1035,7 +1126,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_deplacement",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans Scratch, le bloc “tourner de 90°” sert à...",
+    text: "Le bloc « tourner de 90° » sert à...",
     format: "qcm",
     choices: [
       "changer de direction",
@@ -1069,7 +1160,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne uniquement les blocs “avancer”.",
     tags: ["algo_programmation", "deplacement", "distance", "template", "canvas"],
-    generate: () => {
+    generate: tenir(15, () => {
       const a = randomChoice(ACTEURS_SIMPLES);
       let prog: Ins[];
       do prog = programmeSimple(a.u, 3, false);
@@ -1080,12 +1171,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
       return {
         text:
-          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n` +
           randomChoice([
             `Quelle distance ${a.nom} parcourt-${il} ?`,
             `Calcule la distance parcourue.`,
             `De combien ${a.nom} avance-t-${il} en tout ?`,
             `Calcule la distance totale.`,
+            `Combien de ${UNITE_MOT[a.u]} en tout ?`,
           ]),
         format: "short",
         expected: [uTxt(total, a.u)],
@@ -1098,7 +1190,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(prog, a.u, "Déplacements", a),
       };
-    },
+    }),
   },
 
   {
@@ -1112,7 +1204,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne les angles des blocs “tourner”.",
     tags: ["algo_programmation", "deplacement", "angle", "template", "canvas"],
-    generate: () => {
+    generate: tenir(15, () => {
       const a = randomChoice(ACTEURS_SIMPLES);
       let prog: Ins[];
       do prog = programmeSimple(a.u, 3, false);
@@ -1123,12 +1215,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
       return {
         text:
-          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n` +
           randomChoice([
             `De combien ${a.nom} tourne-t-${il} en tout ?`,
             `Calcule l’angle total.`,
             `Additionne les angles. Combien de degrés ?`,
             `Quel est l’angle total ?`,
+            `De combien de degrés ${a.nom} tourne-t-${il} ?`,
           ]),
         format: "short",
         expected: [`${total}°`],
@@ -1141,7 +1234,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(prog, a.u, "Rotations", a),
       };
-    },
+    }),
   },
 
   {
@@ -1178,7 +1271,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Pour parcourir une distance, on utilise un bloc avancer.",
     tags: ["algo_programmation", "deplacement", "completer", "template", "canvas"],
-    generate: () => {
+    generate: tenir(25, () => {
       const p = pick(PRENOMS);
       const a = randomChoice(ACTEURS);
       const surAngle = Math.random() < 0.35;
@@ -1194,26 +1287,26 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const connus = prog
         .filter((i, k) => i.t === quoi && k !== trou)
         .map((i) => (i.t === "av" ? i.n : i.t === "tg" ? i.a : 0));
-      const lignes = prog.map((i, k) =>
-        k !== trou ? `– ${ligne(i, a.u)}` : quoi === "av" ? `– avancer de … ${a.u}` : "– tourner de …°",
-      );
+      // 07/11/2026 : le programme est dans les blocs, le bloc à compléter y affiche « ? ».
       const blocs = canvasDe(prog, a.u, "Bloc à compléter", a);
       if (blocs) {
         const b = blocs.blocks[trou + 1];
-        b.value = quoi === "av" && a.u !== "pas" ? `? ${a.u}` : "?";
+        b.value = quoi === "av" ? `? ${a.u}` : "?";
+        delete b.text;
       }
       const but = surAngle
-        ? `${maj(a.nom)} doit tourner de ${total}° en tout.`
-        : `${maj(a.nom)} doit parcourir ${uTxt(total, a.u)} en tout.`;
+        ? `${maj(court(a))} doit tourner de ${total}° en tout.`
+        : `${maj(court(a))} doit parcourir ${uTxt(total, a.u)} en tout.`;
       const unite = surAngle ? "°" : ` ${a.u}`;
 
       return {
         text:
-          `${intro(p, a)} ${but}\n${lignes.join("\n")}\n` +
+          `${intro3(p, a)} ${but}\n` +
           randomChoice([
-            "Quel nombre faut-il écrire à la place de « … » ?",
+            "Quel nombre faut-il écrire dans le bloc à compléter ?",
             "Complète le bloc : quel nombre manque ?",
             "Quel nombre manque dans le programme ?",
+            "Quel nombre remplace le « ? » ?",
           ]),
         format: "short",
         expected: [surAngle ? `${cache}°` : uTxt(cache, a.u)],
@@ -1226,7 +1319,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: blocs,
       };
-    },
+    }),
   },
 
   {
@@ -1240,7 +1333,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un quart de tour à droite : Nord → Est → Sud → Ouest.",
     tags: ["algo_programmation", "deplacement", "orientation", "template", "canvas"],
-    generate: () => questionOrientation(randomInt(1, 2), randomInt(0, 1), "Tourner", true),
+    generate: tenir(12, () => questionOrientation(randomInt(1, 2), randomInt(0, 1), "Tourner", true)),
   },
 
   {
@@ -1254,7 +1347,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "« avancer » change la place ; « tourner » change la direction.",
     tags: ["algo_programmation", "deplacement", "template", "canvas", "qcm"],
-    generate: () => {
+    generate: tenir(12, () => {
       const a = randomChoice(ACTEURS_SIMPLES);
       const direction = Math.random() < 0.5;
       const autres: Ins[] = [];
@@ -1273,26 +1366,27 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const juste = ligne(cle, a.u);
       return {
         text:
-          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n` +
           (direction
             ? randomChoice([
-                `Quelle ligne change la direction ?`,
-                `Quelle ligne fait tourner ?`,
+                `Quel bloc change la direction ?`,
+                `Quel bloc fait tourner ${a.nom} ?`,
+                `Quel bloc change la direction ${duA(a)} ?`,
               ])
-            : randomChoice([`Quelle ligne change la place ?`, `Quelle ligne fait avancer ?`])),
+            : randomChoice([`Quel bloc change la place ?`, `Quel bloc fait avancer ${a.nom} ?`, `Quel bloc déplace ${a.nom} ?`])),
         format: "qcm",
         choices: makeChoices(juste, prog.map((i) => ligne(i, a.u))),
         expected: [juste],
         comparator: "mcq_exact",
         explanation: ae(
           "« avancer » déplace : la place change. « tourner » fait pivoter : la direction change. « dire » affiche une bulle.",
-          direction ? "on cherche la ligne avec un angle en degrés." : "on cherche la ligne avec une distance.",
-          `c’est la ligne ${cite(juste)}.`,
+          direction ? "on cherche le bloc avec un angle en degrés." : "on cherche le bloc avec une distance.",
+          `c’est le bloc ${cite(juste)}.`,
           `la réponse est ${cite(juste)}.`,
         ),
         canvas: canvasDe(prog, a.u, "Programme", a),
       };
-    },
+    }),
   },
 
   {
@@ -1306,7 +1400,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Suis les blocs « tourner » un par un ; « avancer » ne change pas la direction.",
     tags: ["algo_programmation", "deplacement", "orientation", "template", "canvas"],
-    generate: () => questionOrientation(randomInt(3, 4), randomInt(1, 3), "Où regarde-t-il ?"),
+    generate: tenir(25, () => questionOrientation(randomInt(3, 4), randomInt(1, 3), "Où regarde-t-il ?")),
   },
 
   {
@@ -1451,7 +1545,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_repetition",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans Scratch, le bloc “répéter 4 fois” sert à...",
+    text: "Le bloc « répéter 4 fois » sert à...",
     format: "qcm",
     choices: [
       "exécuter plusieurs fois les mêmes instructions",
@@ -1489,7 +1583,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Multiplie le nombre de répétitions par la distance avancée.",
     tags: ["algo_programmation", "repetition", "distance", "template", "canvas"],
-    generate: () => {
+    generate: tenir(15, () => {
       const a = randomChoice(ACTEURS_SIMPLES);
       const k = randomInt(2, 8);
       const d = longueur(a.u);
@@ -1500,11 +1594,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const il = ilA(a);
       return {
         text:
-          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n` +
           randomChoice([
             `Quelle distance ${a.nom} parcourt-${il} ?`,
             `Combien de ${UNITE_MOT[a.u]} en tout ?`,
             `Calcule la distance totale.`,
+            `De combien ${a.nom} avance-t-${il} en tout ?`,
+            `Quelle distance après toute la boucle ?`,
           ]),
         format: "short",
         expected: [uTxt(total, a.u)],
@@ -1517,7 +1613,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(prog, a.u, "Boucle", a),
       };
-    },
+    }),
   },
 
   {
@@ -1531,7 +1627,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Chaque instruction dans la boucle est répétée le même nombre de fois.",
     tags: ["algo_programmation", "repetition", "actions", "template", "canvas"],
-    generate: () => {
+    generate: tenir(15, () => {
       const a = randomChoice(ACTEURS_SIMPLES);
       const k = randomInt(2, 6);
       const corps: Ins[] = shuffle([
@@ -1547,15 +1643,16 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
               randomChoice([
                 "Combien d’instructions sont exécutées ?",
                 "Compte les instructions exécutées.",
+                "En tout, combien d’instructions sont exécutées ?",
               ]),
               corps.length,
             ]
           : genre === "tourne"
-            ? [`Combien de fois ${a.nom} tourne-t-${il} ?`, 1]
-            : [`Combien de fois ${a.nom} avance-t-${il} ?`, 1];
+            ? [randomChoice([`Combien de fois ${a.nom} tourne-t-${il} ?`, `Combien de rotations ${a.nom} fait-${il} ?`]), 1]
+            : [randomChoice([`Combien de fois ${a.nom} avance-t-${il} ?`, `Combien de blocs « avancer » sont exécutés ?`]), 1];
       const total = k * parTour;
       return {
-        text: `${introSimple(a)}\n${progTxt(prog, a.u)}\n${question}`,
+        text: `${introSimple(a)}\n${question}`,
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
@@ -1567,7 +1664,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(prog, a.u, "Compter les instructions", a),
       };
-    },
+    }),
   },
 
   {
@@ -1618,7 +1715,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     "template",
     "canvas",
   ],
-  generate: () => {
+  generate: tenir(25, () => {
     const p = pick(PRENOMS);
     const a = randomChoice(ACTEURS);
     const k = randomInt(2, 9);
@@ -1631,20 +1728,21 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     const parTour = surAngle ? (corps[1] as { a: number }).a : (corps[0] as { n: number }).n;
     const total = k * parTour;
     const prog: Ins[] = [{ t: "rep", k, corps }];
-    const lignes = `– répéter … fois : ${corps.map((c) => ligne(c, a.u)).join(" puis ")}`;
+    // 07/11/2026 : la boucle est dans les blocs (« répéter ? fois »), la phrase donne le but.
     const blocs = canvasDe(prog, a.u, "Boucle à compléter", a);
     // Le nombre de tours est la réponse : le bloc l'affiche « ? ».
     if (blocs) (blocs.blocks[1] as { times?: unknown }).times = "?";
     const but = surAngle
-      ? `${maj(a.nom)} doit tourner de ${total}° en tout.`
-      : `${maj(a.nom)} doit parcourir ${uTxt(total, a.u)} en tout.`;
+      ? `${maj(court(a))} doit tourner de ${total}° en tout.`
+      : `${maj(court(a))} doit parcourir ${uTxt(total, a.u)} en tout.`;
     return {
       text:
-        `${intro(p, a)} ${but}\n${lignes}\n` +
+        `${intro3(p, a)} ${but}\n` +
         randomChoice([
           "Combien de fois faut-il répéter ?",
-          "Quel nombre faut-il écrire à la place de « … » ?",
+          "Quel nombre faut-il écrire dans le bloc « répéter » ?",
           "Complète la boucle : combien de tours faut-il ?",
+          "Combien de tours de boucle faut-il ?",
         ]),
       format: "short",
       expected: [String(k)],
@@ -1659,7 +1757,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       ),
       canvas: blocs,
     };
-  },
+  }),
 },
 
   {
@@ -1673,7 +1771,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Multiplie le nombre de répétitions par l’angle tourné à chaque fois.",
     tags: ["algo_programmation", "repetition", "angle", "template", "canvas"],
-    generate: () => {
+    generate: tenir(25, () => {
       const p = pick(PRENOMS);
       const a = randomChoice(ACTEURS);
       const k = randomInt(2, 8);
@@ -1684,13 +1782,15 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const prog: Ins[] = [{ t: "rep", k, corps }];
       const total = k * angle;
       const il = ilA(a);
+      const c = court(a);
       return {
         text:
-          `${intro(p, a)}\n${progTxt(prog, a.u)}\n` +
+          `${intro3(p, a)}\n` +
           randomChoice([
-            `De combien de degrés ${a.nom} tourne-t-${il} en tout ?`,
-            `Calcule l’angle total dont ${a.nom} a tourné.`,
-            `Quel est l’angle total des rotations ${duA(a)} ?`,
+            `De combien de degrés ${c} tourne-t-${il} en tout ?`,
+            `Calcule l’angle total dont ${c} a tourné.`,
+            `Quel est l’angle total des rotations ${duA({ ...a, nom: c })} ?`,
+            `En tout, de combien ${c} a-t-${il} tourné ?`,
           ]),
         format: "short",
         expected: [`${total}°`],
@@ -1703,7 +1803,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(prog, a.u, "Boucle et rotation", a),
       };
-    },
+    }),
   },
 
   {
@@ -1716,17 +1816,22 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     difficulty: 1,
     theme: "neutral",
     hint: "Le nombre écrit dans « répéter … fois » dit combien de fois on refait l’action.",
-    tags: ["algo_programmation", "repetition", "template"],
-    generate: () => {
+    tags: ["algo_programmation", "repetition", "template", "canvas"],
+    generate: tenir(12, () => {
       // 03/11/2026 : ★1 sans situation (les situations : 6e_algo_repetition_tpl_7_situation, ★3).
+      // 07/11/2026 : la boucle est affichée dans les blocs, la phrase pose la question.
       const s = randomChoice(REPETES_SIMPLES);
       const a = s.lutin ? ACTEURS_SIMPLES[0] : randomChoice(ACTEURS_SIMPLES);
       const k = randomInt(2, 10);
       const sansBoucle = Math.random() < 0.25;
+      const prog: Ins[] = [{ t: "rep", k, corps: [{ t: "act", s: s.act }] }];
       return {
+        canvas: canvasLibre(prog, "Boucle", `quand ${a.nom} démarre`),
         text:
-          `${introSimple(a)}\n– répéter ${k} fois : ${s.act}\n` +
-          (sansBoucle ? "Sans boucle, combien de lignes faut-il ?" : s.question(a)),
+          `${introSimple(a)}\n` +
+          (sansBoucle
+            ? randomChoice(["Sans boucle, combien de blocs faudrait-il ?", "Sans la boucle, combien de blocs faut-il ?"])
+            : s.question(a)),
         format: "short",
         expected: [String(k)],
         comparator: "number_equal",
@@ -1737,7 +1842,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `la réponse est ${k}.`,
         ),
       };
-    },
+    }),
   },
 
   {
@@ -1751,7 +1856,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le nombre écrit dans « répéter … fois » dit combien de fois on refait l’action.",
     tags: ["algo_programmation", "repetition", "template"],
-    generate: () => {
+    generate: tenir(25, () => {
       // 03/11/2026 : les situations de la vie (vélo, musique, jardin, sport…), montées de ★1 à ★3.
       const p = pick(PRENOMS);
       const s = randomChoice(REPETES);
@@ -1760,7 +1865,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       return {
         text:
           `${s.ouverture(p)}\n– répéter ${k} fois : ${s.act}\n` +
-          (sansBoucle ? `Sans boucle, combien de lignes « ${s.act} » faudrait-il écrire ?` : s.question),
+          (sansBoucle
+            ? randomChoice([`Sans boucle, combien de lignes « ${s.act} » faudrait-il ?`, "Sans boucle, combien de lignes faudrait-il écrire ?"])
+            : s.question),
         format: "short",
         expected: [String(k)],
         comparator: "number_equal",
@@ -1771,7 +1878,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `la réponse est ${k}.`,
         ),
       };
-    },
+    }),
   },
 
   {
@@ -1912,7 +2019,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne les blocs avancer, en tenant compte de la boucle.",
     tags: ["algo_programmation", "lire_programme", "distance", "boucle", "template", "canvas"],
-    generate: () => {
+    generate: tenir(15, () => {
       const a = randomChoice(ACTEURS_SIMPLES);
       const debut = longueur(a.u);
       const k = randomInt(2, 5);
@@ -1926,11 +2033,13 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const il = ilA(a);
       return {
         text:
-          `${introSimple(a)}\n${progTxt(prog, a.u)}\n` +
+          `${introSimple(a)}\n` +
           randomChoice([
             `Quelle distance ${a.nom} parcourt-${il} ?`,
             `Combien de ${UNITE_MOT[a.u]} en tout ?`,
             `Calcule la distance totale.`,
+            `Boucle comprise, quelle distance parcourt ${a.nom} ?`,
+            `Du début à la fin, de combien ${a.nom} avance-t-${il} ?`,
           ]),
         format: "short",
         expected: [uTxt(total, a.u)],
@@ -1943,7 +2052,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(prog, a.u, "Lire le programme", a),
       };
-    },
+    }),
   },
 
   {
@@ -1957,7 +2066,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Les blocs dans la boucle comptent plusieurs fois.",
     tags: ["algo_programmation", "lire_programme", "repetition", "template", "canvas"],
-    generate: () => {
+    generate: tenir(25, () => {
       const p = pick(PRENOMS);
       const a = randomChoice(ACTEURS);
       const k = randomInt(2, 6);
@@ -1975,11 +2084,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const total = avant + k * corps.length + 1;
       return {
         text:
-          `${intro(p, a)}\n${progTxt(prog, a.u)}\n` +
+          `${intro3(p, a)}\n` +
           randomChoice([
             "Combien d’instructions sont exécutées en tout ?",
             "En tout, combien d’instructions le programme exécute-t-il ?",
-            "Compte les instructions exécutées, boucle comprise. Combien y en a-t-il ?",
+            "Compte les instructions exécutées, boucle comprise.",
+            "Boucle comprise, combien d’instructions sont exécutées ?",
           ]),
         format: "short",
         expected: [String(total)],
@@ -1992,7 +2102,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(prog, a.u, "Compter les instructions", a),
       };
-    },
+    }),
   },
 
   {
@@ -2006,7 +2116,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Calcule d’abord la distance dans la boucle.",
     tags: ["algo_programmation", "lire_programme", "qcm", "template", "canvas"],
-    generate: () => {
+    generate: tenir(25, () => {
       const p = pick(PRENOMS);
       if (Math.random() < 0.5) {
         // Un programme de calcul : les pièges sont « une ligne oubliée » et « dans le désordre ».
@@ -2024,18 +2134,20 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         }
         return {
           text:
-            `${introCalcul(p)}\n${progTxt(prog)}\n` +
+            `${introCalcul(p)}\n` +
             randomChoice(["Quel nombre obtient-on à la fin ?", "Quel est le résultat du programme ?", "Choisis le résultat du programme."]),
           format: "qcm",
           choices: makeChoices(String(v), pieges),
           expected: [String(v)],
           comparator: "mcq_exact",
           explanation: ae(
-            "un programme de calcul se fait ligne par ligne, dans l’ordre.",
+            "un programme de calcul se fait bloc par bloc, dans l’ordre.",
             "on part du nombre choisi et on fait chaque calcul sur le résultat précédent.",
             `${derouleCalcul(prog)}.`,
             `on obtient ${v}.`,
           ),
+          // 07/11/2026 : le programme de calcul est dans les blocs.
+          canvas: canvasLibre(prog, "Programme de calcul", ""),
         };
       }
       const a = randomChoice(ACTEURS);
@@ -2047,10 +2159,11 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const il = ilA(a);
       return {
         text:
-          `${intro(p, a)}\n${progTxt(prog, a.u)}\n` +
+          `${intro3(p, a)}\n` +
           randomChoice([
-            `Quelle distance ${a.nom} parcourt-${il} en tout ?`,
-            `Choisis la distance totale parcourue par ${a.nom}.`,
+            `Quelle distance ${court(a)} parcourt-${il} en tout ?`,
+            `Choisis la distance totale parcourue par ${court(a)}.`,
+            `Boucle comprise, quelle distance parcourt ${court(a)} ?`,
           ]),
         format: "qcm",
         choices: makeChoices(uTxt(total, a.u), [
@@ -2069,7 +2182,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(prog, a.u, "Prévoir le résultat", a),
       };
-    },
+    }),
   },
 
   {
@@ -2083,7 +2196,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Pars du nombre choisi, puis fais le calcul de la ligne suivante.",
     tags: ["algo_programmation", "lire_programme", "programme_calcul", "template"],
-    generate: () => {
+    generate: tenir(12, () => {
+      // 07/11/2026 : un calcul d'une ligne reste écrit ; ouverture et question courtes.
       const prog = programmeCalcul(1);
       const v = executer(prog).valeur;
       return {
@@ -2093,6 +2207,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
             "Quel nombre obtient-on ?",
             "Quel est le résultat ?",
             "Calcule le résultat.",
+            "Donne le résultat.",
+            "Que trouve-t-on ?",
           ]),
         format: "short",
         expected: [String(v)],
@@ -2104,7 +2220,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `on obtient ${v}.`,
         ),
       };
-    },
+    }),
   },
 
   {
@@ -2118,7 +2234,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Fais les calculs un par un, dans l’ordre des lignes.",
     tags: ["algo_programmation", "lire_programme", "programme_calcul", "template"],
-    generate: () => {
+    generate: tenir(15, () => {
+      // 07/11/2026 : le programme reste écrit ; 3 calculs seulement s'ils tiennent en 15 mots.
       const prog = programmeCalcul(randomInt(2, 3));
       const v = executer(prog).valeur;
       return {
@@ -2128,6 +2245,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
             "Quel nombre obtient-on ?",
             "Quel est le résultat ?",
             "Calcule le résultat.",
+            "Donne le résultat.",
+            "Que trouve-t-on ?",
           ]),
         format: "short",
         expected: [String(v)],
@@ -2139,7 +2258,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `on obtient ${v}.`,
         ),
       };
-    },
+    }),
   },
 
   {
@@ -2360,20 +2479,20 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Dans un carré, les 4 côtés ont la même longueur.",
     tags: ["algo_programmation", "figures", "carre", "template", "canvas"],
-    generate: () => {
+    generate: tenir(25, () => {
       const p = pick(PRENOMS);
       const a = randomChoice(DESSINATEURS);
       const f = programmeFigure(a.u, ["un carré", "un triangle équilatéral", "un pentagone", "un hexagone", "un octogone"]);
       const nbCotes = Math.random() < 0.5;
       return {
         text:
-          `${intro(p, a)} Ce programme trace ${f.nom}.\n${progTxt(f.prog, a.u)}\n` +
+          `${intro3(p, a)} Ce programme trace ${f.nom}.\n` +
           (nbCotes
-            ? randomChoice(["Combien de côtés la figure a-t-elle ?", `Combien de côtés ${a.nom} trace-t-${ilA(a)} ?`])
+            ? randomChoice(["Combien de côtés la figure a-t-elle ?", `Combien de côtés ${court(a)} trace-t-${ilA(a)} ?`])
             : randomChoice([
                 "Quelle est la longueur d’un côté de la figure ?",
                 "Combien mesure chaque côté de la figure ?",
-                `Quelle longueur fait chaque côté tracé par ${a.nom} ?`,
+                `Quelle longueur fait chaque côté tracé par ${court(a)} ?`,
               ])),
         format: "short",
         expected: [nbCotes ? String(f.cotes) : uTxt(f.cote, a.u)],
@@ -2386,7 +2505,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(f.prog, a.u, "Tracer une figure", a),
       };
-    },
+    }),
   },
 
   {
@@ -2400,17 +2519,17 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le périmètre d’un carré vaut 4 × côté.",
     tags: ["algo_programmation", "figures", "carre", "perimetre", "template", "canvas"],
-    generate: () => {
+    generate: tenir(25, () => {
       const p = pick(PRENOMS);
       const a = randomChoice(DESSINATEURS);
       const f = programmeFigure(a.u, ["un carré", "un carré", "un rectangle", "un triangle équilatéral", "un pentagone", "un hexagone"]);
       const dit = Math.random() < 0.6;
       return {
         text:
-          `${intro(p, a)}${dit ? ` Ce programme trace ${f.nom}.` : ""}\n${progTxt(f.prog, a.u)}\n` +
+          `${intro3(p, a)}${dit ? ` Ce programme trace ${f.nom}.` : ""}\n` +
           randomChoice([
             "Quel est le périmètre de la figure tracée ?",
-            `Quelle longueur de trait ${a.nom} trace-t-${ilA(a)} en tout ?`,
+            `Quelle longueur de trait ${court(a)} trace-t-${ilA(a)} en tout ?`,
             "Calcule le périmètre de la figure.",
           ]),
         format: "short",
@@ -2424,7 +2543,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(f.prog, a.u, "Périmètre", a),
       };
-    },
+    }),
   },
 
   {
@@ -2490,18 +2609,20 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le nombre de tours donne le nombre de côtés ; l’angle dit comment on tourne.",
     tags: ["algo_programmation", "figures", "template", "canvas", "qcm"],
-    generate: () => {
+    generate: tenir(15, () => {
       const a = randomChoice(DESSINATEURS_SIMPLES);
       const f = programmeFigure(a.u, ["un carré", "un carré", "un rectangle", "un triangle équilatéral", "un triangle équilatéral", "un hexagone"]);
       // Un carré EST un rectangle : jamais les deux dans les propositions quand c'est un carré.
       const leurres = FIGURES_LEURRES.filter((x) => x !== f.nom && !(f.nom === "un carré" && x === "un rectangle"));
       return {
         text:
-          `${introSimple(a)}\n${progTxt(f.prog, a.u)}\n` +
+          `${introSimple(a)}\n` +
           randomChoice([
             `Quelle figure ${a.nom} trace-t-${ilA(a)} ?`,
             "Quelle figure est tracée ?",
             `Que trace ${a.nom} ?`,
+            "Quelle figure obtient-on ?",
+            "Quelle figure ce programme dessine-t-il ?",
           ]),
         format: "qcm",
         choices: makeChoices(f.nom, leurres),
@@ -2517,7 +2638,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         ),
         canvas: canvasDe(f.prog, a.u, "Quelle figure ?", a),
       };
-    },
+    }),
   },
 
   {
@@ -2870,8 +2991,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Fais le calcul de la boucle autant de fois qu’il y a de tours, en partant du résultat précédent.",
-    tags: ["algo_programmation", "defi", "boucle", "programme_calcul", "template"],
-    generate: () => {
+    tags: ["algo_programmation", "defi", "boucle", "programme_calcul", "template", "canvas"],
+    generate: tenir(25, () => {
       const p = pick(PRENOMS);
       let prog: Ins[];
       let v: number;
@@ -2911,8 +3032,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       };
       prog.forEach(trace);
       return {
+        // 07/11/2026 : le programme de calcul (et sa boucle) est dans les blocs.
         text:
-          `Défi : ${introCalcul(p)}\n${progTxt(prog)}\n` +
+          `Défi : ${introCalcul(p)}\n` +
           randomChoice(["Quel nombre obtient-on à la fin ?", "Quel est le résultat du programme ?", "Calcule le résultat, tour après tour."]),
         format: "short",
         expected: [String(v)],
@@ -2923,8 +3045,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `${etapes.join(" ; ")}.`,
           `on obtient ${v}.`,
         ),
+        canvas: canvasLibre(prog, "Programme de calcul", ""),
       };
-    },
+    }),
   },
 
   {
@@ -3025,7 +3148,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_deplacement_topup_1", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_deplacement", difficulty: 1, theme: "neutral",
-    text: "Un robot regarde vers le Nord. Il tourne à droite. Où regarde-t-il ?",
+    text: "Un robot regarde vers le nord. Il tourne à droite. Où regarde-t-il ?",
     format: "qcm", choices: ["Est", "Ouest", "Sud", "Nord"], expected: ["Est"], comparator: "mcq_exact",
     hint: "Un quart de tour à droite depuis le Nord.",
     explanation: ae("tourner à droite fait un quart de tour dans le sens des aiguilles d’une montre.", "on part du Nord.", "Nord → quart de tour à droite → Est.", "le robot regarde vers l’Est."),
@@ -3034,7 +3157,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_deplacement_topup_2", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_deplacement", difficulty: 1, theme: "neutral",
-    text: "Un robot regarde vers l’Est. Il fait demi-tour. Où regarde-t-il ?",
+    text: "Un robot regarde vers l’est. Il fait demi-tour. Où regarde-t-il ?",
     format: "qcm", choices: ["Ouest", "Est", "Nord", "Sud"], expected: ["Ouest"], comparator: "mcq_exact",
     hint: "Un demi-tour = direction opposée.",
     explanation: ae("un demi-tour amène vers la direction opposée.", "on cherche l’opposé de l’Est.", "l’opposé de l’Est est l’Ouest.", "le robot regarde vers l’Ouest."),
@@ -3113,7 +3236,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_lire_programme_topup_1", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_lire_programme", difficulty: 1, theme: "neutral",
-    text: "Quel bloc lance toujours un programme Scratch ?",
+    text: "Quel bloc lance toujours un programme ?",
     format: "qcm", choices: ["Quand 🚩 est cliqué", "Avancer de 10 pas", "Répéter 10 fois", "Dire Bonjour"],
     expected: ["Quand 🚩 est cliqué"], comparator: "mcq_exact",
     hint: "C’est le bloc tout en haut.",
@@ -3195,7 +3318,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "6e_algo_defi_topup_4", niveau: "6e", matiere: "maths",
     notionId: "algo_programmation", microId: "algo_defi", difficulty: 4, theme: "neutral",
-    text: "Défi : un robot regarde le Nord. Il tourne deux fois à droite. Vers où regarde-t-il ?",
+    text: "Défi : un robot regarde le nord. Il tourne deux fois à droite. Vers où regarde-t-il ?",
     format: "qcm", choices: ["Sud", "Nord", "Est", "Ouest"], expected: ["Sud"], comparator: "mcq_exact",
     hint: "Deux quarts de tour à droite.",
     explanation: ae("chaque « tourner à droite » fait un quart de tour.", "on enchaîne les deux quarts de tour depuis le Nord.", "Nord → Est → Sud.", "le robot regarde vers le Sud."),

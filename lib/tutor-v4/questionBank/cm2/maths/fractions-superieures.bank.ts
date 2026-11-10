@@ -34,6 +34,7 @@ import type { TutorBankItemV4, FractionCanvasData } from "@/lib/tutor-v4/types";
 import {
   type Prenom, tirer, entre, deuxPrenoms, il, Il, deP, parts, enParts, choix, dec, fabriqueGabarit,
 } from "./fractions-cm2-outils";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const gabarit = fabriqueGabarit("fraction_mixte");
 
@@ -89,7 +90,7 @@ function randomChoice<T>(items: T[]): T {
 }
 
 function shuffle<T>(items: T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 /** La bonne réponse est mise de côté, puis trois pièges distincts sont tirés. */

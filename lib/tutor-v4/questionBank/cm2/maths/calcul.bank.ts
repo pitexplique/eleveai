@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/cm2/calcul.bank.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 /* =========================
    HELPERS
@@ -15,7 +16,7 @@ function randomChoice<T>(items: T[]): T {
 }
 
 function shuffle<T>(items: T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 function makeChoices(correct: string, wrongs: string[]) {

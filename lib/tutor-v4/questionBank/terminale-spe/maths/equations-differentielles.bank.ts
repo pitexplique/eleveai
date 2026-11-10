@@ -14,6 +14,7 @@
 //   (solution constante -b/a). Condition initiale ⇒ détermine C.
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -540,7 +541,7 @@ export const equationsDifferentiellesBank: TutorBankItemV4[] = [
       return {
         text: `Quelles sont les solutions de $y' = ${a}y$ ?`,
         format: "qcm",
-        choices: [correct, ...distracteurs].sort(() => Math.random() - 0.5),
+        choices: melangeEnPlace([correct, ...distracteurs]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

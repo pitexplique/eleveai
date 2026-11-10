@@ -33,6 +33,7 @@ import {
   type Etoile,
   type Q,
 } from "./outils-mesures-ce2";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 export type Unite = { sym: string; nom: string; le: string; base: number };
 
@@ -232,7 +233,7 @@ function quoiMesure(G: Grandeur): Q {
 }
 
 function rangerUnites(G: Grandeur): Q {
-  const U = [...G.unites].sort(() => Math.random() - 0.5).slice(0, 3).sort((a, b) => a.base - b.base);
+  const U = melangeEnPlace([...G.unites]).slice(0, 3).sort((a, b) => a.base - b.base);
   const croissant = Math.random() < 0.5;
   const ordre = croissant ? U : [...U].reverse();
   const txt = (l: Unite[]) => l.map((u) => u.sym).join(", ");
@@ -595,7 +596,7 @@ function comparerTrois(G: Grandeur): Q {
   ];
   const [a, b, c] = troisPersonnes();
   const noms = [a, b, c].map((x) => x.nom);
-  const ordre = [0, 1, 2].sort(() => Math.random() - 0.5);
+  const ordre = melangeEnPlace([0, 1, 2]);
   const plus = Math.random() < 0.7;
   const best = plus ? 0 : 2;
   const bonne = noms[ordre.indexOf(best)];

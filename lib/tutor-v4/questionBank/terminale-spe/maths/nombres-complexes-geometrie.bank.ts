@@ -9,6 +9,7 @@ import {
   angT, coefZ, courtZ, fauxAngles, fauxRacines, nz, plan, pose, princ, rem, signe, suite, tpl,
   zAdd, zConj, zEq, zK, zMul, zN2, zP, zPow, zSub, zT, zTire, type A, type Z,
 } from "./nombres-complexes-commun";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const M7 = "cx_geometrie";
 const M8 = "cx_transformations";
@@ -307,7 +308,7 @@ export const nombresComplexesGeometrieBank: TutorBankItemV4[] = [
     const [x, y] = un<[number, number]>([[3, 4], [6, 8], [5, 12]]);
     const r = Math.hypot(x, y);
     const off: Z[] = [[r, 0], [-r, 0], [0, r], [0, -r], [x, y], [x, -y], [-x, y], [-x, -y], [y, x], [y, -x], [-y, x], [-y, -x]];
-    const m = [...off].sort(() => Math.random() - 0.5);
+    const m = melangeEnPlace([...off]);
     const [A1, B1, D1] = [zAdd(w, m[0]), zAdd(w, m[1]), zAdd(w, m[2])];
     const faux = [zAdd(D1, [1, 0]), zAdd(D1, [0, 1]), zAdd(D1, [-1, 1]), zAdd(w, [x + 1, y]), zAdd(w, [y + 1, x + 1]), zAdd(w, [x + 2, y + 1])].filter((z) => Math.hypot(z[0] - w[0], z[1] - w[1]) !== r);
     return qcm(`Le point $\\Omega$ d'affixe $\\omega = ${zT(w)}$ est le centre d'un cercle passant par $A$ et $B$, avec $z_{A} = ${zT(A1)}$ et $z_{B} = ${zT(B1)}$. ${un(["Lequel de ces points est aussi sur ce cercle ?", "Quel point est cocyclique avec $A$ et $B$ sur ce cercle ?", "Quelle affixe est celle d'un point de ce cercle ?", "Parmi ces affixes, laquelle donne un point de ce cercle ?", "Une ingénieure place un quatrième point sur ce cercle. Quelle affixe convient ?", "Quel point complète $A$ et $B$ sur ce cercle ?", "Calcule les distances à $\\Omega$ : quel point est sur le cercle ?", "Repère l'affixe d'un point du même cercle."])}`, `$${zT(D1)}$`, faux.map((z) => `$${zT(z)}$`), ex7(`$\\Omega A = \\Omega B = ${r}$. Le bon point est à la distance ${r} de $\\Omega$.`, `$${zT(D1)}$ convient.`));
@@ -319,7 +320,7 @@ export const nombresComplexesGeometrieBank: TutorBankItemV4[] = [
     const r = Math.hypot(x, y);
     const off: Z[] = [[r, 0], [-r, 0], [0, r], [0, -r], [x, y], [x, -y], [-x, y], [-x, -y], [y, x], [y, -x], [-y, x], [-y, -x]];
     for (;;) {
-      const m = [...off].sort(() => Math.random() - 0.5);
+      const m = melangeEnPlace([...off]);
       const coc = Math.random() < 0.5;
       const dec: Z = un<Z>([[1, 0], [0, 1], [-1, 0], [0, -1], [1, 1]]);
       const [a, b, c] = [zAdd(w, m[0]), zAdd(w, m[1]), zAdd(w, m[2])];

@@ -28,6 +28,7 @@
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS, de, pick, type Prenom } from "./entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -173,7 +174,7 @@ function tableauTour(diametres: number[], manquant: number, u: "cm" | "m" = "cm"
 
 const LETTRES = "ABCDEFGHIJKLMNPRSTUVWXYZ".split("");
 function shuffle<T>(arr: readonly T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 function lettres(k: number): string[] {
   return shuffle(LETTRES).slice(0, k);

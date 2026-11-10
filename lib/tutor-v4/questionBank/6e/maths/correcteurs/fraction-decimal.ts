@@ -31,7 +31,8 @@ function lire(q: TutorGeneratedQuestionV4, sup1: boolean): string[] {
   const n = Math.round(value * 10);
   const p = droite(q);
   if (!q.text.includes(`point ${label}`)) p.push(`le texte ne nomme pas le point ${label}`);
-  if (!/partagée en 10/.test(q.text)) p.push("le texte doit dire que l'unité est partagée en 10");
+  // 07/11/2026 : « graduée en dixièmes », « combien de dixièmes » le disent aussi.
+  if (!/partagée en 10|dixième/.test(q.text)) p.push("le texte doit dire que l'unité est partagée en 10 (ou en dixièmes)");
   if (sup1 !== n > 10) p.push(`${n}/10 : ${sup1 ? "devrait dépasser 1" : "devrait être plus petit que 1"}`);
   if (q.comparator === "exact_text") {
     if (!/dénominateur 10|… \/ 10/.test(q.text)) p.push("la fraction demandée doit être précisée (dénominateur 10)");

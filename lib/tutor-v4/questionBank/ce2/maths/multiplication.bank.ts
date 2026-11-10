@@ -29,6 +29,7 @@
 // `format: "open"` (cf. ce2/maths/index.ts) : un CE2 clique, il ne tape pas.
 
 import type { CalculPoseCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -39,7 +40,7 @@ function randomChoice<T>(items: readonly T[]): T {
 }
 
 function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 // La bonne réponse est mise de côté, trois pièges distincts sont tirés ensuite,

@@ -5,13 +5,14 @@ import type {
   TransformationCanvasData,
 } from "@/lib/tutor-v4/types";
 import { PRENOMS, de, pick, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function transformationCanvas(
@@ -95,7 +96,7 @@ function figureAutour(n: 3 | 4): { c: Pt; src: Pt[]; sx: number; sy: number } {
 function decaler(img: Pt[], combien: number): Pt[] {
   for (;;) {
     const res = img.map((p) => ({ ...p }));
-    const idx = [...img.keys()].sort(() => Math.random() - 0.5).slice(0, combien);
+    const idx = melangeEnPlace([...img.keys()]).slice(0, combien);
     for (const i of idx) {
       const [dx, dy] = pick([[1, 0], [-1, 0], [0, 1], [0, -1]]);
       res[i] = { x: res[i].x + dx, y: res[i].y + dy };

@@ -6,13 +6,14 @@ import type {
   TutorGeneratedQuestionV4,
 } from "@/lib/tutor-v4/types";
 import { PRENOMS, pick, de, type Prenom } from "./entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function transformationCanvas(
@@ -600,7 +601,7 @@ function genSymAxe(etoile: 1 | 2 | 3 | 4 | 5): QS {
     return {
       text: question,
       format: "qcm",
-      choices: shuffle([0, 1, 2, 3, 4].filter((k) => k !== c.n).sort(() => Math.random() - 0.5).slice(0, 3).concat(c.n).map(nAxes)),
+      choices: shuffle(melangeEnPlace([0, 1, 2, 3, 4].filter((k) => k !== c.n)).slice(0, 3).concat(c.n).map(nAxes)),
       expected: [nAxes(c.n)],
       comparator: "mcq_exact",
       explanation: pe(

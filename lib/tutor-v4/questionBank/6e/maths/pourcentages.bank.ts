@@ -92,26 +92,26 @@ const SITUATIONS_PCT: readonly SitPct[] = [
   { tot: (N) => `Au spectacle de l’école, il y a ${N} spectateurs.`, nom: "spectateurs", adj: "sont des parents", autre: "ne sont pas des parents", max: 300 },
   { tot: (N, P) => `${P.n} a ${N} photos sur sa tablette.`, nom: "photos", adj: "montrent des animaux", autre: "ne montrent pas d’animaux", max: 300 },
   { tot: (N) => `Un grand sachet contient ${N} bonbons.`, nom: "bonbons", adj: "sont à la fraise", autre: "ont un autre goût", max: 200 },
-  { tot: (N) => `La bibliothèque du collège prête ${N} livres en une semaine.`, nom: "livres", adj: "sont des bandes dessinées", autre: "ne sont pas des bandes dessinées", max: 300 },
+  { tot: (N) => `La bibliothèque du collège prête ${N} livres.`, nom: "livres", adj: "sont des romans", autre: "ne sont pas des romans", max: 300 },
   { tot: (N) => `Un verger compte ${N} arbres.`, nom: "arbres", adj: "sont des pommiers", autre: "ne sont pas des pommiers", max: 300 },
   { tot: (N, P) => `${P.n} collectionne les cartes : ${il(P)} en a ${N}.`, nom: "cartes", adj: "sont brillantes", autre: "ne sont pas brillantes", max: 300 },
   { tot: (N) => `Une course à vélo réunit ${N} coureurs.`, nom: "coureurs", adj: "terminent la course", autre: "abandonnent", max: 300 },
-  { tot: (N) => `Le grand aquarium du zoo abrite ${N} poissons.`, nom: "poissons", adj: "sont rouges", autre: "sont d’une autre couleur", max: 300 },
+  { tot: (N) => `L’aquarium du zoo abrite ${N} poissons.`, nom: "poissons", adj: "sont rouges", autre: "sont d’une autre couleur", max: 300 },
   { tot: (N) => `La chorale de la ville compte ${N} choristes.`, nom: "choristes", adj: "sont des enfants", autre: "sont des adultes", max: 200 },
   { tot: (N) => `Au marché, un étal présente ${N} fruits.`, nom: "fruits", adj: "sont des pêches", autre: "ne sont pas des pêches", max: 200 },
   { tot: (N, P) => `${P.n} a ${N} chansons dans sa playlist.`, nom: "chansons", adj: "sont en anglais", autre: "sont dans une autre langue", max: 300 },
   { tot: (N) => `Le parking du stade compte ${N} places.`, nom: "places", adj: "sont occupées", autre: "sont libres", max: 300 },
   { tot: (N) => `Une ferme élève ${N} poules.`, nom: "poules", adj: "sont rousses", autre: "ont une autre couleur", max: 300 },
-  { tot: (N, P) => `Lors d’une sortie nature, la classe ${de(P.n)} compte ${N} oiseaux.`, nom: "oiseaux", adj: "sont des moineaux", autre: "ne sont pas des moineaux", max: 200 },
-  { tot: (N) => `Le gymnase possède ${N} ballons.`, nom: "ballons", adj: "sont des ballons de basket", autre: "sont des ballons de foot", max: 200 },
-  { tot: (N, P) => `Pour son bricolage, ${P.n} achète une boîte de ${N} vis.`, nom: "vis", adj: "sont trop courtes", autre: "ont la bonne longueur", max: 300 },
-  { tot: (N) => `Un musée reçoit ${N} visiteurs dans la matinée.`, nom: "visiteurs", adj: "sont des enfants", autre: "sont des adultes", max: 300 },
+  { tot: (N, P) => `En sortie nature, la classe ${de(P.n)} voit ${N} oiseaux.`, nom: "oiseaux", adj: "sont des moineaux", autre: "ne sont pas des moineaux", max: 200 },
+  { tot: (N) => `Le gymnase possède ${N} ballons.`, nom: "ballons", adj: "servent au basket", autre: "servent au foot", max: 200 },
+  { tot: (N, P) => `${P.n} achète une boîte de ${N} vis.`, nom: "vis", adj: "sont trop courtes", autre: "ont la bonne longueur", max: 300 },
+  { tot: (N) => `Un musée reçoit ${N} visiteurs.`, nom: "visiteurs", adj: "sont des enfants", autre: "sont des adultes", max: 300 },
   { tot: (N) => `À la piscine, ${N} enfants passent le test de natation.`, nom: "enfants", adj: "réussissent le test", autre: "échouent", max: 200 },
   { tot: (N) => `Un producteur de La Réunion récolte ${N} ananas.`, nom: "ananas", adj: "sont déjà mûrs", autre: "ne sont pas encore mûrs", max: 300 },
   // 03/11/2026 : des MÉTIERS (vocations), pour les questions ★3 et plus.
-  { tot: (N) => `Une vétérinaire soigne ${N} animaux dans le mois.`, nom: "animaux", adj: "sont des chats", autre: "ne sont pas des chats", max: 300 },
-  { tot: (N) => `Un boulanger prépare ${N} viennoiseries ce matin.`, nom: "viennoiseries", adj: "sont des croissants", autre: "ne sont pas des croissants", max: 300 },
-  { tot: (N) => `Une biologiste observe ${N} cellules au microscope.`, nom: "cellules", adj: "sont en train de se diviser", autre: "ne se divisent pas", max: 300 },
+  { tot: (N) => `Une vétérinaire soigne ${N} animaux.`, nom: "animaux", adj: "sont des chats", autre: "ne sont pas des chats", max: 300 },
+  { tot: (N) => `Un boulanger prépare ${N} viennoiseries.`, nom: "viennoiseries", adj: "sont des croissants", autre: "ne sont pas des croissants", max: 300 },
+  { tot: (N) => `Une biologiste observe ${N} cellules au microscope.`, nom: "cellules", adj: "se divisent", autre: "ne se divisent pas", max: 300 },
   { tot: (N) => `Un développeur teste ${N} programmes.`, nom: "programmes", adj: "fonctionnent du premier coup", autre: "ont un bug", max: 200 },
   { tot: (N) => `Une astronome photographie ${N} étoiles.`, nom: "étoiles", adj: "sont des étoiles doubles", autre: "sont des étoiles seules", max: 300 },
 ];
@@ -259,7 +259,7 @@ function appliquerPct(ps: readonly number[], nu: number, simple = false) {
   const n = totalPour(p, s.max);
   const question = pick([
     `Combien ${deNu(s.nom)} ${s.adj} ?`,
-    `Trouve le nombre ${deNu(s.nom)} qui ${s.adj}.`,
+    `Trouve combien ${deNu(s.nom)} ${s.adj}.`,
     `Calcule combien ${deNu(s.nom)} ${s.adj}.`,
   ]);
   return { text: `${s.tot(n, pick(PRENOMS))} ${p} % des ${s.nom} ${s.adj}. ${question}`, p, n, r: (p * n) / 100 };
@@ -1325,6 +1325,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         `Quelle fraction sur 100 vaut ${p} % ?`,
         `Complète : ${p} % = …/100`,
         `Écris ${p} % sous forme de fraction.`,
+        // 07/11/2026 : plus de tournures (la même phrase revenait 6 fois sur 20).
+        `Transforme ${p} % en fraction.`,
+        `${p} % s’écrit quelle fraction sur 100 ?`,
+        `Donne la fraction égale à ${p} %.`,
+        `Complète : …/100 = ${p} %`,
+        `Traduis ${p} % par une fraction sur 100.`,
+        `${p} %, c’est quelle fraction ?`,
+        `Écris la fraction sur 100 égale à ${p} %.`,
       ]);
       return {
         text: Math.random() < 0.6 ? tient(12, `${phraseSimple(p)} ${question}`, question) : question,
@@ -1354,6 +1362,13 @@ export const pourcentagesBank: TutorBankItemV4[] = [
         `Quel pourcentage est égal à ${k}/100 ?`,
         `Complète : ${k}/100 = … %`,
         `Combien de pour cent font ${k}/100 ?`,
+        // 07/11/2026 : plus de tournures (la même phrase revenait 6 fois sur 20).
+        `Transforme ${k}/100 en pourcentage.`,
+        `${k}/100, c’est combien de pour cent ?`,
+        `Écris ${k}/100 avec le signe %.`,
+        `Donne le pourcentage égal à ${k}/100.`,
+        `Traduis ${k}/100 en pourcentage.`,
+        `Quel pourcentage vaut ${k}/100 ?`,
       ]);
       if (Math.random() < 0.6) {
         const s = pick(SIMPLES_PCT);
@@ -1697,11 +1712,11 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       const r = 100 - p;
       const question = pick([
         `Combien ${deNu(s.nom)} ${s.autre} ?`,
-        `Trouve le nombre ${deNu(s.nom)} qui ${s.autre}.`,
+        `Trouve combien ${deNu(s.nom)} ${s.autre}.`,
         `Calcule combien ${deNu(s.nom)} ${s.autre}.`,
       ]);
       return {
-        text: `${s.tot(100, P)} ${p} % des ${s.nom} ${s.adj}. Les autres ${s.autre}. ${question}`,
+        text: `${s.tot(100, P)} ${p} % des ${s.nom} ${s.adj}. ${question}`,
         format: "short",
         expected: [String(r)],
         comparator: "number_equal",
@@ -1931,7 +1946,14 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       const N = totalPour(p, 300);
       const d = donneesS(N, s, p, true);
       return {
-        text: tient(15, `${d} Quel pourcentage des ${s.nom} ${s.autre} ?`, `${d} Combien de pour cent des ${s.nom} ${s.autre} ?`),
+        // 07/11/2026 : cinq questions (la même phrase revenait plus de 4 fois sur 20).
+        text: tient(15, pick([
+          `${d} Quel pourcentage des ${s.nom} ${s.autre} ?`,
+          `${d} Combien de pour cent des ${s.nom} ${s.autre} ?`,
+          `${d} Quel pourcentage ${s.autre} ?`,
+          `${d} Trouve le pourcentage des ${s.nom} qui ${s.autre}.`,
+          `${d} Écris le pourcentage des ${s.nom} qui ${s.autre}.`,
+        ]), `${d} Quel pourcentage ${s.autre} ?`),
         format: "short",
         expected: [String(100 - p), `${100 - p} %`],
         comparator: "number_equal",
@@ -1958,11 +1980,11 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       const r = N - (p * N) / 100;
       const question = pick([
         `Combien ${deNu(s.nom)} ${s.autre} ?`,
-        `Trouve le nombre ${deNu(s.nom)} qui ${s.autre}.`,
+        `Trouve combien ${deNu(s.nom)} ${s.autre}.`,
         `Calcule combien ${deNu(s.nom)} ${s.autre}.`,
       ]);
       return {
-        text: `${s.tot(N, P)} ${p} % des ${s.nom} ${s.adj}. Les autres ${s.autre}. ${question}`,
+        text: `${s.tot(N, P)} ${p} % des ${s.nom} ${s.adj}. ${question}`,
         format: "short",
         expected: [String(r)],
         comparator: "number_equal",
@@ -2104,11 +2126,11 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       if (Math.random() < 0.75) {
         const s = pick(SITUATIONS_PCT.filter((x) => x.max >= 2 * b));
         const N = b * randomInt(Math.max(1, Math.ceil(10 / b)), Math.floor(s.max / b));
-        text = `${s.tot(N, pick(PRENOMS))} On sait que ${a}/${b} des ${s.nom} ${s.adj}. ${pick([
+        text = `${s.tot(N, pick(PRENOMS))} ${a}/${b} des ${s.nom} ${s.adj}. ${pick([
           `Quel pourcentage des ${s.nom} ${s.adj} ?`,
           "Écris cette part en pourcentage.",
           "Cela fait combien de pour cent ?",
-          `Quelle part des ${s.nom} ${s.adj}, en pourcentage ?`,
+          "Cela fait quel pourcentage ?",
         ])}`;
       }
       return {

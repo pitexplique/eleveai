@@ -1768,8 +1768,8 @@ function auxDebut(x: ReturnType<typeof tirerAux>) {
 const plusC = (s: string, c: number) => (c === 0 ? s : `${s} ${c > 0 ? "+" : "-"} ${n(Math.abs(c))}`);
 
 function genAuxL() {
-  const x = Math.random() < 0.5 ? tirerAux() : (() => { const c = tirerC(); return { a: c.a, b: c.B, L: c.L, U: c.U, V0: c.U - c.L, ctx: c }; })();
-  const debut = "ctx" in x ? `${x.ctx.ctx.phrase(n(x.U), pct(x.ctx.T), n(x.b))} On modélise par $u_0 = ${n(x.U)}$ et $u_{n+1} = ${recU(x.a, x.b)}$.` : pick(CADRES_AUX)(n(x.U), recU(x.a, x.b));
+  const x: ReturnType<typeof tirerAux> & { ctx?: ReturnType<typeof tirerC> } = Math.random() < 0.5 ? tirerAux() : (() => { const c = tirerC(); return { a: c.a, b: c.B, L: c.L, U: c.U, V0: c.U - c.L, ctx: c }; })();
+  const debut = x.ctx ? `${x.ctx.ctx.phrase(n(x.U), pct(x.ctx.T), n(x.b))} On modélise par $u_0 = ${n(x.U)}$ et $u_{n+1} = ${recU(x.a, x.b)}$.` : pick(CADRES_AUX)(n(x.U), recU(x.a, x.b));
   return court(`${debut} ${pick([`Quel réel $L$ vérifie $L = ${recU(x.a, x.b).replace("u_n", "L")}$ ?`, `On cherche la valeur d’équilibre $L$, telle que $L = ${recU(x.a, x.b).replace("u_n", "L")}$. Combien vaut $L$ ?`])}`, x.L, expl("le point fixe $L$ vérifie $L = aL + b$, donc $L = \\dfrac{b}{1 - a}$.", "on regroupe les $L$ d’un côté.", `$L = \\dfrac{${n(x.b)}}{1 - ${n(x.a)}} = \\dfrac{${n(x.b)}}{${n(arr(1 - x.a))}}$.`, `$L = ${n(x.L)}$.`));
 }
 

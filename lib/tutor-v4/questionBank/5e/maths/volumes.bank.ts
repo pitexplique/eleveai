@@ -5,6 +5,7 @@ import type {
   Solide3DCanvasData,
 } from "@/lib/tutor-v4/types";
 import { PRENOMS, de, pick, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -15,7 +16,7 @@ function randomChoice<T>(arr: T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 // Ajouté le 04/08/2026 : le gabarit du pavé droit proposait deux fois la même

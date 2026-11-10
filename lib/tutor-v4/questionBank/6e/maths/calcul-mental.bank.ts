@@ -554,7 +554,19 @@ const ARTICLES: { lieu: string; items: [string, number, number][] }[] = [
   { lieu: "À la piscine", items: [["une entrée", 3, 6], ["un bonnet de bain", 4, 9], ["des lunettes de natation", 6, 15]] },
 ];
 
+/** Mots d'un énoncé, comptés comme la mesure des longueurs de 6e (un morceau avec une lettre ou un chiffre). */
+const nbMots = (t: string) => t.trim().split(/\s+/).filter((x) => /[\p{L}\d]/u.test(x)).length;
+
 function genAchats() {
+  // 07/11/2026 : ★3 = 25 mots au plus. Trois articles aux noms longs (« un tour
+  // de grande roue », « une barbe à papa »…) dépassaient : on retire ce tirage.
+  for (let essai = 0; ; essai++) {
+    const r = tirerAchats();
+    if (nbMots(r.text) <= 25 || essai > 50) return r;
+  }
+}
+
+function tirerAchats() {
   const mag = pick(ARTICLES);
   const n = mag.items.length >= 3 && Math.random() < 0.4 ? 3 : 2;
   const choisis = shuffle(mag.items).slice(0, n);
@@ -601,7 +613,7 @@ function genSommeNue() {
 // Longueurs mises bout à bout : la somme.
 const SITU_LONG_SOMME: Situ2[] = [
   { max: 400, unite: "cm", t: (p, a, b) => `${p.nom} noue une ficelle de ${a} cm à une ficelle de ${b} cm. On ne compte pas le nœud.\nQuelle longueur obtient-${il(p)}, en centimètres ?` },
-  { max: 900, unite: "cm", t: (p, a, b) => `Pour la frise de la classe, ${p.nom} colle une bande de ${a} cm puis une bande de ${b} cm.\nQuelle est la longueur de la frise, en centimètres ?` },
+  { max: 900, unite: "cm", t: (p, a, b) => `Pour la frise de la classe, ${p.nom} colle une bande de ${a} cm puis une de ${b} cm.\nQuelle longueur mesure la frise, en centimètres ?` },
   { max: 60, unite: "km", t: (p, a, b) => `En randonnée, ${p.nom} marche ${a} km le matin et ${b} km l’après-midi.\nQuelle distance a-t-${il(p)} parcourue, en kilomètres ?` },
   { max: 90, unite: "m", t: (p, a, b) => `${p.nom} raccorde un tuyau d’arrosage de ${a} m à un autre de ${b} m.\nQuelle est la longueur totale, en mètres ?` },
   { max: 900, unite: "cm", t: (p, a, b) => `${p.nom} accroche une guirlande de ${a} cm et une guirlande de ${b} cm bout à bout.\nQuelle longueur cela fait-il, en centimètres ?` },

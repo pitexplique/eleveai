@@ -55,6 +55,7 @@ import type {
   TutorGeneratedQuestionV4,
   CanvasProbabilitesData,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 type Genere = TutorGeneratedQuestionV4;
 
@@ -87,7 +88,7 @@ function randomChoice<T>(arr: readonly T[]): T {
 }
 
 function shuffle<T>(arr: readonly T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function pgcd(a: number, b: number): number {

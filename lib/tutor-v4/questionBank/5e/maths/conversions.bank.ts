@@ -21,6 +21,7 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS, de, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -60,7 +61,7 @@ function rint(min: number, max: number) {
   return min + Math.floor(Math.random() * (max - min + 1));
 }
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 const r3 = (x: number) => Math.round(x * 1000) / 1000;
 /** Nombre à la française : « 3,5 », « 2400 ». */

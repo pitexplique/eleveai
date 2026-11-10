@@ -14,6 +14,7 @@
 // fraction_calcul et fraction_mixte ont les leurs (autre session).
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 export type Prenom = { p: string; f: boolean };
 export const PRENOMS: Prenom[] = [
@@ -28,7 +29,7 @@ export const PRENOMS: Prenom[] = [
 
 export const tirer = <T,>(t: readonly T[]): T => t[Math.floor(Math.random() * t.length)];
 export const entre = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
-export const melanger = <T,>(t: readonly T[]): T[] => [...t].sort(() => Math.random() - 0.5);
+export const melanger = <T,>(t: readonly T[]): T[] => melangeEnPlace([...t]);
 export function deuxPrenoms(): [Prenom, Prenom] {
   const a = tirer(PRENOMS);
   let b = tirer(PRENOMS);

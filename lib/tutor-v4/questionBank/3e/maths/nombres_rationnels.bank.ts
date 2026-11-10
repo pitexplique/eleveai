@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/3e/nombres_rationnels.bank.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -11,7 +12,7 @@ function randomChoice<T>(arr: T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function gcd(a: number, b: number): number {

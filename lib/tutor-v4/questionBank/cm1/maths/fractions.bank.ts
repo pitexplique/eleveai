@@ -7,6 +7,7 @@ import { fractionsGabaritsB } from "./fractions-gabarits-b";
 import { fractionsGabaritsC } from "./fractions-gabarits-c";
 import { fractionsGabaritsD } from "./fractions-gabarits-d";
 import { debut, egaux, e, figure, il, MAJ, nomSeul, objet, rang, tIl, tournure } from "./fractions-gabarits-outils";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -17,7 +18,7 @@ function randomChoice<T>(items: T[]): T {
 }
 
 function shuffle<T>(items: T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {

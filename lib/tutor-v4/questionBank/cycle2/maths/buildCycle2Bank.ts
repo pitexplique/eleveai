@@ -6,6 +6,7 @@ import type {
   TutorGeneratedQuestionV4,
 } from "@/lib/tutor-v4/types";
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 type Cycle2Level = Extract<SchoolLevel, "cp" | "ce1" | "ce2">;
 
@@ -23,7 +24,7 @@ function randomChoice<T>(items: readonly T[]): T {
 }
 
 function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {

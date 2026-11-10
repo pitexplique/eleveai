@@ -26,6 +26,7 @@
 // `contains_keyword` sur une réponse chiffrée (« 3x + 67 » passait pour 3x + 6).
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 /* =========================
    HELPERS
@@ -40,7 +41,7 @@ function randomChoice<T>(arr: readonly T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {

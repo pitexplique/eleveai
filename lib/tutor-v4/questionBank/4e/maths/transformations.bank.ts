@@ -5,6 +5,7 @@ import type {
   TutorGeneratedQuestionV4,
   TransformationCanvasData,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 // Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
 // finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
@@ -24,7 +25,7 @@ function randomChoice<T>(arr: readonly T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function randomInt(min: number, max: number) {

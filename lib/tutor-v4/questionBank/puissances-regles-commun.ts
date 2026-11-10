@@ -21,6 +21,7 @@
 
 import type { TutorGeneratedQuestionV4, TutorBankItemTemplateV4 } from "@/lib/tutor-v4/types";
 import { puissancesBank as banque4e } from "@/lib/tutor-v4/questionBank/4e/maths/puissances.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 /** Un gabarit de la 4e (déjà robuste, 30/09), réutilisé plus haut. La 4e
  *  s'interdit les formules (BO) ; au-delà, on retire cette mise en garde. */
@@ -59,7 +60,7 @@ function randomChoice<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 function shuffle<T>(arr: readonly T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 /** La bonne réponse + trois pièges DISTINCTS d'elle et entre eux. */
 function makeChoices(correct: string, wrongs: readonly string[]) {

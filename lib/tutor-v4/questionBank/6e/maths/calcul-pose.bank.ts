@@ -94,7 +94,7 @@ const POSE_ADD: Situ2[] = [
   { max: 9999, t: (_p, a, b) => `Un magasin de sport vend ${a} ballons au printemps et ${b} en été.\nCombien de ballons a-t-il vendus ?` },
   { max: 99999, t: (p, a, b) => `La chanson préférée ${de(p.nom)} a ${a} écoutes. Cette semaine, elle en gagne ${b} de plus.\nCombien d’écoutes a-t-elle maintenant ?` },
   { max: 9999, unite: "m", t: (p, a, b) => `En randonnée, ${p.nom} monte ${a} m le premier jour et ${b} m le deuxième.\nDe combien de mètres est-${il(p)} monté${p.f ? "e" : ""} en tout ?` },
-  { max: 5000, unite: "g", t: (p, a, b) => `Pour la kermesse, ${p.nom} prépare ${a} g de pâte à crêpes et ${b} g de pâte à gaufres.\nQuelle masse de pâte prépare-t-${il(p)}, en grammes ?` },
+  { max: 5000, unite: "g", t: (p, a, b) => `Pour la kermesse, ${p.nom} prépare ${a} g de pâte à crêpes et ${b} g de pâte à gaufres.\nCombien de grammes en tout ?` },
 ];
 const POSE_SOUS: Situ2[] = [
   { max: 60000, t: (_p, a, b) => `Le stade a ${a} places. ${b} spectateurs sont venus au match.\nCombien de places sont restées vides ?` },
@@ -107,8 +107,8 @@ const POSE_SOUS: Situ2[] = [
   { max: 9999, unite: "L", t: (_p, a, b) => `Une citerne contient ${a} L d’eau. Pour arroser le jardin, on en utilise ${b} L.\nCombien de litres reste-t-il ?` },
   { max: 9999, t: (_p, a, b) => `Le magasin avait ${a} cahiers en stock. Il en vend ${b} à la rentrée.\nCombien de cahiers lui reste-t-il ?` },
   { max: 5000, t: (p, a, b) => `Le livre préféré ${de(p.nom)} a ${a} pages. ${Il(p)} en a lu ${b}.\nCombien de pages lui reste-t-il à lire ?` },
-  { max: 30000, t: (_p, a, b) => `Une ville a planté ${a} arbres en dix ans. ${b} arbres ont été plantés cette année.\nCombien d’arbres ont été plantés les années d’avant ?` },
-  { max: 9999, t: (p, a, b) => `La collection ${de(p.nom)} compte ${a} cartes. Celle de son cousin en compte ${b}.\nCombien de cartes ${p.nom} a-t-${il(p)} de plus que son cousin ?` },
+  { max: 30000, t: (_p, a, b) => `Une ville a planté ${a} arbres en dix ans. Elle en a planté ${b} cette année.\nCombien d’arbres a-t-elle plantés avant ?` },
+  { max: 9999, t: (p, a, b) => `${p.nom} a ${a} cartes. Son cousin en a ${b}.\nCombien de cartes ${p.nom} a-t-${il(p)} de plus ?` },
 ];
 // a groupes de b : `amax` borne le nombre de groupes, `bmin`/`bmax` la taille d'un groupe.
 const POSE_MUL: Situ2[] = [

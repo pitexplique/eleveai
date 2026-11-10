@@ -89,26 +89,26 @@ const SITUATIONS_PROP: readonly SitProp[] = [
   { q: (n) => nb(n, "ticket de bus", "tickets de bus"), phrase: (n, x) => `${nb(n, "ticket de bus", "tickets de bus")} ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Quel est le prix de ${nb(m, "ticket", "tickets")} ?`, u: "€", taux: [1.5, 2, 2.5, 3], nMax: 10 },
   { q: (n) => `${fr(n)} kg de pommes`, phrase: (n, x) => `Au marché, ${fr(n)} kg de pommes ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${fr(m)} kg de pommes ?`, u: "€", taux: [2, 2.5, 3, 3.5, 4], nMax: 10 },
   { q: (n) => nb(n, "crêpe", "crêpes"), phrase: (n, x) => `Pour ${nb(n, "crêpe", "crêpes")}, il faut ${fr(x)} g de farine.`, question: (m) => `Combien de grammes de farine faut-il pour ${nb(m, "crêpe", "crêpes")} ?`, u: "g", taux: [20, 25, 30, 40, 50], nMax: 12 },
-  { q: (n) => nb(n, "heure", "heures"), phrase: (n, x, P) => `En ${nb(n, "heure", "heures")}, ${P.n} parcourt ${fr(x)} km à vélo, toujours à la même vitesse.`, question: (m, P) => `Combien de kilomètres parcourt-${il(P)} en ${nb(m, "heure", "heures")} ?`, u: "km", taux: [12, 15, 18, 20], nMax: 5 },
+  { q: (n) => nb(n, "heure", "heures"), phrase: (n, x, P) => `En ${nb(n, "heure", "heures")}, ${P.n} parcourt ${fr(x)} km à vélo.`, question: (m, P) => `Combien de kilomètres parcourt-${il(P)} en ${nb(m, "heure", "heures")} ?`, u: "km", taux: [12, 15, 18, 20], nMax: 5 },
   { q: (n) => nb(n, "minute", "minutes"), phrase: (n, x) => `En ${nb(n, "minute", "minutes")}, un robinet remplit ${fr(x)} L d’eau.`, question: (m) => `Combien de litres remplit-il en ${nb(m, "minute", "minutes")} ?`, u: "L", taux: [6, 8, 10, 12, 15], nMax: 10 },
-  { q: (n) => nb(n, "jour", "jours"), phrase: (n, x, P) => `En ${nb(n, "jour", "jours")}, le chien ${de(P.n)} mange ${fr(x)} g de croquettes.`, question: (m) => `Combien de grammes de croquettes mange-t-il en ${nb(m, "jour", "jours")} ?`, u: "g", taux: [150, 200, 250, 300], nMax: 7 },
+  { q: (n) => nb(n, "jour", "jours"), phrase: (n, x, P) => `En ${nb(n, "jour", "jours")}, le chien ${de(P.n)} mange ${fr(x)} g.`, question: (m) => `Combien de grammes mange-t-il en ${nb(m, "jour", "jours")} ?`, u: "g", taux: [150, 200, 250, 300], nMax: 7 },
   { q: (n) => nb(n, "boîte", "boîtes"), phrase: (n, x) => `${nb(n, "boîte de construction", "boîtes de construction identiques")} ${acc(n, "contient", "contiennent")} ${fr(x)} pièces.`, question: (m) => `Combien de pièces y a-t-il dans ${nb(m, "boîte", "boîtes")} ?`, u: "", v: "pièces", taux: [50, 80, 100, 120, 150], nMax: 10 },
-  { q: (n) => nb(n, "chanson", "chansons"), phrase: (n, x, P) => `Dans la playlist ${de(P.n)}, ${nb(n, "chanson", "chansons de même durée")} ${acc(n, "dure", "durent")} ${fr(x)} minutes.`, question: (m) => `Combien de minutes ${acc(m, "dure", "durent")} ${nb(m, "chanson", "chansons")} ?`, u: "min", taux: [3, 3.5, 4, 4.5, 5], nMax: 12 },
+  { q: (n) => nb(n, "chanson", "chansons"), phrase: (n, x, P) => `Dans la playlist ${de(P.n)}, ${nb(n, "chanson", "chansons")} ${acc(n, "dure", "durent")} ${fr(x)} minutes.`, question: (m) => `Combien de minutes ${acc(m, "dure", "durent")} ${nb(m, "chanson", "chansons")} ?`, u: "min", taux: [3, 3.5, 4, 4.5, 5], nMax: 12 },
   { q: (n) => nb(n, "marche", "marches"), phrase: (n, x) => `Dans un escalier, ${nb(n, "marche", "marches identiques")} ${acc(n, "monte", "montent")} de ${fr(x)} cm.`, question: (m) => `De combien de centimètres ${acc(m, "monte", "montent")} ${nb(m, "marche", "marches")} ?`, u: "cm", taux: [15, 16, 17, 17.5, 18, 20], nMax: 12 },
-  { q: (n) => nb(n, "longueur", "longueurs"), phrase: (n, x, P) => `À la piscine, ${P.n} nage ${nb(n, "longueur", "longueurs")} de bassin : cela fait ${fr(x)} m.`, question: (m) => `Combien de mètres ${acc(m, "fait", "font")} ${nb(m, "longueur", "longueurs")} de ce bassin ?`, u: "m", taux: [25, 50], nMax: 12 },
+  { q: (n) => nb(n, "longueur", "longueurs"), phrase: (n, x, P) => `${P.n} nage ${nb(n, "longueur", "longueurs")} de bassin, soit ${fr(x)} m.`, question: (m) => `Combien de mètres ${acc(m, "fait", "font")} ${nb(m, "longueur", "longueurs")} de ce bassin ?`, u: "m", taux: [25, 50], nMax: 12 },
   { q: (n) => nb(n, "semaine", "semaines"), phrase: (n, x) => `En ${nb(n, "semaine", "semaines")}, les poules d’une ferme pondent ${fr(x)} œufs.`, question: (m) => `Combien d’œufs pondent-elles en ${nb(m, "semaine", "semaines")} ?`, u: "", v: "œufs", taux: [20, 30, 35, 40], nMax: 8 },
   { q: (n) => nb(n, "sachet", "sachets"), phrase: (n, x) => `${nb(n, "sachet de graines", "sachets de graines identiques")} ${acc(n, "pèse", "pèsent")} ${fr(x)} g.`, question: (m) => `Combien ${acc(m, "pèse", "pèsent")} ${nb(m, "sachet", "sachets")} ?`, u: "g", taux: [25, 40, 50, 60], nMax: 10 },
-  { q: (n) => nb(n, "pot", "pots"), phrase: (n, x) => `Avec ${nb(n, "pot", "pots")} de peinture, on peint ${fr(x)} m² de mur.`, question: (m) => `Combien de mètres carrés peut-on peindre avec ${nb(m, "pot", "pots")} ?`, u: "m²", taux: [5, 6, 8, 10], nMax: 8 },
+  { q: (n) => nb(n, "pot", "pots"), phrase: (n, x) => `Avec ${nb(n, "pot", "pots")} de peinture, on peint ${fr(x)} m² de mur.`, question: (m) => `Combien de mètres carrés peint-on avec ${nb(m, "pot", "pots")} ?`, u: "m²", taux: [5, 6, 8, 10], nMax: 8 },
   { q: (n) => `${fr(n)} m de tissu`, phrase: (n, x) => `${fr(n)} m de tissu ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${fr(m)} m de ce tissu ?`, u: "€", taux: [3, 4, 4.5, 5, 6, 7.5, 8], nMax: 10 },
-  { q: (n) => nb(n, "barquette", "barquettes"), phrase: (n, x) => `Au marché de Saint-Paul, à La Réunion, ${nb(n, "barquette", "barquettes")} de letchis ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${nb(m, "barquette", "barquettes")} ?`, u: "€", taux: [3, 3.5, 4, 5], nMax: 8 },
+  { q: (n) => nb(n, "barquette", "barquettes"), phrase: (n, x) => `Au marché de Saint-Paul, ${nb(n, "barquette", "barquettes")} de letchis ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${nb(m, "barquette", "barquettes")} ?`, u: "€", taux: [3, 3.5, 4, 5], nMax: 8 },
   { q: (n) => nb(n, "heure", "heures"), phrase: (n, x, P) => `En ${nb(n, "heure", "heures")} de marche, le groupe ${de(P.n)} parcourt ${fr(x)} km.`, question: (m) => `Combien de kilomètres le groupe parcourt-il en ${nb(m, "heure", "heures")} ?`, u: "km", taux: [3, 3.5, 4, 4.5, 5], nMax: 6 },
   { q: (n) => nb(n, "minute", "minutes"), phrase: (n, x) => `En ${nb(n, "minute", "minutes")}, un escargot avance de ${fr(x)} cm.`, question: (m) => `De combien de centimètres avance-t-il en ${nb(m, "minute", "minutes")} ?`, u: "cm", taux: [4.5, 5, 6, 7, 8], nMax: 10 },
   { q: (n) => nb(n, "corde", "cordes"), phrase: (n, x) => `Au magasin de musique, ${nb(n, "corde", "cordes")} de guitare ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${nb(m, "corde", "cordes")} ?`, u: "€", taux: [2, 2.5, 3, 4, 5], nMax: 6 },
-  { q: (n) => nb(n, "rangée", "rangées"), phrase: (n, x, P) => `Dans le potager ${de(P.n)}, ${nb(n, "rangée", "rangées")} de salades ${acc(n, "compte", "comptent")} ${fr(x)} salades.`, question: (m) => `Combien de salades y a-t-il dans ${nb(m, "rangée", "rangées")} ?`, u: "", v: "salades", taux: [6, 8, 10, 12], nMax: 8 },
+  { q: (n) => nb(n, "rangée", "rangées"), phrase: (n, x, P) => `Dans le potager ${de(P.n)}, ${nb(n, "rangée", "rangées")} ${acc(n, "compte", "comptent")} ${fr(x)} salades.`, question: (m) => `Combien de salades y a-t-il dans ${nb(m, "rangée", "rangées")} ?`, u: "", v: "salades", taux: [6, 8, 10, 12], nMax: 8 },
   // 03/11/2026 : des métiers et des sciences (les maths sont transversales) ; ces
   // situations ne servent plus qu'à partir de ★3.
   { q: (n) => nb(n, "baguette", "baguettes"), phrase: (n, x) => `Pour ${nb(n, "baguette", "baguettes")}, un boulanger utilise ${fr(x)} g de farine.`, question: (m) => `Combien de grammes de farine faut-il pour ${nb(m, "baguette", "baguettes")} ?`, u: "g", taux: [150, 200, 250], nMax: 10 },
-  { q: (n) => nb(n, "flacon", "flacons"), phrase: (n, x) => `Dans une pharmacie, ${nb(n, "flacon", "flacons identiques")} ${acc(n, "contient", "contiennent")} ${fr(x)} mL de sirop.`, question: (m) => `Combien de millilitres de sirop y a-t-il dans ${nb(m, "flacon", "flacons")} ?`, u: "mL", taux: [100, 125, 150, 200], nMax: 8 },
+  { q: (n) => nb(n, "flacon", "flacons"), phrase: (n, x) => `Dans une pharmacie, ${nb(n, "flacon", "flacons identiques")} ${acc(n, "contient", "contiennent")} ${fr(x)} mL de sirop.`, question: (m) => `Combien de millilitres contiennent ${nb(m, "flacon", "flacons")} ?`, u: "mL", taux: [100, 125, 150, 200], nMax: 8 },
   { q: (n) => nb(n, "minute", "minutes"), phrase: (n, x) => `En ${nb(n, "minute", "minutes")}, une photographe de mariage prend ${fr(x)} photos.`, question: (m) => `Combien de photos prend-elle en ${nb(m, "minute", "minutes")} ?`, u: "", v: "photos", taux: [4, 5, 6, 8], nMax: 10 },
   { q: (n) => nb(n, "massif", "massifs"), phrase: (n, x) => `Pour ${nb(n, "massif", "massifs identiques")}, une paysagiste plante ${fr(x)} fleurs.`, question: (m) => `Combien de fleurs faut-il pour ${nb(m, "massif", "massifs")} ?`, u: "", v: "fleurs", taux: [12, 15, 20, 24], nMax: 8 },
   { q: (n) => nb(n, "seconde", "secondes"), phrase: (n, x) => `En ${nb(n, "seconde", "secondes")}, le son parcourt ${fr(x)} m dans l’air.`, question: (m) => `Combien de mètres le son parcourt-il en ${nb(m, "seconde", "secondes")} ?`, u: "m", taux: [340], nMax: 9 },
@@ -145,7 +145,12 @@ function deuxReleves(ks: readonly number[]) {
     const pas = x1 >= 50 ? 10 : 1;
     const x2 = prop ? n2 * t : n2 * t + randomChoice([-1, 1]) * pas * randomInt(1, 2);
     // 06/10 (coordinateur) : « 6 croissants coûtent 9 € », pas « Pour 6 croissants, cela fait 9 € ».
-    const text = `${s.phrase(n1, x1, P)} ${s.phrase(n2, x2, P)}`;
+    const text = randomChoice([
+      () => `${s.phrase(n1, x1, P)} ${s.phrase(n2, x2, P)}`,
+      () => `${s.phrase(n1, x1, P)} Et pour ${s.q(n2)} : ${valeur(s, x2)}.`,
+      () => `${s.q(n1)} : ${valeur(s, x1)}. ${s.q(n2)} : ${valeur(s, x2)}.`,
+    ])();
+    if (motsSituation(text) > 19) continue;
     const explication = prop
       ? `On passe de ${fr(n1)} à ${fr(n2)} en multipliant par ${k}. La valeur aussi : ${fr(x1)} × ${k} = ${fr(x2)}. C’est proportionnel.`
       : `On passe de ${fr(n1)} à ${fr(n2)} en multipliant par ${k}. Mais ${fr(x1)} × ${k} = ${fr(n2 * t)}, et pas ${fr(x2)}. Ce n’est pas proportionnel.`;
@@ -166,12 +171,15 @@ function colonneFoisK() {
     const text = randomChoice([true, true, false])
       ? `${s.phrase(n1, x1, P)} ${s.question(m, P)}`
       : `Complète ce tableau de proportionnalité : ${s.q(n1)} → ${valeur(s, x1)} ; ${s.q(m)} → ?`;
+    if (motsSituation(text) > 25) continue;
     const explication = `On passe de ${fr(n1)} à ${fr(m)} en multipliant par ${k}. La valeur est aussi multipliée par ${k} : ${fr(x1)} × ${k} = ${fr(y)}.`;
     return { s, t, n1, x1, m, y, text, explication };
   }
 }
 
 const egalNb = (a: number, b: number) => Math.abs(a - b) < 1e-9;
+/** 07/11/2026 : les mots d'un énoncé, comptés comme la mesure de REGLES-6E.md. */
+const motsSituation = (t: string) => t.trim().split(/\s+/).filter((x) => /[\p{L}\d]/u.test(x)).length;
 
 /** Le coefficient de proportionnalité : la valeur pour une unité (décimale si `decimal`). */
 function coefficient(decimal: boolean) {
@@ -209,6 +217,7 @@ function versUnite(decimal: boolean) {
       () => `${s.phrase(n, x, P)} ${randomChoice(["Aide", "Explique à"])} ${randomChoice([...PRENOMS]).n} : ${s.question(1, P).replace(/^./, (c) => c.toLowerCase())}`,
       () => `Complète ce tableau de proportionnalité : ${s.q(n)} → ${valeur(s, x)} ; ${s.q(1)} → ?`,
     ])();
+    if (motsSituation(text) > 25) continue;
     return { s, t, n, x, text, explication: `On passe à l’unité : on divise par ${fr(n)}. ${fr(x)} ÷ ${fr(n)} = ${fr(t)}.` };
   }
 }
@@ -227,8 +236,9 @@ function colonneDiviseeK(ks: readonly number[], moitie: boolean) {
       forme === 3
         ? `Complète ce tableau de proportionnalité : ${s.q(n)} → ${valeur(s, x)} ; ${s.q(m)} → ?`
         : forme === 2 && moitie
-          ? `${s.phrase(n, x, P)} Cette fois, la quantité est deux fois plus petite. ${s.question(m, P)}`
+          ? `${s.phrase(n, x, P)} ${k === 2 ? randomChoice(["Cette fois, c’est la moitié.", "Cette fois, c’est deux fois moins."]) : `Cette fois, c’est ${k === 3 ? "trois" : "quatre"} fois moins.`} ${s.question(m, P)}`
           : `${s.phrase(n, x, P)} ${s.question(m, P)}`;
+    if (motsSituation(text) > 25) continue;
     const explication = `On passe de ${fr(n)} à ${fr(m)} en divisant par ${k}. On divise aussi la valeur par ${k} : ${fr(x)} ÷ ${k} = ${fr(y)}.`;
     return { s, n, x, m, y, text, explication };
   }
@@ -252,6 +262,7 @@ function parLUnite(decimal: boolean) {
       () => `${s.phrase(n, x, P)} Passe par l’unité. ${s.question(m, P)}`,
       () => `Complète ce tableau de proportionnalité : ${s.q(n)} → ${valeur(s, x)} ; ${s.q(m)} → ?`,
     ])();
+    if (motsSituation(text) > 25) continue;
     const explication = `Pour 1 : ${fr(x)} ÷ ${fr(n)} = ${fr(t)}. Pour ${fr(m)} : ${fr(m)} × ${fr(t)} = ${fr(y)}.`;
     return { s, t, n, x, m, y, text, explication };
   }
@@ -905,18 +916,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_unite",
     difficulty: 2,
     theme: "neutral",
-    // 03/11/2026 : ★2, sans le marché ; les propositions en euros (réponse attendue) restent.
-    text: "Prix proportionnel : 5 → 15 €. Quel prix pour 1 ?",
+    // 07/11/2026 : ★2, des nombres seuls (plus d'euros).
+    text: "Proportionnalité : 5 → 15. Que donne 1 ?",
     format: "qcm",
-    choices: ["2 €", "3 €", "4 €", "5 €"],
-    expected: ["3 €"],
+    choices: ["2", "3", "4", "5"],
+    expected: ["3"],
     comparator: "mcq_exact",
     hint: "Passe par l’unité.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("15 € ÷ 5 = 3 €. Le prix pour 1 est donc 3 €.") +
+      ("15 ÷ 5 = 3. En face de 1, on écrit donc 3.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "unite", "qcm"],
   },
@@ -929,18 +940,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_unite",
     difficulty: 2,
     theme: "neutral",
-    // 03/11/2026 : ★2, sans le marché ; les propositions en euros (réponse attendue) restent.
-    text: "Tableau de proportionnalité, en euros : 4 → 8 € ; 1 → ?",
+    // 07/11/2026 : ★2, des nombres seuls (plus d'euros).
+    text: "Tableau de proportionnalité : 4 → 8 ; 1 → ?",
     format: "qcm",
-    choices: ["1 €", "2 €", "3 €", "4 €"],
-    expected: ["2 €"],
+    choices: ["1", "2", "3", "4"],
+    expected: ["2"],
     comparator: "mcq_exact",
     hint: "Divise 8 par 4.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("8 € ÷ 4 = 2 €. En face de 1, on écrit 2 €.") +
+      ("8 ÷ 4 = 2. En face de 1, on écrit 2.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "unite", "qcm"],
   },
@@ -1049,18 +1060,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_direct",
     difficulty: 2,
     theme: "neutral",
-    // 03/11/2026 : ★2, sans la recette ; les propositions en euros (réponse attendue) restent.
-    text: "Prix proportionnel : 8 → 16 €. Quel prix pour 4 ?",
+    // 07/11/2026 : ★2, des nombres seuls (plus d'euros).
+    text: "Proportionnalité : 8 → 16. Quel nombre pour 4 ?",
     format: "qcm",
-    choices: ["4 €", "6 €", "8 €", "12 €"],
-    expected: ["8 €"],
+    choices: ["4", "6", "8", "12"],
+    expected: ["8"],
     comparator: "mcq_exact",
     hint: "4 est la moitié de 8.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("4, c’est la moitié de 8. Le prix est donc la moitié de 16 €, soit 8 €.") +
+      ("4, c’est la moitié de 8. L’autre nombre est donc la moitié de 16, soit 8.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "direct", "qcm"],
   },
@@ -1073,18 +1084,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_direct",
     difficulty: 2,
     theme: "neutral",
-    // 03/11/2026 : ★2, sans la recette ; les propositions en euros (réponse attendue) restent.
-    text: "Tableau de proportionnalité, en euros : 6 → 12 € ; 3 → ?",
+    // 07/11/2026 : ★2, des nombres seuls (plus d'euros).
+    text: "C’est proportionnel. Complète : 6 → 12 et 3 → …",
     format: "qcm",
-    choices: ["3 €", "4 €", "6 €", "9 €"],
-    expected: ["6 €"],
+    choices: ["3", "4", "6", "9"],
+    expected: ["6"],
     comparator: "mcq_exact",
     hint: "3 est la moitié de 6.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("3, c’est la moitié de 6. Le prix est donc la moitié de 12 €, soit 6 €.") +
+      ("3, c’est la moitié de 6. L’autre nombre est donc la moitié de 12, soit 6.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "direct", "qcm"],
   },
@@ -1304,7 +1315,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "Est-ce une situation de proportionnalité ?",
           "Ces deux relevés sont-ils proportionnels ?",
           "Est-ce proportionnel ?",
-          "La valeur suit-elle la quantité de façon proportionnelle ?",
+          "Y a-t-il proportionnalité ?",
+          "Est-ce une situation proportionnelle ?",
         ])}`,
         format: "qcm",
         choices: ["oui", "non"],
@@ -1436,8 +1448,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         if (n1 === n2 || n1 + n2 > Math.max(s.nMax, 6)) continue;
         const [x1, x2, m] = [n1 * t, n2 * t, n1 + n2];
         const text = randomChoice([true, false])
-          ? `${s.phrase(n1, x1, P)} ${s.phrase(n2, x2, P)} ${s.question(m, P)}`
+          ? `${s.phrase(n1, x1, P)} Et ${s.q(n2)} : ${valeur(s, x2)}. ${s.question(m, P)}`
           : `Voici un tableau de proportionnalité : ${s.q(n1)} → ${valeur(s, x1)} ; ${s.q(n2)} → ${valeur(s, x2)} ; ${s.q(m)} → ? ${randomChoice(["Complète la dernière case.", "Trouve la valeur manquante.", "Quelle valeur faut-il écrire ?"])}`;
+        if (motsSituation(text) > 25) continue;
         return {
           text,
           format: "short",
@@ -1807,11 +1820,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         const [x1, x2] = [n1 * t1, n2 * t2b];
         const bonne = egalNb(t1, t2b) ? "elles se valent" : t1 < t2b ? "l’offre A" : "l’offre B";
         return {
-          text: `${P.n} compare deux offres. Offre A : ${s.q(n1)} pour ${fr(x1)} €. Offre B : ${s.q(n2)} pour ${fr(x2)} €. ${randomChoice([
-            "Quelle offre est la moins chère pour un seul ?",
-            "Avec quelle offre l’unité coûte-t-elle le moins cher ?",
-            `Quelle offre ${P.n} doit-${il(P)} choisir pour payer le moins cher à l’unité ?`,
-          ])}`,
+          text: randomChoice([
+            `${P.n} compare : offre A, ${s.q(n1)} pour ${fr(x1)} € ; offre B, ${s.q(n2)} pour ${fr(x2)} €. ${randomChoice(["Quelle offre coûte le moins à l’unité ?", "Où l’unité est-elle la moins chère ?"])}`,
+            `Offre A : ${s.q(n1)} pour ${fr(x1)} €. Offre B : ${s.q(n2)} pour ${fr(x2)} €. ${P.n} veut payer moins à l’unité. Quelle offre choisir ?`,
+            `Offre A : ${s.q(n1)} pour ${fr(x1)} €. Offre B : ${s.q(n2)} pour ${fr(x2)} €. Quelle offre est la moins chère pour un seul ?`,
+          ]),
           format: "qcm",
           choices: ["l’offre A", "l’offre B", "elles se valent"],
           expected: [bonne],

@@ -66,11 +66,12 @@ const UNITES_MOTS: Record<string, string> = {
 // ─── decimal_lire_ecrire ────────────────────────────────────────────────────
 
 function valeurLireEcrire(t: string): { v: number | null; unite: string } {
-  const mesure = t.match(/(\d+) (mètres|kilogrammes|litres|kilomètres|secondes|centimètres) et (\d+) (dixièmes|centièmes)/);
+  // 07/11/2026 : « 1 kilomètre et 87 centièmes » (singulier quand la mesure vaut 1).
+  const mesure = t.match(/(\d+) (mètres?|kilogrammes?|litres?|kilomètres?|secondes?|centimètres?) et (\d+) (dixièmes|centièmes)/);
   if (mesure)
     return {
       v: Number(mesure[1]) + Number(mesure[3]) / (mesure[4] === "dixièmes" ? 10 : 100),
-      unite: UNITES_MOTS[mesure[2]],
+      unite: UNITES_MOTS[mesure[2].replace(/s?$/, "s")],
     };
   const deco = t.match(/(\d+) \+ (?:(\d+)\/10 \+ )?(\d+)\/100/);
   if (deco) return { v: Number(deco[1]) + Number(deco[2] ?? 0) / 10 + Number(deco[3]) / 100, unite: "" };
@@ -339,7 +340,7 @@ function corrigerEncadrer(q: TutorGeneratedQuestionV4): string[] {
 
 /** L'unité écrite juste après le premier nombre de l'énoncé (« 12,5 km » → « km »). */
 function uniteDuTexte(t: string): string {
-  return t.match(/\d (€|km|kg|cL|cm|mm|mL|L|m|s|g|°C)(?![a-zA-Zé])/)?.[1] ?? "";
+  return t.match(/\d (€|km|kg|cL|cm|mm|mL|L|m|s|g|°C)(?![a-zA-Zé'’])/)?.[1] ?? "";
 }
 
 /** Plausibilité grossière d'une mesure de la vie d'un enfant. */
@@ -547,7 +548,7 @@ const BASE: CorrecteursMaths = {
  */
 export function deuxDecimalesEnSituation(q: TutorGeneratedQuestionV4): string[] {
   const textes = [q.text, ...(q.choices ?? []), ...(q.expected ?? [])].map(String);
-  const enSituation = textes.some((s) => /\d (€|km|kg|cL|cm|mm|mL|L|m|s|g|°C)(?![a-zA-Zé])/.test(s)) || /gradu(é|ée) en /.test(q.text);
+  const enSituation = textes.some((s) => /\d (€|km|kg|cL|cm|mm|mL|L|m|s|g|°C)(?![a-zA-Zé'’])/.test(s)) || /gradu(é|ée) en /.test(q.text);
   if (!enSituation) return [];
   const longs = textes.flatMap((s) => s.match(/\d+,\d{3,}/g) ?? []);
   return longs.length ? [`mesure en situation à plus de deux chiffres après la virgule : ${[...new Set(longs)].join(", ")}`] : [];

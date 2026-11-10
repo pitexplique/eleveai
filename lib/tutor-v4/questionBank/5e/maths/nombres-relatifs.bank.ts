@@ -3,7 +3,7 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function formatSigned(n: number): string {
@@ -58,6 +58,7 @@ function numberLine(
 // partout à la sortie du fichier, items figés compris (voir en bas).
 import { PRENOMS, pick, de, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 export const il = (p: Prenom) => (p.f ? "elle" : "il");
 export const Il = (p: Prenom) => (p.f ? "Elle" : "Il");

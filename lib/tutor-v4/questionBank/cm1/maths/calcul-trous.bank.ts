@@ -4,6 +4,7 @@
 
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { CALC, atelier, entre, etapes, fr, melange, qcm, qcmN, tournure, un } from "./trous-outils";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const arr = (v: number) => Math.round(v * 1000) / 1000;
 const euro = (v: number) => `${v.toFixed(2).replace(".", ",")} €`;
@@ -483,7 +484,7 @@ const STEMS = (t: string) => [`Il est ${t}.`, `L’horloge doit indiquer ${t}.`,
 const NOMS_G = ["Où est la grande aiguille ?", "Sur quel nombre pointe la grande aiguille ?", "Où mets-tu la grande aiguille ?", "Où va la grande aiguille ?"];
 const NOMS_P = ["Où est la petite aiguille ?", "Où pointe la petite aiguille ?", "Où mets-tu la petite aiguille ?", "Où va la petite aiguille ?"];
 const surNb = (m: number) => (m === 0 ? 12 : m / 5);
-const leurresNb = (j: number) => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((x) => x !== j).sort(() => Math.random() - 0.5).slice(0, 3).map((x) => `Sur le ${x}`);
+const leurresNb = (j: number) => melangeEnPlace([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((x) => x !== j)).slice(0, 3).map((x) => `Sur le ${x}`);
 const explG = (t: string, m: number) => etapes(`la grande aiguille compte les minutes. Chaque nombre vaut 5 minutes.`, m === 0 ? `0 minute : elle est sur le 12.` : `${m} ÷ 5 = ${m / 5}.`, `à ${t}, la grande aiguille est sur le ${surNb(m)}.`);
 const suiv = (h: number) => (h === 12 ? 1 : h + 1);
 /** Où est la petite aiguille à h:m (h sur 12). */

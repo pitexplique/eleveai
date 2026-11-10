@@ -14,7 +14,7 @@ function randomChoice<T>(arr: T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {
@@ -56,6 +56,7 @@ function expl(calcul: string) {
 // (la divisibilité n'est pas une notion de fractions ; les fractions du défi
 // restent empilées en LaTeX, objet de la simplification).
 import { PRENOMS, pick, de, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const il = (p: Prenom) => (p.f ? "elle" : "il");
 const Il = (p: Prenom) => (p.f ? "Elle" : "Il");

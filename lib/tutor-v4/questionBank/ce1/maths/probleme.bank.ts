@@ -46,7 +46,7 @@ function randomChoice<T>(items: readonly T[]): T {
 }
 
 function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {
@@ -93,6 +93,7 @@ import {
   dessinBarre,
   dessinArgent,
 } from "./calcul-outils-ce1";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function gab(
   id: string,

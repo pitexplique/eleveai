@@ -2,6 +2,7 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { proportionnaliteRenfort3e } from "./proportionnalite-renfort";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -12,7 +13,7 @@ function randomChoice<T>(arr: T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 const anciens3e: TutorBankItemV4[] = [

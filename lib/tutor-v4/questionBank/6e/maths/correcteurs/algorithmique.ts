@@ -69,7 +69,71 @@ function programmes(text: string): Array<{ titre: string; lignes: string[]; prog
   }
   return res.filter((p) => p.lignes.length);
 }
-const programme = (q: Q) => programmes(q.text)[0] ?? { titre: "", lignes: [], prog: [] };
+
+/* 07/11/2026 — quand l'énoncé ne recopie plus le programme (★1-★3), on le relit
+   dans les blocs affichés : chaque bloc redevient la ligne qu'il dit, dans la
+   même notation que le texte, puis passe par le même `lire`. Un bloc jaune avec
+   un texte « Programme de … » ouvre un nouveau programme (deux programmes côte à côte). */
+function ligneDeBloc(b: any): string | null {
+  const v = b.value;
+  const vide = (x: unknown) => /\?|…/.test(String(x ?? ""));
+  switch (b.type) {
+    case "move": {
+      if (vide(v)) return `avancer de … ${(String(v).match(/(pas|cm|m|cases?)\s*$/) ?? [])[1] ?? "pas"}`;
+      return typeof v === "number" ? `avancer de ${v} pas` : `avancer de ${String(v).trim()}`;
+    }
+    case "turn": {
+      if (vide(v)) return "tourner de …°";
+      const s = String(v);
+      const a = nombre(s);
+      return s.includes("↺") ? `tourner à gauche de ${a}°` : s.includes("↻") ? `tourner à droite de ${a}°` : `tourner de ${a}°`;
+    }
+    case "repeat": {
+      const corps = (b.children ?? []).map(ligneDeBloc);
+      if (corps.some((c: string | null) => c === null)) return null;
+      return `répéter ${vide(b.times) ? "…" : b.times} fois : ${corps.join(" puis ")}`;
+    }
+    case "say":
+      return `dire « ${b.text} »`;
+    case "pen":
+      return "poser le stylo";
+    case "set_variable":
+      return `mettre « ${b.variable} » à ${b.value}`;
+    case "change_variable":
+      return `ajouter ${b.value} à « ${b.variable} »`;
+    case "operator":
+      return b.text ? String(b.text) : null;
+    default:
+      return null;
+  }
+}
+function programmesDuCanvas(q: Q): Array<{ titre: string; lignes: string[]; prog: L[] }> {
+  const c = q.canvas as any;
+  if (!c || c.kind !== "scratch") return [];
+  const res: Array<{ titre: string; lignes: string[]; prog: L[] }> = [];
+  let cur: { titre: string; lignes: string[]; prog: L[] } | null = null;
+  for (const b of c.blocks as any[]) {
+    if (b.type === "event") {
+      cur = { titre: b.text ? `${b.text} :` : "", lignes: [], prog: [] };
+      res.push(cur);
+      continue;
+    }
+    if (!cur) {
+      cur = { titre: "", lignes: [], prog: [] };
+      res.push(cur);
+    }
+    const l = ligneDeBloc(b) ?? `bloc illisible (${b.type})`;
+    cur.lignes.push(l);
+    cur.prog.push(lire(l));
+  }
+  return res.filter((p) => p.lignes.length);
+}
+/** Le texte s'il écrit le programme, sinon les blocs. */
+const progsDe = (q: Q) => {
+  const t = programmes(q.text);
+  return t.length ? t : programmesDuCanvas(q);
+};
+const programme = (q: Q) => progsDe(q)[0] ?? { titre: "", lignes: [], prog: [] };
 /** La question : la dernière ligne du texte. */
 const question = (q: Q) => q.text.trim().split("\n").pop() ?? "";
 
@@ -155,6 +219,8 @@ function canvasCoherent(q: Q, prog: L[]): string[] {
   const c = q.canvas as any;
   if (!c) return [];
   if (c.kind !== "scratch") return ["canvas inattendu"];
+  // 07/11/2026 : programme relu dans les blocs eux-mêmes : rien à comparer.
+  if (!programmes(q.text).length) return [];
   const bs = c.blocks as any[];
   if (bs[0]?.type !== "event") return ["le canvas ne commence pas par le bloc de départ"];
   const p: string[] = [];
@@ -229,7 +295,7 @@ function verifierRang(q: Q, lignes: string[]): string[] {
   const p: string[] = [];
   if (new Set(lignes).size !== lignes.length) p.push("deux lignes identiques : la question est ambiguë");
   const qu = question(q);
-  if (/combien/i.test(qu)) return [...p, ...attendu(q, lignes.length)];
+  if (/combien|^Compte /i.test(qu)) return [...p, ...attendu(q, lignes.length)];
   const juste = ligneVisee(lignes, qu);
   if (!juste) return [...p, `question illisible : « ${qu} »`];
   p.push(...attendu(q, juste));
@@ -240,10 +306,11 @@ function verifierRang(q: Q, lignes: string[]): string[] {
 /** L'orientation finale, depuis « Au départ, … regarde vers le Nord. ». */
 function orientation(q: Q): string[] {
   // 03/11/2026 : à ★1, « Au départ, le lutin regarde l’Est. » (sans « vers »).
-  const m = q.text.match(/ regarde (?:vers )?(?:le |l’)(Nord|Est|Sud|Ouest)\./);
+  // 07/11/2026 : directions en minuscules (« vers le sud »), et « … part tournée vers l’est. ».
+  const m = q.text.match(/ (?:regarde|tournée?) (?:vers )?(?:le |l’)(nord|est|sud|ouest)\./i);
   if (!m) return ["direction de départ illisible"];
   const { prog } = programme(q);
-  const e = executer(prog, CAPS[m[1]]);
+  const e = executer(prog, CAPS[m[1].charAt(0).toUpperCase() + m[1].slice(1).toLowerCase()]);
   if (e.cap % 90) return [`direction finale entre deux points cardinaux (${e.cap}°)`];
   return [...attendu(q, NOM_CAP[e.cap / 90]), ...canvasCoherent(q, prog), ...plausible(prog)];
 }
@@ -259,7 +326,7 @@ function uniteProg(prog: L[]): string[] {
 /** « Combien de fois … tourne-t-il ? », « … instructions … ? » : on compte dans l'exécution. */
 function compter(qu: string, prog: L[]): number {
   const acts = executer(prog).actions;
-  if (/tourne-t|« tourner »/.test(qu)) return acts.filter((i) => i.t === "tg").length;
+  if (/tourne-t|« tourner »|rotations/.test(qu)) return acts.filter((i) => i.t === "tg").length;
   if (/avance-t|« avancer »/.test(qu)) return acts.filter((i) => i.t === "av").length;
   if (/instructions/.test(qu)) return acts.length;
   return acts.filter((i) => i.t === "act").length;
@@ -321,7 +388,7 @@ export const CORRECTEURS: CorrecteursMaths = {
   // 03/11/2026 : les routines de la vie, montées à ★3 (même vérification).
   "6e_algo_sequence_tpl_7_routine_situation": (q) => verifierRang(q, programme(q).lignes),
   "6e_algo_sequence_tpl_4_ordre_change_resultat": (q) => {
-    const ps = programmes(q.text);
+    const ps = progsDe(q);
     const p: string[] = [];
     if (ps.length !== 2) return [`deux programmes attendus, ${ps.length} lus`];
     const v = ps.map((x) => executer(x.prog));

@@ -14,13 +14,14 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 type Niveau = "cm1" | "cm2";
 type Etoile = 2 | 3;
 
 const tire = <T,>(t: readonly T[]): T => t[Math.floor(Math.random() * t.length)];
 const entre = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
-const melange = <T,>(t: T[]): T[] => [...t].sort(() => Math.random() - 0.5);
+const melange = <T,>(t: T[]): T[] => melangeEnPlace([...t]);
 const dec = (n: number, k: number) => `${n},${k}`;
 const rang = (k: number) => (k === 1 ? "1er" : `${k}e`);
 

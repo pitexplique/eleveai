@@ -10,6 +10,7 @@ import type {
   TutorGeneratedQuestionV4,
   TriangleCanvasData,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 /* =========================================================================
    ⛔⛔ 13/10/2026 — « DES QUESTIONS REVIENNENT », LA 3e À SON TOUR. Mesuré
@@ -46,7 +47,7 @@ function randomChoice<T>(arr: T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 /** 13.69 → « 13,69 » ; 14400 → « 14 400 ». L'élève lit des nombres français. */

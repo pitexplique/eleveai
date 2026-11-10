@@ -123,26 +123,49 @@ function genLire(etoile: 1 | 2): TutorGeneratedQuestionV4 {
   const enFraction = Math.random() < 0.5;
   const L = choix(["A", "B", "C", "D", "E", "M", "P", "R", "T"]);
   const dec = decimalDe(n, 10);
-  const intro = choix([
-    "La droite est graduée en dixièmes : chaque unité est partagée en 10.",
-    "Sur cette droite, chaque unité est partagée en 10 parts égales.",
-    "Chaque unité de la droite est partagée en 10.",
-    "Regarde la droite : l'unité est partagée en 10 petits intervalles.",
-    `Le point ${L} est sur une droite graduée. Chaque unité est partagée en 10.`,
-  ]);
-  const consigne = enFraction
-    ? choix([
-        `Écris l'abscisse du point ${L} sous forme de fraction de dénominateur 10.`,
-        `Combien de dixièmes y a-t-il de 0 jusqu'au point ${L} ? Écris la fraction (… / 10).`,
+  // 07/11/2026 : ★1 12 mots au plus, ★2 15 au plus. Un début × une consigne,
+  // gardés seulement s'ils tiennent dans la longueur ; le texte dit toujours
+  // que l'unité est partagée en 10 (ou graduée en dixièmes).
+  const DEBUTS = [
+    "",
+    "Regarde la droite.",
+    "Observe la graduation.",
+    "Droite graduée en dixièmes.",
+    "On compte en dixièmes.",
+    "L'unité est partagée en 10.",
+    "Chaque unité est partagée en 10.",
+    "La droite est graduée en dixièmes.",
+    "Chaque petit intervalle vaut un dixième.",
+    "Regarde la droite : l'unité est partagée en 10.",
+    "Sur cette droite, chaque unité est partagée en 10.",
+  ];
+  const CONSIGNES = enFraction
+    ? [
+        `Quelle fraction est au point ${L} ? (… / 10)`,
+        `Combien de dixièmes jusqu'au point ${L} ? (… / 10)`,
+        `Le point ${L} est à … / 10.`,
+        `Complète : point ${L} = … / 10.`,
+        `Écris l'abscisse du point ${L} : … / 10.`,
+        `Combien de dixièmes de 0 au point ${L} ? (… / 10)`,
         `Quelle fraction de dénominateur 10 est au point ${L} ?`,
-      ])
-    : choix([
-        `Écris l'abscisse du point ${L} avec une virgule.`,
+        `Écris l'abscisse du point ${L} en fraction de dénominateur 10.`,
+      ]
+    : [
         `Quel nombre décimal est au point ${L} ?`,
+        `Quel décimal est au point ${L} ?`,
+        `Écris l'abscisse du point ${L} avec une virgule.`,
         `Quel nombre à virgule est au point ${L} ?`,
-      ]);
+        `Complète avec une virgule : point ${L} = …`,
+        `Écris l'abscisse du point ${L} en décimal.`,
+        `En dixièmes, quel décimal est au point ${L} ?`,
+        `Le point ${L} est à combien ? Réponds avec une virgule.`,
+      ];
+  const lim = etoile === 1 ? 12 : 15;
+  const textes = DEBUTS.flatMap((d) => CONSIGNES.map((c) => (d ? `${d} ${c}` : c))).filter(
+    (t) => mots(t) <= lim && /partagée en 10|dixième/.test(t),
+  );
   return {
-    text: `${intro} ${consigne}`,
+    text: choix(textes),
     format: "short",
     expected: enFraction ? [`${n}/10`] : [dec],
     comparator: enFraction ? "exact_text" : "number_equal",
@@ -157,6 +180,8 @@ function genLire(etoile: 1 | 2): TutorGeneratedQuestionV4 {
     canvas: droiteDixiemes(maxPour(n), [{ value: n / 10, label: L }]),
   };
 }
+/** Les mots d'un énoncé : ce qui porte une lettre ou un chiffre (« = », « ? » ne comptent pas). */
+const mots = (t: string) => t.trim().split(/\s+/).filter((x) => /[\p{L}\d]/u.test(x)).length;
 
 /** ★3 : la même lecture, portée par un métier (l'ancienne version de ★1–★2). */
 function genLireMetier(): TutorGeneratedQuestionV4 {
@@ -166,19 +191,30 @@ function genLireMetier(): TutorGeneratedQuestionV4 {
   const enFraction = Math.random() < 0.5;
   const L = choix(["A", "M", "P", "R", "T"]);
   const dec = decimalDe(n, 10);
-  const consigne = enFraction
-    ? choix([
-        `Écris l'abscisse de ${L} sous forme de fraction de dénominateur 10.`,
-        `Combien de dixièmes y a-t-il de 0 jusqu'à ${L} ? Écris la fraction (… / 10).`,
-        `Quelle fraction de dénominateur 10 est au point ${L} ?`,
-      ])
-    : choix([
-        `Écris l'abscisse de ${L} avec une virgule.`,
-        `Quel nombre décimal est au point ${L} ?`,
-        `Combien de ${m.u} indique le point ${L} ? Réponds avec une virgule.`,
-      ]);
+  // 07/11/2026 : 25 mots au plus (★3) : une seule phrase de situation, puis la
+  // consigne. On retire tant que le texte dépasse.
+  let text = "";
+  do {
+    const consigne = enFraction
+      ? choix([
+          `Écris l'abscisse du point ${L} en fraction (… / 10).`,
+          `Combien de dixièmes de 0 au point ${L} ? (… / 10)`,
+          `Quelle fraction de dénominateur 10 est au point ${L} ?`,
+        ])
+      : choix([
+          `Écris l'abscisse du point ${L} avec une virgule.`,
+          `Quel nombre décimal est au point ${L} ?`,
+          `Combien de ${m.u} indique le point ${L} ? Réponds avec une virgule.`,
+        ]);
+    const situation = choix([
+      `Sur ${m.objet} ${deQui(m.qui(p))}, chaque unité (1 ${m.u}) est partagée en 10.`,
+      `${Maj(m.qui(p))} dessine ${m.objet} sur cette droite, en ${m.u}. L'unité est partagée en 10.`,
+      `Pour ${m.qui(p)}, le point ${L} marque ${m.marque}. L'unité est partagée en 10.`,
+    ]);
+    text = `${situation} ${consigne}`;
+  } while (mots(text) > 25);
   return {
-    text: `La droite représente ${m.objet} ${deQui(m.qui(p))}, graduée en ${m.u} : chaque unité est partagée en 10. Le point ${L} marque ${m.marque}. ${consigne}`,
+    text,
     format: "short",
     expected: enFraction ? [`${n}/10`] : [dec, `${dec} ${m.u}`],
     comparator: enFraction ? "exact_text" : "number_equal",
@@ -207,7 +243,8 @@ function genSous(): TutorGeneratedQuestionV4 {
   return {
     // 03/11/2026 : ★2, la droite seule, sans métier.
     text: choix([
-      `Au-dessus du point, on lit ${n}/10. Sous la droite, on écrit le même nombre avec une virgule. Lequel ?`,
+      // 07/11/2026 : 15 mots au plus (★2).
+      `Au-dessus du point : ${n}/10. Que faut-il écrire dessous, avec une virgule ?`,
       `Au-dessus d'un point, on a écrit ${n}/10. Quel nombre décimal faut-il écrire en dessous ?`,
       `Quelle écriture décimale va sous le point ${n}/10 ?`,
       `Sous le point ${n}/10, quel nombre à virgule faut-il écrire ?`,
@@ -451,7 +488,7 @@ export const fractionDecimalBank: TutorBankItemV4[] = [
     kind: "fixed",
     id: "fraction_decimal_fixed_1",
     difficulty: 1,
-    text: "La droite est graduée en dixièmes. Quelle fraction de dénominateur 10 est au point A ?",
+    text: "Droite graduée en dixièmes. Quelle fraction est au point A ? (… / 10)",
     format: "short",
     expected: ["7/10"],
     comparator: "exact_text",

@@ -103,7 +103,7 @@ const PRENOMS: Prenom[] = [
 const choix = <T,>(t: readonly T[]): T => t[Math.floor(Math.random() * t.length)];
 const prenom = () => choix(PRENOMS);
 const il = (p: Prenom) => (p.f ? "elle" : "il");
-const de = (p: Prenom) => (/^[aeiouyàâéèêëîïôûü]/i.test(p.nom) ? `d'${p.nom}` : `de ${p.nom}`);
+const de = (p: Prenom) => (/^[aeiouàâéèêëîïôûü]/i.test(p.nom) ? `d'${p.nom}` : `de ${p.nom}`);
 const rond = (n: number) => Number(n.toFixed(6));
 function melange<T>(t: T[]): T[] {
   return [...t].sort(() => Math.random() - 0.5);
@@ -126,16 +126,16 @@ const milieu = (e: Echelle, k: number) => rond(e.min + (k + 0.5) * e.pas);
 const SITUATIONS_DROITE: { u: string; lettre: string; texte: (p: Prenom, L: string) => string; question: (p: Prenom, L: string) => string }[] = [
   { u: "", lettre: "A", texte: (p, L) => `Sur cette demi-droite graduée, ${p.nom} a placé le point ${L}.`, question: () => "Quelle est son abscisse ?" },
   { u: "", lettre: "M", texte: (p, L) => `${p.nom} regarde le point ${L} sur la demi-droite graduée.`, question: (p) => `Quelle abscisse doit-${il(p)} lire ?` },
-  { u: "km", lettre: "R", texte: (p, L) => `La demi-droite représente le sentier ${de(p)}, gradué en km. Le refuge est au point ${L}.`, question: () => "À quel kilomètre se trouve le refuge ?" },
-  { u: "cm", lettre: "T", texte: (p, L) => `La demi-droite représente une règle graduée en cm. ${p.nom} a fait un trait au point ${L}.`, question: () => "Quelle longueur ce trait indique-t-il ?" },
-  { u: "L", lettre: "N", texte: (p, L) => `La demi-droite représente la cuve d'eau de pluie ${de(p)}, graduée en L. Le niveau est au point ${L}.`, question: () => "Combien de litres contient la cuve ?" },
-  { u: "°C", lettre: "T", texte: (p, L) => `La demi-droite représente le thermomètre du jardin ${de(p)}, gradué en °C. Le liquide s'arrête au point ${L}.`, question: () => "Quelle température indique-t-il ?" },
-  { u: "kg", lettre: "F", texte: (p, L) => `La demi-droite représente le cadran de la balance ${de(p)}, gradué en kg. L'aiguille montre le point ${L}.`, question: () => "Quelle masse indique la balance ?" },
-  { u: "m", lettre: "S", texte: (p, L) => `La demi-droite représente la piste de course, graduée en m. ${p.nom} s'est arrêté${p.f ? "e" : ""} au point ${L}.`, question: (p) => `À combien de mètres du départ est-${il(p)} ?` },
-  { u: "km", lettre: "V", texte: (p, L) => `La demi-droite représente la route à vélo ${de(p)}, graduée en km. Le point ${L} marque sa pause goûter.`, question: (p) => `À quel kilomètre fait-${il(p)} la pause ?` },
+  { u: "km", lettre: "R", texte: (p, L) => `La demi-droite est le sentier ${de(p)}, gradué en km. Le refuge est au point ${L}.`, question: () => "À quel kilomètre se trouve le refuge ?" },
+  { u: "cm", lettre: "T", texte: (p, L) => `La demi-droite est une règle graduée en cm. ${p.nom} a fait un trait au point ${L}.`, question: () => "Quelle longueur ce trait indique-t-il ?" },
+  { u: "L", lettre: "N", texte: (p, L) => `La demi-droite est la cuve d'eau ${de(p)}, graduée en L. Le niveau est au point ${L}.`, question: () => "Combien de litres contient la cuve ?" },
+  { u: "°C", lettre: "T", texte: (p, L) => `La demi-droite est le thermomètre ${de(p)}, gradué en °C. Le liquide s'arrête au point ${L}.`, question: () => "Quelle température indique-t-il ?" },
+  { u: "kg", lettre: "F", texte: (p, L) => `La demi-droite est la balance ${de(p)}, graduée en kg. L'aiguille montre le point ${L}.`, question: () => "Quelle masse indique la balance ?" },
+  { u: "m", lettre: "S", texte: (p, L) => `La demi-droite est une piste graduée en m. ${p.nom} s'est arrêté${p.f ? "e" : ""} au point ${L}.`, question: (p) => `À combien de mètres du départ est-${il(p)} ?` },
+  { u: "km", lettre: "V", texte: (p, L) => `La demi-droite est la route à vélo ${de(p)}, graduée en km. Le point ${L} marque sa pause.`, question: (p) => `À quel kilomètre fait-${il(p)} la pause ?` },
   { u: "", lettre: "E", texte: (p, L) => `Le professeur ${de(p)} a placé le point ${L} sur la demi-droite graduée.`, question: () => "Lis son abscisse." },
-  { u: "L", lettre: "J", texte: (p, L) => `La demi-droite représente un pichet de jus gradué en L. ${p.nom} l'a rempli jusqu'au point ${L}.`, question: () => "Combien de litres de jus y a-t-il ?" },
-  { u: "cm", lettre: "H", texte: (p, L) => `La demi-droite représente la toise de la classe, graduée en cm. Le haut de la plante ${de(p)} est au point ${L}.`, question: () => "Quelle hauteur indique la toise ?" },
+  { u: "L", lettre: "J", texte: (p, L) => `La demi-droite est un pichet gradué en L. ${p.nom} l'a rempli de jus jusqu'au point ${L}.`, question: () => "Combien de litres de jus y a-t-il ?" },
+  { u: "cm", lettre: "H", texte: (p, L) => `La demi-droite est une toise graduée en cm. Le haut de la plante ${de(p)} est au point ${L}.`, question: () => "Quelle hauteur indique la toise ?" },
 ];
 
 // ⛔⛔ 03/11/2026 (Frédéric) : « d'abord des questions simples ; le contexte est
@@ -150,6 +150,10 @@ const LIRE_INTRO_SIMPLE: ((L: string) => string)[] = [
   (L) => `Observe le point ${L}.`,
   (L) => `Le point ${L} est au milieu de deux graduations.`,
   (L) => `Voici le point ${L}.`,
+  (L) => `Le point ${L} est sur la droite.`,
+  (L) => `On a marqué le point ${L}.`,
+  (L) => `Cherche le point ${L}.`,
+  (L) => `Un point ${L} est placé.`,
 ];
 const LIRE_QUESTION_SIMPLE: ((L: string) => string)[] = [
   () => "Quelle est son abscisse ?",
@@ -157,6 +161,10 @@ const LIRE_QUESTION_SIMPLE: ((L: string) => string)[] = [
   (L) => `Quel nombre repère ${L} ?`,
   (L) => `Écris l'abscisse de ${L}.`,
   (L) => `Quel nombre est en ${L} ?`,
+  (L) => `Donne l'abscisse de ${L}.`,
+  (L) => `Trouve l'abscisse de ${L}.`,
+  (L) => `Quelle abscisse a ${L} ?`,
+  (L) => `${L} est à quel nombre ?`,
 ];
 
 /** Petites unités : la lecture se fait sur des pas de 1, 2, 5, 10 ou en dixièmes selon la situation. */
@@ -218,27 +226,43 @@ const LETTRES_PLACER = [
 
 const SITUATIONS_PLACER: { u: string; intro: (p: Prenom, l: string[]) => string; question: (p: Prenom, x: string) => string }[] = [
   { u: "", intro: () => "", question: (p, x) => `Quel point a pour abscisse ${x} ?` },
-  { u: "", intro: (p) => `${p.nom} cherche un point sur la demi-droite graduée.`, question: (p, x) => `Lequel a pour abscisse ${x} ?` },
-  { u: "km", intro: (p, l) => `La demi-droite représente le sentier ${de(p)}, gradué en km. Les points ${l.join(", ")} sont des refuges.`, question: (p, x) => `Quel refuge est au kilomètre ${x} ?` },
-  { u: "cm", intro: (p, l) => `La demi-droite représente une règle graduée en cm. ${p.nom} a marqué les points ${l.join(", ")}.`, question: (p, x) => `Quel point est à ${x} cm ?` },
-  { u: "L", intro: (p, l) => `La demi-droite représente un seau gradué en L. Les points ${l.join(", ")} sont trois niveaux d'eau.`, question: (p, x) => `Quel niveau correspond à ${x} L ?` },
-  { u: "m", intro: (p, l) => `La demi-droite représente la piste du stade, graduée en m. ${p.nom} a posé trois plots : ${l.join(", ")}.`, question: (p, x) => `Quel plot est à ${x} m du départ ?` },
-  { u: "kg", intro: (p, l) => `La demi-droite représente le cadran d'une balance, gradué en kg. Les points ${l.join(", ")} sont trois pesées ${de(p)}.`, question: (p, x) => `Quelle pesée indique ${x} kg ?` },
-  { u: "°C", intro: (p, l) => `La demi-droite représente un thermomètre gradué en °C. ${p.nom} a noté trois relevés : ${l.join(", ")}.`, question: (p, x) => `Quel relevé indique ${x} °C ?` },
-  { u: "", intro: (p, l) => `Le professeur ${de(p)} a placé les points ${l.join(", ")}.`, question: (p, x) => `${p.nom} doit trouver le point d'abscisse ${x}. Lequel est-ce ?` },
+  { u: "", intro: (p) => `${p.nom} cherche un point sur la demi-droite graduée.`, question: (p, x) => `Quel point a pour abscisse ${x} ?` },
+  { u: "km", intro: (p, l) => `La demi-droite est le sentier ${de(p)}, gradué en km. Les points ${l.join(", ")} sont des refuges.`, question: (p, x) => `Quel refuge est au kilomètre ${x} ?` },
+  { u: "cm", intro: (p, l) => `La demi-droite est une règle graduée en cm. ${p.nom} a marqué les points ${l.join(", ")}.`, question: (p, x) => `Quel point est à ${x} cm ?` },
+  { u: "L", intro: (p, l) => `La demi-droite est un seau gradué en L. Les points ${l.join(", ")} sont trois niveaux d'eau.`, question: (p, x) => `Quel niveau correspond à ${x} L ?` },
+  { u: "m", intro: (p, l) => `La demi-droite est une piste graduée en m. ${p.nom} a posé trois plots : ${l.join(", ")}.`, question: (p, x) => `Quel plot est à ${x} m du départ ?` },
+  { u: "kg", intro: (p, l) => `La demi-droite est une balance graduée en kg. Les points ${l.join(", ")} sont trois pesées ${de(p)}.`, question: (p, x) => `Quelle pesée indique ${x} kg ?` },
+  { u: "°C", intro: (p, l) => `La demi-droite est un thermomètre gradué en °C. ${p.nom} a noté trois relevés : ${l.join(", ")}.`, question: (p, x) => `Quel relevé indique ${x} °C ?` },
+  { u: "", intro: (p, l) => `Le professeur ${de(p)} a placé les points ${l.join(", ")}.`, question: (p, x) => `${p.nom} cherche le point d'abscisse ${x}. Quel est ce point ?` },
 ];
 
 // ★2 : la demi-droite seule (03/11/2026). L'abscisse cherchée est le DERNIER
 // nombre de l'énoncé (le correcteur la relit là).
-const SITUATIONS_PLACER_SIMPLES: typeof SITUATIONS_PLACER = [
-  { u: "", intro: () => "", question: (p, x) => `Quel point a pour abscisse ${x} ?` },
-  { u: "", intro: () => "Trois points sont sur la demi-droite graduée.", question: (p, x) => `Lequel a pour abscisse ${x} ?` },
-  { u: "", intro: (p, l) => `Les points ${l.join(", ")} sont sur la droite.`, question: (p, x) => `Lequel est en ${x} ?` },
-  { u: "", intro: () => "Regarde les trois points.", question: (p, x) => `Où se trouve le nombre ${x} ?` },
-  { u: "", intro: () => "Observe la demi-droite graduée.", question: (p, x) => `Quel point correspond à ${x} ?` },
-  { u: "", intro: () => "", question: (p, x) => `Sur la demi-droite graduée, quel point est à ${x} ?` },
-  { u: "", intro: (p, l) => `On a placé ${l.join(", ")}.`, question: (p, x) => `Quel point a pour abscisse ${x} ?` },
+// 07/11/2026 : une intro × une question (plus de 70 phrases), sans nombre dans l'intro.
+const PLACER_INTROS_SIMPLES: ((l: string[]) => string)[] = [
+  () => "",
+  () => "Trois points sont sur la demi-droite graduée.",
+  (l) => `Les points ${l.join(", ")} sont sur la droite.`,
+  () => "Regarde les trois points.",
+  () => "Observe la demi-droite graduée.",
+  (l) => `On a placé ${l.join(", ")}.`,
+  (l) => `Voici trois points : ${l.join(", ")}.`,
+  () => "Lis bien les graduations.",
 ];
+const PLACER_QUESTIONS_SIMPLES: ((x: string) => string)[] = [
+  (x) => `Quel point a pour abscisse ${x} ?`,
+  (x) => `Quel point est en ${x} ?`,
+  (x) => `Où se trouve le nombre ${x} ?`,
+  (x) => `Quel point correspond à ${x} ?`,
+  (x) => `Quel point est à ${x} ?`,
+  (x) => `Quel point repère le nombre ${x} ?`,
+  (x) => `Trouve le point d'abscisse ${x}.`,
+  (x) => `Quelle lettre est en ${x} ?`,
+  (x) => `Quel point a l'abscisse ${x} ?`,
+];
+const SITUATIONS_PLACER_SIMPLES: typeof SITUATIONS_PLACER = PLACER_INTROS_SIMPLES.flatMap((i) =>
+  PLACER_QUESTIONS_SIMPLES.map((q) => ({ u: "", intro: (_p: Prenom, l: string[]) => i(l), question: (_p: Prenom, x: string) => q(x) })),
+);
 
 function genPlacer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   const p = prenom();
@@ -281,23 +305,34 @@ function genPlacer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
 
 const FRACTIONS_INTRO: ((p: Prenom, d: number, L: string) => string)[] = [
   (p, d, L) => `L'unité est partagée en ${d} parts égales. Quelle fraction est l'abscisse du point ${L} ?`,
-  (p, d, L) => `Sur cette demi-droite, l'unité est partagée en ${d} parts égales. ${p.nom} a placé le point ${L}. Écris son abscisse sous forme de fraction.`,
+  (p, d, L) => `Sur cette demi-droite, l'unité est partagée en ${d} parts égales. ${p.nom} a placé le point ${L}. Écris son abscisse en fraction.`,
   (p, d, L) => `Chaque unité est coupée en ${d} parts égales. ${p.nom} cherche l'abscisse du point ${L}. Quelle fraction doit-${il(p)} écrire ?`,
   (p, d, L) => `Sur la frise ${de(p)}, chaque unité est partagée en ${d} parts égales. ${p.nom} a marqué le point ${L}. Quelle fraction est son abscisse ?`,
-  (p, d, L) => `Le sentier ${de(p)} est gradué : chaque kilomètre est partagé en ${d} parts égales. Le point ${L} marque sa pause. Écris son abscisse sous forme de fraction.`,
+  (p, d, L) => `Sur le sentier ${de(p)}, chaque kilomètre est partagé en ${d} parts égales. Le point ${L} marque sa pause. Écris son abscisse en fraction.`,
   (p, d, L) => `Le professeur ${de(p)} a partagé l'unité en ${d} parts égales et a placé le point ${L}. Quelle fraction a-t-il placée ?`,
 ];
 
 // ★2 : la demi-droite seule (03/11/2026). Le correcteur relit « en d parts » et « point L ».
-const FRACTIONS_INTRO_SIMPLES: ((d: number, L: string) => string)[] = [
-  (d, L) => `L'unité est partagée en ${d} parts égales. Quelle fraction repère le point ${L} ?`,
-  (d, L) => `L'unité est coupée en ${d} parts égales. Écris l'abscisse du point ${L}.`,
-  (d, L) => `Chaque unité est coupée en ${d} parts égales. Quelle fraction est au point ${L} ?`,
-  (d, L) => `L'unité est partagée en ${d} parts. Quelle est l'abscisse du point ${L} ?`,
-  (d, L) => `Écris l'abscisse du point ${L}. L'unité est partagée en ${d} parts égales.`,
-  (d, L) => `Quelle fraction repère le point ${L} ? L'unité est coupée en ${d} parts.`,
-  (d, L) => `L'unité est coupée en ${d} parts. Écris l'abscisse du point ${L} en fraction.`,
+const FRACTIONS_PARTAGE_SIMPLES: ((d: number) => string)[] = [
+  (d) => `L'unité est partagée en ${d} parts égales.`,
+  (d) => `L'unité est coupée en ${d} parts égales.`,
+  (d) => `Chaque unité est coupée en ${d} parts.`,
+  (d) => `L'unité est partagée en ${d} parts.`,
+  (d) => `Chaque unité est partagée en ${d} parts égales.`,
 ];
+const FRACTIONS_QUESTION_SIMPLES: ((L: string) => string)[] = [
+  (L) => `Quelle fraction repère le point ${L} ?`,
+  (L) => `Écris l'abscisse du point ${L}.`,
+  (L) => `Quelle est l'abscisse du point ${L} ?`,
+  (L) => `Quelle fraction est au point ${L} ?`,
+  (L) => `Écris l'abscisse du point ${L} en fraction.`,
+  (L) => `Donne l'abscisse du point ${L}.`,
+  (L) => `Trouve la fraction du point ${L}.`,
+  (L) => `Le point ${L} a quelle abscisse ?`,
+];
+const FRACTIONS_INTRO_SIMPLES: ((d: number, L: string) => string)[] = FRACTIONS_PARTAGE_SIMPLES.flatMap((pa) =>
+  FRACTIONS_QUESTION_SIMPLES.flatMap((qu) => [(d: number, L: string) => `${pa(d)} ${qu(L)}`, (d: number, L: string) => `${qu(L)} ${pa(d)}`]),
+);
 
 function genFraction(etoile: 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
   const p = prenom();
@@ -438,16 +473,16 @@ const PARTS_MOTS: Record<number, string> = { 2: "en deux", 3: "en tiers", 4: "en
 
 /** `pron` : « la » ou « le », selon le genre de l'objet partagé. */
 const SUPPORTS: { u: string; pron: string; objet: (p: Prenom, L: string) => string }[] = [
-  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} gradue une bande de papier de ${L} cm` },
-  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} prépare une frise chronologique de ${L} cm` },
-  { u: "cm", pron: "le", objet: (p, L) => `Pour un jeu de l'oie, ${p.nom} trace un chemin de ${L} cm` },
-  { u: "m", pron: "la", objet: (p, L) => `${p.nom} fait des nœuds sur une corde de ${L} m` },
+  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} gradue une bande de ${L} cm` },
+  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} prépare une frise de ${L} cm` },
+  { u: "cm", pron: "le", objet: (p, L) => `${p.nom} trace un chemin de ${L} cm` },
+  { u: "m", pron: "la", objet: (p, L) => `${p.nom} marque une corde de ${L} m` },
   { u: "cm", pron: "le", objet: (p, L) => `${p.nom} gradue un ruban de ${L} cm` },
-  { u: "m", pron: "la", objet: (p, L) => `Au stade, ${p.nom} pose des plots le long d'une ligne de ${L} m` },
-  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} gradue une baguette de bois de ${L} cm` },
-  { u: "m", pron: "la", objet: (p, L) => `Dans le jardin, ${p.nom} plante des piquets le long d'une allée de ${L} m` },
+  { u: "m", pron: "la", objet: (p, L) => `${p.nom} trace une ligne de ${L} m` },
+  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} gradue une baguette de ${L} cm` },
+  { u: "m", pron: "la", objet: (p, L) => `${p.nom} mesure une allée de ${L} m` },
   { u: "cm", pron: "le", objet: (p, L) => `${p.nom} dessine un segment de ${L} cm` },
-  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} gradue une règle en carton de ${L} cm` },
+  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} gradue une règle de ${L} cm` },
 ];
 
 function genGraduer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
@@ -506,7 +541,7 @@ function genGraduer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   if (forme === "distance") {
     const k = 1 + Math.floor(Math.random() * (parts - 1));
     return {
-      text: `${debut} ${choix([`À quelle distance du début se trouve la ${k === 1 ? "1re" : `${k}e`} graduation ?`, `Où place-t-${il(p)} la graduation ${k}/${parts} ? Donne sa distance au début.`])}`,
+      text: `${debut} ${choix([`À quelle distance du début est la ${k === 1 ? "1re" : `${k}e`} graduation ?`, `À quelle distance du début est la graduation ${k}/${parts} ?`])}`,
       format: "short",
       expected: [`${virgule(rond(k * pas))} ${s.u}`, virgule(rond(k * pas))],
       comparator: "number_equal",
@@ -515,7 +550,7 @@ function genGraduer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   }
   if (forme === "traits") {
     return {
-      text: `${debut} ${choix([`Combien de traits doit-${il(p)} tracer à l'intérieur, sans compter les deux bouts ?`, "Combien de marques faut-il à l'intérieur, sans compter les extrémités ?"])}`,
+      text: `${debut} ${choix([`Combien de traits trace-t-${il(p)} à l'intérieur ?`, "Combien de marques faut-il à l'intérieur ?", "Combien de traits à l'intérieur, sans les bouts ?"])}`,
       format: "short",
       expected: [String(parts - 1)],
       comparator: "number_equal",
@@ -524,7 +559,7 @@ function genGraduer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
   }
   if (forme === "total") {
     return {
-      text: `${debut} ${choix([`Combien de graduations y a-t-il en tout, en comptant les deux bouts ?`, "Combien de marques en tout, extrémités comprises ?"])}`,
+      text: `${debut} ${choix(["Combien de graduations en tout, bouts compris ?", "Combien de marques en tout, extrémités comprises ?"])}`,
       format: "short",
       expected: [String(parts + 1)],
       comparator: "number_equal",

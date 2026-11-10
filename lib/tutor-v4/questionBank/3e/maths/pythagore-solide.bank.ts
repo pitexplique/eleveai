@@ -26,6 +26,7 @@ import type {
   TutorGeneratedQuestionV4,
   PythagoreSolideCanvasData,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 type Q = TutorGeneratedQuestionV4;
 
@@ -34,7 +35,7 @@ function randomChoice<T>(arr: readonly T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 /** 67.24 → « 67,24 ». L'élève lit des nombres français. */

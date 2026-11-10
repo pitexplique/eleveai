@@ -16,6 +16,7 @@
 // leurre qui vaudrait la bonne réponse ou un autre leurre.
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 export type Prenom = { p: string; f: boolean };
 export const PRENOMS: Prenom[] = [
@@ -35,7 +36,7 @@ export function entre(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 export function melanger<T>(t: readonly T[]): T[] {
-  return [...t].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...t]);
 }
 export function deuxPrenoms(): [Prenom, Prenom] {
   const a = tirer(PRENOMS);

@@ -29,6 +29,7 @@ import type {
   TutorGeneratedQuestionV4,
   TriangleCanvasData,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -39,7 +40,7 @@ function randomChoice<T>(arr: T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 // ⭐ « LES CARRÉS PARFAITS DE 1 À 144 » EST UNE CONNAISSANCE DU BO (cycle 4,

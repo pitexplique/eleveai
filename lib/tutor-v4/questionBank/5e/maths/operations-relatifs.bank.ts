@@ -1,7 +1,7 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function randomChoice<T>(arr: T[]): T {
@@ -39,6 +39,7 @@ function expl(calcul: string) {
 // parenthèses : « 5 + (−3) ».
 import { PRENOMS, pick, de, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
 import { rel as relSigne, par, attendus, vraiMoins, choix, randInt, nonNul, deux, il, Il, pl, VILLES } from "./nombres-relatifs.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 /** Un relatif écrit : « −7 » ; un positif s'écrit « 7 », parfois « +7 ». (Pour un QCM, utiliser `relSigne`, stable.) */
 const rel = (n: number, plus = Math.random() < 0.3) => relSigne(n, plus);
@@ -48,7 +49,7 @@ type Terme = { op: "+" | "−"; v: number };
 function ecrire(premier: number, termes: Terme[]) {
   return [rel(premier, Math.random() < 0.25), ...termes.map((t) => `${t.op} ${par(t.v, Math.random() < 0.25)}`)].join(" ");
 }
-const shuffleTermes = (t: Terme[]) => [...t].sort(() => Math.random() - 0.5);
+const shuffleTermes = (t: Terme[]) => melangeEnPlace([...t]);
 const valeurDe = (premier: number, termes: Terme[]) => termes.reduce((s, t) => (t.op === "+" ? s + t.v : s - t.v), premier);
 /** Huit consignes pour un calcul écrit. */
 function consigne(expr: string, p: Prenom) {
@@ -462,7 +463,7 @@ const operationsRelatifsBrut: TutorBankItemV4[] = [
     // 09/10/2026 : somme de quatre relatifs — liste en situation (4), calcul écrit (8 consignes) ou évolution à 3 changements.
     generate: () => {
       const p = pick(PRENOMS);
-      const v = [nonNul(15), -randInt(1, 15), nonNul(15), randInt(1, 15)].sort(() => Math.random() - 0.5);
+      const v = melangeEnPlace([nonNul(15), -randInt(1, 15), nonNul(15), randInt(1, 15)]);
       const total = v.reduce((s, x) => s + x, 0);
       const forme = Math.random();
       if (forme < 0.25) {
@@ -1083,7 +1084,7 @@ const operationsRelatifsBrut: TutorBankItemV4[] = [
           `Dans ce calcul ${de(p.nom)}, le résultat est faux : ${expr} = ${rel(faux)}. Quel est le bon ?`,
         ]),
         format: "qcm",
-        choices: choixUniques.sort(() => Math.random() - 0.5).map((x) => relSigne(x)),
+        choices: melangeEnPlace(choixUniques).map((x) => relSigne(x)),
         expected: [relSigne(juste)],
         comparator: "mcq_exact",
         explanation: expl(

@@ -96,15 +96,15 @@ const CTX_COMPARER: CtxComparer[] = [
   { min: 1000, max: 9999, phrase: (_p, _q, a, b) => `Samedi, le zoo a reçu ${a} visiteurs. Dimanche, il en a reçu ${b}.` },
   { min: 200, max: 3000, phrase: (p, q, a, b) => `Le puzzle ${de(p.nom)} a ${a} pièces. Celui ${de(q.nom)} en a ${b}.` },
   { min: 120, max: 980, phrase: (p, q, a, b) => `Pour un gâteau, ${p.nom} pèse ${a} g de farine. ${q.nom} en pèse ${b} g.` },
-  { min: 1000, max: 4800, phrase: (p, q, a, b) => `En vacances, ${p.nom} monte sur un sommet de ${a} m. ${q.nom} monte sur un sommet de ${b} m.` },
-  { min: 1000, max: 9999, phrase: (_p, _q, a, b) => `Au stade, ${a} personnes regardent le match de foot. Au gymnase, ${b} personnes regardent le match de hand.` },
+  { min: 1000, max: 4800, phrase: (p, q, a, b) => `En vacances, ${p.nom} grimpe un sommet de ${a} m. ${q.nom} grimpe à ${b} m.` },
+  { min: 1000, max: 9999, phrase: (_p, _q, a, b) => `Au stade, ${a} personnes regardent le foot. Au gymnase, ${b} personnes regardent le hand.` },
   { min: 100, max: 900, phrase: (p, q, a, b) => `Au jardin, ${p.nom} sème ${a} graines de radis. ${q.nom} sème ${b} graines de carottes.` },
   { min: 2000, max: 6500, phrase: (_p, _q, a, b) => `Au parc animalier, un éléphant pèse ${a} kg. Un autre éléphant pèse ${b} kg.` },
   { min: 150, max: 990, phrase: (_p, _q, a, b) => `Au magasin, un vélo coûte ${a} €. Une trottinette coûte ${b} €.` },
   { min: 1000, max: 9999, phrase: (p, q, a, b) => `La chanson préférée ${de(p.nom)} a ${a} écoutes. Celle ${de(q.nom)} a ${b} écoutes.` },
   { min: 100, max: 999, phrase: (p, q, a, b) => `${p.nom} a ${a} cartes de foot dans sa collection. ${q.nom} en a ${b}.` },
   { min: 100, max: 999, phrase: (_p, _q, a, b) => `Pour la cabane, une boîte contient ${a} vis. Une autre boîte en contient ${b}.` },
-  { min: 1000, max: 9999, phrase: (_p, _q, a, b) => `Un avion vole à ${a} m de haut. Un autre avion vole à ${b} m de haut.` },
+  { min: 1000, max: 9999, phrase: (_p, _q, a, b) => `Un avion vole à ${a} m de haut. Un autre vole à ${b} m.` },
   { min: 200, max: 999, phrase: (_p, _q, a, b) => `La bibliothèque prête ${a} livres en mars et ${b} livres en avril.` },
   { min: 1000, max: 9999, phrase: (_p, _q, a, b) => `À Saint-Denis de La Réunion, ${a} coureurs font le semi-marathon. À Lyon, ils sont ${b}.` },
   { min: 100, max: 999, phrase: (p, q, a, b) => `Le chat ${de(p.nom)} a dormi ${a} minutes. Le chat ${de(q.nom)} a dormi ${b} minutes.` },
@@ -121,10 +121,10 @@ function deuxNombres(min: number, max: number, proches: boolean): [number, numbe
 }
 
 const QUESTIONS_COMPARER: { q: string; sens: "grand" | "petit" }[] = [
-  { q: "Quel est le plus grand de ces deux nombres ?", sens: "grand" },
-  { q: "Quel est le plus petit de ces deux nombres ?", sens: "petit" },
-  { q: "Écris le plus grand des deux nombres.", sens: "grand" },
-  { q: "Écris le plus petit des deux nombres.", sens: "petit" },
+  { q: "Quel nombre est le plus grand ?", sens: "grand" },
+  { q: "Quel nombre est le plus petit ?", sens: "petit" },
+  { q: "Écris le plus grand des deux.", sens: "grand" },
+  { q: "Écris le plus petit des deux.", sens: "petit" },
 ];
 
 /* ⛔⛔ 03/11/2026 — D'ABORD LE GESTE NU (Frédéric, ../REGLES-6E.md) : à ★1 et
@@ -183,18 +183,20 @@ function genComparer(proches: boolean, contexte = false) {
 function genComparerQuatre(contexte: boolean) {
   const ctx = contexte
     ? pick([
-        { intro: "Quatre amis jouent aux fléchettes. Voici leurs points.", unite: "points", min: 100, max: 999 },
+        // 07/11/2026 (25 mots au plus à ★3) : au-delà de 999, l'unité est dite
+        // une seule fois, dans la phrase d'entrée, et pas sur chaque ligne.
+        { intro: "Quatre amis jouent aux fléchettes.", unite: "points", min: 100, max: 999 },
         { intro: "Quatre cyclistes notent leurs kilomètres de l’année.", unite: "km", min: 1000, max: 3000 },
-        { intro: "Quatre enfants comptent leurs pas de la journée.", unite: "pas", min: 4000, max: 9999 },
-        { intro: "Quatre amis pèsent leur récolte de tomates.", unite: "g", min: 1000, max: 2500 },
-        { intro: "Quatre lecteurs comptent les pages lues cette année.", unite: "pages", min: 1000, max: 5000 },
-        { intro: "Quatre joueurs comparent leurs scores au jeu vidéo.", unite: "points", min: 1000, max: 9999 },
+        { intro: "Quatre enfants comptent leurs pas du jour.", unite: "pas", min: 4000, max: 9999 },
+        { intro: "Quatre amis pèsent leurs tomates, en grammes.", unite: "g", min: 1000, max: 2500 },
+        { intro: "Quatre lecteurs comptent leurs pages de l’année.", unite: "pages", min: 1000, max: 5000 },
+        { intro: "Quatre joueurs comparent leurs scores de jeu.", unite: "points", min: 1000, max: 9999 },
         { intro: "Quatre amis comptent leurs timbres.", unite: "timbres", min: 100, max: 999 },
         { intro: "Quatre élèves mesurent leur saut en longueur.", unite: "cm", min: 250, max: 480 },
-        { intro: "Quatre amis comptent leurs perles pour faire des bracelets.", unite: "perles", min: 100, max: 999 },
-        { intro: "Quatre musiciens comptent leurs minutes de piano de l’année.", unite: "minutes", min: 1000, max: 4000 },
-        { intro: "Quatre jardiniers comptent les graines de leur sachet.", unite: "graines", min: 100, max: 999 },
-        { intro: "Quatre amis comptent les bouchons collectés pour le recyclage.", unite: "bouchons", min: 1000, max: 9999 },
+        { intro: "Quatre amis enfilent des perles.", unite: "perles", min: 100, max: 999 },
+        { intro: "Quatre musiciens comptent leurs minutes de piano.", unite: "minutes", min: 1000, max: 4000 },
+        { intro: "Quatre jardiniers comptent leurs graines.", unite: "graines", min: 100, max: 999 },
+        { intro: "Quatre amis comptent leurs bouchons à recycler.", unite: "bouchons", min: 1000, max: 9999 },
       ])
     : pick([
         { intro: "", unite: "", min: 100, max: 999 },
@@ -219,10 +221,10 @@ function genComparerQuatre(contexte: boolean) {
     }
     const question = pick(
       sens === "grand"
-        ? ["Quel est le plus grand de ces quatre nombres ?", "Choisis le plus grand nombre.", "Qui a le plus grand nombre ? Choisis ce nombre."]
-        : ["Quel est le plus petit de ces quatre nombres ?", "Choisis le plus petit nombre.", "Qui a le plus petit nombre ? Choisis ce nombre."],
+        ? ["Quel est le plus grand nombre ?", "Choisis le plus grand nombre.", "Qui a le plus grand nombre ?"]
+        : ["Quel est le plus petit nombre ?", "Choisis le plus petit nombre.", "Qui a le plus petit nombre ?"],
     );
-    const lignes = nums.map((n, i) => `${noms[i]} : ${fmt(n)} ${ctx.unite}`).join("\n");
+    const lignes = nums.map((n, i) => `${noms[i]} : ${fmt(n)}${ctx.max < 1000 ? ` ${ctx.unite}` : ""}`).join("\n");
     text = `${ctx.intro}\n${lignes}\n${question}`;
   } else {
     text = pick(
@@ -402,9 +404,10 @@ function genDecomposerCourt(lo: number, hi: number, avecEnTout: boolean, context
     if (contexte && Math.random() < 0.5) {
       const p = pick(PRENOMS);
       const pron = p.f ? "elle" : "il";
-      const jeu = pick(["Au jeu de société", "Au jeu vidéo", "À la kermesse", "Au jeu de piste", "Au concours de tir à l’arc"]);
-      const cartes = ordre.map((x) => `${fmt(x)} points`);
-      const liste = cartes.length === 1 ? cartes[0] : `${cartes.slice(0, -1).join(", ")} et ${cartes[cartes.length - 1]}`;
+      const jeu = pick(["Au jeu de société", "Au jeu vidéo", "À la kermesse", "Au jeu de piste", "Au tir à l’arc"]);
+      // 07/11/2026 : « points » une seule fois, en fin de liste (25 mots au plus).
+      const cartes = ordre.map((x) => fmt(x));
+      const liste = `${cartes.length === 1 ? cartes[0] : `${cartes.slice(0, -1).join(", ")} et ${cartes[cartes.length - 1]}`} points`;
       return {
         text: `${jeu}, ${p.nom} gagne ${liste}.\n${pick([`Combien de points a-t-${pron} en tout ?`, "Écris son total en un seul nombre.", `Quel est son total ?`])}`,
         format: "short" as const,
@@ -661,13 +664,15 @@ function genChiffresDonnes(qcm: boolean, avecZero: boolean) {
   const mots = NB_CHIFFRES_MOTS[K];
   const objet = pick(["cartes", "étiquettes", "jetons", "aimants", "tuiles"]);
   const text = pick([
-    `${p.nom} a ${mots} ${objet} : ${liste}. ${p.f ? "Elle" : "Il"} les aligne pour former un nombre de ${mots} chiffres.\nQuel est le plus ${sens} nombre qu’${pron} peut former ?`,
+    // 07/11/2026 : 25 mots au plus (★3). Le nombre de chiffres annoncé (autant
+    // que de chiffres donnés) dit déjà qu'on les prend tous, une fois chacun.
+    `${p.nom} a ${mots} ${objet} : ${liste}.\nQuel est le plus ${sens} nombre de ${mots} chiffres qu’${pron} peut former ?`,
     `Avec les chiffres ${liste}, utilisés une seule fois chacun, quel est le plus ${sens} nombre de ${mots} chiffres ?`,
     `Écris le plus ${sens} nombre de ${mots} chiffres avec ${liste}, une seule fois chacun.`,
-    `${p.nom} joue au loto des nombres. ${p.f ? "Elle" : "Il"} tire les boules ${liste}.\nQuel est le plus ${sens} nombre de ${mots} chiffres qu’${pron} peut écrire avec elles, une seule fois chacune ?`,
-    `Sur le frigo, ${p.nom} a les aimants ${liste}.\nQuel est le plus ${sens} nombre de ${mots} chiffres qu’${pron} peut former avec tous ces aimants ?`,
-    `${p.nom} lance ${mots} fois un dé à dix faces et obtient ${liste}.\nAvec ces chiffres, une seule fois chacun, quel est le plus ${sens} nombre de ${mots} chiffres ?`,
-    `Au jeu de piste, ${p.nom} trouve les chiffres ${liste}. Le trésor s’ouvre avec le plus ${sens} nombre de ${mots} chiffres écrit avec eux, une seule fois chacun.\nQuel est ce nombre ?`,
+    `Au loto, ${p.nom} tire les boules ${liste}.\nAvec ces boules, quel est le plus ${sens} nombre de ${mots} chiffres ?`,
+    `Sur le frigo, ${p.nom} a les aimants ${liste}.\nQuel est le plus ${sens} nombre de ${mots} chiffres qu’${pron} peut former ?`,
+    `${p.nom} obtient ${liste} avec un dé à dix faces.\nAvec ces chiffres, quel est le plus ${sens} nombre de ${mots} chiffres ?`,
+    `Au jeu de piste, ${p.nom} trouve les chiffres ${liste}.\nLe code est le plus ${sens} nombre de ${mots} chiffres. Trouve-le.`,
   ]);
   const explication = expl(
     sens === "grand"
@@ -724,7 +729,7 @@ function genComplement(contexte = false) {
           `Au jeu, ${p.nom} a ${A} points. Il faut ${T} points pour gagner.\nCombien de points ${lui} manque-t-il ?`,
           `Aujourd’hui, ${p.nom} a fait ${A} pas. ${Il} veut atteindre ${T} pas.\nCombien de pas doit-${il} encore faire ?`,
           `${p.nom} fait un puzzle de ${T} pièces. ${Il} en a déjà posé ${A}.\nCombien de pièces reste-t-il à poser ?`,
-          `Dans le jeu vidéo ${de(p.nom)}, il faut ${T} pièces d’or pour passer au niveau suivant. ${Il} en a ${A}.\nCombien de pièces d’or ${lui} manque-t-il ?`,
+          `Au jeu vidéo, il faut ${T} pièces d’or pour passer le niveau. ${p.nom} en a ${A}.\nCombien ${lui} en manque-t-il ?`,
           `${p.nom} collectionne les bouchons pour le recyclage. Le but est ${T} bouchons. ${Il} en a ${A}.\nCombien lui en manque-t-il ?`,
           `Cette année, ${p.nom} veut lire ${T} pages. ${Il} en a déjà lu ${A}.\nCombien de pages doit-${il} encore lire ?`,
           `Le stade de la ville a ${T} places. ${p.nom} lit sur l’écran : ${A} places occupées.\nCombien de places restent libres ?`,
@@ -743,7 +748,7 @@ function genComplement(contexte = false) {
           `${p.nom} enfile des perles. ${Il} en veut ${T} pour ses bracelets et en a déjà ${A}.\nCombien de perles doit-${il} encore enfiler ?`,
           `Au club de natation, ${p.nom} a nagé ${A} m. L’entraînement fait ${T} m.\nCombien de mètres reste-t-il à nager ?`,
           `${p.nom} range ${T} livres à la bibliothèque. ${Il} en a déjà rangé ${A}.\nCombien en reste-t-il à ranger ?`,
-          `Dans le jeu vidéo ${de(p.nom)}, il faut ${T} pièces d’or pour passer au niveau suivant. ${Il} en a ${A}.\nCombien de pièces d’or ${lui} manque-t-il ?`,
+          `Au jeu vidéo, il faut ${T} pièces d’or pour passer le niveau. ${p.nom} en a ${A}.\nCombien ${lui} en manque-t-il ?`,
           `${p.nom} prépare une randonnée de ${T} m de montée. ${Il} a déjà monté ${A} m.\nCombien de mètres reste-t-il à monter ?`,
           `${p.nom} collectionne les bouchons pour le recyclage. Le but est ${T} bouchons. ${Il} en a ${A}.\nCombien lui en manque-t-il ?`,
         ]);

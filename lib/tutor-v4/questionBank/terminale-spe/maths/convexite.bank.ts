@@ -18,6 +18,7 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 import { renfortConvexite } from "./convexite-renfort";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -707,7 +708,7 @@ const anciens: TutorBankItemV4[] = [
       return {
         text: `Soit $f(x) = ${a}x^3$. Quelle est sa dérivée seconde $f''(x)$ ?`,
         format: "qcm",
-        choices: [correct, ...distracteurs].sort(() => Math.random() - 0.5),
+        choices: melangeEnPlace([correct, ...distracteurs]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

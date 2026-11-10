@@ -4,6 +4,7 @@ import type {
   TutorBankItemV4,
   DroiteGradueeCanvasData,
 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomChoice<T>(items: T[]): T {
   return items[Math.floor(Math.random() * items.length)];
@@ -14,7 +15,7 @@ function randomInt(min: number, max: number) {
 }
 
 function shuffle<T>(items: T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {

@@ -69,6 +69,9 @@ const que = (x: string) => (/^[AEIOUÉÈÊÀÂÎ]/i.test(x) ? `qu’${x}` : `que
 /** « d’élèves », « de livres ». */
 const deMot = (mot: string) => (/^[aeiouéèêh]/i.test(mot) ? `d’${mot}` : `de ${mot}`);
 
+/** Le nombre de mots d'un énoncé (« : », « ? » ne comptent pas). */
+const nbMots = (t: string) => t.trim().split(/\s+/).filter((w) => /[\p{L}\d]/u.test(w)).length;
+
 function gab(
   id: string,
   notionId: string,
@@ -79,9 +82,19 @@ function gab(
   generate: () => Q,
 ): TutorBankItemV4 {
   // 03/11/2026 : une situation vide (★1-★2) laisse une espace en tête ou en double.
-  const net = (): Q => {
+  const net1 = (): Q => {
     const q = generate();
     return { ...q, text: q.text.replace(/ {2,}/g, " ").trim() };
+  };
+  // 07/11/2026 : ★3 en 25 mots au plus (REGLES-6E.md) — on retire jusqu'à tenir.
+  const net = (): Q => {
+    let q = net1();
+    if (difficulty !== 3) return q;
+    for (let k = 0; k < 300 && nbMots(q.text) > 25; k++) {
+      const r = net1();
+      if (nbMots(r.text) < nbMots(q.text)) q = r;
+    }
+    return q;
   };
   return { kind: "template", id, niveau: "6e", matiere: "maths", notionId, microId, difficulty, theme: "neutral", hint, tags, generate: net };
 }
@@ -149,21 +162,21 @@ const OISEAUX = [
 const CTX_STAT: CtxStat[] = [
   {
     titre: "Sport préféré", entete: "Nombre d’élèves", unite: "élèves", quel: "Quel sport",
-    intro: (p) => `${p.nom} a demandé à chaque élève de sa classe son sport préféré.`,
+    intro: (p) => `${p.nom} a demandé à sa classe son sport préféré.`,
     combien: (c) => `combien d’élèves ont choisi ${c.gn}`,
     tout: () => "combien d’élèves ont répondu",
     cats: SPORTS, min: 2, max: 12,
   },
   {
     titre: "Cagettes vendues au marché", entete: "Cagettes vendues", unite: "cagettes", quel: "Quel fruit",
-    intro: (p) => `${p.nom} aide ses parents au marché. ${Il(p)} note les cagettes de fruits vendues.`,
+    intro: (p) => `Au marché, ${p.nom} note les cagettes de fruits vendues.`,
     combien: (c) => `combien de cagettes ${c.gn} ont été vendues`,
     tout: () => "combien de cagettes ont été vendues",
     cats: FRUITS, min: 4, max: 30,
   },
   {
     titre: "Livres empruntés", entete: "Livres empruntés", unite: "livres", quel: "Quel jour",
-    intro: (p) => `${p.nom} aide à la médiathèque. ${Il(p)} compte les livres empruntés chaque jour.`,
+    intro: (p) => `À la médiathèque, ${p.nom} compte les livres empruntés chaque jour.`,
     combien: (c) => `combien de livres ont été empruntés ${c.gn}`,
     tout: () => "combien de livres ont été empruntés",
     cats: jours(6).slice(1), min: 12, max: 60,
@@ -177,21 +190,21 @@ const CTX_STAT: CtxStat[] = [
   },
   {
     titre: "Instrument choisi", entete: "Nombre d’élèves", unite: "élèves", quel: "Quel instrument",
-    intro: (p) => `À l’école de musique, ${p.nom} note l’instrument choisi par chaque élève.`,
+    intro: (p) => `À l’école de musique, ${p.nom} note l’instrument de chaque élève.`,
     combien: (c) => `combien d’élèves ont choisi ${c.gn}`,
     tout: () => "combien d’élèves ont choisi un instrument",
     cats: INSTRUMENTS, min: 2, max: 14,
   },
   {
     titre: "Trajet jusqu’au collège", entete: "Nombre d’élèves", unite: "élèves", quel: "Quel moyen de transport",
-    intro: (p) => `${p.nom} demande aux élèves de sa classe comment ils viennent au collège.`,
+    intro: (p) => `${p.nom} demande à sa classe comment chacun vient au collège.`,
     combien: (c) => `combien d’élèves viennent ${c.gn}`,
     tout: () => "combien d’élèves ont répondu",
     cats: TRANSPORTS, min: 2, max: 14,
   },
   {
     titre: "Animaux à la maison", entete: "Nombre d’élèves", unite: "élèves", quel: "Quel animal",
-    intro: (p) => `${p.nom} demande aux élèves de son club quel animal ils ont à la maison.`,
+    intro: (p) => `${p.nom} demande à son club quel animal chacun a chez lui.`,
     combien: (c) => `combien d’élèves ont ${c.gn}`,
     tout: () => "combien d’élèves ont répondu",
     cats: [
@@ -202,7 +215,7 @@ const CTX_STAT: CtxStat[] = [
   },
   {
     titre: "Cornets de glace vendus", entete: "Cornets vendus", unite: "cornets", quel: "Quel parfum",
-    intro: (p) => `À la fête du village, ${p.nom} tient le stand de glaces. ${Il(p)} compte les cornets vendus.`,
+    intro: (p) => `À la fête du village, ${p.nom} compte les cornets de glace vendus.`,
     combien: (c) => `combien de cornets ${c.gn} ont été vendus`,
     tout: () => "combien de cornets ont été vendus",
     cats: PARFUMS, min: 5, max: 40,
@@ -224,7 +237,7 @@ const CTX_STAT: CtxStat[] = [
   {
     titre: "Jours de pluie", entete: "Jours de pluie", unite: "jours", quel: "Quel mois",
     grandeur: { mot: "nombre de jours de pluie", fem: false },
-    intro: (p) => `${p.nom} note chaque jour s’il a plu. ${Il(p)} fait le compte de chaque mois.`,
+    intro: (p) => `${p.nom} compte les jours de pluie de chaque mois.`,
     combien: (c) => `combien de jours de pluie y a-t-il eu ${c.gn}`,
     tout: () => "combien de jours de pluie y a-t-il eu",
     cats: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin"].map((m) => cat(m, `en ${m.toLowerCase()}`)),
@@ -233,14 +246,14 @@ const CTX_STAT: CtxStat[] = [
   {
     titre: "Distance parcourue à vélo", entete: "Distance (km)", unite: "km", quel: "Quel jour",
     grandeur: { mot: "distance", fem: true },
-    intro: (p) => `Pendant les vacances, ${p.nom} fait une randonnée à vélo. ${Il(p)} note la distance parcourue chaque jour.`,
+    intro: (p) => `En vacances, ${p.nom} note la distance parcourue à vélo chaque jour.`,
     combien: (c, p) => `combien de kilomètres ${p.nom} a-t-${il(p)} parcourus ${c.gn}`,
     tout: (p) => `combien de kilomètres ${p.nom} a-t-${il(p)} parcourus`,
     cats: jours(6), min: 8, max: 45,
   },
   {
     titre: "Graines germées", entete: "Graines germées", unite: "graines", quel: "Quel jour",
-    intro: (p) => `En sciences, ${p.nom} a semé des haricots. ${Il(p)} compte les graines qui germent chaque jour.`,
+    intro: (p) => `En sciences, ${p.nom} compte les graines de haricot qui germent chaque jour.`,
     combien: (c) => `combien de graines ont germé ${c.gn}`,
     tout: () => "combien de graines ont germé",
     cats: jours(5), min: 1, max: 15,
@@ -259,7 +272,7 @@ const CTX_STAT: CtxStat[] = [
   },
   {
     titre: "Barquettes vendues", entete: "Barquettes vendues", unite: "barquettes", quel: "Quel fruit",
-    intro: (p) => `Au marché de Saint-Paul, à La Réunion, ${p.nom} compte les barquettes de fruits vendues.`,
+    intro: (p) => `Au marché de Saint-Paul, ${p.nom} compte les barquettes de fruits vendues.`,
     combien: (c) => `combien de barquettes ${c.gn} ont été vendues`,
     tout: () => "combien de barquettes ont été vendues",
     cats: [
@@ -270,7 +283,7 @@ const CTX_STAT: CtxStat[] = [
   },
   {
     titre: "Objets fabriqués", entete: "Objets fabriqués", unite: "objets", quel: "Quel groupe",
-    intro: (p) => `À l’atelier de bricolage, ${p.nom} compte les objets fabriqués par chaque groupe.`,
+    intro: (p) => `À l’atelier bricolage, ${p.nom} compte les objets de chaque groupe.`,
     combien: (c) => `combien d’objets ${c.gn} a-t-il fabriqués`,
     tout: () => "combien d’objets ont été fabriqués",
     cats: ["rouge", "bleu", "vert", "jaune", "orange"].map((x) => cat(`Groupe ${x}`, `le groupe ${x}`)),
@@ -372,7 +385,7 @@ const CTX_COURBE: CtxCourbe[] = [
   {
     titre: "Jours de pluie à Saint-Denis", entete: "Jours de pluie", unite: "jours", quel: "Quel mois", axeY: "jours de pluie",
     grandeur: { mot: "nombre de jours de pluie", fem: false },
-    intro: (p) => `${p.nom} veut devenir météorologue. ${Il(p)} relève les jours de pluie à Saint-Denis, à La Réunion, mois après mois.`,
+    intro: (p) => `${p.nom} veut devenir météorologue. ${Il(p)} note les jours de pluie chaque mois.`,
     combien: (c) => `combien de jours de pluie y a-t-il eu ${c.gn}`,
     tout: () => "combien de jours de pluie y a-t-il eu",
     cats: MOIS.map(moisCat), min: 2, max: 18,
@@ -381,7 +394,7 @@ const CTX_COURBE: CtxCourbe[] = [
   {
     titre: "Baleines observées au large de Saint-Gilles", entete: "Baleines observées", unite: "baleines", quel: "Quel mois", axeY: "baleines",
     grandeur: { mot: "nombre de baleines observées", fem: false },
-    intro: (p) => `${p.nom} accompagne une biologiste marine en mer. Elle compte les baleines à bosse observées chaque mois au large de Saint-Gilles.`,
+    intro: (p) => `En mer, ${p.nom} aide une biologiste à compter les baleines chaque mois.`,
     combien: (c) => `combien de baleines ont été observées ${c.gn}`,
     tout: () => "combien de baleines ont été observées",
     cats: ["Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre"].map(moisCat), min: 5, max: 100,
@@ -390,7 +403,7 @@ const CTX_COURBE: CtxCourbe[] = [
   {
     titre: "Visiteurs de Kélonia heure par heure", entete: "Visiteurs", unite: "visiteurs", quel: "À quelle heure", axeY: "visiteurs",
     grandeur: { mot: "nombre de visiteurs", fem: false },
-    intro: (p) => `${p.nom} fait un stage avec la responsable de l’accueil de Kélonia, le centre des tortues marines de Saint-Leu. ${Il(p)} compte les visiteurs qui entrent à chaque heure.`,
+    intro: (p) => `En stage dans un centre de tortues marines, ${p.nom} compte les visiteurs à chaque heure.`,
     combien: (c) => `combien de visiteurs sont entrés ${c.gn}`,
     tout: () => "combien de visiteurs sont entrés",
     cats: ["9 h", "10 h", "11 h", "12 h", "14 h", "15 h"].map((h) => cat(h, `à ${h}`)), min: 10, max: 100,
@@ -399,7 +412,7 @@ const CTX_COURBE: CtxCourbe[] = [
   {
     titre: "Température à Cilaos un jour d’hiver", entete: "Température (°C)", unite: "°C", quel: "À quelle heure", axeY: "°C",
     grandeur: { mot: "température", fem: true },
-    intro: (p) => `${p.nom} part en randonnée à Cilaos avec une guide de montagne. Elle note la température toutes les deux heures.`,
+    intro: (p) => `En randonnée avec une guide de montagne, ${p.nom} note la température toutes les deux heures.`,
     combien: (c) => `quelle température, en °C, fait-il ${c.gn}`,
     tout: () => "",
     cats: ["8 h", "10 h", "12 h", "14 h", "16 h"].map((h) => cat(h, `à ${h}`)), min: 4, max: 20,
@@ -408,7 +421,7 @@ const CTX_COURBE: CtxCourbe[] = [
   {
     titre: "Taille d’un plant de tomate", entete: "Taille (cm)", unite: "cm", quel: "Quelle semaine", axeY: "cm",
     grandeur: { mot: "taille", fem: true },
-    intro: (p) => `${p.nom} aide une maraîchère de la Plaine des Cafres. Chaque semaine, ${il(p)} mesure la hauteur d’un plant de tomate.`,
+    intro: (p) => `Chez une maraîchère, ${p.nom} mesure chaque semaine la hauteur d’un plant de tomate.`,
     combien: (c) => `quelle taille, en cm, mesure le plant ${c.gn}`,
     tout: () => "",
     cats: [1, 2, 3, 4, 5, 6].map((k) => cat(`Semaine ${k}`, `à la semaine ${k}`)), min: 5, max: 50,
@@ -493,7 +506,7 @@ function qCourbe(s: Serie, mode: "max" | "min" | "ecart"): Q {
   const k = s.v.indexOf(max ? Math.max(...s.v) : Math.min(...s.v));
   const gm = `${g.fem ? "la" : "le"} plus ${max ? "grand" : "petit"}${g.fem ? "e" : ""} ${g.mot}`;
   const text = pick([
-    () => `${s.ctx.intro(s.p)} ${s.ctx.quel} ${L[0].match(/^\d/) ? "relève-t-on" : "compte"} ${gm} ? Cherche le point le plus ${max ? "haut" : "bas"} de la courbe.`,
+    () => `${s.ctx.intro(s.p)} ${s.ctx.quel} ${L[0].match(/^\d/) ? "relève-t-on" : "compte"} ${gm} ?${pick(["", ` Cherche le point le plus ${max ? "haut" : "bas"}.`])}`,
     () => `${maj(supp(s))} s’intitule « ${s.ctx.titre} ». ${s.ctx.quel} correspond ${gm.replace(/^le /, "au ").replace(/^la /, "à la ")} ?`,
   ])();
   return {
@@ -766,10 +779,11 @@ function qExtreme(s: Serie, max = Math.random() < 0.6): Q {
   const k = s.v.indexOf(max ? Math.max(...s.v) : Math.min(...s.v));
   const qu = s.ctx.quel;
   const o = motU(s);
+  // 07/11/2026 : ★1 à 7,2 répétitions sur 20 — une consigne × une question, 12 mots au plus.
   const text = s.ctx.simple
-    ? pick(max
-        ? [`Quelle couleur a le plus grand effectif ?`, `Quelle couleur arrive en tête ?`, `Quelle couleur ${deMot(o)} a le plus grand effectif ?`, `Compare les nombres. Quelle couleur arrive en tête ?`, `Quelle couleur ${deMot(o)} arrive en tête ?`]
-        : [`Quelle couleur a le plus petit effectif ?`, `Quelle couleur arrive en dernier ?`, `Quelle couleur ${deMot(o)} a le plus petit effectif ?`, `Compare les nombres. Quelle couleur arrive en dernier ?`, `Quelle couleur ${deMot(o)} arrive en dernier ?`])
+    ? `${pick(["", "", "Compare les nombres.", `Compare les ${o}.`, "Lis la figure.", `Regarde les ${o}.`])} ${pick(max
+        ? [`Quelle couleur a le plus grand effectif ?`, `Quelle couleur arrive en tête ?`, `Quelle couleur ${deMot(o)} a le plus grand effectif ?`, `Quelle couleur ${deMot(o)} arrive en tête ?`, `Quelle couleur a la plus grande valeur ?`]
+        : [`Quelle couleur a le plus petit effectif ?`, `Quelle couleur arrive en dernier ?`, `Quelle couleur ${deMot(o)} a le plus petit effectif ?`, `Quelle couleur ${deMot(o)} arrive en dernier ?`, `Quelle couleur a la plus petite valeur ?`])}`.trim()
     : max
     ? pick([
         () => `${amorce(s)} ${qu} a ${pg(s, true)} ?`,
@@ -917,14 +931,25 @@ function qVrai(s: Serie, modeles: ("plusQue" | "max" | "min" | "total" | "ecart"
   const prem = vraies.filter((x) => (modeles[0] === "plusQue" ? / a plus .+ que / : modeles[0] === "max" ? / a le plus / : modeles[0] === "min" ? / a le moins / : modeles[0] === "total" ? /en tout/ : modeles[0] === "ecart" ? /de plus que/ : modeles[0] === "moitie" ? /moitié/ : /double/).test(x));
   const juste = pick(prem.length ? prem : vraies);
   const pieges = shuffle([...new Set(fausses)]).slice(0, 3);
-  const text = s.ctx.simple ? pick([
+  // 07/11/2026 : ★2 à 10,7 répétitions sur 20 — une consigne × une question, pour varier.
+  const text = s.ctx.simple ? `${pick([
+    "",
+    "",
+    "Lis la figure.",
+    "Lis les nombres.",
+    "Regarde bien la figure.",
+    `Compare les ${motU(s)}.`,
+    `Compte les ${motU(s)}.`,
+    `Regarde les ${motU(s)}.`,
+  ])} ${pick([
     "Quelle phrase est vraie ?",
-    "Lis la figure. Quelle phrase est vraie ?",
     "Quelle affirmation est juste ?",
     "Une seule phrase dit vrai : laquelle ?",
-    `Compare les ${motU(s)}. Quelle phrase est vraie ?`,
-    "Lis les nombres. Quelle affirmation est juste ?",
-  ]) : pick([
+    "Quelle phrase dit vrai ?",
+    "Trouve la phrase qui dit vrai.",
+    "Coche la phrase qui dit vrai.",
+    "Une seule affirmation est juste. Trouve-la.",
+  ])}`.trim() : pick([
     () => `${amorce(s)} Lis ${supp(s)}. Quelle phrase est vraie ?`,
     () => `${amorce(s)} Quelle affirmation est juste ?`,
     () => `${amorce(s)} ${s.ctx.simple ? "Voici quatre phrases." : `${s.p.nom} écrit quatre phrases.`} Une seule dit vrai : laquelle ?`,
@@ -1019,7 +1044,7 @@ const WEEKEND = [cat("Samedi", "le samedi"), cat("Dimanche", "le dimanche"), cat
 const CTX_DOUBLE: CtxDouble[] = [
   {
     titre: "Sport préféré des élèves du collège",
-    intro: (p) => `${p.nom} a fait une enquête sur le sport préféré des élèves du collège.`,
+    intro: (p) => `${p.nom} a demandé leur sport préféré aux élèves du collège.`,
     lignes: SPORTS, cols: FILLES_GARCONS,
     cellule: (r, k) => [`combien de ${k.gn} ont choisi ${r.gn}`, k.gn],
     totalLigne: (r) => [`combien d’élèves ont choisi ${r.gn} en tout`, "élèves"],
@@ -1037,7 +1062,7 @@ const CTX_DOUBLE: CtxDouble[] = [
   },
   {
     titre: "Cagettes vendues au marché",
-    intro: (p) => `${p.nom} aide ses parents au marché. ${Il(p)} note les cagettes vendues chaque jour de marché.`,
+    intro: (p) => `Au marché, ${p.nom} note les cagettes vendues chaque jour.`,
     lignes: FRUITS, cols: WEEKEND,
     cellule: (r, k) => [`combien de cagettes ${r.gn} ont été vendues ${k.gn}`, "cagettes"],
     totalLigne: (r) => [`combien de cagettes ${r.gn} ont été vendues en tout`, "cagettes"],
@@ -1046,7 +1071,7 @@ const CTX_DOUBLE: CtxDouble[] = [
   },
   {
     titre: "Crêpes vendues",
-    intro: (p) => `${p.nom} tient le stand de crêpes de la kermesse pendant plusieurs jours.`,
+    intro: (p) => `${p.nom} tient le stand de crêpes de la kermesse.`,
     lignes: GARNITURES, cols: WEEKEND,
     cellule: (r, k) => [`combien de crêpes ${r.gn} ont été vendues ${k.gn}`, "crêpes"],
     totalLigne: (r) => [`combien de crêpes ${r.gn} ont été vendues en tout`, "crêpes"],
@@ -1055,7 +1080,7 @@ const CTX_DOUBLE: CtxDouble[] = [
   },
   {
     titre: "Cornets vendus cet été",
-    intro: (p) => `${p.nom} aide un glacier pendant l’été. ${Il(p)} recopie les ventes de chaque mois.`,
+    intro: (p) => `Cet été, ${p.nom} note les ventes d’un glacier, mois par mois.`,
     lignes: PARFUMS, cols: ["Juin", "Juillet", "Août"].map((m) => cat(m, `en ${m.toLowerCase()}`)),
     cellule: (r, k) => [`combien de cornets ${r.gn} ont été vendus ${k.gn}`, "cornets"],
     totalLigne: (r) => [`combien de cornets ${r.gn} ont été vendus en tout`, "cornets"],
@@ -1073,7 +1098,7 @@ const CTX_DOUBLE: CtxDouble[] = [
   },
   {
     titre: "Plants du potager",
-    intro: (p) => `Le potager de l’école a plusieurs carrés. ${p.nom} compte les plants de chacun.`,
+    intro: (p) => `${p.nom} compte les plants de chaque carré du potager.`,
     lignes: LEGUMES, cols: ["nord", "sud", "est"].map((x) => cat(`Carré ${x}`, `dans le carré ${x}`)),
     cellule: (r, k) => [`combien de plants ${r.gn} y a-t-il ${k.gn}`, "plants"],
     totalLigne: (r) => [`combien de plants ${r.gn} y a-t-il en tout`, "plants"],
@@ -1082,7 +1107,7 @@ const CTX_DOUBLE: CtxDouble[] = [
   },
   {
     titre: "Oiseaux observés",
-    intro: (p) => `${p.nom} observe les oiseaux de son jardin à deux moments de la journée.`,
+    intro: (p) => `${p.nom} compte les oiseaux de son jardin deux fois par jour.`,
     lignes: OISEAUX, cols: [cat("Matin", "le matin"), cat("Soir", "le soir")],
     cellule: (r, k, p) => [`combien de ${r.gn} ${p.nom} a-t-${il(p)} comptés ${k.gn}`, r.gn],
     totalLigne: (r, p) => [`combien de ${r.gn} ${p.nom} a-t-${il(p)} comptés en tout`, r.gn],
@@ -1302,12 +1327,19 @@ function qPlanifierQuestion(s: SujetEnquete = pick(SUJETS_ENQUETE)): Q {
       "Quelle question d’enquête permet de compter les réponses ?",
       "Quelle est la meilleure question d’enquête ?",
       "Quelle question convient à une enquête ?",
+      // 07/11/2026 : ★2 à 6,1 répétitions sur 20 — d'autres tournures.
+      "Quelle question est bien posée pour une enquête ?",
+      "Pour compter les réponses, quelle question choisir ?",
+      "Quelle question évite les réponses vagues ?",
+      "Quelle question ne souffle pas la réponse ?",
+      "Trouve la question d’enquête bien posée.",
+      "Quelle question donne des réponses faciles à ranger ?",
       "Quelle question donne des réponses précises, faciles à compter ?",
       "Pour une enquête, quelle question faut-il poser ?",
       "Quelle question d’enquête est précise et neutre ?",
       "Choisis la bonne question d’enquête.",
       "Quelle question permet de ranger les réponses ?",
-    ]) + pick(["", "", " Une seule est bien posée.", " Lis les quatre questions."]);
+    ]) + pick(["", "", " Une seule est bien posée.", " Lis les quatre questions.", " Lis bien chaque question.", " Une seule convient."]);
   return {
     text,
     format: "qcm",
@@ -1468,9 +1500,9 @@ function qLignesMesureSituation(): Q {
   const n = entre(5, 24);
   const p = pick(PRENOMS);
   const text = pick([
-    () => `${p.nom} doit relever ${m.quoi(n)} dans un tableau. Combien de lignes de données faut-il, sans compter l’en-tête ?`,
-    () => `${p.nom} prépare un tableau pour noter ${m.quoi(n)}. Une ligne par mesure. Combien de lignes de données en tout ?`,
-    () => `Pour consigner ${m.quoi(n)}, ${p.nom} trace un tableau. L’en-tête est « ${m.col} ». Combien de lignes de mesures faut-il prévoir ?`,
+    () => `${p.nom} doit relever ${m.quoi(n)} dans un tableau. Combien de lignes de données, sans l’en-tête ?`,
+    () => `${p.nom} prépare un tableau pour noter ${m.quoi(n)}. Une ligne par mesure. Combien de lignes de données ?`,
+    () => `Pour noter ${m.quoi(n)}, ${p.nom} trace un tableau « ${m.col} ». Combien de lignes de mesures faut-il ?`,
   ])();
   return { ...qLignesMesure(m, n), text };
 }
@@ -1482,9 +1514,10 @@ function qConvertirMesure(): Q {
   const obj = pick(c.objets);
   const col = `${c.grandeur} (${c.vers})`;
   const text = pick([
-    () => `${p.nom} relève ${c.la} de plusieurs ${obj}. La colonne s’intitule « ${col} ». Une mesure a été notée ${virgule(x)} ${c.de}. Quel nombre faut-il écrire dans la colonne ?`,
+    () => `${p.nom} relève ${c.la} de ${obj}. La colonne est « ${col} ». Une mesure est notée ${virgule(x)} ${c.de}. Quel nombre faut-il écrire ?`,
     () => `Dans le tableau ${de(p.nom)}, la colonne « ${col} » contient une erreur : ${virgule(x)} ${c.de}. Convertis cette mesure pour la colonne.`,
     () => `${p.nom} mesure des ${obj}. Son tableau est en ${c.vers}, mais une mesure est notée ${virgule(x)} ${c.de}. Combien cela fait-il en ${c.vers} ?`,
+    () => `Colonne « ${col} » : ${p.nom} a noté ${virgule(x)} ${c.de} par erreur. Que faut-il écrire à la place ?`,
   ])();
   return {
     text,
@@ -1557,15 +1590,15 @@ function listeBrute(n: number, k: number) {
   return { L, mots, rep: shuffle(rep) };
 }
 function qCompterBrut(): Q {
-  const n = entre(10, 16);
+  const n = entre(8, 11); // 07/11/2026 : la liste tient dans un énoncé de 25 mots
   const { L, mots, rep } = listeBrute(n, entre(3, 4));
   const p = pick(PRENOMS);
   const m = pick(mots);
   const eff = rep.filter((x) => x === m).length;
   const text = pick([
-    () => `${p.nom} a demandé à ${n} élèves ${L.sujet}. Réponses : ${rep.join(", ")}. Quel est l’effectif de la réponse ${m} ?`,
-    () => `Voici les réponses brutes recueillies par ${p.nom} sur ${L.sujet} : ${rep.join(", ")}. Combien d’élèves ont répondu ${m} ?`,
-    () => `${p.nom} construit le tableau des effectifs. Réponses notées : ${rep.join(", ")}. Quel nombre écrire en face de ${m} ?`,
+    () => `${p.nom} a demandé à ${n} élèves ${L.sujet} : ${rep.join(", ")}. Combien ont répondu ${m} ?`,
+    () => `Réponses de ${n} élèves sur ${L.sujet} : ${rep.join(", ")}. Quel est l’effectif de ${m} ?`,
+    () => `${p.nom} interroge ${n} élèves sur ${L.sujet}. Réponses : ${rep.join(", ")}. Quel nombre écrire en face de ${m} ?`,
   ])();
   return {
     text,
@@ -3297,7 +3330,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_construire_tableau",
     difficulty: 3,
     theme: "neutral",
-    text: "On a demandé à 25 élèves leur sport préféré. Les réponses possibles sont : football, natation, danse, escalade. Combien de LIGNES de données le tableau des effectifs doit-il contenir ?",
+    text: "25 élèves donnent leur sport préféré : football, natation, danse ou escalade. Combien de LIGNES de données faut-il dans le tableau des effectifs ?",
     format: "short",
     expected: ["4"],
     comparator: "number_equal",
@@ -3308,17 +3341,8 @@ export const donneesBank: TutorBankItemV4[] = [
       "Il y a quatre réponses possibles, donc quatre lignes : football, natation, danse, escalade. Faire 25 lignes reviendrait à recopier les réponses une à une, sans rien résumer — c'est exactement ce que le tableau d'effectifs évite. Le tableau ne stocke pas les observations, il les COMPTE.",
       "on garde 4 lignes."
     ),
-    tags: ["stat_enquete", "construire", "canvas", "short"],
-    canvas: tableauDonneesCanvas({
-      title: "Sport préféré (25 élèves)",
-      headers: ["Effectif"],
-      rows: [
-        { label: "Football", values: [9] },
-        { label: "Natation", values: [6] },
-        { label: "Danse", values: [7] },
-        { label: "Escalade", values: [3] },
-      ],
-    }),
+    // 07/11/2026 : le tableau dessiné montrait déjà ses 4 lignes — il donnait la réponse ; retiré.
+    tags: ["stat_enquete", "construire", "short"],
   },
   {
     kind: "fixed",

@@ -1,6 +1,7 @@
 //calcul-litteral.bank.ts
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS, pick, de, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -42,7 +43,7 @@ const LETTRES = ["x", "y", "n", "t", "k"];
 const il = (p: Prenom) => (p.f ? "elle" : "il");
 const ils = (p: Prenom, q: Prenom) => (p.f && q.f ? "elles" : "ils");
 const Maj = (s: string) => s[0].toUpperCase() + s.slice(1);
-const melange = <T,>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
+const melange = <T,>(arr: T[]): T[] => melangeEnPlace([...arr]);
 function deuxPrenoms(): [Prenom, Prenom] {
   const p = pick(PRENOMS);
   let q = pick(PRENOMS);

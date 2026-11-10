@@ -6,9 +6,10 @@
 
 import type { TutorBankItemV4, ScratchBlockData, DifficultyLevel } from "@/lib/tutor-v4/types";
 import { PRENOMS, pick, de as deNom, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function scratchCanvas(title: string, blocks: any[], description?: string) {

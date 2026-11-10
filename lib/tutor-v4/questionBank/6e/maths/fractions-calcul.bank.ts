@@ -575,8 +575,9 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
         `Complète en ${pl} : ${a}/${d} + ${b}/${d} = …/${d}`,
         `Les barres montrent ${a}/${d} et ${b}/${d}. Combien de ${pl} en tout ?`,
         `${fractionEnMots(a, d)} plus ${fractionEnMots(b, d)} : écris le résultat. (${a}/${d} + ${b}/${d})`.replace(/^./, (c) => c.toUpperCase()),
-        `On ${g.verbe} ${a}/${d} ${F.du}, puis encore ${b}/${d}. Quelle fraction ${F.du} est ${ppF(g)} en tout ?`,
-        `${Maj(F.un)} est ${partageF(F)} en ${d} parts égales. On ${g.verbe} ${a}/${d}, puis ${b}/${d}. Quelle fraction ${F.du} est ${ppF(g)} ?`,
+        // 07/11/2026 : 12 mots au plus (★1).
+        `On ${g.verbe} ${a}/${d} ${F.du}, puis ${b}/${d}. Quelle fraction est ${ppF(g)} ?`,
+        `Sur ${F.un}, on ${g.verbe} ${a}/${d} puis ${b}/${d}. Quelle fraction en tout ?`,
       ];
       return {
         text: tirer(tournures),
@@ -653,7 +654,8 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
         ? [
             `On ${g.verbe} ${a}/${d} ${F.du}. Quelle fraction ${F.du} reste à ${g.inf} ?`,
             `Calcule 1 − ${a}/${d}. (1, c’est ${d}/${d} : ${fractionEnMots(d, d)}.)`,
-            `${Maj(F.un)} a ${d} parts égales. On en ${g.verbe} ${a}/${d}. Quelle fraction ${F.du} reste à ${g.inf} ?`,
+            // 07/11/2026 : 15 mots au plus (★2).
+            `${Maj(F.un)} a ${d} parts égales. On ${g.verbe} ${a}/${d}. Quelle fraction reste à ${g.inf} ?`,
             `Que vaut 1 − ${a}/${d} ? Compte en ${pl} (1, c’est ${d}/${d}).`,
             `Complète en ${pl} : 1 − ${a}/${d} = …/${d}. (1, c’est ${d}/${d}.)`,
             `${Maj(F.un)} est ${partageF(F)} en ${pl}. On ${g.verbe} ${a}/${d}. Quelle fraction reste ?`,

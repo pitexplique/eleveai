@@ -170,7 +170,7 @@ const MOTIFS: { nom: string; unite: string }[] = [
   { nom: "maisons en allumettes", unite: "allumettes" },
   { nom: "carrés en bâtonnets", unite: "bâtonnets" },
   { nom: "tours de cubes", unite: "cubes" },
-  { nom: "tables mises bout à bout", unite: "chaises" },
+  { nom: "rangées de tables", unite: "chaises" },
   { nom: "triangles en pailles", unite: "pailles" },
   { nom: "murets de briques", unite: "briques" },
   { nom: "colliers de perles", unite: "perles" },
@@ -976,10 +976,11 @@ export const algebreBank: TutorBankItemV4[] = [
       const m = tirer(MOTIFS);
       const x = tirer(PRENOMS);
       const tournures = [
-        `${x.p} fabrique des ${m.nom}. L'étape 1 demande ${debut} ${m.unite}, et chaque étape suivante ${pas} de plus. Combien ${deM(m)} à l'étape ${rang} ?`,
+        // 07/11/2026 : ★3 = 25 mots au plus.
+        `${x.p} fabrique des ${m.nom}. L'étape 1 demande ${debut} ${m.unite}, puis ${pas} de plus par étape. Combien ${deM(m)} à l'étape ${rang} ?`,
         `Un motif de ${m.nom} commence par ${debut} ${m.unite}. À chaque étape, on ajoute ${pas} ${m.unite}. Combien en faut-il à l'étape ${rang} ? Aide ${x.p}.`,
-        `Pour ses ${m.nom}, ${x.p} utilise ${debut} ${m.unite} à l'étape 1, puis ${pas} de plus à chaque étape. Combien ${deM(m)} à l'étape ${rang} ?`,
-        `${x.p} veut construire l'étape ${rang} d'un motif de ${m.nom} : ${debut} ${m.unite} au départ, ${pas} de plus à chaque étape. Combien ${deM(m)} lui faut-il ?`,
+        `Pour ses ${m.nom}, ${x.p} utilise ${debut} ${m.unite} à l'étape 1, puis ${pas} de plus par étape. Combien ${deM(m)} à l'étape ${rang} ?`,
+        `${x.p} construit un motif de ${m.nom} : ${debut} ${m.unite} au départ, ${pas} de plus à chaque étape. Combien ${deM(m)} à l'étape ${rang} ?`,
       ];
       return {
         text: tirer(tournures),

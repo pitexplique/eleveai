@@ -41,6 +41,7 @@ import {
   type Prenom, tirer, entre, deuxPrenoms, il, Il, deP, pgcd, simplifiee, parts, enParts,
   choix, dec, tournureCalcul, fabriqueGabarit,
 } from "./fractions-cm2-outils";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const gabarit = fabriqueGabarit("fraction_calcul");
 
@@ -202,7 +203,7 @@ function randomChoice<T>(items: T[]): T {
 }
 
 function shuffle<T>(items: T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...items]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {

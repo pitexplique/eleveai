@@ -142,7 +142,7 @@ const ACTIVITES: Activite[] = [
   { nom: "le trajet en train", f: false, min: 40, max: 200, hMin: 7, hMax: 19 },
   { nom: "la sieste du chat", f: true, min: 20, max: 120, hMin: 12, hMax: 16 },
   { nom: "l’atelier de bricolage", f: false, min: 45, max: 120, hMin: 9, hMax: 16 },
-  { nom: "la partie de jeu de société", f: true, min: 25, max: 100, hMin: 14, hMax: 20 },
+  { nom: "la partie de cartes", f: true, min: 25, max: 100, hMin: 14, hMax: 20 },
   { nom: "le concert", f: false, min: 60, max: 150, hMin: 18, hMax: 21 },
   { nom: "la balade à vélo", f: true, min: 30, max: 150, hMin: 9, hMax: 17 },
   { nom: "la visite du zoo", f: true, min: 90, max: 210, hMin: 9, hMax: 14 },
@@ -219,7 +219,7 @@ function genCalculer(etoile: 1 | 2 | 3, sorte?: "fin" | "duree" | "debut") {
     `${A} commence à ${hm(debut)} et se termine à ${hm(fin)}.\nCombien de temps dure-t-${pron(a)} ?`,
     `${p.nom} commence ${a.nom} à ${hm(debut)} et le termine à ${hm(fin)}.\nQuelle est la durée ?`.replace("le termine", a.f ? "la termine" : "le termine"),
     `Début : ${hm(debut)}. Fin : ${hm(fin)}.\nCalcule la durée ${a.nom.startsWith("le ") ? "du " + a.nom.slice(3) : "de " + a.nom}.`,
-    `${A} débute à ${hm(debut)}. ${p.nom} regarde l’horloge à la fin : ${hm(fin)}.\nCombien de temps a duré ${a.nom} ?`,
+    `${A} débute à ${hm(debut)}. ${p.nom} regarde l’horloge à la fin : ${hm(fin)}.\nCombien de temps a-t-${pron(a)} duré ?`,
   ]);
   return {
     text,
@@ -726,23 +726,24 @@ function genDecimalePiege() {
 
 // ----- PROBLÈMES
 const SERIES: { quoi: string; min: number[]; ctx: (p: Prenom, n: number, d: number) => string }[] = [
-  { quoi: "séances", min: [40, 45, 50, 55], ctx: (p, n, d) => `Le club de natation ${de(p.nom)} propose ${n} séances de ${d} min ce trimestre.` },
+  { quoi: "séances", min: [40, 45, 50, 55], ctx: (p, n, d) => `Le club de natation ${de(p.nom)} propose ${n} séances de ${d} min.` },
   { quoi: "épisodes", min: [22, 25, 26, 42, 45], ctx: (p, n, d) => `${p.nom} regarde une série : ${n} épisodes de ${d} min.` },
   { quoi: "chansons", min: [3, 4, 5], ctx: (p, n, d) => `L’album préféré ${de(p.nom)} compte ${n} chansons de ${d} min.` },
   { quoi: "leçons", min: [30, 35, 45], ctx: (p, n, d) => `${p.nom} prend ${n} leçons de guitare de ${d} min.` },
   { quoi: "séances", min: [55, 60, 90], ctx: (p, n, d) => `Au théâtre, la troupe ${de(p.nom)} répète pendant ${n} séances de ${d} min.` },
-  { quoi: "tours", min: [3, 4, 6], ctx: (p, n, d) => `À la fête foraine, ${p.nom} fait ${n} tours de grande roue de ${d} min.` },
+  { quoi: "tours", min: [3, 4, 6], ctx: (p, n, d) => `${p.nom} fait ${n} tours de grande roue de ${d} min.` },
   { quoi: "séances", min: [45, 50, 60], ctx: (p, n, d) => `${p.nom} va au club d’escalade : ${n} séances de ${d} min.` },
   { quoi: "épisodes", min: [20, 30, 35], ctx: (p, n, d) => `${p.nom} écoute ${n} épisodes d’un podcast de sciences, de ${d} min chacun.` },
 ];
-const TRAJETS: { a: string; b: (p: Prenom, d: number) => string; d1: [number, number]; d2: [number, number] }[] = [
-  { a: "marche jusqu’à la gare", b: (_p, d) => `le train roule ${d} min`, d1: [8, 25], d2: [30, 95] },
-  { a: "attend le bus", b: (_p, d) => `le trajet en bus dure ${d} min`, d1: [5, 15], d2: [15, 50] },
-  { a: "roule à vélo jusqu’au lac", b: (p, d) => `${il(p)} fait le tour du lac à pied en ${d} min`, d1: [20, 45], d2: [35, 80] },
-  { a: "prend le métro", b: (p, d) => `${il(p)} marche jusqu’au musée en ${d} min`, d1: [15, 35], d2: [5, 15] },
-  { a: "prépare son sac", b: (_p, d) => `le trajet en voiture dure ${d} min`, d1: [10, 20], d2: [25, 75] },
-  { a: "fait ses devoirs", b: (p, d) => `${il(p)} joue au foot pendant ${d} min`, d1: [25, 50], d2: [40, 70] },
-  { a: "range sa chambre", b: (p, d) => `${il(p)} lit une bande dessinée pendant ${d} min`, d1: [15, 30], d2: [20, 45] },
+// 07/11/2026 : ★3 en 25 mots au plus (REGLES-6E.md) : « a » porte sa durée, « b » est court.
+const TRAJETS: { a: (d: number) => string; b: (p: Prenom, d: number) => string; d1: [number, number]; d2: [number, number] }[] = [
+  { a: (d) => `marche jusqu’à la gare en ${d} min`, b: (_p, d) => `le train roule ${d} min`, d1: [8, 25], d2: [30, 95] },
+  { a: (d) => `attend le bus ${d} min`, b: (_p, d) => `le trajet en bus dure ${d} min`, d1: [5, 15], d2: [15, 50] },
+  { a: (d) => `pédale jusqu’au lac en ${d} min`, b: (p, d) => `${il(p)} en fait le tour en ${d} min`, d1: [20, 45], d2: [35, 80] },
+  { a: (d) => `prend le métro pendant ${d} min`, b: (p, d) => `${il(p)} marche jusqu’au musée en ${d} min`, d1: [15, 35], d2: [5, 15] },
+  { a: (d) => `prépare son sac en ${d} min`, b: (_p, d) => `le trajet en voiture dure ${d} min`, d1: [10, 20], d2: [25, 75] },
+  { a: (d) => `fait ses devoirs en ${d} min`, b: (p, d) => `${il(p)} joue au foot pendant ${d} min`, d1: [25, 50], d2: [40, 70] },
+  { a: (d) => `range sa chambre en ${d} min`, b: (p, d) => `${il(p)} lit pendant ${d} min`, d1: [15, 30], d2: [20, 45] },
 ];
 function genProblemeDurees(etoile: 3 | 4) {
   const p = pick(PRENOMS);
@@ -769,7 +770,7 @@ function genProblemeDurees(etoile: 3 | 4) {
     const fin = debut + d1 + d2;
     if (debut % 60 === 0 || fin % 60 === 0) return genProblemeDurees(etoile);
     return {
-      text: `À ${hm(debut)}, ${p.nom} ${t.a} : cela prend ${d1} min. Ensuite, ${t.b(p, d2)}.\n${pick([`À quelle heure ${p.nom} a-t-${il(p)} fini ?`, "Quelle heure est-il à la fin ?", "Calcule l’heure de fin."])}`,
+      text: `À ${hm(debut)}, ${p.nom} ${t.a(d1)}. Puis ${t.b(p, d2)}.\n${pick([`À quelle heure a-t-${il(p)} fini ?`, "Quelle heure est-il alors ?", "Calcule l’heure de fin.", `À quelle heure finit-${il(p)} ?`])}`,
       format: "short" as const,
       expected: formesHoraire(Math.floor(fin / 60), fin % 60),
       comparator: "exact_text" as const,
@@ -1574,15 +1575,15 @@ export const dureesBank: TutorBankItemV4[] = [
     microId: "duree_probleme",
     difficulty: 3,
     theme: "neutral",
-    text: "Il est 17 h 26. Un ami te prévient qu'il te rejoint dans 12 minutes. Pourrez-vous prendre ensemble le bus 303, qui part à 17 h 42 ?",
+    text: "Il est 17 h 26. Ton ami arrive dans 12 minutes. Pourrez-vous prendre ensemble le bus de 17 h 42 ?",
     format: "qcm",
     choices: [
-      "oui : il arrive à 17 h 38, soit 4 minutes avant le départ",
-      "non : il arrive à 17 h 38, soit après le départ",
-      "oui : il arrive à 17 h 48, juste à temps",
-      "non : il arrive à 17 h 44, soit 2 minutes trop tard",
+      "oui : il arrive à 17 h 38",
+      "non : il arrive à 17 h 38",
+      "oui : il arrive à 17 h 48",
+      "non : il arrive à 17 h 44",
     ],
-    expected: ["oui : il arrive à 17 h 38, soit 4 minutes avant le départ"],
+    expected: ["oui : il arrive à 17 h 38"],
     comparator: "mcq_exact",
     hint: "Calcule d'abord son heure d'arrivée.",
     explanation: expl(

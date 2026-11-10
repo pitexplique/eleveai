@@ -65,6 +65,28 @@ function simple<R extends { text: string }>(limite: number, f: () => R): () => R
     }
   };
 }
+/* 07/11/2026 — ★3 en 25 mots au plus (REGLES-6E.md). Les gabarits ★3 passent par
+   `court(25, …)` : pendant l'appel, les situations prennent une forme en une phrase
+   (« Léa tire une bille au hasard parmi 3 rouges… », ou le sac seulement dessiné),
+   le contenu cite le nom une fois, les événements perdent leur verbe (« une bille
+   verte », « plus de 4 ») ; on retire jusqu'à tenir dans la limite. */
+let COURT = false;
+function court<R extends { text: string }>(limite: number, f: () => R): () => R {
+  return () => {
+    const avant = COURT;
+    COURT = true;
+    try {
+      let best = f();
+      for (let k = 0; k < 500 && nbMots(best.text) > limite; k++) {
+        const q = f();
+        if (nbMots(q.text) < nbMots(best.text)) best = q;
+      }
+      return best;
+    } finally {
+      COURT = avant;
+    }
+  };
+}
 /** Virgule décimale française, trois décimales au plus. */
 const virg = (x: number) => String(Math.round(x * 1000) / 1000).replace(".", ",");
 /** « 2 000 » : espace des milliers. */
@@ -166,7 +188,26 @@ const CTX_URNES_SIMPLES: CtxUrne[] = [
   { o: O.cube, pose: (_p, c) => `Une boîte contient ${c}.`, tire: () => "", v: "tirer" },
   { o: O.perle, pose: (_p, c) => `Dans la boîte : ${c}.`, tire: () => "", v: "tirer" },
 ];
-const ctxUrnes = () => (SIMPLE ? CTX_URNES_SIMPLES : CTX_URNES);
+/** ★3 court : une phrase avec le contenu (`pose`), ou une phrase seule, le sac étant dessiné (`tire`). */
+const BALLE: Objet = { s: "balle", p: "balles", f: true, couleurs: ["jaune", "orange", "blanc", "vert", "rose"] };
+const CTX_URNES_COURTS: CtxUrne[] = [
+  { o: O.bille, pose: (p, c) => `${p.nom} tire une bille au hasard parmi ${c}.`, tire: (p) => `${p.nom} tire une bille au hasard dans ce sac.`, v: "tirer" },
+  { o: O.jeton, pose: (p, c) => `Pour un jeu, ${p.nom} pioche un jeton au hasard parmi ${c}.`, tire: (p) => `Pour un jeu, ${p.nom} pioche au hasard un de ces jetons.`, v: "piocher" },
+  { o: O.bonbon, pose: (p, c) => `Au goûter, ${p.nom} prend un bonbon au hasard parmi ${c}.`, tire: (p) => `Au goûter, ${p.nom} prend au hasard un bonbon de ce bocal.`, v: "prendre" },
+  { o: O.feutre, pose: (p, c) => `${p.nom} attrape un feutre au hasard parmi ${c}.`, tire: (p) => `${p.nom} attrape au hasard un feutre de sa trousse.`, v: "attraper" },
+  { o: O.perle, pose: (p, c) => `Pour un bracelet, ${p.nom} prend une perle au hasard parmi ${c}.`, tire: (p) => `Pour un bracelet, ${p.nom} prend au hasard une de ces perles.`, v: "prendre" },
+  { o: BALLE, pose: (p, c) => `Au tennis, ${p.nom} prend une balle au hasard parmi ${c}.`, tire: (p) => `Au tennis, ${p.nom} prend au hasard une balle du panier.`, v: "prendre" },
+  { o: O.ballon, pose: (p, c) => `Pour la fête, ${p.nom} sort un ballon au hasard parmi ${c}.`, tire: (p) => `Pour la fête, ${p.nom} sort au hasard un de ces ballons.`, v: "sortir" },
+  { o: O.pomme, pose: (p, c) => `${p.nom} prend une pomme au hasard parmi ${c}.`, tire: (p) => `${p.nom} prend au hasard une pomme du panier.`, v: "prendre" },
+  { o: O.poisson, pose: (p, c) => `À la pêche à la ligne, ${p.nom} attrape un poisson parmi ${c}.`, tire: (p) => `À la pêche à la ligne, ${p.nom} attrape au hasard un de ces poissons.`, v: "attraper" },
+  { o: O.teeshirt, pose: (p, c) => `Le matin, ${p.nom} prend un tee-shirt au hasard parmi ${c}.`, tire: (p) => `Le matin, ${p.nom} prend au hasard un de ces tee-shirts.`, v: "prendre" },
+  { o: O.crayon, pose: (p, c) => `En arts plastiques, ${p.nom} prend un crayon au hasard parmi ${c}.`, tire: (p) => `En arts plastiques, ${p.nom} prend au hasard un crayon du pot.`, v: "prendre" },
+  { o: O.cube, pose: (p, c) => `${p.nom} prend un cube au hasard parmi ${c}.`, tire: (p) => `${p.nom} prend au hasard un cube de cette boîte.`, v: "prendre" },
+  { o: O.macaron, pose: (p, c) => `À la pâtisserie, ${p.nom} choisit un macaron au hasard parmi ${c}.`, tire: (p) => `À la pâtisserie, ${p.nom} choisit au hasard un de ces macarons.`, v: "choisir" },
+  { o: O.dossard, pose: (p, c) => `Avant le cross, ${p.nom} prend un dossard au hasard parmi ${c}.`, tire: (p) => `Avant le cross, ${p.nom} prend au hasard un de ces dossards.`, v: "prendre" },
+  { o: O.fleur, pose: (p, c) => `Pour un bouquet, ${p.nom} cueille une fleur au hasard parmi ${c}.`, tire: (p) => `Pour un bouquet, ${p.nom} prend au hasard une de ces fleurs.`, v: "prendre" },
+];
+const ctxUrnes = () => (SIMPLE ? CTX_URNES_SIMPLES : COURT ? CTX_URNES_COURTS : CTX_URNES);
 type Urne = { ctx: CtxUrne; p: Prenom; contenu: { c: Coul; n: number }[] };
 /** Une urne de `k` couleurs, de `nMin` à `nMax` objets par couleur. */
 function nouvelleUrne(k: number, nMin: number, nMax: number, opts: { distincts?: boolean; maxTotal?: number } = {}): Urne {
@@ -189,17 +230,26 @@ const totalUrne = (u: Urne) => u.contenu.reduce((a, x) => a + x.n, 0);
 const groupe = (o: Objet, c: Coul, n: number) => `${n} ${n > 1 ? o.p : o.s} ${accorde(c, o.f, n > 1)}`;
 /** En mode simple : « 3 boules rouges, 2 bleues et 1 verte » (le nom une seule fois). */
 const contenuUrne = (u: Urne) =>
-  SIMPLE
+  SIMPLE || COURT
     ? listeFr(u.contenu.map((x, i) => (i === 0 ? groupe(u.ctx.o, x.c, x.n) : `${x.n} ${accorde(x.c, u.ctx.o.f, x.n > 1)}`)))
     : listeFr(u.contenu.map((x) => groupe(u.ctx.o, x.c, x.n)));
-const situationUrne = (u: Urne) => (SIMPLE ? u.ctx.pose(u.p, contenuUrne(u)) : `${u.ctx.pose(u.p, contenuUrne(u))} ${u.ctx.tire(u.p)}`);
+/** ★3 court : la moitié du temps, le sac est seulement dessiné (24 objets au plus) et le texte n'en redonne pas le contenu. */
+const situationUrne = (u: Urne) =>
+  SIMPLE
+    ? u.ctx.pose(u.p, contenuUrne(u))
+    : COURT
+      ? totalUrne(u) <= 24 && Math.random() < 0.5
+        ? u.ctx.tire(u.p)
+        : u.ctx.pose(u.p, contenuUrne(u))
+      : `${u.ctx.pose(u.p, contenuUrne(u))} ${u.ctx.tire(u.p)}`;
 /** Une couleur de l'objet absente de l'urne. */
 const couleurAbsente = (u: Urne) => randomChoice(u.ctx.o.couleurs.filter((c) => !u.contenu.some((x) => x.c === c)));
 /** L'événement « tirer une bille rouge », « … rouge ou bleue », « … qui n’est pas verte ». */
 function evtUrne(u: Urne, cs: Coul[], pas = false) {
   const o = u.ctx.o;
   const a = cs.map((c) => accorde(c, o.f, false));
-  return pas ? `${u.ctx.v} ${un(o)} ${o.s} qui n’est pas ${a[0]}` : `${u.ctx.v} ${un(o)} ${o.s} ${a.join(" ou ")}`;
+  const v = COURT ? "" : `${u.ctx.v} `; // ★3 court : « une bille verte », sans le verbe
+  return pas ? `${v}${un(o)} ${o.s} qui n’est pas ${a[0]}` : `${v}${un(o)} ${o.s} ${a.join(" ou ")}`;
 }
 const favUrne = (u: Urne, cs: Coul[], pas = false) =>
   u.contenu.filter((x) => (pas ? !cs.includes(x.c) : cs.includes(x.c))).reduce((a, x) => a + x.n, 0);
@@ -250,34 +300,56 @@ const CTX_NUM_SIMPLES: CtxNum[] = [
   { Ns: [4, 6, 8, 10, 12, 20], mot: "nombre", pose: (_p, N) => `On lance un dé à ${N} faces.`, canvas: deCanvas },
   { Ns: [6, 8, 10, 12, 15, 20], mot: "numéro", pose: (_p, N) => `On tire une boule numérotée de 1 à ${N}.` },
   { Ns: [6, 8, 10, 12], mot: "numéro", pose: (_p, N) => `On pioche un jeton numéroté de 1 à ${N}.` },
+  // 07/11/2026 : d'autres expériences courtes (proba_issue ★1 à 5,5 répétitions sur 20).
+  { Ns: [6, 8, 10, 12], mot: "numéro", pose: (_p, N) => `On tire une carte numérotée de 1 à ${N}.` },
+  { Ns: [10, 12, 15, 20], mot: "numéro", pose: (_p, N) => `On tire un ticket numéroté de 1 à ${N}.` },
+  { Ns: [4, 6, 8, 10, 12, 20], mot: "nombre", pose: (_p, N) => `On jette un dé à ${N} faces.`, canvas: deCanvas },
   {
     Ns: [4, 5, 6, 8, 10], mot: "nombre",
     pose: (_p, N) => `Une roue a ${N} secteurs numérotés de 1 à ${N}.`,
     canvas: (N) => probabilitesCanvas({ variant: "roue", roue: { segments: Array.from({ length: N }, (_, i) => ({ label: String(i + 1), poids: 1 })) } }),
   },
 ];
+/** ★3 court : une phrase, le prénom, le hasard, les issues numérotées. */
+const CTX_NUM_COURTS: CtxNum[] = [
+  { Ns: [4, 6, 8, 10, 12, 20], mot: "nombre", pose: (p, N) => `${p.nom} lance un dé à ${N} faces.`, canvas: deCanvas },
+  { Ns: [6, 8, 10, 12, 15, 20], mot: "nombre", pose: (p, N) => `${p.nom} tire au hasard une carte numérotée de 1 à ${N}.` },
+  {
+    Ns: [4, 5, 6, 8, 10, 12], mot: "nombre",
+    pose: (p, N) => `${p.nom} fait tourner une roue de ${N} secteurs égaux, numérotés de 1 à ${N}.`,
+    canvas: (N) => probabilitesCanvas({ variant: "roue", roue: { segments: Array.from({ length: N }, (_, i) => ({ label: String(i + 1), poids: 1 })) } }),
+  },
+  { Ns: [10, 12, 15, 20], mot: "numéro", pose: (p, N) => `Au loto, ${p.nom} tire une boule au hasard, numérotée de 1 à ${N}.` },
+  { Ns: [10, 12, 15, 20], mot: "numéro", pose: (p, N) => `${p.nom} tire au hasard un ticket de tombola numéroté de 1 à ${N}.` },
+  { Ns: [11, 12, 15, 16, 18, 20], mot: "numéro", pose: (p, N) => `Au foot, ${p.nom} prend au hasard un maillot numéroté de 1 à ${N}.` },
+  { Ns: [8, 10, 12, 15, 20], mot: "numéro", pose: (_p, N) => `Un jeu vidéo choisit au hasard un niveau numéroté de 1 à ${N}.` },
+  { Ns: [10, 12, 15, 20], mot: "numéro", pose: (p, N) => `En colonie, ${p.nom} reçoit au hasard une chambre numérotée de 1 à ${N}.` },
+  { Ns: [8, 10, 12], mot: "numéro", pose: (p, N) => `Au cours de musique, ${p.nom} tire au hasard un morceau numéroté de 1 à ${N}.` },
+];
 type Num = { ctx: CtxNum; p: Prenom; N: number };
 function nouveauNum(filtre: (N: number) => boolean = () => true): Num {
-  const ctx = randomChoice((SIMPLE ? CTX_NUM_SIMPLES : CTX_NUM).filter((c) => c.Ns.some(filtre)));
+  const ctx = randomChoice((SIMPLE ? CTX_NUM_SIMPLES : COURT ? CTX_NUM_COURTS : CTX_NUM).filter((c) => c.Ns.some(filtre)));
   return { ctx, p: randomChoice(PRENOMS), N: randomChoice(ctx.Ns.filter(filtre)) };
 }
 const situationNum = (x: Num) => x.ctx.pose(x.p, x.N);
 type EvtNum = { lib: string; ok: (v: number) => boolean };
 /** Les événements sur des issues numérotées. `m` = « nombre » ou « numéro ». */
+/** ★3 court : l'événement sans « obtenir » (« un nombre pair », « plus de 4 »). */
+const ob = (x: string) => (COURT ? x : `obtenir ${x}`);
 const EVN = {
-  pair: (m: string): EvtNum => ({ lib: `obtenir un ${m} pair`, ok: (v) => v % 2 === 0 }),
-  impair: (m: string): EvtNum => ({ lib: `obtenir un ${m} impair`, ok: (v) => v % 2 === 1 }),
-  // En mode simple (★1-★2) : « obtenir plus de 4 », « obtenir 5 ou plus », « obtenir le 3 ».
-  sup: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir plus de ${k}` : `obtenir un ${m} supérieur à ${k}`, ok: (v) => v > k }),
-  inf: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir moins de ${k}` : `obtenir un ${m} inférieur à ${k}`, ok: (v) => v < k }),
-  supEg: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir ${k} ou plus` : `obtenir un ${m} supérieur ou égal à ${k}`, ok: (v) => v >= k }),
-  infEg: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir ${k} ou moins` : `obtenir un ${m} inférieur ou égal à ${k}`, ok: (v) => v <= k }),
-  egal: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir le ${k}` : `obtenir le ${m} ${k}`, ok: (v) => v === k }),
-  pas: (m: string, k: number): EvtNum => ({ lib: `ne pas obtenir le ${m} ${k}`, ok: (v) => v !== k }),
-  mult: (m: string, k: number): EvtNum => ({ lib: `obtenir un multiple de ${k}`, ok: (v) => v % k === 0 }),
-  deuxChiffres: (m: string): EvtNum => ({ lib: `obtenir un ${m} à deux chiffres`, ok: (v) => v >= 10 && v <= 99 }),
-  pairSup: (m: string, k: number): EvtNum => ({ lib: `obtenir un ${m} pair supérieur à ${k}`, ok: (v) => v % 2 === 0 && v > k }),
-  impairInf: (m: string, k: number): EvtNum => ({ lib: `obtenir un ${m} impair inférieur à ${k}`, ok: (v) => v % 2 === 1 && v < k }),
+  pair: (m: string): EvtNum => ({ lib: ob(`un ${m} pair`), ok: (v) => v % 2 === 0 }),
+  impair: (m: string): EvtNum => ({ lib: ob(`un ${m} impair`), ok: (v) => v % 2 === 1 }),
+  // En mode simple (★1-★2) : « obtenir plus de 4 », « obtenir 5 ou plus », « obtenir le 3 » ; ★3 court : « plus de 4 ».
+  sup: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir plus de ${k}` : COURT ? `plus de ${k}` : `obtenir un ${m} supérieur à ${k}`, ok: (v) => v > k }),
+  inf: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir moins de ${k}` : COURT ? `moins de ${k}` : `obtenir un ${m} inférieur à ${k}`, ok: (v) => v < k }),
+  supEg: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir ${k} ou plus` : COURT ? `${k} ou plus` : `obtenir un ${m} supérieur ou égal à ${k}`, ok: (v) => v >= k }),
+  infEg: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir ${k} ou moins` : COURT ? `${k} ou moins` : `obtenir un ${m} inférieur ou égal à ${k}`, ok: (v) => v <= k }),
+  egal: (m: string, k: number): EvtNum => ({ lib: SIMPLE ? `obtenir le ${k}` : COURT ? `le ${k}` : `obtenir le ${m} ${k}`, ok: (v) => v === k }),
+  pas: (m: string, k: number): EvtNum => ({ lib: COURT ? `pas le ${k}` : `ne pas obtenir le ${m} ${k}`, ok: (v) => v !== k }),
+  mult: (m: string, k: number): EvtNum => ({ lib: ob(`un multiple de ${k}`), ok: (v) => v % k === 0 }),
+  deuxChiffres: (m: string): EvtNum => ({ lib: ob(`un ${m} à deux chiffres`), ok: (v) => v >= 10 && v <= 99 }),
+  pairSup: (m: string, k: number): EvtNum => ({ lib: ob(`un ${m} pair supérieur à ${k}`), ok: (v) => v % 2 === 0 && v > k }),
+  impairInf: (m: string, k: number): EvtNum => ({ lib: ob(`un ${m} impair inférieur à ${k}`), ok: (v) => v % 2 === 1 && v < k }),
 };
 const favNum = (x: Num, e: EvtNum) => Array.from({ length: x.N }, (_, i) => i + 1).filter(e.ok).length;
 const listeFav = (x: Num, e: EvtNum) => Array.from({ length: x.N }, (_, i) => i + 1).filter(e.ok);
@@ -419,13 +491,26 @@ function roueAvec(ns: number[]): Roue {
   return { intro: randomChoice(INTROS_ROUE), p: randomChoice(PRENOMS), contenu: couleurs.map((c, i) => ({ c, n: ns[i] })) };
 }
 const totalRoue = (r: Roue) => r.contenu.reduce((a, x) => a + x.n, 0);
+/** ★3 court : la roue est dessinée, le texte ne recopie pas ses secteurs. */
+const INTROS_ROUE_COURTES: ((p: Prenom) => string)[] = [
+  (p) => `À la kermesse, ${p.nom} fait tourner cette roue.`,
+  (p) => `Dans un jeu de société, ${p.nom} fait tourner cette roue.`,
+  (p) => `À la fête de l’école, ${p.nom} lance cette roue.`,
+  (p) => `Au centre de loisirs, ${p.nom} fait tourner cette roue.`,
+  (p) => `Au cours de sport, ${p.nom} tourne cette roue pour choisir son équipe.`,
+  (p) => `Au musée des sciences, ${p.nom} fait tourner cette roue.`,
+  (p) => `Au camping, ${p.nom} lance la roue du jeu du soir.`,
+];
 const situationRoue = (r: Roue) =>
   SIMPLE
     ? `Une roue a ${totalRoue(r)} secteurs égaux : ${listeFr(r.contenu.map((x) => `${x.n} ${accorde(x.c, false, x.n > 1)}`))}.`
-    : `${r.intro(r.p)} La roue a ${totalRoue(r)} secteurs de même taille : ${listeFr(r.contenu.map((x) => groupe(SECTEUR, x.c, x.n)))}.`;
+    : COURT
+      ? `${randomChoice(INTROS_ROUE_COURTES)(r.p)} ${randomChoice(["Ses secteurs sont égaux.", "Les secteurs ont la même taille."])}`
+      : `${r.intro(r.p)} La roue a ${totalRoue(r)} secteurs de même taille : ${listeFr(r.contenu.map((x) => groupe(SECTEUR, x.c, x.n)))}.`;
 function evtRoue(r: Roue, cs: Coul[], pas = false) {
   const a = cs.map((c) => accorde(c, false, false));
-  return pas ? `obtenir un secteur qui n’est pas ${a[0]}` : `obtenir un secteur ${a.join(" ou ")}`;
+  const v = COURT ? "" : "obtenir ";
+  return pas ? `${v}un secteur qui n’est pas ${a[0]}` : `${v}un secteur ${a.join(" ou ")}`;
 }
 const favRoue = (r: Roue, cs: Coul[], pas = false) =>
   r.contenu.filter((x) => (pas ? !cs.includes(x.c) : cs.includes(x.c))).reduce((a, x) => a + x.n, 0);
@@ -590,12 +675,12 @@ const CTX_CALC: CtxCalc[] = [
   { intro: (p, n) => `${p.nom} lance ${n} fois un dé.`, issues: [["six", 1 / 6], ["autre chose", 5 / 6]] },
   { intro: (p, n) => `À la pêche, ${p.nom} lance sa ligne ${n} fois.`, issues: [["un poisson", 0.3], ["rien", 0.7]] },
   { intro: (p, n) => `Au bowling, ${p.nom} joue ${n} lancers.`, issues: [["strike", 0.2], ["pas de strike", 0.8]] },
-  { intro: (p, n) => `En sciences, ${p.nom} laisse tomber ${n} fois une tartine en carton, beurrée d’un côté.`, issues: [["côté beurre", 0.5], ["côté sec", 0.5]] },
+  { intro: (p, n) => `En sciences, ${p.nom} lâche ${n} fois une tartine en carton beurrée.`, issues: [["côté beurre", 0.5], ["côté sec", 0.5]] },
   { intro: (p, n) => `Au ping-pong, ${p.nom} fait ${n} services.`, issues: [["réussi", 0.75], ["faute", 0.25]] },
   { intro: (p, n) => `Au tir à l’arc, ${p.nom} tire ${n} flèches.`, issues: [["dans le jaune", 0.3], ["dans le rouge", 0.4], ["ailleurs", 0.3]] },
   { intro: (p, n) => `Au parc, ${p.nom} observe les ${n} premiers chiens qui passent.`, issues: [["en laisse", 0.7], ["sans laisse", 0.3]] },
   { intro: (p, n) => `À la kermesse, ${p.nom} joue ${n} fois à la pêche aux canards.`, issues: [["gagné", 0.3], ["perdu", 0.7]] },
-  { intro: (p, n) => `Au marché de Saint-Pierre, à La Réunion, ${p.nom} joue ${n} fois à la roue de la loterie.`, issues: [["gagné", 0.25], ["perdu", 0.75]] },
+  { intro: (p, n) => `Au marché de Saint-Pierre, ${p.nom} joue ${n} fois à la loterie.`, issues: [["gagné", 0.25], ["perdu", 0.75]] },
 ];
 /** ★2 : des expériences de hasard nues ; les résultats sont dans le tableau. */
 const CTX_CALC_SIMPLES: CtxCalc[] = [
@@ -616,10 +701,13 @@ function serieCalc(ns: number[], maxIssues = 3): SerieCalc {
     if (ks.some((k) => k === 0)) continue;
     const p = randomChoice(PRENOMS);
     const issues = ctx.issues.map(([l], i) => ({ l, k: ks[i] }));
-    const dansTexte = Math.random() < 0.5;
+    // ★3 court : les résultats sont dans le tableau dessiné, le texte ne les recopie pas.
+    const dansTexte = !COURT && Math.random() < 0.5;
     const res = `Résultats : ${listeFr(issues.map((x) => `« ${x.l} » ${x.k} fois`))}.`;
     return {
-      texte: SIMPLE ? ctx.intro(p, n) : `${ctx.intro(p, n)} ${dansTexte ? res : "Le tableau donne les résultats."}`,
+      texte: SIMPLE
+        ? ctx.intro(p, n)
+        : `${ctx.intro(p, n)} ${dansTexte ? res : COURT ? randomChoice(["Voici les résultats.", "Le tableau donne les résultats."]) : "Le tableau donne les résultats."}`,
       canvas: probabilitesCanvas({ variant: "tableau", tableau: { entetes: ["Résultat", "Nombre de fois"], lignes: issues.map((x) => [x.l, String(x.k)]) } }),
       issues,
       n,
@@ -638,25 +726,30 @@ type ExpRep = { intro: (n: number) => string; lib: string; num: number; den: num
 function experienceRepetee(): ExpRep {
   const p = randomChoice(PRENOMS);
   const r = ri(0, 4);
+  // ★3 court : phrases d'une ligne, événement sans verbe (« pile », « le 3 », « une bille rouge »).
+  const ob2 = (x: string) => (COURT ? x : `obtenir ${x}`);
   if (r === 0) {
-    return { p, intro: (n) => `${p.nom} lance ${milliers(n)} fois une pièce.`, lib: randomChoice(["obtenir pile", "obtenir face"]), num: 1, den: 2, objet: "la pièce" };
+    return { p, intro: (n) => `${p.nom} lance ${milliers(n)} fois une pièce.`, lib: ob2(randomChoice(["pile", "face"])), num: 1, den: 2, objet: "la pièce" };
   }
   if (r === 1) {
-    const [lib, num, den] = randomChoice([["obtenir deux piles", 1, 4], ["obtenir deux faces", 1, 4], ["obtenir un pile et un face", 1, 2]] as const);
-    return { p, intro: (n) => `${p.nom} lance ${milliers(n)} fois deux pièces en même temps.`, lib, num, den, objet: "les pièces" };
+    const [lib, num, den] = randomChoice([["deux piles", 1, 4], ["deux faces", 1, 4], ["un pile et un face", 1, 2]] as const);
+    return { p, intro: (n) => (COURT ? `${p.nom} lance ${milliers(n)} fois deux pièces.` : `${p.nom} lance ${milliers(n)} fois deux pièces en même temps.`), lib: ob2(lib), num, den, objet: "les pièces" };
   }
   if (r === 2) {
     const N = randomChoice([4, 6, 6, 8, 10, 12]);
     const e = Math.random() < 0.7 ? EVN.egal("nombre", ri(1, N)) : EVN.pair("nombre");
     // une seule face (1/N), ou les faces paires (la moitié, N étant pair)
     const den = e.lib.includes("pair") ? 2 : N;
-    return { p, intro: (n) => `${p.nom} lance ${milliers(n)} fois un dé à ${N} faces, numérotées de 1 à ${N}.`, lib: e.lib, num: 1, den, objet: "le dé" };
+    return { p, intro: (n) => (COURT ? `${p.nom} lance ${milliers(n)} fois un dé à ${N} faces.` : `${p.nom} lance ${milliers(n)} fois un dé à ${N} faces, numérotées de 1 à ${N}.`), lib: e.lib, num: 1, den, objet: "le dé" };
   }
   if (r === 3) {
     const T = randomChoice([4, 5, 6, 8, 10]);
     const c = ri(1, T - 1);
     const ro = roueAvec([c, T - c]);
-    const intro = (n: number) => `${p.nom} fait tourner ${milliers(n)} fois une roue. Elle a ${T} secteurs de même taille : ${listeFr(ro.contenu.map((x) => groupe(SECTEUR, x.c, x.n)))}.`;
+    const intro = (n: number) =>
+      COURT
+        ? `${p.nom} fait tourner ${milliers(n)} fois une roue de ${T} secteurs égaux : ${listeFr(ro.contenu.map((x) => `${x.n} ${accorde(x.c, false, x.n > 1)}`))}.`
+        : `${p.nom} fait tourner ${milliers(n)} fois une roue. Elle a ${T} secteurs de même taille : ${listeFr(ro.contenu.map((x) => groupe(SECTEUR, x.c, x.n)))}.`;
     const g = pgcd(c, T);
     return { p, intro, lib: evtRoue(ro, [ro.contenu[0].c]), num: c / g, den: T / g, objet: "la roue" };
   }
@@ -669,8 +762,10 @@ function experienceRepetee(): ExpRep {
   return {
     p,
     intro: (n) =>
-      `${cont} contient ${listeFr([groupe(o, c1, a), groupe(o, c2, b)])}. ${p.nom} tire ${milliers(n)} fois ${un(o)} ${o.s} au hasard, en ${o.f ? "la" : "le"} remettant à chaque fois.`,
-    lib: `tirer ${un(o)} ${o.s} ${accorde(c1, o.f, false)}`,
+      COURT
+        ? `${cont} contient ${groupe(o, c1, a)} et ${b} ${accorde(c2, o.f, b > 1)}. ${p.nom} en tire ${un(o)} au hasard ${milliers(n)} fois, en ${o.f ? "la" : "le"} remettant.`
+        : `${cont} contient ${listeFr([groupe(o, c1, a), groupe(o, c2, b)])}. ${p.nom} tire ${milliers(n)} fois ${un(o)} ${o.s} au hasard, en ${o.f ? "la" : "le"} remettant à chaque fois.`,
+    lib: `${COURT ? "" : "tirer "}${un(o)} ${o.s} ${accorde(c1, o.f, false)}`,
     num: a / g,
     den: (a + b) / g,
     objet: cont === "Un sac" ? "le sac" : cont === "Une boîte" ? "la boîte" : "l’urne",
@@ -764,14 +859,19 @@ function poserComparaison(texte: string, canvas: CanvasProbabilitesData | undefi
   const gagne = A.fav > B.fav ? 0 : A.fav < B.fav ? 1 : 2;
   if (t === 0 || t === 1) {
     text = t === 0
-      ? `${texte} Quel événement a le plus de chances : « ${A.lib} » ou « ${B.lib} » ?`
-      : `${texte} Qu’est-ce qui est le plus probable : « ${A.lib} » ou « ${B.lib} » ?`;
-    choices = [A.lib, B.lib, "les deux ont autant de chances"];
+      ? `${texte} ${COURT ? "Qu’est-ce qui est le plus probable" : "Quel événement a le plus de chances"} : « ${A.lib} » ou « ${B.lib} » ?`
+      : `${texte} ${COURT ? "Qu’est-ce qui a le plus de chances" : "Qu’est-ce qui est le plus probable"} : « ${A.lib} » ou « ${B.lib} » ?`;
+    choices = [A.lib, B.lib, COURT ? "autant de chances" : "les deux ont autant de chances"];
   } else if (t === 2) {
-    text = `${texte} ${p2.nom} parie sur « ${A.lib} ». ${p3.nom} parie sur « ${B.lib} ». Qui a le plus de chances de gagner ?`;
+    text = COURT
+      ? `${texte} ${p2.nom} parie sur « ${A.lib} ». ${p3.nom} parie sur « ${B.lib} ». Qui a le plus de chances ?`
+      : `${texte} ${p2.nom} parie sur « ${A.lib} ». ${p3.nom} parie sur « ${B.lib} ». Qui a le plus de chances de gagner ?`;
     choices = [p2.nom, p3.nom, autant];
   } else {
-    text = `${texte} Compare les chances de « ${A.lib} » et de « ${B.lib} ».`;
+    // ★3 court : « Compare les chances de « une bille verte » » se lit mal ; on pose la question.
+    text = COURT
+      ? `${texte} Entre « ${A.lib} » et « ${B.lib} », quel est le plus probable ?`
+      : `${texte} Compare les chances de « ${A.lib} » et de « ${B.lib} ».`;
     choices = [`« ${A.lib} » a plus de chances`, `« ${B.lib} » a plus de chances`, "les deux ont autant de chances"];
   }
   expected = choices[gagne];
@@ -1062,8 +1162,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Chaque secteur est une issue : compte les secteurs qui conviennent.",
     tags: ["proba_experience", "issue", "roue", "template", "canvas"],
-    // ★3 : roue coloriée ; « rouge ou bleu », « qui n'est pas vert ».
-    generate: () => {
+    // ★3 : roue coloriée ; « rouge ou bleu », « qui n'est pas vert ». 07/11 : roue dessinée, 25 mots.
+    generate: court(25, () => {
       const r = roueAvec(Array.from({ length: ri(3, 4) }, () => ri(1, 4)));
       const cs = shuffle(r.contenu.map((x) => x.c));
       const genre = randomChoice(["ou", "pas", "ou", "pas", "une"] as const);
@@ -1071,10 +1171,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
       const lib = evtRoue(r, choisis, genre === "pas");
       const fav = favRoue(r, choisis, genre === "pas");
       const text = randomChoice([
-        `${situationRoue(r)} Combien de secteurs réalisent l’événement « ${lib} » ?`,
+        `${situationRoue(r)} Combien de secteurs réalisent « ${lib} » ?`,
         `${situationRoue(r)} Combien d’issues sont favorables à « ${lib} » ?`,
-        `${situationRoue(r)} Compte les secteurs favorables à l’événement « ${lib} ».`,
-        `${situationRoue(r)} Pour l’événement « ${lib} », combien de secteurs conviennent ?`,
+        `${situationRoue(r)} Compte les secteurs favorables à « ${lib} ».`,
+        `${situationRoue(r)} Pour « ${lib} », combien de secteurs conviennent ?`,
       ]);
       return {
         text,
@@ -1089,7 +1189,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ),
         canvas: canvasRoue(r),
       };
-    },
+    }),
   },
 
   {
@@ -1171,14 +1271,14 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Compte les objets favorables à chaque événement, puis compare.",
     tags: ["proba_experience", "comparer", "billes", "template", "canvas"],
     // ★3 : deux événements sur un même sac (une couleur, deux couleurs, « qui n'est pas »).
-    generate: () => {
+    generate: court(25, () => {
       for (;;) {
         const u = nouvelleUrne(ri(3, 4), 1, 6, { maxTotal: 20 });
         const AB = deuxEv(evenementsUrne(u), Math.random() < 0.3);
         if (!AB) continue;
         return poserComparaison(situationUrne(u), canvasUrne(u), AB[0], AB[1], totalUrne(u));
       }
-    },
+    }),
   },
 
   {
@@ -1193,14 +1293,14 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Écris les issues favorables à chaque événement, puis compare leurs nombres.",
     tags: ["proba_experience", "comparer", "roue", "template", "canvas"],
     // ★3 : deux événements sur des issues numérotées (dé, cartes, roue, loto…).
-    generate: () => {
+    generate: court(25, () => {
       for (;;) {
         const x = nouveauNum((N) => N <= 20);
         const AB = deuxEv(evenementsNum(x), Math.random() < 0.3);
         if (!AB) continue;
         return poserComparaison(situationNum(x), x.ctx.canvas?.(x.N), AB[0], AB[1], x.N);
       }
-    },
+    }),
   },
 
   {
@@ -1414,20 +1514,22 @@ export const probabilitesBank: TutorBankItemV4[] = [
   hint: "Probabilité = nombre d’issues favorables sur nombre d’issues possibles.",
   tags: ["proba_experience", "estimer", "de", "fraction", "template", "canvas"],
   // ★3 : la probabilité en fraction, ou « 3 chances sur 8 ».
-  generate: () => {
+  // 07/11/2026 : 25 mots ; l'événement sans verbe (« une bille verte », « plus de 4 »).
+  generate: court(25, () => {
     const ex = experienceQuelconque();
     const enChances = Math.random() < 0.4;
     const { bonne, choices } = fractionsProposees(ex.fav, ex.total, enChances ? chances : (a, b) => `${a}/${b}`);
     const [p2] = deuxPrenoms();
     const text = enChances
       ? randomChoice([
-          `${ex.texte} Combien de chances y a-t-il de « ${ex.lib} » ?`,
+          `${ex.texte} Combien de chances y a-t-il d’avoir « ${ex.lib} » ?`,
           `${ex.texte} ${p2.nom} veut « ${ex.lib} ». Combien de chances a-t-${ilElle(p2)} ?`,
+          `${ex.texte} Pour « ${ex.lib} », combien de chances y a-t-il ?`,
         ])
       : randomChoice([
-          `${ex.texte} Quelle est la probabilité de « ${ex.lib} » ?`,
+          `${ex.texte} Quelle est la probabilité d’avoir « ${ex.lib} » ?`,
           `${ex.texte} Écris la probabilité de l’événement « ${ex.lib} ».`,
-          `${ex.texte} Quelle fraction donne la probabilité de « ${ex.lib} » ?`,
+          `${ex.texte} Quelle fraction donne la probabilité de l’événement « ${ex.lib} » ?`,
         ]);
     return {
       text,
@@ -1443,7 +1545,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
       ),
       canvas: ex.canvas,
     };
-  },
+  }),
 },
 
   {
@@ -1486,6 +1588,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         `${ex.texte} La probabilité de « ${ex.lib} » est :`,
         `${ex.texte} « ${ex.lib} » a pour probabilité :`,
         `${ex.texte} Place « ${ex.lib} » entre 0 et 1.`,
+        // 07/11/2026 : ★1 à 4,2 répétitions sur 20 — d'autres tournures courtes.
+        `${ex.texte} Choisis la probabilité de « ${ex.lib} ».`,
+        `${ex.texte} « ${ex.lib} » : quelle probabilité ?`,
+        `${ex.texte} Donne la probabilité de « ${ex.lib} ».`,
       ]);
       return {
         text,
@@ -1655,7 +1761,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Compte les secteurs de chaque lot sur le dessin.",
     tags: ["proba_experience", "lire", "roue", "template", "canvas"],
     // ★3 : la roue des lots ; chaque secteur porte le nom d'un lot. On LIT le dessin.
-    generate: () => {
+    generate: court(25, () => {
       const LOTS: [string, Coul][] = [["Stylo", "bleu"], ["Livre", "vert"], ["Badge", "violet"], ["Perdu", "rouge"], ["Bille", "orange"], ["Jeu", "jaune"], ["Gomme", "rose"]];
       const k = ri(3, 4);
       const lots = shuffle(LOTS).slice(0, k);
@@ -1663,12 +1769,13 @@ export const probabilitesBank: TutorBankItemV4[] = [
       const total = ns.reduce((a, b) => a + b, 0);
       const segments = shuffle(lots.flatMap(([label, couleur], i) => Array.from({ length: ns[i] }, () => ({ label, poids: 1, couleur }))));
       const p = randomChoice(PRENOMS);
+      // 07/11/2026 : 25 mots au plus ; les noms des lots se lisent sur le dessin.
       const intro = randomChoice([
         `À la kermesse, ${p.nom} fait tourner la roue des lots.`,
         `À la fête de l’école, ${p.nom} joue à la roue des lots.`,
-        `Au centre de loisirs, ${p.nom} fait tourner la roue des cadeaux.`,
-        `Au marché de Noël, ${p.nom} tente sa chance à la roue des lots.`,
-      ]) + " Tous les secteurs ont la même taille. Chacun porte le nom d’un lot.";
+        `Au centre de loisirs, ${p.nom} lance la roue des cadeaux.`,
+        `Au marché de Noël, ${p.nom} joue à la roue des lots.`,
+      ]) + " " + randomChoice(["Ses secteurs sont égaux.", "Tous les secteurs ont la même taille."]);
       const genre = randomChoice(["plus", "moins", "chances", "compte"] as const);
       const iCible = ri(0, k - 1);
       const [lot] = lots[iCible];
@@ -1683,7 +1790,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
         choices = shuffle(lots.map(([l]) => l));
         expected = genre === "plus" ? tri[0].l : tri[tri.length - 1].l;
       } else if (genre === "chances") {
-        text = `${intro} Combien de chances ${p.nom} a-t-${ilElle(p)} de gagner le lot « ${lot} » ?`;
+        text = `${intro} Combien de chances a-t-${ilElle(p)} de gagner le lot « ${lot} » ?`;
         const f = fractionsProposees(ns[iCible], total, chances);
         choices = f.choices;
         expected = f.bonne;
@@ -1707,7 +1814,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ),
         canvas: probabilitesCanvas({ variant: "roue", roue: { segments } }),
       };
-    },
+    }),
   },
 
   {
@@ -1999,7 +2106,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Essaie : ajoute (ou enlève) un objet, recompte, et recommence jusqu’à ce que ça marche.",
     tags: ["proba_experience", "defi", "template"],
     // ★3 : combien en ajouter (ou en enlever) pour rendre deux couleurs aussi probables, ou pour « une chance sur deux » ?
-    generate: () => {
+    // 07/11/2026 : 25 mots ; « pour que les deux couleurs aient autant de chances », « pour que le rouge ait une chance sur deux ».
+    generate: court(25, () => {
       const forme = randomChoice(["ajouter", "enlever", "moitie"] as const);
       let u: Urne;
       let text: string;
@@ -2012,10 +2120,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         const petit = u.contenu.find((x) => x.n === a)!.c;
         const grand = u.contenu.find((x) => x.n === b)!.c;
         const o = u.ctx.o;
-        const cond = `autant de chances ${deV(`« ${evtUrne(u, [petit])} »`)} que ${deV(`« ${evtUrne(u, [grand])} »`)}`;
+        const cond = randomChoice(["pour que les deux couleurs aient autant de chances", "pour que les deux couleurs aient autant de chances de sortir"]);
         text = forme === "ajouter"
-          ? `${situationUrne(u)} Combien de ${o.p} ${accorde(petit, o.f, true)} faut-il ajouter pour avoir ${cond} ?`
-          : `${situationUrne(u)} Combien de ${o.p} ${accorde(grand, o.f, true)} faut-il enlever pour avoir ${cond} ?`;
+          ? `${situationUrne(u)} Combien de ${o.p} ${accorde(petit, o.f, true)} faut-il ajouter ${cond} ?`
+          : `${situationUrne(u)} Combien de ${o.p} ${accorde(grand, o.f, true)} faut-il enlever ${cond} ?`;
         rep = b - a;
         detail = `Il y a ${a} ${accorde(petit, o.f, a > 1)} et ${b} ${accorde(grand, o.f, true)} : il faut le même nombre des deux. ${b} − ${a} = ${rep}.`;
       } else {
@@ -2029,7 +2137,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
         const o = u.ctx.o;
         const aC = u.contenu.find((x) => x.c === c)!.n;
         const reste = totalUrne(u) - aC;
-        text = `${situationUrne(u)} Combien de ${o.p} ${accorde(c, o.f, true)} faut-il ajouter pour avoir une chance sur deux ${deV(`« ${evtUrne(u, [c])} »`)} ?`;
+        const leC = c === "orange" ? "l’orange" : `le ${c}`;
+        text = `${situationUrne(u)} Combien de ${o.p} ${accorde(c, o.f, true)} faut-il ajouter pour que ${leC} ait une chance sur deux ?`;
         rep = reste - aC;
         detail = `Une chance sur deux : il faut autant de ${o.p} ${accorde(c, o.f, true)} que de ${o.p} des autres couleurs. Les autres : ${reste}. Il y en a ${aC} : ${reste} − ${aC} = ${rep}.`;
       }
@@ -2046,7 +2155,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ),
         canvas: canvasUrne(u),
       };
-    },
+    }),
   },
   {
     kind: "template",
@@ -2211,8 +2320,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Chaque objet est une issue : additionne ceux qui conviennent.",
     tags: ["proba_experience", "issue", "billes", "total", "template", "canvas"],
-    // ★3 : sac de trois couleurs ; « rouge ou bleue », « qui n'est pas verte ».
-    generate: () => {
+    // ★3 : sac de trois couleurs ; « rouge ou bleue », « qui n'est pas verte ». 07/11 : 25 mots.
+    generate: court(25, () => {
       const u = nouvelleUrne(3, 1, 8, { maxTotal: 22 });
       const o = u.ctx.o;
       const cs = shuffle(u.contenu.map((x) => x.c));
@@ -2222,9 +2331,9 @@ export const probabilitesBank: TutorBankItemV4[] = [
       const fav = favUrne(u, choisis, pas);
       const gardes = u.contenu.filter((x) => (pas ? !choisis.includes(x.c) : choisis.includes(x.c)));
       const text = randomChoice([
-        `${situationUrne(u)} Combien d’issues réalisent l’événement « ${lib} » ?`,
+        `${situationUrne(u)} Combien d’issues réalisent « ${lib} » ?`,
         `${situationUrne(u)} Combien de ${o.p} sont favorables à « ${lib} » ?`,
-        `${situationUrne(u)} Pour l’événement « ${lib} », combien d’issues conviennent ?`,
+        `${situationUrne(u)} Pour « ${lib} », combien d’issues conviennent ?`,
         `${situationUrne(u)} Compte les issues favorables à « ${lib} ».`,
       ]);
       return {
@@ -2240,7 +2349,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ),
         canvas: canvasUrne(u),
       };
-    },
+    }),
   },
 
   {
@@ -2267,6 +2376,12 @@ export const probabilitesBank: TutorBankItemV4[] = [
           `${situationNum(x)} Combien d’issues possibles ?`,
           `${situationNum(x)} Donne le nombre d’issues possibles.`,
           `${situationNum(x)} Combien de résultats différents ?`,
+          // 07/11/2026 : ★1 à 5,5 répétitions sur 20 — d'autres tournures courtes.
+          `${situationNum(x)} Compte les issues possibles.`,
+          `${situationNum(x)} Combien d’issues en tout ?`,
+          `${situationNum(x)} Combien de résultats en tout ?`,
+          `${situationNum(x)} Il y a combien d’issues possibles ?`,
+          `${situationNum(x)} Quel est le nombre d’issues possibles ?`,
         ]);
         return {
           text,
@@ -2290,6 +2405,9 @@ export const probabilitesBank: TutorBankItemV4[] = [
           "On lance une pièce. Combien d’issues compte cette expérience ?",
           "On lance une pièce. Combien d’issues possibles ?",
           "On lance une pièce. Combien de résultats différents ?",
+          "On lance une pièce. Compte les issues possibles.",
+          "Une pièce tombe sur pile ou face. Combien d’issues en tout ?",
+          "On lance une pièce. Combien de résultats en tout ?",
         ]);
         return {
           text,
@@ -2424,8 +2542,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Deux événements ont autant de chances s’ils ont le même nombre d’issues favorables.",
     tags: ["proba_experience", "comparer", "aussi_probable", "template", "canvas"],
-    // ★3 : oui ou non, ces deux événements ont-ils autant de chances ?
-    generate: () => {
+    // ★3 : oui ou non, ces deux événements ont-ils autant de chances ? 07/11 : 25 mots.
+    generate: court(25, () => {
       for (;;) {
         const egaux = Math.random() < 0.5;
         let texte: string;
@@ -2450,7 +2568,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
         const text = randomChoice([
           `${texte} Les événements « ${A.lib} » et « ${B.lib} » ont-ils autant de chances ?`,
           `${texte} « ${A.lib} » et « ${B.lib} » : est-ce aussi probable ?`,
-          `${texte} A-t-on autant de chances de « ${A.lib} » que de « ${B.lib} » ?`,
+          `${texte} A-t-on autant de chances pour « ${A.lib} » que pour « ${B.lib} » ?`,
+          `${texte} « ${A.lib} » a-t-il autant de chances que « ${B.lib} » ?`,
         ]);
         return {
           text,
@@ -2467,7 +2586,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           canvas,
         };
       }
-    },
+    }),
   },
 
   {
@@ -3070,8 +3189,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Impossible vaut 0, certain vaut 1.",
     tags: ["proba_experience", "vocabulaire", "template"],
     // ★3 : quatre événements sur la même expérience ; lequel est certain,
-    // impossible, peu probable ou très probable ?
-    generate: () => {
+    // impossible, peu probable ou très probable ? 07/11 : 25 mots.
+    generate: court(25, () => {
       const cible = randomChoice<Cat>(["impossible", "certain", "peu", "tres"]);
       let texte: string;
       let canvas: CanvasProbabilitesData | undefined;
@@ -3106,11 +3225,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
         total = totalUrne(u);
       }
       const mot = MOT_CAT[cible];
-      const [p2] = deuxPrenoms();
       const text = randomChoice([
         `${texte} Parmi ces événements, lequel est ${mot} ?`,
         `${texte} Quel événement est ${mot} ?`,
-        `${texte} ${p2.nom} cherche un événement ${mot}. Lequel doit-${ilElle(p2)} choisir ?`,
+        `${texte} Trouve l’événement ${mot}.`,
         `${texte} Coche l’événement ${mot}.`,
       ]);
       return {
@@ -3127,7 +3245,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ),
         canvas,
       };
-    },
+    }),
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -3247,16 +3365,18 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Fréquence = nombre de fois obtenu ÷ nombre d'essais.",
     tags: ["proba_frequence", "calculer", "template"],
     // ★3 : trois issues parfois ; la fréquence d'une issue ou de deux réunies ; en décimal ou en pourcentage.
-    generate: () => {
+    // 07/11/2026 : 25 mots ; les résultats se lisent dans le tableau.
+    generate: court(25, () => {
       const s = serieCalc([20, 25, 50, 100]);
       const deux = s.issues.length === 3 && Math.random() < 0.4;
       const [a, b] = shuffle(s.issues);
       const k = deux ? a.k + b.k : a.k;
       const cible = deux ? `« ${a.l} » ou « ${b.l} »` : `« ${a.l} »`;
       const text = randomChoice([
-        `${s.texte} Quelle est la fréquence de ${cible} ? Donne-la en nombre décimal.`,
+        `${s.texte} Quelle est la fréquence de ${cible}, en nombre décimal ?`,
         `${s.texte} Quelle est la fréquence de ${cible}, en pourcentage ?`,
         `${s.texte} Calcule la fréquence observée de ${cible}.`,
+        `${s.texte} Trouve la fréquence de ${cible}.`,
       ]);
       // la réponse affichée en premier suit la consigne (pourcentage demandé → « 35 % »)
       const ecr0 = ecrituresFrequence(k, s.n);
@@ -3274,7 +3394,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
         ),
         canvas: s.canvas,
       };
-    },
+    }),
   },
   {
     kind: "template",
@@ -3630,14 +3750,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Nombre attendu = probabilité × nombre d’essais.",
     tags: ["proba_frequence", "comparer", "template"],
     // ★3 : combien de fois peut-on s'attendre à obtenir le résultat ? (la probabilité se calcule à partir du texte)
-    generate: () => {
+    // 07/11/2026 : 25 mots ; l'événement sans verbe (« pile », « le 3 », « une bille rouge »).
+    generate: court(25, () => {
       const e = experienceRepetee();
       const n = e.den * ri(2, Math.max(2, Math.floor(120 / e.den)));
       const attendu = (n * e.num) / e.den;
       const text = randomChoice([
-        `${e.intro(n)} À combien de fois « ${e.lib} » peut-on s’attendre, à peu près ?`,
+        `${e.intro(n)} Environ combien de fois peut-on s’attendre à « ${e.lib} » ?`,
         `${e.intro(n)} Environ combien de fois peut-${ilElle(e.p)} s’attendre à « ${e.lib} » ?`,
         `${e.intro(n)} Combien de fois « ${e.lib} » peut-on prévoir, environ ?`,
+        `${e.intro(n)} À peu près combien de fois aura-t-${ilElle(e.p)} « ${e.lib} » ?`,
       ]);
       return {
         text,
@@ -3651,7 +3773,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           `on peut s’attendre à environ ${attendu} fois — presque jamais exactement.`
         ),
       };
-    },
+    }),
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -3728,13 +3850,13 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_frequence_repeter",
     difficulty: 3,
     theme: "neutral",
-    text: "Deux séries donnent une fréquence de 0,30 pour « deux piles » : l'une sur 20 lancers, l'autre sur 2 000. Laquelle renseigne le mieux sur la vraie probabilité ?",
+    text: "Deux séries donnent une fréquence de 0,30 pour « deux piles » : l’une sur 20 lancers, l’autre sur 2 000. Quelle série est la plus fiable ?",
     format: "qcm",
     choices: [
       "celle sur 2 000 lancers",
       "celle sur 20 lancers",
-      "les deux également, la fréquence est la même",
-      "aucune, il faudrait connaître les résultats détaillés",
+      "les deux autant : même fréquence",
+      "aucune des deux",
     ],
     expected: ["celle sur 2 000 lancers"],
     comparator: "mcq_exact",
@@ -3928,29 +4050,38 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Une série plus longue laisse moins de place au hasard.",
     tags: ["proba_frequence", "repeter", "template"],
     // ★3 : une petite et une grande série ; laquelle renseigne le mieux sur la probabilité ?
-    generate: () => {
+    // 07/11/2026 : 25 mots — « On lance une punaise. « Pointe en haut » : Léa 13 fois sur 20, Hugo 312 fois sur 500. »
+    generate: court(25, () => {
       const OBJ = [
-        { o: "une pièce", lib: "obtenir pile", p: 0.5 },
-        { o: "une punaise", lib: "tomber pointe en haut", p: 0.6 },
-        { o: "un bouchon", lib: "tomber debout", p: 0.15 },
-        { o: "un gobelet", lib: "tomber à l’endroit", p: 0.3 },
-        { o: "un dé", lib: "obtenir six", p: 1 / 6 },
-        { o: "une tartine en carton", lib: "tomber côté beurre", p: 0.5 },
-        { o: "une capsule de bouteille", lib: "tomber à l’envers", p: 0.4 },
+        { o: "une pièce", lib: "pile", p: 0.5 },
+        { o: "une punaise", lib: "pointe en haut", p: 0.6 },
+        { o: "un bouchon", lib: "debout", p: 0.15 },
+        { o: "un gobelet", lib: "à l’endroit", p: 0.3 },
+        { o: "un dé", lib: "six", p: 1 / 6 },
+        { o: "une tartine en carton", lib: "côté beurre", p: 0.5 },
+        { o: "une capsule", lib: "à l’envers", p: 0.4 },
+        { o: "un cône de chantier", lib: "debout", p: 0.35 },
       ];
       const x = randomChoice(OBJ);
       const [A, B] = deuxPrenoms();
       const petit = randomChoice([10, 12, 15, 20]);
-      const grand = randomChoice([200, 500, 1000, 2000]);
+      const grand = randomChoice([200, 300, 400, 500, 800]);
       const aPetit = Math.random() < 0.5;
       const nA = aPetit ? petit : grand;
       const nB = aPetit ? grand : petit;
-      const phr = (nom: Prenom, n: number) => `${nom.nom} lance ${milliers(n)} fois ${x.o}. L’événement « ${x.lib} » se produit ${milliers(binomial(n, x.p))} fois.`;
+      const serie = (nom: Prenom, n: number) => `${nom.nom} ${binomial(n, x.p)} fois sur ${n}`;
+      const intro = randomChoice([
+        `On lance ${x.o}. « ${maj(x.lib)} » : ${serie(A, nA)}, ${serie(B, nB)}.`,
+        `Deux élèves lancent ${x.o}. « ${maj(x.lib)} » : ${serie(A, nA)}, ${serie(B, nB)}.`,
+        `En sciences, on lance ${x.o}. On compte « ${x.lib} » : ${serie(A, nA)}, ${serie(B, nB)}.`,
+      ]);
       const text =
-        `${phr(A, nA)} ${phr(B, nB)} ` +
+        `${intro} ` +
         randomChoice([
-          `Quelle série renseigne le mieux sur la probabilité de « ${x.lib} » ?`,
-          `À quelle série faut-il faire le plus confiance pour estimer la probabilité de « ${x.lib} » ?`,
+          "Quelle série renseigne le mieux sur la probabilité ?",
+          "À quelle série faut-il faire le plus confiance ?",
+          "Quelle série est la plus fiable ?",
+          "Quelle série donne la meilleure estimation ?",
         ]);
       const choices = [`celle ${de(A.nom)}`, `celle ${de(B.nom)}`, "les deux autant"];
       return {
@@ -3966,6 +4097,6 @@ export const probabilitesBank: TutorBankItemV4[] = [
           `on fait confiance à la série ${de(aPetit ? B.nom : A.nom)}.`
         ),
       };
-    },
+    }),
   },
 ]
