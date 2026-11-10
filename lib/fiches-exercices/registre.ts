@@ -1036,6 +1036,22 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Développer avec un facteur puis avec deux parenthèses, réduire, reconnaître un produit, démasquer les erreurs — un terrain de foot agrandi, les degrés Fahrenheit, une semaine d'entraînement, le carré du calendrier. Le modèle des aires dessiné dans les corrigés.",
   },
+  // Écrites le 29/10/2026, branchées le 10/11/2026 (elles n'avaient ni registre ni page).
+  "maths/4e/fonction-dependance": {
+    titre: "Dépendance entre deux grandeurs : 20 exercices corrigés",
+    resume:
+      "Suivre un programme de calcul et le remonter, lire un tableau et un graphique dans les deux sens, reconnaître quand une grandeur dépend d'une autre sans lui être proportionnelle. Le CO₂ du Mauna Loa, le ballon-sonde, le grillon thermomètre, la distance de freinage, la carte de patinoire. La lecture dessinée dans les corrigés.",
+  },
+  "maths/4e/proba-frequence": {
+    titre: "Fréquence et probabilité : 20 exercices corrigés",
+    resume:
+      "Calculer une fréquence, la comparer à la probabilité, voir l'écart se réduire quand on répète, savoir ce qu'un petit nombre d'essais ne prouve pas. Un gobelet, la météo, deux basketteuses, les oiseaux des jardins, les tirs au but, la pièce de l'arbitre. De vraies simulations et des courbes de fréquences dans les corrigés.",
+  },
+  "maths/4e/volume-solide": {
+    titre: "Les volumes : 20 exercices corrigés",
+    resume:
+      "Une seule règle, aire de la base × hauteur, pour le pavé, le prisme et le cylindre, puis les cm³, les litres et les m³ qui vont de mille en mille. Un aquarium, un moule à cake, un bain contre une douche, la balle ronde de foin, la digue contre la mer, l'eau oubliée dans le tuyau. Le solide dessiné dans chaque corrigé.",
+  },
   // ⭐ LA PREMIÈRE (15/09/2026) — écrite pour la fille de Frédéric, en 1re, qui
   // teste ce soir. Le verdict est pour demain.
   "maths/premiere-spe/exponentielle": {
