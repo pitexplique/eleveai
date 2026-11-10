@@ -17,49 +17,49 @@
 // ⚠️ PAS DE QUESTION À RÉDIGER. `applyMathsKeyboardFree` retire les items
 // `format: "open"` (cf. ce2/maths/index.ts) : un CE2 clique, il ne tape pas.
 
+//
+// ⛔ LES SQUELETTES (10/11/2026). Mesuré avec scripts/mesurer-squelettes-coach.ts :
+// les 6 micros tenaient sur 4 à 7 squelettes. Chaque gabarit tire maintenant une
+// FAMILLE (le résultat, un chiffre du résultat, la retenue, l'erreur à trouver,
+// la vérification, une histoire), une TOURNURE et un enfant de la troupe.
+// ⭐ L'opération posée (`calcul_pose`) est dessinée SANS son résultat — sauf quand
+// c'est le résultat FAUX d'un élève qu'on demande de juger. Outils communs :
+// ./outils-calcul-ce2.ts.
+
 import type { CalculPoseCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-// La bonne réponse est mise de côté, trois pièges distincts sont tirés ensuite,
-// puis on mélange. L'écrire autrement a rendu des questions impossibles à
-// réussir dans 79 banques : voir scripts/verifier-generateurs.mjs.
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
+import {
+  type Etoile,
+  type Prenom,
+  type Q,
+  MONDES,
+  barre,
+  de,
+  deuxPersonnes,
+  exp,
+  fmt,
+  gabarit,
+  maj,
+  monde,
+  nObj,
+  pick,
+  pose,
+  poserCalcul,
+  qM,
+  qN,
+  quelquun,
+  rint,
+  tIl,
+} from "./outils-calcul-ce2";
 
 function calculPose(data: Omit<CalculPoseCanvasData, "kind">): CalculPoseCanvasData {
   return { kind: "calcul_pose", ...data };
 }
 
-function exp(definition: string, methode: string, calcul: string, conclusion: string) {
-  return `Définition : ${definition}
+/* =========================================================
+   LES ITEMS FIGÉS (gardés tels quels)
+========================================================= */
 
-Méthode : ${methode}
-
-Calcul : ${calcul}
-
-Conclusion : ${conclusion}`;
-}
-
-export const additionSoustractionBank: TutorBankItemV4[] = [
-  /* =========================================================
-     CE2_ADDITION_POSEE — poser une addition avec retenues
-     Le piège de l'alignement est ici.
-  ========================================================= */
+const FIXES: TutorBankItemV4[] = [
   {
     kind: "fixed",
     id: "ce2_addition_posee_fixed_1",
@@ -145,83 +145,6 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     tags: ["ce2", "addition", "posee", "definition", "qcm"],
   },
   {
-    kind: "template",
-    id: "ce2_addition_posee_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_addition_posee",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Colonne par colonne, en partant des unités.",
-    tags: ["ce2", "addition", "posee", "template", "canvas"],
-    generate: () => {
-      const a = randomInt(120, 4800);
-      const b = randomInt(15, 900);
-      const somme = a + b;
-      const retenueUnites = (a % 10) + (b % 10) >= 10;
-      return {
-        text: `Combien font ${a} + ${b} ?`,
-        format: "short",
-        expected: [String(somme)],
-        comparator: "number_equal",
-        explanation: exp(
-          "On additionne colonne par colonne, en partant des unités ; dix unités d'un rang font une unité du rang suivant.",
-          "On aligne les unités sous les unités, puis on avance vers la gauche en portant les retenues.",
-          retenueUnites
-            ? `Unités : ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}, on écrit ${((a % 10) + (b % 10)) % 10} et on retient 1. On continue vers la gauche : le total est ${somme}.`
-            : `Unités : ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}, sans retenue. On continue vers la gauche : le total est ${somme}.`,
-          `${a} + ${b} = ${somme}.`,
-        ),
-        canvas: calculPose({
-          operation: "addition",
-          numbers: [String(a), String(b)],
-          result: String(somme),
-          display: { showResult: false, showRetenues: false },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_addition_posee_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_addition_posee",
-    difficulty: 4,
-    theme: "reunion",
-    hint: "Additionne les deux nombres : les unités d'abord.",
-    tags: ["ce2", "addition", "posee", "reunion", "template"],
-    generate: () => {
-      const contexte = randomChoice([
-        { quoi: "spectateurs", ou: "au spectacle de fin d'année", a: "le samedi", b: "le dimanche" },
-        { quoi: "visiteurs", ou: "à la fête de la vanille", a: "le matin", b: "l'après-midi" },
-        { quoi: "coureurs", ou: "au cross du collège", a: "en 6ᵉ", b: "en 5ᵉ" },
-      ]);
-      const a = randomInt(150, 900);
-      const b = randomInt(150, 900);
-      return {
-        text: `${contexte.ou.charAt(0).toUpperCase() + contexte.ou.slice(1)}, il y avait ${a} ${contexte.quoi} ${contexte.a} et ${b} ${contexte.b}. Combien de ${contexte.quoi} en tout ?`,
-        format: "short",
-        expected: [String(a + b)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Réunir deux quantités, c'est les additionner.",
-          "On pose l'addition en alignant les unités, puis on avance vers la gauche.",
-          `${a} + ${b} = ${a + b}.`,
-          `Il y avait ${a + b} ${contexte.quoi}.`,
-        ),
-      };
-    },
-  },
-
-  /* =========================================================
-     CE2_SOUSTRACTION_POSEE — poser une soustraction
-     LE piège : retourner la colonne au lieu de casser une
-     dizaine.
-  ========================================================= */
-  {
     kind: "fixed",
     id: "ce2_soustraction_posee_fixed_1",
     niveau: "ce2",
@@ -306,100 +229,6 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     tags: ["ce2", "soustraction", "posee", "methode", "qcm"],
   },
   {
-    kind: "template",
-    id: "ce2_soustraction_posee_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_soustraction_posee",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Colonne par colonne, et on casse une dizaine quand il le faut.",
-    tags: ["ce2", "soustraction", "posee", "template", "canvas"],
-    generate: () => {
-      const a = randomInt(300, 4800);
-      const b = randomInt(120, a - 100);
-      const difference = a - b;
-      const emprunt = (a % 10) < (b % 10);
-      return {
-        text: `Combien font ${a} - ${b} ?`,
-        format: "short",
-        expected: [String(difference)],
-        comparator: "number_equal",
-        explanation: exp(
-          "On soustrait colonne par colonne en partant des unités ; si le chiffre du haut est trop petit, on casse une unité du rang de gauche.",
-          "On enlève toujours le chiffre du bas à celui du haut, jamais l'inverse.",
-          emprunt
-            ? `Unités : ${a % 10} est plus petit que ${b % 10}, on casse une dizaine : ${(a % 10) + 10} - ${b % 10} = ${(a % 10) + 10 - (b % 10)}. On continue vers la gauche en n'oubliant pas la dizaine empruntée. Le résultat est ${difference}.`
-            : `Unités : ${a % 10} - ${b % 10} = ${(a % 10) - (b % 10)}, sans emprunt. On continue vers la gauche : le résultat est ${difference}.`,
-          `${a} - ${b} = ${difference}. Vérification : ${difference} + ${b} = ${a}.`,
-        ),
-        canvas: calculPose({
-          operation: "soustraction",
-          numbers: [String(a), String(b)],
-          result: String(difference),
-          display: { showResult: false, showRetenues: false },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_soustraction_posee_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_soustraction_posee",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Le piège classique : ne retourne pas la colonne des unités.",
-    tags: ["ce2", "soustraction", "posee", "piege", "template"],
-    generate: () => {
-      const dizaines = randomInt(3, 9);
-      const uniteHaut = randomInt(0, 4);
-      const a = dizaines * 10 + uniteHaut;
-      const uniteBas = randomInt(uniteHaut + 3, 9);
-      const b = randomInt(1, dizaines - 2) * 10 + uniteBas;
-      const juste = a - b;
-      const faux = Math.abs(Math.floor(a / 10) - Math.floor(b / 10)) * 10 + Math.abs(uniteHaut - uniteBas);
-      return {
-        text: `Un élève calcule ${a} - ${b}. Dans la colonne des unités, il fait ${uniteBas} - ${uniteHaut} et trouve ${faux}. Quelle est la bonne réponse ?`,
-        format: "qcm",
-        choices: makeChoices(String(juste), [
-          String(faux),
-          String(juste + 10),
-          String(juste - 10),
-          String(a - b + 1),
-        ]),
-        expected: [String(juste)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Dans une soustraction, on enlève toujours le chiffre du bas à celui du haut, même s'il est plus grand.",
-          "Quand le chiffre du haut est trop petit, on casse une dizaine du rang de gauche pour lui donner dix unités.",
-          `${a}, c'est ${dizaines - 1} dizaines et ${uniteHaut + 10} unités. Alors ${uniteHaut + 10} - ${uniteBas} = ${uniteHaut + 10 - uniteBas} aux unités, et on continue avec les dizaines. Le résultat est ${juste}, pas ${faux}.`,
-          `${a} - ${b} = ${juste}. Vérification : ${juste} + ${b} = ${a}.`,
-        ),
-      };
-    },
-  },
-
-  /* =========================================================
-     CE2_ADD_SOUS_VOCABULAIRE — terme, somme, différence
-     Attendu du BO, resté longtemps sans une seule question.
-     LE PIÈGE : confondre le nom de l'opération et le nom de son
-     résultat. La somme n'est pas l'addition, c'est ce qu'elle
-     produit. « Trouve la somme de 8 et 5 » ne demande pas
-     d'écrire 8 + 5, mais 13.
-     Son cousin : croire que « terme » ne vaut que pour
-     l'addition. Le BO écrit « 60 et 37 sont les termes de la
-     soustraction 60 − 37 ».
-  ========================================================= */
-  // ⚠️ « Quelle est la somme de 8 et de 5 ? » était figé ici. C'est un calcul,
-  // pas un cas remarquable : le gabarit tpl_1 le tire déjà, et il descend
-  // maintenant jusqu'aux petits nombres pour garder cette porte d'entrée.
-  // Les trois `fixed` qui restent gagnent leur place : deux phrases littérales
-  // du programme, et le piège nommé.
-  {
     kind: "fixed",
     id: "ce2_add_sous_vocabulaire_fixed_2",
     niveau: "ce2",
@@ -474,62 +303,6 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     tags: ["ce2", "addition", "vocabulaire", "somme", "piege", "qcm"],
   },
   {
-    kind: "template",
-    id: "ce2_add_sous_vocabulaire_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_add_sous_vocabulaire",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Somme : on ajoute. Différence : on retire. Dans les deux cas, on donne le RÉSULTAT.",
-    tags: ["ce2", "addition", "soustraction", "vocabulaire", "template"],
-    generate: () => {
-      // On descend jusqu'à 8 : le gabarit doit couvrir la question facile
-      // « la somme de 8 et de 5 », qui était un item figé jusqu'ici.
-      // b reste sous a, sinon la différence passerait sous zéro.
-      const a = randomInt(8, 96);
-      const b = randomInt(3, Math.min(23, a - 1));
-      const somme = randomChoice([true, false]);
-      const resultat = somme ? a + b : a - b;
-      const autre = somme ? a - b : a + b;
-      return {
-        text: somme
-          ? `Quelle est la somme de ${a} et de ${b} ?`
-          : `Quelle est la différence entre ${a} et ${b} ?`,
-        format: "qcm",
-        choices: makeChoices(String(resultat), [
-          String(autre),
-          somme ? `${a} + ${b}` : `${a} − ${b}`,
-          // ⚠️ Pas de « + 10 » ici : sur une différence avec b = 5, il tombe
-          // exactement sur la somme, et deux pièges n'en font plus qu'un.
-          String(resultat + 1),
-          String(resultat + 2),
-        ]),
-        expected: [String(resultat)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          somme
-            ? "La somme de deux nombres est le résultat de leur addition."
-            : "La différence entre deux nombres est le résultat de leur soustraction.",
-          "On effectue l'opération, et on donne le nombre trouvé — pas le calcul.",
-          somme
-            ? `${a} + ${b} = ${a + b}. Écrire « ${a} + ${b} » n'est pas une réponse : c'est le calcul.`
-            : `${a} − ${b} = ${a - b}. Écrire « ${a} − ${b} » n'est pas une réponse : c'est le calcul.`,
-          somme
-            ? `La somme de ${a} et de ${b} est ${a + b}.`
-            : `La différence entre ${a} et ${b} est ${a - b}.`,
-        ),
-      };
-    },
-  },
-
-  /* =========================================================
-     CE2_ADD_SOUS_COMPLEMENT — compléter une égalité
-     Le trou peut être n'importe où : ce n'est pas toujours
-     une soustraction.
-  ========================================================= */
-  {
     kind: "fixed",
     id: "ce2_add_sous_complement_fixed_1",
     niveau: "ce2",
@@ -596,85 +369,6 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "addition", "complement", "methode", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_add_sous_complement_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_add_sous_complement",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Avance jusqu'à la dizaine ronde, puis jusqu'au total.",
-    tags: ["ce2", "addition", "complement", "template"],
-    generate: () => {
-      const total = randomChoice([100, 200, 500, 1000]);
-      const debut = randomInt(1, total / 10 - 1) * 10 + randomInt(1, 9);
-      const manque = total - debut;
-      const versDizaine = 10 - (debut % 10);
-      return {
-        text: `Complète : ${debut} + ... = ${total}`,
-        format: "short",
-        expected: [String(manque)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Compléter, c'est chercher ce qui manque pour atteindre le total.",
-          "On avance par étapes : d'abord jusqu'à la dizaine ronde, puis jusqu'au total.",
-          `De ${debut} à ${debut + versDizaine} : ${versDizaine}. De ${debut + versDizaine} à ${total} : ${total - debut - versDizaine}. En tout : ${versDizaine} + ${total - debut - versDizaine} = ${manque}.`,
-          `Il manque ${manque}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_add_sous_complement_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_add_sous_complement",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Regarde OÙ est le trou : au départ, ou à l'arrivée ?",
-    tags: ["ce2", "addition", "complement", "piege", "template"],
-    generate: () => {
-      const b = randomInt(20, 90);
-      const reste = randomInt(20, 90);
-      const depart = b + reste;
-      const trouAuDepart = randomChoice([true, false]);
-      return trouAuDepart
-        ? {
-            text: `Complète : ... - ${b} = ${reste}`,
-            format: "short",
-            expected: [String(depart)],
-            comparator: "number_equal",
-            explanation: exp(
-              "Quand le nombre qui manque est celui de DÉPART, on le retrouve en additionnant.",
-              "On remet ce qui a été enlevé sur ce qui reste.",
-              `Il reste ${reste} après avoir enlevé ${b} : au départ il y avait ${reste} + ${b} = ${depart}. Vérification : ${depart} - ${b} = ${reste}.`,
-              `Il manque ${depart}.`,
-            ),
-          }
-        : {
-            text: `Complète : ${depart} - ... = ${reste}`,
-            format: "short",
-            expected: [String(b)],
-            comparator: "number_equal",
-            explanation: exp(
-              "Quand le nombre qui manque est celui qu'on ENLÈVE, on le retrouve en soustrayant.",
-              "On enlève au nombre de départ ce qui reste à la fin.",
-              `On part de ${depart} et il reste ${reste} : on a donc enlevé ${depart} - ${reste} = ${b}. Vérification : ${depart} - ${b} = ${reste}.`,
-              `Il manque ${b}.`,
-            ),
-          };
-    },
-  },
-
-  /* =========================================================
-     CE2_ADD_SOUS_ESTIMER — contrôler par estimation
-     Estimer ne sert pas à trouver le résultat, mais à
-     repérer celui qui ne peut pas être bon.
-  ========================================================= */
   {
     kind: "fixed",
     id: "ce2_add_sous_estimer_fixed_1",
@@ -755,82 +449,6 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     tags: ["ce2", "addition", "estimer", "qcm"],
   },
   {
-    kind: "template",
-    id: "ce2_add_sous_estimer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_add_sous_estimer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Arrondis chaque nombre à la centaine la plus proche.",
-    tags: ["ce2", "addition", "estimer", "template"],
-    generate: () => {
-      const centA = randomInt(2, 9);
-      const centB = randomInt(1, 9 - Math.min(centA, 5));
-      const a = centA * 100 + randomChoice([-4, -2, 3, 5]);
-      const b = centB * 100 + randomChoice([-3, 2, 4]);
-      const estimation = (centA + centB) * 100;
-      return {
-        text: `Environ combien font ${a} + ${b} ?`,
-        format: "qcm",
-        choices: makeChoices(`environ ${estimation}`, [
-          `environ ${estimation + 100}`,
-          `environ ${estimation - 100}`,
-          `environ ${estimation + 200}`,
-          `environ ${estimation * 2}`,
-        ]),
-        expected: [`environ ${estimation}`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Estimer, c'est remplacer chaque nombre par le nombre rond le plus proche.",
-          "On arrondit à la centaine, puis on additionne de tête.",
-          `${a} est proche de ${centA * 100}, et ${b} de ${centB * 100}. Donc ${centA * 100} + ${centB * 100} = ${estimation}.`,
-          `C'est environ ${estimation}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_add_sous_estimer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_add_sous_estimer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Compare le résultat annoncé à ce que donne l'estimation.",
-    tags: ["ce2", "addition", "estimer", "piege", "template"],
-    generate: () => {
-      const a = randomInt(2, 9) * 100 + randomInt(1, 9);
-      const b = randomInt(1, 4) * 100 + randomInt(1, 9);
-      const juste = a + b;
-      const absurde = randomChoice([juste * 10, juste + 1000, Math.floor(juste / 10)]);
-      return {
-        text: `Un élève calcule ${a} + ${b} et annonce ${absurde}. Sans poser le calcul, ce résultat est-il possible ?`,
-        format: "qcm",
-        choices: makeChoices("non, il est très loin de l'estimation", [
-          "oui",
-          "on ne peut rien dire sans poser le calcul",
-          "oui, à condition qu'il y ait une retenue",
-        ]),
-        expected: ["non, il est très loin de l'estimation"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une estimation donne l'ordre de grandeur du résultat : un résultat qui s'en éloigne beaucoup est forcément faux.",
-          "On arrondit chaque nombre à la centaine, on additionne de tête, puis on compare.",
-          `${a} est proche de ${Math.round(a / 100) * 100} et ${b} de ${Math.round(b / 100) * 100} : le total doit tourner autour de ${Math.round(a / 100) * 100 + Math.round(b / 100) * 100}. Le résultat annoncé, ${absurde}, en est très loin.`,
-          "Non, ce résultat n'est pas possible.",
-        ),
-      };
-    },
-  },
-
-  /* =========================================================
-     CE2_ADD_SOUS_DEFI — les défis
-  ========================================================= */
-  {
     kind: "fixed",
     id: "ce2_add_sous_defi_fixed_1",
     niveau: "ce2",
@@ -874,74 +492,612 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "addition", "defi", "reunion", "deux_etapes"],
   },
-  {
-    kind: "template",
-    id: "ce2_add_sous_defi_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_add_sous_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Remonte l'opération à l'envers.",
-    tags: ["ce2", "addition", "defi", "template"],
-    generate: () => {
-      const cache = randomInt(120, 890);
-      const ajout = randomInt(100, 900);
-      const total = cache + ajout;
-      const rang = randomChoice([
-        { nom: "des unités", chiffre: cache % 10, masque: `${Math.floor(cache / 10)}?` },
-        { nom: "des dizaines", chiffre: Math.floor(cache / 10) % 10, masque: `${Math.floor(cache / 100)}?${cache % 10}` },
-      ]);
-      return {
-        text: `Dans l'opération ${rang.masque} + ${ajout} = ${total}, quel chiffre se cache derrière le point d'interrogation ?`,
-        format: "short",
-        expected: [String(rang.chiffre)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un chiffre manquant se retrouve en remontant l'opération à l'envers.",
-          "On calcule la soustraction pour retrouver le nombre complet, puis on lit le chiffre cherché.",
-          `${total} - ${ajout} = ${cache}. Le nombre caché est ${cache}, et son chiffre ${rang.nom} est ${rang.chiffre}.`,
-          `C'est le ${rang.chiffre}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_add_sous_defi_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_add_sous_defi",
-    difficulty: 5,
-    theme: "reunion",
-    hint: "Deux étapes : ce qui est parti d'abord, ce qui reste ensuite.",
-    tags: ["ce2", "addition", "defi", "reunion", "deux_etapes", "template"],
-    generate: () => {
-      const contexte = randomChoice([
-        { lieu: "la bibliothèque de l'école", quoi: "livres", verbe: "empruntés" },
-        { lieu: "la coopérative", quoi: "cahiers", verbe: "distribués" },
-        { lieu: "le stock de la cantine", quoi: "briques de lait", verbe: "sorties" },
-      ]);
-      // ⚠️ Le second retrait est borné par ce qui reste vraiment en stock :
-      // sans cela, 300 - 200 - 200 sortait un reste négatif.
-      const depart = randomInt(400, 900);
-      const a = randomInt(50, 200);
-      const b = randomInt(50, Math.min(200, depart - a - 20));
-      const reste = depart - a - b;
-      return {
-        text: `Dans ${contexte.lieu}, il y a ${depart} ${contexte.quoi}. ${a} sont ${contexte.verbe} le matin et ${b} l'après-midi. Combien en reste-t-il ?`,
-        format: "short",
-        expected: [String(reste)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un problème à deux étapes se résout dans l'ordre : d'abord le total parti, ensuite ce qui reste.",
-          "On additionne les deux quantités sorties, puis on les retire du stock de départ.",
-          `${a} + ${b} = ${a + b} ${contexte.quoi} sortis. Puis ${depart} - ${a + b} = ${reste}.`,
-          `Il en reste ${reste}.`,
-        ),
-      };
-    },
-  },
 ];
+
+/* =========================================================
+   LES GABARITS — une famille × une situation × une tournure
+========================================================= */
+
+const N = "addition_soustraction";
+const g = (id: string, microId: string, difficulty: Etoile, hint: string, tags: string[], gen: () => Q, theme: "neutral" | "reunion" = "neutral") =>
+  gabarit({ id, notionId: N, microId, difficulty, hint, tags, theme }, gen);
+
+const parfois = <T,>(p: number, f: () => T | undefined): T | undefined => (Math.random() < p ? f() : undefined);
+const avec = (canvas: Q["canvas"] | undefined): Partial<Q> => (canvas ? { canvas } : {});
+
+const chiffres = (n: number) => String(n).split("").reverse().map(Number);
+
+/** L'addition faite colonne par colonne SANS les retenues (l'erreur la plus vue). */
+function sansRetenue(a: number, b: number): number {
+  const A = chiffres(a);
+  const B = chiffres(b);
+  let r = 0;
+  for (let i = Math.max(A.length, B.length) - 1; i >= 0; i--) r = r * 10 + (((A[i] ?? 0) + (B[i] ?? 0)) % 10);
+  return r;
+}
+
+/** La soustraction « à l'envers » : dans chaque colonne, le grand moins le petit. */
+function aLEnvers(a: number, b: number): number {
+  const A = chiffres(a);
+  const B = chiffres(b);
+  let r = 0;
+  for (let i = A.length - 1; i >= 0; i--) r = r * 10 + Math.abs((A[i] ?? 0) - (B[i] ?? 0));
+  return r;
+}
+
+const aDesRetenues = (a: number, b: number) => sansRetenue(a, b) !== a + b;
+
+/** Deux nombres pour une addition posée, somme sous 10 000. */
+function deuxNombres(etoile: Etoile): [number, number] {
+  if (etoile <= 2) return [rint(120, 680), rint(15, 290)];
+  if (etoile === 3) return Math.random() < 0.5 ? [rint(120, 899), rint(45, 899)] : [rint(1020, 4800), rint(120, 3900)];
+  return [rint(1200, 5800), rint(380, 3900)];
+}
+
+/* ---------------------------------------------------------
+   LES SITUATIONS — un total de deux quantités, un retrait.
+--------------------------------------------------------- */
+
+type Sit = (p: Prenom, a: string, b: string) => string;
+
+const REUNIONS: readonly Sit[] = [
+  (p, a, b) => `Au zoo, ${a} visiteurs sont venus samedi et ${b} dimanche. Combien de visiteurs en tout ?`,
+  (p, a, b) => `La bibliothécaire a ${a} livres de contes et ${b} livres de sciences. Combien de livres a-t-elle en tout ?`,
+  (p, a, b) => `${p.nom} a ${a} points au jeu, puis gagne encore ${b} points. Combien de points a-t-${p.il} maintenant ?`,
+  (p, a, b) => `Le cirque a vendu ${a} billets le matin et ${b} billets le soir. Combien de billets en tout ?`,
+  (p, a, b) => `Dans la fusée, il y a ${a} litres d'eau, et on en ajoute ${b}. Combien de litres d'eau y a-t-il ?`,
+  (p, a, b) => `Les pirates ont trouvé ${a} pièces d'or dans un coffre et ${b} dans un autre. Combien de pièces d'or en tout ?`,
+  (p, a, b) => `La boulangère a fait ${a} croissants et ${b} pains au chocolat. Combien de viennoiseries en tout ?`,
+  (p, a, b) => `${p.nom} roule ${a} mètres à vélo le matin et ${b} mètres l'après-midi. Combien de mètres en tout ?`,
+  (p, a, b) => `À la kermesse, on a vendu ${a} tickets de tombola et ${b} tickets de pêche à la ligne. Combien de tickets en tout ?`,
+  (p, a, b) => `Le jardinier plante ${a} tulipes et ${b} roses. Combien de fleurs plante-t-il ?`,
+  (p, a, b) => `Au musée des dinosaures, il y a ${a} fossiles dans une salle et ${b} dans l'autre. Combien de fossiles en tout ?`,
+  (p, a, b) => `Le train transporte ${a} voyageurs. À la gare, ${b} voyageurs montent. Combien sont-ils dans le train ?`,
+  (p, a, b) => `L'astronaute compte ${a} étoiles sur une photo et ${b} sur une autre. Combien d'étoiles en tout ?`,
+  (p, a, b) => `À la piscine, ${a} enfants sont venus en juin et ${b} en juillet. Combien d'enfants en tout ?`,
+  (p, a, b) => `La fermière a ramassé ${a} œufs cette semaine et ${b} la semaine dernière. Combien d'œufs en tout ?`,
+];
+
+const RETRAITS: readonly Sit[] = [
+  (p, a, b) => `La bibliothèque avait ${a} livres. Elle en prête ${b}. Combien de livres reste-t-il sur les étagères ?`,
+  (p, a, b) => `${p.nom} a ${a} points au jeu. ${maj(p.il)} en perd ${b}. Combien de points lui reste-t-il ?`,
+  (p, a, b) => `Le cirque a ${a} places. ${b} places sont déjà vendues. Combien de places restent libres ?`,
+  (p, a, b) => `Les pirates avaient ${a} pièces d'or. Ils en dépensent ${b}. Combien de pièces d'or leur reste-t-il ?`,
+  (p, a, b) => `La boulangère a fait ${a} croissants. Elle en a vendu ${b}. Combien de croissants lui reste-t-il ?`,
+  (p, a, b) => `Le chemin de randonnée fait ${a} mètres. ${p.nom} a déjà marché ${b} mètres. Combien de mètres lui reste-t-il ?`,
+  (p, a, b) => `À la kermesse, il y avait ${a} ballons. ${b} ballons sont partis dans le ciel. Combien en reste-t-il ?`,
+  (p, a, b) => `Le jardinier avait ${a} graines. Il en sème ${b}. Combien de graines lui reste-t-il ?`,
+  (p, a, b) => `Le train transporte ${a} voyageurs. À la gare, ${b} voyageurs descendent. Combien en reste-t-il dans le train ?`,
+  (p, a, b) => `La fusée a ${a} litres de carburant. Elle en brûle ${b} au décollage. Combien de litres lui reste-t-il ?`,
+  (p, a, b) => `${p.nom} lit un livre de ${a} pages. ${maj(p.il)} en a lu ${b}. Combien de pages lui reste-t-il ?`,
+  (p, a, b) => `Le zoo a reçu ${a} kilos de fruits. Les singes en ont mangé ${b}. Combien de kilos reste-t-il ?`,
+  (p, a, b) => `La cantine avait ${a} yaourts. ${b} ont été mangés à midi. Combien de yaourts reste-t-il ?`,
+  (p, a, b) => `Au marché de Saint-Pierre, le marchand avait ${a} letchis. Il en vend ${b}. Combien lui en reste-t-il ?`,
+];
+
+/* ---------------------------------------------------------
+   POSER UNE ADDITION, UNE SOUSTRACTION
+--------------------------------------------------------- */
+
+function additionPosee(a: number, b: number): Q {
+  const r = a + b;
+  const p = quelquun();
+  const f = rint(1, 10);
+  const canvas = pose("addition", [a, b]);
+  if (f <= 6) {
+    const text = pick([
+      poserCalcul(`${fmt(a)} + ${fmt(b)}`, p),
+      `Pose et calcule : ${fmt(a)} + ${fmt(b)}.`,
+      `${p.nom} pose l'addition ${fmt(a)} + ${fmt(b)}. Quel résultat doit-${p.il} trouver ?`,
+      `Voici une addition posée. Quel est son résultat ?`,
+      `${p.nom} a posé ${fmt(a)} + ${fmt(b)} dans son cahier. Combien trouve-${tIl(p)} ?`,
+    ]);
+    return qN(
+      text,
+      r,
+      [sansRetenue(a, b), r + 10, r - 10, r + 100, r - 100, r + 1, a + b * 10],
+      exp(
+        "On additionne colonne par colonne en partant des unités ; dix unités d'un rang font une unité du rang suivant (la retenue).",
+        "On aligne les unités sous les unités, puis on avance vers la gauche en portant les retenues.",
+        `Unités : ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}${(a % 10) + (b % 10) >= 10 ? `, on écrit ${((a % 10) + (b % 10)) % 10} et on retient 1` : ""}. On continue vers la gauche : le total est ${fmt(r)}.`,
+        `${fmt(a)} + ${fmt(b)} = ${fmt(r)}.`,
+      ),
+      { canvas },
+    );
+  }
+  if (f <= 8) {
+    const rang = pick(["unités", "dizaines"] as const);
+    const chiffre = rang === "unités" ? r % 10 : Math.floor(r / 10) % 10;
+    const faux = rang === "unités" ? ((a % 10) + (b % 10)) : (Math.floor(a / 10) % 10) + (Math.floor(b / 10) % 10);
+    return chiffreQ(chiffre, faux, rang, a, b, r, p);
+  }
+  const ret = (a % 10) + (b % 10) >= 10;
+  return qM(
+    pick([
+      `Dans l'addition ${fmt(a)} + ${fmt(b)}, faut-il une retenue en passant des unités aux dizaines ?`,
+      `${p.nom} pose ${fmt(a)} + ${fmt(b)}. Doit-${p.il} écrire une retenue au-dessus des dizaines ?`,
+    ]),
+    ret ? `oui, car ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}` : `non, car ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}`,
+    [
+      ret ? `non, car ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}` : `oui, car ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}`,
+      "on ne peut pas savoir avant d'avoir fini",
+      "oui, il y a toujours une retenue",
+    ],
+    exp("On met une retenue quand une colonne dépasse 9.", "On regarde la somme des unités.", `${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}.`, ret ? "Elle dépasse 9 : une dizaine part dans la colonne des dizaines." : "Elle ne dépasse pas 9 : pas de retenue."),
+    { canvas },
+  );
+}
+
+/** Le chiffre d'un rang du résultat : les choix sont des chiffres de 0 à 9. */
+function chiffreQ(chiffre: number, faux: number, rang: string, a: number, b: number, r: number, p: Prenom): Q {
+  const pieges = [faux % 10, (chiffre + 1) % 10, (chiffre + 9) % 10, (chiffre + 2) % 10, (chiffre + 8) % 10].filter((d) => d !== chiffre).map(String);
+  return qM(
+    pick([
+      `Dans cette addition posée, quel chiffre écrit-on dans la colonne des ${rang} du résultat ?`,
+      `${p.nom} pose ${fmt(a)} + ${fmt(b)}. Quel chiffre doit-${p.il} écrire aux ${rang} du résultat ?`,
+      `Regarde l'addition posée. Quel est le chiffre des ${rang} du résultat ?`,
+      `${p.nom} a commencé l'addition posée. Quel chiffre va dans la colonne des ${rang}, en bas ?`,
+    ]),
+    String(chiffre),
+    pieges,
+    exp("Dans chaque colonne, on écrit le chiffre des unités de la somme, et on retient les dizaines.", `On additionne la colonne des ${rang}${rang === "dizaines" ? ", sans oublier la retenue des unités" : ""}.`, `Le résultat complet est ${fmt(r)} : le chiffre des ${rang} est ${chiffre}.`, `On écrit ${chiffre}.`),
+    { canvas: pose("addition", [a, b]) },
+  );
+}
+
+function soustractionPosee(a: number, b: number): Q {
+  const r = a - b;
+  const p = quelquun();
+  const f = rint(1, 10);
+  const canvas = pose("soustraction", [a, b]);
+  if (f <= 7) {
+    return qN(
+      pick([
+        poserCalcul(`${fmt(a)} − ${fmt(b)}`, p),
+        `Pose et calcule : ${fmt(a)} − ${fmt(b)}.`,
+        `${p.nom} pose la soustraction ${fmt(a)} − ${fmt(b)}. Quel résultat doit-${p.il} trouver ?`,
+        `Voici une soustraction posée. Quel est son résultat ?`,
+        `${p.nom} a posé ${fmt(a)} − ${fmt(b)} dans son cahier. Combien trouve-${tIl(p)} ?`,
+      ]),
+      r,
+      [aLEnvers(a, b), r + 10, r - 10, r + 100, r - 100, r + 1, a + b],
+      exp(
+        "On soustrait colonne par colonne en partant des unités. Si le chiffre du haut est trop petit, on casse une dizaine (ou une centaine) du rang de gauche.",
+        "On ne retourne jamais la colonne : on prend toujours le chiffre du haut moins celui du bas.",
+        `${fmt(a)} − ${fmt(b)} = ${fmt(r)}. Vérification : ${fmt(r)} + ${fmt(b)} = ${fmt(a)}.`,
+        `${fmt(a)} − ${fmt(b)} = ${fmt(r)}.`,
+      ),
+      { canvas },
+    );
+  }
+  return qN(
+    pick([
+      `Pour vérifier ${fmt(a)} − ${fmt(b)} = ${fmt(r)}, ${p.nom} fait une addition. Que doit-${p.il} retrouver ?`,
+      `${p.nom} trouve ${fmt(a)} − ${fmt(b)} = ${fmt(r)}. ${maj(p.il)} calcule ${fmt(r)} + ${fmt(b)} pour vérifier. Quel nombre doit-${p.il} trouver ?`,
+      `On vérifie une soustraction avec une addition : combien font ${fmt(r)} + ${fmt(b)} ?`,
+    ]),
+    a,
+    [r, b, a + 10, a - 10, r + b + 1],
+    exp("Une soustraction se vérifie par une addition.", "Résultat + nombre du bas = nombre du haut.", `${fmt(r)} + ${fmt(b)} = ${fmt(a)}.`, `On retrouve ${fmt(a)} : le calcul est juste.`),
+    { canvas },
+  );
+}
+
+/** Deux nombres pour une soustraction posée avec au moins une retenue. */
+function deuxPourSoustraire(etoile: Etoile): [number, number] {
+  for (;;) {
+    const a = etoile <= 3 ? (Math.random() < 0.5 ? rint(210, 980) : rint(1010, 4900)) : rint(1200, 9600);
+    const b = rint(etoile <= 3 ? 35 : 180, Math.floor(a * 0.8));
+    if (aLEnvers(a, b) !== a - b) return [a, b];
+  }
+}
+
+function erreurSoustraction(): Q {
+  const p = quelquun();
+  for (;;) {
+    const [a, b] = deuxPourSoustraire(4);
+    const faux = aLEnvers(a, b);
+    if (faux === a - b) continue;
+    const r = a - b;
+    return qN(
+      pick([
+        `${p.nom} calcule ${fmt(a)} − ${fmt(b)} et trouve ${fmt(faux)}. ${maj(p.il)} a retourné une colonne. Quelle est la bonne réponse ?`,
+        `Voici la soustraction posée par ${p.nom}. ${maj(p.il)} trouve ${fmt(faux)}, mais c'est faux. Quel est le bon résultat ?`,
+        `${p.nom} a fait « le grand moins le petit » dans chaque colonne de ${fmt(a)} − ${fmt(b)}. Quel résultat aurait-${p.il} dû trouver ?`,
+      ]),
+      r,
+      [faux, r + 10, r - 10, r + 100, r - 100],
+      exp(
+        "Dans une soustraction posée, on prend toujours le chiffre du haut moins celui du bas.",
+        "Quand le chiffre du haut est trop petit, on casse une dizaine (ou une centaine) du rang de gauche.",
+        `${fmt(a)} − ${fmt(b)} = ${fmt(r)} ; vérification : ${fmt(r)} + ${fmt(b)} = ${fmt(a)}. Avec ${fmt(faux)}, on ne retrouve pas ${fmt(a)}.`,
+        `Le bon résultat est ${fmt(r)}.`,
+      ),
+      { canvas: { ...pose("soustraction", [a, b]), result: String(faux), display: { showResult: true, showRetenues: false } } },
+    );
+  }
+}
+
+function enSituation(plus: boolean, a: number, b: number): Q {
+  const p = quelquun();
+  const A = fmt(a);
+  const B = fmt(b);
+  const r = plus ? a + b : a - b;
+  const text = pick(plus ? REUNIONS : RETRAITS)(p, A, B);
+  const dessin = pick(["pose", "barre", "aucun"] as const);
+  const canvas =
+    dessin === "pose"
+      ? pose(plus ? "addition" : "soustraction", [a, b])
+      : dessin === "barre"
+        ? plus
+          ? barre([["", A], ["", B]], null)
+          : barre([["", B], ["il reste", null]], A)
+        : undefined;
+  return qN(
+    text,
+    r,
+    plus ? [sansRetenue(a, b), r + 10, r - 10, r + 100, a - b] : [aLEnvers(a, b), r + 10, r - 10, r + 100, a + b],
+    exp(
+      plus ? "Quand on réunit deux quantités, on les additionne." : "Quand on enlève une quantité, on fait une soustraction.",
+      plus ? `On pose ${A} + ${B}, unités sous unités.` : `On pose ${A} − ${B}, unités sous unités.`,
+      plus ? `${A} + ${B} = ${fmt(r)}.` : `${A} − ${B} = ${fmt(r)} ; vérification : ${fmt(r)} + ${B} = ${A}.`,
+      `La réponse est ${fmt(r)}.`,
+    ),
+    avec(canvas),
+  );
+}
+
+/* ---------------------------------------------------------
+   LE VOCABULAIRE : terme, somme, différence
+--------------------------------------------------------- */
+
+function vocabulaire(): Q {
+  const p = quelquun();
+  const a = rint(24, 380);
+  const b = rint(11, a - 5);
+  const f = rint(1, 6);
+  if (f === 1)
+    return qM(
+      pick([
+        `Quelle est la somme de ${a} et de ${b} ?`,
+        `${p.nom} doit calculer la somme de ${a} et de ${b}. Que trouve-${tIl(p)} ?`,
+        `Calcule la somme de ${a} et de ${b}.`,
+      ]),
+      fmt(a + b),
+      [`${a} + ${b}`, fmt(a - b), fmt(a + b + 1), fmt(a + b + 10)],
+      exp("La somme est le RÉSULTAT d'une addition.", "On additionne les deux termes.", `${a} + ${b} = ${a + b}.`, `La somme est ${a + b}.`),
+      avec(parfois(0.6, () => barre([["", String(a)], ["", String(b)]], null))),
+    );
+  if (f === 2)
+    return qM(
+      pick([
+        `Quelle est la différence entre ${a} et ${b} ?`,
+        `${p.nom} cherche la différence entre ${a} et ${b}. Que trouve-${tIl(p)} ?`,
+        `Calcule la différence entre ${a} et ${b}.`,
+      ]),
+      fmt(a - b),
+      [`${a} − ${b}`, fmt(a + b), fmt(a - b + 1), fmt(a - b + 10)],
+      exp("La différence est le RÉSULTAT d'une soustraction : l'écart entre deux nombres.", "On enlève le plus petit du plus grand.", `${a} − ${b} = ${a - b}.`, `La différence est ${a - b}.`),
+      avec(parfois(0.6, () => barre([["", String(b)], ["écart", null]], String(a)))),
+    );
+  if (f === 3) {
+    const plus = Math.random() < 0.5;
+    const c = plus ? a + b : a - b;
+    const bon = plus ? "la somme" : "la différence";
+    return qM(
+      pick([
+        `Dans ${a} ${plus ? "+" : "−"} ${b} = ${c}, comment appelle-t-on ${c} ?`,
+        `${p.nom} écrit ${a} ${plus ? "+" : "−"} ${b} = ${c}. Quel nom porte ${c} ?`,
+        `Pic le paille-en-queue montre le ${c} de ${a} ${plus ? "+" : "−"} ${b} = ${c}. Comment s'appelle-t-il ?`,
+      ]),
+      bon,
+      [plus ? "la différence" : "la somme", "un terme", "le produit"],
+      exp("La somme est le résultat d'une addition, la différence celui d'une soustraction. Les nombres qu'on ajoute ou qu'on soustrait sont les termes.", "On regarde le signe de l'opération.", `Le signe est « ${plus ? "+" : "−"} » : ${c} est ${bon}.`, `${c} est ${bon}.`),
+    );
+  }
+  if (f === 4) {
+    const plus = Math.random() < 0.5;
+    const c = plus ? a + b : a - b;
+    return qM(
+      pick([
+        `Dans ${a} ${plus ? "+" : "−"} ${b} = ${c}, comment appelle-t-on ${a} et ${b} ?`,
+        `${p.nom} écrit ${a} ${plus ? "+" : "−"} ${b} = ${c}. Comment s'appellent ${a} et ${b} ?`,
+      ]),
+      "les termes",
+      [plus ? "les sommes" : "les différences", "les facteurs", "les résultats"],
+      exp("Les nombres qu'on ajoute ou qu'on soustrait s'appellent les termes.", "Le résultat a son propre nom : somme ou différence.", `${a} et ${b} sont les termes ; ${c} est ${plus ? "la somme" : "la différence"}.`, "Ce sont les termes."),
+    );
+  }
+  if (f === 5) {
+    const dit = Math.random() < 0.5 ? a + b : a - b;
+    const juste = dit === a + b;
+    return qM(
+      pick([
+        `${p.nom} dit : « La somme de ${a} et de ${b}, c'est ${dit}. » A-t-${p.il} raison ?`,
+        `Pic le paille-en-queue annonce que la somme de ${a} et de ${b} est ${dit}. Est-ce juste ?`,
+      ]),
+      juste ? "oui, c'est le résultat de l'addition" : `non, ${dit} est leur différence`,
+      [juste ? `non, ${dit} est leur différence` : "oui, c'est le résultat de l'addition", "non, la somme est un des termes", "on ne peut pas savoir"],
+      exp("La somme est le résultat de l'addition.", `On calcule ${a} + ${b}.`, `${a} + ${b} = ${a + b}${juste ? "" : ` ; ${a} − ${b} = ${a - b}, c'est la différence`}.`, juste ? "Oui, c'est bien la somme." : "Non : c'est la différence."),
+    );
+  }
+  const [x, y] = deuxPersonnes();
+  const m = pick(MONDES);
+  if (Math.random() < 0.5)
+    return qM(
+      `${x.nom} a ${nObj(a, m)} et ${y.nom} en a ${b}. Quelle est la différence entre leurs nombres ${de(m.des)} ?`,
+      fmt(a - b),
+      [fmt(a + b), fmt(a - b + 10), fmt(a - b - 1), `${a} − ${b}`],
+      exp("La différence est le résultat d'une soustraction.", "On enlève le plus petit nombre du plus grand.", `${a} − ${b} = ${a - b}.`, `La différence est ${a - b}.`),
+      avec(parfois(0.6, () => barre([[y.nom, String(b)], ["écart", null]], String(a)))),
+    );
+  return qM(
+    `${x.nom} a ${nObj(a, m)} et ${y.nom} en a ${b}. Quelle est la somme de leurs ${m.des} ?`,
+    fmt(a + b),
+    [fmt(a - b), fmt(a + b + 10), fmt(a + b + 1), `${a} + ${b}`],
+    exp("La somme est le résultat d'une addition.", "On additionne les deux nombres.", `${a} + ${b} = ${a + b}.`, `La somme est ${a + b}.`),
+    avec(parfois(0.6, () => barre([[x.nom, String(a)], [y.nom, String(b)]], null))),
+  );
+}
+
+/* ---------------------------------------------------------
+   COMPLÉTER UNE ÉGALITÉ
+--------------------------------------------------------- */
+
+function completerPlus(a: number, c: number): Q {
+  const r = c - a;
+  const p = quelquun();
+  const m = monde();
+  const text = pick([
+    `Complète : ${fmt(a)} + … = ${fmt(c)}`,
+    `Quel nombre manque : ${fmt(a)} + ? = ${fmt(c)} ?`,
+    `Complète : … + ${fmt(a)} = ${fmt(c)}`,
+    `${p.nom} cherche le nombre caché : ${fmt(a)} + ? = ${fmt(c)}.`,
+    `${p.nom} a ${nObj(a, m)}. ${maj(p.il)} en veut ${fmt(c)}. Combien lui en manque-t-il ?`,
+    `Pic le paille-en-queue a ${fmt(a)} graines. Combien doit-il en trouver pour en avoir ${fmt(c)} ?`,
+    `Le cirque a ${fmt(c)} places. ${fmt(a)} sont occupées. Combien sont libres ?`,
+    `${p.nom} a déjà ${fmt(a)} points. Il en faut ${fmt(c)} pour gagner. Combien de points lui manque-t-il ?`,
+    `${p.nom} lit un livre de ${fmt(c)} pages. ${maj(p.il)} est à la page ${fmt(a)}. Combien de pages lui reste-t-il ?`,
+    `Le jardinier veut planter ${fmt(c)} fleurs. Il en a planté ${fmt(a)}. Combien lui en reste-t-il à planter ?`,
+    `Les pirates veulent ${fmt(c)} pièces d'or. Ils en ont ${fmt(a)}. Combien leur en manque-t-il ?`,
+    `La fusée doit monter à ${fmt(c)} mètres. Elle est à ${fmt(a)} mètres. Combien de mètres lui manque-t-il ?`,
+    `${p.nom} écrit ${fmt(a)} + … = ${fmt(c)} sur son ardoise. Quel nombre doit-${p.il} écrire à la place des points ?`,
+    `Le puzzle ${de(p.nom)} a ${fmt(c)} pièces. ${maj(p.il)} en a posé ${fmt(a)}. Combien de pièces reste-t-il ?`,
+  ]);
+  return qN(
+    text,
+    r,
+    [r + 10, r - 10, r + 1, r - 1, a + c, r + 100],
+    exp("Compléter une addition, c'est chercher ce qui manque.", `On calcule l'écart : ${fmt(c)} − ${fmt(a)}.`, `${fmt(c)} − ${fmt(a)} = ${fmt(r)}, et ${fmt(a)} + ${fmt(r)} = ${fmt(c)}.`, `Le nombre qui manque est ${fmt(r)}.`),
+    avec(parfois(0.6, () => barre([["", fmt(a)], ["", null]], fmt(c)))),
+  );
+}
+
+function completerMoins(): Q {
+  const p = quelquun();
+  const b = rint(24, 480);
+  const r = rint(15, 480);
+  const a = b + r;
+  if (Math.random() < 0.55) {
+    // … − b = r : on cherche le nombre de départ.
+    return qN(
+      pick([
+        `Complète : … − ${b} = ${r}`,
+        `Quel nombre manque : ? − ${b} = ${r} ?`,
+        `${p.nom} avait des billes. ${maj(p.il)} en a donné ${b}, il lui en reste ${r}. Combien en avait-${p.il} ?`,
+        `La boulangère a vendu ${b} croissants. Il lui en reste ${r}. Combien en avait-elle fait ?`,
+        `Pic le paille-en-queue a mangé ${b} graines. Il lui en reste ${r}. Combien en avait-il au départ ?`,
+        `${p.nom} cherche le nombre de départ : ? − ${b} = ${r}.`,
+        `Le jardinier a semé ${b} graines. Il lui en reste ${r}. Combien de graines avait-il ?`,
+        `${p.nom} a perdu ${b} points au jeu. ${maj(p.il)} en a encore ${r}. Combien de points avait-${p.il} avant ?`,
+        `Les pirates ont dépensé ${b} pièces d'or. Il leur en reste ${r}. Combien en avaient-ils ?`,
+      ]),
+      a,
+      [r - b > 0 ? r - b : r + b + 10, a + 10, a - 10, a + 1, a - 1, a + 100],
+      exp("Pour retrouver le nombre de départ d'une soustraction, on fait le chemin inverse.", `On ajoute ce qu'on a enlevé à ce qui reste : ${r} + ${b}.`, `${r} + ${b} = ${a}, et ${a} − ${b} = ${r}.`, `Le nombre qui manque est ${a}.`),
+      avec(parfois(0.6, () => barre([["enlevé", String(b)], ["reste", String(r)]], null))),
+    );
+  }
+  // a − … = r : on cherche ce qu'on a enlevé.
+  return qN(
+    pick([
+      `Complète : ${a} − … = ${r}`,
+      `Quel nombre manque : ${a} − ? = ${r} ?`,
+      `${p.nom} avait ${a} images. Il lui en reste ${r}. Combien en a-t-${p.il} donné ?`,
+      `Le train transportait ${a} voyageurs. Il en reste ${r}. Combien sont descendus ?`,
+      `${p.nom} cherche le nombre caché : ${a} − ? = ${r}.`,
+      `La bibliothèque avait ${a} livres. Il en reste ${r} sur les étagères. Combien de livres sont prêtés ?`,
+      `${p.nom} avait ${a} points. ${maj(p.il)} n'en a plus que ${r}. Combien de points a-t-${p.il} perdus ?`,
+    ]),
+    b,
+    [a + r, b + 10, b - 10, b + 1, b - 1],
+    exp("Dans une soustraction, ce qu'on enlève est l'écart entre le départ et ce qui reste.", `On calcule ${a} − ${r}.`, `${a} − ${r} = ${b}, et ${a} − ${b} = ${r}.`, `Le nombre qui manque est ${b}.`),
+    avec(parfois(0.6, () => barre([["enlevé", null], ["reste", String(r)]], String(a)))),
+  );
+}
+
+/* ---------------------------------------------------------
+   ESTIMER
+--------------------------------------------------------- */
+
+const proche = (c: number) => c * 100 + pick([-3, -2, -1, 1, 2, 3, 4, -4, 5]);
+
+function estimer(): Q {
+  const p = quelquun();
+  const ca = rint(2, 6);
+  const cb = rint(1, 4);
+  const a = proche(ca);
+  const b = proche(cb);
+  const plus = Math.random() < 0.65;
+  const vrai = plus ? ca + cb : ca - cb;
+  const cible = plus ? ca + cb : ca - cb;
+  if (!plus && cible <= 0) return estimer();
+  const opt = (k: number) => `environ ${fmt(k * 100)}`;
+  const calc = `${a} ${plus ? "+" : "−"} ${b}`;
+  const sit = plus
+    ? pick([
+        `Au cinéma, il y a eu ${a} enfants le matin et ${b} l'après-midi. Environ combien d'enfants en tout ?`,
+        `${p.nom} a ${a} images et en reçoit ${b}. Environ combien en a-t-${p.il} ?`,
+        `La fermière a ${a} poules et ${b} canards. Environ combien d'animaux ?`,
+        `Le zoo a reçu ${a} visiteurs samedi et ${b} dimanche. Environ combien de visiteurs ?`,
+        `Les pirates trouvent ${a} pièces d'or, puis ${b} autres. Environ combien de pièces ont-ils ?`,
+        `${p.nom} fait ${a} pas le matin et ${b} pas le soir. Environ combien de pas en tout ?`,
+        `La boulangère vend ${a} croissants et ${b} baguettes. Environ combien de viennoiseries et de pains ?`,
+      ])
+    : pick([
+        `La bibliothèque a ${a} livres. Elle en prête ${b}. Environ combien en reste-t-il ?`,
+        `Le cirque a ${a} places. ${b} sont vendues. Environ combien de places restent ?`,
+        `${p.nom} a ${a} images. ${maj(p.il)} en donne ${b}. Environ combien lui en reste-t-il ?`,
+        `La fusée a ${a} litres d'eau. Les astronautes en boivent ${b}. Environ combien de litres reste-t-il ?`,
+        `Le jardinier a ${a} graines. Il en sème ${b}. Environ combien lui en reste-t-il ?`,
+      ]);
+  const text = pick([
+    `Environ combien font ${calc} ?`,
+    `Sans calculer exactement, ${calc} fait environ…`,
+    `${p.nom} arrondit pour estimer ${calc}. Que trouve-${tIl(p)} ?`,
+    `Pic le paille-en-queue veut un ordre de grandeur de ${calc}. Lequel ?`,
+    `${p.nom} ne veut pas poser ${calc}. ${maj(p.il)} cherche juste un résultat proche. Lequel ?`,
+    `Avant de poser ${calc}, ${p.nom} estime le résultat. Que trouve-${tIl(p)} ?`,
+    sit,
+    sit,
+    sit,
+  ]);
+  return qM(
+    text,
+    opt(vrai),
+    [opt(vrai + 1), opt(vrai - 1), opt(vrai + 2), opt(plus ? ca * cb : ca + cb)].filter((o) => !o.includes(" 0") && !o.includes("-")),
+    exp("Estimer, c'est calculer avec des nombres ronds proches des vrais.", "On remplace chaque nombre par la centaine la plus proche.", `${a} ≈ ${ca * 100} et ${b} ≈ ${cb * 100}. ${ca * 100} ${plus ? "+" : "−"} ${cb * 100} = ${cible * 100}.`, `Le résultat est ${opt(vrai)} (exactement ${plus ? a + b : a - b}).`),
+  );
+}
+
+function resultatPossible(): Q {
+  const p = quelquun();
+  const ca = rint(2, 6);
+  const cb = rint(1, 3);
+  const a = proche(ca);
+  const b = proche(cb);
+  const juste = a + b;
+  const type = rint(1, 4);
+  const annonce = type === 1 ? juste : type === 2 ? juste + 1000 : type === 3 ? Math.floor(juste / 10) : juste - 200;
+  const bon = type === 1 ? "oui, il est proche de l'estimation" : "non, il est trop loin de l'estimation";
+  const estim = (ca + cb) * 100;
+  return qM(
+    pick([
+      `${p.nom} calcule ${a} + ${b} et annonce ${fmt(annonce)}. Sans poser le calcul, ce résultat est-il possible ?`,
+      `Voici l'addition posée par ${p.nom}. ${maj(p.il)} trouve ${fmt(annonce)}. Ce résultat est-il possible ?`,
+      `Pic le paille-en-queue dit que ${a} + ${b} = ${fmt(annonce)}. Peut-on le croire ?`,
+      `${p.nom} a trouvé ${fmt(annonce)} pour ${a} + ${b}. Est-ce vraisemblable ?`,
+    ]),
+    bon,
+    [type === 1 ? "non, il est trop loin de l'estimation" : "oui, il est proche de l'estimation", "on ne peut rien dire sans poser le calcul", "oui, s'il y a une retenue"],
+    exp("Une estimation permet de repérer un résultat impossible.", "On arrondit chaque nombre à la centaine.", `${a} ≈ ${ca * 100}, ${b} ≈ ${cb * 100}, donc le total est proche de ${estim}.`, type === 1 ? `${fmt(annonce)} est proche de ${estim} : c'est possible.` : `${fmt(annonce)} est loin de ${estim} : c'est impossible.`),
+    { canvas: { ...pose("addition", [a, b]), result: String(annonce), display: { showResult: true, showRetenues: false } } },
+  );
+}
+
+/* ---------------------------------------------------------
+   LES DÉFIS
+--------------------------------------------------------- */
+
+function chiffreCache(): Q {
+  const p = quelquun();
+  const plus = Math.random() < 0.6;
+  for (;;) {
+    const a = rint(120, 899);
+    const b = rint(105, 899);
+    if (!plus && a <= b) continue;
+    const r = plus ? a + b : a - b;
+    if (r > 9999) continue;
+    const pos = rint(0, 2);
+    const s = String(a);
+    const cache = Number(s[s.length - 1 - pos]);
+    const masque = s.slice(0, s.length - 1 - pos) + "?" + s.slice(s.length - pos);
+    const op = plus ? "+" : "−";
+    return qM(
+          pick([
+            `Dans l'opération ${masque} ${op} ${b} = ${fmt(r)}, quel chiffre se cache derrière le point d'interrogation ?`,
+            `${p.nom} a fait une tache d'encre sur son opération : ${masque} ${op} ${b} = ${fmt(r)}. Quel chiffre est caché ?`,
+            `Pic le paille-en-queue a posé son aile sur un chiffre de l'opération posée. Quel chiffre se cache sous le « ? » ?`,
+            `Retrouve le chiffre caché : ${masque} ${op} ${b} = ${fmt(r)}.`,
+          ]),
+          String(cache),
+          [(cache + 1) % 10, (cache + 9) % 10, (cache + 2) % 10, (cache + 5) % 10].map(String),
+          exp(
+            plus ? "Dans une addition, le nombre de départ est le résultat moins l'autre terme." : "Dans une soustraction, le nombre de départ est le résultat plus le nombre enlevé.",
+            plus ? `On calcule ${fmt(r)} − ${b}.` : `On calcule ${fmt(r)} + ${b}.`,
+            plus ? `${fmt(r)} − ${b} = ${a}.` : `${fmt(r)} + ${b} = ${a}.`,
+            `Le nombre est ${a} : le chiffre caché est ${cache}.`,
+          ),
+          { canvas: { kind: "calcul_pose", operation: plus ? "addition" : "soustraction", numbers: [masque, String(b)], result: String(r), display: { showResult: true, showRetenues: false } } },
+        );
+  }
+}
+
+function deuxEtapes(): Q {
+  const p = quelquun();
+  const total = rint(250, 980);
+  const x = rint(60, Math.floor(total / 2));
+  const y = rint(30, total - x - 20);
+  const r = total - x - y;
+  const sit = pick([
+    `Dans la bibliothèque de l'école, il y a ${total} livres. ${x} sont empruntés le matin et ${y} l'après-midi. Combien de livres reste-t-il ?`,
+    `Une école a ${total} élèves. ${x} partent au zoo le matin et ${y} au musée l'après-midi. Combien d'élèves ne sont pas partis ?`,
+    `Les pirates ont ${total} pièces d'or. Ils en dépensent ${x} au port, puis ${y} au marché. Combien leur en reste-t-il ?`,
+    `${p.nom} a ${total} points au jeu. ${maj(p.il)} en perd ${x}, puis encore ${y}. Combien de points lui reste-t-il ?`,
+    `La fusée emporte ${total} litres d'eau. Les astronautes en boivent ${x} la première semaine et ${y} la deuxième. Combien de litres reste-t-il ?`,
+    `Le jardinier a ${total} graines. Il en sème ${x} lundi et ${y} mardi. Combien de graines lui reste-t-il ?`,
+    `Le cirque a ${total} places. ${x} sont vendues samedi et ${y} dimanche. Combien de places restent libres ?`,
+    `La boulangère a fait ${total} croissants. Elle en vend ${x} le matin et ${y} l'après-midi. Combien lui en reste-t-il ?`,
+  ]);
+  return qN(
+    sit,
+    r,
+    [total - x, total - y, total + x - y, x + y, r + 10, r - 10],
+    exp("Quand on enlève deux fois, on peut enlever les deux quantités l'une après l'autre, ou d'un coup.", `On ajoute ce qui part (${x} + ${y}), puis on l'enlève du total.`, `${x} + ${y} = ${x + y}, puis ${total} − ${x + y} = ${r}.`, `Il reste ${r}.`),
+    avec(parfois(0.7, () => barre([["", String(x)], ["", String(y)], ["reste", null]], String(total)))),
+  );
+}
+
+/* =========================================================
+   LES ITEMS
+========================================================= */
+
+const GABARITS: TutorBankItemV4[] = [
+  g("ce2_addition_posee_tpl_1", "ce2_addition_posee", 3, "Colonne par colonne, en partant des unités.", ["addition", "posee", "canvas"], () => {
+    const [a, b] = deuxNombres(3);
+    return additionPosee(a, b);
+  }),
+  g("ce2_addition_posee_tpl_2", "ce2_addition_posee", 4, "Additionne les deux nombres : les unités d'abord.", ["addition", "posee", "probleme"], () => {
+    const [a, b] = deuxNombres(4);
+    return Math.random() < 0.6 ? enSituation(true, a, b) : additionPosee(a, b);
+  }),
+  g("ce2_soustraction_posee_tpl_1", "ce2_soustraction_posee", 3, "Le chiffre du haut moins celui du bas ; s'il est trop petit, casse une dizaine.", ["soustraction", "posee", "canvas"], () => {
+    const [a, b] = deuxPourSoustraire(3);
+    return soustractionPosee(a, b);
+  }),
+  g("ce2_soustraction_posee_tpl_2", "ce2_soustraction_posee", 4, "On ne retourne jamais une colonne.", ["soustraction", "posee", "piege"], () => {
+    if (Math.random() < 0.4) return erreurSoustraction();
+    const [a, b] = deuxPourSoustraire(4);
+    return Math.random() < 0.6 ? enSituation(false, a, b) : soustractionPosee(a, b);
+  }),
+  g("ce2_add_sous_vocabulaire_tpl_1", "ce2_add_sous_vocabulaire", 3, "La somme et la différence sont des RÉSULTATS.", ["vocabulaire"], vocabulaire),
+  g("ce2_add_sous_complement_tpl_1", "ce2_add_sous_complement", 3, "Cherche l'écart entre les deux nombres.", ["complement"], () => {
+    const f = rint(1, 3);
+    if (f === 1) return completerPlus(rint(12, 88), 100);
+    if (f === 2) {
+      const c = pick([500, 1000, 1000]);
+      return completerPlus(rint(110, c - 30), c);
+    }
+    const a = rint(45, 680);
+    return completerPlus(a, a + rint(25, 480));
+  }),
+  g("ce2_add_sous_complement_tpl_2", "ce2_add_sous_complement", 4, "Pour retrouver un nombre caché, fais le chemin inverse.", ["complement"], () =>
+    Math.random() < 0.75 ? completerMoins() : completerPlus(rint(1200, 4800), rint(5, 9) * 1000),
+  ),
+  g("ce2_add_sous_estimer_tpl_1", "ce2_add_sous_estimer", 3, "Arrondis chaque nombre à la centaine.", ["estimer"], estimer),
+  g("ce2_add_sous_estimer_tpl_2", "ce2_add_sous_estimer", 4, "Compare avec l'estimation.", ["estimer"], resultatPossible),
+  g("ce2_add_sous_defi_tpl_1", "ce2_add_sous_defi", 5, "Fais l'opération inverse pour retrouver le chiffre.", ["defi"], chiffreCache),
+  g("ce2_add_sous_defi_tpl_2", "ce2_add_sous_defi", 5, "Additionne ce qui part, puis enlève-le.", ["defi"], () => (Math.random() < 0.7 ? deuxEtapes() : completerMoins())),
+];
+
+export const additionSoustractionBank: TutorBankItemV4[] = [...FIXES, ...GABARITS];

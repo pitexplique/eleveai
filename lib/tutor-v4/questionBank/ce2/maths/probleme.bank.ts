@@ -15,281 +15,47 @@
 //
 // ⚠️ Aucun résultat ni aucun piège ne descend sous zéro : les nombres relatifs
 // entrent en 5e. On ne retire jamais plus qu'il n'y a.
+//
+// ⛔ LES SQUELETTES (10/11/2026). Mesuré avec scripts/mesurer-squelettes-coach.ts :
+// 8 des 10 micros étaient sous le seuil (6 à 252 squelettes, jusqu'à 18
+// répétitions sur 20), et 3 contextes sur 7 venaient de La Réunion. Chaque
+// gabarit tire maintenant une FAMILLE, une RÉSERVE (23 mondes d'enfant et
+// métiers : pirates, boulangère, vétérinaire, astronaute, cirque… ; La Réunion
+// une fois sur 23), une TOURNURE et un enfant de la troupe.
+// ⭐ Dessins : schéma en barres (parties-tout, comparaison, parts égales),
+// objets en groupes ou en vrac (choisir l'opération), billet (achats),
+// tableau des associations (produit cartésien). Outils : ./outils-calcul-ce2.ts.
 
-import type { SchemaBarreCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import {
+  type Etoile,
+  type Prenom,
+  type Q,
+  barre,
+  barreEgale,
+  de,
+  deuxPersonnes,
+  exp,
+  fmt,
+  gabarit,
+  maj,
+  mondeDessinable,
+  objetsEnVrac,
+  objetsGroupes,
+  pick,
+  qM,
+  qN,
+  que,
+  quelquun,
+  rint,
+  shuffle,
+} from "./outils-calcul-ce2";
 
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+/* =========================================================
+   LES ITEMS FIGÉS (gardés tels quels)
+========================================================= */
 
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
-
-function piegesPositifs(valeurs: readonly number[]): string[] {
-  return valeurs.filter((v) => v > 0).map((v) => v.toLocaleString("fr-FR"));
-}
-
-function formatNumber(n: number): string {
-  return n.toLocaleString("fr-FR");
-}
-
-// Les contextes commencent par leur article — « le marché de Saint-Pierre ».
-// Quand ils ouvrent la phrase, il faut la majuscule, sinon l'énoncé s'écrit
-// « la cantine avait 1 025 gâteaux ».
-function majuscule(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-// « de ananas » et « que Anaïs » ne s'écrivent pas : devant une voyelle,
-// « de » et « que » s'élident.
-function commenceParVoyelle(mot: string): boolean {
-  return /^[aeiouéèêàîïôûùh]/i.test(mot);
-}
-
-function de(mot: string): string {
-  return commenceParVoyelle(mot) ? `d'${mot}` : `de ${mot}`;
-}
-
-function que(mot: string): string {
-  return commenceParVoyelle(mot) ? `qu'${mot}` : `que ${mot}`;
-}
-
-// « de le club » ne s'écrit pas non plus : de + le se contracte en du.
-function duLieu(lieu: string): string {
-  if (lieu.startsWith("le ")) return `du ${lieu.slice(3)}`;
-  if (lieu.startsWith("l'")) return `de ${lieu}`;
-  return `de ${lieu}`;
-}
-
-function exp(
-  definition: string,
-  methode: string,
-  calcul: string,
-  conclusion: string,
-) {
-  return `Définition : ${definition}
-
-Méthode : ${methode}
-
-Calcul : ${calcul}
-
-Conclusion : ${conclusion}`;
-}
-
-function schemaBarre(data: Omit<SchemaBarreCanvasData, "kind">): SchemaBarreCanvasData {
-  return { kind: "schema_barre", ...data };
-}
-
-// ============================================================
-// CONTEXTES — l'île d'abord, puis l'école et la cour.
-// Chaque contexte porte son objet au singulier et au pluriel : les énoncés se
-// lisent alors sans faute d'accord, quel que soit le tirage.
-// ============================================================
-
-// Le genre voyage avec le contexte et avec le prénom. Sans lui, on écrit « La
-// cantine avait 1 637 gâteaux. Il en reçoit 150 », et l'élève de CE2 lit une
-// faute avant de lire un problème.
-type Contexte = {
-  lieu: string;
-  objet: string;
-  objets: string;
-  feminin: boolean;
-  theme: "neutral" | "reunion" | "sport" | "cuisine" | "jeux_video";
-};
-
-const CONTEXTES: Contexte[] = [
-  { lieu: "le marché de Saint-Pierre", objet: "letchi", objets: "letchis", feminin: false, theme: "reunion" },
-  { lieu: "la boutique du Tampon", objet: "samoussa", objets: "samoussas", feminin: true, theme: "reunion" },
-  { lieu: "la plantation de Sainte-Rose", objet: "ananas", objets: "ananas", feminin: true, theme: "reunion" },
-  { lieu: "le club de Saint-Denis", objet: "maillot", objets: "maillots", feminin: false, theme: "sport" },
-  { lieu: "la bibliothèque de l'école", objet: "livre", objets: "livres", feminin: true, theme: "neutral" },
-  { lieu: "la coopérative de la classe", objet: "cahier", objets: "cahiers", feminin: true, theme: "neutral" },
-  { lieu: "la cantine", objet: "gâteau", objets: "gâteaux", feminin: true, theme: "cuisine" },
-];
-
-type Personne = { nom: string; feminin: boolean };
-
-const PRENOMS: Personne[] = [
-  { nom: "Léa", feminin: true },
-  { nom: "Noé", feminin: false },
-  { nom: "Maëva", feminin: true },
-  { nom: "Ryan", feminin: false },
-  { nom: "Anaïs", feminin: true },
-  { nom: "Tom", feminin: false },
-  { nom: "Naïla", feminin: true },
-  { nom: "Ewan", feminin: false },
-];
-
-/** « il » ou « elle », selon le sujet. */
-function pronom(feminin: boolean, majuscule = false): string {
-  const p = feminin ? "elle" : "il";
-  return majuscule ? p.charAt(0).toUpperCase() + p.slice(1) : p;
-}
-
-/** « Combien Maëva en a-t-elle ? » plutôt que « en a-t-il ou elle ? ». */
-function aTIl(feminin: boolean): string {
-  return feminin ? "a-t-elle" : "a-t-il";
-}
-
-export const problemeBank: TutorBankItemV4[] = [
-  // ============================================================
-  // ce2_probleme_choisir_operation — Choisir l'opération
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_probleme_choisir_tpl_001",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_choisir_operation",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Demande-toi si la quantité augmente, diminue, se répète ou se partage.",
-    tags: ["ce2", "probleme", "choisir_operation", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const p = randomChoice(PRENOMS);
-
-      const situations = [
-        {
-          text: `${p.nom} a ${randomInt(120, 480)} ${c.objets}. On lui en donne ${randomInt(20, 90)}. Combien en ${aTIl(p.feminin)} maintenant ?`,
-          operation: "une addition",
-          pourquoi: "la quantité augmente : on rassemble deux parts.",
-        },
-        {
-          text: `${p.nom} a ${randomInt(200, 900)} ${c.objets}. ${pronom(p.feminin, true)} en donne ${randomInt(20, 90)}. Combien lui en reste-t-il ?`,
-          operation: "une soustraction",
-          pourquoi: "la quantité diminue : on enlève une part.",
-        },
-        {
-          text: `${p.nom} range ${randomInt(3, 9)} paquets de ${randomInt(6, 12)} ${c.objets}. Combien y a-t-il ${de(c.objets)} en tout ?`,
-          operation: "une multiplication",
-          pourquoi: "la même quantité se répète plusieurs fois.",
-        },
-        {
-          text: `${p.nom} partage ${randomInt(4, 9) * randomInt(4, 9)} ${c.objets} entre ${randomInt(4, 9)} camarades, à parts égales. Combien chacun en reçoit-il ?`,
-          operation: "une division",
-          pourquoi: "on partage un tout en parts égales.",
-        },
-      ];
-
-      const s = randomChoice(situations);
-
-      return {
-        text: `${s.text}\n\nQuelle opération faut-il choisir ?`,
-        format: "qcm",
-        choices: shuffle([
-          "une addition",
-          "une soustraction",
-          "une multiplication",
-          "une division",
-        ]),
-        expected: [s.operation],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Choisir l'opération, c'est reconnaître ce que fait l'énoncé à la quantité.",
-          "On regarde si la quantité augmente, diminue, se répète à l'identique ou se partage en parts égales.",
-          `Ici, ${s.pourquoi}`,
-          `Il faut choisir ${s.operation}.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_probleme_une_etape — Additif parties-tout
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_probleme_une_etape_tpl_001_parties_tout",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_une_etape",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Deux parts qu'on rassemble : on additionne.",
-    tags: ["ce2", "probleme", "parties_tout", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const a = randomInt(120, 3800);
-      const b = randomInt(90, 2400);
-      const total = a + b;
-
-      return {
-        text: `Le matin, ${c.lieu} vend ${formatNumber(a)} ${c.objets}. L'après-midi, ${pronom(c.feminin)} en vend ${formatNumber(b)}. Combien ${de(c.objets)} ont été vendus dans la journée ?`,
-        format: "qcm",
-        choices: makeChoices(
-          formatNumber(total),
-          piegesPositifs([a - b, total + 100, total - 100, total + 10, total - 10]),
-        ),
-        expected: [formatNumber(total)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un problème parties-tout donne deux parts et demande le tout.",
-          "On rassemble les deux parts : c'est une addition.",
-          `${formatNumber(a)} + ${formatNumber(b)} = ${formatNumber(total)}.`,
-          `${formatNumber(total)} ${c.objets} ont été vendus dans la journée.`,
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_une_etape_tpl_002_part_manquante",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_une_etape",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "On connaît le tout et une part : on cherche l'autre part.",
-    tags: ["ce2", "probleme", "parties_tout", "part_manquante", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const total = randomInt(600, 4800);
-      const part = randomInt(150, total - 150);
-      const manque = total - part;
-
-      return {
-        text: `${majuscule(c.lieu)} a reçu ${formatNumber(total)} ${c.objets} en tout. ${formatNumber(part)} sont déjà rangés. Combien reste-t-il ${de(c.objets)} à ranger ?`,
-        format: "qcm",
-        choices: makeChoices(
-          formatNumber(manque),
-          piegesPositifs([total + part, manque + 100, manque - 100, part, manque + 10]),
-        ),
-        expected: [formatNumber(manque)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Quand on connaît le tout et une part, on cherche la part qui manque.",
-          "On enlève la part connue du tout : c'est une soustraction.",
-          `${formatNumber(total)} − ${formatNumber(part)} = ${formatNumber(manque)}.`,
-          `Il reste ${formatNumber(manque)} ${c.objets} à ranger.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_probleme_comparaison — Additif de comparaison
-  // Nouveau : le programme le distingue explicitement du parties-tout.
-  // ============================================================
-
+const FIXES: TutorBankItemV4[] = [
   {
     kind: "fixed",
     id: "ce2_probleme_comparaison_fixed_001_de_plus_que",
@@ -313,166 +79,6 @@ export const problemeBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "probleme", "comparaison", "qcm", "piege"],
   },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_comparaison_tpl_001",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_comparaison",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Cherche d'abord qui en a le plus, puis décide s'il faut ajouter ou enlever.",
-    tags: ["ce2", "probleme", "comparaison", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const [un, deux] = shuffle(PRENOMS).slice(0, 2);
-      const petit = randomInt(120, 1800);
-      const ecart = randomInt(40, 600);
-      const grand = petit + ecart;
-
-      // Deux formulations qui se ressemblent et n'appellent pas la même
-      // opération : c'est exactement là que l'élève de CE2 trébuche.
-      const versionPlus = randomChoice([true, false]);
-
-      const texte = versionPlus
-        ? `${un.nom} a ${formatNumber(grand)} ${c.objets}. ${pronom(un.feminin, true)} en a ${formatNumber(ecart)} de plus ${que(deux.nom)}. Combien ${deux.nom} en ${aTIl(deux.feminin)} ?`
-        : `${un.nom} a ${formatNumber(petit)} ${c.objets}. ${pronom(un.feminin, true)} en a ${formatNumber(ecart)} de moins ${que(deux.nom)}. Combien ${deux.nom} en ${aTIl(deux.feminin)} ?`;
-
-      const reponse = versionPlus ? petit : grand;
-
-      return {
-        text: texte,
-        format: "qcm",
-        choices: makeChoices(
-          formatNumber(reponse),
-          piegesPositifs([
-            versionPlus ? grand + ecart : petit - ecart,
-            versionPlus ? grand : petit,
-            ecart,
-            reponse + 100,
-            reponse + 10,
-          ]),
-        ),
-        expected: [formatNumber(reponse)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Dans un problème de comparaison, un écart sépare deux quantités.",
-          versionPlus
-            ? "« en a de plus que » : celui dont on parle en a le plus, donc on enlève l'écart pour trouver l'autre."
-            : "« en a de moins que » : celui dont on parle en a le moins, donc on ajoute l'écart pour trouver l'autre.",
-          versionPlus
-            ? `${formatNumber(grand)} − ${formatNumber(ecart)} = ${formatNumber(petit)}.`
-            : `${formatNumber(petit)} + ${formatNumber(ecart)} = ${formatNumber(grand)}.`,
-          `${deux.nom} a ${formatNumber(reponse)} ${c.objets}.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_probleme_deux_etapes
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_probleme_deux_etapes_tpl_001",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_deux_etapes",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Fais un calcul, note le résultat, puis sers-t'en pour le second.",
-    tags: ["ce2", "probleme", "deux_etapes", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const depart = randomInt(800, 4000);
-      const recu = randomInt(150, 900);
-      const vendu = randomInt(100, depart);
-      const apresRecu = depart + recu;
-      const final = apresRecu - vendu;
-
-      return {
-        text: `${majuscule(c.lieu)} avait ${formatNumber(depart)} ${c.objets}. ${pronom(c.feminin, true)} en reçoit ${formatNumber(recu)}, puis en vend ${formatNumber(vendu)}. Combien lui en reste-t-il ?`,
-        format: "qcm",
-        choices: makeChoices(
-          formatNumber(final),
-          piegesPositifs([
-            apresRecu,
-            depart - vendu,
-            depart + recu + vendu,
-            final + 100,
-            final - 100,
-          ]),
-        ),
-        expected: [formatNumber(final)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un problème à deux étapes demande deux calculs qui se suivent.",
-          "On calcule d'abord ce qu'il y a après la réception, puis on enlève ce qui est vendu.",
-          `${formatNumber(depart)} + ${formatNumber(recu)} = ${formatNumber(apresRecu)}, puis ${formatNumber(apresRecu)} − ${formatNumber(vendu)} = ${formatNumber(final)}.`,
-          `Il reste ${formatNumber(final)} ${c.objets}.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_probleme_trois_etapes — Mixte, nouveau au CE2
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_probleme_trois_etapes_tpl_001_mixte",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_trois_etapes",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Trois calculs : combien en tout, combien ajoutés, combien il reste.",
-    tags: ["ce2", "probleme", "trois_etapes", "mixte", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const cartons = randomInt(4, 9);
-      const parCarton = randomInt(12, 45);
-      const enVrac = randomInt(20, 180);
-      const total = cartons * parCarton + enVrac;
-      const donnes = randomInt(30, total - 30);
-      const reste = total - donnes;
-
-      return {
-        text: `${majuscule(c.lieu)} range ${cartons} cartons de ${parCarton} ${c.objets}, et ${formatNumber(enVrac)} ${c.objets} en vrac. ${pronom(c.feminin, true)} en donne ensuite ${formatNumber(donnes)}. Combien ${de(c.objets)} lui reste-t-il ?`,
-        format: "qcm",
-        choices: makeChoices(
-          formatNumber(reste),
-          piegesPositifs([
-            total,
-            cartons * parCarton,
-            cartons * parCarton - donnes,
-            total + donnes,
-            reste + 100,
-          ]),
-        ),
-        expected: [formatNumber(reste)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un problème mixte mêle plusieurs opérations différentes.",
-          "On calcule le contenu des cartons, on ajoute le vrac, puis on enlève ce qui est donné.",
-          `${cartons} × ${parCarton} = ${formatNumber(cartons * parCarton)} ; ${formatNumber(cartons * parCarton)} + ${formatNumber(enVrac)} = ${formatNumber(total)} ; ${formatNumber(total)} − ${formatNumber(donnes)} = ${formatNumber(reste)}.`,
-          `Il reste ${formatNumber(reste)} ${c.objets}.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_probleme_comparaison_multiplicative — Nouveau au CE2
-  // « trois fois plus » n'est pas « trois de plus » : c'est tout le sujet.
-  // ============================================================
-
   {
     kind: "fixed",
     id: "ce2_probleme_compmult_fixed_001_fois_plus",
@@ -496,840 +102,889 @@ export const problemeBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "probleme", "comparaison_multiplicative", "qcm", "piege"],
   },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_compmult_tpl_001",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_comparaison_multiplicative",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "« fois plus » multiplie, « fois moins » partage.",
-    tags: ["ce2", "probleme", "comparaison_multiplicative", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const [un, deux] = shuffle(PRENOMS).slice(0, 2);
-      const base = randomInt(6, 45);
-      const fois = randomInt(3, 9);
-      const grand = base * fois;
-
-      const versionPlus = randomChoice([true, false]);
-      const texte = versionPlus
-        ? `${un.nom} a ${base} ${c.objets}. ${deux.nom} en a ${fois} fois plus. Combien ${deux.nom} en ${aTIl(deux.feminin)} ?`
-        : `${un.nom} a ${formatNumber(grand)} ${c.objets}. ${deux.nom} en a ${fois} fois moins. Combien ${deux.nom} en ${aTIl(deux.feminin)} ?`;
-      const reponse = versionPlus ? grand : base;
-
-      return {
-        text: texte,
-        format: "qcm",
-        choices: makeChoices(
-          formatNumber(reponse),
-          piegesPositifs([
-            versionPlus ? base + fois : grand - fois,
-            versionPlus ? base : grand,
-            versionPlus ? grand + base : base + fois,
-            reponse + fois,
-            fois,
-          ]),
-        ),
-        expected: [formatNumber(reponse)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "« Fois plus » et « fois moins » comparent en multipliant ou en partageant, jamais en ajoutant.",
-          versionPlus
-            ? "« fois plus » : on multiplie la quantité de départ."
-            : "« fois moins » : on partage la quantité de départ.",
-          versionPlus
-            ? `${base} × ${fois} = ${formatNumber(grand)}. Avec « ${fois} de plus », on aurait trouvé ${base + fois} seulement.`
-            : `${formatNumber(grand)} ÷ ${fois} = ${base}. Avec « ${fois} de moins », on aurait trouvé ${grand - fois}.`,
-          `${deux.nom} a ${formatNumber(reponse)} ${c.objets}.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_probleme_produit_cartesien — Nouveau au CE2
-  // Combien de couples différents peut-on former ?
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_probleme_cartesien_tpl_001",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_produit_cartesien",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Chaque choix du premier peut aller avec chaque choix du second.",
-    tags: ["ce2", "probleme", "produit_cartesien", "template"],
-    generate: () => {
-      const situations = [
-        { a: "tee-shirts", b: "shorts", quoi: "tenues différentes" },
-        { a: "parfums de glace", b: "sortes de cornets", quoi: "glaces différentes" },
-        { a: "sortes de pain", b: "garnitures", quoi: "sandwichs différents" },
-        { a: "couleurs de stylo", b: "modèles de carnet", quoi: "assortiments différents" },
-      ];
-      const s = randomChoice(situations);
-      const na = randomInt(3, 8);
-      const nb = randomInt(3, 8);
-      const total = na * nb;
-
-      return {
-        text: `Il y a ${na} ${s.a} et ${nb} ${s.b}. Combien ${de(s.quoi)} peut-on former ?`,
-        format: "qcm",
-        choices: makeChoices(
-          String(total),
-          piegesPositifs([na + nb, total + na, total - na, na * nb * 2, Math.abs(na - nb)]),
-        ),
-        expected: [String(total)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Quand chaque élément d'un groupe peut se combiner avec chaque élément d'un autre, on compte toutes les paires possibles.",
-          "On multiplie le nombre de choix du premier groupe par le nombre de choix du second.",
-          `Chacun des ${na} ${s.a} peut aller avec chacun des ${nb} ${s.b} : ${na} × ${nb} = ${total}. En additionnant, on n'aurait trouvé que ${na + nb}.`,
-          `On peut former ${total} ${s.quoi}.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_probleme_schema_barre — Le schéma en barres
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_probleme_schema_tpl_001",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_schema_barre",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "La barre entière est le tout ; les morceaux sont les parts.",
-    tags: ["ce2", "probleme", "schema_barre", "template", "canvas"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const total = randomInt(400, 2400);
-      const connue = randomInt(100, total - 100);
-      const manque = total - connue;
-
-      return {
-        text: `Le schéma montre les ${c.objets} ${duLieu(c.lieu)}. Quel nombre remplace le point d'interrogation ?`,
-        format: "qcm",
-        choices: makeChoices(
-          formatNumber(manque),
-          piegesPositifs([total + connue, connue, manque + 100, manque - 100, total]),
-        ),
-        expected: [formatNumber(manque)],
-        comparator: "mcq_exact",
-        canvas: schemaBarre({
-          title: `Les ${c.objets} ${duLieu(c.lieu)}`,
-          total: formatNumber(total),
-          parts: [
-            { label: "Déjà rangés", value: formatNumber(connue) },
-            { label: "À ranger", unknown: true },
-          ],
-          questionLabel: "Combien en reste-t-il à ranger ?",
-        }),
-        explanation: exp(
-          "Un schéma en barres montre le tout au-dessus et les parts en dessous.",
-          "On lit le tout, on lit la part connue, et on cherche la part qui manque.",
-          `${formatNumber(total)} − ${formatNumber(connue)} = ${formatNumber(manque)}.`,
-          `Le point d'interrogation vaut ${formatNumber(manque)}.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_probleme_verifier — La vraisemblance
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_probleme_verifier_tpl_001",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_verifier",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Sans calculer, demande-toi si le résultat peut être plus grand ou plus petit que le départ.",
-    tags: ["ce2", "probleme", "vraisemblance", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const depart = randomInt(400, 2000);
-      const enleve = randomInt(50, 300);
-      const juste = depart - enleve;
-
-      // Trois réponses impossibles, chacune pour une raison différente : plus
-      // grande que le départ, égale au départ, ou égale à ce qu'on a enlevé.
-      const absurdes = [
-        {
-          valeur: depart + enleve,
-          pourquoi: `il est plus grand que le nombre de départ, alors qu'on a enlevé des ${c.objets}`,
-        },
-        { valeur: depart, pourquoi: "il est égal au nombre de départ, comme si on n'avait rien enlevé" },
-        { valeur: enleve, pourquoi: "c'est le nombre enlevé, pas ce qui reste" },
-      ];
-      const faux = randomChoice(absurdes);
-
-      return {
-        text: `${majuscule(c.lieu)} avait ${formatNumber(depart)} ${c.objets} et en a donné ${formatNumber(enleve)}. Un élève répond ${formatNumber(faux.valeur)}. Cette réponse est-elle possible ?`,
-        format: "qcm",
-        choices: shuffle([
-          "Non, elle est impossible",
-          "Oui, elle est correcte",
-          "On ne peut pas le savoir",
-        ]),
-        expected: ["Non, elle est impossible"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Vérifier la vraisemblance, c'est se demander si le résultat peut exister avant même de calculer.",
-          "Quand on enlève, le résultat est forcément plus petit que le nombre de départ.",
-          `Ici, ${faux.pourquoi}. La bonne réponse est ${formatNumber(depart)} − ${formatNumber(enleve)} = ${formatNumber(juste)}.`,
-          "La réponse proposée est impossible.",
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // ce2_probleme_defi — Le défi de la notion
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_probleme_defi_tpl_001_partage_avec_reste",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Compte combien de paquets complets on peut faire, puis ce qui reste.",
-    tags: ["ce2", "probleme", "defi", "partage", "reste", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const parBoite = randomInt(6, 12);
-      const boites = randomInt(4, 15);
-      const reste = randomInt(1, parBoite - 1);
-      const total = boites * parBoite + reste;
-
-      return {
-        text: `${majuscule(c.lieu)} a ${formatNumber(total)} ${c.objets} à ranger dans des boîtes de ${parBoite}. Combien de boîtes seront complètes ?`,
-        format: "qcm",
-        choices: makeChoices(
-          String(boites),
-          piegesPositifs([boites + 1, reste, parBoite, boites - 1, boites + reste]),
-        ),
-        expected: [String(boites)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un partage ne tombe pas toujours juste : il reste parfois des objets qui ne remplissent pas une boîte.",
-          "On cherche combien de fois la boîte tient dans le total, sans dépasser.",
-          `${boites} × ${parBoite} = ${formatNumber(boites * parBoite)}, et il reste ${reste} ${c.objets} qui ne remplissent pas une boîte entière.`,
-          `${boites} boîtes seront complètes.`,
-        ),
-      };
-    },
-  },
-
-  // ============================================================
-  // COMPLÉMENTS DU 09/08/2026 — dix micro-compétences n'avaient qu'une ou deux
-  // questions. À la troisième, l'élève revoyait la première. Chaque ajout est
-  // un GÉNÉRATEUR, et prend un angle que la banque n'avait pas : les structures
-  // de problème que le BO nomme, avec ses propres exemples quand il en donne.
-  // ============================================================
-
-  {
-    kind: "template",
-    id: "ce2_probleme_choisir_tpl_002_groupes_ou_reunion",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_choisir_operation",
-    difficulty: 4,
-    theme: "reunion",
-    hint: "Les parts sont-elles toutes pareilles, ou différentes ?",
-    tags: ["ce2", "probleme", "choisir_operation", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const groupesEgaux = randomChoice([true, false]);
-      const cartons = randomInt(4, 9);
-      const parCarton = randomInt(12, 40);
-      const autre = randomInt(120, 900);
-      const bonne = groupesEgaux ? "une multiplication" : "une addition";
-      return {
-        text: groupesEgaux
-          ? `${majuscule(c.lieu)} range ${cartons} cartons contenant chacun ${parCarton} ${c.objets}. Combien de ${c.objets} en tout ?\n\nQuelle opération faut-il choisir ?`
-          : `${majuscule(c.lieu)} a ${formatNumber(autre)} ${c.objets} en réserve et ${formatNumber(parCarton)} ${c.objets} en rayon. Combien de ${c.objets} en tout ?\n\nQuelle opération faut-il choisir ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          groupesEgaux ? "une addition" : "une multiplication",
-          "une soustraction",
-          "une division",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une multiplication réunit des parts TOUTES ÉGALES ; une addition réunit des parts quelconques.",
-          "On regarde si les quantités à réunir sont identiques ou non.",
-          groupesEgaux
-            ? `Les ${cartons} cartons contiennent tous ${parCarton} ${c.objets} : les parts sont égales, on multiplie. Additionner ${cartons} et ${parCarton} n'aurait aucun sens — l'un compte des cartons, l'autre des ${c.objets}.`
-            : `Les deux quantités n'ont aucune raison d'être égales : on ne peut que les additionner. Multiplier reviendrait à croire qu'il y a ${formatNumber(autre)} paquets.`,
-          `Il faut choisir ${bonne}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_probleme_choisir_tpl_003_partage",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_choisir_operation",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "On connait le tout et on cherche une part : ce n'est pas une soustraction.",
-    tags: ["ce2", "probleme", "choisir_operation", "piege", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const parts = randomInt(3, 9);
-      const parPart = randomInt(11, 60);
-      const total = parts * parPart;
-      return {
-        text: `${majuscule(c.lieu)} partage ${formatNumber(total)} ${c.objets} en ${parts} lots égaux. Combien de ${c.objets} dans chaque lot ?\n\nQuelle opération faut-il choisir ?`,
-        format: "qcm",
-        choices: makeChoices("une division", [
-          "une soustraction",
-          "une multiplication",
-          "une addition",
-        ]),
-        expected: ["une division"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Partager un tout en parts égales, c'est diviser.",
-          "On se demande ce qu'on connait — le tout — et ce qu'on cherche — une part.",
-          `On connait le tout (${formatNumber(total)}) et le nombre de parts (${parts}) : on cherche la valeur d'une part, donc on divise. Soustraire ${parts} ne retirerait que ${parts} ${c.objets}, ce qui ne partage rien.`,
-          "Il faut choisir une division.",
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_une_etape_tpl_003_etat_initial",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_une_etape",
-    difficulty: 5,
-    theme: "reunion",
-    hint: "On cherche le DÉPART : il est forcément plus grand que ce qui reste.",
-    tags: ["ce2", "probleme", "une_etape", "piege", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const reste = randomInt(400, 3000);
-      const parti = randomInt(150, 1200);
-      const depart = reste + parti;
-      return {
-        text: `${majuscule(c.lieu)} a vendu ${formatNumber(parti)} ${c.objets} ce matin. Il lui en reste ${formatNumber(reste)}. Combien de ${c.objets} y avait-il au départ ?`,
-        format: "short",
-        expected: [String(depart)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Chercher l'état initial, c'est remonter le temps : on remet ce qui est parti.",
-          "On réunit ce qui reste et ce qui a été vendu.",
-          `${formatNumber(reste)} + ${formatNumber(parti)} = ${formatNumber(depart)}. Le mot « vendu » fait penser à une soustraction, mais c'est le DÉPART qu'on cherche : il est plus grand que ce qui reste.`,
-          `Il y avait ${formatNumber(depart)} ${c.objets} au départ.`,
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_comparaison_tpl_002_ecart",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_comparaison",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "On cherche l'écart entre les deux quantités.",
-    tags: ["ce2", "probleme", "comparaison", "template"],
-    generate: () => {
-      const [a, b] = shuffle(PRENOMS).slice(0, 2);
-      const c = randomChoice(CONTEXTES);
-      const grand = randomInt(600, 4000);
-      const petit = randomInt(120, grand - 100);
-      const ecart = grand - petit;
-      return {
-        text: `${a.nom} a ${formatNumber(grand)} ${c.objets} et ${b.nom} en a ${formatNumber(petit)}. Combien ${a.nom} en a-t-${pronom(a.feminin)} de plus ${que(b.nom)} ?`,
-        format: "short",
-        expected: [String(ecart)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Comparer deux quantités, c'est chercher leur écart.",
-          "On enlève la plus petite quantité à la plus grande.",
-          `${formatNumber(grand)} − ${formatNumber(petit)} = ${formatNumber(ecart)}. Le mot « plus » apparait dans la question, et pourtant on soustrait : c'est la différence qu'on cherche.`,
-          `${a.nom} en a ${formatNumber(ecart)} de plus.`,
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_deux_etapes_tpl_002_le_reste",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_deux_etapes",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Réunis d'abord les deux catégories connues.",
-    tags: ["ce2", "probleme", "deux_etapes", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const a = randomInt(120, 900);
-      const b = randomInt(80, 700);
-      const reste = randomInt(100, 900);
-      const total = a + b + reste;
-      return {
-        text: `${majuscule(c.lieu)} compte ${formatNumber(total)} ${c.objets} : ${formatNumber(a)} sont neufs, ${formatNumber(b)} sont abimés, et les autres sont à trier. Combien de ${c.objets} restent à trier ?`,
-        format: "short",
-        expected: [String(reste)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand une part est décrite comme « les autres », on la trouve en enlevant au tout toutes les parts connues.",
-          "On réunit d'abord les parts connues, puis on les enlève au total.",
-          `Première étape : ${formatNumber(a)} + ${formatNumber(b)} = ${formatNumber(a + b)}. Deuxième étape : ${formatNumber(total)} − ${formatNumber(a + b)} = ${formatNumber(reste)}.`,
-          `Il reste ${formatNumber(reste)} ${c.objets} à trier.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_probleme_deux_etapes_tpl_003_comparaison_puis_total",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_deux_etapes",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Trouve d'abord ce que possède le second, puis réunis les deux.",
-    tags: ["ce2", "probleme", "deux_etapes", "piege", "template"],
-    generate: () => {
-      // Le problème de comparaison qui demande le TOUT : le BO en fait une
-      // structure à part, « nécessitant donc une étape supplémentaire ».
-      const [a, b] = shuffle(PRENOMS).slice(0, 2);
-      const c = randomChoice(CONTEXTES);
-      const premier = randomInt(120, 900);
-      const ecart = randomInt(20, 300);
-      const second = premier + ecart;
-      const total = premier + second;
-      return {
-        text: `${a.nom} a ${formatNumber(premier)} ${c.objets}. ${b.nom} en a ${formatNumber(ecart)} de plus ${que(a.nom)}. Combien les deux enfants ont-ils ${de(c.objets)} en tout ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un problème de comparaison qui demande le tout se résout en deux étapes.",
-          "On calcule d'abord la quantité du second, puis on réunit les deux.",
-          `Première étape : ${formatNumber(premier)} + ${formatNumber(ecart)} = ${formatNumber(second)}, ce que possède ${b.nom}. Deuxième étape : ${formatNumber(premier)} + ${formatNumber(second)} = ${formatNumber(total)}. Répondre ${formatNumber(premier + ecart)} serait s'arrêter à la première étape.`,
-          `Ils ont ${formatNumber(total)} ${c.objets} en tout.`,
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_trois_etapes_tpl_002_restaurant",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_trois_etapes",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Chaque sorte de table donne son total de places, puis on réunit.",
-    tags: ["ce2", "probleme", "trois_etapes", "template"],
-    generate: () => {
-      // L'exemple du BO, mot pour mot : « Dans un restaurant, il y a 4 tables
-      // de 6 personnes et 7 tables de 4 personnes. »
-      const grandes = randomInt(3, 9);
-      const placesGrandes = randomInt(6, 10);
-      const petites = randomInt(4, 12);
-      const placesPetites = randomInt(2, 5);
-      const total = grandes * placesGrandes + petites * placesPetites;
-      return {
-        text: `Dans un restaurant, il y a ${grandes} tables de ${placesGrandes} personnes et ${petites} tables de ${placesPetites} personnes. Combien ce restaurant peut-il recevoir de clients ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un problème mixte enchaine des multiplications et une addition.",
-          "On calcule les places de chaque sorte de table, puis on réunit.",
-          `${grandes} × ${placesGrandes} = ${grandes * placesGrandes} places aux grandes tables. ${petites} × ${placesPetites} = ${petites * placesPetites} places aux petites. En tout : ${grandes * placesGrandes} + ${petites * placesPetites} = ${total}.`,
-          `Le restaurant peut recevoir ${total} clients.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_probleme_trois_etapes_tpl_003_achats",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_trois_etapes",
-    difficulty: 5,
-    theme: "reunion",
-    hint: "Chaque achat d'abord, la dépense ensuite, le rendu en dernier.",
-    tags: ["ce2", "probleme", "trois_etapes", "template"],
-    generate: () => {
-      const nbA = randomInt(3, 8);
-      const prixA = randomInt(3, 12);
-      const nbB = randomInt(2, 6);
-      const prixB = randomInt(4, 15);
-      const depense = nbA * prixA + nbB * prixB;
-      const billet = Math.ceil((depense + 5) / 10) * 10;
-      const rendu = billet - depense;
-      return {
-        text: `Au marché, on achète ${nbA} barquettes de letchis à ${prixA} € et ${nbB} paquets de samoussas à ${prixB} €. On paie avec ${billet} €. Combien rend-on ?`,
-        format: "short",
-        expected: [String(rendu)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un problème à trois étapes se traite dans l'ordre où les choses se passent.",
-          "On calcule chaque achat, on réunit, puis on cherche le rendu.",
-          `Les letchis : ${nbA} × ${prixA} = ${nbA * prixA} €. Les samoussas : ${nbB} × ${prixB} = ${nbB * prixB} €. La dépense : ${nbA * prixA} + ${nbB * prixB} = ${depense} €. Le rendu : ${billet} − ${depense} = ${rendu} €.`,
-          `On rend ${rendu} €.`,
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_compmult_tpl_002_prix",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_comparaison_multiplicative",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "« Quatre fois plus cher » ne veut pas dire « quatre euros de plus ».",
-    tags: ["ce2", "probleme", "comparaison_multiplicative", "piege", "template"],
-    generate: () => {
-      // L'exemple du BO : « Une trottinette coute quatre fois plus cher qu'un
-      // casque. Le casque coute 32 €. »
-      const prixPetit = randomInt(12, 60);
-      const facteur = randomInt(3, 8);
-      const prixGrand = prixPetit * facteur;
-      const paire = randomChoice([
-        { petit: "un casque", grand: "une trottinette" },
-        { petit: "un cahier", grand: "un dictionnaire" },
-        { petit: "un ballon", grand: "une paire de baskets" },
-      ]);
-      return {
-        text: `${majuscule(paire.grand)} coute ${facteur} fois plus cher ${que(paire.petit.split(" ")[1] || paire.petit)}. ${majuscule(paire.petit)} coute ${prixPetit} €. Combien coute ${paire.grand} ?`,
-        format: "short",
-        expected: [String(prixGrand)],
-        comparator: "number_equal",
-        explanation: exp(
-          "« Tant de fois plus » annonce une multiplication, pas une addition.",
-          "On multiplie le prix connu par le facteur donné.",
-          `${prixPetit} × ${facteur} = ${prixGrand}. Ajouter ${facteur} donnerait ${prixPetit + facteur} € : ce serait « ${facteur} euros de plus », ce qui n'est pas ce que dit l'énoncé.`,
-          `${majuscule(paire.grand)} coute ${prixGrand} €.`,
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_cartesien_tpl_002_trois_ensembles",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_produit_cartesien",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "On combine d'abord deux ensembles, puis on ajoute le troisième.",
-    tags: ["ce2", "probleme", "produit_cartesien", "template"],
-    generate: () => {
-      // L'exemple du BO : le clown, ses chapeaux, ses tee-shirts, ses pantalons.
-      const chapeaux = randomInt(2, 4);
-      const tshirts = randomInt(2, 4);
-      const pantalons = randomInt(2, 4);
-      const total = chapeaux * tshirts * pantalons;
-      return {
-        text: `Pour se déguiser, un clown dispose de ${chapeaux} chapeaux, de ${tshirts} tee-shirts et de ${pantalons} pantalons. Combien de costumes différents peut-il faire ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Chaque choix se combine avec tous les autres : on multiplie les possibilités.",
-          "On combine deux ensembles, puis on multiplie par le troisième.",
-          `Avec ${chapeaux} chapeaux et ${tshirts} tee-shirts, il y a déjà ${chapeaux * tshirts} débuts de costume. Chacun peut aller avec ${pantalons} pantalons : ${chapeaux * tshirts} × ${pantalons} = ${total}.`,
-          `Il peut faire ${total} costumes différents.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_probleme_cartesien_tpl_003_ensemble_manquant",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_produit_cartesien",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "On connait le nombre de tenues et l'un des deux ensembles.",
-    tags: ["ce2", "probleme", "produit_cartesien", "piege", "template"],
-    generate: () => {
-      const hauts = randomInt(3, 9);
-      const bas = randomInt(3, 9);
-      const tenues = hauts * bas;
-      return {
-        text: `Avec ses tee-shirts et ses ${bas} shorts, Naïla peut composer ${tenues} tenues différentes. Combien a-t-elle de tee-shirts ?`,
-        format: "short",
-        expected: [String(hauts)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le nombre de tenues est le produit des deux ensembles : connaissant l'un, on retrouve l'autre.",
-          "On cherche par combien multiplier le nombre connu pour obtenir le total.",
-          `Chaque tee-shirt donne ${bas} tenues, une par short. Il faut donc ${hauts} tee-shirts, car ${hauts} × ${bas} = ${tenues}.`,
-          `Elle a ${hauts} tee-shirts.`,
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_schema_tpl_002_comparaison",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_schema_barre",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "La barre du haut est plus longue de l'écart : calcule-la avant le total.",
-    tags: ["ce2", "probleme", "schema_barre", "template", "canvas"],
-    generate: () => {
-      // Le schéma du BO : « Léo a 188 billes. Lucie en a 75 de plus que Léo. »
-      const [a, b] = shuffle(PRENOMS).slice(0, 2);
-      const base = randomInt(80, 900);
-      const ecart = randomInt(20, 200);
-      const autre = base + ecart;
-      const total = base + autre;
-      return {
-        text: `${a.nom} a ${formatNumber(base)} billes. ${b.nom} en a ${formatNumber(ecart)} de plus ${que(a.nom)}. Combien les deux enfants ont-ils de billes en tout ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le schéma en barres montre l'écart comme un morceau ajouté à la barre la plus courte.",
-          "On calcule la barre longue, puis on réunit les deux barres.",
-          `${formatNumber(base)} + ${formatNumber(ecart)} = ${formatNumber(autre)} pour ${b.nom}. Puis ${formatNumber(base)} + ${formatNumber(autre)} = ${formatNumber(total)}.`,
-          `Ils ont ${formatNumber(total)} billes en tout.`,
-        ),
-        canvas: schemaBarre({
-          total: "?",
-          parts: [
-            { label: a.nom, value: formatNumber(base) },
-            { label: b.nom, value: `${formatNumber(base)} + ${formatNumber(ecart)}` },
-          ],
-          display: { showTotal: true, showPartLabels: true, showValues: true },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_probleme_schema_tpl_003_parts_egales",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_schema_barre",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "La barre est coupée en parts toutes égales.",
-    tags: ["ce2", "probleme", "schema_barre", "template", "canvas"],
-    generate: () => {
-      // Le second schéma du BO : six dictionnaires payés 72 €.
-      const parts = randomInt(3, 8);
-      const prixUnite = randomInt(6, 25);
-      const total = parts * prixUnite;
-      const objet = randomChoice(["dictionnaires", "ballons", "cahiers", "casques"]);
-      return {
-        text: `La maitresse a acheté ${parts} ${objet} pour la classe. Elle a payé ${total} €. Quel est le prix d'un seul ?`,
-        format: "short",
-        expected: [String(prixUnite)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand un tout se partage en parts égales, le schéma en barres montre des morceaux tous de la même taille.",
-          "On cherche la valeur d'une part : on divise le tout par le nombre de parts.",
-          `${total} ÷ ${parts} = ${prixUnite}, car ${parts} × ${prixUnite} = ${total}.`,
-          `Un seul coute ${prixUnite} €.`,
-        ),
-        canvas: schemaBarre({
-          total: `${total} €`,
-          parts: Array.from({ length: parts }, () => ({ label: "?", unknown: true })),
-          questionLabel: `${parts} ${objet}`,
-          display: { showTotal: true, showPartLabels: true, showValues: false },
-        }),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_verifier_tpl_002_part_plus_grande",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_verifier",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Une part ne peut jamais dépasser le tout dont elle fait partie.",
-    tags: ["ce2", "probleme", "verifier", "piege", "template"],
-    generate: () => {
-      const c = randomChoice(CONTEXTES);
-      const total = randomInt(500, 4000);
-      const possible = randomChoice([true, false]);
-      const trouve = possible ? randomInt(50, total - 50) : total + randomInt(50, 900);
-      return {
-        text: `${majuscule(c.lieu)} a ${formatNumber(total)} ${c.objets} en tout, dont une partie est déjà vendue. Un élève trouve ${formatNumber(trouve)} ${c.objets} vendus. Cette réponse est-elle possible ?`,
-        format: "qcm",
-        choices: shuffle(["oui", "non"]),
-        expected: [possible ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Avant d'écrire sa réponse, on vérifie qu'elle est possible : c'est la régulation.",
-          "On compare le résultat trouvé au total donné par l'énoncé.",
-          possible
-            ? `${formatNumber(trouve)} est plus petit que ${formatNumber(total)} : c'est possible, il resterait ${formatNumber(total - trouve)} ${c.objets}.`
-            : `${formatNumber(trouve)} est plus grand que ${formatNumber(total)}, le total. Une part ne peut pas dépasser le tout : le calcul est à refaire.`,
-          possible ? "Oui, c'est possible." : "Non, ce n'est pas possible.",
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_probleme_verifier_tpl_003_somme_trop_petite",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_verifier",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Une somme est toujours plus grande que chacun des deux nombres réunis.",
-    tags: ["ce2", "probleme", "verifier", "piege", "template"],
-    generate: () => {
-      const a = randomInt(400, 2000);
-      const b = randomInt(300, 1800);
-      const possible = randomChoice([true, false]);
-      const trouve = possible ? a + b : randomInt(Math.min(a, b) - 200, Math.min(a, b) - 20);
-      return {
-        text: `On réunit ${formatNumber(a)} et ${formatNumber(b)}. Un élève annonce ${formatNumber(trouve)}. Cette réponse est-elle possible ?`,
-        format: "qcm",
-        choices: shuffle(["oui", "non"]),
-        expected: [possible ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une somme de deux nombres positifs est plus grande que chacun d'eux.",
-          "On compare le résultat annoncé aux deux nombres de départ, sans refaire le calcul.",
-          possible
-            ? `${formatNumber(trouve)} est plus grand que ${formatNumber(a)} et que ${formatNumber(b)} : la réponse tient debout, et le calcul le confirme.`
-            : `${formatNumber(trouve)} est plus PETIT que ${formatNumber(Math.min(a, b))}, l'un des deux nombres réunis. C'est impossible : en ajoutant, on ne peut pas obtenir moins qu'au départ.`,
-          possible ? "Oui, c'est possible." : "Non, ce n'est pas possible.",
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "ce2_probleme_defi_tpl_002_reste_du_partage",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Cherche ce qui ne rentre dans aucune boite complète.",
-    tags: ["ce2", "probleme", "defi", "template"],
-    generate: () => {
-      const parBoite = randomInt(6, 15);
-      const boites = randomInt(5, 20);
-      const reste = randomInt(1, parBoite - 1);
-      const total = boites * parBoite + reste;
-      const c = randomChoice(CONTEXTES);
-      return {
-        text: `${majuscule(c.lieu)} range ${formatNumber(total)} ${c.objets} dans des boites de ${parBoite}. Combien de ${c.objets} resteront en dehors des boites complètes ?`,
-        format: "short",
-        expected: [String(reste)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un partage ne tombe pas toujours juste : ce qui ne remplit pas une part entière s'appelle le reste.",
-          "On remplit autant de boites complètes que possible, puis on regarde ce qui n'a pas trouvé de place.",
-          `${boites} boites complètes contiennent ${boites} × ${parBoite} = ${formatNumber(boites * parBoite)} ${c.objets}. Il en restait ${formatNumber(total)} : ${formatNumber(total)} − ${formatNumber(boites * parBoite)} = ${reste}. Le reste est toujours plus petit que ${parBoite}, sinon on remplirait une boite de plus.`,
-          `Il restera ${reste} ${c.objets}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_probleme_defi_tpl_003_reste_selon_histoire",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "probleme",
-    microId: "ce2_probleme_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Les derniers voyageurs ont-ils le droit de rester à quai ?",
-    tags: ["ce2", "probleme", "defi", "piege", "template"],
-    generate: () => {
-      // Le même reste, deux réponses différentes : c'est l'histoire qui décide
-      // s'il faut arrondir au-dessus ou en dessous.
-      const parVehicule = randomInt(4, 9);
-      const complets = randomInt(3, 12);
-      const reste = randomInt(1, parVehicule - 1);
-      const total = complets * parVehicule + reste;
-      const transporter = randomChoice([true, false]);
-      const bonne = transporter ? complets + 1 : complets;
-      return {
-        text: transporter
-          ? `${total} élèves partent en sortie. Chaque voiture transporte ${parVehicule} élèves. Combien faut-il de voitures pour que TOUS partent ?`
-          : `${total} élèves veulent jouer. Chaque équipe compte ${parVehicule} élèves. Combien d'équipes COMPLÈTES peut-on former ?`,
-        format: "short",
-        expected: [String(bonne)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un partage avec reste ne se termine pas par un calcul mais par une décision : que fait-on du reste ?",
-          "On calcule le nombre de parts complètes, puis on relit la question.",
-          transporter
-            ? `${complets} voitures pleines transportent ${complets * parVehicule} élèves. Il en reste ${reste}, qui ne peuvent pas rester sur place : il faut une voiture de plus, donc ${bonne}.`
-            : `${complets} équipes complètes réunissent ${complets * parVehicule} élèves. Il en reste ${reste}, trop peu pour former une équipe entière : on en compte ${bonne}.`,
-          transporter ? `Il faut ${bonne} voitures.` : `On peut former ${bonne} équipes complètes.`,
-        ),
-      };
-    },
-  },
 ];
+
+/* =========================================================
+   LES GABARITS — une famille × une situation × une tournure
+========================================================= */
+
+const N = "probleme";
+const g = (id: string, microId: string, difficulty: Etoile, hint: string, tags: string[], gen: () => Q) =>
+  gabarit({ id, notionId: N, microId, difficulty, hint, tags: ["probleme", ...tags] }, gen);
+
+const parfois = <T,>(p: number, f: () => T | undefined): T | undefined => (Math.random() < p ? f() : undefined);
+const avec = (canvas: Q["canvas"] | undefined): Partial<Q> => (canvas ? { canvas } : {});
+
+/* ---------------------------------------------------------
+   LES RÉSERVES — qui possède quoi, et comment ça bouge.
+   `sujet` absent : c'est un enfant de la troupe qui possède.
+   Les objets se comptent par centaines ou par milliers sans
+   que la phrase sonne faux (pas « 3 000 pommes »).
+   La Réunion : environ une réserve sur vingt-cinq.
+--------------------------------------------------------- */
+
+type Reserve = {
+  sujet?: string;
+  fem?: boolean;
+  un: string;
+  des: string;
+  plus: string;
+  moins: string;
+  /** Le participe de `moins`, accordé avec l'objet : « prêtés », « vendues ». */
+  moinsPp: string;
+};
+
+const RESERVES: readonly Reserve[] = [
+  { un: "bille", des: "billes", plus: "gagne", moins: "perd", moinsPp: "perdues" },
+  { un: "image", des: "images", plus: "reçoit", moins: "donne", moinsPp: "données" },
+  { un: "point", des: "points", plus: "gagne", moins: "perd", moinsPp: "perdus" },
+  { un: "perle", des: "perles", plus: "achète", moins: "utilise", moinsPp: "utilisées" },
+  { un: "timbre", des: "timbres", plus: "reçoit", moins: "échange", moinsPp: "échangés" },
+  { un: "carte", des: "cartes", plus: "gagne", moins: "donne", moinsPp: "données" },
+  { sujet: "La bibliothèque", fem: true, un: "livre", des: "livres", plus: "achète", moins: "prête", moinsPp: "prêtés" },
+  { sujet: "Le capitaine pirate", un: "pièce d'or", des: "pièces d'or", plus: "trouve", moins: "dépense", moinsPp: "dépensées" },
+  { sujet: "La fermière", fem: true, un: "œuf", des: "œufs", plus: "ramasse", moins: "vend", moinsPp: "vendus" },
+  { sujet: "La boulangère", fem: true, un: "croissant", des: "croissants", plus: "prépare", moins: "vend", moinsPp: "vendus" },
+  { sujet: "Le jardinier", un: "graine", des: "graines", plus: "achète", moins: "sème", moinsPp: "semées" },
+  { sujet: "Le cirque", un: "billet", des: "billets", plus: "imprime", moins: "vend", moinsPp: "vendus" },
+  { sujet: "Le magasin de jouets", un: "ballon", des: "ballons", plus: "reçoit", moins: "vend", moinsPp: "vendus" },
+  { sujet: "La cantine", fem: true, un: "yaourt", des: "yaourts", plus: "reçoit", moins: "sert", moinsPp: "servis" },
+  { sujet: "Le fleuriste", un: "fleur", des: "fleurs", plus: "reçoit", moins: "vend", moinsPp: "vendues" },
+  { sujet: "Le chef pâtissier", un: "cookie", des: "cookies", plus: "prépare", moins: "vend", moinsPp: "vendus" },
+  { sujet: "Le musée des dinosaures", un: "fossile", des: "fossiles", plus: "reçoit", moins: "prête", moinsPp: "prêtés" },
+  { sujet: "La vétérinaire", fem: true, un: "vaccin", des: "vaccins", plus: "commande", moins: "utilise", moinsPp: "utilisés" },
+  { sujet: "L'astronaute Zoé", fem: true, un: "photo", des: "photos", plus: "prend", moins: "envoie", moinsPp: "envoyées" },
+  { sujet: "Le vendeur de glaces", un: "cornet", des: "cornets", plus: "reçoit", moins: "vend", moinsPp: "vendus" },
+  { sujet: "La maîtresse", fem: true, un: "cahier", des: "cahiers", plus: "commande", moins: "distribue", moinsPp: "distribués" },
+  { sujet: "Le pompier", un: "mètre de tuyau", des: "mètres de tuyau", plus: "déroule", moins: "range", moinsPp: "rangés" },
+  { sujet: "Le marchand de Saint-Pierre", un: "letchi", des: "letchis", plus: "cueille", moins: "vend", moinsPp: "vendus" },
+];
+
+const reserve = () => pick(RESERVES);
+/** Ce qu'un ENFANT possède (pas des vaccins ni des yaourts). */
+const aEnfant = () => pick(RESERVES.filter((x) => !x.sujet || ["livres", "pièces d'or", "graines", "fleurs", "cookies"].includes(x.des)));
+/** Ce qui se range dans des boîtes ou des cartons (pas des points, pas des mètres). */
+const rangeable = () => pick(RESERVES.filter((x) => !["points", "mètres de tuyau", "photos"].includes(x.des)));
+
+/** Le sujet de la phrase et son pronom. */
+function qui(r: Reserve, p: Prenom): { S: string; il: string } {
+  return r.sujet ? { S: r.sujet, il: r.fem ? "elle" : "il" } : { S: p.nom, il: p.il };
+}
+
+/** Le sujet au milieu d'une phrase : « le cirque », « Nina ». */
+const sujetMilieu = (r: Reserve, p: Prenom) => (r.sujet ? r.sujet.charAt(0).toLowerCase() + r.sujet.slice(1) : p.nom);
+
+/** « vendues » → « vendu » (passé composé) ; → « vendue » (une partie est vendue). */
+const ppMasc = (r: Reserve) => r.moinsPp.replace(/(es|s)$/, "");
+const ppFem = (r: Reserve) => `${ppMasc(r)}e`;
+
+/** « Combien de billes a-t-il ? » — de / d' devant voyelle. */
+const combienDe = (r: Reserve) => `Combien ${de(r.des)}`;
+
+/* ---------------------------------------------------------
+   CHOISIR L'OPÉRATION
+--------------------------------------------------------- */
+
+const OPS = ["une addition", "une soustraction", "une multiplication", "une division"];
+
+function choisirOperation(etoile: Etoile): Q {
+  const r = reserve();
+  const re = aEnfant();
+  const p = quelquun();
+  const { S, il } = qui(r, p);
+  const grand = etoile >= 4;
+  const f = rint(1, grand ? 6 : 4);
+  let text: string;
+  let bon: string;
+  let pourquoi: string;
+  let canvas: Q["canvas"] | undefined;
+  const m = mondeDessinable();
+  if (f === 1) {
+    const a = grand ? rint(120, 2400) : rint(12, 60);
+    const b = grand ? rint(45, 900) : rint(5, 30);
+    text = pick([
+      `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.plus} ${fmt(b)}. ${combienDe(r)} a-t-${il} maintenant ?`,
+      `${S} a ${fmt(a)} ${r.des} lundi et en ${r.plus} ${fmt(b)} mardi. ${combienDe(r)} en tout ?`,
+    ]);
+    bon = "une addition";
+    pourquoi = "la quantité augmente : on rassemble deux parts.";
+    canvas = parfois(0.5, () => barre([["", fmt(a)], ["", fmt(b)]], null));
+  } else if (f === 2) {
+    const a = grand ? rint(500, 4800) : rint(30, 90);
+    const b = grand ? rint(45, 400) : rint(5, 25);
+    text = pick([
+      `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.moins} ${fmt(b)}. ${combienDe(r)} lui reste-t-il ?`,
+      `${S} avait ${fmt(a)} ${r.des}. ${fmt(b)} sont ${r.moinsPp}. ${combienDe(r)} reste-t-il ?`,
+    ]);
+    bon = "une soustraction";
+    pourquoi = "la quantité diminue : on enlève une part.";
+    canvas = parfois(0.5, () => barre([["", fmt(b)], ["reste", null]], fmt(a)));
+  } else if (f === 3) {
+    const k = rint(3, grand ? 9 : 5);
+    const n = grand ? rint(12, 60) : rint(2, 5);
+    text = pick([
+      `${p.nom} a ${k} sachets de ${n} ${m.des}. Combien ${de(m.des)} a-t-${p.il} en tout ?`,
+      `${maj(m.ou)}, on voit ${k} groupes de ${n} ${m.des}. Combien ${de(m.des)} en tout ?`,
+      `Il y a ${k} rangées de ${n} ${m.des}. Combien ${de(m.des)} y a-t-il ?`,
+    ]);
+    bon = "une multiplication";
+    pourquoi = "la même quantité se répète plusieurs fois.";
+    canvas = !grand ? parfois(0.7, () => objetsGroupes(m.dessin!, k, n)) : parfois(0.5, () => barreEgale(k, String(n), null));
+  } else if (f === 4) {
+    const k = rint(2, grand ? 9 : 5);
+    const q = rint(2, grand ? 9 : 6);
+    text = pick([
+      `${p.nom} partage ${k * q} ${m.des} entre ${k} amis, à parts égales. Combien chacun en reçoit-il ?`,
+      `On range ${k * q} ${m.des} par paquets de ${k}. Combien de paquets fait-on ?`,
+      `${p.nom} met ${k * q} ${m.des} dans ${k} boîtes, autant dans chacune. Combien par boîte ?`,
+    ]);
+    bon = "une division";
+    pourquoi = "on partage un tout en parts égales.";
+    canvas = k * q <= 30 ? parfois(0.7, () => objetsEnVrac(m.dessin!, k * q)) : undefined;
+  } else if (f === 5) {
+    const a = rint(120, 900);
+    const b = rint(15, 90);
+    const [x, y] = deuxPersonnes();
+    text = pick([
+      `${x.nom} a ${a} ${re.des}. ${y.nom} en a ${b} de plus. ${combienDe(re)} ${y.nom} a-t-${y.il} ?`,
+      `${x.nom} a ${a} ${re.des} et ${y.nom} en a ${b}. ${combienDe(re)} ${x.nom} a-t-${x.il} de plus ${que(y.nom)} ?`,
+    ]);
+    bon = text.includes("de plus que") || text.includes("de plus qu'") ? "une soustraction" : "une addition";
+    pourquoi = bon === "une addition" ? "on connaît la petite quantité et l'écart : on ajoute l'écart." : "on cherche un écart entre deux quantités.";
+  } else {
+    const k = rint(2, 5);
+    const n = rint(12, 90);
+    const [x, y] = deuxPersonnes();
+    text = `${x.nom} a ${n} ${re.des}. ${y.nom} en a ${k} fois plus. ${combienDe(re)} ${y.nom} a-t-${y.il} ?`;
+    bon = "une multiplication";
+    pourquoi = `« ${k} fois plus », c'est ${k} fois la même quantité.`;
+    canvas = parfois(0.5, () => barreEgale(k, String(n), null));
+  }
+  return qM(
+    `${text}\n\nQuelle opération faut-il choisir ?`,
+    bon,
+    OPS,
+    exp(
+      "Choisir l'opération, c'est reconnaître ce que l'histoire fait à la quantité.",
+      "On regarde si la quantité augmente, diminue, se répète à l'identique ou se partage en parts égales.",
+      `Ici, ${pourquoi}`,
+      `Il faut choisir ${bon}.`,
+    ),
+    avec(canvas),
+  );
+}
+
+/* ---------------------------------------------------------
+   UNE ÉTAPE : le tout, une part, le départ
+--------------------------------------------------------- */
+
+function leTout(): Q {
+  const r = reserve();
+  const p = quelquun();
+  const { S, il } = qui(r, p);
+  const a = rint(120, 3800);
+  const b = rint(90, 2400);
+  const t = a + b;
+  const couleurs = ["billes", "perles", "images", "cartes"].includes(r.des);
+  const text = pick([
+    `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.plus} ${fmt(b)}. ${combienDe(r)} a-t-${il} maintenant ?`,
+    `Le matin, ${sujetMilieu(r, p)} compte ${fmt(a)} ${r.des}. L'après-midi, ${il} en ${r.plus} ${fmt(b)}. ${combienDe(r)} en tout ?`,
+    `${S} range ${fmt(a)} ${r.des} dans une boîte et ${fmt(b)} dans une autre. Quel est le nombre total ${de(r.des)} ?`,
+    `Samedi, le zoo accueille ${fmt(a)} visiteurs. Dimanche, il en accueille ${fmt(b)}. Combien de visiteurs en tout ?`,
+    `Le cirque vend ${fmt(a)} billets pour le premier spectacle et ${fmt(b)} pour le second. Combien de billets en tout ?`,
+    couleurs
+      ? `${p.nom} a ${fmt(a)} ${r.des} rouges et ${fmt(b)} ${r.des} bleues. ${combienDe(r)} a-t-${p.il} ?`
+      : `${S} a ${fmt(a)} ${r.des} et ${p.nom} lui en apporte ${fmt(b)}. ${combienDe(r)} y a-t-il maintenant ?`,
+  ]);
+  return qN(
+    text,
+    t,
+    [a - b > 0 ? a - b : b - a, t + 100, t - 100, t + 10, t - 10, t + 1000],
+    exp("Un problème parties-tout donne deux parts et demande le tout.", "On rassemble les deux parts : c'est une addition.", `${fmt(a)} + ${fmt(b)} = ${fmt(t)}.`, `En tout : ${fmt(t)}.`),
+    avec(parfois(0.55, () => barre([["", fmt(a)], ["", fmt(b)]], null))),
+  );
+}
+
+function unePart(): Q {
+  const r = reserve();
+  const p = quelquun();
+  const { S, il } = qui(r, p);
+  const t = rint(800, 4800);
+  const a = rint(150, t - 120);
+  const b = t - a;
+  const text = pick([
+    `${S} a ${fmt(t)} ${r.des} en tout. ${fmt(a)} sont déjà ${/es$/.test(r.moinsPp) ? "rangées" : "rangés"}. Combien reste-t-il à ranger ?`,
+    `${S} avait ${fmt(t)} ${r.des}. ${maj(il)} en ${r.moins} ${fmt(a)}. ${combienDe(r)} lui reste-t-il ?`,
+    `${S} veut ${fmt(t)} ${r.des}. ${maj(il)} en a déjà ${fmt(a)}. ${combienDe(r)} lui manque-t-il ?`,
+    `Sur ${fmt(t)} ${r.des}, ${fmt(a)} sont ${r.moinsPp}. ${combienDe(r)} ne le sont pas ?`,
+    `Le train transporte ${fmt(t)} voyageurs. À la gare, ${fmt(a)} descendent. Combien en reste-t-il dans le train ?`,
+    `${p.nom} lit un gros livre de ${fmt(t)} pages. ${maj(p.il)} en a lu ${fmt(a)}. Combien de pages lui reste-t-il ?`,
+  ]);
+  return qN(
+    text,
+    b,
+    [t + a, b + 100, b - 100, b + 10, b - 10, a],
+    exp("On connaît le tout et une part : on cherche l'autre part.", "On enlève la part connue du tout : c'est une soustraction.", `${fmt(t)} − ${fmt(a)} = ${fmt(b)}. Vérification : ${fmt(a)} + ${fmt(b)} = ${fmt(t)}.`, `La réponse est ${fmt(b)}.`),
+    avec(parfois(0.55, () => barre([["connu", fmt(a)], ["?", null]], fmt(t)))),
+  );
+}
+
+function leDepart(): Q {
+  const r = reserve();
+  const p = quelquun();
+  const { S, il } = qui(r, p);
+  const x = rint(1200, 5800);
+  const d = rint(150, 2800);
+  const moins = Math.random() < 0.6;
+  const fin = moins ? x - d : x + d;
+  if (fin <= 0) return leDepart();
+  const text = moins
+    ? pick([
+        `${S} ${r.moins} ${fmt(d)} ${r.des}. Il lui en reste ${fmt(fin)}. ${combienDe(r)} avait-${il} au départ ?`,
+        `${S} a déjà ${ppMasc(r)} ${fmt(d)} ${r.des}. Il lui en reste ${fmt(fin)}. ${combienDe(r)} y avait-il avant ?`,
+        `Après en avoir ${ppMasc(r)} ${fmt(d)}, ${sujetMilieu(r, p)} a encore ${fmt(fin)} ${r.des}. ${combienDe(r)} y avait-il au début ?`,
+      ])
+    : pick([
+        `${S} ${r.plus} ${fmt(d)} ${r.des}. ${maj(il)} en a maintenant ${fmt(fin)}. ${combienDe(r)} avait-${il} avant ?`,
+        `Après en avoir reçu ${fmt(d)}, ${sujetMilieu(r, p)} a ${fmt(fin)} ${r.des}. ${combienDe(r)} avait-${il} au départ ?`,
+      ]);
+  return qN(
+    text,
+    x,
+    moins ? [fin - d, x + 10, x - 10, x + 100, d] : [fin + d, x + 10, x - 10, x - 100, d],
+    exp(
+      "On connaît la fin de l'histoire et le changement : on cherche le début.",
+      moins ? "On a enlevé : pour revenir au début, on rajoute." : "On a ajouté : pour revenir au début, on enlève.",
+      moins ? `${fmt(fin)} + ${fmt(d)} = ${fmt(x)}.` : `${fmt(fin)} − ${fmt(d)} = ${fmt(x)}.`,
+      `Au départ, il y en avait ${fmt(x)}.`,
+    ),
+    avec(parfois(0.55, () => (moins ? barre([["parti", fmt(d)], ["reste", fmt(fin)]], null) : barre([["avant", null], ["reçu", fmt(d)]], fmt(fin))))),
+  );
+}
+
+/* ---------------------------------------------------------
+   COMPARER : « de plus que », « de moins que », l'écart
+--------------------------------------------------------- */
+
+function comparaison(): Q {
+  const r = aEnfant();
+  const [x, y] = deuxPersonnes();
+  const a = rint(120, 980);
+  const e = rint(15, Math.min(400, a - 20));
+  const f = rint(1, 5);
+  const Q_ = combienDe(r);
+  if (f === 1)
+    return qN(
+      pick([
+        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de plus. ${Q_} ${y.nom} a-t-${y.il} ?`,
+        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de plus ${que(x.nom)}. ${Q_} pour ${y.nom} ?`,
+      ]),
+      a + e,
+      [a - e, e, a + e + 10, a + e - 10, a],
+      exp("« De plus » : l'autre en a davantage.", "On ajoute l'écart à la quantité connue.", `${a} + ${e} = ${a + e}.`, `${y.nom} en a ${a + e}.`),
+      avec(parfois(0.55, () => barre([[x.nom, String(a)], ["de plus", String(e)]], null))),
+    );
+  if (f === 2)
+    return qN(
+      pick([
+        `${x.nom} a ${a} ${r.des}. ${maj(x.il)} en a ${e} de plus ${que(y.nom)}. ${Q_} ${y.nom} a-t-${y.il} ?`,
+        `${x.nom} a ${a} ${r.des}, c'est ${e} de plus ${que(y.nom)}. ${Q_} ${y.nom} a-t-${y.il} ?`,
+      ]),
+      a - e,
+      [a + e, e, a - e + 10, a - e - 10, a],
+      exp("Un problème de comparaison relie deux quantités par un écart.", `On repère qui en a le plus : c'est ${x.nom}. Pour trouver ${y.nom}, on enlève l'écart.`, `${a} − ${e} = ${a - e}.`, `${y.nom} en a ${a - e}.`),
+      avec(parfois(0.55, () => barre([[y.nom, null], ["écart", String(e)]], String(a)))),
+    );
+  if (f === 3)
+    return qN(
+      pick([
+        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de moins. ${Q_} ${y.nom} a-t-${y.il} ?`,
+        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de moins ${que(x.nom)}. ${Q_} pour ${y.nom} ?`,
+      ]),
+      a - e,
+      [a + e, e, a - e + 10, a - e - 10],
+      exp("« De moins » : l'autre en a moins.", "On enlève l'écart à la quantité connue.", `${a} − ${e} = ${a - e}.`, `${y.nom} en a ${a - e}.`),
+      avec(parfois(0.55, () => barre([[y.nom, null], ["de moins", String(e)]], String(a)))),
+    );
+  const b = a - e;
+  return qN(
+    pick([
+      `${x.nom} a ${a} ${r.des} et ${y.nom} en a ${b}. ${Q_} ${x.nom} a-t-${x.il} de plus ${que(y.nom)} ?`,
+      `${x.nom} a ${a} ${r.des}, ${y.nom} en a ${b}. ${Q_} manque-t-il à ${y.nom} pour en avoir autant ${que(x.nom)} ?`,
+      `${x.nom} a ${a} ${r.des} et ${y.nom} ${b}. Quel est l'écart entre les deux ?`,
+      `${y.nom} a ${b} ${r.des}. ${x.nom} en a ${a}. ${Q_} ${y.nom} a-t-${y.il} de moins ?`,
+    ]),
+    e,
+    [a + b, e + 10, e - 10, e + 1, a],
+    exp("L'écart entre deux quantités, c'est ce qu'il faut ajouter à la petite pour avoir la grande.", "On enlève la petite quantité de la grande.", `${a} − ${b} = ${e}.`, `L'écart est de ${e}.`),
+    avec(parfois(0.55, () => barre([[y.nom, String(b)], ["écart", null]], String(a)))),
+  );
+}
+
+/* ---------------------------------------------------------
+   DEUX ÉTAPES, TROIS ÉTAPES
+--------------------------------------------------------- */
+
+function deuxEtapesRecoitVend(): Q {
+  const r = reserve();
+  const p = quelquun();
+  const { S, il } = qui(r, p);
+  const a = rint(300, 2500);
+  const b = rint(100, 900);
+  const c = rint(80, a + b - 100);
+  const res = a + b - c;
+  return qN(
+    pick([
+      `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.plus} ${fmt(b)}, puis en ${r.moins} ${fmt(c)}. ${combienDe(r)} lui reste-t-il ?`,
+      `Au début, ${sujetMilieu(r, p)} a ${fmt(a)} ${r.des}. Ensuite, ${il} en ${r.plus} ${fmt(b)}. Enfin, ${il} en ${r.moins} ${fmt(c)}. ${combienDe(r)} a-t-${il} à la fin ?`,
+      `${S} a ${fmt(a)} ${r.des}. Lundi, ${il} en ${r.plus} ${fmt(b)}. Mardi, ${il} en ${r.moins} ${fmt(c)}. ${combienDe(r)} lui reste-t-il ?`,
+    ]),
+    res,
+    [a + b + c, a - c, a + b, res + 100, res - 10],
+    exp("Un problème à deux étapes : deux changements, l'un après l'autre.", "On fait d'abord l'ajout, puis le retrait.", `${fmt(a)} + ${fmt(b)} = ${fmt(a + b)}, puis ${fmt(a + b)} − ${fmt(c)} = ${fmt(res)}.`, `Il en reste ${fmt(res)}.`),
+    avec(parfois(0.5, () => barre([["", fmt(a)], ["", fmt(b)]], null))),
+  );
+}
+
+function deuxEtapesLeReste(): Q {
+  const r = pick(RESERVES.filter((x) => !["points", "photos", "vaccins", "mètres de tuyau", "billets"].includes(x.des)));
+  const p = quelquun();
+  const { S } = qui(r, p);
+  const t = rint(900, 4800);
+  const a = rint(150, Math.floor(t / 3));
+  const b = rint(150, Math.floor(t / 3));
+  const c = t - a - b;
+  const fem = /es$/.test(r.moinsPp);
+  const trio = pick([
+    { m: ["neufs", "abîmés", "à trier"], f: ["neuves", "abîmées", "à trier"] },
+    { m: ["rouges", "bleus", "verts"], f: ["rouges", "bleues", "vertes"] },
+    { m: ["petits", "moyens", "grands"], f: ["petites", "moyennes", "grandes"] },
+  ]);
+  const [adjA, adjB, adjC] = fem ? trio.f : trio.m;
+  const accord = (x: string) => x;
+  return qN(
+    pick([
+      `${S} a ${fmt(t)} ${r.des} : ${fmt(a)} sont ${accord(adjA)}, ${fmt(b)} sont ${accord(adjB)}, et les autres sont ${accord(adjC)}. ${combienDe(r)} sont ${accord(adjC)} ?`,
+      `Sur ${fmt(t)} ${r.des}, il y en a ${fmt(a)} ${accord(adjA)} et ${fmt(b)} ${accord(adjB)}. Les autres sont ${accord(adjC)}. Combien ?`,
+      `${p.nom} compte ${fmt(t)} ${r.des} : ${fmt(a)} ${accord(adjA)}, ${fmt(b)} ${accord(adjB)}, le reste ${accord(adjC)}. ${combienDe(r)} ${accord(adjC)} ?`,
+    ]),
+    c,
+    [t - a, t - b, a + b, c + 10, c - 10, t + a + b],
+    exp("On connaît le tout et deux parts : on cherche la troisième.", "On rassemble les deux parts connues, puis on les enlève du tout.", `${fmt(a)} + ${fmt(b)} = ${fmt(a + b)}, puis ${fmt(t)} − ${fmt(a + b)} = ${fmt(c)}.`, `Il y en a ${fmt(c)}.`),
+    avec(parfois(0.6, () => barre([["", fmt(a)], ["", fmt(b)], ["?", null]], fmt(t)))),
+  );
+}
+
+function deuxEtapesComparaisonTotal(): Q {
+  const r = aEnfant();
+  const [x, y] = deuxPersonnes();
+  const a = rint(120, 800);
+  const e = rint(25, 400);
+  const b = a + e;
+  const t = a + b;
+  return qN(
+    pick([
+      `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de plus. ${combienDe(r)} les deux enfants ont-ils en tout ?`,
+      `${x.nom} a ${a} ${r.des} et ${y.nom} en a ${e} de plus ${que(x.nom)}. Combien en ont-ils ensemble ?`,
+      `${y.nom} a ${e} ${r.des} de plus ${que(x.nom)}, qui en a ${a}. ${combienDe(r)} en tout ?`,
+    ]),
+    t,
+    [a + e, a + a, t + e, t - 10, t + 100],
+    exp("Deux étapes : d'abord la quantité inconnue, puis le total.", `On trouve ce qu'a ${y.nom}, puis on additionne.`, `${a} + ${e} = ${b}, puis ${a} + ${b} = ${t}.`, `Ensemble, ils en ont ${t}.`),
+    avec(parfois(0.6, () => barre([[x.nom, String(a)], [y.nom, null]], null))),
+  );
+}
+
+function troisEtapesMixte(): Q {
+  const r = rangeable();
+  const p = quelquun();
+  const { S, il } = qui(r, p);
+  const k = rint(3, 8);
+  const n = rint(12, 60);
+  const v = rint(20, 150);
+  const d = rint(20, k * n + v - 20);
+  const res = k * n + v - d;
+  return qN(
+    pick([
+      `${S} range ${k} cartons de ${n} ${r.des}, et ${v} ${r.des} en plus. ${maj(il)} en ${r.moins} ensuite ${d}. ${combienDe(r)} lui reste-t-il ?`,
+      `${S} a ${k} boîtes de ${n} ${r.des} et ${v} ${r.des} à part. ${maj(il)} en ${r.moins} ${d}. ${combienDe(r)} a-t-${il} à la fin ?`,
+      `Dans le grenier ${de(p.nom)}, il y a ${k} caisses de ${n} ${r.des} et ${v} ${r.des} en vrac. ${maj(p.il)} en donne ${d}. Combien en reste-t-il ?`,
+    ]),
+    res,
+    [k * n + v, k * n - d, k + n + v - d, res + 10, res - 10, k * n + v + d],
+    exp("Trois étapes : une multiplication, une addition, une soustraction.", "On compte les paquets, on ajoute le vrac, on enlève ce qui part.", `${k} × ${n} = ${k * n} ; ${k * n} + ${v} = ${k * n + v} ; ${k * n + v} − ${d} = ${res}.`, `Il en reste ${res}.`),
+    avec(parfois(0.5, () => barre([...Array.from({ length: Math.min(k, 4) }, () => ["", String(n)] as [string, string]), ...(k > 4 ? [["…", "…"] as [string, string]] : []), ["vrac", String(v)]], null))),
+  );
+}
+
+function troisEtapesTables(): Q {
+  const p = quelquun();
+  const a = rint(3, 9);
+  const b = rint(3, 9);
+  const c = rint(2, 6);
+  const d = rint(2, 8);
+  const lieu = pick([
+    { lieu: "Dans le restaurant", g1: "tables de", g2: "personnes", q: "Combien de clients ce restaurant peut-il recevoir ?" },
+    { lieu: `Pour l'anniversaire ${de(p.nom)}`, g1: "tables de", g2: "invités", q: "Combien d'invités peut-on asseoir ?" },
+    { lieu: "Au cinéma de l'école", g1: "rangées de", g2: "fauteuils", q: "Combien de fauteuils y a-t-il ?" },
+    { lieu: "Dans le train de la fête foraine", g1: "wagons de", g2: "places", q: "Combien de places y a-t-il ?" },
+    { lieu: "Au potager", g1: "rangs de", g2: "salades", q: "Combien de salades le jardinier a-t-il plantées ?" },
+    { lieu: "Dans le vaisseau spatial", g1: "cabines de", g2: "astronautes", q: "Combien d'astronautes peuvent voyager ?" },
+    { lieu: "À la piscine", g1: "lignes de", g2: "nageurs", q: "Combien de nageurs peuvent s'entraîner ?" },
+  ]);
+  const t = a * b + c * d;
+  return qN(
+    `${lieu.lieu}, il y a ${a} ${lieu.g1} ${b} ${lieu.g2} et ${c} ${lieu.g1} ${d} ${lieu.g2}. ${lieu.q}`,
+    t,
+    [a * b, c * d, a + b + c + d, (a + c) * (b + d), t + 10, t - 1],
+    exp("Trois étapes : deux multiplications, puis une addition.", "On compte chaque groupe, puis on rassemble.", `${a} × ${b} = ${a * b} ; ${c} × ${d} = ${c * d} ; ${a * b} + ${c * d} = ${t}.`, `En tout : ${t}.`),
+    avec(parfois(0.4, () => barre([[`${a} × ${b}`, null], [`${c} × ${d}`, null]], null))),
+  );
+}
+
+const ARTICLES: readonly { un: string; des: string }[] = [
+  { un: "cahier", des: "cahiers" },
+  { un: "ballon", des: "ballons" },
+  { un: "livre", des: "livres" },
+  { un: "paquet de graines", des: "paquets de graines" },
+  { un: "puzzle", des: "puzzles" },
+  { un: "jeu de cartes", des: "jeux de cartes" },
+  { un: "pot de peinture", des: "pots de peinture" },
+  { un: "masque de pirate", des: "masques de pirate" },
+  { un: "cerf-volant", des: "cerfs-volants" },
+  { un: "kit de dinosaure", des: "kits de dinosaure" },
+];
+
+function troisEtapesAchats(): Q {
+  const p = quelquun();
+  const [A, B] = shuffle(ARTICLES).slice(0, 2);
+  const na = rint(2, 6);
+  const pa = rint(3, 12);
+  const nb = rint(2, 4);
+  const pb = rint(2, 9);
+  const cout = na * pa + nb * pb;
+  const billet = [20, 50, 100].find((x) => x > cout + 1);
+  if (!billet) return troisEtapesAchats();
+  const rendu = billet - cout;
+  const lieu = pick(["Au magasin de jouets", "À la papeterie", "À la kermesse", "Au marché", "À la librairie"]);
+  return qN(
+    pick([
+      `${lieu}, ${p.nom} achète ${na} ${A.des} à ${pa} € et ${nb} ${B.des} à ${pb} €. ${maj(p.il)} paie avec un billet de ${billet} €. Combien lui rend-on ?`,
+      `${p.nom} achète ${na} ${A.des} à ${pa} € l'un et ${nb} ${B.des} à ${pb} € l'un. ${maj(p.il)} donne ${billet} €. Quelle somme le vendeur lui rend-il ?`,
+    ]),
+    rendu,
+    [cout, billet - na * pa, billet - nb * pb, rendu + 1, rendu + 10],
+    exp("Trois étapes : le prix de chaque achat, le total, puis la monnaie rendue.", "On multiplie, on additionne, puis on enlève du billet.", `${na} × ${pa} = ${na * pa} € ; ${nb} × ${pb} = ${nb * pb} € ; total ${cout} € ; ${billet} − ${cout} = ${rendu} €.`, `On lui rend ${rendu} €.`),
+    { canvas: { kind: "monnaie", elements: [{ valeur: `${billet}e` as "20e" | "50e" | "100e" }] } },
+    "€",
+  );
+}
+
+/* ---------------------------------------------------------
+   COMPARAISON MULTIPLICATIVE
+--------------------------------------------------------- */
+
+function foisPlusMoins(): Q {
+  const r = aEnfant();
+  const [x, y] = deuxPersonnes();
+  const k = rint(2, 6);
+  const n = rint(4, 25);
+  if (Math.random() < 0.55)
+    return qN(
+      pick([
+        `${x.nom} a ${n} ${r.des}. ${y.nom} en a ${k} fois plus. ${combienDe(r)} ${y.nom} a-t-${y.il} ?`,
+        `${y.nom} a ${k} fois plus ${de(r.des)} ${que(x.nom)}, qui en a ${n}. ${combienDe(r)} pour ${y.nom} ?`,
+        `${x.nom} a ${n} ${r.des}. ${y.nom} en a ${k} fois autant. Combien en a ${y.nom} ?`,
+      ]),
+      n * k,
+      [n + k, n * k + n, n * k - n, n, k],
+      exp("« Fois plus » compare par multiplication, pas par addition.", "On multiplie la quantité connue par le nombre de fois.", `${n} × ${k} = ${n * k}. (« ${k} de plus » aurait donné ${n + k}.)`, `${y.nom} en a ${n * k}.`),
+      avec(parfois(0.6, () => barreEgale(k, String(n), null))),
+    );
+  const N1 = n * k;
+  return qN(
+    pick([
+      `${x.nom} a ${N1} ${r.des}. ${y.nom} en a ${k} fois moins. ${combienDe(r)} ${y.nom} a-t-${y.il} ?`,
+      `${x.nom} a ${N1} ${r.des}, c'est ${k} fois plus ${que(y.nom)}. ${combienDe(r)} ${y.nom} a-t-${y.il} ?`,
+    ]),
+    n,
+    [N1 - k, N1 * k, n + 1, N1, k],
+    exp("« Fois moins » : on partage la grande quantité en parts égales.", `On divise par ${k}.`, `${N1} ÷ ${k} = ${n}, car ${k} × ${n} = ${N1}.`, `${y.nom} en a ${n}.`),
+    avec(parfois(0.6, () => barreEgale(k, null, String(N1)))),
+  );
+}
+
+function foisPlusPrix(): Q {
+  const p = quelquun();
+  const paire = pick([
+    { petit: "un casque", grand: "une trottinette", G: "La trottinette", P: "Le casque" },
+    { petit: "un ballon", grand: "un vélo", G: "Le vélo", P: "Le ballon" },
+    { petit: "un livre", grand: "une tente", G: "La tente", P: "Le livre" },
+    { petit: "une boîte de crayons", grand: "un cartable", G: "Le cartable", P: "La boîte de crayons" },
+    { petit: "un yo-yo", grand: "un jeu de société", G: "Le jeu de société", P: "Le yo-yo" },
+    { petit: "un masque de plongée", grand: "une paire de palmes", G: "La paire de palmes", P: "Le masque" },
+    { petit: "une fusée en carton", grand: "une fusée télécommandée", G: "La fusée télécommandée", P: "La fusée en carton" },
+  ]);
+  const k = rint(2, 8);
+  const prix = rint(4, 40);
+  if (Math.random() < 0.6)
+    return qN(
+      pick([
+        `${paire.G} coûte ${k} fois plus cher ${que(paire.petit)}. ${paire.P} coûte ${prix} €. Combien coûte ${paire.grand.replace(/^un |^une /, (a) => (a === "un " ? "le " : "la "))} ?`,
+        `${p.nom} regarde ${paire.petit} à ${prix} € et ${paire.grand}, ${k} fois plus cher. Quel est le prix ${paire.grand.startsWith("une") ? "de la" : "du"} ${paire.grand.replace(/^un |^une /, "")} ?`,
+      ]),
+      prix * k,
+      [prix + k, prix * k + prix, prix * (k - 1), prix * k * 2],
+      exp("« Fois plus cher » : on multiplie le prix.", `On multiplie ${prix} € par ${k}.`, `${prix} × ${k} = ${prix * k}.`, `Cela coûte ${prix * k} €.`),
+      avec(parfois(0.6, () => barreEgale(k, `${prix} €`, null))),
+      "€",
+    );
+  return qN(
+    `${paire.G} coûte ${prix * k} €. C'est ${k} fois plus cher ${que(paire.petit)}. Combien coûte ${paire.petit.replace(/^un |^une /, (a) => (a === "un " ? "le " : "la "))} ?`,
+    prix,
+    [prix * k - k, prix + k, prix * k, prix - 1],
+    exp("Si le grand coûte k fois plus, le petit coûte k fois moins.", `On divise ${prix * k} € par ${k}.`, `${prix * k} ÷ ${k} = ${prix}, car ${k} × ${prix} = ${prix * k}.`, `Cela coûte ${prix} €.`),
+    avec(parfois(0.6, () => barreEgale(k, null, `${prix * k} €`))),
+    "€",
+  );
+}
+
+/* ---------------------------------------------------------
+   PRODUIT CARTÉSIEN : toutes les associations
+--------------------------------------------------------- */
+
+type Combo = { A: string; B: string; C?: string; quoi: string; verbe: string; la: string[]; lb: string[] };
+const COMBOS: readonly Combo[] = [
+  { A: "parfums de glace", B: "sortes de cornets", C: "nappages", quoi: "glaces différentes", verbe: "peut-on former", la: ["vanille", "fraise", "chocolat", "citron", "coco", "menthe"], lb: ["cornet", "pot", "gaufre", "biscuit"] },
+  { A: "tee-shirts", B: "shorts", C: "casquettes", quoi: "tenues différentes", verbe: "peut-on composer", la: ["rouge", "bleu", "jaune", "vert", "blanc", "noir"], lb: ["jean", "gris", "marine", "beige"] },
+  { A: "sortes de pain", B: "garnitures", C: "sauces", quoi: "sandwichs différents", verbe: "peut-on préparer", la: ["baguette", "pain de mie", "pain rond", "pain aux noix"], lb: ["jambon", "fromage", "poulet", "thon"] },
+  { A: "entrées", B: "desserts", C: "boissons", quoi: "menus différents", verbe: "peut-on choisir", la: ["salade", "soupe", "melon", "carottes"], lb: ["glace", "fruit", "yaourt", "gâteau"] },
+  { A: "têtes de robot", B: "corps de robot", C: "paires de bras", quoi: "robots différents", verbe: "peut-on assembler", la: ["ronde", "carrée", "pointue", "ovale"], lb: ["bleu", "rouge", "argent", "vert"] },
+  { A: "chapeaux", B: "capes", C: "baguettes magiques", quoi: "déguisements de magicien", verbe: "peut-on faire", la: ["haut", "pointu", "rond", "étoilé"], lb: ["violette", "noire", "dorée", "verte"] },
+  { A: "pâtes à pizza", B: "garnitures", C: "fromages", quoi: "pizzas différentes", verbe: "peut-on cuisiner", la: ["fine", "épaisse", "complète"], lb: ["tomate", "champignons", "olives", "ananas"] },
+  { A: "couleurs de coque", B: "couleurs de voile", C: "drapeaux", quoi: "bateaux pirates différents", verbe: "peut-on dessiner", la: ["noire", "rouge", "brune", "verte"], lb: ["blanche", "noire", "rayée", "jaune"] },
+  { A: "dragons", B: "châteaux", C: "chevaliers", quoi: "histoires différentes", verbe: "peut-on inventer", la: ["vert", "rouge", "bleu", "doré"], lb: ["de pierre", "de glace", "de nuages", "de sable"] },
+  { A: "lettres", B: "chiffres", C: "symboles", quoi: "codes secrets", verbe: "peut-on écrire", la: ["A", "B", "C", "D", "E"], lb: ["1", "2", "3", "4", "5"] },
+];
+
+function cartesien(etoile: Etoile): Q {
+  const c = pick(COMBOS);
+  const p = quelquun();
+  const a = rint(2, Math.min(5, c.la.length));
+  const b = rint(2, Math.min(4, c.lb.length));
+  if (etoile === 4) {
+    const tableau: Q["canvas"] | undefined =
+      Math.random() < 0.55
+        ? { kind: "tableau_donnees", headers: c.lb.slice(0, b), coin: "", rows: c.la.slice(0, a).map((l) => ({ label: l, values: Array.from({ length: b }, () => "…") })) } as Q["canvas"]
+        : undefined;
+    return qN(
+      pick([
+        `Il y a ${a} ${c.A} et ${b} ${c.B}. Combien ${de(c.quoi)} ${c.verbe} ?`,
+        `${p.nom} a ${a} ${c.A} et ${b} ${c.B}. Combien ${de(c.quoi)} ${c.verbe} ?`,
+        `Avec ${a} ${c.A} et ${b} ${c.B}, combien de ${c.quoi} ${c.verbe} ?`,
+        `Pic le paille-en-queue essaie toutes les associations : ${a} ${c.A} avec ${b} ${c.B}. Combien ${de(c.quoi)} ${c.verbe} ?`,
+      ]),
+      a * b,
+      [a + b, a * b * 2, a * b + 1, a * b - 1, a * a],
+      exp("Pour compter toutes les associations, on associe chaque élément du premier groupe à chaque élément du second.", `Chacun des ${a} ${c.A} va avec chacun des ${b} ${c.B}.`, `${a} × ${b} = ${a * b}.`, `On peut faire ${a * b} ${c.quoi}.`),
+      avec(tableau),
+    );
+  }
+  if (Math.random() < 0.5) {
+    const k = rint(2, 3);
+    return qN(
+      pick([
+        `Il y a ${a} ${c.A}, ${b} ${c.B} et ${k} ${c.C}. Combien ${de(c.quoi)} ${c.verbe} ?`,
+        `${p.nom} a ${a} ${c.A}, ${b} ${c.B} et ${k} ${c.C}. Combien ${de(c.quoi)} ${c.verbe} ?`,
+      ]),
+      a * b * k,
+      [a + b + k, a * b, a * b + k, a * b * k + 1, (a + b) * k],
+      exp("Avec trois groupes, on associe chaque élément de chacun.", "On multiplie les trois nombres.", `${a} × ${b} = ${a * b}, puis ${a * b} × ${k} = ${a * b * k}.`, `On peut faire ${a * b * k} ${c.quoi}.`),
+    );
+  }
+  const t = a * b;
+  return qN(
+    pick([
+      `Avec ses ${c.A} et ${b} ${c.B}, ${p.nom} peut faire ${t} ${c.quoi}. Combien a-t-${p.il} ${de(c.A)} ?`,
+      `On peut faire ${t} ${c.quoi} avec ${b} ${c.B} et des ${c.A}. Combien y a-t-il ${de(c.A)} ?`,
+    ]),
+    a,
+    [t - b, t, a + 1, b, a * 2],
+    exp("Le nombre d'associations est le produit des deux groupes.", `On cherche le nombre qui, multiplié par ${b}, donne ${t}.`, `${a} × ${b} = ${t}, donc il y a ${a} ${c.A}.`, `Il y a ${a} ${c.A}.`),
+  );
+}
+
+/* ---------------------------------------------------------
+   LE SCHÉMA EN BARRES : lire le dessin
+--------------------------------------------------------- */
+
+function lireSchema(etoile: Etoile): Q {
+  const r = rangeable();
+  const p = quelquun();
+  const { S } = qui(r, p);
+  const f = etoile === 3 ? rint(1, 2) : etoile === 4 ? rint(3, 4) : 5;
+  if (f === 1) {
+    const a = rint(120, 2800);
+    const b = rint(90, 2400);
+    return qN(
+      pick([
+        `Le schéma montre les ${r.des} ${de(p.nom)}. Quel nombre remplace le point d'interrogation ?`,
+        `${p.nom} a dessiné ce schéma pour ses ${r.des}. Que vaut le « ? » ?`,
+        `Regarde le schéma : deux parts et un tout. Quel est le tout ?`,
+        `Pic le paille-en-queue a caché le total du schéma. Combien vaut-il ?`,
+        `${p.nom} réunit ses ${r.des} : le schéma montre les deux tas. Combien en a-t-${p.il} en tout ?`,
+        `${p.nom} lit le schéma de la maîtresse. Que vaut la barre entière ?`,
+        `Le schéma ${de(p.nom)} a deux parts. Quel est le total ?`,
+      ]),
+      a + b,
+      [a - b > 0 ? a - b : b - a, a + b + 100, a + b - 100, a + b + 10],
+      exp("Dans un schéma en barres, le tout est la barre entière.", "On connaît les deux parts : on les additionne.", `${fmt(a)} + ${fmt(b)} = ${fmt(a + b)}.`, `Le « ? » vaut ${fmt(a + b)}.`),
+      { canvas: barre([["", fmt(a)], ["", fmt(b)]], null) },
+    );
+  }
+  if (f === 2) {
+    const t = rint(800, 4800);
+    const a = rint(150, t - 100);
+    return qN(
+      pick([
+        `Le schéma montre les ${r.des} ${de(p.nom)}. Quel nombre remplace le point d'interrogation ?`,
+        `${p.nom} a dessiné ce schéma. Combien vaut la part cachée ?`,
+        `Regarde le schéma : on connaît le tout et une part. Que vaut l'autre part ?`,
+        `Pic le paille-en-queue a caché une part du schéma. Combien vaut-elle ?`,
+        `${p.nom} sait combien ${p.il} a ${de(r.des)} en tout. Le schéma montre une part. Combien vaut l'autre ?`,
+        `Le schéma ${de(p.nom)} montre le tout et une part. Quel nombre manque ?`,
+        `${p.nom} a dessiné ses ${r.des} en barre. Que vaut la partie rouge ?`,
+      ]),
+      t - a,
+      [t + a, t - a + 100, t - a - 10, a],
+      exp("Dans un schéma en barres, les parts mises bout à bout font le tout.", "On enlève la part connue du tout.", `${fmt(t)} − ${fmt(a)} = ${fmt(t - a)}.`, `Le « ? » vaut ${fmt(t - a)}.`),
+      { canvas: barre([["", fmt(a)], ["", null]], fmt(t)) },
+    );
+  }
+  if (f === 3) {
+    const k = rint(3, 8);
+    const q = rint(4, 25);
+    const objet = pick([
+      { quoi: "dictionnaires", qui: "La maîtresse", verbe: "a acheté", fin: "Quel est le prix d'un seul ?" },
+      { quoi: "billets de cirque", qui: `${p.nom}`, verbe: "a payé", fin: "Combien coûte un billet ?" },
+      { quoi: "ballons", qui: "Le club de foot", verbe: "a acheté", fin: "Quel est le prix d'un ballon ?" },
+      { quoi: "pots de peinture", qui: "Le peintre", verbe: "a acheté", fin: "Combien coûte un pot ?" },
+      { quoi: "livres", qui: "La bibliothécaire", verbe: "a acheté", fin: "Combien coûte un livre ?" },
+    ]);
+    return qN(
+      pick([
+        `${objet.qui} ${objet.verbe} ${k} ${objet.quoi} au même prix pour ${k * q} €. Le schéma montre le partage. ${objet.fin}`,
+        `${k} ${objet.quoi} coûtent ${k * q} € en tout, tous au même prix. ${objet.fin}`,
+        `${p.nom} regarde le schéma : ${k} ${objet.quoi} pour ${k * q} €, tous au même prix. ${objet.fin}`,
+        `${objet.qui} ${objet.verbe} ${k} ${objet.quoi} identiques. ${p.nom} sait que le total est de ${k * q} €. ${objet.fin}`,
+      ]),
+      q,
+      [k * q - k, q + 1, k, k * q, q * 2],
+      exp("Des parts égales : le tout se partage.", `On divise ${k * q} € par ${k}.`, `${k * q} ÷ ${k} = ${q}, car ${k} × ${q} = ${k * q}.`, `Un seul coûte ${q} €.`),
+      { canvas: barreEgale(k, null, `${k * q} €`) },
+      "€",
+    );
+  }
+  if (f === 4) {
+    const k = rint(3, 6);
+    const q = rint(12, 80);
+    return qN(
+      pick([
+        `${S} remplit ${k} boîtes de ${q} ${r.des}. Le schéma le montre. ${combienDe(r)} en tout ?`,
+        `Le schéma montre ${k} parts égales de ${q}. Que vaut la barre entière ?`,
+        `${p.nom} dessine ${k} parts de ${q} ${r.des}. Combien vaut le total ?`,
+        `Pic le paille-en-queue a rempli ${k} paniers de ${q} ${r.des}. Combien en tout ?`,
+        `${p.nom} met ${q} ${r.des} dans chacune de ses ${k} boîtes. Le schéma le montre. Combien ${de(r.des)} a-t-${p.il} ?`,
+      ]),
+      k * q,
+      [k + q, k * q + q, k * q - q, k * q + 10],
+      exp("Des parts égales mises bout à bout : c'est une multiplication.", `${k} parts de ${q}.`, `${k} × ${q} = ${k * q}.`, `Le total est ${k * q}.`),
+      { canvas: barreEgale(k, String(q), null) },
+    );
+  }
+  const re = aEnfant();
+  const [x, y] = deuxPersonnes();
+  const a = rint(120, 700);
+  const e = rint(25, 300);
+  return qN(
+    pick([
+      `${x.nom} a ${a} ${re.des}. ${y.nom} en a ${e} de plus ${que(x.nom)}. Combien les deux enfants ont-ils ${de(re.des)} en tout ?`,
+      `Le schéma montre les ${re.des} ${de(x.nom)} et ${de(y.nom)}, qui en a ${e} de plus. ${x.nom} en a ${a}. Combien en ont-ils ensemble ?`,
+      `${y.nom} a ${e} ${re.des} de plus ${que(x.nom)}, qui en a ${a}. Le schéma les montre. Combien ${de(re.des)} en tout ?`,
+      `${x.nom} a ${a} ${re.des} ; ${y.nom} en a ${e} de plus. Quel est le total des deux enfants ?`,
+    ]),
+    a + a + e,
+    [a + e, a + e + e, a + a, a + a + e + 10],
+    exp("Deux étapes : la part de chacun, puis le total.", `${y.nom} en a ${a} + ${e} = ${a + e}.`, `${a} + ${a + e} = ${a + a + e}.`, `Ensemble : ${a + a + e}.`),
+    { canvas: barre([[x.nom, String(a)], [y.nom, null]], null) },
+  );
+}
+
+/* ---------------------------------------------------------
+   VÉRIFIER : la réponse est-elle possible ?
+--------------------------------------------------------- */
+
+function verifier(etoile: Etoile): Q {
+  const r = reserve();
+  const p = quelquun();
+  const { S } = qui(r, p);
+  const f = etoile === 4 ? rint(1, 2) : rint(1, 3);
+  if (f === 1) {
+    const a = rint(800, 4800);
+    const b = rint(30, 600);
+    const juste = Math.random() < 0.4;
+    const annonce = juste ? a - b : pick([a, a + b, a + b * 2]);
+    return qM(
+      pick([
+        `${S} avait ${fmt(a)} ${r.des} et en a ${ppMasc(r)} ${fmt(b)}. ${p.nom} répond qu'il en reste ${fmt(annonce)}. Cette réponse est-elle possible ?`,
+        `Il y avait ${fmt(a)} ${r.des} ; ${fmt(b)} sont partis. Un élève trouve qu'il en reste ${fmt(annonce)}. Est-ce possible ?`.replace("partis", /es$/.test(r.moinsPp) ? "parties" : "partis"),
+      ]),
+      juste ? "Oui, elle est correcte" : "Non, elle est impossible",
+      [juste ? "Non, elle est impossible" : "Oui, elle est correcte", "On ne peut pas le savoir"],
+      exp("Quand on enlève, il doit rester MOINS qu'au départ.", `On compare la réponse au départ, ${fmt(a)}.`, juste ? `${fmt(a)} − ${fmt(b)} = ${fmt(a - b)} : la réponse est juste.` : `${fmt(annonce)} n'est pas plus petit que ${fmt(a)} : c'est impossible. La bonne réponse est ${fmt(a - b)}.`, juste ? "La réponse est possible." : "La réponse est impossible."),
+    );
+  }
+  if (f === 2) {
+    const t = rint(800, 4800);
+    const part = Math.random() < 0.5 ? rint(100, t - 50) : rint(t + 50, t + 900);
+    const ok = part < t;
+    return qM(
+      pick([
+        `${S} a ${fmt(t)} ${r.des} en tout, dont une partie est ${ppFem(r)}. ${p.nom} trouve ${fmt(part)} ${r.des} ${r.moinsPp}. Cette réponse est-elle possible ?`,
+        `Sur ${fmt(t)} ${r.des}, certains sont ${r.moinsPp}. Un élève annonce que ${fmt(part)} sont ${r.moinsPp}. Est-ce possible ?`.replace("certains sont", /es$/.test(r.moinsPp) ? "certaines sont" : "certains sont"),
+      ]),
+      ok ? "oui" : "non",
+      [ok ? "non" : "oui", "on ne peut pas le savoir"],
+      exp("Une partie ne peut pas être plus grande que le tout.", `On compare ${fmt(part)} et ${fmt(t)}.`, ok ? `${fmt(part)} est plus petit que ${fmt(t)} : c'est possible.` : `${fmt(part)} est plus grand que ${fmt(t)} : c'est impossible.`, ok ? "Oui, c'est possible." : "Non, c'est impossible."),
+      avec(parfois(0.5, () => barre([["partie", fmt(part)], ["reste", null]], fmt(t)))),
+    );
+  }
+  const a = rint(600, 4800);
+  const b = rint(120, 2800);
+  const juste = Math.random() < 0.45;
+  const annonce = juste ? a + b : pick([Math.abs(a - b), a, b + 1]);
+  return qM(
+    pick([
+      `On réunit ${fmt(a)} et ${fmt(b)}. ${p.nom} annonce ${fmt(annonce)}. Cette réponse est-elle possible ?`,
+      `${S} a ${fmt(a)} ${r.des} et en ${r.plus} ${fmt(b)}. Un élève dit qu'${r.sujet ? (r.fem ? "elle" : "il") : p.il} en a ${fmt(annonce)}. Est-ce possible ?`,
+    ]),
+    juste ? "oui" : "non",
+    [juste ? "non" : "oui", "on ne peut pas le savoir"],
+    exp("Quand on réunit deux quantités, le total est plus grand que chacune.", "On estime : on arrondit à la centaine.", juste ? `${fmt(a)} + ${fmt(b)} = ${fmt(a + b)} : c'est juste.` : `${fmt(annonce)} n'est pas plus grand que ${fmt(Math.max(a, b))} : c'est impossible.`, juste ? "Oui." : "Non."),
+  );
+}
+
+/* ---------------------------------------------------------
+   LES DÉFIS : le reste du partage, c'est l'histoire qui décide
+--------------------------------------------------------- */
+
+function defiReste(type: 1 | 2 | 3): Q {
+  const k = rint(4, 10);
+  const q = rint(3, 9);
+  const reste = rint(1, k - 1);
+  const t = k * q + reste;
+  const p = quelquun();
+  const sit = pick([
+    { quoi: "cahiers", boite: "boîtes", fem: true, qui: "La maîtresse", v: "range" },
+    { quoi: "œufs", boite: "boîtes", fem: true, qui: "La fermière", v: "range" },
+    { quoi: "croissants", boite: "sachets", fem: false, qui: "La boulangère", v: "met" },
+    { quoi: "billes", boite: "sachets", fem: false, qui: "Le marchand de jouets", v: "met" },
+    { quoi: "livres", boite: "cartons", fem: false, qui: "La bibliothécaire", v: "range" },
+    { quoi: "pièces d'or", boite: "coffres", fem: false, qui: "Le capitaine pirate", v: "range" },
+    { quoi: "cookies", boite: "boîtes", fem: true, qui: "Le chef pâtissier", v: "range" },
+    { quoi: "graines", boite: "pots", fem: false, qui: "Le jardinier", v: "met" },
+    { quoi: "poissons", boite: "aquariums", fem: false, qui: "La soigneuse", v: "met" },
+  ]);
+  const complets = sit.fem ? "complètes" : "complets";
+  const quiMin = sit.qui.charAt(0).toLowerCase() + sit.qui.slice(1);
+  const debut = pick([
+    `${sit.qui} ${sit.v} ${t} ${sit.quoi} dans des ${sit.boite} de ${k}.`,
+    `${sit.qui} ${sit.v} ${t} ${sit.quoi} par ${sit.boite} de ${k}.`,
+    `Il y a ${t} ${sit.quoi}. ${sit.qui} les ${sit.v} dans des ${sit.boite} de ${k}.`,
+    `${p.nom} aide ${quiMin} à répartir ${t} ${sit.quoi} dans des ${sit.boite} de ${k}.`,
+  ]);
+  if (type === 1)
+    return qN(
+      `${debut} ${pick([`Combien ${de(sit.boite)} seront ${complets} ?`, `Combien ${de(sit.boite)} ${complets} y aura-t-il ?`, `Combien ${de(sit.boite)} pourra-t-on remplir entièrement ?`])}`,
+      q,
+      [q + 1, reste, q - 1, k],
+      exp("On cherche combien de fois le paquet tient dans le total.", `${t} = ${k} × ${q} + ${reste}.`, `${q} ${sit.boite} ${complets}, et ${reste} ${sit.quoi} restent.`, `${q} ${sit.boite} sont ${complets}.`),
+      avec(parfois(0.5, () => barre([...Array.from({ length: Math.min(q, 4) }, () => ["", String(k)] as [string, string]), ...(q > 4 ? [["…", "…"] as [string, string]] : []), ["reste", null]], String(t)))),
+    );
+  if (type === 2)
+    return qN(
+      `${debut} ${pick([`Combien ${de(sit.quoi)} resteront en dehors des ${sit.boite} ${complets} ?`, `Combien ${de(sit.quoi)} ne trouveront pas de place ?`, `Une fois les ${sit.boite} ${complets} remplis, combien ${de(sit.quoi)} reste-t-il ?`.replace("remplis", sit.fem ? "remplies" : "remplis")])}`,
+      reste,
+      [k - reste, q, reste + 1, k],
+      exp("Le reste, c'est ce qui ne suffit pas à remplir un paquet de plus.", `${k} × ${q} = ${k * q}.`, `${t} − ${k * q} = ${reste}.`, `Il en reste ${reste}.`),
+      avec(parfois(0.5, () => barre([["déjà rangés", String(k * q)], ["reste", null]], String(t)))),
+    );
+  const v = pick([
+    { qui: "élèves partent en sortie", v: "voiture transporte", vs: "voitures", fin: "pour que TOUS partent" },
+    { qui: "enfants vont à la piscine", v: "minibus emmène", vs: "minibus", fin: "pour emmener tout le monde" },
+    { qui: "supporters vont au match", v: "car transporte", vs: "cars", fin: "pour que tous voyagent" },
+    { qui: "astronautes partent vers Mars", v: "fusée emmène", vs: "fusées", fin: "pour que tous décollent" },
+  ]);
+  return qN(
+    `${pick(["", "", `${p.nom} organise le voyage. `, `${p.nom} fait le calcul. `, "Pic le paille-en-queue compte. "])}${t} ${v.qui}. Chaque ${v.v} ${k} personnes. ${pick([`Combien ${de(v.vs)} faut-il ${v.fin} ?`, `Combien ${de(v.vs)} doit-on prévoir ?`, `Quel est le plus petit nombre ${de(v.vs)} qu'il faut ?`])}`,
+    q + 1,
+    [q, reste, q + 2, k],
+    exp("Le reste ne se jette pas : des personnes ne restent pas sur le trottoir.", `${t} = ${k} × ${q} + ${reste}.`, `${q} ${v.vs} ne suffisent pas : il reste ${reste} personnes, il en faut une de plus.`.replace("il en faut une", v.vs === "fusées" || v.vs === "voitures" ? "il en faut une" : "il en faut un"), `Il faut ${q + 1} ${v.vs}.`),
+  );
+}
+
+/* =========================================================
+   LES ITEMS
+========================================================= */
+
+const GABARITS: TutorBankItemV4[] = [
+  // ce2_probleme_choisir_operation
+  g("ce2_probleme_choisir_tpl_001", "ce2_probleme_choisir_operation", 2, "Demande-toi si la quantité augmente, diminue, se répète ou se partage.", ["choisir_operation"], () => choisirOperation(2)),
+  g("ce2_probleme_choisir_tpl_002_groupes_ou_reunion", "ce2_probleme_choisir_operation", 4, "Paquets égaux ou parts qu'on réunit ?", ["choisir_operation"], () => choisirOperation(4)),
+  g("ce2_probleme_choisir_tpl_003_partage", "ce2_probleme_choisir_operation", 4, "Partage en parts égales : c'est une division.", ["choisir_operation"], () => choisirOperation(4)),
+
+  // ce2_probleme_une_etape
+  g("ce2_probleme_une_etape_tpl_001_parties_tout", "ce2_probleme_une_etape", 2, "Deux parts qu'on rassemble : on additionne.", ["parties_tout"], leTout),
+  g("ce2_probleme_une_etape_tpl_002_part_manquante", "ce2_probleme_une_etape", 3, "Le tout moins la part connue.", ["parties_tout"], unePart),
+  g("ce2_probleme_une_etape_tpl_003_etat_initial", "ce2_probleme_une_etape", 5, "Fais l'histoire à l'envers.", ["etat_initial"], leDepart),
+
+  // ce2_probleme_comparaison
+  g("ce2_probleme_comparaison_tpl_001", "ce2_probleme_comparaison", 3, "Qui en a le plus ? Ajoute ou enlève l'écart.", ["comparaison"], comparaison),
+  g("ce2_probleme_comparaison_tpl_002_ecart", "ce2_probleme_comparaison", 3, "L'écart : la grande quantité moins la petite.", ["comparaison"], comparaison),
+
+  // ce2_probleme_deux_etapes
+  g("ce2_probleme_deux_etapes_tpl_001", "ce2_probleme_deux_etapes", 3, "Un changement, puis l'autre.", ["deux_etapes"], () => (Math.random() < 0.7 ? deuxEtapesRecoitVend() : deuxEtapesComparaisonTotal())),
+  g("ce2_probleme_deux_etapes_tpl_002_le_reste", "ce2_probleme_deux_etapes", 5, "Rassemble les parts connues, puis enlève-les du tout.", ["deux_etapes"], deuxEtapesLeReste),
+  g("ce2_probleme_deux_etapes_tpl_003_comparaison_puis_total", "ce2_probleme_deux_etapes", 5, "D'abord la quantité inconnue, puis le total.", ["deux_etapes"], () => (Math.random() < 0.6 ? deuxEtapesComparaisonTotal() : deuxEtapesRecoitVend())),
+
+  // ce2_probleme_trois_etapes
+  g("ce2_probleme_trois_etapes_tpl_001_mixte", "ce2_probleme_trois_etapes", 5, "Les paquets, puis le vrac, puis ce qui part.", ["trois_etapes"], troisEtapesMixte),
+  g("ce2_probleme_trois_etapes_tpl_002_restaurant", "ce2_probleme_trois_etapes", 5, "Compte chaque groupe, puis rassemble.", ["trois_etapes"], troisEtapesTables),
+  g("ce2_probleme_trois_etapes_tpl_003_achats", "ce2_probleme_trois_etapes", 5, "Le prix de chaque achat, le total, puis la monnaie.", ["trois_etapes"], troisEtapesAchats),
+
+  // ce2_probleme_comparaison_multiplicative
+  g("ce2_probleme_compmult_tpl_001", "ce2_probleme_comparaison_multiplicative", 4, "« Fois plus » : on multiplie. « Fois moins » : on divise.", ["comparaison_multiplicative"], foisPlusMoins),
+  g("ce2_probleme_compmult_tpl_002_prix", "ce2_probleme_comparaison_multiplicative", 5, "« Fois plus cher » : on multiplie le prix.", ["comparaison_multiplicative"], () => (Math.random() < 0.65 ? foisPlusPrix() : foisPlusMoins())),
+
+  // ce2_probleme_produit_cartesien
+  g("ce2_probleme_cartesien_tpl_001", "ce2_probleme_produit_cartesien", 4, "Chaque élément du premier groupe va avec chaque élément du second.", ["produit_cartesien"], () => cartesien(4)),
+  g("ce2_probleme_cartesien_tpl_002_trois_ensembles", "ce2_probleme_produit_cartesien", 5, "Avec trois groupes, on multiplie trois nombres.", ["produit_cartesien"], () => cartesien(5)),
+  g("ce2_probleme_cartesien_tpl_003_ensemble_manquant", "ce2_probleme_produit_cartesien", 5, "Quel nombre, multiplié par l'autre groupe, donne toutes les associations ?", ["produit_cartesien"], () => cartesien(5)),
+
+  // ce2_probleme_schema_barre
+  g("ce2_probleme_schema_tpl_001", "ce2_probleme_schema_barre", 3, "La barre entière, c'est le tout.", ["schema_barre", "canvas"], () => lireSchema(3)),
+  g("ce2_probleme_schema_tpl_003_parts_egales", "ce2_probleme_schema_barre", 4, "Des parts égales : multiplie ou partage.", ["schema_barre", "canvas"], () => lireSchema(4)),
+  g("ce2_probleme_schema_tpl_002_comparaison", "ce2_probleme_schema_barre", 5, "D'abord la part de chacun, puis le total.", ["schema_barre", "canvas"], () => (Math.random() < 0.6 ? lireSchema(5) : lireSchema(4))),
+
+  // ce2_probleme_verifier
+  g("ce2_probleme_verifier_tpl_001", "ce2_probleme_verifier", 4, "Quand on enlève, il reste moins qu'au départ.", ["verifier"], () => verifier(4)),
+  g("ce2_probleme_verifier_tpl_002_part_plus_grande", "ce2_probleme_verifier", 4, "Une partie ne dépasse jamais le tout.", ["verifier"], () => verifier(4)),
+  g("ce2_probleme_verifier_tpl_003_somme_trop_petite", "ce2_probleme_verifier", 5, "Un total est plus grand que chacune de ses parts.", ["verifier"], () => verifier(5)),
+
+  // ce2_probleme_defi
+  g("ce2_probleme_defi_tpl_001_partage_avec_reste", "ce2_probleme_defi", 5, "Combien de fois le paquet tient-il dans le total ?", ["defi"], () => defiReste(1)),
+  g("ce2_probleme_defi_tpl_002_reste_du_partage", "ce2_probleme_defi", 5, "Le reste : ce qui ne remplit pas un paquet de plus.", ["defi"], () => defiReste(2)),
+  g("ce2_probleme_defi_tpl_003_reste_selon_histoire", "ce2_probleme_defi", 5, "Personne ne reste sur le trottoir.", ["defi"], () => defiReste(3)),
+];
+
+export const problemeBank: TutorBankItemV4[] = [...FIXES, ...GABARITS];

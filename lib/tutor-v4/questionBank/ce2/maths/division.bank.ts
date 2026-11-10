@@ -26,46 +26,44 @@
 //
 // ⚠️ PAS DE QUESTION À RÉDIGER. `applyMathsKeyboardFree` retire les items
 // `format: "open"` (cf. ce2/maths/index.ts) : un CE2 clique, il ne tape pas.
+//
+// ⛔ LES SQUELETTES (10/11/2026). Mesuré avec scripts/mesurer-squelettes-coach.ts :
+// les 5 micros tenaient sur 4 à 16 squelettes, et le ★2 du sens n'avait que
+// deux items figés (18 répétitions sur 20). Chaque gabarit tire maintenant une
+// FAMILLE, une SITUATION (18 choses, 11 contenants, la troupe) et une TOURNURE.
+// ⭐ LES DESSINS (`objets`) : une collection À PARTAGER est dessinée EN VRAC
+// (par cinq, comme on compte), jamais déjà rangée en paquets — le dessin aide à
+// compter sans donner la réponse. Les paquets ne sont dessinés que pour un fait
+// déjà connu (« on sait que 3 × 4 = 12 ») ou une multiplication. Sinon, un
+// schéma en barres de parts égales. Outils communs : ./outils-calcul-ce2.ts.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { ObjetId, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import {
+  type Etoile,
+  type Prenom,
+  type Q,
+  barre,
+  barreEgale,
+  de,
+  exp,
+  gabarit,
+  maj,
+  objetsEnVrac,
+  objetsGroupes,
+  pick,
+  poserCalcul,
+  qM,
+  qN,
+  quelquun,
+  rint,
+  tIl,
+} from "./outils-calcul-ce2";
 
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+/* =========================================================
+   LES ITEMS FIGÉS (gardés tels quels)
+========================================================= */
 
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-// La bonne réponse est mise de côté, trois pièges distincts sont tirés ensuite,
-// puis on mélange. L'écrire autrement a rendu des questions impossibles à
-// réussir dans 79 banques : voir scripts/verifier-generateurs.mjs.
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
-
-function exp(definition: string, methode: string, calcul: string, conclusion: string) {
-  return `Définition : ${definition}
-
-Méthode : ${methode}
-
-Calcul : ${calcul}
-
-Conclusion : ${conclusion}`;
-}
-
-export const divisionBank: TutorBankItemV4[] = [
-  /* =========================================================
-     CE2_DIVISION_SENS — partage ou groupement
-     Deux histoires différentes, un même calcul.
-  ========================================================= */
+const FIXES: TutorBankItemV4[] = [
   {
     kind: "fixed",
     id: "ce2_division_sens_fixed_1",
@@ -139,104 +137,6 @@ export const divisionBank: TutorBankItemV4[] = [
     tags: ["ce2", "division", "sens", "reunion", "piege", "qcm"],
   },
   {
-    kind: "template",
-    id: "ce2_division_sens_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_sens",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Cherche dans la table : combien de fois ce nombre pour arriver au total ?",
-    tags: ["ce2", "division", "sens", "template"],
-    generate: () => {
-      const parts = randomInt(2, 9);
-      const chacun = randomInt(2, 9);
-      const total = parts * chacun;
-      const partage = randomChoice([true, false]);
-      const objet = randomChoice([
-        { nom: "billes", contenant: "sachets" },
-        { nom: "images", contenant: "pochettes" },
-        { nom: "letchis", contenant: "barquettes" },
-        { nom: "crayons", contenant: "trousses" },
-      ]);
-      return partage
-        ? {
-            text: `On partage ${total} ${objet.nom} entre ${parts} enfants, à parts égales. Combien de ${objet.nom} chacun ?`,
-            format: "short",
-            expected: [String(chacun)],
-            comparator: "number_equal",
-            explanation: exp(
-              "Partager à parts égales, c'est chercher ce que reçoit chacun.",
-              "On cherche dans la table du nombre d'enfants.",
-              `${parts} × ${chacun} = ${total}, donc chacun reçoit ${chacun} ${objet.nom}.`,
-              `Chacun a ${chacun} ${objet.nom}.`,
-            ),
-          }
-        : {
-            text: `On range ${total} ${objet.nom} dans des ${objet.contenant} de ${chacun}. Combien de ${objet.contenant} remplit-on ?`,
-            format: "short",
-            expected: [String(parts)],
-            comparator: "number_equal",
-            explanation: exp(
-              "Grouper, c'est chercher combien de paquets on peut faire quand on connaît leur taille.",
-              `On cherche combien de fois ${chacun} tient dans ${total}.`,
-              `${chacun} × ${parts} = ${total}, donc on remplit ${parts} ${objet.contenant}.`,
-              `On remplit ${parts} ${objet.contenant}.`,
-            ),
-          };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_division_sens_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_sens",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Lis bien : le second nombre dit-il combien de paquets, ou ce qu'ils contiennent ?",
-    tags: ["ce2", "division", "sens", "piege", "template"],
-    generate: () => {
-      const parts = randomInt(3, 8);
-      const chacun = randomInt(3, 9);
-      const total = parts * chacun;
-      const groupement = randomChoice([true, false]);
-      const texte = groupement
-        ? `On range ${total} bonbons dans des boîtes de ${chacun}.`
-        : `On partage ${total} bonbons entre ${parts} enfants.`;
-      const bonne = groupement ? "combien de boîtes on remplit" : "combien de bonbons chacun reçoit";
-      return {
-        text: `${texte} Que cherche-t-on ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          "combien de boîtes on remplit",
-          "combien de bonbons chacun reçoit",
-          "combien de bonbons il y a en tout",
-          "combien de bonbons il reste",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          groupement
-            ? "Dans un groupement, on connaît la taille des paquets et on cherche leur nombre."
-            : "Dans un partage, on connaît le nombre de parts et on cherche ce que reçoit chacun.",
-          "On regarde ce que désigne le second nombre de l'énoncé.",
-          groupement
-            ? `« Des boîtes de ${chacun} » dit ce que contient chaque boîte. On cherche donc leur nombre : ${chacun} × ${parts} = ${total}, soit ${parts} boîtes.`
-            : `« Entre ${parts} enfants » dit le nombre de parts. On cherche donc ce que reçoit chacun : ${parts} × ${chacun} = ${total}, soit ${chacun} bonbons.`,
-          `On cherche ${bonne}.`,
-        ),
-      };
-    },
-  },
-
-  // --- Le symbole ÷ -----------------------------------------
-  // Jusqu'ici la banque disait « on partage 24 en 4 parts ».
-  // Elle ne l'écrivait jamais 24 ÷ 4. Un signe qu'on n'a jamais
-  // lu dans une question est un signe qu'on ne reconnaît pas.
-  {
     kind: "fixed",
     id: "ce2_division_sens_fixed_4",
     niveau: "ce2",
@@ -264,10 +164,6 @@ export const divisionBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "division", "symbole", "vocabulaire", "qcm"],
   },
-  // ⚠️ « Que veut dire 30 ÷ 5 ? » était figé ici. Rien ne tenait au 30 ni au
-  // 5 : c'est devenu le gabarit tpl_4, juste en dessous. Les deux `fixed` qui
-  // restent gagnent leur place — l'un dit comment le signe se LIT, l'autre
-  // reprend l'exemple littéral du programme (7 × 13 = 91).
   {
     kind: "fixed",
     id: "ce2_division_sens_fixed_6",
@@ -291,87 +187,6 @@ export const divisionBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "division", "symbole", "lien_multiplication", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_division_sens_tpl_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_sens",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Cherche dans la table : combien de fois le second nombre tient-il dans le premier ?",
-    tags: ["ce2", "division", "symbole", "template"],
-    generate: () => {
-      const diviseur = randomInt(2, 9);
-      const quotient = randomInt(2, 9);
-      const total = diviseur * quotient;
-      return {
-        text: `Combien font ${total} ÷ ${diviseur} ?`,
-        format: "qcm",
-        // Deux pièges se recoupent quand le diviseur vaut 2 (4 ÷ 2 : « total
-        // moins diviseur » et « diviseur » donnent tous deux 2). On garde donc
-        // quatre pièges qui ne PEUVENT pas coïncider, plus ces deux-là.
-        choices: makeChoices(String(quotient), [
-          String(total + diviseur),
-          String(quotient + 1),
-          String(quotient + 2),
-          String(total),
-          String(total - diviseur),
-          String(diviseur),
-        ]),
-        expected: [String(quotient)],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Le signe ÷ se lit « divisé par » : on partage, ou on cherche combien de fois le second nombre tient dans le premier.",
-          "On s'appuie sur la table de multiplication : quel nombre, multiplié par le diviseur, donne le total ?",
-          `${diviseur} × ${quotient} = ${total}, donc ${total} ÷ ${diviseur} = ${quotient}.`,
-          `${total} ÷ ${diviseur} = ${quotient}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_division_sens_tpl_4",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_sens",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le signe ÷ partage. Il n'ajoute rien et n'enlève rien.",
-    tags: ["ce2", "division", "symbole", "sens", "template"],
-    generate: () => {
-      const diviseur = randomInt(2, 9);
-      const quotient = randomInt(2, 9);
-      const total = diviseur * quotient;
-      return {
-        text: `Que veut dire ${total} ÷ ${diviseur} ?`,
-        format: "qcm",
-        choices: makeChoices(`on partage ${total} en ${diviseur} parts égales`, [
-          `on ajoute ${diviseur} à ${total}`,
-          `on enlève ${diviseur} à ${total}`,
-          `on multiplie ${total} par ${diviseur}`,
-          `on partage ${diviseur} en ${total} parts égales`,
-        ]),
-        expected: [`on partage ${total} en ${diviseur} parts égales`],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Écrire a ÷ b, c'est partager a en b parts égales — ou chercher combien de fois b tient dans a.",
-          "On traduit le signe en histoire avant de calculer.",
-          `${total} ÷ ${diviseur}, c'est ${total} partagé en ${diviseur} parts égales : chaque part vaut ${quotient}. On peut aussi le lire « combien de fois ${diviseur} tient-il dans ${total} ? », et la réponse est la même. Attention au sens de lecture : c'est le premier nombre qu'on partage, pas le second.`,
-          `C'est partager ${total} en ${diviseur} parts égales, et cela fait ${quotient}.`,
-        ),
-      };
-    },
-  },
-
-  /* =========================================================
-     CE2_DIVISION_LIEN_MULTIPLICATION — la table à l'envers
-     Au CE2 on ne pose pas la division : on la lit dans les
-     tables.
-  ========================================================= */
   {
     kind: "fixed",
     id: "ce2_division_lien_multiplication_fixed_1",
@@ -444,70 +259,6 @@ export const divisionBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "division", "lien_multiplication"],
   },
-  {
-    kind: "template",
-    id: "ce2_division_lien_multiplication_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_lien_multiplication",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Récite la table jusqu'à tomber sur le total.",
-    tags: ["ce2", "division", "lien_multiplication", "template"],
-    generate: () => {
-      const diviseur = randomInt(2, 9);
-      const quotient = randomInt(2, 9);
-      const total = diviseur * quotient;
-      return {
-        text: `Combien de fois ${diviseur} tient-il dans ${total} ?`,
-        format: "short",
-        expected: [String(quotient)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Chercher combien de fois un nombre tient dans un autre, c'est parcourir sa table.",
-          "On récite la table jusqu'à atteindre le total.",
-          `${diviseur} × ${quotient} = ${total}, donc ${diviseur} tient ${quotient} fois dans ${total}. Vérification : ${quotient} × ${diviseur} = ${total}.`,
-          `${diviseur} tient ${quotient} fois dans ${total}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_division_lien_multiplication_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_lien_multiplication",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "La multiplication donnée contient déjà la réponse.",
-    tags: ["ce2", "division", "lien_multiplication", "template"],
-    generate: () => {
-      const a = randomInt(3, 9);
-      const b = randomInt(3, 9);
-      const total = a * b;
-      return {
-        text: `On sait que ${a} × ${b} = ${total}. Combien font ${total} partagés en ${b} parts égales ?`,
-        format: "short",
-        expected: [String(a)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La division et la multiplication sont deux opérations inverses.",
-          "On relit la multiplication à l'envers : elle donne le partage tout fait.",
-          `${a} × ${b} = ${total} veut dire que ${b} parts de ${a} font ${total}. Donc ${total} partagés en ${b} parts donnent ${a} par part.`,
-          `Chaque part vaut ${a}.`,
-        ),
-      };
-    },
-  },
-
-  /* =========================================================
-     CE2_DIVISION_RESTE — interpréter le reste
-     Le même reste s'arrondit vers le haut ou se garde tel
-     quel : c'est l'histoire qui tranche, pas le calcul.
-  ========================================================= */
   {
     kind: "fixed",
     id: "ce2_division_reste_fixed_1",
@@ -582,78 +333,6 @@ export const divisionBank: TutorBankItemV4[] = [
     tags: ["ce2", "division", "reste", "piege", "qcm"],
   },
   {
-    kind: "template",
-    id: "ce2_division_reste_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_reste",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Cherche le plus grand résultat de la table qui ne dépasse pas le total.",
-    tags: ["ce2", "division", "reste", "template"],
-    generate: () => {
-      const parts = randomInt(3, 9);
-      const chacun = randomInt(2, 9);
-      const reste = randomInt(1, parts - 1);
-      const total = parts * chacun + reste;
-      const question = randomChoice(["chacun", "reste"]);
-      return {
-        text: `On partage ${total} billes entre ${parts} enfants, à parts égales. ${question === "chacun" ? "Combien de billes reçoit chaque enfant ?" : "Combien de billes reste-t-il ?"}`,
-        format: "short",
-        expected: [String(question === "chacun" ? chacun : reste)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand le partage ne tombe pas juste, ce qui n'a pas pu être distribué s'appelle le reste.",
-          "On cherche dans la table le plus grand produit qui ne dépasse pas le total, puis on soustrait.",
-          `${parts} × ${chacun} = ${parts * chacun}, et ${parts} × ${chacun + 1} = ${parts * (chacun + 1)}, ce qui dépasse ${total}. Chacun reçoit donc ${chacun} billes, et ${total} - ${parts * chacun} = ${reste}.`,
-          question === "chacun"
-            ? `Chaque enfant reçoit ${chacun} billes.`
-            : `Il reste ${reste} billes.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_division_reste_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_reste",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Le reste ne peut pas rester dehors : il lui faut un contenant de plus.",
-    tags: ["ce2", "division", "reste", "piege", "template"],
-    generate: () => {
-      const parPaquet = randomInt(4, 9);
-      const pleins = randomInt(2, 7);
-      const reste = randomInt(1, parPaquet - 1);
-      const total = parPaquet * pleins + reste;
-      const contexte = randomChoice([
-        { quoi: "élèves", contenant: "voitures", verbe: "emmène" },
-        { quoi: "livres", contenant: "cartons", verbe: "contient" },
-        { quoi: "gâteaux", contenant: "boîtes", verbe: "contient" },
-      ]);
-      return {
-        text: `${total} ${contexte.quoi} à transporter. Chaque ${contexte.contenant.replace(/s$/, "")} ${contexte.verbe} ${parPaquet} ${contexte.quoi}. Combien de ${contexte.contenant} faut-il ?`,
-        format: "short",
-        expected: [String(pleins + 1)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand le reste ne peut pas être abandonné, il faut un contenant de plus.",
-          "On calcule le partage, puis on regarde ce que le reste représente dans l'histoire.",
-          `${total} = ${pleins} × ${parPaquet} + ${reste}. ${pleins} ${contexte.contenant} pleins ne suffisent pas : il reste ${reste} ${contexte.quoi}. Il en faut un de plus, même s'il n'est pas plein.`,
-          `Il faut ${pleins + 1} ${contexte.contenant}.`,
-        ),
-      };
-    },
-  },
-
-  /* =========================================================
-     CE2_DIVISION_PROBLEME — la division dans un problème
-  ========================================================= */
-  {
     kind: "fixed",
     id: "ce2_division_probleme_fixed_1",
     niveau: "ce2",
@@ -698,81 +377,6 @@ export const divisionBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "division", "probleme", "methode", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_division_probleme_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_probleme",
-    difficulty: 3,
-    theme: "reunion",
-    hint: "Récite la table jusqu'au total.",
-    tags: ["ce2", "division", "probleme", "reunion", "template"],
-    generate: () => {
-      const contexte = randomChoice([
-        { quoi: "letchis", contenant: "barquettes", ou: "au marché forain de Saint-Paul" },
-        { quoi: "samoussas", contenant: "sachets", ou: "au snack du Tampon" },
-        { quoi: "cahiers", contenant: "paquets", ou: "à la coopérative de l'école" },
-      ]);
-      const parPaquet = randomInt(3, 9);
-      const paquets = randomInt(3, 9);
-      const total = parPaquet * paquets;
-      return {
-        text: `${contexte.ou.charAt(0).toUpperCase() + contexte.ou.slice(1)}, ${total} ${contexte.quoi} sont rangés dans des ${contexte.contenant} de ${parPaquet}. Combien de ${contexte.contenant} ?`,
-        format: "short",
-        expected: [String(paquets)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Grouper, c'est chercher combien de paquets on peut faire quand on connaît leur taille.",
-          `On récite la table de ${parPaquet} jusqu'à ${total}.`,
-          `${parPaquet} × ${paquets} = ${total}, donc on remplit ${paquets} ${contexte.contenant} exactement.`,
-          `Il faut ${paquets} ${contexte.contenant}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_division_probleme_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_probleme",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Repère les mots de l'énoncé : partage, ou réunion ?",
-    tags: ["ce2", "division", "probleme", "template"],
-    generate: () => {
-      const parts = randomInt(3, 8);
-      const chacun = randomInt(3, 9);
-      const total = parts * chacun;
-      const estDivision = randomChoice([true, false]);
-      return {
-        text: estDivision
-          ? `Quelle opération faut-il choisir pour partager ${total} images entre ${parts} enfants ?`
-          : `Quelle opération faut-il choisir pour savoir combien d'images ont ${parts} enfants qui en possèdent ${chacun} chacun ?`,
-        format: "qcm",
-        choices: shuffle(["Division", "Multiplication", "Addition", "Soustraction"]),
-        expected: [estDivision ? "Division" : "Multiplication"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          estDivision
-            ? "Partager une quantité en parts égales, c'est une division."
-            : "Réunir plusieurs parts toutes égales, c'est une multiplication.",
-          "On repère les mots de l'énoncé : « partager entre » annonce une division, « chacun a » annonce une multiplication.",
-          estDivision
-            ? `${total} partagés entre ${parts} : on cherche ce que reçoit chacun, soit ${chacun} images.`
-            : `${parts} enfants qui ont ${chacun} images chacun : on réunit ${parts} paquets de ${chacun}, soit ${total} images.`,
-          estDivision ? "C'est une division." : "C'est une multiplication.",
-        ),
-      };
-    },
-  },
-
-  /* =========================================================
-     CE2_DIVISION_DEFI — les défis
-  ========================================================= */
   {
     kind: "fixed",
     id: "ce2_division_defi_fixed_1",
@@ -829,76 +433,567 @@ export const divisionBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "division", "defi", "reunion", "piege", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_division_defi_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Deux étapes : le total d'abord, le partage ensuite.",
-    tags: ["ce2", "division", "defi", "deux_etapes", "template"],
-    generate: () => {
-      // On construit le total à partir des boîtes, puis on ne choisit le nombre
-      // d'enfants que parmi ses diviseurs : le partage tombe toujours juste, et
-      // le gabarit n'a jamais à changer de question en cours de route.
-      const boites = randomInt(2, 5);
-      const parBoite = randomInt(3, 9);
-      const total = boites * parBoite;
-      const parts = randomChoice(
-        [2, 3, 4, 5, 6, 7, 8].filter((p) => total % p === 0 && total / p > 1),
-      );
-      const chacun = total / parts;
-      return {
-        text: `${boites} boîtes contiennent chacune ${parBoite} images, soit ${total} images en tout. On les partage entre ${parts} enfants, à parts égales. Combien d'images chacun ?`,
-        format: "short",
-        expected: [String(chacun)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un problème à deux étapes se résout dans l'ordre : le total d'abord, le partage ensuite.",
-          "On multiplie pour trouver le total, puis on partage entre les enfants.",
-          `${boites} × ${parBoite} = ${total} images. Puis ${total} partagés entre ${parts} : ${parts} × ${chacun} = ${total}, donc ${chacun} par enfant.`,
-          `Chacun a ${chacun} images.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_division_defi_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Relis la question : le reste a-t-il droit à un paquet de plus ?",
-    tags: ["ce2", "division", "defi", "reste", "piege", "template"],
-    generate: () => {
-      const parPaquet = randomInt(4, 9);
-      const pleins = randomInt(2, 6);
-      const reste = randomInt(1, parPaquet - 1);
-      const total = parPaquet * pleins + reste;
-      const completesSeules = randomChoice([true, false]);
-      const bonne = String(completesSeules ? pleins : pleins + 1);
-      return {
-        text: completesSeules
-          ? `On a ${total} gâteaux et des boîtes de ${parPaquet}. On ne veut que des boîtes COMPLÈTES. Combien de boîtes remplit-on ?`
-          : `${total} élèves partent en sortie. Chaque voiture emmène ${parPaquet} élèves. Combien de voitures faut-il ?`,
-        format: "short",
-        expected: [bonne],
-        comparator: "number_equal",
-        explanation: exp(
-          "Selon la question posée, le reste donne un groupe de plus… ou reste dehors.",
-          "On calcule le partage, puis on relit la question pour savoir quoi faire du reste.",
-          completesSeules
-            ? `${total} = ${pleins} × ${parPaquet} + ${reste}. On remplit ${pleins} boîtes complètes, et les ${reste} gâteaux qui restent ne suffisent pas à en faire une de plus.`
-            : `${total} = ${pleins} × ${parPaquet} + ${reste}. ${pleins} voitures emmènent ${pleins * parPaquet} élèves, et il en reste ${reste} : il faut une voiture de plus, même si elle n'est pas pleine.`,
-          completesSeules ? `On remplit ${pleins} boîtes.` : `Il faut ${pleins + 1} voitures.`,
-        ),
-      };
-    },
-  },
 ];
+
+/* =========================================================
+   LES GABARITS — une famille × une situation × une tournure
+========================================================= */
+
+const N = "division";
+const g = (id: string, microId: string, difficulty: Etoile, hint: string, tags: string[], gen: () => Q) =>
+  gabarit({ id, notionId: N, microId, difficulty, hint, tags: ["division", ...tags] }, gen);
+
+const parfois = <T,>(p: number, f: () => T | undefined): T | undefined => (Math.random() < p ? f() : undefined);
+const avec = (canvas: Q["canvas"] | undefined): Partial<Q> => (canvas ? { canvas } : {});
+
+/* ---------------------------------------------------------
+   LES SITUATIONS
+   Un PARTAGE : on connaît le nombre de parts, on cherche la
+   part. Un GROUPEMENT : on connaît la taille du paquet, on
+   cherche le nombre de paquets. `dessin` : l'objet de la
+   bibliothèque `objets`, quand il existe.
+--------------------------------------------------------- */
+
+type Chose = { un: string; des: string; dessin?: ObjetId };
+const CHOSES: readonly Chose[] = [
+  { un: "pomme", des: "pommes", dessin: "pomme" },
+  { un: "banane", des: "bananes", dessin: "banane" },
+  { un: "ballon", des: "ballons", dessin: "ballon" },
+  { un: "poisson", des: "poissons", dessin: "poisson" },
+  { un: "fleur", des: "fleurs", dessin: "fleur" },
+  { un: "livre", des: "livres", dessin: "livre" },
+  { un: "étoile en papier", des: "étoiles en papier", dessin: "etoile" },
+  { un: "petite voiture", des: "petites voitures", dessin: "voiture" },
+  { un: "feuille", des: "feuilles", dessin: "feuille" },
+  { un: "chapeau de fête", des: "chapeaux de fête", dessin: "chapeau" },
+  { un: "bille", des: "billes" },
+  { un: "bonbon", des: "bonbons" },
+  { un: "image", des: "images" },
+  { un: "crayon", des: "crayons" },
+  { un: "cookie", des: "cookies" },
+  { un: "carte", des: "cartes" },
+  { un: "pièce d'or", des: "pièces d'or" },
+  { un: "graine", des: "graines" },
+];
+
+/** Le contenant d'un groupement : « des sachets de 4 », « des vases de 5 ». */
+type Boite = { un: string; des: string; fem: boolean; pour?: string[] };
+const BOITES: readonly Boite[] = [
+  { un: "sachet", des: "sachets", fem: false },
+  { un: "boîte", des: "boîtes", fem: true },
+  { un: "panier", des: "paniers", fem: false, pour: ["pommes", "bananes", "fleurs", "cookies"] },
+  { un: "vase", des: "vases", fem: false, pour: ["fleurs"] },
+  { un: "aquarium", des: "aquariums", fem: false, pour: ["poissons"] },
+  { un: "étagère", des: "étagères", fem: true, pour: ["livres"] },
+  { un: "trousse", des: "trousses", fem: true, pour: ["crayons"] },
+  { un: "coffre", des: "coffres", fem: false, pour: ["pièces d'or"] },
+  { un: "filet", des: "filets", fem: false, pour: ["ballons"] },
+  { un: "pochette", des: "pochettes", fem: true, pour: ["images", "cartes"] },
+  { un: "pot", des: "pots", fem: false, pour: ["graines"] },
+];
+
+function boitePour(c: Chose): Boite {
+  const faites = BOITES.filter((b) => b.pour?.includes(c.des));
+  const libres = BOITES.filter((b) => !b.pour);
+  if (c.des === "poissons" || (faites.length && Math.random() < 0.7)) return pick(faites);
+  return pick(libres);
+}
+
+const chose = () => pick(CHOSES);
+
+/** Le dessin d'un partage À FAIRE : la collection en vrac (par 5), jamais les groupes. */
+const vrac = (c: Chose, total: number) => (c.dessin && total <= 30 ? objetsEnVrac(c.dessin, total) : undefined);
+
+/** Un partage avec reste : `k` parts égales inconnues, et un petit reste inconnu. */
+const barreReste = (k: number, total: number) =>
+  barre([...Array.from({ length: k }, () => ["", null] as [string, null]), ["reste", null]], String(total));
+
+/** Le dessin d'un fait connu : `groupes` paquets de `k` (k ≤ 5). */
+const enGroupes = (c: Chose, groupes: number, k: number) =>
+  c.dessin && k <= 5 && groupes <= 6 ? objetsGroupes(c.dessin, groupes, k) : undefined;
+
+function textePartage(total: number, parts: number, c: Chose, p: Prenom): string {
+  return pick([
+    `On partage ${total} ${c.des} entre ${parts} enfants, à parts égales. Combien ${de(c.des)} pour chacun ?`,
+    `${p.nom} partage ${total} ${c.des} entre ${parts} amis. Chacun en reçoit autant. Combien chacun en a-t-il ?`,
+    `${p.nom} et ses amis sont ${parts}. Ils se partagent ${total} ${c.des} à égalité. Combien en a chaque enfant ?`,
+    `La maîtresse distribue ${total} ${c.des} à ${parts} groupes, autant à chaque groupe. Combien par groupe ?`,
+    `Pic le paille-en-queue partage ${total} ${c.des} entre ses ${parts} petits. Combien chaque petit en reçoit-il ?`,
+    `À l'anniversaire ${de(p.nom)}, ${parts} enfants se partagent ${total} ${c.des}. Combien chacun en a-t-il ?`,
+    `Les ${parts} pirates se partagent ${total} ${c.des} du coffre. Combien chaque pirate en a-t-il ?`,
+    `Partage ${total} ${c.des} en ${parts} tas égaux. Combien ${de(c.des)} dans chaque tas ?`,
+  ]);
+}
+
+function texteGroupement(total: number, k: number, c: Chose, b: Boite, p: Prenom): string {
+  return pick([
+    `On range ${total} ${c.des} dans des ${b.des} de ${k}. Combien ${de(b.des)} remplit-on ?`,
+    `${p.nom} met ${total} ${c.des} par ${b.des} de ${k}. Combien ${de(b.des)} lui faut-il ?`,
+    `${p.nom} a ${total} ${c.des}. ${maj(p.il)} en met ${k} dans chaque ${b.un}. Combien ${de(b.des)} remplit-${p.il} ?`,
+    `Il y a ${total} ${c.des}. Dans ${b.fem ? "une" : "un"} ${b.un}, on en met ${k}. Combien ${de(b.des)} faut-il ?`,
+    `Pic le paille-en-queue range ${total} ${c.des} par ${b.des} de ${k}. Combien ${de(b.des)} remplit-il ?`,
+    `Le marchand vend ses ${c.des} par lots de ${k}. Il en a ${total}. Combien de lots peut-il faire ?`,
+    `Combien ${de(b.des)} de ${k} ${c.des} peut-on faire avec ${total} ${c.des} ?`,
+  ]);
+}
+
+/* ---------------------------------------------------------
+   LE SENS : partager, grouper, lire « ÷ »
+--------------------------------------------------------- */
+
+function partage(total: number, parts: number, dessin = true): Q {
+  const q = total / parts;
+  const c = chose();
+  const p = quelquun();
+  return qN(
+    textePartage(total, parts, c, p),
+    q,
+    [parts, total - parts, q + 1, q - 1, total + parts, q * 2],
+    exp("Partager à parts égales, c'est faire une division.", `On cherche combien de fois ${parts} tient dans ${total}, ou : ${parts} × ? = ${total}.`, `${parts} × ${q} = ${total}, donc ${total} ÷ ${parts} = ${q}.`, `Chacun en reçoit ${q}.`),
+    avec(dessin ? parfois(0.8, () => vrac(c, total) ?? barreEgale(parts, null, String(total))) : undefined),
+  );
+}
+
+function groupement(total: number, k: number, dessin = true): Q {
+  const q = total / k;
+  const c = chose();
+  const b = boitePour(c);
+  const p = quelquun();
+  return qN(
+    texteGroupement(total, k, c, b, p),
+    q,
+    [k, total - k, q + 1, q - 1, total + k, q * 2],
+    exp("Faire des paquets égaux et compter les paquets, c'est aussi une division.", `On cherche combien de fois ${k} tient dans ${total} : ${k} × ? = ${total}.`, `${k} × ${q} = ${total}, donc ${total} ÷ ${k} = ${q}.`, `On remplit ${q} ${b.des}.`),
+    avec(dessin ? parfois(0.8, () => vrac(c, total) ?? barreEgale(q, String(k), null)) : undefined),
+  );
+}
+
+function divisionNue(a: number, b: number): Q {
+  const q = a / b;
+  const p = quelquun();
+  return qN(
+    pick([
+      poserCalcul(`${a} ÷ ${b}`, p),
+      `${a} divisé par ${b}, ça fait combien ?`,
+      `${p.nom} lit « ${a} ÷ ${b} ». Quel est le résultat ?`,
+      `Quel nombre multiplié par ${b} donne ${a} ? Donc ${a} ÷ ${b} = ?`,
+    ]),
+    q,
+    [b, a - b, a + b, q + 1, q - 1, q * 2],
+    exp(`${a} ÷ ${b}, c'est le nombre qui, multiplié par ${b}, donne ${a}.`, `On cherche dans la table de ${b}.`, `${b} × ${q} = ${a}, donc ${a} ÷ ${b} = ${q}.`, `${a} ÷ ${b} = ${q}.`),
+    avec(parfois(0.7, () => barreEgale(b, null, String(a)))),
+  );
+}
+
+function lireDivise(): Q {
+  const b = rint(2, 6);
+  const q = rint(2, 9);
+  const a = b * q;
+  const p = quelquun();
+  const f = rint(1, 3);
+  if (f === 1)
+    return qM(
+      pick([
+        `Que veut dire ${a} ÷ ${b} ?`,
+        `${p.nom} lit le calcul ${a} ÷ ${b}. Qu'est-ce que ça veut dire ?`,
+        `Pic le paille-en-queue voit « ${a} ÷ ${b} » au tableau. Que veut dire ce calcul ?`,
+      ]),
+      `on partage ${a} en ${b} parts égales`,
+      [`on partage ${b} en ${a} parts égales`, `on enlève ${b} à ${a}`, `on multiplie ${a} par ${b}`],
+      exp("Le signe ÷ se lit « divisé par ».", `${a} ÷ ${b}, c'est partager ${a} en ${b} parts égales (ou chercher combien de fois ${b} tient dans ${a}).`, `${a} ÷ ${b} = ${q}, car ${b} × ${q} = ${a}.`, `On partage ${a} en ${b} parts égales.`),
+      avec(parfois(0.6, () => barreEgale(b, null, String(a)))),
+    );
+  if (f === 2)
+    return qM(
+      pick([
+        `Comment lit-on ${a} ÷ ${b} ?`,
+        `${p.nom} doit lire à voix haute « ${a} ÷ ${b} ». Que dit-${p.il} ?`,
+      ]),
+      `${a} divisé par ${b}`,
+      [`${a} fois ${b}`, `${a} moins ${b}`, `${a} plus ${b}`],
+      exp("Le signe ÷ se lit « divisé par ».", "On lit le premier nombre, puis « divisé par », puis le second.", `${a} ÷ ${b} se lit « ${a} divisé par ${b} ».`, `On dit « ${a} divisé par ${b} ».`),
+    );
+  const c = chose();
+  return qM(
+    pick([
+      `${p.nom} partage ${a} ${c.des} entre ${b} amis. Quel calcul écrit-${p.il} ?`,
+      `On range ${a} ${c.des} par paquets de ${b}. Quel calcul permet de trouver le nombre de paquets ?`,
+    ]),
+    `${a} ÷ ${b}`,
+    [`${a} − ${b}`, `${a} × ${b}`, `${b} ÷ ${a}`, `${a} + ${b}`],
+    exp("Partager ou faire des paquets égaux, c'est diviser.", "Le nombre de départ s'écrit en premier.", `${a} ÷ ${b} = ${q}.`, `Le calcul est ${a} ÷ ${b}.`),
+    avec(parfois(0.6, () => vrac(c, a))),
+  );
+}
+
+function queCherche(): Q {
+  const p = quelquun();
+  const c = chose();
+  const k = rint(3, 8);
+  const q = rint(3, 9);
+  const total = k * q;
+  if (Math.random() < 0.5) {
+    const b = boitePour(c);
+    return qM(
+      pick([
+        `On range ${total} ${c.des} dans des ${b.des} de ${k}. Que cherche-t-on ?`,
+        `${p.nom} met ${total} ${c.des} par ${b.des} de ${k}. Quelle question se pose-t-${p.il} ?`,
+        `Pic le paille-en-queue range ${total} ${c.des} par ${b.des} de ${k}. Que doit-il trouver ?`,
+      ]),
+      `combien ${de(b.des)} on remplit`,
+      [`combien ${de(c.des)} dans chaque ${b.un}`, `combien ${de(c.des)} il y a en tout`, `combien ${de(c.des)} il reste`],
+      exp("Dans un groupement, on connaît la taille d'un paquet.", `On sait déjà qu'il y a ${k} ${c.des} par ${b.un} : on cherche le nombre ${de(b.des)}.`, `${total} ÷ ${k} = ${q} ${b.des}.`, `On cherche combien ${de(b.des)} on remplit.`),
+      avec(parfois(0.75, () => vrac(c, total) ?? barreEgale(q, String(k), String(total)))),
+    );
+  }
+  return qM(
+    pick([
+      `On partage ${total} ${c.des} entre ${k} enfants. Que cherche-t-on ?`,
+      `${p.nom} partage ${total} ${c.des} entre ${k} amis. Quelle question se pose-t-${p.il} ?`,
+      `Les ${k} enfants de l'équipe se partagent ${total} ${c.des}. Que faut-il trouver ?`,
+    ]),
+    `combien ${de(c.des)} chacun reçoit`,
+    [`combien de boîtes on remplit`, `combien ${de(c.des)} il reste`, `combien ${de(c.des)} il y a en tout`],
+    exp("Dans un partage, on connaît le nombre de parts.", `On sait déjà qu'il y a ${k} enfants : on cherche la part de chacun.`, `${total} ÷ ${k} = ${q}.`, `On cherche combien ${de(c.des)} chacun reçoit.`),
+    avec(parfois(0.75, () => vrac(c, total) ?? barreEgale(k, null, String(total)))),
+  );
+}
+
+/* ---------------------------------------------------------
+   LE LIEN AVEC LA MULTIPLICATION
+--------------------------------------------------------- */
+
+function combienDeFois(b: number, q: number): Q {
+  const a = b * q;
+  const p = quelquun();
+  const c = chose();
+  // Les tournures qui parlent des objets dessinent la collection EN VRAC
+  // (l'élève fait les paquets) ; jamais les paquets tout faits : on les
+  // compterait, et ce serait la réponse.
+  const sansObjet = [
+    `Combien de fois ${b} tient-il dans ${a} ?`,
+    `${b} × ? = ${a}. Quel nombre manque ?`,
+    `Quel nombre multiplié par ${b} donne ${a} ?`,
+    `${p.nom} cherche combien de fois ${b} tient dans ${a}. Que trouve-${tIl(p)} ?`,
+    `Pic le paille-en-queue fait des sauts de ${b}. Combien de sauts pour arriver à ${a} ?`,
+    `${p.nom} compte de ${b} en ${b} jusqu'à ${a}. Combien de bonds fait-${p.il} ?`,
+    `${p.nom} sait que ${b} × ? = ${a}. Quel est le nombre caché ?`,
+    `Dans la table de ${b}, ${p.nom} cherche ${a}. ${b} fois combien ?`,
+    `La grenouille ${de(p.nom)} fait des bonds de ${b} cases. Combien de bonds pour aller jusqu'à la case ${a} ?`,
+  ];
+  const avecObjet = [
+    `Combien de paquets de ${b} ${c.des} peut-on faire avec ${a} ${c.des} ?`,
+    `${p.nom} range ${a} ${c.des} par ${b}. Combien de tas fait-${p.il} ?`,
+  ];
+  const objet = Math.random() < 0.3;
+  return qN(
+    objet ? pick(avecObjet) : pick(sansObjet),
+    q,
+    [b, q + 1, q - 1, a - b, q + 10, a + b],
+    exp("Chercher combien de fois un nombre tient dans un autre, c'est diviser.", `On cherche dans la table de ${b}.`, `${b} × ${q} = ${a}, donc ${b} tient ${q} fois dans ${a} : ${a} ÷ ${b} = ${q}.`, `${b} tient ${q} fois dans ${a}.`),
+    avec(parfois(0.7, () => (objet ? vrac(c, a) : undefined) ?? barreEgale(b, null, String(a)))),
+  );
+}
+
+function onSaitQue(): Q {
+  const a = rint(2, 9);
+  const b = rint(2, 9);
+  const prod = a * b;
+  const p = quelquun();
+  const c = chose();
+  const f = rint(1, 3);
+  if (f <= 2) {
+    const diviseur = Math.random() < 0.5 ? b : a;
+    const q = prod / diviseur;
+    return qN(
+      pick([
+        `On sait que ${a} × ${b} = ${prod}. Combien font ${prod} ÷ ${diviseur} ?`,
+        `${p.nom} connaît sa table : ${a} × ${b} = ${prod}. Combien font alors ${prod} ÷ ${diviseur} ?`,
+        `Si ${a} × ${b} = ${prod}, combien font ${prod} partagés en ${diviseur} parts égales ?`,
+        `Pic le paille-en-queue sait que ${a} × ${b} = ${prod}. Il cherche ${prod} ÷ ${diviseur}. Que trouve-t-il ?`,
+        `${p.nom} a écrit ${a} × ${b} = ${prod} sur son ardoise. Que vaut ${prod} ÷ ${diviseur} ?`,
+        `${p.nom} range ${prod} ${c.des} en ${diviseur} tas égaux. ${maj(p.il)} sait que ${a} × ${b} = ${prod}. Combien dans chaque tas ?`,
+      ]),
+      q,
+      [diviseur, prod, prod + diviseur, q + 1, q - 1],
+      exp("La division est l'opération inverse de la multiplication.", `${a} × ${b} = ${prod} donne deux divisions : ${prod} ÷ ${b} = ${a} et ${prod} ÷ ${a} = ${b}.`, `${prod} ÷ ${diviseur} = ${q}.`, `${prod} ÷ ${diviseur} = ${q}.`),
+      avec(parfois(0.75, () => enGroupes(c, a, b) ?? barreEgale(b, String(a), String(prod)))),
+    );
+  }
+  return qM(
+    pick([
+      `Quelle multiplication aide à calculer ${prod} ÷ ${b} ?`,
+      `${p.nom} veut calculer ${prod} ÷ ${b}. Quel résultat de table l'aide ?`,
+      `Pour partager ${prod} ${c.des} en ${b} parts égales, ${p.nom} utilise une multiplication. Laquelle ?`,
+    ]),
+    `${a} × ${b} = ${prod}`,
+    [`${prod} × ${b} = ${prod * b}`, `${a} + ${b} = ${a + b}`, `${b} × ${b} = ${b * b}`, `${a + 1} × ${b} = ${(a + 1) * b}`].filter((t) => t !== `${a} × ${b} = ${prod}`),
+    exp("Pour diviser, on cherche dans les tables.", `On cherche le nombre qui, multiplié par ${b}, donne ${prod}.`, `${a} × ${b} = ${prod}, donc ${prod} ÷ ${b} = ${a}.`, `C'est ${a} × ${b} = ${prod}.`),
+    avec(parfois(0.6, () => enGroupes(c, a, b) ?? barreEgale(b, null, String(prod)))),
+  );
+}
+
+/* ---------------------------------------------------------
+   LE RESTE : c'est l'histoire qui décide
+--------------------------------------------------------- */
+
+function partageAvecReste(): Q {
+  const parts = rint(3, 8);
+  const q = rint(3, 9);
+  const r = rint(1, parts - 1);
+  const total = parts * q + r;
+  const c = chose();
+  const p = quelquun();
+  const chacun = Math.random() < 0.55;
+  const debut = pick([
+    `On partage ${total} ${c.des} entre ${parts} enfants, à parts égales.`,
+    `${p.nom} partage ${total} ${c.des} entre ${parts} amis, autant pour chacun.`,
+    `Pic le paille-en-queue distribue ${total} ${c.des} à ses ${parts} petits, autant à chacun.`,
+    `${parts} enfants se partagent ${total} ${c.des} à égalité.`,
+  ]);
+  const text = chacun
+    ? `${debut} ${pick([`Combien ${de(c.des)} chacun reçoit-il ?`, `Combien en a chaque enfant ?`])}`
+    : `${debut} ${pick([`Combien ${de(c.des)} restera-t-il ?`, `Combien en reste-t-il à la fin ?`])}`;
+  return qN(
+    text,
+    chacun ? q : r,
+    chacun ? [q + 1, q - 1, r, parts, q + r] : [q, parts - r, r + 1, parts, 0 + parts + r],
+    exp(
+      "Dans un partage, on donne autant à chacun ; ce qui ne peut plus être donné à tous, c'est le reste.",
+      `On cherche le plus grand multiple de ${parts} qui ne dépasse pas ${total}.`,
+      `${parts} × ${q} = ${parts * q}, et ${total} − ${parts * q} = ${r}. Donc ${total} = ${parts} × ${q} + ${r}.`,
+      chacun ? `Chacun reçoit ${q} ${c.des} (il en reste ${r}).` : `Il reste ${r} ${pl(r, c)}.`,
+    ),
+    avec(parfois(0.8, () => vrac(c, total) ?? barreReste(parts, total))),
+  );
+}
+
+const pl = (n: number, c: Chose) => (n === 1 ? c.un : c.des);
+
+/** Le même reste, trois histoires : on arrondit au-dessus, on garde le quotient, ou on demande le reste. */
+function interpreterReste(): Q {
+  const k = rint(3, 9);
+  const q = rint(2, 8);
+  const r = rint(1, k - 1);
+  const total = k * q + r;
+  const p = quelquun();
+  const sit = pick([
+    { qui: "élèves", un: "voiture", des: "voitures", fem: true, verbe: `Chaque voiture emmène ${k} élèves.`, depart: `${total} élèves partent en sortie.`, tous: "pour que tous les élèves partent" },
+    { qui: "enfants", un: "barque", des: "barques", fem: true, verbe: `Une barque transporte ${k} enfants.`, depart: `${total} enfants veulent traverser le lac.`, tous: "pour que tous les enfants traversent" },
+    { qui: "joueurs", un: "minibus", des: "minibus", fem: false, verbe: `Un minibus emmène ${k} joueurs.`, depart: `${total} joueurs vont au match de football.`, tous: "pour emmener tous les joueurs" },
+    { qui: "gâteaux", un: "boîte", des: "boîtes", fem: true, verbe: `Chaque boîte contient ${k} gâteaux.`, depart: `Le chef pâtissier doit transporter ${total} gâteaux.`, tous: "pour transporter tous les gâteaux" },
+    { qui: "livres", un: "carton", des: "cartons", fem: false, verbe: `Un carton contient ${k} livres.`, depart: `La bibliothécaire range ${total} livres.`, tous: "pour ranger tous les livres" },
+    { qui: "œufs", un: "boîte", des: "boîtes", fem: true, verbe: `Une boîte contient ${k} œufs.`, depart: `La fermière a ramassé ${total} œufs.`, tous: "pour ranger tous les œufs" },
+    { qui: "astronautes", un: "fusée", des: "fusées", fem: true, verbe: `Une fusée emmène ${k} astronautes.`, depart: `${total} astronautes partent sur la Lune.`, tous: "pour que tous les astronautes partent" },
+    { qui: "invités", un: "table", des: "tables", fem: true, verbe: `À chaque table, il y a ${k} places.`, depart: `${total} invités viennent à l'anniversaire.`, tous: "pour asseoir tous les invités" },
+  ]);
+  const type = rint(1, 3);
+  const complets = sit.fem ? "complètes" : "complets";
+  const intro = pick(["", "", `${p.nom} aide à tout organiser. `, `${p.nom} fait le calcul. `, `Pic le paille-en-queue se pose une question. `]);
+  const question =
+    type === 1
+      ? `Combien ${de(sit.des)} faut-il ${sit.tous} ?`
+      : type === 2
+        ? `Combien ${de(sit.des)} seront ${complets} ?`
+        : `On ne remplit que des ${sit.des} ${complets}. Combien ${de(sit.qui)} restent à part ?`;
+  const bon = type === 1 ? q + 1 : type === 2 ? q : r;
+  return qN(
+    `${intro}${sit.depart} ${sit.verbe} ${question}`,
+    bon,
+    [q, q + 1, r, k, q + 2, k - r].filter((v) => v !== bon),
+    exp(
+      "Le reste d'un partage ne se jette pas : c'est l'histoire qui dit quoi en faire.",
+      `On écrit ${total} = ${k} × ${q} + ${r}.`,
+      type === 1
+        ? `${q} ${sit.des} ne suffisent pas : il reste ${r} ${sit.qui}. Il faut ${sit.fem ? "une" : "un"} ${sit.un} de plus : ${q + 1}.`
+        : type === 2
+          ? `${q} ${sit.des} sont ${complets}, et ${r} ${sit.qui} restent à part.`
+          : `Il reste ${r} ${sit.qui}.`,
+      `La réponse est ${bon}.`,
+    ),
+    avec(parfois(0.75, () => barre([...Array.from({ length: Math.min(q, 5) }, () => ["", String(k)] as [string, string]), ...(q > 5 ? [["…", "…"] as [string, string]] : []), ["reste", null]], String(total)))),
+  );
+}
+
+/* ---------------------------------------------------------
+   LES PROBLÈMES
+--------------------------------------------------------- */
+
+function choisirOperation(): Q {
+  const p = quelquun();
+  const c = chose();
+  const f = rint(1, 4);
+  const k = rint(3, 9);
+  const q = rint(3, 9);
+  let text: string;
+  let bon: string;
+  if (f === 1) {
+    text = pick([
+      `Quelle opération faut-il choisir pour partager ${k * q} ${c.des} entre ${k} enfants ?`,
+      `${p.nom} range ${k * q} ${c.des} par paquets de ${k}. Quelle opération donne le nombre de paquets ?`,
+    ]);
+    bon = "Division";
+  } else if (f === 2) {
+    text = pick([
+      `${p.nom} a ${k} sachets de ${q} ${c.des}. Quelle opération donne le nombre ${de(c.des)} ?`,
+      `Il y a ${k} rangées de ${q} ${c.des}. Quelle opération permet de les compter vite ?`,
+    ]);
+    bon = "Multiplication";
+  } else if (f === 3) {
+    text = pick([
+      `${p.nom} avait ${k * q + 12} ${c.des}. ${maj(p.il)} en donne ${q}. Quelle opération donne ce qui lui reste ?`,
+      `Il y avait ${k * q + 12} ${c.des}. On en perd ${q}. Quelle opération faut-il faire ?`,
+    ]);
+    bon = "Soustraction";
+  } else {
+    text = pick([
+      `${p.nom} a ${k * q} ${c.des} et en reçoit ${q} de plus. Quelle opération donne le total ?`,
+      `On réunit ${k * q} ${c.des} et ${k + q} ${c.des}. Quelle opération faut-il faire ?`,
+    ]);
+    bon = "Addition";
+  }
+  return qM(
+    text,
+    bon,
+    ["Division", "Multiplication", "Soustraction", "Addition"],
+    exp("Chaque histoire a son opération.", "Partager ou faire des paquets égaux : division. Plusieurs paquets égaux : multiplication. Enlever : soustraction. Réunir : addition.", `Ici, il s'agit de ${bon === "Division" ? "partager" : bon === "Multiplication" ? "compter des paquets égaux" : bon === "Soustraction" ? "enlever" : "réunir"}.`, `On choisit la ${bon.toLowerCase()}.`),
+    avec(f === 1 ? parfois(0.7, () => vrac(c, k * q) ?? barreEgale(k, null, String(k * q))) : f === 2 ? parfois(0.7, () => enGroupes(c, k, q) ?? barreEgale(k, String(q), null)) : f === 3 ? parfois(0.5, () => barre([["donné", String(q)], ["reste", null]], String(k * q + 12))) : parfois(0.5, () => barre([["", String(k * q)], ["", String(q)]], null))),
+  );
+}
+
+function problemeDivision(): Q {
+  const k = rint(2, 9);
+  const q = rint(2, 10);
+  return Math.random() < 0.5 ? partage(k * q, k) : groupement(k * q, k);
+}
+
+/* ---------------------------------------------------------
+   LES DÉFIS
+--------------------------------------------------------- */
+
+function defiDeuxEtapes(): Q {
+  const p = quelquun();
+  const c = chose();
+  const f = rint(1, 3);
+  if (f === 1) {
+    const boites = rint(2, 6);
+    const par = rint(3, 6);
+    const total = boites * par;
+    const enfants = pick([2, 3, 4, 6].filter((e) => total % e === 0 && e !== boites));
+    if (!enfants) return defiDeuxEtapes();
+    return qN(
+      pick([
+        `${boites} boîtes contiennent chacune ${par} ${c.des}. On partage toutes les ${c.des} entre ${enfants} enfants. Combien chacun en reçoit-il ?`,
+        `${p.nom} a ${boites} sachets de ${par} ${c.des}. ${maj(p.il)} les partage entre ${enfants} amis, à égalité. Combien chaque ami en a-t-il ?`,
+        `Pic le paille-en-queue rapporte ${boites} fois ${par} ${c.des}. Il les partage entre ses ${enfants} petits. Combien en a chaque petit ?`,
+      ]),
+      total / enfants,
+      [total, par, boites, total / enfants + 1, total - enfants],
+      exp("Un problème à deux étapes : d'abord le total, puis le partage.", "On multiplie, puis on divise.", `${boites} × ${par} = ${total}, puis ${total} ÷ ${enfants} = ${total / enfants}.`, `Chacun reçoit ${total / enfants} ${c.des}.`),
+      avec(parfois(0.6, () => enGroupes(c, boites, par))),
+    );
+  }
+  if (f === 2) {
+    const amis = rint(3, 6);
+    const part = rint(3, 8);
+    const mange = rint(2, 9);
+    const total = amis * part + mange;
+    return qN(
+      pick([
+        `${p.nom} a ${total} ${c.des}. ${maj(p.il)} en garde ${mange}, puis partage le reste entre ${amis} amis. Combien chaque ami en reçoit-il ?`,
+        `Il y a ${total} ${c.des}. On en met ${mange} de côté, et on partage les autres entre ${amis} enfants. Combien pour chacun ?`,
+      ]),
+      part,
+      [Math.floor(total / amis), part + 1, total - mange, amis, part - 1],
+      exp("Un problème à deux étapes : d'abord ce qui reste, puis le partage.", "On soustrait, puis on divise.", `${total} − ${mange} = ${total - mange}, puis ${total - mange} ÷ ${amis} = ${part}.`, `Chaque ami reçoit ${part} ${c.des}.`),
+      avec(parfois(0.6, () => barre([["gardé", String(mange)], ...Array.from({ length: amis }, () => ["", null] as [string, null])], String(total)))),
+    );
+  }
+  const a = pick([2, 3, 4]);
+  const b = pick([6, 8, 12].filter((x) => x > a));
+  const total = a * b * pick([1, 2]);
+  return qM(
+    pick([
+      `Une classe de ${total} élèves se met en rangs de ${a}. Puis la maîtresse demande des rangs de ${b}. Y a-t-il plus de rangs, ou moins ?`,
+      `${p.nom} range ${total} ${c.des} par paquets de ${a}, puis par paquets de ${b}. Fait-${p.il} plus de paquets, ou moins ?`,
+    ]),
+    "moins, car les paquets sont plus grands",
+    ["plus, car " + b + " est plus grand que " + a, "le même nombre", "on ne peut pas savoir"],
+    exp("Plus les paquets sont gros, moins il y en a.", `On compare ${total} ÷ ${a} et ${total} ÷ ${b}.`, `${total} ÷ ${a} = ${total / a} et ${total} ÷ ${b} = ${total / b}.`, `Il y en a moins : ${total / b} au lieu de ${total / a}.`),
+    avec(parfois(0.6, () => vrac(c, total) ?? barreEgale(total / a, String(a), String(total)))),
+  );
+}
+
+function boitesCompletes(): Q {
+  const k = rint(3, 9);
+  const q = rint(3, 9);
+  const r = rint(1, k - 1);
+  const total = k * q + r;
+  const c = chose();
+  const b = boitePour(c);
+  const p = quelquun();
+  const reste = Math.random() < 0.4;
+  const complets = b.fem ? "complètes" : "complets";
+  const debut = pick([
+    `On a ${total} ${c.des} et des ${b.des} de ${k}. On ne veut que des ${b.des} ${b.fem ? "pleines" : "pleins"}.`,
+    `${p.nom} range ${total} ${c.des} dans des ${b.des} de ${k}. ${b.fem ? "Seules les" : "Seuls les"} ${b.des} ${complets} partent au marché.`,
+    `Pic le paille-en-queue met ${total} ${c.des} par ${b.des} de ${k}.`,
+    `${p.nom} prépare des ${b.des} de ${k} ${c.des}. ${maj(p.il)} en a ${total}.`,
+  ]);
+  const question = reste ? `Combien ${de(c.des)} restent dehors ?` : `Combien ${de(b.des)} ${complets} remplit-on ?`;
+  return qN(
+    `${debut} ${question}`,
+    reste ? r : q,
+    reste ? [k - r, r + 1, q, k] : [q + 1, q - 1, r, k],
+    exp("Le reste, c'est ce qui ne suffit pas à remplir un paquet de plus.", `On cherche le plus grand multiple de ${k} qui ne dépasse pas ${total}.`, `${k} × ${q} = ${k * q}, et ${total} − ${k * q} = ${r}. Donc ${total} = ${k} × ${q} + ${r}.`, reste ? `${r} ${pl(r, c)} restent dehors.` : `On remplit ${q} ${b.des} ${complets}.`),
+    avec(parfois(0.7, () => vrac(c, total) ?? barreReste(k, total))),
+  );
+}
+
+/* =========================================================
+   LES ITEMS
+========================================================= */
+
+const GABARITS: TutorBankItemV4[] = [
+  // ce2_division_sens
+  g("ce2_division_sens_tpl_5_partage_simple", "ce2_division_sens", 2, "Distribue un par un, comme des cartes.", ["sens", "partage"], () => {
+    const parts = rint(2, 5);
+    const q = rint(2, 6);
+    const f = rint(1, 3);
+    return f === 1 ? partage(parts * q, parts) : f === 2 ? groupement(parts * q, parts) : divisionNue(parts * q, parts);
+  }),
+  g("ce2_division_sens_tpl_1", "ce2_division_sens", 3, "Combien de fois le paquet tient-il dans le total ?", ["sens", "groupement"], () => {
+    const k = rint(2, 6);
+    return groupement(k * rint(3, 9), k);
+  }),
+  g("ce2_division_sens_tpl_2", "ce2_division_sens", 4, "Sais-tu déjà combien il y a de parts, ou combien il y a dans chaque paquet ?", ["sens"], queCherche),
+  g("ce2_division_sens_tpl_3", "ce2_division_sens", 3, "Cherche dans la table du diviseur.", ["sens", "symbole"], () => {
+    const b = rint(2, 9);
+    return divisionNue(b * rint(2, 9), b);
+  }),
+  g("ce2_division_sens_tpl_4", "ce2_division_sens", 3, "« ÷ » se lit « divisé par ».", ["sens", "symbole"], () => {
+    if (Math.random() < 0.6) return lireDivise();
+    const parts = rint(2, 5);
+    return partage(parts * rint(3, 6), parts);
+  }),
+
+  // ce2_division_lien_multiplication
+  g("ce2_division_lien_multiplication_tpl_1", "ce2_division_lien_multiplication", 3, "Cherche dans la table : combien de fois ?", ["lien"], () => combienDeFois(rint(2, 9), rint(2, 9))),
+  g("ce2_division_lien_multiplication_tpl_2", "ce2_division_lien_multiplication", 3, "Une multiplication donne deux divisions.", ["lien"], onSaitQue),
+
+  // ce2_division_reste
+  g("ce2_division_reste_tpl_1", "ce2_division_reste", 4, "Donne autant à chacun ; ce qui ne peut plus être donné à tous, c'est le reste.", ["reste"], partageAvecReste),
+  g("ce2_division_reste_tpl_2", "ce2_division_reste", 5, "C'est l'histoire qui dit quoi faire du reste.", ["reste"], () => (Math.random() < 0.6 ? interpreterReste() : boitesCompletes())),
+
+  // ce2_division_probleme
+  g("ce2_division_probleme_tpl_1", "ce2_division_probleme", 3, "Partage ou paquets ? Cherche dans les tables.", ["probleme"], problemeDivision),
+  g("ce2_division_probleme_tpl_2", "ce2_division_probleme", 4, "Que se passe-t-il dans l'histoire : partager, réunir, enlever, des paquets égaux ?", ["probleme", "operation"], () =>
+    Math.random() < 0.6 ? choisirOperation() : problemeDivision(),
+  ),
+
+  // ce2_division_defi
+  g("ce2_division_defi_tpl_1", "ce2_division_defi", 5, "Deux étapes : fais-les l'une après l'autre.", ["defi"], defiDeuxEtapes),
+  g("ce2_division_defi_tpl_2", "ce2_division_defi", 5, "Les paquets complets d'abord, le reste ensuite.", ["defi", "reste"], () => (Math.random() < 0.5 ? boitesCompletes() : interpreterReste())),
+];
+
+export const divisionBank: TutorBankItemV4[] = [...FIXES, ...GABARITS];
