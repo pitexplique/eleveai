@@ -20,7 +20,8 @@
 // ⚠️ PAS DE QUESTION À RÉDIGER. `applyMathsKeyboardFree` retire les items
 // `format: "open"` (cf. ce2/maths/index.ts) : un CE2 clique, il ne tape pas.
 
-import type { TransformationCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { CanvasFigure, TransformationCanvasData, TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { cap, melange, qcm, qcmN, un } from "../../cm1/maths/trous-outils";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -98,7 +99,7 @@ const AXES = [
   { figure: "un losange qui n'est pas un carré", nb: 2, pourquoi: "ses deux diagonales" },
 ] as const;
 
-export const symetrieBank: TutorBankItemV4[] = [
+const symetrieBase: TutorBankItemV4[] = [
   /* =========================================================
      CE2_SYMETRIE_AXE — reconnaître les axes
      Le piège de la diagonale du rectangle est ici.
@@ -711,4 +712,638 @@ export const symetrieBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/* ═════════════════════════════════════════════════════════════════════════
+   LES GÉNÉRATEURS RICHES (10/11/2026) — robustesse du coach du cycle 2.
+
+   Mesuré le 10/11 : 7 à 15 squelettes par micro, 8 à 18 répétitions sur 20.
+   Chaque gabarit tire désormais une FIGURE (une lettre, la moitié d'un sapin,
+   d'une fusée, d'un papillon, un rectangle et son pli) × une TOURNURE × une
+   situation à partir de ★3. L'ancien générateur reste servi une fois sur sept.
+   ⛔ Le dessin ne donne JAMAIS la réponse : quand on demande où va l'image,
+   on ne la dessine pas (l'ancien `construire_tpl_1` la dessinait, il est donc
+   remplacé en entier) ; quand on demande si un trait est un axe, il n'est pas
+   étiqueté « axe » ; quand on demande si la partie rouge est le symétrique,
+   rien ne l'appelle « symétrique ».
+═════════════════════════════════════════════════════════════════════════ */
+
+type Gen = TutorGeneratedQuestionV4;
+type Pt = { x: number; y: number };
+
+const TROUPE = [
+  "Nina", "Téo", "Zoé", "Ravi", "Pic le paille-en-queue",
+  "Lou", "Malo", "Inès", "Sacha", "Amir", "Jade", "Naïa", "Tom", "Lina", "Yanis",
+] as const;
+const qui = () => un(TROUPE);
+
+const OUI = "oui, les deux moitiés se superposent";
+const NON = "non, les deux moitiés ne se superposent pas";
+const ouiNon = (oui: boolean) => qcm(oui ? OUI : NON, [OUI, NON]);
+
+function grille(
+  source: Pt[],
+  axis: TransformationCanvasData["axis"],
+  extra: Partial<TransformationCanvasData> = {},
+  rows = 7,
+): TransformationCanvasData {
+  return {
+    kind: "transformation",
+    transformation: "symetrie_axiale",
+    grid: { rows, cols: 10 },
+    // Fond presque transparent : un aplat plein cachait l'axe qui traverse la figure (vu au rendu le 10/11).
+    source: { points: source, color: "#2563eb", fill: "rgba(37, 99, 235, 0.10)" },
+    axis,
+    display: { showGrid: true, showLabels: false, showPoints: false, showDashedLinks: true },
+    ...extra,
+  };
+}
+
+/* ─── 1. Les lettres capitales, dessinées en bâton sur le quadrillage ─── */
+const LETTRES_DESSIN = [
+  { l: "T", w: 4, v: true, h: false, pts: [[0, 0], [4, 0], [4, 1], [3, 1], [3, 5], [1, 5], [1, 1], [0, 1]] },
+  { l: "H", w: 4, v: true, h: true, pts: [[0, 0], [1, 0], [1, 2], [3, 2], [3, 0], [4, 0], [4, 5], [3, 5], [3, 3], [1, 3], [1, 5], [0, 5]] },
+  { l: "U", w: 4, v: true, h: false, pts: [[0, 0], [1, 0], [1, 4], [3, 4], [3, 0], [4, 0], [4, 5], [0, 5]] },
+  { l: "C", w: 3, v: false, h: true, pts: [[0, 0], [3, 0], [3, 1], [1, 1], [1, 4], [3, 4], [3, 5], [0, 5]] },
+  { l: "E", w: 3, v: false, h: true, pts: [[0, 0], [3, 0], [3, 1], [1, 1], [1, 2], [2, 2], [2, 3], [1, 3], [1, 4], [3, 4], [3, 5], [0, 5]] },
+  { l: "L", w: 3, v: false, h: false, pts: [[0, 0], [1, 0], [1, 4], [3, 4], [3, 5], [0, 5]] },
+  { l: "F", w: 3, v: false, h: false, pts: [[0, 0], [3, 0], [3, 1], [1, 1], [1, 2], [2, 2], [2, 3], [1, 3], [1, 5], [0, 5]] },
+  { l: "I", w: 3, v: true, h: true, pts: [[0, 0], [3, 0], [3, 1], [2, 1], [2, 4], [3, 4], [3, 5], [0, 5], [0, 4], [1, 4], [1, 1], [0, 1]] },
+] as const;
+
+function lettreDessinee(ctx: boolean): Gen {
+  const L = un(LETTRES_DESSIN);
+  const x0 = 3;
+  const y0 = 1;
+  const cx = x0 + L.w / 2;
+  const cy = y0 + 2.5;
+  const cas = un(["vc", "hc", "vd", "hd", "vc", "hc"] as const);
+  const axis: TransformationCanvasData["axis"] =
+    cas === "vc" ? { type: "vertical", x: cx }
+    : cas === "hc" ? { type: "horizontal", y: cy }
+    : cas === "vd" ? { type: "vertical", x: cx + un([-1, 1]) }
+    : { type: "horizontal", y: cy + un([-1, 1]) };
+  const oui = (cas === "vc" && L.v) || (cas === "hc" && L.h);
+  const sens = cas[0] === "v" ? "vertical" : "horizontal";
+  const P = qui();
+  return {
+    text: [
+      ctx
+        ? un([`${P} a découpé la lettre ${L.l} dans du carton.`, `${P} plie la lettre ${L.l} le long du trait vert.`, `Pour une affiche, ${P} dessine la lettre ${L.l}.`])
+        : un([`Voici la lettre ${L.l}.`, `Regarde la lettre ${L.l}.`, `La lettre ${L.l} est dessinée.`]),
+      un([
+        `Le trait vert ${sens} est-il un axe de symétrie ?`,
+        "Si on plie le long du trait vert, les deux moitiés se superposent-elles ?",
+        "Ce trait vert est-il un axe de symétrie de la lettre ?",
+      ]),
+    ].join(" "),
+    ...ouiNon(oui),
+    explanation: exp(
+      "Un axe de symétrie partage la figure en deux moitiés qui se superposent quand on plie.",
+      "On imagine le pliage le long du trait : chaque morceau doit tomber exactement sur un morceau de l'autre côté.",
+      oui
+        ? `Le trait passe au milieu de la lettre ${L.l} et ses deux moitiés sont pareilles, retournées : elles se superposent.`
+        : cas === "vd" || cas === "hd"
+          ? `Le trait ne passe pas au milieu de la lettre ${L.l} : une moitié est plus grosse que l'autre.`
+          : `Les deux moitiés de la lettre ${L.l} ne sont pas pareilles : en pliant, elles dépassent.`,
+      oui ? "Oui, c'est un axe de symétrie." : "Non, ce n'est pas un axe de symétrie.",
+    ),
+    canvas: grille(L.pts.map(([x, y]) => ({ x: x0 + x, y: y0 + y })), axis),
+  };
+}
+
+/* ─── 2. Les lettres en mots (capitales d'imprimerie) ─── */
+const AXE_VERTICAL = ["A", "H", "I", "M", "O", "T", "U", "V", "W", "X", "Y"];
+const AXE_HORIZONTAL = ["B", "C", "D", "E", "H", "I", "K", "O", "X"];
+const SANS_AXE = ["F", "G", "J", "L", "N", "P", "R", "S", "Z"];
+function lettreEnMots(deux: boolean): Gen {
+  if (deux) {
+    const juste = un(["H", "I", "O", "X"]);
+    const faux = melange(["A", "T", "U", "V", "M", "B", "C", "D", "E"]).slice(0, 3);
+    return {
+      text: un([
+        "Laquelle de ces lettres a DEUX axes de symétrie ?",
+        "Quelle lettre peut se plier en deux de haut en bas ET de gauche à droite ?",
+        `${qui()} cherche une lettre avec deux axes de symétrie. Laquelle ?`,
+      ]),
+      ...qcm(juste, faux),
+      explanation: exp(
+        "Une lettre peut avoir un axe vertical, un axe horizontal, les deux, ou aucun.",
+        "On essaie les deux pliages : de haut en bas, puis de gauche à droite.",
+        `${juste} se superpose dans les deux pliages. ${faux.join(", ")} n'ont qu'un seul axe.`,
+        `C'est ${juste}.`,
+      ),
+    };
+  }
+  const vertical = Math.random() < 0.6;
+  const juste = un(vertical ? AXE_VERTICAL : AXE_HORIZONTAL);
+  const faux = melange(vertical ? [...SANS_AXE, "B", "C", "D", "E", "K"] : [...SANS_AXE, "A", "T", "U", "V", "M"]).slice(0, 3);
+  const sens = vertical ? "vertical" : "horizontal";
+  return {
+    text: un([
+      `Laquelle de ces lettres capitales a un axe de symétrie ${sens} ?`,
+      vertical
+        ? "Quelle lettre se plie en deux, la gauche sur la droite, sans dépasser ?"
+        : "Quelle lettre se plie en deux, le haut sur le bas, sans dépasser ?",
+      `${qui()} écrit son nom en capitales. Quelle lettre a un axe de symétrie ${sens} ?`,
+    ]),
+    ...qcm(juste, faux),
+    explanation: exp(
+      `Un axe ${sens} partage la lettre en deux moitiés ${vertical ? "gauche et droite" : "du haut et du bas"} qui se superposent.`,
+      "On imagine qu'on plie la lettre le long de cet axe.",
+      `${juste} se superpose. ${faux.join(", ")} dépassent quand on les plie ainsi.`,
+      `C'est ${juste}.`,
+    ),
+  };
+}
+
+/* ─── 3. Combien d'axes ? (les figures usuelles, sans les axes dessinés) ─── */
+const FIGURES = [
+  {
+    nom: "ce carré", Nom: "Ce carré", nb: 4, pourquoi: "les deux médianes et les deux diagonales",
+    canvas: (): CanvasFigure => ({
+      kind: "quadrilatere",
+      points: { A: { x: 90, y: 40 }, B: { x: 230, y: 40 }, C: { x: 230, y: 180 }, D: { x: 90, y: 180 } },
+      display: { showPoints: false, showLabels: false, showSides: true },
+      marks: { rightAnglesAt: ["A", "B", "C", "D"], equalSides: [["AB", "BC"], ["CD", "DA"]] },
+    }),
+  },
+  {
+    nom: "ce rectangle", Nom: "Ce rectangle", nb: 2, pourquoi: "les deux médianes seulement, pas les diagonales",
+    canvas: (): CanvasFigure => ({
+      kind: "quadrilatere",
+      points: { A: { x: 50, y: 60 }, B: { x: 270, y: 60 }, C: { x: 270, y: 170 }, D: { x: 50, y: 170 } },
+      display: { showPoints: false, showLabels: false, showSides: true },
+      marks: { rightAnglesAt: ["A", "B", "C", "D"] },
+    }),
+  },
+  {
+    nom: "ce losange", Nom: "Ce losange", nb: 2, pourquoi: "ses deux diagonales",
+    canvas: (): CanvasFigure => ({
+      kind: "quadrilatere",
+      points: { A: { x: 160, y: 20 }, B: { x: 230, y: 110 }, C: { x: 160, y: 200 }, D: { x: 90, y: 110 } },
+      display: { showPoints: false, showLabels: false, showSides: true },
+      marks: { equalSides: [["AB", "BC"], ["CD", "DA"]] },
+    }),
+  },
+  {
+    nom: "ce triangle équilatéral", Nom: "Ce triangle équilatéral", nb: 3, pourquoi: "une par sommet",
+    canvas: (): CanvasFigure => ({
+      kind: "triangle",
+      points: { A: { x: 70, y: 190 }, B: { x: 250, y: 190 }, C: { x: 160, y: 34 } },
+      display: { showPoints: false, showLabels: false, showSides: true },
+      marks: { equalSides: [["AB", "BC"], ["BC", "CA"]] },
+    }),
+  },
+] as const;
+
+function combienAxes(ctx: boolean): Gen {
+  const f = un(FIGURES);
+  const P = qui();
+  return {
+    text: ctx
+      ? un([
+          `${P} plie ${f.nom} en papier de toutes les façons. Combien d'axes de symétrie trouve-t-${P === "Pic le paille-en-queue" ? "il" : "on"} ?`,
+          `${P} cherche tous les plis qui marchent pour ${f.nom}. Combien d'axes de symétrie a-t-il ?`,
+        ])
+      : un([`Combien d'axes de symétrie a ${f.nom} ?`, `${f.Nom} : combien a-t-il d'axes de symétrie ?`, `Regarde ${f.nom}. Combien a-t-il d'axes de symétrie ?`]),
+    ...qcmN(f.nb, [4, 2, 3, 1, 0].filter((n) => n !== f.nb)),
+    explanation: exp(
+      "Un axe de symétrie est un pli qui superpose les deux moitiés.",
+      "On essaie chaque pli possible : par le milieu des côtés, par les sommets.",
+      `${f.Nom} en a ${f.nb} : ${f.pourquoi}.`,
+      `Il a ${f.nb} axes de symétrie.`,
+    ),
+    canvas: f.canvas(),
+  };
+}
+
+/* ─── 4. Une figure au hasard : symétrique ou presque ─── */
+function figureHasard(): { pts: Pt[]; sym: boolean } {
+  const ys = melange([2, 3, 4, 5]).slice(0, un([2, 3])).sort();
+  const prof: Array<[number, number]> = [[un([0, 1, 2]), 1], ...ys.map((y): [number, number] => [un([1, 2, 3]), y]), [un([0, 1, 2]), 6]];
+  const X = 5;
+  const droite = prof.map(([dx, y]) => ({ x: X + dx, y }));
+  const gauche = [...prof].reverse().map(([dx, y]) => ({ x: X - dx, y }));
+  const sym = Math.random() < 0.5;
+  if (!sym) {
+    // On déplace d'un carreau un point de gauche qui n'est ni en haut ni en bas.
+    const i = 1 + Math.floor(Math.random() * ys.length);
+    const p = gauche[i];
+    const dx = X - p.x;
+    gauche[i] = { x: X - (dx === 3 ? 2 : dx + 1), y: p.y };
+  }
+  const pts = [...droite, ...gauche].filter((p, i, a) => i === 0 || p.x !== a[i - 1].x || p.y !== a[i - 1].y);
+  return { pts, sym };
+}
+
+function figureEtAxe(): Gen {
+  const { pts, sym } = figureHasard();
+  const P = qui();
+  return {
+    text: [
+      un([
+        `${P} a découpé cette forme dans du papier.`,
+        `${P} plie son dessin le long du trait vert.`,
+        `Pour une guirlande, ${P} découpe cette forme.`,
+        `${P} fait un pliage à l'atelier.`,
+        "La maîtresse dessine cette figure au tableau.",
+        "Ti Margo a dessiné cette figure.",
+      ]),
+      un([
+        "Le trait vert est-il un axe de symétrie ?",
+        "Les deux moitiés se superposent-elles exactement ?",
+        "Ce trait coupe-t-il la figure en deux moitiés pareilles ?",
+      ]),
+    ].join(" "),
+    ...ouiNon(sym),
+    explanation: exp(
+      "Un axe de symétrie partage la figure en deux moitiés qui se superposent quand on plie.",
+      "On compare chaque coin de gauche à son coin de droite : même ligne, même distance du trait.",
+      sym
+        ? "Chaque coin de gauche a son jumeau à droite, sur la même ligne et à la même distance du trait."
+        : "Un coin de gauche n'est pas à la même distance du trait que son jumeau de droite : en pliant, il dépasse.",
+      sym ? "Oui, c'est un axe de symétrie." : "Non, ce n'est pas un axe de symétrie.",
+    ),
+    canvas: grille(pts, { type: "vertical", x: 5 }, {}, 7),
+  };
+}
+
+/* ─── 5. Le pli du rectangle, du carré, du losange ─── */
+const QUADS = [
+  {
+    nom: "rectangle", objets: ["une serviette rectangulaire", "une carte postale", "un drapeau", "une feuille de papier"],
+    pts: [{ x: 2, y: 1 }, { x: 8, y: 1 }, { x: 8, y: 5 }, { x: 2, y: 5 }],
+    plis: [
+      { axe: { type: "vertical", x: 5 }, oui: true, quoi: "par le milieu de deux côtés" },
+      { axe: { type: "horizontal", y: 3 }, oui: true, quoi: "par le milieu de deux côtés" },
+      { axe: { type: "line", from: { x: 2, y: 1 }, to: { x: 8, y: 5 } }, oui: false, quoi: "par une diagonale : les coins ne tombent pas l'un sur l'autre" },
+      { axe: { type: "line", from: { x: 8, y: 1 }, to: { x: 2, y: 5 } }, oui: false, quoi: "par une diagonale : les coins ne tombent pas l'un sur l'autre" },
+    ],
+  },
+  {
+    nom: "carré", objets: ["un mouchoir carré", "une serviette carrée", "un papier d'origami carré"],
+    pts: [{ x: 3, y: 1 }, { x: 7, y: 1 }, { x: 7, y: 5 }, { x: 3, y: 5 }],
+    plis: [
+      { axe: { type: "line", from: { x: 3, y: 1 }, to: { x: 7, y: 5 } }, oui: true, quoi: "par une diagonale : dans un carré, elle marche" },
+      { axe: { type: "vertical", x: 5 }, oui: true, quoi: "par le milieu de deux côtés" },
+      { axe: { type: "vertical", x: 4 }, oui: false, quoi: "à côté du milieu : une moitié est plus large" },
+      { axe: { type: "horizontal", y: 2 }, oui: false, quoi: "à côté du milieu : une moitié est plus haute" },
+    ],
+  },
+  {
+    nom: "losange", objets: ["un cerf-volant en losange", "une étiquette en losange"],
+    pts: [{ x: 5, y: 0 }, { x: 7, y: 3 }, { x: 5, y: 6 }, { x: 3, y: 3 }],
+    plis: [
+      { axe: { type: "vertical", x: 5 }, oui: true, quoi: "par une diagonale : dans un losange, elle marche" },
+      { axe: { type: "horizontal", y: 3 }, oui: true, quoi: "par une diagonale : dans un losange, elle marche" },
+      { axe: { type: "line", from: { x: 6, y: 1.5 }, to: { x: 4, y: 4.5 } }, oui: false, quoi: "par le milieu de deux côtés : dans un losange, ce pli ne marche pas" },
+      { axe: { type: "vertical", x: 4 }, oui: false, quoi: "à côté du milieu : une moitié est plus large" },
+    ],
+  },
+] as const;
+
+function pliQuadrilatere(ctx: boolean, piege = false): Gen {
+  const q = piege ? QUADS[0] : un(QUADS);
+  const plis: readonly (typeof q.plis)[number][] = q.plis;
+  const pli = piege ? un([plis[2], plis[3], plis[0]]) : un(plis);
+  const P = qui();
+  const o = un(q.objets);
+  return {
+    text: ctx
+      ? `${P} plie ${o} le long du trait vert. ${un(["Les deux moitiés se superposent-elles ?", "Ce pli est-il un axe de symétrie ?", "Les bords tombent-ils pile l'un sur l'autre ?"])}`
+      : `Voici un ${q.nom}. ${un(["Le trait vert est-il un axe de symétrie ?", "Si on plie le long du trait vert, les deux moitiés se superposent-elles ?"])}`,
+    ...ouiNon(pli.oui),
+    explanation: exp(
+      "Un axe de symétrie est un pli qui superpose les deux moitiés, sans dépasser.",
+      "On imagine le pliage et on regarde où tombent les coins.",
+      `Ici on plie le ${q.nom} ${pli.quoi}.`,
+      pli.oui ? "Oui, c'est un axe de symétrie." : "Non, ce n'est pas un axe de symétrie.",
+    ),
+    canvas: grille([...q.pts], pli.axe as TransformationCanvasData["axis"]),
+  };
+}
+
+function axeRiche(d: number): Gen {
+  const r = Math.random();
+  if (d <= 2) {
+    if (r < 0.45) return lettreDessinee(false);
+    if (r < 0.75) return combienAxes(false);
+    if (r < 0.9) return pliQuadrilatere(false);
+    return lettreEnMots(false);
+  }
+  if (r < 0.3) return figureEtAxe();
+  if (r < 0.6) return pliQuadrilatere(true, d >= 5 && Math.random() < 0.5);
+  if (r < 0.75) return lettreDessinee(true);
+  if (r < 0.9) return combienAxes(true);
+  return lettreEnMots(d >= 5);
+}
+
+/* ─── 6. Compléter : la moitié d'un objet contre l'axe ─── */
+const MOITIES = [
+  { le: "le sapin", du: "du sapin", un: "un sapin", f: false, prof: [[0, 0], [2, 2], [1, 2], [3, 4], [1, 4], [1, 6], [0, 6]] },
+  { le: "la maison", du: "de la maison", un: "une maison", f: true, prof: [[0, 0], [3, 2], [2, 2], [2, 6], [0, 6]] },
+  { le: "la fusée", du: "de la fusée", un: "une fusée", f: true, prof: [[0, 0], [1, 1], [1, 4], [2, 5], [2, 6], [0, 6]] },
+  { le: "la tour du château", du: "de la tour du château", un: "une tour de château", f: true, prof: [[0, 0], [1, 0], [1, 1], [2, 1], [2, 0], [3, 0], [3, 6], [0, 6]] },
+  { le: "le vase", du: "du vase", un: "un vase", f: false, prof: [[0, 0], [2, 0], [1, 1], [1, 2], [3, 4], [2, 6], [0, 6]] },
+  { le: "la flèche", du: "de la flèche", un: "une flèche", f: true, prof: [[0, 0], [3, 3], [1, 3], [1, 6], [0, 6]] },
+  { le: "la couronne", du: "de la couronne", un: "une couronne", f: true, prof: [[0, 1], [1, 3], [3, 0], [3, 6], [0, 6]] },
+  { le: "le papillon", du: "du papillon", un: "un papillon", f: false, prof: [[0, 1], [2, 0], [3, 1], [2, 3], [3, 5], [2, 6], [0, 5]] },
+  { le: "le cœur", du: "du cœur", un: "un cœur", f: false, prof: [[0, 1], [1, 0], [2, 0], [3, 1], [3, 2], [0, 5]] },
+] as const;
+type Moitie = (typeof MOITIES)[number];
+const AXE_X = 5;
+const HAUT = 1;
+
+/** La moitié dessinée, à gauche ou à droite de l'axe (le signe dit le côté). */
+const demi = (m: Moitie, cote: 1 | -1, decale = 0, monte = 0): Pt[] =>
+  m.prof.map(([dx, y]) => ({ x: AXE_X + cote * (dx + decale), y: HAUT + y + monte }));
+const largeur = (m: Moitie) => Math.max(...m.prof.map(([dx]) => dx));
+
+function completerDistance(ctx: boolean): Gen {
+  const m = un(MOITIES);
+  const cote = un([1, -1] as const);
+  const ext = cote === -1 ? "gauche" : "droite";
+  const w = largeur(m);
+  const P = qui();
+  return {
+    text: [
+      ctx
+        ? un([`${P} a dessiné la moitié ${m.du} contre l'axe.`, `${P} veut compléter ${m.le} par symétrie.`, `Pour la fête, ${P} dessine ${m.un} en deux moitiés.`])
+        : un([`Voici la moitié ${m.du}.`, `On a dessiné la moitié ${m.du}.`]),
+      un([
+        `À combien de carreaux de l'axe faut-il placer l'image de son point le plus à ${ext} ?`,
+        `L'image du point le plus à ${ext} sera à combien de carreaux de l'axe ?`,
+        `Pour finir le dessin, à combien de carreaux de l'axe va l'image du point le plus à ${ext} ?`,
+      ]),
+    ].join(" "),
+    ...qcmN(w, [w - 1, w + 1, 2 * w]),
+    explanation: exp(
+      "Le symétrique d'un point est de l'autre côté de l'axe, sur la même ligne, à la même distance.",
+      "On compte les carreaux entre le point et l'axe, puis on reporte ce nombre de l'autre côté.",
+      `Le point le plus à ${ext} est à ${w} carreaux de l'axe : son image aussi.`,
+      `À ${w} carreaux de l'axe.`,
+    ),
+    canvas: grille(demi(m, cote), { type: "vertical", x: AXE_X, label: "axe" }, {}, 8),
+  };
+}
+
+function completerLargeur(): Gen {
+  const m = un(MOITIES);
+  const cote = un([1, -1] as const);
+  const w = largeur(m);
+  const P = qui();
+  return {
+    text: [
+      un([`${P} va compléter ${m.le} par symétrie.`, `Voici la moitié ${m.du}, posée contre l'axe.`, `${P} a peint la moitié ${m.du}.`]),
+      un([
+        `Une fois ${m.f ? "complète" : "complet"}, combien de carreaux de large mesurera ${m.le} ?`,
+        `Quelle sera la largeur ${m.du} entier, en carreaux ?`,
+      ]),
+    ].join(" "),
+    ...qcmN(2 * w, [w, 2 * w + 1, 2 * w - 1, w + 1]),
+    explanation: exp(
+      "Les deux moitiés d'une figure symétrique sont pareilles : chacune a la même largeur.",
+      "On compte la largeur de la moitié dessinée, puis on la double.",
+      `La moitié fait ${w} carreaux de large : ${w} + ${w} = ${2 * w}.`,
+      `${cap(m.le)} mesurera ${2 * w} carreaux de large.`,
+    ),
+    canvas: grille(demi(m, cote), { type: "vertical", x: AXE_X, label: "axe" }, {}, 8),
+  };
+}
+
+const BIEN = "oui, c'est bien le symétrique";
+const GLISSE = "non : la moitié est glissée, pas retournée";
+const LOIN = "non : elle est trop loin de l'axe";
+const HAUTEUR = "non : elle n'est pas à la même hauteur";
+
+function completerJuger(d: number): Gen {
+  const m = un(MOITIES);
+  const cote = un([1, -1] as const);
+  const w = largeur(m);
+  const cas = un(d >= 4 ? [BIEN, BIEN, GLISSE, LOIN, HAUTEUR] : [BIEN, BIEN, GLISSE, LOIN]);
+  const image =
+    cas === BIEN ? demi(m, (-cote) as 1 | -1)
+    : cas === LOIN ? demi(m, (-cote) as 1 | -1, 1)
+    : cas === HAUTEUR ? demi(m, (-cote) as 1 | -1, 0, 1)
+    : m.prof.map(([dx, y]) => ({ x: AXE_X + cote * dx - cote * w, y: HAUT + y }));
+  const P = qui();
+  const explications: Record<string, string> = {
+    [BIEN]: "Chaque point rouge est en face de son point bleu, sur la même ligne, à la même distance de l'axe.",
+    [GLISSE]: "La partie rouge est la même que la bleue, simplement poussée de côté : elle n'est pas retournée comme dans un miroir.",
+    [LOIN]: "La partie rouge est retournée, mais chaque point est un carreau trop loin de l'axe.",
+    [HAUTEUR]: "La partie rouge est retournée, mais elle est descendue d'un carreau : les points ne sont plus sur la même ligne.",
+  };
+  return {
+    text: [
+      un([`${P} complète la moitié ${m.du}.`, `${P} a fini son dessin ${m.du}.`, `Pour la fête, ${P} dessine ${m.un} symétrique.`, `${P} a colorié l'autre moitié ${m.du} en rouge.`]),
+      un(["La partie rouge est-elle bien le symétrique de la bleue ?", "Le dessin est-il juste ?", "La partie rouge est-elle bien placée ?"]),
+    ].join(" "),
+    ...qcm(cas, d >= 4 ? [BIEN, GLISSE, LOIN, HAUTEUR] : [BIEN, GLISSE, LOIN]),
+    explanation: exp(
+      "Pour compléter par symétrie, on retourne la moitié comme dans un miroir : même ligne, même distance de l'axe.",
+      "On suit chaque pointillé d'un point bleu à son point rouge et on compte les carreaux de chaque côté de l'axe.",
+      explications[cas],
+      cas === BIEN ? "Le dessin est juste." : "Le dessin n'est pas juste.",
+    ),
+    canvas: grille(demi(m, cote), { type: "vertical", x: AXE_X }, { image: { points: image, color: "#dc2626", fill: "rgba(220, 38, 38, 0.12)" } }, 9),
+  };
+}
+
+function completerSurAxe(): Gen {
+  const m = un(MOITIES.filter((x) => x.prof[0][0] === 0));
+  const P = qui();
+  const juste = "au même endroit : il ne bouge pas";
+  return {
+    text: `${un([`${P} complète ${m.le}.`, `Voici la moitié ${m.du}.`])} Le point tout en haut est posé sur l'axe. ${un(["Où sera son image ?", "Où faut-il dessiner son symétrique ?"])}`,
+    ...qcm(juste, ["à 1 carreau de l'autre côté de l'axe", "à 2 carreaux de l'autre côté de l'axe", "tout en bas de l'axe"]),
+    explanation: exp(
+      "Le symétrique d'un point est à la même distance de l'axe, de l'autre côté.",
+      "On mesure la distance entre le point et l'axe.",
+      "Le point est SUR l'axe : sa distance à l'axe vaut zéro. Son image est donc lui-même.",
+      "Il ne bouge pas.",
+    ),
+    canvas: grille(demi(m, un([1, -1] as const)), { type: "vertical", x: AXE_X, label: "axe" }, {}, 8),
+  };
+}
+
+function completerRiche(d: number): Gen {
+  const r = Math.random();
+  if (d <= 2) return r < 0.65 ? completerDistance(false) : completerJuger(2);
+  if (d === 3) return r < 0.4 ? completerDistance(true) : r < 0.85 ? completerJuger(3) : completerLargeur();
+  if (r < 0.45) return completerJuger(4);
+  if (r < 0.75) return completerLargeur();
+  if (r < 0.9) return completerDistance(true);
+  return completerSurAxe();
+}
+
+/* ─── 7. Construire : le symétrique d'un point sur le quadrillage ─── */
+const PAS = 40;
+const NOMS = ["B", "C", "D", "E"];
+
+function pointsDroites(axe: "v" | "h", A: [number, number], cands: Array<[number, number]>): CanvasFigure {
+  const ligne =
+    axe === "v"
+      ? { id: "axe", type: "droite" as const, from: { x: 4 * PAS, y: 0 }, to: { x: 4 * PAS, y: 6 * PAS }, color: "#16a34a", dashed: true, strokeWidth: 3 }
+      : { id: "axe", type: "droite" as const, from: { x: 0, y: 3 * PAS }, to: { x: 8 * PAS, y: 3 * PAS }, color: "#16a34a", dashed: true, strokeWidth: 3 };
+  return {
+    kind: "droites",
+    size: { width: 8 * PAS, height: 6 * PAS },
+    grid: { show: true, cols: 8, rows: 6 },
+    lines: [ligne],
+    points: [
+      { x: A[0] * PAS, y: A[1] * PAS, label: "A", color: "#2563eb" },
+      ...cands.map(([c, r], i) => ({ x: c * PAS, y: r * PAS, label: NOMS[i], color: "#f59e0b" })),
+    ],
+    display: { showGrid: true, showLabels: true, showPoints: true, showIntersections: false },
+  };
+}
+
+function symetriquePoint(ctx: boolean, d: number): Gen {
+  const axe: "v" | "h" = d >= 4 && Math.random() < 0.5 ? "h" : Math.random() < 0.8 ? "v" : "h";
+  let A: [number, number];
+  let img: [number, number];
+  const leurres: Array<[number, number]> = [];
+  if (axe === "v") {
+    A = [un([1, 2, 3, 5, 6, 7]), un([1, 2, 3, 4, 5])];
+    img = [8 - A[0], A[1]];
+    leurres.push([img[0] + (img[0] > 4 ? 1 : -1), A[1]], [img[0] - (img[0] > 4 ? 1 : -1), A[1]], [img[0], A[1] + 1], [img[0], A[1] - 1], [A[0] + (A[0] < 4 ? 4 : -4), A[1]]);
+  } else {
+    A = [un([1, 2, 3, 4, 5, 6, 7]), un([1, 2, 4, 5])];
+    img = [A[0], 6 - A[1]];
+    leurres.push([A[0], img[1] + (img[1] > 3 ? 1 : -1)], [A[0], img[1] - (img[1] > 3 ? 1 : -1)], [A[0] + 1, img[1]], [A[0] - 1, img[1]]);
+  }
+  const ok = (p: [number, number]) =>
+    p[0] >= 1 && p[0] <= 7 && p[1] >= 1 && p[1] <= 5 && !(p[0] === A[0] && p[1] === A[1]) && !(p[0] === img[0] && p[1] === img[1]) &&
+    (axe === "v" ? p[0] !== 4 : p[1] !== 3);
+  const uniques = leurres.filter(ok).filter((p, i, a) => a.findIndex((q) => q[0] === p[0] && q[1] === p[1]) === i);
+  const faux = melange(uniques).slice(0, 3);
+  const cands = melange([img, ...faux]);
+  const lettre = NOMS[cands.indexOf(img)];
+  const P = qui();
+  const juste = `le point ${lettre}`;
+  const lac = axe === "h" && ctx && Math.random() < 0.4;
+  return {
+    text: lac
+      ? `Le bord du lac est l'axe vert. ${P} se tient au point A. ${un(["Où est son reflet ?", "Sur quel point voit-on son reflet ?"])}`
+      : [
+        ctx
+          ? un([
+              `${P} a posé un jeton sur le point A.`,
+              "Pic le paille-en-queue est perché sur le point A.",
+              `Sur le quadrillage, ${P} a marqué le point A.`,
+              `${P} a caché un trésor au point A.`,
+              `Le jardinier plante une fleur au point A.`,
+            ])
+          : un(["Voici le point A et un axe vert.", "Regarde le point A et l'axe vert."]),
+        un(["Quel point est le symétrique de A ?", "Lequel de ces points est l'image de A ?", "Si on plie le long de l'axe vert, sur quel point tombe A ?"]),
+      ].join(" "),
+    ...qcm(juste, cands.map((_, i) => `le point ${NOMS[i]}`)),
+    explanation: exp(
+      "Le symétrique d'un point est de l'autre côté de l'axe, sur la même ligne droite qui le traverse, à la même distance.",
+      "On compte les carreaux entre A et l'axe, puis le même nombre de carreaux de l'autre côté, sans changer de ligne.",
+      `A est à ${axe === "v" ? Math.abs(A[0] - 4) : Math.abs(A[1] - 3)} carreaux de l'axe. Le point ${lettre} aussi, en face de A : c'est son symétrique.`,
+      `C'est ${juste}.`,
+    ),
+    canvas: pointsDroites(axe, A, cands),
+  };
+}
+
+function distancePoint(): Gen {
+  const axe: "v" | "h" = Math.random() < 0.5 ? "v" : "h";
+  const A: [number, number] = axe === "v" ? [un([1, 2, 3, 5, 6, 7]), un([1, 2, 3, 4, 5])] : [un([1, 2, 3, 5, 6, 7]), un([1, 2, 4, 5])];
+  const dist = axe === "v" ? Math.abs(A[0] - 4) : Math.abs(A[1] - 3);
+  const P = qui();
+  const inverse = Math.random() < 0.3;
+  if (inverse) {
+    return {
+      text: `${un([`${P} a placé le point A et son symétrique.`, "Un point et son symétrique sont de chaque côté de l'axe vert."])} Ils sont séparés de ${2 * dist} carreaux. À combien de carreaux de l'axe est chacun d'eux ?`,
+      ...qcmN(dist, [2 * dist, dist + 1, 4 * dist]),
+      explanation: exp(
+        "Un point et son symétrique sont à la même distance de l'axe, chacun d'un côté.",
+        "L'écart total se partage en deux moitiés égales.",
+        `${2 * dist} carreaux, c'est ${dist} + ${dist} : chacun est à ${dist} carreaux de l'axe.`,
+        `À ${dist} carreaux.`,
+      ),
+      canvas: pointsDroites(axe, A, []),
+    };
+  }
+  return {
+    text: `${un([`${P} a marqué le point A.`, "Pic le paille-en-queue est sur le point A.", "Regarde le point A et l'axe vert."])} ${un([
+      "Combien de carreaux séparent A de son symétrique ?",
+      "Quelle distance, en carreaux, y a-t-il entre A et son image ?",
+    ])}`,
+    ...qcmN(2 * dist, [dist, 2 * dist + 1, 2 * dist - 1]),
+    explanation: exp(
+      "Le symétrique de A est de l'autre côté de l'axe, à la même distance.",
+      "On compte les carreaux de A jusqu'à l'axe, puis de l'axe jusqu'à l'image.",
+      `A est à ${dist} carreaux de l'axe, son image aussi : ${dist} + ${dist} = ${2 * dist}.`,
+      `${2 * dist} carreaux.`,
+    ),
+    canvas: pointsDroites(axe, A, []),
+  };
+}
+
+function construireRiche(d: number): Gen {
+  const r = Math.random();
+  if (d <= 3) return symetriquePoint(r < 0.6, 3);
+  return r < 0.65 ? symetriquePoint(true, d) : distancePoint();
+}
+
+function defiRiche(): Gen {
+  const r = Math.random();
+  if (r < 0.2) return pliQuadrilatere(true, true);
+  if (r < 0.35) return lettreEnMots(true);
+  if (r < 0.55) return symetriquePoint(true, 5);
+  if (r < 0.75) return completerJuger(5);
+  if (r < 0.88) return figureEtAxe();
+  return completerLargeur();
+}
+
+const RICHE: Record<string, (d: number) => Gen> = {
+  ce2_symetrie_axe: axeRiche,
+  ce2_symetrie_completer: completerRiche,
+  ce2_symetrie_construire: construireRiche,
+  ce2_symetrie_defi: () => defiRiche(),
+};
+const AIDE: Record<string, string> = {
+  ce2_symetrie_axe: "Imagine que tu plies le long du trait : les deux moitiés tombent-elles pile l'une sur l'autre ?",
+  ce2_symetrie_completer: "Compte les carreaux jusqu'à l'axe, puis le même nombre de l'autre côté, sur la même ligne.",
+  ce2_symetrie_construire: "Même ligne, même distance de l'axe, de l'autre côté.",
+  ce2_symetrie_defi: "Plie dans ta tête, et compte les carreaux de chaque côté de l'axe.",
+};
+/** L'ancien générateur garde une part, sauf celui qui dessinait la réponse. */
+const PART_ANCIENNE: Record<string, number> = { ce2_symetrie_construire_tpl_1: 0 };
+
+function nouveau(id: string, microId: string, difficulty: 1 | 2 | 3 | 4 | 5): TutorBankItemV4 {
+  return {
+    kind: "template",
+    id,
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "symetrie",
+    microId,
+    difficulty,
+    theme: "neutral",
+    hint: AIDE[microId],
+    tags: ["ce2", "symetrie", "template", "canvas"],
+    generate: () => RICHE[microId](difficulty),
+  };
+}
+
+export const symetrieBank: TutorBankItemV4[] = [
+  ...symetrieBase.map((it): TutorBankItemV4 => {
+    if (it.kind !== "template" || !RICHE[it.microId]) return it;
+    const ancien = it.generate;
+    const part = PART_ANCIENNE[it.id] ?? 0.15;
+    const d = it.difficulty;
+    return {
+      ...it,
+      hint: AIDE[it.microId],
+      generate: (ctx) => (Math.random() < part ? ancien(ctx) : RICHE[it.microId](d)),
+    };
+  }),
+  // ★2 des axes et ★3 de « construire » n'avaient que des items figés.
+  nouveau("ce2_symetrie_axe_tpl_3", "ce2_symetrie_axe", 2),
+  nouveau("ce2_symetrie_construire_tpl_3", "ce2_symetrie_construire", 3),
 ];
