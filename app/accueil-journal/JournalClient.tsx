@@ -16,41 +16,16 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import Image from "next/image";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
-import {
-  ArrowRight,
-  BookOpen,
-  Calculator,
-  Camera,
-  Clapperboard,
-  ClipboardCheck,
-  GraduationCap,
-  Languages,
-  PenLine,
-  Play,
-  Printer,
-  Projector,
-  Sparkles,
-  Trophy,
-  Users,
-} from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, Languages, PenLine, Play, Trophy } from "lucide-react";
 import type { ChiffreDuJour, Metier } from "@/lib/accueil/journal";
+import type { Article, Mission } from "@/lib/accueil/articles";
 import ArriveeDiagonale from "@/components/accueil/dessins/ArriveeDiagonale";
 import { genererDefi, type DefiGenere, type Theme } from "@/lib/accueil/defis";
-import RechercheEntete from "@/components/accueil/RechercheEntete";
-import BanniereCrpe from "@/components/accueil/BanniereCrpe";
-import BandePays from "@/components/accueil/BandePays";
 
 export type VideoJournal = { id: string; titre: string; short: boolean; vignette: string };
 
 type Mise = "quotidien" | "magazine" | "fil";
 
-const MISES: { id: Mise; label: string; texte: string }[] = [
-  { id: "quotidien", label: "Quotidien", texte: "Le vrai journal, en colonnes" },
-  { id: "magazine", label: "Magazine", texte: "Des cartes de couleur" },
-  { id: "fil", label: "Fil", texte: "Une colonne, comme sur téléphone" },
-];
-
-const CLE_MISE = "eleveai.journal.mise";
 /** Le marqueur posé sur tous les liens : `from=accueil` sur /accueil (la mesure
  *  des départs de l'accueil continue, voir AccueilMatieres.tsx), `from=journal`
  *  sur la maquette. */
@@ -105,6 +80,7 @@ const COULEUR_MAGAZINE = {
   rituels: "bg-cyan-100",
   atelier: "bg-red-200",
   grands: "bg-slate-200",
+  article: "bg-white",
   rdv: "bg-amber-100",
   videotheque: "bg-white",
 } as const;
@@ -209,84 +185,47 @@ function Vignette({
 
 /* ═══ LA MANCHETTE ════════════════════════════════════════════════════════ */
 
-const PROMESSES = [
-  { ancre: "#apprendre", texte: "Apprendre une chose utile", couleur: "bg-blue-600 text-white" },
-  { ancre: "#entrainer", texte: "S'entraîner", couleur: "bg-red-600 text-white" },
-  { ancre: "#demain", texte: "Penser à demain", couleur: "bg-yellow-400 text-yellow-950" },
+const SOMMAIRE = [
+  { ancre: "#comprendre", texte: "Comprendre" },
+  { ancre: "#changer", texte: "Changer" },
+  { ancre: "#defi", texte: "Se tester" },
+  { ancre: "#dehors", texte: "Agir" },
+  { ancre: "#demain", texte: "Penser à demain" },
 ];
 
-function Manchette({ mise, date, numero }: { mise: Mise; date: string; numero: number }) {
-  if (mise === "quotidien") {
-    return (
-      <header className="border-b-[6px] border-double border-stone-900 pb-3 text-center sm:pb-4">
-        <div className="flex items-center justify-between border-b border-stone-900 pb-1 text-[11px] font-bold uppercase tracking-widest text-stone-700">
-          <span>{date}</span>
-          <span className="hidden sm:inline">Du CP aux adultes</span>
-          <span>N° {numero}</span>
-        </div>
-        <h1 className="mt-2 font-serif text-4xl font-black leading-none tracking-tight text-stone-900 sm:mt-3 sm:text-7xl">
-          Le Journal EleveAI
-          {/* ⚠️ LE h1 DE LA PAGE LA PLUS IMPORTANTE DU SITE : la marque se voit,
-              la REQUÊTE se lit (Google, lecteurs d'écran) — la règle du 23/09
-              (« un h1 qui dit la requête parle à ceux qui ne connaissent pas »). */}
-          <span className="sr-only"> : cours, exercices corrigés et coach de maths, du CP aux adultes</span>
-        </h1>
-        <p className="mt-2 font-serif text-sm italic text-stone-700 sm:mt-3 sm:text-lg">
-          Chaque jour, une chose utile à apprendre, de quoi s&rsquo;entraîner, et une idée pour demain.
-        </p>
-      </header>
-    );
-  }
-  if (mise === "magazine") {
-    return (
-      <header className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-violet-600 to-rose-500 p-6 text-white shadow-xl sm:p-8">
-        <div className="flex items-center gap-4 sm:gap-6">
-          <Image
-            src="/cahier-vacances/ti-margo.png"
-            alt="Ti Margo"
-            width={112}
-            height={140}
-            className="h-24 w-auto shrink-0 drop-shadow-xl sm:h-32"
-            priority
-          />
-          <div className="min-w-0">
-            <p className="text-xs font-bold uppercase tracking-widest text-white/80">
-              {date} · N° {numero}
-            </p>
-            <h1 className="mt-1 text-4xl font-black leading-none tracking-tight sm:text-6xl">
-              Le Journal EleveAI
-            </h1>
-            <p className="mt-2 text-sm font-semibold text-white/90 sm:text-base">
-              Pour les curieux du CP aux adultes.
-            </p>
-          </div>
-        </div>
-        <nav aria-label="Les trois promesses" className="mt-5 flex flex-wrap gap-2">
-          {PROMESSES.map((p) => (
-            <a key={p.ancre} href={p.ancre} className={`rounded-full px-4 py-2 text-sm font-black shadow ${p.couleur}`}>
-              {p.texte}
-            </a>
-          ))}
-        </nav>
-      </header>
-    );
-  }
+function Manchette({ date, numero }: { date: string; numero: number }) {
   return (
-    <header className="flex items-center gap-3 px-1">
-      <Image
-        src="/cahier-vacances/ti-margo.png"
-        alt="Ti Margo"
-        width={56}
-        height={70}
-        className="h-14 w-auto shrink-0"
-        priority
-      />
-      <div className="min-w-0">
-        <h1 className="text-2xl font-black leading-tight text-slate-900">Le Journal EleveAI</h1>
-        <p className="text-sm text-slate-600">
-          {date} · apprendre, s&rsquo;entraîner, penser à demain
-        </p>
+    <header className="border-b-[6px] border-double border-stone-900 pb-3 sm:pb-4">
+      <div className="flex items-center justify-between border-b border-stone-900 pb-1 text-[11px] font-bold uppercase tracking-widest text-stone-700">
+        <span>{date}</span>
+        <span className="hidden sm:inline">Du CP aux adultes</span>
+        <span>N° {numero}</span>
       </div>
+      <div className="mt-3 flex items-center justify-center gap-3 sm:gap-6">
+        <Image
+          src="/ti-margo/ti-margo-magazine.png"
+          alt="Ti Margo lit le journal"
+          width={240}
+          height={228}
+          className="h-16 w-auto shrink-0 sm:h-28"
+          priority
+        />
+        <div className="min-w-0 text-center">
+          <h1 className="font-serif text-4xl font-black leading-none tracking-tight text-stone-900 sm:text-7xl">
+            Le Journal d&rsquo;EleveAI
+          </h1>
+          <p className="mt-2 font-serif text-base italic text-stone-700 sm:text-2xl">
+            Comprendre le monde, et le changer
+          </p>
+        </div>
+      </div>
+      <nav aria-label="Sommaire" className="mt-3 flex justify-center gap-4 text-xs font-bold uppercase tracking-widest text-stone-700 sm:text-sm">
+        {SOMMAIRE.map((s) => (
+          <a key={s.ancre} href={s.ancre} className="hover:text-red-700 hover:underline">
+            {s.texte}
+          </a>
+        ))}
+      </nav>
     </header>
   );
 }
@@ -299,7 +238,7 @@ function Une({ mise, une }: { mise: Mise; une: UneProps }) {
   const t = TON[mise];
   if (!une.paysage) return null;
   return (
-    <Bloc mise={mise} quoi="une" rubrique={`À la Une · ${une.classe}`}>
+    <Bloc mise={mise} quoi="une" rubrique={`La vidéo du jour · ${une.classe}`}>
       {/* ⛔ Toujours une PAYSAGE (donnees.ts écarte les shorts de la Une). */}
       <Vignette v={une.paysage} mise={mise} quoi="une" grande />
       <div className="mt-4 flex gap-4">
@@ -479,7 +418,7 @@ function RendezVous({
 function Chiffre({ mise, chiffre }: { mise: Mise; chiffre: ChiffreDuJour }) {
   const t = TON[mise];
   return (
-    <Bloc mise={mise} quoi="chiffre" rubrique="Le chiffre du jour">
+    <Bloc mise={mise} quoi="chiffre" rubrique="Les chiffres clés">
       {chiffre.dessin === "arrivee-diagonale" && (
         <figure className="mb-3">
           <ArriveeDiagonale className={mise === "quotidien" ? "" : "rounded-xl"} />
@@ -489,6 +428,22 @@ function Chiffre({ mise, chiffre }: { mise: Mise; chiffre: ChiffreDuJour }) {
       <p className={`${t.titre} text-5xl leading-none`}>{chiffre.chiffre}</p>
       <p className={`${t.texte} mt-3 leading-snug`}>{chiffre.texte}</p>
     </Bloc>
+  );
+}
+
+/** « Les chiffres clés » (10/11/2026) : le chiffre du jour en grand, puis deux
+ *  autres, comme l'encadré chiffré d'un quotidien. */
+function ChiffresCles({ chiffre, autres }: { chiffre: ChiffreDuJour; autres: ChiffreDuJour[] }) {
+  return (
+    <div className="space-y-5">
+      <Chiffre mise="quotidien" chiffre={chiffre} />
+      {autres.map((c) => (
+        <div key={c.chiffre} className="border-t border-stone-400 pt-3">
+          <p className="font-serif text-3xl font-black leading-none tracking-tight text-stone-900">{c.chiffre}</p>
+          <p className="mt-2 font-serif text-sm leading-snug text-stone-800">{c.texte}</p>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -510,253 +465,6 @@ function MetierDuJour({ mise, metier }: { mise: Mise; metier: Metier }) {
         </p>
       </Bloc>
     </div>
-  );
-}
-
-/* Les classes rangées par cycle, du plus grand au plus petit dans chaque cycle :
-   c'est l'ordre de lecture de l'accueil (décision du 13/09, public lycée et
-   collège d'abord). Couleurs des cycles = les trois primaires (07/10). */
-const CYCLES = [
-  {
-    titre: "Lycée",
-    couleur: "bg-blue-600 text-white hover:bg-blue-700",
-    classes: [
-      ["terminale-spe", "Term"],
-      ["premiere-spe", "1re spé"],
-      ["premiere", "1re"],
-      ["seconde", "2de"],
-      ["stmg", "STMG"],
-    ],
-  },
-  {
-    titre: "Collège",
-    couleur: "bg-red-600 text-white hover:bg-red-700",
-    classes: [
-      ["3e", "3e"],
-      ["4e", "4e"],
-      ["5e", "5e"],
-      ["6e", "6e"],
-    ],
-  },
-  {
-    titre: "Primaire",
-    couleur: "bg-yellow-400 text-yellow-950 hover:bg-yellow-300",
-    classes: [
-      ["cm2", "CM2"],
-      ["cm1", "CM1"],
-      ["ce2", "CE2"],
-      ["ce1", "CE1"],
-      ["cp", "CP"],
-    ],
-  },
-] as const;
-
-const AUTRES_MATIERES = [
-  { label: "Français", href: "/coach-ia/francais", Icone: PenLine },
-  { label: "Anglais", href: "/coach-ia/anglais", Icone: Languages },
-  { label: "Espagnol", href: "/coach-ia/espagnol", Icone: Languages },
-  { label: "Économie", href: "/coach-ia/economie", Icone: Calculator },
-  { label: "IA", href: "/coach-ia/ia", Icone: Sparkles },
-  { label: "Photo d'un exercice", href: "/photo-exercice", Icone: Camera },
-];
-
-/** Les entraînements de MATHS hors coach — repris de l'ancien accueil
- *  (PanneauEvaluation et `LIEN_DANS_ACTIONS`). Routes vérifiées le 19/10. */
-const EXAMENS = [
-  { label: "Évaluation par chapitres", texte: "Coche un chapitre, plusieurs ou tout", href: "/parcours" },
-  { label: "Automatismes", texte: "Brevet et 1re, sans calculatrice", href: "/automatismes-maths" },
-  { label: "Brevet", texte: "Les exercices, notion par notion", href: "/coach-brevet" },
-  { label: "Bac spécialité", texte: "Première et terminale", href: "/coach-bac-spe" },
-  { label: "Évaluations nationales", texte: "6e et 4e, format réel", href: "/evaluation-nationale-college" },
-];
-
-function Coach({ mise, totalVideos }: { mise: Mise; totalVideos: number }) {
-  const t = TON[mise];
-  const etroit = mise === "fil";
-  return (
-    <div id="entrainer" className="scroll-mt-24">
-      <Bloc mise={mise} quoi="coach" rubrique="S'entraîner avec le coach">
-        <h2 className={`${t.titre} text-2xl leading-tight sm:text-3xl`}>Tu es en quelle classe ?</h2>
-        {/* ⭐ PAR OÙ COMMENCER (20/10/2026). Sa fille : « il y a trop de choses, et
-            les élèves qui galèrent, il faut [leur dire] par où je commence ».
-            Frédéric : « sans tout refondre l'accueil ». Le premier geste est
-            UN : la classe. Trois étapes numérotées, rien d'autre ne bouge. */}
-        <ol className="mt-3 grid gap-2 sm:grid-cols-3" aria-label="Par où commencer">
-          {[
-            "Clique sur ta classe.",
-            "Le coach te pose une question à la fois, à ton niveau, et corrige pas à pas.",
-            "Tu bloques ? Le bouton Vidéo t'explique, en se lisant et en s'écoutant.",
-          ].map((etape, i) => (
-            <li key={i} className="flex items-start gap-2.5 rounded-xl bg-white/70 px-3 py-2 ring-1 ring-current/10">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-sm font-black text-white" aria-hidden="true">
-                {i + 1}
-              </span>
-              <span className={`${t.texte} text-sm leading-snug`}>
-                {i === 0 && <span className="font-black">Par où commencer ? </span>}
-                {etape}
-              </span>
-            </li>
-          ))}
-        </ol>
-        {/* ⭐ SUR ORDINATEUR, LES TROIS CYCLES SUR UNE SEULE LIGNE, séparés par
-            un filet vertical (Frédéric, 20/10 : « essaie de tout mettre sur une
-            ligne, réduis les espaces entre lycée, collège et primaire, ou mets
-            une barre verticale — sur ordinateur, pas téléphone »). Au téléphone
-            (et dans le Fil), les cycles restent empilés. */}
-        <div className={`mt-4 flex flex-col gap-4 ${etroit ? "" : "lg:flex-row lg:items-start lg:gap-0"}`}>
-          {CYCLES.map((c, i) => (
-            <div
-              key={c.titre}
-              className={etroit ? "" : `lg:px-4 ${i === 0 ? "lg:pl-0" : "lg:border-l-2 lg:border-current/15"}`}
-            >
-              <p className="mb-2 text-sm font-black uppercase tracking-wide opacity-70">{c.titre}</p>
-              <div className={`flex flex-wrap gap-2 ${etroit ? "" : "lg:flex-nowrap lg:gap-1.5"}`}>
-                {c.classes.map(([id, label]) => (
-                  <Lien
-                    key={id}
-                    href={`/coach-ia/maths?classe=${id}`}
-                    quoi="coach"
-                    mise={mise}
-                    label={`Coach de maths, ${label}`}
-                    className={`min-w-14 whitespace-nowrap rounded-xl px-3 py-2.5 text-center text-base font-black shadow-sm transition hover:-translate-y-0.5 ${etroit ? "" : "lg:min-w-0 lg:px-2.5 lg:py-2"} ${c.couleur}`}
-                  >
-                    {label}
-                  </Lien>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        {/* ⭐ 19/10/2026, Frédéric : « avant on avait automatisme en maths », « et
-            même évaluation ». L'ancien accueil les portait dans sa ligne
-            d'onglets (AccueilMatieres.tsx) ; le journal les avait perdus. */}
-        <div className="mt-5 border-t border-current/15 pt-4">
-          <p className="mb-2 text-sm font-black uppercase tracking-wide opacity-70">Évaluations et examens</p>
-          <div className="flex flex-wrap gap-2">
-            {EXAMENS.map(({ label, texte, href }) => (
-              <Lien
-                key={href}
-                href={href}
-                quoi="coach"
-                mise={mise}
-                className={`inline-flex flex-col rounded-xl px-3 py-2 text-left shadow-sm transition hover:-translate-y-0.5 ${t.bouton}`}
-              >
-                <span className="flex items-center gap-1.5 text-sm font-black">
-                  <ClipboardCheck className="h-4 w-4" aria-hidden="true" />
-                  {label}
-                </span>
-                <span className="text-xs opacity-80">{texte}</span>
-              </Lien>
-            ))}
-          </div>
-        </div>
-        {/* ⭐ LA RANGÉE « VIDÉOS » (Frédéric, 20/10 : « il y a s'entraîner avec le
-            coach, puis s'entraîner à l'examen : il faut rajouter une section
-            vidéos pour accéder à la chaîne », « ça doit se voir à la page
-            d'accueil »). Le rouge de YouTube : on reconnaît une chaîne. */}
-        <div className="mt-4 border-t border-current/15 pt-4">
-          <p className="mb-2 text-sm font-black uppercase tracking-wide opacity-70">Vidéos</p>
-          <Lien
-            href="/video"
-            quoi="coach"
-            mise={mise}
-            className="inline-flex items-center gap-3 rounded-xl bg-red-600 px-4 py-2.5 text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-red-700"
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-red-600" aria-hidden="true">
-              <Play className="ml-0.5 h-4 w-4" fill="currentColor" />
-            </span>
-            <span className="text-left">
-              <span className="block text-base font-black leading-tight">La chaîne vidéo EleveAI</span>
-              <span className="block text-xs font-semibold opacity-90">
-                {totalVideos > 0 ? `Plus de ${totalVideos} vidéos, ` : ""}du CP au lycée
-              </span>
-            </span>
-          </Lien>
-        </div>
-        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-current/15 pt-4">
-          <span className="text-sm font-bold opacity-70">Et aussi :</span>
-          {AUTRES_MATIERES.map(({ label, href, Icone }) => (
-            <Lien
-              key={href}
-              href={href}
-              quoi="coach"
-              mise={mise}
-              className="inline-flex items-center gap-1.5 rounded-full border border-current/25 bg-white/60 px-3 py-1.5 text-sm font-bold transition hover:bg-white"
-            >
-              <Icone className="h-4 w-4" aria-hidden="true" />
-              {label}
-            </Lien>
-          ))}
-        </div>
-      </Bloc>
-    </div>
-  );
-}
-
-/* ═══ LA VIDÉOTHÈQUE, FAÇON YOUTUBE (20/10/2026) ════════════════════════════
-   Frédéric : « sur la page d'accueil j'aimerais avoir en annonce la page vidéo
-   style YouTube ». Placée juste sous la Une : on vient de voir LA vidéo du jour,
-   on découvre qu'il y en a des centaines. Le style est celui de YouTube dans les
-   trois mises en page (fond blanc, vignettes arrondies, titre gras sur deux
-   lignes, pastille de chaîne) : c'est une vitrine qu'on reconnaît d'un coup d'œil.
-   ⛔ Les vignettes mènent à /video/<id> (lecteur EleveAI en pause), pas à
-   YouTube. */
-type VideoVitrine = VideoJournal & { classe: string };
-
-function Videotheque({ mise, videos, total }: { mise: Mise; videos: VideoVitrine[]; total: number }) {
-  if (videos.length === 0) return null;
-  return (
-    <section
-      aria-label="La chaîne vidéo EleveAI"
-      className="rounded-2xl bg-white p-4 font-sans text-slate-900 shadow-sm ring-1 ring-slate-200 sm:p-5"
-    >
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="flex items-center gap-2 text-base font-black sm:text-xl">
-          <span className="flex h-7 w-10 items-center justify-center rounded-lg bg-red-600 text-white" aria-hidden="true">
-            <Play className="ml-0.5 h-4 w-4" fill="currentColor" />
-          </span>
-          La chaîne vidéo EleveAI
-          {total > 0 && <span className="hidden text-sm font-semibold text-slate-500 sm:inline">· plus de {total}</span>}
-        </h2>
-        <Lien
-          href="/video"
-          quoi="videotheque"
-          mise={mise}
-          className="shrink-0 rounded-full bg-slate-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-slate-700"
-        >
-          Tout voir →
-        </Lien>
-      </div>
-      <div className={`mt-4 grid grid-cols-2 gap-x-3 gap-y-4 sm:gap-x-4 ${mise === "fil" ? "" : "lg:grid-cols-4"}`}>
-        {videos.map((v) => (
-          <Lien key={v.id} href={`/video/${v.id}`} quoi="videotheque" mise={mise} className="group block" label={`Regarder : ${v.titre}`}>
-            <span className="relative block aspect-video overflow-hidden rounded-xl bg-slate-900">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={v.vignette}
-                alt=""
-                loading="lazy"
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-              />
-              <span className="absolute bottom-1.5 right-1.5 rounded bg-black/80 px-1.5 py-0.5 text-[11px] font-bold text-white">
-                {v.classe}
-              </span>
-            </span>
-            <span className="mt-2 flex gap-2.5">
-              <span className="hidden h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-emerald-100 ring-1 ring-emerald-200 sm:flex">
-                <Image src="/cahier-vacances/ti-margo.png" alt="" width={28} height={35} className="h-7 w-auto" />
-              </span>
-              <span className="min-w-0">
-                <span className="line-clamp-2 text-sm font-bold leading-snug text-slate-900 group-hover:text-red-700">
-                  {v.titre}
-                </span>
-                <span className="mt-0.5 block text-xs text-slate-500">EleveAI · {v.classe}</span>
-              </span>
-            </span>
-          </Lien>
-        ))}
-      </div>
-    </section>
   );
 }
 
@@ -843,69 +551,6 @@ function Rituels({ mise }: { mise: Mise }) {
   );
 }
 
-function Atelier({ mise }: { mise: Mise }) {
-  const t = TON[mise];
-  return (
-    <Bloc mise={mise} quoi="atelier" rubrique="À toi de jouer">
-      <div className="flex items-start gap-3">
-        <Clapperboard className="h-10 w-10 shrink-0" aria-hidden="true" />
-        <div>
-          <h2 className={`${t.titre} text-xl leading-tight`}>Crée ta vidéo de maths</h2>
-          <p className={`${t.texte} mt-1 leading-snug`}>
-            Tu écris ton explication en français, elle s&rsquo;anime toute seule. La meilleure façon de
-            comprendre, c&rsquo;est d&rsquo;expliquer.
-          </p>
-          <p className="mt-3">
-            <Lien href="/atelier-video" quoi="atelier" mise={mise} className={t.lien}>
-              Ouvrir l&rsquo;atelier vidéo
-            </Lien>
-          </p>
-        </div>
-      </div>
-    </Bloc>
-  );
-}
-
-const GRANDS = [
-  { titre: "À projeter demain en classe", texte: "Le coach en mode classe, les vidéos, les rituels.", href: "/espace-profs", Icone: Projector },
-  { titre: "Fiches d'exercices à imprimer", texte: "Une feuille A4 par notion, avec la correction.", href: "/fiches-exercices", Icone: Printer },
-  { titre: "Préparer le CRPE", texte: "Les maths et le français du concours, et un test pour se situer.", href: "/formation-crpe", Icone: GraduationCap },
-  { titre: "Reprendre les maths", texte: "Pour reprendre des études, ou aider ses enfants.", href: "/coach-ia/maths?classe=adulte", Icone: Calculator },
-  { titre: "Parents", texte: "Accompagner sans faire à sa place.", href: "/parents", Icone: Users },
-  { titre: "Fiches de cours", texte: "L'essentiel de chaque notion, un visuel par idée.", href: "/fiches-cours", Icone: BookOpen },
-];
-
-function Grands({ mise }: { mise: Mise }) {
-  const t = TON[mise];
-  return (
-    <Bloc
-      mise={mise}
-      quoi="grands"
-      rubrique="Le cahier des grands : profs, parents, adultes"
-      className={mise === "quotidien" ? "bg-stone-200/50 px-4 pb-4" : ""}
-    >
-      <ul className={`grid gap-3 ${mise === "fil" ? "" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
-        {GRANDS.map(({ titre, texte, href, Icone }) => (
-          <li key={href}>
-            <Lien
-              href={href}
-              quoi="grands"
-              mise={mise}
-              className="flex h-full items-start gap-3 rounded-xl bg-white/70 p-3 transition hover:bg-white"
-            >
-              <Icone className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
-              <span>
-                <span className={`${t.titre} block`}>{titre}</span>
-                <span className={`${t.texte} block text-sm leading-snug`}>{texte}</span>
-              </span>
-            </Lien>
-          </li>
-        ))}
-      </ul>
-    </Bloc>
-  );
-}
-
 const PIED = [
   { label: "Comment ça marche", href: "/pourquoi-eleveai" },
   { label: "Élèves", href: "/espace-eleves" },
@@ -919,39 +564,199 @@ const PIED = [
   { label: "Conditions", href: "/cgu" },
 ];
 
-/* ═══ LE SÉLECTEUR DE MISE EN PAGE ═══════════════════════════════════════ */
+/* ═══ LES ARTICLES : « COMPRENDRE LE MONDE » (10/11/2026) ═════════════════ */
 
-function Selecteur({ mise, choisir }: { mise: Mise; choisir: (m: Mise) => void }) {
+function EncadreMaths({ a }: { a: Article }) {
   return (
-    <div className="border-b border-slate-200 bg-white/90 px-3 py-2">
-      <div
-        role="radiogroup"
-        aria-label="Mise en page"
-        className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-2"
-      >
-        <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Mise en page :</span>
-        {MISES.map((m) => (
-          <button
-            key={m.id}
-            type="button"
-            role="radio"
-            aria-checked={mise === m.id}
-            title={m.texte}
-            onClick={() => choisir(m.id)}
-            className={`rounded-full px-3 py-1 text-sm font-bold transition ${
-              mise === m.id ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-            }`}
-          >
-            {m.label}
-          </button>
+    <aside className="border-2 border-stone-900 bg-white/70 p-4">
+      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">Les maths derrière</p>
+      <p className="mt-1 font-serif text-lg font-black leading-tight text-stone-900">{a.maths.titre}</p>
+      <ul className="mt-2 space-y-1 font-mono text-[13px] leading-snug text-stone-800 sm:text-sm">
+        {a.maths.lignes.map((l) => (
+          <li key={l}>{l}</li>
         ))}
+      </ul>
+      <p className="mt-2 text-xs italic text-stone-600">À suivre {a.niveau}.</p>
+    </aside>
+  );
+}
+
+/** Le défi de l'article (10/11/2026) : on lit, on comprend, on se teste.
+ *  Un clic donne la correction et son explication ; on peut se reprendre. */
+function DefiArticle({ a }: { a: Article }) {
+  const [choisi, setChoisi] = useState<number | null>(null);
+  const [vue, setVue] = useState(false);
+  const d = a.defi;
+  const juste = choisi === d.bonne;
+  const fini = juste || vue;
+  return (
+    <div className="border-2 border-dashed border-stone-900 bg-yellow-50 p-4">
+      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">🎯 Le défi de l&rsquo;article</p>
+      <p className="mt-1 font-serif text-lg font-bold leading-snug text-stone-900">{d.question}</p>
+      <div className="mt-3 grid gap-2 sm:grid-cols-3">
+        {d.choix.map((c, i) => {
+          // Une erreur ne montre PAS la bonne réponse : on se reprend d'abord.
+          const etat =
+            fini && i === d.bonne
+              ? "bg-emerald-600 text-white"
+              : i === choisi && !juste
+                ? "bg-red-600 text-white"
+                : fini
+                  ? "bg-white opacity-60"
+                  : "bg-white hover:bg-stone-100";
+          return (
+            <button
+              key={c}
+              type="button"
+              disabled={fini}
+              onClick={() => {
+                setChoisi(i);
+                track("journal_defi_article", { article: a.id, juste: i === d.bonne });
+              }}
+              className={`rounded-lg border-2 border-stone-900 px-3 py-2 text-left font-bold transition ${etat}`}
+            >
+              <span className="mr-1.5 opacity-70">{"ABC"[i]}.</span>
+              {c}
+            </button>
+          );
+        })}
+      </div>
+      <div className="mt-3" aria-live="polite">
+        {fini ? (
+          <p className="font-serif leading-snug text-stone-800">
+            <span className={`font-black ${juste ? "text-emerald-700" : "text-stone-900"}`}>
+              {juste ? "Bravo ! " : "La réponse : "}
+            </span>
+            {d.explication}
+          </p>
+        ) : choisi !== null ? (
+          <p className="font-serif leading-snug text-stone-800">
+            <span className="font-black text-red-700">Pas tout à fait. </span>
+            Relis « Les maths derrière » et essaie un autre choix.{" "}
+            <button type="button" onClick={() => setVue(true)} className="font-bold text-red-700 underline underline-offset-4">
+              Voir la réponse
+            </button>
+          </p>
+        ) : null}
       </div>
     </div>
   );
 }
 
+function Agir({ a }: { a: Article }) {
+  return (
+    <p className="border-l-4 border-emerald-700 bg-emerald-50 px-3 py-2 font-serif leading-snug text-stone-800">
+      <span className="font-black text-emerald-800">Et toi, tu peux… </span>
+      {a.agir}
+    </p>
+  );
+}
+
+function ArticleUne({ a }: { a: Article }) {
+  return (
+    <article aria-label={`À la Une : ${a.titre}`} className="border-t-[3px] border-stone-900 pt-3">
+      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">À la Une · {a.rubrique}</p>
+      <h2 className="mt-2 font-serif text-3xl font-black leading-[1.05] tracking-tight text-stone-900 sm:text-5xl">
+        {a.titre}
+      </h2>
+      <p className="mt-3 font-serif text-lg font-semibold leading-snug text-stone-800 sm:text-xl">{a.chapo}</p>
+      <div className="mt-5 grid gap-6 md:grid-cols-[1fr_16rem]">
+        <div className="space-y-3 font-serif text-[17px] leading-relaxed text-stone-800 first-letter:float-left first-letter:mr-2 first-letter:font-serif first-letter:text-6xl first-letter:font-black first-letter:leading-[0.85] first-letter:text-stone-900">
+          {a.corps.map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </div>
+        <EncadreMaths a={a} />
+      </div>
+      <div className="mt-5">
+        <DefiArticle a={a} />
+      </div>
+      <div id="changer" className="mt-5 scroll-mt-24">
+        <Agir a={a} />
+      </div>
+      <p className="mt-4 text-xs italic text-stone-500">Source : {a.source}</p>
+    </article>
+  );
+}
+
+function AutreNouvelle({ a }: { a: Article }) {
+  const [ouvert, setOuvert] = useState(false);
+  return (
+    <article aria-label={a.titre} className="border-t-[3px] border-stone-900 pt-3">
+      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">{a.rubrique}</p>
+      <h3 className="mt-2 font-serif text-2xl font-black leading-tight tracking-tight text-stone-900">{a.titre}</h3>
+      <p className="mt-2 font-serif leading-snug text-stone-800">{a.chapo}</p>
+      {ouvert ? (
+        <div className="mt-3 space-y-3">
+          {a.corps.map((p) => (
+            <p key={p} className="font-serif leading-relaxed text-stone-800">
+              {p}
+            </p>
+          ))}
+          <EncadreMaths a={a} />
+          <DefiArticle a={a} />
+          <Agir a={a} />
+          <p className="text-xs italic text-stone-500">Source : {a.source}</p>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => {
+            setOuvert(true);
+            track("journal_clic", { rubrique: "article", article: a.id });
+          }}
+          className="mt-3 font-bold text-red-700 underline decoration-2 underline-offset-4 hover:text-red-900"
+        >
+          Lire l&rsquo;article et ses maths
+        </button>
+      )}
+    </article>
+  );
+}
+
+/** « Le défi dehors » ou « La bonne action du jour » (10/11/2026) : un jour
+ *  l'un, un jour l'autre (lib/accueil/articles.ts, missionDuJour). */
+function MissionDuJour({ m }: { m: Mission }) {
+  const dehors = m.genre === "dehors";
+  return (
+    <section
+      id="dehors"
+      aria-label={dehors ? "Le défi dehors" : "La bonne action du jour"}
+      className={`scroll-mt-24 border-[3px] p-5 ${dehors ? "border-emerald-800 bg-emerald-50" : "border-sky-800 bg-sky-50"}`}
+    >
+      <p className={`text-[11px] font-bold uppercase tracking-[0.2em] ${dehors ? "text-emerald-800" : "text-sky-800"}`}>
+        {dehors ? "🌳 Le défi dehors" : "🤝 La bonne action du jour"} · {m.niveau}
+      </p>
+      <h2 className="mt-2 font-serif text-2xl font-black leading-tight text-stone-900 sm:text-3xl">{m.titre}</h2>
+      <p className="mt-2 font-serif text-sm italic text-stone-700">
+        <span className="font-bold not-italic">Il te faut : </span>
+        {m.materiel}
+      </p>
+      <ol className="mt-3 list-decimal space-y-1 pl-5 font-serif leading-snug text-stone-800">
+        {m.etapes.map((e) => (
+          <li key={e}>{e}</li>
+        ))}
+      </ol>
+      <p className="mt-3 border-t border-stone-900/20 pt-3 font-serif leading-snug text-stone-800">
+        <span className={`font-black ${dehors ? "text-emerald-800" : "text-sky-800"}`}>Le calcul : </span>
+        {m.calcul}
+      </p>
+      <p className="mt-2 text-xs italic text-stone-600">
+        Avec un adulte dès que tu sors de l&rsquo;école. Demain, {dehors ? "une bonne action" : "un défi dehors"}.
+      </p>
+    </section>
+  );
+}
+
 /* ═══ LA PAGE ═════════════════════════════════════════════════════════════ */
 
+// ⭐ 10/11/2026 — UN VRAI JOURNAL. Frédéric : « faut faire un vrai journal ! »,
+// « le coach est donc inutile ». Une seule mise en page (le Quotidien, son
+// choix du 18/10) ; le sélecteur Magazine / Fil, le bloc du coach, la chaîne
+// vidéo, l'atelier et le cahier des grands sont partis (les rituels restent,
+// « garde les rituels ») (version
+// d'avant : git log de ce fichier). Ce qui reste : des ARTICLES sur le monde
+// (lib/accueil/articles.ts), le chiffre, le défi, la vidéo, les métiers.
 export default function JournalClient(props: {
   date: string;
   numero: number;
@@ -962,167 +767,94 @@ export default function JournalClient(props: {
   theme: Theme | null;
   hier: { question: string; reponse: string };
   chiffre: ChiffreDuJour;
+  chiffresCles: ChiffreDuJour[];
   metier: Metier;
   shorts: VideoJournal[];
   reel: VideoJournal[];
-  videotheque: { videos: VideoVitrine[]; total: number };
-  /** Monté par /accueil : le Quotidien, sans sélecteur (son choix du 18/10). */
-  accueil?: boolean;
+  articles: { une: Article; autres: Article[] };
+  mission: Mission;
 }) {
-  const [mise, setMise] = useState<Mise>("quotidien");
-  const accueil = props.accueil ?? false;
-
-  // ?mise= dans l'adresse l'emporte (pour lui envoyer un lien), sinon le
-  // dernier choix du visiteur. Lu APRÈS l'hydratation : le serveur rend toujours
-  // le Quotidien.
-  useEffect(() => {
-    if (accueil) return;
-    const ok = (x: string | null): x is Mise => x === "quotidien" || x === "magazine" || x === "fil";
-    const url = new URLSearchParams(window.location.search).get("mise");
-    let garde: string | null = null;
-    try {
-      garde = localStorage.getItem(CLE_MISE);
-    } catch {}
-    if (ok(url)) setMise(url);
-    else if (ok(garde)) setMise(garde);
-  }, [accueil]);
-
-  function choisir(m: Mise) {
-    setMise(m);
-    track("journal_mise", { mise: m });
-    try {
-      localStorage.setItem(CLE_MISE, m);
-    } catch {}
-    const u = new URL(window.location.href);
-    u.searchParams.set("mise", m);
-    window.history.replaceState(null, "", u);
-  }
-
+  const mise: Mise = "quotidien";
   const t = TON[mise];
-  const { date, numero, jour, une, demain, defi, theme, hier, chiffre, metier, shorts, reel, videotheque } = props;
-
-  const blocs = {
-    une: <Une mise={mise} une={une} />,
-    defi: <DefiDuJour mise={mise} jour={jour} defi={defi} theme={theme} />,
-    videotheque: <Videotheque mise={mise} videos={videotheque.videos} total={videotheque.total} />,
-    rdv: <RendezVous mise={mise} jour={jour} demain={demain} hier={hier} />,
-    chiffre: <Chiffre mise={mise} chiffre={chiffre} />,
-    metier: <MetierDuJour mise={mise} metier={metier} />,
-    coach: <Coach mise={mise} totalVideos={videotheque.total} />,
-    shorts: <Shorts mise={mise} shorts={shorts} />,
-    reel: <Reel mise={mise} reel={reel} />,
-    rituels: <Rituels mise={mise} />,
-    atelier: <Atelier mise={mise} />,
-    grands: <Grands mise={mise} />,
-  };
+  const { date, numero, jour, une, demain, defi, theme, hier, chiffre, chiffresCles, metier, shorts, reel, articles, mission } = props;
 
   return (
-    <Source.Provider value={accueil ? "accueil" : "journal"}>
-    <div className={`min-h-screen ${t.page}`}>
-      {accueil ? (
-        /* ⚠️ LE CHAMP DES TÉLÉPHONES : sous 640 px l'en-tête masque sa recherche
-           (voir AccueilMatieres.tsx) ; sans cette ligne, aucune recherche. */
-        <div className="border-b border-stone-300 bg-white px-3 py-2 sm:hidden">
-          <RechercheEntete variante="page" />
-        </div>
-      ) : (
-        <Selecteur mise={mise} choisir={choisir} />
-      )}
-      <main className={`mx-auto w-full px-4 py-6 sm:py-8 ${t.conteneur}`}>
-        <Manchette mise={mise} date={date} numero={numero} />
-        {/* La bande CRPE (ordinateur ; au téléphone elle est au-dessus de
-            l'en-tête, posée par le layout). */}
-        {accueil && (
-          <div className="mt-4">
-            <BanniereCrpe place="colonnes" />
-          </div>
-        )}
-        {/* Les programmes des autres pays (22/10/2026), voir BandePays. */}
-        {accueil && (
-          <div className="mt-3">
-            <BandePays />
-          </div>
-        )}
-        {/* ⭐⭐ LE COACH EN PREMIER (Frédéric, 20/10/2026 : « il faut mettre en
-            premier la section S'entraîner avec le coach : tu es en quelle
-            classe, évaluation, examen et les matières, car c'est le cœur
-            d'EleveAI », puis « juste en dessous de la pub pour le CRPE »). Sous la
-            bande CRPE, avant la Une, dans les trois mises en page. */}
-        <div className={mise === "fil" ? "mt-4" : "mt-6"}>{blocs.coach}</div>
-        {/* ⭐ LA CHAÎNE VIDÉO, JUSTE SOUS LE COACH (Frédéric, 20/10 : « tu peux
-            monter vidéo », « ça doit l'envoyer sur la chaîne vidéo »). */}
-        <div className={mise === "fil" ? "mt-4" : "mt-6"}>{blocs.videotheque}</div>
+    <Source.Provider value="journal">
+      <div className={`min-h-screen ${t.page}`}>
+        <main className={`mx-auto w-full px-4 py-6 sm:py-8 ${t.conteneur}`}>
+          <Manchette date={date} numero={numero} />
 
-        {mise === "quotidien" && (
-          <div className="mt-6 space-y-8">
-            <div id="apprendre" className="grid scroll-mt-24 gap-8 lg:grid-cols-12">
-              <div className="lg:col-span-8">{blocs.une}</div>
-              <aside className="space-y-8 lg:col-span-4 lg:border-l lg:border-stone-300 lg:pl-8">
-                {blocs.defi}
-                {blocs.chiffre}
-                {blocs.rdv}
-              </aside>
+          {/* LA UNE : l'article du jour, et la colonne de droite. */}
+          <div id="comprendre" className="mt-6 grid scroll-mt-24 gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-8">
+              <ArticleUne a={articles.une} />
             </div>
-            <div className="grid gap-8 lg:grid-cols-12">
-              <div className="lg:col-span-4">{blocs.metier}</div>
-              <div className="lg:col-span-8 lg:border-l lg:border-stone-300 lg:pl-8">{blocs.reel}</div>
-            </div>
-            {blocs.shorts}
-            <div className="grid gap-8 md:grid-cols-12">
-              <div className="md:col-span-7">{blocs.rituels}</div>
-              <div className="md:col-span-5">{blocs.atelier}</div>
-            </div>
-            {blocs.grands}
+            <aside className="space-y-8 lg:col-span-4 lg:border-l lg:border-stone-300 lg:pl-8">
+              <ChiffresCles chiffre={chiffre} autres={chiffresCles} />
+              <div id="defi" className="scroll-mt-24">
+                <DefiDuJour mise={mise} jour={jour} defi={defi} theme={theme} />
+              </div>
+            </aside>
           </div>
-        )}
 
-        {mise === "magazine" && (
-          <div className="mt-6 grid gap-5 lg:grid-cols-3">
-            <div id="apprendre" className="scroll-mt-24 lg:col-span-2 lg:row-span-2">
-              {blocs.une}
+          {/* LES AUTRES NOUVELLES, sur trois colonnes. */}
+          <section aria-label="Les autres nouvelles" className="mt-10">
+            <h2 className="border-b-[6px] border-double border-stone-900 pb-1 font-serif text-2xl font-black text-stone-900">
+              Les autres nouvelles
+            </h2>
+            <div className="mt-4 grid gap-8 md:grid-cols-3">
+              {articles.autres.map((a) => (
+                <AutreNouvelle key={a.id} a={a} />
+              ))}
             </div>
-            {blocs.defi}
-            {blocs.chiffre}
-            {blocs.metier}
-            <div className="lg:col-span-2">{blocs.reel}</div>
-            <div className="lg:col-span-3">{blocs.shorts}</div>
-            <div className="lg:col-span-3">{blocs.rdv}</div>
-            <div className="lg:col-span-2">{blocs.rituels}</div>
-            {blocs.atelier}
-            <div className="lg:col-span-3">{blocs.grands}</div>
-          </div>
-        )}
+          </section>
 
-        {mise === "fil" && (
-          <div className="mt-4 space-y-4">
-            <div id="apprendre" className="scroll-mt-24">
-              {blocs.une}
+          {/* LE DÉFI DEHORS OU LA BONNE ACTION : apprendre autrement, en vrai. */}
+          <div className="mt-10">
+            <MissionDuJour m={mission} />
+          </div>
+
+          {/* EN IMAGES : la vidéo du jour et les maths dehors. */}
+          <div className="mt-10 grid gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <Une mise={mise} une={une} />
             </div>
-            {blocs.defi}
-            {blocs.rdv}
-            {blocs.metier}
-            {blocs.shorts}
-            {blocs.chiffre}
-            {blocs.reel}
-            {blocs.rituels}
-            {blocs.atelier}
-            {blocs.grands}
+            <div className="lg:col-span-5 lg:border-l lg:border-stone-300 lg:pl-8">
+              <Reel mise={mise} reel={reel} />
+            </div>
           </div>
-        )}
 
-        <footer className="pt-10">
-          <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs opacity-70">
-            {PIED.map((l) => (
-              <li key={l.href}>
-                <Lien href={l.href} quoi="pied" mise={mise} className="hover:underline">
-                  {l.label}
-                </Lien>
-              </li>
-            ))}
-          </ul>
-        </footer>
-      </main>
-    </div>
+          <div className="mt-10 grid gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <MetierDuJour mise={mise} metier={metier} />
+            </div>
+            <div className="lg:col-span-7 lg:border-l lg:border-stone-300 lg:pl-8">
+              <RendezVous mise={mise} jour={jour} demain={demain} hier={hier} />
+            </div>
+          </div>
+
+          <div className="mt-10">
+            <Shorts mise={mise} shorts={shorts} />
+          </div>
+
+          {/* Frédéric, 10/11 : « garde les rituels ». */}
+          <div className="mt-10">
+            <Rituels mise={mise} />
+          </div>
+
+          <footer className="pt-10">
+            <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs opacity-70">
+              {PIED.map((l) => (
+                <li key={l.href}>
+                  <Lien href={l.href} quoi="pied" mise={mise} className="hover:underline">
+                    {l.label}
+                  </Lien>
+                </li>
+              ))}
+            </ul>
+          </footer>
+        </main>
+      </div>
     </Source.Provider>
   );
 }

@@ -20,9 +20,14 @@ import type { Metadata } from "next";
 import JournalClient from "./JournalClient";
 import { donneesDuJournal } from "./donnees";
 
+// ⭐ 10/11/2026 : ce n'est plus une maquette, c'est LE Journal d'EleveAI
+// (« comprendre le monde avec les maths »), lié depuis le bandeau en haut de
+// toutes les pages (components/BandeauJournal.tsx). Il s'indexe donc.
 export const metadata: Metadata = {
-  title: "Le journal EleveAI (maquette)",
-  robots: { index: false, follow: false },
+  title: "Le Journal d'EleveAI : comprendre le monde et le changer",
+  description:
+    "Chaque jour, un article pour comprendre le monde (planète, espace, santé, argent, sport, technologie) les maths qui l'expliquent et un geste pour le changer, du CP aux adultes.",
+  alternates: { canonical: "/accueil-journal" },
 };
 
 export const revalidate = 3600;

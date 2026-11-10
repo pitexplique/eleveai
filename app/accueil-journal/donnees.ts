@@ -14,6 +14,7 @@
 //     du défi d'hier, la série de jours (côté navigateur, JournalClient).
 // ⭐ L'ORDRE DE TIRAGE EST STABLE : chaque vidéo a sa place fixe (un hachage de
 // son id). Une vidéo publiée demain s'insère sans bouleverser les autres.
+import { articlesDuJour, missionDuJour } from "@/lib/accueil/articles";
 import { toutesLesVideos, urlR2, type VideoR2 } from "@/lib/videos/r2";
 import { CHIFFRES, EDITION, JOUR_DU_NUMERO_1, METIERS, UNES, jourParis } from "@/lib/accueil/journal";
 import { depuisEcrit, genererDefi, themeDe } from "@/lib/accueil/defis";
@@ -166,6 +167,16 @@ export function donneesDuJournal(jour = jourParis()) {
     },
     demain: { titre: demain.p.titre, classe: demain.classe },
     chiffre: chiffreDuJour(jour),
+    // 10/11/2026 — « les chiffres clés » : celui du jour, et deux autres du
+    // catalogue (pas de 7 et 13, jamais le même que celui du jour).
+    // ⛔ La Réunion ≈ 4 % des contextes : les deux chiffres en plus l'écartent.
+    chiffresCles: (() => {
+      const monde = CHIFFRES.filter(
+        (c) => !/Réunion|Piton|Maïdo|Foc-Foc|Diagonale|lagon|baleine/i.test(c.texte) &&
+          c.chiffre !== chiffreDuJour(jour).chiffre,
+      );
+      return [3, 8].map((k) => monde[(jour * 2 + k) % monde.length]).filter((c, i, l) => l.indexOf(c) === i);
+    })(),
     // Le défi d'aujourd'hui, son thème (pour « Un autre défi », qui reste sur
     // la notion de la Une), et celui d'HIER pour la réponse des rendez-vous.
     defi: defiDuJour(jour),
@@ -175,6 +186,10 @@ export function donneesDuJournal(jour = jourParis()) {
       return { question: d.question, reponse: d.choix[d.bonne] };
     })(),
     metier: METIERS[jour % METIERS.length],
+    // 10/11/2026 : les articles « comprendre le monde » (lib/accueil/articles.ts).
+    articles: articlesDuJour(jour),
+    // « des défis à faire à l'extérieur », « ou des bonnes actions » (10/11).
+    mission: missionDuJour(jour),
     // ⚠️ La fenêtre se prend sur la liste ENTIÈRE, et le short de la Une n'est
     // retiré qu'après (il en reste alors 8) : retirer d'abord changeait la
     // longueur de la liste d'un jour à l'autre, et deux jours pouvaient
