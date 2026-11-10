@@ -17,7 +17,7 @@
 #       fichier_marques = "suite_xxx_marques.json"  # à côté du script
 #       nom_voix = "premiere-suite-xxx"             # manim/voix/<nom>.json
 #
-#   UN ÉCRAN : self.nouvel_ecran("02-ecarts") (efface, Ti-Margo, lance la voix),
+#   UN ÉCRAN : self.nouvel_ecran("02-ecarts") (lance la voix, efface l'ancien écran en 0,25 s AVANT le nouveau, Ti-Margo),
 #     puis des animations calées sur la voix :
 #       self.au_mot("raison")      attend le mot (n=2 : 2e occurrence) ;
 #       self.suivre("40")          attend la PROCHAINE occurrence après le
@@ -275,6 +275,16 @@ class _OutilsSuites:
         return i
 
     # ── textes et petits gestes ─────────────────────────────────────────────
+
+    def _effacer_ancien(self, garder=(), run_time=0.25):
+        """Fait disparaître l'écran précédent (sauf Ti-Margo et `garder`) AVANT
+        le nouveau : appelé par nouvel_ecran, juste après le départ de la voix."""
+        vieux = [m for m in self.mobjects if m is not getattr(self, "_margo", None) and m not in garder]
+        for m in vieux:
+            m.clear_updaters()
+        if vieux:
+            self.play(*[FadeOut(m) for m in vieux], run_time=run_time)
+            self.remove(*vieux)
 
     def t(self, texte, fs=36, color=WHITE, larg=None, audit=True):
         t = Text(texte, font_size=fs, color=color)
@@ -536,10 +546,14 @@ class PaysageSuites(_OutilsSuites, AuditSynchro, MotsCales, Notion6e):
         return m
 
     def nouvel_ecran(self, cle, margo=0.5):
-        """Efface tout, remet Ti-Margo, lance la voix de l'écran."""
+        """Lance la voix de l'écran, efface l'ancien écran en 0,25 s, PUIS remet
+        Ti-Margo : rien du nouvel écran n'apparaît avant (pas de chevauchement,
+        REGLES.md), et la synchro ne prend jamais d'avance (les mots attendent)."""
+        r = self.dire(cle)
+        self._effacer_ancien()
         self.clear()
         self.add_mascotte(margo)
-        return self.dire(cle)
+        return r
 
     def titre(self, texte, couleur=JAUNE_TITRE, fs=46, extrait=None, y=3.15):
         """Le titre de l'écran, en haut et centré, quand la voix dit l'extrait."""
@@ -666,11 +680,11 @@ class ShortSuites(_OutilsSuites, AuditSynchro, MotsCales, Short6e):
     y_tete_question = 3.45
 
     def nouvel_ecran(self, cle, garder=()):
-        """Efface tout sauf Ti-Margo (et `garder`), lance la voix."""
-        for m in list(self.mobjects):
-            if m is not getattr(self, "_margo", None) and m not in garder:
-                self.remove(m)
-        return self.dire(cle)
+        """Lance la voix, efface en 0,25 s tout sauf Ti-Margo (et `garder`) :
+        l'ancien écran a DISPARU avant que le nouveau commence (REGLES.md)."""
+        r = self.dire(cle)
+        self._effacer_ancien(garder)
+        return r
 
     def entete(self, titre, extrait=None, fs=44):
         """Ti-Margo en bas, le titre (y = 3,45) et l'échelle ENTIÈRE des ceintures

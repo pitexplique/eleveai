@@ -130,7 +130,7 @@ class SuiteArithReconnaitreShort(ShortSuites):
         nom = self.t("Inès", 48, JAUNE_TITRE).move_to(P(0, 2.36))
         metier = self.t("prépare un marathon", 36, TERME).move_to(P(0, 1.85))
         self.au_mot("Inès")
-        self.play(FadeOut(VGroup(pari, cad, aig)), FadeIn(nom, shift=UP * 0.1), run_time=0.4)
+        self.play(FadeIn(nom, shift=UP * 0.1), run_time=0.4)
         self.au_mot("prépare")
         self.play(FadeIn(metier, shift=UP * 0.1), run_time=0.3)
         pi = self.piste()
@@ -155,9 +155,10 @@ class SuiteArithReconnaitreShort(ShortSuites):
 
         # ── 02 : le pas est toujours le même ──
         self.dire("02-pas")
+        self.play(FadeOut(cs), FadeOut(plus), run_time=0.25)  # effacés AVANT les arcs
         self.au_mot("plus 3")
         sauts = [lg.saut(k, "+3", fs=30, creux=0.18) for k in range(3)]
-        self.play(FadeOut(cs), FadeOut(plus), *[Create(s[0]) for s in sauts],
+        self.play(*[Create(s[0]) for s in sauts],
                   *[Indicate(t[1], color=RAISON) for t in traces[1:]], run_time=0.3)
         self.play(*[FadeIn(s[1], scale=1.4) for s in sauts], run_time=0.2)
         self.au_mot("arithmétique")
@@ -185,10 +186,10 @@ class SuiteArithReconnaitreShort(ShortSuites):
                                 listes, 1, y_question=2.85)
         self.dire("03b-reponse")
         self.q_reponse(q, 1)
+        self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[2]), run_time=0.25)  # C a disparu avant les arcs
         self.au_mot("5 à")
         ec = self.ecarts_sous(listes[1], "−5", fs=28, bas=q.cartes[1].get_bottom()[1])
-        self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[2]), *[Create(e[0]) for e in ec], run_time=0.3)
-        self.play(*[FadeIn(e[1], scale=1.3) for e in ec], run_time=0.2)
+        self.play(*[Create(e[0]) for e in ec], *[FadeIn(e[1], scale=1.3) for e in ec], run_time=0.3)
         self.au_mot("5", n=2)
         r5 = VGroup(self.t("r =", 56, JUSTE), self.t("−5", 56, JUSTE)).arrange(RIGHT, buff=0.15)
         r5.move_to(P(0, q.cartes[1].get_bottom()[1] - 1.2))
