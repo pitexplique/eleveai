@@ -17,6 +17,11 @@ Modèle : la série Équations 4e (`manim/REPRISE-equations.md`, `manim/brief-ag
 - Short 01 « Le calcul éclair » : `manim/scripts/4e/distrib_simple_short.py` (commit `c147753e`), sortie `…/01-simple/eleveai-maths-4e-distrib-simple-short.mp4`, 1080 × 1920, 1 min 15, 0 bord. Question à 00:29 (A). Les 3 lignes de réponse : cartes laissées à 85 % (sinon la dernière descend sur Ti-Margo).
 - Les deux sont dans l'aperçu (`manim/sorties/apercu.html`, port 3900). **On attend le oui de Frédéric sur le FORMAT** avant d'écrire les voix 02 à 05.
 
+## État au 10/11, 17 h 20 : format VALIDÉ, voix 02-05 VALIDÉES
+- Frédéric a validé le format des pilotes 01 (« Oui, continue ») puis les 8 voix 02-05 (« Oui, lance tout »). Voix + marques committées (`b62ba56b`), WAV générés.
+- 4 agents lancés en parallèle (un par épisode 02, 03, 04, 05), brief commun : `side-session-notes/local_06503db4-…/brief-agents-distributivite-02-05.md`. Chacun écrit `manim/scripts/4e/distrib_<slug>.py` + `distrib_<slug>_short.py`, rend en HD dans `manim/sorties/4e/maths/distributivite/NN-<slug>/`, committe ses 2 scripts.
+- Si une session reprend : vérifier pour chaque épisode la présence des 2 mp4 et des 2 scripts committés ; relancer seulement ce qui manque, avec le même brief.
+
 ## Reste, dans l'ordre
 1. ~~Paysage 01 et short 01~~ FAITS (voir plus haut). Ancienne consigne, pour mémoire : paysage 01 : `AUDIT=1 BORDS=1 python -m manim render --dry_run manim/scripts/4e/distrib_simple.py DistribSimple4e --media_dir manim/scripts/4e/media-dist-01-audit` (0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; filtrer `tr '\r' '\n' | grep -E "AUDIT-AVANCE|RETARD|BORD|Error|Traceback"`). Points à surveiller : la pose au mot de « 3(x + 4) » sur « 3 fois, entre parenthèses, x plus 4 », `dire_eq(r2, "12. En")` dans `ecran_ranger` (à vérifier), l'écran 02-05 qui garde les planches d'un écran à l'autre, `Indicate` sur des objets REMPLIS (le brief Équations l'interdit : il remplit de vert) → remplacer par un `insister`/`Circumscribe` si ça cache le texte.
    Puis brouillon `-ql` et planche regardée (poses ET instants d'animation), UN rendu `-qh --disable_caching --media_dir manim/scripts/4e/media-dist-01`, copie vers `manim/sorties/4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple.mp4`, `python scripts/verifier-bords-video.py` = 0, planche finale, supprimer `media-dist-01*`.
