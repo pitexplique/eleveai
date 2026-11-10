@@ -195,12 +195,12 @@
           {
             "numerator": 2,
             "denominator": 3,
-            "label": "Léa"
+            "label": "Léa : 2/3"
           },
           {
             "numerator": 3,
             "denominator": 4,
-            "label": "Max"
+            "label": "Max : 3/4"
           }
         ],
         "display": {
@@ -537,57 +537,109 @@
       "exemple": "Triangle ABC : on place les 3 points A’, B’ et C’, puis on trace A’B’C’.",
       "piege": "Relier dans le désordre : A’ va avec B’, comme A va avec B.",
       "figure": {
-        "kind": "transformation",
-        "transformation": "symetrie_centrale",
-        "grid": {
-          "rows": 8,
-          "cols": 8
-        },
-        "source": {
-          "label": "ABC",
-          "points": [
-            {
-              "x": 1,
-              "y": 1
-            },
-            {
-              "x": 3,
-              "y": 1
-            },
-            {
-              "x": 2,
-              "y": 3
-            }
-          ]
-        },
-        "image": {
-          "label": "A’B’C’",
-          "points": [
-            {
-              "x": 7,
-              "y": 7
-            },
-            {
-              "x": 5,
-              "y": 7
-            },
-            {
-              "x": 6,
-              "y": 5
-            }
-          ]
-        },
-        "center": {
-          "point": {
-            "x": 4,
-            "y": 4
+        "kind": "construction",
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
           },
-          "label": "O"
-        },
-        "display": {
-          "showDashedLinks": true,
-          "showTransformationInfo": false
-        }
+          {
+            "id": "A",
+            "x": -95,
+            "y": 35,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": -45,
+            "y": 60,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": -60,
+            "y": 5,
+            "nom": "C"
+          },
+          {
+            "id": "A2",
+            "x": 95,
+            "y": -35,
+            "nom": "A’"
+          },
+          {
+            "id": "B2",
+            "x": 45,
+            "y": -60,
+            "nom": "B’"
+          },
+          {
+            "id": "C2",
+            "x": 60,
+            "y": -5,
+            "nom": "C’"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "#dbeafe",
+            "contour": "#2563eb"
+          },
+          {
+            "sommets": [
+              "A2",
+              "B2",
+              "C2"
+            ],
+            "fond": "#fee2e2",
+            "contour": "#dc2626"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "O",
+            "code": 1,
+            "pointille": true
+          },
+          {
+            "a": "O",
+            "b": "A2",
+            "code": 1,
+            "pointille": true
+          },
+          {
+            "a": "B",
+            "b": "O",
+            "code": 2,
+            "pointille": true
+          },
+          {
+            "a": "O",
+            "b": "B2",
+            "code": 2,
+            "pointille": true
+          },
+          {
+            "a": "C",
+            "b": "O",
+            "pointille": true
+          },
+          {
+            "a": "O",
+            "b": "C2",
+            "pointille": true
+          }
+        ],
+        "largeur": 300,
+        "hauteurMax": 170
       }
     },
     {
@@ -617,54 +669,77 @@
       "exemple": "AC = 10 cm : AO = OC = 10 ÷ 2 = 5 cm.",
       "piege": "Les diagonales n’ont pas forcément la même longueur.",
       "figure": {
-        "kind": "quadrilatere",
-        "size": {
-          "width": 300,
-          "height": 220
-        },
-        "points": {
-          "A": {
-            "x": 45,
-            "y": 180
+        "kind": "construction",
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
           },
-          "B": {
-            "x": 220,
-            "y": 180
+          {
+            "id": "B",
+            "x": 120,
+            "y": 0,
+            "nom": "B"
           },
-          "C": {
-            "x": 255,
-            "y": 50
+          {
+            "id": "C",
+            "x": 150,
+            "y": 70,
+            "nom": "C"
           },
-          "D": {
-            "x": 80,
-            "y": 50
+          {
+            "id": "D",
+            "x": 30,
+            "y": 70,
+            "nom": "D"
+          },
+          {
+            "id": "O",
+            "x": 75,
+            "y": 35,
+            "nom": "O"
           }
-        },
-        "labels": {
-          "A": "A",
-          "B": "B",
-          "C": "C",
-          "D": "D"
-        },
-        "display": {
-          "showPoints": true,
-          "showLabels": true,
-          "showSides": false,
-          "showAngles": false,
-          "showDiagonals": true
-        },
-        "marks": {
-          "parallelSides": [
-            [
-              "AB",
-              "CD"
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
             ],
-            [
-              "AD",
-              "BC"
-            ]
-          ]
-        }
+            "fond": "#f0fdfa",
+            "contour": "#0f766e"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "O",
+            "code": 1,
+            "texte": "5 cm"
+          },
+          {
+            "a": "O",
+            "b": "C",
+            "code": 1,
+            "texte": "5 cm"
+          },
+          {
+            "a": "B",
+            "b": "O",
+            "code": 2
+          },
+          {
+            "a": "O",
+            "b": "D",
+            "code": 2
+          }
+        ],
+        "largeur": 300,
+        "hauteurMax": 150
       }
     },
     {
@@ -800,54 +875,114 @@
       "exemple": "Cerf-volant losange de diagonales 8 dm et 5 dm : 8 × 5 ÷ 2 = 20 dm².",
       "piege": "Oublier le ÷ 2 : 8 × 5 = 40 dm², c’est le rectangle autour du losange.",
       "figure": {
-        "kind": "quadrilatere",
-        "size": {
-          "width": 280,
-          "height": 200
-        },
-        "points": {
-          "A": {
-            "x": 30,
-            "y": 100
+        "kind": "construction",
+        "points": [
+          {
+            "id": "A",
+            "x": -80,
+            "y": 0,
+            "nom": "A"
           },
-          "B": {
-            "x": 140,
-            "y": 170
+          {
+            "id": "B",
+            "x": 0,
+            "y": -50,
+            "nom": "B"
           },
-          "C": {
-            "x": 250,
-            "y": 100
+          {
+            "id": "C",
+            "x": 80,
+            "y": 0,
+            "nom": "C"
           },
-          "D": {
-            "x": 140,
-            "y": 30
+          {
+            "id": "D",
+            "x": 0,
+            "y": 50,
+            "nom": "D"
+          },
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "",
+            "cache": true
+          },
+          {
+            "id": "Q1",
+            "x": -55,
+            "y": -72,
+            "nom": "",
+            "cache": true
+          },
+          {
+            "id": "Q2",
+            "x": 55,
+            "y": -72,
+            "nom": "",
+            "cache": true
+          },
+          {
+            "id": "R1",
+            "x": 105,
+            "y": -35,
+            "nom": "",
+            "cache": true
+          },
+          {
+            "id": "R2",
+            "x": 105,
+            "y": 35,
+            "nom": "",
+            "cache": true
           }
-        },
-        "labels": {
-          "A": "A",
-          "B": "B",
-          "C": "C",
-          "D": "D"
-        },
-        "display": {
-          "showPoints": true,
-          "showLabels": true,
-          "showSides": false,
-          "showAngles": false,
-          "showDiagonals": true
-        },
-        "marks": {
-          "equalSides": [
-            [
-              "AB",
-              "BC"
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
             ],
-            [
-              "CD",
-              "DA"
-            ]
-          ]
-        }
+            "fond": "#f0fdfa",
+            "contour": "#0f766e"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "C",
+            "pointille": true
+          },
+          {
+            "a": "B",
+            "b": "D",
+            "pointille": true
+          },
+          {
+            "a": "Q1",
+            "b": "Q2",
+            "sansTrait": true,
+            "texte": "AC = 8 dm"
+          },
+          {
+            "a": "R1",
+            "b": "R2",
+            "sansTrait": true,
+            "texte": "BD = 5 dm"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "O",
+            "de": "C",
+            "vers": "D",
+            "droit": true
+          }
+        ],
+        "largeur": 300,
+        "hauteurMax": 160
       }
     },
     {
@@ -898,14 +1033,6 @@
           "showLabels": true,
           "showSides": true,
           "showAngles": false
-        },
-        "marks": {
-          "parallelSides": [
-            [
-              "AB",
-              "CD"
-            ]
-          ]
         }
       }
     }
