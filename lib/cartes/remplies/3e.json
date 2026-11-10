@@ -1,0 +1,7518 @@
+{
+  "3e/fraction_rationnel": [
+    {
+      "regle": "Un rationnel s’écrit a/b, avec a et b entiers et b ≠ 0.",
+      "exemple": "0,75 = 3/4 et −2 = −2/1 sont rationnels ; √2 ne l’est pas.",
+      "piege": "π n’est pas rationnel : 3,14 n’en est qu’une valeur approchée."
+    },
+    {
+      "regle": "On divise le numérateur par le dénominateur.",
+      "exemple": "7/8 = 7 ÷ 8 = 0,875 ; 1/3 = 0,333… (le 3 se répète sans fin).",
+      "piege": "3/4 ≠ 3,4 : on calcule 3 ÷ 4 = 0,75."
+    },
+    {
+      "regle": "On met au même dénominateur, puis on compare les numérateurs.",
+      "exemple": "2/3 = 10/15 et 3/5 = 9/15, donc 2/3 > 3/5.",
+      "piege": "Chez les négatifs, l’ordre s’inverse : −1/2 < −1/3."
+    },
+    {
+      "regle": "+ et − : même dénominateur. × : haut × haut, bas × bas.",
+      "exemple": "2/3 + 1/4 = 8/12 + 3/12 = 11/12 ; 2/3 × 5/7 = 10/21.",
+      "piege": "2/3 + 1/4 ≠ 3/7 : on n’ajoute pas les dénominateurs."
+    },
+    {
+      "regle": "Défi : passer au même dénominateur, puis calculer étape par étape.",
+      "exemple": "Léa mange 1/4 d’une pizza, Tom 1/3. Reste : 1 − 7/12 = 5/12.",
+      "piege": "1/4 + 1/3 ≠ 2/7 : en douzièmes, 3/12 + 4/12 = 7/12."
+    }
+  ],
+  "3e/entier_puissance": [
+    {
+      "regle": "a^n = a × a × … × a : n facteurs égaux à a.",
+      "exemple": "2^5 = 2 × 2 × 2 × 2 × 2 = 32.",
+      "piege": "2^5 ≠ 2 × 5 = 10 : ce sont cinq facteurs 2."
+    },
+    {
+      "regle": "On calcule la puissance avant × et +, sauf s’il y a des parenthèses.",
+      "exemple": "3 + 2^3 = 3 + 8 = 11 ; (−2)^3 = −8.",
+      "piege": "(−3)^2 = 9, mais −3^2 = −9 : le carré ne touche que le 3."
+    },
+    {
+      "regle": "10^n = 1 suivi de n zéros ; 10^(−n) = 0,0…01, avec n chiffres après la virgule.",
+      "exemple": "10^4 = 10 000 ; 10^(−3) = 0,001.",
+      "piege": "10^(−3) n’est pas négatif : 10^(−3) = 0,001, pas −1 000."
+    },
+    {
+      "regle": "a × 10^n avec 1 ⩽ a < 10 : un seul chiffre non nul avant la virgule.",
+      "exemple": "Distance Terre–Soleil : 150 000 000 km = 1,5 × 10^8 km.",
+      "piege": "45 × 10^3 n’est pas scientifique : on écrit 4,5 × 10^4."
+    },
+    {
+      "regle": "a^m × a^n = a^(m + n) ; a^m ÷ a^n = a^(m − n) ; (a^m)^n = a^(m × n).",
+      "exemple": "10^5 × 10^3 = 10^8 ; 2^7 ÷ 2^4 = 2^3 = 8.",
+      "piege": "10^5 × 10^3 ≠ 10^15 : on ajoute les exposants, 5 + 3 = 8."
+    },
+    {
+      "regle": "Défi : passer en écriture scientifique, puis calculer à part nombres et puissances.",
+      "exemple": "Disque de 2 × 10^12 octets, photo de 4 × 10^6 octets : 5 × 10^5 photos.",
+      "piege": "0,5 × 10^6 n’est pas scientifique : on écrit 5 × 10^5."
+    }
+  ],
+  "3e/entier_racine_carree": [
+    {
+      "regle": "√a est le nombre positif dont le carré vaut a (avec a ⩾ 0).",
+      "exemple": "√49 = 7 car 7^2 = 49 : un carré de 49 m² a un côté de 7 m.",
+      "piege": "√49 ≠ 49 ÷ 2 : la racine carrée n’est pas la moitié.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 190,
+        "hauteurMax": 190,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 7,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 7,
+            "y": 7,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 0,
+            "y": 7,
+            "cache": true
+          },
+          {
+            "id": "I1",
+            "x": 1.5,
+            "y": 3.5,
+            "cache": true
+          },
+          {
+            "id": "I2",
+            "x": 5.5,
+            "y": 3.5,
+            "cache": true
+          },
+          {
+            "id": "Z",
+            "x": 3.5,
+            "y": -1.3,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "#2563eb"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "7 m"
+          },
+          {
+            "a": "I1",
+            "b": "I2",
+            "sansTrait": true,
+            "texte": "49 m²"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "B",
+            "vers": "D",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Un carré parfait est le carré d’un entier : 1, 4, 9, 16, 25, 36…",
+      "exemple": "144 = 12^2 est un carré parfait ; 50 non (7^2 = 49 et 8^2 = 64).",
+      "piege": "9 est un carré parfait, mais 90 non : 9^2 = 81 et 10^2 = 100."
+    },
+    {
+      "regle": "On cherche le nombre positif dont le carré donne le nombre.",
+      "exemple": "√81 = 9 ; √0,25 = 0,5 car 0,5^2 = 0,25.",
+      "piege": "√(9 + 16) = √25 = 5, pas √9 + √16 = 7."
+    },
+    {
+      "regle": "On place le nombre entre deux carrés parfaits voisins.",
+      "exemple": "36 < 40 < 49, donc 6 < √40 < 7 ; à la calculatrice √40 ≈ 6,32.",
+      "piege": "√40 n’est pas 20 : 20^2 = 400, bien plus que 40."
+    },
+    {
+      "regle": "Défi : passer par l’aire (ou Pythagore), puis prendre la racine.",
+      "exemple": "Potager carré de 64 m² : côté √64 = 8 m, clôture 4 × 8 = 32 m.",
+      "piege": "Le côté n’est pas 64 ÷ 4 = 16 m : c’est √64 = 8 m."
+    }
+  ],
+  "3e/entier_arithmetique": [
+    {
+      "regle": "a est un multiple de b si a = b × k (k entier) ; b est alors un diviseur de a.",
+      "exemple": "42 = 6 × 7 : 42 est un multiple de 6, et 6 est un diviseur de 42.",
+      "piege": "« 6 divise 42 » ne veut pas dire 6 ÷ 42 : c’est 42 ÷ 6 = 7."
+    },
+    {
+      "regle": "Par 2 : unité paire. Par 3 ou 9 : somme des chiffres. Par 5 : unité 0 ou 5.",
+      "exemple": "534 : 5 + 3 + 4 = 12, multiple de 3, donc 534 = 3 × 178.",
+      "piege": "Finir par 3 ne suffit pas : 13 n’est pas divisible par 3."
+    },
+    {
+      "regle": "Un nombre premier a exactement deux diviseurs : 1 et lui-même.",
+      "exemple": "29 est premier : 2, 3 et 5 ne le divisent pas, et 6^2 = 36 > 29.",
+      "piege": "1 n’est pas premier (un seul diviseur) ; 2 est premier et pair."
+    },
+    {
+      "regle": "On divise par 2, 3, 5, 7… tant que c’est possible.",
+      "exemple": "360 = 2 × 2 × 2 × 3 × 3 × 5 = 2^3 × 3^2 × 5.",
+      "piege": "360 = 4 × 90 n’est pas fini : 4 et 90 ne sont pas premiers."
+    },
+    {
+      "regle": "On compare les décompositions : on garde les facteurs communs.",
+      "exemple": "84 = 2^2 × 3 × 7 et 90 = 2 × 3^2 × 5 : plus grand diviseur commun 2 × 3 = 6.",
+      "piege": "Facteur commun au plus petit exposant : 2^1, pas 2^2."
+    },
+    {
+      "regle": "Défi : chercher le plus grand diviseur commun pour faire des parts égales.",
+      "exemple": "Fleuriste : 60 roses et 84 tulipes → 12 bouquets de 5 roses et 7 tulipes.",
+      "piege": "6 bouquets marchent aussi, mais le plus grand nombre possible est 12."
+    }
+  ],
+  "3e/prop_proportionnalite": [
+    {
+      "regle": "Proportionnel : on passe d’une grandeur à l’autre en multipliant toujours par le même nombre.",
+      "exemple": "Mangues : 3 kg → 7,50 € et 5 kg → 12,50 € : × 2,5 à chaque fois.",
+      "piege": "Âge et taille ne sont pas proportionnels : 1,40 m à 10 ans, pas 2,80 m à 20 ans."
+    },
+    {
+      "regle": "On trouve le coefficient (une ligne ÷ l’autre), puis on complète.",
+      "exemple": "Essence : 20 L → 36 € ; coefficient 36 ÷ 20 = 1,8, donc 50 L → 90 €.",
+      "piege": "On n’ajoute pas 16 : de 20 L à 36 €, on multiplie par 1,8.",
+      "figure": {
+        "kind": "tableau_proportionnalite",
+        "size": {
+          "width": 280,
+          "height": 120
+        },
+        "rows": 2,
+        "cols": 2,
+        "rowLabels": [
+          "Volume (L)",
+          "Prix (€)"
+        ],
+        "values": [
+          [
+            "20",
+            "50"
+          ],
+          [
+            "36",
+            "90"
+          ]
+        ],
+        "missing": [],
+        "highlightedCells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ],
+        "display": {
+          "showRowLabels": true,
+          "showColLabels": false,
+          "showGrid": true
+        }
+      }
+    },
+    {
+      "regle": "Si a → b et c → ?, alors ? = b × c ÷ a (produit en croix).",
+      "exemple": "Recette : 4 personnes → 300 g de farine ; 6 personnes → 300 × 6 ÷ 4 = 450 g.",
+      "piege": "Pas 300 + 2 = 302 g : 2 personnes de plus, c’est 150 g de plus."
+    },
+    {
+      "regle": "t % de N = N × t ÷ 100 ; une proportion = partie ÷ total × 100.",
+      "exemple": "18 élèves sur 24 font du sport : 18 ÷ 24 × 100 = 75 %.",
+      "piege": "30 % de 50 ne vaut pas 30 : c’est 50 × 30 ÷ 100 = 15."
+    },
+    {
+      "regle": "Hausse de t % : × (1 + t ÷ 100). Baisse de t % : × (1 − t ÷ 100).",
+      "exemple": "Baskets à 80 € soldées à −25 % : 80 × 0,75 = 60 €.",
+      "piege": "+ 20 % puis − 20 % ne revient pas au départ : 100 € → 120 € → 96 €."
+    },
+    {
+      "regle": "Vitesse = distance ÷ durée ; débit = volume ÷ durée ; densité = masse ÷ volume.",
+      "exemple": "Un cycliste fait 45 km en 1 h 30 : 45 ÷ 1,5 = 30 km/h.",
+      "piege": "1 h 30 ≠ 1,3 h : 30 min = 0,5 h, donc 1 h 30 = 1,5 h."
+    },
+    {
+      "regle": "Défi : convertir dans les bonnes unités, puis appliquer la formule.",
+      "exemple": "Un scooter roule à 54 km/h : 54 000 m ÷ 3 600 s = 15 m/s.",
+      "piege": "54 km/h ≠ 54 m/s : on divise par 3,6, soit 15 m/s."
+    }
+  ],
+  "3e/litteral_calcul": [
+    {
+      "regle": "Une expression littérale contient des lettres qui remplacent des nombres.",
+      "exemple": "Rectangle de 5 cm sur 3 cm : P = 2 × (L + l) = 2 × (5 + 3) = 16 cm.",
+      "piege": "3x veut dire 3 × x, pas 3 + x : pour x = 2, 3x = 6, pas 5."
+    },
+    {
+      "regle": "On remplace la lettre par sa valeur, puis on suit les priorités.",
+      "exemple": "Pour x = −3 : 2x^2 − 5 = 2 × 9 − 5 = 13.",
+      "piege": "Pour x = −3, x^2 = (−3)^2 = 9, pas −9 : on met des parenthèses."
+    },
+    {
+      "regle": "On regroupe les termes de même nature : les x ensemble, les nombres ensemble.",
+      "exemple": "3x + 5 + 2x − 8 = 5x − 3.",
+      "piege": "3x + 2 ne fait pas 5x ; et x × x = x^2, mais x + x = 2x."
+    },
+    {
+      "regle": "k(a + b) = ka + kb ; (a + b)(c + d) = ac + ad + bc + bd.",
+      "exemple": "(x + 2)(x − 5) = x^2 − 5x + 2x − 10 = x^2 − 3x − 10.",
+      "piege": "−(x − 4) = −x + 4 : le signe moins change TOUS les signes."
+    },
+    {
+      "regle": "On repère le facteur commun et on le met devant la parenthèse.",
+      "exemple": "6x + 9 = 3(2x + 3) ; x^2 + 5x = x(x + 5).",
+      "piege": "4x + 4 = 4(x + 1), pas 4x : il reste 1 dans la parenthèse."
+    },
+    {
+      "regle": "(a + b)^2 = a^2 + 2ab + b^2 ; (a − b)^2 = a^2 − 2ab + b^2 ; (a + b)(a − b) = a^2 − b^2.",
+      "exemple": "(x + 3)^2 = x^2 + 6x + 9 ; (x + 4)(x − 4) = x^2 − 16.",
+      "piege": "(x + 3)^2 ≠ x^2 + 9 : il manque le double produit 6x.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 220,
+        "hauteurMax": 220,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "P",
+            "x": 5,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "Q",
+            "x": 8,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "R",
+            "x": 8,
+            "y": 5,
+            "cache": true
+          },
+          {
+            "id": "T",
+            "x": 8,
+            "y": 8,
+            "cache": true
+          },
+          {
+            "id": "U",
+            "x": 5,
+            "y": 8,
+            "cache": true
+          },
+          {
+            "id": "V",
+            "x": 0,
+            "y": 8,
+            "cache": true
+          },
+          {
+            "id": "W",
+            "x": 0,
+            "y": 5,
+            "cache": true
+          },
+          {
+            "id": "X",
+            "x": 5,
+            "y": 5,
+            "cache": true
+          },
+          {
+            "id": "a1",
+            "x": 1.5,
+            "y": 2.5,
+            "cache": true
+          },
+          {
+            "id": "a2",
+            "x": 3.5,
+            "y": 2.5,
+            "cache": true
+          },
+          {
+            "id": "b1",
+            "x": 5.6,
+            "y": 2.5,
+            "cache": true
+          },
+          {
+            "id": "b2",
+            "x": 7.4,
+            "y": 2.5,
+            "cache": true
+          },
+          {
+            "id": "c1",
+            "x": 1.5,
+            "y": 6.5,
+            "cache": true
+          },
+          {
+            "id": "c2",
+            "x": 3.5,
+            "y": 6.5,
+            "cache": true
+          },
+          {
+            "id": "d1",
+            "x": 5.6,
+            "y": 6.5,
+            "cache": true
+          },
+          {
+            "id": "d2",
+            "x": 7.4,
+            "y": 6.5,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "O",
+              "P",
+              "X",
+              "W"
+            ],
+            "fond": "rgba(37, 99, 235, 0.18)",
+            "contour": "#2563eb"
+          },
+          {
+            "sommets": [
+              "P",
+              "Q",
+              "R",
+              "X"
+            ],
+            "fond": "rgba(234, 88, 12, 0.16)",
+            "contour": "#ea580c"
+          },
+          {
+            "sommets": [
+              "W",
+              "X",
+              "U",
+              "V"
+            ],
+            "fond": "rgba(234, 88, 12, 0.16)",
+            "contour": "#ea580c"
+          },
+          {
+            "sommets": [
+              "X",
+              "R",
+              "T",
+              "U"
+            ],
+            "fond": "rgba(22, 163, 74, 0.18)",
+            "contour": "#16a34a"
+          }
+        ],
+        "segments": [
+          {
+            "a": "O",
+            "b": "P",
+            "sansTrait": true,
+            "texte": "x"
+          },
+          {
+            "a": "P",
+            "b": "Q",
+            "sansTrait": true,
+            "texte": "3"
+          },
+          {
+            "a": "W",
+            "b": "O",
+            "sansTrait": true,
+            "texte": "x"
+          },
+          {
+            "a": "V",
+            "b": "W",
+            "sansTrait": true,
+            "texte": "3"
+          },
+          {
+            "a": "a1",
+            "b": "a2",
+            "sansTrait": true,
+            "texte": "x²"
+          },
+          {
+            "a": "b1",
+            "b": "b2",
+            "sansTrait": true,
+            "texte": "3x"
+          },
+          {
+            "a": "c1",
+            "b": "c2",
+            "sansTrait": true,
+            "texte": "3x"
+          },
+          {
+            "a": "d1",
+            "b": "d2",
+            "sansTrait": true,
+            "texte": "9"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On écrit l’entier avec une lettre n, puis on transforme l’expression.",
+      "exemple": "n + (n + 1) + (n + 2) = 3n + 3 = 3(n + 1) : c’est un multiple de 3.",
+      "piege": "Tester 1, 2 et 3 ne prouve rien : un exemple n’est pas une démonstration."
+    },
+    {
+      "regle": "On écrit les fractions avec des lettres, puis on calcule au même dénominateur.",
+      "exemple": "1/n − 1/(n + 1) = 1/(n(n + 1)) ; pour n = 2 : 1/2 − 1/3 = 1/6.",
+      "piege": "a/b + c/d ≠ (a + c)/(b + d) : 1/2 + 1/3 = 5/6, pas 2/5."
+    },
+    {
+      "regle": "Défi : traduire le programme en expression, puis développer et réduire.",
+      "exemple": "x → + 3 → au carré → − 9 donne (x + 3)^2 − 9 = x^2 + 6x.",
+      "piege": "« Ajouter 3 puis multiplier par 2 » : 2(x + 3), pas 2x + 3."
+    }
+  ],
+  "3e/equation_resolution": [
+    {
+      "regle": "Une équation est une égalité avec une inconnue ; la résoudre, c’est trouver ses solutions.",
+      "exemple": "3x + 1 = 10 est une équation ; x = 3 est solution car 3 × 3 + 1 = 10.",
+      "piege": "3x + 1 n’est pas une équation : sans signe « = », c’est une expression."
+    },
+    {
+      "regle": "On fait la même opération des deux côtés pour isoler x.",
+      "exemple": "4x − 7 = 13 → 4x = 20 → x = 20 ÷ 4 = 5.",
+      "piege": "4x = 20 donne x = 5, pas x = 20 − 4 = 16."
+    },
+    {
+      "regle": "On développe, on réduit, puis on regroupe les x d’un même côté.",
+      "exemple": "3(x − 2) = x + 4 → 3x − 6 = x + 4 → 2x = 10 → x = 5.",
+      "piege": "3(x − 2) = 3x − 6, pas 3x − 2 : le 3 multiplie aussi le 2."
+    },
+    {
+      "regle": "Si A × B = 0, alors A = 0 ou B = 0.",
+      "exemple": "(x − 3)(2x + 8) = 0 → x − 3 = 0 ou 2x + 8 = 0 → x = 3 ou x = −4.",
+      "piege": "2x + 8 = 0 donne x = −4, pas x = 4 ; et on ne développe pas."
+    },
+    {
+      "regle": "Si a > 0 : x = √a ou x = −√a. Si a = 0 : x = 0. Si a < 0 : aucune solution.",
+      "exemple": "x^2 = 49 → x = 7 ou x = −7 ; x^2 = −4 n’a pas de solution.",
+      "piege": "x^2 = 49 a DEUX solutions : on oublie souvent x = −7."
+    },
+    {
+      "regle": "On factorise avec a^2 − b^2 = (a − b)(a + b), puis on utilise le produit nul.",
+      "exemple": "x^2 − 9 = (x − 3)(x + 3) = 0 → x = 3 ou x = −3.",
+      "piege": "(x − 2)^2 = 25 : x − 2 = 5 OU x − 2 = −5, donc x = 7 ou x = −3."
+    },
+    {
+      "regle": "On remplace x par la valeur dans chaque membre : les deux doivent être égaux.",
+      "exemple": "x = 2 pour 5x − 1 = 3x + 3 : 5 × 2 − 1 = 9 et 3 × 2 + 3 = 9. Juste !",
+      "piege": "Calculer un seul côté ne suffit pas : on calcule les DEUX membres."
+    },
+    {
+      "regle": "On choisit l’inconnue, on écrit l’équation, on résout, on répond par une phrase.",
+      "exemple": "Inès a x €, son frère 2x € ; ensemble 45 € : 3x = 45, donc x = 15 €.",
+      "piege": "Trouver x ne suffit pas : on répond à la question (son frère a 30 €)."
+    },
+    {
+      "regle": "Défi : faire un schéma, nommer l’inconnue, puis vérifier dans l’énoncé.",
+      "exemple": "Rectangle de périmètre 30 cm, longueur = largeur + 3 : 2(x + x + 3) = 30 → x = 6 cm.",
+      "piege": "Le périmètre compte 4 côtés : 2(x + x + 3) = 30, pas x + x + 3 = 30.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 240,
+        "hauteurMax": 170,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 9,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 9,
+            "y": 6,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 0,
+            "y": 6,
+            "cache": true
+          },
+          {
+            "id": "Z",
+            "x": 4.5,
+            "y": -1.08,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "#2563eb"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "x + 3"
+          },
+          {
+            "a": "D",
+            "b": "A",
+            "sansTrait": true,
+            "texte": "x"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "B",
+            "vers": "D",
+            "droit": true
+          }
+        ]
+      }
+    }
+  ],
+  "3e/fonction_generalite": [
+    {
+      "regle": "f(x) se lit « f de x » : x est l’antécédent, f(x) est son image.",
+      "exemple": "f(x) = 3x − 1 : f(2) = 5, donc 5 est l’image de 2 et 2 un antécédent de 5.",
+      "piege": "Dans f(2) = 5, l’image est 5, pas 2 : on confond souvent les deux."
+    },
+    {
+      "regle": "Pour l’image de a, on remplace x par a dans f(x), puis on calcule.",
+      "exemple": "f(x) = x^2 − 4 : f(3) = 9 − 4 = 5.",
+      "piege": "f(−3) = (−3)^2 − 4 = 9 − 4 = 5, pas −9 − 4 = −13."
+    },
+    {
+      "regle": "Pour trouver un antécédent de b, on résout l’équation f(x) = b.",
+      "exemple": "f(x) = 2x + 1, antécédent de 7 : 2x + 1 = 7, donc x = 3.",
+      "piege": "L’antécédent de 7 n’est pas f(7) = 15 : on cherche x, pas l’image."
+    },
+    {
+      "regle": "Ligne du haut : x. Ligne du bas : f(x). On lit dans les deux sens.",
+      "exemple": "x : 0 ; 1 ; 2 et f(x) : 4 ; 6 ; 8. Donc f(1) = 6, et 8 a pour antécédent 2.",
+      "piege": "Lire « f(6) = 1 » au lieu de f(1) = 6 : on inverse les deux lignes.",
+      "figure": {
+        "kind": "fonction_tableau",
+        "size": {
+          "width": 260,
+          "height": 100
+        },
+        "xValues": [
+          0,
+          1,
+          2
+        ],
+        "yValues": [
+          4,
+          6,
+          8
+        ],
+        "highlightIndex": 1
+      }
+    },
+    {
+      "regle": "Image : on part de x sur l’axe horizontal. Antécédent : on part de l’axe vertical.",
+      "exemple": "Courbe de la température : à 14 h, il fait 25 °C, donc f(14) = 25.",
+      "piege": "Inverser les axes : le point (2 ; 5) a pour abscisse 2, pas 5.",
+      "figure": {
+        "kind": "fonctionGraphique",
+        "size": {
+          "width": 250,
+          "height": 210
+        },
+        "grille": true,
+        "xmin": 8,
+        "xmax": 18,
+        "ymin": 16,
+        "ymax": 28,
+        "courbes": [
+          {
+            "id": "t",
+            "type": "points",
+            "couleur": "#2563eb",
+            "points": [
+              {
+                "x": 8,
+                "y": 18
+              },
+              {
+                "x": 10,
+                "y": 21
+              },
+              {
+                "x": 12,
+                "y": 23
+              },
+              {
+                "x": 14,
+                "y": 25
+              },
+              {
+                "x": 16,
+                "y": 24
+              },
+              {
+                "x": 18,
+                "y": 20
+              }
+            ]
+          }
+        ],
+        "misesEnEvidence": [
+          {
+            "verticale": {
+              "x": 14,
+              "couleur": "#dc2626"
+            },
+            "horizontale": {
+              "y": 25,
+              "couleur": "#dc2626"
+            },
+            "point": {
+              "x": 14,
+              "y": 25,
+              "couleur": "#dc2626"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Linéaire : f(x) = ax. Affine : f(x) = ax + b. Une linéaire est affine avec b = 0.",
+      "exemple": "f(x) = 3x est linéaire ; g(x) = 3x + 2 est affine ; h(x) = x^2 n’est pas affine.",
+      "piege": "Croire que 5 − 2x n’est pas affine : c’est −2x + 5, donc a = −2 et b = 5."
+    },
+    {
+      "regle": "Défi : traduire l’énoncé en f(x), puis calculer une image ou un antécédent.",
+      "exemple": "Taxi : 3 € + 2 € par km. f(x) = 2x + 3 ; f(10) = 23 € pour 10 km.",
+      "piege": "Écrire f(x) = 3x + 2 : le prix fixe est b = 3, le prix par km est a = 2."
+    }
+  ],
+  "3e/affine_fonction": [
+    {
+      "regle": "f est affine si f(x) = ax + b ; elle est linéaire si b = 0 (f(x) = ax).",
+      "exemple": "f(x) = −4x + 1 est affine (a = −4, b = 1) ; g(x) = 0,5x est linéaire.",
+      "piege": "f(x) = 3x^2 + 1 n’est pas affine : x est au carré."
+    },
+    {
+      "regle": "a = (écart des images) ÷ (écart des x).",
+      "exemple": "f(1) = 5 et f(3) = 11 : a = (11 − 5) ÷ (3 − 1) = 6 ÷ 2 = 3.",
+      "piege": "Faire (3 − 1) ÷ (11 − 5) : on divise l’écart des images par celui des x.",
+      "figure": {
+        "kind": "fonctionGraphique",
+        "size": {
+          "width": 250,
+          "height": 210
+        },
+        "grille": true,
+        "xmin": 0,
+        "xmax": 4,
+        "ymin": 0,
+        "ymax": 14,
+        "ordonneesMasquees": [
+          2
+        ],
+        "courbes": [
+          {
+            "id": "f",
+            "type": "affine",
+            "a": 3,
+            "b": 2,
+            "couleur": "#2563eb"
+          }
+        ],
+        "points": [
+          {
+            "x": 1,
+            "y": 5,
+            "label": "(1 ; 5)",
+            "couleur": "#dc2626",
+            "labelGauche": true
+          },
+          {
+            "x": 3,
+            "y": 11,
+            "label": "(3 ; 11)",
+            "couleur": "#dc2626",
+            "labelGauche": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "b = f(0) : c’est là où la droite coupe l’axe vertical.",
+      "exemple": "f(x) = 2x − 3 : f(0) = −3, la droite coupe l’axe vertical en −3.",
+      "piege": "Dans f(x) = 2x − 3, b vaut −3, pas 3 : le signe compte.",
+      "figure": {
+        "kind": "fonctionGraphique",
+        "size": {
+          "width": 250,
+          "height": 210
+        },
+        "grille": true,
+        "xmin": -2,
+        "xmax": 4,
+        "ymin": -5,
+        "ymax": 5,
+        "ordonneesMasquees": [
+          -3,
+          -4
+        ],
+        "courbes": [
+          {
+            "id": "f",
+            "type": "affine",
+            "a": 2,
+            "b": -3,
+            "couleur": "#2563eb"
+          }
+        ],
+        "points": [
+          {
+            "x": 0,
+            "y": -3,
+            "label": "b = −3",
+            "couleur": "#dc2626"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On remplace x par le nombre, puis on fait la multiplication avant l’addition.",
+      "exemple": "f(x) = −2x + 7 : f(4) = −2 × 4 + 7 = −8 + 7 = −1.",
+      "piege": "f(−3) = −2 × (−3) + 7 = 6 + 7 = 13, pas −6 + 7 = 1."
+    },
+    {
+      "regle": "On calcule a avec deux points, puis b avec b = f(x) − ax.",
+      "exemple": "f(2) = 7 et f(4) = 11 : a = 4 ÷ 2 = 2, b = 7 − 2 × 2 = 3, donc f(x) = 2x + 3.",
+      "piege": "Oublier b : avec f(x) = 2x, on trouve f(2) = 4, pas 7."
+    },
+    {
+      "regle": "b se lit sur l’axe vertical. Pour a : on avance de 1, on monte (ou descend) de a.",
+      "exemple": "Droite par (0 ; 1) qui monte de 2 quand x avance de 1 : f(x) = 2x + 1.",
+      "piege": "Droite qui descend de 3 quand x avance de 1 : a = −3, pas 3.",
+      "figure": {
+        "kind": "fonctionGraphique",
+        "size": {
+          "width": 250,
+          "height": 210
+        },
+        "grille": true,
+        "xmin": -2,
+        "xmax": 2,
+        "ymin": -1,
+        "ymax": 5,
+        "courbes": [
+          {
+            "id": "f",
+            "type": "affine",
+            "a": 2,
+            "b": 1,
+            "couleur": "#2563eb"
+          }
+        ],
+        "points": [
+          {
+            "x": 0,
+            "y": 1,
+            "label": "b = 1",
+            "couleur": "#dc2626"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "label": "(1 ; 3)",
+            "couleur": "#dc2626"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On calcule deux images, on place les deux points, on trace la droite qui les relie.",
+      "exemple": "f(x) = 2x − 1 : f(0) = −1 et f(3) = 5, donc points (0 ; −1) et (3 ; 5).",
+      "piege": "Placer (−1 ; 0) au lieu de (0 ; −1) : d’abord x, puis f(x).",
+      "figure": {
+        "kind": "fonctionGraphique",
+        "size": {
+          "width": 250,
+          "height": 210
+        },
+        "grille": true,
+        "xmin": -1,
+        "xmax": 4,
+        "ymin": -2,
+        "ymax": 6,
+        "ordonneesMasquees": [
+          -2
+        ],
+        "courbes": [
+          {
+            "id": "f",
+            "type": "affine",
+            "a": 2,
+            "b": -1,
+            "couleur": "#2563eb"
+          }
+        ],
+        "points": [
+          {
+            "x": 0,
+            "y": -1,
+            "couleur": "#dc2626"
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "label": "(3 ; 5)",
+            "couleur": "#dc2626",
+            "labelGauche": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On repère la part fixe (b) et la part qui dépend de x (a) : f(x) = ax + b.",
+      "exemple": "Forfait : 10 € par mois + 0,50 € par Go. f(x) = 0,5x + 10 ; f(8) = 14 €.",
+      "piege": "Écrire f(x) = 10x + 0,5 : on inverse le prix fixe et le prix par Go."
+    },
+    {
+      "regle": "Défi : pour comparer deux tarifs, on résout f(x) = g(x).",
+      "exemple": "Salle de sport : f(x) = 5x et g(x) = 3x + 20. 5x = 3x + 20, donc x = 10 séances.",
+      "piege": "Croire qu’un tarif gagne toujours : après 10 séances, 3x + 20 devient moins cher.",
+      "figure": {
+        "kind": "fonctionGraphique",
+        "size": {
+          "width": 250,
+          "height": 210
+        },
+        "grille": true,
+        "xmin": 0,
+        "xmax": 14,
+        "ymin": 0,
+        "ymax": 70,
+        "courbes": [
+          {
+            "id": "f",
+            "type": "lineaire",
+            "a": 5,
+            "couleur": "#2563eb"
+          },
+          {
+            "id": "g",
+            "type": "affine",
+            "a": 3,
+            "b": 20,
+            "couleur": "#ea580c"
+          }
+        ],
+        "points": [
+          {
+            "x": 10,
+            "y": 50,
+            "label": "(10 ; 50)",
+            "couleur": "#dc2626",
+            "labelGauche": true
+          }
+        ]
+      }
+    }
+  ],
+  "3e/triangle_figure": [
+    {
+      "regle": "Isocèle : 2 côtés égaux. Équilatéral : 3 côtés égaux. Rectangle : un angle droit.",
+      "exemple": "Un triangle de côtés 5 cm, 5 cm et 7 cm est isocèle.",
+      "piege": "Croire qu’un équilatéral n’est pas isocèle : il a même 3 côtés égaux.",
+      "figure": {
+        "kind": "triangle",
+        "size": {
+          "width": 290,
+          "height": 190
+        },
+        "points": {
+          "A": {
+            "x": 145,
+            "y": 50
+          },
+          "B": {
+            "x": 40,
+            "y": 157
+          },
+          "C": {
+            "x": 250,
+            "y": 157
+          }
+        },
+        "labels": {
+          "A": "A",
+          "B": "B",
+          "C": "C"
+        },
+        "sideLabels": {
+          "AB": "5 cm",
+          "CA": "5 cm",
+          "BC": "7 cm"
+        },
+        "marks": {
+          "equalSides": [
+            [
+              "AB",
+              "CA"
+            ]
+          ]
+        },
+        "display": {
+          "showPoints": true,
+          "showLabels": true,
+          "showSides": true,
+          "showAngles": false,
+          "legendesDehors": true
+        }
+      }
+    },
+    {
+      "regle": "La somme des trois angles d’un triangle vaut toujours 180°.",
+      "exemple": "Angles de 50° et 70° : le troisième vaut 180° − 50° − 70° = 60°.",
+      "piege": "Triangle rectangle : il reste 90° pour les deux autres angles, pas 180°.",
+      "figure": {
+        "kind": "triangle",
+        "size": {
+          "width": 240,
+          "height": 210
+        },
+        "points": {
+          "A": {
+            "x": 20,
+            "y": 190
+          },
+          "B": {
+            "x": 220,
+            "y": 190
+          },
+          "C": {
+            "x": 159.5,
+            "y": 23.8
+          }
+        },
+        "labels": {
+          "A": "A",
+          "B": "B",
+          "C": "C"
+        },
+        "angleLabels": {
+          "A": "50°",
+          "B": "70°",
+          "C": "?"
+        },
+        "display": {
+          "showPoints": true,
+          "showLabels": true,
+          "showSides": false,
+          "showAngles": true
+        }
+      }
+    },
+    {
+      "regle": "Chaque côté est plus petit que la somme des deux autres.",
+      "exemple": "3 cm, 4 cm et 6 cm : 6 < 3 + 4 = 7, donc le triangle existe.",
+      "piege": "2 cm, 3 cm et 5 cm : 5 = 2 + 3, les points sont alignés, pas de triangle."
+    },
+    {
+      "regle": "On trace le plus grand côté, puis on reporte les deux autres au compas.",
+      "exemple": "AB = 6 cm, AC = 4 cm, BC = 5 cm : arc de 4 cm depuis A, arc de 5 cm depuis B.",
+      "piege": "Inverser les arcs : depuis A, on reporte AC = 4 cm, pas BC = 5 cm.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 260,
+        "hauteurMax": 190,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 6,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 2.25,
+            "y": 3.31,
+            "nom": "C"
+          },
+          {
+            "id": "a1",
+            "x": 2.78,
+            "y": 2.88,
+            "nom": "a1",
+            "cache": true
+          },
+          {
+            "id": "a2",
+            "x": 1.63,
+            "y": 3.65,
+            "nom": "a2",
+            "cache": true
+          },
+          {
+            "id": "b1",
+            "x": 2.85,
+            "y": 3.89,
+            "nom": "b1",
+            "cache": true
+          },
+          {
+            "id": "b2",
+            "x": 1.76,
+            "y": 2.65,
+            "nom": "b2",
+            "cache": true
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "texte": "6 cm",
+            "epais": true
+          },
+          {
+            "a": "A",
+            "b": "C",
+            "texte": "4 cm",
+            "pointille": true
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "texte": "5 cm",
+            "pointille": true
+          }
+        ],
+        "arcs": [
+          {
+            "centre": "A",
+            "de": "a1",
+            "vers": "a2",
+            "eviter": "B",
+            "couleur": "#2563eb"
+          },
+          {
+            "centre": "B",
+            "de": "b1",
+            "vers": "b2",
+            "eviter": "A",
+            "couleur": "#ea580c"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Défi : trouver l’angle inconnu avec 180° et les propriétés du triangle.",
+      "exemple": "Isocèle, angle au sommet 40° : angles de la base = (180° − 40°) ÷ 2 = 70°.",
+      "piege": "Oublier de diviser par 2 : 140° est la somme des deux angles de la base.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 200,
+        "hauteurMax": 230,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 5.49,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": -2,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 2,
+            "y": 0,
+            "nom": "C"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "#0f172a"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "code": 1,
+            "sansTrait": true
+          },
+          {
+            "a": "A",
+            "b": "C",
+            "code": 1,
+            "sansTrait": true
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "B",
+            "vers": "C",
+            "texte": "40°",
+            "rayon": 34,
+            "rayonTexte": 48
+          },
+          {
+            "sommet": "B",
+            "de": "C",
+            "vers": "A",
+            "texte": "?",
+            "couleur": "#dc2626"
+          },
+          {
+            "sommet": "C",
+            "de": "A",
+            "vers": "B",
+            "texte": "?",
+            "couleur": "#dc2626"
+          }
+        ]
+      }
+    }
+  ],
+  "3e/pythagore_theoreme": [
+    {
+      "regle": "L’hypoténuse est le côté en face de l’angle droit ; c’est le plus long.",
+      "exemple": "ABC rectangle en A : l’hypoténuse est [BC].",
+      "piege": "Prendre un côté qui touche l’angle droit : l’hypoténuse est en face.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 250,
+        "hauteurMax": 210,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 0,
+            "y": 3,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 4,
+            "y": 0,
+            "nom": "C"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B"
+          },
+          {
+            "a": "A",
+            "b": "C"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "texte": "hypoténuse",
+            "couleur": "#dc2626",
+            "epais": true
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "C",
+            "vers": "B",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Si ABC est rectangle en A : BC^2 = AB^2 + AC^2.",
+      "exemple": "AB = 3 cm, AC = 4 cm : BC^2 = 9 + 16 = 25, donc BC = √25 = 5 cm.",
+      "piege": "BC ≠ 3 + 4 = 7 cm : on additionne les carrés, pas les côtés.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 250,
+        "hauteurMax": 210,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 0,
+            "y": 3,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 4,
+            "y": 0,
+            "nom": "C"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "texte": "3 cm"
+          },
+          {
+            "a": "A",
+            "b": "C",
+            "texte": "4 cm"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "texte": "?"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "C",
+            "vers": "B",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Pour un côté de l’angle droit, on soustrait : AB^2 = BC^2 − AC^2.",
+      "exemple": "BC = 13 cm, AC = 5 cm : AB^2 = 169 − 25 = 144, donc AB = √144 = 12 cm.",
+      "piege": "Faire 169 + 25 : le côté cherché est plus court que l’hypoténuse.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 250,
+        "hauteurMax": 210,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 0,
+            "y": 12,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 5,
+            "y": 0,
+            "nom": "C"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "texte": "?"
+          },
+          {
+            "a": "A",
+            "b": "C",
+            "texte": "5 cm"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "texte": "13 cm"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "C",
+            "vers": "B",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Si (plus grand côté)^2 = somme des carrés des deux autres, le triangle est rectangle.",
+      "exemple": "6, 8 et 10 cm : 10^2 = 100 et 6^2 + 8^2 = 36 + 64 = 100, donc rectangle.",
+      "piege": "Tester 6^2 = 8^2 + 10^2 : seul le plus grand côté va à gauche.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 250,
+        "hauteurMax": 210,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 0,
+            "y": 6,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 8,
+            "y": 0,
+            "nom": "C"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "texte": "6 cm"
+          },
+          {
+            "a": "A",
+            "b": "C",
+            "texte": "8 cm"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "texte": "10 cm"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "C",
+            "vers": "B",
+            "texte": "?"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On cite le triangle rectangle, le théorème, l’égalité, puis le calcul.",
+      "exemple": "ABC est rectangle en A, donc d’après Pythagore : BC^2 = AB^2 + AC^2 = 9 + 16 = 25.",
+      "piege": "Oublier « rectangle en A » : sans angle droit, pas de Pythagore."
+    },
+    {
+      "regle": "On repère un triangle rectangle caché dans le solide, puis on applique Pythagore.",
+      "exemple": "Cône de rayon 3 cm et de hauteur 4 cm : génératrice^2 = 9 + 16 = 25, donc 5 cm.",
+      "piege": "Prendre le diamètre 6 cm au lieu du rayon 3 cm dans le triangle.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 230,
+        "hauteurMax": 175,
+        "points": [
+          {
+            "id": "S",
+            "x": 0,
+            "y": 4,
+            "nom": "S"
+          },
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "A",
+            "x": 3,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "L",
+            "x": -3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "e0",
+            "x": 3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "e1",
+            "x": 2.94,
+            "y": 0.08,
+            "cache": true
+          },
+          {
+            "id": "e2",
+            "x": 2.77,
+            "y": 0.15,
+            "cache": true
+          },
+          {
+            "id": "e3",
+            "x": 2.49,
+            "y": 0.22,
+            "cache": true
+          },
+          {
+            "id": "e4",
+            "x": 2.12,
+            "y": 0.28,
+            "cache": true
+          },
+          {
+            "id": "e5",
+            "x": 1.67,
+            "y": 0.33,
+            "cache": true
+          },
+          {
+            "id": "e6",
+            "x": 1.15,
+            "y": 0.37,
+            "cache": true
+          },
+          {
+            "id": "e7",
+            "x": 0.59,
+            "y": 0.39,
+            "cache": true
+          },
+          {
+            "id": "e8",
+            "x": 0,
+            "y": 0.4,
+            "cache": true
+          },
+          {
+            "id": "e9",
+            "x": -0.59,
+            "y": 0.39,
+            "cache": true
+          },
+          {
+            "id": "e10",
+            "x": -1.15,
+            "y": 0.37,
+            "cache": true
+          },
+          {
+            "id": "e11",
+            "x": -1.67,
+            "y": 0.33,
+            "cache": true
+          },
+          {
+            "id": "e12",
+            "x": -2.12,
+            "y": 0.28,
+            "cache": true
+          },
+          {
+            "id": "e13",
+            "x": -2.49,
+            "y": 0.22,
+            "cache": true
+          },
+          {
+            "id": "e14",
+            "x": -2.77,
+            "y": 0.15,
+            "cache": true
+          },
+          {
+            "id": "e15",
+            "x": -2.94,
+            "y": 0.08,
+            "cache": true
+          },
+          {
+            "id": "e16",
+            "x": -3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "e17",
+            "x": -2.94,
+            "y": -0.08,
+            "cache": true
+          },
+          {
+            "id": "e18",
+            "x": -2.77,
+            "y": -0.15,
+            "cache": true
+          },
+          {
+            "id": "e19",
+            "x": -2.49,
+            "y": -0.22,
+            "cache": true
+          },
+          {
+            "id": "e20",
+            "x": -2.12,
+            "y": -0.28,
+            "cache": true
+          },
+          {
+            "id": "e21",
+            "x": -1.67,
+            "y": -0.33,
+            "cache": true
+          },
+          {
+            "id": "e22",
+            "x": -1.15,
+            "y": -0.37,
+            "cache": true
+          },
+          {
+            "id": "e23",
+            "x": -0.59,
+            "y": -0.39,
+            "cache": true
+          },
+          {
+            "id": "e24",
+            "x": 0,
+            "y": -0.4,
+            "cache": true
+          },
+          {
+            "id": "e25",
+            "x": 0.59,
+            "y": -0.39,
+            "cache": true
+          },
+          {
+            "id": "e26",
+            "x": 1.15,
+            "y": -0.37,
+            "cache": true
+          },
+          {
+            "id": "e27",
+            "x": 1.67,
+            "y": -0.33,
+            "cache": true
+          },
+          {
+            "id": "e28",
+            "x": 2.12,
+            "y": -0.28,
+            "cache": true
+          },
+          {
+            "id": "e29",
+            "x": 2.49,
+            "y": -0.22,
+            "cache": true
+          },
+          {
+            "id": "e30",
+            "x": 2.77,
+            "y": -0.15,
+            "cache": true
+          },
+          {
+            "id": "e31",
+            "x": 2.94,
+            "y": -0.08,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "S",
+              "e16",
+              "e17",
+              "e18",
+              "e19",
+              "e20",
+              "e21",
+              "e22",
+              "e23",
+              "e24",
+              "e25",
+              "e26",
+              "e27",
+              "e28",
+              "e29",
+              "e30",
+              "e31",
+              "e0"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "none"
+          },
+          {
+            "sommets": [
+              "S",
+              "O",
+              "A"
+            ],
+            "fond": "rgba(234, 88, 12, 0.16)",
+            "contour": "none"
+          }
+        ],
+        "segments": [
+          {
+            "a": "e0",
+            "b": "e1",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e1",
+            "b": "e2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e2",
+            "b": "e3",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e3",
+            "b": "e4",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e4",
+            "b": "e5",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e5",
+            "b": "e6",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e6",
+            "b": "e7",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e7",
+            "b": "e8",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e8",
+            "b": "e9",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e9",
+            "b": "e10",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e10",
+            "b": "e11",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e11",
+            "b": "e12",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e12",
+            "b": "e13",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e13",
+            "b": "e14",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e14",
+            "b": "e15",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e15",
+            "b": "e16",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e16",
+            "b": "e17",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e17",
+            "b": "e18",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e18",
+            "b": "e19",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e19",
+            "b": "e20",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e20",
+            "b": "e21",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e21",
+            "b": "e22",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e22",
+            "b": "e23",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e23",
+            "b": "e24",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e24",
+            "b": "e25",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e25",
+            "b": "e26",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e26",
+            "b": "e27",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e27",
+            "b": "e28",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e28",
+            "b": "e29",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e29",
+            "b": "e30",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e30",
+            "b": "e31",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e31",
+            "b": "e0",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "S",
+            "b": "L"
+          },
+          {
+            "a": "S",
+            "b": "A",
+            "texte": "5 cm",
+            "couleur": "#ea580c",
+            "epais": true
+          },
+          {
+            "a": "S",
+            "b": "O",
+            "texte": "4 cm",
+            "couleur": "#ea580c",
+            "epais": true
+          },
+          {
+            "a": "O",
+            "b": "A",
+            "texte": "3 cm",
+            "couleur": "#ea580c",
+            "epais": true
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "O",
+            "de": "A",
+            "vers": "S",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Défi : faire un schéma pour voir apparaître un triangle rectangle.",
+      "exemple": "Échelle de 5 m, pied à 3 m du mur : hauteur^2 = 25 − 9 = 16, donc 4 m.",
+      "piege": "Faire 25 + 9 : l’échelle est l’hypoténuse, donc on soustrait.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 200,
+        "hauteurMax": 175,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "P",
+            "x": 3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "H",
+            "x": 0,
+            "y": 4,
+            "cache": true
+          },
+          {
+            "id": "S",
+            "x": 4,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "T",
+            "x": 0,
+            "y": 4.6,
+            "cache": true
+          }
+        ],
+        "segments": [
+          {
+            "a": "O",
+            "b": "S",
+            "couleur": "#78716c"
+          },
+          {
+            "a": "O",
+            "b": "T",
+            "couleur": "#78716c",
+            "epais": true
+          },
+          {
+            "a": "O",
+            "b": "P",
+            "sansTrait": true,
+            "texte": "3 m"
+          },
+          {
+            "a": "O",
+            "b": "H",
+            "sansTrait": true,
+            "texte": "?"
+          },
+          {
+            "a": "P",
+            "b": "H",
+            "texte": "5 m",
+            "couleur": "#ea580c",
+            "epais": true
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "O",
+            "de": "P",
+            "vers": "H",
+            "droit": true
+          }
+        ]
+      }
+    }
+  ],
+  "3e/thales_theoreme": [
+    {
+      "regle": "Deux droites sécantes en A, coupées par deux droites parallèles.",
+      "exemple": "M sur [AB], N sur [AC] et (MN) // (BC) : c’est une configuration de Thalès.",
+      "piege": "Sans parallèles, pas de Thalès : vérifier d’abord (MN) // (BC).",
+      "figure": {
+        "kind": "construction",
+        "largeur": 270,
+        "hauteurMax": 200,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 9,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 3.5,
+            "y": 6,
+            "nom": "C"
+          },
+          {
+            "id": "M",
+            "x": 3.6,
+            "y": 0,
+            "nom": "M"
+          },
+          {
+            "id": "N",
+            "x": 1.4,
+            "y": 2.4,
+            "nom": "N"
+          },
+          {
+            "id": "z1",
+            "x": 4.5,
+            "y": -0.9,
+            "cache": true
+          },
+          {
+            "id": "z2",
+            "x": 10,
+            "y": 3,
+            "cache": true
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B"
+          },
+          {
+            "a": "A",
+            "b": "C"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "couleur": "#ea580c",
+            "epais": true
+          },
+          {
+            "a": "M",
+            "b": "N",
+            "couleur": "#ea580c",
+            "epais": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "AM/AB = AN/AC = MN/BC : petit triangle en haut, grand triangle en bas.",
+      "exemple": "AM = 2 cm, AB = 6 cm, AN = 3 cm, AC = 9 cm : 2/6 = 3/9 = 1/3.",
+      "piege": "Écrire AM/MB : on compare au côté entier AB, pas au morceau MB.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 270,
+        "hauteurMax": 200,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 9,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 3.5,
+            "y": 6,
+            "nom": "C"
+          },
+          {
+            "id": "M",
+            "x": 3,
+            "y": 0,
+            "nom": "M"
+          },
+          {
+            "id": "N",
+            "x": 1.17,
+            "y": 2,
+            "nom": "N"
+          },
+          {
+            "id": "z1",
+            "x": 4.5,
+            "y": -0.9,
+            "cache": true
+          },
+          {
+            "id": "z2",
+            "x": 10,
+            "y": 3,
+            "cache": true
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B"
+          },
+          {
+            "a": "A",
+            "b": "C"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "couleur": "#ea580c",
+            "epais": true
+          },
+          {
+            "a": "M",
+            "b": "N",
+            "couleur": "#ea580c",
+            "epais": true
+          },
+          {
+            "a": "A",
+            "b": "M",
+            "sansTrait": true,
+            "texte": "2 cm"
+          },
+          {
+            "a": "M",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "AB = 6 cm"
+          },
+          {
+            "a": "A",
+            "b": "N",
+            "sansTrait": true,
+            "texte": "3 cm"
+          },
+          {
+            "a": "N",
+            "b": "C",
+            "sansTrait": true,
+            "texte": "AC = 9 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On écrit les rapports égaux, puis on fait un produit en croix.",
+      "exemple": "AM = 3 cm, AB = 9 cm, MN = 4 cm : 3/9 = 4/BC, donc BC = 9 × 4 ÷ 3 = 12 cm.",
+      "piege": "Écrire 3/9 = BC/4 : les côtés du petit triangle restent en haut.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 270,
+        "hauteurMax": 200,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 9,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 3.5,
+            "y": 6,
+            "nom": "C"
+          },
+          {
+            "id": "M",
+            "x": 3,
+            "y": 0,
+            "nom": "M"
+          },
+          {
+            "id": "N",
+            "x": 1.17,
+            "y": 2,
+            "nom": "N"
+          },
+          {
+            "id": "z1",
+            "x": 4.5,
+            "y": -0.9,
+            "cache": true
+          },
+          {
+            "id": "z2",
+            "x": 10,
+            "y": 3,
+            "cache": true
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B"
+          },
+          {
+            "a": "A",
+            "b": "C"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "couleur": "#ea580c",
+            "epais": true
+          },
+          {
+            "a": "M",
+            "b": "N",
+            "couleur": "#ea580c",
+            "epais": true
+          },
+          {
+            "a": "A",
+            "b": "M",
+            "sansTrait": true,
+            "texte": "3 cm"
+          },
+          {
+            "a": "M",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "AB = 9 cm"
+          },
+          {
+            "a": "N",
+            "b": "M",
+            "sansTrait": true,
+            "texte": "4 cm"
+          },
+          {
+            "a": "C",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "BC = ?"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Si AM/AB = AN/AC, points dans le même ordre, alors (MN) // (BC).",
+      "exemple": "AM/AB = 2/5 = 0,4 et AN/AC = 4/10 = 0,4 : donc (MN) // (BC).",
+      "piege": "Conclure « parallèles » avec 0,4 et 0,42 : il faut des rapports égaux.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 270,
+        "hauteurMax": 200,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 9,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 3.5,
+            "y": 6,
+            "nom": "C"
+          },
+          {
+            "id": "M",
+            "x": 3.6,
+            "y": 0,
+            "nom": "M"
+          },
+          {
+            "id": "N",
+            "x": 1.4,
+            "y": 2.4,
+            "nom": "N"
+          },
+          {
+            "id": "z1",
+            "x": 4.5,
+            "y": -0.9,
+            "cache": true
+          },
+          {
+            "id": "z2",
+            "x": 10,
+            "y": 3,
+            "cache": true
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B"
+          },
+          {
+            "a": "A",
+            "b": "C"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "couleur": "#0f172a",
+            "epais": false
+          },
+          {
+            "a": "M",
+            "b": "N",
+            "couleur": "#0f172a",
+            "epais": false
+          },
+          {
+            "a": "A",
+            "b": "M",
+            "sansTrait": true,
+            "texte": "2 cm"
+          },
+          {
+            "a": "M",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "AB = 5 cm"
+          },
+          {
+            "a": "A",
+            "b": "N",
+            "sansTrait": true,
+            "texte": "4 cm"
+          },
+          {
+            "a": "N",
+            "b": "C",
+            "sansTrait": true,
+            "texte": "AC = 10 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On cite les points alignés, les droites parallèles, le théorème, puis les rapports.",
+      "exemple": "A, M, B alignés ; A, N, C alignés ; (MN) // (BC) ; donc AM/AB = AN/AC = MN/BC.",
+      "piege": "Oublier « (MN) // (BC) » : c’est la condition du théorème."
+    },
+    {
+      "regle": "Défi : repérer les parallèles cachées (rayons du soleil, poteaux, étagères).",
+      "exemple": "Bâton de 1 m, ombre de 2 m ; ombre de l’arbre 10 m : hauteur = 10 × 1 ÷ 2 = 5 m.",
+      "piege": "Faire 10 × 2 ÷ 1 = 20 m : garder hauteur ÷ ombre dans le même ordre.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 290,
+        "hauteurMax": 170,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "P",
+            "x": 2,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "Q",
+            "x": 2,
+            "y": 1,
+            "cache": true
+          },
+          {
+            "id": "T",
+            "x": 10,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "U",
+            "x": 10,
+            "y": 5,
+            "cache": true
+          },
+          {
+            "id": "Q1",
+            "x": 2.5,
+            "y": 0.25,
+            "cache": true
+          },
+          {
+            "id": "Q2",
+            "x": 2.5,
+            "y": 1.05,
+            "cache": true
+          },
+          {
+            "id": "Y1",
+            "x": 0,
+            "y": -1.6,
+            "cache": true
+          },
+          {
+            "id": "Y2",
+            "x": 10,
+            "y": -1.6,
+            "cache": true
+          },
+          {
+            "id": "Y3",
+            "x": 0,
+            "y": -1.2,
+            "cache": true
+          },
+          {
+            "id": "Y4",
+            "x": 10,
+            "y": -1.2,
+            "cache": true
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "U",
+            "couleur": "#ea580c",
+            "pointille": true
+          },
+          {
+            "a": "A",
+            "b": "P",
+            "texte": "2 m"
+          },
+          {
+            "a": "P",
+            "b": "T",
+            "couleur": "#78716c"
+          },
+          {
+            "a": "P",
+            "b": "Q",
+            "couleur": "#2563eb",
+            "epais": true
+          },
+          {
+            "a": "Q1",
+            "b": "Q2",
+            "sansTrait": true,
+            "texte": "1 m",
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "T",
+            "b": "U",
+            "texte": "?",
+            "couleur": "#16a34a",
+            "epais": true
+          },
+          {
+            "a": "Y1",
+            "b": "Y2",
+            "couleur": "#94a3b8",
+            "texte": "10 m"
+          },
+          {
+            "a": "Y1",
+            "b": "Y3",
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "Y2",
+            "b": "Y4",
+            "couleur": "#94a3b8"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "P",
+            "de": "T",
+            "vers": "Q",
+            "droit": true
+          },
+          {
+            "sommet": "T",
+            "de": "U",
+            "vers": "A",
+            "droit": true
+          }
+        ]
+      }
+    }
+  ],
+  "3e/trigo_trigonometrie": [
+    {
+      "regle": "Hypoténuse : en face de l’angle droit. Opposé : en face de l’angle. Adjacent : il le touche.",
+      "exemple": "ABC rectangle en B, angle en A : [AC] hypoténuse, [BC] opposé, [AB] adjacent.",
+      "piege": "L’hypoténuse touche aussi l’angle A, mais ce n’est jamais l’adjacent.",
+      "figure": {
+        "kind": "triangle",
+        "size": {
+          "width": 280,
+          "height": 200
+        },
+        "points": {
+          "A": {
+            "x": 35,
+            "y": 160
+          },
+          "B": {
+            "x": 190,
+            "y": 160
+          },
+          "C": {
+            "x": 190,
+            "y": 43.75
+          }
+        },
+        "labels": {
+          "A": "A",
+          "B": "B",
+          "C": "C"
+        },
+        "sideLabels": {
+          "AB": "adjacent",
+          "BC": "opposé",
+          "CA": "hypoténuse"
+        },
+        "angleLabels": {
+          "A": ""
+        },
+        "display": {
+          "showPoints": true,
+          "showLabels": true,
+          "showSides": true,
+          "showAngles": true,
+          "legendesDehors": true
+        },
+        "marks": {
+          "rightAngleAt": "B",
+          "equalAngles": [
+            [
+              "A",
+              "A"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "regle": "cos(angle) = côté adjacent ÷ hypoténuse.",
+      "exemple": "Rectangle en B, AB = 4 cm, AC = 5 cm : cos(l’angle BAC) = 4 ÷ 5 = 0,8.",
+      "piege": "Faire 5 ÷ 4 = 1,25 : un cosinus est toujours plus petit que 1.",
+      "figure": {
+        "kind": "triangle",
+        "size": {
+          "width": 280,
+          "height": 200
+        },
+        "points": {
+          "A": {
+            "x": 35,
+            "y": 160
+          },
+          "B": {
+            "x": 190,
+            "y": 160
+          },
+          "C": {
+            "x": 190,
+            "y": 43.75
+          }
+        },
+        "labels": {
+          "A": "A",
+          "B": "B",
+          "C": "C"
+        },
+        "sideLabels": {
+          "AB": "4 cm",
+          "CA": "5 cm"
+        },
+        "angleLabels": {
+          "A": "?"
+        },
+        "display": {
+          "showPoints": true,
+          "showLabels": true,
+          "showSides": true,
+          "showAngles": true,
+          "legendesDehors": true
+        },
+        "marks": {
+          "rightAngleAt": "B",
+          "equalAngles": [
+            [
+              "A",
+              "A"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "regle": "sin(angle) = côté opposé ÷ hypoténuse.",
+      "exemple": "Rectangle en B, BC = 3 cm, AC = 5 cm : sin(l’angle BAC) = 3 ÷ 5 = 0,6.",
+      "piege": "Prendre l’adjacent : pour l’angle en A, l’opposé est [BC], pas [AB].",
+      "figure": {
+        "kind": "triangle",
+        "size": {
+          "width": 280,
+          "height": 200
+        },
+        "points": {
+          "A": {
+            "x": 35,
+            "y": 160
+          },
+          "B": {
+            "x": 190,
+            "y": 160
+          },
+          "C": {
+            "x": 190,
+            "y": 43.75
+          }
+        },
+        "labels": {
+          "A": "A",
+          "B": "B",
+          "C": "C"
+        },
+        "sideLabels": {
+          "BC": "3 cm",
+          "CA": "5 cm"
+        },
+        "angleLabels": {
+          "A": "?"
+        },
+        "display": {
+          "showPoints": true,
+          "showLabels": true,
+          "showSides": true,
+          "showAngles": true,
+          "legendesDehors": true
+        },
+        "marks": {
+          "rightAngleAt": "B",
+          "equalAngles": [
+            [
+              "A",
+              "A"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "regle": "tan(angle) = côté opposé ÷ côté adjacent.",
+      "exemple": "Rectangle en B, BC = 3 cm, AB = 4 cm : tan(l’angle BAC) = 3 ÷ 4 = 0,75.",
+      "piege": "Mettre l’hypoténuse : tan = 3 ÷ 4, pas 3 ÷ 5.",
+      "figure": {
+        "kind": "triangle",
+        "size": {
+          "width": 280,
+          "height": 200
+        },
+        "points": {
+          "A": {
+            "x": 35,
+            "y": 160
+          },
+          "B": {
+            "x": 190,
+            "y": 160
+          },
+          "C": {
+            "x": 190,
+            "y": 43.75
+          }
+        },
+        "labels": {
+          "A": "A",
+          "B": "B",
+          "C": "C"
+        },
+        "sideLabels": {
+          "AB": "4 cm",
+          "BC": "3 cm"
+        },
+        "angleLabels": {
+          "A": "?"
+        },
+        "display": {
+          "showPoints": true,
+          "showLabels": true,
+          "showSides": true,
+          "showAngles": true,
+          "legendesDehors": true
+        },
+        "marks": {
+          "rightAngleAt": "B",
+          "equalAngles": [
+            [
+              "A",
+              "A"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "regle": "On écrit la formule, puis on isole la longueur cherchée.",
+      "exemple": "Hypoténuse 10 cm, angle de 30° : opposé = 10 × sin 30° = 10 × 0,5 = 5 cm.",
+      "piege": "Calculatrice en radians : sin 30 donne ≈ −0,99 ; il faut le mode degrés.",
+      "figure": {
+        "kind": "triangle",
+        "size": {
+          "width": 280,
+          "height": 200
+        },
+        "points": {
+          "A": {
+            "x": 35,
+            "y": 160
+          },
+          "B": {
+            "x": 190,
+            "y": 160
+          },
+          "C": {
+            "x": 190,
+            "y": 70.51
+          }
+        },
+        "labels": {
+          "A": "A",
+          "B": "B",
+          "C": "C"
+        },
+        "sideLabels": {
+          "CA": "10 cm",
+          "BC": "?"
+        },
+        "angleLabels": {
+          "A": "30°"
+        },
+        "display": {
+          "showPoints": true,
+          "showLabels": true,
+          "showSides": true,
+          "showAngles": true,
+          "legendesDehors": true
+        },
+        "marks": {
+          "rightAngleAt": "B",
+          "equalAngles": [
+            [
+              "A",
+              "A"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "regle": "On calcule le rapport, puis on utilise la touche arccos (ou cos^(−1)).",
+      "exemple": "cos(l’angle A) = 4 ÷ 5 = 0,8, donc l’angle A ≈ 36,9°.",
+      "piege": "Écrire « l’angle A = 0,8 » : 0,8 est le cosinus, pas l’angle."
+    },
+    {
+      "regle": "SOH CAH TOA : sin = O ÷ H ; cos = A ÷ H ; tan = O ÷ A.",
+      "exemple": "On connaît l’opposé 6 cm et l’adjacent 8 cm : tan = 6 ÷ 8 = 0,75.",
+      "piege": "Choisir cos sans connaître l’hypoténuse : regarder d’abord les côtés connus."
+    },
+    {
+      "regle": "Défi : faire un schéma, repérer l’angle droit, puis choisir la formule.",
+      "exemple": "Rampe de 5 m inclinée de 10° : hauteur = 5 × sin 10° ≈ 0,87 m.",
+      "piege": "5 × cos 10° ≈ 4,92 m : c’est la longueur au sol, pas la hauteur.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 300,
+        "hauteurMax": 150,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 4.92,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 4.92,
+            "y": 0.87,
+            "nom": "C"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "C",
+            "texte": "5 m"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "texte": "?",
+            "couleur": "#2563eb"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "B",
+            "vers": "C",
+            "texte": "10°",
+            "couleur": "#7c3aed",
+            "rayon": 55,
+            "rayonTexte": 88
+          },
+          {
+            "sommet": "B",
+            "de": "C",
+            "vers": "A",
+            "droit": true
+          }
+        ]
+      }
+    }
+  ],
+  "3e/sym_transformation": [
+    {
+      "regle": "Symétrie, translation, rotation : la figure garde sa forme et toutes ses mesures.",
+      "exemple": "Rotation de centre O et d’angle 90° : un carré de 3 cm reste un carré de 3 cm.",
+      "piege": "Rotation de 90° ≠ symétrie axiale : la figure tourne, elle n’est pas retournée.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 260,
+        "hauteurMax": 190,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "A",
+            "x": 1.5,
+            "y": 1,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 4.5,
+            "y": 1,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 4.5,
+            "y": 4,
+            "nom": "C"
+          },
+          {
+            "id": "D",
+            "x": 1.5,
+            "y": 4,
+            "nom": "D"
+          },
+          {
+            "id": "A2",
+            "x": -1,
+            "y": 1.5,
+            "nom": "A’"
+          },
+          {
+            "id": "B2",
+            "x": -1,
+            "y": 4.5,
+            "nom": "B’"
+          },
+          {
+            "id": "C2",
+            "x": -4,
+            "y": 4.5,
+            "nom": "C’"
+          },
+          {
+            "id": "D2",
+            "x": -4,
+            "y": 1.5,
+            "nom": "D’"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "fond": "rgba(37, 99, 235, 0.12)",
+            "contour": "#2563eb"
+          },
+          {
+            "sommets": [
+              "A2",
+              "B2",
+              "C2",
+              "D2"
+            ],
+            "fond": "rgba(220, 38, 38, 0.10)",
+            "contour": "#dc2626"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "3 cm"
+          },
+          {
+            "a": "D2",
+            "b": "A2",
+            "sansTrait": true,
+            "texte": "3 cm"
+          },
+          {
+            "a": "O",
+            "b": "A",
+            "pointille": true,
+            "couleur": "#64748b"
+          },
+          {
+            "a": "O",
+            "b": "A2",
+            "pointille": true,
+            "couleur": "#64748b"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "O",
+            "de": "A",
+            "vers": "A2",
+            "texte": "90°",
+            "rayon": 22
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Homothétie de centre O : O, un point et son image sont alignés ; la figure est agrandie ou réduite.",
+      "exemple": "OA = 2 cm, A’ sur [OA) avec OA’ = 6 cm : homothétie de rapport 3.",
+      "piege": "Toutes les longueurs sont × k : un rectangle 2 × 3 donne 4 × 6, pas 4 × 5.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 270,
+        "hauteurMax": 210,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O",
+            "couleur": "#ea580c"
+          },
+          {
+            "id": "A",
+            "x": 1.2,
+            "y": 0.3,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 2.5,
+            "y": 0.3,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 1.2,
+            "y": 1.5,
+            "nom": "C"
+          },
+          {
+            "id": "A2",
+            "x": 3.6,
+            "y": 0.9,
+            "nom": "A’"
+          },
+          {
+            "id": "B2",
+            "x": 7.5,
+            "y": 0.9,
+            "nom": "B’"
+          },
+          {
+            "id": "C2",
+            "x": 3.6,
+            "y": 4.5,
+            "nom": "C’"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.16)",
+            "contour": "#2563eb"
+          },
+          {
+            "sommets": [
+              "A2",
+              "B2",
+              "C2"
+            ],
+            "fond": "rgba(220, 38, 38, 0.10)",
+            "contour": "#dc2626"
+          }
+        ],
+        "segments": [
+          {
+            "a": "O",
+            "b": "B2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "O",
+            "b": "C2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "O",
+            "b": "A2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "k > 0 : M’ sur [OM) avec OM’ = k × OM. Si k < 0 : M’ de l’autre côté de O.",
+      "exemple": "k = 2 et OM = 3 cm : M’ sur [OM), OM’ = 2 × 3 = 6 cm.",
+      "piege": "k = −2, OM = 3 cm : M’ est à 6 cm de O, mais de l’autre côté de O."
+    },
+    {
+      "regle": "Longueur de l’image = k × longueur de départ ; donc k = longueur image ÷ longueur de départ.",
+      "exemple": "AB = 4 cm et A’B’ = 10 cm : k = 10 ÷ 4 = 2,5.",
+      "piege": "k = 0,5 réduit la figure : 4 cm devient 2 cm, pas 8 cm."
+    },
+    {
+      "regle": "Rapport k : longueurs × k, aires × k^2, angles inchangés.",
+      "exemple": "k = 3 : un triangle de 5 cm² devient un triangle de 5 × 9 = 45 cm².",
+      "piege": "Avec k = 3, l’aire est × 9, pas × 3 ; et un angle de 40° reste 40°."
+    },
+    {
+      "regle": "Défi : trouver k avec deux longueurs connues, puis l’utiliser pour le reste.",
+      "exemple": "Photo 10 cm × 15 cm agrandie : 10 → 25 cm, k = 2,5, donc 15 → 37,5 cm.",
+      "piege": "Ajouter 15 cm partout (15 + 15 = 30 cm) est faux : on multiplie par 2,5."
+    }
+  ],
+  "3e/volume_geometrie_espace": [
+    {
+      "regle": "Prisme droit, cylindre : 2 bases pareilles. Pyramide, cône : 1 base et un sommet.",
+      "exemple": "Un prisme à base triangulaire a 5 faces, 9 arêtes et 6 sommets.",
+      "piege": "Une pyramide à base carrée a 5 faces, pas 4 : on oublie souvent la base.",
+      "figure": {
+        "kind": "solide_3d",
+        "solide": "prisme",
+        "display": {
+          "showLabels": false,
+          "showDimensions": false
+        }
+      }
+    },
+    {
+      "regle": "Une section, c’est la forme qu’on obtient en coupant un solide par un plan.",
+      "exemple": "Pavé 6 cm × 4 cm × 3 cm coupé parallèlement à la face 6 × 4 : rectangle 6 cm × 4 cm.",
+      "piege": "Un cylindre coupé parallèlement à sa base donne un disque, pas un rectangle.",
+      "figure": {
+        "kind": "section_solide",
+        "solide": "pave_droit",
+        "section": "parallele_base",
+        "size": {
+          "width": 220,
+          "height": 220
+        },
+        "display": {
+          "showLabels": false,
+          "showSectionName": false,
+          "showPlane": true,
+          "showCallouts": false
+        }
+      }
+    },
+    {
+      "regle": "En perspective cavalière, les arêtes cachées sont en pointillés et les fuyantes raccourcies.",
+      "exemple": "Cube de 4 cm : face avant 4 cm × 4 cm, arêtes fuyantes dessinées 2 cm (× 0,5).",
+      "piege": "Sur le dessin, un angle semble faire 45° : sur le vrai cube, il fait 90°."
+    },
+    {
+      "regle": "Défi : compter faces, sommets et arêtes avec méthode, sans en oublier.",
+      "exemple": "Pyramide à base hexagonale : 6 + 1 = 7 faces, 7 sommets, 6 + 6 = 12 arêtes.",
+      "piege": "Compter 6 arêtes, c’est oublier les 6 arêtes de la base : il y en a 12."
+    }
+  ],
+  "3e/sections_solides": [
+    {
+      "regle": "Une section plane est la surface obtenue en coupant un solide par un plan.",
+      "exemple": "Saucisson de 4 cm de diamètre coupé droit : la rondelle est un disque de 4 cm de diamètre.",
+      "piege": "Tout dépend du sens de coupe : coupé en long, le saucisson donne un rectangle.",
+      "figure": {
+        "kind": "section_solide",
+        "solide": "cylindre",
+        "section": "parallele_base",
+        "size": {
+          "width": 200,
+          "height": 210
+        },
+        "display": {
+          "showLabels": false,
+          "showSectionName": false,
+          "showPlane": true,
+          "showCallouts": false
+        }
+      }
+    },
+    {
+      "regle": "Cube ou pavé coupé parallèlement à une face : un rectangle égal à cette face.",
+      "exemple": "Cube de 5 cm coupé parallèlement à une face : carré de 5 cm de côté.",
+      "piege": "Coupe par deux arêtes opposées : rectangle 5 cm × 7,1 cm environ, pas un carré.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 230,
+        "hauteurMax": 170,
+        "points": [
+          {
+            "id": "Lg",
+            "x": -1.3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 5,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 5,
+            "y": 5,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 0,
+            "y": 5,
+            "cache": true
+          },
+          {
+            "id": "E",
+            "x": 2.17,
+            "y": 1.25,
+            "cache": true
+          },
+          {
+            "id": "F2",
+            "x": 7.17,
+            "y": 1.25,
+            "cache": true
+          },
+          {
+            "id": "G",
+            "x": 7.17,
+            "y": 6.25,
+            "cache": true
+          },
+          {
+            "id": "H",
+            "x": 2.17,
+            "y": 6.25,
+            "cache": true
+          },
+          {
+            "id": "I",
+            "x": 0,
+            "y": 2.5,
+            "cache": true
+          },
+          {
+            "id": "J",
+            "x": 5,
+            "y": 2.5,
+            "cache": true
+          },
+          {
+            "id": "K",
+            "x": 7.17,
+            "y": 3.75,
+            "cache": true
+          },
+          {
+            "id": "M",
+            "x": 2.17,
+            "y": 3.75,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "fond": "rgba(37, 99, 235, 0.06)",
+            "contour": "#0f172a"
+          },
+          {
+            "sommets": [
+              "D",
+              "C",
+              "G",
+              "H"
+            ],
+            "fond": "rgba(37, 99, 235, 0.10)",
+            "contour": "#0f172a"
+          },
+          {
+            "sommets": [
+              "B",
+              "F2",
+              "G",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.16)",
+            "contour": "#0f172a"
+          },
+          {
+            "sommets": [
+              "I",
+              "J",
+              "K",
+              "M"
+            ],
+            "fond": "rgba(234, 88, 12, 0.30)",
+            "contour": "#ea580c"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "E",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "E",
+            "b": "F2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "E",
+            "b": "H",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "A",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "5 cm"
+          },
+          {
+            "a": "D",
+            "b": "A",
+            "sansTrait": true,
+            "texte": "5 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Cylindre : plan parallèle à la base → disque ; plan parallèle à l’axe → rectangle.",
+      "exemple": "Cylindre r = 3 cm, h = 10 cm, coupé par son axe : rectangle 6 cm × 10 cm.",
+      "piege": "Coupe par l’axe : la largeur est le diamètre 6 cm, pas le rayon 3 cm.",
+      "figure": {
+        "kind": "section_solide",
+        "solide": "cylindre",
+        "section": "parallele_axe",
+        "size": {
+          "width": 200,
+          "height": 210
+        },
+        "display": {
+          "showLabels": false,
+          "showSectionName": false,
+          "showPlane": true,
+          "showCallouts": false
+        }
+      }
+    },
+    {
+      "regle": "Plan parallèle à la base : cône → disque plus petit ; pyramide → réduction de la base.",
+      "exemple": "Pyramide à base carrée de 6 cm coupée à mi-hauteur : carré de 3 cm de côté.",
+      "piege": "À mi-hauteur, le carré fait 3 cm, pas 6 cm : la section rétrécit vers le sommet.",
+      "figure": {
+        "kind": "section_solide",
+        "solide": "pyramide",
+        "section": "parallele_base",
+        "size": {
+          "width": 210,
+          "height": 210
+        },
+        "display": {
+          "showLabels": false,
+          "showSectionName": false,
+          "showPlane": true,
+          "showCallouts": false
+        }
+      }
+    },
+    {
+      "regle": "Sphère coupée par un plan : un cercle. Distance d au centre : r^2 = R^2 − d^2.",
+      "exemple": "R = 5 cm, plan à 3 cm du centre : r^2 = 25 − 9 = 16, donc r = 4 cm.",
+      "piege": "r ≠ R − d : ici r = 4 cm, pas 5 − 3 = 2 cm.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 220,
+        "hauteurMax": 220,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "I",
+            "x": 0,
+            "y": 3,
+            "cache": true
+          },
+          {
+            "id": "P",
+            "x": -4,
+            "y": 3,
+            "cache": true
+          },
+          {
+            "id": "Q",
+            "x": 4,
+            "y": 3,
+            "cache": true
+          },
+          {
+            "id": "e0",
+            "x": 4,
+            "y": 3,
+            "cache": true
+          },
+          {
+            "id": "e1",
+            "x": 3.9,
+            "y": 3.1,
+            "cache": true
+          },
+          {
+            "id": "e2",
+            "x": 3.6,
+            "y": 3.2,
+            "cache": true
+          },
+          {
+            "id": "e3",
+            "x": 3.13,
+            "y": 3.28,
+            "cache": true
+          },
+          {
+            "id": "e4",
+            "x": 2.49,
+            "y": 3.35,
+            "cache": true
+          },
+          {
+            "id": "e5",
+            "x": 1.74,
+            "y": 3.41,
+            "cache": true
+          },
+          {
+            "id": "e6",
+            "x": 0.89,
+            "y": 3.44,
+            "cache": true
+          },
+          {
+            "id": "e7",
+            "x": 0,
+            "y": 3.45,
+            "cache": true
+          },
+          {
+            "id": "e8",
+            "x": -0.89,
+            "y": 3.44,
+            "cache": true
+          },
+          {
+            "id": "e9",
+            "x": -1.74,
+            "y": 3.41,
+            "cache": true
+          },
+          {
+            "id": "e10",
+            "x": -2.49,
+            "y": 3.35,
+            "cache": true
+          },
+          {
+            "id": "e11",
+            "x": -3.13,
+            "y": 3.28,
+            "cache": true
+          },
+          {
+            "id": "e12",
+            "x": -3.6,
+            "y": 3.2,
+            "cache": true
+          },
+          {
+            "id": "e13",
+            "x": -3.9,
+            "y": 3.1,
+            "cache": true
+          },
+          {
+            "id": "e14",
+            "x": -4,
+            "y": 3,
+            "cache": true
+          },
+          {
+            "id": "e15",
+            "x": -3.9,
+            "y": 2.9,
+            "cache": true
+          },
+          {
+            "id": "e16",
+            "x": -3.6,
+            "y": 2.8,
+            "cache": true
+          },
+          {
+            "id": "e17",
+            "x": -3.13,
+            "y": 2.72,
+            "cache": true
+          },
+          {
+            "id": "e18",
+            "x": -2.49,
+            "y": 2.65,
+            "cache": true
+          },
+          {
+            "id": "e19",
+            "x": -1.74,
+            "y": 2.59,
+            "cache": true
+          },
+          {
+            "id": "e20",
+            "x": -0.89,
+            "y": 2.56,
+            "cache": true
+          },
+          {
+            "id": "e21",
+            "x": 0,
+            "y": 2.55,
+            "cache": true
+          },
+          {
+            "id": "e22",
+            "x": 0.89,
+            "y": 2.56,
+            "cache": true
+          },
+          {
+            "id": "e23",
+            "x": 1.74,
+            "y": 2.59,
+            "cache": true
+          },
+          {
+            "id": "e24",
+            "x": 2.49,
+            "y": 2.65,
+            "cache": true
+          },
+          {
+            "id": "e25",
+            "x": 3.13,
+            "y": 2.72,
+            "cache": true
+          },
+          {
+            "id": "e26",
+            "x": 3.6,
+            "y": 2.8,
+            "cache": true
+          },
+          {
+            "id": "e27",
+            "x": 3.9,
+            "y": 2.9,
+            "cache": true
+          }
+        ],
+        "cercles": [
+          {
+            "centre": "O",
+            "rayon": 5,
+            "couleur": "#2563eb",
+            "fond": "rgba(37, 99, 235, 0.06)"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "e0",
+              "e1",
+              "e2",
+              "e3",
+              "e4",
+              "e5",
+              "e6",
+              "e7",
+              "e8",
+              "e9",
+              "e10",
+              "e11",
+              "e12",
+              "e13",
+              "e14",
+              "e15",
+              "e16",
+              "e17",
+              "e18",
+              "e19",
+              "e20",
+              "e21",
+              "e22",
+              "e23",
+              "e24",
+              "e25",
+              "e26",
+              "e27"
+            ],
+            "fond": "rgba(220, 38, 38, 0.14)",
+            "contour": "#dc2626"
+          }
+        ],
+        "segments": [
+          {
+            "a": "O",
+            "b": "I",
+            "texte": "3 cm",
+            "pointille": true
+          },
+          {
+            "a": "Q",
+            "b": "I",
+            "texte": "4 cm",
+            "couleur": "#dc2626",
+            "epais": true
+          },
+          {
+            "a": "O",
+            "b": "Q",
+            "texte": "5 cm",
+            "couleur": "#2563eb"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "I",
+            "de": "Q",
+            "vers": "O",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On dessine la section en vraie grandeur, puis on utilise Pythagore ou Thalès.",
+      "exemple": "Pavé 3 × 4 × 10 cm coupé par la diagonale de la base : √(9 + 16) = 5, rectangle 5 × 10 cm.",
+      "piege": "Diagonale du rectangle 3 cm × 4 cm : 5 cm, pas 3 + 4 = 7 cm.",
+      "figure": {
+        "kind": "section_solide",
+        "solide": "pave_droit",
+        "section": "diagonale",
+        "size": {
+          "width": 220,
+          "height": 220
+        },
+        "display": {
+          "showLabels": false,
+          "showSectionName": false,
+          "showPlane": true,
+          "showCallouts": false
+        }
+      }
+    },
+    {
+      "regle": "Défi : repérer le solide et le sens de la coupe, puis la forme et ses mesures.",
+      "exemple": "Cône r = 6 cm, h = 12 cm, coupé à 4 cm du sommet : k = 4 ÷ 12, disque de rayon 2 cm.",
+      "piege": "À 4 cm du SOMMET, pas de la base : le rapport est 4 ÷ 12, pas 8 ÷ 12."
+    }
+  ],
+  "3e/aire_perimetre": [
+    {
+      "regle": "Le périmètre est la longueur du tour d’une figure ; il s’écrit en cm, m ou km.",
+      "exemple": "Terrain de foot 100 m × 60 m : tour = 100 + 60 + 100 + 60 = 320 m.",
+      "piege": "Un périmètre ne s’écrit pas en m² : 320 m, pas 320 m² (m², c’est une aire)."
+    },
+    {
+      "regle": "On additionne les longueurs de tous les côtés, toutes dans la même unité.",
+      "exemple": "Triangle de côtés 5 cm, 0,7 dm et 9 cm : 5 + 7 + 9 = 21 cm.",
+      "piege": "5 + 0,7 + 9 = 14,7 est faux : il faut d’abord convertir 0,7 dm = 7 cm."
+    },
+    {
+      "regle": "Longueur d’un cercle = 2 × π × rayon = π × diamètre.",
+      "exemple": "Roue de vélo de diamètre 70 cm : π × 70 ≈ 219,9 cm.",
+      "piege": "Avec le rayon 35 cm, c’est 2 × π × 35, pas π × 35 ≈ 110 cm.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 200,
+        "hauteurMax": 200,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "A",
+            "x": -35,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 35,
+            "y": 0,
+            "cache": true
+          }
+        ],
+        "cercles": [
+          {
+            "centre": "O",
+            "rayon": 35,
+            "couleur": "#2563eb"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "texte": "70 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On suit le contour : on garde les bords extérieurs, on enlève les traits intérieurs.",
+      "exemple": "Carré de 4 m + demi-disque de diamètre 4 m : 3 × 4 + π × 4 ÷ 2 ≈ 18,28 m.",
+      "piege": "Compter aussi le côté collé au demi-disque : 4 × 4 au lieu de 3 × 4.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 220,
+        "hauteurMax": 175,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 4,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 4,
+            "y": 4,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 0,
+            "y": 4,
+            "cache": true
+          },
+          {
+            "id": "O",
+            "x": 2,
+            "y": 4,
+            "cache": true
+          },
+          {
+            "id": "I",
+            "x": 2,
+            "y": 2,
+            "cache": true
+          },
+          {
+            "id": "T",
+            "x": 2,
+            "y": 6,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "none"
+          }
+        ],
+        "segments": [
+          {
+            "a": "D",
+            "b": "A",
+            "epais": true,
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "A",
+            "b": "B",
+            "epais": true,
+            "couleur": "#2563eb",
+            "texte": "4 m"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "epais": true,
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "D",
+            "b": "C",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          }
+        ],
+        "arcs": [
+          {
+            "centre": "O",
+            "de": "C",
+            "vers": "D",
+            "eviter": "I",
+            "couleur": "#dc2626"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Défi : faire un schéma, noter chaque longueur, puis faire le tour.",
+      "exemple": "Jardin 25 m × 12 m, portail de 3 m : 2 × (25 + 12) − 3 = 71 m de grillage.",
+      "piege": "Oublier d’enlever le portail : 74 m, alors qu’il faut 71 m de grillage."
+    }
+  ],
+  "3e/aire_surface": [
+    {
+      "regle": "L’aire mesure la surface occupée ; elle s’écrit en cm², m² ou km².",
+      "exemple": "Chambre de 4 m × 3 m : aire = 4 × 3 = 12 m².",
+      "piege": "1 m² = 10 000 cm², pas 100 cm² : on fait × 100 deux fois."
+    },
+    {
+      "regle": "Aire du triangle = base × hauteur ÷ 2 (hauteur perpendiculaire à la base).",
+      "exemple": "Base 8 cm, hauteur 5 cm : 8 × 5 ÷ 2 = 20 cm².",
+      "piege": "Oublier le ÷ 2 : 8 × 5 = 40 cm², c’est l’aire du rectangle.",
+      "figure": {
+        "kind": "triangle",
+        "size": {
+          "width": 280,
+          "height": 200
+        },
+        "points": {
+          "A": {
+            "x": 30,
+            "y": 170
+          },
+          "B": {
+            "x": 250,
+            "y": 170
+          },
+          "C": {
+            "x": 175,
+            "y": 32
+          }
+        },
+        "labels": {
+          "A": "A",
+          "B": "B",
+          "C": "C"
+        },
+        "sideLabels": {
+          "AB": "8 cm"
+        },
+        "height": {
+          "fromVertex": "C",
+          "label": "5 cm"
+        },
+        "display": {
+          "showPoints": true,
+          "showLabels": true,
+          "showSides": true,
+          "showAngles": false
+        }
+      }
+    },
+    {
+      "regle": "Aire du disque = π × rayon × rayon = π × r^2.",
+      "exemple": "Pizza de rayon 15 cm : π × 15^2 ≈ 706,9 cm².",
+      "piege": "Avec un diamètre de 30 cm, on prend r = 15 cm : π × 30^2 est 4 fois trop grand.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 180,
+        "hauteurMax": 180,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "R",
+            "x": 15,
+            "y": 0,
+            "cache": true
+          }
+        ],
+        "cercles": [
+          {
+            "centre": "O",
+            "rayon": 15,
+            "couleur": "#ea580c",
+            "fond": "rgba(249, 115, 22, 0.16)"
+          }
+        ],
+        "segments": [
+          {
+            "a": "O",
+            "b": "R",
+            "texte": "15 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "On découpe en figures simples, puis on ajoute ou on enlève les aires.",
+      "exemple": "Rectangle 10 m × 6 m privé d’un carré de 2 m : 60 − 4 = 56 m².",
+      "piege": "Ajouter le carré au lieu de l’enlever : 60 + 4 = 64 m² est faux.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 260,
+        "hauteurMax": 180,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 10,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 10,
+            "y": 4,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 8,
+            "y": 4,
+            "cache": true
+          },
+          {
+            "id": "E",
+            "x": 8,
+            "y": 6,
+            "cache": true
+          },
+          {
+            "id": "F",
+            "x": 0,
+            "y": 6,
+            "cache": true
+          },
+          {
+            "id": "G",
+            "x": 10,
+            "y": 6,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "#2563eb"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "10 m"
+          },
+          {
+            "a": "F",
+            "b": "A",
+            "sansTrait": true,
+            "texte": "6 m"
+          },
+          {
+            "a": "D",
+            "b": "C",
+            "sansTrait": true,
+            "texte": "2 m"
+          },
+          {
+            "a": "D",
+            "b": "E",
+            "sansTrait": true,
+            "texte": "2 m"
+          },
+          {
+            "a": "C",
+            "b": "G",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "E",
+            "b": "G",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Longueurs × k → aires × k^2.",
+      "exemple": "Photo 10 cm × 15 cm = 150 cm² agrandie × 2 : 150 × 4 = 600 cm².",
+      "piege": "Longueurs × 2 : l’aire est × 4. 150 cm² → 600 cm², pas 300 cm².",
+      "figure": {
+        "kind": "construction",
+        "largeur": 270,
+        "hauteurMax": 200,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 2,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 2,
+            "y": 3,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 0,
+            "y": 3,
+            "cache": true
+          },
+          {
+            "id": "E",
+            "x": 3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "F",
+            "x": 7,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "G",
+            "x": 7,
+            "y": 6,
+            "cache": true
+          },
+          {
+            "id": "H",
+            "x": 3,
+            "y": 6,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "#2563eb"
+          },
+          {
+            "sommets": [
+              "E",
+              "F",
+              "G",
+              "H"
+            ],
+            "fond": "rgba(234, 88, 12, 0.12)",
+            "contour": "#ea580c"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "10 cm"
+          },
+          {
+            "a": "D",
+            "b": "A",
+            "sansTrait": true,
+            "texte": "15 cm"
+          },
+          {
+            "a": "E",
+            "b": "F",
+            "sansTrait": true,
+            "texte": "20 cm"
+          },
+          {
+            "a": "F",
+            "b": "G",
+            "sansTrait": true,
+            "texte": "30 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Défi : calculer l’aire, puis diviser par ce que couvre un pot ou un paquet.",
+      "exemple": "Mur 5 m × 2,6 m = 13 m², 1 pot pour 4 m² : 13 ÷ 4 = 3,25 → 4 pots.",
+      "piege": "3,25 pots → 4 pots : en achetant 3, un bout de mur reste sans peinture."
+    }
+  ],
+  "3e/volume_solide": [
+    {
+      "regle": "Le volume mesure la place occupée dans l’espace ; il s’écrit en cm³, m³ ou L.",
+      "exemple": "Un cube de 1 cm d’arête a un volume de 1 cm³ ; 1 L = 1 dm³ = 1 000 cm³.",
+      "piege": "Volume ≠ aire : un cube de 2 cm fait 8 cm³, mais chaque face fait 4 cm²."
+    },
+    {
+      "regle": "Volume du pavé droit = longueur × largeur × hauteur.",
+      "exemple": "Aquarium 50 cm × 30 cm × 40 cm : 60 000 cm³ = 60 L.",
+      "piege": "50 + 30 + 40 = 120 n’est pas un volume : on multiplie les trois.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 250,
+        "hauteurMax": 170,
+        "points": [
+          {
+            "id": "Lg",
+            "x": -1.3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 5,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 5,
+            "y": 4,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 0,
+            "y": 4,
+            "cache": true
+          },
+          {
+            "id": "E",
+            "x": 1.3,
+            "y": 0.75,
+            "cache": true
+          },
+          {
+            "id": "F2",
+            "x": 6.3,
+            "y": 0.75,
+            "cache": true
+          },
+          {
+            "id": "G",
+            "x": 6.3,
+            "y": 4.75,
+            "cache": true
+          },
+          {
+            "id": "H",
+            "x": 1.3,
+            "y": 4.75,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "#0f172a"
+          },
+          {
+            "sommets": [
+              "D",
+              "C",
+              "G",
+              "H"
+            ],
+            "fond": "rgba(37, 99, 235, 0.14)",
+            "contour": "#0f172a"
+          },
+          {
+            "sommets": [
+              "B",
+              "F2",
+              "G",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.20)",
+            "contour": "#0f172a"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "E",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "E",
+            "b": "F2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "E",
+            "b": "H",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "A",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "50 cm"
+          },
+          {
+            "a": "B",
+            "b": "F2",
+            "sansTrait": true,
+            "texte": "30 cm"
+          },
+          {
+            "a": "D",
+            "b": "A",
+            "sansTrait": true,
+            "texte": "40 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Volume du prisme droit = aire de la base × hauteur.",
+      "exemple": "Tente : base triangle 2 m × 1,5 m ÷ 2 = 1,5 m², longueur 3 m : 1,5 × 3 = 4,5 m³.",
+      "piege": "Oublier le ÷ 2 du triangle de base : 9 m³ au lieu de 4,5 m³.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 260,
+        "hauteurMax": 170,
+        "points": [
+          {
+            "id": "Lg",
+            "x": -1.8,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "V1",
+            "x": -0.45,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "V2",
+            "x": -0.45,
+            "y": 1.5,
+            "cache": true
+          },
+          {
+            "id": "P",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "Q",
+            "x": 2,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "R",
+            "x": 1,
+            "y": 1.5,
+            "cache": true
+          },
+          {
+            "id": "K",
+            "x": 1,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "P2",
+            "x": 2.2,
+            "y": 1.1,
+            "cache": true
+          },
+          {
+            "id": "Q2",
+            "x": 4.2,
+            "y": 1.1,
+            "cache": true
+          },
+          {
+            "id": "R2",
+            "x": 3.2,
+            "y": 2.6,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "R",
+              "Q",
+              "Q2",
+              "R2"
+            ],
+            "fond": "rgba(37, 99, 235, 0.14)",
+            "contour": "#0f172a"
+          },
+          {
+            "sommets": [
+              "P",
+              "Q",
+              "R"
+            ],
+            "fond": "rgba(234, 179, 8, 0.30)",
+            "contour": "#ea580c"
+          }
+        ],
+        "segments": [
+          {
+            "a": "P",
+            "b": "P2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "P2",
+            "b": "Q2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "P2",
+            "b": "R2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "R",
+            "b": "K",
+            "pointille": true,
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "V1",
+            "b": "V2",
+            "couleur": "#94a3b8",
+            "texte": "1,5 m"
+          },
+          {
+            "a": "P",
+            "b": "Q",
+            "sansTrait": true,
+            "texte": "2 m"
+          },
+          {
+            "a": "Q",
+            "b": "Q2",
+            "sansTrait": true,
+            "texte": "3 m"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "K",
+            "de": "Q",
+            "vers": "R",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Volume du cylindre = π × r^2 × h.",
+      "exemple": "Canette r = 3 cm, h = 12 cm : π × 9 × 12 ≈ 339,3 cm³.",
+      "piege": "Prendre le diamètre 6 cm : π × 36 × 12 ≈ 1 357 cm³, 4 fois trop.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 230,
+        "hauteurMax": 175,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "R",
+            "x": 3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "G",
+            "x": -3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "G2",
+            "x": -3,
+            "y": 12,
+            "cache": true
+          },
+          {
+            "id": "D2",
+            "x": 3,
+            "y": 12,
+            "cache": true
+          },
+          {
+            "id": "h1",
+            "x": 4.4,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "h2",
+            "x": 4.4,
+            "y": 12,
+            "cache": true
+          },
+          {
+            "id": "b0",
+            "x": 3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "b1",
+            "x": 2.94,
+            "y": 0.16,
+            "cache": true
+          },
+          {
+            "id": "b2",
+            "x": 2.77,
+            "y": 0.31,
+            "cache": true
+          },
+          {
+            "id": "b3",
+            "x": 2.49,
+            "y": 0.44,
+            "cache": true
+          },
+          {
+            "id": "b4",
+            "x": 2.12,
+            "y": 0.57,
+            "cache": true
+          },
+          {
+            "id": "b5",
+            "x": 1.67,
+            "y": 0.67,
+            "cache": true
+          },
+          {
+            "id": "b6",
+            "x": 1.15,
+            "y": 0.74,
+            "cache": true
+          },
+          {
+            "id": "b7",
+            "x": 0.59,
+            "y": 0.78,
+            "cache": true
+          },
+          {
+            "id": "b8",
+            "x": 0,
+            "y": 0.8,
+            "cache": true
+          },
+          {
+            "id": "b9",
+            "x": -0.59,
+            "y": 0.78,
+            "cache": true
+          },
+          {
+            "id": "b10",
+            "x": -1.15,
+            "y": 0.74,
+            "cache": true
+          },
+          {
+            "id": "b11",
+            "x": -1.67,
+            "y": 0.67,
+            "cache": true
+          },
+          {
+            "id": "b12",
+            "x": -2.12,
+            "y": 0.57,
+            "cache": true
+          },
+          {
+            "id": "b13",
+            "x": -2.49,
+            "y": 0.44,
+            "cache": true
+          },
+          {
+            "id": "b14",
+            "x": -2.77,
+            "y": 0.31,
+            "cache": true
+          },
+          {
+            "id": "b15",
+            "x": -2.94,
+            "y": 0.16,
+            "cache": true
+          },
+          {
+            "id": "b16",
+            "x": -3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "b17",
+            "x": -2.94,
+            "y": -0.16,
+            "cache": true
+          },
+          {
+            "id": "b18",
+            "x": -2.77,
+            "y": -0.31,
+            "cache": true
+          },
+          {
+            "id": "b19",
+            "x": -2.49,
+            "y": -0.44,
+            "cache": true
+          },
+          {
+            "id": "b20",
+            "x": -2.12,
+            "y": -0.57,
+            "cache": true
+          },
+          {
+            "id": "b21",
+            "x": -1.67,
+            "y": -0.67,
+            "cache": true
+          },
+          {
+            "id": "b22",
+            "x": -1.15,
+            "y": -0.74,
+            "cache": true
+          },
+          {
+            "id": "b23",
+            "x": -0.59,
+            "y": -0.78,
+            "cache": true
+          },
+          {
+            "id": "b24",
+            "x": 0,
+            "y": -0.8,
+            "cache": true
+          },
+          {
+            "id": "b25",
+            "x": 0.59,
+            "y": -0.78,
+            "cache": true
+          },
+          {
+            "id": "b26",
+            "x": 1.15,
+            "y": -0.74,
+            "cache": true
+          },
+          {
+            "id": "b27",
+            "x": 1.67,
+            "y": -0.67,
+            "cache": true
+          },
+          {
+            "id": "b28",
+            "x": 2.12,
+            "y": -0.57,
+            "cache": true
+          },
+          {
+            "id": "b29",
+            "x": 2.49,
+            "y": -0.44,
+            "cache": true
+          },
+          {
+            "id": "b30",
+            "x": 2.77,
+            "y": -0.31,
+            "cache": true
+          },
+          {
+            "id": "b31",
+            "x": 2.94,
+            "y": -0.16,
+            "cache": true
+          },
+          {
+            "id": "t0",
+            "x": 3,
+            "y": 12,
+            "cache": true
+          },
+          {
+            "id": "t1",
+            "x": 2.94,
+            "y": 12.16,
+            "cache": true
+          },
+          {
+            "id": "t2",
+            "x": 2.77,
+            "y": 12.31,
+            "cache": true
+          },
+          {
+            "id": "t3",
+            "x": 2.49,
+            "y": 12.44,
+            "cache": true
+          },
+          {
+            "id": "t4",
+            "x": 2.12,
+            "y": 12.57,
+            "cache": true
+          },
+          {
+            "id": "t5",
+            "x": 1.67,
+            "y": 12.67,
+            "cache": true
+          },
+          {
+            "id": "t6",
+            "x": 1.15,
+            "y": 12.74,
+            "cache": true
+          },
+          {
+            "id": "t7",
+            "x": 0.59,
+            "y": 12.78,
+            "cache": true
+          },
+          {
+            "id": "t8",
+            "x": 0,
+            "y": 12.8,
+            "cache": true
+          },
+          {
+            "id": "t9",
+            "x": -0.59,
+            "y": 12.78,
+            "cache": true
+          },
+          {
+            "id": "t10",
+            "x": -1.15,
+            "y": 12.74,
+            "cache": true
+          },
+          {
+            "id": "t11",
+            "x": -1.67,
+            "y": 12.67,
+            "cache": true
+          },
+          {
+            "id": "t12",
+            "x": -2.12,
+            "y": 12.57,
+            "cache": true
+          },
+          {
+            "id": "t13",
+            "x": -2.49,
+            "y": 12.44,
+            "cache": true
+          },
+          {
+            "id": "t14",
+            "x": -2.77,
+            "y": 12.31,
+            "cache": true
+          },
+          {
+            "id": "t15",
+            "x": -2.94,
+            "y": 12.16,
+            "cache": true
+          },
+          {
+            "id": "t16",
+            "x": -3,
+            "y": 12,
+            "cache": true
+          },
+          {
+            "id": "t17",
+            "x": -2.94,
+            "y": 11.84,
+            "cache": true
+          },
+          {
+            "id": "t18",
+            "x": -2.77,
+            "y": 11.69,
+            "cache": true
+          },
+          {
+            "id": "t19",
+            "x": -2.49,
+            "y": 11.56,
+            "cache": true
+          },
+          {
+            "id": "t20",
+            "x": -2.12,
+            "y": 11.43,
+            "cache": true
+          },
+          {
+            "id": "t21",
+            "x": -1.67,
+            "y": 11.33,
+            "cache": true
+          },
+          {
+            "id": "t22",
+            "x": -1.15,
+            "y": 11.26,
+            "cache": true
+          },
+          {
+            "id": "t23",
+            "x": -0.59,
+            "y": 11.22,
+            "cache": true
+          },
+          {
+            "id": "t24",
+            "x": 0,
+            "y": 11.2,
+            "cache": true
+          },
+          {
+            "id": "t25",
+            "x": 0.59,
+            "y": 11.22,
+            "cache": true
+          },
+          {
+            "id": "t26",
+            "x": 1.15,
+            "y": 11.26,
+            "cache": true
+          },
+          {
+            "id": "t27",
+            "x": 1.67,
+            "y": 11.33,
+            "cache": true
+          },
+          {
+            "id": "t28",
+            "x": 2.12,
+            "y": 11.43,
+            "cache": true
+          },
+          {
+            "id": "t29",
+            "x": 2.49,
+            "y": 11.56,
+            "cache": true
+          },
+          {
+            "id": "t30",
+            "x": 2.77,
+            "y": 11.69,
+            "cache": true
+          },
+          {
+            "id": "t31",
+            "x": 2.94,
+            "y": 11.84,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "b0",
+              "b1",
+              "b2",
+              "b3",
+              "b4",
+              "b5",
+              "b6",
+              "b7",
+              "b8",
+              "b9",
+              "b10",
+              "b11",
+              "b12",
+              "b13",
+              "b14",
+              "b15",
+              "b16",
+              "b17",
+              "b18",
+              "b19",
+              "b20",
+              "b21",
+              "b22",
+              "b23",
+              "b24",
+              "b25",
+              "b26",
+              "b27",
+              "b28",
+              "b29",
+              "b30",
+              "b31"
+            ],
+            "fond": "rgba(234, 179, 8, 0.30)",
+            "contour": "none"
+          },
+          {
+            "sommets": [
+              "t0",
+              "t1",
+              "t2",
+              "t3",
+              "t4",
+              "t5",
+              "t6",
+              "t7",
+              "t8",
+              "t9",
+              "t10",
+              "t11",
+              "t12",
+              "t13",
+              "t14",
+              "t15",
+              "t16",
+              "t17",
+              "t18",
+              "t19",
+              "t20",
+              "t21",
+              "t22",
+              "t23",
+              "t24",
+              "t25",
+              "t26",
+              "t27",
+              "t28",
+              "t29",
+              "t30",
+              "t31"
+            ],
+            "fond": "rgba(37, 99, 235, 0.12)",
+            "contour": "none"
+          }
+        ],
+        "segments": [
+          {
+            "a": "b0",
+            "b": "b1",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b1",
+            "b": "b2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b2",
+            "b": "b3",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b3",
+            "b": "b4",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b4",
+            "b": "b5",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b5",
+            "b": "b6",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b6",
+            "b": "b7",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b7",
+            "b": "b8",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b8",
+            "b": "b9",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b9",
+            "b": "b10",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b10",
+            "b": "b11",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b11",
+            "b": "b12",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b12",
+            "b": "b13",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b13",
+            "b": "b14",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b14",
+            "b": "b15",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b15",
+            "b": "b16",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "b16",
+            "b": "b17",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b17",
+            "b": "b18",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b18",
+            "b": "b19",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b19",
+            "b": "b20",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b20",
+            "b": "b21",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b21",
+            "b": "b22",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b22",
+            "b": "b23",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b23",
+            "b": "b24",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b24",
+            "b": "b25",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b25",
+            "b": "b26",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b26",
+            "b": "b27",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b27",
+            "b": "b28",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b28",
+            "b": "b29",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b29",
+            "b": "b30",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b30",
+            "b": "b31",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "b31",
+            "b": "b0",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "t0",
+            "b": "t1",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t1",
+            "b": "t2",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t2",
+            "b": "t3",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t3",
+            "b": "t4",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t4",
+            "b": "t5",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t5",
+            "b": "t6",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t6",
+            "b": "t7",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t7",
+            "b": "t8",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t8",
+            "b": "t9",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t9",
+            "b": "t10",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t10",
+            "b": "t11",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t11",
+            "b": "t12",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t12",
+            "b": "t13",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t13",
+            "b": "t14",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t14",
+            "b": "t15",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t15",
+            "b": "t16",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t16",
+            "b": "t17",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t17",
+            "b": "t18",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t18",
+            "b": "t19",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t19",
+            "b": "t20",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t20",
+            "b": "t21",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t21",
+            "b": "t22",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t22",
+            "b": "t23",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t23",
+            "b": "t24",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t24",
+            "b": "t25",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t25",
+            "b": "t26",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t26",
+            "b": "t27",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t27",
+            "b": "t28",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t28",
+            "b": "t29",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t29",
+            "b": "t30",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t30",
+            "b": "t31",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "t31",
+            "b": "t0",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "G",
+            "b": "G2"
+          },
+          {
+            "a": "R",
+            "b": "D2"
+          },
+          {
+            "a": "O",
+            "b": "R",
+            "couleur": "#2563eb",
+            "epais": true,
+            "texte": "r = 3 cm"
+          },
+          {
+            "a": "h1",
+            "b": "h2",
+            "couleur": "#dc2626",
+            "texte": "h = 12 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Volume de la boule = 4 × π × r^3 ÷ 3.",
+      "exemple": "Ballon de rayon 12 cm : 4 × π × 12^3 ÷ 3 ≈ 7 238,2 cm³.",
+      "piege": "r^3 = r × r × r : 12^3 = 1 728, pas 12 × 3 = 36."
+    },
+    {
+      "regle": "Volume de la pyramide = aire de la base × hauteur ÷ 3.",
+      "exemple": "Base carrée de 6 cm, hauteur 10 cm : 36 × 10 ÷ 3 = 120 cm³.",
+      "piege": "Oublier le ÷ 3 : 360 cm³, c’est le volume du prisme de même base.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 230,
+        "hauteurMax": 175,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 6,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 8.6,
+            "y": 1.5,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 2.6,
+            "y": 1.5,
+            "cache": true
+          },
+          {
+            "id": "S",
+            "x": 4.3,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "H",
+            "x": 4.3,
+            "y": 0.75,
+            "nom": "H",
+            "cache": true
+          },
+          {
+            "id": "W1",
+            "x": 9.5,
+            "y": 0.75,
+            "cache": true
+          },
+          {
+            "id": "W2",
+            "x": 9.5,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "W3",
+            "x": 12.1,
+            "y": 0.75,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "fond": "rgba(234, 179, 8, 0.25)",
+            "contour": "none"
+          },
+          {
+            "sommets": [
+              "S",
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.10)",
+            "contour": "none"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "texte": "6 cm"
+          },
+          {
+            "a": "B",
+            "b": "C"
+          },
+          {
+            "a": "C",
+            "b": "D",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "D",
+            "b": "A",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "S",
+            "b": "A"
+          },
+          {
+            "a": "S",
+            "b": "B"
+          },
+          {
+            "a": "S",
+            "b": "C"
+          },
+          {
+            "a": "S",
+            "b": "D",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "S",
+            "b": "H",
+            "pointille": true,
+            "couleur": "#dc2626"
+          },
+          {
+            "a": "W1",
+            "b": "W2",
+            "couleur": "#dc2626",
+            "texte": "10 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Volume du cône = π × r^2 × h ÷ 3.",
+      "exemple": "Cornet r = 3 cm, h = 10 cm : π × 9 × 10 ÷ 3 ≈ 94,2 cm³.",
+      "piege": "h est la hauteur droite (10 cm), pas le bord du cône (≈ 10,4 cm).",
+      "figure": {
+        "kind": "construction",
+        "largeur": 230,
+        "hauteurMax": 175,
+        "points": [
+          {
+            "id": "S",
+            "x": 0,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "R",
+            "x": 3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "W1",
+            "x": -4,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "W2",
+            "x": -4,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "W3",
+            "x": -8,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "e0",
+            "x": 3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "e1",
+            "x": 2.94,
+            "y": 0.12,
+            "cache": true
+          },
+          {
+            "id": "e2",
+            "x": 2.77,
+            "y": 0.23,
+            "cache": true
+          },
+          {
+            "id": "e3",
+            "x": 2.49,
+            "y": 0.33,
+            "cache": true
+          },
+          {
+            "id": "e4",
+            "x": 2.12,
+            "y": 0.42,
+            "cache": true
+          },
+          {
+            "id": "e5",
+            "x": 1.67,
+            "y": 0.5,
+            "cache": true
+          },
+          {
+            "id": "e6",
+            "x": 1.15,
+            "y": 0.55,
+            "cache": true
+          },
+          {
+            "id": "e7",
+            "x": 0.59,
+            "y": 0.59,
+            "cache": true
+          },
+          {
+            "id": "e8",
+            "x": 0,
+            "y": 0.6,
+            "cache": true
+          },
+          {
+            "id": "e9",
+            "x": -0.59,
+            "y": 0.59,
+            "cache": true
+          },
+          {
+            "id": "e10",
+            "x": -1.15,
+            "y": 0.55,
+            "cache": true
+          },
+          {
+            "id": "e11",
+            "x": -1.67,
+            "y": 0.5,
+            "cache": true
+          },
+          {
+            "id": "e12",
+            "x": -2.12,
+            "y": 0.42,
+            "cache": true
+          },
+          {
+            "id": "e13",
+            "x": -2.49,
+            "y": 0.33,
+            "cache": true
+          },
+          {
+            "id": "e14",
+            "x": -2.77,
+            "y": 0.23,
+            "cache": true
+          },
+          {
+            "id": "e15",
+            "x": -2.94,
+            "y": 0.12,
+            "cache": true
+          },
+          {
+            "id": "e16",
+            "x": -3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "e17",
+            "x": -2.94,
+            "y": -0.12,
+            "cache": true
+          },
+          {
+            "id": "e18",
+            "x": -2.77,
+            "y": -0.23,
+            "cache": true
+          },
+          {
+            "id": "e19",
+            "x": -2.49,
+            "y": -0.33,
+            "cache": true
+          },
+          {
+            "id": "e20",
+            "x": -2.12,
+            "y": -0.42,
+            "cache": true
+          },
+          {
+            "id": "e21",
+            "x": -1.67,
+            "y": -0.5,
+            "cache": true
+          },
+          {
+            "id": "e22",
+            "x": -1.15,
+            "y": -0.55,
+            "cache": true
+          },
+          {
+            "id": "e23",
+            "x": -0.59,
+            "y": -0.59,
+            "cache": true
+          },
+          {
+            "id": "e24",
+            "x": 0,
+            "y": -0.6,
+            "cache": true
+          },
+          {
+            "id": "e25",
+            "x": 0.59,
+            "y": -0.59,
+            "cache": true
+          },
+          {
+            "id": "e26",
+            "x": 1.15,
+            "y": -0.55,
+            "cache": true
+          },
+          {
+            "id": "e27",
+            "x": 1.67,
+            "y": -0.5,
+            "cache": true
+          },
+          {
+            "id": "e28",
+            "x": 2.12,
+            "y": -0.42,
+            "cache": true
+          },
+          {
+            "id": "e29",
+            "x": 2.49,
+            "y": -0.33,
+            "cache": true
+          },
+          {
+            "id": "e30",
+            "x": 2.77,
+            "y": -0.23,
+            "cache": true
+          },
+          {
+            "id": "e31",
+            "x": 2.94,
+            "y": -0.12,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "S",
+              "e16",
+              "e17",
+              "e18",
+              "e19",
+              "e20",
+              "e21",
+              "e22",
+              "e23",
+              "e24",
+              "e25",
+              "e26",
+              "e27",
+              "e28",
+              "e29",
+              "e30",
+              "e31",
+              "e0"
+            ],
+            "fond": "rgba(37, 99, 235, 0.10)",
+            "contour": "none"
+          }
+        ],
+        "segments": [
+          {
+            "a": "e0",
+            "b": "e1",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e1",
+            "b": "e2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e2",
+            "b": "e3",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e3",
+            "b": "e4",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e4",
+            "b": "e5",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e5",
+            "b": "e6",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e6",
+            "b": "e7",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e7",
+            "b": "e8",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e8",
+            "b": "e9",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e9",
+            "b": "e10",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e10",
+            "b": "e11",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e11",
+            "b": "e12",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e12",
+            "b": "e13",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e13",
+            "b": "e14",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e14",
+            "b": "e15",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e15",
+            "b": "e16",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e16",
+            "b": "e17",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e17",
+            "b": "e18",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e18",
+            "b": "e19",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e19",
+            "b": "e20",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e20",
+            "b": "e21",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e21",
+            "b": "e22",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e22",
+            "b": "e23",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e23",
+            "b": "e24",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e24",
+            "b": "e25",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e25",
+            "b": "e26",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e26",
+            "b": "e27",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e27",
+            "b": "e28",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e28",
+            "b": "e29",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e29",
+            "b": "e30",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e30",
+            "b": "e31",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e31",
+            "b": "e0",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "S",
+            "b": "e16"
+          },
+          {
+            "a": "S",
+            "b": "R"
+          },
+          {
+            "a": "S",
+            "b": "O",
+            "pointille": true,
+            "couleur": "#dc2626"
+          },
+          {
+            "a": "W1",
+            "b": "W2",
+            "couleur": "#dc2626",
+            "texte": "h = 10 cm"
+          },
+          {
+            "a": "O",
+            "b": "R",
+            "couleur": "#2563eb",
+            "epais": true,
+            "texte": "r = 3 cm"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "O",
+            "de": "R",
+            "vers": "S",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Le petit cône (ou la petite pyramide) est une réduction de rapport k : volume × k^3.",
+      "exemple": "Cône de 800 cm³ coupé à mi-hauteur : k = 0,5, petit cône 800 × 0,125 = 100 cm³.",
+      "piege": "k = 0,5 : le volume est ÷ 8, pas ÷ 2. 100 cm³, pas 400 cm³.",
+      "figure": {
+        "kind": "section_solide",
+        "solide": "cone",
+        "section": "parallele_base",
+        "size": {
+          "width": 210,
+          "height": 220
+        },
+        "display": {
+          "showLabels": false,
+          "showSectionName": false,
+          "showPlane": true,
+          "showCallouts": false
+        }
+      }
+    },
+    {
+      "regle": "Longueurs × k → aires × k^2 → volumes × k^3.",
+      "exemple": "Réservoir de 5 L, toutes les longueurs × 2 : 5 × 8 = 40 L.",
+      "piege": "Longueurs × 2 : le volume est × 8, pas × 2 ni × 4."
+    },
+    {
+      "regle": "1 m³ = 1 000 dm³ ; 1 dm³ = 1 L = 1 000 cm³ ; 1 cm³ = 1 mL.",
+      "exemple": "Piscine de 30 m³ : 30 × 1 000 = 30 000 dm³ = 30 000 L.",
+      "piege": "1 m³ = 1 000 L, pas 100 L : en volume, c’est × 1 000 à chaque unité."
+    },
+    {
+      "regle": "Défi : calculer le volume, le convertir en L, puis diviser ou comparer.",
+      "exemple": "Bac 2 m × 1 m × 0,5 m = 1 m³ = 1 000 L ; à 20 L par minute : 50 min.",
+      "piege": "1 ÷ 20 = 0,05 min est faux : on convertit d’abord 1 m³ = 1 000 L."
+    }
+  ],
+  "3e/stat_statistique": [
+    {
+      "regle": "On repère la ligne et la colonne, puis on lit la case où elles se croisent.",
+      "exemple": "Pointure 38 : 5 élèves ; 39 : 8 ; 40 : 3. Donc 8 élèves chaussent du 39.",
+      "piege": "Confondre la valeur (pointure 39) et l’effectif (8 élèves)."
+    },
+    {
+      "regle": "On lit la valeur sur l’axe horizontal et sa hauteur sur l’axe vertical.",
+      "exemple": "Buts marqués par match : le bâton « 2 buts » monte à 6, donc 6 matchs.",
+      "piege": "Si 1 carreau vaut 2 matchs, 3 carreaux font 6 matchs, pas 3.",
+      "figure": {
+        "kind": "stat_graph",
+        "graphType": "batons",
+        "size": {
+          "width": 280,
+          "height": 190
+        },
+        "data": [
+          {
+            "label": "0 but",
+            "value": 2
+          },
+          {
+            "label": "1 but",
+            "value": 4
+          },
+          {
+            "label": "2 buts",
+            "value": 6
+          },
+          {
+            "label": "3 buts",
+            "value": 1
+          }
+        ],
+        "display": {
+          "showLabels": true,
+          "showValues": false,
+          "showAxis": true,
+          "step": 2,
+          "axeY": "matchs",
+          "highlightIndex": 2
+        }
+      }
+    },
+    {
+      "regle": "Fréquence = effectif ÷ effectif total (en fraction, en décimal ou en %).",
+      "exemple": "12 élèves sur 30 viennent en bus : f = 12/30 = 0,4 = 40 %.",
+      "piege": "Diviser par le mauvais total : 12 ÷ 18 (les autres) au lieu de 12 ÷ 30."
+    },
+    {
+      "regle": "Moyenne = somme des valeurs ÷ nombre de valeurs.",
+      "exemple": "Notes 12, 15, 9, 16 : (12 + 15 + 9 + 16) ÷ 4 = 52 ÷ 4 = 13.",
+      "piege": "Notes 10 (3 fois) et 16 (1 fois) : (30 + 16) ÷ 4 = 11,5, pas (10 + 16) ÷ 2 = 13."
+    },
+    {
+      "regle": "On range les valeurs dans l’ordre ; la médiane partage la série en deux moitiés.",
+      "exemple": "Trajets 7, 3, 9, 4, 12 min → 3, 4, 7, 9, 12 : médiane = 7 min.",
+      "piege": "Prendre le milieu sans ranger : dans 7, 3, 9, 4, 12, le 9 n’est pas la médiane."
+    },
+    {
+      "regle": "Étendue = plus grande valeur − plus petite valeur.",
+      "exemple": "Températures 18 °C, 25 °C, 21 °C, 14 °C : 25 − 14 = 11 °C.",
+      "piege": "Faire dernière − première sans chercher : 14 − 18 n’est pas l’étendue."
+    },
+    {
+      "regle": "Moyenne et médiane donnent le niveau ; l’étendue dit si la série est dispersée.",
+      "exemple": "Salaire médian 1 500 € : au moins la moitié gagne 1 500 € ou moins.",
+      "piege": "Valeur extrême : 2, 3, 4, 31 → moyenne 10 mais médiane 3,5 ; la moyenne trompe."
+    },
+    {
+      "regle": "Défi : moyenne connue → somme totale = moyenne × nombre de valeurs.",
+      "exemple": "Moyenne 12 sur 3 notes, déjà 10 et 11 : 3e note = 36 − 21 = 15.",
+      "piege": "Faire 12 × 2 = 24 : il y a 3 notes, donc 12 × 3 = 36."
+    }
+  ],
+  "3e/stat_classes": [
+    {
+      "regle": "On découpe en intervalles de même amplitude, puis on compte les valeurs de chacun.",
+      "exemple": "Tailles 152, 158, 161, 167, 169 cm : [150 ; 160[ → 2, [160 ; 170[ → 3.",
+      "piege": "160 va dans [160 ; 170[, pas dans [150 ; 160[ : le crochet ouvert l’exclut."
+    },
+    {
+      "regle": "Classe modale : le plus grand effectif. Centre : (borne basse + borne haute) ÷ 2.",
+      "exemple": "[10 ; 20[ : 4, [20 ; 30[ : 9 → modale [20 ; 30[, centre (20 + 30) ÷ 2 = 25.",
+      "piege": "La classe modale est la classe [20 ; 30[, pas son effectif 9."
+    },
+    {
+      "regle": "On remplace chaque classe par son centre, puis on fait la moyenne avec les effectifs.",
+      "exemple": "Trajets [0 ; 10[ min : 2, [10 ; 20[ : 3 → (5 × 2 + 15 × 3) ÷ 5 = 11 min.",
+      "piege": "Prendre les bornes (0, 10) au lieu des centres (5, 15) fausse la moyenne."
+    },
+    {
+      "regle": "Effectif cumulé = somme des effectifs jusqu’à cette classe ; point à la borne haute.",
+      "exemple": "[0 ; 5[ : 3, [5 ; 10[ : 5, [10 ; 15[ : 2 → cumulés 3, 8, 10.",
+      "piege": "Placer le cumul 8 au centre 7,5 : il va à la borne haute 10.",
+      "figure": {
+        "kind": "fonctionGraphique",
+        "size": {
+          "width": 250,
+          "height": 210
+        },
+        "grille": true,
+        "xmin": 0,
+        "xmax": 15,
+        "ymin": 0,
+        "ymax": 10,
+        "courbes": [
+          {
+            "id": "c",
+            "type": "points",
+            "couleur": "#2563eb",
+            "points": [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 5,
+                "y": 3
+              },
+              {
+                "x": 10,
+                "y": 8
+              },
+              {
+                "x": 15,
+                "y": 10
+              }
+            ]
+          }
+        ],
+        "misesEnEvidence": [
+          {
+            "verticale": {
+              "x": 10,
+              "couleur": "#dc2626"
+            },
+            "horizontale": {
+              "y": 8,
+              "couleur": "#dc2626"
+            },
+            "point": {
+              "x": 10,
+              "y": 8,
+              "couleur": "#dc2626"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "3e/proba_experience": [
+    {
+      "regle": "Expérience aléatoire : on connaît les issues possibles, pas le résultat à l’avance.",
+      "exemple": "Lancer un dé : 6 issues (1 à 6) ; « obtenir un nombre pair » est un événement.",
+      "piege": "Confondre issue et événement : « pair » regroupe 3 issues : 2, 4 et 6."
+    },
+    {
+      "regle": "On liste TOUTES les issues possibles, sans en oublier ni en répéter.",
+      "exemple": "Lancer 2 pièces : PP, PF, FP, FF → 4 issues.",
+      "piege": "PF et FP sont deux issues différentes : il y en a 4, pas 3."
+    },
+    {
+      "regle": "Équiprobable : toutes les issues ont la même chance (dé équilibré, tirage au hasard).",
+      "exemple": "Dé équilibré : chaque face a la probabilité 1/6.",
+      "piege": "Somme de 2 dés : 7 (6 façons) est plus probable que 2 (1 seule façon)."
+    },
+    {
+      "regle": "Un événement est une phrase ; on écrit les issues qui le réalisent.",
+      "exemple": "Dé : A « obtenir au moins 5 » = {5 ; 6}.",
+      "piege": "« Au moins 5 » contient le 5 : A = {5 ; 6}, pas seulement {6}."
+    },
+    {
+      "regle": "Si équiprobable : p = nombre d’issues favorables ÷ nombre total d’issues.",
+      "exemple": "Sac de 3 billes rouges et 5 bleues : p(rouge) = 3/8.",
+      "piege": "Écrire 3/5 (rouges ÷ bleues) : on divise par le total, 8.",
+      "figure": {
+        "kind": "probabilites",
+        "variant": "billes",
+        "billes": {
+          "elements": [
+            {
+              "label": "R",
+              "couleur": "#ef4444"
+            },
+            {
+              "label": "R",
+              "couleur": "#ef4444"
+            },
+            {
+              "label": "R",
+              "couleur": "#ef4444"
+            },
+            {
+              "label": "B",
+              "couleur": "#3b82f6"
+            },
+            {
+              "label": "B",
+              "couleur": "#3b82f6"
+            },
+            {
+              "label": "B",
+              "couleur": "#3b82f6"
+            },
+            {
+              "label": "B",
+              "couleur": "#3b82f6"
+            },
+            {
+              "label": "B",
+              "couleur": "#3b82f6"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "regle": "p(non A) = 1 − p(A).",
+      "exemple": "Pluie demain : p = 0,3, donc p(pas de pluie) = 1 − 0,3 = 0,7.",
+      "piege": "Le contraire de « obtenir 6 » est « 1, 2, 3, 4 ou 5 », pas « obtenir 1 »."
+    },
+    {
+      "regle": "On fait un arbre ou un tableau, puis on compte les issues favorables parmi toutes.",
+      "exemple": "Pièce puis dé : 2 × 6 = 12 issues ; p(pile et 6) = 1/12.",
+      "piege": "Additionner 1/2 + 1/6 est faux : p(pile et 6) = 1/12."
+    },
+    {
+      "regle": "Défi : nommer chaque bille (R1, R2…) pour lister toutes les issues.",
+      "exemple": "2 rouges R1, R2 et 1 bleue B, on en tire 2 : R1R2, R1B, R2B ; p(2 rouges) = 1/3.",
+      "piege": "Dire « 2 rouges sur 3 billes », donc 2/3 : il faut compter les paires."
+    }
+  ],
+  "3e/algo_programmation": [
+    {
+      "regle": "« et » : les deux conditions vraies ; « ou » : au moins une ; « non » : l’inverse.",
+      "exemple": "Manège : « si âge ⩾ 12 et taille ⩾ 140 » ; 13 ans, 135 cm → faux, refusé.",
+      "piege": "Avec « ou », 13 ans et 135 cm donnerait vrai : « et » ≠ « ou ».",
+      "figure": {
+        "kind": "scratch",
+        "blocks": [
+          {
+            "type": "if",
+            "condition": "âge ⩾ 12 et taille ⩾ 140",
+            "children": [
+              {
+                "type": "say",
+                "text": "« Monte ! »"
+              }
+            ]
+          }
+        ],
+        "display": {
+          "compact": true
+        }
+      }
+    },
+    {
+      "regle": "Une variable garde une valeur ; « répéter n fois » refait le bloc n fois.",
+      "exemple": "score = 0, « répéter 4 fois » « ajouter 5 à score » → score = 20.",
+      "piege": "« mettre score à 0 » DANS la boucle : score finit à 5, pas 20.",
+      "figure": {
+        "kind": "scratch",
+        "blocks": [
+          {
+            "type": "set_variable",
+            "variable": "score",
+            "value": 0
+          },
+          {
+            "type": "repeat",
+            "times": 4,
+            "children": [
+              {
+                "type": "change_variable",
+                "variable": "score",
+                "value": 5
+              }
+            ]
+          }
+        ],
+        "display": {
+          "compact": true
+        }
+      }
+    },
+    {
+      "regle": "On applique les étapes dans l’ordre ; avec x, on obtient une expression.",
+      "exemple": "Choisir 3, × 2, + 5, × 3 → 33 ; avec x : (2x + 5) × 3 = 6x + 15.",
+      "piege": "Oublier les parenthèses : 2x + 5 × 3 = 2x + 15 ≠ 6x + 15."
+    },
+    {
+      "regle": "On teste avec une valeur simple et on suit chaque bloc pour trouver l’erreur.",
+      "exemple": "Aire du carré : « dire côté × 2 » donne 10 pour 5 ; on corrige : côté × côté = 25.",
+      "piege": "Confondre côté × 2 et côté^2 : pour 5, 10 ≠ 25."
+    },
+    {
+      "regle": "On remplace le nombre qui change par une variable : le programme marche pour tous.",
+      "exemple": "Cinéma, n places à 8 € : prix = 8 × n ; pour n = 7, prix = 56 €.",
+      "piege": "Écrire « prix = 8 × 7 » : le programme ne marche que pour 7 places."
+    },
+    {
+      "regle": "Défi : faire un tableau des valeurs de la variable, tour par tour.",
+      "exemple": "n = 1, « répéter jusqu’à n > 20 » « mettre n à n × 2 » : 2, 4, 8, 16, 32 → 32.",
+      "piege": "S’arrêter à 16 : la boucle continue, car 16 > 20 est faux."
+    }
+  ],
+  "3e/aire_solides": [
+    {
+      "regle": "Aire latérale = périmètre de la base × hauteur ; aire totale = latérale + 2 bases.",
+      "exemple": "Base triangle rectangle 3, 4, 5 cm (6 cm²), h = 10 cm : 12 × 10 + 2 × 6 = 132 cm².",
+      "piege": "L’aire totale compte les 2 bases : 120 + 6 = 126 cm² est faux, c’est 132 cm².",
+      "figure": {
+        "kind": "construction",
+        "largeur": 240,
+        "hauteurMax": 240,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 7,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 12,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "E",
+            "x": 12,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "F",
+            "x": 7,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "G",
+            "x": 3,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "H",
+            "x": 0,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "T1",
+            "x": 3,
+            "y": 13,
+            "cache": true
+          },
+          {
+            "id": "T2",
+            "x": 3,
+            "y": -3,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "D",
+              "E",
+              "H"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "#2563eb"
+          },
+          {
+            "sommets": [
+              "G",
+              "F",
+              "T1"
+            ],
+            "fond": "rgba(234, 88, 12, 0.14)",
+            "contour": "#ea580c"
+          },
+          {
+            "sommets": [
+              "B",
+              "C",
+              "T2"
+            ],
+            "fond": "rgba(234, 88, 12, 0.14)",
+            "contour": "#ea580c"
+          }
+        ],
+        "segments": [
+          {
+            "a": "B",
+            "b": "G",
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "C",
+            "b": "F",
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "H",
+            "b": "G",
+            "sansTrait": true,
+            "texte": "3 cm"
+          },
+          {
+            "a": "G",
+            "b": "F",
+            "sansTrait": true,
+            "texte": "4 cm"
+          },
+          {
+            "a": "F",
+            "b": "E",
+            "sansTrait": true,
+            "texte": "5 cm"
+          },
+          {
+            "a": "A",
+            "b": "H",
+            "sansTrait": true,
+            "texte": "10 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Aire latérale = 2 × π × r × h ; aire totale = latérale + 2 × π × r^2.",
+      "exemple": "r = 5 cm, h = 10 cm : 2 × π × 5 × 10 ≈ 314,2 cm² ; totale ≈ 471,2 cm².",
+      "piege": "Rectangle du patron : longueur 2 × π × 5 ≈ 31,4 cm, pas 5 cm.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 270,
+        "hauteurMax": 230,
+        "points": [
+          {
+            "id": "A",
+            "x": 0,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "B",
+            "x": 31.42,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "C",
+            "x": 31.42,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "D",
+            "x": 0,
+            "y": 10,
+            "cache": true
+          },
+          {
+            "id": "O1",
+            "x": 5,
+            "y": 15,
+            "cache": true
+          },
+          {
+            "id": "O2",
+            "x": 26.42,
+            "y": -5,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "#2563eb"
+          }
+        ],
+        "cercles": [
+          {
+            "centre": "O1",
+            "rayon": 5,
+            "couleur": "#2563eb",
+            "fond": "rgba(37, 99, 235, 0.08)"
+          },
+          {
+            "centre": "O2",
+            "rayon": 5,
+            "couleur": "#2563eb",
+            "fond": "rgba(37, 99, 235, 0.08)"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "sansTrait": true,
+            "texte": "≈ 31,4 cm"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "sansTrait": true,
+            "texte": "10 cm"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Pyramide : somme des aires des faces. Cône : aire latérale = π × r × génératrice.",
+      "exemple": "Cône r = 3 cm, génératrice 5 cm : π × 3 × 5 ≈ 47,1 cm² ; avec la base ≈ 75,4 cm².",
+      "piege": "On prend la génératrice (5 cm), pas la hauteur (4 cm) : π × 3 × 4 est faux.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 230,
+        "hauteurMax": 175,
+        "points": [
+          {
+            "id": "S",
+            "x": 0,
+            "y": 4,
+            "nom": "S"
+          },
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "A",
+            "x": 3,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "L",
+            "x": -3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "e0",
+            "x": 3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "e1",
+            "x": 2.94,
+            "y": 0.08,
+            "cache": true
+          },
+          {
+            "id": "e2",
+            "x": 2.77,
+            "y": 0.15,
+            "cache": true
+          },
+          {
+            "id": "e3",
+            "x": 2.49,
+            "y": 0.22,
+            "cache": true
+          },
+          {
+            "id": "e4",
+            "x": 2.12,
+            "y": 0.28,
+            "cache": true
+          },
+          {
+            "id": "e5",
+            "x": 1.67,
+            "y": 0.33,
+            "cache": true
+          },
+          {
+            "id": "e6",
+            "x": 1.15,
+            "y": 0.37,
+            "cache": true
+          },
+          {
+            "id": "e7",
+            "x": 0.59,
+            "y": 0.39,
+            "cache": true
+          },
+          {
+            "id": "e8",
+            "x": 0,
+            "y": 0.4,
+            "cache": true
+          },
+          {
+            "id": "e9",
+            "x": -0.59,
+            "y": 0.39,
+            "cache": true
+          },
+          {
+            "id": "e10",
+            "x": -1.15,
+            "y": 0.37,
+            "cache": true
+          },
+          {
+            "id": "e11",
+            "x": -1.67,
+            "y": 0.33,
+            "cache": true
+          },
+          {
+            "id": "e12",
+            "x": -2.12,
+            "y": 0.28,
+            "cache": true
+          },
+          {
+            "id": "e13",
+            "x": -2.49,
+            "y": 0.22,
+            "cache": true
+          },
+          {
+            "id": "e14",
+            "x": -2.77,
+            "y": 0.15,
+            "cache": true
+          },
+          {
+            "id": "e15",
+            "x": -2.94,
+            "y": 0.08,
+            "cache": true
+          },
+          {
+            "id": "e16",
+            "x": -3,
+            "y": 0,
+            "cache": true
+          },
+          {
+            "id": "e17",
+            "x": -2.94,
+            "y": -0.08,
+            "cache": true
+          },
+          {
+            "id": "e18",
+            "x": -2.77,
+            "y": -0.15,
+            "cache": true
+          },
+          {
+            "id": "e19",
+            "x": -2.49,
+            "y": -0.22,
+            "cache": true
+          },
+          {
+            "id": "e20",
+            "x": -2.12,
+            "y": -0.28,
+            "cache": true
+          },
+          {
+            "id": "e21",
+            "x": -1.67,
+            "y": -0.33,
+            "cache": true
+          },
+          {
+            "id": "e22",
+            "x": -1.15,
+            "y": -0.37,
+            "cache": true
+          },
+          {
+            "id": "e23",
+            "x": -0.59,
+            "y": -0.39,
+            "cache": true
+          },
+          {
+            "id": "e24",
+            "x": 0,
+            "y": -0.4,
+            "cache": true
+          },
+          {
+            "id": "e25",
+            "x": 0.59,
+            "y": -0.39,
+            "cache": true
+          },
+          {
+            "id": "e26",
+            "x": 1.15,
+            "y": -0.37,
+            "cache": true
+          },
+          {
+            "id": "e27",
+            "x": 1.67,
+            "y": -0.33,
+            "cache": true
+          },
+          {
+            "id": "e28",
+            "x": 2.12,
+            "y": -0.28,
+            "cache": true
+          },
+          {
+            "id": "e29",
+            "x": 2.49,
+            "y": -0.22,
+            "cache": true
+          },
+          {
+            "id": "e30",
+            "x": 2.77,
+            "y": -0.15,
+            "cache": true
+          },
+          {
+            "id": "e31",
+            "x": 2.94,
+            "y": -0.08,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "S",
+              "e16",
+              "e17",
+              "e18",
+              "e19",
+              "e20",
+              "e21",
+              "e22",
+              "e23",
+              "e24",
+              "e25",
+              "e26",
+              "e27",
+              "e28",
+              "e29",
+              "e30",
+              "e31",
+              "e0"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)",
+            "contour": "none"
+          },
+          {
+            "sommets": [
+              "S",
+              "O",
+              "A"
+            ],
+            "fond": "rgba(234, 88, 12, 0.16)",
+            "contour": "none"
+          }
+        ],
+        "segments": [
+          {
+            "a": "e0",
+            "b": "e1",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e1",
+            "b": "e2",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e2",
+            "b": "e3",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e3",
+            "b": "e4",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e4",
+            "b": "e5",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e5",
+            "b": "e6",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e6",
+            "b": "e7",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e7",
+            "b": "e8",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e8",
+            "b": "e9",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e9",
+            "b": "e10",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e10",
+            "b": "e11",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e11",
+            "b": "e12",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e12",
+            "b": "e13",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e13",
+            "b": "e14",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e14",
+            "b": "e15",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e15",
+            "b": "e16",
+            "pointille": true,
+            "couleur": "#94a3b8"
+          },
+          {
+            "a": "e16",
+            "b": "e17",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e17",
+            "b": "e18",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e18",
+            "b": "e19",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e19",
+            "b": "e20",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e20",
+            "b": "e21",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e21",
+            "b": "e22",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e22",
+            "b": "e23",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e23",
+            "b": "e24",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e24",
+            "b": "e25",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e25",
+            "b": "e26",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e26",
+            "b": "e27",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e27",
+            "b": "e28",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e28",
+            "b": "e29",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e29",
+            "b": "e30",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e30",
+            "b": "e31",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "e31",
+            "b": "e0",
+            "couleur": "#0f172a"
+          },
+          {
+            "a": "S",
+            "b": "L"
+          },
+          {
+            "a": "S",
+            "b": "A",
+            "texte": "5 cm",
+            "couleur": "#ea580c",
+            "epais": true
+          },
+          {
+            "a": "S",
+            "b": "O",
+            "texte": "4 cm",
+            "couleur": "#ea580c",
+            "epais": true
+          },
+          {
+            "a": "O",
+            "b": "A",
+            "texte": "3 cm",
+            "couleur": "#ea580c",
+            "epais": true
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "O",
+            "de": "A",
+            "vers": "S",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Aire de la sphère = 4 × π × r^2.",
+      "exemple": "Ballon de rayon 11 cm : 4 × π × 11^2 ≈ 1 520,5 cm².",
+      "piege": "Aire : r^2 et des cm² ; 4 × π × 11^3 ÷ 3 est le volume, en cm³."
+    }
+  ],
+  "3e/angles_cercle": [
+    {
+      "regle": "L’angle au centre vaut le double de l’angle inscrit qui intercepte le même arc.",
+      "exemple": "L’angle inscrit AMB vaut 35°, donc l’angle au centre AOB vaut 2 × 35° = 70°.",
+      "piege": "Écrire l’angle AOB = 17,5° : c’est le double (70°), pas la moitié.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 220,
+        "hauteurMax": 220,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "A",
+            "x": -5.74,
+            "y": -8.19,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 5.74,
+            "y": -8.19,
+            "nom": "B"
+          },
+          {
+            "id": "M",
+            "x": 0,
+            "y": 10,
+            "nom": "M"
+          }
+        ],
+        "cercles": [
+          {
+            "centre": "O",
+            "rayon": 10,
+            "couleur": "#94a3b8"
+          }
+        ],
+        "segments": [
+          {
+            "a": "M",
+            "b": "A",
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "M",
+            "b": "B",
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "O",
+            "b": "A",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "O",
+            "b": "B",
+            "couleur": "#ea580c"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "M",
+            "de": "A",
+            "vers": "B",
+            "texte": "35°",
+            "couleur": "#2563eb",
+            "rayon": 30
+          },
+          {
+            "sommet": "O",
+            "de": "A",
+            "vers": "B",
+            "texte": "?",
+            "couleur": "#ea580c"
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Deux angles inscrits qui interceptent le même arc sont égaux.",
+      "exemple": "M et N sur le cercle, même arc AB : l’angle AMB = 40°, donc l’angle ANB = 40°.",
+      "piege": "M et N doivent être du même côté de [AB], sinon les angles diffèrent.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 220,
+        "hauteurMax": 220,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O",
+            "cache": true
+          },
+          {
+            "id": "A",
+            "x": -6.43,
+            "y": -7.66,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 6.43,
+            "y": -7.66,
+            "nom": "B"
+          },
+          {
+            "id": "M",
+            "x": 5.74,
+            "y": 8.19,
+            "nom": "M"
+          },
+          {
+            "id": "N",
+            "x": -7.07,
+            "y": 7.07,
+            "nom": "N"
+          }
+        ],
+        "cercles": [
+          {
+            "centre": "O",
+            "rayon": 10,
+            "couleur": "#94a3b8"
+          }
+        ],
+        "segments": [
+          {
+            "a": "M",
+            "b": "A",
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "M",
+            "b": "B",
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "N",
+            "b": "A",
+            "couleur": "#ea580c"
+          },
+          {
+            "a": "N",
+            "b": "B",
+            "couleur": "#ea580c"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "M",
+            "de": "A",
+            "vers": "B",
+            "texte": "40°",
+            "couleur": "#2563eb",
+            "rayon": 30
+          },
+          {
+            "sommet": "N",
+            "de": "A",
+            "vers": "B",
+            "texte": "40°",
+            "couleur": "#ea580c",
+            "rayon": 30
+          }
+        ]
+      }
+    },
+    {
+      "regle": "Si [AB] est un diamètre et M sur le cercle, alors AMB est rectangle en M.",
+      "exemple": "Diamètre AB = 10 cm, AM = 6 cm : MB^2 = 100 − 36 = 64, donc MB = 8 cm.",
+      "piege": "L’angle droit est en M, pas en A ni en B : [AB] est l’hypoténuse.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 240,
+        "hauteurMax": 200,
+        "points": [
+          {
+            "id": "O",
+            "x": 0,
+            "y": 0,
+            "nom": "O"
+          },
+          {
+            "id": "A",
+            "x": -5,
+            "y": 0,
+            "nom": "A"
+          },
+          {
+            "id": "B",
+            "x": 5,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "M",
+            "x": -1.4,
+            "y": 4.8,
+            "nom": "M"
+          }
+        ],
+        "cercles": [
+          {
+            "centre": "O",
+            "rayon": 5,
+            "couleur": "#94a3b8"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "texte": "10 cm"
+          },
+          {
+            "a": "A",
+            "b": "M",
+            "texte": "6 cm",
+            "couleur": "#2563eb"
+          },
+          {
+            "a": "M",
+            "b": "B",
+            "texte": "?",
+            "couleur": "#2563eb"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "M",
+            "de": "A",
+            "vers": "B",
+            "droit": true
+          }
+        ]
+      }
+    }
+  ],
+  "3e/relations_metriques": [
+    {
+      "regle": "ABC rectangle en A, H pied de la hauteur : AH × BC = AB × AC (deux fois l’aire).",
+      "exemple": "AB = 3 cm, AC = 4 cm, BC = 5 cm : AH × 5 = 12, donc AH = 12 ÷ 5 = 2,4 cm.",
+      "piege": "AH = 3 × 4 = 12 cm est faux : il faut encore diviser par BC = 5.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 260,
+        "hauteurMax": 170,
+        "points": [
+          {
+            "id": "B",
+            "x": 0,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 5,
+            "y": 0,
+            "nom": "C"
+          },
+          {
+            "id": "A",
+            "x": 1.8,
+            "y": 2.4,
+            "nom": "A"
+          },
+          {
+            "id": "H",
+            "x": 1.8,
+            "y": 0,
+            "nom": "H"
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B",
+            "texte": "3 cm"
+          },
+          {
+            "a": "A",
+            "b": "C",
+            "texte": "4 cm"
+          },
+          {
+            "a": "B",
+            "b": "C",
+            "texte": "5 cm"
+          },
+          {
+            "a": "A",
+            "b": "H",
+            "texte": "?",
+            "pointille": true,
+            "couleur": "#dc2626"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "C",
+            "vers": "B",
+            "droit": true
+          },
+          {
+            "sommet": "H",
+            "de": "C",
+            "vers": "A",
+            "droit": true
+          }
+        ]
+      }
+    },
+    {
+      "regle": "H pied de la hauteur issue de A : AH^2 = HB × HC et AB^2 = BH × BC.",
+      "exemple": "BH = 1,8 cm, HC = 3,2 cm : AH^2 = 1,8 × 3,2 = 5,76, donc AH = 2,4 cm.",
+      "piege": "AB^2 = BH × BC, pas BH × HC : on prend le grand côté BC en entier.",
+      "figure": {
+        "kind": "construction",
+        "largeur": 260,
+        "hauteurMax": 170,
+        "points": [
+          {
+            "id": "B",
+            "x": 0,
+            "y": 0,
+            "nom": "B"
+          },
+          {
+            "id": "C",
+            "x": 5,
+            "y": 0,
+            "nom": "C"
+          },
+          {
+            "id": "A",
+            "x": 1.8,
+            "y": 2.4,
+            "nom": "A"
+          },
+          {
+            "id": "H",
+            "x": 1.8,
+            "y": 0,
+            "nom": "H"
+          },
+          {
+            "id": "z1",
+            "x": 0,
+            "y": -0.7,
+            "cache": true
+          },
+          {
+            "id": "z2",
+            "x": 5,
+            "y": -0.7,
+            "cache": true
+          }
+        ],
+        "polygones": [
+          {
+            "sommets": [
+              "A",
+              "B",
+              "C"
+            ],
+            "fond": "rgba(37, 99, 235, 0.08)"
+          }
+        ],
+        "segments": [
+          {
+            "a": "A",
+            "b": "B"
+          },
+          {
+            "a": "A",
+            "b": "C"
+          },
+          {
+            "a": "B",
+            "b": "H",
+            "texte": "1,8 cm"
+          },
+          {
+            "a": "H",
+            "b": "C",
+            "texte": "3,2 cm"
+          },
+          {
+            "a": "A",
+            "b": "H",
+            "texte": "?",
+            "pointille": true,
+            "couleur": "#dc2626"
+          }
+        ],
+        "angles": [
+          {
+            "sommet": "A",
+            "de": "C",
+            "vers": "B",
+            "droit": true
+          },
+          {
+            "sommet": "H",
+            "de": "C",
+            "vers": "A",
+            "droit": true
+          }
+        ]
+      }
+    }
+  ]
+}
