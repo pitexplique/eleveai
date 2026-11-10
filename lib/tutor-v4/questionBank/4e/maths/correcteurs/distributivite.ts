@@ -126,9 +126,11 @@ function cReconnaitreQcm(q: Q): string[] {
   const t = texteLisible(q.text);
   const c = q.choices ?? [];
   if (c.some((x) => !poly(x))) return ["proposition illisible"];
-  // la liste écrite dans l'énoncé est celle des propositions
+  // Depuis le 10/11/2026, l'énoncé ne recopie plus la liste (les choix la montrent) ;
+  // si une liste y figure encore, elle doit être celle des propositions.
   const liste = t.match(/(?:: |Parmi )(.+?)(?:\. Laquelle|\. Pour laquelle|, (?:quelle|laquelle|une seule)| \?)/)?.[1]?.split(" ; ") ?? [];
-  if (liste.length !== c.length || liste.some((x) => !c.includes(x.trim()))) return [`la liste de l'énoncé (${liste.join(" ; ")}) n'est pas celle des propositions`];
+  if (/ ; /.test(t) && (liste.length !== c.length || liste.some((x) => !c.includes(x.trim())))) return [`la liste de l'énoncé (${liste.join(" ; ")}) n'est pas celle des propositions`];
+  if (c.length < 3) return ["moins de trois propositions"];
   let juste: (x: string) => boolean;
   if (/double distributivité|quatre produits|produit de deux parenthèses/.test(t)) juste = doubleParenthese;
   else if (/déjà développée|n’a plus rien à développer|forme développée|une somme, sans parenthèse/.test(t)) juste = developpee;

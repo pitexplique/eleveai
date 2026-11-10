@@ -296,7 +296,7 @@ const TOURNURES_SIMPLE: Array<(t: string, q: string, l: string, k: number, b: nu
   (t, q, l) => `${t} Exprime ${q} en fonction de ${l}, sous forme développée.`,
   (t, q) => `${t} Écris ${q} sans parenthèses.`,
   (t, q) => `${t} Quelle expression développée donne ${q} ?`,
-  (t, q, l, k, b) => `${t} Montre que ${q} vaut ${k}(${l} + ${b}), puis développe cette expression.`,
+  (t, q, l, k, b) => `${t} Développe ${k}(${l} + ${b}) pour obtenir ${q}.`,
   (t, q) => `${t} Donne ${q} sous la forme d’une somme de deux termes.`,
 ];
 
@@ -671,7 +671,7 @@ export const distributiviteBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "litteral_distributivite",
     microId: "litteral_distributivite_simple",
-    difficulty: 2,
+    difficulty: 3, // ⛔ 10/11/2026 : une situation, donc ★3 (collège : rien que le geste à ★1-★2)
     theme: "neutral",
     hint: "Le nombre de groupes multiplie ce qu’il y a dans chaque groupe.",
     tags: ["litteral_distributivite", "nature", "template"],
@@ -684,7 +684,7 @@ export const distributiviteBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "litteral_distributivite",
     microId: "litteral_distributivite_simple",
-    difficulty: 2,
+    difficulty: 3, // ⛔ 10/11/2026 : une situation, donc ★3 (collège : rien que le geste à ★1-★2)
     theme: "neutral",
     hint: "La même quantité est répétée plusieurs fois.",
     tags: ["litteral_distributivite", "maison", "template"],
@@ -697,7 +697,7 @@ export const distributiviteBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "litteral_distributivite",
     microId: "litteral_distributivite_simple",
-    difficulty: 2,
+    difficulty: 3, // ⛔ 10/11/2026 : une situation, donc ★3 (collège : rien que le geste à ★1-★2)
     theme: "neutral",
     hint: "Il y a plusieurs lots identiques.",
     tags: ["litteral_distributivite", "achat", "template"],
@@ -1304,12 +1304,13 @@ export const distributiviteBank: TutorBankItemV4[] = [
       const correct = formeProduitSimple(l);
       const autres = distinctes(3, () => formeSomme(l), [correct]);
       const choices = shuffle([correct, ...autres]);
-      const liste = choices.join(" ; ");
+      // ⛔ 10/11/2026 : la liste n'est plus recopiée dans l'énoncé (26 mots en moyenne à ★1) :
+      // les quatre expressions sont déjà les choix du QCM.
       const text = randomChoice([
-        `Voici quatre expressions : ${liste}. Laquelle faut-il développer ?`,
-        `Parmi ${liste}, quelle expression contient un produit à développer ?`,
-        `Une seule de ces expressions contient une parenthèse à distribuer : ${liste}. Laquelle ?`,
-        `Laquelle de ces expressions n’est pas encore développée : ${liste} ?`,
+        "Laquelle de ces expressions faut-il développer ?",
+        "Quelle expression contient un produit à développer ?",
+        "Une seule expression contient une parenthèse à distribuer. Laquelle ?",
+        "Laquelle de ces expressions n’est pas encore développée ?",
       ]);
       return {
         text,
@@ -1341,12 +1342,12 @@ export const distributiviteBank: TutorBankItemV4[] = [
       const correct = formeSomme(l);
       const autres = distinctes(3, () => (Math.random() < 0.6 ? formeProduitSimple(l) : formeProduitDouble(l)), [correct]);
       const choices = shuffle([correct, ...autres]);
-      const liste = choices.join(" ; ");
+      // ⛔ 10/11/2026 : la liste n'est plus recopiée dans l'énoncé (les choix la montrent).
       const text = randomChoice([
-        `Laquelle de ces expressions est déjà développée : ${liste} ?`,
-        `Parmi ${liste}, une seule n’a plus rien à développer. Laquelle ?`,
-        `Voici quatre expressions : ${liste}. Laquelle est écrite sous forme développée ?`,
-        `Quelle expression est une somme, sans parenthèse à distribuer : ${liste} ?`,
+        "Laquelle de ces expressions est déjà développée ?",
+        "Une seule expression n’a plus rien à développer. Laquelle ?",
+        "Laquelle de ces expressions est écrite sous forme développée ?",
+        "Quelle expression est une somme, sans parenthèse à distribuer ?",
       ]);
       return {
         text,
@@ -1845,12 +1846,12 @@ export const distributiviteBank: TutorBankItemV4[] = [
       const correct = formeProduitDouble(l);
       const autres = distinctes(3, () => (Math.random() < 0.5 ? formeProduitSimple(l) : formeSomme(l)), [correct]);
       const choices = shuffle([correct, ...autres]);
-      const liste = choices.join(" ; ");
+      // ⛔ 10/11/2026 : la liste n'est plus recopiée dans l'énoncé (les choix la montrent).
       const text = randomChoice([
-        `Quelle expression demande une double distributivité : ${liste} ?`,
-        `Parmi ${liste}, laquelle est un produit de deux parenthèses ?`,
-        `Voici quatre expressions : ${liste}. Pour laquelle faut-il effectuer quatre produits ?`,
-        `Laquelle de ces expressions se développe avec la double distributivité : ${liste} ?`,
+        "Quelle expression demande une double distributivité ?",
+        "Laquelle de ces expressions est un produit de deux parenthèses ?",
+        "Pour quelle expression faut-il effectuer quatre produits ?",
+        "Laquelle se développe avec la double distributivité ?",
       ]);
       return {
         text,
