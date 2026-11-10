@@ -1,0 +1,19 @@
+{
+  "00-garde": "La distributivité simple. Comment enlever une parenthèse sans rien oublier ?",
+  "01-menuisier": "Lucas est menuisier. Il fabrique 3 étagères identiques. Pour chaque étagère, il lui faut une planche de x décimètres, et une petite planche de 4 décimètres. Combien de bois en tout ?",
+  "02-paquets": "Première façon de compter : 3 paquets, et dans chaque paquet, x plus 4. Ça s'écrit 3 fois, entre parenthèses, x plus 4.",
+  "03-ranger": "Deuxième façon : Lucas range ses planches par taille. 3 grandes planches de x : 3 x. 3 petites planches de 4 : 12. En tout, 3 x plus 12.",
+  "04-egalite": "C'est le même bois, compté de deux façons. Donc 3 fois, entre parenthèses, x plus 4, égale 3 x plus 12. Le 3 multiplie x, et il multiplie aussi le 4. Enlever la parenthèse ainsi, c'est développer : un produit devient une somme.",
+  "05-verifier": "Vérifions avec x égale 10. 3 fois 14 : 42. Et 3 fois 10 plus 12 : 42. C'est juste.",
+  "06-piege": "Le piège : écrire 3 x plus 4. Le 3 a oublié le 4 ! Lucas n'aurait qu'une seule petite planche, au lieu de 3. Il lui manquerait 8 décimètres de bois.",
+  "06q-question": "Question ! Que donne 5 fois, entre parenthèses, x plus 2 ? A : 5 x plus 2. B : x plus 10. C : 5 x plus 10. Mets pause, et choisis !",
+  "06r-reponse": "Réponse C : 5 x plus 10. Le 5 multiplie x, et il multiplie aussi le 2.",
+  "07-moins": "Avec un moins dans la parenthèse. Lucas a 4 planches de x décimètres. Il coupe 3 décimètres sur chacune. Il lui reste 4 fois, entre parenthèses, x moins 3. Le 4 multiplie x : 4 x. Le 4 multiplie 3 : 12. Résultat : 4 x moins 12. Le moins reste devant le 12.",
+  "08-negatif": "Et avec un nombre négatif devant la parenthèse ? Moins 2 fois, entre parenthèses, x moins 5. Moins 2 fois x : moins 2 x. Moins 2 fois moins 5 : plus 10. Résultat : moins 2 x plus 10. Le signe moins se distribue lui aussi, à chaque terme.",
+  "08q-question": "Question ! Que donne moins 3 fois, entre parenthèses, x plus 4 ? A : moins 3 x plus 12. B : moins 3 x moins 12. C : moins 3 x plus 4. Mets pause, et choisis !",
+  "08r-reponse": "Réponse B : moins 3 x moins 12. Moins 3 fois 4, c'est moins 12.",
+  "09-defi": "À toi de jouer. Développe 6 fois, entre parenthèses, 2 x moins 5. Mets pause, et cherche !",
+  "09b-correction": "Correction. Le 6 multiplie 2 x : 12 x. Le 6 multiplie 5 : 30, avec le moins devant. Résultat : 12 x moins 30.",
+  "10-finale": "Ce que tu as appris. Le nombre devant la parenthèse multiplie chaque terme. Il garde son signe, et les signes se multiplient. Développer, c'est transformer un produit en somme.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
