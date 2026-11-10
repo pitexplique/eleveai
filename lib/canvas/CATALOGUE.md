@@ -223,6 +223,8 @@ voisins.
 | `personnage` | **Le premier canvas qui ILLUSTRE** : un enfant de la troupe qui fait quelque chose, sa bulle de BD, et une consigne de coloriage. Rendu au trait noir fermé (mode `coloriage`) ou en couleurs (mode `couleur`) | Analyser une phrase (c'est `phrase`), démonter un verbe (c'est `conjugaison`), décorer une fiche de collège |
 | `objets` | **La bibliothèque** : 22 objets du quotidien, de la nature et des animaux, posés en grille, avec leur mot et le nombre d'exemplaires. Sert à NOMMER et à CLASSER | Une quantité à calculer (`schema_barre`, `fraction`), une figure géométrique |
 | `reglure` | **La réglure Seyès** : des lignes d'écriture aux millimètres du cahier, avec le modèle en cursive et sa reprise en pointillé. Le seul canvas qui ne montre rien — il se remplit | Montrer une lettre isolée, mesurer une longueur (`schema_barre`) |
+| `monnaie` | **Pièces et billets en euros**, dessinés (pas de photo) : 1 c → 2 € et 5 € → 100 €, rangés en lignes, un exemplaire par dessin pour compter du doigt ; plusieurs porte-monnaie nommés à comparer | Une somme écrite (le dessin n'additionne JAMAIS), un prix seul sans pièces |
+| `base_dix` | **Le matériel de numération** : plaques de cent, barres de dix (10 carreaux visibles), cubes unités, cubes de mille ; la règle d'échange ; variante **cadres de dix** (jetons, CP) | Un nombre écrit en chiffres (c'est l'énoncé), un tableau de numération |
 
 C'est à la grammaire ce que `number_line` est aux nombres : **un seul objet, dessiné
 toujours pareil, sur lequel toutes les notions viennent se poser**. Avant d'en écrire un
@@ -370,6 +372,61 @@ en formes FERMÉES : un trait épais est un trait noir, et on ne colorie pas un
 trait.
 
 ---
+
+### `monnaie` — pièces et billets en euros (10/11/2026)
+
+Construit pour le coach CP-CE2 : compter une somme, payer, rendre, comparer.
+
+```json
+{ "kind": "monnaie", "elements": [ { "valeur": "10e" }, { "valeur": "2e", "nombre": 3 }, { "valeur": "50c", "marque": true } ] }
+```
+
+| Champ | |
+|---|---|
+| `elements` | `{ valeur, nombre?, marque?, cache? }` — `valeur` : `1c` `2c` `5c` `10c` `20c` `50c` `1e` `2e` `5e` `10e` `20e` `50e` `100e` |
+| `nombre` | exemplaires dessinés UN PAR UN (1 à 10) ; 24 dessins au plus en tout |
+| `marque` | entouré en pointillés (la pièce désignée) |
+| `cache` | la valeur remplacée par « ? » (la pièce qui manque) |
+| `groupes` | `[{ nom: "Lou", elements: […] }, { nom: "Téo", … }]` : un porte-monnaie par ligne, séparés d'un pointillé ; remplace `elements` |
+| `mode` | `couleur` (défaut) · `coloriage` |
+| `consigne`, `size.width` | 320 par défaut : lisible jusqu'à une carte de 280 px |
+
+⭐ **Les couleurs sont celles des vrais billets** (5 € gris, 10 € rouge, 20 € bleu,
+50 € orange, 100 € vert), avec l'arche ; les pièces gardent leur métal (cuivre,
+or, bimétal 1 € / 2 € inversés). ⭐ **La taille des pièces suit l'ordre RÉEL des
+diamètres** : 10 c est plus petite que 5 c. La taille ne dit pas la valeur.
+
+⛔ **Pièges.** Ne jamais écrire la somme dans `consigne` quand c'est la question.
+Euros entiers au CP-CE1, centimes au CE2 seulement. Au-delà de ~12 dessins, une
+carte de téléphone devient longue : préférer `nombre` modéré (3 lignes au plus
+à 280 px). L'ordre des `elements` est l'ordre de pose : trier du plus grand au
+plus petit aide le CP, mélanger entraîne le CE2.
+
+### `base_dix` — plaques, barres, cubes, cadres de dix (10/11/2026)
+
+```json
+{ "kind": "base_dix", "centaines": 2, "dizaines": 4, "unites": 7, "etiquettes": true }
+{ "kind": "base_dix", "variante": "cadres", "nombre": 5, "ajout": 3 }
+```
+
+| Champ | |
+|---|---|
+| `milliers` `centaines` `dizaines` `unites` | nombres d'objets (≤ 9, 12, 30, 30) ; 0 ou absent = groupe absent |
+| `etiquettes` | écrit « centaines », « dizaines », « unités » sous chaque groupe — jamais leur nombre |
+| `echange` | `unites` : encadré « 10 cubes = 1 barre » · `dizaines` : « 10 barres = 1 plaque » |
+| `variante: "cadres"` | des cadres de 2 × 5 cases, remplis ligne par ligne : `nombre` jetons rouges, `ajout` jetons bleus (« 5 + 3 »), `cadres` = nombre de cadres dessinés (pour « combien pour faire 10 ? ») |
+| `mode` | `couleur` (défaut) · `coloriage` (jetons `ajout` marqués d'un point) |
+
+⭐ **Le carreau se choisit seul** : le plus gros qui met tout sur une ligne (jusqu'à
+12 px sans plaque, au CP ; 8 px au plus avec plaques). Les plaques passent sur 2-3
+rangées pour laisser barres et cubes à côté. ⭐ **Rangées équilibrées** : 13 barres
+font 7 + 6, jamais 10 + 3 — une rangée de 10 barres soufflerait « 1 centaine ».
+Les cubes vont par rangées de 5, un petit écart toutes les 10.
+
+⛔ **Pièges.** Le dessin n'écrit JAMAIS le nombre : la question « quel nombre ? »
+reste entière. Pour « 14 unités = ? dizaines », poser `unites: 14` (pas de
+regroupement automatique). 9 plaques + barres + cubes à 280 px : les cubes
+passent seuls sur une deuxième ligne, c'est lisible mais haut (~300 px).
 
 ### `reglure` — la calligraphie, aux millimètres du cahier
 

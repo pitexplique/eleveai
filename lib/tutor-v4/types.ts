@@ -90,6 +90,10 @@ export type {
   ObjetId,
   ObjetsElement,
   ObjetsCanvasData,
+  MonnaieValeur,
+  MonnaieElement,
+  MonnaieCanvasData,
+  BaseDixCanvasData,
   ReglureCanvasData
 } from "./types_canvas";
 

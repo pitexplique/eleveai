@@ -26,6 +26,7 @@
 
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths/index";
 import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths/index";
+import { mathsCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/maths/index";
 import { mathsCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/maths/index";
 import { mathsCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/maths/index";
 import { mathsCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/maths/index";
@@ -42,6 +43,7 @@ import { mathsTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/termi
 const BANQUES: Record<string, any[]> = {
   "4e": maths4eQuestionBank,
   "3e": maths3eQuestionBank,
+  cp: mathsCpQuestionBank,
   ce1: mathsCe1QuestionBank,
   ce2: mathsCe2QuestionBank,
   cm1: mathsCm1QuestionBank,

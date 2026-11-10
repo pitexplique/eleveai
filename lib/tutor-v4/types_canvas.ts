@@ -1980,6 +1980,75 @@ export type ObjetsCanvasData = {
   size?: { width?: number; height?: number };
 };
 
+// ─── LA MONNAIE (cycle 2) ─────────────────────────────────────────────────────
+// Ajoutée le 10/11/2026 pour le coach CP-CE2 : compter une somme, payer, rendre.
+// Pièces et billets en euros DESSINÉS (aucune image de vrai billet) : la couleur
+// dominante est celle du vrai billet, la valeur est écrite en gros.
+// ⭐ La TAILLE des pièces suit l'ordre réel des diamètres : la pièce de 10 c est
+// plus PETITE que celle de 5 c. C'est voulu : la taille ne dit pas la valeur.
+// ⛔ PAS POUR : une somme écrite (le dessin ne l'additionne jamais), un prix seul.
+
+/** « c » = centimes, « e » = euros. */
+export type MonnaieValeur =
+  | "1c" | "2c" | "5c" | "10c" | "20c" | "50c"
+  | "1e" | "2e"
+  | "5e" | "10e" | "20e" | "50e" | "100e";
+
+export type MonnaieElement = {
+  valeur: MonnaieValeur;
+  /** Nombre d'exemplaires, dessinés UN PAR UN (pour compter). 1 par défaut, 10 au plus. */
+  nombre?: number;
+  /** Entouré en pointillés : ce qu'on désigne (la pièce à trouver, à rendre…). */
+  marque?: boolean;
+  /** La valeur remplacée par « ? » : la pièce ou le billet qui manque. */
+  cache?: boolean;
+};
+
+export type MonnaieCanvasData = {
+  kind: "monnaie";
+  /** Les pièces et billets, dans l'ordre où ils sont posés (rangés en lignes). */
+  elements?: MonnaieElement[];
+  /** Plusieurs porte-monnaie à comparer, chacun avec son nom (« Lou », « Téo »).
+   *  Si présent, remplace `elements`. */
+  groupes?: { nom?: string; elements: MonnaieElement[] }[];
+  /** `couleur` (défaut) ou `coloriage` (trait noir, valeurs écrites). */
+  mode?: "couleur" | "coloriage";
+  consigne?: string;
+  /** Largeur du dessin, 320 par défaut (lisible jusqu'à une carte de 280 px). */
+  size?: { width?: number };
+};
+
+// ─── LE MATÉRIEL DE NUMÉRATION (cycle 2) ──────────────────────────────────────
+// Ajouté le 10/11/2026 : plaques de cent (10 × 10), barres de dix, cubes unités,
+// et cubes de mille. Chaque barre montre ses 10 carreaux : on peut recompter.
+// Variante `cadres` (CP) : des boîtes de 10 cases (2 × 5) remplies de jetons.
+// ⛔ Le dessin n'écrit JAMAIS le nombre représenté (ce serait la réponse).
+
+export type BaseDixCanvasData = {
+  kind: "base_dix";
+  /** `materiel` (défaut) ou `cadres` (cadres de dix + jetons). */
+  variante?: "materiel" | "cadres";
+  milliers?: number;
+  centaines?: number;
+  dizaines?: number;
+  unites?: number;
+  /** Écrit « centaines », « dizaines », « unités » sous chaque groupe (pas les nombres). */
+  etiquettes?: boolean;
+  /** Montre la règle d'échange sous le matériel : « 10 cubes = 1 barre »
+   *  (`unites`) ou « 10 barres = 1 plaque » (`dizaines`). */
+  echange?: "unites" | "dizaines";
+  /** Variante `cadres` : le nombre de jetons rouges (0 à 100). */
+  nombre?: number;
+  /** Variante `cadres` : des jetons BLEUS ajoutés après les rouges (« 5 + 3 »). */
+  ajout?: number;
+  /** Variante `cadres` : le nombre de cadres dessinés (au moins ce qu'il faut). */
+  cadres?: number;
+  mode?: "couleur" | "coloriage";
+  consigne?: string;
+  /** Largeur du dessin, 320 par défaut. */
+  size?: { width?: number };
+};
+
 // ─── LA RÉGLURE SEYÈS ─────────────────────────────────────────────────────────
 // Ajoutée le 02/09/2026. Frédéric, en posant le format du cycle 2 : « avec
 // l'importance aussi de la calligraphie ».
@@ -2263,6 +2332,8 @@ export type CanvasFigure =
   | CercleTrigoCanvasData
   | ReglureCanvasData
   | ObjetsCanvasData
+  | MonnaieCanvasData
+  | BaseDixCanvasData
   | PersonnageCanvasData
   | ConjugaisonCanvasData
   | PhraseCanvasData

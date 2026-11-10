@@ -50,6 +50,8 @@ import PhraseCanvas from "./PhraseCanvas";
 import ConjugaisonCanvas from "./ConjugaisonCanvas";
 import PersonnageCanvas from "./PersonnageCanvas";
 import ObjetsCanvas from "./ObjetsCanvas";
+import MonnaieCanvas from "./MonnaieCanvas";
+import BaseDixCanvas from "./BaseDixCanvas";
 import ReglureCanvas from "./ReglureCanvas";
 
 
@@ -208,6 +210,14 @@ export default function CanvasRenderer({ figure }: Props) {
     // La bibliothèque d'objets : nommer, compter, classer.
     case "objets":
       return <ObjetsCanvas figure={figure} />;
+
+    // Les pièces et billets en euros (cycle 2) : compter, payer, rendre.
+    case "monnaie":
+      return <MonnaieCanvas figure={figure} />;
+
+    // Plaques, barres, cubes, cadres de dix (cycle 2) : la numération.
+    case "base_dix":
+      return <BaseDixCanvas figure={figure} />;
 
     // La réglure Seyès : le seul canvas qui ne montre rien — il se remplit.
     case "reglure":
