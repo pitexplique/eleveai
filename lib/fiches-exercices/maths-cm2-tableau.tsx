@@ -153,14 +153,14 @@ export const exercicesTableauCm2: FicheExercicesData = {
       exercices: [
         {
           enonce:
-            "Un petit cinéma compte ses spectateurs, un samedi.\na) Combien de spectateurs pour le film d'aventure, à 20 h ?\nb) Combien pour le documentaire, à 17 h ?\nc) Dans quelle case lis-tu 112 ?\nd) Lola dit : « 74 personnes ont vu l'aventure à 20 h. » A-t-elle raison ?",
+            "Un petit cinéma compte ses spectateurs, un samedi.\na) Combien de spectateurs pour le film d'aventure, à 20 h ?\nb) Combien pour le documentaire, à 17 h ?\nc) 112 est sur la ligne « animation ». Dans quelle colonne ?\nd) Lola dit : « 74 personnes ont vu l'aventure à 20 h. » A-t-elle raison ?",
           figure: grille(["film", "14 h", "17 h", "20 h"], [
             ["animation", "86", "112", "45"],
             ["aventure", "38", "74", "120"],
             ["documentaire", "27", "19", "33"],
           ]),
           correction:
-            "Une case est au croisement d'une ligne et d'une colonne.\na) Je pose le doigt sur la ligne « aventure ».\nJe glisse jusqu'à la colonne « 20 h » : je lis 120.\nb) Ligne « documentaire », colonne « 17 h » : je lis 19.\nc) Je cherche 112 dans tout le tableau.\nIl est sur la ligne « animation », dans la colonne « 17 h ».\nd) Non. 74, c'est l'aventure à 17 h.\nLola a lu la colonne d'à côté.\n⛔ Le piège : la bonne ligne, mais la mauvaise colonne. Je garde le doigt sur la ligne jusqu'au bout.\nRéponse : a) 120 ; b) 19 ; c) animation, 17 h ; d) non, c'est 120.",
+            "Une case est au croisement d'une ligne et d'une colonne.\na) Je pose le doigt sur la ligne « aventure ».\nJe glisse jusqu'à la colonne « 20 h » : je lis 120.\nb) Ligne « documentaire », colonne « 17 h » : je lis 19.\nc) Je cherche 112 dans tout le tableau.\nIl est sur la ligne « animation », dans la colonne « 17 h ».\nd) Non. 74, c'est l'aventure à 17 h.\nLola a lu la colonne d'à côté.\n⛔ Le piège : la bonne ligne, mais la mauvaise colonne. Je garde le doigt sur la ligne jusqu'au bout.\nRéponse : a) 120 ; b) 19 ; c) la colonne « 17 h » ; d) non, c'est 120.",
           schema: ecranSeulement(
             grille(["film", "14 h", "17 h", "20 h"], [
               ["animation", "86", "112", "45"],
@@ -168,6 +168,12 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["documentaire", "27", "19", "33"],
             ], { cases: [[1, 3], [0, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "120" },
+            { question: "b)", attendu: "19" },
+            { question: "c)", attendu: "17 h" },
+            { question: "d)", attendu: "non" },
+          ],
           micros: ["tableau_lire"],
         },
         {
@@ -189,13 +195,19 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["école", "7 h 28", "7 h 58", "8 h 28"],
             ], { cases: [[1, 2], [3, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["7h35", "7:35", "7h35min"], exact: true },
+            { question: "b)", attendu: ["8h28", "8:28", "8h28min"], exact: true },
+            { question: "c)", attendu: "2" },
+            { question: "d)", attendu: "oui" },
+          ],
           micros: ["tableau_lire", "tableau_interpreter"],
         },
         {
           enonce:
-            "La classe sème des graines, au soleil et à l'ombre. Une semaine plus tard, elle compte les graines qui ont germé.\nHaricots : 18 au soleil et 11 à l'ombre.\nLentilles : 23 au soleil et 16 à l'ombre.\nRadis : 9 à l'ombre et 20 au soleil.\na) Range ces nombres dans un tableau. Une ligne par graine, une colonne par endroit.\nb) Que veut dire le nombre 16 dans ton tableau ?",
+            "La classe sème des graines, au soleil et à l'ombre. Une semaine plus tard, elle compte les graines qui ont germé.\nHaricots : 18 au soleil et 11 à l'ombre.\nLentilles : 23 au soleil et 16 à l'ombre.\nRadis : 9 à l'ombre et 20 au soleil.\nTu ranges ces nombres dans un tableau. Une ligne par graine, une colonne par endroit.\na) Quel nombre écris-tu dans la case « radis, soleil » ?\nb) Et dans la case « radis, ombre » ?\nc) Que veut dire le nombre 16 dans ton tableau ?\nA : 16 lentilles ont germé au soleil.\nB : 16 haricots ont germé à l'ombre.\nC : 16 lentilles ont germé à l'ombre.",
           correction:
-            "a) Je trace trois lignes : haricot, lentille, radis.\nJe trace deux colonnes : soleil, ombre.\nHaricot : 18 dans « soleil », 11 dans « ombre ».\nLentille : 23 dans « soleil », 16 dans « ombre ».\nRadis : attention, l'ombre est donnée en premier.\nJ'écris 20 dans « soleil » et 9 dans « ombre ».\nb) 16 est sur la ligne « lentille », dans la colonne « ombre ».\n16 lentilles ont germé à l'ombre.\n⛔ Le piège : recopier les nombres dans l'ordre de la phrase. Je lis le mot à côté de chaque nombre.\nRéponse : b) 16 lentilles ont germé à l'ombre.",
+            "Je trace trois lignes : haricot, lentille, radis.\nJe trace deux colonnes : soleil, ombre.\nHaricot : 18 dans « soleil », 11 dans « ombre ».\nLentille : 23 dans « soleil », 16 dans « ombre ».\nRadis : attention, l'ombre est donnée en premier.\na) J'écris 20 dans « soleil ».\nb) J'écris 9 dans « ombre ».\nc) 16 est sur la ligne « lentille », dans la colonne « ombre ».\n16 lentilles ont germé à l'ombre : c'est la réponse C.\n⛔ Le piège : recopier les nombres dans l'ordre de la phrase. Je lis le mot à côté de chaque nombre.\nRéponse : a) 20 ; b) 9 ; c) C.",
           schema: ecranSeulement(
             grille(["graine", "soleil", "ombre"], [
               ["haricot", "18", "11"],
@@ -203,13 +215,18 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["radis", "20", "9"],
             ], { cases: [[2, 1], [2, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "20" },
+            { question: "b)", attendu: "9" },
+            { question: "c)", attendu: "C" },
+          ],
           micros: ["tableau_completer"],
         },
         {
           enonce:
-            "À la fête de l'école, une équipe joue à un quiz de culture. Il y a quatre manches.\nManche 1 : 14 points. Manche 3 : 19 points. Manche 4 : 17 points.\nLe score de la manche 2 est effacé. Le total des quatre manches est 68 points.\na) Combien de points en manche 2 ?\nb) Vérifie par une addition.\nc) Dans quelle manche l'équipe a-t-elle marqué le plus ?",
+            "À la fête de l'école, une équipe joue à un quiz de culture. Il y a quatre manches.\nManche 1 : 14 points. Manche 3 : 19 points. Manche 4 : 17 points.\nLe score de la manche 2 est effacé. Le total des quatre manches est 68 points.\na) Combien de points en manche 2 ?\nb) Vérifie : combien font les quatre manches ensemble ?\nc) Dans quelle manche l'équipe a-t-elle marqué le plus ?",
           correction:
-            "a) J'additionne les manches connues : 14 + 19 + 17 = 50.\nIl manque 68 − 50 = 18 points.\nb) 14 + 18 + 19 + 17 = 68. Le total colle.\nc) Je compare : 14, 18, 19, 17. Le plus grand est 19 : la manche 3.\n⛔ Le piège : enlever une seule manche, 68 − 14 = 54. J'enlève TOUTES les manches connues.\nRéponse : a) 18 points ; c) la manche 3.",
+            "a) J'additionne les manches connues : 14 + 19 + 17 = 50.\nIl manque 68 − 50 = 18 points.\nb) 14 + 18 + 19 + 17 = 68. Le total colle.\nc) Je compare : 14, 18, 19, 17. Le plus grand est 19 : la manche 3.\n⛔ Le piège : enlever une seule manche, 68 − 14 = 54. J'enlève TOUTES les manches connues.\nRéponse : a) 18 points ; b) 68 points ; c) la manche 3.",
           schema: ecranSeulement(
             grille(["manche", "points"], [
               ["1", "14"],
@@ -219,6 +236,11 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["total", "68"],
             ], { total: true, cases: [[1, 1]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "18" },
+            { question: "b)", attendu: "68" },
+            { question: "c)", attendu: "3" },
+          ],
           micros: ["tableau_completer", "tableau_interpreter"],
         },
         {
@@ -240,6 +262,12 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["Nice", "22", "21", "23"],
             ], { cases: [[0, 2], [1, 2], [2, 2], [3, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "Nice" },
+            { question: "b)", attendu: "Lille" },
+            { question: "c)", attendu: "Lyon" },
+            { question: "d)", attendu: "Nice" },
+          ],
           micros: ["tableau_interpreter"],
         },
         {
@@ -254,18 +282,24 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["merle", "6", "8"],
             ], { cases: [[1, 1], [1, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "11" },
+            { question: "c)", attendu: ["mésange", "la mésange", "les mésanges"] },
+            { question: "d)", attendu: "48" },
+          ],
           micros: ["tableau_interpreter", "tableau_completer"],
         },
         {
           enonce:
-            "Trois classes collectent du vieux papier pour le recycler. Le tableau donne les kilos (kg) collectés.\na) Combien de kilos le CM2 a-t-il collectés en tout ?\nb) Combien de kilos dans tout le tableau ?\nc) Vérifie ton total d'une autre façon.",
+            "Trois classes collectent du vieux papier pour le recycler. Le tableau donne les kilos (kg) collectés.\na) Combien de kilos le CM2 a-t-il collectés en tout ?\nb) Combien de kilos dans tout le tableau ?\nc) Vérifie d'une autre façon : fais le total de chaque colonne, puis ajoute ces totaux. Que trouves-tu ?",
           figure: grille(["classe", "sept.", "oct.", "nov."], [
             ["CE2", "7", "10", "11"],
             ["CM1", "12", "15", "9"],
             ["CM2", "18", "14", "16"],
           ]),
           correction:
-            "a) Ligne « CM2 » : 18 + 14 + 16 = 48 kg.\nb) Je fais le total de chaque ligne.\nCE2 : 7 + 10 + 11 = 28 kg. CM1 : 12 + 15 + 9 = 36 kg. CM2 : 48 kg.\nPuis j'additionne les trois totaux : 28 + 36 + 48 = 112 kg.\nc) Je fais le total de chaque colonne.\nSeptembre : 7 + 12 + 18 = 37. Octobre : 10 + 15 + 14 = 39. Novembre : 11 + 9 + 16 = 36.\n37 + 39 + 36 = 112 kg. Je trouve le même total : il est juste.\n⛔ Le piège : oublier une ligne. Je coche chaque case quand je l'ajoute.\nRéponse : a) 48 kg ; b) 112 kg.",
+            "a) Ligne « CM2 » : 18 + 14 + 16 = 48 kg.\nb) Je fais le total de chaque ligne.\nCE2 : 7 + 10 + 11 = 28 kg. CM1 : 12 + 15 + 9 = 36 kg. CM2 : 48 kg.\nPuis j'additionne les trois totaux : 28 + 36 + 48 = 112 kg.\nc) Je fais le total de chaque colonne.\nSeptembre : 7 + 12 + 18 = 37. Octobre : 10 + 15 + 14 = 39. Novembre : 11 + 9 + 16 = 36.\n37 + 39 + 36 = 112 kg. Je trouve le même total : il est juste.\n⛔ Le piège : oublier une ligne. Je coche chaque case quand je l'ajoute.\nRéponse : a) 48 kg ; b) 112 kg ; c) 112 kg, le même total.",
           schema: ecranSeulement(
             grille(["classe", "sept.", "oct.", "nov.", "total"], [
               ["CE2", "7", "10", "11", "28"],
@@ -274,11 +308,16 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["total", "37", "39", "36", "112"],
             ], { total: true, cases: [[3, 4]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "48" },
+            { question: "b)", attendu: "112" },
+            { question: "c)", attendu: "112" },
+          ],
           micros: ["tableau_defi"],
         },
         {
           enonce:
-            "Voici une recette de crêpes, pour 4 ou pour 8 personnes.\na) Combien de lait pour 8 personnes ?\nb) Combien d'œufs pour 4 personnes ?\nc) Le nombre 500 est écrit deux fois. Que veut dire chacun ?\nd) Tu cuisines pour 8 personnes. Lis-tu une ligne ou une colonne ?",
+            "Voici une recette de crêpes, pour 4 ou pour 8 personnes.\na) Combien de lait pour 8 personnes ?\nb) Combien d'œufs pour 4 personnes ?\nc) Le nombre 500 est écrit deux fois. Quelle phrase est vraie ?\nA : il faut 500 g de farine pour 4 personnes.\nB : il faut 500 mL de lait pour 4 personnes.\nC : il faut 500 mL de lait pour 8 personnes.\nd) Tu cuisines pour 8 personnes. Lis-tu une ligne ou une colonne ?",
           figure: grille(["ingrédient", "4 personnes", "8 personnes"], [
             ["farine (g)", "250", "500"],
             ["lait (mL)", "500", "1 000"],
@@ -286,7 +325,7 @@ export const exercicesTableauCm2: FicheExercicesData = {
             ["sucre (g)", "50", "100"],
           ]),
           correction:
-            "a) Ligne « lait (mL) », colonne « 8 personnes » : 1 000 mL.\nb) Ligne « œufs », colonne « 4 personnes » : 4 œufs.\nc) Le premier 500 est sur la ligne « farine (g) », colonne « 8 personnes ».\nC'est 500 g de farine pour 8 personnes.\nLe second est sur la ligne « lait (mL) », colonne « 4 personnes ».\nC'est 500 mL de lait pour 4 personnes.\nd) Une colonne : « 8 personnes ». Elle donne tout ce qu'il faut pour 8.\n⛔ Le piège : lire un nombre sans sa ligne et sa colonne. 500 seul ne dit rien : je lis toujours les deux titres.\nRéponse : a) 1 000 mL ; b) 4 œufs ; c) 500 g de farine pour 8, et 500 mL de lait pour 4 ; d) une colonne.",
+            "a) Ligne « lait (mL) », colonne « 8 personnes » : 1 000 mL.\nb) Ligne « œufs », colonne « 4 personnes » : 4 œufs.\nc) Le premier 500 est sur la ligne « farine (g) », colonne « 8 personnes ».\nC'est 500 g de farine pour 8 personnes.\nLe second est sur la ligne « lait (mL) », colonne « 4 personnes ».\nC'est 500 mL de lait pour 4 personnes : la phrase B est vraie.\nA est fausse : pour 4 personnes, il faut 250 g de farine. C est fausse : pour 8 personnes, il faut 1 000 mL de lait.\nd) Une colonne : « 8 personnes ». Elle donne tout ce qu'il faut pour 8.\n⛔ Le piège : lire un nombre sans sa ligne et sa colonne. 500 seul ne dit rien : je lis toujours les deux titres.\nRéponse : a) 1 000 mL ; b) 4 œufs ; c) B ; d) une colonne.",
           schema: ecranSeulement(
             grille(["ingrédient", "4 personnes", "8 personnes"], [
               ["farine (g)", "250", "500"],
@@ -295,6 +334,12 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["sucre (g)", "50", "100"],
             ], { cases: [[0, 2], [1, 1]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "1000" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "B" },
+            { question: "d)", attendu: ["colonne", "une colonne"] },
+          ],
           micros: ["tableau_lire"],
         },
       ],
@@ -328,13 +373,19 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["juin", "1 450", "2 070", "3 520"],
             ], { cases: [[1, 3], [2, 3]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "2070" },
+            { question: "b)", attendu: "2510" },
+            { question: "c)", attendu: "juin" },
+            { question: "d)", attendu: "620" },
+          ],
           micros: ["tableau_lire", "tableau_completer", "tableau_interpreter"],
         },
         {
           enonce:
-            "Le cuisinier de la cantine propose deux plats : poisson ou végétarien. Il note les choix.\nLundi : 46 poissons et 38 végétariens.\nMardi : 29 poissons et 55 végétariens.\nJeudi : 33 végétariens et 51 poissons.\nVendredi : 40 poissons et 44 végétariens.\na) Range ces nombres dans un tableau, avec une colonne « total ».\nb) Chaque jour, 84 élèves mangent à la cantine. Tes totaux collent-ils ?\nc) Quel jour le plat végétarien a-t-il eu le plus de succès ?\nd) Sur les quatre jours, quel plat a été le plus choisi ?",
+            "Le cuisinier de la cantine propose deux plats : poisson ou végétarien. Il note les choix.\nLundi : 46 poissons et 38 végétariens.\nMardi : 29 poissons et 55 végétariens.\nJeudi : 33 végétariens et 51 poissons.\nVendredi : 40 poissons et 44 végétariens.\na) Range ces nombres dans un tableau, avec une colonne « total ». Quel nombre écris-tu dans la case « jeudi, poisson » ?\nb) Chaque jour, 84 élèves mangent à la cantine. Tes totaux collent-ils ?\nc) Quel jour le plat végétarien a-t-il eu le plus de succès ?\nd) Sur les quatre jours, quel plat a été le plus choisi ?",
           correction:
-            "a) Une ligne par jour. Trois colonnes : poisson, végétarien, total.\nJeudi : attention, le végétarien est donné en premier.\nJ'écris 51 dans « poisson » et 33 dans « végétarien ».\nb) Lundi : 46 + 38 = 84. Mardi : 29 + 55 = 84.\nJeudi : 51 + 33 = 84. Vendredi : 40 + 44 = 84.\nChaque total fait 84 : le tableau est juste.\nc) Colonne « végétarien » : 38, 55, 33, 44. Le plus grand est 55 : mardi.\nd) Poisson : 46 + 29 + 51 + 40 = 166. Végétarien : 38 + 55 + 33 + 44 = 170.\nLe végétarien gagne, de 170 − 166 = 4 repas.\n⛔ Le piège au d) : compter les jours gagnés. Chaque plat gagne deux jours, mais les totaux ne sont pas égaux.\nRéponse : b) oui ; c) mardi ; d) le végétarien.",
+            "a) Une ligne par jour. Trois colonnes : poisson, végétarien, total.\nJeudi : attention, le végétarien est donné en premier.\nJ'écris 51 dans « poisson » et 33 dans « végétarien ».\nb) Lundi : 46 + 38 = 84. Mardi : 29 + 55 = 84.\nJeudi : 51 + 33 = 84. Vendredi : 40 + 44 = 84.\nChaque total fait 84 : le tableau est juste.\nc) Colonne « végétarien » : 38, 55, 33, 44. Le plus grand est 55 : mardi.\nd) Poisson : 46 + 29 + 51 + 40 = 166. Végétarien : 38 + 55 + 33 + 44 = 170.\nLe végétarien gagne, de 170 − 166 = 4 repas.\n⛔ Le piège au d) : compter les jours gagnés. Chaque plat gagne deux jours, mais les totaux ne sont pas égaux.\nRéponse : a) 51 ; b) oui ; c) mardi ; d) le végétarien.",
           schema: ecranSeulement(
             grille(["jour", "poisson", "végétarien", "total"], [
               ["lun.", "46", "38", "84"],
@@ -344,6 +395,12 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["total", "166", "170", "336"],
             ], { total: true, cases: [[2, 1], [2, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "51" },
+            { question: "b)", attendu: "oui" },
+            { question: "c)", attendu: "mardi" },
+            { question: "d)", attendu: ["végétarien", "le végétarien", "le plat végétarien"] },
+          ],
           micros: ["tableau_completer", "tableau_interpreter"],
         },
         {
@@ -365,6 +422,12 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["total", "117", "118", "235"],
             ], { total: true, cases: [[0, 2], [1, 1], [2, 3], [3, 1], [3, 3]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "37" },
+            { question: "b)", attendu: "38" },
+            { question: "c)", attendu: "84 ; 117", ordre: true },
+            { question: "d)", attendu: "235" },
+          ],
           micros: ["tableau_completer", "tableau_defi"],
         },
         {
@@ -386,6 +449,12 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["tir à l'arc", "39", "41", "80"],
             ], { cases: [[0, 3], [1, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["quilles", "les quilles"] },
+            { question: "b)", attendu: "165" },
+            { question: "c)", attendu: ["pêche", "la pêche"] },
+            { question: "d)", attendu: "non" },
+          ],
           micros: ["tableau_interpreter", "tableau_defi"],
         },
         {
@@ -405,6 +474,12 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["Commerson", "96", "130"],
             ], { cases: [[0, 1], [1, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "240" },
+            { question: "b)", attendu: "non" },
+            { question: "c)", attendu: "190" },
+            { question: "d)", attendu: "980" },
+          ],
           micros: ["tableau_lire", "tableau_interpreter"],
         },
         {
@@ -424,11 +499,17 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["tournesols", "52", "46", "49"],
             ], { cases: [[0, 2], [1, 3], [2, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "79" },
+            { question: "b)", attendu: "36" },
+            { question: "c)", attendu: "46" },
+            { question: "d)", attendu: "mardi" },
+          ],
           micros: ["tableau_completer"],
         },
         {
           enonce:
-            "Une école de musique compte ses élèves, filles et garçons.\nVrai ou faux ? Explique avec les nombres.\na) « À la guitare, il y a plus de garçons que de filles. »\nb) « Au piano, il y a deux fois plus de filles que de garçons. »\nc) « En tout, il y a plus de garçons que de filles. »\nd) « La batterie est l'instrument le moins choisi. »",
+            "Une école de musique compte ses élèves, filles et garçons.\nVrai ou faux ? Vérifie avec les nombres.\na) « À la guitare, il y a plus de garçons que de filles. »\nb) « Au piano, il y a deux fois plus de filles que de garçons. »\nc) « En tout, il y a plus de garçons que de filles. »\nd) « La batterie est l'instrument le moins choisi. »",
           figure: grille(["cours", "filles", "garçons"], [
             ["piano", "18", "9"],
             ["guitare", "14", "21"],
@@ -446,13 +527,19 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["total", "48", "47", "95"],
             ], { total: true, cases: [[2, 3]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "vrai" },
+            { question: "b)", attendu: "vrai" },
+            { question: "c)", attendu: "faux" },
+            { question: "d)", attendu: "faux" },
+          ],
           micros: ["tableau_interpreter"],
         },
         {
           enonce:
-            "Inès, Malo et Sacha jouent à un jeu en trois manches.\nInès marque 25, puis 18, puis 30 points.\nMalo marque 32, puis 29, puis 9 points.\nSacha marque 14, puis 27, puis 21 points.\na) Range ces scores dans un tableau. Une ligne par joueur, une colonne par manche.\nb) Combien de manches Malo a-t-il gagnées ?\nc) Calcule le total de chaque joueur.\nd) Qui gagne la partie ? Avec combien de points d'avance ?",
+            "Inès, Malo et Sacha jouent à un jeu en trois manches.\nInès marque 25, puis 18, puis 30 points.\nMalo marque 32, puis 29, puis 9 points.\nSacha marque 14, puis 27, puis 21 points.\na) Range ces scores dans un tableau. Une ligne par joueur, une colonne par manche. Quel score lis-tu sur la ligne de Malo, dans la colonne de la 3e manche ?\nb) Combien de manches Malo a-t-il gagnées ?\nc) Calcule le total d'Inès, puis de Malo, puis de Sacha.\nd) Qui gagne la partie ? Avec combien de points d'avance ?",
           correction:
-            "a) Trois lignes : Inès, Malo, Sacha. Trois colonnes : 1re, 2e et 3e manche.\nb) Manche 1 : 25, 32, 14. Malo gagne avec 32.\nManche 2 : 18, 29, 27. Malo gagne avec 29.\nManche 3 : 30, 9, 21. Inès gagne avec 30.\nMalo a gagné 2 manches.\nc) Inès : 25 + 18 + 30 = 73. Malo : 32 + 29 + 9 = 70. Sacha : 14 + 27 + 21 = 62.\nd) Le plus grand total est 73 : Inès gagne.\nSon avance sur Malo : 73 − 70 = 3 points.\n⛔ Le piège : donner la victoire à Malo, qui a gagné le plus de manches. Le gagnant a le plus grand TOTAL.\nRéponse : b) 2 manches ; c) 73, 70 et 62 ; d) Inès, avec 3 points d'avance.",
+            "a) Trois lignes : Inès, Malo, Sacha. Trois colonnes : 1re, 2e et 3e manche.\nSur la ligne de Malo, la 3e manche vaut 9.\nb) Manche 1 : 25, 32, 14. Malo gagne avec 32.\nManche 2 : 18, 29, 27. Malo gagne avec 29.\nManche 3 : 30, 9, 21. Inès gagne avec 30.\nMalo a gagné 2 manches.\nc) Inès : 25 + 18 + 30 = 73. Malo : 32 + 29 + 9 = 70. Sacha : 14 + 27 + 21 = 62.\nd) Le plus grand total est 73 : Inès gagne.\nSon avance sur Malo : 73 − 70 = 3 points.\n⛔ Le piège : donner la victoire à Malo, qui a gagné le plus de manches. Le gagnant a le plus grand TOTAL.\nRéponse : a) 9 ; b) 2 manches ; c) 73, 70 et 62 ; d) Inès, avec 3 points d'avance.",
           schema: ecranSeulement(
             grille(["joueur", "1re", "2e", "3e", "total"], [
               ["Inès", "25", "18", "30", "73"],
@@ -460,6 +547,13 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["Sacha", "14", "27", "21", "62"],
             ], { cases: [[0, 4]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "73 ; 70 ; 62", ordre: true },
+            { question: "d) qui", attendu: "Inès" },
+            { question: "d) avance", attendu: "3" },
+          ],
           micros: ["tableau_completer", "tableau_defi"],
         },
       ],
@@ -479,7 +573,7 @@ export const exercicesTableauCm2: FicheExercicesData = {
         {
           titre: "Le tableau des médailles",
           enonce:
-            "Une journaliste sportive écrit un article sur les Jeux olympiques de Paris 2024. Voici les vraies médailles de quatre pays.\na) Combien de médailles d'argent pour la France ?\nb) Calcule le total de médailles de chaque pays.\nc) Le classement officiel range les pays par l'or. Range ces quatre pays de cette façon.\nd) Range-les maintenant par le total de médailles.\ne) Quel pays est premier ? Explique pourquoi la réponse dépend de la règle.",
+            "Une journaliste sportive écrit un article sur les Jeux olympiques de Paris 2024. Voici les vraies médailles de quatre pays.\na) Combien de médailles d'argent pour la France ?\nb) Calcule le total de médailles de chaque pays, dans l'ordre du tableau.\nc) Le classement officiel range les pays par l'or. Range ces quatre pays de cette façon. Quel pays est premier ?\nd) Range-les maintenant par le total de médailles. Quel pays est premier ?\ne) Dans ce classement par le total, à quelle place est le Japon ?",
           figure: grille(["pays", "or", "argent", "bronze"], [
             ["France", "16", "26", "22"],
             ["Royaume-Uni", "14", "22", "29"],
@@ -487,7 +581,7 @@ export const exercicesTableauCm2: FicheExercicesData = {
             ["Japon", "20", "12", "13"],
           ]),
           correction:
-            "a) Ligne « France », colonne « argent » : 26.\nb) J'additionne chaque ligne.\nFrance : 16 + 26 + 22 = 64. Royaume-Uni : 14 + 22 + 29 = 65.\nAustralie : 18 + 19 + 16 = 53. Japon : 20 + 12 + 13 = 45.\nc) Colonne « or » : Japon 20, Australie 18, France 16, Royaume-Uni 14.\nL'ordre est : Japon, Australie, France, Royaume-Uni.\nd) Les totaux : Royaume-Uni 65, France 64, Australie 53, Japon 45.\nL'ordre est : Royaume-Uni, France, Australie, Japon.\ne) Par l'or, le Japon est premier. Par le total, il est dernier !\nLe tableau ne change pas. C'est la règle qui change le classement.\n⛔ Le piège : croire qu'un classement est le seul possible. Je lis toujours sa règle.\nRéponse : c) Japon, Australie, France, Royaume-Uni ; d) Royaume-Uni, France, Australie, Japon ; e) cela dépend de la règle.",
+            "a) Ligne « France », colonne « argent » : 26.\nb) J'additionne chaque ligne.\nFrance : 16 + 26 + 22 = 64. Royaume-Uni : 14 + 22 + 29 = 65.\nAustralie : 18 + 19 + 16 = 53. Japon : 20 + 12 + 13 = 45.\nc) Colonne « or » : Japon 20, Australie 18, France 16, Royaume-Uni 14.\nL'ordre est : Japon, Australie, France, Royaume-Uni. Le premier est le Japon.\nd) Les totaux : Royaume-Uni 65, France 64, Australie 53, Japon 45.\nL'ordre est : Royaume-Uni, France, Australie, Japon. Le premier est le Royaume-Uni.\ne) Par le total, le Japon est 4e sur 4 : dernier ! Par l'or, il était premier.\nLe tableau ne change pas. C'est la règle qui change le classement.\n⛔ Le piège : croire qu'un classement est le seul possible. Je lis toujours sa règle.\nRéponse : a) 26 ; b) 64, 65, 53 et 45 ; c) le Japon ; d) le Royaume-Uni ; e) 4e, dernier.",
           schema: ecranSeulement(
             grille(["pays", "or", "total"], [
               ["Japon", "20", "45"],
@@ -496,6 +590,13 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["Royaume-Uni", "14", "65"],
             ], { cases: [[0, 1], [3, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "26" },
+            { question: "b)", attendu: "64 ; 65 ; 53 ; 45", ordre: true },
+            { question: "c)", attendu: ["Japon", "le Japon"] },
+            { question: "d)", attendu: ["Royaume-Uni", "le Royaume-Uni", "Royaume Uni", "le Royaume Uni"] },
+            { question: "e)", attendu: ["4", "4e", "4eme", "dernier"] },
+          ],
           micros: ["tableau_lire", "tableau_interpreter", "tableau_defi"],
         },
         {
@@ -518,12 +619,19 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["total", "34", "43", "38", "115"],
             ], { total: true, cases: [[0, 2], [1, 3], [1, 4], [3, 4]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "14" },
+            { question: "b)", attendu: "18" },
+            { question: "c)", attendu: "59" },
+            { question: "d)", attendu: "115" },
+            { question: "e)", attendu: "15" },
+          ],
           micros: ["tableau_completer", "tableau_defi"],
         },
         {
           titre: "Le total qui ne colle pas",
           enonce:
-            "Le bibliothécaire de l'école compte les livres empruntés par deux classes. Il a fait une erreur dans une case « total ».\na) Vérifie chaque total. Lequel est faux ?\nb) Corrige-le.\nc) Quelle classe emprunte le plus de livres ?\nd) Il veut acheter des livres du genre le plus emprunté. Lequel ?",
+            "Le bibliothécaire de l'école compte les livres empruntés par deux classes. Il a fait une erreur dans une case « total ».\na) Vérifie chaque total. Lequel est faux ?\nA : le total des BD.\nB : le total du CM1.\nC : le total du CM2.\nb) Quel est le bon total ?\nc) Quelle classe emprunte le plus de livres ?\nd) Il veut acheter des livres du genre le plus emprunté. Lequel ?",
           figure: grille(["livres", "CM1", "CM2", "total"], [
             ["BD", "48", "57", "105"],
             ["romans", "35", "41", "76"],
@@ -531,7 +639,7 @@ export const exercicesTableauCm2: FicheExercicesData = {
             ["total", "105", "107", "222"],
           ], { total: true }),
           correction:
-            "a) Je refais chaque addition.\nBD : 48 + 57 = 105. Romans : 35 + 41 = 76. Albums : 22 + 19 = 41. Ces trois totaux sont justes.\nCM1 : 48 + 35 + 22 = 105. C'est juste.\nCM2 : 57 + 41 + 19 = 117. Le tableau écrit 107 : c'est faux.\nUn indice le montrait : 105 + 107 = 212, pas 222.\nb) J'écris 117. Contrôle : 105 + 117 = 222, et 105 + 76 + 41 = 222.\nc) CM2 : 117 livres. CM1 : 105 livres. Le CM2 emprunte le plus.\nd) Colonne « total » : BD 105, romans 76, albums 41. Ce sont les BD.\n⛔ Le piège : croire un total parce qu'il est écrit. Je le vérifie par l'addition.\nRéponse : a) le total du CM2 ; b) 117 ; c) le CM2 ; d) les BD.",
+            "a) Je refais chaque addition.\nBD : 48 + 57 = 105. Romans : 35 + 41 = 76. Albums : 22 + 19 = 41. Ces trois totaux sont justes.\nCM1 : 48 + 35 + 22 = 105. C'est juste.\nCM2 : 57 + 41 + 19 = 117. Le tableau écrit 107 : c'est faux. C'est la réponse C.\nUn indice le montrait : 105 + 107 = 212, pas 222.\nb) J'écris 117. Contrôle : 105 + 117 = 222, et 105 + 76 + 41 = 222.\nc) CM2 : 117 livres. CM1 : 105 livres. Le CM2 emprunte le plus.\nd) Colonne « total » : BD 105, romans 76, albums 41. Ce sont les BD.\n⛔ Le piège : croire un total parce qu'il est écrit. Je le vérifie par l'addition.\nRéponse : a) C, le total du CM2 ; b) 117 ; c) le CM2 ; d) les BD.",
           schema: ecranSeulement(
             grille(["livres", "CM1", "CM2", "total"], [
               ["BD", "48", "57", "105"],
@@ -540,14 +648,20 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["total", "105", "117", "222"],
             ], { total: true, cases: [[3, 2]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "C" },
+            { question: "b)", attendu: "117" },
+            { question: "c)", attendu: ["CM2", "le CM2"] },
+            { question: "d)", attendu: ["BD", "les BD"] },
+          ],
           micros: ["tableau_completer", "tableau_interpreter", "tableau_defi"],
         },
         {
           titre: "Les panneaux solaires de l'école",
           enonce:
-            "Un technicien relève l'électricité produite par les panneaux solaires de l'école. Il la compte en kWh, une unité d'énergie.\nCantine : 85 en avril, 110 en mai, 125 en juin.\nGymnase : 140 en avril, 175 en mai, 190 en juin.\nClasses : 60 en avril, 72 en mai, 81 en juin.\na) Range ces relevés dans un tableau.\nb) Quel mois a produit le plus ?\nc) L'objectif était 1 000 kWh sur les trois mois. Est-il atteint ?\nd) Le technicien dit : « Le gymnase produit plus que la cantine et les classes réunies. » A-t-il raison ?",
+            "Un technicien relève l'électricité produite par les panneaux solaires de l'école. Il la compte en kWh, une unité d'énergie.\nCantine : 85 en avril, 110 en mai, 125 en juin.\nGymnase : 140 en avril, 175 en mai, 190 en juin.\nClasses : 60 en avril, 72 en mai, 81 en juin.\na) Range ces relevés dans un tableau. Combien de kWh en avril, pour les trois bâtiments ensemble ?\nb) Quel mois a produit le plus ?\nc) L'objectif était 1 000 kWh sur les trois mois. Est-il atteint ?\nd) Le technicien dit : « Le gymnase produit plus que la cantine et les classes réunies. » A-t-il raison ?",
           correction:
-            "a) Une ligne par bâtiment, une colonne par mois.\nb) Je fais le total de chaque colonne.\nAvril : 85 + 140 + 60 = 285. Mai : 110 + 175 + 72 = 357. Juin : 125 + 190 + 81 = 396.\nLe plus grand est 396 : juin.\nc) 285 + 357 + 396 = 1 038 kWh.\n1 038 est plus grand que 1 000 : l'objectif est atteint, avec 38 kWh de plus.\nd) Gymnase : 140 + 175 + 190 = 505.\nCantine : 85 + 110 + 125 = 320. Classes : 60 + 72 + 81 = 213.\nCantine et classes réunies : 320 + 213 = 533.\n505 est plus petit que 533 : il a tort.\nContrôle : 505 + 533 = 1 038. Je retrouve le total.\n⛔ Le piège au d) : comparer le gymnase à un seul bâtiment. « Réunies » veut dire : j'additionne les deux autres.\nRéponse : b) juin ; c) oui, 1 038 kWh ; d) non.",
+            "a) Une ligne par bâtiment, une colonne par mois.\nJe fais le total de la colonne « avril » : 85 + 140 + 60 = 285 kWh.\nb) Je fais le total des autres colonnes.\nAvril : 285. Mai : 110 + 175 + 72 = 357. Juin : 125 + 190 + 81 = 396.\nLe plus grand est 396 : juin.\nc) 285 + 357 + 396 = 1 038 kWh.\n1 038 est plus grand que 1 000 : l'objectif est atteint, avec 38 kWh de plus.\nd) Gymnase : 140 + 175 + 190 = 505.\nCantine : 85 + 110 + 125 = 320. Classes : 60 + 72 + 81 = 213.\nCantine et classes réunies : 320 + 213 = 533.\n505 est plus petit que 533 : il a tort.\nContrôle : 505 + 533 = 1 038. Je retrouve le total.\n⛔ Le piège au d) : comparer le gymnase à un seul bâtiment. « Réunies » veut dire : j'additionne les deux autres.\nRéponse : a) 285 kWh ; b) juin ; c) oui, 1 038 kWh ; d) non.",
           schema: ecranSeulement(
             grille(["bâtiment", "avril", "mai", "juin", "total"], [
               ["cantine", "85", "110", "125", "320"],
@@ -556,6 +670,12 @@ export const exercicesTableauCm2: FicheExercicesData = {
               ["total", "285", "357", "396", "1 038"],
             ], { total: true, cases: [[3, 3], [3, 4]] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "285" },
+            { question: "b)", attendu: "juin" },
+            { question: "c)", attendu: "oui" },
+            { question: "d)", attendu: "non" },
+          ],
           micros: ["tableau_completer", "tableau_interpreter", "tableau_defi"],
         },
       ],

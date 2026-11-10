@@ -81,6 +81,12 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           figure: deuxDisques([4, 4], [3, 4], false),
           correction:
             "a) Je compte les parts bleues : 4 dans la première pizza, 3 dans la deuxième. 4 + 3 = 7 quarts : $\\dfrac{7}{4}$.\nb) 4 quarts font une pizza entière : $\\dfrac{4}{4} = 1$. Il reste 3 quarts en plus.\nc) $\\dfrac{7}{4} = 1 + \\dfrac{3}{4}$.\n⛔ Le piège : croire qu'une fraction est toujours plus petite que 1. $\\dfrac{7}{4}$, c'est plus d'une pizza !\nRéponse : a) 7 quarts ; b) 1 pizza et 3 quarts ; c) $\\dfrac{7}{4} = 1 + \\dfrac{3}{4}$.",
+          reponses: [
+            { question: "a)", attendu: "7" },
+            { question: "b) pizzas", attendu: "1" },
+            { question: "b) quarts", attendu: "3" },
+            { question: "c)", attendu: "3" },
+          ],
           micros: ["fraction_mixte_ecrire"],
         },
         {
@@ -91,6 +97,12 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           ]),
           correction:
             "Je regarde d'abord en combien de parts est coupée UNE unité : c'est le dénominateur.\nBarre A : une unité en 3 parts. 5 parts bleues : $\\dfrac{5}{3}$. Une unité pleine (3 tiers) et 2 tiers : $\\dfrac{5}{3} = 1 + \\dfrac{2}{3}$.\nBarre B : une unité en 5 parts. 8 parts bleues : $\\dfrac{8}{5}$. Une unité pleine (5 cinquièmes) et 3 cinquièmes : $\\dfrac{8}{5} = 1 + \\dfrac{3}{5}$.\n⛔ Le piège : écrire $\\dfrac{5}{6}$ pour A, en comptant les parts des DEUX unités en bas. Le dénominateur, c'est le partage d'UNE unité.\nRéponse : A : $\\dfrac{5}{3} = 1 + \\dfrac{2}{3}$ ; B : $\\dfrac{8}{5} = 1 + \\dfrac{3}{5}$.",
+          reponses: [
+            { question: "A fraction", attendu: "5/3" },
+            { question: "A entier", attendu: "1+2/3", exact: true },
+            { question: "B fraction", attendu: "8/5" },
+            { question: "B entier", attendu: "1+3/5", exact: true },
+          ],
           micros: ["fraction_mixte_ecrire"],
         },
         {
@@ -103,6 +115,13 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
               { d: 6, label: "18/6", parts: [18], fois: 3 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "1" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "3" },
+            { question: "d)", attendu: "3" },
+            { question: "e)", attendu: "14" },
+          ],
           micros: ["fraction_mixte_ecrire"],
         },
         {
@@ -114,6 +133,14 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           ], { nombres: 1 }),
           correction:
             "Entre deux entiers, il y a 4 sauts : chaque saut vaut $\\dfrac{1}{4}$. Je compte les sauts depuis 0.\na) A est à 7 sauts de 0 : $\\dfrac{7}{4}$. B est à 9 sauts : $\\dfrac{9}{4}$. C est à 11 sauts : $\\dfrac{11}{4}$.\nb) $1 < \\dfrac{7}{4} < 2$ ; $2 < \\dfrac{9}{4} < 3$ ; $2 < \\dfrac{11}{4} < 3$.\n⛔ Le piège : dire que $\\dfrac{7}{4}$ est « entre 7 et 8 ». C'est 7 QUARTS, pas 7 unités : à peine moins de 2.\nRéponse : a) A : $\\dfrac{7}{4}$ ; B : $\\dfrac{9}{4}$ ; C : $\\dfrac{11}{4}$ ; b) A entre 1 et 2 ; B et C entre 2 et 3.",
+          reponses: [
+            { question: "A", attendu: "7/4" },
+            { question: "B", attendu: "9/4" },
+            { question: "C", attendu: "11/4" },
+            { question: "b) A", attendu: ["1 ; 2", "1 < 7/4 < 2"], ordre: true },
+            { question: "b) B", attendu: ["2 ; 3", "2 < 9/4 < 3"], ordre: true },
+            { question: "b) C", attendu: ["2 ; 3", "2 < 11/4 < 3"], ordre: true },
+          ],
           micros: ["fraction_encadrer"],
         },
         {
@@ -129,6 +156,13 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
               { value: 5.2, label: "26/5" },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: ["2 ; 3", "2 < 5/2 < 3"], ordre: true },
+            { question: "b)", attendu: ["3 ; 4", "3 < 10/3 < 4"], ordre: true },
+            { question: "c)", attendu: ["2 ; 3", "2 < 9/4 < 3"], ordre: true },
+            { question: "d)", attendu: ["2 ; 3", "2 < 23/10 < 3"], ordre: true },
+            { question: "e)", attendu: ["5 ; 6", "5 < 26/5 < 6"], ordre: true },
+          ],
           micros: ["fraction_encadrer"],
         },
         {
@@ -136,14 +170,24 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           correction:
             "J'écris chaque unité avec le même dénominateur que la fraction, puis je compte toutes les parts.\na) $1 = \\dfrac{4}{4}$. 4 quarts et 1 quart : $1 + \\dfrac{1}{4} = \\dfrac{5}{4}$.\nb) $2 = \\dfrac{6}{3}$ (2 × 3 = 6). 6 tiers et 1 tiers : $2 + \\dfrac{1}{3} = \\dfrac{7}{3}$.\nc) $3 = \\dfrac{15}{5}$ (3 × 5 = 15). 15 cinquièmes et 2 : $3 + \\dfrac{2}{5} = \\dfrac{17}{5}$.\nd) $1 = \\dfrac{6}{6}$. 6 sixièmes et 5 : $1 + \\dfrac{5}{6} = \\dfrac{11}{6}$.\n⛔ Le piège : coller l'entier devant le numérateur. $2 + \\dfrac{1}{3}$ n'est pas $\\dfrac{21}{3}$ : ça ferait 7 unités !\nRéponse : a) $\\dfrac{5}{4}$ ; b) $\\dfrac{7}{3}$ ; c) $\\dfrac{17}{5}$ ; d) $\\dfrac{11}{6}$.",
           schema: ecranSeulement(barres([{ d: 4, label: "1 + 1/4", parts: [5], fois: 2 }])),
+          reponses: [
+            { question: "a)", attendu: "5/4", exact: true },
+            { question: "b)", attendu: "7/3", exact: true },
+            { question: "c)", attendu: "17/5", exact: true },
+            { question: "d)", attendu: "11/6", exact: true },
+          ],
           micros: ["fraction_mixte_regrouper"],
         },
         {
-          enonce: "Lou, cycliste, s'entraîne sur une piste de 3 km. Le point d'eau est à $2 + \\dfrac{1}{4}$ km du départ.\na) Écris cette distance avec une seule fraction, en quarts de kilomètre.\nb) Place le point d'eau sur la droite.",
+          enonce: "Lou, cycliste, s'entraîne sur une piste de 3 km. Le point d'eau est à $2 + \\dfrac{1}{4}$ km du départ.\na) Écris cette distance avec une seule fraction, en quarts de kilomètre.\nb) Sur la droite, combien de sauts d'un quart fais-tu depuis 0 pour arriver au point d'eau ?",
           figure: droiteRel(0, 3, 0.25, [], { nombres: 1 }),
           correction:
-            "a) 1 km, ce sont 4 quarts. 2 km, ce sont 2 × 4 = 8 quarts. Et 1 quart de plus : 9 quarts.\n$2 + \\dfrac{1}{4} = \\dfrac{9}{4}$ km.\nb) Je vais jusqu'à 2, puis j'avance d'un saut : le point d'eau est juste après 2.\n⛔ Le piège : placer le point à 1 saut de 0, en oubliant les 2 km entiers.\nRéponse : a) $\\dfrac{9}{4}$ km ; b) un saut après 2.",
+            "a) 1 km, ce sont 4 quarts. 2 km, ce sont 2 × 4 = 8 quarts. Et 1 quart de plus : 9 quarts.\n$2 + \\dfrac{1}{4} = \\dfrac{9}{4}$ km.\nb) Je vais jusqu'à 2 : 8 sauts. Puis j'avance d'un saut : 8 + 1 = 9 sauts. Le point d'eau est juste après 2.\n⛔ Le piège : placer le point à 1 saut de 0, en oubliant les 2 km entiers.\nRéponse : a) $\\dfrac{9}{4}$ km ; b) 9 sauts, un saut après 2.",
           schema: ecranSeulement(droiteRel(0, 3, 0.25, [{ value: 2.25, label: "9/4", color: VERT }], { nombres: 1 })),
+          reponses: [
+            { question: "a)", attendu: "9/4", exact: true },
+            { question: "b)", attendu: "9" },
+          ],
           micros: ["fraction_mixte_regrouper"],
         },
         {
@@ -158,6 +202,12 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
               { value: 47 / 6, label: "47/6" },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "4+1/2", exact: true },
+            { question: "b)", attendu: "3+1/4", exact: true },
+            { question: "c)", attendu: "3+1/7", exact: true },
+            { question: "d)", attendu: "7+5/6", exact: true },
+          ],
           micros: ["fraction_mixte_ecrire"],
         },
       ],
@@ -183,6 +233,16 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
             { value: 1.5, label: "3/2" },
             { value: 1.75, label: "7/4" },
           ]),
+          reponses: [
+            { question: "a) entier", attendu: "1+1/4", exact: true },
+            { question: "a) virgule", attendu: "1,25", exact: true },
+            { question: "b) entier", attendu: "1+1/2", exact: true },
+            { question: "b) virgule", attendu: ["1,5", "1,50"], exact: true },
+            { question: "c) entier", attendu: "1+3/4", exact: true },
+            { question: "c) virgule", attendu: "1,75", exact: true },
+            { question: "d) entier", attendu: ["1+2/10", "1+1/5"], exact: true },
+            { question: "d) virgule", attendu: ["1,2", "1,20"], exact: true },
+          ],
           micros: ["fraction_mixte_ecrire"],
         },
         {
@@ -190,6 +250,11 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           correction:
             "$2 + \\dfrac{3}{5}$, ce sont 2 unités entières ET 3 cinquièmes : un nombre entre 2 et 3.\na) $\\dfrac{5}{5} = 1$. Or le nombre dépasse 2 : Tom a perdu une unité. Ajouter 2 en haut, c'est ajouter seulement 2 cinquièmes.\nb) 4 × 5 = 20 : $\\dfrac{23}{5} = 4 + \\dfrac{3}{5}$. C'est entre 4 et 5 : trop grand.\nc) $2 = \\dfrac{10}{5}$ (2 × 5 = 10). Donc $2 + \\dfrac{3}{5} = \\dfrac{13}{5}$.\n⭐ Je vérifie : $\\dfrac{13}{5} = \\dfrac{10}{5} + \\dfrac{3}{5}$, entre 2 et 3.\n⛔ Les deux pièges : ajouter l'entier en haut, ou le coller devant. Je change l'entier en parts, puis je compte.\nRéponse : a) $\\dfrac{5}{5} = 1$, trop petit ; b) $\\dfrac{23}{5}$ est entre 4 et 5 ; c) $\\dfrac{13}{5}$.",
           schema: barres([{ d: 5, label: "2 + 3/5", parts: [13], fois: 3 }]),
+          reponses: [
+            { question: "a)", attendu: "1" },
+            { question: "b)", attendu: ["4 ; 5", "4 < 23/5 < 5"], ordre: true },
+            { question: "c)", attendu: "13/5", exact: true },
+          ],
           micros: ["fraction_mixte_regrouper"],
         },
         {
@@ -203,6 +268,14 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
               { value: 50 / 9, label: "50/9" },
             ]),
           ),
+          reponses: [
+            { question: "a) entier", attendu: "7+1/4", exact: true },
+            { question: "a) entre", attendu: ["7 ; 8", "7 < 29/4 < 8"], ordre: true },
+            { question: "b) entier", attendu: "7+3/5", exact: true },
+            { question: "b) entre", attendu: ["7 ; 8", "7 < 38/5 < 8"], ordre: true },
+            { question: "c) entier", attendu: "5+5/9", exact: true },
+            { question: "c) entre", attendu: ["5 ; 6", "5 < 50/9 < 6"], ordre: true },
+          ],
           micros: ["fraction_mixte_ecrire", "fraction_encadrer"],
         },
         {
@@ -216,6 +289,9 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
               { value: 8 / 3, label: "8/3" },
             ], { nombres: 1 }),
           ),
+          reponses: [
+            { attendu: "5/3 < 2 < 2+1/3 < 8/3 < 3", ordre: true },
+          ],
           micros: ["fraction_mixte_regrouper", "fraction_encadrer"],
         },
         {
@@ -226,6 +302,11 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
             { d: 4, label: "6/4", parts: [6], fois: 2 },
             { d: 2, label: "3/2", parts: [3], fois: 2 },
           ]),
+          reponses: [
+            { question: "a)", attendu: "1+1/2", exact: true },
+            { question: "b)", attendu: "2+1/2", exact: true },
+            { question: "c)", attendu: "1+1/2", exact: true },
+          ],
           micros: ["fraction_mixte_ecrire"],
         },
         {
@@ -238,6 +319,12 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
             { value: 2.2, label: "11/5" },
             { value: 0.8, label: "4/5" },
           ]),
+          reponses: [
+            { question: "a)", attendu: "faux" },
+            { question: "b)", attendu: "faux" },
+            { question: "c)", attendu: "vrai" },
+            { question: "d)", attendu: "vrai" },
+          ],
           micros: ["fraction_encadrer"],
         },
         {
@@ -245,6 +332,11 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           correction:
             "a) 1 tasse = 4 quarts. 2 tasses = 2 × 4 = 8 quarts. Et 3 quarts de plus : 8 + 3 = 11 quarts. Il remplit sa mesure 11 fois.\nb) $2 + \\dfrac{3}{4} = \\dfrac{11}{4}$ tasses.\nc) 3 quarts = 0,75 : $2 + \\dfrac{3}{4} = 2{,}75$ tasses.\n⛔ Le piège du a) : répondre 5 (2 + 3). Les 2 tasses entières contiennent chacune 4 quarts.\nRéponse : a) 11 fois ; b) $\\dfrac{11}{4}$ ; c) 2,75 tasses.",
           schema: ecranSeulement(barres([{ d: 4, label: "farine", parts: [11], fois: 3 }])),
+          reponses: [
+            { question: "a)", attendu: "11" },
+            { question: "b)", attendu: "11/4", exact: true },
+            { question: "c)", attendu: ["2,75"], exact: true },
+          ],
           micros: ["fraction_mixte_regrouper"],
         },
         {
@@ -255,6 +347,12 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           ], { nombres: 1 }),
           correction:
             "Entre deux entiers, il y a 5 sauts : chaque saut vaut $\\dfrac{1}{5}$.\na) $2 = \\dfrac{10}{5}$. A est 3 sauts après 2 : $\\dfrac{13}{5}$.\n$3 = \\dfrac{15}{5}$. B est 2 sauts après 3 : $\\dfrac{17}{5}$.\nb) $\\dfrac{13}{5} = 2 + \\dfrac{3}{5}$ et $\\dfrac{17}{5} = 3 + \\dfrac{2}{5}$.\n⛔ Le piège : écrire $\\dfrac{3}{5}$ pour A. La droite ne commence pas à 0 : il faut compter les 2 unités d'avant.\nRéponse : a) A : $\\dfrac{13}{5}$ ; B : $\\dfrac{17}{5}$ ; b) $2 + \\dfrac{3}{5}$ et $3 + \\dfrac{2}{5}$.",
+          reponses: [
+            { question: "a) A", attendu: "13/5", exact: true },
+            { question: "a) B", attendu: "17/5", exact: true },
+            { question: "b) A", attendu: "2+3/5", exact: true },
+            { question: "b) B", attendu: "3+2/5", exact: true },
+          ],
           micros: ["fraction_mixte_ecrire", "fraction_encadrer"],
         },
       ],
@@ -277,17 +375,29 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           figure: barres([{ d: 6, label: "tartes", parts: [17], fois: 3 }]),
           correction:
             "a) Une part, c'est $\\dfrac{1}{6}$ de tarte. 17 parts : $\\dfrac{17}{6}$ de tarte.\nb) 2 × 6 = 12 : $\\dfrac{17}{6} = \\dfrac{12}{6} + \\dfrac{5}{6} = 2 + \\dfrac{5}{6}$.\nc) $2 < \\dfrac{17}{6} < 3$ : entre 2 et 3 tartes.\nd) 3 tartes = 3 × 6 = 18 parts. 18 − 17 = 1 part manque.\n⛔ Le piège : dire « 17 tartes ». Sofia vend 17 PARTS, des sixièmes de tarte.\nRéponse : a) $\\dfrac{17}{6}$ ; b) $2 + \\dfrac{5}{6}$ ; c) entre 2 et 3 ; d) 1 part.",
+          reponses: [
+            { question: "a)", attendu: "17/6" },
+            { question: "b)", attendu: "2+5/6", exact: true },
+            { question: "c)", attendu: ["2 ; 3", "2 < 17/6 < 3"], ordre: true },
+            { question: "d)", attendu: "1" },
+          ],
           micros: ["fraction_mixte_ecrire", "fraction_encadrer"],
         },
         {
           titre: "Le train",
           enonce: "Maëlle, conductrice de train, fait un trajet aller de $\\dfrac{9}{4}$ heures.\na) Écris cette durée « entier + fraction ».\nb) Un quart d'heure dure 15 minutes. Écris la durée en heures et minutes.\nc) Écris la durée avec une virgule.\nd) Le retour dure $2 + \\dfrac{1}{2}$ heures. Quel trajet est le plus long ?",
           correction:
-            "a) 2 × 4 = 8 : $\\dfrac{9}{4} = \\dfrac{8}{4} + \\dfrac{1}{4} = 2 + \\dfrac{1}{4}$ heures.\nb) 2 heures et un quart d'heure : 2 h 15 min.\nc) Un quart = 0,25 : $\\dfrac{9}{4} = 2{,}25$ heures.\nd) $2 + \\dfrac{1}{2} = \\dfrac{10}{4}$ (une moitié = 2 quarts). Et $\\dfrac{10}{4} > \\dfrac{9}{4}$ : le retour est plus long, de 15 minutes.\n⛔ Le piège du b) : écrire 2 h 25 min en lisant 2,25. Un quart d'heure, c'est 15 minutes, pas 25.\nRéponse : a) $2 + \\dfrac{1}{4}$ ; b) 2 h 15 min ; c) 2,25 heures ; d) le retour.",
+            "a) 2 × 4 = 8 : $\\dfrac{9}{4} = \\dfrac{8}{4} + \\dfrac{1}{4} = 2 + \\dfrac{1}{4}$ heures.\nb) 2 heures et un quart d'heure : 2 h 15 min, soit 120 + 15 = 135 min.\nc) Un quart = 0,25 : $\\dfrac{9}{4} = 2{,}25$ heures.\nd) $2 + \\dfrac{1}{2} = \\dfrac{10}{4}$ (une moitié = 2 quarts). Et $\\dfrac{10}{4} > \\dfrac{9}{4}$ : le retour est plus long, de 15 minutes.\n⛔ Le piège du b) : écrire 2 h 25 min en lisant 2,25. Un quart d'heure, c'est 15 minutes, pas 25.\nRéponse : a) $2 + \\dfrac{1}{4}$ ; b) 2 h 15 min ; c) 2,25 heures ; d) le retour.",
           schema: droiteRel(0, 3, 0.25, [
             { value: 2.25, label: "aller" },
             { value: 2.5, label: "retour", color: VERT },
           ], { nombres: 1 }),
+          reponses: [
+            { question: "a)", attendu: "2+1/4", exact: true },
+            { question: "b)", attendu: ["2h15", "2h15min", "135min"], exact: true },
+            { question: "c)", attendu: "2,25", exact: true },
+            { question: "d)", attendu: ["retour", "le retour"] },
+          ],
           micros: ["fraction_mixte_ecrire", "fraction_encadrer"],
         },
         {
@@ -296,6 +406,13 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           figure: barres([{ d: 5, label: "ruban", parts: [17], fois: 4 }]),
           correction:
             "a) 1 mètre = 5 morceaux. 3 mètres = 3 × 5 = 15 morceaux. Et 2 de plus : 15 + 2 = 17 morceaux.\nb) $3 + \\dfrac{2}{5} = \\dfrac{17}{5}$ mètres.\nc) 12 morceaux : $\\dfrac{12}{5}$ m. Et 2 × 5 = 10 : $\\dfrac{12}{5} = \\dfrac{10}{5} + \\dfrac{2}{5} = 2 + \\dfrac{2}{5}$ m.\nd) 17 − 12 = 5 morceaux. $\\dfrac{5}{5} = 1$ : il reste 1 mètre.\n⛔ Le piège du a) : répondre 5 morceaux (3 + 2). Chaque mètre entier donne 5 morceaux.\nRéponse : a) 17 ; b) $\\dfrac{17}{5}$ ; c) $2 + \\dfrac{2}{5}$ m ; d) 5 morceaux, 1 mètre.",
+          reponses: [
+            { question: "a)", attendu: "17" },
+            { question: "b)", attendu: "17/5", exact: true },
+            { question: "c)", attendu: "2+2/5", exact: true },
+            { question: "d) morceaux", attendu: "5" },
+            { question: "d) mètres", attendu: "1" },
+          ],
           micros: ["fraction_mixte_regrouper", "fraction_mixte_ecrire"],
         },
         {
@@ -304,6 +421,14 @@ export const exercicesFractionMixteCm2: FicheExercicesData = {
           figure: droiteRel(3, 4, 0.25, [{ value: 3.5, label: "3 + 1/2" }], { nombres: 1 }),
           correction:
             "a) $3 = \\dfrac{12}{4}$ ; $4 = \\dfrac{16}{4}$ ; $3 + \\dfrac{1}{2} = \\dfrac{14}{4}$ (une moitié = 2 quarts).\nb) Indice 1 : mon numérateur est entre 12 et 16. Il vaut 13, 14 ou 15.\nIndice 2 : il est impair, il reste 13 ou 15.\nIndice 3 : il dépasse 14. Je suis $\\dfrac{15}{4}$.\nc) $\\dfrac{15}{4} = 3 + \\dfrac{3}{4} = 3{,}75$.\n⛔ Le piège : chercher un numérateur entre 3 et 4. Il faut d'abord écrire 3 et 4 en QUARTS.\nRéponse : b) $\\dfrac{15}{4}$ ; c) $3 + \\dfrac{3}{4}$ et 3,75.",
+          reponses: [
+            { question: "a) 3", attendu: "12/4", exact: true },
+            { question: "a) 4", attendu: "16/4", exact: true },
+            { question: "a) 3 + 1/2", attendu: "14/4", exact: true },
+            { question: "b)", attendu: "15/4", exact: true },
+            { question: "c) entier", attendu: "3+3/4", exact: true },
+            { question: "c) virgule", attendu: "3,75", exact: true },
+          ],
           micros: ["fraction_encadrer", "fraction_mixte_regrouper", "fraction_mixte_ecrire"],
         },
       ],

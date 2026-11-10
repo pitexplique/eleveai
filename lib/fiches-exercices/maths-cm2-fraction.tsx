@@ -95,6 +95,14 @@ export const exercicesFractionCm2: FicheExercicesData = {
           ]),
           correction:
             "Je compte d'abord TOUTES les parts : c'est le dénominateur, en bas.\nPuis je compte les parts bleues : c'est le numérateur, en haut.\nBarre A : 6 parts, 5 bleues. $\\dfrac{5}{6}$ : cinq sixièmes.\nBarre B : 4 parts, 1 bleue. $\\dfrac{1}{4}$ : un quart.\nBarre C : 9 parts, 4 bleues. $\\dfrac{4}{9}$ : quatre neuvièmes.\n⛔ Le piège : mettre en bas les parts BLANCHES. Pour B, on écrirait $\\dfrac{1}{3}$. En bas, je mets toutes les parts.\nRéponse : A : $\\dfrac{5}{6}$ ; B : $\\dfrac{1}{4}$ ; C : $\\dfrac{4}{9}$.",
+          reponses: [
+            { question: "A", attendu: "5/6" },
+            { question: "B", attendu: "1/4" },
+            { question: "C", attendu: "4/9" },
+            { question: "A lettres", attendu: "cinq sixièmes" },
+            { question: "B lettres", attendu: "un quart" },
+            { question: "C lettres", attendu: "quatre neuvièmes" },
+          ],
           micros: ["fraction_lire"],
         },
         {
@@ -102,6 +110,12 @@ export const exercicesFractionCm2: FicheExercicesData = {
           figure: disque(5, 8),
           correction:
             "La pizza est coupée en 8 parts égales : le dénominateur est 8.\na) Je compte 5 parts bleues : $\\dfrac{5}{8}$ de la pizza est mangée.\nb) 8 − 5 = 3 parts restent : $\\dfrac{3}{8}$.\nc) Le numérateur, en haut, est 5. Le dénominateur, en bas, est 8.\n⭐ Je vérifie : 5 parts et 3 parts font 8 parts, toute la pizza. $\\dfrac{8}{8} = 1$.\n⛔ Le piège : écrire $\\dfrac{5}{3}$, les parts mangées sur les parts restantes. En bas, toujours TOUTES les parts.\nRéponse : a) $\\dfrac{5}{8}$ ; b) $\\dfrac{3}{8}$ ; c) numérateur 5, dénominateur 8.",
+          reponses: [
+            { question: "a)", attendu: "5/8" },
+            { question: "b)", attendu: "3/8" },
+            { question: "c) num.", attendu: "5" },
+            { question: "c) dén.", attendu: "8" },
+          ],
           micros: ["fraction_lire", "fraction_representer"],
         },
         {
@@ -109,6 +123,12 @@ export const exercicesFractionCm2: FicheExercicesData = {
           figure: rect(4, 5, 7),
           correction:
             "a) 4 lignes de 5 carrés : 4 × 5 = 20 carrés.\nb) Je compte 7 carrés bleus sur 20 : $\\dfrac{7}{20}$.\nc) Le dénominateur 20 dit : 20 carrés en tout. Le numérateur 3 dit : j'en prends 3. Il faut 3 carrés.\nd) 20 − 7 − 3 = 10 carrés vides : $\\dfrac{10}{20}$. C'est la moitié du potager !\n⛔ Le piège : prendre les 5 carrés d'une seule ligne pour le dénominateur. Le tout, c'est le potager entier.\nRéponse : a) 20 ; b) $\\dfrac{7}{20}$ ; c) 3 carrés ; d) $\\dfrac{10}{20}$, la moitié.",
+          reponses: [
+            { question: "a)", attendu: "20" },
+            { question: "b)", attendu: "7/20" },
+            { question: "c)", attendu: "3" },
+            { question: "d)", attendu: "10/20" },
+          ],
           micros: ["fraction_representer"],
         },
         {
@@ -120,13 +140,19 @@ export const exercicesFractionCm2: FicheExercicesData = {
           ], { nombres: 1 }),
           correction:
             "a) Entre 0 et 1, je compte les SAUTS d'une graduation à l'autre : 8 sauts. Chaque saut vaut $\\dfrac{1}{8}$.\nb) A est à 2 sauts de 0 : $\\dfrac{2}{8}$.\nB est à 5 sauts de 0 : $\\dfrac{5}{8}$.\nC est à 7 sauts de 0 : $\\dfrac{7}{8}$.\n⛔ Le piège : compter les TRAITS, 0 compris. Pour A, on trouverait 3. Je compte les sauts.\nRéponse : a) 8 parts ; b) A : $\\dfrac{2}{8}$ ; B : $\\dfrac{5}{8}$ ; C : $\\dfrac{7}{8}$.",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "A", attendu: "2/8" },
+            { question: "B", attendu: "5/8" },
+            { question: "C", attendu: "7/8" },
+          ],
           micros: ["fraction_droite"],
         },
         {
-          enonce: "Le sentier d'une course d'orientation fait 2 km. Une balise est posée tous les tiers de kilomètre.\na) Place sur la droite les balises à $\\dfrac{1}{3}$ ; $\\dfrac{2}{3}$ ; $\\dfrac{4}{3}$ et $\\dfrac{5}{3}$ km du départ.\nb) Lesquelles sont après 1 km ?",
+          enonce: "Le sentier d'une course d'orientation fait 2 km. Une balise est posée tous les tiers de kilomètre. Les balises sont à $\\dfrac{1}{3}$ ; $\\dfrac{2}{3}$ ; $\\dfrac{4}{3}$ et $\\dfrac{5}{3}$ km du départ.\na) Sur la droite, combien de sauts d'un tiers fais-tu depuis 0 pour arriver à la balise à $\\dfrac{5}{3}$ km ?\nb) Lesquelles sont après 1 km ?",
           figure: droiteRel(0, 2, 1 / 3, [], { nombres: 1 }),
           correction:
-            "Entre 0 et 1, il y a 3 sauts égaux : chaque saut vaut $\\dfrac{1}{3}$.\na) $\\dfrac{1}{3}$ : 1 saut depuis 0. $\\dfrac{2}{3}$ : 2 sauts.\n$\\dfrac{3}{3}$ tombe pile sur 1.\n$\\dfrac{4}{3}$ : 4 sauts, soit 1 saut après 1. $\\dfrac{5}{3}$ : 5 sauts, soit 2 sauts après 1.\nb) $\\dfrac{4}{3}$ et $\\dfrac{5}{3}$ : leur numérateur dépasse 3.\n⛔ Le piège : placer $\\dfrac{4}{3}$ avant 1. Une fraction dépasse 1 dès que le haut dépasse le bas.\nRéponse : b) les balises à $\\dfrac{4}{3}$ et $\\dfrac{5}{3}$ km.",
+            "Entre 0 et 1, il y a 3 sauts égaux : chaque saut vaut $\\dfrac{1}{3}$.\na) $\\dfrac{1}{3}$ : 1 saut depuis 0. $\\dfrac{2}{3}$ : 2 sauts.\n$\\dfrac{3}{3}$ tombe pile sur 1.\n$\\dfrac{4}{3}$ : 4 sauts, soit 1 saut après 1. $\\dfrac{5}{3}$ : 5 sauts, soit 2 sauts après 1.\nb) $\\dfrac{4}{3}$ et $\\dfrac{5}{3}$ : leur numérateur dépasse 3.\n⛔ Le piège : placer $\\dfrac{4}{3}$ avant 1. Une fraction dépasse 1 dès que le haut dépasse le bas.\nRéponse : a) 5 sauts ; b) les balises à $\\dfrac{4}{3}$ et $\\dfrac{5}{3}$ km.",
           schema: ecranSeulement(
             droiteRel(0, 2, 1 / 3, [
               { value: 1 / 3, label: "1/3" },
@@ -135,6 +161,10 @@ export const exercicesFractionCm2: FicheExercicesData = {
               { value: 5 / 3, label: "5/3" },
             ], { nombres: 1 }),
           ),
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "4/3 ; 5/3" },
+          ],
           micros: ["fraction_droite"],
         },
         {
@@ -142,6 +172,12 @@ export const exercicesFractionCm2: FicheExercicesData = {
           correction:
             "a) Même dénominateur : les parts ont la même taille. 3 parts contre 5 parts. $\\dfrac{3}{7} < \\dfrac{5}{7}$.\nb) Même numérateur : 2 parts de chaque côté. Mais un tiers est plus GROS qu'un cinquième. $\\dfrac{2}{3} > \\dfrac{2}{5}$.\nc) $\\dfrac{8}{8} = 1$, et 9 huitièmes, c'est un huitième de plus. $\\dfrac{9}{8} > 1$.\nd) 6 parts sur 6, c'est toute l'unité. $\\dfrac{6}{6} = 1$.\n⛔ Le piège du b) : croire $\\dfrac{2}{5}$ plus grand « parce que 5 est plus grand que 3 ». Plus je coupe, plus les parts sont PETITES.\nRéponse : a) < ; b) > ; c) > ; d) =.",
           schema: ecranSeulement(comparer([2, 3], [2, 5])),
+          reponses: [
+            { question: "a)", attendu: "<" },
+            { question: "b)", attendu: ">" },
+            { question: "c)", attendu: ">" },
+            { question: "d)", attendu: "=" },
+          ],
           micros: ["fraction_comparer"],
         },
         {
@@ -155,6 +191,13 @@ export const exercicesFractionCm2: FicheExercicesData = {
               { d: 8, label: "4/8", parts: [4] },
             ]),
           ),
+          reponses: [
+            { question: "a) 1er", attendu: "2" },
+            { question: "a) 2e", attendu: "4" },
+            { question: "a) 3e", attendu: "10" },
+            { question: "b) 1er", attendu: "6" },
+            { question: "b) 2e", attendu: "3" },
+          ],
           micros: ["fraction_equivalente"],
         },
         {
@@ -162,6 +205,12 @@ export const exercicesFractionCm2: FicheExercicesData = {
           correction:
             "Le dénominateur dit le rang : 10, ce sont des dixièmes ; 100, des centièmes.\na) 3 dixièmes : $\\dfrac{3}{10} = 0{,}3$.\nb) 9 dixièmes : $\\dfrac{9}{10} = 0{,}9$.\nc) 45 centièmes : $\\dfrac{45}{100} = 0{,}45$. Sur la grille de 100, ce sont 45 cases.\nd) 6 centièmes : le 6 va au rang des centièmes. $\\dfrac{6}{100} = 0{,}06$.\n⛔ Le piège du d) : écrire 0,6. Ça, ce sont 6 DIXIÈMES. Des centièmes ont deux chiffres après la virgule.\nRéponse : a) 0,3 ; b) 0,9 ; c) 0,45 ; d) 0,06.",
           schema: ecranSeulement(cent(45)),
+          reponses: [
+            { question: "a)", attendu: "0,3", exact: true },
+            { question: "b)", attendu: "0,9", exact: true },
+            { question: "c)", attendu: "0,45", exact: true },
+            { question: "d)", attendu: "0,06", exact: true },
+          ],
           micros: ["fraction_decimale"],
         },
       ],
@@ -187,6 +236,12 @@ export const exercicesFractionCm2: FicheExercicesData = {
             { d: 4, label: "3/4", parts: [3] },
             { d: 8, label: "3/8", parts: [3] },
           ]),
+          reponses: [
+            { question: "a)", attendu: "3/4", exact: true },
+            { question: "b) 10/15", attendu: "2/3", exact: true },
+            { question: "b) 4/12", attendu: "1/3", exact: true },
+            { question: "c)", attendu: "non" },
+          ],
           micros: ["fraction_equivalente", "fraction_defi"],
         },
         {
@@ -194,6 +249,16 @@ export const exercicesFractionCm2: FicheExercicesData = {
           correction:
             "Je passe d'abord en centièmes : je multiplie le haut et le bas pour avoir 100 en bas.\na) 4 × 25 = 100. $\\dfrac{1}{4} = \\dfrac{25}{100} = 0{,}25$, soit 25 %. Sur la grille : 25 cases.\nb) 2 × 50 = 100. $\\dfrac{1}{2} = \\dfrac{50}{100} = 0{,}5$, soit 50 %.\nc) 4 × 25 = 100. $\\dfrac{3}{4} = \\dfrac{75}{100} = 0{,}75$, soit 75 %.\nd) 5 × 20 = 100. $\\dfrac{1}{5} = \\dfrac{20}{100} = 0{,}2$, soit 20 %.\n⛔ Le piège : écrire 3,4 pour trois quarts. La barre de fraction n'est pas une virgule : trois quarts, c'est 3 ÷ 4 = 0,75.\n⛔ Autre piège : écrire 4 % pour un quart. Un quart de la grille, ce sont 25 cases : 25 %.\nRéponse : a) 0,25 et 25 % ; b) 0,5 et 50 % ; c) 0,75 et 75 % ; d) 0,2 et 20 %.",
           schema: cent(25),
+          reponses: [
+            { question: "a) virgule", attendu: "0,25", exact: true },
+            { question: "a) %", attendu: "25 %", exact: true },
+            { question: "b) virgule", attendu: ["0,5", "0,50"], exact: true },
+            { question: "b) %", attendu: "50 %", exact: true },
+            { question: "c) virgule", attendu: "0,75", exact: true },
+            { question: "c) %", attendu: "75 %", exact: true },
+            { question: "d) virgule", attendu: ["0,2", "0,20"], exact: true },
+            { question: "d) %", attendu: "20 %", exact: true },
+          ],
           micros: ["fraction_decimale"],
         },
         {
@@ -201,6 +266,11 @@ export const exercicesFractionCm2: FicheExercicesData = {
           correction:
             "Un dénominateur est un multiple de l'autre : je coupe chaque part en morceaux égaux.\na) 4 × 2 = 8 : $\\dfrac{3}{4} = \\dfrac{6}{8}$. Et $\\dfrac{6}{8} > \\dfrac{5}{8}$, donc $\\dfrac{3}{4} > \\dfrac{5}{8}$.\nb) 3 × 2 = 6 : $\\dfrac{2}{3} = \\dfrac{4}{6}$. Et $\\dfrac{4}{6} < \\dfrac{5}{6}$, donc $\\dfrac{2}{3} < \\dfrac{5}{6}$.\nc) 2 × 4 = 8 : $\\dfrac{1}{2} = \\dfrac{4}{8}$. Et $\\dfrac{4}{8} > \\dfrac{3}{8}$, donc $\\dfrac{1}{2} > \\dfrac{3}{8}$.\n⛔ Le piège du a) : dire que $\\dfrac{5}{8}$ est plus grand « parce que 5 est plus grand que 3 ». Je compare les numérateurs seulement quand les parts ont la même taille.\nRéponse : a) $\\dfrac{3}{4} > \\dfrac{5}{8}$ ; b) $\\dfrac{2}{3} < \\dfrac{5}{6}$ ; c) $\\dfrac{1}{2} > \\dfrac{3}{8}$.",
           schema: comparer([3, 4], [5, 8]),
+          reponses: [
+            { question: "a)", attendu: ">" },
+            { question: "b)", attendu: "<" },
+            { question: "c)", attendu: ">" },
+          ],
           micros: ["fraction_comparer"],
         },
         {
@@ -215,13 +285,21 @@ export const exercicesFractionCm2: FicheExercicesData = {
               { value: 1.25, label: "5/4" },
             ], { nombres: 0.5 }),
           ),
+          reponses: [
+            { attendu: "1/4 < 1/2 < 3/4 < 1 < 5/4", ordre: true },
+          ],
           micros: ["fraction_comparer", "fraction_droite"],
         },
         {
-          enonce: "Hugo et Jade ont deux tartes de même taille. Hugo mange $\\dfrac{3}{9}$ de la sienne. Jade mange $\\dfrac{1}{3}$ de la sienne.\na) Qui a mangé le plus ?\nb) Écris une fraction égale à $\\dfrac{1}{3}$ avec le dénominateur 12.\nc) Ilan mange $\\dfrac{3}{6}$ d'une tarte. Écris cette fraction plus simplement.",
+          enonce: "Hugo et Jade ont deux tartes de même taille. Hugo mange $\\dfrac{3}{9}$ de la sienne. Jade mange $\\dfrac{1}{3}$ de la sienne.\na) Qui a mangé le plus ?\nA : Hugo.\nB : Jade.\nC : ils ont mangé autant.\nb) Écris une fraction égale à $\\dfrac{1}{3}$ avec le dénominateur 12.\nc) Ilan mange $\\dfrac{3}{6}$ d'une tarte. Écris cette fraction plus simplement.",
           figure: deuxDisques([3, 9], [1, 3]),
           correction:
-            "a) Sur les disques, la partie bleue a la même taille.\nJe divise le haut et le bas de $\\dfrac{3}{9}$ par 3 : $\\dfrac{3}{9} = \\dfrac{1}{3}$. Ils ont mangé autant l'un que l'autre.\nb) 3 × 4 = 12, donc en haut 1 × 4 = 4 : $\\dfrac{1}{3} = \\dfrac{4}{12}$.\nc) 3 ÷ 3 = 1 et 6 ÷ 3 = 2 : $\\dfrac{3}{6} = \\dfrac{1}{2}$, la moitié de la tarte.\n⛔ Le piège du a) : dire Hugo « parce que 3 est plus grand que 1 ». Ses parts sont 3 fois plus petites.\nRéponse : a) autant tous les deux ; b) $\\dfrac{4}{12}$ ; c) $\\dfrac{1}{2}$.",
+            "a) Sur les disques, la partie bleue a la même taille.\nJe divise le haut et le bas de $\\dfrac{3}{9}$ par 3 : $\\dfrac{3}{9} = \\dfrac{1}{3}$. Ils ont mangé autant l'un que l'autre : la réponse C.\nb) 3 × 4 = 12, donc en haut 1 × 4 = 4 : $\\dfrac{1}{3} = \\dfrac{4}{12}$.\nc) 3 ÷ 3 = 1 et 6 ÷ 3 = 2 : $\\dfrac{3}{6} = \\dfrac{1}{2}$, la moitié de la tarte.\n⛔ Le piège du a) : dire Hugo « parce que 3 est plus grand que 1 ». Ses parts sont 3 fois plus petites.\nRéponse : a) C, autant tous les deux ; b) $\\dfrac{4}{12}$ ; c) $\\dfrac{1}{2}$.",
+          reponses: [
+            { question: "a)", attendu: "C" },
+            { question: "b)", attendu: "4/12", exact: true },
+            { question: "c)", attendu: "1/2", exact: true },
+          ],
           micros: ["fraction_equivalente", "fraction_representer", "fraction_comparer"],
         },
         {
@@ -229,13 +307,25 @@ export const exercicesFractionCm2: FicheExercicesData = {
           correction:
             "a) 71 % veut dire 71 sur 100 : $\\dfrac{71}{100} = 0{,}71$. Sur la grille de 100 : 71 cases.\nb) $\\dfrac{3}{4} = \\dfrac{75}{100}$, soit 75 %. Et 71 < 75 : un peu MOINS que les trois quarts.\nc) $\\dfrac{7}{10} = \\dfrac{70}{100}$, soit 70 %. Et 71 > 70 : un peu PLUS que sept dixièmes.\nd) 100 − 71 = 29 : 29 % de la surface n'est pas couvert d'eau.\n⛔ Le piège : écrire 7,1 pour 71 %. Un pourcentage, ce sont des centièmes : 71 % = 0,71.\nRéponse : a) $\\dfrac{71}{100}$ et 0,71 ; b) moins ; c) plus ; d) 29 %.",
           schema: ecranSeulement(cent(71)),
+          reponses: [
+            { question: "a) fraction", attendu: "71/100", exact: true },
+            { question: "a) virgule", attendu: "0,71", exact: true },
+            { question: "b)", attendu: "moins" },
+            { question: "c)", attendu: "plus" },
+            { question: "d)", attendu: "29 %" },
+          ],
           micros: ["fraction_decimale", "fraction_defi"],
         },
         {
-          enonce: "Trois élèves se trompent. Trouve la bonne réponse.\na) Tom : « $\\dfrac{3}{4} = 3{,}4$. »\nb) Léa : « $\\dfrac{2}{3} = \\dfrac{3}{4}$, car j'ajoute 1 en haut et en bas. »\nc) Sam : « $\\dfrac{1}{4}$, c'est 4 %. »",
+          enonce: "Trois élèves se trompent. Trouve la bonne réponse.\na) Tom : « $\\dfrac{3}{4} = 3{,}4$. » Écris $\\dfrac{3}{4}$ avec une virgule.\nb) Léa : « $\\dfrac{2}{3} = \\dfrac{3}{4}$, car j'ajoute 1 en haut et en bas. » Complète une vraie égalité : $\\dfrac{2}{3} = \\dfrac{\\ldots}{6}$.\nc) Sam : « $\\dfrac{1}{4}$, c'est 4 %. » Quel est le bon pourcentage ?",
           correction:
             "a) La barre de fraction n'est pas une virgule. Trois quarts, c'est 3 ÷ 4 = 0,75. Ou : $\\dfrac{3}{4} = \\dfrac{75}{100} = 0{,}75$.\nb) Ajouter le même nombre en haut et en bas change la fraction. $\\dfrac{2}{3} = \\dfrac{8}{12}$ et $\\dfrac{3}{4} = \\dfrac{9}{12}$ : elles ne sont pas égales. Pour une fraction égale, je multiplie : $\\dfrac{2}{3} = \\dfrac{4}{6}$.\nc) Un quart de la grille de 100, ce sont 100 ÷ 4 = 25 cases : 25 %.\n⛔ Trois pièges à retenir : la barre n'est pas une virgule ; jamais « + » en haut et en bas ; un quart, c'est 25 %, pas 4 %.\nRéponse : a) 0,75 ; b) $\\dfrac{2}{3} = \\dfrac{4}{6}$ ; c) 25 %.",
           schema: ecranSeulement(cent(25)),
+          reponses: [
+            { question: "a)", attendu: "0,75", exact: true },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "25 %" },
+          ],
           micros: ["fraction_defi", "fraction_decimale", "fraction_equivalente"],
         },
         {
@@ -247,6 +337,13 @@ export const exercicesFractionCm2: FicheExercicesData = {
           ], { nombres: 1 }),
           correction:
             "Entre 0 et 1, il y a 2 sauts : chaque saut vaut $\\dfrac{1}{2}$.\na) A est à 3 sauts de 0 : $\\dfrac{3}{2}$. B est à 1 saut : $\\dfrac{1}{2}$. C est à 5 sauts : $\\dfrac{5}{2}$.\nb) A et C : leur numérateur dépasse 2.\nc) $\\dfrac{3}{2}$, c'est 1 et une moitié : $\\dfrac{3}{2} = 1{,}5$.\n⛔ Le piège du c) : écrire 3,2. La barre de fraction n'est pas une virgule.\nRéponse : a) A : $\\dfrac{3}{2}$ ; B : $\\dfrac{1}{2}$ ; C : $\\dfrac{5}{2}$ ; b) A et C ; c) 1,5.",
+          reponses: [
+            { question: "A", attendu: "3/2" },
+            { question: "B", attendu: "1/2" },
+            { question: "C", attendu: "5/2" },
+            { question: "b)", attendu: "A ; C" },
+            { question: "c)", attendu: "1,5", exact: true },
+          ],
           micros: ["fraction_droite", "fraction_comparer", "fraction_decimale"],
         },
       ],
@@ -269,6 +366,13 @@ export const exercicesFractionCm2: FicheExercicesData = {
           correction:
             "a) Le match est partagé en 4 parts égales : un quart-temps, c'est $\\dfrac{1}{4}$ du match.\nb) $\\dfrac{1}{4} = \\dfrac{25}{100}$ : 25 % du match.\nc) 3 quarts-temps : $\\dfrac{3}{4}$ du match. 3 × 10 = 30 minutes. Et $\\dfrac{3}{4} = \\dfrac{75}{100}$ : 75 % du match.\nd) 2 ÷ 2 = 1 et 4 ÷ 2 = 2 : $\\dfrac{2}{4} = \\dfrac{1}{2}$. C'est la moitié du match : 20 minutes.\n⛔ Le piège du b) : écrire 4 %. Un quart, c'est 25 % : 25 + 25 + 25 + 25 = 100.\nRéponse : a) $\\dfrac{1}{4}$ ; b) 25 % ; c) $\\dfrac{3}{4}$, 30 minutes ; d) $\\dfrac{1}{2}$.",
           schema: ecranSeulement(disque(3, 4)),
+          reponses: [
+            { question: "a)", attendu: "1/4" },
+            { question: "b)", attendu: "25 %" },
+            { question: "c) fraction", attendu: "3/4" },
+            { question: "c) minutes", attendu: "30" },
+            { question: "d)", attendu: "1/2", exact: true },
+          ],
           micros: ["fraction_defi", "fraction_decimale", "fraction_equivalente"],
         },
         {
@@ -281,6 +385,16 @@ export const exercicesFractionCm2: FicheExercicesData = {
           ], "vide"),
           correction:
             "a) Le tout, ce sont les 12 carreaux. Mer : $\\dfrac{6}{12}$ ; sable : $\\dfrac{3}{12}$ ; forêt : $\\dfrac{2}{12}$ ; vide : $\\dfrac{1}{12}$.\nb) 6 ÷ 6 = 1 et 12 ÷ 6 = 2 : $\\dfrac{6}{12} = \\dfrac{1}{2}$.\n3 ÷ 3 = 1 et 12 ÷ 3 = 4 : $\\dfrac{3}{12} = \\dfrac{1}{4}$.\nc) $\\dfrac{1}{2} = \\dfrac{50}{100}$ : 50 %.\nd) Ensemble : 6 + 3 = 9 carreaux, soit $\\dfrac{9}{12}$. Et $\\dfrac{3}{4} = \\dfrac{9}{12}$ (× 3 en haut et en bas). Pas plus : exactement les trois quarts.\n⛔ Le piège du a) : écrire $\\dfrac{6}{3}$ pour la mer, en comparant au sable. Une fraction de la fresque se rapporte au TOUT : les 12 carreaux.\nRéponse : a) $\\dfrac{6}{12}$, $\\dfrac{3}{12}$, $\\dfrac{2}{12}$, $\\dfrac{1}{12}$ ; b) $\\dfrac{1}{2}$ et $\\dfrac{1}{4}$ ; c) 50 % ; d) non, exactement $\\dfrac{3}{4}$.",
+          reponses: [
+            { question: "a) mer", attendu: "6/12" },
+            { question: "a) sable", attendu: "3/12" },
+            { question: "a) forêt", attendu: "2/12" },
+            { question: "a) vide", attendu: "1/12" },
+            { question: "b) mer", attendu: "1/2", exact: true },
+            { question: "b) sable", attendu: "1/4", exact: true },
+            { question: "c)", attendu: "50 %" },
+            { question: "d)", attendu: "non" },
+          ],
           micros: ["fraction_defi", "fraction_equivalente", "fraction_decimale"],
         },
         {
@@ -294,6 +408,13 @@ export const exercicesFractionCm2: FicheExercicesData = {
           ]),
           correction:
             "Sur les barres, la ronde est le tout : la barre entière.\na) Une noire, c'est $\\dfrac{1}{4}$ de ronde. Une croche en est la moitié : la ronde est coupée en 8. Une croche dure $\\dfrac{1}{8}$ de ronde.\nb) Une blanche = 2 noires, soit $\\dfrac{2}{4}$ de ronde. Et $\\dfrac{2}{4} = \\dfrac{1}{2}$ : une demi-ronde.\nc) Une noire = 2 croches, soit $\\dfrac{2}{8}$ de ronde. 3 croches font $\\dfrac{3}{8}$. Et $\\dfrac{3}{8} > \\dfrac{2}{8}$ : c'est plus long.\nd) La ronde est coupée en 8 croches : $\\dfrac{8}{8} = 1$.\n⛔ Le piège du c) : comparer 3 et 1 sans regarder la taille des parts. Je passe tout en huitièmes.\nRéponse : a) $\\dfrac{1}{8}$ ; b) 2 noires, $\\dfrac{1}{2}$ ; c) plus long ; d) 8 croches.",
+          reponses: [
+            { question: "a)", attendu: "1/8" },
+            { question: "b) noires", attendu: "2" },
+            { question: "b) simplifié", attendu: "1/2", exact: true },
+            { question: "c)", attendu: ["plus", "plus long"] },
+            { question: "d)", attendu: "8" },
+          ],
           micros: ["fraction_lire", "fraction_equivalente", "fraction_comparer"],
         },
         {
@@ -306,6 +427,13 @@ export const exercicesFractionCm2: FicheExercicesData = {
           ]),
           correction:
             "a) $\\dfrac{1}{4}$ de 20 : je partage 20 en 4 parts égales. 20 ÷ 4 = 5 billes bleues : une rangée sur quatre.\nb) $\\dfrac{2}{5}$ de 20 : je partage en 5 parts égales, 20 ÷ 5 = 4. J'en prends 2 : 2 × 4 = 8 billes orange.\nc) 20 − 5 − 8 = 7 billes vertes : $\\dfrac{7}{20}$ des billes.\nd) 20 × 5 = 100 : $\\dfrac{7}{20} = \\dfrac{35}{100}$, soit 35 %.\n⛔ Le piège du b) : calculer 20 ÷ 2. Je divise par le nombre du BAS, puis je multiplie par celui du HAUT.\nRéponse : a) 5 ; b) 8 ; c) 7, soit $\\dfrac{7}{20}$ ; d) 35 %.",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "8" },
+            { question: "c) nombre", attendu: "7" },
+            { question: "c) fraction", attendu: "7/20" },
+            { question: "d)", attendu: "35 %" },
+          ],
           micros: ["fraction_defi", "fraction_representer", "fraction_decimale"],
         },
       ],

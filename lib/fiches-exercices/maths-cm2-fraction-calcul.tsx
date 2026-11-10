@@ -84,6 +84,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           figure: barres([{ d: 8, label: "pizza", parts: [3, 2] }]),
           correction:
             "a) La pizza a 8 parts égales. Elsa : 3 parts, $\\dfrac{3}{8}$. Noah : 2 parts, $\\dfrac{2}{8}$.\nb) 3 huitièmes et 2 huitièmes font 5 huitièmes : $\\dfrac{3}{8} + \\dfrac{2}{8} = \\dfrac{5}{8}$.\nc) La pizza entière, c'est $\\dfrac{8}{8}$. Il reste 8 − 5 = 3 parts : $\\dfrac{3}{8}$.\n⛔ Le piège : écrire $\\dfrac{5}{16}$ en ajoutant aussi les dénominateurs. La pizza a toujours 8 parts, pas 16 !\nRéponse : a) $\\dfrac{3}{8}$ et $\\dfrac{2}{8}$ ; b) $\\dfrac{5}{8}$ ; c) $\\dfrac{3}{8}$.",
+          reponses: [
+            { question: "a) Elsa", attendu: "3/8" },
+            { question: "a) Noah", attendu: "2/8" },
+            { question: "b)", attendu: "5/8" },
+            { question: "c)", attendu: "3/8" },
+          ],
           micros: ["fraction_additionner"],
         },
         {
@@ -91,6 +97,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "Même dénominateur : j'ajoute les numérateurs, le dénominateur ne bouge pas.\na) 1 quart + 2 quarts = 3 quarts : $\\dfrac{1}{4} + \\dfrac{2}{4} = \\dfrac{3}{4}$.\nb) $\\dfrac{3}{7} + \\dfrac{3}{7} = \\dfrac{6}{7}$.\nc) $\\dfrac{5}{9} + \\dfrac{4}{9} = \\dfrac{9}{9} = 1$ : l'unité entière.\nd) $\\dfrac{2}{6} + \\dfrac{1}{6} = \\dfrac{3}{6}$. Je simplifie : 3 ÷ 3 = 1 et 6 ÷ 3 = 2, donc $\\dfrac{3}{6} = \\dfrac{1}{2}$.\n⛔ Le piège : $\\dfrac{1}{4} + \\dfrac{2}{4} = \\dfrac{3}{8}$. Faux ! $\\dfrac{3}{8}$ est plus petit que $\\dfrac{2}{4}$ : en ajoutant, j'aurais perdu.\nRéponse : a) $\\dfrac{3}{4}$ ; b) $\\dfrac{6}{7}$ ; c) 1 ; d) $\\dfrac{1}{2}$.",
           schema: ecranSeulement(barres([{ d: 4, label: "1/4 + 2/4", parts: [1, 2] }])),
+          reponses: [
+            { question: "a)", attendu: "3/4" },
+            { question: "b)", attendu: "6/7" },
+            { question: "c)", attendu: "1", exact: true },
+            { question: "d)", attendu: "1/2", exact: true },
+          ],
           micros: ["fraction_additionner"],
         },
         {
@@ -98,6 +110,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "Même dénominateur : j'enlève des numérateurs, le dénominateur reste.\na) $\\dfrac{7}{8} - \\dfrac{3}{8} = \\dfrac{4}{8}$. Je simplifie par 4 : $\\dfrac{4}{8} = \\dfrac{1}{2}$.\nb) $\\dfrac{5}{6} - \\dfrac{1}{6} = \\dfrac{4}{6}$. Je simplifie par 2 : $\\dfrac{4}{6} = \\dfrac{2}{3}$.\nc) $1 = \\dfrac{5}{5}$. Donc $1 - \\dfrac{2}{5} = \\dfrac{5}{5} - \\dfrac{2}{5} = \\dfrac{3}{5}$.\nd) $\\dfrac{9}{10} - \\dfrac{4}{10} = \\dfrac{5}{10}$. Je simplifie par 5 : $\\dfrac{5}{10} = \\dfrac{1}{2}$.\n⛔ Le piège : enlever aussi en bas. $\\dfrac{7}{8} - \\dfrac{3}{8}$ n'est pas $\\dfrac{4}{0}$ : les parts restent des huitièmes.\nRéponse : a) $\\dfrac{1}{2}$ ; b) $\\dfrac{2}{3}$ ; c) $\\dfrac{3}{5}$ ; d) $\\dfrac{1}{2}$.",
           schema: ecranSeulement(barres([{ d: 8, label: "7/8 − 3/8", parts: [4, 3] }])),
+          reponses: [
+            { question: "a)", attendu: "1/2", exact: true },
+            { question: "b)", attendu: "2/3", exact: true },
+            { question: "c)", attendu: "3/5" },
+            { question: "d)", attendu: "1/2", exact: true },
+          ],
           micros: ["fraction_additionner"],
         },
         {
@@ -105,6 +123,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "Multiplier par 3, c'est ajouter 3 fois la même fraction. Le dénominateur reste.\na) $3 \\times \\dfrac{2}{7} = \\dfrac{2}{7} + \\dfrac{2}{7} + \\dfrac{2}{7} = \\dfrac{6}{7}$.\nb) $4 \\times \\dfrac{1}{5} = \\dfrac{1}{5} + \\dfrac{1}{5} + \\dfrac{1}{5} + \\dfrac{1}{5} = \\dfrac{4}{5}$.\nc) $2 \\times \\dfrac{3}{8} = \\dfrac{3}{8} + \\dfrac{3}{8} = \\dfrac{6}{8}$. Je simplifie : $\\dfrac{6}{8} = \\dfrac{3}{4}$.\nd) $5 \\times \\dfrac{2}{10} = \\dfrac{10}{10} = 1$.\n⛔ Le piège : multiplier aussi le bas. $3 \\times \\dfrac{2}{7}$ n'est pas $\\dfrac{6}{21}$ : on ajoute des septièmes, ils restent des septièmes.\nRéponse : a) $\\dfrac{6}{7}$ ; b) $\\dfrac{4}{5}$ ; c) $\\dfrac{3}{4}$ ; d) 1.",
           schema: barres([{ d: 7, label: "3 × 2/7", parts: [2, 2, 2] }]),
+          reponses: [
+            { question: "a)", attendu: "6/7" },
+            { question: "b)", attendu: "4/5" },
+            { question: "c)", attendu: "3/4" },
+            { question: "d)", attendu: "1" },
+          ],
           micros: ["fraction_produit_entier"],
         },
         {
@@ -112,6 +136,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "Prendre un tiers, c'est partager en 3 parts égales : je divise par le nombre du bas.\na) 18 ÷ 2 = 9.\nb) 21 ÷ 3 = 7. Sur le dessin : 3 rangées de 7 billes, j'en prends une.\nc) 32 ÷ 4 = 8.\nd) 45 ÷ 5 = 9.\n⛔ Le piège : multiplier, 21 × 3 = 63. Un tiers de 21 est PLUS PETIT que 21.\nRéponse : a) 9 ; b) 7 ; c) 8 ; d) 9.",
           schema: ecranSeulement(jetons(3, 7, [{ n: 7, nom: "1/3" }])),
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: "8" },
+            { question: "d)", attendu: "9" },
+          ],
           micros: ["fraction_quantite"],
         },
         {
@@ -120,6 +150,11 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "a) Je partage 12 en 3 rangées égales : 12 ÷ 3 = 4 billes. $\\dfrac{1}{3}$ de 12, c'est 4.\nb) $\\dfrac{2}{3}$, ce sont 2 rangées : 2 × 4 = 8 billes.\nc) 12 − 8 = 4 billes : une rangée, $\\dfrac{1}{3}$ des billes.\n⛔ Le piège du b) : s'arrêter à 4. J'ai partagé (÷ 3), il faut encore PRENDRE 2 parts (× 2).\nRéponse : a) 4 billes ; b) 8 billes ; c) 4 billes.",
           schema: ecranSeulement(jetons(3, 4, [{ n: 8, nom: "donnée" }], "gardée")),
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "8" },
+            { question: "c)", attendu: "4" },
+          ],
           micros: ["fraction_quantite"],
         },
         {
@@ -130,6 +165,11 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
             { d: 2, label: "1/2", parts: [1] },
             { d: 4, label: "1/2 + 1/4", parts: [2, 1] },
           ]),
+          reponses: [
+            { question: "a)", attendu: "3/4" },
+            { question: "b)", attendu: "1/2" },
+            { question: "c)", attendu: "5/8" },
+          ],
           micros: ["fraction_additionner"],
         },
         {
@@ -144,6 +184,11 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           }),
           correction:
             "a) $\\dfrac{3}{4} + \\dfrac{3}{4} + \\dfrac{3}{4} = 3 \\times \\dfrac{3}{4}$.\nb) 3 quarts, trois fois : 3 × 3 = 9 quarts. $3 \\times \\dfrac{3}{4} = \\dfrac{9}{4}$ m.\nc) 2 × 4 = 8 : $\\dfrac{9}{4} = 2 + \\dfrac{1}{4}$. Elle arrive entre 2 et 3 mètres. Sur la droite, le 3e saut finit un trait après 2.\n⛔ Le piège : écrire $\\dfrac{9}{12}$. Chaque saut mesure des QUARTS de mètre : le résultat aussi.\nRéponse : a) $3 \\times \\dfrac{3}{4}$ ; b) $\\dfrac{9}{4}$ m ; c) entre 2 et 3 m.",
+          reponses: [
+            { question: "a) produit", attendu: ["3×3/4", "3*3/4", "3x3/4", "3/4×3", "3/4+3/4+3/4"], exact: true },
+            { question: "b)", attendu: "9/4" },
+            { question: "c)", attendu: ["2 ; 3", "2 < 9/4 < 3"], ordre: true },
+          ],
           micros: ["fraction_produit_entier"],
         },
       ],
@@ -165,6 +210,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "a) $\\dfrac{1}{4} + \\dfrac{1}{4} = \\dfrac{2}{4} = \\dfrac{1}{2} = 0{,}5$.\nb) $\\dfrac{3}{10} + \\dfrac{2}{10} = \\dfrac{5}{10} = \\dfrac{1}{2} = 0{,}5$.\nc) $\\dfrac{1}{2} = \\dfrac{2}{4}$, donc $\\dfrac{1}{2} + \\dfrac{1}{4} = \\dfrac{3}{4} = 0{,}75$. Sur la grille de 100 : 50 cases + 25 cases = 75 cases.\nd) $\\dfrac{3}{4} + \\dfrac{3}{4} = \\dfrac{6}{4} = \\dfrac{3}{2} = 1{,}5$. C'est plus que 1 !\n⛔ Le piège : s'arrêter à $\\dfrac{2}{4}$ ou $\\dfrac{5}{10}$ sans voir la moitié. Je cherche toujours à simplifier.\nRéponse : a) 0,5 ; b) 0,5 ; c) 0,75 ; d) 1,5.",
           schema: cent(75),
+          reponses: [
+            { question: "a)", attendu: "0,5" },
+            { question: "b)", attendu: "0,5" },
+            { question: "c)", attendu: "0,75" },
+            { question: "d)", attendu: "1,5" },
+          ],
           micros: ["fraction_additionner"],
         },
         {
@@ -177,6 +228,11 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
               { d: 8, label: "3/8", parts: [3] },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "3/4" },
+            { question: "b)", attendu: "6/5" },
+            { question: "c)", attendu: "3/4" },
+          ],
           micros: ["fraction_additionner", "fraction_produit_entier"],
         },
         {
@@ -184,6 +240,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "a) $4 \\times \\dfrac{3}{4} = \\dfrac{3}{4} + \\dfrac{3}{4} + \\dfrac{3}{4} + \\dfrac{3}{4} = \\dfrac{12}{4}$.\nb) 3 × 4 = 12 : $\\dfrac{12}{4} = 3$. Il faut 3 litres.\nc) $6 \\times \\dfrac{3}{4} = \\dfrac{18}{4}$. 4 × 4 = 16 : $\\dfrac{18}{4} = 4 + \\dfrac{2}{4} = 4 + \\dfrac{1}{2} = 4{,}5$ litres.\n⛔ Le piège : $4 \\times \\dfrac{3}{4} = \\dfrac{12}{16}$. C'est moins d'un litre pour 4 gâteaux : impossible !\nRéponse : a) $\\dfrac{12}{4}$ ; b) 3 litres ; c) $4 + \\dfrac{1}{2}$, soit 4,5 litres.",
           schema: barres([{ d: 4, label: "4 gâteaux", parts: [3, 3, 3, 3], fois: 3 }]),
+          reponses: [
+            { question: "a)", attendu: "12/4" },
+            { question: "b)", attendu: "3" },
+            { question: "c) entier", attendu: "4+1/2", exact: true },
+            { question: "c) virgule", attendu: ["4,5", "4,50"], exact: true },
+          ],
           micros: ["fraction_produit_entier"],
         },
         {
@@ -191,6 +253,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "a) Je partage : 28 ÷ 4 = 7. Je prends 3 parts : 3 × 7 = 21 élèves à pied.\nb) 28 − 21 = 7 élèves en bus. C'est une part sur quatre : $\\dfrac{1}{4}$ de la classe.\nc) Je partage : 28 ÷ 7 = 4. Je prends 2 parts : 2 × 4 = 8 élèves ont un vélo.\n⛔ Le piège du a) : s'arrêter à 7. 7, c'est un quart ; il en faut trois.\nRéponse : a) 21 ; b) 7, soit $\\dfrac{1}{4}$ ; c) 8.",
           schema: ecranSeulement(jetons(4, 7, [{ n: 21, nom: "à pied" }], "en bus")),
+          reponses: [
+            { question: "a)", attendu: "21" },
+            { question: "b) bus", attendu: "7" },
+            { question: "b) fraction", attendu: "1/4" },
+            { question: "c)", attendu: "8" },
+          ],
           micros: ["fraction_quantite"],
         },
         {
@@ -198,6 +266,13 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "a) 20 ÷ 4 = 5 : $\\dfrac{1}{4}$ de 20 €, c'est 5 €.\nb) 25 % = $\\dfrac{25}{100} = \\dfrac{1}{4}$. Donc 25 % de 20 €, c'est aussi 5 €.\nc) 3 × 5 = 15 € : $\\dfrac{3}{4}$ = 75 %.\nd) 10 % = $\\dfrac{10}{100} = \\dfrac{1}{10}$. 20 ÷ 10 = 2 €.\n⛔ Le piège du b) : répondre 25 €. 25 % n'est pas 25 euros : c'est 25 centièmes de la somme, un quart.\nRéponse : a) 5 € ; b) 5 € ; c) 15 €, 75 % ; d) 2 €.",
           schema: ecranSeulement(cent(25)),
+          reponses: [
+            { question: "a)", attendu: "5 €" },
+            { question: "b)", attendu: "5 €" },
+            { question: "c) €", attendu: "15 €" },
+            { question: "c) %", attendu: "75 %" },
+            { question: "d)", attendu: "2 €" },
+          ],
           micros: ["fraction_quantite"],
         },
         {
@@ -211,6 +286,11 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           }),
           correction:
             "a) $\\dfrac{3}{8} + \\dfrac{4}{8} = \\dfrac{7}{8}$ km.\nb) 1 km = $\\dfrac{8}{8}$. $\\dfrac{8}{8} - \\dfrac{7}{8} = \\dfrac{1}{8}$ km : un seul saut de graduation.\nc) $\\dfrac{7}{8} + \\dfrac{2}{8} = \\dfrac{9}{8}$ km. Et $\\dfrac{9}{8} = 1 + \\dfrac{1}{8}$ km : un peu plus d'un kilomètre.\n⛔ Le piège du a) : $\\dfrac{7}{16}$. Ce serait moins que $\\dfrac{4}{8}$ : elle aurait reculé !\nRéponse : a) $\\dfrac{7}{8}$ km ; b) $\\dfrac{1}{8}$ km ; c) $\\dfrac{9}{8} = 1 + \\dfrac{1}{8}$ km.",
+          reponses: [
+            { question: "a)", attendu: "7/8" },
+            { question: "b)", attendu: "1/8" },
+            { question: "c)", attendu: "1+1/8", exact: true },
+          ],
           micros: ["fraction_additionner"],
         },
         {
@@ -229,6 +309,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
               nombres: 1,
             }),
           ),
+          reponses: [
+            { question: "a)", attendu: "5/4" },
+            { question: "b)", attendu: "1+1/4", exact: true },
+            { question: "c) minutes", attendu: "75" },
+            { question: "c) h min", attendu: ["1h15", "1h15min"], exact: true },
+          ],
           micros: ["fraction_produit_entier"],
         },
         {
@@ -236,6 +322,13 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "Je partage par le nombre du BAS, puis je prends autant de parts que le nombre du HAUT.\na) 30 ÷ 3 = 10.\nb) 30 ÷ 3 = 10, puis 2 × 10 = 20.\nc) 30 ÷ 3 = 10, puis 3 × 10 = 30 : trois tiers, c'est le tout.\nd) 40 ÷ 5 = 8, puis 3 × 8 = 24.\ne) 50 ÷ 10 = 5, puis 7 × 5 = 35.\n⛔ Le piège du b) : diviser par le nombre du haut, 30 ÷ 2 = 15. Le bas partage, le haut prend.\nRéponse : a) 10 ; b) 20 ; c) 30 ; d) 24 ; e) 35.",
           schema: jetons(3, 10, [{ n: 20, nom: "2/3" }]),
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: "30" },
+            { question: "d)", attendu: "24" },
+            { question: "e)", attendu: "35" },
+          ],
           micros: ["fraction_quantite"],
         },
       ],
@@ -258,6 +351,13 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "a) 2 mi-temps égales : une mi-temps, c'est $\\dfrac{1}{2}$ du match. 90 ÷ 2 = 45 minutes.\nb) Je partage : 90 ÷ 3 = 30. Je prends 2 parts : 2 × 30 = 60 minutes.\nc) $\\dfrac{1}{2} = \\dfrac{3}{6}$. Donc $\\dfrac{1}{2} + \\dfrac{1}{6} = \\dfrac{3}{6} + \\dfrac{1}{6} = \\dfrac{4}{6}$. Je simplifie : $\\dfrac{4}{6} = \\dfrac{2}{3}$.\nd) Kenza joue $\\dfrac{2}{3}$ du match, comme Théo : autant, 60 minutes. Je vérifie : 45 + 15 = 60.\n⛔ Le piège du c) : $\\dfrac{1}{2} + \\dfrac{1}{6} = \\dfrac{2}{8}$. C'est moins qu'une mi-temps : impossible !\nRéponse : a) $\\dfrac{1}{2}$, 45 minutes ; b) 60 minutes ; c) $\\dfrac{2}{3}$ ; d) autant.",
           schema: disque(2, 3),
+          reponses: [
+            { question: "a) fraction", attendu: "1/2" },
+            { question: "a) minutes", attendu: "45" },
+            { question: "b)", attendu: "60" },
+            { question: "c)", attendu: "2/3" },
+            { question: "d)", attendu: ["autant", "autant que Théo"] },
+          ],
           micros: ["fraction_quantite", "fraction_additionner"],
         },
         {
@@ -266,6 +366,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           correction:
             "a) $3 \\times \\dfrac{1}{2} = \\dfrac{3}{2}$ litres. 2 demis font 1 : $\\dfrac{3}{2} = 1 + \\dfrac{1}{2}$ litre, soit 1,5 litre.\nb) $2 = \\dfrac{4}{2}$. $\\dfrac{4}{2} - \\dfrac{3}{2} = \\dfrac{1}{2}$ litre reste.\nc) 3 × 12 = 36 crêpes.\nd) 36 ÷ 3 = 12 crêpes au sucre.\n⛔ Le piège du a) : $3 \\times \\dfrac{1}{2} = \\dfrac{3}{6}$. Ce serait moins que pour une seule recette !\nRéponse : a) $1 + \\dfrac{1}{2}$ litre ; b) $\\dfrac{1}{2}$ litre ; c) 36 crêpes ; d) 12 crêpes.",
           schema: barres([{ d: 2, label: "lait", parts: [1, 1, 1], fois: 2 }]),
+          reponses: [
+            { question: "a)", attendu: "1+1/2", exact: true },
+            { question: "b)", attendu: "1/2" },
+            { question: "c)", attendu: "36" },
+            { question: "d)", attendu: "12" },
+          ],
           micros: ["fraction_produit_entier", "fraction_additionner", "fraction_quantite"],
         },
         {
@@ -277,6 +383,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           ], "terre"),
           correction:
             "a) 24 ÷ 8 = 3, puis 3 × 3 = 9 tortues de mer.\nb) 24 ÷ 4 = 6 tortues d'eau douce.\nc) 24 − 9 − 6 = 9 tortues de terre.\nd) $\\dfrac{1}{4} = \\dfrac{2}{8}$. Donc $\\dfrac{3}{8} + \\dfrac{1}{4} = \\dfrac{3}{8} + \\dfrac{2}{8} = \\dfrac{5}{8}$.\n⭐ Je vérifie avec les nombres : 9 + 6 = 15 tortues, et $\\dfrac{5}{8}$ de 24 = 5 × 3 = 15. C'est juste.\n⛔ Le piège du d) : $\\dfrac{3}{8} + \\dfrac{1}{4} = \\dfrac{4}{12}$. Je redécoupe les quarts en huitièmes d'abord.\nRéponse : a) 9 ; b) 6 ; c) 9 ; d) $\\dfrac{5}{8}$.",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "9" },
+            { question: "d)", attendu: "5/8" },
+          ],
           micros: ["fraction_quantite", "fraction_additionner"],
         },
         {
@@ -285,6 +397,12 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           figure: barres([{ d: 8, label: "haie", parts: [2, 3] }]),
           correction:
             "a) $\\dfrac{1}{4} = \\dfrac{2}{8}$. Donc $\\dfrac{1}{4} + \\dfrac{3}{8} = \\dfrac{2}{8} + \\dfrac{3}{8} = \\dfrac{5}{8}$.\nb) Toute la haie, c'est $\\dfrac{8}{8}$. $\\dfrac{8}{8} - \\dfrac{5}{8} = \\dfrac{3}{8}$.\nc) 40 ÷ 8 = 5, puis 3 × 5 = 15 mètres.\nd) $\\dfrac{1}{4} = \\dfrac{25}{100}$ : 25 % de la haie.\n⛔ Le piège du b) : calculer 8 − 5 sans le dénominateur, et écrire 3 mètres. Ce sont 3 HUITIÈMES de la haie.\nRéponse : a) $\\dfrac{5}{8}$ ; b) $\\dfrac{3}{8}$ ; c) 15 mètres ; d) 25 %.",
+          reponses: [
+            { question: "a)", attendu: "5/8" },
+            { question: "b)", attendu: "3/8" },
+            { question: "c)", attendu: "15" },
+            { question: "d)", attendu: "25 %" },
+          ],
           micros: ["fraction_additionner", "fraction_quantite"],
         },
       ],

@@ -310,6 +310,12 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
           ], { pas: 2, unite: "animaux" }),
           correction:
             "Les nombres de l'axe vont de 2 en 2.\na) Je pars du haut de la barre des chats.\nJe suis la ligne vers la gauche jusqu'à l'axe. Je lis 14.\nb) Le haut de la barre des chiens est sur la ligne 12. Je lis 12.\nc) La barre des lapins s'arrête au milieu, entre 6 et 8.\nLe nombre du milieu entre 6 et 8, c'est 7. Il y a 7 lapins.\nd) La barre la plus basse est celle des furets : 4.\n⛔ Le piège : lire la graduation voisine. Je suis la ligne avec ma règle.\nRéponse : a) 14 chats ; b) 12 chiens ; c) 7 lapins ; d) les furets.",
+          reponses: [
+            { question: "a)", attendu: "14" },
+            { question: "b)", attendu: "12" },
+            { question: "c)", attendu: "7" },
+            { question: "d)", attendu: ["furets", "les furets", "furet"] },
+          ],
           micros: ["graphique_lire"],
         },
         {
@@ -318,11 +324,17 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
           figure: courbe(["6 h", "8 h", "10 h", "12 h", "14 h", "16 h"], [1, 3, 5, 6, 5, 3], 1, { unite: "mètres" }),
           correction:
             "En bas, je lis l'heure. Sur l'axe de gauche, je lis la hauteur.\na) Je pars du point de 8 h. Je suis la ligne vers la gauche : je lis 3.\nÀ 8 h, l'eau monte à 3 mètres.\nb) Le point le plus haut est celui de 12 h : 6 mètres.\nc) Le point le plus bas est celui de 6 h : 1 mètre.\nd) Après 12 h, la ligne descend : de 6 mètres à 3 mètres. La mer descend.\n⛔ Le piège : lire l'heure à la place de la hauteur. « 8 h » est l'heure, pas la réponse.\nRéponse : a) 3 mètres ; b) à 12 h ; c) à 6 h ; d) elle descend.",
+          reponses: [
+            { question: "a)", attendu: "3 m" },
+            { question: "b)", attendu: "12 h" },
+            { question: "c)", attendu: "6 h" },
+            { question: "d)", attendu: ["descend", "elle descend"] },
+          ],
           micros: ["graphique_lire"],
         },
         {
           enonce:
-            "Une troupe de théâtre joue quatre soirs. Le diagramme donne le nombre de spectateurs. La barre du lundi n'est pas encore dessinée.\na) Combien de spectateurs le vendredi ?\nb) Combien de spectateurs le samedi ?\nc) Le lundi, 25 spectateurs sont venus. Jusqu'où doit monter la barre du lundi ?\nd) Quel soir y a-t-il eu le moins de spectateurs ?",
+            "Une troupe de théâtre joue quatre soirs. Le diagramme donne le nombre de spectateurs. La barre du lundi n'est pas encore dessinée.\na) Combien de spectateurs le vendredi ?\nb) Combien de spectateurs le samedi ?\nc) Le lundi, 25 spectateurs sont venus. Où s'arrête la barre du lundi ?\nA : sur la ligne 20.\nB : au milieu, entre 20 et 30.\nC : sur la ligne 30.\nd) Quel soir y a-t-il eu le moins de spectateurs ?",
           figure: barres([
             { label: "ven", value: 30 },
             { label: "sam", value: 45 },
@@ -330,7 +342,7 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
             { label: "lun", value: 25 },
           ], { pas: 10, manque: [3], unite: "spectateurs" }),
           correction:
-            "Les nombres de l'axe vont de 10 en 10.\na) Le haut de la barre du vendredi est sur la ligne 30. Je lis 30.\nb) La barre du samedi s'arrête au milieu, entre 40 et 50. Je lis 45.\nc) 25 est au milieu, entre 20 et 30.\nJe dessine une barre qui s'arrête au milieu, entre la ligne 20 et la ligne 30.\nd) Je compare 30, 45, 40 et 25. Le plus petit est 25 : c'est le lundi.\n⛔ Le piège au d) : oublier la barre que je viens de dessiner. Le lundi compte aussi.\nRéponse : a) 30 ; b) 45 ; c) au milieu, entre 20 et 30 ; d) le lundi.",
+            "Les nombres de l'axe vont de 10 en 10.\na) Le haut de la barre du vendredi est sur la ligne 30. Je lis 30.\nb) La barre du samedi s'arrête au milieu, entre 40 et 50. Je lis 45.\nc) 25 est au milieu, entre 20 et 30.\nJe dessine une barre qui s'arrête au milieu, entre la ligne 20 et la ligne 30 : c'est la réponse B.\nd) Je compare 30, 45, 40 et 25. Le plus petit est 25 : c'est le lundi.\n⛔ Le piège au d) : oublier la barre que je viens de dessiner. Le lundi compte aussi.\nRéponse : a) 30 ; b) 45 ; c) B, au milieu entre 20 et 30 ; d) le lundi.",
           schema: ecranSeulement(
             barres([
               { label: "ven", value: 30 },
@@ -339,6 +351,12 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "lun", value: 25 },
             ], { pas: 10, surligne: 3, unite: "spectateurs" }),
           ),
+          reponses: [
+            { question: "a)", attendu: "30" },
+            { question: "b)", attendu: "45" },
+            { question: "c)", attendu: "B" },
+            { question: "d)", attendu: ["lundi", "le lundi"] },
+          ],
           micros: ["graphique_lire", "graphique_completer"],
         },
         {
@@ -360,6 +378,13 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "roquefort", value: 4 },
             ]),
           ),
+          reponses: [
+            { question: "a) nom", attendu: ["comté", "le comté"] },
+            { question: "a) nb", attendu: "20" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: "10" },
+            { question: "d)", attendu: "4" },
+          ],
           micros: ["graphique_lire"],
         },
         {
@@ -375,6 +400,12 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "jeu", value: 10 },
             ], { surligne: 3 }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["jeudi", "le jeudi"] },
+            { question: "b)", attendu: "7" },
+            { question: "c)", attendu: "vrai" },
+            { question: "d)", attendu: "faux" },
+          ],
           micros: ["graphique_interpreter"],
         },
         {
@@ -388,11 +419,17 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
           ], { pas: 10, unite: "kilos" }),
           correction:
             "a) Les nombres de l'axe sont 0, 10, 20, 30, 40. L'axe va de 10 en 10.\nb) Le haut de la barre du verger est sur la ligne 20. Je lis 20 kilos.\nc) La barre de la prairie s'arrête au milieu, entre 30 et 40. Je lis 35 kilos.\nd) La barre de la forêt s'arrête au milieu, entre 10 et 20. Je lis 15 kilos.\n⛔ Le piège : compter les cases. La barre de la forêt monte d'une case et demie.\nMais chaque case vaut 10 kilos. Je lis le nombre sur l'axe, je ne compte pas les cases.\nRéponse : a) de 10 en 10 ; b) 20 kilos ; c) 35 kilos ; d) 15 kilos.",
+          reponses: [
+            { question: "a)", attendu: ["10", "de 10 en 10"] },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: "35" },
+            { question: "d)", attendu: "15" },
+          ],
           micros: ["graphique_lire"],
         },
         {
           enonce:
-            "Des élèves comptent les voitures garées devant l'école. Blanches : 30. Grises : 25. Noires : 15. Rouges : 10. Sami a dessiné le diagramme. Il a fait une erreur.\na) Quelle barre est fausse ?\nb) Jusqu'où doit-elle monter ?\nc) Combien de voitures en tout ?",
+            "Des élèves comptent les voitures garées devant l'école. Blanches : 30. Grises : 25. Noires : 15. Rouges : 10. Sami a dessiné le diagramme. Il a fait une erreur.\na) Quelle barre est fausse ?\nb) Quel nombre doit-elle montrer ?\nc) Combien de voitures en tout ?",
           figure: barres([
             { label: "blanc", value: 30 },
             { label: "gris", value: 25 },
@@ -400,7 +437,7 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
             { label: "rouge", value: 10 },
           ], { pas: 10, unite: "voitures" }),
           correction:
-            "Je lis chaque barre et je la compare au texte. L'axe va de 10 en 10.\na) Blanc : 30, c'est juste.\nGris : la barre s'arrête au milieu, entre 20 et 30. Elle vaut 25, c'est juste.\nNoir : la barre monte jusqu'à 20. Le texte dit 15 : elle est fausse.\nRouge : 10, c'est juste.\nb) 15 est au milieu, entre 10 et 20. La barre noire doit s'arrêter là.\nc) 30 + 25 + 15 + 10 = 80 voitures.\n⛔ Le piège : monter jusqu'à la graduation voisine. 15 n'est pas sur une ligne : la barre s'arrête entre deux lignes.\nRéponse : a) la barre noire ; b) au milieu, entre 10 et 20 ; c) 80 voitures.",
+            "Je lis chaque barre et je la compare au texte. L'axe va de 10 en 10.\na) Blanc : 30, c'est juste.\nGris : la barre s'arrête au milieu, entre 20 et 30. Elle vaut 25, c'est juste.\nNoir : la barre monte jusqu'à 20. Le texte dit 15 : elle est fausse.\nRouge : 10, c'est juste.\nb) Elle doit montrer 15. 15 est au milieu, entre 10 et 20 : la barre noire doit s'arrêter là.\nc) 30 + 25 + 15 + 10 = 80 voitures.\n⛔ Le piège : monter jusqu'à la graduation voisine. 15 n'est pas sur une ligne : la barre s'arrête entre deux lignes.\nRéponse : a) la barre noire ; b) 15, au milieu entre 10 et 20 ; c) 80 voitures.",
           schema: ecranSeulement(
             barres([
               { label: "blanc", value: 30 },
@@ -409,6 +446,11 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "rouge", value: 10 },
             ], { pas: 10, surligne: 2, unite: "voitures" }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["noir", "noire", "la noire", "la barre noire"] },
+            { question: "b)", attendu: "15" },
+            { question: "c)", attendu: "80" },
+          ],
           micros: ["graphique_completer"],
         },
         {
@@ -424,6 +466,11 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "briques", value: 20 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "70" },
+            { question: "b)", attendu: "60" },
+            { question: "c)", attendu: "15" },
+          ],
           micros: ["graphique_defi"],
         },
       ],
@@ -447,11 +494,18 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
           figure: courbe(["0", "10", "20", "30", "40", "50"], [80, 60, 45, 35, 30, 25], 10, { unite: "°C" }),
           correction:
             "L'axe va de 10 en 10.\na) Au départ, c'est le point de 0 minute. Je lis 80 °C.\nb) Le point de 20 minutes est au milieu, entre 40 et 50. Je lis 45 °C.\nc) À 0 minute, 80 °C. À 10 minutes, 60 °C.\n80 − 60 = 20 °C de moins.\nd) À 40 minutes, je lis 30. À 50 minutes, le point est au milieu, entre 20 et 30 : 25.\n30 − 25 = 5 °C de moins.\ne) Au début, l'eau perd 20 °C en 10 minutes. À la fin, seulement 5 °C.\nElle refroidit plus vite au début : la ligne y descend plus fort.\n⛔ Le piège au b) : répondre 40 ou 50, la graduation voisine. Le point est entre les deux : 45.\nRéponse : a) 80 °C ; b) 45 °C ; c) 20 °C ; d) 5 °C ; e) au début.",
+          reponses: [
+            { question: "a)", attendu: "80 °C" },
+            { question: "b)", attendu: "45 °C" },
+            { question: "c)", attendu: "20 °C" },
+            { question: "d)", attendu: "5 °C" },
+            { question: "e)", attendu: ["début", "au début"] },
+          ],
           micros: ["graphique_lire", "graphique_interpreter"],
         },
         {
           enonce:
-            "Un refuge note les chiens adoptés chaque mois. Janvier : 6. Février : 9. Mars : 12. Avril : 4.\nVrai ou faux ? Explique avec les nombres.\na) « En mars, il y a eu deux fois plus d'adoptions qu'en janvier. »\nb) « En février, il y a eu deux fois plus d'adoptions qu'en avril. »\nc) « En quatre mois, plus de 30 chiens ont été adoptés. »\nd) « Mars est le seul mois avec plus de 10 adoptions. »",
+            "Un refuge note les chiens adoptés chaque mois. Janvier : 6. Février : 9. Mars : 12. Avril : 4.\nVrai ou faux ? Vérifie avec les nombres.\na) « En mars, il y a eu deux fois plus d'adoptions qu'en janvier. »\nb) « En février, il y a eu deux fois plus d'adoptions qu'en avril. »\nc) « En quatre mois, plus de 30 chiens ont été adoptés. »\nd) « Mars est le seul mois avec plus de 10 adoptions. »",
           correction:
             "a) Deux fois janvier : 2 × 6 = 12. C'est bien mars : vrai.\nb) Deux fois avril : 2 × 4 = 8. Février en a 9, pas 8 : faux.\nc) J'additionne les quatre mois : 6 + 9 + 12 + 4 = 31.\n31 est plus grand que 30 : vrai.\nd) Je regarde chaque mois. Seul mars dépasse 10 : vrai.\n⛔ Le piège au b) : les barres se ressemblent, alors on dit vrai. Je calcule : 8 n'est pas 9.\nRéponse : a) vrai ; b) faux ; c) vrai ; d) vrai.",
           schema: ecranSeulement(
@@ -462,6 +516,12 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "avril", value: 4 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "vrai" },
+            { question: "b)", attendu: "faux" },
+            { question: "c)", attendu: "vrai" },
+            { question: "d)", attendu: "vrai" },
+          ],
           micros: ["graphique_interpreter"],
         },
         {
@@ -483,11 +543,17 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "iris", value: 12 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b)", attendu: "30" },
+            { question: "c)", attendu: "30" },
+            { question: "d)", attendu: "12" },
+          ],
           micros: ["graphique_lire", "graphique_defi"],
         },
         {
           enonce:
-            "Une maraîchère vend des paniers de légumes chaque semaine. Elle a commencé le diagramme. Il manque les semaines 3 et 4.\na) Combien de paniers la semaine 1 ? Et la semaine 2 ?\nb) Semaine 3 : 25 paniers. Semaine 4 : 45 paniers. Où s'arrête chaque barre ?\nc) Quelle semaine a-t-elle vendu le plus de paniers ?\nd) Combien de paniers en quatre semaines ?",
+            "Une maraîchère vend des paniers de légumes chaque semaine. Elle a commencé le diagramme. Il manque les semaines 3 et 4.\na) Combien de paniers la semaine 1 ? Et la semaine 2 ?\nb) Semaine 3 : 25 paniers. Semaine 4 : 45 paniers. Où s'arrête la barre de la semaine 4 ?\nA : sur la ligne 40.\nB : sur la ligne 50.\nC : au milieu, entre 40 et 50.\nc) Quelle semaine a-t-elle vendu le plus de paniers ?\nd) Combien de paniers en quatre semaines ?",
           figure: barres([
             { label: "S1", value: 35 },
             { label: "S2", value: 40 },
@@ -495,7 +561,7 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
             { label: "S4", value: 45 },
           ], { pas: 10, manque: [2, 3], unite: "paniers" }),
           correction:
-            "L'axe va de 10 en 10.\na) La barre S1 s'arrête au milieu, entre 30 et 40 : 35 paniers.\nLa barre S2 s'arrête sur la ligne 40 : 40 paniers.\nb) 25 est au milieu, entre 20 et 30. La barre S3 s'arrête là.\n45 est au milieu, entre 40 et 50. La barre S4 s'arrête là.\nc) Je compare 35, 40, 25 et 45. La semaine 4 gagne, avec 45 paniers.\nd) 35 + 40 + 25 + 45 = 145 paniers.\n⛔ Le piège au c) : choisir S2, la plus haute barre déjà dessinée. Je compare aussi les barres que j'ai ajoutées.\nRéponse : a) 35 et 40 ; b) entre 20 et 30, puis entre 40 et 50 ; c) la semaine 4 ; d) 145 paniers.",
+            "L'axe va de 10 en 10.\na) La barre S1 s'arrête au milieu, entre 30 et 40 : 35 paniers.\nLa barre S2 s'arrête sur la ligne 40 : 40 paniers.\nb) 25 est au milieu, entre 20 et 30. La barre S3 s'arrête là.\n45 est au milieu, entre 40 et 50. La barre S4 s'arrête là : c'est la réponse C.\nc) Je compare 35, 40, 25 et 45. La semaine 4 gagne, avec 45 paniers.\nd) 35 + 40 + 25 + 45 = 145 paniers.\n⛔ Le piège au c) : choisir S2, la plus haute barre déjà dessinée. Je compare aussi les barres que j'ai ajoutées.\nRéponse : a) 35 et 40 ; b) C, au milieu entre 40 et 50 ; c) la semaine 4 ; d) 145 paniers.",
           schema: ecranSeulement(
             barres([
               { label: "S1", value: 35 },
@@ -504,19 +570,33 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "S4", value: 45 },
             ], { pas: 10, surligne: 3, unite: "paniers" }),
           ),
+          reponses: [
+            { question: "a) S1", attendu: "35" },
+            { question: "a) S2", attendu: "40" },
+            { question: "b)", attendu: "C" },
+            { question: "c)", attendu: ["4", "S4"] },
+            { question: "d)", attendu: "145" },
+          ],
           micros: ["graphique_lire", "graphique_completer"],
         },
         {
           enonce:
-            "Dans une station de ski, un pisteur mesure la neige au sol chaque mois. La courbe donne la hauteur de neige, en centimètres.\na) Quelle hauteur de neige en janvier ?\nb) Quelle hauteur de neige en mars ?\nc) Quel mois la neige est-elle la plus haute ?\nd) De combien la neige baisse-t-elle entre février et avril ?\ne) D'un mois au suivant, quand la neige monte-t-elle le plus ?",
+            "Dans une station de ski, un pisteur mesure la neige au sol chaque mois. La courbe donne la hauteur de neige, en centimètres.\na) Quelle hauteur de neige en janvier ?\nb) Quelle hauteur de neige en mars ?\nc) Quel mois la neige est-elle la plus haute ?\nd) De combien la neige baisse-t-elle entre février et avril ?\ne) D'un mois au suivant, quand la neige monte-t-elle le plus ?\nA : de novembre à décembre.\nB : de décembre à janvier.\nC : de janvier à février.",
           figure: courbe(["nov", "déc", "jan", "fév", "mar", "avr"], [10, 30, 60, 80, 55, 20], 10, { unite: "cm" }),
           correction:
-            "L'axe va de 10 en 10.\na) Je pars du point de janvier. Je suis la ligne jusqu'à l'axe : 60 cm.\nb) Le point de mars est au milieu, entre 50 et 60. Je lis 55 cm.\nc) Le point le plus haut est celui de février : 80 cm.\nd) Février : 80 cm. Avril : 20 cm. 80 − 20 = 60 cm de moins.\ne) Je calcule chaque montée. De novembre à décembre : 30 − 10 = 20.\nDe décembre à janvier : 60 − 30 = 30. De janvier à février : 80 − 60 = 20.\nLa plus forte montée est 30 cm : de décembre à janvier.\n⛔ Le piège au e) : répondre février, le point le plus haut. La plus forte montée, c'est là où la ligne monte le plus raide.\nRéponse : a) 60 cm ; b) 55 cm ; c) février ; d) 60 cm ; e) de décembre à janvier.",
+            "L'axe va de 10 en 10.\na) Je pars du point de janvier. Je suis la ligne jusqu'à l'axe : 60 cm.\nb) Le point de mars est au milieu, entre 50 et 60. Je lis 55 cm.\nc) Le point le plus haut est celui de février : 80 cm.\nd) Février : 80 cm. Avril : 20 cm. 80 − 20 = 60 cm de moins.\ne) Je calcule chaque montée. De novembre à décembre : 30 − 10 = 20.\nDe décembre à janvier : 60 − 30 = 30. De janvier à février : 80 − 60 = 20.\nLa plus forte montée est 30 cm : de décembre à janvier, la réponse B.\n⛔ Le piège au e) : répondre février, le point le plus haut. La plus forte montée, c'est là où la ligne monte le plus raide.\nRéponse : a) 60 cm ; b) 55 cm ; c) février ; d) 60 cm ; e) B, de décembre à janvier.",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b)", attendu: "55" },
+            { question: "c)", attendu: "février" },
+            { question: "d)", attendu: "60" },
+            { question: "e)", attendu: "B" },
+          ],
           micros: ["graphique_lire", "graphique_interpreter"],
         },
         {
           enonce:
-            "Aux Jeux olympiques de Paris, en 2024, des pays ont gagné des médailles d'or. Le diagramme en montre quatre.\na) Combien de médailles d'or pour les États-Unis (USA) ?\nb) Léo dit : « Les USA ont gagné le plus de médailles d'or. » A-t-il tout dit ?\nc) Combien de médailles d'or de plus pour le Japon que pour les Pays-Bas ?\nd) La France a gagné 16 médailles d'or. Où s'arrêterait sa barre ?\ne) Combien de fois plus de médailles d'or pour la Chine que pour le Japon ?",
+            "Aux Jeux olympiques de Paris, en 2024, des pays ont gagné des médailles d'or. Le diagramme en montre quatre.\na) Combien de médailles d'or pour les États-Unis (USA) ?\nb) Léo dit : « Les USA ont gagné le plus de médailles d'or. » Quel autre pays en a gagné autant ?\nc) Combien de médailles d'or de plus pour le Japon que pour les Pays-Bas ?\nd) La France a gagné 16 médailles d'or. Où s'arrêterait sa barre ?\nA : un peu au-dessus du milieu, entre 10 et 20.\nB : sur la ligne 20.\nC : un peu au-dessous du milieu, entre 10 et 20.\ne) Combien de fois plus de médailles d'or pour la Chine que pour le Japon ?",
           figure: barres([
             { label: "USA", value: 40 },
             { label: "Chine", value: 40 },
@@ -524,12 +604,19 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
             { label: "P.-Bas", value: 15 },
           ], { pas: 10, unite: "médailles d'or" }),
           correction:
-            "L'axe va de 10 en 10.\na) Le haut de la barre des USA est sur la ligne 40. Je lis 40.\nb) La barre de la Chine monte aussi jusqu'à 40.\nLes USA et la Chine sont à égalité, avec 40 médailles d'or chacun.\nc) La barre des Pays-Bas s'arrête au milieu, entre 10 et 20 : 15.\n20 − 15 = 5 médailles d'or de plus pour le Japon.\nd) 16 est entre 15 et 20, tout près de 15.\nLa barre s'arrêterait un peu au-dessus du milieu, entre 10 et 20.\ne) 2 × 20 = 40 : la Chine en a 2 fois plus que le Japon.\n⛔ Le piège au b) : voir une barre haute et croire qu'elle est seule. Je regarde toutes les barres.\nRéponse : a) 40 ; b) non, la Chine aussi en a 40 ; c) 5 ; d) un peu au-dessus du milieu, entre 10 et 20 ; e) 2 fois plus.",
+            "L'axe va de 10 en 10.\na) Le haut de la barre des USA est sur la ligne 40. Je lis 40.\nb) La barre de la Chine monte aussi jusqu'à 40.\nLes USA et la Chine sont à égalité, avec 40 médailles d'or chacun.\nc) La barre des Pays-Bas s'arrête au milieu, entre 10 et 20 : 15.\n20 − 15 = 5 médailles d'or de plus pour le Japon.\nd) 16 est entre 15 et 20, tout près de 15.\nLa barre s'arrêterait un peu au-dessus du milieu, entre 10 et 20 : la réponse A.\ne) 2 × 20 = 40 : la Chine en a 2 fois plus que le Japon.\n⛔ Le piège au b) : voir une barre haute et croire qu'elle est seule. Je regarde toutes les barres.\nRéponse : a) 40 ; b) la Chine, 40 aussi ; c) 5 ; d) A, un peu au-dessus du milieu entre 10 et 20 ; e) 2 fois plus.",
+          reponses: [
+            { question: "a)", attendu: "40" },
+            { question: "b)", attendu: ["Chine", "la Chine"] },
+            { question: "c)", attendu: "5" },
+            { question: "d)", attendu: "A" },
+            { question: "e)", attendu: ["2", "2 fois"] },
+          ],
           micros: ["graphique_lire", "graphique_interpreter", "graphique_completer"],
         },
         {
           enonce:
-            "Dans une ferme, cinq poules ont pondu 100 œufs en un mois. Lili : 30 œufs. Zoé : 15. Nina : 25. Pia : 10. Ana : 20.\na) Vérifie le total de 100 œufs.\nb) Quelle poule a pondu le quart des œufs ?\nc) Lili et Pia, à elles deux, ont-elles pondu la moitié des œufs ?\nd) Combien d'œufs manque-t-il à Zoé pour égaler Lili ?",
+            "Dans une ferme, cinq poules ont pondu 100 œufs en un mois. Lili : 30 œufs. Zoé : 15. Nina : 25. Pia : 10. Ana : 20.\na) Vérifie le total : combien d'œufs en tout ?\nb) Quelle poule a pondu le quart des œufs ?\nc) Lili et Pia, à elles deux, ont-elles pondu la moitié des œufs ?\nd) Combien d'œufs manque-t-il à Zoé pour égaler Lili ?",
           correction:
             "a) 30 + 15 + 25 + 10 + 20 = 100. Le total est juste.\nb) Le quart de 100 : 100 ÷ 4 = 25. C'est Nina.\nc) Lili et Pia : 30 + 10 = 40. La moitié de 100 : 100 ÷ 2 = 50.\n40 est plus petit que 50 : non, ce n'est pas la moitié.\nd) 30 − 15 = 15 œufs.\n⛔ Le piège au c) : Lili a la plus haute barre, alors on croit qu'elle suffit. Je calcule toujours.\nRéponse : a) oui, 100 œufs ; b) Nina ; c) non, 40 seulement ; d) 15 œufs.",
           schema: ecranSeulement(
@@ -541,6 +628,12 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "Ana", value: 20 },
             ], { surligne: 2 }),
           ),
+          reponses: [
+            { question: "a)", attendu: "100" },
+            { question: "b)", attendu: "Nina" },
+            { question: "c)", attendu: "non" },
+            { question: "d)", attendu: "15" },
+          ],
           micros: ["graphique_defi"],
         },
         {
@@ -554,6 +647,14 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
           ], { pas: 10, unite: "employés" }),
           correction:
             "L'axe va de 10 en 10.\na) La barre voiture s'arrête au milieu, entre 20 et 30 : 25.\nLa barre vélo s'arrête au milieu, entre 10 et 20 : 15.\nb) La barre bus s'arrête au milieu, entre 0 et 10 : 5.\nLa barre à pied est sur la ligne 10 : 10.\nc) 25 + 15 + 5 + 10 = 55 employés.\nd) Non. Le diagramme compte 55 employés. L'affiche en annonce 50.\nIl y a 55 − 50 = 5 employés de trop : une barre est fausse, ou bien le titre.\n⛔ Le piège : croire le titre sans vérifier. Je refais toujours l'addition.\nRéponse : a) 25 et 15 ; b) 5 et 10 ; c) 55 ; d) non, 5 de trop.",
+          reponses: [
+            { question: "a) voiture", attendu: "25" },
+            { question: "a) vélo", attendu: "15" },
+            { question: "b) bus", attendu: "5" },
+            { question: "b) à pied", attendu: "10" },
+            { question: "c)", attendu: "55" },
+            { question: "d)", attendu: "non" },
+          ],
           micros: ["graphique_lire", "graphique_interpreter", "graphique_defi"],
         },
       ],
@@ -573,25 +674,41 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
         {
           titre: "La durée du jour",
           enonce:
-            "Une astronome étudie la durée du jour à Paris. C'est le temps entre le lever et le coucher du Soleil. Elle la note le 15 de chaque mois, arrondie à l'heure.\na) Combien d'heures dure le jour en janvier ?\nb) Combien d'heures en juin ? Combien d'heures de plus qu'en janvier ?\nc) D'un mois au suivant, quand le jour gagne-t-il le plus d'heures ?\nd) Une journée entière dure 24 heures. En juin, fait-il jour plus de la moitié du temps ? Et en janvier ?",
+            "Une astronome étudie la durée du jour à Paris. C'est le temps entre le lever et le coucher du Soleil. Elle la note le 15 de chaque mois, arrondie à l'heure.\na) Combien d'heures dure le jour en janvier ?\nb) Combien d'heures en juin ? Combien d'heures de plus qu'en janvier ?\nc) D'un mois au suivant, quand le jour gagne-t-il le plus d'heures ?\nA : de février à mars, et de mars à avril, à égalité.\nB : seulement de février à mars.\nC : de mai à juin.\nd) Une journée entière dure 24 heures. En juin, fait-il jour plus de la moitié du temps ? Et en janvier ?",
           figure: courbe(["jan", "fév", "mar", "avr", "mai", "juin"], [9, 10, 12, 14, 15, 16], 2, { unite: "heures" }),
           correction:
-            "L'axe va de 2 en 2.\na) Le point de janvier est au milieu, entre 8 et 10. Je lis 9 heures.\nb) Le point de juin est sur la ligne 16 : 16 heures.\n16 − 9 = 7 heures de plus qu'en janvier.\nc) Le point de mai est au milieu, entre 14 et 16 : 15.\nJe calcule chaque gain. Janvier à février : 10 − 9 = 1. Février à mars : 12 − 10 = 2.\nMars à avril : 14 − 12 = 2. Avril à mai : 15 − 14 = 1. Mai à juin : 16 − 15 = 1.\nDeux gains sont à égalité, 2 heures chacun : de février à mars, et de mars à avril.\nd) La moitié de 24 heures : 24 ÷ 2 = 12 heures.\nEn juin, 16 heures, c'est plus que 12 : oui.\nEn janvier, 9 heures, c'est moins que 12 : non. La nuit est plus longue que le jour.\n⭐ L'astronome le sait : le jour le plus long de l'année tombe vers le 21 juin.\n⛔ Le piège au c) : s'arrêter au premier gain de 2. Je relis toute la liste.\nRéponse : a) 9 heures ; b) 16 heures, 7 de plus ; c) de février à mars et de mars à avril ; d) oui en juin, non en janvier.",
+            "L'axe va de 2 en 2.\na) Le point de janvier est au milieu, entre 8 et 10. Je lis 9 heures.\nb) Le point de juin est sur la ligne 16 : 16 heures.\n16 − 9 = 7 heures de plus qu'en janvier.\nc) Le point de mai est au milieu, entre 14 et 16 : 15.\nJe calcule chaque gain. Janvier à février : 10 − 9 = 1. Février à mars : 12 − 10 = 2.\nMars à avril : 14 − 12 = 2. Avril à mai : 15 − 14 = 1. Mai à juin : 16 − 15 = 1.\nDeux gains sont à égalité, 2 heures chacun : de février à mars, et de mars à avril. C'est la réponse A.\nd) La moitié de 24 heures : 24 ÷ 2 = 12 heures.\nEn juin, 16 heures, c'est plus que 12 : oui.\nEn janvier, 9 heures, c'est moins que 12 : non. La nuit est plus longue que le jour.\n⭐ L'astronome le sait : le jour le plus long de l'année tombe vers le 21 juin.\n⛔ Le piège au c) : s'arrêter au premier gain de 2. Je relis toute la liste.\nRéponse : a) 9 heures ; b) 16 heures, 7 de plus ; c) A, de février à mars et de mars à avril ; d) oui en juin, non en janvier.",
+          reponses: [
+            { question: "a)", attendu: "9" },
+            { question: "b) juin", attendu: "16" },
+            { question: "b) de plus", attendu: "7" },
+            { question: "c)", attendu: "A" },
+            { question: "d) juin", attendu: "oui" },
+            { question: "d) janvier", attendu: "non" },
+          ],
           micros: ["graphique_lire", "graphique_interpreter", "graphique_defi"],
         },
         {
           titre: "La rivière après l'orage",
           enonce:
-            "Un hydrologue surveille une rivière après un gros orage. Il relève la hauteur de l'eau toutes les deux heures, en centimètres. Au-dessus de 60 cm, la rivière peut déborder : c'est la ligne rouge.\na) Quelle est la hauteur de l'eau à 10 h ?\nb) À quelle heure l'eau est-elle la plus haute ? Combien ?\nc) Entre deux relevés qui se suivent, quand l'eau monte-t-elle le plus ?\nd) Combien de relevés sont au-dessus de la ligne rouge ?\ne) À 18 h, de combien l'eau doit-elle encore baisser pour revenir à sa hauteur de 8 h ?",
+            "Un hydrologue surveille une rivière après un gros orage. Il relève la hauteur de l'eau toutes les deux heures, en centimètres. Au-dessus de 60 cm, la rivière peut déborder : c'est la ligne rouge.\na) Quelle est la hauteur de l'eau à 10 h ?\nb) À quelle heure l'eau est-elle la plus haute ? Combien ?\nc) Entre deux relevés qui se suivent, quand l'eau monte-t-elle le plus ?\nA : de 8 h à 10 h.\nB : de 12 h à 14 h.\nC : de 10 h à 12 h.\nd) Combien de relevés sont au-dessus de la ligne rouge ?\ne) À 18 h, de combien l'eau doit-elle encore baisser pour revenir à sa hauteur de 8 h ?",
           figure: courbe(["8 h", "10 h", "12 h", "14 h", "16 h", "18 h"], [20, 35, 70, 80, 65, 45], 10, { unite: "cm", seuil: 60 }),
           correction:
-            "L'axe va de 10 en 10.\na) Le point de 10 h est au milieu, entre 30 et 40. Je lis 35 cm.\nb) Le point le plus haut est celui de 14 h : 80 cm.\nc) Je calcule chaque montée. De 8 h à 10 h : 35 − 20 = 15.\nDe 10 h à 12 h : 70 − 35 = 35. De 12 h à 14 h : 80 − 70 = 10.\nAprès 14 h, l'eau baisse. La plus forte montée est 35 cm, de 10 h à 12 h.\nd) Le point de 16 h est au milieu, entre 60 et 70 : 65.\nAu-dessus de 60 : 70 à 12 h, 80 à 14 h, 65 à 16 h. Cela fait 3 relevés.\ne) À 18 h, le point est au milieu, entre 40 et 50 : 45 cm. À 8 h : 20 cm.\n45 − 20 = 25 cm.\n⛔ Le piège au d) : oublier 16 h. Son point est entre deux lignes, mais bien au-dessus de la ligne rouge.\nRéponse : a) 35 cm ; b) à 14 h, 80 cm ; c) de 10 h à 12 h ; d) 3 relevés ; e) 25 cm.",
+            "L'axe va de 10 en 10.\na) Le point de 10 h est au milieu, entre 30 et 40. Je lis 35 cm.\nb) Le point le plus haut est celui de 14 h : 80 cm.\nc) Je calcule chaque montée. De 8 h à 10 h : 35 − 20 = 15.\nDe 10 h à 12 h : 70 − 35 = 35. De 12 h à 14 h : 80 − 70 = 10.\nAprès 14 h, l'eau baisse. La plus forte montée est 35 cm, de 10 h à 12 h : la réponse C.\nd) Le point de 16 h est au milieu, entre 60 et 70 : 65.\nAu-dessus de 60 : 70 à 12 h, 80 à 14 h, 65 à 16 h. Cela fait 3 relevés.\ne) À 18 h, le point est au milieu, entre 40 et 50 : 45 cm. À 8 h : 20 cm.\n45 − 20 = 25 cm.\n⛔ Le piège au d) : oublier 16 h. Son point est entre deux lignes, mais bien au-dessus de la ligne rouge.\nRéponse : a) 35 cm ; b) à 14 h, 80 cm ; c) C, de 10 h à 12 h ; d) 3 relevés ; e) 25 cm.",
+          reponses: [
+            { question: "a)", attendu: "35" },
+            { question: "b) heure", attendu: "14 h" },
+            { question: "b) hauteur", attendu: "80" },
+            { question: "c)", attendu: "C" },
+            { question: "d)", attendu: "3" },
+            { question: "e)", attendu: "25" },
+          ],
           micros: ["graphique_lire", "graphique_interpreter", "graphique_defi"],
         },
         {
           titre: "Une journée de 24 heures",
           enonce:
-            "Une pédiatre est une médecin des enfants. Elle demande à Inès, 10 ans, comment se passe sa journée d'école. Sommeil : 10 heures. École : 6 heures. Loisirs : 4 heures. Repas : 2 heures. Trajets : 2 heures.\na) Vérifie que la journée fait bien 24 heures.\nb) Quelle activité occupe le quart de la journée ?\nc) Le sommeil occupe-t-il la moitié de la journée ?\nd) La pédiatre conseille de dormir de 9 à 12 heures à cet âge. Inès dort-elle assez ?\ne) Dans un diagramme circulaire, quelle activité aurait le plus grand secteur ?",
+            "Une pédiatre est une médecin des enfants. Elle demande à Inès, 10 ans, comment se passe sa journée d'école. Sommeil : 10 heures. École : 6 heures. Loisirs : 4 heures. Repas : 2 heures. Trajets : 2 heures.\na) Vérifie la journée : combien d'heures en tout ?\nb) Quelle activité occupe le quart de la journée ?\nc) Le sommeil occupe-t-il la moitié de la journée ?\nd) La pédiatre conseille de dormir de 9 à 12 heures à cet âge. Inès dort-elle assez ?\ne) Dans un diagramme circulaire, quelle activité aurait le plus grand secteur ?",
           correction:
             "a) 10 + 6 + 4 + 2 + 2 = 24 heures. Le compte est bon.\nb) Le quart de 24 : 24 ÷ 4 = 6. C'est l'école.\nc) La moitié de 24 : 24 ÷ 2 = 12. Inès dort 10 heures.\n10 est plus petit que 12 : non, un peu moins de la moitié.\nd) 10 heures, c'est entre 9 et 12 heures : oui, elle dort assez.\ne) Le plus grand nombre est 10 : le sommeil a le plus grand secteur.\n⛔ Le piège au c) : le sommeil a le plus grand secteur, alors on dit « la moitié ». Le plus grand n'est pas forcément la moitié : je calcule.\nRéponse : a) oui, 24 heures ; b) l'école ; c) non ; d) oui ; e) le sommeil.",
           schema: ecranSeulement(
@@ -603,14 +720,21 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "loisirs", value: 4 },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "24" },
+            { question: "b)", attendu: ["école", "l'école"] },
+            { question: "c)", attendu: "non" },
+            { question: "d)", attendu: "oui" },
+            { question: "e)", attendu: ["sommeil", "le sommeil"] },
+          ],
           micros: ["graphique_interpreter", "graphique_defi"],
         },
         {
           titre: "Les pièces de l'archéologue",
           enonce:
-            "Une archéologue fouille un ancien village. Elle trouve 80 pièces de monnaie. Bronze : 35 pièces. Argent : 25 pièces. Or : 5 pièces. Les autres sont en cuivre.\na) Combien de pièces en cuivre ?\nb) Elle dessine un diagramme en barres, gradué de 10 en 10. Où s'arrête la barre du cuivre ? Et celle de l'or ?\nc) Vrai ou faux : « Il y a 7 fois plus de pièces en bronze qu'en or. »\nd) Vrai ou faux : « Le bronze a plus de pièces que tous les autres métaux réunis. »",
+            "Une archéologue fouille un ancien village. Elle trouve 80 pièces de monnaie. Bronze : 35 pièces. Argent : 25 pièces. Or : 5 pièces. Les autres sont en cuivre.\na) Combien de pièces en cuivre ?\nb) Elle dessine un diagramme en barres, gradué de 10 en 10. Où s'arrête la barre du cuivre ?\nA : au milieu, entre 10 et 20.\nB : sur la ligne 10.\nC : sur la ligne 20.\nc) Vrai ou faux : « Il y a 7 fois plus de pièces en bronze qu'en or. »\nd) Vrai ou faux : « Le bronze a plus de pièces que tous les autres métaux réunis. »",
           correction:
-            "a) J'additionne les pièces connues : 35 + 25 + 5 = 65.\n80 − 65 = 15 pièces en cuivre.\nContrôle : 35 + 25 + 5 + 15 = 80. Le compte est bon.\nb) 15 est au milieu, entre 10 et 20 : la barre du cuivre s'arrête là.\n5 est au milieu, entre 0 et 10 : la barre de l'or s'arrête là.\nc) 7 × 5 = 35. C'est le bronze : vrai.\nd) Les autres réunis : 25 + 5 + 15 = 45.\n35 est plus petit que 45 : faux.\n⛔ Le piège au d) : comparer le bronze à un seul métal. « Tous les autres », c'est trois métaux ensemble.\nRéponse : a) 15 pièces ; b) au milieu entre 10 et 20, et au milieu entre 0 et 10 ; c) vrai ; d) faux.",
+            "a) J'additionne les pièces connues : 35 + 25 + 5 = 65.\n80 − 65 = 15 pièces en cuivre.\nContrôle : 35 + 25 + 5 + 15 = 80. Le compte est bon.\nb) 15 est au milieu, entre 10 et 20 : la barre du cuivre s'arrête là. C'est la réponse A.\nDe même, 5 est au milieu, entre 0 et 10 : la barre de l'or s'arrêterait là.\nc) 7 × 5 = 35. C'est le bronze : vrai.\nd) Les autres réunis : 25 + 5 + 15 = 45.\n35 est plus petit que 45 : faux.\n⛔ Le piège au d) : comparer le bronze à un seul métal. « Tous les autres », c'est trois métaux ensemble.\nRéponse : a) 15 pièces ; b) A, au milieu entre 10 et 20 ; c) vrai ; d) faux.",
           schema: ecranSeulement(
             barres([
               { label: "bronze", value: 35 },
@@ -619,6 +743,12 @@ export const exercicesGraphiqueCm2: FicheExercicesData = {
               { label: "cuivre", value: 15 },
             ], { pas: 10, surligne: 3, unite: "pièces" }),
           ),
+          reponses: [
+            { question: "a)", attendu: "15" },
+            { question: "b)", attendu: "A" },
+            { question: "c)", attendu: "vrai" },
+            { question: "d)", attendu: "faux" },
+          ],
           micros: ["graphique_completer", "graphique_interpreter", "graphique_defi"],
         },
       ],

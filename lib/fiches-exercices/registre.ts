@@ -229,6 +229,139 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Additionner et soustraire des fractions de même dénominateur, ou dont un dénominateur est multiple de l'autre, multiplier une fraction par un entier, prendre une fraction d'une quantité. Une pizza, des billes, une grenouille, un match de football, une kermesse, un refuge pour tortues et une haie à planter.",
   },
+  // ─── CM2 : toutes les autres notions du coach (10/11/2026) ───
+  // Feuilles interactives : champ réponse + clavier maths, vérifiées sans IA.
+  "maths/cm2/nombre-entier": {
+    titre: "Les nombres entiers : 20 exercices corrigés",
+    resume:
+      "Lire et écrire les grands nombres, les comparer, les ranger, les décomposer, les arrondir, les placer sur une droite graduée, trouver des multiples et des diviseurs. Un stade, des macarons, des bouquets, des bus, des concerts, un carrelage et un camion.",
+  },
+  "maths/cm2/suite": {
+    titre: "Les suites de nombres : 20 exercices corrigés",
+    resume:
+      "Continuer une suite, trouver sa règle, dire si elle monte ou si elle descend, puis des défis. Des allumettes, une bougie, une plante d'eau, un taxi, une coureuse, un banquet, une citerne et un code secret.",
+  },
+  "maths/cm2/multiplication": {
+    titre: "La multiplication : 20 exercices corrigés",
+    resume:
+      "Les tables, le calcul de tête, multiplier par 10, 100 ou 1 000 par la valeur des chiffres, poser une multiplication avec ou sans virgule. Une boulangerie, un cinéma, des crêpes, un voyage en train et des panneaux solaires.",
+  },
+  "maths/cm2/division": {
+    titre: "La division : 20 exercices corrigés",
+    resume:
+      "Partager en parts égales, vérifier une division par une multiplication, poser une division, comprendre le reste, continuer après la virgule. Des voitures, un album photo, du tissu, des cars, de la confiture, une course de relais et un jardin.",
+  },
+  "maths/cm2/nombre-decimal": {
+    titre: "Les nombres décimaux : 20 exercices corrigés",
+    resume:
+      "Lire et écrire un nombre à virgule, passer d'une fraction décimale au nombre décimal, trouver la valeur d'un chiffre, comparer, ranger, placer sur la droite, arrondir, diviser par 10, 100 ou 1 000. La poste, le marché, une course, un laboratoire, un cadenas et un sentier de randonnée.",
+  },
+  "maths/cm2/calcul": {
+    titre: "Le calcul : 20 exercices corrigés",
+    resume:
+      "Calculer de tête, poser une addition ou une soustraction, avec ou sans virgule, respecter les priorités, prendre la moitié ou le double, multiplier par 5, 50, 11 ou 25, estimer un résultat. Une course à pied, une corde d'escalade, une recette, un musée, un tournoi de foot et un potager.",
+  },
+  "maths/cm2/calculs-commerciaux": {
+    titre: "Les calculs commerciaux : 20 exercices corrigés",
+    resume:
+      "Calculer un prix de revient, un bénéfice ou une perte, l'intérêt d'une somme placée, lire et compléter une facture avec la TVA. Un réparateur de vélos, une fleuriste, une banque, un club de sport, un garage, un atelier de poterie et une brocante.",
+  },
+  "maths/cm2/probleme": {
+    titre: "Les problèmes : 20 exercices corrigés",
+    resume:
+      "Choisir la bonne opération, résoudre en une étape puis en plusieurs, choisir la bonne phrase-réponse, compter toutes les possibilités, chercher le plus petit ou le plus grand. Un infirmier, un zoo, une boulangerie, une fleuriste, un parc animalier, un glacier et une ferme.",
+  },
+  "maths/cm2/algebre": {
+    titre: "Les débuts de l'algèbre : 20 exercices corrigés",
+    resume:
+      "Lire et compléter une égalité, trouver le nombre caché, lire un schéma en barres, continuer un motif qui grandit et trouver une étape lointaine sans tout dessiner. Une course de relais, un ukulélé, un restaurant, un tour de magie, un bassin et un robot.",
+  },
+  "maths/cm2/proportionnalite": {
+    titre: "La proportionnalité : 20 exercices corrigés",
+    resume:
+      "Reconnaître une situation de proportionnalité, compléter un tableau, trouver le nombre par lequel on multiplie, chercher « 2 fois plus » ou le prix d'un seul. Des crêpes, des tulipes, un zoo, de la peinture, un ressort, des cordes de guitare et un voyage en voiture.",
+  },
+  "maths/cm2/pourcentage": {
+    titre: "Les pourcentages : 20 exercices corrigés",
+    resume:
+      "Lire un pourcentage sur une grille de 100 cases, l'écrire en fraction et avec une virgule, calculer 10 %, 25 % ou 50 % d'une quantité, une remise et le prix à payer. Un ballon de foot, des soldes, un sondage, un verger, l'eau du corps humain et une piscine.",
+  },
+  "maths/cm2/echelle": {
+    titre: "Les échelles : 20 exercices corrigés",
+    resume:
+      "Lire une échelle, passer du plan à la vraie distance et retour, convertir avant de calculer, retrouver l'échelle d'un plan. Des cartes, une maquette de bus, une chambre, une architecte, un avion, un terrain de football et une mare.",
+  },
+  "maths/cm2/longueur": {
+    titre: "Les longueurs : 20 exercices corrigés",
+    resume:
+      "Convertir des km, m, cm et mm avec le tableau, comparer des longueurs, lire une règle et estimer la bonne unité. Des étagères de menuisière, des tournesols, une girafe, une piste cyclable et une pile de jetons.",
+  },
+  "maths/cm2/masse": {
+    titre: "Les masses : 20 exercices corrigés",
+    resume:
+      "Convertir des tonnes, kg, g et mg, comparer, lire une balance en équilibre et estimer une masse. Un melon, la recette du pâtissier, un camion, un ascenseur, le sac de farine de la boulangère et des letchis.",
+  },
+  "maths/cm2/contenance": {
+    titre: "Les contenances : 20 exercices corrigés",
+    resume:
+      "Convertir des L, dL, cL et mL, comparer, lire un verre doseur et estimer une contenance. Une pâte à crêpes, une fontaine, un aquarium, une douche ou un bain, un anniversaire et la citerne de la maraîchère.",
+  },
+  "maths/cm2/duree": {
+    titre: "Les durées : 20 exercices corrigés",
+    resume:
+      "Lire l'heure sur une horloge à aiguilles et sur un réveil, placer les aiguilles, convertir, puis calculer une durée ou une heure de fin en passant par l'heure pile. Un car scolaire, un film, un vol de nuit, le gâteau du pâtissier et un entraînement de natation.",
+  },
+  "maths/cm2/perimetre": {
+    titre: "Les périmètres : 20 exercices corrigés",
+    resume:
+      "Faire le tour d'une figure sur quadrillage puis avec des mesures (triangle, carré, rectangle, losange, polygones), trouver un côté qui manque. Un terrain de basket, une pièce en L, des cadres photo, une clôture et l'enclos de la fermière.",
+  },
+  "maths/cm2/aire": {
+    titre: "Les aires : 20 exercices corrigés",
+    resume:
+      "Compter des carreaux, choisir entre cm², dm² et m², calculer l'aire d'un carré, d'un rectangle, d'un triangle rectangle, découper une figure en rectangles. Un potager, une voile de bateau, une cuisine à carreler, une fresque, des panneaux solaires et un enclos de chèvres.",
+  },
+  "maths/cm2/angle": {
+    titre: "Les angles : 20 exercices corrigés",
+    resume:
+      "Trouver le sommet et les côtés d'un angle, repérer un angle droit, nommer un angle avec trois lettres, dire s'il est aigu, droit, obtus ou plat, comparer sans mesurer, lire un rapporteur. Une horloge, une pizza, une rampe de skate, un éventail et une rose des vents.",
+  },
+  "maths/cm2/reperage": {
+    titre: "Se repérer sur un quadrillage : 20 exercices corrigés",
+    resume:
+      "Nommer une case comme C4, lire les coordonnées d'un point comme (3 ; 2), retrouver un point, compter un déplacement. Un zoo, un robot, une carte au trésor, des étoiles, un drone, une fourmi et une randonnée.",
+  },
+  "maths/cm2/droite": {
+    titre: "Droites, parallèles et perpendiculaires : 20 exercices corrigés",
+    resume:
+      "Reconnaître et écrire un segment, une demi-droite, une droite, repérer des parallèles et des perpendiculaires, choisir le bon point pour en tracer une. Des rails, une guitare, le plan d'un quartier, un cerf-volant et l'échelle des pompiers.",
+  },
+  "maths/cm2/symetrie": {
+    titre: "La symétrie axiale : 20 exercices corrigés",
+    resume:
+      "Reconnaître un axe de symétrie, compter les carreaux jusqu'à l'axe, choisir le bon symétrique d'un point ou d'une figure, se servir de ce que la symétrie garde. Des lettres, une broderie, le reflet d'une montagne dans un lac, un logo et un massif de rosiers.",
+  },
+  "maths/cm2/figure-plane": {
+    titre: "Les figures planes : 20 exercices corrigés",
+    resume:
+      "Reconnaître un triangle, un carré, un losange, un cercle, lire le codage, le rayon et le diamètre, suivre un programme de construction et trouver la mesure qui manque. Un carrelage, un cerf-volant, une cible, un vitrail et des balles de tennis.",
+  },
+  "maths/cm2/solide": {
+    titre: "Les solides : 20 exercices corrigés",
+    resume:
+      "Reconnaître un cube, un pavé, un cylindre, un cône, une pyramide, compter faces, arêtes et sommets, trouver le bon patron et la face d'en face. Une épicerie, une tente, un dé, une chocolaterie, un cube peint et les cartons de la pâtissière.",
+  },
+  "maths/cm2/probabilite": {
+    titre: "Les probabilités : 20 exercices corrigés",
+    resume:
+      "Dire si c'est certain, possible ou impossible, compter les chances avec un sac de billes, une roue, un dé, comparer deux jeux, lister les issues de deux épreuves. Une kermesse, une roue de fête foraine, un dé fait main et pierre-feuille-ciseaux.",
+  },
+  "maths/cm2/algorithmique": {
+    titre: "L'algorithmique : 20 exercices corrigés",
+    resume:
+      "Suivre des instructions dans l'ordre, coder un déplacement avec des flèches, lire un programme Scratch, compter les pas, utiliser « répéter ». Un robot aspirateur, une chasse au trésor, un tour de magie, un drone, un robot jardinier et une livreuse à vélo.",
+  },
+  // ─── fin CM2 ───
   "maths/6e/stat-enquete": {
     titre: "Mener une enquête : 20 exercices corrigés",
     resume:
