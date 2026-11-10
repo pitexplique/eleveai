@@ -14,17 +14,20 @@
 //   — construire et compléter un TABLEAU À DOUBLE ENTRÉE représentant tous les
 //     couples possibles à partir de deux critères, par exemple la forme et la
 //     couleur ;
-//   — interpréter avec les expressions : « le plus », « le moins », « le plus
-//     grand », « le plus petit », « autant que », « plus que », « moins que ».
+//   — interpréter avec les expressions : « le plus », « le moins », « autant
+//     que », « plus que », « moins que ».
 //
 // LE PIÈGE DE LA NOTION : la case du croisement. Dans un tableau à double
 // entrée, on suit la ligne du doigt, on suit la colonne de l'autre main, et on
-// lit là où les deux se rencontrent — pas la première case venue de la ligne.
-// Son cousin est le passage des bâtons au nombre : quatre bâtons regroupés
-// quatre par quatre ne font pas quatre.
+// lit là où les deux se rencontrent. Son cousin est le passage des bâtons au
+// nombre : deux paquets de cinq bâtons ne font pas deux.
 //
-// ⚠️ Au CP l'axe est gradué de un en un : le piège de la graduation par cinq,
-// qui guette au CE2, n'a pas lieu d'être ici.
+// ⭐ 10/11/2026 — GÉNÉRATEURS. Chaque gabarit tire une ENQUÊTE (fruit, animal,
+// couleur, jeu de récré, goûter, glace, sport, trajet, instrument…) × un
+// enquêteur (la troupe et ses amis) × un lieu × une tournure. Le dessin porte
+// toujours les données : tableau (`tableau_donnees`) ou diagramme en barres
+// (`stat_graph`, axe gradué de un en un, AUCUNE valeur écrite sur les barres,
+// aucune barre surlignée) — c'est la lecture qu'on demande.
 //
 // ⚠️ PAS DE QUESTION À RÉDIGER : `applyMathsKeyboardFree` retire les items
 // `format: "open"`. Un CP clique, il ne tape pas.
@@ -58,17 +61,20 @@ function tableau(data: Omit<TableauDonneesCanvasData, "kind">): TableauDonneesCa
   return { kind: "tableau_donnees", ...data };
 }
 
+/** Diagramme en barres du CP : axe gradué de un en un, aucune valeur écrite. */
 function barres(data: { label: string; value: number }[]): StatGraphCanvasData {
   return {
     kind: "stat_graph",
     graphType: "barres",
+    size: { width: 340, height: 220 },
     data,
     display: {
-      // ⛔ Les valeurs écrites au-dessus des barres donneraient la réponse.
-      // On ne pose donc que des questions de comparaison : la plus haute, la
-      // plus basse — ce que le BO demande justement au CP.
+      // ⛔ Les valeurs écrites au-dessus des barres donneraient la réponse :
+      // on lit la hauteur sur l'axe, gradué de un en un comme le veut le BO.
       showValues: false,
       showLabels: true,
+      showAxis: true,
+      step: 1,
     },
   };
 }
@@ -83,8 +89,144 @@ Calcul : ${calcul}
 Conclusion : ${conclusion}`;
 }
 
-const FRUITS = ["orange", "fraise", "banane", "kiwi"] as const;
-const ANIMAUX = ["chien", "chat", "poisson", "lapin"] as const;
+const maj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+/** « de Nina », « d'Inès ». */
+const de = (p: string) => (/^[AEIOUÉÈÊaeiou]/.test(p) ? `d'${p}` : `de ${p}`);
+/** « a, b et c ». */
+const enListe = (l: readonly string[]) =>
+  l.length < 2 ? l.join("") : `${l.slice(0, -1).join(", ")} et ${l[l.length - 1]}`;
+
+const PRENOMS = [
+  "Nina", "Téo", "Zoé", "Ravi", "Lou", "Malo", "Inès", "Sacha",
+  "Amir", "Jade", "Naïa", "Tom", "Lina", "Yanis",
+] as const;
+
+const LIEUX = [
+  "En classe",
+  "Au centre de loisirs",
+  "À la cantine",
+  "Au club de judo",
+  "À la piscine",
+  "Au goûter d'anniversaire",
+  "Dans le bus de la sortie",
+  "À la bibliothèque",
+  "Au club de foot",
+  "En colonie",
+] as const;
+
+// Les enquêtes : un caractère qualitatif, 4 ou 5 valeurs au mot court (≤ 8
+// lettres : les étiquettes du diagramme ne doivent pas se toucher).
+type Enquete = { question: string; entete: string; cats: readonly string[] };
+const ENQUETES: readonly Enquete[] = [
+  { question: "Quel est ton fruit préféré ?", entete: "Fruit", cats: ["pomme", "banane", "fraise", "kiwi", "mangue"] },
+  { question: "Quel est ton animal préféré ?", entete: "Animal", cats: ["chien", "chat", "lapin", "poisson", "cheval"] },
+  { question: "Quelle est ta couleur préférée ?", entete: "Couleur", cats: ["rouge", "bleu", "vert", "jaune", "rose"] },
+  { question: "À quoi joues-tu à la récré ?", entete: "Jeu", cats: ["ballon", "corde", "billes", "marelle", "loup"] },
+  { question: "Que manges-tu au goûter ?", entete: "Goûter", cats: ["gâteau", "fruit", "yaourt", "pain", "compote"] },
+  { question: "Quelle glace préfères-tu ?", entete: "Glace", cats: ["vanille", "chocolat", "fraise", "citron", "coco"] },
+  { question: "Quel sport aimes-tu ?", entete: "Sport", cats: ["foot", "judo", "danse", "natation", "vélo"] },
+  { question: "Comment viens-tu à l'école ?", entete: "Trajet", cats: ["à pied", "en bus", "à vélo", "en voiture"] },
+  { question: "Quel instrument aimes-tu ?", entete: "Instrument", cats: ["tambour", "flûte", "guitare", "piano"] },
+  { question: "Quel est ton jouet préféré ?", entete: "Jouet", cats: ["poupée", "ballon", "puzzle", "toupie", "peluche"] },
+  { question: "Quelle saison préfères-tu ?", entete: "Saison", cats: ["été", "hiver", "automne", "printemps"] },
+  { question: "Quel métier veux-tu faire ?", entete: "Métier", cats: ["pompier", "pilote", "fermier", "docteur", "cuisinier"] },
+];
+
+type Tirage = { e: Enquete; p: string; lieu: string; valeurs: { label: string; value: number }[] };
+
+/** Une enquête tirée : n catégories, des effectifs (distincts si demandé). */
+function enquete(n: number, min: number, max: number, distincts = false): Tirage {
+  const e = randomChoice(ENQUETES);
+  const cats = shuffle(e.cats).slice(0, Math.min(n, e.cats.length));
+  const pool = shuffle(Array.from({ length: max - min + 1 }, (_, i) => min + i));
+  const valeurs = cats.map((label, i) => ({
+    label,
+    value: distincts ? pool[i] : randomInt(min, max),
+  }));
+  return { e, p: randomChoice(PRENOMS), lieu: randomChoice(LIEUX), valeurs };
+}
+
+function tableauEnquete(t: Tirage, enfants = "Enfants"): TableauDonneesCanvasData {
+  return tableau({
+    headers: [t.e.entete, enfants],
+    rows: t.valeurs.map((v) => ({ values: [v.label, v.value] })),
+  });
+}
+
+/** Une phrase qui pose l'enquête, différente à chaque fois. */
+function intro(t: Tirage, support: "tableau" | "diagramme") {
+  return randomChoice([
+    `${t.p} a demandé : « ${t.e.question} »`,
+    `${t.lieu}, ${t.p} a fait une enquête.`,
+    `Regarde le ${support} ${de(t.p)}.`,
+    `${t.lieu}, on a demandé : « ${t.e.question} »`,
+    `Pic le paille-en-queue a fait une enquête.`,
+    `Lis le ${support}.`,
+  ]);
+}
+
+/** Bâtons groupés par cinq : « ||||| ||| ». */
+function batons(n: number) {
+  const paquets = Math.floor(n / 5);
+  const reste = n % 5;
+  return [...Array.from({ length: paquets }, () => "|||||"), ...(reste ? ["|".repeat(reste)] : [])].join(" ");
+}
+
+// Tableaux à double entrée : des choses (lignes) × des couleurs (colonnes).
+const CHOSES = [
+  { nom: "ronds", f: false, famille: "formes" },
+  { nom: "carrés", f: false, famille: "formes" },
+  { nom: "triangles", f: false, famille: "formes" },
+  { nom: "ballons", f: false, famille: "jouets" },
+  { nom: "voitures", f: true, famille: "jouets" },
+  { nom: "toupies", f: true, famille: "jouets" },
+  { nom: "pommes", f: true, famille: "fruits" },
+  { nom: "poires", f: true, famille: "fruits" },
+  { nom: "bonnets", f: false, famille: "habits" },
+  { nom: "écharpes", f: true, famille: "habits" },
+  { nom: "gants", f: false, famille: "habits" },
+  { nom: "chats", f: false, famille: "animaux" },
+  { nom: "lapins", f: false, famille: "animaux" },
+  { nom: "poules", f: true, famille: "animaux" },
+] as const;
+const FAMILLES = ["formes", "jouets", "fruits", "habits", "animaux"] as const;
+const COULEURS_PAR_FAMILLE: Record<string, readonly { m: string; mp: string; fp: string }[]> = {
+  formes: [
+    { m: "bleu", mp: "bleus", fp: "bleues" },
+    { m: "rouge", mp: "rouges", fp: "rouges" },
+    { m: "vert", mp: "verts", fp: "vertes" },
+    { m: "jaune", mp: "jaunes", fp: "jaunes" },
+  ],
+  jouets: [
+    { m: "bleu", mp: "bleus", fp: "bleues" },
+    { m: "rouge", mp: "rouges", fp: "rouges" },
+    { m: "vert", mp: "verts", fp: "vertes" },
+    { m: "jaune", mp: "jaunes", fp: "jaunes" },
+  ],
+  fruits: [
+    { m: "rouge", mp: "rouges", fp: "rouges" },
+    { m: "vert", mp: "verts", fp: "vertes" },
+    { m: "jaune", mp: "jaunes", fp: "jaunes" },
+  ],
+  habits: [
+    { m: "bleu", mp: "bleus", fp: "bleues" },
+    { m: "rouge", mp: "rouges", fp: "rouges" },
+    { m: "noir", mp: "noirs", fp: "noires" },
+    { m: "blanc", mp: "blancs", fp: "blanches" },
+  ],
+  animaux: [
+    { m: "blanc", mp: "blancs", fp: "blanches" },
+    { m: "noir", mp: "noirs", fp: "noires" },
+    { m: "roux", mp: "roux", fp: "rousses" },
+  ],
+};
+
+function doubleEntree(nbLignes = 3, nbCols = 3) {
+  const famille = randomChoice(FAMILLES);
+  const lignes = shuffle(CHOSES.filter((c) => c.famille === famille)).slice(0, nbLignes);
+  const cols = shuffle(COULEURS_PAR_FAMILLE[famille]).slice(0, nbCols);
+  return { famille, lignes, cols };
+}
 
 export const donneesBank: TutorBankItemV4[] = [
   /* =========================================================
@@ -102,10 +244,16 @@ export const donneesBank: TutorBankItemV4[] = [
     hint: "Trouve la ligne demandée, puis lis le nombre écrit à côté.",
     tags: ["cp", "donnees", "lire_tableau", "template", "canvas"],
     generate: () => {
-      const valeurs = FRUITS.map((f) => ({ label: f, value: randomInt(2, 14) }));
-      const cible = randomChoice(valeurs);
+      const t = enquete(randomInt(3, 4), 2, 12);
+      const cible = randomChoice(t.valeurs);
+      const q = randomChoice([
+        `Combien d'enfants ont répondu « ${cible.label} » ?`,
+        `Combien d'enfants ont choisi « ${cible.label} » ?`,
+        `« ${maj(cible.label)} » : combien d'enfants ?`,
+        `Combien de voix pour « ${cible.label} » ?`,
+      ]);
       return {
-        text: `Dans la classe, on a demandé à chacun son fruit préféré. Combien d'élèves ont répondu « ${cible.label} » ?`,
+        text: `${intro(t, "tableau")} ${q}`,
         format: "short",
         expected: [String(cible.value)],
         comparator: "number_equal",
@@ -113,12 +261,46 @@ export const donneesBank: TutorBankItemV4[] = [
           "Un tableau range les résultats d'une enquête : chaque ligne porte une réponse et son nombre.",
           "On cherche la ligne demandée, puis on lit le nombre écrit en face.",
           `La ligne « ${cible.label} » indique ${cible.value}.`,
-          `${cible.value} élèves préfèrent ce fruit.`,
+          `${cible.value} enfants ont répondu « ${cible.label} ».`,
         ),
-        canvas: tableau({
-          headers: ["Fruit préféré", "Nombre d'élèves"],
-          rows: valeurs.map((v) => ({ values: [v.label, v.value] })),
-        }),
+        canvas: tableauEnquete(t),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "cp_donnees_lire_tableau_tpl_3",
+    niveau: "cp",
+    matiere: "maths",
+    notionId: "donnees",
+    microId: "cp_donnees_lire_tableau",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Lis tous les nombres du tableau et trouve le plus grand (ou le plus petit).",
+    tags: ["cp", "donnees", "lire_tableau", "template", "canvas"],
+    generate: () => {
+      const t = enquete(randomInt(3, 4), 1, 12, true);
+      const trie = [...t.valeurs].sort((a, b) => a.value - b.value);
+      const max = randomChoice([true, false]);
+      const bonne = max ? trie[trie.length - 1] : trie[0];
+      const q = randomChoice([
+        `Quelle réponse a été choisie le ${max ? "PLUS" : "MOINS"} souvent ?`,
+        `Quelle réponse a le ${max ? "PLUS" : "MOINS"} de voix ?`,
+        `Quelle réponse a été donnée par le ${max ? "PLUS" : "MOINS"} d'enfants ?`,
+      ]);
+      return {
+        text: `${intro(t, "tableau")} ${q}`,
+        format: "qcm",
+        choices: shuffle(t.valeurs.map((v) => v.label)),
+        expected: [bonne.label],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dans le tableau, chaque réponse a son nombre d'enfants.",
+          `On lit tous les nombres et on cherche le plus ${max ? "grand" : "petit"}.`,
+          `Les nombres sont ${t.valeurs.map((v) => v.value).join(", ")}. Le plus ${max ? "grand" : "petit"} est ${bonne.value}, sur la ligne « ${bonne.label} ».`,
+          `C'est « ${bonne.label} ».`,
+        ),
+        canvas: tableauEnquete(t),
       };
     },
   },
@@ -131,7 +313,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_lire_tableau",
     difficulty: 3,
     theme: "neutral",
-    text: "Pour compter les réponses d'une enquête, on fait d'abord des bâtons regroupés par paquets de cinq. On voit ||||| ||||| ||. Combien cela fait-il ?",
+    text: "Pour compter les réponses d'une enquête, on fait des bâtons, par paquets de cinq. On voit ||||| ||||| ||. Combien cela fait-il ?",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
@@ -156,22 +338,67 @@ export const donneesBank: TutorBankItemV4[] = [
     hint: "Additionne toutes les lignes du tableau.",
     tags: ["cp", "donnees", "lire_tableau", "template", "canvas"],
     generate: () => {
-      const valeurs = ANIMAUX.slice(0, 3).map((a) => ({ label: a, value: randomInt(2, 9) }));
-      const total = valeurs.reduce((s, v) => s + v.value, 0);
+      const t = enquete(3, 2, 9);
+      const total = t.valeurs.reduce((s, v) => s + v.value, 0);
+      const q = randomChoice([
+        "Combien d'enfants ont répondu en tout ?",
+        "Combien d'enfants ont répondu à l'enquête ?",
+        "Combien de réponses y a-t-il en tout ?",
+      ]);
       return {
-        text: "Combien d'élèves ont répondu à cette enquête en tout ?",
+        text: `${intro(t, "tableau")} ${q}`,
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
         explanation: exp(
           "Le total d'une enquête est la somme de toutes les réponses recueillies.",
           "On additionne les nombres de toutes les lignes.",
-          `${valeurs.map((v) => v.value).join(" + ")} = ${total}.`,
-          `${total} élèves ont répondu.`,
+          `${t.valeurs.map((v) => v.value).join(" + ")} = ${total}.`,
+          `${total} enfants ont répondu.`,
+        ),
+        canvas: tableauEnquete(t),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "cp_donnees_lire_tableau_tpl_4",
+    niveau: "cp",
+    matiere: "maths",
+    notionId: "donnees",
+    microId: "cp_donnees_lire_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un paquet de bâtons vaut 5. Compte les paquets de 5, puis les bâtons seuls.",
+    tags: ["cp", "donnees", "lire_tableau", "batons", "template", "canvas"],
+    generate: () => {
+      const t = enquete(3, 3, 14);
+      const cible = randomChoice(t.valeurs);
+      const q = randomChoice([
+        `Combien d'enfants ont choisi « ${cible.label} » ?`,
+        `Compte les bâtons de « ${cible.label} ». Combien d'enfants ?`,
+        `Combien de bâtons pour « ${cible.label} » ?`,
+      ]);
+      const debut = randomChoice([
+        `${t.p} a compté les réponses avec des bâtons.`,
+        `${t.lieu}, ${t.p} a noté les réponses avec des bâtons.`,
+        `Pic a fait un bâton pour chaque réponse.`,
+        `Ti Margo a compté avec des bâtons.`,
+      ]);
+      return {
+        text: `${debut} ${q}`,
+        format: "short",
+        expected: [String(cible.value)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un bâton, c'est une réponse. On les range par paquets de cinq pour compter vite.",
+          "On compte les paquets de 5, puis on ajoute les bâtons seuls.",
+          `« ${cible.label} » : ${batons(cible.value)}. ${Math.floor(cible.value / 5)} paquet(s) de 5 et ${cible.value % 5} bâton(s) seul(s) : cela fait ${cible.value}.`,
+          `${cible.value} enfants ont choisi « ${cible.label} ».`,
         ),
         canvas: tableau({
-          headers: ["Animal préféré", "Nombre d'élèves"],
-          rows: valeurs.map((v) => ({ values: [v.label, v.value] })),
+          headers: [t.e.entete, "Bâtons"],
+          rows: t.valeurs.map((v) => ({ values: [v.label, batons(v.value)] })),
         }),
       };
     },
@@ -189,29 +416,31 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_barres",
     difficulty: 2,
     theme: "neutral",
-    hint: "La barre la plus haute correspond à la réponse la plus fréquente.",
+    hint: "La barre la plus haute, c'est la réponse la plus choisie.",
     tags: ["cp", "donnees", "barres", "template", "canvas"],
     generate: () => {
-      const valeurs = shuffle([...FRUITS]).map((f, i) => ({
-        label: f,
-        value: [3, 6, 9, 12][i] + randomInt(0, 1),
-      }));
-      const chercheMax = randomChoice([true, false]);
-      const trie = [...valeurs].sort((a, b) => a.value - b.value);
-      const bonne = chercheMax ? trie[trie.length - 1] : trie[0];
+      const t = enquete(4, 1, 10, true);
+      const max = randomChoice([true, false]);
+      const trie = [...t.valeurs].sort((a, b) => a.value - b.value);
+      const bonne = max ? trie[trie.length - 1] : trie[0];
+      const q = randomChoice([
+        `Quelle réponse a été choisie par le ${max ? "PLUS" : "MOINS"} d'enfants ?`,
+        `Quelle est la barre la plus ${max ? "HAUTE" : "BASSE"} ?`,
+        `Quelle réponse a eu le ${max ? "PLUS" : "MOINS"} de voix ?`,
+      ]);
       return {
-        text: `Quel fruit a été choisi par le ${chercheMax ? "PLUS" : "MOINS"} d'élèves ?`,
+        text: `${intro(t, "diagramme")} ${q}`,
         format: "qcm",
-        choices: shuffle(valeurs.map((v) => v.label)),
+        choices: shuffle(t.valeurs.map((v) => v.label)),
         expected: [bonne.label],
         comparator: "mcq_exact",
         explanation: exp(
           "Dans un diagramme en barres, plus une barre est haute, plus la réponse a été choisie.",
-          "On compare les hauteurs des barres, sans avoir besoin de lire les nombres.",
-          `La barre ${chercheMax ? "la plus haute" : "la plus basse"} est celle de « ${bonne.label} ».`,
-          `C'est ${bonne.label}.`,
+          "On compare les hauteurs des barres.",
+          `La barre ${max ? "la plus haute" : "la plus basse"} est celle de « ${bonne.label} ».`,
+          `C'est « ${bonne.label} ».`,
         ),
-        canvas: barres(valeurs),
+        canvas: barres(t.valeurs),
       };
     },
   },
@@ -238,7 +467,7 @@ export const donneesBank: TutorBankItemV4[] = [
     explanation: exp(
       "Dans un diagramme en barres, la hauteur d'une barre représente le nombre de réponses.",
       "On lit la hauteur sur l'axe vertical, gradué de un en un.",
-      "Une barre deux fois plus haute qu'une autre correspond à deux fois plus d'élèves. Cela ne dit rien sur la qualité de la réponse : le fruit le plus choisi n'est pas « le meilleur fruit ».",
+      "Une barre plus haute correspond à plus d'enfants. Cela ne dit rien sur la qualité de la réponse : le fruit le plus choisi n'est pas « le meilleur fruit ».",
       "Une barre plus haute veut dire que cette réponse a été choisie plus souvent.",
     ),
     tags: ["cp", "donnees", "barres", "piege", "qcm"],
@@ -252,22 +481,29 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_barres",
     difficulty: 3,
     theme: "neutral",
-    hint: "Un carreau vaut un élève : compte les carreaux de la barre.",
-    tags: ["cp", "donnees", "barres", "template"],
+    hint: "Suis le haut de la barre jusqu'à l'axe, et lis le nombre.",
+    tags: ["cp", "donnees", "barres", "template", "canvas"],
     generate: () => {
-      const carreaux = randomInt(3, 12);
-      const animal = randomChoice([...ANIMAUX]);
+      const t = enquete(4, 1, 10);
+      const cible = randomChoice(t.valeurs);
+      const q = randomChoice([
+        `Combien d'enfants ont choisi « ${cible.label} » ?`,
+        `Jusqu'où monte la barre « ${cible.label} » ?`,
+        `Combien de voix pour « ${cible.label} » ?`,
+        `« ${maj(cible.label)} » : combien d'enfants ?`,
+      ]);
       return {
-        text: `Sur un diagramme en barres gradué de un en un, la barre du ${animal} monte jusqu'à ${carreaux} carreaux. Combien d'élèves ont choisi le ${animal} ?`,
+        text: `${intro(t, "diagramme")} ${q}`,
         format: "short",
-        expected: [String(carreaux)],
+        expected: [String(cible.value)],
         comparator: "number_equal",
         explanation: exp(
-          "Sur un axe gradué de un en un, chaque carreau représente un individu.",
-          "On compte les carreaux de la barre, un par un.",
-          `La barre monte de ${carreaux} carreaux, et chaque carreau vaut un élève : cela fait ${carreaux} élèves.`,
-          `${carreaux} élèves ont choisi le ${animal}.`,
+          "Sur un axe gradué de un en un, chaque graduation compte un enfant de plus.",
+          "On suit le haut de la barre jusqu'à l'axe, et on lit le nombre.",
+          `Le haut de la barre « ${cible.label} » arrive au ${cible.value}.`,
+          `${cible.value} enfants ont choisi « ${cible.label} ».`,
         ),
+        canvas: barres(t.valeurs),
       };
     },
   },
@@ -285,7 +521,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_completer_tableau",
     difficulty: 4,
     theme: "neutral",
-    text: "Dans un tableau à double entrée, comment trouve-t-on la case qui correspond aux ronds bleus ?",
+    text: "Dans un tableau à double entrée, comment trouve-t-on la case des ronds bleus ?",
     format: "qcm",
     choices: [
       "on suit la ligne des ronds et la colonne du bleu, et on lit là où elles se croisent",
@@ -301,7 +537,7 @@ export const donneesBank: TutorBankItemV4[] = [
     explanation: exp(
       "Un tableau à double entrée croise deux critères : chaque case correspond à un couple, ici une forme et une couleur.",
       "On pose un doigt sur la ligne, un doigt sur la colonne, et on les fait glisser jusqu'à ce qu'ils se rencontrent.",
-      "La ligne des ronds contient tous les ronds, de toutes les couleurs. La colonne du bleu contient tout ce qui est bleu, de toutes les formes. Seule la case où les deux se croisent contient les ronds ET bleus.",
+      "La ligne des ronds contient tous les ronds, de toutes les couleurs. La colonne du bleu contient tout ce qui est bleu. Seule la case où les deux se croisent contient les ronds bleus.",
       "On lit la case où la ligne et la colonne se croisent.",
     ),
     tags: ["cp", "donnees", "double_entree", "piege", "qcm"],
@@ -315,29 +551,37 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_completer_tableau",
     difficulty: 4,
     theme: "neutral",
-    hint: "Suis la ligne, suis la colonne, et lis le croisement.",
+    hint: "Un doigt sur la ligne, un doigt sur la colonne : lis la case où ils se croisent.",
     tags: ["cp", "donnees", "double_entree", "template", "canvas"],
     generate: () => {
-      const formes = ["rond", "carré", "triangle"];
-      const couleurs = ["bleu", "rouge", "vert"];
-      const grille = formes.map(() => couleurs.map(() => randomInt(0, 6)));
-      const iForme = randomInt(0, formes.length - 1);
-      const iCouleur = randomInt(0, couleurs.length - 1);
-      const valeur = grille[iForme][iCouleur];
+      const { famille, lignes, cols } = doubleEntree(3, 3);
+      const grille = lignes.map(() => cols.map(() => randomInt(0, 9)));
+      const i = randomInt(0, lignes.length - 1);
+      const j = randomInt(0, cols.length - 1);
+      const valeur = grille[i][j];
+      const quoi = `${lignes[i].nom} ${lignes[i].f ? cols[j].fp : cols[j].mp}`;
+      const p = randomChoice(PRENOMS);
+      const text = randomChoice([
+        `Combien y a-t-il ${de(quoi)} ?`,
+        `${p} a trié ses ${famille}. Combien ${de(quoi)} ?`,
+        `Lis le tableau ${de(p)}. Combien ${de(quoi)} ?`,
+        `Pic cherche les ${quoi}. Combien y en a-t-il ?`,
+        `${p} a rangé des ${famille} dans un tableau. Combien ${de(quoi)} ?`,
+      ]);
       return {
-        text: `Combien y a-t-il de ${formes[iForme]}s ${couleurs[iCouleur]}s ?`,
+        text,
         format: "short",
         expected: [String(valeur)],
         comparator: "number_equal",
         explanation: exp(
           "Dans un tableau à double entrée, chaque case répond à deux questions à la fois.",
-          "On suit la ligne de la forme et la colonne de la couleur, et on lit leur croisement.",
-          `La ligne « ${formes[iForme]} » et la colonne « ${couleurs[iCouleur]} » se croisent sur la case qui contient ${valeur}.`,
-          `Il y a ${valeur} ${formes[iForme]}s ${couleurs[iCouleur]}s.`,
+          "On suit la ligne et la colonne, et on lit leur croisement.",
+          `La ligne « ${lignes[i].nom} » et la colonne « ${cols[j].m} » se croisent sur la case ${valeur}.`,
+          `Il y a ${valeur} ${quoi}.`,
         ),
         canvas: tableau({
-          headers: ["", ...couleurs],
-          rows: formes.map((f, i) => ({ values: [f, ...grille[i]] })),
+          headers: ["", ...cols.map((c) => c.m)],
+          rows: lignes.map((l, k) => ({ values: [l.nom, ...grille[k]] })),
         }),
       };
     },
@@ -351,23 +595,77 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_completer_tableau",
     difficulty: 5,
     theme: "neutral",
-    hint: "Chaque forme peut prendre chaque couleur.",
+    hint: "Chaque chose peut avoir chaque couleur : une case pour chaque couple.",
     tags: ["cp", "donnees", "double_entree", "template"],
     generate: () => {
-      const nbFormes = randomInt(2, 4);
-      const nbCouleurs = randomInt(2, 4);
-      const total = nbFormes * nbCouleurs;
+      const { famille, lignes, cols } = doubleEntree(randomInt(2, 3), randomInt(2, 4));
+      const total = lignes.length * cols.length;
+      const p = randomChoice(PRENOMS);
+      const liste = enListe(lignes.map((l) => l.nom));
+      const couleurs = enListe(cols.map((c) => c.m));
+      const text = randomChoice([
+        `${p} fait un tableau à double entrée : ${liste} en lignes ; ${couleurs} en colonnes. Combien de cases à remplir ?`,
+        `Un tableau range des ${famille} : ${liste}. Les couleurs sont ${couleurs}. Combien de cases faut-il ?`,
+        `Pic veut un tableau pour ses ${famille} (${liste}) et les couleurs ${couleurs}. Combien de cases ?`,
+      ]);
       return {
-        text: `Un tableau à double entrée croise ${nbFormes} formes et ${nbCouleurs} couleurs. Combien de cases contient-il ?`,
+        text,
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
         explanation: exp(
           "Un tableau à double entrée contient une case pour chaque couple possible entre les deux critères.",
           "On compte les cases ligne par ligne.",
-          `Chaque forme peut prendre les ${nbCouleurs} couleurs : cela fait ${nbCouleurs} cases par ligne. Avec ${nbFormes} lignes : ${Array.from({ length: nbFormes }, () => nbCouleurs).join(" + ")} = ${total}.`,
-          `Le tableau contient ${total} cases.`,
+          `Chaque ligne a ${cols.length} cases (une par couleur). Avec ${lignes.length} lignes : ${lignes.map(() => cols.length).join(" + ")} = ${total}.`,
+          `Il faut ${total} cases.`,
         ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "cp_donnees_completer_tableau_tpl_3",
+    niveau: "cp",
+    matiere: "maths",
+    notionId: "donnees",
+    microId: "cp_donnees_completer_tableau",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Le total de la ligne est connu : enlève les cases que tu connais.",
+    tags: ["cp", "donnees", "double_entree", "template", "canvas"],
+    generate: () => {
+      const { famille, lignes, cols } = doubleEntree(3, 3);
+      const grille = lignes.map(() => cols.map(() => randomInt(1, 6)));
+      const i = randomInt(0, lignes.length - 1);
+      const j = randomInt(0, cols.length - 1);
+      const valeur = grille[i][j];
+      const totalLigne = grille[i].reduce((s, v) => s + v, 0);
+      const quoi = `${lignes[i].nom} ${lignes[i].f ? cols[j].fp : cols[j].mp}`;
+      const p = randomChoice(PRENOMS);
+      const text = randomChoice([
+        `${p} a ${totalLigne} ${lignes[i].nom} en tout. Une case est cachée. Combien ${de(quoi)} ?`,
+        `Il y a ${totalLigne} ${lignes[i].nom} en tout. Combien ${de(quoi)} ?`,
+        `Pic a renversé de l'eau sur une case ! Il y a ${totalLigne} ${lignes[i].nom}. Combien ${de(quoi)} ?`,
+        `${p} range ses ${famille} : ${totalLigne} ${lignes[i].nom} en tout. Combien ${de(quoi)} ?`,
+      ]);
+      const connus = grille[i].filter((_, k) => k !== j);
+      return {
+        text,
+        format: "short",
+        expected: [String(valeur)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Toutes les cases d'une ligne, ensemble, font le total de la ligne.",
+          "On additionne les cases connues de la ligne, puis on complète jusqu'au total.",
+          `${connus.join(" + ")} = ${connus.reduce((s, v) => s + v, 0)}. Pour aller jusqu'à ${totalLigne}, il manque ${valeur}.`,
+          `Il y a ${valeur} ${quoi}.`,
+        ),
+        canvas: tableau({
+          headers: ["", ...cols.map((c) => c.m)],
+          rows: lignes.map((l, k) => ({
+            values: [l.nom, ...grille[k].map((v, c) => (k === i && c === j ? "?" : v))],
+          })),
+        }),
       };
     },
   },
@@ -387,30 +685,29 @@ export const donneesBank: TutorBankItemV4[] = [
     hint: "« Plus que » veut dire davantage, « autant que » veut dire pareil.",
     tags: ["cp", "donnees", "interpreter", "template", "canvas"],
     generate: () => {
-      const valeurs = FRUITS.slice(0, 3).map((f) => ({ label: f, value: randomInt(2, 12) }));
-      const [a, b] = shuffle(valeurs).slice(0, 2);
-      const bonne =
-        a.value > b.value
-          ? `plus que`
-          : a.value < b.value
-            ? `moins que`
-            : `autant que`;
+      const t = enquete(randomInt(3, 4), 2, 10);
+      const [a, b] = shuffle(t.valeurs).slice(0, 2);
+      if (Math.random() < 0.25) b.value = a.value;
+      const bonne = a.value > b.value ? "plus" : a.value < b.value ? "moins" : "autant";
+      const enBarres = randomChoice([true, false]);
+      const q = randomChoice([
+        `Pour « ${a.label} », y a-t-il plus, moins ou autant de voix que pour « ${b.label} » ?`,
+        `Y a-t-il plus, moins ou autant d'enfants pour « ${a.label} » que pour « ${b.label} » ?`,
+        `Compare « ${a.label} » et « ${b.label} ». Pour « ${a.label} », il y a plus, moins ou autant de voix ?`,
+      ]);
       return {
-        text: `Dans cette enquête, y a-t-il plus, moins ou autant d'élèves qui ont choisi « ${a.label} » que d'élèves qui ont choisi « ${b.label} » ?`,
+        text: `${intro(t, enBarres ? "diagramme" : "tableau")} ${q}`,
         format: "qcm",
-        choices: shuffle(["plus que", "moins que", "autant que"]),
+        choices: shuffle(["plus", "moins", "autant"]),
         expected: [bonne],
         comparator: "mcq_exact",
         explanation: exp(
-          "Comparer deux données, c'est dire laquelle est la plus grande — ou si elles sont égales.",
-          "On lit les deux nombres dans le tableau, puis on les compare.",
+          "Comparer deux données, c'est dire laquelle est la plus grande, ou si elles sont égales.",
+          enBarres ? "On compare la hauteur des deux barres." : "On lit les deux nombres dans le tableau, puis on les compare.",
           `« ${a.label} » : ${a.value}. « ${b.label} » : ${b.value}. ${a.value === b.value ? "Les deux nombres sont égaux." : `${a.value} est ${a.value > b.value ? "plus grand" : "plus petit"} que ${b.value}.`}`,
-          `Il y en a ${bonne}.`,
+          `Il y a ${bonne} de voix pour « ${a.label} » que pour « ${b.label} ».`,
         ),
-        canvas: tableau({
-          headers: ["Fruit préféré", "Nombre d'élèves"],
-          rows: valeurs.map((v) => ({ values: [v.label, v.value] })),
-        }),
+        canvas: enBarres ? barres(t.valeurs) : tableauEnquete(t),
       };
     },
   },
@@ -423,30 +720,32 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_interpreter",
     difficulty: 4,
     theme: "neutral",
-    hint: "Cherche l'écart entre les deux nombres.",
+    hint: "Cherche l'écart entre les deux nombres : compte de l'un à l'autre.",
     tags: ["cp", "donnees", "interpreter", "template", "canvas"],
     generate: () => {
-      // ⚠️ Trois valeurs DISTINCTES : sinon « le plus aimé » et « le moins
-      // aimé » peuvent désigner le même nombre, et l'écart tombe à zéro.
-      const tirage = shuffle([2, 4, 6, 8, 10, 12, 15]).slice(0, 3);
-      const valeurs = ANIMAUX.slice(0, 3).map((a, i) => ({ label: a, value: tirage[i] }));
-      const trie = [...valeurs].sort((x, y) => y.value - x.value);
-      const ecart = trie[0].value - trie[trie.length - 1].value;
+      const t = enquete(randomInt(3, 4), 1, 12, true);
+      const [x, y] = shuffle(t.valeurs).slice(0, 2);
+      const haut = x.value > y.value ? x : y;
+      const bas = x.value > y.value ? y : x;
+      const ecart = haut.value - bas.value;
+      const enBarres = randomChoice([true, false]);
+      const q = randomChoice([
+        `Combien d'enfants de plus ont choisi « ${haut.label} » que « ${bas.label} » ?`,
+        `« ${maj(haut.label)} » a combien de voix de plus que « ${bas.label} » ?`,
+        `Combien de voix de moins pour « ${bas.label} » que pour « ${haut.label} » ?`,
+      ]);
       return {
-        text: "Combien d'élèves de plus ont choisi l'animal le plus aimé, par rapport à l'animal le moins aimé ?",
+        text: `${intro(t, enBarres ? "diagramme" : "tableau")} ${q}`,
         format: "short",
         expected: [String(ecart)],
         comparator: "number_equal",
         explanation: exp(
-          "Comparer deux données chiffrées, c'est calculer leur écart.",
-          "On repère la plus grande et la plus petite valeur, puis on les soustrait.",
-          `La plus grande est « ${trie[0].label} » avec ${trie[0].value}, la plus petite est « ${trie[trie.length - 1].label} » avec ${trie[trie.length - 1].value}. ${trie[0].value} - ${trie[trie.length - 1].value} = ${ecart}.`,
-          `Il y a ${ecart} élèves de plus.`,
+          "Comparer deux données chiffrées, c'est trouver leur écart.",
+          "On lit les deux nombres, puis on compte du plus petit au plus grand.",
+          `« ${haut.label} » : ${haut.value}. « ${bas.label} » : ${bas.value}. ${haut.value} - ${bas.value} = ${ecart}.`,
+          `Il y a ${ecart} voix d'écart.`,
         ),
-        canvas: tableau({
-          headers: ["Animal préféré", "Nombre d'élèves"],
-          rows: valeurs.map((v) => ({ values: [v.label, v.value] })),
-        }),
+        canvas: enBarres ? barres(t.valeurs) : tableauEnquete(t),
       };
     },
   },
@@ -471,9 +770,9 @@ export const donneesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "« Autant » va avec le signe =.",
     explanation: exp(
-      "« Autant que » exprime l'égalité entre deux quantités.",
+      "« Autant que » veut dire « le même nombre ».",
       "On compare les deux nombres du tableau.",
-      "Si les deux barres du diagramme ont exactement la même hauteur, ou si les deux lignes du tableau portent le même nombre, alors il y a autant de chats que de chiens.",
+      "Si les deux barres ont la même hauteur, ou si les deux lignes du tableau portent le même nombre, il y a autant de chats que de chiens.",
       "Cela veut dire qu'il y en a exactement le même nombre.",
     ),
     tags: ["cp", "donnees", "interpreter", "lexique", "qcm"],
@@ -491,15 +790,15 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Dans une classe de 24 élèves, tous ont répondu à l'enquête sur le fruit préféré. On compte 4 oranges, 12 fraises et 6 bananes. Combien d'élèves ont choisi un autre fruit ?",
+    text: "Les 24 élèves de la classe ont tous répondu. On compte 4 oranges, 12 fraises et 6 bananes. Combien d'élèves ont choisi un autre fruit ?",
     format: "short",
     expected: ["2"],
     comparator: "number_equal",
     hint: "Le total des réponses doit faire 24.",
     explanation: exp(
-      "Dans une enquête où tout le monde répond, la somme des réponses est égale au nombre de personnes interrogées.",
-      "On additionne les réponses connues, puis on les enlève au total.",
-      "4 + 12 + 6 = 22 réponses connues. Il y a 24 élèves : 24 - 22 = 2. Deux élèves ont choisi un autre fruit.",
+      "Quand tout le monde répond, la somme des réponses est égale au nombre de personnes interrogées.",
+      "On additionne les réponses connues, puis on complète jusqu'au total.",
+      "4 + 12 + 6 = 22 réponses connues. Il y a 24 élèves : 24 - 22 = 2.",
       "2 élèves ont choisi un autre fruit.",
     ),
     tags: ["cp", "donnees", "defi", "piege"],
@@ -513,25 +812,40 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "La somme de toutes les réponses doit donner le nombre d'élèves.",
-    tags: ["cp", "donnees", "defi", "template"],
+    hint: "Toutes les lignes ensemble doivent faire le nombre d'enfants.",
+    tags: ["cp", "donnees", "defi", "template", "canvas"],
     generate: () => {
-      const a = randomInt(2, 9);
-      const b = randomInt(3, 12);
-      const c = randomInt(2, 8);
-      const manquant = randomInt(1, 6);
-      const total = a + b + c + manquant;
+      const t = enquete(4, 1, 8);
+      const k = randomInt(0, t.valeurs.length - 1);
+      const manquant = t.valeurs[k];
+      const total = t.valeurs.reduce((s, v) => s + v.value, 0);
+      const connus = t.valeurs.filter((_, i) => i !== k).map((v) => v.value);
+      const debut = randomChoice([
+        `Les ${total} enfants de la classe ${de(t.p)} ont tous répondu.`,
+        `${t.lieu}, ${total} enfants ont tous répondu à l'enquête.`,
+        `Pic a interrogé ${total} enfants. Tous ont répondu.`,
+        `${t.p} a posé sa question à ${total} enfants. Tous ont répondu.`,
+      ]);
+      const q = randomChoice([
+        `Combien ont répondu « ${manquant.label} » ?`,
+        `Une case est effacée. Combien pour « ${manquant.label} » ?`,
+        `Trouve le nombre caché.`,
+      ]);
       return {
-        text: `Les ${total} élèves de la classe ont tous répondu à l'enquête. On compte ${a} pour « orange », ${b} pour « fraise » et ${c} pour « banane ». Combien ont répondu « kiwi » ?`,
+        text: `${debut} ${q}`,
         format: "short",
-        expected: [String(manquant)],
+        expected: [String(manquant.value)],
         comparator: "number_equal",
         explanation: exp(
-          "Quand toute la classe répond, la somme des réponses est égale au nombre d'élèves.",
-          "On additionne les réponses connues, puis on les enlève au total.",
-          `${a} + ${b} + ${c} = ${a + b + c}. Puis ${total} - ${a + b + c} = ${manquant}.`,
-          `${manquant} élèves ont répondu « kiwi ».`,
+          "Quand tout le monde répond, la somme des réponses est égale au nombre d'enfants.",
+          "On additionne les nombres connus, puis on complète jusqu'au total.",
+          `${connus.join(" + ")} = ${total - manquant.value}. Pour aller jusqu'à ${total}, il manque ${manquant.value}.`,
+          `${manquant.value} enfants ont répondu « ${manquant.label} ».`,
         ),
+        canvas: tableau({
+          headers: [t.e.entete, "Enfants"],
+          rows: t.valeurs.map((v, i) => ({ values: [v.label, i === k ? "?" : v.value] })),
+        }),
       };
     },
   },
@@ -544,26 +858,38 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_defi",
     difficulty: 4,
     theme: "neutral",
-    hint: "Une enquête ne peut pas donner plus de réponses qu'il n'y a de personnes.",
-    tags: ["cp", "donnees", "defi", "piege", "template"],
+    hint: "Chaque enfant donne une seule réponse : additionne tout et compare au nombre d'enfants.",
+    tags: ["cp", "donnees", "defi", "piege", "template", "canvas"],
     generate: () => {
-      const eleves = randomInt(18, 30);
-      const possible = randomChoice([true, false]);
-      const compte = possible ? randomInt(2, eleves - 1) : eleves + randomInt(1, 8);
+      const t = enquete(3, 2, 8);
+      const somme = t.valeurs.reduce((s, v) => s + v.value, 0);
+      const juste = randomChoice([true, false]);
+      const enfants = juste ? somme : somme - randomInt(1, 4);
+      const debut = randomChoice([
+        `Il y a ${enfants} enfants dans le groupe ${de(t.p)}.`,
+        `${t.lieu}, il y a ${enfants} enfants.`,
+        `${t.p} interroge ${enfants} enfants.`,
+        `Pic interroge les ${enfants} enfants du club.`,
+      ]);
+      const q = randomChoice([
+        "Chacun donne une seule réponse. Ce tableau peut-il être juste ?",
+        "Chaque enfant répond une fois. Le tableau est-il possible ?",
+        "Une seule réponse par enfant. Ce tableau peut-il être vrai ?",
+      ]);
+      const bonne = juste ? "oui" : "non";
       return {
-        text: `Dans une classe de ${eleves} élèves, chacun a donné une seule réponse. Un élève compte ${compte} réponses « chien ». Est-ce possible ?`,
+        text: `${debut} ${q}`,
         format: "qcm",
         choices: shuffle(["oui", "non"]),
-        expected: [possible ? "oui" : "non"],
+        expected: [bonne],
         comparator: "mcq_exact",
         explanation: exp(
-          "Chaque personne interrogée ne donne qu'une réponse : aucune réponse ne peut dépasser le nombre de personnes.",
-          "On compare le nombre trouvé au nombre d'élèves.",
-          possible
-            ? `${compte} est plus petit que ${eleves} : c'est possible, les ${eleves - compte} autres élèves ont répondu autre chose.`
-            : `${compte} est plus grand que ${eleves}, le nombre d'élèves de la classe. C'est impossible : il faut recompter.`,
-          possible ? "Oui, c'est possible." : "Non, ce n'est pas possible.",
+          "Chaque enfant donne une seule réponse : il ne peut pas y avoir plus de réponses que d'enfants.",
+          "On additionne toutes les réponses du tableau, puis on compare au nombre d'enfants.",
+          `${t.valeurs.map((v) => v.value).join(" + ")} = ${somme}. ${juste ? `C'est bien le nombre d'enfants, ${enfants}.` : `C'est plus que ${enfants} enfants : il y a une erreur.`}`,
+          juste ? "Oui, le tableau peut être juste." : "Non, le tableau ne peut pas être juste.",
         ),
+        canvas: tableauEnquete(t),
       };
     },
   },
