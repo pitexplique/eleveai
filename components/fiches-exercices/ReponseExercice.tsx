@@ -15,7 +15,7 @@ import { useMemo, useRef, useState } from "react";
 import katex from "katex";
 import { CheckCircle2, CircleAlert, Keyboard, XCircle } from "lucide-react";
 import { saisieEnLatex, touchesPourClasse, type ToucheMaths } from "@/lib/fiches-exercices/saisie-maths";
-import { saisieJuste, type ReponseAttendue } from "@/lib/fiches-exercices/verifier-saisie";
+import { saisieJuste, selonLaClasse, type ReponseAttendue } from "@/lib/fiches-exercices/verifier-saisie";
 
 function Apercu({ saisie }: { saisie: string }) {
   const html = useMemo(() => {
@@ -70,7 +70,7 @@ export default function ReponseExercice({
   }
 
   function valider() {
-    setVerdicts(reponses.map((r, k) => saisieJuste(saisies[k], r)));
+    setVerdicts(reponses.map((r, k) => saisieJuste(saisies[k], selonLaClasse(r, classe))));
   }
 
   const rempli = saisies.some((s) => s.trim());

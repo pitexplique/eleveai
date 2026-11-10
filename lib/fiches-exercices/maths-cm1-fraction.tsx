@@ -139,6 +139,11 @@ export const exercicesFractionCm1: FicheExercicesData = {
           ]),
           correction:
             "Je compte d'abord TOUTES les parts : c'est le nombre du bas, le dénominateur.\nPuis je compte les parts bleues : c'est le nombre du haut, le numérateur.\nBarre A : 5 parts, 2 bleues. $\\dfrac{2}{5}$ : deux cinquièmes.\nBarre B : 3 parts, 1 bleue. $\\dfrac{1}{3}$ : un tiers.\nBarre C : 8 parts, 3 bleues. $\\dfrac{3}{8}$ : trois huitièmes.\n⛔ Le piège : mettre en bas les parts BLANCHES. Pour A, on écrirait $\\dfrac{2}{3}$. En bas, je mets toutes les parts.\nRéponse : A : $\\dfrac{2}{5}$ ; B : $\\dfrac{1}{3}$ ; C : $\\dfrac{3}{8}$.",
+          reponses: [
+            { question: "A", attendu: ["2/5", "deux cinquièmes"] },
+            { question: "B", attendu: ["1/3", "un tiers"] },
+            { question: "C", attendu: ["3/8", "trois huitièmes"] },
+          ],
           micros: ["fraction_lire"],
         },
         {
@@ -152,6 +157,12 @@ export const exercicesFractionCm1: FicheExercicesData = {
               { d: 3, label: "2/3", parts: [2] },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "1/2", exact: true },
+            { question: "b)", attendu: "3/4", exact: true },
+            { question: "c)", attendu: "2/3", exact: true },
+            { question: "d)", attendu: ["cinq sixièmes", "cinq sixième"] },
+          ],
           micros: ["fraction_lire"],
         },
         {
@@ -159,6 +170,12 @@ export const exercicesFractionCm1: FicheExercicesData = {
           figure: rect(2, 4, 3),
           correction:
             "a) 2 lignes de 4 cases : 2 × 4 = 8 cases.\nb) Je compte 3 cases coloriées sur 8 : $\\dfrac{3}{8}$.\nc) Pour $\\dfrac{5}{8}$, il faut 5 cases coloriées. Elle en a déjà 3. Il manque 5 − 3 = 2 cases.\nd) 8 − 3 = 5 cases blanches : $\\dfrac{5}{8}$.\n⛔ Le piège : écrire $\\dfrac{3}{5}$, les cases coloriées sur les cases blanches. En bas, je mets TOUTES les cases.\nRéponse : a) 8 cases ; b) $\\dfrac{3}{8}$ ; c) 2 cases ; d) $\\dfrac{5}{8}$.",
+          reponses: [
+            { question: "a)", attendu: ["8", "8 cases"] },
+            { question: "b)", attendu: "3/8" },
+            { question: "c)", attendu: ["2", "2 cases"] },
+            { question: "d)", attendu: "5/8" },
+          ],
           micros: ["fraction_representer"],
         },
         {
@@ -171,6 +188,9 @@ export const exercicesFractionCm1: FicheExercicesData = {
           ]),
           correction:
             "Pour lire $\\dfrac{1}{3}$, il faut 3 parts ÉGALES, dont 1 bleue.\nA : 3 parts égales, 1 bleue. Oui, c'est $\\dfrac{1}{3}$.\nB : 3 parts, mais elles ne sont pas égales. La part bleue est trop petite. Non.\nC : 4 parts égales, 1 bleue. C'est $\\dfrac{1}{4}$. Non.\nD : 6 parts égales, 2 bleues : $\\dfrac{2}{6}$. Je regroupe les parts deux par deux : 3 paquets, dont 1 bleu. $\\dfrac{2}{6} = \\dfrac{1}{3}$. Oui.\n⛔ Le piège : dire oui pour B parce qu'il y a 3 parts. Sans parts égales, pas de fraction.\nRéponse : les barres A et D.",
+          reponses: [
+            { attendu: ["A et D", "A ; D", "A, D", "les barres A et D"] },
+          ],
           micros: ["fraction_representer", "fraction_equivalente"],
         },
         {
@@ -178,6 +198,11 @@ export const exercicesFractionCm1: FicheExercicesData = {
           correction:
             "La barre entière, c'est l'unité : elle est coupée en 5 parts égales.\na) Il mange 2 parts sur 5 : $\\dfrac{2}{5}$.\nb) 5 − 2 = 3 parts restent : $\\dfrac{3}{5}$.\nc) La barre entière, ce sont ses 5 parts : $\\dfrac{5}{5} = 1$.\n⭐ Je vérifie : 2 cinquièmes et 3 cinquièmes font 5 cinquièmes, la barre entière.\n⛔ Le piège : croire que l'unité, c'est une seule part. L'unité, c'est TOUTE la barre.\nRéponse : a) $\\dfrac{2}{5}$ ; b) $\\dfrac{3}{5}$ ; c) 5 cinquièmes : $\\dfrac{5}{5} = 1$.",
           schema: ecranSeulement(barres([{ d: 5, label: "la barre", parts: [2, 3] }])),
+          reponses: [
+            { question: "a)", attendu: "2/5" },
+            { question: "b)", attendu: "3/5" },
+            { question: "c)", attendu: ["5", "cinq"] },
+          ],
           micros: ["fraction_unite"],
         },
         {
@@ -189,6 +214,13 @@ export const exercicesFractionCm1: FicheExercicesData = {
           ]),
           correction:
             "Une unité, ce sont 4 quarts : $\\dfrac{4}{4} = 1$. Je compare le haut et le bas.\na) 3 < 4 : $\\dfrac{3}{4}$ est plus petite que 1. Il manque 1 quart.\nb) 4 = 4 : $\\dfrac{4}{4} = 1$. La barre bleue s'arrête pile sur le trait rouge.\nc) 7 > 4 : $\\dfrac{7}{4}$ est plus grande que 1. La barre bleue dépasse le trait rouge.\nd) 9 > 5 : $\\dfrac{9}{5}$ est plus grande que 1.\ne) 2 < 5 : $\\dfrac{2}{5}$ est plus petite que 1.\n⛔ Le piège : croire qu'une fraction est toujours plus petite que 1. Dès que le haut dépasse le bas, elle dépasse 1.\nRéponse : a) plus petite ; b) égale à 1 ; c) plus grande ; d) plus grande ; e) plus petite.",
+          reponses: [
+            { question: "a)", attendu: ["plus petite", "plus petite que 1", "< 1", "inférieure à 1"] },
+            { question: "b)", attendu: ["égale à 1", "égale", "1", "= 1"] },
+            { question: "c)", attendu: ["plus grande", "plus grande que 1", "> 1", "supérieure à 1"] },
+            { question: "d)", attendu: ["plus grande", "plus grande que 1", "> 1", "supérieure à 1"] },
+            { question: "e)", attendu: ["plus petite", "plus petite que 1", "< 1", "inférieure à 1"] },
+          ],
           micros: ["fraction_superieure_1"],
         },
         {
@@ -200,6 +232,13 @@ export const exercicesFractionCm1: FicheExercicesData = {
           ], { nombres: 1 }),
           correction:
             "a) Entre 0 et 1, je compte les SAUTS d'une graduation à l'autre : 6 sauts. Chaque saut vaut $\\dfrac{1}{6}$.\nb) A est à 1 saut de 0 : $\\dfrac{1}{6}$.\nB est à 3 sauts de 0 : $\\dfrac{3}{6}$.\nC est à 5 sauts de 0 : $\\dfrac{5}{6}$.\nc) B : 3 sauts sur 6, c'est la moitié. $\\dfrac{3}{6} = \\dfrac{1}{2}$.\n⛔ Le piège : compter les TRAITS, 0 compris. Pour B, on trouverait 4. Je compte les sauts.\nRéponse : a) 6 parts ; b) A : $\\dfrac{1}{6}$ ; B : $\\dfrac{3}{6}$ ; C : $\\dfrac{5}{6}$ ; c) le point B.",
+          reponses: [
+            { question: "a)", attendu: ["6", "6 parts"] },
+            { question: "b) A", attendu: "1/6" },
+            { question: "b) B", attendu: "3/6" },
+            { question: "b) C", attendu: "5/6" },
+            { question: "c)", attendu: ["B", "le point B"] },
+          ],
           micros: ["fraction_droite"],
         },
         {
@@ -207,6 +246,13 @@ export const exercicesFractionCm1: FicheExercicesData = {
           figure: cent(40),
           correction:
             "a) En bas, il faut 10, 100 ou 1 000. $\\dfrac{3}{10}$ et $\\dfrac{45}{100}$ sont décimales. $\\dfrac{2}{5}$ et $\\dfrac{7}{8}$ ne le sont pas.\nb) Je compte 40 cases sur 100 : $\\dfrac{40}{100}$, quarante centièmes.\nc) 4 lignes coloriées sur 10 lignes : $\\dfrac{4}{10}$, quatre dixièmes. Donc $\\dfrac{40}{100} = \\dfrac{4}{10}$.\n⭐ Avec une virgule, 4 dixièmes s'écrit 0,4. Et « 40 sur 100 » se dit aussi « 40 pour cent » : 40 %.\n⛔ Le piège : croire que $\\dfrac{2}{5}$ est décimale parce qu'elle est petite. Je regarde seulement le nombre du bas.\nRéponse : a) $\\dfrac{3}{10}$ et $\\dfrac{45}{100}$ ; b) 40 cases, $\\dfrac{40}{100}$ ; c) 4 lignes, $\\dfrac{4}{10}$.",
+          reponses: [
+            { question: "a)", attendu: ["3/10 et 45/100", "3/10 ; 45/100"] },
+            { question: "b) cases", attendu: ["40", "40 cases"] },
+            { question: "b) fraction", attendu: "40/100" },
+            { question: "c) lignes", attendu: ["4", "4 lignes"] },
+            { question: "c) dixièmes", attendu: "4/10", exact: true },
+          ],
           micros: ["fraction_decimale"],
         },
       ],
@@ -225,13 +271,20 @@ export const exercicesFractionCm1: FicheExercicesData = {
       ],
       exercices: [
         {
-          enonce: "Lucas et Maya ont deux tablettes de chocolat de même taille.\nLa tablette de Lucas a 4 barres : il en mange 3.\nLa tablette de Maya a 8 barres : elle en mange 6.\na) Écris la fraction de tablette mangée par chacun.\nb) Sur la tablette de Maya, regroupe les barres deux par deux. Combien de paquets en tout ? Combien de paquets mangés ?\nc) Qui a mangé le plus de chocolat ?",
+          enonce: "Lucas et Maya ont deux tablettes de chocolat de même taille.\nLa tablette de Lucas a 4 barres : il en mange 3.\nLa tablette de Maya a 8 barres : elle en mange 6.\na) Écris la fraction de tablette mangée par chacun.\nb) Sur la tablette de Maya, regroupe les barres deux par deux. Combien de paquets en tout ? Combien de paquets mangés ?\nc) Qui a mangé le plus de chocolat ? A) autant l'un que l'autre B) Lucas C) Maya",
           figure: barres([
             { d: 4, label: "Lucas", parts: [3] },
             { d: 8, label: "Maya", parts: [6] },
           ]),
           correction:
-            "a) Lucas : 3 barres sur 4, $\\dfrac{3}{4}$. Maya : 6 barres sur 8, $\\dfrac{6}{8}$.\nb) 8 barres regroupées deux par deux : 8 ÷ 2 = 4 paquets. 6 barres mangées : 6 ÷ 2 = 3 paquets mangés. Donc $\\dfrac{6}{8} = \\dfrac{3}{4}$.\nc) Les deux parties bleues ont la même longueur : ils ont mangé autant !\n⭐ Simplifier, c'est cela : je divise le haut ET le bas par le même nombre. $\\dfrac{6 \\div 2}{8 \\div 2} = \\dfrac{3}{4}$.\n⛔ Le piège : dire que Maya a mangé plus « parce que 6 > 3 ». Ses barres sont deux fois plus petites.\nRéponse : a) $\\dfrac{3}{4}$ et $\\dfrac{6}{8}$ ; b) 4 paquets, 3 mangés ; c) autant : $\\dfrac{6}{8} = \\dfrac{3}{4}$.",
+            "a) Lucas : 3 barres sur 4, $\\dfrac{3}{4}$. Maya : 6 barres sur 8, $\\dfrac{6}{8}$.\nb) 8 barres regroupées deux par deux : 8 ÷ 2 = 4 paquets. 6 barres mangées : 6 ÷ 2 = 3 paquets mangés. Donc $\\dfrac{6}{8} = \\dfrac{3}{4}$.\nc) Les deux parties bleues ont la même longueur : ils ont mangé autant ! Réponse A.\n⭐ Simplifier, c'est cela : je divise le haut ET le bas par le même nombre. $\\dfrac{6 \\div 2}{8 \\div 2} = \\dfrac{3}{4}$.\n⛔ Le piège : dire que Maya a mangé plus « parce que 6 > 3 ». Ses barres sont deux fois plus petites.\nRéponse : a) $\\dfrac{3}{4}$ et $\\dfrac{6}{8}$ ; b) 4 paquets, 3 mangés ; c) A, autant : $\\dfrac{6}{8} = \\dfrac{3}{4}$.",
+          reponses: [
+            { question: "a) Lucas", attendu: "3/4", exact: true },
+            { question: "a) Maya", attendu: "6/8", exact: true },
+            { question: "b) paquets", attendu: ["4", "4 paquets"] },
+            { question: "b) mangés", attendu: ["3", "3 paquets"] },
+            { question: "c)", attendu: ["A", "a) autant l'un que l'autre", "autant l'un que l'autre", "autant"] },
+          ],
           micros: ["fraction_equivalente"],
         },
         {
@@ -245,6 +298,13 @@ export const exercicesFractionCm1: FicheExercicesData = {
               { d: 10, label: "5/10", parts: [5] },
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: "0,5", exact: true },
+            { question: "d) centièmes", attendu: "50" },
+            { question: "d) %", attendu: ["50 %", "50"] },
+          ],
           micros: ["fraction_equivalente", "fraction_decimale"],
         },
         {
@@ -252,6 +312,12 @@ export const exercicesFractionCm1: FicheExercicesData = {
           correction:
             "a) Même dénominateur : des cinquièmes de même taille. 2 < 4, donc $\\dfrac{2}{5} < \\dfrac{4}{5}$.\nb) Même numérateur : 1 part de chaque côté. Un sixième est plus PETIT qu'un tiers. $\\dfrac{1}{6} < \\dfrac{1}{3}$.\nc) 3 parts de chaque côté. Un huitième est plus petit qu'un quart. $\\dfrac{3}{8} < \\dfrac{3}{4}$.\nd) Des dixièmes, et 7 > 5. $\\dfrac{7}{10} > \\dfrac{5}{10}$.\n⛔ Le piège du b) : croire que $\\dfrac{1}{6}$ est plus grand « parce que 6 > 3 ». Plus je coupe, plus les parts sont PETITES. Les deux barres le montrent.\nRéponse : a) $<$ ; b) $<$ ; c) $<$ ; d) $>$.",
           schema: comparer([1, 6], [1, 3]),
+          reponses: [
+            { question: "a)", attendu: "<" },
+            { question: "b)", attendu: "<" },
+            { question: "c)", attendu: "<" },
+            { question: "d)", attendu: ">" },
+          ],
           micros: ["fraction_comparer"],
         },
         {
@@ -267,13 +333,18 @@ export const exercicesFractionCm1: FicheExercicesData = {
               { value: 8 / 6, label: "8/6" },
             ], { nombres: 1 }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["1/6 < 3/6 < 5/6 < 6/6 < 8/6", "1/6 ; 3/6 ; 5/6 ; 6/6 ; 8/6"], ordre: true },
+            { question: "b)", attendu: "8/6" },
+            { question: "c)", attendu: "3/6" },
+          ],
           micros: ["fraction_comparer", "fraction_superieure_1"],
         },
         {
-          enonce: "Sacha fait du vélo sur une piste de 2 km. Une borne est posée tous les quarts de kilomètre.\na) Place sur la droite le point A à $\\dfrac{3}{4}$ km, le point B à $\\dfrac{5}{4}$ km et le point C à $\\dfrac{8}{4}$ km.\nb) Lequel tombe sur un nombre entier ?\nc) Complète : $\\dfrac{5}{4} = 1 + \\dfrac{\\ldots}{4}$.",
+          enonce: "Sacha fait du vélo sur une piste de 2 km. Une borne est posée tous les quarts de kilomètre. Le point A est à $\\dfrac{3}{4}$ km, le point B à $\\dfrac{5}{4}$ km et le point C à $\\dfrac{8}{4}$ km.\na) Depuis 0, combien de sauts d'un quart faut-il pour arriver au point B ?\nb) Lequel des trois points tombe sur un nombre entier ?\nc) Complète : $\\dfrac{5}{4} = 1 + \\dfrac{\\ldots}{4}$.",
           figure: droiteRel(0, 2, 0.25, [], { nombres: 1 }),
           correction:
-            "Entre 0 et 1, il y a 4 sauts égaux : chaque saut vaut $\\dfrac{1}{4}$.\na) A : 3 sauts depuis 0. B : 5 sauts, soit 1 saut après 1. C : 8 sauts.\nb) 4 sauts font 1, et 8 sauts font 2. C tombe sur 2 : $\\dfrac{8}{4} = 2$.\nc) 5 quarts, c'est 4 quarts et 1 quart : $\\dfrac{5}{4} = 1 + \\dfrac{1}{4}$.\n⛔ Le piège : placer $\\dfrac{5}{4}$ avant 1, comme si c'étaient des cinquièmes. Je compte des quarts, et je continue après 1.\nRéponse : b) le point C, sur 2 ; c) 1.",
+            "Entre 0 et 1, il y a 4 sauts égaux : chaque saut vaut $\\dfrac{1}{4}$.\na) A : 3 sauts depuis 0. B : 5 sauts, soit 1 saut après 1. C : 8 sauts.\nb) 4 sauts font 1, et 8 sauts font 2. C tombe sur 2 : $\\dfrac{8}{4} = 2$.\nc) 5 quarts, c'est 4 quarts et 1 quart : $\\dfrac{5}{4} = 1 + \\dfrac{1}{4}$.\n⛔ Le piège : placer $\\dfrac{5}{4}$ avant 1, comme si c'étaient des cinquièmes. Je compte des quarts, et je continue après 1.\nRéponse : a) 5 sauts ; b) le point C, sur 2 ; c) 1.",
           schema: ecranSeulement(
             droiteRel(0, 2, 0.25, [
               { value: 0.75, label: "A" },
@@ -281,6 +352,11 @@ export const exercicesFractionCm1: FicheExercicesData = {
               { value: 2, label: "C" },
             ], { nombres: 1 }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["5", "5 sauts"] },
+            { question: "b)", attendu: ["C", "le point C"] },
+            { question: "c)", attendu: "1" },
+          ],
           micros: ["fraction_droite", "fraction_superieure_1"],
         },
         {
@@ -288,6 +364,12 @@ export const exercicesFractionCm1: FicheExercicesData = {
           figure: jetons(4, 3, []),
           correction:
             "L'unité, c'est le sac entier : 12 billes.\na) 4 rangées égales : 12 ÷ 4 = 3 billes par rangée. Une rangée, c'est $\\dfrac{1}{4}$ des billes.\nb) $\\dfrac{1}{4}$ des billes, c'est une rangée : 3 billes rouges.\nc) $\\dfrac{3}{4}$, ce sont 3 rangées : 3 × 3 = 9 billes.\n⭐ Je vérifie : 3 + 9 = 12, tout le sac.\nd) Non. La moitié d'une grande pizza est plus grosse que la moitié d'une petite. Une fraction dépend de l'unité.\n⛔ Le piège du b) : répondre 4, le nombre du bas. Le 4 dit en combien de parts je partage, pas combien il y a de billes rouges.\nRéponse : a) 3 ; b) 3 billes ; c) 9 billes ; d) non.",
+          reponses: [
+            { question: "a)", attendu: ["3", "3 billes"] },
+            { question: "b)", attendu: ["3", "3 billes"] },
+            { question: "c)", attendu: ["9", "9 billes"] },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           micros: ["fraction_unite", "fraction_defi"],
         },
         {
@@ -295,19 +377,31 @@ export const exercicesFractionCm1: FicheExercicesData = {
           correction:
             "a) 3 < 4 : $\\dfrac{3}{4}$ est plus petit que 1. Mais 3,4, c'est 3 unités et 4 dixièmes : plus grand que 1. Donc $\\dfrac{3}{4}$ n'est pas 3,4.\n⭐ Sur une grille de 100, trois quarts, ce sont 75 cases : $\\dfrac{3}{4} = \\dfrac{75}{100} = 0{,}75$.\nb) Couper en 8 fait des parts plus PETITES que couper en 4. Donc $\\dfrac{1}{8} < \\dfrac{1}{4}$.\nc) 4 centièmes : le 4 va au rang des centièmes. $\\dfrac{4}{100} = 0{,}04$. Et 0,4, ce sont 4 dixièmes : $\\dfrac{4}{10}$.\n⛔ Le piège de Léna : lire la barre de fraction comme une virgule.\n⛔ Le piège de Sam : un grand nombre en bas fait de PETITES parts.\nRéponse : a) $\\dfrac{3}{4}$ est plus petit que 1, et 3,4 plus grand ; b) $\\dfrac{1}{8} < \\dfrac{1}{4}$ ; c) 0,04.",
           schema: ecranSeulement(comparer([1, 8], [1, 4])),
+          reponses: [
+            { question: "a) 3/4", attendu: ["plus petit", "plus petit que 1", "< 1"] },
+            { question: "a) 3,4", attendu: ["plus grand", "plus grand que 1", "> 1"] },
+            { question: "b)", attendu: ["<", "1/8 < 1/4"] },
+            { question: "c)", attendu: "0,04", exact: true },
+          ],
           micros: ["fraction_decimale", "fraction_comparer", "fraction_defi"],
         },
         {
-          enonce: "Au saut sans élan, Anaïs saute $\\dfrac{13}{10}$ m. Bilal saute 1,6 m.\na) Écris $\\dfrac{13}{10}$ avec une virgule.\nb) Écris 1,6 en dixièmes, avec une fraction.\nc) Qui a sauté le plus loin ?\nd) Place le point A (Anaïs) et le point B (Bilal) sur la droite.",
+          enonce: "Au saut sans élan, Anaïs saute $\\dfrac{13}{10}$ m. Bilal saute 1,6 m.\na) Écris $\\dfrac{13}{10}$ avec une virgule.\nb) Écris 1,6 en dixièmes, avec une fraction.\nc) Qui a sauté le plus loin ?\nd) Sur la droite, le point B (Bilal) est à combien de graduations après 1 ?",
           figure: droiteRel(0, 2, 0.1, [], { nombres: 0.5 }),
           correction:
-            "Dix dixièmes font une unité : $\\dfrac{10}{10} = 1$.\na) 13 dixièmes, c'est 10 dixièmes et 3 dixièmes : 1 unité et 3 dixièmes. $\\dfrac{13}{10} = 1{,}3$.\nb) 1,6, c'est 1 unité (10 dixièmes) et 6 dixièmes : 16 dixièmes. $1{,}6 = \\dfrac{16}{10}$.\nc) 16 dixièmes > 13 dixièmes : Bilal a sauté le plus loin.\nd) A est 3 graduations après 1. B est 6 graduations après 1.\n⛔ Le piège du a) : écrire 13,10 ou 0,13. $\\dfrac{13}{10}$, ce sont 13 dixièmes : plus que 1.\nRéponse : a) 1,3 m ; b) $\\dfrac{16}{10}$ ; c) Bilal ; d) A à 1,3 et B à 1,6.",
+            "Dix dixièmes font une unité : $\\dfrac{10}{10} = 1$.\na) 13 dixièmes, c'est 10 dixièmes et 3 dixièmes : 1 unité et 3 dixièmes. $\\dfrac{13}{10} = 1{,}3$.\nb) 1,6, c'est 1 unité (10 dixièmes) et 6 dixièmes : 16 dixièmes. $1{,}6 = \\dfrac{16}{10}$.\nc) 16 dixièmes > 13 dixièmes : Bilal a sauté le plus loin.\nd) A est 3 graduations après 1. B est 6 graduations après 1.\n⛔ Le piège du a) : écrire 13,10 ou 0,13. $\\dfrac{13}{10}$, ce sont 13 dixièmes : plus que 1.\nRéponse : a) 1,3 m ; b) $\\dfrac{16}{10}$ ; c) Bilal ; d) 6 graduations après 1.",
           schema: ecranSeulement(
             droiteRel(0, 2, 0.1, [
               { value: 1.3, label: "A" },
               { value: 1.6, label: "B" },
             ], { nombres: 0.5 }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["1,3", "1,3 m"], exact: true },
+            { question: "b)", attendu: "16/10", exact: true },
+            { question: "c)", attendu: "Bilal" },
+            { question: "d)", attendu: ["6", "6 graduations"] },
+          ],
           micros: ["fraction_decimale", "fraction_droite", "fraction_superieure_1"],
         },
       ],
@@ -333,6 +427,13 @@ export const exercicesFractionCm1: FicheExercicesData = {
           ], "fév."),
           correction:
             "Le tout, ce sont les 12 mois de l'année.\na) 4 mois sur 12 : $\\dfrac{4}{12}$.\nb) Je range les 12 mois en paquets de 4. 12 ÷ 4 = 3 paquets. Les mois de 30 jours font 1 paquet. $\\dfrac{4}{12} = \\dfrac{1}{3}$ : une rangée sur trois.\nc) 7 mois sur 12 : $\\dfrac{7}{12}$. La moitié de 12, c'est 6. Or 7 > 6 : c'est plus que la moitié.\nd) Février est 1 mois sur 12 : $\\dfrac{1}{12}$.\n⭐ Je vérifie : 4 + 7 + 1 = 12 mois.\n⛔ Le piège du b) : ENLEVER le même nombre en haut et en bas, par exemple 3, et trouver $\\dfrac{1}{9}$. Je regroupe en paquets égaux : je DIVISE le haut et le bas.\nRéponse : a) $\\dfrac{4}{12}$ ; b) $\\dfrac{1}{3}$ ; c) $\\dfrac{7}{12}$, plus que la moitié ; d) $\\dfrac{1}{12}$.",
+          reponses: [
+            { question: "a)", attendu: "4/12", exact: true },
+            { question: "b)", attendu: "1/3", exact: true },
+            { question: "c) fraction", attendu: "7/12" },
+            { question: "c) moitié", attendu: ["plus", "plus que la moitié", "plus de la moitié"] },
+            { question: "d)", attendu: "1/12" },
+          ],
           micros: ["fraction_lire", "fraction_equivalente", "fraction_comparer", "fraction_defi"],
         },
         {
@@ -345,6 +446,12 @@ export const exercicesFractionCm1: FicheExercicesData = {
             { value: 45, label: "1/2" },
             { value: 60, label: "2/3" },
           ], { nombres: 15 }),
+          reponses: [
+            { question: "a)", attendu: "1/2" },
+            { question: "b)", attendu: "1/3" },
+            { question: "c)", attendu: "2/3" },
+            { question: "d)", attendu: ["plus", "plus de la moitié", "plus que la moitié"] },
+          ],
           micros: ["fraction_unite", "fraction_equivalente", "fraction_comparer", "fraction_defi"],
         },
         {
@@ -353,6 +460,13 @@ export const exercicesFractionCm1: FicheExercicesData = {
           correction:
             "Le tout, ce sont les 8 planètes.\na) 4 planètes sur 8 : $\\dfrac{4}{8}$.\nb) 4, c'est la moitié de 8. Je regroupe en paquets de 4. J'ai 2 paquets, dont 1 rocheux. $\\dfrac{4}{8} = \\dfrac{1}{2}$.\nc) Avant la Terre, il y a Mercure et Vénus : 2 planètes sur 8, $\\dfrac{2}{8}$. En paquets de 2, j'ai 4 paquets, dont 1. $\\dfrac{2}{8} = \\dfrac{1}{4}$.\nd) La moitié de 100, c'est 50 : $\\dfrac{1}{2} = \\dfrac{50}{100}$, soit 50 %.\n⛔ Le piège du b) : croire que $\\dfrac{4}{8}$ est plus grand que $\\dfrac{1}{2}$ « parce que 4 et 8 sont plus grands ». Les deux fractions colorient la même part.\nRéponse : a) $\\dfrac{4}{8}$ ; b) $\\dfrac{1}{2}$ ; c) $\\dfrac{2}{8} = \\dfrac{1}{4}$ ; d) $\\dfrac{50}{100}$, soit 50 %.",
           schema: ecranSeulement(carreaux(2, 4, [{ n: 4, nom: "roche" }], "géante")),
+          reponses: [
+            { question: "a)", attendu: "4/8", exact: true },
+            { question: "b)", attendu: "1/2", exact: true },
+            { question: "c)", attendu: ["1/4", "2/8 = 1/4"], exact: true },
+            { question: "d) centièmes", attendu: "50/100", exact: true },
+            { question: "d) %", attendu: ["50 %", "50"] },
+          ],
           micros: ["fraction_lire", "fraction_representer", "fraction_equivalente", "fraction_decimale", "fraction_defi"],
         },
         {
@@ -365,6 +479,16 @@ export const exercicesFractionCm1: FicheExercicesData = {
           ]),
           correction:
             "La mosaïque entière, c'est l'unité : 100 carreaux.\na) Bleu : $\\dfrac{30}{100}$ ; orange : $\\dfrac{50}{100}$ ; vert : $\\dfrac{20}{100}$.\nb) 3 lignes sur 10 : $\\dfrac{3}{10}$. Donc $\\dfrac{30}{100} = \\dfrac{3}{10}$.\nc) 3 dixièmes : $\\dfrac{3}{10} = 0{,}3$.\nd) « Sur 100 » se dit « pour cent ». Bleu : 30 % ; orange : 50 % ; vert : 20 %.\n⭐ Je vérifie : 30 + 50 + 20 = 100. Tous les carreaux, c'est 100 %.\n⛔ Le piège du c) : écrire 0,03. Trois dixièmes, c'est le 3 juste après la virgule : 0,3.\nRéponse : a) $\\dfrac{30}{100}$, $\\dfrac{50}{100}$, $\\dfrac{20}{100}$ ; b) $\\dfrac{3}{10}$ ; c) 0,3 ; d) 30 %, 50 %, 20 %.",
+          reponses: [
+            { question: "a) bleu", attendu: "30/100", exact: true },
+            { question: "a) orange", attendu: "50/100", exact: true },
+            { question: "a) vert", attendu: "20/100", exact: true },
+            { question: "b)", attendu: "3/10", exact: true },
+            { question: "c)", attendu: "0,3", exact: true },
+            { question: "d) bleu", attendu: ["30 %", "30"] },
+            { question: "d) orange", attendu: ["50 %", "50"] },
+            { question: "d) vert", attendu: ["20 %", "20"] },
+          ],
           micros: ["fraction_representer", "fraction_equivalente", "fraction_decimale", "fraction_defi"],
         },
       ],

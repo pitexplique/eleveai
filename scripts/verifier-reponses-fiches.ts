@@ -13,7 +13,7 @@ async function main() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).React = (await import("react")).default;
   const { CHARGEURS_FICHES_EXERCICES } = await import("../lib/fiches-exercices/chargeurs");
-  const { saisieJuste } = await import("../lib/fiches-exercices/verifier-saisie");
+  const { saisieJuste, selonLaClasse } = await import("../lib/fiches-exercices/verifier-saisie");
   const motif = process.argv[2] ?? "";
   let erreurs = 0, alertes = 0, exercices = 0, avec = 0;
   for (const [cle, charger] of Object.entries(CHARGEURS_FICHES_EXERCICES)) {
@@ -30,7 +30,7 @@ async function main() {
         for (const r of ex.reponses) {
           const formes = Array.isArray(r.attendu) ? r.attendu : [r.attendu];
           for (const f of formes) {
-            if (!saisieJuste(f, r)) {
+            if (!saisieJuste(f, selonLaClasse(r, fiche.classe))) {
               erreurs++;
               console.log(`✗ ${cle} ex.${n} ${r.question ?? ""} « ${f} » ne se valide pas lui-même`);
             }

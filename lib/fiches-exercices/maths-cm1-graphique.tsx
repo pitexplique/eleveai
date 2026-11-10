@@ -252,6 +252,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
               { label: "moineau", value: 6 },
             ], { pas: 2, suivi: 0 }),
           ),
+          reponses: [
+            { question: "a)", attendu: "2" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "8" },
+            { question: "d)", attendu: ["le moineau", "moineau"] },
+          ],
           micros: ["graphique_lire"],
         },
         {
@@ -265,6 +271,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 5 }),
           correction:
             "Je lis l'axe : 0, 5, 10, 15… Une graduation vaut 5 livres.\na) Du haut de la barre « mar », je suis la ligne jusqu'à l'axe : je lis 25.\nb) La barre « jeu » s'arrête sur 10.\nc) Je cherche 30 sur l'axe. Sa ligne touche le haut de la barre « ven » : le vendredi.\nd) La barre la plus basse est celle du jeudi : 10 livres.\n⛔ Le piège : compter les graduations au lieu de lire le nombre. La barre du jeudi monte de 2 graduations. Mais elle vaut 10 livres, pas 2.\nRéponse : a) 25 livres ; b) 10 livres ; c) le vendredi ; d) le jeudi.",
+          reponses: [
+            { question: "a)", attendu: "25" },
+            { question: "b)", attendu: "10" },
+            { question: "c)", attendu: ["le vendredi", "vendredi", "ven"] },
+            { question: "d)", attendu: ["le jeudi", "jeudi", "jeu"] },
+          ],
           micros: ["graphique_lire"],
         },
         {
@@ -278,6 +290,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 10, batons: true }),
           correction:
             "Je lis l'axe : 0, 10, 20… Une graduation vaut 10 élèves.\na) Du haut du bâton « guitare », je suis la ligne jusqu'à l'axe : je lis 60.\nb) Le bâton « violon » s'arrête sur 20.\nc) Je cherche 30 sur l'axe. Sa ligne touche le haut du bâton « flûte ».\nd) Le bâton « piano » s'arrête sur 40. Or 40 est plus grand que 30.\nLe piano dépasse donc 30 élèves, lui aussi. Tom a tort.\n⛔ Le piège : regarder seulement le bâton le plus haut. Je lis TOUS les bâtons avant de dire « seul ».\nRéponse : a) 60 élèves ; b) 20 élèves ; c) la flûte ; d) non, le piano aussi.",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: ["la flûte", "flûte"] },
+            { question: "d)", attendu: ["non", "faux", "non, le piano aussi"] },
+          ],
           micros: ["graphique_lire"],
         },
         {
@@ -291,6 +309,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ]),
           correction:
             "Je cherche d'abord la couleur de chaque film dans la légende.\na) La part de la comédie porte 6 : 6 élèves.\nb) La plus grande part porte 12 : c'est le film d'animation.\nc) La plus petite part porte 3 : c'est le documentaire.\nd) J'additionne toutes les parts : 12 + 7 + 3 + 6 = 28 élèves.\n⛔ Le piège : oublier une part dans le total. Je coche chaque part quand je l'ajoute.\nRéponse : a) 6 élèves ; b) l'animation ; c) le documentaire ; d) 28 élèves.",
+          reponses: [
+            { question: "a)", attendu: "6" },
+            { question: "b)", attendu: ["l'animation", "animation", "le film d'animation"] },
+            { question: "c)", attendu: ["le documentaire", "documentaire"] },
+            { question: "d)", attendu: "28" },
+          ],
           micros: ["graphique_lire"],
         },
         {
@@ -305,6 +329,11 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
               { label: "Enzo", value: 10 },
             ], { pas: 2, valeurs: true }),
           ),
+          reponses: [
+            { question: "a)", attendu: "4" },
+            { question: "b)", attendu: "6" },
+            { question: "c)", attendu: "10" },
+          ],
           micros: ["graphique_completer"],
         },
         {
@@ -318,6 +347,11 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 5 }),
           correction:
             "Une graduation vaut 5 kilos. Je lis chaque barre sur l'axe.\nPomme : 20. Poire : 10. Prune : 30. Kiwi : 15.\na) Le plus grand nombre est 30 : la prune.\nb) Le plus petit nombre est 10 : la poire.\nc) Je range les nombres : 30, puis 20, puis 15, puis 10.\nL'ordre est : prune, pomme, kiwi, poire.\n⛔ Le piège : ranger à l'œil. La pomme et le kiwi ont des barres proches. Je lis leurs nombres : 20 et 15.\nRéponse : a) la prune ; b) la poire ; c) prune, pomme, kiwi, poire.",
+          reponses: [
+            { question: "a)", attendu: ["la prune", "prune"] },
+            { question: "b)", attendu: ["la poire", "poire"] },
+            { question: "c)", attendu: ["prune ; pomme ; kiwi ; poire", "prune, pomme, kiwi, poire"], ordre: true },
+          ],
           micros: ["graphique_interpreter", "graphique_lire"],
         },
         {
@@ -331,6 +365,11 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 1 }),
           correction:
             "Une graduation vaut 1 étoile.\na) La barre « mar » s'arrête sur 5 : 5 étoiles filantes.\nb) Mardi : 5. Mercredi : 1. Je fais l'écart, le grand moins le petit : 5 − 1 = 4.\nc) Lundi : 2. Mardi : 5. L'écart : 5 − 2 = 3.\n⛔ Le piège : au b), répondre 1, le nombre du mercredi. La question demande un ÉCART : je soustrais.\nRéponse : a) 5 étoiles ; b) 4 de plus ; c) 3 de moins.",
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "3" },
+          ],
           micros: ["graphique_interpreter"],
         },
         {
@@ -344,6 +383,10 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 2 }),
           correction:
             "Une graduation vaut 2 élèves. Je lis les quatre barres.\nÀ pied : 10. Car : 6. Voiture : 8. Vélo : 4.\na) J'additionne les quatre barres : 10 + 6 + 8 + 4 = 28 élèves.\nb) La classe compte 30 élèves : 30 − 28 = 2 élèves manquent.\nIls étaient peut-être absents ce jour-là.\n⛔ Le piège : oublier une barre. Je compte les barres avant d'additionner : il y en a 4.\nRéponse : a) 28 élèves ; b) 2 élèves.",
+          reponses: [
+            { question: "a)", attendu: "28" },
+            { question: "b)", attendu: "2" },
+          ],
           micros: ["graphique_defi", "graphique_lire"],
         },
       ],
@@ -373,6 +416,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 10 }),
           correction:
             "Une graduation vaut 10 spectateurs.\na) La barre « mer » s'arrête sur 60 : 60 spectateurs.\nb) La barre la plus basse est celle du jeudi : 20 spectateurs.\nc) Mercredi : 60. Jeudi : 20. L'écart : 60 − 20 = 40 spectateurs.\nd) Deux fois le jeudi : 2 × 20 = 40.\nMardi, la barre s'arrête sur 50, pas sur 40. C'est faux.\n⛔ Le piège : juger « deux fois plus » à l'œil. La barre de mardi a l'air deux fois plus haute. Je fais le calcul.\nRéponse : a) 60 ; b) le jeudi ; c) 40 de plus ; d) faux.",
+          reponses: [
+            { question: "a)", attendu: "60" },
+            { question: "b)", attendu: ["le jeudi", "jeudi", "jeu"] },
+            { question: "c)", attendu: "40" },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           micros: ["graphique_lire", "graphique_interpreter"],
         },
         {
@@ -394,11 +443,17 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
               { label: "oiseau", value: 4 },
             ], { pas: 2, surligne: 2, valeurs: true }),
           ),
+          reponses: [
+            { question: "a)", attendu: "10" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: "8" },
+            { question: "d)", attendu: "4" },
+          ],
           micros: ["graphique_completer", "graphique_lire"],
         },
         {
           enonce:
-            "La classe mesure ses plantes du jardin, un mois après les semis (en centimètres).\nVrai ou faux ? Explique avec les nombres.\na) « Le haricot est la plante la plus haute. »\nb) « Le radis mesure 15 cm. »\nc) « Le haricot mesure 3 fois la hauteur du radis. »\nd) « La tomate et le maïs, mis bout à bout, dépassent le haricot. »",
+            "La classe mesure ses plantes du jardin, un mois après les semis (en centimètres).\nVrai ou faux ?\na) « Le haricot est la plante la plus haute. »\nb) « Le radis mesure 15 cm. »\nc) « Le haricot mesure 3 fois la hauteur du radis. »\nd) « La tomate et le maïs, mis bout à bout, dépassent le haricot. »",
           figure: barres([
             { label: "tomate", value: 25 },
             { label: "haricot", value: 30 },
@@ -407,6 +462,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 5 }),
           correction:
             "Une graduation vaut 5 cm. Je lis chaque barre.\nTomate : 25. Haricot : 30. Radis : 10. Maïs : 20.\na) Vrai : 30 est le plus grand nombre.\nb) Faux : la barre du radis s'arrête sur 10, pas sur 15.\nc) 3 fois le radis : 3 × 10 = 30. C'est le haricot : vrai.\nd) Tomate et maïs : 25 + 20 = 45 cm.\n45 est plus grand que 30 : vrai.\n⛔ Le piège : au b), lire la graduation voisine. Je suis la ligne du haut de la barre jusqu'à l'axe.\nRéponse : a) vrai ; b) faux ; c) vrai ; d) vrai.",
+          reponses: [
+            { question: "a)", attendu: ["vrai", "oui"] },
+            { question: "b)", attendu: ["faux", "non"] },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           micros: ["graphique_interpreter", "graphique_lire"],
         },
         {
@@ -422,6 +483,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
               { label: "jeu", value: 4 },
             ], { pas: 2, valeurs: true }),
           ),
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "3" },
+            { question: "c)", attendu: "5" },
+            { question: "d)", attendu: "4" },
+          ],
           micros: ["graphique_completer"],
         },
         {
@@ -435,6 +502,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 5 }),
           correction:
             "Une graduation vaut 5 kilos. Je lis les quatre barres.\nS1 : 15. S2 : 25. S3 : 20. S4 : 30.\na) La barre « S2 » s'arrête sur 25 : 25 kilos.\nb) La barre la plus haute est « S4 » : 30 kilos.\nc) 15 + 25 + 20 + 30 = 90 kilos.\nd) 100 − 90 = 10 kilos manquent.\n⛔ Le piège : oublier une semaine dans le total. Je coche chaque barre quand je l'ajoute.\nRéponse : a) 25 kilos ; b) la semaine 4 ; c) 90 kilos ; d) 10 kilos.",
+          reponses: [
+            { question: "a)", attendu: "25" },
+            { question: "b)", attendu: ["4", "S4", "la semaine 4"] },
+            { question: "c)", attendu: "90" },
+            { question: "d)", attendu: "10" },
+          ],
           micros: ["graphique_defi", "graphique_lire"],
         },
         {
@@ -449,6 +522,13 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 5 }),
           correction:
             "Une graduation vaut 5 crêpes. Je lis chaque barre.\n14 h : 15. 15 h : 5. 16 h : 25. 17 h : 10. 18 h : 20.\na) La barre la plus haute est celle de 16 h : 25 crêpes.\nb) 14 h et 15 h : 15 + 5 = 20 crêpes. 20 est plus petit que 25 : non.\nc) 17 h et 18 h : 10 + 20 = 30 crêpes. Puis 30 − 25 = 5 crêpes de plus.\nd) 15 + 5 + 25 + 10 + 20 = 75 crêpes.\n⛔ Le piège : comparer deux barres à une seule, à l'œil. J'additionne d'abord les deux barres, puis je compare.\nRéponse : a) à 16 h, 25 crêpes ; b) non ; c) 5 de plus ; d) 75 crêpes.",
+          reponses: [
+            { question: "a) heure", attendu: ["16 h", "16"] },
+            { question: "a) crêpes", attendu: "25" },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "5" },
+            { question: "d)", attendu: "75" },
+          ],
           micros: ["graphique_interpreter", "graphique_defi"],
         },
         {
@@ -463,6 +543,11 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
               { label: "Biscuit", value: 10 },
             ], { pas: 2, surligne: 1, valeurs: true }),
           ),
+          reponses: [
+            { question: "a)", attendu: "28" },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: "8" },
+          ],
           micros: ["graphique_lire", "graphique_defi"],
         },
         {
@@ -478,6 +563,11 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
               { label: "juil.", value: 25 },
             ], { pas: 5, surligne: 3, valeurs: true }),
           ),
+          reponses: [
+            { question: "a)", attendu: "25" },
+            { question: "b)", attendu: "5" },
+            { question: "c)", attendu: ["juillet", "juil"] },
+          ],
           micros: ["graphique_completer", "graphique_defi"],
         },
       ],
@@ -505,6 +595,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 2 }),
           correction:
             "Une graduation vaut 2 pattes. Fourmi : 6. Araignée : 8. Poule : 2.\na) La barre « araignée » s'arrête sur 8 : 8 pattes.\nb) 8 − 6 = 2 pattes de plus.\nc) Les araignées : 2 × 8 = 16 pattes. Les fourmis : 3 × 6 = 18 pattes.\nEn tout : 16 + 18 = 34 pattes.\nd) 4 fois la poule : 4 × 2 = 8. C'est bien l'araignée : il a raison.\n⭐ Un insecte a toujours 6 pattes. Une araignée n'est pas un insecte : elle en a 8.\n⛔ Le piège au c) : compter les pattes d'un seul animal. Il y a 2 araignées et 3 fourmis : je multiplie.\nRéponse : a) 8 pattes ; b) 2 de plus ; c) 34 pattes ; d) oui.",
+          reponses: [
+            { question: "a)", attendu: "8" },
+            { question: "b)", attendu: "2" },
+            { question: "c)", attendu: "34" },
+            { question: "d)", attendu: ["oui", "vrai"] },
+          ],
           micros: ["graphique_lire", "graphique_interpreter", "graphique_defi"],
         },
         {
@@ -521,6 +617,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
               { label: "juin", value: 5 },
             ], { pas: 5, valeurs: true }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["5", "le pas de 5"] },
+            { question: "b)", attendu: "3" },
+            { question: "c)", attendu: "50" },
+            { question: "d)", attendu: "25" },
+          ],
           micros: ["graphique_completer", "graphique_interpreter", "graphique_defi"],
         },
         {
@@ -535,6 +637,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
           ], { pas: 10 }),
           correction:
             "Une graduation vaut 10 visiteurs. Je lis les quatre barres.\nGaulois : 40. Égypte : 60. Romains : 30. Vikings : 50.\na) La barre la plus haute est « Égypte » : 60 visiteurs.\nb) 40 + 60 + 30 + 50 = 180 visiteurs.\nc) Groupe 1 : 40 + 30 = 70. Groupe 2 : 60 + 50 = 110.\nL'écart : 110 − 70 = 40 visiteurs.\nd) Il y a 4 salles. Chacune gagne 10 visiteurs : 4 × 10 = 40.\nNouveau total : 180 + 40 = 220 visiteurs.\n⛔ Le piège au d) : ajouter 10 une seule fois. Chaque barre monte de 10 : j'ajoute 10 quatre fois.\nRéponse : a) l'Égypte ; b) 180 visiteurs ; c) 40 visiteurs ; d) 220 visiteurs.",
+          reponses: [
+            { question: "a)", attendu: ["l'Égypte", "Égypte"] },
+            { question: "b)", attendu: "180" },
+            { question: "c)", attendu: "40" },
+            { question: "d)", attendu: "220" },
+          ],
           micros: ["graphique_lire", "graphique_interpreter", "graphique_defi"],
         },
         {
@@ -551,6 +659,12 @@ export const exercicesGraphiqueCm1: FicheExercicesData = {
               { label: "compote", value: 5 },
             ], { pas: 5, valeurs: true }),
           ),
+          reponses: [
+            { question: "a)", attendu: "5" },
+            { question: "b)", attendu: "4" },
+            { question: "c)", attendu: ["vrai", "oui"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           micros: ["graphique_completer", "graphique_interpreter", "graphique_defi"],
         },
       ],

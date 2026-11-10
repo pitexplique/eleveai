@@ -38,6 +38,13 @@ export type ReponseAttendue = {
    * (2 ; -1), (-4 ; 2) et (1 ; -0,5) sont tous justes, (0 ; 0) non.
    */
   colineaire?: boolean;
+  /**
+   * ⭐ CM1 (10/11/2026) : la réponse doit être un NOMBRE ÉCRIT, pas un calcul.
+   * Sans elle, la saisie est calculée : « 7 × 8 » à la question « 7 × 8 = ? »
+   * valait 56, et l'élève avait juste sans avoir rien trouvé. L'unité ou le mot
+   * qui suit (« 56 billes », « 12 € ») reste permis.
+   */
+  nombre?: boolean;
 };
 
 type Valeurs = Record<string, number>;
@@ -285,12 +292,35 @@ function memesValeurs(a: string, b: string, tolerance: number, constante = false
   return true;
 }
 
+/** Un nombre écrit en chiffres : « 56 », « 1 012 », « 7,05 », « −3 ». */
+const NOMBRE_ECRIT = /^[-−+]?\s*\d[\d\s]*([.,]\d+)?$/;
+
+/**
+ * ⭐ AU PRIMAIRE (CP → CM2, 10/11/2026) : une réponse attendue qui n'est qu'un
+ * nombre se valide en `nombre` — l'élève écrit le résultat, pas le calcul.
+ * Appliqué par ReponseExercice selon la classe de la fiche.
+ */
+export function selonLaClasse(r: ReponseAttendue, classe: string): ReponseAttendue {
+  if (r.nombre !== undefined || !/^(cp|ce|cm)/i.test(classe)) return r;
+  const formes = (Array.isArray(r.attendu) ? r.attendu : [r.attendu]).map((f) => f.trim());
+  // Un nombre, et au besoin le même nombre en lettres : ["4", "quatre"].
+  const chiffres = formes.filter((f) => NOMBRE_ECRIT.test(f));
+  const lettres = formes.filter((f) => /^[\p{L}\s'’-]+$/u.test(f));
+  return chiffres.length && chiffres.length + lettres.length === formes.length ? { ...r, nombre: true } : r;
+}
+
 /** La saisie de l'élève correspond-elle à l'une des formes acceptées ? */
 export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean {
   if (!saisie.trim()) return false;
   const formes = Array.isArray(attendue.attendu) ? attendue.attendu : [attendue.attendu];
   const eleve = sansMembreGauche(saisie);
   const gaucheEleve = membreGauche(saisie);
+  // Un nombre écrit — des chiffres, une virgule, un signe — ou en lettres
+  // (« quatre ») : aucune opération.
+  if (attendue.nombre) {
+    const nu = sansUnite(eleve).trim();
+    if (!NOMBRE_ECRIT.test(nu) && !/^[\p{L}\s'’-]+$/u.test(nu)) return false;
+  }
   return formes.some((forme) => {
     // ⛔ « g(3) = 7 » ne vaut pas « g(2) = 7 » : quand l'élève ET la réponse
     // écrivent un membre de gauche, il doit être le même.

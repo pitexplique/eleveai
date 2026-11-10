@@ -172,18 +172,24 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["batterie", "11"],
             ], { ligne: 1, case: [1, 1] }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["9", "9 élèves"] },
+            { question: "b)", attendu: ["la batterie", "batterie"] },
+            { question: "c)", attendu: ["la guitare", "guitare"] },
+            { question: "d)", attendu: ["le violon", "violon"] },
+          ],
           micros: ["tableau_lire"],
         },
         {
           enonce:
-            "Une piscine compte ses entrées pendant trois jours.\na) Combien d'adultes le mercredi ?\nb) Combien d'enfants le samedi ?\nc) Combien d'enfants le lundi ?\nd) Dans quelle case lis-tu 75 ?",
+            "Une piscine compte ses entrées pendant trois jours.\na) Combien d'adultes le mercredi ?\nb) Combien d'enfants le samedi ?\nc) Combien d'enfants le lundi ?\nd) Que compte le nombre 75 ? A) les enfants du samedi B) les adultes du samedi C) les adultes du lundi",
           figure: grille(["jour", "enfants", "adultes"], [
             ["lundi", "35", "62"],
             ["mercredi", "84", "40"],
             ["samedi", "96", "75"],
           ]),
           correction:
-            "Une case est au croisement d'une ligne et d'une colonne.\na) Je pose le doigt sur la ligne « mercredi ». Je le glisse jusqu'à la colonne « adultes ». Je lis 40.\nb) Ligne « samedi », colonne « enfants » : je lis 96.\nc) Ligne « lundi », colonne « enfants » : je lis 35.\nd) Le 75 est sur la ligne « samedi », dans la colonne « adultes ». Ce sont les adultes du samedi.\n⛔ Le piège : prendre la bonne ligne, mais la mauvaise colonne. Au a), la case des enfants donne 84, pas 40.\nRéponse : a) 40 adultes ; b) 96 enfants ; c) 35 enfants ; d) les adultes du samedi.",
+            "Une case est au croisement d'une ligne et d'une colonne.\na) Je pose le doigt sur la ligne « mercredi ». Je le glisse jusqu'à la colonne « adultes ». Je lis 40.\nb) Ligne « samedi », colonne « enfants » : je lis 96.\nc) Ligne « lundi », colonne « enfants » : je lis 35.\nd) Le 75 est sur la ligne « samedi », dans la colonne « adultes ». Ce sont les adultes du samedi : réponse B.\n⛔ Le piège : prendre la bonne ligne, mais la mauvaise colonne. Au a), la case des enfants donne 84, pas 40.\nRéponse : a) 40 adultes ; b) 96 enfants ; c) 35 enfants ; d) B, les adultes du samedi.",
           schema: ecranSeulement(
             grille(["jour", "enfants", "adultes"], [
               ["lundi", "35", "62"],
@@ -191,11 +197,17 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["samedi", "96", "75"],
             ], { ligne: 1, colonne: 2, case: [1, 2] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "40" },
+            { question: "b)", attendu: "96" },
+            { question: "c)", attendu: "35" },
+            { question: "d)", attendu: ["B", "b) les adultes du samedi", "les adultes du samedi", "adultes du samedi"] },
+          ],
           micros: ["tableau_lire"],
         },
         {
           enonce:
-            "Un apiculteur a trois ruchers. Il pèse le miel récolté cet été. Rucher du bois : 18 kg. Rucher du pré : 25 kg. Rucher du verger : 12 kg.\na) Combien de kilos de miel en tout ?\nb) Vérifie ton total : additionne dans un autre ordre.",
+            "Un apiculteur a trois ruchers. Il pèse le miel récolté cet été. Rucher du bois : 18 kg. Rucher du pré : 25 kg. Rucher du verger : 12 kg.\na) Combien de kilos de miel en tout ?\nb) Refais l'addition dans un autre ordre : 12 + 18 + 25. Combien trouves-tu ?",
           correction:
             "a) Le total, c'est la somme de toutes les cases.\nJ'additionne les trois ruchers : 18 + 25 + 12 = 55 kg.\nb) Je change l'ordre : 12 + 18 = 30, puis 30 + 25 = 55.\nJe retrouve 55 kg : mon total est juste.\n⛔ Le piège : oublier une ligne. Je coche chaque rucher quand je l'ajoute.\nRéponse : a) 55 kg de miel ; b) je retrouve 55.",
           schema: ecranSeulement(
@@ -206,11 +218,15 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["total", "55"],
             ], { total: true, case: [3, 1] }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["55", "55 kg"] },
+            { question: "b)", attendu: ["55", "55 kg"] },
+          ],
           micros: ["tableau_completer"],
         },
         {
           enonce:
-            "Une ferme pédagogique accueille les classes. Elle a 40 animaux en tout. Le tableau donne le nombre de chaque animal.\na) Combien y a-t-il de chèvres ?\nb) Vérifie : les trois animaux ensemble doivent faire 40.",
+            "Une ferme pédagogique accueille les classes. Elle a 40 animaux en tout. Le tableau donne le nombre de chaque animal.\na) Combien y a-t-il de chèvres ?\nb) Ajoute les poules, les lapins et tes chèvres. Trouves-tu 40 ? Réponds par oui ou non.",
           figure: grille(["animal", "nombre"], [
             ["poules", "17"],
             ["lapins", "9"],
@@ -218,7 +234,7 @@ export const exercicesTableauCm1: FicheExercicesData = {
             ["total", "40"],
           ], { total: true }),
           correction:
-            "a) Le total est 40. J'additionne d'abord les animaux connus : 17 + 9 = 26.\nLes chèvres, c'est ce qui reste : 40 − 26 = 14 chèvres.\nb) Je vérifie : 17 + 9 + 14 = 40. Le compte est bon.\n⛔ Le piège : faire 40 − 17 = 23 et s'arrêter. J'enlève TOUTES les cases connues, pas une seule.\nRéponse : a) 14 chèvres ; b) 17 + 9 + 14 = 40.",
+            "a) Le total est 40. J'additionne d'abord les animaux connus : 17 + 9 = 26.\nLes chèvres, c'est ce qui reste : 40 − 26 = 14 chèvres.\nb) Je vérifie : 17 + 9 + 14 = 40. Oui, le compte est bon.\n⛔ Le piège : faire 40 − 17 = 23 et s'arrêter. J'enlève TOUTES les cases connues, pas une seule.\nRéponse : a) 14 chèvres ; b) oui : 17 + 9 + 14 = 40.",
           schema: ecranSeulement(
             grille(["animal", "nombre"], [
               ["poules", "17"],
@@ -227,6 +243,10 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["total", "40"],
             ], { total: true, case: [2, 1] }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["14", "14 chèvres"] },
+            { question: "b)", attendu: ["oui", "vrai"] },
+          ],
           micros: ["tableau_completer"],
         },
         {
@@ -240,6 +260,11 @@ export const exercicesTableauCm1: FicheExercicesData = {
           ]),
           correction:
             "a) Je compare les nombres. 131 est le plus grand : c'est la comédie.\nb) 47 est le plus petit : c'est le documentaire.\nc) Je range : 131, puis 124, puis 98, puis 47.\nL'ordre est : comédie, dessin animé, aventure, documentaire.\n⛔ Le piège : croire que 98 est grand, à cause de son 9. 98 a deux chiffres : il est plus petit que 124, qui en a trois.\nRéponse : a) la comédie ; b) le documentaire ; c) comédie, dessin animé, aventure, documentaire.",
+          reponses: [
+            { question: "a)", attendu: ["la comédie", "comédie"] },
+            { question: "b)", attendu: ["le documentaire", "documentaire"] },
+            { question: "c)", attendu: ["comédie ; dessin animé ; aventure ; documentaire", "comédie, dessin animé, aventure, documentaire"], ordre: true },
+          ],
           micros: ["tableau_interpreter"],
         },
         {
@@ -254,6 +279,11 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["Sacha", "91"],
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "16" },
+            { question: "b)", attendu: "17" },
+            { question: "c)", attendu: "33" },
+          ],
           micros: ["tableau_interpreter"],
         },
         {
@@ -267,6 +297,11 @@ export const exercicesTableauCm1: FicheExercicesData = {
           ]),
           correction:
             "Un match se joue à deux équipes. Je double le nombre du tableau.\na) Football : 11 + 11 = 22 joueurs. C'est aussi 2 × 11 = 22.\nb) Rugby à XV : 2 × 15 = 30 joueurs.\nc) Basket : 2 × 5 = 10 joueurs.\n⛔ Le piège : répondre 11 pour le football. Le tableau compte UNE équipe, et le match en a deux.\nRéponse : a) 22 joueurs ; b) 30 joueurs ; c) 10 joueurs.",
+          reponses: [
+            { question: "a)", attendu: "22" },
+            { question: "b)", attendu: "30" },
+            { question: "c)", attendu: "10" },
+          ],
           micros: ["tableau_defi"],
         },
         {
@@ -288,6 +323,11 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["total", "160"],
             ], { total: true, case: [3, 1] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "160" },
+            { question: "b)", attendu: ["non", "faux", "non, il est faux"] },
+            { question: "c)", attendu: "160" },
+          ],
           micros: ["tableau_completer", "tableau_defi"],
         },
       ],
@@ -306,14 +346,20 @@ export const exercicesTableauCm1: FicheExercicesData = {
       exercices: [
         {
           enonce:
-            "Un compteur note les véhicules qui passent dans une rue. Il compte le matin, puis le soir.\na) Combien de voitures le soir ?\nb) Les bus passent-ils plus le matin ou le soir ?\nc) Combien de vélos en tout dans la journée ?\nd) Combien de véhicules le matin ?",
+            "Un compteur note les véhicules qui passent dans une rue. Il compte le matin, puis le soir.\na) Combien de voitures le soir ?\nb) Les bus passent-ils plus le matin ou le soir ? A) plus le matin B) plus le soir C) autant le matin que le soir\nc) Combien de vélos en tout dans la journée ?\nd) Combien de véhicules le matin ?",
           figure: grille(["véhicule", "matin", "soir"], [
             ["vélos", "46", "58"],
             ["voitures", "120", "134"],
             ["bus", "12", "12"],
           ]),
           correction:
-            "a) Ligne « voitures », colonne « soir » : je lis 134.\nb) Ligne « bus » : 12 le matin, 12 le soir. C'est autant : ni plus le matin, ni plus le soir.\nc) Ligne « vélos » : 46 + 58 = 104 vélos.\nd) Colonne « matin » : 46 + 120 + 12 = 178 véhicules.\n⛔ Le piège au a) : lire 120, la case du matin. Je glisse le doigt jusqu'à la bonne colonne.\n⛔ Le piège au b) : répondre trop vite. Deux cases peuvent être égales.\nRéponse : a) 134 voitures ; b) autant le matin que le soir ; c) 104 vélos ; d) 178 véhicules.",
+            "a) Ligne « voitures », colonne « soir » : je lis 134.\nb) Ligne « bus » : 12 le matin, 12 le soir. C'est autant : ni plus le matin, ni plus le soir. Réponse C.\nc) Ligne « vélos » : 46 + 58 = 104 vélos.\nd) Colonne « matin » : 46 + 120 + 12 = 178 véhicules.\n⛔ Le piège au a) : lire 120, la case du matin. Je glisse le doigt jusqu'à la bonne colonne.\n⛔ Le piège au b) : répondre trop vite. Deux cases peuvent être égales.\nRéponse : a) 134 voitures ; b) C, autant le matin que le soir ; c) 104 vélos ; d) 178 véhicules.",
+          reponses: [
+            { question: "a)", attendu: "134" },
+            { question: "b)", attendu: ["C", "c) autant le matin que le soir", "autant le matin que le soir", "autant"] },
+            { question: "c)", attendu: "104" },
+            { question: "d)", attendu: "178" },
+          ],
           micros: ["tableau_lire", "tableau_interpreter"],
         },
         {
@@ -331,11 +377,17 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["mardi", "58", "70", "128"],
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: "67" },
+            { question: "b)", attendu: "128" },
+            { question: "c) qui ?", attendu: ["les garçons", "garçons"] },
+            { question: "c) combien ?", attendu: ["12", "12 de plus"] },
+          ],
           micros: ["tableau_completer", "tableau_interpreter"],
         },
         {
           enonce:
-            "Une station météo note les jours de pluie de quatre mois. Janvier : 12 jours. Avril : 8 jours. Juillet : 4 jours. Octobre : 11 jours.\nVrai ou faux ? Explique avec les nombres.\na) « Juillet est le mois le plus pluvieux. »\nb) « Il a plu deux fois plus de jours en avril qu'en juillet. »\nc) « Sur les quatre mois, il a plu 36 jours. »\nd) « Janvier a un jour de pluie de plus qu'octobre. »",
+            "Une station météo note les jours de pluie de quatre mois. Janvier : 12 jours. Avril : 8 jours. Juillet : 4 jours. Octobre : 11 jours.\nVrai ou faux ?\na) « Juillet est le mois le plus pluvieux. »\nb) « Il a plu deux fois plus de jours en avril qu'en juillet. »\nc) « Sur les quatre mois, il a plu 36 jours. »\nd) « Janvier a un jour de pluie de plus qu'octobre. »",
           correction:
             "a) Faux. Le plus grand nombre est 12 : c'est janvier. Juillet est le MOINS pluvieux, avec 4 jours.\nb) Deux fois juillet : 2 × 4 = 8. Avril a bien 8 jours : vrai.\nc) 12 + 8 + 4 + 11 = 35 jours, pas 36 : faux.\nd) 12 − 11 = 1 : vrai.\n⛔ Le piège au b) : juger « deux fois plus » à l'œil. Je fais toujours le calcul.\nRéponse : a) faux ; b) vrai ; c) faux ; d) vrai.",
           schema: ecranSeulement(
@@ -346,6 +398,12 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["octobre", "11"],
             ]),
           ),
+          reponses: [
+            { question: "a)", attendu: ["faux", "non"] },
+            { question: "b)", attendu: ["vrai", "oui"] },
+            { question: "c)", attendu: ["faux", "non"] },
+            { question: "d)", attendu: ["vrai", "oui"] },
+          ],
           micros: ["tableau_interpreter"],
         },
         {
@@ -362,6 +420,11 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["total", "164"],
             ], { total: true, case: [4, 1] }),
           ),
+          reponses: [
+            { question: "a)", attendu: ["164", "164 €"] },
+            { question: "b)", attendu: ["non", "faux"] },
+            { question: "c)", attendu: ["36", "36 €"] },
+          ],
           micros: ["tableau_defi"],
         },
         {
@@ -381,6 +444,13 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["total", "28", "19", "47"],
             ], { total: true }),
           ),
+          reponses: [
+            { question: "a) judo", attendu: "15" },
+            { question: "a) danse", attendu: "4" },
+            { question: "b)", attendu: "28" },
+            { question: "c)", attendu: "19" },
+            { question: "d)", attendu: "47" },
+          ],
           micros: ["tableau_completer"],
         },
         {
@@ -394,6 +464,12 @@ export const exercicesTableauCm1: FicheExercicesData = {
           ]),
           correction:
             "a) Le plus grand nombre est 120. Il est écrit DEUX fois : l'Égypte et les Vikings.\nLes deux salles sont à égalité.\nb) 120 − 64 = 56 visiteurs de plus.\nc) 85 + 120 + 120 + 64 = 389 visiteurs.\nd) Je range : 120, 120, puis 85, puis 64.\nL'ordre : l'Égypte et les Vikings, puis les Grecs, puis les Romains.\n⛔ Le piège au a) : s'arrêter au premier 120. Je relis toute la colonne avant de répondre.\nRéponse : a) l'Égypte et les Vikings ; b) 56 visiteurs ; c) 389 visiteurs ; d) Égypte et Vikings, Grecs, Romains.",
+          reponses: [
+            { question: "a)", attendu: ["l'Égypte et les Vikings", "Égypte et Vikings", "les Vikings et l'Égypte", "Vikings et Égypte"] },
+            { question: "b)", attendu: "56" },
+            { question: "c)", attendu: "389" },
+            { question: "d)", attendu: ["Égypte ; Vikings ; Grecs ; Romains", "Vikings ; Égypte ; Grecs ; Romains", "Égypte, Vikings, Grecs, Romains", "Vikings, Égypte, Grecs, Romains"], ordre: true },
+          ],
           micros: ["tableau_lire", "tableau_interpreter"],
         },
         {
@@ -410,6 +486,12 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["total", "34"],
             ], { total: true, case: [0, 1] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "12" },
+            { question: "b)", attendu: "21" },
+            { question: "c)", attendu: "13" },
+            { question: "d)", attendu: "8" },
+          ],
           micros: ["tableau_completer", "tableau_interpreter"],
         },
         {
@@ -424,6 +506,12 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["total", "8", "54"],
             ], { total: true, case: [2, 2] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "24" },
+            { question: "b)", attendu: "30" },
+            { question: "c)", attendu: "54" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           micros: ["tableau_lire", "tableau_defi"],
         },
       ],
@@ -451,6 +539,13 @@ export const exercicesTableauCm1: FicheExercicesData = {
           ]),
           correction:
             "a) Ligne « Saint-Leu », colonne « avril » : je lis 31.\nb) Mars : 23 + 14 + 8 = 45 tortues. Avril : 31 + 9 + 15 = 55 tortues.\nc) Je compare les deux cases de chaque ligne.\nSaint-Leu : 23 puis 31, c'est plus. Grand Bois : 8 puis 15, c'est plus. Étang-Salé : 14 puis 9, c'est moins.\nC'est devant l'Étang-Salé : 14 − 9 = 5 tortues de moins.\nd) Faux. Le total monte, de 45 à 55. Mais devant l'Étang-Salé, le nombre baisse.\n⛔ Le piège au d) : regarder seulement le total. Un total qui monte ne dit pas que chaque case monte.\nRéponse : a) 31 tortues ; b) 45 en mars, 55 en avril ; c) l'Étang-Salé ; d) faux.",
+          reponses: [
+            { question: "a)", attendu: "31" },
+            { question: "b) mars", attendu: "45" },
+            { question: "b) avril", attendu: "55" },
+            { question: "c)", attendu: ["l'Étang-Salé", "Étang-Salé", "l'Étang Salé", "Étang Salé"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           micros: ["tableau_lire", "tableau_interpreter", "tableau_defi"],
         },
         {
@@ -464,6 +559,14 @@ export const exercicesTableauCm1: FicheExercicesData = {
           ]),
           correction:
             "a) J'additionne chaque ligne. Lions : 4 + 1 + 1 = 6. Aigles : 3 + 3 + 0 = 6. Loups : 4 + 0 + 2 = 6.\nOui : chaque équipe a joué 6 matchs.\nb) Lions : 4 × 3 = 12, plus 1 nul : 12 + 1 = 13 points.\nAigles : 3 × 3 = 9, plus 3 nuls : 9 + 3 = 12 points.\nLoups : 4 × 3 = 12, et aucun nul : 12 points.\nc) Les Lions sont premiers, avec 13 points. Les Aigles et les Loups sont à égalité, avec 12 points.\nd) Faux. Les deux équipes ont 4 victoires. Mais les Lions ont 1 match nul en plus : 13 points contre 12.\n⛔ Le piège : compter les matchs gagnés à la place des points. Je multiplie d'abord, puis j'ajoute les nuls.\nRéponse : a) oui ; b) Lions 13, Aigles 12, Loups 12 ; c) les Lions ; d) faux.",
+          reponses: [
+            { question: "a)", attendu: ["oui", "vrai"] },
+            { question: "b) Lions", attendu: "13" },
+            { question: "b) Aigles", attendu: "12" },
+            { question: "b) Loups", attendu: "12" },
+            { question: "c)", attendu: ["les Lions", "Lions"] },
+            { question: "d)", attendu: ["faux", "non"] },
+          ],
           micros: ["tableau_lire", "tableau_interpreter", "tableau_defi"],
         },
         {
@@ -486,6 +589,12 @@ export const exercicesTableauCm1: FicheExercicesData = {
               ["marché", "8"],
             ], { case: [1, 1] }),
           ),
+          reponses: [
+            { question: "a)", attendu: "34" },
+            { question: "b)", attendu: "20" },
+            { question: "c)", attendu: ["après la mairie", "la mairie", "mairie"] },
+            { question: "d)", attendu: "8" },
+          ],
           micros: ["tableau_lire", "tableau_completer", "tableau_interpreter", "tableau_defi"],
         },
         {
@@ -499,6 +608,13 @@ export const exercicesTableauCm1: FicheExercicesData = {
           ]),
           correction:
             "a) Ligne « samedi » : 210 + 480 = 690 billets.\nb) Colonne « enfants » : 120 + 210 + 260 = 590 billets enfants.\nColonne « adultes » : 340 + 480 + 390 = 1 210 billets adultes.\nc) 590 + 1 210 = 1 800 billets.\nJe vérifie par les jours. Vendredi : 120 + 340 = 460. Samedi : 690. Dimanche : 260 + 390 = 650.\nEt 460 + 690 + 650 = 1 800. Je retrouve le même total.\nd) Non. 1 800 est plus petit que 2 000. Il manque 2 000 − 1 800 = 200 billets.\n⛔ Le piège : croire le journal sans calculer. Un grand nombre se vérifie, case par case.\nRéponse : a) 690 billets ; b) 590 enfants, 1 210 adultes ; c) 1 800 billets ; d) non.",
+          reponses: [
+            { question: "a)", attendu: "690" },
+            { question: "b) enfants", attendu: "590" },
+            { question: "b) adultes", attendu: "1210" },
+            { question: "c)", attendu: "1800" },
+            { question: "d)", attendu: ["non", "faux"] },
+          ],
           micros: ["tableau_completer", "tableau_interpreter", "tableau_defi"],
         },
       ],

@@ -202,6 +202,133 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
       "Lire et dessiner une fraction, comprendre l'unité, reconnaître une fraction plus grande que 1, la placer sur la droite, comparer, trouver des fractions égales en regroupant les parts, passer aux dixièmes, aux centièmes et au « pour cent ». Des crêpes, des billes, un saut sans élan, un calendrier, un match de football, les planètes et une mosaïque.",
   },
   // ── fin CM1 : fractions ──
+  // ── CM1 : toutes les notions du coach, interactives (10/11/2026) ──
+  "maths/cm1/nombre-entier": {
+    titre: "Les nombres entiers : 20 exercices corrigés",
+    resume:
+      "Lire et écrire les grands nombres, comparer et ranger, décomposer, chiffre et nombre de centaines, arrondir, encadrer, placer sur une droite graduée, reconnaître un multiple et un diviseur. Problèmes : une bibliothèque, des cartons de jus, un musée, un coffre à code.",
+  },
+  "maths/cm1/suite": {
+    titre: "Les suites de nombres : 20 exercices corrigés",
+    resume:
+      "Continuer une suite, trouver le nombre qui manque, trouver la règle (ajouter, enlever, multiplier), dire si elle est croissante ou décroissante, des sauts sur une droite et des carrés en allumettes. Problèmes : une tirelire, un jardin de tulipes, des gradins, une frise de carreaux.",
+  },
+  "maths/cm1/calcul": {
+    titre: "Le calcul : 20 exercices corrigés",
+    resume:
+      "Calcul mental et astuces (+ 9, × 5), addition et soustraction posées avec retenues, multiplication posée, nombres à virgule, calculs à trous, priorités des opérations, estimer un résultat. Problèmes : une cantine, un menuisier, un voyage de classe, une épicerie.",
+  },
+  "maths/cm1/tables-multiplication": {
+    titre: "Les tables de multiplication : 20 exercices corrigés",
+    resume:
+      "Lire une multiplication sur un rectangle de billes, retrouver les tables de 2 à 10 avec des astuces (le double, le double du double, 10 fois moins une fois), lire la table de Pythagore, trouver le nombre qui manque, comparer des produits. Problèmes : un verger, un concert, des devinettes, des insectes.",
+  },
+  "maths/cm1/multiplication": {
+    titre: "La multiplication : 20 exercices corrigés",
+    resume:
+      "Multiplier par 10, 100 ou 1 000 par la valeur des chiffres, calculer de tête en coupant un nombre, poser une multiplication avec retenues puis par un nombre à deux chiffres, multiplier un prix à virgule, changer l'ordre pour calculer malin. Problèmes : une boulangerie, un voyage en car, un carrelage, des chiffres cachés.",
+  },
+  "maths/cm1/division": {
+    titre: "La division : 20 exercices corrigés",
+    resume:
+      "Partager en parts égales et faire des paquets, lire deux divisions dans un rectangle de billes, retrouver une division dans les tables, poser une division, trouver le quotient et le reste, savoir quand il faut une part de plus. Problèmes : une randonnée, une bibliothèque, des macarons, des énigmes.",
+  },
+  "maths/cm1/nombre-decimal": {
+    titre: "Les nombres décimaux : 20 exercices corrigés",
+    resume:
+      "Lire et écrire un nombre à virgule, passer d'une fraction décimale au nombre décimal, valeur d'un chiffre, comparer et ranger, placer sur la droite graduée, arrondir à l'unité, multiplier et diviser par 10 ou 100. Problèmes : des prix, un saut en longueur, des chatons chez la vétérinaire, une énigme.",
+  },
+  "maths/cm1/probleme": {
+    titre: "Résoudre des problèmes : 20 problèmes corrigés",
+    resume:
+      "Choisir la bonne opération, résoudre en une ou plusieurs étapes, choisir la bonne phrase réponse, vérifier qu'un résultat est possible, faire un schéma en barres. Des billes, un bus, des croissants, un car scolaire, un zoo, une électricienne.",
+  },
+  "maths/cm1/algebre": {
+    titre: "Premiers pas en algèbre : 20 exercices corrigés",
+    resume:
+      "Comprendre le signe =, compléter une égalité, trouver le nombre qui manque, poursuivre un motif qui grandit, trouver la règle entre deux quantités, suivre un programme de calcul, lire un schéma en barres.",
+  },
+  "maths/cm1/proportionnalite": {
+    titre: "La proportionnalité : 20 exercices corrigés",
+    resume:
+      "Reconnaître une situation de proportionnalité, raisonner en fois plus et fois moins, compléter un tableau, trouver le coefficient, passer par la valeur pour 1. Des recettes, des tickets, un plan d'architecte, un cycliste, de la peinture, des photos.",
+  },
+  "maths/cm1/longueur": {
+    titre: "Les longueurs : 20 exercices corrigés",
+    resume:
+      "Mesurer avec une règle, convertir les km, m, cm et mm, comparer et ranger des longueurs, estimer la taille d'un objet. Problèmes : une couturière, un guide de montagne, un menuisier, un relais d'athlétisme.",
+  },
+  "maths/cm1/masse": {
+    titre: "Les masses : 20 exercices corrigés",
+    resume:
+      "Convertir les tonnes, kilogrammes et grammes, lire une balance à plateaux, comparer et ranger des masses, estimer la masse d'un objet. Problèmes : un camion de livraison, une pâtissière, un vétérinaire, une valise d'avion.",
+  },
+  "maths/cm1/contenance": {
+    titre: "Les contenances : 20 exercices corrigés",
+    resume:
+      "Convertir les litres, centilitres et millilitres, lire un verre doseur, comparer et ranger des contenances, estimer ce que contient un objet, partager une carafe. Problèmes : un aquarium, un arrosoir, une limonade, le goûter d'une classe.",
+  },
+  "maths/cm1/duree": {
+    titre: "Les durées : 20 exercices corrigés",
+    resume:
+      "Lire l'heure sur une horloge à aiguilles, placer les aiguilles, convertir heures, minutes et secondes, calculer une durée, trouver l'heure de fin. Problèmes : un train, un boulanger, une infirmière de nuit, un concert.",
+  },
+  "maths/cm1/perimetre": {
+    titre: "Le périmètre : 20 exercices corrigés",
+    resume:
+      "Faire le tour d'une figure sur un quadrillage, additionner les côtés d'un triangle, d'un rectangle, d'un carré, d'un polygone à côtés égaux, retrouver un côté qui manque. Problèmes : un parc, un cadre, des plinthes, les tables d'une fête.",
+  },
+  "maths/cm1/aire": {
+    titre: "L'aire : 20 exercices corrigés",
+    resume:
+      "Compter les carreaux d'une figure, comparer deux aires avec une unité, ne pas confondre aire et périmètre, aire d'un rectangle et d'un carré en cm² et en m², découper une figure ou enlever un morceau. Problèmes : une chambre, un potager, un toit solaire, un drapeau.",
+  },
+  "maths/cm1/angle": {
+    titre: "Les angles : 20 exercices corrigés",
+    resume:
+      "Trouver le sommet et les côtés, reconnaître un angle droit à l'équerre, dire si un angle est aigu ou obtus, comparer deux angles avec un gabarit, nommer un angle avec trois lettres. Horloges, pizzas, lettres, cadre de menuisier, robot, toit.",
+  },
+  "maths/cm1/reperage": {
+    titre: "Le repérage : 20 exercices corrigés",
+    resume:
+      "Trouver une case comme B3 sur un quadrillage, lire les coordonnées d'un point dans le bon ordre, trouver le point d'une adresse, suivre un trajet ou un code de flèches. Bataille navale, plan de ville, chasse au trésor, jeu vidéo.",
+  },
+  "maths/cm1/droite": {
+    titre: "Droites parallèles et perpendiculaires : 20 exercices corrigés",
+    resume:
+      "Reconnaître un segment, une demi-droite, une droite, repérer des droites parallèles (même écart) et perpendiculaires (angle droit) sur quadrillage, trouver des points alignés, lire les notations [AB] et (AB). Problèmes : une échelle, un terrain de handball, des plots de sport, un plan d'architecte.",
+  },
+  "maths/cm1/symetrie": {
+    titre: "La symétrie axiale : 20 exercices corrigés",
+    resume:
+      "Reconnaître un axe de symétrie, compter les axes d'une figure ou d'une lettre, trouver la case ou le point symétrique sur un quadrillage, compléter une figure, savoir que la symétrie garde les longueurs. Problèmes : une case créole, un carrelage à deux axes, des drapeaux, un jardin à la française.",
+  },
+  "maths/cm1/figure-plane": {
+    titre: "Les figures planes : 20 exercices corrigés",
+    resume:
+      "Nommer un triangle, un carré, un rectangle, un losange, reconnaître un triangle rectangle, isocèle ou équilatéral, lire le codage d'une figure, utiliser le centre, le rayon et le diamètre d'un cercle, compter des figures cachées. Problèmes : un vitrail, un massif de fleurs rond, un couvercle de menuisière, des cadres photo.",
+  },
+  "maths/cm1/solide": {
+    titre: "Les solides : 20 exercices corrigés",
+    resume:
+      "Reconnaître un cube, un pavé droit, un cylindre, un cône, une pyramide, une boule, compter les faces, les arêtes et les sommets (cachés compris), dire la forme des faces, reconnaître un patron de cube, de pavé ou de pyramide, décrire un prisme droit. Problèmes : une boîte de bonbons, une maquette en pailles, le patron d'un dé, le toit d'un kiosque.",
+  },
+  "maths/cm1/probabilite": {
+    titre: "Le hasard et les chances : 20 exercices corrigés",
+    resume:
+      "Dire si un événement est certain, possible ou impossible, reconnaître une situation de hasard, compter les cas gagnants sur un dé, une roue ou dans un sac de billes, comparer des chances, trouver tous les résultats d'une expérience. Problèmes : une tombola, des chaussettes dans le noir, un tour de cartes, un jeu de société.",
+  },
+  "maths/cm1/algorithmique": {
+    titre: "Programmer un déplacement : 20 exercices corrigés",
+    resume:
+      "Suivre des instructions dans l'ordre, continuer une suite logique, déplacer un robot sur un quadrillage avec des flèches et trouver sa case d'arrivée, choisir le bon programme, lire des blocs Scratch, utiliser « répéter ». Problèmes : une tondeuse robot, un programme de calcul, un robot d'entrepôt, le plan d'un architecte.",
+  },
+  "maths/cm1/trier-classer": {
+    titre: "Trier et classer : 20 exercices corrigés",
+    resume:
+      "Trier selon un critère puis un deuxième, lire deux ou trois ensembles qui se croisent et compter chaque zone, suivre un arbre de tri et trouver la question qui manque. Problèmes : une bibliothèque, un refuge pour chiens, un centre de recyclage, un tour de magie.",
+  },
+  // ── fin CM1 : toutes les notions ──
   "maths/cm2/tableau": {
     titre: "Lire, compléter et interpréter un tableau : 20 exercices corrigés",
     resume:
