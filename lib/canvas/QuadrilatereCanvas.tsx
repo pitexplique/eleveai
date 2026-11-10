@@ -137,8 +137,12 @@ function getTickSegment(a: Point, b: Point, tickSize = 12, offset = 0) {
   const nx = -dy / n;
   const ny = dx / n;
 
-  const cx = m.x + nx * offset;
-  const cy = m.y + ny * offset;
+  // ⛔ 10/11/2026 — le décalage se faisait le long de la NORMALE, donc le long
+  // du trait lui-même : deux traits se superposaient et se lisaient comme un
+  // seul. On ne distinguait plus le codage d'un rectangle de celui d'un carré.
+  // Les traits se décalent le long du CÔTÉ.
+  const cx = m.x + (dx / n) * offset;
+  const cy = m.y + (dy / n) * offset;
 
   return {
     x1: cx - (nx * tickSize) / 2,

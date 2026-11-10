@@ -99,7 +99,12 @@ function Clock({
   showDigital: boolean;
 }) {
   const width = 220;
-  const height = 250;
+  // ⛔ 10/11/2026 — l'étiquette (« Début — 14 h 30 ») était écrite à y = 220,
+  // SUR le bracelet du bas (178 → 232). Le bracelet est raccourci et
+  // l'étiquette, puis l'affichage digital, se posent dessous.
+  const labelY = 238;
+  const digitalY = label ? 250 : 224;
+  const height = showDigital ? digitalY + 26 : label ? 250 : 226;
 
   const cx = width / 2;
   const cy = 112;
@@ -139,7 +144,7 @@ function Clock({
         x={cx - 28}
         y={178}
         width={56}
-        height={54}
+        height={42}
         rx={16}
         fill={colors.strap}
         stroke={colors.bezel}
@@ -242,7 +247,7 @@ function Clock({
       {label ? (
         <text
           x={cx}
-          y={220}
+          y={labelY}
           textAnchor="middle"
           fontSize="15"
           fontWeight="900"
@@ -259,7 +264,7 @@ function Clock({
         <g>
           <rect
             x={cx - 42}
-            y={224}
+            y={digitalY}
             width={84}
             height={22}
             rx={8}
@@ -269,7 +274,7 @@ function Clock({
           />
           <text
             x={cx}
-            y={240}
+            y={digitalY + 16}
             textAnchor="middle"
             fontSize="14"
             fontWeight="900"

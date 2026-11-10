@@ -152,10 +152,13 @@ function drawPaveOrCube({
   const showDimensions = data.display?.showDimensions ?? true;
   const showFormulaHint = data.display?.showFormulaHint ?? false;
 
-  const frontA = { x: 82, y: 98 };
-  const frontB = { x: 222, y: 98 };
-  const frontC = { x: 222, y: 198 };
-  const frontD = { x: 82, y: 198 };
+  // ⛔ 10/11/2026 — LE CUBE SE DESSINAIT COMME UN PAVÉ : face avant de 140 × 100.
+  // Deux agents du cycle 2 l'ont vu et contourné. Un cube a une face CARRÉE :
+  // 110 × 110, même bas de face, même centre horizontal.
+  const frontA = isCube ? { x: 97, y: 88 } : { x: 82, y: 98 };
+  const frontB = isCube ? { x: 207, y: 88 } : { x: 222, y: 98 };
+  const frontC = isCube ? { x: 207, y: 198 } : { x: 222, y: 198 };
+  const frontD = isCube ? { x: 97, y: 198 } : { x: 82, y: 198 };
 
   const depth = isCube ? { x: 48, y: -42 } : { x: 62, y: -38 };
 
