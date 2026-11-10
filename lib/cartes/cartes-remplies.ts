@@ -26,10 +26,11 @@ import QUATRIEME from "./remplies/4e.json";
 import CM2 from "./remplies/cm2.json";
 import CINQUIEME from "./remplies/5e.json";
 import type { CanvasFigure } from "@/lib/tutor-v4/types";
-// Les dessins des cartes de 6e et de 4e, à part des textes : { "<classe>/<notion>":
+// Les dessins des cartes de 6e, de 4e et de CM2, à part des textes : { "<classe>/<notion>":
 // { "<n° de bulle à partir de 0>": figure } }. Un dessin écrit à la main ici l'emporte.
 import FIGURES_6E from "./remplies/figures-6e.json";
 import FIGURES_4E from "./remplies/figures-4e.json";
+import FIGURES_CM2 from "./remplies/figures-cm2.json";
 
 // ⭐ 09/11 soir — Frédéric : « mettre dans les cartes mentales les graphiques
 // si possible et là où c’est nécessaire ». `figure` = un petit dessin du moteur
@@ -516,7 +517,7 @@ const BASE: Record<string, BulleRemplie[]> = {
 };
 
 type Figures = Record<string, Record<string, CanvasFigure>>;
-const FIGURES: Figures = { ...(FIGURES_6E as unknown as Figures), ...(FIGURES_4E as unknown as Figures) };
+const FIGURES: Figures = { ...(FIGURES_6E as unknown as Figures), ...(FIGURES_4E as unknown as Figures), ...(FIGURES_CM2 as unknown as Figures) };
 
 export const CARTES_REMPLIES: Record<string, BulleRemplie[]> = Object.fromEntries(
   Object.entries(BASE).map(([cle, bulles]) => {
