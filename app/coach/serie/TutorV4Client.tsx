@@ -117,6 +117,7 @@ import AudioBoost from "@/components/AudioBoost";
    lire son cours. Le registre est la source de vérité, on ne recopie aucune
    table de correspondance. */
 import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
+import NOTIONS_AVEC_CARTE from "@/lib/cartes/notions-avec-carte.json";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import FloatingCoach from "@/components/FloatingCoach";
@@ -563,6 +564,41 @@ function PastilleFiche({
       {classeSource ? (
         <span className="font-black">· {classeSource.toUpperCase()}</span>
       ) : null}
+    </Link>
+  );
+}
+
+/**
+ * ⭐ LA CARTE MENTALE À CÔTÉ DE LA FICHE (10/11/2026). Frédéric : « en haut il
+ * y a un lien fiche cours et vidéos, tu peux rajouter le lien vers la carte
+ * mentale ». Même règle que la fiche : dans les rangées existantes, aucune
+ * ligne en plus. La liste des notions qui ont une carte est écrite par
+ * scripts/generer-bilans-videos.mjs (les seules clés, pas les micros).
+ */
+const CARTES_MENTALES = new Set<string>(NOTIONS_AVEC_CARTE as string[]);
+
+function PastilleCarte({
+  matiere,
+  classe,
+  notion,
+}: {
+  matiere: string;
+  classe: string;
+  notion: string;
+}) {
+  if (matiere !== "maths" || !notion || !CARTES_MENTALES.has(`${classe}/${notion}`)) return null;
+
+  return (
+    <Link
+      href={`/cartes-mentales/maths/${classe}/${notion}`}
+      data-hors-apercu=""
+      title="Carte mentale de cette notion : l'essentiel sur une feuille"
+      className="inline-flex shrink-0 items-center gap-1 rounded-full bg-violet-100 px-3 py-1 text-xs font-bold text-violet-800 hover:bg-violet-200"
+    >
+      {/* À 375 px, « Mission en cours » + les deux pastilles en entier
+          passaient à la ligne : sur téléphone, le cerveau seul (le titre
+          garde le nom). */}
+      🧠<span className="hidden sm:inline">Carte mentale</span>
     </Link>
   );
 }
@@ -1954,7 +1990,10 @@ function handleInputKeyDown(
           remediationBanner={remediationBanner}
           questionListenButton={questionListenButton}
           ficheLink={
-            <PastilleFiche href={ficheHref} classeSource={ficheAutreClasse} />
+            <>
+              <PastilleFiche href={ficheHref} classeSource={ficheAutreClasse} />
+              <PastilleCarte matiere={matiere} classe={classe} notion={notion} />
+            </>
           }
           autoRead={autoRead}
           onToggleAutoRead={toggleAutoRead}
@@ -2318,6 +2357,7 @@ function handleInputKeyDown(
                     Choisis ta question
                   </div>
                   <PastilleFiche href={ficheHref} classeSource={ficheAutreClasse} />
+                  <PastilleCarte matiere={matiere} classe={classe} notion={notion} />
                 </div>
                 <p className="text-sm text-slate-500">
                   Compétence active :{" "}
@@ -2404,6 +2444,7 @@ function handleInputKeyDown(
                       Mission en cours
                     </div>
                     <PastilleFiche href={ficheHref} classeSource={ficheAutreClasse} />
+                    <PastilleCarte matiere={matiere} classe={classe} notion={notion} />
                   </div>
                   <p className="text-sm text-slate-500">
                     Compétence :{" "}

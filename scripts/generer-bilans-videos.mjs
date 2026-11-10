@@ -74,5 +74,11 @@ for (const classe of fs.readdirSync(KNOW, { withFileTypes: true }).filter((d) =>
 }
 const sortieN = path.join(RACINE, "lib", "videos", "bilans-notions.json");
 fs.writeFileSync(sortieN, JSON.stringify(notions) + "\n", "utf8");
+// Les seules CLÉS (« 6e/fraction_nombre »), pour le lien « Carte mentale » du
+// coach : le client n'a pas à charger les 160 Ko des micros pour savoir si la
+// carte existe.
+const sortieCles = path.join(RACINE, "lib", "cartes", "notions-avec-carte.json");
+fs.writeFileSync(sortieCles, JSON.stringify(Object.keys(notions).sort()) + "
+", "utf8");
 const toutes = Object.values(notions);
 console.log(`${toutes.length} cartes mentales (une par notion du coach, ${toutes.filter((n) => n.micros.length > 8).length} sur deux pages) → ${path.relative(RACINE, sortieN)}`);
