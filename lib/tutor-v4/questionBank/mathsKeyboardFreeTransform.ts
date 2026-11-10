@@ -81,7 +81,10 @@ function pickDistractorValues(parsed: Parsed): number[] {
   const groups = [
     [v + step, v - step, v + 2 * step, v - 2 * step], // voisins proches
     [v + 10 * step, v - 10 * step, v + 5 * step, v - 5 * step], // ordre de grandeur
-    [round(v * 2), round(v / 2), round(v * 3)], // échelle
+    // ⛔ 10/11/2026 — plus de « ×3 » : aucun enfant ne l'écrit, et il donnait
+    // « 2019 » parmi les réponses à 308 + 365 au CE1, « 27 » pour l'heure
+    // qui vient avant 10 heures au CP. Le double et la moitié restent.
+    [round(v * 2), round(v / 2)], // échelle
   ];
 
   const out: number[] = [];
