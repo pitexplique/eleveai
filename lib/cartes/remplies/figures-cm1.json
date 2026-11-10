@@ -1,0 +1,3203 @@
+{
+  "cm1/nombre_entier": {
+    "3": {
+      "kind": "number_line",
+      "min": 40,
+      "max": 50,
+      "step": 10,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 43,
+          "label": "43",
+          "color": "#2563eb"
+        },
+        {
+          "value": 47,
+          "label": "47",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "6": {
+      "kind": "number_line",
+      "min": 200,
+      "max": 300,
+      "step": 100,
+      "minorStep": 10,
+      "points": [
+        {
+          "value": 260,
+          "label": "260",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "8": {
+      "kind": "number_line",
+      "min": 600,
+      "max": 700,
+      "step": 100,
+      "minorStep": 10,
+      "points": [
+        {
+          "value": 648,
+          "label": "648",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    }
+  },
+  "cm1/suite": {
+    "1": {
+      "kind": "number_line",
+      "min": 3,
+      "max": 15,
+      "step": 4,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 3,
+          "color": "#dc2626"
+        },
+        {
+          "value": 7,
+          "color": "#dc2626"
+        },
+        {
+          "value": 11,
+          "color": "#dc2626"
+        },
+        {
+          "value": 15,
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": false,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    }
+  },
+  "cm1/tables_multiplication": {
+    "11": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "48 arbres",
+      "parts": [
+        {
+          "label": "rangée",
+          "value": "8",
+          "color": "#2563eb"
+        },
+        {
+          "label": "rangée",
+          "value": "8",
+          "color": "#059669"
+        },
+        {
+          "label": "rangée",
+          "value": "8",
+          "color": "#2563eb"
+        },
+        {
+          "label": "rangée",
+          "value": "8",
+          "color": "#059669"
+        },
+        {
+          "label": "rangée",
+          "value": "8",
+          "color": "#2563eb"
+        },
+        {
+          "label": "rangée",
+          "value": "8",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": false,
+        "showValues": true
+      }
+    }
+  },
+  "cm1/multiplication": {
+    "1": {
+      "kind": "calcul_pose",
+      "operation": "multiplication",
+      "numbers": [
+        "324",
+        "3"
+      ],
+      "result": "972",
+      "display": {
+        "showResult": true,
+        "compact": true
+      }
+    },
+    "2": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "",
+        "milliers",
+        "centaines",
+        "dizaines",
+        "unités"
+      ],
+      "rows": [
+        {
+          "values": [
+            "45",
+            "",
+            "",
+            "4",
+            "5"
+          ]
+        },
+        {
+          "values": [
+            "45 × 10",
+            "",
+            "4",
+            "5",
+            "0"
+          ]
+        },
+        {
+          "values": [
+            "45 × 100",
+            "4",
+            "5",
+            "0",
+            "0"
+          ]
+        }
+      ],
+      "highlight": {
+        "row": 2
+      },
+      "display": {
+        "compact": true
+      }
+    },
+    "3": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "28 €",
+      "parts": [
+        {
+          "label": "billet",
+          "value": "7 €",
+          "color": "#2563eb"
+        },
+        {
+          "label": "billet",
+          "value": "7 €",
+          "color": "#059669"
+        },
+        {
+          "label": "billet",
+          "value": "7 €",
+          "color": "#2563eb"
+        },
+        {
+          "label": "billet",
+          "value": "7 €",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "4": {
+      "kind": "calcul_pose",
+      "operation": "multiplication",
+      "numbers": [
+        "2,35",
+        "3"
+      ],
+      "result": "7,05",
+      "display": {
+        "showResult": true,
+        "compact": true
+      }
+    }
+  },
+  "cm1/division": {
+    "0": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "12 billes",
+      "parts": [
+        {
+          "label": "Léa",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "Noé",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "Sami",
+          "value": "4",
+          "color": "#7c3aed"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "3": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "29 élèves",
+      "parts": [
+        {
+          "label": "",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "reste",
+          "value": "1",
+          "color": "#ea580c"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cm1/fraction": {
+    "1": {
+      "kind": "fraction",
+      "model": "bar",
+      "fraction": {
+        "numerator": 2,
+        "denominator": 3
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 240,
+        "height": 150
+      }
+    },
+    "4": {
+      "kind": "number_line",
+      "min": 0,
+      "max": 2,
+      "step": 1,
+      "minorStep": 0.25,
+      "points": [
+        {
+          "value": 0.75,
+          "label": "3/4",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "5": {
+      "kind": "fraction",
+      "model": "compare",
+      "fractions": [
+        {
+          "numerator": 1,
+          "denominator": 2,
+          "color": "#2563eb"
+        },
+        {
+          "numerator": 1,
+          "denominator": 4,
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showLabel": true,
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 260,
+        "height": 200
+      }
+    },
+    "6": {
+      "kind": "fraction",
+      "model": "compare",
+      "fractions": [
+        {
+          "numerator": 1,
+          "denominator": 2,
+          "color": "#2563eb"
+        },
+        {
+          "numerator": 2,
+          "denominator": 4,
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showLabel": true,
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 260,
+        "height": 200
+      }
+    },
+    "10": {
+      "kind": "fraction",
+      "model": "circle",
+      "fraction": {
+        "numerator": 3,
+        "denominator": 8,
+        "label": "mangé : 3/8"
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 220,
+        "height": 200
+      }
+    }
+  },
+  "cm1/nombre_decimal": {
+    "1": {
+      "kind": "fraction",
+      "model": "bar",
+      "fraction": {
+        "numerator": 7,
+        "denominator": 10,
+        "label": "7/10 = 0,7"
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 280,
+        "height": 150
+      }
+    },
+    "2": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "unités",
+        "dixièmes",
+        "centièmes"
+      ],
+      "rows": [
+        {
+          "values": [
+            "4",
+            "5",
+            "6"
+          ]
+        }
+      ],
+      "highlight": {
+        "col": 2
+      },
+      "display": {}
+    },
+    "3": {
+      "kind": "number_line",
+      "size": {
+        "width": 300,
+        "height": 90
+      },
+      "min": 2.6,
+      "max": 2.8,
+      "step": 0.1,
+      "minorStep": 0.01,
+      "points": [
+        {
+          "value": 2.65,
+          "label": "2,65",
+          "color": "#2563eb"
+        },
+        {
+          "value": 2.7,
+          "label": "2,7",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      }
+    },
+    "5": {
+      "kind": "number_line",
+      "size": {
+        "width": 300,
+        "height": 90
+      },
+      "min": 0,
+      "max": 1,
+      "step": 1,
+      "minorStep": 0.1,
+      "points": [
+        {
+          "value": 0.7,
+          "label": "0,7",
+          "color": "#2563eb"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      }
+    },
+    "11": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "3,85 €",
+      "parts": [
+        {
+          "label": "gomme",
+          "value": "1,50 €",
+          "color": "#2563eb"
+        },
+        {
+          "label": "stylo",
+          "value": "2,35 €",
+          "color": "#7c3aed"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cm1/calcul": {
+    "1": {
+      "kind": "calcul_pose",
+      "operation": "addition",
+      "numbers": [
+        "468",
+        "357"
+      ],
+      "result": "825",
+      "retenues": [
+        "1",
+        "1",
+        ""
+      ],
+      "display": {
+        "showResult": true,
+        "showRetenues": true,
+        "compact": true
+      }
+    },
+    "2": {
+      "kind": "calcul_pose",
+      "operation": "soustraction",
+      "numbers": [
+        "524",
+        "168"
+      ],
+      "result": "356",
+      "display": {
+        "showResult": true,
+        "showRetenues": false,
+        "compact": true
+      }
+    },
+    "4": {
+      "kind": "calcul_pose",
+      "operation": "addition",
+      "numbers": [
+        "4,75",
+        "2,50"
+      ],
+      "result": "7,25",
+      "retenues": [
+        "1",
+        "",
+        "",
+        ""
+      ],
+      "display": {
+        "showResult": true,
+        "showRetenues": true,
+        "compact": true
+      }
+    }
+  },
+  "cm1/probleme": {
+    "0": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "24 billes",
+      "parts": [
+        {
+          "label": "ami 1",
+          "value": "6",
+          "color": "#2563eb"
+        },
+        {
+          "label": "ami 2",
+          "value": "6",
+          "color": "#7c3aed"
+        },
+        {
+          "label": "ami 3",
+          "value": "6",
+          "color": "#059669"
+        },
+        {
+          "label": "ami 4",
+          "value": "6",
+          "color": "#ea580c"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "2": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "13 €",
+      "parts": [
+        {
+          "label": "3 cahiers à 2 €",
+          "value": "6 €",
+          "color": "#2563eb"
+        },
+        {
+          "label": "livre",
+          "value": "7 €",
+          "color": "#ea580c"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "5": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "30 cartes",
+      "parts": [
+        {
+          "label": "Lou",
+          "value": "12",
+          "color": "#2563eb"
+        },
+        {
+          "label": "Max : 12 + 6",
+          "value": "18",
+          "color": "#ea580c"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cm1/algebre": {
+    "3": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "50 billes",
+      "parts": [
+        {
+          "label": "rouges",
+          "value": "32",
+          "color": "#dc2626"
+        },
+        {
+          "label": "bleues",
+          "value": "18",
+          "color": "#2563eb"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "5": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "vélos",
+        "1",
+        "2",
+        "3",
+        "5"
+      ],
+      "rows": [
+        {
+          "values": [
+            "roues",
+            "2",
+            "4",
+            "6",
+            "10"
+          ]
+        }
+      ],
+      "highlight": {
+        "col": 4
+      },
+      "display": {}
+    },
+    "6": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "étape",
+        "résultat"
+      ],
+      "rows": [
+        {
+          "values": [
+            "je choisis 6",
+            "6"
+          ]
+        },
+        {
+          "values": [
+            "+ 4",
+            "10"
+          ]
+        },
+        {
+          "values": [
+            "× 3",
+            "30"
+          ]
+        }
+      ],
+      "highlight": {
+        "col": 1
+      },
+      "display": {}
+    }
+  },
+  "cm1/proportionnalite": {
+    "3": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "tickets",
+        "1",
+        "3",
+        "5"
+      ],
+      "rows": [
+        {
+          "values": [
+            "prix",
+            "2 €",
+            "6 €",
+            "10 €"
+          ]
+        }
+      ],
+      "highlight": {
+        "col": 3
+      },
+      "display": {}
+    },
+    "6": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "20 kg",
+      "parts": [
+        {
+          "label": "sac 1",
+          "value": "5 kg",
+          "color": "#2563eb"
+        },
+        {
+          "label": "sac 2",
+          "value": "5 kg",
+          "color": "#7c3aed"
+        },
+        {
+          "label": "sac 3",
+          "value": "5 kg",
+          "color": "#059669"
+        },
+        {
+          "label": "sac 4",
+          "value": "5 kg",
+          "color": "#ea580c"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cm1/longueur": {
+    "0": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "A",
+          "x": 0,
+          "y": 40,
+          "nom": ""
+        },
+        {
+          "id": "B",
+          "x": 200,
+          "y": 40,
+          "nom": ""
+        },
+        {
+          "id": "Cc",
+          "x": 0,
+          "y": 0,
+          "nom": ""
+        },
+        {
+          "id": "D",
+          "x": 150,
+          "y": 0,
+          "nom": ""
+        },
+        {
+          "id": "z1",
+          "x": 100,
+          "y": 75,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "z2",
+          "x": 100,
+          "y": -25,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "segments": [
+        {
+          "a": "A",
+          "b": "B",
+          "couleur": "#2563eb",
+          "epais": true,
+          "texte": "2 m = 200 cm"
+        },
+        {
+          "a": "Cc",
+          "b": "D",
+          "couleur": "#ea580c",
+          "epais": true,
+          "texte": "150 cm"
+        }
+      ],
+      "largeur": 210,
+      "hauteurMax": 140
+    },
+    "3": {
+      "kind": "number_line",
+      "size": {
+        "width": 200,
+        "height": 80
+      },
+      "min": 0,
+      "max": 15,
+      "step": 5,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 12,
+          "label": "12 cm",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      }
+    },
+    "4": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "3 m = 300 cm",
+      "parts": [
+        {
+          "label": "coupé",
+          "value": "80",
+          "color": "#ea580c"
+        },
+        {
+          "label": "reste",
+          "value": "220",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cm1/masse": {
+    "3": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 170
+      },
+      "total": "1 250 g",
+      "parts": [
+        {
+          "label": "farine",
+          "value": "250",
+          "color": "#ea580c"
+        },
+        {
+          "label": "pommes : 1 kg",
+          "value": "1 000",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cm1/contenance": {
+    "3": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "1 L = 100 cL",
+      "parts": [
+        {
+          "label": "",
+          "value": "20",
+          "color": "#bfdbfe"
+        },
+        {
+          "label": "",
+          "value": "20",
+          "color": "#bfdbfe"
+        },
+        {
+          "label": "",
+          "value": "20",
+          "color": "#bfdbfe"
+        },
+        {
+          "label": "",
+          "value": "20",
+          "color": "#bfdbfe"
+        },
+        {
+          "label": "",
+          "value": "20",
+          "color": "#bfdbfe"
+        }
+      ],
+      "questionLabel": "5 verres de 20 cL",
+      "display": {
+        "showTotal": true,
+        "showPartLabels": false,
+        "showValues": true,
+        "showQuestion": true
+      }
+    }
+  },
+  "cm1/duree": {
+    "0": {
+      "kind": "duree",
+      "variant": "horloge",
+      "time": {
+        "hour": 4,
+        "minute": 30,
+        "label": "4 h 30"
+      },
+      "display": {
+        "showNumbers": true,
+        "showMinuteTicks": true,
+        "showLabels": true
+      }
+    },
+    "2": {
+      "kind": "duree",
+      "variant": "frise",
+      "frise": {
+        "startLabel": "8 h 40",
+        "endLabel": "10 h 15",
+        "steps": [
+          {
+            "label": "20 min",
+            "minutes": 20
+          },
+          {
+            "label": "1 h",
+            "minutes": 60
+          },
+          {
+            "label": "15 min",
+            "minutes": 15
+          }
+        ]
+      }
+    },
+    "4": {
+      "kind": "duree",
+      "variant": "horloge",
+      "time": {
+        "hour": 7,
+        "minute": 15,
+        "label": "7 h 15"
+      },
+      "display": {
+        "showNumbers": true,
+        "showMinuteTicks": true,
+        "showLabels": true
+      }
+    }
+  },
+  "cm1/perimetre": {
+    "0": {
+      "kind": "figure_libre",
+      "size": {
+        "width": 236,
+        "height": 168,
+        "cellSize": 34
+      },
+      "grid": {
+        "rows": 4,
+        "cols": 6,
+        "filledCells": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      "display": {
+        "showGrid": true,
+        "showFilled": true,
+        "showPerimeter": true
+      },
+      "colors": {
+        "filled": "#dbeafe",
+        "perimeter": "#dc2626"
+      }
+    },
+    "1": {
+      "kind": "triangle",
+      "size": {
+        "width": 240,
+        "height": 190
+      },
+      "points": {
+        "A": {
+          "x": 40,
+          "y": 155
+        },
+        "B": {
+          "x": 190,
+          "y": 155
+        },
+        "C": {
+          "x": 40,
+          "y": 42.5
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": ""
+      },
+      "sideLabels": {
+        "AB": "4 cm",
+        "BC": "5 cm",
+        "CA": "3 cm"
+      },
+      "display": {
+        "showPoints": true,
+        "showLabels": false,
+        "showSides": true,
+        "showAngles": false
+      }
+    },
+    "2": {
+      "kind": "quadrilatere",
+      "size": {
+        "width": 260,
+        "height": 190
+      },
+      "points": {
+        "A": {
+          "x": 50,
+          "y": 45
+        },
+        "B": {
+          "x": 210,
+          "y": 45
+        },
+        "C": {
+          "x": 210,
+          "y": 152
+        },
+        "D": {
+          "x": 50,
+          "y": 152
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "sideLabels": {
+        "AB": "6 m",
+        "BC": "4 m",
+        "CD": "6 m",
+        "DA": "4 m"
+      },
+      "display": {
+        "showPoints": false,
+        "showLabels": false,
+        "showSides": true
+      },
+      "marks": {
+        "rightAnglesAt": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    "3": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "A",
+          "x": 0,
+          "y": 3.4,
+          "nom": ""
+        },
+        {
+          "id": "B",
+          "x": -3.24,
+          "y": 1.05,
+          "nom": ""
+        },
+        {
+          "id": "Cc",
+          "x": -2,
+          "y": -2.75,
+          "nom": ""
+        },
+        {
+          "id": "D",
+          "x": 2,
+          "y": -2.75,
+          "nom": ""
+        },
+        {
+          "id": "E",
+          "x": 3.24,
+          "y": 1.05,
+          "nom": ""
+        }
+      ],
+      "polygones": [
+        {
+          "sommets": [
+            "A",
+            "B",
+            "Cc",
+            "D",
+            "E"
+          ],
+          "fond": "rgba(37,99,235,0.10)"
+        }
+      ],
+      "segments": [
+        {
+          "a": "A",
+          "b": "B",
+          "code": 1
+        },
+        {
+          "a": "B",
+          "b": "Cc",
+          "code": 1
+        },
+        {
+          "a": "Cc",
+          "b": "D",
+          "code": 1,
+          "texte": "4 cm"
+        },
+        {
+          "a": "D",
+          "b": "E",
+          "code": 1
+        },
+        {
+          "a": "E",
+          "b": "A",
+          "code": 1
+        }
+      ],
+      "largeur": 160,
+      "hauteurMax": 140
+    }
+  },
+  "cm1/aire": {
+    "0": {
+      "kind": "figure_libre",
+      "size": {
+        "width": 168,
+        "height": 134,
+        "cellSize": 34
+      },
+      "grid": {
+        "rows": 3,
+        "cols": 4,
+        "filledCells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "display": {
+        "showGrid": true,
+        "showFilled": true,
+        "showCellLabels": true,
+        "showPerimeter": false
+      },
+      "colors": {
+        "filled": "#dbeafe"
+      }
+    },
+    "2": {
+      "kind": "quadrilatere",
+      "size": {
+        "width": 260,
+        "height": 190
+      },
+      "points": {
+        "A": {
+          "x": 50,
+          "y": 45
+        },
+        "B": {
+          "x": 210,
+          "y": 45
+        },
+        "C": {
+          "x": 210,
+          "y": 152
+        },
+        "D": {
+          "x": 50,
+          "y": 152
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "sideLabels": {
+        "AB": "3 m",
+        "BC": "2 m"
+      },
+      "display": {
+        "showPoints": false,
+        "showLabels": false,
+        "showSides": true
+      },
+      "marks": {
+        "rightAnglesAt": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    "3": {
+      "kind": "figure_libre",
+      "size": {
+        "width": 168,
+        "height": 168,
+        "cellSize": 34
+      },
+      "grid": {
+        "rows": 4,
+        "cols": 4,
+        "filledCells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ]
+        ]
+      },
+      "display": {
+        "showGrid": true,
+        "showFilled": true,
+        "showPerimeter": true
+      },
+      "colors": {
+        "filled": "#dbeafe",
+        "perimeter": "#dc2626"
+      }
+    },
+    "4": {
+      "kind": "quadrilatere",
+      "size": {
+        "width": 250,
+        "height": 190
+      },
+      "points": {
+        "A": {
+          "x": 45,
+          "y": 45
+        },
+        "B": {
+          "x": 207,
+          "y": 45
+        },
+        "C": {
+          "x": 207,
+          "y": 153
+        },
+        "D": {
+          "x": 45,
+          "y": 153
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "sideLabels": {
+        "AB": "6 cm",
+        "BC": "?"
+      },
+      "display": {
+        "showPoints": false,
+        "showLabels": false,
+        "showSides": true
+      },
+      "marks": {
+        "rightAnglesAt": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    }
+  },
+  "cm1/angle": {
+    "0": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "S",
+          "x": 0,
+          "y": 0,
+          "nom": "sommet",
+          "couleur": "#dc2626"
+        },
+        {
+          "id": "A",
+          "x": 6,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "B",
+          "x": 3.86,
+          "y": 4.6,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "z",
+          "x": -2.5,
+          "y": -0.3,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "segments": [
+        {
+          "a": "S",
+          "b": "A",
+          "couleur": "#2563eb",
+          "epais": true,
+          "texte": "côté"
+        },
+        {
+          "a": "S",
+          "b": "B",
+          "couleur": "#2563eb",
+          "epais": true,
+          "texte": "côté"
+        }
+      ],
+      "angles": [
+        {
+          "sommet": "S",
+          "de": "A",
+          "vers": "B",
+          "rayon": 26
+        }
+      ],
+      "largeur": 200,
+      "hauteurMax": 140
+    },
+    "1": {
+      "kind": "quadrilatere",
+      "size": {
+        "width": 260,
+        "height": 190
+      },
+      "points": {
+        "A": {
+          "x": 59.9,
+          "y": 77.9
+        },
+        "B": {
+          "x": 172.7,
+          "y": 36.9
+        },
+        "C": {
+          "x": 200.1,
+          "y": 112.1
+        },
+        "D": {
+          "x": 87.3,
+          "y": 153.1
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "display": {
+        "showPoints": false,
+        "showLabels": false,
+        "showSides": true
+      },
+      "marks": {
+        "rightAnglesAt": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    "2": {
+      "kind": "deux_angles",
+      "mode": "cote_a_cote",
+      "angles": [
+        {
+          "deg": 30,
+          "nom": "1 h : aigu",
+          "longueur": 95,
+          "rotation": 0
+        },
+        {
+          "deg": 150,
+          "nom": "5 h : obtus",
+          "longueur": 55,
+          "rotation": 0
+        }
+      ]
+    },
+    "4": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "B",
+          "x": 0,
+          "y": 0,
+          "nom": "B"
+        },
+        {
+          "id": "A",
+          "x": 4.5,
+          "y": 3.5,
+          "nom": "A"
+        },
+        {
+          "id": "Cc",
+          "x": 6,
+          "y": 0,
+          "nom": "C"
+        }
+      ],
+      "segments": [
+        {
+          "a": "B",
+          "b": "A"
+        },
+        {
+          "a": "B",
+          "b": "Cc"
+        }
+      ],
+      "angles": [
+        {
+          "sommet": "B",
+          "de": "Cc",
+          "vers": "A",
+          "rayon": 28,
+          "couleur": "#dc2626"
+        }
+      ],
+      "largeur": 180,
+      "hauteurMax": 140
+    },
+    "6": {
+      "kind": "triangle",
+      "size": {
+        "width": 240,
+        "height": 190
+      },
+      "points": {
+        "A": {
+          "x": 55,
+          "y": 35
+        },
+        "B": {
+          "x": 55,
+          "y": 150
+        },
+        "C": {
+          "x": 200,
+          "y": 150
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": ""
+      },
+      "display": {
+        "showPoints": false,
+        "showLabels": false,
+        "showSides": true,
+        "showAngles": false
+      },
+      "marks": {
+        "rightAngleAt": "B"
+      }
+    }
+  },
+  "cm1/reperage": {
+    "1": {
+      "kind": "reperage",
+      "size": {
+        "width": 260,
+        "height": 220
+      },
+      "grid": {
+        "rows": 4,
+        "cols": 5
+      },
+      "points": [
+        {
+          "x": 3,
+          "y": 2,
+          "label": "A",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": true,
+        "showPointLabels": true,
+        "showTarget": false
+      }
+    },
+    "2": {
+      "kind": "reperage",
+      "size": {
+        "width": 320,
+        "height": 230
+      },
+      "grid": {
+        "rows": 4,
+        "cols": 5
+      },
+      "path": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "steps": [
+          {
+            "direction": "droite",
+            "count": 4
+          },
+          {
+            "direction": "haut",
+            "count": 1
+          }
+        ],
+        "showArrows": true,
+        "color": "#2563eb"
+      },
+      "target": {
+        "x": 4,
+        "y": 1,
+        "label": "B",
+        "color": "#dc2626"
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": true,
+        "showPointLabels": true,
+        "showTarget": true
+      }
+    },
+    "3": {
+      "kind": "reperage",
+      "size": {
+        "width": 260,
+        "height": 220
+      },
+      "grid": {
+        "rows": 4,
+        "cols": 6
+      },
+      "path": {
+        "start": {
+          "x": 1,
+          "y": 1
+        },
+        "steps": [
+          {
+            "direction": "droite",
+            "count": 3
+          },
+          {
+            "direction": "haut",
+            "count": 2
+          }
+        ],
+        "showArrows": true,
+        "color": "#2563eb"
+      },
+      "target": {
+        "x": 4,
+        "y": 3,
+        "label": "arrivée",
+        "color": "#dc2626"
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": true,
+        "showPointLabels": true,
+        "showTarget": true
+      }
+    }
+  },
+  "cm1/droite": {
+    "0": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "Cc",
+          "x": 0,
+          "y": 8,
+          "nom": ""
+        },
+        {
+          "id": "z",
+          "x": 9,
+          "y": 8,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "A",
+          "x": 0,
+          "y": 4,
+          "nom": "A"
+        },
+        {
+          "id": "B",
+          "x": 4,
+          "y": 4,
+          "nom": "B"
+        },
+        {
+          "id": "E",
+          "x": 2,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "F",
+          "x": 6,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "segments": [
+        {
+          "a": "Cc",
+          "b": "z",
+          "couleur": "#059669",
+          "epais": true,
+          "texte": "demi-droite"
+        },
+        {
+          "a": "A",
+          "b": "B",
+          "couleur": "#2563eb",
+          "epais": true,
+          "texte": "segment de 4 cm"
+        },
+        {
+          "a": "E",
+          "b": "F",
+          "sansTrait": true,
+          "couleur": "#dc2626",
+          "texte": "droite (d)"
+        }
+      ],
+      "droites": [
+        {
+          "a": "E",
+          "b": "F",
+          "couleur": "#dc2626"
+        }
+      ],
+      "largeur": 240,
+      "hauteurMax": 230
+    },
+    "1": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "P1",
+          "x": 0,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "P2",
+          "x": 6,
+          "y": 2.18,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "Q1",
+          "x": -1.03,
+          "y": 2.82,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "Q2",
+          "x": 4.97,
+          "y": 5,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "e1",
+          "x": 1,
+          "y": 0.364,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "f1",
+          "x": -0.026,
+          "y": 3.183,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "e2",
+          "x": 5,
+          "y": 1.82,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "f2",
+          "x": 3.974,
+          "y": 4.639,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "droites": [
+        {
+          "a": "P1",
+          "b": "P2",
+          "couleur": "#2563eb"
+        },
+        {
+          "a": "Q1",
+          "b": "Q2",
+          "couleur": "#2563eb"
+        }
+      ],
+      "segments": [
+        {
+          "a": "e1",
+          "b": "f1",
+          "pointille": true,
+          "couleur": "#dc2626",
+          "texte": "3 cm"
+        },
+        {
+          "a": "e2",
+          "b": "f2",
+          "pointille": true,
+          "couleur": "#dc2626",
+          "texte": "3 cm"
+        }
+      ],
+      "angles": [
+        {
+          "sommet": "e1",
+          "de": "P2",
+          "vers": "f1",
+          "droit": true,
+          "couleur": "#dc2626"
+        },
+        {
+          "sommet": "e2",
+          "de": "P2",
+          "vers": "f2",
+          "droit": true,
+          "couleur": "#dc2626"
+        }
+      ],
+      "largeur": 200,
+      "hauteurMax": 140
+    },
+    "2": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "O",
+          "x": 0,
+          "y": 0,
+          "nom": ""
+        },
+        {
+          "id": "A",
+          "x": 3.76,
+          "y": 1.37,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "B",
+          "x": -3.76,
+          "y": -1.37,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "Cc",
+          "x": -1.37,
+          "y": 3.76,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "D",
+          "x": 1.37,
+          "y": -3.76,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "droites": [
+        {
+          "a": "B",
+          "b": "A",
+          "couleur": "#2563eb"
+        },
+        {
+          "a": "D",
+          "b": "Cc",
+          "couleur": "#059669"
+        }
+      ],
+      "angles": [
+        {
+          "sommet": "O",
+          "de": "A",
+          "vers": "Cc",
+          "droit": true
+        },
+        {
+          "sommet": "O",
+          "de": "Cc",
+          "vers": "B",
+          "droit": true
+        },
+        {
+          "sommet": "O",
+          "de": "B",
+          "vers": "D",
+          "droit": true
+        },
+        {
+          "sommet": "O",
+          "de": "D",
+          "vers": "A",
+          "droit": true
+        }
+      ],
+      "largeur": 160,
+      "hauteurMax": 140
+    },
+    "3": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "P",
+          "x": 0,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "Q",
+          "x": 8,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "H1",
+          "x": 1.5,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "H2",
+          "x": 6.5,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "M",
+          "x": 1.5,
+          "y": 2,
+          "nom": "M"
+        },
+        {
+          "id": "N",
+          "x": 6.5,
+          "y": 2,
+          "nom": "N"
+        },
+        {
+          "id": "t1",
+          "x": 3,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "t2",
+          "x": 5,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "droites": [
+        {
+          "a": "P",
+          "b": "Q",
+          "couleur": "#0f172a"
+        },
+        {
+          "a": "M",
+          "b": "N",
+          "couleur": "#2563eb"
+        }
+      ],
+      "segments": [
+        {
+          "a": "H1",
+          "b": "M",
+          "pointille": true,
+          "couleur": "#dc2626",
+          "texte": "2 cm"
+        },
+        {
+          "a": "H2",
+          "b": "N",
+          "pointille": true,
+          "couleur": "#dc2626",
+          "texte": "2 cm"
+        },
+        {
+          "a": "t1",
+          "b": "t2",
+          "sansTrait": true,
+          "texte": "(d)"
+        }
+      ],
+      "angles": [
+        {
+          "sommet": "H1",
+          "de": "Q",
+          "vers": "M",
+          "droit": true,
+          "couleur": "#dc2626"
+        },
+        {
+          "sommet": "H2",
+          "de": "Q",
+          "vers": "N",
+          "droit": true,
+          "couleur": "#dc2626"
+        }
+      ],
+      "largeur": 210,
+      "hauteurMax": 140
+    }
+  },
+  "cm1/symetrie": {
+    "0": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "A",
+          "x": 0,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "B",
+          "x": 6,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "Cc",
+          "x": 6,
+          "y": 4,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "D",
+          "x": 0,
+          "y": 4,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "m1",
+          "x": 3,
+          "y": -0.8,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "m2",
+          "x": 3,
+          "y": 4.8,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "n1",
+          "x": -0.8,
+          "y": 2,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "n2",
+          "x": 6.8,
+          "y": 2,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "polygones": [
+        {
+          "sommets": [
+            "A",
+            "B",
+            "Cc",
+            "D"
+          ],
+          "fond": "rgba(37,99,235,0.12)",
+          "contour": "#2563eb"
+        }
+      ],
+      "segments": [
+        {
+          "a": "m1",
+          "b": "m2",
+          "couleur": "#dc2626",
+          "pointille": true,
+          "epais": true
+        },
+        {
+          "a": "n1",
+          "b": "n2",
+          "couleur": "#dc2626",
+          "pointille": true,
+          "epais": true
+        }
+      ],
+      "largeur": 200,
+      "hauteurMax": 140
+    },
+    "1": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "P1",
+          "x": 2,
+          "y": 4,
+          "nom": ""
+        },
+        {
+          "id": "P2",
+          "x": 4,
+          "y": 4,
+          "nom": ""
+        },
+        {
+          "id": "P3",
+          "x": 4,
+          "y": 1,
+          "nom": ""
+        },
+        {
+          "id": "Q1",
+          "x": 8,
+          "y": 4,
+          "nom": ""
+        },
+        {
+          "id": "Q2",
+          "x": 6,
+          "y": 4,
+          "nom": ""
+        },
+        {
+          "id": "Q3",
+          "x": 6,
+          "y": 1,
+          "nom": ""
+        },
+        {
+          "id": "M",
+          "x": 5,
+          "y": 4,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "H",
+          "x": 5,
+          "y": 4.8,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "K",
+          "x": 5,
+          "y": 0.4,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "polygones": [
+        {
+          "sommets": [
+            "P1",
+            "P2",
+            "P3"
+          ],
+          "fond": "rgba(37,99,235,0.18)",
+          "contour": "#2563eb"
+        },
+        {
+          "sommets": [
+            "Q1",
+            "Q2",
+            "Q3"
+          ],
+          "fond": "rgba(220,38,38,0.15)",
+          "contour": "#dc2626"
+        }
+      ],
+      "segments": [
+        {
+          "a": "H",
+          "b": "K",
+          "couleur": "#059669",
+          "pointille": true,
+          "epais": true
+        },
+        {
+          "a": "P1",
+          "b": "M",
+          "pointille": true,
+          "couleur": "#64748b",
+          "texte": "3 carreaux"
+        },
+        {
+          "a": "M",
+          "b": "Q1",
+          "pointille": true,
+          "couleur": "#64748b",
+          "texte": "3 carreaux"
+        }
+      ],
+      "largeur": 260,
+      "hauteurMax": 210
+    },
+    "2": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "A",
+          "x": -2,
+          "y": 0,
+          "nom": "A",
+          "couleur": "#2563eb"
+        },
+        {
+          "id": "H",
+          "x": 0,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "A2",
+          "x": 2,
+          "y": 0,
+          "nom": "A’",
+          "couleur": "#dc2626"
+        },
+        {
+          "id": "h1",
+          "x": 0,
+          "y": -1.6,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "h2",
+          "x": 0,
+          "y": 1.6,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "t1",
+          "x": 0.15,
+          "y": 1.2,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "t2",
+          "x": 0.15,
+          "y": 1.6,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "segments": [
+        {
+          "a": "A",
+          "b": "H",
+          "code": 1,
+          "texte": "2 cm"
+        },
+        {
+          "a": "H",
+          "b": "A2",
+          "code": 1,
+          "texte": "2 cm"
+        },
+        {
+          "a": "t1",
+          "b": "t2",
+          "sansTrait": true,
+          "texte": "(d)"
+        }
+      ],
+      "droites": [
+        {
+          "a": "h1",
+          "b": "h2",
+          "couleur": "#059669"
+        }
+      ],
+      "angles": [
+        {
+          "sommet": "H",
+          "de": "A2",
+          "vers": "h2",
+          "droit": true
+        }
+      ],
+      "largeur": 190,
+      "hauteurMax": 130
+    }
+  },
+  "cm1/figure_plane": {
+    "2": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "O",
+          "x": 0,
+          "y": 0,
+          "nom": "O"
+        },
+        {
+          "id": "B",
+          "x": -3,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "Cc",
+          "x": 3,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "A",
+          "x": 1.5,
+          "y": 2.6,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "t1",
+          "x": -2,
+          "y": -1.6,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "t2",
+          "x": 2,
+          "y": -1.6,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "segments": [
+        {
+          "a": "B",
+          "b": "Cc",
+          "couleur": "#2563eb",
+          "epais": true
+        },
+        {
+          "a": "t2",
+          "b": "t1",
+          "sansTrait": true,
+          "couleur": "#2563eb",
+          "texte": "diamètre 6 cm"
+        },
+        {
+          "a": "O",
+          "b": "A",
+          "couleur": "#dc2626",
+          "epais": true,
+          "texte": "3 cm"
+        }
+      ],
+      "cercles": [
+        {
+          "centre": "O",
+          "rayon": 3
+        }
+      ],
+      "largeur": 200,
+      "hauteurMax": 200
+    },
+    "5": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "A",
+          "x": 0,
+          "y": 3.46,
+          "nom": "A"
+        },
+        {
+          "id": "B",
+          "x": -2,
+          "y": 0,
+          "nom": "B"
+        },
+        {
+          "id": "Cc",
+          "x": 2,
+          "y": 0,
+          "nom": "C"
+        }
+      ],
+      "polygones": [
+        {
+          "sommets": [
+            "A",
+            "B",
+            "Cc"
+          ],
+          "fond": "rgba(37,99,235,0.1)"
+        }
+      ],
+      "segments": [
+        {
+          "a": "A",
+          "b": "B",
+          "code": 1,
+          "texte": "4 cm"
+        },
+        {
+          "a": "A",
+          "b": "Cc",
+          "code": 1
+        },
+        {
+          "a": "B",
+          "b": "Cc"
+        }
+      ],
+      "largeur": 160,
+      "hauteurMax": 150
+    },
+    "6": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "O",
+          "x": 0,
+          "y": 0,
+          "nom": "O"
+        },
+        {
+          "id": "M",
+          "x": 2,
+          "y": 0,
+          "nom": "M",
+          "couleur": "#059669"
+        },
+        {
+          "id": "N",
+          "x": -1.29,
+          "y": 1.53,
+          "nom": "N",
+          "couleur": "#059669"
+        },
+        {
+          "id": "P",
+          "x": -1.5,
+          "y": -2.6,
+          "nom": "P",
+          "couleur": "#dc2626"
+        }
+      ],
+      "segments": [
+        {
+          "a": "O",
+          "b": "M",
+          "code": 1,
+          "couleur": "#059669",
+          "texte": "2 cm"
+        },
+        {
+          "a": "O",
+          "b": "N",
+          "code": 1,
+          "couleur": "#059669"
+        },
+        {
+          "a": "O",
+          "b": "P",
+          "pointille": true,
+          "couleur": "#dc2626",
+          "texte": "3 cm"
+        }
+      ],
+      "cercles": [
+        {
+          "centre": "O",
+          "rayon": 2,
+          "couleur": "#2563eb"
+        }
+      ],
+      "largeur": 170,
+      "hauteurMax": 180
+    }
+  },
+  "cm1/solide": {
+    "1": {
+      "kind": "solide_3d",
+      "solide": "cube",
+      "display": {
+        "showLabels": false,
+        "showDimensions": false
+      }
+    },
+    "3": {
+      "kind": "patrons_cube",
+      "patrons": [
+        {
+          "cases": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    "4": {
+      "kind": "solide_3d",
+      "solide": "prisme",
+      "display": {
+        "showLabels": false,
+        "showDimensions": false
+      }
+    }
+  },
+  "cm1/tableau": {
+    "0": {
+      "kind": "tableau_donnees",
+      "coin": "",
+      "headers": [
+        "mai",
+        "juin"
+      ],
+      "rows": [
+        {
+          "label": "Léa",
+          "values": [
+            4,
+            6
+          ]
+        },
+        {
+          "label": "Hugo",
+          "values": [
+            3,
+            5
+          ]
+        }
+      ],
+      "highlight": {
+        "cell": {
+          "row": 0,
+          "col": 0
+        }
+      },
+      "display": {}
+    },
+    "1": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "lundi",
+        "mardi",
+        "total"
+      ],
+      "rows": [
+        {
+          "values": [
+            "8 kg",
+            "?",
+            "20 kg"
+          ]
+        }
+      ],
+      "highlight": {
+        "col": 1
+      },
+      "display": {}
+    },
+    "3": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "enfant",
+        "adulte"
+      ],
+      "rows": [
+        {
+          "values": [
+            "3 €",
+            "5 €"
+          ]
+        }
+      ],
+      "display": {}
+    }
+  },
+  "cm1/graphique": {
+    "0": {
+      "kind": "stat_graph",
+      "graphType": "barres",
+      "data": [
+        {
+          "label": "chats",
+          "value": 14
+        },
+        {
+          "label": "chiens",
+          "value": 10
+        },
+        {
+          "label": "poissons",
+          "value": 6
+        }
+      ],
+      "display": {
+        "showValues": false,
+        "showLabels": true,
+        "showAxis": true,
+        "step": 2,
+        "axeY": "élèves",
+        "highlightIndex": 0
+      },
+      "size": {
+        "width": 280,
+        "height": 170
+      }
+    },
+    "3": {
+      "kind": "stat_graph",
+      "graphType": "courbe",
+      "data": [
+        {
+          "label": "8 h",
+          "value": 18
+        },
+        {
+          "label": "10 h",
+          "value": 21
+        },
+        {
+          "label": "12 h",
+          "value": 24
+        },
+        {
+          "label": "14 h",
+          "value": 26
+        },
+        {
+          "label": "16 h",
+          "value": 23
+        }
+      ],
+      "display": {
+        "showValues": false,
+        "showLabels": true,
+        "showAxis": true,
+        "step": 5,
+        "axeY": "°C",
+        "highlightIndex": 3
+      },
+      "size": {
+        "width": 240,
+        "height": 170
+      }
+    },
+    "4": {
+      "kind": "fonctionGraphique",
+      "size": {
+        "width": 230,
+        "height": 190
+      },
+      "xmin": 7,
+      "xmax": 12,
+      "ymin": 120,
+      "ymax": 150,
+      "grille": true,
+      "points": [
+        {
+          "x": 8,
+          "y": 128,
+          "couleur": "#2563eb"
+        },
+        {
+          "x": 9,
+          "y": 133,
+          "couleur": "#2563eb"
+        },
+        {
+          "x": 10,
+          "y": 140,
+          "label": "Tom",
+          "couleur": "#dc2626"
+        },
+        {
+          "x": 11,
+          "y": 145,
+          "couleur": "#2563eb"
+        }
+      ],
+      "misesEnEvidence": [
+        {
+          "verticale": {
+            "x": 10,
+            "couleur": "#dc2626"
+          },
+          "horizontale": {
+            "y": 140,
+            "couleur": "#dc2626"
+          }
+        }
+      ]
+    }
+  },
+  "cm1/probabilite": {
+    "3": {
+      "kind": "probabilites",
+      "variant": "roue",
+      "roue": {
+        "segments": [
+          {
+            "label": "",
+            "poids": 1,
+            "couleur": "#facc15"
+          },
+          {
+            "label": "",
+            "poids": 1,
+            "couleur": "#93c5fd"
+          },
+          {
+            "label": "",
+            "poids": 1,
+            "couleur": "#93c5fd"
+          },
+          {
+            "label": "",
+            "poids": 1,
+            "couleur": "#facc15"
+          },
+          {
+            "label": "",
+            "poids": 1,
+            "couleur": "#93c5fd"
+          },
+          {
+            "label": "",
+            "poids": 1,
+            "couleur": "#93c5fd"
+          },
+          {
+            "label": "",
+            "poids": 1,
+            "couleur": "#facc15"
+          },
+          {
+            "label": "",
+            "poids": 1,
+            "couleur": "#93c5fd"
+          }
+        ]
+      }
+    },
+    "4": {
+      "kind": "tableau_donnees",
+      "coin": "",
+      "headers": [
+        "P",
+        "F"
+      ],
+      "rows": [
+        {
+          "label": "P",
+          "values": [
+            "PP",
+            "PF"
+          ]
+        },
+        {
+          "label": "F",
+          "values": [
+            "FP",
+            "FF"
+          ]
+        }
+      ],
+      "highlight": {
+        "cell": {
+          "row": 0,
+          "col": 1
+        }
+      },
+      "display": {}
+    },
+    "5": {
+      "kind": "probabilites",
+      "variant": "billes",
+      "billes": {
+        "elements": [
+          {
+            "couleur": "#22c55e"
+          },
+          {
+            "couleur": "#22c55e"
+          },
+          {
+            "couleur": "#3b82f6"
+          },
+          {
+            "couleur": "#3b82f6"
+          },
+          {
+            "couleur": "#3b82f6"
+          },
+          {
+            "couleur": "#3b82f6"
+          },
+          {
+            "couleur": "#3b82f6"
+          }
+        ]
+      }
+    }
+  },
+  "cm1/algorithmique": {
+    "2": {
+      "kind": "reperage",
+      "grid": {
+        "rows": 4,
+        "cols": 5
+      },
+      "path": {
+        "start": {
+          "x": 1,
+          "y": 1
+        },
+        "steps": [
+          {
+            "direction": "droite",
+            "count": 3
+          },
+          {
+            "direction": "haut",
+            "count": 2
+          }
+        ],
+        "showArrows": true,
+        "color": "#7c3aed"
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": false,
+        "showPointLabels": false
+      },
+      "size": {
+        "width": 300,
+        "height": 220
+      }
+    },
+    "3": {
+      "kind": "scratch",
+      "blocks": [
+        {
+          "type": "move",
+          "value": 50
+        },
+        {
+          "type": "turn",
+          "value": 90,
+          "text": "tourner à droite de 90°"
+        },
+        {
+          "type": "move",
+          "value": 50
+        }
+      ],
+      "display": {
+        "compact": true
+      }
+    },
+    "4": {
+      "kind": "scratch",
+      "blocks": [
+        {
+          "type": "repeat",
+          "times": 4,
+          "children": [
+            {
+              "type": "move",
+              "value": 100
+            },
+            {
+              "type": "turn",
+              "value": 90
+            }
+          ]
+        }
+      ],
+      "display": {
+        "compact": true
+      }
+    }
+  },
+  "cm1/trier_classer": {
+    "2": {
+      "kind": "arbre_tri",
+      "racine": {
+        "question": "pair ?",
+        "oui": {
+          "question": "plus de 10 ?",
+          "oui": {
+            "feuille": "A"
+          },
+          "non": {
+            "feuille": "B"
+          }
+        },
+        "non": {
+          "question": "plus de 10 ?",
+          "oui": {
+            "feuille": "C"
+          },
+          "non": {
+            "feuille": "D"
+          }
+        }
+      }
+    }
+  }
+}

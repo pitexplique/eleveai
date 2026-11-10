@@ -1,0 +1,963 @@
+{
+  "cm1/nombre_entier": [
+    {
+      "regle": "On sépare les chiffres par paquets de 3 depuis la droite.",
+      "exemple": "45 207 se lit : quarante-cinq mille deux cent sept.",
+      "piege": "« trois mille huit » s’écrit 3 008, pas 38."
+    },
+    {
+      "regle": "Plus de chiffres, plus grand. Sinon, on compare chiffre par chiffre depuis la gauche.",
+      "exemple": "12 050 > 9 800. Et 4 732 < 4 750 : 3 dizaines < 5 dizaines.",
+      "piege": "9 800 < 12 050, même si 9 > 1 : 12 050 a plus de chiffres."
+    },
+    {
+      "regle": "Chaque chiffre a une valeur selon sa place.",
+      "exemple": "5 306 = 5 000 + 300 + 6. C’est 5 milliers, 3 centaines et 6 unités.",
+      "piege": "5 306 n’a pas de dizaine : ce n’est pas 5 000 + 30 + 6."
+    },
+    {
+      "regle": "On remplace le nombre par le nombre rond le plus proche.",
+      "exemple": "À la dizaine : 47 → 50 et 43 → 40.",
+      "piege": "47 s’arrondit à 50, pas à 40 : 47 est plus près de 50."
+    },
+    {
+      "regle": "Un multiple de 4 est un résultat de la table de 4.",
+      "exemple": "4, 8, 12, 16, 20… sont des multiples de 4. 28 = 4 × 7.",
+      "piege": "14 n’est pas un multiple de 4 : 4 × 3 = 12 et 4 × 4 = 16."
+    },
+    {
+      "regle": "Défi : trouver le chiffre de chaque rang, un par un.",
+      "exemple": "Je suis entre 30 et 40. Mon chiffre des unités est 5. Je suis 35.",
+      "piege": "Ce n’est pas 53 : 53 n’est pas entre 30 et 40."
+    },
+    {
+      "regle": "On regarde combien vaut un petit trait, puis on compte les traits.",
+      "exemple": "De 200 à 300, un petit trait vaut 10. 260 est au 6e trait.",
+      "piege": "Un petit trait ne vaut pas toujours 1 : ici, il vaut 10."
+    },
+    {
+      "regle": "3 est un diviseur de 12 si 12 ÷ 3 tombe juste, sans reste.",
+      "exemple": "12 ÷ 3 = 4, sans reste : 3 est un diviseur de 12.",
+      "piege": "5 n’est pas un diviseur de 12 : 5 × 2 = 10 et 5 × 3 = 15."
+    },
+    {
+      "regle": "Encadrer : un nombre rond juste avant, un juste après.",
+      "exemple": "À la centaine : 600 < 648 < 700. Entre 15 et 18, on peut mettre 16.",
+      "piege": "Encadrer 648 à la centaine : 600 et 700, pas 640 et 650."
+    }
+  ],
+  "cm1/suite": [
+    {
+      "regle": "On trouve ce qu’on ajoute à chaque pas, puis on continue.",
+      "exemple": "5, 10, 15, 20… : on ajoute 5. Ensuite viennent 25 et 30.",
+      "piege": "Après 20 vient 25, pas 21 : on ajoute 5, pas 1."
+    },
+    {
+      "regle": "On calcule l’écart entre deux nombres qui se suivent.",
+      "exemple": "3, 7, 11, 15 : 7 − 3 = 4 et 11 − 7 = 4. La règle : « + 4 ».",
+      "piege": "La règle n’est pas « + 3 » parce que la suite commence par 3."
+    },
+    {
+      "regle": "Croissante : les nombres montent. Décroissante : ils descendent.",
+      "exemple": "2, 4, 6, 8 monte : croissante. 50, 40, 30 descend : décroissante.",
+      "piege": "100, 90, 80 est décroissante, même si 100 est un grand nombre."
+    },
+    {
+      "regle": "Défi : écrire la suite pas à pas, sans sauter de nombre.",
+      "exemple": "Inès a 6 €. Elle range 3 € par semaine. Après 3 semaines : 9, 12, 15 €.",
+      "piege": "Ce n’est pas 6 + 3 = 9 € : elle ajoute 3 € TROIS fois, donc 15 €."
+    }
+  ],
+  "cm1/tables_multiplication": [
+    {
+      "regle": "Table de 2 : on compte de 2 en 2. C’est le double.",
+      "exemple": "2 × 7 = 14 : c’est le double de 7. 2 × 9 = 18.",
+      "piege": "2 × 7 = 14, pas 9 : on ne fait pas 2 + 7."
+    },
+    {
+      "regle": "Table de 3 : on compte de 3 en 3.",
+      "exemple": "Un tricycle a 3 roues. 8 tricycles : 3 × 8 = 24 roues.",
+      "piege": "3 × 7 = 21, pas 27 : 27, c’est 3 × 9."
+    },
+    {
+      "regle": "Table de 4 : c’est le double du double.",
+      "exemple": "4 × 6 : le double de 6 = 12, le double de 12 = 24.",
+      "piege": "4 × 7 = 28, pas 24 : 24, c’est 4 × 6."
+    },
+    {
+      "regle": "Table de 5 : le résultat finit toujours par 0 ou par 5.",
+      "exemple": "8 mains de 5 doigts : 5 × 8 = 40 doigts. 5 × 7 = 35.",
+      "piege": "5 × 9 = 45, pas 54 : 54 ne finit ni par 0 ni par 5."
+    },
+    {
+      "regle": "Table de 6 : c’est le double de la table de 3.",
+      "exemple": "6 × 7 : 3 × 7 = 21, puis 21 + 21 = 42.",
+      "piege": "6 × 7 = 42, pas 36 : 36, c’est 6 × 6."
+    },
+    {
+      "regle": "Table de 7 : 7, 14, 21, 28, 35, 42, 49, 56, 63, 70.",
+      "exemple": "7 jours par semaine. 4 semaines : 7 × 4 = 28 jours.",
+      "piege": "7 × 8 = 56, pas 54 : 54, c’est 6 × 9."
+    },
+    {
+      "regle": "Table de 8 : c’est le double de la table de 4.",
+      "exemple": "8 × 6 : 4 × 6 = 24, puis 24 + 24 = 48.",
+      "piege": "8 × 7 = 56, pas 64 : 64, c’est 8 × 8."
+    },
+    {
+      "regle": "Table de 9 : 10 fois le nombre, moins une fois le nombre.",
+      "exemple": "9 × 6 = 10 × 6 − 6 = 60 − 6 = 54.",
+      "piege": "9 × 7 = 63, pas 72 : 72, c’est 9 × 8."
+    },
+    {
+      "regle": "Fois 10 : chaque unité devient une dizaine.",
+      "exemple": "10 × 7 = 70 : 7 unités deviennent 7 dizaines. 10 × 12 = 120.",
+      "piege": "10 × 12 = 120, pas 1 012 : on ne colle pas 10 devant 12."
+    },
+    {
+      "regle": "Un résultat oublié ? On part d’un résultat qu’on connaît.",
+      "exemple": "7 × 8 ? Je sais 7 × 7 = 49. Puis 49 + 7 = 56.",
+      "piege": "On mélange souvent : 7 × 8 = 56 et 6 × 9 = 54."
+    },
+    {
+      "regle": "On cherche dans la table le nombre qui manque.",
+      "exemple": "6 × … = 42. Dans la table de 6 : 6 × 7 = 42. Il manque 7.",
+      "piege": "Ce n’est pas 42 − 6 = 36 : on cherche 6 × 7 = 42, donc 7."
+    },
+    {
+      "regle": "Défi : faire un dessin en rangées avant de calculer.",
+      "exemple": "Un verger a 6 rangées de 8 arbres : 6 × 8 = 48 arbres.",
+      "piege": "Ce n’est pas 6 + 8 = 14 : il y a 6 FOIS 8 arbres."
+    }
+  ],
+  "cm1/multiplication": [
+    {
+      "regle": "On coupe le nombre en dizaines et unités. On multiplie chaque morceau.",
+      "exemple": "4 × 23 = 4 × 20 + 4 × 3 = 80 + 12 = 92.",
+      "piege": "4 × 23 = 92, pas 83 : on multiplie aussi le 3, pas seulement le 20."
+    },
+    {
+      "regle": "On multiplie chaque chiffre, unités d’abord. On ajoute la retenue.",
+      "exemple": "324 × 3 : 3 × 4 = 12, je pose 2, je retiens 1. Résultat : 972.",
+      "piege": "Oublier la retenue donne 962 au lieu de 972."
+    },
+    {
+      "regle": "Fois 10 : chaque chiffre avance d’une place à gauche. Fois 100 : de deux.",
+      "exemple": "45 × 10 = 450 ; 45 × 100 = 4 500 ; 45 × 1 000 = 45 000.",
+      "piege": "45 × 100 = 4 500, pas 450 : fois 100, on avance de deux places."
+    },
+    {
+      "regle": "Plusieurs fois la même quantité : on multiplie.",
+      "exemple": "Un billet de cinéma coûte 7 €. 4 billets : 7 × 4 = 28 €.",
+      "piege": "Ce n’est pas 7 + 4 = 11 € : on paie 4 FOIS 7 €."
+    },
+    {
+      "regle": "On multiplie sans la virgule. Puis on remet autant de chiffres après la virgule.",
+      "exemple": "3 cahiers à 2,35 € : 235 × 3 = 705, donc 2,35 × 3 = 7,05 €.",
+      "piege": "2,35 × 3 = 7,05, pas 705 : on remet 2 chiffres après la virgule."
+    },
+    {
+      "regle": "Défi : découper le problème en deux calculs.",
+      "exemple": "2 salles de 6 rangs de 10 chaises : 6 × 10 = 60, puis 60 × 2 = 120.",
+      "piege": "Ce n’est pas 60 chaises : il y a 2 salles, donc 120 chaises."
+    }
+  ],
+  "cm1/division": [
+    {
+      "regle": "Diviser, c’est partager en parts égales.",
+      "exemple": "12 billes pour 3 enfants : 12 ÷ 3 = 4 billes chacun.",
+      "piege": "12 ÷ 3 = 4, pas 9 : on partage, on n’enlève pas 3."
+    },
+    {
+      "regle": "Une multiplication donne deux divisions.",
+      "exemple": "6 × 7 = 42, donc 42 ÷ 6 = 7 et 42 ÷ 7 = 6.",
+      "piege": "42 ÷ 6 = 7, pas 36 : on cherche 6 × 7 = 42."
+    },
+    {
+      "regle": "On partage chiffre par chiffre, en commençant par la gauche.",
+      "exemple": "96 ÷ 4 : 9 ÷ 4 = 2, reste 1. Puis 16 ÷ 4 = 4. Donc 96 ÷ 4 = 24.",
+      "piege": "96 ÷ 4 = 24, pas 21 : le reste 1 va avec le 6, ça fait 16."
+    },
+    {
+      "regle": "Le reste, c’est ce qui ne fait pas une part entière. Il faut parfois une part de plus.",
+      "exemple": "29 élèves, tables de 4 : 29 ÷ 4 = 7, reste 1. Il faut 8 tables.",
+      "piege": "7 tables ne suffisent pas : 1 élève resterait debout. Il en faut 8."
+    },
+    {
+      "regle": "Partager en parts égales ou faire des paquets égaux : on divise.",
+      "exemple": "Un ruban de 45 cm coupé en 5 morceaux égaux : 45 ÷ 5 = 9 cm.",
+      "piege": "Pas 45 × 5 = 225 cm : partager donne des morceaux plus petits."
+    },
+    {
+      "regle": "Défi : vérifier le résultat avec une multiplication.",
+      "exemple": "60 € partagés entre 4 amis : 60 ÷ 4 = 15 €. Vérif : 15 × 4 = 60.",
+      "piege": "Ce n’est pas 14 € : 14 × 4 = 56, il resterait 4 €."
+    }
+  ],
+  "cm1/fraction": [
+    {
+      "regle": "Le nombre du bas : en combien de parts. Le nombre du haut : combien on en prend.",
+      "exemple": "3/4 se lit « trois quarts ». 1/3 se lit « un tiers ».",
+      "piege": "1/4 se lit « un quart », pas « un sur quatre » ni « un quatre »."
+    },
+    {
+      "regle": "On partage en parts égales et on en colorie.",
+      "exemple": "2/3 d’une tablette : 3 parts égales, on en colorie 2.",
+      "piege": "2 parts coloriées et 1 blanche : c’est 2/3, pas 2/1."
+    },
+    {
+      "regle": "Une fraction est une part d’un tout. Ce tout s’appelle l’unité.",
+      "exemple": "La bande unité mesure 12 cm. 1/4 de la bande mesure 3 cm.",
+      "piege": "1/4 de 12 cm, c’est 3 cm, pas 4 cm : on coupe le tout en 4."
+    },
+    {
+      "regle": "Si le haut est plus grand que le bas, la fraction dépasse 1.",
+      "exemple": "5/4 = 4/4 + 1/4 = 1 + 1/4 : une pizza et un quart.",
+      "piege": "5/4 n’est pas plus petit que 1 : 4/4 font déjà 1."
+    },
+    {
+      "regle": "On coupe l’unité en parts égales, puis on compte les parts.",
+      "exemple": "3/4 : de 0 à 1, on coupe en 4 parts et on avance de 3 parts.",
+      "piege": "3/4 est entre 0 et 1, pas sur le nombre 3."
+    },
+    {
+      "regle": "Même nombre en bas : la plus grande a le plus grand nombre en haut.",
+      "exemple": "3/5 > 2/5. Et 1/2 > 1/4 : une moitié est plus grosse qu’un quart.",
+      "piege": "1/4 n’est pas plus grand que 1/2 : en 4 parts, chaque part est plus petite."
+    },
+    {
+      "regle": "Deux fractions égales montrent la même part, coupée autrement.",
+      "exemple": "1/2 = 2/4 : 1 part sur 2, ou 2 parts sur 4, c’est pareil.",
+      "piege": "2/4 n’est pas plus grand que 1/2 : c’est la même quantité."
+    },
+    {
+      "regle": "Une fraction décimale a 10 ou 100 en bas.",
+      "exemple": "3/10 : trois dixièmes. 45/100 : quarante-cinq centièmes.",
+      "piege": "3/4 n’est pas une fraction décimale : en bas, il y a 4, pas 10 ni 100."
+    },
+    {
+      "regle": "Même nombre en bas : on ajoute les nombres du haut. Le bas ne change pas.",
+      "exemple": "2/5 + 1/5 = 3/5. Et 7/8 − 3/8 = 4/8.",
+      "piege": "2/5 + 1/5 = 3/5, pas 3/10 : on n’ajoute pas les nombres du bas."
+    },
+    {
+      "regle": "1 entier, c’est 4/4 quand on coupe en quarts.",
+      "exemple": "Hugo boit 1 bouteille et 3/4 : 1 + 3/4 = 4/4 + 3/4 = 7/4.",
+      "piege": "1 + 3/4 n’est pas 4/4 : 1 entier vaut 4 quarts, donc 7/4."
+    },
+    {
+      "regle": "Défi : dessiner le tout, puis le couper en parts égales.",
+      "exemple": "Un gâteau en 8 parts. Zoé en mange 3. Il reste 8/8 − 3/8 = 5/8.",
+      "piege": "Il reste 5/8, pas 3/8 : 3/8, c’est la part mangée."
+    }
+  ],
+  "cm1/nombre_decimal": [
+    {
+      "regle": "La virgule sépare les unités des dixièmes et des centièmes.",
+      "exemple": "3,25 se lit : trois unités et vingt-cinq centièmes.",
+      "piege": "« deux unités et sept centièmes » s’écrit 2,07, pas 2,7."
+    },
+    {
+      "regle": "Un dixième, c’est 1/10 = 0,1. Un centième, c’est 1/100 = 0,01.",
+      "exemple": "7/10 = 0,7 et 45/100 = 0,45.",
+      "piege": "3/100 s’écrit 0,03, pas 0,3 : 0,3, c’est 3/10."
+    },
+    {
+      "regle": "Après la virgule : 1er chiffre = dixièmes, 2e chiffre = centièmes.",
+      "exemple": "Dans 4,56 : le 5 vaut 5 dixièmes, le 6 vaut 6 centièmes.",
+      "piege": "Dans 4,56, le 6 vaut 0,06, pas 6 unités."
+    },
+    {
+      "regle": "On compare les unités, puis les dixièmes, puis les centièmes.",
+      "exemple": "2,7 > 2,65 : mêmes unités, et 7 dixièmes > 6 dixièmes.",
+      "piege": "2,65 n’est pas plus grand que 2,7 : on ne compare pas 65 et 7."
+    },
+    {
+      "regle": "Pour ranger, on compare les nombres deux par deux, chiffre par chiffre.",
+      "exemple": "Du plus petit au plus grand : 1,5 < 1,52 < 1,8 < 2,1.",
+      "piege": "1,8 se range après 1,52, même si 52 > 8 : 8 dixièmes > 5 dixièmes."
+    },
+    {
+      "regle": "Entre 0 et 1, il y a 10 petits traits : chacun vaut 0,1.",
+      "exemple": "0,7 : on part de 0 et on avance de 7 petits traits.",
+      "piege": "0,7 n’est pas sur le 7 : un petit trait vaut 0,1, pas 1."
+    },
+    {
+      "regle": "On regarde les dixièmes : 5 ou plus, on monte à l’unité au-dessus.",
+      "exemple": "3,6 arrondi à l’unité → 4. Et 3,4 → 3.",
+      "piege": "3,5 arrondi à l’unité donne 4, pas 3."
+    },
+    {
+      "regle": "On sépare les unités, les dixièmes et les centièmes.",
+      "exemple": "2,35 = 2 + 3/10 + 5/100.",
+      "piege": "2,35 n’est pas 2 + 35/10 : c’est 2 + 35/100."
+    },
+    {
+      "regle": "On écrit les fractions en centièmes pour les comparer.",
+      "exemple": "3/10 = 30/100 et 4/10 = 40/100, donc 3/10 < 35/100 < 4/10.",
+      "piege": "35/100 n’est pas plus grand que 4/10, même si 35 > 4 : 4/10 = 40/100."
+    },
+    {
+      "regle": "× 10 : chaque chiffre vaut 10 fois plus. ÷ 10 : 10 fois moins.",
+      "exemple": "2,5 × 10 = 25 ; 2,5 × 100 = 250 ; 36 ÷ 10 = 3,6.",
+      "piege": "2,5 × 10 = 25, pas 2,50 : on n’ajoute pas un zéro."
+    },
+    {
+      "regle": "On ajoute les dixièmes aux dixièmes, les centièmes aux centièmes.",
+      "exemple": "1,4 + 3 dixièmes = 1,7 ; 2,58 − 5 centièmes = 2,53.",
+      "piege": "1,9 + 1 dixième = 2, pas 1,10 : 10 dixièmes font 1 unité."
+    },
+    {
+      "regle": "Défi : écrire les prix avec leurs centimes, puis aligner les virgules.",
+      "exemple": "Léo a 5 €. Gomme 1,50 € + stylo 2,35 € = 3,85 € : il peut payer.",
+      "piege": "1,5 + 2,35 n’est pas 2,50 : on aligne les virgules → 3,85."
+    }
+  ],
+  "cm1/calcul": [
+    {
+      "regle": "On découpe un nombre pour calculer de tête.",
+      "exemple": "47 + 25 = 47 + 20 + 5 = 67 + 5 = 72.",
+      "piege": "47 + 25 = 72, pas 62 : 7 + 5 = 12, il faut garder la dizaine."
+    },
+    {
+      "regle": "On aligne les unités sous les unités. On n’oublie pas les retenues.",
+      "exemple": "468 + 357 = 825.",
+      "piege": "8 + 7 = 15 : on écrit 5 et on retient 1. On n’écrit pas 15."
+    },
+    {
+      "regle": "On soustrait colonne par colonne, en commençant par les unités.",
+      "exemple": "524 − 168 = 356.",
+      "piege": "Pour 4 − 8, on ne fait pas 8 − 4 : on fait 14 − 8 = 6."
+    },
+    {
+      "regle": "On multiplie chaque chiffre, en commençant par les unités.",
+      "exemple": "236 × 4 = 944.",
+      "piege": "6 × 4 = 24 : on écrit 4 et on retient 2. On n’écrit pas 24."
+    },
+    {
+      "regle": "On aligne les virgules, puis on calcule comme avec des entiers.",
+      "exemple": "4,75 + 2,5 = 7,25.",
+      "piege": "4,75 + 2,5 n’est pas 5,00 : on aligne les virgules, pas les chiffres."
+    },
+    {
+      "regle": "On aligne les virgules. On ajoute un zéro s’il manque un chiffre.",
+      "exemple": "6,4 − 2,35 : on écrit 6,40 − 2,35 = 4,05.",
+      "piege": "6,4 − 2,35 n’est pas 4,15 : on écrit d’abord 6,40."
+    },
+    {
+      "regle": "D’abord les parenthèses, puis les ×, puis les + et les −.",
+      "exemple": "(3 + 4) × 5 = 35, mais 3 + 4 × 5 = 3 + 20 = 23.",
+      "piege": "3 + 4 × 5 = 23, pas 35 : la multiplication passe d’abord."
+    },
+    {
+      "regle": "On arrondit les nombres, puis on calcule de tête.",
+      "exemple": "298 + 405, c’est environ 300 + 400 = 700.",
+      "piege": "49 × 21, c’est environ 50 × 20 = 1 000. Trouver 10 290, c’est faux."
+    },
+    {
+      "regle": "+ 9, c’est + 10 puis − 1. × 5, c’est × 10 puis ÷ 2.",
+      "exemple": "37 + 9 : 37 + 10 = 47, puis 47 − 1 = 46. 14 × 5 : 140 ÷ 2 = 70.",
+      "piege": "+ 9, c’est + 10 puis − 1, pas + 1 : 37 + 9 = 46, pas 48."
+    },
+    {
+      "regle": "Défi : écrire le calcul en entier, puis faire les × en premier.",
+      "exemple": "Tom achète 4 sacs à 25 € et 1 sac à 38 € : 4 × 25 + 38 = 138 €.",
+      "piege": "4 × 25 + 38 = 138, pas 4 × 63 = 252 : la × passe d’abord."
+    }
+  ],
+  "cm1/probleme": [
+    {
+      "regle": "On se demande : on ajoute, on enlève, on répète ou on partage ?",
+      "exemple": "24 billes partagées entre 4 amis : 24 ÷ 4 = 6 billes chacun.",
+      "piege": "« Partager », ici, c’est 24 ÷ 4 = 6, pas 24 − 4 = 20."
+    },
+    {
+      "regle": "On lit la question, on prend les nombres utiles, on calcule.",
+      "exemple": "Un bus a 38 places, 29 sont prises : 38 − 29 = 9 places libres.",
+      "piege": "Ce n’est pas 38 + 29 = 67 : on cherche ce qui reste."
+    },
+    {
+      "regle": "On découpe en petites questions. Une étape à la fois.",
+      "exemple": "3 cahiers à 2 € et 1 livre à 7 € : 3 × 2 = 6, puis 6 + 7 = 13 €.",
+      "piege": "Ce n’est pas 3 + 2 + 7 = 12 € : il y a 3 FOIS 2 €."
+    },
+    {
+      "regle": "On écrit le calcul, puis une phrase avec l’unité.",
+      "exemple": "Chloé a 12 boîtes de 5 crayons : 12 × 5 = 60. Elle a 60 crayons.",
+      "piege": "Répondre « 60 » ne suffit pas : on écrit « Elle a 60 crayons »."
+    },
+    {
+      "regle": "On se demande si le résultat est possible dans la vraie vie.",
+      "exemple": "5 places de cinéma à 8 € : 5 × 8 = 40 €. C’est un prix possible.",
+      "piege": "Trouver 400 € pour 5 places à 8 €, c’est faux : 5 × 8 = 40."
+    },
+    {
+      "regle": "Défi : faire un schéma en barres avant de calculer.",
+      "exemple": "Lou et Max ont 30 cartes. Max en a 6 de plus : Lou 12, Max 18.",
+      "piege": "Ce n’est pas 30 ÷ 2 = 15 chacun : Max en a 6 de plus que Lou."
+    }
+  ],
+  "cm1/algebre": [
+    {
+      "regle": "Le signe = veut dire : les deux côtés ont la même valeur.",
+      "exemple": "8 + 4 = 10 + 2 : les deux côtés valent 12.",
+      "piege": "Dans 8 + 4 = … + 2, on ne met pas 12 : on met 10."
+    },
+    {
+      "regle": "On calcule ce qu’on connaît, puis on cherche le nombre qui manque.",
+      "exemple": "15 + … = 40 : 40 − 15 = 25, donc 15 + 25 = 40.",
+      "piege": "15 + … = 40 : la réponse est 25, pas 55."
+    },
+    {
+      "regle": "On fait l’opération contraire : × se défait par ÷.",
+      "exemple": "? × 6 = 42 : 42 ÷ 6 = 7. On vérifie : 7 × 6 = 42.",
+      "piege": "? × 6 = 42 donne 7, pas 42 × 6 = 252."
+    },
+    {
+      "regle": "Une grande barre pour le tout, des morceaux pour les parts.",
+      "exemple": "Un sac de 50 billes : 32 rouges, le reste bleu. 50 − 32 = 18 bleues.",
+      "piege": "Le tout, c’est 50 : on fait 50 − 32 = 18, pas 50 + 32 = 82."
+    },
+    {
+      "regle": "On cherche ce qui change d’une étape à la suivante.",
+      "exemple": "Tours de cubes : 3, 5, 7, 9… On ajoute 2 cubes : la suivante a 11.",
+      "piege": "Après 3, 5, 7, 9 vient 11, pas 10 : on ajoute 2, pas 1."
+    },
+    {
+      "regle": "On cherche la règle qui fait passer d’une quantité à l’autre.",
+      "exemple": "1 vélo a 2 roues. 5 vélos ont 5 × 2 = 10 roues.",
+      "piege": "5 vélos ont 10 roues, pas 5 + 2 = 7 : c’est 2 FOIS plus."
+    },
+    {
+      "regle": "On fait les étapes dans l’ordre, une par une.",
+      "exemple": "Choisis 6. Ajoute 4 → 10. Multiplie par 3 → 30.",
+      "piege": "Ce n’est pas 6 + 4 × 3 = 18 : on fait d’abord + 4, puis × 3."
+    },
+    {
+      "regle": "Défi : essayer un nombre, vérifier, puis changer d’essai.",
+      "exemple": "Je pense à un nombre. × 4, puis + 3 : 23. J’essaie 5 : 20 + 3 = 23.",
+      "piege": "Ce n’est pas 23 ÷ 4 : on enlève d’abord 3 → 20, puis 20 ÷ 4 = 5."
+    }
+  ],
+  "cm1/proportionnalite": [
+    {
+      "regle": "C’est proportionnel si, quand une quantité double, l’autre double.",
+      "exemple": "1 kg de pommes : 3 €. 2 kg : 6 €. 4 kg : 12 €. C’est proportionnel.",
+      "piege": "Âge et taille : 110 cm à 5 ans ne donne pas 220 cm à 10 ans. Pas proportionnel."
+    },
+    {
+      "regle": "3 fois plus de l’un, c’est 3 fois plus de l’autre : on multiplie.",
+      "exemple": "2 gâteaux : 4 œufs. 3 fois plus de gâteaux : 4 × 3 = 12 œufs.",
+      "piege": "3 fois plus d’œufs : 4 × 3 = 12, pas 4 + 3 = 7."
+    },
+    {
+      "regle": "2 fois moins de l’un, c’est 2 fois moins de l’autre : on divise.",
+      "exemple": "Recette pour 8 : 400 g de farine. Pour 4 : 400 ÷ 2 = 200 g.",
+      "piege": "Pour 2 fois moins : 400 ÷ 2 = 200 g, pas 400 − 2 = 398 g."
+    },
+    {
+      "regle": "On cherche par combien on multiplie le nombre du haut.",
+      "exemple": "1 ticket : 2 €. 3 tickets : 6 €. 5 tickets : 5 × 2 = 10 €.",
+      "piege": "5 tickets coûtent 10 €, pas 8 € : on ne fait pas + 2 à chaque fois."
+    },
+    {
+      "regle": "On multiplie toujours par le même nombre : c’est le coefficient.",
+      "exemple": "1 boîte = 6 œufs. Coefficient 6 : 4 boîtes → 4 × 6 = 24 œufs.",
+      "piege": "7 boîtes → 7 × 6 = 42 œufs, pas 7 + 6 = 13."
+    },
+    {
+      "regle": "On cherche d’abord le prix pour 1, puis on multiplie.",
+      "exemple": "3 croissants : 3,60 €. 1 croissant : 3,60 ÷ 3 = 1,20 €. 5 : 6 €.",
+      "piege": "5 croissants : 5 × 1,20 = 6 €, pas 3,60 × 5 = 18 €."
+    },
+    {
+      "regle": "Défi : passer par la valeur pour 1, puis multiplier.",
+      "exemple": "4 sacs de terreau pèsent 20 kg. 1 sac : 5 kg. 6 sacs : 30 kg.",
+      "piege": "6 sacs ne pèsent pas 20 + 2 = 22 kg : c’est 6 × 5 = 30 kg."
+    }
+  ],
+  "cm1/longueur": [
+    {
+      "regle": "On met les deux longueurs dans la même unité. Ensuite, on compare.",
+      "exemple": "2 m et 150 cm : 2 m = 200 cm, donc 2 m est plus long.",
+      "piege": "150 cm n’est pas plus long que 2 m, même si 150 > 2 : 2 m = 200 cm."
+    },
+    {
+      "regle": "1 km = 1 000 m. 1 m = 100 cm. 1 cm = 10 mm.",
+      "exemple": "3 m = 300 cm ; 5 cm = 50 mm ; 2 km = 2 000 m.",
+      "piege": "4 m = 400 cm, pas 40 cm : 1 m = 100 cm."
+    },
+    {
+      "regle": "On compare à une longueur connue. Un doigt fait environ 1 cm de large.",
+      "exemple": "Une gomme : environ 5 cm. Une porte : environ 2 m de haut.",
+      "piege": "Un lit mesure environ 2 m, pas 2 cm ni 2 km."
+    },
+    {
+      "regle": "On pose le 0 de la règle au bout de l’objet. On lit l’autre bout.",
+      "exemple": "Le crayon part du 0 et finit sur le 12 : il mesure 12 cm.",
+      "piege": "Départ sur 1, arrivée sur 13 : 13 − 1 = 12 cm, pas 13 cm."
+    },
+    {
+      "regle": "Défi : tout écrire dans la même unité avant de calculer.",
+      "exemple": "Corde de 3 m, Hugo coupe 80 cm : 300 − 80 = 220 cm restent.",
+      "piege": "On ne fait pas 3 − 80 : on écrit d’abord 3 m = 300 cm."
+    }
+  ],
+  "cm1/masse": [
+    {
+      "regle": "On met les deux masses dans la même unité. Ensuite, on compare.",
+      "exemple": "1 kg et 800 g : 1 kg = 1 000 g, donc 1 kg est plus lourd.",
+      "piege": "800 g est plus léger que 1 kg, même si 800 est plus grand que 1."
+    },
+    {
+      "regle": "1 kg = 1 000 g. Pour passer des kg aux g, on fait × 1 000.",
+      "exemple": "2 kg = 2 000 g ; 3 kg et 500 g = 3 500 g.",
+      "piege": "2 kg = 2 000 g, pas 200 g : 1 kg = 1 000 g."
+    },
+    {
+      "regle": "On compare à une masse connue. Un paquet de sucre pèse 1 kg.",
+      "exemple": "Une pomme : environ 150 g. Un chat : environ 4 kg.",
+      "piege": "Un stylo pèse environ 10 g, pas 10 kg."
+    },
+    {
+      "regle": "Défi : tout mettre en g avant d’additionner.",
+      "exemple": "Gâteau : 250 g de farine et 1 kg de pommes : 250 + 1 000 = 1 250 g.",
+      "piege": "On ne fait pas 250 + 1 = 251 : on écrit d’abord 1 kg = 1 000 g."
+    }
+  ],
+  "cm1/contenance": [
+    {
+      "regle": "On met les deux contenances dans la même unité. Ensuite, on compare.",
+      "exemple": "1 L et 75 cL : 1 L = 100 cL, donc 1 L contient plus.",
+      "piege": "75 cL, c’est moins que 1 L, même si 75 est plus grand que 1."
+    },
+    {
+      "regle": "1 L = 100 cL. 1 L = 1 000 mL. 1 cL = 10 mL.",
+      "exemple": "2 L = 200 cL ; 3 L = 3 000 mL ; 50 cL = 500 mL.",
+      "piege": "1 L = 1 000 mL, pas 100 mL : 100, c’est en cL."
+    },
+    {
+      "regle": "On compare à un objet connu. Une petite cuillère contient environ 5 mL.",
+      "exemple": "Un verre : environ 20 cL. Un seau : environ 10 L.",
+      "piege": "Une canette contient 33 cL, pas 33 L : 33 L, c’est plus de 3 seaux."
+    },
+    {
+      "regle": "Défi : tout mettre dans la même unité, puis calculer.",
+      "exemple": "Carafe de 1 L, verres de 20 cL : 1 L = 100 cL ; 100 ÷ 20 = 5 verres.",
+      "piege": "On ne fait pas 1 ÷ 20 : on écrit d’abord 1 L = 100 cL."
+    }
+  ],
+  "cm1/duree": [
+    {
+      "regle": "La petite aiguille montre l’heure. La grande aiguille montre les minutes.",
+      "exemple": "Petite aiguille entre 4 et 5, grande sur 6 : il est 4 h 30.",
+      "piege": "Grande aiguille sur 6 : 30 minutes, pas 6 minutes. On compte de 5 en 5."
+    },
+    {
+      "regle": "1 h = 60 min. 1 min = 60 s. 1 jour = 24 h.",
+      "exemple": "2 h = 120 min ; 1 h 15 min = 60 + 15 = 75 min.",
+      "piege": "1 h 30 min, ce n’est pas 130 min : c’est 60 + 30 = 90 min."
+    },
+    {
+      "regle": "On compte jusqu’à l’heure pile. Puis on ajoute le reste.",
+      "exemple": "De 8 h 40 à 10 h 15 : 20 min + 1 h + 15 min = 1 h 35 min.",
+      "piege": "Une heure a 60 min, pas 100 : 8 h 40 + 20 min = 9 h, pas 8 h 60."
+    },
+    {
+      "regle": "On repère l’heure du début et la durée. Puis on avance.",
+      "exemple": "Le film commence à 14 h 30 et dure 1 h 45 : il finit à 16 h 15.",
+      "piege": "Pas 15 h 75 : 75 min = 1 h 15 min, donc 14 h 30 + 1 h 45 = 16 h 15."
+    },
+    {
+      "regle": "Grande aiguille : minutes ÷ 5 donne son nombre. Petite aiguille : près de l’heure.",
+      "exemple": "7 h 15 : grande aiguille sur 3, car 15 ÷ 5 = 3. Petite juste après 7.",
+      "piege": "À 7 h 45, la petite aiguille est presque sur 8, pas pile sur 7."
+    },
+    {
+      "regle": "Défi : couper la durée en morceaux faciles, jusqu’aux heures pile.",
+      "exemple": "Bus de 9 h 50 à 11 h 10 : 10 min + 1 h + 10 min = 1 h 20 min.",
+      "piege": "Oublier les 10 min de 9 h 50 à 10 h : on les compte d’abord."
+    }
+  ],
+  "cm1/perimetre": [
+    {
+      "regle": "Le périmètre, c’est la longueur du tour d’une figure.",
+      "exemple": "Rectangle de 4 carreaux sur 2 : 4 + 2 + 4 + 2 = 12 côtés de carreau.",
+      "piege": "Le périmètre n’est pas l’aire : ici, le tour fait 12, l’intérieur 8 carreaux."
+    },
+    {
+      "regle": "On additionne les longueurs des 3 côtés.",
+      "exemple": "Côtés de 3 cm, 4 cm et 5 cm : 3 + 4 + 5 = 12 cm.",
+      "piege": "Ne pas oublier un côté : 3 + 4 = 7 cm, il manque les 5 cm."
+    },
+    {
+      "regle": "On additionne les longueurs des 4 côtés.",
+      "exemple": "Potager de 6 m sur 4 m : 6 + 4 + 6 + 4 = 20 m de grillage.",
+      "piege": "Pas 6 + 4 = 10 m : il y a 4 côtés à faire, pas 2."
+    },
+    {
+      "regle": "On additionne tous les côtés. Côtés égaux : côté × nombre de côtés.",
+      "exemple": "Un pentagone a 5 côtés de 4 cm : 5 × 4 = 20 cm.",
+      "piege": "Un hexagone a 6 côtés, pas 5 : côtés de 4 cm → 6 × 4 = 24 cm."
+    },
+    {
+      "regle": "Défi : trouver d’abord les côtés qui manquent. Puis faire le tour.",
+      "exemple": "Carré de périmètre 20 cm : 4 côtés égaux, donc côté = 20 ÷ 4 = 5 cm.",
+      "piege": "Le côté n’est pas 20 ÷ 2 = 10 cm : un carré a 4 côtés."
+    }
+  ],
+  "cm1/aire": [
+    {
+      "regle": "L’aire, c’est la place prise à l’intérieur d’une figure.",
+      "exemple": "Ce rectangle a 3 rangées de 4 carreaux : 3 × 4 = 12 carreaux.",
+      "piege": "L’aire n’est pas le tour : ici, l’aire = 12 carreaux, le tour = 14."
+    },
+    {
+      "regle": "On prend un carreau comme unité. On compte les carreaux de chaque figure.",
+      "exemple": "Figure bleue : 6 carreaux. Figure rouge : 5 carreaux. La bleue est plus grande.",
+      "piege": "Plus long ne veut pas dire plus grand : bande de 6 carreaux, carré 3 sur 3 = 9."
+    },
+    {
+      "regle": "Rectangle : longueur × largeur. Carré : côté × côté.",
+      "exemple": "Tapis de 3 m sur 2 m : 3 × 2 = 6 m². Carré de 5 cm : 5 × 5 = 25 cm².",
+      "piege": "Carré de 5 cm : 5 × 5 = 25 cm², pas 5 × 4 = 20 cm (ça, c’est le tour)."
+    },
+    {
+      "regle": "On coupe la figure en rectangles. On calcule chaque aire, puis on ajoute.",
+      "exemple": "Figure en L : 2 × 2 = 4 et 4 × 2 = 8 carreaux ; 4 + 8 = 12 carreaux.",
+      "piege": "Pas 8 + 8 = 16 : le coin de 4 carreaux serait compté deux fois."
+    },
+    {
+      "regle": "Défi : partir de l’aire connue. Chercher le nombre qui manque.",
+      "exemple": "Rectangle de 24 cm², longueur 6 cm : 6 × 4 = 24, donc largeur 4 cm.",
+      "piege": "La largeur n’est pas 24 − 6 = 18 cm : on cherche 6 × ? = 24."
+    }
+  ],
+  "cm1/angle": [
+    {
+      "regle": "Un angle, c’est deux côtés qui partent du même point : le sommet.",
+      "exemple": "Un triangle a 3 sommets, donc 3 angles. Un carré en a 4.",
+      "piege": "Le sommet est le point où les 2 côtés se touchent, pas le bout d’un côté."
+    },
+    {
+      "regle": "Un angle droit, c’est comme le coin d’une feuille. On le vérifie à l’équerre.",
+      "exemple": "Une feuille a 4 coins : ce sont 4 angles droits.",
+      "piege": "Un rectangle penché garde ses 4 angles droits : on tourne l’équerre."
+    },
+    {
+      "regle": "Aigu : plus petit qu’un angle droit. Obtus : plus grand qu’un angle droit.",
+      "exemple": "Aiguilles d’une horloge : à 1 h, angle aigu ; à 3 h, droit ; à 5 h, obtus.",
+      "piege": "À 3 h, l’angle est droit : il n’est ni aigu, ni obtus."
+    },
+    {
+      "regle": "On décalque un angle. On le pose sur l’autre, sommet sur sommet.",
+      "exemple": "Aiguilles d’une horloge : l’angle à 2 h est plus petit que l’angle à 4 h.",
+      "piege": "Côtés de 2 cm ou de 8 cm : l’angle est le même si l’écart est le même."
+    },
+    {
+      "regle": "On nomme un angle avec 3 lettres. La lettre du sommet va au milieu.",
+      "exemple": "Sommet B, côtés vers A et vers C : c’est l’angle ABC.",
+      "piege": "Le sommet est B : l’angle BAC, c’est un autre angle, de sommet A."
+    },
+    {
+      "regle": "On compare à l’angle droit de l’équerre : plus petit ou plus grand.",
+      "exemple": "Pizza en 4 parts : chaque part fait un angle droit. En 8 parts : plus petit.",
+      "piege": "8 parts font des angles plus petits que 4 parts, même si 8 est plus grand que 4."
+    },
+    {
+      "regle": "Défi : utiliser le coin de l’équerre pour chercher les angles droits.",
+      "exemple": "Un rectangle a 4 angles droits. Un triangle en a au plus 1.",
+      "piege": "Un triangle n’a jamais 2 angles droits : ses côtés ne se rejoindraient pas."
+    }
+  ],
+  "cm1/reperage": [
+    {
+      "regle": "Une case se repère par sa colonne (une lettre) et sa ligne (un nombre).",
+      "exemple": "Bataille navale : pour C4, on va à la colonne C, puis à la ligne 4.",
+      "piege": "On écrit C4, pas 4C : la lettre (colonne) d’abord, le nombre (ligne) ensuite."
+    },
+    {
+      "regle": "On lit d’abord le nombre en bas, puis le nombre sur le côté.",
+      "exemple": "A est à 3 carreaux vers la droite et 2 vers le haut : A (3 ; 2).",
+      "piege": "(2 ; 3) n’est pas le même point que (3 ; 2) : l’ordre compte."
+    },
+    {
+      "regle": "Depuis le 0, on avance à droite du 1er nombre. Puis on monte du 2e.",
+      "exemple": "B (4 ; 1) : 4 carreaux vers la droite, puis 1 carreau vers le haut.",
+      "piege": "Pour B (4 ; 1), on part du 0 en bas à gauche, pas d’un autre point."
+    },
+    {
+      "regle": "On dit le nombre de carreaux et le sens : droite, gauche, haut ou bas.",
+      "exemple": "Le robot va de (1 ; 1) à (4 ; 3) : 3 à droite, puis 2 vers le haut.",
+      "piege": "On ne compte pas le point de départ : de 1 à 4, il y a 3 pas, pas 4."
+    },
+    {
+      "regle": "Défi : faire le trajet pas à pas. Noter chaque arrêt.",
+      "exemple": "Noé part de (2 ; 4), va 3 à droite, puis 2 en bas : il arrive en (5 ; 2).",
+      "piege": "Descendre fait baisser le 2e nombre : 4 − 2 = 2, pas 4 + 2 = 6."
+    }
+  ],
+  "cm1/droite": [
+    {
+      "regle": "Segment : 2 bouts. Demi-droite : 1 seul bout. Droite : aucun bout.",
+      "exemple": "[AB] est un segment de 4 cm. (d) est une droite : elle ne finit jamais.",
+      "piege": "Une droite ne se mesure pas : elle ne s’arrête pas, même tracée sur 3 cm."
+    },
+    {
+      "regle": "Deux droites parallèles gardent le même écart. Elles ne se croisent jamais.",
+      "exemple": "Les 2 bords d’une règle : 3 cm d’écart partout. Ils sont parallèles.",
+      "piege": "Écart de 2 cm d’un côté et de 3 cm de l’autre : pas parallèles."
+    },
+    {
+      "regle": "Deux droites perpendiculaires se coupent en faisant un angle droit.",
+      "exemple": "Le signe + : 2 droites qui se coupent en faisant 4 angles droits.",
+      "piege": "À 2 h, les aiguilles font un angle aigu, pas droit : pas perpendiculaires."
+    },
+    {
+      "regle": "Perpendiculaire : on pose l’équerre sur (d). Parallèle : même écart en 2 points.",
+      "exemple": "Parallèle à (d) à 2 cm : 2 points à 2 cm de (d), puis on les relie.",
+      "piege": "Mesuré en biais, l’écart semble 3 cm au lieu de 2 cm : on mesure à l’équerre."
+    },
+    {
+      "regle": "Défi : 2 droites perpendiculaires à une même droite sont parallèles.",
+      "exemple": "Échelle : 8 barreaux, tous perpendiculaires au montant, donc 8 parallèles.",
+      "piege": "2 perpendiculaires à la même droite ne se croisent jamais, même tracées longues."
+    }
+  ],
+  "cm1/symetrie": [
+    {
+      "regle": "Un axe de symétrie : on plie sur cette ligne, les 2 moitiés se recouvrent.",
+      "exemple": "Un rectangle a 2 axes. Un carré en a 4. Un cœur en a 1.",
+      "piege": "La diagonale d’un rectangle n’est pas un axe : les 2 moitiés ne se recouvrent pas."
+    },
+    {
+      "regle": "Chaque point passe de l’autre côté de l’axe, à la même distance.",
+      "exemple": "Un coin est à 3 carreaux à gauche de l’axe : son image est à 3 carreaux à droite.",
+      "piege": "Un coin à 1 carreau de l’axe va à 1 carreau de l’axe, pas à 3."
+    },
+    {
+      "regle": "On trace un trait qui coupe l’axe à angle droit, puis on reporte la distance.",
+      "exemple": "A est à 2 cm de l’axe (d) : on place A’ à 2 cm, de l’autre côté.",
+      "piege": "A’ n’est pas à 4 cm de l’axe : 2 cm de chaque côté, 4 cm de A à A’."
+    },
+    {
+      "regle": "La symétrie garde les longueurs et les angles : la figure garde sa taille.",
+      "exemple": "Le segment [AB] mesure 5 cm : son symétrique [A’B’] mesure aussi 5 cm.",
+      "piege": "[A’B’] ne mesure pas 10 cm : la symétrie ne fait pas grandir, 5 cm → 5 cm."
+    },
+    {
+      "regle": "Défi : plier la figure dans sa tête, dans chaque sens.",
+      "exemple": "Combien d’axes pour la lettre H ? On plie haut-bas, puis gauche-droite : 2 axes.",
+      "piege": "La lettre N a 0 axe : pliée, ses 2 moitiés ne se recouvrent jamais."
+    }
+  ],
+  "cm1/figure_plane": [
+    {
+      "regle": "Un triangle a 3 côtés droits et 3 sommets.",
+      "exemple": "Triangle rectangle : 1 angle droit. Triangle équilatéral : 3 côtés de 4 cm.",
+      "piege": "Un triangle rectangle a 1 seul angle droit, jamais 2."
+    },
+    {
+      "regle": "Un quadrilatère a 4 côtés. Carré, rectangle et losange en sont.",
+      "exemple": "Rectangle : 4 angles droits. Carré : 4 angles droits et 4 côtés de 3 cm.",
+      "piege": "« Un carré n’est pas un rectangle » est faux : il a bien 4 angles droits."
+    },
+    {
+      "regle": "On trace un cercle au compas. La pointe se pique au centre.",
+      "exemple": "Rayon 3 cm : on écarte le compas de 3 cm. Le diamètre fait 3 × 2 = 6 cm.",
+      "piege": "Rayon 3 cm : on écarte le compas de 3 cm, pas de 6 cm (le diamètre)."
+    },
+    {
+      "regle": "Dans un rectangle, les côtés d’en face ont la même longueur.",
+      "exemple": "Rectangle de 5 cm sur 3 cm : ses 4 côtés font 5 cm, 3 cm, 5 cm et 3 cm.",
+      "piege": "En face du côté de 5 cm, il y a 5 cm, pas 3 cm."
+    },
+    {
+      "regle": "Pour un carré : chaque côté à la règle, chaque angle droit à l’équerre.",
+      "exemple": "Carré de 4 cm : on trace 4 côtés de 4 cm et 4 angles droits.",
+      "piege": "Mesurer à partir du 1 de la règle donne 3 cm au lieu de 4 cm : partir du 0."
+    },
+    {
+      "regle": "Un petit carré = un angle droit. Le même trait = la même longueur.",
+      "exemple": "[AB] et [AC] portent le même trait. [AB] mesure 4 cm, donc [AC] aussi.",
+      "piege": "Sans petit carré, l’angle n’est pas sûr : il peut faire 85°, pas 90°."
+    },
+    {
+      "regle": "Tous les points du cercle sont à la même distance du centre : le rayon.",
+      "exemple": "Cercle de centre O et de rayon 2 cm : M et N sont sur le cercle, à 2 cm de O.",
+      "piege": "Un point à 3 cm de O n’est pas sur ce cercle de 2 cm : il est dehors."
+    },
+    {
+      "regle": "Défi : compter les côtés, puis chercher les angles droits.",
+      "exemple": "Un carré coupé par ses 2 diagonales : 4 petits triangles + 4 grands = 8.",
+      "piege": "Ce n’est pas 4 : chaque moitié du carré est aussi un grand triangle."
+    }
+  ],
+  "cm1/solide": [
+    {
+      "regle": "Cube, pavé, cylindre, cône, pyramide, boule : des solides qu’on peut tenir.",
+      "exemple": "Un dé est un cube. Une boîte de conserve, un cylindre. Un ballon, une boule.",
+      "piege": "Un cube n’est pas un carré : le carré est plat, le cube a 6 faces."
+    },
+    {
+      "regle": "Face : partie plate. Arête : bord entre 2 faces. Sommet : coin pointu.",
+      "exemple": "Un cube a 6 faces, 12 arêtes et 8 sommets.",
+      "piege": "Sur le dessin d’un cube, on voit 9 arêtes, mais il y en a 12."
+    },
+    {
+      "regle": "On compte les faces et on dit leur forme : carré, rectangle ou triangle.",
+      "exemple": "Une boîte à chaussures est un pavé : 6 faces, toutes des rectangles.",
+      "piege": "Une pyramide à base carrée a 5 faces, pas 4 : 1 carré + 4 triangles."
+    },
+    {
+      "regle": "Un patron, c’est le solide déplié à plat. On le replie pour le fermer.",
+      "exemple": "Un patron de cube : 6 carrés collés, par exemple en forme de croix.",
+      "piege": "6 carrés en ligne ne font pas un cube : 2 faces se mettent l’une sur l’autre."
+    },
+    {
+      "regle": "Un prisme droit a 2 bases pareilles, face à face, reliées par des rectangles.",
+      "exemple": "Prisme à base triangle : 5 faces, 9 arêtes et 6 sommets.",
+      "piege": "Il n’a pas 6 faces comme le pavé : 2 triangles + 3 rectangles = 5 faces."
+    },
+    {
+      "regle": "Défi : compter dans l’ordre, en bas, puis en haut.",
+      "exemple": "Pyramide à base carrée : 4 sommets en bas + 1 en haut = 5 sommets.",
+      "piege": "Ce n’est pas 4 sommets : on oublie la pointe du haut, 4 + 1 = 5."
+    }
+  ],
+  "cm1/tableau": [
+    {
+      "regle": "On croise la ligne et la colonne : la case commune donne la réponse.",
+      "exemple": "Ligne « Léa », colonne « mai » : Léa a lu 4 livres en mai.",
+      "piege": "Lire la case d’à côté : 6, c’est Léa en juin, pas en mai."
+    },
+    {
+      "regle": "On trouve la case vide avec le total : total − nombres connus.",
+      "exemple": "Fraises : 8 kg lundi, ? mardi, 20 kg en tout. Mardi : 20 − 8 = 12 kg.",
+      "piege": "Pas 20 + 8 = 28 kg : le total, c’est déjà lundi et mardi ensemble."
+    },
+    {
+      "regle": "On compare les nombres pour dire ce que le tableau montre.",
+      "exemple": "Billets vendus : 45 samedi, 30 dimanche. Samedi : 45 − 30 = 15 billets de plus.",
+      "piege": "« Combien de plus ? » ne demande pas 45 : la réponse est l’écart, 15."
+    },
+    {
+      "regle": "Défi : trouver dans le tableau chaque nombre utile, puis calculer.",
+      "exemple": "Piscine : enfant 3 €, adulte 5 €. 2 enfants et 1 adulte : 3 × 2 + 5 = 11 €.",
+      "piege": "Pas 3 + 5 = 8 € : il y a 2 enfants, donc 2 fois 3 €."
+    }
+  ],
+  "cm1/graphique": [
+    {
+      "regle": "On part du haut de la barre et on suit la ligne jusqu’à l’axe.",
+      "exemple": "La barre « chats » arrive à 14 : 14 élèves ont un chat.",
+      "piege": "Pas 7 : la barre fait 7 carreaux, mais 1 carreau = 2 élèves, donc 14."
+    },
+    {
+      "regle": "On trouve la valeur sur l’axe, puis on monte la barre jusque-là.",
+      "exemple": "1 carreau = 2 mm de pluie. Pour 10 mm : 10 ÷ 2 = 5 carreaux.",
+      "piege": "Pas 10 carreaux pour 10 mm : 1 carreau vaut 2 mm, donc 5 carreaux."
+    },
+    {
+      "regle": "La barre la plus haute montre la plus grande valeur.",
+      "exemple": "Vélos vendus : 30 en mai, 50 en juin. En juin : 50 − 30 = 20 vélos de plus.",
+      "piege": "Juin n’a pas 2 fois plus : 30 × 2 = 60, et juin n’a que 50."
+    },
+    {
+      "regle": "On part de l’heure en bas, on monte à la courbe, puis on lit à gauche.",
+      "exemple": "À 14 h, la courbe est à 26 °C : il fait 26 °C à 14 h.",
+      "piege": "Ne pas répondre 14 : 14 est l’heure. La température, 26 °C, est à gauche."
+    },
+    {
+      "regle": "Chaque point est un enfant : on lit en bas, puis à gauche.",
+      "exemple": "Le point de Tom : 10 ans en bas, 140 cm à gauche. Tom a 10 ans et mesure 140 cm.",
+      "piege": "Pas « 140 ans et 10 cm » : l’âge est en bas, la taille à gauche."
+    },
+    {
+      "regle": "Défi : trouver ce que vaut 1 carreau, puis calculer.",
+      "exemple": "Barre de 6 carreaux, 1 carreau = 5 livres : 6 × 5 = 30 livres.",
+      "piege": "Pas 6 livres : on a compté les carreaux sans faire × 5."
+    }
+  ],
+  "cm1/probabilite": [
+    {
+      "regle": "Certain : ça arrive à coup sûr. Impossible : jamais. Possible : peut-être.",
+      "exemple": "Dé de 1 à 6 : faire 7, impossible ; moins de 7, certain ; faire 3, possible.",
+      "piege": "Faire 6 est possible, pas certain : il reste 5 autres faces."
+    },
+    {
+      "regle": "C’est du hasard quand on ne peut pas savoir le résultat avant.",
+      "exemple": "Lancer une pièce : 2 résultats, pile ou face. On ne sait pas lequel.",
+      "piege": "Après 3 « pile », « face » n’est pas obligé : la pièce n’a pas de mémoire."
+    },
+    {
+      "regle": "Plus il y a de cas gagnants sur le total, plus on a de chances.",
+      "exemple": "Sac A : 3 rouges sur 10 billes. Sac B : 6 rouges sur 10. Le sac B est meilleur.",
+      "piege": "4 rouges sur 20 n’est pas mieux que 3 sur 5 : 4 > 3, mais il y a 20 billes."
+    },
+    {
+      "regle": "On compte les cases gagnantes, puis toutes les cases.",
+      "exemple": "Roue de 8 cases, 3 jaunes : 3 chances sur 8 de tomber sur jaune.",
+      "piege": "Pas 3 chances sur 5 : on compte TOUTES les cases, les 8."
+    },
+    {
+      "regle": "On écrit tous les résultats possibles, sans en oublier.",
+      "exemple": "2 pièces : PP, PF, FP, FF. Il y a 4 issues.",
+      "piege": "Pas 3 issues : PF et FP sont différents, la 1re pièce n’est pas la 2e."
+    },
+    {
+      "regle": "Défi : compter les cas gagnants, puis tous les cas.",
+      "exemple": "Sac de 2 billes vertes et 5 bleues : bleue a plus de chances, 5 contre 2.",
+      "piege": "Verte n’est pas impossible : 2 chances sur 7."
+    }
+  ],
+  "cm1/algorithmique": [
+    {
+      "regle": "On fait les instructions une par une, dans l’ordre.",
+      "exemple": "Pars de 4, ajoute 2, puis multiplie par 3 : 4 + 2 = 6, puis 6 × 3 = 18.",
+      "piege": "Pas dans le désordre : 4 × 3 = 12, puis 12 + 2 = 14, ce n’est pas 18."
+    },
+    {
+      "regle": "On cherche ce qui change d’un nombre au suivant, puis on continue.",
+      "exemple": "5, 10, 15, 20… on ajoute 5 : le suivant est 20 + 5 = 25.",
+      "piege": "Dans 1, 2, 4, 8, on double : le suivant est 16, pas 10."
+    },
+    {
+      "regle": "Une flèche = 1 case : → droite, ← gauche, ↑ haut, ↓ bas.",
+      "exemple": "3 cases à droite, puis 2 cases vers le haut : → → → ↑ ↑.",
+      "piege": "3 cases à droite, c’est 3 flèches →, pas une seule."
+    },
+    {
+      "regle": "On lit les blocs de haut en bas, un par un.",
+      "exemple": "Avancer de 50, tourner de 90°, avancer de 50 : 2 traits de 50 en angle droit.",
+      "piege": "Tourner ne fait pas avancer : le lutin a fait 50 + 50 = 100 pas en tout."
+    },
+    {
+      "regle": "« Répéter 4 fois » refait les mêmes blocs 4 fois de suite.",
+      "exemple": "Répéter 4 fois : avancer de 100, tourner de 90°. Le lutin trace un carré.",
+      "piege": "Le lutin avance 4 × 100 = 400 pas en tout, pas 100."
+    },
+    {
+      "regle": "Défi : jouer le programme avec son doigt, pas à pas.",
+      "exemple": "Pars de 10. Répète 3 fois : ajoute 4. 10 + 4 + 4 + 4 = 22.",
+      "piege": "Pas 10 + 4 = 14 : on ajoute 4 trois fois, donc 10 + 12 = 22."
+    }
+  ],
+  "cm1/trier_classer": [
+    {
+      "regle": "On fait un 1er tri, puis un 2e tri sur ce qui reste.",
+      "exemple": "3, 8, 12, 15, 20 : pairs → 8, 12, 20. Puis plus grands que 10 → 12, 20.",
+      "piege": "15 est plus grand que 10, mais il est parti au 1er tri : il est impair."
+    },
+    {
+      "regle": "Avec 3 cercles qui se croisent, un cercle compte toutes ses zones.",
+      "exemple": "Foot : 6 que foot + 2 avec danse + 1 avec judo + 1 les trois = 10 enfants.",
+      "piege": "Foot en tout, ce n’est pas 6 : 6, ce sont les enfants qui font seulement foot."
+    },
+    {
+      "regle": "À chaque question, on suit « oui » à gauche ou « non » à droite.",
+      "exemple": "Le nombre 14 : pair ? oui. Plus de 10 ? oui. Il va dans la case A.",
+      "piege": "7 n’est pas pair : il part à droite dès la 1re question, pas à gauche."
+    }
+  ]
+}
