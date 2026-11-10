@@ -22,6 +22,24 @@ Modèle : la série Équations 4e (`manim/REPRISE-equations.md`, `manim/brief-ag
 - 4 agents lancés en parallèle (un par épisode 02, 03, 04, 05), brief commun : `side-session-notes/local_06503db4-…/brief-agents-distributivite-02-05.md`. Chacun écrit `manim/scripts/4e/distrib_<slug>.py` + `distrib_<slug>_short.py`, rend en HD dans `manim/sorties/4e/maths/distributivite/NN-<slug>/`, committe ses 2 scripts.
 - Si une session reprend : vérifier pour chaque épisode la présence des 2 mp4 et des 2 scripts committés ; relancer seulement ce qui manque, avec le même brief.
 
+## État au 10/11, 18 h 30 : LES 10 VIDÉOS SONT RENDUES
+| NN | paysage | short | commit scripts | questions (paysage ; short) |
+|---|---|---|---|---|
+| 01 simple | 4 min 15 | 1 min 15 « Le calcul éclair » | `a759d13d`, `c147753e` | 01:34 C, 02:53 B ; 00:29 A |
+| 02 double | 4 min 07 | 1 min 22 « Les 4 morceaux » | `1fd70775` | 01:26 B, 02:42 C ; 00:30 C |
+| 03 reduire | 3 min 39 | 1 min 11 « Le tri des chaussettes » | `9531b3e2` | 00:58 A, 02:12 B ; 00:25 A |
+| 04 reconnaitre | 3 min 38 | 1 min 12 « Le caissier du cinéma » | `8e5ed4f3` | 01:16 C, 02:14 A ; 00:30 C |
+| 05 defi | 4 min 00 | 1 min 25 « Le prix rond » | `06439ccd` | 00:48 A, 01:58 B ; 00:30 C |
+Toutes : audit propre, `verifier-bords-video.py` = 0, planches HD relues par la session chef (10/11). mp4 dans `manim/sorties/4e/maths/distributivite/NN-slug/` (dossier ignoré par git). Aperçu des 8 dernières : `manim/sorties/apercu-distributivite.html` (port 3900) — ⛔ ne PAS écraser `apercu.html`, partagé avec d'autres sessions.
+Piège noté par l'agent 03 : dans `_plan_eq` (equation_commun.py), deux atomes NON DITS consécutifs → le premier disparaît sans alerte d'audit (« 2e » : « 2 » puis « e »). Contourné dans `distrib_reduire.py`, module commun non modifié.
+
+## RESTE (passe finale)
+1. Miniatures (paysage « COMPRENDRE … EN N MIN », short), manifeste `manim/manifeste-youtube.json` en AJOUT depuis HEAD (10 entrées, micro_id rempli pour les shorts, vide/rempli selon `qr-des-fiches-video-paysage-shorts-sur-la-micro`), chapitres par `--dry_run`, `fiches-youtube.py`.
+2. R2 : `rclone copy` du SEUL dossier `manim/sorties/4e/maths/distributivite`.
+3. `COUPE_PAR_VIDEO` (« Mets » + 0,03 s pour chaque short) dans `components/LecteurVideo.tsx`.
+4. Métiers : `V` dans `lib/matrice/metiers-college.ts` pour `litteral_distributivite` (menuisier, photographe, maître-nageur, cuisinier, vendeur).
+5. Coach : `brancher-videos-coach.mjs --ecrire` APRÈS le push du soir, sur son ordre. Pas de YouTube sans son ordre.
+
 ## Reste, dans l'ordre
 1. ~~Paysage 01 et short 01~~ FAITS (voir plus haut). Ancienne consigne, pour mémoire : paysage 01 : `AUDIT=1 BORDS=1 python -m manim render --dry_run manim/scripts/4e/distrib_simple.py DistribSimple4e --media_dir manim/scripts/4e/media-dist-01-audit` (0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; filtrer `tr '\r' '\n' | grep -E "AUDIT-AVANCE|RETARD|BORD|Error|Traceback"`). Points à surveiller : la pose au mot de « 3(x + 4) » sur « 3 fois, entre parenthèses, x plus 4 », `dire_eq(r2, "12. En")` dans `ecran_ranger` (à vérifier), l'écran 02-05 qui garde les planches d'un écran à l'autre, `Indicate` sur des objets REMPLIS (le brief Équations l'interdit : il remplit de vert) → remplacer par un `insister`/`Circumscribe` si ça cache le texte.
    Puis brouillon `-ql` et planche regardée (poses ET instants d'animation), UN rendu `-qh --disable_caching --media_dir manim/scripts/4e/media-dist-01`, copie vers `manim/sorties/4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple.mp4`, `python scripts/verifier-bords-video.py` = 0, planche finale, supprimer `media-dist-01*`.
