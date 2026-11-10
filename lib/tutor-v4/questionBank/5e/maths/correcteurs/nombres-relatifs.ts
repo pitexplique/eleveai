@@ -143,22 +143,35 @@ function corrigerRanger(q: Q): string[] {
 
 // ─── relatif_placer : la droite graduée du canvas ─────────────────────────
 
-type Droite = { min: number; max: number; step: number; points: { value: number; label: string }[] };
+type Droite = { min: number; max: number; step: number; points: { value: number; label: string }[]; ecrites?: number[] };
+const proche = (a: number, b: number) => Math.abs(a - b) < 1e-9;
+/** ⛔ 10/11/2026 : la graduation d'un point est-elle ÉCRITE ? (sans `valeursEcrites`, toutes le sont) */
+const ecrite = (d: Droite, v: number) => !d.ecrites || d.ecrites.some((e) => proche(e, v));
 /** Le canvas relu : graduations régulières, 0 visible, chaque point sur une graduation, lettres distinctes. */
 function lireDroite(q: Q): { d: Droite | null; p: string[] } {
   const c = q.canvas as any;
   if (!c || c.kind !== "number_line") return { d: null, p: ["droite graduée absente"] };
-  const d: Droite = { min: c.min, max: c.max, step: c.step ?? 1, points: c.points ?? [] };
+  const d: Droite = { min: c.min, max: c.max, step: c.step ?? 1, points: c.points ?? [], ecrites: c.valeursEcrites };
   const p: string[] = [];
   if (!(d.min < 0 && d.max > 0)) p.push(`0 n'est pas sur la droite (${d.min} à ${d.max})`);
   for (const pt of d.points) {
     if (pt.value < d.min || pt.value > d.max) p.push(`le point ${pt.label} (${pt.value}) sort de la droite`);
-    if (!Number.isInteger((pt.value - d.min) / d.step)) p.push(`le point ${pt.label} n'est pas sur une graduation`);
+    const r = (pt.value - d.min) / d.step;
+    if (!proche(r, Math.round(r))) p.push(`le point ${pt.label} n'est pas sur une graduation`);
   }
   if (new Set(d.points.map((x) => x.label)).size !== d.points.length) p.push("deux points portent la même lettre");
   if (new Set(d.points.map((x) => x.value)).size !== d.points.length) p.push("deux points au même endroit");
-  const pas = q.text.match(/de (\d+) en \1/);
-  if (pas && Number(pas[1]) !== d.step) p.push(`le texte dit « de ${pas[1]} en ${pas[1]} », la droite va de ${d.step} en ${d.step}`);
+  const pas = q.text.match(/de (\d+(?:,\d+)?) en \1/) ?? q.text.match(/pas de la graduation est (\d+(?:,\d+)?)/);
+  if (pas && !proche(Number(pas[1].replace(",", ".")), d.step)) p.push(`le texte dit un pas de ${pas[1]}, la droite va de ${d.step} en ${d.step}`);
+  // Les nombres écrits sous la droite doivent être des graduations, et 0 l'un d'eux (le repère).
+  if (d.ecrites) {
+    if (!d.ecrites.some((e) => proche(e, 0))) p.push("0 n'est pas écrit sous la droite");
+    for (const e of d.ecrites) {
+      const r = (e - d.min) / d.step;
+      if (e < d.min || e > d.max || !proche(r, Math.round(r))) p.push(`le nombre écrit ${e} n'est pas une graduation`);
+    }
+    if (d.ecrites.length < 2) p.push("un seul nombre écrit : le pas ne se lit pas");
+  }
   return { d, p };
 }
 
@@ -168,8 +181,25 @@ function corrigerAbscisse(q: Q): string[] {
   const L = q.text.match(/point ([A-Z])\b/)?.[1];
   const pt = d.points.find((x) => x.label === L);
   if (!pt) return [...p, `point ${L} absent de la droite`];
-  if (attendu(q) !== pt.value) p.push(`attendu ${q.expected[0]}, le point ${L} est en ${pt.value}`);
+  const a = attendu(q);
+  if (a === null || !proche(a, pt.value)) p.push(`attendu ${q.expected[0]}, le point ${L} est en ${pt.value}`);
+  if (ecrite(d, pt.value)) p.push(`la graduation du point ${L} est écrite : le dessin donne la réponse`);
   return p;
+}
+
+/** QCM de lecture : la lettre du texte, son abscisse parmi des nombres distincts, une seule juste. */
+function corrigerAbscisseQcm(q: Q): string[] {
+  const { d, p } = lireDroite(q);
+  if (!d) return p;
+  const L = q.text.match(/point ([A-Z])\b/)?.[1];
+  const pt = d.points.find((x) => x.label === L);
+  if (!pt) return [...p, `point ${L} absent de la droite`];
+  if (ecrite(d, pt.value)) p.push(`la graduation du point ${L} est écrite : le dessin donne la réponse`);
+  const vs = (q.choices ?? []).map(valeur);
+  if (vs.some((v) => v === null)) p.push("une proposition n'est pas un nombre");
+  if (new Set(vs).size !== vs.length) p.push("deux propositions de même valeur");
+  if ((q.choices ?? []).some((c) => /\./.test(c))) p.push("point décimal au lieu de la virgule");
+  return [...p, ...qcmUnique(q, (c) => valeur(c) !== null && proche(valeur(c)!, pt.value))];
 }
 
 function corrigerPointExtreme(q: Q): string[] {
@@ -196,8 +226,9 @@ function corrigerQuelPoint(q: Q): string[] {
   if (!d) return p;
   const rs = relatifs(q.text);
   if (rs.length !== 1) return [...p, `un seul nombre attendu dans le texte, lus : ${rs.join(", ")}`];
-  const pts = d.points.filter((x) => x.value === rs[0]);
+  const pts = d.points.filter((x) => proche(x.value, rs[0]));
   if (pts.length !== 1) return [...p, `${pts.length} point(s) en ${rs[0]}`];
+  if (ecrite(d, rs[0])) p.push(`la graduation ${rs[0]} est écrite : le dessin donne la réponse`);
   return [...p, ...qcmUnique(q, (c) => c === pts[0].label)];
 }
 
@@ -339,6 +370,11 @@ export const CORRECTEURS: CorrecteursMaths = Object.fromEntries(
       relatif_placer_tpl_1: corrigerAbscisse,
       relatif_placer_tpl_2: corrigerPointExtreme,
       relatif_placer_tpl_3_quel_point: corrigerQuelPoint,
+      relatif_placer_tpl_4_decimal_pas_donne: corrigerAbscisse,
+      relatif_placer_tpl_5_decimal_trouver_pas: corrigerAbscisse,
+      relatif_placer_tpl_6_decimal_quel_point: corrigerQuelPoint,
+      relatif_placer_tpl_7_decimal_qcm_lecture: corrigerAbscisseQcm,
+      relatif_placer_tpl_8_decimal_situation: (q: Q) => (q.format === "qcm" ? corrigerQuelPoint(q) : corrigerAbscisse(q)),
       relatif_oppose_tpl_1: corrigerOppose,
       relatif_oppose_tpl_3_simple: corrigerOppose,
       relatif_oppose_tpl_x1: corrigerOpposeQcm,

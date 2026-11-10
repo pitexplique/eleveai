@@ -196,6 +196,10 @@ export type NumberLineCanvasData = {
   step?: number;
   /** Graduations secondaires sans valeur écrite (ex. 0,1 entre 0 et 1). */
   minorStep?: number;
+  /** ⭐ 10/11/2026 : seules ces graduations portent leur nombre (ex. [0, 1]) ;
+   *  les autres restent muettes. Sinon, un point posé sur une graduation écrite
+   *  donnait sa propre abscisse : l'élève lisait au lieu de compter le pas. */
+  valeursEcrites?: number[];
   points?: NumberLineCanvasPoint[];
   intervalles?: NumberLineCanvasIntervalle[];
   display?: {
@@ -1525,6 +1529,10 @@ export type DroiteGradueeCanvasData = {
   step?: number;
   /** Graduations secondaires sans valeur écrite (ex. 0,1 entre 0 et 1). */
   minorStep?: number;
+  /** ⭐ 10/11/2026 : seules ces graduations portent leur nombre (ex. [0, 1]) ;
+   *  les autres restent muettes. Sinon, un point posé sur une graduation écrite
+   *  donnait sa propre abscisse : l'élève lisait au lieu de compter le pas. */
+  valeursEcrites?: number[];
 
   points?: DroiteGradueePoint[];
   /** Voir `NumberLineCanvasIntervalle`. */

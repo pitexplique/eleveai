@@ -33,7 +33,12 @@ function valueToX(
   return leftPad + ((value - min) / (max - min)) * usableWidth;
 }
 
+/** ⛔ 10/11/2026 : le vrai signe moins « − » sous la droite, pas le tiret « - » de `String(-2)`. */
 function formatTick(value: number) {
+  return formatTickBrut(value).replace("-", "−");
+}
+
+function formatTickBrut(value: number) {
   const rounded = Math.round(value * 100) / 100;
 
   if (Number.isInteger(rounded)) {
@@ -83,6 +88,9 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   // `lib/tutor-v4/components`, que le coach n'utilise pas : la micro 6e
   // « Relier fraction et décimal » montrait une droite sans ses dixièmes.
   const minorStep = figure.minorStep ?? 0;
+  // ⭐ 10/11/2026 : seules ces graduations portent leur nombre (voir le type).
+  const valeursEcrites = figure.valeursEcrites;
+  const estEcrite = (t: number) => !valeursEcrites || valeursEcrites.some((v) => Math.abs(v - t) < 1e-9);
   const minorTicks: number[] = [];
   if (minorStep > 0 && (max - min) / minorStep <= 60) {
     for (let v = min; v <= max + 1e-9; v += minorStep) {
@@ -97,10 +105,11 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   // ⛔ LES GRANDS NOMBRES (05/11/2026, captures à 375 px). « 66 000 000 » ne tient pas
   // entre deux grands traits : élargir le dessin les faisait tomber à 5 px à l'écran.
   // On écrit un nombre sur deux une rangée plus bas : tous restent lus, à bonne taille.
-  const largeurNombre = Math.max(...ticks.map((t) => formatTick(t).length)) * 8;
+  const largeurNombre = Math.max(...ticks.filter(estEcrite).map((t) => formatTick(t).length), 1) * 8;
   const ecartGraduations = ticks.length > 1 ? (axisEndX - axisStartX) / (ticks.length - 1) : Infinity;
   const enDeuxRangees =
     showValues &&
+    !valeursEcrites &&
     !points.some((p) => p.below) &&
     largeurNombre + 4 > ecartGraduations &&
     largeurNombre + 4 <= 2 * ecartGraduations;
@@ -254,7 +263,7 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
                   strokeLinecap="round"
                 />
 
-                {showValues ? (
+                {showValues && estEcrite(tick) ? (
                   <text
                     x={x}
                     y={axisY + 26 + (enDeuxRangees && rang % 2 === 1 ? 18 : 0)}

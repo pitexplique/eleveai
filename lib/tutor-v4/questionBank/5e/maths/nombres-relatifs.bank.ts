@@ -30,13 +30,15 @@ function expl(calcul: string) {
 function numberLine(
   points: { value: number; label: string }[],
   min = -5,
-  max = 5
+  max = 5,
+  valeursEcrites?: number[],
 ) {
   return {
     kind: "number_line" as const,
     min,
     max,
     step: 1,
+    ...(valeursEcrites ? { valeursEcrites } : {}),
     points,
     display: {
       showTicks: true,
@@ -261,8 +263,69 @@ export function pointsSurDroite(d: { min: number; max: number; step: number }, k
 export function lettres(k: number) {
   return shuffle(["A", "B", "C", "D", "E", "F", "G", "H", "K", "M", "N", "P", "R", "S", "T"]).slice(0, k).sort();
 }
-export function canvasDroite(d: { min: number; max: number; step: number }, points: { value: number; label: string }[]) {
-  return { ...numberLine(points, d.min, d.max), step: d.step };
+export function canvasDroite(
+  d: { min: number; max: number; step: number },
+  points: { value: number; label: string }[],
+  valeursEcrites?: number[],
+) {
+  return { ...numberLine(points, d.min, d.max), step: d.step, ...(valeursEcrites ? { valeursEcrites } : {}) };
+}
+/** ⭐ 10/11/2026 : seuls 0 et la graduation qui suit portent leur nombre : l'élève COMPTE le pas.
+ *  (Toutes les graduations écrites, le point se posait au-dessus de sa propre réponse.) */
+export const zeroEtPas = (d: { step: number }) => [0, d.step];
+
+// ─── LA DROITE GRADUÉE DÉCIMALE (10/11/2026) ────────────────────────────────
+// Le coach de 5e n'avait que des pas entiers (1, 2, 5, 10), et chaque graduation
+// écrite donnait la réponse. Ici : un pas de 0,5, 0,25 ou 0,2, des nombres
+// relatifs décimaux, et seuls les ENTIERS sont écrits (★3 : seulement 0 et 1).
+// L'élève trouve le pas (« 1 unité en 5 graduations → 0,2 ») puis compte.
+export const rond = (x: number) => Math.round(x * 1000) / 1000;
+/** « 0,2 », « 0,25 », « 0,5 ». */
+export const dec = (x: number) => String(rond(x)).replace(".", ",");
+export type DroiteDecimale = { min: number; max: number; step: number; ecrites: number[]; parUnite: number };
+export function droiteDecimale(etoile: number): DroiteDecimale {
+  const step = choix([0.5, 0.25, 0.25, 0.2, 0.2]);
+  const unites = step === 0.5 ? randInt(4, 6) : randInt(2, 3);
+  const min = -randInt(1, unites - 1);
+  const max = min + unites;
+  const entiers = Array.from({ length: unites + 1 }, (_, i) => min + i);
+  return { min, max, step, parUnite: Math.round(1 / step), ecrites: etoile >= 3 ? [0, 1] : entiers };
+}
+/** Toutes les graduations de la droite. */
+export function graduations(d: DroiteDecimale) {
+  return Array.from({ length: Math.round((d.max - d.min) / d.step) + 1 }, (_, i) => rond(d.min + i * d.step));
+}
+/** Une graduation SANS nombre écrit, non entière (un négatif 7 fois sur 10). */
+export function decimaleMuette(d: DroiteDecimale, interdites: number[] = []) {
+  const ok = graduations(d).filter((v) => !Number.isInteger(v) && !interdites.includes(v));
+  const neg = ok.filter((v) => v < 0);
+  return Math.random() < 0.7 && neg.length ? choix(neg) : choix(ok);
+}
+/** L'explication : le pas trouvé, puis les graduations comptées depuis l'entier écrit le plus proche (à gauche). */
+export function comptePas(d: DroiteDecimale, v: number) {
+  const pas = `la droite est graduée de ${dec(d.step)} en ${dec(d.step)}`;
+  // ★3 : seuls 0 et 1 sont écrits ; un négatif se compte depuis 0, vers la gauche.
+  if (!d.ecrites.includes(-1) && v < 0) {
+    const n = Math.round(-v / d.step);
+    return (
+      `Entre 0 et 1, il y a ${d.parUnite} intervalles : ${pas}. ` +
+      `On part de 0 et on recule de ${pl(n, "graduation")} vers la gauche : 0 − ${n} × ${dec(d.step)} = ${rel(v)}.`
+    );
+  }
+  const depart = Math.floor(v + 1e-9);
+  const n = Math.round((v - depart) / d.step);
+  return (
+    `Entre deux entiers, il y a ${d.parUnite} intervalles : ${pas}. ` +
+    `On part de ${rel(depart)} et on avance de ${pl(n, "graduation")} vers la droite : ${rel(depart)} + ${n} × ${dec(d.step)} = ${rel(v)}.`
+  );
+}
+/** Les erreurs typiques de lecture de v : l'opposé, une graduation de trop ou de moins,
+ *  et le pas lu comme 0,1 (« 3 graduations après −2 → −1,7 »). Toutes distinctes de v. */
+export function leurresLecture(d: DroiteDecimale, v: number): number[] {
+  const depart = Math.floor(v + 1e-9);
+  const n = Math.round((v - depart) / d.step);
+  const cands = [-v, rond(v + d.step), rond(v - d.step), rond(depart + n / 10), rond(depart + 1 - n * d.step)];
+  return Array.from(new Set(cands.filter((x) => x !== v && x !== 0)));
 }
 
 const nombresRelatifsBrut: TutorBankItemV4[] = [
@@ -619,11 +682,11 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
     choices: ["A", "B", "C", "D"],
     expected: ["A"],
     comparator: "mcq_exact",
-    hint: "Cherche le point placé au-dessus de -3.",
+    hint: "Pars de 0 et compte 3 graduations vers la gauche.",
     explanation:
       "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          ("Sur la droite graduée, le point A est placé au-dessus de -3. Donc A correspond à -3.") +
+          ("La droite est graduée de 1 en 1. On part de 0 et on compte 3 graduations vers la gauche : on arrive au point A. Donc A correspond à -3.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
     tags: ["relatif", "placement", "qcm", "canvas"],
     canvas: {
@@ -631,6 +694,7 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
       min: -5,
       max: 5,
       step: 1,
+      valeursEcrites: [0, 1],
       points: [
         { value: -3, label: "A" },
         { value: -1, label: "B" },
@@ -659,11 +723,11 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
     format: "short",
     expected: ["-2"],
     comparator: "number_equal",
-    hint: "Lis le nombre situé sous le point B.",
+    hint: "La droite va de 1 en 1 : pars de 0 et compte les graduations jusqu’au point B.",
     explanation:
       "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          ("Le point B est placé au-dessus de -2. Son abscisse est donc -2.") +
+          ("Le point B est 2 graduations à gauche de 0, sur une droite graduée de 1 en 1. Son abscisse est donc -2.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
     tags: ["relatif", "placement", "abscisse", "canvas"],
     canvas: {
@@ -671,6 +735,7 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
       min: -4,
       max: 4,
       step: 1,
+      valeursEcrites: [0, 1],
       points: [{ value: -2, label: "B" }],
       display: {
         showTicks: true,
@@ -1342,7 +1407,9 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
       const vals = pointsSurDroite(d, randInt(2, 4));
       const labels = lettres(vals.length);
       const points = vals.map((value, i) => ({ value, label: labels[i] }));
-      const cible = Math.random() < 0.7 ? points.find((x) => x.value < 0)! : choix(points);
+      // ⭐ 10/11/2026 : seuls 0 et le pas sont écrits ; la cible n'est jamais l'un d'eux.
+      const muets = points.filter((x) => x.value !== d.step);
+      const cible = Math.random() < 0.7 ? points.find((x) => x.value < 0)! : choix(muets);
       const L = cible.label;
       const text = choix([
         `Quelle est l’abscisse du point ${L} ?`,
@@ -1360,7 +1427,7 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
           `La droite est graduée de ${d.step} en ${d.step}. Le point ${L} est ${cible.value < 0 ? "à gauche" : "à droite"} de 0, ` +
             `à ${Math.abs(cible.value) / d.step} graduation${Math.abs(cible.value) / d.step > 1 ? "s" : ""} : son abscisse est ${rel(cible.value)}.`,
         ),
-        canvas: canvasDroite(d, points),
+        canvas: canvasDroite(d, points, zeroEtPas(d)),
       };
     },
   },
@@ -1452,7 +1519,212 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
         explanation: expl(
           `La droite est graduée de ${d.step} en ${d.step}. ${rel(x)} est ${x < 0 ? "à gauche" : "à droite"} de 0, à ${Math.abs(x) / d.step} graduation${Math.abs(x) / d.step > 1 ? "s" : ""} : c’est le point ${bon.label}.`,
         ),
-        canvas: canvasDroite(d, points),
+        canvas: canvasDroite(d, points, zeroEtPas(d)),
+      };
+    },
+  },
+
+  // =========================
+  // TEMPLATES - RELATIF_PLACER : LA DROITE DÉCIMALE (10/11/2026)
+  // Pas de 0,5, 0,25 ou 0,2 ; seuls les entiers sont écrits (★3 : seulement 0 et 1).
+  // ★1 : le pas est donné ; ★2 : l'élève le trouve ; ★3 : une situation, un métier.
+  // =========================
+  {
+    kind: "template",
+    id: "relatif_placer_tpl_4_decimal_pas_donne",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_placer",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Pars de l’entier écrit juste à gauche du point, puis compte les graduations en ajoutant le pas à chaque fois.",
+    tags: ["relatif", "placement", "abscisse", "decimal", "canvas", "template"],
+    generate: () => {
+      const p = pick(PRENOMS);
+      const d = droiteDecimale(1);
+      const v = decimaleMuette(d);
+      const L = choix(lettres(6));
+      const pas = dec(d.step);
+      const text = choix([
+        `La droite est graduée de ${pas} en ${pas}. Quelle est l’abscisse du point ${L} ?`,
+        `Sur cette droite graduée de ${pas} en ${pas}, quel nombre repère le point ${L} ?`,
+        `Le pas de la graduation est ${pas}. Quel nombre correspond au point ${L} ?`,
+        `${p.nom} sait que la droite est graduée de ${pas} en ${pas}. Quelle est l’abscisse du point ${L} ?`,
+        `Graduation de ${pas} en ${pas} : lis l’abscisse du point ${L}.`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: attendus(v),
+        comparator: "number_equal",
+        explanation: expl(comptePas(d, v)),
+        canvas: canvasDroite(d, [{ value: v, label: L }], d.ecrites),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_placer_tpl_5_decimal_trouver_pas",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_placer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les intervalles entre deux entiers écrits : 2 → pas de 0,5 ; 4 → pas de 0,25 ; 5 → pas de 0,2.",
+    tags: ["relatif", "placement", "abscisse", "decimal", "canvas", "template"],
+    generate: () => {
+      const p = pick(PRENOMS);
+      const d = droiteDecimale(2);
+      const vals: number[] = [];
+      const k = randInt(2, 3);
+      while (vals.length < k) vals.push(decimaleMuette(d, vals));
+      const labels = lettres(k);
+      const points = vals.map((value, i) => ({ value, label: labels[i] }));
+      const cible = choix(points);
+      const L = cible.label;
+      const text = choix([
+        `Quelle est l’abscisse du point ${L} ? Trouve d’abord le pas de la graduation.`,
+        `${p.nom} doit lire l’abscisse du point ${L}. Que trouve-t-${il(p)} ?`,
+        `Quel nombre repère le point ${L} ? Attention au pas de la graduation.`,
+        `Lis l’abscisse du point ${L} sur cette droite graduée.`,
+        `${p.nom} a placé le point ${L}. Quelle est son abscisse ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: attendus(cible.value),
+        comparator: "number_equal",
+        explanation: expl(comptePas(d, cible.value)),
+        canvas: canvasDroite(d, points, d.ecrites),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_placer_tpl_6_decimal_quel_point",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_placer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Trouve le pas, pars de l’entier écrit juste à gauche du nombre, puis compte les graduations vers la droite.",
+    tags: ["relatif", "placement", "qcm", "decimal", "canvas", "template"],
+    // Les leurres sont les erreurs typiques : l'opposé, une graduation de trop, le comptage depuis le mauvais entier.
+    generate: () => {
+      const p = pick(PRENOMS);
+      const d = droiteDecimale(2);
+      const x = decimaleMuette(d);
+      const surDroite = graduations(d);
+      const pieges = shuffle(leurresLecture(d, x).filter((v) => surDroite.includes(v) && !Number.isInteger(v)));
+      const vals = [x, ...pieges.slice(0, randInt(2, 3))];
+      while (vals.length < 3) vals.push(decimaleMuette(d, vals));
+      const labels = lettres(vals.length);
+      const points = shuffle(vals).map((value, i) => ({ value, label: labels[i] }));
+      const bon = points.find((pt) => pt.value === x)!;
+      const text = choix([
+        `Quel point a pour abscisse ${rel(x)} ?`,
+        `${p.nom} a placé le nombre ${rel(x)} sur la droite graduée. Quelle lettre a-t-${il(p)} écrite ?`,
+        `Sur cette droite graduée, quel point est placé en ${rel(x)} ?`,
+        `${p.nom} cherche le point d’abscisse ${rel(x)}. Lequel est-ce ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: labels,
+        expected: [bon.label],
+        comparator: "mcq_exact",
+        explanation: expl(`${comptePas(d, x)} C’est le point ${bon.label}.`),
+        canvas: canvasDroite(d, points, d.ecrites),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_placer_tpl_7_decimal_qcm_lecture",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_placer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une graduation ne vaut pas forcément 0,1 : compte les intervalles entre deux entiers.",
+    tags: ["relatif", "placement", "abscisse", "qcm", "decimal", "canvas", "template"],
+    generate: () => {
+      const p = pick(PRENOMS);
+      const d = droiteDecimale(2);
+      const v = decimaleMuette(d);
+      const L = choix(lettres(6));
+      const props = [v, ...shuffle(leurresLecture(d, v)).slice(0, 3)];
+      const choices = shuffle(props).map((x) => rel(x, false));
+      const text = choix([
+        `Quelle est l’abscisse du point ${L} ?`,
+        `${p.nom} lit l’abscisse du point ${L}. Quelle est la bonne réponse ?`,
+        `Quel nombre repère le point ${L} ?`,
+        `Parmi ces nombres, lequel est l’abscisse du point ${L} ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices,
+        expected: [rel(v, false)],
+        comparator: "mcq_exact",
+        explanation: expl(comptePas(d, v)),
+        canvas: canvasDroite(d, [{ value: v, label: L }], d.ecrites),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_placer_tpl_8_decimal_situation",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_placer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Seuls 0 et 1 sont écrits : compte combien de graduations il faut pour aller de 0 à 1, tu obtiens le pas.",
+    tags: ["relatif", "placement", "decimal", "canvas", "situation", "template"],
+    // Une situation (6, un métier chacune) × lire ou placer × une lettre ; seuls 0 et 1 sont écrits.
+    generate: () => {
+      const p = pick(PRENOMS);
+      const d = droiteDecimale(3);
+      const v = decimaleMuette(d, [1]);
+      const L = choix(["T", "M", "P", "R", "S", "N"]);
+      const sit = choix([
+        { u: "°C", t: `Une météorologue reporte la température de la nuit sur une droite graduée en degrés Celsius.`, q: "Quelle température indique le point" },
+        { u: "m", t: `Un capitaine de port note la hauteur de l’eau par rapport à son niveau moyen, en mètres.`, q: "Quelle hauteur indique le point" },
+        { u: "°C", t: `Un frigoriste règle une chambre froide et note sa température en degrés Celsius sur une droite graduée.`, q: "Quelle température indique le point" },
+        { u: "m", t: `Une monitrice de plongée repère la position ${de(p.nom)} par rapport à la surface de l’eau, en mètres.`, q: "Quelle position indique le point" },
+        { u: "m", t: `Une entraîneuse de saut en longueur note l’écart entre le saut ${de(p.nom)} et son record, en mètres.`, q: "Quel écart indique le point" },
+        { u: "", t: `Un comptable reporte le solde d’une petite entreprise, en milliers d’euros, sur une droite graduée.`, q: "Quel solde, en milliers d’euros, indique le point" },
+      ]);
+      if (Math.random() < 0.6) {
+        return {
+          text: `${sit.t} ${sit.q} ${L} ?`,
+          format: "short",
+          expected: attendus(v, sit.u),
+          comparator: "number_equal",
+          explanation: expl(comptePas(d, v)),
+          canvas: canvasDroite(d, [{ value: v, label: L }], d.ecrites),
+        };
+      }
+      const surDroite = graduations(d);
+      const vals = [v, ...shuffle(leurresLecture(d, v).filter((x) => surDroite.includes(x) && !Number.isInteger(x))).slice(0, 2)];
+      while (vals.length < 3) vals.push(decimaleMuette(d, [...vals, 1]));
+      const labels = lettres(vals.length);
+      const points = shuffle(vals).map((value, i) => ({ value, label: labels[i] }));
+      const bon = points.find((pt) => pt.value === v)!;
+      return {
+        text: `${sit.t} Quel point correspond à ${rel(v)}${sit.u ? ` ${sit.u}` : ""} ?`,
+        format: "qcm",
+        choices: labels,
+        expected: [bon.label],
+        comparator: "mcq_exact",
+        explanation: expl(`${comptePas(d, v)} C’est le point ${bon.label}.`),
+        canvas: canvasDroite(d, points, d.ecrites),
       };
     },
   },
@@ -2326,14 +2598,14 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
-    hint: "Lis le nombre sous le point C.",
-    explanation: expl("Le point C est placé au-dessus de 3 : son abscisse est 3."),
+    hint: "La droite va de 1 en 1 : pars de 0 et compte les graduations jusqu’au point C.",
+    explanation: expl("Le point C est 3 graduations à droite de 0, sur une droite graduée de 1 en 1 : son abscisse est 3."),
     tags: ["relatif", "placement", "abscisse", "canvas"],
     canvas: numberLine([
       { value: -4, label: "A" },
       { value: -1, label: "B" },
       { value: 3, label: "C" },
-    ]),
+    ], -5, 5, [0, 1]),
   },
   {
     kind: "fixed",
@@ -2349,15 +2621,15 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
     choices: ["A", "B", "C", "D"],
     expected: ["B"],
     comparator: "mcq_exact",
-    hint: "Cherche le point au-dessus de -2.",
-    explanation: expl("Le point B est placé au-dessus de -2."),
+    hint: "Pars de 0 et compte 2 graduations vers la gauche.",
+    explanation: expl("On part de 0 et on compte 2 graduations vers la gauche : on arrive au point B."),
     tags: ["relatif", "placement", "qcm", "canvas"],
     canvas: numberLine([
       { value: -5, label: "A" },
       { value: -2, label: "B" },
       { value: 1, label: "C" },
       { value: 4, label: "D" },
-    ]),
+    ], -5, 5, [0, 1]),
   },
   {
     kind: "fixed",
@@ -2382,7 +2654,7 @@ const nombresRelatifsBrut: TutorBankItemV4[] = [
       { value: -3, label: "B" },
       { value: -4, label: "C" },
       { value: -5, label: "D" },
-    ]),
+    ], -5, 5, [0, 1]),
   },
 
   // =========================
