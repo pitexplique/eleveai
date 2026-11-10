@@ -40,7 +40,7 @@ function lireVideo(id: string): Promise<VideoLue | null> {
   return cache.get(id)!;
 }
 
-const HAUTEUR_VIDEO = "max-h-[calc(100dvh-5.5rem)] sm:max-h-[calc(100dvh-7.5rem)]";
+const HAUTEUR_VIDEO = "max-h-[calc(100dvh-9rem)] sm:max-h-[calc(100dvh-11rem)]";
 
 function ModalVideo({
   id,
@@ -186,7 +186,7 @@ function ModalVideo({
                 suite={video.coach ? { href: video.coach, label: "Je m'entraîne sur ces questions" } : undefined}
                 className={
                   video.short
-                    ? `mx-auto aspect-[9/16] h-[calc(100dvh-5.5rem)] max-w-full bg-black object-contain sm:h-[calc(100dvh-7.5rem)] sm:rounded-2xl`
+                    ? `mx-auto aspect-[9/16] h-[calc(100dvh-9rem)] max-w-full bg-black object-contain sm:h-[calc(100dvh-11rem)] sm:rounded-2xl`
                     : `aspect-video w-full bg-black object-contain sm:rounded-2xl ${HAUTEUR_VIDEO}`
                 }
               >
