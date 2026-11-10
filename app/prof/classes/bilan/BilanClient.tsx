@@ -20,7 +20,7 @@ type Notion = {
 };
 type Donnees = {
   classe: { nom_classe: string; code_etablissement: string };
-  eleves: { code_utilisateur: string; nom: string | null }[];
+  eleves: { code_utilisateur: string; nom: string | null; pseudo?: string | null }[];
   notions: Notion[];
 };
 
@@ -120,6 +120,9 @@ export default function BilanClient() {
                           <td className="sticky left-0 bg-white p-2 whitespace-nowrap">
                             <span className="font-mono font-bold">{e.code_utilisateur}</span>
                             {prenom && <span className="ml-2 text-slate-600">{prenom}</span>}
+                            {e.pseudo && e.pseudo !== prenom && (
+                              <span className="ml-2 italic text-violet-700" title="Prénom ou pseudo choisi par l'élève">« {e.pseudo} »</span>
+                            )}
                           </td>
                           {notion.micros.map((m) => {
                             const c = siens[m.id];

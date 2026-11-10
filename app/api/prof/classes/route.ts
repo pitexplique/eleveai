@@ -50,10 +50,14 @@ export async function GET(req: Request) {
     // colonne absente : on s'en passe.
     const { data: av } = await admin
       .from("passions_eleves")
-      .select("code_etablissement, code_utilisateur, avatar")
+      .select("*")
       .in("code_etablissement", codes);
-    const avatars = new Map((av ?? []).map((a: any) => [`${a.code_etablissement}·${a.code_utilisateur}`, a.avatar ?? null]));
-    eleves = eleves.map((e) => ({ ...e, avatar: avatars.get(`${e.code_etablissement}·${e.code_utilisateur}`) ?? null }));
+    // « select * » : avatar et pseudo (lib/pseudo.ts, 10/11/2026) peuvent manquer tant que le SQL n'a pas tourné.
+    const profils = new Map((av ?? []).map((a: any) => [`${a.code_etablissement}·${a.code_utilisateur}`, a]));
+    eleves = eleves.map((e) => {
+      const pr = profils.get(`${e.code_etablissement}·${e.code_utilisateur}`);
+      return { ...e, avatar: pr?.avatar ?? null, pseudo: pr?.pseudo ?? null };
+    });
   }
 
   return NextResponse.json({

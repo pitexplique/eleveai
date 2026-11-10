@@ -4,6 +4,7 @@
 
 import { NextResponse } from "next/server";
 import { classeDuProf, profDuJeton, supabaseAdmin } from "@/lib/server/classesProf";
+import { pseudosDeLaClasse } from "@/lib/server/pseudos";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +29,7 @@ export async function GET(req: Request) {
       .limit(5000);
   const COLONNES = "created_at, code_utilisateur, type, ressource, libelle, juste";
 
-  const [eleves, avecQuestion] = await Promise.all([
+  const [eleves, avecQuestion, pseudos] = await Promise.all([
     admin
       .from("acces_etablissement")
       .select("code_utilisateur, nom")
@@ -37,6 +38,8 @@ export async function GET(req: Request) {
       .order("code_utilisateur"),
     // L'énoncé et la réponse : colonnes de supabase/activite_eleve_question.sql.
     lireGestes(`${COLONNES}, enonce, reponse`),
+    // Le prénom ou pseudo que l'élève s'est donné (lib/pseudo.ts).
+    pseudosDeLaClasse(admin, code),
   ]);
   // Colonnes pas encore créées : on lit comme avant, sans la question.
   const gestes = avecQuestion.error ? await lireGestes(COLONNES) : avecQuestion;
@@ -52,7 +55,7 @@ export async function GET(req: Request) {
     ok: true,
     maintenant: new Date().toISOString(),
     classe: { nom_classe: classe.nom_classe, code_etablissement: code },
-    eleves: eleves.data ?? [],
+    eleves: (eleves.data ?? []).map((e) => ({ ...e, pseudo: pseudos.get(e.code_utilisateur) ?? null })),
     gestes: gestes.data ?? [],
   });
 }

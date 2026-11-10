@@ -16,6 +16,8 @@ type EleveClasse = {
   mot_de_passe: string | null;
   actif: boolean;
   avatar?: string | null;
+  /** Prénom ou pseudo choisi par l'élève (lib/pseudo.ts). */
+  pseudo?: string | null;
 };
 
 type Classe = {
@@ -367,6 +369,11 @@ export default function MesClassesClient() {
                               <AvatarRond avatar={e.avatar} taille="s" />
                               {e.code_utilisateur}
                             </span>
+                            {e.pseudo && (
+                              <span className="ml-2 font-sans text-xs font-semibold italic text-violet-700" title="Prénom ou pseudo choisi par l'élève">
+                                « {e.pseudo} »
+                              </span>
+                            )}
                           </td>
                           <td className="py-1.5">
                             <input

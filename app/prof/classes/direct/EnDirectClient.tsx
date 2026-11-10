@@ -25,7 +25,8 @@ type Geste = {
 type Donnees = {
   maintenant: string;
   classe: { nom_classe: string; code_etablissement: string };
-  eleves: { code_utilisateur: string; nom: string | null }[];
+  /** pseudo : le prénom ou pseudo choisi par l'élève (lib/pseudo.ts). */
+  eleves: { code_utilisateur: string; nom: string | null; pseudo?: string | null }[];
   gestes: Geste[];
 };
 
@@ -35,6 +36,8 @@ const RAFRAICHIR_MS = 15 * 1000;
 type Tuile = {
   code: string;
   prenom: string | null;
+  /** Choisi par l'élève dans son tableau de bord ; null si vide ou égal au prénom. */
+  pseudo: string | null;
   etat: "actif" | "pause" | "rien";
   aider: boolean;
   depuisMin: number | null;
@@ -49,6 +52,7 @@ type Tuile = {
 function tuileDe(
   code: string,
   nom: string | null,
+  pseudoEleve: string | null | undefined,
   gestes: Geste[],
   maintenant: number,
 ): Tuile {
@@ -56,6 +60,7 @@ function tuileDe(
   const coach = siens.filter((g) => g.type === "coach");
   const dernier = siens[0];
   const prenom = nom && !/^Élève \d+$/.test(nom) ? nom : null;
+  const pseudo = pseudoEleve && pseudoEleve !== prenom ? pseudoEleve : null;
 
   // Trois erreurs de suite sur le même micro : c'est l'élève à aller voir.
   const [a, b, c] = coach;
@@ -86,6 +91,7 @@ function tuileDe(
   return {
     code,
     prenom,
+    pseudo,
     etat: depuis === null ? "rien" : depuis < ACTIF_MS ? "actif" : "pause",
     aider,
     depuisMin: depuis === null ? null : Math.floor(depuis / 60000),
@@ -152,7 +158,7 @@ export default function EnDirectClient() {
 
   const maintenant = new Date(donnees.maintenant).getTime();
   const tuiles = donnees.eleves.map((e) =>
-    tuileDe(e.code_utilisateur, e.nom, donnees.gestes, maintenant),
+    tuileDe(e.code_utilisateur, e.nom, e.pseudo, donnees.gestes, maintenant),
   );
   const nbActifs = tuiles.filter((t) => t.etat === "actif").length;
   const nbAider = tuiles.filter((t) => t.aider).length;
@@ -198,9 +204,17 @@ export default function EnDirectClient() {
                         : "⚪ rien"}
                 </p>
               </div>
-              {t.prenom && (
+              {(t.prenom || t.pseudo) && (
                 <p className="truncate text-sm font-bold text-slate-800">
                   {t.prenom}
+                  {t.pseudo && (
+                    <span
+                      className={`italic text-violet-700 ${t.prenom ? "ml-1 font-semibold" : ""}`}
+                      title="Prénom ou pseudo choisi par l'élève"
+                    >
+                      « {t.pseudo} »
+                    </span>
+                  )}
                 </p>
               )}
               <p className="mt-1 line-clamp-2 text-sm text-slate-700">

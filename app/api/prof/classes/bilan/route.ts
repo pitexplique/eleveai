@@ -6,6 +6,7 @@
 
 import { NextResponse } from "next/server";
 import { classeDuProf, profDuJeton, supabaseAdmin } from "@/lib/server/classesProf";
+import { pseudosDeLaClasse } from "@/lib/server/pseudos";
 import { getMicroLabelMap, getNotionMicroMap, notionLabel } from "@/lib/tutor-v4/catalog";
 
 export const dynamic = "force-dynamic";
@@ -21,7 +22,7 @@ export async function GET(req: Request) {
   const classe = await classeDuProf(admin, p.prof.id, code);
   if (!classe) return NextResponse.json({ ok: false, error: "Classe introuvable." }, { status: 404 });
 
-  const [eleves, seances] = await Promise.all([
+  const [eleves, seances, pseudos] = await Promise.all([
     admin
       .from("acces_etablissement")
       .select("code_utilisateur, nom")
@@ -34,6 +35,7 @@ export async function GET(req: Request) {
       .eq("code_etablissement", code)
       .order("created_at", { ascending: false })
       .limit(5000),
+    pseudosDeLaClasse(admin, code),
   ]);
 
   // notion (classe|matiere|notion) → { dernière fois, élève → micro → cumul }
@@ -87,7 +89,7 @@ export async function GET(req: Request) {
   return NextResponse.json({
     ok: true,
     classe: { nom_classe: classe.nom_classe, code_etablissement: code },
-    eleves: eleves.data ?? [],
+    eleves: (eleves.data ?? []).map((e) => ({ ...e, pseudo: pseudos.get(e.code_utilisateur) ?? null })),
     notions: resultat,
   });
 }

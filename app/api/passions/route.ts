@@ -12,6 +12,7 @@ import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { MAX_PASSIONS, passionValide } from "@/lib/videos/centres-interet";
 import { avatarValide } from "@/lib/avatars";
+import { nettoyerPseudo } from "@/lib/pseudo";
 
 export const dynamic = "force-dynamic";
 
@@ -42,6 +43,8 @@ export async function GET(req: Request) {
     passions: (data?.passions as string[] | undefined) ?? null,
     // « select * » : la colonne avatar peut manquer tant que le SQL n'est pas rejoué.
     avatar: (data?.avatar as string | null | undefined) ?? null,
+    // Le prénom ou pseudo (lib/pseudo.ts, supabase/passions_eleves_pseudo.sql).
+    pseudo: (data?.pseudo as string | null | undefined) ?? null,
     enBase: true,
   });
 }
@@ -61,6 +64,13 @@ export async function POST(req: Request) {
     ligne.passions = [...new Set(brutes.filter(passionValide).map((p) => p.trim()))].slice(0, MAX_PASSIONS);
   }
   if (avatarValide(body?.avatar)) ligne.avatar = body.avatar;
+  if (body && "pseudo" in body) {
+    const pseudo = nettoyerPseudo(body.pseudo);
+    if (pseudo && typeof pseudo === "object") {
+      return NextResponse.json({ ok: false, error: pseudo.erreur }, { status: 400 });
+    }
+    ligne.pseudo = pseudo;
+  }
   // Upsert : sur une ligne existante, seules les colonnes envoyées changent.
   const { error } = await admin().from("passions_eleves").upsert(ligne);
   return NextResponse.json({ ok: true, enBase: !error });

@@ -7,6 +7,7 @@ import { useEleve } from "@/context/EleveContext";
 import CarteMesNotions, { type Notion as NotionCompris } from "./CarteMesNotions";
 import CartePassions from "./CartePassions";
 import CarteAvatar from "./CarteAvatar";
+import CartePseudo from "./CartePseudo";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
 import CarteCodeParent from "./CarteCodeParent";
 import type { Bulletin } from "@/lib/bulletin/types";
@@ -449,6 +450,7 @@ export default function DashboardEleveClient() {
 
         <CarteMesNotions notions={mesNotions} />
 
+        <CartePseudo />
         <CarteAvatar />
         <CartePassions />
         <CarteCodeParent />
