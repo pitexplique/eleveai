@@ -18,6 +18,7 @@
 // à l'autre est une micro-compétence à part entière.
 
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { renfortSuitesArithmetiques } from "./suites-arithmetiques-renfort";
 
 /* ─────────────────────────── outils ─────────────────────────── */
 
@@ -91,7 +92,7 @@ const CONTEXTES = [
   { sujet: "Un club", unite: "adhérents", nom: "le nombre d'adhérents" },
 ] as const;
 
-export const suitesArithmetiquesBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ═══════════════ lin_suite_reconnaitre ═══════════════ */
 
   {
@@ -747,4 +748,21 @@ export const suitesArithmetiquesBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/* 10/11/2026 — Frédéric : « enlève les questions fixes sauf pour des cas
+   spéciaux ». Mesure du 10/11 : 1 à 8 squelettes par micro, 13 à 19
+   répétitions sur 20. Les générateurs de suites-arithmetiques-renfort.ts
+   remplacent tout ; on garde trois questions de cours : la lecture de uₙ
+   (rang, pas produit), le piège « premier terme négatif mais r > 0 », et
+   l'alignement des points d'une suite arithmétique. */
+const CAS_SPECIAUX = new Set([
+  "premiere_lin_notation_fixed_1",
+  "premiere_lin_variation_fixed_1",
+  "premiere_lin_graphique_fixed_1",
+]);
+
+export const suitesArithmetiquesBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortSuitesArithmetiques,
 ];

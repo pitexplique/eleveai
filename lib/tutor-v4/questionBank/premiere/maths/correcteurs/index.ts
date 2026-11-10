@@ -2,7 +2,9 @@
 import type { CorrecteursMaths } from "@/lib/tutor-v4/questionBank/4e/maths/correcteurs/types";
 
 import { CORRECTEURS as testsGrandsNombres } from "./tests-grands-nombres";
+import { CORRECTEURS as suites } from "./suites";
 
 export const CORRECTEURS_PREMIERE: CorrecteursMaths = {
   ...testsGrandsNombres,
+  ...suites,
 };

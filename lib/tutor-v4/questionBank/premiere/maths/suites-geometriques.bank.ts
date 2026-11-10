@@ -18,6 +18,7 @@
 // coach fait autrement : il garde des nombres calculables de tête.
 
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { renfortSuitesGeometriques } from "./suites-geometriques-renfort";
 
 /* ─────────────────────────── outils ─────────────────────────── */
 
@@ -79,7 +80,7 @@ function canvasNuage(termes: number[], titre?: string): CanvasFigure {
 // Taux dont le coefficient donne des puissances exactes sur de petits rangs.
 const TAUX_EXACTS = [20, 25, 50, 100] as const;
 
-export const suitesGeometriquesBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* ═══════════════ expo_suite_reconnaitre ═══════════════ */
 
   {
@@ -609,4 +610,16 @@ export const suitesGeometriquesBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/* 10/11/2026 — Frédéric : « enlève les questions fixes sauf pour des cas
+   spéciaux ». Mesure du 10/11 : 1 à 8 squelettes par micro, 13 à 19
+   répétitions sur 20. Les générateurs de suites-geometriques-renfort.ts
+   remplacent tout ; on garde une question de cours : l'allure des points
+   d'une suite géométrique de raison 1,5 (ils ne sont pas alignés). */
+const CAS_SPECIAUX = new Set(["premiere_expo_graphique_fixed_1"]);
+
+export const suitesGeometriquesBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortSuitesGeometriques,
 ];
