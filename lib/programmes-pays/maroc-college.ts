@@ -359,7 +359,7 @@ export const MAROC_2AC: ProgrammePays = {
       code: "S2-8", domaine: AG,
       texte: "Cosinus d'un angle aigu dans le triangle rectangle ; valeurs arrondies à la calculatrice.",
       couverture: "complete",
-      micros: m("4e", "cos_cotes", "cos_definition", "cos_calculer_longueur", "cos_calculer_angle", "cos_probleme"),
+      micros: m("4e", "cos_cotes", "cos_definition", "cos_calculer_longueur", "cos_calculer_angle", "cos_probleme", "cos_defi"),
     },
     {
       code: "S2-9", domaine: AG,

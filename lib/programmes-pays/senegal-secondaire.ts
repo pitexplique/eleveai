@@ -187,7 +187,7 @@ export const SENEGAL_2NDE: ProgrammePays = {
       texte: "Raisonnement : syllogisme, contraposée, raisonnement par l'absurde, symboles de l'implication et de l'équivalence.",
       couverture: "complete",
       micros: [
-        ...m("seconde", "logique_connecteurs", "logique_implication_reciproque", "logique_negation_contre_exemple"),
+        ...m("seconde", "logique_connecteurs", "logique_implication_reciproque", "logique_negation_contre_exemple", "logique_contraposee", "logique_raisonnement_type"),
         ...m("premiere-spe", "log_raisonnements", "log_equivalence"),
       ],
     },
@@ -197,7 +197,7 @@ export const SENEGAL_2NDE: ProgrammePays = {
       texte: "Statistique descriptive : diagrammes cumulatifs, histogramme, mode, classe modale, moyenne, médiane, quartiles (graphiquement et par le calcul) ; variance, écart-type, interprétation.",
       couverture: "complete",
       micros: [
-        ...m("seconde", "stat_lire_serie", "stat_frequence", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_interquartile", "stat_ecart_type", "stat_interpreter", "stat_histogramme", "stat_polygone_cumule", "stat_mediane_estimee"),
+        ...m("seconde", "stat_lire_serie", "stat_frequence", "stat_moyenne_ponderee", "stat_mediane_quartiles", "stat_ecart_interquartile", "stat_ecart_type", "stat_interpreter", "stat_histogramme", "stat_polygone_cumule", "stat_mediane_estimee", "stat_linearite_moyenne"),
         ...m("3e", "stat_classe_modale_centre", "stat_lire_tableau"),
         ...m("4e", "stat_histogramme_lire"),
         ...m("premiere", "auto_stat_moyenne"),
@@ -247,7 +247,7 @@ export const SENEGAL_1RE: ProgrammePays = {
       texte: "Dérivée et sens de variation : dérivée nulle, positive, négative ; extremum quand f' s'annule en changeant de signe ; problèmes d'optimisation ; dérivée et bijection.",
       couverture: "complete",
       micros: [
-        ...m("premiere-spe", "var_constante", "var_signe_derivee", "var_tableau", "var_extremum", "var_optimisation"),
+        ...m("premiere-spe", "var_constante", "var_signe_derivee", "var_tableau", "var_extremum", "var_extremum_tangente", "var_optimisation", "var_inegalite"),
         ...m("terminale-spe", "tvi_unicite"),
       ],
     },
@@ -266,7 +266,7 @@ export const SENEGAL_1RE: ProgrammePays = {
       texte: "Suites : définition, sens de variation, suites bornées, périodiques, raisonnement par récurrence, représentation graphique ; suites arithmétiques et géométriques, somme de p termes ; convergence (approche intuitive).",
       couverture: "complete",
       micros: [
-        ...m("premiere-spe", "suite_termes", "suite_recurrence", "suite_variation", "suite_arithmetique", "suite_geometrique", "suite_sommes", "suite_somme_geo", "suite_limite"),
+        ...m("premiere-spe", "suite_termes", "suite_recurrence", "suite_variation", "suite_arithmetique", "suite_geometrique", "suite_sommes", "suite_somme_geo", "suite_limite", "suite_algorithme"),
         ...m("terminale-spe", "suite_bornee", "suite_recurrence_preuve"),
       ],
     },
@@ -286,7 +286,7 @@ export const SENEGAL_1RE: ProgrammePays = {
       code: "ST 1", domaine: "Statistique",
       texte: "Séries classées d'inégales amplitudes ; séries à deux variables : effectifs et fréquences marginaux et conditionnels, nuage de points, point moyen, ajustement à main levée et par la méthode de Mayer.",
       couverture: "partielle",
-      micros: m("premiere", "info_tab_frequence_marginale", "info_tab_frequence_conditionnelle", "info_nuage_construire", "info_point_moyen_calculer", "info_point_moyen_droite", "info_ajust_determiner", "info_ajust_equation"),
+      micros: [...m("premiere", "info_tab_frequence_marginale", "info_tab_frequence_conditionnelle", "info_nuage_construire", "info_point_moyen_calculer", "info_point_moyen_droite", "info_ajust_determiner", "info_ajust_equation"), ...m("seconde", "croise_completer_tableau", "croise_frequence_marginale", "croise_frequence_conditionnelle")],
       note: "Renvois à l'enseignement scientifique de 1re (tronc commun). Les classes d'inégales amplitudes et la méthode de MAYER (deux sous-nuages, deux points moyens) n'ont pas de micro propre.",
     },
 
@@ -365,14 +365,14 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "AN 1", domaine: "Analyse",
       texte: "Continuité et fonction réciproque : théorème des valeurs intermédiaires, valeur approchée d'un zéro ; réciproque d'une fonction continue strictement monotone (existence, courbe) ; branches infinies, comparaison de limites, limite d'une composée.",
       couverture: "partielle",
-      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "limite_fonction_operations", "limite_fonction_asymptote", "reciproque_bijection", "reciproque_expression", "reciproque_courbe", "branches_infinies"),
-      note: "Manquent le calcul d'une valeur approchée d'un zéro, la comparaison de limites et la limite d'une composée pour les fonctions.",
+      micros: m("terminale-spe", "continuite_reconnaitre", "tvi_appliquer", "tvi_unicite", "tvi_rediger", "limite_fonction_operations", "limite_fonction_asymptote", "reciproque_bijection", "reciproque_expression", "reciproque_courbe", "branches_infinies", "tvi_defi"),
+      note: "Manquent le calcul d'une valeur approchée d'un zéro (le défi tvi_defi nomme seulement le balayage et la dichotomie), la comparaison de limites et la limite d'une composée pour les fonctions.",
     },
     {
       code: "AN 2", domaine: "Analyse",
       texte: "Dérivées et primitives : dérivée d'une composée et d'une réciproque, dérivées successives, point d'inflexion ; primitives des fonctions usuelles, de (g' ∘ f)·f' et fⁿ·f' ; inégalité des accroissements finis.",
       couverture: "partielle",
-      micros: m("terminale-spe", "derivation_formules", "derivation_composee", "convexite_derivee_seconde", "convexite_point_inflexion", "primitive_reconnaitre", "primitive_calculer", "reciproque_derivee"),
+      micros: m("terminale-spe", "derivation_formules", "derivation_somme_produit_quotient", "derivation_composee", "convexite_derivee_seconde", "convexite_point_inflexion", "primitive_reconnaitre", "primitive_calculer", "reciproque_derivee"),
       note: "La dérivée de la réciproque est couverte ; manquent les primitives de fⁿ·f' et l'inégalité des accroissements finis.",
     },
     {
@@ -386,7 +386,7 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "AN 4", domaine: "Analyse",
       texte: "Exponentielle : réciproque de ln, propriétés, limites (eˣ/xᵃ, xⁿeˣ, (eˣ − 1)/x), dérivée, primitives de (exp ∘ f)·f', courbe.",
       couverture: "complete",
-      micros: m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "primitive_calculer"),
+      micros: [...m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "primitive_calculer"), ...m("premiere-spe", "exp_relation", "exp_signe", "exp_simplifier", "exp_courbe")],
     },
     {
       code: "AN 5", domaine: "Analyse",
@@ -398,7 +398,7 @@ export const SENEGAL_TLE: ProgrammePays = {
       code: "AN 6", domaine: "Analyse",
       texte: "Suites : rappels sur les suites arithmétiques et géométriques ; suites récurrentes uₙ₊₁ = f(uₙ) avec f continue (représentation, sens de variation, limite solution de f(x) = x) ; convergence des suites monotones bornées.",
       couverture: "complete",
-      micros: m("terminale-spe", "suite_explicite_recurrence", "suite_recurrence_preuve", "suite_variation", "suite_bornee", "limite_suite_monotone_bornee", "limite_suite_calculer", "limite_suite_defi"),
+      micros: m("terminale-spe", "suite_reconnaitre", "suite_calculer_termes", "suite_explicite_recurrence", "suite_recurrence_preuve", "suite_variation", "suite_bornee", "limite_suite_monotone_bornee", "limite_suite_calculer", "limite_suite_defi", "suite_defi"),
     },
     {
       code: "AN 7", domaine: "Analyse",
@@ -430,16 +430,16 @@ export const SENEGAL_TLE: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("seconde", "proba_vocabulaire", "proba_calculer", "proba_evenement_contraire", "proba_formule_union"),
-        ...m("premiere-spe", "pc_independance"),
-        ...m("terminale-spe", "proba_conditionnelle_arbre", "proba_conditionnelle_formule", "proba_totales", "proba_inverse_bayes"),
+        ...m("premiere-spe", "pc_independance", "pc_arbre_construire", "pc_inverser"),
+        ...m("terminale-spe", "proba_conditionnelle_arbre", "proba_conditionnelle_formule", "proba_totales", "proba_inverse_bayes", "proba_conditionnelle_defi"),
       ],
     },
     {
       code: "OD 3", domaine: "Organisation de données",
       texte: "Variables aléatoires : loi, fonction de répartition F(x) = P(X ≤ x), espérance, variance, écart-type ; schéma de Bernoulli, loi binomiale.",
       couverture: "partielle",
-      micros: m("terminale-spe", "va_definition", "va_loi_probabilite", "va_esperance", "va_variance_ecart_type", "va_somme", "binomiale_schema", "binomiale_reconnaitre", "binomiale_calculer", "binomiale_esperance_variance"),
-      note: "La FONCTION DE RÉPARTITION (fonction en escalier, à tracer) n'a pas de micro.",
+      micros: [...m("terminale-spe", "va_definition", "va_loi_probabilite", "va_esperance", "va_variance_ecart_type", "va_interpreter", "va_somme", "binomiale_schema", "binomiale_reconnaitre", "binomiale_calculer", "binomiale_intervalle", "binomiale_esperance_variance", "va_defi", "binomiale_defi"), ...m("premiere-spe", "va_notation", "pc_bernoulli_repetition", "pc_bernoulli_au_moins_un")],
+      note: "P(X ⩽ a) se lit et se calcule dans va_notation (1re) ; la FONCTION DE RÉPARTITION comme fonction en escalier, à tracer, n'a pas de micro.",
     },
 
     {

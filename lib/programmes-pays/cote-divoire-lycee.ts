@@ -199,8 +199,8 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
       code: "C1-L3", domaine: FONC,
       texte: "Généralités sur les fonctions : restriction, application injective, surjective, bijective et réciproque, comparaison de fonctions, somme, produit, quotient, composée ; fonctions associées f(x − a) + b, f(−x), −f(x), |f(x)| et leurs courbes (translations, symétries).",
       couverture: "partielle",
-      micros: [...m("terminale-spe", "reciproque_bijection", "reciproque_expression", "reciproque_courbe", "composee_ecrire"), ...m("seconde", "courbe_translation", "courbe_dilatation_abs"), ...m("premiere-spe", "var_parite")],
-      note: "Manquent la restriction et la comparaison de fonctions ; la courbe de f(−x) n'est vue que par la symétrie des fonctions paires et impaires.",
+      micros: [...m("terminale-spe", "reciproque_bijection", "reciproque_expression", "reciproque_courbe", "composee_ecrire"), ...m("seconde", "courbe_translation", "courbe_dilatation_abs", "fonction_comparer_courbes"), ...m("premiere-spe", "var_parite", "var_position_relative")],
+      note: "La comparaison de deux fonctions (signe de f − g, position des courbes) est couverte ; manque la restriction ; la courbe de f(−x) n'est vue que par la symétrie des fonctions paires et impaires.",
     },
     {
       code: "C1-L4", domaine: FONC,

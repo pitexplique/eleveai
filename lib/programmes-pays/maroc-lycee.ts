@@ -94,8 +94,8 @@ export const MAROC_TC: ProgrammePays = {
       code: "I-3a", domaine: NB,
       texte: "Ordre et opérations : comparer deux nombres ou deux expressions, majorer et minorer une expression algébrique.",
       couverture: "partielle",
-      micros: m("seconde", "comparer_difference_quotient"),
-      note: "Manquent les majorations et minorations d'expressions par les règles de l'ordre et l'inégalité triangulaire.",
+      micros: m("seconde", "comparer_difference_quotient", "encadrer_somme_produit"),
+      note: "Encadrer une somme, un produit ou un quotient est couvert ; manquent la majoration d'expressions plus générales et l'inégalité triangulaire |a + b| ≤ |a| + |b|.",
     },
     {
       code: "I-3b", domaine: NB,
@@ -384,15 +384,16 @@ export const MAROC_1BAC: ProgrammePays = {
       micros: [
         ...m("premiere-spe", "var_tableau", "var_lecture_courbe", "var_extremum", "var_position_relative", "trig_periodicite"),
         ...m("seconde", "fonction_comparer_courbes"),
+        ...m("terminale-spe", "suite_bornee"),
       ],
-      note: "Manque la notion de fonction majorée, minorée, bornée.",
+      note: "Majorée, minorée, bornée n'est travaillé que pour les SUITES (micro de terminale) ; manque cette notion pour une fonction.",
     },
     {
       code: "AA-4b", domaine: FN,
       texte: "Composée de deux fonctions et sa monotonie ; variations de f + λ et λf ; courbes de x ↦ √(x + a) et x ↦ ax³.",
       couverture: "partielle",
-      micros: [...m("seconde", "reference_racine", "reference_cube"), ...m("premiere-spe", "der_composee_affine"), ...m("terminale-spe", "composee_ecrire")],
-      note: "Manquent la monotonie d'une composée (sans dérivée) et les variations de f + λ et λf.",
+      micros: [...m("seconde", "reference_racine", "reference_cube", "courbe_translation", "courbe_dilatation_abs"), ...m("premiere-spe", "der_composee_affine"), ...m("terminale-spe", "composee_ecrire")],
+      note: "Les courbes de f + k et de k·f (seconde) donnent les variations de f + λ et λf ; manque la monotonie d'une composée (sans dérivée).",
     },
     {
       code: "AA-4c", domaine: FN,
@@ -488,8 +489,11 @@ export const MAROC_2BAC: ProgrammePays = {
       code: "A2-4", domaine: AN,
       texte: "Dérivée d'une composée ; études de fonctions rationnelles, trigonométriques et irrationnelles : branches infinies, concavité, éléments de symétrie, résolution graphique.",
       couverture: "partielle",
-      micros: m("terminale-spe", "derivation_composee", "derivation_variation", "derivation_defi", "trigo_etude_fonction", "limite_fonction_asymptote", "convexite_derivee_seconde", "convexite_point_inflexion", "asymptote_oblique", "branches_infinies", "symetrie_courbe"),
-      note: "Reste l'étude complète d'une fonction irrationnelle ; la résolution graphique n'a pas de micro citée sur cette ligne.",
+      micros: [
+        ...m("terminale-spe", "derivation_composee", "derivation_variation", "derivation_defi", "trigo_etude_fonction", "limite_fonction_asymptote", "convexite_derivee_seconde", "convexite_point_inflexion", "asymptote_oblique", "branches_infinies", "symetrie_courbe"),
+        ...m("premiere-spe", "graph1s_resoudre_equation", "graph1s_resoudre_inequation"),
+      ],
+      note: "La résolution graphique est entraînée en 1re ; reste l'étude complète d'une fonction irrationnelle.",
     },
     {
       code: "A2-5", domaine: AN,
@@ -575,8 +579,9 @@ export const MAROC_2BAC: ProgrammePays = {
     {
       code: "G-3", domaine: AL,
       texte: "Sphère : équation cartésienne, ensemble x² + y² + z² + ax + by + cz + d = 0, représentation paramétrique, intersection avec un plan ou une droite, plan tangent.",
-      couverture: "absente",
-      micros: [],
+      couverture: "partielle",
+      micros: m("3e", "section_sphere"),
+      note: "Seule la section d'une sphère par un plan (cercle, rayon par Pythagore) est travaillée, en 3e (âge) ; manquent l'équation cartésienne, la représentation paramétrique, l'intersection avec une droite et le plan tangent.",
     },
     {
       code: "G-4", domaine: AL,

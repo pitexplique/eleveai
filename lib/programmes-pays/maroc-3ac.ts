@@ -90,18 +90,19 @@ export const MAROC_3AC: ProgrammePays = {
       code: "S1-5", domaine: AG,
       texte: "Théorème de Thalès et sa réciproque (en tenant compte de l'ordre des points) ; rappel des propriétés de la droite des milieux ; problèmes.",
       couverture: "complete",
-      micros: m("3e", "thales_configuration", "thales_rapport", "thales_calculer_longueur", "thales_reciproque", "thales_rediger"),
+      micros: [...m("3e", "thales_configuration", "thales_rapport", "thales_calculer_longueur", "thales_reciproque", "thales_rediger"), ...m("4e", "thales_reciproque_verifier", "thales_reciproque_conclure", "thales_defi")],
       note: "Le rappel de la droite des milieux (2AC) n'a pas de micro chez nous.",
     },
     {
       code: "S1-6", domaine: AG,
       texte: "Trigonométrie dans le triangle rectangle : sinus, cosinus, tangente d'un angle aigu ; valeurs à la calculatrice dans les deux sens ; cos² x + sin² x = 1 et tan x = sin x ÷ cos x.",
-      couverture: "partielle",
+      couverture: "complete",
       micros: [
-        ...m("3e", "trigo_triangle_rectangle", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_choisir_rapport", "trigo_calculer_angle"),
+        ...m("3e", "trigo_triangle_rectangle", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_choisir_rapport", "trigo_calculer_angle", "trigo_defi"),
         ...m("seconde", "geo_trig_identite"),
+        ...m("premiere-spe", "tan_reel"),
       ],
-      note: "Manque la relation tan x = sin x ÷ cos x.",
+      note: "tan x = sin x ÷ cos x est entraînée dans une micro de 1re (âge : tangente d'un réel, valeurs remarquables).",
     },
     {
       code: "S1-7", domaine: AG,
@@ -196,9 +197,12 @@ export const MAROC_3AC: ProgrammePays = {
     {
       code: "S2-9", domaine: AG,
       texte: "Calcul des volumes (toutes les formules d'aires et de volumes) ; positions relatives et orthogonalité autour du prisme droit ; agrandissement et réduction de rapport k : longueurs × k, aires × k², volumes × k³.",
-      couverture: "partielle",
-      micros: m("3e", "volume_pave", "volume_prisme", "volume_cylindre", "volume_boule", "pythagore_solide", "aire_agrandissement_reduction", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "aire_prisme_droit", "aire_cylindre", "aire_pyramide_cone", "aire_sphere"),
-      note: "Toutes les formules d'aires et de volumes sont couvertes ; restent les positions relatives et l'orthogonalité autour du prisme droit.",
+      couverture: "complete",
+      micros: [
+        ...m("3e", "volume_pave", "volume_prisme", "volume_cylindre", "volume_boule", "pythagore_solide", "aire_agrandissement_reduction", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "aire_prisme_droit", "aire_cylindre", "aire_pyramide_cone", "aire_sphere"),
+        ...m("seconde", "espace_positions_relatives", "espace_orthogonalite_droite_plan"),
+      ],
+      note: "Les positions relatives et l'orthogonalité de droites et de plans sur un solide sont entraînées dans deux micros de seconde (âge : un an plus tard).",
     },
   ],
 };

@@ -477,7 +477,7 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       texte: "Triangle rectangle : Pythagore et sa réciproque, relation métrique déduite de l'aire, cosinus, sinus, tangente d'un angle aigu, cos² + sin² = 1, angles complémentaires ; construire un segment de longueur √a.",
       couverture: "partielle",
       micros: [
-        ...m("3e", "pythagore_reconnaitre", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_reciproque", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_calculer_longueur", "trigo_calculer_angle", "metrique_produit"),
+        ...m("3e", "pythagore_reconnaitre", "pythagore_calculer_hypotenuse", "pythagore_calculer_cote", "pythagore_reciproque", "trigo_cosinus", "trigo_sinus", "trigo_tangente", "trigo_calculer_longueur", "trigo_calculer_angle", "metrique_produit", "trigo_defi"),
         ...m("seconde", "geo_trig_identite"),
       ],
       note: "Manque la construction d'un segment de longueur √a.",
@@ -486,7 +486,7 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       code: "C3-L2", domaine: GPLAN,
       texte: "Propriétés de Thalès dans un triangle : propriété, conséquence, réciproque ; partager un segment en segments de même longueur ; calculer des distances, démontrer un parallélisme.",
       couverture: "partielle",
-      micros: m("3e", "thales_configuration", "thales_rapport", "thales_calculer_longueur", "thales_reciproque", "thales_rediger"),
+      micros: [...m("3e", "thales_configuration", "thales_rapport", "thales_calculer_longueur", "thales_reciproque", "thales_rediger"), ...m("4e", "thales_reciproque_verifier", "thales_reciproque_conclure", "thales_defi")],
       note: "Manque le partage d'un segment en segments de même longueur.",
     },
     {

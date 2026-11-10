@@ -84,7 +84,7 @@ export const SENEGAL_6E: ProgrammePays = {
       code: "AN 5", domaine: AN,
       texte: "Division des décimaux arithmétiques : quotient entier, quotient décimal, division par un décimal.",
       couverture: "complete",
-      micros: m("6e", "entier_division_posee", "entier_division_mentale", "decimal_diviser_par_entier", "decimal_diviser_par_decimal"),
+      micros: [...m("6e", "entier_division_posee", "entier_division_mentale", "decimal_diviser_par_entier", "decimal_diviser_par_decimal"), ...m("5e", "quotient_decimaux")],
     },
     {
       code: "AN 6", domaine: AN,
@@ -100,7 +100,7 @@ export const SENEGAL_6E: ProgrammePays = {
       code: "AN 7", domaine: AN,
       texte: "Proportionnalité : nombres proportionnels, pourcentage.",
       couverture: "complete",
-      micros: m("6e", "prop_reconnaitre", "prop_table", "prop_coeff", "prop_unite", "prop_direct", "pourcentage_comprendre", "pourcentage_calcul_simple"),
+      micros: m("6e", "prop_reconnaitre", "prop_table", "prop_coeff", "prop_unite", "prop_direct", "pourcentage_comprendre", "pourcentage_lire", "pourcentage_calcul_simple"),
     },
     {
       code: "AN 8", domaine: AN,
@@ -124,14 +124,14 @@ export const SENEGAL_6E: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("cm2", "droite_reconnaitre"),
-        ...m("6e", "distance_definition", "distance_milieu", "distance_inegalite", "triangle_possible_ou_non", "aire_longueur_mesurer", "aire_perimetre_figure"),
+        ...m("6e", "distance_definition", "distance_milieu", "distance_inegalite", "triangle_possible_ou_non", "aire_longueur_mesurer", "aire_perimetre_comprendre", "aire_perimetre_figure"),
       ],
     },
     {
       code: "AG 2", domaine: AG,
       texte: "Le cercle : centre, rayon, diamètre, disque, arc, corde, périmètre ; intérieur et extérieur ; cercles sécants, tangents, disjoints.",
       couverture: "complete",
-      micros: m("6e", "cercle_vocabulaire", "cercle_ensemble", "cercle_distance", "cercle_perimetre"),
+      micros: m("6e", "cercle_vocabulaire", "cercle_ensemble", "cercle_distance", "cercle_perimetre", "cercle_proportionnel"),
       note: "La position de deux cercles est dans cercle_distance (★5 : deux points, un seul ou aucun selon AB comparé à r + r′) ; seule la tangence intérieure n'y est pas.",
     },
     {
@@ -247,7 +247,7 @@ export const SENEGAL_5E: ProgrammePays = {
       texte: "Nombres décimaux relatifs : opérations, sommes algébriques et suppression des parenthèses, rangement et inégalités dans 𝔻, équations a + x = b et ax = b, inéquations a + x ≤ b.",
       couverture: "partielle",
       micros: [
-        ...m("5e", "relatif_addition", "relatif_soustraction", "relatif_calcul", "relatif_comparer"),
+        ...m("5e", "relatif_addition", "relatif_soustraction", "relatif_calcul", "relatif_comparer", "relatif_probleme"),
         ...m("4e", "relatif_multiplication", "relatif_division", "relatif_operation_defi", "equation_resoudre_simple", "inequation_college"),
         ...m("seconde", "inequation_resoudre"),
       ],
@@ -290,9 +290,9 @@ export const SENEGAL_5E: ProgrammePays = {
       texte: "Triangles : somme des angles ; médiatrices et cercle circonscrit ; hauteurs et orthocentre ; triangles particuliers (rectangle, isocèle, équilatéral) : propriétés et reconnaissances.",
       couverture: "complete",
       micros: [
-        ...m("5e", "triangle_somme_angle", "triangle_nature", "triangle_construire"),
+        ...m("5e", "triangle_reconnaitre", "triangle_somme_angle", "triangle_nature", "triangle_construire"),
         ...m("6e", "triangle_angle_manquant", "triangle_propriete_defi", "circonscrit_concourantes", "circonscrit_construire"),
-        ...m("4e", "triangle_droites", "orthocentre"),
+        ...m("4e", "triangle_droites", "orthocentre", "triangle_somme_angle"),
       ],
     },
     {
@@ -353,7 +353,7 @@ export const SENEGAL_4E: ProgrammePays = {
       texte: "Calcul algébrique : développement, réduction, égalités usuelles (identités remarquables), factorisation, valeur numérique d'une expression littérale.",
       couverture: "complete",
       micros: [
-        ...m("4e", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_expression_reduire", "litteral_identite_developper", "litteral_facteur_commun", "litteral_factoriser_simple", "litteral_expression_substituer"),
+        ...m("4e", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_expression_reduire", "litteral_identite_developper", "litteral_identite_choisir", "litteral_facteur_commun", "litteral_factoriser_simple", "litteral_expression_substituer"),
         ...m("seconde", "devfac_factoriser_identite"),
       ],
     },
@@ -547,7 +547,7 @@ export const SENEGAL_3E: ProgrammePays = {
       code: "AG 1", domaine: AG,
       texte: "Théorème de Thalès et sa réciproque : cas du triangle, cas du trapèze.",
       couverture: "partielle",
-      micros: m("3e", "thales_configuration", "thales_rapport", "thales_calculer_longueur", "thales_reciproque", "thales_rediger"),
+      micros: [...m("3e", "thales_configuration", "thales_rapport", "thales_calculer_longueur", "thales_reciproque", "thales_rediger"), ...m("4e", "thales_reciproque_verifier", "thales_reciproque_conclure")],
       note: "Le « cas du trapèze » (parallèles coupant deux sécantes) n'a pas de micro propre.",
     },
     {
