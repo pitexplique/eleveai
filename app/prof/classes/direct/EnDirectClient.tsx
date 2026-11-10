@@ -8,6 +8,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
+import { MarkdownMath } from "@/components/MarkdownMath";
 
 type Geste = {
   created_at: string;
@@ -16,6 +17,10 @@ type Geste = {
   ressource: string | null;
   libelle: string | null;
   juste: boolean | null;
+  /* Colonnes de supabase/activite_eleve_question.sql : absentes tant que le
+     script n'a pas tourné, ou pour les gestes d'avant. */
+  enonce?: string | null;
+  reponse?: string | null;
 };
 type Donnees = {
   maintenant: string;
@@ -37,6 +42,8 @@ type Tuile = {
   reponses: number;
   justes: number;
   videosVues: number;
+  /** La dernière question du coach, pour « Voir la question ». */
+  question: Geste | null;
 };
 
 function tuileDe(
@@ -86,6 +93,7 @@ function tuileDe(
     reponses: coach.length,
     justes: coach.filter((g) => g.juste).length,
     videosVues: siens.filter((g) => g.type === "video_fin").length,
+    question: coach[0] ?? null,
   };
 }
 
@@ -101,6 +109,15 @@ export default function EnDirectClient() {
   const token = user?.token ?? null;
   const [donnees, setDonnees] = useState<Donnees | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
+  // Les élèves dont le prof a déplié la question (repliée par défaut).
+  const [ouvertes, setOuvertes] = useState<Set<string>>(new Set());
+  const basculer = (code: string) =>
+    setOuvertes((prev) => {
+      const s = new Set(prev);
+      if (s.has(code)) s.delete(code);
+      else s.add(code);
+      return s;
+    });
 
   useEffect(() => {
     if (!token) return;
@@ -162,10 +179,12 @@ export default function EnDirectClient() {
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {tuiles.map((t) => (
+          {tuiles.map((t) => {
+            const ouverte = ouvertes.has(t.code) && !!t.question;
+            return (
             <div
               key={t.code}
-              className={`rounded-2xl border-2 p-3 ${t.aider ? COULEURS.aider : COULEURS[t.etat]}`}
+              className={`rounded-2xl border-2 p-3 ${t.aider ? COULEURS.aider : COULEURS[t.etat]} ${ouverte ? "col-span-2 sm:col-span-3 lg:col-span-3" : ""}`}
             >
               <div className="flex items-baseline justify-between gap-2">
                 <p className="font-mono text-lg font-black">{t.code}</p>
@@ -197,8 +216,22 @@ export default function EnDirectClient() {
                     .join(" · ")}
                 </p>
               )}
+              {t.question && (
+                <button
+                  type="button"
+                  onClick={() => basculer(t.code)}
+                  aria-expanded={ouverte}
+                  className="mt-2 rounded-lg border border-slate-300 bg-white px-2 py-1 text-xs font-bold text-slate-700 hover:bg-slate-100"
+                >
+                  {ouverte ? "▲ Cacher la question" : "▼ Voir la question"}
+                </button>
+              )}
+              {ouverte && t.question && (
+                <QuestionDeLEleve geste={t.question} maintenant={maintenant} />
+              )}
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <p className="mt-6 text-xs text-slate-500">
@@ -208,5 +241,45 @@ export default function EnDirectClient() {
         </p>
       </div>
     </main>
+  );
+}
+
+/* La dernière question du coach d'un élève : l'énoncé rendu comme dans le
+   coach (Markdown + LaTeX), sa réponse, juste ou faux. */
+function QuestionDeLEleve({
+  geste,
+  maintenant,
+}: {
+  geste: Geste;
+  maintenant: number;
+}) {
+  const min = Math.floor((maintenant - new Date(geste.created_at).getTime()) / 60000);
+  return (
+    <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-white p-3 text-slate-900">
+      <p className="text-xs font-semibold text-slate-500">
+        {geste.libelle ?? geste.ressource} ·{" "}
+        {min < 1 ? "à l’instant" : `il y a ${min} min`}
+      </p>
+      {geste.enonce ? (
+        <MarkdownMath className="text-base leading-7">{geste.enonce}</MarkdownMath>
+      ) : (
+        <p className="text-sm italic text-slate-500">
+          Énoncé pas encore enregistré pour cette réponse.
+        </p>
+      )}
+      <div
+        className={`rounded-lg px-2 py-1 text-sm font-semibold ${
+          geste.juste ? "bg-emerald-50 text-emerald-800" : "bg-red-50 text-red-800"
+        }`}
+      >
+        {geste.juste ? "✅ Juste" : "❌ Faux"}
+        {geste.reponse ? (
+          <>
+            {" "}
+            — sa réponse : <MarkdownMath inline>{geste.reponse}</MarkdownMath>
+          </>
+        ) : null}
+      </div>
+    </div>
   );
 }

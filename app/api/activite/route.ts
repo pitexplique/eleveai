@@ -42,14 +42,28 @@ export async function POST(req: Request) {
       ? String(body.libelle ?? "").slice(0, 160) || null
       : (ressource && trouverVideo(ressource)?.titre) || ressource;
 
-  await admin.from("activite_eleve").insert({
+  const ligne = {
     code_etablissement: session.code_etablissement,
     code_utilisateur: session.code_utilisateur,
     type,
     ressource,
     libelle,
     juste: type === "coach" ? Boolean(body.juste) : null,
-  });
+  };
+  // L'énoncé et la réponse (« Voir la question » du direct) : colonnes
+  // ajoutées par supabase/activite_eleve_question.sql. Tant qu'elles manquent,
+  // l'insertion échoue et on réécrit la ligne sans elles.
+  const question =
+    type === "coach"
+      ? {
+          enonce: String(body.enonce ?? "").slice(0, 4000) || null,
+          reponse: String(body.reponse ?? "").slice(0, 500) || null,
+        }
+      : {};
+  const { error } = await admin.from("activite_eleve").insert({ ...ligne, ...question });
+  if (error && type === "coach") {
+    await admin.from("activite_eleve").insert(ligne);
+  }
 
   // Purge des 30 jours, une requête sur cent : pas de tâche planifiée à tenir.
   if (Math.random() < 0.01) {

@@ -1638,6 +1638,18 @@ function continueAfterExplanation() {
         ressource: currentMicro,
         libelle: currentMicroLabel,
         juste: typed.result.ok,
+        // « Voir la question » du direct : l'énoncé (avec les choix d'un QCM)
+        // et ce que l'élève a répondu.
+        enonce: [
+          currentQuestion.text,
+          currentQuestion.canvas ? "*(avec une figure)*" : "",
+          currentQuestion.choices?.length
+            ? `**Choix :** ${currentQuestion.choices.join(" · ")}`
+            : "",
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
+        reponse: finalAnswer,
       });
 
       setSessionResults((prev) => [...prev, typed.result.ok]);

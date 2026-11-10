@@ -18,21 +18,28 @@ export async function GET(req: Request) {
   const classe = await classeDuProf(admin, p.prof.id, code);
   if (!classe) return NextResponse.json({ ok: false, error: "Classe introuvable." }, { status: 404 });
 
-  const [eleves, gestes] = await Promise.all([
+  const lireGestes = (colonnes: string) =>
+    admin
+      .from("activite_eleve")
+      .select(colonnes)
+      .eq("code_etablissement", code)
+      .gte("created_at", new Date(Date.now() - FENETRE_MS).toISOString())
+      .order("created_at", { ascending: false })
+      .limit(5000);
+  const COLONNES = "created_at, code_utilisateur, type, ressource, libelle, juste";
+
+  const [eleves, avecQuestion] = await Promise.all([
     admin
       .from("acces_etablissement")
       .select("code_utilisateur, nom")
       .eq("code_etablissement", code)
       .eq("type_utilisateur", "eleve")
       .order("code_utilisateur"),
-    admin
-      .from("activite_eleve")
-      .select("created_at, code_utilisateur, type, ressource, libelle, juste")
-      .eq("code_etablissement", code)
-      .gte("created_at", new Date(Date.now() - FENETRE_MS).toISOString())
-      .order("created_at", { ascending: false })
-      .limit(5000),
+    // L'énoncé et la réponse : colonnes de supabase/activite_eleve_question.sql.
+    lireGestes(`${COLONNES}, enonce, reponse`),
   ]);
+  // Colonnes pas encore créées : on lit comme avant, sans la question.
+  const gestes = avecQuestion.error ? await lireGestes(COLONNES) : avecQuestion;
 
   if (gestes.error) {
     return NextResponse.json(

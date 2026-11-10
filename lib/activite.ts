@@ -3,7 +3,15 @@
 // Sans jeton (visiteur), rien ne part.
 
 export type GesteEleve =
-  | { type: "coach"; ressource: string; libelle: string; juste: boolean }
+  | {
+      type: "coach";
+      ressource: string;
+      libelle: string;
+      juste: boolean;
+      /** L'énoncé et la réponse de l'élève, pour « Voir la question » du direct. */
+      enonce?: string;
+      reponse?: string;
+    }
   | { type: "video_debut" | "video_fin"; ressource: string };
 
 export function signalerActivite(token: string | null | undefined, geste: GesteEleve): void {
