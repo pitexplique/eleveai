@@ -4,12 +4,16 @@
 # Série SUITES, épisode 01. Micro du coach : lin_suite_reconnaitre.
 #   · 00-garde      : le titre, l'échelle, « en 3 secondes ? » et un chrono ;
 #   · 01-situation  : EN HAUT Inès court sur la piste (un couloir par semaine,
-#                     les 3 km de plus en orange) ; EN BAS les cases 10, 13, 16, 19
-#                     se remplissent EN MÊME TEMPS, sous la fin de chaque course ;
+#                     les 3 km de plus en orange ; la piste est coupée « // » entre
+#                     0 et 8 km pour que les cases soient grandes) ; EN BAS les cases
+#                     10, 13, 16, 19 se remplissent EN MÊME TEMPS, sous la fin de
+#                     chaque course (un pointillé les relie) ;
 #   · 02-pas        : les flèches « +3 » sautent de case en case, r = 3 ;
 #   · 03/03b        : question-pause (B : 50 ; 45 ; 40 ; 35, r = −5), 3 s ;
-#   · 04-commentaire: 10, 13, 16, 19 … ? : la 10e semaine (réponse 37 km =
-#                     10 + 9 × 3, NON affichée) ; « Réponds en commentaire ! » ;
+#   · 04-commentaire: 10, 13, 16, 19 … ? en haut, puis la question dans l'ordre
+#                     de la voix (« Combien de kilomètres Inès courra-t-elle la 10e
+#                     semaine ? »), puis « Réponds en commentaire ! » (réponse 37 km =
+#                     10 + 9 × 3, NON affichée) ;
 #   · 05-abonne     : la fin du 05/11 (« Un pouce · La cloche »).
 # Code couleur (module commun) : bleu = termes, orange = raison, vert = juste.
 # Voix VALIDÉE (10/11) : manim/voix/premiere-suite-arith-reconnaitre-short.json
@@ -28,14 +32,15 @@ assert all(b - a == 3 for a, b in zip(KM, KM[1:]))
 assert 10 + 9 * 3 == 37                                   # la 10e semaine (commentaire)
 QS = [[2, 4, 8, 16], [50, 45, 40, 35], [1, 4, 9, 16]]
 assert [len({b - a for a, b in zip(l, l[1:])}) == 1 for l in QS] == [False, True, False]  # B
-X0, ECH = -1.95, 0.19                                    # la piste : x = X0 + ECH × km
-Y_COUL = [1.33, 1.03, 0.73, 0.43]                         # les 4 couloirs (semaines)
-Y_CASES = -0.75
+XD, XB = -2.0, -1.55                     # la ligne de départ ; la coupure « // » (0 → 8 km)
+ECH = (1.95 - XB) / (20 - 8)              # après la coupure : x = XB + ECH × (km − 8)
+Y_COUL = [1.45, 1.05, 0.65, 0.25]         # les 4 couloirs (semaines 1 à 4), 0,4 de haut
+Y_CASES = -0.6
 PISTE, PEAU = "#9A3412", "#8d5524"
 
 
 def x_km(km):
-    return X0 + ECH * km
+    return XB + ECH * (km - 8)
 
 
 def coureuse(s=1.0, couleur="#EC4899"):
@@ -51,11 +56,11 @@ def coureuse(s=1.0, couleur="#EC4899"):
     return VGroup(queue, j1, j2, corps, b1, b2, tete).scale(s, about_point=ORIGIN)
 
 
-def chrono(r=0.55):
-    cadran = Circle(radius=r, stroke_color=WHITE, stroke_width=5)
-    bouton = RoundedRectangle(width=0.2, height=0.14, corner_radius=0.04, fill_color=WHITE, fill_opacity=1,
-                              stroke_width=0).next_to(cadran, UP, buff=0.02)
-    aiguille = Line(ORIGIN, UP * r * 0.8, stroke_color=RAISON, stroke_width=5)
+def chrono(r=0.9):
+    cadran = Circle(radius=r, stroke_color=WHITE, stroke_width=7)
+    bouton = RoundedRectangle(width=0.3, height=0.2, corner_radius=0.05, fill_color=WHITE, fill_opacity=1,
+                              stroke_width=0).next_to(cadran, UP, buff=0.03)
+    aiguille = Line(ORIGIN, UP * r * 0.8, stroke_color=RAISON, stroke_width=7)
     return VGroup(cadran, bouton), aiguille
 
 
@@ -66,153 +71,154 @@ class SuiteArithReconnaitreShort(ShortSuites):
     ceinture = "blanche"
 
     def piste(self):
-        fond = Rectangle(width=X0 * -2, height=1.2, fill_color=PISTE, fill_opacity=1, stroke_width=0)
-        fond.move_to(P(0, (Y_COUL[0] + Y_COUL[-1]) / 2))
-        traits = VGroup(*[Line(P(X0, y), P(-X0, y), stroke_color=WHITE, stroke_width=1.5, stroke_opacity=0.7)
-                          for y in (1.48, 1.18, 0.88, 0.58, 0.28)])
-        depart = Line(P(X0, 0.28), P(X0, 1.48), stroke_color=WHITE, stroke_width=4)
-        reperes = VGroup(*[Line(P(x_km(km), 0.2), P(x_km(km), 0.28), stroke_color=GREY_B, stroke_width=2)
-                           for km in range(0, 21)])
-        return VGroup(fond, traits, depart, reperes)
+        haut, bas = Y_COUL[0] + 0.2, Y_COUL[-1] - 0.2
+        fond = Rectangle(width=-2 * XD, height=haut - bas, fill_color=PISTE, fill_opacity=1, stroke_width=0)
+        fond.move_to(P(0, (haut + bas) / 2))
+        traits = VGroup(*[Line(P(XD, y), P(-XD, y), stroke_color=WHITE, stroke_width=1.5, stroke_opacity=0.7)
+                          for y in np.linspace(bas, haut, 5)])
+        depart = Line(P(XD, bas), P(XD, haut), stroke_color=WHITE, stroke_width=4)
+        coupure = VGroup(*[Line(P(XB - 0.2 + dx, bas - 0.08), P(XB - 0.1 + dx, haut + 0.08), stroke_color=BLACK,
+                                stroke_width=7) for dx in (0, 0.1)])
+        reperes = VGroup(*[Line(P(x_km(km), bas - 0.09), P(x_km(km), bas), stroke_color=GREY_B, stroke_width=2)
+                           for km in range(8, 21)])
+        return VGroup(fond, traits, depart, coupure, reperes)
 
     def courir(self, k, lg, run):
         """La semaine k : Inès court dans son couloir (bleu jusqu'à la course
         d'avant, orange pour les 3 km de plus) ; la case k se remplit dessous."""
         y = Y_COUL[k]
         avant = KM[k - 1] if k else KM[0]
-        bleu = Line(P(X0, y), P(x_km(avant), y), stroke_color=TERME, stroke_width=7)
-        neuf = Line(P(x_km(avant), y), P(x_km(KM[k]), y), stroke_color=RAISON, stroke_width=7) if k else None
+        bleu = Line(P(XD, y), P(x_km(avant), y), stroke_color=TERME, stroke_width=8)
+        neuf = Line(P(x_km(avant), y), P(x_km(KM[k]), y), stroke_color=RAISON, stroke_width=8) if k else None
         lien = DashedLine(P(x_km(KM[k]), y - 0.08), lg.cases[k][0].get_top() + UP * 0.05, color=GREY_B,
-                          stroke_width=2, dash_length=0.07)
-        self.play(Create(bleu), run.animate.move_to(P(x_km(avant), y + 0.02), aligned_edge=DOWN), run_time=0.2,
+                          stroke_width=2, dash_length=0.08)
+        self.play(Create(bleu), run.animate.move_to(P(x_km(avant), y - 0.17), aligned_edge=DOWN), run_time=0.2,
                   rate_func=linear)
         anims = [FadeIn(lg.cases[k][0], scale=0.8), FadeIn(lg.cases[k][1], scale=1.4), Create(lien)]
         if neuf:
-            anims += [Create(neuf), run.animate.move_to(P(x_km(KM[k]), y + 0.02), aligned_edge=DOWN)]
+            anims += [Create(neuf), run.animate.move_to(P(x_km(KM[k]), y - 0.17), aligned_edge=DOWN)]
         self.play(*anims, run_time=0.25, rate_func=linear)
         return VGroup(bleu, *([neuf] if neuf else []), lien)
 
-    def ecarts_sous(self, liste, texte, couleur=RAISON, fs=22, bas=None):
+    def ecarts_sous(self, liste, texte, couleur=RAISON, fs=34, bas=None):
         g = VGroup()
         for a, b in zip(liste.nombres, liste.nombres[1:]):
             y = (bas if bas is not None else a.get_bottom()[1]) - 0.05
             fl = CurvedArrow(P(a.get_center()[0], y), P(b.get_center()[0], y), angle=TAU / 4,
-                             color=couleur, stroke_width=3, tip_length=0.1)
-            g.add(VGroup(fl, self.t(texte, fs, couleur).next_to(fl, DOWN, buff=0.03)))
+                             color=couleur, stroke_width=4, tip_length=0.13)
+            g.add(VGroup(fl, self.t(texte, fs, couleur).next_to(fl, DOWN, buff=0.04)))
         return g
 
     def construct(self):
-        # ── 00 : la garde ──
+        # ── 00 : la garde : le titre, l'échelle (70 %), le pari en gros ──
         self.dire("00-garde")
         self.entete("Suite arithmétique", extrait="Suite")
-        self.au_mot("Tu paries")
-        g1 = self.t("Tu paries que tu la repères", 30).move_to(P(0, 1.85))
-        self.play(FadeIn(g1, shift=UP * 0.1), run_time=0.35)
-        self.au_mot("3 secondes")
-        g2 = self.t("en 3 secondes ?", 40, RAISON).move_to(P(0, 1.25))
-        cad, aig = chrono(0.55)
-        VGroup(cad, aig).move_to(P(0, -0.3))
+        pari = self.paragraphe(["Tu paries que", "tu la repères", ("en 3 secondes ?", RAISON)], self.fs_grand,
+                               buff=0.2, y=1.35)
+        for ligne, ex in zip(pari, ("Tu paries", "tu la", "3 secondes")):
+            self.au_mot(ex)
+            self.play(FadeIn(ligne, shift=UP * 0.1), run_time=0.3)
+        cad, aig = chrono(0.85)
+        VGroup(cad, aig).move_to(P(0, -1.6))
         aig.shift(cad[0].get_center() - aig.get_start())
-        self.play(FadeIn(g2, scale=1.3), FadeIn(cad, scale=0.7), FadeIn(aig), run_time=0.35)
+        self.play(FadeIn(cad, scale=0.7), FadeIn(aig), run_time=0.3)
         self.play(Rotate(aig, -TAU, about_point=cad[0].get_center()), run_time=1.0, rate_func=linear)
         self.attendre_voix(marge=0.2)
 
-        # ── 01 : Inès court ; les cases se remplissent dessous ──
+        # ── 01 : EN HAUT Inès court ; EN BAS les cases se remplissent dessous ──
         self.nouvel_ecran("01-situation", garder=(self.badge, self.titre_s))
-        perso = coureuse(1.05).move_to(P(-1.45, 2.05))
-        nom = self.t("Inès", 34, JAUNE_TITRE)
-        metier = self.t("prépare un marathon", 24, TERME)
-        nm = VGroup(nom, metier).arrange(DOWN, aligned_edge=LEFT, buff=0.08)
-        if nm.width > 2.9:
-            nm.scale_to_fit_width(2.9)
-        nm.next_to(perso, RIGHT, buff=0.3)
+        nom = self.t("Inès", 48, JAUNE_TITRE).move_to(P(0, 2.36))
+        metier = self.t("prépare un marathon", 36, TERME).move_to(P(0, 1.85))
         self.au_mot("Inès")
-        self.play(FadeOut(VGroup(g1, g2, cad, aig)), FadeIn(perso, shift=RIGHT * 0.2), FadeIn(nom), run_time=0.4)
+        self.play(FadeOut(VGroup(pari, cad, aig)), FadeIn(nom, shift=UP * 0.1), run_time=0.4)
         self.au_mot("prépare")
         self.play(FadeIn(metier, shift=UP * 0.1), run_time=0.3)
         pi = self.piste()
+        run = coureuse(0.38).move_to(P(XD + 0.1, Y_COUL[0] - 0.17), aligned_edge=DOWN)
         self.au_mot("marathon")
-        self.play(FadeIn(pi[0]), Create(pi[1]), Create(pi[2]), FadeIn(pi[3]), run_time=0.5)
-        lg = LigneTermes([str(v) for v in KM], xs=[x_km(v) for v in KM], centre=P(0, Y_CASES), largeur=0.5,
-                         hauteur=0.5, fs=26)
+        self.play(FadeIn(pi[0]), Create(pi[1]), Create(pi[2]), FadeIn(pi[3:]), FadeIn(run), run_time=0.5)
+        lg = LigneTermes([str(v) for v in KM], xs=[x_km(v) for v in KM], centre=P(0, Y_CASES), largeur=0.8,
+                         hauteur=0.72, fs=40)
         self.au_mot("Chaque semaine")
-        cs = VGroup(self.t("chaque", 24, GREY_A), self.t("semaine", 24, GREY_A)).arrange(DOWN, buff=0.06)
-        cs.move_to(P(-1.4, Y_CASES + 0.1))
+        cs = self.t("chaque semaine", 38, GREY_A).move_to(P(0, -1.85))
         self.play(FadeIn(cs, shift=UP * 0.1), run_time=0.3)
         self.au_mot("3 kilomètres")
-        plus = self.t("+ 3 km", 28, RAISON).move_to(P(-1.4, Y_CASES - 0.6))
-        run = coureuse(0.3).move_to(P(X0, Y_COUL[0] + 0.02), aligned_edge=DOWN)
-        self.play(FadeIn(plus, scale=1.3), FadeIn(run), run_time=0.3)
+        plus = self.t("+ 3 km", 50, RAISON).move_to(P(0, -2.5))
+        self.play(FadeIn(plus, scale=1.3), run_time=0.3)
         traces = VGroup()
         for k, v in enumerate(KM):
             self.suivre(str(v))
             traces.add(self.courir(k, lg, run))
             if k < 3:
-                run.move_to(P(X0, Y_COUL[k + 1] + 0.02), aligned_edge=DOWN)
+                run.move_to(P(XD + 0.1, Y_COUL[k + 1] - 0.17), aligned_edge=DOWN)
         self.attendre_voix(marge=0.2)
 
         # ── 02 : le pas est toujours le même ──
         self.dire("02-pas")
         self.au_mot("plus 3")
-        sauts = [lg.saut(k, "+3", fs=20, creux=0.14) for k in range(3)]
-        self.play(*[Create(s[0]) for s in sauts], *[Indicate(t[1], color=RAISON) for t in traces[1:]],
-                  run_time=0.3)
+        sauts = [lg.saut(k, "+3", fs=30, creux=0.18) for k in range(3)]
+        self.play(FadeOut(cs), FadeOut(plus), *[Create(s[0]) for s in sauts],
+                  *[Indicate(t[1], color=RAISON) for t in traces[1:]], run_time=0.3)
         self.play(*[FadeIn(s[1], scale=1.4) for s in sauts], run_time=0.2)
         self.au_mot("arithmétique")
-        sa = self.t("suite arithmétique", 32, JAUNE_TITRE).move_to(P(0, -1.95))
+        sa = self.t("suite arithmétique", 42, JAUNE_TITRE).move_to(P(0, -2.1))
         self.play(FadeIn(sa, scale=1.2), run_time=0.35)
         self.au_mot("raison")
-        rr = VGroup(self.t("raison :", 30, WHITE), self.t("r =", 32, RAISON), self.t("3", 32, RAISON))
-        rr.arrange(RIGHT, buff=0.15).move_to(P(0, -2.6))
+        rr = VGroup(self.t("raison :", 40, WHITE), self.t("r =", 44, RAISON), self.t("3", 44, RAISON))
+        rr.arrange(RIGHT, buff=0.15)
         rr[1:].shift(RIGHT * 0.12)
+        if rr.width > 3.6:  # il grandit de 10 % (insister)
+            rr.scale_to_fit_width(3.6)
+        rr.move_to(P(0, -2.72))
         self.play(FadeIn(rr[:2], shift=UP * 0.1), run_time=0.25)
         self.suivre("3")
         cadr = self.encadre(rr[1:], RAISON, 0.1)
         self.play(FadeIn(rr[2], scale=1.4), Create(cadr), run_time=0.3)
-        self.insister(VGroup(rr, cadr), 1.15)
+        self.insister(VGroup(rr, cadr), 1.1)
         self.attendre_voix(marge=0.3)
 
         # ── 03 : question-pause → B ──
-        listes = [liste_nombres([str(v) for v in l], 30) for l in QS]
+        listes = [self.liste(l) for l in QS]
         q = self.poser_question("03-question",
-                                [(self.t("Laquelle avance toujours", 30), "Laquelle"),
-                                 (self.t("du même pas ?", 30), "du même pas")],
-                                listes, 1, y_question=2.5)
+                                [(self.t("Laquelle avance", 40), "Laquelle"), (self.t("toujours", 40), "toujours"),
+                                 (self.t("du même pas ?", 40), "du même pas")],
+                                listes, 1, y_question=2.85)
         self.dire("03b-reponse")
         self.q_reponse(q, 1)
         self.au_mot("5 à")
-        ec = self.ecarts_sous(listes[1], "−5", bas=q.cartes[1].get_bottom()[1])
+        ec = self.ecarts_sous(listes[1], "−5", fs=28, bas=q.cartes[1].get_bottom()[1])
         self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[2]), *[Create(e[0]) for e in ec], run_time=0.3)
         self.play(*[FadeIn(e[1], scale=1.3) for e in ec], run_time=0.2)
         self.au_mot("5", n=2)
-        r5 = VGroup(self.t("r =", 34, JUSTE), self.t("−5", 34, JUSTE)).arrange(RIGHT, buff=0.12).move_to(P(0, -1.3))
-        c5 = self.encadre(r5, JUSTE, 0.12)
+        r5 = VGroup(self.t("r =", 56, JUSTE), self.t("−5", 56, JUSTE)).arrange(RIGHT, buff=0.15)
+        r5.move_to(P(0, q.cartes[1].get_bottom()[1] - 1.2))
+        c5 = self.encadre(r5, JUSTE, 0.14)
         self.play(FadeIn(r5, scale=1.3), Create(c5), run_time=0.3)
-        self.insister(VGroup(r5, c5), 1.15)
+        self.insister(VGroup(r5, c5), 1.1)
         self.attendre_voix(marge=0.3)
 
-        # ── 04 : la question en commentaire ──
+        # ── 04 : la question en commentaire, dans l'ordre de la voix ──
         self.nouvel_ecran("04-commentaire", garder=(self.badge,))
         self.au_mot("Et toi")
-        et = self.t("Et toi ?", 40, JAUNE_TITRE).move_to(P(0, 3.45))
-        ines = coureuse(0.9).move_to(P(-1.3, 1.85))
-        self.play(FadeIn(et, shift=DOWN * 0.1), FadeIn(ines, shift=RIGHT * 0.2), run_time=0.35)
-        lc = LigneTermes(["10", "13", "16", "19", "…", "?"], pas=0.7, largeur=0.56, hauteur=0.52, fs=26,
-                         centre=P(0, 0.35))
+        et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, 3.45))
+        self.play(FadeIn(et, shift=DOWN * 0.1), run_time=0.35)
+        lc = LigneTermes(["10", "13", "16", "19", "…", "?"], pas=0.7, largeur=0.64, hauteur=0.62, fs=36,
+                         centre=P(0, 2.0))
         lc.cases[4][0].set_stroke(opacity=0)
         lc.cases[4][1].set_color(GREY_A)
         for k in range(4):
             self.suivre(str(KM[k]))
             self.montrer_case(lc, k, run_time=0.25)
-        self.play(FadeIn(lc.cases[4][1]), run_time=0.2)
-        self.au_mot("Combien")
-        c1 = self.t("Combien de kilomètres", 28, RAISON).move_to(P(0, -0.65))
-        self.play(FadeIn(c1, shift=UP * 0.1), FadeIn(lc.cases[5], scale=1.3), run_time=0.35)
-        self.au_mot("10e")
-        bulle = self.t("la 10e semaine ?", 28, RAISON, larg=2.8).next_to(ines, RIGHT, buff=0.25)
-        self.play(FadeIn(bulle, scale=1.2), Indicate(lc.cases[5], color=RAISON),
-                  run_time=0.4)
-        self.appel_commentaire(-1.7)
+        self.play(FadeIn(lc.cases[4][1]), FadeIn(lc.cases[5], scale=1.3), run_time=0.25)
+        question = self.paragraphe([("Combien de", RAISON), ("kilomètres", RAISON), "Inès courra-t-elle",
+                                    ("la 10e semaine ?", RAISON)], 44, buff=0.14, y=0.1)
+        for ligne, ex in zip(question, ("Combien", "kilomètres", "Inès", "10e")):
+            self.au_mot(ex)
+            anims = [FadeIn(ligne, shift=UP * 0.1)]
+            if ex == "10e":
+                anims.append(Indicate(lc.cases[5], color=RAISON))
+            self.play(*anims, run_time=0.3)
+        self.appel_commentaire(-2.35)
         self.attendre_voix(marge=0.6)
 
         # ── 05 : la fin ──

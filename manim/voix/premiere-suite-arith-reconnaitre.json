@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suite arithmétique : la reconnaître. Comment savoir qu'une liste de nombres avance toujours du même pas ?",
+  "01-situation": "Voici Lucas. Il est agriculteur, et il plante des haies d'arbres autour de ses champs, pour protéger les sols et les oiseaux. La première année, il plante 40 arbres. Ensuite, chaque année, il en plante 30 de plus que l'année d'avant : 40, 70, 100, 130.",
+  "02-ecarts": "Regarde l'écart entre deux années qui se suivent. 70 moins 40 : 30. 100 moins 70 : 30. 130 moins 100 : 30. L'écart est toujours le même.",
+  "03-definition": "Quand on passe d'un terme au suivant en ajoutant toujours le même nombre, la suite est arithmétique. Ce nombre s'appelle la raison, r. Ici, r égale 30.",
+  "04-question": "Question ! Laquelle de ces listes est arithmétique ? A : 3, 6, 12, 24. B : 5, 8, 12, 17. C : 20, 17, 14, 11. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. On enlève 3 à chaque fois : c'est une suite arithmétique de raison moins 3.",
+  "05-negative": "La raison peut donc être négative. Dans le silo de Lucas, il reste 900 tonnes de grain, et il en vend 60 tonnes chaque semaine : 900, 840, 780. La raison est moins 60.",
+  "06-motif": "Un motif peut aussi cacher une suite arithmétique. Voici une croix de carreaux : 5 carreaux à l'étape 1, 9 à l'étape 2, 13 à l'étape 3. Chaque étape ajoute 4 carreaux, un au bout de chaque bras. La raison est 4.",
+  "07-piege": "Voilà le piège ! 2, 4, 8, 16. On ajoute 2, puis 4, puis 8 : les écarts changent, ce n'est pas arithmétique. Ici, on multiplie par 2 à chaque fois : c'est une suite géométrique, tu la verras dans une autre vidéo.",
+  "08-question": "Question ! Les termes d'une suite sont 7, 11, 15, 19. Sa raison est : A : 4. B : moins 4. C : 7. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 11 moins 7 égale 4 : on calcule toujours un terme moins celui d'avant, pas l'inverse.",
+  "09-defi": "À toi de jouer ! Les termes d'une suite sont 12, 9,5, 7, 4,5. Est-elle arithmétique ? Si oui, quelle est sa raison ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 9,5 moins 12 égale moins 2,5. 7 moins 9,5 égale moins 2,5. 4,5 moins 7 égale moins 2,5. L'écart est toujours le même : la suite est arithmétique, de raison moins 2,5.",
+  "10-finale": "Ce que tu as appris. Une suite est arithmétique quand on ajoute toujours le même nombre pour passer d'un terme au suivant. Ce nombre, c'est la raison. Pour la trouver : un terme moins celui d'avant.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -374,15 +374,15 @@ class SuiteArithReconnaitre1re(PaysageSuites):
 
     # ── 06 : un motif : la croix de carreaux ───────────────────────────────
 
-    XS_CROIX = (-4.3, -0.9, 2.9)
+    XS_CROIX = (-4.9, -1.7, 2.2)   # la croix × 1,6 (retour du 10/11) : carreau 0,5
 
     def ecran_motif(self):
         self.nouvel_ecran("06-motif")
         self.titre("Un motif qui cache une suite", JAUNE_TITRE, 42, extrait="Un motif")
-        croix_ = [croix(k, 0.32, x, 1.1) for k, x in zip((1, 2, 3), self.XS_CROIX)]
-        lg = LigneTermes([str(v) for v in CROIX], xs=self.XS_CROIX, centre=P(0, -1.3), largeur=1.2, hauteur=0.7,
-                         fs=36)
-        etapes = [self.t(f"étape {k}", 30, GREY_A).move_to(P(x, -0.45)) for k, x in zip((1, 2, 3), self.XS_CROIX)]
+        croix_ = [croix(k, 0.5, x, 0.85) for k, x in zip((1, 2, 3), self.XS_CROIX)]
+        lg = LigneTermes([str(v) for v in CROIX], xs=self.XS_CROIX, centre=P(0, -2.05), largeur=1.85, hauteur=1.05,
+                         fs=56)
+        etapes = [self.t(f"étape {k}", 44, GREY_A).move_to(P(x, -1.22)) for k, x in zip((1, 2, 3), self.XS_CROIX)]
         self.au_mot("croix")
         self.play(LaggedStart(*[GrowFromCenter(c) for c in croix_[0][0]], lag_ratio=0.12), run_time=0.6)
         for k in range(3):
@@ -397,16 +397,16 @@ class SuiteArithReconnaitre1re(PaysageSuites):
             self.play(FadeIn(etapes[k], shift=UP * 0.1), run_time=0.25)
         self.au_mot("4 carreaux")
         for k in (0, 1):
-            lg.sauts[k] = lg.saut(k, "+ 4", fs=30)
+            lg.sauts[k] = lg.saut(k, "+ 4", fs=42)
         self.play(*[Create(x[0]) for x in lg.sauts.values()], run_time=0.3)
         self.play(*[FadeIn(x[1], scale=1.4) for x in lg.sauts.values()], run_time=0.2)
         self.au_mot("un au bout")
         for k in (1, 2):
-            self.play(*[Flash(c, color=RAISON, line_length=0.15, num_lines=8) for c in croix_[k][1]],
+            self.play(*[Flash(c, color=RAISON, line_length=0.22, num_lines=8) for c in croix_[k][1]],
                       Indicate(croix_[k][1], color=RAISON, scale_factor=1.15), run_time=0.45)
         self.au_mot("raison est")
-        rr = VGroup(self.t("r =", 44, RAISON), self.t("4", 44, RAISON)).arrange(RIGHT, buff=0.15)
-        rr.move_to(P(-0.9, -2.75))
+        rr = VGroup(self.t("r =", 60, RAISON), self.t("4", 60, RAISON)).arrange(RIGHT, buff=0.2)
+        rr.move_to(P(5.25, 0.9))
         self.play(FadeIn(rr[0]), run_time=0.2)
         self.suivre("4")
         cad = self.encadre(rr, RAISON, 0.16)
@@ -479,11 +479,8 @@ class SuiteArithReconnaitre1re(PaysageSuites):
         self.dire("08b-reponse")
         self.q_reponse(q, 0)
         y = q.cartes.get_bottom()[1] - 0.55
-        duo = VGroup(lg.cases[0][0], lg.cases[1][0])
         c1 = self.calcul([("11", JUSTE, "11"), ("−", JUSTE, None), ("7", JUSTE, "7"), ("=", JUSTE, "4"),
-                          ("4", JUSTE, None)], y, x=-5.4, avec=[Indicate(VGroup(lg.cases[0], lg.cases[1]), color=JUSTE)])
-        duo.set_stroke(JUSTE, width=5)
-        self.bring_to_front(lg.cases[0][1], lg.cases[1][1])
+                          ("4", JUSTE, None)], y, x=-5.4, avec=self.allumer_cases(lg, (0, 1)))
         self.au_mot("un terme")
         regle = self.t("un terme − celui d'avant", 36, WHITE).move_to(P(-1.2, y - 0.8))
         self.play(FadeIn(regle, shift=UP * 0.1), run_time=0.35)

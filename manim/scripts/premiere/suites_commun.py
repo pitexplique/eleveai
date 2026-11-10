@@ -198,9 +198,10 @@ class NuageTermes(VGroup):
         return VGroup(tr, t)
 
 
-def liste_nombres(valeurs, fs=32, color=WHITE, sep=" ;"):
+def liste_nombres(valeurs, fs=32, color=WHITE, sep=";", buff=0.2):
     """« 3 ; 6 ; 12 ; 24 » : un Text par nombre (g.nombres), pour les dévoiler
-    chacun quand la voix le dit (montrer_liste)."""
+    chacun quand la voix le dit (montrer_liste). Trop long ? on serre buff
+    (l'espace autour des « ; »), jamais la police : self.liste() le fait."""
     g = VGroup()
     g.nombres, g.seps = [], []
     for k, v in enumerate(valeurs):
@@ -211,7 +212,7 @@ def liste_nombres(valeurs, fs=32, color=WHITE, sep=" ;"):
             s = Text(sep, font_size=fs, color=GREY_B)
             g.add(s)
             g.seps.append(s)
-    g.arrange(RIGHT, buff=0.2)
+    g.arrange(RIGHT, buff=buff)
     return g
 
 
@@ -337,6 +338,37 @@ class _OutilsSuites:
         self.play(GrowFromCenter(d), Flash(d, color=couleur, line_length=0.12, num_lines=8), run_time=run_time)
         return d
 
+    def liste(self, valeurs, fs=None, color=WHITE):
+        """Une liste_nombres aux tailles de la classe (fs_liste, buff_liste)."""
+        return liste_nombres([fr(v) for v in valeurs], fs or self.fs_liste, color, buff=self.buff_liste)
+
+    def paragraphe(self, lignes, fs=None, couleur=WHITE, buff=0.12, y=0.0, larg=None):
+        """Des lignes centrées, de haut en bas (une ligne = un texte ou
+        (texte, couleur)). Chaque ligne se montre à part, dans l'ordre de la voix."""
+        ts = [self.t(l, fs or self.fs_texte, couleur, 1e9) if isinstance(l, str)
+              else self.t(l[0], fs or self.fs_texte, l[1], 1e9) for l in lignes]
+        g = VGroup(*ts)
+        larg = larg or self.largeur_texte
+        k = min(1.0, larg / max(m.width for m in ts))  # même taille pour toutes les lignes
+        for m in ts:
+            m.scale(k)
+        return g.arrange(DOWN, buff=buff * k).move_to(P(0, y))
+
+    def allumer_cases(self, lg, indices, couleur=JUSTE, largeur=7):
+        """Les animations qui allument des cases : contour épais et coloré, fond
+        sombre, nombre BLANC et lisible, taille inchangée (à jouer avec self.play)."""
+        anims = []
+        for i in indices:
+            case = lg.cases[i]
+            c0 = case[0].get_stroke_color()
+
+            def maj(m, a, c0=c0):
+                m[0].set_stroke(interpolate_color(c0, ManimColor(couleur), a), width=3 + (largeur - 3) * a)
+                m[0].set_fill(FOND_CARTE, 1)
+                m[1].set_fill(WHITE, 1)
+            anims.append(UpdateFromAlphaFunc(case, maj))
+        return anims
+
     def montrer_liste(self, g, extraits=None, run_time=0.18):
         """Chaque nombre d'une liste_nombres quand la voix le dit."""
         for k, n in enumerate(g.nombres):
@@ -354,11 +386,12 @@ class _OutilsSuites:
         rond = Circle(radius=0.25 * fs / 32, fill_color=TERME, fill_opacity=1, stroke_width=0)
         lt = Text(lettre, font_size=fs, color=WHITE, weight=BOLD).move_to(rond)
         c = corps if isinstance(corps, Mobject) else Text(corps, font_size=fs, color=WHITE)
-        place = largeur - 0.9 - rond.width - 0.25  # la place de la coche, à droite
+        place = largeur - self.place_coche - rond.width - 0.45  # la coche, à droite
         if c.width > place:  # seul le corps rétrécit : les ronds A, B, C restent égaux
             c.scale_to_fit_width(place)
         ligne = VGroup(VGroup(rond, lt), c).arrange(RIGHT, buff=0.25)
-        cadre = RoundedRectangle(width=largeur, height=max(0.66, ligne.height + 0.26), corner_radius=0.14,
+        cadre = RoundedRectangle(width=largeur, height=max(self.hauteur_bouton, ligne.height + 0.26),
+                                 corner_radius=0.14,
                                  stroke_color=TERME, stroke_width=3, fill_color=FOND_CARTE, fill_opacity=1)
         ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
         return VGroup(cadre, ligne)
@@ -368,7 +401,10 @@ class _OutilsSuites:
         k = self.k_question
         tete = VGroup(pastille_pause(0.38 * k), self.t("Question !", int(38 * k), RAISON)).arrange(RIGHT, buff=0.2)
         rebours = CompteARebours(self.duree_rebours, r=0.32 * k, fs=int(30 * k))
-        VGroup(tete, rebours).arrange(RIGHT, buff=0.4).move_to(P(0, y))
+        g = VGroup(tete, rebours).arrange(RIGHT, buff=0.4)
+        if g.width > self.largeur_texte:
+            g.scale_to_fit_width(self.largeur_texte)
+        g.move_to(P(0, y))
         return tete, rebours
 
     def poser_question(self, cle, lignes, choix, bonne, y_tete=None, y_question=None, en_ligne=False,
@@ -390,14 +426,14 @@ class _OutilsSuites:
         q.move_to(P(0, 0)).align_to(P(0, (tete.get_bottom()[1] - 0.3) if y_question is None else y_question), UP)
         larg = largeur or self.largeur_bouton
         fs_b = fs or int(32 * k)
-        place = larg - 0.9 - 0.5 * fs_b / 32 - 0.25
+        place = larg - self.place_coche - 0.5 * fs_b / 32 - 0.45
         corps = [c for c in choix if isinstance(c, Mobject)]
         if corps and max(c.width for c in corps) > place:  # les trois corps à la MÊME échelle
             f = place / max(c.width for c in corps)
             for c in corps:
                 c.scale(f)
         cartes = VGroup(*[self.bouton(L, c, larg, fs_b) for L, c in zip("ABC", choix)])
-        cartes.arrange(RIGHT if en_ligne else DOWN, buff=0.3 if en_ligne else 0.16)
+        cartes.arrange(RIGHT if en_ligne else DOWN, buff=0.3 if en_ligne else self.buff_boutons)
         if cartes.width > self.largeur_texte:
             cartes.scale_to_fit_width(self.largeur_texte)
         cartes.move_to(P(0, 0)).align_to(P(0, q.get_bottom()[1] - 0.35), UP)
@@ -454,9 +490,11 @@ class _OutilsSuites:
         anims = [b[0].animate.set_stroke(JUSTE, width=7).set_fill("#052e16", 1), b[1][0][0].animate.set_fill(JUSTE)]
         anims += [cartes[j].animate.set_opacity(0.3) for j in range(len(cartes)) if j != bonne]
         self.play(*anims, FadeOut(q.rebours), FadeOut(q.pause), run_time=0.25)
-        ok = self.coche(JUSTE, 0.2 * self.k_question).move_to(b[0].get_right() + LEFT * 0.3)
-        self.play(b.animate.scale(1.12), Create(ok), run_time=0.25)
-        self.play(b.animate.scale(1 / 1.12), ok.animate.scale(1 / 1.12, about_point=b.get_center()), run_time=0.25)
+        ok = self.coche(JUSTE, 0.2 * self.k_question)
+        ok.move_to(b[0].get_right(), aligned_edge=RIGHT).shift(LEFT * 0.12)  # tout à droite, hors du corps
+        k = self.k_allumer
+        self.play(b.animate.scale(k), Create(ok), run_time=0.25)
+        self.play(b.animate.scale(1 / k), ok.animate.scale(1 / k, about_point=b.get_center()), run_time=0.25)
         return ok
 
     def defi_pause(self, y, x=0.0, texte="Mets pause, et cherche !"):
@@ -479,6 +517,13 @@ class PaysageSuites(_OutilsSuites, AuditSynchro, MotsCales, Notion6e):
     ceinture = "verte"
     largeur_texte = 12.6          # 3 % de marge : rien au-delà de x = ±6,68
     largeur_bouton = 7.2
+    hauteur_bouton = 0.66
+    buff_boutons = 0.16
+    place_coche = 0.9             # la place de la coche ✓ dans le bouton allumé
+    k_allumer = 1.12              # la bonne réponse : agrandir puis rétrécir
+    fs_texte = 38
+    fs_liste = 34
+    buff_liste = 0.2
     k_question = 1.0
     duree_rebours = 5
     y_tete_question = 3.1
@@ -602,9 +647,21 @@ class ShortSuites(_OutilsSuites, AuditSynchro, MotsCales, Short6e):
 
     identite = "Maths 1re — EleveAI"
     ceinture = "blanche"
-    largeur_texte = 4.0
-    largeur_bouton = 3.6          # × 1,12 quand la bonne s'allume : reste dans la marge
-    k_question = 0.85
+    # Tailles pour un TÉLÉPHONE (retour de Frédéric sur le pilote, 10/11) : textes
+    # 1,3 à 1,5 fois ceux des premiers shorts, en lignes courtes ; boutons larges
+    # et hauts ; on occupe toute la hauteur jusqu'au-dessus de Ti-Margo (y ≈ −2,9).
+    largeur_texte = 4.1
+    largeur_bouton = 4.0          # × 1,05 quand la bonne s'allume : reste dans la marge
+    hauteur_bouton = 0.9
+    buff_boutons = 0.2
+    place_coche = 0.8           # la coche (≈ 0,5) + son espace : le corps rétrécit avant
+    k_allumer = 1.05
+    fs_texte = 40                 # un texte courant (une ligne courte)
+    fs_grand = 50                 # l'accroche, le pari
+    fs_liste = 31                 # les nombres des boutons (« ; » serrés)
+    buff_liste = 0.03
+    y_bas = -2.85                 # le plus bas qu'un texte puisse aller (Ti-Margo dessous)
+    k_question = 1.15
     duree_rebours = 3
     y_tete_question = 3.45
 
@@ -615,7 +672,7 @@ class ShortSuites(_OutilsSuites, AuditSynchro, MotsCales, Short6e):
                 self.remove(m)
         return self.dire(cle)
 
-    def entete(self, titre, extrait=None, fs=36):
+    def entete(self, titre, extrait=None, fs=44):
         """Ti-Margo en bas, le titre (y = 3,45) et l'échelle ENTIÈRE des ceintures
         dessous (y = 2,95). Le titre apparaît quand la voix le dit."""
         if getattr(self, "_margo", None) is None:
@@ -628,9 +685,11 @@ class ShortSuites(_OutilsSuites, AuditSynchro, MotsCales, Short6e):
         self.play(Write(self.titre_s), run_time=0.5)
         return self.titre_s, self.badge
 
-    def appel_commentaire(self, y=-2.45):
+    def appel_commentaire(self, y=-2.45, fs=44):
+        """« Réponds en / commentaire ! » en gros, sur deux lignes, centré en y."""
         self.au_mot("Réponds en commentaire")
-        appel = self.t("Réponds en commentaire !", 32, JUSTE, larg=3.9).move_to(P(0, y))
+        appel = self.paragraphe([("Réponds en", JUSTE), ("commentaire !", JUSTE)], fs, buff=0.08, y=y,
+                                larg=self.largeur_texte / 1.1)  # il grandit de 8 % (insister)
         self.play(FadeIn(appel, scale=0.7), run_time=0.4)
         self.insister(appel, 1.08)
         return appel
