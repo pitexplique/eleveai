@@ -182,7 +182,7 @@ export const exercicesPerimetreCm2: FicheExercicesData = {
             "Sur ce quadrillage, chaque carreau a des côtés de 1 cm.\na) Quel est le périmètre de la figure, en cm ?\nb) Combien de carreaux la figure contient-elle ?\nc) Le périmètre, c'est : A) le nombre de carreaux   B) la longueur du tour   C) la plus grande longueur. Réponds par A, B ou C.",
           figure: quadrillage(4, 3, [{ cellules: [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2], [3, 2]], couleur: "#93c5fd" }]),
           reponses: [
-            { question: "a)", attendu: "14" },
+            { question: "a)", attendu: "14", unite: "cm" },
             { question: "b)", attendu: "6" },
             { question: "c)", attendu: "B" },
           ],
@@ -259,8 +259,8 @@ export const exercicesPerimetreCm2: FicheExercicesData = {
         {
           enonce: "Un triangle a des côtés de 4 cm, 35 mm et 50 mm.\na) Quel est son périmètre, en mm ?\nb) Écris ce périmètre en cm.",
           reponses: [
-            { question: "a)", attendu: "125" },
-            { question: "b)", attendu: "12,5" },
+            { question: "a)", attendu: "125", unite: "mm" },
+            { question: "b)", attendu: "12,5", unite: "cm" },
           ],
           correction:
             "Les côtés ne sont pas dans la même unité : je mets tout en mm d'abord.\n1 cm = 10 mm, donc 4 cm = 40 mm.\na) 40 + 35 + 50 = 125 mm.\nb) 10 mm font 1 cm. 125 mm, c'est 12 cm et 5 mm : 12,5 cm.\n⛔ Le piège : additionner 4 + 35 + 50 = 89. On n'additionne pas des cm et des mm.\nRéponse : a) 125 mm ; b) 12,5 cm.",
@@ -285,7 +285,7 @@ export const exercicesPerimetreCm2: FicheExercicesData = {
             "Un terrain de basket est un rectangle de 28 m de long et 15 m de large.\na) Quel est son périmètre ?\nb) Pour s'échauffer, l'entraîneur fait courir 3 tours du terrain. Combien de mètres courent les joueurs ?",
           reponses: [
             { question: "a)", attendu: "86" },
-            { question: "b)", attendu: "258" },
+            { question: "b)", attendu: "258", unite: "m" },
           ],
           correction:
             "a) Rectangle : (28 + 15) × 2 = 43 × 2 = 86 m.\nb) 3 tours de 86 m : 3 × 86 = 258 m.\n⛔ Le piège : faire 28 × 15. Ça, c'est l'aire du terrain, pas son tour.\nRéponse : a) 86 m ; b) 258 m.",
@@ -297,7 +297,7 @@ export const exercicesPerimetreCm2: FicheExercicesData = {
           figure: poly([[62, 20], [172, 20], [172, 64], [238, 64], [238, 152], [62, 152]], ["5 m", "2 m", "3 m", "4 m", "8 m", "6 m"], 176, { 2: [18, 0] }),
           reponses: [
             { question: "a)", attendu: "28" },
-            { question: "b)", attendu: "27" },
+            { question: "b)", attendu: "27", unite: "m" },
           ],
           correction:
             "La pièce a 6 côtés. Je fais le tour en partant d'un coin : 5, 2, 3, 4, 8, 6.\na) 5 + 2 + 3 + 4 + 8 + 6 = 28 m.\nb) Je retire la porte : 28 − 1 = 27 m.\n⛔ Le piège : oublier les deux petits côtés du creux, 2 m et 3 m. Je compte 6 côtés pour 6 nombres.\nRéponse : a) 28 m ; b) 27 m.",
@@ -306,8 +306,8 @@ export const exercicesPerimetreCm2: FicheExercicesData = {
         {
           enonce: "Une couturière borde un fanion triangulaire. Ses côtés mesurent 1,2 m, 90 cm et 75 cm.\na) Quel est le périmètre du fanion, en cm ?\nb) Écris-le en m.",
           reponses: [
-            { question: "a)", attendu: "285" },
-            { question: "b)", attendu: "2,85" },
+            { question: "a)", attendu: "285", unite: "cm" },
+            { question: "b)", attendu: "2,85", unite: "m" },
           ],
           correction:
             "Je mets tout en cm. 1 m = 100 cm, donc 1,2 m = 120 cm.\na) 120 + 90 + 75 = 285 cm.\nb) 100 cm font 1 m. 285 cm, c'est 2 m et 85 cm : 2,85 m.\n⛔ Le piège : additionner 1,2 + 90 + 75. Les m et les cm ne s'additionnent pas.\nRéponse : a) 285 cm ; b) 2,85 m.",
@@ -335,8 +335,8 @@ export const exercicesPerimetreCm2: FicheExercicesData = {
             "Une encadreuse fabrique des cadres carrés de 25 cm de côté, avec une baguette de bois.\na) Combien de cm de baguette pour un cadre ?\nb) Écris cette longueur en m.\nc) Combien de mètres de baguette pour 6 cadres ?",
           reponses: [
             { question: "a)", attendu: "100" },
-            { question: "b)", attendu: "1" },
-            { question: "c)", attendu: "6" },
+            { question: "b)", attendu: "1", unite: "m" },
+            { question: "c)", attendu: "6", unite: "m" },
           ],
           correction:
             "a) Un carré a 4 côtés égaux : 25 × 4 = 100 cm.\nb) 100 cm = 1 m.\nc) 1 m par cadre : 6 × 1 = 6 m.\n⛔ Le piège : faire 25 × 2 = 50 cm. Un carré a 4 côtés, pas 2.\nRéponse : a) 100 cm ; b) 1 m ; c) 6 m.",
@@ -408,7 +408,7 @@ export const exercicesPerimetreCm2: FicheExercicesData = {
           ),
           reponses: [
             { question: "a)", attendu: "50" },
-            { question: "b)", attendu: "47" },
+            { question: "b)", attendu: "47", unite: "m" },
             { question: "c)", attendu: "5" },
           ],
           correction:
@@ -435,7 +435,7 @@ export const exercicesPerimetreCm2: FicheExercicesData = {
             "Une fermière fait un enclos triangulaire pour ses chèvres. Les côtés mesurent 25 m, 30 m et 35 m. Elle tend 3 rangs de fil tout autour.\na) Quel est le périmètre de l'enclos ?\nb) Combien de mètres de fil lui faut-il ?",
           reponses: [
             { question: "a)", attendu: "90" },
-            { question: "b)", attendu: "270" },
+            { question: "b)", attendu: "270", unite: "m" },
           ],
           correction:
             "a) 25 + 30 + 35 = 90 m.\nb) 3 rangs de fil, chacun fait le tour : 3 × 90 = 270 m.\n⛔ Le piège : s'arrêter à 90 m. Il y a 3 rangs : le fil fait 3 fois le tour.\nRéponse : a) 90 m ; b) 270 m.",

@@ -174,8 +174,8 @@ export const exercicesEchelleCm2: FicheExercicesData = {
         {
           enonce: "Sur une carte, 1 cm représente 3 km.\na) Que représentent 2 cm sur la carte, en km ?\nb) Que représentent 5 cm sur la carte, en km ?\nc) Que veut dire cette échelle ?\nA) 1 cm sur la carte, c'est 3 km en vrai.\nB) 3 cm sur la carte, c'est 1 km en vrai.\nC) 1 km en vrai, c'est 3 cm sur la carte.",
           reponses: [
-            { question: "a)", attendu: "6" },
-            { question: "b)", attendu: "15" },
+            { question: "a)", attendu: "6", unite: "km" },
+            { question: "b)", attendu: "15", unite: "km" },
             { question: "c)", attendu: "A" },
           ],
           correction:
@@ -189,8 +189,8 @@ export const exercicesEchelleCm2: FicheExercicesData = {
             { nom: "b)", cm: 7 },
           ]),
           reponses: [
-            { question: "a)", attendu: "30" },
-            { question: "b)", attendu: "70" },
+            { question: "a)", attendu: "30", unite: "m" },
+            { question: "b)", attendu: "70", unite: "m" },
           ],
           correction:
             "L'échelle dit : 1 cm sur le plan représente 10 m en vrai. Du plan vers la réalité, je multiplie.\na) L'allée a) mesure 3 cm sur le plan : 3 × 10 = 30 m.\nb) L'allée b) mesure 7 cm sur le plan : 7 × 10 = 70 m.\n⛔ Le piège : additionner, 7 + 10 = 17 m. 7 cm, c'est 7 FOIS 1 cm : je multiplie.\nRéponse : a) 30 m ; b) 70 m.",
@@ -211,7 +211,7 @@ export const exercicesEchelleCm2: FicheExercicesData = {
           enonce: "Sur un plan, 1 cm représente 1 m.\na) La réalité est combien de fois plus grande que le plan ?\nA) 1 000 fois\nB) 10 fois\nC) 100 fois\nb) Un lit mesure 2 cm sur ce plan. Quelle est sa vraie longueur, en m ?",
           reponses: [
             { question: "a)", attendu: "C" },
-            { question: "b)", attendu: "2" },
+            { question: "b)", attendu: "2", unite: "m" },
           ],
           correction:
             "a) Je mets les deux longueurs dans la même unité : 1 m = 100 cm.\nDonc 1 cm sur le plan représente 100 cm en vrai : la réalité est 100 fois plus grande. Choix C.\nb) 2 cm sur le plan : 2 × 1 m = 2 m.\n⛔ Le piège : croire que 1 m = 10 cm, et choisir « 10 fois ». Dans 1 m, il y a 100 cm.\nRéponse : a) C ; b) 2 m.",
@@ -220,9 +220,9 @@ export const exercicesEchelleCm2: FicheExercicesData = {
         {
           enonce: "Un maquettiste fabrique la maquette d'un bus. 1 cm de la maquette représente 50 cm du vrai bus. La maquette mesure 24 cm de long et 6 cm de haut.\na) Quelle est la longueur du vrai bus, en cm ?\nb) Écris cette longueur en m.\nc) Quelle est la hauteur du vrai bus, en m ?",
           reponses: [
-            { question: "a)", attendu: "1200" },
-            { question: "b)", attendu: "12" },
-            { question: "c)", attendu: "3" },
+            { question: "a)", attendu: "1200", unite: "cm" },
+            { question: "b)", attendu: "12", unite: "m" },
+            { question: "c)", attendu: "3", unite: "m" },
           ],
           correction:
             "De la maquette vers le vrai bus, je multiplie par 50.\na) 24 × 50 = 1 200 cm. (24 × 5 = 120, puis × 10 = 1 200.)\nb) 1 m = 100 cm. 1 200 cm ÷ 100 = 12 m.\nc) Hauteur : 6 × 50 = 300 cm. Et 300 cm ÷ 100 = 3 m.\n⛔ Le piège : écrire « 1 200 m ». L'échelle parle en cm : le résultat est en cm, puis je convertis.\nRéponse : a) 1 200 cm ; b) 12 m ; c) 3 m.",
@@ -243,8 +243,8 @@ export const exercicesEchelleCm2: FicheExercicesData = {
           enonce: "Voici le plan de la chambre de Sacha. 1 cm représente 50 cm.\na) Quelle est la vraie longueur de la chambre, en m ?\nb) Quelle est la vraie largeur de la chambre, en m ?",
           figure: piece(30, "1 cm ↔ 50 cm", "Chambre", 8, 6),
           reponses: [
-            { question: "a)", attendu: "4" },
-            { question: "b)", attendu: "3" },
+            { question: "a)", attendu: "4", unite: "m" },
+            { question: "b)", attendu: "3", unite: "m" },
           ],
           correction:
             "Sur le plan, la chambre mesure 8 cm sur 6 cm. Je multiplie par 50.\na) Longueur : 8 × 50 = 400 cm. Et 400 cm = 4 m, car 1 m = 100 cm.\nb) Largeur : 6 × 50 = 300 cm = 3 m.\n⛔ Le piège : répondre 400 m. Le calcul donne des cm : je convertis en m à la fin.\nRéponse : a) 4 m ; b) 3 m.",
@@ -254,7 +254,7 @@ export const exercicesEchelleCm2: FicheExercicesData = {
           enonce: "Deux cartes. Sur la carte rouge, 1 cm représente 1 km. Sur la carte verte, 1 cm représente 10 km.\na) Sur quelle carte un lac de 2 km est-il dessiné le plus grand ?\nA) sur la carte verte\nB) sur la carte rouge\nC) il a la même taille sur les deux\nb) Sur la carte verte, deux villes sont à 5 cm. Quelle est la vraie distance, en km ?",
           reponses: [
             { question: "a)", attendu: "B" },
-            { question: "b)", attendu: "50" },
+            { question: "b)", attendu: "50", unite: "km" },
           ],
           correction:
             "a) Je calcule la taille du lac sur chaque carte.\nCarte rouge : 2 km ÷ 1 = 2 cm.\nCarte verte : 1 cm vaut déjà 10 km. 2 km, c'est bien moins que 10 km : le lac fait moins de 1 cm (2 ÷ 10 = 0,2 cm).\nLe lac est dessiné plus grand sur la carte rouge : choix B.\nb) Carte verte : 5 × 10 = 50 km.\n⛔ Le piège : croire que la carte « à 10 km » dessine plus grand parce que 10 est plus grand que 1. C'est l'inverse : chaque cm couvre plus de pays, donc tout est plus petit.\nRéponse : a) B ; b) 50 km.",
@@ -281,9 +281,9 @@ export const exercicesEchelleCm2: FicheExercicesData = {
             { nom: "b)", cm: 6.5 },
           ]),
           reponses: [
-            { question: "a)", attendu: "800" },
-            { question: "b)", attendu: "1300" },
-            { question: "c)", attendu: "2,1" },
+            { question: "a)", attendu: "800", unite: "m" },
+            { question: "b)", attendu: "1300", unite: "m" },
+            { question: "c)", attendu: "2,1", unite: "km" },
           ],
           correction:
             "Du plan vers la réalité, je multiplie par 200.\na) 4 × 200 = 800 m.\nb) 6,5 cm, c'est 6 cm et la moitié d'un cm. 6 × 200 = 1 200 m, et la moitié de 200 m, c'est 100 m. 1 200 + 100 = 1 300 m.\nc) En tout : 800 + 1 300 = 2 100 m.\n1 km = 1 000 m. 2 100 m = 2 km et 100 m = 2,1 km.\n⛔ Le piège : écrire 2 100 km. 2 100, ce sont des mètres : en km, c'est 2,1.\nRéponse : a) 800 m ; b) 1 300 m ; c) 2,1 km.",
@@ -304,9 +304,9 @@ export const exercicesEchelleCm2: FicheExercicesData = {
         {
           enonce: "Une maquette de bateau : 1 cm représente 25 cm. Le vrai bateau mesure 5 m de long. Son mât mesure 3 m.\na) Écris 5 m en cm.\nb) Quelle est la longueur de la maquette, en cm ?\nc) Quelle est la hauteur du mât de la maquette, en cm ?",
           reponses: [
-            { question: "a)", attendu: "500" },
-            { question: "b)", attendu: "20" },
-            { question: "c)", attendu: "12" },
+            { question: "a)", attendu: "500", unite: "cm" },
+            { question: "b)", attendu: "20", unite: "cm" },
+            { question: "c)", attendu: "12", unite: "cm" },
           ],
           correction:
             "L'échelle parle en cm : je convertis d'abord les mètres en cm.\na) 1 m = 100 cm. Donc 5 m = 500 cm.\nb) De la réalité vers la maquette, je divise par 25 : 500 ÷ 25 = 20 cm. (Dans 100, il y a 4 fois 25 ; dans 500, 5 × 4 = 20 fois.)\nc) 3 m = 300 cm. 300 ÷ 25 = 12 cm.\nJe vérifie : 12 × 25 = 300.\n⛔ Le piège : diviser 5 par 25 sans convertir, ou écrire 5 m = 50 cm. Dans 1 m, il y a 100 cm.\nRéponse : a) 500 cm ; b) 20 cm ; c) 12 cm.",
@@ -315,8 +315,8 @@ export const exercicesEchelleCm2: FicheExercicesData = {
         {
           enonce: "Sur une carte routière, 1 cm représente 8 km.\na) Deux villages sont à 3 cm. Quelle est la vraie distance, en km ?\nb) Deux villes sont à 7,5 cm. Quelle est la vraie distance, en km ?\nc) Un camion fait les deux trajets. Combien de km en tout ?",
           reponses: [
-            { question: "a)", attendu: "24" },
-            { question: "b)", attendu: "60" },
+            { question: "a)", attendu: "24", unite: "km" },
+            { question: "b)", attendu: "60", unite: "km" },
             { question: "c)", attendu: "84" },
           ],
           correction:
@@ -327,7 +327,7 @@ export const exercicesEchelleCm2: FicheExercicesData = {
           enonce: "Sur le plan d'une piscine, le grand bassin de 25 m de long mesure 5 cm.\na) Sur ce plan, 1 cm représente combien de m ?\nb) Le bassin mesure 2 cm de large sur le plan. Quelle est sa vraie largeur, en m ?\nc) Sur le même plan, combien de cm pour un bassin olympique de 50 m ?",
           reponses: [
             { question: "a)", attendu: "5" },
-            { question: "b)", attendu: "10" },
+            { question: "b)", attendu: "10", unite: "m" },
             { question: "c)", attendu: "10" },
           ],
           correction:
@@ -377,8 +377,8 @@ export const exercicesEchelleCm2: FicheExercicesData = {
           titre: "La randonnée en trois étapes",
           enonce: "Sur la carte d'un randonneur, 1 cm représente 2 km. Son chemin a trois étapes : 2,5 cm, 4 cm et 3,5 cm sur la carte.\na) Quelle est la longueur du chemin sur la carte, en cm ?\nb) Quelle est la vraie longueur du chemin, en km ?\nc) Il marche 4 km chaque heure. Combien d'heures dure la randonnée ?",
           reponses: [
-            { question: "a)", attendu: "10" },
-            { question: "b)", attendu: "20" },
+            { question: "a)", attendu: "10", unite: "cm" },
+            { question: "b)", attendu: "20", unite: "km" },
             { question: "c)", attendu: "5" },
           ],
           correction:
@@ -390,8 +390,8 @@ export const exercicesEchelleCm2: FicheExercicesData = {
           enonce: "Une architecte dessine une maison. Sur son plan, 1 cm représente 4 m.\na) Quelle est la vraie longueur de la maison, en m ?\nb) Quelle est la vraie largeur de la maison, en m ?\nc) Le terrain mesure 40 m de long. Combien de cm sur le plan ?",
           figure: piece(30, "1 cm ↔ 4 m", "Maison", 5, 3),
           reponses: [
-            { question: "a)", attendu: "20" },
-            { question: "b)", attendu: "12" },
+            { question: "a)", attendu: "20", unite: "m" },
+            { question: "b)", attendu: "12", unite: "m" },
             { question: "c)", attendu: "10" },
           ],
           correction:
@@ -402,8 +402,8 @@ export const exercicesEchelleCm2: FicheExercicesData = {
           titre: "Le pilote de ligne",
           enonce: "Un pilote de ligne prépare son vol. Sur sa carte, 1 cm représente 50 km. L'aller mesure 8 cm. Le retour passe par une autre ville : 6 cm, puis 5 cm.\na) Quelle est la vraie distance de l'aller, en km ?\nb) Quelle est la vraie distance du retour, en km ?\nc) Combien de km le retour a-t-il de plus que l'aller ?",
           reponses: [
-            { question: "a)", attendu: "400" },
-            { question: "b)", attendu: "550" },
+            { question: "a)", attendu: "400", unite: "km" },
+            { question: "b)", attendu: "550", unite: "km" },
             { question: "c)", attendu: "150" },
           ],
           correction:
@@ -426,8 +426,8 @@ export const exercicesEchelleCm2: FicheExercicesData = {
           titre: "La mare",
           enonce: "Une biologiste dessine le plan d'une mare. 1 cm représente 50 cm. La mare mesure 6 m de long. Il y a 2 m de berge de chaque côté.\na) Écris 6 m en cm.\nb) Quelle est la longueur de la mare sur le plan, en cm ?\nc) Avec les deux berges, combien de cm sur le plan ?\nd) La feuille fait 21 cm de large. Le dessin tient-il ? Réponds par oui ou non.",
           reponses: [
-            { question: "a)", attendu: "600" },
-            { question: "b)", attendu: "12" },
+            { question: "a)", attendu: "600", unite: "cm" },
+            { question: "b)", attendu: "12", unite: "cm" },
             { question: "c)", attendu: "20" },
             { question: "d)", attendu: "oui" },
           ],

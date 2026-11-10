@@ -186,10 +186,10 @@ export const exercicesContenanceCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 3 L = … cL\nb) 4 L = … mL\nc) 5 cL = … mL\nd) 2 L = … dL",
           reponses: [
-            { question: "a)", attendu: "300" },
-            { question: "b)", attendu: "4000" },
-            { question: "c)", attendu: "50" },
-            { question: "d)", attendu: "20" },
+            { question: "a)", attendu: "300", unite: "cl" },
+            { question: "b)", attendu: "4000", unite: "ml" },
+            { question: "c)", attendu: "50", unite: "ml" },
+            { question: "d)", attendu: "20", unite: "dl" },
           ],
           correction:
             "Je passe à une unité plus petite : il en faut plus, le nombre grandit.\na) Le 3 va dans la colonne L du tableau. Puis un 0 en dL et un 0 en cL : 3 0 0. Donc 3 L = 300 cL.\nb) Le 4 va dans la colonne L. Puis trois 0, en dL, cL et mL : 4 L = 4 000 mL.\nc) 1 cL = 10 mL. 5 cL = 50 mL.\nd) 1 L = 10 dL. 2 L = 20 dL.\n⭐ Le raccourci, après : vers une unité plus petite, × 10, × 100 ou × 1 000.\n⛔ Le piège : écrire 4 L = 400 mL. 100, c'est pour les cL. Pour les mL, c'est 1 000.\nRéponse : a) 300 cL ; b) 4 000 mL ; c) 50 mL ; d) 20 dL.",
@@ -204,10 +204,10 @@ export const exercicesContenanceCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 600 cL = … L\nb) 7 000 mL = … L\nc) 80 mL = … cL\nd) 30 dL = … L",
           reponses: [
-            { question: "a)", attendu: "6" },
-            { question: "b)", attendu: "7" },
-            { question: "c)", attendu: "8" },
-            { question: "d)", attendu: "3" },
+            { question: "a)", attendu: "6", unite: "l" },
+            { question: "b)", attendu: "7", unite: "l" },
+            { question: "c)", attendu: "8", unite: "cl" },
+            { question: "d)", attendu: "3", unite: "l" },
           ],
           correction:
             "Je passe à une unité plus grande : il en faut moins, le nombre devient plus petit.\na) 100 cL font 1 L. 600 cL, ce sont 6 centaines de cL : 6 L.\nb) 1 000 mL font 1 L. 7 000 mL = 7 L.\nc) 10 mL font 1 cL. 80 mL, ce sont 8 dizaines de mL : 8 cL.\nd) 10 dL font 1 L. 30 dL = 3 L.\n⛔ Le piège : diviser par 10 au lieu de 100, et écrire 600 cL = 60 L. Entre cL et L, il y a deux colonnes.\nRéponse : a) 6 L ; b) 7 L ; c) 8 cL ; d) 3 L.",
@@ -242,9 +242,9 @@ export const exercicesContenanceCm2: FicheExercicesData = {
           enonce: "Le cuisinier verse du lait dans un verre doseur gradué en mL.\na) Combien de mL de lait contient le verre ?\nb) Écris cette quantité en cL.\nc) Combien de mL faut-il ajouter pour avoir 500 mL ?",
           figure: doseur(500, 50, 350),
           reponses: [
-            { question: "a)", attendu: "350" },
-            { question: "b)", attendu: "35" },
-            { question: "c)", attendu: "150" },
+            { question: "a)", attendu: "350", unite: "ml" },
+            { question: "b)", attendu: "35", unite: "cl" },
+            { question: "c)", attendu: "150", unite: "ml" },
           ],
           correction:
             "Je regarde d'abord ce que vaut un trait. Entre deux nombres, il y a 100 mL et deux sauts : un trait vaut 50 mL.\na) Le lait arrive au petit trait entre 300 et 400 : 350 mL.\nb) 10 mL font 1 cL. 350 mL, ce sont 35 dizaines de mL : 35 cL.\nc) 500 − 350 = 150 mL.\n⛔ Le piège : lire 310 ou 305, en croyant qu'un trait vaut 10 ou 5. Je cherche d'abord la valeur d'un trait : ici 50 mL.\nRéponse : a) 350 mL ; b) 35 cL ; c) 150 mL.",
@@ -253,9 +253,9 @@ export const exercicesContenanceCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 1 L 25 cL = … cL\nb) 2 L 300 mL = … mL\nc) 3 L 5 cL = … cL",
           reponses: [
-            { question: "a)", attendu: "125" },
-            { question: "b)", attendu: "2300" },
-            { question: "c)", attendu: "305" },
+            { question: "a)", attendu: "125", unite: "cl" },
+            { question: "b)", attendu: "2300", unite: "ml" },
+            { question: "c)", attendu: "305", unite: "cl" },
           ],
           correction:
             "Je convertis d'abord les litres, puis j'ajoute le reste.\na) 1 L = 100 cL. 100 + 25 = 125 cL.\nb) 2 L = 2 000 mL. 2 000 + 300 = 2 300 mL.\nc) 3 L = 300 cL. 300 + 5 = 305 cL.\n⛔ Le piège : écrire 3 L 5 cL = 35 cL. Les 3 L valent 300 cL : il faut le 0 des dL, 305 cL.\nRéponse : a) 125 cL ; b) 2 300 mL ; c) 305 cL.",
@@ -304,10 +304,10 @@ export const exercicesContenanceCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 2,5 L = … cL\nb) 0,6 L = … mL\nc) 3,2 L = … cL\nd) 4,5 cL = … mL",
           reponses: [
-            { question: "a)", attendu: "250" },
-            { question: "b)", attendu: "600" },
-            { question: "c)", attendu: "320" },
-            { question: "d)", attendu: "45" },
+            { question: "a)", attendu: "250", unite: "cl" },
+            { question: "b)", attendu: "600", unite: "ml" },
+            { question: "c)", attendu: "320", unite: "cl" },
+            { question: "d)", attendu: "45", unite: "ml" },
           ],
           correction:
             "Je place le chiffre des unités dans la colonne de l'unité, puis je complète par des 0.\na) 2,5 L : 2 en L, 5 en dL, 0 en cL : 250 cL.\nb) 0,6 L : 0 en L, 6 en dL, 0 en cL, 0 en mL : 600 mL.\nc) 3,2 L : 3 en L, 2 en dL, 0 en cL : 320 cL.\nd) 4,5 cL : 4 en cL, 5 en mL : 45 mL.\n⭐ Le raccourci, après : des L aux cL, × 100. 2,5 × 100 = 250.\n⛔ Le piège : écrire 0,6 L = 6 mL ou 60 mL. Le 6 est le chiffre des dL : il vaut 600 mL.\nRéponse : a) 250 cL ; b) 600 mL ; c) 320 cL ; d) 45 mL.",
@@ -322,10 +322,10 @@ export const exercicesContenanceCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 350 cL = … L\nb) 1 800 mL = … L\nc) 25 mL = … cL\nd) 40 cL = … L",
           reponses: [
-            { question: "a)", attendu: "3,5" },
-            { question: "b)", attendu: "1,8" },
-            { question: "c)", attendu: "2,5" },
-            { question: "d)", attendu: "0,4" },
+            { question: "a)", attendu: "3,5", unite: "l" },
+            { question: "b)", attendu: "1,8", unite: "l" },
+            { question: "c)", attendu: "2,5", unite: "cl" },
+            { question: "d)", attendu: "0,4", unite: "l" },
           ],
           correction:
             "J'écris le nombre : son dernier chiffre va dans la colonne de son unité. Puis la virgule va juste après la colonne de la nouvelle unité.\na) 350 cL : 3 en L, 5 en dL, 0 en cL. Virgule après les L : 3,50 L, soit 3,5 L.\nb) 1 800 mL : 1 en L, 8 en dL, 0 en cL, 0 en mL. Donc 1,8 L.\nc) 25 mL : 2 en cL, 5 en mL. Virgule après les cL : 2,5 cL.\nd) 40 cL : 4 en dL, 0 en cL, rien en L. J'écris 0 en L : 0,4 L.\n⛔ Le piège : écrire 40 cL = 0,04 L. Le 4 est le chiffre des dL, juste après la virgule : 0,4 L.\nRéponse : a) 3,5 L ; b) 1,8 L ; c) 2,5 cL ; d) 0,4 L.",
@@ -343,7 +343,7 @@ export const exercicesContenanceCm2: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "125 ; 130 ; 120 ; 110", ordre: true },
             { question: "b)", attendu: "D ; C ; A ; B", ordre: true },
-            { question: "c)", attendu: "20" },
+            { question: "c)", attendu: "20", unite: "cl" },
           ],
           correction:
             "Une seule unité : le cL.\na) A : 1,25 L = 125 cL. B : 130 cL.\nC : 1 200 mL. 10 mL font 1 cL, donc 1 200 mL = 120 cL.\nD : 1 L 10 cL = 100 + 10 = 110 cL.\nb) Je range : 110 < 120 < 125 < 130. Donc D, C, A, B.\nc) 130 − 110 = 20 cL.\n⛔ Le piège : croire que C est la plus grande, avec son 1 200. Elle est en mL : elle vaut 120 cL.\nRéponse : a) 125 ; 130 ; 120 ; 110 ; b) D, C, A, B ; c) 20 cL.",
@@ -390,7 +390,7 @@ export const exercicesContenanceCm2: FicheExercicesData = {
             "Le jardinier a un récupérateur d'eau de pluie de 200 L. Son arrosoir contient 8 L.\na) Combien d'arrosoirs peut-il remplir avec le récupérateur plein ?\nb) Il en remplit 15. Combien de litres reste-t-il dans le récupérateur ?",
           reponses: [
             { question: "a)", attendu: "25" },
-            { question: "b)", attendu: "80" },
+            { question: "b)", attendu: "80", unite: "l" },
           ],
           correction:
             "a) Combien de fois 8 L dans 200 L ? 200 ÷ 8 = 25 arrosoirs.\n⭐ Je vérifie : 25 × 8 = 200.\nb) 15 arrosoirs : 15 × 8 = 120 L. 200 − 120 = 80 L.\n⛔ Le piège : faire 200 − 15. On enlève 15 arrosoirs de 8 L, pas 15 L.\nRéponse : a) 25 arrosoirs ; b) 80 L.",
@@ -417,7 +417,7 @@ export const exercicesContenanceCm2: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "15" },
             { question: "b)", attendu: "8" },
-            { question: "c)", attendu: "12" },
+            { question: "c)", attendu: "12", unite: "cl" },
           ],
           correction:
             "a) 3 cuillères de 5 mL : 3 × 5 = 15 mL par jour.\nb) 120 ÷ 15 = 8 jours.\n⭐ Je vérifie : 8 × 15 = 120.\nc) 10 mL font 1 cL. 120 mL = 12 cL.\n⛔ Le piège : faire 120 ÷ 5 = 24, et dire 24 jours. 24, c'est le nombre de cuillères, et il y en a 3 par jour.\nRéponse : a) 15 mL ; b) 8 jours ; c) 12 cL.",
@@ -429,7 +429,7 @@ export const exercicesContenanceCm2: FicheExercicesData = {
             "Un aquarium contient 54 L. Pour le remplir, Sacha utilise un seau de 6 L.\na) Combien de seaux faut-il pour le remplir ?\nb) Sacha a déjà versé 4 seaux. Combien de litres manque-t-il ?\nc) La pompe filtre 3 L d'eau chaque minute. Combien de minutes pour filtrer tout l'aquarium ?",
           reponses: [
             { question: "a)", attendu: "9" },
-            { question: "b)", attendu: "30" },
+            { question: "b)", attendu: "30", unite: "l" },
             { question: "c)", attendu: "18" },
           ],
           correction:
@@ -441,9 +441,9 @@ export const exercicesContenanceCm2: FicheExercicesData = {
           enonce:
             "Une douche de 5 minutes utilise 60 L d'eau. Un bain en utilise 180 L.\na) Combien de litres économise-t-on avec une douche au lieu d'un bain ?\nb) Léo prend une douche chaque jour pendant une semaine. Combien de litres utilise-t-il ?\nc) Avec un bain chaque jour, combien de litres en plus sur la semaine ?",
           reponses: [
-            { question: "a)", attendu: "120" },
-            { question: "b)", attendu: "420" },
-            { question: "c)", attendu: "840" },
+            { question: "a)", attendu: "120", unite: "l" },
+            { question: "b)", attendu: "420", unite: "l" },
+            { question: "c)", attendu: "840", unite: "l" },
           ],
           correction:
             "a) 180 − 60 = 120 L.\nb) Une semaine, c'est 7 jours. 7 × 60 = 420 L.\nc) 7 bains : 7 × 180 = 1 260 L. 1 260 − 420 = 840 L.\n⭐ Autre chemin : 120 L de plus chaque jour, 7 × 120 = 840 L.\n⛔ Le piège : compter 5 jours dans une semaine. Une semaine a 7 jours.\nRéponse : a) 120 L ; b) 420 L ; c) 840 L.",
@@ -455,7 +455,7 @@ export const exercicesContenanceCm2: FicheExercicesData = {
             "Pour un anniversaire, 24 enfants boivent chacun 2 verres de 15 cL.\na) Combien de cL de jus faut-il en tout ?\nb) Écris cette quantité en L.\nc) Le jus est vendu en bouteilles de 2 L. Combien de bouteilles faut-il acheter, au moins ?",
           reponses: [
             { question: "a)", attendu: "720" },
-            { question: "b)", attendu: "7,2" },
+            { question: "b)", attendu: "7,2", unite: "l" },
             { question: "c)", attendu: "4" },
           ],
           correction:
@@ -468,7 +468,7 @@ export const exercicesContenanceCm2: FicheExercicesData = {
             "Une maraîchère a une citerne de 1 000 L. Elle arrose ses salades avec 40 L chaque jour.\na) Combien de jours dure la citerne pleine ?\nb) Combien de litres reste-t-il après une semaine ?\nc) 720 L, c'est : A) 72 000 cL   B) 7 200 cL   C) 720 000 cL. Réponds par A, B ou C.",
           reponses: [
             { question: "a)", attendu: "25" },
-            { question: "b)", attendu: "720" },
+            { question: "b)", attendu: "720", unite: "l" },
             { question: "c)", attendu: "A" },
           ],
           correction:

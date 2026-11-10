@@ -453,7 +453,7 @@ export const exercicesNombreEntierCm2: FicheExercicesData = {
             "Inès est carreleuse. Le sol d'une salle de bain est un rectangle de 24 dm sur 18 dm. Elle veut le couvrir de carreaux carrés tous pareils, sans couper de carreau. Le côté d'un carreau est un nombre entier de dm.\na) Écris les diviseurs communs de 24 et de 18. Sépare-les par « ; ».\nb) Quel est le plus grand côté possible pour un carreau, en dm ?\nc) Avec ce carreau, combien de carreaux pose-t-elle sur la longueur ?\nd) Combien de carreaux pose-t-elle en tout ?",
           reponses: [
             { question: "a)", attendu: "1 ; 2 ; 3 ; 6" },
-            { question: "b)", attendu: "6" },
+            { question: "b)", attendu: "6", unite: "dm" },
             { question: "c)", attendu: "4" },
             { question: "d)", attendu: "12" },
           ],
@@ -499,10 +499,10 @@ export const exercicesNombreEntierCm2: FicheExercicesData = {
             { value: 35000, label: "B", color: ROUGE },
           ], 50000),
           reponses: [
-            { question: "a)", attendu: "5000" },
+            { question: "a)", attendu: "5000", unite: "km" },
             { question: "b)", attendu: "15000" },
             { question: "c)", attendu: "35000" },
-            { question: "d)", attendu: "20000" },
+            { question: "d)", attendu: "20000", unite: "km" },
           ],
           correction:
             "a) De 0 à 50 000, je compte 10 sauts. 50 000 ÷ 10 = 5 000 : un saut vaut 5 000 km.\nb) A est à 3 sauts de 0 : 3 × 5 000 = 15 000.\nc) B est à 7 sauts de 0 : 7 × 5 000 = 35 000.\nd) De A à B : 35 000 − 15 000 = 20 000 km. Je vérifie : 4 sauts de 5 000, c'est 20 000.\n⛔ Le piège : compter les traits au lieu des sauts. Le trait du 0 n'est pas un saut.\nRéponse : a) 5 000 km ; b) 15 000 ; c) 35 000 ; d) 20 000 km.",

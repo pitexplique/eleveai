@@ -309,12 +309,40 @@ export function selonLaClasse(r: ReponseAttendue, classe: string): ReponseAttend
   return chiffres.length && chiffres.length + lettres.length === formes.length ? { ...r, nombre: true } : r;
 }
 
+/** Les unités de mesure, en symbole, et leurs noms en toutes lettres. */
+const UNITES_MESURE: Record<string, string> = {
+  mm: "mm", cm: "cm", dm: "dm", m: "m", dam: "dam", hm: "hm", km: "km",
+  mg: "mg", cg: "cg", dg: "dg", g: "g", dag: "dag", hg: "hg", kg: "kg", t: "t", q: "q",
+  ml: "ml", cl: "cl", dl: "dl", l: "l", dal: "dal", hl: "hl",
+  "mm²": "mm²", "cm²": "cm²", "dm²": "dm²", "m²": "m²", "km²": "km²", ha: "ha", a: "a",
+  "mm³": "mm³", "cm³": "cm³", "dm³": "dm³", "m³": "m³",
+  millimetre: "mm", centimetre: "cm", decimetre: "dm", metre: "m", kilometre: "km",
+  milligramme: "mg", gramme: "g", kilogramme: "kg", kilo: "kg", tonne: "t",
+  millilitre: "ml", centilitre: "cl", decilitre: "dl", litre: "l", hectolitre: "hl", hectare: "ha",
+};
+
+/**
+ * L'unité de mesure écrite après un nombre (« 300 m », « 4,5 kg », « 12 litres »),
+ * ramenée à son symbole en minuscules ; null s'il n'y en a pas, ou si le mot
+ * n'est pas une unité de mesure (« 36 billes »).
+ */
+function uniteDeMesure(s: string): string | null {
+  const m = /^\s*[-−+]?[\d\s.,]*\d\s*([\p{L}²³23]+)\s*$/u.exec(s);
+  if (!m) return null;
+  const u = m[1].toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/2$/, "²").replace(/3$/, "³");
+  return UNITES_MESURE[u] ?? UNITES_MESURE[u.replace(/s$/, "")] ?? null;
+}
+
 /** La saisie de l'élève correspond-elle à l'une des formes acceptées ? */
 export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean {
   if (!saisie.trim()) return false;
   const formes = Array.isArray(attendue.attendu) ? attendue.attendu : [attendue.attendu];
   const eleve = sansMembreGauche(saisie);
   const gaucheEleve = membreGauche(saisie);
+  if (attendue.unite) {
+    const tapee = uniteDeMesure(eleve);
+    if (tapee && tapee !== uniteDeMesure(`1 ${attendue.unite}`)) return false;
+  }
   // Un nombre écrit — des chiffres, une virgule, un signe — ou en lettres
   // (« quatre ») : aucune opération.
   if (attendue.nombre) {

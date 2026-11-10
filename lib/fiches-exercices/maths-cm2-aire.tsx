@@ -366,7 +366,7 @@ export const exercicesAireCm2: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "18" },
             { question: "b)", attendu: "9" },
-            { question: "c)", attendu: "20" },
+            { question: "c)", attendu: "20", unite: "cm²" },
           ],
         },
         {
@@ -376,10 +376,10 @@ export const exercicesAireCm2: FicheExercicesData = {
             "Dans 1 dm², il y a 10 rangées de 10 petits carrés de 1 cm². 10 × 10 = 100. Donc 1 dm² = 100 cm².\nDe même, 1 m² = 10 × 10 = 100 dm².\na) 4 dm², c'est 4 fois 100 cm² : 4 × 100 = 400 cm².\nLe chiffre 4 des unités devient le chiffre des centaines.\nb) 7 × 100 = 700 dm².\nc) Je cherche combien de fois 100 dans 900 : 900 ÷ 100 = 9 dm².\nd) 2 m² = 200 dm². Puis 200 dm² = 200 × 100 = 20 000 cm².\n⛔ Le piège : 1 dm² = 10 cm². Faux : un carré de 10 cm sur 10 cm contient 100 petits carrés, pas 10.\nRéponse : a) 400 ; b) 700 ; c) 9 ; d) 20 000.",
           micros: ["aire_convertir_unites"],
           reponses: [
-            { question: "a)", attendu: "400" },
-            { question: "b)", attendu: "700" },
-            { question: "c)", attendu: "9" },
-            { question: "d)", attendu: "20000" },
+            { question: "a)", attendu: "400", unite: "cm²" },
+            { question: "b)", attendu: "700", unite: "dm²" },
+            { question: "c)", attendu: "9", unite: "dm²" },
+            { question: "d)", attendu: "20000", unite: "cm²" },
           ],
         },
         {
@@ -398,7 +398,7 @@ export const exercicesAireCm2: FicheExercicesData = {
             "Je coupe la figure en deux rectangles qui ne se chevauchent pas.\na) En bas : 7 carreaux de long, 2 de haut. 7 × 2 = 14 cm².\nb) En haut : 3 carreaux de large, 3 de haut. 3 × 3 = 9 cm².\nc) J'additionne les deux morceaux : 14 + 9 = 23 cm².\n⭐ Contrôle : je peux couper autrement. 3 × 5 = 15 à gauche, et 4 × 2 = 8 à droite. 15 + 8 = 23. Pareil !\n⛔ Le piège : compter deux fois les carreaux du coin. Chaque carreau va dans UN seul morceau.\nRéponse : a) 14 cm² ; b) 9 cm² ; c) 23 cm².",
           micros: ["aire_composer"],
           reponses: [
-            { question: "a)", attendu: "14" },
+            { question: "a)", attendu: "14", unite: "cm²" },
             { question: "b)", attendu: "9" },
             { question: "c)", attendu: "23" },
           ],
@@ -423,9 +423,9 @@ export const exercicesAireCm2: FicheExercicesData = {
             "Aire = longueur × largeur. Je cherche le nombre qui manque dans la multiplication.\na) 5 × ? = 30. Je sais que 5 × 6 = 30. La longueur est 6 cm.\nb) Un carré : côté × côté = 49. Je sais que 7 × 7 = 49. Le côté est 7 m.\nc) 9 × ? = 72. Je sais que 9 × 8 = 72. La largeur est 8 dm.\nJe peux aussi diviser : 72 ÷ 9 = 8.\n⛔ Le piège : soustraire, 30 − 5 = 25. Pour retrouver un côté, je divise l'aire.\nRéponse : a) 6 cm ; b) 7 m ; c) 8 dm.",
           micros: ["aire_defi"],
           reponses: [
-            { question: "a)", attendu: "6" },
-            { question: "b)", attendu: "7" },
-            { question: "c)", attendu: "8" },
+            { question: "a)", attendu: "6", unite: "cm" },
+            { question: "b)", attendu: "7", unite: "m" },
+            { question: "c)", attendu: "8", unite: "dm" },
           ],
         },
       ],
@@ -450,7 +450,7 @@ export const exercicesAireCm2: FicheExercicesData = {
             "a) Rectangle : longueur × largeur. 12 × 5 = 60. Le potager fait 60 m².\nb) 4 salades dans chaque m², et il y a 60 m².\n60 × 4 = 240 salades.\n⛔ Le piège : calculer le tour, 12 + 5 + 12 + 5 = 34 m. Les salades se plantent sur la surface, pas sur le bord.\nRéponse : a) 60 m² ; b) 240 salades.",
           micros: ["aire_carre_rectangle"],
           reponses: [
-            { question: "a)", attendu: "60" },
+            { question: "a)", attendu: "60", unite: "m²" },
             { question: "b)", attendu: "240" },
           ],
         },
@@ -485,7 +485,7 @@ export const exercicesAireCm2: FicheExercicesData = {
             "a) Je prends les deux côtés de l'angle droit : 4 m et 3 m.\n4 × 3 = 12 : c'est le rectangle. La voile en est la moitié : 12 ÷ 2 = 6 m².\nb) 6 m² à 9 € le m² : 6 × 9 = 54 €.\n⛔ Le piège : prendre le grand côté, 5 m. Il ne touche pas l'angle droit : il ne sert pas pour l'aire.\nRéponse : a) 6 m² ; b) 54 €.",
           micros: ["aire_triangle_rectangle"],
           reponses: [
-            { question: "a)", attendu: "6" },
+            { question: "a)", attendu: "6", unite: "m²" },
             { question: "b)", attendu: "54" },
           ],
         },
@@ -505,7 +505,7 @@ export const exercicesAireCm2: FicheExercicesData = {
             "a) Le grand rectangle : 10 carreaux de long, 6 de large. 10 × 6 = 60 m².\nb) Le bassin : un carré de 2 m de côté. 2 × 2 = 4 m².\nc) La pelouse, c'est le grand rectangle SANS le bassin : 60 − 4 = 56 m².\n⛔ Le piège : répondre 60 m². Le jardinier ne tond pas l'eau du bassin !\nRéponse : a) 60 m² ; b) 4 m² ; c) 56 m².",
           micros: ["aire_composer", "aire_carre_rectangle"],
           reponses: [
-            { question: "a)", attendu: "60" },
+            { question: "a)", attendu: "60", unite: "m²" },
             { question: "b)", attendu: "4" },
             { question: "c)", attendu: "56" },
           ],
@@ -524,7 +524,7 @@ export const exercicesAireCm2: FicheExercicesData = {
           micros: ["aire_comprendre", "aire_unites", "aire_carre_rectangle"],
           reponses: [
             { question: "a)", attendu: "B" },
-            { question: "b)", attendu: "16" },
+            { question: "b)", attendu: "16", unite: "cm" },
           ],
         },
         {
@@ -545,8 +545,8 @@ export const exercicesAireCm2: FicheExercicesData = {
             "a) 9 × 4 = 36 cm².\nb) Le carré fait aussi 36 cm². Je cherche côté × côté = 36. 6 × 6 = 36 : le côté est 6 cm.\nc) Périmètre du rectangle : 9 + 4 + 9 + 4 = 26 cm.\nPérimètre du carré : 6 + 6 + 6 + 6 = 24 cm.\n26 est plus grand que 24 : c'est le rectangle.\n⛔ Le piège : diviser 36 par 4 pour le côté du carré. 36 ÷ 4 = 9, mais 9 × 9 = 81, pas 36.\nRéponse : a) 36 cm² ; b) 6 cm ; c) le rectangle.",
           micros: ["aire_carre_rectangle", "aire_defi"],
           reponses: [
-            { question: "a)", attendu: "36" },
-            { question: "b)", attendu: "6" },
+            { question: "a)", attendu: "36", unite: "cm²" },
+            { question: "b)", attendu: "6", unite: "cm" },
             { question: "c)", attendu: ["rectangle", "le rectangle"] },
           ],
         },
@@ -581,7 +581,7 @@ export const exercicesAireCm2: FicheExercicesData = {
             "a) En bas : 5 m de long et 3 m de large. 5 × 3 = 15 m².\nb) En haut : 2 m de large et 3 m de haut. 2 × 3 = 6 m².\nc) 15 + 6 = 21 m².\nd) 10 cartons couvrent 10 × 2 = 20 m². Il manque encore 1 m².\nJe dois acheter un carton de plus : 11 cartons.\n⛔ Le piège : acheter 10 cartons. 21 ÷ 2 = 10 et il reste 1 : ce dernier m² a besoin d'un carton entier.\nRéponse : a) 15 m² ; b) 6 m² ; c) 21 m² ; d) 11 cartons.",
           micros: ["aire_composer", "aire_carre_rectangle"],
           reponses: [
-            { question: "a)", attendu: "15" },
+            { question: "a)", attendu: "15", unite: "m²" },
             { question: "b)", attendu: "6" },
             { question: "c)", attendu: "21" },
             { question: "d)", attendu: "11" },
@@ -605,7 +605,7 @@ export const exercicesAireCm2: FicheExercicesData = {
             "a) La fresque : 6 × 3 = 18 m².\nb) Le triangle a un angle droit. Ses côtés de l'angle droit : 4 m en bas et 3 m sur le côté.\n4 × 3 = 12, puis 12 ÷ 2 = 6 m².\nc) Ce qui reste : 18 − 6 = 12 m².\n⛔ Le piège : oublier le ÷ 2 au b). On trouverait 12 m² de bleu, et il ne resterait que 6 m² de jaune.\nRéponse : a) 18 m² ; b) 6 m² ; c) 12 m².",
           micros: ["aire_triangle_rectangle", "aire_composer"],
           reponses: [
-            { question: "a)", attendu: "18" },
+            { question: "a)", attendu: "18", unite: "m²" },
             { question: "b)", attendu: "6" },
             { question: "c)", attendu: "12" },
           ],
@@ -645,7 +645,7 @@ export const exercicesAireCm2: FicheExercicesData = {
           ),
           micros: ["aire_carre_rectangle", "aire_defi"],
           reponses: [
-            { question: "a)", attendu: "40" },
+            { question: "a)", attendu: "40", unite: "m²" },
             { question: "b)", attendu: "2" },
             { question: "c)", attendu: "20" },
           ],
@@ -667,7 +667,7 @@ export const exercicesAireCm2: FicheExercicesData = {
             "a) 3 × 3 = 9 cm².\nb) 6 × 6 = 36 cm².\nc) Combien de fois 9 dans 36 ? 9 × 4 = 36 : 4 fois.\nSur le dessin : 4 petits carrés tiennent dans le grand.\nd) Périmètres : 3 × 4 = 12 cm et 6 × 4 = 24 cm. 12 × 2 = 24 : 2 fois.\n⛔ Le piège : croire que l'aire double aussi. Le côté double dans les deux sens, en long ET en large : 2 × 2 = 4.\nRéponse : a) 9 cm² ; b) 36 cm² ; c) 4 fois ; d) 2 fois.",
           micros: ["aire_comprendre", "aire_carre_rectangle", "aire_defi"],
           reponses: [
-            { question: "a)", attendu: "9" },
+            { question: "a)", attendu: "9", unite: "cm²" },
             { question: "b)", attendu: "36" },
             { question: "c)", attendu: "4" },
             { question: "d)", attendu: "2" },
@@ -696,7 +696,7 @@ export const exercicesAireCm2: FicheExercicesData = {
             "Je vérifie le grillage : A : 8 + 2 + 8 + 2 = 20 m. B : 7 + 3 + 7 + 3 = 20 m. C : 5 + 5 + 5 + 5 = 20 m.\na) A : 8 × 2 = 16 m².\nb) B : 7 × 3 = 21 m².\nc) C : 5 × 5 = 25 m².\nd) 25 est le plus grand : l'enclos C, le carré.\n⛔ Le piège : croire que le même grillage donne la même place. Le tour est le même, l'aire change.\nRéponse : a) 16 m² ; b) 21 m² ; c) 25 m² ; d) C.",
           micros: ["aire_carre_rectangle", "aire_defi"],
           reponses: [
-            { question: "a)", attendu: "16" },
+            { question: "a)", attendu: "16", unite: "m²" },
             { question: "b)", attendu: "21" },
             { question: "c)", attendu: "25" },
             { question: "d)", attendu: "C" },

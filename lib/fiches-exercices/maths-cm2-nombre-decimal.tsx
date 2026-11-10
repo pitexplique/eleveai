@@ -399,9 +399,9 @@ export const exercicesNombreDecimalCm2: FicheExercicesData = {
             { value: 3.15, label: "S" },
           ], { nombres: 1 }),
           reponses: [
-            { question: "a)", attendu: "3,6" },
-            { question: "b)", attendu: "3,15" },
-            { question: "c)", attendu: "3,2" },
+            { question: "a)", attendu: "3,6", unite: "km" },
+            { question: "b)", attendu: "3,15", unite: "km" },
+            { question: "c)", attendu: "3,2", unite: "km" },
             { question: "d)", attendu: "R" },
           ],
           correction:

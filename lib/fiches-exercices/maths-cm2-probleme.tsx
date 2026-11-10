@@ -200,7 +200,7 @@ export const exercicesProblemeCm2: FicheExercicesData = {
           enonce: "Résous en un seul calcul.\na) Bastien est infirmier. Il fait 6 vaccins par heure pendant 7 heures. Combien de vaccins ?\nb) Un ruban de 96 cm est coupé en 4 morceaux égaux. Combien mesure un morceau, en cm ?\nc) Un train part avec 312 voyageurs. 87 descendent à la gare. Combien restent ?\nd) Une bibliothèque reçoit 145 livres, puis 78 livres. Combien de livres reçus en tout ?",
           reponses: [
             { question: "a)", attendu: "42" },
-            { question: "b)", attendu: "24" },
+            { question: "b)", attendu: "24", unite: "cm" },
             { question: "c)", attendu: "225" },
             { question: "d)", attendu: "223" },
           ],

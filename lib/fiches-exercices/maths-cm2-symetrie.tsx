@@ -415,7 +415,7 @@ export const exercicesSymetrieCm2: FicheExercicesData = {
             "La symétrie, c'est un pliage : la figure ne s'étire pas et ne rétrécit pas.\na) Les longueurs sont gardées : [A'B'] mesure aussi 7 cm.\nb) Les angles sont gardés : l'angle symétrique mesure aussi 60°.\nc) La figure symétrique a la même taille et la même forme. Réponse A.\n⛔ Le piège : croire que la figure change de taille parce qu'elle est retournée. Retournée, oui ; agrandie ou rétrécie, jamais.\nRéponse : a) 7 cm ; b) 60° ; c) A.",
           micros: ["symetrie_propriete"],
           reponses: [
-            { question: "a)", attendu: "7" },
+            { question: "a)", attendu: "7", unite: "cm" },
             { question: "b)", attendu: "60" },
             { question: "c)", attendu: "A" },
           ],
@@ -679,7 +679,7 @@ export const exercicesSymetrieCm2: FicheExercicesData = {
             "La symétrie garde les longueurs et les angles.\na) A'B' = AB = 3 cm. Sur le quadrillage : 3 carreaux dans les deux triangles.\nb) L'angle en A' a la même mesure que l'angle en A : 45°.\nc) Le triangle orange a la même taille. Il est retourné : la pointe penche vers la gauche au lieu de la droite. Réponse C.\n⛔ Le piège : croire qu'il a tourné. Un triangle qui tourne ne change pas de sens ; ici, il est retourné comme dans un miroir.\nRéponse : a) 3 cm ; b) 45° ; c) C.",
           micros: ["symetrie_propriete"],
           reponses: [
-            { question: "a)", attendu: "3" },
+            { question: "a)", attendu: "3", unite: "cm" },
             { question: "b)", attendu: "45" },
             { question: "c)", attendu: "C" },
           ],
@@ -825,7 +825,7 @@ export const exercicesSymetrieCm2: FicheExercicesData = {
           micros: ["symetrie_completer", "symetrie_propriete"],
           reponses: [
             { question: "a)", attendu: "6" },
-            { question: "b)", attendu: "8" },
+            { question: "b)", attendu: "8", unite: "m" },
             { question: "c)", attendu: "2" },
           ],
         },
@@ -928,7 +928,7 @@ export const exercicesSymetrieCm2: FicheExercicesData = {
           ),
           micros: ["symetrie_propriete", "symetrie_defi"],
           reponses: [
-            { question: "a)", attendu: "12" },
+            { question: "a)", attendu: "12", unite: "cm" },
             { question: "b)", attendu: "12" },
             { question: "c)", attendu: "16" },
           ],

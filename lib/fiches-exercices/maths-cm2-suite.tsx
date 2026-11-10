@@ -380,7 +380,7 @@ export const exercicesSuiteCm2: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "A" },
             { question: "b)", attendu: "9,5" },
-            { question: "c)", attendu: "10" },
+            { question: "c)", attendu: "10", unite: "km" },
           ],
           correction:
             "a) 3,50 + 1,20 = 4,70 et 4,70 + 1,20 = 5,90. La règle est + 1,20 € : A.\nb) 5 km : 5 × 1,20 = 6 €. J'ajoute le départ : 3,50 + 6 = 9,50 €.\nc) J'enlève le départ : 15,50 − 3,50 = 12 €. Combien de fois 1,20 € dans 12 € ? 10 × 1,20 = 12. Donc 10 km.\n⛔ Le piège : oublier les 3,50 € du départ. 5 × 1,20 = 6 € n'est pas le prix du trajet.\nRéponse : a) A ; b) 9,50 € ; c) 10 km.",
@@ -418,8 +418,8 @@ export const exercicesSuiteCm2: FicheExercicesData = {
           enonce:
             "Lina court 800 m le lundi. Chaque jour, elle court 200 m de plus que la veille.\na) Combien de mètres court-elle le vendredi ?\nb) Combien de mètres court-elle en tout, du lundi au vendredi ?\nc) Quel jour court-elle 2 000 m pour la première fois ?",
           reponses: [
-            { question: "a)", attendu: "1600" },
-            { question: "b)", attendu: "6000" },
+            { question: "a)", attendu: "1600", unite: "m" },
+            { question: "b)", attendu: "6000", unite: "m" },
             { question: "c)", attendu: "dimanche" },
           ],
           correction:
@@ -446,7 +446,7 @@ export const exercicesSuiteCm2: FicheExercicesData = {
           enonce:
             "Une agricultrice a une citerne de 1 200 litres. Chaque jour, elle prend 75 litres pour arroser.\na) Combien de litres reste-t-il après 4 jours ?\nb) Au bout de combien de jours la citerne est-elle vide ?\nc) Quel jour reste-t-il moins de 500 litres pour la première fois ? Écris le numéro du jour.\nd) La suite des litres est :\nA) croissante   B) décroissante   C) ni l'une ni l'autre",
           reponses: [
-            { question: "a)", attendu: "900" },
+            { question: "a)", attendu: "900", unite: "l" },
             { question: "b)", attendu: "16" },
             { question: "c)", attendu: "10" },
             { question: "d)", attendu: "B" },

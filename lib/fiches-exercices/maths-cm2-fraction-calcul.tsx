@@ -400,7 +400,7 @@ export const exercicesFractionCalculCm2: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "5/8" },
             { question: "b)", attendu: "3/8" },
-            { question: "c)", attendu: "15" },
+            { question: "c)", attendu: "15", unite: "m" },
             { question: "d)", attendu: "25 %" },
           ],
           micros: ["fraction_additionner", "fraction_quantite"],

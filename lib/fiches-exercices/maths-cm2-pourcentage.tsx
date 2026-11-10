@@ -218,9 +218,9 @@ export const exercicesPourcentageCm2: FicheExercicesData = {
           figure: barres([{ d: 10, label: "200 m", parts: [3] }]),
           reponses: [
             { question: "a)", attendu: "10 %" },
-            { question: "b)", attendu: "20" },
+            { question: "b)", attendu: "20", unite: "m" },
             { question: "c)", attendu: "30 %" },
-            { question: "d)", attendu: "60" },
+            { question: "d)", attendu: "60", unite: "m" },
           ],
           correction:
             "a) La piste entière, c'est 100 %, en 10 parts égales : 100 ÷ 10 = 10 % par part.\nb) 200 m en 10 parts : 200 ÷ 10 = 20 m par part.\nc) Elle a couru 3 parts : 3 × 10 % = 30 %.\nd) 3 parts de 20 m : 3 × 20 = 60 m.\n⛔ Le piège : dire qu'une part vaut 1 %. Il faudrait alors 100 parts. Ici, il n'y en a que 10.\nRéponse : a) 10 % ; b) 20 m ; c) 30 % ; d) 60 m.",

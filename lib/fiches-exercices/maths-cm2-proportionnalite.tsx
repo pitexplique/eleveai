@@ -125,9 +125,9 @@ export const exercicesProportionnaliteCm2: FicheExercicesData = {
             ["Farine (g)", "250", "?", "?", "?"],
           ]),
           reponses: [
-            { question: "a)", attendu: "500" },
-            { question: "b)", attendu: "750" },
-            { question: "c)", attendu: "125" },
+            { question: "a)", attendu: "500", unite: "g" },
+            { question: "b)", attendu: "750", unite: "g" },
+            { question: "c)", attendu: "125", unite: "g" },
           ],
           correction:
             "a) 20 crêpes, c'est 2 fois 10 crêpes. Donc 2 fois plus de farine : 2 × 250 = 500 g.\nb) 30 crêpes, c'est 3 fois 10 crêpes : 3 × 250 = 750 g.\nc) 5 crêpes, c'est la moitié de 10 crêpes. Donc la moitié de la farine : 250 ÷ 2 = 125 g.\n⛔ Le piège : AJOUTER 10 à la farine parce qu'on ajoute 10 crêpes. 20 crêpes avec 260 g de farine, c'est raté ! On multiplie.\nRéponse : a) 500 g ; b) 750 g ; c) 125 g.",
@@ -257,8 +257,8 @@ export const exercicesProportionnaliteCm2: FicheExercicesData = {
           enonce: "Un pâtissier a une recette de gâteau pour 6 personnes : 3 œufs, 180 g de sucre et 300 g de farine. Il veut un gâteau pour 8 personnes.\na) Combien d'œufs ?\nb) Combien de grammes de sucre ?\nc) Combien de grammes de farine ?",
           reponses: [
             { question: "a)", attendu: "4" },
-            { question: "b)", attendu: "240" },
-            { question: "c)", attendu: "400" },
+            { question: "b)", attendu: "240", unite: "g" },
+            { question: "c)", attendu: "400", unite: "g" },
           ],
           correction:
             "8 n'est pas un nombre de fois 6. Je passe d'abord par 2 personnes : 6 ÷ 3 = 2, donc je divise tout par 3.\nPour 2 personnes : 3 ÷ 3 = 1 œuf ; 180 ÷ 3 = 60 g de sucre ; 300 ÷ 3 = 100 g de farine.\n8 personnes, c'est 4 fois 2 personnes. Je multiplie par 4.\na) 4 × 1 = 4 œufs.\nb) 4 × 60 = 240 g de sucre.\nc) 4 × 100 = 400 g de farine.\n⛔ Le piège : ajouter 2 à chaque nombre parce qu'on ajoute 2 personnes. 5 œufs, 182 g de sucre : le gâteau serait raté.\nRéponse : a) 4 œufs ; b) 240 g ; c) 400 g.",
@@ -277,7 +277,7 @@ export const exercicesProportionnaliteCm2: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "6" },
             { question: "b)", attendu: "15" },
-            { question: "c)", attendu: "700" },
+            { question: "c)", attendu: "700", unite: "g" },
           ],
           correction:
             "a) 200 g, c'est 2 fois 100 g : 2 × 3 = 6 cm.\nb) 500 g, c'est 5 fois 100 g : 5 × 3 = 15 cm.\nc) 21 cm, c'est combien de fois 3 cm ? 21 ÷ 3 = 7 fois.\nDonc la masse est 7 fois 100 g : 7 × 100 = 700 g.\n⛔ Le piège : calculer 21 × 100 = 2 100 g. On cherche d'abord combien de fois 3 cm il y a dans 21 cm.\nRéponse : a) 6 cm ; b) 15 cm ; c) 700 g.",
@@ -377,8 +377,8 @@ export const exercicesProportionnaliteCm2: FicheExercicesData = {
           titre: "Les costumes du spectacle",
           enonce: "Pour le spectacle de l'école, une couturière fabrique des costumes. Pour 3 costumes, il faut 4,5 m de tissu.\na) Combien de mètres pour 1 costume ?\nb) Combien de mètres pour 12 costumes ?\nc) Avec 30 m de tissu, combien de costumes ?",
           reponses: [
-            { question: "a)", attendu: "1,5" },
-            { question: "b)", attendu: "18" },
+            { question: "a)", attendu: "1,5", unite: "m" },
+            { question: "b)", attendu: "18", unite: "m" },
             { question: "c)", attendu: "20" },
           ],
           correction:

@@ -191,10 +191,10 @@ export const exercicesMasseCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 3 kg = … g\nb) 6 t = … kg\nc) 2 g = … mg\nd) 40 kg = … g",
           reponses: [
-            { question: "a)", attendu: "3000" },
-            { question: "b)", attendu: "6000" },
-            { question: "c)", attendu: "2000" },
-            { question: "d)", attendu: "40000" },
+            { question: "a)", attendu: "3000", unite: "g" },
+            { question: "b)", attendu: "6000", unite: "kg" },
+            { question: "c)", attendu: "2000", unite: "mg" },
+            { question: "d)", attendu: "40000", unite: "g" },
           ],
           correction:
             "Je passe à une unité plus petite : il en faut plus, le nombre grandit.\na) 1 kg = 1 000 g. Dans le tableau, le 3 va dans la colonne kg.\nPuis un 0 en hg, un 0 en dag, un 0 en g : 3 0 0 0. Donc 3 kg = 3 000 g.\nb) 1 t = 1 000 kg. 6 t = 6 000 kg.\nc) 1 g = 1 000 mg. 2 g = 2 000 mg.\nd) 40 kg, ce sont 40 fois 1 000 g : 40 000 g.\n⭐ Le raccourci, après : × 1 000.\n⛔ Le piège : écrire 3 kg = 300 g. Entre kg et g, il y a TROIS colonnes : hg, dag et g. Donc trois 0.\nRéponse : a) 3 000 g ; b) 6 000 kg ; c) 2 000 mg ; d) 40 000 g.",
@@ -204,10 +204,10 @@ export const exercicesMasseCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 5 000 g = … kg\nb) 9 000 kg = … t\nc) 4 000 mg = … g\nd) 12 000 g = … kg",
           reponses: [
-            { question: "a)", attendu: "5" },
-            { question: "b)", attendu: "9" },
-            { question: "c)", attendu: "4" },
-            { question: "d)", attendu: "12" },
+            { question: "a)", attendu: "5", unite: "kg" },
+            { question: "b)", attendu: "9", unite: "t" },
+            { question: "c)", attendu: "4", unite: "g" },
+            { question: "d)", attendu: "12", unite: "kg" },
           ],
           correction:
             "Je passe à une unité plus grande : il en faut moins, le nombre devient plus petit.\na) 1 000 g font 1 kg. 5 000 g, ce sont 5 paquets de 1 000 g : 5 kg.\nb) 1 000 kg font 1 t. 9 000 kg = 9 t.\nc) 1 000 mg font 1 g. 4 000 mg = 4 g.\nd) 12 000 g, ce sont 12 paquets de 1 000 g : 12 kg.\n⭐ Le raccourci, après : ÷ 1 000.\n⛔ Le piège : diviser par 100 et écrire 5 000 g = 50 kg. Entre g et kg, c'est 1 000.\nRéponse : a) 5 kg ; b) 9 t ; c) 4 g ; d) 12 kg.",
@@ -243,9 +243,9 @@ export const exercicesMasseCm2: FicheExercicesData = {
             "La balance est en équilibre. À gauche, un melon. À droite, des masses marquées.\na) Combien de grammes pèse le melon ?\nb) Le melon pèse-t-il plus ou moins de 1 kg ? Écris plus ou moins.\nc) Combien de grammes faudrait-il ajouter au melon pour arriver à 1 kg ?",
           figure: balance(["melon"], ["500 g", "200 g", "100 g", "50 g"]),
           reponses: [
-            { question: "a)", attendu: "850" },
+            { question: "a)", attendu: "850", unite: "g" },
             { question: "b)", attendu: "moins" },
-            { question: "c)", attendu: "150" },
+            { question: "c)", attendu: "150", unite: "g" },
           ],
           correction:
             "La balance est en équilibre : les deux plateaux ont la même masse.\na) J'additionne les masses marquées : 500 + 200 + 100 + 50 = 850 g.\nb) 1 kg = 1 000 g. 850 < 1 000 : le melon pèse moins de 1 kg.\nc) 1 000 − 850 = 150 g.\n⛔ Le piège : oublier une des masses. Je les compte une par une, en les barrant.\nRéponse : a) 850 g ; b) moins ; c) 150 g.",
@@ -254,9 +254,9 @@ export const exercicesMasseCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 2 kg 300 g = … g\nb) 1 t 500 kg = … kg\nc) 4 kg 50 g = … g",
           reponses: [
-            { question: "a)", attendu: "2300" },
-            { question: "b)", attendu: "1500" },
-            { question: "c)", attendu: "4050" },
+            { question: "a)", attendu: "2300", unite: "g" },
+            { question: "b)", attendu: "1500", unite: "kg" },
+            { question: "c)", attendu: "4050", unite: "g" },
           ],
           correction:
             "Je convertis d'abord la grande unité, puis j'ajoute le reste.\na) 2 kg = 2 000 g. 2 000 + 300 = 2 300 g.\nb) 1 t = 1 000 kg. 1 000 + 500 = 1 500 kg.\nc) 4 kg = 4 000 g. 4 000 + 50 = 4 050 g.\nDans le tableau : 4 en kg, 0 en hg, 5 en dag, 0 en g.\n⛔ Le piège : écrire 4 kg 50 g = 450 g. Le 4 vaut 4 000 g : il faut le 0 des hg, 4 050 g.\nRéponse : a) 2 300 g ; b) 1 500 kg ; c) 4 050 g.",
@@ -304,10 +304,10 @@ export const exercicesMasseCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 3,5 kg = … g\nb) 1,25 kg = … g\nc) 0,4 kg = … g\nd) 2,8 t = … kg",
           reponses: [
-            { question: "a)", attendu: "3500" },
-            { question: "b)", attendu: "1250" },
-            { question: "c)", attendu: "400" },
-            { question: "d)", attendu: "2800" },
+            { question: "a)", attendu: "3500", unite: "g" },
+            { question: "b)", attendu: "1250", unite: "g" },
+            { question: "c)", attendu: "400", unite: "g" },
+            { question: "d)", attendu: "2800", unite: "kg" },
           ],
           correction:
             "Je place le chiffre des unités dans la colonne de l'unité, puis je complète par des 0.\na) 3,5 kg : 3 en kg, 5 en hg, 0 en dag, 0 en g : 3 500 g.\nb) 1,25 kg : 1 en kg, 2 en hg, 5 en dag, 0 en g : 1 250 g.\nc) 0,4 kg : 0 en kg, 4 en hg, 0 en dag, 0 en g : 400 g.\nd) 1 t = 1 000 kg. 2,8 t = 2 800 kg.\n⭐ Le raccourci, après : × 1 000. 3,5 × 1 000 = 3 500.\n⛔ Le piège : écrire 3,5 kg = 3 005 g ou 350 g. Le 5 est le chiffre des hg : il vaut 500 g.\nRéponse : a) 3 500 g ; b) 1 250 g ; c) 400 g ; d) 2 800 kg.",
@@ -322,10 +322,10 @@ export const exercicesMasseCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 4 500 g = … kg\nb) 650 g = … kg\nc) 1 200 kg = … t\nd) 80 g = … kg",
           reponses: [
-            { question: "a)", attendu: "4,5" },
-            { question: "b)", attendu: "0,65" },
-            { question: "c)", attendu: "1,2" },
-            { question: "d)", attendu: "0,08" },
+            { question: "a)", attendu: "4,5", unite: "kg" },
+            { question: "b)", attendu: "0,65", unite: "kg" },
+            { question: "c)", attendu: "1,2", unite: "t" },
+            { question: "d)", attendu: "0,08", unite: "kg" },
           ],
           correction:
             "J'écris le nombre, son dernier chiffre dans la colonne g. Puis je mets la virgule juste après la colonne kg.\na) 4 500 g : 4 en kg, 5 en hg, 0, 0. Virgule après le 4 : 4,500 kg, soit 4,5 kg.\nb) 650 g : 6 en hg, 5 en dag, 0 en g. Rien en kg : j'écris 0. Donc 0,65 kg.\nc) 1 000 kg font 1 t. 1 200 kg = 1,2 t.\nd) 80 g : 8 en dag, 0 en g. J'écris 0 en kg et 0 en hg : 0,08 kg.\n⛔ Le piège : écrire 80 g = 0,8 kg. Mais 0,8 kg = 800 g ! Le 8 de 80 g est le chiffre des dag : il va au 2e rang après la virgule.\nRéponse : a) 4,5 kg ; b) 0,65 kg ; c) 1,2 t ; d) 0,08 kg.",
@@ -343,7 +343,7 @@ export const exercicesMasseCm2: FicheExercicesData = {
           reponses: [
             { question: "a)", attendu: "1600 ; 1450 ; 1700 ; 1050", ordre: true },
             { question: "b)", attendu: "D ; B ; A ; C", ordre: true },
-            { question: "c)", attendu: "650" },
+            { question: "c)", attendu: "650", unite: "g" },
           ],
           correction:
             "Une seule unité : le gramme.\na) A : 1,6 kg = 1 600 g. B : 1 450 g.\nC : 1 kg 700 g = 1 000 + 700 = 1 700 g.\nD : 1,05 kg : 1 en kg, 0 en hg, 5 en dag, 0 en g. Donc 1 050 g.\nb) Je range : 1 050 < 1 450 < 1 600 < 1 700. Donc D, B, A, C.\nc) 1 700 − 1 050 = 650 g.\n⛔ Le piège : lire 1,05 kg comme 1 500 g. Le 0 est le chiffre des hg : 1,05 kg, c'est 1 kg et 50 g.\nRéponse : a) 1 600 ; 1 450 ; 1 700 ; 1 050 ; b) D, B, A, C ; c) 650 g.",
@@ -366,9 +366,9 @@ export const exercicesMasseCm2: FicheExercicesData = {
           enonce:
             "Un pâtissier prépare une pâte. Il pèse 0,3 kg de farine, 180 g de sucre, 3 œufs de 60 g chacun et 0,1 kg de beurre.\na) Combien de grammes de farine ?\nb) Combien de grammes pèsent les 3 œufs ?\nc) Quelle est la masse totale de la pâte, en g ?",
           reponses: [
-            { question: "a)", attendu: "300" },
-            { question: "b)", attendu: "180" },
-            { question: "c)", attendu: "760" },
+            { question: "a)", attendu: "300", unite: "g" },
+            { question: "b)", attendu: "180", unite: "g" },
+            { question: "c)", attendu: "760", unite: "g" },
           ],
           correction:
             "Je mets tout en grammes.\na) 0,3 kg : 0 en kg, 3 en hg, 0 en dag, 0 en g. Donc 300 g.\nb) 3 × 60 = 180 g.\nLe beurre : 0,1 kg = 100 g.\nc) Farine, sucre, œufs, beurre : 300 + 180 + 180 + 100 = 760 g.\n⛔ Le piège : additionner 0,3 + 180 + 180 + 0,1. Les kg et les g ne s'additionnent pas.\nRéponse : a) 300 g ; b) 180 g ; c) 760 g.",
@@ -378,7 +378,7 @@ export const exercicesMasseCm2: FicheExercicesData = {
           enonce:
             "Un camion peut porter 3,5 t au plus. Le chauffeur charge 2 400 kg de sable et 900 kg de ciment.\na) Quelle masse a-t-il chargée, en kg ?\nb) Le camion est-il trop chargé ? Réponds oui ou non.\nc) Combien de kg peut-il encore ajouter ?",
           reponses: [
-            { question: "a)", attendu: "3300" },
+            { question: "a)", attendu: "3300", unite: "kg" },
             { question: "b)", attendu: "non" },
             { question: "c)", attendu: "200" },
           ],
@@ -390,9 +390,9 @@ export const exercicesMasseCm2: FicheExercicesData = {
           enonce:
             "Un infirmier donne des comprimés de vitamine C. Chaque comprimé contient 500 mg de vitamine.\na) 500 mg = … g\nb) Combien de comprimés faut-il pour 2 g de vitamine ?\nc) Combien de grammes de vitamine dans 3 comprimés ?",
           reponses: [
-            { question: "a)", attendu: "0,5" },
+            { question: "a)", attendu: "0,5", unite: "g" },
             { question: "b)", attendu: "4" },
-            { question: "c)", attendu: "1,5" },
+            { question: "c)", attendu: "1,5", unite: "g" },
           ],
           correction:
             "1 g = 1 000 mg.\na) 500 mg, c'est la moitié de 1 000 mg : 0,5 g.\nb) 2 g = 2 000 mg. 2 000 ÷ 500 = 4 comprimés.\nc) 3 × 500 = 1 500 mg. 1 500 mg = 1,5 g.\n⛔ Le piège : écrire 500 mg = 5 g. Il faut 1 000 mg pour faire 1 g.\nRéponse : a) 0,5 g ; b) 4 comprimés ; c) 1,5 g.",
@@ -417,9 +417,9 @@ export const exercicesMasseCm2: FicheExercicesData = {
           enonce:
             "Le sac de randonnée de Yanis ne doit pas dépasser 6 kg. Le sac vide pèse 1,4 kg. Yanis y met une gourde de 1,1 kg, un pique-nique de 850 g et une veste de 600 g.\na) Quelle est la masse du sac rempli, en g ?\nb) Écris-la en kg.\nc) Combien de grammes peut-il encore ajouter ?",
           reponses: [
-            { question: "a)", attendu: "3950" },
-            { question: "b)", attendu: "3,95" },
-            { question: "c)", attendu: "2050" },
+            { question: "a)", attendu: "3950", unite: "g" },
+            { question: "b)", attendu: "3,95", unite: "kg" },
+            { question: "c)", attendu: "2050", unite: "g" },
           ],
           correction:
             "Je mets tout en grammes.\nSac vide : 1,4 kg = 1 400 g. Gourde : 1,1 kg = 1 100 g. Pique-nique : 850 g. Veste : 600 g.\na) 1 400 + 1 100 + 850 + 600 = 3 950 g.\nb) 3 950 g : 3 en kg, 9 en hg, 5 en dag, 0 en g. Donc 3,95 kg.\nc) 6 kg = 6 000 g. 6 000 − 3 950 = 2 050 g.\n⛔ Le piège : oublier le sac vide. Il pèse, lui aussi !\nRéponse : a) 3 950 g ; b) 3,95 kg ; c) 2 050 g.",
@@ -430,7 +430,7 @@ export const exercicesMasseCm2: FicheExercicesData = {
           enonce:
             "Une boulangère ouvre un sac de farine de 25 kg. Pour une baguette, il lui faut 200 g de farine.\na) Combien de grammes de farine contient le sac ?\nb) Combien de baguettes peut-elle faire avec tout le sac ?\nc) Elle fait 100 baguettes. Combien de kg de farine reste-t-il ?",
           reponses: [
-            { question: "a)", attendu: "25000" },
+            { question: "a)", attendu: "25000", unite: "g" },
             { question: "b)", attendu: "125" },
             { question: "c)", attendu: "5" },
           ],
@@ -457,7 +457,7 @@ export const exercicesMasseCm2: FicheExercicesData = {
           enonce:
             "Au marché de Saint-Paul, à La Réunion, un marchand a 18 kg de letchis. Il les met en barquettes de 500 g.\na) Combien de grammes de letchis a-t-il ?\nb) Combien de barquettes peut-il remplir ?\nc) Il vend 30 barquettes. Combien de kg de letchis lui reste-t-il ?",
           reponses: [
-            { question: "a)", attendu: "18000" },
+            { question: "a)", attendu: "18000", unite: "g" },
             { question: "b)", attendu: "36" },
             { question: "c)", attendu: "3" },
           ],
@@ -471,7 +471,7 @@ export const exercicesMasseCm2: FicheExercicesData = {
             "La balance est en équilibre. Les 3 pommes ont toutes la même masse.\na) Combien pèsent les 3 pommes ensemble, en g ?\nb) Combien pèse une pomme ?\nc) Combien pèsent 5 pommes ? A) 800 g   B) 1 kg   C) 1,2 kg. Réponds par A, B ou C.",
           figure: balance(["pomme", "pomme", "pomme"], ["500 g", "100 g"]),
           reponses: [
-            { question: "a)", attendu: "600" },
+            { question: "a)", attendu: "600", unite: "g" },
             { question: "b)", attendu: "200" },
             { question: "c)", attendu: "B" },
           ],

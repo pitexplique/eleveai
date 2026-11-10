@@ -198,10 +198,10 @@ export const exercicesLongueurCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 4 m = … cm\nb) 7 cm = … mm\nc) 5 km = … m\nd) 6 dm = … cm",
           reponses: [
-            { question: "a)", attendu: "400" },
-            { question: "b)", attendu: "70" },
-            { question: "c)", attendu: "5000" },
-            { question: "d)", attendu: "60" },
+            { question: "a)", attendu: "400", unite: "cm" },
+            { question: "b)", attendu: "70", unite: "mm" },
+            { question: "c)", attendu: "5000", unite: "m" },
+            { question: "d)", attendu: "60", unite: "cm" },
           ],
           correction:
             "Je passe à une unité plus petite : il en faut plus, le nombre grandit.\na) Dans 4 m, le 4 est le chiffre des mètres. Je l'écris dans la colonne m du tableau.\nJe complète par des 0 jusqu'à la colonne cm : 4 0 0. Donc 4 m = 400 cm.\nb) 1 cm = 10 mm. Le 7 va dans la colonne cm, un 0 dans la colonne mm : 7 cm = 70 mm.\nc) 1 km = 1 000 m. Le 5 va en km, puis 0 en hm, en dam et en m : 5 km = 5 000 m.\nd) 1 dm = 10 cm. 6 dm = 60 cm.\n⭐ Le raccourci, après : vers une unité plus petite, je multiplie par 10, 100 ou 1 000.\n⛔ Le piège : écrire 4 m = 40 cm. Entre m et cm, il y a deux colonnes : 1 m = 100 cm.\nRéponse : a) 400 cm ; b) 70 mm ; c) 5 000 m ; d) 60 cm.",
@@ -216,10 +216,10 @@ export const exercicesLongueurCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 300 cm = … m\nb) 8 000 m = … km\nc) 90 mm = … cm\nd) 250 cm = … dm",
           reponses: [
-            { question: "a)", attendu: "3" },
-            { question: "b)", attendu: "8" },
-            { question: "c)", attendu: "9" },
-            { question: "d)", attendu: "25" },
+            { question: "a)", attendu: "3", unite: "m" },
+            { question: "b)", attendu: "8", unite: "km" },
+            { question: "c)", attendu: "9", unite: "cm" },
+            { question: "d)", attendu: "25", unite: "dm" },
           ],
           correction:
             "Je passe à une unité plus grande : il en faut moins, le nombre devient plus petit.\na) 100 cm font 1 m. Dans 300, il y a 3 centaines : 3 paquets de 100 cm. 300 cm = 3 m.\nb) 1 000 m font 1 km. 8 000 m, ce sont 8 milliers de mètres : 8 km.\nc) 10 mm font 1 cm. 90 mm, ce sont 9 dizaines de mm : 9 cm.\nd) 10 cm font 1 dm. 250 cm, ce sont 25 dizaines de cm : 25 dm.\n⭐ Le raccourci, après : vers une unité plus grande, je divise par 10, 100 ou 1 000.\n⛔ Le piège : multiplier au lieu de diviser, et écrire 300 cm = 30 000 m. Une unité plus grande donne un nombre plus PETIT.\nRéponse : a) 3 m ; b) 8 km ; c) 9 cm ; d) 25 dm.",
@@ -260,8 +260,8 @@ export const exercicesLongueurCm2: FicheExercicesData = {
           enonce: "Lis la règle. Elle est graduée en cm et en mm.\na) Combien de millimètres mesure le clou ?\nb) Écris sa longueur en cm.\nc) Le clou est-il plus long que 6 cm ? Réponds oui ou non.",
           figure: regle(8, 0, 6.4, "clou"),
           reponses: [
-            { question: "a)", attendu: "64" },
-            { question: "b)", attendu: "6,4" },
+            { question: "a)", attendu: "64", unite: "mm" },
+            { question: "b)", attendu: "6,4", unite: "cm" },
             { question: "c)", attendu: "oui" },
           ],
           correction:
@@ -271,9 +271,9 @@ export const exercicesLongueurCm2: FicheExercicesData = {
         {
           enonce: "Pour bricoler, Hugo mesure des baguettes de bois. Complète.\na) 6 m 25 cm = … cm\nb) 3 km 200 m = … m\nc) 8 cm 3 mm = … mm",
           reponses: [
-            { question: "a)", attendu: "625" },
-            { question: "b)", attendu: "3200" },
-            { question: "c)", attendu: "83" },
+            { question: "a)", attendu: "625", unite: "cm" },
+            { question: "b)", attendu: "3200", unite: "m" },
+            { question: "c)", attendu: "83", unite: "mm" },
           ],
           correction:
             "Je convertis d'abord la grande unité, puis j'ajoute le reste.\na) 6 m = 600 cm. 600 + 25 = 625 cm.\nb) 3 km = 3 000 m. 3 000 + 200 = 3 200 m.\nc) 8 cm = 80 mm. 80 + 3 = 83 mm.\n⛔ Le piège : additionner 6 + 25 = 31. Les mètres et les centimètres ne s'additionnent pas : je convertis d'abord les mètres.\nRéponse : a) 625 cm ; b) 3 200 m ; c) 83 mm.",
@@ -320,10 +320,10 @@ export const exercicesLongueurCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 3,5 m = … cm\nb) 2,4 km = … m\nc) 7,5 cm = … mm\nd) 1,25 m = … cm",
           reponses: [
-            { question: "a)", attendu: "350" },
-            { question: "b)", attendu: "2400" },
-            { question: "c)", attendu: "75" },
-            { question: "d)", attendu: "125" },
+            { question: "a)", attendu: "350", unite: "cm" },
+            { question: "b)", attendu: "2400", unite: "m" },
+            { question: "c)", attendu: "75", unite: "mm" },
+            { question: "d)", attendu: "125", unite: "cm" },
           ],
           correction:
             "J'écris le nombre dans le tableau. Le chiffre des unités va dans la colonne de l'unité.\na) 3,5 m : 3 dans la colonne m, 5 dans la colonne dm. Je complète par un 0 en cm : 3 5 0. Donc 3,5 m = 350 cm.\nb) 2,4 km : 2 en km, 4 en hm, puis 0 en dam et 0 en m : 2,4 km = 2 400 m.\nc) 7,5 cm : 7 en cm, 5 en mm : 7,5 cm = 75 mm.\nd) 1,25 m : 1 en m, 2 en dm, 5 en cm : 1,25 m = 125 cm.\n⭐ Le raccourci, après : des m aux cm, × 100. 3,5 × 100 = 350.\n⛔ Le piège : écrire 3,5 m = 305 cm. Le 5 est le chiffre des dm : il vaut 50 cm.\nRéponse : a) 350 cm ; b) 2 400 m ; c) 75 mm ; d) 125 cm.",
@@ -338,10 +338,10 @@ export const exercicesLongueurCm2: FicheExercicesData = {
         {
           enonce: "Complète.\na) 450 cm = … m\nb) 1 600 m = … km\nc) 38 mm = … cm\nd) 75 cm = … m",
           reponses: [
-            { question: "a)", attendu: "4,5" },
-            { question: "b)", attendu: "1,6" },
-            { question: "c)", attendu: "3,8" },
-            { question: "d)", attendu: "0,75" },
+            { question: "a)", attendu: "4,5", unite: "m" },
+            { question: "b)", attendu: "1,6", unite: "km" },
+            { question: "c)", attendu: "3,8", unite: "cm" },
+            { question: "d)", attendu: "0,75", unite: "m" },
           ],
           correction:
             "J'écris le nombre : son dernier chiffre va dans la colonne de son unité. Puis je mets la virgule juste après la colonne de la nouvelle unité.\na) 450 cm : 0 en cm, 5 en dm, 4 en m. Virgule après les m : 4,50 m, soit 4,5 m.\nb) 1 600 m : 0 en m, 0 en dam, 6 en hm, 1 en km. Virgule après les km : 1,6 km.\nc) 38 mm : 8 en mm, 3 en cm. Virgule après les cm : 3,8 cm.\nd) 75 cm : 5 en cm, 7 en dm, rien en m. J'écris un 0 en m : 0,75 m.\n⛔ Le piège : oublier le 0 et écrire « ,75 m » ou 75 m. Il n'y a pas de mètre entier : 0,75 m.\nRéponse : a) 4,5 m ; b) 1,6 km ; c) 3,8 cm ; d) 0,75 m.",
@@ -382,7 +382,7 @@ export const exercicesLongueurCm2: FicheExercicesData = {
           enonce: "Sur la règle, la gomme ne commence pas au 0.\na) Sur quelle graduation commence la gomme ? Donne-la en cm.\nb) Combien de mm mesure la gomme ?\nc) Léo dit : « La gomme mesure 7,5 cm. » A-t-il raison ? Réponds oui ou non.",
           figure: regle(10, 2, 7.5, "gomme"),
           reponses: [
-            { question: "a)", attendu: "2" },
+            { question: "a)", attendu: "2", unite: "cm" },
             { question: "b)", attendu: "55" },
             { question: "c)", attendu: "non" },
           ],
@@ -395,8 +395,8 @@ export const exercicesLongueurCm2: FicheExercicesData = {
             "Malik fait un tour à vélo. Il roule 2 km 500 m, puis 1 800 m, puis 1,2 km.\na) Écris les trois distances en m, dans l'ordre.\nb) Quelle distance a-t-il roulée en tout, en m ?\nc) Écris ce total en km.",
           reponses: [
             { question: "a)", attendu: "2500 ; 1800 ; 1200", ordre: true },
-            { question: "b)", attendu: "5500" },
-            { question: "c)", attendu: "5,5" },
+            { question: "b)", attendu: "5500", unite: "m" },
+            { question: "c)", attendu: "5,5", unite: "km" },
           ],
           correction:
             "Je mets tout en mètres avant d'additionner.\na) 2 km 500 m = 2 000 + 500 = 2 500 m.\n1 800 m reste 1 800 m.\n1,2 km = 1 200 m.\nb) 2 500 + 1 800 + 1 200 = 5 500 m.\nc) 1 000 m font 1 km. 5 500 m, c'est 5 km et 500 m : 5,5 km.\n⛔ Le piège : additionner 2,5 + 1 800 + 1,2. Ces nombres ne sont pas dans la même unité.\nRéponse : a) 2 500 ; 1 800 ; 1 200 ; b) 5 500 m ; c) 5,5 km.",
@@ -446,9 +446,9 @@ export const exercicesLongueurCm2: FicheExercicesData = {
           enonce:
             "Une piste cyclable fait une boucle de 1 250 m. Lucas en fait 4 tours.\na) Combien de mètres a-t-il roulé ?\nb) Écris cette distance en km.\nc) Lucas voulait rouler 6 km. Combien de mètres lui manque-t-il ?",
           reponses: [
-            { question: "a)", attendu: "5000" },
-            { question: "b)", attendu: "5" },
-            { question: "c)", attendu: "1000" },
+            { question: "a)", attendu: "5000", unite: "m" },
+            { question: "b)", attendu: "5", unite: "km" },
+            { question: "c)", attendu: "1000", unite: "m" },
           ],
           correction:
             "a) 4 tours de 1 250 m : 4 × 1 250 = 5 000 m.\nb) 1 000 m font 1 km. 5 000 m = 5 km.\nc) 6 km = 6 000 m. 6 000 − 5 000 = 1 000 m.\n⛔ Le piège : faire 6 − 5 000. Je mets d'abord les 6 km en mètres.\nRéponse : a) 5 000 m ; b) 5 km ; c) 1 000 m.",
@@ -459,8 +459,8 @@ export const exercicesLongueurCm2: FicheExercicesData = {
           enonce:
             "Au zoo, la soigneuse mesure une girafe adulte : 5,3 m. Son girafon mesure 1,8 m.\na) De combien de mètres l'adulte dépasse-t-elle le girafon ?\nb) Écris cet écart en cm.\nc) La soigneuse mesure 1,65 m. De combien de cm le girafon est-il plus grand qu'elle ?",
           reponses: [
-            { question: "a)", attendu: "3,5" },
-            { question: "b)", attendu: "350" },
+            { question: "a)", attendu: "3,5", unite: "m" },
+            { question: "b)", attendu: "350", unite: "cm" },
             { question: "c)", attendu: "15" },
           ],
           correction:

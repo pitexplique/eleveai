@@ -495,7 +495,7 @@ export const exercicesDroiteCm2: FicheExercicesData = {
             { question: "a)", attendu: "oui" },
             { question: "b)", attendu: "non" },
             { question: "c)", attendu: "non" },
-            { question: "d)", attendu: "6" },
+            { question: "d)", attendu: "6", unite: "cm" },
           ],
         },
         {
@@ -814,8 +814,8 @@ export const exercicesDroiteCm2: FicheExercicesData = {
           micros: ["droite_parallele", "droite_defi"],
           reponses: [
             { question: "a)", attendu: "5" },
-            { question: "b)", attendu: "40" },
-            { question: "c)", attendu: "4" },
+            { question: "b)", attendu: "40", unite: "mm" },
+            { question: "c)", attendu: "4", unite: "cm" },
           ],
         },
         {

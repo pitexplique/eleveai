@@ -282,7 +282,7 @@ export const exercicesAlgebreCm2: FicheExercicesData = {
           figure: schema([{ nom: "Ficelle", parts: [{ l: 58, txt: "18 cm" }, { l: 100, txt: "□", c: "#fed7aa" }] }], "50 cm"),
           reponses: [
             { question: "a)", attendu: "C" },
-            { question: "b)", attendu: "32" },
+            { question: "b)", attendu: "32", unite: "cm" },
           ],
           correction:
             "Sur le schéma, toute la barre vaut 50 cm. Elle est faite de 18 cm et de □.\nDonc 18 + □ = 50.\na) Pour trouver une partie, j'enlève l'autre partie du tout : 50 − 18. C'est le choix C.\nb) 50 − 18 = 32. L'autre morceau mesure 32 cm.\nJe vérifie : 18 + 32 = 50.\n⛔ Le piège : additionner 50 + 18 = 68. Mais un morceau ne peut pas être plus long que toute la ficelle.\nRéponse : a) C ; b) 32 cm.",
@@ -384,8 +384,8 @@ export const exercicesAlgebreCm2: FicheExercicesData = {
           ),
           reponses: [
             { question: "a)", attendu: "3" },
-            { question: "b)", attendu: "300" },
-            { question: "c)", attendu: "600" },
+            { question: "b)", attendu: "300", unite: "m" },
+            { question: "c)", attendu: "600", unite: "m" },
           ],
           correction:
             "Léa a 1 part. Sam court 2 fois plus : il a 2 parts.\na) En tout : 1 + 2 = 3 parts égales.\nb) Les 3 parts font 900 m : 900 ÷ 3 = 300 m pour une part. Léa court 300 m.\nc) Sam a 2 parts : 2 × 300 = 600 m.\nJe vérifie : 300 + 600 = 900.\n⛔ Le piège : compter 2 parts en tout, et trouver 900 ÷ 2 = 450. Léa a aussi sa part.\nRéponse : a) 3 parts ; b) 300 m ; c) 600 m.",
@@ -441,8 +441,8 @@ export const exercicesAlgebreCm2: FicheExercicesData = {
           figure: balance(),
           reponses: [
             { question: "a)", attendu: "2" },
-            { question: "b)", attendu: "2" },
-            { question: "c)", attendu: "6" },
+            { question: "b)", attendu: "2", unite: "kg" },
+            { question: "c)", attendu: "6", unite: "kg" },
           ],
           correction:
             "La balance est en équilibre : les deux plateaux pèsent autant. C'est une égalité.\na) J'enlève 1 sac à gauche ET 1 sac à droite : la balance reste en équilibre. À gauche, il reste 3 − 1 = 2 sacs.\nÀ droite, il reste seulement le poids de 4 kg.\nb) 2 sacs pèsent 4 kg. Un sac pèse 4 ÷ 2 = 2 kg.\nc) Au début, à gauche : 3 sacs, donc 3 × 2 = 6 kg.\nJe vérifie à droite : 2 + 4 = 6 kg. Même poids : la balance est bien en équilibre.\n⛔ Le piège : enlever un sac d'un seul plateau. La balance penche, et l'égalité est fausse.\nRéponse : a) 2 sacs ; b) 2 kg ; c) 6 kg.",

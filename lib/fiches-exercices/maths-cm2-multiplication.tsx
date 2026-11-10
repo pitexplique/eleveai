@@ -429,8 +429,8 @@ export const exercicesMultiplicationCm2: FicheExercicesData = {
             "Un cuisinier a une recette de crêpes pour 4 personnes : 250 g de farine, 0,5 L de lait et 3 œufs. Il cuisine pour 12 personnes.\na) Par combien multiplie-t-il la recette ?\nb) Combien de grammes de farine lui faut-il ?\nc) Combien de litres de lait ?\nd) Combien d'œufs ?",
           reponses: [
             { question: "a)", attendu: "3" },
-            { question: "b)", attendu: "750" },
-            { question: "c)", attendu: "1,5" },
+            { question: "b)", attendu: "750", unite: "g" },
+            { question: "c)", attendu: "1,5", unite: "l" },
             { question: "d)", attendu: "9" },
           ],
           correction:
@@ -443,7 +443,7 @@ export const exercicesMultiplicationCm2: FicheExercicesData = {
             "La famille Martin part en train. Ils sont 4. Un billet coûte 39,90 €. Le train roule 4 heures, à 118 km par heure en moyenne.\na) Combien coûtent les 4 billets ?\nb) Combien de kilomètres parcourt le train ?\nc) Ils paient avec 200 €. Combien leur rend-on ?",
           reponses: [
             { question: "a)", attendu: "159,6" },
-            { question: "b)", attendu: "472" },
+            { question: "b)", attendu: "472", unite: "km" },
             { question: "c)", attendu: "40,4" },
           ],
           correction:

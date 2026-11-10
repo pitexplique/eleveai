@@ -286,10 +286,10 @@ export const exercicesCalculCm2: FicheExercicesData = {
         {
           enonce: "Lou est pâtissière. Sa recette pour 8 personnes : 250 g de farine, 0,75 L de lait, 3 œufs, 45 g de beurre.\na) Pour 16 personnes, combien de litres de lait ?\nb) Pour 4 personnes, combien de grammes de farine ?\nc) Pour 4 personnes, combien d'œufs ?\nd) Pour 4 personnes, combien de grammes de beurre ?",
           reponses: [
-            { question: "a)", attendu: "1,5" },
-            { question: "b)", attendu: "125" },
+            { question: "a)", attendu: "1,5", unite: "l" },
+            { question: "b)", attendu: "125", unite: "g" },
             { question: "c)", attendu: "1,5" },
-            { question: "d)", attendu: "22,5" },
+            { question: "d)", attendu: "22,5", unite: "g" },
           ],
           correction:
             "16 personnes, c'est le double de 8 : je double. 4 personnes, c'est la moitié de 8 : je prends la moitié.\na) Double de 0,75 : 0,75 + 0,75 = 1,5 L de lait.\nb) Moitié de 250 : moitié de 200 = 100, moitié de 50 = 25. 100 + 25 = 125 g de farine.\nc) Moitié de 3 : 3 est impair, 3 = 2 + 1. Moitié : 1 + 0,5 = 1,5 œuf, un œuf et demi.\nd) Moitié de 45 : 45 = 44 + 1. Moitié : 22 + 0,5 = 22,5 g de beurre.\n⛔ Le piège du c) : répondre 1 œuf. La moitié de 3, ce n'est ni 1 ni 2 : c'est 1,5.\nRéponse : a) 1,5 L ; b) 125 g ; c) 1,5 œuf ; d) 22,5 g.",

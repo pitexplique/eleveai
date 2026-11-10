@@ -391,7 +391,7 @@ export const exercicesDivisionCm2: FicheExercicesData = {
           enonce:
             "Une confiturière a 6,3 kg de confiture. Elle la verse dans 9 pots, autant dans chaque pot. Elle vend chaque pot 4,50 €.\na) Combien de kilogrammes y a-t-il dans chaque pot ?\nb) Écris ce poids en grammes.\nc) Combien gagne-t-elle si elle vend les 9 pots ?",
           reponses: [
-            { question: "a)", attendu: "0,7" },
+            { question: "a)", attendu: "0,7", unite: "kg" },
             { question: "b)", attendu: "700" },
             { question: "c)", attendu: "40,5" },
           ],
@@ -404,9 +404,9 @@ export const exercicesDivisionCm2: FicheExercicesData = {
           enonce:
             "Une course de relais fait 42 km. 8 coureurs se partagent la distance en parts égales.\na) Combien de kilomètres court chaque coureur ?\nb) Écris cette distance en mètres.\nc) Avec 6 coureurs, combien de kilomètres court chacun ?",
           reponses: [
-            { question: "a)", attendu: "5,25" },
+            { question: "a)", attendu: "5,25", unite: "km" },
             { question: "b)", attendu: "5250" },
-            { question: "c)", attendu: "7" },
+            { question: "c)", attendu: "7", unite: "km" },
           ],
           correction:
             "a) 42 ÷ 8 = 5, il reste 2. Virgule. 20 dixièmes ÷ 8 = 2, il reste 4. 40 centièmes ÷ 8 = 5.\nChaque coureur court 5,25 km. Je vérifie : 8 × 5,25 = 42.\nb) 1 km = 1 000 m. 5,25 × 1 000 = 5 250 m.\nc) 42 ÷ 6 = 7 km, car 6 × 7 = 42.\n⛔ Le piège du a) : écrire le reste après la virgule, 5,2. « 5 reste 2 » ne veut pas dire 5,2 : je continue la division.\nRéponse : a) 5,25 km ; b) 5 250 m ; c) 7 km.",
