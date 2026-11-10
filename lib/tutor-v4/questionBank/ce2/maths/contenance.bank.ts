@@ -28,28 +28,8 @@
 // `format: "open"` (cf. ce2/maths/index.ts) : un CE2 clique, il ne tape pas.
 
 import type { ContenanceCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-// La bonne réponse est mise de côté, trois pièges distincts sont tirés ensuite,
-// puis on mélange. L'écrire autrement a rendu des questions impossibles à
-// réussir dans 79 banques : voir scripts/verifier-generateurs.mjs.
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
+import { choix, de, gabarit, maj, pick, pl, quelquun, rint, type Etoile, type Q } from "./outils-mesures-ce2";
+import { comparer, estimer, relations, sansArticle, unites, type Grandeur } from "./grandeurs-ce2";
 
 function contenanceCanvas(
   data: Omit<ContenanceCanvasData, "kind">,
@@ -145,126 +125,7 @@ export const contenanceBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "contenance", "unites", "reunion", "piege", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_contenance_unites_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_unites",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le L final dit « litre », ce qu'il y a devant dit combien de parts.",
-    tags: ["ce2", "contenance", "unites", "template"],
-    generate: () => {
-      const unites = [
-        { abrev: "L", nom: "litre" },
-        { abrev: "dL", nom: "décilitre" },
-        { abrev: "cL", nom: "centilitre" },
-      ] as const;
-      const u = randomChoice(unites);
-      return {
-        text: `Que veut dire l'abréviation « ${u.abrev} » ?`,
-        format: "qcm",
-        choices: makeChoices(u.nom, [
-          ...unites.map((x) => x.nom),
-          "centimètre",
-          "kilogramme",
-        ]),
-        expected: [u.nom],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Chaque unité de contenance a une abréviation qui se termine par un L majuscule.",
-          "On lit l'abréviation en deux morceaux : le début, puis le L.",
-          `« ${u.abrev} » se lit « ${u.nom} ». Le L majuscule annonce toujours qu'on mesure ce qu'un récipient contient.`,
-          `« ${u.abrev} » veut dire ${u.nom}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_contenance_unites_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_unites",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Range-les dans ta tête : centilitre, décilitre, litre.",
-    tags: ["ce2", "contenance", "unites", "template"],
-    generate: () => {
-      const ordre = ["centilitre", "décilitre", "litre"] as const;
-      const [i, j] = shuffle([0, 1, 2]).slice(0, 2).sort((a, b) => a - b);
-      const plusGrande = randomChoice([true, false]);
-      const bonne = plusGrande ? ordre[j] : ordre[i];
-      return {
-        text: plusGrande
-          ? `Laquelle de ces deux unités est la PLUS GRANDE : le ${ordre[i]} ou le ${ordre[j]} ?`
-          : `Laquelle de ces deux unités est la PLUS PETITE : le ${ordre[i]} ou le ${ordre[j]} ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          plusGrande ? ordre[i] : ordre[j],
-          "elles sont égales",
-          "on ne peut pas comparer",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Les unités de contenance se rangent toujours ainsi : centilitre, décilitre, litre.",
-          "On place les deux unités dans cette liste et on regarde laquelle vient après.",
-          `Le ${ordre[i]} vient avant le ${ordre[j]} : il est donc plus petit. Le litre est la plus grande des trois, car les deux autres viennent de son partage.`,
-          `C'est le ${bonne}.`,
-        ),
-      };
-    },
-  },
 
-  {
-    kind: "template",
-    id: "ce2_contenance_unites_tpl_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_unites",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Imagine le récipient dans ta main, puis choisis l'unité qui va avec.",
-    tags: ["ce2", "contenance", "unites", "template", "canvas"],
-    generate: () => {
-      const objets = [
-        { nom: "une bouteille d'eau", icon: "🧴", bonne: "1 L 50 cL", pourquoi: "on la porte à deux mains quand elle est pleine" },
-        { nom: "une petite cuillère", icon: "🥄", bonne: "1 cL", pourquoi: "elle tient dans un dé à coudre ou presque" },
-        { nom: "un verre", icon: "🥤", bonne: "20 cL", pourquoi: "il faut cinq verres pour faire un litre" },
-        { nom: "un seau", icon: "🪣", bonne: "10 L", pourquoi: "on le porte à deux mains, et il pèse lourd" },
-        { nom: "une gourde d'école", icon: "🚰", bonne: "50 cL", pourquoi: "c'est un demi-litre, la moitié d'une bouteille" },
-      ] as const;
-      const o = randomChoice(objets);
-      const choices = makeChoices(o.bonne, objets.map((x) => x.bonne));
-      return {
-        text: `Quelle est la contenance la plus raisonnable pour ${o.nom} ?`,
-        format: "qcm",
-        choices,
-        expected: [o.bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Chaque récipient a son ordre de grandeur : la cuillère se compte en centilitres, le seau en litres.",
-          "On imagine le récipient rempli, puis on cherche l'unité qui donne un nombre simple.",
-          `Pour ${o.nom}, le repère est simple : ${o.pourquoi}. Cela donne ${o.bonne}.`,
-          `${o.nom} contient environ ${o.bonne}.`,
-        ),
-        // Variante « estimation » : elle montre le récipient SANS sa contenance
-        // (showContenances est forcé à false côté canvas) et pose les
-        // propositions à côté. Rien n'est vendu à l'avance.
-        canvas: contenanceCanvas({
-          variant: "estimation",
-          objet: { label: o.nom, icon: o.icon },
-          choix: choices,
-          display: { showLabels: true },
-        }),
-      };
-    },
-  },
 
   /* =========================================================
      CE2_CONTENANCE_RELATIONS — 1 L = 10 dL = 100 cL
@@ -342,99 +203,6 @@ export const contenanceBank: TutorBankItemV4[] = [
       "Non : 1 L = 100 cL.",
     ),
     tags: ["ce2", "contenance", "relations", "piege", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_contenance_relations_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_relations",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Un seul litre en vaut déjà plusieurs petites : multiplie.",
-    tags: ["ce2", "contenance", "relations", "template"],
-    generate: () => {
-      const r = randomChoice([
-        { petite: "cL", nomPetite: "centilitres", facteur: 100 },
-        { petite: "dL", nomPetite: "décilitres", facteur: 10 },
-      ]);
-      const n = randomInt(2, 9);
-      const total = n * r.facteur;
-      return {
-        text: `Combien de ${r.nomPetite} font ${n} L ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          `1 litre vaut ${r.facteur} ${r.nomPetite}.`,
-          "Pour passer du litre à une plus petite unité, on multiplie : il en faut plus pour la même quantité.",
-          `${n} × ${r.facteur} = ${total}. Donc ${n} L = ${total} ${r.petite}.`,
-          `${n} L font ${total} ${r.petite}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_contenance_relations_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_relations",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Plusieurs petites unités font un seul litre : partage.",
-    tags: ["ce2", "contenance", "relations", "template"],
-    generate: () => {
-      const r = randomChoice([
-        { petite: "cL", nomPetite: "centilitres", facteur: 100 },
-        { petite: "dL", nomPetite: "décilitres", facteur: 10 },
-      ]);
-      const n = randomInt(2, 9);
-      const total = n * r.facteur;
-      return {
-        text: `Combien de litres font ${total} ${r.petite} ?`,
-        format: "short",
-        expected: [String(n)],
-        comparator: "number_equal",
-        explanation: exp(
-          `1 litre vaut ${r.facteur} ${r.nomPetite}.`,
-          "Pour revenir au litre, on partage : il faut moins de litres pour la même quantité.",
-          `${total} ÷ ${r.facteur} = ${n}. Donc ${total} ${r.petite} = ${n} L.`,
-          `${total} ${r.petite} font ${n} L.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_contenance_relations_tpl_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_relations",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Convertis d'abord les litres, puis ajoute les centilitres qui restent.",
-    tags: ["ce2", "contenance", "relations", "template"],
-    generate: () => {
-      const l = randomInt(1, 8);
-      const cl = randomInt(1, 19) * 5; // 5, 10, 15… 95 cL : des valeurs d'étiquette
-      const total = l * 100 + cl;
-      return {
-        text: `Un bidon contient ${l} L ${cl} cL. Combien cela fait-il de centilitres ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une contenance écrite en deux unités se convertit en une seule en additionnant.",
-          "On transforme d'abord les litres en centilitres, puis on ajoute les centilitres déjà là.",
-          `${l} L = ${l * 100} cL. On ajoute les ${cl} cL : ${l * 100} + ${cl} = ${total}.`,
-          `Le bidon contient ${total} cL.`,
-        ),
-      };
-    },
   },
 
   /* =========================================================
@@ -518,90 +286,6 @@ export const contenanceBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "contenance", "comparer", "reunion", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_contenance_comparer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_comparer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Même unité d'abord, comparaison ensuite.",
-    tags: ["ce2", "contenance", "comparer", "piege", "template"],
-    generate: () => {
-      // Le nombre en centilitres est TOUJOURS plus grand que celui en litres :
-      // c'est ce décalage qui fait tomber les élèves dans le piège.
-      const l = randomInt(1, 5);
-      const enCl = l * 100;
-      const cl = randomChoice([enCl - randomInt(1, 9) * 5, enCl + randomInt(1, 9) * 5]);
-      const gagnant = cl > enCl ? `${cl} cL` : `${l} L`;
-      return {
-        text: `Qu'est-ce qui contient le plus : ${l} L ou ${cl} cL ?`,
-        format: "qcm",
-        choices: makeChoices(gagnant, [
-          cl > enCl ? `${l} L` : `${cl} cL`,
-          "c'est pareil",
-          "on ne peut pas savoir",
-        ]),
-        expected: [gagnant],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On ne compare deux contenances qu'après les avoir écrites dans la même unité.",
-          "On convertit les litres en centilitres, car 1 L = 100 cL.",
-          `${l} L = ${enCl} cL. On compare alors ${enCl} cL et ${cl} cL : ${cl > enCl ? `${cl} est plus grand que ${enCl}` : `${enCl} est plus grand que ${cl}`}.`,
-          `Le plus grand est ${gagnant}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_contenance_comparer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Écris les trois contenances en centilitres avant de choisir.",
-    tags: ["ce2", "contenance", "comparer", "template", "canvas"],
-    generate: () => {
-      const petitCl = randomInt(4, 15) * 5; // 20 à 75 cL
-      const moyenDl = randomInt(9, 15); // 90 à 150 cL
-      const grosL = randomInt(2, 5); // 200 à 500 cL
-      const items = shuffle([
-        { texte: `${petitCl} cL`, cl: petitCl },
-        { texte: `${moyenDl} dL`, cl: moyenDl * 10 },
-        { texte: `${grosL} L`, cl: grosL * 100 },
-      ]);
-      const maxCl = Math.max(...items.map((i) => i.cl));
-      const gagnant = items.find((i) => i.cl === maxCl)!;
-      return {
-        text: `Laquelle de ces trois contenances est la PLUS GRANDE : ${items.map((i) => i.texte).join(", ")} ?`,
-        format: "qcm",
-        choices: makeChoices(gagnant.texte, [
-          ...items.filter((i) => i.cl !== maxCl).map((i) => i.texte),
-          "elles sont égales",
-        ]),
-        expected: [gagnant.texte],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Pour comparer plusieurs contenances, on les écrit toutes dans la même unité.",
-          "On choisit le centilitre et on convertit : 1 L = 100 cL, 1 dL = 10 cL.",
-          `En centilitres : ${items.map((i) => `${i.texte} = ${i.cl} cL`).join(" ; ")}. Le plus grand nombre est ${maxCl}.`,
-          `La plus grande est ${gagnant.texte}.`,
-        ),
-        // Variante « objets » : elle se contente de montrer les récipients côte
-        // à côte, sans les remplir ni désigner le gagnant.
-        canvas: contenanceCanvas({
-          variant: "objets",
-          objets: items.map((i) => ({ label: "Récipient", icon: "🧴", contenance: i.texte })),
-          display: { showContenances: true, showLabels: false },
-        }),
-      };
-    },
-  },
 
   /* =========================================================
      CE2_CONTENANCE_PROBLEME — un problème de contenances
@@ -649,72 +333,6 @@ export const contenanceBank: TutorBankItemV4[] = [
       "Il reste 340 cL dans l'arrosoir.",
     ),
     tags: ["ce2", "contenance", "probleme", "deux_etapes"],
-  },
-  {
-    kind: "template",
-    id: "ce2_contenance_probleme_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_probleme",
-    difficulty: 3,
-    theme: "reunion",
-    hint: "Même unité d'abord, opération ensuite.",
-    tags: ["ce2", "contenance", "probleme", "reunion", "template"],
-    generate: () => {
-      const contexte = randomChoice([
-        { qui: "Malia", quoi: "du jus de goyavier", ou: "pour la kermesse" },
-        { qui: "Kevin", quoi: "du sirop de canne", ou: "pour la fête de l'école" },
-        { qui: "Naïla", quoi: "de l'eau de coco", ou: "pour le pique-nique de la classe" },
-      ]);
-      const l = randomInt(1, 5);
-      const cl = randomInt(1, 19) * 5;
-      const total = l * 100 + cl;
-      return {
-        text: `${contexte.qui} prépare ${contexte.quoi} ${contexte.ou}. Elle verse ${l} L dans un premier bidon et ${cl} cL dans un second. Combien de centilitres en tout ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "On n'additionne des contenances que si elles sont écrites dans la même unité.",
-          "On convertit les litres en centilitres, puis on additionne.",
-          `${l} L = ${l * 100} cL. Puis ${l * 100} + ${cl} = ${total}.`,
-          `Cela fait ${total} cL en tout.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_contenance_probleme_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_probleme",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Ce qui reste, c'est le départ moins ce qui a été versé.",
-    tags: ["ce2", "contenance", "probleme", "template"],
-    generate: () => {
-      const l = randomInt(3, 8);
-      const departCl = l * 100;
-      const verse1 = randomInt(4, 15) * 5;
-      const verse2 = randomInt(4, 15) * 5;
-      const reste = departCl - verse1 - verse2;
-      const recipient = randomChoice(["un arrosoir", "un bidon", "une citerne d'eau de pluie", "une bouteille"]);
-      return {
-        text: `On a ${recipient} de ${l} L. On verse d'abord ${verse1} cL, puis ${verse2} cL. Combien de centilitres reste-t-il ?`,
-        format: "short",
-        expected: [String(reste)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Chercher un reste, c'est enlever au total ce qui a été pris.",
-          "On convertit la contenance de départ en centilitres, on additionne ce qui a été versé, puis on soustrait.",
-          `${l} L = ${departCl} cL. Les deux versements font ${verse1} + ${verse2} = ${verse1 + verse2} cL. Il reste ${departCl} - ${verse1 + verse2} = ${reste} cL.`,
-          `Il reste ${reste} cL.`,
-        ),
-      };
-    },
   },
 
   /* =========================================================
@@ -776,67 +394,276 @@ export const contenanceBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "contenance", "defi", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_contenance_defi_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Compte combien de verres tiennent dans la bouteille.",
-    tags: ["ce2", "contenance", "defi", "template"],
-    generate: () => {
-      const verre = randomChoice([10, 20, 25, 50]);
-      const litres = randomInt(2, 6);
-      const nb = (litres * 100) / verre;
-      const boisson = randomChoice(["d'eau", "de jus", "de sirop dilué", "de thé glacé"]);
-      return {
-        text: `Un bidon de ${litres} L ${boisson}. Combien de verres de ${verre} cL peut-on remplir ?`,
-        format: "short",
-        expected: [String(nb)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Chercher combien de verres tiennent dans un bidon, c'est un groupement.",
-          "On écrit d'abord la contenance du bidon dans l'unité des verres, puis on partage.",
-          `${litres} L = ${litres * 100} cL. Puis ${litres * 100} ÷ ${verre} = ${nb}.`,
-          `On peut remplir ${nb} verres.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_contenance_defi_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "contenance",
-    microId: "ce2_contenance_defi",
-    difficulty: 5,
-    theme: "reunion",
-    hint: "Cherche d'abord ce que boit la classe entière, puis compare au bidon.",
-    tags: ["ce2", "contenance", "defi", "reunion", "template"],
-    generate: () => {
-      const eleves = randomInt(20, 28);
-      const parEleve = randomChoice([10, 20, 25]);
-      const totalCl = eleves * parEleve;
-      // Toujours au moins un litre de marge : un bidon vidé pile à zéro donne
-      // un « il reste 0 cL » qui n'apprend rien et embrouille les propositions.
-      const bidonL = Math.ceil(totalCl / 100) + randomInt(1, 2);
-      const resteCl = bidonL * 100 - totalCl;
-      return {
-        text: `Pour la sortie au Piton de la Fournaise, la maîtresse remplit un bidon de ${bidonL} L. Les ${eleves} élèves boivent chacun ${parEleve} cL. Combien de centilitres reste-t-il dans le bidon ?`,
-        format: "short",
-        expected: [String(resteCl)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand chacun prend la même quantité, on multiplie pour obtenir le total bu.",
-          "On calcule d'abord ce que boit toute la classe, puis on convertit le bidon en centilitres et on soustrait.",
-          `La classe boit ${eleves} × ${parEleve} = ${totalCl} cL. Le bidon contient ${bidonL} L = ${bidonL * 100} cL. Il reste ${bidonL * 100} - ${totalCl} = ${resteCl} cL.`,
-          `Il reste ${resteCl} cL.`,
-        ),
-      };
-    },
-  },
 ];
+
+/* =========================================================
+   LES GABARITS (10/11/2026)
+   ⛔ Avant : une phrase par gabarit, 7 à 17 squelettes par micro,
+   13 à 17 répétitions sur 20. Les familles communes aux trois
+   grandeurs sont dans `grandeurs-ce2.ts` ; ici, la fiche de la
+   contenance (L, dL, cL, des récipients d'enfant) et les problèmes.
+   ⛔ Jamais la variante `conversion` : elle imprime « 1 L = 1000 mL ».
+========================================================= */
+
+const CONTENANCE: Grandeur = {
+  notionId: "contenance",
+  mot: "contenance",
+  laGrandeur: "une contenance",
+  unites: [
+    { sym: "cL", nom: "centilitre", le: "le centilitre", base: 1 },
+    { sym: "dL", nom: "décilitre", le: "le décilitre", base: 10 },
+    { sym: "L", nom: "litre", le: "le litre", base: 100 },
+  ],
+  instrument: "un verre doseur",
+  verbe: "contient",
+  infinitif: "mesurer ce que contient",
+  avecQuelle: "Avec quelle unité mesure-t-on ce que contient",
+  sup: { m: "qui contient le plus", f: "qui contient le plus" },
+  questionPlus: "Qu'est-ce qui contient le plus",
+  supports: [
+    { le: "la bouteille de jus", un: "une bouteille de jus", f: true, icon: "🧃", grand: "L", petit: "cL", max: 2 },
+    { le: "le seau", un: "un seau", icon: "🪣", grand: "L", petit: "dL", max: 9 },
+    { le: "l'arrosoir", un: "un arrosoir", icon: "🪴", grand: "L", petit: "dL", max: 9 },
+    { le: "le bidon d'eau", un: "un bidon d'eau", icon: "🛢️", grand: "L", petit: "cL", max: 5 },
+    { le: "la carafe de sirop", un: "une carafe de sirop", f: true, icon: "🫖", grand: "L", petit: "cL", max: 2 },
+    { le: "la casserole de soupe", un: "une casserole de soupe", f: true, icon: "🍲", grand: "L", petit: "dL", max: 4 },
+    { le: "l'aquarium", un: "un aquarium", icon: "🐠", grand: "L", petit: "dL", max: 9 },
+    { le: "le bol de lait", un: "un bol de lait", icon: "🥣", grand: "dL", petit: "cL", max: 5 },
+    { le: "le verre de jus d'orange", un: "un verre de jus d'orange", icon: "🥛", grand: "dL", petit: "cL", max: 3 },
+    { le: "la tasse de chocolat", un: "une tasse de chocolat", f: true, icon: "☕", grand: "dL", petit: "cL", max: 3 },
+    { le: "le biberon du chaton", un: "un biberon", icon: "🍼", grand: "dL", petit: "cL", max: 2 },
+    { le: "la bassine", un: "une bassine", f: true, icon: "🫧", grand: "L", petit: "dL", max: 9 },
+    { le: "le chaudron de soupe du dragon", un: "un chaudron de soupe", icon: "🐉", grand: "L", petit: "cL", max: 5 },
+    { le: "la gourde de randonnée", un: "une gourde", f: true, icon: "🥤", grand: "L", petit: "cL", max: 2 },
+  ],
+  objets: [
+    { nom: "une cuillère à soupe", quoi: "une cuillère à soupe", valeur: 1, unite: "cL", icon: "🥄" },
+    { nom: "un verre", quoi: "un verre", valeur: 20, unite: "cL", icon: "🥛" },
+    { nom: "une grande bouteille d'eau", quoi: "une grande bouteille d'eau", valeur: 1, unite: "L", icon: "🍶" },
+    { nom: "un seau", quoi: "un seau", valeur: 10, unite: "L", icon: "🪣" },
+    { nom: "une baignoire", quoi: "une baignoire", valeur: 150, unite: "L", icon: "🛁" },
+    { nom: "une tasse", quoi: "une tasse", valeur: 25, unite: "cL", icon: "☕" },
+    { nom: "une canette", quoi: "une canette", valeur: 33, unite: "cL", icon: "🥫" },
+    { nom: "un arrosoir", quoi: "un arrosoir", valeur: 5, unite: "L", icon: "🪴" },
+    { nom: "une gourde", quoi: "une gourde", valeur: 50, unite: "cL", icon: "🥤" },
+    { nom: "un aquarium", quoi: "un aquarium", valeur: 30, unite: "L", icon: "🐠" },
+    { nom: "un biberon", quoi: "un biberon", valeur: 2, unite: "dL", icon: "🍼" },
+    { nom: "une casserole", quoi: "une casserole", valeur: 2, unite: "L", icon: "🍲" },
+    { nom: "un pot de yaourt", quoi: "un pot de yaourt", valeur: 12, unite: "cL", icon: "🥛" },
+    { nom: "une piscine gonflable", quoi: "une piscine gonflable", valeur: 500, unite: "L", icon: "🏊" },
+  ],
+  cartes: (items) =>
+    contenanceCanvas({
+      variant: "objets",
+      objets: items.map((i) => ({ label: i.label, icon: i.icon, contenance: i.valeur })),
+      display: { showContenances: items.some((i) => i.valeur), showLabels: true },
+    }),
+};
+
+/* ---------------------------------------------------------
+   PROBLÈMES DE CONTENANCES
+--------------------------------------------------------- */
+
+const BOISSONS: readonly { a: string; b: string; ou: string; icon: string; icon2: string }[] = [
+  { a: "jus de pomme", b: "eau pétillante", ou: "pour le goûter de la classe", icon: "🧃", icon2: "💧" },
+  { a: "lait", b: "chocolat chaud", ou: "pour le petit-déjeuner du camping", icon: "🥛", icon2: "☕" },
+  { a: "sirop de grenadine", b: "eau", ou: "pour la kermesse", icon: "🍹", icon2: "💧" },
+  { a: "soupe de potiron", b: "bouillon", ou: "pour la cantine", icon: "🍲", icon2: "🥣" },
+  { a: "jus d'orange", b: "jus de citron", ou: "pour l'anniversaire de Lou", icon: "🍊", icon2: "🍋" },
+  { a: "potion verte", b: "potion bleue", ou: "dans le chaudron de la sorcière", icon: "🧪", icon2: "🫧" },
+  { a: "limonade", b: "sirop de menthe", ou: "pour la fête du cirque", icon: "🍋", icon2: "🌿" },
+  { a: "eau", b: "engrais liquide", ou: "dans l'arrosoir du jardinier", icon: "💧", icon2: "🌱" },
+  { a: "lait", b: "crème", ou: "pour les crêpes du chef", icon: "🥛", icon2: "🥄" },
+  { a: "eau de mer", b: "eau douce", ou: "dans l'aquarium des poissons-clowns", icon: "🌊", icon2: "💧" },
+];
+
+function contenanceTotale(e: Etoile): Q {
+  const b = pick(BOISSONS);
+  const p = quelquun();
+  const L = rint(1, e === 2 ? 3 : 5);
+  const cl = e === 2 ? pick([10, 20, 25, 50, 75]) : rint(11, 95);
+  const total = L * 100 + cl;
+  const bonne = `${total} cL`;
+  return {
+    text: `${pick([
+      `${p.nom} verse ${L} L ${de(b.a)} et ${cl} cL ${de(b.b)} ${b.ou}.`,
+      `On mélange ${L} L ${de(b.a)} avec ${cl} cL ${de(b.b)} ${b.ou}.`,
+      `${b.ou.charAt(0).toUpperCase() + b.ou.slice(1)}, ${p.nom} prépare ${L} L ${de(b.a)} et ${cl} cL ${de(b.b)}.`,
+    ])} ${pick([
+      "Combien de centilitres cela fait-il en tout ?",
+      "Quelle quantité en tout, en centilitres ?",
+      "Écris la quantité totale en centilitres.",
+    ])}`,
+    format: "qcm",
+    choices: choix(bonne, [`${L + cl} cL`, `${Number(`${L}${cl}`)} cL`, `${L * 10 + cl} cL`, `${total + 100} cL`, `${L * 1000 + cl} cL`]),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Pour additionner deux contenances, on les écrit dans la même unité. 1 L = 100 cL.",
+      "On change les litres en centilitres, puis on ajoute.",
+      `${L} L = ${L * 100} cL ; ${L * 100} + ${cl} = ${total}.`,
+      `Cela fait ${bonne}.`,
+    ),
+    canvas: CONTENANCE.cartes!([
+      { label: b.a, icon: b.icon, valeur: `${L} L` },
+      { label: b.b, icon: b.icon2, valeur: `${cl} cL` },
+    ]),
+  };
+}
+
+/** Un groupe et l'adulte qui le fait boire. */
+const GROUPES: readonly { qui: string; chef: string }[] = [
+  { qui: "joueurs de l'équipe de football", chef: "L'entraîneur" },
+  { qui: "élèves de la classe", chef: "La maîtresse" },
+  { qui: "artistes du cirque", chef: "Le clown Pipo" },
+  { qui: "enfants de la colonie", chef: "L'animatrice" },
+  { qui: "pirates du bateau", chef: "La capitaine" },
+  { qui: "danseuses du spectacle", chef: "Le professeur de danse" },
+  { qui: "pompiers de la caserne", chef: "Le chef des pompiers" },
+  { qui: "invités de l'anniversaire", chef: "Le papa de Zoé" },
+];
+const QUI_BOIT = GROUPES.map((g) => g.qui);
+
+function resteDansLeRecipient(): Q {
+  const s = pick(CONTENANCE.supports.filter((x) => x.petit === "cL" && x.grand === "L"));
+  const L = rint(1, Math.max(1, Math.min(5, s.max)));
+  const v1 = pick([10, 15, 20, 25, 30]);
+  const nb = rint(2, 3);
+  const reste = L * 100 - nb * v1;
+  if (reste <= 0) return resteDansLeRecipient();
+  const p = quelquun();
+  const bonne = `${reste} cL`;
+  return {
+    text: `${maj(s.le)} contient ${L} L. ${pick([
+      `${p.nom} remplit ${nb} verres de ${v1} cL.`,
+      `${p.nom} verse ${nb} gobelets de ${v1} cL pour ses amis.`,
+      `Au goûter, on sert ${nb} tasses de ${v1} cL.`,
+      `${p.nom} et ses copains boivent ${nb} verres de ${v1} cL.`,
+      `Pour le pique-nique, ${p.nom} remplit ${nb} petites gourdes de ${v1} cL.`,
+    ])} ${pick([
+      "Combien de centilitres reste-t-il ?",
+      "Quelle quantité reste-t-il, en centilitres ?",
+      `Combien de centilitres reste-t-il dans ${s.le} ?`,
+    ])}`,
+    format: "qcm",
+    choices: choix(bonne, [`${L * 100 - v1} cL`, `${L * 10 - nb * v1 > 0 ? L * 10 - nb * v1 : reste + 20} cL`, `${reste + v1} cL`, `${nb * v1} cL`, `${reste - 10} cL`]),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "1 L = 100 cL.",
+      "On écrit tout en centilitres, puis on enlève ce qu'on a versé.",
+      `${L} L = ${L * 100} cL ; ${nb} × ${v1} = ${nb * v1} cL ; ${L * 100} − ${nb * v1} = ${reste}.`,
+      `Il reste ${bonne}.`,
+    ),
+    canvas: CONTENANCE.cartes!([
+      { label: maj(sansArticle(s.le)), icon: s.icon, valeur: `${L} L` },
+      ...Array.from({ length: nb }, () => ({ label: "verre", icon: "🥛", valeur: `${v1} cL` })),
+    ]),
+  };
+}
+
+function combienDeVerres(): Q {
+  const L = rint(1, 5);
+  const v = pick([10, 20, 25, 50]);
+  const nb = (L * 100) / v;
+  const qui = pick(QUI_BOIT);
+  const [s, quoi, verres, verre] = pick([
+    ["Un bidon", "de jus de pomme", "verres", "verre"],
+    ["Une grande carafe", "de limonade", "verres", "verre"],
+    ["Une fontaine", "d'eau fraîche", "gobelets", "gobelet"],
+    ["Un chaudron", "de soupe", "bols", "bol"],
+    ["Une grosse bouteille", "de lait", "verres", "verre"],
+    ["Une marmite", "de chocolat chaud", "tasses", "tasse"],
+  ] as const);
+  const u = (x: number) => pl(x, verre, verres);
+  return {
+    text: `${s} ${quoi} contient ${L} L. ${pick([
+      `Combien de ${verres} de ${v} cL peut-on remplir ?`,
+      `On sert les ${qui} dans des ${verres} de ${v} cL. Combien de ${verres} peut-on remplir ?`,
+      `Pour les ${qui}, on remplit des ${verres} de ${v} cL. Combien de ${verres} remplira-t-on ?`,
+    ])}`,
+    format: "qcm",
+    choices: choix(u(nb), [(L * 10) / v >= 1 && Number.isInteger((L * 10) / v) ? (L * 10) / v : nb + 2, nb + 1, nb * 2, L * v, nb - 1].map(u)),
+    expected: [u(nb)],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "1 L = 100 cL.",
+      "On écrit la contenance en centilitres, puis on cherche combien de fois un verre y tient.",
+      `${L} L = ${L * 100} cL ; ${v} × ${nb} = ${L * 100}.`,
+      `On remplit ${nb} ${verres}.`,
+    ),
+    canvas: CONTENANCE.cartes!([
+      { label: s.replace(/^(Un|Une) /, "").replace("grosse ", "").replace("grande ", ""), icon: "🛢️", valeur: `${L} L` },
+      { label: verres.replace(/s$/, ""), icon: verres === "bols" ? "🥣" : verres === "tasses" ? "☕" : "🥛", valeur: `${v} cL` },
+    ]),
+  };
+}
+
+function boissonDuGroupe(): Q {
+  const L = rint(3, 9);
+  const v = pick([10, 20, 25]);
+  const nb = rint(8, Math.floor((L * 100) / v) - 1);
+  const reste = L * 100 - nb * v;
+  const { qui, chef: p } = pick(GROUPES);
+  return {
+    text: `${p} remplit un bidon de ${L} L. ${nb} ${qui} boivent chacun ${v} cL. ${pick([
+      "Combien de centilitres reste-t-il dans le bidon ?",
+      "Quelle quantité reste-t-il, en centilitres ?",
+    ])}`,
+    format: "qcm",
+    choices: choix(`${reste} cL`, [`${nb * v} cL`, `${L * 10 - nb * v > 0 ? L * 10 - nb * v : reste + 50} cL`, `${reste + v} cL`, `${reste + 100} cL`]),
+    expected: [`${reste} cL`],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "1 L = 100 cL.",
+      "On calcule ce qui est bu, en centilitres, puis on l'enlève au bidon.",
+      `${nb} × ${v} = ${nb * v} cL ; ${L} L = ${L * 100} cL ; ${L * 100} − ${nb * v} = ${reste}.`,
+      `Il reste ${reste} cL.`,
+    ),
+    canvas: CONTENANCE.cartes!([
+      { label: "bidon", icon: "🛢️", valeur: `${L} L` },
+      { label: `${nb} verres`, icon: "🥛", valeur: `${v} cL chacun` },
+    ]),
+  };
+}
+
+/* ---------------------------------------------------------
+   LES GABARITS, micro par micro
+--------------------------------------------------------- */
+
+function gab(id: string, microId: string, difficulty: Etoile, hint: string, tags: string[], generate: () => Q) {
+  return gabarit({ id, notionId: "contenance", microId, difficulty, hint, tags }, generate);
+}
+
+const C_UNI = "ce2_contenance_unites";
+const C_REL = "ce2_contenance_relations";
+const C_CMP = "ce2_contenance_comparer";
+const C_PRO = "ce2_contenance_probleme";
+const C_DEF = "ce2_contenance_defi";
+
+contenanceBank.push(
+  gab(`${C_UNI}_tpl_4`, C_UNI, 1, "Le litre mesure ce qu'un récipient peut contenir. Du plus petit au plus grand : cL, dL, L.", ["unites"], () => unites(CONTENANCE, 1)),
+  gab(`${C_UNI}_tpl_1`, C_UNI, 2, "L = litre, dL = décilitre, cL = centilitre.", ["unites", "canvas"], () => unites(CONTENANCE, 2)),
+  gab(`${C_UNI}_tpl_2`, C_UNI, 3, "Du plus petit au plus grand : cL, dL, L.", ["unites"], () => unites(CONTENANCE, 3)),
+  gab(`${C_UNI}_tpl_3`, C_UNI, 3, "Un verre contient environ 20 cL, un seau environ 10 L.", ["unites", "estimer", "canvas"], () => estimer(CONTENANCE, Math.random() < 0.5 ? 2 : 3)),
+
+  gab(`${C_REL}_tpl_4`, C_REL, 1, "1 L = 10 dL = 100 cL ; 1 dL = 10 cL.", ["relations"], () => relations(CONTENANCE, 1)),
+  gab(`${C_REL}_tpl_1`, C_REL, 2, "Chaque litre vaut 100 centilitres, ou 10 décilitres.", ["relations", "canvas"], () => relations(CONTENANCE, 2)),
+  gab(`${C_REL}_tpl_2`, C_REL, 3, "Combien de fois 100 cL (ou 10 dL) dans ce nombre ?", ["relations", "canvas"], () => relations(CONTENANCE, 3)),
+  gab(`${C_REL}_tpl_3`, C_REL, 4, "2 L 5 cL, ce n'est pas 25 cL : 2 L = 200 cL, puis on ajoute 5.", ["relations", "piege", "canvas"], () => relations(CONTENANCE, 4)),
+
+  gab(`${C_CMP}_tpl_3`, C_CMP, 2, "Écris les deux contenances dans la même unité avant de comparer.", ["comparer", "canvas"], () => comparer(CONTENANCE, 2)),
+  gab(`${C_CMP}_tpl_1`, C_CMP, 3, "1 L = 100 cL : compare les nombres seulement quand l'unité est la même.", ["comparer", "canvas"], () => comparer(CONTENANCE, 3)),
+  gab(`${C_CMP}_tpl_2`, C_CMP, 4, "Écris toutes les contenances dans la même unité, puis range-les.", ["comparer", "canvas"], () => comparer(CONTENANCE, 4)),
+
+  gab(`${C_PRO}_tpl_3`, C_PRO, 2, "Écris tout en centilitres, puis additionne.", ["probleme", "canvas"], () => contenanceTotale(2)),
+  gab(`${C_PRO}_tpl_1`, C_PRO, 3, "1 L = 100 cL : change les litres en centilitres, puis calcule.", ["probleme", "canvas"], () =>
+    Math.random() < 0.6 ? contenanceTotale(3) : resteDansLeRecipient(),
+  ),
+  gab(`${C_PRO}_tpl_2`, C_PRO, 4, "Écris tout en centilitres, puis enlève ce qu'on a versé.", ["probleme", "canvas"], () =>
+    Math.random() < 0.6 ? resteDansLeRecipient() : combienDeVerres(),
+  ),
+
+  gab(`${C_DEF}_tpl_1`, C_DEF, 5, "Écris la contenance en centilitres, puis cherche combien de verres y tiennent.", ["defi", "canvas"], combienDeVerres),
+  gab(`${C_DEF}_tpl_2`, C_DEF, 5, "Calcule d'abord ce qui est bu, en centilitres.", ["defi", "deux_etapes", "canvas"], boissonDuGroupe),
+);

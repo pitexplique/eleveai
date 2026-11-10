@@ -23,28 +23,8 @@
 // `format: "open"` (cf. ce2/maths/index.ts) : un CE2 clique, il ne tape pas.
 
 import type { MasseCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-// La bonne réponse est mise de côté, trois pièges distincts sont tirés ensuite,
-// puis on mélange. L'écrire autrement a rendu des questions impossibles à
-// réussir dans 79 banques : voir scripts/verifier-generateurs.mjs.
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
+import { choix, gabarit, pick, pl, quelquun, rint, type Etoile, type Q } from "./outils-mesures-ce2";
+import { choisirUnite, comparer, ecrire, estimer, relations, unites, type Grandeur } from "./grandeurs-ce2";
 
 function masseCanvas(data: Omit<MasseCanvasData, "kind">): MasseCanvasData {
   return { kind: "masse", ...data };
@@ -135,85 +115,6 @@ export const masseBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "masse", "unites", "reunion", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_masse_unites_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_unites",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le g final dit « gramme », ce qu'il y a devant dit combien.",
-    tags: ["ce2", "masse", "unites", "template"],
-    generate: () => {
-      const unites = [
-        { abrev: "g", nom: "gramme" },
-        { abrev: "kg", nom: "kilogramme" },
-        { abrev: "t", nom: "tonne" },
-      ] as const;
-      const u = randomChoice(unites);
-      return {
-        text: `Que veut dire l'abréviation « ${u.abrev} » ?`,
-        format: "qcm",
-        choices: makeChoices(u.nom, [
-          ...unites.map((x) => x.nom),
-          "mètre",
-          "litre",
-        ]),
-        expected: [u.nom],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Chaque unité de masse a une abréviation, écrite sans point et sans s.",
-          "On lit l'abréviation lettre par lettre.",
-          `« ${u.abrev} » se lit « ${u.nom} ». On l'écrit toujours pareil, même au pluriel : 5 ${u.abrev}, jamais 5 ${u.abrev}s.`,
-          `« ${u.abrev} » veut dire ${u.nom}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_unites_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_unites",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Range-les dans ta tête : gramme, kilogramme, tonne.",
-    tags: ["ce2", "masse", "unites", "template"],
-    generate: () => {
-      // « la tonne » et non « le tonne » : l'article voyage avec le nom.
-      const ordre = [
-        { nom: "le gramme", sujet: "Le gramme" },
-        { nom: "le kilogramme", sujet: "Le kilogramme" },
-        { nom: "la tonne", sujet: "La tonne" },
-      ] as const;
-      const [i, j] = shuffle([0, 1, 2]).slice(0, 2).sort((a, b) => a - b);
-      const plusLourde = randomChoice([true, false]);
-      const bonne = plusLourde ? ordre[j].nom : ordre[i].nom;
-      return {
-        text: plusLourde
-          ? `Laquelle de ces deux unités est la PLUS GRANDE : ${ordre[i].nom} ou ${ordre[j].nom} ?`
-          : `Laquelle de ces deux unités est la PLUS PETITE : ${ordre[i].nom} ou ${ordre[j].nom} ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          plusLourde ? ordre[i].nom : ordre[j].nom,
-          "elles sont égales",
-          "on ne peut pas comparer",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Les unités de masse se rangent toujours dans le même ordre : gramme, kilogramme, tonne.",
-          "On place les deux unités dans cette liste et on regarde laquelle vient après.",
-          `${ordre[i].sujet} vient avant ${ordre[j].nom} dans la liste : c'est donc la plus petite des deux. Chaque fois qu'on avance d'un cran, on multiplie par 1000.`,
-          `C'est ${bonne}.`,
-        ),
-      };
-    },
-  },
 
   /* =========================================================
      CE2_MASSE_RELATIONS — 1 kg = 1000 g, 1 t = 1000 kg
@@ -289,99 +190,6 @@ export const masseBank: TutorBankItemV4[] = [
       "Non : 1 kg = 1000 g.",
     ),
     tags: ["ce2", "masse", "relations", "piege", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_relations_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_relations",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Une seule grande unité en vaut déjà mille petites : multiplie.",
-    tags: ["ce2", "masse", "relations", "template"],
-    generate: () => {
-      const r = randomChoice([
-        { grande: "kg", petite: "g", nomGrande: "kilogramme", nomPetite: "grammes" },
-        { grande: "t", petite: "kg", nomGrande: "tonne", nomPetite: "kilogrammes" },
-      ]);
-      const n = randomInt(2, 9);
-      const total = n * 1000;
-      return {
-        text: `Combien de ${r.nomPetite} font ${n} ${r.grande} ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          `1 ${r.nomGrande} vaut 1000 ${r.nomPetite}.`,
-          "Pour passer d'une grande unité à une petite, on multiplie : il faut plus de petites unités pour la même masse.",
-          `${n} × 1000 = ${total}. Donc ${n} ${r.grande} = ${total} ${r.petite}.`,
-          `${n} ${r.grande} font ${total} ${r.petite}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_relations_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_relations",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Mille petites unités font une seule grande : partage.",
-    tags: ["ce2", "masse", "relations", "template"],
-    generate: () => {
-      const r = randomChoice([
-        { grande: "kg", petite: "g", nomGrande: "kilogrammes", nomPetite: "grammes" },
-        { grande: "t", petite: "kg", nomGrande: "tonnes", nomPetite: "kilogrammes" },
-      ]);
-      const n = randomInt(2, 9);
-      const total = n * 1000;
-      return {
-        text: `Combien de ${r.nomGrande} font ${total} ${r.petite} ?`,
-        format: "short",
-        expected: [String(n)],
-        comparator: "number_equal",
-        explanation: exp(
-          `1 ${r.grande} vaut 1000 ${r.nomPetite}.`,
-          "Pour passer d'une petite unité à une grande, on partage : il faut moins de grandes unités pour la même masse.",
-          `${total} ÷ 1000 = ${n}. Donc ${total} ${r.petite} = ${n} ${r.grande}.`,
-          `${total} ${r.petite} font ${n} ${r.grande}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_relations_tpl_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_relations",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Convertis d'abord les kilogrammes, puis ajoute les grammes qui restent.",
-    tags: ["ce2", "masse", "relations", "template"],
-    generate: () => {
-      const kg = randomInt(1, 8);
-      const g = randomInt(50, 900);
-      const total = kg * 1000 + g;
-      return {
-        text: `Un sac pèse ${kg} kg ${g} g. Combien pèse-t-il en grammes ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une masse écrite en deux unités se convertit en une seule en additionnant.",
-          "On transforme d'abord les kilogrammes en grammes, puis on ajoute les grammes déjà là.",
-          `${kg} kg = ${kg * 1000} g. On ajoute les ${g} g : ${kg * 1000} + ${g} = ${total}.`,
-          `Le sac pèse ${total} g.`,
-        ),
-      };
-    },
   },
 
   /* =========================================================
@@ -472,84 +280,6 @@ export const masseBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "masse", "comparer", "piege", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_masse_comparer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_comparer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Même unité d'abord, comparaison ensuite.",
-    // ⛔ Sans canvas, pour la même raison : la balance penche et vend la mèche.
-    tags: ["ce2", "masse", "comparer", "piege", "template"],
-    generate: () => {
-      // Le nombre en grammes est TOUJOURS plus grand que celui en kilogrammes :
-      // c'est ce décalage qui fait tomber les élèves dans le piège.
-      const kg = randomInt(1, 5);
-      const enG = kg * 1000;
-      const g = randomChoice([enG - randomInt(50, 400), enG + randomInt(50, 400)]);
-      const gagnant = g > enG ? `${g} g` : `${kg} kg`;
-      return {
-        text: `Qu'est-ce qui est le plus lourd : ${kg} kg ou ${g} g ?`,
-        format: "qcm",
-        choices: makeChoices(gagnant, [
-          g > enG ? `${kg} kg` : `${g} g`,
-          "c'est pareil",
-          "on ne peut pas savoir",
-        ]),
-        expected: [gagnant],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On ne compare deux masses qu'après les avoir écrites dans la même unité.",
-          "On convertit les kilogrammes en grammes, car 1 kg = 1000 g.",
-          `${kg} kg = ${enG} g. On compare alors ${enG} g et ${g} g : ${g > enG ? `${g} est plus grand que ${enG}` : `${enG} est plus grand que ${g}`}.`,
-          `Le plus lourd est ${gagnant}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_comparer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Écris les trois masses en grammes avant de choisir.",
-    tags: ["ce2", "masse", "comparer", "template"],
-    generate: () => {
-      const petit = randomInt(150, 700);
-      const moyen = randomInt(1100, 1900);
-      const gros = randomInt(2, 5) * 1000 + randomInt(100, 900);
-      const items = shuffle([
-        { texte: `${petit} g`, g: petit },
-        { texte: `${moyen} g`, g: moyen },
-        { texte: `${Math.floor(gros / 1000)} kg ${gros % 1000} g`, g: gros },
-      ]);
-      const maxG = Math.max(...items.map((i) => i.g));
-      const gagnant = items.find((i) => i.g === maxG)!;
-      return {
-        text: `Laquelle de ces trois masses est la PLUS LOURDE : ${items.map((i) => i.texte).join(", ")} ?`,
-        format: "qcm",
-        choices: makeChoices(gagnant.texte, [
-          ...items.filter((i) => i.g !== maxG).map((i) => i.texte),
-          "elles sont égales",
-        ]),
-        expected: [gagnant.texte],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Pour comparer plusieurs masses, on les écrit toutes dans la même unité.",
-          "On choisit le gramme, la plus petite unité de la liste, et on convertit : 1 kg = 1000 g.",
-          `En grammes : ${items.map((i) => `${i.texte} = ${i.g} g`).join(" ; ")}. Le plus grand nombre est ${maxG}.`,
-          `La plus lourde est ${gagnant.texte}.`,
-        ),
-      };
-    },
-  },
 
   /* =========================================================
      CE2_MASSE_CHOISIR_UNITE — l'unité la mieux adaptée
@@ -622,85 +352,6 @@ export const masseBank: TutorBankItemV4[] = [
       "On pèse un camion en tonnes.",
     ),
     tags: ["ce2", "masse", "choisir_unite", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_choisir_unite_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_choisir_unite",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Imagine l'objet dans tes bras, puis choisis l'unité.",
-    tags: ["ce2", "masse", "choisir_unite", "template"],
-    generate: () => {
-      const objets = [
-        { nom: "une gomme", unite: "le gramme", ordre: "environ 15 g" },
-        { nom: "une lettre", unite: "le gramme", ordre: "environ 20 g" },
-        { nom: "une mangue", unite: "le gramme", ordre: "environ 400 g" },
-        { nom: "un sac de riz", unite: "le kilogramme", ordre: "environ 5 kg" },
-        { nom: "un élève de CE2", unite: "le kilogramme", ordre: "environ 25 kg" },
-        { nom: "une voiture", unite: "la tonne", ordre: "environ 1 t" },
-        { nom: "un bus", unite: "la tonne", ordre: "environ 12 t" },
-        { nom: "un cahier", unite: "le gramme", ordre: "environ 200 g" },
-      ] as const;
-      const o = randomChoice(objets);
-      return {
-        text: `Quelle unité choisis-tu pour peser ${o.nom} ?`,
-        format: "qcm",
-        choices: makeChoices(o.unite, [
-          "le gramme",
-          "le kilogramme",
-          "la tonne",
-          "le litre",
-        ]),
-        expected: [o.unite],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On choisit l'unité qui donne un nombre simple, sans virgule et sans une file de zéros.",
-          "On imagine l'objet, puis on essaie les unités une par une.",
-          `Pour ${o.nom}, la bonne masse est ${o.ordre}. Une autre unité donnerait un nombre trop grand ou trop petit.`,
-          `On utilise ${o.unite}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_choisir_unite_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_choisir_unite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le nombre peut être juste et l'unité fausse. Regarde l'unité.",
-    tags: ["ce2", "masse", "choisir_unite", "piege", "template"],
-    generate: () => {
-      const phrases = [
-        { objet: "une pomme", nombre: 150, bonne: "g", fausse: "kg" },
-        { objet: "un élève de CE2", nombre: 25, bonne: "kg", fausse: "g" },
-        { objet: "un camion", nombre: 15, bonne: "t", fausse: "kg" },
-        { objet: "un stylo", nombre: 10, bonne: "g", fausse: "kg" },
-        { objet: "un sac de ciment", nombre: 25, bonne: "kg", fausse: "t" },
-        { objet: "un chat", nombre: 4, bonne: "kg", fausse: "t" },
-      ] as const;
-      const p = randomChoice(phrases);
-      return {
-        text: `Un élève écrit : « ${p.objet} pèse ${p.nombre} ${p.fausse} ». Quelle unité fallait-il écrire ?`,
-        format: "qcm",
-        choices: makeChoices(p.bonne, ["g", "kg", "t", "L"]),
-        expected: [p.bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Le nombre et l'unité vont ensemble : changer l'unité change complètement la masse.",
-          "On garde le nombre et on cherche l'unité qui rend la phrase possible.",
-          `${p.nombre} ${p.fausse} est absurde pour ${p.objet}. Avec ${p.bonne}, la phrase devient juste : ${p.objet} pèse environ ${p.nombre} ${p.bonne}.`,
-          `Il fallait écrire ${p.nombre} ${p.bonne}.`,
-        ),
-      };
-    },
   },
 
   /* =========================================================
@@ -777,85 +428,6 @@ export const masseBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "masse", "estimer", "reunion", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_masse_estimer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_estimer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compare à un objet que tu as déjà soulevé.",
-    tags: ["ce2", "masse", "estimer", "template", "canvas"],
-    generate: () => {
-      const refs = [
-        { objet: "une brique de lait", icon: "🥛", bonne: "1 kg", pourquoi: "on la soulève d'une main, sans effort" },
-        { objet: "une gomme", icon: "🧽", bonne: "15 g", pourquoi: "on la sent à peine dans la trousse" },
-        { objet: "un cartable plein", icon: "🎒", bonne: "3 kg", pourquoi: "on le porte sur le dos toute la journée" },
-        { objet: "une voiture", icon: "🚗", bonne: "1 t", pourquoi: "il faut une grue pour la soulever" },
-        { objet: "un œuf", icon: "🥚", bonne: "60 g", pourquoi: "il tient dans le creux de la main" },
-        { objet: "un sac de riz de la cuisine", icon: "🍚", bonne: "5 kg", pourquoi: "on le porte à deux mains" },
-      ] as const;
-      const r = randomChoice(refs);
-      const autres = refs.filter((x) => x.bonne !== r.bonne).map((x) => x.bonne);
-      const choices = makeChoices(r.bonne, autres);
-      return {
-        text: `Environ combien pèse ${r.objet} ?`,
-        format: "qcm",
-        choices,
-        expected: [r.bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Estimer, c'est comparer à une masse qu'on connaît par cœur.",
-          "On cherche un repère du quotidien avant de choisir un nombre.",
-          `Pour ${r.objet}, le repère est simple : ${r.pourquoi}. Cela donne ${r.bonne}.`,
-          `${r.objet} pèse environ ${r.bonne}.`,
-        ),
-        // Variante « estimation » : le canvas force showMasses à false, l'objet
-        // est donc montré SANS son étiquette de masse. Rien n'est vendu.
-        canvas: masseCanvas({
-          variant: "estimation",
-          objet: { label: r.objet, icon: r.icon },
-          choix: choices,
-          display: { showLabels: true },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_estimer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_estimer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Combien de fois la référence tient-elle dans la masse cherchée ?",
-    tags: ["ce2", "masse", "estimer", "template"],
-    generate: () => {
-      const ref = randomChoice([
-        { objet: "un paquet de sucre", masse: 500 },
-        { objet: "une tablette de chocolat", masse: 100 },
-        { objet: "une boîte de conserve", masse: 250 },
-      ]);
-      const kg = randomInt(2, 6);
-      const nb = (kg * 1000) / ref.masse;
-      return {
-        text: `${ref.objet.charAt(0).toUpperCase() + ref.objet.slice(1)} pèse ${ref.masse} g. Combien en faut-il pour atteindre ${kg} kg ?`,
-        format: "short",
-        expected: [String(nb)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Estimer une masse, c'est reporter une référence connue autant de fois qu'il faut.",
-          "On écrit la masse cherchée dans la même unité que la référence, puis on partage.",
-          `${kg} kg = ${kg * 1000} g. Puis ${kg * 1000} ÷ ${ref.masse} = ${nb}.`,
-          `Il en faut ${nb}.`,
-        ),
-      };
-    },
-  },
 
   /* =========================================================
      CE2_MASSE_PROBLEME — un problème de masses
@@ -905,77 +477,6 @@ export const masseBank: TutorBankItemV4[] = [
       "Les billes pèsent 900 g.",
     ),
     tags: ["ce2", "masse", "probleme", "piege", "tare"],
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_probleme_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_probleme",
-    difficulty: 3,
-    theme: "reunion",
-    hint: "Même unité d'abord, opération ensuite.",
-    tags: ["ce2", "masse", "probleme", "reunion", "template"],
-    generate: () => {
-      const contexte = randomChoice([
-        { qui: "Malia", a: "de letchis", b: "de bringelles", ou: "au marché forain de Saint-Paul" },
-        { qui: "Kevin", a: "de mangues", b: "de chouchous", ou: "au marché de Saint-Pierre" },
-        { qui: "Naïla", a: "de riz", b: "de grains", ou: "à la boutique du quartier" },
-      ]);
-      const kg = randomInt(1, 5);
-      const g = randomInt(100, 900);
-      const total = kg * 1000 + g;
-      return {
-        text: `${contexte.qui} achète ${kg} kg ${contexte.a} et ${g} g ${contexte.b} ${contexte.ou}. Combien pèse le panier, en grammes ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "On n'additionne des masses que si elles sont écrites dans la même unité.",
-          "On convertit les kilogrammes en grammes, puis on additionne.",
-          `${kg} kg = ${kg * 1000} g. Puis ${kg * 1000} + ${g} = ${total}.`,
-          `Le panier pèse ${total} g.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_probleme_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_probleme",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Le récipient plein pèse le récipient PLUS son contenu.",
-    tags: ["ce2", "masse", "probleme", "tare", "template"],
-    generate: () => {
-      const recipient = randomChoice([
-        { nom: "un seau", contenu: "de sable" },
-        { nom: "une caisse", contenu: "de fruits" },
-        { nom: "un panier", contenu: "de légumes" },
-        { nom: "un bocal", contenu: "de billes" },
-      ]);
-      const vide = randomInt(2, 9) * 100;
-      const kgPlein = randomInt(2, 6);
-      const gPlein = randomInt(1, 9) * 100;
-      const plein = kgPlein * 1000 + gPlein;
-      const contenu = plein - vide;
-      return {
-        text: `${recipient.nom.charAt(0).toUpperCase() + recipient.nom.slice(1)} vide pèse ${vide} g. Rempli ${recipient.contenu}, il pèse ${kgPlein} kg ${gPlein} g. Combien pèse le contenu, en grammes ?`,
-        format: "short",
-        expected: [String(contenu)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand on pèse un contenu dans un récipient, la balance affiche les deux ensemble.",
-          "On convertit la masse totale en grammes, puis on retire la masse du récipient vide.",
-          `${kgPlein} kg ${gPlein} g = ${plein} g. Puis ${plein} - ${vide} = ${contenu}.`,
-          `Le contenu pèse ${contenu} g.`,
-        ),
-      };
-    },
   },
 
   /* =========================================================
@@ -1031,74 +532,388 @@ export const masseBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "masse", "defi", "piege"],
   },
-  {
-    kind: "template",
-    id: "ce2_masse_defi_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Additionne toutes les masses posées sur l'autre plateau.",
-    tags: ["ce2", "masse", "defi", "template", "canvas"],
-    generate: () => {
-      const grosse = randomChoice([500, 200, 1000]);
-      const petite = randomChoice([50, 100, 200]);
-      const nb = randomInt(2, 4);
-      const total = grosse + nb * petite;
-      return {
-        text: `Une balance est en équilibre : d'un côté un paquet, de l'autre une masse de ${grosse} g et ${nb} masses de ${petite} g. Combien pèse le paquet, en grammes ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une balance en équilibre annonce que les deux plateaux pèsent pareil.",
-          "On additionne toutes les masses de l'autre plateau, en comptant chaque exemplaire.",
-          `Les petites masses font ${nb} × ${petite} = ${nb * petite} g. Avec la grosse : ${grosse} + ${nb * petite} = ${total} g.`,
-          `Le paquet pèse ${total} g.`,
-        ),
-        canvas: masseCanvas({
-          variant: "balance",
-          gauche: { label: "Paquet", icon: "📦", masse: "? g", grammes: total },
-          droite: { label: "Masses", icon: "⚖️", masse: `${grosse} g + ${nb} × ${petite} g`, grammes: total },
-          display: { showMasses: true, showLabels: true, showComparison: false },
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_masse_defi_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "masse",
-    microId: "ce2_masse_defi",
-    difficulty: 5,
-    theme: "reunion",
-    hint: "Cherche d'abord ce que pèse un seul, puis multiplie.",
-    tags: ["ce2", "masse", "defi", "reunion", "template"],
-    generate: () => {
-      const contexte = randomChoice([
-        { objet: "cageots de letchis", lieu: "à la coopérative de Saint-Joseph" },
-        { objet: "sacs de riz", lieu: "à la boutique du quartier" },
-        { objet: "caisses de mangues", lieu: "au marché forain" },
-      ]);
-      const parUnite = randomChoice([2, 4, 5]);
-      const nbUnites = randomInt(3, 8);
-      const totalKg = parUnite * nbUnites;
-      return {
-        text: `${nbUnites} ${contexte.objet} identiques pèsent ${totalKg} kg en tout ${contexte.lieu}. On en emporte 3. Combien de kilogrammes emporte-t-on ?`,
-        format: "short",
-        expected: [String(parUnite * 3)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand des objets sont identiques, ils pèsent tous la même chose.",
-          "On cherche d'abord la masse d'un seul, en partageant le total, puis on multiplie par ce qu'on emporte.",
-          `Un seul pèse ${totalKg} ÷ ${nbUnites} = ${parUnite} kg. Pour 3 : ${parUnite} × 3 = ${parUnite * 3} kg.`,
-          `On emporte ${parUnite * 3} kg.`,
-        ),
-      };
-    },
-  },
 ];
+
+/* =========================================================
+   LES GABARITS (10/11/2026)
+   ⛔ Avant : une phrase par gabarit, 6 à 17 squelettes par micro,
+   11 à 18 répétitions sur 20. Les familles communes aux trois
+   grandeurs sont dans `grandeurs-ce2.ts` ; ici, la fiche de la
+   masse (unités, ce qu'un enfant pèse) et les problèmes.
+========================================================= */
+
+const MASSE: Grandeur = {
+  notionId: "masse",
+  mot: "masse",
+  laGrandeur: "une masse",
+  unites: [
+    { sym: "g", nom: "gramme", le: "le gramme", base: 1 },
+    { sym: "kg", nom: "kilogramme", le: "le kilogramme", base: 1000 },
+    { sym: "t", nom: "tonne", le: "la tonne", base: 1000000 },
+  ],
+  instrument: "une balance",
+  verbe: "pèse",
+  infinitif: "peser",
+  avecQuelle: "Avec quelle unité pèse-t-on",
+  sup: { m: "le plus lourd", f: "la plus lourde" },
+  questionPlus: "Qu'est-ce qui est le plus lourd",
+  supports: [
+    { le: "le sac de pommes", un: "un sac de pommes", icon: "🍎", grand: "kg", petit: "g", max: 5 },
+    { le: "le paquet de farine", un: "un paquet de farine", icon: "📦", grand: "kg", petit: "g", max: 3 },
+    { le: "la pastèque", un: "une pastèque", f: true, icon: "🍉", grand: "kg", petit: "g", max: 6 },
+    { le: "le panier de légumes", un: "un panier de légumes", icon: "🧺", grand: "kg", petit: "g", max: 6 },
+    { le: "le cartable", un: "un cartable", icon: "🎒", grand: "kg", petit: "g", max: 5 },
+    { le: "la citrouille", un: "une citrouille", f: true, icon: "🎃", grand: "kg", petit: "g", max: 8 },
+    { le: "le carton de livres", un: "un carton de livres", icon: "📚", grand: "kg", petit: "g", max: 9 },
+    { le: "le gâteau d'anniversaire", un: "un gâteau d'anniversaire", icon: "🎂", grand: "kg", petit: "g", max: 3 },
+    { le: "le chiot", un: "un chiot", icon: "🐶", grand: "kg", petit: "g", max: 9 },
+    { le: "la valise", un: "une valise", f: true, icon: "🧳", grand: "kg", petit: "g", max: 9 },
+    { le: "le colis", un: "un colis", icon: "📦", grand: "kg", petit: "g", max: 9 },
+    { le: "le sac de graines de Pic", un: "un sac de graines", icon: "🌻", grand: "kg", petit: "g", max: 4 },
+    { le: "l'éléphant du zoo", un: "un éléphant", icon: "🐘", grand: "t", petit: "kg", max: 6 },
+    { le: "le camion de pompiers", un: "un camion de pompiers", icon: "🚒", grand: "t", petit: "kg", max: 9 },
+    { le: "le tracteur de la ferme", un: "un tracteur", icon: "🚜", grand: "t", petit: "kg", max: 5 },
+    { le: "l'hippopotame", un: "un hippopotame", icon: "🦛", grand: "t", petit: "kg", max: 3 },
+  ],
+  objets: [
+    { nom: "un œuf", quoi: "un œuf", valeur: 60, unite: "g", icon: "🥚" },
+    { nom: "une pomme", quoi: "une pomme", valeur: 150, unite: "g", icon: "🍎" },
+    { nom: "une pastèque", quoi: "une pastèque", valeur: 4, unite: "kg", icon: "🍉" },
+    { nom: "un chat", quoi: "un chat", valeur: 4, unite: "kg", icon: "🐈" },
+    { nom: "un éléphant", quoi: "un éléphant", valeur: 5, unite: "t", icon: "🐘" },
+    { nom: "une voiture", quoi: "une voiture", valeur: 1, unite: "t", icon: "🚗" },
+    { nom: "un crayon", quoi: "un crayon", valeur: 10, unite: "g", icon: "✏️" },
+    { nom: "un cahier", quoi: "un cahier", valeur: 100, unite: "g", icon: "📒" },
+    { nom: "un vélo", quoi: "un vélo", valeur: 12, unite: "kg", icon: "🚲" },
+    { nom: "un enfant de CE2", quoi: "un enfant de CE2", valeur: 25, unite: "kg", icon: "🧒" },
+    { nom: "une plume", quoi: "une plume", valeur: 1, unite: "g", icon: "🪶" },
+    { nom: "une banane", quoi: "une banane", valeur: 120, unite: "g", icon: "🍌" },
+    { nom: "un camion", quoi: "un camion", valeur: 10, unite: "t", icon: "🚚" },
+    { nom: "une fraise", quoi: "une fraise", valeur: 15, unite: "g", icon: "🍓" },
+    { nom: "un ballon de football", quoi: "un ballon de football", valeur: 400, unite: "g", icon: "⚽" },
+    { nom: "un chiot", quoi: "un chiot", valeur: 3, unite: "kg", icon: "🐶" },
+    { nom: "un hippopotame", quoi: "un hippopotame", valeur: 2, unite: "t", icon: "🦛" },
+    { nom: "une baguette de pain", quoi: "une baguette de pain", valeur: 250, unite: "g", icon: "🥖" },
+    { nom: "un dictionnaire", quoi: "un gros dictionnaire", valeur: 2, unite: "kg", icon: "📕" },
+    { nom: "une citrouille", quoi: "une grosse citrouille", valeur: 6, unite: "kg", icon: "🎃" },
+  ],
+  cartes: (items) =>
+    masseCanvas({
+      variant: "objets",
+      objets: items.map((i) => ({ label: i.label, icon: i.icon, masse: i.valeur })),
+      display: { showMasses: items.some((i) => i.valeur), showLabels: true },
+    }),
+};
+
+/* ---------------------------------------------------------
+   PROBLÈMES DE MASSES
+--------------------------------------------------------- */
+
+const ACHATS: readonly { lieu: string; gros: string; petit: string; icon: string; icon2: string }[] = [
+  { lieu: "Au marché", gros: "pommes de terre", petit: "fraises", icon: "🥔", icon2: "🍓" },
+  { lieu: "À l'épicerie", gros: "riz", petit: "bonbons", icon: "🍚", icon2: "🍬" },
+  { lieu: "Chez la boulangère", gros: "farine", petit: "chocolat", icon: "🌾", icon2: "🍫" },
+  { lieu: "À la ferme", gros: "carottes", petit: "cerises", icon: "🥕", icon2: "🍒" },
+  { lieu: "Au marché", gros: "pommes", petit: "champignons", icon: "🍎", icon2: "🍄" },
+  { lieu: "Au jardin", gros: "tomates", petit: "radis", icon: "🍅", icon2: "🌱" },
+  { lieu: "À la fête foraine", gros: "pommes d'amour", petit: "barbe à papa", icon: "🍎", icon2: "🍭" },
+  { lieu: "Chez le fromager", gros: "fromage", petit: "beurre", icon: "🧀", icon2: "🧈" },
+  { lieu: "À l'animalerie", gros: "croquettes", petit: "graines pour oiseaux", icon: "🦴", icon2: "🌻" },
+  { lieu: "Au verger", gros: "poires", petit: "prunes", icon: "🍐", icon2: "🍑" },
+];
+
+function masseTotale(e: Etoile): Q {
+  const a = ACHATS[rint(0, ACHATS.length - 1)];
+  const p = quelquun();
+  const kg = rint(1, e === 2 ? 3 : 5);
+  const g = e === 2 ? pick([100, 200, 250, 300, 400, 500, 600, 750, 800]) : rint(11, 98) * 10 + pick([0, 5]);
+  const total = kg * 1000 + g;
+  const bonne = `${total} g`;
+  return {
+    text: `${pick([
+      `${a.lieu}, ${p.nom} achète ${kg} kg de ${a.gros} et ${g} g de ${a.petit}.`,
+      `${a.lieu}, ${p.nom} met dans son panier ${kg} kg de ${a.gros}, puis ${g} g de ${a.petit}.`,
+      `${a.lieu}, on pèse ${kg} kg de ${a.gros} et ${g} g de ${a.petit} pour ${p.nom}.`,
+    ])} ${pick([
+      "Combien pèsent ses achats, en grammes ?",
+      "Quelle est la masse de son panier, en grammes ?",
+      `Combien de grammes porte-t-${p.il} en tout ?`,
+      "Écris la masse totale en grammes.",
+    ])}`,
+    format: "qcm",
+    choices: choix(bonne, [`${kg + g} g`, `${Number(`${kg}${g}`)} g`, `${total + 1000} g`, `${kg * 100 + g} g`, `${total + 100} g`]),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Pour additionner deux masses, on les écrit dans la même unité. 1 kg = 1000 g.",
+      "On change les kilogrammes en grammes, puis on ajoute.",
+      `${kg} kg = ${kg * 1000} g ; ${kg * 1000} + ${g} = ${total}.`,
+      `Ses achats pèsent ${bonne}.`,
+    ),
+    canvas: MASSE.cartes!([
+      { label: a.gros, icon: a.icon, valeur: `${kg} kg` },
+      { label: a.petit, icon: a.icon2, valeur: `${g} g` },
+    ]),
+  };
+}
+
+const RECIPIENTS_VIDES: readonly { vide: string; plein: string; contenu: string; icon: string }[] = [
+  { vide: "Une boîte vide", plein: "Remplie de billes", contenu: "les billes", icon: "📦" },
+  { vide: "Un seau vide", plein: "Rempli de sable", contenu: "le sable", icon: "🪣" },
+  { vide: "Un panier vide", plein: "Rempli de champignons", contenu: "les champignons", icon: "🧺" },
+  { vide: "Un coffre de pirate vide", plein: "Rempli de pièces d'or", contenu: "les pièces d'or", icon: "🪙" },
+  { vide: "Un aquarium vide", plein: "Rempli de cailloux", contenu: "les cailloux", icon: "🐠" },
+  { vide: "Un cartable vide", plein: "Rempli de livres", contenu: "les livres", icon: "🎒" },
+  { vide: "Une brouette vide", plein: "Remplie de terre", contenu: "la terre", icon: "🌱" },
+  { vide: "Un bocal vide", plein: "Rempli de bonbons", contenu: "les bonbons", icon: "🍬" },
+  { vide: "Une caisse vide", plein: "Remplie de mangues", contenu: "les mangues", icon: "🥭" },
+  { vide: "Un sac à dos vide", plein: "Rempli pour le pique-nique", contenu: "le pique-nique", icon: "🎒" },
+];
+
+function masseDuContenu(): Q {
+  const r = pick(RECIPIENTS_VIDES);
+  const vide = pick([200, 300, 400, 500, 600, 800]);
+  const kg = rint(1, 5);
+  const g = pick([0, 100, 200, 300, 400, 500, 600, 700, 900]);
+  const plein = kg * 1000 + g;
+  if (plein <= vide + 100) return masseDuContenu();
+  const contenu = plein - vide;
+  const bonne = `${contenu} g`;
+  return {
+    text: `${r.vide} pèse ${vide} g. ${r.plein}, ${r.vide.startsWith("Une") ? "elle" : "il"} pèse ${ecrire(kg, "kg", g, "g")}. ${pick([
+      `Combien ${r.contenu.startsWith("les") ? "pèsent" : "pèse"} ${r.contenu}, en grammes ?`,
+      `Quelle est la masse ${`de ${r.contenu}`.replace("de les", "des").replace("de le ", "du ")}, en grammes ?`,
+    ])}`,
+    format: "qcm",
+    choices: choix(bonne, [`${plein + vide} g`, `${kg * 1000 + g - vide / 10} g`, `${contenu + 100} g`, `${contenu - 100} g`, `${Math.abs(kg * 1000 - vide)} g`].filter((x) => x !== bonne)),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "La masse du contenu, c'est la masse pleine MOINS la masse vide.",
+      "On écrit tout en grammes, puis on soustrait.",
+      `${ecrire(kg, "kg", g, "g")} = ${plein} g ; ${plein} − ${vide} = ${contenu}.`,
+      `${r.contenu.charAt(0).toUpperCase() + r.contenu.slice(1)} pèse${r.contenu.startsWith("les") ? "nt" : ""} ${bonne}.`,
+    ),
+    canvas: MASSE.cartes!([
+      { label: "vide", icon: r.icon, valeur: `${vide} g` },
+      { label: "plein", icon: r.icon, valeur: ecrire(kg, "kg", g, "g") },
+    ]),
+  };
+}
+
+const RECETTES: readonly { quoi: string; ingr: string }[] = [
+  { quoi: "des crêpes", ingr: "farine" },
+  { quoi: "un gâteau au chocolat", ingr: "sucre" },
+  { quoi: "des cookies", ingr: "farine" },
+  { quoi: "une tarte aux pommes", ingr: "farine" },
+  { quoi: "de la confiture", ingr: "sucre" },
+  { quoi: "des gaufres", ingr: "farine" },
+  { quoi: "un gâteau pour le dragon", ingr: "sucre" },
+  { quoi: "des petits pains", ingr: "farine" },
+];
+
+function resteDuPaquet(): Q {
+  const r = pick(RECETTES);
+  const kg = pick([1, 1, 2]);
+  const u1 = pick([150, 200, 250, 300, 350]);
+  const u2 = pick([100, 125, 150, 200, 250]);
+  const reste = kg * 1000 - u1 - u2;
+  const chef = pick(["Le chef cuisinier", "La boulangère", "Mamie", "Nina", "Téo", "Le pâtissier"]);
+  const bonne = `${reste} g`;
+  return {
+    text: `${chef} a un paquet de ${kg} kg de ${r.ingr}. ${pick(["Il en faut", "On prend"])} ${u1} g pour ${r.quoi}, puis ${u2} g pour la pâte du lendemain. ${pick([
+      "Combien de grammes reste-t-il dans le paquet ?",
+      "Quelle masse reste-t-il, en grammes ?",
+    ])}`,
+    format: "qcm",
+    choices: choix(bonne, [`${kg * 1000 - u1} g`, `${kg * 100 - u1 - u2 > 0 ? kg * 100 - u1 - u2 : reste + 50} g`, `${reste + 100} g`, `${u1 + u2} g`, `${reste - 10} g`]),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "1 kg = 1000 g.",
+      "On écrit le paquet en grammes, puis on enlève ce qu'on a pris.",
+      `${kg} kg = ${kg * 1000} g ; ${kg * 1000} − ${u1} − ${u2} = ${reste}.`,
+      `Il reste ${bonne}.`,
+    ),
+    canvas: MASSE.cartes!([{ label: r.ingr, icon: "📦", valeur: `${kg} kg` }]),
+  };
+}
+
+function balanceEquilibre(): Q {
+  const choses = pick([
+    { label: "un paquet", le: "le paquet", icon: "📦" },
+    { label: "une citrouille", le: "la citrouille", icon: "🎃" },
+    { label: "un melon", le: "le melon", icon: "🍈" },
+    { label: "un chou", le: "le chou", icon: "🥬" },
+    { label: "un ananas", le: "l'ananas", icon: "🍍" },
+    { label: "un ours en peluche", le: "l'ours en peluche", icon: "🧸" },
+    { label: "un coffre au trésor", le: "le coffre au trésor", icon: "🪙" },
+    { label: "un œuf de dinosaure", le: "l'œuf de dinosaure", icon: "🥚" },
+  ]);
+  const gros = pick([500, 1000, 1000, 2000]);
+  const petite = pick([100, 200, 50]);
+  const nb = rint(2, 4);
+  const total = gros + petite * nb;
+  const p = quelquun();
+  const desc = `une masse de ${gros >= 1000 ? `${gros / 1000} kg` : `${gros} g`} et ${nb} masses de ${petite} g`;
+  return {
+    text: `${p.nom} pose ${choses.label} sur un plateau de la balance. Sur l'autre plateau : ${desc}. La balance est en équilibre. ${pick([
+      `Combien pèse ${choses.le}, en grammes ?`,
+      `Quelle est la masse de ${choses.le}, en grammes ?`.replace("de le ", "du "),
+      "Combien de grammes faut-il écrire sur l'étiquette ?",
+    ])}`,
+    format: "qcm",
+    choices: choix(`${total} g`, [`${gros + petite} g`, `${gros + nb} g`, `${total + petite} g`, `${2 * total} g`, `${gros * nb + petite} g`]),
+    expected: [`${total} g`],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Quand la balance est en équilibre, les deux plateaux portent la même masse.",
+      "On additionne toutes les masses marquées, en grammes.",
+      `${gros} + ${Array.from({ length: nb }, () => petite).join(" + ")} = ${total}.`,
+      `${choses.le.charAt(0).toUpperCase() + choses.le.slice(1)} pèse ${total} g.`,
+    ),
+    canvas: masseCanvas({
+      variant: "balance",
+      gauche: { label: choses.label, icon: choses.icon, grammes: total },
+      droite: { label: `${gros >= 1000 ? `${gros / 1000} kg` : `${gros} g`} + ${nb} × ${petite} g`, icon: "⚖️", grammes: total },
+      display: { showMasses: false, showLabels: true, showComparison: true },
+    }),
+  };
+}
+
+function objetsIdentiques(): Q {
+  const c = pick([
+    { objet: "cageots de pommes", icon: "🍎" },
+    { objet: "sacs de riz", icon: "🍚" },
+    { objet: "caisses de mangues", icon: "🥭" },
+    { objet: "sacs de croquettes", icon: "🦴" },
+    { objet: "cartons de livres", icon: "📚" },
+    { objet: "sacs de sable", icon: "🪣" },
+    { objet: "paniers de champignons", icon: "🧺" },
+    { objet: "sacs de graines", icon: "🌻" },
+  ]);
+  const un = pick([2, 3, 4, 5]);
+  const nb = rint(3, 8);
+  const emporte = rint(2, nb - 1);
+  const total = un * nb;
+  const p = quelquun();
+  if (Math.random() < 0.5) {
+    return {
+      text: `${nb} ${c.objet} identiques pèsent ${total} kg en tout. ${p.nom} en emporte ${emporte}. ${pick([
+        `Combien de kilogrammes emporte-t-${p.il} ?`,
+        `Quelle masse emporte-t-${p.il}, en kilogrammes ?`,
+      ])}`,
+      format: "qcm",
+      choices: choix(`${un * emporte} kg`, [`${total - emporte} kg`, `${un * emporte + un} kg`, `${un} kg`, `${total - un * emporte} kg`]),
+      expected: [`${un * emporte} kg`],
+      comparator: "mcq_exact",
+      explanation: exp(
+        "Des objets identiques ont tous la même masse.",
+        "On cherche d'abord la masse d'un seul en partageant, puis on multiplie.",
+        `Un seul : ${total} ÷ ${nb} = ${un} kg. Pour ${emporte} : ${un} × ${emporte} = ${un * emporte} kg.`,
+        `${p.nom} emporte ${un * emporte} kg.`,
+      ),
+    };
+  }
+  const g = pick([200, 250, 500]);
+  const n = rint(2, 4);
+  const total2 = n * (un * 1000 + g);
+  return {
+    text: `${p.nom} porte ${n} ${c.objet} de ${un} kg ${g} g chacun. ${pick(["Combien de grammes porte-t-" + p.il + " en tout ?", "Quelle est la masse totale, en grammes ?"])}`,
+    format: "qcm",
+    choices: choix(`${total2} g`, [`${n * un * 1000 + g} g`, `${n * (un + g)} g`, `${total2 + 1000} g`, `${un * 1000 + g} g`]),
+    expected: [`${total2} g`],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "1 kg = 1000 g.",
+      "On écrit la masse d'un objet en grammes, puis on la multiplie par le nombre d'objets.",
+      `${un} kg ${g} g = ${un * 1000 + g} g ; ${un * 1000 + g} × ${n} = ${total2}.`,
+      `Il porte ${total2} g.`,
+    ),
+    canvas: MASSE.cartes!(Array.from({ length: n }, () => ({ label: c.objet.split(" ")[0].replace(/s$/, ""), icon: c.icon, valeur: `${un} kg ${g} g` }))),
+  };
+}
+
+/* ---------------------------------------------------------
+   LES GABARITS, micro par micro
+--------------------------------------------------------- */
+
+function gab(id: string, microId: string, difficulty: Etoile, hint: string, tags: string[], generate: () => Q) {
+  return gabarit({ id, notionId: "masse", microId, difficulty, hint, tags }, generate);
+}
+
+const M_UNI = "ce2_masse_unites";
+const M_REL = "ce2_masse_relations";
+const M_CMP = "ce2_masse_comparer";
+const M_CHO = "ce2_masse_choisir_unite";
+const M_EST = "ce2_masse_estimer";
+const M_PRO = "ce2_masse_probleme";
+const M_DEF = "ce2_masse_defi";
+
+masseBank.push(
+  gab(`${M_UNI}_tpl_3`, M_UNI, 1, "Du plus petit au plus grand : g, kg, t. On pèse avec une balance.", ["unites"], () => unites(MASSE, 1)),
+  gab(`${M_UNI}_tpl_1`, M_UNI, 2, "g = gramme, kg = kilogramme, t = tonne.", ["unites", "canvas"], () => unites(MASSE, 2)),
+  gab(`${M_UNI}_tpl_2`, M_UNI, 3, "Du plus petit au plus grand : g, kg, t.", ["unites"], () => unites(MASSE, 3)),
+
+  gab(`${M_REL}_tpl_4`, M_REL, 1, "1 kg = 1000 g ; 1 t = 1000 kg.", ["relations"], () => relations(MASSE, 1)),
+  gab(`${M_REL}_tpl_1`, M_REL, 2, "Chaque kilogramme vaut 1000 grammes : on multiplie par 1000.", ["relations", "canvas"], () => relations(MASSE, 2)),
+  gab(`${M_REL}_tpl_2`, M_REL, 3, "Combien de fois 1000 dans ce nombre ?", ["relations", "canvas"], () => relations(MASSE, 3)),
+  gab(`${M_REL}_tpl_3`, M_REL, 4, "4 kg 33 g, ce n'est pas 433 g : 4 kg = 4000 g, puis on ajoute 33.", ["relations", "piege", "canvas"], () => relations(MASSE, 4)),
+
+  gab(`${M_CMP}_tpl_3`, M_CMP, 2, "Écris les deux masses en grammes avant de comparer.", ["comparer", "canvas"], () => comparer(MASSE, 2)),
+  gab(`${M_CMP}_tpl_1`, M_CMP, 3, "1 kg = 1000 g : compare les nombres seulement quand l'unité est la même.", ["comparer", "canvas"], () => comparer(MASSE, 3)),
+  gab(`${M_CMP}_tpl_2`, M_CMP, 4, "Écris toutes les masses en grammes, puis range-les.", ["comparer", "canvas"], () => comparer(MASSE, 4)),
+
+  gab(`${M_CHO}_tpl_3`, M_CHO, 1, "Léger : le gramme. Lourd comme un enfant : le kilogramme. Énorme : la tonne.", ["choisir_unite", "canvas"], () => choisirUnite(MASSE, 1)),
+  gab(`${M_CHO}_tpl_1`, M_CHO, 2, "Choisis l'unité qui donne un nombre ni trop grand, ni trop petit.", ["choisir_unite", "canvas"], () => choisirUnite(MASSE, 2)),
+  gab(`${M_CHO}_tpl_2`, M_CHO, 3, "Imagine la mesure : est-ce possible ?", ["choisir_unite", "canvas"], () => choisirUnite(MASSE, 3)),
+
+  gab(`${M_EST}_tpl_3`, M_EST, 1, "Une pomme pèse environ 150 g, un enfant de CE2 environ 25 kg.", ["estimer", "canvas"], () => estimer(MASSE, 1)),
+  gab(`${M_EST}_tpl_1`, M_EST, 2, "Regarde d'abord l'unité : grammes, kilogrammes ou tonnes ?", ["estimer", "canvas"], () => estimer(MASSE, 2)),
+  gab(`${M_EST}_tpl_4`, M_EST, 3, "Compare avec des objets que tu connais.", ["estimer", "canvas"], () => estimer(MASSE, 3)),
+  gab(`${M_EST}_tpl_2`, M_EST, 4, "Écris le total en grammes, puis cherche combien de fois le petit paquet y tient.", ["estimer"], () => combienDePaquets()),
+
+  gab(`${M_PRO}_tpl_3`, M_PRO, 2, "Écris tout en grammes, puis additionne.", ["probleme", "canvas"], () => masseTotale(2)),
+  gab(`${M_PRO}_tpl_1`, M_PRO, 3, "1 kg = 1000 g : change les kilogrammes en grammes, puis calcule.", ["probleme", "canvas"], () =>
+    Math.random() < 0.6 ? masseTotale(3) : resteDuPaquet(),
+  ),
+  gab(`${M_PRO}_tpl_2`, M_PRO, 4, "Le contenu, c'est le plein moins le vide.", ["probleme", "canvas"], () =>
+    Math.random() < 0.6 ? masseDuContenu() : resteDuPaquet(),
+  ),
+
+  gab(`${M_DEF}_tpl_1`, M_DEF, 5, "En équilibre, les deux plateaux portent la même masse.", ["defi", "balance", "canvas"], balanceEquilibre),
+  gab(`${M_DEF}_tpl_2`, M_DEF, 5, "Cherche d'abord la masse d'un seul objet.", ["defi", "canvas"], objetsIdentiques),
+);
+
+function combienDePaquets(): Q {
+  const c = pick([
+    { quoi: "Un paquet de sucre", pese: 500, pour: "la kermesse", u: ["paquet", "paquets"], de: "de sucre" },
+    { quoi: "Une boîte de conserve", pese: 250, pour: "la cantine", u: ["boîte", "boîtes"], de: "de conserves" },
+    { quoi: "Un sachet de graines", pese: 100, pour: "le jardin de l'école", u: ["sachet", "sachets"], de: "de graines" },
+    { quoi: "Un pot de confiture", pese: 500, pour: "le goûter géant", u: ["pot", "pots"], de: "de confiture" },
+    { quoi: "Une plaquette de beurre", pese: 250, pour: "la boulangerie", u: ["plaquette", "plaquettes"], de: "de beurre" },
+    { quoi: "Un sac de billes", pese: 200, pour: "le concours de billes", u: ["sac", "sacs"], de: "de billes" },
+    { quoi: "Un paquet de pâtes", pese: 500, pour: "le repas des pirates", u: ["paquet", "paquets"], de: "de pâtes" },
+    { quoi: "Une boîte de croquettes", pese: 250, pour: "les chats du refuge", u: ["boîte", "boîtes"], de: "de croquettes" },
+  ] as const);
+  const kg = rint(1, 5);
+  const nb = (kg * 1000) / c.pese;
+  const p = quelquun();
+  return {
+    text: `${c.quoi} pèse ${c.pese} g. ${pick([
+      `Pour ${c.pour}, il faut ${kg} kg ${c.de}. Combien de ${c.u[1]} faut-il ?`,
+      `${p.nom} veut en rassembler ${kg} kg pour ${c.pour}. Combien de ${c.u[1]} lui faut-il ?`,
+      `Combien de ${c.u[1]} faut-il pour atteindre ${kg} kg ?`,
+    ])}`,
+    format: "qcm",
+    choices: choix(pl(nb, c.u[0], c.u[1]), [nb * 10, nb + 1, kg * 10, nb / 2 >= 1 && Number.isInteger(nb / 2) ? nb / 2 : nb + 2, kg].map((x) => pl(x, c.u[0], c.u[1]))),
+    expected: [pl(nb, c.u[0], c.u[1])],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "1 kg = 1000 g.",
+      "On écrit la masse voulue en grammes, puis on cherche combien de fois le petit paquet y tient.",
+      `${kg} kg = ${kg * 1000} g ; ${c.pese} × ${nb} = ${kg * 1000}.`,
+      `Il en faut ${nb}.`,
+    ),
+  };
+}

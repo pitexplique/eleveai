@@ -22,29 +22,9 @@
 // Les réponses numériques en `short` deviennent cliquables toutes seules —
 // l'unité écrite après le nombre est conservée par le convertisseur.
 
-import type { NumberLineCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomChoice<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
-// La bonne réponse est mise de côté, trois pièges distincts sont tirés ensuite,
-// puis on mélange. L'écrire autrement a rendu des questions impossibles à
-// réussir dans 79 banques : voir scripts/verifier-generateurs.mjs.
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
-}
+import type { CanvasFigure, NumberLineCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { choix, deuxPersonnes, gabarit, maj, pick, pl, quelquun, rint, troisPersonnes, type Etoile, type Q } from "./outils-mesures-ce2";
+import { choisirUnite, comparer, estimer, relations, unites, type Grandeur } from "./grandeurs-ce2";
 
 function numberLine(data: Omit<NumberLineCanvasData, "kind">): NumberLineCanvasData {
   return { kind: "number_line", ...data };
@@ -59,25 +39,6 @@ Calcul : ${calcul}
 
 Conclusion : ${conclusion}`;
 }
-
-/** Les cinq unités du CE2, de la plus petite à la plus grande. */
-const UNITES = [
-  { abrev: "mm", nom: "millimètre", pluriel: "millimètres" },
-  { abrev: "cm", nom: "centimètre", pluriel: "centimètres" },
-  { abrev: "dm", nom: "décimètre", pluriel: "décimètres" },
-  { abrev: "m", nom: "mètre", pluriel: "mètres" },
-  { abrev: "km", nom: "kilomètre", pluriel: "kilomètres" },
-] as const;
-
-/** Les relations que le programme demande de connaître, sans tableau. */
-const RELATIONS = [
-  { grande: "m", petite: "cm", facteur: 100, nomGrande: "mètre", nomPetite: "centimètres" },
-  { grande: "m", petite: "dm", facteur: 10, nomGrande: "mètre", nomPetite: "décimètres" },
-  { grande: "m", petite: "mm", facteur: 1000, nomGrande: "mètre", nomPetite: "millimètres" },
-  { grande: "dm", petite: "cm", facteur: 10, nomGrande: "décimètre", nomPetite: "centimètres" },
-  { grande: "cm", petite: "mm", facteur: 10, nomGrande: "centimètre", nomPetite: "millimètres" },
-  { grande: "km", petite: "m", facteur: 1000, nomGrande: "kilomètre", nomPetite: "mètres" },
-] as const;
 
 export const longueurBank: TutorBankItemV4[] = [
   /* =========================================================
@@ -159,72 +120,6 @@ export const longueurBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "longueur", "unites", "reunion", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_longueur_unites_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_unites",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "La première lettre donne la piste : m pour milli, c pour centi, k pour kilo.",
-    tags: ["ce2", "longueur", "unites", "template"],
-    generate: () => {
-      const u = randomChoice(UNITES);
-      return {
-        text: `Que veut dire l'abréviation « ${u.abrev} » ?`,
-        format: "qcm",
-        choices: makeChoices(u.nom, UNITES.map((x) => x.nom)),
-        expected: [u.nom],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Chaque unité de longueur a une abréviation, toujours écrite sans point et sans s.",
-          "On lit l'abréviation lettre par lettre : le m final dit « mètre », ce qu'il y a devant dit lequel.",
-          `« ${u.abrev} » se lit « ${u.nom} ». On l'écrit toujours pareil, même pour plusieurs ${u.pluriel} : 5 ${u.abrev}, jamais 5 ${u.abrev}s.`,
-          `« ${u.abrev} » veut dire ${u.nom}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_unites_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_unites",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Range-les dans ta tête : mm, cm, dm, m, km.",
-    tags: ["ce2", "longueur", "unites", "template"],
-    generate: () => {
-      const [i, j] = shuffle([0, 1, 2, 3, 4]).slice(0, 2).sort((a, b) => a - b);
-      const petite = UNITES[i];
-      const grande = UNITES[j];
-      const plusGrande = randomChoice([true, false]);
-      const bonne = plusGrande ? grande.nom : petite.nom;
-      return {
-        text: plusGrande
-          ? `Laquelle de ces deux unités est la PLUS GRANDE : le ${petite.nom} ou le ${grande.nom} ?`
-          : `Laquelle de ces deux unités est la PLUS PETITE : le ${petite.nom} ou le ${grande.nom} ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          plusGrande ? petite.nom : grande.nom,
-          "elles sont égales",
-          "on ne peut pas comparer",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Les unités de longueur se rangent toujours dans le même ordre : mm, cm, dm, m, km.",
-          "On place les deux unités dans cette liste et on regarde laquelle vient après.",
-          `Le ${petite.nom} vient avant le ${grande.nom} dans la liste : il est donc plus petit.`,
-          `C'est le ${bonne}.`,
-        ),
-      };
-    },
-  },
 
   /* =========================================================
      CE2_LONGUEUR_RELATIONS — passer d'une unité à l'autre
@@ -302,93 +197,6 @@ export const longueurBank: TutorBankItemV4[] = [
       "1 km = 1000 m.",
     ),
     tags: ["ce2", "longueur", "relations", "remarquable"],
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_relations_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_relations",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Une seule grande unité vaut déjà plusieurs petites : multiplie.",
-    tags: ["ce2", "longueur", "relations", "template"],
-    generate: () => {
-      const r = randomChoice(RELATIONS);
-      const n = randomInt(2, 9);
-      const total = n * r.facteur;
-      return {
-        text: `Combien de ${r.nomPetite} font ${n} ${r.grande} ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          `1 ${r.nomGrande} vaut ${r.facteur} ${r.nomPetite}.`,
-          "Pour passer d'une grande unité à une petite, on multiplie : il faut plus de petites unités pour la même longueur.",
-          `${n} × ${r.facteur} = ${total}. Donc ${n} ${r.grande} = ${total} ${r.petite}.`,
-          `${n} ${r.grande} font ${total} ${r.petite}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_relations_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_relations",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Plusieurs petites unités font une seule grande : partage.",
-    tags: ["ce2", "longueur", "relations", "template"],
-    generate: () => {
-      const r = randomChoice(RELATIONS);
-      const n = randomInt(2, 9);
-      const total = n * r.facteur;
-      return {
-        text: `Combien de ${r.grande === "m" ? "mètres" : r.nomGrande + "s"} font ${total} ${r.petite} ?`,
-        format: "short",
-        expected: [String(n)],
-        comparator: "number_equal",
-        explanation: exp(
-          `1 ${r.nomGrande} vaut ${r.facteur} ${r.nomPetite}.`,
-          "Pour passer d'une petite unité à une grande, on partage : il faut moins de grandes unités pour la même longueur.",
-          `${total} ÷ ${r.facteur} = ${n}. Donc ${total} ${r.petite} = ${n} ${r.grande}.`,
-          `${total} ${r.petite} font ${n} ${r.grande}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_relations_tpl_3",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_relations",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Convertis d'abord les mètres en centimètres, puis ajoute ce qui reste.",
-    tags: ["ce2", "longueur", "relations", "template"],
-    generate: () => {
-      const m = randomInt(1, 6);
-      const cm = randomInt(5, 95);
-      const total = m * 100 + cm;
-      return {
-        text: `Une planche mesure ${m} m ${cm} cm. Combien mesure-t-elle en centimètres ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une longueur écrite en deux unités se convertit en une seule en additionnant.",
-          "On transforme d'abord les mètres en centimètres, puis on ajoute les centimètres déjà là.",
-          `${m} m = ${m * 100} cm. On ajoute les ${cm} cm : ${m * 100} + ${cm} = ${total}.`,
-          `La planche mesure ${total} cm.`,
-        ),
-      };
-    },
   },
 
   /* =========================================================
@@ -475,73 +283,6 @@ export const longueurBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "longueur", "mesurer", "methode", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_longueur_mesurer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_mesurer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Soustrais la graduation de départ de celle d'arrivée.",
-    tags: ["ce2", "longueur", "mesurer", "template", "canvas"],
-    generate: () => {
-      const debut = randomInt(1, 6);
-      const longueur = randomInt(3, 8);
-      const fin = debut + longueur;
-      return {
-        text: `Sur cette règle, le segment commence à la graduation ${debut} et se termine à la graduation ${fin}. Combien mesure-t-il, en cm ?`,
-        format: "short",
-        expected: [String(longueur)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La mesure d'un segment, c'est l'écart entre les deux graduations.",
-          "Quand la règle ne commence pas à 0, on soustrait la graduation de départ.",
-          `${fin} - ${debut} = ${longueur}. Le segment mesure ${longueur} cm, et non ${fin} cm.`,
-          `Il mesure ${longueur} cm.`,
-        ),
-        canvas: numberLine({
-          min: 0,
-          max: 15,
-          step: 1,
-          points: [
-            { value: debut, label: "début", color: "#2563eb" },
-            { value: fin, label: "fin", color: "#ef4444" },
-          ],
-        }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_mesurer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_mesurer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Le segment doit être long de la longueur demandée : ajoute-la au point de départ.",
-    tags: ["ce2", "longueur", "mesurer", "template"],
-    generate: () => {
-      const cassure = randomInt(2, 5);
-      const longueur = randomInt(4, 9);
-      const arrivee = cassure + longueur;
-      return {
-        text: `Ta règle est cassée : elle commence à la graduation ${cassure}. Tu poses le début de ton segment sur cette graduation. Sur quelle graduation dois-tu t'arrêter pour tracer ${longueur} cm ?`,
-        format: "short",
-        expected: [String(arrivee)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Ce qui compte, c'est l'écart entre les deux graduations, pas le nombre de départ.",
-          "On ajoute la longueur voulue à la graduation de départ.",
-          `${cassure} + ${longueur} = ${arrivee}. De la graduation ${cassure} à la graduation ${arrivee}, il y a bien ${longueur} cm.`,
-          `Il faut s'arrêter sur la graduation ${arrivee}.`,
-        ),
-      };
-    },
-  },
 
   /* =========================================================
      CE2_LONGUEUR_COMPARER — comparer des longueurs
@@ -627,85 +368,6 @@ export const longueurBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "longueur", "comparer", "reunion", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_longueur_comparer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_comparer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Même unité d'abord, comparaison ensuite.",
-    tags: ["ce2", "longueur", "comparer", "piege", "template"],
-    generate: () => {
-      // Le nombre en centimètres est TOUJOURS plus grand que celui en mètres :
-      // c'est ce décalage qui fait tomber les élèves dans le piège.
-      const m = randomInt(1, 5);
-      const enCm = m * 100;
-      const cm = randomChoice([enCm - randomInt(1, 40), enCm + randomInt(1, 40)]);
-      const gagnant = cm > enCm ? `${cm} cm` : `${m} m`;
-      return {
-        text: `Qu'est-ce qui est le plus long : ${m} m ou ${cm} cm ?`,
-        format: "qcm",
-        choices: makeChoices(gagnant, [
-          cm > enCm ? `${m} m` : `${cm} cm`,
-          "c'est pareil",
-          "on ne peut pas savoir",
-        ]),
-        expected: [gagnant],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On ne compare deux longueurs qu'après les avoir écrites dans la même unité.",
-          "On convertit les mètres en centimètres, car 1 m = 100 cm.",
-          `${m} m = ${enCm} cm. On compare alors ${enCm} cm et ${cm} cm : ${cm > enCm ? `${cm} est plus grand que ${enCm}` : `${enCm} est plus grand que ${cm}`}.`,
-          `Le plus long est ${gagnant}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_comparer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Écris les trois longueurs en centimètres avant de choisir.",
-    tags: ["ce2", "longueur", "comparer", "template"],
-    generate: () => {
-      // Trois longueurs à comparer, dont une écrite en mètres et centimètres :
-      // c'est elle la plus longue, et c'est elle qui porte le plus petit nombre.
-      const petit = randomInt(20, 70);
-      const moyen = randomInt(120, 260);
-      const gros = randomInt(3, 6) * 100 + randomInt(10, 90);
-      const items = shuffle([
-        { texte: `${petit} cm`, cm: petit },
-        { texte: `${moyen} cm`, cm: moyen },
-        { texte: `${Math.floor(gros / 100)} m ${gros % 100} cm`, cm: gros },
-      ]);
-      const maxCm = Math.max(...items.map((i) => i.cm));
-      const gagnant = items.find((i) => i.cm === maxCm)!;
-      return {
-        text: `Range mentalement ces trois longueurs. Laquelle est la plus LONGUE : ${items.map((i) => i.texte).join(", ")} ?`,
-        format: "qcm",
-        choices: makeChoices(gagnant.texte, [
-          ...items.filter((i) => i.cm !== maxCm).map((i) => i.texte),
-          "elles sont égales",
-        ]),
-        expected: [gagnant.texte],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Pour comparer plusieurs longueurs, on les écrit toutes dans la même unité.",
-          "On choisit le centimètre, la plus petite unité de la liste, et on convertit : 1 m = 100 cm.",
-          `En centimètres : ${items.map((i) => `${i.texte} = ${i.cm} cm`).join(" ; ")}. Le plus grand nombre est ${maxCm}.`,
-          `La plus longue est ${gagnant.texte}.`,
-        ),
-      };
-    },
-  },
 
   /* =========================================================
      CE2_LONGUEUR_CHOISIR_UNITE — l'unité la mieux adaptée
@@ -780,85 +442,6 @@ export const longueurBank: TutorBankItemV4[] = [
       "On mesure cette distance en kilomètres.",
     ),
     tags: ["ce2", "longueur", "choisir_unite", "reunion", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_choisir_unite_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_choisir_unite",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Imagine l'objet, puis choisis l'unité qui donne le nombre le plus simple.",
-    tags: ["ce2", "longueur", "choisir_unite", "template"],
-    generate: () => {
-      const objets = [
-        { nom: "la longueur d'une gomme", unite: "le centimètre", ordre: "environ 4 cm" },
-        { nom: "l'épaisseur d'une pièce de monnaie", unite: "le millimètre", ordre: "environ 2 mm" },
-        { nom: "la hauteur d'un immeuble", unite: "le mètre", ordre: "environ 20 m" },
-        { nom: "la longueur d'un terrain de foot", unite: "le mètre", ordre: "environ 100 m" },
-        { nom: "la distance entre deux villes", unite: "le kilomètre", ordre: "des dizaines de kilomètres" },
-        { nom: "la largeur d'un cahier", unite: "le centimètre", ordre: "environ 17 cm" },
-        { nom: "l'épaisseur d'un cheveu", unite: "le millimètre", ordre: "moins de 1 mm" },
-        { nom: "la longueur d'un bus", unite: "le mètre", ordre: "environ 12 m" },
-      ] as const;
-      const o = randomChoice(objets);
-      return {
-        text: `Quelle unité choisis-tu pour mesurer ${o.nom} ?`,
-        format: "qcm",
-        choices: makeChoices(o.unite, [
-          "le millimètre",
-          "le centimètre",
-          "le mètre",
-          "le kilomètre",
-        ]),
-        expected: [o.unite],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On choisit l'unité qui donne un nombre simple, sans virgule et sans une file de zéros.",
-          "On imagine l'objet, puis on essaie les unités une par une.",
-          `Pour ${o.nom}, la bonne taille est ${o.ordre}. Une autre unité donnerait un nombre trop grand ou trop petit.`,
-          `On utilise ${o.unite}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_choisir_unite_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_choisir_unite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le nombre peut être juste et l'unité fausse. Regarde l'unité.",
-    tags: ["ce2", "longueur", "choisir_unite", "piege", "template"],
-    generate: () => {
-      const phrases = [
-        { objet: "une table de classe", nombre: 1, bonne: "m", fausse: "km" },
-        { objet: "une trousse", nombre: 20, bonne: "cm", fausse: "m" },
-        { objet: "un stade", nombre: 100, bonne: "m", fausse: "cm" },
-        { objet: "une fourmi", nombre: 5, bonne: "mm", fausse: "cm" },
-        { objet: "un tableau de classe", nombre: 3, bonne: "m", fausse: "cm" },
-        { objet: "une clé", nombre: 6, bonne: "cm", fausse: "m" },
-      ] as const;
-      const p = randomChoice(phrases);
-      return {
-        text: `Un élève écrit : « ${p.objet} mesure ${p.nombre} ${p.fausse} ». Quelle unité fallait-il écrire ?`,
-        format: "qcm",
-        choices: makeChoices(p.bonne, ["mm", "cm", "m", "km"]),
-        expected: [p.bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Le nombre et l'unité vont ensemble : changer l'unité change complètement la longueur.",
-          "On garde le nombre et on cherche l'unité qui rend la phrase possible.",
-          `${p.nombre} ${p.fausse} est absurde pour ${p.objet}. Avec ${p.bonne}, la phrase devient juste : ${p.objet} mesure environ ${p.nombre} ${p.bonne}.`,
-          `Il fallait écrire ${p.nombre} ${p.bonne}.`,
-        ),
-      };
-    },
   },
 
   /* =========================================================
@@ -935,72 +518,6 @@ export const longueurBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "longueur", "estimer", "reunion", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_longueur_estimer_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_estimer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compare à un objet que tu as déjà tenu dans la main.",
-    tags: ["ce2", "longueur", "estimer", "template"],
-    generate: () => {
-      const refs = [
-        { objet: "une règle d'écolier", bonne: "30 cm", pourquoi: "elle tient dans la trousse et couvre la largeur d'un cahier" },
-        { objet: "un lit d'enfant", bonne: "1 m 60", pourquoi: "on s'y allonge tout entier" },
-        { objet: "une salle de classe", bonne: "8 m", pourquoi: "il faut une dizaine de grands pas pour la traverser" },
-        { objet: "une pièce de 1 euro", bonne: "2 cm", pourquoi: "elle se cache derrière un ongle de pouce" },
-        { objet: "un stylo", bonne: "14 cm", pourquoi: "il fait à peu près la largeur d'une main d'adulte" },
-        { objet: "une porte d'entrée", bonne: "2 m", pourquoi: "un adulte passe dessous sans se baisser" },
-      ] as const;
-      const r = randomChoice(refs);
-      const autres = refs.filter((x) => x.bonne !== r.bonne).map((x) => x.bonne);
-      return {
-        text: `Environ combien mesure ${r.objet} ?`,
-        format: "qcm",
-        choices: makeChoices(r.bonne, autres),
-        expected: [r.bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Estimer, c'est comparer à une longueur qu'on connaît par cœur.",
-          "On cherche un repère du quotidien avant de choisir un nombre.",
-          `Pour ${r.objet}, le repère est simple : ${r.pourquoi}. Cela donne ${r.bonne}.`,
-          `${r.objet} mesure environ ${r.bonne}.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_estimer_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_estimer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Combien de fois la référence tient-elle dans la longueur cherchée ?",
-    tags: ["ce2", "longueur", "estimer", "template"],
-    generate: () => {
-      const pas = 50; // un pas d'élève, la référence qu'on fabrique en classe
-      const metres = randomInt(3, 20);
-      const nbPas = (metres * 100) / pas;
-      return {
-        text: `Un pas d'élève mesure environ ${pas} cm. Environ combien de pas faut-il pour parcourir ${metres} m ?`,
-        format: "short",
-        expected: [String(nbPas)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Estimer une longueur, c'est reporter une référence connue autant de fois qu'il faut.",
-          "On écrit la distance dans la même unité que la référence, puis on cherche combien de fois elle y tient.",
-          `${metres} m = ${metres * 100} cm. Or ${pas} cm entrent 2 fois dans 1 m, donc ${metres * 100} ÷ ${pas} = ${nbPas}.`,
-          `Il faut environ ${nbPas} pas.`,
-        ),
-      };
-    },
-  },
 
   /* =========================================================
      CE2_LONGUEUR_PROBLEME — un problème de longueurs
@@ -1048,72 +565,6 @@ export const longueurBank: TutorBankItemV4[] = [
       "Il reste 90 cm de corde.",
     ),
     tags: ["ce2", "longueur", "probleme", "deux_etapes"],
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_probleme_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_probleme",
-    difficulty: 3,
-    theme: "reunion",
-    hint: "Même unité d'abord, opération ensuite.",
-    tags: ["ce2", "longueur", "probleme", "reunion", "template"],
-    generate: () => {
-      const contexte = randomChoice([
-        { qui: "Malia", quoi: "du tissu pour un tour de cou", ou: "au marché forain de Saint-Paul" },
-        { qui: "Kevin", quoi: "de la ficelle pour un cerf-volant", ou: "sur la plage de l'Étang-Salé" },
-        { qui: "Naïla", quoi: "du fil pour un collier de graines", ou: "dans la cour de l'école" },
-      ]);
-      const m = randomInt(2, 6);
-      const cm = randomInt(20, 90);
-      const total = m * 100 + cm;
-      return {
-        text: `${contexte.qui} prépare ${contexte.quoi} ${contexte.ou}. Elle a ${m} m d'un côté et ${cm} cm de l'autre. Combien de centimètres en tout ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "On n'additionne des longueurs que si elles sont écrites dans la même unité.",
-          "On convertit les mètres en centimètres, puis on additionne.",
-          `${m} m = ${m * 100} cm. Puis ${m * 100} + ${cm} = ${total}.`,
-          `Cela fait ${total} cm en tout.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_probleme_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_probleme",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Ce qui reste, c'est le départ moins ce qu'on a enlevé.",
-    tags: ["ce2", "longueur", "probleme", "template"],
-    generate: () => {
-      const m = randomInt(2, 5);
-      const departCm = m * 100;
-      const coupe1 = randomInt(20, 80);
-      const coupe2 = randomInt(20, 80);
-      const reste = departCm - coupe1 - coupe2;
-      const objet = randomChoice(["une planche", "un ruban", "un tuyau d'arrosage", "une bande de papier"]);
-      return {
-        text: `On a ${objet} de ${m} m. On coupe d'abord ${coupe1} cm, puis ${coupe2} cm. Combien de centimètres reste-t-il ?`,
-        format: "short",
-        expected: [String(reste)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Chercher un reste, c'est enlever au total ce qui a été pris.",
-          "On convertit la longueur de départ, on additionne les morceaux coupés, puis on soustrait.",
-          `${m} m = ${departCm} cm. Les coupes font ${coupe1} + ${coupe2} = ${coupe1 + coupe2} cm. Il reste ${departCm} - ${coupe1 + coupe2} = ${reste} cm.`,
-          `Il reste ${reste} cm.`,
-        ),
-      };
-    },
   },
 
   /* =========================================================
@@ -1178,71 +629,513 @@ export const longueurBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "longueur", "defi", "qcm"],
   },
-  {
-    kind: "template",
-    id: "ce2_longueur_defi_tpl_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Compte combien de morceaux tiennent dans la longueur de départ.",
-    tags: ["ce2", "longueur", "defi", "template"],
-    generate: () => {
-      // 40 cm ne tombe juste que sur un nombre pair de mètres : 300 ÷ 40 n'est
-      // pas entier, et un défi qui se termine par 7,5 morceaux n'apprend rien.
-      const morceau = randomChoice([20, 25, 40, 50]);
-      const metres = morceau === 40 ? randomChoice([2, 4, 6]) : randomInt(2, 6);
-      const nb = (metres * 100) / morceau;
-      const objet = randomChoice(["ruban", "cordon", "fil de fer", "bande de papier"]);
-      return {
-        text: `Dans un ${objet} de ${metres} m, combien peut-on couper de morceaux de ${morceau} cm ?`,
-        format: "short",
-        expected: [String(nb)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Chercher combien de morceaux tiennent dans une longueur, c'est un groupement.",
-          "On écrit d'abord la longueur de départ dans l'unité des morceaux, puis on partage.",
-          `${metres} m = ${metres * 100} cm. Puis ${metres * 100} ÷ ${morceau} = ${nb}.`,
-          `On peut couper ${nb} morceaux.`,
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "ce2_longueur_defi_tpl_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "longueur",
-    microId: "ce2_longueur_defi",
-    difficulty: 5,
-    theme: "reunion",
-    hint: "Il manque une étape : cherche d'abord la longueur du deuxième.",
-    tags: ["ce2", "longueur", "defi", "reunion", "template"],
-    generate: () => {
-      const petit = randomInt(30, 90);
-      const ecart = randomInt(20, 70);
-      const grand = petit + ecart;
-      const total = petit + grand;
-      const contexte = randomChoice([
-        { qui: "Kevin", quoi: "deux bambous pour un cerf-volant" },
-        { qui: "Malia", quoi: "deux tiges de vacoa pour un panier" },
-        { qui: "Naïla", quoi: "deux morceaux de canne pour une cabane" },
-      ]);
-      return {
-        text: `${contexte.qui} coupe ${contexte.quoi}. Le premier mesure ${petit} cm. Le second mesure ${ecart} cm de plus. Quelle longueur, en cm, les deux mis bout à bout ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "« De plus » veut dire qu'on ajoute à la première longueur pour obtenir la seconde.",
-          "On cherche d'abord la longueur qui manque, puis on additionne les deux.",
-          `Le second mesure ${petit} + ${ecart} = ${grand} cm. Bout à bout : ${petit} + ${grand} = ${total} cm.`,
-          `Les deux mis bout à bout font ${total} cm.`,
-        ),
-      };
-    },
-  },
 ];
+
+/* =========================================================
+   LES GABARITS (10/11/2026)
+   ⛔ Avant : une phrase par gabarit, 5 à 28 squelettes par micro,
+   10 à 18 répétitions sur 20, et 6 % des énoncés avec un dessin.
+   Les familles communes aux trois grandeurs sont dans
+   `grandeurs-ce2.ts` ; ici, la fiche de la longueur, la règle
+   graduée et les problèmes.
+   ⛔ Jamais le canvas `contenance` pour une longueur : des
+   morceaux mis bout à bout (`schema_barre`), la règle
+   (`number_line`) ou l'objet dessiné (`objets`).
+========================================================= */
+
+/** Des morceaux bout à bout. Les nombres ne vont DANS la barre que s'ils ont
+ *  la même unité : le schéma les met à l'échelle, « 4 m » et « 33 cm » se
+ *  dessineraient 4 contre 33. Sinon, ils vont dessous, à parts égales. */
+function barre(parts: { label: string; value?: string; unknown?: boolean }[], total?: string): CanvasFigure {
+  const unitesVues = new Set(parts.filter((p) => !p.unknown).map((p) => p.label.replace(/[\d\s]/g, "")));
+  const memeUnite = unitesVues.size === 1 && parts.every((p) => /^\d+ \S+$/.test(p.label) || p.unknown);
+  return {
+    kind: "schema_barre",
+    total,
+    parts: parts.map((p) =>
+      p.unknown ? { label: p.label, unknown: true } : memeUnite ? { label: "", value: p.label } : { label: p.label },
+    ),
+    display: { showTotal: !!total, showValues: true, showPartLabels: true },
+  };
+}
+
+const LONGUEUR: Grandeur = {
+  notionId: "longueur",
+  mot: "longueur",
+  laGrandeur: "une longueur",
+  unites: [
+    { sym: "mm", nom: "millimètre", le: "le millimètre", base: 1 },
+    { sym: "cm", nom: "centimètre", le: "le centimètre", base: 10 },
+    { sym: "dm", nom: "décimètre", le: "le décimètre", base: 100 },
+    { sym: "m", nom: "mètre", le: "le mètre", base: 1000 },
+    { sym: "km", nom: "kilomètre", le: "le kilomètre", base: 1000000 },
+  ],
+  instrument: "une règle graduée",
+  verbe: "mesure",
+  infinitif: "mesurer",
+  avecQuelle: "Avec quelle unité mesure-t-on",
+  sup: { m: "le plus long", f: "la plus longue" },
+  questionPlus: "Qu'est-ce qui est le plus long",
+  supports: [
+    { le: "le ruban", un: "un ruban", grand: "m", petit: "cm", max: 5 },
+    { le: "la ficelle", un: "une ficelle", f: true, grand: "m", petit: "cm", max: 4 },
+    { le: "la corde à sauter", un: "une corde à sauter", f: true, grand: "m", petit: "cm", max: 3 },
+    { le: "la guirlande", un: "une guirlande", f: true, grand: "m", petit: "cm", max: 9 },
+    { le: "le tuyau d'arrosage", un: "un tuyau d'arrosage", grand: "m", petit: "cm", max: 9 },
+    { le: "la bande de papier", un: "une bande de papier", f: true, grand: "m", petit: "cm", max: 3 },
+    { le: "le serpentin", un: "un serpentin", grand: "m", petit: "cm", max: 5 },
+    { le: "la planche", un: "une planche", f: true, grand: "m", petit: "cm", max: 4 },
+    { le: "le crayon", un: "un crayon", grand: "cm", petit: "mm", max: 2 },
+    { le: "la chenille", un: "une chenille", f: true, grand: "cm", petit: "mm", max: 5 },
+    { le: "le chemin de randonnée", un: "un chemin de randonnée", grand: "km", petit: "m", max: 9 },
+    { le: "la piste de vélo", un: "une piste de vélo", f: true, grand: "km", petit: "m", max: 5 },
+    { le: "la tige de bambou", un: "une tige de bambou", f: true, grand: "m", petit: "dm", max: 3 },
+    { le: "la queue du cerf-volant", un: "une queue de cerf-volant", f: true, grand: "m", petit: "dm", max: 4 },
+  ],
+  objets: [
+    { nom: "un livre", quoi: "la longueur d'un livre", valeur: 25, unite: "cm", dessin: "livre" },
+    { nom: "une voiture", quoi: "la longueur d'une voiture", valeur: 4, unite: "m", dessin: "voiture" },
+    { nom: "un arbre", quoi: "la hauteur d'un grand arbre", valeur: 10, unite: "m", dessin: "arbre" },
+    { nom: "une maison", quoi: "la hauteur d'une maison", valeur: 8, unite: "m", dessin: "maison" },
+    { nom: "une clé", quoi: "la longueur d'une clé", valeur: 6, unite: "cm", dessin: "cle" },
+    { nom: "un ballon de football", quoi: "la largeur d'un ballon de football", valeur: 22, unite: "cm", dessin: "ballon" },
+    { nom: "un cartable", quoi: "la largeur d'un cartable", valeur: 40, unite: "cm", dessin: "cartable" },
+    { nom: "une banane", quoi: "la longueur d'une banane", valeur: 18, unite: "cm", dessin: "banane" },
+    { nom: "un poisson rouge", quoi: "la longueur d'un poisson rouge", valeur: 6, unite: "cm", dessin: "poisson" },
+    { nom: "un papillon", quoi: "la largeur d'un papillon", valeur: 5, unite: "cm", dessin: "papillon" },
+    { nom: "un bateau de pêche", quoi: "la longueur d'un bateau de pêche", valeur: 9, unite: "m", dessin: "bateau" },
+    { nom: "une fourmi", quoi: "la longueur d'une fourmi", valeur: 4, unite: "mm" },
+    { nom: "une coccinelle", quoi: "la longueur d'une coccinelle", valeur: 6, unite: "mm" },
+    { nom: "la porte de la classe", quoi: "la hauteur de la porte de la classe", valeur: 2, unite: "m" },
+    { nom: "une piscine", quoi: "la longueur d'une piscine", valeur: 25, unite: "m" },
+    { nom: "une gomme", quoi: "la longueur d'une gomme", valeur: 4, unite: "cm" },
+    { nom: "le chemin de l'école", quoi: "la distance entre la maison et l'école", valeur: 2, unite: "km" },
+    { nom: "un lit", quoi: "la longueur d'un lit", valeur: 2, unite: "m" },
+    { nom: "un crayon", quoi: "la longueur d'un crayon", valeur: 15, unite: "cm" },
+    { nom: "un trajet en train", quoi: "la distance entre deux villes", valeur: 40, unite: "km" },
+  ],
+  barre,
+  dessinObjet: (o) =>
+    o.dessin ? { kind: "objets", elements: [{ quoi: o.dessin, label: o.nom.replace(/^(un |une |la |le )/, "") }], mode: "couleur" } : undefined,
+};
+
+/* ---------------------------------------------------------
+   LA RÈGLE GRADUÉE
+--------------------------------------------------------- */
+
+const A_MESURER: readonly string[] = [
+  "le crayon de Zoé",
+  "la chenille du jardin",
+  "la plume de Pic le paille-en-queue",
+  "la clé du coffre au trésor",
+  "la gomme de Téo",
+  "le ver de terre",
+  "la petite voiture de Ravi",
+  "la fourchette de la dînette",
+  "le pinceau de Nina",
+  "la feuille du marronnier",
+  "la sauterelle",
+  "le bâton de colle",
+  "le coquillage de la plage",
+  "la carte au trésor pliée",
+];
+
+const regle = (min: number, max: number, debut: number, fin: number | null) =>
+  numberLine({
+    min,
+    max,
+    step: 1,
+    minorStep: 0.5,
+    points: [
+      { value: debut, label: "début", color: "#2563eb" },
+      ...(fin !== null ? [{ value: fin, label: "fin", color: "#ef4444" }] : []),
+    ],
+  });
+
+function lireRegle(debutA0: boolean): Q {
+  const quoi = pick(A_MESURER);
+  const debut = debutA0 ? 0 : rint(1, 5);
+  // la règle va de 0 à 12 : au-delà, ses nombres passent sur deux rangs (rendu du 10/11)
+  const longueur = rint(2, debutA0 ? 11 : 11 - debut);
+  const fin = debut + longueur;
+  const bonne = `${longueur} cm`;
+  const p = quelquun();
+  return {
+    text: debutA0
+      ? `${pick([`${p.nom} mesure ${quoi} avec sa règle.`, `On pose ${quoi} sur la règle.`, `Voici ${quoi} posé${/^la /.test(quoi) ? "e" : ""} contre la règle.`])} ${pick([
+          "Combien mesure-t-il, en centimètres ?",
+          "Quelle est sa longueur ?",
+          "Combien de centimètres mesure-t-il ?",
+        ])}`.replace(/-t-il/, /^la /.test(quoi) ? "-t-elle" : "-t-il")
+      : `${pick([
+          `${p.nom} a mal posé sa règle : ${quoi} commence à la graduation ${debut} et finit à la graduation ${fin}.`,
+          `Sur la règle, ${quoi} va de la graduation ${debut} à la graduation ${fin}.`,
+          `${p.nom} mesure ${quoi}. Le début n'est pas sur le 0 : il est sur le ${debut}, et la fin sur le ${fin}.`,
+        ])} ${pick(["Combien mesure-t-il vraiment, en cm ?", "Quelle est sa vraie longueur ?", "Combien de centimètres mesure-t-il ?"])}`.replace(
+          /-t-il/,
+          /^la /.test(quoi) ? "-t-elle" : "-t-il",
+        ),
+    format: "qcm",
+    choices: choix(bonne, [`${fin} cm`, `${longueur + 1} cm`, `${longueur - 1} cm`, `${longueur} mm`, `${fin + debut} cm`, `${longueur + 2} cm`]),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Mesurer, c'est compter les centimètres entre le début et la fin.",
+      debutA0 ? "Le début est sur le 0 : on lit la graduation de la fin." : "Le début n'est pas sur le 0 : on enlève la graduation du début à celle de la fin.",
+      debutA0 ? `La fin est sur la graduation ${fin}.` : `${fin} − ${debut} = ${longueur}.`,
+      `Il mesure ${bonne}.`,
+    ),
+    canvas: regle(0, 12, debut, fin),
+  };
+}
+
+function tracer(depart: number): Q {
+  const n = rint(3, 11 - Math.min(depart, 3));
+  const fin = depart + n;
+  const p = quelquun();
+  const dessin = depart > 0 || Math.random() < 0.5;
+  const objet = pick(["un segment", "le mât du bateau pirate", "la tige d'une fleur", "le bord d'une carte au trésor", "la queue d'un dragon", "une ligne de départ"]);
+  return {
+    text:
+      depart === 0
+        ? `${p.nom} veut tracer ${objet} de ${n} cm. ${maj(p.il)} part de la graduation 0. ${pick(["Où doit-" + p.il + " s'arrêter ?", "Sur quelle graduation doit-" + p.il + " s'arrêter ?"])}`
+        : `La règle de ${p.nom} est cassée : elle commence à la graduation ${depart}. ${maj(p.il)} veut tracer ${objet} de ${n} cm en partant de ${depart}. ${pick([
+            "Sur quelle graduation doit-" + p.il + " s'arrêter ?",
+            "Où se trouve la fin du tracé ?",
+          ])}`,
+    format: "qcm",
+    choices: choix(`sur le ${fin}`, [`sur le ${n}`, `sur le ${fin + 1}`, `sur le ${fin - 1}`, `sur le ${fin + 2}`, `sur le ${n - depart > 0 ? n - depart : fin + 3}`]),
+    expected: [`sur le ${fin}`],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Tracer n centimètres, c'est avancer de n graduations à partir du point de départ.",
+      depart === 0 ? "On part du 0 : on s'arrête sur la graduation n." : "On ne part pas du 0 : on ajoute la longueur à la graduation de départ.",
+      depart === 0 ? `0 + ${n} = ${n}.` : `${depart} + ${n} = ${fin}.`,
+      `On s'arrête sur le ${fin}.`,
+    ),
+    canvas: dessin ? numberLine({ min: depart, max: depart + 12, step: 1, minorStep: 0.5, points: [{ value: depart, label: "départ", color: "#2563eb" }] }) : undefined,
+  };
+}
+
+function lireMillimetres(): Q {
+  const cm = rint(2, 9);
+  const mm = rint(1, 9);
+  const quoi = pick(A_MESURER);
+  const enMm = Math.random() < 0.5;
+  const bonne = enMm ? `${cm * 10 + mm} mm` : `${cm} cm ${mm} mm`;
+  return {
+    text: `On mesure ${quoi}. La fin tombe ${mm} petits traits après la graduation ${cm}. Les petits traits sont des millimètres. ${
+      enMm ? "Combien mesure-t-il en millimètres ?" : "Quelle est sa longueur ?"
+    }`.replace("-t-il", /^la /.test(quoi) ? "-t-elle" : "-t-il"),
+    format: "qcm",
+    choices: choix(
+      bonne,
+      enMm
+        ? [`${cm + mm} mm`, `${cm * 100 + mm} mm`, `${cm * 10 + mm + 10} mm`, `${cm}${mm}0 mm`]
+        : [`${cm + 1} cm ${mm} mm`, `${cm} cm ${10 - mm} mm`, `${mm} cm ${cm} mm`, `${cm} cm ${mm + 1} mm`],
+    ),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Sur la règle, 1 cm est partagé en 10 petits traits : ce sont les millimètres. 1 cm = 10 mm.",
+      "On lit les centimètres entiers, puis on compte les petits traits.",
+      enMm ? `${cm} cm ${mm} mm = ${cm} × 10 + ${mm} = ${cm * 10 + mm} mm.` : `${cm} centimètres entiers et ${mm} petits traits.`,
+      `Il mesure ${bonne}.`,
+    ),
+    canvas: numberLine({ min: 0, max: 10, step: 1, minorStep: 0.1, points: [{ value: 0, label: "début", color: "#2563eb" }, { value: cm + mm / 10, label: "fin", color: "#ef4444" }] }),
+  };
+}
+
+/* ---------------------------------------------------------
+   PROBLÈMES DE LONGUEURS
+--------------------------------------------------------- */
+
+const BOUT_A_BOUT: readonly { qui: (p: string) => string; a: string; b: string }[] = [
+  { qui: (p) => `Pour décorer la classe, ${p} accroche deux guirlandes bout à bout.`, a: "La guirlande dorée", b: "la rouge" },
+  { qui: (p) => `${p} attache deux cordes pour faire une grande corde à sauter.`, a: "La corde bleue", b: "la verte" },
+  { qui: () => "Le jardinier relie deux tuyaux d'arrosage.", a: "Le premier tuyau", b: "le second" },
+  { qui: (p) => `${p} colle deux bandes de papier pour la frise de la classe.`, a: "La bande jaune", b: "l'orange" },
+  { qui: () => "Les pirates nouent deux cordes pour descendre le coffre dans la cale.", a: "La corde du capitaine", b: "celle du mousse" },
+  { qui: (p) => `Pour la queue de son cerf-volant, ${p} met bout à bout deux rubans.`, a: "Le ruban rose", b: "le violet" },
+  { qui: () => "Au cirque, on attache deux fils pour le funambule.", a: "Le fil rouge", b: "le blanc" },
+  { qui: (p) => `${p} fabrique un grand collier avec deux morceaux de fil.`, a: "Le fil doré", b: "le fil argenté" },
+  { qui: () => "Pour la course en sac, la maîtresse trace une piste en deux morceaux.", a: "Le premier morceau", b: "le second" },
+  { qui: () => "Le dragon du carnaval a une queue faite de deux morceaux de tissu.", a: "Le morceau vert", b: "le jaune" },
+];
+
+function longueurTotale(e: Etoile): Q {
+  const h = pick(BOUT_A_BOUT);
+  const p = quelquun();
+  const m = rint(1, e === 2 ? 3 : 5);
+  const cm = e === 2 ? pick([10, 20, 25, 30, 40, 50, 60, 75, 80]) : rint(11, 95);
+  const total = m * 100 + cm;
+  const bonne = `${total} cm`;
+  return {
+    text: `${h.qui(p.nom)} ${pick([`${h.a} mesure ${m} m, ${h.b} ${cm} cm.`, `${h.a} fait ${m} m et ${h.b} ${cm} cm.`])} ${pick([
+      "Quelle longueur en tout, en centimètres ?",
+      "Combien de centimètres cela fait-il bout à bout ?",
+      "Quelle est la longueur totale, en cm ?",
+      "Écris la longueur totale en centimètres.",
+    ])}`,
+    format: "qcm",
+    choices: choix(bonne, [`${m + cm} cm`, `${Number(`${m}${cm}`)} cm`, `${m * 10 + cm} cm`, `${total + 100} cm`, `${total + 10} cm`]),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Pour additionner deux longueurs, on les écrit dans la même unité. 1 m = 100 cm.",
+      "On change les mètres en centimètres, puis on ajoute.",
+      `${m} m = ${m * 100} cm ; ${m * 100} + ${cm} = ${total}.`,
+      `Bout à bout, cela fait ${bonne}.`,
+    ),
+    canvas: barre([{ label: `${m} m` }, { label: `${cm} cm` }], "? cm"),
+  };
+}
+
+function combienDePlus(): Q {
+  const [p, q] = deuxPersonnes();
+  const s = pick(LONGUEUR.supports.filter((x) => x.grand === "m" && x.petit === "cm"));
+  const m = rint(1, Math.min(4, s.max));
+  const autre = m * 100 - pick([15, 20, 25, 30, 40, 45, 60, 75]);
+  const ecart = m * 100 - autre;
+  const bonne = `${ecart} cm`;
+  return {
+    text: `${maj(s.le)} de ${p.nom} mesure ${m} m. ${s.f ? "Celle" : "Celui"} de ${q.nom} mesure ${autre} cm. ${pick([
+      `Combien de centimètres ${s.f ? "celle" : "celui"} de ${p.nom} a-t-${s.f ? "elle" : "il"} de plus ?`,
+      `Quelle est la différence de longueur, en centimètres ?`,
+      `Combien de centimètres manque-t-il à ${s.f ? "celle" : "celui"} de ${q.nom} ?`,
+    ])}`,
+    format: "qcm",
+    choices: choix(bonne, [`${Math.abs(autre - m)} cm`, `${ecart + 10} cm`, `${m * 100 + autre} cm`, `${ecart - 5} cm`, `${100 - (autre % 100)} cm`].filter((x) => x !== bonne)),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Pour trouver l'écart entre deux longueurs, on les écrit dans la même unité, puis on soustrait.",
+      "1 m = 100 cm.",
+      `${m} m = ${m * 100} cm ; ${m * 100} − ${autre} = ${ecart}.`,
+      `L'écart est de ${bonne}.`,
+    ),
+    canvas: barre([{ label: `${autre} cm` }, { label: "?", unknown: true }], `${m} m`),
+  };
+}
+
+const COUPES: readonly { tout: string; quoi: string }[] = [
+  { tout: "une planche", quoi: "pour la cabane" },
+  { tout: "une corde", quoi: "pour la balançoire" },
+  { tout: "un rouleau de ruban", quoi: "pour les paquets cadeaux" },
+  { tout: "une bande de tissu", quoi: "pour les costumes du spectacle" },
+  { tout: "un fil de laine", quoi: "pour les bracelets" },
+  { tout: "une guirlande", quoi: "pour le sapin et la porte" },
+  { tout: "un tuyau", quoi: "pour arroser les deux potagers" },
+  { tout: "un rouleau de papier", quoi: "pour les dessins de dinosaures" },
+];
+
+function resteApresCoupes(): Q {
+  const c = pick(COUPES);
+  const m = rint(2, 5);
+  const c1 = rint(15, 80);
+  const c2 = rint(15, 80);
+  const reste = m * 100 - c1 - c2;
+  const p = quelquun();
+  const bonne = `${reste} cm`;
+  return {
+    text: `${p.nom} a ${c.tout} de ${m} m. ${maj(p.il)} coupe un morceau de ${c1} cm, puis un autre de ${c2} cm ${c.quoi}. ${pick([
+      "Combien de centimètres reste-t-il ?",
+      "Quelle longueur reste-t-il, en centimètres ?",
+    ])}`,
+    format: "qcm",
+    choices: choix(bonne, [`${m * 100 - c1} cm`, `${m * 10 - c1 - c2 > 0 ? m * 10 - c1 - c2 : reste + 20} cm`, `${reste + 10} cm`, `${c1 + c2} cm`, `${reste - 1} cm`]),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "1 m = 100 cm.",
+      "On écrit la longueur de départ en centimètres, puis on enlève les morceaux coupés.",
+      `${m} m = ${m * 100} cm ; ${m * 100} − ${c1} − ${c2} = ${reste}.`,
+      `Il reste ${bonne}.`,
+    ),
+    canvas: barre([{ label: `${c1} cm` }, { label: `${c2} cm` }, { label: "?", unknown: true }], `${m} m`),
+  };
+}
+
+function morceauxDans(): Q {
+  const m = rint(2, 6);
+  const piece = pick([20, 25, 40, 50]);
+  const nb = (m * 100) / piece;
+  if (!Number.isInteger(nb)) return morceauxDans();
+  const quoi = pick(["un ruban", "un fil de fer", "une ficelle", "une corde", "une bande de papier", "une guirlande"]);
+  const pour = pick(["pour faire des bracelets", "pour emballer des cadeaux", "pour les déguisements de pirates", "pour la décoration du cirque", "pour les cerfs-volants"]);
+  return {
+    text: `${pick([
+      `Dans ${quoi} de ${m} m, on coupe des morceaux de ${piece} cm ${pour}.`,
+      `${quelquun().nom} a ${quoi} de ${m} m. Il faut des morceaux de ${piece} cm ${pour}.`,
+      `On partage ${quoi} de ${m} m en morceaux de ${piece} cm ${pour}.`,
+    ])} ${pick(["Combien de morceaux peut-on couper ?", "Combien de morceaux aura-t-on ?", "Combien de morceaux de cette taille obtient-on ?"])}`,
+    format: "qcm",
+    choices: choix(pl(nb, "morceau", "morceaux"), [nb * 2, nb + 1, Math.max(1, nb - 2), (m * 10) / piece >= 1 ? (m * 10) / piece : m, m * piece].map((x) => pl(x, "morceau", "morceaux"))),
+    expected: [pl(nb, "morceau", "morceaux")],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "1 m = 100 cm.",
+      "On écrit la longueur en centimètres, puis on cherche combien de fois le morceau y tient.",
+      `${m} m = ${m * 100} cm ; ${piece} × ${nb} = ${m * 100}.`,
+      `On peut couper ${nb} morceaux.`,
+    ),
+  };
+}
+
+function deuxMorceauxPlus(): Q {
+  const p = quelquun();
+  const a = rint(35, 90);
+  const ecart = rint(10, 30);
+  const deMoins = Math.random() < 0.35;
+  const b = deMoins ? a - ecart : a + ecart;
+  const total = a + b;
+  const quoi = pick([
+    ["coupe deux bambous pour un cerf-volant", "Le premier", "Le second", "mis"],
+    ["dessine deux serpents sur une grande affiche", "Le premier", "Le second", "mis"],
+    ["plante deux tiges de tournesol", "La première", "La seconde", "mises"],
+    ["fabrique deux épées en carton pour le spectacle", "La première", "La seconde", "mises"],
+    ["construit deux rails pour son petit train", "Le premier", "Le second", "mis"],
+    ["découpe deux dinosaures dans du carton", "Le premier", "Le second", "mis"],
+    ["tresse deux bracelets pour la fête des mères", "Le premier", "Le second", "mis"],
+    ["peint deux bandes sur le mur de la cabane", "La première", "La seconde", "mises"],
+    ["fabrique deux fusées en papier", "La première", "La seconde", "mises"],
+    ["coud deux écharpes pour ses poupées", "La première", "La seconde", "mises"],
+  ] as const);
+  return {
+    text: `${p.nom} ${quoi[0]}. ${quoi[1]} mesure ${a} cm. ${quoi[2]} mesure ${ecart} cm de ${deMoins ? "moins" : "plus"}. ${pick([
+      `Quelle longueur font les deux ${quoi[3]} bout à bout, en cm ?`,
+      "Combien de centimètres en tout ?",
+      `Si on les met bout à bout, combien de centimètres cela fait-il ?`,
+    ])}`,
+    format: "qcm",
+    choices: choix(`${total} cm`, [`${b} cm`, `${deMoins ? a + ecart : a - ecart} cm`, `${a + (deMoins ? a + ecart : a - ecart)} cm`, `${total + 10} cm`, `${2 * a} cm`, `${total - 1} cm`]),
+    expected: [`${total} cm`],
+    comparator: "mcq_exact",
+    explanation: exp(
+      deMoins ? "« De moins » : on enlève à la première longueur pour trouver la seconde." : "« De plus » : on ajoute à la première longueur pour trouver la seconde.",
+      "On cherche d'abord la seconde longueur, puis on additionne les deux.",
+      `${a} ${deMoins ? "−" : "+"} ${ecart} = ${b} ; ${a} + ${b} = ${total}.`,
+      `Les deux font ${total} cm.`,
+    ),
+    canvas: barre([{ label: `${a} cm` }, { label: `${a} cm ${deMoins ? "−" : "+"} ${ecart} cm` }], "? cm"),
+  };
+}
+
+function memeLongueur(): Q {
+  const cm = rint(11, 39);
+  const ecritures = [`${cm} cm`, `${cm * 10} mm`, `${Math.floor(cm / 10)} dm ${cm % 10} cm`];
+  const [p, q, r] = troisPersonnes();
+  const faux = Math.random() < 0.5;
+  const ecr = [...ecritures];
+  const k = rint(1, 2);
+  if (faux) ecr[k] = k === 1 ? `${cm} mm` : `${Math.floor(cm / 10)} dm ${(cm % 10) + 1} cm`;
+  const bonne = faux ? (k === 1 ? `${p.nom} et ${r.nom}` : `${p.nom} et ${q.nom}`) : "les trois";
+  return {
+    text: `${p.nom}, ${q.nom} et ${r.nom} mesurent le même segment. ${p.nom} écrit ${ecr[0]}, ${q.nom} écrit ${ecr[1]}, ${r.nom} écrit ${ecr[2]}. ${pick(["Qui a raison ?", "Qui a écrit une mesure juste ?"])}`,
+    format: "qcm",
+    choices: choix(bonne, ["les trois", `${p.nom} seulement`, `${p.nom} et ${q.nom}`, `${p.nom} et ${r.nom}`]),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "Une même longueur peut s'écrire de plusieurs façons : 1 cm = 10 mm, 1 dm = 10 cm.",
+      "On écrit toutes les mesures en millimètres pour les comparer.",
+      `${cm} cm = ${cm * 10} mm = ${Math.floor(cm / 10)} dm ${cm % 10} cm.`,
+      faux ? `${bonne} ont raison.` : "Les trois ont raison.",
+    ),
+  };
+}
+
+function combienDePas(): Q {
+  const u = pick([
+    { quoi: "Un pas de Ravi", cm: 50, sg: "pas", mot: "pas", total: "parcourir" },
+    { quoi: "Une dalle du couloir", cm: 50, sg: "dalle", mot: "dalles", total: "couvrir" },
+    { quoi: "Une marche de l'escalier du phare", cm: 20, sg: "marche", mot: "marches", total: "monter" },
+    { quoi: "Un saut de grenouille", cm: 25, sg: "saut", mot: "sauts", total: "parcourir" },
+    { quoi: "Un wagon du petit train", cm: 200, sg: "wagon", mot: "wagons", total: "faire un train de" },
+    { quoi: "Une enjambée du géant", cm: 500, sg: "enjambée", mot: "enjambées", total: "parcourir" },
+  ]);
+  const m = u.cm >= 200 ? rint(2, 6) * (u.cm / 100) : rint(2, 9);
+  const nb = (m * 100) / u.cm;
+  if (!Number.isInteger(nb)) return combienDePas();
+  return {
+    text: `${u.quoi} mesure environ ${u.cm >= 100 ? `${u.cm / 100} m` : `${u.cm} cm`}. ${pick([
+      `Combien de ${u.mot} faut-il pour ${u.total} ${m} m ?`,
+      `Pour ${u.total} ${m} m, combien de ${u.mot} faut-il environ ?`,
+    ])}`,
+    format: "qcm",
+    choices: choix(pl(nb, u.sg, u.mot), [nb * 2, nb + 1, m, Math.max(1, Math.round(nb / 2)), nb * 10].map((x) => pl(x, u.sg, u.mot))),
+    expected: [pl(nb, u.sg, u.mot)],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "1 m = 100 cm.",
+      "On écrit la distance en centimètres, puis on cherche combien de fois la petite longueur y tient.",
+      `${m} m = ${m * 100} cm ; ${u.cm} × ${nb} = ${m * 100}.`,
+      `Il en faut environ ${nb}.`,
+    ),
+  };
+}
+
+/* ---------------------------------------------------------
+   LES GABARITS, micro par micro
+--------------------------------------------------------- */
+
+function gab(id: string, microId: string, difficulty: Etoile, hint: string, tags: string[], generate: () => Q) {
+  return gabarit({ id, notionId: "longueur", microId, difficulty, hint, tags }, generate);
+}
+
+const L_UNI = "ce2_longueur_unites";
+const L_REL = "ce2_longueur_relations";
+const L_MES = "ce2_longueur_mesurer";
+const L_CMP = "ce2_longueur_comparer";
+const L_CHO = "ce2_longueur_choisir_unite";
+const L_EST = "ce2_longueur_estimer";
+const L_PRO = "ce2_longueur_probleme";
+const L_DEF = "ce2_longueur_defi";
+
+longueurBank.push(
+  gab(`${L_UNI}_tpl_3`, L_UNI, 1, "Du plus petit au plus grand : mm, cm, dm, m, km. On mesure avec une règle.", ["unites"], () => unites(LONGUEUR, 1)),
+  gab(`${L_UNI}_tpl_1`, L_UNI, 2, "mm = millimètre, cm = centimètre, dm = décimètre, m = mètre, km = kilomètre.", ["unites"], () => unites(LONGUEUR, 2)),
+  gab(`${L_UNI}_tpl_2`, L_UNI, 3, "Du plus petit au plus grand : mm, cm, dm, m, km.", ["unites"], () => unites(LONGUEUR, 3)),
+
+  gab(`${L_REL}_tpl_4`, L_REL, 1, "1 m = 100 cm ; 1 cm = 10 mm ; 1 km = 1000 m.", ["relations", "canvas"], () => relations(LONGUEUR, 1)),
+  gab(`${L_REL}_tpl_1`, L_REL, 2, "Chaque mètre vaut 100 centimètres : on prend 100 autant de fois qu'il y a de mètres.", ["relations", "canvas"], () => relations(LONGUEUR, 2)),
+  gab(`${L_REL}_tpl_2`, L_REL, 3, "Combien de fois 100 cm (ou 10 mm, ou 1000 m) dans ce nombre ?", ["relations"], () => relations(LONGUEUR, 3)),
+  gab(`${L_REL}_tpl_3`, L_REL, 4, "4 m 5 cm, ce n'est pas 45 cm : 4 m = 400 cm, puis on ajoute 5.", ["relations", "piege", "canvas"], () => relations(LONGUEUR, 4)),
+
+  gab(`${L_MES}_tpl_3`, L_MES, 1, "Le début sur le 0 : on lit la graduation de la fin.", ["mesurer", "canvas"], () => lireRegle(true)),
+  gab(`${L_MES}_tpl_4`, L_MES, 2, "On part du 0 et on avance d'autant de centimètres qu'on veut tracer.", ["mesurer", "canvas"], () =>
+    Math.random() < 0.5 ? tracer(0) : lireRegle(true),
+  ),
+  gab(`${L_MES}_tpl_1`, L_MES, 3, "Fin moins début : on compte les centimètres entre les deux.", ["mesurer", "canvas"], () => lireRegle(false)),
+  gab(`${L_MES}_tpl_2`, L_MES, 4, "Règle cassée : on ajoute la longueur à la graduation de départ. Les petits traits sont les millimètres.", ["mesurer", "canvas"], () =>
+    Math.random() < 0.55 ? tracer(rint(1, 4)) : lireMillimetres(),
+  ),
+
+  gab(`${L_CMP}_tpl_3`, L_CMP, 2, "Écris les deux longueurs dans la même unité avant de comparer.", ["comparer"], () => comparer(LONGUEUR, 2)),
+  gab(`${L_CMP}_tpl_1`, L_CMP, 3, "1 m = 100 cm : compare les nombres seulement quand l'unité est la même.", ["comparer", "canvas"], () => comparer(LONGUEUR, 3)),
+  gab(`${L_CMP}_tpl_2`, L_CMP, 4, "Écris toutes les longueurs dans la même unité, puis range-les.", ["comparer", "canvas"], () => comparer(LONGUEUR, 4)),
+
+  gab(`${L_CHO}_tpl_3`, L_CHO, 1, "Petit comme un crayon : le centimètre. Grand comme une porte : le mètre.", ["choisir_unite", "canvas"], () => choisirUnite(LONGUEUR, 1)),
+  gab(`${L_CHO}_tpl_1`, L_CHO, 2, "Choisis l'unité qui donne un nombre ni trop grand, ni trop petit.", ["choisir_unite", "canvas"], () => choisirUnite(LONGUEUR, 2)),
+  gab(`${L_CHO}_tpl_2`, L_CHO, 3, "Imagine la mesure : est-ce possible ?", ["choisir_unite", "canvas"], () => choisirUnite(LONGUEUR, 3)),
+
+  gab(`${L_EST}_tpl_3`, L_EST, 1, "Une porte mesure environ 2 m, un crayon environ 15 cm.", ["estimer", "canvas"], () => estimer(LONGUEUR, 1)),
+  gab(`${L_EST}_tpl_1`, L_EST, 2, "Regarde d'abord l'unité : est-ce une petite ou une grande longueur ?", ["estimer", "canvas"], () => estimer(LONGUEUR, 2)),
+  gab(`${L_EST}_tpl_4`, L_EST, 3, "Compare avec des objets que tu connais.", ["estimer", "canvas"], () => estimer(LONGUEUR, 3)),
+  gab(`${L_EST}_tpl_2`, L_EST, 4, "Écris la distance en centimètres, puis cherche combien de fois la petite longueur y tient.", ["estimer"], combienDePas),
+
+  gab(`${L_PRO}_tpl_3`, L_PRO, 2, "Écris tout en centimètres, puis additionne.", ["probleme", "canvas"], () =>
+    Math.random() < 0.7 ? longueurTotale(2) : combienDePlus(),
+  ),
+  gab(`${L_PRO}_tpl_1`, L_PRO, 3, "1 m = 100 cm : change les mètres en centimètres, puis calcule.", ["probleme", "canvas"], () =>
+    Math.random() < 0.6 ? longueurTotale(3) : combienDePlus(),
+  ),
+  gab(`${L_PRO}_tpl_2`, L_PRO, 4, "Écris tout en centimètres, puis enlève les morceaux coupés.", ["probleme", "canvas"], () =>
+    Math.random() < 0.7 ? resteApresCoupes() : combienDePlus(),
+  ),
+
+  gab(`${L_DEF}_tpl_1`, L_DEF, 5, "Écris la longueur en centimètres, puis cherche combien de morceaux y tiennent.", ["defi"], () =>
+    Math.random() < 0.6 ? morceauxDans() : memeLongueur(),
+  ),
+  gab(`${L_DEF}_tpl_2`, L_DEF, 5, "Cherche d'abord la seconde longueur, puis ajoute les deux.", ["defi", "deux_etapes", "canvas"], deuxMorceauxPlus),
+);
