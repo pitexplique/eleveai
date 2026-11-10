@@ -23,8 +23,23 @@
 //
 // ⚠️ PAS DE QUESTION À RÉDIGER : `applyMathsKeyboardFree` retire les items
 // `format: "open"`. Un CP clique, il ne tape pas.
+//
+// ⛔ LES SQUELETTES (10/11/2026). Mesure de départ : 6 micros sur 6 sous le
+// seuil (3 à 85 squelettes, jusqu'à 18 répétitions sur 20). Chaque gabarit
+// tire une FAMILLE, une SITUATION d'enfant (kermesse, marché, boulangerie,
+// tirelire…) et une TOURNURE. Mesure : scripts/mesurer-squelettes-coach.ts cp
+// monnaie.
+//
+// ⭐ LES DESSINS (10/11/2026) : le canvas `monnaie` dessine les pièces et les
+// billets — presque chaque question les MONTRE, l'enfant compte sur le dessin.
+// ⛔ Le dessin n'écrit jamais la somme cherchée. Les choix portent « € ».
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type {
+  CanvasFigure,
+  MonnaieValeur,
+  TutorBankItemV4,
+  TutorGeneratedQuestionV4,
+} from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -45,6 +60,17 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   return shuffle([correct, ...distracteurs]);
 }
 
+const eu = (n: number) => `${n} €`;
+
+/** Choix numériques (0 à 100), avec ou sans « € », jamais en double. */
+function choixNombres(correct: number, wrongs: readonly number[], euros = true): string[] {
+  const f = (n: number) => (euros ? eu(n) : String(n));
+  const ok = Array.from(new Set(wrongs)).filter((w) => Number.isInteger(w) && w >= 0 && w <= 100 && w !== correct);
+  const secours = [correct + 1, correct - 1, correct + 10, correct + 2, correct - 2, correct + 5];
+  for (const s of secours) if (ok.length < 3 && s > 0 && s <= 100 && s !== correct && !ok.includes(s)) ok.push(s);
+  return shuffle([f(correct), ...shuffle(ok).slice(0, 3).map(f)]);
+}
+
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return `Définition : ${definition}
 
@@ -55,649 +81,634 @@ Calcul : ${calcul}
 Conclusion : ${conclusion}`;
 }
 
+type Q = TutorGeneratedQuestionV4;
+type Famille = () => Q;
+const tirer = (familles: readonly Famille[]): Q => randomChoice(familles)();
+
+function qcm(text: string, choices: string[], correct: string, explanation: string, canvas?: CanvasFigure): Q {
+  return { text, format: "qcm", choices, expected: [correct], comparator: "mcq_exact", explanation, ...(canvas ? { canvas } : {}) };
+}
+
+function gab(
+  id: string,
+  microId: string,
+  difficulty: 1 | 2 | 3 | 4 | 5,
+  hint: string,
+  tags: string[],
+  familles: readonly Famille[],
+): TutorBankItemV4 {
+  return {
+    kind: "template",
+    id,
+    niveau: "cp",
+    matiere: "maths",
+    notionId: "monnaie",
+    microId,
+    difficulty,
+    theme: "neutral",
+    hint,
+    tags: ["cp", "monnaie", ...tags, "template"],
+    generate: () => tirer(familles),
+  };
+}
+
+type Prenom = { nom: string; il: "il" | "elle" };
+const PRENOMS: readonly Prenom[] = [
+  { nom: "Nina", il: "elle" }, { nom: "Téo", il: "il" }, { nom: "Zoé", il: "elle" },
+  { nom: "Ravi", il: "il" }, { nom: "Lou", il: "elle" }, { nom: "Malo", il: "il" },
+  { nom: "Inès", il: "elle" }, { nom: "Sacha", il: "il" }, { nom: "Amir", il: "il" },
+  { nom: "Jade", il: "elle" }, { nom: "Naïa", il: "elle" }, { nom: "Tom", il: "il" },
+  { nom: "Lina", il: "elle" }, { nom: "Yanis", il: "il" }, { nom: "Rose", il: "elle" },
+  { nom: "Noé", il: "il" },
+];
+const quelquun = () => randomChoice(PRENOMS);
+/** « de Lou », « d'Inès ». */
+const deN = (nom: string) => (/^[AEIOUYÉÈÎ]/i.test(nom) ? `d'${nom}` : `de ${nom}`);
+/** « de jetons », « d'images ». */
+const de = (mot: string) => (/^[aeiouyàâéèêëîïôœ]/i.test(mot) ? `d'${mot}` : `de ${mot}`);
+
+function deuxEnfants(): [Prenom, Prenom] {
+  const a = quelquun();
+  let b = quelquun();
+  while (b.nom === a.nom) b = quelquun();
+  return [a, b];
+}
+const elleIl = (p: Prenom) => (p.il === "il" ? "Il" : "Elle");
+
+/* ---------------------------------------------------------
+   L'ARGENT DU CP : pièces de 1 € et 2 €, billets de 5, 10, 20, 50 €
+--------------------------------------------------------- */
+const VAL: Record<number, MonnaieValeur> = { 1: "1e", 2: "2e", 5: "5e", 10: "10e", 20: "20e", 50: "50e" };
 const PIECES = [1, 2] as const;
 const BILLETS = [5, 10, 20, 50] as const;
+const estPiece = (v: number) => v <= 2;
+const nomArgent = (v: number) => (estPiece(v) ? `une pièce de ${v} €` : `un billet de ${v} €`);
+const nomArgents = (v: number, n: number) =>
+  n === 1 ? nomArgent(v) : `${n} ${estPiece(v) ? "pièces" : "billets"} de ${v} €`;
 
-function accord(nb: number, singulier: string, pluriel: string) {
-  return `${nb} ${nb > 1 ? pluriel : singulier}`;
+/** Un tas d'argent : [valeur, combien]. Dessiné du plus grand au plus petit. */
+type Tas = [number, number][];
+const total = (t: Tas) => t.reduce((s, [v, n]) => s + v * n, 0);
+const nbObjets = (t: Tas) => t.reduce((s, [, n]) => s + n, 0);
+function dessin(t: Tas, marque?: number): CanvasFigure {
+  return {
+    kind: "monnaie",
+    elements: [...t].filter(([, n]) => n > 0).sort((a, b) => b[0] - a[0]).map(([v, n]) => ({ valeur: VAL[v], nombre: n, ...(marque === v ? { marque: true } : {}) })),
+  };
+}
+function deuxTas(a: { nom: string; tas: Tas }, b: { nom: string; tas: Tas }): CanvasFigure {
+  const el = (t: Tas) => [...t].filter(([, n]) => n > 0).sort((x, y) => y[0] - x[0]).map(([v, n]) => ({ valeur: VAL[v], nombre: n }));
+  return { kind: "monnaie", groupes: [{ nom: a.nom, elements: el(a.tas) }, { nom: b.nom, elements: el(b.tas) }] };
+}
+const decrire = (t: Tas) => t.filter(([, n]) => n > 0).sort((a, b) => b[0] - a[0]).map(([v, n]) => nomArgents(v, n)).join(" et ");
+
+/** Où est l'argent. */
+const OU: readonly ((p: Prenom) => string)[] = [
+  (p) => `Voici le porte-monnaie ${deN(p.nom)}.`,
+  (p) => `${p.nom} vide sa tirelire sur la table.`,
+  (p) => `Voici l'argent ${deN(p.nom)} pour la kermesse.`,
+  (p) => `${p.nom} a reçu cet argent pour son anniversaire.`,
+  (p) => `Pic a trouvé cet argent dans le coffre au trésor ${deN(p.nom)}.`,
+  (p) => `Voici ce que ${p.nom} emporte au marché.`,
+  (p) => `${p.nom} joue à la marchande avec cet argent.`,
+  (p) => `Dans la caisse du stand de gâteaux, ${p.nom} trouve cet argent.`,
+  (p) => `Voici les économies ${deN(p.nom)} pour acheter un jeu.`,
+  (p) => `${p.nom} range cet argent dans sa boîte à trésor.`,
+];
+
+/** Ce qu'on achète, et où. */
+const ACHATS: readonly { quoi: string; ou: string; min: number; max: number }[] = [
+  { quoi: "un livre de dinosaures", ou: "à la librairie", min: 4, max: 15 },
+  { quoi: "un ballon", ou: "au magasin de sport", min: 3, max: 15 },
+  { quoi: "un gâteau au chocolat", ou: "à la boulangerie", min: 3, max: 15 },
+  { quoi: "une petite voiture", ou: "au magasin de jouets", min: 2, max: 9 },
+  { quoi: "un pot de fleurs", ou: "chez la fleuriste", min: 2, max: 12 },
+  { quoi: "un cerf-volant", ou: "au marché", min: 5, max: 20 },
+  { quoi: "une boîte de feutres", ou: "à la papeterie", min: 2, max: 9 },
+  { quoi: "un poisson rouge", ou: "à l'animalerie", min: 2, max: 8 },
+  { quoi: "une corde à sauter", ou: "à la kermesse", min: 2, max: 8 },
+  { quoi: "un puzzle de pirates", ou: "au magasin de jouets", min: 5, max: 20 },
+  { quoi: "un melon", ou: "au marché", min: 1, max: 4 },
+  { quoi: "une tarte aux pommes", ou: "chez le pâtissier", min: 3, max: 12 },
+  { quoi: "un petit dragon en peluche", ou: "à la fête foraine", min: 5, max: 25 },
+  { quoi: "un paquet de graines", ou: "chez le jardinier", min: 1, max: 4 },
+  { quoi: "un ananas", ou: "au marché du dimanche", min: 1, max: 5 },
+  { quoi: "un jeu de société", ou: "au magasin de jouets", min: 10, max: 35 },
+  { quoi: "une paire de rollers", ou: "au magasin de sport", min: 20, max: 50 },
+  { quoi: "une trottinette", ou: "au magasin de sport", min: 25, max: 60 },
+  { quoi: "un aquarium", ou: "à l'animalerie", min: 20, max: 60 },
+  { quoi: "un château fort en bois", ou: "au magasin de jouets", min: 25, max: 70 },
+  { quoi: "une tente de camping", ou: "au magasin de sport", min: 30, max: 90 },
+  { quoi: "un vélo", ou: "chez le vendeur de vélos", min: 50, max: 99 },
+];
+
+/** Un achat dont le prix est plausible (une trottinette ne coûte pas 3 €). */
+function achatPour(prix: number, sauf?: string) {
+  const ok = ACHATS.filter((a) => a.min <= prix && prix <= a.max && a.quoi !== sauf);
+  return ok.length ? randomChoice(ok) : { quoi: "un cadeau", ou: "au magasin", min: 1, max: 100 };
 }
 
 export const monnaieBank: TutorBankItemV4[] = [
   /* =========================================================
      CP_MONNAIE_RECONNAITRE — pièces et billets
-     Avant de compter, il faut savoir ce qu'on a dans la main.
   ========================================================= */
-  {
-    kind: "template",
-    id: "cp_monnaie_reconnaitre_tpl_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_reconnaitre",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Les petites sommes sont en métal, les grandes en papier.",
-    tags: ["cp", "monnaie", "reconnaitre", "template"],
-    generate: () => {
-      const chercheBillet = randomChoice([true, false]);
-      const bonne = chercheBillet
-        ? `${randomChoice([...BILLETS])} €`
-        : `${randomChoice([...PIECES])} €`;
-      const autres = chercheBillet
-        ? PIECES.map((p) => `${p} €`)
-        : BILLETS.map((b) => `${b} €`);
-      return {
-        text: `Parmi ces sommes, laquelle est ${chercheBillet ? "un BILLET" : "une PIÈCE"} ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, autres),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "L'argent existe en pièces, qui sont en métal, et en billets, qui sont en papier.",
-          "On se rappelle la liste : pièces de 1 € et 2 €, billets de 5, 10, 20 et 50 €.",
-          `${bonne} fait partie des ${chercheBillet ? "billets" : "pièces"}. Les autres propositions sont des ${chercheBillet ? "pièces" : "billets"}.`,
-          `C'est ${bonne}.`,
-        ),
-      };
+  gab("cp_monnaie_reconnaitre_tpl_2", "cp_monnaie_reconnaitre", 2,
+    "Les pièces sont rondes. Les billets sont des rectangles de papier.",
+    ["reconnaitre", "canvas"], [
+    // Compter les pièces, ou les billets.
+    () => {
+      const nbP = randomInt(1, 5);
+      const nbB = randomInt(1, 4);
+      const t1: Tas = [];
+      let restP = nbP;
+      for (const v of shuffle(PIECES)) { const k = restP > 0 ? randomInt(1, restP) : 0; if (k) t1.push([v, k]); restP -= k; }
+      if (restP > 0) t1.push([1, restP]);
+      let restB = nbB;
+      for (const v of shuffle(BILLETS)) { const k = restB > 0 ? randomInt(1, Math.min(2, restB)) : 0; if (k) t1.push([v, k]); restB -= k; }
+      if (restB > 0) t1.push([10, restB]);
+      const pieces = Math.random() < 0.5;
+      const bon = pieces ? nbP : nbB;
+      const p = quelquun();
+      const t = `${randomChoice(OU)(p)} ${pieces ? "Combien de pièces vois-tu ?" : "Combien de billets vois-tu ?"}`;
+      return qcm(t, choixNombres(bon, [pieces ? nbB : nbP, nbP + nbB, bon + 1, bon - 1], false), String(bon),
+        exp("Les pièces sont rondes et en métal, les billets sont en papier.", pieces ? "On compte seulement les ronds." : "On compte seulement les rectangles.",
+          `Il y a ${nbP} pièce${nbP > 1 ? "s" : ""} et ${nbB} billet${nbB > 1 ? "s" : ""}.`, `Il y a ${bon} ${pieces ? "pièce" : "billet"}${bon > 1 ? "s" : ""}.`),
+        dessin(mergeTas(t1)));
     },
-  },
-  {
-    kind: "fixed",
-    id: "cp_monnaie_reconnaitre_fixed_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_reconnaitre",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Existe-t-il un billet de 2 € ?",
-    format: "qcm",
-    choices: [
-      "non, 2 € est une pièce",
-      "oui, il est vert",
-      "oui, mais on ne s'en sert plus",
-      "on ne peut pas savoir",
-    ],
-    expected: ["non, 2 € est une pièce"],
-    comparator: "mcq_exact",
-    hint: "Cherche dans ta poche : à quoi ressemblent 2 € ?",
-    explanation: exp(
-      "Chaque valeur existe soit en pièce, soit en billet, jamais dans les deux.",
-      "On se rappelle la liste : pièces de 1 € et 2 €, billets de 5, 10, 20 et 50 €.",
-      "2 € est une pièce dorée et argentée. Le plus petit billet est celui de 5 €.",
-      "Non : 2 €, c'est une pièce.",
-    ),
-    tags: ["cp", "monnaie", "reconnaitre", "piege", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "cp_monnaie_reconnaitre_tpl_1",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_reconnaitre",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Jusqu'à 2 €, c'est une pièce. À partir de 5 €, c'est un billet.",
-    tags: ["cp", "monnaie", "reconnaitre", "template"],
-    generate: () => {
-      const valeur = randomChoice([...PIECES, ...BILLETS]);
-      const bonne = valeur <= 2 ? "une pièce" : "un billet";
-      return {
-        text: `Est-ce que ${valeur} €, c'est une pièce ou un billet ?`,
-        format: "qcm",
-        choices: shuffle(["une pièce", "un billet"]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Les petites valeurs sont des pièces, les grandes des billets.",
-          "On compare la valeur à 5 € : en dessous ce sont des pièces, à partir de 5 € des billets.",
-          `${valeur} € vaut ${valeur <= 2 ? "moins de 5 €, c'est donc une pièce" : "5 € ou plus, c'est donc un billet"}.`,
-          `${valeur} €, c'est ${bonne}.`,
-        ),
-      };
+  ]),
+  gab("cp_monnaie_reconnaitre_tpl_1", "cp_monnaie_reconnaitre", 2,
+    "Regarde la forme : rond, c'est une pièce ; rectangle, c'est un billet.",
+    ["reconnaitre", "canvas"], [
+    // Pièce ou billet ?
+    () => {
+      const vals = shuffle([1, 2, 5, 10, 20, 50]).slice(0, 3);
+      const cible = randomChoice(vals);
+      const p = quelquun();
+      const bon = estPiece(cible) ? "une pièce" : "un billet";
+      const t = `${randomChoice(OU)(p)} ${randomChoice(["L'argent entouré, est-ce une pièce ou un billet ?", "Ce qui est entouré, c'est une pièce ou un billet ?"])}`;
+      return qcm(t, ["une pièce", "un billet"], bon,
+        exp("Les pièces sont rondes, les billets sont des rectangles.", "On regarde la forme de ce qui est entouré.",
+          `${cible} € : c'est ${nomArgent(cible)}.`, `C'est ${bon}.`),
+        dessin(vals.map((v) => [v, 1] as [number, number]), cible));
     },
-  },
+    // Combien vaut ce qui est entouré ?
+    () => {
+      const vals = shuffle([1, 2, 5, 10, 20, 50]).slice(0, 3);
+      const cible = randomChoice(vals);
+      const p = quelquun();
+      const t = `${randomChoice(OU)(p)} ${randomChoice([`Combien vaut ${estPiece(cible) ? "la pièce entourée" : "le billet entouré"} ?`, "Combien vaut ce qui est entouré ?"])}`;
+      return qcm(t, choixNombres(cible, vals.filter((v) => v !== cible).concat([cible === 2 ? 20 : cible === 20 ? 2 : cible === 5 ? 50 : 5])), eu(cible),
+        exp("La valeur est écrite en gros sur chaque pièce et chaque billet.", "On lit le nombre écrit sur ce qui est entouré.",
+          `C'est ${nomArgent(cible)}.`, `Il vaut ${eu(cible)}.`),
+        dessin(vals.map((v) => [v, 1] as [number, number]), cible));
+    },
+  ]),
+  gab("cp_monnaie_reconnaitre_fixed_2", "cp_monnaie_reconnaitre", 3,
+    "1 € et 2 € sont des pièces. 5 €, 10 €, 20 € et 50 € sont des billets.",
+    ["reconnaitre", "piege"], [
+    // Est-ce possible ?
+    () => {
+      const p = quelquun();
+      const cas = randomChoice([
+        { dit: "un billet de 2 €", ok: false, bon: "non, 2 € est une pièce" },
+        { dit: "un billet de 1 €", ok: false, bon: "non, 1 € est une pièce" },
+        { dit: "une pièce de 5 €", ok: false, bon: "non, 5 € est un billet" },
+        { dit: "une pièce de 10 €", ok: false, bon: "non, 10 € est un billet" },
+        { dit: "une pièce de 2 €", ok: true, bon: "oui" },
+        { dit: "un billet de 20 €", ok: true, bon: "oui" },
+        { dit: "un billet de 5 €", ok: true, bon: "oui" },
+        { dit: "une pièce de 1 €", ok: true, bon: "oui" },
+      ]);
+      const t = randomChoice([
+        `${p.nom} dit : « J'ai ${cas.dit}. » Est-ce possible ?`,
+        `Existe-t-il ${cas.dit} ?`,
+        `À la kermesse, ${p.nom} cherche ${cas.dit}. Cela existe-t-il ?`,
+      ]);
+      const faux = ["oui", "non, 2 € est une pièce", "non, 5 € est un billet", "non, 1 € est une pièce", "non, 10 € est un billet", "on ne peut pas savoir"];
+      return qcm(t, makeChoices(cas.bon, faux), cas.bon,
+        exp("Au CP, on connaît les pièces de 1 € et 2 €, et les billets de 5, 10, 20 et 50 €.", "On se demande si cette valeur est une pièce ou un billet.",
+          `Il existe des pièces de 1 € et 2 €, et des billets de 5 €, 10 €, 20 € et 50 €.`, cas.ok ? `Oui, cela existe.` : `${cas.bon.charAt(0).toUpperCase()}${cas.bon.slice(1)}.`));
+    },
+    // Laquelle est une pièce / un billet ?
+    () => {
+      const piece = Math.random() < 0.5;
+      const bonV = piece ? randomChoice(PIECES) : randomChoice(BILLETS);
+      const autres = shuffle((piece ? BILLETS : PIECES).slice() as number[]).slice(0, piece ? 3 : 2);
+      const p = quelquun();
+      const t = randomChoice([
+        `Parmi ces sommes, laquelle est ${piece ? "une PIÈCE" : "un BILLET"} ?`,
+        `${p.nom} cherche ${piece ? "une pièce" : "un billet"} dans sa tirelire. Lequel de ces argents est ${piece ? "une pièce" : "un billet"} ?`,
+      ]);
+      return qcm(t, makeChoices(eu(bonV), autres.map(eu)), eu(bonV),
+        exp("Les pièces valent 1 € ou 2 €, les billets 5 €, 10 €, 20 € ou 50 €.", "On cherche la seule valeur du bon genre.",
+          `${eu(bonV)} est ${nomArgent(bonV).split(" de ")[0]}.`, `C'est ${eu(bonV)}.`));
+    },
+  ]),
 
   /* =========================================================
-     CP_MONNAIE_VALEUR — combien y a-t-il dans le porte-monnaie
+     CP_MONNAIE_VALEUR — combien d'euros ?
   ========================================================= */
-  {
-    kind: "template",
-    id: "cp_monnaie_valeur_tpl_3",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_valeur",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Trois sortes d'argent : compte-les l'une après l'autre.",
-    tags: ["cp", "monnaie", "valeur", "template"],
-    generate: () => {
-      const billet = randomChoice([5, 10, 20]);
-      const nbDeux = randomInt(1, 4);
-      const nbUn = randomInt(1, 5);
-      const total = billet + nbDeux * 2 + nbUn;
-      return {
-        text: `Dans un porte-monnaie, il y a 1 billet de ${billet} €, ${accord(nbDeux, "pièce", "pièces")} de 2 € et ${accord(nbUn, "pièce", "pièces")} de 1 €. Combien y a-t-il d'euros ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La valeur d'un ensemble d'argent est la somme de tout ce qu'il contient.",
-          "On commence par la plus grande valeur, puis on ajoute les autres.",
-          `Le billet vaut ${billet} €. Les pièces de 2 € valent ${nbDeux * 2} €. Les pièces de 1 € valent ${nbUn} €. En tout : ${billet} + ${nbDeux * 2} + ${nbUn} = ${total} €.`,
-          `Il y a ${total} €.`,
-        ),
-      };
+  gab("cp_monnaie_valeur_fixed_2", "cp_monnaie_valeur", 2,
+    "Dix pièces de 1 € valent un billet de 10 €.",
+    ["valeur", "remarquable", "dizaine", "canvas"], [
+    () => {
+      const [grand, petit] = randomChoice([[5, 1], [10, 1], [10, 2], [10, 5], [20, 10], [50, 10], [20, 2], [20, 5]] as const);
+      const bon = grand / petit;
+      const p = quelquun();
+      const t = randomChoice([
+        `Combien faut-il de ${estPiece(petit) ? "pièces" : "billets"} de ${petit} € pour faire ${nomArgent(grand)} ?`,
+        `${p.nom} veut échanger ce billet contre des ${estPiece(petit) ? "pièces" : "billets"} de ${petit} €. Combien en aura-t-${p.il} ?`,
+        `La marchande change ce billet en ${estPiece(petit) ? "pièces" : "billets"} de ${petit} €. Combien en donne-t-elle ?`,
+      ]);
+      return qcm(t, choixNombres(bon, [grand, bon + 1, bon - 1, bon * 2], false), String(bon),
+        exp(`${nomArgent(grand)} vaut ${grand} €.`, `On compte de ${petit} en ${petit} jusqu'à ${grand}.`,
+          `${Array.from({ length: bon }, (_, i) => (i + 1) * petit).join(", ")} : ${bon} fois.`, `Il en faut ${bon}.`),
+        dessin([[grand, 1]]));
     },
-  },
-  {
-    kind: "fixed",
-    id: "cp_monnaie_valeur_fixed_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_valeur",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Combien faut-il de pièces de 1 € pour faire un billet de 10 € ?",
-    format: "short",
-    expected: ["10"],
-    comparator: "number_equal",
-    hint: "Compte de un en un jusqu'à dix.",
-    explanation: exp(
-      "Un billet de 10 € a exactement la même valeur que dix pièces de 1 €.",
-      "On compte les pièces une à une jusqu'à atteindre la valeur du billet.",
-      "1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Il faut dix pièces. C'est le même dix que la dizaine : dix unités font une dizaine.",
-      "Il faut 10 pièces de 1 €.",
-    ),
-    tags: ["cp", "monnaie", "valeur", "remarquable", "dizaine"],
-  },
-  {
-    kind: "template",
-    id: "cp_monnaie_valeur_tpl_1",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_valeur",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Les billets d'abord, les pièces ensuite.",
-    tags: ["cp", "monnaie", "valeur", "template"],
-    generate: () => {
-      const billet = randomChoice([5, 10, 20]);
-      const nbBillets = randomInt(1, 3);
-      const piece = randomChoice([1, 2]);
-      const nbPieces = randomInt(1, 4);
-      const total = billet * nbBillets + piece * nbPieces;
-      return {
-        text: `Dans un porte-monnaie, il y a ${accord(nbBillets, "billet", "billets")} de ${billet} € et ${accord(nbPieces, "pièce", "pièces")} de ${piece} €. Combien y a-t-il d'euros ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La valeur d'un ensemble d'argent est la somme de toutes ses pièces et de tous ses billets.",
-          "On compte les billets, puis on ajoute les pièces.",
-          `${nbBillets} × ${billet} € = ${billet * nbBillets} €. Les pièces valent ${piece * nbPieces} €. En tout : ${billet * nbBillets} + ${piece * nbPieces} = ${total} €.`,
-          `Il y a ${total} €.`,
-        ),
-      };
+  ]),
+  gab("cp_monnaie_valeur_tpl_2", "cp_monnaie_valeur", 2,
+    "Compte de 2 en 2 pour les pièces de 2 €, de 10 en 10 pour les billets de 10 €.",
+    ["valeur", "canvas"], [
+    () => {
+      const v = randomChoice([1, 2, 5, 10]);
+      const n = v === 1 ? randomInt(3, 9) : v === 2 ? randomInt(2, 6) : v === 5 ? randomInt(2, 4) : randomInt(2, 6);
+      const bon = v * n;
+      const p = quelquun();
+      const t = `${randomChoice(OU)(p)} ${randomChoice(["Combien d'euros y a-t-il ?", "Combien d'argent en tout ?", `Combien d'euros a ${p.nom} ?`])}`;
+      return qcm(t, choixNombres(bon, [n, bon + v, bon - v, v]), eu(bon),
+        exp("Pour savoir combien d'argent on a, on ajoute la valeur de chaque pièce ou billet.", `On compte de ${v} en ${v}.`,
+          `${Array.from({ length: n }, (_, i) => (i + 1) * v).join(", ")}.`, `Il y a ${eu(bon)}.`),
+        dessin([[v, n]]));
     },
-  },
-  {
-    kind: "template",
-    id: "cp_monnaie_valeur_tpl_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_valeur",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Chaque pièce compte pour sa valeur, pas pour un.",
-    tags: ["cp", "monnaie", "valeur", "template"],
-    generate: () => {
-      const nb = randomInt(3, 8);
-      const piece = randomChoice([1, 2]);
-      const total = nb * piece;
-      return {
-        text: `Léa a ${nb} pièces de ${piece} €. Combien a-t-elle d'euros ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le nombre de pièces et le nombre d'euros ne sont pas la même chose.",
-          "On ajoute la valeur de chaque pièce, une par une.",
-          piece === 1
-            ? `${nb} pièces de 1 € font ${total} €, car chaque pièce vaut un euro.`
-            : `${nb} pièces de 2 € : on compte de deux en deux, ${Array.from({ length: nb }, (_, i) => (i + 1) * 2).join(", ")}. Cela fait ${total} €.`,
-          `Elle a ${total} €.`,
-        ),
-      };
+  ]),
+  gab("cp_monnaie_valeur_tpl_1", "cp_monnaie_valeur", 3,
+    "Compte d'abord les billets de 10 en 10, puis ajoute les pièces.",
+    ["valeur", "canvas"], [
+    () => {
+      const d = randomInt(1, 6);
+      const u = randomInt(1, 6);
+      const bon = d * 10 + u;
+      const p = quelquun();
+      const t = `${randomChoice(OU)(p)} ${randomChoice(["Combien d'euros y a-t-il ?", "Combien d'argent en tout ?", "Quelle somme est-ce ?"])}`;
+      return qcm(t, choixNombres(bon, [d + u, u * 10 + d, bon + 10, d * 10]), eu(bon),
+        exp("Un billet de 10 € vaut dix pièces de 1 €.", "On compte les billets de 10 en 10, puis on ajoute les pièces.",
+          `${d * 10} + ${u} = ${bon}.`, `Il y a ${eu(bon)}.`),
+        dessin([[10, d], [1, u]]));
     },
-  },
+    () => {
+      const d = randomInt(1, 4);
+      const c = randomInt(1, 4);
+      const bon = d * 10 + c * 2;
+      const p = quelquun();
+      const t = `${randomChoice(OU)(p)} ${randomChoice(["Combien d'euros y a-t-il ?", "Combien d'argent en tout ?"])}`;
+      return qcm(t, choixNombres(bon, [d * 10 + c, d + c, bon + 2, bon - 2]), eu(bon),
+        exp("Une pièce de 2 € vaut deux euros.", "On compte les billets de 10 en 10, puis les pièces de 2 en 2.",
+          `${d * 10} + ${c * 2} = ${bon}.`, `Il y a ${eu(bon)}.`),
+        dessin([[10, d], [2, c]]));
+    },
+  ]),
+  gab("cp_monnaie_valeur_tpl_3", "cp_monnaie_valeur", 4,
+    "Commence par le plus gros billet, puis ajoute le reste petit à petit.",
+    ["valeur", "canvas"], [
+    () => {
+      const t0 = mergeTas([
+        [randomChoice([5, 10, 20]), randomInt(1, 2)],
+        [randomChoice([5, 10]), randomInt(0, 2)],
+        [2, randomInt(0, 3)],
+        [1, randomInt(1, 3)],
+      ]);
+      if (total(t0) > 100) t0.splice(0, 1, [10, 1]);
+      const bon = total(t0);
+      const p = quelquun();
+      const t = `${randomChoice(OU)(p)} ${randomChoice(["Combien d'euros y a-t-il en tout ?", "Quelle somme est-ce ?", "Combien d'argent en tout ?"])}`;
+      return qcm(t, choixNombres(bon, [nbObjets(t0), bon + 1, bon - 1, bon + 5, bon - 2]), eu(bon),
+        exp("On ajoute la valeur de chaque pièce et de chaque billet.", "On part du plus gros billet, puis on ajoute les autres.",
+          `${t0.sort((a, b) => b[0] - a[0]).flatMap(([v, n]) => Array.from({ length: n }, () => v)).join(" + ")} = ${bon}.`, `Il y a ${eu(bon)}.`),
+        dessin(t0));
+    },
+  ]),
 
   /* =========================================================
-     CP_MONNAIE_COMPARER — LE piège de la notion
-     « du point de vue de leur valeur et non de celui du nombre
-     de pièces », écrit le BO.
+     CP_MONNAIE_COMPARER — qui a le plus ? plus cher, moins cher
+     Le piège du BO : on compare la VALEUR, pas le nombre de pièces.
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "cp_monnaie_comparer_fixed_1",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Malia a 6 pièces de 1 €. Kevin a 1 billet de 10 €. Qui a le plus d'argent ?",
-    format: "qcm",
-    choices: [
-      "Kevin",
-      "Malia, elle a plus de pièces",
-      "ils ont la même chose",
-      "on ne peut pas savoir",
-    ],
-    expected: ["Kevin"],
-    comparator: "mcq_exact",
-    hint: "Ce n'est pas le nombre de pièces qui compte, mais ce qu'elles valent.",
-    explanation: exp(
-      "On compare deux sommes d'argent d'après leur valeur, jamais d'après le nombre de pièces.",
-      "On calcule la valeur de chaque porte-monnaie, puis on compare les deux nombres.",
-      "Malia a 6 pièces, donc 6 €. Kevin n'a qu'un seul billet, mais il vaut 10 €. Et 10 € est plus que 6 € : Kevin a plus d'argent avec un seul papier qu'elle avec six pièces.",
-      "C'est Kevin qui a le plus d'argent.",
-    ),
-    tags: ["cp", "monnaie", "comparer", "piege", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "cp_monnaie_comparer_fixed_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Ryan a 3 pièces de 2 €. Naïla a 5 pièces de 1 €. Qui a le plus d'argent ?",
-    format: "qcm",
-    choices: [
-      "Ryan",
-      "Naïla, elle a plus de pièces",
-      "ils ont la même chose",
-      "on ne peut pas savoir",
-    ],
-    expected: ["Ryan"],
-    comparator: "mcq_exact",
-    hint: "Compte les euros, pas les pièces.",
-    explanation: exp(
-      "Deux pièces peuvent avoir des valeurs différentes : on compte les euros, pas les objets.",
-      "On calcule chaque somme séparément.",
-      "Ryan : 2 + 2 + 2 = 6 €. Naïla : 1 + 1 + 1 + 1 + 1 = 5 €. Naïla a plus de pièces, mais Ryan a plus d'argent.",
-      "C'est Ryan qui a le plus d'argent.",
-    ),
-    tags: ["cp", "monnaie", "comparer", "piege", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "cp_monnaie_comparer_tpl_1",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Calcule les deux sommes avant de choisir.",
-    tags: ["cp", "monnaie", "comparer", "piege", "template"],
-    generate: () => {
-      // On tire exprès la configuration qui piège : celui qui a le PLUS de
-      // pièces a le MOINS d'argent.
-      const nbA = randomInt(4, 9);
-      const totalA = nbA; // pièces de 1 €
-      const billet = randomChoice([10, 20]);
-      const totalB = billet;
-      const [a, b] = shuffle(["Malia", "Kevin", "Naïla", "Ryan", "Léa", "Enzo"]).slice(0, 2);
-      return {
-        text: `${a} a ${nbA} pièces de 1 €. ${b} a 1 billet de ${billet} €. Qui a le plus d'argent ?`,
-        format: "qcm",
-        choices: makeChoices(b, [
-          a,
-          "ils ont la même chose",
-          "on ne peut pas savoir",
-        ]),
-        expected: [b],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On compare des sommes d'argent d'après leur valeur, pas d'après le nombre de pièces.",
-          "On calcule chaque somme, puis on compare.",
-          `${a} a ${totalA} €. ${b} n'a qu'un seul billet, mais il vaut ${totalB} €. Et ${totalB} est plus grand que ${totalA}.`,
-          `C'est ${b} qui a le plus d'argent.`,
-        ),
-      };
+  gab("cp_monnaie_comparer_tpl_2", "cp_monnaie_comparer", 3,
+    "Le plus cher, c'est celui qui coûte le plus d'euros.",
+    ["comparer", "lexique", "canvas"], [
+    // Plus cher, moins cher.
+    () => {
+      const pa = randomInt(2, 30);
+      let pb = randomInt(2, 30);
+      while (pb === pa) pb = randomInt(2, 30);
+      const a = achatPour(pa);
+      const b = achatPour(pb, a.quoi);
+      const plus = Math.random() < 0.5;
+      const bon = (plus ? pa > pb : pa < pb) ? a.quoi : b.quoi;
+      const p = quelquun();
+      const t = randomChoice([
+        `${a.quoi.charAt(0).toUpperCase()}${a.quoi.slice(1)} coûte ${eu(pa)}. ${b.quoi.charAt(0).toUpperCase()}${b.quoi.slice(1)} coûte ${eu(pb)}. Qu'est-ce qui est le ${plus ? "PLUS" : "MOINS"} cher ?`,
+        `${p.nom} hésite entre ${a.quoi} à ${eu(pa)} et ${b.quoi} à ${eu(pb)}. Qu'est-ce qui est le ${plus ? "plus" : "moins"} cher ?`,
+      ]);
+      return qcm(t, makeChoices(bon, [a.quoi, b.quoi, "les deux coûtent pareil"]), bon,
+        exp("Plus cher veut dire qu'il faut payer plus d'euros.", "On compare les deux prix.",
+          `${Math.min(pa, pb)} € < ${Math.max(pa, pb)} €.`, `Le ${plus ? "plus" : "moins"} cher : ${bon}.`));
     },
-  },
-  {
-    kind: "template",
-    id: "cp_monnaie_comparer_tpl_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_comparer",
-    difficulty: 3,
-    theme: "reunion",
-    hint: "« Moins cher » veut dire que le prix est plus petit.",
-    tags: ["cp", "monnaie", "comparer", "lexique", "reunion", "template"],
-    generate: () => {
-      const objets = shuffle([
-        { nom: "un samoussa", prix: 1 },
-        { nom: "un bonbon piment", prix: 2 },
-        { nom: "un pain bouchon", prix: 3 },
-        { nom: "une bouteille d'eau", prix: 2 },
-        { nom: "un sandwich", prix: 5 },
-        { nom: "une part de gâteau patate", prix: 4 },
-      ]).slice(0, 2);
-      while (objets[0].prix === objets[1].prix) {
-        objets[1] = randomChoice([
-          { nom: "un sandwich", prix: 5 },
-          { nom: "un pain bouchon", prix: 3 },
-          { nom: "un samoussa", prix: 1 },
-        ]);
-      }
-      const chercheMoinsCher = randomChoice([true, false]);
-      const trie = [...objets].sort((x, y) => x.prix - y.prix);
-      const bonne = chercheMoinsCher ? trie[0].nom : trie[1].nom;
-      return {
-        text: `Au snack, ${objets[0].nom} coute ${objets[0].prix} € et ${objets[1].nom} coute ${objets[1].prix} €. Qu'est-ce qui est le ${chercheMoinsCher ? "MOINS" : "PLUS"} cher ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          chercheMoinsCher ? trie[1].nom : trie[0].nom,
-          "les deux coutent pareil",
-          "on ne peut pas savoir",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "« Moins cher » veut dire que le prix est plus petit, « plus cher » qu'il est plus grand.",
-          "On compare les deux prix comme deux nombres.",
-          `${trie[0].prix} € est plus petit que ${trie[1].prix} € : ${trie[0].nom} est donc le moins cher.`,
-          `C'est ${bonne}.`,
-        ),
-      };
+    // Qui a le plus d'argent (sans piège) ?
+    () => {
+      const [x, y] = deuxEnfants();
+      const ta: Tas = [[10, randomInt(0, 2)], [5, randomInt(0, 1)], [1, randomInt(1, 4)]];
+      let tb: Tas = [[10, randomInt(0, 2)], [2, randomInt(1, 3)]];
+      while (total(tb) === total(ta)) tb = [[10, randomInt(0, 2)], [2, randomInt(1, 3)]];
+      const plus = Math.random() < 0.6;
+      const bon = (plus ? total(ta) > total(tb) : total(ta) < total(tb)) ? x.nom : y.nom;
+      const t = randomChoice([
+        `${x.nom} et ${y.nom} vident leur tirelire. Qui a le ${plus ? "plus" : "moins"} d'argent ?`,
+        `Voici l'argent ${deN(x.nom)} et ${deN(y.nom)} pour la kermesse. Qui a le ${plus ? "plus" : "moins"} d'argent ?`,
+      ]);
+      return qcm(t, makeChoices(bon, [x.nom, y.nom, "ils ont autant"]), bon,
+        exp("Pour comparer, on calcule ce que vaut chaque tas.", "On compte la somme de chacun.",
+          `${x.nom} : ${eu(total(ta))}. ${y.nom} : ${eu(total(tb))}.`, `${bon} a le ${plus ? "plus" : "moins"} d'argent.`),
+        deuxTas({ nom: x.nom, tas: ta }, { nom: y.nom, tas: tb }));
     },
-  },
+  ]),
+  gab("cp_monnaie_comparer_fixed_1", "cp_monnaie_comparer", 4,
+    "Beaucoup de pièces, ce n'est pas forcément beaucoup d'argent.",
+    ["comparer", "piege", "canvas"], [
+    () => piegeNombreDePieces(10, 1),
+  ]),
+  gab("cp_monnaie_comparer_fixed_2", "cp_monnaie_comparer", 4,
+    "Une pièce de 2 € vaut deux pièces de 1 €.",
+    ["comparer", "piege", "canvas"], [
+    () => piegeNombreDePieces(2, 1),
+  ]),
+  gab("cp_monnaie_comparer_tpl_1", "cp_monnaie_comparer", 4,
+    "Compte la valeur de chaque tas, pas le nombre de pièces.",
+    ["comparer", "piege", "canvas"], [
+    () => piegeNombreDePieces(randomChoice([5, 10, 20]), randomChoice([1, 2])),
+    () => piegeNombreDePieces(randomChoice([10, 20]), 5),
+  ]),
 
   /* =========================================================
-     CP_MONNAIE_CONSTITUER — fabriquer une somme donnée
+     CP_MONNAIE_CONSTITUER — faire une somme donnée
   ========================================================= */
-  {
-    kind: "template",
-    id: "cp_monnaie_constituer_tpl_3",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_constituer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le billet est déjà posé. Cherche ce qui manque.",
-    tags: ["cp", "monnaie", "constituer", "template"],
-    generate: () => {
-      const billet = randomChoice([5, 10, 20]);
-      const manque = randomInt(1, 8);
-      const somme = billet + manque;
-      return {
-        text: `Tu as un billet de ${billet} € et beaucoup de pièces de 1 €. Combien de pièces faut-il ajouter au billet pour faire ${somme} € ?`,
-        format: "short",
-        expected: [String(manque)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Constituer une somme, c'est réunir des pièces et des billets qui font exactement le montant demandé.",
-          "On pose d'abord la plus grande valeur, puis on complète avec les pièces.",
-          `Le billet vaut ${billet} €. De ${billet} à ${somme}, il manque ${manque} € : il faut donc ${manque} pièces de 1 €.`,
-          `Il faut ${manque} pièces.`,
-        ),
-      };
+  gab("cp_monnaie_constituer_tpl_1", "cp_monnaie_constituer", 3,
+    "Compte ce que tu as, puis ce qui manque pour arriver au prix.",
+    ["constituer", "canvas"], [
+    // Combien manque-t-il ?
+    () => {
+      const t0: Tas = mergeTas([[randomChoice([5, 10]), 1], [1, randomInt(0, 3)], [2, randomInt(0, 2)]]);
+      const a = total(t0);
+      const prix = a + randomInt(1, 6);
+      const achat = achatPour(prix);
+      const p = quelquun();
+      const t = randomChoice([
+        `${p.nom} veut acheter ${achat.quoi} à ${eu(prix)}. Voici son argent. Combien lui manque-t-il ?`,
+        `${achat.ou.charAt(0).toUpperCase()}${achat.ou.slice(1)}, ${achat.quoi} coûte ${eu(prix)}. ${p.nom} a cet argent. Combien lui manque-t-il ?`,
+      ]);
+      return qcm(t, choixNombres(prix - a, [prix, a, prix - a + 1, prix - a - 1]), eu(prix - a),
+        exp("Il manque ce qu'il faut ajouter pour arriver au prix.", "On compte l'argent, puis on avance jusqu'au prix.",
+          `${p.nom} a ${eu(a)}. De ${a} à ${prix}, il y a ${prix - a}.`, `Il manque ${eu(prix - a)}.`),
+        dessin(t0));
     },
-  },
-  {
-    kind: "template",
-    id: "cp_monnaie_constituer_tpl_1",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_constituer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Combien de fois le billet tient-il dans la somme ?",
-    tags: ["cp", "monnaie", "constituer", "template"],
-    generate: () => {
-      const billet = randomChoice([5, 10, 20]);
-      const nb = randomInt(2, 5);
-      const somme = billet * nb;
-      return {
-        text: `Combien faut-il de billets de ${billet} € pour faire ${somme} € ?`,
-        format: "short",
-        expected: [String(nb)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Constituer une somme avec des billets identiques, c'est chercher combien de fois le billet tient dans le montant.",
-          "On compte de billet en billet jusqu'à atteindre la somme.",
-          `On compte : ${Array.from({ length: nb }, (_, i) => `${(i + 1) * billet} €`).join(", ")}. Il a fallu ${nb} billets.`,
-          `Il faut ${nb} billets de ${billet} €.`,
-        ),
-      };
+    // Combien de pièces de 1 € ajouter ?
+    () => {
+      const b = randomChoice([5, 10, 20]);
+      const cible = b + randomInt(1, 5);
+      const p = quelquun();
+      const t = randomChoice([
+        `${p.nom} a ce billet. Combien de pièces de 1 € doit-${p.il} ajouter pour avoir ${eu(cible)} ?`,
+        `Pour payer ${eu(cible)}, ${p.nom} pose ce billet. Combien de pièces de 1 € faut-il encore ?`,
+      ]);
+      return qcm(t, choixNombres(cible - b, [cible, b, cible - b + 1], false), String(cible - b),
+        exp("On ajoute des pièces de 1 € une par une.", `On part de ${b} et on compte jusqu'à ${cible}.`,
+          `${b} + ${cible - b} = ${cible}.`, `Il faut ${cible - b} pièces de 1 €.`),
+        dessin([[b, 1]]));
     },
-  },
-  {
-    kind: "template",
-    id: "cp_monnaie_constituer_tpl_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_constituer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Prends d'abord le plus grand billet possible, puis complète.",
-    tags: ["cp", "monnaie", "constituer", "template"],
-    generate: () => {
-      const dizaines = randomInt(1, 5);
-      const unites = randomInt(1, 4);
-      const somme = dizaines * 10 + unites;
-      return {
-        text: `Tu dois payer ${somme} € avec des billets de 10 € et des pièces de 1 €, en utilisant le moins d'argent possible. Combien prends-tu de billets de 10 € ?`,
-        format: "short",
-        expected: [String(dizaines)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Pour utiliser le moins de pièces et de billets possible, on commence toujours par les plus grandes valeurs.",
-          "On lit le chiffre des dizaines : il donne le nombre de billets de 10 €.",
-          `${somme} = ${dizaines} dizaines et ${unites} unités. On prend donc ${dizaines} billets de 10 €, puis ${unites} pièces de 1 €.`,
-          `On prend ${dizaines} billets de 10 €.`,
-        ),
-      };
+  ]),
+  gab("cp_monnaie_constituer_tpl_3", "cp_monnaie_constituer", 3,
+    "Compte de 10 en 10 (ou de 5 en 5, de 2 en 2) jusqu'à la somme.",
+    ["constituer", "canvas"], [
+    () => {
+      const [v, somme] = randomChoice([[10, 30], [10, 40], [10, 50], [10, 60], [10, 80], [20, 40], [20, 60], [20, 100], [5, 15], [5, 20], [2, 8], [2, 10], [2, 12], [10, 100], [5, 25]] as const);
+      const bon = somme / v;
+      const p = quelquun();
+      const t = randomChoice([
+        `Combien faut-il de ${estPiece(v) ? "pièces" : "billets"} de ${v} € pour faire ${eu(somme)} ?`,
+        `${p.nom} veut payer ${eu(somme)} avec des ${estPiece(v) ? "pièces" : "billets"} de ${v} €. Combien en faut-il ?`,
+        `Pic range ${eu(somme)} en ${estPiece(v) ? "pièces" : "billets"} de ${v} €. Combien en a-t-il ?`,
+      ]);
+      return qcm(t, choixNombres(bon, [somme, bon + 1, bon - 1, bon * 2], false), String(bon),
+        exp(`${nomArgent(v)} vaut ${v} €.`, `On compte de ${v} en ${v} jusqu'à ${somme}.`,
+          `${Array.from({ length: bon }, (_, i) => (i + 1) * v).join(", ")}.`, `Il en faut ${bon}.`));
     },
-  },
+    // Quel billet ou quelle pièce manque ?
+    () => {
+      const t0: Tas = mergeTas([[randomChoice([10, 20]), 1], [randomChoice([1, 2, 5]), randomInt(1, 2)]]);
+      const manque = randomChoice([1, 2, 5, 10]);
+      const somme = total(t0) + manque;
+      const p = quelquun();
+      const bon = nomArgent(manque);
+      const t = `${p.nom} veut avoir ${eu(somme)}. ${randomChoice(["Voici son argent.", "Voilà ce qu'il y a déjà dans sa main."])} Que lui faut-il encore ?`;
+      return qcm(t, makeChoices(bon, [1, 2, 5, 10, 20].filter((x) => x !== manque).map(nomArgent)), bon,
+        exp("Il manque ce qu'il faut ajouter pour arriver à la somme.", "On compte l'argent, puis on avance jusqu'à la somme.",
+          `${total(t0)} + ${manque} = ${somme}.`, `Il lui faut encore ${bon}.`),
+        dessin(t0));
+    },
+  ]),
+  gab("cp_monnaie_constituer_tpl_2", "cp_monnaie_constituer", 4,
+    "Prends autant de billets de 10 € que de dizaines, puis des pièces pour les unités.",
+    ["constituer"], [
+    () => {
+      const n = randomInt(2, 9) * 10 + randomInt(1, 9);
+      const d = Math.floor(n / 10);
+      const u = n % 10;
+      const p = quelquun();
+      const achat = achatPour(n);
+      const billets = Math.random() < 0.5;
+      const t = `${p.nom} doit payer ${eu(n)} ${achat.ou} avec des billets de 10 € et des pièces de 1 €. ${elleIl(p)} prend le moins d'argent possible. Combien de ${billets ? "billets de 10 €" : "pièces de 1 €"} prend-${p.il} ?`;
+      const bon = billets ? d : u;
+      return qcm(t, choixNombres(bon, billets ? [u, n, d + 1] : [d, n, u + 10], false), String(bon),
+        exp("Un billet de 10 € vaut une dizaine d'euros.", "Les dizaines du prix disent les billets, les unités disent les pièces.",
+          `${n} = ${d * 10} + ${u} : ${d} billets et ${u} pièces.`, `${p.nom} prend ${bon} ${billets ? "billets" : "pièces"}.`));
+    },
+    () => {
+      const n = randomInt(2, 4) * 20 + randomInt(1, 9);
+      const v = Math.floor(n / 20);
+      const p = quelquun();
+      const achat = achatPour(n);
+      const t = `${achat.quoi.charAt(0).toUpperCase()}${achat.quoi.slice(1)} coûte ${eu(n)}. ${p.nom} paie avec des billets de 20 € d'abord, puis le reste en pièces. Combien de billets de 20 € donne-t-${p.il} ?`;
+      return qcm(t, choixNombres(v, [v + 1, Math.floor(n / 10), n % 20], false), String(v),
+        exp("Un billet de 20 € vaut deux billets de 10 €.", "On compte de 20 en 20 sans dépasser le prix.",
+          `${Array.from({ length: v }, (_, i) => (i + 1) * 20).join(", ")} : ${v} billets, il reste ${n - 20 * v} €.`, `${p.il === "il" ? "Il" : "Elle"} donne ${v} billets de 20 €.`));
+    },
+  ]),
 
   /* =========================================================
      CP_MONNAIE_RENDRE — rendre la monnaie
-     Le piège : rendre le PRIX au lieu de ce qui reste.
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "cp_monnaie_rendre_fixed_1",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_rendre",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Un livre coute 7 €. Tu paies avec un billet de 10 €. Combien la marchande doit-elle te rendre ?",
-    format: "short",
-    expected: ["3"],
-    comparator: "number_equal",
-    hint: "De 7 à 10, combien manque-t-il ?",
-    explanation: exp(
-      "Rendre la monnaie, c'est redonner ce qui a été payé en trop.",
-      "On cherche l'écart entre ce qu'on a donné et le prix.",
-      "De 7 à 10, il faut ajouter 3 : 7 + 3 = 10. La marchande rend donc 3 €. Elle ne rend pas 7 € : 7 €, c'est ce que le livre coute.",
-      "Elle doit rendre 3 €.",
-    ),
-    tags: ["cp", "monnaie", "rendre", "piege"],
-  },
-  {
-    kind: "fixed",
-    id: "cp_monnaie_rendre_fixed_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_rendre",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Tu paies un objet qui coute exactement 5 € avec un billet de 5 €. Que te rend la marchande ?",
-    format: "qcm",
-    choices: ["rien", "5 €", "1 €", "10 €"],
-    expected: ["rien"],
-    comparator: "mcq_exact",
-    hint: "As-tu donné plus que le prix ?",
-    explanation: exp(
-      "On ne rend de la monnaie que si l'on a donné plus que le prix.",
-      "On compare ce qu'on donne et ce que l'objet coute.",
-      "Le billet vaut 5 € et l'objet coute 5 € : c'est exactement le compte. Il n'y a rien en trop, donc rien à rendre.",
-      "Elle ne rend rien.",
-    ),
-    tags: ["cp", "monnaie", "rendre", "piege", "qcm"],
-  },
-  {
-    kind: "template",
-    id: "cp_monnaie_rendre_tpl_1",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_rendre",
-    difficulty: 4,
-    theme: "reunion",
-    hint: "Cherche ce qui manque pour aller du prix jusqu'au billet.",
-    tags: ["cp", "monnaie", "rendre", "reunion", "template"],
-    generate: () => {
-      const billet = randomChoice([10, 20]);
-      const prix = randomInt(2, billet - 2);
-      const rendu = billet - prix;
-      const achat = randomChoice([
-        "un paquet de letchis",
-        "un jeu de cartes",
-        "un cahier",
-        "une bouteille de jus",
-        "un ballon",
-      ]);
-      return {
-        text: `${achat.charAt(0).toUpperCase()}${achat.slice(1)} coute ${prix} €. Tu paies avec un billet de ${billet} €. Combien te rend-on ?`,
-        format: "short",
-        expected: [String(rendu)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La monnaie rendue, c'est la différence entre ce qu'on a donné et le prix.",
-          "On part du prix et on compte ce qui manque pour arriver au billet.",
-          `De ${prix} à ${billet}, il manque ${rendu} : ${prix} + ${rendu} = ${billet}.`,
-          `On te rend ${rendu} €.`,
-        ),
-      };
+  gab("cp_monnaie_rendre_fixed_2", "cp_monnaie_rendre", 2,
+    "Compte du prix jusqu'à ce que tu as donné.",
+    ["rendre", "piege", "canvas"], [
+    () => rendre(5, randomInt(1, 4)),
+    () => {
+      const v = randomChoice([2, 5, 10]);
+      return rendre(v, v);
     },
-  },
+  ]),
+  gab("cp_monnaie_rendre_fixed_1", "cp_monnaie_rendre", 3,
+    "Pars du prix et compte jusqu'à 10.",
+    ["rendre", "piege", "canvas"], [
+    () => rendre(10, randomInt(1, 9)),
+  ]),
+  gab("cp_monnaie_rendre_tpl_1", "cp_monnaie_rendre", 4,
+    "Pars du prix et avance jusqu'à la somme donnée : c'est ce qu'on te rend.",
+    ["rendre", "canvas"], [
+    () => rendre(20, randomInt(11, 19)),
+    () => rendre(randomChoice([10, 20]), randomInt(3, 9)),
+  ]),
 
   /* =========================================================
-     CP_MONNAIE_DEFI — ce qui ne s'obtient pas en appliquant une
-     règle : payer avec le moins d'argent possible, et trouver
-     deux façons de faire la même somme.
+     CP_MONNAIE_DEFI — problèmes à plusieurs étapes
   ========================================================= */
-  {
-    kind: "template",
-    id: "cp_monnaie_defi_tpl_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Compte de deux en deux jusqu'au montant.",
-    tags: ["cp", "monnaie", "defi", "template"],
-    generate: () => {
-      const nb = randomInt(2, 9);
-      const somme = nb * 2;
-      return {
-        text: `Tu dois faire ${somme} € avec des pièces de 2 € seulement. Combien t'en faut-il ?`,
-        format: "short",
-        expected: [String(nb)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Fabriquer une somme avec des pièces identiques, c'est compter de cette valeur en cette valeur.",
-          "On avance de 2 en 2 jusqu'à atteindre le montant.",
-          `On compte : ${Array.from({ length: nb }, (_, i) => (i + 1) * 2).join(", ")}. Il a fallu ${nb} pièces.`,
-          `Il faut ${nb} pièces de 2 €.`,
-        ),
-      };
+  gab("cp_monnaie_defi_tpl_2", "cp_monnaie_defi", 5,
+    "Calcule ce que vaut chaque tas avant de choisir.",
+    ["defi", "canvas"], [
+    // Peut-on payer exactement ?
+    () => {
+      const t0: Tas = mergeTas([[2, randomInt(1, 4)], [1, randomInt(0, 2)], [5, randomInt(0, 1)]]);
+      const a = total(t0);
+      const ok = Math.random() < 0.5;
+      const prix = ok ? randomInt(Math.max(1, a - 3), a) : a + randomInt(1, 4);
+      const achat = achatPour(prix);
+      const p = quelquun();
+      const bon = ok ? "oui" : "non, il manque de l'argent";
+      const t = `${p.nom} a cet argent. ${elleIl(p)} veut ${achat.quoi} à ${eu(prix)}. A-t-${p.il} assez d'argent ?`;
+      return qcm(t, makeChoices(bon, ["oui", "non, il manque de l'argent", "on ne peut pas savoir"]), bon,
+        exp("On a assez d'argent si la somme est au moins égale au prix.", "On compte l'argent, puis on compare au prix.",
+          `${p.nom} a ${eu(a)} ; le prix est ${eu(prix)}.`, ok ? "Oui, c'est assez." : "Non, il manque de l'argent."),
+        dessin(t0));
     },
-  },
-  {
-    kind: "fixed",
-    id: "cp_monnaie_defi_fixed_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Tu dois payer 48 € en utilisant le moins de billets et de pièces possible. Tu as des billets de 20 €, de 10 €, des pièces de 2 € et de 1 €. Combien de billets de 20 € prends-tu ?",
-    format: "short",
-    expected: ["2"],
-    comparator: "number_equal",
-    hint: "Commence toujours par la plus grande valeur, tant qu'elle ne dépasse pas.",
-    explanation: exp(
-      "Payer avec le moins d'argent possible, c'est prendre à chaque fois la plus grande valeur qui ne dépasse pas.",
-      "On essaie les billets du plus grand au plus petit.",
-      "Deux billets de 20 € font 40 €, et un troisième en ferait 60 € : c'est trop. On prend donc 2 billets de 20 €. Il reste 8 € à payer : un billet ne convient plus, on complète avec 4 pièces de 2 €.",
-      "On prend 2 billets de 20 €.",
-    ),
-    tags: ["cp", "monnaie", "defi", "piege"],
-  },
-  {
-    kind: "template",
-    id: "cp_monnaie_defi_tpl_1",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "cp_monnaie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Compare ce que valent les deux tas avant de répondre.",
-    tags: ["cp", "monnaie", "defi", "template"],
-    generate: () => {
-      const nbUn = randomInt(2, 8);
-      const nbDeux = randomInt(2, 6);
-      const totalUn = nbUn;
-      const totalDeux = nbDeux * 2;
-      const memeChose = totalUn === totalDeux;
-      const bonne = memeChose
-        ? "les deux tas valent pareil"
-        : totalUn > totalDeux
-          ? "le tas de pièces de 1 €"
-          : "le tas de pièces de 2 €";
-      return {
-        text: `Un tas contient ${nbUn} pièces de 1 €, un autre contient ${nbDeux} pièces de 2 €. Quel tas vaut le plus ?`,
-        format: "qcm",
-        choices: makeChoices(bonne, [
-          "le tas de pièces de 1 €",
-          "le tas de pièces de 2 €",
-          "les deux tas valent pareil",
-          "celui qui a le plus de pièces",
-        ]),
-        expected: [bonne],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "La valeur d'un tas ne dépend pas du nombre de pièces mais de ce que chacune vaut.",
-          "On calcule les deux totaux, puis on les compare.",
-          `Le premier tas vaut ${totalUn} €. Le second vaut ${nbDeux} × 2 = ${totalDeux} €. ${memeChose ? "Les deux totaux sont égaux." : `${Math.max(totalUn, totalDeux)} est plus grand que ${Math.min(totalUn, totalDeux)}.`}`,
-          memeChose ? "Les deux tas valent pareil." : `C'est ${bonne}.`,
-        ),
-      };
+    // Quel tas vaut le plus ?
+    () => {
+      const n1 = randomInt(5, 9);
+      const n2 = randomInt(3, Math.min(6, n1 - 1));
+      const bon = n2 * 2 > n1 ? "le tas de pièces de 2 €" : n2 * 2 < n1 ? "le tas de pièces de 1 €" : "les deux tas valent pareil";
+      const [x, y] = deuxEnfants();
+      const t = `${x.nom} a ${n1} pièces de 1 €. ${y.nom} a ${n2} pièces de 2 €. Quel tas vaut le plus ?`;
+      return qcm(t, makeChoices(bon, ["le tas de pièces de 1 €", "le tas de pièces de 2 €", "les deux tas valent pareil", "celui qui a le plus de pièces"]), bon,
+        exp("Un tas vaut la somme de ses pièces.", "On compte la valeur de chaque tas.",
+          `${n1} pièces de 1 € : ${eu(n1)}. ${n2} pièces de 2 € : ${eu(n2 * 2)}.`, `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`),
+        deuxTas({ nom: x.nom, tas: [[1, n1]] }, { nom: y.nom, tas: [[2, n2]] }));
     },
-  },
+  ]),
+  gab("cp_monnaie_defi_fixed_2", "cp_monnaie_defi", 5,
+    "Prends d'abord les plus gros billets, sans dépasser la somme.",
+    ["defi", "piege"], [
+    () => {
+      const n = randomInt(2, 4) * 20 + randomChoice([0, 10]) + randomInt(2, 9);
+      const v20 = Math.floor(n / 20);
+      const r = n - 20 * v20;
+      const v10 = Math.floor(r / 10);
+      const r2 = r - 10 * v10;
+      const v2 = Math.floor(r2 / 2);
+      const v1 = r2 % 2;
+      const p = quelquun();
+      const quoi = randomChoice([
+        { mot: "billets de 20 €", bon: v20 },
+        { mot: "pièces de 2 €", bon: v2 },
+      ]);
+      const t = `${p.nom} doit payer ${eu(n)} avec le moins de billets et de pièces possible. ${elleIl(p)} a des billets de 20 € et de 10 €, des pièces de 2 € et de 1 €. Combien de ${quoi.mot} prend-${p.il} ?`;
+      return qcm(t, choixNombres(quoi.bon, [quoi.bon + 1, quoi.bon - 1, Math.floor(n / 10), r2], false), String(quoi.bon),
+        exp("Avec le moins d'argent possible, on prend d'abord les plus gros billets.", "On prend des billets de 20 €, puis de 10 €, puis des pièces de 2 € et de 1 €.",
+          `${n} = ${[...Array(v20).fill(20), ...Array(v10).fill(10), ...Array(v2).fill(2), ...Array(v1).fill(1)].join(" + ")}.`, `${elleIl(p)} prend ${quoi.bon} ${quoi.mot}.`));
+    },
+  ]),
+  gab("cp_monnaie_defi_tpl_1", "cp_monnaie_defi", 5,
+    "Compte de 2 en 2 (ou de 5 en 5) jusqu'à la somme.",
+    ["defi"], [
+    () => {
+      const v = randomChoice([2, 5, 10]);
+      const k = v === 2 ? randomInt(3, 9) : v === 5 ? randomInt(2, 6) : randomInt(3, 9);
+      const somme = v * k;
+      const p = quelquun();
+      const achat = achatPour(somme);
+      const t = randomChoice([
+        `${p.nom} doit faire ${eu(somme)} avec des ${estPiece(v) ? "pièces" : "billets"} de ${v} € seulement. Combien lui en faut-il ?`,
+        `${achat.quoi.charAt(0).toUpperCase()}${achat.quoi.slice(1)} coûte ${eu(somme)}. ${p.nom} n'a que des ${estPiece(v) ? "pièces" : "billets"} de ${v} €. Combien en donne-t-${p.il} ?`,
+      ]);
+      return qcm(t, choixNombres(k, [somme, k + 1, k - 1, somme - v], false), String(k),
+        exp(`${nomArgent(v)} vaut ${v} €.`, `On compte de ${v} en ${v} jusqu'à ${somme}.`,
+          `${Array.from({ length: k }, (_, i) => (i + 1) * v).join(", ")} : ${k} fois.`, `Il en faut ${k}.`));
+    },
+    // Deux achats, puis la monnaie.
+    () => {
+      const pa = randomInt(2, 6);
+      const pb = randomInt(2, 6);
+      const a = achatPour(pa);
+      const b = achatPour(pb, a.quoi);
+      const donne = 20;
+      const p = quelquun();
+      const t = `${p.nom} achète ${a.quoi} à ${eu(pa)} et ${b.quoi} à ${eu(pb)}. ${elleIl(p)} paie avec un billet de 20 €. Combien lui rend-on ?`;
+      const bon = donne - pa - pb;
+      return qcm(t, choixNombres(bon, [pa + pb, bon + 1, bon - 1, donne - pa]), eu(bon),
+        exp("On rend ce qui reste quand on a payé.", "On calcule le prix total, puis on avance jusqu'à 20.",
+          `${pa} + ${pb} = ${pa + pb}. De ${pa + pb} à 20, il y a ${bon}.`, `On lui rend ${eu(bon)}.`),
+        dessin([[20, 1]]));
+    },
+  ]),
 ];
+
+/** Regroupe les lignes de même valeur et retire les vides. */
+function mergeTas(t: Tas): Tas {
+  const m = new Map<number, number>();
+  for (const [v, n] of t) if (n > 0) m.set(v, (m.get(v) ?? 0) + n);
+  return [...m.entries()];
+}
+
+/** Le piège du BO : plus de pièces, mais moins d'argent (ou autant). */
+function piegeNombreDePieces(gros: number, petit: number): Q {
+  const [x, y] = deuxEnfants();
+  const nbGros = gros >= 20 ? 1 : randomInt(1, 2);
+  const valGros = gros * nbGros;
+  const cas = randomInt(0, 2); // 0 : moins, 1 : autant, 2 : un peu plus mais moins de pièces chez l'autre
+  let nbPetit = cas === 0 ? randomInt(Math.ceil(valGros / petit / 2), Math.ceil(valGros / petit) - 1) : cas === 1 ? valGros / petit : Math.ceil(valGros / petit) + 1;
+  if (!Number.isInteger(nbPetit) || nbPetit < 2) nbPetit = Math.max(2, Math.ceil(valGros / petit) - 1);
+  if (nbPetit > 10) nbPetit = 10;
+  if (nbPetit <= nbGros) nbPetit = nbGros + 1;
+  const valPetit = nbPetit * petit;
+  const tasX: Tas = [[petit, nbPetit]];
+  const tasY: Tas = [[gros, nbGros]];
+  const bon = valPetit > valGros ? x.nom : valPetit < valGros ? y.nom : "ils ont autant";
+  const t = randomChoice([
+    `${x.nom} a ${nomArgents(petit, nbPetit)}. ${y.nom} a ${nomArgents(gros, nbGros)}. Qui a le plus d'argent ?`,
+    `Voici l'argent ${deN(x.nom)} et ${deN(y.nom)}. Qui a le plus d'argent ?`,
+    `${x.nom} dit : « J'ai plus de ${estPiece(petit) ? "pièces" : "billets"}, donc plus d'argent ! » Qui a le plus d'argent ?`,
+  ]);
+  return qcm(t, makeChoices(bon, [x.nom, y.nom, "ils ont autant", "on ne peut pas savoir"]), bon,
+    exp("On compare la VALEUR de l'argent, pas le nombre de pièces.", "On calcule combien d'euros a chacun.",
+      `${x.nom} : ${eu(valPetit)}. ${y.nom} : ${eu(valGros)}.`, bon === "ils ont autant" ? "Ils ont autant d'argent." : `${bon} a le plus d'argent.`),
+    deuxTas({ nom: x.nom, tas: tasX }, { nom: y.nom, tas: tasY }));
+}
+
+/** Payer `donne` € pour un objet à `prix` € : combien rend-on ? */
+function rendre(donne: number, prix: number): Q {
+  const achat = achatPour(prix);
+  const p = quelquun();
+  const bon = donne - prix;
+  const billet = estPiece(donne) ? `une pièce de ${donne} €` : `un billet de ${donne} €`;
+  const t = randomChoice([
+    `${achat.quoi.charAt(0).toUpperCase()}${achat.quoi.slice(1)} coûte ${eu(prix)}. ${p.nom} paie avec ${billet}. Combien doit-on lui rendre ?`,
+    `${achat.ou.charAt(0).toUpperCase()}${achat.ou.slice(1)}, ${p.nom} achète ${achat.quoi} à ${eu(prix)}. ${elleIl(p)} donne ce billet. Combien lui rend-on ?`.replace("ce billet", estPiece(donne) ? "cette pièce" : "ce billet"),
+    `${p.nom} joue à la marchande. ${achat.quoi.charAt(0).toUpperCase()}${achat.quoi.slice(1)} coûte ${eu(prix)}, le client donne ${billet}. Combien ${p.nom} rend-${p.il} ?`,
+  ]);
+  if (bon === 0) {
+    return qcm(t, makeChoices("rien", [eu(donne), "1 €", eu(donne * 2)]), "rien",
+      exp("Quand on paie le prix exact, on ne rend rien.", "On compare ce qu'on donne et le prix.",
+        `${p.nom} donne ${eu(donne)} pour ${eu(prix)} : c'est le prix exact.`, "On ne rend rien."),
+      dessin([[donne, 1]]));
+  }
+  return qcm(t, choixNombres(bon, [prix, donne, bon + 1, bon - 1, donne + prix].filter((x) => x > 0)), eu(bon),
+    exp("Rendre la monnaie, c'est donner ce qui a été payé en trop.", `On part du prix et on compte jusqu'à ${donne}.`,
+      `De ${prix} à ${donne}, il y a ${bon} : ${prix} + ${bon} = ${donne}.`, `On rend ${eu(bon)}.`),
+    dessin([[donne, 1]]));
+}
