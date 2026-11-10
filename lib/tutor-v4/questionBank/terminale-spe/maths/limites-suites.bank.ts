@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/terminale-spe/limites-suites.bank.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { renfortLimitesSuites } from "./limites-suites-renfort";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -28,7 +29,13 @@ function exp(
   );
 }
 
-export const limitesSuitesBank: TutorBankItemV4[] = [
+// ⚠️ 10/11/2026 : renfort. La mesure des squelettes donnait 9 à 16 squelettes
+// par micro et 11 à 18 répétitions sur 20 : on ne garde des questions figées
+// que pour quelques CAS SPÉCIAUX (cours, piège classique), écrits en LaTeX ;
+// le reste vient des générateurs de limites-suites-renfort.ts (avec correcteurs).
+// Les anciens gabarits et les questions « open » sont retirés
+// (`terminale_spe_limite_suite_defi_tpl_1` attendait « 1.3333333333333333 »).
+const anciens: TutorBankItemV4[] = [
   /* =========================
      LIMITE_SUITE_INTERPRETER
   ========================= */
@@ -946,9 +953,9 @@ export const limitesSuitesBank: TutorBankItemV4[] = [
     kind: "fixed", id: "terminale_spe_lim_suite_interpreter_h3", niveau: "terminale-spe", matiere: "maths",
     notionId: "limite_suite", microId: "limite_suite_interpreter", difficulty: 3, theme: "neutral",
     text: "Une suite est convergente lorsque :",
-    format: "qcm", choices: ["elle admet une limite finie", "elle tend vers +∞", "elle est croissante", "elle est bornée"], expected: ["elle admet une limite finie"], comparator: "mcq_exact",
-    hint: "Convergence ⟺ limite finie.",
-    explanation: exp("La convergence se définit par une limite finie.", "Une suite tendant vers ±∞ diverge.", "Être bornée ne suffit pas.", "Elle admet une limite finie."),
+    format: "qcm", choices: ["elle admet une limite finie", "elle tend vers $+\\infty$", "elle est croissante", "elle est bornée"], expected: ["elle admet une limite finie"], comparator: "mcq_exact",
+    hint: "Converger, c'est avoir une limite finie.",
+    explanation: exp("La convergence se définit par une limite finie.", "Une suite qui tend vers $+\\infty$ ou $-\\infty$ diverge.", "Être bornée ne suffit pas.", "Elle admet une limite finie."),
     tags: ["terminale-spe", "limite_suite", "interpreter", "qcm"],
   },
   {
@@ -1028,10 +1035,10 @@ export const limitesSuitesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "terminale_spe_lim_suite_operations_h4", niveau: "terminale-spe", matiere: "maths",
     notionId: "limite_suite", microId: "limite_suite_operations", difficulty: 5, theme: "neutral",
-    text: "« +∞ - ∞ » est :",
-    format: "qcm", choices: ["une forme indéterminée", "égal à 0", "égal à +∞", "égal à -∞"], expected: ["une forme indéterminée"], comparator: "mcq_exact",
+    text: "Si $u_n$ tend vers $+\\infty$ et $v_n$ tend vers $+\\infty$, l'écriture « $+\\infty - \\infty$ » pour la limite de $u_n - v_n$ est :",
+    format: "qcm", choices: ["une forme indéterminée", "égale à $0$", "égale à $+\\infty$", "égale à $-\\infty$"], expected: ["une forme indéterminée"], comparator: "mcq_exact",
     hint: "On ne peut pas conclure directement.",
-    explanation: exp("Certaines opérations sont indéterminées.", "« +∞ - ∞ » ne permet pas de conclure.", "Il faut lever l'indétermination.", "C'est une forme indéterminée."),
+    explanation: exp("Certaines opérations sur les limites sont indéterminées.", "« $+\\infty - \\infty$ » ne permet pas de conclure : $n^2 - n \\to +\\infty$ mais $(n + 1) - n \\to 1$.", "Il faut lever l'indétermination.", "C'est une forme indéterminée."),
     tags: ["terminale-spe", "limite_suite", "operations", "qcm"],
   },
 
@@ -1059,7 +1066,7 @@ export const limitesSuitesBank: TutorBankItemV4[] = [
     text: "Comment s'appelle le théorème d'encadrement des limites ?",
     format: "qcm", choices: ["théorème des gendarmes", "théorème de Pascal", "théorème des valeurs intermédiaires", "théorème de Thalès"], expected: ["théorème des gendarmes"], comparator: "mcq_exact",
     hint: "Deux suites encadrent la troisième.",
-    explanation: exp("L'encadrement de limites a un nom imagé.", "Deux « gendarmes » encadrent la suite.", "Même limite des gendarmes ⟹ même limite.", "C'est le théorème des gendarmes."),
+    explanation: exp("L'encadrement de limites a un nom imagé.", "Deux « gendarmes » encadrent la suite.", "Si les deux gendarmes ont la même limite, la suite encadrée a aussi cette limite.", "C'est le théorème des gendarmes."),
     tags: ["terminale-spe", "limite_suite", "comparaison", "qcm"],
   },
   {
@@ -1121,7 +1128,7 @@ export const limitesSuitesBank: TutorBankItemV4[] = [
     kind: "fixed", id: "terminale_spe_lim_suite_mono_h5", niveau: "terminale-spe", matiere: "maths",
     notionId: "limite_suite", microId: "limite_suite_monotone_bornee", difficulty: 5, theme: "neutral",
     text: "Le théorème de convergence monotone garantit-il la VALEUR de la limite ?",
-    format: "qcm", choices: ["Non, seulement l'existence", "Oui, il la donne", "Oui, elle vaut 0", "Non, la suite diverge"], expected: ["Non, seulement l'existence"], comparator: "mcq_exact",
+    format: "qcm", choices: ["Non, seulement l'existence", "Oui, il la donne", "Oui, elle vaut le majorant", "Non, la suite diverge"], expected: ["Non, seulement l'existence"], comparator: "mcq_exact",
     hint: "Résultat d'existence.",
     explanation: exp("Le théorème prouve l'existence d'une limite finie.", "Il ne calcule pas sa valeur.", "Autre méthode requise pour la valeur.", "Non, seulement l'existence."),
     tags: ["terminale-spe", "limite_suite", "monotone", "qcm"],
@@ -1159,8 +1166,19 @@ export const limitesSuitesBank: TutorBankItemV4[] = [
     notionId: "limite_suite", microId: "limite_suite_defi", difficulty: 5, theme: "neutral",
     text: "Pour justifier qu'une suite récurrente croissante converge, il suffit souvent de montrer qu'elle est :",
     format: "qcm", choices: ["majorée", "minorée", "négative", "constante"], expected: ["majorée"], comparator: "mcq_exact",
-    hint: "Croissante + majorée ⟹ convergente.",
+    hint: "Croissante et majorée : elle converge.",
     explanation: exp("On vise le théorème de convergence monotone.", "La suite est déjà croissante.", "Il reste à montrer qu'elle est majorée.", "Il suffit de montrer qu'elle est majorée."),
     tags: ["terminale-spe", "limite_suite", "type_bac", "qcm"],
   },
 ];
+
+/** Les figées gardées : cours et pièges classiques (10/11/2026). */
+const CAS_SPECIAUX = new Set([
+  "terminale_spe_lim_suite_interpreter_h3", // convergente = limite finie
+  "terminale_spe_lim_suite_operations_h4", // « +∞ − ∞ » est une forme indéterminée
+  "terminale_spe_lim_suite_comparaison_h3", // le nom du théorème des gendarmes
+  "terminale_spe_lim_suite_mono_h5", // le théorème ne donne pas la valeur
+  "terminale_spe_lim_suite_defi_h4", // croissante : il reste « majorée »
+]);
+
+export const limitesSuitesBank: TutorBankItemV4[] = [...anciens.filter((i) => CAS_SPECIAUX.has(i.id)), ...renfortLimitesSuites];

@@ -15,6 +15,7 @@ import { CORRECTEURS as nombresComplexes } from "./nombres-complexes";
 import { CORRECTEURS as asymptotesSymetries } from "./asymptotes-symetries";
 import { CORRECTEURS as gaucheDroiteApproximation } from "./gauche-droite-approximation";
 import { CORRECTEURS as equadiffSecondOrdre } from "./equadiff-second-ordre";
+import { CORRECTEURS as suites } from "./suites";
 
 export const CORRECTEURS_TLE: CorrecteursMaths = {
   ...integrationParties,
@@ -29,4 +30,5 @@ export const CORRECTEURS_TLE: CorrecteursMaths = {
   ...asymptotesSymetries,
   ...gaucheDroiteApproximation,
   ...equadiffSecondOrdre,
+  ...suites,
 };

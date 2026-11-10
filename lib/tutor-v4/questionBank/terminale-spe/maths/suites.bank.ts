@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/terminale-spe/suites.bank.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { renfortSuites } from "./suites-renfort";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -23,7 +24,12 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
   );
 }
 
-export const suitesBank: TutorBankItemV4[] = [
+// ⚠️ 10/11/2026 : renfort. La mesure des squelettes donnait 11 à 16 squelettes
+// par micro et 13 à 18 répétitions sur 20 : on ne garde des questions figées
+// que pour quelques CAS SPÉCIAUX (cours, piège classique), écrits en LaTeX ;
+// le reste vient des générateurs de suites-renfort.ts (avec correcteurs).
+// Les anciens gabarits et les questions « open » sont retirés.
+const anciens: TutorBankItemV4[] = [
   /* =========================
      SUITE_RECONNAITRE
   ========================= */
@@ -1040,10 +1046,10 @@ export const suitesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "terminale_spe_suite_reconnaitre_h5", niveau: "terminale-spe", matiere: "maths",
     notionId: "suite_numerique", microId: "suite_reconnaitre", difficulty: 4, theme: "neutral",
-    text: "Une suite vérifie uₙ₊₁ = uₙ + n. Est-elle arithmétique ?",
-    format: "qcm", choices: ["Non, la quantité ajoutée change", "Oui, de raison 1", "Oui, de raison n", "Oui, géométrique"], expected: ["Non, la quantité ajoutée change"], comparator: "mcq_exact",
-    hint: "On ajoute n, qui dépend du rang.",
-    explanation: exp("Une suite arithmétique ajoute une CONSTANTE.", "Ici on ajoute n, qui varie.", "uₙ₊₁ - uₙ = n n'est pas constant.", "La suite n'est pas arithmétique."),
+    text: "Une suite vérifie $u_{n+1} = u_n + n$. Est-elle arithmétique ?",
+    format: "qcm", choices: ["Non, la quantité ajoutée change", "Oui, de raison $1$", "Oui, de raison $n$", "Non, elle est géométrique"], expected: ["Non, la quantité ajoutée change"], comparator: "mcq_exact",
+    hint: "On ajoute $n$, qui dépend du rang.",
+    explanation: exp("Une suite arithmétique ajoute toujours la MÊME constante.", "Ici on ajoute $n$, qui varie.", "$u_{n+1} - u_n = n$ n'est pas constant.", "La suite n'est pas arithmétique."),
     tags: ["terminale-spe", "suite", "reconnaitre", "qcm"],
   },
 
@@ -1134,10 +1140,10 @@ export const suitesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "terminale_spe_suite_explicite_recurrence_h5", niveau: "terminale-spe", matiere: "maths",
     notionId: "suite_numerique", microId: "suite_explicite_recurrence", difficulty: 3, theme: "neutral",
-    text: "Avec quelle forme peut-on calculer u₁₀₀ sans calculer les termes précédents ?",
+    text: "Avec quelle forme peut-on calculer $u_{100}$ sans calculer les termes précédents ?",
     format: "qcm", choices: ["une forme explicite", "une forme récurrente", "un arbre pondéré", "une primitive"], expected: ["une forme explicite"], comparator: "mcq_exact",
-    hint: "Explicite = directement en fonction de n.",
-    explanation: exp("La forme explicite donne uₙ directement.", "On remplace n par 100.", "Pas besoin des termes précédents.", "La forme explicite."),
+    hint: "Explicite : directement en fonction de $n$.",
+    explanation: exp("La forme explicite donne $u_n$ directement en fonction de $n$.", "On remplace $n$ par $100$.", "Pas besoin des termes précédents.", "La forme explicite."),
     tags: ["terminale-spe", "suite", "explicite", "qcm"],
   },
   {
@@ -1193,7 +1199,7 @@ export const suitesBank: TutorBankItemV4[] = [
     text: "Pourquoi l'initialisation est-elle indispensable ?",
     format: "qcm", choices: ["sans premier maillon, la chaîne ne démarre pas", "pour calculer la limite", "pour dériver", "elle est facultative"], expected: ["sans premier maillon, la chaîne ne démarre pas"], comparator: "mcq_exact",
     hint: "Image de la chaîne de dominos.",
-    explanation: exp("La récurrence est une chaîne d'implications.", "L'hérédité transmet, mais il faut un point de départ vrai.", "Sans initialisation, rien ne garantit que Pₙ démarre.", "Sans premier maillon, la chaîne ne démarre pas."),
+    explanation: exp("La récurrence est une chaîne d'implications.", "L'hérédité transmet, mais il faut un point de départ vrai.", "Sans initialisation, rien ne garantit que la propriété est vraie au premier rang.", "Sans premier maillon, la chaîne ne démarre pas."),
     tags: ["terminale-spe", "suite", "recurrence", "preuve", "qcm"],
   },
 
@@ -1314,9 +1320,21 @@ export const suitesBank: TutorBankItemV4[] = [
     kind: "fixed", id: "terminale_spe_suite_defi_h2", niveau: "terminale-spe", matiere: "maths",
     notionId: "suite_numerique", microId: "suite_defi", difficulty: 5, theme: "neutral",
     text: "Dans un exercice de bac, on a montré qu'une suite est décroissante et minorée. On peut conclure qu'elle est :",
-    format: "qcm", choices: ["convergente", "divergente vers -∞", "croissante", "non bornée"], expected: ["convergente"], comparator: "mcq_exact",
+    format: "qcm", choices: ["convergente", "divergente vers $-\\infty$", "croissante", "non bornée"], expected: ["convergente"], comparator: "mcq_exact",
     hint: "Théorème de convergence monotone.",
-    explanation: exp("On applique le théorème de convergence monotone.", "Décroissante et minorée ⟹ bornée et monotone.", "Donc convergente.", "La suite est convergente."),
+    explanation: exp("On applique le théorème de convergence monotone.", "Décroissante et minorée : monotone, avec une borne du bon côté.", "Elle converge, mais le théorème ne donne pas la valeur de la limite.", "La suite est convergente."),
     tags: ["terminale-spe", "suite", "convergence", "type_bac", "qcm"],
   },
 ];
+
+/** Les figées gardées : cours et pièges classiques (10/11/2026). */
+const CAS_SPECIAUX = new Set([
+  "terminale_spe_suite_reconnaitre_h5", // u_{n+1} = u_n + n n'est pas arithmétique
+  "terminale_spe_suite_explicite_recurrence_h5", // forme explicite = calcul direct
+  "terminale_spe_suite_recurrence_preuve_h1", // l'ordre des trois étapes
+  "terminale_spe_suite_recurrence_preuve_h5", // pourquoi l'initialisation
+  "terminale_spe_suite_bornee_h3", // définition de « bornée »
+  "terminale_spe_suite_defi_h2", // décroissante et minorée : convergente
+]);
+
+export const suitesBank: TutorBankItemV4[] = [...anciens.filter((i) => CAS_SPECIAUX.has(i.id)), ...renfortSuites];
