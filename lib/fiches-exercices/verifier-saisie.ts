@@ -45,6 +45,12 @@ export type ReponseAttendue = {
    * qui suit (« 56 billes », « 12 € ») reste permis.
    */
   nombre?: boolean;
+  /**
+   * ⭐ CM2 (10/11/2026) : l'UNITÉ attendue (« cm », « kg », « mL », « m² »).
+   * L'élève peut ne pas l'écrire ; mais s'il écrit une autre unité de mesure,
+   * c'est faux : « 300 m » ne vaut plus « 300 » à la question « 3 m = … cm ».
+   */
+  unite?: string;
 };
 
 type Valeurs = Record<string, number>;
@@ -339,15 +345,15 @@ export function saisieJuste(saisie: string, attendue: ReponseAttendue): boolean 
   const formes = Array.isArray(attendue.attendu) ? attendue.attendu : [attendue.attendu];
   const eleve = sansMembreGauche(saisie);
   const gaucheEleve = membreGauche(saisie);
-  if (attendue.unite) {
-    const tapee = uniteDeMesure(eleve);
-    if (tapee && tapee !== uniteDeMesure(`1 ${attendue.unite}`)) return false;
-  }
   // Un nombre écrit — des chiffres, une virgule, un signe — ou en lettres
   // (« quatre ») : aucune opération.
   if (attendue.nombre) {
     const nu = sansUnite(eleve).trim();
     if (!NOMBRE_ECRIT.test(nu) && !/^[\p{L}\s'’-]+$/u.test(nu)) return false;
+  }
+  if (attendue.unite) {
+    const tapee = uniteDeMesure(eleve);
+    if (tapee && tapee !== uniteDeMesure(`1 ${attendue.unite}`)) return false;
   }
   return formes.some((forme) => {
     // ⛔ « g(3) = 7 » ne vaut pas « g(2) = 7 » : quand l'élève ET la réponse
