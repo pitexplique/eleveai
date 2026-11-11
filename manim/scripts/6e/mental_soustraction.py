@@ -81,7 +81,7 @@ class MentalSoustractionBase(PaysageMental):
         q = self.bloc(["Comment calculer", "sans poser l'opération ?"], 40).move_to(P(-3.0, 0.45))
         self.play(FadeIn(q[0], shift=UP * 0.2), run_time=0.35)
         self.au_mot("121 moins")
-        calc = self.ligne([("121 " + MOINS, JAUNE_TITRE), ("38 = ?", JAUNE_TITRE)], 66, buff=0.25).move_to(P(3.4, 0.45))
+        calc = self.ligne([("121 " + MOINS, JAUNE_TITRE), ("38 = ?", JAUNE_TITRE)], 66, buff=0.42).move_to(P(3.4, 0.45))
         self.play(FadeIn(calc[0], scale=1.3), run_time=0.3)
         self.au_mot("38 sans")
         self.play(FadeIn(calc[1], scale=1.3), run_time=0.3)
