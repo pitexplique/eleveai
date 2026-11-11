@@ -98,8 +98,8 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
         met = self.bloc(["guide de", "montagne"], 30).set_color(BLEU_CALCUL).next_to(hg, DOWN, buff=0.15)
         mont, sommet, point = montagne()
         self.play(FadeIn(met, shift=DOWN * 0.1), FadeIn(mont, shift=UP * 0.3), run_time=0.45)
-        l1 = self.ligne([("Sommet :", WHITE), ("632 m", ROSE_D)], 36, buff=0.18).next_to(sommet, RIGHT, buff=0.55) \
-            .shift(UP * 0.55)
+        l1 = self.ligne([("Sommet :", WHITE), ("632 m", ROSE_D)], 36, buff=0.18).next_to(sommet, RIGHT, buff=0.85) \
+            .shift(UP * 0.25)
         self.au_mot("le sommet")
         self.play(FadeIn(l1[0], shift=LEFT * 0.1), Flash(sommet + UP * 0.6, color=ROSE_D), run_time=0.45)
         self.au_mot("632 mètres")
@@ -114,7 +114,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
         self.play(FadeIn(l2[1], scale=1.2), run_time=0.3)
         self.au_mot("Combien")
         reste = DashedLine(pt, sommet, color=JAUNE_TITRE, stroke_width=7, dash_length=0.14)
-        qm = self.t("?", 48, JAUNE_TITRE).next_to(reste.get_center(), LEFT, buff=0.25)
+        qm = self.t("?", 48, JAUNE_TITRE).next_to(reste.get_center(), RIGHT, buff=0.3)
         q = self.t("Combien reste-t-il ?", 44, JAUNE_TITRE).move_to(P(1.0, -2.85))
         self.play(Create(reste), FadeIn(qm, scale=1.5), FadeIn(q, shift=UP * 0.15), run_time=0.5)
         self.attendre_voix()
@@ -154,7 +154,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
         self.ecran("03-pose")
         po = Pose(["632", "458"], signe=MOINS, origine=P(-3.0, 1.2), pas=0.95, hl=1.15, fs=72)
         hauts = {r: po.chiffre(0, r) for r in (0, 1, 2)}
-        self.add(*hauts.values(), po.ligne(1), po.signe, po.barre, *[po.entete(r) for r in (0, 1, 2)])
+        self.add(*hauts.values(), po.ligne(1), po.signe, po.barre, *[po.entete(r, haut=1.3) for r in (0, 1, 2)])
         x0 = -0.6
         bloc = VGroup()
 
@@ -219,16 +219,16 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
         self.play(Write(tit), run_time=0.4)
         po = Pose(["174", "458"], origine=P(-2.6, 1.5), pas=0.95, hl=1.15, fs=72)
         self.au_mot("174 plus")
-        l1 = self.ligne([("174", VERT_OK), ("+", WHITE)], 44, buff=0.2)
+        l1 = self.ligne([("174", VERT_OK), ("+", WHITE)], 44, buff=0.3)
         gauche(l1, 0.6, 1.5)
         self.play(FadeIn(l1, shift=UP * 0.1), FadeIn(po.ligne(0), shift=DOWN * 0.2), run_time=0.35)
         self.au_mot("458, ça")
-        l2 = self.t("458", 44, AMBRE_D).next_to(l1, RIGHT, buff=0.2)
+        l2 = self.t("458", 44, AMBRE_D).next_to(l1, RIGHT, buff=0.3)
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(po.ligne(1), shift=DOWN * 0.2), FadeIn(po.signe),
                   Create(po.barre), run_time=0.35)
         self.au_mot("ça fait 632")
         res = VGroup(po.res(0, 2, ROSE_D), po.res(1, 3, ROSE_D), po.res(2, 6, ROSE_D), po.ret(1, 1), po.ret(2, 1))
-        l3 = self.t("= 632", 44, ROSE_D).next_to(l2, RIGHT, buff=0.2)
+        l3 = self.t("= 632", 44, ROSE_D).next_to(l2, RIGHT, buff=0.3)
         self.play(LaggedStart(*[FadeIn(m, scale=1.5) for m in res], lag_ratio=0.15), FadeIn(l3, scale=1.2),
                   run_time=0.6)
         self.au_mot("C'est juste")
@@ -279,7 +279,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
         tit = self.t("Attention au piège du zéro !", 46, ROUGE_ERREUR)
         gauche(tit, -6.2, 3.1)
         self.play(Write(tit), run_time=0.35)
-        po = Pose(["503", "128"], signe=MOINS, origine=P(-3.7, 0.6), pas=0.85, fs=64, hl=1.05)
+        po = Pose(["503", "128"], signe=MOINS, origine=P(-3.7, 0.3), pas=0.85, fs=64, hl=1.05)
         hauts = {r: po.chiffre(0, r) for r in (0, 1, 2)}
         l0 = self.ligne([("Montée :", WHITE), ("503 m,", ROSE_D)], 34, buff=0.16)
         gauche(l0, -6.2, 2.3)
@@ -345,7 +345,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
                     run_time=0.35)
 
         def apres(sc):
-            bas = lambda i, m: sc.rep_bas(i, m, y0=-1.25, pas=0.6)  # noqa: E731
+            bas = sc.rep_bas
             lg = bas(0, ["Je casse une centaine,", "puis une dizaine."])
             sc.au_mot("Je casse une centaine")
             sc.play(FadeIn(lg[0], shift=UP * 0.1), Create(po.barrer(hauts[2])), FadeIn(po.dessus(2, "3"), scale=1.8),
@@ -353,18 +353,16 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
             sc.au_mot("puis une dizaine")
             sc.play(FadeIn(lg[1], shift=UP * 0.1), Create(po.barrer(hauts[1])), FadeIn(po.dessus(1, "9"), scale=1.8),
                     FadeIn(po.devant(0), scale=1.8), run_time=0.3)
-            lg2 = bas(1, ["10 unités, 9 dizaines,", "3 centaines."])
+            lg2 = bas(1, ["10 unités, 9 dizaines, 3 centaines."])
             sc.au_mot("J'ai 10")
             sc.play(FadeIn(lg2[0], shift=UP * 0.1), run_time=0.3)
-            sc.au_mot("3 centaines")
-            sc.play(FadeIn(lg2[1], shift=UP * 0.1), run_time=0.3)
             lg3 = bas(2, ["10 " + MOINS + " 5 = 5,", "9 " + MOINS + " 3 = 6,", "3 " + MOINS + " 1 = 2."])
             for k, (mot, r, v) in enumerate((("10 moins 5", 0, 5), ("9 moins 3", 1, 6), ("3 moins 1", 2, 2))):
                 sc.au_mot(mot)
                 sc.play(FadeIn(lg3[k], shift=UP * 0.1), FadeIn(po.res(r, v), scale=1.6), run_time=0.3)
-            lg4 = bas(3, ["Ça fait 265."])
+            l265 = sc.t("Ça fait 265.", 32, VERT_OK).next_to(lg3, RIGHT, buff=0.35)
             sc.au_mot("Ça fait 265")
-            sc.play(FadeIn(lg4[0], scale=1.2), run_time=0.3)
+            sc.play(FadeIn(l265, scale=1.2), run_time=0.3)
             sc.rep_fini()
 
         self.question_pause("07-question", "07b-reponse", ["Combien font 400 " + MOINS + " 135 ?"],
