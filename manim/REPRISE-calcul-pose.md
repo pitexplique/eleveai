@@ -25,8 +25,15 @@ Voix et manifeste : `6e-calcul-pose-<slug>[-short]` (`manim/voix/`). Sorties : `
 ## État
 - 11/11 : 10 voix écrites (`manim/voix/6e-calcul-pose-*.json`). Voix du pilote 01 (paysage + short) montrée EN ENTIER à Frédéric : **en attente de son oui**. Rien n'est généré ni rendu.
 
+- 11/11 : ✅ **VOIX VALIDÉES par Frédéric** (« Oui, enchaîne »). ✅ 10 voix générées (Julie, débit −6, `public/sons/6e-calcul-pose-*`). ✅ Marques des 5 paysages : `python manim/scripts/6e/calcul_pose_marques.py` (0 mot introuvable).
+- ✅ `manim/scripts/6e/calcul_pose_commun.py` : `Pose` entière (colonnes colorées par rang, `entete`, `place`, `barrer`, `ret(r+1, v)` pour une retenue), `nadia`, `facture`, `cube`, `gauche(m, x, y)` (placer SANS rétrécir : `self.col` rétrécit), `rep_bas()` (explication des questions-pauses en bas à gauche, en grand : `ligne_rep` la rendait minuscule), `finale_gauche()`.
+- ✅ Paysage pilote `manim/scripts/6e/calcul_pose_addition.py` (`CalculPoseAddition6e`, 3 min 48) : dry run propre (0 TARD, 0 BORD, seul « 974 »). Brouillon -ql relu en planche, puis corrigé (factures, poses, explications, finale) ; **re-planche -ql à faire** avant le HD.
+- Leçons : `au_mot(extrait)` prend la PREMIÈRE occurrence dans le clip (« 1 unité » tombait dans « 11 unités ») : prendre un extrait unique. Nombres à espace (« 1 248 ») : `hors_audit(...)` (l'audit cherche « 1248 » dans la voix). Étiquettes redites : `f.sans_synchro = True`. Le script d'audit filtre `AUDIT|BORD|TARD|AVANCE`. Cadre : |x| ≤ 6,68.
+- ⚠️ 9 processus python tournaient le 11/11 : avant le HD, vérifier les lignes de commande (`powershell "Get-CimInstance Win32_Process -Filter \"name='python.exe'\" | select CommandLine"`) : rendre seulement si aucun `manim render` ne tourne.
+
 ## Reste, dans l'ordre
-1. Son oui sur les voix (pilote 01, puis les autres).
-2. Voix : `powershell -File scripts/generer-voix.ps1 -Fichier <json> -Voix Julie -Debit -6` ; marques des paysages (copie de `decimal_marques.py`) ; instants des shorts `python scripts/ti-margo-cues.py calcul-pose <ép>`.
-3. Pilotes 01 (paysage `calcul_pose_addition.py` sur `decimal_commun` + `Pose` de `decimal_additionner.py` ; film `films/calcul-pose.js`), dry run AUDIT, planches, UN rendu HD à la fois (⛔ `tasklist` avant : poste partagé).
+1. ~~Son oui sur les voix~~ ✅ ; ~~voix et marques~~ ✅. Instants des shorts : `python scripts/ti-margo-cues.py calcul-pose <ép>` (après `films/calcul-pose.json`).
+2. Re-planche -ql de la paysage 01 (`-o brouillon-cp-01 --media_dir manim/scripts/6e/media-cp-01`, `python scripts/ti-margo-planche.py <mp4> <png> 30`), puis HD.
+3. Short 01 : `films/calcul-pose.js` + `.json` depuis `_modele` (modèle : `films/decimaux.js`, `decimaux-additionner.js`), miniature « Dessin animé ».
+4. Pilotes 01 (paysage `calcul_pose_addition.py` sur `decimal_commun` + `Pose` de `decimal_additionner.py` ; film `films/calcul-pose.js`), dry run AUDIT, planches, UN rendu HD à la fois (⛔ `tasklist` avant : poste partagé).
 4. Validation du format, puis 02 à 05, aperçu, commit par chemin, sans push. Manifeste, R2, coach : après son écoute.
