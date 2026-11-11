@@ -156,7 +156,7 @@ class OutilsCalcul(OutilsLimite):
             g.nombres, g.seps = list(g), [VMobject() for _ in g[1:]]
         return g
 
-    def ligne_maths(self, segs, fs=44, couleur_barre=WHITE):
+    def ligne_maths(self, segs, fs=44, couleur_barre=WHITE, ecart=0.12):
         """Une ligne = des segments ("t", morceaux) ou ("f", morceaux du haut, morceaux
         du bas). Chaque texte est UN Text en morceaux ; les signes (=, +, →) sont centrés
         sur la barre des fractions. Renvoie un VGroup PLAT de morceaux (la barre va avec
@@ -169,8 +169,8 @@ class OutilsCalcul(OutilsLimite):
                 n, d = self.construire(s[1], fs, 1e9), self.construire(s[2], fs, 1e9)
                 w = max(n.width, d.width) + 0.26 * fs / 44
                 bar = Line(LEFT * w / 2, RIGHT * w / 2, stroke_width=3.5 * fs / 44, color=couleur_barre)
-                n.next_to(bar, UP, buff=0.12 * fs / 44)
-                d.next_to(bar, DOWN, buff=0.12 * fs / 44)
+                n.next_to(bar, UP, buff=ecart * fs / 44)     # ecart plus grand quand on encadre en haut ou en bas
+                d.next_to(bar, DOWN, buff=ecart * fs / 44)
                 blocs.append(("f", VGroup(n, bar, d)))
         VGroup(*[b for _, b in blocs]).arrange(RIGHT, buff=self.espace(fs))
         fr_ = [b for k, b in blocs if k == "f"]
@@ -234,8 +234,8 @@ class SuiteLimiteCalculerTle(OutilsCalcul, PaysageSuites):
             g.align_to(P(x, 0), LEFT)
         return self.montrer(g, avec, rt=rt, avec_k=avec_k)
 
-    def lmaths(self, segs, y, x=None, fs=44, avec=(), avec_k=None, rt=0.25, montrer=True):
-        g = self.ligne_maths(segs, fs).move_to(P(0, y))
+    def lmaths(self, segs, y, x=None, fs=44, avec=(), avec_k=None, rt=0.25, montrer=True, ecart=0.12):
+        g = self.ligne_maths(segs, fs, ecart=ecart).move_to(P(0, y))
         if x is not None:
             g.align_to(P(x, 0), LEFT)
         return self.montrer(g, avec, rt=rt, avec_k=avec_k) if montrer else g
@@ -428,32 +428,36 @@ class SuiteLimiteCalculerTle(OutilsCalcul, PaysageSuites):
         self.nouvel_ecran("05-quotient")
         self.titre("Un quotient", JAUNE_TITRE, 46, extrait="quotient")
         x0 = -6.2
-        self.ligne([("On factorise", WHITE, "on factorise"), ("en haut et en bas.", RAISON, "en haut")], 2.42, x=x0,
+        self.ligne([("On factorise", WHITE, "on factorise"), ("en haut et en bas.", RAISON, "en haut")], 2.5, x=x0,
                    fs=40)
         nu = NuageTermes((0, 20.5), (0, 3.4), P(2.6, -1.35), P(5.6, 1.3), fs=24)
         pts = [nu.point(n, QUO[n], r=0.07) for n in range(21)]
         l3 = self.trait_u(nu, 3, JUSTE, "3")
         r1 = self.lmaths([("t", [("uₙ =", TERME, "u indice")]),
                           ("f", [("3n", WHITE, "3 n"), ("+ 1", WHITE, "1")], [("n", WHITE, "n plus"), ("+ 2", WHITE, "2")])],
-                         1.5, x=x0, fs=42,
+                         1.28, x=x0, fs=42, ecart=0.24,
                          avec_k={4: self.axes(nu, [LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.05)])})
         c1, c2 = self.dominant(r1[1][0], buff=0.08), self.dominant(r1[3], buff=0.08)
-        div = self.t("÷ n", 40, RAISON).next_to(r1, RIGHT, buff=0.35)
+        xd = r1[1][1].get_right()[0] + 0.45                     # à droite du trait de fraction
+        dh = self.t("÷ n", 36, RAISON)
+        dh.move_to(P(xd + dh.width / 2, VGroup(r1[1][0], r1[2]).get_center()[1]))
+        db = self.t("÷ n", 36, RAISON)
+        db.move_to(P(xd + db.width / 2, VGroup(r1[3], r1[4]).get_center()[1]))
         self.au_mot("On divise")
-        self.play(Create(c1), Create(c2), FadeIn(div, scale=1.3), run_time=0.35)
+        self.play(Create(c1), Create(c2), FadeIn(dh, scale=1.3), FadeIn(db, scale=1.3), run_time=0.35)
         r2 = self.lmaths([("t", [("=", WHITE, None)]),
                           ("f", [("3", JAUNE_TITRE, "3 plus"), ("+ 1/n", WHITE, "1 sur")],
-                           [("1", JAUNE_TITRE, "1 plus"), ("+ 2/n", WHITE, "2 sur")])], -0.02, fs=42, montrer=False)
+                           [("1", JAUNE_TITRE, "1 plus"), ("+ 2/n", WHITE, "2 sur")])], -0.32, fs=42, montrer=False)
         r2.shift(RIGHT * (r1[0][-1].get_center()[0] - r2[0].get_center()[0]))   # « = » sous « = »
         self.montrer(r2)
         fin = self.lmaths([("t", [("La limite est", WHITE, "La limite")]), ("f", [("3", JUSTE, "3")], [("1", JUSTE, "1")]),
-                           ("t", [("=", WHITE, None), ("3", JUSTE, "3")])], -1.3, x=x0, fs=40,
+                           ("t", [("=", WHITE, None), ("3", JUSTE, "3")])], -1.7, x=x0, fs=40,
                           avec_k={0: [r2[2].animate.set_opacity(0.35), r2[4].animate.set_opacity(0.35)],
                                   4: [Create(l3), *[d.animate.set_color(JUSTE) for d in pts[8:]]]})
         self.play(Create(self.encadre(fin, JUSTE, 0.14)), run_time=0.3)
         self.ligne([("Même degré en haut et en bas :", WHITE, "Même degré"),
-                    ("la limite est le", WHITE, "la limite est le")], -2.5, x=x0, fs=36, larg=11.3)
-        self.ligne([("quotient des coefficients dominants.", JAUNE_TITRE, "quotient")], -3.1, x=x0, fs=36, larg=11.3,
+                    ("la limite est le", WHITE, "la limite est le")], -2.76, x=x0, fs=36, larg=11.3)
+        self.ligne([("quotient des coefficients dominants.", JAUNE_TITRE, "quotient")], -3.28, x=x0, fs=36, larg=11.3,
                    avec_k={1: [Indicate(VGroup(r2[0][0], r2[2]), color=JAUNE_TITRE, scale_factor=1.3)]})
         self.attendre_voix(marge=0.6)
 
@@ -462,17 +466,17 @@ class SuiteLimiteCalculerTle(OutilsCalcul, PaysageSuites):
     def ecran_question2(self):
         g = self.ligne_maths([("t", [("La limite de", WHITE, "La limite")]),
                               ("f", [("4n²", WHITE, "4 n"), ("− 1", WHITE, "1")], [("2n²", WHITE, "2 n"), ("+ 7", WHITE, "7")]),
-                              ("t", [("est :", WHITE, "est :")])], 44)
+                              ("t", [("est :", WHITE, "est :")])], 44, ecart=0.24)
         q = self.question_lignes("06-question", [g], ["2", self.couper("−1/7", [(2, WHITE, "1"), (2, WHITE, "7")], 40, choix=True), "+∞"],
                                  0, fs=40)
         self.dire("06b-reponse")
         ok = self.q_reponse(q, 0)
         x0 = -6.2
-        yc = q.question.get_bottom()[1] - 0.7
+        yc = q.question.get_bottom()[1] - 0.6
         self.play(FadeOut(q.cartes[1]), FadeOut(q.cartes[2]),
                   VGroup(q.cartes[0], ok).animate.move_to(P(x0 + q.cartes[0].width / 2, yc)), run_time=0.3)
         yb = yc - q.cartes[0].height / 2
-        c4, c2 = self.dominant(g[1][0], buff=0.04), self.dominant(g[3], buff=0.04)
+        c4, c2 = self.dominant(g[1][0], buff=0.07), self.dominant(g[3], buff=0.07)
         nu = NuageTermes((0, 12.5), (-0.45, 2.3), P(2.75, -1.95), P(5.6, 0.2), fs=24)
         pts = [nu.point(n, Q2[n], PIEGE if n == 0 else TERME, r=0.075) for n in range(13)]
         l2 = self.trait_u(nu, 2, JUSTE, "2")
@@ -481,13 +485,13 @@ class SuiteLimiteCalculerTle(OutilsCalcul, PaysageSuites):
         self.ligne([("les coefficients dominants :", JAUNE_TITRE, "les coefficients")], yb - 1.2, x=x0, fs=40,
                    avec_k={0: [Create(c4), Create(c2)]})
         fin = self.lmaths([("f", [("4", JAUNE_TITRE, "4")], [("2", JAUNE_TITRE, "2")]),
-                           ("t", [("=", WHITE, None), ("2", JUSTE, "2")])], yb - 2.3, x=x0 + 0.2, fs=44,
+                           ("t", [("=", WHITE, None), ("2", JUSTE, "2")])], yb - 2.25, x=x0 + 0.2, fs=44,
                           avec_k={3: [Create(l2), *[d.animate.set_color(JUSTE) for d in pts[4:]]]})
         self.play(Create(self.encadre(fin, JUSTE, 0.14)), run_time=0.3)
-        r1, r7 = self.encadre(g[2], PIEGE, 0.04), self.encadre(g[4], PIEGE, 0.04)
+        r1, r7 = g[2].animate.set_color(PIEGE), g[4].animate.set_color(PIEGE)   # recolorées : pas de cadres qui se touchent
         self.montrer(self.couper("−1/7, c'est le piège des constantes", [(2, PIEGE, "1"), (3, PIEGE, "7"),
                                                                          (None, PIEGE, "c'est le piège")], 40)
-                     .move_to(P(0, yb - 3.4)).align_to(P(x0, 0), LEFT), avec_k={0: [Create(r1), Create(r7), Indicate(pts[0], color=PIEGE, scale_factor=1.8)]})
+                     .move_to(P(0, yb - 3.3)).align_to(P(x0, 0), LEFT), avec_k={0: [r1, r7, Indicate(pts[0], color=PIEGE, scale_factor=1.8)]})
         self.attendre_voix(marge=0.6)
 
     # ── 07 : croissances comparées : 2ⁿ écrase n² ──────────────────────────
@@ -585,7 +589,7 @@ class SuiteLimiteCalculerTle(OutilsCalcul, PaysageSuites):
                  [("t", [("wₙ =", TERME, "w"), ("3 ×", WHITE, "3 fois"), ("0,5ⁿ", RAISON, "0,5"), ("+ 4", WHITE, "4")])]]
         cases = []
         for k, (sp, y) in enumerate(zip(specs, (1.05, -0.4, -1.75))):
-            g = self.lmaths(sp, y, x=x0, fs=42, montrer=False)
+            g = self.lmaths(sp, y, x=x0, fs=42, montrer=False, ecart=0.26 if k == 1 else 0.12)   # v sera encadré
             fl = self.t("→", 44, GREY_A).move_to(P(0.0, y))
             c = self.case_q(0.95, y)
             self.montrer(g, avec_k={len(g) - 1: [FadeIn(fl), FadeIn(c, scale=0.8)]})
@@ -615,12 +619,13 @@ class SuiteLimiteCalculerTle(OutilsCalcul, PaysageSuites):
                     1.05, x=xr, fs=40, avec_k={0: [Indicate(VGroup(u[2], u[3]), color=RAISON, scale_factor=1.15)]})
         repondre(0, "5")
         # v : le dénominateur l'emporte
-        cden, cnum = self.dominant(VGroup(v_[3], v_[4]), buff=0.035), self.dominant(VGroup(v_[1][0], v_[2]), GREY_A, 0.035)
-        self.ligne([("dénominateur :", JAUNE_TITRE, "dénominateur"), ("degré 2", JAUNE_TITRE, "degré 2")], -0.15, x=xr,
-                   fs=32, larg=4.85, avec_k={0: [Create(cden)]})
+        cden, cnum = self.dominant(VGroup(v_[3], v_[4]), buff=0.08), self.dominant(VGroup(v_[1][0], v_[2]), GREY_A, 0.08)
+        yh, ybas = VGroup(v_[1][0], v_[2]).get_center()[1], VGroup(v_[3], v_[4]).get_center()[1]
+        self.ligne([("en bas :", JAUNE_TITRE, "dénominateur"), ("degré 2", JAUNE_TITRE, "degré 2")], ybas, x=xr,
+                   fs=36, avec_k={0: [Create(cden)]})
         self.au_mot("l'emporte")
         self.play(Indicate(VGroup(v_[3], v_[4]), color=JAUNE_TITRE, scale_factor=1.12), run_time=0.35)
-        self.ligne([("numérateur :", GREY_A, "numérateur"), ("degré 1", GREY_A, "degré 1")], -0.7, x=xr, fs=32, larg=4.85,
+        self.ligne([("en haut :", GREY_A, "numérateur"), ("degré 1", GREY_A, "degré 1")], yh, x=xr, fs=36,
                    avec_k={0: [Create(cnum)]})
         self.au_mot("v indice n tend")
         repondre(1, "0")

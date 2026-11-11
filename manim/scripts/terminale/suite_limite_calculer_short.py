@@ -171,7 +171,7 @@ class SuiteLimiteCalculerShort(OutilsCalcul, ShortSuites):
         self.au_mot("game designer")
         self.play(FadeIn(metier, shift=UP * 0.08), run_time=0.3)
         bas, haut = self.CHAMP
-        champ = RoundedRectangle(width=4.1, height=haut - bas, corner_radius=0.14, fill_color=HERBE, fill_opacity=1,
+        champ = RoundedRectangle(width=4.2, height=haut - bas, corner_radius=0.14, fill_color=HERBE, fill_opacity=1,
                                  stroke_color=GREY_B, stroke_width=2).move_to(P(0, (bas + haut) / 2))
         milieu = DashedLine(P(0, bas + 0.08), P(0, haut - 0.08), color=GREY_B, stroke_width=2)
         self.au_mot("Dans son jeu")
@@ -179,7 +179,12 @@ class SuiteLimiteCalculerShort(OutilsCalcul, ShortSuites):
         self.play(FadeIn(champ, scale=0.95), Create(milieu), run_time=0.35)
         hd = self.construire([("Tour n :", JAUNE_TITRE, "au tour")], 44).move_to(P(0, yh))
         self.montrer(hd)
-        lj, le = self.t("joueur", 36, TERME).move_to(P(-1.02, 2.16)), self.t("ennemi", 36, RAISON).move_to(P(1.02, 2.16))
+        # chaque mot au milieu de sa moitié, avec plus de 20 px d'air contre le bord et contre les pointillés
+        lj, le = self.t("joueur", 36, TERME), self.t("ennemi", 36, RAISON)
+        for m, x in ((lj, -1.05), (le, 1.05)):
+            if m.width > 1.5:
+                m.scale_to_fit_width(1.5)
+            m.move_to(P(x, 2.16))
         fj = self.construire([("n²", TERME, "n au carré")], 46).move_to(P(-1.02, 1.66))
         fe = self.construire([("2ⁿ", RAISON, "2 puissance")], 46).move_to(P(1.02, 1.66))
         self.au_mot("joueur")

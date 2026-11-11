@@ -9,7 +9,9 @@ function voixDe(A){
   const CL=(window.CUES||{})[VIDEO]||{}, norme=s=>s.toLowerCase().normalize('NFD').replace(/[^a-z0-9]/g,'');
   function dit(clip){ const l=CL[clip]; if(!l) throw new Error('clip sans instants : '+clip); let i=0;
     const f=txt=>{ const toks=txt.split(' '), tm=[]; let av=null;
-      toks.forEach((w,k)=>{ const n=norme(w); if(!n){ tm.push(av); return; }
+      toks.forEach((w,k)=>{ const n=norme(w);
+        /* un signe écrit (+, −, ×) prend le mot dit seul (« plus », « moins », « fois ») */
+        if(!n){ const sg={'+':'plus','−':'moins','×':'fois'}[w]; if(sg&&l[i]&&norme(l[i][1])===sg){ av=A[clip]+l[i][0]; i++; } tm.push(av); return; }
         if(i>=l.length) throw new Error(`${clip} : plus de mots pour « ${txt} »`);
         const c=norme(l[i][1]); if(!c.includes(n)&&!n.includes(c)) throw new Error(`${clip} : écrit « ${w} », dit « ${l[i][1]} »`);
         av=A[clip]+l[i][0]; tm.push(av);
@@ -67,6 +69,11 @@ const pop=(T,t0,d=.5)=>{ const u=(T-t0)/d; return u<0?0:(u>=1?1:1+.7*Math.sin(u*
 const zoom=(T,t,k=.5)=>T<t?0:Math.max(1,pop(T,t)*k+(1-k));
 function coche(c,x,y,s=1){ c.strokeStyle=CRAIE.ok; c.lineWidth=18*s; c.lineCap='round'; c.beginPath(); c.moveTo(x,y); c.lineTo(x+40*s,y+50*s); c.lineTo(x+130*s,y-60*s); c.stroke(); }
 function cercle(c,x,y,r,coul=CRAIE.faux,u=1){ c.strokeStyle=coul; c.lineWidth=10; c.beginPath(); c.arc(x,y,r*(.6+.4*Math.min(1,u)),0,7); c.stroke(); }
+/* Soustraction : barrer un chiffre posé (le trait se trace, u de 0 à 1) */
+function barrer(c,x,y,s=1,u=1){ if(u<=0) return; u=Math.min(1,u); c.strokeStyle=CRAIE.faux; c.lineWidth=9*s; c.lineCap='round';
+  c.beginPath(); c.moveTo(x-40*s,y+44*s); c.lineTo(x-40*s+80*s*u,y+44*s-88*s*u); c.stroke(); }
+/* Soustraction : le petit chiffre orange de la dizaine cassée (au-dessus du chiffre barré, ou le « 1 » devant) */
+function petit(c,txt,x,y,z=1){ if(z>0) ecrire(c,txt,x,y,62*z,CRAIE.ret); }
 
 /* ---- L'opération posée, à la craie ----
    o.xu : centre de la colonne des unités ; o.y0 : centre de la 1re ligne ; o.w, o.h : colonne, ligne ; o.ft : taille.

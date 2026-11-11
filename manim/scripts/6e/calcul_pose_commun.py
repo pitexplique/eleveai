@@ -39,6 +39,17 @@ class Pose(_Pose):
         plus le chiffre du dessous (planche du 11/11)."""
         return self._t(v, r, i, couleur, fs=int(self.fs * 0.5)).shift(P(-self.pas * 0.5, self.hl * 0.56))
 
+    def dessus(self, r, v, couleur=ORANGE_RETENUE, i=0):
+        """Soustraction : le chiffre « cassé » écrit petit AU-DESSUS du chiffre barré (3 → 2)."""
+        return self._t(v, r, i, couleur, fs=int(self.fs * 0.5)).shift(P(0, self.hl * 0.66))
+
+    def devant(self, r, haut=False, couleur=ORANGE_RETENUE, i=0):
+        """Soustraction : le petit « 1 » de la dizaine cassée, devant le chiffre (2 → 12).
+        haut=True : devant un chiffre déjà écrit au-dessus (le 2 au-dessus du 3 → 12)."""
+        if haut:
+            return self._t("1", r, i, couleur, fs=int(self.fs * 0.5)).shift(P(-self.pas * 0.3, self.hl * 0.66))
+        return self._t("1", r, i, couleur, fs=int(self.fs * 0.5)).shift(P(-self.pas * 0.4, self.hl * 0.36))
+
     def barrer(self, m, couleur=ROUGE_ERREUR):
         return Line(m.get_corner(DL) + LEFT * 0.05, m.get_corner(UR) + RIGHT * 0.05, color=couleur, stroke_width=6)
 
