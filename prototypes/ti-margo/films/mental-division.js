@@ -70,11 +70,12 @@ FILMS['division']=function(outils){
       if(T>=t128) ecrire(c,'4 × 32 = 128 !',W/2,460,92*Math.max(1,pop(T,t128)),CRAIE.faux);
       ligneMots(c,[['4 ×',t4fois,CRAIE.blanc],['9',t9,CRAIE.d],['= 36',t36c,CRAIE.ok]],W/2,620,96,T);
       tab.maj(); return; }
+    const doux=t=>1+(Math.max(1,pop(T,t))-1)*.35; /* petit rebond : reste dans le tableau */
     /* l'accroche : 36 biscuits, 4 copains, « divisé par 4… j'enlève 4 » : 32 chacun ! */
     if(T>=t36){ for(let k=0;k<36;k++) biscuitCraie(c,60+(k%9)*46,60+Math.floor(k/9)*44,18);
-      ecrire(c,'36 biscuits',W-250,120,88*Math.max(1,pop(T,t36)),CRAIE.blanc); }
+      ecrire(c,'36 biscuits',W-270,120,80*doux(t36),CRAIE.blanc); }
     if(T>=tCopains){ for(let k=0;k<4;k++) copainCraie(c,90+k*110,290,.8,COPAINS[k]);
-      ecrire(c,'4 copains',W-250,320,88*Math.max(1,pop(T,tCopains)),CRAIE.d); }
+      ecrire(c,'4 copains',W-270,320,80*doux(tCopains),CRAIE.d); }
     ligneMots(c,[['36 ÷',tDiv,CRAIE.blanc],['4',t4par,CRAIE.d]],W/2,480,96,T);
     ligneMots(c,[['36 − 4',t4enl,CRAIE.faux],['= 32 !',t32,CRAIE.faux]],W/2,625,104,T);
     tab.maj();
