@@ -39,7 +39,7 @@ Y_CASES = -1.12
 def liste_deux_lignes(valeurs, fs=40, color=WHITE):
     """La liste aérée coupée après le 2e « ; » : « 10 ; 20 ; » au-dessus de « 30 ; 40 »,
     pour garder de gros chiffres dans les boutons étroits du short."""
-    g = liste_aeree(valeurs, fs, color, apres=0.16)
+    g = liste_aeree(valeurs, fs, color, avant=0.17, apres=0.19)  # « 10 ; 20 » : une espace des deux côtés
     bas = VGroup(*g.submobjects[4:])
     bas.shift(DOWN * (g.nombres[0].height + 0.12)).align_to(g.nombres[0], LEFT)
     return g
@@ -239,8 +239,8 @@ class SuiteGeoReconnaitreShort(ShortSuites):
         ok = self.q_reponse(q, 2)
         self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[1]), run_time=0.25)
         self.play(VGroup(q.cartes[2], ok).animate.move_to(q.cartes[0].get_center()), run_time=0.35)
-        lr = LigneTermes([str(v) for v in QS[2]], centre=P(0, q.cartes[2].get_bottom()[1] - 0.6), pas=1.04,
-                         largeur=0.94, hauteur=0.7, fs=28)  # « 135 » a la même marge que « 15 »
+        lr = LigneTermes([str(v) for v in QS[2]], centre=P(0, q.cartes[2].get_bottom()[1] - 0.6), pas=1.06,
+                         largeur=0.92, hauteur=0.66, fs=24)  # « 135 » a la même marge que « 15 »
         for c in lr.cases:
             c[1]._pas_audit = True  # les termes de C, déjà lus dans la question
         self.play(LaggedStart(*[FadeIn(c, scale=0.8) for c in lr.cases], lag_ratio=0.15), run_time=0.4)
