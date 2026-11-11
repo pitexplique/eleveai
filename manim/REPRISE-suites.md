@@ -39,6 +39,93 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
   Questions pilote (t du premier rendu, à recaler) : paysage 00:58 → 2 (C), 02:24 → 0 (A) ; short 00:23 → 1 (B). Chapitres : 00:00 garde, 00:08 haie, 00:30 écart, 00:45 raison, 00:58 Q, 01:30 silo, 01:47 croix, 02:04 piège, 02:24 Q, 02:50 défi, 03:11 correction, 03:32 appris, 03:48 fin.
 - 10/11 nuit : pilote 01 CORRIGÉ et revérifié (`d720b563` cases allumées en contour vert, croix ×1,6, short agrandi, échelle 70 %, voix committées ; `9784f82a` plus aucun chevauchement de fondu, `nouvel_ecran` efface avant d'afficher). Paysage 3:59, short 1:10, bords 0. Questions : paysage 00:59 → C, 02:24 → A ; short 00:23 → B. Aperçu du short ouvert en pause (port 3900). EN ATTENTE DU OUI de Frédéric sur le pilote.
 - ✅ 11/11 : Frédéric a VALIDÉ le pilote : « Oui, lance tout ». Bascule en session fille (contexte à 72 %) : la fille rend les 37 épisodes 02 à 38 SANS redemander.
+- 11/11 : session fille au travail : rendus 02 → 38 lancés, 3 agents à la fois (mission commune dans le dossier de notes de la session, `mission-commune.md` ; rapports complets `ep-NN.md` au même endroit). Détail par épisode : section « Épisodes rendus » en bas. Sur la proposition de Frédéric, une session sœur rend la TERMINALE (28 à 38, 2 agents, sa note `manim/REPRISE-suites-terminale.md`, rapports `ep-NN.md` au même dossier de notes) ; la session fille garde 02 à 27 et toute la passe finale.
 - APRÈS SON OUI : les 37 autres épisodes, un agent par épisode (brief `manim/brief-agent-suites.md` + mission : classe, micro, voix, lettres justes, dessins), 3 ou 4 à la fois au plus (machine partagée), puis passe finale comme la divisibilité (miniatures, manifeste en AJOUT avec `aussi` pour les 4 communes, `fiches-youtube.py`, R2 par `rclone copy` du seul dossier `suites`, coach `brancher-videos-coach.mjs --ecrire` APRÈS le push du soir, sur son ordre).
 - Ép. 01 `lin_suite_reconnaitre` : voix écrites (`manim/voix/premiere-suite-arith-reconnaitre[-short].json`), EN ATTENTE DE LA VALIDATION de Frédéric. Rien de généré.
   Questions : paysage 04 → C, 08 → A ; short 03 → B ; commentaire : 37 km (10 + 9 × 3).
+
+## ⏭ Relais de la session fille (11/11 après-midi)
+- Acceptés après relecture : 02 à 08 (blocs ci-dessous). En cours au moment du relais : 09 (retouches espaces/cases renvoyées), 10, 11, 12 (agents de rendu), lot de re-rendus de la fin (01 ✅, 02 ✅, 03 ✅, restent 04 et la paysage 05).
+- Relecture : regarder `planche-finale-paysage.png` / `-short.png` du dossier de sortie + images à t précis (outil PyAV : extraire une image à t, recadrer pour zoomer). Défauts typiques renvoyés : liste en fin de `mission-commune.md` (dossier de notes de la session fille) : la donner telle quelle aux agents suivants.
+- Reste : 13 à 27 (1re géo puis 1re spé), puis passe finale (miniatures, manifeste en AJOUT, fiches-youtube, R2, table R2). Terminale 28-38 : session sœur « Suites Terminale », rapports `ep-28.md`… dans le même dossier de notes.
+
+## Épisodes rendus (11/11, session fille)
+⏳ À REFAIRE en fin de série, machine libre : les vidéos rendues AVANT `524b48bd` ont une étoile (Flash) posée 0,5 s sur « @eleveai974 » à l'écran de fin (pilote 01, 02, 03, 04, 28, 29 ; vérifier 05 et 06 selon l'heure de leur dernier rendu). Re-rendu HD seul, calage inchangé.
+### Ép. 04 arith-terme-rang ✅ relu (planches regardées par la session fille ; short corrigé `a206b4d8` : « 20 » de u₁ lisible)
+- Ép. 04 `arith-terme-rang` (`lin_suite_terme_rang`) : commits locaux `57a3a348` + `a206b4d8` correctif short (case u₁ élargie, « 20 » lisible) (scripts `suite_arith_terme_rang.py` / `_short.py` + `_marques.json`), PAS poussé.
+- Durées : paysage 4:21 (261,2 s), short 1:04 (63,9 s). Bords : 0 instant sur les deux. Audit : 0 AVANCE, 0 RETARD, 0 BORD.
+- Ceintures : paysage verte, short blanche (échelle entière à 70 %).
+- Métier : Hugo, carreleur (bacs en carré bordé : 8, 12, 16 → étape 20 = 84 carreaux). Short : Chloé prépare une course à vélo.
+- Centres : construction, velo, jeux-defis.
+- Questions : paysage 01:28 → C (57), 02:33 → A (14) ; short 00:25 → C (65).
+- Commentaire du short : 30e semaine = 20 + 29 × 5 = 165 km (non affiché).
+- Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-arith-terme-rang[-short]/`). Marques produites par `manim/scripts/4e/equation_commun.py` (cues doubles datées).
+
+- Chapitres et questions complets : `ep-04.md` du dossier de notes.
+
+### Ép. 03 arith-notation ✅ relu (corrections `82f74820` : fiche de Nadia agrandie, satellites écartés, cases du short espacées)
+- Ép. 03 `arith-notation` (1re, `lin_suite_notation`) : commits locaux `e72e7e7f` + `82f74820` (retouches) (scripts `suite_arith_notation.py` + `_short.py`, 2 `_marques.json`), PAS poussé.
+- Durées : paysage 4:21 (260,75 s), short 1:05 (65,03 s). Bords : 0 instant (les deux). Dry run : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD.
+- Ceintures : paysage verte, short blanche (échelle à 70 %).
+- Métier : Nadia, ingénieure dans une agence spatiale (constellation de satellites d'observation). Short : un compte de vulgarisation scientifique.
+- Centres : `espace`, `sciences`, `reseaux-sociaux` (short).
+- Questions paysage : 01:09 → A (u₈) ; 02:22 → B (8 + 3n). Short : 00:23 → B (u₆).
+- Commentaire du short : indice du 50e terme d'une suite qui commence à u₀ → 49 (u₄₉), non affiché.
+- Voix : aucun mot changé.
+- Nouveauté technique (dans le script de l'épisode, pas dans le module commun) : `formule()` = un seul MarkupText Pango, avec de vrais indices abaissés (`u_{n+1}`), et des morceaux dévoilés à la voix. Les indices Unicode (ₙ) restaient sur la ligne et se lisaient mal. Seul défaut : les nombres d'un MarkupText ne sont pas audités, je les ai calés à la main avec suivre().
+
+
+### Ép. 02 arith-recurrence ✅ relu (corrections `ce89aee2` : r = 300 écarté, piège clarifié, 250 dans sa case)
+- Ép. 02 `arith-recurrence` (1re, `lin_suite_recurrence`) : commits 2d40f853 + ce89aee2 (corrections de la relecture) (scripts `suite_arith_recurrence.py` + `_short.py`, marques), pas poussé.
+- Durées : paysage 4:41 (280,5 s), short 1:11. Ceintures : paysage verte, short blanche. Bords : 0 instant (les deux).
+- Métier : Léna, programmatrice d'un festival de musique (paysage) ; un food truck (short).
+- Centres : `musique`, `cuisine`.
+- Questions : paysage 01:06 → A (vₙ₊₁ = vₙ − 15), 02:24 → B (54) ; short 00:27 → B (565).
+- Commentaire du short : u₀ = 250, raison 35 → u₄ = 250 + 4 × 35 = 390 (non affiché).
+- Voix : aucun mot changé (générée à −6, telle quelle).
+- Outil propre à l'épisode (dans son script) : `AuditMilliers` (l'audit trouve « 1 200 » dans la voix), `arc_fleche` (flèche qui recule), `phrase` (une ligne de question en morceaux calés).
+
+
+### Ép. 05 arith-explicite ✅ relu, COMMUNE avec 1re spé suite_arithmetique (corrections `248fd58f` : choix en colonne, titre Correction centré, choix du short agrandis)
+- Ép. 05 `arith-explicite` (1re, micro `lin_suite_explicite`, vidéo COMMUNE avec `suite_arithmetique` 1re spé, à brancher par `aussi`) : commits `cb434f9d` (scripts + marques) puis `248fd58f` (corrections de la relecture), pas poussé.
+- Durées : paysage 5:16 (315,9 s), short 1:08 (67,9 s), inchangées après relecture. Ceintures : paysage verte, short blanche. Bords 0 / 0 (verifier-bords-video), dry run 0 AUDIT-AVANCE, 0 RETARD, 0 BORD.
+- Métier : Sofiane, conseiller bancaire (Jade, 17 ans, épargne 300 € + 45 €/mois pour son permis : uₙ = 300 + 45n, n = 20). Short : la trottinette électrique (120 km + 15 km/jour).
+- Centres : `argent-budget`, `voitures-motos` (paysage) ; `transports` (short).
+- Questions paysage : 01:05 → C (vₙ = 8 − 3n) ; 02:55 → B (tₙ = 14 + 6n). Short : 00:25 → C (uₙ = 120 + 15n).
+- Réponse de la question en commentaire du short : 570 km (120 + 30 × 15), non affichée.
+- Voix : AUCUN mot changé (paysage longue ~5 min gardée, qualité d'abord).
+- Sorties : `manim/sorties/premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite[-short].mp4`.
+
+
+### Ép. 06 arith-variation ✅ relu (corrections `e0f68a4e`, `4fa07ead` : r = −25 espacé, cartes de la correction agrandies, cases du short)
+- Ép. 06 `arith-variation` (`lin_suite_variation`) : commits locaux `aadaebcb` + `e0f68a4e` correctif de relecture + `4fa07ead` carte 3 (scripts `suite_arith_variation.py` / `_short.py` + `_marques.json`), PAS poussé.
+- Durées : paysage 4:32 (272,3 s), short 1:04 (64,3 s). Bords : 0 instant sur les deux. Audit : 0 AVANCE, 0 RETARD, 0 BORD (dry run final).
+- Ceintures : paysage verte, short blanche (échelle entière à 70 %).
+- Métier : Lucie, glaciologue (le glacier de 6 000 m qui recule de 25 m par an ; « il va finir par se stabiliser » jugé faux). Short : un nageur qui gagne 0,5 s par semaine au 100 m.
+- Centres : meteo-climat, nature-ecologie, natation.
+- Questions : paysage 01:15 → A (décroissante, vₙ = 40 − 0,5n), 02:26 → B (croissante, w₀ = −300, r = 0,25) ; short 00:25 → C (décroissante).
+- Commentaire du short : après 8 semaines, 62 − 8 × 0,5 = 58 s (non affiché).
+- Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-arith-variation[-short]/`). Marques par `manim/scripts/4e/equation_commun.py`.
+
+
+### Ép. 07 arith-graphique ✅ relu (corrections `b3580d3b` : étiquettes hors du tracé, graduations lisibles, bas du short aéré)
+- Commits locaux `9c698040` (scripts + marques) puis `b3580d3b` (6 défauts mineurs relus par la session principale) ; rien poussé.
+- Durées : paysage 4:26 (266,1 s) ; short 1:07 (67,0 s). Bords : 0 instant dans les deux vidéos.
+- Ceintures : paysage verte, short blanche.
+- Métiers : paysage Amel, ingénieure en robotique (robot livreur d'hôpital, autonomie 120 − 15n) ; short Lina, monteuse vidéo (4, 7, 10 épisodes, +3 par semaine).
+- Centres : technologie-ia, corps-sante (paysage) ; cinema-series (short).
+- Questions : paysage 01:11 → A (4), 02:23 → B ((4 ; 17)) ; short 00:24 → C (points alignés).
+- Réponse au commentaire du short (non affichée) : 34 = 4 + 3 × 10.
+- Voix : aucun mot changé.
+
+
+### Ép. 08 arith-interpreter ✅ relu (corrections `8339fc82` : espaces autour de ≥ ≈ = −, personnages écartés)
+- Ép. 08 `arith-interpreter` (1re, `lin_suite_interpreter`) : commits locaux `6e0873c3` + `8339fc82` (retouches de la relecture : espaces autour de ≥ ≈ = −, Clara et Bastien écartés ; paysage re-rendue, bords 0) (scripts `suite_arith_interpreter.py` + `_short.py`, 2 `_marques.json`), PAS poussé.
+- Durées : paysage 5:02, short 1:04. Bords : 0 instant sur les deux mp4 ; dry run final : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD.
+- Ceintures : paysage verte, short blanche (échelle entière).
+- Métier : Clara, kinésithérapeute (son patient Bastien, opéré du genou, réapprend à marcher). Short : un refuge pour animaux (pas de métier nommé dans la voix).
+- Centres : `corps-sante`, `sport`, `animaux`.
+- Questions paysage : 01:07 → B (le nombre de livres ajoutés chaque année) ; 03:10 → C (l'étape 20). Short : 00:23 → B (2035).
+- Question en commentaire du short : u₁ correspond à 2026, à quelle année correspond u₉ ? Réponse : 2034 (non affichée).
+- Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-arith-interpreter[-short]/`). Marques datées par `manim/scripts/4e/equation_commun.py` (cues doubles).
+
