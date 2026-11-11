@@ -95,7 +95,19 @@ class SuiteArithTermeRangShort(ShortSuites):
         self.play(FadeIn(nom, shift=UP * 0.1), run_time=0.35)
         self.au_mot("prépare")
         self.play(FadeIn(metier, shift=UP * 0.1), run_time=0.3)
-        lg = Rangee(10, X0, X1, Y_CASES, larg=0.36, haut=0.48, creux=0.13, sw=3)
+        lg = Rangee(10, X0, X1, Y_CASES, larg=0.34, haut=0.48, creux=0.13, sw=3)
+        # la case u₁ porte « 20 » : elle est plus large (le nombre lisible, bien centré),
+        # les 9 autres se resserrent à droite ; les sauts sont refaits
+        xs_cases = [-1.72] + list(np.linspace(-1.15, 1.8, 9))
+        for k, c in enumerate(lg.cases):
+            c.move_to(P(xs_cases[k], Y_CASES))
+        large = RoundedRectangle(width=0.56, height=0.48, corner_radius=0.08, stroke_color=TERME, stroke_width=3,
+                                 fill_color=FOND_CARTE, fill_opacity=1).move_to(P(xs_cases[0], Y_CASES))
+        lg.cases.remove(lg.cases[0])
+        lg.cases.submobjects.insert(0, large)
+        lg.remove(lg.sauts)
+        lg.sauts = VGroup(*[lg.fleche(k, k + 1, 0.13, 3) for k in range(9)])
+        lg.add(lg.sauts)
         xs = [c.get_center()[0] for c in lg.cases]
         rt, poteaux = self.route(xs)
         v = velo(0.75).move_to(P(xs[0], Y_ROUTE), aligned_edge=DOWN)
@@ -112,7 +124,7 @@ class SuiteArithTermeRangShort(ShortSuites):
         self.play(FadeIn(s1), FadeIn(l1[0], shift=UP * 0.1), Indicate(poteaux[0], color=TERME), run_time=0.3)
         self.play(LaggedStart(*[FadeIn(c, scale=0.8) for c in lg.cases], lag_ratio=0.06), FadeIn(n1), run_time=0.4)
         self.suivre("20")
-        t20 = Text("20", font_size=24, color=WHITE).move_to(lg.cases[0])
+        t20 = Text("20", font_size=30, color=WHITE).move_to(lg.cases[0])
         self.play(FadeIn(l1[1], scale=1.3), FadeIn(t20, scale=1.4), Wiggle(v, scale_value=1.1), run_time=0.4)
         self.suivre("5")
         l2 = VGroup(self.t("puis", 40), self.t("+ 5 km", 44, RAISON)).arrange(RIGHT, buff=0.18)
