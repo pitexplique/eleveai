@@ -61,6 +61,7 @@ def carte(code: str, mois: int, de: str = "") -> Image.Image:
     margo = margo.resize((round(margo.width * h_margo / margo.height), h_margo), Image.LANCZOS)
     im.paste(margo, ((bande - margo.width) // 2, 150), margo)
     centre(d, 0, bande, 1020, "Ti Margo", police("segoeuib.ttf", 50), VERT_FONCE)
+    centre(d, 0, bande, 1095, "Ton défi t'attend !", police("segoeuib.ttf", 44), VERT)
 
     # Le texte à droite.
     x0, x1 = bande + 80, L - 80
