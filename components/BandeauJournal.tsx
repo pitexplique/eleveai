@@ -15,14 +15,16 @@
 // parce qu'elle « détourne l'attention sur la page centrale ». Le rouge reste
 // en petit, comme la rubrique du journal.
 // ⛔ 11/11 : « tu le mets que dans la page d'accueil, pas sur tout le site » →
-// affiché seulement sur « / ».
+// affiché seulement sur l'accueil.
+// ⛔ 11/11 soir : l'accueil, c'est « /accueil » (app/page.tsx redirige « / »
+// vers « /accueil ») — tester seulement « / » cachait le bandeau partout.
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function BandeauJournal() {
   const pathname = usePathname();
-  if (pathname !== "/") return null;
+  if (pathname !== "/" && pathname !== "/accueil") return null;
 
   return (
     <div className="border-b-[4px] border-double border-stone-900 bg-[#faf6ec] px-3 py-2 text-stone-900 print:hidden sm:py-2.5">
