@@ -567,9 +567,11 @@ class SuiteVariationTle(PaysageSuites):
         c2 = self.morceaux(["= ", ("2n", RAISON), (" − ", RAISON), ("5", RAISON)], 38)
         c2.move_to(P(0, 0.55)).align_to(c1[1], LEFT)
         c3 = self.gauche(self.morceaux([("positif", JUSTE), " dès que  ", ("n ≥ ", JUSTE), ("3", JUSTE)], 38), -0.3)
-        c4 = self.gauche(self.morceaux([("Vérifie :", GREY_A), "  ", ("u₂", TERME), " = −", "8", "    ", ("u₃", TERME), " = −",
-                                        "9", "    ", ("u₄", TERME), " = −", "8"], 34, 6.5), -1.2)
-        c5 = self.gauche(self.morceaux([("croissante à partir du rang ", JUSTE), ("3", JUSTE)], 40, 6.6), -2.25)
+        # « Vérifie » sur DEUX lignes, à la taille du reste (38)
+        c4 = self.gauche(self.morceaux([("Vérifie :", GREY_A), "  ", ("u₂", TERME), " = −", "8"], 38), -1.05)
+        c4b = self.morceaux([("u₃", TERME), " = −", "9", "    ", ("u₄", TERME), " = −", "8"], 38)
+        c4b.move_to(P(0, -1.68)).align_to(P(-5.65, 0), LEFT)
+        c5 = self.gauche(self.morceaux([("croissante à partir du rang ", JUSTE), ("3", JUSTE)], 40, 6.6), -2.45)
         zero, barres = bande_ecarts(nu, ECARTS_DEFI, -1.55, 0.11, larg=0.24)
         lab0 = self.t("0", 22, GREY_A, audit=False).next_to(zero, LEFT, buff=0.12)
         self.devoiler(c1, ["u indice n plus 1", None, "2", "1", "6"])
@@ -582,8 +584,8 @@ class SuiteVariationTle(PaysageSuites):
         sp = signe("+", JUSTE, 0.26, 34).next_to(barres, RIGHT, buff=0.2).set_y(-1.1)
         self.play(GrowFromCenter(sm), GrowFromCenter(sp), Indicate(barres[3:], color=JUSTE, scale_factor=1.15),
                   run_time=0.45)
-        self.devoiler(c4, ["Vérifie", "u indice 2", None, "8", "u indice 3", None, "9", "u indice 4", None, "8"],
-                      rt=0.25)
+        self.devoiler(c4, ["Vérifie", "u indice 2", None, "8"], rt=0.25)
+        self.devoiler(c4b, ["u indice 3", None, "9", "u indice 4", None, "8"], rt=0.25)
         for k in (2, 3, 4):
             pts[k].set_color(JAUNE_TITRE)
         self.play(Indicate(VGroup(*pts[2:5]), color=JAUNE_TITRE, scale_factor=1.5), run_time=0.45)
@@ -591,6 +593,12 @@ class SuiteVariationTle(PaysageSuites):
         cad = self.encadre(c5, JUSTE, 0.12)
         rang = DashedLine(nu.G(3, 8), nu.G(3, -10), color=JUSTE, stroke_width=3, dash_length=0.08)
         fl = tendance(nu, (3, -6.5), (7.4, 9.5), JUSTE)
+        # les graduations restent lisibles : chaque nombre sur un petit fond noir, PAR-DESSUS les traits
+        for g in nu[4:]:
+            fond = BackgroundRectangle(g[1], color=BLACK, fill_opacity=1, buff=0.03)
+            fond.set_z_index(2)
+            g[1].set_z_index(3)
+            self.add(fond)
         self.play(Create(cad), Create(rang), GrowArrow(fl), run_time=0.45)
         self.attendre_voix(marge=0.6)
 
