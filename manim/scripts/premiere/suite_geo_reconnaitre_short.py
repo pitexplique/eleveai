@@ -36,6 +36,15 @@ XA, YA, ECH, RAP = -1.7, -0.2, 0.125, 0.62    # le coin bas-gauche des photos ; 
 Y_CASES = -1.12
 
 
+def liste_deux_lignes(valeurs, fs=40, color=WHITE):
+    """La liste aérée coupée après le 2e « ; » : « 10 ; 20 ; » au-dessus de « 30 ; 40 »,
+    pour garder de gros chiffres dans les boutons étroits du short."""
+    g = liste_aeree(valeurs, fs, color, apres=0.16)
+    bas = VGroup(*g.submobjects[4:])
+    bas.shift(DOWN * (g.nombres[0].height + 0.12)).align_to(g.nombres[0], LEFT)
+    return g
+
+
 def liste_aeree(valeurs, fs=32, color=WHITE, avant=0.05, apres=None):
     """« 3 ; 7 ; 11 ; 15 » comme liste_nombres (g.nombres, g.seps), mais le « ; »
     collé au nombre d'avant et une vraie espace APRÈS lui (relecture du 11/11)."""
@@ -217,17 +226,21 @@ class SuiteGeoReconnaitreShort(ShortSuites):
         self.attendre_voix(marge=0.3)
 
         # ── 03 : question-pause → C ──
-        listes = [liste_aeree([str(v) for v in l], 36, apres=0.2) for l in QS]  # « ; » puis une espace
+        # 2 lignes par bouton : les chiffres au moins aussi gros que « le même nombre ? » (relecture 11/11) ;
+        # la question en 3 lignes égales et les boutons un peu moins espacés, pour garder la place au-dessus de Ti-Margo
+        listes = [liste_deux_lignes([str(v) for v in l], 32) for l in QS]
+        self.buff_boutons = 0.12
         q = self.poser_question("03-question",
-                                [(self.t("Laquelle multiplie", 40), "Laquelle"), (self.t("toujours par", 40), "toujours"),
-                                 (self.t("le même nombre ?", 40), "le même")],
-                                listes, 2, y_question=2.85)
+                                [(self.t("Laquelle multiplie", 32), "Laquelle"), (self.t("toujours par", 32), "toujours"),
+                                 (self.t("le même nombre ?", 32), "le même")],
+                                listes, 2, y_question=2.95)
+        del self.buff_boutons
         self.dire("03b-reponse")
         ok = self.q_reponse(q, 2)
         self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[1]), run_time=0.25)
         self.play(VGroup(q.cartes[2], ok).animate.move_to(q.cartes[0].get_center()), run_time=0.35)
-        lr = LigneTermes([str(v) for v in QS[2]], centre=P(0, q.cartes[2].get_bottom()[1] - 0.6), pas=1.08,
-                         largeur=0.86, hauteur=0.7, fs=30)
+        lr = LigneTermes([str(v) for v in QS[2]], centre=P(0, q.cartes[2].get_bottom()[1] - 0.6), pas=1.04,
+                         largeur=0.94, hauteur=0.7, fs=28)  # « 135 » a la même marge que « 15 »
         for c in lr.cases:
             c[1]._pas_audit = True  # les termes de C, déjà lus dans la question
         self.play(LaggedStart(*[FadeIn(c, scale=0.8) for c in lr.cases], lag_ratio=0.15), run_time=0.4)
