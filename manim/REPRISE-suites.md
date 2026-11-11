@@ -45,7 +45,8 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
   Questions : paysage 04 → C, 08 → A ; short 03 → B ; commentaire : 37 km (10 + 9 × 3).
 
 ## ⏭ Relais de la session fille (11/11 après-midi)
-- Acceptés après relecture : 02 à 08 (blocs ci-dessous). En cours au moment du relais : 09 (retouches espaces/cases renvoyées), 10, 11, 12 (agents de rendu), lot de re-rendus de la fin (01 ✅, 02 ✅, 03 ✅, restent 04 et la paysage 05).
+- Acceptés après relecture : 02 à 12, tous en commits locaux (blocs ci-dessous). Fins sans étoile : 01 à 05 re-rendus ✅ (paysage + short). Plus aucun agent de la session fille ne tourne au moment du relais (11/11 ~15 h).
+- Machine partagée : verrou `eleveai-rendu-hd.lock` (un seul rendu -qh à la fois, toutes sessions) + au moins 1,5 Go de RAM libre avant chaque HD (règle de la session Calcul mental 6e). Les sessions Calcul mental, Terminale et un « chef d'orchestre » peuvent demander une pause : la transmettre aux agents.
 - Relecture : regarder `planche-finale-paysage.png` / `-short.png` du dossier de sortie + images à t précis (outil PyAV : extraire une image à t, recadrer pour zoomer). Défauts typiques renvoyés : liste en fin de `mission-commune.md` (dossier de notes de la session fille) : la donner telle quelle aux agents suivants.
 - ⏰ ÉCHÉANCE (calendrier validé par Frédéric, section « 📅 Calendrier YouTube » en bas) : épisodes 01 à 04 PRÊTS avant le 16/11 12 h 30 (heure de La Réunion) = re-rendus sans étoile (faits), miniatures, entrées du manifeste en AJOUT (prioritaire: true, pas_avant à leur date, renvoie_vers sur les shorts), par lecture-patch-écriture du JSON ; ⛔ ne pas committer le manifeste par son chemin tant qu'il porte la modif non committée d'une autre session (2 pas_avant). Chaque épisode suivant : en place 2 jours avant sa date. Donc la passe finale se fait AU FIL DE L'EAU, pas seulement à la fin.
 - Reste : 13 à 27 (1re géo puis 1re spé), puis passe finale (miniatures, manifeste en AJOUT, fiches-youtube, R2, table R2). Terminale 28-38 : session sœur « Suites Terminale », rapports `ep-28.md`… dans le même dossier de notes.
@@ -142,6 +143,17 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
 - Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-geo-reconnaitre[-short]/`).
 
 
+### Ép. 10 geo-recurrence ✅ relu (corrections `041dab0e`, `12d1f6ab`, `ec27018a` : espaces des calculs, « 1 024 » à la taille des autres, cases du rebond égales autour de 67,5, arc de la garde écarté des ceintures)
+- Ép. 10 `geo-recurrence` (1re, `expo_suite_recurrence`) : commits locaux `b8d849f3` + `041dab0e` (défauts de la relecture) + `12d1f6ab` (2e relecture : cases h du rebond) + `ec27018a` (3e relecture : écran titre) (scripts `suite_geo_recurrence.py` + `_short.py`, 2 `_marques.json`), PAS poussé.
+- Durées : paysage 4:33 (273,1 s), short 1:11 (70,7 s). Bords : 0 instant (les deux). Dry run : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD.
+- Ceintures : paysage verte, short blanche (échelle entière à 70 %).
+- Métier : Manon, apicultrice (colonie de 10 000 abeilles, + 20 % par mois → uₙ₊₁ = 1,2 × uₙ ; u₃ = 17 280). Short : un tournoi d'échecs en ligne (1 024 joueurs, la moitié éliminée à chaque tour).
+- Centres : `animaux`, `nature-ecologie` (paysage) ; `jeux-defis` (short).
+- Questions : paysage 00:46 → A (vₙ₊₁ = 0,98 × vₙ), 02:31 → C (54) ; short 00:24 → A (uₙ₊₁ = 0,5 × uₙ).
+- Commentaire du short : après 4 tours, 1 024 ÷ 2⁴ = 64 joueurs (non affiché).
+- Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-geo-recurrence[-short]/`). Marques datées par `manim/scripts/4e/equation_commun.py` (cues doubles).
+- Outils repris de l'ép. 02 (importés, pas recopiés) : `AuditMilliers`, `OutilsEp02` (`phrase`, `calcul`, `lancer`), `arc_fleche`. Nouveau dans le short : `deux_lignes()` (choix des boutons sur deux lignes, à la taille de la question).
+
 ### Ép. 11 geo-taux ✅ relu (corrections `6c079054` : sous-titre du titre écarté, étiquettes d'Ylan aérées, 49 %/51 % séparés)
 - Ép. 11 `geo-taux` (1re, `expo_suite_taux`) : commit local `5cb68df2` (scripts `suite_geo_taux.py` + `_short.py`, 2 `_marques.json`), PAS poussé.
 - Durées : paysage 4:49 (289,0 s), short 0:56 (56,3 s). Bords : 0 instant sur les deux mp4 ; dry run final : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD.
@@ -153,8 +165,19 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
 - Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-geo-taux[-short]/`). Marques : `marques_dump.ps1`, puis un petit convertisseur à moi qui date un à un les mots des cues répétées (« 10 000 fois » en 3 mots) ; `equation_commun.py` perdait la fin de `09b-correction` (16 cues « introuvable »).
 
 
+### Ép. 12 geo-terme-rang ✅ relu (corrections `ba99d570`, `09fce1f0`, `6f69af25` : « 768 » dans sa case, garde aérée, choix des questions en grand, étiquettes agrandies, échelle du short à 70 % sous le titre)
+- Ép. 12 `geo-terme-rang` (1re, `expo_suite_terme_rang`) : commits locaux `ba99d570` + `09fce1f0` + `6f69af25` (retours de relecture) (scripts `suite_geo_terme_rang.py` + `_short.py`, 2 `_marques.json`), PAS poussé.
+- Durées : paysage 4:13 (253,0 s), short 1:14 (74,3 s). Bords : 0 instant sur les deux mp4 ; dry run final : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD.
+- Ceintures : paysage verte, short blanche (échelle entière à 70 %, 0,15 sous le titre en fs 40).
+- Métier : Léo, community manager (le compte d'un club de basket : 2 000 abonnés, + 10 % par mois, u₁₂ = 2 000 × 1,1¹² ≈ 6 277). Short : la feuille pliée 10 fois (pas de métier nommé dans la voix).
+- Centres : `reseaux-sociaux`, `sport`, `jeux-defis`.
+- Questions paysage : 01:08 → C (405 = 5 × 3⁴) ; 02:01 → B (100 = 800 × 0,5³). Short : 00:27 → C (uₙ = 0,1 × 2ⁿ).
+- Question en commentaire du short : l'épaisseur après 7 pliages. Réponse : 12,8 mm (0,1 × 2⁷), non affichée.
+- Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-geo-terme-rang[-short]/`). Marques datées par `manim/scripts/4e/equation_commun.py` (cues doubles).
+
+
 ## 📅 Calendrier YouTube décidé le 11/11 (Frédéric : « Oui, à partir du 16 »)
 - Les suites prennent le 5e créneau du jour (les 4 autres sont le calendrier 4e/6e déjà daté jusqu'au 09/12). Le 16/11 est déjà plein (5 vidéos) : on démarre le **17/11**.
 - Rythme : paysage de l'ép. NN un jour, son short le lendemain. Épisode k (01 → 38, dans l'ordre de la table) : paysage `pas_avant` = 17/11 + 2 × (k − 1) jours, short = le jour suivant. Donc 01 : 17 et 18/11 ; 02 : 19 et 20/11 ; 03 : 21 et 22/11 ; 08 : 01 et 02/12…
 - Dans le manifeste (passe finale, entrées en AJOUT) : `prioritaire: true` + `pas_avant` sur chaque entrée ; le short a `renvoie_vers` = sa paysage. Les 4 vidéos communes : une seule entrée publiée, la jumelle en `meme_video_que`.
-- ⛔ Avant l'envoi de l'ép. 01 (programmé le 16/11 à 12 h 30 pour le 17) : miniatures + entrées au manifeste des ép. 01 à 04 au moins, et re-rendu des vidéos qui ont l'étoile Flash sur « @eleveai974 » (01 à 04 ✅ re-rendus sans étoile le 11/11, paysage et short ; 05 paysage + short à refaire ; 06 et suivants rendus après le correctif). Sans entrée, l'automatique ne les voit pas ; une vidéo défectueuse partirait telle quelle.
+- ⛔ Avant l'envoi de l'ép. 01 (programmé le 16/11 à 12 h 30 pour le 17) : miniatures + entrées au manifeste des ép. 01 à 04 au moins, et re-rendu des vidéos qui ont l'étoile Flash sur « @eleveai974 » (01 à 05 ✅ re-rendus sans étoile le 11/11, paysage et short, durées identiques, bords 0 ; 06 et suivants rendus après le correctif). Sans entrée, l'automatique ne les voit pas ; une vidéo défectueuse partirait telle quelle.
