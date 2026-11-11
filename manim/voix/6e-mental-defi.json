@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le grand défi du calcul mental. Sauras-tu résoudre ces problèmes de tête ?",
+  "01-situation": "Voici Nathan. Il est développeur de jeux vidéo. Dans son jeu, le héros gagne des pièces et achète des objets. Nathan vérifie chaque calcul de tête.",
+  "02-somme": "Défi 1 : le héros achète une épée à 26 pièces, une potion à 5 pièces et une carte à 3 pièces. On regroupe les petits : 5 plus 3, ça fait 8. Puis 26 plus 8 : 34 pièces.",
+  "03-groupes": "Défi 2 : le château a 9 couloirs. Dans chaque couloir, 7 pièces d'or. 9 fois 7, ça fait 63 pièces d'or.",
+  "04-question": "Question ! Le héros partage ses 63 pièces entre 9 amis. Combien chacun ? A : 54. B : 7. C : 8. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 9 fois 7, ça fait 63. Donc 63 divisé par 9, ça fait 7 pièces chacun.",
+  "05-ordre": "Nathan vérifie toujours avec un ordre de grandeur. 96 moins 27 : 96, c'est presque 100. 27, c'est presque 30. 100 moins 30, ça fait 70. Le résultat est autour de 70. 69, c'est raisonnable. 123, non : on a ajouté au lieu d'enlever !",
+  "06-horaire": "Défi 3 : une partie commence à 15 h 35. Elle dure 1 heure et 25 minutes. 15 h 35 plus 1 heure : 16 h 35. Puis 25 minutes : de 35 à 60, il faut juste 25 minutes. La partie finit à 17 h.",
+  "07-question": "Question ! 48 plus 31, c'est environ combien ? A : 80. B : 20. C : 800. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 48, c'est presque 50. 31, c'est presque 30. 50 plus 30 : environ 80.",
+  "08-defi": "À toi de jouer ! Le héros a 100 pièces. Il achète 4 flèches à 5 pièces et une armure à 38 pièces. Combien lui reste-t-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 4 fois 5, ça fait 20. 20 plus 38, ça fait 58. De 58 à 60, il manque 2. De 60 à 100, il manque 40. Il lui reste 42 pièces.",
+  "09-finale": "Ce que tu as appris. On lit le problème et on choisit l'opération. On coupe le calcul en étapes faciles. On vérifie avec un ordre de grandeur.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

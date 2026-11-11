@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'ai 38 billes. J'en gagne 5. 8 plus 5, ça fait 13. Je colle le 3 et le 13 : j'ai 313 billes ! Tu paries ?",
+  "01-sac": "313 billes ? Mon sac ne pourrait jamais les porter ! De 38 à 40, il manque 2. Et 5, c'est 2 et 3.",
+  "02-question": "Question ! Combien j'ai de billes ? A : 43. B : 313. C : 33. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! 38 plus 2, ça fait 40. Puis plus 3 : 43 billes.",
+  "03-ouf": "Ouf ! Mon sac respire.",
+  "04-commentaire": "À toi : combien font 67 plus 6 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

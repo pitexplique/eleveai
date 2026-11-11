@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je partage 36 biscuits entre 4 copains. Divisé par 4... j'enlève 4 : 32 biscuits chacun ! Tu paries ?",
+  "01-copains": "32 biscuits chacun, pour 4 copains ? Il faudrait 128 biscuits ! Je récite la table de 4 : 4 fois 9, ça fait 36.",
+  "02-question": "Question ! Combien de biscuits pour chacun ? A : 32. B : 9. C : 8. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 4 fois 9, ça fait 36. Donc 36 divisé par 4, ça fait 9 biscuits chacun.",
+  "03-ouf": "Ouf ! Personne n'est jaloux.",
+  "04-commentaire": "À toi : 42 cerises pour 6 copains. Combien de cerises pour chacun ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

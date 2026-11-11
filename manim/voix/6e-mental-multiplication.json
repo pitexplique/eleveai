@@ -1,0 +1,15 @@
+{
+  "00-garde": "Multiplier de tête. Comment calculer 18 fois 5 en 3 secondes ?",
+  "01-situation": "Voici Hugo. Il est DJ. Pour une fête, il prépare 18 morceaux de 5 minutes. Combien de minutes de musique ?",
+  "02-fois5": "L'astuce : 5, c'est la moitié de 10. Hugo calcule d'abord 18 fois 10. Chaque chiffre monte d'une colonne : 180. Puis la moitié de 180 : 90. 18 fois 5, ça fait 90 minutes.",
+  "03-question": "Question ! Combien font 24 fois 5 ? A : 240. B : 100. C : 120. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 24 fois 10, ça fait 240. La moitié de 240 : 120.",
+  "04-fois11": "Pour les lumières, Hugo pose 11 rangées de 9 lampes. 11 fois 9, c'est 10 fois 9, plus encore une fois 9. 10 fois 9, ça fait 90. 90 plus 9, ça fait 99 lampes.",
+  "05-piege": "Le piège : avec fois 5, on oublie la moitié. 18 fois 5, ce n'est pas 180 ! Vérifie : 20 fois 5, ça fait 100. Donc 18 fois 5 fait moins de 100.",
+  "06-question": "Question ! Combien font 12 fois 9 ? A : 108. B : 118. C : 98. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. 10 fois 9, ça fait 90. 2 fois 9, ça fait 18. 90 plus 18 : 108.",
+  "07-defi": "À toi de jouer ! La fête dure 2 heures, soit 120 minutes. Hugo a 22 morceaux de 5 minutes. A-t-il assez de musique ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 22 fois 10, ça fait 220. La moitié : 110 minutes. 110, c'est moins que 120. Il manque 10 minutes : Hugo doit ajouter 2 morceaux !",
+  "08-finale": "Ce que tu as appris. Fois 5, c'est fois 10, puis la moitié. 11 fois 9, c'est 10 fois 9, plus encore une fois 9. On vérifie avec un nombre rond.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

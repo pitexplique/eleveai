@@ -1,0 +1,16 @@
+{
+  "00-garde": "Soustraire de tête. Comment calculer 121 moins 38 sans poser l'opération ?",
+  "01-situation": "Voici Chloé. Elle tient un magasin de vélos. Toute la journée, elle rend la monnaie de tête.",
+  "02-complement": "Un client achète un casque à 36 euros. Il paie avec un billet de 100 euros. Chloé complète : de 36 à 40, il manque 4. De 40 à 100, il manque 60. 4 plus 60 : elle rend 64 euros. 100 moins 36, ça fait 64.",
+  "03-question": "Question ! Combien font 100 moins 45 ? A : 65. B : 55. C : 45. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. De 45 à 50, il manque 5. De 50 à 100, il manque 50. 5 plus 50 : 55.",
+  "04-dizaines": "Dans le stock, il y a 96 sonnettes. Chloé en vend 27. Elle enlève d'abord les dizaines : 96 moins 20, ça fait 76. Puis les unités : 76 moins 7, ça fait 69. Il reste 69 sonnettes.",
+  "05-arrondir": "Plus fort : 121 vélos dans le magasin, 38 sont vendus. 38, c'est presque 40. 121 moins 40, ça fait 81. Mais Chloé a enlevé 2 de trop. Elle les rajoute : 81 plus 2, ça fait 83 vélos.",
+  "06-piege": "Le piège : corriger dans le mauvais sens. 81 moins 2, ça fait 79 : faux ! On a enlevé trop, alors on rajoute.",
+  "07-question": "Question ! Combien font 85 moins 29 ? A : 54. B : 64. C : 56. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 85 moins 30, ça fait 55. On a enlevé 1 de trop : on le rajoute. 56.",
+  "08-defi": "À toi de jouer ! Un vélo coûte 162 euros. Chloé fait une remise de 19 euros. Quel est le nouveau prix ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 19, c'est presque 20. 162 moins 20, ça fait 142. On a enlevé 1 de trop : 142 plus 1, ça fait 143. Le vélo coûte 143 euros.",
+  "09-finale": "Ce que tu as appris. Pour rendre la monnaie, on complète jusqu'au nombre rond. On enlève les dizaines, puis les unités. Si on arrondit, on corrige dans le bon sens.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Ajouter de tête. Comment calculer 56 plus 8 sans poser l'opération ?",
+  "01-situation": "Voici Enzo. Il est arbitre de basket. Pendant le match, il compte les points de tête. Les Bleus ont 56 points. Ils marquent encore 8 points. Combien de points en tout ?",
+  "02-dizaine": "Enzo passe par la dizaine. De 56 à 60, il manque 4. Il coupe 8 en 4 et 4. 56 plus 4, ça fait 60. Puis 60 plus 4, ça fait 64. Les Bleus ont 64 points.",
+  "03-rond": "Pourquoi passer par 60 ? Parce qu'un nombre rond, c'est un raccourci. Ajouter 4 à 60, c'est facile.",
+  "04-question": "Question ! Combien font 47 plus 8 ? A : 65. B : 54. C : 55. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. De 47 à 50, il manque 3. 8, c'est 3 et 5. 50 plus 5, ça fait 55.",
+  "05-decomposer": "Au tournoi, les Rouges marquent 134 points samedi et 28 points dimanche. Enzo coupe 28 en 20 et 8. 134 plus 20, ça fait 154. Puis 154 plus 8, ça fait 162 points.",
+  "06-piege": "Attention au piège ! 154 plus 8 : on passe la dizaine. 154 plus 6, ça fait 160. Puis plus 2 : 162. Pas 152 !",
+  "07-question": "Question ! Combien font 245 plus 37 ? A : 282. B : 272. C : 285. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 245 plus 30, ça fait 275. Puis 275 plus 7 : on passe par 280, et on arrive à 282.",
+  "08-defi": "À toi de jouer ! Les Bleus ont 78 points. Ils en marquent encore 15. Les Rouges ont 92 points. Qui gagne ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 78 plus 2, ça fait 80. Il reste 13 à ajouter : 80 plus 13, ça fait 93. Les Bleus ont 93 points, les Rouges 92. Les Bleus gagnent, d'un seul point !",
+  "09-finale": "Ce que tu as appris. Pour ajouter de tête, on passe par un nombre rond. On ajoute les dizaines, puis les unités. On fait attention quand on passe la dizaine.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

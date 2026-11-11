@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'achète un jeu à 49 euros et une manette à 52 euros. 49 plus 52... 911 euros ! Tu paries ?",
+  "01-ordre": "911 euros ? Le vendeur éclate de rire. 49, c'est presque 50. 52, c'est presque 50. 50 plus 50, ça fait 100. Le prix est autour de 100 euros.",
+  "02-question": "Question ! Combien je paie ? A : 911 euros. B : 101 euros. C : 91 euros. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 49 plus 1, ça fait 50. 50 plus 51, ça fait 101 euros.",
+  "03-ouf": "Ouf ! Il me reste de quoi acheter des bonbons.",
+  "04-commentaire": "À toi : combien font 98 plus 103 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

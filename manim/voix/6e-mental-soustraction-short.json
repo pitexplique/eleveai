@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'achète un skate à 36 euros. Je paie avec un billet de 100 euros. Le vendeur va me rendre 74 euros ! Tu paries ?",
+  "01-vendeur": "Le vendeur compte sur ses doigts. De 36 à 40, il manque 4. De 40 à 100, il manque 60.",
+  "02-question": "Question ! Combien on me rend ? A : 74 euros. B : 64 euros. C : 136 euros. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 4 plus 60, ça fait 64 euros. Et 36 plus 64, ça fait bien 100.",
+  "03-ouf": "Ouf ! Je n'ai pas volé 10 euros au vendeur.",
+  "04-commentaire": "À toi : un livre coûte 58 euros. Tu paies avec 100 euros. Combien on te rend ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
