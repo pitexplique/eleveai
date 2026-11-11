@@ -170,28 +170,32 @@ class SuiteArithExpliciteShort(ShortSuites):
         self.attendre_voix(marge=0.3)
 
         # ── 03 : question-pause → C ──
-        choix = ["uₙ = 15 + 120n", "uₙ = 120 × 15ⁿ", "uₙ = 120 + 15n"]
-        q = self.poser_question("03-question", [(self.t("Quelle est la", 42), "Quelle"),
-                                                (self.t("formule explicite ?", 42), "formule")],
-                                choix, 2, y_question=2.85)
+        choix = ["15 + 120n", "120 × 15ⁿ", "120 + 15n"]   # « uₙ = » écrit une fois, dans la question
+        # boutons resserrés pour cette question : « Mets pause » reste au-dessus de Ti-Margo
+        self.buff_boutons = 0.12
+        q = self.poser_question("03-question", [(self.t("Quelle est la", 40), "Quelle"),
+                                                (self.t("formule explicite ?", 40), "formule"),
+                                                (self.t("uₙ = …", 44, TERME), None)],
+                                choix, 2, y_question=2.9, fs=42)
+        self.buff_boutons = ShortSuites.buff_boutons
         self.dire("03b-reponse")
         ok = self.q_reponse(q, 2)
         c = q.cartes[2]
         self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[1]), FadeOut(q.question), run_time=0.25)
         self.play(VGroup(c, ok).animate.shift(P(0, 2.0) - c.get_center()), run_time=0.3)
-        corps = c[1][1]                       # « uₙ=120+15n » : u ₙ = 1 2 0 + 1 5 n
+        corps = c[1][1]                       # « 120+15n » : 1 2 0 + 1 5 n
         self.au_mot("premier terme")
         pt = self.t("le premier terme", 38, TERME).move_to(P(0, 0.75))
         self.play(FadeIn(pt, shift=UP * 0.1), run_time=0.3)
         self.suivre("120")
         u0 = self.t("u₀ = 120", 56, TERME).move_to(P(0, 0.05))
-        self.play(FadeIn(u0, scale=1.3), corps[3:6].animate.set_color(TERME), run_time=0.3)
+        self.play(FadeIn(u0, scale=1.3), corps[0:3].animate.set_color(TERME), run_time=0.3)
         self.au_mot("raison")
         ra = self.t("la raison", 38, RAISON).move_to(P(0, -0.95))
         self.play(FadeIn(ra, shift=UP * 0.1), run_time=0.3)
         self.suivre("15")
         r15 = self.t("r = 15", 56, RAISON).move_to(P(0, -1.65))
-        self.play(FadeIn(r15, scale=1.3), corps[7:].animate.set_color(RAISON), run_time=0.3)
+        self.play(FadeIn(r15, scale=1.3), corps[4:].animate.set_color(RAISON), run_time=0.3)
         self.insister(VGroup(u0, r15), 1.08)
         self.attendre_voix(marge=0.3)
 

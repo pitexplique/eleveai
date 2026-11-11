@@ -538,14 +538,18 @@ class SuiteArithExplicite1re(PaysageSuites):
                   (self.t("et sa raison est 6.", 36, RAISON), "6"),
                   (self.t("Pour tout entier n ≥ 1 :", 36), "1")]
         choix = ["tₙ = 20 + 6n", "tₙ = 14 + 6n", "tₙ = 6 + 20n"]
-        q = self.poser_question("08-question", lignes, choix, 1, en_ligne=True, largeur=3.9, fs=34)
+        q = self.poser_question("08-question", lignes, choix, 1, fs=36)
         self.dire("08b-reponse")
-        self.q_reponse(q, 1)
-        y = q.cartes.get_bottom()[1] - 0.75
+        ok_b = self.q_reponse(q, 1)
+        # A et C s'effacent, B monte à la place de A : les calculs prennent la place de B et C
+        ya, yb, yc = (c.get_center()[1] for c in q.cartes)
+        self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[2]), VGroup(q.cartes[1], ok_b).animate.shift(UP * (ya - yb)),
+                  run_time=0.2)
+        y = yb
         self.calcul([("tₙ =", WHITE, "t indice n"), ("20", TERME, "20"), ("+ 6 ×", RAISON, "6 fois"), ("(n − 1)", RAISON, "1"),
                      ("= 14", JUSTE, "14"), ("+ 6n", JUSTE, "6 n")], y, x=-5.6, fs=40)
         v = self.calcul([("On vérifie : t₁ =", WHITE, "On vérifie"), ("14", WHITE, "14"), ("+ 6", WHITE, "6"),
-                         ("= 20", JUSTE, "20")], y - 0.95, x=-5.6, fs=40)
+                         ("= 20", JUSTE, "20")], yc - 0.1, x=-5.6, fs=40)
         ok = self.coche(JUSTE, 0.2).next_to(v, RIGHT, buff=0.3)
         self.play(Create(ok), run_time=0.3)
         self.attendre_voix(marge=0.6)
@@ -631,8 +635,15 @@ class SuiteArithExplicite1re(PaysageSuites):
         self.dire("10b-correction")
         tit, lg, qs = self._defi
         self.au_mot("Correction")
-        cor = self.t("Correction", 44, JUSTE).move_to(P(-5.0, 3.22))
-        self.play(FadeOut(qs), FadeOut(tit), FadeIn(cor, shift=DOWN * 0.1), run_time=0.4)
+        cor = self.t("Correction", 44, JUSTE).move_to(P(0, 3.22))  # en haut et centré
+        # la ligne descend de 0,3 (place du « + 20 » sous le titre) ; seules les parties affichées glissent
+        fam = lg.get_family()
+        vus = [m for m in self.mobjects if any(m is f for f in fam)]
+        lg.shift(DOWN * 0.3)
+        for m in vus:
+            m.shift(UP * 0.3)
+        self.play(FadeOut(qs), FadeOut(tit), FadeIn(cor, shift=DOWN * 0.1), *[m.animate.shift(DOWN * 0.3) for m in vus],
+                  run_time=0.4)
         self.au_mot("rang 2")
         self.play(Indicate(VGroup(lg.cases[2], lg.noms[2]), color=TERME, scale_factor=1.2), run_time=0.3)
         self.au_mot("rang 6")
@@ -644,10 +655,10 @@ class SuiteArithExplicite1re(PaysageSuites):
             sauts.append(s)
             self.play(Create(s[0]), FadeIn(s[1]), run_time=0.12)
         self.calcul([("4 pas :", WHITE, None, False), ("31", WHITE, "31 moins"), ("− 11", WHITE, "11"),
-                     ("= 20", RAISON, "20")], -0.15, x=-6.2, fs=38)
+                     ("= 20", RAISON, "20")], -0.45, x=-6.2, fs=38)
         bloc = self.regrouper(lg, 2, 6, "+ 20", [], creux=0.3, fs=30, run_time=0.4)
         self.calcul([("r =", RAISON, "raison est"), ("20", WHITE, "20"), ("÷ 4", WHITE, "4"), ("= 5", JUSTE, "5")],
-                    -0.15, x=0.6, fs=38)
+                    -0.45, x=0.6, fs=38)
         neufs = [self.t("+ 5", 28, RAISON).move_to(s[1]) for s in sauts]
         copies = [bloc[1][1].copy() for _ in sauts]
         self.add(*copies)
@@ -659,13 +670,13 @@ class SuiteArithExplicite1re(PaysageSuites):
         self.play(*[FadeIn(lg.cases[k][0], scale=0.8) for k in (0, 1)], *[FadeIn(lg.noms[k]) for k in (0, 1)],
                   *[Create(a[0]) for a in arriere], *[FadeIn(a[1]) for a in arriere], run_time=0.4)
         self.calcul([("u₀ =", WHITE, None), ("11", WHITE, "11 moins"), ("− 2", WHITE, "2 fois"), ("× 5", WHITE, "5"),
-                     ("= 1", JUSTE, "1")], -0.95, x=-6.2, fs=38, avec=[FadeIn(lg.cases[0][1], scale=1.4)])
-        f = self.calcul([("uₙ =", WHITE, "u indice n égale"), ("1", TERME, "1 plus"), ("+ 5n", RAISON, "5 n")], -1.75,
+                     ("= 1", JUSTE, "1")], -1.25, x=-6.2, fs=38, avec=[FadeIn(lg.cases[0][1], scale=1.4)])
+        f = self.calcul([("uₙ =", WHITE, "u indice n égale"), ("1", TERME, "1 plus"), ("+ 5n", RAISON, "5 n")], -2.05,
                         x=-6.2, fs=40)
         self.play(Create(self.encadre(f, JAUNE_TITRE, 0.12)), run_time=0.3)
         self.calcul([("1", WHITE, "Enfin"), ("+ 5n", WHITE, "5 n"), ("= 96", WHITE, "96"), ("→", GREY_B, None),
                      ("5n", WHITE, "5 n"), ("= 95", WHITE, "95"), ("→", GREY_B, None), ("n = 19", JUSTE, "19")],
-                    -2.6, x=-6.2, fs=38)
+                    -2.9, x=-6.2, fs=38)
         n19 = self.t(u(19), 26, JUSTE).move_to(lg.noms[8])
         self.play(ReplacementTransform(lg.noms[8], n19), lg.cases[8][0].animate.set_stroke(JUSTE, width=7),
                   run_time=0.35)
