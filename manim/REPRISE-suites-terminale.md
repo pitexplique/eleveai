@@ -11,10 +11,10 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 | 28 | reconnaitre | suite_reconnaitre | 04 C, 07 A ; B | ✅ `a98ce8ba` + `af285329` (5:11 / 1:11), relu, bords 0 |
 | 29 | recurrence-preuve | suite_recurrence_preuve | 06 B, 08 C, 10 A ; C | ✅ `ae350d97` + `562b7d8b` + `584f95d3` (5:42 / 1:13), relu, bords 0 |
 | 30 | variation | suite_variation | 04 A, 07 B ; A | ✅ `d413f550` + `bca6781d` (4:18 / 1:15), relu, bords 0 |
-| 31 | bornee | suite_bornee | 04 C, 07 B ; C | à rendre |
+| 31 | bornee | suite_bornee | 04 C, 07 B ; C | ✅ `55969ebb` (3:59 / 1:24), relu, bords 0 ; questions 01:10 C, 02:21 B ; short 00:28 C |
 | 32 | defi (bleue) | suite_defi | 04 B, 06 A, 09 C ; B | ✅ `66bee7b1` (6:17 / 1:07), relu, bords 0 |
-| 33 | limite-interpreter | limite_suite_interpreter | 04 A, 08 C ; A | à rendre |
-| 34 | limite-calculer | limite_suite_calculer | 04 B, 06 A ; C | à rendre |
+| 33 | limite-interpreter | limite_suite_interpreter | 04 A, 08 C ; A | rendu `1b32d10c`, retouches demandées (Ti Margo sur les graphiques, formule du short coupée) |
+| 34 | limite-calculer | limite_suite_calculer | 04 B, 06 A ; C | agent lancé |
 | 35 | limite-operations | limite_suite_operations | 04 C, 07 B ; B | à rendre |
 | 36 | limite-comparaison | limite_suite_comparaison | 04 A, 07 C ; A | à rendre |
 | 37 | limite-monotone-bornee | limite_suite_monotone_bornee | 04 B, 07 A ; C | à rendre |
