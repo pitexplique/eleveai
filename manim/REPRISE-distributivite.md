@@ -42,11 +42,13 @@ Piège noté par l'agent 03 : dans `_plan_eq` (equation_commun.py), deux atomes 
 - Métiers : `V` sur vendeur et menuisier (phrase du menuisier alignée sur la vidéo), photographe, maître-nageur, cuisinier ajoutés avec `V` ; `scripts/verifier-metiers.ts` vert, `tsc` sans erreur sur ces fichiers.
 - R2 : `r2-videos.ps1 -Rclone "copy manim/sorties/4e/maths/distributivite R2:4e/maths/distributivite --include *.{mp4,png,jpg,webp}"`, `check --size-only` : 0 différence, 30 fichiers.
 
+## FAIT le 11/11
+- Push de `main` (`b81690a5..9784f82a`), déploiement Vercel réussi : les 10 pages `/video/4e-distrib-*` répondent 200.
+- `brancher-videos-coach.mjs --ecrire` : 10 vidéos branchées au coach (micros `litteral_distributivite_*`).
+
 ## RESTE (sur l'ordre de Frédéric)
-1. Push, le soir.
-2. Après le push seulement : `node scripts/brancher-videos-coach.mjs --id 4e-distrib-simple,4e-distrib-simple-short,4e-distrib-double,4e-distrib-double-short,4e-distrib-reduire,4e-distrib-reduire-short,4e-distrib-reconnaitre,4e-distrib-reconnaitre-short,4e-distrib-defi,4e-distrib-defi-short --ecrire`.
-3. YouTube : date à choisir à la place du `pas_avant` de prudence ; paysage avant son short.
-4. Mémoire `serie-distributivite-4e.md`.
+1. YouTube : date à choisir à la place du `pas_avant` de prudence (01/12) ; paysage avant son short.
+2. Titres YouTube des shorts (écrits par les agents) et ligne « Voix de synthèse. » à faire relire.
 
 ## Reste, dans l'ordre
 1. ~~Paysage 01 et short 01~~ FAITS (voir plus haut). Ancienne consigne, pour mémoire : paysage 01 : `AUDIT=1 BORDS=1 python -m manim render --dry_run manim/scripts/4e/distrib_simple.py DistribSimple4e --media_dir manim/scripts/4e/media-dist-01-audit` (0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; filtrer `tr '\r' '\n' | grep -E "AUDIT-AVANCE|RETARD|BORD|Error|Traceback"`). Points à surveiller : la pose au mot de « 3(x + 4) » sur « 3 fois, entre parenthèses, x plus 4 », `dire_eq(r2, "12. En")` dans `ecran_ranger` (à vérifier), l'écran 02-05 qui garde les planches d'un écran à l'autre, `Indicate` sur des objets REMPLIS (le brief Équations l'interdit : il remplit de vert) → remplacer par un `insister`/`Circumscribe` si ça cache le texte.
