@@ -10,7 +10,7 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 |---|---|---|---|---|
 | 28 | reconnaitre | suite_reconnaitre | 04 C, 07 A ; B | ✅ `a98ce8ba` + `af285329` (5:11 / 1:11), relu, bords 0 |
 | 29 | recurrence-preuve | suite_recurrence_preuve | 06 B, 08 C, 10 A ; C | ✅ `ae350d97` + `562b7d8b` + `584f95d3` (5:42 / 1:13), relu, bords 0 |
-| 30 | variation | suite_variation | 04 A, 07 B ; A | à rendre |
+| 30 | variation | suite_variation | 04 A, 07 B ; A | ✅ `d413f550` + `bca6781d` (4:18 / 1:15), relu, bords 0 |
 | 31 | bornee | suite_bornee | 04 C, 07 B ; C | à rendre |
 | 32 | defi (bleue) | suite_defi | 04 B, 06 A, 09 C ; B | à rendre |
 | 33 | limite-interpreter | limite_suite_interpreter | 04 A, 08 C ; A | à rendre |
@@ -27,3 +27,4 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 - 11/11 : ép. 28 ACCEPTÉ (`af285329` retouches). ⚠️ Trouvé : l'étincelle `Flash` de la fin commune (`suites_commun.py`) se pose sur « @eleveai974 », ce qui touche AUSSI le pilote et les épisodes 02-27. L'ép. 28 la redéfinit dans son script. Signalé à la session mère (note `etincelle-fin-commune.md` dans son dossier de notes). Ép. 30 lancé.
 - 11/11 : la session mère a corrigé la fin commune (`524b48bd`, `Indicate` au lieu du `Flash`) : les épisodes suivants ne la redéfinissent plus. Les vidéos déjà rendues avec l'étoile seront refaites par la session mère en fin de série.
 - 11/11 : ép. 29 ACCEPTÉ (`584f95d3`). Ép. 31 lancé (30 en cours).
+- 11/11 : ép. 30 ACCEPTÉ (`bca6781d`). Ép. 32 lancé (31 en cours).
