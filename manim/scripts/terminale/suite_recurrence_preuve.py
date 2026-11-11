@@ -752,7 +752,7 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
             b = RoundedRectangle(width=2.95, height=0.62, corner_radius=0.12, stroke_color=JUSTE, stroke_width=3,
                                  fill_color=FOND_CARTE, fill_opacity=1)
             b.move_to(P(0, y)).align_to(P(x_nom, 0), LEFT)
-            n = self.t(ETAPES[i], 30, JUSTE, larg=2.7).move_to(b)
+            n = self.t(ETAPES[i], 30, JUSTE, larg=2.35).move_to(b)   # une marge de chaque côté
             self.au_mot(extrait)
             self.play(FadeIn(b), FadeIn(n, scale=1.2), run_time=0.3)
             rangs[i] = VGroup(b, n)
@@ -769,7 +769,7 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
         h4 = self.ligne([("uₖ₊₁", JUSTE, "u indice k plus 1"), ("≤ 6", JUSTE, "6")], -1.6 + D, x=x_txt, fs=40)
         etiquette(2, -2.45 + D, "Conclusion")
         fin = self.ligne([("pour tout entier naturel n,", WHITE, "pour tout entier naturel n"),
-                          ("uₙ", JUSTE, "u indice n"), ("≤ 6", JUSTE, "6")], -2.45 + D, x=x_txt, fs=34,
+                          ("uₙ", JUSTE, "u indice n"), ("≤ 6", JUSTE, "6")], -2.45 + D, x=x_txt, fs=31,
                          decale=(1, 0.22))
         c = self.encadre(fin[1:], JUSTE, 0.1)
         self.play(Create(c), run_time=0.3)

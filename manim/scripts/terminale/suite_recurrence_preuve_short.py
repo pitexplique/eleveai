@@ -111,7 +111,7 @@ class SuiteRecurrencePreuveShort(ShortSuites):
 
     # les boutons : corps à ≈ 34 pt sur deux lignes ; le rond A/B/C plus petit,
     # la coche en bas à droite (à côté de la 2e ligne, plus courte)
-    place_coche = -0.2            # poser_question : place du corps = 4,0 − 0,82 (voir bouton)
+    place_coche = -0.08           # poser_question : place du corps = 4,0 − 0,94 (voir bouton)
     hauteur_bouton = 1.05
 
     def t(self, texte, fs=36, color=WHITE, larg=None, audit=True):
@@ -128,7 +128,7 @@ class SuiteRecurrencePreuveShort(ShortSuites):
         rond = Circle(radius=0.21, fill_color=TERME, fill_opacity=1, stroke_width=0)
         lt = Text(lettre, font_size=30, color=WHITE, weight=BOLD).move_to(rond)
         c = corps if isinstance(corps, Mobject) else self.t(corps, 36, WHITE, 1e9)
-        place = largeur - 0.15 - rond.width - 0.15 - 0.1
+        place = largeur - 0.15 - rond.width - 0.15 - 0.22   # ≥ 0,2 (≈ 50 px) de marge à droite
         if c.width > place:
             c.scale_to_fit_width(place)
         ligne = VGroup(VGroup(rond, lt), c).arrange(RIGHT, buff=0.15)
