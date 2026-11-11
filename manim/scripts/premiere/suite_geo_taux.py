@@ -221,7 +221,7 @@ class SuiteGeoTaux1re(PaysageSuites):
     # ── 00 : la garde ──────────────────────────────────────────────────────
 
     def dessin_garde(self):
-        y, yt = -0.2, 0.75
+        y, yt = -0.4, 0.5
         b1 = Barre(4, W=3.0, h=0.5, gauche=P(-5.9, y))
         b2 = Barre(-25, W=3.0, h=0.5, gauche=P(0.6, y))
         q1 = self.t("× ?", 40, RAISON).next_to(b1, RIGHT, buff=0.3)
@@ -240,7 +240,7 @@ class SuiteGeoTaux1re(PaysageSuites):
         self.play(Indicate(b2.morceau, color=RAISON, scale_factor=1.15), run_time=0.3)
         self.barrer_morceau(b2)
         self.au_mot("par quel nombre")
-        qn = self.t("par quel nombre multiplie-t-on ?", 40).move_to(P(0, -1.2))
+        qn = self.t("par quel nombre multiplie-t-on ?", 40).move_to(P(0, -1.3))
         self.play(FadeIn(qn, shift=UP * 0.1), FadeIn(q1, scale=1.4), FadeIn(q2, scale=1.4), run_time=0.4)
 
     def ecran_garde(self):
@@ -254,7 +254,7 @@ class SuiteGeoTaux1re(PaysageSuites):
 
     def ecran_situation(self):
         self.nouvel_ecran("01-situation")
-        perso = ylan(1.0).move_to(P(-5.2, 1.55))
+        perso = ylan(1.0).move_to(P(-5.2, 2.2))
         nom = self.t("Ylan", 40, JAUNE_TITRE).next_to(perso, DOWN, buff=0.3)
         m1 = self.t("distribution", 32, TERME).next_to(nom, DOWN, buff=0.12)
         m2 = self.t("de films", 32, TERME).next_to(m1, DOWN, buff=0.08)
@@ -554,7 +554,7 @@ class SuiteGeoTaux1re(PaysageSuites):
         self.play(FadeIn(b60, scale=1.3), run_time=0.25)
         self.biffer(b60)
         # la barre : × 0,49 → on garde 49 %, la baisse globale est de 51 %
-        b = Barre(-51, W=8.0, h=0.7, gauche=P(-3.6, 0.55))
+        b = Barre(-51, W=9.4, h=0.7, gauche=P(-4.3, 0.55))
         x49 = self.t("× 0,49", 40, RAISON).next_to(b, LEFT, buff=0.35)
         self.au_mot("Multiplier")
         self.play(GrowFromEdge(VGroup(b.bleu, b.morceau), LEFT), run_time=0.4)
@@ -582,7 +582,7 @@ class SuiteGeoTaux1re(PaysageSuites):
         self.au_mot("Les pourcentages")
         cx = self.barrer(Square(0.34))
         par = self.paragraphe([("Les pourcentages successifs", PIEGE), ("ne s'additionnent pas :", PIEGE)], 38,
-                              buff=0.08)
+                              buff=0.2)
         par[1].align_to(par[0], LEFT)
         l1 = VGroup(cx, par)
         l1.arrange(RIGHT, buff=0.25).move_to(P(0, -1.75)).align_to(P(-6.0, 0), LEFT)
