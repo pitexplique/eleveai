@@ -615,7 +615,7 @@ const GABARITS: TutorBankItemV4[] = [
         return qcm(
           `Un paquet ${quoi} pèse 1 kg. ${p.nom} en utilise ${utilise} g pour ${pour}. ${randomChoice(["Combien reste-t-il de grammes ?", "Quelle masse reste-t-il dans le paquet ?"])}`,
           `${1000 - utilise} g`,
-          [`${utilise} g`, `${1000 - utilise + 100} g`, `${Math.abs(100 - utilise) || 900} g`, `${1000 - utilise - 50} g`].filter((x) => x !== `${1000 - utilise} g`),
+          [`${utilise} g`, `${1000 - utilise + 100} g`, `${Math.abs(100 - utilise) || 900} g`, `${1000 - utilise - 50} g`].filter((x) => x !== `${1000 - utilise} g` && !x.startsWith("0") && !x.startsWith("-")),
           exp("1 kg = 1 000 g.", "On enlève ce qui a été utilisé : on cherche ce qui manque pour faire 1 000.", `${utilise} + ${1000 - utilise} = 1 000.`, `Il reste ${1000 - utilise} g.`),
         );
       },
@@ -648,7 +648,7 @@ const GABARITS: TutorBankItemV4[] = [
         return qcm(
           `${maj(cont.q)} vide pèse ${vide} g. ${p.nom} y met ${dedans} g ${fruit}. ${randomChoice([`Combien pèse ${cont.q} ${cont.f ? "pleine" : "plein"} ?`, "Quelle est la masse totale ?"])}`,
           `${vide + dedans} g`,
-          [`${dedans} g`, `${vide + dedans + 100} g`, `${dedans - vide} g`, `${vide + dedans - 50} g`],
+          [`${dedans} g`, `${vide + dedans + 100} g`, `${Math.abs(dedans - vide) || vide + dedans + 50} g`, `${vide + dedans - 50} g`],
           exp("La masse du contenant plein, c'est sa masse vide plus ce qu'on met dedans.", "On ajoute les deux masses.", `${vide} + ${dedans} = ${vide + dedans}.`, `Cela fait ${vide + dedans} g.`),
         );
       },
@@ -676,7 +676,7 @@ const GABARITS: TutorBankItemV4[] = [
     return qcm(
       `${randomChoice([`${p.nom} a déjà ${deja} g ${quoi} dans son sac.`, `Le chef cuisinier a ${deja} g ${quoi}.`, `Sur le plateau, il y a ${deja} g ${quoi}.`])} ${randomChoice(["Combien de grammes faut-il ajouter pour avoir 1 kg ?", "Combien manque-t-il pour arriver à 1 kg ?"])}`,
       `${1000 - deja} g`,
-      [`${1000 - deja + 100} g`, `${1000 - deja - 100} g`, `${deja} g`, `${(100 - (deja % 100)) % 100 || 100} g`].filter((x, i, t) => t.indexOf(x) === i && x !== `${1000 - deja} g`),
+      [`${1000 - deja + 100} g`, `${1000 - deja - 100} g`, `${deja} g`, `${(100 - (deja % 100)) % 100 || 100} g`].filter((x, i, t) => t.indexOf(x) === i && x !== `${1000 - deja} g` && !x.startsWith("0") && !x.startsWith("-")),
       exp("1 kg = 1 000 g.", "On avance de centaine en centaine jusqu'à 1 000.", `${deja} + ${1000 - deja} = 1 000.`, `Il faut ajouter ${1000 - deja} g.`),
       { kind: "schema_barre", total: "1 kg", parts: [{ label: "déjà", value: `${deja} g` }, { label: "manque", unknown: true }] },
     );

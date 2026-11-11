@@ -14,7 +14,7 @@ function randomChoice<T>(arr: T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function calculPoseCanvas(
@@ -38,6 +38,7 @@ function cpe(def: string, meth: string, calc: string, ccl: string) {
 // Correcteurs : correcteurs/calcul-pose.ts.
 import { PRENOMS, pick, de, voyelle, type Prenom } from "./entiers.bank";
 import { nb, attendus, il, Il, situOk, type Situ2 } from "./calcul-mental.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const TITRES: Record<"addition" | "soustraction" | "multiplication" | "division", string> = {
   addition: "Addition posée",

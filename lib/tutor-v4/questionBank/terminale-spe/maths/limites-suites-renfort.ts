@@ -8,6 +8,7 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { affN, affU, cPlusK, co, court, expl, fabriquer, geoN, n, nuage, pick, qcm, rint, rond, sg, situationAffine, type LigneRenfort } from "./suites-renfort";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 const PINF = "$+\\infty$";
 const MINF = "$-\\infty$";
@@ -59,7 +60,7 @@ function genLimNuage() {
   return qcm(
     pick(["Voici les premiers termes d'une suite $(u_n)$, représentés par les points $(n\\,;u_n)$. Quand $n$ devient grand, la suite semble :", "D'après le nuage de points ci-dessous, la suite $(u_n)$ semble :", "Un capteur enregistre une mesure $u_n$ chaque seconde (graphique ci-dessous). Sur le long terme, la suite semble :", "Observe les points $(n\\,;u_n)$. Quelle conjecture peut-on faire ?"]),
     bon,
-    [...new Set(pieges)].sort(() => Math.random() - 0.5).slice(0, 3),
+    melangeEnPlace([...new Set(pieges)]).slice(0, 3),
     expl("une suite converge vers $L$ si ses termes finissent par être aussi proches de $L$ qu'on veut.", "on regarde où se dirigent les points quand $n$ augmente.", `${raison}.`, `la suite semble ${bon}.`),
     nuage(y)
   );
@@ -85,7 +86,7 @@ function genLimPhrase() {
   return qcm(
     `${pick(["On modélise", "Une scientifique modélise", "Un technicien modélise"])} ${p.ctx} par $u_n = ${p.F}$. ${pick(["Quand $n$ devient très grand, la suite $(u_n)$ semble :", "Sur le long terme, la suite $(u_n)$ va :", "Que fait la suite $(u_n)$ quand $n$ tend vers $+\\infty$ ?"])}`,
     p.bon,
-    [conv(0), conv(1), conv(100), T_PINF, T_MINF, T_AUC].filter((x) => x !== p.bon).sort(() => Math.random() - 0.5).slice(0, 3),
+    melangeEnPlace([conv(0), conv(1), conv(100), T_PINF, T_MINF, T_AUC].filter((x) => x !== p.bon)).slice(0, 3),
     expl("on cherche vers quoi se dirigent les termes quand $n$ devient grand.", "on repère le terme qui tend vers 0 (ou qui grandit sans fin).", `${p.raison}.`, `la suite va ${p.bon}.`)
   );
 }
@@ -105,7 +106,7 @@ function genLimTableau() {
   return qcm(
     `${pick(["Une calculatrice donne, pour", "Un tableur affiche, pour", "Une élève calcule, pour"])} $u_n = ${F}$ : ${ligne}. ${pick(["La suite semble :", "Quelle conjecture peut-on faire ?", "Quand $n$ tend vers $+\\infty$, la suite semble :"])}`,
     bon,
-    [conv(v[3]), ...[...new Set([conv(L), conv(0), T_PINF, T_MINF, T_AUC])].filter((x) => x !== bon).sort(() => Math.random() - 0.5)].slice(0, 3),
+    [conv(v[3]), ...melangeEnPlace([...new Set([conv(L), conv(0), T_PINF, T_MINF, T_AUC])].filter((x) => x !== bon))].slice(0, 3),
     expl("la limite est la valeur dont les termes se rapprochent, pas la valeur d'un terme.", "on regarde comment évoluent les valeurs quand $n$ est multiplié par 10.", t <= 2 ? `les écarts à $${n(L)}$ deviennent de plus en plus petits.` : `les valeurs ${t === 3 ? "augmentent" : "diminuent"} sans se stabiliser.`, `la suite semble ${bon}.`)
   );
 }

@@ -31,6 +31,7 @@
 // des traits secondaires au composant.
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function entierAleatoire(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -106,7 +107,7 @@ const il = (p: Prenom) => (p.f ? "elle" : "il");
 const de = (p: Prenom) => (/^[aeiouàâéèêëîïôûü]/i.test(p.nom) ? `d'${p.nom}` : `de ${p.nom}`);
 const rond = (n: number) => Number(n.toFixed(6));
 function melange<T>(t: T[]): T[] {
-  return [...t].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...t]);
 }
 
 /** Une graduation lisible : `pas` entre deux traits étiquetés, `nb` intervalles (cinq au plus). */

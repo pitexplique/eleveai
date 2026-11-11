@@ -36,13 +36,14 @@ import {
   PRENOMS, PARTAGES, tirer, deuxPrenoms, il, Il, deP, egales, Maj, attendusFraction,
   FIGURES, GESTES, partageF, ppF, nomDen, fractionEnMots,
 } from "./fractions.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 // ⛔⛔ 03/11/2026 (Frédéric) : « d'abord des questions simples ; le contexte est
 // réservé aux étoiles ★3 et plus ». À ★1 et ★2 : le calcul seul, ou une figure
 // (FIGURES, GESTES de fractions.bank.ts) ; les prénoms et les situations
 // restent à ★3 et plus.
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function randomInt(min: number, max: number) {

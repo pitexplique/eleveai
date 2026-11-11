@@ -197,7 +197,10 @@ const m5 = () => {
   const j = noms[degs.indexOf(cible)];
   return qcm(
     `L'angle ${j}`,
-    noms.filter((x) => x !== j).map((x) => `L'angle ${x}`),
+    // ⛔ 11/11/2026 — à deux angles, le QCM n'avait que deux lignes (une chance
+    // sur deux au hasard). « Ils sont égaux » est toujours faux ici : les deux
+    // ouvertures viennent de familles différentes.
+    [...noms.filter((x) => x !== j).map((x) => `L'angle ${x}`), ...(k === 2 ? ["Ils sont égaux"] : [])],
     exp(OUVERT, "on regarde l'écart entre les deux côtés de chaque angle.", `l'angle ${j} est le ${grand ? "plus ouvert" : "moins ouvert"}.`, `la réponse est l'angle ${j}.`),
     `${v(["Sans mesurer.", "Regarde ces angles.", "Observe ces angles.", "Compare ces angles."])} ${grand ? v(["Lequel est le plus ouvert ?", "Lequel est le plus grand ?", "Quel angle est le plus ouvert ?", "Quel est le plus grand angle ?"]) : v(["Lequel est le moins ouvert ?", "Lequel est le plus petit ?", "Quel angle est le moins ouvert ?", "Quel est le plus petit angle ?"])}`,
     dessin(degs, noms),

@@ -960,7 +960,7 @@ export const graphiquesBank: TutorBankItemV4[] = [
           ])}`,
           format: "qcm",
           // Leurres : la graduation voisine lue au départ, la valeur de départ, la cible.
-          choices: makeChoices(correct, leurres(missing, [missing - pas, missing + pas, current, target])),
+          choices: makeChoices(correct, leurres(missing, [missing - pas, missing + pas, current, target, missing + 2 * pas]) /* ⛔ 11/11/2026 — + deux pas : quand current = pas = manque, il ne restait qu’un piège */),
           expected: [correct],
           comparator: "mcq_exact",
           explanation: exp(

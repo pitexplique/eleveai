@@ -30,6 +30,7 @@
 // le simple bon sens rejette. Deux items travaillent ce contrôle.
 
 import type { TutorBankItemV4, EchelleCanvasData } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -163,7 +164,7 @@ function fermer(c: CasFerme) {
   const q = c.qcm!;
   return {
     format: "qcm" as const,
-    choices: [q.bonne, ...q.leurres].sort(() => Math.random() - 0.5),
+    choices: melangeEnPlace([q.bonne, ...q.leurres]),
     expected: [q.bonne],
     comparator: "mcq_exact" as const,
   };
@@ -425,7 +426,7 @@ export const echelles6eBank: TutorBankItemV4[] = [
           `Sur ${e.doc(P)}, il est écrit : échelle 1/${e.n}. Choisis la bonne explication.`,
         ]),
         format: "qcm",
-        choices: [bonne, ...leurres.sort(() => Math.random() - 0.5).slice(0, 3)].sort(() => Math.random() - 0.5),
+        choices: melangeEnPlace([bonne, ...melangeEnPlace(leurres).slice(0, 3)]),
         expected: [bonne],
         comparator: "mcq_exact",
         explanation: ex(

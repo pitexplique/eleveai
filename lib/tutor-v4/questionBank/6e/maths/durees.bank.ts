@@ -30,9 +30,10 @@
 
 import type { TutorBankItemV4, DureeCanvasData } from "@/lib/tutor-v4/types";
 import { PRENOMS, pick, de, type Prenom } from "./entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function randomInt(min: number, max: number) {

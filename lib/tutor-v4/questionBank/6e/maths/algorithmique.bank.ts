@@ -2,6 +2,7 @@
 
 import type { TutorBankItemV4, ScratchCanvasData, ScratchBlockData } from "@/lib/tutor-v4/types";
 import { PRENOMS, pick, de, type Prenom } from "./entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 /* =========================
    HELPERS
@@ -16,7 +17,7 @@ function randomChoice<T>(arr: T[]): T {
 }
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function makeChoices(correct: string, wrongs: readonly string[]) {
@@ -1351,7 +1352,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const a = randomChoice(ACTEURS_SIMPLES);
       const direction = Math.random() < 0.5;
       const autres: Ins[] = [];
-      const nb = randomInt(1, 2);
+      const nb = randomInt(2, 3); // ≥ 3 propositions : avec un seul autre bloc, le QCM n’en avait que deux
       while (autres.length < nb) {
         const i: Ins =
           Math.random() < 0.5

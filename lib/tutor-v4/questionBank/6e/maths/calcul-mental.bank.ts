@@ -1,7 +1,7 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function formatComma(n: number | string) {
@@ -26,6 +26,7 @@ function expl(calcul: string) {
 // s'écrit TOUJOURS « ÷ » (jamais 12/4) ; un quotient non entier s'écrit en
 // décimal (14,5). Correcteurs : correcteurs/calcul-mental.ts.
 import { PRENOMS, pick, de, type Prenom } from "./entiers.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

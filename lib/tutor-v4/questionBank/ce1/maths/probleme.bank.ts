@@ -920,8 +920,10 @@ export const problemeBank: TutorBankItemV4[] = [
       }
       const k = ri(2, 6);
       const t = rc([2, 3, 4, 5, 10] as const);
-      const extra = ri(2, 9);
       const plus = famille === "paquets_plus";
+      // ⛔ 11/11/2026 — « 2 sachets de 2 billes, il en perd 9 » : le reste était
+      // négatif. On n'enlève jamais plus que ce qu'il y a (il en reste au moins 2).
+      const extra = ri(2, plus ? 9 : Math.min(9, k * t - 2));
       const r = plus ? k * t + extra : k * t - extra;
       const h = rc([
         { a: `${p.nom} a ${k} sachets de ${t} billes`, plus: `et ${extra} billes dans sa poche`, moins: `et ${p.il} perd ${extra} billes`, quoi: "billes" },

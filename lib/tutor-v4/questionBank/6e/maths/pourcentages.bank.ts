@@ -1,7 +1,8 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return melangeEnPlace([...arr]);
 }
 
 function formatComma(n: number | string) {
@@ -1876,7 +1877,9 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       ]);
       const question = pick(["Quel était le prix avant la remise ?", "Combien coûtait cet objet avant les soldes ?", "Retrouve le prix de départ."]);
       // Les erreurs typiques : ajouter p €, ajouter p % du prix payé, retirer encore p %.
-      const leurres = [apres + p, apres + (p * apres) / 100, apres - (p * apres) / 100, 2 * apres]
+      // ⛔ 11/11/2026 — + le prix payé lui-même (oublier de remonter) : sans lui, certains tirages
+      // n'avaient que deux propositions.
+      const leurres = [apres + p, apres + (p * apres) / 100, apres - (p * apres) / 100, 2 * apres, apres]
         .filter((x) => Number.isInteger(x) && x > 0)
         .map((x) => `${x} €`);
       return {
@@ -2175,7 +2178,7 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       return {
         text: `${debut} ${question}`,
         format: "qcm",
-        choices: choixQcm(`${nouveau} €`, [`${remise} €`, ...(P - p > 0 ? [`${P - p} €`] : []), `${P + remise} €`]),
+        choices: choixQcm(`${nouveau} €`, [`${remise} €`, ...(P - p > 0 ? [`${P - p} €`] : []), `${P + remise} €`, `${P} €`] /* ⛔ 11/11/2026 — + le prix sans remise : à −50 % sur 100 €, il ne restait que deux propositions. */),
         expected: [`${nouveau} €`],
         comparator: "mcq_exact",
         explanation: expl(

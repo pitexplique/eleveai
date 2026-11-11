@@ -12,6 +12,7 @@
 
 import type { CanvasFigure, TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { makeChoices } from "@/lib/tutor-v4/questionBank/4e/maths/proportionnalite.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -547,7 +548,7 @@ function genRecReconnaitre() {
   const recs = [`$u_0 = ${A}$ et $u_{n+1} = ${recU(pick([1, 2, 3]), nz(-5, 5))}$`, `$u_0 = ${A}$ et $u_{n+1} = ${recU(pick([2, -1, 0.5]), 0)}$`, `$u_1 = ${A}$ et $u_{n+1} = u_n^2 ${pick(["+", "-"])} 1$`, `$u_0 = ${A}$ et $u_{n+1} = ${recU(pick([1, 2]), 0).replace("u_n", "u_n + n")}$`];
   const expls = [`$u_n = ${lin(nz(-6, 6), nz(-9, 9))}$`, `$u_n = ${geoT(randomInt(2, 5), pick([2, 3]))}$`, `$u_n = n^2 ${pick(["+", "-"])} ${randomInt(1, 9)}$`, `$u_n = \\dfrac{1}{n + ${randomInt(1, 5)}}$`, `$u_n = ${randomInt(2, 9)} - \\dfrac{n}{2}$`];
   const chercheRec = Math.random() < 0.5;
-  const sh = <T,>(x: T[]) => [...x].sort(() => Math.random() - 0.5);
+  const sh = <T,>(x: T[]) => melangeEnPlace([...x]);
   if (chercheRec) {
     return qcm(
       pick(["Laquelle de ces suites est définie PAR RÉCURRENCE ?", "Une seule de ces définitions donne chaque terme à partir du PRÉCÉDENT. Laquelle ?", "Quelle suite faut-il calculer de proche en proche ?"]),

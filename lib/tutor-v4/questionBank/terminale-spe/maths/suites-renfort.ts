@@ -12,6 +12,7 @@
 
 import type { CanvasFigure, TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { makeChoices } from "@/lib/tutor-v4/questionBank/4e/maths/proportionnalite.bank";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 export function rint(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -1140,7 +1141,7 @@ const NON_BORNEES = ["n^2 - 3n", "(-2)^n", "\\sqrt{n}", "1{,}1^n", "4 - n", "(-1
 function genBorneQuelle() {
   const bornee = rint(1, 2) === 1;
   const [bonF, autres] = bornee ? [pick(BORNEES), NON_BORNEES] : [pick(NON_BORNEES), BORNEES];
-  const pieges = [...autres].sort(() => Math.random() - 0.5).slice(0, 3);
+  const pieges = melangeEnPlace([...autres]).slice(0, 3);
   return qcm(
     bornee ? pick(["Laquelle de ces suites, définies pour $n \\in \\mathbb{N}$, est bornée ?", "Parmi ces suites, une seule est bornée. Laquelle ?"]) : pick(["Laquelle de ces suites, définies pour $n \\in \\mathbb{N}$, n'est PAS bornée ?", "Parmi ces suites, une seule n'est pas bornée. Laquelle ?"]),
     `$u_n = ${bonF}$`,

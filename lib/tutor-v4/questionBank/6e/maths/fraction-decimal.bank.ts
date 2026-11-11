@@ -28,6 +28,7 @@
 // conversions en centièmes).
 
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 type Prenom = { nom: string; f: boolean };
 const PRENOMS: Prenom[] = [
@@ -40,7 +41,7 @@ const PRENOMS: Prenom[] = [
 ];
 const choix = <T,>(t: readonly T[]): T => t[Math.floor(Math.random() * t.length)];
 const entre = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
-const melange = <T,>(t: T[]): T[] => [...t].sort(() => Math.random() - 0.5);
+const melange = <T,>(t: T[]): T[] => melangeEnPlace([...t]);
 
 /** n/d (d = 10, 100 ou 1 000) écrit avec une virgule, sans passer par les flottants. */
 export function decimalDe(n: number, d: number): string {
@@ -185,16 +186,21 @@ const mots = (t: string) => t.trim().split(/\s+/).filter((x) => /[\p{L}\d]/u.tes
 
 /** ★3 : la même lecture, portée par un métier (l'ancienne version de ★1–★2). */
 function genLireMetier(): TutorGeneratedQuestionV4 {
-  const p = choix(PRENOMS);
-  const m = choix(METIERS);
+  let p = choix(PRENOMS);
+  let m = choix(METIERS);
   const n = dixiemes(Math.random() < 0.5);
   const enFraction = Math.random() < 0.5;
   const L = choix(["A", "M", "P", "R", "T"]);
   const dec = decimalDe(n, 10);
   // 07/11/2026 : 25 mots au plus (★3) : une seule phrase de situation, puis la
   // consigne. On retire tant que le texte dépasse.
+  // ⛔ 11/11/2026 — on retirait la phrase, jamais le métier ni le prénom : avec
+  // un métier aux mots longs, aucune phrase ne passait et la boucle ne
+  // finissait pas (le coach se figeait). On retire donc tout, à chaque tour.
   let text = "";
   do {
+    p = choix(PRENOMS);
+    m = choix(METIERS);
     const consigne = enFraction
       ? choix([
           `Écris l'abscisse du point ${L} en fraction (… / 10).`,
