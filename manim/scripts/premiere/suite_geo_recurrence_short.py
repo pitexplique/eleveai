@@ -25,10 +25,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from suites_commun import *  # noqa: E402,F403
 from suite_arith_recurrence import AuditMilliers, OutilsEp02, arc_fleche  # noqa: E402
+from suite_geo_recurrence import ligne_reguliere  # noqa: E402
 
 assert [1024 // 2 ** k for k in range(3)] == [1024, 512, 256]
 assert 1024 * 0.5 ** 4 == 64                             # le commentaire (non affiché)
-XS = (-1.42, 0.0, 1.42)                                  # groupes de pions et cases : mêmes abscisses
+XS = (-1.25, 0.21, 1.46)                                  # groupes de pions et cases : mêmes abscisses
 NOIR_C, BLANC_C = "#334155", "#CBD5E1"
 
 
@@ -43,7 +44,7 @@ def pion(s=1.0, couleur=WHITE):
     return VGroup(socle, corps, col, tete).scale(s, about_point=ORIGIN)
 
 
-def groupe(n, x, y0, s=0.75, couleur=WHITE, cols=4, dx=0.3, dy=0.27):
+def groupe(n, x, y0, s=0.72, couleur=WHITE, cols=4, dx=0.26, dy=0.27):
     """n pions en rangées de `cols`, posés sur la ligne y0 (rangée du bas d'abord)."""
     g = VGroup()
     for k in range(n):
@@ -106,8 +107,12 @@ class SuiteGeoRecurrenceShort(AuditMilliers, OutilsEp02, ShortSuites):
         jo = self.t("joueurs", 34, WHITE).next_to(nb, DOWN, buff=0.12)
         Y0 = 0.15
         g0 = groupe(16, XS[0], Y0)
-        lg = LigneTermes(["1 024", "512", "256"], xs=XS, centre=P(0, -0.55), largeur=1.2, hauteur=0.66, fs=34)
-        lg.cases[0][1].scale_to_fit_width(0.9).move_to(lg.cases[0][0])  # une marge nette dans la case
+        # mêmes chiffres partout (fs 30) ; la case de 1 024 plus large (1,42), les deux autres 1,0
+        lg = LigneTermes(["1 024", "512", "256"], xs=XS, centre=P(0, -0.55), largeur=1.42, hauteur=0.66, fs=30)
+        for k in (1, 2):
+            etroite = RoundedRectangle(width=1.0, height=0.66, corner_radius=0.12, stroke_color=TERME, stroke_width=3,
+                                       fill_color=FOND_CARTE, fill_opacity=1).move_to(lg.cases[k][0])
+            lg.cases[k].submobjects[0] = etroite
         self.au_mot("1 024")
         self.play(FadeIn(nb, scale=1.3), LaggedStart(*[FadeIn(p, shift=DOWN * 0.1) for p in g0], lag_ratio=0.03),
                   FadeIn(lg.cases[0][0], scale=0.8), FadeIn(lg.cases[0][1], scale=1.3), run_time=0.5)
@@ -159,25 +164,24 @@ class SuiteGeoRecurrenceShort(AuditMilliers, OutilsEp02, ShortSuites):
         self.dire("03b-reponse")
         ok = self.q_reponse(q, 0)
         a = q.cartes[0]
-        disque = VGroup(Sector(radius=0.85, start_angle=PI / 2, angle=PI, fill_color=TERME, fill_opacity=1,
+        disque = VGroup(Sector(radius=1.05, start_angle=PI / 2, angle=PI, fill_color=TERME, fill_opacity=1,
                                stroke_color=WHITE, stroke_width=3),
-                        Sector(radius=0.85, start_angle=-PI / 2, angle=PI, fill_color=TERME, fill_opacity=1,
-                               stroke_color=WHITE, stroke_width=3)).move_to(P(0, -0.45))
+                        Sector(radius=1.05, start_angle=-PI / 2, angle=PI, fill_color=TERME, fill_opacity=1,
+                               stroke_color=WHITE, stroke_width=3)).move_to(P(0, -0.62))
         self.au_mot("Diviser par")
         self.play(FadeOut(q.cartes[1]), FadeOut(q.cartes[2]), VGroup(a, ok).animate.shift(P(0, 1.2) - a.get_center()),
                   GrowFromCenter(disque), run_time=0.35)
         self.suivre("2")
-        d2 = self.t("÷ 2", 44, RAISON)
-        eg = self.t("=", 44)
-        m5 = self.t("× 0,5", 44, JUSTE)
-        ligne = VGroup(d2, eg, m5).arrange(RIGHT, buff=0.4).move_to(P(0, -2.25))
+        d2, eg, m5 = ligne_reguliere([("÷ 2", RAISON), ("=", WHITE), ("× 0,5", JUSTE)], 42)
+        m5.shift(RIGHT * 0.12)                            # la place de l'encadré, sans coller le « = »
+        ligne = VGroup(d2, eg, m5).move_to(P(0, -2.3)).shift(LEFT * 0.07)  # l'encadré de « × 0,5 » compris : centré
         self.play(disque[1].animate.set_fill(PIEGE).shift(RIGHT * 0.45 + DOWN * 0.15), FadeIn(d2, scale=1.3),
                   run_time=0.4)
-        self.play(FadeOut(disque[1], shift=RIGHT * 0.4), disque[0].animate.shift(RIGHT * 0.42), run_time=0.4)
+        self.play(FadeOut(disque[1], shift=RIGHT * 0.4), disque[0].animate.shift(RIGHT * 0.52), run_time=0.4)
         self.au_mot("multiplier par")
         self.suivre("0,5")
         cad = self.encadre(m5, JUSTE, 0.12)
-        moitie = self.t("0,5", 30, WHITE, audit=False).move_to(disque[0].get_center())
+        moitie = self.t("0,5", 30, WHITE, audit=False).move_to(disque[0].get_center() + RIGHT * 0.1)
         self.play(FadeIn(eg), FadeIn(m5, scale=1.3), Create(cad), FadeIn(moitie, scale=1.3), run_time=0.35)
         self.insister(VGroup(m5, cad), 1.08)
         self.attendre_voix(marge=0.3)

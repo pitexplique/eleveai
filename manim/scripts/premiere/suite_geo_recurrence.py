@@ -139,6 +139,21 @@ def personnes(n, x0, x1, y, r=0.085):
     return VGroup(*[Dot(P(x0 + k * pas, y), radius=r, color=TERME) for k in range(n)])
 
 
+def ligne_reguliere(morceaux, fs):
+    """Un calcul d'UNE seule ligne de texte (« t₃ = 162 ÷ 3 = 54 ») : une seule
+    taille, une seule ligne de base, des espaces régulières autour de =, ×, ÷.
+    morceaux = [(texte, couleur), …] ; renvoie un VGroup : un morceau = les
+    glyphes de son texte (à dévoiler un à un quand la voix le dit)."""
+    tout = Text(" ".join(m for m, _ in morceaux), font_size=fs)
+    nb = [len(m.replace(" ", "")) for m, _ in morceaux]
+    assert len(tout) == sum(nb), (len(tout), nb)
+    g, i = VGroup(), 0
+    for (m, c), n in zip(morceaux, nb):
+        g.add(VGroup(*tout[i:i + n]).set_color(c))
+        i += n
+    return g
+
+
 class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
     fichier_marques = "suite_geo_recurrence_marques.json"
     nom_voix = "premiere-suite-geo-recurrence"
@@ -330,9 +345,11 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
         ts = []
         for k in range(1, 4):
             y = 0.05 - 0.75 * (k - 1)
-            ts = [self.t(f"{u(k)} =", 38, TERME), self.t("1,2", 38, RAISON), self.t("×", 38), self.t(vals[k - 1], 38),
-                  self.t("=", 38), self.t(vals[k], 38, JUSTE)]
-            VGroup(*ts).arrange(RIGHT, buff=0.3).move_to(P(0, y)).align_to(P(-6.3, 0), LEFT)
+            ts = ligne_reguliere([(f"{u(k)} =", TERME), ("1,2", RAISON), ("×", WHITE), (vals[k - 1], WHITE),
+                                  ("=", WHITE), (vals[k], JUSTE), ("abeilles" if k == 3 else "", JUSTE)], 38)
+            ts.move_to(P(0, y)).align_to(P(-6.3, 0), LEFT)
+            if k == 3:
+                VGroup(ts[5], ts[6]).shift(RIGHT * 0.12)  # la place de l'encadré, sans coller le « = »
             self.suivre(f"u indice {k}")
             self.play(FadeIn(ts[0], shift=UP * 0.1), run_time=0.2)
             self.suivre("1,2")
@@ -354,9 +371,9 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
                 anims += [a[1].animate.set_fill(MIEL) for a in orange]
             self.play(*anims, run_time=0.45)
             orange = neuves
-        fin = self.t("abeilles", 38, JUSTE).next_to(ts[5], RIGHT, buff=0.2)
+        fin = ts[6]
         self.au_mot("abeilles")
-        cad = self.encadre(VGroup(ts[5], fin), JUSTE, 0.08)
+        cad = self.encadre(VGroup(ts[5], fin), JUSTE, 0.12)
         self.play(FadeIn(fin, shift=LEFT * 0.1), Create(cad), *self.allumer_cases(lg, (3,)), run_time=0.4)
         self.attendre_voix(marge=0.6)
 
@@ -391,9 +408,8 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
             retours.append(arc_fleche(a, b, DOWN, creux=0.4))
         lab1 = self.t("÷ 2", 34, RAISON).next_to(retours[0], DOWN, buff=0.06)
         lab2 = self.t("÷ 2", 34, RAISON, audit=False).next_to(retours[1], DOWN, buff=0.06)
-        l1 = [self.t("w₅ =", 40, TERME), self.t("320", 40), self.t("÷ 2", 40, RAISON), self.t("=", 40),
-              self.t("160", 40, JUSTE)]
-        g1 = VGroup(*l1).arrange(RIGHT, buff=0.28).move_to(P(-1.5, -1.95))
+        l1 = ligne_reguliere([("w₅ =", TERME), ("320", WHITE), ("÷ 2", RAISON), ("=", WHITE), ("160", JUSTE)], 40)
+        g1 = l1.move_to(P(-1.5, -1.95))
         self.au_mot("alors")
         self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.2)
         self.au_mot("320", n=2)
@@ -404,10 +420,8 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
         self.au_mot("160")
         v5 = self.t("160", 40).move_to(lg.cases[1][0])
         self.play(FadeIn(l1[3]), FadeIn(l1[4], scale=1.3), FadeIn(v5, scale=1.4), run_time=0.35)
-        l2 = [self.t("w₄ =", 40, TERME), self.t("160", 40, audit=False), self.t("÷ 2", 40, RAISON, audit=False),
-              self.t("=", 40),
-              self.t("80", 40, JUSTE)]
-        VGroup(*l2).arrange(RIGHT, buff=0.28).next_to(g1, DOWN, buff=0.3).align_to(g1, LEFT)
+        l2 = ligne_reguliere([("w₄ =", TERME), ("160", WHITE), ("÷ 2", RAISON), ("=", WHITE), ("80", JUSTE)], 40)
+        l2.next_to(g1, DOWN, buff=0.3).align_to(g1, LEFT)
         self.au_mot("w indice 4")
         self.lancer(retours[1], RAISON, 0.45, extra=[FadeIn(lab2, scale=1.3), FadeIn(VGroup(*l2[:3]), shift=UP * 0.1)])
         self.au_mot("80")
@@ -480,14 +494,15 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
         self.suivre("3")
         lab = self.t("÷ 3", 36, JUSTE).next_to(retour, DOWN, buff=0.05)
         self.lancer(retour, JUSTE, 0.5, extra=[FadeIn(lab, scale=1.3)])
-        calc = VGroup(self.t("t₃ =", 42, TERME), self.t("162", 42), self.t("÷ 3", 42, JUSTE), self.t("=", 42),
-                      self.t("54", 42, JUSTE)).arrange(RIGHT, buff=0.32).move_to(P(-1.0, -3.0))
+        calc = ligne_reguliere([("t₃ =", TERME), ("162", WHITE), ("÷ 3", JUSTE), ("=", WHITE), ("54", JUSTE)], 42)
+        calc.move_to(P(-1.0, -3.0))
+        calc[4].shift(RIGHT * 0.14)                        # la place de l'encadré, sans coller le « = »
         self.au_mot("162 divisé")
         self.play(FadeIn(calc[:2], shift=UP * 0.1), run_time=0.25)
         self.suivre("3")
         self.play(FadeIn(calc[2], shift=UP * 0.1), run_time=0.3)
         self.au_mot("54")
-        cad = self.encadre(calc[4], JUSTE, 0.1)
+        cad = self.encadre(calc[4], JUSTE, 0.12)
         self.play(FadeIn(calc[3:], scale=1.3), Create(cad), run_time=0.35)
         self.insister(VGroup(calc[4], cad), 1.2)
         self.attendre_voix(marge=0.6)
@@ -585,7 +600,7 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
             self.play(ReplacementTransform(lg.cases[k][1], neuf), FadeIn(haut, scale=1.3),
                       Flash(self.sommet(k), color=JUSTE, line_length=0.12, num_lines=8), run_time=0.4)
             lg.cases[k].submobjects[1] = neuf
-        rr = VGroup(self.t("h₃ =", 44, JUSTE), self.t("67,5 cm", 44, JUSTE, audit=False)).arrange(RIGHT, buff=0.2)
+        rr = ligne_reguliere([("h₃ =", JUSTE), ("67,5 cm", JUSTE)], 44)
         rr.move_to(P(3.1, -1.85))
         self.au_mot("centimètres")
         c2 = self.encadre(rr, JUSTE, 0.16)
