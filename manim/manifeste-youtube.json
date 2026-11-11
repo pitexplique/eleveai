@@ -1182,7 +1182,9 @@
         "brevet",
         "révisions",
         "Shorts"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-14"
     },
     {
       "id": "pisa-2025",
@@ -6211,7 +6213,9 @@
         "terminale",
         "spécialité maths",
         "Shorts"
-      ]
+      ],
+      "prioritaire": true,
+      "pas_avant": "2026-11-13"
     },
     {
       "id": "3e-pente-maido-short",
@@ -71709,6 +71713,1809 @@
       "centres": [
         "jeux-video",
         "argent-budget"
+      ]
+    },
+    {
+      "id": "premiere-suite-arith-reconnaitre",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_reconnaitre",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-17",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/01-arith-reconnaitre/eleveai-maths-premiere-suite-arith-reconnaitre.mp4",
+      "miniature": "premiere/maths/suites/01-arith-reconnaitre/eleveai-maths-premiere-suite-arith-reconnaitre.png",
+      "titre": "40, 70, 100, 130 : toujours le même pas ? — Reconnaître une suite arithmétique — épisode 1 · Maths 1re",
+      "accroche": "Lucas est agriculteur : il plante des haies d'arbres autour de ses champs. 40 arbres la première année, puis 30 de plus chaque année : 40, 70, 100, 130. Comment savoir qu'une liste de nombres avance toujours du même pas ?\n\nDans cette vidéo :\n• l'écart entre deux termes qui se suivent : 70 − 40 = 30, 100 − 70 = 30…\n• suite arithmétique : on ajoute toujours le même nombre, la raison r\n• la raison peut être négative : le silo qui perd 60 tonnes par semaine\n• un motif de carreaux en croix qui grandit de 4 à chaque étape\n• le piège : 2, 4, 8, 16, les écarts changent, ce n'est pas arithmétique\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 12 ; 9,5 ; 7 ; 4,5 : est-elle arithmétique ? Si oui, quelle est sa raison ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_reconnaitre&display=simple\n\n📈 Épisode 1 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Suite arithmétique : la reconnaître · Lucas, agriculteur : la haie"
+        ],
+        [
+          "00:30",
+          "L'écart entre deux termes"
+        ],
+        [
+          "00:46",
+          "La raison"
+        ],
+        [
+          "00:59",
+          "Question 1"
+        ],
+        [
+          "01:31",
+          "Une raison négative : le silo"
+        ],
+        [
+          "01:47",
+          "Un motif en croix"
+        ],
+        [
+          "02:05",
+          "Le piège"
+        ],
+        [
+          "02:24",
+          "Question 2"
+        ],
+        [
+          "02:51",
+          "À toi de jouer"
+        ],
+        [
+          "03:11",
+          "Correction"
+        ],
+        [
+          "03:33",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suite arithmétique",
+        "reconnaître une suite arithmétique",
+        "raison",
+        "écart",
+        "agriculteur",
+        "haie",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:59",
+          "question": "Laquelle de ces listes est arithmétique ?",
+          "choix": [
+            "3 ; 6 ; 12 ; 24",
+            "5 ; 8 ; 12 ; 17",
+            "20 ; 17 ; 14 ; 11"
+          ],
+          "reponse": 2,
+          "explication": "On enlève 3 à chaque fois : c'est une suite arithmétique de raison −3."
+        },
+        {
+          "t": "02:24",
+          "question": "Les termes d'une suite sont 7 ; 11 ; 15 ; 19. Sa raison est :",
+          "choix": [
+            "4",
+            "−4",
+            "7"
+          ],
+          "reponse": 0,
+          "explication": "11 − 7 = 4 : on calcule toujours un terme moins celui d'avant, pas l'inverse."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "construction"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique"
+    },
+    {
+      "id": "premiere-suite-arith-reconnaitre-short",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_reconnaitre",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-18",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-arith-reconnaitre",
+      "fichier": "premiere/maths/suites/01-arith-reconnaitre/eleveai-maths-premiere-suite-arith-reconnaitre-short.mp4",
+      "miniature": "premiere/maths/suites/01-arith-reconnaitre/eleveai-maths-premiere-suite-arith-reconnaitre-short.png",
+      "titre": "10, 13, 16, 19 : tu repères le pas en 3 secondes ? 🏃‍♀️ — 1re #Shorts",
+      "accroche": "Inès prépare un marathon : chaque semaine, elle court 3 kilomètres de plus. 10, 13, 16, 19 kilomètres : le pas est toujours le même, + 3. C'est une suite arithmétique, de raison 3.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de kilomètres Inès courra-t-elle la 10e semaine ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "marathon",
+        "course à pied",
+        "suite arithmétique",
+        "raison",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Laquelle avance toujours du même pas ?",
+          "choix": [
+            "2 ; 4 ; 8 ; 16",
+            "50 ; 45 ; 40 ; 35",
+            "1 ; 4 ; 9 ; 16"
+          ],
+          "reponse": 1,
+          "explication": "On enlève 5 à chaque fois : la raison est −5."
+        }
+      ],
+      "centres": [
+        "course-trail",
+        "sport"
+      ]
+    },
+    {
+      "id": "premiere-suite-arith-recurrence",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_recurrence",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-19",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/02-arith-recurrence/eleveai-maths-premiere-suite-arith-recurrence.mp4",
+      "miniature": "premiere/maths/suites/02-arith-recurrence/eleveai-maths-premiere-suite-arith-recurrence.png",
+      "titre": "uₙ₊₁ = uₙ + 300 : passer au terme suivant — La relation de récurrence — épisode 2 · Maths 1re",
+      "accroche": "Léna est programmatrice d'un festival de musique. La première édition accueille 1 200 spectateurs, et elle en prévoit 300 de plus chaque année. Combien de place réserver pour les éditions suivantes ? On passe d'un terme au suivant, et même on revient en arrière.\n\nDans cette vidéo :\n• la notation uₙ : le nombre de spectateurs de l'édition n\n• la relation de récurrence : uₙ₊₁ = uₙ + 300\n• on déroule pas à pas : u₁, u₂, u₃…\n• remonter le temps : pour reculer d'un rang, on fait l'opération inverse\n• le piège : uₙ = uₙ₊₁ + 300, la relation écrite à l'envers\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : t₁ = 7,5 et tₙ₊₁ = tₙ + 2,5 : calcule t₄, pas à pas.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_recurrence&display=simple\n\n📈 Épisode 2 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "La relation de récurrence"
+        ],
+        [
+          "00:10",
+          "Léna et son festival"
+        ],
+        [
+          "00:34",
+          "La notation uₙ"
+        ],
+        [
+          "00:48",
+          "uₙ₊₁ = uₙ + 300"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "On déroule pas à pas"
+        ],
+        [
+          "02:09",
+          "Remonter le temps"
+        ],
+        [
+          "02:25",
+          "Question 2"
+        ],
+        [
+          "03:01",
+          "Le piège"
+        ],
+        [
+          "03:21",
+          "À toi de jouer"
+        ],
+        [
+          "03:44",
+          "Correction"
+        ],
+        [
+          "04:11",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "relation de récurrence",
+        "suite arithmétique",
+        "terme suivant",
+        "terme précédent",
+        "festival",
+        "programmatrice",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Une chorale perd 15 choristes chaque année. vₙ est le nombre de choristes après n années. Quelle relation traduit cette situation ?",
+          "choix": [
+            "vₙ₊₁ = vₙ − 15",
+            "vₙ₊₁ = 15 × vₙ",
+            "vₙ = vₙ₊₁ − 15"
+          ],
+          "reponse": 0,
+          "explication": "Perdre 15, c'est retirer 15 au terme actuel pour obtenir le terme suivant."
+        },
+        {
+          "t": "02:25",
+          "question": "Une suite vérifie wₙ₊₁ = wₙ − 4 et w₆ = 50. Combien vaut w₅ ?",
+          "choix": [
+            "46",
+            "54",
+            "42"
+          ],
+          "reponse": 1,
+          "explication": "Pour reculer d'un rang, on fait l'opération inverse : 50 + 4 = 54."
+        }
+      ],
+      "centres": [
+        "musique"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique"
+    },
+    {
+      "id": "premiere-suite-arith-recurrence-short",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_recurrence",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-20",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-arith-recurrence",
+      "fichier": "premiere/maths/suites/02-arith-recurrence/eleveai-maths-premiere-suite-arith-recurrence-short.mp4",
+      "miniature": "premiere/maths/suites/02-arith-recurrence/eleveai-maths-premiere-suite-arith-recurrence-short.png",
+      "titre": "u₁₀ = 600 : tu remontes le temps d'une suite ? 🚚 — 1re #Shorts",
+      "accroche": "Un food truck sert chaque semaine 35 repas de plus que la semaine d'avant : uₙ₊₁ = uₙ + 35. Pour reculer d'une semaine, on retire 35.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : u₀ = 250. Combien vaut u₄ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_recurrence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "food truck",
+        "relation de récurrence",
+        "remonter le temps",
+        "suite arithmétique",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "u₁₀ = 600 (on ajoute 35 chaque semaine). Combien vaut u₉ ?",
+          "choix": [
+            "635",
+            "565",
+            "35"
+          ],
+          "reponse": 1,
+          "explication": "On recule d'un rang : 600 − 35 = 565."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "premiere-suite-arith-notation",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_notation",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-21",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/03-arith-notation/eleveai-maths-premiere-suite-arith-notation.mp4",
+      "miniature": "premiere/maths/suites/03-arith-notation/eleveai-maths-premiere-suite-arith-notation.png",
+      "titre": "u(n), uₙ : que veut dire ce petit n ? — La notation des suites — épisode 3 · Maths 1re",
+      "accroche": "Nadia est ingénieure dans une agence spatiale : elle suit une constellation de satellites. 600 en orbite en 2026, 120 de plus chaque année. Avant une réunion, elle contrôle un rapport rempli de notations : u(n), uₙ, u(n + 1)…\n\nDans cette vidéo :\n• u(n) et uₙ : deux écritures du même terme\n• le n est un rang : on compte les années depuis 2026\n• le premier terme : u₀ ou u₁, il faut regarder\n• u(n + 1), le terme suivant : on remplace n par n + 1\n• le piège : uₙ n'est pas u × n\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : les termes de w commencent à w₀ : quel est l'indice du 25e terme ? Combien de termes de w₀ à w₄₀ ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_notation&display=simple\n\n📈 Épisode 3 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Suites : la notation · Nadia et les satellites"
+        ],
+        [
+          "00:32",
+          "u(n) et uₙ : le même terme"
+        ],
+        [
+          "00:52",
+          "Le n est un rang"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:39",
+          "Le premier terme : u₀ ou u₁"
+        ],
+        [
+          "02:01",
+          "u(n + 1), le terme suivant"
+        ],
+        [
+          "02:23",
+          "Question 2"
+        ],
+        [
+          "02:54",
+          "Le piège : uₙ n'est pas u × n"
+        ],
+        [
+          "03:10",
+          "À toi de jouer"
+        ],
+        [
+          "03:36",
+          "Correction"
+        ],
+        [
+          "03:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "notation des suites",
+        "u indice n",
+        "rang",
+        "terme suivant",
+        "satellites",
+        "ingénieure spatiale",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Dans le rapport, comment s'écrit le nombre de satellites en 2034 ?",
+          "choix": [
+            "u₈",
+            "u₂₀₃₄",
+            "u₉"
+          ],
+          "reponse": 0,
+          "explication": "2034 − 2026 = 8 : c'est le terme de rang 8."
+        },
+        {
+          "t": "02:23",
+          "question": "Une suite v est définie par v(n) = 5 + 3n. Que vaut v(n + 1) ?",
+          "choix": [
+            "6 + 3n",
+            "8 + 3n",
+            "5 + 4n"
+          ],
+          "reponse": 1,
+          "explication": "On remplace n par n + 1 : 5 + 3n + 3 = 8 + 3n."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique"
+    },
+    {
+      "id": "premiere-suite-arith-notation-short",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_notation",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-22",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-arith-notation",
+      "fichier": "premiere/maths/suites/03-arith-notation/eleveai-maths-premiere-suite-arith-notation-short.mp4",
+      "miniature": "premiere/maths/suites/03-arith-notation/eleveai-maths-premiere-suite-arith-notation-short.png",
+      "titre": "2031, c'est u₂₀₃₁ ? Le piège de l'année 📱 — 1re #Shorts",
+      "accroche": "Un compte de vulgarisation scientifique gagne des abonnés chaque année. u(n) est le nombre d'abonnés en 2025 + n : u(0) correspond à 2025. Le n est un rang : on compte les années depuis 2025.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une suite commence à u₀. Quel est l'indice de son 50e terme ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_notation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "abonnés",
+        "notation",
+        "rang",
+        "u indice n",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Comment s'écrit le nombre d'abonnés en 2031 ?",
+          "choix": [
+            "u₂₀₃₁",
+            "u₆",
+            "u₇"
+          ],
+          "reponse": 1,
+          "explication": "2031 − 2025 = 6 : c'est u₆."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "premiere-suite-arith-terme-rang",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_terme_rang",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-23",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/04-arith-terme-rang/eleveai-maths-premiere-suite-arith-terme-rang.mp4",
+      "miniature": "premiere/maths/suites/04-arith-terme-rang/eleveai-maths-premiere-suite-arith-terme-rang.png",
+      "titre": "Le 20e terme sans calculer les autres — Calculer un terme lointain — épisode 4 · Maths 1re",
+      "accroche": "Hugo est carreleur. Autour de bacs à plantes carrés, il pose des bordures : 8 carreaux à l'étape 1, 12 à l'étape 2, 16 à l'étape 3. Le plus grand bac est l'étape 20 : combien de carreaux commander, sans tout calculer ?\n\nDans cette vidéo :\n• la raison : 4 carreaux de plus à chaque étape\n• compter les pas : de l'étape 1 à l'étape 20, 19 pas\n• les formules : uₙ = u₀ + n × r, uₙ = u₁ + (n − 1) × r, uₙ = uₚ + (n − p) × r\n• u₂₀ = 8 + 19 × 4 = 84 carreaux\n• le piège : 8 + 20 × 4, un pas de trop\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 1 carré : 4 allumettes, 2 carrés : 7, 3 carrés : 10. Combien d'allumettes pour 50 carrés ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_terme_rang&display=simple\n\n📈 Épisode 4 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Calculer un terme lointain · Hugo, carreleur : le carré bordé"
+        ],
+        [
+          "00:35",
+          "La raison : 4 carreaux de plus"
+        ],
+        [
+          "00:49",
+          "Compter les pas : 19 pas"
+        ],
+        [
+          "01:05",
+          "Les trois formules"
+        ],
+        [
+          "01:29",
+          "Question 1"
+        ],
+        [
+          "02:02",
+          "Depuis un autre terme"
+        ],
+        [
+          "02:18",
+          "Le piège : un pas de trop"
+        ],
+        [
+          "02:33",
+          "Question 2"
+        ],
+        [
+          "03:06",
+          "À toi de jouer : les allumettes"
+        ],
+        [
+          "03:32",
+          "Correction"
+        ],
+        [
+          "03:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "terme général",
+        "suite arithmétique",
+        "calculer un terme",
+        "compter les pas",
+        "carreleur",
+        "motif",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:29",
+          "question": "Une suite arithmétique de raison 5 commence à u₁ = 12. Combien vaut u₁₀ ?",
+          "choix": [
+            "62",
+            "67",
+            "57"
+          ],
+          "reponse": 2,
+          "explication": "De u₁ à u₁₀, il y a 9 pas : 12 + 9 × 5 = 57."
+        },
+        {
+          "t": "02:33",
+          "question": "Une suite arithmétique vérifie v₄ = 30, et sa raison est −2. Combien vaut v₁₂ ?",
+          "choix": [
+            "14",
+            "46",
+            "6"
+          ],
+          "reponse": 0,
+          "explication": "De v₄ à v₁₂, il y a 8 pas : 30 + 8 × (−2) = 14."
+        }
+      ],
+      "centres": [
+        "construction",
+        "jeux-defis"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique"
+    },
+    {
+      "id": "premiere-suite-arith-terme-rang-short",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_terme_rang",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-24",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-arith-terme-rang",
+      "fichier": "premiere/maths/suites/04-arith-terme-rang/eleveai-maths-premiere-suite-arith-terme-rang-short.mp4",
+      "miniature": "premiere/maths/suites/04-arith-terme-rang/eleveai-maths-premiere-suite-arith-terme-rang-short.png",
+      "titre": "La 10e semaine : 10 pas ou 9 ? 🚴‍♀️ — 1re #Shorts",
+      "accroche": "Chloé prépare une course à vélo : 20 kilomètres la 1re semaine, puis 5 de plus chaque semaine. u₁ = 20. De la semaine 1 à la semaine 10, il y a 9 pas, pas 10.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de kilomètres Chloé roulera-t-elle la 30e semaine ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_terme_rang&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "vélo",
+        "terme lointain",
+        "compter les pas",
+        "suite arithmétique",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Chloé roule 20 km la 1re semaine, puis 5 km de plus chaque semaine. Combien de kilomètres roule-t-elle la 10e semaine ?",
+          "choix": [
+            "70",
+            "75",
+            "65"
+          ],
+          "reponse": 2,
+          "explication": "20 + 9 × 5 = 65 : de la semaine 1 à la semaine 10, il y a 9 pas."
+        }
+      ],
+      "centres": [
+        "velo"
+      ]
+    },
+    {
+      "id": "premiere-suite-arith-explicite",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_explicite",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-25",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite.mp4",
+      "miniature": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite.png",
+      "titre": "Dans combien de mois aura-t-elle 1 200 € ? — La formule explicite — épisode 5 · Maths 1re",
+      "accroche": "Sofiane est conseiller bancaire. Sa cliente Jade, 17 ans, a 300 € sur son livret et y ajoute 45 € chaque mois pour payer son permis. Dans combien de mois aura-t-elle 1 200 € ? Une formule donne directement n'importe quel terme.\n\nDans cette vidéo :\n• de la récurrence à la formule : uₙ = 300 + 45n\n• rang 0 ou rang 1 : uₙ = u₀ + nr, uₙ = u₁ + (n − 1)r\n• retrouver le rang : 300 + 45n = 1 200, n = 20\n• avec deux termes connus : la raison, puis la formule\n• lire une formule et prouver qu'une suite est arithmétique\n• le piège : la raison devant le n, le premier terme seul\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : u₂ = 11 et u₆ = 31 : la raison, la formule explicite, puis le rang n pour lequel uₙ = 96.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_explicite&display=simple\n\n📈 Épisode 5 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "La formule explicite · Jade, son livret et son permis"
+        ],
+        [
+          "00:30",
+          "De la récurrence à la formule"
+        ],
+        [
+          "00:52",
+          "Rang 0, rang 1 : les deux formules"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:42",
+          "Retrouver le rang"
+        ],
+        [
+          "02:00",
+          "Avec deux termes connus"
+        ],
+        [
+          "02:34",
+          "Lire la formule, prouver"
+        ],
+        [
+          "02:55",
+          "Question 2"
+        ],
+        [
+          "03:35",
+          "Le piège"
+        ],
+        [
+          "03:56",
+          "À toi de jouer"
+        ],
+        [
+          "04:19",
+          "Correction"
+        ],
+        [
+          "04:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "formule explicite",
+        "suite arithmétique",
+        "terme général",
+        "uₙ = u₀ + nr",
+        "épargne",
+        "conseiller bancaire",
+        "permis de conduire",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Une suite arithmétique a pour premier terme v₀ = 8 et pour raison −3. Pour tout entier naturel n :",
+          "choix": [
+            "vₙ = −3 + 8n",
+            "vₙ = 8 − 3 × (n − 1)",
+            "vₙ = 8 − 3n"
+          ],
+          "reponse": 2,
+          "explication": "Le premier terme est le nombre seul, et la raison multiplie n : 8 − 3n."
+        },
+        {
+          "t": "02:55",
+          "question": "Une suite arithmétique commence à t₁ = 20, et sa raison est 6. Pour tout entier n ≥ 1 :",
+          "choix": [
+            "tₙ = 20 + 6n",
+            "tₙ = 14 + 6n",
+            "tₙ = 6 + 20n"
+          ],
+          "reponse": 1,
+          "explication": "tₙ = 20 + 6 × (n − 1) = 14 + 6n. On vérifie : t₁ = 14 + 6 = 20."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "voitures-motos"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique",
+      "aussi": [
+        {
+          "classe": "premiere-spe",
+          "notionId": "suites",
+          "microId": "suite_arithmetique"
+        }
+      ]
+    },
+    {
+      "id": "premiere-suite-arith-explicite-short",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_explicite",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-26",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-arith-explicite",
+      "fichier": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite-short.mp4",
+      "miniature": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite-short.png",
+      "titre": "La formule de la trottinette en 10 secondes ? 🛴 — 1re #Shorts",
+      "accroche": "Le compteur d'une trottinette électrique affiche 120 km, et sa propriétaire roule 15 km par jour. Après n jours, on a ajouté n fois 15 : uₙ = 120 + 15n.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de kilomètres affiche le compteur après 30 jours ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_explicite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "trottinette électrique",
+        "formule explicite",
+        "suite arithmétique",
+        "kilométrage",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Le compteur affiche 120 km et la propriétaire roule 15 km par jour. Quelle est la formule explicite ?",
+          "choix": [
+            "uₙ = 15 + 120n",
+            "uₙ = 120 × 15ⁿ",
+            "uₙ = 120 + 15n"
+          ],
+          "reponse": 2,
+          "explication": "Le premier terme, 120, plus n fois la raison, 15."
+        }
+      ],
+      "centres": [
+        "transports"
+      ],
+      "aussi": [
+        {
+          "classe": "premiere-spe",
+          "notionId": "suites",
+          "microId": "suite_arithmetique"
+        }
+      ]
+    },
+    {
+      "id": "premiere-suite-arith-variation",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_variation",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-27",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/06-arith-variation/eleveai-maths-premiere-suite-arith-variation.mp4",
+      "miniature": "premiere/maths/suites/06-arith-variation/eleveai-maths-premiere-suite-arith-variation.png",
+      "titre": "Le glacier va-t-il se stabiliser ? — Sens de variation d'une suite arithmétique — épisode 6 · Maths 1re",
+      "accroche": "Lucie est glaciologue. Le glacier qu'elle suit mesure 6 000 m en 2026 et recule de 25 m par an. Un article affirme : « il est si long qu'il va finir par se stabiliser ». Vrai ou faux ? Le signe de la raison décide de tout.\n\nDans cette vidéo :\n• la raison −25 : la suite est décroissante\n• la règle : r > 0 croissante, r < 0 décroissante, r = 0 constante\n• le premier terme ne décide rien\n• le piège : on compare la raison à 0, pas à 1\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : uₙ = 3n − 50, vₙ₊₁ = vₙ, une citerne de 900 L qui perd 40 L par jour : croissante, décroissante ou constante ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_variation&display=simple\n\n📈 Épisode 6 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Monte-t-elle ou descend-elle ?"
+        ],
+        [
+          "00:11",
+          "Lucie, glaciologue : le glacier recule"
+        ],
+        [
+          "00:32",
+          "La raison −25 : décroissante"
+        ],
+        [
+          "00:59",
+          "La règle : le signe de r"
+        ],
+        [
+          "01:15",
+          "Question 1"
+        ],
+        [
+          "01:47",
+          "Le premier terme ne décide rien"
+        ],
+        [
+          "02:06",
+          "Le piège : comparer à 0, pas à 1"
+        ],
+        [
+          "02:27",
+          "Question 2"
+        ],
+        [
+          "03:12",
+          "À toi de jouer : trois suites"
+        ],
+        [
+          "03:42",
+          "Correction"
+        ],
+        [
+          "04:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "sens de variation",
+        "suite arithmétique",
+        "croissante",
+        "décroissante",
+        "raison",
+        "glacier",
+        "glaciologue",
+        "climat",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:15",
+          "question": "Une suite est définie par vₙ = 40 − 0,5n. Elle est :",
+          "choix": [
+            "décroissante",
+            "croissante",
+            "constante"
+          ],
+          "reponse": 0,
+          "explication": "La raison est le nombre devant n : −0,5. Elle est négative, même si elle est petite."
+        },
+        {
+          "t": "02:27",
+          "question": "Une suite arithmétique a pour premier terme w₀ = −300 et pour raison 0,25. Quelle affirmation est juste ?",
+          "choix": [
+            "Elle est décroissante, car w₀ est négatif",
+            "Elle est croissante, car r est positive",
+            "Elle est décroissante, car r est plus petite que 1"
+          ],
+          "reponse": 1,
+          "explication": "On ajoute 0,25 à chaque étape : −300, puis −299,75. Elle monte."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "nature-ecologie"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique"
+    },
+    {
+      "id": "premiere-suite-arith-variation-short",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_variation",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-28",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-arith-variation",
+      "fichier": "premiere/maths/suites/06-arith-variation/eleveai-maths-premiere-suite-arith-variation-short.mp4",
+      "miniature": "premiere/maths/suites/06-arith-variation/eleveai-maths-premiere-suite-arith-variation-short.png",
+      "titre": "Monte ou descend, sans rien calculer ? 🏊 — 1re #Shorts",
+      "accroche": "Un nageur s'entraîne au 100 m : chaque semaine, il gagne 0,5 s. 62 s, 61,5 s, puis 61 s : on retire 0,5 chaque semaine, la raison est −0,5.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : en partant de 62 secondes, quel temps fera-t-il après 8 semaines ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_variation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "natation",
+        "100 mètres",
+        "sens de variation",
+        "décroissante",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Un nageur gagne 0,5 s chaque semaine : 62 s, 61,5 s, puis 61 s. La suite de ses temps est :",
+          "choix": [
+            "croissante",
+            "constante",
+            "décroissante"
+          ],
+          "reponse": 2,
+          "explication": "La raison est négative : les temps descendent, et c'est une bonne nouvelle pour lui."
+        }
+      ],
+      "centres": [
+        "natation"
+      ]
+    },
+    {
+      "id": "premiere-suite-arith-graphique",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_graphique",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-29",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique.mp4",
+      "miniature": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique.png",
+      "titre": "Quand le robot doit-il se recharger ? — Suite arithmétique sur un graphique — épisode 7 · Maths 1re",
+      "accroche": "Amel est ingénieure en robotique : son robot livre les médicaments dans un hôpital. 120 minutes d'autonomie au départ, 15 de moins à chaque livraison. Sur un graphique, elle voit d'un coup d'œil quand le recharger.\n\nDans cette vidéo :\n• placer les points (n ; uₙ) : l'abscisse est le rang, l'ordonnée le terme\n• une suite arithmétique : des points alignés\n• lire la raison sur le graphique : 12 ÷ 3 = 4\n• monter, descendre, ou pas aligné\n• le piège : confondre u₀ et la raison\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : les points sont sur la droite y = 30 − 2x : donne u₀, la raison, le sens de variation et u₆.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_graphique&display=simple\n\n📈 Épisode 7 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Suite arithmétique sur un graphique"
+        ],
+        [
+          "00:10",
+          "Amel et son robot livreur"
+        ],
+        [
+          "00:31",
+          "Placer les points (n ; uₙ)"
+        ],
+        [
+          "00:52",
+          "Des points alignés"
+        ],
+        [
+          "01:12",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "Lire le graphique : quand recharger ?"
+        ],
+        [
+          "02:01",
+          "Monter, descendre, ou pas aligné"
+        ],
+        [
+          "02:23",
+          "Question 2"
+        ],
+        [
+          "03:02",
+          "Le piège : u₀ et r"
+        ],
+        [
+          "03:17",
+          "À toi de jouer"
+        ],
+        [
+          "03:38",
+          "Correction"
+        ],
+        [
+          "03:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "représentation graphique",
+        "suite arithmétique",
+        "points alignés",
+        "nuage de points",
+        "robot",
+        "ingénieure en robotique",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Quelle est la raison ?",
+          "choix": [
+            "4",
+            "12",
+            "3"
+          ],
+          "reponse": 0,
+          "explication": "De l'abscisse 1 à l'abscisse 4, il y a 3 pas, et on monte de 12 : 12 ÷ 3 = 4."
+        },
+        {
+          "t": "02:23",
+          "question": "Quel point fait partie de sa représentation graphique ?",
+          "choix": [
+            "(17 ; 4)",
+            "(4 ; 17)",
+            "(4 ; 20)"
+          ],
+          "reponse": 1,
+          "explication": "w₄ = 5 + 3 × 4 = 17 : l'abscisse est le rang, l'ordonnée est le terme."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "corps-sante"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique"
+    },
+    {
+      "id": "premiere-suite-arith-graphique-short",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_graphique",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-11-30",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-arith-graphique",
+      "fichier": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique-short.mp4",
+      "miniature": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique-short.png",
+      "titre": "Une suite arithmétique au premier coup d'œil ? 🎬 — 1re #Shorts",
+      "accroche": "Lina est monteuse vidéo : sa série a 4 épisodes en ligne, puis elle en publie 3 de plus chaque semaine. Les points (0 ; 4), (1 ; 7), (2 ; 10) : on ajoute toujours 3, ils sont alignés.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : (0 ; 4), (1 ; 7), (2 ; 10)… quelle est l'ordonnée du point d'abscisse 10 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_graphique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "monteuse vidéo",
+        "série",
+        "points alignés",
+        "graphique",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Lequel de ces nuages est arithmétique ?",
+          "choix": [
+            "des points qui montent de plus en plus vite",
+            "des points en zigzag",
+            "des points alignés"
+          ],
+          "reponse": 2,
+          "explication": "Un écart constant donne des points alignés."
+        }
+      ],
+      "centres": [
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "premiere-suite-arith-interpreter",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_interpreter",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-01",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter.mp4",
+      "miniature": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter.png",
+      "titre": "Quand Bastien marchera-t-il 3 km ? — Interpréter une suite arithmétique — épisode 8 · Maths 1re",
+      "accroche": "Clara est kinésithérapeute. Son patient Bastien, opéré du genou, marche 400 m au début de sa rééducation, puis 150 m de plus chaque semaine. Quand pourra-t-il marcher 3 km pour aller au lycée à pied ?\n\nDans cette vidéo :\n• ce que dit chaque nombre de la formule\n• un terme est une valeur, pas un gain\n• le seuil des 3 km : la première semaine où on le dépasse\n• le piège : arrondir au plus proche au lieu de l'entier suivant\n• l'indice devient une date\n• un motif de carreaux en T\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une croix de 5, 9, 13 carreaux… Avec 150 carreaux, quelle est la plus grande étape construite entièrement ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_interpreter&display=simple\n\n📈 Épisode 8 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Interpréter une formule · Clara, Bastien et ses 3 km"
+        ],
+        [
+          "00:33",
+          "Ce que dit chaque nombre"
+        ],
+        [
+          "00:52",
+          "Un terme, pas un gain"
+        ],
+        [
+          "01:08",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "Le seuil des 3 km"
+        ],
+        [
+          "02:04",
+          "Le piège : arrondir à 17"
+        ],
+        [
+          "02:26",
+          "L'indice devient une date"
+        ],
+        [
+          "02:44",
+          "Le motif en T"
+        ],
+        [
+          "03:10",
+          "Question 2"
+        ],
+        [
+          "03:43",
+          "À toi de jouer"
+        ],
+        [
+          "04:08",
+          "Correction"
+        ],
+        [
+          "04:32",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "interpréter une suite",
+        "suite arithmétique",
+        "seuil",
+        "modéliser",
+        "kinésithérapeute",
+        "rééducation",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:08",
+          "question": "Une médiathèque possède wₙ = 2 000 + 120n livres, en 2026 + n. Que veut dire le nombre 120 ?",
+          "choix": [
+            "le nombre de livres en 2026",
+            "le nombre de livres ajoutés chaque année",
+            "le nombre d'années écoulées"
+          ],
+          "reponse": 1,
+          "explication": "Le nombre devant n, c'est la raison : ce qui s'ajoute chaque année."
+        },
+        {
+          "t": "03:10",
+          "question": "Quelle étape du T utilise exactement 61 carreaux ?",
+          "choix": [
+            "l'étape 61",
+            "l'étape 21",
+            "l'étape 20"
+          ],
+          "reponse": 2,
+          "explication": "4 + 3 × (n − 1) = 61 : 3 × (n − 1) = 57, donc n − 1 = 19, et n = 20."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sport"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/lin-suite-arithmetique"
+    },
+    {
+      "id": "premiere-suite-arith-interpreter-short",
+      "notionId": "lin_suite_arithmetique",
+      "microId": "lin_suite_interpreter",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-02",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-arith-interpreter",
+      "fichier": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter-short.mp4",
+      "miniature": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter-short.png",
+      "titre": "u₉, c'est quelle année ? Sans te tromper d'un an 🐶 — 1re #Shorts",
+      "accroche": "Un refuge pour animaux fait adopter chaque année 12 chiens de plus que l'année d'avant. u₀ correspond à 2026 : l'indice compte les années écoulées depuis 2026.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : cette fois, u₁ correspond à 2026. À quelle année correspond u₉ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_interpreter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "refuge",
+        "adoption",
+        "chiens",
+        "indice et année",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "À quelle année correspond u₉ (u₀ correspond à 2026) ?",
+          "choix": [
+            "2036",
+            "2035",
+            "2034"
+          ],
+          "reponse": 1,
+          "explication": "2026 + 9 = 2035."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "premiere-suite-geo-reconnaitre",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_reconnaitre",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-03",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre.mp4",
+      "miniature": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre.png",
+      "titre": "500, 1 000, 2 000, 4 000 : à quelle vitesse ? — Reconnaître une suite géométrique — épisode 9 · Maths 1re",
+      "accroche": "Mathis est technicien dans un laboratoire d'analyses médicales. Une culture de bactéries : 500, puis 1 000, 2 000, 4 000. Il doit dire au médecin à quelle vitesse elle grandit. Les écarts changent… mais le quotient, lui, reste le même.\n\nDans cette vidéo :\n• le quotient de deux termes qui se suivent : 1 000 ÷ 500 = 2\n• suite géométrique : on multiplie toujours par le même nombre, la raison q\n• un pourcentage fixe cache une suite géométrique : − 20 %, c'est × 0,8\n• le piège : 5, 10, 15, 20 n'est pas géométrique\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 6 ; 18 ; 54 ; 162 : arithmétique, géométrique ou ni l'un ni l'autre ? Et v₂ = 5, v₄ = 45 : quelle raison ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_reconnaitre&display=simple\n\n📈 Épisode 9 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Suite géométrique : la reconnaître · Mathis et sa culture de bactéries"
+        ],
+        [
+          "00:28",
+          "Les écarts changent, le quotient reste"
+        ],
+        [
+          "00:51",
+          "La raison q"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Un pourcentage fixe : × 0,8"
+        ],
+        [
+          "01:59",
+          "Le piège : 5, 10, 15, 20"
+        ],
+        [
+          "02:22",
+          "Question 2"
+        ],
+        [
+          "02:55",
+          "À toi de jouer"
+        ],
+        [
+          "03:27",
+          "Correction"
+        ],
+        [
+          "03:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suite géométrique",
+        "reconnaître une suite géométrique",
+        "raison",
+        "quotient",
+        "bactéries",
+        "laboratoire d'analyses",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Laquelle de ces listes est géométrique ?",
+          "choix": [
+            "3 ; 7 ; 11 ; 15",
+            "80 ; 40 ; 20 ; 10",
+            "1 ; 4 ; 9 ; 16"
+          ],
+          "reponse": 1,
+          "explication": "40 ÷ 80 = 0,5, et de même ensuite : c'est une suite géométrique de raison 0,5."
+        },
+        {
+          "t": "02:22",
+          "question": "Une suite géométrique à termes positifs vérifie u₃ = 20 et u₄ = 25. Sa raison est :",
+          "choix": [
+            "5",
+            "0,8",
+            "1,25"
+          ],
+          "reponse": 2,
+          "explication": "On divise le terme suivant par le précédent : 25 ÷ 20 = 1,25."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique"
+    },
+    {
+      "id": "premiere-suite-geo-reconnaitre-short",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_reconnaitre",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-04",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-geo-reconnaitre",
+      "fichier": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre-short.mp4",
+      "miniature": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre-short.png",
+      "titre": "8, 12, 18, 27 : tu la repères en 3 secondes ? 📷 — 1re #Shorts",
+      "accroche": "Un photographe agrandit une photo : à chaque fois, sa largeur est multipliée par 1,5. 8, 12, 18, 27 cm : 12 ÷ 8 = 1,5, et de même ensuite. C'est une suite géométrique de raison 1,5.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 8, 12, 18, 27… quelle sera la largeur suivante, en centimètres ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "photographe",
+        "agrandissement",
+        "suite géométrique",
+        "quotient",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Laquelle multiplie toujours par le même nombre ?",
+          "choix": [
+            "10 ; 20 ; 30 ; 40",
+            "1 ; 2 ; 4 ; 7",
+            "5 ; 15 ; 45 ; 135"
+          ],
+          "reponse": 2,
+          "explication": "On multiplie par 3 à chaque fois : la raison est 3."
+        }
+      ],
+      "centres": [
+        "photo"
+      ]
+    },
+    {
+      "id": "premiere-suite-geo-recurrence",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_recurrence",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-05",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/10-geo-recurrence/eleveai-maths-premiere-suite-geo-recurrence.mp4",
+      "miniature": "premiere/maths/suites/10-geo-recurrence/eleveai-maths-premiere-suite-geo-recurrence.png",
+      "titre": "+ 20 % par mois : quand agrandir la ruche ? — Récurrence d'une suite géométrique — épisode 10 · Maths 1re",
+      "accroche": "Manon est apicultrice. Au printemps, une colonie compte 10 000 abeilles, et elle grandit de 20 % chaque mois. Quand faudra-t-il agrandir la ruche ? On passe d'un mois au suivant en multipliant.\n\nDans cette vidéo :\n• + 20 %, c'est × 1,2 : uₙ₊₁ = 1,2 × uₙ\n• on déroule pas à pas : 10 000, 12 000, 14 400, 17 280\n• remonter le temps : on divise par q\n• le piège : ajouter au lieu de multiplier\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une balle lâchée de 160 cm remonte à 75 % de sa hauteur à chaque rebond : la relation, puis h₃.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_recurrence&display=simple\n\n📈 Épisode 10 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "La relation de récurrence · Manon, apicultrice : la ruche"
+        ],
+        [
+          "00:24",
+          "uₙ₊₁ = 1,2 × uₙ"
+        ],
+        [
+          "00:46",
+          "Question 1"
+        ],
+        [
+          "01:30",
+          "On déroule, pas à pas"
+        ],
+        [
+          "01:50",
+          "Remonter le temps : ÷ q"
+        ],
+        [
+          "02:14",
+          "Le piège : ajouter au lieu de multiplier"
+        ],
+        [
+          "02:31",
+          "Question 2"
+        ],
+        [
+          "03:08",
+          "À toi de jouer : la balle qui rebondit"
+        ],
+        [
+          "03:39",
+          "Correction"
+        ],
+        [
+          "04:02",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "relation de récurrence",
+        "suite géométrique",
+        "pourcentage",
+        "coefficient multiplicateur",
+        "abeilles",
+        "apicultrice",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:46",
+          "question": "Une ville perd 2 % de ses habitants chaque année. vₙ est sa population après n années. Quelle relation traduit cette situation ?",
+          "choix": [
+            "vₙ₊₁ = 0,98 × vₙ",
+            "vₙ₊₁ = vₙ − 2",
+            "vₙ₊₁ = 0,02 × vₙ"
+          ],
+          "reponse": 0,
+          "explication": "Perdre 2 %, c'est garder 98 % : on multiplie par 0,98."
+        },
+        {
+          "t": "02:31",
+          "question": "Une suite vérifie tₙ₊₁ = 3 × tₙ et t₄ = 162. Combien vaut t₃ ?",
+          "choix": [
+            "486",
+            "159",
+            "54"
+          ],
+          "reponse": 2,
+          "explication": "Pour reculer d'un rang, on divise par 3 : 162 ÷ 3 = 54."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique"
+    },
+    {
+      "id": "premiere-suite-geo-recurrence-short",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_recurrence",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-06",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-geo-recurrence",
+      "fichier": "premiere/maths/suites/10-geo-recurrence/eleveai-maths-premiere-suite-geo-recurrence-short.mp4",
+      "miniature": "premiere/maths/suites/10-geo-recurrence/eleveai-maths-premiere-suite-geo-recurrence-short.png",
+      "titre": "1 024 joueurs, la moitié éliminée : la bonne relation ? ♟️ — 1re #Shorts",
+      "accroche": "Un tournoi d'échecs en ligne réunit 1 024 joueurs. À chaque tour, la moitié est éliminée : 1 024, 512, 256. On divise par 2 à chaque tour : uₙ₊₁ = 0,5 × uₙ.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 024 joueurs au départ. Combien en reste-t-il après 4 tours ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_recurrence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "échecs",
+        "tournoi",
+        "relation de récurrence",
+        "suite géométrique",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "À chaque tour, la moitié des joueurs est éliminée. Quelle relation vérifie la suite ?",
+          "choix": [
+            "uₙ₊₁ = 0,5 × uₙ",
+            "uₙ₊₁ = uₙ − 2",
+            "uₙ₊₁ = uₙ − 0,5"
+          ],
+          "reponse": 0,
+          "explication": "Diviser par 2, c'est multiplier par 0,5."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "premiere-suite-geo-taux",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_taux",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-07",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/11-geo-taux/eleveai-maths-premiere-suite-geo-taux.mp4",
+      "miniature": "premiere/maths/suites/11-geo-taux/eleveai-maths-premiere-suite-geo-taux.png",
+      "titre": "− 30 % par semaine : combien d'entrées ? — Du pourcentage à la raison — épisode 11 · Maths 1re",
+      "accroche": "Ylan travaille dans la distribution de films : il décide combien de salles gardent un film à l'affiche. 200 000 entrées la première semaine, puis − 30 % d'une semaine à l'autre. Combien deux semaines plus tard ?\n\nDans cette vidéo :\n• baisser de 30 %, c'est garder 70 % : q = 0,7\n• les mots qui cachent une raison : hausse, baisse, double, moitié\n• dans l'autre sens : le taux, c'est q − 1\n• deux semaines : × 0,7², soit − 51 %\n• le piège : − 30 % deux fois n'est pas − 60 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 8 000 vues en 2026, 10 000 en 2027, au même taux : la raison, le pourcentage, et les vues en 2028.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_taux&display=simple\n\n📈 Épisode 11 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Du pourcentage à la raison"
+        ],
+        [
+          "00:11",
+          "Ylan et les entrées d'un film"
+        ],
+        [
+          "00:33",
+          "Baisser de 30 %, c'est garder 70 %"
+        ],
+        [
+          "00:55",
+          "Des mots qui cachent une raison"
+        ],
+        [
+          "01:17",
+          "Question 1"
+        ],
+        [
+          "01:49",
+          "Dans l'autre sens : q − 1"
+        ],
+        [
+          "02:10",
+          "Deux semaines : × 0,7²"
+        ],
+        [
+          "02:31",
+          "Le piège : pas − 60 %"
+        ],
+        [
+          "02:53",
+          "Question 2"
+        ],
+        [
+          "03:30",
+          "À toi de jouer"
+        ],
+        [
+          "03:59",
+          "Correction"
+        ],
+        [
+          "04:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "taux d'évolution",
+        "coefficient multiplicateur",
+        "suite géométrique",
+        "pourcentage",
+        "cinéma",
+        "distribution de films",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:17",
+          "question": "Un abonnement augmente de 4 % chaque année. La raison de la suite géométrique associée est :",
+          "choix": [
+            "1,04",
+            "1,4",
+            "0,04"
+          ],
+          "reponse": 0,
+          "explication": "1 + 4/100 = 1,04 : on garde tout, et on ajoute 4 %."
+        },
+        {
+          "t": "02:53",
+          "question": "Une suite géométrique a pour raison q = 1,1. Entre u₀ et u₂, l'évolution globale est :",
+          "choix": [
+            "une hausse de 20 %",
+            "une hausse de 121 %",
+            "une hausse de 21 %"
+          ],
+          "reponse": 2,
+          "explication": "1,1² = 1,21, et 1,21 − 1 = 0,21 : c'est une hausse de 21 %."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "argent-budget"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique"
+    },
+    {
+      "id": "premiere-suite-geo-taux-short",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_taux",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-08",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-geo-taux",
+      "fichier": "premiere/maths/suites/11-geo-taux/eleveai-maths-premiere-suite-geo-taux-short.mp4",
+      "miniature": "premiere/maths/suites/11-geo-taux/eleveai-maths-premiere-suite-geo-taux-short.png",
+      "titre": "− 20 % par an : ne te fais pas avoir 📱 — 1re #Shorts",
+      "accroche": "Un smartphone perd 20 % de sa valeur chaque année. Perdre 20 %, c'est garder 80 % : on multiplie par 0,8.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un smartphone de 500 € perd 20 % de sa valeur par an. Combien vaut-il après 2 ans ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_taux&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "smartphone",
+        "pourcentage",
+        "coefficient multiplicateur",
+        "valeur",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Perdre 20 %, c'est multiplier par :",
+          "choix": [
+            "0,8",
+            "0,2",
+            "1,2"
+          ],
+          "reponse": 0,
+          "explication": "1 − 20/100 = 0,8."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "premiere-suite-geo-terme-rang",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_terme_rang",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-09",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/12-geo-terme-rang/eleveai-maths-premiere-suite-geo-terme-rang.mp4",
+      "miniature": "premiere/maths/suites/12-geo-terme-rang/eleveai-maths-premiere-suite-geo-terme-rang.png",
+      "titre": "+ 10 % par mois : combien d'abonnés dans un an ? — Calculer un terme d'une suite géométrique — épisode 12 · Maths 1re",
+      "accroche": "Léo est community manager : il anime le compte d'un club de basket. 2 000 abonnés, et 10 % de plus chaque mois. Pour convaincre un sponsor, le club veut savoir combien il en aura dans un an, sans calculer mois par mois.\n\nDans cette vidéo :\n• trois mois : trois sauts × 1,1\n• douze mois : u₁₂ = 2 000 × 1,1¹² ≈ 6 277\n• uₙ = u₀ × qⁿ, et depuis u₁ : uₙ = u₁ × qⁿ⁻¹\n• le piège : × 12 au lieu de la puissance 12\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une suite géométrique de raison 2 vérifie t₅ = 96 : calcule t₈, puis t₃.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_terme_rang&display=simple\n\n📈 Épisode 12 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Calculer un terme lointain · Léo et ses 2 000 abonnés"
+        ],
+        [
+          "00:28",
+          "Trois sauts × 1,1"
+        ],
+        [
+          "00:48",
+          "Douze sauts : 1,1¹²"
+        ],
+        [
+          "01:08",
+          "Question 1"
+        ],
+        [
+          "01:41",
+          "Le rang de départ"
+        ],
+        [
+          "02:01",
+          "Question 2"
+        ],
+        [
+          "02:40",
+          "Le piège : × 12"
+        ],
+        [
+          "02:59",
+          "À toi de jouer"
+        ],
+        [
+          "03:18",
+          "Correction"
+        ],
+        [
+          "03:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "terme général",
+        "suite géométrique",
+        "puissance",
+        "uₙ = u₀ × qⁿ",
+        "community manager",
+        "abonnés",
+        "basket",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:08",
+          "question": "Une suite géométrique commence à v₀ = 5, et sa raison est 3. Combien vaut v₄ ?",
+          "choix": [
+            "60",
+            "135",
+            "405"
+          ],
+          "reponse": 2,
+          "explication": "3⁴ = 81, et 5 × 81 = 405."
+        },
+        {
+          "t": "02:01",
+          "question": "Une suite géométrique commence à w₁ = 800, et sa raison est 0,5. Combien vaut w₄ ?",
+          "choix": [
+            "50",
+            "100",
+            "1 600"
+          ],
+          "reponse": 1,
+          "explication": "De w₁ à w₄, il y a 3 pas : 800 × 0,5³ = 800 × 0,125 = 100."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "basket"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique"
+    },
+    {
+      "id": "premiere-suite-geo-terme-rang-short",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_terme_rang",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-10",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-geo-terme-rang",
+      "fichier": "premiere/maths/suites/12-geo-terme-rang/eleveai-maths-premiere-suite-geo-terme-rang-short.mp4",
+      "miniature": "premiere/maths/suites/12-geo-terme-rang/eleveai-maths-premiere-suite-geo-terme-rang-short.png",
+      "titre": "Une feuille pliée 10 fois : plus de 10 cm ? 📄 — 1re #Shorts",
+      "accroche": "Une feuille de 0,1 mm d'épaisseur double à chaque pliage. Après n pliages, on a multiplié n fois par 2 : uₙ = 0,1 × 2ⁿ. Après 10 pliages : 102,4 mm, plus de 10 cm !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : quelle est l'épaisseur, en millimètres, après 7 pliages ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_terme_rang&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "feuille pliée",
+        "puissance de 2",
+        "suite géométrique",
+        "défi",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Une feuille de 0,1 mm double d'épaisseur à chaque pliage. Quelle formule donne l'épaisseur uₙ après n pliages ?",
+          "choix": [
+            "uₙ = 0,1 × 2 × n",
+            "uₙ = 0,1 + 2n",
+            "uₙ = 0,1 × 2ⁿ"
+          ],
+          "reponse": 2,
+          "explication": "On multiplie n fois par 2 : uₙ = 0,1 × 2ⁿ. Et u₁₀ = 0,1 × 1 024 = 102,4 mm : plus de 10 cm !"
+        }
+      ],
+      "centres": [
+        "jeux-defis"
       ]
     }
   ]

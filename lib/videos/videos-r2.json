@@ -5454,6 +5454,22 @@
   "youtube": "_-GyjUG7noI",
   "coach": null
  },
+ "carte-cadeau-noel-short": {
+  "fichier": "ti-margo/cadeau-noel/eleveai-carte-cadeau-noel-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "carte cadeau noel short",
+  "short": true,
+  "youtube": null
+ },
+ "carte-cadeau-noel-short-bd": {
+  "fichier": "ti-margo/cadeau-noel/eleveai-carte-cadeau-noel-short-bd.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "carte cadeau noel short bd",
+  "short": true,
+  "youtube": null
+ },
  "cm1-decimal-droite": {
   "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.mp4",
   "poster": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.png",
@@ -8057,7 +8073,7 @@
  "francais-cp-pas-a-pas-lettre-c": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-c/eleveai-francais-cp-pas-a-pas-lettre-c.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-c/eleveai-francais-cp-pas-a-pas-lettre-c.vignette.webp",
   "titre": "francais cp pas a pas lettre c",
   "short": false,
   "youtube": null
@@ -8065,7 +8081,7 @@
  "francais-cp-pas-a-pas-lettre-d": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-d/eleveai-francais-cp-pas-a-pas-lettre-d.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-d/eleveai-francais-cp-pas-a-pas-lettre-d.vignette.webp",
   "titre": "francais cp pas a pas lettre d",
   "short": false,
   "youtube": null
@@ -8073,7 +8089,7 @@
  "francais-cp-pas-a-pas-lettre-e": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-e/eleveai-francais-cp-pas-a-pas-lettre-e.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-e/eleveai-francais-cp-pas-a-pas-lettre-e.vignette.webp",
   "titre": "francais cp pas a pas lettre e",
   "short": false,
   "youtube": null
@@ -8089,7 +8105,7 @@
  "francais-cp-pas-a-pas-lettre-g": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-g/eleveai-francais-cp-pas-a-pas-lettre-g.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-g/eleveai-francais-cp-pas-a-pas-lettre-g.vignette.webp",
   "titre": "francais cp pas a pas lettre g",
   "short": false,
   "youtube": null
@@ -8097,7 +8113,7 @@
  "francais-cp-pas-a-pas-lettre-h": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-h/eleveai-francais-cp-pas-a-pas-lettre-h.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-h/eleveai-francais-cp-pas-a-pas-lettre-h.vignette.webp",
   "titre": "francais cp pas a pas lettre h",
   "short": false,
   "youtube": null
@@ -8105,7 +8121,7 @@
  "francais-cp-pas-a-pas-lettre-i": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-i/eleveai-francais-cp-pas-a-pas-lettre-i.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-i/eleveai-francais-cp-pas-a-pas-lettre-i.vignette.webp",
   "titre": "francais cp pas a pas lettre i",
   "short": false,
   "youtube": null
@@ -8113,7 +8129,7 @@
  "francais-cp-pas-a-pas-lettre-k": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-k/eleveai-francais-cp-pas-a-pas-lettre-k.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-k/eleveai-francais-cp-pas-a-pas-lettre-k.vignette.webp",
   "titre": "francais cp pas a pas lettre k",
   "short": false,
   "youtube": null
@@ -8121,7 +8137,7 @@
  "francais-cp-pas-a-pas-lettre-l": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-l/eleveai-francais-cp-pas-a-pas-lettre-l.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-l/eleveai-francais-cp-pas-a-pas-lettre-l.vignette.webp",
   "titre": "francais cp pas a pas lettre l",
   "short": false,
   "youtube": null
@@ -8129,7 +8145,7 @@
  "francais-cp-pas-a-pas-lettre-m": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-m/eleveai-francais-cp-pas-a-pas-lettre-m.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-m/eleveai-francais-cp-pas-a-pas-lettre-m.vignette.webp",
   "titre": "francais cp pas a pas lettre m",
   "short": false,
   "youtube": null
@@ -8137,7 +8153,7 @@
  "francais-cp-pas-a-pas-lettre-n": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-n/eleveai-francais-cp-pas-a-pas-lettre-n.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-n/eleveai-francais-cp-pas-a-pas-lettre-n.vignette.webp",
   "titre": "francais cp pas a pas lettre n",
   "short": false,
   "youtube": null
@@ -8145,7 +8161,7 @@
  "francais-cp-pas-a-pas-lettre-o": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-o/eleveai-francais-cp-pas-a-pas-lettre-o.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-o/eleveai-francais-cp-pas-a-pas-lettre-o.vignette.webp",
   "titre": "francais cp pas a pas lettre o",
   "short": false,
   "youtube": null
@@ -8153,7 +8169,7 @@
  "francais-cp-pas-a-pas-lettre-p": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-p/eleveai-francais-cp-pas-a-pas-lettre-p.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-p/eleveai-francais-cp-pas-a-pas-lettre-p.vignette.webp",
   "titre": "francais cp pas a pas lettre p",
   "short": false,
   "youtube": null
@@ -8161,7 +8177,7 @@
  "francais-cp-pas-a-pas-lettre-q": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-q/eleveai-francais-cp-pas-a-pas-lettre-q.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-q/eleveai-francais-cp-pas-a-pas-lettre-q.vignette.webp",
   "titre": "francais cp pas a pas lettre q",
   "short": false,
   "youtube": null
@@ -8169,7 +8185,7 @@
  "francais-cp-pas-a-pas-lettre-r": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-r/eleveai-francais-cp-pas-a-pas-lettre-r.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-r/eleveai-francais-cp-pas-a-pas-lettre-r.vignette.webp",
   "titre": "francais cp pas a pas lettre r",
   "short": false,
   "youtube": null
@@ -8177,7 +8193,7 @@
  "francais-cp-pas-a-pas-lettre-s": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-s/eleveai-francais-cp-pas-a-pas-lettre-s.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-s/eleveai-francais-cp-pas-a-pas-lettre-s.vignette.webp",
   "titre": "francais cp pas a pas lettre s",
   "short": false,
   "youtube": null
@@ -8185,7 +8201,7 @@
  "francais-cp-pas-a-pas-lettre-t": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-t/eleveai-francais-cp-pas-a-pas-lettre-t.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-t/eleveai-francais-cp-pas-a-pas-lettre-t.vignette.webp",
   "titre": "francais cp pas a pas lettre t",
   "short": false,
   "youtube": null
@@ -8193,7 +8209,7 @@
  "francais-cp-pas-a-pas-lettre-y": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/lettre-y/eleveai-francais-cp-pas-a-pas-lettre-y.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "cp/francais/paysage/fr/pas-a-pas/lettre-y/eleveai-francais-cp-pas-a-pas-lettre-y.vignette.webp",
   "titre": "francais cp pas a pas lettre y",
   "short": false,
   "youtube": null
@@ -8297,6 +8313,22 @@
   "youtube": "uVs9h6561zU",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=identites_remarquables_2de&microId=ir_carre_somme&display=simple"
  },
+ "journal-presentation-paysage": {
+  "fichier": "ti-margo/journal-presentation/eleveai-journal-presentation-paysage.mp4",
+  "poster": null,
+  "vignette": "ti-margo/journal-presentation/eleveai-journal-presentation-paysage.vignette.webp",
+  "titre": "journal presentation paysage",
+  "short": false,
+  "youtube": null
+ },
+ "journal-presentation-paysage-bd": {
+  "fichier": "ti-margo/journal-presentation/eleveai-journal-presentation-paysage-bd.mp4",
+  "poster": null,
+  "vignette": "ti-margo/journal-presentation/eleveai-journal-presentation-paysage-bd.vignette.webp",
+  "titre": "journal presentation paysage bd",
+  "short": false,
+  "youtube": null
+ },
  "le-noel-de-ti-margo-episode-1": {
   "fichier": "ti-margo/film-noel-episode-1/eleveai-le-noel-de-ti-margo-episode-1.mp4",
   "poster": null,
@@ -8308,7 +8340,7 @@
  "le-noel-de-ti-margo-episode-2": {
   "fichier": "ti-margo/film-noel-episode-2/eleveai-le-noel-de-ti-margo-episode-2.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "ti-margo/film-noel-episode-2/eleveai-le-noel-de-ti-margo-episode-2.vignette.webp",
   "titre": "le noel de ti margo episode 2",
   "short": false,
   "youtube": null
@@ -8321,19 +8353,123 @@
   "short": false,
   "youtube": null
  },
- "maths-4e-distrib-simple": {
-  "fichier": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple.mp4",
+ "maths-4e-facto-commun": {
+  "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.mp4",
   "poster": null,
   "vignette": null,
-  "titre": "maths 4e distrib simple",
+  "titre": "maths 4e facto commun",
   "short": false,
   "youtube": null
  },
- "maths-4e-distrib-simple-short": {
-  "fichier": "4e/maths/distributivite/01-simple/eleveai-maths-4e-distrib-simple-short.mp4",
+ "maths-4e-facto-commun-short": {
+  "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.mp4",
   "poster": null,
   "vignette": null,
-  "titre": "maths 4e distrib simple short",
+  "titre": "maths 4e facto commun short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-6e-calcul-pose-addition": {
+  "fichier": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e calcul pose addition",
+  "short": false,
+  "youtube": null
+ },
+ "maths-6e-mental-addition": {
+  "fichier": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental addition",
+  "short": false,
+  "youtube": null
+ },
+ "maths-6e-mental-addition-short": {
+  "fichier": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental addition short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-6e-mental-astuces": {
+  "fichier": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental astuces",
+  "short": false,
+  "youtube": null
+ },
+ "maths-6e-mental-astuces-short": {
+  "fichier": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental astuces short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-6e-mental-defi": {
+  "fichier": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental defi",
+  "short": false,
+  "youtube": null
+ },
+ "maths-6e-mental-defi-short": {
+  "fichier": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental defi short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-6e-mental-division": {
+  "fichier": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental division",
+  "short": false,
+  "youtube": null
+ },
+ "maths-6e-mental-division-short": {
+  "fichier": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental division short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-6e-mental-multiplication": {
+  "fichier": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental multiplication",
+  "short": false,
+  "youtube": null
+ },
+ "maths-6e-mental-multiplication-short": {
+  "fichier": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental multiplication short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-6e-mental-soustraction": {
+  "fichier": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental soustraction",
+  "short": false,
+  "youtube": null
+ },
+ "maths-6e-mental-soustraction-short": {
+  "fichier": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e mental soustraction short",
   "short": true,
   "youtube": null
  },
@@ -8604,8 +8740,24 @@
  "maths-monde-bonnes-actions-short": {
   "fichier": "ti-margo/monde-bonnes-actions/eleveai-maths-monde-bonnes-actions-short.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "ti-margo/monde-bonnes-actions/eleveai-maths-monde-bonnes-actions-short.vignette.webp",
   "titre": "maths monde bonnes actions short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-monde-coeur-short": {
+  "fichier": "ti-margo/monde-coeur/eleveai-maths-monde-coeur-short.mp4",
+  "poster": null,
+  "vignette": "ti-margo/monde-coeur/eleveai-maths-monde-coeur-short.vignette.webp",
+  "titre": "maths monde coeur short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-monde-oceans-short": {
+  "fichier": "ti-margo/monde-oceans/eleveai-maths-monde-oceans-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths monde oceans short",
   "short": true,
   "youtube": null
  },
@@ -8721,6 +8873,102 @@
   "poster": null,
   "vignette": "terminale/maths/analyse/convexite/eleveai-maths-terminale-convexite-reconnaitre-short.vignette.webp",
   "titre": "maths terminale convexite reconnaitre short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-bornee": {
+  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite bornee",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-bornee-short": {
+  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite bornee short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-defi": {
+  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite defi",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-defi-short": {
+  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite defi short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-interpreter": {
+  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite limite interpreter",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-interpreter-short": {
+  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite limite interpreter short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-reconnaitre": {
+  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite reconnaitre",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-reconnaitre-short": {
+  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite reconnaitre short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-recurrence-preuve": {
+  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite recurrence preuve",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-recurrence-preuve-short": {
+  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite recurrence preuve short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-variation": {
+  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite variation",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-variation-short": {
+  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite variation short",
   "short": true,
   "youtube": null
  },
@@ -10092,6 +10340,222 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple"
  },
+ "premiere-suite-arith-explicite": {
+  "fichier": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite.mp4",
+  "poster": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite.png",
+  "vignette": null,
+  "titre": "Dans combien de mois aura-t-elle 1 200 € ? — La formule explicite — épisode 5 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_explicite&display=simple"
+ },
+ "premiere-suite-arith-explicite-short": {
+  "fichier": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite-short.mp4",
+  "poster": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite-short.png",
+  "vignette": null,
+  "titre": "La formule de la trottinette en 10 secondes ? 🛴 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_explicite&display=simple"
+ },
+ "premiere-suite-arith-graphique": {
+  "fichier": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique.mp4",
+  "poster": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique.png",
+  "vignette": null,
+  "titre": "Quand le robot doit-il se recharger ? — Suite arithmétique sur un graphique — épisode 7 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_graphique&display=simple"
+ },
+ "premiere-suite-arith-graphique-short": {
+  "fichier": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique-short.mp4",
+  "poster": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique-short.png",
+  "vignette": null,
+  "titre": "Une suite arithmétique au premier coup d'œil ? 🎬 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_graphique&display=simple"
+ },
+ "premiere-suite-arith-interpreter": {
+  "fichier": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter.mp4",
+  "poster": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter.png",
+  "vignette": null,
+  "titre": "Quand Bastien marchera-t-il 3 km ? — Interpréter une suite arithmétique — épisode 8 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_interpreter&display=simple"
+ },
+ "premiere-suite-arith-interpreter-short": {
+  "fichier": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter-short.mp4",
+  "poster": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter-short.png",
+  "vignette": null,
+  "titre": "u₉, c'est quelle année ? Sans te tromper d'un an 🐶 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_interpreter&display=simple"
+ },
+ "premiere-suite-arith-notation": {
+  "fichier": "premiere/maths/suites/03-arith-notation/eleveai-maths-premiere-suite-arith-notation.mp4",
+  "poster": "premiere/maths/suites/03-arith-notation/eleveai-maths-premiere-suite-arith-notation.png",
+  "vignette": null,
+  "titre": "u(n), uₙ : que veut dire ce petit n ? — La notation des suites — épisode 3 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_notation&display=simple"
+ },
+ "premiere-suite-arith-notation-short": {
+  "fichier": "premiere/maths/suites/03-arith-notation/eleveai-maths-premiere-suite-arith-notation-short.mp4",
+  "poster": "premiere/maths/suites/03-arith-notation/eleveai-maths-premiere-suite-arith-notation-short.png",
+  "vignette": null,
+  "titre": "2031, c'est u₂₀₃₁ ? Le piège de l'année 📱 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_notation&display=simple"
+ },
+ "premiere-suite-arith-reconnaitre": {
+  "fichier": "premiere/maths/suites/01-arith-reconnaitre/eleveai-maths-premiere-suite-arith-reconnaitre.mp4",
+  "poster": "premiere/maths/suites/01-arith-reconnaitre/eleveai-maths-premiere-suite-arith-reconnaitre.png",
+  "vignette": null,
+  "titre": "40, 70, 100, 130 : toujours le même pas ? — Reconnaître une suite arithmétique — épisode 1 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_reconnaitre&display=simple"
+ },
+ "premiere-suite-arith-reconnaitre-short": {
+  "fichier": "premiere/maths/suites/01-arith-reconnaitre/eleveai-maths-premiere-suite-arith-reconnaitre-short.mp4",
+  "poster": "premiere/maths/suites/01-arith-reconnaitre/eleveai-maths-premiere-suite-arith-reconnaitre-short.png",
+  "vignette": null,
+  "titre": "10, 13, 16, 19 : tu repères le pas en 3 secondes ? 🏃‍♀️ — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_reconnaitre&display=simple"
+ },
+ "premiere-suite-arith-recurrence": {
+  "fichier": "premiere/maths/suites/02-arith-recurrence/eleveai-maths-premiere-suite-arith-recurrence.mp4",
+  "poster": "premiere/maths/suites/02-arith-recurrence/eleveai-maths-premiere-suite-arith-recurrence.png",
+  "vignette": null,
+  "titre": "uₙ₊₁ = uₙ + 300 : passer au terme suivant — La relation de récurrence — épisode 2 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_recurrence&display=simple"
+ },
+ "premiere-suite-arith-recurrence-short": {
+  "fichier": "premiere/maths/suites/02-arith-recurrence/eleveai-maths-premiere-suite-arith-recurrence-short.mp4",
+  "poster": "premiere/maths/suites/02-arith-recurrence/eleveai-maths-premiere-suite-arith-recurrence-short.png",
+  "vignette": null,
+  "titre": "u₁₀ = 600 : tu remontes le temps d'une suite ? 🚚 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_recurrence&display=simple"
+ },
+ "premiere-suite-arith-terme-rang": {
+  "fichier": "premiere/maths/suites/04-arith-terme-rang/eleveai-maths-premiere-suite-arith-terme-rang.mp4",
+  "poster": "premiere/maths/suites/04-arith-terme-rang/eleveai-maths-premiere-suite-arith-terme-rang.png",
+  "vignette": null,
+  "titre": "Le 20e terme sans calculer les autres — Calculer un terme lointain — épisode 4 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_terme_rang&display=simple"
+ },
+ "premiere-suite-arith-terme-rang-short": {
+  "fichier": "premiere/maths/suites/04-arith-terme-rang/eleveai-maths-premiere-suite-arith-terme-rang-short.mp4",
+  "poster": "premiere/maths/suites/04-arith-terme-rang/eleveai-maths-premiere-suite-arith-terme-rang-short.png",
+  "vignette": null,
+  "titre": "La 10e semaine : 10 pas ou 9 ? 🚴‍♀️ — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_terme_rang&display=simple"
+ },
+ "premiere-suite-arith-variation": {
+  "fichier": "premiere/maths/suites/06-arith-variation/eleveai-maths-premiere-suite-arith-variation.mp4",
+  "poster": "premiere/maths/suites/06-arith-variation/eleveai-maths-premiere-suite-arith-variation.png",
+  "vignette": null,
+  "titre": "Le glacier va-t-il se stabiliser ? — Sens de variation d'une suite arithmétique — épisode 6 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_variation&display=simple"
+ },
+ "premiere-suite-arith-variation-short": {
+  "fichier": "premiere/maths/suites/06-arith-variation/eleveai-maths-premiere-suite-arith-variation-short.mp4",
+  "poster": "premiere/maths/suites/06-arith-variation/eleveai-maths-premiere-suite-arith-variation-short.png",
+  "vignette": null,
+  "titre": "Monte ou descend, sans rien calculer ? 🏊 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_variation&display=simple"
+ },
+ "premiere-suite-geo-reconnaitre": {
+  "fichier": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre.mp4",
+  "poster": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre.png",
+  "vignette": null,
+  "titre": "500, 1 000, 2 000, 4 000 : à quelle vitesse ? — Reconnaître une suite géométrique — épisode 9 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_reconnaitre&display=simple"
+ },
+ "premiere-suite-geo-reconnaitre-short": {
+  "fichier": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre-short.mp4",
+  "poster": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre-short.png",
+  "vignette": null,
+  "titre": "8, 12, 18, 27 : tu la repères en 3 secondes ? 📷 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_reconnaitre&display=simple"
+ },
+ "premiere-suite-geo-recurrence": {
+  "fichier": "premiere/maths/suites/10-geo-recurrence/eleveai-maths-premiere-suite-geo-recurrence.mp4",
+  "poster": "premiere/maths/suites/10-geo-recurrence/eleveai-maths-premiere-suite-geo-recurrence.png",
+  "vignette": null,
+  "titre": "+ 20 % par mois : quand agrandir la ruche ? — Récurrence d'une suite géométrique — épisode 10 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_recurrence&display=simple"
+ },
+ "premiere-suite-geo-recurrence-short": {
+  "fichier": "premiere/maths/suites/10-geo-recurrence/eleveai-maths-premiere-suite-geo-recurrence-short.mp4",
+  "poster": "premiere/maths/suites/10-geo-recurrence/eleveai-maths-premiere-suite-geo-recurrence-short.png",
+  "vignette": null,
+  "titre": "1 024 joueurs, la moitié éliminée : la bonne relation ? ♟️ — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_recurrence&display=simple"
+ },
+ "premiere-suite-geo-taux": {
+  "fichier": "premiere/maths/suites/11-geo-taux/eleveai-maths-premiere-suite-geo-taux.mp4",
+  "poster": "premiere/maths/suites/11-geo-taux/eleveai-maths-premiere-suite-geo-taux.png",
+  "vignette": null,
+  "titre": "− 30 % par semaine : combien d'entrées ? — Du pourcentage à la raison — épisode 11 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_taux&display=simple"
+ },
+ "premiere-suite-geo-taux-short": {
+  "fichier": "premiere/maths/suites/11-geo-taux/eleveai-maths-premiere-suite-geo-taux-short.mp4",
+  "poster": "premiere/maths/suites/11-geo-taux/eleveai-maths-premiere-suite-geo-taux-short.png",
+  "vignette": null,
+  "titre": "− 20 % par an : ne te fais pas avoir 📱 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_taux&display=simple"
+ },
+ "premiere-suite-geo-terme-rang": {
+  "fichier": "premiere/maths/suites/12-geo-terme-rang/eleveai-maths-premiere-suite-geo-terme-rang.mp4",
+  "poster": "premiere/maths/suites/12-geo-terme-rang/eleveai-maths-premiere-suite-geo-terme-rang.png",
+  "vignette": null,
+  "titre": "+ 10 % par mois : combien d'abonnés dans un an ? — Calculer un terme d'une suite géométrique — épisode 12 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_terme_rang&display=simple"
+ },
+ "premiere-suite-geo-terme-rang-short": {
+  "fichier": "premiere/maths/suites/12-geo-terme-rang/eleveai-maths-premiere-suite-geo-terme-rang-short.mp4",
+  "poster": "premiere/maths/suites/12-geo-terme-rang/eleveai-maths-premiere-suite-geo-terme-rang-short.png",
+  "vignette": null,
+  "titre": "Une feuille pliée 10 fois : plus de 10 cm ? 📄 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_terme_rang&display=simple"
+ },
  "presentation": {
   "fichier": "ulule/presentation.mp4",
   "poster": null,
@@ -10246,7 +10710,7 @@
  "saphir-partie-1-episode-1-le-cercle-des-loups": {
   "fichier": "saphir/eleveai-saphir-partie-1-episode-1-le-cercle-des-loups.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "saphir/eleveai-saphir-partie-1-episode-1-le-cercle-des-loups.vignette.webp",
   "titre": "saphir partie 1 episode 1 le cercle des loups",
   "short": false,
   "youtube": null
@@ -10254,7 +10718,7 @@
  "saphir-partie-1-episode-2-le-milieu-du-cercle": {
   "fichier": "saphir/eleveai-saphir-partie-1-episode-2-le-milieu-du-cercle.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "saphir/eleveai-saphir-partie-1-episode-2-le-milieu-du-cercle.vignette.webp",
   "titre": "saphir partie 1 episode 2 le milieu du cercle",
   "short": false,
   "youtube": null
@@ -10262,7 +10726,7 @@
  "saphir-partie-1-episode-2-le-milieu-du-cercle-brouillon": {
   "fichier": "saphir/eleveai-saphir-partie-1-episode-2-le-milieu-du-cercle-brouillon.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "saphir/eleveai-saphir-partie-1-episode-2-le-milieu-du-cercle-brouillon.vignette.webp",
   "titre": "saphir partie 1 episode 2 le milieu du cercle brouillon",
   "short": false,
   "youtube": null
@@ -10270,7 +10734,7 @@
  "saphir-short-episode-1-le-cercle-des-loups": {
   "fichier": "saphir/eleveai-saphir-short-episode-1-le-cercle-des-loups.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "saphir/eleveai-saphir-short-episode-1-le-cercle-des-loups.vignette.webp",
   "titre": "saphir short episode 1 le cercle des loups",
   "short": true,
   "youtube": null
@@ -10278,7 +10742,7 @@
  "saphir-short-episode-2-le-milieu-du-cercle": {
   "fichier": "saphir/eleveai-saphir-short-episode-2-le-milieu-du-cercle.mp4",
   "poster": null,
-  "vignette": null,
+  "vignette": "saphir/eleveai-saphir-short-episode-2-le-milieu-du-cercle.vignette.webp",
   "titre": "saphir short episode 2 le milieu du cercle",
   "short": true,
   "youtube": null
