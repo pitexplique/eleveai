@@ -141,7 +141,7 @@ class Repere(NuageTermes):
     du repère, non auditées). pas_n, pas_u : le quadrillage ; etiq_n, etiq_u :
     les nombres écrits sur les axes."""
 
-    def __init__(self, nr, ur, bg, hd, pas_u, etiq_u=(), etiq_n=(), pas_n=1, nom_u="uₙ", fs=28, fs_grad=26):
+    def __init__(self, nr, ur, bg, hd, pas_u, etiq_u=(), etiq_n=(), pas_n=1, nom_u="uₙ", fs=28, fs_grad=26, buff_grad=0.06):
         super().__init__(nr, ur, bg, hd, nom_u=nom_u, fs=fs)
         k = dict(stroke_color=GREY_D, stroke_width=1.2, stroke_opacity=0.8)
         self.grille = VGroup()
@@ -160,7 +160,7 @@ class Repere(NuageTermes):
         for v in etiq_u:
             y = self.G(0, v)[1]
             tr = Line(P(x - 0.07, y), P(x + 0.07, y), stroke_width=2, color=GREY_B)
-            t = Text(fr(v), font_size=fs_grad, color=GREY_A).next_to(tr, LEFT, buff=0.06)
+            t = Text(fr(v), font_size=fs_grad, color=GREY_A).next_to(tr, LEFT, buff=buff_grad)
             t._pas_audit = True
             self.grads.add(VGroup(tr, t))
         self.add_to_back(self.grille)
@@ -362,8 +362,8 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
     # ── 02 : les points (n ; uₙ) ───────────────────────────────────────────
 
     def repere_amel(self):
-        return Repere((0, 9), (0, 135), P(-0.6, -2.2), P(4.9, 2.4), 15, etiq_u=(30, 60, 90, 120),
-                      etiq_n=range(0, 10))
+        return Repere((0, 9), (0, 135), P(-0.45, -2.2), P(5.0, 2.4), 15, etiq_u=(30, 60, 90, 120),
+                      etiq_n=range(0, 10), buff_grad=0.28)
 
     def ecran_points(self):
         self.nouvel_ecran("02-points")
@@ -393,7 +393,7 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
         for n in range(4):
             d = rep.point(n, AMEL[n], r=0.1)
             lb = VGroup(self.t(f"({n} ;", 30, TERME), self.t(f"{AMEL[n]})", 30, TERME)).arrange(RIGHT, buff=0.14)
-            lb.next_to(d, UR, buff=0.04)
+            lb.next_to(d, RIGHT, buff=0.2).shift(UP * 0.12)
             self.suivre(f"{n} et")
             self.play(FadeIn(lb[0], shift=UP * 0.05), run_time=0.15)
             self.suivre(fr(AMEL[n]))
@@ -449,19 +449,19 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
         self.play(FadeIn(f2.parts[2], scale=1.2), run_time=0.25)
         self.au_mot("La raison")
         marches = VGroup(*[rep.marche(k, AMEL[k], AMEL[k + 1]) for k in range(3)])
-        p1 = self.t("+1", 28, RAISON, audit=False).next_to(marches[1][0], UP, buff=0.08)
+        p1 = self.t("+1", 28, RAISON, audit=False).next_to(marches[1][0], UP, buff=0.16).shift(RIGHT * 0.12)
         self.play(*[Create(m) for m in marches], run_time=0.6)
         self.bring_to_front(pts)
         self.play(FadeIn(p1, scale=1.3), run_time=0.2)
         self.suivre("15")
-        m15 = self.t("−15", 32, RAISON).next_to(marches[1][1], RIGHT, buff=0.1)
+        m15 = self.t("−15", 32, RAISON).next_to(marches[1][1], RIGHT, buff=0.2).shift(UP * 0.14)
         rr = self.t("r = −15", 44, RAISON).move_to(P(x, -0.75))
         self.play(FadeIn(m15, scale=1.3), FadeIn(rr, scale=1.3), run_time=0.3)
         self.au_mot("coefficient directeur")
         cdir = self.t("le coefficient directeur", 32, WHITE).move_to(P(x, -1.3))
         self.play(FadeIn(cdir, shift=UP * 0.08), Indicate(f2.parts[2], color=RAISON, scale_factor=1.3), run_time=0.45)
         self.au_mot("Et u indice 0")
-        rond = Circle(radius=0.22, color=TERME, stroke_width=5).move_to(pts[0])
+        rond = Circle(radius=0.16, color=TERME, stroke_width=5).move_to(pts[0])
         self.play(Create(rond), Flash(pts[0], color=TERME, line_length=0.18), run_time=0.4)
         self.suivre("120")
         u0 = formule([("u_{0} =", TERME), ("120", TERME)], 44).move_to(P(x, -2.1))
@@ -492,8 +492,8 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
         l3[3:].shift(RIGHT * 0.24)
         l3.move_to(P(x, 0.85))
         l4 = self.t("Quelle est la raison ?", 38, RAISON).move_to(P(x, 0.3))
-        rep = Repere((0, 5), (0, 22), P(-6.0, -3.05), P(-1.4, -0.85), 2, etiq_u=(4, 8, 12, 16, 20),
-                     etiq_n=range(0, 6))
+        rep = Repere((0, 5), (0, 22), P(-5.95, -2.95), P(-1.4, -0.75), 2, etiq_u=(10, 20),
+                     etiq_n=range(0, 6), fs=32, fs_grad=32, buff_grad=0.1)
         f = lambda n: 3 + 4 * n  # noqa: E731
         p1, p2 = rep.point(1, 7, r=0.1), rep.point(4, 19, r=0.1)
         dr = rep.droite(0, 4.75, f)
@@ -613,7 +613,7 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
     def ecran_nature(self):
         self.nouvel_ecran("06-nature")
         self.titre("Et si les points ne sont pas alignés ?", JAUNE_TITRE, 40, extrait="Et si", y=3.2)
-        rep = Repere((0, 4.5), (0, 17.5), P(-6.1, -1.55), P(-2.9, 2.15), 2, etiq_u=(4, 8, 12, 16),
+        rep = Repere((0, 4.5), (0, 17.5), P(-6.1, -1.15), P(-2.9, 2.4), 2, etiq_u=(4, 8, 12, 16),
                      etiq_n=range(0, 5))
         pts = VGroup(*[rep.point(n, v, r=0.1) for n, v in enumerate(GEO)])
         self.au_mot("montent")
@@ -627,11 +627,11 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
         self.bring_to_front(pts)
         self.au_mot("ce n'est pas")
         cx = self.barrer(VGroup(pts, courbe), buff=0.15)
-        pa = self.t("pas arithmétique", 34, PIEGE).move_to(P(-4.5, -2.32))
+        pa = self.t("pas arithmétique", 36, PIEGE).move_to(P(-4.45, -2.1))
         self.play(Create(cx), FadeIn(pa, shift=UP * 0.08), run_time=0.45)
         self.au_mot("l'allure")
-        g1 = self.t("l'allure d'une suite", 30, RAISON).move_to(P(-4.5, -2.84))
-        g2 = self.t("géométrique", 30, RAISON).move_to(P(-4.5, -3.27))
+        g1 = self.t("l'allure d'une suite", 33, RAISON).move_to(P(-4.45, -2.66))
+        g2 = self.t("géométrique", 33, RAISON).move_to(P(-4.45, -3.22))
         self.play(FadeIn(g1, shift=UP * 0.08), run_time=0.3)
         self.au_mot("géométrique")
         self.play(FadeIn(g2, shift=UP * 0.08), run_time=0.3)
@@ -656,8 +656,8 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
         l2 = formule([("w_{n} =", TERME), ("5", WHITE), ("+ 3n", RAISON)], 52).move_to(P(x, 1.62))
         l3 = self.t("Quel point fait partie de sa", 34, larg=6.3).move_to(P(x, 0.9))
         l4 = self.t("représentation graphique ?", 34, larg=6.3).move_to(P(x, 0.38))
-        rep = Repere((0, 6), (0, 22), P(-6.0, -2.95), P(-1.4, -0.85), 5, etiq_u=(5, 10, 15, 20),
-                     etiq_n=range(0, 7), nom_u="wₙ")
+        rep = Repere((0, 6), (0, 22), P(-5.95, -2.95), P(-1.4, -0.6), 5, etiq_u=(10, 20),
+                     etiq_n=range(0, 7), nom_u="wₙ", fs=32, fs_grad=32, buff_grad=0.1)
 
         def e1():
             self.au_mot("La suite w")
@@ -743,11 +743,12 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
         self.play(FadeIn(l5, shift=UP * 0.08), run_time=0.3)
         self.au_mot("quand on avance")
         l6 = self.t("quand on avance d'un rang", 34).move_to(P(xr, -1.6))
-        rang = self.t("un rang", 28, RAISON).next_to(m[0], DOWN, buff=0.2).shift(RIGHT * 0.35)
+        rang = self.t("un rang", 30, RAISON).next_to(m[0], DOWN, buff=0.28).shift(RIGHT * 0.55)
+        fond = BackgroundRectangle(rang, fill_opacity=0.92, buff=0.07)
         self.play(FadeIn(l6, shift=UP * 0.08), Create(m[0]), run_time=0.35)
         self.bring_to_front(pts)
         self.au_mot("d'un rang")
-        self.play(FadeIn(rang, scale=1.3), Indicate(m, color=RAISON), run_time=0.4)
+        self.play(FadeIn(fond), FadeIn(rang, scale=1.3), Indicate(m, color=RAISON), run_time=0.4)
         self.attendre_voix(marge=0.6)
 
     # ── 09 : le défi ───────────────────────────────────────────────────────
@@ -760,7 +761,7 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
         l1b = self.t("arithmétique sont sur", 36).move_to(P(x, 1.95))
         l2 = self.t("la droite d'équation", 36).move_to(P(x, 1.4))
         eq = formule([("y =", GRIS_DROITE), ("30", WHITE), ("− 2x", RAISON)], 56).move_to(P(x, 0.62))
-        rep = Repere((0, 10), (0, 32), P(1.65, -1.75), P(5.2, 2.3), 2, etiq_u=(10, 20, 30), etiq_n=(0, 2, 4, 6, 8, 10))
+        rep = Repere((0, 10), (0, 32), P(1.75, -1.75), P(5.2, 2.3), 2, etiq_u=(10, 20, 30), etiq_n=(0, 2, 4, 6, 8, 10), buff_grad=0.28)
         dr = rep.droite(0, 10, lambda n: 30 - 2 * n)
         self.au_mot("Les points")
         self.play(FadeIn(l1, shift=UP * 0.08), *rep.anims(), run_time=0.4)
@@ -802,18 +803,18 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
             return v, qm
 
         self.au_mot("L'ordonnée")
-        rond = Circle(radius=0.2, color=JUSTE, stroke_width=5).move_to(pts[0])
+        rond = Circle(radius=0.15, color=JUSTE, stroke_width=5).move_to(pts[0])
         self.play(Create(rond), Flash(pts[0], color=JUSTE, line_length=0.15), run_time=0.4)
         self.suivre("30")
         v, qm = remplacer(0, [("30", JUSTE, None)])
         self.play(ReplacementTransform(qm, v), run_time=0.3)
         self.au_mot("coefficient directeur")
         m = rep.marche(3, 24, 22, largeur=6)
-        p1 = self.t("+1", 30, RAISON, audit=False).next_to(m[0], UP, buff=0.08)
+        p1 = self.t("+1", 30, RAISON, audit=False).next_to(m[0], UP, buff=0.2)
         self.play(Create(m), FadeIn(p1), run_time=0.45)
         self.bring_to_front(pts)
         self.suivre("2")
-        m2 = self.t("−2", 32, RAISON).next_to(m[1], RIGHT, buff=0.3).shift(UP * 0.2)
+        m2 = self.t("−2", 32, RAISON).next_to(m[1], RIGHT, buff=0.25)
         v, qm = remplacer(1, [("−2", JUSTE, None)])
         self.play(ReplacementTransform(qm, v), FadeIn(m2, scale=1.3), run_time=0.3)
         self.au_mot("décroissante")
@@ -822,7 +823,7 @@ class SuiteArithGraphique1re(OutilsGraphique, PaysageSuites):
         self.play(ReplacementTransform(qm, v), run_time=0.35)
         self.au_mot("30 moins")
         nm, qm = asks[3]
-        v = self.morceaux([("30 −", WHITE, None), ("2 ×", WHITE, None), ("6", WHITE, None), ("= 18", JUSTE, None)], 38, buff=0.2)
+        v = self.morceaux([("30 −", WHITE, None), ("2 ×", WHITE, None), ("6", WHITE, None), ("= 18", JUSTE, None)], 38, buff=0.28)
         v.next_to(nm, RIGHT, buff=0.25)
         self.play(ReplacementTransform(qm, v[0]), run_time=0.25)
         self.suivre("2 fois")

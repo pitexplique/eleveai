@@ -196,11 +196,11 @@ class SuiteArithGraphiqueShort(OutilsGraphique, ShortSuites):
         self.au_mot("Et toi")
         et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, 3.45))
         self.play(FadeIn(et, shift=DOWN * 0.1), run_time=0.35)
-        X0, Y0, KU = -1.45, 1.2, 0.105
+        X0, Y0, KU = -1.45, 1.4, 0.1
         XN = {0: -1.45, 1: -0.9, 2: -0.35, 10: 1.3}
         k = dict(buff=0, stroke_width=2.5, color=GREY_B, tip_length=0.15)
         ax_n = Arrow(P(X0, Y0), P(1.72, Y0), **k)
-        ax_u = Arrow(P(X0, Y0), P(X0, 2.6), **k)
+        ax_u = Arrow(P(X0, Y0), P(X0, 2.7), **k)
         coupe = VGroup(*[Line(P(0.3 + dx, Y0 - 0.1), P(0.4 + dx, Y0 + 0.1), stroke_width=4, color=GREY_B)
                          for dx in (0, 0.1)])
         ln = self.t("n", 28, GREY_A).next_to(ax_n, RIGHT, buff=0.06)
@@ -219,11 +219,11 @@ class SuiteArithGraphiqueShort(OutilsGraphique, ShortSuites):
             pts.add(d)
         dr = DashedLine(P(XN[0], Y0 + KU * 4), P(0.1, Y0 + KU * (4 + 3 * (0.1 - XN[0]) / 0.55)), color=GRIS_DROITE,
                         stroke_width=3)
-        pp = self.t("…", 40, GREY_A).move_to(P(0.55, 2.1))
+        pp = self.t("…", 40, GREY_A).move_to(P(0.55, 2.2))
         self.play(Create(dr), FadeIn(pp), run_time=0.3)
         self.bring_to_front(pts)
-        question = self.paragraphe(["Quelle est", "l'ordonnée", "du point", ("d'abscisse 10 ?", RAISON)], 40,
-                                   buff=0.12, y=-0.55)
+        question = self.paragraphe(["Quelle est", "l'ordonnée", "du point", ("d'abscisse 10 ?", RAISON)], 38,
+                                   buff=0.1, y=-0.25)
         for ligne, ex in zip(question, ("Quelle", "l'ordonnée", "du point", "abscisse 10")):
             if ex == "abscisse 10":
                 self.suivre("10")
@@ -232,11 +232,11 @@ class SuiteArithGraphiqueShort(OutilsGraphique, ShortSuites):
             anims = [FadeIn(ligne, shift=UP * 0.1)]
             if ex == "abscisse 10":
                 g10 = self.t("10", 24, RAISON).move_to(P(XN[10], Y0 - 0.22))
-                vl = DashedLine(P(XN[10], Y0), P(XN[10], 2.12), color=RAISON, stroke_width=3)
-                qm = self.t("?", 44, RAISON).move_to(P(XN[10], 2.35))
+                vl = DashedLine(P(XN[10], Y0), P(XN[10], 2.25), color=RAISON, stroke_width=3)
+                qm = self.t("?", 44, RAISON).move_to(P(XN[10], 2.5))
                 anims += [FadeIn(g10), Create(vl), FadeIn(qm, scale=1.4)]
             self.play(*anims, run_time=0.3)
-        self.appel_commentaire(-2.3)
+        self.appel_commentaire(-2.28)
         self.attendre_voix(marge=0.6)
 
         # ── 05 : la fin ──
