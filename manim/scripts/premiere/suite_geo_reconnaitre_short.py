@@ -36,6 +36,29 @@ XA, YA, ECH, RAP = -1.7, -0.2, 0.125, 0.62    # le coin bas-gauche des photos ; 
 Y_CASES = -1.12
 
 
+def liste_aeree(valeurs, fs=32, color=WHITE, avant=0.05, apres=None):
+    """« 3 ; 7 ; 11 ; 15 » comme liste_nombres (g.nombres, g.seps), mais le « ; »
+    collé au nombre d'avant et une vraie espace APRÈS lui (relecture du 11/11)."""
+    apres = 0.3 * fs / 34 if apres is None else apres
+    g = VGroup()
+    g.nombres, g.seps = [], []
+    prec = None
+    for k, v in enumerate(valeurs):
+        n = Text(v, font_size=fs, color=color)
+        if prec is not None:
+            n.next_to(prec, RIGHT, buff=apres).align_to(g.nombres[0], DOWN)
+        g.add(n)
+        g.nombres.append(n)
+        prec = n
+        if k < len(valeurs) - 1:
+            s = Text(";", font_size=fs, color=GREY_B).next_to(n, RIGHT, buff=avant)
+            s.align_to(n, DOWN)
+            g.add(s)
+            g.seps.append(s)
+            prec = s
+    return g
+
+
 def photo(cm, contour=False):
     """La photo (un paysage : ciel, montagne, soleil), de largeur cm, posée sur
     son coin bas-gauche (XA, YA). contour=True : seulement le cadre, en gris."""
@@ -135,7 +158,7 @@ class SuiteGeoReconnaitreShort(ShortSuites):
         fois = VGroup(self.t("largeur", 42, WHITE), self.t("× 1,5", 46, RAISON)).arrange(RIGHT, buff=0.2)
         fois.move_to(P(0, -2.1))
         self.play(FadeIn(fois, scale=1.2), run_time=0.3)
-        lg = LigneTermes([str(v) for v in CM], centre=P(0, Y_CASES), pas=1.05, largeur=0.86, hauteur=0.75, fs=40)
+        lg = LigneTermes([str(v) for v in CM], centre=P(0, Y_CASES), pas=1.08, largeur=0.8, hauteur=0.75, fs=38)
         anciens = VGroup()
         lien = None
         for k, v in enumerate(CM):
@@ -167,7 +190,7 @@ class SuiteGeoReconnaitreShort(ShortSuites):
         self.play(*self.allumer_cases(lg, (0, 1), RAISON), run_time=0.2)
         c = [self.t(x, 48, col) for x, col in (("12", WHITE), ("÷", WHITE), ("8", WHITE), ("=", WHITE),
                                                   ("1,5", RAISON))]
-        calc = VGroup(*c).arrange(RIGHT, buff=0.22).move_to(P(0, 0.2))
+        calc = VGroup(*c).arrange(RIGHT, buff=0.3).move_to(P(0, 0.2))
         self.play(FadeIn(c[0], shift=UP * 0.1), run_time=0.2)
         self.au_mot("divisé")
         self.play(FadeIn(c[1]), run_time=0.15)
@@ -176,7 +199,7 @@ class SuiteGeoReconnaitreShort(ShortSuites):
         self.suivre("1,5")
         self.play(FadeIn(VGroup(*c[3:]), scale=1.3), run_time=0.25)
         self.au_mot("de même")
-        sauts = [lg.saut(k, "×1,5", fs=27, creux=0.2) for k in range(3)]
+        sauts = [lg.saut(k, "× 1,5", fs=25, creux=0.2) for k in range(3)]
         for x in sauts:
             x[1]._pas_audit = True  # « et de même ensuite » : 1,5 déjà dit
         self.play(*self.allumer_cases(lg, (0, 1), TERME, largeur=3), *[Create(s[0]) for s in sauts], run_time=0.3)
@@ -194,7 +217,7 @@ class SuiteGeoReconnaitreShort(ShortSuites):
         self.attendre_voix(marge=0.3)
 
         # ── 03 : question-pause → C ──
-        listes = [liste_nombres([str(v) for v in l], self.fs_liste, buff=0.08) for l in QS]  # « ; » aérés
+        listes = [liste_aeree([str(v) for v in l], 36, apres=0.2) for l in QS]  # « ; » puis une espace
         q = self.poser_question("03-question",
                                 [(self.t("Laquelle multiplie", 40), "Laquelle"), (self.t("toujours par", 40), "toujours"),
                                  (self.t("le même nombre ?", 40), "le même")],
@@ -203,13 +226,13 @@ class SuiteGeoReconnaitreShort(ShortSuites):
         ok = self.q_reponse(q, 2)
         self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[1]), run_time=0.25)
         self.play(VGroup(q.cartes[2], ok).animate.move_to(q.cartes[0].get_center()), run_time=0.35)
-        lr = LigneTermes([str(v) for v in QS[2]], centre=P(0, q.cartes[2].get_bottom()[1] - 0.6), pas=1.05,
-                         largeur=0.86, hauteur=0.7, fs=36)
+        lr = LigneTermes([str(v) for v in QS[2]], centre=P(0, q.cartes[2].get_bottom()[1] - 0.6), pas=1.08,
+                         largeur=0.86, hauteur=0.7, fs=30)
         for c in lr.cases:
             c[1]._pas_audit = True  # les termes de C, déjà lus dans la question
         self.play(LaggedStart(*[FadeIn(c, scale=0.8) for c in lr.cases], lag_ratio=0.15), run_time=0.4)
         self.au_mot("3")
-        ec = [lr.saut(k, "×3", fs=32, creux=0.2) for k in range(3)]
+        ec = [lr.saut(k, "× 3", fs=30, creux=0.2) for k in range(3)]
         self.play(*[Create(e[0]) for e in ec], *[FadeIn(e[1], scale=1.3) for e in ec], run_time=0.3)
         self.au_mot("3", n=2)
         r3 = self.egalite("q", "3", 48, JUSTE).move_to(P(0, -2.45))
@@ -223,7 +246,7 @@ class SuiteGeoReconnaitreShort(ShortSuites):
         self.au_mot("Et toi")
         et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, 3.45))
         self.play(FadeIn(et, shift=DOWN * 0.1), run_time=0.35)
-        lc = LigneTermes(["8", "12", "18", "27", "?"], pas=0.85, largeur=0.74, hauteur=0.66, fs=32, centre=P(0, 2.0))
+        lc = LigneTermes(["8", "12", "18", "27", "?"], pas=0.86, largeur=0.64, hauteur=0.66, fs=30, centre=P(0, 2.0))
         for k in range(4):
             self.suivre(str(CM[k]))
             self.montrer_case(lc, k, run_time=0.25)

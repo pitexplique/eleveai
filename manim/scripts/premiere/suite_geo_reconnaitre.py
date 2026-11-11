@@ -60,6 +60,29 @@ assert all(b / a == 3 for a, b in zip(DEFI, DEFI[1:]))                      # q 
 assert 45 / 5 == 9 and 3 ** 2 == 9                                          # q² = 9, q = 3
 
 PEAU, CHEVEUX, BLOUSE = "#a0673d", "#1f1300", "#F1F5F9"
+
+
+def liste_aeree(valeurs, fs=32, color=WHITE, avant=0.05, apres=None):
+    """« 3 ; 7 ; 11 ; 15 » comme liste_nombres (g.nombres, g.seps), mais le « ; »
+    collé au nombre d'avant et une vraie espace APRÈS lui (relecture du 11/11)."""
+    apres = 0.3 * fs / 34 if apres is None else apres
+    g = VGroup()
+    g.nombres, g.seps = [], []
+    prec = None
+    for k, v in enumerate(valeurs):
+        n = Text(v, font_size=fs, color=color)
+        if prec is not None:
+            n.next_to(prec, RIGHT, buff=apres).align_to(g.nombres[0], DOWN)
+        g.add(n)
+        g.nombres.append(n)
+        prec = n
+        if k < len(valeurs) - 1:
+            s = Text(";", font_size=fs, color=GREY_B).next_to(n, RIGHT, buff=avant)
+            s.align_to(n, DOWN)
+            g.add(s)
+            g.seps.append(s)
+            prec = s
+    return g
 GELOSE, MEDOC = "#1e293b", "#60A5FA"
 
 
@@ -168,11 +191,12 @@ def tube(hauteur=3.4, largeur=0.9):
 class OutilsEp09:
     """Les petits outils de l'épisode (pas dans le module commun)."""
 
-    def calcul(self, morceaux, y, x=-6.2, fs=38, avec=(), centre=None, buff=0.18):
+    def calcul(self, morceaux, y, x=-6.2, fs=38, avec=(), centre=None, buff=None):
         """Un calcul écrit morceau par morceau : [(texte, couleur, extrait), …] ;
         chaque morceau quand la voix dit son extrait (None : avec le précédent).
         centre : x du centre (sinon aligné à gauche sur x)."""
         ts = [self.t(m, fs, c) for m, c, _ in morceaux]
+        buff = 0.3 * fs / 38 if buff is None else buff  # une espace nette autour de ÷, ×, =
         g = VGroup(*ts).arrange(RIGHT, buff=buff).move_to(P(0 if centre is None else centre, y))
         if centre is None:
             g.align_to(P(x, 0), LEFT)
@@ -368,7 +392,7 @@ class SuiteGeoReconnaitre1re(AuditMilliers, OutilsEp09, PaysageSuites):
     # ── 04 : question-pause n° 1 : laquelle est géométrique ? → B ──────────
 
     def ecran_question1(self):
-        listes = [liste_nombres([str(v) for v in l], 34) for l in Q1]
+        listes = [liste_aeree([str(v) for v in l], 34) for l in Q1]
         q = self.poser_question("04-question",
                                 [(self.t("Laquelle de ces listes est géométrique ?", 38), "Laquelle")],
                                 listes, 1)
@@ -573,7 +597,7 @@ class SuiteGeoReconnaitre1re(AuditMilliers, OutilsEp09, PaysageSuites):
             self.play(*self.allumer_cases(lg1, (k, k + 1), TERME, largeur=3), run_time=0.15)
         self.au_mot("toujours")
         self.suivre("3")
-        egs = [self.t("= 3", 32, RAISON).next_to(d, RIGHT, buff=0.2) for d in divs]
+        egs = [self.t("= 3", 32, RAISON).next_to(d, RIGHT, buff=0.25) for d in divs]
         x3 = [lg1.saut(k, "× 3", fs=30) for k in range(3)]
         self.play(*[FadeIn(e, scale=1.3) for e in egs], *[Create(s[0]) for s in x3], run_time=0.35)
         self.play(*[FadeIn(s[1], scale=1.4) for s in x3], run_time=0.2)
@@ -618,7 +642,7 @@ class SuiteGeoReconnaitre1re(AuditMilliers, OutilsEp09, PaysageSuites):
               self.t("par le même nombre d'un terme au suivant.", fs)]
         p2 = [VGroup(self.t("Ce nombre, c'est la", fs), self.t("raison q.", fs, RAISON)).arrange(RIGHT, buff=0.2)]
         p3 = [self.t("Pour la trouver :", fs),
-              VGroup(self.t("un terme ÷ celui d'avant", fs, JUSTE), self.t("(q = uₙ₊₁ ÷ uₙ)", 32, GREY_A)).arrange(
+              VGroup(self.t("un terme ÷ celui d'avant", fs, JUSTE), self.t("(q = uₙ₊₁ ÷ uₙ)", fs, GREY_A)).arrange(
                   RIGHT, buff=0.35)]
         self.finale([(p1, ["géométrique", "le même nombre"]), (p2, ["Ce nombre, c'est"]),
                      (p3, ["Pour la trouver", "un terme divisé"])], cle="09-finale")
