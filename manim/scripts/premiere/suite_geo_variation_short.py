@@ -195,7 +195,7 @@ class SuiteGeoVariationShort(AuditMilliers, OutilsEp12, ShortSuites):
         self.au_mot("Et toi")
         et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, 3.45))
         self.play(FadeIn(et, shift=DOWN * 0.1), run_time=0.35)
-        lc = LigneTermes(["200 mg", "?"], xs=(-0.9, 1.2), centre=P(0, 2.1), largeur=1.6, hauteur=0.85, fs=40)
+        lc = LigneTermes(["200 mg", "?"], xs=(-1.0, 1.28), centre=P(0, 2.1), largeur=1.5, hauteur=0.85, fs=40)
         self.suivre("200")
         self.montrer_case(lc, 0)
         dep = self.t("au départ", 28, GREY_A).next_to(lc.cases[0], DOWN, buff=0.15)

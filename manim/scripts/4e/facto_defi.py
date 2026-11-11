@@ -121,6 +121,35 @@ class FactoDefi4e(PaysageRel):
         self.dire_eq(e, phrase, n)
         return e
 
+    def finale_colonne(self, textes, fs=38, figure=None):
+        """Celle du module commun, mais un interligne RÉGULIER : arrange(DOWN) collait les lignes
+        sans jambage (« …raconte souvent ») à la suivante. Chaque ligne commence ici par une lettre
+        haute : leurs hauts, posés à pas fixe, donnent des lignes de base régulières. La coche est
+        centrée sur la première ligne du point."""
+        tit = self.t("Ce que tu as appris", 46, JAUNE_TITRE).to_edge(UP, buff=0.45)
+        if figure is not None:
+            self.cadrer(figure, droite=self.XL - 0.3, haut=tit.get_bottom()[1] - 0.25)
+        self.play(Write(tit), run_time=0.7)
+        lignes = VGroup()
+        for morceaux in textes:
+            ts = [self.t(x, fs) for x in morceaux]
+            pas = max(t.height for t in ts) + 0.1
+            for k, t in enumerate(ts):
+                t.align_to(P(0, -k * pas), UP).align_to(P(0, 0), LEFT)
+            bloc = VGroup(*ts)
+            c = self.coche()
+            c.next_to(ts[0], LEFT, buff=0.25).set_y(ts[0].get_center()[1])
+            lignes.add(VGroup(c, bloc))
+        lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.42)
+        xl = self.XL if figure is None else min(self.XL, figure.get_right()[0] + 0.45)
+        largeur = self.BORD_X - 0.05 - xl
+        if lignes.width > largeur:
+            lignes.scale_to_fit_width(largeur)
+        if lignes.height > 4.3:
+            lignes.scale_to_fit_height(4.3)
+        lignes.align_to(P(xl, 0), LEFT).align_to(P(0, 2.45), UP)
+        return lignes
+
     # ── 00 : page de garde ──────────────────────────────────────────────────
     def page_de_garde(self):
         self.clear()
@@ -330,7 +359,7 @@ class FactoDefi4e(PaysageRel):
         self.play(quatre.animate.set_color(FACTEUR), run_time=0.2)
         donc = self.lg("Donc", 0, 0, 44, maxw=2)
         r = D("−4(x + 5)", 66, VERT_OK)
-        VGroup(donc, r).arrange(RIGHT, buff=0.4).move_to(P(-0.6, -0.55))
+        VGroup(donc, r).arrange(RIGHT, buff=0.3 + 0.15 + 0.14).move_to(P(-0.6, -0.55))  # 0,3 entre « Donc » et le cadre
         self.dit(donc, "Donc")
         self.dire_eq(r, "moins 4 fois, entre parenthèses, x plus 5.")
         VGroup(r.atomes[0], r.atomes[1]).set_color(FACTEUR)
@@ -425,7 +454,7 @@ class FactoDefi4e(PaysageRel):
         self.play(b.atomes[2].animate.set_color(FACTEUR), t2.atomes[0].animate.set_color(FACTEUR), run_time=0.2)
         donc = self.lg("Donc", 0, 0, 46, maxw=2)
         r = D("9(x + 5)", 70, VERT_OK)
-        VGroup(donc, r).arrange(RIGHT, buff=0.4).move_to(P(-0.4, -0.85))
+        VGroup(donc, r).arrange(RIGHT, buff=0.3 + 0.16 + 0.14).move_to(P(-0.4, -0.85))  # 0,3 entre « Donc » et le cadre
         self.dit(donc, "Donc")
         self.dire_eq(r, "9 fois, entre parenthèses, x plus 5 :")
         r.atomes[0].set_color(FACTEUR)

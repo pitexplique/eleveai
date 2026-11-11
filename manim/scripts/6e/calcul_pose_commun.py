@@ -25,10 +25,11 @@ class Pose(_Pose):
         c = super().colonne(r, i0, i1)
         return c.set_stroke(COUL_RANG_E.get(r, WHITE), 5)
 
-    def entete(self, r, fs=30):
-        """L'initiale du rang (u, d, c, m) au-dessus de la colonne."""
+    def entete(self, r, fs=30, haut=0.95):
+        """L'initiale du rang (u, d, c, m) au-dessus de la colonne. haut=1.3 en soustraction :
+        les chiffres cassés s'écrivent entre l'initiale et le chiffre."""
         t = Text(NOM_RANG[r][0], font_size=fs, color=COUL_RANG_E[r], weight=BOLD)
-        return hors_audit(t).move_to(self.pt(r, 0) + UP * self.hl * 0.95)
+        return hors_audit(t).move_to(self.pt(r, 0) + UP * self.hl * haut)
 
     def place(self, s, r, i, couleur=WHITE, fs=None):
         """Un chiffre posé à la main (mauvaise pose, chiffre cassé), hors audit."""
