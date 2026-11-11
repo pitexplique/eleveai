@@ -97,6 +97,26 @@ def carte(code: str, mois: int, de: str = "") -> Image.Image:
     return im
 
 
+def verso(prix: str, wero: str) -> Image.Image:
+    """Le dos de la carte (11/11/2026) : le prix et comment payer, Wero ou Ulule. Identique pour toutes."""
+    im = Image.new("RGB", (L, H), VERT_CLAIR)
+    d = ImageDraw.Draw(im)
+    for i, (cx, cy, r) in enumerate([(90, 90, 40), (1660, 80, 30), (1650, 1150, 40), (80, 1160, 26)]):
+        d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=JAUNE if i % 2 == 0 else (167, 243, 208))
+    centre(d, 0, L, 90, "Offrez les maths en dessin animé", police("segoeuib.ttf", 62), VERT_FONCE)
+    d.rounded_rectangle([L // 2 - 330, 200, L // 2 + 330, 470], radius=60, fill=JAUNE)
+    centre(d, 0, L, 197, f"{prix} €", police("segoeuib.ttf", 190), ENCRE)
+    centre(d, 0, L, 500, "= 1 an pour un enfant", police("segoeuib.ttf", 60), ENCRE)
+    d.rounded_rectangle([140, 620, L - 140, 1080], radius=40, fill="white", outline=VERT, width=6)
+    centre(d, 0, L, 650, "Pour payer", police("segoeuib.ttf", 44), VERT)
+    centre(d, 0, L, 715, "avec l'application Wero", police("segoeui.ttf", 50), GRIS)
+    centre(d, 0, L, 775, wero, police("segoeuib.ttf", 96), VERT_FONCE)
+    centre(d, 0, L, 905, "ou sur Ulule, campagne « Ti Margo »", police("segoeui.ttf", 50), GRIS)
+    centre(d, 0, L, 975, "ulule.com", police("segoeuib.ttf", 60), VERT_FONCE)
+    centre(d, 0, L, 1120, "Merci de soutenir le projet !  Frédéric et Ti Margo", police("segoeui.ttf", 42), GRIS)
+    return im
+
+
 def planches(cartes: list[Image.Image]) -> list[Image.Image]:
     """4 cartes par feuille A4 paysage, avec traits de coupe (11/11/2026, cartes à découper).
 
@@ -130,6 +150,9 @@ def main() -> None:
     p.add_argument("--de", default="", help="« De la part de » imprimé (sinon une ligne à remplir)")
     p.add_argument("--csv", help="le CSV d'un lot de scripts/codes-ulule.mjs")
     p.add_argument("--sortie", default=str(SORTIE))
+    p.add_argument("--verso", action="store_true", help="avec --planche : ajoute le dos (prix, Wero, Ulule)")
+    p.add_argument("--prix", default="20")
+    p.add_argument("--wero", default="+262 262 74 29 58")
     p.add_argument("--planche", action="store_true", help="avec --csv : aussi des A4 de 4 cartes à découper")
     a = p.parse_args()
 
@@ -150,6 +173,9 @@ def main() -> None:
         print(f"{len(cartes)} cartes : {sortie}\n  {pdf}")
         if a.planche:
             feuilles = planches(cartes)
+            if a.verso:  # recto verso : chaque feuille suivie de son dos (même place, dos identiques)
+                dos = planches([verso(a.prix, a.wero)] * 4)[0]
+                feuilles = [f for r in feuilles for f in (r, dos)]
             pdf4 = sortie / f"planches-{Path(a.csv).stem}.pdf"
             feuilles[0].save(pdf4, save_all=True, append_images=feuilles[1:], resolution=300)
             feuilles[0].save(sortie / f"planche-1-{Path(a.csv).stem}.png", dpi=(300, 300))
