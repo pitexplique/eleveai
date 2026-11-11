@@ -76,6 +76,19 @@ class SuiteGeoTermeRangShort(OutilsEp12, ShortSuites):
         self.play(a.animate.move_to(c), run_time=0.15)  # la feuille pliée revient au milieu
         return a
 
+    def entete(self, titre, extrait=None, fs=44):
+        """L'en-tête du module commun, mais l'échelle (un peu plus petite) est
+        posée SOUS le titre avec un vrai écart : elle ne touche plus son bas."""
+        if getattr(self, "_margo", None) is None:
+            self._margo = self.margo_bas()
+        self.titre_s = self.t(titre, fs, JAUNE_TITRE).move_to(P(0, 3.55))
+        self.badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.6)
+        self.badge.next_to(self.titre_s, DOWN, buff=0.2)
+        self.add(self.badge)
+        self.au_mot(extrait or titre)
+        self.play(Write(self.titre_s), run_time=0.5)
+        return self.titre_s, self.badge
+
     def construct(self):
         # ── 00 : la garde : titre, échelle (70 %), le pari ; la feuille se plie ──
         self.dire("00-garde")
@@ -100,7 +113,7 @@ class SuiteGeoTermeRangShort(OutilsEp12, ShortSuites):
         self.nouvel_ecran("01-situation", garder=(self.badge, self.titre_s))
         table = Line(P(-2.0, Y_PILE), P(2.0, Y_PILE), stroke_color="#64748B", stroke_width=5)
         p0 = pile(0)
-        lab_f = self.t("une feuille de papier", 36, GREY_A).move_to(P(0, 2.35))
+        lab_f = self.t("une feuille de papier", 36, GREY_A).next_to(self.badge, DOWN, buff=0.22)
         self.au_mot("feuille")
         self.play(FadeIn(table), FadeIn(p0, shift=DOWN * 0.2), FadeIn(lab_f, shift=UP * 0.1), run_time=0.4)
         self.suivre("0,1")

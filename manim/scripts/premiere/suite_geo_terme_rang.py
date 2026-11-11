@@ -255,25 +255,25 @@ class SuiteGeoTermeRang1re(AuditMilliers, OutilsEp12, PaysageSuites):
         sous = self.t("calculer un terme lointain", 40, TERME).move_to(P(0, y))
         self.au_mot("calculer")
         self.play(FadeIn(sous, shift=UP * 0.1), run_time=0.35)
-        y -= 0.85
+        y -= 0.72
         l2, (a, b) = self.ligne([("Comment sauter directement", WHITE), ("au 12e mois,", WHITE)], 40)
         l2.move_to(P(0, y))
         self.au_mot("Comment")
         self.play(FadeIn(a, shift=UP * 0.1), run_time=0.3)
         self.au_mot("12e")
         self.play(FadeIn(b, shift=UP * 0.1), run_time=0.3)
-        y -= 0.66
+        y -= 0.6
         l3 = self.t("sans tout calculer ?", 40).move_to(P(0, y))
-        ident = self.t(self.identite, 26, GREY_A).move_to(P(0, y - 0.56))
-        rg = RangeeG(13, -5.0, 3.8, -1.55, larges={0: 0.62, 12: 0.62}, larg=0.44, haut=0.52, creux=0.15, sw=3)
-        n0 = self.nom_case(rg, 0, "u₀", 28)
+        ident = self.t(self.identite, 26, GREY_A).move_to(P(0, y - 0.62))
+        rg = RangeeG(13, -5.0, 3.8, -1.02, larges={0: 0.62, 12: 0.62}, larg=0.44, haut=0.46, creux=0.15, sw=3)
+        n0 = self.nom_case(rg, 0, "u₀", 32)
         self.au_mot("sans")
         self.play(FadeIn(l3, shift=UP * 0.1), FadeIn(ident),
                   LaggedStart(*[FadeIn(c, scale=0.8) for c in rg.cases], lag_ratio=0.05),
                   *[Create(s) for s in rg.sauts], FadeIn(n0), run_time=0.35)
         self.au_mot("tout")
         self.allumer(rg.sauts, run_time=0.7)
-        grand = self.grand_saut(rg, 0, 12, creux=0.55)
+        grand = self.grand_saut(rg, 0, 12, creux=0.3)
         q = Text("?", font_size=36, color=RAISON).move_to(rg.cases[12])
         self.play(Create(grand), FadeIn(q, scale=1.6), rg.cases[12].animate.set_stroke(RAISON, width=6),
                   rg.sauts.animate.set_color(GRIS_SAUT), run_time=0.5)
@@ -450,7 +450,7 @@ class SuiteGeoTermeRang1re(AuditMilliers, OutilsEp12, PaysageSuites):
 
     # ── la correction d'une question-pause : la bonne monte, la place se libère ──
 
-    def degager(self, q, bonne, ok, y=2.3, avec=()):
+    def degager(self, q, bonne, ok, y=2.12, avec=()):
         """Les deux autres boutons et l'énoncé s'en vont ; la bonne réponse
         (avec sa coche) monte sous « Question ! » : la correction a la place."""
         autres = [q.cartes[j] for j in range(3) if j != bonne]
@@ -463,7 +463,7 @@ class SuiteGeoTermeRang1re(AuditMilliers, OutilsEp12, PaysageSuites):
         les animations qui la montrent."""
         rg = Rangee(n, x0, x1, y, larg=0.62, haut=0.62, creux=0.22, sw=4)
         rg.sauts.set_color(GRIS_SAUT)
-        a, b = self.nom_case(rg, 0, noms[0], 30), self.nom_case(rg, n - 1, noms[1], 30)
+        a, b = self.nom_case(rg, 0, noms[0], 38), self.nom_case(rg, n - 1, noms[1], 38)
         return rg, [LaggedStart(*[FadeIn(c, scale=0.8) for c in rg.cases], lag_ratio=0.08),
                     *[Create(s) for s in rg.sauts], FadeIn(a), FadeIn(b)]
 
@@ -474,7 +474,8 @@ class SuiteGeoTermeRang1re(AuditMilliers, OutilsEp12, PaysageSuites):
                                 [(self.t("Une suite géométrique commence à v₀ = 5,", 38), "5"),
                                  (self.t("et sa raison est 3.", 38), "3"),
                                  (self.t("Combien vaut v₄ ?", 38), "Combien")],
-                                ["60", "135", "405"], 2)
+                                [self.t(c, 52) for c in ("60", "135", "405")], 2, en_ligne=True, largeur=3.3,
+                                fs=52)
         self.dire("04b-reponse")
         ok = self.q_reponse(q, 2)
         rg, anims = self.rangee_question(5, ("v₀", "v₄"), 0.2)
@@ -494,7 +495,7 @@ class SuiteGeoTermeRang1re(AuditMilliers, OutilsEp12, PaysageSuites):
     def bloc_formule(self, y, debut, lab, cond, formule, ex_cond, ex_lab, n_formule, lab_apres=False):
         rg = Rangee(5, -6.1, -2.7, y - 0.25, larg=0.6, haut=0.6, creux=0.2)
         rg.sauts.set_color(GRIS_SAUT)
-        na, nn = self.nom_case(rg, 0, debut, 32), self.nom_case(rg, 4, "uₙ", 32, TERME)
+        na, nn = self.nom_case(rg, 0, debut, 38), self.nom_case(rg, 4, "uₙ", 38, TERME)
         pts = Text("…", font_size=34, color=GREY_A).move_to(rg.cases[2])
         lab_t = self.t(lab, 36, RAISON).move_to(P(-4.4, y + 0.7))
         c = self.t(cond, 38, GREY_A)
@@ -536,7 +537,8 @@ class SuiteGeoTermeRang1re(AuditMilliers, OutilsEp12, PaysageSuites):
                                 [(self.t("Une suite géométrique commence à w₁ = 800,", 38), "800"),
                                  (self.t("et sa raison est 0,5.", 38), "0,5"),
                                  (self.t("Combien vaut w₄ ?", 38), "Combien")],
-                                ["50", "100", "1 600"], 1)
+                                [self.t(c, 52) for c in ("50", "100", "1 600")], 1, en_ligne=True, largeur=3.9,
+                                fs=52)
         self.dire("06b-reponse")
         ok = self.q_reponse(q, 1)
         self.degager(q, 1, ok)
@@ -602,7 +604,7 @@ class SuiteGeoTermeRang1re(AuditMilliers, OutilsEp12, PaysageSuites):
         self.suivre("2")
         self.play(FadeIn(enonce, shift=UP * 0.1), run_time=0.3)
         rg = Rangee(6, -5.0, 3.5, -0.2, larg=1.15, haut=0.8, creux=0.3, sauts=False)
-        noms = {k: self.nom_case(rg, k - 3, u(k, "t"), 34, GREY_A) for k in range(3, 9)}
+        noms = {k: self.nom_case(rg, k - 3, u(k, "t"), 38, GREY_A) for k in range(3, 9)}
         self.au_mot("vérifie")
         self.play(LaggedStart(*[FadeIn(c, scale=0.8) for c in rg.cases], lag_ratio=0.08), run_time=0.4)
         self.suivre("5")
