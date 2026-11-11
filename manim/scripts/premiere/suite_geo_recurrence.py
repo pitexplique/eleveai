@@ -511,7 +511,7 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
 
     SOL, HAUT, R_B = -1.55, 3.3, 0.16                  # le sol, 160 cm à l'écran, le rayon de la balle
     REBONDS = [(-5.0, -3.6), (-3.6, -2.4), (-2.4, -1.4)]
-    XS8 = (0.75, 2.3, 3.85, 5.4)
+    XS8 = (0.7, 2.3, 3.9, 5.5)
 
     def sommet(self, k):
         """Le sommet du rebond k (1, 2, 3) : 75 % de la hauteur précédente."""
@@ -556,7 +556,7 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
         self.au_mot("On note")
         hn = self.paragraphe([("hₙ : la hauteur", TERME), ("après n rebonds", TERME)], 32, buff=0.1, y=2.3)
         hn.move_to(P(3.1, 2.3))
-        lg = LigneTermes(["160", "?", "?", "?"], xs=self.XS8, centre=P(0, 1.0), largeur=1.25, hauteur=0.75, fs=36,
+        lg = LigneTermes(["160", "?", "?", "?"], xs=self.XS8, centre=P(0, 1.0), largeur=1.42, hauteur=0.75, fs=34,
                          noms=[u(k, "h") for k in range(4)], fs_noms=30)
         for k in range(4):
             lg.noms[k].next_to(lg.cases[k][0], UP, buff=0.1)
@@ -589,13 +589,13 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
         self.play(LaggedStart(*[AnimationGroup(Create(s_[0]), FadeIn(s_[1], scale=1.3)) for s_ in sauts],
                               lag_ratio=0.3), run_time=0.6)
         f = self.calcul([("hₙ₊₁", TERME, "h indice n plus 1"), ("=", WHITE, "égale"), ("0,75", RAISON, "0,75"),
-                         ("×", WHITE, "fois"), ("hₙ", TERME, "h indice n")], -0.7, x=1.4, fs=44, buff=0.25)
-        cad = self.encadre(f, JAUNE_TITRE, 0.16)
+                         ("×", WHITE, "fois"), ("hₙ", TERME, "h indice n")], -0.7, x=0.72, fs=44, buff=0.25)
+        cad = self.encadre(f, JAUNE_TITRE, 0.24)
         self.play(Create(cad), run_time=0.3)
         for k, v in zip((1, 2, 3), DEFI[1:]):
             self.au_mot(f"h indice {k} égale")
             self.suivre(fr(v))
-            neuf = self.t(fr(v), 36, WHITE).move_to(lg.cases[k][0])
+            neuf = self.t(fr(v), 34, WHITE).move_to(lg.cases[k][0])
             haut = self.t(fr(v), 28, JUSTE, audit=False).next_to(self.sommet(k), UP, buff=0.12)
             self.play(ReplacementTransform(lg.cases[k][1], neuf), FadeIn(haut, scale=1.3),
                       Flash(self.sommet(k), color=JUSTE, line_length=0.12, num_lines=8), run_time=0.4)
