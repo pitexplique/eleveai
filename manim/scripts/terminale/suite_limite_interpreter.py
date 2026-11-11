@@ -302,14 +302,14 @@ class SuiteLimiteInterpreterTle(OutilsLimite, PaysageSuites):
         self.play(Create(nu.ax_n), Create(nu.ax_u), FadeIn(nu.lab_n), FadeIn(nu.lab_u),
                   *[FadeIn(nu.graduation_n(n, str(n), fs)) for n in grads], *extra, run_time=rt)
 
-    def trait_u(self, nu, v, couleur=GREY_B, texte=None, fs=24, audit=False, x1=None):
+    def trait_u(self, nu, v, couleur=GREY_B, texte=None, fs=24, audit=False, x1=None, buff=0.12):
         """Un trait horizontal pointillé à la hauteur v (et son nombre, à gauche de l'axe)."""
         y = nu.G(nu.na, v)[1]
         tr = DashedLine(P(nu.ax_u.get_center()[0], y), P(x1 if x1 is not None else nu.X1 + 0.1, y), color=couleur,
                         stroke_width=3.5, dash_length=0.1)
         g = VGroup(tr)
         if texte:
-            g.add(self.t(texte, fs, couleur, audit=audit).next_to(tr, LEFT, buff=0.12))
+            g.add(self.t(texte, fs, couleur, audit=audit).next_to(tr, LEFT, buff=buff))
         return g
 
     # ── 00 : la garde : le nuage qui monte vers 55, la bande qui se resserre ──
@@ -392,7 +392,7 @@ class SuiteLimiteInterpreterTle(OutilsLimite, PaysageSuites):
     def ecran_modele(self):
         self.nouvel_ecran("02-modele")
         x0 = -6.2
-        nu = NuageTermes((0, 16.5), (0, 64), P(2.45, -2.2), P(5.8, 2.25), fs=26)
+        nu = NuageTermes((0, 16.5), (0, 64), P(2.45, -1.55), P(5.5, 2.25), fs=26)
         for n in (5, 10, 15):
             nu.add(nu.graduation_n(n, str(n), 22))
         self.ligne([("On modélise", WHITE, "On modélise"), ("la vitesse", TERME, "la vitesse"),
@@ -478,7 +478,7 @@ class SuiteLimiteInterpreterTle(OutilsLimite, PaysageSuites):
         self.play(FadeOut(q.cartes[1]), FadeOut(q.cartes[2]), FadeOut(q.question),
                   VGroup(q.cartes[0], ok).animate.move_to(P(0, 1.75)), run_time=0.3)
         x0 = -6.2
-        nu = NuageTermes((0, 16.5), (0, 64), P(2.6, -2.75), P(5.6, 0.05), fs=24)
+        nu = NuageTermes((0, 16.5), (0, 64), P(2.95, -1.6), P(5.3, 0.15), fs=24)
         l55 = self.trait_u(nu, 55, JUSTE, "55", 24)
         pts = [nu.point(n, V[n], r=0.07) for n in range(17)]
         self.ligne([("Les termes peuvent ne jamais valoir", WHITE, "Les termes"), ("55", PIEGE, "55")], 0.1, x=x0,
@@ -497,7 +497,7 @@ class SuiteLimiteInterpreterTle(OutilsLimite, PaysageSuites):
     def ecran_rang(self):
         self.nouvel_ecran("05-rang")
         x0 = -6.2
-        nu = NuageTermes((13, 20.6), (51.5, 55.6), P(2.35, -2.0), P(5.8, 2.0), fs=26)
+        nu = NuageTermes((13, 20.6), (51.5, 55.6), P(2.35, -1.6), P(5.4, 2.0), fs=26)
         g17, g18 = nu.graduation_n(17, "17", 24), nu.graduation_n(18, "18", 24)
         g17[1].shift(LEFT * 0.08)
         g18[1].shift(RIGHT * 0.08)
@@ -613,8 +613,9 @@ class SuiteLimiteInterpreterTle(OutilsLimite, PaysageSuites):
         self.ligne([("et ne redescendent plus en dessous.", JUSTE, "et ne redescendent")], -0.8, x=x0, fs=36,
                    larg=7.6, avec=[A.animate.set_value(17.5), UpdateFromFunc(VGroup(*pts), colorer)], rt=1.0)
         # la suite qui saute sans cesse : −1, 1, −1, 1…
-        nu2 = NuageTermes((0, 10.6), (-1.6, 1.6), P(2.75, -3.1), P(5.0, -1.45), fs=22)
-        h1, hm1 = self.trait_u(nu2, 1, PIEGE, "1", 22, x1=nu2.X1), self.trait_u(nu2, -1, PIEGE, "−1", 22, x1=nu2.X1)
+        nu2 = NuageTermes((0, 10.6), (-1.6, 1.6), P(2.75, -3.1), P(4.6, -1.45), fs=22)
+        h1 = self.trait_u(nu2, 1, PIEGE, "1", 22, x1=nu2.X1, buff=0.3)
+        hm1 = self.trait_u(nu2, -1, PIEGE, "−1", 22, x1=nu2.X1, buff=0.3)
         p2 = [nu2.point(n, (-1) ** n, PIEGE, r=0.07).set_opacity(0) for n in range(11)]
         self.add(*p2)
         bille = Dot(p2[0].get_center(), radius=0.1, color=PIEGE)
@@ -714,7 +715,7 @@ class SuiteLimiteInterpreterTle(OutilsLimite, PaysageSuites):
         self.play(*[FadeOut(m) for m in autres], ReplacementTransform(tit, cor), run_time=0.4)
         self.remove(*autres)
         x0 = -6.2
-        nu = NuageTermes((0, 30.6), (0, 88), P(2.95, -1.85), P(5.8, 2.3), fs=24)
+        nu = NuageTermes((0, 30.6), (0, 88), P(2.95, -1.45), P(5.35, 2.3), fs=24)
         for n in (10, 20, 30):
             nu.add(nu.graduation_n(n, str(n), 22))
         pts = [nu.point(n, CHOCO[n], r=0.065) for n in range(31)]
@@ -752,25 +753,25 @@ class SuiteLimiteInterpreterTle(OutilsLimite, PaysageSuites):
                    [("à partir d'un certain rang.", WHITE, "à partir")]],
                   [[("Elle tend vers", WHITE, "Elle tend"), ("+∞", J, "plus l'infini"), ("si ses termes", WHITE, "si ses")],
                    [("finissent par dépasser tout nombre.", WHITE, "finissent")]],
-                  [[("La limite n'est pas", WHITE, "la limite"), ("le dernier terme calculé.", PIEGE, "le dernier")]]]
+                  [[("La limite n'est pas", WHITE, "la limite")], [("le dernier terme calculé.", PIEGE, "le dernier")]]]
         self.nouvel_ecran("10-finale", margo=0.65)
         self.au_mot("Ce que tu as appris")
         tit = self.t("Ce que tu as appris", 46, J).to_edge(UP, buff=0.45)
         self.play(Write(tit), run_time=0.7)
         blocs = []
         for pt in points:
-            lignes = VGroup(*[self.construire(l, 42, 1e9) for l in pt]).arrange(DOWN, aligned_edge=LEFT, buff=0.18)
+            lignes = VGroup(*[self.construire(l, 44, 1e9) for l in pt]).arrange(DOWN, aligned_edge=LEFT, buff=0.18)
             # même pas entre les lignes de base (« ℓ » est plus haut que les autres lettres)
             for k, l in enumerate(lignes):
                 if k:
-                    l.shift(UP * (base(lignes[0]) - 0.62 * k - base(l)))
+                    l.shift(UP * (base(lignes[0]) - 0.66 * k - base(l)))
             blocs.append(VGroup(self.coche(), lignes).arrange(RIGHT, buff=0.3, aligned_edge=UP))
         tout = VGroup(*blocs).arrange(DOWN, aligned_edge=LEFT, buff=0.45)
-        if tout.width > 11.0:
-            tout.scale_to_fit_width(11.0)
-        if tout.height > 5.6:
-            tout.scale_to_fit_height(5.6)
-        tout.move_to(P(-0.8, -0.25))
+        if tout.width > 12.0:
+            tout.scale_to_fit_width(12.0)
+        if tout.height > 5.9:
+            tout.scale_to_fit_height(5.9)
+        tout.move_to(P(0, -0.3))
         for bloc in blocs:
             for k, l in enumerate(bloc[1]):
                 self.montrer(l, rt=0.3, avec_k={0: [Create(bloc[0])]} if k == 0 else None)

@@ -104,10 +104,10 @@ class SuiteLimiteInterpreterShort(OutilsLimite, ShortSuites):
         rond = Circle(radius=0.21, fill_color=TERME, fill_opacity=1, stroke_width=0)
         lt = Text(lettre, font_size=30, color=WHITE, weight=BOLD).move_to(rond)
         c = corps if isinstance(corps, Mobject) else self.t(corps, 36, WHITE, 1e9)
-        place = largeur - 0.15 - rond.width - 0.2 - 0.75
+        place = largeur - 0.15 - rond.width - 0.32 - 0.75
         if c.width > place:
             c.scale_to_fit_width(place)
-        ligne = VGroup(VGroup(rond, lt), c).arrange(RIGHT, buff=0.2)
+        ligne = VGroup(VGroup(rond, lt), c).arrange(RIGHT, buff=0.32)
         cadre = RoundedRectangle(width=largeur, height=max(self.hauteur_bouton, ligne.height + 0.36),
                                  corner_radius=0.14, stroke_color=TERME, stroke_width=3, fill_color=FOND_CARTE,
                                  fill_opacity=1)
@@ -241,17 +241,18 @@ class SuiteLimiteInterpreterShort(OutilsLimite, ShortSuites):
         self.dire("03b-reponse")
         ok = self.q_reponse(q, 0)
         y = 2.9 - q.cartes[0].height / 2
-        nu, pts = self.nuage(-2.85, -0.75, x0=-1.45, nb=9)
+        nu, pts = self.nuage(-2.9, -0.95, x0=-1.45, nb=9)
         d60 = self.droite60(nu, JUSTE, "60")
         self.ligne([("0,5ⁿ", RAISON, "0,5"), ("→ 0", WHITE, "tend vers 0")], y - 0.55, fs=46,
                    avec_k={0: [FadeOut(q.tete), FadeOut(q.question), VGroup(q.cartes[0], ok).animate.move_to(P(0, 2.9)),
                                FadeOut(q.cartes[1]), FadeOut(q.cartes[2]), Create(nu.ax_n), Create(nu.ax_u),
                                FadeIn(nu.lab_n), FadeIn(nu.lab_u),
                                LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.1)]})
-        self.ligne([("le cœur revient vers", WHITE, "le cœur revient"), ("60", JUSTE, "60")], y - 1.2, fs=38,
+        self.ligne([("le cœur revient", WHITE, "le cœur revient")], y - 1.12, fs=33)
+        self.ligne([("vers", WHITE, "vers"), ("60", JUSTE, "60")], y - 1.62, fs=33,
                    avec_k={1: [Create(d60[0]), FadeIn(d60[1], scale=1.3),
                                *[d.animate.set_color(JUSTE) for d in pts[3:]]]})
-        self.ligne([("son rythme au repos", JUSTE, "son rythme")], y - 1.8, fs=38)
+        self.ligne([("son rythme au repos", JUSTE, "son rythme")], y - 2.14, fs=38, larg=4.1)
         self.attendre_voix(marge=0.4)
 
         # ── 04 : la question en commentaire, dans l'ordre de la voix ──
@@ -263,9 +264,10 @@ class SuiteLimiteInterpreterShort(OutilsLimite, ShortSuites):
         qm = self.t("?", 150, RAISON, audit=False).move_to(P(0, -1.5)).set_opacity(0.55)
         self.play(FadeIn(et, shift=DOWN * 0.1), GrowFromCenter(c4), FadeIn(qm, scale=0.8), run_time=0.35)
         self.battre(c4, 0.5)
-        self.ligne([("avec", WHITE, "avec"), ("uₙ =", TERME, "u indice n")], 1.5, fs=44)
-        self.ligne([("70", WHITE, "70"), ("+ 50", WHITE, "plus 50"), ("×", WHITE, None),
-                    ("0,5ⁿ", RAISON, "0,5")], 0.8, fs=44, avec_k={3: [Indicate(c4, color=RAISON)]}, rt_mid=0.12)
+        self.ligne([("avec", WHITE, "avec")], 1.5, fs=44)
+        self.ligne([("uₙ =", TERME, "u indice n"), ("70", WHITE, "70"), ("+ 50", WHITE, "plus 50"), ("×", WHITE, None),
+                    ("0,5ⁿ", RAISON, "0,5")], 0.8, fs=40, larg=4.1, avec_k={4: [Indicate(c4, color=RAISON)]},
+                   rt_mid=0.12)
         c4.periode = 0.9
         question = self.paragraphe([("vers quel rythme", RAISON), ("revient le cœur ?", RAISON)], 46, buff=0.12,
                                    y=-0.55)
