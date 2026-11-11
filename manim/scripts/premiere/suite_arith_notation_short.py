@@ -189,18 +189,18 @@ class SuiteArithNotationShort(ShortSuites):
         self.au_mot("Et toi")
         et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, 3.45))
         self.play(FadeIn(et, shift=DOWN * 0.1), run_time=0.35)
-        xs = [-1.62, -0.81, 0.0, 0.81, 1.62]
-        lc = cases(["u_{0}", "u_{1}", "u_{2}", "…", "?"], xs, 1.9, 0.74, 0.74, 44)
-        pos = etiquettes(["1er", "2e", "3e", "", "50e"], lc, UP, 28, GREY_A, 0.12)
+        xs = [-1.5, -0.5, 0.5, 1.5]          # un vrai écart entre les cases (0,2), comme à 0:22
+        lc = cases(["u_{0}", "u_{1}", "…", "?"], xs, 1.9, 0.8, 0.74, 40)
+        pos = etiquettes(["1er", "2e", "", "50e"], lc, UP, 28, GREY_A, 0.12)
         self.au_mot("u indice 0")
-        self.play(LaggedStart(*[FadeIn(c, scale=0.85) for c in lc[:4]], *[FadeIn(p) for p in pos[:3]], lag_ratio=0.1),
+        self.play(LaggedStart(*[FadeIn(c, scale=0.85) for c in lc[:3]], *[FadeIn(p) for p in pos[:2]], lag_ratio=0.1),
                   run_time=0.5)
         question = self.paragraphe([("Quel est l'indice", WHITE), ("de son 50e terme ?", RAISON)], 52, buff=0.18, y=0.2)
         self.au_mot("Quel est")
         self.play(FadeIn(question[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("50e")
-        self.play(FadeIn(question[1], shift=UP * 0.1), FadeIn(lc[4], scale=1.3), FadeIn(pos[4], scale=1.3), run_time=0.35)
-        self.play(Indicate(lc[4], color=RAISON, scale_factor=1.2), run_time=0.4)
+        self.play(FadeIn(question[1], shift=UP * 0.1), FadeIn(lc[3], scale=1.3), FadeIn(pos[3], scale=1.3), run_time=0.35)
+        self.play(Indicate(lc[3], color=RAISON, scale_factor=1.2), run_time=0.4)
         self.appel_commentaire(-1.75, fs=50)
         self.attendre_voix(marge=0.6)
 

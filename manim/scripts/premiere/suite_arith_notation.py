@@ -135,7 +135,7 @@ def rapport(largeur=2.0, hauteur=2.5):
     bandeau = Rectangle(width=largeur, height=0.32, fill_color=TERME, fill_opacity=1, stroke_width=0)
     bandeau.align_to(feuille, UP)
     lignes = VGroup(*[Line(P(-largeur / 2 + 0.2, 0), P(largeur / 2 - 0.2 - 0.3 * (k % 2), 0), stroke_color="#94A3B8",
-                           stroke_width=3).shift(UP * (hauteur / 2 - 0.62 - 0.3 * k)) for k in range(6)])
+                           stroke_width=3).shift(UP * (hauteur / 2 - 0.62 - 0.36 * k)) for k in range(6)])
     return VGroup(feuille, bandeau, lignes)
 
 
@@ -274,15 +274,15 @@ class SuiteArithNotation1re(PaysageSuites):
         self.au_mot("120")
         a3 = VGroup(self.t("+ 120", 40, RAISON), self.t("chaque année", 30, RAISON)).arrange(DOWN, buff=0.08)
         a3.move_to(P(x_d, 1.05))
-        neufs = [self.sur_orbite(a, RAISON) for a in (1.2, 3.6, 5.4)]
+        neufs = [self.sur_orbite(a, RAISON) for a in (0.69, 2.27, 4.62)]  # entre deux anciens
         self.play(FadeIn(a3, scale=1.2), *[FadeIn(s, scale=2.0) for s in neufs], run_time=0.5)
         for s in neufs:
             sats.add(s)
         self.au_mot("rapport")
-        rp = rapport(2.0, 2.35).move_to(P(x_d - 0.15, -0.95))
+        rp = rapport(2.2, 2.65).move_to(P(4.35, -0.95))  # assez grande pour lire les notations
         self.play(FadeIn(rp, shift=UP * 0.3), run_time=0.5)
         self.au_mot("notations")
-        ecr = [nom("u(n)", 30, "#0F172A"), nom("u_{n}", 30, "#0F172A"), nom("u_{n+1}", 30, RAISON)]
+        ecr = [nom("u(n)", 38, "#0F172A"), nom("u_{n}", 38, "#0F172A"), nom("u_{n+1}", 38, RAISON)]
         for k, e in enumerate(ecr):
             e.move_to(rp[2][2 * k].get_center()).align_to(rp[0].get_left() + RIGHT * 0.25, LEFT)
             e.shift(UP * 0.04)
