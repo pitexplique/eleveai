@@ -34,6 +34,11 @@ class Pose(_Pose):
         """Un chiffre posé à la main (mauvaise pose, chiffre cassé), hors audit."""
         return self._t(s, r, i, couleur, fs)
 
+    def ret(self, r, v, couleur=ORANGE_RETENUE, i=0):
+        """La retenue, un peu plus haut et à gauche que dans decimal_additionner : elle ne touche
+        plus le chiffre du dessous (planche du 11/11)."""
+        return self._t(v, r, i, couleur, fs=int(self.fs * 0.5)).shift(P(-self.pas * 0.5, self.hl * 0.56))
+
     def barrer(self, m, couleur=ROUGE_ERREUR):
         return Line(m.get_corner(DL) + LEFT * 0.05, m.get_corner(UR) + RIGHT * 0.05, color=couleur, stroke_width=6)
 

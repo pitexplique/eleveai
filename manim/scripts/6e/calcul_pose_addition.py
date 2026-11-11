@@ -112,7 +112,7 @@ class CalculPoseAdditionBase(PaysageCalculPose):
         self.ecran("03-pose")
         po = Pose(["475", "286"], origine=P(-3.2, 1.5), pas=0.9, hl=1.1, fs=70)
         self.au_mot("On pose")
-        l0 = self.ligne([("On pose", WHITE), ("475", ROSE_D), ("+ 286.", AMBRE_D)], 38, buff=0.16)
+        l0 = self.ligne([("On pose", WHITE), ("475 +", ROSE_D), ("286.", AMBRE_D)], 38, buff=0.2)
         gauche(l0, -1.4, 2.95)
         self.play(FadeIn(l0[0], shift=UP * 0.1), run_time=0.25)
         self.au_mot("475 plus")
@@ -128,7 +128,7 @@ class CalculPoseAdditionBase(PaysageCalculPose):
         y = 2.2
         for nom, r, calc, mot_calc, egal, mot_egal, chiffre, mot_ecrit, mot_ret, phrase in etapes:
             cad = po.colonne(r)
-            lg = self.ligne([(nom, COUL_RANG_E[r]), (calc, WHITE), (egal, VERT_OK)], 36, buff=0.16)
+            lg = self.ligne([(nom, COUL_RANG_E[r]), (calc, WHITE), (egal, VERT_OK)], 36, buff=0.24)
             gauche(lg, -1.4, y)
             self.au_mot(nom[:-2])
             self.play(FadeIn(lg[0], shift=UP * 0.1), Create(cad), run_time=0.3)
@@ -259,7 +259,7 @@ class CalculPoseAdditionBase(PaysageCalculPose):
         f7, f5 = faux.place("7", 3, 1, ROUGE_ERREUR), faux.place("5", 2, 1, ROUGE_ERREUR)
         self.au_mot("On ne pose pas")
         lf = self.t("Pas en commençant à gauche !", 32, ROUGE_ERREUR)
-        gauche(lf, -6.2, -1.5)
+        gauche(lf, -6.2, -2.3)
         self.play(FadeIn(VGroup(f7, f5), shift=RIGHT * 0.2), FadeIn(faux.signe), Create(faux.barre), run_time=0.4)
         self.au_mot("commençant à gauche")
         croix = Cross(VGroup(fl0, f7, f5), stroke_color=ROUGE_ERREUR, stroke_width=8)
@@ -273,7 +273,7 @@ class CalculPoseAdditionBase(PaysageCalculPose):
         self.au_mot("Ça fait")
         res = VGroup(bon.res(3, 1), bon.res(2, 3), bon.res(1, 2), bon.res(0, 3), bon.ret(1, 1), bon.ret(2, 1))
         self.au_mot("1 323")
-        g = self.gros("1 323 €", fs=52).move_to(P(2.4, -1.9))
+        g = self.gros("1 323 €", fs=52).move_to(P(2.5, -2.75))
         hors_audit(g[1])
         self.play(FadeIn(res, scale=1.3), FadeIn(g, scale=1.2), run_time=0.4)
         self.insister(g, 1.15, 0.25)
@@ -328,9 +328,9 @@ class CalculPoseAdditionBase(PaysageCalculPose):
             m = self.t(txt, 38, c).next_to(f, DOWN, buff=0.18)
             self.play(FadeIn(f, shift=DOWN * 0.25), FadeIn(m, scale=1.2), run_time=0.35)
         self.au_mot("Combien")
-        q = self.t("Combien en tout ?", 42, JAUNE_TITRE).move_to(P(-0.4, -1.2))
+        q = self.t("Combien en tout ?", 42, JAUNE_TITRE).move_to(P(-0.4, -1.75))
         self.play(FadeIn(q, shift=UP * 0.1), Wiggle(VGroup(*fs_)), run_time=0.45)
-        self.pause_defi(y=-2.1)
+        self.pause_defi(y=-2.6)
 
     def ecran_correction(self):
         self.ecran("08b-correction", 0.65)
@@ -349,7 +349,7 @@ class CalculPoseAdditionBase(PaysageCalculPose):
         y = 1.85
         for nom, r, calc, mot_calc, egal, ch, mot_ecrit, ret, mot_ret in etapes:
             cad = po.colonne(r)
-            lg = self.ligne([(nom, COUL_RANG_E[r]), (calc, WHITE), (egal, VERT_OK)], 34, buff=0.14)
+            lg = self.ligne([(nom, COUL_RANG_E[r]), (calc, WHITE), (egal, VERT_OK)], 34, buff=0.22)
             gauche(lg, -3.0, y)
             self.au_mot(nom[:-2])
             self.play(FadeIn(lg[0], shift=UP * 0.1), Create(cad), run_time=0.25)

@@ -17,7 +17,7 @@ Notion `entier_calcul_pose` (banque `lib/tutor-v4/questionBank/6e/maths/calcul-p
 
 3 filles, 2 garçons. 0 à La Réunion. Ceintures : paysages vertes, shorts jaunes (un calcul).
 Bonnes réponses tirées au hasard (graine 1111) : paysages 01 A-B, 02 A-B, 03 A-C, 04 A-C, 05 C-A ; shorts C, B, C, B, B (5 A, 5 B, 5 C).
-Métiers : matrice `lib/matrice/metiers-college.ts` (`entier_calcul_pose`) ; guide de montagne ajouté ; marquer `V` après le rendu (phrase de la logisticienne à mettre à 157 colis / camionnettes de 6).
+Métiers : matrice `lib/matrice/metiers-college.ts` (`entier_calcul_pose`) ; guide de montagne PAS ENCORE ajouté (à faire avec les `V`) ; marquer `V` après le rendu (phrase de la logisticienne à mettre à 157 colis / camionnettes de 6).
 
 ## Noms
 Voix et manifeste : `6e-calcul-pose-<slug>[-short]` (`manim/voix/`). Sorties : `manim/sorties/6e/maths/calcul-pose/NN-<slug>/`. Scènes : `manim/scripts/6e/calcul_pose_<slug>.py`. Films : `prototypes/ti-margo/films/calcul-pose.js` (+ `calcul-pose-<slug>.js`, `.json`). Aperçu : `manim/sorties/apercu-calcul-pose.html` (⛔ jamais `apercu.html`).
@@ -29,6 +29,10 @@ Voix et manifeste : `6e-calcul-pose-<slug>[-short]` (`manim/voix/`). Sorties : `
 - ✅ `manim/scripts/6e/calcul_pose_commun.py` : `Pose` entière (colonnes colorées par rang, `entete`, `place`, `barrer`, `ret(r+1, v)` pour une retenue), `nadia`, `facture`, `cube`, `gauche(m, x, y)` (placer SANS rétrécir : `self.col` rétrécit), `rep_bas()` (explication des questions-pauses en bas à gauche, en grand : `ligne_rep` la rendait minuscule), `finale_gauche()`.
 - ✅ Paysage pilote `manim/scripts/6e/calcul_pose_addition.py` (`CalculPoseAddition6e`, 3 min 48) : dry run propre (0 TARD, 0 BORD, seul « 974 »). Brouillon -ql relu en planche, puis corrigé (factures, poses, explications, finale) ; **re-planche -ql à faire** avant le HD.
 - Leçons : `au_mot(extrait)` prend la PREMIÈRE occurrence dans le clip (« 1 unité » tombait dans « 11 unités ») : prendre un extrait unique. Nombres à espace (« 1 248 ») : `hors_audit(...)` (l'audit cherche « 1248 » dans la voix). Étiquettes redites : `f.sans_synchro = True`. Le script d'audit filtre `AUDIT|BORD|TARD|AVANCE`. Cadre : |x| ≤ 6,68.
+- 11/11 soir : planche -ql relue ; corrigés : retenues qui touchaient les chiffres (`Pose.ret` surchargée dans `calcul_pose_commun.py`, décalage −0,5 pas / +0,56 hl), « Combien en tout ? » collé aux montants du défi (y −1,75, `pause_defi(y=-2.6)`), deux-points collés au nombre (buff 0,24 / 0,22). Dry run AUDIT propre. Rendu HD lancé dès le poste libre.
+- ✅ Short 01 « La retenue oubliée » : `films/calcul-pose.js` (outils de la série : `poser`, `cadrer`, `sacCraie`, `ardoiseMini`… ⛔ pas de `camera` ni `sac` : déjà dans personnage.js/short.js), `calcul-pose.json`, `calcul-pose-cues.js` (5 ép.). Contrôles relus (en-têtes au-dessus du cadre, « 50 + 40 = 90 » aéré, retenue = pastille orange pleine, remontée au-dessus du 4).
+- ✅ Aperçu séparé `manim/sorties/apercu-calcul-pose.html` (2 vidéos, sans lecture auto).
+- ✅ 11/11 16 h : **pilotes 01 rendus**. Paysage HD (228,8 s, bords 0, audit propre ; piège : encadré « 1 323 € » descendu sous le résultat, « Pas en commençant à gauche ! » à y −2,3 ; « On pose 475 + 286. » aéré). Short 84,9 s + miniature (ardoise rétrécie, ne cache plus l'œil). Planches relues. **En attente du oui de Frédéric sur le FORMAT** (aperçu `apercu-calcul-pose.html`) avant 02-05.
 - ⚠️ 9 processus python tournaient le 11/11 : avant le HD, vérifier les lignes de commande (`powershell "Get-CimInstance Win32_Process -Filter \"name='python.exe'\" | select CommandLine"`) : rendre seulement si aucun `manim render` ne tourne.
 
 ## Reste, dans l'ordre
