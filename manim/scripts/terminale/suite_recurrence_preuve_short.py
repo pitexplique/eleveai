@@ -76,6 +76,31 @@ def domino(x, y0, h=0.75, w=0.2, couleur=TERME):
 
 
 XS_DOM = [-1.55 + 0.62 * k for k in range(6)]
+INDICES = set("₀₁₂₃₄₅₆₇₈₉₊₋ₖₙₚ")
+
+
+def grossir_indices(t, texte, k=1.3):
+    """Les indices Unicode (police de secours) sortent trop petits : chacun × k,
+    et la suite de SA ligne glisse d'autant (les espaces restent égales)."""
+    car, lig, n = [], [], 0
+    for c in texte:
+        if c == "\n":
+            n += 1
+        elif not c.isspace():
+            car.append(c)
+            lig.append(n)
+    gl = t.submobjects
+    if len(gl) != len(car):
+        return t
+    for i, c in enumerate(car):
+        if c in INDICES:
+            w = gl[i].width
+            gl[i].scale(k, about_edge=LEFT)
+            d = gl[i].width - w
+            for j in range(i + 1, len(gl)):
+                if lig[j] == lig[i]:
+                    gl[j].shift(RIGHT * d)
+    return t
 
 
 class SuiteRecurrencePreuveShort(ShortSuites):
@@ -84,13 +109,58 @@ class SuiteRecurrencePreuveShort(ShortSuites):
     identite = "Maths Tle — EleveAI"
     ceinture = "blanche"
 
+    # les boutons : corps à ≈ 34 pt sur deux lignes ; le rond A/B/C plus petit,
+    # la coche en bas à droite (à côté de la 2e ligne, plus courte)
+    place_coche = -0.2            # poser_question : place du corps = 4,0 − 0,82 (voir bouton)
+    hauteur_bouton = 1.05
+
+    def t(self, texte, fs=36, color=WHITE, larg=None, audit=True):
+        """Comme le module commun, avec les indices agrandis."""
+        t = grossir_indices(Text(texte, font_size=fs, color=color), texte)
+        larg = larg or self.largeur_texte
+        if t.width > larg:
+            t.scale_to_fit_width(larg)
+        if not audit:
+            t._pas_audit = True
+        return t
+
+    def bouton(self, lettre, corps, largeur, fs):
+        rond = Circle(radius=0.21, fill_color=TERME, fill_opacity=1, stroke_width=0)
+        lt = Text(lettre, font_size=30, color=WHITE, weight=BOLD).move_to(rond)
+        c = corps if isinstance(corps, Mobject) else self.t(corps, 36, WHITE, 1e9)
+        place = largeur - 0.15 - rond.width - 0.15 - 0.1
+        if c.width > place:
+            c.scale_to_fit_width(place)
+        ligne = VGroup(VGroup(rond, lt), c).arrange(RIGHT, buff=0.15)
+        cadre = RoundedRectangle(width=largeur, height=max(self.hauteur_bouton, ligne.height + 0.28),
+                                 corner_radius=0.14, stroke_color=TERME, stroke_width=3, fill_color=FOND_CARTE,
+                                 fill_opacity=1)
+        ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.15, LEFT)
+        return VGroup(cadre, ligne)
+
+    def q_reponse(self, q, bonne):
+        cartes = q.cartes
+        b = cartes[bonne]
+        anims = [b[0].animate.set_stroke(JUSTE, width=7).set_fill("#052e16", 1), b[1][0][0].animate.set_fill(JUSTE)]
+        anims += [cartes[j].animate.set_opacity(0.3) for j in range(len(cartes)) if j != bonne]
+        self.play(*anims, FadeOut(q.rebours), FadeOut(q.pause), run_time=0.25)
+        ok = self.coche(JUSTE, 0.2 * self.k_question)
+        ok.move_to(b[0].get_corner(DR), aligned_edge=DR).shift(P(-0.14, 0.12))
+        k = self.k_allumer
+        self.play(b.animate.scale(k), Create(ok), run_time=0.25)
+        self.play(b.animate.scale(1 / k), ok.animate.scale(1 / k, about_point=b.get_center()), run_time=0.25)
+        return ok
+
     def ligne(self, morceaux, y, fs=40, avec=()):
-        """Une ligne centrée, écrite morceau par morceau : [(texte, couleur, extrait), …]."""
-        ts = [self.t(m, fs, c, 1e9) for m, c, _ in morceaux]
-        g = VGroup(*ts).arrange(RIGHT, buff=0.14)
-        if g.width > self.largeur_texte:
-            g.scale_to_fit_width(self.largeur_texte)
-        g.move_to(P(0, y))
+        """Une ligne centrée, écrite morceau par morceau : [(texte, couleur, extrait), …].
+        UN seul texte coupé en morceaux : espaces régulières, même ligne de base."""
+        tout = self.t(" ".join(m for m, _, _ in morceaux), fs, WHITE, self.largeur_texte / 1.1)  # insister × 1,08
+        ts, i = [], 0
+        for m, c, _ in morceaux:
+            n = sum(1 for ch in m if not ch.isspace())
+            ts.append(VGroup(*tout.submobjects[i:i + n]).set_color(c))
+            i += n
+        g = VGroup(*ts).move_to(P(0, y))
         paquet = []
         for tx, (_, _, ex) in zip(ts, morceaux):
             if ex is not None and paquet:
@@ -173,7 +243,7 @@ class SuiteRecurrencePreuveShort(ShortSuites):
                   self.montrer_case_anim(lg, 1), run_time=0.3)
         self.play(LaggedStart(*[FadeIn(e, scale=1.4) for e in t1[2:]], lag_ratio=0.25), run_time=0.45)
         rel = self.ligne([("uₙ₊₁ =", WHITE, "u indice n plus 1"), ("uₙ", WHITE, "égale u indice n"),
-                          ("+ 3", RAISON, "3")], -2.65, fs=46)
+                          ("+ 3", RAISON, "3")], -2.65, fs=42)
         self.insister(VGroup(rel, s[1]), 1.08)
         self.attendre_voix(marge=0.3)
 
@@ -187,9 +257,11 @@ class SuiteRecurrencePreuveShort(ShortSuites):
         self.play(Create(sol2), LaggedStart(*[FadeIn(d, shift=UP * 0.2) for d in doms2], lag_ratio=0.1),
                   run_time=0.4)
         fls = self.fleches_dominos(doms2, 0.98)
-        l1 = self.ligne([("Si uₖ est", WHITE, "Si u indice k"), ("multiple de 3,", WHITE, "3")], -0.65, fs=40,
+        # deux lignes à la MÊME taille que « uₖ + 3 aussi » (sur une ligne, il fallait rétrécir)
+        self.ligne([("Si uₖ est", WHITE, "Si u indice k")], -0.5, fs=38)
+        l1 = self.ligne([("multiple de 3,", WHITE, "3")], -1.02, fs=38,
                         avec=[doms2[2].animate.set_fill(JUSTE, 0.9)])
-        l2 = self.ligne([("uₖ", WHITE, "u indice k"), ("+ 3", WHITE, "3"), ("aussi", WHITE, "aussi")], -1.35, fs=44,
+        l2 = self.ligne([("uₖ", WHITE, "u indice k"), ("+ 3", WHITE, "3"), ("aussi", WHITE, "aussi")], -1.62, fs=38,
                         avec=[Create(fls[2]), doms2[3].animate.set_fill(JUSTE, 0.9)])
         self.au_mot("héréditaire")
         her = VGroup(self.coche(RAISON, 0.22), self.t("c'est héréditaire !", 44, RAISON)).arrange(RIGHT, buff=0.2)

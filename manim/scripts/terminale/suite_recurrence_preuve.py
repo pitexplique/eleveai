@@ -62,6 +62,31 @@ assert all(v <= 6 for v in v_)
 EAU, CHLORE, PEAU = "#0EA5E9", "#A3E635", "#8d5524"
 BLOC_W, BLOC_H, Y_BLOC = 3.9, 0.72, 3.1
 ETAPES = ("Initialisation", "Hérédité", "Conclusion")
+INDICES = set("₀₁₂₃₄₅₆₇₈₉₊₋ₖₙₚ")
+
+
+def grossir_indices(t, texte, k=1.3):
+    """Les indices Unicode (police de secours) sortent trop petits : chacun × k,
+    et la suite de SA ligne glisse d'autant (les espaces restent égales)."""
+    car, lig, n = [], [], 0
+    for c in texte:
+        if c == "\n":
+            n += 1
+        elif not c.isspace():
+            car.append(c)
+            lig.append(n)
+    gl = t.submobjects
+    if len(gl) != len(car):
+        return t
+    for i, c in enumerate(car):
+        if c in INDICES:
+            w = gl[i].width
+            gl[i].scale(k, about_edge=LEFT)
+            d = gl[i].width - w
+            for j in range(i + 1, len(gl)):
+                if lig[j] == lig[i]:
+                    gl[j].shift(RIGHT * d)
+    return t
 
 
 def bonhomme(s=1.0, couleur=TERME):
@@ -155,6 +180,28 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
 
     # ── outils de l'épisode ────────────────────────────────────────────────
 
+    def t(self, texte, fs=36, color=WHITE, larg=None, audit=True):
+        """Comme le module commun, avec les indices agrandis."""
+        t = grossir_indices(Text(texte, font_size=fs, color=color), texte)
+        larg = larg or self.largeur_texte
+        if t.width > larg:
+            t.scale_to_fit_width(larg)
+        if not audit:
+            t._pas_audit = True
+        return t
+
+    def formule(self, morceaux, fs=40, larg=None):
+        """UNE ligne de texte (espaces régulières, même ligne de base), coupée en
+        morceaux [(texte, couleur), …] : un VGroup des morceaux, à colorer et à
+        montrer un par un."""
+        tout = self.t(" ".join(m for m, _ in morceaux), fs, WHITE, larg)
+        parts, i = VGroup(), 0
+        for m, c in morceaux:
+            n = sum(1 for ch in m if not ch.isspace())
+            parts.add(VGroup(*tout.submobjects[i:i + n]).set_color(c))
+            i += n
+        return parts
+
     def ecran_garde_bandeau(self, cle):
         """Un nouvel écran qui GARDE le bandeau des trois étapes (et Ti-Margo)."""
         self.dire(cle)
@@ -179,11 +226,16 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
         self.play(*anims, FadeIn(b[1], scale=1.2), run_time=0.4)
         self.insister(b, 1.08)
 
-    def ligne(self, morceaux, y, x=None, fs=40, avec=()):
+    def ligne(self, morceaux, y, x=None, fs=40, avec=(), decale=None):
         """Une ligne écrite morceau par morceau : [(texte, couleur, extrait), …] ;
-        chaque morceau quand la voix dit son extrait (None : avec le précédent)."""
-        ts = [self.t(m, fs, c) for m, c, _ in morceaux]
-        g = VGroup(*ts).arrange(RIGHT, buff=0.18).move_to(P(0, y))
+        chaque morceau quand la voix dit son extrait (None : avec le précédent).
+        decale = (i, d) : les morceaux à partir du i-ième glissent de d à droite."""
+        g = self.formule([(m, c) for m, c, _ in morceaux], fs)
+        ts = list(g)
+        if decale:
+            for p in ts[decale[0]:]:
+                p.shift(RIGHT * decale[1])
+        g.move_to(P(0, y))
         if x is not None:
             g.align_to(P(x, 0), LEFT)
         paquet = []
@@ -322,8 +374,7 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
         i2 = machine(0.8).next_to(f2, DOWN, buff=0.2)
         rel = [("uₙ₊₁ =", WHITE, "u indice n plus 1"), ("0,5", RAISON, "0,5"), ("uₙ", WHITE, None),
                ("+ 1", RAISON, "1")]
-        ts = [self.t(m, 48, c) for m, c, _ in rel]
-        VGroup(*ts).arrange(RIGHT, buff=0.18).move_to(P(1.7, 1.05))
+        ts = self.formule([(m, c) for m, c, _ in rel], 48).move_to(P(1.7, 1.05))
         self.suivre("u indice n plus 1")
         self.play(FadeIn(ts[0], shift=UP * 0.1), FadeIn(ca), FadeIn(ta), FadeIn(cb), FadeIn(tb), run_time=0.3)
         self.suivre("0,5")
@@ -482,9 +533,9 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
         g = VGroup()
         g.nombres, g.seps, g.extraits = [], [], []
         for r in rangees:
-            ts = [self.t(m, fs, couleur) for m, _ in r]
-            g.add(VGroup(*ts).arrange(RIGHT, buff=0.16))
-            g.nombres += ts
+            ts = self.formule([(m, couleur) for m, _ in r], fs)
+            g.add(ts)
+            g.nombres += list(ts)
             g.extraits += [ex for _, ex in r]
         g.arrange(DOWN, buff=0.08, aligned_edge=LEFT)
         g.seps = [VMobject() for _ in g.nombres[1:]]
@@ -493,7 +544,8 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
     # ── 06 : question-pause n° 1 : l'hypothèse de récurrence → B ───────────
 
     def ecran_question1(self):
-        choix = ["on suppose uₙ ≤ 2 pour tout n", "on suppose uₖ ≤ 2 pour un entier k", "on suppose u₀ ≤ 2"]
+        choix = [self.t(c, 34, WHITE, 1e9) for c in
+                 ("on suppose uₙ ≤ 2 pour tout n", "on suppose uₖ ≤ 2 pour un entier k", "on suppose u₀ ≤ 2")]
         q = self.poser_question("06-question",
                                 [(self.t("Dans l'hérédité, quelle hypothèse écrit-on ?", 40), "Dans l'hérédité")],
                                 choix, 1, largeur=11.4, fs=34)
@@ -570,18 +622,25 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
     def ecran_question2(self):
         copie = self.morceaux([[("« Supposons", "Supposons"), ("uₖ ≤ 2.", "2")],
                                [("Alors", "Alors"), ("uₖ₊₁ ≤ 2.", "2")],
-                               [("Donc", "Donc"), ("uₙ ≤ 2", "2"), ("pour tout n. »", "pour tout n")]], 30)
+                               [("Donc", "Donc"), ("uₙ ≤ 2", "2"), ("pour tout n. »", "pour tout n")]], 29)
         feuille = []
+        lw, lh = copie.width + 0.6, copie.height + 0.3
+        marge = Rectangle(width=lw, height=lh + 0.22, stroke_width=0, fill_opacity=0).move_to(copie)
+        # « Une copie écrit : » À GAUCHE de la feuille (sur sa 1re ligne) : la feuille
+        # ne touche plus rien, et l'écran garde de la place pour les boutons
+        une = self.t("Une copie écrit :", 32).next_to(marge, LEFT, buff=0.3).match_y(copie[0])
+        bloc = VGroup(une, copie, marge)
+        bloc.nombres, bloc.extraits = [une] + copie.nombres, ["Une copie"] + copie.extraits
+        bloc.seps = [VMobject() for _ in bloc.nombres[1:]]
 
         def papier():
-            c = self.carte(copie.width + 0.6, copie.height + 0.35, copie.get_center(), GREY_A)
+            c = self.carte(lw, lh, marge.get_center(), GREY_A)
             c.set_fill("#1e293b", 1)
             feuille.append(c)
             self.play(FadeIn(c), run_time=0.3)
 
         q = self.poser_question("08-question",
-                                [(self.t("Une copie écrit :", 34), "Une copie"), (copie, None),
-                                 (self.t("Que manque-t-il ?", 34), "Que manque")],
+                                [(bloc, None), (self.t("Que manque-t-il ?", 34), "Que manque")],
                                 ["la conclusion", "l'hérédité", "l'initialisation"], 2, largeur=6.4, fs=32,
                                 dessin=papier, y_tete=3.22, y_question=2.8)
         self.dire("08b-reponse")
@@ -681,10 +740,12 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
         tit, l1, l2, l3, cad, blocs = self._defi
         self.au_mot("Correction")
         cor = self.t("Correction", 46, JUSTE).move_to(tit)
-        enonce = VGroup(l1, VGroup(l3, cad))
         self.play(FadeOut(blocs), FadeOut(l2), ReplacementTransform(tit, cor), run_time=0.35)
-        self.play(enonce.animate.scale(0.62).arrange(RIGHT, buff=0.5).move_to(P(0, 2.4)), run_time=0.45)
+        # l'énoncé en haut, sur deux lignes lisibles (≈ 36 pt)
+        self.play(l1.animate.scale(0.82).move_to(P(0, 2.5)),
+                  VGroup(l3, cad).animate.scale(0.82).move_to(P(0, 1.86)), run_time=0.45)
         x_nom, x_txt = -6.2, -3.05
+        D = -0.4                     # toutes les lignes de la correction descendent sous l'énoncé
         rangs = {}
 
         def etiquette(i, y, extrait):
@@ -696,28 +757,57 @@ class SuiteRecurrencePreuveTle(PaysageSuites):
             self.play(FadeIn(b), FadeIn(n, scale=1.2), run_time=0.3)
             rangs[i] = VGroup(b, n)
 
-        etiquette(0, 1.45, "Initialisation")
-        self.ligne([("u₀ =", WHITE, "u indice 0"), ("2", WHITE, "2"), ("≤ 6", WHITE, "6"), (": P(0)", JUSTE, "0"), ("vraie", JUSTE, "vraie")], 1.45,
+        etiquette(0, 1.45 + D, "Initialisation")
+        self.ligne([("u₀ =", WHITE, "u indice 0"), ("2", WHITE, "2"), ("≤ 6", WHITE, "6"), (": P(0)", JUSTE, "0"), ("vraie", JUSTE, "vraie")], 1.45 + D,
                    x=x_txt, fs=38)
-        etiquette(1, 0.55, "Hérédité")
+        etiquette(1, 0.55 + D, "Hérédité")
         self.ligne([("Supposons", WHITE, "supposons"), ("uₖ ≤ 6", TERME, "6"),
-                    ("pour un entier naturel k.", GREY_A, "pour un entier")], 0.55, x=x_txt, fs=30)
-        self.ligne([("Alors", WHITE, "Alors"), ("0,5 uₖ", WHITE, "0,5"), ("≤ 3", WHITE, "3")], -0.2, x=x_txt, fs=38)
-        self.ligne([("puis", WHITE, "puis"), ("0,5 uₖ", WHITE, "0,5 u indice k"), ("+ 3", WHITE, "3"), ("≤ 6", WHITE, "6")], -0.9, x=x_txt,
+                    ("pour un entier naturel k.", GREY_A, "pour un entier")], 0.55 + D, x=x_txt, fs=30)
+        self.ligne([("Alors", WHITE, "Alors"), ("0,5 uₖ", WHITE, "0,5"), ("≤ 3", WHITE, "3")], -0.2 + D, x=x_txt, fs=38)
+        self.ligne([("puis", WHITE, "puis"), ("0,5 uₖ", WHITE, "0,5 u indice k"), ("+ 3", WHITE, "3"), ("≤ 6", WHITE, "6")], -0.9 + D, x=x_txt,
                    fs=38)
-        h4 = self.ligne([("uₖ₊₁", JUSTE, "u indice k plus 1"), ("≤ 6", JUSTE, "6")], -1.6, x=x_txt, fs=40)
-        etiquette(2, -2.45, "Conclusion")
+        h4 = self.ligne([("uₖ₊₁", JUSTE, "u indice k plus 1"), ("≤ 6", JUSTE, "6")], -1.6 + D, x=x_txt, fs=40)
+        etiquette(2, -2.45 + D, "Conclusion")
         fin = self.ligne([("pour tout entier naturel n,", WHITE, "pour tout entier naturel n"),
-                          ("uₙ", JUSTE, "u indice n"), ("≤ 6", JUSTE, "6")], -2.45, x=x_txt, fs=34)
-        c = self.encadre(fin[1:], JUSTE, 0.12)
+                          ("uₙ", JUSTE, "u indice n"), ("≤ 6", JUSTE, "6")], -2.45 + D, x=x_txt, fs=34,
+                         decale=(1, 0.22))
+        c = self.encadre(fin[1:], JUSTE, 0.1)
         self.play(Create(c), run_time=0.3)
         self.insister(VGroup(*fin[1:], c), 1.12)
         self.attendre_voix(marge=0.6)
 
     # ── 12 : ce que tu as appris ───────────────────────────────────────────
 
+    def finale(self, points, cle="10-finale", fs=38):
+        """Comme le module commun, mais la liste plus aérée (0,6 entre les points)
+        et calée sous le titre : plus de bande vide entre le titre et la liste."""
+        self.nouvel_ecran(cle, margo=0.65)
+        self.au_mot("Ce que tu as appris")
+        tit = self.t("Ce que tu as appris", 46, JAUNE_TITRE).to_edge(UP, buff=0.45)
+        self.play(Write(tit), run_time=0.7)
+        blocs = []
+        for lignes, _ in points:
+            b = VGroup(*lignes).arrange(DOWN, aligned_edge=LEFT, buff=0.16)
+            blocs.append(VGroup(self.coche(), b).arrange(RIGHT, buff=0.3, aligned_edge=UP))
+        tout = VGroup(*blocs).arrange(DOWN, aligned_edge=LEFT, buff=0.6)
+        if tout.width > 11.4:
+            tout.scale_to_fit_width(11.4)
+        if tout.height > 5.4:
+            tout.scale_to_fit_height(5.4)
+        tout.move_to(P(-0.4, 0)).align_to(P(0, tit.get_bottom()[1] - 0.6), UP)
+        for bloc, (lignes, extraits) in zip(blocs, points):
+            for k, (l, ex) in enumerate(zip(lignes, extraits)):
+                if ex:
+                    self.au_mot(ex)
+                anims = [FadeIn(l, shift=RIGHT * 0.2)]
+                if k == 0:
+                    anims.append(Create(bloc[0]))
+                self.play(*anims, run_time=0.45)
+        self.attendre_voix(marge=0.8)
+        return tout
+
     def ecran_appris(self):
-        fs = 38
+        fs = 46
         p1 = [self.t("Une récurrence a trois étapes :", fs, JAUNE_TITRE)]
         p2 = [VGroup(self.t("l'initialisation,", fs, JUSTE), self.t("au premier rang ;", fs)).arrange(RIGHT, buff=0.2)]
         p3 = [VGroup(self.t("l'hérédité :", fs, RAISON), self.t("on suppose P(k) pour un entier k,", fs)).arrange(
