@@ -133,6 +133,7 @@ class MentalSoustractionBase(PaysageMental):
         self.au_mot("Chloé complète")
         self.play(Create(bd.trait), run_time=0.35)
         t36, t40, t100 = bd.tic(36), bd.tic(40, ROND), bd.tic(100, ROND)
+        t36[1].shift(LEFT * 0.14); t40[1].shift(RIGHT * 0.14)  # 36 et 40 aérés
         b1, b2 = bd.bond(36, 40, "+ 4"), bd.bond(40, 100, "+ 60", ROSE_D)
         self.au_mot("de 36")
         self.play(Create(t36[0]), FadeIn(t36[1]), run_time=0.25)
@@ -162,6 +163,7 @@ class MentalSoustractionBase(PaysageMental):
         def apres(sc):
             lg0 = sc.ligne_rep(0, ["De 45", "à 50,", "il manque 5."])
             t45, t50, b1 = bd.tic(45), bd.tic(50, ROND), bd.bond(45, 50, "+ 5")
+            t45[1].shift(LEFT * 0.12); t50[1].shift(RIGHT * 0.12)  # 45 et 50 aérés
             sc.au_mot("De 45")
             sc.play(FadeIn(lg0[0], shift=UP * 0.1), Create(t45[0]), FadeIn(t45[1]), run_time=0.25)
             sc.au_mot("à 50")
@@ -240,7 +242,7 @@ class MentalSoustractionBase(PaysageMental):
         self.au_mot("Elle les rajoute")
         self.play(FadeIn(l3[2], shift=UP * 0.1), run_time=0.3)
         t83, b2 = bd.tic(83, VERT_OK), bd.bond(81, 83, "+ 2", VERT_OK, haut=0.55)
-        t83[1].shift(RIGHT * 0.25)
+        t83[1].shift(RIGHT * 0.5)  # 83 à droite de son trait, loin de 81
         self.etapes(bd, [("81 +", "81 plus"), ("2", "2, ça"), ("= 83.", "83 vélos")], -2.55,
                     gestes={1: [Create(b2.fleche), FadeIn(b2.etiquette, scale=1.3)], 2: [Create(t83[0]), FadeIn(t83[1])]})
         self.attendre_voix()
@@ -343,6 +345,7 @@ class MentalSoustractionBase(PaysageMental):
         bd = Bonds(142, 162, x0=-5.0, x1=4.2, y=0.6, fs=38)
         self.play(Create(bd.trait), run_time=0.25)
         t162, b1, t142 = bd.tic(162), bd.bond(162, 142, MOINS + " 20", ROSE_D), bd.tic(142)
+        t142[1].shift(LEFT * 0.22)  # 142 et 143 aérés
         self.etapes(bd, [("162 " + MOINS, "162 moins"), ("20", "20, ça"), ("= 142.", "142. On")], -0.7,
                     gestes={0: [Create(t162[0]), FadeIn(t162[1])], 1: [Create(b1.fleche), FadeIn(b1.etiquette, scale=1.3)],
                             2: [Create(t142[0]), FadeIn(t142[1])]})
@@ -351,7 +354,7 @@ class MentalSoustractionBase(PaysageMental):
         self.col(l2, -1.4, xl=-5.6)
         self.play(FadeIn(l2, shift=UP * 0.1), run_time=0.3)
         b2, t143 = bd.bond(142, 143, "+ 1", VERT_OK, haut=0.5), bd.tic(143, VERT_OK)
-        t143[1].shift(RIGHT * 0.35)
+        t143[1].shift(RIGHT * 0.62)  # 143 à droite de son trait, loin de 142
         self.etapes(bd, [("142 +", "142 plus"), ("1", "1, ça"), ("= 143.", "143. Le")], -2.1,
                     gestes={1: [Create(b2.fleche), FadeIn(b2.etiquette, scale=1.3)], 2: [Create(t143[0]), FadeIn(t143[1])]})
         self.au_mot("Le vélo coûte")
@@ -365,6 +368,7 @@ class MentalSoustractionBase(PaysageMental):
         self.ecran("09-finale", 0.65)
         bd = Bonds(36, 100, x0=0, x1=4.6, y=0, fs=34)
         t36, t40, t100 = bd.tic(36), bd.tic(40, ROND), bd.tic(100, ROND)
+        t36[1].shift(LEFT * 0.08); t40[1].shift(RIGHT * 0.12 + DOWN * 0.4)  # 40 une ligne sous 36
         fig = VGroup(bd, t36, t40, t100, bd.bond(36, 40, "+ 4"), bd.bond(40, 100, "+ 60", ROSE_D), bd.rond(t100))
         hors_audit(fig)
         self.add(fig)
