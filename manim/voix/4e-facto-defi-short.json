@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un élève écrit au tableau : x au carré plus 6 x égale x fois, entre parenthèses, x plus 6 x. Il s'est trompé. Tu vois où ?",
+  "01-secret": "On développe : x fois x, x au carré. x fois 6 x, 6 x au carré. On trouve x au carré plus 6 x au carré : faux ! Le x est sorti, il ne reste que 6 : x fois, entre parenthèses, x plus 6.",
+  "01q-question": "Question ! Mets moins 2 en facteur dans moins 2 x moins 10. A : moins 2 fois, entre parenthèses, x moins 5. B : moins 2 fois, entre parenthèses, x plus 5. C : 2 fois, entre parenthèses, x plus 5. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : moins 2 fois, entre parenthèses, x plus 5. Moins 2 fois 5 : moins 10.",
+  "02-question": "À toi. Factorise 4 x au carré plus 4 x. Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

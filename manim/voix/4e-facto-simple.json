@@ -1,0 +1,17 @@
+{
+  "00-garde": "Factoriser. Comment transformer une somme en produit ?",
+  "01-developpeuse": "Maya est développeuse. Son programme doit calculer 9 fois 37, plus 9 fois 63. Ça fait deux multiplications. Maya repère le facteur commun : 9. Elle écrit 9 fois, entre parenthèses, 37 plus 63. C'est 9 fois 100 : 900. Une seule multiplication, et de tête !",
+  "02-methode": "Avec une lettre, c'est pareil. Factorisons 3 x plus 21. D'abord, le facteur commun : 3 x, c'est 3 fois x, et 21, c'est 3 fois 7. Le facteur commun est 3. On l'écrit devant la parenthèse. Dans la parenthèse, on met ce qui reste : x plus 7. Donc 3 x plus 21 égale 3 fois, entre parenthèses, x plus 7.",
+  "03-produit": "Avant : une somme de deux termes. Après : un produit, 3 fois une parenthèse. Factoriser, c'est transformer une somme en produit. C'est le chemin inverse de développer.",
+  "03q-question": "Question ! Factorise 5 x plus 35. A : 5 fois, entre parenthèses, x plus 35. B : x fois, entre parenthèses, 5 plus 35. C : 5 fois, entre parenthèses, x plus 7. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : 5 fois, entre parenthèses, x plus 7. 35, c'est 5 fois 7 : dans la parenthèse, on écrit 7, pas 35.",
+  "04-moins": "Avec un moins : 2 x moins 18. 2 x, c'est 2 fois x. 18, c'est 2 fois 9. Le moins reste dans la parenthèse : 2 fois, entre parenthèses, x moins 9.",
+  "05-piege": "Le piège : 6 x plus 6. 6 x, c'est 6 fois x. Et 6, c'est 6 fois 1 ! Il reste 1 dans la parenthèse : 6 fois, entre parenthèses, x plus 1. Sans le 1, on ne retrouverait que 6 x : le 6 aurait disparu.",
+  "06-lettre": "Le facteur commun peut être une lettre. x au carré plus 5 x. x au carré, c'est x fois x, et 5 x, c'est 5 fois x. On sort le x devant : x fois, entre parenthèses, x plus 5.",
+  "06q-question": "Question ! Factorise y au carré plus 8 y. A : y fois, entre parenthèses, y plus 8. B : y fois, entre parenthèses, y plus 8 y. C : 8 fois, entre parenthèses, y au carré plus y. Mets pause, et choisis !",
+  "06r-reponse": "Réponse A : y fois, entre parenthèses, y plus 8. Le y sort devant : dans la parenthèse, il reste y et 8.",
+  "07-defi": "À toi de jouer. Factorise 7 x moins 56. Mets pause, et cherche !",
+  "07b-correction": "Correction. 7 x, c'est 7 fois x. 56, c'est 7 fois 8. Résultat : 7 fois, entre parenthèses, x moins 8. Le moins reste dans la parenthèse.",
+  "08-finale": "Ce que tu as appris. Factoriser, c'est transformer une somme en produit. On écrit le facteur commun devant la parenthèse, et ce qui reste dedans. Si un terme est le facteur lui-même, il reste 1.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

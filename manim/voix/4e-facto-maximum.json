@@ -1,0 +1,16 @@
+{
+  "00-garde": "Factoriser au maximum. Comment sortir tout ce qui est commun ?",
+  "01-paysagiste": "Camille est paysagiste. Elle dessine une terrasse rectangulaire, en deux parties. Leurs aires : 2 x au carré, et 6 x. L'aire totale : 2 x au carré plus 6 x. Elle cherche la largeur commune aux deux parties.",
+  "02-nombre-lettre": "Écrivons chaque terme comme un produit. 2 x au carré, c'est 2 fois x fois x. 6 x, c'est 2 fois 3 fois x. Le 2 est commun. Le x aussi. Le facteur commun, c'est 2 x : la largeur de la terrasse.",
+  "03-sortir": "On sort 2 x devant la parenthèse. Il reste x, et 3. 2 x au carré plus 6 x égale 2 x fois, entre parenthèses, x plus 3. On vérifie : 2 x fois x, 2 x au carré. 2 x fois 3, 6 x. C'est juste.",
+  "03q-question": "Question ! Factorise au maximum 5 x au carré plus 10 x. A : 5 fois, entre parenthèses, x au carré plus 2 x. B : 5 x fois, entre parenthèses, x plus 2. C : x fois, entre parenthèses, 5 x plus 10. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : 5 x fois, entre parenthèses, x plus 2. A et C sont justes, mais pas finies : il reste un facteur commun dans la parenthèse.",
+  "04-pas-fini": "Le piège : s'arrêter trop tôt. 12 x plus 18 égale 2 fois, entre parenthèses, 6 x plus 9. C'est juste, mais 6 x et 9 ont encore 3 en commun ! Le plus grand facteur commun de 12 et 18, c'est 6. 12 x plus 18 égale 6 fois, entre parenthèses, 2 x plus 3.",
+  "05-fini": "Pour savoir si c'est fini, regarde la parenthèse : ses termes n'ont plus rien en commun. 2 x et 3 : rien de commun. C'est fini.",
+  "05q-question": "Question ! Quel est le plus grand facteur commun de 8 x plus 20 ? A : 2. B : 8. C : 4. Mets pause, et choisis !",
+  "05r-reponse": "Réponse C : 4. 8 x, c'est 4 fois 2 x, et 20, c'est 4 fois 5. 2 x et 5 n'ont plus rien en commun.",
+  "06-defi": "À toi de jouer. Factorise au maximum 3 x au carré plus 12 x. Mets pause, et cherche !",
+  "06b-correction": "Correction. 3 x au carré, c'est 3 x fois x. 12 x, c'est 3 x fois 4. Le facteur commun est 3 x. Résultat : 3 x fois, entre parenthèses, x plus 4.",
+  "07-finale": "Ce que tu as appris. On sort le plus grand nombre commun, et la lettre commune. La factorisation est finie quand la parenthèse n'a plus rien en commun. Et on vérifie en développant.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

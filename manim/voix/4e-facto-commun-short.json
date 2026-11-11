@@ -1,0 +1,8 @@
+{
+  "00-accroche": "14, 21 et 35. Un même nombre se cache dans les trois. Tu le trouves en 5 secondes ?",
+  "01-secret": "14, c'est 7 fois 2. 21, c'est 7 fois 3. 35, c'est 7 fois 5. Le 7 est caché dans les trois : c'est leur facteur commun.",
+  "01q-question": "Question ! Et avec une lettre ? Dans 5 x plus 15, quel est le facteur commun ? A : 5. B : 15. C : x. Mets pause, et choisis !",
+  "01r-reponse": "Réponse A : 5. 5 x, c'est 5 fois x, et 15, c'est 5 fois 3.",
+  "02-question": "À toi. Quel est le facteur commun de 15 x plus 35 ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

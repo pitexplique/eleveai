@@ -1,0 +1,15 @@
+{
+  "00-garde": "Défis de factorisation. Sauras-tu repérer les erreurs, et factoriser un vrai problème ?",
+  "01-comptable": "Malik est comptable dans un club de football. Le club achète 8 tenues. Chaque tenue : un maillot à x euros, et un short à 12 euros. Le prix total : 8 x plus 96 euros. Malik veut l'écrire comme un produit.",
+  "02-factoriser": "96, c'est 8 fois 12. Le facteur commun est 8 : le nombre de tenues. 8 x plus 96 égale 8 fois, entre parenthèses, x plus 12. 8 tenues, fois le prix d'une tenue. La forme factorisée raconte la situation !",
+  "02q-question": "Question ! Une classe forme 6 équipes, avec x filles et 4 garçons par équipe. Le nombre d'élèves : 6 x plus 24. Sa forme factorisée ? A : 6 fois, entre parenthèses, x plus 24. B : 6 fois, entre parenthèses, x plus 4. C : x fois, entre parenthèses, 6 plus 24. Mets pause, et choisis !",
+  "02r-reponse": "Réponse B : 6 fois, entre parenthèses, x plus 4. 6 équipes, de x plus 4 élèves.",
+  "03-erreurs": "Corrige les erreurs. Un élève écrit : 7 x plus 7 égale 7 x. Faux : 7, c'est 7 fois 1. La bonne réponse : 7 fois, entre parenthèses, x plus 1. Une élève écrit : x au carré plus 4 x égale x fois, entre parenthèses, x plus 4 x. Faux : le x est déjà sorti. La bonne réponse : x fois, entre parenthèses, x plus 4.",
+  "04-negatif": "Le défi des champions : un nombre négatif en facteur. Moins 4 x moins 20. Moins 4 x, c'est moins 4 fois x. Moins 20, c'est moins 4 fois 5. Donc moins 4 fois, entre parenthèses, x plus 5. Dans la parenthèse, le signe du 5 a changé : c'est le piège.",
+  "04q-question": "Question ! Mets moins 3 en facteur dans moins 3 x plus 12. A : moins 3 fois, entre parenthèses, x moins 4. B : moins 3 fois, entre parenthèses, x plus 4. C : 3 fois, entre parenthèses, x moins 4. Mets pause, et choisis !",
+  "04r-reponse": "Réponse A : moins 3 fois, entre parenthèses, x moins 4. Moins 3 fois moins 4 : plus 12.",
+  "05-defi": "À toi de jouer. Un jardinier prépare 9 jardinières. Dans chacune : x plants de fraisiers, et 5 plants de menthe. Écris le nombre total de plants, puis factorise-le. Mets pause, et cherche !",
+  "05b-correction": "Correction. Le total : 9 x plus 45. 45, c'est 9 fois 5. Donc 9 fois, entre parenthèses, x plus 5 : 9 jardinières, de x plus 5 plants.",
+  "06-finale": "Ce que tu as appris. La forme factorisée raconte souvent la situation : le nombre de groupes, fois ce qu'il y a dans un groupe. Développer permet de trouver les erreurs. Avec un facteur négatif, les signes de la parenthèse changent.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

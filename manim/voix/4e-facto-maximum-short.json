@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Factorise 4 x au carré plus 8 x. Beaucoup d'élèves s'arrêtent trop tôt. Et toi ?",
+  "01-secret": "Le secret : on sort tout ce qui est commun. Le plus grand nombre : 4. La lettre : x. Donc 4 x. 4 x au carré plus 8 x égale 4 x fois, entre parenthèses, x plus 2.",
+  "01q-question": "Question ! Factorise au maximum 6 x au carré plus 9 x. A : 3 fois, entre parenthèses, 2 x au carré plus 3 x. B : x fois, entre parenthèses, 6 x plus 9. C : 3 x fois, entre parenthèses, 2 x plus 3. Mets pause, et choisis !",
+  "01r-reponse": "Réponse C : 3 x fois, entre parenthèses, 2 x plus 3. Le 3 et le x sortent tous les deux.",
+  "02-question": "À toi. Factorise au maximum 10 x au carré plus 15 x. Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

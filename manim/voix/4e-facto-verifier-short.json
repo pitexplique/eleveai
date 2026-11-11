@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ton copain écrit : 4 x plus 20 égale 4 fois, entre parenthèses, x plus 20. Tu le crois ?",
+  "01-secret": "Le secret pour en être sûr : on développe. 4 fois x : 4 x. 4 fois 20 : 80. On trouve 4 x plus 80. C'est faux ! La bonne réponse : 4 fois, entre parenthèses, x plus 5.",
+  "01q-question": "Question ! Laquelle est juste pour 3 x moins 21 ? A : 3 fois, entre parenthèses, x moins 21. B : 3 fois, entre parenthèses, x plus 7. C : 3 fois, entre parenthèses, x moins 7. Mets pause, et choisis !",
+  "01r-reponse": "Réponse C : 3 fois, entre parenthèses, x moins 7. On développe : 3 x moins 21.",
+  "02-question": "À toi. 6 x plus 42 égale 6 fois, entre parenthèses, x plus 7 : juste ou faux ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

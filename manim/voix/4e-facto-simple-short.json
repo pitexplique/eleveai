@@ -1,0 +1,8 @@
+{
+  "00-accroche": "17 fois 6, plus 17 fois 4. De tête, sans poser l'opération. Tu y arrives ?",
+  "01-secret": "Le raccourci : le 17 est dans les deux produits. On le sort devant : 17 fois, entre parenthèses, 6 plus 4. C'est 17 fois 10 : 170.",
+  "01q-question": "Question ! Et avec une lettre ? Factorise 3 x plus 15. A : 3 fois, entre parenthèses, x plus 15. B : x fois, entre parenthèses, 3 plus 15. C : 3 fois, entre parenthèses, x plus 5. Mets pause, et choisis !",
+  "01r-reponse": "Réponse C : 3 fois, entre parenthèses, x plus 5. 15, c'est 3 fois 5.",
+  "02-question": "À toi. Calcule de tête 23 fois 7, plus 23 fois 3. Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

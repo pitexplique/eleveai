@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le facteur commun. Comment voir ce qui se répète dans une somme ?",
+  "01-logisticienne": "Inès est logisticienne. Elle organise les livraisons d'un entrepôt. Ce matin, 5 camions partent. Dans chaque camion : x palettes de riz, et 2 palettes d'eau. En tout, 5 x palettes de riz, et 10 palettes d'eau.",
+  "02-produits": "Sur sa feuille, Inès écrit 5 x plus 10. Cette somme a deux termes : 5 x, et 10. Écrivons chaque terme comme un produit. 5 x, c'est 5 fois x. 10, c'est 5 fois 2. Le 5 revient dans les deux termes : c'est le facteur commun. C'est le nombre de camions !",
+  "03-lettre": "Le facteur commun peut aussi être une lettre. x au carré plus 7 x. x au carré, c'est x fois x. 7 x, c'est 7 fois x. Les deux rectangles ont un côté commun : x. Le x revient dans les deux termes : x est le facteur commun.",
+  "03q-question": "Question ! Dans 7 x plus 14, quel est le facteur commun ? A : 7. B : 14. C : x. Mets pause, et choisis !",
+  "03r-reponse": "Réponse A : 7. 7 x, c'est 7 fois x, et 14, c'est 7 fois 2.",
+  "04-piege": "Le piège : prendre le premier nombre qu'on voit. Dans 6 x plus 9, on a envie de dire 6. Mais 9 n'est pas dans la table de 6 ! 6 x, c'est 3 fois 2 x. 9, c'est 3 fois 3. Le facteur commun, c'est 3.",
+  "05-absent": "Autre piège : 3 x plus 5. Le x est dans 3 x, mais il n'est pas dans 5. Ici, x n'est pas un facteur commun. Pour être commun, il faut être dans chaque terme.",
+  "05q-question": "Question ! Dans y au carré plus 3 y, quel est le facteur commun ? A : 3. B : y. C : y au carré. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : y. y au carré, c'est y fois y, et 3 y, c'est 3 fois y. Le 3 n'est pas dans y au carré.",
+  "06-defi": "À toi de jouer. Trouve le facteur commun de 10 x plus 15. Mets pause, et cherche !",
+  "06b-correction": "Correction. 10 x, c'est 5 fois 2 x. 15, c'est 5 fois 3. Le facteur commun est 5. Et pas 10 : 15 n'est pas dans la table de 10.",
+  "07-finale": "Ce que tu as appris. Un facteur commun multiplie chaque terme de la somme. Pour le trouver, on écrit chaque terme comme un produit. Ce peut être un nombre, ou une lettre.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
