@@ -613,7 +613,7 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
         # 3 : la citerne
         self.au_mot("Trois")
         self.play(FadeIn(cartes[2], scale=0.95), FadeIn(nums[2]), run_time=0.3)
-        ci = citerne(1.0, 1.15).move_to(P(x3 - 0.95, 0.72))
+        ci = citerne(0.62, 0.8).move_to(P(x3 - 1.5, 1.2))   # en haut à gauche, loin du texte
         cuve = ci[0]
 
         def eau(v):
@@ -624,13 +624,13 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
         self.au_mot("citerne")
         self.play(Create(ci), run_time=0.4)
         e = eau(900)
-        c1 = self.t("900 L", 36).move_to(P(x3 + 0.9, 1.1))
+        c1 = self.t("900 L", 34).move_to(P(x3 + 0.45, 0.9))
         self.au_mot("900")
         self.play(GrowFromEdge(e, DOWN), FadeIn(c1, scale=1.2), run_time=0.4)
         self.bring_to_front(ci)
-        c2 = self.t("− 40 L", 36, RAISON).move_to(P(x3 + 0.9, 0.65))
+        c2, c3 = self.t("− 40 L", 28, RAISON), self.t("par jour", 28, GREY_A)
+        VGroup(c2, c3).arrange(RIGHT, buff=0.25).move_to(P(x3, 0.42))   # sous la citerne, dans la carte
         self.poser(c2, "40")
-        c3 = self.t("par jour", 30, GREY_A).move_to(P(x3 + 0.9, 0.25))
         self.poser(c3, "par jour", False)
         self.defi_pause(-2.55, x=-0.6)
         self._defi = (tit, cartes, ci, e, eau, VGroup(m1, m2, m3))
