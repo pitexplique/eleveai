@@ -59,7 +59,7 @@ FILMS['multiplication']=function(outils){
           if(k<5) bonbon(c,x,y,22,COUL_BONBONS[k]);
           else { c.strokeStyle=CRAIE.blanc; c.lineWidth=5; c.setLineDash([12,10]); c.beginPath(); c.arc(x,y,24,0,7); c.stroke(); c.setLineDash([]); } }
         c.strokeStyle=CRAIE.d; c.lineWidth=7; c.setLineDash([18,12]); c.beginPath(); c.moveTo(100+4.5*95+15,350); c.lineTo(100+4.5*95+15,490); c.stroke(); c.setLineDash([]); }
-      ligneMots(c,[['5 =',tMoitie,CRAIE.d],['la moitié',tMoitie,CRAIE.d],['de 10',tC10b,CRAIE.d]],W/2,600,84,T);
+      ligneMots(c,[['5 = la moitié',tMoitie,CRAIE.d],['de 10',tC10b,CRAIE.d]],W/2,600,84,T);
       tab.maj(); return; }
     /* l'accroche : 16 paquets de 5, puis 16 × 10 = 160 ! */
     if(T>=t16) for(let k=0;k<16;k++) paquet(c,95+(k%8)*124,115+Math.floor(k/8)*140,.95,T>=t5);
