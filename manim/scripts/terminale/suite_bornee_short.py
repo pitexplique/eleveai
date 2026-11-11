@@ -75,7 +75,7 @@ class SuiteBorneeShort(ShortSuites):
     nom_voix = "terminale-suite-bornee-short"
     identite = "Maths Tle — EleveAI"
     ceinture = "blanche"
-    place_coche = -0.08           # poser_question : place du corps = 4,0 − 0,94 (voir bouton)
+    place_coche = 0.54            # poser_question : place du corps = 4,0 − 0,54 − 0,56 − 0,45 = 2,45 (comme bouton)
     hauteur_bouton = 1.25
     buff_boutons = 0.35
     Y_TITRE, Y_ECHELLE = 3.56, 2.86      # écartés : le titre ne touche pas l'échelle des ceintures
@@ -105,7 +105,7 @@ class SuiteBorneeShort(ShortSuites):
         rond = Circle(radius=0.21, fill_color=TERME, fill_opacity=1, stroke_width=0)
         lt = Text(lettre, font_size=30, color=WHITE, weight=BOLD).move_to(rond)
         c = corps if isinstance(corps, Mobject) else self.t(corps, 36, WHITE, 1e9)
-        place = largeur - 0.15 - rond.width - 0.15 - 0.6    # la coche, à droite, ne touche pas le texte
+        place = largeur - 0.15 - rond.width - 0.15 - 0.83   # coche (0,46) + 0,12 du bord + 0,25 d'air (≥ 40 px)
         if c.width > place:
             c.scale_to_fit_width(place)
         ligne = VGroup(VGroup(rond, lt), c).arrange(RIGHT, buff=0.15)
@@ -136,10 +136,10 @@ class SuiteBorneeShort(ShortSuites):
         g.extraits = [ex for _, _, ex in morceaux]
         return g
 
-    def ligne(self, morceaux, y, fs=40, avec=(), avec_k=None, ordre=None):
+    def ligne(self, morceaux, y, fs=40, avec=(), avec_k=None, ordre=None, larg=None):
         """Une ligne centrée en y, chaque morceau à sa voix (None : avec le précédent) ;
         ordre : l'ordre de la voix ; avec_k = {k: [animations]} jouées avec le morceau k."""
-        g = self.construire(morceaux, fs).move_to(P(0, y))
+        g = self.construire(morceaux, fs, larg).move_to(P(0, y))
         avec_k, paquet = avec_k or {}, []
 
         def jouer(fin=()):
@@ -315,9 +315,9 @@ class SuiteBorneeShort(ShortSuites):
         qm = self.t("?", 50, RAISON).move_to(C4 + P(1.1, 0.0))
         self.play(GrowFromCenter(tr4), FadeIn(sat4, scale=0.5), run_time=0.35)
         self.orbiter(sat4, C4, 0.47, 0.07)
-        self.ligne([("si", WHITE, "si l'altitude"), ("uₙ =", TERME, "u indice n égale"), ("550", WHITE, "550")],
-                   1.45, fs=40)
-        self.ligne([("− 4 sin(n),", RAISON, "4 sinus")], 0.92, fs=40)
+        self.ligne([("si", WHITE, "si l'altitude")], 1.5, fs=40)
+        self.ligne([("uₙ =", TERME, "u indice n égale"), ("550", WHITE, "550"), ("− 4 sin(n)", RAISON, "4 sinus")],
+                   0.93, fs=40, larg=self.largeur_texte)          # la formule entière, sur UNE ligne
         question = self.paragraphe([("quelle est", RAISON), ("l'altitude", RAISON), ("la plus haute", RAISON),
                                     ("possible ?", RAISON)], 37, buff=0.05, y=-0.63)
         for i, m in enumerate(question):                 # lignes à pas égal (sur la ligne de base)

@@ -553,8 +553,13 @@ class SuiteBorneeTle(PaysageSuites):
                          ("valable pour tout n", WHITE, None)], 0.7, fs=38)
         # le dessin : « ? ≤ wₙ ≤ ? » et le nuage entre deux traits inconnus
         b1, b2 = [VGroup(self.carte(1.0, 0.85, ORIGIN, RAISON), self.t("?", 52, RAISON)) for _ in range(2)]
-        mil = self.t("≤  wₙ  ≤", 48, TERME)
-        enc = VGroup(b1, mil, b2).arrange(RIGHT, buff=0.3).move_to(P(-2.9, -0.85))
+        mil = self.construire([("≤", TERME, None), ("wₙ", TERME, None), ("≤", TERME, None)], 48)  # une ligne de base
+        x = 0.0
+        for m in (b1, *mil, b2):                         # le même écart (0,3) entre chaque morceau
+            m.set_x(x + m.width / 2)
+            x += m.width + 0.3
+        b1.set_y(mil.get_y()); b2.set_y(mil.get_y())
+        enc = VGroup(b1, mil, b2).move_to(P(-2.9, -0.85))
         nu = NuageTermes((0, 14.6), (0, 11.5), P(1.3, -1.95), P(5.4, -0.2), nom_u="wₙ", fs=26)
         pts = [nu.point(k, v, r=0.07) for k, v in enumerate(DEFI)]
         h, b = self.trait(nu, 10, texte="?", fs=32), self.trait(nu, 4, texte="?", fs=32)
