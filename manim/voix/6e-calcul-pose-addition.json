@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'addition posée. Comment ne pas oublier une retenue ?",
+  "01-situation": "Voici Nadia. Elle est comptable dans une entreprise. Ce mois-ci, elle a payé 475 euros d'électricité et 286 euros d'internet. Combien en tout ?",
+  "02-aligner": "D'abord, on aligne les chiffres à droite. Les unités sous les unités, les dizaines sous les dizaines, les centaines sous les centaines.",
+  "03-pose": "On pose 475 plus 286. Unités : 5 plus 6, 11. J'écris 1, et je retiens 1 dizaine. Dizaines : 1 plus 7 plus 8, 16. J'écris 6, et je retiens 1 centaine. Centaines : 1 plus 4 plus 2, 7. Nadia a payé 761 euros.",
+  "04-retenue": "Pourquoi retenir 1 ? 11 unités, c'est 1 dizaine et 1 unité. La dizaine part dans la colonne des dizaines. Une retenue, c'est un paquet de 10 qui change de colonne.",
+  "05-question": "Question ! Combien font 368 plus 157 ? A : 525. B : 415. C : 515. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Unités : 8 plus 7, 15, je retiens 1. Dizaines : 1 plus 6 plus 5, 12, je retiens 1. Centaines : 1 plus 3 plus 1, 5. Ça fait 525.",
+  "06-piege": "Attention au piège ! Nadia ajoute 1 248 euros de loyer et 75 euros d'eau. On ne pose pas le 75 en commençant à gauche ! Le 5 va sous le 8, le 7 sous le 4. Ça fait 1 323 euros.",
+  "07-question": "Question ! Dans 2 405 plus 36, où poser le 36 ? A : le 3 sous le 2. B : le 6 sous le 5. C : le 3 sous le 4. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. On aligne à droite. Le 6 des unités va sous le 5 des unités. Le 3 des dizaines va sous le 0. Ça fait 2 441.",
+  "08-defi": "À toi de jouer ! Nadia paie trois factures : 348 euros, 275 euros et 96 euros. Combien en tout ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On pose les trois nombres, alignés à droite. Unités : 8 plus 5 plus 6, 19. J'écris 9, je retiens 1. Dizaines : 1 plus 4 plus 7 plus 9, 21. J'écris 1, je retiens 2. Centaines : 2 plus 3 plus 2, 7. Total : 719 euros.",
+  "09-finale": "Ce que tu as appris. On aligne les chiffres à droite. On commence par les unités. Un paquet de 10 devient une retenue dans la colonne de gauche.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

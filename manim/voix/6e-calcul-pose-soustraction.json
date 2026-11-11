@@ -1,0 +1,16 @@
+{
+  "00-garde": "La soustraction posée. Que faire quand le chiffre du haut est trop petit ?",
+  "01-situation": "Voici Hugo. Il est guide de montagne. Pour atteindre le sommet, son groupe doit monter 632 mètres. Il a déjà monté 458 mètres. Combien reste-t-il ?",
+  "02-sens": "Combien reste-t-il : c'est une soustraction. 632 moins 458. On pose le grand nombre en haut, et on aligne à droite.",
+  "03-pose": "Unités : 2 moins 8, impossible. Je casse une dizaine du 3 : il reste 2 dizaines, et j'ai 12 unités. 12 moins 8, 4. Dizaines : 2 moins 5, impossible. Je casse une centaine du 6 : il reste 5 centaines, et j'ai 12 dizaines. 12 moins 5, 7. Centaines : 5 moins 4, 1. Il reste 174 mètres.",
+  "04-verifier": "On vérifie avec une addition : 174 plus 458, ça fait 632. C'est juste !",
+  "05-question": "Question ! Combien font 81 moins 46 ? A : 35. B : 45. C : 25. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 1 moins 6, impossible : je casse une dizaine. 11 moins 6, 5. Il reste 7 dizaines : 7 moins 4, 3. Ça fait 35.",
+  "06-piege": "Attention au piège du zéro ! Le lendemain, la montée fait 503 mètres. Le groupe en a monté 128. Unités : 3 moins 8, impossible. Mais il y a 0 dizaine : rien à casser ! Alors je casse une centaine : 10 dizaines. Puis je casse une de ces dizaines : j'ai 13 unités. Il reste 4 centaines et 9 dizaines. 13 moins 8, 5. 9 moins 2, 7. 4 moins 1, 3. Il reste 375 mètres.",
+  "07-question": "Question ! Combien font 400 moins 135 ? A : 335. B : 265. C : 275. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Je casse une centaine, puis une dizaine. J'ai 10 unités, 9 dizaines et 3 centaines. 10 moins 5, 5. 9 moins 3, 6. 3 moins 1, 2. Ça fait 265.",
+  "08-defi": "À toi de jouer ! Une randonnée fait 1 000 mètres de montée. Le groupe monte 375 mètres le matin, puis 268 mètres l'après-midi. Combien reste-t-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le groupe a monté 375 plus 268 : 643 mètres. Il reste 1 000 moins 643 : 357 mètres. On vérifie : 357 plus 643, ça fait 1 000.",
+  "09-finale": "Ce que tu as appris. On pose le grand nombre en haut. Si le chiffre du haut est trop petit, on casse une dizaine ou une centaine. On vérifie avec une addition.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je range des œufs : 23 boîtes de 12 œufs. 23 fois 2, 46. 23 fois 1, 23. 46 plus 23, 69. J'ai 69 œufs ! Tu paries ?",
+  "01-verif": "Je vérifie. 23 boîtes, c'est plus de 20 boîtes. 20 boîtes de 10 œufs, c'est déjà 200 œufs. 69, c'est bien trop petit !",
+  "02-question": "Question ! Combien ai-je d'œufs ? A : 69. B : 266. C : 276. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 12, c'est 2 plus 10. 23 fois 2, 46. 23 fois 10, 230 : j'avais oublié le zéro. 46 plus 230, 276.",
+  "03-ouf": "276, c'est bien plus que 200. Ouf, mes œufs sont tous là !",
+  "04-commentaire": "À toi : combien font 21 fois 13 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

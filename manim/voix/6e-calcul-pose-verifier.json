@@ -1,0 +1,15 @@
+{
+  "00-garde": "Vérifier un calcul posé. Comment savoir si mon résultat est juste ?",
+  "01-situation": "Voici Zoé. Elle est réalisatrice de dessins animés. Dans un dessin animé, chaque seconde contient 24 images. Zoé fait beaucoup de calculs, et elle les vérifie toujours.",
+  "02-ordre": "Première méthode : l'ordre de grandeur. Zoé trouve 386 plus 247, 533. Elle arrondit : 386, c'est presque 390. 247, c'est presque 250. 390 plus 250, 640. 533, c'est trop loin ! Elle a oublié une retenue. Le bon résultat est 633.",
+  "03-question": "Question ! Quel est le bon ordre de grandeur de 498 plus 307 ? A : 700. B : 900. C : 800. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 498, c'est presque 500. 307, c'est presque 300. 500 plus 300, 800.",
+  "04-inverse": "Deuxième méthode : l'opération inverse. Zoé calcule 702 moins 358, et trouve 354. Elle vérifie avec une addition : 354 plus 358, 712. Ce n'est pas 702 ! Le bon résultat est 344. Et 344 plus 358, ça fait bien 702.",
+  "05-division": "Pour une division, on vérifie avec une multiplication. 96 divisé par 4 : Zoé trouve 34. Mais 34 fois 4, 136. C'est trop ! Le bon quotient est 24 : 24 fois 4, 96.",
+  "06-question": "Question ! Quelle addition vérifie 50 moins 17 égale 33 ? A : 33 plus 17. B : 50 plus 17. C : 50 plus 33. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. On ajoute ce qui reste à ce qu'on a enlevé : 33 plus 17, 50. C'est juste.",
+  "07-defi": "À toi de jouer ! Le dessin animé de Zoé dure 3 minutes. Une minute, c'est 60 secondes. Chaque seconde contient 24 images. Combien d'images faut-il dessiner ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 3 minutes, c'est 3 fois 60 : 180 secondes. On pose 180 fois 24. Première ligne : 180 fois 4, 720. Deuxième ligne : 180 fois 20, 3 600. Total : 720 plus 3 600, 4 320 images. On vérifie : 200 fois 20, 4 000. C'est proche !",
+  "08-finale": "Ce que tu as appris. On vérifie avec un ordre de grandeur. On vérifie avec l'opération inverse : l'addition pour la soustraction, la multiplication pour la division.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

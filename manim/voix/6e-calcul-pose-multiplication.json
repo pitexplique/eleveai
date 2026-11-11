@@ -1,0 +1,17 @@
+{
+  "00-garde": "La multiplication posée. Pourquoi écrit-on un zéro sur la deuxième ligne ?",
+  "01-situation": "Voici Théo. Il est agriculteur. Il plante des salades : 267 salades par rangée, et 4 rangées. Combien de salades ?",
+  "02-pose": "On pose 267 fois 4. Le 4 multiplie chaque chiffre, en commençant par les unités. 4 fois 7, 28 : j'écris 8, je retiens 2. 4 fois 6, 24, plus 2, 26 : j'écris 6, je retiens 2. 4 fois 2, 8, plus 2, 10. Théo plante 1 068 salades.",
+  "03-question": "Question ! Combien font 135 fois 3 ? A : 405. B : 395. C : 305. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 3 fois 5, 15 : j'écris 5, je retiens 1. 3 fois 3, 9, plus 1, 10 : j'écris 0, je retiens 1. 3 fois 1, 3, plus 1, 4. Ça fait 405.",
+  "04-champ": "Dans un autre champ, Théo a 24 rangées de 36 plants de tomates. On pose 36 fois 24. Et 24, c'est 4 plus 20.",
+  "05-lignes": "Première ligne : 36 fois 4, 144. Deuxième ligne : 36 fois 20. On écrit d'abord un 0 aux unités, parce qu'on multiplie par des dizaines. Puis 36 fois 2, 72. La ligne vaut 720.",
+  "06-total": "On additionne les deux lignes : 144 plus 720, 864. Théo a 864 plants de tomates.",
+  "07-piege": "Attention au piège ! Sans le zéro, la deuxième ligne vaudrait 72, et le total 216. On vérifie l'ordre de grandeur : 36, c'est presque 40. 24, c'est presque 20. 40 fois 20, 800. 864 est proche. 216 est bien trop petit.",
+  "08-question": "Question ! Dans 52 fois 13, que vaut la deuxième ligne ? A : 52. B : 156. C : 520. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 13, c'est 3 plus 10. La deuxième ligne, c'est 52 fois 10 : 520. On n'oublie pas le zéro.",
+  "09-defi": "À toi de jouer ! Théo range des pots de fleurs : 45 rangées de 28 pots. Combien de pots ? Mets pause, et cherche !",
+  "09b-correction": "Correction. On pose 28 fois 45. Première ligne : 28 fois 5, 140. Deuxième ligne : 28 fois 40, 1 120. Total : 140 plus 1 120, 1 260 pots.",
+  "10-finale": "Ce que tu as appris. On multiplie chiffre par chiffre, en commençant par les unités. On ajoute la retenue après le produit. Pour les dizaines, on écrit d'abord un zéro.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

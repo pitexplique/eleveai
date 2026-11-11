@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'ai posé 615 moins 278. J'ai trouvé 347. Je suis sûr de moi ! Tu paries ?",
+  "01-verif": "Je vérifie avec une addition : 347 plus 278, ça fait 625. Ce n'est pas 615 ! Il y a un problème.",
+  "02-question": "Question ! Combien font 615 moins 278 ? A : 347. B : 337. C : 463. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Je casse une dizaine : 15 moins 8, 7. Il reste 0 dizaine : je casse une centaine. 10 moins 7, 3. 5 moins 2, 3. Ça fait 337.",
+  "03-ouf": "Et 337 plus 278, ça fait bien 615. Ouf, vérifier m'a sauvé !",
+  "04-commentaire": "À toi : un ami trouve 403 moins 156, 357. Quel est le bon résultat ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

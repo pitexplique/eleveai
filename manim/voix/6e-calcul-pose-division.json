@@ -1,0 +1,18 @@
+{
+  "00-garde": "La division posée. Que veut dire le reste ?",
+  "01-situation": "Voici Maëlle. Elle est logisticienne : elle organise les livraisons. Ce matin, elle a 58 colis. Une camionnette en transporte 7. Combien de camionnettes pleines ?",
+  "02-tables": "On cherche combien de fois 7 rentre dans 58. 7 fois 8, 56. 7 fois 9, 63 : c'est trop. Donc 8 camionnettes pleines.",
+  "03-reste": "Il reste 58 moins 56 : 2 colis. On écrit : 58 égale 7 fois 8, plus 2. 8, c'est le quotient. 2, c'est le reste.",
+  "04-question": "Question ! Dans 47 divisé par 5, quel est le reste ? A : 2. B : 7. C : 9. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 5 fois 9, 45. 47 moins 45, 2. Le reste est 2. Il est plus petit que 5 : c'est bon.",
+  "05-potence": "Pour un grand nombre, on pose la division dans une potence. Maëlle doit envoyer 157 colis, avec des camionnettes de 6. On écrit 157 à gauche, et 6 à droite.",
+  "06-etapes": "1 centaine, c'est trop petit pour 6. Alors on prend 15 dizaines. 6 fois 2, 12 : j'écris 2 au quotient. 15 moins 12, 3. J'abaisse le 7 : 37. 6 fois 6, 36 : j'écris 6. 37 moins 36, 1. Le quotient est 26, et le reste est 1.",
+  "07-sens": "26 camionnettes pleines, et il reste 1 colis. Ce colis doit partir aussi ! Maëlle a besoin de 27 camionnettes.",
+  "08-verif": "On vérifie : 6 fois 26, 156. Plus 1, 157. C'est juste !",
+  "09-question": "Question ! 50 élèves partent en sortie. Une voiture prend 4 élèves. Combien de voitures faut-il ? A : 12. B : 2. C : 13. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. 50 égale 4 fois 12, plus 2. Il reste 2 élèves : il faut une voiture de plus. 13 voitures.",
+  "10-defi": "À toi de jouer ! Maëlle range 245 bouteilles d'eau dans des cartons de 8. Combien de cartons pleins ? Combien de bouteilles restent ? Mets pause, et cherche !",
+  "10b-correction": "Correction. On prend 24 dizaines : 8 fois 3, 24. 24 moins 24, 0. J'abaisse le 5. 5, c'est trop petit pour 8 : j'écris 0 au quotient. 30 cartons pleins, et il reste 5 bouteilles. On vérifie : 8 fois 30, 240, plus 5, 245.",
+  "11-finale": "Ce que tu as appris. On cherche combien de fois le diviseur rentre, avec les tables. Le reste est toujours plus petit que le diviseur. On vérifie : diviseur fois quotient, plus le reste.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je distribue 50 cartes à 6 joueurs. 6 fois 7, 42. Chacun en a 7, et il m'en reste 8 ! Tu paries ?",
+  "01-verif": "Je vérifie. Il me reste 8 cartes. Mais avec 8 cartes, je peux encore en donner 1 à chacun des 6 joueurs ! Il y a un problème.",
+  "02-question": "Question ! Combien de cartes pour chacun ? A : 7, il en reste 8. B : 8, il en reste 2. C : 9, il en reste 0. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 6 fois 8, 48. 50 moins 48, 2. Chacun a 8 cartes, et il en reste 2.",
+  "03-ouf": "Le reste, 2, est plus petit que 6. Ouf, la partie peut commencer !",
+  "04-commentaire": "À toi : 45 billes pour 7 copains. Combien pour chacun, et combien en reste-t-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
