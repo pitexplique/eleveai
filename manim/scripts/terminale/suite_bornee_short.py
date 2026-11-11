@@ -268,9 +268,10 @@ class SuiteBorneeShort(ShortSuites):
         sat.clear_updaters()
 
         # ── 03 : question-pause → C (397 ≤ uₙ ≤ 403) ──
-        rappel = self.t("uₙ = 400 + 3 cos(n)", 36, GREY_A, audit=False)       # la donnée, déjà dite
+        rappel = self.construire([("uₙ =", TERME, None), ("400", WHITE, None), ("+ 3 cos(n)", RAISON, None)],
+                                 48, larg=3.95)                        # la donnée (déjà dite), en grand
         q = self.poser_question("03-question",
-                                [(rappel, None), (self.t("Pour tout n :", 42), "Pour tout n")],
+                                [(rappel, None), (self.t("Pour tout n :", 28), "Pour tout n")],
                                 [self.choix([("0 ≤", "0"), ("uₙ ≤", "u indice n"), ("400", "400")]),
                                  self.choix([("400 ≤", "400"), ("uₙ ≤", "u indice n"), ("403", "403")]),
                                  self.choix([("397 ≤", "397"), ("uₙ ≤", "u indice n"), ("403", "403")])], 2, y_question=2.85)
@@ -307,21 +308,25 @@ class SuiteBorneeShort(ShortSuites):
         self.au_mot("Et toi")
         et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, self.Y_TITRE))
         self.play(FadeIn(et, shift=DOWN * 0.1), run_time=0.35)
-        C4 = P(0, 1.45)
-        tr4 = terre(0.45).move_to(C4)
-        haut = DashedVMobject(Circle(radius=0.95, stroke_color=RAISON, stroke_width=3).move_to(C4), num_dashes=40)
-        sat4 = satellite(0.9).move_to(C4 + RIGHT * 0.85)
-        qm = self.t("?", 56, RAISON).move_to(C4 + P(1.45, 0.55))
+        C4 = P(0, 2.42)
+        tr4 = terre(0.27).move_to(C4)
+        haut = DashedVMobject(Circle(radius=0.58, stroke_color=RAISON, stroke_width=3).move_to(C4), num_dashes=32)
+        sat4 = satellite(0.55).move_to(C4 + RIGHT * 0.5)
+        qm = self.t("?", 50, RAISON).move_to(C4 + P(1.1, 0.0))
         self.play(GrowFromCenter(tr4), FadeIn(sat4, scale=0.5), run_time=0.35)
-        self.orbiter(sat4, C4, 0.78, 0.12)
-        self.ligne([("si", WHITE, "si l'altitude"), ("uₙ =", TERME, "u indice n égale"), ("550", WHITE, "550"),
-                    ("− 4 sin(n),", RAISON, "4 sinus")], 0.05, fs=42)
-        question = self.paragraphe([("quelle est l'altitude", RAISON), ("la plus haute possible ?", RAISON)], 42,
-                                   buff=0.1, y=-0.95, larg=self.largeur_texte / 1.05)
+        self.orbiter(sat4, C4, 0.47, 0.07)
+        self.ligne([("si", WHITE, "si l'altitude"), ("uₙ =", TERME, "u indice n égale"), ("550", WHITE, "550")],
+                   1.45, fs=40)
+        self.ligne([("− 4 sin(n),", RAISON, "4 sinus")], 0.92, fs=40)
+        question = self.paragraphe([("quelle est", RAISON), ("l'altitude", RAISON), ("la plus haute", RAISON),
+                                    ("possible ?", RAISON)], 37, buff=0.05, y=-0.63)
+        for i, m in enumerate(question):                 # lignes à pas égal (sur la ligne de base)
+            m.set_y(question[0].get_y() - 0.56 * i + (0.05 if i == 1 else 0))
         self.au_mot("quelle est")
-        self.play(FadeIn(question[0], shift=UP * 0.1), run_time=0.3)
+        self.play(FadeIn(question[0], shift=UP * 0.1), FadeIn(question[1], shift=UP * 0.1), run_time=0.3)
         self.au_mot("la plus haute")
-        self.play(FadeIn(question[1], shift=UP * 0.1), Create(haut), FadeIn(qm, scale=1.5), run_time=0.4)
+        self.play(FadeIn(question[2], shift=UP * 0.1), FadeIn(question[3], shift=UP * 0.1), Create(haut),
+                  FadeIn(qm, scale=1.5), run_time=0.4)
         self.appel_commentaire(-2.4)
         self.attendre_voix(marge=0.6)
         sat4.clear_updaters()

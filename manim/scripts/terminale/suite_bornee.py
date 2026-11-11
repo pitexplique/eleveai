@@ -305,7 +305,7 @@ class SuiteBorneeTle(PaysageSuites):
                           for k, v in enumerate(SON[:10])])
         self.play(LaggedStart(*[GrowFromEdge(b, DOWN) for b in barres], lag_ratio=0.35), run_time=1.8)
         self.au_mot("jamais franchie")
-        pq = self.t("?", 64, RAISON).move_to(nu.G(9.6, 103.2) + UP * 0.35)
+        pq = self.t("?", 60, RAISON).next_to(lim, RIGHT, buff=0.3)          # à droite du trait, sans le toucher
         self.play(Indicate(lim, color=PIEGE, scale_factor=1.05), FadeIn(pq, scale=1.5), run_time=0.6)
         self.attendre_voix(marge=0.5)
 
@@ -399,11 +399,11 @@ class SuiteBorneeTle(PaysageSuites):
         self.dire("04b-reponse")
         self.q_reponse(q, 2)
         cA, cB = q.cartes[0], q.cartes[1]
-        nu = NuageTermes((0, 10.6), (97.5, 100.5), P(2.0, -2.0), P(5.3, -0.65), fs=26)
-        pts = [nu.point(k, v, r=0.07) for k, v in enumerate(SON[:11]) if k >= 1]
+        nu = NuageTermes((0, 10.6), (97.7, 100.3), P(0.95, -2.15), P(5.15, -0.5), fs=30)
+        pts = [nu.point(k, v, r=0.09) for k, v in enumerate(SON[:11]) if k >= 1]
         pts = [None] + pts
-        t98, t99 = self.trait(nu, 98, PIEGE, "98"), self.trait(nu, 99, PIEGE, "99")
-        t100 = self.trait(nu, 100, JUSTE, "100", audit=False)
+        t98, t99 = self.trait(nu, 98, PIEGE, "98", fs=30), self.trait(nu, 99, PIEGE, "99", fs=30)
+        t100 = self.trait(nu, 100, JUSTE, "100", fs=30, audit=False)
         x0 = -6.2
         for d in pts[1:]:
             d.set_opacity(0)
@@ -411,7 +411,7 @@ class SuiteBorneeTle(PaysageSuites):
         self.ligne([("u₇ =", TERME, "u indice 7"), ("99,5", WHITE, "99,5")], -0.45, x=x0, fs=46,
                    avec_k={0: [Create(nu.ax_n), Create(nu.ax_u), FadeIn(nu.lab_n), FadeIn(nu.lab_u),
                                *[d.animate.set_opacity(1) for d in pts[1:]]],
-                           1: [pts[7].animate.scale(1.8).set_color(RAISON)]})
+                           1: [pts[7].animate.set_opacity(1).scale(1.8).set_color(RAISON)]})
         e2 = self.construire([("il dépasse", PIEGE, "il dépasse"), ("98", PIEGE, "98"), ("et", PIEGE, None),
                               ("99", PIEGE, "99")], 42).move_to(P(0, -1.35)).align_to(P(x0, 0), LEFT)
         self.suivre("il dépasse")
