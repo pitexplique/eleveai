@@ -1,0 +1,9 @@
+{
+  "00-garde": "Suite arithmétique sur un graphique. Tu paries que tu la reconnais au premier coup d'œil ?",
+  "01-situation": "Lina est monteuse vidéo. Sa série a 4 épisodes en ligne, puis elle en publie 3 de plus chaque semaine. Les points : 0 et 4, 1 et 7, 2 et 10.",
+  "02-alignes": "On ajoute toujours 3 : les points sont alignés.",
+  "03-question": "Question ! Lequel de ces nuages est celui d'une suite arithmétique ? A : des points qui montent de plus en plus vite. B : des points en zigzag. C : des points alignés. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. Un écart constant donne des points alignés.",
+  "04-commentaire": "Et toi : 0 et 4, 1 et 7, 2 et 10… Quelle est l'ordonnée du point d'abscisse 10 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

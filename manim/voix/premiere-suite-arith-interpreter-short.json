@@ -1,0 +1,9 @@
+{
+  "00-garde": "Interpréter une suite. Tu paries que tu trouves l'année sans te tromper d'un an ?",
+  "01-situation": "Un refuge pour animaux fait adopter chaque année 12 chiens de plus que l'année d'avant. On note u indice n le nombre d'adoptions : u indice 0 correspond à 2026.",
+  "02-idee": "L'indice compte les années écoulées depuis 2026.",
+  "03-question": "Question ! À quelle année correspond u indice 9 ? A : 2036. B : 2035. C : 2034. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 2026 plus 9, égale 2035.",
+  "04-commentaire": "Et toi : cette fois, u indice 1 correspond à 2026. À quelle année correspond u indice 9 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Suite géométrique : la relation de récurrence. Comment écrire : « à chaque étape, on multiplie » ?",
+  "01-situation": "Voici Manon. Elle est apicultrice. Au printemps, une de ses colonies compte 10 000 abeilles, et chaque mois, elle grandit de 20 %. Manon doit prévoir le moment où il faudra agrandir la ruche.",
+  "02-relation": "On note u indice n le nombre d'abeilles n mois après le début : la suite commence à u indice 0 égale 10 000. Augmenter de 20 %, c'est multiplier par 1,2. Donc u indice n plus 1 égale 1,2 fois u indice n. Le terme suivant égale la raison fois le terme actuel.",
+  "03-question": "Question ! Une ville perd 2 % de ses habitants chaque année. On note v indice n sa population après n années. Quelle relation traduit cette situation ? A : v indice n plus 1 égale 0,98 fois v indice n. B : v indice n plus 1 égale v indice n moins 2. C : v indice n plus 1 égale 0,02 fois v indice n. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. Perdre 2 %, c'est garder 98 % : on multiplie par 0,98.",
+  "04-derouler": "Déroulons pour Manon. u indice 1 égale 1,2 fois 10 000, égale 12 000. u indice 2 égale 1,2 fois 12 000, égale 14 400. u indice 3 égale 1,2 fois 14 400, égale 17 280 abeilles.",
+  "05-precedent": "Et pour remonter le temps ? On fait l'opération inverse : on divise par la raison. Si une suite vérifie w indice n plus 1 égale 2 fois w indice n, et w indice 6 égale 320, alors w indice 5 égale 320 divisé par 2, égale 160, et w indice 4 égale 80.",
+  "06-piege": "Voilà le piège ! Écrire u indice n plus 1 égale u indice n plus 20. Ça voudrait dire 20 abeilles de plus chaque mois, pas 20 % de plus. Un pourcentage fixe, on ne l'ajoute pas : on MULTIPLIE par le coefficient.",
+  "07-question": "Question ! Une suite vérifie t indice n plus 1 égale 3 fois t indice n, et t indice 4 égale 162. Combien vaut t indice 3 ? A : 486. B : 159. C : 54. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Pour reculer d'un rang, on divise par 3 : 162 divisé par 3, égale 54.",
+  "08-defi": "À toi de jouer ! On lâche une balle d'une hauteur de 160 centimètres. À chaque rebond, elle remonte à 75 % de la hauteur précédente. On note h indice n la hauteur après n rebonds, avec h indice 0 égale 160. Écris la relation de récurrence, puis calcule h indice 3. Mets pause, et cherche !",
+  "08b-correction": "Correction. Remonter à 75 %, c'est multiplier par 0,75 : h indice n plus 1 égale 0,75 fois h indice n. h indice 1 égale 120. h indice 2 égale 90. h indice 3 égale 67,5 centimètres.",
+  "09-finale": "Ce que tu as appris. La relation de récurrence d'une suite géométrique : u indice n plus 1 égale q fois u indice n. Pour avancer d'un rang, on multiplie par la raison ; pour reculer, on divise. Et un pourcentage se traduit par un coefficient multiplicateur.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

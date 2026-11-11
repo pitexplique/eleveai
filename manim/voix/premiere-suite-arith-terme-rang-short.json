@@ -1,0 +1,9 @@
+{
+  "00-garde": "Un terme lointain. Tu paries que tu ne te trompes pas d'un pas ?",
+  "01-situation": "Chloé prépare une course à vélo. La 1re semaine, elle roule 20 kilomètres, puis 5 kilomètres de plus chaque semaine. On note u indice n la distance de la semaine n : u indice 1 égale 20.",
+  "02-pas": "De la semaine 1 à la semaine 10, il y a 9 pas, pas 10.",
+  "03-question": "Question ! Combien de kilomètres roule-t-elle la 10e semaine ? A : 70. B : 75. C : 65. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 20 plus 9 fois 5, égale 65.",
+  "04-commentaire": "Et toi : combien de kilomètres Chloé roulera-t-elle la 30e semaine ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

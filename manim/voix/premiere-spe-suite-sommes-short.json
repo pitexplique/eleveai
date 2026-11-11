@@ -1,0 +1,9 @@
+{
+  "00-garde": "La somme 1 plus 2 plus … plus n. Tu paries que tu la calcules plus vite qu'une calculatrice ?",
+  "01-situation": "Jade est nageuse. Elle nage 1 longueur le premier jour, 2 le deuxième, et ainsi de suite : une de plus chaque jour, pendant 30 jours.",
+  "02-formule": "Son total : 1 plus 2 plus … plus 30, égale 30 fois 31, divisé par 2.",
+  "03-question": "Question ! Combien de longueurs en tout ? A : 465. B : 900. C : 450. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 30 fois 31, égale 930, divisé par 2 : 465 longueurs.",
+  "04-commentaire": "Et toi : en combien de jours aurait-elle nagé 210 longueurs en tout ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-garde": "Somme géométrique. Tu paries que ça grimpe plus vite que tu ne crois ?",
+  "01-situation": "Enzo publie son premier morceau de musique. Le premier jour, 3 personnes le partagent. Puis chaque jour, 2 fois plus de nouvelles personnes que la veille.",
+  "02-calcul": "Sur 5 jours : 3 plus 6 plus 12 plus 24 plus 48. Avec la formule : 3 fois, 2 puissance 5 moins 1, divisé par 2 moins 1, égale 3 fois 31, égale 93 personnes.",
+  "03-question": "Question ! Et sur 10 jours, combien de personnes en tout ? A : 1 536. B : 3 072. C : 3 069. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 3 fois, 2 puissance 10 moins 1, égale 3 fois 1 023, égale 3 069.",
+  "04-commentaire": "Et toi : sur 20 jours, combien de personnes en tout ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

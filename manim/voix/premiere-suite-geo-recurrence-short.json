@@ -1,0 +1,9 @@
+{
+  "00-garde": "Récurrence géométrique. Tu paries que tu écris la bonne relation ?",
+  "01-situation": "Un tournoi d'échecs en ligne réunit 1 024 joueurs. À chaque tour, la moitié est éliminée : 1 024, 512, 256.",
+  "02-idee": "On note u indice n le nombre de joueurs après n tours : à chaque tour, on divise par 2.",
+  "03-question": "Question ! Quelle relation vérifie la suite ? A : u indice n plus 1 égale 0,5 fois u indice n. B : u indice n plus 1 égale u indice n moins 2. C : u indice n plus 1 égale u indice n moins 0,5. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. Diviser par 2, c'est multiplier par 0,5.",
+  "04-commentaire": "Et toi : 1 024 joueurs au départ. Combien en reste-t-il après 4 tours ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

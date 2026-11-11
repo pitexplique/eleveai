@@ -1,0 +1,18 @@
+{
+  "00-garde": "Suites et Python : lire un programme. Que calcule cette boucle, et quel terme affiche-t-elle ?",
+  "01-situation": "Voici Maxime. Il est développeur dans une jeune entreprise qui entraîne une intelligence artificielle. La version 0 de son modèle demande 3 heures de calcul. Pour chaque nouvelle version, le temps double, puis il ajoute 1 heure de tests. Pour prévoir, il écrit un programme Python.",
+  "02-programme": "Voici le programme. Ligne 1 : u prend la valeur 3. Ligne 2 : pour i allant de 0 à 3, u prend la valeur 2 u plus 1. Ligne 3 : afficher u.",
+  "03-range": "range de 4 donne i égale 0, 1, 2 et 3 : la boucle fait 4 tours. Chaque tour fait passer de u indice n à u indice n plus 1. Ce programme calcule la suite u indice 0 égale 3, et u indice n plus 1 égale 2 u indice n plus 1.",
+  "04-tours": "Suivons u, tour après tour : 3, puis 7, puis 15, puis 31, puis 63. Le programme affiche 63 : c'est u indice 4.",
+  "05-question": "Question ! On change la boucle : u prend la valeur 5, puis pour i allant de 0 à 2, u prend la valeur u moins 2. Qu'affiche le programme ? A : 1. B : 3. C : moins 1. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 3 tours : 5, puis 3, puis 1, puis moins 1.",
+  "06-while": "Maxime veut savoir à partir de quelle version le calcul dépasse 100 heures. Il écrit une boucle tant que. u prend la valeur 3, n prend la valeur 0. Tant que u est inférieur à 100, u prend la valeur 2 u plus 1, et n prend la valeur n plus 1. Puis afficher n.",
+  "07-while-tours": "u vaut 3, 7, 15, 31, 63, puis 127. 127 n'est plus inférieur à 100 : la boucle s'arrête après 5 tours. Le programme affiche 5.",
+  "08-piege": "Voilà le piège ! Ce programme affiche n, pas u. La réponse est un rang, 5, pas une valeur, 127. C'est à la version 5 que le calcul dépasse 100 heures.",
+  "09-question": "Question ! u prend la valeur 3, puis pour i allant de 2 à 6, u prend la valeur 2 u plus 1. Quel terme de la suite le programme affiche-t-il ? A : u indice 6. B : u indice 5. C : u indice 7. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. i va de 2 à 6 : cela fait 5 tours. On part de u indice 0 et on avance de 5 rangs : u indice 5.",
+  "10-defi": "À toi de jouer ! u prend la valeur 1, n prend la valeur 0. Tant que u est inférieur à 50, u prend la valeur 3 u, et n prend la valeur n plus 1. Puis afficher n. Qu'affiche le programme ? Mets pause, et cherche !",
+  "10b-correction": "Correction. u vaut 1, 3, 9, 27, puis 81. 81 n'est plus inférieur à 50 : la boucle s'arrête après 4 tours. Le programme affiche 4 : c'est le premier rang n où u indice n dépasse 50.",
+  "11-finale": "Ce que tu as appris. La première ligne donne u indice 0, la ligne de la boucle donne le passage au terme suivant. range de K fait K tours. Une boucle tant que s'arrête dès que la condition devient fausse : son compteur donne un rang.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

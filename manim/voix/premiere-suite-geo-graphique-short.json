@@ -1,0 +1,9 @@
+{
+  "00-garde": "Suite géométrique sur un graphique. Tu paries que tu la reconnais rien qu'à son dessin ?",
+  "01-situation": "Dans un jeu vidéo, les monstres triplent à chaque vague : 2, 6, 18, 54.",
+  "02-dessin": "On place les points : 0 et 2, 1 et 6, 2 et 18, 3 et 54.",
+  "03-question": "Question ! À quoi ressemble ce nuage de points ? A : des points qui montent de plus en plus vite. B : des points alignés. C : des points qui descendent. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. On multiplie par 3 : les écarts grandissent, et la courbe se creuse.",
+  "04-commentaire": "Et toi : 2, 6, 18, 54… Quelle est l'ordonnée du point d'abscisse 6 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

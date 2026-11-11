@@ -1,0 +1,17 @@
+{
+  "00-garde": "Calculer la limite d'une suite. Quand n devient énorme, quel terme gagne ?",
+  "01-situation": "Voici Mehdi. Il est data scientist : il entraîne des intelligences artificielles. Pour n données, un premier algorithme fait n au carré moins 100 n opérations ; un second en fait 2 puissance n. Avant de lancer un calcul sur des millions de données, Mehdi doit savoir lequel va exploser.",
+  "02-references": "Les limites de référence. n, n au carré et racine de n tendent vers plus l'infini. 1 sur n et 1 sur n au carré tendent vers 0. Et q puissance n tend vers 0 si q est entre moins 1 et 1, vers plus l'infini si q est plus grand que 1. Si q est inférieur ou égal à moins 1, il n'y a pas de limite.",
+  "03-polynome": "Premier algorithme : n au carré moins 100 n. On obtient « plus l'infini moins plus l'infini » : on factorise par le terme de plus haut degré. n au carré moins 100 n égale n au carré fois, 1 moins 100 sur n. n au carré tend vers plus l'infini, la parenthèse tend vers 1 : la limite est plus l'infini.",
+  "04-question": "Question ! Pour u indice n égale moins 2 n au cube plus 5 n au carré, la limite est : A : plus l'infini. B : moins l'infini. C : on ne peut pas conclure. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Le terme de plus haut degré, moins 2 n au cube, l'emporte : il tend vers moins l'infini.",
+  "05-quotient": "Pour un quotient, on factorise en haut et en bas. u indice n égale 3 n plus 1, sur n plus 2. On divise par n : 3 plus 1 sur n, sur 1 plus 2 sur n. La limite est 3 sur 1, égale 3. Même degré en haut et en bas : la limite est le quotient des coefficients dominants.",
+  "06-question": "Question ! La limite de 4 n au carré moins 1, sur 2 n au carré plus 7, est : A : 2. B : moins 1 sur 7. C : plus l'infini. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. Même degré : on garde les coefficients dominants, 4 sur 2, égale 2. Moins 1 sur 7, c'est le piège des constantes.",
+  "07-comparees": "Second algorithme de Mehdi : 2 puissance n. Croissances comparées : une exponentielle l'emporte sur toute puissance de n. n au carré sur 2 puissance n tend vers 0 : à long terme, 2 puissance n écrase n au carré. C'est le second algorithme qui explose.",
+  "08-piege": "Voilà le piège ! Une forme indéterminée ne veut pas dire « pas de limite ». « Infini sur infini » ou « infini moins infini », c'est seulement le signal qu'il faut transformer l'écriture : factoriser, simplifier, puis conclure.",
+  "09-defi": "À toi de jouer ! Pour n supérieur ou égal à 1, trouve la limite de chaque suite. u indice n égale 5 moins 3 sur n au carré. v indice n égale 2 n plus 1, sur n au carré plus 3. w indice n égale 3 fois 0,5 puissance n, plus 4. Mets pause, et cherche !",
+  "09b-correction": "Correction. 3 sur n au carré tend vers 0 : u indice n tend vers 5. Pour v, le dénominateur, de degré 2, l'emporte sur le numérateur, de degré 1 : v indice n tend vers 0. 0,5 puissance n tend vers 0 : w indice n tend vers 4.",
+  "10-finale": "Ce que tu as appris. On part des limites de référence et de q puissance n. Pour un polynôme ou un quotient, on factorise par le terme qui domine. Et l'exponentielle l'emporte sur toute puissance de n.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Sens de variation d'une suite. Comment prouver qu'une suite monte toujours, ou descend toujours ?",
+  "01-situation": "Voici Rania. Elle est technicienne de laboratoire. Elle dilue une solution : à chaque étape, la concentration est divisée par 2. Elle part de 80 milligrammes par litre.",
+  "02-definition": "Une suite est croissante si chaque terme est plus grand que le précédent, ou égal : u indice n plus 1 supérieur ou égal à u indice n, pour tout n. Elle est décroissante si u indice n plus 1 inférieur ou égal à u indice n, pour tout n.",
+  "03-difference": "Méthode 1 : on étudie le signe de u indice n plus 1 moins u indice n. Par exemple, u indice n égale n au carré plus 3. u indice n plus 1 moins u indice n égale 2 n plus 1 : c'est positif pour tout n. La suite est croissante.",
+  "04-quotient": "Méthode 2, pour une suite à termes strictement positifs : on compare u indice n plus 1 divisé par u indice n à 1. Pour la dilution de Rania, ce quotient vaut 0,5 : il est plus petit que 1. La concentration est décroissante : 80, 40, 20, 10.",
+  "05-question": "Question ! Pour tout n, u indice n plus 1 égale u indice n moins n au carré moins 1. La suite est : A : croissante. B : ni croissante ni décroissante. C : décroissante. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. u indice n plus 1 moins u indice n égale moins n au carré moins 1 : c'est négatif pour tout n.",
+  "06-piege": "Voilà le piège ! Pour une suite géométrique, regarde q ET le signe du premier terme. Avec u indice 0 égale moins 5 et q égale 2 : moins 5, moins 10, moins 20. q est plus grand que 1, et pourtant la suite est décroissante.",
+  "07-question": "Question ! u indice 0 égale 6 et u indice n plus 1 égale moins 2 fois u indice n. La suite est : A : ni croissante ni décroissante. B : croissante. C : décroissante. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 6, moins 12, 24 : les termes changent de signe à chaque fois, ils montent puis descendent.",
+  "08-defi": "À toi de jouer ! Pour tout entier naturel n, u indice n plus 1 moins u indice n égale 3 n moins 10. À partir de quel rang n a-t-on u indice n plus 1 supérieur ou égal à u indice n ? Mets pause, et cherche !",
+  "08b-correction": "Correction. u indice n plus 1 supérieur ou égal à u indice n revient à 3 n moins 10 supérieur ou égal à 0, donc n supérieur ou égal à 10 sur 3, environ 3,33. Le plus petit entier qui convient est 4 : la suite est croissante à partir du rang 4.",
+  "09-finale": "Ce que tu as appris. Pour le sens de variation, on étudie le signe de u indice n plus 1 moins u indice n. Pour des termes positifs, on peut comparer le quotient à 1. Et pour une suite géométrique, on regarde la raison et le signe du premier terme.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

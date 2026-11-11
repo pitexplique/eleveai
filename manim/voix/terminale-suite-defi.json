@@ -1,0 +1,20 @@
+{
+  "00-garde": "Suites : un exercice de bac. Une plateforme perd des abonnés chaque mois, et en gagne d'autres. Combien en aura-t-elle sur le long terme ?",
+  "01-situation": "Voici Lina. Elle est data analyst pour une plateforme de séries, qui a 4 000 abonnés ce mois-ci. Chaque mois, 10 % des abonnés partent, et 600 nouveaux arrivent. Sa directrice veut savoir si l'on dépassera un jour 5 500 abonnés, et quand.",
+  "02-enonce": "L'énoncé. On note u indice n le nombre d'abonnés au mois n, à partir de n égale 0. Un : justifie que u indice n plus 1 égale 0,9 u indice n plus 600. Deux : avec v indice n égale u indice n moins 6 000, montre que v est géométrique. Trois : exprime u indice n. Quatre : trouve la limite. Cinq : trouve le mois où l'on dépasse 5 500 abonnés.",
+  "03-modele": "Question un. Perdre 10 %, c'est multiplier par 0,9 ; puis on ajoute 600. Donc u indice 0 égale 4 000, et u indice n plus 1 égale 0,9 u indice n plus 600. Par exemple, u indice 1 égale 3 600 plus 600, égale 4 200.",
+  "04-question": "Question ! La suite u est : A : géométrique de raison 0,9. B : ni arithmétique ni géométrique. C : arithmétique de raison 600. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. On multiplie par 0,9 puis on ajoute 600 : ni l'un ni l'autre seul. D'où la suite auxiliaire.",
+  "05-auxiliaire": "Question deux. v indice n plus 1 égale u indice n plus 1 moins 6 000, égale 0,9 u indice n plus 600 moins 6 000, égale 0,9 u indice n moins 5 400, égale 0,9 fois, u indice n moins 6 000. Donc v indice n plus 1 égale 0,9 v indice n : la suite v est géométrique de raison 0,9. Et v indice 0 égale 4 000 moins 6 000, égale moins 2 000.",
+  "06-question": "Question ! On en déduit, pour tout entier naturel n : A : u indice n égale 6 000 moins 2 000 fois 0,9 puissance n. B : u indice n égale moins 2 000 fois 0,9 puissance n. C : u indice n égale 4 000 plus 6 000 fois 0,9 puissance n. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. v indice n égale moins 2 000 fois 0,9 puissance n, et u indice n égale v indice n plus 6 000 : on n'oublie pas d'ajouter 6 000.",
+  "07-limite": "Question quatre. 0,9 est entre 0 et 1, donc 0,9 puissance n tend vers 0, et u indice n tend vers 6 000 abonnés.",
+  "08-seuil": "Question cinq. On cherche le plus petit n tel que u indice n est supérieur à 5 500 : 2 000 fois 0,9 puissance n inférieur à 500, soit 0,9 puissance n inférieur à 0,25. À la calculatrice, u indice 13 vaut environ 5 491,6, et u indice 14 environ 5 542,5. C'est au mois 14.",
+  "09-question": "Question ! Une élève résout 0,9 puissance n inférieur à 0,25 avec le logarithme. Elle obtient : A : n inférieur à 13,16 environ. B : n égale 0,25. C : n supérieur à 13,16 environ. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. Le logarithme de 0,9 est négatif : en divisant par lui, le sens de l'inégalité change. n supérieur à 13,16 environ, donc n égale 14.",
+  "10-piege": "Voilà le piège ! La limite n'est ni 4 000, le premier terme, ni 600, ce qu'on ajoute. C'est le point fixe : 0,9 fois 6 000 plus 600 égale 6 000.",
+  "11-defi": "À toi de jouer ! Un cinéma a 300 cartes d'abonnement au mois 0. Chaque mois, 20 % ne sont pas renouvelées, et 100 nouvelles sont vendues. Avec v indice n égale u indice n moins 500, exprime u indice n, puis trouve sa limite. Mets pause, et cherche !",
+  "11b-correction": "Correction. u indice n plus 1 égale 0,8 u indice n plus 100. Alors v indice n plus 1 égale 0,8 u indice n moins 400, égale 0,8 v indice n, et v indice 0 égale moins 200. Donc u indice n égale 500 moins 200 fois 0,8 puissance n. Comme 0,8 puissance n tend vers 0, la limite est 500.",
+  "12-finale": "Ce que tu as appris. Pour u indice n plus 1 égale a u indice n plus b : v indice n égale u indice n moins le point fixe est géométrique de raison a, puis u indice n égale v indice n plus le point fixe. Si a est entre 0 et 1, la limite est le point fixe. Pour un seuil : calculatrice ou logarithme.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

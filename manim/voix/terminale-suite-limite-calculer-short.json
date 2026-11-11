@@ -1,0 +1,9 @@
+{
+  "00-garde": "Limites. Tu paries que tu sais qui gagne, entre n au carré et 2 puissance n ?",
+  "01-situation": "Lou est game designer. Dans son jeu de stratégie, au tour n, le joueur a n au carré soldats, et l'ennemi 2 puissance n. Au tour 4 : 16 contre 16.",
+  "02-tours": "Au tour 10 : 100 contre 1 024. Au tour 20 : 400 contre 1 048 576.",
+  "03-question": "Question ! Que fait n au carré sur 2 puissance n, quand n tend vers plus l'infini ? A : il tend vers 1. B : il tend vers plus l'infini. C : il tend vers 0. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. L'exponentielle l'emporte sur toute puissance de n : le rapport s'écrase vers 0.",
+  "04-commentaire": "Et toi : au tour 5, combien de soldats a le joueur, et combien en a l'ennemi ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

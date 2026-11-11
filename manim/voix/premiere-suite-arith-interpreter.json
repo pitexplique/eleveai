@@ -1,0 +1,18 @@
+{
+  "00-garde": "Suite arithmétique : interpréter. Que veut dire chaque nombre d'une formule, dans la vraie vie ?",
+  "01-situation": "Voici Clara. Elle est kinésithérapeute. Son patient, Bastien, s'est fait opérer du genou. Au début de sa rééducation, il marche 400 mètres. Chaque semaine, il marchera 150 mètres de plus. Il veut savoir quand il pourra marcher 3 kilomètres, pour aller au lycée à pied.",
+  "02-formule": "On note u indice n la distance qu'il marche, en mètres, n semaines après le début : la suite commence à u indice 0. u indice n égale 400 plus 150 n. 400, c'est la distance au départ. 150, c'est ce qu'il gagne chaque semaine.",
+  "03-terme": "u indice 10 égale 400 plus 1 500, égale 1 900. Ça veut dire : 10 semaines après le début, Bastien marche 1 900 mètres. Ce n'est pas ce qu'il a gagné : il a gagné 1 500 mètres.",
+  "04-question": "Question ! Une médiathèque possède w indice n égale 2 000 plus 120 n livres, en 2026 plus n. Que veut dire le nombre 120 ? A : le nombre de livres en 2026. B : le nombre de livres ajoutés chaque année. C : le nombre d'années écoulées. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Le nombre devant n, c'est la raison : ce qui s'ajoute chaque année.",
+  "05-seuil": "Et les 3 kilomètres, soit 3 000 mètres ? On résout 400 plus 150 n supérieur ou égal à 3 000. 150 n supérieur ou égal à 2 600, donc n supérieur ou égal à 2 600 divisé par 150, environ 17,3.",
+  "06-piege": "Voilà le piège ! Arrondir à 17. u indice 17 égale 400 plus 2 550, égale 2 950 : il manque 50 mètres. u indice 18 égale 3 100 : ça y est. On prend le premier entier qui convient : 18 semaines après le début.",
+  "07-annee": "Quand n compte les années, on traduit l'indice en date. Si u indice 0 correspond à 2026, u indice 7 correspond à 2033. Mais si la suite commence à u indice 1 en 2026, u indice 7 correspond à 2032.",
+  "08-motif": "Un motif se lit aussi comme une suite. Pour rééduquer les doigts, Clara fait assembler des T en petits carreaux. Étape 1 : 4 carreaux. Étape 2 : 7 carreaux. Étape 3 : 10 carreaux. On ajoute 3 carreaux à chaque étape : un de chaque côté de la barre, et un au pied. u indice n égale 4 plus 3 fois, n moins 1.",
+  "09-question": "Question ! Quelle étape du T utilise exactement 61 carreaux ? A : l'étape 61. B : l'étape 21. C : l'étape 20. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. 4 plus 3 fois, n moins 1, égale 61 : 3 fois, n moins 1, égale 57, donc n moins 1 égale 19, et n égale 20.",
+  "10-defi": "À toi de jouer ! Un motif en forme de croix : étape 1, 5 carreaux ; étape 2, 9 carreaux ; étape 3, 13 carreaux. Tu as 150 carreaux. Quelle est la plus grande étape que tu peux construire entièrement ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Chaque étape ajoute 4 carreaux, un au bout de chaque bras : u indice n égale 5 plus 4 fois, n moins 1. u indice 37 égale 5 plus 144, égale 149 : ça passe. u indice 38 égale 153 : c'est trop. La plus grande étape est l'étape 37.",
+  "11-finale": "Ce que tu as appris. Dans u indice n égale u indice 0 plus r n, u indice 0 est la valeur de départ, et r ce qui s'ajoute à chaque étape. Un terme est une valeur totale, pas un gain. Et pour un seuil, on prend le premier entier qui convient.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

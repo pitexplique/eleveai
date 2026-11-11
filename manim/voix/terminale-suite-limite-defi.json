@@ -1,0 +1,19 @@
+{
+  "00-garde": "Limites de suites : un exercice de bac. Une population de tortues va-t-elle se stabiliser, ou disparaître ?",
+  "01-situation": "Voici Maïa. Elle est biologiste marine dans une réserve où vivent 200 tortues. Chaque année, 25 % d'entre elles quittent la zone, et 100 jeunes tortues arrivent. Maïa doit dire aux financeurs combien de tortues la réserve accueillera sur le long terme.",
+  "02-enonce": "L'énoncé. On note u indice n le nombre de tortues l'année n, à partir de n égale 0 : u indice 0 égale 200, et u indice n plus 1 égale 0,75 u indice n plus 100. Un : démontre par récurrence que u indice n est inférieur ou égal à 400. Deux : montre que la suite est croissante. Trois : déduis-en qu'elle converge. Quatre : calcule sa limite.",
+  "03-recurrence": "Question un. Initialisation : u indice 0 égale 200, et 200 est inférieur ou égal à 400. Hérédité : supposons u indice k inférieur ou égal à 400 pour un entier naturel k. Alors 0,75 u indice k inférieur ou égal à 300, puis 0,75 u indice k plus 100 inférieur ou égal à 400 : u indice k plus 1 inférieur ou égal à 400. Conclusion : pour tout entier naturel n, u indice n inférieur ou égal à 400.",
+  "04-question": "Question ! Dans l'hérédité, on suppose u indice k inférieur ou égal à 400, et on obtient u indice k plus 1 inférieur ou égal à N. Que vaut N ? A : 300. B : 500. C : 400. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. 0,75 fois 400 plus 100, égale 300 plus 100, égale 400 : la propriété se transmet.",
+  "05-croissante": "Question deux. u indice n plus 1 moins u indice n égale moins 0,25 u indice n plus 100, égale 0,25 fois, 400 moins u indice n. Comme u indice n est inférieur ou égal à 400, cette différence est positive : la suite est croissante.",
+  "06-question": "Question ! La suite est croissante et majorée par 400. Le théorème de convergence monotone permet d'affirmer : A : elle converge vers 400. B : elle converge vers un réel l. C : elle tend vers plus l'infini. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. Elle converge, mais le théorème ne donne pas la valeur de l : il faut la calculer.",
+  "07-limite": "Questions trois et quatre. Croissante et majorée, la suite converge vers un réel l, et l égale 0,75 l plus 100. Donc 0,25 l égale 100, et l égale 400 tortues.",
+  "08-piege": "Voilà le piège ! Résoudre l égale f de l ne suffit pas. Avec le modèle u indice n plus 1 égale 1,5 u indice n moins 200, on trouve aussi l égale 400. Mais en partant de 200 : 200, 100, moins 50… La suite tend vers moins l'infini : les tortues disparaissent.",
+  "09-question": "Question ! Avec u indice 0 égale 200 et u indice n plus 1 égale 1,5 u indice n moins 200, la suite u indice n moins 400 est géométrique de raison : A : 1,5. B : moins 200. C : 0,5. Mets pause, et choisis !",
+  "09b-reponse": "Réponse A. u indice n moins 400 égale moins 200 fois 1,5 puissance n ; 1,5 est plus grand que 1, donc la suite tend vers moins l'infini.",
+  "10-defi": "À toi de jouer ! Soit u indice 0 égale 0 et, pour tout entier naturel n, u indice n plus 1 égale racine de, u indice n plus 12. On admet que la suite converge vers un réel l positif. Quelle équation vérifie l ? Que vaut l ? Mets pause, et cherche !",
+  "10b-correction": "Correction. On passe à la limite : l égale racine de, l plus 12. On élève au carré : l au carré égale l plus 12, soit l au carré moins l moins 12 égale 0. Les solutions sont 4 et moins 3. Comme l est positif, l égale 4.",
+  "11-finale": "Ce que tu as appris. Au bac : on borne la suite par récurrence, on étudie son sens de variation, le théorème de convergence monotone donne la convergence, puis l égale f de l donne la limite. Mais l égale f de l, seul, ne prouve jamais la convergence.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

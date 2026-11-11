@@ -1,0 +1,9 @@
+{
+  "00-garde": "Un terme lointain. Tu paries qu'en pliant une feuille 10 fois, elle dépasse 10 centimètres d'épaisseur ?",
+  "01-situation": "Une feuille de papier a une épaisseur de 0,1 millimètre. À chaque pliage, son épaisseur double. On note u indice n l'épaisseur après n pliages : u indice 0 égale 0,1.",
+  "02-idee": "Après n pliages, on a multiplié n fois par 2.",
+  "03-question": "Question ! Quelle formule donne l'épaisseur ? A : u indice n égale 0,1 fois 2 fois n. B : u indice n égale 0,1 plus 2 n. C : u indice n égale 0,1 fois 2 puissance n. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. Et u indice 10 égale 0,1 fois 1 024, égale 102,4 millimètres : plus de 10 centimètres !",
+  "04-commentaire": "Et toi : quelle est l'épaisseur, en millimètres, après 7 pliages ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

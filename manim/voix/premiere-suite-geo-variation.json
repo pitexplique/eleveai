@@ -1,0 +1,16 @@
+{
+  "00-garde": "Suite géométrique : son sens de variation. Monte-t-elle, ou descend-elle ? Il faut comparer la raison au bon nombre.",
+  "01-situation": "Voici Sarah. Elle est game designer : elle règle la difficulté d'un jeu vidéo. Pour chaque niveau, il faut 5 % de points d'expérience de plus qu'au niveau d'avant. Un testeur affirme : « 5 %, c'est si peu que ça reste presque pareil ». Sarah doit juger cette phrase.",
+  "02-croissante": "On note u indice n les points demandés pour le niveau n : la suite commence à u indice 1 égale 2 000. On multiplie par 1,05 à chaque niveau : 2 000, 2 100, 2 205. 1,05 est plus grand que 1 : chaque terme est plus grand que le précédent. La suite est croissante, lentement, mais sans jamais s'arrêter.",
+  "03-regle": "La règle, pour une suite géométrique à termes positifs. Si q est plus grand que 1, elle est croissante. Si q est compris entre 0 et 1, elle est décroissante. Si q égale 1, elle est constante. On compare la raison à 1.",
+  "04-question": "Question ! Une suite géométrique à termes positifs a pour raison 0,9. Elle est : A : décroissante. B : croissante, car 0,9 est positif. C : constante, car 0,9 est proche de 1. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 0,9 est plus petit que 1 : à chaque étape, on ne garde que 90 %, donc ça baisse.",
+  "05-reste-positive": "Les ventes du jeu, elles, baissent de 10 % par mois : 50 000, 45 000, 40 500. La suite décroît et se rapproche de 0, mais elle ne devient jamais négative : on garde toujours 90 % d'un nombre positif.",
+  "06-piege": "Voilà le piège ! Comparer q à 0. q égale 0,9 est positif, et pourtant la suite descend. Pour une suite arithmétique, on regarde le signe de r. Pour une suite géométrique, on compare q à 1.",
+  "07-question": "Question ! La suite v indice n égale 300 fois 1,02 puissance n est : A : décroissante, car le taux est faible. B : constante. C : croissante. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. La raison est la base de la puissance : 1,02, plus grande que 1.",
+  "08-defi": "À toi de jouer ! Croissante, décroissante ou constante ? Un : une ville de 5 000 habitants perd 2 % de ses habitants par an. Deux : w indice n égale 40 fois 1 puissance n. Trois : t indice 0 égale 8, et t indice n plus 1 égale 1,5 fois t indice n. Mets pause, et cherche !",
+  "08b-correction": "Correction. Un : q égale 0,98, plus petit que 1 : décroissante. Deux : q égale 1, tous les termes valent 40 : constante. Trois : q égale 1,5, plus grand que 1 : croissante.",
+  "09-finale": "Ce que tu as appris. Pour une suite géométrique à termes positifs, on compare la raison à 1 : plus grande, elle croît ; entre 0 et 1, elle décroît vers 0 sans devenir négative ; égale à 1, elle est constante. Même une raison proche de 1 fait bouger la suite.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

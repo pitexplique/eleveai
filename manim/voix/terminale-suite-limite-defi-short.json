@@ -1,0 +1,9 @@
+{
+  "00-garde": "Somme infinie. Tu paries qu'un ballon qui rebondit sans fin parcourt une distance… finie ?",
+  "01-situation": "Léo est ingénieur chez un fabricant de ballons de basket. Dans son test, le premier trajet du ballon fait 2 mètres, et chaque trajet suivant vaut 0,5 fois le précédent : 2, 1, 0,5, 0,25 mètre.",
+  "02-somme": "La distance totale est S indice n égale 2 fois, 1 moins 0,5 puissance n plus 1, sur 1 moins 0,5. Et 0,5 puissance n plus 1 tend vers 0.",
+  "03-question": "Question ! La distance totale S indice n tend vers : A : plus l'infini. B : 4 mètres. C : 2 mètres. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 2 sur 1 moins 0,5, égale 2 sur 0,5, égale 4 mètres : une infinité de rebonds, mais une distance finie.",
+  "04-commentaire": "Et toi : si chaque trajet vaut 0,75 fois le précédent, avec toujours 2 mètres au départ, quelle distance totale parcourt le ballon ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

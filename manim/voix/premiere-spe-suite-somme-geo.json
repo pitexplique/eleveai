@@ -1,0 +1,16 @@
+{
+  "00-garde": "Somme des termes d'une suite géométrique. Comment additionner des nombres qui doublent, sans tout poser ?",
+  "01-situation": "Voici Yasmine. Elle est épidémiologiste : elle surveille un virus de la grippe. La première semaine, il y a 50 nouveaux cas. Puis chaque semaine, 2 fois plus de nouveaux cas que la semaine d'avant. Combien de malades en tout, sur 6 semaines ?",
+  "02-astuce": "Commençons par S égale 1 plus 2 plus 2 au carré plus … plus 2 puissance 5. On multiplie par 2 : 2 S égale 2 plus 2 au carré plus … plus 2 puissance 6. On retire S : presque tout s'annule. Il reste 2 S moins S égale 2 puissance 6 moins 1. Donc S égale 63.",
+  "03-formule": "En général, pour q différent de 1 : 1 plus q plus q au carré plus … plus q puissance n égale q puissance n plus 1, moins 1, divisé par q moins 1. Attention : il y a n plus 1 termes, de q puissance 0 à q puissance n.",
+  "04-question": "Question ! Combien de termes dans la somme 1 plus 3 plus 3 au carré plus … plus 3 puissance 8 ? A : 9. B : 3. C : 8. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Les exposants vont de 0 à 8 : cela fait 9 termes. Le 1 du début, c'est 3 puissance 0.",
+  "05-application": "Pour Yasmine : 50 plus 50 fois 2 plus … plus 50 fois 2 puissance 5. On met 50 en facteur : 50 fois, 2 puissance 6 moins 1, divisé par 2 moins 1, égale 50 fois 63, égale 3 150 cas en 6 semaines.",
+  "06-piege": "Voilà le piège ! Sur 6 semaines, le dernier exposant est 5, pas 6. Dans la formule, l'exposant du haut a un de plus que le dernier exposant : 2 puissance 6. Avec 2 puissance 7, on compterait une semaine de trop.",
+  "07-question": "Question ! Combien vaut 1 plus 2 plus 2 au carré plus … plus 2 puissance 9 ? A : 2 047. B : 1 023. C : 1 024. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le dernier exposant est 9 : 2 puissance 10 moins 1, divisé par 2 moins 1, égale 1 023.",
+  "08-defi": "À toi de jouer ! Une suite géométrique a pour premier terme u indice 0 égale 4 et pour raison 3. Calcule u indice 0 plus u indice 1 plus … plus u indice 4. Mets pause, et cherche !",
+  "08b-correction": "Correction. De u indice 0 à u indice 4 : 5 termes. S égale 4 fois, 3 puissance 5 moins 1, divisé par 3 moins 1, égale 4 fois 242, divisé par 2, égale 484. On vérifie : 4 plus 12 plus 36 plus 108 plus 324, égale 484.",
+  "09-finale": "Ce que tu as appris. Pour q différent de 1, 1 plus q plus … plus q puissance n égale q puissance n plus 1, moins 1, divisé par q moins 1. Avec un premier terme u indice 0, on le met en facteur. Et on compte bien les termes : n plus 1, en partant de l'exposant 0.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

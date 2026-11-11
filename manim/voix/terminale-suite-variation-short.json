@@ -1,0 +1,9 @@
+{
+  "00-garde": "Sens de variation. Tu paries que multiplier par 1,1 peut faire descendre ?",
+  "01-situation": "Malik est conseiller bancaire. Dans ce modèle, un client a un découvert : son solde est de moins 1 000 euros au mois 0, et les frais le multiplient par 1,1 chaque mois.",
+  "02-termes": "Moins 1 000, moins 1 100, moins 1 210. La raison est 1,1, plus grande que 1… et le solde descend !",
+  "03-question": "Question ! Une suite géométrique de raison 1,1 est croissante ou décroissante selon : A : le signe du premier terme. B : le rang n. C : rien, elle est toujours croissante. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. Premier terme positif : elle monte. Premier terme négatif : elle descend.",
+  "04-commentaire": "Et toi : moins 1 000 euros au mois 0, multipliés par 1,1 chaque mois. Quel est le solde au mois 3 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

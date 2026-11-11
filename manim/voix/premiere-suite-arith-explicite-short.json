@@ -1,0 +1,9 @@
+{
+  "00-garde": "La formule explicite. Tu paries que tu la trouves en 10 secondes ?",
+  "01-situation": "Le compteur d'une trottinette électrique affiche 120 kilomètres. Chaque jour, sa propriétaire roule 15 kilomètres. On note u indice n le kilométrage après n jours : u indice 0 égale 120.",
+  "02-idee": "Après n jours, on a ajouté n fois 15.",
+  "03-question": "Question ! Quelle est la formule explicite ? A : u indice n égale 15 plus 120 n. B : u indice n égale 120 fois 15 puissance n. C : u indice n égale 120 plus 15 n. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. Le premier terme, 120, plus n fois la raison, 15.",
+  "04-commentaire": "Et toi : combien de kilomètres affiche le compteur après 30 jours ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

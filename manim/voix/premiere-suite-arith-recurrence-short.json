@@ -1,0 +1,9 @@
+{
+  "00-garde": "Relation de récurrence. Tu paries que tu remontes le temps d'une suite ?",
+  "01-situation": "Un food truck sert chaque semaine 35 repas de plus que la semaine d'avant. On note u indice n le nombre de repas de la semaine n.",
+  "02-relation": "Chaque semaine, on ajoute 35 : u indice n plus 1 égale u indice n plus 35. Pour reculer d'une semaine, on retire 35.",
+  "03-question": "Question ! u indice 10 égale 600. Combien vaut u indice 9 ? A : 635. B : 565. C : 35. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. On recule d'un rang : 600 moins 35, égale 565.",
+  "04-commentaire": "Et toi : u indice 0 égale 250. Combien vaut u indice 4 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

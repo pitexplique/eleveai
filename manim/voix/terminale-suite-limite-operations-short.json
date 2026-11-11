@@ -1,0 +1,9 @@
+{
+  "00-garde": "Limites. Tu paries qu'infini moins infini, ça ne fait pas 0 ?",
+  "01-situation": "Amina est géographe. Elle compare deux villes qui grandissent sans fin. Au bout de n ans, la ville A a n au carré plus 5 n milliers d'habitants, et la ville B en a n au carré milliers.",
+  "02-infini": "Les deux populations tendent vers plus l'infini. Et l'écart entre les deux ?",
+  "03-question": "Question ! L'écart, n au carré plus 5 n moins n au carré, tend vers : A : 0. B : plus l'infini. C : 5. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. L'écart vaut 5 n : il grandit sans fin. « Infini moins infini », ce n'est pas 0.",
+  "04-commentaire": "Et toi : au bout de 10 ans, quel est l'écart entre les deux villes, en milliers d'habitants ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

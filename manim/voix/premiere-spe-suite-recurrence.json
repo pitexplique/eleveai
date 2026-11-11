@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suite définie par récurrence. Comment calculer un terme à partir du précédent, et quand passer à une formule directe ?",
+  "01-situation": "Voici Awa. Elle est vétérinaire dans un centre de soins pour tortues marines. À son arrivée, une jeune tortue pèse 40 grammes. Chaque semaine, elle prend 15 grammes.",
+  "02-recurrence": "On note u indice n sa masse, en grammes, après n semaines : la suite commence à u indice 0 égale 40. Pour passer d'une semaine à la suivante, on ajoute 15 : u indice n plus 1 égale u indice n plus 15. C'est une définition par récurrence : un premier terme, et une règle pour passer au suivant.",
+  "03-proche": "On calcule de proche en proche : u indice 1 égale 55, u indice 2 égale 70, u indice 3 égale 85.",
+  "04-question": "Question ! Une suite est définie par u indice 0 égale 3 et u indice n plus 1 égale 2 u indice n moins 1. Combien vaut u indice 2 ? A : 9. B : 5. C : 10. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. u indice 1 égale 2 fois 3 moins 1, égale 5. Puis u indice 2 égale 2 fois 5 moins 1, égale 9.",
+  "05-explicite": "Mais pour la masse après 52 semaines, il faudrait 52 calculs ! On ajoute toujours 15 : c'est une suite arithmétique. Sa forme explicite : u indice n égale 40 plus 15 n. Donc u indice 52 égale 40 plus 15 fois 52, égale 820 grammes.",
+  "06-inverse": "Et dans l'autre sens. Dans le bassin, la masse d'algues est v indice n égale 5 fois 2 puissance n, en kilogrammes, après n mois. Chaque terme est 2 fois le précédent : v indice n plus 1 égale 2 v indice n, avec v indice 0 égale 5. On passe de la forme explicite à la récurrence.",
+  "07-piege": "Voilà le piège ! Si Awa note u indice 1 la masse à l'arrivée, la suite commence à 1 : u indice 1 égale 40. Alors, au rang n, il n'y a eu que n moins 1 semaines : u indice n égale 40 plus 15 fois, n moins 1. Avec 40 plus 15 n, on compterait une semaine de trop.",
+  "08-question": "Question ! Laquelle de ces suites est définie de façon explicite ? A : u indice 0 égale 2 et u indice n plus 1 égale 3 u indice n. B : u indice n égale n au carré moins 4. C : u indice 1 égale 5 et u indice n plus 1 égale u indice n plus n. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. u indice n est donné directement en fonction de n : on peut calculer u indice 100 tout de suite, sans les termes d'avant.",
+  "09-defi": "À toi de jouer ! Une suite est définie par u indice 1 égale 7 et, pour n à partir de 1, u indice n plus 1 égale u indice n moins 4. Donne sa forme explicite, puis calcule u indice 30. Mets pause, et cherche !",
+  "09b-correction": "Correction. On enlève 4 à chaque fois : suite arithmétique de raison moins 4, qui commence à u indice 1. u indice n égale 7 moins 4 fois, n moins 1. u indice 30 égale 7 moins 4 fois 29, égale 7 moins 116, égale moins 109.",
+  "10-finale": "Ce que tu as appris. Une récurrence donne un premier terme et une règle pour passer au suivant : on calcule de proche en proche. Pour un terme lointain, on reconnaît une suite arithmétique ou géométrique, et on passe à la forme explicite. Et on vérifie où commence la suite : u indice 0 ou u indice 1.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

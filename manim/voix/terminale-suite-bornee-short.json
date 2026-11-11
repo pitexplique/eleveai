@@ -1,0 +1,9 @@
+{
+  "00-garde": "Suite bornée. Tu paries que tu trouves l'altitude la plus basse et la plus haute d'un satellite ?",
+  "01-situation": "Inès est ingénieure en mécanique spatiale. L'altitude de son satellite, en kilomètres, au tour n, est u indice n égale 400 plus 3 cosinus de n.",
+  "02-cosinus": "Cosinus de n reste entre moins 1 et 1. Donc 3 cosinus de n reste entre moins 3 et 3.",
+  "03-question": "Question ! Pour tout n : A : 0 inférieur ou égal à u indice n, inférieur ou égal à 400. B : 400 inférieur ou égal à u indice n, inférieur ou égal à 403. C : 397 inférieur ou égal à u indice n, inférieur ou égal à 403. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 400 moins 3, et 400 plus 3 : l'altitude reste entre 397 et 403 kilomètres.",
+  "04-commentaire": "Et toi : si l'altitude est u indice n égale 550 moins 4 sinus de n, quelle est l'altitude la plus haute possible ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

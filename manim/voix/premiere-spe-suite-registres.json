@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suites : des mots aux symboles. Que veut dire, en français, u indice 4 égale 180 ?",
+  "01-situation": "Voici Sofiane. Il dirige une école de musique. À la rentrée 2026, elle compte 120 élèves. Avec une nouvelle classe de guitare, il prévoit 15 élèves de plus chaque année.",
+  "02-notation": "On note u indice n le nombre d'élèves après n années. La suite commence à n égale 0 : u indice 0 égale 120. n, c'est le rang : le nombre d'années écoulées. u indice n, c'est la valeur : le nombre d'élèves.",
+  "03-egalite": "Alors, u indice 4 égale 180 se lit : après 4 années, l'école compte 180 élèves. En effet, 120 plus 4 fois 15, égale 180.",
+  "04-question": "Question ! Que veut dire u indice 6 égale 210 ? A : après 210 années, il y a 6 élèves. B : après 7 années, il y a 210 élèves. C : après 6 années, il y a 210 élèves. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. L'indice 6 compte les années ; le nombre 210, c'est la valeur : le nombre d'élèves.",
+  "05-recurrence": "Pour passer d'une année à la suivante, on ajoute 15 : u indice n plus 1 égale u indice n plus 15. Et si l'école gagnait 10 % d'élèves chaque année, on multiplierait par 1,1 : u indice n plus 1 égale 1,1 fois u indice n.",
+  "06-annee": "Quelle année correspond à u indice 7 ? u indice 0, c'est 2026. Donc u indice 7, c'est 7 années plus tard : 2033.",
+  "07-piege": "Voilà le piège ! Si on décide que u indice 1 correspond à 2026, tout se décale d'un cran : 2033 devient u indice 8. Et la formule devient u indice n égale 120 plus 15 fois, n moins 1. Regarde toujours où commence la suite.",
+  "08-question": "Question ! Un orchestre perd 5 % de ses abonnés chaque année. On note u indice n le nombre d'abonnés après n années. Quelle relation convient ? A : u indice n plus 1 égale 0,95 fois u indice n. B : u indice n plus 1 égale u indice n moins 5. C : u indice n plus 1 égale 0,05 fois u indice n. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Diminuer de 5 %, c'est multiplier par 1 moins 0,05, soit 0,95.",
+  "09-defi": "À toi de jouer ! La lettre d'information de l'école compte 200 abonnés : u indice 0 égale 200. Chaque mois, 10 % des abonnés se désinscrivent, puis 30 nouveaux s'inscrivent. Écris u indice n plus 1 en fonction de u indice n, puis calcule u indice 1. Mets pause, et cherche !",
+  "09b-correction": "Correction. Perdre 10 %, c'est multiplier par 0,9, puis on ajoute 30 : u indice n plus 1 égale 0,9 fois u indice n plus 30. Dans cet ordre : d'abord le pourcentage, ensuite l'ajout. u indice 1 égale 0,9 fois 200 plus 30, égale 180 plus 30, égale 210.",
+  "10-finale": "Ce que tu as appris. Dans u indice n, n est le rang et u indice n la valeur. Ajouter toujours le même nombre r : u indice n plus 1 égale u indice n plus r. Un pourcentage fixe : on multiplie par le coefficient. Et regarde toujours si la suite commence à 0 ou à 1.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

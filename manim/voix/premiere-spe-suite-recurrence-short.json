@@ -1,0 +1,9 @@
+{
+  "00-garde": "Suite par récurrence. Tu paries que tu prévois l'épisode 3 en 10 secondes ?",
+  "01-situation": "Une série est vue par 3 millions de personnes pour l'épisode 1 : u indice 1 égale 3. À chaque nouvel épisode, le nombre de spectateurs, en millions, est multiplié par 2, puis on enlève 1 : u indice n plus 1 égale 2 u indice n moins 1.",
+  "02-calcul": "Épisode 2 : u indice 2 égale 2 fois 3 moins 1, égale 5 millions.",
+  "03-question": "Question ! Combien vaut u indice 3 ? A : 10. B : 5. C : 9. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 2 fois 5, égale 10, moins 1 : 9 millions. On part du terme précédent, et on n'oublie pas le moins 1.",
+  "04-commentaire": "Et toi : combien vaut u indice 5 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Suite géométrique : interpréter. Que disent, dans la vraie vie, chaque nombre et chaque indice d'une formule ?",
+  "01-situation": "Voici Baptiste. Il est chargé de mobilité dans une grande ville : il prépare les pistes cyclables. En 2026, on compte 50 000 trajets à vélo par jour, et une étude prévoit 20 % de plus chaque année. La ville veut savoir en quelle année les trajets auront doublé, pour décider quand élargir les pistes.",
+  "02-formule": "On note u indice n le nombre de trajets par jour en 2026 plus n : u indice 0 correspond à 2026. u indice n égale 50 000 fois 1,2 puissance n. 50 000, c'est la valeur en 2026. 1,2, c'est une hausse de 20 % chaque année : 1,2 moins 1, égale 0,2.",
+  "03-terme": "u indice 3 égale 50 000 fois 1,2 puissance 3, égale 50 000 fois 1,728, égale 86 400. Ça veut dire : en 2029, on compte 86 400 trajets par jour. Ce n'est pas l'augmentation : depuis 2026, on a gagné 36 400 trajets.",
+  "04-question": "Question ! Une ville compte v indice n égale 80 000 fois 0,97 puissance n habitants en 2026 plus n. Que veut dire le nombre 0,97 ? A : la population augmente de 97 % par an. B : la population baisse de 3 % par an. C : la population baisse de 0,97 habitant par an. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 0,97 moins 1, égale moins 0,03 : c'est une baisse de 3 % chaque année.",
+  "05-seuil": "Quand les trajets auront-ils doublé, c'est-à-dire dépassé 100 000 ? On calcule les termes un à un. u indice 3 égale 86 400 : pas encore. u indice 4 égale 86 400 fois 1,2, égale 103 680 : c'est dépassé. Le rang 4 correspond à 2030.",
+  "06-piege": "Voilà le piège ! Croire qu'une hausse de 20 % par an fait 40 % en deux ans. 1,2 au carré égale 1,44 : la hausse globale est de 44 %. Et en 5 ans, ce n'est pas 100 % : 1,2 puissance 5 égale environ 2,49, soit une hausse d'environ 149 %.",
+  "07-question": "Question ! u indice 0 correspond à 2026. À quelle année correspond u indice 7 ? A : 2033. B : 2032. C : 2034. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 2026 plus 7, égale 2033.",
+  "08-defi": "À toi de jouer ! Une piscine municipale accueille 40 000 nageurs en 2026, et sa fréquentation baisse de 10 % par an. On note u indice n la fréquentation en 2026 plus n. En quelle année passe-t-elle pour la première fois sous 30 000 nageurs ? Et quelle est la baisse globale entre 2026 et 2028 ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On multiplie par 0,9 chaque année. u indice 1 égale 36 000. u indice 2 égale 32 400. u indice 3 égale 29 160 : c'est sous 30 000, en 2029. Entre 2026 et 2028, on multiplie par 0,9 au carré, égale 0,81 : c'est une baisse globale de 19 %.",
+  "09-finale": "Ce que tu as appris. Dans u indice n égale u indice 0 fois q puissance n, u indice 0 est la valeur de départ, et q moins 1 donne le pourcentage d'évolution à chaque étape. Un terme est une valeur totale, pas un gain. Et sur plusieurs années, les coefficients se multiplient.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

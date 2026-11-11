@@ -1,0 +1,17 @@
+{
+  "00-garde": "Modéliser par une suite. Comment trouver une formule qui marche pour toutes les figures ?",
+  "01-situation": "Voici Lina. Elle est cheffe de salle dans un restaurant. Pour les grands groupes, elle accole des tables carrées en ligne, avec une chaise sur chaque côté libre. 1 table : 4 chaises. 2 tables : 6 chaises. 3 tables : 8 chaises.",
+  "02-observer": "On note u indice n le nombre de chaises pour n tables, à partir de n égale 1. De 4 à 6, puis de 6 à 8 : on ajoute 2 chaises pour chaque table en plus. C'est une suite arithmétique de raison 2.",
+  "03-formule": "Pourquoi 2 ? Chaque table a une chaise en haut et une en bas : 2 n chaises. Plus une chaise à chaque bout : 2. Donc u indice n égale 2 n plus 2. On teste : u indice 1 égale 4, u indice 2 égale 6, u indice 3 égale 8. Ça marche.",
+  "04-question": "Question ! Combien de chaises pour 25 tables ? A : 100. B : 52. C : 54. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. u indice 25 égale 2 fois 25 plus 2, égale 52. Pas 4 fois 25 : les côtés accolés n'ont pas de chaise.",
+  "05-rang": "Et pour un groupe de 40 personnes ? On cherche n tel que 2 n plus 2 égale 40 : 2 n égale 38, et n égale 19. Il faut 19 tables.",
+  "06-nature": "On ne modélise pas toujours en ajoutant. Si les réservations augmentent de 10 % par mois, on multiplie par 1,1 : suite géométrique. Si on perd 10 % des clients, puis on en gagne 20, on multiplie ET on ajoute : la suite n'est ni arithmétique ni géométrique.",
+  "07-piege": "Voilà le piège ! La formule 4 n marche pour 1 table : 4 chaises. Mais pour 2 tables, elle donne 8, alors qu'il y en a 6. Une formule doit marcher pour toutes les figures : teste-la sur les figures 1, 2 et 3.",
+  "08-question": "Question ! Le nombre de couverts servis augmente de 20 % chaque mois. Quelle est la nature de la suite ? A : géométrique de raison 1,2. B : arithmétique de raison 20. C : géométrique de raison 0,2. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Augmenter de 20 %, c'est multiplier par 1 plus 0,2, soit 1,2.",
+  "09-defi": "À toi de jouer ! Un carreleur entoure un carré de n dalles sur n dalles d'une bordure de dalles noires. Figure 1 : 8 dalles noires. Figure 2 : 12. Figure 3 : 16. Trouve u indice n, puis la figure qui utilise 100 dalles noires. Mets pause, et cherche !",
+  "09b-correction": "Correction. On ajoute 4 dalles à chaque figure : 4 côtés de n dalles, plus les 4 coins. u indice n égale 4 n plus 4. On vérifie : u indice 1 égale 8. Puis 4 n plus 4 égale 100 donne 4 n égale 96, et n égale 24 : c'est la figure 24.",
+  "10-finale": "Ce que tu as appris. Pour modéliser, on regarde ce qui change d'une étape à la suivante : on ajoute toujours pareil, c'est arithmétique ; on multiplie toujours pareil, c'est géométrique. On écrit u indice n, on la teste sur les premières figures, puis on s'en sert pour calculer un terme ou trouver un rang.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

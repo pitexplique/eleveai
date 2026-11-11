@@ -1,0 +1,9 @@
+{
+  "00-garde": "Sens de variation. Tu paries que tu le vois en un coup d'œil ?",
+  "01-situation": "Mathis est météorologue. Au sommet d'une montagne, la hauteur de neige, en centimètres, n jours après le début du redoux, vaut u indice n égale 60 moins 4 n.",
+  "02-variation": "u indice n plus 1 moins u indice n égale moins 4 : chaque jour, 4 centimètres de moins. La suite est décroissante.",
+  "03-question": "Question ! Les températures du matin sont 5, 3, 4, 2, puis 6 degrés. Cette suite est : A : croissante. B : ni croissante ni décroissante. C : décroissante. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. Elle descend, remonte, redescend, puis remonte : elle n'est ni croissante ni décroissante.",
+  "04-commentaire": "Et toi : avec u indice n égale 60 moins 4 n, au bout de combien de jours la neige a-t-elle fondu ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

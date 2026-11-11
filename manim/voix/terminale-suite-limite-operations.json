@@ -1,0 +1,17 @@
+{
+  "00-garde": "Opérations sur les limites. Si deux suites ont une limite, que font leur somme, leur produit, leur quotient ?",
+  "01-situation": "Voici Sarah. Elle est économiste dans une jeune entreprise de vélos cargo. Mois après mois, les recettes et les coûts augmentent sans fin. Son patron lui demande : « Les deux tendent vers plus l'infini, donc le bénéfice tend vers 0, non ? » Sarah doit lui répondre.",
+  "02-finies": "Avec des limites finies, tout va bien. Si u indice n tend vers 3 et v indice n vers 2, alors u indice n plus v indice n tend vers 5, le produit tend vers 6, et le quotient tend vers 3 sur 2, égale 1,5.",
+  "03-infinies": "Avec l'infini, il y a des règles. Un nombre plus plus l'infini : plus l'infini. Moins 2 fois plus l'infini : moins l'infini, par la règle des signes. Un nombre divisé par une quantité qui tend vers l'infini : 0.",
+  "04-question": "Question ! u indice n tend vers moins 3, et v indice n tend vers plus l'infini. La limite de u indice n fois v indice n est : A : plus l'infini. B : 0. C : moins l'infini. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Moins 3 fois plus l'infini : la règle des signes donne moins l'infini.",
+  "05-indeterminees": "Mais trois cas résistent : « infini moins infini », « 0 fois infini », et « infini sur infini ». Ce sont des formes indéterminées : les règles ne permettent pas de conclure directement.",
+  "06-benefice": "Retour au bénéfice de Sarah. Recettes : u indice n égale n au carré plus 3 n. Coûts : v indice n égale n au carré. Les deux tendent vers plus l'infini : c'est « infini moins infini ». On calcule : u indice n moins v indice n égale 3 n, qui tend vers plus l'infini. Le bénéfice ne tend pas vers 0 : il grandit sans fin.",
+  "07-question": "Question ! Si les coûts étaient v indice n égale 2 n au carré, le bénéfice, n au carré plus 3 n moins 2 n au carré, tendrait vers : A : 0. B : moins l'infini. C : plus l'infini. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Il reste moins n au carré plus 3 n, égale n au carré fois, moins 1 plus 3 sur n : moins l'infini. La même forme « infini moins infini » donne ici le résultat inverse.",
+  "08-piege": "Voilà le piège ! « Infini moins infini égale 0 » : c'est faux. Selon les suites, on peut trouver plus l'infini, moins l'infini, ou un nombre. Une forme indéterminée, ça se lève, en transformant l'écriture.",
+  "09-defi": "À toi de jouer ! Pour n supérieur ou égal à 1, trouve la limite de u indice n égale, 4 plus 1 sur n, fois, 3 moins 2 sur n. Puis celle de v indice n égale 5 sur racine de n. Mets pause, et cherche !",
+  "09b-correction": "Correction. 4 plus 1 sur n tend vers 4, et 3 moins 2 sur n tend vers 3 : le produit tend vers 4 fois 3, égale 12. Pour v, on divise 5 par une quantité qui tend vers plus l'infini : v indice n tend vers 0.",
+  "10-finale": "Ce que tu as appris. On opère sur les limites : somme, produit, quotient, avec la règle des signes. Sauf dans les formes indéterminées : infini moins infini, 0 fois infini, infini sur infini. Là, on transforme l'écriture avant de conclure.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

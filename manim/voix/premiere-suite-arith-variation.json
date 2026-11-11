@@ -1,0 +1,16 @@
+{
+  "00-garde": "Suite arithmétique : son sens de variation. Monte-t-elle, ou descend-elle ? Un seul nombre suffit pour le dire.",
+  "01-situation": "Voici Lucie. Elle est glaciologue : elle mesure les glaciers des Alpes. Celui qu'elle suit mesure 6 000 mètres de long en 2026, et il recule de 25 mètres chaque année. Un article affirme : « il est si long qu'il va finir par se stabiliser ». Lucie doit juger cette phrase.",
+  "02-signe": "On note u indice n la longueur du glacier en 2026 plus n : u indice 0 égale 6 000, et u indice n plus 1 égale u indice n moins 25. La raison est moins 25. Chaque année, on retire 25 : 6 000, 5 975, 5 950. La suite est décroissante, et elle ne se stabilise pas.",
+  "03-regle": "La règle. Si la raison r est positive, la suite est croissante. Si r est négative, elle est décroissante. Si r égale 0, elle est constante. Seul le SIGNE de la raison compte.",
+  "04-question": "Question ! Une suite est définie par v indice n égale 40 moins 0,5 n. Elle est : A : décroissante. B : croissante. C : constante. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. La raison est le nombre devant n : moins 0,5. Elle est négative, même si elle est petite.",
+  "05-premier-terme": "Le premier terme, lui, ne décide rien. Une nuit d'hiver en montagne, il fait moins 12 degrés, et la température monte de 2 degrés par heure : moins 12, moins 10, moins 8. La suite est croissante, même si ses premiers termes sont négatifs.",
+  "06-piege": "Voilà le piège ! Croire qu'une raison de 0,5 fait descendre, parce qu'elle est plus petite que 1. Comparer à 1, c'est pour les suites géométriques. Pour une suite arithmétique, on compare r à 0 : r égale 0,5 est positive, la suite est croissante.",
+  "07-question": "Question ! Une suite arithmétique a pour premier terme w indice 0 égale moins 300 et pour raison 0,25. Quelle affirmation est juste ? A : elle est décroissante, car w indice 0 est négatif. B : elle est croissante, car r est positive. C : elle est décroissante, car r est plus petite que 1. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. On ajoute 0,25 à chaque étape : moins 300, puis moins 299,75. Elle monte.",
+  "08-defi": "À toi de jouer ! Pour chaque suite, dis si elle est croissante, décroissante ou constante. Un : u indice n égale 3 n moins 50. Deux : v indice 0 égale 8, et v indice n plus 1 égale v indice n. Trois : une citerne contient 900 litres et perd 40 litres par jour. Mets pause, et cherche !",
+  "08b-correction": "Correction. Un : la raison est 3, positive : la suite est croissante, même si u indice 0 égale moins 50. Deux : on ajoute 0 à chaque étape : la suite est constante. Trois : la raison est moins 40, négative : la suite est décroissante.",
+  "09-finale": "Ce que tu as appris. Le sens de variation d'une suite arithmétique se lit sur le signe de sa raison : positive, elle croît ; négative, elle décroît ; nulle, elle est constante. Le premier terme ne compte pas, et on compare r à 0, pas à 1.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

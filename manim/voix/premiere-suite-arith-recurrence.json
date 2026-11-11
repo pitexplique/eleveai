@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suite arithmétique : la relation de récurrence. Comment passer d'un terme au suivant, et même revenir en arrière ?",
+  "01-situation": "Voici Léna. Elle est programmatrice d'un festival de musique : elle choisit les artistes, et elle réserve le terrain. La première édition, en 2026, accueille 1 200 spectateurs. Elle prévoit 300 spectateurs de plus chaque année. Elle doit savoir combien de place réserver pour les éditions suivantes.",
+  "02-notation": "On note u indice n le nombre de spectateurs en 2026 plus n. La suite commence à 0 : u indice 0 correspond à 2026, et u indice 0 égale 1 200.",
+  "03-relation": "Chaque année, on ajoute 300 spectateurs. On l'écrit : u indice n plus 1 égale u indice n plus 300. Le terme suivant égale le terme actuel, plus la raison. C'est la relation de récurrence d'une suite arithmétique de raison 300.",
+  "04-question": "Question ! Une chorale perd 15 choristes chaque année. On note v indice n le nombre de choristes après n années. Quelle relation traduit cette situation ? A : v indice n plus 1 égale v indice n moins 15. B : v indice n plus 1 égale 15 fois v indice n. C : v indice n égale v indice n plus 1 moins 15. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Perdre 15, c'est retirer 15 au terme actuel pour obtenir le terme suivant.",
+  "05-derouler": "Déroulons la relation pour Léna, pas à pas. u indice 1 égale 1 200 plus 300, égale 1 500. u indice 2 égale 1 500 plus 300, égale 1 800. u indice 3 égale 1 800 plus 300, égale 2 100. En 2029, elle attend 2 100 spectateurs.",
+  "06-precedent": "Et pour remonter le temps ? On fait l'opération inverse : on retire la raison. Si u indice 5 égale 2 700, alors u indice 4 égale 2 700 moins 300, égale 2 400.",
+  "07-question": "Question ! Une suite vérifie w indice n plus 1 égale w indice n moins 4, et w indice 6 égale 50. Combien vaut w indice 5 ? A : 46. B : 54. C : 42. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Pour reculer d'un rang, on fait l'opération inverse : 50 plus 4, égale 54.",
+  "08-piege": "Voilà le piège ! Écrire u indice n égale u indice n plus 1, plus 300. C'est à l'envers : le terme d'avant serait plus grand que le suivant, et le festival perdrait des spectateurs. La relation donne toujours le terme SUIVANT à partir du terme actuel.",
+  "09-defi": "À toi de jouer ! Une suite commence à t indice 1 égale 7,5, et t indice n plus 1 égale t indice n plus 2,5, pour n supérieur ou égal à 1. Calcule t indice 4, pas à pas. Mets pause, et cherche !",
+  "09b-correction": "Correction. La suite commence à t indice 1. t indice 2 égale 7,5 plus 2,5, égale 10. t indice 3 égale 10 plus 2,5, égale 12,5. t indice 4 égale 12,5 plus 2,5, égale 15. De t indice 1 à t indice 4, il y a 3 pas.",
+  "10-finale": "Ce que tu as appris. La relation de récurrence d'une suite arithmétique : u indice n plus 1 égale u indice n plus r. Pour avancer d'un rang, on ajoute la raison ; pour reculer, on la retire. Et on déroule pas à pas depuis le premier terme.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

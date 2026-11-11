@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparaison et gendarmes. Comment trouver la limite d'une suite qu'on ne sait pas calculer directement ?",
+  "01-situation": "Voici Alice. Elle est astrophysicienne : elle mesure la lumière d'une étoile qui scintille. Chaque nuit, le signal oscille, à cause de l'atmosphère. Alice veut savoir vers quelle valeur la moyenne de ses mesures se stabilise, malgré ces oscillations.",
+  "02-encadrer": "Sa moyenne après n nuits, pour n supérieur ou égal à 1, est u indice n égale 2 plus sinus de n sur n. Sinus de n est entre moins 1 et 1. Donc u indice n est entre 2 moins 1 sur n et 2 plus 1 sur n.",
+  "03-gendarmes": "Les deux bornes tendent vers 2. Théorème des gendarmes : si une suite est coincée entre deux suites qui ont la MÊME limite, elle a aussi cette limite. Donc u indice n converge vers 2.",
+  "04-question": "Question ! Pour tout n supérieur ou égal à 1 : 5 moins 3 sur n, inférieur ou égal à u indice n, inférieur ou égal à 5 plus 1 sur n au carré. La limite de u indice n est : A : 5. B : 2. C : on ne peut pas conclure. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Les deux bornes tendent vers 5 : par les gendarmes, u indice n converge vers 5.",
+  "05-comparaison": "Pour l'infini, un seul côté suffit. Prends u indice n égale n plus 3 cosinus de n. Cosinus de n est supérieur ou égal à moins 1, donc u indice n est supérieur ou égal à n moins 3, qui tend vers plus l'infini. Théorème de comparaison : u indice n tend vers plus l'infini. Pour plus l'infini, on minore ; pour moins l'infini, on majore.",
+  "06-piege": "Voilà le piège ! Être plus petite qu'une suite qui tend vers plus l'infini ne dit rien. Si u indice n est inférieur ou égal à n, u indice n peut tendre vers 0, vers 7, ou vers moins l'infini. Et pour les gendarmes, les deux bornes doivent avoir la même limite.",
+  "07-question": "Question ! Pour tout n supérieur ou égal à 1 : 1 moins 1 sur n, inférieur ou égal à u indice n, inférieur ou égal à 3 plus 1 sur n. Que peut-on affirmer ? A : u indice n converge vers 2. B : u indice n converge vers 1. C : on ne peut pas conclure sur la limite. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Les bornes tendent vers 1 et vers 3 : deux limites différentes, les gendarmes ne s'appliquent pas.",
+  "08-defi": "À toi de jouer ! Pour n supérieur ou égal à 1, trouve la limite de v indice n égale moins n au carré plus 4 sinus de n. Puis celle de w indice n égale 1 plus 2 cosinus de n sur n. Mets pause, et cherche !",
+  "08b-correction": "Correction. Sinus de n est inférieur ou égal à 1, donc v indice n est inférieur ou égal à moins n au carré plus 4, qui tend vers moins l'infini : v indice n tend vers moins l'infini. Pour w : 1 moins 2 sur n, inférieur ou égal à w indice n, inférieur ou égal à 1 plus 2 sur n. Les deux bornes tendent vers 1 : w indice n converge vers 1.",
+  "09-finale": "Ce que tu as appris. Pour plus l'infini, on minore par une suite qui tend vers plus l'infini ; pour moins l'infini, on majore. Pour une limite finie, on encadre entre deux suites de même limite : ce sont les gendarmes. Et sinus et cosinus restent entre moins 1 et 1.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

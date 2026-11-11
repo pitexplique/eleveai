@@ -1,0 +1,16 @@
+{
+  "00-garde": "Évolutions en pourcentage. Pourquoi plus 10 %, puis moins 10 %, ne ramène pas au départ ?",
+  "01-situation": "Voici Emma. Elle est conseillère bancaire. Un jeune client a 1 000 euros d'économies, et il hésite entre deux placements. Emma va l'aider à choisir.",
+  "02-coefficient": "Augmenter de 3 %, c'est multiplier par 1 plus 0,03 : 1,03. Baisser de 20 %, c'est multiplier par 1 moins 0,2 : 0,8. Ce nombre s'appelle le coefficient multiplicateur.",
+  "03-suite": "Placé à 3 % par an, le capital forme une suite géométrique : u indice 0 égale 1 000, et u indice n plus 1 égale 1,03 fois u indice n. Donc u indice n égale 1 000 fois 1,03 puissance n. Après 2 ans : 1 000 fois 1,03 au carré, égale 1 060,90 euros.",
+  "04-question": "Question ! Un prix est multiplié par 0,85. Cela correspond à : A : une baisse de 15 %. B : une baisse de 85 %. C : une hausse de 15 %. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 0,85 est plus petit que 1 : c'est une baisse. Et 1 moins 0,85, égale 0,15, soit 15 %.",
+  "05-lineaire-exponentiel": "Emma compare deux offres. Offre A : on ajoute 40 euros chaque année. C'est une évolution linéaire : suite arithmétique. Offre B : plus 3 % par an. C'est une évolution exponentielle : suite géométrique. Après 10 ans, A donne 1 000 plus 10 fois 40, égale 1 400 euros ; B donne 1 000 fois 1,03 puissance 10, environ 1 343,92 euros. Mais après 20 ans, A donne 1 800 euros, et B environ 1 806 euros : l'exponentielle finit par passer devant.",
+  "06-piege": "Voilà le piège ! Une hausse de 10 %, puis une baisse de 10 %, ce n'est pas zéro. On multiplie les coefficients : 1,1 fois 0,9, égale 0,99. C'est une baisse de 1 %. Les pourcentages ne s'ajoutent pas.",
+  "07-question": "Question ! Un prix augmente de 25 %. De combien doit-il baisser pour revenir à sa valeur de départ ? A : 25 %. B : 75 %. C : 20 %. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Le coefficient réciproque est l'inverse : 1 divisé par 1,25, égale 0,8. C'est une baisse de 20 %.",
+  "08-defi": "À toi de jouer ! Un loyer de 600 euros augmente de 2 % par an, pendant 3 ans. Quel est le loyer final, au centime près ? Et quel est le taux d'évolution global ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On multiplie trois fois par 1,02 : 600 fois 1,02 puissance 3, environ 636,72 euros. Le coefficient global est 1,02 puissance 3, environ 1,0612 : c'est une hausse d'environ 6,12 %, et pas de 6 %.",
+  "09-finale": "Ce que tu as appris. Une évolution de t % se traduit par un coefficient multiplicateur. Pour des évolutions successives, on multiplie les coefficients. Un nombre fixe ajouté, c'est linéaire et arithmétique ; un pourcentage fixe, c'est exponentiel et géométrique.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

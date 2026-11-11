@@ -1,0 +1,9 @@
+{
+  "00-garde": "Convergence monotone. Tu paries qu'une batterie qui se charge sans dépasser 100 % ne finit pas forcément à 100 % ?",
+  "01-situation": "Élodie est ingénieure chez un constructeur de voitures électriques. Pour protéger la batterie, la charge, en %, au quart d'heure n, suit : u indice 0 égale 20, et u indice n plus 1 égale 0,5 u indice n plus 40.",
+  "02-termes": "20, 50, 65, 72,5 : la charge monte, et reste sous 100.",
+  "03-question": "Question ! La suite est croissante et majorée par 100. Que peut-on affirmer ? A : elle converge vers 100. B : elle tend vers plus l'infini. C : elle converge vers un nombre inférieur ou égal à 100. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. Le théorème donne la convergence ; 100 est un plafond, pas forcément la limite.",
+  "04-commentaire": "Et toi : en résolvant l égale 0,5 l plus 40, à quel pourcentage la charge se stabilise-t-elle ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

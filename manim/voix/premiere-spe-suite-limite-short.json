@@ -1,0 +1,9 @@
+{
+  "00-garde": "Limite d'une suite. Tu paries que tu devines où ça s'arrête ?",
+  "01-situation": "Lou est pâtissière. Son gâteau sort du four à 180 degrés. Minute après minute, sa température suit u indice n plus 1 égale 0,5 fois u indice n plus 10.",
+  "02-termes": "180, puis 100, 60, 40, 30, 25 degrés.",
+  "03-question": "Question ! Vers quelle température le gâteau semble-t-il tendre ? A : 10 degrés. B : 20 degrés. C : 0 degré. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. L égale 0,5 L plus 10 donne L égale 20 : la température de la cuisine.",
+  "04-commentaire": "Et toi : avec u indice n plus 1 égale 0,5 fois u indice n plus 12, vers quelle température le gâteau tend-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

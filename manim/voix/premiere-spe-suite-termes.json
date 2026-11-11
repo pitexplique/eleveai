@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suites : calculer un terme. Comment trouver directement les points du niveau 9, sans passer par tous les autres ?",
+  "01-situation": "Voici Chloé. Elle est game designer : elle règle la difficulté d'un jeu vidéo. Au niveau n, le joueur doit gagner u indice n points d'expérience, avec u indice n égale 2 n au carré plus 10. Le premier niveau est le niveau 0 : la suite commence à n égale 0.",
+  "02-explicite": "C'est une forme explicite : u indice n est donné directement en fonction de n. Pour le niveau 3, on remplace n par 3 : u indice 3 égale 2 fois 3 au carré plus 10. 3 au carré, 9 ; 2 fois 9, 18 ; plus 10 : 28 points.",
+  "03-graphique": "Sur un graphique, on place les points de coordonnées n et u indice n. L'abscisse, c'est le rang : le niveau. L'ordonnée, c'est la valeur : les points. Le point d'abscisse 3 est à la hauteur 28.",
+  "04-question": "Question ! Pour u indice n égale 2 n au carré plus 10, combien vaut u indice 5 ? A : 20. B : 60. C : 50. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 5 au carré, 25 ; 2 fois 25, 50 ; plus 10 : 60. Le carré d'abord, puis la multiplication, puis l'ajout.",
+  "05-piege": "Voilà le piège ! u indice n plus 1, ce n'est pas u indice n auquel on ajoute 1. On remplace n par n plus 1, partout : u indice n plus 1 égale 2 fois, n plus 1 au carré, plus 10.",
+  "06-recurrence": "Chloé règle aussi un bonus, d'une autre façon. Au niveau 0, le bonus vaut 4 points. Puis, à chaque niveau, elle double le bonus et ajoute 1 : v indice n plus 1 égale 2 v indice n plus 1. C'est une récurrence : on calcule de proche en proche. v indice 1 égale 2 fois 4 plus 1, égale 9. v indice 2 égale 2 fois 9 plus 1, égale 19. v indice 3 égale 39.",
+  "07-rang": "Et dans l'autre sens : à quel niveau faut-il 172 points ? On cherche le rang n tel que u indice n égale 172. 2 n au carré plus 10 égale 172, donc 2 n au carré égale 162, n au carré égale 81, et n égale 9. C'est le niveau 9.",
+  "08-question": "Question ! Avec u indice n égale 2 n au carré plus 10, à partir de quel niveau faut-il plus de 100 points ? A : 45. B : 6. C : 7. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. u indice 6 égale 82 : pas encore. u indice 7 égale 108 : ça dépasse 100. Le premier rang qui franchit le seuil, c'est 7.",
+  "09-defi": "À toi de jouer ! Dans un autre jeu, u indice n égale 5 n moins 3, pour n à partir de 0. Calcule u indice 10. Écris u indice n plus 1 en fonction de n. Puis trouve le rang n tel que u indice n égale 72. Mets pause, et cherche !",
+  "09b-correction": "Correction. u indice 10 égale 5 fois 10 moins 3, égale 47. u indice n plus 1 égale 5 fois, n plus 1, moins 3, égale 5 n plus 2. Et 5 n moins 3 égale 72 donne 5 n égale 75, donc n égale 15.",
+  "10-finale": "Ce que tu as appris. Avec une forme explicite, on remplace n par sa valeur, partout. Avec une récurrence, on avance de proche en proche depuis le premier terme. Et pour trouver un rang, on résout u indice n égale la valeur : la réponse est un n.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-garde": "Suite auxiliaire. Tu paries que tu trouves l'équilibre en une ligne ?",
+  "01-situation": "Samuel est infirmier. Son patient a 100 milligrammes d'un médicament dans le sang. Chaque jour, le corps en élimine la moitié, puis il reçoit une dose de 40 milligrammes : u indice n plus 1 égale 0,5 fois u indice n plus 40.",
+  "02-equilibre": "À l'équilibre, la dose compense ce qui est éliminé : L égale 0,5 L plus 40. Donc 0,5 L égale 40, et L égale 80.",
+  "03-question": "Question ! Avec v indice n égale u indice n moins 80, la suite v est géométrique de raison : A : 0,5. B : 80. C : 40. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. La raison de v, c'est le coefficient devant u indice n : 0,5.",
+  "04-commentaire": "Et toi : avec u indice 0 égale 100, combien de milligrammes reste-t-il au jour 3 ? C'est u indice 3. Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Somme des termes d'une suite arithmétique. Comment additionner 100 nombres en quelques secondes ?",
+  "01-situation": "Voici Nora. Elle est guide-conférencière dans un amphithéâtre romain. Les visiteurs lui demandent : combien de spectateurs pouvaient s'asseoir ici ? Le premier rang compte 40 places, chaque rang en compte 4 de plus que le précédent, et il y a 25 rangs.",
+  "02-gauss": "Un détour par l'histoire. Enfant, le mathématicien Carl Friedrich Gauss aurait calculé 1 plus 2 plus … plus 100 en un éclair. Il range les nombres par paires : 1 plus 100, 2 plus 99, 3 plus 98. Chaque paire vaut 101, et il y a 50 paires : 50 fois 101, égale 5 050.",
+  "03-formule": "D'où la formule : 1 plus 2 plus … plus n égale n fois, n plus 1, divisé par 2. Et pour toute somme de termes d'une suite arithmétique : nombre de termes, fois premier plus dernier, divisé par 2.",
+  "04-amphitheatre": "Pour l'amphithéâtre : le dernier rang compte 40 plus 24 fois 4, égale 136 places. Il y a 25 termes. La somme vaut 25 fois, 40 plus 136, divisé par 2, égale 25 fois 88, égale 2 200 places.",
+  "05-question": "Question ! Combien de termes dans la somme u indice 5 plus u indice 6 plus … plus u indice 30 ? A : 30. B : 25. C : 26. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. De u indice 5 à u indice 30 : 30 moins 5 plus 1, égale 26 termes. On compte les deux bouts.",
+  "06-piege": "Voilà le piège ! Pour 25 rangs, le dernier n'est pas 40 plus 25 fois 4. Du rang 1 au rang 25, on ajoute 4 seulement 24 fois : le dernier rang a 136 places, pas 140.",
+  "07-question": "Question ! Combien vaut 1 plus 2 plus … plus 40 ? A : 1 600. B : 820. C : 840. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 40 fois 41, égale 1 640, divisé par 2 : 820.",
+  "08-defi": "À toi de jouer ! Calcule 7 plus 10 plus 13 plus … plus 61. Mets pause, et cherche !",
+  "08b-correction": "Correction. La raison est 3. Nombre de termes : 61 moins 7, égale 54 ; 54 divisé par 3, égale 18 ; plus 1 : 19 termes. Somme : 19 fois, 7 plus 61, divisé par 2, égale 19 fois 34, égale 646.",
+  "09-finale": "Ce que tu as appris. 1 plus 2 plus … plus n égale n fois, n plus 1, divisé par 2. Pour une somme arithmétique : nombre de termes, fois premier plus dernier, divisé par 2. Et de u indice p à u indice q, il y a q moins p plus 1 termes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

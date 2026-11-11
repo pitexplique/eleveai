@@ -1,0 +1,16 @@
+{
+  "00-garde": "Théorème de convergence monotone. Une suite qui monte sans jamais dépasser un plafond finit-elle par se stabiliser ?",
+  "01-situation": "Voici Yohan. Il est hydrologue : il surveille le lac d'un barrage. Au départ, le lac contient 5 millions de mètres cubes d'eau. Chaque mois, 20 % de l'eau est relâchée vers la rivière, et les pluies en apportent 4 millions. Yohan doit prévoir si le lac va déborder, et à quel niveau il va se stabiliser.",
+  "02-modele": "On note u indice n le volume au mois n, en millions de mètres cubes, à partir de n égale 0. u indice 0 égale 5, et u indice n plus 1 égale 0,8 u indice n plus 4. Par récurrence, on démontre que u indice n est inférieur ou égal à u indice n plus 1, lui-même inférieur ou égal à 20 : la suite est croissante, et majorée par 20.",
+  "03-theoreme": "Le théorème de convergence monotone : une suite croissante et majorée converge. Une suite décroissante et minorée converge aussi. Le lac de Yohan se stabilise donc vers un volume l.",
+  "04-question": "Question ! Une suite est croissante et majorée par 50. Que peut-on conclure ? A : elle converge vers 50. B : elle converge, mais on ne connaît pas encore sa limite. C : elle tend vers plus l'infini. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Le théorème donne la convergence, pas la valeur : 50 est un majorant, pas forcément la limite.",
+  "05-point-fixe": "Pour trouver l, on passe à la limite dans u indice n plus 1 égale 0,8 u indice n plus 4 : l égale 0,8 l plus 4. Donc 0,2 l égale 4, et l égale 20. Le lac se stabilise à 20 millions de mètres cubes.",
+  "06-piege": "Voilà le piège ! Si Yohan avait seulement prouvé que u indice n est inférieur ou égal à 30, la suite convergerait aussi… mais pas vers 30 : la limite resterait 20. Et « croissante et minorée » n'apprend rien : une suite croissante est toujours minorée par son premier terme.",
+  "07-question": "Question ! On sait seulement qu'une suite est décroissante. Pour appliquer le théorème, que faut-il encore démontrer ? A : qu'elle est minorée. B : qu'elle est majorée. C : que sa limite est finie. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Une suite qui descend a besoin d'un plancher : elle doit être minorée. « Sa limite est finie », c'est justement ce qu'on veut prouver.",
+  "08-defi": "À toi de jouer ! Soit u indice 0 égale 10 et, pour tout entier naturel n, u indice n plus 1 égale 0,5 u indice n plus 2. On admet que la suite est décroissante et minorée par 3. Que peut-on conclure ? Et quelle est sa limite ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Décroissante et minorée par 3 : d'après le théorème de convergence monotone, la suite converge vers un réel l. Puis l égale 0,5 l plus 2, donc 0,5 l égale 2, et l égale 4. La limite est 4, et non le minorant 3.",
+  "09-finale": "Ce que tu as appris. Croissante et majorée, ou décroissante et minorée : la suite converge. Le théorème ne donne pas la limite : on la trouve ensuite, souvent en résolvant l égale f de l. Et un majorant n'est pas forcément la limite.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

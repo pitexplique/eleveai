@@ -1,0 +1,20 @@
+{
+  "00-garde": "Raisonnement par récurrence. Comment prouver qu'une chose est vraie pour tous les entiers, sans les essayer un par un ?",
+  "01-situation": "Voici Sami. Il est technicien de maintenance dans une piscine olympique. Le jour 0, l'eau contient 1 milligramme de chlore par litre. Chaque nuit, la moitié du chlore disparaît, et la machine en ajoute 1 milligramme par litre. Sa cheffe veut une garantie : jamais plus de 2 milligrammes par litre.",
+  "02-modele": "On note u indice n le chlore au jour n, pour tout entier naturel n. u indice 0 égale 1, et u indice n plus 1 égale 0,5 u indice n plus 1. On veut démontrer la propriété P de n : u indice n inférieur ou égal à 2, pour tout entier naturel n.",
+  "03-initialisation": "Étape 1, l'initialisation. On vérifie la propriété au premier rang, ici 0. u indice 0 égale 1, et 1 est inférieur ou égal à 2 : P de 0 est vraie.",
+  "04-heredite": "Étape 2, l'hérédité. Supposons que P de k est vraie pour un entier naturel k : u indice k inférieur ou égal à 2. On multiplie par 0,5, qui est positif : 0,5 u indice k inférieur ou égal à 1. On ajoute 1 : 0,5 u indice k plus 1 inférieur ou égal à 2. C'est-à-dire u indice k plus 1 inférieur ou égal à 2 : P de k plus 1 est vraie.",
+  "05-conclusion": "Étape 3, la conclusion. P de 0 est vraie, et P est héréditaire. Donc, pour tout entier naturel n, u indice n inférieur ou égal à 2. Sami peut donner sa garantie.",
+  "06-question": "Question ! Dans l'hérédité, quelle hypothèse écrit-on ? A : on suppose u indice n inférieur ou égal à 2 pour tout n. B : on suppose u indice k inférieur ou égal à 2 pour un entier k. C : on suppose u indice 0 inférieur ou égal à 2. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. On suppose la propriété à UN rang k ; la supposer pour tout n, ce serait admettre ce qu'on veut démontrer.",
+  "07-piege": "Voilà le piège ! L'hérédité seule ne suffit pas. Avec u indice 0 égale 3, le même calcul d'hérédité marche, mais u indice 0 dépasse déjà 2 : la propriété est fausse. Sans initialisation, une récurrence ne prouve rien.",
+  "08-question": "Question ! Une copie écrit : « Supposons u indice k inférieur ou égal à 2. Alors u indice k plus 1 inférieur ou égal à 2. Donc u indice n inférieur ou égal à 2 pour tout n. » Que manque-t-il ? A : la conclusion. B : l'hérédité. C : l'initialisation. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. Personne n'a vérifié P de 0 : il manque l'initialisation.",
+  "09-rang": "Parfois, la propriété n'est vraie qu'à partir d'un certain rang. Pour 2 puissance n supérieur ou égal à n au carré, on initialise au rang 4 : 2 puissance 4 égale 16, et 4 au carré égale 16.",
+  "10-question": "Question ! On initialise au rang 4, et l'hérédité est prouvée pour tout k supérieur ou égal à 4. La propriété est démontrée : A : pour tout entier n supérieur ou égal à 4. B : pour tout entier naturel n. C : seulement pour n égale 4. Mets pause, et choisis !",
+  "10b-reponse": "Réponse A. La récurrence démontre la propriété à partir du rang de l'initialisation. Pour n égale 3, elle est d'ailleurs fausse : 8 est plus petit que 9.",
+  "11-defi": "À toi de jouer ! Soit u indice 0 égale 2 et, pour tout entier naturel n, u indice n plus 1 égale 0,5 u indice n plus 3. Démontre par récurrence que u indice n est inférieur ou égal à 6, pour tout entier naturel n. Mets pause, et cherche !",
+  "11b-correction": "Correction. Initialisation : u indice 0 égale 2, et 2 est inférieur ou égal à 6 : P de 0 est vraie. Hérédité : supposons u indice k inférieur ou égal à 6 pour un entier naturel k. Alors 0,5 u indice k inférieur ou égal à 3, puis 0,5 u indice k plus 3 inférieur ou égal à 6 : u indice k plus 1 inférieur ou égal à 6. Conclusion : pour tout entier naturel n, u indice n inférieur ou égal à 6.",
+  "12-finale": "Ce que tu as appris. Une récurrence a trois étapes : l'initialisation, au premier rang ; l'hérédité, où l'on suppose P de k pour un entier k et où l'on montre P de k plus 1 ; puis la conclusion.",
+  "13-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

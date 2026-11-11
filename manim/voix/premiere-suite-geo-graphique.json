@@ -1,0 +1,16 @@
+{
+  "00-garde": "Suite géométrique : la représentation graphique. À quoi ressemble une suite qui multiplie, et que nous dit son dessin ?",
+  "01-situation": "Voici Laura. Elle est technicienne qualité dans une cuisine centrale, qui prépare les repas des cantines. Un plat oublié hors du frigo contient 100 bactéries, et toutes les 20 minutes, leur nombre double. Laura doit évaluer le risque, et le montrer aux cuisiniers d'un seul dessin.",
+  "02-points": "On note u indice n le nombre de bactéries après n périodes de 20 minutes : u indice 0 égale 100. On place les points de coordonnées n et u indice n : 0 et 100, 1 et 200, 2 et 400, 3 et 800, 4 et 1 600.",
+  "03-courbe": "Ces points ne sont pas alignés : ils montent de plus en plus vite, sur une courbe qui se creuse. Les écarts grandissent : 100, 200, 400, 800. C'est l'allure d'une suite géométrique de raison plus grande que 1.",
+  "04-question": "Question ! Sur le graphique d'une suite géométrique, on lit u indice 0 égale 40 et u indice 1 égale 20. Sa raison est : A : 0,5. B : moins 20. C : 2. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. On divise : 20 divisé par 40, égale 0,5. Moins 20, c'est l'écart, pas la raison.",
+  "05-conjecture": "Et si on continue ? Avec q plus grand que 1, les termes deviennent aussi grands que l'on veut. Avec q entre 0 et 1, les points descendent et se rapprochent de 0, sans jamais l'atteindre. Quand on nettoie une planche à découper, chaque passage de produit élimine 90 % des bactéries : 10 000, 1 000, 100, 10. q égale 0,1, et les points descendent vers 0.",
+  "06-piege": "Voilà le piège ! Croire qu'une courbe qui démarre doucement reste petite. Après 2 heures, soit 6 périodes, u indice 6 égale 100 fois 2 puissance 6, égale 6 400 bactéries. Après 4 heures, u indice 12 égale 409 600. C'est pour ça qu'on ne laisse pas un plat hors du frigo.",
+  "07-question": "Question ! Deux nuages de points. La suite bleue : 3, 6, 9, 12. La suite rouge : 3, 6, 12, 24. Laquelle est géométrique ? A : la bleue. B : la rouge. C : les deux. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. La rouge double à chaque fois : ses points se creusent. La bleue ajoute 3 : ses points sont alignés.",
+  "08-defi": "À toi de jouer ! Une suite est définie par u indice n égale 3 fois 2 puissance n. Lequel de ces points est sur son graphique : le point de coordonnées 4 et 48, ou le point de coordonnées 4 et 24 ? Et que peut-on conjecturer quand n devient très grand ? Mets pause, et cherche !",
+  "08b-correction": "Correction. u indice 4 égale 3 fois 2 puissance 4, égale 3 fois 16, égale 48 : c'est le point de coordonnées 4 et 48. Le point 4 et 24 vient de 3 fois 2 fois 4 : c'est l'erreur à éviter. La raison, 2, est plus grande que 1 : les termes deviennent aussi grands que l'on veut.",
+  "09-finale": "Ce que tu as appris. Les points d'une suite géométrique ne sont pas alignés : avec q plus grand que 1, ils montent de plus en plus vite ; avec q entre 0 et 1, ils descendent vers 0. Sur un graphique, la raison est le quotient de deux ordonnées qui se suivent.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

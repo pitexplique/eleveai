@@ -1,0 +1,17 @@
+{
+  "00-garde": "Limite d'une suite. Vers quoi vont les termes quand n devient très grand ?",
+  "01-situation": "Voici Karim. Il est maître de port. Son port de plaisance accueille 360 bateaux. Chaque année, la moitié des bateaux partent vers d'autres ports, puis 100 nouveaux bateaux arrivent. Faut-il agrandir le port ?",
+  "02-termes": "On note u indice n le nombre de bateaux après n années, à partir de u indice 0 égale 360. u indice n plus 1 égale 0,5 fois u indice n plus 100. Les termes : 360, 280, 240, 220, 210, 205.",
+  "03-conjecture": "Les termes se rapprochent de 200, de plus en plus près. On conjecture que la limite de u indice n quand n tend vers plus l'infini est 200 : la suite semble tendre vers 200. Pas besoin d'agrandir : le port va se stabiliser autour de 200 bateaux.",
+  "04-point-fixe": "Comment trouver 200 sans calculer tous les termes ? Si la suite tend vers L, alors L égale 0,5 L plus 100. Donc 0,5 L égale 100, et L égale 200.",
+  "05-question": "Question ! u indice 0 égale 10 et u indice n plus 1 égale 0,8 u indice n plus 6. Vers quelle valeur la suite semble-t-elle tendre ? A : 10. B : 6. C : 30. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. L égale 0,8 L plus 6, donc 0,2 L égale 6, et L égale 30.",
+  "06-references": "Quelques limites à connaître. 1 sur n s'approche de 0. n au carré et 2 puissance n dépassent tout nombre : ils tendent vers plus l'infini. Et pour q entre moins 1 et 1, q puissance n tend vers 0 : par exemple, 0,5 puissance n.",
+  "07-piege": "Voilà le piège ! Une suite géométrique de raison 2 ne tend pas toujours vers plus l'infini. Si u indice 0 égale moins 3, alors u indice n égale moins 3 fois 2 puissance n : moins 3, moins 6, moins 12. Elle tend vers moins l'infini. Regarde aussi le signe du premier terme.",
+  "08-question": "Question ! u indice n égale 5 plus 3 sur n, pour n à partir de 1. Vers quoi semble tendre u indice n ? A : 5. B : plus l'infini. C : 8. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 3 sur n s'approche de 0 quand n devient très grand : il reste 5.",
+  "09-defi": "À toi de jouer ! Pour tout entier naturel n, u indice n égale 4 fois 0,9 puissance n, plus 7. Vers quoi semble tendre u indice n ? Et v indice n égale 2 n au carré moins 50 ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 0,9 est entre moins 1 et 1, donc 0,9 puissance n tend vers 0 : u indice n semble tendre vers 7. Et 2 n au carré dépasse tout nombre : v indice n tend vers plus l'infini.",
+  "10-finale": "Ce que tu as appris. Pour conjecturer une limite, on regarde ce que deviennent les termes quand n devient très grand. Pour u indice n plus 1 égale a u indice n plus b, la limite L vérifie L égale a L plus b. Et pour une suite géométrique, on regarde la raison, puis le signe du premier terme.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

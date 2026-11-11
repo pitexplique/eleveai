@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suites : la notation. u de n, u indice n : que veut dire ce petit n, et comment ne pas se tromper de rang ?",
+  "01-situation": "Voici Nadia. Elle est ingénieure dans une agence spatiale : elle suit une constellation de satellites d'observation de la Terre. En 2026, 600 satellites sont en orbite, et l'agence en lance 120 de plus chaque année. Avant une réunion, Nadia doit contrôler un rapport rempli de notations.",
+  "02-deux-notations": "On note u de n le nombre de satellites en 2026 plus n. La suite commence à 0 : u de 0 égale 600. On écrit aussi u indice n. u de n et u indice n, c'est le même terme : ce qui est entre parenthèses passe en indice. u de 5 égale u indice 5.",
+  "03-rang": "Le n est un RANG, pas une année. 2031, c'est 2026 plus 5 : c'est u indice 5, pas u indice 2031. Et u indice 5 égale 600 plus 5 fois 120, égale 1 200 satellites.",
+  "04-question": "Question ! Dans le rapport, comment s'écrit le nombre de satellites en 2034 ? A : u indice 8. B : u indice 2034. C : u indice 9. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 2034 moins 2026 égale 8 : c'est le terme de rang 8.",
+  "05-position": "Attention au premier terme. Si la suite commence à u indice 0, le 1er terme est u indice 0, et le 10e terme est u indice 9. Si elle commence à u indice 1, le 10e terme est u indice 10. Et de u indice 0 à u indice 9, il y a 10 termes : 9 moins 0, plus 1.",
+  "06-n-plus-1": "Encore une différence. u de n plus 1, avec n plus 1 entre les parenthèses, c'est le terme SUIVANT : u indice n plus 1. Si u de n égale 600 plus 120 n, on remplace n par n plus 1 : u de n plus 1 égale 600 plus 120 fois, n plus 1, égale 720 plus 120 n.",
+  "07-question": "Question ! Une suite v est définie par v de n égale 5 plus 3 n. Que vaut v de n plus 1 ? A : 6 plus 3 n. B : 8 plus 3 n. C : 5 plus 4 n. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. On remplace n par n plus 1 : 5 plus 3 n plus 3, égale 8 plus 3 n.",
+  "08-piege": "Voilà le piège ! Lire u indice n comme u fois n. L'indice est une place dans la liste, pas un facteur. u indice 5, c'est le terme de rang 5 : le sixième terme, quand la suite commence à 0.",
+  "09-defi": "À toi de jouer ! Les termes d'une suite w sont numérotés à partir de w indice 0. Quel est l'indice du 25e terme ? Et combien y a-t-il de termes de w indice 0 à w indice 40, les deux compris ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Le 1er terme est w indice 0, donc le 25e terme est w indice 24. De w indice 0 à w indice 40, il y a 40 moins 0, plus 1 : 41 termes.",
+  "10-finale": "Ce que tu as appris. u de n et u indice n désignent le même terme : le terme de rang n. L'indice est un rang, pas une année ni un facteur. Et lis toujours où commence la suite : à u indice 0, ou à u indice 1.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suite géométrique : la formule explicite. Comment calculer n'importe quel terme d'un seul coup, et lire une formule ?",
+  "01-situation": "Voici Elena. Elle est experte automobile : elle estime la valeur des voitures pour les assurances. Une voiture neuve vaut 20 000 euros, et chaque année, sa valeur baisse de 20 %. Un client lui demande ce qu'elle vaudra dans 3 ans, avant de l'acheter.",
+  "02-formule": "On note u indice n la valeur de la voiture n années après l'achat : la suite commence à u indice 0 égale 20 000. Baisser de 20 %, c'est multiplier par 0,8 : q égale 0,8. Après n années, on a multiplié n fois par 0,8 : u indice n égale 20 000 fois 0,8 puissance n.",
+  "03-calcul": "u indice 3 égale 20 000 fois 0,8 puissance 3. On calcule d'abord la puissance : 0,8 puissance 3 égale 0,512. Puis 20 000 fois 0,512, égale 10 240 euros.",
+  "04-question": "Question ! Une suite géométrique a pour premier terme v indice 0 égale 50 et pour raison 1,2. Pour tout entier naturel n : A : v indice n égale 50 fois 1,2 fois n. B : v indice n égale 1,2 fois 50 puissance n. C : v indice n égale 50 fois 1,2 puissance n. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Le premier terme est devant, la raison est la base de la puissance, et n est en exposant.",
+  "05-rang-1": "Si la suite commence à u indice 1, l'exposant perd 1 : u indice n égale u indice 1 fois q puissance n moins 1. Par exemple, avec u indice 1 égale 3 et q égale 2 : u indice n égale 3 fois 2 puissance n moins 1. Et u indice 5 égale 3 fois 2 puissance 4, égale 3 fois 16, égale 48.",
+  "06-lire-prouver": "Dans l'autre sens : si w indice n égale 7 fois 3 puissance n, le nombre devant est le premier terme, w indice 0 égale 7, car 3 puissance 0 égale 1. La base, 3, est la raison. Pour prouver que la suite est géométrique, on calcule w indice n plus 1 divisé par w indice n : on trouve 3, un nombre qui ne dépend pas de n.",
+  "07-question": "Question ! Une suite géométrique commence à t indice 1 égale 400, et sa raison est 0,9. Pour tout entier n supérieur ou égal à 1 : A : t indice n égale 400 fois 0,9 puissance n. B : t indice n égale 400 fois 0,9 puissance n moins 1. C : t indice n égale 400 moins 10 n. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. On vérifie : t indice 1 égale 400 fois 0,9 puissance 0, égale 400.",
+  "08-piege": "Voilà le piège ! Écrire 20 000 fois 0,2 puissance n. 0,2, c'est la part perdue ; la raison, c'est ce qui reste : 0,8. Avec 0,2, la voiture ne vaudrait plus que 4 000 euros au bout d'un an.",
+  "09-defi": "À toi de jouer ! Une suite géométrique à termes positifs vérifie u indice 1 égale 6 et u indice 2 égale 9. Trouve sa raison, puis u indice 0, et écris u indice n en fonction de n. Mets pause, et cherche !",
+  "09b-correction": "Correction. La raison est 9 divisé par 6, égale 1,5. Pour reculer d'un rang, on divise : u indice 0 égale 6 divisé par 1,5, égale 4. Donc u indice n égale 4 fois 1,5 puissance n. On vérifie : u indice 2 égale 4 fois 2,25, égale 9.",
+  "10-finale": "Ce que tu as appris. La formule explicite d'une suite géométrique : u indice n égale u indice 0 fois q puissance n, ou u indice 1 fois q puissance n moins 1. On calcule la puissance avant de multiplier. Et pour montrer qu'une suite est géométrique, le quotient u indice n plus 1 sur u indice n ne dépend pas de n.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

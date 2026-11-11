@@ -1,0 +1,9 @@
+{
+  "00-garde": "Modéliser. Tu paries que tu comptes les lignes aériennes sans les dessiner ?",
+  "01-situation": "Une compagnie aérienne relie n villes, chacune avec toutes les autres, par une ligne directe. 3 villes : 3 lignes. 4 villes : 6 lignes. 5 villes : 10 lignes.",
+  "02-formule": "Chaque ville est reliée aux n moins 1 autres, et chaque ligne est comptée deux fois : u indice n égale n fois, n moins 1, divisé par 2.",
+  "03-question": "Question ! Combien de lignes pour 10 villes ? A : 90. B : 100. C : 45. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 10 fois 9, égale 90, divisé par 2 : 45. Sans diviser par 2, chaque ligne serait comptée deux fois.",
+  "04-commentaire": "Et toi : combien de lignes pour 20 villes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

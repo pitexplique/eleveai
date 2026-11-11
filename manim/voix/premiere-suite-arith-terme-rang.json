@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suite arithmétique : calculer un terme lointain. Comment trouver le 20e terme sans calculer tous ceux d'avant ?",
+  "01-situation": "Voici Hugo. Il est carreleur. Pour une place publique, il pose des bordures de carreaux autour de bacs à plantes carrés : c'est un motif en carré bordé. Étape 1 : 8 carreaux. Étape 2 : 12 carreaux. Étape 3 : 16 carreaux. Le plus grand bac est l'étape 20. Hugo doit décider combien de carreaux commander.",
+  "02-raison": "D'une étape à la suivante, on ajoute 4 carreaux, un de plus sur chaque côté. On note u indice n le nombre de carreaux de l'étape n : la suite commence à u indice 1 égale 8, et sa raison est 4.",
+  "03-compter-pas": "De l'étape 1 à l'étape 20, combien de pas ? 20 moins 1, égale 19 pas. Donc u indice 20 égale 8 plus 19 fois 4, égale 84. Hugo commande 84 carreaux.",
+  "04-formules": "On compte toujours les PAS. Si la suite commence à u indice 0 : u indice n égale u indice 0 plus n fois r. Si elle commence à u indice 1 : u indice n égale u indice 1 plus, n moins 1, fois r. Et depuis n'importe quel terme u indice p : u indice n égale u indice p plus, n moins p, fois r.",
+  "05-question": "Question ! Une suite arithmétique de raison 5 commence à u indice 1 égale 12. Combien vaut u indice 10 ? A : 62. B : 67. C : 57. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. De u indice 1 à u indice 10, il y a 9 pas : 12 plus 9 fois 5, égale 57.",
+  "06-autre-terme": "On ne connaît pas toujours le premier terme. Si u indice 6 égale 40 et que la raison est 3, alors de u indice 6 à u indice 15, il y a 9 pas : u indice 15 égale 40 plus 9 fois 3, égale 67.",
+  "07-piege": "Voilà le piège ! Compter le rang au lieu des pas. Avec 8 plus 20 fois 4, Hugo trouverait 88 carreaux : 4 de trop. De l'étape 1 à l'étape 20, il n'y a que 19 pas.",
+  "08-question": "Question ! Une suite arithmétique vérifie v indice 4 égale 30, et sa raison est moins 2. Combien vaut v indice 12 ? A : 14. B : 46. C : 6. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. De v indice 4 à v indice 12, il y a 8 pas : 30 plus 8 fois moins 2, égale 14.",
+  "09-defi": "À toi de jouer ! On construit une rangée de carrés collés, avec des allumettes. 1 carré : 4 allumettes. 2 carrés : 7 allumettes. 3 carrés : 10 allumettes. Combien faut-il d'allumettes pour une rangée de 50 carrés ? Mets pause, et cherche !",
+  "09b-correction": "Correction. On ajoute 3 allumettes à chaque carré : la raison est 3, et la suite commence à u indice 1 égale 4. De u indice 1 à u indice 50, il y a 49 pas : u indice 50 égale 4 plus 49 fois 3, égale 151 allumettes.",
+  "10-finale": "Ce que tu as appris. Pour calculer un terme lointain, on part d'un terme connu et on compte les pas : u indice n égale u indice p plus, n moins p, fois r. Si la suite commence à u indice 1, il y a n moins 1 pas jusqu'à u indice n.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

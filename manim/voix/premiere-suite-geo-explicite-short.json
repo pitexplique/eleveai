@@ -1,0 +1,9 @@
+{
+  "00-garde": "La formule explicite. Tu paries que tu la lis en 5 secondes ?",
+  "01-situation": "Sur un étang, des nénuphars couvrent 3 mètres carrés. Chaque jour, leur surface double. On note u indice n la surface après n jours : u indice n égale 3 fois 2 puissance n.",
+  "02-idee": "Le nombre devant, c'est le départ. La base de la puissance, c'est la raison.",
+  "03-question": "Question ! Quels sont le premier terme et la raison ? A : u indice 0 égale 3 et q égale 2. B : u indice 0 égale 2 et q égale 3. C : u indice 0 égale 6 et q égale 2. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. Pour n égale 0, 2 puissance 0 égale 1 : u indice 0 égale 3.",
+  "04-commentaire": "Et toi : combien de mètres carrés les nénuphars couvrent-ils au bout de 6 jours ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

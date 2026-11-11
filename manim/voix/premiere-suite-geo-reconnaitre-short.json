@@ -1,0 +1,9 @@
+{
+  "00-garde": "Suite géométrique. Tu paries que tu la repères en 3 secondes ?",
+  "01-situation": "Un photographe agrandit une photo. À chaque agrandissement, sa largeur est multipliée par 1,5 : 8, 12, 18, 27 centimètres.",
+  "02-quotient": "12 divisé par 8 égale 1,5, et de même ensuite : c'est une suite géométrique, de raison 1,5.",
+  "03-question": "Question ! Laquelle multiplie toujours par le même nombre ? A : 10, 20, 30, 40. B : 1, 2, 4, 7. C : 5, 15, 45, 135. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. On multiplie par 3 à chaque fois : la raison est 3.",
+  "04-commentaire": "Et toi : 8, 12, 18, 27… Quelle sera la largeur suivante, en centimètres ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

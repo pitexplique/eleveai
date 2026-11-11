@@ -1,0 +1,9 @@
+{
+  "00-garde": "Théorème des gendarmes. Tu paries que tu trouves une limite sans connaître la suite ?",
+  "01-situation": "Théo est technicien de laboratoire. Il ne connaît pas la formule de sa mesure u indice n, mais il sait que, pour n supérieur ou égal à 1 : 8 moins 1 sur n, inférieur ou égal à u indice n, inférieur ou égal à 8 plus 2 sur n.",
+  "02-bornes": "1 sur n et 2 sur n tendent vers 0. Les deux bornes se resserrent.",
+  "03-question": "Question ! La mesure u indice n converge vers : A : 8. B : 10. C : on ne peut pas savoir. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. Les deux bornes tendent vers 8 : coincée entre elles, la mesure tend vers 8.",
+  "04-commentaire": "Et toi : pour n égale 100, entre quels nombres se trouve forcément la mesure ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

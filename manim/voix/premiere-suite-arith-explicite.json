@@ -1,0 +1,18 @@
+{
+  "00-garde": "Suite arithmétique : la formule explicite. Comment calculer n'importe quel terme d'un seul coup, et retrouver le rang ?",
+  "01-situation": "Voici Sofiane. Il est conseiller bancaire. Sa cliente, Jade, 17 ans, a 300 euros sur son livret. Elle veut payer son permis de conduire, et elle y ajoute 45 euros chaque mois. Elle lui demande : dans combien de mois aurai-je 1 200 euros ?",
+  "02-vers-explicite": "On note u indice n la somme sur le livret après n mois : la suite commence à u indice 0 égale 300. Chaque mois, on ajoute 45 : u indice n plus 1 égale u indice n plus 45. Après n mois, on a ajouté n fois 45 : u indice n égale 300 plus 45 n.",
+  "03-formules": "C'est la formule explicite : u indice n égale u indice 0 plus n fois r. Si la suite commence à u indice 1 : u indice n égale u indice 1 plus, n moins 1, fois r.",
+  "04-question": "Question ! Une suite arithmétique a pour premier terme v indice 0 égale 8 et pour raison moins 3. Pour tout entier naturel n : A : v indice n égale moins 3 plus 8 n. B : v indice n égale 8 moins 3 fois, n moins 1. C : v indice n égale 8 moins 3 n. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Le premier terme est le nombre seul, et la raison multiplie n : 8 moins 3 n.",
+  "05-rang": "Revenons à Jade. Elle veut 1 200 euros : on résout 300 plus 45 n égale 1 200. 45 n égale 900, donc n égale 900 divisé par 45, égale 20. Dans 20 mois, son permis est payé.",
+  "06-deux-termes": "Et si on ne connaît que deux termes ? u indice 3 égale 17 et u indice 8 égale 42. Entre le rang 3 et le rang 8, il y a 5 pas, et on a gagné 42 moins 17, égale 25. La raison est 25 divisé par 5, égale 5. Depuis un terme connu u indice p : u indice n égale u indice p plus, n moins p, fois r. Ici, u indice n égale 17 plus, n moins 3, fois 5, égale 2 plus 5 n.",
+  "07-lire-prouver": "Dans l'autre sens : si w indice n égale 7 plus 4 n, le nombre seul est le premier terme, w indice 0 égale 7, et le nombre devant n est la raison, 4. Pour prouver qu'elle est arithmétique, on calcule w indice n plus 1 moins w indice n : on trouve 4, un nombre qui ne dépend pas de n.",
+  "08-question": "Question ! Une suite arithmétique commence à t indice 1 égale 20, et sa raison est 6. Pour tout entier n supérieur ou égal à 1 : A : t indice n égale 20 plus 6 n. B : t indice n égale 14 plus 6 n. C : t indice n égale 6 plus 20 n. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. t indice n égale 20 plus 6 fois, n moins 1, égale 14 plus 6 n. On vérifie : t indice 1 égale 14 plus 6, égale 20.",
+  "09-piege": "Voilà le piège ! Échanger le premier terme et la raison. 45 plus 300 n, ce n'est pas la somme de Jade : pour n égale 0, on trouverait 45 euros au lieu de 300. Pour vérifier une formule, remplace n par le premier rang : tu dois retrouver le premier terme.",
+  "10-defi": "À toi de jouer ! Une suite arithmétique vérifie u indice 2 égale 11 et u indice 6 égale 31. Trouve sa raison, sa formule explicite, puis le rang n pour lequel u indice n égale 96. Mets pause, et cherche !",
+  "10b-correction": "Correction. Du rang 2 au rang 6, il y a 4 pas, et on a gagné 31 moins 11, égale 20. La raison est 20 divisé par 4, égale 5. u indice 0 égale 11 moins 2 fois 5, égale 1, donc u indice n égale 1 plus 5 n. Enfin, 1 plus 5 n égale 96 : 5 n égale 95, donc n égale 19.",
+  "11-finale": "Ce que tu as appris. La formule explicite d'une suite arithmétique : u indice n égale u indice 0 plus n fois r. Avec deux termes, la raison est leur écart divisé par le nombre de pas. Et pour trouver un rang, on résout une équation.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

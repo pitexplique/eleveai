@@ -1,0 +1,9 @@
+{
+  "00-garde": "Sens de variation. Tu paries que tu sais si elle monte ou descend, sans rien calculer ?",
+  "01-situation": "Un nageur s'entraîne au 100 mètres. Chaque semaine, il gagne 0,5 seconde : 62 secondes, 61,5, puis 61.",
+  "02-raison": "On retire 0,5 à chaque semaine : la raison est moins 0,5.",
+  "03-question": "Question ! La suite de ses temps est : A : croissante. B : constante. C : décroissante. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. La raison est négative : les temps descendent, et c'est une bonne nouvelle pour lui.",
+  "04-commentaire": "Et toi : en partant de 62 secondes, quel temps fera-t-il après 8 semaines ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Suite bornée. Comment être sûr qu'une suite ne dépassera jamais une valeur, ni vers le haut, ni vers le bas ?",
+  "01-situation": "Voici Clara. Elle est ingénieure du son dans les festivals d'électro. La loi impose un niveau moyen d'au plus 102 décibels. Pendant le set d'un DJ, elle règle le son minute après minute, et elle doit prouver que cette limite ne sera jamais franchie.",
+  "02-definitions": "Une suite est majorée par M si u indice n est inférieur ou égal à M pour TOUT n. Elle est minorée par m si u indice n est supérieur ou égal à m pour tout n. Elle est bornée si elle est les deux à la fois.",
+  "03-son": "Le niveau à la minute n, pour n entier naturel, est u indice n égale 100 moins 4 sur n plus 1. 4 sur n plus 1 est positif, donc u indice n est inférieur ou égal à 100 : la suite est majorée par 100, et donc aussi par 102. Elle est croissante, donc minorée par u indice 0, égale 96. Elle est bornée, entre 96 et 100.",
+  "04-question": "Question ! Pour u indice n égale 100 moins 4 sur n plus 1, lequel de ces nombres est un majorant ? A : 99. B : 98. C : 100. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. u indice 7 vaut 99,5 : il dépasse 98 et 99. Un majorant doit dépasser TOUS les termes, même les derniers.",
+  "05-oscille": "Une deuxième machine fait vibrer les basses : v indice n égale 4 plus 2 sinus de n. Comme sinus de n est entre moins 1 et 1, 2 sinus de n est entre moins 2 et 2, et v indice n est entre 2 et 6. La suite est bornée, même si elle ne se stabilise jamais.",
+  "06-piege": "Voilà le piège ! Bornée ne veut pas dire convergente. moins 1 puissance n vaut moins 1, puis 1, puis moins 1 : elle est bornée, et elle n'a pas de limite. Et majorée par 100 ne veut pas dire que la suite atteint 100.",
+  "07-question": "Question ! Laquelle de ces suites, définies pour n entier naturel, n'est PAS bornée ? A : 5 fois 0,8 puissance n. B : racine de n. C : 2 cosinus de n. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Racine de n est minorée par 0, mais elle dépasse tout nombre : elle n'est pas majorée.",
+  "08-defi": "À toi de jouer ! Pour n entier naturel, w indice n égale 7 moins 3 cosinus de n. Trouve un encadrement de w indice n valable pour tout n. Mets pause, et cherche !",
+  "08b-correction": "Correction. Cosinus de n est entre moins 1 et 1. Donc moins 3 cosinus de n est entre moins 3 et 3, et w indice n est entre 4 et 10. La suite est bornée : 4 inférieur ou égal à w indice n, inférieur ou égal à 10.",
+  "09-finale": "Ce que tu as appris. Majorée : sous un nombre fixe, pour tous les rangs. Minorée : au-dessus d'un nombre fixe. Bornée : les deux. Pour sinus et cosinus, on part de moins 1 et 1. Et une suite bornée n'a pas forcément de limite.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

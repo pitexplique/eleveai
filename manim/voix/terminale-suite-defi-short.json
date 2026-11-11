@@ -1,0 +1,9 @@
+{
+  "00-garde": "Suites. Tu paries que tu trouves où se stabilise un parc de vélos, sans calculer un seul terme ?",
+  "01-situation": "Hugo gère les vélos en libre-service d'une ville. Chaque mois, la moitié des vélos part en réparation, et 400 vélos neufs arrivent : u indice n plus 1 égale 0,5 u indice n plus 400.",
+  "02-point-fixe": "Si le parc se stabilise à une valeur l, alors l égale 0,5 l plus 400.",
+  "03-question": "Question ! Que vaut l ? A : 400. B : 800. C : 200. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 0,5 l égale 400, donc l égale 800 vélos.",
+  "04-commentaire": "Et toi : si 20 % des vélos partent chaque mois et que 300 vélos neufs arrivent, où se stabilise le parc ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

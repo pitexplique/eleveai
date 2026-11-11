@@ -1,0 +1,9 @@
+{
+  "00-garde": "Récurrence. Tu paries que l'hérédité seule peut « prouver » une chose fausse ?",
+  "01-situation": "Nora est cheffe de chantier. Sa tour a 2 étages au mois 0, et chaque mois on en construit 3 de plus : u indice n plus 1 égale u indice n plus 3.",
+  "02-heredite": "Propriété : « u indice n est un multiple de 3 ». Si u indice k est un multiple de 3, u indice k plus 3 aussi : c'est héréditaire !",
+  "03-question": "Question ! Pourtant, la propriété est fausse. Pourquoi ? A : l'hérédité est fausse. B : il manque la conclusion. C : l'initialisation est fausse. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. u indice 0 égale 2, et 2 n'est pas un multiple de 3 : la chaîne ne démarre jamais.",
+  "04-commentaire": "Et toi : 2 étages au mois 0, puis 3 de plus chaque mois. Combien d'étages au mois 12 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

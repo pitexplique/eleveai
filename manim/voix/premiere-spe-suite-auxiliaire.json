@@ -1,0 +1,18 @@
+{
+  "00-garde": "Suite auxiliaire : la méthode du bac. Comment trouver la formule de u indice n quand on multiplie ET on ajoute ?",
+  "01-situation": "Voici Manon. Elle est technicienne forestière. Une forêt compte 5 000 arbres. Chaque année, on coupe 10 % des arbres, puis Manon en fait planter 300. La forêt va-t-elle disparaître ?",
+  "02-modele": "On note u indice n le nombre d'arbres après n années, à partir de u indice 0 égale 5 000. Couper 10 %, c'est multiplier par 0,9, puis on ajoute 300 : u indice n plus 1 égale 0,9 fois u indice n plus 300. Cette suite n'est ni arithmétique, ni géométrique.",
+  "03-point-fixe": "Étape 1 : la valeur d'équilibre. On cherche L tel que L égale 0,9 L plus 300. Donc 0,1 L égale 300, et L égale 3 000.",
+  "04-question": "Question ! Avec u indice n plus 1 égale 0,5 fois u indice n plus 8, la valeur d'équilibre L vaut : A : 8. B : 16. C : 4. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. L égale 0,5 L plus 8, donc 0,5 L égale 8, et L égale 16.",
+  "05-auxiliaire": "Étape 2 : on pose v indice n égale u indice n moins 3 000 : l'écart à l'équilibre. Alors v indice n plus 1 égale u indice n plus 1 moins 3 000, égale 0,9 u indice n plus 300 moins 3 000, égale 0,9 u indice n moins 2 700, égale 0,9 fois, u indice n moins 3 000. Donc v indice n plus 1 égale 0,9 v indice n : la suite v est géométrique, de raison 0,9.",
+  "06-formule": "Étape 3 : v indice 0 égale 5 000 moins 3 000, égale 2 000. Donc v indice n égale 2 000 fois 0,9 puissance n. Et comme u indice n égale v indice n plus 3 000 : u indice n égale 2 000 fois 0,9 puissance n, plus 3 000.",
+  "07-question": "Question ! u indice 0 égale 10, u indice n plus 1 égale 0,5 u indice n plus 8, et v indice n égale u indice n moins 16. Combien vaut v indice 0 ? A : moins 16. B : 26. C : moins 6. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. v indice 0 égale u indice 0 moins L : 10 moins 16, égale moins 6.",
+  "08-piege": "Voilà le piège ! La raison de v est 0,9, le coefficient devant u indice n, et pas 300. Et on n'oublie pas de rajouter L à la fin : u indice n égale v indice n plus 3 000, pas v indice n tout seul.",
+  "09-limite": "Étape 4 : la limite. 0,9 est entre 0 et 1 : 0,9 puissance n tend vers 0. Donc u indice n tend vers 3 000. La forêt ne disparaît pas : elle se stabilise autour de 3 000 arbres. Après 10 ans, il en reste 2 000 fois 0,9 puissance 10, plus 3 000 : environ 3 697.",
+  "10-defi": "À toi de jouer ! u indice 0 égale 5 et, pour tout entier naturel n, u indice n plus 1 égale 3 u indice n moins 4. Trouve L, montre que v indice n égale u indice n moins L est géométrique, puis donne u indice n et sa limite. Mets pause, et cherche !",
+  "10b-correction": "Correction. L égale 3 L moins 4 donne L égale 2. v indice n plus 1 égale 3 u indice n moins 4 moins 2, égale 3 u indice n moins 6, égale 3 fois, u indice n moins 2, égale 3 v indice n : géométrique de raison 3. v indice 0 égale 5 moins 2, égale 3. Donc u indice n égale 3 fois 3 puissance n, plus 2. 3 est plus grand que 1 et v indice 0 est positif : u indice n tend vers plus l'infini. On vérifie : u indice 1 égale 11, et 3 fois 3 plus 2, égale 11.",
+  "11-finale": "Ce que tu as appris. Pour u indice n plus 1 égale a u indice n plus b, on cherche l'équilibre L, tel que L égale a L plus b. On pose v indice n égale u indice n moins L : elle est géométrique de raison a. Puis u indice n égale v indice 0 fois a puissance n, plus L, et a puissance n donne la limite.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

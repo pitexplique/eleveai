@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suite arithmétique : la représentation graphique. Comment lire une suite sur un dessin, et la reconnaître au premier coup d'œil ?",
+  "01-situation": "Voici Amel. Elle est ingénieure en robotique : elle teste un robot qui livre les médicaments dans un hôpital. Au départ, sa batterie lui donne 120 minutes d'autonomie, et chaque livraison en consomme 15. Amel veut voir, d'un seul coup d'œil, quand le robot devra se recharger.",
+  "02-points": "On note u indice n l'autonomie, en minutes, après n livraisons : u indice 0 égale 120. On place les points de coordonnées n et u indice n : 0 et 120, 1 et 105, 2 et 90, 3 et 75. Une suite, ce sont des points isolés : on ne les relie pas.",
+  "03-alignes": "Ces points sont alignés. C'est normal : u indice n égale 120 moins 15 n, comme une droite d'équation y égale 120 moins 15 x. La raison, moins 15, est le coefficient directeur. Et u indice 0, 120, est l'ordonnée à l'origine.",
+  "04-question": "Question ! Les points d'une suite arithmétique sont sur une droite qui passe par les points de coordonnées 1 et 7, puis 4 et 19. Quelle est la raison ? A : 4. B : 12. C : 3. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. De l'abscisse 1 à l'abscisse 4, il y a 3 pas, et on monte de 12 : 12 divisé par 3, égale 4.",
+  "05-lire": "Sur le graphique d'Amel, chaque point est 15 plus bas que le précédent. Le point d'abscisse 8 arrive sur l'axe : u indice 8 égale 120 moins 120, égale 0. Après 8 livraisons, le robot doit se recharger.",
+  "06-nature": "Et si les points ne sont pas alignés ? S'ils montent de plus en plus vite, sur une courbe qui se creuse, ce n'est pas une suite arithmétique : c'est l'allure d'une suite géométrique. Points alignés : arithmétique. Points qui montent : raison positive. Points qui descendent : raison négative.",
+  "07-question": "Question ! La suite w est définie par w indice n égale 5 plus 3 n. Quel point fait partie de sa représentation graphique ? A : le point de coordonnées 17 et 4. B : le point de coordonnées 4 et 17. C : le point de coordonnées 4 et 20. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. w indice 4 égale 5 plus 3 fois 4, égale 17 : l'abscisse est le rang, l'ordonnée est le terme.",
+  "08-piege": "Voilà le piège ! Lire la raison là où la droite coupe l'axe des ordonnées. Ce nombre-là, c'est u indice 0. La raison, c'est de combien on monte, ou on descend, quand on avance d'un rang.",
+  "09-defi": "À toi de jouer ! Les points d'une suite arithmétique sont sur la droite d'équation y égale 30 moins 2 x. Donne u indice 0, la raison, le sens de variation, et la valeur de u indice 6. Mets pause, et cherche !",
+  "09b-correction": "Correction. L'ordonnée à l'origine donne u indice 0 égale 30. Le coefficient directeur donne la raison : moins 2. Elle est négative : la suite est décroissante. Et u indice 6 égale 30 moins 2 fois 6, égale 18.",
+  "10-finale": "Ce que tu as appris. Les points de coordonnées n et u indice n d'une suite arithmétique sont alignés, sur la droite y égale u indice 0 plus r x. La raison est le coefficient directeur : l'écart entre deux points qui se suivent.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Suite géométrique : du pourcentage à la raison. Augmenter de 4 %, perdre un quart : par quel nombre multiplie-t-on ?",
+  "01-situation": "Voici Ylan. Il travaille dans la distribution de films : il décide combien de salles de cinéma gardent un film à l'affiche. La première semaine, un film fait 200 000 entrées. Ensuite, d'une semaine à l'autre, les entrées baissent de 30 %. Combien en restera-t-il deux semaines plus tard ?",
+  "02-formule": "Baisser de 30 %, c'est garder 70 %. On multiplie par 1 moins 30 sur 100, égale 0,7 : la raison est q égale 0,7. Pour une hausse de t %, q égale 1 plus t sur 100. Pour une baisse de t %, q égale 1 moins t sur 100.",
+  "03-mots": "Certains mots cachent une raison. Doubler : q égale 2. Tripler : q égale 3. Diviser par 2 : q égale 0,5. Perdre un quart : on garde trois quarts, q égale 0,75. Augmenter de 100 % : q égale 2.",
+  "04-question": "Question ! Un abonnement augmente de 4 % chaque année. La raison de la suite géométrique associée est : A : 1,04. B : 1,4. C : 0,04. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 1 plus 4 sur 100, égale 1,04 : on garde tout, et on ajoute 4 %.",
+  "05-inverse": "Dans l'autre sens, on retire 1 à la raison. q égale 0,85 : 0,85 moins 1, égale moins 0,15, c'est une baisse de 15 %. q égale 1,2 : 1,2 moins 1, égale 0,2, c'est une hausse de 20 %.",
+  "06-global": "Revenons à Ylan. 200 000 fois 0,7, égale 140 000 entrées. Puis 140 000 fois 0,7, égale 98 000. Sur deux semaines, on a multiplié par 0,7 au carré, égale 0,49.",
+  "07-piege": "Voilà le piège ! Deux baisses de 30 % ne font pas une baisse de 60 %. Multiplier par 0,49, c'est garder 49 % : la baisse globale est de 51 %. Les pourcentages successifs ne s'additionnent pas : les coefficients se multiplient.",
+  "08-question": "Question ! Une suite géométrique a pour raison q égale 1,1. Entre u indice 0 et u indice 2, l'évolution globale est : A : une hausse de 20 %. B : une hausse de 121 %. C : une hausse de 21 %. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 1,1 au carré égale 1,21, et 1,21 moins 1, égale 0,21 : c'est une hausse de 21 %.",
+  "09-defi": "À toi de jouer ! Une vidéo sur le cinéma passe de 8 000 vues en 2026 à 10 000 vues en 2027. On suppose que l'évolution continue au même taux. Quelle est la raison ? De combien de pourcents les vues augmentent-elles chaque année ? Et combien de vues en 2028 ? Mets pause, et cherche !",
+  "09b-correction": "Correction. La raison est 10 000 divisé par 8 000, égale 1,25. 1,25 moins 1, égale 0,25 : c'est une hausse de 25 % par an. En 2028 : 10 000 fois 1,25, égale 12 500 vues.",
+  "10-finale": "Ce que tu as appris. Une hausse de t % donne la raison 1 plus t sur 100 ; une baisse, 1 moins t sur 100. Pour retrouver le pourcentage, on retire 1 à la raison. Et sur plusieurs étapes, les coefficients se multiplient.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

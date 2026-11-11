@@ -1,0 +1,9 @@
+{
+  "00-garde": "Calculer un terme. Tu paries que tu trouves u indice 3 de tête ?",
+  "01-situation": "Malik est astronome. Son télescope repère de nouvelles étoiles : la nuit n, il en compte u indice n égale 3 fois 2 puissance n.",
+  "02-calcul": "Pour u indice 2 : 2 puissance 2, égale 4, puis 3 fois 4 : 12. La puissance d'abord, la multiplication ensuite.",
+  "03-question": "Question ! Combien vaut u indice 3 ? A : 24. B : 216. C : 18. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 2 puissance 3, égale 8, et 3 fois 8, égale 24.",
+  "04-commentaire": "Et toi : combien vaut u indice 5 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

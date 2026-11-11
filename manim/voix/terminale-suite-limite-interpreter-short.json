@@ -1,0 +1,9 @@
+{
+  "00-garde": "Limite d'une suite. Tu paries que tu lis la limite sur un graphique en 3 secondes ?",
+  "01-situation": "Yasmine est cardiologue. Après un effort, le cœur de sa patiente ralentit, minute après minute : 120, 90, 75, 67,5 battements par minute. Elle modélise : u indice n égale 60 plus 60 fois 0,5 puissance n, à partir de n égale 0.",
+  "02-graphique": "Sur le graphique, les points descendent, et se rapprochent de plus en plus d'une droite horizontale.",
+  "03-question": "Question ! La suite semble : A : converger vers 60. B : converger vers 67,5. C : tendre vers moins l'infini. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. 0,5 puissance n tend vers 0 : le cœur revient vers 60 battements par minute, son rythme au repos.",
+  "04-commentaire": "Et toi : avec u indice n égale 70 plus 50 fois 0,5 puissance n, vers quel rythme revient le cœur ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

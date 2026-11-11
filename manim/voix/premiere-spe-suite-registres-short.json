@@ -1,0 +1,9 @@
+{
+  "00-garde": "Les mots et les symboles. Tu paries que tu lis u indice 5 sans te tromper ?",
+  "01-situation": "Zoé lance sa chaîne de vidéos de dessin. Elle a 50 abonnés au départ, puis 8 de plus chaque mois. u indice n, c'est le nombre d'abonnés après n mois : u indice 0 égale 50.",
+  "02-lecture": "u indice 3, c'est après 3 mois : 50 plus 3 fois 8, égale 74 abonnés.",
+  "03-question": "Question ! u indice 5 égale 90 veut dire : A : après 90 mois, 5 abonnés. B : après 5 mois, 90 abonnés. C : après 6 mois, 90 abonnés. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. L'indice compte les mois, la valeur compte les abonnés : 50 plus 5 fois 8, égale 90.",
+  "04-commentaire": "Et toi : pour quel n a-t-on u indice n égale 130 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

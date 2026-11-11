@@ -1,0 +1,9 @@
+{
+  "00-garde": "Pourcentages. Tu paries que plus 20 %, puis moins 20 %, ne fait pas zéro ?",
+  "01-situation": "Hugo est photographe. Il augmente son tarif de 20 % : 200 euros deviennent 240 euros. Puis il fait une promotion de 20 %.",
+  "02-calcul": "Moins 20 % sur 240 euros, c'est 240 fois 0,8 : 192 euros. Pas 200 !",
+  "03-question": "Question ! Plus 20 %, puis moins 20 %, c'est au total : A : 0 %. B : une baisse de 4 %. C : une hausse de 4 %. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. 1,2 fois 0,8, égale 0,96 : c'est une baisse de 4 %.",
+  "04-commentaire": "Et toi : plus 50 %, puis moins 50 %, quelle évolution au total, en pourcentage ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
