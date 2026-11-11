@@ -182,7 +182,7 @@ class MentalMultiplicationBase(PaysageMental):
         self.ligne_mots([("Pour une fête,", WHITE), ("il prépare", WHITE)], ["Pour une fête", "il prépare"], 2.85,
                         fs=38, xl=-2.6)
         disques = VGroup(*[vinyle(0.27, [ROSE_D, ROND, AMBRE_D][k % 3]) for k in range(18)])
-        disques.arrange_in_grid(rows=2, cols=9, buff=(0.36, 0.42)).move_to(P(1.85, 0.75))
+        disques.arrange_in_grid(rows=2, cols=9, buff=(0.47, 0.42)).move_to(P(1.85, 0.75))  # « 5 min » aérés
         etiq = VGroup(*[Text("5 min", font_size=18, color=AMBRE_D, weight=BOLD).next_to(d, DOWN, buff=0.06)
                         for d in disques])
         hors_audit(etiq)
