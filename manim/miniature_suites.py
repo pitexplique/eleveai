@@ -45,6 +45,38 @@ EP = [
      ["COMPRENDRE COMMENT CALCULER", "UN TERME LOINTAIN"], "u_{20} = 8 + 19 × 4", "= 84 : 19 pas, pas 20",
      "blanche", ["UN PAS", "DE TROP ?"], "de la semaine 1 à la semaine 10",
      [("u_{10} = 20 + 10 × 5 ?", 100, ROUGE), ("9 pas : 20 + 9 × 5", 100, VERT)]),
+    ("premiere", "05-arith-explicite", "verte",
+     ["COMPRENDRE LA", "FORMULE EXPLICITE"], "u_{n} = 300 + 45n", "= 1 200 : n = 20 mois",
+     "blanche", ["LA FORMULE", "EN 10 S ?"], "la trottinette : 120 km + 15 km par jour",
+     [("u_{n} = ?", 130, ROUGE), ("120 + 15n", 130, VERT)]),
+    ("premiere", "06-arith-variation", "verte",
+     ["COMPRENDRE LE SENS", "DE VARIATION"], "r = −25", "+ r < 0 : décroissante",
+     "blanche", ["MONTE OU", "DESCEND ?"], "sans rien calculer",
+     [("62 ; 61,5 ; 61", 120, BLEU), ("r = −0,5", 130, ROUGE)]),
+    ("premiere", "07-arith-graphique", "verte",
+     ["COMPRENDRE UNE SUITE", "SUR UN GRAPHIQUE"], "(n ; u_{n}) alignés", "+ arithmétique : une droite",
+     "blanche", ["AU PREMIER", "COUP D'ŒIL ?"], "les épisodes de Lina, + 3 par semaine",
+     [("(0 ; 4) (1 ; 7) (2 ; 10)", 100, BLEU), ("points alignés", 110, VERT)]),
+    ("premiere", "08-arith-interpreter", "verte",
+     ["COMPRENDRE CE QUE", "DIT UNE SUITE"], "400 + 150n ≥ 3 000", "+ n = 18 semaines",
+     "blanche", ["LA BONNE", "ANNÉE ?"], "l'indice 0, c'est 2026",
+     [("u_{9} → 2036 ?", 120, ROUGE), ("non : 2035", 130, VERT)]),
+    ("premiere", "09-geo-reconnaitre", "verte",
+     ["COMPRENDRE LES SUITES", "GÉOMÉTRIQUES"], "500 ; 1 000 ; 2 000", "+ toujours × 2 : la raison",
+     "blanche", ["× LE MÊME", "NOMBRE ?"], "la photo agrandie",
+     [("8 ; 12 ; 18 ; 27", 120, BLEU), ("× 1,5 à chaque fois", 100, VERT)]),
+    ("premiere", "10-geo-recurrence", "verte",
+     ["COMPRENDRE LA RÉCURRENCE", "GÉOMÉTRIQUE"], "u_{n+1} = 1,2 × u_{n}", "pas u_{n} + 20 !",
+     "blanche", ["LA BONNE", "RELATION ?"], "1 024 joueurs, la moitié éliminée",
+     [("1 024 ; 512 ; 256", 115, BLEU), ("u_{n+1} = 0,5 × u_{n}", 100, VERT)]),
+    ("premiere", "11-geo-taux", "verte",
+     ["COMPRENDRE LA RAISON", "D'UN POURCENTAGE"], "− 30 % = × 0,7", "deux fois : pas − 60 % !",
+     "blanche", ["− 20 %, C'EST", "× COMBIEN ?"], "le smartphone qui perd de la valeur",
+     [("− 20 %", 140, ROUGE), ("= × 0,8", 140, VERT)]),
+    ("premiere", "12-geo-terme-rang", "verte",
+     ["COMPRENDRE COMMENT CALCULER", "UN TERME LOINTAIN"], "u_{12} = 2 000 × 1,1^{12}", "+ ≈ 6 277 abonnés",
+     "blanche", ["10 PLIAGES :", "PLUS DE 10 CM ?"], "une feuille de 0,1 mm",
+     [("0,1 × 2^{10}", 130, BLEU), ("= 102,4 mm", 130, VERT)]),
 ]
 
 
@@ -93,7 +125,7 @@ def ajuste(d, txt, t, lmax):
 def acc_paysage(haut, bas, ceinture, y0):
     """Comme `miniature_puissances.acc_paysage`, avec nos indices."""
     def f(d):
-        lmax = 900
+        lmax = 860
         th = ajuste(d, haut, 92, lmax)
         vert = bas.startswith(("=", "+ "))
         texte = bas[2:] if bas.startswith("+ ") else bas
