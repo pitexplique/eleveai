@@ -64,7 +64,7 @@ def carte(code: str, mois: int, de: str = "") -> Image.Image:
 
     # Le texte à droite.
     x0, x1 = bande + 80, L - 80
-    d.text((x0, 95), "Un cadeau pour apprendre", font=police("segoeuib.ttf", 54), fill=GRIS)
+    d.text((x0, 95), "Apprendre et comprendre le monde", font=police("segoeuib.ttf", 54), fill=GRIS)
     # La durée prend la place qu'il y a, sans toucher le bord.
     taille = 150
     while d.textlength(duree_offerte(mois), font=police("segoeuib.ttf", taille)) > x1 - x0:
