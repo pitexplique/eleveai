@@ -12,7 +12,7 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 | 29 | recurrence-preuve | suite_recurrence_preuve | 06 B, 08 C, 10 A ; C | ✅ `ae350d97` + `562b7d8b` + `584f95d3` (5:42 / 1:13), relu, bords 0 |
 | 30 | variation | suite_variation | 04 A, 07 B ; A | ✅ `d413f550` + `bca6781d` (4:18 / 1:15), relu, bords 0 |
 | 31 | bornee | suite_bornee | 04 C, 07 B ; C | à rendre |
-| 32 | defi (bleue) | suite_defi | 04 B, 06 A, 09 C ; B | à rendre |
+| 32 | defi (bleue) | suite_defi | 04 B, 06 A, 09 C ; B | ✅ `66bee7b1` (6:17 / 1:07), relu, bords 0 |
 | 33 | limite-interpreter | limite_suite_interpreter | 04 A, 08 C ; A | à rendre |
 | 34 | limite-calculer | limite_suite_calculer | 04 B, 06 A ; C | à rendre |
 | 35 | limite-operations | limite_suite_operations | 04 C, 07 B ; B | à rendre |
@@ -28,3 +28,5 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 - 11/11 : la session mère a corrigé la fin commune (`524b48bd`, `Indicate` au lieu du `Flash`) : les épisodes suivants ne la redéfinissent plus. Les vidéos déjà rendues avec l'étoile seront refaites par la session mère en fin de série.
 - 11/11 : ép. 29 ACCEPTÉ (`584f95d3`). Ép. 31 lancé (30 en cours).
 - 11/11 : ép. 30 ACCEPTÉ (`bca6781d`). Ép. 32 lancé (31 en cours).
+- 11/11 ~9 h 40 (Réunion) : le chef d'orchestre a demandé de ne lancer AUCUN nouveau rendu -qh pendant ~40 min (RAM à 0,46 Go). La session Calcul mental 6e (local_ab9a90af…) préviendra. Agents 31 et 32 : ils finissent le rendu en cours, sans en lancer d'autre.
+- 11/11 ~13 h : HD libre (4 Go libres). Ép. 32 ACCEPTÉ (`66bee7b1`). Ép. 33 lancé ; ép. 31 en rendu HD final (`b5f772ea`).
