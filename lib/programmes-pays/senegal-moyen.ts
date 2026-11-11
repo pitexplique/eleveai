@@ -353,7 +353,7 @@ export const SENEGAL_4E: ProgrammePays = {
       texte: "Calcul algébrique : développement, réduction, égalités usuelles (identités remarquables), factorisation, valeur numérique d'une expression littérale.",
       couverture: "complete",
       micros: [
-        ...m("4e", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_expression_reduire", "litteral_identite_developper", "litteral_identite_choisir", "litteral_facteur_commun", "litteral_factoriser_simple", "litteral_expression_substituer"),
+        ...m("4e", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_distributivite_reduire", "litteral_distributivite_reconnaitre", "litteral_distributivite_defi", "litteral_expression_reduire", "litteral_identite_developper", "litteral_identite_choisir", "litteral_facteur_commun", "litteral_factoriser_simple", "litteral_expression_substituer"),
         ...m("seconde", "devfac_factoriser_identite"),
       ],
     },

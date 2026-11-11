@@ -323,7 +323,7 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       texte: "Calcul littéral : développer a(x + y), (a + b)(x + y) ; identités remarquables (a + b)², (a − b)², (a + b)(a − b) ; factoriser ax + ay, ax + ay + bx + by et les expressions remarquables.",
       couverture: "partielle",
       micros: [
-        ...m("4e", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_identite_developper", "litteral_identite_reconnaitre", "litteral_facteur_commun", "litteral_factoriser_simple"),
+        ...m("4e", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_distributivite_reduire", "litteral_distributivite_reconnaitre", "litteral_distributivite_defi", "litteral_identite_developper", "litteral_identite_reconnaitre", "litteral_facteur_commun", "litteral_factoriser_simple"),
         ...m("3e", "litteral_factoriser"),
       ],
       note: "Manque la factorisation par groupement de ax + ay + bx + by.",

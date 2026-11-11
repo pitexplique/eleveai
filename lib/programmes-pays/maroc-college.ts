@@ -146,7 +146,7 @@ export const MAROC_1AC: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("5e", "litteral_distributivite", "litteral_reduire"),
-        ...m("4e", "litteral_distributivite_simple", "litteral_facteur_commun", "litteral_factoriser_simple"),
+        ...m("4e", "litteral_distributivite_simple", "litteral_distributivite_reconnaitre", "litteral_distributivite_defi", "litteral_facteur_commun", "litteral_factoriser_simple"),
       ],
     },
     {
@@ -301,7 +301,7 @@ export const MAROC_2AC: ProgrammePays = {
       code: "S2-1", domaine: AN,
       texte: "Calcul littéral : réduire une expression à une variable, développer (a + b)(c + d), factoriser des expressions simples ; identités remarquables sans excès.",
       couverture: "complete",
-      micros: m("4e", "litteral_expression_reduire", "litteral_distributivite_double", "litteral_distributivite_reduire", "litteral_facteur_commun", "litteral_factoriser_simple", "litteral_identite_developper"),
+      micros: m("4e", "litteral_expression_reduire", "litteral_distributivite_simple", "litteral_distributivite_double", "litteral_distributivite_reduire", "litteral_distributivite_defi", "litteral_facteur_commun", "litteral_factoriser_simple", "litteral_identite_developper"),
     },
     {
       code: "S2-2", domaine: AN,

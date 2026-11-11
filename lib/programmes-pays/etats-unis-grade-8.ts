@@ -82,7 +82,7 @@ export const ETATS_UNIS_GRADE_8: ProgrammePays = {
       texte: "Équations du premier degré à coefficients rationnels (distributivité, réduction) ; dire si elles ont une, aucune ou une infinité de solutions.",
       couverture: "partielle",
       micros: [
-        ...m("4e", "equation_resoudre_distributivite", "equation_verifier"),
+        ...m("4e", "litteral_distributivite_simple", "litteral_distributivite_reduire", "equation_resoudre_distributivite", "equation_verifier"),
         ...m("3e", "equation_resoudre_developper"),
       ],
       note: "7a manque : reconnaître une équation SANS solution (3 = 5) ou vraie pour tout x (3 = 3).",
