@@ -50,7 +50,7 @@ FILMS['defi']=function(outils){
   function dessiner(T){ const c=tab.c; tab.effacer(); const W=tab.W;
     if(T>=com){ /* le défi : 98 + 103 */
       manetteC(c,170,340,1.05);
-      ligneMots(c,[['98 +',tC98,CRAIE.blanc],['103',tC103,CRAIE.d],['= ?',tRep,CRAIE.ok]],W/2+165,340,112,T);
+      ligneMots(c,[['98 +',tC98,CRAIE.blanc],['103',tC103,CRAIE.d],['= ?',tRep,CRAIE.ok]],W/2+140,340,100,T);
       tab.maj(); return; }
     if(T>=ouf){ /* il reste de quoi acheter des bonbons : 101 € */
       boiteJeu(c,150,220,1); manetteC(c,150,470,.85);
@@ -70,8 +70,8 @@ FILMS['defi']=function(outils){
     /* l'accroche : le jeu à 49 €, la manette à 52 €, 49 + 52… 911 € (le 9 des dizaines, le 11 des unités) */
     if(T>=tJeu) boiteJeu(c,120,115,.8);
     if(T>=tManette) manetteC(c,120,275,.72);
-    ligneMots(c,[['un jeu :',tJeu,CRAIE.blanc],['49 €',t49,CRAIE.d]],W/2+110,115,80,T);
-    ligneMots(c,[['une manette :',tManette,CRAIE.blanc],['52 €',t52,CRAIE.d]],W/2+110,275,80,T);
+    ligneMots(c,[['un jeu :',tJeu,CRAIE.blanc],['49 €',t49,CRAIE.d]],W/2+85,115,74,T);
+    ligneMots(c,[['une manette :',tManette,CRAIE.blanc],['52 €',t52,CRAIE.d]],W/2+85,275,74,T);
     ligneMots(c,[['49 +',tPlus,CRAIE.blanc],['52',t52b,CRAIE.blanc]],W/2,425,90,T);
     if(T>=t911){ const z=Math.max(1,pop(T,t911)), ft=120*z; c.font=`800 ${ft}px "Segoe UI"`;
       const parts=[['9',CRAIE.d],['11',CRAIE.u],[' € !',CRAIE.faux]], ws=parts.map(([s])=>c.measureText(s).width);
