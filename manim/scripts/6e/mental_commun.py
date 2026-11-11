@@ -47,7 +47,7 @@ class Bonds(VGroup):
 
     def bond(self, a, b, txt, couleur=AMBRE_D, fs=None, haut=None):
         """La flèche courbe de a à b (au-dessus) et son étiquette (« + 4 »)."""
-        hauteur = haut if haut is not None else min(1.25, 0.35 + abs(self.x(b) - self.x(a)) * 0.22)
+        hauteur = haut if haut is not None else min(0.85, 0.3 + abs(self.x(b) - self.x(a)) * 0.2)
         dep, arr = self.pt(a) + UP * 0.2, self.pt(b) + UP * 0.2
         ang = -2 * np.arctan(2 * hauteur / max(0.01, abs(arr[0] - dep[0])))
         fl = CurvedArrow(dep, arr, angle=ang if b > a else -ang, color=couleur, stroke_width=6, tip_length=0.22)

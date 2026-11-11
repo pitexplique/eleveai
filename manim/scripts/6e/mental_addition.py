@@ -83,7 +83,7 @@ class MentalAdditionBase(PaysageMental):
         self.au_mot("Enzo passe")
         tit = self.t("Je passe par la dizaine", 46, JAUNE_TITRE).move_to(P(0, 3.0))
         self.play(Write(tit), run_time=0.45)
-        bd = Bonds(56, 64, x0=-5.4, x1=3.8, y=0.75, fs=40)
+        bd = Bonds(56, 64, x0=-5.4, x1=3.8, y=0.6, fs=40)
         self.play(Create(bd.trait), run_time=0.4)
         t56 = self.jouer_tic(bd, 56, "De 56")
         t60 = self.jouer_tic(bd, 60, "à 60", couleur=ROND)
@@ -181,17 +181,17 @@ class MentalAdditionBase(PaysageMental):
         self.play(FadeIn(score(pan.case[1], 28, fs=50), scale=1.3), run_time=0.3)
         l1 = self.ligne_mots([("Il coupe", WHITE), ("28", AMBRE_D), ("en", WHITE), ("20", ROSE_D), ("et", WHITE),
                               ("8.", AMBRE_D)], ["Enzo coupe", "28 en", None, "20 et", None, "8. 134"], 2.55, fs=36, xl=1.2)
-        bd = Bonds(134, 162, x0=-5.4, x1=4.2, y=-0.15, fs=38)
+        bd = Bonds(134, 162, x0=-5.4, x1=4.2, y=-0.55, fs=38)
         self.play(Create(bd.trait), run_time=0.3)
         t134, b1, t154 = bd.tic(134), bd.bond(134, 154, "+ 20", ROSE_D), bd.tic(154)
-        self.etapes(bd, [("134 +", "134 plus"), ("20", "20, ça fait 154"), ("= 154.", "154. Puis")], -1.25,
+        self.etapes(bd, [("134 +", "134 plus"), ("20", "20, ça fait 154"), ("= 154.", "154. Puis")], -1.75,
                     gestes={0: [Create(t134[0]), FadeIn(t134[1])], 1: [Create(b1.fleche), FadeIn(b1.etiquette, scale=1.3)],
                             2: [Create(t154[0]), FadeIn(t154[1])]})
         b2, t162 = bd.bond(154, 162, "+ 8"), bd.tic(162, VERT_OK)
-        self.etapes(bd, [("154 +", "154 plus"), ("8", "8, ça fait 162"), ("= 162", "162 points")], -1.95,
+        self.etapes(bd, [("154 +", "154 plus"), ("8", "8, ça fait 162"), ("= 162", "162 points")], -2.45,
                     gestes={1: [Create(b2.fleche), FadeIn(b2.etiquette, scale=1.3)],
                             2: [Create(t162[0]), FadeIn(t162[1], scale=1.3)]})
-        g = self.gros("162 points", fs=46).move_to(P(2.6, -1.6))
+        g = self.gros("162 points", fs=46).move_to(P(2.2, -2.1))
         self.play(FadeIn(g, scale=1.3), run_time=0.4)
         self.attendre_voix()
 
@@ -225,7 +225,7 @@ class MentalAdditionBase(PaysageMental):
     def ecran_question2(self):
         self.clear()
         self.add_mascotte()
-        bd = Bonds(245, 282, x0=-5.9, x1=-1.0, y=0.4, fs=30)
+        bd = Bonds(245, 282, x0=-6.2, x1=-0.6, y=0.4, fs=26)
 
         def autres_q(sc):
             sc.play(Create(bd.trait), run_time=0.3)
@@ -240,13 +240,14 @@ class MentalAdditionBase(PaysageMental):
             sc.au_mot("275. Puis")
             _t = bd.tic(275)
             sc.play(FadeIn(lg0[1], shift=UP * 0.1), Create(_t[0]), FadeIn(_t[1]), run_time=0.25)
-            lg1 = sc.ligne_rep(1, ["275 + 7 :", "on passe par 280,"])
+            lg1 = sc.ligne_rep(1, ["275 + 7 :"])
             sc.au_mot("275 plus 7")
             _b = bd.bond(275, 282, "+ 7", fs=28)
             sc.play(FadeIn(lg1[0], shift=UP * 0.1), Create(_b.fleche), FadeIn(_b.etiquette), run_time=0.3)
+            lg15 = sc.ligne_rep(2, ["on passe par 280,"])
             sc.au_mot("on passe par 280")
-            sc.play(FadeIn(lg1[1], shift=UP * 0.1), run_time=0.25)
-            lg2 = sc.ligne_rep(2, ["et on arrive à 282."])
+            sc.play(FadeIn(lg15[0], shift=UP * 0.1), run_time=0.25)
+            lg2 = sc.ligne_rep(3, ["et on arrive à 282."])
             sc.au_mot("et on arrive")
             _t = bd.tic(282, couleur=VERT_OK)
             sc.play(FadeIn(lg2[0], shift=UP * 0.1), Create(_t[0]), FadeIn(_t[1]), run_time=0.25)
@@ -254,7 +255,7 @@ class MentalAdditionBase(PaysageMental):
 
         self.question_pause("07-question", "07b-reponse", ["Combien font 245 + 37 ?"],
                             [self.t("282", 36), self.t("272", 36), self.t("285", 36)], 0,
-                            ["245 + 30 = 275.", "275 + 7 : on passe par 280,", "et on arrive à 282."],
+                            ["245 + 30 = 275.", "275 + 7 :", "on passe par 280,", "et on arrive à 282."],
                             mot_q="Combien", autres_q=autres_q, autres_r=apres)
 
     # ── 08 : le défi ────────────────────────────────────────────────────────
