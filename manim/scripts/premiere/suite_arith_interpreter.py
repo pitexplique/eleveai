@@ -212,7 +212,10 @@ class SuiteArithInterpreter1re(PaysageSuites):
         """Un calcul écrit morceau par morceau : [(texte, couleur, extrait), …] ;
         chaque morceau quand la voix dit son extrait (None : avec le précédent)."""
         ts = [self.t(m[0], fs, m[1], 1e9, audit=len(m) < 4) for m in morceaux]  # 4e élément : déjà dit
-        g = VGroup(*ts).arrange(RIGHT, buff=buff).move_to(P(0, y))
+        g = VGroup(*ts)
+        for a, b, ma, mb in zip(ts, ts[1:], morceaux, morceaux[1:]):
+            b.next_to(a, RIGHT, buff=self.espace(ma[0], mb[0], fs))
+        g.move_to(P(0, y))
         if g.width > self.largeur_texte:
             g.scale_to_fit_width(self.largeur_texte)
         if centre:
@@ -229,6 +232,17 @@ class SuiteArithInterpreter1re(PaysageSuites):
             paquet.append(tx)
         self.play(*[FadeIn(p, shift=UP * 0.1) for p in paquet], *avec, run_time=0.25)
         return g
+
+    def espace(self, a, b, fs):
+        """L'écart entre deux morceaux = une VRAIE espace de la police entre le
+        dernier signe de a et le premier de b (« n ≥ 2 600 », « (n − 1) »,
+        « u₃₈ = 153 ») ; « 150 » puis « n » restent collés (150n)."""
+        x, y = a.strip()[-1], b.strip()[0]
+        if y == "n" and x.isdigit():
+            return 0.04
+        k = fs / 48
+        tout = Text(f"{x} {y}", font_size=48).width
+        return max(0.05, (tout - Text(x, font_size=48).width - Text(y, font_size=48).width) * k)
 
     def fleche(self, a, b, couleur, sw=5):
         return Arrow(a, b, buff=0.08, color=couleur, stroke_width=sw, tip_length=0.2,
@@ -275,7 +289,7 @@ class SuiteArithInterpreter1re(PaysageSuites):
         self.play(FadeIn(cl, shift=UP * 0.2), FadeIn(nom, shift=UP * 0.1), run_time=0.45)
         self.au_mot("kinésithérapeute")
         self.play(FadeIn(metier, shift=UP * 0.1), run_time=0.35)
-        ba = bastien(0.95).move_to(P(-1.3, 1.95))
+        ba = bastien(0.95).move_to(P(-0.85, 1.95))
         nba = self.t("Bastien", 40, JAUNE_TITRE).next_to(ba, DOWN, buff=0.22)
         self.au_mot("Bastien")
         self.play(FadeIn(ba, shift=LEFT * 0.2), FadeIn(nba, shift=UP * 0.1), run_time=0.4)
@@ -308,7 +322,7 @@ class SuiteArithInterpreter1re(PaysageSuites):
         ly = lycee(1.0).move_to(P(ch.X(3000) - 0.35, ch.y + 0.68))
         but = DashedLine(P(ch.X(3000), ch.y - 0.3), P(ch.X(3000), ch.y + 1.4), color=JUSTE, stroke_width=3)
         l3 = self.t("3 km", 36, JUSTE).move_to(P(ch.X(3000) - 0.35, ch.y - 0.55))
-        q = self.t("Quand marchera-t-il 3 km ?", 40, WHITE, larg=6.5).move_to(P(2.95, 1.9))
+        q = self.t("Quand marchera-t-il 3 km ?", 40, WHITE, larg=6.4).move_to(P(3.2, 1.9))
         self.play(FadeIn(ly, shift=DOWN * 0.15), Create(but), FadeIn(l3, scale=1.3), FadeIn(q, shift=UP * 0.1),
                   run_time=0.45)
         self.au_mot("lycée")
@@ -328,8 +342,7 @@ class SuiteArithInterpreter1re(PaysageSuites):
         l3 = self.calcul([("la suite commence à", GREY_A, "commence"), ("u₀", TERME, "u indice 0")], 1.95, x=0,
                          fs=32, centre=True, buff=0.15)
         f = self.calcul([("uₙ =", WHITE, "u indice n égale"), ("400", TERME, "400"), ("+", WHITE, None),
-                         ("150", RAISON, "150"), ("n", WHITE, None)], 0.75, x=0, fs=72, centre=True, buff=0.25)
-        f[4].shift(LEFT * 0.17)
+                         ("150", RAISON, "150"), ("n", WHITE, None)], 0.75, x=0, fs=66, centre=True, buff=0.25)
         self.play(Circumscribe(f[4], color=WHITE, buff=0.08), Circumscribe(l2[0], color=WHITE, buff=0.08),
                   run_time=0.6)
         ch = Chemin(*self.CH2)
@@ -350,7 +363,7 @@ class SuiteArithInterpreter1re(PaysageSuites):
         fl1 = self.fleche(f[3].get_bottom(), pieces[0].get_top(), RAISON)
         e1 = VGroup(self.t("+ 150 m", 36, RAISON), self.t("chaque semaine", 34, WHITE)).arrange(
             DOWN, aligned_edge=LEFT, buff=0.1)
-        e1.move_to(P(0, -0.55)).align_to(P(fl1.get_right()[0] + 0.25, 0), LEFT)
+        e1.move_to(P(0, -0.55)).align_to(P(fl1.get_right()[0] + 0.15, 0), LEFT)
         self.play(GrowArrow(fl1), Indicate(f[3], color=RAISON, scale_factor=1.15), GrowFromEdge(pieces[0], LEFT),
                   FadeIn(e1[0], scale=1.3), run_time=0.5)
         self.au_mot("chaque semaine")
