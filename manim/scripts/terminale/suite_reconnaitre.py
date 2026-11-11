@@ -138,16 +138,22 @@ class SuiteReconnaitreTle(PaysageSuites):
         entier = Text("".join(p for p, _ in pieces), font_size=fs)
         g, k = VGroup(), 0
         for p, c in pieces:
-            n = len(p.replace(" ", ""))
-            if not n:
+            if not p.strip():
                 continue
-            m = Text(p.strip(), font_size=fs, color=c).move_to(VGroup(*entier[k:k + n]))
+            m = Text(p.strip(), font_size=fs, color=c)
+            n = len(m)    # glyphes réels : une ligature (« ffi ») en compte un seul
+            m.move_to(VGroup(*entier[k:k + n]))
             g.add(m)
             k += n
         larg = larg or self.largeur_texte
         if g.width > larg:
             g.scale_to_fit_width(larg)
         return g
+
+    def rayer(self, mob, couleur=PIEGE):
+        """Barré d'UN trait fin, à mi-hauteur : le mot reste lisible dessous."""
+        y = mob.get_center()[1]
+        return Line(P(mob.get_left()[0] - 0.08, y), P(mob.get_right()[0] + 0.08, y)).set_stroke(couleur, 3.5)
 
     def devoiler(self, g, extraits, rt=0.3, avec=()):
         """Chaque morceau quand la voix dit son extrait (None : avec le précédent)."""
@@ -340,10 +346,10 @@ class SuiteReconnaitreTle(PaysageSuites):
         self.au_mot("Pas")
         self.suivre("6")
         self.play(FadeIn(l7[0], shift=UP * 0.08), run_time=0.2)
-        self.play(Create(self.barrer(l7[0])), run_time=0.25)
+        self.play(Create(self.rayer(l7[0])), run_time=0.25)
         self.suivre("0,06")
         self.play(FadeIn(l7[1], shift=UP * 0.08), run_time=0.2)
-        self.play(Create(self.barrer(l7[1])), run_time=0.25)
+        self.play(Create(self.rayer(l7[1])), run_time=0.25)
         self.suivre("1,06")
         cad3 = self.encadre(l7[2], JUSTE, 0.1)
         self.play(FadeIn(l7[2], scale=1.3), Create(cad3), run_time=0.3)
@@ -604,8 +610,9 @@ class SuiteReconnaitreTle(PaysageSuites):
                   LaggedStart(*[GrowFromCenter(d) for d in p2], lag_ratio=0.1), run_time=1.0)
         m2 = marches(ny, OFFRE2, couleur=JUSTE, largeur=4)
         self.au_mot("120")
-        l120 = self.t("+ 120", 34, JUSTE).move_to(m2[0][1].get_top() + P(0.7, 0.8))
-        fl120 = Arrow(l120.get_bottom(), m2[0][1].get_top() + UP * 0.05, buff=0.06, color=JUSTE, stroke_width=3,
+        # l'étiquette AU-DESSUS du nuage (loin des premiers points), la flèche s'arrête avant eux
+        l120 = self.t("+ 120", 34, JUSTE).move_to(m2[0][1].get_top() + P(0.45, 1.55))   # loin de l'axe aussi
+        fl120 = Arrow(P(m2[0][1].get_top()[0], l120.get_bottom()[1]), m2[0][1].get_top() + UP * 0.22, buff=0.08, color=JUSTE, stroke_width=3,
                       tip_length=0.14, max_tip_length_to_length_ratio=0.3)
         self.play(Create(m2[0]), FadeIn(l120, scale=1.3), GrowArrow(fl120), run_time=0.35)
         self.au_mot("de plus en plus")
@@ -648,6 +655,17 @@ class SuiteReconnaitreTle(PaysageSuites):
             for k, (l, (_, ex)) in enumerate(zip(bloc[1], pt)):
                 self.devoiler(l, ex, rt=0.4, avec=[Create(bloc[0])] if k == 0 else ())
         self.attendre_voix(marge=0.8)
+
+    def fin(self, cle="11-abonne"):
+        """La fin commune, mais l'étincelle finale jaillit À DROITE de « @eleveai974 »
+        (au centre, elle se posait sur le « e » du nom)."""
+        import suites_commun as sc
+        flash = sc.Flash
+        sc.Flash = lambda m, **kw: flash(m.get_right() + RIGHT * 0.75, **kw)
+        try:
+            super().fin(cle)
+        finally:
+            sc.Flash = flash
 
     def construct(self):
         ecrans = [self.ecran_garde, self.ecran_situation, self.ecran_ajouter, self.ecran_multiplier,

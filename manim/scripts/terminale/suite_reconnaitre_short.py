@@ -94,9 +94,10 @@ class SuiteReconnaitreShort(ShortSuites):
         entier = Text("".join(p for p, _ in pieces), font_size=fs)
         g, k = VGroup(), 0
         for p, c in pieces:
-            n = len(p.replace(" ", ""))
-            if n:
-                g.add(Text(p.strip(), font_size=fs, color=c).move_to(VGroup(*entier[k:k + n])))
+            if p.strip():
+                m = Text(p.strip(), font_size=fs, color=c)
+                n = len(m)    # glyphes réels : une ligature (« ffi ») en compte un seul
+                g.add(m.move_to(VGroup(*entier[k:k + n])))
                 k += n
         larg = larg or self.largeur_texte
         if g.width > larg:
@@ -114,6 +115,20 @@ class SuiteReconnaitreShort(ShortSuites):
             paquet.append(m)
         self.play(*[FadeIn(p, shift=UP * 0.08) for p in paquet], *avec, run_time=rt)
 
+    Y_TITRE, Y_ECHELLE = 3.56, 2.86      # écartés : le titre ne touche plus l'échelle des ceintures
+
+    def entete(self, titre, extrait=None, fs=44):
+        """Comme l'entête commun, mais le titre plus haut et l'échelle (70 %) plus bas."""
+        if getattr(self, "_margo", None) is None:
+            self._margo = self.margo_bas()
+        self.badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7)
+        self.badge.move_to(P(0, self.Y_ECHELLE))
+        self.titre_s = self.t(titre, fs, JAUNE_TITRE).move_to(P(0, self.Y_TITRE))
+        self.add(self.badge)
+        self.au_mot(extrait or titre)
+        self.play(Write(self.titre_s), run_time=0.5)
+        return self.titre_s, self.badge
+
     def corps(self, l1, l2, fs=34):
         """Un choix sur deux lignes (« géométrique » / « de raison 1,1 »)."""
         return Text(f"{l1}\n{l2}", font_size=fs, line_spacing=0.8)
@@ -123,7 +138,7 @@ class SuiteReconnaitreShort(ShortSuites):
         self.dire("00-garde")
         self.entete("Suites", extrait="Suites")
         pari = self.paragraphe(["Tu paries que", "tu reconnais", "la nature", "d'une suite", ("en 5 secondes ?", RAISON)],
-                               self.fs_grand, buff=0.16, y=1.15)
+                               self.fs_grand, buff=0.16, y=1.0)
         for ligne, ex in zip(pari, ("Tu paries", "tu reconnais", "la nature", "d'une suite", "5 secondes")):
             self.au_mot(ex)
             self.play(FadeIn(ligne, shift=UP * 0.1), run_time=0.25)
@@ -136,11 +151,13 @@ class SuiteReconnaitreShort(ShortSuites):
 
         # ── 01 : EN HAUT les écoutes de Zoé en barres ; EN BAS les cases dessous ──
         self.nouvel_ecran("01-situation", garder=(self.badge, self.titre_s))
-        nom = self.t("Zoé", 48, JAUNE_TITRE)
-        cq = casque(0.9)
-        ident = VGroup(cq, nom).arrange(RIGHT, buff=0.25).move_to(P(0, 2.22))
-        m1 = self.t("productrice", 34, TERME).move_to(P(0, 1.68))
-        m2 = self.t("de musique", 34, TERME).move_to(P(0, 1.3))
+        nom = self.t("Zoé", 46, JAUNE_TITRE)
+        cq = casque(0.8)
+        ident = VGroup(cq, nom).arrange(RIGHT, buff=0.25).move_to(P(0, 1.98))    # loin de l'échelle
+        # « productrice de musique » sur UNE ligne, bien sous « Zoé » (plus d'interligne serré)
+        metier = self.morceaux([("productrice", TERME), (" de musique", TERME)], 32)
+        metier.move_to(P(0, 1.42))
+        m1, m2 = metier
         self.au_mot("Zoé")
         self.play(FadeIn(ident, shift=UP * 0.1), run_time=0.35)
         self.au_mot("productrice")
@@ -202,8 +219,8 @@ class SuiteReconnaitreShort(ShortSuites):
         self.play(FadeIn(rr[2], scale=1.4), Create(cadr), run_time=0.3)
         self.insister(VGroup(rr, cadr), 1.08)
         self.au_mot("Si on ajoutait")
-        s1 = self.t("si on ajoutait", 38, GREY_A).move_to(P(0, 2.38))
-        s2 = self.morceaux([("+ 1 000", GREY_A), (" : arithmétique", GREY_A)], 38).move_to(P(0, 1.75))
+        s1 = self.t("si on ajoutait", 38, GREY_A).move_to(P(0, 2.05))       # aéré sous l'échelle
+        s2 = self.morceaux([("+ 1 000", GREY_A), (" : arithmétique", GREY_A)], 38).move_to(P(0, 1.45))
         s2[0]._pas_audit = True
         fan = [fantome(x + 0.47, k + 1) for k, x in enumerate(XS)]
         self.play(FadeOut(VGroup(ident, m1, m2)), run_time=0.25)
@@ -243,7 +260,7 @@ class SuiteReconnaitreShort(ShortSuites):
         # ── 04 : la question en commentaire, dans l'ordre de la voix ──
         self.nouvel_ecran("04-commentaire", garder=(self.badge,))
         self.au_mot("Et toi")
-        et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, 3.45))
+        et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, self.Y_TITRE - 0.02))
         self.play(FadeIn(et, shift=DOWN * 0.1), run_time=0.35)
         lc = LigneTermes(["1 000", "?"], xs=(-1.15, 1.15), centre=P(0, 1.3), largeur=1.3, hauteur=0.76, fs=40,
                          noms=["jour 0", "jour 5"], fs_noms=30)
@@ -267,4 +284,12 @@ class SuiteReconnaitreShort(ShortSuites):
         self.attendre_voix(marge=0.6)
 
         # ── 05 : la fin ──
-        self.fin_short("05-abonne")
+        # la fin commune, sans le cercle d'étincelles posé AU CENTRE de « @eleveai974 » :
+        # le nom grossit un instant (pas de place à côté, il prend toute la largeur)
+        import suites_commun as sc
+        flash = sc.Flash
+        sc.Flash = lambda m, color=None, **kw: Indicate(m, scale_factor=1.08, color=color)
+        try:
+            self.fin_short("05-abonne")
+        finally:
+            sc.Flash = flash
