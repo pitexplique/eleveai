@@ -13,7 +13,7 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 | 30 | variation | suite_variation | 04 A, 07 B ; A | ✅ `d413f550` + `bca6781d` (4:18 / 1:15), relu, bords 0 |
 | 31 | bornee | suite_bornee | 04 C, 07 B ; C | ✅ `55969ebb` (3:59 / 1:24), relu, bords 0 ; questions 01:10 C, 02:21 B ; short 00:28 C |
 | 32 | defi (bleue) | suite_defi | 04 B, 06 A, 09 C ; B | ✅ `66bee7b1` (6:17 / 1:07), relu, bords 0 |
-| 33 | limite-interpreter | limite_suite_interpreter | 04 A, 08 C ; A | rendu `1b32d10c`, retouches demandées (Ti Margo sur les graphiques, formule du short coupée) |
+| 33 | limite-interpreter | limite_suite_interpreter | 04 A, 08 C ; A | ✅ `1b32d10c` + `6f85ce6a` (4:58 / 1:24), relu, bords 0 ; questions 01:10 A, 03:01 C ; short 00:37 A |
 | 34 | limite-calculer | limite_suite_calculer | 04 B, 06 A ; C | agent lancé |
 | 35 | limite-operations | limite_suite_operations | 04 C, 07 B ; B | à rendre |
 | 36 | limite-comparaison | limite_suite_comparaison | 04 A, 07 C ; A | à rendre |
