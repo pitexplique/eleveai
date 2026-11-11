@@ -24,11 +24,16 @@ Centres : 01 sport, basket ; 02 argent-budget, velo ; 03 musique, electro-dj ; 0
 Ceintures : paysages vertes ; shorts jaunes (un calcul à faire).
 
 ## État
-- 11/11 : 12 voix écrites, pilote 01 (paysage + short) montré en entier à Frédéric : **EN ATTENTE DE SON OUI**. Rien n'est généré ni rendu.
+- 11/11 13 h : ✅ PILOTES 01 RENDUS EN HD, **EN ATTENTE DU OUI DE FRÉDÉRIC SUR LE FORMAT** (aperçu `manim/sorties/apercu-calcul-mental.html`, ouvert en pause).
+  - Paysage `manim/sorties/6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.mp4` : 3 min 36, bords 0, planches relues (titre « 56 + 8 = ? » à écart égal, droite du piège sous « On passe la dizaine ! », 275/282 aérés). Commit `640f34ce`.
+  - Short `…/01-addition/eleveai-maths-6e-mental-addition-short.mp4` (1 min 09, 1080×1920) + `-short-miniature.png` (« 38 + 5 = 313 ? TU PARIES ? », « Dessin animé ») : planche relue, OK.
+- ✅ 02 : paysage `mental_soustraction.py` dry run propre (commit `2da0da25`, titre retouché dans `640f34ce`) ; short `films/mental-soustraction.js` (`04d2fd0d`, 73 s, réponse B). RESTE : HD paysage, film + miniature.
+- ⏳ 03 à 06 : écrits par des agents (scène + `films/mental-<slug>.js`), dry run, brouillon -ql, planches ; derniers contrôles en cours. RESTE pour chacun : HD, film + miniature, bords, planche.
+- ⚠️ Synchro par jetons : chaque mot écrit attend son mot dit ; écrire EXACTEMENT les mots de la voix (« Chloé en vend », pas « Elle en vend »). Dry run : `PYTHONUTF8=1 PYTHONIOENCODING=utf-8 AUDIT=1 BORDS=1 … --dry_run --media_dir <dossier à soi>`.
+- ⚠️ Poste partagé : rendus via `rendre.sh` (verrou mkdir commun, ≤ 1 autre -qh, RAM ≥ 1,5 Go au départ, arrêt si < 0,3 Go). Cahier des charges : `side-session-notes/local_30b52608-…/calcul-mental-brief-agents.md`.
 
 ## Reste, dans l'ordre
-1. Son oui sur les voix (corrections éventuelles).
-2. Générer les voix (Julie, débit −6 comme les décimaux), marques des paysages.
-3. Pilotes 01 : paysage `manim/scripts/6e/mental_addition.py` (module commun `mental_commun.py`, calqué sur `decimal_commun.py`), short `prototypes/ti-margo/films/calcul-mental.js` (+ `.json`). Dry run AUDIT, planches, un seul rendu HD à la fois (⛔ `tasklist` avant : poste partagé).
-4. Aperçu `manim/sorties/apercu-calcul-mental.html` (⛔ jamais `apercu.html`), validation du format, puis 02 à 06.
-5. Commit par chemin, sans push.
+1. Oui de Frédéric sur le format (aperçu).
+2. 02 : HD paysage, puis `node scripts/ti-margo-short.mjs mental soustraction film` et `… miniature`, bords, planches.
+3. 03 à 06 : idem, un rendu à la fois ; ajouter chaque épisode à l'aperçu avec sa vraie durée.
+4. Commit par chemin, sans push ; ⛔ pas de manifeste, `lib/videos` ni R2.
