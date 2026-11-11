@@ -193,7 +193,7 @@ class MentalAstucesBase(PaysageMental):
         q = self.bloc(["Comment calculer", "en 2 secondes ?"], 40).move_to(P(-3.0, 0.45))
         self.play(FadeIn(q[0], shift=UP * 0.2), run_time=0.35)
         self.au_mot("99 plus")
-        calc = self.ligne([("99 +", JAUNE_TITRE), ("47 = ?", JAUNE_TITRE)], 72, buff=0.25).move_to(P(3.3, 0.45))
+        calc = self.ligne([("99 +", JAUNE_TITRE), ("47 = ?", JAUNE_TITRE)], 72, buff=0.42).move_to(P(3.3, 0.45))
         self.play(FadeIn(calc[0], scale=1.3), run_time=0.3)
         self.au_mot("47 en")
         self.play(FadeIn(calc[1], scale=1.3), run_time=0.3)
