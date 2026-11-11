@@ -122,7 +122,7 @@ class SuiteArithVariationShort(AuditMilliers, ShortSuites):
         self.play(FadeIn(gagne[0], shift=UP * 0.1), run_time=0.25)
         self.suivre("0,5")
         self.play(FadeIn(gagne[1], scale=1.3), run_time=0.3)
-        lg = LigneTermes([fr(v) for v in TEMPS], xs=XS, centre=P(0, Y_CASES), largeur=1.15, hauteur=0.78, fs=40)
+        lg = LigneTermes([fr(v) for v in TEMPS], xs=XS, centre=P(0, Y_CASES), largeur=1.25, hauteur=0.78, fs=34)
         nag = []
         for k, v in enumerate(TEMPS):
             self.suivre(fr(v))
@@ -147,6 +147,7 @@ class SuiteArithVariationShort(AuditMilliers, ShortSuites):
         rr = VGroup(self.t("raison :", 42), self.t("r =", 46, RAISON), self.t("−0,5", 46, RAISON))
         rr.arrange(RIGHT, buff=0.15)
         rr[1:].shift(RIGHT * 0.1)
+        rr[2].shift(RIGHT * 0.15)                        # une espace nette après le « = »
         if rr.width > 3.4:
             rr.scale_to_fit_width(3.4)
         rr.move_to(P(0, -2.15))

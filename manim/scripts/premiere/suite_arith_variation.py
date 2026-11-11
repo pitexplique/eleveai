@@ -303,11 +303,12 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
 
     def ecran_signe(self):
         self.nouvel_ecran("02-signe")
-        a1 = self.t("uₙ : la longueur du glacier", 36, TERME)
-        a2 = self.t("en 2026 + n", 36, TERME)
-        VGroup(a1, a2).arrange(RIGHT, buff=0.22).move_to(P(-0.3, 3.05))
-        self.poser(a1, "longueur", False)
-        self.poser(a2, "2026", False)
+        ligne = self.t("uₙ : la longueur du glacier en 2026 + n", 38, TERME, audit=False).move_to(P(0, 3.05))
+        k = len("uₙ:lalongueurduglacier")              # les glyphes avant « en 2026 + n »
+        self.au_mot("longueur")
+        self.play(FadeIn(ligne[:k], shift=UP * 0.1), run_time=0.35)
+        self.au_mot("2026")                              # le 2026 à sa voix (audit à la main)
+        self.play(FadeIn(ligne[k:], shift=UP * 0.1), run_time=0.35)
         u0 = self.t("u₀ = 6 000", 42).move_to(P(-3.2, 2.15))
         self.poser(u0, "6 000", False)
         rec1 = self.t("uₙ₊₁ = uₙ", 42)
@@ -315,7 +316,7 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
         VGroup(rec1, rec2).arrange(RIGHT, buff=0.2).move_to(P(2.3, 2.15))
         self.poser(rec1, "plus 1 égale", False)
         self.poser(rec2, "25", False)
-        rr = VGroup(self.t("r =", 46, RAISON), self.t("−25", 46, RAISON)).arrange(RIGHT, buff=0.18)
+        rr = VGroup(self.t("r =", 46, RAISON), self.t("−25", 46, RAISON)).arrange(RIGHT, buff=0.32)
         rr.move_to(P(-0.4, 1.2))
         self.au_mot("La raison")
         self.play(FadeIn(rr[0]), run_time=0.25)
@@ -405,7 +406,7 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
         self.au_mot("devant n")
         cad = self.encadre(f2, RAISON, 0.12)
         self.play(Create(cad), f2.animate.set_color(RAISON), run_time=0.35)
-        rr = VGroup(self.t("r =", 46, RAISON), self.t("−0,5", 46, RAISON)).arrange(RIGHT, buff=0.18)
+        rr = VGroup(self.t("r =", 46, RAISON), self.t("−0,5", 46, RAISON)).arrange(RIGHT, buff=0.32)
         rr.move_to(P(3.7, 1.45))
         self.play(FadeIn(rr[0]), run_time=0.2)
         self.suivre("0,5")
@@ -432,7 +433,7 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
         VGroup(t1, t2).arrange(RIGHT, buff=0.25).move_to(P(0, 3.15))
         self.poser(t1, "premier", False)
         self.poser(t2, "ne décide", False)
-        mont = montagne(-6.5, -3.4, -2.3, 2.3)
+        mont = montagne(-6.5, -3.4, -1.75, 2.0)
         etoiles = VGroup(*[Dot(P(x, y), radius=0.03, color=WHITE) for x, y in
                            ((-6.2, 1.6), (-4.6, 2.5), (-3.6, 1.4), (-5.3, 1.1), (-3.2, 2.6))])
         moon = lune().move_to(P(-5.7, 2.25))
@@ -453,7 +454,7 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
         lab = self.t("−12 °C", 36).move_to(P(-1.45, liq.get_top()[1]))
         self.au_mot("12 degrés")
         self.play(GrowFromEdge(liq, DOWN), FadeIn(lab, shift=LEFT * 0.1), run_time=0.4)
-        plus = self.t("+ 2 °C par heure", 34, RAISON).move_to(P(-4.6, -2.75))
+        plus = self.t("+ 2 °C par heure", 36, RAISON).move_to(P(-4.6, -2.3))
         self.au_mot("2 degrés par")
         self.play(FadeIn(plus, shift=UP * 0.1), run_time=0.3)
         lg = LigneTermes([fr(v) for v in NUIT], xs=self.XS_NUIT, centre=P(0, 1.95), largeur=1.6, hauteur=0.8, fs=40)
@@ -482,10 +483,10 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
             pts.append(d)
         fm = Arrow(P(0.15, -2.1), P(5.15, -0.75), buff=0, color=MONTE, stroke_width=8,
                    max_tip_length_to_length_ratio=0.08)
-        cr = self.t("croissante", 42, MONTE).move_to(P(2.3, -2.45))
+        cr = self.t("croissante", 42, MONTE).move_to(P(2.5, -2.3))
         self.au_mot("croissante")
         self.play(GrowArrow(fm), FadeIn(cr, scale=1.2), run_time=0.45)
-        neg = self.t("même si ses premiers termes sont négatifs", 28, GREY_A).move_to(P(0.9, -3.15))
+        neg = self.t("même si ses premiers termes sont négatifs", 36, WHITE).move_to(P(-0.6, -3.15))
         self.au_mot("même si")
         self.play(FadeIn(neg, shift=UP * 0.1), run_time=0.3)
         self.au_mot("négatifs")
@@ -612,7 +613,7 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
         # 3 : la citerne
         self.au_mot("Trois")
         self.play(FadeIn(cartes[2], scale=0.95), FadeIn(nums[2]), run_time=0.3)
-        ci = citerne(1.0, 1.2).move_to(P(x3 - 0.95, 0.55))
+        ci = citerne(1.0, 1.15).move_to(P(x3 - 0.95, 0.72))
         cuve = ci[0]
 
         def eau(v):
@@ -623,49 +624,59 @@ class SuiteArithVariation1re(AuditMilliers, PaysageSuites):
         self.au_mot("citerne")
         self.play(Create(ci), run_time=0.4)
         e = eau(900)
-        c1 = self.t("900 L", 36).move_to(P(x3 + 0.9, 1.0))
+        c1 = self.t("900 L", 36).move_to(P(x3 + 0.9, 1.1))
         self.au_mot("900")
         self.play(GrowFromEdge(e, DOWN), FadeIn(c1, scale=1.2), run_time=0.4)
         self.bring_to_front(ci)
-        c2 = self.t("− 40 L", 36, RAISON).move_to(P(x3 + 0.9, 0.5))
+        c2 = self.t("− 40 L", 36, RAISON).move_to(P(x3 + 0.9, 0.65))
         self.poser(c2, "40")
-        c3 = self.t("par jour", 30, GREY_A).move_to(P(x3 + 0.9, 0.05))
+        c3 = self.t("par jour", 30, GREY_A).move_to(P(x3 + 0.9, 0.25))
         self.poser(c3, "par jour", False)
         self.defi_pause(-2.55, x=-0.6)
-        self._defi = (tit, cartes, ci, e, eau)
+        self._defi = (tit, cartes, ci, e, eau, VGroup(m1, m2, m3))
 
     def verdict(self, x, sens, mot, y=-1.15):
         fl = fleche_sens(sens, 0.55, 7)
         coul = MONTE if sens > 0 else DESCEND if sens < 0 else PLAT
-        m = self.t(mot, 32, coul)
+        m = self.t(mot, 34, coul)
         return VGroup(fl, m).arrange(RIGHT, buff=0.3).move_to(P(x, y))
+
+    def deux_lignes(self, a, b, x, fs=34):
+        """La raison d'une carte, sur deux lignes lisibles (sous le dessin)."""
+        return VGroup(self.t(a, fs, RAISON), self.t(b, fs, RAISON)).arrange(DOWN, buff=0.08).move_to(P(x, -0.05))
 
     def ecran_correction(self):
         self.dire("08b-correction")
-        tit, cartes, ci, e, eau = self._defi
+        tit, cartes, ci, e, eau, sous = self._defi
         x1, x2, x3 = self.XS_DEFI
         cor = self.t("Correction", 48, JUSTE).move_to(tit)
         self.au_mot("Correction")
-        self.play(ReplacementTransform(tit, cor), run_time=0.4)
-        r1 = self.t("r = 3, positive", 28, RAISON).move_to(P(x1, -0.55))
+        # la question s'efface : les cartes grandissent vers le haut (place pour la correction)
+        haut = 0.55
+        contenu = [m for m in self.mobjects if m not in (self._margo, tit, sous, *cartes)]
+        grandes = [self.carte(c.width, c.height + haut, c.get_center() + UP * haut / 2) for c in cartes]
+        self.play(ReplacementTransform(tit, cor), FadeOut(sous),
+                  *[Transform(c, g) for c, g in zip(cartes, grandes)],
+                  *[m.animate.shift(UP * haut) for m in contenu], run_time=0.5)
+        r1 = self.deux_lignes("r = 3,", "positive", x1)
         self.au_mot("Un :")
         self.poser(r1, "3")
-        v1 = self.verdict(x1, 1, "croissante", -1.1)
+        v1 = self.verdict(x1, 1, "croissante", -0.82)
         self.au_mot("croissante")
         self.play(GrowArrow(v1[0]), FadeIn(v1[1], scale=1.2), run_time=0.35)
-        s1 = self.t("même si u₀ = −50", 28, GREY_A).move_to(P(x1, -1.65))
+        s1 = self.t("même si u₀ = −50", 30, WHITE).move_to(P(x1, -1.5))
         self.poser(s1, "50")
-        r2 = self.t("+ 0 à chaque étape", 28, RAISON).move_to(P(x2, -0.55))
+        r2 = self.deux_lignes("+ 0", "à chaque étape", x2)
         self.au_mot("Deux")
         self.poser(r2, "0")
-        v2 = self.verdict(x2, 0, "constante", -1.1)
+        v2 = self.verdict(x2, 0, "constante", -0.82)
         self.au_mot("constante")
         self.play(GrowArrow(v2[0]), FadeIn(v2[1], scale=1.2), run_time=0.35)
         self.au_mot("Trois")
         self.play(Transform(e, eau(700)), run_time=0.6)
-        r3 = self.t("r = −40, négative", 28, RAISON).move_to(P(x3, -0.55))
+        r3 = self.deux_lignes("r = −40,", "négative", x3)
         self.poser(r3, "40")
-        v3 = self.verdict(x3, -1, "décroissante", -1.1)
+        v3 = self.verdict(x3, -1, "décroissante", -0.82)
         self.au_mot("décroissante")
         self.play(GrowArrow(v3[0]), FadeIn(v3[1], scale=1.2), run_time=0.35)
         self.play(*[Indicate(v[1], scale_factor=1.15) for v in (v1, v2, v3)], run_time=0.6)
