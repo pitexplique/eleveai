@@ -24,16 +24,24 @@ Centres : 01 sport, basket ; 02 argent-budget, velo ; 03 musique, electro-dj ; 0
 Ceintures : paysages vertes ; shorts jaunes (un calcul à faire).
 
 ## État
-- 11/11 13 h : ✅ PILOTES 01 RENDUS EN HD, **EN ATTENTE DU OUI DE FRÉDÉRIC SUR LE FORMAT** (aperçu `manim/sorties/apercu-calcul-mental.html`, ouvert en pause).
-  - Paysage `manim/sorties/6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.mp4` : 3 min 36, bords 0, planches relues (titre « 56 + 8 = ? » à écart égal, droite du piège sous « On passe la dizaine ! », 275/282 aérés). Commit `640f34ce`.
-  - Short `…/01-addition/eleveai-maths-6e-mental-addition-short.mp4` (1 min 09, 1080×1920) + `-short-miniature.png` (« 38 + 5 = 313 ? TU PARIES ? », « Dessin animé ») : planche relue, OK.
-- ✅ 02 : paysage `mental_soustraction.py` dry run propre (commit `2da0da25`, titre retouché dans `640f34ce`) ; short `films/mental-soustraction.js` (`04d2fd0d`, 73 s, réponse B). RESTE : HD paysage, film + miniature.
-- ⏳ 03 à 06 : écrits par des agents (scène + `films/mental-<slug>.js`), dry run, brouillon -ql, planches ; derniers contrôles en cours. RESTE pour chacun : HD, film + miniature, bords, planche.
-- ⚠️ Synchro par jetons : chaque mot écrit attend son mot dit ; écrire EXACTEMENT les mots de la voix (« Chloé en vend », pas « Elle en vend »). Dry run : `PYTHONUTF8=1 PYTHONIOENCODING=utf-8 AUDIT=1 BORDS=1 … --dry_run --media_dir <dossier à soi>`.
-- ⚠️ Poste partagé : rendus via `rendre.sh` (verrou mkdir commun, ≤ 1 autre -qh, RAM ≥ 1,5 Go au départ, arrêt si < 0,3 Go). Cahier des charges : `side-session-notes/local_30b52608-…/calcul-mental-brief-agents.md`.
+- 11/11 15 h : ✅ **SÉRIE FINIE : 12 vidéos rendues en HD, relues, défauts mineurs corrigés** (Frédéric a validé le format le 11/11 : « Oui, enchaîne »). Aperçu : `manim/sorties/apercu-calcul-mental.html` (12 vidéos, en pause). Sorties dans `manim/sorties/6e/maths/calcul-mental/NN-<slug>/` (paysage, `-short.mp4`, `-short-miniature.png`).
 
-## Reste, dans l'ordre
-1. Oui de Frédéric sur le format (aperçu).
-2. 02 : HD paysage, puis `node scripts/ti-margo-short.mjs mental soustraction film` et `… miniature`, bords, planches.
-3. 03 à 06 : idem, un rendu à la fois ; ajouter chaque épisode à l'aperçu avec sa vraie durée.
-4. Commit par chemin, sans push ; ⛔ pas de manifeste, `lib/videos` ni R2.
+| N° | Paysage (scène) | Durée | Short Ti Margo | Durée | Réponse |
+|---|---|---|---|---|---|
+| 01 | `mental_addition.py` Enzo, arbitre de basket | 3 min 36 | « Les billes » | 1 min 09 | — |
+| 02 | `mental_soustraction.py` Chloé, magasin de vélos | 3 min 34 | « Le skate » | 1 min 13 | B |
+| 03 | `mental_multiplication.py` Hugo, DJ | 3 min 05 | « Les bonbons » | 1 min 05 | C |
+| 04 | `mental_division.py` Maëlys, soigneuse au zoo | 3 min 45 | « Les biscuits » | 1 min 10 | B |
+| 05 | `mental_astuces.py` Jade, cheffe cuisinière | 3 min 24 | « Le beurre » | 1 min 12 | C |
+| 06 | `mental_defi.py` Nathan, développeur de jeux vidéo | 3 min 35 | « La manette » | 1 min 16 | B |
+
+- Contrôles : paysages bords 0 ; shorts ~70 « bords » = le décor plein cadre (même chiffre sur le pilote, normal). Planches relues pour les 12.
+- Retouches après HD : 01 titre, piège, 275/282 ; 02 nombres des petits bonds (36/40, 45/50, 81/83, 142/143) ; 03 disques « 5 min » ; 05 titre « 99 + 47 » ; shorts 03 (« 5 = la moitié de 10 »), 04 (rebond « 4 copains »), 06 (bord du tableau).
+- ⚠️ À écouter sur le HD (calages faits à l'oreille par les agents) : 04 « 80 et 16 », « 70 et 14 », « 60 et 12 » ; 05 « plus 250 », « fraises », « et 75 », « et 52 ».
+- ⚠️ Synchro par jetons : chaque mot écrit attend son mot dit ; écrire EXACTEMENT les mots de la voix. Dry run : `PYTHONUTF8=1 PYTHONIOENCODING=utf-8 AUDIT=1 BORDS=1 … --dry_run --media_dir <dossier à soi>`.
+- ⚠️ Poste partagé : rendus via un verrou mkdir commun (≤ 1 autre -qh, RAM ≥ 1,5 Go). Cahier des charges : `side-session-notes/local_30b52608-…/calcul-mental-brief-agents.md`.
+
+## Reste
+1. Frédéric regarde les 12 vidéos dans l'aperçu (retouches éventuelles).
+2. Publication (R2, manifeste, `lib/videos`, YouTube) : PAS dans cette session, ⛔ ne pas y toucher ici.
+3. Rien n'est poussé.
