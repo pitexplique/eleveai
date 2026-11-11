@@ -165,7 +165,7 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
     def dessin_garde(self):
         """Quatre cases de plus en plus grandes (on multiplie) ; les flèches
         avancent, puis une flèche revient en arrière (dessous)."""
-        lg = LigneTermes(["", "", "", ""], centre=P(-0.6, -1.25), pas=1.6, largeur=1.05, hauteur=0.6, fs=30)
+        lg = LigneTermes(["", "", "", ""], centre=P(-0.6, -1.07), pas=1.6, largeur=1.05, hauteur=0.6, fs=30)
         for k, c in enumerate(lg.cases):
             c.scale(0.8 + 0.12 * k)
         self.play(LaggedStart(*[FadeIn(c, scale=0.8) for c in lg.cases], lag_ratio=0.15), run_time=0.5)
@@ -174,7 +174,7 @@ class SuiteGeoRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
                             creux=0.22)
             self.lancer(fl, run_time=0.3)
         fl = arc_fleche(lg.cases[3][0].get_bottom() + DOWN * 0.08, lg.cases[2][0].get_bottom() + DOWN * 0.08, DOWN,
-                        creux=0.22)
+                        creux=0.16)
         self.lancer(fl, run_time=0.45)
 
     def ecran_garde(self):
