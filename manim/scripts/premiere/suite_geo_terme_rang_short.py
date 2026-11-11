@@ -77,13 +77,13 @@ class SuiteGeoTermeRangShort(OutilsEp12, ShortSuites):
         return a
 
     def entete(self, titre, extrait=None, fs=44):
-        """L'en-tête du module commun, mais l'échelle (un peu plus petite) est
-        posée SOUS le titre avec un vrai écart : elle ne touche plus son bas."""
+        """L'en-tête du module commun (échelle à 70 %), mais le titre (fs 40) est
+        un peu plus haut et l'échelle posée SOUS lui avec un écart de 0,15."""
         if getattr(self, "_margo", None) is None:
             self._margo = self.margo_bas()
-        self.titre_s = self.t(titre, fs, JAUNE_TITRE).move_to(P(0, 3.55))
-        self.badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.6)
-        self.badge.next_to(self.titre_s, DOWN, buff=0.2)
+        self.titre_s = self.t(titre, fs, JAUNE_TITRE).move_to(P(0, 3.6))
+        self.badge = echelle_ceintures(self.ceinture).scale_to_fit_width(config.frame_width * 0.7)
+        self.badge.next_to(self.titre_s, DOWN, buff=0.15)
         self.add(self.badge)
         self.au_mot(extrait or titre)
         self.play(Write(self.titre_s), run_time=0.5)
@@ -92,9 +92,12 @@ class SuiteGeoTermeRangShort(OutilsEp12, ShortSuites):
     def construct(self):
         # ── 00 : la garde : titre, échelle (70 %), le pari ; la feuille se plie ──
         self.dire("00-garde")
-        self.entete("Un terme lointain", extrait="Un terme")
+        self.entete("Un terme lointain", extrait="Un terme", fs=40)
         pari = self.paragraphe(["Tu paries qu'en pliant", "une feuille 10 fois,", "elle dépasse",
                                 ("10 cm d'épaisseur ?", RAISON)], self.fs_grand, buff=0.2, y=1.3)
+        haut = self.badge.get_bottom()[1] - 0.35  # le pari reste sous l'échelle
+        if pari.get_top()[1] > haut:
+            pari.shift(DOWN * (pari.get_top()[1] - haut))
         feuille = Rectangle(width=3.6, height=2.0, fill_color=PAPIER, fill_opacity=1, stroke_color=PLI,
                             stroke_width=2).move_to(P(0, -1.65))
         for k, (ligne, ex) in enumerate(zip(pari, ("Tu paries", "10", "elle", "centimètres"))):
@@ -121,6 +124,8 @@ class SuiteGeoTermeRangShort(OutilsEp12, ShortSuites):
         if ep.width > self.largeur_texte:
             ep.scale_to_fit_width(self.largeur_texte)
         ep.move_to(P(0, 1.55))
+        if ep.get_top()[1] > lab_f.get_bottom()[1] - 0.25:  # sous « une feuille de papier »
+            ep.next_to(lab_f, DOWN, buff=0.25)
         fl = Arrow(ep[1].get_bottom(), p0.get_top() + RIGHT * 0.9, buff=0.08, color=TERME, stroke_width=4,
                    tip_length=0.16)
         self.play(FadeIn(ep, shift=UP * 0.1), GrowArrow(fl), run_time=0.4)
