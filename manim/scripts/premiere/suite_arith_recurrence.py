@@ -392,7 +392,7 @@ class SuiteArithRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
         self.au_mot("arithmétique")
         sa = self.t("d'une suite arithmétique de raison", 34, WHITE)
         rr = VGroup(self.t("r =", 40, RAISON), self.t("300", 40, RAISON)).arrange(RIGHT, buff=0.15)
-        bloc = VGroup(sa, rr).arrange(RIGHT, buff=0.3).move_to(P(-0.4, -2.6))
+        bloc = VGroup(sa, rr).arrange(RIGHT, buff=0.5).move_to(P(-0.4, -2.6))
         self.play(FadeIn(sa, shift=UP * 0.1), run_time=0.35)
         self.au_mot("raison", n=2)
         self.suivre("300")
@@ -589,9 +589,11 @@ class SuiteArithRecurrence1re(AuditMilliers, OutilsEp02, PaysageSuites):
         self.au_mot("à l'envers")
         fl = arc_fleche(lg.cases[1][0].get_top() + UP * 0.08, lg.cases[0][0].get_top() + UP * 0.08, UP,
                         couleur=PIEGE, creux=0.32)
-        lab = self.t("+ 300", 32, PIEGE, audit=False).next_to(fl, UP, buff=0.05)
+        lab = self.t("+ 300", 32, PIEGE, audit=False).next_to(fl, UP, buff=0.3)
         self.lancer(fl, PIEGE, 0.45, extra=[FadeIn(lab)])
-        x1, x2 = self.barrer(f, buff=0.1), self.barrer(VGroup(fl, lab), buff=0.06)
+        # la formule : un seul trait (elle reste lisible) ; la flèche : une petite croix sur l'arc seul
+        x1 = Line(f.get_left() + LEFT * 0.12, f.get_right() + RIGHT * 0.12, stroke_color=PIEGE, stroke_width=5)
+        x2 = self.barrer(Square(0.32).move_to(fl.point_from_proportion(0.5)), buff=0)
         env = self.t("à l'envers !", 38, PIEGE).move_to(P(-3.0, -0.72))
         self.play(Create(x1), Create(x2), FadeIn(env, scale=1.2), run_time=0.45)
         self.au_mot("plus grand")

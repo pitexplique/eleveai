@@ -191,8 +191,9 @@ class SuiteArithRecurrenceShort(OutilsEp02, ShortSuites):
         et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, 3.45))
         ft2 = food_truck(0.75).move_to(P(0, 1.95))
         self.play(FadeIn(et, shift=DOWN * 0.1), FadeIn(ft2, shift=RIGHT * 0.8), run_time=0.4)
-        lc = LigneTermes(["250", "", "", "", "?"], pas=0.84, largeur=0.74, hauteur=0.62, fs=32, centre=P(0, 0.35),
+        lc = LigneTermes(["250", "", "", "", "?"], pas=0.84, largeur=0.72, hauteur=0.62, fs=32, centre=P(0, 0.35),
                          noms=[u(k) for k in range(5)], fs_noms=28)
+        lc.cases[0][1].scale_to_fit_width(0.46).move_to(lc.cases[0][0])  # une marge nette dans la case
         self.au_mot("250")
         self.play(*[FadeIn(lc.cases[k][0], scale=0.8) for k in range(4)], FadeIn(lc.cases[0][1], scale=1.4),
                   *[FadeIn(lc.noms[k]) for k in range(4)], run_time=0.35)
