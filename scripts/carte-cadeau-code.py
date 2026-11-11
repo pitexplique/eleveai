@@ -72,8 +72,8 @@ def carte(code: str, mois: int, de: str = "") -> Image.Image:
     d.text((x0, 165 + (150 - taille) // 2), duree_offerte(mois), font=police("segoeuib.ttf", taille), fill=VERT_FONCE)
     d.text((x0, 360), "du suivi famille EleveAI", font=police("segoeuib.ttf", 58), fill=ENCRE)
     f_corps = police("segoeui.ttf", 38)
-    d.text((x0, 450), "Des vidéos, et un coach de maths qui suit", font=f_corps, fill=GRIS)
-    d.text((x0, 500), "chaque progrès de votre enfant.", font=f_corps, fill=GRIS)
+    d.text((x0, 450), "Des dessins animés avec Ti Margo, et un coach", font=f_corps, fill=GRIS)
+    d.text((x0, 500), "de maths qui suit les progrès de votre enfant.", font=f_corps, fill=GRIS)
 
     # « De la part de » : imprimé, ou une ligne à remplir à la main.
     f_de = police("segoeui.ttf", 40)
