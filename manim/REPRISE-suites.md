@@ -47,6 +47,7 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
 ## ⏭ Relais de la session fille (11/11 après-midi)
 - Acceptés après relecture : 02 à 08 (blocs ci-dessous). En cours au moment du relais : 09 (retouches espaces/cases renvoyées), 10, 11, 12 (agents de rendu), lot de re-rendus de la fin (01 ✅, 02 ✅, 03 ✅, restent 04 et la paysage 05).
 - Relecture : regarder `planche-finale-paysage.png` / `-short.png` du dossier de sortie + images à t précis (outil PyAV : extraire une image à t, recadrer pour zoomer). Défauts typiques renvoyés : liste en fin de `mission-commune.md` (dossier de notes de la session fille) : la donner telle quelle aux agents suivants.
+- ⏰ ÉCHÉANCE (calendrier validé par Frédéric, section « 📅 Calendrier YouTube » en bas) : épisodes 01 à 04 PRÊTS avant le 16/11 12 h 30 (heure de La Réunion) = re-rendus sans étoile (faits), miniatures, entrées du manifeste en AJOUT (prioritaire: true, pas_avant à leur date, renvoie_vers sur les shorts), par lecture-patch-écriture du JSON ; ⛔ ne pas committer le manifeste par son chemin tant qu'il porte la modif non committée d'une autre session (2 pas_avant). Chaque épisode suivant : en place 2 jours avant sa date. Donc la passe finale se fait AU FIL DE L'EAU, pas seulement à la fin.
 - Reste : 13 à 27 (1re géo puis 1re spé), puis passe finale (miniatures, manifeste en AJOUT, fiches-youtube, R2, table R2). Terminale 28-38 : session sœur « Suites Terminale », rapports `ep-28.md`… dans le même dossier de notes.
 
 ## Épisodes rendus (11/11, session fille)
@@ -129,3 +130,31 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
 - Question en commentaire du short : u₁ correspond à 2026, à quelle année correspond u₉ ? Réponse : 2034 (non affichée).
 - Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-arith-interpreter[-short]/`). Marques datées par `manim/scripts/4e/equation_commun.py` (cues doubles).
 
+
+### Ép. 09 geo-reconnaitre ✅ relu (corrections `b34f9b36`, `f1e4dea5`, `2112046d` : « ; » espacés, choix du short sur deux lignes, cases 5/15/45/135 égales)
+- Commits locaux `1ac3376e` puis `b34f9b36` , `f1e4dea5` et `2112046d` (retours de la session principale ; pas poussés) : 2 scripts (`suite_geo_reconnaitre.py`, `_short.py`) + 2 `_marques.json`.
+- Durées : paysage 4:24 (263,6 s) ; short 1:13 (73,4 s). Bords : 0 instant dans les deux vidéos. Dry run : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD.
+- Ceintures : paysage verte, short blanche (échelle entière à 70 %).
+- Métier : paysage Mathis, technicien de laboratoire d'analyses médicales (culture de bactéries 500, 1 000, 2 000, 4 000 ; médicament − 20 %/h) ; short : un photographe (photo agrandie × 1,5 : 8, 12, 18, 27 cm).
+- Centres : corps-sante, sciences (paysage) ; photo (short).
+- Questions : paysage 01:06 → B (80 ; 40 ; 20 ; 10), 02:22 → C (1,25) ; short 00:27 → C (5 ; 15 ; 45 ; 135).
+- Réponse au commentaire du short (non affichée) : 40,5 cm (27 × 1,5).
+- Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-geo-reconnaitre[-short]/`).
+
+
+### Ép. 11 geo-taux ✅ relu (corrections `6c079054` : sous-titre du titre écarté, étiquettes d'Ylan aérées, 49 %/51 % séparés)
+- Ép. 11 `geo-taux` (1re, `expo_suite_taux`) : commit local `5cb68df2` (scripts `suite_geo_taux.py` + `_short.py`, 2 `_marques.json`), PAS poussé.
+- Durées : paysage 4:49 (289,0 s), short 0:56 (56,3 s). Bords : 0 instant sur les deux mp4 ; dry run final : 0 AUDIT-AVANCE, 0 RETARD, 0 BORD.
+- Ceintures : paysage verte, short blanche (échelle entière à 70 %).
+- Métier : Ylan, distribution de films (combien de salles gardent un film à l'affiche ; 200 000 entrées, − 30 % par semaine). Short : un smartphone qui perd 20 % de sa valeur par an (pas de métier nommé).
+- Centres : `cinema-series`, `argent-budget`, `reseaux-sociaux` (défi : les vues d'une vidéo).
+- Questions paysage : 01:17 → A (1,04) ; 02:53 → C (hausse de 21 %). Short : 00:16 → A (0,8).
+- Question en commentaire du short : 500 € qui perdent 20 % par an, après 2 ans → 320 € (500 × 0,8²), non affichée.
+- Voix : aucun mot changé (WAV débit −6 dans `public/sons/premiere-suite-geo-taux[-short]/`). Marques : `marques_dump.ps1`, puis un petit convertisseur à moi qui date un à un les mots des cues répétées (« 10 000 fois » en 3 mots) ; `equation_commun.py` perdait la fin de `09b-correction` (16 cues « introuvable »).
+
+
+## 📅 Calendrier YouTube décidé le 11/11 (Frédéric : « Oui, à partir du 16 »)
+- Les suites prennent le 5e créneau du jour (les 4 autres sont le calendrier 4e/6e déjà daté jusqu'au 09/12). Le 16/11 est déjà plein (5 vidéos) : on démarre le **17/11**.
+- Rythme : paysage de l'ép. NN un jour, son short le lendemain. Épisode k (01 → 38, dans l'ordre de la table) : paysage `pas_avant` = 17/11 + 2 × (k − 1) jours, short = le jour suivant. Donc 01 : 17 et 18/11 ; 02 : 19 et 20/11 ; 03 : 21 et 22/11 ; 08 : 01 et 02/12…
+- Dans le manifeste (passe finale, entrées en AJOUT) : `prioritaire: true` + `pas_avant` sur chaque entrée ; le short a `renvoie_vers` = sa paysage. Les 4 vidéos communes : une seule entrée publiée, la jumelle en `meme_video_que`.
+- ⛔ Avant l'envoi de l'ép. 01 (programmé le 16/11 à 12 h 30 pour le 17) : miniatures + entrées au manifeste des ép. 01 à 04 au moins, et re-rendu des vidéos qui ont l'étoile Flash sur « @eleveai974 » (01 à 04 ✅ re-rendus sans étoile le 11/11, paysage et short ; 05 paysage + short à refaire ; 06 et suivants rendus après le correctif). Sans entrée, l'automatique ne les voit pas ; une vidéo défectueuse partirait telle quelle.
