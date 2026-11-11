@@ -128,8 +128,8 @@ FILMS.noel=function({$,legende,panneau,carte:carteQ,fin}){
   /* La miniature : la carte, Ti Margo, « Dessin animé » */
   window.tiMargoMiniature=()=>{ window.MINI=true; window.tiMargo.aller(A['02-carte']+1);
     legende.style.display='none'; for(const e of [cBulle,cPrix,cBarre,cFin]) e.style.display='none';
-    const t=document.createElement('div'); t.className='cv'; t.innerHTML='Le cadeau de Noël<div style="color:#e8590c;font-size:120px">en dessin animé</div>';
-    t.style.cssText='left:50px;right:50px;top:60px;background:#fff;border:7px solid #17452a;border-radius:44px;padding:20px;font-size:96px;line-height:1.08;text-align:center;z-index:6;'; document.body.append(t);
+    const t=document.createElement('div'); t.className='cv'; t.innerHTML='Le cadeau de Noël<div style="color:#e8590c;font-size:112px">20 € = 1 an</div>';
+    t.style.cssText='left:50px;right:50px;top:60px;background:#fff;border:7px solid #17452a;border-radius:44px;padding:16px;font-size:88px;line-height:1.08;text-align:center;z-index:6;'; document.body.append(t);
     const m=document.createElement('div'); m.className='cv'; m.textContent='Dessin animé';
     m.style.cssText='left:250px;right:250px;bottom:36px;text-align:center;font-size:72px;background:#17452a;color:#fff;border-radius:999px;padding:14px 0;z-index:6;'; document.body.append(m); };
 
@@ -184,6 +184,6 @@ FILMS.noel=function({$,legende,panneau,carte:carteQ,fin}){
       else if(T<A['06-site']) T>=tEleves?G.fier():G.montre();
       else G.pouce();
 
-      if(window.MINI){ scene.x=-.7; cam.d=9.6; cam.y=3.1; P.jaw=.62; G.fier(); }
+      if(window.MINI){ scene.x=-.8; cam.d=10.4; cam.y=4.05; P.jaw=.62; G.fier(); cBulle.style.display='none'; anneau.style.display='none'; cCarte.style.display='block'; cCarte.style.transform='translate(0px,70px) scale(.8)'; }
     } };
 };
