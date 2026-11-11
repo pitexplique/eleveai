@@ -46,7 +46,7 @@ def centre(d: ImageDraw.ImageDraw, x0: int, x1: int, y: int, texte: str, f, coul
     d.text((x0 + (x1 - x0 - larg) / 2, y), texte, font=f, fill=couleur)
 
 
-def carte(code: str, mois: int, de: str = "") -> Image.Image:
+def carte(code: str, mois: int, de: str = "", titre: str = "Apprendre et comprendre le monde") -> Image.Image:
     im = Image.new("RGB", (L, H), CREME)
     d = ImageDraw.Draw(im)
 
@@ -65,7 +65,7 @@ def carte(code: str, mois: int, de: str = "") -> Image.Image:
 
     # Le texte à droite.
     x0, x1 = bande + 80, L - 80
-    d.text((x0, 95), "Apprendre et comprendre le monde", font=police("segoeuib.ttf", 54), fill=GRIS)
+    d.text((x0, 95), titre, font=police("segoeuib.ttf", 54), fill=GRIS)
     # La durée prend la place qu'il y a, sans toucher le bord.
     taille = 150
     while d.textlength(duree_offerte(mois), font=police("segoeuib.ttf", taille)) > x1 - x0:
@@ -152,7 +152,9 @@ def main() -> None:
     p.add_argument("--sortie", default=str(SORTIE))
     p.add_argument("--verso", action="store_true", help="avec --planche : ajoute le dos (prix, Wero, Ulule)")
     p.add_argument("--prix", default="20")
+    p.add_argument("--titre", default="Apprendre et comprendre le monde", help="la ligne au-dessus de la durée")
     p.add_argument("--wero", default="+262 262 74 29 58")
+    p.add_argument("--suffixe", default="", help="ajouté au nom du PDF des planches, pour comparer deux versions")
     p.add_argument("--planche", action="store_true", help="avec --csv : aussi des A4 de 4 cartes à découper")
     a = p.parse_args()
 
@@ -165,7 +167,7 @@ def main() -> None:
             sys.exit("Aucun code famille ou cadeau dans ce CSV.")
         cartes = []
         for l in lignes:
-            im = carte(l["code"], int(l["duree_mois"]), a.de)
+            im = carte(l["code"], int(l["duree_mois"]), a.de, a.titre)
             im.save(sortie / f"carte-{l['code']}.png", dpi=(300, 300))
             cartes.append(im)
         pdf = sortie / f"cartes-{Path(a.csv).stem}.pdf"
@@ -176,7 +178,7 @@ def main() -> None:
             if a.verso:  # recto verso : chaque feuille suivie de son dos (même place, dos identiques)
                 dos = planches([verso(a.prix, a.wero)] * 4)[0]
                 feuilles = [f for r in feuilles for f in (r, dos)]
-            pdf4 = sortie / f"planches-{Path(a.csv).stem}.pdf"
+            pdf4 = sortie / f"planches-{Path(a.csv).stem}{a.suffixe}.pdf"
             feuilles[0].save(pdf4, save_all=True, append_images=feuilles[1:], resolution=300)
             feuilles[0].save(sortie / f"planche-1-{Path(a.csv).stem}.png", dpi=(300, 300))
             print(f"{len(feuilles)} feuilles A4 à découper (4 cartes chacune) :\n  {pdf4}")
@@ -184,7 +186,7 @@ def main() -> None:
     if not (a.code and a.duree):
         p.error("--code et --duree, ou --csv")
     png = sortie / f"carte-{a.code}.png"
-    im = carte(a.code, a.duree, a.de)
+    im = carte(a.code, a.duree, a.de, a.titre)
     im.save(png, dpi=(300, 300))
     im.save(png.with_suffix(".pdf"), resolution=300)
     print(png)
