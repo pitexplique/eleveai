@@ -96,6 +96,32 @@ def carte(code: str, mois: int, de: str = "") -> Image.Image:
     return im
 
 
+def planches(cartes: list[Image.Image]) -> list[Image.Image]:
+    """4 cartes par feuille A4 paysage, avec traits de coupe (11/11/2026, cartes à découper).
+
+    Les cartes sont réduites à 93 % pour garder la marge que les imprimantes ne savent pas remplir.
+    """
+    A4L, A4H = 3508, 2480  # 297 x 210 mm à 300 ppp
+    ech = 0.93
+    cl, ch = round(L * ech), round(H * ech)
+    mx, my = (A4L - 2 * cl) // 2, (A4H - 2 * ch) // 2
+    feuilles = []
+    for i in range(0, len(cartes), 4):
+        f = Image.new("RGB", (A4L, A4H), "white")
+        d = ImageDraw.Draw(f)
+        for j, c in enumerate(cartes[i : i + 4]):
+            f.paste(c.resize((cl, ch), Image.LANCZOS), (mx + (j % 2) * cl, my + (j // 2) * ch))
+        gris = (148, 163, 184)
+        for x in (mx, mx + cl, mx + 2 * cl):  # traits de coupe verticaux, sur toute la hauteur
+            for y in range(0, A4H, 40):
+                d.line([x, y, x, y + 20], fill=gris, width=3)
+        for y in (my, my + ch, my + 2 * ch):
+            for x in range(0, A4L, 40):
+                d.line([x, y, x + 20, y], fill=gris, width=3)
+        feuilles.append(f)
+    return feuilles
+
+
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--code")
@@ -103,6 +129,7 @@ def main() -> None:
     p.add_argument("--de", default="", help="« De la part de » imprimé (sinon une ligne à remplir)")
     p.add_argument("--csv", help="le CSV d'un lot de scripts/codes-ulule.mjs")
     p.add_argument("--sortie", default=str(SORTIE))
+    p.add_argument("--planche", action="store_true", help="avec --csv : aussi des A4 de 4 cartes à découper")
     a = p.parse_args()
 
     sortie = Path(a.sortie)
@@ -120,6 +147,12 @@ def main() -> None:
         pdf = sortie / f"cartes-{Path(a.csv).stem}.pdf"
         cartes[0].save(pdf, save_all=True, append_images=cartes[1:], resolution=300)
         print(f"{len(cartes)} cartes : {sortie}\n  {pdf}")
+        if a.planche:
+            feuilles = planches(cartes)
+            pdf4 = sortie / f"planches-{Path(a.csv).stem}.pdf"
+            feuilles[0].save(pdf4, save_all=True, append_images=feuilles[1:], resolution=300)
+            feuilles[0].save(sortie / f"planche-1-{Path(a.csv).stem}.png", dpi=(300, 300))
+            print(f"{len(feuilles)} feuilles A4 à découper (4 cartes chacune) :\n  {pdf4}")
         return
     if not (a.code and a.duree):
         p.error("--code et --duree, ou --csv")
