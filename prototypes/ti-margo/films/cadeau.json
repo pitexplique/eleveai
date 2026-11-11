@@ -1,0 +1,7 @@
+{
+  "voix": "cadeau-{ep}-short",
+  "sons": "public/sons/cadeau-{ep}-short",
+  "sortie": "manim/sorties/ti-margo/cadeau-{ep}",
+  "nom": "eleveai-carte-cadeau-{ep}-short",
+  "episodes": { "noel": "01" }
+}
