@@ -648,7 +648,7 @@ class PaysageSuites(_OutilsSuites, AuditSynchro, MotsCales, Notion6e):
         self.play(FadeIn(abonne, shift=UP * 0.15), GrowFromCenter(poignee), run_time=0.4)
         self.au_mot("cloche")
         self.play(FadeIn(points[1]), FadeIn(gestes[2], scale=1.3), run_time=0.25)
-        self.play(Flash(poignee, color=JUSTE, line_length=0.3), run_time=0.5)
+        self.play(Indicate(poignee, color=JUSTE, scale_factor=1.12), run_time=0.5)  # 11/11 : plus de Flash (étoile posée sur le texte)
         self.attendre_voix(marge=1.4)
 
 
@@ -733,5 +733,5 @@ class ShortSuites(_OutilsSuites, AuditSynchro, MotsCales, Short6e):
         self.play(FadeIn(abonne, shift=UP * 0.15), GrowFromCenter(poignee), run_time=0.3)
         self.au_mot("cloche")
         self.play(FadeIn(p), FadeIn(g2, scale=1.3), run_time=0.22)
-        self.play(Flash(poignee, color=JUSTE, line_length=0.25), run_time=0.45)
+        self.play(Indicate(poignee, color=JUSTE, scale_factor=1.12), run_time=0.45)  # 11/11 : plus de Flash (étoile posée sur le texte)
         self.attendre_voix(marge=1.0)
