@@ -59515,7 +59515,7 @@
         "sciences"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-14"
+      "pas_avant": "2026-12-09"
     },
     {
       "id": "4e-puissance-zero-negatif-short",
@@ -60480,7 +60480,7 @@
         "jeux-defis"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-18"
+      "pas_avant": "2026-12-10"
     },
     {
       "id": "seconde-puissance-produit-quotient-short",
@@ -60526,7 +60526,7 @@
         "technologie-ia"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-18"
+      "pas_avant": "2026-12-10"
     },
     {
       "id": "seconde-puissance-puissance-puissance",
@@ -60626,7 +60626,7 @@
         "jeux-defis"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-19"
+      "pas_avant": "2026-12-11"
     },
     {
       "id": "seconde-puissance-enchainer",
@@ -60730,7 +60730,7 @@
         "avions"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-20"
+      "pas_avant": "2026-12-12"
     },
     {
       "id": "seconde-puissance-enchainer-short",
@@ -60777,7 +60777,7 @@
         "transports"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-20"
+      "pas_avant": "2026-12-12"
     },
     {
       "id": "4e-puissance-defi",
@@ -61064,7 +61064,7 @@
         "espace"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-22"
+      "pas_avant": "2026-12-13"
     },
     {
       "id": "3e-puissance-defi-short",
@@ -61114,7 +61114,7 @@
         "sciences"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-22"
+      "pas_avant": "2026-12-13"
     },
     {
       "id": "premiere-puissance-cinq-regles",
@@ -61222,7 +61222,7 @@
         "sciences"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-23"
+      "pas_avant": "2026-12-14"
     },
     {
       "id": "stmg-puissance-cinq-regles",
@@ -61384,7 +61384,7 @@
         }
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-23"
+      "pas_avant": "2026-12-14"
     },
     {
       "id": "6e-angle-reconnaitre",
@@ -70932,7 +70932,7 @@
     },
     {
       "id": "4e-distrib-simple",
-      "pas_avant": "2026-12-09",
+      "pas_avant": "2026-11-14",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_simple",
@@ -71045,7 +71045,7 @@
     },
     {
       "id": "4e-distrib-simple-short",
-      "pas_avant": "2026-12-09",
+      "pas_avant": "2026-11-14",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_simple",
@@ -71092,7 +71092,7 @@
     },
     {
       "id": "4e-distrib-double",
-      "pas_avant": "2026-12-10",
+      "pas_avant": "2026-11-18",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_double",
@@ -71205,7 +71205,7 @@
     },
     {
       "id": "4e-distrib-double-short",
-      "pas_avant": "2026-12-10",
+      "pas_avant": "2026-11-18",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_double",
@@ -71253,7 +71253,7 @@
     },
     {
       "id": "4e-distrib-reduire",
-      "pas_avant": "2026-12-11",
+      "pas_avant": "2026-11-19",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_reduire",
@@ -71358,7 +71358,7 @@
     },
     {
       "id": "4e-distrib-reduire-short",
-      "pas_avant": "2026-12-11",
+      "pas_avant": "2026-11-19",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_reduire",
@@ -71406,7 +71406,7 @@
     },
     {
       "id": "4e-distrib-reconnaitre",
-      "pas_avant": "2026-12-12",
+      "pas_avant": "2026-11-20",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_reconnaitre",
@@ -71511,7 +71511,7 @@
     },
     {
       "id": "4e-distrib-reconnaitre-short",
-      "pas_avant": "2026-12-12",
+      "pas_avant": "2026-11-20",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_reconnaitre",
@@ -71559,7 +71559,7 @@
     },
     {
       "id": "4e-distrib-defi",
-      "pas_avant": "2026-12-13",
+      "pas_avant": "2026-11-22",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_defi",
@@ -71665,7 +71665,7 @@
     },
     {
       "id": "4e-distrib-defi-short",
-      "pas_avant": "2026-12-13",
+      "pas_avant": "2026-11-22",
       "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_defi",
