@@ -47,7 +47,7 @@ Piège noté par l'agent 03 : dans `_plan_eq` (equation_commun.py), deux atomes 
 - `brancher-videos-coach.mjs --ecrire` : 10 vidéos branchées au coach (micros `litteral_distributivite_*`).
 
 ## RESTE (sur l'ordre de Frédéric)
-1. YouTube : date à choisir à la place du `pas_avant` de prudence (01/12) ; paysage avant son short.
+1. ✅ YouTube programmé le 11/11 (ordre « programme-la ») : `pas_avant` + `prioritaire` au manifeste, un épisode par jour, 01 le 09/12, 02 le 10/12, 03 le 11/12, 04 le 12/12, 05 le 13/12 (le calendrier était plein jusqu'au 08/12). L'envoi automatique de 12 h 30 les envoie la veille, paysage avant son short.
 2. Titres YouTube des shorts (écrits par les agents) et ligne « Voix de synthèse. » à faire relire.
 
 ## Reste, dans l'ordre

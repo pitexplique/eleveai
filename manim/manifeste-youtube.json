@@ -70932,7 +70932,8 @@
     },
     {
       "id": "4e-distrib-simple",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-09",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_simple",
       "classe": "4e",
@@ -71044,7 +71045,8 @@
     },
     {
       "id": "4e-distrib-simple-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-09",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_simple",
       "classe": "4e",
@@ -71090,7 +71092,8 @@
     },
     {
       "id": "4e-distrib-double",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-10",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_double",
       "classe": "4e",
@@ -71202,7 +71205,8 @@
     },
     {
       "id": "4e-distrib-double-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-10",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_double",
       "classe": "4e",
@@ -71249,7 +71253,8 @@
     },
     {
       "id": "4e-distrib-reduire",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-11",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_reduire",
       "classe": "4e",
@@ -71353,7 +71358,8 @@
     },
     {
       "id": "4e-distrib-reduire-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-11",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_reduire",
       "classe": "4e",
@@ -71400,7 +71406,8 @@
     },
     {
       "id": "4e-distrib-reconnaitre",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-12",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_reconnaitre",
       "classe": "4e",
@@ -71504,7 +71511,8 @@
     },
     {
       "id": "4e-distrib-reconnaitre-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-12",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_reconnaitre",
       "classe": "4e",
@@ -71551,7 +71559,8 @@
     },
     {
       "id": "4e-distrib-defi",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-13",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_defi",
       "classe": "4e",
@@ -71656,7 +71665,8 @@
     },
     {
       "id": "4e-distrib-defi-short",
-      "pas_avant": "2026-12-01",
+      "pas_avant": "2026-12-13",
+      "prioritaire": true,
       "notionId": "litteral_distributivite",
       "microId": "litteral_distributivite_defi",
       "classe": "4e",
