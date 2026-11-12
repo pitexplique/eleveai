@@ -189,7 +189,7 @@ class SuiteGeoExpliciteShort(OutilsEp12, ShortSuites):
         self.au_mot("La base")
         self.play(Indicate(f[3], color=RAISON, scale_factor=1.5), run_time=0.4)
         self.au_mot("la raison")
-        self.play(FadeIn(rai, shift=DOWN * 0.1), *[Indicate(l, color=RAISON, scale_factor=1.4) for l in labs],
+        self.play(FadeIn(rai, shift=DOWN * 0.1), *[Indicate(l, color=RAISON, scale_factor=1.15) for l in labs],
                   run_time=0.45)
         self.attendre_voix(marge=0.3)
 
