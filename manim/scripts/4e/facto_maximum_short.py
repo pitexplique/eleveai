@@ -100,21 +100,21 @@ class FactoMaximumShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
 
         # ── 01 : le secret : on sort TOUT ce qui est commun ──
         self.dire("01-secret")
-        s0 = self.l("Le secret :", 2.1, 40, CIEL)
-        self.dit(s0, "Le secret :")
-        s1 = self.l("on sort tout", 1.6, 33)
-        self.dit(s1, "on sort tout")
-        s1b = self.l("ce qui est commun.", 1.14, 33)
-        self.dit(s1b, "ce qui est commun.")
-        n1 = Eq("Le plus grand", 33, lettres="").move_to(P(0, 0.62))
-        self.dire_eq(n1, "Le plus grand", echelle=1.0, rt=0.12)
-        n1b = Eq("nombre : 4.", 33, lettres="").move_to(P(0, 0.16))
+        # Toutes les lignes à la MÊME taille (38), réparties sur la hauteur utile, sous la ceinture (y 1.95 → −2.6),
+        # à pas régulier : 0.5 dans un groupe, un peu plus entre deux idées.
+        lignes = [Eq("Le secret :", 38, CIEL, lettres=""), Eq("on sort tout", 38, lettres=""),
+                  Eq("ce qui est commun.", 38, lettres=""), Eq("Le plus grand", 38, lettres=""),
+                  Eq("nombre : 4.", 38, lettres=""), Eq("La lettre : x.", 38, lettres="")]
+        k = min(1.0, 3.9 / max(m.width for m in lignes))
+        for m, y in zip(lignes, (1.95, 1.4, 0.92, 0.32, -0.16, -0.66)):
+            m.scale(k).move_to(P(0, y))
+        s0, s1, s1b, n1, n1b, n2 = lignes
         n1b.atomes[-2].set_color(FACTEUR)
-        self.dire_eq(n1b, "nombre : 4.", echelle=1.0, rt=0.12)
-        n2 = Eq("La lettre : x.", 33, lettres="").move_to(P(0, -0.3))
         n2.atomes[-2].set_color(FACTEUR)
-        self.dire_eq(n2, "La lettre : x.", echelle=1.0, rt=0.12)
-        n3 = Eq("Donc 4x.", 44, lettres="").move_to(P(0, -0.85))
+        for m, ph in zip(lignes, ("Le secret :", "on sort tout", "ce qui est commun.", "Le plus grand",
+                                  "nombre : 4.", "La lettre : x.")):
+            self.dire_eq(m, ph, echelle=1.0, rt=0.12)
+        n3 = Eq("Donc 4x.", 38 * k, lettres="").move_to(P(0, -1.22))
         VGroup(n3.atomes[1], n3.atomes[2]).set_color(FACTEUR)
         n3.atomes[3].shift(RIGHT * 0.1)
         self.dire_eq(n3, "Donc 4 x.", echelle=1.0, rt=0.12)
@@ -122,9 +122,9 @@ class FactoMaximumShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
                                   corner_radius=0.06)
         self.play(Create(c3), run_time=0.2)
         self.insister(VGroup(n3.atomes[1], n3.atomes[2], c3), 1.25, 0.15)
-        g1 = Eq("4x² + 8x", 46).move_to(P(0, -1.5))
+        g1 = Eq("4x² + 8x", 48).move_to(P(0, -1.82))
         self.dire_eq(g1, "4 x au carré plus 8 x égale", echelle=1.15)
-        g2 = Eq("= 4x(x + 2)", 46).move_to(P(0, -2.15))
+        g2 = Eq("= 4x(x + 2)", 48).move_to(P(0, -2.4))
         VGroup(g2.atomes[1], g2.atomes[2]).set_color(FACTEUR)
         self.dire_eq(g2, "égale 4 x fois, entre parenthèses, x plus 2.", echelle=1.15)
         quatre = VGroup(g2.atomes[1], g2.atomes[2])
@@ -171,7 +171,17 @@ class FactoMaximumShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         ligne = VGroup(egal, VGroup(boite, pt), par).arrange(RIGHT, buff=0.15).move_to(P(0, -1.0))
         pt.move_to(boite)
         self.play(FadeIn(egal), Create(boite), FadeIn(pt, scale=1.4), FadeIn(par), run_time=0.2)
-        self.appel_commentaire(-2.0)
+        # comme au short 05 : sur 2 lignes, gros et gras, sous le cadre « ? »
+        self.au_mot("Réponds en commentaire")
+        a1 = T("Réponds", 44, VERT_OK, gras=True)
+        a2 = T("en commentaire !", 44, VERT_OK, gras=True)
+        appel = VGroup(a1, a2).arrange(DOWN, buff=0.12)
+        if appel.width > 3.5:
+            appel.scale_to_fit_width(3.5)
+        appel.move_to(P(0, -2.1))
+        self.play(FadeIn(appel, scale=0.7), run_time=0.35)
+        self.insister(appel, 1.06, 0.25)
+        self.attendre_voix(marge=1.0)
 
         # ── 03 : la fin du 05/11 ──
         self.fin_05_11("03-abonne", [x for x in self.mobjects if x is not margo])

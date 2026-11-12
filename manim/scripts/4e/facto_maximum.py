@@ -121,14 +121,16 @@ class FactoMaximum4e(PaysageRel):
         cartes.next_to(q, DOWN, buff=0.3).align_to(P(self.XL, 0), LEFT)
         pause.next_to(cartes, DOWN, buff=0.3).align_to(P(self.XL, 0), LEFT)
         # la phrase de réponse sous la figure, à gauche : la place d'y écrire toute la voix, à la taille normale
+        # 36 pt, plus gros que « Mets pause, et choisis ! » : lisible au fond de la classe
         if len(ph.submobjects):
-            ph.scale(Text(phrase[0], font_size=30).height / ph[0].height)  # défait la réduction du module commun
-        ph.arrange(DOWN, aligned_edge=LEFT, buff=0.16)
-        if ph.width > 6.0:
-            ph.scale_to_fit_width(6.0)
-        ph.align_to(P(-6.45, 0), LEFT).align_to(P(0, -1.2), UP)
-        if ph.get_bottom()[1] < -3.55:
-            ph.scale(2.35 / ph.height, about_point=P(-6.45, -1.2))
+            ph.scale(T(phrase[0], 36, audit=False).height / ph[0].height)  # défait la réduction du module commun
+        ph.arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+        if ph.width > 6.7:  # maxw explicite : la colonne de gauche, jusqu'aux cartes
+            ph.scale_to_fit_width(6.7)
+        haut = getattr(self, "ph_haut", -0.6)
+        ph.align_to(P(-6.45, 0), LEFT).align_to(P(0, haut), UP)
+        if ph.get_bottom()[1] < -3.45:
+            ph.scale((haut + 3.45) / ph.height, about_point=P(-6.45, haut))
         return tete, q, cartes, pause, rebours, ph
 
     def dit_avec(self, e, phrase, gestes, n=1, rt=0.12):
@@ -270,11 +272,13 @@ class FactoMaximum4e(PaysageRel):
         self.dit(v0, "On vérifie :")
         va = D("2x × x = 2x²", 50).mis_sur_egal(0.3, -1.85)
         VGroup(va.atomes[0], va.atomes[1]).set_color(FACTEUR)
+        VGroup(*va.atomes[5:]).shift(RIGHT * 0.15)  # le cadre vert ne touche pas le « = »
         self.dire_eq(va, "2 x fois x, 2 x au carré.", avec=[Create(f1)])
         vb = D("2x × 3 = 6x", 50).mis_sur_egal(0.3, -2.7)
         VGroup(vb.atomes[0], vb.atomes[1]).set_color(FACTEUR)
+        VGroup(*vb.atomes[5:]).shift(RIGHT * 0.15)
         self.dire_eq(vb, "2 x fois 3, 6 x.", avec=[Create(f2)])
-        ok = self.lg("C'est juste.", 4.1, -1.85, 50, VERT_OK, maxw=3.4)
+        ok = self.lg("C'est juste.", 4.35, -1.85, 50, VERT_OK, maxw=3.4)
         self.dit(ok, "C'est juste.", avec=[Create(self.cadre_ok(VGroup(*va.atomes[5:]), 0.08)),
                                            Create(self.cadre_ok(VGroup(*vb.atomes[5:]), 0.08))])
         self.insister(ok, 1.12, 0.2)
@@ -285,8 +289,9 @@ class FactoMaximum4e(PaysageRel):
         self.clear()
         self.add_mascotte()
         self.XL = 0.6
-        e = D("5x² + 10x", 76, audit=False).move_to(P(-3.6, 1.55))
-        r = D("= 5x(x + 2)", 60, VERT_OK, audit=False).next_to(e, DOWN, buff=0.7)
+        self.ph_haut = -0.55
+        e = D("5x² + 10x", 72, audit=False).move_to(P(-3.6, 2.1))
+        r = D("= 5x(x + 2)", 58, VERT_OK, audit=False).next_to(e, DOWN, buff=0.6)
         r.shift(RIGHT * (e.get_left()[0] - r.get_left()[0]))
         VGroup(r.atomes[1], r.atomes[2]).set_color(FACTEUR)
         f1 = self.fleche_arc(VGroup(r.atomes[1], r.atomes[2]), r.atomes[4], VERT_OK, angle=-1.6, sw=4)
@@ -301,14 +306,15 @@ class FactoMaximum4e(PaysageRel):
             sc.ph_eq(0, "Réponse B : 5x(x + 2).", "Réponse B : 5 x fois, entre parenthèses, x plus 2.", lettres="x",
                      premier=True, avec=[FadeIn(r, shift=DOWN * 0.2)])
             sc.play(Create(f1), Create(f2), run_time=0.4)
-            sc.ph_eq(1, "A et C sont justes, mais pas finies :", "A et C sont justes, mais pas finies :")
-            sc.ph_eq(2, "il reste un facteur commun", "il reste un facteur commun")
-            sc.ph_eq(3, "dans la parenthèse.", "dans la parenthèse.")
+            sc.ph_eq(1, "A et C sont justes,", "A et C sont justes,")
+            sc.ph_eq(2, "mais pas finies :", "mais pas finies :")
+            sc.ph_eq(3, "il reste un facteur commun", "il reste un facteur commun")
+            sc.ph_eq(4, "dans la parenthèse.", "dans la parenthèse.")
             sc.rep_fini()
 
         self.question_pause("03q-question", "03r-reponse", ["Factorise au maximum", "5x² + 10x."],
                             [Eq("5(x² + 2x)", 34), Eq("5x(x + 2)", 34), Eq("x(5x + 10)", 34)], 1,
-                            ["Réponse B : 5x(x + 2).", "A et C sont justes, mais pas finies :",
+                            ["Réponse B : 5x(x + 2).", "A et C sont justes,", "mais pas finies :",
                              "il reste un facteur commun", "dans la parenthèse."],
                             avant_q=avant, autres_r=apres)
         self.XL = type(self).XL
@@ -371,15 +377,15 @@ class FactoMaximum4e(PaysageRel):
         self.play(Create(loupe), par.animate.scale(1.12), run_time=0.45)
         self.play(par.animate.scale(1 / 1.12), run_time=0.25)
         self.dit(l3, "ses termes n'ont plus rien en commun.")
-        g = Bloc(1.6, 0.9, "#1e3a5f", None).move_to(P(-4.3, -2.3))
-        d = Bloc(1.6, 0.9, "#1e3a5f", None).move_to(P(-1.8, -2.3))
+        g = Bloc(1.6, 0.9, "#1e3a5f", None).move_to(P(-4.3, -1.95))
+        d = Bloc(1.6, 0.9, "#1e3a5f", None).move_to(P(-1.8, -1.95))
         tg = D("2x", 54, audit=False).move_to(g)
         td = T("3", 54, WHITE, audit=False).move_to(d)
-        l4 = self.lg("2x et 3 : rien de commun.", 2.6, -2.0, 42, lettres="x", maxw=6.0)
+        l4 = self.lg("2x et 3 : rien de commun.", 2.3, -1.8, 42, lettres="x", maxw=6.0)
         self.dit_avec(l4, "2 x et 3 : rien de commun.", {0: lambda: [FadeIn(g), FadeIn(tg)],
                                                           idx(l4, "3"): lambda: [FadeIn(d), FadeIn(td)]})
         self.play(Circumscribe(VGroup(g, d), color=CIEL, buff=0.08), run_time=0.45)
-        l5 = self.lg("C'est fini.", 2.6, -2.85, 48, VERT_OK, maxw=4)
+        l5 = self.lg("C'est fini.", 2.0, -2.75, 48, VERT_OK, maxw=4)
         self.dit(l5, "C'est fini.")
         self.play(Create(self.cadre_ok(l5, 0.14)), Create(self.coche(VERT_OK, 0.3).next_to(e, RIGHT, buff=0.5)),
                   run_time=0.3)
@@ -391,7 +397,8 @@ class FactoMaximum4e(PaysageRel):
         self.clear()
         self.add_mascotte()
         self.XL = 0.6
-        e = D("8x + 20", 80, audit=False).move_to(P(-3.6, 1.1))
+        self.ph_haut = -0.45
+        e = D("8x + 20", 76, audit=False).move_to(P(-3.6, 2.1))
         a = D("4 × 2x", 46, audit=False).next_to(VGroup(e.atomes[0], e.atomes[1]), DOWN, buff=0.75)
         b = D("4 × 5", 46, audit=False).next_to(e.atomes[3], DOWN, buff=0.75)
         if b.get_left()[0] < a.get_right()[0] + 0.45:
@@ -409,12 +416,13 @@ class FactoMaximum4e(PaysageRel):
             sc.ph_eq(1, "8x = 4 × 2x,", "8 x, c'est 4 fois 2 x,", lettres="x", avec=[FadeIn(a, shift=DOWN * 0.2)])
             sc.ph_eq(2, "et 20 = 4 × 5.", "et 20, c'est 4 fois 5.", avec=[FadeIn(b, shift=DOWN * 0.2)])
             sc.play(Circumscribe(VGroup(a.atomes[0], b.atomes[0]), color=FACTEUR, buff=0.1), run_time=0.5)
-            sc.ph_eq(3, "2x et 5 n'ont plus rien en commun.", "2 x et 5 n'ont plus rien en commun.", lettres="x")
+            sc.ph_eq(3, "2x et 5 n'ont plus", "2 x et 5 n'ont plus", lettres="x")
+            sc.ph_eq(4, "rien en commun.", "rien en commun.")
             sc.rep_fini()
 
         self.question_pause("05q-question", "05r-reponse", ["Quel est le plus grand", "facteur commun de 8x + 20 ?"],
                             [Eq("2", 34), Eq("8", 34), Eq("4", 34)], 2,
-                            ["Réponse C : 4.", "8x = 4 × 2x,", "et 20 = 4 × 5.", "2x et 5 n'ont plus rien en commun."],
+                            ["Réponse C : 4.", "8x = 4 × 2x,", "et 20 = 4 × 5.", "2x et 5 n'ont plus", "rien en commun."],
                             avant_q=avant, autres_r=apres)
         self.XL = type(self).XL
 
@@ -477,14 +485,41 @@ class FactoMaximum4e(PaysageRel):
         t = terrasse(0.75, 1.75, 1.2, "2x²", "6x", 30, cote=D("2x", 34, FACTEUR, lettres="", audit=False))
         t.next_to(r, DOWN, buff=0.45)
         fig = VGroup(e, r, t)
-        lignes = self.finale_colonne([["On sort le plus grand nombre", "commun, et la lettre commune."],
-                                      ["La factorisation est finie quand la", "parenthèse n'a plus rien en commun."],
-                                      ["Et on vérifie", "en développant."]],
-                                     fs=38, figure=fig)
-        self.play(FadeIn(fig), run_time=0.3)
+        lignes = self.finale_gauche([["On sort le plus grand", "nombre commun,", "et la lettre commune."],
+                                     ["La factorisation est finie", "quand la parenthèse n'a", "plus rien en commun."],
+                                     ["Et on vérifie", "en développant."]], fig)
         for lg in lignes:
             self.montrer_ligne(lg)
         self.attendre_voix(marge=1.2)
+
+    def finale_gauche(self, textes, figure, fs=42):
+        """« Ce que tu as appris » : titre en haut et centré, la figure à gauche, les points à 40 pt
+        en lignes courtes à sa droite (la colonne du module commun les réduisait de moitié).
+        Interligne régulier : les hauts des lignes sont posés à pas fixe."""
+        tit = self.t("Ce que tu as appris", 46, JAUNE_TITRE).to_edge(UP, buff=0.45)
+        self.cadrer(figure, gauche=-6.3, droite=-2.9, haut=tit.get_bottom()[1] - 0.6, bas=-2.6)
+        # la figure d'abord : le titre attend le mot « Ce », l'écran ne reste pas noir
+        self.play(FadeIn(figure), run_time=0.3)
+        self.play(Write(tit), run_time=0.7)
+        lignes = VGroup()
+        for morceaux in textes:
+            ts = [self.t(x, fs) for x in morceaux]
+            pas = max(t.height for t in ts) + 0.1
+            for k, t in enumerate(ts):
+                t.align_to(P(0, -k * pas), UP).align_to(P(0, 0), LEFT)
+            c = self.coche()
+            c.next_to(ts[0], LEFT, buff=0.25).set_y(ts[0].get_center()[1])
+            lignes.add(VGroup(c, VGroup(*ts)))
+        lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.4)
+        xl = figure.get_right()[0] + 0.6
+        largeur = 5.0 - xl  # elles restent à gauche de Ti-Margo (en bas à droite)
+        if lignes.width > largeur:
+            lignes.scale_to_fit_width(largeur)
+        haut = tit.get_bottom()[1] - 0.4
+        if lignes.height > haut + 3.2:
+            lignes.scale_to_fit_height(haut + 3.2)
+        lignes.align_to(P(xl, 0), LEFT).align_to(P(0, haut), UP)
+        return lignes
 
     def construct(self):
         self.page_de_garde()
