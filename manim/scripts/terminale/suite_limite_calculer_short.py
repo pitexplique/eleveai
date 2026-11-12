@@ -218,25 +218,29 @@ class SuiteLimiteCalculerShort(OutilsCalcul, ShortSuites):
         for tour, vj, exj, ve, exe in ((10, "100", "100 contre", "1 024", "1 024"),
                                        (20, "400", "400 contre", "1 048 576", "1 048 576")):
             h = self.construire([("Tour", JAUNE_TITRE, None), (f"{tour} :", JAUNE_TITRE, str(tour))], 44).move_to(P(0, yh))
+            # Changement de tour : les nombres ET les armées de l'ancien tour partent ensemble,
+            # des « ? » attendent la voix (aucune image ne mélange deux tours).
+            qj, qe = self.t("?", 44, TERME).move_to(cj), self.t("?", 44, RAISON).move_to(ce)
             self.suivre(str(tour))
-            self.play(FadeOut(h4), FadeIn(h), run_time=0.25)
+            self.play(FadeOut(h4), FadeIn(h), FadeOut(nj), FadeOut(ne), FadeOut(aj), FadeOut(ae),
+                      FadeIn(qj), FadeIn(qe), run_time=0.25)
             h4 = h
             nj2 = self.nombre(vj, WHITE, cj, exj)
             aj2 = armee(tour, s, TERME, (-1.52, 1.4))
             self.suivre(exj)
-            self.play(FadeOut(nj), FadeIn(nj2, scale=1.3), FadeOut(aj), FadeIn(aj2, scale=0.8), run_time=0.35)
+            self.play(FadeOut(qj), FadeIn(nj2, scale=1.3), FadeIn(aj2, scale=0.8), run_time=0.35)
             nj, aj = nj2, aj2
             ne2 = self.nombre(ve, WHITE, ce, exe)
             self.suivre(exe)
             if tour == 10:
                 ae2 = armee(32, s, RAISON, (0.52, 1.4))
-                self.play(FadeOut(ne), FadeIn(ne2, scale=1.3), FadeOut(ae), FadeIn(ae2, scale=0.8), run_time=0.35)
+                self.play(FadeOut(qe), FadeIn(ne2, scale=1.3), FadeIn(ae2, scale=0.8), run_time=0.35)
             else:
-                ae2 = RoundedRectangle(width=4.1, height=haut - bas, corner_radius=0.14, fill_color=RAISON,
+                ae2 = RoundedRectangle(width=4.2, height=haut - bas, corner_radius=0.14, fill_color=RAISON,
                                        fill_opacity=1, stroke_width=0).move_to(champ)
                 for m in (aj, lj, fj, le, fe):
                     m.set_z_index(3)
-                self.play(FadeOut(ne), FadeIn(ne2, scale=1.3), FadeOut(ae), GrowFromPoint(ae2, P(1.02, 0.9)),
+                self.play(FadeOut(qe), FadeIn(ne2, scale=1.3), GrowFromPoint(ae2, P(1.02, 0.9)),
                           le.animate.set_color(WHITE), fe.animate.set_color(WHITE), lj.animate.set_color("#1e3a8a"),
                           fj.animate.set_color("#1e3a8a"), ce.animate.set_stroke(PIEGE, width=6), run_time=0.45)
                 self.play(Flash(ce, color=RAISON, line_length=0.25), Indicate(ne2, color=RAISON, scale_factor=1.12),
