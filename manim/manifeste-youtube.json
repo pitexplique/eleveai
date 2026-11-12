@@ -73986,6 +73986,755 @@
         "jeux-video",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-calcul-pose-addition",
+      "pas_avant": "2026-12-17",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_addition_posee",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition.mp4",
+      "miniature": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition.png",
+      "titre": "475 € + 286 € : pourquoi une retenue ? — L'addition posée — épisode 1 · Maths 6e",
+      "accroche": "Nadia est comptable. Ce mois-ci, elle a payé 475 euros d'électricité et 286 euros d'internet. Combien en tout ?\n\nDans cette vidéo :\n• aligner les chiffres à droite : unités sous unités\n• commencer par les unités\n• la retenue : 5 + 6 = 11, j'écris 1 et je retiens 1\n• le piège : commencer par la gauche\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois factures de 348 €, 275 € et 96 € : combien en tout ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_addition_posee&display=simple\n\n🔢 Épisode 1 sur 5 de la série Calcul posé d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Pourquoi une retenue ?"
+        ],
+        [
+          "00:21",
+          "Aligner les chiffres"
+        ],
+        [
+          "00:31",
+          "Poser l'addition"
+        ],
+        [
+          "00:57",
+          "La retenue"
+        ],
+        [
+          "01:11",
+          "Question 1"
+        ],
+        [
+          "01:48",
+          "Le piège"
+        ],
+        [
+          "02:07",
+          "Question 2"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:25",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose",
+      "tags": [
+        "addition posée",
+        "retenue",
+        "calcul posé",
+        "comptable",
+        "factures",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "Combien font 368 + 157 ?",
+          "choix": [
+            "525",
+            "415",
+            "515"
+          ],
+          "reponse": 0,
+          "explication": "Unités : 8 + 7, 15, je retiens 1. Dizaines : 1 + 6 plus 5, 12, je retiens 1. Centaines : 1 + 3 plus 1, 5. Ça fait 525."
+        },
+        {
+          "t": "02:07",
+          "question": "Dans 2 405 + 36, où poser le 36 ?",
+          "choix": [
+            "le 3 sous le 2",
+            "le 6 sous le 5",
+            "le 3 sous le 4"
+          ],
+          "reponse": 1,
+          "explication": "On aligne à droite. Le 6 des unités va sous le 5 des unités. Le 3 des dizaines va sous le 0. Ça fait 2 441."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-calcul-pose-addition-short",
+      "pas_avant": "2026-12-17",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_addition_posee",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-calcul-pose-addition",
+      "fichier": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition-short.mp4",
+      "miniature": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition-short-miniature.png",
+      "titre": "47 billes + 38 : j'en ai 75, tu paries ? #maths #6e",
+      "accroche": "J'ai 47 billes, mon copain m'en donne 38. 7 + 8 = 15, j'écris 5... et j'oublie la retenue. 75 billes ? Ça ne colle pas !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : combien font 56 + 27 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_addition_posee&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "addition",
+        "retenue oubliée",
+        "billes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Combien ai-je de billes ?",
+          "choix": [
+            "75",
+            "715",
+            "85"
+          ],
+          "reponse": 2,
+          "explication": "7 + 8, 15 : j'écris 5, et je retiens 1. 1 + 4 plus 3, 8. Ça fait 85."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-calcul-pose-soustraction",
+      "pas_avant": "2026-12-18",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_soustraction_posee",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction.mp4",
+      "miniature": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction.png",
+      "titre": "632 m − 458 m : comment faire 2 − 8 ? — La soustraction posée — épisode 2 · Maths 6e",
+      "accroche": "Hugo est guide de montagne. Son groupe doit monter 632 mètres jusqu'au sommet. Il en a déjà monté 458. Combien reste-t-il ?\n\nDans cette vidéo :\n• le grand nombre en haut, aligné à droite\n• 2 − 8, impossible : je casse une dizaine\n• on vérifie avec une addition\n• le piège du zéro : 503 − 128\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 1 000 m de montée : 375 m le matin, 268 m l'après-midi. Combien reste-t-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_soustraction_posee&display=simple\n\n🔢 Épisode 2 sur 5 de la série Calcul posé d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment faire 2 − 8 ?"
+        ],
+        [
+          "00:22",
+          "C'est une soustraction"
+        ],
+        [
+          "00:34",
+          "Je casse une dizaine"
+        ],
+        [
+          "01:03",
+          "On vérifie"
+        ],
+        [
+          "01:13",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Le piège du zéro"
+        ],
+        [
+          "02:25",
+          "Question 2"
+        ],
+        [
+          "03:07",
+          "À toi de jouer"
+        ],
+        [
+          "03:25",
+          "Correction"
+        ],
+        [
+          "03:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose",
+      "tags": [
+        "soustraction posée",
+        "casser une dizaine",
+        "emprunt",
+        "calcul posé",
+        "guide de montagne",
+        "randonnée",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Combien font 81 − 46 ?",
+          "choix": [
+            "35",
+            "45",
+            "25"
+          ],
+          "reponse": 0,
+          "explication": "1 − 6, impossible : je casse une dizaine. 11 − 6, 5. Il reste 7 dizaines : 7 − 4, 3. Ça fait 35."
+        },
+        {
+          "t": "02:25",
+          "question": "Combien font 400 − 135 ?",
+          "choix": [
+            "335",
+            "265",
+            "275"
+          ],
+          "reponse": 1,
+          "explication": "Je casse une centaine, puis une dizaine. J'ai 10 unités, 9 dizaines et 3 centaines. 10 − 5, 5. 9 − 3, 6. 3 − 1, 2. Ça fait 265."
+        }
+      ],
+      "centres": [
+        "sport",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "6e-calcul-pose-soustraction-short",
+      "pas_avant": "2026-12-18",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_soustraction_posee",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-calcul-pose-soustraction",
+      "fichier": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction-short.mp4",
+      "miniature": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction-short-miniature.png",
+      "titre": "52 coquillages − 17 : il m'en reste 45, tu paries ? #maths #6e",
+      "accroche": "J'avais 52 coquillages, j'en donne 17. Pour les unités, 7 − 2... Je retire le petit du grand ! 45 coquillages ? Je vérifie...\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : combien font 73 − 48 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_soustraction_posee&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "soustraction",
+        "coquillages",
+        "vérifier",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Combien me reste-t-il de coquillages ?",
+          "choix": [
+            "45",
+            "35",
+            "25"
+          ],
+          "reponse": 1,
+          "explication": "En haut, il y a 2. 2 − 7, impossible : je casse une dizaine. 12 − 7, 5. Il reste 4 dizaines : 4 − 1, 3. Ça fait 35."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "6e-calcul-pose-multiplication",
+      "pas_avant": "2026-12-19",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_multiplication_posee",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication.mp4",
+      "miniature": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication.png",
+      "titre": "36 × 24 : pourquoi écrire un zéro ? — La multiplication posée — épisode 3 · Maths 6e",
+      "accroche": "Théo est agriculteur. Il plante 267 salades par rangée, sur 4 rangées. Puis 24 rangées de 36 plants de tomates. Combien de plants ?\n\nDans cette vidéo :\n• multiplier chiffre par chiffre, en commençant par les unités\n• la retenue s'ajoute après le produit\n• deux lignes : pour les dizaines, on écrit d'abord un zéro\n• le piège : sans le zéro, 216 au lieu de 864\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 45 rangées de 28 pots de fleurs : combien de pots ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_multiplication_posee&display=simple\n\n🔢 Épisode 3 sur 5 de la série Calcul posé d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Pourquoi écrire un zéro ?"
+        ],
+        [
+          "00:20",
+          "Poser 267 × 4"
+        ],
+        [
+          "00:47",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Deux chiffres en bas"
+        ],
+        [
+          "01:39",
+          "Les deux lignes"
+        ],
+        [
+          "02:10",
+          "Le piège du zéro"
+        ],
+        [
+          "02:35",
+          "Question 2"
+        ],
+        [
+          "03:07",
+          "À toi de jouer"
+        ],
+        [
+          "03:20",
+          "Correction"
+        ],
+        [
+          "03:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose",
+      "tags": [
+        "multiplication posée",
+        "retenue",
+        "zéro",
+        "calcul posé",
+        "agriculteur",
+        "plantations",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:47",
+          "question": "Combien font 135 × 3 ?",
+          "choix": [
+            "405",
+            "395",
+            "305"
+          ],
+          "reponse": 0,
+          "explication": "3 × 5, 15 : j'écris 5, je retiens 1. 3 × 3, 9, plus 1, 10 : j'écris 0, je retiens 1. 3 × 1, 3, plus 1, 4. Ça fait 405."
+        },
+        {
+          "t": "02:35",
+          "question": "Dans 52 × 13, que vaut la deuxième ligne ?",
+          "choix": [
+            "52",
+            "156",
+            "520"
+          ],
+          "reponse": 2,
+          "explication": "13, c'est 3 + 10. La deuxième ligne, c'est 52 × 10 : 520. On n'oublie pas le zéro."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-calcul-pose-multiplication-short",
+      "pas_avant": "2026-12-19",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_multiplication_posee",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-calcul-pose-multiplication",
+      "fichier": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication-short.mp4",
+      "miniature": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication-short-miniature.png",
+      "titre": "23 boîtes de 12 œufs : j'en ai 69, tu paries ? #maths #6e",
+      "accroche": "23 boîtes de 12 œufs. 23 × 2 = 46, 23 × 1 = 23, et 46 + 23 = 69. Mais 20 boîtes de 10 œufs, c'est déjà 200 œufs...\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : combien font 21 × 13 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_multiplication_posee&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "multiplication",
+        "zéro oublié",
+        "œufs",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:32",
+          "question": "Combien ai-je d'œufs ?",
+          "choix": [
+            "69",
+            "266",
+            "276"
+          ],
+          "reponse": 2,
+          "explication": "12, c'est 2 + 10. 23 × 2, 46. 23 × 10, 230 : j'avais oublié le zéro. 46 + 230, 276."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-calcul-pose-division",
+      "pas_avant": "2026-12-20",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_division_posee",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division.mp4",
+      "miniature": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division.png",
+      "titre": "157 colis, camionnettes de 6 : que veut dire le reste ? — La division posée — épisode 4 · Maths 6e",
+      "accroche": "Maëlle est logisticienne. Elle a 58 colis et une camionnette en transporte 7. Combien de camionnettes pleines ? Et que veut dire le reste ?\n\nDans cette vidéo :\n• combien de fois 7 rentre dans 58 : les tables\n• 58 = 7 × 8 + 2 : le quotient et le reste\n• la potence : 157 ÷ 6, on abaisse le chiffre suivant\n• le reste a un sens : une camionnette de plus\n• on vérifie : 6 × 26 + 1 = 157\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 245 bouteilles d'eau dans des cartons de 8 : combien de cartons pleins, et combien de bouteilles restent ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_division_posee&display=simple\n\n🔢 Épisode 4 sur 5 de la série Calcul posé d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Que veut dire le reste ?"
+        ],
+        [
+          "00:20",
+          "Avec les tables"
+        ],
+        [
+          "00:34",
+          "Le quotient et le reste"
+        ],
+        [
+          "00:48",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "La potence"
+        ],
+        [
+          "01:32",
+          "J'abaisse le chiffre suivant"
+        ],
+        [
+          "01:59",
+          "Le sens du reste"
+        ],
+        [
+          "02:19",
+          "Question 2"
+        ],
+        [
+          "02:51",
+          "À toi de jouer"
+        ],
+        [
+          "03:07",
+          "Correction"
+        ],
+        [
+          "03:34",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose",
+      "tags": [
+        "division posée",
+        "potence",
+        "quotient",
+        "reste",
+        "division euclidienne",
+        "logisticienne",
+        "livraisons",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "Dans 47 ÷ 5, quel est le reste ?",
+          "choix": [
+            "2",
+            "7",
+            "9"
+          ],
+          "reponse": 0,
+          "explication": "5 × 9, 45. 47 − 45, 2. Le reste est 2. Il est plus petit que 5 : c'est bon."
+        },
+        {
+          "t": "02:19",
+          "question": "50 élèves partent en sortie. Une voiture prend 4 élèves. Combien de voitures faut-il ?",
+          "choix": [
+            "12",
+            "2",
+            "13"
+          ],
+          "reponse": 2,
+          "explication": "50 égale 4 × 12, plus 2. Il reste 2 élèves : il faut une voiture de plus. 13 voitures."
+        }
+      ],
+      "centres": [
+        "transports",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-calcul-pose-division-short",
+      "pas_avant": "2026-12-20",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_division_posee",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-calcul-pose-division",
+      "fichier": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division-short.mp4",
+      "miniature": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division-short-miniature.png",
+      "titre": "50 cartes à 6 joueurs : il m'en reste 8, tu paries ? #maths #6e",
+      "accroche": "Je distribue 50 cartes à 6 joueurs : 6 × 7 = 42, chacun en a 7, il m'en reste 8. Mais avec 8 cartes, je peux encore en donner à tout le monde...\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : 45 billes pour 7 copains. Combien pour chacun, et combien en reste-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_division_posee&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "division",
+        "reste",
+        "cartes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Combien de cartes pour chacun ?",
+          "choix": [
+            "7, il en reste 8",
+            "8, il en reste 2",
+            "9, il en reste 0"
+          ],
+          "reponse": 1,
+          "explication": "6 × 8, 48. 50 − 48, 2. Chacun a 8 cartes, et il en reste 2."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-calcul-pose-verifier",
+      "pas_avant": "2026-12-21",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_calcul_verifier",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier.mp4",
+      "miniature": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier.png",
+      "titre": "386 + 247 = 533 ? Comment savoir si c'est juste — Vérifier un calcul posé — épisode 5 · Maths 6e",
+      "accroche": "Zoé est réalisatrice de dessins animés : chaque seconde contient 24 images. Elle fait beaucoup de calculs, et elle les vérifie toujours.\n\nDans cette vidéo :\n• l'ordre de grandeur : 390 + 250 = 640, donc 533 est trop loin\n• l'opération inverse : 354 + 358 = 712, pas 702\n• une division se vérifie par une multiplication : 34 × 4 = 136\n• les deux méthodes ensemble\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un dessin animé de 3 minutes, 24 images par seconde : combien d'images à dessiner ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_calcul_verifier&display=simple\n\n🔢 Épisode 5 sur 5 de la série Calcul posé d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment savoir si c'est juste ?"
+        ],
+        [
+          "00:22",
+          "L'ordre de grandeur"
+        ],
+        [
+          "00:56",
+          "Question 1"
+        ],
+        [
+          "01:29",
+          "L'opération inverse"
+        ],
+        [
+          "01:58",
+          "Vérifier une division"
+        ],
+        [
+          "02:18",
+          "Question 2"
+        ],
+        [
+          "02:51",
+          "À toi de jouer"
+        ],
+        [
+          "03:10",
+          "Correction"
+        ],
+        [
+          "03:42",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-pose",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-pose",
+      "tags": [
+        "vérifier un calcul",
+        "ordre de grandeur",
+        "opération inverse",
+        "calcul posé",
+        "réalisatrice",
+        "dessin animé",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Quel est le bon ordre de grandeur de 498 + 307 ?",
+          "choix": [
+            "700",
+            "900",
+            "800"
+          ],
+          "reponse": 2,
+          "explication": "498, c'est presque 500. 307, c'est presque 300. 500 + 300, 800."
+        },
+        {
+          "t": "02:18",
+          "question": "Quelle addition vérifie 50 − 17 égale 33 ?",
+          "choix": [
+            "33 + 17",
+            "50 + 17",
+            "50 + 33"
+          ],
+          "reponse": 0,
+          "explication": "On ajoute ce qui reste à ce qu'on a enlevé : 33 + 17, 50. C'est juste."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-calcul-pose-verifier-short",
+      "pas_avant": "2026-12-21",
+      "prioritaire": true,
+      "notionId": "entier_calcul_pose",
+      "microId": "entier_calcul_verifier",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-calcul-pose-verifier",
+      "fichier": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier-short.mp4",
+      "miniature": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier-short-miniature.png",
+      "titre": "615 − 278 = 347 : je suis sûr de moi, tu paries ? #maths #6e",
+      "accroche": "J'ai posé 615 − 278 et trouvé 347. Je suis sûr de moi ! Je vérifie avec une addition : 347 + 278 = 625...\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : un ami trouve 403 − 156 = 357. Quel est le bon résultat ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_calcul_verifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "vérifier",
+        "soustraction",
+        "addition",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul posé",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Combien font 615 − 278 ?",
+          "choix": [
+            "347",
+            "337",
+            "463"
+          ],
+          "reponse": 1,
+          "explication": "Je casse une dizaine : 15 − 8, 7. Il reste 0 dizaine : je casse une centaine. 10 − 7, 3. 5 − 2, 3. Ça fait 337."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

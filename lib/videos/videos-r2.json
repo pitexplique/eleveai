@@ -3593,6 +3593,96 @@
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=angle_mesure&microId=angle_tracer&display=simple"
  },
+ "6e-calcul-pose-addition": {
+  "fichier": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition.mp4",
+  "poster": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition.png",
+  "vignette": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition.vignette.webp",
+  "titre": "475 € + 286 € : pourquoi une retenue ? — L'addition posée — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_addition_posee&display=simple"
+ },
+ "6e-calcul-pose-addition-short": {
+  "fichier": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition-short.mp4",
+  "poster": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition-short-miniature.png",
+  "vignette": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition-short-miniature.vignette.webp",
+  "titre": "47 billes + 38 : j'en ai 75, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_addition_posee&display=simple"
+ },
+ "6e-calcul-pose-division": {
+  "fichier": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division.mp4",
+  "poster": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division.png",
+  "vignette": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division.vignette.webp",
+  "titre": "157 colis, camionnettes de 6 : que veut dire le reste ? — La division posée — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_division_posee&display=simple"
+ },
+ "6e-calcul-pose-division-short": {
+  "fichier": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division-short.mp4",
+  "poster": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division-short-miniature.png",
+  "vignette": "6e/maths/calcul-pose/04-division/eleveai-maths-6e-calcul-pose-division-short-miniature.vignette.webp",
+  "titre": "50 cartes à 6 joueurs : il m'en reste 8, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_division_posee&display=simple"
+ },
+ "6e-calcul-pose-multiplication": {
+  "fichier": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication.mp4",
+  "poster": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication.png",
+  "vignette": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication.vignette.webp",
+  "titre": "36 × 24 : pourquoi écrire un zéro ? — La multiplication posée — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_multiplication_posee&display=simple"
+ },
+ "6e-calcul-pose-multiplication-short": {
+  "fichier": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication-short.mp4",
+  "poster": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication-short-miniature.png",
+  "vignette": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication-short-miniature.vignette.webp",
+  "titre": "23 boîtes de 12 œufs : j'en ai 69, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_multiplication_posee&display=simple"
+ },
+ "6e-calcul-pose-soustraction": {
+  "fichier": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction.mp4",
+  "poster": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction.png",
+  "vignette": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction.vignette.webp",
+  "titre": "632 m − 458 m : comment faire 2 − 8 ? — La soustraction posée — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_soustraction_posee&display=simple"
+ },
+ "6e-calcul-pose-soustraction-short": {
+  "fichier": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction-short.mp4",
+  "poster": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction-short-miniature.png",
+  "vignette": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction-short-miniature.vignette.webp",
+  "titre": "52 coquillages − 17 : il m'en reste 45, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_soustraction_posee&display=simple"
+ },
+ "6e-calcul-pose-verifier": {
+  "fichier": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier.mp4",
+  "poster": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier.png",
+  "vignette": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier.vignette.webp",
+  "titre": "386 + 247 = 533 ? Comment savoir si c'est juste — Vérifier un calcul posé — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_calcul_verifier&display=simple"
+ },
+ "6e-calcul-pose-verifier-short": {
+  "fichier": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier-short.mp4",
+  "poster": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier-short-miniature.png",
+  "vignette": "6e/maths/calcul-pose/05-verifier/eleveai-maths-6e-calcul-pose-verifier-short-miniature.vignette.webp",
+  "titre": "615 − 278 = 347 : je suis sûr de moi, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_pose&microId=entier_calcul_verifier&display=simple"
+ },
  "6e-decimal-additionner": {
   "fichier": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner.mp4",
   "poster": "6e/maths/decimaux/07-additionner/eleveai-maths-6e-decimal-additionner.png",
@@ -8398,46 +8488,6 @@
   "poster": null,
   "vignette": null,
   "titre": "maths 4e facto maximum short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-calcul-pose-addition": {
-  "fichier": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition.vignette.webp",
-  "titre": "maths 6e calcul pose addition",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-calcul-pose-addition-short": {
-  "fichier": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition-short.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition-short.vignette.webp",
-  "titre": "maths 6e calcul pose addition short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-calcul-pose-multiplication": {
-  "fichier": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e calcul pose multiplication",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-calcul-pose-soustraction": {
-  "fichier": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e calcul pose soustraction",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-calcul-pose-soustraction-short": {
-  "fichier": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 6e calcul pose soustraction short",
   "short": true,
   "youtube": null
  },

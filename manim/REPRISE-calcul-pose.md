@@ -49,9 +49,9 @@ Voix et manifeste : `6e-calcul-pose-<slug>[-short]` (`manim/voix/`). Sorties : `
 
 - ✅ 12/11 soir (quota 91 %, « finir 3 à 5 vidéos ») : **HD 04 division** (241,7 s) et **HD 05 vérifier** (247,4 s) rendus, bords 0, planches HD relues (05 : l'ancien « 354 » restait sous le « 344 » au -ql, corrigé avant le HD). **Shorts 03, 04, 05 filmés + miniatures**, planches relues (03 refilmé : « d u » seuls au défi, `entetes:false` ; « × 10 = 200 » aéré). Les 9 vidéos 01-05 sont finies, sauf le short 02.
 
-## Reste, dans l'ordre (samedi 14/11, 9 h)
-1. ~~Short 02~~ ✅ 13/11 6 h : refilmé (84,1 s) + miniature, planche relue propre (« 45 + 17 = 62 » aéré, coche du « Ouf »). **Les 10 vidéos 01-05 sont finies.**
-2. `V` logisticienne + réalisatrice dans `lib/matrice/metiers-college.ts` (`entier_calcul_pose`).
-3. Aperçu `manim/sorties/apercu-calcul-pose.html` : ajouter 02-05 (paysage + short, sans autoplay). Durées : 04 241,7 s, 05 247,4 s, 03 244,2 s.
-4. Faire écouter à Frédéric ; ensuite seulement manifeste, R2, coach.
+- ✅ 12/11 15 h (consigne « fais-le pour toutes les vidéos finies ») : short 02 refilmé (84,1 s) + miniature, planche propre. `V` logisticienne + réalisatrice (matrice). Aperçu `apercu-calcul-pose.html` : les 10 vidéos, sans autoplay. Miniatures paysages : `python manim/miniature_calcul_pose.py` ; mini du short 04 : « = 7 / reste 8 ? » sur 2 lignes (lisible). **Manifeste** : `python manim/passe_calcul_pose.py temps|voir|manifeste` (10 entrées, ceinture verte/jaune, fiche `maths/6e/entier-calcul-pose`, questions et chapitres mesurés au son), `pas_avant` 17/12 (01) → 21/12 (05), une paire par jour, `prioritaire` ; `fiche-youtube.md` dans chaque dossier. **R2** : copié, `check --one-way` 0 différence (35 fichiers). `lib/videos/videos-r2.json` + `bilans-videos.json` : seulement nos clés commitées (les anciennes `maths-6e-calcul-pose-*` hors manifeste remplacées).
+
+## Reste
+1. Après le push (session hebdomadaire) : `node scripts/brancher-videos-coach.mjs --classe 6e --notion entier_calcul_pose --ecrire` (lecture seule le 12/11 : 0 branchée, 10 à brancher, une par micro).
+2. Publication YouTube par `publier-youtube.mjs` à partir du 17/12 (Frédéric a trouvé décembre tard pour la distributivité : avancer les dates si besoin, sans chevaucher).
 - ⛔ Poste partagé : avant chaque rendu lourd, lignes de commande des processus : rendre seulement si aucun `manim render` ne tourne.

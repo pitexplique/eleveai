@@ -103,7 +103,7 @@ FILMS.division=function(outils){
   rd.saute(2); const r1=rd('6 × 8 = 48.'), r2=rd('50 − 48 = 2.'), r3=rd('Chacun a 8 cartes,'), r4=rd('et il en reste 2.');
   const tB=mot('02b-reponse','B');
 
-  poserMiniature(outils,acc+1,'50 cartes<br>pour 6 joueurs'+PARI,ardoiseMini([['50 ÷ 6'],['= 7, reste 8 ?','#ff8787']],330,240));
+  poserMiniature(outils,acc+1,'50 cartes<br>pour 6 joueurs'+PARI,ardoiseMini([['50 ÷ 6'],['= 7','#ff8787'],['reste 8 ?','#ff8787']],330,270));
   return { clips,FIN,titre:'Le reste trop grand',ceinture:1,finTitre:tFinT,groupes,finClip:'05-abonne',
     cuts:[tFinT,ver,q,r,ouf,com,f],
     question:{ qc:'02-question',rc:'02b-reponse',finR:ouf,cpt:fin('02-question')+.1,bonne:1,tBon:tB-r,
