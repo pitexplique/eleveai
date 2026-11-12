@@ -57,7 +57,7 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
 - ⛔ Toujours NON committés (mêlés à d'autres sessions) : `manim/manifeste-youtube.json`, `lib/videos/videos-r2.json`, `lib/videos/bilans-videos.json`, `lib/videos/mots-videos.json` → ensemble au push. `python manim/passe_suites.py manifeste` recrée nos entrées.
 - À faire samedi : 16 à 27, un agent par épisode, 3 au plus à la fois (mission : `mission-commune.md` du dossier de notes `local_eb6b8bf7…` + lettres ci-dessous), verrou `%TEMP%\eleveai-rendu-hd.lock` (dossier : mkdir/rmdir), ≥ 1,5 Go libres, < 2 rendus lourds sur le poste (les `hd.sh` des agents 13 et 15 le vérifient : les recopier). Puis relire soi-même chaque planche finale (une fois), passe finale (voir section suivante). Lettres : 16 B/A short B ; 17 C/A B ; 18 B/C A ; 19 A/B C ; 20 C/B A ; 21 B/A C ; 22 A/C B ; 23 C/A B ; 24 C/B A ; 25 A/B C ; 26 C/A B ; 27 B/C A (vérifier les clés `…b-reponse`). Communes : 18 et 19 ont déjà leur `aussi` dans `AUSSI`.
 - ⚠ Arrêter une attente de verrou en tuant AUSSI ses processus enfants (`TaskStop` seul a laissé une boucle rendre la 15 pendant la pause du 11/11).
-- Terminale (session sœur `local_944a8872…`) : acceptés 28-33 ; passe finale Tle par nous, depuis les `ep-NN.md` du dossier `local_67461f00…`.
+- Terminale (session sœur `local_944a8872…`) : acceptés 28-35 (34 short `f99754fd` ; 35 `c5335870`), 36-38 samedi ; passe finale Tle par nous, depuis les `ep-NN.md` du dossier `local_67461f00…`.
 - Planches : les étiquettes de temps des planches des agents sont parfois décalées (15 : ~20 s) ; se fier à `passe_suites.py temps`, qui mesure l'audio.
 
 ## ✅ Passe finale au fil de l'eau (11/11 16 h, session « suites 13-27 »)
