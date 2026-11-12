@@ -89,6 +89,14 @@ EP = [
      ["COMPRENDRE UNE SUITE GÉO.", "SUR UN GRAPHIQUE"], "100 ; 200 ; 400 ; 800", "+ la courbe se creuse",
      "blanche", ["RIEN QU'À", "SON DESSIN ?"], "les monstres triplent à chaque vague",
      [("2 ; 6 ; 18 ; 54", 120, BLEU), ("× 3 : ça se creuse", 100, VERT)]),
+    ("premiere", "16-geo-interpreter", "verte",
+     ["COMPRENDRE CE QUE DIT", "UNE SUITE GÉOMÉTRIQUE"], "u_{n} = 50 000 × 1,2^{n}", "+ + 20 % par an : u_{4} = 103 680",
+     "blanche", ["LE TOTAL OU", "LA HAUSSE ?"], "un morceau de rap en streaming",
+     [("u_{2} = 3 600", 130, BLEU), ("écoutes dans la semaine", 90, VERT)]),
+    ("premiere-spe", "17-registres", "verte",
+     ["COMPRENDRE LES SUITES :", "DES MOTS AUX SYMBOLES"], "u_{4} = 180", "+ après 4 ans : 180 élèves",
+     "blanche", ["LE RANG OU", "LA VALEUR ?"], "la chaîne de dessin de Zoé",
+     [("u_{5} = 90", 140, BLEU), ("5 mois → 90 abonnés", 100, VERT)]),
 ]
 
 
