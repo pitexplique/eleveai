@@ -295,9 +295,13 @@ export function depuisEcrit(d: DefiEcrit, graine: number): DefiGenere {
  *  (pas trois défis de primaire d'affilée). */
 const ORDRE = [1, 10, 5, 8, 3, 13, 6, 11, 0, 9, 4, 12, 7, 2];
 
-/** Le défi d'une graine. La bonne réponse n'est jamais à une place fixe. */
-export function genererDefi(graine: number, theme?: Theme | null): DefiGenere {
-  const duTheme = theme ? THEMES[theme] : null;
+/** Le défi d'une graine. La bonne réponse n'est jamais à une place fixe.
+ *  `parmi` (12/11/2026, les niveaux du Journal, lib/accueil/niveaux.ts) : les
+ *  seuls générateurs permis ; le thème n'est gardé que s'il en fait partie. */
+export function genererDefi(graine: number, theme?: Theme | null, parmi?: number[] | null): DefiGenere {
+  const themeEntier = theme ? THEMES[theme] : null;
+  const themePermis = themeEntier && parmi ? themeEntier.filter((g) => parmi.includes(g)) : themeEntier;
+  const duTheme = themePermis && themePermis.length ? themePermis : parmi && parmi.length ? parmi : null;
   for (let essai = 0; essai < 20; essai++) {
     const r = hasard(graine * 7919 + essai);
     // Le TYPE tourne : les 14 sortes de défi passent toutes avant qu'une revienne

@@ -16,11 +16,22 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import Image from "next/image";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
-import { ArrowRight, BookOpen, Calculator, Languages, PenLine, Play, Trophy } from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, Languages, PenLine, Play, Square, Trophy, Volume2 } from "lucide-react";
 import type { ChiffreDuJour, Metier } from "@/lib/accueil/journal";
 import type { Article, Mission } from "@/lib/accueil/articles";
 import ArriveeDiagonale from "@/components/accueil/dessins/ArriveeDiagonale";
 import { genererDefi, type DefiGenere, type Theme } from "@/lib/accueil/defis";
+import {
+  DEFIS_DU_NIVEAU,
+  NIVEAUX,
+  NIVEAU_PAR_DEFAUT,
+  PETIT_NIVEAU,
+  estNiveau,
+  niveauDeLaClasse,
+  type NiveauJournal,
+} from "@/lib/accueil/niveaux";
+import { useEleve } from "@/context/EleveContext";
+import type { EditionDuNiveau } from "./donnees";
 
 export type VideoJournal = { id: string; titre: string; short: boolean; vignette: string };
 
@@ -193,7 +204,7 @@ const SOMMAIRE = [
   { ancre: "#demain", texte: "Penser à demain" },
 ];
 
-function Manchette({ date, numero }: { date: string; numero: number }) {
+function Manchette({ date, numero, ile = false }: { date: string; numero: number; ile?: boolean }) {
   return (
     <header className="border-b-[6px] border-double border-stone-900 pb-3 sm:pb-4">
       <div className="flex items-center justify-between border-b border-stone-900 pb-1 text-[11px] font-bold uppercase tracking-widest text-stone-700">
@@ -215,13 +226,16 @@ function Manchette({ date, numero }: { date: string; numero: number }) {
             Le Journal d&rsquo;EleveAI
           </h1>
           <p className="mt-2 font-serif text-base italic text-stone-700 sm:text-2xl">
-            Comprendre le monde, et le changer
+            {ile ? "Le journal scientifique de l’île de La Réunion" : "Comprendre le monde, et le changer"}
           </p>
         </div>
       </div>
-      <nav aria-label="Sommaire" className="mt-3 flex justify-center gap-4 text-xs font-bold uppercase tracking-widest text-stone-700 sm:text-sm">
+      <nav
+        aria-label="Sommaire"
+        className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs font-bold uppercase tracking-wider text-stone-700 sm:tracking-widest sm:text-sm"
+      >
         {SOMMAIRE.map((s) => (
-          <a key={s.ancre} href={s.ancre} className="hover:text-red-700 hover:underline">
+          <a key={s.ancre} href={s.ancre} className="whitespace-nowrap hover:text-red-700 hover:underline">
             {s.texte}
           </a>
         ))}
@@ -280,18 +294,21 @@ function DefiDuJour({
   jour,
   defi,
   theme,
+  parmi = null,
 }: {
   mise: Mise;
   jour: number;
   defi: DefiGenere;
   theme: Theme | null;
+  /** Les générateurs de l'édition choisie (lib/accueil/niveaux.ts). */
+  parmi?: number[] | null;
 }) {
   const t = TON[mise];
   // Le défi du JOUR vient du serveur : lié à la Une (écrit pour elle, ou généré
   // sur son thème). « Un autre défi » en fabrique d'autres SUR LE MÊME THÈME.
   const [i, setI] = useState(jour);
   const [choisi, setChoisi] = useState<number | null>(null);
-  const d = useMemo(() => (i === jour ? defi : genererDefi(i * 31 + 7, theme)), [i, jour, defi, theme]);
+  const d = useMemo(() => (i === jour ? defi : genererDefi(i * 31 + 7, theme, parmi)), [i, jour, defi, theme, parmi]);
   const ordre = d.choix.map((_, j) => j);
   const juste = choisi === d.bonne;
 
@@ -468,21 +485,28 @@ function MetierDuJour({ mise, metier }: { mise: Mise; metier: Metier }) {
   );
 }
 
-function Shorts({ mise, shorts }: { mise: Mise; shorts: VideoJournal[] }) {
+/** 12/11/2026 — Frédéric : « un short sur un défi en fonction des classes »,
+ *  « 3 shorts, plus simple ». Trois shorts de l'édition choisie, un défi
+ *  d'abord (donnees.ts, shortsDuNiveau), côte à côte, sans défilement. */
+function Shorts({ mise, shorts, niveau }: { mise: Mise; shorts: VideoJournal[]; niveau: string }) {
   const t = TON[mise];
   if (shorts.length === 0) return null;
   return (
-    <Bloc mise={mise} quoi="shorts" rubrique="Une minute pour être surpris">
-      <div className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-2">
+    <Bloc mise={mise} quoi="shorts" rubrique={`En 1 minute : 3 défis en vidéo · ${niveau}`}>
+      <div className="mx-auto grid max-w-2xl grid-cols-3 gap-3 sm:gap-6">
         {shorts.map((v) => (
-          <div key={v.id} className="w-32 shrink-0 snap-start sm:w-36">
+          <div key={v.id}>
             <Vignette v={v} mise={mise} quoi="shorts" />
-            <p className={`${t.texte} mt-1.5 line-clamp-3 text-xs font-semibold leading-snug`}>
-              {v.titre.replace(/#shorts?/gi, "").trim()}
+            <p className={`${t.texte} mt-1.5 line-clamp-3 text-xs font-semibold leading-snug sm:text-sm`}>
+              {v.titre
+                .replace(/#\S+/g, "")
+                .replace(/\s*—\s*(CP|CE1|CE2|CM1|CM2|6e|5e|4e|3e|2de|1re|Tle)(\s.*)?$/i, "")
+                .trim()}
             </p>
           </div>
         ))}
       </div>
+      <p className={`${t.texte} mt-2 text-sm italic`}>Mets la vidéo sur pause, réponds, puis regarde la solution.</p>
       <p className="mt-2">
         <Lien href="/video" quoi="shorts" mise={mise} className={t.lien}>
           Toutes les vidéos
@@ -566,12 +590,15 @@ const PIED = [
 
 /* ═══ LES ARTICLES : « COMPRENDRE LE MONDE » (10/11/2026) ═════════════════ */
 
-function EncadreMaths({ a }: { a: Article }) {
+function EncadreMaths({ a, petit = false }: { a: Article; petit?: boolean }) {
   return (
     <aside className="border-2 border-stone-900 bg-white/70 p-4">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">Les maths derrière</p>
       <p className="mt-1 font-serif text-lg font-black leading-tight text-stone-900">{a.maths.titre}</p>
-      <ul className="mt-2 space-y-1 font-mono text-[13px] leading-snug text-stone-800 sm:text-sm">
+      {/* Aux petits niveaux, pas de police machine à écrire : plus grand, plus rond. */}
+      <ul
+        className={`mt-2 space-y-1 leading-snug text-stone-800 ${petit ? "font-sans text-lg font-semibold" : "font-mono text-[13px] sm:text-sm"}`}
+      >
         {a.maths.lignes.map((l) => (
           <li key={l}>{l}</li>
         ))}
@@ -652,21 +679,96 @@ function Agir({ a }: { a: Article }) {
   );
 }
 
-function ArticleUne({ a }: { a: Article }) {
+/** « Écouter l'article » (12/11/2026) : pour ceux qui lisent difficilement
+ *  (la règle du coach sonore). La voix du navigateur, en français ; rien ne se
+ *  lance tout seul. */
+function Ecouter({ a }: { a: Article }) {
+  const [parle, setParle] = useState(false);
+  const [possible, setPossible] = useState(false);
+  useEffect(() => {
+    setPossible("speechSynthesis" in window);
+    return () => {
+      try {
+        window.speechSynthesis?.cancel();
+      } catch {}
+    };
+  }, []);
+  // Un autre article (autre édition) : on se tait.
+  useEffect(() => {
+    try {
+      window.speechSynthesis?.cancel();
+    } catch {}
+    setParle(false);
+  }, [a.id]);
+  if (!possible) return null;
+  const lire = () => {
+    try {
+      const s = window.speechSynthesis;
+      s.cancel();
+      if (parle) {
+        setParle(false);
+        return;
+      }
+      // « ÷ », « × », « − » : la voix les lirait mal ; on les dit en mots.
+      const texte = [a.titre, a.chapo, ...a.corps]
+        .join(". ")
+        .replace(/×/g, " fois ")
+        .replace(/÷/g, " divisé par ")
+        .replace(/−/g, " moins ");
+      const u = new SpeechSynthesisUtterance(texte);
+      u.lang = "fr-FR";
+      u.rate = 0.9;
+      const voix = s.getVoices().find((v) => v.lang.startsWith("fr"));
+      if (voix) u.voice = voix;
+      u.onend = () => setParle(false);
+      u.onerror = () => setParle(false);
+      s.speak(u);
+      setParle(true);
+      track("journal_ecouter", { article: a.id });
+    } catch {
+      setParle(false);
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={lire}
+      className="mt-3 inline-flex items-center gap-2 rounded-full border-2 border-stone-900 bg-white px-4 py-1.5 font-serif text-base font-bold text-stone-900 hover:bg-stone-100"
+    >
+      {parle ? <Square className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
+      {parle ? "Arrêter" : "Écouter l’article"}
+    </button>
+  );
+}
+
+function ArticleUne({ a, petit = false }: { a: Article; petit?: boolean }) {
   return (
     <article aria-label={`À la Une : ${a.titre}`} className="border-t-[3px] border-stone-900 pt-3">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">À la Une · {a.rubrique}</p>
       <h2 className="mt-2 font-serif text-3xl font-black leading-[1.05] tracking-tight text-stone-900 sm:text-5xl">
         {a.titre}
       </h2>
-      <p className="mt-3 font-serif text-lg font-semibold leading-snug text-stone-800 sm:text-xl">{a.chapo}</p>
+      <p
+        className={`mt-3 font-serif font-semibold leading-snug text-stone-800 ${petit ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"}`}
+      >
+        {a.chapo}
+      </p>
+      <Ecouter a={a} />
       <div className="mt-5 grid gap-6 md:grid-cols-[1fr_16rem]">
-        <div className="space-y-3 font-serif text-[17px] leading-relaxed text-stone-800 first-letter:float-left first-letter:mr-2 first-letter:font-serif first-letter:text-6xl first-letter:font-black first-letter:leading-[0.85] first-letter:text-stone-900">
+        {/* Aux petits niveaux : plus grand, plus aéré, pas de lettrine (elle
+            gêne ceux qui déchiffrent). */}
+        <div
+          className={
+            petit
+              ? "space-y-4 font-serif text-xl leading-loose text-stone-900 sm:text-[22px]"
+              : "space-y-3 font-serif text-[17px] leading-relaxed text-stone-800 first-letter:float-left first-letter:mr-2 first-letter:font-serif first-letter:text-6xl first-letter:font-black first-letter:leading-[0.85] first-letter:text-stone-900"
+          }
+        >
           {a.corps.map((p) => (
             <p key={p}>{p}</p>
           ))}
         </div>
-        <EncadreMaths a={a} />
+        <EncadreMaths a={a} petit={petit} />
       </div>
       <div className="mt-5">
         <DefiArticle a={a} />
@@ -679,21 +781,21 @@ function ArticleUne({ a }: { a: Article }) {
   );
 }
 
-function AutreNouvelle({ a }: { a: Article }) {
+function AutreNouvelle({ a, petit = false }: { a: Article; petit?: boolean }) {
   const [ouvert, setOuvert] = useState(false);
   return (
     <article aria-label={a.titre} className="border-t-[3px] border-stone-900 pt-3">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">{a.rubrique}</p>
       <h3 className="mt-2 font-serif text-2xl font-black leading-tight tracking-tight text-stone-900">{a.titre}</h3>
-      <p className="mt-2 font-serif leading-snug text-stone-800">{a.chapo}</p>
+      <p className={`mt-2 font-serif leading-snug text-stone-800 ${petit ? "text-lg" : ""}`}>{a.chapo}</p>
       {ouvert ? (
         <div className="mt-3 space-y-3">
           {a.corps.map((p) => (
-            <p key={p} className="font-serif leading-relaxed text-stone-800">
+            <p key={p} className={`font-serif text-stone-800 ${petit ? "text-lg leading-loose" : "leading-relaxed"}`}>
               {p}
             </p>
           ))}
-          <EncadreMaths a={a} />
+          <EncadreMaths a={a} petit={petit} />
           <DefiArticle a={a} />
           <Agir a={a} />
           <p className="text-xs italic text-stone-500">Source : {a.source}</p>
@@ -748,6 +850,117 @@ function MissionDuJour({ m }: { m: Mission }) {
   );
 }
 
+/* ═══ LE CHOIX DE L'ÉDITION (12/11/2026) ═══════════════════════════════════
+   Frédéric : « il faut que les élèves choisissent leurs niveaux, les articles
+   doivent correspondre à leurs niveaux ». Six boutons sous la manchette.
+   L'ordre de choix : ?niveau= dans l'adresse (un prof qui projette), puis le
+   choix gardé dans le navigateur, puis la classe de l'élève connecté, puis la
+   classe choisie sur l'accueil, sinon 6e-5e. ⚠️ Le serveur rend toujours
+   6e-5e : le choix ne s'applique qu'après le chargement (pas d'erreur
+   d'hydratation). */
+const CLE_NIVEAU = "eleveai.journal.niveau";
+
+function lireNiveauGarde(): NiveauJournal | null {
+  try {
+    const url = new URLSearchParams(window.location.search).get("niveau");
+    if (estNiveau(url)) return url;
+  } catch {}
+  try {
+    const garde = localStorage.getItem(CLE_NIVEAU);
+    if (estNiveau(garde)) return garde;
+  } catch {}
+  return null;
+}
+
+function niveauDeLAccueil(): NiveauJournal | null {
+  try {
+    const lu = JSON.parse(localStorage.getItem("eleveai.accueil") ?? "null") as { classe?: string } | null;
+    return niveauDeLaClasse(lu?.classe);
+  } catch {
+    return null;
+  }
+}
+
+const CLE_EDITION = "eleveai.journal.edition";
+
+function lireIleGardee(): boolean | null {
+  try {
+    const url = new URLSearchParams(window.location.search).get("edition");
+    if (url === "reunion") return true;
+    if (url === "monde") return false;
+  } catch {}
+  try {
+    const garde = localStorage.getItem(CLE_EDITION);
+    if (garde === "reunion") return true;
+    if (garde === "monde") return false;
+  } catch {}
+  return null;
+}
+
+/** 12/11/2026 — « tu me crées une version île de La Réunion » : deux éditions,
+ *  le monde ou l'île, au-dessus des niveaux. */
+function InterrupteurEdition({ ile, surChoix }: { ile: boolean; surChoix: (ile: boolean) => void }) {
+  const bouton = (actif: boolean) =>
+    `flex-1 whitespace-nowrap rounded-full px-3 py-2 font-serif text-[15px] font-black transition sm:px-4 sm:text-lg ${
+      actif ? "bg-stone-900 text-white" : "text-stone-900 hover:bg-stone-200"
+    }`;
+  return (
+    <div
+      role="group"
+      aria-label="Choisis ton édition"
+      className="mx-auto mt-4 flex max-w-lg gap-1 rounded-full border-2 border-stone-900 bg-white p-1"
+    >
+      <button type="button" aria-pressed={!ile} onClick={() => surChoix(false)} className={bouton(!ile)}>
+        🌍 Le monde
+      </button>
+      <button type="button" aria-pressed={ile} onClick={() => surChoix(true)} className={bouton(ile)}>
+        🌋 Île de La Réunion
+      </button>
+    </div>
+  );
+}
+
+function SelecteurNiveau({
+  niveau,
+  choisi,
+  surChoix,
+}: {
+  niveau: NiveauJournal;
+  /** false tant que l'élève n'a rien choisi : on l'invite à le faire. */
+  choisi: boolean;
+  surChoix: (n: NiveauJournal) => void;
+}) {
+  return (
+    <nav aria-label="Choisis ton niveau" className="mt-3 border-b border-stone-900 pb-4">
+      <p className="text-center font-serif text-lg font-black text-stone-900 sm:text-xl">
+        {choisi ? "Ton édition" : "Choisis ton niveau"}
+        <span className="font-normal italic text-stone-700"> : les articles changent avec lui.</span>
+      </p>
+      <div className="mx-auto mt-3 grid max-w-3xl grid-cols-3 gap-2 sm:grid-cols-6">
+        {NIVEAUX.map((n) => {
+          const actif = n.id === niveau;
+          return (
+            <button
+              key={n.id}
+              type="button"
+              aria-pressed={actif}
+              onClick={() => surChoix(n.id)}
+              className={`rounded-lg border-2 px-2 py-2 text-center transition ${
+                actif
+                  ? "border-stone-900 bg-stone-900 text-white"
+                  : "border-stone-900 bg-white text-stone-900 hover:bg-stone-100"
+              }`}
+            >
+              <span className="block font-serif text-lg font-black leading-tight">{n.libelle}</span>
+              <span className={`block text-[11px] font-bold ${actif ? "text-stone-200" : "text-stone-600"}`}>{n.age}</span>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
 /* ═══ LA PAGE ═════════════════════════════════════════════════════════════ */
 
 // ⭐ 10/11/2026 — UN VRAI JOURNAL. Frédéric : « faut faire un vrai journal ! »,
@@ -773,28 +986,85 @@ export default function JournalClient(props: {
   reel: VideoJournal[];
   articles: { une: Article; autres: Article[] };
   mission: Mission;
+  /** 12/11/2026 : les six éditions du jour (donnees.ts) et leurs articles. */
+  editions: Record<NiveauJournal, EditionDuNiveau>;
+  editionsReunion: Record<NiveauJournal, EditionDuNiveau>;
+  catalogue: Record<string, Article>;
 }) {
   const mise: Mise = "quotidien";
   const t = TON[mise];
-  const { date, numero, jour, une, demain, defi, theme, hier, chiffre, chiffresCles, metier, shorts, reel, articles, mission } = props;
+  const { date, numero, jour, une, demain, theme, metier, reel, editions, editionsReunion, catalogue } = props;
+
+  // Le monde ou l'île (?edition=reunion, puis le choix gardé).
+  const [ile, setIle] = useState(false);
+  useEffect(() => {
+    const garde = lireIleGardee();
+    if (garde !== null) setIle(garde);
+  }, []);
+  const choisirIle = (oui: boolean) => {
+    setIle(oui);
+    try {
+      localStorage.setItem(CLE_EDITION, oui ? "reunion" : "monde");
+    } catch {}
+    track("journal_edition", { edition: oui ? "reunion" : "monde" });
+  };
+
+  // L'édition choisie (voir SelecteurNiveau pour l'ordre de choix).
+  const { eleve } = useEleve();
+  const [niveau, setNiveau] = useState<NiveauJournal>(NIVEAU_PAR_DEFAUT);
+  const [choisi, setChoisi] = useState(false);
+  useEffect(() => {
+    const garde = lireNiveauGarde();
+    const propose = garde ?? niveauDeLaClasse(eleve?.classe) ?? niveauDeLAccueil();
+    if (propose) setNiveau(propose);
+    setChoisi(Boolean(garde));
+  }, [eleve?.classe]);
+  const choisir = (n: NiveauJournal) => {
+    setNiveau(n);
+    setChoisi(true);
+    try {
+      localStorage.setItem(CLE_NIVEAU, n);
+    } catch {}
+    track("journal_niveau", { niveau: n });
+  };
+
+  const e = (ile ? editionsReunion : editions)[niveau];
+  const petit = PETIT_NIVEAU.has(niveau);
+  const libelle = NIVEAUX.find((n) => n.id === niveau)?.libelle ?? niveau;
+  const aLaUne = catalogue[e.une];
+  const autres = e.autres.map((id) => catalogue[id]).filter(Boolean);
 
   return (
     <Source.Provider value="journal">
       <div className={`min-h-screen ${t.page}`}>
         <main className={`mx-auto w-full px-4 py-6 sm:py-8 ${t.conteneur}`}>
-          <Manchette date={date} numero={numero} />
+          <Manchette date={date} numero={numero} ile={ile} />
+          <InterrupteurEdition ile={ile} surChoix={choisirIle} />
+          <SelecteurNiveau niveau={niveau} choisi={choisi} surChoix={choisir} />
 
           {/* LA UNE : l'article du jour, et la colonne de droite. */}
           <div id="comprendre" className="mt-6 grid scroll-mt-24 gap-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
-              <ArticleUne a={articles.une} />
+              <ArticleUne key={aLaUne.id} a={aLaUne} petit={petit} />
             </div>
             <aside className="space-y-8 lg:col-span-4 lg:border-l lg:border-stone-300 lg:pl-8">
-              <ChiffresCles chiffre={chiffre} autres={chiffresCles} />
+              <ChiffresCles chiffre={e.chiffres[0]} autres={e.chiffres.slice(1)} />
               <div id="defi" className="scroll-mt-24">
-                <DefiDuJour mise={mise} jour={jour} defi={defi} theme={theme} />
+                <DefiDuJour
+                  key={niveau}
+                  mise={mise}
+                  jour={jour}
+                  defi={e.defi}
+                  theme={theme}
+                  parmi={DEFIS_DU_NIVEAU[niveau]}
+                />
               </div>
             </aside>
+          </div>
+
+          {/* 3 SHORTS DE L'ÉDITION, un défi d'abord (Frédéric, 12/11). */}
+          <div className="mt-10">
+            <Shorts mise={mise} shorts={e.shorts} niveau={libelle} />
           </div>
 
           {/* LES AUTRES NOUVELLES, sur trois colonnes. */}
@@ -803,15 +1073,15 @@ export default function JournalClient(props: {
               Les autres nouvelles
             </h2>
             <div className="mt-4 grid gap-8 md:grid-cols-3">
-              {articles.autres.map((a) => (
-                <AutreNouvelle key={a.id} a={a} />
+              {autres.map((a) => (
+                <AutreNouvelle key={a.id} a={a} petit={petit} />
               ))}
             </div>
           </section>
 
           {/* LE DÉFI DEHORS OU LA BONNE ACTION : apprendre autrement, en vrai. */}
           <div className="mt-10">
-            <MissionDuJour m={mission} />
+            <MissionDuJour m={e.mission} />
           </div>
 
           {/* EN IMAGES : la vidéo du jour et les maths dehors. */}
@@ -829,12 +1099,8 @@ export default function JournalClient(props: {
               <MetierDuJour mise={mise} metier={metier} />
             </div>
             <div className="lg:col-span-7 lg:border-l lg:border-stone-300 lg:pl-8">
-              <RendezVous mise={mise} jour={jour} demain={demain} hier={hier} />
+              <RendezVous mise={mise} jour={jour} demain={demain} hier={e.hier} />
             </div>
-          </div>
-
-          <div className="mt-10">
-            <Shorts mise={mise} shorts={shorts} />
           </div>
 
           {/* Frédéric, 10/11 : « garde les rituels ». */}

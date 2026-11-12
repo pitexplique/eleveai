@@ -14,10 +14,13 @@
 //     du défi d'hier, la série de jours (côté navigateur, JournalClient).
 // ⭐ L'ORDRE DE TIRAGE EST STABLE : chaque vidéo a sa place fixe (un hachage de
 // son id). Une vidéo publiée demain s'insère sans bouleverser les autres.
-import { articlesDuJour, missionDuJour } from "@/lib/accueil/articles";
+import { articlesDuJour, chiffresDesPetits, missionDuJour, type Article } from "@/lib/accueil/articles";
+import { DEFIS_DU_NIVEAU, NIVEAUX, type NiveauJournal } from "@/lib/accueil/niveaux";
 import { toutesLesVideos, urlR2, type VideoR2 } from "@/lib/videos/r2";
 import { CHIFFRES, EDITION, JOUR_DU_NUMERO_1, METIERS, UNES, jourParis } from "@/lib/accueil/journal";
-import { depuisEcrit, genererDefi, themeDe } from "@/lib/accueil/defis";
+import { depuisEcrit, genererDefi, themeDe, type DefiGenere } from "@/lib/accueil/defis";
+import type { ChiffreDuJour } from "@/lib/accueil/journal";
+import type { Mission } from "@/lib/accueil/articles";
 import type { VideoJournal } from "./JournalClient";
 
 /** Hachage FNV-1a : une place stable par id. */
@@ -144,6 +147,141 @@ function chiffreDuJour(jour: number) {
   return CHIFFRES[jour % CHIFFRES.length];
 }
 
+/* ═══ LES ÉDITIONS PAR NIVEAU (12/11/2026) ══════════════════════════════════
+   Frédéric : « il faut que les élèves choisissent leurs niveaux, les articles
+   doivent correspondre à leurs niveaux », puis « une vidéo dessin animé ou un
+   short sur un défi en fonction des classes », « 3 shorts, plus simple ».
+   Le serveur prépare les SIX éditions du jour ; le navigateur montre celle que
+   l'élève a choisie (JournalClient). */
+
+/** Les dossiers de vidéos de chaque édition (le 1er segment de `fichier`). */
+const DOSSIERS: Record<NiveauJournal, string[]> = {
+  "cp-ce2": ["cp"],
+  cm: ["cm1", "cm2"],
+  "6e-5e": ["6e", "5e"],
+  "4e-3e": ["4e", "3e"],
+  lycee: ["seconde", "premiere", "premiere-commun", "premiere-spe", "terminale"],
+  adultes: ["actu", "bases", "maths-en-vrai"],
+};
+/** CP-CE2 n'a que trois shorts de maths : on y ajoute les billes de 3 × 4 = 12. */
+const EN_PLUS: Partial<Record<NiveauJournal, string[]>> = {
+  "cp-ce2": ["bases-multiplication-division-short-billes"],
+};
+/** ⛔ Le français est en pause (10/11) : pas de shorts d'écriture des lettres. */
+const PAS_DANS_LE_JOURNAL = /cursive|writing|la lettre|english/i;
+/** Le même short existe parfois en CM1 et en CM2 : un seul. */
+const sansClasse = (t: string) => t.replace(/[—-]\s*(CM1|CM2|6e|5e|4e|3e).*$/i, "").replace(/#\w+/g, "").trim();
+
+/* Les shorts AVEC miniature, sur R2 (publiés ou non sur YouTube : la page
+   /video/<id> les lit sur R2, règle « élèves = vidéos R2 »). */
+const SHORTS_R2 = toutesLesVideos().filter((v) => v.short && v.vignette && v.poster && !PAS_DANS_LE_JOURNAL.test(v.titre));
+const SHORTS_DU_NIVEAU = Object.fromEntries(
+  NIVEAUX.map(({ id }) => {
+    const vus = new Set<string>();
+    const liste = melange(
+      SHORTS_R2.filter((v) => DOSSIERS[id].includes(v.fichier.split("/")[0]) || EN_PLUS[id]?.includes(v.id)),
+      `short-${id}`,
+    ).filter((v) => {
+      const t = sansClasse(v.titre);
+      if (vus.has(t)) return false;
+      vus.add(t);
+      return true;
+    });
+    return [id, liste];
+  }),
+) as Record<NiveauJournal, VideoR2[]>;
+
+/** Trois shorts par jour pour une édition : un DÉFI d'abord (id « …-defi-… »
+ *  ou titre en « Défi »), puis deux autres. */
+function shortsDuNiveau(jour: number, niveau: NiveauJournal): VideoJournal[] {
+  const liste = SHORTS_DU_NIVEAU[niveau];
+  const defis = liste.filter((v) => /defi/i.test(v.id) || /^défi/i.test(v.titre));
+  const premier = defis.length ? defis[((jour % defis.length) + defis.length) % defis.length] : null;
+  const reste = liste.filter((v) => v !== premier);
+  return [...(premier ? [premier] : []), ...fenetre(reste, jour, premier ? 2 : 3)]
+    .map(video)
+    .filter((x): x is VideoJournal => x !== null);
+}
+
+export type EditionDuNiveau = {
+  une: string;
+  autres: string[];
+  chiffres: ChiffreDuJour[];
+  defi: DefiGenere;
+  hier: { question: string; reponse: string };
+  mission: Mission;
+  shorts: VideoJournal[];
+};
+
+/* ═══ L'ÉDITION « ÎLE DE LA RÉUNION » (12/11/2026) ══════════════════════════
+   Frédéric : « journal scientifique de l'île de La Réunion », « tu me crées une
+   version île de La Réunion ». Mêmes niveaux, mêmes défis et missions ; les
+   articles, les chiffres clés et les shorts sont ceux de l'île. */
+const REUNION = /Réunion|réunionnais|974|Piton|Maïdo|Foc-Foc|Diagonale|lagon|baleine|Cilaos|Mafate|Salazie|Saint-|Grand Raid/i;
+const CHIFFRES_REUNION: ChiffreDuJour[] = [
+  ...CHIFFRES.filter((c) => REUNION.test(c.texte)),
+  { chiffre: "2 632 m", texte: "L'altitude du Piton de la Fournaise, l'un des volcans les plus actifs du monde." },
+  { chiffre: "2 512 km²", texte: "La surface de l'île. Le cœur du Parc national en couvre environ 42 %." },
+  { chiffre: "3 cirques", texte: "Cilaos, Mafate et Salazie, creusés par les pluies dans l'ancien volcan du Piton des Neiges." },
+  { chiffre: "6 mois", texte: "La saison des cyclones, du 1er novembre au 30 avril, pendant l'été austral." },
+];
+const SHORTS_REUNION = melange(
+  SHORTS_R2.filter((v) => v.fichier.startsWith("974/") || REUNION.test(v.titre)),
+  "short-reunion",
+);
+
+function chiffresReunion(jour: number): ChiffreDuJour[] {
+  const l = CHIFFRES_REUNION;
+  const j = ((jour % l.length) + l.length) % l.length;
+  return [0, 3, 5].map((k) => l[(j + k) % l.length]);
+}
+
+/** Les shorts de l'île d'abord, complétés par ceux du niveau. */
+function shortsReunion(jour: number, niveau: NiveauJournal): VideoJournal[] {
+  const ile = fenetre(SHORTS_REUNION, jour, 2).map(video).filter((x): x is VideoJournal => x !== null);
+  const ids = new Set(ile.map((v) => v.id));
+  return [...ile, ...shortsDuNiveau(jour, niveau).filter((v) => !ids.has(v.id))].slice(0, 3);
+}
+
+function editionDuNiveau(jour: number, niveau: NiveauJournal, reunion = false): EditionDuNiveau {
+  const art = articlesDuJour(jour, niveau, reunion);
+  const parmi = DEFIS_DU_NIVEAU[niveau];
+  // Le défi du jour : celui des adultes reste lié à la vidéo de la Une ; les
+  // autres éditions restent sur LEURS générateurs (le thème est gardé s'il en fait partie).
+  const defiDe = (j: number) => {
+    const u = uneDuJour(j);
+    if (!parmi) return u.ecrite?.defi ? depuisEcrit(u.ecrite.defi, j) : genererDefi(j, u.theme);
+    return genererDefi(j, u.theme, parmi);
+  };
+  const d = defiDe(jour);
+  const h = defiDe(jour - 1);
+  let chiffres: ChiffreDuJour[];
+  if (reunion) chiffres = chiffresReunion(jour);
+  else if (niveau === "cp-ce2" || niveau === "cm") chiffres = chiffresDesPetits(jour, niveau);
+  else {
+    const c = chiffreDuJour(jour);
+    chiffres = [c, ...chiffresEnPlus(jour, c)];
+  }
+  return {
+    une: art.une.id,
+    autres: art.autres.map((a) => a.id),
+    chiffres,
+    defi: d,
+    hier: { question: h.question, reponse: h.choix[h.bonne] },
+    mission: missionDuJour(jour, niveau, reunion),
+    shorts: reunion ? shortsReunion(jour, niveau) : shortsDuNiveau(jour, niveau),
+  };
+}
+
+/** Les deux chiffres clés en plus (10/11/2026) : pas de 7 et 13, jamais le même
+ *  que celui du jour. ⛔ La Réunion ≈ 4 % des contextes : on l'écarte ici. */
+function chiffresEnPlus(jour: number, duJour: ChiffreDuJour): ChiffreDuJour[] {
+  const monde = CHIFFRES.filter(
+    (c) => !/Réunion|Piton|Maïdo|Foc-Foc|Diagonale|lagon|baleine/i.test(c.texte) && c.chiffre !== duJour.chiffre,
+  );
+  return [3, 8].map((k) => monde[(jour * 2 + k) % monde.length]).filter((c, i, l) => l.indexOf(c) === i);
+}
+
 /** Le contenu du journal d'un jour donné (défaut : aujourd'hui, à Paris). */
 export function donneesDuJournal(jour = jourParis()) {
   const une = uneDuJour(jour);
@@ -170,13 +308,7 @@ export function donneesDuJournal(jour = jourParis()) {
     // 10/11/2026 — « les chiffres clés » : celui du jour, et deux autres du
     // catalogue (pas de 7 et 13, jamais le même que celui du jour).
     // ⛔ La Réunion ≈ 4 % des contextes : les deux chiffres en plus l'écartent.
-    chiffresCles: (() => {
-      const monde = CHIFFRES.filter(
-        (c) => !/Réunion|Piton|Maïdo|Foc-Foc|Diagonale|lagon|baleine/i.test(c.texte) &&
-          c.chiffre !== chiffreDuJour(jour).chiffre,
-      );
-      return [3, 8].map((k) => monde[(jour * 2 + k) % monde.length]).filter((c, i, l) => l.indexOf(c) === i);
-    })(),
+    chiffresCles: chiffresEnPlus(jour, chiffreDuJour(jour)),
     // Le défi d'aujourd'hui, son thème (pour « Un autre défi », qui reste sur
     // la notion de la Une), et celui d'HIER pour la réponse des rendez-vous.
     defi: defiDuJour(jour),
@@ -190,6 +322,26 @@ export function donneesDuJournal(jour = jourParis()) {
     articles: articlesDuJour(jour),
     // « des défis à faire à l'extérieur », « ou des bonnes actions » (10/11).
     mission: missionDuJour(jour),
+    // 12/11/2026 : les six éditions du jour, et les articles qu'elles citent
+    // (envoyés une seule fois, par id).
+    editions: Object.fromEntries(NIVEAUX.map(({ id }) => [id, editionDuNiveau(jour, id)])) as Record<
+      NiveauJournal,
+      EditionDuNiveau
+    >,
+    // L'édition « Île de La Réunion », niveau par niveau.
+    editionsReunion: Object.fromEntries(NIVEAUX.map(({ id }) => [id, editionDuNiveau(jour, id, true)])) as Record<
+      NiveauJournal,
+      EditionDuNiveau
+    >,
+    catalogue: (() => {
+      const ids = new Set(NIVEAUX.flatMap(({ id }) =>
+        [false, true].flatMap((ile) => {
+          const a = articlesDuJour(jour, id, ile);
+          return [a.une, ...a.autres];
+        }),
+      ));
+      return Object.fromEntries([...ids].map((a) => [a.id, a])) as Record<string, Article>;
+    })(),
     // ⚠️ La fenêtre se prend sur la liste ENTIÈRE, et le short de la Une n'est
     // retiré qu'après (il en reste alors 8) : retirer d'abord changeait la
     // longueur de la liste d'un jour à l'autre, et deux jours pouvaient
