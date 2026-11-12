@@ -1,4 +1,4 @@
-# Reprise — série CALCUL POSÉ 6e (état au 11/11/2026)
+# Reprise — série CALCUL POSÉ 6e (état au 12/11/2026)
 
 Notion `entier_calcul_pose` (banque `lib/tutor-v4/questionBank/6e/maths/calcul-pose.bank.ts`, 6 micros). 5 paysages Manim + 5 shorts dessin animé Ti Margo, sur le modèle de la série Décimaux (`manim/REPRISE-decimaux.md`).
 
@@ -40,10 +40,20 @@ Voix et manifeste : `6e-calcul-pose-<slug>[-short]` (`manim/voix/`). Sorties : `
   - Short `prototypes/ti-margo/films/calcul-pose-soustraction.js` « Les coquillages envolés » (52 − 17 = 45 faux, vérif 45 + 17 = 62 ≠ 52, bonne réponse B = 35, commentaire 73 − 48). Contrôles relus et propres (captures 6, 8,6, 11, 16, 26, 40, 58, 66, 74 s). Pas encore filmé ni miniature. Outils ajoutés dans `calcul-pose.js` : `barrer(c,x,y)`, `petit(c,txt,x,y)` ; `voixDe` fait maintenant correspondre un signe écrit (+, −, ×) au mot dit SEUL (« plus », « moins », « fois »).
 - Leçons : l'audit contrôle aussi les MOTS écrits (« Sommet », « Déjà », « Montée » : à poser au mot où ils sont dits). Pour poser un résultat au bon instant, prendre l'extrait qui COMMENCE par le chiffre (« 4. Dizaines », pas « 8, 4 »). Lancer le dry run avec `PYTHONIOENCODING=utf-8` (le signe − plante la console sinon). Une légende du short doit suivre la voix mot à mot (« 45 + 17, ça fait 62. »).
 
-## Reste, dans l'ordre (samedi 14/11)
-1. Ép. 02 : re-planche -ql (`PYTHONIOENCODING=utf-8 python -m manim render -ql --progress_bar none manim/scripts/6e/calcul_pose_soustraction.py CalculPoseSoustraction6e -o brouillon-cp-02 --media_dir manim/scripts/6e/media-cp-02`, puis `python scripts/ti-margo-planche.py <mp4> <png> 30`) pour revoir les 5 corrections ; puis UN rendu HD (`-qh --disable_caching … -o eleveai-maths-6e-calcul-pose-soustraction`) vers `manim/sorties/6e/maths/calcul-pose/02-soustraction/`, `python scripts/verifier-bords-video.py`, planche HD.
-2. Short 02 : `node scripts/ti-margo-short.mjs calcul-pose soustraction film`, puis `… miniature`, planche du mp4.
-3. Ép. 03 multiplication, 04 division, 05 vérifier : même chemin (voix et marques prêtes, instants des shorts déjà dans `calcul-pose-cues.js`). Un fichier `films/calcul-pose-<ép>.js` par short. Bonnes réponses : paysages 03 A-C, 04 A-C, 05 C-A ; shorts C, B, B.
-4. Métiers `lib/matrice/metiers-college.ts` (`entier_calcul_pose`) : ajouter le guide de montagne, marquer `V` les vidéos faites, phrase de la logisticienne → 157 colis, camionnettes de 6 (fichier partagé : committer « HEAD + mes lignes »).
-5. Ajouter 02-05 à `manim/sorties/apercu-calcul-pose.html`. Commit par chemin, sans push. Manifeste, R2, coach : après l'écoute de Frédéric.
-- ⛔ Poste partagé : avant chaque rendu lourd, lignes de commande des processus (`Get-CimInstance Win32_Process`) : rendre seulement si aucun `manim render` ne tourne.
+- ✅ 12/11 : **ép. 02 HD rendu** (`02-soustraction/`, bords 0, planche HD propre) ; short 02 filmé + miniature, MAIS `films/calcul-pose-soustraction.js` retouché APRÈS le film (ligne « 45 + 17 = 62 » aérée, coche du « Ouf » à 915) : **short 02 à refilmer**.
+- ✅ 12/11 : **ép. 03 multiplication** : paysage `calcul_pose_multiplication.py` (`CalculPoseMultiplication6e`, `PoseX` : deux lignes de produits, `+`, total) HD rendu (`03-multiplication/`, 244 s, bords 0, planche HD propre). Short `films/calcul-pose-multiplication.js` « Le zéro oublié » : contrôles propres, **pas encore filmé**.
+- ✅ 12/11 : **ép. 04 division** : paysage `calcul_pose_division.py` (`CalculPoseDivision6e`, `Potence` reprise de `decimal_diviser_par_entier.py` avec mémoire : rappeler `po.q(0, 2)` rend LE MÊME chiffre) : audit propre, planche -ql relue et corrigée (« 58 = 7 × 8 + 2 » aéré, « 6 × 26 » aéré) ; **HD à faire**. Short `films/calcul-pose-division.js` « Le reste trop grand » (potence dessinée à la craie) : contrôles propres, **pas filmé**.
+- ✅ 12/11 : **ép. 05 vérifier** : paysage `calcul_pose_verifier.py` (`CalculPoseVerifier6e`, Zoé réalisatrice, `pellicule`, `nombre(po, "633")`) : audit propre ; brouillon -ql rendu le 12/11 (`manim/scripts/6e/media-cp-05-ql/…/brouillon.mp4`), **planche à faire et à relire samedi** (`python scripts/ti-margo-planche.py <mp4> <png> 40`), puis HD. Short `films/calcul-pose-verifier.js` « Vérifier, ça sauve » (`limiterRepetitions()` : « 615 moins » ×4 dans les instants) : contrôles propres, **pas filmé**.
+- ✅ Matrice métiers : guide de montagne ajouté, `V` sur comptable, guide, agriculteur ; logisticienne → 157 colis / camionnettes de 6. `V` de la logisticienne et de la réalisatrice à mettre après leurs HD. Pas commité.
+- Leçons 12/11 : un morceau fait d'un NOMBRE SEUL : un play à part + `au_mot` explicite (sinon il suit le morceau d'avant, trop tôt). Un Text attend son DERNIER mot : couper « 386, | c'est presque » sinon 386 arrive tard. Un affichage 0,1 s AVANT la dernière occurrence d'un nombre compte comme « TARD » (contre l'occurrence d'avant) : viser l'extrait exact (`("1.", 2)`). Les choix redits dans la réponse : `_pas_audit` seul (garder la synchro). `ecrire(..., autres={k: [...]})` : animations liées à CHAQUE morceau. `GRIS` n'existe pas dans `calcul_pose_commun` (le définir).
+
+## Reste, dans l'ordre (samedi 14/11, 9 h)
+- ⏸ 12/11 : arrêt sur consigne de Frédéric (88 % de l'usage hebdomadaire). Aucun HD lancé après l'ép. 03. Rien poussé.
+0. Relire la planche -ql de l'ép. 05, corriger les défauts.
+1. Rendus lourds, UN à la fois, machine libre (`Get-CimInstance Win32_Process`, aucun `manim render` ni `ti-margo-short … film`) :
+   HD 04 et HD 05 (`python -m manim render -qh --disable_caching manim/scripts/6e/calcul_pose_<ép>.py <Scène> -o eleveai-maths-6e-calcul-pose-<ép> --media_dir manim/scripts/6e/media-cp-0N`, copie vers `manim/sorties/6e/maths/calcul-pose/0N-<ép>/`, `python scripts/verifier-bords-video.py`, planche) ;
+   films des shorts 02 (refilm), 03, 04, 05 (`node scripts/ti-margo-short.mjs calcul-pose <ép> film`, puis `… miniature`, planche du mp4).
+2. `V` logisticienne + réalisatrice dans `lib/matrice/metiers-college.ts`.
+3. Aperçu `manim/sorties/apercu-calcul-pose.html` : ajouter 02-05 (paysage + short, sans autoplay).
+4. Commit par chemin (mes fichiers seulement), sans push. Manifeste, R2, coach : après l'écoute de Frédéric.
+- ⛔ Poste partagé : avant chaque rendu lourd, lignes de commande des processus : rendre seulement si aucun `manim render` ne tourne.

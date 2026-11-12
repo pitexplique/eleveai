@@ -71,9 +71,10 @@ export const METIERS_6E: Record<string, LienMetier[]> = {
     F("paysagiste", "dessine le jardin sur un plan à l'échelle avant de planter.", V),
   ],
   entier_calcul_pose: [
-    F("comptable", "pose l'addition des dépenses du mois pour vérifier le total."),
-    M("agriculteur", "calcule 24 rangées de 36 plants : 864 plants à commander."),
-    F("logisticien", "répartit 1 250 colis dans des camions de 48 places : combien de camions ?"),
+    F("comptable", "pose l'addition des dépenses du mois pour vérifier le total.", V),
+    M("guide-montagne", "calcule ce qui reste à monter : 632 m à gravir, 458 m déjà faits, encore 174 m.", V),
+    M("agriculteur", "calcule 24 rangées de 36 plants : 864 plants à commander.", V),
+    F("logisticien", "répartit 157 colis dans des camionnettes de 6 : 26 pleines, et une 27e pour le dernier colis."),
     F("realisateur", "compte les images d'un film : 24 images par seconde pendant 90 minutes."),
   ],
   entier_calcul_mental: [

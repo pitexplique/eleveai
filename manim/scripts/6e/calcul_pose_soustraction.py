@@ -114,7 +114,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
         self.play(FadeIn(l2[1], scale=1.2), run_time=0.3)
         self.au_mot("Combien")
         reste = DashedLine(pt, sommet, color=JAUNE_TITRE, stroke_width=7, dash_length=0.14)
-        qm = self.t("?", 48, JAUNE_TITRE).next_to(reste.get_center(), RIGHT, buff=0.3)
+        qm = self.t("?", 48, JAUNE_TITRE).move_to(reste.get_center() + P(-0.5, 0.35))  # sur le noir, pas la neige
         q = self.t("Combien reste-t-il ?", 44, JAUNE_TITRE).move_to(P(1.0, -2.85))
         self.play(Create(reste), FadeIn(qm, scale=1.5), FadeIn(q, shift=UP * 0.15), run_time=0.5)
         self.attendre_voix()
@@ -243,7 +243,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
     def ecran_question1(self):
         self.clear()
         self.add_mascotte()
-        po = Pose(["81", "46"], signe=MOINS, origine=P(-3.6, 1.6), pas=0.7, fs=60, hl=0.95)
+        po = Pose(["81", "46"], signe=MOINS, origine=P(-3.6, 1.6), pas=0.85, fs=60, hl=0.95)
         h8 = po.chiffre(0, 1)
 
         def autres_q(sc):
@@ -257,7 +257,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
             sc.au_mot("je casse")
             sc.play(FadeIn(lg[1], shift=UP * 0.1), Create(po.barrer(h8)), FadeIn(po.dessus(1, "7"), scale=1.8),
                     FadeIn(po.devant(0), scale=1.8), run_time=0.35)
-            lg2 = sc.rep_bas(1, ["11 " + MOINS + " 6 = 5,", "7 " + MOINS + " 4 = 3."])
+            lg2 = sc.rep_bas(1, ["11 " + MOINS + " 6 = 5,", "7 " + MOINS + " 4 = 3."], buff=0.4)
             sc.au_mot("11 moins")
             sc.play(FadeIn(lg2[0], shift=UP * 0.1), FadeIn(po.res(0, 5), scale=1.6), run_time=0.3)
             sc.au_mot("7 moins 4")
@@ -337,7 +337,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
     def ecran_question2(self):
         self.clear()
         self.add_mascotte()
-        po = Pose(["400", "135"], signe=MOINS, origine=P(-3.4, 1.6), pas=0.7, fs=60, hl=0.95)
+        po = Pose(["400", "135"], signe=MOINS, origine=P(-3.4, 1.6), pas=0.85, fs=60, hl=0.95)
         hauts = {r: po.chiffre(0, r) for r in (0, 1, 2)}
 
         def autres_q(sc):
@@ -345,7 +345,8 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
                     run_time=0.35)
 
         def apres(sc):
-            bas = sc.rep_bas
+            def bas(i, morceaux, **k):  # 4 lignes : pas resserré, la dernière reste dans le cadre
+                return sc.rep_bas(i, morceaux, pas=0.54, **k)
             lg = bas(0, ["Je casse une centaine,", "puis une dizaine."])
             sc.au_mot("Je casse une centaine")
             sc.play(FadeIn(lg[0], shift=UP * 0.1), Create(po.barrer(hauts[2])), FadeIn(po.dessus(2, "3"), scale=1.8),
@@ -356,11 +357,11 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
             lg2 = bas(1, ["10 unités, 9 dizaines, 3 centaines."])
             sc.au_mot("J'ai 10")
             sc.play(FadeIn(lg2[0], shift=UP * 0.1), run_time=0.3)
-            lg3 = bas(2, ["10 " + MOINS + " 5 = 5,", "9 " + MOINS + " 3 = 6,", "3 " + MOINS + " 1 = 2."])
+            lg3 = bas(2, ["10 " + MOINS + " 5 = 5,", "9 " + MOINS + " 3 = 6,", "3 " + MOINS + " 1 = 2."], buff=0.4)
             for k, (mot, r, v) in enumerate((("10 moins 5", 0, 5), ("9 moins 3", 1, 6), ("3 moins 1", 2, 2))):
                 sc.au_mot(mot)
                 sc.play(FadeIn(lg3[k], shift=UP * 0.1), FadeIn(po.res(r, v), scale=1.6), run_time=0.3)
-            l265 = sc.t("Ça fait 265.", 32, VERT_OK).next_to(lg3, RIGHT, buff=0.35)
+            l265 = bas(3, ["Ça fait 265."])[0]
             sc.au_mot("Ça fait 265")
             sc.play(FadeIn(l265, scale=1.2), run_time=0.3)
             sc.rep_fini()
@@ -409,7 +410,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
         pb = Pose(["1000", "643"], signe=MOINS, origine=P(2.6, 1.9), pas=0.66, fs=54, hl=0.8)
         self.au_mot("375 plus")
         la = self.ligne([("Montés :", WHITE), ("375 + 268 =", WHITE)], 36, buff=0.2)
-        gauche(la, -6.0, -1.3)
+        gauche(la, -6.0, -1.1)
         self.play(FadeIn(la, shift=UP * 0.1), FadeIn(pa.ligne(0)), FadeIn(pa.ligne(1)), FadeIn(pa.signe),
                   Create(pa.barre), run_time=0.4)
         self.au_mot("643 mètres")
@@ -423,7 +424,7 @@ class CalculPoseSoustractionBase(PaysageCalculPose):
         self.play(FadeIn(lb, shift=UP * 0.1), FadeIn(pb.ligne(0)), FadeIn(pb.ligne(1)), FadeIn(pb.signe),
                   Create(pb.barre), run_time=0.4)
         self.au_mot("357 mètres")
-        g = self.gros("357 m", fs=48).next_to(lb, RIGHT, buff=0.3)
+        g = self.gros("357 m", fs=42).next_to(lb, RIGHT, buff=0.3)  # 48 : l'encadré touchait « 643 m. »
         self.play(FadeIn(g, scale=1.3), FadeIn(VGroup(pb.res(0, 7), pb.res(1, 5), pb.res(2, 3)), scale=1.3),
                   run_time=0.4)
         self.insister(g, 1.15, 0.25)

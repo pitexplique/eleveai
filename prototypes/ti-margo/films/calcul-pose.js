@@ -29,6 +29,15 @@ function voixDe(A){
   const marque=(clip,k)=>A[clip]+CL[clip][k][0];
   return {dit,mot,marque};
 }
+/* Un nombre long (« deux cent soixante-seize ») a une marque par mot dit, toutes au même texte (« 276 »,
+   « 276 », « 276 ») : voixDe n'en saute qu'une. Appelé en tête d'un film (épisodes 03 à 05), ceci fusionne
+   ces suites en UNE marque (la première). Seulement pour un nombre seul : « 20 boîtes », dit deux fois de
+   suite, reste géré par voixDe. Les épisodes 01 et 02 ne l'appellent pas. */
+function fusionnerNombres(){ const CL=(window.CUES||{})[VIDEO]||{};
+  for(const k in CL){ const l=CL[k], res=[];
+    for(const [t,w] of l){ const s=w.trim(); const der=res[res.length-1];
+      if(der&&/^\d+$/.test(s)&&der[1]===s) continue; res.push([t,/^\d+$/.test(s)?s:w]); }
+    CL[k]=res; } }
 /* Enchaîne les clips : durée lue sur le WAV ; attente supplémentaire après certains clips */
 function enchainer(depart,liste,DUR,apres={},ecart=.2){ let t=depart; return liste.map(c=>{ const r=[c,+t.toFixed(2)]; t+=DUR[c]+(apres[c]??ecart); return r; }); }
 const groupe=(de,a,top,fs,...phrases)=>({de,a,top,fs,phrases});

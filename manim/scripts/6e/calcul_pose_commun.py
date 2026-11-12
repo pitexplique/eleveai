@@ -92,11 +92,11 @@ def gauche(m, x, y):
 
 
 class _Aides:
-    def rep_bas(self, i, morceaux, fs=32, x=-6.2, y0=-1.6, pas=0.62):
+    def rep_bas(self, i, morceaux, fs=32, x=-6.2, y0=-1.6, pas=0.62, buff=0.14):
         """Dans une question-pause, la ligne i de l'explication, en bas à gauche, en grand
         (ligne_rep la rétrécit à côté de Ti-Margo). Morceaux : textes ou (texte, couleur)."""
         mx = [(m, VERT_OK) if isinstance(m, str) else m for m in morceaux]
-        lg = self.ligne(mx, fs, buff=0.14)
+        lg = self.ligne(mx, fs, buff=buff)  # buff 0,4 entre « 5, » et « 7 » : sinon on lit 5,7
         return gauche(lg, x, y0 - pas * i)
 
     def finale_gauche(self, figure, textes, fs=36, x_fig=-4.6, xl=-2.3):

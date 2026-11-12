@@ -47,12 +47,12 @@ FILMS.soustraction=function(outils){
       if(T>=tO35) ecrire(c,'35',680,Y0+H*.35,92*zoom(T,tO35,.4),CRAIE.ok,'left');
       if(T>=tO17) ecrire(c,'+ 17',800,Y0+H*.35,92*zoom(T,tO17,.4),CRAIE.blanc,'left');
       if(T>=tO52) ecrire(c,'= 52',680,Y0+H*1.35,92*zoom(T,tO52,.4),CRAIE.ok,'left');
-      if(T>=tOuf) coche(c,880,Y0+H*1.3,.7);
+      if(T>=tOuf) coche(c,915,Y0+H*1.3,.7); /* 880 : touchait « = 52 » */
       tab.maj(); return; }
     if(T>=ver){ /* la vérification : 45 + 17 = 62, mais il en avait 52 */
-      if(T>=tV45) ecrire(c,'45',W/2-255,150,104*zoom(T,tV45,.4),CRAIE.blanc);
-      if(T>=tV17) ecrire(c,'+ 17',W/2-70,150,104*zoom(T,tV17,.4),CRAIE.blanc);
-      if(T>=tV62) ecrire(c,'= 62',W/2+215,150,104*zoom(T,tV62,.4),T>=tV52?CRAIE.faux:CRAIE.ok);
+      if(T>=tV45) ecrire(c,'45',W/2-285,150,104*zoom(T,tV45,.4),CRAIE.blanc);
+      if(T>=tV17) ecrire(c,'+ 17',W/2-55,150,104*zoom(T,tV17,.4),CRAIE.blanc);
+      if(T>=tV62) ecrire(c,'= 62',W/2+225,150,104*zoom(T,tV62,.4),T>=tV52?CRAIE.faux:CRAIE.ok);
       if(T>=tV52){ ecrire(c,'Mais j’avais',W/2-90,340,80,CRAIE.blanc); ecrire(c,'52',W/2+230,340,104*zoom(T,tV52,.4),CRAIE.jaune); }
       if(T>=tProb) ecrire(c,'62 ≠ 52 ?!',W/2,540,110*zoom(T,tProb,.4),CRAIE.faux);
       tab.maj(); return; }
