@@ -38,7 +38,7 @@ B = [n * n for n in range(30)]
 assert all(A[n] - B[n] == 5 * n for n in range(30))          # la réponse B : 5n → +∞
 assert A[10] - B[10] == 50                                    # le commentaire : 50 milliers
 PEAU = "#a16207"
-KV = 0.02                                                     # hauteur d'un millier d'habitants
+KV = 0.017                                                    # hauteur d'un millier d'habitants
 
 
 def amina(s=1.0):
@@ -154,7 +154,8 @@ class SuiteLimiteOperationsShort(VerifMargo, OutilsLimite, ShortSuites):
         self.play(FadeIn(vil, shift=UP * 0.2), run_time=0.4)        # le bas n'est jamais vide
         self.ligne([("Tu paries que", WHITE, "Tu paries")], 1.95, fs=46)
         self.ligne([("∞ − ∞", RAISON, "infini moins")], 0.85, fs=100, larg=4.0)
-        self.ligne([("ça ne fait pas", WHITE, "ça ne fait"), ("0 ?", PIEGE, "pas 0")], -0.3, fs=48)
+        self.ligne([("ça ne fait pas", WHITE, "ça ne fait")], -0.2, fs=44)
+        self.ligne([("0 ?", PIEGE, "pas 0")], -0.95, fs=72)
         self.attendre_voix(marge=0.3)
 
         # ── 01 : EN HAUT Amina et les villes qui grandissent ; EN BAS les formules EN MÊME TEMPS ──
@@ -166,16 +167,16 @@ class SuiteLimiteOperationsShort(VerifMargo, OutilsLimite, ShortSuites):
         fa = self.construire([("n²", TERME, "n au carré"), ("+ 5n", TERME, "plus 5"), ("→ +∞", JUSTE, None)], 46, 1e9)
         fb = self.construire([("n²", VIOLET, "n au carré"), ("→ +∞", JUSTE, None)], 46, 1e9)
         kf = min(1.0, 3.8 / fa.width)          # les deux lignes à la MÊME taille
-        for g, y in ((fa, -1.2), (fb, -1.9)):
+        for g, y in ((fa, -0.85), (fb, -1.45)):
             g.scale(kf).move_to(P(0, y)).align_to(P(-1.88, 0), LEFT)
-        trous = VGroup(*[DashedVMobject(RoundedRectangle(width=VGroup(*g[:-1]).width + 0.3, height=0.66,
+        trous = VGroup(*[DashedVMobject(RoundedRectangle(width=VGroup(*g[:-1]).width + 0.3, height=0.48,
                                                          corner_radius=0.1, stroke_color=c, stroke_width=3),
                                         num_dashes=24).move_to(VGroup(*g[:-1])) for g, c in ((fa, TERME), (fb, VIOLET))])
         perso = amina(0.55).move_to(P(-1.45, 1.75))
         nom = self.t("Amina", 44, JAUNE_TITRE).move_to(P(0.6, 2.1))
         metier = self.t("géographe", 36, TERME).move_to(P(0.6, 1.55))
         self.au_mot("Amina")
-        self.play(y_t.animate.set_value(-0.35), Create(trous),
+        self.play(y_t.animate.set_value(-0.1), Create(trous),
                   FadeIn(perso, shift=UP * 0.1), FadeIn(nom, shift=UP * 0.1), run_time=0.4)
         self.au_mot("géographe")
         self.play(FadeIn(metier, shift=UP * 0.08), run_time=0.3)
@@ -183,7 +184,8 @@ class SuiteLimiteOperationsShort(VerifMargo, OutilsLimite, ShortSuites):
         self.play(n_t.animate.set_value(5), run_time=0.8)
         self.au_mot("la ville A")
         self.montrer(self.partie(fa, [0, 1]), avec=[FadeOut(trous[0])])
-        mil = self.t("en milliers d'habitants", 36, GREY_A).move_to(P(0, -2.55))
+        mil = VGroup(self.t("en milliers", 36, GREY_A), self.t("d'habitants", 36, GREY_A)).arrange(DOWN, buff=0.12)
+        mil.move_to(P(0, -2.2))
         self.au_mot("milliers")
         self.play(FadeIn(mil, shift=UP * 0.08), run_time=0.3)
         self.au_mot("la ville B")
@@ -195,11 +197,11 @@ class SuiteLimiteOperationsShort(VerifMargo, OutilsLimite, ShortSuites):
         self.au_mot("plus l'infini")
         self.play(FadeIn(fa[2], shift=RIGHT * 0.1), FadeIn(fb[1], shift=RIGHT * 0.1), n_t.animate.set_value(6),
                   run_time=0.5)
-        ec = self.ecart(n_t, y_t)
-        lab = self.t("l'écart ?", 32, RAISON).move_to(P(1.15, 0.8))
+        ec = self.ecart(n_t, y_t, x=-0.2)
+        lab = self.t("l'écart ?", 36, RAISON).move_to(P(1.06, 0.95))
         self.au_mot("l'écart")
         self.play(FadeIn(ec), FadeIn(lab, scale=1.2), run_time=0.35)
-        self.insister(lab, 1.1)
+        self.play(Indicate(lab, color=JAUNE_TITRE, scale_factor=1.0), run_time=0.5)
         self.attendre_voix(marge=0.3)
         vil.clear_updaters()
         ec.clear_updaters()
@@ -220,6 +222,9 @@ class SuiteLimiteOperationsShort(VerifMargo, OutilsLimite, ShortSuites):
             ea.clear_updaters()
             for g in (g1, g2, g3):
                 self.montrer(g, rt=0.22)
+            # le dessin s'en va AVANT les cadres des boutons : rien ne se superpose
+            self.play(FadeOut(self._attente_q, shift=DOWN * 0.15), run_time=0.25)
+            self._attente_q = None
             liste.clear()
         liste = [(g1, None), (g2, None), (g3, None)]
         q = self.poser_question("03-question", liste,
@@ -227,17 +232,17 @@ class SuiteLimiteOperationsShort(VerifMargo, OutilsLimite, ShortSuites):
                                  self.choix([("5", "5")], 40)], 1, dessin=dessin)
         self.dire("03b-reponse")
         ok = self.q_reponse(q, 1)
-        n_t, y_t, K2 = ValueTracker(6.0), ValueTracker(0.45), 0.015
+        n_t, y_t, K2 = ValueTracker(6.0), ValueTracker(1.1), 0.010
         vil = self.villes(n_t, y_t, k=K2)
         ec = self.ecart(n_t, y_t, k=K2)
         self.play(FadeOut(q.tete), FadeOut(q.question), FadeOut(q.cartes[0]), FadeOut(q.cartes[2]),
                   VGroup(q.cartes[1], ok).animate.move_to(P(0, 2.95)), run_time=0.3)
         self.play(FadeIn(vil), FadeIn(ec), run_time=0.3)
-        self.ligne([("L'écart vaut", WHITE, "L'écart vaut"), ("5n :", RAISON, "5 n")], -0.3, fs=46)
-        self.ligne([("il grandit sans fin.", JUSTE, "il grandit")], -1.0, fs=44,
-                   avec=[n_t.animate.set_value(8.5)], rt=0.8)
-        self.ligne([("« ∞ − ∞ »,", PIEGE, "Infini moins")], -1.75, fs=52)
-        fin = self.ligne([("ce n'est pas", WHITE, "ce n'est"), ("0.", PIEGE, "pas 0")], -2.45, fs=46)
+        self.ligne([("L'écart =", WHITE, "L'écart vaut"), ("5n :", RAISON, "5 n")], 0.3, fs=40)
+        self.ligne([("il grandit", JUSTE, "il grandit")], -0.35, fs=40, avec=[n_t.animate.set_value(8.5)], rt=0.8)
+        self.ligne([("sans fin.", JUSTE, "sans fin")], -0.95, fs=40)
+        self.ligne([("« ∞ − ∞ »,", PIEGE, "Infini moins")], -1.65, fs=48)
+        fin = self.ligne([("ce n'est pas", WHITE, "ce n'est"), ("0.", PIEGE, "pas 0")], -2.35, fs=40)
         self.insister(fin, 1.08)
         self.attendre_voix(marge=0.4)
         vil.clear_updaters()
@@ -247,18 +252,18 @@ class SuiteLimiteOperationsShort(VerifMargo, OutilsLimite, ShortSuites):
         self.nouvel_ecran("04-commentaire")
         self.au_mot("Et toi")
         et = self.t("Et toi ?", 54, JAUNE_TITRE).move_to(P(0, self.Y_TITRE - 0.02))
-        n_t, y_t = ValueTracker(6.0), ValueTracker(2.25)
-        vil = self.villes(n_t, y_t, k=0.0075, larg=1.0, xa=-0.75, xb=0.75, lettres=False)
         # un grand « ? » attend en bas jusqu'à l'appel (la moitié basse jamais vide)
-        qm = self.t("?", 150, RAISON, audit=False).move_to(P(0, -1.75)).set_opacity(0.55)
-        self.play(FadeIn(et, shift=DOWN * 0.1), FadeIn(vil), FadeIn(qm, scale=0.8), run_time=0.35)
-        vil.clear_updaters()
-        self.ligne([("au bout de", WHITE, "au bout"), ("10 ans,", JAUNE_TITRE, "10 ans")], 1.45, fs=44)
-        self.ligne([("quel est l'écart", RAISON, "quel est")], 0.75, fs=46)
-        self.ligne([("entre les deux villes,", WHITE, "entre les deux")], 0.1, fs=40)
-        self.ligne([("en milliers d'habitants ?", GREY_A, "en milliers")], -0.55, fs=36)
+        qm = self.t("?", 130, RAISON, audit=False).move_to(P(0, -2.05)).set_opacity(0.55)
+        self.play(FadeIn(et, shift=DOWN * 0.1), FadeIn(qm, scale=0.8), run_time=0.35)
+        self.ligne([("au bout de", WHITE, "au bout")], 2.7, fs=40)
+        self.ligne([("10 ans,", JAUNE_TITRE, "10 ans")], 2.08, fs=40)
+        self.ligne([("quel est l'écart", RAISON, "quel est")], 1.46, fs=40)
+        self.ligne([("entre les", WHITE, "entre les")], 0.84, fs=38)
+        self.ligne([("deux villes,", WHITE, "deux villes")], 0.22, fs=38)
+        self.ligne([("en milliers", GREY_A, "en milliers")], -0.4, fs=38)
+        self.ligne([("d'habitants ?", GREY_A, "d'habitants")], -1.02, fs=38)
         self.au_mot("Réponds en commentaire")
-        appel = self.paragraphe([("Réponds en", JUSTE), ("commentaire !", JUSTE)], 44, buff=0.08, y=-1.75,
+        appel = self.paragraphe([("Réponds en", JUSTE), ("commentaire !", JUSTE)], 44, buff=0.08, y=-2.0,
                                 larg=self.largeur_texte / 1.1)
         self.play(FadeOut(qm, scale=0.8), FadeIn(appel, scale=0.7), run_time=0.4)
         self.insister(appel, 1.08)

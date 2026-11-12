@@ -427,18 +427,18 @@ class SuiteLimiteOperationsTle(VerifMargo, OutilsLimite, PaysageSuites):
 
     # ── 06 : le bénéfice de Sarah : n² + 3n − n² = 3n ──────────────────────
 
-    def barres_benefice(self, couts, X0=3.55, YB=-1.75, K=3.4 / 40, n_max=5):
+    def barres_benefice(self, couts, X0=3.8, YB=-1.75, K=3.4 / 40, n_max=5):
         """Pour chaque mois n : la barre des recettes n² + 3n ; dedans, les coûts (violet)
         et, au-dessus, le bénéfice (orange). Renvoie (recettes, couts, benefices)."""
         rec, cou, ben = VGroup(), VGroup(), VGroup()
         for n in range(1, n_max + 1):
-            x = X0 + 0.52 * (n - 1)
+            x = X0 + 0.5 * (n - 1)
             hr, hc = R[n] * K, couts[n] * K
-            rec.add(Rectangle(width=0.42, height=hr, stroke_color=TERME, stroke_width=3, fill_color=TERME,
+            rec.add(Rectangle(width=0.4, height=hr, stroke_color=TERME, stroke_width=3, fill_color=TERME,
                               fill_opacity=0.35).move_to(P(x, YB + hr / 2)))
-            cou.add(Rectangle(width=0.42, height=hc, stroke_width=0, fill_color=VIOLET,
+            cou.add(Rectangle(width=0.4, height=hc, stroke_width=0, fill_color=VIOLET,
                               fill_opacity=1).move_to(P(x, YB + hc / 2)))
-            ben.add(Rectangle(width=0.42, height=hr - hc, stroke_width=0, fill_color=RAISON,
+            ben.add(Rectangle(width=0.4, height=hr - hc, stroke_width=0, fill_color=RAISON,
                               fill_opacity=1).move_to(P(x, YB + hc + (hr - hc) / 2)))
         return rec, cou, ben
 
@@ -446,7 +446,7 @@ class SuiteLimiteOperationsTle(VerifMargo, OutilsLimite, PaysageSuites):
         self.nouvel_ecran("06-benefice")
         self.titre("Retour au bénéfice de Sarah", JAUNE_TITRE, 46, extrait="Retour")
         x0 = -6.2
-        base = Line(P(3.2, -1.75), P(6.0, -1.75), stroke_color=GREY_B, stroke_width=3)
+        base = Line(P(3.45, -1.75), P(6.0, -1.75), stroke_color=GREY_B, stroke_width=3)
         rec, cou, ben = self.barres_benefice(C1)
         self.ligne([("Recettes :", TERME, "Recettes"), ("uₙ =", TERME, "u indice n"), ("n²", WHITE, "n au carré"),
                     ("+ 3n", WHITE, "plus 3")], 2.2, x=x0, fs=42, avec_k={0: [Create(base)],
@@ -459,10 +459,10 @@ class SuiteLimiteOperationsTle(VerifMargo, OutilsLimite, PaysageSuites):
         self.ligne([("On calcule :", GREY_A, "On calcule"), ("uₙ − vₙ", RAISON, "u indice n moins"),
                     ("= 3n", RAISON, "égale 3"), ("→ +∞", JUSTE, "qui tend")], -0.3, x=x0, fs=40,
                    avec_k={2: [LaggedStart(*[FadeIn(b) for b in ben], lag_ratio=0.12)]}, rt=0.5)
-        fl = Arrow(P(6.25, -0.2), P(6.25, 1.7), buff=0, color=JUSTE, stroke_width=6, tip_length=0.22)
+        fl = Arrow(P(6.3, -0.2), P(6.3, 1.7), buff=0, color=JUSTE, stroke_width=6, tip_length=0.22)
         self.play(GrowArrow(fl), Indicate(ben, color=RAISON, scale_factor=1.06), run_time=0.45)
         self.ligne([("Le bénéfice", WHITE, "Le bénéfice"), ("ne tend pas vers 0 :", PIEGE, "vers 0")], -1.2, x=x0,
-                   fs=40)
+                   fs=38)
         fin = self.ligne([("il grandit sans fin.", JUSTE, "il grandit")], -2.1, x=x0 + 0.2, fs=44)
         self.play(Create(self.encadre(fin, JUSTE, 0.16)), run_time=0.3)
         self.attendre_voix(marge=0.6)
@@ -501,8 +501,8 @@ class SuiteLimiteOperationsTle(VerifMargo, OutilsLimite, PaysageSuites):
                               ("(−1", WHITE, "moins 1"), ("+ 3/n)", WHITE, "3 sur n")], 44)
         l2.move_to(P(0, -0.35)).align_to(P(x0 + 1.2, 0), LEFT)
         self.montrer(l2)
-        a1 = self.t("→ +∞", 32, GREY_A, audit=False).next_to(l2[1], DOWN, buff=0.18)
-        a2 = self.t("→ −1", 32, GREY_A, audit=False).next_to(VGroup(l2[3], l2[4]), DOWN, buff=0.18)
+        a1 = self.t("→ +∞", 36, GREY_A, audit=False).next_to(l2[1], DOWN, buff=0.18)
+        a2 = self.t("→ −1", 36, GREY_A, audit=False).next_to(VGroup(l2[3], l2[4]), DOWN, buff=0.18)
         res = self.construire([("→ −∞", PIEGE, "moins l'infini")], 48).next_to(l2, RIGHT, buff=0.4)
         self.montrer(res, avec=[FadeIn(a1, shift=UP * 0.1), FadeIn(a2, shift=UP * 0.1),
                                 Indicate(bens[3:], color=PIEGE, scale_factor=1.1)], rt=0.45)
@@ -528,9 +528,9 @@ class SuiteLimiteOperationsTle(VerifMargo, OutilsLimite, PaysageSuites):
         self.play(Create(bar), FadeIn(faux, scale=1.2), run_time=0.4)
         self.ligne([("Selon les suites, on peut trouver :", WHITE, "Selon")], 0.95, fs=38)
         issues = []
-        for x, (txt, coul, ex) in zip((-4.1, -0.3, 3.5), (("+∞", JUSTE, "plus l'infini"), ("−∞", JUSTE, "moins l'infini"),
+        for x, (txt, coul, ex) in zip((-4.3, -0.2, 3.9), (("+∞", JUSTE, "plus l'infini"), ("−∞", JUSTE, "moins l'infini"),
                                                           ("un nombre", JUSTE, "un nombre"))):
-            c = self.carte(3.5, 1.0, P(x, -0.3), JUSTE)
+            c = self.carte(3.8, 1.0, P(x, -0.3), JUSTE)
             t = self.construire([(txt, coul, ex)], 40).move_to(c)
             self.suivre(ex)
             self.play(FadeIn(c, scale=0.9), FadeIn(t, scale=1.2), run_time=0.3)
@@ -598,7 +598,7 @@ class SuiteLimiteOperationsTle(VerifMargo, OutilsLimite, PaysageSuites):
         self.add(cible)
         self.play(Create(self.encadre(fin[2], JUSTE, 0.14)), run_time=0.3)
         gt = gateau(0.6, 3).move_to(P(4.2, -1.35))
-        self.ligne([("Pour", WHITE, "Pour v"), ("v,", VIOLET, None), ("on divise", WHITE, "on divise"),
+        self.ligne([("Pour", WHITE, "Pour v"), ("vₙ,", VIOLET, None), ("on divise", WHITE, "on divise"),
                     ("5", WHITE, "5 par")], -0.55, x=x0, fs=40, avec_k={3: [FadeIn(gt, scale=0.8)]})
         self.ligne([("par une quantité → +∞ :", WHITE, "une quantité")], -1.3, x=x0, fs=40,
                    avec=[Transform(gt, gateau(0.6, 12).move_to(P(4.2, -1.35)))], rt=0.5)
@@ -629,7 +629,7 @@ class SuiteLimiteOperationsTle(VerifMargo, OutilsLimite, PaysageSuites):
         self.play(Write(tit), run_time=0.7)
         blocs = []
         for pt in points:
-            lignes = VGroup(*[self.construire(l, 44, 1e9) for l in pt]).arrange(DOWN, aligned_edge=LEFT, buff=0.18)
+            lignes = VGroup(*[self.construire(l, 50 if l[0][0].startswith("∞") else 44, 1e9) for l in pt]).arrange(DOWN, aligned_edge=LEFT, buff=0.18)
             for k, l in enumerate(lignes):      # même pas entre les lignes de base
                 if k:
                     l.shift(UP * (base(lignes[0]) - 0.66 * k - base(l)))
