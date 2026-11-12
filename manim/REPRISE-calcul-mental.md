@@ -45,3 +45,13 @@ Ceintures : paysages vertes ; shorts jaunes (un calcul à faire).
 1. Frédéric regarde les 12 vidéos dans l'aperçu (retouches éventuelles).
 2. Publication (R2, manifeste, `lib/videos`, YouTube) : PAS dans cette session, ⛔ ne pas y toucher ici.
 3. Rien n'est poussé.
+
+## Reprise samedi 14/11
+Aucun rendu en cours, verrou libre, tout est committé (dernier commit vidéo : `e5588acb`). Rien à finir : seulement d'éventuelles retouches après visionnage, puis la publication.
+- Retoucher une paysage NN (ex. 04 division) : corriger `manim/scripts/6e/mental_<slug>.py`, puis dry run
+  `PYTHONUTF8=1 PYTHONIOENCODING=utf-8 AUDIT=1 BORDS=1 python -m manim render --dry_run --progress_bar none manim/scripts/6e/mental_<slug>.py Mental<Classe>6e --media_dir manim/scripts/6e/media-men-NN-dry` (seule ligne admise : « AUDIT-ABSENT NN-abonne « 974 » »), puis HD (verrou, ≤ 1 autre -qh, RAM ≥ 1,5 Go)
+  `python -m manim render -qh --disable_caching --progress_bar none manim/scripts/6e/mental_<slug>.py Mental<Classe>6e -o eleveai-maths-6e-mental-<slug> --media_dir manim/scripts/6e/media-men-NN`
+  et copier `media-men-NN/videos/mental_<slug>/1080p60/eleveai-maths-6e-mental-<slug>.mp4` dans `manim/sorties/6e/maths/calcul-mental/NN-<slug>/`.
+- Retoucher un short : corriger `prototypes/ti-margo/films/mental-<slug>.js`, puis `node scripts/ti-margo-short.mjs mental <slug> controle` (planche), `… film`, `… miniature`, supprimer `_muet.mp4`.
+- Vérifier : `python scripts/verifier-bords-video.py <mp4>` (paysage 0 ; short ~70 = décor plein cadre, normal).
+- Mettre à jour les durées de `manim/sorties/apercu-calcul-mental.html` (⛔ pas `apercu.html`, jamais d'autoplay).
