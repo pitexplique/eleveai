@@ -337,22 +337,22 @@ class SuiteGeoInterpreter1re(AuditMilliers, OutilsEp12, OutilsGraphique, Paysage
         xg = -2.95
         self.titre("Quand les trajets auront-ils doublé ?", JAUNE_TITRE, 42, extrait="Quand", y=3.2)
         y0, k = -2.75, 3.3 / 100000
-        x3, x4 = 2.4, 4.4
+        x3, x4 = 2.25, 4.45
         ys = y0 + k * 100000
-        sol = Line(P(1.3, y0), P(5.4, y0), stroke_color=GREY_B, stroke_width=3)
-        seuil = DashedLine(P(1.0, ys), P(5.5, ys), color=JUSTE, stroke_width=4, dash_length=0.14)
+        sol = Line(P(1.0, y0), P(5.55, y0), stroke_color=GREY_B, stroke_width=3)
+        seuil = DashedLine(P(1.0, ys), P(5.6, ys), color=JUSTE, stroke_width=4, dash_length=0.14)
         ls = self.t("100 000", 30, JUSTE).next_to(seuil, UP, buff=0.12).align_to(seuil, LEFT)
         self.suivre("100 000")
         self.play(Create(sol), Create(seuil), FadeIn(ls, scale=1.2), run_time=0.45)
         self.au_mot("On calcule")
         l1 = self.t("On calcule les termes un à un :", 36, larg=7.0).move_to(P(xg, 2.2))
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.3)
-        b3 = barre(x3, y0, k * VELO[3], 1.7, TERME)
-        b4 = barre(x4, y0, k * VELO[4], 1.7, TERME)
+        b3 = barre(x3, y0, k * VELO[3], 1.95, TERME)
+        b4 = barre(x4, y0, k * VELO[4], 1.95, TERME)
         n3 = self.t("u₃", 32, TERME).next_to(b3, DOWN, buff=0.1)
         n4 = self.t("u₄", 32, TERME).next_to(b4, DOWN, buff=0.1)
-        v3 = self.t("86 400", 30, WHITE).move_to(b3)
-        v4 = self.t("103 680", 30, WHITE).move_to(b4)
+        v3 = self.t("86 400", 26, WHITE).move_to(b3)
+        v4 = self.t("103 680", 26, WHITE).move_to(b4)
         self.calc([("u₃ =", TERME, "u indice 3"), ("86 400", WHITE, "86 400"), (": pas encore", PIEGE, "pas encore")],
                     1.35, centre=xg, fs=38, larg=7.0,
                     avec_morceau={1: [GrowFromEdge(b3, DOWN), FadeIn(n3), FadeIn(v3)]})
