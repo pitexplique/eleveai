@@ -47,6 +47,16 @@ class FactoSimpleShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         cartes.set_x(0)
         pause.next_to(cartes, DOWN, buff=0.14).set_x(0)
         ph.arrange(DOWN, buff=0.08).next_to(cartes, DOWN, buff=0.1).set_x(0)
+        # 12/11 relecture : la phrase de réponse à la taille des lignes de la question (elle était minuscule),
+        # au plus 3,8 de large, jamais sous y -2,6 (Ti-Margo)
+        if len(ph.submobjects) and len(q.submobjects):
+            k = q[0].height / ph[0].height
+            k = min(k, 3.8 / ph.width)
+            haut = ph.get_top()[1]
+            if haut - k * ph.height < -2.6:
+                k = (haut + 2.6) / ph.height
+            if k > 1.0:
+                ph.scale(k, about_point=ph.get_top()).set_x(0)
         return tete, q, cartes, pause, rebours, ph
     fin_05_11 = DistribSimpleShort4e.fin_05_11  # la fin du 05/11, telle quelle
 

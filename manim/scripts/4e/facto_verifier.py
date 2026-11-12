@@ -23,6 +23,7 @@ sys.path.insert(0, str(ICI))
 
 from relatif_commun import *  # noqa: E402,F403
 from equation_commun import PAROLE  # noqa: E402
+from facto_maximum import FactoMaximum4e  # noqa: E402
 
 PAROLE["²"] = "carré"
 
@@ -110,12 +111,23 @@ class FactoVerifier4e(PaysageRel):
         return [self.fleche_arc(e.atomes[i_k], c if isinstance(c, Mobject) else e.atomes[c], couleur, angle=a)
                 for c, a in zip(cibles, angles)]
 
+    finale_gauche = FactoMaximum4e.finale_gauche
+
     def _disposer_q(self, question, choix, phrase):
         """Les cartes remontent sous la question : la phrase de réponse garde sa taille."""
         tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
         cartes.next_to(q, DOWN, buff=0.3).align_to(P(self.XL, 0), LEFT)
         pause.next_to(cartes, DOWN, buff=0.3).align_to(P(self.XL, 0), LEFT)
-        ph.next_to(cartes, DOWN, buff=0.22).align_to(P(self.XL, 0), LEFT)
+        # 12/11 relecture : comme au 04, la phrase de réponse sous la figure, à gauche, à 36 pt (elle était
+        # minuscule sous les cartes) ; la figure est remontée en haut à gauche
+        ph = VGroup(*[T(x, 36, VERT_OK, audit=False) for x in phrase]).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+        if ph.width > 6.7:
+            ph.scale_to_fit_width(6.7)
+        haut = getattr(self, "ph_haut", -0.6)
+        ph.align_to(P(-6.45, 0), LEFT).align_to(P(0, haut), UP)
+        if ph.get_bottom()[1] < -3.45:
+            ph.scale((haut + 3.45) / ph.height, about_point=P(-6.45, haut))
+        self.ph_q = ph
         return tete, q, cartes, pause, rebours, ph
 
     def rangee(self, morceaux, x, y, buff=0.32):
@@ -197,7 +209,7 @@ class FactoVerifier4e(PaysageRel):
         lc = self.lg("il écrit", 0, 0, 36, maxw=2)
         f2 = D("6(x + 30)", 56)
         f2.atomes[0].set_color(FACTEUR)
-        self.rangee([lc, f2], 3.4, -0.55)
+        self.rangee([lc, f2], 2.8, -0.55)  # loin du bord droit
         self.dit(lc, "il écrit")
         self.dire_eq(f2, "6 fois, entre parenthèses, x plus 30.", echelle=1.2)
         lp = loupe(0.5).move_to(f2.get_left() + P(-0.1, -0.05))
@@ -266,18 +278,18 @@ class FactoVerifier4e(PaysageRel):
         b = D("6(x + 5).", 62)
         b.atomes[0].set_color(FACTEUR)
         b.atomes[4].set_color(VERT_OK)
-        self.rangee([b1, b], -1.1, 0.2, buff=0.4)
+        self.rangee([b1, b], -1.1, -0.1, buff=0.4)
         self.dit(b1, "La bonne formule :")
         self.dire_eq(b, "6 fois, entre parenthèses, x plus 5.", echelle=1.2)
         f1, f2 = self.fleches(b, 0, (2, 4))
         v1 = self.lg("On vérifie :", 0, 0, 40, maxw=3.2)
         v = D("6x + 30.", 60)
-        self.rangee([v1, v], -1.1, -1.0, buff=0.4)
+        self.rangee([v1, v], -1.1, -1.25, buff=0.4)
         self.dit(v1, "On vérifie :", avec=[Create(f1), Create(f2)])
         self.dire_eq(v, "6 x plus 30.", echelle=1.2)
-        r1 = self.lg("On retrouve l'expression de départ :", 0, 0, 40, maxw=8.6)
+        r1 = self.lg("On retrouve l'expression de départ :", 0, 0, 40, maxw=7.8)
         r2 = self.lg("c'est juste.", 0, 0, 48, VERT_OK, maxw=3.2)
-        self.rangee([r1, r2], -0.6, -2.2, buff=0.35)
+        self.rangee([r1, r2], -0.75, -2.4, buff=0.35)  # loin de Ti-Margo
         self.dit(r1, "On retrouve l'expression de départ :", avec=[Circumscribe(v, color=VERT_OK, buff=0.1)])
         self.dit(r2, "c'est juste.")
         cr = self.cadre_ok(VGroup(b, f1, f2), 0.14)
@@ -290,9 +302,10 @@ class FactoVerifier4e(PaysageRel):
         self.clear()
         self.add_mascotte()
         self.XL = 0.6
-        e = D("8(x + 5)", 80, audit=False).move_to(P(-3.6, 1.0))
+        e = D("8(x + 5)", 80, audit=False).move_to(P(-3.6, 2.1))
         e.atomes[0].set_color(FACTEUR)
-        r = D("= 8x + 40", 64, VERT_OK, audit=False).next_to(e, DOWN, buff=0.75)
+        r = D("= 8x + 40", 64, VERT_OK, audit=False).next_to(e, DOWN, buff=0.5)
+        self.ph_haut = r.get_bottom()[1] - 0.45
         r.align_to(e, LEFT).shift(LEFT * 0.4)
 
         def avant(sc):
@@ -303,15 +316,16 @@ class FactoVerifier4e(PaysageRel):
         def apres(sc):
             sc.ph_eq(0, "Réponse A : oui.", "Réponse A : oui.", premier=True)
             f = VGroup(*sc.fleches(e, 0, (2, 4)))
-            sc.ph_eq(1, "8 × x = 8x, et 8 × 5 = 40.", "8 fois x : 8 x, et 8 fois 5 : 40.", lettres="x", avec=[Create(f)])
-            sc.ph_eq(2, "On retrouve 8x + 40.", "On retrouve 8 x plus 40.", lettres="x", avec=[FadeIn(r, shift=DOWN * 0.2)])
+            sc.ph_eq(1, "8 × x = 8x,", "8 fois x : 8 x,", lettres="x", avec=[Create(f)])
+            sc.ph_eq(2, "et 8 × 5 = 40.", "et 8 fois 5 : 40.")
+            sc.ph_eq(3, "On retrouve 8x + 40.", "On retrouve 8 x plus 40.", lettres="x", avec=[FadeIn(r, shift=DOWN * 0.2)])
             sc.play(Circumscribe(r, color=VERT_OK, buff=0.12), run_time=0.5)
             sc.rep_fini()
 
         self.question_pause("03q-question", "03r-reponse", ["8x + 40 = 8(x + 5).", "Est-ce juste ?"],
                             [E("oui", 34, lettres=""), E("non, c'est 8(x + 40)", 34, lettres="x"),
                              E("non, c'est 8x(1 + 5)", 34, lettres="x")], 0,
-                            ["Réponse A : oui.", "8 × x = 8x, et 8 × 5 = 40.", "On retrouve 8x + 40."],
+                            ["Réponse A : oui.", "8 × x = 8x,", "et 8 × 5 = 40.", "On retrouve 8x + 40."],
                             avant_q=avant, autres_r=apres)
         self.XL = type(self).XL
 
@@ -344,7 +358,7 @@ class FactoVerifier4e(PaysageRel):
         self.rangee([b1, b], -0.8, -2.15, buff=0.4)
         self.dit(b1, "La bonne factorisation :")
         self.dire_eq(b, "4 fois, entre parenthèses, x moins 3.", echelle=1.2)
-        self.play(Create(self.cadre_ok(b, 0.14)), run_time=0.2)
+        self.play(Create(self.cadre_ok(b, 0.2)), run_time=0.2)
         self.insister(b.atomes[3], 1.5, 0.18)
         self.attendre_voix(marge=0.8)
 
@@ -387,7 +401,7 @@ class FactoVerifier4e(PaysageRel):
         self.rangee([b1, r], -0.8, -2.7, buff=0.4)
         self.dit(b1, "La bonne factorisation :")
         self.dire_eq(r, "x fois, entre parenthèses, x plus 9.", echelle=1.2)
-        self.play(Create(self.cadre_ok(r, 0.12)), run_time=0.2)
+        self.play(Create(self.cadre_ok(r, 0.2)), run_time=0.2)
         self.insister(r.atomes[4], 1.5, 0.18)
         self.attendre_voix(marge=0.8)
 
@@ -396,12 +410,14 @@ class FactoVerifier4e(PaysageRel):
         self.clear()
         self.add_mascotte()
         self.XL = 0.6
-        e = D("9(x + 3)", 72, audit=False).move_to(P(-3.6, 1.65))
+        e = D("9(x + 3)", 72, audit=False).move_to(P(-3.6, 2.15))
         e.atomes[0].set_color(FACTEUR)
         r1 = D("= 9x + 27", 58, audit=False)
         r1.atomes[3].set_color(PIEGE)
-        r1.next_to(e, DOWN, buff=0.5).align_to(e, LEFT).shift(LEFT * 0.35)
-        r2 = D("9(x − 3)", 64, VERT_OK, audit=False).move_to(P(-3.6, -1.25))
+        r1.next_to(e, DOWN, buff=0.4).align_to(e, LEFT).shift(LEFT * 0.35)
+        r2 = D("9(x − 3)", 64, VERT_OK, audit=False)
+        r2.next_to(r1, DOWN, buff=0.45).set_x(e.get_center()[0])
+        self.ph_haut = r2.get_bottom()[1] - 0.5
         r2.atomes[0].set_color(FACTEUR)
         r2.atomes[2].set_color(INCONNUE)
 
@@ -418,7 +434,7 @@ class FactoVerifier4e(PaysageRel):
                      avec=[Create(f), FadeIn(r1, shift=DOWN * 0.2)])
             sc.ph_eq(2, "Le moins a disparu :", "Le moins a disparu :", avec=[Circumscribe(r1.atomes[3], color=PIEGE, buff=0.08)])
             sc.ph_eq(3, "il fallait 9(x − 3).", "il fallait 9 fois, entre parenthèses, x moins 3.", lettres="x")
-            sc.play(FadeIn(r2, shift=UP * 0.2), Create(sc.cadre_ok(r2, 0.14)), run_time=0.3)
+            sc.play(FadeIn(r2, shift=UP * 0.2), Create(sc.cadre_ok(r2, 0.2)), run_time=0.3)
             sc.rep_fini()
 
         self.question_pause("05q-question", "05r-reponse", ["Léo factorise 9x − 27 en 9(x + 3).", "A-t-il raison ?"],
@@ -483,24 +499,23 @@ class FactoVerifier4e(PaysageRel):
         self.rangee([b1, r], -0.8, -2.65, buff=0.4)
         self.dit(b1, "La bonne factorisation :")
         self.dire_eq(r, "5 fois, entre parenthèses, x plus 9.", echelle=1.2)
-        self.play(Create(self.cadre_ok(r, 0.12)), run_time=0.2)
+        self.play(Create(self.cadre_ok(r, 0.2)), run_time=0.2)
         self.insister(r, 1.1, 0.2)
         self.attendre_voix(marge=1.2)
 
     # ── 07 : ce que tu as appris ────────────────────────────────────────────
     def ecran_finale(self):
         self.ecran("07-finale", 0.5)
-        e = D("6(x + 5)", 56, audit=False)
+        e = D("6(x + 5)", 72, audit=False)
         e.atomes[0].set_color(FACTEUR)
         f = VGroup(*self.fleches(e, 0, (2, 4)))
-        r = D("= 6x + 30", 46, VERT_OK, audit=False).next_to(e, DOWN, buff=0.35)
-        lp = loupe(0.42).next_to(r, DOWN, buff=0.4)
+        r = D("= 6x + 30", 60, VERT_OK, audit=False).next_to(e, DOWN, buff=0.5)
+        lp = loupe(0.6).next_to(r, DOWN, buff=0.55)
         fig = VGroup(f, e, r, lp)
-        lignes = self.finale_colonne([["Pour vérifier une factorisation,", "on développe."],
-                                      ["On doit retrouver exactement", "l'expression de départ."],
-                                      ["Regarde bien les nombres de", "la parenthèse, et les signes."]],
-                                     fs=38, figure=fig)
-        self.play(FadeIn(fig), run_time=0.3)
+        # 12/11 relecture : la colonne du module réduisait les points de moitié ; celle du 04, à 42 pt
+        lignes = self.finale_gauche([["Pour vérifier", "une factorisation,", "on développe."],
+                                     ["On doit retrouver", "exactement l'expression", "de départ."],
+                                     ["Regarde bien les nombres", "de la parenthèse,", "et les signes."]], fig)
         for lg in lignes:
             self.montrer_ligne(lg)
         self.attendre_voix(marge=1.2)

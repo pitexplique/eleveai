@@ -482,7 +482,7 @@ class FactoSimple4e(PaysageRel):
         fl = Arrow(s.get_bottom(), p.get_top(), buff=0.12, color=FACTEUR, stroke_width=6,
                    max_tip_length_to_length_ratio=0.22)
         tf = T("factoriser", 32, FACTEUR, audit=False).next_to(fl, RIGHT, buff=0.18)
-        ecr = ecran_code(4.0, 1.25)  # le code ne touche plus le bord de la fenêtre.next_to(p, DOWN, buff=0.7)
+        ecr = ecran_code(4.0, 1.25).next_to(p, DOWN, buff=0.7)  # le code ne touche plus le bord de la fenêtre
         code = D("9 × (37 + 63)", 34, audit=False).move_to(ecr[0]).shift(DOWN * 0.15)
         code.atomes[0].set_color(FACTEUR)
         fig = VGroup(s, fl, tf, p, ecr, code)

@@ -53,6 +53,16 @@ class FactoVerifierShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         for c in cartes:  # le cadre reprend 3,7 de large : le choix juste garde sa taille près de la coche
             c[0].stretch_to_fit_width(3.7)
             c[1].align_to(c[0].get_left() + RIGHT * 0.2, LEFT)
+        # 12/11 relecture : la phrase de réponse à la taille des lignes de la question (elle était minuscule),
+        # au plus 3,8 de large, jamais sous y -2,6 (Ti-Margo)
+        if len(ph.submobjects) and len(q.submobjects):
+            k = q[0].height / ph[0].height
+            k = min(k, 3.8 / ph.width)
+            haut = ph.get_top()[1]
+            if haut - k * ph.height < -2.6:
+                k = (haut + 2.6) / ph.height
+            if k > 1.0:
+                ph.scale(k, about_point=ph.get_top()).set_x(0)
         return tete, q, cartes, pause, rebours, ph
 
     def appel_commentaire(self, y=-2.2):
@@ -126,26 +136,26 @@ class FactoVerifierShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         self.dit(s2, "on développe.")
         self.insister(s2, 1.1, 0.15)
         f1, f2 = fleche(e.atomes[0], e.atomes[2], -1.6), fleche(e.atomes[0], e.atomes[4], -1.2)
-        a = self.q("4 × x = 4x", -0.86, 42)
+        a = self.q("4 × x = 4x", -0.86, 38)
         a.atomes[0].set_color(FACTEUR)
         self.dire_eq(a, "4 fois x : 4 x.", avec=[Create(f1)])
-        b = self.q("4 × 20 = 80", -1.36, 42)
+        b = self.q("4 × 20 = 80", -1.36, 38)
         b.atomes[0].set_color(FACTEUR)
         self.dire_eq(b, "4 fois 20 : 80.", avec=[Create(f2)])
-        c = self.q("On trouve 4x + 80.", -1.87, 40, largeur=3.9)
+        c = self.q("On trouve 4x + 80.", -1.87, 46, largeur=3.9)
         self.dire_eq(c, "On trouve 4 x plus 80.", echelle=1.0)
         self.play(c.atomes[-2].animate.set_color(PIEGE), b.atomes[-1].animate.set_color(PIEGE), run_time=0.2)
         fx = self.l("C'est faux !", -2.4, 42, PIEGE)
         ba = self.barrer(e, sw=7)
         self.dit(fx, "C'est faux !", avec=[Create(ba)])
         self.play(FadeOut(VGroup(a, b, c, fx)), run_time=0.3)
-        r1 = self.l("La bonne réponse :", -1.0, 40, CIEL)
+        r1 = self.l("La bonne réponse :", -1.0, 46, CIEL)
         self.dit(r1, "La bonne réponse :")
         r = self.q("4(x + 5)", -1.9, 70)
         r.atomes[0].set_color(FACTEUR)
         r.atomes[4].set_color(VERT_OK)
         self.dire_eq(r, "4 fois, entre parenthèses, x plus 5.")
-        self.play(Create(self.cadre_ok(r, 0.14)), run_time=0.2)
+        self.play(Create(self.cadre_ok(r, 0.2)), run_time=0.2)
         self.insister(r, 1.1, 0.15)
         self.attendre_voix(marge=1.2)
         self.vider(garder)
