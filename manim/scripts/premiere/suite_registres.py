@@ -347,7 +347,7 @@ class SuiteRegistres1reSpe(AuditMilliers, OutilsEp12, OutilsGraphique, PaysageSu
         a7 = self.t("2033", 34, JUSTE).next_to(ticks[7], UP, buff=0.6)
         c = self.calc([("u₇", TERME, None), ("↔", WHITE, None), ("2026 + 7 = 2033", JUSTE, None)], -1.6, centre=0,
                       fs=48, avec=[FadeIn(a7, scale=1.3), Indicate(nms[7], color=JUSTE, scale_factor=1.3)])
-        self.play(Create(self.encadre(c, JUSTE, 0.15)), run_time=0.3)
+        self.play(Create(self.encadre(c, JUSTE, 0.25)), run_time=0.3)
         self.attendre_voix(marge=0.6)
 
     # ── 07 : le piège : la suite commence à u₁ ─────────────────────────────
@@ -408,8 +408,8 @@ class SuiteRegistres1reSpe(AuditMilliers, OutilsEp12, OutilsGraphique, PaysageSu
         x = 4.3
         self.calc([("− 5 %", RAISON, "Diminuer de 5 %")], 0.4, centre=x, fs=46, larg=4.4)
         self.calc([("× (1 − 0,05)", RAISON, "multiplier par 1 moins")], -0.4, centre=x, fs=44, larg=4.4)
-        c = self.calc([("= × 0,95", JUSTE, "0,95")], -1.2, centre=x, fs=50, larg=4.4)
-        self.play(Create(self.encadre(c, JUSTE, 0.14)), Indicate(cartes[0], color=JUSTE, scale_factor=1.03),
+        c = self.calc([("= × 0,95", JUSTE, "0,95")], -1.4, centre=x, fs=50, larg=4.4)
+        self.play(Create(self.encadre(c, JUSTE, 0.22)), Indicate(cartes[0], color=JUSTE, scale_factor=1.03),
                   run_time=0.35)
         self.attendre_voix(marge=0.6)
 
@@ -473,7 +473,8 @@ class SuiteRegistres1reSpe(AuditMilliers, OutilsEp12, OutilsGraphique, PaysageSu
                   larg=11)
         c = self.calc([("=", WHITE, "égale"), ("180 + 30", WHITE, "180"), ("=", WHITE, "égale"), ("210", JUSTE, "210")],
                       -2.25, centre=-0.3, fs=46, larg=11)
-        self.play(Create(self.encadre(c[-1], JUSTE, 0.12)), run_time=0.3)
+        cad = self.encadre(c[-1].copy().shift(RIGHT * 0.22), JUSTE, 0.2)
+        self.play(c[-1].animate.shift(RIGHT * 0.22), Create(cad), run_time=0.3)
         self.attendre_voix(marge=0.6)
 
     # ── 10 : ce que tu as appris ───────────────────────────────────────────
