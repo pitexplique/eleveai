@@ -77,6 +77,18 @@ EP = [
      ["COMPRENDRE COMMENT CALCULER", "UN TERME LOINTAIN"], "u_{12} = 2 000 × 1,1^{12}", "+ ≈ 6 277 abonnés",
      "blanche", ["10 PLIAGES :", "PLUS DE 10 CM ?"], "une feuille de 0,1 mm",
      [("0,1 × 2^{10}", 130, BLEU), ("= 102,4 mm", 130, VERT)]),
+    ("premiere", "13-geo-explicite", "verte",
+     ["COMPRENDRE LA FORMULE", "EXPLICITE (GÉOMÉTRIQUE)"], "u_{n} = 20 000 × 0,8^{n}", "+ u_{3} = 10 240 € dans 3 ans",
+     "blanche", ["LA FORMULE", "EN 5 S ?"], "les nénuphars doublent chaque jour",
+     [("u_{n} = 3 × 2^{n}", 130, BLEU), ("u_{0} = 3 et q = 2", 110, VERT)]),
+    ("premiere", "14-geo-variation", "verte",
+     ["COMPRENDRE LE SENS DE", "VARIATION (GÉOMÉTRIQUE)"], "q = 1,05 > 1", "+ croissante : on compare q à 1",
+     "blanche", ["MONTE OU", "DESCEND ?"], "un médicament : − 25 % par heure",
+     [("× 0,75", 140, BLEU), ("0,75 < 1 : ça baisse", 100, VERT)]),
+    ("premiere", "15-geo-graphique", "verte",
+     ["COMPRENDRE UNE SUITE GÉO.", "SUR UN GRAPHIQUE"], "100 ; 200 ; 400 ; 800", "+ la courbe se creuse",
+     "blanche", ["RIEN QU'À", "SON DESSIN ?"], "les monstres triplent à chaque vague",
+     [("2 ; 6 ; 18 ; 54", 120, BLEU), ("× 3 : ça se creuse", 100, VERT)]),
 ]
 
 
