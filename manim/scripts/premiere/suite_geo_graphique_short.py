@@ -177,7 +177,7 @@ class SuiteGeoGraphiqueShort(OutilsGraphique, ShortSuites):
 
         # ── 03 : question-pause → A ; le nuage de la question au-dessus des boutons ──
         lignes = self.paragraphe(["À quoi ressemble", "ce nuage ?"], 32, buff=0.1, y=2.6)
-        mini = self.repere_jeu(1.25, 1.75, grads=False)
+        mini = self.repere_jeu(1.15, 1.6, grads=False)
         mini.lab_n.next_to(mini.ax_n.get_end(), UP, buff=0.05).shift(LEFT * 0.12)
         mpts = VGroup(*[mini.point(n, v, r=0.08) for n, v in enumerate(MONSTRES)])
         corps = [bouton_texte(["de plus en", "plus vite"], 30), bouton_texte(["alignés"], 30),
@@ -208,11 +208,11 @@ class SuiteGeoGraphiqueShort(OutilsGraphique, ShortSuites):
         self.play(*rep2.anims(), LaggedStart(*[GrowFromCenter(d) for d in pts2], lag_ratio=0.2), run_time=0.45)
         self.au_mot("multiplie par")
         self.suivre("3")
-        f3 = self.t("× 3", 56, RAISON).move_to(P(0, 2.0))
+        f3 = self.t("× 3", 56, RAISON).move_to(P(0, 2.1))
         self.play(FadeIn(f3, scale=1.4), run_time=0.3)
         self.au_mot("les écarts")
-        ec = VGroup(self.t("les écarts", 40, RAISON), self.t("grandissent", 40, RAISON)).arrange(DOWN, buff=0.22)
-        ec.move_to(P(0, 1.05))
+        ec = VGroup(self.t("les écarts", 36, RAISON), self.t("grandissent", 36, RAISON)).arrange(DOWN, buff=0.22)
+        ec.move_to(P(0, 1.2))
         marches = [rep2.marche(n, MONSTRES[n], MONSTRES[n + 1], largeur=6) for n in range(3)]
         self.play(FadeIn(ec, shift=UP * 0.08), LaggedStart(*[Create(m) for m in marches], lag_ratio=0.5),
                   run_time=0.6)
@@ -220,7 +220,7 @@ class SuiteGeoGraphiqueShort(OutilsGraphique, ShortSuites):
         self.au_mot("la courbe")
         cb = DashedVMobject(VMobject().set_points_smoothly([d.get_center() for d in pts2]), num_dashes=24)
         cb.set_stroke(GRIS_DROITE, 3)
-        cr = VGroup(self.t("la courbe", 40, TERME), self.t("se creuse", 40, TERME)).arrange(DOWN, buff=0.22)
+        cr = VGroup(self.t("la courbe", 36, TERME), self.t("se creuse", 36, TERME)).arrange(DOWN, buff=0.22)
         cr.move_to(ec)
         self.play(FadeOut(ec, shift=UP * 0.1), FadeIn(cr, shift=UP * 0.1), Create(cb), run_time=0.5)
         self.bring_to_front(pts2)
