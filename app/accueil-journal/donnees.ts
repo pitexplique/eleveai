@@ -14,7 +14,7 @@
 //     du défi d'hier, la série de jours (côté navigateur, JournalClient).
 // ⭐ L'ORDRE DE TIRAGE EST STABLE : chaque vidéo a sa place fixe (un hachage de
 // son id). Une vidéo publiée demain s'insère sans bouleverser les autres.
-import { articlesDuJour, chiffresDesPetits, missionDuJour, type Article } from "@/lib/accueil/articles";
+import { ARTICLES, CHIFFRES_PETITS, MISSIONS, articlesDuJour, chiffresDesPetits, missionDuJour } from "@/lib/accueil/articles";
 import { DEFIS_DU_NIVEAU, NIVEAUX, type NiveauJournal } from "@/lib/accueil/niveaux";
 import { toutesLesVideos, urlR2, type VideoR2 } from "@/lib/videos/r2";
 import { CHIFFRES, EDITION, JOUR_DU_NUMERO_1, METIERS, UNES, jourParis } from "@/lib/accueil/journal";
@@ -207,6 +207,8 @@ export type EditionDuNiveau = {
   une: string;
   autres: string[];
   chiffres: ChiffreDuJour[];
+  /** La rangée « Les chiffres clés » de la galerie : ceux du jour, puis d'autres. */
+  chiffresRangee: ChiffreDuJour[];
   defi: DefiGenere;
   hier: { question: string; reponse: string };
   mission: Mission;
@@ -262,10 +264,19 @@ function editionDuNiveau(jour: number, niveau: NiveauJournal, reunion = false): 
     const c = chiffreDuJour(jour);
     chiffres = [c, ...chiffresEnPlus(jour, c)];
   }
+  // La rangée : les 3 du jour d'abord, puis la suite de la banque de l'édition.
+  const banque = reunion
+    ? CHIFFRES_REUNION
+    : niveau === "cp-ce2" || niveau === "cm"
+      ? CHIFFRES_PETITS[niveau]
+      : CHIFFRES.filter((c) => !REUNION.test(c.texte));
+  const dejaLa = new Set(chiffres.map((c) => c.chiffre));
+  const chiffresRangee = [...chiffres, ...fenetre(banque, jour, banque.length).filter((c) => !dejaLa.has(c.chiffre))].slice(0, 9);
   return {
     une: art.une.id,
     autres: art.autres.map((a) => a.id),
     chiffres,
+    chiffresRangee,
     defi: d,
     hier: { question: h.question, reponse: h.choix[h.bonne] },
     mission: missionDuJour(jour, niveau, reunion),
@@ -333,15 +344,11 @@ export function donneesDuJournal(jour = jourParis()) {
       NiveauJournal,
       EditionDuNiveau
     >,
-    catalogue: (() => {
-      const ids = new Set(NIVEAUX.flatMap(({ id }) =>
-        [false, true].flatMap((ile) => {
-          const a = articlesDuJour(jour, id, ile);
-          return [a.une, ...a.autres];
-        }),
-      ));
-      return Object.fromEntries([...ids].map((a) => [a.id, a])) as Record<string, Article>;
-    })(),
+    // La galerie (12/11/2026, « à la façon Netflix ») : tous les articles et
+    // toutes les missions, le navigateur les range par profil ; 8 métiers.
+    tousArticles: ARTICLES,
+    missions: MISSIONS,
+    metiers: fenetre(METIERS, jour, 8, 1),
     // ⚠️ La fenêtre se prend sur la liste ENTIÈRE, et le short de la Une n'est
     // retiré qu'après (il en reste alors 8) : retirer d'abord changeait la
     // longueur de la liste d'un jour à l'autre, et deux jours pouvaient

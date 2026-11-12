@@ -12,14 +12,13 @@
 // ⛔ Aucune vidéo ne se lance ici : la vignette mène à /video/<id>, qui s'ouvre
 // en pause (règle du site).
 
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { ArrowRight, BookOpen, Calculator, Languages, PenLine, Play, Square, Trophy, Volume2 } from "lucide-react";
-import type { ChiffreDuJour, Metier } from "@/lib/accueil/journal";
+import type { Metier } from "@/lib/accueil/journal";
 import type { Article, Mission } from "@/lib/accueil/articles";
-import ArriveeDiagonale from "@/components/accueil/dessins/ArriveeDiagonale";
 import { genererDefi, type DefiGenere, type Theme } from "@/lib/accueil/defis";
 import {
   DEFIS_DU_NIVEAU,
@@ -131,6 +130,7 @@ function Lien({
   className,
   children,
   label,
+  carte = false,
 }: {
   href: string;
   quoi: Rubrique | "manchette" | "pied";
@@ -138,6 +138,8 @@ function Lien({
   className?: string;
   children: ReactNode;
   label?: string;
+  /** Une carte de la galerie : les flèches du clavier s'y arrêtent. */
+  carte?: boolean;
 }) {
   const sep = href.includes("?") ? "&" : "?";
   const de = useContext(Source);
@@ -146,6 +148,7 @@ function Lien({
       prefetch={false}
       href={`${href}${sep}from=${de}`}
       aria-label={label}
+      data-carte={carte ? "" : undefined}
       onClick={() => track("journal_clic", { rubrique: quoi, mise, page: de })}
       className={className}
     >
@@ -169,7 +172,7 @@ function Vignette({
 }) {
   const arrondi = mise === "quotidien" ? "" : mise === "magazine" ? "rounded-2xl" : "rounded-xl";
   return (
-    <Lien href={`/video/${v.id}`} quoi={quoi} mise={mise} className="group block" label={`Regarder : ${v.titre}`}>
+    <Lien href={`/video/${v.id}`} quoi={quoi} mise={mise} carte className="group block focus-visible:outline focus-visible:outline-4 focus-visible:outline-red-700" label={`Regarder : ${v.titre}`}>
       <span
         className={`relative block overflow-hidden bg-slate-900 ${arrondi} ${v.short ? "aspect-[9/16]" : "aspect-video"}`}
       >
@@ -200,7 +203,7 @@ const SOMMAIRE = [
   { ancre: "#comprendre", texte: "Comprendre" },
   { ancre: "#changer", texte: "Changer" },
   { ancre: "#defi", texte: "Se tester" },
-  { ancre: "#dehors", texte: "Agir" },
+  { ancre: "#agir", texte: "Agir" },
   { ancre: "#demain", texte: "Penser à demain" },
 ];
 
@@ -247,47 +250,6 @@ function Manchette({ date, numero, ile = false }: { date: string; numero: number
 /* ═══ LES RUBRIQUES ═══════════════════════════════════════════════════════ */
 
 type UneProps = { paysage: VideoJournal | null; short: VideoJournal | null; classe: string; utile: string | null };
-
-function Une({ mise, une }: { mise: Mise; une: UneProps }) {
-  const t = TON[mise];
-  if (!une.paysage) return null;
-  return (
-    <Bloc mise={mise} quoi="une" rubrique={`La vidéo du jour · ${une.classe}`}>
-      {/* ⛔ Toujours une PAYSAGE (donnees.ts écarte les shorts de la Une). */}
-      <Vignette v={une.paysage} mise={mise} quoi="une" grande />
-      <div className="mt-4 flex gap-4">
-        <div className="min-w-0 flex-1">
-          <h2 className={`${t.titre} text-xl leading-tight sm:text-3xl`}>
-            <Lien href={`/video/${une.paysage.id}`} quoi="une" mise={mise} className="hover:underline">
-              {une.paysage.titre}
-            </Lien>
-          </h2>
-          {/* La phrase n'existe que pour les Unes écrites (l'édition de la
-              semaine) ; un tirage du catalogue n'invente rien. */}
-          {une.utile && (
-            <p className={`${t.texte} mt-3 leading-snug sm:text-lg`}>
-              <span className="font-black">Ce que tu vas apprendre : </span>
-              {une.utile}
-            </p>
-          )}
-          <p className="mt-4">
-            <Lien href={`/video/${une.paysage.id}`} quoi="une" mise={mise} className={t.lien}>
-              Regarder la vidéo
-            </Lien>
-          </p>
-        </div>
-        {une.short && (
-          <div className="w-24 shrink-0 sm:w-28">
-            <Vignette v={une.short} mise={mise} quoi="une" />
-            <p className="mt-1.5 text-xs font-bold leading-tight text-current opacity-80">
-              Le short : 1 minute, et ta réponse en commentaire
-            </p>
-          </div>
-        )}
-      </div>
-    </Bloc>
-  );
-}
 
 function DefiDuJour({
   mise,
@@ -432,115 +394,6 @@ function RendezVous({
   );
 }
 
-function Chiffre({ mise, chiffre }: { mise: Mise; chiffre: ChiffreDuJour }) {
-  const t = TON[mise];
-  return (
-    <Bloc mise={mise} quoi="chiffre" rubrique="Les chiffres clés">
-      {chiffre.dessin === "arrivee-diagonale" && (
-        <figure className="mb-3">
-          <ArriveeDiagonale className={mise === "quotidien" ? "" : "rounded-xl"} />
-          <figcaption className="mt-1 text-xs italic opacity-70">Dessin EleveAI : l&rsquo;arrivée, sous le chrono.</figcaption>
-        </figure>
-      )}
-      <p className={`${t.titre} text-5xl leading-none`}>{chiffre.chiffre}</p>
-      <p className={`${t.texte} mt-3 leading-snug`}>{chiffre.texte}</p>
-    </Bloc>
-  );
-}
-
-/** « Les chiffres clés » (10/11/2026) : le chiffre du jour en grand, puis deux
- *  autres, comme l'encadré chiffré d'un quotidien. */
-function ChiffresCles({ chiffre, autres }: { chiffre: ChiffreDuJour; autres: ChiffreDuJour[] }) {
-  return (
-    <div className="space-y-5">
-      <Chiffre mise="quotidien" chiffre={chiffre} />
-      {autres.map((c) => (
-        <div key={c.chiffre} className="border-t border-stone-400 pt-3">
-          <p className="font-serif text-3xl font-black leading-none tracking-tight text-stone-900">{c.chiffre}</p>
-          <p className="mt-2 font-serif text-sm leading-snug text-stone-800">{c.texte}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function MetierDuJour({ mise, metier }: { mise: Mise; metier: Metier }) {
-  const t = TON[mise];
-  return (
-    <div id="demain" className="scroll-mt-24">
-      <Bloc mise={mise} quoi="metier" rubrique="Et plus tard ? Le métier du jour">
-        <h2 className={`${t.titre} text-2xl leading-tight`}>{metier.nom}</h2>
-        <p className={`${t.texte} mt-1 italic`}>{metier.fait}</p>
-        <p className={`${t.texte} mt-3 leading-snug`}>
-          <span className="font-black not-italic">Les maths qui lui servent : </span>
-          {metier.maths}
-        </p>
-        <p className="mt-3">
-          <Lien href={metier.href} quoi="metier" mise={mise} className={t.lien}>
-            Apprendre : {metier.notion}
-          </Lien>
-        </p>
-      </Bloc>
-    </div>
-  );
-}
-
-/** 12/11/2026 — Frédéric : « un short sur un défi en fonction des classes »,
- *  « 3 shorts, plus simple ». Trois shorts de l'édition choisie, un défi
- *  d'abord (donnees.ts, shortsDuNiveau), côte à côte, sans défilement. */
-function Shorts({ mise, shorts, niveau }: { mise: Mise; shorts: VideoJournal[]; niveau: string }) {
-  const t = TON[mise];
-  if (shorts.length === 0) return null;
-  return (
-    <Bloc mise={mise} quoi="shorts" rubrique={`En 1 minute : 3 défis en vidéo · ${niveau}`}>
-      <div className="mx-auto grid max-w-2xl grid-cols-3 gap-3 sm:gap-6">
-        {shorts.map((v) => (
-          <div key={v.id}>
-            <Vignette v={v} mise={mise} quoi="shorts" />
-            <p className={`${t.texte} mt-1.5 line-clamp-3 text-xs font-semibold leading-snug sm:text-sm`}>
-              {v.titre
-                .replace(/#\S+/g, "")
-                .replace(/\s*—\s*(CP|CE1|CE2|CM1|CM2|6e|5e|4e|3e|2de|1re|Tle)(\s.*)?$/i, "")
-                .trim()}
-            </p>
-          </div>
-        ))}
-      </div>
-      <p className={`${t.texte} mt-2 text-sm italic`}>Mets la vidéo sur pause, réponds, puis regarde la solution.</p>
-      <p className="mt-2">
-        <Lien href="/video" quoi="shorts" mise={mise} className={t.lien}>
-          Toutes les vidéos
-        </Lien>
-      </p>
-    </Bloc>
-  );
-}
-
-function Reel({ mise, reel }: { mise: Mise; reel: VideoJournal[] }) {
-  const t = TON[mise];
-  if (reel.length === 0) return null;
-  // Un nombre PAIR de vignettes : la grille est à deux colonnes.
-  const paysages = reel.filter((v) => !v.short).slice(0, 4);
-  if (paysages.length % 2 === 1 && paysages.length > 1) paysages.pop();
-  return (
-    <Bloc mise={mise} quoi="reel" rubrique="Maths Réel : les maths sont dehors">
-      <div className="grid grid-cols-2 gap-4">
-        {paysages.map((v) => (
-          <div key={v.id}>
-            <Vignette v={v} mise={mise} quoi="reel" />
-            <p className={`${t.texte} mt-1.5 line-clamp-3 text-sm font-bold leading-snug`}>{v.titre}</p>
-          </div>
-        ))}
-      </div>
-      <p className="mt-3">
-        <Lien href="/maths-974" quoi="reel" mise={mise} className={t.lien}>
-          Toutes les maths du réel
-        </Lien>
-      </p>
-    </Bloc>
-  );
-}
-
 const RITUELS = [
   { titre: "Les défis du jour", texte: "Trois défis neufs chaque matin.", href: "/defis-du-jour", Icone: Trophy },
   { titre: "Le calcul rapide", texte: "Cinq minutes d'automatismes.", href: "/calcul-rapide", Icone: Calculator },
@@ -610,7 +463,7 @@ function EncadreMaths({ a, petit = false }: { a: Article; petit?: boolean }) {
 
 /** Le défi de l'article (10/11/2026) : on lit, on comprend, on se teste.
  *  Un clic donne la correction et son explication ; on peut se reprendre. */
-function DefiArticle({ a }: { a: Article }) {
+function DefiArticle({ a, surFini }: { a: Article; surFini?: () => void }) {
   const [choisi, setChoisi] = useState<number | null>(null);
   const [vue, setVue] = useState(false);
   const d = a.defi;
@@ -639,6 +492,8 @@ function DefiArticle({ a }: { a: Article }) {
               onClick={() => {
                 setChoisi(i);
                 track("journal_defi_article", { article: a.id, juste: i === d.bonne });
+                // Le défi réussi : l'article est « lu » (rangée « Continuer à lire »).
+                if (i === d.bonne) surFini?.();
               }}
               className={`rounded-lg border-2 border-stone-900 px-3 py-2 text-left font-bold transition ${etat}`}
             >
@@ -741,10 +596,23 @@ function Ecouter({ a }: { a: Article }) {
   );
 }
 
-function ArticleUne({ a, petit = false }: { a: Article; petit?: boolean }) {
+function ArticleUne({
+  a,
+  petit = false,
+  duree,
+  surFini,
+}: {
+  a: Article;
+  petit?: boolean;
+  duree?: number;
+  surFini?: () => void;
+}) {
   return (
-    <article aria-label={`À la Une : ${a.titre}`} className="border-t-[3px] border-stone-900 pt-3">
-      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">À la Une · {a.rubrique}</p>
+    <article aria-label={a.titre} className="border-t-[3px] border-stone-900 pt-3">
+      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">
+        {a.rubrique}
+        {duree ? ` · ${duree} min de lecture` : ""}
+      </p>
       <h2 className="mt-2 font-serif text-3xl font-black leading-[1.05] tracking-tight text-stone-900 sm:text-5xl">
         {a.titre}
       </h2>
@@ -768,50 +636,17 @@ function ArticleUne({ a, petit = false }: { a: Article; petit?: boolean }) {
             <p key={p}>{p}</p>
           ))}
         </div>
-        <EncadreMaths a={a} petit={petit} />
+        <div id="lecteur-maths">
+          <EncadreMaths a={a} petit={petit} />
+        </div>
       </div>
-      <div className="mt-5">
-        <DefiArticle a={a} />
+      <div id="lecteur-defi" className="mt-5">
+        <DefiArticle a={a} surFini={surFini} />
       </div>
-      <div id="changer" className="mt-5 scroll-mt-24">
+      <div id="lecteur-changer" className="mt-5">
         <Agir a={a} />
       </div>
       <p className="mt-4 text-xs italic text-stone-500">Source : {a.source}</p>
-    </article>
-  );
-}
-
-function AutreNouvelle({ a, petit = false }: { a: Article; petit?: boolean }) {
-  const [ouvert, setOuvert] = useState(false);
-  return (
-    <article aria-label={a.titre} className="border-t-[3px] border-stone-900 pt-3">
-      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">{a.rubrique}</p>
-      <h3 className="mt-2 font-serif text-2xl font-black leading-tight tracking-tight text-stone-900">{a.titre}</h3>
-      <p className={`mt-2 font-serif leading-snug text-stone-800 ${petit ? "text-lg" : ""}`}>{a.chapo}</p>
-      {ouvert ? (
-        <div className="mt-3 space-y-3">
-          {a.corps.map((p) => (
-            <p key={p} className={`font-serif text-stone-800 ${petit ? "text-lg leading-loose" : "leading-relaxed"}`}>
-              {p}
-            </p>
-          ))}
-          <EncadreMaths a={a} petit={petit} />
-          <DefiArticle a={a} />
-          <Agir a={a} />
-          <p className="text-xs italic text-stone-500">Source : {a.source}</p>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={() => {
-            setOuvert(true);
-            track("journal_clic", { rubrique: "article", article: a.id });
-          }}
-          className="mt-3 font-bold text-red-700 underline decoration-2 underline-offset-4 hover:text-red-900"
-        >
-          Lire l&rsquo;article et ses maths
-        </button>
-      )}
     </article>
   );
 }
@@ -822,9 +657,8 @@ function MissionDuJour({ m }: { m: Mission }) {
   const dehors = m.genre === "dehors";
   return (
     <section
-      id="dehors"
       aria-label={dehors ? "Le défi dehors" : "La bonne action du jour"}
-      className={`scroll-mt-24 border-[3px] p-5 ${dehors ? "border-emerald-800 bg-emerald-50" : "border-sky-800 bg-sky-50"}`}
+      className={`border-[3px] p-5 ${dehors ? "border-emerald-800 bg-emerald-50" : "border-sky-800 bg-sky-50"}`}
     >
       <p className={`text-[11px] font-bold uppercase tracking-[0.2em] ${dehors ? "text-emerald-800" : "text-sky-800"}`}>
         {dehors ? "🌳 Le défi dehors" : "🤝 La bonne action du jour"} · {m.niveau}
@@ -850,15 +684,25 @@ function MissionDuJour({ m }: { m: Mission }) {
   );
 }
 
-/* ═══ LE CHOIX DE L'ÉDITION (12/11/2026) ═══════════════════════════════════
+/* ═══ LE JOURNAL EN GALERIE, « À LA FAÇON NETFLIX » (12/11/2026) ═══════════
    Frédéric : « il faut que les élèves choisissent leurs niveaux, les articles
-   doivent correspondre à leurs niveaux ». Six boutons sous la manchette.
-   L'ordre de choix : ?niveau= dans l'adresse (un prof qui projette), puis le
-   choix gardé dans le navigateur, puis la classe de l'élève connecté, puis la
-   classe choisie sur l'accueil, sinon 6e-5e. ⚠️ Le serveur rend toujours
-   6e-5e : le choix ne s'applique qu'après le chargement (pas d'erreur
-   d'hydratation). */
+   doivent correspondre à leurs niveaux », puis « et si on faisait à la façon
+   Netflix ». Donc :
+     1. un écran d'entrée « Qui lit aujourd'hui ? » : une grande carte par
+        profil (CP-CE2 … adultes), avec un Ti Margo ; le choix est gardé, un
+        bouton en tête permet d'en changer ;
+     2. une grande Une, puis des RANGÉES qui défilent (au doigt, à la molette,
+        aux flèches du clavier) : Nouveau aujourd'hui, Continuer à lire,
+        Comprendre, Changer, Se tester, En vidéo, Agir, Penser à demain, Les
+        chiffres clés, Les maths derrière ;
+     3. une carte ouvre l'article dans un lecteur, par-dessus la galerie.
+   L'identité reste celle du journal : manchette, papier crème, empattements.
+   L'ordre de choix du profil : ?niveau= dans l'adresse (un prof qui projette),
+   puis le choix gardé dans le navigateur ; sinon on DEMANDE (la classe de
+   l'élève connecté est seulement mise en avant sur l'écran des profils). */
 const CLE_NIVEAU = "eleveai.journal.niveau";
+const CLE_EDITION = "eleveai.journal.edition";
+const CLE_LUS = "eleveai.journal.lus";
 
 function lireNiveauGarde(): NiveauJournal | null {
   try {
@@ -881,8 +725,6 @@ function niveauDeLAccueil(): NiveauJournal | null {
   }
 }
 
-const CLE_EDITION = "eleveai.journal.edition";
-
 function lireIleGardee(): boolean | null {
   try {
     const url = new URLSearchParams(window.location.search).get("edition");
@@ -897,19 +739,156 @@ function lireIleGardee(): boolean | null {
   return null;
 }
 
-/** 12/11/2026 — « tu me crées une version île de La Réunion » : deux éditions,
- *  le monde ou l'île, au-dessus des niveaux. */
+/* ── Les « images » des cartes ──────────────────────────────────────────────
+   ⛔ Jamais de photo de presse (règle du journal). Chaque carte a une image
+   maison : un grand dessin (émoji) sur un fond de la couleur de sa rubrique.
+   Des couleurs de la rose chromatique, pas des nuances d'une même famille. */
+export const FOND_RUBRIQUE: Record<Article["rubrique"], string> = {
+  Planète: "from-emerald-400 to-teal-700",
+  Espace: "from-indigo-500 to-slate-900",
+  Santé: "from-rose-400 to-red-700",
+  Argent: "from-amber-300 to-orange-600",
+  Sport: "from-sky-400 to-blue-700",
+  Technologie: "from-violet-400 to-purple-800",
+  Histoire: "from-yellow-500 to-amber-800",
+  Société: "from-fuchsia-400 to-pink-700",
+  Sécurité: "from-orange-400 to-red-600",
+};
+export const DESSIN_RUBRIQUE: Record<Article["rubrique"], string> = {
+  Planète: "🌍", Espace: "🚀", Santé: "❤️", Argent: "💶", Sport: "🏅",
+  Technologie: "📱", Histoire: "🏛️", Société: "🤝", Sécurité: "🛡️",
+};
+const DESSIN_ARTICLE: Record<string, string> = {
+  "bonnes-actions-puissances": "🤝", "bonnes-actions-cm": "🤝", "lumiere-soleil": "☀️", "huit-milliards": "🌍",
+  "coeur-battements": "❤️", "coeur-cm": "❤️", "prix-qui-doublent": "🛒", "marathon-21-kmh": "🏃", megapixels: "📷",
+  "pluie-70": "🌧️", eratosthene: "📐", "sondage-1000": "🗳️", "sondage-college": "🗳️", "sondage-ecole": "🥣",
+  "oceans-71": "🌊", "code-pin": "🔐", freinage: "🚗", "rechauffement-1-5": "🌡️", "baleines-reunion": "🐋",
+  "dents-de-lait": "🦷", "abeilles-hexagones": "🐝", "ballon-32-pieces": "⚽", "semaine-7-jours": "📅",
+  "tirelire-2-euros": "🐷", "jour-et-nuit": "🌙", "annee-bissextile": "🗓️", "douche-ou-bain": "🚿",
+  "carbone-14": "🦴", "faux-positifs": "🧪", "reunion-bassin-ecole": "🏖️", "reunion-bassin": "🏖️",
+  "reunion-fournaise": "🌋", "reunion-cyclones": "🌀", "reunion-tortues": "🐢", "reunion-trois-cirques": "⛰️",
+  "reunion-foot-payet": "⚽", "reunion-velo-maido": "🚴", "reunion-moringue": "🥁", "reunion-canne-a-sucre": "🌾",
+  "reunion-poissons-lagon": "🐠", "reunion-soleil": "😎", "reunion-vivre-ensemble": "🫶", "reunion-record-pluie": "☔",
+  "reunion-diagonale": "🥾", "reunion-altitude": "🏔️", "reunion-lave-nouvelles-terres": "🌋", "reunion-parc-national": "🌳",
+};
+export const dessinDe = (a: Article) => DESSIN_ARTICLE[a.id] ?? DESSIN_RUBRIQUE[a.rubrique];
+
+function ImageCarte({ fond, dessin, grand = false }: { fond: string; dessin: string; grand?: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`flex aspect-video w-full items-center justify-center bg-gradient-to-br ${fond} ${grand ? "text-8xl sm:text-9xl" : "text-6xl"}`}
+    >
+      <span className="drop-shadow-[0_3px_6px_rgba(0,0,0,0.35)]">{dessin}</span>
+    </span>
+  );
+}
+
+/** La durée de lecture : les petits lisent moins vite. */
+function minutes(a: Article, petit: boolean): number {
+  const mots = [a.titre, a.chapo, ...a.corps, ...a.maths.lignes, a.agir].join(" ").split(/\s+/).length;
+  return Math.max(1, Math.round(mots / (petit ? 70 : 160)));
+}
+
+/* ── L'écran des profils ──────────────────────────────────────────────────── */
+const PROFILS: Record<NiveauJournal, { image: string; fond: string; phrase: string }> = {
+  "cp-ce2": { image: "/ti-margo/animations/danse.png", fond: "bg-yellow-300", phrase: "Des phrases courtes" },
+  cm: { image: "/ti-margo/animations/saut-de-joie.png", fond: "bg-orange-300", phrase: "Je découvre le monde" },
+  "6e-5e": { image: "/ti-margo/animations/salut.png", fond: "bg-emerald-300", phrase: "Je comprends avec les maths" },
+  "4e-3e": { image: "/ti-margo/animations/bravo.png", fond: "bg-sky-300", phrase: "Je calcule, je vérifie" },
+  lycee: { image: "/ti-margo/animations/reflechit.png", fond: "bg-violet-300", phrase: "Je démontre, je doute" },
+  adultes: { image: "/ti-margo/ti-margo-magazine.png", fond: "bg-rose-300", phrase: "Parents, profs, curieux" },
+};
+
+/* ⚠️ Le serveur ne sait pas si un profil est gardé : il rend l'écran des
+   profils PAR-DESSUS le journal (le contenu reste dans la page, pour les
+   moteurs). Un tout petit script, exécuté avant l'affichage, le cache chez
+   celui qui a déjà choisi : pas d'écran qui clignote chaque matin. */
+// ⛔ Pas d'attribut posé sur <html> ou <body> (erreur d'hydratation) : le script
+// ajoute une règle de style dans l'en-tête, que React ne compare pas.
+const SCRIPT_PROFIL = `try{if(localStorage.getItem("${CLE_NIVEAU}")||/[?&]niveau=/.test(location.search)){var s=document.createElement("style");s.textContent='[data-ecran-profils="auto"]{display:none}';document.head.appendChild(s)}}catch(e){}`;
+
+function EcranProfils({
+  mode,
+  actuel,
+  propose,
+  surChoix,
+  surFermer,
+}: {
+  /** « auto » : à l'arrivée (caché par le script si un profil est gardé) ; « manuel » : bouton « Changer de profil ». */
+  mode: "auto" | "manuel";
+  actuel: NiveauJournal | null;
+  /** La classe de l'élève connecté, mise en avant. */
+  propose: NiveauJournal | null;
+  surChoix: (n: NiveauJournal) => void;
+  surFermer: (() => void) | null;
+}) {
+  return (
+    <div
+      data-ecran-profils={mode}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Qui lit aujourd'hui ?"
+      className="fixed inset-0 z-[90] overflow-y-auto bg-[#faf6ec] px-4 py-8 text-stone-900 sm:py-12"
+    >
+      <div className="mx-auto max-w-4xl text-center">
+        <p className="font-serif text-xl font-black tracking-tight sm:text-2xl">Le Journal d&rsquo;EleveAI</p>
+        <p className="font-serif text-sm italic text-stone-700 sm:text-base">Comprendre le monde, et le changer</p>
+        <h2 className="mt-6 font-serif text-[2rem] font-black leading-tight tracking-tight sm:text-6xl">
+          Qui lit aujourd&rsquo;hui&nbsp;?
+        </h2>
+        <p className="mt-2 font-serif text-lg text-stone-700">Choisis ton niveau : le journal s&rsquo;écrit pour toi.</p>
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6">
+          {NIVEAUX.map((n) => {
+            const p = PROFILS[n.id];
+            const mis = n.id === (actuel ?? propose);
+            return (
+              <button
+                key={n.id}
+                type="button"
+                onClick={() => surChoix(n.id)}
+                className={`group rounded-2xl border-[3px] bg-white p-3 text-center transition hover:-translate-y-1 hover:shadow-xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-red-700 ${
+                  mis ? "border-red-700 shadow-lg" : "border-stone-900"
+                }`}
+              >
+                <span className={`flex aspect-square items-center justify-center rounded-xl ${p.fond}`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={p.image} alt="" className="h-4/5 w-4/5 object-contain transition group-hover:scale-105" />
+                </span>
+                <span className="mt-3 block font-serif text-2xl font-black leading-tight sm:text-3xl">{n.libelle}</span>
+                <span className="block text-sm font-bold text-stone-600">{n.age}</span>
+                <span className="mt-1 hidden font-serif text-sm italic text-stone-700 sm:block">{p.phrase}</span>
+                {mis && (
+                  <span className="mt-1 block text-xs font-bold uppercase tracking-widest text-red-700">
+                    {actuel ? "Ton profil" : "Ta classe"}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+        {surFermer && (
+          <button
+            type="button"
+            onClick={surFermer}
+            className="mt-8 rounded-full border-2 border-stone-900 bg-white px-5 py-2 font-serif text-lg font-bold hover:bg-stone-100"
+          >
+            Garder mon profil
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** Deux éditions, le monde ou l'île (« tu me crées une version île de La Réunion »). */
 function InterrupteurEdition({ ile, surChoix }: { ile: boolean; surChoix: (ile: boolean) => void }) {
   const bouton = (actif: boolean) =>
-    `flex-1 whitespace-nowrap rounded-full px-3 py-2 font-serif text-[15px] font-black transition sm:px-4 sm:text-lg ${
+    `whitespace-nowrap rounded-full px-3 py-1.5 font-serif text-[15px] font-black transition sm:px-4 sm:text-base ${
       actif ? "bg-stone-900 text-white" : "text-stone-900 hover:bg-stone-200"
     }`;
   return (
-    <div
-      role="group"
-      aria-label="Choisis ton édition"
-      className="mx-auto mt-4 flex max-w-lg gap-1 rounded-full border-2 border-stone-900 bg-white p-1"
-    >
+    <div role="group" aria-label="Choisis ton édition" className="flex gap-1 rounded-full border-2 border-stone-900 bg-white p-1">
       <button type="button" aria-pressed={!ile} onClick={() => surChoix(false)} className={bouton(!ile)}>
         🌍 Le monde
       </button>
@@ -920,80 +899,244 @@ function InterrupteurEdition({ ile, surChoix }: { ile: boolean; surChoix: (ile: 
   );
 }
 
-function SelecteurNiveau({
-  niveau,
-  choisi,
-  surChoix,
+/* ── Les rangées et les cartes ────────────────────────────────────────────── */
+
+function Rangee({ id, titre, sous, children }: { id?: string; titre: string; sous?: string; children: ReactNode }) {
+  return (
+    <section id={id} aria-label={titre} className="mt-9 scroll-mt-24">
+      <h2 className="flex flex-wrap items-baseline gap-x-3 border-b-[3px] border-stone-900 pb-1 font-serif text-2xl font-black text-stone-900 sm:text-3xl">
+        {titre}
+        {sous && <span className="font-serif text-sm font-normal italic text-stone-600 sm:text-base">{sous}</span>}
+      </h2>
+      {/* Défilement horizontal : au doigt, à la molette (Maj), aux flèches. */}
+      <div data-rangee className="-mx-4 mt-3 flex snap-x scroll-px-4 gap-4 overflow-x-auto px-4 pb-3">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+const CARTE =
+  "group w-[15.5rem] shrink-0 snap-start overflow-hidden rounded-lg border-2 border-stone-900 bg-white text-left transition hover:-translate-y-1 hover:shadow-xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-red-700";
+
+function CarteArticle({
+  a,
+  petit,
+  etat,
+  surOuvrir,
+  variante = "article",
 }: {
-  niveau: NiveauJournal;
-  /** false tant que l'élève n'a rien choisi : on l'invite à le faire. */
-  choisi: boolean;
-  surChoix: (n: NiveauJournal) => void;
+  a: Article;
+  petit: boolean;
+  etat?: "commence" | "fini";
+  surOuvrir: () => void;
+  /** Ce que la carte met en avant : l'article, son geste, son défi ou ses maths. */
+  variante?: "article" | "changer" | "defi" | "maths";
+}) {
+  const titre =
+    variante === "changer" ? a.agir : variante === "defi" ? a.defi.question : variante === "maths" ? a.maths.titre : a.titre;
+  const etiquette =
+    variante === "changer" ? "Et toi, tu peux…" : variante === "defi" ? "🎯 Le défi" : variante === "maths" ? "Les maths derrière" : a.rubrique;
+  return (
+    <button type="button" data-carte onClick={surOuvrir} className={CARTE}>
+      <span className="relative block">
+        <ImageCarte fond={FOND_RUBRIQUE[a.rubrique]} dessin={dessinDe(a)} />
+        {etat && (
+          <span className="absolute left-2 top-2 rounded-full bg-white px-2 py-0.5 text-xs font-black text-stone-900 shadow">
+            {etat === "fini" ? "✓ Lu" : "À finir"}
+          </span>
+        )}
+      </span>
+      <span className="block p-3">
+        <span className="block text-[11px] font-bold uppercase tracking-[0.15em] text-red-700">{etiquette}</span>
+        <span className={`mt-1 line-clamp-4 font-serif font-black leading-tight text-stone-900 ${petit ? "text-xl" : "text-lg"}`}>
+          {titre}
+        </span>
+        {variante === "maths" && (
+          <span className="mt-1 line-clamp-2 font-mono text-xs text-stone-700">{a.maths.lignes[0]}</span>
+        )}
+        <span className="mt-2 block text-xs font-bold text-stone-600">
+          {variante === "article" ? `${minutes(a, petit)} min de lecture` : a.titre}
+        </span>
+      </span>
+    </button>
+  );
+}
+
+/** Une carte sans article : un défi, une mission, un chiffre. */
+function CarteSimple({
+  fond,
+  dessin,
+  etiquette,
+  titre,
+  pied,
+  surOuvrir,
+}: {
+  fond: string;
+  dessin: string;
+  etiquette: string;
+  titre: string;
+  pied?: string;
+  surOuvrir: () => void;
 }) {
   return (
-    <nav aria-label="Choisis ton niveau" className="mt-3 border-b border-stone-900 pb-4">
-      <p className="text-center font-serif text-lg font-black text-stone-900 sm:text-xl">
-        {choisi ? "Ton édition" : "Choisis ton niveau"}
-        <span className="font-normal italic text-stone-700"> : les articles changent avec lui.</span>
-      </p>
-      <div className="mx-auto mt-3 grid max-w-3xl grid-cols-3 gap-2 sm:grid-cols-6">
-        {NIVEAUX.map((n) => {
-          const actif = n.id === niveau;
-          return (
-            <button
-              key={n.id}
-              type="button"
-              aria-pressed={actif}
-              onClick={() => surChoix(n.id)}
-              className={`rounded-lg border-2 px-2 py-2 text-center transition ${
-                actif
-                  ? "border-stone-900 bg-stone-900 text-white"
-                  : "border-stone-900 bg-white text-stone-900 hover:bg-stone-100"
-              }`}
-            >
-              <span className="block font-serif text-lg font-black leading-tight">{n.libelle}</span>
-              <span className={`block text-[11px] font-bold ${actif ? "text-stone-200" : "text-stone-600"}`}>{n.age}</span>
-            </button>
-          );
-        })}
-      </div>
-    </nav>
+    <button type="button" data-carte onClick={surOuvrir} className={CARTE}>
+      <ImageCarte fond={fond} dessin={dessin} />
+      <span className="block p-3">
+        <span className="block text-[11px] font-bold uppercase tracking-[0.15em] text-red-700">{etiquette}</span>
+        <span className="mt-1 line-clamp-3 font-serif text-lg font-black leading-tight text-stone-900">{titre}</span>
+        {pied && <span className="mt-2 block text-xs font-bold text-stone-600">{pied}</span>}
+      </span>
+    </button>
   );
+}
+
+/* ── Le lecteur : une fenêtre par-dessus la galerie ───────────────────────── */
+function Fenetre({ titre, surFermer, children }: { titre: string; surFermer: () => void; children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const avant = document.activeElement as HTMLElement | null;
+    ref.current?.focus();
+    const touche = (e: KeyboardEvent) => {
+      if (e.key === "Escape") surFermer();
+    };
+    document.addEventListener("keydown", touche);
+    const defilement = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", touche);
+      document.body.style.overflow = defilement;
+      avant?.focus?.();
+    };
+  }, [surFermer]);
+  return (
+    <div className="fixed inset-0 z-[100] overflow-y-auto bg-stone-900/70 sm:p-6" onClick={surFermer}>
+      <div
+        ref={ref}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        aria-label={titre}
+        onClick={(e) => e.stopPropagation()}
+        className="relative mx-auto min-h-full w-full max-w-3xl bg-[#faf6ec] p-4 pt-16 text-stone-900 shadow-2xl outline-none sm:min-h-0 sm:rounded-lg sm:p-8 sm:pt-16"
+      >
+        <button
+          type="button"
+          onClick={surFermer}
+          className="absolute right-3 top-3 rounded-full border-2 border-stone-900 bg-white px-4 py-1.5 font-serif text-base font-bold hover:bg-stone-100"
+        >
+          Fermer ✕
+        </button>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function LecteurArticle({
+  a,
+  petit,
+  ancre,
+  surFini,
+}: {
+  a: Article;
+  petit: boolean;
+  ancre?: "maths" | "defi" | "changer";
+  surFini: () => void;
+}) {
+  useEffect(() => {
+    if (ancre) document.getElementById(`lecteur-${ancre}`)?.scrollIntoView({ block: "center" });
+  }, [ancre, a.id]);
+  return (
+    <>
+      <ImageCarte fond={FOND_RUBRIQUE[a.rubrique]} dessin={dessinDe(a)} grand />
+      <div className="mt-4">
+        <ArticleUne a={a} petit={petit} duree={minutes(a, petit)} surFini={surFini} />
+      </div>
+    </>
+  );
+}
+
+/** Les flèches du clavier : ← → dans la rangée, ↑ ↓ d'une rangée à l'autre. */
+function auClavier(e: React.KeyboardEvent<HTMLElement>) {
+  if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(e.key)) return;
+  const carte = (e.target as HTMLElement).closest<HTMLElement>("[data-carte]");
+  const rangee = carte?.closest<HTMLElement>("[data-rangee]");
+  if (!carte || !rangee) return;
+  const cartes = [...rangee.querySelectorAll<HTMLElement>("[data-carte]")];
+  const i = cartes.indexOf(carte);
+  let cible: HTMLElement | undefined;
+  if (e.key === "ArrowRight") cible = cartes[i + 1];
+  else if (e.key === "ArrowLeft") cible = cartes[i - 1];
+  else {
+    const rangees = [...e.currentTarget.querySelectorAll<HTMLElement>("[data-rangee]")];
+    const autre = rangees[rangees.indexOf(rangee) + (e.key === "ArrowDown" ? 1 : -1)];
+    const l = autre ? [...autre.querySelectorAll<HTMLElement>("[data-carte]")] : [];
+    cible = l[Math.min(i, l.length - 1)];
+  }
+  if (!cible) return;
+  e.preventDefault();
+  cible.focus();
+  cible.scrollIntoView({ block: "nearest", inline: "nearest" });
 }
 
 /* ═══ LA PAGE ═════════════════════════════════════════════════════════════ */
 
-// ⭐ 10/11/2026 — UN VRAI JOURNAL. Frédéric : « faut faire un vrai journal ! »,
-// « le coach est donc inutile ». Une seule mise en page (le Quotidien, son
-// choix du 18/10) ; le sélecteur Magazine / Fil, le bloc du coach, la chaîne
-// vidéo, l'atelier et le cahier des grands sont partis (les rituels restent,
-// « garde les rituels ») (version
-// d'avant : git log de ce fichier). Ce qui reste : des ARTICLES sur le monde
-// (lib/accueil/articles.ts), le chiffre, le défi, la vidéo, les métiers.
+type Ouvert =
+  | { quoi: "article"; id: string; ancre?: "maths" | "defi" | "changer" }
+  | { quoi: "defi" }
+  | { quoi: "mission"; id: string }
+  | null;
+
 export default function JournalClient(props: {
   date: string;
   numero: number;
   une: UneProps;
   jour: number;
   demain: { titre: string; classe: string };
-  defi: DefiGenere;
   theme: Theme | null;
-  hier: { question: string; reponse: string };
-  chiffre: ChiffreDuJour;
-  chiffresCles: ChiffreDuJour[];
-  metier: Metier;
-  shorts: VideoJournal[];
-  reel: VideoJournal[];
-  articles: { une: Article; autres: Article[] };
-  mission: Mission;
-  /** 12/11/2026 : les six éditions du jour (donnees.ts) et leurs articles. */
+  /** Les six éditions du jour (donnees.ts), monde et île. */
   editions: Record<NiveauJournal, EditionDuNiveau>;
   editionsReunion: Record<NiveauJournal, EditionDuNiveau>;
-  catalogue: Record<string, Article>;
+  tousArticles: Article[];
+  missions: Mission[];
+  metiers: Metier[];
 }) {
   const mise: Mise = "quotidien";
   const t = TON[mise];
-  const { date, numero, jour, une, demain, theme, metier, reel, editions, editionsReunion, catalogue } = props;
+  const { date, numero, jour, une, demain, theme, editions, editionsReunion, tousArticles, missions, metiers } = props;
+
+  // Le profil : null tant qu'on ne sait pas (l'écran des profils est devant).
+  const { eleve } = useEleve();
+  const [niveau, setNiveau] = useState<NiveauJournal>(NIVEAU_PAR_DEFAUT);
+  const [profils, setProfils] = useState<"auto" | "manuel" | null>("auto");
+  const [choisi, setChoisi] = useState(false);
+  const [propose, setPropose] = useState<NiveauJournal | null>(null);
+  useEffect(() => {
+    const garde = lireNiveauGarde();
+    if (garde) {
+      setNiveau(garde);
+      setChoisi(true);
+      setProfils(null);
+    } else {
+      // Rien de valable n'est gardé : on demande, même si le script a cru
+      // voir un choix (« manuel » n'est jamais caché par sa règle de style).
+      setProfils("manuel");
+    }
+  }, []);
+  useEffect(() => {
+    setPropose(niveauDeLaClasse(eleve?.classe) ?? niveauDeLAccueil());
+  }, [eleve?.classe]);
+  const choisir = (n: NiveauJournal) => {
+    setNiveau(n);
+    setChoisi(true);
+    setProfils(null);
+    try {
+      localStorage.setItem(CLE_NIVEAU, n);
+    } catch {}
+    track("journal_niveau", { niveau: n });
+    window.scrollTo(0, 0);
+  };
 
   // Le monde ou l'île (?edition=reunion, puis le choix gardé).
   const [ile, setIle] = useState(false);
@@ -1009,103 +1152,245 @@ export default function JournalClient(props: {
     track("journal_edition", { edition: oui ? "reunion" : "monde" });
   };
 
-  // L'édition choisie (voir SelecteurNiveau pour l'ordre de choix).
-  const { eleve } = useEleve();
-  const [niveau, setNiveau] = useState<NiveauJournal>(NIVEAU_PAR_DEFAUT);
-  const [choisi, setChoisi] = useState(false);
+  // « Continuer à lire » : les articles ouverts, gardés dans le navigateur.
+  const [lus, setLus] = useState<Record<string, "commence" | "fini">>({});
   useEffect(() => {
-    const garde = lireNiveauGarde();
-    const propose = garde ?? niveauDeLaClasse(eleve?.classe) ?? niveauDeLAccueil();
-    if (propose) setNiveau(propose);
-    setChoisi(Boolean(garde));
-  }, [eleve?.classe]);
-  const choisir = (n: NiveauJournal) => {
-    setNiveau(n);
-    setChoisi(true);
     try {
-      localStorage.setItem(CLE_NIVEAU, n);
+      const l = JSON.parse(localStorage.getItem(CLE_LUS) ?? "{}") as Record<string, "commence" | "fini">;
+      if (l && typeof l === "object") setLus(l);
     } catch {}
-    track("journal_niveau", { niveau: n });
+  }, []);
+  const noter = useCallback((id: string, etat: "commence" | "fini") => {
+    setLus((avant) => {
+      if (avant[id] === etat || (avant[id] === "fini" && etat === "commence")) return avant;
+      const apres = { ...avant, [id]: etat };
+      try {
+        localStorage.setItem(CLE_LUS, JSON.stringify(apres));
+      } catch {}
+      return apres;
+    });
+  }, []);
+
+  const [ouvert, setOuvert] = useState<Ouvert>(null);
+  const fermer = useCallback(() => setOuvert(null), []);
+  const ouvrir = (a: Article, rangee: string, ancre?: "maths" | "defi" | "changer") => {
+    noter(a.id, "commence");
+    setOuvert({ quoi: "article", id: a.id, ancre });
+    track("journal_carte", { rangee, article: a.id, niveau });
   };
 
   const e = (ile ? editionsReunion : editions)[niveau];
   const petit = PETIT_NIVEAU.has(niveau);
   const libelle = NIVEAUX.find((n) => n.id === niveau)?.libelle ?? niveau;
-  const aLaUne = catalogue[e.une];
-  const autres = e.autres.map((id) => catalogue[id]).filter(Boolean);
+  const parId = useMemo(() => new Map(tousArticles.map((a) => [a.id, a])), [tousArticles]);
+  // Tous les articles du profil, dans l'édition choisie ; ceux du jour d'abord.
+  const duJour = [e.une, ...e.autres].map((id) => parId.get(id)).filter((a): a is Article => Boolean(a));
+  const duProfil = tousArticles.filter((a) => a.niveaux.includes(niveau) && Boolean(a.reunion) === ile);
+  const autres = duProfil.filter((a) => !duJour.includes(a));
+  const tous = [...duJour, ...autres];
+  const aLaUne = duJour[0];
+  const aFinir = tous.filter((a) => lus[a.id] === "commence");
+  const missionsDuProfil = [
+    e.mission,
+    ...missions.filter(
+      (m) => m.id !== e.mission.id && m.niveaux.includes(niveau) && (m.genre === "bonne-action" || Boolean(m.reunion) === ile),
+    ),
+  ];
+  const articleOuvert = ouvert?.quoi === "article" ? parId.get(ouvert.id) : undefined;
+  const missionOuverte = ouvert?.quoi === "mission" ? missionsDuProfil.find((m) => m.id === ouvert.id) : undefined;
 
   return (
     <Source.Provider value="journal">
+      <script dangerouslySetInnerHTML={{ __html: SCRIPT_PROFIL }} />
+      {profils && (
+        <EcranProfils
+          mode={profils}
+          actuel={choisi ? niveau : null}
+          propose={propose}
+          surChoix={choisir}
+          surFermer={choisi ? () => setProfils(null) : null}
+        />
+      )}
       <div className={`min-h-screen ${t.page}`}>
-        <main className={`mx-auto w-full px-4 py-6 sm:py-8 ${t.conteneur}`}>
+        <main className={`mx-auto w-full px-4 py-6 sm:py-8 ${t.conteneur}`} onKeyDown={auClavier}>
           <Manchette date={date} numero={numero} ile={ile} />
-          <InterrupteurEdition ile={ile} surChoix={choisirIle} />
-          <SelecteurNiveau niveau={niveau} choisi={choisi} surChoix={choisir} />
 
-          {/* LA UNE : l'article du jour, et la colonne de droite. */}
-          <div id="comprendre" className="mt-6 grid scroll-mt-24 gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              <ArticleUne key={aLaUne.id} a={aLaUne} petit={petit} />
-            </div>
-            <aside className="space-y-8 lg:col-span-4 lg:border-l lg:border-stone-300 lg:pl-8">
-              <ChiffresCles chiffre={e.chiffres[0]} autres={e.chiffres.slice(1)} />
-              <div id="defi" className="scroll-mt-24">
-                <DefiDuJour
-                  key={niveau}
-                  mise={mise}
-                  jour={jour}
-                  defi={e.defi}
-                  theme={theme}
-                  parmi={DEFIS_DU_NIVEAU[niveau]}
-                />
+          {/* Le profil et l'édition : toujours à portée de main. */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-3 border-b border-stone-900 pb-4">
+            <button
+              type="button"
+              onClick={() => setProfils("manuel")}
+              className="flex items-center gap-2 rounded-full border-2 border-stone-900 bg-white py-1 pl-1 pr-4 font-serif text-base font-black hover:bg-stone-100"
+            >
+              <span className={`flex h-9 w-9 items-center justify-center rounded-full ${PROFILS[niveau].fond}`}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={PROFILS[niveau].image} alt="" className="h-7 w-7 object-contain" />
+              </span>
+              {libelle}
+              <span className="font-normal italic text-stone-600">· changer de profil</span>
+            </button>
+            <InterrupteurEdition ile={ile} surChoix={choisirIle} />
+          </div>
+
+          {/* LA GRANDE UNE. */}
+          {aLaUne && (
+            <article aria-label={`À la Une : ${aLaUne.titre}`} className="mt-6 grid items-center gap-5 md:grid-cols-2 md:gap-8">
+              <button
+                type="button"
+                onClick={() => ouvrir(aLaUne, "une")}
+                aria-label={`Lire : ${aLaUne.titre}`}
+                className="overflow-hidden rounded-lg border-[3px] border-stone-900 transition hover:shadow-xl"
+              >
+                <ImageCarte fond={FOND_RUBRIQUE[aLaUne.rubrique]} dessin={dessinDe(aLaUne)} grand />
+              </button>
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">
+                  À la Une · {aLaUne.rubrique} · {libelle}
+                </p>
+                <h2 className="mt-2 font-serif text-3xl font-black leading-[1.05] tracking-tight text-stone-900 sm:text-5xl">
+                  {aLaUne.titre}
+                </h2>
+                <p className={`mt-3 font-serif font-semibold leading-snug text-stone-800 ${petit ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"}`}>
+                  {aLaUne.chapo}
+                </p>
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => ouvrir(aLaUne, "une")}
+                    className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-6 py-2.5 font-serif text-xl font-black text-white hover:bg-stone-700"
+                  >
+                    <BookOpen className="h-5 w-5" aria-hidden="true" /> Lire
+                  </button>
+                  <span className="text-sm font-bold text-stone-600">{minutes(aLaUne, petit)} min de lecture</span>
+                </div>
               </div>
-            </aside>
-          </div>
+            </article>
+          )}
 
-          {/* 3 SHORTS DE L'ÉDITION, un défi d'abord (Frédéric, 12/11). */}
-          <div className="mt-10">
-            <Shorts mise={mise} shorts={e.shorts} niveau={libelle} />
-          </div>
+          <Rangee titre="Nouveau aujourd'hui" sous={date}>
+            {duJour.map((a) => (
+              <CarteArticle key={a.id} a={a} petit={petit} etat={lus[a.id]} surOuvrir={() => ouvrir(a, "nouveau")} />
+            ))}
+          </Rangee>
 
-          {/* LES AUTRES NOUVELLES, sur trois colonnes. */}
-          <section aria-label="Les autres nouvelles" className="mt-10">
-            <h2 className="border-b-[6px] border-double border-stone-900 pb-1 font-serif text-2xl font-black text-stone-900">
-              Les autres nouvelles
-            </h2>
-            <div className="mt-4 grid gap-8 md:grid-cols-3">
-              {autres.map((a) => (
-                <AutreNouvelle key={a.id} a={a} petit={petit} />
+          {aFinir.length > 0 && (
+            <Rangee titre="Continuer à lire">
+              {aFinir.map((a) => (
+                <CarteArticle key={a.id} a={a} petit={petit} etat="commence" surOuvrir={() => ouvrir(a, "continuer")} />
               ))}
-            </div>
-          </section>
+            </Rangee>
+          )}
 
-          {/* LE DÉFI DEHORS OU LA BONNE ACTION : apprendre autrement, en vrai. */}
-          <div className="mt-10">
-            <MissionDuJour m={e.mission} />
-          </div>
+          <Rangee id="comprendre" titre="Comprendre" sous="le monde, avec les maths">
+            {tous.map((a) => (
+              <CarteArticle key={a.id} a={a} petit={petit} etat={lus[a.id]} surOuvrir={() => ouvrir(a, "comprendre")} />
+            ))}
+          </Rangee>
 
-          {/* EN IMAGES : la vidéo du jour et les maths dehors. */}
-          <div className="mt-10 grid gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <Une mise={mise} une={une} />
-            </div>
-            <div className="lg:col-span-5 lg:border-l lg:border-stone-300 lg:pl-8">
-              <Reel mise={mise} reel={reel} />
-            </div>
-          </div>
+          <Rangee id="changer" titre="Changer" sous="un geste à ta portée">
+            {tous.map((a) => (
+              <CarteArticle key={a.id} a={a} petit={petit} variante="changer" surOuvrir={() => ouvrir(a, "changer", "changer")} />
+            ))}
+          </Rangee>
 
-          <div className="mt-10 grid gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-5">
-              <MetierDuJour mise={mise} metier={metier} />
-            </div>
-            <div className="lg:col-span-7 lg:border-l lg:border-stone-300 lg:pl-8">
-              <RendezVous mise={mise} jour={jour} demain={demain} hier={e.hier} />
-            </div>
-          </div>
+          <Rangee id="defi" titre="Se tester" sous="un clic, et tu sais">
+            <CarteSimple
+              fond="from-yellow-300 to-amber-500"
+              dessin="🎯"
+              etiquette={`Le défi du jour · ${e.defi.classe}`}
+              titre={e.defi.question}
+              pied="Trois choix, une seule bonne réponse"
+              surOuvrir={() => setOuvert({ quoi: "defi" })}
+            />
+            {tous.map((a) => (
+              <CarteArticle key={a.id} a={a} petit={petit} variante="defi" surOuvrir={() => ouvrir(a, "defi", "defi")} />
+            ))}
+          </Rangee>
+
+          {e.shorts.length > 0 && (
+            <Rangee titre="En vidéo" sous={`3 défis en 1 minute · ${libelle}`}>
+              {e.shorts.map((v) => (
+                <div key={v.id} className="w-36 shrink-0 snap-start sm:w-40">
+                  <Vignette v={v} mise={mise} quoi="shorts" />
+                  <p className="mt-1.5 line-clamp-3 font-serif text-sm font-semibold leading-snug text-stone-800">
+                    {v.titre
+                      .replace(/#\S+/g, "")
+                      .replace(/\s*—\s*(CP|CE1|CE2|CM1|CM2|6e|5e|4e|3e|2de|1re|Tle)(\s.*)?$/i, "")
+                      .trim()}
+                  </p>
+                </div>
+              ))}
+              {une.paysage && (
+                <div className="w-72 shrink-0 snap-start sm:w-80">
+                  <Vignette v={une.paysage} mise={mise} quoi="une" />
+                  <p className="mt-1.5 line-clamp-2 font-serif text-sm font-semibold leading-snug text-stone-800">
+                    <span className="font-black text-red-700">La vidéo du jour · {une.classe} : </span>
+                    {une.paysage.titre}
+                  </p>
+                </div>
+              )}
+            </Rangee>
+          )}
+
+          <Rangee id="agir" titre="Agir" sous="un défi dehors, une bonne action">
+            {missionsDuProfil.map((m, i) => (
+              <CarteSimple
+                key={m.id}
+                fond={m.genre === "dehors" ? "from-lime-400 to-emerald-700" : "from-sky-300 to-blue-700"}
+                dessin={m.genre === "dehors" ? "🌳" : "🤝"}
+                etiquette={`${i === 0 ? "Aujourd'hui · " : ""}${m.genre === "dehors" ? "Le défi dehors" : "La bonne action"}`}
+                titre={m.titre}
+                pied={m.niveau}
+                surOuvrir={() => {
+                  setOuvert({ quoi: "mission", id: m.id });
+                  track("journal_carte", { rangee: "agir", mission: m.id, niveau });
+                }}
+              />
+            ))}
+          </Rangee>
+
+          <Rangee id="demain" titre="Penser à demain" sous="un métier, et les maths qui lui servent">
+            {metiers.map((m) => (
+              <Lien key={m.nom} href={m.href} quoi="metier" mise={mise} className={CARTE} carte>
+                <ImageCarte fond="from-teal-300 to-emerald-700" dessin="🧭" />
+                <span className="block p-3">
+                  <span className="block text-[11px] font-bold uppercase tracking-[0.15em] text-red-700">Et plus tard ?</span>
+                  <span className="mt-1 block font-serif text-lg font-black leading-tight text-stone-900">{m.nom}</span>
+                  <span className="mt-1 line-clamp-3 font-serif text-sm leading-snug text-stone-800">{m.maths}</span>
+                  <span className="mt-2 block text-xs font-bold text-stone-600">Apprendre : {m.notion}</span>
+                </span>
+              </Lien>
+            ))}
+          </Rangee>
+
+          <Rangee titre="Les chiffres clés">
+            {e.chiffresRangee.map((c) => (
+              <div
+                key={c.chiffre}
+                data-carte
+                tabIndex={0}
+                className="w-[15.5rem] shrink-0 snap-start rounded-lg border-2 border-stone-900 bg-white p-4 focus-visible:outline focus-visible:outline-4 focus-visible:outline-red-700"
+              >
+                <p className="font-serif text-4xl font-black leading-none tracking-tight text-stone-900">{c.chiffre}</p>
+                <p className={`mt-3 font-serif leading-snug text-stone-800 ${petit ? "text-lg" : "text-[15px]"}`}>{c.texte}</p>
+              </div>
+            ))}
+          </Rangee>
+
+          <Rangee titre="Les maths derrière" sous="le calcul de chaque article">
+            {tous.map((a) => (
+              <CarteArticle key={a.id} a={a} petit={petit} variante="maths" surOuvrir={() => ouvrir(a, "maths", "maths")} />
+            ))}
+          </Rangee>
 
           {/* Frédéric, 10/11 : « garde les rituels ». */}
-          <div className="mt-10">
-            <Rituels mise={mise} />
+          <div className="mt-10 grid gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <Rituels mise={mise} />
+            </div>
+            <div className="lg:col-span-5 lg:border-l lg:border-stone-300 lg:pl-8">
+              <RendezVous mise={mise} jour={jour} demain={demain} hier={e.hier} />
+            </div>
           </div>
 
           <footer className="pt-10">
@@ -1121,6 +1406,28 @@ export default function JournalClient(props: {
           </footer>
         </main>
       </div>
+
+      {articleOuvert && ouvert?.quoi === "article" && (
+        <Fenetre titre={articleOuvert.titre} surFermer={fermer}>
+          <LecteurArticle
+            key={articleOuvert.id}
+            a={articleOuvert}
+            petit={petit}
+            ancre={ouvert.ancre}
+            surFini={() => noter(articleOuvert.id, "fini")}
+          />
+        </Fenetre>
+      )}
+      {ouvert?.quoi === "defi" && (
+        <Fenetre titre="Le défi du jour" surFermer={fermer}>
+          <DefiDuJour key={niveau} mise={mise} jour={jour} defi={e.defi} theme={theme} parmi={DEFIS_DU_NIVEAU[niveau]} />
+        </Fenetre>
+      )}
+      {missionOuverte && (
+        <Fenetre titre={missionOuverte.titre} surFermer={fermer}>
+          <MissionDuJour m={missionOuverte} />
+        </Fenetre>
+      )}
     </Source.Provider>
   );
 }

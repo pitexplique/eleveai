@@ -1725,6 +1725,9 @@ const BONNES_ACTIONS: Mission[] = [
   },
 ];
 
+/** Toutes les missions (la rangée « Agir » du journal en galerie, 12/11/2026). */
+export const MISSIONS: Mission[] = [...DEHORS, ...DEHORS_REUNION, ...BONNES_ACTIONS];
+
 /** Un jour dehors, un jour une bonne action, DANS L'ÉDITION choisie
  *  (12/11/2026) ; sans niveau, toutes les missions (scripts, story). */
 export function missionDuJour(jour: number, niveau?: NiveauJournal, reunion = false): Mission {
