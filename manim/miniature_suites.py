@@ -98,6 +98,9 @@ EP = [
      "blanche", ["LE RANG OU", "LA VALEUR ?"], "la chaîne de dessin de Zoé",
      [("u_{5} = 90", 140, BLEU), ("5 mois → 90 abonnés", 100, VERT)]),
 ]
+# Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
+from suites_terminale_donnees import EP_TLE  # noqa: E402
+EP += EP_TLE
 
 
 import re

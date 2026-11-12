@@ -319,6 +319,10 @@ AUSSI = {
     "18": [{"classe": "terminale-spe", "notionId": "suite_numerique", "microId": "suite_calculer_termes"}],
     "19": [{"classe": "terminale-spe", "notionId": "suite_numerique", "microId": "suite_explicite_recurrence"}],
 }
+# Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
+from suites_terminale_donnees import EPS_TLE, EXOS_TLE  # noqa: E402
+EPS += EPS_TLE
+EXOS.update(EXOS_TLE)
 
 
 def entrees():
