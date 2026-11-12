@@ -208,10 +208,11 @@ class CalculPoseVerifierBase(PaysageCalculPose):
         pa = Pose(["702", "358"], signe=MOINS, origine=P(-4.0, 1.75), pas=0.6, hl=0.8, fs=54)
         pb = Pose(["354", "358"], signe="+", origine=P(-1.0, 1.75), pas=0.6, hl=0.8, fs=54)
         pb2 = Pose(["344", "358"], signe="+", origine=P(-1.0, 1.75), pas=0.6, hl=0.8, fs=54)
+        pa0, pb0 = pa.ligne(0), pb.ligne(0)  # ligne() recrée les chiffres : garder les mêmes pour FadeOut/Indicate
         x0, fs = -0.2, 30
         self.ecrire([("Zoé calcule", WHITE), ("702 " + MOINS, WHITE, "702 moins"), ("358,", WHITE, "358, et")],
                     "Zoé calcule", x0, 2.35, fs=fs,
-                    autres={1: [FadeIn(pa.ligne(0))], 2: [FadeIn(pa.ligne(1)), FadeIn(pa.signe), Create(pa.barre)]})
+                    autres={1: [FadeIn(pa0)], 2: [FadeIn(pa.ligne(1)), FadeIn(pa.signe), Create(pa.barre)]})
         faux = nombre(pa, "354")
         self.ecrire([("et trouve", WHITE), ("354.", WHITE, "354. Elle")], "et trouve", x0, 1.75, fs=fs,
                     autres={1: [FadeIn(faux, scale=1.3)]})
@@ -219,18 +220,18 @@ class CalculPoseVerifierBase(PaysageCalculPose):
         b712 = nombre(pb, "712", couleur=ROUGE_ERREUR)
         self.ecrire([("354 +", WHITE, "354 plus"), ("358 =", WHITE, "358, 712"), ("712.", ROUGE_ERREUR, "712. Ce")],
                     None, x0, 0.4, fs=fs,
-                    autres={0: [FadeIn(pb.ligne(0))], 1: [FadeIn(pb.ligne(1)), FadeIn(pb.signe), Create(pb.barre)],
+                    autres={0: [FadeIn(pb0)], 1: [FadeIn(pb.ligne(1)), FadeIn(pb.signe), Create(pb.barre)],
                             2: [FadeIn(b712, scale=1.3)]})
         cx = self.croix(faux)
         self.ecrire([("Ce n'est pas 702 !", ROUGE_ERREUR)], "Ce n'est pas", x0, -0.2, fs=fs,
-                    autres=[Create(cx), Indicate(pa.ligne(0), color=ROUGE_ERREUR)])
+                    autres=[Create(cx), Indicate(pa0, color=ROUGE_ERREUR)])
         bon = nombre(pa, "344", couleur=VERT_OK)
         self.ecrire([("Le bon résultat est", WHITE), ("344.", VERT_OK, "344. Et")], "Le bon", x0, -0.95, fs=fs)
         self.play(FadeOut(faux), FadeOut(cx), FadeIn(bon, scale=1.3), run_time=0.3)
         b702 = nombre(pb2, "702", couleur=VERT_OK)
         self.ecrire([("Et 344 +", WHITE, "344 plus"), ("358,", WHITE, "358, ça"), ("ça fait bien", WHITE),
                      ("702.", VERT_OK, "702.")], "Et 344", x0, -1.6, fs=fs,
-                    autres={0: [FadeOut(pb.ligne(0)), FadeOut(b712), FadeIn(pb2.ligne(0))], 3: [FadeIn(b702, scale=1.3)]})
+                    autres={0: [FadeOut(pb0), FadeOut(b712), FadeIn(pb2.ligne(0))], 3: [FadeIn(b702, scale=1.3)]})
         ch = self.coche(taille=0.45).next_to(b702, DOWN, buff=0.25)
         self.play(Create(ch), run_time=0.3)
         self.attendre_voix()

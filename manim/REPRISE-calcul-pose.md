@@ -47,13 +47,11 @@ Voix et manifeste : `6e-calcul-pose-<slug>[-short]` (`manim/voix/`). Sorties : `
 - ✅ Matrice métiers : guide de montagne ajouté, `V` sur comptable, guide, agriculteur ; logisticienne → 157 colis / camionnettes de 6. `V` de la logisticienne et de la réalisatrice à mettre après leurs HD. Pas commité.
 - Leçons 12/11 : un morceau fait d'un NOMBRE SEUL : un play à part + `au_mot` explicite (sinon il suit le morceau d'avant, trop tôt). Un Text attend son DERNIER mot : couper « 386, | c'est presque » sinon 386 arrive tard. Un affichage 0,1 s AVANT la dernière occurrence d'un nombre compte comme « TARD » (contre l'occurrence d'avant) : viser l'extrait exact (`("1.", 2)`). Les choix redits dans la réponse : `_pas_audit` seul (garder la synchro). `ecrire(..., autres={k: [...]})` : animations liées à CHAQUE morceau. `GRIS` n'existe pas dans `calcul_pose_commun` (le définir).
 
+- ✅ 12/11 soir (quota 91 %, « finir 3 à 5 vidéos ») : **HD 04 division** (241,7 s) et **HD 05 vérifier** (247,4 s) rendus, bords 0, planches HD relues (05 : l'ancien « 354 » restait sous le « 344 » au -ql, corrigé avant le HD). **Shorts 03, 04, 05 filmés + miniatures**, planches relues (03 refilmé : « d u » seuls au défi, `entetes:false` ; « × 10 = 200 » aéré). Les 9 vidéos 01-05 sont finies, sauf le short 02.
+
 ## Reste, dans l'ordre (samedi 14/11, 9 h)
-- ⏸ 12/11 : arrêt sur consigne de Frédéric (88 % de l'usage hebdomadaire). Aucun HD lancé après l'ép. 03. Rien poussé.
-0. Relire la planche -ql de l'ép. 05, corriger les défauts.
-1. Rendus lourds, UN à la fois, machine libre (`Get-CimInstance Win32_Process`, aucun `manim render` ni `ti-margo-short … film`) :
-   HD 04 et HD 05 (`python -m manim render -qh --disable_caching manim/scripts/6e/calcul_pose_<ép>.py <Scène> -o eleveai-maths-6e-calcul-pose-<ép> --media_dir manim/scripts/6e/media-cp-0N`, copie vers `manim/sorties/6e/maths/calcul-pose/0N-<ép>/`, `python scripts/verifier-bords-video.py`, planche) ;
-   films des shorts 02 (refilm), 03, 04, 05 (`node scripts/ti-margo-short.mjs calcul-pose <ép> film`, puis `… miniature`, planche du mp4).
-2. `V` logisticienne + réalisatrice dans `lib/matrice/metiers-college.ts`.
-3. Aperçu `manim/sorties/apercu-calcul-pose.html` : ajouter 02-05 (paysage + short, sans autoplay).
-4. Commit par chemin (mes fichiers seulement), sans push. Manifeste, R2, coach : après l'écoute de Frédéric.
+1. Short 02 : `node scripts/ti-margo-short.mjs calcul-pose soustraction film`, puis `… miniature`, planche du mp4 (`python scripts/ti-margo-planche.py <mp4> <png> 24`).
+2. `V` logisticienne + réalisatrice dans `lib/matrice/metiers-college.ts` (`entier_calcul_pose`).
+3. Aperçu `manim/sorties/apercu-calcul-pose.html` : ajouter 02-05 (paysage + short, sans autoplay). Durées : 04 241,7 s, 05 247,4 s, 03 244,2 s.
+4. Faire écouter à Frédéric ; ensuite seulement manifeste, R2, coach.
 - ⛔ Poste partagé : avant chaque rendu lourd, lignes de commande des processus : rendre seulement si aucun `manim render` ne tourne.

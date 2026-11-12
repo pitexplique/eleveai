@@ -47,7 +47,7 @@ FILMS.multiplication=function(outils){
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* le défi : 21 × 13, la réponse reste à l'élève */
-      poser(c,{xu:W/2+75,y0:250,lignes:[{txt:'21',z:T>=t21?zoom(T,t21):0},{txt:'13',z:T>=t13?zoom(T,t13):0}],signe:T>=t13?'×':'',barre:T>=t13?1:0});
+      poser(c,{xu:W/2+75,y0:250,entetes:false,lignes:[{txt:'21',z:T>=t21?zoom(T,t21):0},{txt:'13',z:T>=t13?zoom(T,t13):0}],signe:T>=t13?'×':'',barre:T>=t13?1:0});
       if(T>=tRep) ecrire(c,'?',W/2+75-75,250+2*135+60,130*zoom(T,tRep,.6),CRAIE.jaune);
       tab.maj(); return; }
     if(T>=ouf){ /* la bonne pose : la deuxième ligne commence par 0 (230), 46 + 230 = 276, bien plus que 200 */
@@ -61,8 +61,8 @@ FILMS.multiplication=function(outils){
       if(T>=tV23) ecrire(c,'23 boîtes',W/2-175,110,70*zoom(T,tV23,.4),CRAIE.blanc);
       if(T>=tV20) ecrire(c,'> 20 boîtes',W/2+205,110,70*zoom(T,tV20,.4),CRAIE.jaune);
       if(T>=tV20b) ecrire(c,'20',W/2-290,290,96*zoom(T,tV20b,.4),CRAIE.jaune);
-      if(T>=tV10) ecrire(c,'× 10',W/2-65,290,96*zoom(T,tV10,.4),CRAIE.jaune);
-      if(T>=tV200) ecrire(c,'= 200',W/2+195,290,96*zoom(T,tV200,.4),CRAIE.ok);
+      if(T>=tV10) ecrire(c,'× 10',W/2-75,290,96*zoom(T,tV10,.4),CRAIE.jaune);
+      if(T>=tV200) ecrire(c,'= 200',W/2+225,290,96*zoom(T,tV200,.4),CRAIE.ok);
       if(T>=tV69) ecrire(c,'69',W/2-150,480,110*zoom(T,tV69,.4),T>=tPetit?CRAIE.faux:CRAIE.blanc);
       if(T>=tPetit) ecrire(c,'< 200 !',W/2+120,480,96*zoom(T,tPetit,.4),CRAIE.faux);
       tab.maj(); return; }
