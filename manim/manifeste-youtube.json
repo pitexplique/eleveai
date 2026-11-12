@@ -6215,7 +6215,8 @@
         "Shorts"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-13"
+      "pas_avant": "2026-11-13",
+      "url": "https://youtube.com/shorts/0-xPByp5vww"
     },
     {
       "id": "3e-pente-maido-short",
@@ -59410,7 +59411,8 @@
         "sciences"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-13"
+      "pas_avant": "2026-11-13",
+      "url": "https://youtu.be/lPB9F4HGvB4"
     },
     {
       "id": "seconde-puissance-zero-negatif",
@@ -59577,7 +59579,8 @@
         }
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-13"
+      "pas_avant": "2026-11-13",
+      "url": "https://youtube.com/shorts/DRxR1H4qMWU"
     },
     {
       "id": "4e-puissance-notation-scientifique",
@@ -63751,7 +63754,8 @@
       "centres": [
         "meteo-climat"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/PPu5Y5kouEw"
     },
     {
       "id": "4e-relatif-soustraction-short",
@@ -63799,7 +63803,8 @@
       "centres": [
         "meteo-climat"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/D20ZmhSSHGc"
     },
     {
       "id": "4e-relatif-multiplication",
@@ -73519,6 +73524,466 @@
         }
       ],
       "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "premiere-suite-geo-explicite",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_explicite",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-11",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite.mp4",
+      "miniature": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite.png",
+      "titre": "20 000 € et − 20 % par an : combien dans 3 ans ? — La formule explicite d'une suite géométrique — épisode 13 · Maths 1re",
+      "accroche": "Elena est experte automobile : elle estime la valeur des voitures pour les assurances. Une voiture neuve vaut 20 000 €, et sa valeur baisse de 20 % chaque année. Combien vaudra-t-elle dans 3 ans ? Avec la formule explicite, on calcule n'importe quel terme d'un seul coup.\n\nDans cette vidéo :\n• − 20 % = × 0,8 : uₙ = 20 000 × 0,8ⁿ\n• la puissance d'abord : 0,8³ = 0,512, puis u₃ = 10 240 €\n• si la suite commence à u₁ : uₙ = u₁ × qⁿ⁻¹\n• lire une formule : le nombre devant est le premier terme, la base est la raison\n• prouver qu'une suite est géométrique : uₙ₊₁ ÷ uₙ ne dépend pas de n\n• le piège : 0,2ⁿ, la part perdue au lieu de ce qui reste\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une suite géométrique à termes positifs vérifie u₁ = 6 et u₂ = 9 : trouve sa raison, u₀, puis uₙ en fonction de n.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_explicite&display=simple\n\n📈 Épisode 13 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Formule explicite · Elena, experte automobile"
+        ],
+        [
+          "00:29",
+          "uₙ = 20 000 × 0,8ⁿ"
+        ],
+        [
+          "00:53",
+          "La puissance d'abord"
+        ],
+        [
+          "01:11",
+          "Question 1"
+        ],
+        [
+          "01:51",
+          "Départ à u₁ : qⁿ⁻¹"
+        ],
+        [
+          "02:15",
+          "Lire et prouver"
+        ],
+        [
+          "02:42",
+          "Question 2"
+        ],
+        [
+          "03:24",
+          "Le piège 0,2ⁿ"
+        ],
+        [
+          "03:42",
+          "À toi de jouer"
+        ],
+        [
+          "04:03",
+          "Correction"
+        ],
+        [
+          "04:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "formule explicite",
+        "suite géométrique",
+        "uₙ = u₀ × qⁿ",
+        "puissance",
+        "expert automobile",
+        "assurance",
+        "voiture",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "Une suite géométrique a pour premier terme v₀ = 50 et pour raison 1,2. Pour tout entier naturel n :",
+          "choix": [
+            "vₙ = 50 × 1,2 × n",
+            "vₙ = 1,2 × 50ⁿ",
+            "vₙ = 50 × 1,2ⁿ"
+          ],
+          "reponse": 2,
+          "explication": "Le premier terme est devant, la raison est la base de la puissance, et n est en exposant."
+        },
+        {
+          "t": "02:42",
+          "question": "Une suite géométrique commence à t₁ = 400, et sa raison est 0,9. Pour tout entier n ≥ 1 :",
+          "choix": [
+            "tₙ = 400 × 0,9ⁿ",
+            "tₙ = 400 × 0,9ⁿ⁻¹",
+            "tₙ = 400 − 10n"
+          ],
+          "reponse": 1,
+          "explication": "On vérifie : t₁ = 400 × 0,9⁰ = 400."
+        }
+      ],
+      "centres": [
+        "voitures-motos",
+        "argent-budget"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique",
+      "aussi": [
+        {
+          "classe": "premiere-spe",
+          "notionId": "suites",
+          "microId": "suite_geometrique"
+        }
+      ]
+    },
+    {
+      "id": "premiere-suite-geo-explicite-short",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_explicite",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-12",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-geo-explicite",
+      "fichier": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite-short.mp4",
+      "miniature": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite-short.png",
+      "titre": "uₙ = 3 × 2ⁿ : tu la lis en 5 secondes ? 🪷 — 1re #Shorts",
+      "accroche": "Sur un étang, des nénuphars couvrent 3 m², et leur surface double chaque jour : uₙ = 3 × 2ⁿ. Le nombre devant, c'est le départ ; la base de la puissance, c'est la raison.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de mètres carrés les nénuphars couvrent-ils au bout de 6 jours ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_explicite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "nénuphars",
+        "étang",
+        "suite géométrique",
+        "formule explicite",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Des nénuphars couvrent uₙ = 3 × 2ⁿ m² après n jours. Quels sont le premier terme et la raison ?",
+          "choix": [
+            "u₀ = 3 et q = 2",
+            "u₀ = 2 et q = 3",
+            "u₀ = 6 et q = 2"
+          ],
+          "reponse": 0,
+          "explication": "Pour n = 0, 2⁰ = 1 : u₀ = 3."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ],
+      "aussi": [
+        {
+          "classe": "premiere-spe",
+          "notionId": "suites",
+          "microId": "suite_geometrique"
+        }
+      ]
+    },
+    {
+      "id": "premiere-suite-geo-variation",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_variation",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-13",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation.mp4",
+      "miniature": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation.png",
+      "titre": "+ 5 % par niveau : « ça reste presque pareil » ? — Sens de variation d'une suite géométrique — épisode 14 · Maths 1re",
+      "accroche": "Sarah est game designer : elle règle la difficulté d'un jeu vidéo. À chaque niveau, il faut 5 % de points d'expérience de plus. Un testeur affirme : « 5 %, c'est si peu que ça reste presque pareil ». Monte-t-elle, descend-elle ? Il faut comparer la raison au bon nombre.\n\nDans cette vidéo :\n• q = 1,05 > 1 : 2 000, 2 100, 2 205, la suite croît lentement, sans jamais s'arrêter\n• la règle à termes positifs : q > 1 croissante, 0 < q < 1 décroissante, q = 1 constante\n• les ventes du jeu : − 10 % par mois, la suite décroît vers 0 sans devenir négative\n• le piège : comparer q à 0 au lieu de 1\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : croissante, décroissante ou constante ? Une ville de 5 000 habitants qui perd 2 % par an ; wₙ = 40 × 1ⁿ ; t₀ = 8 et tₙ₊₁ = 1,5 × tₙ.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_variation&display=simple\n\n📈 Épisode 14 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sens de variation"
+        ],
+        [
+          "00:11",
+          "Sarah, game designer"
+        ],
+        [
+          "00:32",
+          "+ 5 % : croissante"
+        ],
+        [
+          "00:58",
+          "La règle : comparer q à 1"
+        ],
+        [
+          "01:16",
+          "Question 1"
+        ],
+        [
+          "01:51",
+          "Les ventes : vers 0"
+        ],
+        [
+          "02:09",
+          "Le piège : comparer à 0"
+        ],
+        [
+          "02:27",
+          "Question 2"
+        ],
+        [
+          "02:58",
+          "À toi de jouer"
+        ],
+        [
+          "03:27",
+          "Correction"
+        ],
+        [
+          "03:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "sens de variation",
+        "suite géométrique",
+        "croissante",
+        "décroissante",
+        "raison",
+        "game designer",
+        "jeu vidéo",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:16",
+          "question": "Une suite géométrique à termes positifs a pour raison 0,9. Elle est :",
+          "choix": [
+            "décroissante",
+            "croissante, car 0,9 est positif",
+            "constante, car 0,9 est proche de 1"
+          ],
+          "reponse": 0,
+          "explication": "0,9 est plus petit que 1 : à chaque étape, on ne garde que 90 %, donc ça baisse."
+        },
+        {
+          "t": "02:27",
+          "question": "La suite vₙ = 300 × 1,02ⁿ est :",
+          "choix": [
+            "décroissante, car le taux est faible",
+            "constante",
+            "croissante"
+          ],
+          "reponse": 2,
+          "explication": "La raison est la base de la puissance : 1,02, plus grande que 1."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "technologie-ia"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique"
+    },
+    {
+      "id": "premiere-suite-geo-variation-short",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_variation",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-14",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-geo-variation",
+      "fichier": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation-short.mp4",
+      "miniature": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation-short.png",
+      "titre": "− 25 % par heure : ça monte ou ça descend ? 💊 — 1re #Shorts",
+      "accroche": "Dans le sang d'un patient, la quantité d'un médicament baisse de 25 % chaque heure : on multiplie par 0,75. 0,75 est plus petit que 1 : la suite est décroissante, sans jamais devenir négative.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 200 mg au départ : combien en reste-t-il après 2 heures ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_variation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "médicament",
+        "pourcentage",
+        "suite géométrique",
+        "sens de variation",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Un médicament baisse de 25 % chaque heure dans le sang (× 0,75). La suite des quantités est :",
+          "choix": [
+            "décroissante",
+            "croissante, car q est positif",
+            "constante"
+          ],
+          "reponse": 0,
+          "explication": "q est entre 0 et 1 : la quantité baisse à chaque heure, sans devenir négative."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-suite-geo-graphique",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_graphique",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-15",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique.mp4",
+      "miniature": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique.png",
+      "titre": "100 bactéries qui doublent : à quoi ressemble la courbe ? — Suite géométrique sur un graphique — épisode 15 · Maths 1re",
+      "accroche": "Laura est technicienne qualité dans une cuisine centrale, qui prépare les repas des cantines. Un plat oublié hors du frigo contient 100 bactéries, et leur nombre double toutes les 20 minutes. Pour montrer le risque aux cuisiniers, un seul dessin suffit : celui de la suite.\n\nDans cette vidéo :\n• placer les points (n ; uₙ) : 100, 200, 400, 800, 1 600\n• des points pas alignés : une courbe qui se creuse quand q > 1\n• lire la raison sur un graphique : le quotient de deux ordonnées qui se suivent\n• q entre 0 et 1 : la planche à découper, les points descendent vers 0\n• le piège : une courbe qui démarre doucement ne reste pas petite (409 600 bactéries en 4 heures)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : uₙ = 3 × 2ⁿ : le point (4 ; 48) ou le point (4 ; 24) est-il sur son graphique ? Que conjecturer quand n devient très grand ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_graphique&display=simple\n\n📈 Épisode 15 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Suite géométrique sur un graphique · Laura et les bactéries"
+        ],
+        [
+          "00:30",
+          "Placer les points"
+        ],
+        [
+          "00:47",
+          "Une courbe qui se creuse"
+        ],
+        [
+          "01:04",
+          "Question 1"
+        ],
+        [
+          "01:37",
+          "Raison entre 0 et 1"
+        ],
+        [
+          "02:05",
+          "Le piège"
+        ],
+        [
+          "02:29",
+          "Question 2"
+        ],
+        [
+          "03:06",
+          "À toi de jouer"
+        ],
+        [
+          "03:34",
+          "Correction"
+        ],
+        [
+          "03:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suite géométrique",
+        "représentation graphique",
+        "nuage de points",
+        "raison",
+        "bactéries",
+        "hygiène alimentaire",
+        "cuisine centrale",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "Sur le graphique d'une suite géométrique, on lit u₀ = 40 et u₁ = 20. Sa raison est :",
+          "choix": [
+            "0,5",
+            "−20",
+            "2"
+          ],
+          "reponse": 0,
+          "explication": "On divise : 20 ÷ 40 = 0,5. −20, c'est l'écart, pas la raison."
+        },
+        {
+          "t": "02:29",
+          "question": "Deux nuages de points. La suite bleue : 3 ; 6 ; 9 ; 12. La suite rouge : 3 ; 6 ; 12 ; 24. Laquelle est géométrique ?",
+          "choix": [
+            "la bleue",
+            "la rouge",
+            "les deux"
+          ],
+          "reponse": 1,
+          "explication": "La rouge double à chaque fois : ses points se creusent. La bleue ajoute 3 : ses points sont alignés."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "corps-sante",
+        "sciences"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-suite-geometrique"
+    },
+    {
+      "id": "premiere-suite-geo-graphique-short",
+      "notionId": "expo_suite_geometrique",
+      "microId": "expo_suite_graphique",
+      "classe": "premiere",
+      "serie": "Maths 1re",
+      "prioritaire": true,
+      "pas_avant": "2026-12-16",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-suite-geo-graphique",
+      "fichier": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique-short.mp4",
+      "miniature": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique-short.png",
+      "titre": "Tu reconnais une suite géométrique rien qu'à son dessin ? 🎮 — 1re #Shorts",
+      "accroche": "Dans un jeu vidéo, les monstres triplent à chaque vague : 2, 6, 18, 54. Sur un graphique, les points ne sont pas alignés : ils montent de plus en plus vite, la courbe se creuse.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 2, 6, 18, 54… quelle est l'ordonnée du point d'abscisse 6 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_graphique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+      "tags": [
+        "jeu vidéo",
+        "monstres",
+        "suite géométrique",
+        "graphique",
+        "maths",
+        "1re",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Les monstres triplent à chaque vague : 2 ; 6 ; 18 ; 54. À quoi ressemble ce nuage de points ?",
+          "choix": [
+            "des points qui montent de plus en plus vite",
+            "des points alignés",
+            "des points qui descendent"
+          ],
+          "reponse": 0,
+          "explication": "On multiplie par 3 : les écarts grandissent, et la courbe se creuse."
+        }
+      ],
+      "centres": [
+        "jeux-video",
         "jeux-defis"
       ]
     }

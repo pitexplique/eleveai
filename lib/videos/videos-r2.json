@@ -2259,7 +2259,7 @@
   "vignette": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif.vignette.webp",
   "titre": "10⁰ vaut 1, pas 0 ! — Puissance zéro et exposant négatif — épisode 4 · Maths 4e",
   "short": false,
-  "youtube": null,
+  "youtube": "lPB9F4HGvB4",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple"
  },
  "4e-puissance-zero-negatif-short": {
@@ -2268,7 +2268,7 @@
   "vignette": "4e/maths/puissances/dessin-anime/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif-short-dessin-anime-miniature.vignette.webp",
   "titre": "2026 puissance 0, ça fait combien ? 🤯 — 4e #Shorts",
   "short": true,
-  "youtube": null,
+  "youtube": "DRxR1H4qMWU",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple"
  },
  "4e-pythagore-carre-racine": {
@@ -2529,7 +2529,7 @@
   "vignette": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction.vignette.webp",
   "titre": "Enlever peut faire monter — Soustraire des relatifs — épisode 2 · Maths 4e",
   "short": false,
-  "youtube": null,
+  "youtube": "PPu5Y5kouEw",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_soustraction&display=simple"
  },
  "4e-relatif-soustraction-short": {
@@ -2538,7 +2538,7 @@
   "vignette": "4e/maths/relatifs/02-soustraction/eleveai-maths-4e-relatif-soustraction-short-miniature.vignette.webp",
   "titre": "J'enlève un sac de sable : je descends ? Tu paries ? #maths #4e",
   "short": true,
-  "youtube": null,
+  "youtube": "D20ZmhSSHGc",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_soustraction&display=simple"
  },
  "4e-stats-defi": {
@@ -8385,6 +8385,14 @@
   "short": true,
   "youtube": null
  },
+ "maths-4e-facto-maximum": {
+  "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 4e facto maximum",
+  "short": false,
+  "youtube": null
+ },
  "maths-4e-facto-maximum-short": {
   "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum-short.mp4",
   "poster": null,
@@ -8406,6 +8414,30 @@
   "poster": null,
   "vignette": "6e/maths/calcul-pose/01-addition/eleveai-maths-6e-calcul-pose-addition-short.vignette.webp",
   "titre": "maths 6e calcul pose addition short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-6e-calcul-pose-multiplication": {
+  "fichier": "6e/maths/calcul-pose/03-multiplication/eleveai-maths-6e-calcul-pose-multiplication.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e calcul pose multiplication",
+  "short": false,
+  "youtube": null
+ },
+ "maths-6e-calcul-pose-soustraction": {
+  "fichier": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e calcul pose soustraction",
+  "short": false,
+  "youtube": null
+ },
+ "maths-6e-calcul-pose-soustraction-short": {
+  "fichier": "6e/maths/calcul-pose/02-soustraction/eleveai-maths-6e-calcul-pose-soustraction-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths 6e calcul pose soustraction short",
   "short": true,
   "youtube": null
  },
@@ -8837,22 +8869,6 @@
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=second_degre&display=simple"
- },
- "maths-premiere-suite-geo-explicite": {
-  "fichier": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite.mp4",
-  "poster": null,
-  "vignette": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite.vignette.webp",
-  "titre": "maths premiere suite geo explicite",
-  "short": false,
-  "youtube": null
- },
- "maths-premiere-suite-geo-variation": {
-  "fichier": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths premiere suite geo variation",
-  "short": false,
-  "youtube": null
  },
  "maths-premiere-suites-arith-geo": {
   "fichier": "premiere/maths/paysage/fr/suites-arith-geo/eleveai-maths-premiere-suites-arith-geo.mp4",
@@ -10564,6 +10580,42 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_variation&display=simple"
  },
+ "premiere-suite-geo-explicite": {
+  "fichier": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite.mp4",
+  "poster": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite.png",
+  "vignette": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite.vignette.webp",
+  "titre": "20 000 € et − 20 % par an : combien dans 3 ans ? — La formule explicite d'une suite géométrique — épisode 13 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_explicite&display=simple"
+ },
+ "premiere-suite-geo-explicite-short": {
+  "fichier": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite-short.mp4",
+  "poster": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite-short.png",
+  "vignette": null,
+  "titre": "uₙ = 3 × 2ⁿ : tu la lis en 5 secondes ? 🪷 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_explicite&display=simple"
+ },
+ "premiere-suite-geo-graphique": {
+  "fichier": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique.mp4",
+  "poster": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique.png",
+  "vignette": null,
+  "titre": "100 bactéries qui doublent : à quoi ressemble la courbe ? — Suite géométrique sur un graphique — épisode 15 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_graphique&display=simple"
+ },
+ "premiere-suite-geo-graphique-short": {
+  "fichier": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique-short.mp4",
+  "poster": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique-short.png",
+  "vignette": null,
+  "titre": "Tu reconnais une suite géométrique rien qu'à son dessin ? 🎮 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_graphique&display=simple"
+ },
  "premiere-suite-geo-reconnaitre": {
   "fichier": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre.mp4",
   "poster": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre.png",
@@ -10635,6 +10687,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_terme_rang&display=simple"
+ },
+ "premiere-suite-geo-variation": {
+  "fichier": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation.mp4",
+  "poster": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation.png",
+  "vignette": null,
+  "titre": "+ 5 % par niveau : « ça reste presque pareil » ? — Sens de variation d'une suite géométrique — épisode 14 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_variation&display=simple"
+ },
+ "premiere-suite-geo-variation-short": {
+  "fichier": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation-short.mp4",
+  "poster": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation-short.png",
+  "vignette": null,
+  "titre": "− 25 % par heure : ça monte ou ça descend ? 💊 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_variation&display=simple"
  },
  "presentation": {
   "fichier": "ulule/presentation.mp4",
@@ -13047,7 +13117,7 @@
   "vignette": "terminale/maths/shorts/fr/continuite-tvi/eleveai-maths-terminale-continuite-tvi-short-defi.vignette.webp",
   "titre": "Trouver α au centième, sans formule (TVI et balayage)",
   "short": true,
-  "youtube": null,
+  "youtube": "0-xPByp5vww",
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=tvi_defi&display=simple"
  },
  "terminale-continuite-tvi-short-rediger": {
