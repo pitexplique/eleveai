@@ -37,6 +37,14 @@ class FactoSimpleShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         """Trois lignes de question ET trois de réponse : cartes à 85 %, la réponse ne descend pas sur Ti-Margo."""
         tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
         cartes.scale(0.85).next_to(q, DOWN, buff=0.14).set_x(0)
+        # 12/11 relecture HD : la bonne carte rétrécissait son texte pour loger la coche (carte trop étroite) :
+        # on allonge les cartes vers la droite (au plus 4,0 de large), pour que le texte garde sa taille
+        gauche = min(c[0].get_left()[0] for c in cartes)
+        besoin = max(c[1][1].get_right()[0] for c in cartes) + 1.0 - gauche
+        larg = min(4.0, max(besoin, cartes[0][0].width))
+        for c in cartes:
+            c[0].stretch_to_fit_width(larg, about_edge=LEFT)
+        cartes.set_x(0)
         pause.next_to(cartes, DOWN, buff=0.14).set_x(0)
         ph.arrange(DOWN, buff=0.08).next_to(cartes, DOWN, buff=0.1).set_x(0)
         return tete, q, cartes, pause, rebours, ph
@@ -81,7 +89,7 @@ class FactoSimpleShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         self.dit(l1, "De tête,")
         l2 = self.l("sans poser", 0.12, 42, CIEL)
         l2b = self.l("l'opération.", -0.46, 42, CIEL)
-        op = self.operation_posee().scale(0.7).move_to(P(0, -1.45))
+        op = self.operation_posee().scale(0.84).move_to(P(0, -1.5))  # 12/11 : plus lisible (était à 70 %)
         croix = VGroup(Line(op.get_corner(DL), op.get_corner(UR)), Line(op.get_corner(UL), op.get_corner(DR)))
         croix.set_stroke(PIEGE, 7)
         self.dit(l2, "sans poser")
@@ -152,7 +160,17 @@ class FactoSimpleShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         boite = RoundedRectangle(width=0.8, height=0.8, corner_radius=0.1, color=FACTEUR, stroke_width=5).move_to(P(0, -0.95))
         pt = T("?", 50, FACTEUR, gras=True, audit=False).move_to(boite)
         self.play(Create(boite), FadeIn(pt, scale=1.4), run_time=0.3)
-        self.appel_commentaire(-2.0)
+        # 12/11 relecture HD : comme aux shorts 04 et 05, sur 2 lignes, gros et gras (il était minuscule)
+        self.au_mot("Réponds en commentaire")
+        a1 = T("Réponds", 44, VERT_OK, gras=True)
+        a2 = T("en commentaire !", 44, VERT_OK, gras=True)
+        appel = VGroup(a1, a2).arrange(DOWN, buff=0.12)
+        if appel.width > 3.5:
+            appel.scale_to_fit_width(3.5)
+        appel.move_to(P(0, -2.05))
+        self.play(FadeIn(appel, scale=0.7), run_time=0.35)
+        self.insister(appel, 1.06, 0.25)
+        self.attendre_voix(marge=1.0)
 
         # ── 03 : la fin du 05/11 ──
         self.fin_05_11("03-abonne", [x for x in self.mobjects if x is not margo])

@@ -78,6 +78,22 @@ class FactoSimple4e(PaysageRel):
     fichier_marques = "facto_simple_marques.json"
     ceinture = "jaune"
 
+    def _disposer_q(self, question, choix, phrase):
+        """Les phrases de réponse au moins à la taille de « Mets pause » (sans sortir du cadre)."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        # 12/11 relecture HD : la phrase de réponse passe sous la figure, à gauche, à 36 pt (elle était
+        # minuscule sous les cartes) ; la figure est remontée (figure_q, y 2.1)
+        if len(ph.submobjects):
+            ph.scale(T(phrase[0], 36, audit=False).height / ph[0].height)
+            ph.arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+            if ph.width > 6.7:
+                ph.scale_to_fit_width(6.7)
+            haut = -0.75
+            ph.align_to(P(-6.45, 0), LEFT).align_to(P(0, haut), UP)
+            if ph.get_bottom()[1] < -3.45:
+                ph.scale((haut + 3.45) / ph.height, about_point=P(-6.45, haut))
+        return tete, q, cartes, pause, rebours, ph
+
     def cadre(self, m, couleur=CIEL, buff=0.12):
         return SurroundingRectangle(m, color=couleur, buff=buff, stroke_width=3, corner_radius=0.08)
 
@@ -122,31 +138,31 @@ class FactoSimple4e(PaysageRel):
         m.nom.next_to(m.perso, UP, buff=0.14).set_x(-4.9)
         self.au("Maya", FadeIn(m.perso, shift=UP * 0.3), FadeIn(m.nom[0], shift=UP * 0.1), rt=0.35)
         self.au("développeuse", FadeIn(m.nom[1], shift=UP * 0.1), rt=0.3)
-        ecr = ecran_code(8.4, 3.1).move_to(P(1.15, 0.95))
+        ecr = ecran_code(8.4, 3.3).move_to(P(1.15, 0.95))
         l1 = self.lg("Son programme doit calculer", 1.15, 3.0, 38, CIEL, maxw=8.2)
         self.dit(l1, "Son programme doit calculer", avec=[FadeIn(ecr, shift=UP * 0.2)])
-        e1 = D("9 × 37 + 9 × 63", 54).move_to(P(1.15, 1.65))
+        e1 = D("9 × 37 + 9 × 63", 54).move_to(P(1.15, 1.8))
         self.dire_eq(e1, "9 fois 37, plus 9 fois 63.", echelle=1.2)
-        l2 = self.lg("Ça fait deux multiplications.", 1.15, -1.2, 38, maxw=8.4)
+        l2 = self.lg("Ça fait deux multiplications.", 1.15, -1.32, 36, maxw=8.4)
         self.dit(l2, "Ça fait deux multiplications.",
                  avec=[Circumscribe(e1.atomes[1], color=CIEL, buff=0.06), Circumscribe(e1.atomes[5], color=CIEL, buff=0.06)])
         neufs = VGroup(e1.atomes[0], e1.atomes[4])
         l3 = self.lg("Maya repère le facteur commun :", 0, 0, 36, maxw=8.6)
         l3b = self.lg("9.", 0, 0, 44, FACTEUR, maxw=1)
-        VGroup(l3, l3b).arrange(RIGHT, buff=0.25).move_to(P(1.4, -1.92))
+        VGroup(l3, l3b).arrange(RIGHT, buff=0.25).move_to(P(0.35, -2.08))  # le « 9. » loin de Ti-Margo
         self.dit(l3, "Maya repère le facteur commun :")
         self.dit(l3b, "commun : 9.", avec=[neufs.animate.set_color(FACTEUR)])
         self.play(Circumscribe(e1.atomes[0], color=FACTEUR, buff=0.08), Circumscribe(e1.atomes[4], color=FACTEUR, buff=0.08),
                   run_time=0.25)
-        e2 = D("9 × (37 + 63)", 54).move_to(P(1.15, 0.85))
+        e2 = D("9 × (37 + 63)", 54).move_to(P(1.15, 0.92))
         e2.atomes[0].set_color(FACTEUR)
         self.au("Elle écrit", e1.animate.set_opacity(0.45), rt=0.3)
         self.dire_eq(e2, "9 fois, entre parenthèses, 37 plus 63.", echelle=1.2)
         e3 = D("= 9 × 100 = 900", 54)
-        e3.move_to(P(1.15, 0.05))
+        e3.move_to(P(1.15, 0.02))
         self.dire_eq(e3, "C'est 9 fois 100 : 900.", echelle=1.2)
         self.play(e3.atomes[-1].animate.set_color(VERT_OK), run_time=0.15)
-        l4 = self.lg("Une seule multiplication, et de tête !", 0.7, -2.72, 36, VERT_OK, maxw=9.6)
+        l4 = self.lg("Une seule multiplication, et de tête !", 0.7, -2.86, 36, VERT_OK, maxw=9.6)
         self.dit(l4, "Une seule multiplication, et de tête !",
                  avec=[Circumscribe(VGroup(e2.atomes[1]), color=VERT_OK, buff=0.06)])
         self.insister(l4, 1.08, 0.2)
@@ -178,7 +194,7 @@ class FactoSimple4e(PaysageRel):
         c.atomes[0].set_color(FACTEUR)
         l5 = self.lg("On l'écrit devant", 0, 0, 36, maxw=4.6)
         l5b = self.lg("la parenthèse.", 0, 0, 36, maxw=4.0)
-        VGroup(l5, l5b).arrange(RIGHT, buff=0.25).move_to(P(-2.55, -1.45))
+        VGroup(l5, l5b).arrange(RIGHT, buff=0.14).move_to(P(-2.55, -1.45))
         self.dit(l5, "On l'écrit devant")
         self.play(TransformFromCopy(a.atomes[3], c.atomes[0]), run_time=0.4)
         self.dit(l5b, "la parenthèse.", avec=[FadeIn(VGroup(c.atomes[1], c.atomes[5]), scale=1.3)])
@@ -212,8 +228,8 @@ class FactoSimple4e(PaysageRel):
         av = self.lg("Avant :", -3.7, 2.85, 40, CIEL, maxw=3)
         self.dit(av, "Avant :", avec=[FadeIn(s, shift=UP * 0.2)])
         bs = Brace(s, DOWN, buff=0.15, color=CIEL)
-        ls1 = self.lg("une somme", 0, 0, 34, maxw=4).next_to(bs, DOWN, buff=0.12)
-        ls2 = self.lg("de deux termes.", 0, 0, 34, maxw=4).next_to(ls1, DOWN, buff=0.12)
+        ls1 = self.lg("une somme", 0, 0, 34, maxw=4).next_to(bs, DOWN, buff=0.14)
+        ls2 = self.lg("de deux termes.", 0, 0, 34, maxw=4).next_to(ls1, DOWN, buff=0.2)
         self.dit(ls1, "une somme", avec=[GrowFromCenter(bs)])
         self.dit(ls2, "de deux termes.")
         c1, c2 = self.cadre(VGroup(s.atomes[0], s.atomes[1])), self.cadre(s.atomes[3])
@@ -223,8 +239,8 @@ class FactoSimple4e(PaysageRel):
         ap = self.lg("Après :", 3.7, 2.85, 40, CIEL, maxw=3)
         self.dit(ap, "Après :", avec=[GrowArrow(fl), FadeIn(p, shift=UP * 0.2)])
         bp = Brace(p, DOWN, buff=0.15, color=FACTEUR)
-        lp1 = self.lg("un produit,", 0, 0, 34, maxw=4).next_to(bp, DOWN, buff=0.12)
-        lp2 = self.lg("3 fois une parenthèse.", 0, 0, 34, maxw=5.6).next_to(lp1, DOWN, buff=0.12)
+        lp1 = self.lg("un produit,", 0, 0, 34, maxw=4).next_to(bp, DOWN, buff=0.14)
+        lp2 = self.lg("3 fois une parenthèse.", 0, 0, 34, maxw=5.6).next_to(lp1, DOWN, buff=0.2)
         self.dit(lp1, "un produit,", avec=[GrowFromCenter(bp)])
         self.dit(lp2, "3 fois une parenthèse.",
                  avec=[Circumscribe(p.atomes[0], color=FACTEUR, buff=0.08),
@@ -248,7 +264,7 @@ class FactoSimple4e(PaysageRel):
     # ── 03q : QUESTION 1 (réponse C) ────────────────────────────────────────
     def figure_q(self, s, gauche, droite, i_g, i_d, k):
         """La figure d'une question : l'expression, et sous chaque terme son produit (posé avec la réponse)."""
-        e = D(s, 76, audit=False).move_to(P(-3.6, 1.0))
+        e = D(s, 76, audit=False).move_to(P(-3.6, 2.1))
         a = D(gauche, 46, audit=False)
         b = D(droite, 46, audit=False)
         a.next_to(e.atomes[i_g], DOWN, buff=0.75)
@@ -307,7 +323,7 @@ class FactoSimple4e(PaysageRel):
         fm = CurvedArrow(m1.get_bottom() + DOWN * 0.15, m2.get_bottom() + DOWN * 0.15, angle=PI / 3.2,
                          color=JAUNE_TITRE, stroke_width=5, tip_length=0.16)
         self.play(m1.animate.set_color(JAUNE_TITRE), m2.animate.set_color(JAUNE_TITRE), Create(fm), run_time=0.5)
-        self.play(Create(self.cadre_ok(g, 0.16)), run_time=0.25)
+        self.play(Create(self.cadre_ok(VGroup(g, fm), 0.16)), run_time=0.25)  # le cadre englobe l'arc
         self.insister(VGroup(m2, g.atomes[9]), 1.35, 0.2)
         self.attendre_voix(marge=0.8)
 
@@ -333,7 +349,7 @@ class FactoSimple4e(PaysageRel):
         self.poser_droite(g, 5, "6 fois, entre parenthèses, x plus 1.")
         self.play(g.atomes[9].animate.set_color(VERT_OK), Create(self.cadre_ok(g, 0.16)), run_time=0.25)
         s1 = self.lg("Sans le 1, on ne retrouverait que 6x :", -1.4, -1.85, 36, lettres="x", maxw=9.4)
-        faux = D("6(x) = 6x", 50, couleur=PIEGE, lettres="", audit=False).move_to(P(3.7, -2.65))
+        faux = D("6(x) = 6x", 50, couleur=PIEGE, lettres="", audit=False).move_to(P(2.7, -2.65))  # loin de Ti-Margo
         self.dit(s1, "Sans le 1, on ne retrouverait que 6 x :", avec=[FadeIn(faux, shift=LEFT * 0.2)])
         self.play(Create(self.barrer(faux)), run_time=0.25)
         s2 = self.lg("le 6 aurait disparu.", -2.6, -2.65, 42, PIEGE, maxw=6.0)
@@ -458,21 +474,36 @@ class FactoSimple4e(PaysageRel):
     # ── 08 : ce que tu as appris ────────────────────────────────────────────
     def ecran_finale(self):
         self.ecran("08-finale", 0.5)
-        s = D("3x + 21", 54, audit=False)
-        p = D("3(x + 7)", 54, audit=False)
+        tit = self.t("Ce que tu as appris", 48, JAUNE_TITRE).to_edge(UP, buff=0.45)
+        s = D("3x + 21", 64, audit=False)
+        p = D("3(x + 7)", 64, audit=False)
         p.atomes[0].set_color(FACTEUR)
-        VGroup(s, p).arrange(DOWN, buff=1.0)
-        fl = Arrow(s.get_bottom(), p.get_top(), buff=0.1, color=FACTEUR, stroke_width=5,
-                   max_tip_length_to_length_ratio=0.25)
-        tf = T("factoriser", 28, FACTEUR, audit=False).next_to(fl, RIGHT, buff=0.15)
-        ecr = ecran_code(2.6, 1.0).next_to(p, DOWN, buff=0.5)
-        code = D("9 × (37 + 63)", 28, audit=False).move_to(ecr[0]).shift(DOWN * 0.13)
+        VGroup(s, p).arrange(DOWN, buff=1.2)
+        fl = Arrow(s.get_bottom(), p.get_top(), buff=0.12, color=FACTEUR, stroke_width=6,
+                   max_tip_length_to_length_ratio=0.22)
+        tf = T("factoriser", 32, FACTEUR, audit=False).next_to(fl, RIGHT, buff=0.18)
+        ecr = ecran_code(4.0, 1.25)  # le code ne touche plus le bord de la fenêtre.next_to(p, DOWN, buff=0.7)
+        code = D("9 × (37 + 63)", 34, audit=False).move_to(ecr[0]).shift(DOWN * 0.15)
         code.atomes[0].set_color(FACTEUR)
         fig = VGroup(s, fl, tf, p, ecr, code)
-        lignes = self.finale_colonne([["Factoriser, c'est transformer", "une somme en produit."],
-                                      ["On écrit le facteur commun", "devant la parenthèse,", "et ce qui reste dedans."],
-                                      ["Si un terme est le facteur", "lui-même, il reste 1."]],
-                                     fs=38, figure=fig)
+        fig.move_to(P(-4.35, -0.45))
+        lignes = VGroup()
+        for morceaux in (["Factoriser, c'est transformer", "une somme en produit."],
+                         ["On écrit le facteur commun", "devant la parenthèse,", "et ce qui reste dedans."],
+                         ["Si un terme est le facteur", "lui-même, il reste 1."]):
+            # interligne régulier (pas fixe entre les hauts) ; la coche centrée sur la 1re ligne
+            ts = [self.t(x, 40) for x in morceaux]
+            pas = max(t.height for t in ts) + 0.12
+            for k_, t_ in enumerate(ts):
+                t_.align_to(P(0, -k_ * pas), UP).align_to(P(0, 0), LEFT)
+            c_ = self.coche()
+            c_.next_to(ts[0], LEFT, buff=0.3).set_y(ts[0].get_center()[1])
+            lignes.add(VGroup(c_, VGroup(*ts)))
+        lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.5)
+        if lignes.width > 5.3 - (-1.7):  # s'arrête avant Ti-Margo
+            lignes.scale_to_fit_width(5.3 + 1.7)
+        lignes.align_to(P(-1.7, 0), LEFT).align_to(P(0, 2.2), UP)
+        self.play(Write(tit), run_time=0.7)
         self.play(FadeIn(fig), run_time=0.3)
         self.au("Factoriser, c'est")
         self.montrer_ligne(lignes[0])
