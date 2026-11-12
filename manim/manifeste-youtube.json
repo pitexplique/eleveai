@@ -74735,6 +74735,889 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-mental-addition",
+      "pas_avant": "2026-12-22",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_addition_mentale",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.mp4",
+      "miniature": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.png",
+      "titre": "56 + 8 sans poser l'opération ? — Ajouter de tête — épisode 1 · Maths 6e",
+      "accroche": "Enzo est arbitre de basket. Pendant le match, il compte les points de tête : les Bleus ont 56 points et marquent encore 8 points. Combien en tout ?\n\nDans cette vidéo :\n• passer par la dizaine : 56 + 4, puis + 4\n• ajouter un nombre rond\n• ajouter les dizaines, puis les unités\n• le piège : bien passer la dizaine\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : les Bleus ont 78 points et en marquent 15, les Rouges ont 92 points : qui gagne ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_addition_mentale&display=simple\n\n🔢 Épisode 1 sur 6 de la série Calcul mental d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "56 + 8 sans poser"
+        ],
+        [
+          "00:23",
+          "Passer par la dizaine"
+        ],
+        [
+          "00:44",
+          "Ajouter un nombre rond"
+        ],
+        [
+          "00:54",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Dizaines, puis unités"
+        ],
+        [
+          "01:45",
+          "Le piège"
+        ],
+        [
+          "02:02",
+          "Question 2"
+        ],
+        [
+          "02:37",
+          "À toi de jouer"
+        ],
+        [
+          "02:52",
+          "Correction"
+        ],
+        [
+          "03:11",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental",
+      "tags": [
+        "calcul mental",
+        "addition de tête",
+        "passer la dizaine",
+        "arbitre",
+        "basket",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Combien font 47 + 8 ?",
+          "choix": [
+            "65",
+            "54",
+            "55"
+          ],
+          "reponse": 2,
+          "explication": "De 47 à 50, il manque 3. 8, c'est 3 et 5. 50 + 5, ça fait 55."
+        },
+        {
+          "t": "02:02",
+          "question": "Combien font 245 + 37 ?",
+          "choix": [
+            "282",
+            "272",
+            "285"
+          ],
+          "reponse": 0,
+          "explication": "245 + 30, ça fait 275. Puis 275 + 7 : on passe par 280, et on arrive à 282."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "6e-mental-addition-short",
+      "pas_avant": "2026-12-22",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_addition_mentale",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-mental-addition",
+      "fichier": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition-short.mp4",
+      "miniature": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition-short-miniature.png",
+      "titre": "38 + 5 = 313 billes, tu paries ? #maths #6e",
+      "accroche": "J'ai 38 billes, j'en gagne 5. 8 + 5 = 13... je colle le 3 et le 13 : 313 billes ! Ça ne colle pas.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : combien font 67 + 6 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_addition_mentale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "addition",
+        "billes",
+        "passer la dizaine",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Combien j'ai de billes ?",
+          "choix": [
+            "43",
+            "313",
+            "33"
+          ],
+          "reponse": 0,
+          "explication": "38 + 2, ça fait 40. Puis plus 3 : 43 billes."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-mental-soustraction",
+      "pas_avant": "2026-12-23",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_soustraction_mentale",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction.mp4",
+      "miniature": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction.png",
+      "titre": "121 − 38 de tête : comment rendre la monnaie ? — Soustraire de tête — épisode 2 · Maths 6e",
+      "accroche": "Chloé tient un magasin de vélos. Toute la journée, elle rend la monnaie de tête.\n\nDans cette vidéo :\n• compléter jusqu'au nombre rond : de 36 à 40, puis à 100\n• enlever les dizaines, puis les unités\n• arrondir, puis corriger dans le bon sens\n• le piège : corriger à l'envers\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un vélo à 162 € avec une remise de 19 € : quel est le nouveau prix ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_soustraction_mentale&display=simple\n\n🔢 Épisode 2 sur 6 de la série Calcul mental d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "121 − 38 de tête"
+        ],
+        [
+          "00:16",
+          "Compléter jusqu'à 100"
+        ],
+        [
+          "00:40",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Dizaines, puis unités"
+        ],
+        [
+          "01:33",
+          "Arrondir, puis corriger"
+        ],
+        [
+          "01:54",
+          "Le piège"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:37",
+          "À toi de jouer"
+        ],
+        [
+          "02:51",
+          "Correction"
+        ],
+        [
+          "03:09",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental",
+      "tags": [
+        "calcul mental",
+        "soustraction de tête",
+        "rendre la monnaie",
+        "commerçante",
+        "vélo",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:40",
+          "question": "Combien font 100 − 45 ?",
+          "choix": [
+            "65",
+            "55",
+            "45"
+          ],
+          "reponse": 1,
+          "explication": "De 45 à 50, il manque 5. De 50 à 100, il manque 50. 5 + 50 : 55."
+        },
+        {
+          "t": "02:06",
+          "question": "Combien font 85 − 29 ?",
+          "choix": [
+            "54",
+            "64",
+            "56"
+          ],
+          "reponse": 2,
+          "explication": "85 − 30, ça fait 55. On a enlevé 1 de trop : on le rajoute. 56."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-mental-soustraction-short",
+      "pas_avant": "2026-12-23",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_soustraction_mentale",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-mental-soustraction",
+      "fichier": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction-short.mp4",
+      "miniature": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction-short-miniature.png",
+      "titre": "100 € − 36 € : on me rend 74 €, tu paries ? #maths #6e",
+      "accroche": "J'achète un skate à 36 euros avec un billet de 100 euros. Le vendeur va me rendre 74 euros ! Il compte : de 36 à 40, puis de 40 à 100...\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : un livre coûte 58 €, tu paies avec 100 € : combien on te rend ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_soustraction_mentale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "soustraction",
+        "monnaie",
+        "skate",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Combien on me rend ?",
+          "choix": [
+            "74 euros",
+            "64 euros",
+            "136 euros"
+          ],
+          "reponse": 1,
+          "explication": "4 + 60, ça fait 64 euros. Et 36 + 64, ça fait bien 100."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "6e-mental-multiplication",
+      "pas_avant": "2026-12-24",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_multiplication_mentale",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication.mp4",
+      "miniature": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication.png",
+      "titre": "18 × 5 en 3 secondes ? — Multiplier de tête — épisode 3 · Maths 6e",
+      "accroche": "Hugo est DJ. Pour une fête, il prépare 18 morceaux de 5 minutes. Combien de minutes de musique ?\n\nDans cette vidéo :\n• × 5, c'est × 10, puis la moitié\n• × 11 : 10 fois, plus encore une fois\n• le piège : oublier la moitié\n• vérifier avec un nombre rond\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : la fête dure 120 minutes, Hugo a 22 morceaux de 5 minutes : a-t-il assez de musique ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_multiplication_mentale&display=simple\n\n🔢 Épisode 3 sur 6 de la série Calcul mental d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "18 × 5 en 3 secondes"
+        ],
+        [
+          "00:18",
+          "× 5 = × 10, puis la moitié"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:05",
+          "× 11"
+        ],
+        [
+          "01:23",
+          "Le piège"
+        ],
+        [
+          "01:39",
+          "Question 2"
+        ],
+        [
+          "02:09",
+          "À toi de jouer"
+        ],
+        [
+          "02:24",
+          "Correction"
+        ],
+        [
+          "02:40",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental",
+      "tags": [
+        "calcul mental",
+        "multiplication de tête",
+        "fois 5",
+        "fois 11",
+        "DJ",
+        "musique",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Combien font 24 × 5 ?",
+          "choix": [
+            "240",
+            "100",
+            "120"
+          ],
+          "reponse": 2,
+          "explication": "24 × 10, ça fait 240. La moitié de 240 : 120."
+        },
+        {
+          "t": "01:39",
+          "question": "Combien font 12 × 9 ?",
+          "choix": [
+            "108",
+            "118",
+            "98"
+          ],
+          "reponse": 0,
+          "explication": "10 × 9, ça fait 90. 2 × 9, ça fait 18. 90 + 18 : 108."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "6e-mental-multiplication-short",
+      "pas_avant": "2026-12-24",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_multiplication_mentale",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-mental-multiplication",
+      "fichier": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication-short.mp4",
+      "miniature": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication-short-miniature.png",
+      "titre": "16 paquets de 5 bonbons = 160, tu paries ? #maths #6e",
+      "accroche": "J'ai 16 paquets de 5 bonbons. 16 × 10 = 160, donc 160 bonbons ! Mais un paquet n'a que 5 bonbons : la moitié de 10.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : combien font 28 × 5 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_multiplication_mentale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "multiplication",
+        "bonbons",
+        "fois 5",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Combien j'ai de bonbons ?",
+          "choix": [
+            "160",
+            "21",
+            "80"
+          ],
+          "reponse": 2,
+          "explication": "16 × 10, ça fait 160. La moitié de 160 : 80 bonbons."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-mental-division",
+      "pas_avant": "2026-12-25",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_division_mentale",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division.mp4",
+      "miniature": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division.png",
+      "titre": "56 ÷ 8 sans poser la division ? — Diviser de tête — épisode 4 · Maths 6e",
+      "accroche": "Maëlys est soigneuse au zoo. Ce matin, elle a 56 poissons pour 8 manchots. Combien de poissons pour chaque manchot ?\n\nDans cette vidéo :\n• lire la table à l'envers : 7 × 8 = 56\n• couper en morceaux de la table : 96 = 80 + 16\n• vérifier par une multiplication\n• ÷ 10 : chaque chiffre descend d'une colonne\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 72 carottes pour 6 girafes, 3 mangées le matin : combien en reste-t-il à chacune pour le soir ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_division_mentale&display=simple\n\n🔢 Épisode 4 sur 6 de la série Calcul mental d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "56 ÷ 8 sans poser"
+        ],
+        [
+          "00:20",
+          "La table à l'envers"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:02",
+          "Couper en morceaux"
+        ],
+        [
+          "01:34",
+          "Question 2"
+        ],
+        [
+          "02:08",
+          "Diviser par 10"
+        ],
+        [
+          "02:41",
+          "À toi de jouer"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:18",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental",
+      "tags": [
+        "calcul mental",
+        "division de tête",
+        "tables",
+        "partage",
+        "soigneuse",
+        "zoo",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Combien font 63 ÷ 9 ?",
+          "choix": [
+            "7",
+            "8",
+            "54"
+          ],
+          "reponse": 0,
+          "explication": "9 × 7, ça fait 63. Donc 63 ÷ 9, ça fait 7."
+        },
+        {
+          "t": "01:34",
+          "question": "Combien font 84 ÷ 7 ?",
+          "choix": [
+            "11",
+            "14",
+            "12"
+          ],
+          "reponse": 2,
+          "explication": "84, c'est 70 et 14. 70 ÷ 7, ça fait 10. 14 ÷ 7, ça fait 2. 10 + 2 : 12."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "6e-mental-division-short",
+      "pas_avant": "2026-12-25",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_division_mentale",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-mental-division",
+      "fichier": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division-short.mp4",
+      "miniature": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division-short-miniature.png",
+      "titre": "36 biscuits pour 4 : 32 chacun, tu paries ? #maths #6e",
+      "accroche": "Je partage 36 biscuits entre 4 copains. Divisé par 4... j'enlève 4 : 32 biscuits chacun !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : 42 cerises pour 6 copains : combien chacun ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_division_mentale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "division",
+        "partage",
+        "biscuits",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Combien de biscuits pour chacun ?",
+          "choix": [
+            "32",
+            "9",
+            "8"
+          ],
+          "reponse": 1,
+          "explication": "4 × 9, ça fait 36. Donc 36 ÷ 4, ça fait 9 biscuits chacun."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-mental-astuces",
+      "pas_avant": "2026-12-26",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_strategie_mentale",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces.mp4",
+      "miniature": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces.png",
+      "titre": "99 + 47 en 2 secondes ? — Les astuces du calcul mental — épisode 5 · Maths 6e",
+      "accroche": "Jade est cheffe cuisinière. Avant de calculer, elle regarde les nombres : un nombre rond est-il tout près ?\n\nDans cette vidéo :\n• le double : ajouter le nombre à lui-même\n• le quart : la moitié de la moitié\n• regrouper pour faire 100\n• arrondir, puis corriger : 99 + 47 = 100 + 47 − 1\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois paniers à 48 €, 99 € et 52 € : combien paie-t-elle ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_strategie_mentale&display=simple\n\n🔢 Épisode 5 sur 6 de la série Calcul mental d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "99 + 47 en 2 secondes"
+        ],
+        [
+          "00:19",
+          "Le double"
+        ],
+        [
+          "00:35",
+          "Le quart"
+        ],
+        [
+          "00:52",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Regrouper pour faire 100"
+        ],
+        [
+          "01:32",
+          "Arrondir, puis corriger"
+        ],
+        [
+          "02:00",
+          "Question 2"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:46",
+          "Correction"
+        ],
+        [
+          "02:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental",
+      "tags": [
+        "calcul mental",
+        "astuces",
+        "double",
+        "quart",
+        "cuisinière",
+        "cuisine",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Quel est le quart de 36 ?",
+          "choix": [
+            "18",
+            "9",
+            "32"
+          ],
+          "reponse": 1,
+          "explication": "La moitié de 36 : 18. La moitié de 18 : 9."
+        },
+        {
+          "t": "02:00",
+          "question": "Combien font 199 + 56 ?",
+          "choix": [
+            "255",
+            "257",
+            "256"
+          ],
+          "reponse": 0,
+          "explication": "200 + 56, ça fait 256. On a ajouté 1 de trop : 255."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-mental-astuces-short",
+      "pas_avant": "2026-12-26",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_strategie_mentale",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-mental-astuces",
+      "fichier": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces-short.mp4",
+      "miniature": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces-short-miniature.png",
+      "titre": "Le double de 125 g = 1 250 g, tu paries ? #maths #6e",
+      "accroche": "Ma recette demande 125 grammes de beurre. Je la double : 1 250 grammes ! Le double, c'est 125 + 125...\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : quel est le double de 375 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_strategie_mentale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "double",
+        "recette",
+        "beurre",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Le double de 125 ?",
+          "choix": [
+            "1 250",
+            "127",
+            "250"
+          ],
+          "reponse": 2,
+          "explication": "200 + 50 : 250 grammes de beurre."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-mental-defi",
+      "pas_avant": "2026-12-27",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_calcul_mental_defi",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi.mp4",
+      "miniature": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi.png",
+      "titre": "Sauras-tu tout calculer de tête ? — Le grand défi du calcul mental — épisode 6 · Maths 6e",
+      "accroche": "Nathan est développeur de jeux vidéo. Dans son jeu, le héros gagne des pièces et achète des objets : Nathan vérifie chaque calcul de tête.\n\nDans cette vidéo :\n• lire le problème et choisir l'opération\n• couper le calcul en étapes faciles\n• regrouper les nombres\n• vérifier avec un ordre de grandeur\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le héros a 100 pièces, il achète 4 flèches à 5 pièces et une armure à 38 pièces : combien lui reste-t-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_calcul_mental_defi&display=simple\n\n🔢 Épisode 6 sur 6 de la série Calcul mental d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le grand défi"
+        ],
+        [
+          "00:20",
+          "Une somme"
+        ],
+        [
+          "00:37",
+          "Des groupes"
+        ],
+        [
+          "00:48",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "L'ordre de grandeur"
+        ],
+        [
+          "01:45",
+          "Un horaire"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:36",
+          "À toi de jouer"
+        ],
+        [
+          "02:52",
+          "Correction"
+        ],
+        [
+          "03:11",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/entier-calcul-mental",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/entier-calcul-mental",
+      "tags": [
+        "calcul mental",
+        "problèmes",
+        "ordre de grandeur",
+        "développeur",
+        "jeux vidéo",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "Le héros partage ses 63 pièces entre 9 amis. Combien chacun ?",
+          "choix": [
+            "54",
+            "7",
+            "8"
+          ],
+          "reponse": 1,
+          "explication": "9 × 7, ça fait 63. Donc 63 ÷ 9, ça fait 7 pièces chacun."
+        },
+        {
+          "t": "02:06",
+          "question": "48 + 31, c'est environ combien ?",
+          "choix": [
+            "80",
+            "20",
+            "800"
+          ],
+          "reponse": 0,
+          "explication": "48, c'est presque 50. 31, c'est presque 30. 50 + 30 : environ 80."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "6e-mental-defi-short",
+      "pas_avant": "2026-12-27",
+      "prioritaire": true,
+      "notionId": "entier_calcul_mental",
+      "microId": "entier_calcul_mental_defi",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-mental-defi",
+      "fichier": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi-short.mp4",
+      "miniature": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi-short-miniature.png",
+      "titre": "49 € + 52 € = 911 €, tu paries ? #maths #6e",
+      "accroche": "J'achète un jeu à 49 euros et une manette à 52 euros. 49 + 52... 911 euros ! Le vendeur éclate de rire.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune : une règle ou un calcul.\n👉 À toi : combien font 98 + 103 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_calcul_mental_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #calcul #6e #collège",
+      "tags": [
+        "ordre de grandeur",
+        "jeu vidéo",
+        "manette",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "calcul mental",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Combien je paie ?",
+          "choix": [
+            "911 euros",
+            "101 euros",
+            "91 euros"
+          ],
+          "reponse": 1,
+          "explication": "49 + 1, ça fait 50. 50 + 51, ça fait 101 euros."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
     }
   ]
 }

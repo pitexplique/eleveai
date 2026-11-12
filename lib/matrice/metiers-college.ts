@@ -80,7 +80,8 @@ export const METIERS_6E: Record<string, LienMetier[]> = {
   entier_calcul_mental: [
     M("arbitre", "compte de tête les points d'un match de basket : 2 + 3 + 2, en direct.", V),
     F("cuisinier", "double une recette de tête : 250 g de farine, ça fait 500 g.", V),
-    M("dj", "enchaîne des morceaux à 120 battements par minute : en 2 minutes, 240 battements.", V),
+    M("dj", "prépare 18 morceaux de 5 minutes : 18 × 10 = 180, la moitié, 90 minutes de musique.", V),
+    M("vendeur", "rend la monnaie d'un billet de 100 € sur un skate à 36 € : 64 €, pas 74 €.", V),
     F("commercant", "rend la monnaie de tête : pour 36 € payés avec 100 €, elle rend 64 €.", V),
     F("soigneur", "partage de tête 56 poissons entre 8 manchots : 7 chacun.", V),
     M("developpeur", "vérifie de tête les pièces que gagne le héros de son jeu vidéo.", V),

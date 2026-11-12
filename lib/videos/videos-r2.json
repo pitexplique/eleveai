@@ -4358,6 +4358,114 @@
   "youtube": "oVqU7WQL4TA",
   "coach": null
  },
+ "6e-mental-addition": {
+  "fichier": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.mp4",
+  "poster": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.png",
+  "vignette": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.vignette.webp",
+  "titre": "56 + 8 sans poser l'opération ? — Ajouter de tête — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_addition_mentale&display=simple"
+ },
+ "6e-mental-addition-short": {
+  "fichier": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition-short.mp4",
+  "poster": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition-short-miniature.png",
+  "vignette": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition-short-miniature.vignette.webp",
+  "titre": "38 + 5 = 313 billes, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_addition_mentale&display=simple"
+ },
+ "6e-mental-astuces": {
+  "fichier": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces.mp4",
+  "poster": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces.png",
+  "vignette": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces.vignette.webp",
+  "titre": "99 + 47 en 2 secondes ? — Les astuces du calcul mental — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_strategie_mentale&display=simple"
+ },
+ "6e-mental-astuces-short": {
+  "fichier": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces-short.mp4",
+  "poster": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces-short-miniature.png",
+  "vignette": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces-short-miniature.vignette.webp",
+  "titre": "Le double de 125 g = 1 250 g, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_strategie_mentale&display=simple"
+ },
+ "6e-mental-defi": {
+  "fichier": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi.mp4",
+  "poster": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi.png",
+  "vignette": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi.vignette.webp",
+  "titre": "Sauras-tu tout calculer de tête ? — Le grand défi du calcul mental — épisode 6 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_calcul_mental_defi&display=simple"
+ },
+ "6e-mental-defi-short": {
+  "fichier": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi-short.mp4",
+  "poster": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi-short-miniature.png",
+  "vignette": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi-short-miniature.vignette.webp",
+  "titre": "49 € + 52 € = 911 €, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_calcul_mental_defi&display=simple"
+ },
+ "6e-mental-division": {
+  "fichier": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division.mp4",
+  "poster": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division.png",
+  "vignette": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division.vignette.webp",
+  "titre": "56 ÷ 8 sans poser la division ? — Diviser de tête — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_division_mentale&display=simple"
+ },
+ "6e-mental-division-short": {
+  "fichier": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division-short.mp4",
+  "poster": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division-short-miniature.png",
+  "vignette": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division-short-miniature.vignette.webp",
+  "titre": "36 biscuits pour 4 : 32 chacun, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_division_mentale&display=simple"
+ },
+ "6e-mental-multiplication": {
+  "fichier": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication.mp4",
+  "poster": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication.png",
+  "vignette": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication.vignette.webp",
+  "titre": "18 × 5 en 3 secondes ? — Multiplier de tête — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_multiplication_mentale&display=simple"
+ },
+ "6e-mental-multiplication-short": {
+  "fichier": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication-short.mp4",
+  "poster": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication-short-miniature.png",
+  "vignette": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication-short-miniature.vignette.webp",
+  "titre": "16 paquets de 5 bonbons = 160, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_multiplication_mentale&display=simple"
+ },
+ "6e-mental-soustraction": {
+  "fichier": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction.mp4",
+  "poster": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction.png",
+  "vignette": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction.vignette.webp",
+  "titre": "121 − 38 de tête : comment rendre la monnaie ? — Soustraire de tête — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_soustraction_mentale&display=simple"
+ },
+ "6e-mental-soustraction-short": {
+  "fichier": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction-short.mp4",
+  "poster": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction-short-miniature.png",
+  "vignette": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction-short-miniature.vignette.webp",
+  "titre": "100 € − 36 € : on me rend 74 €, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_calcul_mental&microId=entier_soustraction_mentale&display=simple"
+ },
  "6e-proba-comparer": {
   "fichier": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer.mp4",
   "poster": "6e/maths/probabilites/02-comparer/eleveai-maths-6e-proba-comparer.png",
@@ -8488,102 +8596,6 @@
   "poster": null,
   "vignette": null,
   "titre": "maths 4e facto maximum short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-mental-addition": {
-  "fichier": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition.vignette.webp",
-  "titre": "maths 6e mental addition",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-mental-addition-short": {
-  "fichier": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition-short.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/01-addition/eleveai-maths-6e-mental-addition-short.vignette.webp",
-  "titre": "maths 6e mental addition short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-mental-astuces": {
-  "fichier": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces.vignette.webp",
-  "titre": "maths 6e mental astuces",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-mental-astuces-short": {
-  "fichier": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces-short.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/05-astuces/eleveai-maths-6e-mental-astuces-short.vignette.webp",
-  "titre": "maths 6e mental astuces short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-mental-defi": {
-  "fichier": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi.vignette.webp",
-  "titre": "maths 6e mental defi",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-mental-defi-short": {
-  "fichier": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi-short.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/06-defi/eleveai-maths-6e-mental-defi-short.vignette.webp",
-  "titre": "maths 6e mental defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-mental-division": {
-  "fichier": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division.vignette.webp",
-  "titre": "maths 6e mental division",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-mental-division-short": {
-  "fichier": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division-short.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/04-division/eleveai-maths-6e-mental-division-short.vignette.webp",
-  "titre": "maths 6e mental division short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-mental-multiplication": {
-  "fichier": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication.vignette.webp",
-  "titre": "maths 6e mental multiplication",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-mental-multiplication-short": {
-  "fichier": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication-short.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/03-multiplication/eleveai-maths-6e-mental-multiplication-short.vignette.webp",
-  "titre": "maths 6e mental multiplication short",
-  "short": true,
-  "youtube": null
- },
- "maths-6e-mental-soustraction": {
-  "fichier": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction.vignette.webp",
-  "titre": "maths 6e mental soustraction",
-  "short": false,
-  "youtube": null
- },
- "maths-6e-mental-soustraction-short": {
-  "fichier": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction-short.mp4",
-  "poster": null,
-  "vignette": "6e/maths/calcul-mental/02-soustraction/eleveai-maths-6e-mental-soustraction-short.vignette.webp",
-  "titre": "maths 6e mental soustraction short",
   "short": true,
   "youtube": null
  },

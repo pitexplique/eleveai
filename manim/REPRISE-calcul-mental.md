@@ -41,13 +41,15 @@ Ceintures : paysages vertes ; shorts jaunes (un calcul à faire).
 - ⚠️ Synchro par jetons : chaque mot écrit attend son mot dit ; écrire EXACTEMENT les mots de la voix. Dry run : `PYTHONUTF8=1 PYTHONIOENCODING=utf-8 AUDIT=1 BORDS=1 … --dry_run --media_dir <dossier à soi>`.
 - ⚠️ Poste partagé : rendus via un verrou mkdir commun (≤ 1 autre -qh, RAM ≥ 1,5 Go). Cahier des charges : `side-session-notes/local_30b52608-…/calcul-mental-brief-agents.md`.
 
+- ✅ 12/11 15 h 30 (consigne « fais-le pour toutes les vidéos finies », relayée par la session hebdomadaire) : matrice métiers (`V` partout, + vendeur des shorts 02/06, phrase du DJ calée sur la vidéo). Miniatures paysages : `python manim/miniature_calcul_mental.py`. **Manifeste** : `python manim/passe_calcul_mental.py temps|voir|manifeste` (12 entrées `6e-mental-<slug>[-short]`, ceinture verte/jaune, fiche `maths/6e/entier-calcul-mental`, questions et chapitres mesurés au son), `pas_avant` 22/12 (01) → 27/12 (06), une paire par jour, `prioritaire`. **R2** : dossier `6e/maths/calcul-mental` copié, `check --one-way` 0 différence (42 fichiers). `lib/videos/videos-r2.json` + `bilans-videos.json` : seulement nos clés commitées (les anciennes `maths-6e-mental-*` hors manifeste remplacées).
+
 ## Reste
-1. Frédéric regarde les 12 vidéos dans l'aperçu (retouches éventuelles).
-2. Publication (R2, manifeste, `lib/videos`, YouTube) : PAS dans cette session, ⛔ ne pas y toucher ici.
-3. Rien n'est poussé.
+1. Après le push (session hebdomadaire) : `node scripts/brancher-videos-coach.mjs --classe 6e --notion entier_calcul_mental --ecrire` (lecture seule le 12/11 : 12 à brancher, paysage + short par micro).
+2. Publication YouTube par `publier-youtube.mjs` à partir du 22/12 (avancer si Frédéric trouve ça tard, sans chevaucher le calcul posé 17 → 21/12).
+3. Frédéric regarde les 12 vidéos dans l'aperçu (retouches éventuelles : une vidéo retouchée se recopie sur R2 avant publication).
 
 ## Reprise samedi 14/11
-Aucun rendu en cours, verrou libre, tout est committé (dernier commit vidéo : `e5588acb`). Rien à finir : seulement d'éventuelles retouches après visionnage, puis la publication.
+Aucun rendu en cours, verrou libre, tout est committé. Manifeste, R2 et `lib/videos` faits le 12/11 ; reste le coach (`--ecrire` après le push) et YouTube dès le 22/12.
 - Retoucher une paysage NN (ex. 04 division) : corriger `manim/scripts/6e/mental_<slug>.py`, puis dry run
   `PYTHONUTF8=1 PYTHONIOENCODING=utf-8 AUDIT=1 BORDS=1 python -m manim render --dry_run --progress_bar none manim/scripts/6e/mental_<slug>.py Mental<Classe>6e --media_dir manim/scripts/6e/media-men-NN-dry` (seule ligne admise : « AUDIT-ABSENT NN-abonne « 974 » »), puis HD (verrou, ≤ 1 autre -qh, RAM ≥ 1,5 Go)
   `python -m manim render -qh --disable_caching --progress_bar none manim/scripts/6e/mental_<slug>.py Mental<Classe>6e -o eleveai-maths-6e-mental-<slug> --media_dir manim/scripts/6e/media-men-NN`
