@@ -656,17 +656,6 @@ class SuiteReconnaitreTle(PaysageSuites):
                 self.devoiler(l, ex, rt=0.4, avec=[Create(bloc[0])] if k == 0 else ())
         self.attendre_voix(marge=0.8)
 
-    def fin(self, cle="11-abonne"):
-        """La fin commune, mais l'étincelle finale jaillit À DROITE de « @eleveai974 »
-        (au centre, elle se posait sur le « e » du nom)."""
-        import suites_commun as sc
-        flash = sc.Flash
-        sc.Flash = lambda m, **kw: flash(m.get_right() + RIGHT * 0.75, **kw)
-        try:
-            super().fin(cle)
-        finally:
-            sc.Flash = flash
-
     def construct(self):
         ecrans = [self.ecran_garde, self.ecran_situation, self.ecran_ajouter, self.ecran_multiplier,
                   self.ecran_question1, self.ecran_explicite, self.ecran_piege, self.ecran_question2,
