@@ -8601,6 +8601,22 @@
   "youtube": "uVs9h6561zU",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=identites_remarquables_2de&microId=ir_carre_somme&display=simple"
  },
+ "journal-bassin-grande-anse-paysage": {
+  "fichier": "ti-margo/bassin-grande-anse-paysage/eleveai-journal-bassin-grande-anse-paysage.mp4",
+  "poster": "ti-margo/bassin-grande-anse-paysage/eleveai-journal-bassin-grande-anse-paysage.png",
+  "vignette": "ti-margo/bassin-grande-anse-paysage/eleveai-journal-bassin-grande-anse-paysage.vignette.webp",
+  "titre": "journal bassin grande anse paysage",
+  "short": false,
+  "youtube": null
+ },
+ "journal-bassin-grande-anse-short": {
+  "fichier": "ti-margo/bassin-grande-anse-short/eleveai-journal-bassin-grande-anse-short.mp4",
+  "poster": "ti-margo/bassin-grande-anse-short/eleveai-journal-bassin-grande-anse-short.png",
+  "vignette": "ti-margo/bassin-grande-anse-short/eleveai-journal-bassin-grande-anse-short.vignette.webp",
+  "titre": "journal bassin grande anse short",
+  "short": true,
+  "youtube": null
+ },
  "journal-presentation-paysage": {
   "fichier": "ti-margo/journal-presentation/eleveai-journal-presentation-paysage.mp4",
   "poster": null,
@@ -8974,6 +8990,38 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=second_degre&display=simple"
  },
+ "maths-premiere-spe-suite-recurrence": {
+  "fichier": "premiere-spe/maths/suites/19-recurrence/eleveai-maths-premiere-spe-suite-recurrence.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths premiere spe suite recurrence",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-spe-suite-recurrence-short": {
+  "fichier": "premiere-spe/maths/suites/19-recurrence/eleveai-maths-premiere-spe-suite-recurrence-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths premiere spe suite recurrence short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-premiere-spe-suite-termes": {
+  "fichier": "premiere-spe/maths/suites/18-termes/eleveai-maths-premiere-spe-suite-termes.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths premiere spe suite termes",
+  "short": false,
+  "youtube": null
+ },
+ "maths-premiere-spe-suite-termes-short": {
+  "fichier": "premiere-spe/maths/suites/18-termes/eleveai-maths-premiere-spe-suite-termes-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths premiere spe suite termes short",
+  "short": true,
+  "youtube": null
+ },
  "maths-premiere-suites-arith-geo": {
   "fichier": "premiere/maths/paysage/fr/suites-arith-geo/eleveai-maths-premiere-suites-arith-geo.mp4",
   "poster": "premiere/maths/paysage/fr/suites-arith-geo/eleveai-maths-premiere-suites-arith-geo.png",
@@ -9041,6 +9089,22 @@
   "poster": null,
   "vignette": "terminale/maths/analyse/convexite/eleveai-maths-terminale-convexite-reconnaitre-short.vignette.webp",
   "titre": "maths terminale convexite reconnaitre short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-comparaison": {
+  "fichier": "terminale/maths/suites/36-limite-comparaison/eleveai-maths-terminale-suite-limite-comparaison.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite limite comparaison",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-comparaison-short": {
+  "fichier": "terminale/maths/suites/36-limite-comparaison/eleveai-maths-terminale-suite-limite-comparaison-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite limite comparaison short",
   "short": true,
   "youtube": null
  },
@@ -10412,6 +10476,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_fractions_puissances&microId=auto_num_puissances&display=simple"
  },
+ "premiere-spe-suite-registres": {
+  "fichier": "premiere-spe/maths/suites/17-registres/eleveai-maths-premiere-spe-suite-registres.mp4",
+  "poster": "premiere-spe/maths/suites/17-registres/eleveai-maths-premiere-spe-suite-registres.png",
+  "vignette": "premiere-spe/maths/suites/17-registres/eleveai-maths-premiere-spe-suite-registres.vignette.webp",
+  "titre": "Que veut dire u₄ = 180 ? — Des mots aux symboles : lire une suite — épisode 17 · Maths 1re spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_registres&display=simple"
+ },
+ "premiere-spe-suite-registres-short": {
+  "fichier": "premiere-spe/maths/suites/17-registres/eleveai-maths-premiere-spe-suite-registres-short.mp4",
+  "poster": "premiere-spe/maths/suites/17-registres/eleveai-maths-premiere-spe-suite-registres-short.png",
+  "vignette": "premiere-spe/maths/suites/17-registres/eleveai-maths-premiere-spe-suite-registres-short.vignette.webp",
+  "titre": "Tu lis u₅ = 90 sans te tromper ? 🎨 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_registres&display=simple"
+ },
  "premiere-suite-arith-explicite": {
   "fichier": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite.mp4",
   "poster": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite.png",
@@ -10419,7 +10501,7 @@
   "titre": "Dans combien de mois aura-t-elle 1 200 € ? — La formule explicite — épisode 5 · Maths 1re",
   "short": false,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_explicite&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_terme_general&microId=lin_suite_explicite&display=simple"
  },
  "premiere-suite-arith-explicite-short": {
   "fichier": "premiere/maths/suites/05-arith-explicite/eleveai-maths-premiere-suite-arith-explicite-short.mp4",
@@ -10428,7 +10510,7 @@
   "titre": "La formule de la trottinette en 10 secondes ? 🛴 — 1re #Shorts",
   "short": true,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_explicite&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_terme_general&microId=lin_suite_explicite&display=simple"
  },
  "premiere-suite-arith-graphique": {
   "fichier": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique.mp4",
@@ -10437,7 +10519,7 @@
   "titre": "Quand le robot doit-il se recharger ? — Suite arithmétique sur un graphique — épisode 7 · Maths 1re",
   "short": false,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_graphique&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_terme_general&microId=lin_suite_graphique&display=simple"
  },
  "premiere-suite-arith-graphique-short": {
   "fichier": "premiere/maths/suites/07-arith-graphique/eleveai-maths-premiere-suite-arith-graphique-short.mp4",
@@ -10446,7 +10528,7 @@
   "titre": "Une suite arithmétique au premier coup d'œil ? 🎬 — 1re #Shorts",
   "short": true,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_graphique&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_terme_general&microId=lin_suite_graphique&display=simple"
  },
  "premiere-suite-arith-interpreter": {
   "fichier": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter.mp4",
@@ -10455,7 +10537,7 @@
   "titre": "Quand Bastien marchera-t-il 3 km ? — Interpréter une suite arithmétique — épisode 8 · Maths 1re",
   "short": false,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_interpreter&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_terme_general&microId=lin_suite_interpreter&display=simple"
  },
  "premiere-suite-arith-interpreter-short": {
   "fichier": "premiere/maths/suites/08-arith-interpreter/eleveai-maths-premiere-suite-arith-interpreter-short.mp4",
@@ -10464,7 +10546,7 @@
   "titre": "u₉, c'est quelle année ? Sans te tromper d'un an 🐶 — 1re #Shorts",
   "short": true,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_interpreter&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_terme_general&microId=lin_suite_interpreter&display=simple"
  },
  "premiere-suite-arith-notation": {
   "fichier": "premiere/maths/suites/03-arith-notation/eleveai-maths-premiere-suite-arith-notation.mp4",
@@ -10545,7 +10627,7 @@
   "titre": "Le glacier va-t-il se stabiliser ? — Sens de variation d'une suite arithmétique — épisode 6 · Maths 1re",
   "short": false,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_variation&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_terme_general&microId=lin_suite_variation&display=simple"
  },
  "premiere-suite-arith-variation-short": {
   "fichier": "premiere/maths/suites/06-arith-variation/eleveai-maths-premiere-suite-arith-variation-short.mp4",
@@ -10554,7 +10636,7 @@
   "titre": "Monte ou descend, sans rien calculer ? 🏊 — 1re #Shorts",
   "short": true,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_arithmetique&microId=lin_suite_variation&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_terme_general&microId=lin_suite_variation&display=simple"
  },
  "premiere-suite-geo-explicite": {
   "fichier": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite.mp4",
@@ -10563,34 +10645,52 @@
   "titre": "20 000 € et − 20 % par an : combien dans 3 ans ? — La formule explicite d'une suite géométrique — épisode 13 · Maths 1re",
   "short": false,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_explicite&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_terme_general&microId=expo_suite_explicite&display=simple"
  },
  "premiere-suite-geo-explicite-short": {
   "fichier": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite-short.mp4",
   "poster": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite-short.png",
-  "vignette": null,
+  "vignette": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite-short.vignette.webp",
   "titre": "uₙ = 3 × 2ⁿ : tu la lis en 5 secondes ? 🪷 — 1re #Shorts",
   "short": true,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_explicite&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_terme_general&microId=expo_suite_explicite&display=simple"
  },
  "premiere-suite-geo-graphique": {
   "fichier": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique.mp4",
   "poster": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique.png",
-  "vignette": null,
+  "vignette": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique.vignette.webp",
   "titre": "100 bactéries qui doublent : à quoi ressemble la courbe ? — Suite géométrique sur un graphique — épisode 15 · Maths 1re",
   "short": false,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_graphique&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_terme_general&microId=expo_suite_graphique&display=simple"
  },
  "premiere-suite-geo-graphique-short": {
   "fichier": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique-short.mp4",
   "poster": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique-short.png",
-  "vignette": null,
+  "vignette": "premiere/maths/suites/15-geo-graphique/eleveai-maths-premiere-suite-geo-graphique-short.vignette.webp",
   "titre": "Tu reconnais une suite géométrique rien qu'à son dessin ? 🎮 — 1re #Shorts",
   "short": true,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_graphique&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_terme_general&microId=expo_suite_graphique&display=simple"
+ },
+ "premiere-suite-geo-interpreter": {
+  "fichier": "premiere/maths/suites/16-geo-interpreter/eleveai-maths-premiere-suite-geo-interpreter.mp4",
+  "poster": "premiere/maths/suites/16-geo-interpreter/eleveai-maths-premiere-suite-geo-interpreter.png",
+  "vignette": "premiere/maths/suites/16-geo-interpreter/eleveai-maths-premiere-suite-geo-interpreter.vignette.webp",
+  "titre": "50 000 trajets à vélo, + 20 % par an : quand auront-ils doublé ? — Interpréter une suite géométrique — épisode 16 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_terme_general&microId=expo_suite_interpreter&display=simple"
+ },
+ "premiere-suite-geo-interpreter-short": {
+  "fichier": "premiere/maths/suites/16-geo-interpreter/eleveai-maths-premiere-suite-geo-interpreter-short.mp4",
+  "poster": "premiere/maths/suites/16-geo-interpreter/eleveai-maths-premiere-suite-geo-interpreter-short.png",
+  "vignette": "premiere/maths/suites/16-geo-interpreter/eleveai-maths-premiere-suite-geo-interpreter-short.vignette.webp",
+  "titre": "Le total ou la hausse ? Ne te fais pas piéger 🎧 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_terme_general&microId=expo_suite_interpreter&display=simple"
  },
  "premiere-suite-geo-reconnaitre": {
   "fichier": "premiere/maths/suites/09-geo-reconnaitre/eleveai-maths-premiere-suite-geo-reconnaitre.mp4",
@@ -10667,20 +10767,20 @@
  "premiere-suite-geo-variation": {
   "fichier": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation.mp4",
   "poster": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation.png",
-  "vignette": null,
+  "vignette": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation.vignette.webp",
   "titre": "+ 5 % par niveau : « ça reste presque pareil » ? — Sens de variation d'une suite géométrique — épisode 14 · Maths 1re",
   "short": false,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_variation&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_terme_general&microId=expo_suite_variation&display=simple"
  },
  "premiere-suite-geo-variation-short": {
   "fichier": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation-short.mp4",
   "poster": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation-short.png",
-  "vignette": null,
+  "vignette": "premiere/maths/suites/14-geo-variation/eleveai-maths-premiere-suite-geo-variation-short.vignette.webp",
   "titre": "− 25 % par heure : ça monte ou ça descend ? 💊 — 1re #Shorts",
   "short": true,
   "youtube": null,
-  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_geometrique&microId=expo_suite_variation&display=simple"
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_suite_terme_general&microId=expo_suite_variation&display=simple"
  },
  "presentation": {
   "fichier": "ulule/presentation.mp4",
@@ -13762,6 +13862,150 @@
   "youtube": null,
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=variable_aleatoire&microId=va_somme&display=simple"
  },
+ "terminale-suite-bornee": {
+  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.mp4",
+  "poster": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.png",
+  "vignette": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.vignette.webp",
+  "titre": "Au plus 102 décibels : comment le prouver ? — Suite majorée, minorée, bornée — épisode 31 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-bornee-short": {
+  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.mp4",
+  "poster": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.png",
+  "vignette": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.vignette.webp",
+  "titre": "L'altitude la plus basse et la plus haute du satellite ? 🛰️ — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-defi": {
+  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.mp4",
+  "poster": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.png",
+  "vignette": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.vignette.webp",
+  "titre": "− 10 % et + 600 abonnés par mois : jusqu'où ? — Un exercice de bac sur les suites — épisode 32 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-defi-short": {
+  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.mp4",
+  "poster": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.png",
+  "vignette": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.vignette.webp",
+  "titre": "Où se stabilise le parc de vélos ? 🚲 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-limite-calculer": {
+  "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.mp4",
+  "poster": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.png",
+  "vignette": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.vignette.webp",
+  "titre": "n² − 100n ou 2ⁿ : quel algorithme va exploser ? — Calculer la limite d'une suite — épisode 34 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-limite-calculer-short": {
+  "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer-short.mp4",
+  "poster": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer-short.png",
+  "vignette": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer-short.vignette.webp",
+  "titre": "n² ou 2ⁿ : qui gagne la bataille ? ⚔️ — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-limite-interpreter": {
+  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.mp4",
+  "poster": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.png",
+  "vignette": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.vignette.webp",
+  "titre": "Que veut dire « la vitesse tend vers 55 » ? — Interpréter la limite d'une suite — épisode 33 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-limite-interpreter-short": {
+  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.mp4",
+  "poster": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.png",
+  "vignette": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.vignette.webp",
+  "titre": "Tu lis la limite sur un graphique en 3 secondes ? ❤️ — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-limite-operations": {
+  "fichier": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations.mp4",
+  "poster": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations.png",
+  "vignette": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations.vignette.webp",
+  "titre": "Recettes et coûts tendent vers +∞ : et le bénéfice ? — Opérations sur les limites — épisode 35 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-limite-operations-short": {
+  "fichier": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations-short.mp4",
+  "poster": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations-short.png",
+  "vignette": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations-short.vignette.webp",
+  "titre": "Infini moins infini, ça fait 0 ? 🗺️ — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-reconnaitre": {
+  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.mp4",
+  "poster": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.png",
+  "vignette": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.vignette.webp",
+  "titre": "+ 150 ou + 6 % par mois : quelle offre choisir ? — Reconnaître la nature d'une suite — épisode 28 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-reconnaitre-short": {
+  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.mp4",
+  "poster": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.png",
+  "vignette": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.vignette.webp",
+  "titre": "+ 10 % par jour : arithmétique ou géométrique ? 🎧 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-recurrence-preuve": {
+  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.mp4",
+  "poster": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.png",
+  "vignette": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.vignette.webp",
+  "titre": "Jamais plus de 2 mg de chlore : comment le garantir ? — Le raisonnement par récurrence — épisode 29 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-recurrence-preuve-short": {
+  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.mp4",
+  "poster": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.png",
+  "vignette": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.vignette.webp",
+  "titre": "L'hérédité seule peut-elle prouver une chose fausse ? 🏗️ — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-variation": {
+  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.mp4",
+  "poster": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.png",
+  "vignette": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.vignette.webp",
+  "titre": "Le glacier baisse-t-il chaque année, sans exception ? — Sens de variation d'une suite — épisode 30 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-variation-short": {
+  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.mp4",
+  "poster": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.png",
+  "vignette": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.vignette.webp",
+  "titre": "× 1,1 chaque mois, et ça descend ? 💸 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
  "ti-margo-3d-cahier-ecriture": {
   "fichier": "ti-margo/cahier-ecriture/eleveai-ti-margo-3d-cahier-ecriture.mp4",
   "poster": null,
@@ -14600,133 +14844,5 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
- },
- "maths-terminale-suite-bornee": {
-  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.vignette.webp",
-  "titre": "maths terminale suite bornee",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-bornee-short": {
-  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.vignette.webp",
-  "titre": "maths terminale suite bornee short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-defi": {
-  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.vignette.webp",
-  "titre": "maths terminale suite defi",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-defi-short": {
-  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.vignette.webp",
-  "titre": "maths terminale suite defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-limite-calculer": {
-  "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.vignette.webp",
-  "titre": "maths terminale suite limite calculer",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-limite-calculer-short": {
-  "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer-short.vignette.webp",
-  "titre": "maths terminale suite limite calculer short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-limite-interpreter": {
-  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.vignette.webp",
-  "titre": "maths terminale suite limite interpreter",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-limite-interpreter-short": {
-  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.vignette.webp",
-  "titre": "maths terminale suite limite interpreter short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-limite-operations": {
-  "fichier": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths terminale suite limite operations",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-limite-operations-short": {
-  "fichier": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths terminale suite limite operations short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-reconnaitre": {
-  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.vignette.webp",
-  "titre": "maths terminale suite reconnaitre",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-reconnaitre-short": {
-  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.vignette.webp",
-  "titre": "maths terminale suite reconnaitre short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-recurrence-preuve": {
-  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.vignette.webp",
-  "titre": "maths terminale suite recurrence preuve",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-recurrence-preuve-short": {
-  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.vignette.webp",
-  "titre": "maths terminale suite recurrence preuve short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-variation": {
-  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.vignette.webp",
-  "titre": "maths terminale suite variation",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-variation-short": {
-  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.vignette.webp",
-  "titre": "maths terminale suite variation short",
-  "short": true,
-  "youtube": null
  }
 }
