@@ -550,6 +550,15 @@ const CLASSES_VIDEO_DU_JOUR: Record<NiveauJournal, string[]> = {
   adultes: ["6e", "5e", "4e", "3e", "2de", "1re", "1re spé", "Terminale", "Maths Réel", "Les bases", "Maths"],
 };
 
+/** Les espaces qu'un titre ne doit pas couper (13/11 : « 1,5 / °C » sur deux
+ *  lignes) : avant une unité ou %, et à l'intérieur des guillemets. */
+const insecable = (t: string) =>
+  t
+    .replace(/(\d) (°C|°|%|km|m|kg|g|h|min|s|€|ans?)(?=[\s»,.!?]|$)/g, "$1 $2")
+    .replace(/« /g, "« ")
+    .replace(/ »/g, " »")
+    .replace(/(\d) (\d{3})/g, "$1 $2");
+
 /** Le titre d'une vidéo sans « #Shorts » ni « — Maths 6e » à la fin. */
 const titreCourt = (t: string) =>
   t
@@ -699,7 +708,7 @@ function ArticleUne({
         {duree ? ` · ${duree} min de lecture` : ""}
       </p>
       <h2 className="mt-2 font-serif text-3xl font-black leading-[1.05] tracking-tight text-stone-900 sm:text-5xl">
-        {a.titre}
+        {insecable(a.titre)}
       </h2>
       <p
         className={`mt-3 font-serif font-semibold leading-snug text-stone-800 ${petit ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"}`}
@@ -1281,7 +1290,7 @@ function ArticleDuJour({
               une ? "text-3xl sm:text-5xl" : "text-2xl sm:text-4xl"
             }`}
           >
-            {a.titre}
+            {insecable(a.titre)}
           </h2>
           <p className={`mt-3 font-serif font-semibold leading-snug text-stone-800 ${petit ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"}`}>
             {a.chapo}
