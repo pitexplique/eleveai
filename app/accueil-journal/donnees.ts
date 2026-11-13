@@ -22,6 +22,9 @@ import { depuisEcrit, genererDefi, themeDe, type DefiGenere } from "@/lib/accuei
 import type { ChiffreDuJour } from "@/lib/accueil/journal";
 import type { Mission } from "@/lib/accueil/articles";
 import type { VideoJournal } from "./JournalClient";
+import { NOTION_COACH_MATHS } from "@/lib/matrice/coach";
+import { NOTIONS_COACH } from "@/lib/matrice/notions.generated";
+import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 
 /** Hachage FNV-1a : une place stable par id. */
 function hache(texte: string): number {
@@ -203,6 +206,54 @@ function shortsDuNiveau(jour: number, niveau: NiveauJournal): VideoJournal[] {
     .filter((x): x is VideoJournal => x !== null);
 }
 
+/* ═══ LE LIEN VERS LE COACH (13/11/2026) ════════════════════════════════════
+   « Chaque article renvoie vers la micro du coach qui correspond (la pente
+   vers les pourcentages, le bassin vers les volumes) : c'est ce lien qui en
+   fait un complément du suivi plutôt qu'un site à côté. » Pour chaque article
+   et chaque profil : la série du coach où s'entraîner, dans une classe du
+   profil. Calculé ICI (serveur) : la table des libellés pèse 130 Ko. */
+const CLASSES_DU_NIVEAU: Record<NiveauJournal, string[]> = {
+  "cp-ce2": ["ce2", "ce1", "cp"],
+  cm: ["cm2", "cm1"],
+  "6e-5e": ["6e", "5e"],
+  "4e-3e": ["4e", "3e"],
+  lycee: ["seconde", "premiere", "premiere-spe"],
+  adultes: ["4e", "3e", "seconde", "6e", "5e"],
+};
+const NOM_CLASSE: Record<string, string> = {
+  cp: "CP", ce1: "CE1", ce2: "CE2", cm1: "CM1", cm2: "CM2", "6e": "6e", "5e": "5e", "4e": "4e", "3e": "3e",
+  seconde: "2de", premiere: "1re", "premiere-spe": "1re spé",
+};
+export type Entrainement = { href: string; label: string; classe: string };
+
+function entrainement(cles: string[], niveau: NiveauJournal): Entrainement | null {
+  for (const brut of cles) {
+    const [cle, imposee] = brut.split("@");
+    for (const classe of imposee ? [imposee] : CLASSES_DU_NIVEAU[niveau]) {
+      const notion = NOTION_COACH_MATHS[cle]?.[classe];
+      const label = notion && NOTIONS_COACH.maths?.[classe]?.find((n) => n.id === notion)?.label;
+      // ⛔ Pas de lien vers une série que le coach ne connaît pas.
+      if (!notion || !label) continue;
+      return {
+        href: `/coach/serie?classe=${classe}&matiere=maths&notion=${notion}&${displayParamForClasse(classe)}`,
+        label,
+        classe: NOM_CLASSE[classe] ?? classe,
+      };
+    }
+  }
+  return null;
+}
+
+/** article → profil → la série du coach (absent : pas de série à ce niveau). */
+const ENTRAINEMENTS: Record<string, Partial<Record<NiveauJournal, Entrainement>>> = Object.fromEntries(
+  ARTICLES.map((a) => [
+    a.id,
+    Object.fromEntries(
+      a.niveaux.map((n) => [n, entrainement(a.coach, n)] as const).filter(([, e]) => e !== null),
+    ),
+  ]),
+);
+
 export type EditionDuNiveau = {
   une: string;
   autres: string[];
@@ -347,6 +398,7 @@ export function donneesDuJournal(jour = jourParis()) {
     // La galerie (12/11/2026, « à la façon Netflix ») : tous les articles et
     // toutes les missions, le navigateur les range par profil ; 8 métiers.
     tousArticles: ARTICLES,
+    entrainements: ENTRAINEMENTS,
     missions: MISSIONS,
     metiers: fenetre(METIERS, jour, 8, 1),
     // ⚠️ La fenêtre se prend sur la liste ENTIÈRE, et le short de la Une n'est

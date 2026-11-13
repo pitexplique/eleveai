@@ -30,7 +30,7 @@ import {
   type NiveauJournal,
 } from "@/lib/accueil/niveaux";
 import { useEleve } from "@/context/EleveContext";
-import type { EditionDuNiveau } from "./donnees";
+import type { EditionDuNiveau, Entrainement } from "./donnees";
 
 export type VideoJournal = { id: string; titre: string; short: boolean; vignette: string };
 
@@ -601,12 +601,16 @@ function ArticleUne({
   petit = false,
   duree,
   surFini,
+  coach,
 }: {
   a: Article;
   petit?: boolean;
   duree?: number;
   surFini?: () => void;
+  /** La série du coach où s'entraîner après l'article (donnees.ts). */
+  coach?: Entrainement;
 }) {
+  const de = useContext(Source);
   return (
     <article aria-label={a.titre} className="border-t-[3px] border-stone-900 pt-3">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">
@@ -622,6 +626,25 @@ function ArticleUne({
         {a.chapo}
       </p>
       <Ecouter a={a} />
+      {/* Les vidéos de l'article (13/11/2026) : des liens vers /video/<id>, où la
+          vidéo s'ouvre en pause. Rien ne se lance ici. */}
+      {a.videos?.length ? (
+        <ul className="mt-3 flex flex-wrap gap-2" aria-label="Les vidéos de l’article">
+          {a.videos.map((v) => (
+            <li key={v.id}>
+              <Link
+                prefetch={false}
+                href={`/video/${v.id}?from=${de}`}
+                onClick={() => track("journal_article_video", { article: a.id, video: v.id })}
+                className="inline-flex items-center gap-2 rounded-full bg-red-700 px-4 py-1.5 font-serif text-base font-bold text-white hover:bg-red-800 focus-visible:outline focus-visible:outline-4 focus-visible:outline-stone-900"
+              >
+                <Play className="h-4 w-4" fill="currentColor" aria-hidden="true" />
+                {v.libelle}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : null}
       <div className="mt-5 grid gap-6 md:grid-cols-[1fr_16rem]">
         {/* Aux petits niveaux : plus grand, plus aéré, pas de lettrine (elle
             gêne ceux qui déchiffrent). */}
@@ -646,6 +669,26 @@ function ArticleUne({
       <div id="lecteur-changer" className="mt-5">
         <Agir a={a} />
       </div>
+      {/* ⭐ 13/11/2026 : l'article mène au coach. C'est ce lien qui fait du
+          journal un complément du suivi, et pas un site à côté. */}
+      {coach && (
+        <div className="mt-5 flex flex-wrap items-center gap-3 border-2 border-stone-900 bg-white p-4">
+          <p className="min-w-0 flex-1 font-serif leading-snug text-stone-800">
+            <span className="block text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">
+              À toi de jouer · {coach.classe}
+            </span>
+            <span className={`font-black text-stone-900 ${petit ? "text-xl" : "text-lg"}`}>{coach.label}</span>
+          </p>
+          <Lien
+            href={coach.href}
+            quoi="coach"
+            mise="quotidien"
+            className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-5 py-2.5 font-serif text-lg font-black text-white hover:bg-stone-700"
+          >
+            S&rsquo;entraîner avec le coach <ArrowRight className="h-5 w-5" aria-hidden="true" />
+          </Lien>
+        </div>
+      )}
       <p className="mt-4 text-xs italic text-stone-500">Source : {a.source}</p>
     </article>
   );
@@ -1038,11 +1081,13 @@ function LecteurArticle({
   petit,
   ancre,
   surFini,
+  coach,
 }: {
   a: Article;
   petit: boolean;
   ancre?: "maths" | "defi" | "changer";
   surFini: () => void;
+  coach?: Entrainement;
 }) {
   useEffect(() => {
     if (ancre) document.getElementById(`lecteur-${ancre}`)?.scrollIntoView({ block: "center" });
@@ -1051,7 +1096,7 @@ function LecteurArticle({
     <>
       <ImageCarte fond={FOND_RUBRIQUE[a.rubrique]} dessin={dessinDe(a)} grand />
       <div className="mt-4">
-        <ArticleUne a={a} petit={petit} duree={minutes(a, petit)} surFini={surFini} />
+        <ArticleUne a={a} petit={petit} duree={minutes(a, petit)} surFini={surFini} coach={coach} />
       </div>
     </>
   );
@@ -1099,12 +1144,14 @@ export default function JournalClient(props: {
   editions: Record<NiveauJournal, EditionDuNiveau>;
   editionsReunion: Record<NiveauJournal, EditionDuNiveau>;
   tousArticles: Article[];
+  /** article → profil → la série du coach où s'entraîner. */
+  entrainements: Record<string, Partial<Record<NiveauJournal, Entrainement>>>;
   missions: Mission[];
   metiers: Metier[];
 }) {
   const mise: Mise = "quotidien";
   const t = TON[mise];
-  const { date, numero, jour, une, demain, theme, editions, editionsReunion, tousArticles, missions, metiers } = props;
+  const { date, numero, jour, une, demain, theme, editions, editionsReunion, tousArticles, entrainements, missions, metiers } = props;
 
   // Le profil : null tant qu'on ne sait pas (l'écran des profils est devant).
   const { eleve } = useEleve();
@@ -1415,6 +1462,7 @@ export default function JournalClient(props: {
             petit={petit}
             ancre={ouvert.ancre}
             surFini={() => noter(articleOuvert.id, "fini")}
+            coach={entrainements[articleOuvert.id]?.[niveau]}
           />
         </Fenetre>
       )}

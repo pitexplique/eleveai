@@ -25,6 +25,12 @@ export type Article = {
    *  ⛔ Un article de CP-CE2 ou de CM1-CM2 est ÉCRIT pour eux : phrases courtes,
    *  mots simples, nombres simples. Un même sujet peut avoir plusieurs versions. */
   niveaux: NiveauJournal[];
+  /** ⭐ LE LIEN VERS LE COACH (13/11/2026) : c'est ce qui fait du journal un
+   *  complément du suivi, et pas un site à côté. Les notions du lexique
+   *  (clés de NOTION_COACH_MATHS, lib/matrice/coach.ts) où s'entraîner après
+   *  l'article, par ordre de préférence ; « solides@5e » impose la classe.
+   *  Le serveur en tire le lien de chaque profil (donnees.ts). */
+  coach: string[];
   /** L'édition « Île de La Réunion » (12/11/2026) : l'article n'y paraît que là. */
   reunion?: boolean;
   rubrique: "Planète" | "Espace" | "Santé" | "Argent" | "Sport" | "Technologie" | "Histoire" | "Société" | "Sécurité";
@@ -40,6 +46,10 @@ export type Article = {
   agir: string;
   /** Optionnel : la date (AAAA-MM-JJ) où l'article passe à la Une. */
   uneLe?: string;
+  /** Optionnel (13/11/2026) : les vidéos de l'article, par leur id de
+   *  lib/videos/videos-r2.json ; le lecteur en fait des boutons vers /video/<id>
+   *  (la vidéo s'y ouvre en pause). */
+  videos?: { id: string; libelle: string }[];
   /** Le niveau à partir duquel on suit le calcul. */
   niveau: string;
   source: string;
@@ -51,6 +61,7 @@ export const ARTICLES: Article[] = [
     // deux amis et que les deux font deux bonnes actions, au bout d'un mois
     // combien y aura-t-il de bonnes actions ? » À la Une le jour même.
     id: "bonnes-actions-puissances",
+    coach: ["puissances"],
     niveaux: ["4e-3e", "lycee", "adultes"],
     uneLe: "2026-11-10",
     rubrique: "Société",
@@ -82,6 +93,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "lumiere-soleil",
+    coach: ["proportionnalite"],
     niveaux: ["6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Espace",
     titre: "Le Soleil que tu vois a 8 minutes de retard",
@@ -111,6 +123,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "huit-milliards",
+    coach: ["ordres_grandeur", "calcul", "proportionnalite"],
     niveaux: ["6e-5e", "4e-3e", "adultes"],
     rubrique: "Société",
     titre: "Huit milliards d'humains : combien de temps pour tous les compter ?",
@@ -140,6 +153,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "coeur-battements",
+    coach: ["proportionnalite"],
     niveaux: ["6e-5e", "4e-3e", "adultes"],
     rubrique: "Santé",
     titre: "Ton cœur bat environ 100 000 fois par jour",
@@ -168,6 +182,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "prix-qui-doublent",
+    coach: ["pourcentages"],
     niveaux: ["4e-3e", "lycee", "adultes"],
     rubrique: "Argent",
     titre: "Pourquoi les prix doublent en 35 ans, même avec 2 % par an",
@@ -197,6 +212,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "marathon-21-kmh",
+    coach: ["proportionnalite"],
     niveaux: ["6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Sport",
     titre: "Un marathon en 2 heures, c'est rouler à vélo… en courant",
@@ -226,6 +242,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "megapixels",
+    coach: ["grandeurs@5e", "proportionnalite"],
     niveaux: ["6e-5e", "4e-3e", "adultes"],
     rubrique: "Technologie",
     titre: "12 mégapixels : ce que cache le chiffre de ton téléphone",
@@ -255,6 +272,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "pluie-70",
+    coach: ["probabilites"],
     niveaux: ["6e-5e", "4e-3e", "adultes"],
     rubrique: "Planète",
     titre: "« 70 % de risque de pluie » : ce que la météo veut vraiment dire",
@@ -284,6 +302,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "eratosthene",
+    coach: ["proportionnalite"],
     niveaux: ["6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Histoire",
     titre: "Il y a 2 200 ans, il a mesuré la Terre avec un bâton",
@@ -313,6 +332,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "sondage-1000",
+    coach: ["statistiques"],
     niveaux: ["lycee", "adultes"],
     rubrique: "Société",
     titre: "Comment 1 000 personnes peuvent parler pour tout un pays",
@@ -342,6 +362,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "oceans-71",
+    coach: ["pourcentages"],
     niveaux: ["6e-5e", "4e-3e", "adultes"],
     rubrique: "Planète",
     titre: "Notre planète devrait s'appeler la planète Mer",
@@ -371,6 +392,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "code-pin",
+    coach: ["probabilites"],
     niveaux: ["4e-3e", "lycee", "adultes"],
     rubrique: "Sécurité",
     titre: "Ton code à 4 chiffres résiste-t-il à un voleur ?",
@@ -400,6 +422,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "freinage",
+    coach: ["fonctions", "proportionnalite"],
     niveaux: ["4e-3e", "lycee", "adultes"],
     rubrique: "Sécurité",
     titre: "Rouler deux fois plus vite, c'est freiner quatre fois plus loin",
@@ -429,6 +452,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "rechauffement-1-5",
+    coach: ["statistiques"],
     niveaux: ["6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Planète",
     titre: "Pourquoi tout le monde parle de « 1,5 °C »",
@@ -458,6 +482,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "baleines-reunion",
+    coach: ["proportionnalite"],
     niveaux: ["6e-5e"],
     rubrique: "Planète",
     titre: "8 000 km sans GPS : le voyage des baleines à bosse",
@@ -494,6 +519,7 @@ export const ARTICLES: Article[] = [
   // ── CP-CE2 ──────────────────────────────────────────────────────────────
   {
     id: "dents-de-lait",
+    coach: ["calcul"],
     niveaux: ["cp-ce2"],
     rubrique: "Santé",
     titre: "Tes dents de lait tombent, et d'autres poussent",
@@ -519,6 +545,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "abeilles-hexagones",
+    coach: ["geometrie"],
     niveaux: ["cp-ce2", "cm"],
     rubrique: "Planète",
     titre: "Pourquoi les abeilles font des cases à 6 côtés",
@@ -545,6 +572,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "ballon-32-pieces",
+    coach: ["calcul"],
     niveaux: ["cp-ce2", "cm"],
     rubrique: "Sport",
     titre: "Un ballon de foot, c'est 32 morceaux cousus ensemble",
@@ -571,6 +599,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "semaine-7-jours",
+    coach: ["calcul"],
     niveaux: ["cp-ce2", "cm"],
     rubrique: "Histoire",
     titre: "Pourquoi une semaine a 7 jours",
@@ -596,6 +625,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "tirelire-2-euros",
+    coach: ["calcul"],
     niveaux: ["cp-ce2"],
     rubrique: "Argent",
     titre: "2 € par semaine dans ta tirelire : combien à la fin ?",
@@ -621,6 +651,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "jour-et-nuit",
+    coach: ["calcul"],
     niveaux: ["cp-ce2"],
     rubrique: "Espace",
     titre: "Pourquoi il fait nuit ? La Terre tourne comme une toupie",
@@ -649,6 +680,7 @@ export const ARTICLES: Article[] = [
   {
     // La version CM de « bonnes-actions-puissances » : sans puissances, dix jours.
     id: "bonnes-actions-cm",
+    coach: ["calcul"],
     niveaux: ["cm", "6e-5e"],
     rubrique: "Société",
     titre: "Une bonne action qui double chaque jour",
@@ -676,6 +708,7 @@ export const ARTICLES: Article[] = [
   {
     // La version école de « sondage-1000 ».
     id: "sondage-ecole",
+    coach: ["proportionnalite"],
     niveaux: ["cm"],
     rubrique: "Société",
     titre: "Savoir ce que pense toute l'école sans demander à tout le monde",
@@ -703,6 +736,7 @@ export const ARTICLES: Article[] = [
   {
     // La version CM de « coeur-battements ».
     id: "coeur-cm",
+    coach: ["proportionnalite"],
     niveaux: ["cm"],
     rubrique: "Santé",
     titre: "Ton cœur bat plus de 100 000 fois par jour",
@@ -728,6 +762,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "annee-bissextile",
+    coach: ["calcul"],
     niveaux: ["cm", "6e-5e"],
     rubrique: "Espace",
     titre: "Pourquoi certaines années ont un 29 février",
@@ -753,6 +788,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "douche-ou-bain",
+    coach: ["proportionnalite"],
     niveaux: ["cm", "6e-5e"],
     rubrique: "Planète",
     titre: "Douche ou bain : lequel boit le plus d'eau ?",
@@ -780,6 +816,7 @@ export const ARTICLES: Article[] = [
   // ── COLLÈGE : la version collège du sondage ─────────────────────────────
   {
     id: "sondage-college",
+    coach: ["pourcentages"],
     niveaux: ["6e-5e", "4e-3e"],
     rubrique: "Société",
     titre: "Un sondage de 1 000 personnes peut-il se tromper ?",
@@ -812,6 +849,7 @@ export const ARTICLES: Article[] = [
   // ── LYCÉE ───────────────────────────────────────────────────────────────
   {
     id: "carbone-14",
+    coach: ["puissances"],
     niveaux: ["lycee", "adultes"],
     rubrique: "Histoire",
     titre: "Comment on sait qu'un os a 10 000 ans",
@@ -841,6 +879,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "faux-positifs",
+    coach: ["probabilites_conditionnelles"],
     niveaux: ["lycee", "adultes"],
     rubrique: "Santé",
     titre: "Un test fiable à 99 % peut se tromper une fois sur deux",
@@ -879,6 +918,7 @@ export const ARTICLES: Article[] = [
   // ── La Réunion, CP-CE2 et CM1-CM2 ───────────────────────────────────────
   {
     id: "reunion-fournaise",
+    coach: ["calcul"],
     reunion: true,
     niveaux: ["cp-ce2", "cm"],
     rubrique: "Planète",
@@ -906,6 +946,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-cyclones",
+    coach: ["calcul"],
     reunion: true,
     niveaux: ["cp-ce2", "cm"],
     rubrique: "Planète",
@@ -933,6 +974,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-tortues",
+    coach: ["calcul"],
     reunion: true,
     niveaux: ["cp-ce2", "cm"],
     rubrique: "Planète",
@@ -960,6 +1002,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-trois-cirques",
+    coach: ["calcul"],
     reunion: true,
     niveaux: ["cp-ce2", "cm"],
     rubrique: "Histoire",
@@ -992,6 +1035,7 @@ export const ARTICLES: Article[] = [
     // expliquer les choses. » ⚠️ Les nombres sont un EXEMPLE CHIFFRÉ (dit dans
     // l'article), pas des mesures du bassin.
     id: "reunion-bassin-ecole",
+    coach: ["calcul"],
     reunion: true,
     uneLe: "2026-11-12",
     niveaux: ["cp-ce2", "cm"],
@@ -1015,11 +1059,16 @@ export const ARTICLES: Article[] = [
       explication: "L'eau ne sort pas, donc tout s'ajoute : 10 + 10 + 10 = 30 verres.",
     },
     agir: "Avant de te baigner, passe aux toilettes ! Et explique à tes amis pourquoi : dans un bassin fermé, tout ce qu'on y met reste dedans.",
+    videos: [
+      { id: "journal-bassin-grande-anse-short", libelle: "Le dessin animé de Ti Margo (2 min)" },
+      { id: "journal-bassin-grande-anse-paysage", libelle: "Pour aller plus loin : le volume du bassin (5 min)" },
+    ],
     niveau: "dès le CP",
     source: "Exemple chiffré EleveAI ; Agence régionale de santé : contrôle de la qualité des eaux de baignade.",
   },
   {
     id: "reunion-bassin",
+    coach: ["solides@5e"],
     reunion: true,
     uneLe: "2026-11-12",
     niveaux: ["6e-5e", "4e-3e", "lycee", "adultes"],
@@ -1047,6 +1096,10 @@ export const ARTICLES: Article[] = [
       explication: "1 500 ÷ 300 = 5 : il faut environ 5 jours pour renouveler tout le volume. Fermé, ce temps devient infini.",
     },
     agir: "Calcule le volume d'un bassin que tu connais (longueur × largeur × profondeur moyenne). Puis demande-toi : par où l'eau entre-t-elle, et par où sort-elle ?",
+    videos: [
+      { id: "journal-bassin-grande-anse-paysage", libelle: "Le dessin animé : comprendre le volume en 5 min" },
+      { id: "journal-bassin-grande-anse-short", libelle: "Le short de Ti Margo (2 min)" },
+    ],
     niveau: "dès la 6e (volumes en 5e, doublements en 4e)",
     source: "Exemple chiffré EleveAI ; doublement des bactéries en environ 20 minutes en conditions favorables (Escherichia coli, laboratoire).",
   },
@@ -1056,6 +1109,7 @@ export const ARTICLES: Article[] = [
   //    parle de ça, de La Réunion »). ─────────────────────────────────────────
   {
     id: "reunion-foot-payet",
+    coach: ["statistiques"],
     reunion: true,
     niveaux: ["cm", "6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Sport",
@@ -1083,6 +1137,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-velo-maido",
+    coach: ["pourcentages"],
     reunion: true,
     niveaux: ["6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Sport",
@@ -1109,6 +1164,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-moringue",
+    coach: ["proportionnalite"],
     reunion: true,
     niveaux: ["cm", "6e-5e", "4e-3e"],
     rubrique: "Sport",
@@ -1139,6 +1195,7 @@ export const ARTICLES: Article[] = [
   //    sport, du soleil… de la vie, quoi », « et le vivre ensemble »). ───────
   {
     id: "reunion-canne-a-sucre",
+    coach: ["proportionnalite"],
     reunion: true,
     niveaux: ["cm", "6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Argent",
@@ -1165,6 +1222,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-poissons-lagon",
+    coach: ["calcul"],
     reunion: true,
     niveaux: ["cp-ce2", "cm", "6e-5e"],
     rubrique: "Planète",
@@ -1192,6 +1250,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-soleil",
+    coach: ["fractions", "proportionnalite"],
     reunion: true,
     niveaux: ["6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Santé",
@@ -1218,6 +1277,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-vivre-ensemble",
+    coach: ["calcul", "problemes"],
     reunion: true,
     niveaux: ["cm", "6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Société",
@@ -1247,6 +1307,7 @@ export const ARTICLES: Article[] = [
   // ── La Réunion, du CM au lycée ──────────────────────────────────────────
   {
     id: "reunion-record-pluie",
+    coach: ["nombres-decimaux", "proportionnalite"],
     reunion: true,
     niveaux: ["cm", "6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Planète",
@@ -1274,6 +1335,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-diagonale",
+    coach: ["proportionnalite"],
     reunion: true,
     niveaux: ["cm", "6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Sport",
@@ -1300,6 +1362,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-altitude",
+    coach: ["fonctions", "proportionnalite"],
     reunion: true,
     niveaux: ["6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Planète",
@@ -1326,6 +1389,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-lave-nouvelles-terres",
+    coach: ["grandeurs@5e", "proportionnalite"],
     reunion: true,
     niveaux: ["6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Planète",
@@ -1352,6 +1416,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "reunion-parc-national",
+    coach: ["pourcentages"],
     reunion: true,
     niveaux: ["cm", "6e-5e", "4e-3e", "lycee", "adultes"],
     rubrique: "Planète",
