@@ -30,7 +30,7 @@ import {
   type NiveauJournal,
 } from "@/lib/accueil/niveaux";
 import { useEleve } from "@/context/EleveContext";
-import type { EditionDuNiveau, Entrainement } from "./donnees";
+import type { EditionDuNiveau, Entrainement, VideosArticle } from "./donnees";
 
 export type VideoJournal = { id: string; titre: string; short: boolean; vignette: string };
 
@@ -537,7 +537,54 @@ function Agir({ a }: { a: Article }) {
 /** « Écouter l'article » (12/11/2026) : pour ceux qui lisent difficilement
  *  (la règle du coach sonore). La voix du navigateur, en français ; rien ne se
  *  lance tout seul. */
-function Ecouter({ a }: { a: Article }) {
+/** Les vidéos de l'article (13/11/2026, Frédéric : « pas assez de liens vers
+ *  des vidéos paysage ou shorts, trop d'écrit ») : la paysage en grand, le
+ *  short à côté. Des liens vers /video/<id> : rien ne se lance ici. */
+/** Les classes (lues par classeDe, donnees.ts) dont la vidéo du jour va à chaque profil. */
+const CLASSES_VIDEO_DU_JOUR: Record<NiveauJournal, string[]> = {
+  "cp-ce2": [],
+  cm: [],
+  "6e-5e": ["6e", "5e", "Maths Réel"],
+  "4e-3e": ["4e", "3e", "Maths Réel"],
+  lycee: ["2de", "1re", "1re spé", "Terminale", "Maths Réel"],
+  adultes: ["6e", "5e", "4e", "3e", "2de", "1re", "1re spé", "Terminale", "Maths Réel", "Les bases", "Maths"],
+};
+
+/** Le titre d'une vidéo sans « #Shorts » ni « — Maths 6e » à la fin. */
+const titreCourt = (t: string) =>
+  t
+    .replace(/#\S+/g, "")
+    .replace(/\s*[—·]\s*(Maths\s+)?(CP|CE1|CE2|CM1|CM2|6e|5e|4e|3e|2de|1re|Tle|Seconde|Terminale)(\s.*)?$/i, "")
+    .trim();
+
+function BlocVideos({ v, petit = false }: { v?: VideosArticle; petit?: boolean }) {
+  if (!v?.paysage && !v?.short) return null;
+  const titre = titreCourt;
+  return (
+    <div className={`grid items-start gap-3 ${v.paysage && v.short ? "grid-cols-[1fr_7.5rem] sm:grid-cols-[1fr_9rem]" : v.short ? "grid-cols-[minmax(0,13rem)] justify-center" : ""}`}>
+      {v.paysage && (
+        <div>
+          <Vignette v={v.paysage} mise="quotidien" quoi="article" grande />
+          <p className={`mt-1.5 font-serif font-bold leading-snug text-stone-900 ${petit ? "text-lg" : "text-base"}`}>
+            <span className="text-red-700">▶ La vidéo : </span>
+            {titre(v.paysage.titre)}
+          </p>
+        </div>
+      )}
+      {v.short && (
+        <div>
+          <Vignette v={v.short} mise="quotidien" quoi="shorts" />
+          <p className="mt-1.5 line-clamp-3 font-serif text-sm font-bold leading-snug text-stone-900">
+            <span className="text-red-700">Le short : </span>
+            {titre(v.short.titre)}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Ecouter({ a, grand = false }: { a: Article; grand?: boolean }) {
   const [parle, setParle] = useState(false);
   const [possible, setPossible] = useState(false);
   useEffect(() => {
@@ -588,9 +635,12 @@ function Ecouter({ a }: { a: Article }) {
     <button
       type="button"
       onClick={lire}
-      className="mt-3 inline-flex items-center gap-2 rounded-full border-2 border-stone-900 bg-white px-4 py-1.5 font-serif text-base font-bold text-stone-900 hover:bg-stone-100"
+      // ⭐ 13/11 : « j'aime bien écouter l'article » — un vrai bouton, bien visible.
+      className={`inline-flex items-center gap-2 rounded-full border-2 border-stone-900 font-serif font-black hover:bg-amber-200 ${
+        parle ? "bg-amber-200" : "bg-amber-100"
+      } ${grand ? "px-6 py-2.5 text-xl" : "px-5 py-2 text-lg"} text-stone-900`}
     >
-      {parle ? <Square className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
+      {parle ? <Square className="h-5 w-5" aria-hidden="true" /> : <Volume2 className="h-6 w-6" aria-hidden="true" />}
       {parle ? "Arrêter" : "Écouter l’article"}
     </button>
   );
@@ -602,6 +652,8 @@ function ArticleUne({
   duree,
   surFini,
   coach,
+  videos,
+  deplie = false,
 }: {
   a: Article;
   petit?: boolean;
@@ -609,10 +661,22 @@ function ArticleUne({
   surFini?: () => void;
   /** La série du coach où s'entraîner après l'article (donnees.ts). */
   coach?: Entrainement;
+  /** La paysage et le short de l'article pour ce profil (donnees.ts). */
+  videos?: VideosArticle;
+  /** Ouvert sur une partie précise (maths, défi…) : le texte est déplié. */
+  deplie?: boolean;
 }) {
   const de = useContext(Source);
+  // ⭐ 13/11 : « trop d'écrit » : deux paragraphes, la suite sur demande.
+  const [suite, setSuite] = useState(deplie);
+  const visibles = suite ? a.corps : a.corps.slice(0, 2);
   return (
     <article aria-label={a.titre} className="border-t-[3px] border-stone-900 pt-3">
+      {videos && (videos.paysage || videos.short) && (
+        <div className="mb-4">
+          <BlocVideos v={videos} petit={petit} />
+        </div>
+      )}
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">
         {a.rubrique}
         {duree ? ` · ${duree} min de lecture` : ""}
@@ -625,8 +689,10 @@ function ArticleUne({
       >
         {a.chapo}
       </p>
-      <Ecouter a={a} />
-      {/* Les vidéos de l'article (13/11/2026) : des liens vers /video/<id>, où la
+      <div className="mt-3">
+        <Ecouter a={a} />
+      </div>
+      {/* Les vidéos écrites à la main dans l'article (13/11/2026) : des liens vers /video/<id>, où la
           vidéo s'ouvre en pause. Rien ne se lance ici. */}
       {a.videos?.length ? (
         <ul className="mt-3 flex flex-wrap gap-2" aria-label="Les vidéos de l’article">
@@ -655,9 +721,21 @@ function ArticleUne({
               : "space-y-3 font-serif text-[17px] leading-relaxed text-stone-800 first-letter:float-left first-letter:mr-2 first-letter:font-serif first-letter:text-6xl first-letter:font-black first-letter:leading-[0.85] first-letter:text-stone-900"
           }
         >
-          {a.corps.map((p) => (
+          {visibles.map((p) => (
             <p key={p}>{p}</p>
           ))}
+          {!suite && a.corps.length > visibles.length && (
+            <button
+              type="button"
+              onClick={() => {
+                setSuite(true);
+                track("journal_lire_suite", { article: a.id });
+              }}
+              className="!mt-2 font-serif text-base font-black text-red-700 underline decoration-2 underline-offset-4 hover:text-red-900"
+            >
+              Lire la suite ↓
+            </button>
+          )}
         </div>
         <div id="lecteur-maths">
           <EncadreMaths a={a} petit={petit} />
@@ -968,11 +1046,14 @@ function CarteArticle({
   etat,
   surOuvrir,
   variante = "article",
+  video,
 }: {
   a: Article;
   petit: boolean;
   etat?: "commence" | "fini";
   surOuvrir: () => void;
+  /** 13/11 : la vignette de la vidéo de l'article, à la place de l'émoji. */
+  video?: VideoJournal;
   /** Ce que la carte met en avant : l'article, son geste, son défi ou ses maths. */
   variante?: "article" | "changer" | "defi" | "maths";
 }) {
@@ -983,7 +1064,22 @@ function CarteArticle({
   return (
     <button type="button" data-carte onClick={surOuvrir} className={CARTE}>
       <span className="relative block">
-        <ImageCarte fond={FOND_RUBRIQUE[a.rubrique]} dessin={dessinDe(a)} />
+        {video ? (
+          <span className={`relative block aspect-video w-full overflow-hidden bg-gradient-to-br ${FOND_RUBRIQUE[a.rubrique]}`}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={video.vignette}
+              alt=""
+              loading="lazy"
+              className={`h-full w-full transition duration-300 group-hover:scale-105 ${video.short ? "object-contain" : "object-cover"}`}
+            />
+            <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-red-700 px-2.5 py-1 text-xs font-black text-white shadow">
+              <Play className="h-3 w-3" fill="currentColor" aria-hidden="true" /> {video.short ? "Short" : "Vidéo"}
+            </span>
+          </span>
+        ) : (
+          <ImageCarte fond={FOND_RUBRIQUE[a.rubrique]} dessin={dessinDe(a)} />
+        )}
         {etat && (
           <span className="absolute left-2 top-2 rounded-full bg-white px-2 py-0.5 text-xs font-black text-stone-900 shadow">
             {etat === "fini" ? "✓ Lu" : "À finir"}
@@ -1082,21 +1178,25 @@ function LecteurArticle({
   ancre,
   surFini,
   coach,
+  videos,
 }: {
   a: Article;
   petit: boolean;
   ancre?: "maths" | "defi" | "changer";
   surFini: () => void;
   coach?: Entrainement;
+  videos?: VideosArticle;
 }) {
   useEffect(() => {
     if (ancre) document.getElementById(`lecteur-${ancre}`)?.scrollIntoView({ block: "center" });
   }, [ancre, a.id]);
+  // La vidéo en tête de l'article ; l'émoji seulement s'il n'y en a pas.
+  const avecVideo = Boolean(videos?.paysage || videos?.short);
   return (
     <>
-      <ImageCarte fond={FOND_RUBRIQUE[a.rubrique]} dessin={dessinDe(a)} grand />
-      <div className="mt-4">
-        <ArticleUne a={a} petit={petit} duree={minutes(a, petit)} surFini={surFini} coach={coach} />
+      {!avecVideo && <ImageCarte fond={FOND_RUBRIQUE[a.rubrique]} dessin={dessinDe(a)} grand />}
+      <div className={avecVideo ? "" : "mt-4"}>
+        <ArticleUne a={a} petit={petit} duree={minutes(a, petit)} surFini={surFini} coach={coach} videos={videos} deplie={Boolean(ancre)} />
       </div>
     </>
   );
@@ -1146,12 +1246,15 @@ export default function JournalClient(props: {
   tousArticles: Article[];
   /** article → profil → la série du coach où s'entraîner. */
   entrainements: Record<string, Partial<Record<NiveauJournal, Entrainement>>>;
+  /** article → profil → sa paysage et son short (13/11/2026). */
+  videosArticles?: Record<string, Partial<Record<NiveauJournal, VideosArticle>>>;
   missions: Mission[];
   metiers: Metier[];
 }) {
   const mise: Mise = "quotidien";
   const t = TON[mise];
   const { date, numero, jour, une, demain, theme, editions, editionsReunion, tousArticles, entrainements, missions, metiers } = props;
+  const videosArticles = props.videosArticles ?? {};
 
   // Le profil : null tant qu'on ne sait pas (l'écran des profils est devant).
   const { eleve } = useEleve();
@@ -1243,6 +1346,31 @@ export default function JournalClient(props: {
       (m) => m.id !== e.mission.id && m.niveaux.includes(niveau) && (m.genre === "bonne-action" || Boolean(m.reunion) === ile),
     ),
   ];
+  // Les vidéos des articles, pour ce profil (13/11/2026).
+  const videosDe = (a: Article) => videosArticles[a.id]?.[niveau];
+  const vid = (a: Article) => videosDe(a)?.paysage ?? videosDe(a)?.short;
+  const videosUne = aLaUne && (videosDe(aLaUne)?.paysage || videosDe(aLaUne)?.short) ? videosDe(aLaUne) : undefined;
+  // La rangée « En vidéo » : les paysages des autres articles du jour, la vidéo
+  // du jour, puis les shorts (défis du niveau, ceux des articles). Sans doublon,
+  // et sans les vidéos déjà montrées par la Une.
+  const aRegarder = (() => {
+    const deja = new Set([videosUne?.paysage?.id, videosUne?.short?.id].filter(Boolean) as string[]);
+    const l: VideoJournal[] = [];
+    const ajoute = (v?: VideoJournal | null) => {
+      if (v && !deja.has(v.id)) {
+        deja.add(v.id);
+        l.push(v);
+      }
+    };
+    const suite = duJour.slice(1);
+    suite.forEach((a) => ajoute(videosDe(a)?.paysage));
+    // La vidéo du jour est tirée pour tout le site : seulement si elle est de
+    // la classe du profil (13/11 : une vidéo de 2de montrée aux 6e-5e).
+    if (CLASSES_VIDEO_DU_JOUR[niveau].includes(une.classe)) ajoute(une.paysage);
+    e.shorts.forEach(ajoute);
+    suite.forEach((a) => ajoute(videosDe(a)?.short));
+    return l.slice(0, 10);
+  })();
   const articleOuvert = ouvert?.quoi === "article" ? parId.get(ouvert.id) : undefined;
   const missionOuverte = ouvert?.quoi === "mission" ? missionsDuProfil.find((m) => m.id === ouvert.id) : undefined;
 
@@ -1282,14 +1410,21 @@ export default function JournalClient(props: {
           {/* LA GRANDE UNE. */}
           {aLaUne && (
             <article aria-label={`À la Une : ${aLaUne.titre}`} className="mt-6 grid items-center gap-5 md:grid-cols-2 md:gap-8">
-              <button
-                type="button"
-                onClick={() => ouvrir(aLaUne, "une")}
-                aria-label={`Lire : ${aLaUne.titre}`}
-                className="overflow-hidden rounded-lg border-[3px] border-stone-900 transition hover:shadow-xl"
-              >
-                <ImageCarte fond={FOND_RUBRIQUE[aLaUne.rubrique]} dessin={dessinDe(aLaUne)} grand />
-              </button>
+              {/* ⭐ 13/11 : la Une s'ouvre sur SA vidéo (paysage + short), plus sur un émoji. */}
+              {videosUne ? (
+                <div className="overflow-hidden rounded-lg border-[3px] border-stone-900 bg-white p-2">
+                  <BlocVideos v={videosUne} petit={petit} />
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => ouvrir(aLaUne, "une")}
+                  aria-label={`Lire : ${aLaUne.titre}`}
+                  className="overflow-hidden rounded-lg border-[3px] border-stone-900 transition hover:shadow-xl"
+                >
+                  <ImageCarte fond={FOND_RUBRIQUE[aLaUne.rubrique]} dessin={dessinDe(aLaUne)} grand />
+                </button>
+              )}
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">
                   À la Une · {aLaUne.rubrique} · {libelle}
@@ -1301,6 +1436,16 @@ export default function JournalClient(props: {
                   {aLaUne.chapo}
                 </p>
                 <div className="mt-4 flex flex-wrap items-center gap-3">
+                  {videosUne?.paysage && (
+                    <Lien
+                      href={`/video/${videosUne.paysage.id}`}
+                      quoi="une"
+                      mise={mise}
+                      className="inline-flex items-center gap-2 rounded-full bg-red-700 px-6 py-2.5 font-serif text-xl font-black text-white hover:bg-red-800"
+                    >
+                      <Play className="h-5 w-5" fill="currentColor" aria-hidden="true" /> Regarder
+                    </Lien>
+                  )}
                   <button
                     type="button"
                     onClick={() => ouvrir(aLaUne, "une")}
@@ -1308,29 +1453,46 @@ export default function JournalClient(props: {
                   >
                     <BookOpen className="h-5 w-5" aria-hidden="true" /> Lire
                   </button>
-                  <span className="text-sm font-bold text-stone-600">{minutes(aLaUne, petit)} min de lecture</span>
+                  <Ecouter a={aLaUne} grand />
                 </div>
               </div>
             </article>
           )}
 
+          {/* ⭐ 13/11 : « En vidéo » JUSTE SOUS LA UNE, et plus seulement 4 vidéos :
+              les paysages et shorts des articles du jour, la vidéo du jour,
+              les shorts de défi du niveau. */}
+          {aRegarder.length > 0 && (
+            <Rangee titre="En vidéo" sous={`à regarder, puis à t’entraîner · ${libelle}`}>
+              {aRegarder.map((v) => (
+                <div key={v.id} className={`shrink-0 snap-start ${v.short ? "w-36 sm:w-40" : "w-72 sm:w-80"}`}>
+                  <Vignette v={v} mise={mise} quoi={v.short ? "shorts" : "une"} />
+                  <p className="mt-1.5 line-clamp-3 font-serif text-sm font-semibold leading-snug text-stone-800">
+                    {v.id === une.paysage?.id && <span className="font-black text-red-700">La vidéo du jour · {une.classe} : </span>}
+                    {titreCourt(v.titre)}
+                  </p>
+                </div>
+              ))}
+            </Rangee>
+          )}
+
           <Rangee titre="Nouveau aujourd'hui" sous={date}>
             {duJour.map((a) => (
-              <CarteArticle key={a.id} a={a} petit={petit} etat={lus[a.id]} surOuvrir={() => ouvrir(a, "nouveau")} />
+              <CarteArticle key={a.id} a={a} petit={petit} etat={lus[a.id]} video={vid(a)} surOuvrir={() => ouvrir(a, "nouveau")} />
             ))}
           </Rangee>
 
           {aFinir.length > 0 && (
             <Rangee titre="Continuer à lire">
               {aFinir.map((a) => (
-                <CarteArticle key={a.id} a={a} petit={petit} etat="commence" surOuvrir={() => ouvrir(a, "continuer")} />
+                <CarteArticle key={a.id} a={a} petit={petit} etat="commence" video={vid(a)} surOuvrir={() => ouvrir(a, "continuer")} />
               ))}
             </Rangee>
           )}
 
           <Rangee id="comprendre" titre="Comprendre" sous="le monde, avec les maths">
             {tous.map((a) => (
-              <CarteArticle key={a.id} a={a} petit={petit} etat={lus[a.id]} surOuvrir={() => ouvrir(a, "comprendre")} />
+              <CarteArticle key={a.id} a={a} petit={petit} etat={lus[a.id]} video={vid(a)} surOuvrir={() => ouvrir(a, "comprendre")} />
             ))}
           </Rangee>
 
@@ -1354,30 +1516,6 @@ export default function JournalClient(props: {
             ))}
           </Rangee>
 
-          {e.shorts.length > 0 && (
-            <Rangee titre="En vidéo" sous={`3 défis en 1 minute · ${libelle}`}>
-              {e.shorts.map((v) => (
-                <div key={v.id} className="w-36 shrink-0 snap-start sm:w-40">
-                  <Vignette v={v} mise={mise} quoi="shorts" />
-                  <p className="mt-1.5 line-clamp-3 font-serif text-sm font-semibold leading-snug text-stone-800">
-                    {v.titre
-                      .replace(/#\S+/g, "")
-                      .replace(/\s*—\s*(CP|CE1|CE2|CM1|CM2|6e|5e|4e|3e|2de|1re|Tle)(\s.*)?$/i, "")
-                      .trim()}
-                  </p>
-                </div>
-              ))}
-              {une.paysage && (
-                <div className="w-72 shrink-0 snap-start sm:w-80">
-                  <Vignette v={une.paysage} mise={mise} quoi="une" />
-                  <p className="mt-1.5 line-clamp-2 font-serif text-sm font-semibold leading-snug text-stone-800">
-                    <span className="font-black text-red-700">La vidéo du jour · {une.classe} : </span>
-                    {une.paysage.titre}
-                  </p>
-                </div>
-              )}
-            </Rangee>
-          )}
 
           <Rangee id="agir" titre="Agir" sous="un défi dehors, une bonne action">
             {missionsDuProfil.map((m, i) => (
@@ -1463,6 +1601,7 @@ export default function JournalClient(props: {
             ancre={ouvert.ancre}
             surFini={() => noter(articleOuvert.id, "fini")}
             coach={entrainements[articleOuvert.id]?.[niveau]}
+            videos={videosDe(articleOuvert)}
           />
         </Fenetre>
       )}

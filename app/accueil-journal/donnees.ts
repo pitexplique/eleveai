@@ -254,6 +254,91 @@ const ENTRAINEMENTS: Record<string, Partial<Record<NiveauJournal, Entrainement>>
   ]),
 );
 
+/* ═══ LES VIDÉOS DE CHAQUE ARTICLE (13/11/2026) ═════════════════════════════
+   Frédéric : « pas assez de liens vers des vidéos paysage ou shorts, trop
+   d'écrit », puis « les élèves y ont été ce matin et regardent chez eux ».
+   Chaque vidéo de lib/videos/videos-r2.json porte la série du coach de sa
+   notion (`coach`) : l'article, qui connaît ses notions (`coach`), y trouve
+   SA paysage et SON short, dans la classe du profil. Rien à écrire à la main :
+   une vidéo rendue et mise dans la table arrive d'elle-même dans le journal.
+   ⭐ Le choix tourne CHAQUE SEMAINE parmi les vidéos de la notion (« on le
+   mettra à jour chaque semaine »). */
+export type VideosArticle = { paysage?: VideoJournal; short?: VideoJournal };
+
+const VIDEOS_PAR_NOTION = (() => {
+  const m = new Map<string, { paysages: VideoR2[]; shorts: VideoR2[] }>();
+  for (const v of toutesLesVideos()) {
+    if (!v.coach || !v.poster || !v.vignette || PAS_DANS_LE_JOURNAL.test(v.titre)) continue;
+    const q = new URLSearchParams(v.coach.split("?")[1]);
+    const cle = `${q.get("classe")}/${q.get("notion")}`;
+    const l = m.get(cle) ?? { paysages: [], shorts: [] };
+    (v.short ? l.shorts : l.paysages).push(v);
+    m.set(cle, l);
+  }
+  // Les vidéos de TOUTE la notion (sans micro) et publiées d'abord, puis un
+  // ordre stable : la rotation de la semaine part de la meilleure.
+  const rang = (v: VideoR2) => (v.coach!.includes("microId=") ? 2 : 0) + (v.youtube ? 0 : 1);
+  for (const l of m.values()) {
+    for (const liste of [l.paysages, l.shorts]) liste.sort((a, b) => rang(a) - rang(b) || hache(a.id) - hache(b.id));
+  }
+  return m;
+})();
+
+/** Les clés « classe/notion » d'un article pour un profil, dans l'ordre du coach. */
+function notionsDe(cles: string[], niveau: NiveauJournal): string[] {
+  const out: string[] = [];
+  for (const brut of cles) {
+    const [cle, imposee] = brut.split("@");
+    for (const classe of imposee ? [imposee] : CLASSES_DU_NIVEAU[niveau]) {
+      const notion = NOTION_COACH_MATHS[cle]?.[classe];
+      if (notion) out.push(`${classe}/${notion}`);
+    }
+  }
+  return out;
+}
+
+function videosArticle(a: (typeof ARTICLES)[number], niveau: NiveauJournal, semaine: number): VideosArticle {
+  const notions = notionsDe(a.coach, niveau);
+  const tour = <T,>(l: T[]) => l[((semaine % l.length) + l.length) % l.length];
+  // La paysage : la première notion qui en a une ; le short, de préférence le
+  // jumeau de la paysage (son id commence par celui de la paysage), sinon un
+  // short de la même notion, sinon d'une autre notion de l'article.
+  let paysage: VideoR2 | undefined;
+  let short: VideoR2 | undefined;
+  for (const n of notions) {
+    const l = VIDEOS_PAR_NOTION.get(n);
+    if (!l) continue;
+    if (!paysage && l.paysages.length) {
+      paysage = tour(l.paysages);
+      short = l.shorts.find((s) => s.id.startsWith(`${paysage!.id}-short`)) ?? (l.shorts.length ? tour(l.shorts) : undefined);
+    }
+    if (!short && l.shorts.length) short = tour(l.shorts);
+    if (paysage && short) break;
+  }
+  // Aucune vidéo de la notion à ce niveau (le « calcul » de CM, 13/11) : un
+  // short de l'édition, différent d'un article à l'autre.
+  if (!paysage && !short) {
+    const l = SHORTS_DU_NIVEAU[niveau];
+    if (l.length) short = l[(hache(a.id) + semaine) % l.length];
+  }
+  return { paysage: video(paysage) ?? undefined, short: video(short) ?? undefined };
+}
+
+/** article → profil → ses vidéos de la semaine. */
+function videosDesArticles(jour: number): Record<string, Partial<Record<NiveauJournal, VideosArticle>>> {
+  const semaine = Math.floor(jour / 7);
+  return Object.fromEntries(
+    ARTICLES.map((a) => [
+      a.id,
+      Object.fromEntries(
+        a.niveaux
+          .map((n) => [n, videosArticle(a, n, semaine)] as const)
+          .filter(([, v]) => v.paysage || v.short),
+      ),
+    ]),
+  );
+}
+
 export type EditionDuNiveau = {
   une: string;
   autres: string[];
@@ -399,6 +484,7 @@ export function donneesDuJournal(jour = jourParis()) {
     // toutes les missions, le navigateur les range par profil ; 8 métiers.
     tousArticles: ARTICLES,
     entrainements: ENTRAINEMENTS,
+    videosArticles: videosDesArticles(jour),
     missions: MISSIONS,
     metiers: fenetre(METIERS, jour, 8, 1),
     // ⚠️ La fenêtre se prend sur la liste ENTIÈRE, et le short de la Une n'est
