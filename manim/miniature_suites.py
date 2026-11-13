@@ -121,6 +121,10 @@ EP = [
      ["COMPRENDRE LE SENS", "DE VARIATION"], "u_{n+1} − u_{n} = 2n + 1", "+ positif : la suite est croissante",
      "blanche", ["EN UN COUP", "D'ŒIL ?"], "la neige qui fond",
      [("5 ; 3 ; 4 ; 2 ; 6", 120, BLEU), ("croissante ? décroissante ?", 60, VERT)]),
+    ("premiere-spe", "24-sommes", "verte",
+     ["COMPRENDRE LA SOMME", "DES TERMES"], "1 + 2 + … + n", "+ = n(n + 1) ÷ 2",
+     "blanche", ["DE TÊTE", "EN 5 S ?"], "plus vite qu'une calculatrice",
+     [("1 + 2 + … + 30", 110, BLEU), ("= ?", 120, VERT)]),
 ]
 # Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
 from suites_terminale_donnees import EP_TLE  # noqa: E402

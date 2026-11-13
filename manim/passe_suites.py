@@ -401,6 +401,21 @@ EPS = [
          sa="Mathis est météorologue : au sommet d'une montagne, la hauteur de neige n jours après le début du redoux vaut uₙ = 60 − 4n centimètres. Chaque jour, 4 cm de moins : la suite est décroissante.",
          stoi="avec uₙ = 60 − 4n, au bout de combien de jours la neige a-t-elle fondu ?", srep="15 jours : 60 − 4n = 0 donne n = 15.",
          stags=["neige", "météo", "montagne", "sens de variation", "suites"]),
+    dict(num="24", slug="sommes", classe="premiere-spe", notion="suites", micro="suite_sommes",
+         ceinture="verte", sc="blanche", centres=["histoire-geographie"], scentres=["sport", "natation"],
+         titre="Combien de places dans l'amphithéâtre ? — Somme des termes d'une suite arithmétique — épisode 24 · Maths 1re spé",
+         intro="Nora est guide-conférencière dans un amphithéâtre romain : 40 places au premier rang, 4 de plus à chaque rang, 25 rangs. Combien de spectateurs pouvaient s'asseoir ici ? Et comment additionner 100 nombres en quelques secondes ?",
+         puces=["le détour de Gauss : 1 + 2 + … + 100, ranger par paires de 101, 50 × 101 = 5 050", "la formule : 1 + 2 + … + n = n(n + 1) ÷ 2", "somme de termes d'une suite arithmétique : nombre de termes × (premier + dernier) ÷ 2", "compter les termes : de uₚ à u_q, il y a q − p + 1 termes", "le piège : pour 25 rangs, on ajoute 4 seulement 24 fois (136 places, pas 140)"],
+         defi="Calcule 7 + 10 + 13 + … + 61.",
+         chap={"00-garde": "Somme des termes", "01-situation": "Nora, guide-conférencière", "02-gauss": "Gauss et les paires", "03-formule": "La formule", "04-amphitheatre": "L'amphithéâtre : 2 200 places", "05-question": "Question : combien de termes ?", "06-piege": "Le piège : 24 sauts pour 25 rangs", "07-question": "Question : 1 + 2 + … + 40", "08-defi": "À toi de jouer", "08b-correction": "Correction : 646", "09-finale": "Ce que tu as appris"},
+         qs=[("05-question", "Combien de termes dans la somme u₅ + u₆ + … + u₃₀ ?", ["30", "25", "26"], 2, "De u₅ à u₃₀ : 30 − 5 + 1 = 26 termes. On compte les deux bouts."),
+             ("07-question", "Combien vaut 1 + 2 + … + 40 ?", ["1 600", "820", "840"], 1, "40 × 41 = 1 640, divisé par 2 : 820.")],
+         tags=["suites", "somme", "suite arithmétique", "Gauss", "1 + 2 + … + n", "amphithéâtre", "guide-conférencière"],
+         st="1 + 2 + … + 30 plus vite qu'une calculatrice ? 🏊 — 1re spé #Shorts",
+         sq=("03-question", "Jade nage 1 longueur le 1er jour, une de plus chaque jour, pendant 30 jours. Combien de longueurs en tout ?", ["465", "900", "450"], 0, "30 × 31 = 930, divisé par 2 : 465 longueurs."),
+         sa="Jade est nageuse : 1 longueur le premier jour, 2 le deuxième, une de plus chaque jour, pendant 30 jours. Son total : 1 + 2 + … + 30 = 30 × 31 ÷ 2.",
+         stoi="en combien de jours aurait-elle nagé 210 longueurs en tout ?", srep="20 jours : 20 × 21 ÷ 2 = 210.",
+         stags=["natation", "nageuse", "Gauss", "somme", "suites"]),
 ]
 # Les 4 vidéos communes : la même vidéo sert aussi la micro de la classe du dessus.
 AUSSI = {
