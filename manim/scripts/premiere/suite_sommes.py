@@ -379,19 +379,19 @@ class SuiteSommes1reSpe(Bords6, AuditMilliers, OutilsSommes, OutilsEp12, OutilsG
         self.nouvel_ecran("02-gauss")
         self.titre("Un détour par l'histoire", JAUNE_TITRE, 44, extrait="Un détour", y=3.2)
         g = gauss(0.95).move_to(P(-5.15, 1.75))
-        nm = self.t("Carl Friedrich Gauss", 38, TERME).move_to(P(0.6, 2.5))
+        nm = self.t("Carl Friedrich Gauss", 38, TERME).move_to(P(0.6, 2.58))
         self.au_mot("Carl Friedrich Gauss")
         self.play(FadeIn(g, shift=UP * 0.15), FadeIn(nm, shift=UP * 0.1), run_time=0.45)
         s = self.ecrire([[("1 +", WHITE, "1"), ("2 +", WHITE, "2"), ("… +", WHITE, None), ("100", WHITE, "100"),
-                          ("= ?", RAISON, None)]], 1.75, centre=0.6, fs=48)
+                          ("= ?", RAISON, None)]], 1.88, centre=0.6, fs=48)
         self.play(Indicate(s, color=JAUNE_TITRE, scale_factor=1.06), Wiggle(g, scale_value=1.08), run_time=0.5)
         xs = (-4.6, -3.25, -1.9, 1.9, 3.25, 4.6)
-        lg = LigneTermes(["1", "2", "3", "98", "99", "100"], xs=xs, centre=P(0, -1.25), largeur=1.15, hauteur=0.8,
+        lg = LigneTermes(["1", "2", "3", "98", "99", "100"], xs=xs, centre=P(0, -1.45), largeur=1.15, hauteur=0.8,
                          fs=40)
-        pts = self.t("…", 44, WHITE).move_to(P(0, -1.25))
+        pts = self.t("…", 44, WHITE).move_to(P(0, -1.45))
         self.au_mot("par paires")
         self.play(*[FadeIn(c[0], scale=0.8) for c in lg.cases], FadeIn(pts), run_time=0.4)
-        hs, arcs = (1.75, 1.15, 0.55), []
+        hs, arcs = (1.9, 1.15, 0.4), []
         for k, (a, b) in enumerate(((0, 5), (1, 4), (2, 3))):
             d, f = lg.cases[a][0].get_top() + UP * 0.08, lg.cases[b][0].get_top() + UP * 0.08
             ang = -4 * np.arctan(2 * hs[k] / np.linalg.norm(f - d))
@@ -404,8 +404,7 @@ class SuiteSommes1reSpe(Bords6, AuditMilliers, OutilsSommes, OutilsEp12, OutilsG
         labs = []
         for arc in arcs:
             l = self.t("101", 34, RAISON)
-            fond = BackgroundRectangle(l, color=BLACK, fill_opacity=1, buff=0.08)
-            labs.append(VGroup(fond, l).move_to(arc.point_from_proportion(0.5)))
+            labs.append(l.next_to(arc.point_from_proportion(0.5), UP, buff=0.08))
         self.au_mot("101")
         self.play(*[FadeIn(l, scale=1.3) for l in labs], run_time=0.35)
         r = self.ecrire([[("50 paires :", RANG, "50 paires"), ("50 ×", WHITE, "50 fois"), ("101", WHITE, "101"),
@@ -417,31 +416,32 @@ class SuiteSommes1reSpe(Bords6, AuditMilliers, OutilsSommes, OutilsEp12, OutilsG
 
     def ecran_formule(self):
         self.nouvel_ecran("03-formule")
-        c, n, x0, y0 = 0.42, 5, 3.3, 0.02
+        c, n, x0, y0 = 0.36, 5, 4.3, 0.5
         esc = escalier(n, c).shift(P(x0, y0))
         tit = self.t("La formule", 46, JAUNE_TITRE).move_to(P(0, 3.2))
         self.au_mot("la formule")
         self.play(FadeIn(tit, shift=DOWN * 0.1), LaggedStart(*[FadeIn(col, shift=UP * 0.1) for col in esc], lag_ratio=0.2),
                   run_time=0.6)
         jum = escalier(n, c, RAISON).rotate(PI, about_point=ORIGIN).shift(P(x0 + n * c, y0 + (n + 1) * c))
-        ln = self.t("n", 40, RANG).next_to(esc, DOWN, buff=0.15)
-        ln1 = self.t("n + 1", 40, RANG, audit=False).move_to(P(x0, y0 + (n + 1) * c / 2), aligned_edge=RIGHT)
-        ln1.shift(LEFT * 0.25)
-        xg = -2.65
+        ln = self.t("n", 38, RANG).next_to(esc, DOWN, buff=0.12)
+        ln1 = self.t("n + 1", 36, RANG, audit=False).move_to(P(x0, y0 + (n + 1) * c / 2), aligned_edge=RIGHT)
+        ln1.shift(LEFT * 0.2)
+        xg = -1.95
         # l'escalier : son jumeau orange à « n fois, n plus 1 » (n × (n + 1) cubes), puis la moitié
         f1 = self.ecrire([[("1 +", WHITE, "1 plus 2"), ("2 +", WHITE, None), ("… +", WHITE, None), ("n =", WHITE, "plus n")],
                           ("frac", [("n(", TERME, "n fois"), ("n + 1)", TERME, "n plus 1")], [("2", WHITE, "divisé par 2")])],
-                         1.35, centre=xg, fs=52, larg=6.6,
+                         1.55, centre=xg, fs=52, larg=8.2,
                          avec_part={4: [LaggedStart(*[FadeIn(col, shift=DOWN * 0.1) for col in jum], lag_ratio=0.1),
                                         FadeIn(ln)],
                                     5: [FadeIn(ln1, shift=RIGHT * 0.1)],
                                     6: [jum.animate.set_opacity(0.2), Indicate(esc, color=TERME, scale_factor=1.04)]},
                          run_time=0.5)
         self.play(Create(self.encadre(f1, TERME, 0.18)), run_time=0.3)
-        self.ecrire([[("Somme de termes d'une suite arithmétique :", JAUNE_TITRE, "toute somme")]], -0.95, centre=-0.3,
-                    fs=40, larg=11.0)
-        f2 = self.ecrire(somme_arith(("nombre de termes", None, "fois premier", None, "dernier", "divisé par 2")),
-                         -2.2, centre=-0.35, fs=48, larg=11.2)
+        self.ecrire([[("Somme de termes d'une suite arithmétique =", JAUNE_TITRE, "toute somme")]], -0.45, centre=0,
+                    fs=42, larg=11.6)
+        f2 = self.ecrire([[("nombre de termes", RANG, "nombre de termes"), ("×", WHITE, "fois premier")],
+                          ("frac", [("premier +", TERME, None), ("dernier", TERME, "dernier")], [("2", WHITE, "divisé par 2")])],
+                         -1.6, centre=0, fs=46, larg=11.4)
         self.play(Create(self.encadre(f2, JUSTE, 0.16)), run_time=0.3)
         self.attendre_voix(marge=0.5)
 
@@ -449,11 +449,11 @@ class SuiteSommes1reSpe(Bords6, AuditMilliers, OutilsSommes, OutilsEp12, OutilsG
 
     def ecran_amphi(self):
         self.nouvel_ecran("04-amphitheatre")
-        am = Amphi(3.6, -1.9, larg0=2.6, dl=0.38, h=0.56)
+        am = Amphi(3.72, -1.9, larg0=2.6, dl=0.38, h=0.56)
         self.au_mot("amphithéâtre")
         self.play(FadeIn(am.arene), LaggedStart(*[FadeIn(r, shift=UP * 0.1) for r in am.rangs], lag_ratio=0.15),
                   FadeIn(am.points), run_time=0.7)
-        xg, lg = -2.6, 7.0
+        xg, lg = -2.9, 6.3
         self.ecrire([[("Dernier rang :", WHITE, "le dernier rang")]], 2.6, centre=xg, fs=42, larg=lg)
         l40 = self.t("40 places", 30, WHITE).move_to(am.cadres[0])
         l136 = self.t("136 places", 34, JUSTE).move_to(am.cadres[3])
@@ -556,8 +556,8 @@ class SuiteSommes1reSpe(Bords6, AuditMilliers, OutilsSommes, OutilsEp12, OutilsG
 
     def ligne_defi(self, y):
         """Les termes en cases, reliés par « + » : la somme écrite en cases."""
-        xs = (-5.0, -3.0, -1.0, 3.0)
-        lg = LigneTermes(["7", "10", "13", "61"], xs=xs, centre=P(0, y), largeur=1.15, hauteur=0.85, fs=46)
+        xs = (-5.25, -3.0, -0.75, 3.1)
+        lg = LigneTermes(["7", "10", "13", "61"], xs=xs, centre=P(0, y), largeur=1.1, hauteur=0.85, fs=46)
         plus = [self.t("+", 46, WHITE).move_to(P((a + b) / 2, y)) for a, b in zip(xs[:2], xs[1:3])]
         plus.append(self.t("+ … +", 46, WHITE).move_to(P((xs[2] + xs[3]) / 2, y)))
         egal = self.t("= ?", 46, RAISON).next_to(lg.cases[3], RIGHT, buff=0.3)
@@ -617,6 +617,36 @@ class SuiteSommes1reSpe(Bords6, AuditMilliers, OutilsSommes, OutilsEp12, OutilsG
                                 (":", WHITE, None), ("q − p + 1 termes", RANG, None)]], fs)]
         self.finale([(p1, ["1 plus 2"]), (p2, ["Pour une somme arithmétique", "nombre de termes"]),
                      (p3, ["Et de u indice p"])], cle="09-finale")
+
+    def finale(self, points, cle="10-finale", fs=38):
+        """Comme le module commun, mais la coche est centrée sur sa PREMIÈRE ligne
+        (une fraction est plus haute qu'une ligne de texte)."""
+        self.nouvel_ecran(cle, margo=0.65)
+        self.au_mot("Ce que tu as appris")
+        tit = self.t("Ce que tu as appris", 46, JAUNE_TITRE).to_edge(UP, buff=0.45)
+        self.play(Write(tit), run_time=0.7)
+        blocs = []
+        for lignes, _ in points:
+            b = VGroup(*lignes).arrange(DOWN, aligned_edge=LEFT, buff=0.12)
+            ck = self.coche()
+            ck.next_to(lignes[0], LEFT, buff=0.3)
+            blocs.append(VGroup(ck, b))
+        tout = VGroup(*blocs).arrange(DOWN, aligned_edge=LEFT, buff=0.45)
+        if tout.width > 11.4:
+            tout.scale_to_fit_width(11.4)
+        if tout.height > 5.6:
+            tout.scale_to_fit_height(5.6)
+        tout.move_to(P(-0.4, -0.35))
+        for bloc, (lignes, extraits) in zip(blocs, points):
+            for k, (l, ex) in enumerate(zip(lignes, extraits)):
+                if ex:
+                    self.au_mot(ex)
+                anims = [FadeIn(l, shift=RIGHT * 0.2)]
+                if k == 0:
+                    anims.append(Create(bloc[0]))
+                self.play(*anims, run_time=0.45)
+        self.attendre_voix(marge=0.8)
+        return tout
 
     def construct(self):
         self.ecran_garde()

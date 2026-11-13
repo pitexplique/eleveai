@@ -79,6 +79,18 @@ class SuiteSommesShort(Bords6, AuditMilliers, OutilsSommes, OutilsEp12, OutilsGr
     q_reponse = _S18.q_reponse
     bouton_haut = _S18.bouton_haut
 
+    def bouton_rangee(self, lettre, texte, largeur=3.5, hauteur=0.76, fs=46):
+        """Un bouton en rangée : rond + lettre à gauche, le nombre centré dans la
+        place qui reste, avec une vraie marge intérieure (structure du module commun)."""
+        rond = Circle(radius=0.26, fill_color=TERME, fill_opacity=1, stroke_width=0)
+        lt = Text(lettre, font_size=34, color=WHITE, weight=BOLD).move_to(rond)
+        c = Text(texte, font_size=fs, color=WHITE)
+        cadre = RoundedRectangle(width=largeur, height=hauteur, corner_radius=0.14, stroke_color=TERME,
+                                 stroke_width=3, fill_color=FOND_CARTE, fill_opacity=1)
+        VGroup(rond, lt).move_to(cadre.get_left() + RIGHT * 0.42)
+        c.move_to(P(cadre.get_x() + 0.2, cadre.get_y()))
+        return VGroup(cadre, VGroup(VGroup(rond, lt), c))
+
     def nager(self, nv, bassin, longueurs, run_time=0.7):
         """Le nageur fait `longueurs` longueurs (aller, retour…) dans le bassin."""
         xg, xd = bassin[1].get_left()[0] + 0.25, bassin[1].get_right()[0] - 0.45
@@ -151,27 +163,27 @@ class SuiteSommesShort(Bords6, AuditMilliers, OutilsSommes, OutilsEp12, OutilsGr
         self.attendre_voix(marge=0.3)
 
         # ── 03 : question-pause → A (465) ; puis 30 × 31 = 930 et 930 ÷ 2 = 465 ──
-        cartes = VGroup(*[self.bouton_haut(Ln, nb, largeur=1.15, fs_nb=40) for Ln, nb in zip("ABC", ("465", "900", "450"))])
-        for cc, x in zip(cartes, (-1.36, 0, 1.36)):
-            cc.move_to(P(x, -0.2))
+        cartes = VGroup(*[self.bouton_rangee(Ln, nb) for Ln, nb in zip("ABC", ("465", "900", "450"))])
+        for cc, y in zip(cartes, (0.55, -0.32, -1.19)):
+            cc.move_to(P(0, y))
 
         def e1():
             self.largeur_texte = 3.85     # la pause (déjà placée) était bornée à 3,4 : marge de 6 % avec le rebours
-            qq = self.paragraphe(["Combien de", "longueurs", "en tout ?"], 50, buff=0.16, y=2.05)
+            qq = self.paragraphe(["Combien de", "longueurs", "en tout ?"], 48, buff=0.14, y=2.08)
             for l, ex in zip(qq, ("Combien de", "longueurs", "en tout")):
                 self.au_mot(ex)
                 self.play(FadeIn(l, shift=UP * 0.1), run_time=0.25)
 
         self.largeur_texte = 3.4
-        q = self.question_libre("03-question", [e1], cartes, P(0, -1.45))
+        q = self.question_libre("03-question", [e1], cartes, P(0, -1.98))
         self.largeur_texte = 3.85
         self.dire("03b-reponse")
         self.au_mot("Réponse A")
         self.q_reponse(q, 0)
         self.ecrire([[("30 ×", WHITE, "30 fois"), ("31", WHITE, "31"), ("=", WHITE, "égale"), ("930", WHITE, "930")]],
-                    -1.6, fs=46)
-        r = self.ecrire([[("930 ÷ 2", RAISON, "divisé par 2"), ("=", WHITE, None), ("465", JUSTE, "465")]], -2.35,
-                        centre=-0.15, fs=46, larg=3.4)
+                    -1.98, fs=44, larg=3.5)
+        r = self.ecrire([[("930 ÷ 2", RAISON, "divisé par 2"), ("=", WHITE, None), ("465", JUSTE, "465")]], -2.62,
+                        centre=-0.15, fs=44, larg=3.2)
         self.boite(r.parts[-1:])
         self.attendre_voix(marge=0.8)
 
