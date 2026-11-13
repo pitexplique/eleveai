@@ -51,6 +51,16 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
 - ⏰ ÉCHÉANCE (calendrier validé par Frédéric, section « 📅 Calendrier YouTube » en bas) : épisodes 01 à 04 PRÊTS avant le 16/11 12 h 30 (heure de La Réunion) = re-rendus sans étoile (faits), miniatures, entrées du manifeste en AJOUT (prioritaire: true, pas_avant à leur date, renvoie_vers sur les shorts), par lecture-patch-écriture du JSON ; ⛔ ne pas committer le manifeste par son chemin tant qu'il porte la modif non committée d'une autre session (2 pas_avant). Chaque épisode suivant : en place 2 jours avant sa date. Donc la passe finale se fait AU FIL DE L'EAU, pas seulement à la fin.
 - Reste : 13 à 27 (1re géo puis 1re spé), puis passe finale (miniatures, manifeste en AJOUT, fiches-youtube, R2, table R2). Terminale 28-38 : session sœur « Suites Terminale », rapports `ep-28.md`… dans le même dossier de notes.
 
+## ▶ 12/11 après-midi (session « suites 16-27 », relancée le 12/11)
+- ✅ 16 et 17 PRÊTS (`8e8d2ec1`) : miniatures relues (« + 20 % » ; titre du short 17 « LE RANG OU LA VALEUR ? », u_{5} n'était pas dessiné dans le titre), manifeste 17 → 20/12, fiches, R2 (0 différence, premiere 64 / premiere-spe 4), table R2. Micro du 16 CONFIRMÉE : `expo_suite_interpreter`.
+- ⛔ Défaut corrigé dans `passe_suites.py` : 05-08 et 13-16 avaient la notion `lin_suite_arithmetique` / `expo_suite_geometrique`, alors que leurs micros sont dans `lin_suite_terme_general` / `expo_suite_terme_general` (coach : lien et `notion_ressources` faux). Manifeste et fiches régénérés ; lien d'exercices = fiche « terme général ».
+- Calendrier : les vidéos du collège passent avant (même date : nos entrées sont en fin de manifeste, l'automatique les sert en dernier ; au plus 2 paysages par jour).
+- 18 et 19 en rendu (agents), 2 à la fois au plus (la factorisation 4e rend sur le même poste).
+- 13/11 : ⚠ `DEBUT` de `passe_suites.py` = 25/12 (collège d'abord, `0140492b`) : épisode k → 25/12 + 2(k − 1).
+- ✅ 18 termes PRÊT (`831c0e2e`, `c97c1ccc` retouches ; passe finale `f9b9f036`) : paysage 4:37 Q 01:05 → B, 02:48 → C ; short 1:02 Q 00:27 → A (commentaire 96) ; manifeste 28 → 29/01/2027 ; fiche, R2 (4 fichiers, 0 différence), table R2.
+- 19 recurrence (`3cb22cc3`) : paysage ACCEPTÉE ; short renvoyé (marges 6 %, silhouette fantôme coupée) → re-rendu du short, puis passe finale.
+- 20 algorithme en cours ; 21 modeliser lancé le 13/11 (rapport `ep-21.md`).
+
 ## ▶ REPRISE samedi 14/11 à 9 h : épisodes 16 à 27 (état au 12/11 4 h 20)
 - **01 à 15 PRÊTS** : HD relus soi-même planche par planche, miniatures, 30 entrées au manifeste (`pas_avant` 17/11 → 16/12), `fiche-youtube.md`, R2 `premiere/maths/suites` (check : 87 fichiers, 0 différence), table R2 régénérée. Rien poussé de notre côté.
 - Le 12/11 : 13 re-rendu (paysage + short, `3aa523f7`), 14 short re-rendu (« 200 mg », `aa903f42`), 15 paysage + short re-rendus (`faec9c91`). Fins vérifiées : 01-04, 29, short 28 sans étoile Flash ; paysage 28 re-rendue sans étoile (`f7b05821`, mp4 en place ; l'ancien dans le dossier agent-etoile du TEMP (ancien-28p.mp4)). ⚠ La 28 (Tle) n'est PAS encore sur R2 : c'est à la passe finale Tle de l'y envoyer.
