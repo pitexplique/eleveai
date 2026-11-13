@@ -57,7 +57,7 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
     nom_voix = "ce2-perimetre-comparer"
     fichier_marques = "perimetre_comparer_marques.json"
 
-    def somme(self, morceaux, y, mot, fs=34, x=None, xl=None, couleur=BLEU_D, avec=()):
+    def somme(self, morceaux, y, mot, fs=34, x=None, xl=None, couleur=BLEU_D, avec=(), mots=None):
         """Une somme écrite au fil de la voix : le titre (« Carré : ») au mot, puis chaque
         nombre à son tour (au_fil)."""
         lg = self.ligne([(m, couleur if k else WHITE) for k, m in enumerate(morceaux)], fs, buff=0.16)
@@ -67,7 +67,16 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
             self.col(lg, y, xl=xl)
         self.au_mot(mot)
         self.play(FadeIn(lg[0], shift=UP * 0.08), *avec, run_time=0.25)
-        self.au_fil(lg, 1)
+        if mots is None:
+            self.au_fil(lg, 1)
+        else:  # chaque morceau à son extrait (nombres répétés : la synchro par jetons s'y perd)
+            for m, ex in zip(lg[1:], mots):
+                for f in m.get_family():
+                    f.sans_synchro = True  # le moment est choisi ici, l'audit vérifie toujours
+                ex, n, delai = (ex if isinstance(ex, tuple) else (ex,)) + (1, 0.0)[len(ex) - 1 if isinstance(ex, tuple) else 0:]
+                self.au_mot(ex, n)
+                self.wait(0.07 + delai)  # au-delà de l'arrondi d'image de l'aperçu
+                self.play(FadeIn(m, shift=UP * 0.08), run_time=0.18)
         return lg
 
     # ── 00 : page de garde ──────────────────────────────────────────────────
@@ -244,7 +253,8 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
         self.somme(["Carré :", "5", "+ 5", "+ 5", "+ 5", "= 20."], -0.75, "Carré", x=-6.2,
                    avec=[Create(car.contour(sw=7))])
         self.somme(["Rectangle :", "9", "+ 1", "+ 9", "+ 1", "= 20."], -1.45, "Rectangle", x=-6.2,
-                   avec=[Create(rec.contour(sw=7))])
+                   avec=[Create(rec.contour(sw=7))],
+                   mots=["9 plus 1 plus 9", "1 plus 9", "9 plus 1,", "1, 20", "20. Le"])
         self.au_mot("Le même périmètre")
         g = self.gros("Le même périmètre !", fs=36)
         gauche(g, -6.2, -2.4)
@@ -335,13 +345,13 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
             sc.play(Create(jaune), Create(vert), FadeIn(tj), FadeIn(tv), run_time=0.4)
 
         def apres(sc):
-            lg = sc.rep_bas(0, ["Le segment, c'est le tour déplié."], fs=32, y0=-2.1, pas=0.5)
+            lg = sc.rep_bas(0, ["Le segment, c'est le tour déplié."], fs=32, y0=-2.32, pas=0.47)
             sc.au_mot("Le segment, c'est")
             sc.play(FadeIn(lg[0], shift=UP * 0.1), run_time=0.3)
-            lg2 = sc.rep_bas(1, ["Le segment le plus long donne"], fs=32, y0=-2.1, pas=0.5)
+            lg2 = sc.rep_bas(1, ["Le segment le plus long donne"], fs=32, y0=-2.32, pas=0.47)
             sc.au_mot("Le segment le plus long")
             sc.play(FadeIn(lg2[0], shift=UP * 0.1), Indicate(vert, color="#4ade80", scale_factor=1.06), run_time=0.35)
-            lg3 = sc.rep_bas(2, ["le tour le plus long, sans rien mesurer."], fs=32, y0=-2.1, pas=0.5)
+            lg3 = sc.rep_bas(2, ["le tour le plus long, sans rien mesurer."], fs=32, y0=-2.32, pas=0.47)
             sc.au_mot("le tour le plus long")
             sc.play(FadeIn(lg3[0], shift=UP * 0.1), run_time=0.3)
             sc.rep_fini()
@@ -419,7 +429,10 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
                 (car, ["Carré :", "30", "+ 30", "+ 30", "+ 30", "= 120."], "Carré"),
                 (rec, ["Rectangle :", "50", "+ 20", "+ 50", "+ 20", "= 140."], "Rectangle"),
                 (tri, ["Triangle :", "40", "+ 40", "+ 30", "= 110."], "Triangle"))):
-            lg = self.somme(morceaux, -0.35 - 0.66 * k, mot, fs=32, x=-6.2, avec=[Create(fig.contour(sw=6))])
+            mots = (["30 plus", "30 plus 30 plus 30,", "30 plus 30,", ("30, 120", 1, 0.1), "120"]
+                    if k == 0 else ["40 plus 40", "40 plus 30", "30, 110", "110"] if k == 2 else None)  # le 4e « 30 » n a pas de marque : juste après le 3e
+            lg = self.somme(morceaux, -0.35 - 0.66 * k, mot, fs=32, x=-6.2, avec=[Create(fig.contour(sw=6))],
+                            mots=mots)
             tot.append(lg[-1])
         self.au_mot("Du plus court")
         l = self.t("Du plus court au plus long :", 32, VERT_OK)
