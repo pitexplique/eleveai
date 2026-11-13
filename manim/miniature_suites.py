@@ -125,6 +125,14 @@ EP = [
      ["COMPRENDRE LA SOMME", "DES TERMES"], "1 + 2 + … + n", "+ = n(n + 1) ÷ 2",
      "blanche", ["DE TÊTE", "EN 5 S ?"], "plus vite qu'une calculatrice",
      [("1 + 2 + … + 30", 110, BLEU), ("= ?", 120, VERT)]),
+    ("premiere-spe", "25-somme-geo", "verte",
+     ["COMPRENDRE LA SOMME", "GÉOMÉTRIQUE"], "1 + 2 + 2^{2} + … + 2^{5}", "+ = 2^{6} − 1 = 63",
+     "blanche", ["ÇA GRIMPE", "VITE !"], "un morceau partagé, × 2 par jour",
+     [("3 + 6 + 12 + 24 + 48", 75, BLEU), ("10 jours : ?", 110, VERT)]),
+    ("premiere-spe", "26-limite", "verte",
+     ["COMPRENDRE LA LIMITE", "D'UNE SUITE"], "360 → 280 → 240 → …", "+ lim u_{n} = 200",
+     "blanche", ["JUSQU'OÙ", "ÇA DESCEND ?"], "le gâteau qui refroidit",
+     [("180 → 100 → 60 → …", 90, BLEU), ("→ ? °C", 110, VERT)]),
 ]
 # Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
 from suites_terminale_donnees import EP_TLE  # noqa: E402
