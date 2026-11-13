@@ -4,15 +4,24 @@ Plan : `manim/PLAN-perimetre-aire-volume.md` (section « ## CE2 »). Vidéos COM
 ⛔ Les 6 voix (paysage + short des épisodes 01, 02, 03) sont VALIDÉES par Frédéric le 13/11 : ne pas les redemander.
 Ceintures : paysages 01 blanche, 02 jaune, 03 orange ; shorts blanche. Centres : 01 nature-ecologie + animaux, 02 nature-ecologie, 03 sport.
 
-## État au 13/11, session 3 (arrêt pour compactage à ~60 %)
+## État au 13/11 15 h, session 3 : ÉPISODES 01-03 FINIS
 
 | Épisode | Paysage | Short |
 |---|---|---|
-| 01 comprendre | ✅ HD rendu, bords 0, planche relue ; ✅ miniature paysage faite et relue | ✅ rendu, planche + miniature relues (OK) |
-| 02 polygone | ✅ dry run 0 (seul le faux positif 974) ; ✅ `-ql` relu deux fois, défauts corrigés (cotes « 3 m » écartées, numéros 1-6 posés en cotes, « Mais 9… » sur 2 lignes, question du défi sur 3 lignes, choix Q2 en fs 22, question 07 sans les nombres) → **PRÊT POUR LE HD** | film corrigé (question sur 3 lignes « Combien de mètres / de guirlande pour / faire tout le tour ? »), contrôlé → à rendre |
-| 03 comparer | ✅ dry run 0 avant la dernière retouche ; `-ql` relu 3 fois. Dernière retouche NON VÉRIFIÉE : choix C de Q2 sur 2 lignes (`chr(10)`), c1/c2 de 03-bleu en xl=0.2, l1 de 02-rouge fs 30 xl=0.1, réponses Q2 y0=−2,1 pas 0,5 → refaire dry run + `-ql` + images 39 s, 61 s, 125 s, 201 s | film corrigé (choix B = « mon copain,<br>sur la table carrée », texte exact de la voix), contrôlé → à rendre |
+| 01 comprendre | ✅ HD re-rendu (3 min 44, « + 3 » de Q1 calé sur le 3 dit), bords 0, planche relue, miniature « EN 4 MIN » | ✅ |
+| 02 polygone | ✅ HD (3 min 55), bords 0, planche relue (Q2 : A sur 2 lignes, cartes pleine largeur ; ligne Sofia sous la figure), miniature | ✅ « La guirlande de ma cabane », planche + miniature relues |
+| 03 comparer | ✅ HD (4 min 13), bords 0, planche relue (réponse Q2 sous la carte C, « On fait pareil » à taille normale), miniature | ✅ « La course des tables », miniature : titre sur 2 lignes |
 
-Retouches faites en session 3 (03) : voix = écrit (« Pour comparer, on calcule… », « est un rectangle », « On fait pareil avec l'autre figure », « Le segment le plus long donne le tour le plus long »), « 130, c'est plus que 120 : » (130 hors_audit), terrain rouge centre −3,0, piège : figures remontées et morale sur une ligne en bas, défi : figures +0,35 et pause à −1,6, correction : l'ordre sur sa propre ligne (−3,1), Q1 et Q2 : `self.XL` abaissé le temps de la question (−0,3 et −0,9) puis `del self.XL`.
+✅ Manifeste : 6 entrées `ce2-perimetre-*` (25, 27, 29/12), fiches YouTube écrites, 12 fichiers sur R2 (`ce2/maths/perimetre/`), `lib/videos/videos-r2.json` + `bilans-videos.json` (nos clés ; les 2 anciennes clés auto `maths-ce2-perimetre-comprendre[-short]` remplacées) — commit `d570dc8b`. Plan coché (CE2 01-03). Rien poussé.
+⏳ Coach : `node scripts/brancher-videos-coach.mjs --classe ce2 --notion perimetre --ecrire` (6 à brancher) APRÈS le push du chef d'orchestre.
+
+⛔ Leçons session 3 :
+- Filtrer la sortie du dry run avec `tr '' '
+' | grep -a …` : sans `tr`, les barres de progression collent les lignes et des AUDIT passent inaperçus.
+- À 15 images/s, `au_mot` peut finir 0,06 s AVANT la marque → AUDIT-TARD/AVANCE : ajouter `self.wait(0.07)` après.
+- Nombres répétés (« 3 plus 3 plus 3 ») : la synchro par jetons s'y perd → caler chaque morceau sur un extrait qui COMMENCE par son nombre (« 3, 12. », « 1 plus 9 »), pas sur « Plus 3 » (sinon affiché avant le nombre). `somme(..., mots=[...])` dans perimetre_comparer.py, `somme_au_mot(..., res_mot=)` dans perimetre_polygone.py.
+- Marques manquantes (TTS) : ex. « 3 plus 3 » du 02 correction → hors_audit justifié en commentaire.
+- `self.XL` abaissé sur une question-pause peut RÉTRÉCIR les cartes (02 Q2) : vérifier sur la planche ; mieux vaut un choix sur 2 lignes (`chr(10)`).
 Outils hors dépôt (scratchpad de la session 3, à recréer si perdus) : `hd.sh` (verrou mkdir `C:/Users/FRED/AppData/Local/Temp/eleveai-rendu-hd.lock` + rendu), `images.py <mp4> <png> t1 t2…` (images à des instants, PyAV).
 ⛔ `planche-video.py` ne garde que la DERNIÈRE image de chaque écran : regarder aussi 2-3 instants au milieu (`images.py`). Le `_muet.mp4` laissé par `ti-margo-short.mjs film` dans le dossier de sortie : le supprimer avant R2.
 
@@ -23,12 +32,8 @@ Outils hors dépôt (scratchpad de la session 3, à recréer si perdus) : `hd.sh
 - `manim/miniature_perimetre_ce2.py` (ceinture par épisode) ; `manim/passe_perimetre_ce2.py` (`temps [slug]`, `voir`, `manifeste` ; dates 25/12, 27/12, 29/12 vérifiées libres ; lien coach seulement, pas de fiche CE2) ; aperçu séparé `manim/sorties/apercu-perimetre-ce2.html` (6 vidéos, sans lecture auto).
 - `$TEMP/claude/mots.py` (hors dépôt) : mot@instant d'un clip, pour caler les `au_mot`. À recréer si besoin : lit `manim/voix/ce2-perimetre-<slug>.json` et `manim/scripts/ce2/perimetre_<slug>_marques.json`.
 
-## Reste (dans l'ordre)
-1. Ép. 03 : dry run + `-ql` de la dernière retouche (voir tableau), relire.
-2. Ép. 02 : HD sous le verrou (`python -m manim render -qh --disable_caching manim/scripts/ce2/perimetre_polygone.py PerimetrePolygoneCE2 -o eleveai-maths-ce2-perimetre-polygone --media_dir <scratchpad>/hd02`) → copier vers `sorties/ce2/maths/perimetre/02-polygone/` → `python scripts/verifier-bords-video.py <mp4>` = 0 → planche HD → short `node scripts/ti-margo-short.mjs ce2-perimetre polygone film` puis `… miniature` (relire planche `ti-margo-planche.py <mp4> <png> 40`) → `python manim/miniature_perimetre_ce2.py polygone`.
-3. Ép. 03 : même chaîne (`perimetre_comparer.py`, `PerimetreComparerCE2`, `03-comparer/`, `comparer`).
-4. `python manim/passe_perimetre_ce2.py temps` puis `voir` (titres ≤ 100) puis `manifeste` ; `python scripts/fiches-youtube.py` ; R2 : `scripts/r2-videos.ps1` (à blanc) puis `-Envoyer`, `node scripts/generer-videos-r2.mjs` ; `lib/videos/*` : NOS clés seulement (`git hash-object -w` + `git update-index --cacheinfo`, jamais `git commit -- lib/videos/...`).
-5. Cocher `manim/PLAN-perimetre-aire-volume.md` (CE2 01-03), mettre cette note à jour, commit PAR CHEMIN, pas de push.
-6. Coach : `node scripts/brancher-videos-coach.mjs --classe ce2 --notion perimetre` (lecture seule) — `--ecrire` APRÈS le push du chef d'orchestre.
+## Reste
+1. Coach `--ecrire` après le push (voir plus haut).
+2. Suite du plan CE2 : `ce2_perimetre_rectangle`, `ce2_perimetre_defi`, puis contenance et solides (voix à écrire et à faire valider À DEUX).
 
 ⛔ RAM : un seul rendu HD sur le PC (verrou), aperçus `-ql`, rien sous 2,5 Go libres, un seul processus manim à soi, aucun sous-agent qui rend.

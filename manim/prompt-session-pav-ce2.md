@@ -6,7 +6,7 @@ Tu reprends la série PÉRIMÈTRE du **CE2** (micros `ce2_perimetre_{comprendre,
 
 ⛔ Les 6 voix sont VALIDÉES (13/11) : ne pas les redemander. Ceintures : 01 blanche, 02 jaune, 03 orange ; shorts blanche.
 
-Prochaine action : voir « Reste » de `manim/REPRISE-pav-ce2.md` (session 3 : 01 fini, 02 prêt pour le HD, 03 à revérifier après la dernière retouche).
+Prochaine action : voir « Reste » de `manim/REPRISE-pav-ce2.md` (13/11 15 h : épisodes 01-03 FINIS, au manifeste et sur R2 ; reste le coach --ecrire après le push, puis rectangle et défi).
 
 C'est fini quand les 6 vidéos sont rendues, au manifeste et sur R2, le plan est coché et la note de reprise est à jour.
 

@@ -7,9 +7,9 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 ## CE2
 
 **Périmètre** (5)
-- [ ] Comprendre ce… — `ce2_perimetre_comprendre`
-- [ ] Déterminer le périmètre… — `ce2_perimetre_polygone`
-- [ ] Comparer les périmètres de plusieurs polygones — `ce2_perimetre_comparer`
+- [x] Comprendre ce… — `ce2_perimetre_comprendre`
+- [x] Déterminer le périmètre… — `ce2_perimetre_polygone`
+- [x] Comparer les périmètres de plusieurs polygones — `ce2_perimetre_comparer`
 - [ ] Déterminer le périmètre… — `ce2_perimetre_rectangle`
 - [ ] Résoudre un défi de périmètre — `ce2_perimetre_defi`
 
