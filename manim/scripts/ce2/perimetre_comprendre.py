@@ -209,9 +209,14 @@ class PerimetreComprendreBase(PaysagePerimetreCE2):
             hors_audit(lg2[1]), hors_audit(lg2[4])  # 5 et 8 : déjà dits, déjà écrits
             sc.au_mot("3 plus 2")
             sc.play(FadeIn(lg2[0], shift=UP * 0.1), run_time=0.25)
-            for k, mot in ((1, "Plus 3"), (4, "Plus 2")):
-                sc.au_mot(mot)
+            for k, mot, res in ((1, "3, 8.", "8. Plus"), (4, "2, 10.", "10. Le")):
+                for x in lg2[k + 2].get_family():
+                    x.sans_synchro = True
+                sc.au_mot(mot)  # « + 3 » au 3 dit (pas au « Plus »)
+                sc.wait(0.07)
                 sc.play(FadeIn(lg2[k:k + 2], shift=UP * 0.1), run_time=0.2)
+                sc.au_mot(res)
+                sc.wait(0.07)
                 sc.play(FadeIn(lg2[k + 2], shift=UP * 0.1), run_time=0.2)
             lg3 = sc.rep_bas(2, ["Le périmètre du tapis : 10 m."], fs=32)
             sc.au_mot("Le périmètre du tapis")

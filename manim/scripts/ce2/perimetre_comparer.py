@@ -314,8 +314,9 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
         tp = self.t("le périmètre", 28, VERT_OK).next_to(acc, DOWN, buff=0.08)
         self.play(FadeIn(tp, scale=1.2), Create(tri.contour(sw=7)), run_time=0.4)
         self.au_mot("On fait pareil")
-        l3 = self.bloc(["On fait pareil avec l'autre figure :", "le segment le plus long,", "c'est le plus long tour."], 30)
-        self.col(l3, -0.55, xl=0.4)
+        l3 = self.bloc(["On fait pareil avec", "l'autre figure :", "le segment le plus long,", "c'est le plus long tour."], 32)
+        self.col(l3, -0.75, xl=0.4)
+        l3 = VGroup(VGroup(l3[0], l3[1]), l3[2], l3[3])  # la phrase coupée en deux lignes, montrée d'un coup
         self.play(FadeIn(l3[0], shift=UP * 0.1), run_time=0.3)
         base2 = Line(P(x0 - 0.1, y2), P(0.3, y2), color=GRAY_B, stroke_width=2)
         self.add(base2)

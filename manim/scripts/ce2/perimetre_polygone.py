@@ -84,14 +84,20 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
     nom_voix = "ce2-perimetre-polygone"
     fichier_marques = "perimetre_polygone_marques.json"
 
-    def somme_au_mot(self, prec, terme, res, mot, y, fs=36, xl=None, avec=(), n=1):
+    def somme_au_mot(self, prec, terme, res, mot, y, fs=36, xl=None, avec=(), n=1, res_mot=None):
         """« 8 + 3 = 11 » quand la voix dit « Plus 3, 11 » : le 8 (déjà dit) hors synchro,
         « + 3 » au mot, « = 11 » au résultat."""
         lg = self.ligne([(prec, BLEU_D), ("+ " + terme, BLEU_D), ("= " + res, BLEU_D)], fs, buff=0.16)
         hors_audit(lg[0])
         self.col(lg, y, xl=xl)
         self.au_mot(mot, n)
+        self.wait(0.07)  # au-delà de l'arrondi d'image : le nombre est dit
         self.play(FadeIn(lg[0:2], shift=UP * 0.1), *avec, run_time=0.25)
+        if res_mot:
+            for x in lg[2].get_family():
+                x.sans_synchro = True
+            self.au_mot(res_mot)
+            self.wait(0.07)
         self.play(FadeIn(lg[2], shift=UP * 0.1), run_time=0.2)
         return lg
 
@@ -203,7 +209,7 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.play(FadeIn(l2[1], shift=UP * 0.1), run_time=0.3)
         self.au_mot("Sofia achète")
         l5 = self.t("Sofia achète 22 m de bordure.", 32, VERT_OK)
-        self.col(l5, -3.05, xl=0.2)
+        gauche(l5, -6.2, -3.05)  # sous la figure, en grand (à droite, la zone de Ti-Margo le rapetissait)
         self.play(FadeIn(l5, shift=UP * 0.1), Create(pg.contour(couleur=BOIS, sw=7)), run_time=0.5)
         self.insister(l5, 1.06, 0.25)
         self.attendre_voix()
@@ -280,7 +286,8 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.play(LaggedStart(*[Create(seg[i]) for i in range(3, 13)], lag_ratio=0.3), run_time=1.1)
         self.au_mot("jusqu'à 14")
         self.play(Create(seg[13]), FadeIn(nums[13], scale=1.6), run_time=0.3)
-        self.au_mot("Le périmètre est")
+        self.au_mot("14 centimètres")
+        self.wait(0.07)
         g = self.gros("Périmètre : 14 cm", fs=36)
         self.col(g, -1.25, xl=0.6)
         self.play(FadeIn(g, scale=1.2), run_time=0.4)
@@ -349,12 +356,14 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
             sc.play(FadeIn(lg3[0], shift=UP * 0.1), run_time=0.3)
             sc.rep_fini()
 
+        self.XL = -0.9  # la colonne s'élargit : les choix gardent leur taille
         self.question_pause("07-question", "07b-reponse",
                             ["Une figure a 5 côtés.", "Léa trouve 18 cm.", "Quelle est son erreur ?"],
-                            [self.choix("Elle a compté un côté deux fois.", 22), self.choix("Elle a multiplié.", 22),
-                             self.choix("Elle a oublié un côté.", 22)], 2,
+                            [self.choix("Elle a compté" + chr(10) + "un côté deux fois.", 26),
+                             self.choix("Elle a multiplié.", 26), self.choix("Elle a oublié un côté.", 26)], 2,
                             ["4 + 6 + 3 + 5 + 7 = 25.", "Sans le 7 : 18.", "Léa a oublié le dernier côté."],
                             mot_q="Une figure", autres_q=autres_q, autres_r=apres)
+        del self.XL
 
     # ── 08 : le défi ────────────────────────────────────────────────────────
     def hexagone(self):
@@ -405,13 +414,14 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         l0 = self.t("6 côtés de 3 m.", 34)
         self.col(l0, 2.2)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.3)
-        l1 = self.t("3 + 3 = 6", 36, BLEU_D)
+        l1 = hors_audit(self.t("3 + 3 = 6", 36, BLEU_D))  # « 3 plus 3 » n'a pas de marques : posé au « 6. »
         self.col(l1, 1.5)
         self.au_mot("6.")
         self.play(FadeIn(l1, shift=UP * 0.1), Create(hx.cote(0)), Create(hx.cote(1)), run_time=0.3)
         suite = (("6", "9"), ("9", "12"), ("12", "15"), ("15", "18"))
         for k, (a, r) in enumerate(suite):
-            self.somme_au_mot(a, "3", r, "Plus 3", 0.92 - 0.58 * k, avec=[Create(hx.cote(k + 2))], n=k + 1)
+            self.somme_au_mot(a, "3", r, "3, " + r + ".", 0.92 - 0.58 * k, avec=[Create(hx.cote(k + 2))],
+                              res_mot=r + ".")  # « + 3 » au 3 dit (pas au « Plus »), « = r » à son nombre
         self.au_mot("18 mètres de bordure")
         g = self.gros("18 m de bordure", fs=40)
         for x in g.get_family():
