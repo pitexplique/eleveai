@@ -52,9 +52,9 @@ assert all(2 - 1 / n <= U[n] <= 2 + 1 / n for n in NS) and abs(U[1999] - 2) < 1e
 assert 3 / 1999 < 2e-3 and 1 / 1999 ** 2 < 1e-6                                # 04 : bornes → 5 (A)
 C5 = {n: n + 3 * math.cos(n) for n in NS}
 assert all(C5[n] >= n - 3 for n in NS)                                        # 05 : uₙ ≥ n − 3 → +∞
-P6 = {"0": lambda n: 1 / n, "7": lambda n: 7 * n / (n + 6), "−∞": lambda n: -n}
+P6 = {"0": lambda n: 6 * n / (n * n + 5), "7": lambda n: 7 * n / (n + 6), "−∞": lambda n: -n}
 assert all(f(n) <= n for f in P6.values() for n in NS)                        # 06 : toutes sous y = n
-assert abs(P6["7"](10 ** 6) - 7) < 1e-4
+assert abs(P6["7"](10 ** 6) - 7) < 1e-4 and P6["0"](10 ** 6) < 1e-5
 assert (1 - 1 / 10 ** 6, 3 + 1 / 10 ** 6) and 1 != 3                          # 07 : bornes → 1 et → 3 (C)
 V8 = {n: -n * n + 4 * math.sin(n) for n in NS}
 assert all(V8[n] <= -n * n + 4 for n in NS)                                   # 08b : vₙ → −∞
@@ -282,7 +282,7 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
         self.ligne([("Sa moyenne après", WHITE, "après n"), ("n", TERME, None), ("nuits,", WHITE, "nuits"),
                     ("pour", WHITE, "pour n"), ("n ≥ 1 :", GREY_A, "égal à 1")], 2.25, x=x0, fs=40)
         self.lmaths([("t", [("uₙ =", TERME, "u indice n"), ("2 +", WHITE, "2 plus")]),
-                     ("f", [("sin(n)", WHITE, "sinus de n sur")], [("n", WHITE, None)])], 1.15, x=x0 + 0.2, fs=48)
+                     ("f", [("sin(n)", WHITE, "sinus de n sur")], [("n", WHITE, None)])], 1.15, x=x0, fs=48)
         # la vague sin(n), coincée entre les traits −1 et 1
         X0, X1, YC, H = 1.3, 6.0, -0.15, 0.62
         haut = DashedLine(P(X0, YC + H), P(X1, YC + H), color=RAISON, stroke_width=4, dash_length=0.1)
@@ -297,12 +297,12 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
         self.play(Create(vg), run_time=0.5)
         moteur = VMobject().add_updater(lambda m, dt: ph.increment_value(2.2 * dt))
         self.add(moteur)
-        self.ligne([("−1 ≤", RAISON, "moins 1"), ("sin(n)", WHITE, None), ("≤ 1", RAISON, "et 1")], -0.15, x=x0 + 0.2,
+        self.ligne([("−1 ≤", RAISON, "moins 1"), ("sin(n)", WHITE, None), ("≤ 1", RAISON, "et 1")], -0.15, x=x0,
                    fs=46, avec_k={0: [Create(bas), FadeIn(lm1)], 2: [Create(haut), FadeIn(l1)]}, rt=0.4)
         g = self.lmaths([("t", [("donc", GREY_A, "Donc"), ("2 −", RAISON, "2 moins")]),
                          ("f", [("1", RAISON, "1 sur")], [("n", RAISON, None)]),
                          ("t", [("≤", WHITE, None), ("uₙ", TERME, None), ("≤", WHITE, None), ("2 +", RAISON, "2 plus")]),
-                         ("f", [("1", RAISON, "1 sur")], [("n", RAISON, None)])], -1.6, x=x0 + 0.2, fs=48)
+                         ("f", [("1", RAISON, "1 sur")], [("n", RAISON, None)])], -1.6, x=x0, fs=48)
         self.play(Indicate(VGroup(*g[1:4]), color=RAISON, scale_factor=1.06),
                   Indicate(VGroup(*g[-3:]), color=RAISON, scale_factor=1.06), run_time=0.6)
         self.attendre_voix(marge=0.6)
@@ -343,8 +343,8 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
         self.ligne([("elle a aussi cette limite.", WHITE, "elle a aussi")], -1.4, x=x0, fs=38)
         l2 = self.trait_u(nu, 2, JUSTE, "2", 28)
         fin = self.ligne([("uₙ", TERME, "Donc u"), ("converge vers", JUSTE, "converge"),
-                          ("2", JUSTE, "vers 2")], -2.35, x=x0 + 0.2, fs=42, avec_k={3: [Create(l2[0]), FadeIn(l2[1])]})
-        self.play(Create(self.encadre(fin, JUSTE, 0.16)), run_time=0.3)
+                          ("2", JUSTE, "vers 2")], -2.35, x=x0, fs=42, avec_k={3: [Create(l2[0]), FadeIn(l2[1])]})
+        self.play(FadeIn(self.encadre(fin, JUSTE, 0.16)), run_time=0.3)
         self.attendre_voix(marge=0.6)
         moteur.clear_updaters()
         sc.clear_updaters()
@@ -384,8 +384,8 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
                    avec_k={0: [FadeIn(gd, shift=LEFT * 0.3), LaggedStart(*[GrowFromCenter(d) for d in termes],
                                                                          lag_ratio=0.08)]}, rt=0.7)
         fin = self.ligne([("uₙ", TERME, "u indice n"), ("converge vers", JUSTE, "converge"), ("5", JUSTE, "vers 5")],
-                         -2.25, x=x0 + 0.2, fs=46)
-        self.play(Create(self.encadre(fin, JUSTE, 0.16)), run_time=0.3)
+                         -2.25, x=x0, fs=46)
+        self.play(FadeIn(self.encadre(fin, JUSTE, 0.16)), run_time=0.3)
         self.attendre_voix(marge=0.6)
 
     # ── 05 : la comparaison : le plancher n − 3 pousse uₙ vers +∞ ─────────
@@ -405,7 +405,7 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
             g.add(*[nu.point(n, C5[n], TERME, 0.075) for n in range(1, int(k + 1e-6) + 1)])
             return g
         sc = always_redraw(dessin)
-        lab = self.t("n − 3", 30, RAISON, audit=False).next_to(nu.G(10, 7), DR, buff=0.18)
+        lab = self.t("n − 3", 30, RAISON, audit=False).next_to(nu.G(11, 8), DR, buff=0.35)
         haut = Arrow(nu.G(12.9, 9) + RIGHT * 0.25, nu.G(12.9, 16.5) + RIGHT * 0.25, buff=0, color=JUSTE,
                      stroke_width=6, tip_length=0.2)
         self.ligne([("Prends", WHITE, "Prends"), ("uₙ =", TERME, "u indice n"), ("n + 3cos(n).", WHITE, "n plus 3")],
@@ -416,9 +416,9 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
                     ("→ +∞.", JUSTE, "qui tend")], 0.5, x=x0, fs=44,
                    avec_k={2: [k_t.animate.set_value(6), FadeIn(lab)], 3: [k_t.animate.set_value(12.6)]}, rt=1.2)
         self.ligne([("Théorème de comparaison :", JAUNE_TITRE, "Théorème de comparaison")], -0.4, x=x0, fs=38)
-        fin = self.ligne([("uₙ → +∞", JUSTE, "u indice n tend")], -1.25, x=x0 + 0.2, fs=48,
+        fin = self.ligne([("uₙ → +∞", JUSTE, "u indice n tend")], -1.25, x=x0, fs=48,
                          avec_k={0: [GrowArrow(haut)]})
-        self.play(Create(self.encadre(fin, JUSTE, 0.16)), run_time=0.3)
+        self.play(FadeIn(self.encadre(fin, JUSTE, 0.16)), run_time=0.3)
         self.ligne([("Pour +∞, on", WHITE, "Pour plus"), ("minore ;", RAISON, "minore")], -2.3, x=x0, fs=42)
         self.ligne([("pour −∞, on", WHITE, "pour moins"), ("majore.", RAISON, "majore")], -3.05, x=x0, fs=42)
         self.attendre_voix(marge=0.6)
@@ -444,16 +444,17 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
         for cle, f in P6.items():
             pts = self.points(nu, f, range(1, 13), TERME, 0.07)
             series.append(pts)
-        e0 = self.t("→ 0", 30, JUSTE, audit=False).next_to(nu.G(11, 0), DOWN, buff=0.15)
+        y0, y7 = nu.G(10.5, P6["0"](10.5))[1], nu.G(10.5, P6["7"](10.5))[1]
+        e0 = self.t("→ 0", 28, JUSTE, audit=False).move_to(P(nu.G(10.5, 0)[0], (y0 + y7) / 2))
         e7 = self.t("→ 7", 30, JUSTE, audit=False).next_to(nu.G(12.6, 7 * 12 / 18), RIGHT, buff=0.12)
         em = self.t("→ −∞", 30, JUSTE, audit=False).next_to(nu.G(8, -9.5), LEFT, buff=0.1)
         lag = lambda pts: LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.08)  # noqa: E731
         self.ligne([("vers 0,", JUSTE, "vers 0"), ("vers 7,", JUSTE, "vers 7"), ("ou vers −∞.", JUSTE, "ou vers moins")],
-                   -0.2, x=x0 + 0.2, fs=38, avec_k={0: [lag(series[0]), FadeIn(e0)], 1: [lag(series[1]), FadeIn(e7)],
+                   -0.2, x=x0, fs=38, avec_k={0: [lag(series[0]), FadeIn(e0)], 1: [lag(series[1]), FadeIn(e7)],
                                                     2: [lag(series[2]), FadeIn(em)]}, rt=0.6)
         self.ligne([("Et pour les gendarmes,", WHITE, "Et pour les")], -1.25, x=x0, fs=37)
         self.ligne([("les deux bornes doivent avoir", WHITE, "les deux bornes")], -1.95, x=x0, fs=37)
-        fin = self.ligne([("la même limite.", JAUNE_TITRE, "la même limite")], -2.75, x=x0 + 0.2, fs=44)
+        fin = self.ligne([("la même limite.", JAUNE_TITRE, "la même limite")], -2.75, x=x0, fs=44)
         self.insister(fin, 1.08)
         self.attendre_voix(marge=0.6)
 
@@ -486,9 +487,9 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
         self.ligne([("deux limites différentes,", PIEGE, "deux limites")], -1.3, x=x0, fs=42,
                    avec_k={0: [GrowFromCenter(ecart), LaggedStart(*[GrowFromCenter(d) for d in termes],
                                                                    lag_ratio=0.08)]}, rt=0.7)
-        fin1 = self.ligne([("les gendarmes", PIEGE, "les gendarmes")], -2.2, x=x0 + 0.2, fs=40)
-        fin = VGroup(fin1, self.ligne([("ne s'appliquent pas.", PIEGE, "ne s'appliquent")], -2.85, x=x0 + 0.2, fs=40))
-        self.play(Create(self.encadre(fin, PIEGE, 0.16)), Indicate(ecart, color=PIEGE, scale_factor=1.15),
+        fin1 = self.ligne([("les gendarmes", PIEGE, "les gendarmes")], -2.2, x=x0, fs=40)
+        fin = VGroup(fin1, self.ligne([("ne s'appliquent pas.", PIEGE, "ne s'appliquent")], -2.85, x=x0, fs=40))
+        self.play(FadeIn(self.encadre(fin, PIEGE, 0.16)), Indicate(ecart, color=PIEGE, scale_factor=1.15),
                   run_time=0.45)
         self.attendre_voix(marge=0.6)
 
@@ -503,7 +504,7 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
         self.ligne([("Pour", WHITE, "Pour n"), ("n ≥ 1,", GREY_A, "égal à 1"), ("trouve la limite de", WHITE, "trouve")],
                    2.2, x=x0, fs=40, avec_k={0: [FadeIn(tel, shift=UP * 0.15), GrowFromCenter(et)]})
         self.ligne([("vₙ =", TERME, "v indice n"), ("−n²", WHITE, "moins n"), ("+ 4sin(n).", WHITE, "plus 4")], 1.25,
-                   x=x0 + 0.2, fs=48)
+                   x=x0, fs=48)
         self.lmaths([("t", [("Puis celle de", WHITE, "Puis celle"), ("wₙ =", TERME, "w indice n"), ("1 +", WHITE, "1 plus")]),
                      ("f", [("2cos(n)", WHITE, "2 cosinus")], [("n", WHITE, None)])], -0.05, x=x0, fs=48)
         self.defi_pause(-2.0, x=-1.8)
@@ -531,14 +532,14 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
                     ("→ −∞ :", JUSTE, "qui tend")], 1.4, x=x0, fs=44,
                    avec_k={1: [Create(plaf)], 3: [LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.1)]},
                    rt=0.6)
-        fin1 = self.ligne([("vₙ → −∞", JUSTE, "v indice n tend")], 0.55, x=x0 + 0.2, fs=46, avec_k={0: [GrowArrow(bas)]})
-        self.play(Create(self.encadre(fin1, JUSTE, 0.14)), run_time=0.3)
+        fin1 = self.ligne([("vₙ → −∞", JUSTE, "v indice n tend")], 0.55, x=x0, fs=46, avec_k={0: [GrowArrow(bas)]})
+        self.play(FadeIn(self.encadre(fin1, JUSTE, 0.14)), run_time=0.3)
         # wₙ : l'entonnoir vers 1
         self.au_mot("Pour w")
         self.play(*[FadeOut(m) for m in (nu.ax_n, nu.ax_u, nu.lab_n, nu.lab_u, plaf, pts, bas)], run_time=0.25)
         nw, bornes, termes, gd, lim = self.entonnoir(lambda t: 1 - 2 / t, lambda t: 1 + 2 / t,
                                                      lambda n: W8[n], (-1.4, 3.4), 1, bg=P(2.85, -2.1), hd=P(5.0, 2.0))
-        g = self.lmaths([("t", [("Pour w :", GREY_A, None), ("1 −", RAISON, "1 moins")]),
+        g = self.lmaths([("t", [("Pour wₙ :", GREY_A, None), ("1 −", RAISON, "1 moins")]),
                          ("f", [("2", RAISON, "2 sur")], [("n", RAISON, None)]),
                          ("t", [("≤", WHITE, "inférieur ou égal à w"), ("wₙ", TERME, None),
                                 ("≤", WHITE, "inférieur ou égal à 1"), ("1 +", RAISON, None)]),
@@ -549,8 +550,8 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
                                                                          lag_ratio=0.08)],
                            1: [Create(lim[0]), FadeIn(lim[1])]}, rt=0.6)
         fin2 = self.ligne([("wₙ", TERME, "w indice n"), ("converge vers", JUSTE, "converge"), ("1", JUSTE, "vers 1")],
-                          -2.78, x=x0 + 0.2, fs=44)
-        self.play(Create(self.encadre(fin2, JUSTE, 0.14)), run_time=0.3)
+                          -2.78, x=x0, fs=44)
+        self.play(FadeIn(self.encadre(fin2, JUSTE, 0.14)), run_time=0.3)
         self.attendre_voix(marge=0.6)
 
     # ── 09 : ce que tu as appris ───────────────────────────────────────────

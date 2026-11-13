@@ -235,8 +235,13 @@ class SuiteLimiteComparaisonShort(VerifMargo, OutilsCalcul, ShortSuites):
         viv = cad.vivant(n_t)
         huit = VGroup(Line(P(cad.X(8), 1.55 - 0.42), P(cad.X(8), 1.55 + 0.42), stroke_color=JUSTE, stroke_width=3),
                       self.t("8", 36, JUSTE, audit=False).move_to(P(cad.X(8), 0.9)))
-        self.play(FadeIn(cad), FadeIn(viv), run_time=0.3)
-        self.ligne([("Les deux bornes", RAISON, "Les deux bornes")], 0.2, fs=42,
+        rap = self.encadrement(42).move_to(P(0, -0.4))           # le bas n'est pas vide : les bornes attendent
+        for m in rap:
+            m.set_opacity(1)
+        self.play(FadeIn(cad), FadeIn(viv), FadeIn(rap, shift=UP * 0.1), run_time=0.3)
+        self.au_mot("Les deux bornes")
+        self.play(FadeOut(rap, shift=DOWN * 0.1), run_time=0.2)
+        self.ligne([("Les deux bornes", RAISON, None)], 0.2, fs=42,
                    avec=[n_t.animate.set_value(8)], rt=0.6)
         self.ligne([("→ 8 :", JUSTE, "vers 8")], -0.5, fs=52, avec_k={0: [FadeIn(huit), n_t.animate.set_value(60)]},
                    rt=0.9)
@@ -279,8 +284,11 @@ class SuiteLimiteComparaisonShort(VerifMargo, OutilsCalcul, ShortSuites):
             return super().q_montrer_choix(cartes)
         self._attente_q = None
         self.play(FadeOut(att, shift=DOWN * 0.15), run_time=0.25)      # le dessin part AVANT les cadres
-        for k, (c, L) in enumerate(zip(cartes, "ABC")):
+        for c, L in zip(cartes, "ABC"):
+            # le cadre, sa lettre et son 1er morceau arrivent ENSEMBLE, quand la voix dit ce morceau
             self.suivre(f"{L} : ")
-            debut = [FadeIn(b[0]) for b in cartes] if k == 0 else []
-            self.play(*debut, FadeIn(c[1][0], shift=RIGHT * 0.15), run_time=0.25)
-            self.montrer_liste(c[1][1])
+            corps = c[1][1]
+            for k, (m, ex) in enumerate(zip(corps.nombres, corps.extraits)):
+                self.suivre(ex)
+                debut = [FadeIn(c[0]), FadeIn(c[1][0], shift=RIGHT * 0.15)] if k == 0 else []
+                self.play(*debut, FadeIn(m, scale=1.2), run_time=0.25)
