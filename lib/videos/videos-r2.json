@@ -5758,6 +5758,60 @@
   "short": true,
   "youtube": null
  },
+ "ce2-perimetre-comparer": {
+  "fichier": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.mp4",
+  "poster": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.png",
+  "vignette": null,
+  "titre": "Rectangle ou triangle : quel tour est plus long ? — Comparer des périmètres — épisode 3 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_comparer&display=simple"
+ },
+ "ce2-perimetre-comparer-short": {
+  "fichier": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer-short.mp4",
+  "poster": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer-short-miniature.png",
+  "vignette": null,
+  "titre": "La table la plus petite a le plus petit tour, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_comparer&display=simple"
+ },
+ "ce2-perimetre-comprendre": {
+  "fichier": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre.mp4",
+  "poster": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre.png",
+  "vignette": null,
+  "titre": "Combien de clôture pour faire le tour d'un jardin ? — Le périmètre — épisode 1 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_comprendre&display=simple"
+ },
+ "ce2-perimetre-comprendre-short": {
+  "fichier": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre-short.mp4",
+  "poster": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre-short-miniature.png",
+  "vignette": null,
+  "titre": "Le tour du bac à sable : 9 m, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_comprendre&display=simple"
+ },
+ "ce2-perimetre-polygone": {
+  "fichier": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone.mp4",
+  "poster": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone.png",
+  "vignette": null,
+  "titre": "6 côtés : comment n'en oublier aucun ? — Le périmètre d'un polygone — épisode 2 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_polygone&display=simple"
+ },
+ "ce2-perimetre-polygone-short": {
+  "fichier": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone-short.mp4",
+  "poster": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone-short-miniature.png",
+  "vignette": null,
+  "titre": "La guirlande de ma cabane : 13 m, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_polygone&display=simple"
+ },
  "cm1-aire-carre-rectangle": {
   "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.mp4",
   "poster": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.png",
@@ -8745,22 +8799,6 @@
   "vignette": "ti-margo/film-noel/eleveai-le-noel-de-ti-margo-film-complet.vignette.webp",
   "titre": "le noel de ti margo film complet",
   "short": false,
-  "youtube": null
- },
- "maths-ce2-perimetre-comprendre": {
-  "fichier": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre.mp4",
-  "poster": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre.png",
-  "vignette": null,
-  "titre": "maths ce2 perimetre comprendre",
-  "short": false,
-  "youtube": null
- },
- "maths-ce2-perimetre-comprendre-short": {
-  "fichier": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths ce2 perimetre comprendre short",
-  "short": true,
   "youtube": null
  },
  "maths-cp-chiffre-0-droitier-portrait": {

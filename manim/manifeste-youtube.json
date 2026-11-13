@@ -80699,6 +80699,457 @@
         "sport",
         "sciences"
       ]
+    },
+    {
+      "id": "ce2-perimetre-comprendre",
+      "pas_avant": "2026-12-25",
+      "prioritaire": true,
+      "notionId": "perimetre",
+      "microId": "ce2_perimetre_comprendre",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre.mp4",
+      "miniature": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre.png",
+      "titre": "Combien de clôture pour faire le tour d'un jardin ? — Le périmètre — épisode 1 · Maths CE2",
+      "accroche": "Léo est paysagiste. Il doit poser une clôture tout autour d'un jardin de 8 mètres sur 5 mètres. Combien de mètres de clôture doit-il acheter ?\n\nDans cette vidéo :\n• faire le tour : on suit le bord, côté après côté, jusqu'au départ\n• ajouter les côtés : 8 + 5 + 8 + 5 = 26 m\n• le périmètre, c'est le bord, pas l'intérieur\n• le piège : n'oublier aucun côté\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : l'enclos à moutons d'Inès a 5 côtés de 3, 4, 2, 5 et 6 mètres : combien de grillage ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_comprendre&display=simple\n\n🔢 Épisode 1 de la série Périmètre d'EleveAI, en CE2 (et pour revoir au CM1).",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de clôture ?"
+        ],
+        [
+          "00:19",
+          "Faire le tour"
+        ],
+        [
+          "00:32",
+          "Ajouter les côtés"
+        ],
+        [
+          "00:54",
+          "Le bord, pas l'intérieur"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Le piège"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:45",
+          "À toi de jouer"
+        ],
+        [
+          "03:04",
+          "Correction"
+        ],
+        [
+          "03:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "faire le tour",
+        "ajouter les côtés",
+        "paysagiste",
+        "jardin",
+        "clôture",
+        "périmètre",
+        "maths",
+        "CE2",
+        "CM1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Un tapis a quatre côtés : 3 mètres, 2 mètres, 3 mètres et 2 mètres. Quel est son périmètre ?",
+          "choix": [
+            "5 mètres",
+            "12 mètres",
+            "10 mètres"
+          ],
+          "reponse": 2,
+          "explication": "On fait le tour. 3 + 2, 5. Plus 3, 8. Plus 2, 10. Le périmètre du tapis est de 10 mètres."
+        },
+        {
+          "t": "02:06",
+          "question": "Un carré a quatre côtés de 4 centimètres. Quel est son périmètre ?",
+          "choix": [
+            "16 centimètres",
+            "8 centimètres",
+            "12 centimètres"
+          ],
+          "reponse": 0,
+          "explication": "Le carré a 4 côtés de 4 centimètres. 4 + 4, 8. Plus 4, 12. Plus 4, 16. Le périmètre est de 16 centimètres."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "animaux"
+      ]
+    },
+    {
+      "id": "ce2-perimetre-comprendre-short",
+      "pas_avant": "2026-12-25",
+      "prioritaire": true,
+      "notionId": "perimetre",
+      "microId": "ce2_perimetre_comprendre",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-perimetre-comprendre",
+      "fichier": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre-short.mp4",
+      "miniature": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre-short-miniature.png",
+      "titre": "Le tour du bac à sable : 9 m, tu paries ? #maths #ce2",
+      "accroche": "Je fais le tour du bac à sable : 6 mètres, 3 mètres… et hop, je coupe par le milieu ! 9 mètres ? Couper par le milieu, ce n'est pas faire le tour…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : mon carnet est un carré de 9 cm de côté. Quel est son périmètre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #périmètre #ce2 #primaire",
+      "tags": [
+        "périmètre",
+        "bac à sable",
+        "faire le tour",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "périmètre",
+        "maths",
+        "CE2",
+        "CM1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Combien mesure le tour du bac à sable ?",
+          "choix": [
+            "9 mètres",
+            "18 mètres",
+            "12 mètres"
+          ],
+          "reponse": 1,
+          "explication": "6 + 3, 9. Plus 6, 15. Plus 3, 18. Le tour fait 18 mètres."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-perimetre-polygone",
+      "pas_avant": "2026-12-27",
+      "prioritaire": true,
+      "notionId": "perimetre",
+      "microId": "ce2_perimetre_polygone",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone.mp4",
+      "miniature": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone.png",
+      "titre": "6 côtés : comment n'en oublier aucun ? — Le périmètre d'un polygone — épisode 2 · Maths CE2",
+      "accroche": "Sofia est jardinière. Son potager a une drôle de forme : il a six côtés. Elle veut poser une bordure en bois tout autour. Combien de mètres ?\n\nDans cette vidéo :\n• compter les côtés d'abord : un point sur chacun\n• faire le tour : 6 + 2 + 3 + 3 + 3 + 5 = 22 m\n• sur un quadrillage : compter les côtés de carreaux, 14 cm\n• le piège : 9 carreaux, ce n'est pas le périmètre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un parterre de fleurs à 6 côtés égaux de 3 mètres : combien de bordure ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_polygone&display=simple\n\n🔢 Épisode 2 de la série Périmètre d'EleveAI, en CE2 (et pour revoir au CM1).",
+      "chapitres": [
+        [
+          "00:00",
+          "Ne jamais oublier un côté"
+        ],
+        [
+          "00:22",
+          "Compter les côtés"
+        ],
+        [
+          "00:34",
+          "Faire le tour"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:36",
+          "Sur un quadrillage"
+        ],
+        [
+          "01:55",
+          "Le piège des carreaux"
+        ],
+        [
+          "02:10",
+          "Question 2"
+        ],
+        [
+          "02:54",
+          "À toi de jouer"
+        ],
+        [
+          "03:11",
+          "Correction"
+        ],
+        [
+          "03:30",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "polygone",
+        "quadrillage",
+        "compter les côtés",
+        "jardinière",
+        "potager",
+        "périmètre",
+        "maths",
+        "CE2",
+        "CM1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "Un triangle a trois côtés : 6 centimètres, 8 centimètres et 5 centimètres. Quel est son périmètre ?",
+          "choix": [
+            "14 centimètres",
+            "19 centimètres",
+            "13 centimètres"
+          ],
+          "reponse": 1,
+          "explication": "6 + 8, 14. Plus 5, 19. Trois côtés, trois nombres : le périmètre est de 19 centimètres."
+        },
+        {
+          "t": "02:10",
+          "question": "Une figure a 5 côtés : 4, 6, 3, 5 et 7 centimètres. Léa trouve 18 centimètres. Quelle est son erreur ?",
+          "choix": [
+            "elle a compté un côté deux fois",
+            "elle a multiplié",
+            "elle a oublié un côté"
+          ],
+          "reponse": 2,
+          "explication": "4 + 6 plus 3 + 5 plus 7, ça fait 25. Sans le 7, ça fait 18 : Léa a oublié le dernier côté. Un point sur chaque côté, et on n'en oublie plus !"
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "ce2-perimetre-polygone-short",
+      "pas_avant": "2026-12-27",
+      "prioritaire": true,
+      "notionId": "perimetre",
+      "microId": "ce2_perimetre_polygone",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-perimetre-polygone",
+      "fichier": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone-short.mp4",
+      "miniature": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone-short-miniature.png",
+      "titre": "La guirlande de ma cabane : 13 m, tu paries ? #maths #ce2",
+      "accroche": "J'entoure ma cabane d'une guirlande. Le sol, 4 mètres. Le mur, 3. Le toit, 3 et 3. 13 mètres ? Oh non, il manque un bout de guirlande…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un triangle a des côtés de 5, 6 et 7 cm. Quel est son périmètre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_polygone&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #périmètre #ce2 #primaire",
+      "tags": [
+        "périmètre",
+        "polygone",
+        "guirlande",
+        "côté oublié",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "périmètre",
+        "maths",
+        "CE2",
+        "CM1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Combien de mètres de guirlande pour faire tout le tour ?",
+          "choix": [
+            "16 mètres",
+            "13 mètres",
+            "19 mètres"
+          ],
+          "reponse": 0,
+          "explication": "Ma cabane a 5 côtés. 4 + 3, 7. Plus 3, 10. Plus 3, 13. Plus 3, 16. Cinq côtés, cinq nombres !"
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-perimetre-comparer",
+      "pas_avant": "2026-12-29",
+      "prioritaire": true,
+      "notionId": "perimetre",
+      "microId": "ce2_perimetre_comparer",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.mp4",
+      "miniature": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.png",
+      "titre": "Rectangle ou triangle : quel tour est plus long ? — Comparer des périmètres — épisode 3 · Maths CE2",
+      "accroche": "Malik organise des courses pour les enfants. Il hésite entre deux parcours : le tour du terrain rouge, ou le tour du terrain bleu. Lequel est le plus long ?\n\nDans cette vidéo :\n• calculer les deux tours : 120 m et 130 m\n• le plus long tour peut avoir moins de côtés\n• le piège : un carré de 5 m et un rectangle de 9 m sur 1 m ont le même tour\n• sans règle : déplier les tours sur une ligne, au compas\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : ranger 3 parcours du plus court au plus long : un carré de 30 m, un rectangle de 50 m sur 20 m, un triangle de 40, 40 et 30 m.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_comparer&display=simple\n\n🔢 Épisode 3 de la série Périmètre d'EleveAI, en CE2 (et pour revoir au CM1).",
+      "chapitres": [
+        [
+          "00:00",
+          "Quel tour est le plus long ?"
+        ],
+        [
+          "00:19",
+          "Le tour rouge"
+        ],
+        [
+          "00:40",
+          "Le tour bleu"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:42",
+          "Le piège : même tour"
+        ],
+        [
+          "02:06",
+          "Sans règle : le compas"
+        ],
+        [
+          "02:25",
+          "Question 2"
+        ],
+        [
+          "03:01",
+          "À toi de jouer"
+        ],
+        [
+          "03:23",
+          "Correction"
+        ],
+        [
+          "03:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "comparer des périmètres",
+        "compas",
+        "reporter des longueurs",
+        "organisateur",
+        "course",
+        "périmètre",
+        "maths",
+        "CE2",
+        "CM1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Un triangle a trois côtés de 5 centimètres. Un carré a quatre côtés de 4 centimètres. Lequel a le plus grand périmètre ?",
+          "choix": [
+            "le carré",
+            "le triangle",
+            "ils sont pareils"
+          ],
+          "reponse": 0,
+          "explication": "Triangle : 5 + 5 plus 5, 15. Carré : 4 + 4 plus 4 + 4, 16. 16, c'est plus que 15 : c'est le carré."
+        },
+        {
+          "t": "02:25",
+          "question": "Malik déplie deux tours sur une ligne. Le segment du tour vert est plus long que celui du tour jaune. Quel tour est le plus long ?",
+          "choix": [
+            "le jaune",
+            "le vert",
+            "on ne peut pas savoir sans règle"
+          ],
+          "reponse": 1,
+          "explication": "Le segment, c'est le tour déplié. Le segment le plus long donne le tour le plus long, sans rien mesurer."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "ce2-perimetre-comparer-short",
+      "pas_avant": "2026-12-29",
+      "prioritaire": true,
+      "notionId": "perimetre",
+      "microId": "ce2_perimetre_comparer",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-perimetre-comparer",
+      "fichier": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer-short.mp4",
+      "miniature": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer-short-miniature.png",
+      "titre": "La table la plus petite a le plus petit tour, tu paries ? #maths #ce2",
+      "accroche": "Course autour des tables ! Je prends la table longue et fine : elle a l'air plus petite. Mon copain prend la table carrée. Qui fait le plus long tour ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un triangle de 6 pas de côté, ou un carré de 4 pas de côté : lequel a le plus long tour ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #périmètre #ce2 #primaire",
+      "tags": [
+        "périmètre",
+        "comparer",
+        "course",
+        "tables",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "périmètre",
+        "maths",
+        "CE2",
+        "CM1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Qui fait le plus long tour ?",
+          "choix": [
+            "moi, sur la table longue",
+            "mon copain, sur la table carrée",
+            "on fait pareil"
+          ],
+          "reponse": 2,
+          "explication": "5 + 5 plus 5 + 5, 20 pas. 9 + 1 plus 9 + 1, 20 pas. Le même tour : égalité !"
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
     }
   ]
 }
