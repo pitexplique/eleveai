@@ -86,6 +86,10 @@ class SuiteAlgorithmeShort(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiqu
         for k, b in enumerate(bars):
             b.move_to(P(0, prog.ycentre(k))).align_to(prog.lignes[k], LEFT)
         bars[2].align_to(prog.lignes[2][0], LEFT)
+        xd = prog.fond.get_right()[0] - 0.3          # même marge intérieure pour toutes les barres
+        for b in bars:
+            if b.get_right()[0] > xd:
+                b.stretch_to_fit_width(xd - b.get_left()[0], about_edge=LEFT)
         self.calcul([("un programme", WHITE, "un programme"), ("Python", FONCTION, None)], -1.3, centre=0, fs=44,
                     avec=[FadeIn(prog.cadre, scale=0.9)])
         self.calcul([("de", WHITE, None), ("3 lignes", RAISON, "3 lignes")], -2.05, centre=0, fs=44,
