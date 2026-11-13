@@ -58,7 +58,7 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
 - 18 et 19 en rendu (agents), 2 à la fois au plus (la factorisation 4e rend sur le même poste).
 - 13/11 : ⚠ `DEBUT` de `passe_suites.py` = 25/12 (collège d'abord, `0140492b`) : épisode k → 25/12 + 2(k − 1).
 - ✅ 18 termes PRÊT (`831c0e2e`, `c97c1ccc` retouches ; passe finale `f9b9f036`) : paysage 4:37 Q 01:05 → B, 02:48 → C ; short 1:02 Q 00:27 → A (commentaire 96) ; manifeste 28 → 29/01/2027 ; fiche, R2 (4 fichiers, 0 différence), table R2.
-- 19 recurrence (`3cb22cc3`) : paysage ACCEPTÉE ; short renvoyé (marges 6 %, silhouette fantôme coupée) → re-rendu du short, puis passe finale.
+- ✅ 19 recurrence PRÊT (`3cb22cc3`, `ab3891cd` short retouché ; passe finale `7cb89467`) : paysage 4:29 Q 00:56 → A, 02:35 → B ; short 1:05 Q 00:30 → C (commentaire 33) ; manifeste 30 → 31/01/2027 ; fiche, R2 (4 fichiers, 0 différence), table R2.
 - 20 algorithme en cours ; 21 modeliser lancé le 13/11 (rapport `ep-21.md`).
 
 ## ▶ REPRISE samedi 14/11 à 9 h : épisodes 16 à 27 (état au 12/11 4 h 20)
