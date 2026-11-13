@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je fais le tour du bac à sable. 6 mètres… 3 mètres… et hop, je coupe par le milieu ! Le tour fait 9 mètres !",
+  "01-erreur": "Ah non ! Couper par le milieu, ce n'est pas faire le tour. Le périmètre, c'est le bord, jusqu'au départ.",
+  "02-tour": "Je recommence. 6 mètres, 3 mètres, 6 mètres, 3 mètres. Me revoilà au départ !",
+  "03-question": "Question ! Combien mesure le tour du bac à sable ? A : 9 mètres. B : 18 mètres. C : 12 mètres. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B ! 6 plus 3, 9. Plus 6, 15. Plus 3, 18. Le tour fait 18 mètres.",
+  "04-commentaire": "À toi : mon carnet est un carré de 9 centimètres de côté. Quel est son périmètre ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'entoure ma cabane d'une guirlande. Le sol, 4 mètres. Le mur, 3. Le toit, 3 et 3. Il me faut 13 mètres !",
+  "01-oups": "Oh non ! Il manque un bout de guirlande. J'ai oublié un mur !",
+  "02-question": "Question ! Combien de mètres de guirlande pour faire tout le tour ? A : 16 mètres. B : 13 mètres. C : 19 mètres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Ma cabane a 5 côtés. 4 plus 3, 7. Plus 3, 10. Plus 3, 13. Plus 3, 16. Cinq côtés, cinq nombres !",
+  "03-ouf": "Ouf ! La guirlande fait tout le tour. Ça brille !",
+  "04-commentaire": "À toi : un triangle a des côtés de 5, 6 et 7 centimètres. Quel est son périmètre ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

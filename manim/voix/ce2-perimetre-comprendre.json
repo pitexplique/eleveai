@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le périmètre. Combien de clôture faut-il pour faire le tour d'un jardin ?",
+  "01-situation": "Voici Léo. Il est paysagiste. Il doit poser une clôture tout autour d'un jardin. Combien de mètres de clôture doit-il acheter ?",
+  "02-tour": "Pour le savoir, on fait le tour du jardin. On suit le bord, côté après côté, jusqu'à revenir au départ. La longueur de ce tour, c'est le périmètre.",
+  "03-calcul": "Le jardin a quatre côtés : 8 mètres, 5 mètres, 8 mètres et 5 mètres. On les ajoute. 8 plus 5, 13. Plus 8, 21. Plus 5, 26. Le périmètre est de 26 mètres. Léo achète 26 mètres de clôture.",
+  "04-bord": "Attention ! Le périmètre, c'est le bord, pas l'intérieur. La fourmi qui fait le tour du jardin marche sur le périmètre. L'herbe au milieu, ce n'est pas le périmètre.",
+  "05-question": "Question ! Un tapis a quatre côtés : 3 mètres, 2 mètres, 3 mètres et 2 mètres. Quel est son périmètre ? A : 5 mètres. B : 12 mètres. C : 10 mètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. On fait le tour. 3 plus 2, 5. Plus 3, 8. Plus 2, 10. Le périmètre du tapis est de 10 mètres.",
+  "06-piege": "Attention au piège ! Un triangle a trois côtés : 4 centimètres, 3 centimètres et 5 centimètres. On n'oublie aucun côté ! 4 plus 3, 7. Plus 5, 12. Le périmètre est de 12 centimètres.",
+  "07-question": "Question ! Un carré a quatre côtés de 4 centimètres. Quel est son périmètre ? A : 16 centimètres. B : 8 centimètres. C : 12 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Le carré a 4 côtés de 4 centimètres. 4 plus 4, 8. Plus 4, 12. Plus 4, 16. Le périmètre est de 16 centimètres.",
+  "08-defi": "À toi de jouer ! Inès est éleveuse de moutons. Son enclos a cinq côtés : 3 mètres, 4 mètres, 2 mètres, 5 mètres et 6 mètres. Combien de mètres de grillage pour en faire le tour ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On ajoute les cinq côtés. 3 plus 4, 7. Plus 2, 9. Plus 5, 14. Plus 6, 20. Il faut 20 mètres de grillage.",
+  "09-finale": "Ce que tu as appris. Le périmètre, c'est la longueur du tour d'une figure. On ajoute les longueurs de tous les côtés. On n'en oublie aucun.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

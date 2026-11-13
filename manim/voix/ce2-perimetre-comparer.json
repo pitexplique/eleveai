@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des périmètres. Quel tour est le plus long ?",
+  "01-situation": "Voici Malik. Il organise des courses pour les enfants. Il hésite entre deux parcours : le tour du terrain rouge, ou le tour du terrain bleu. Lequel est le plus long ?",
+  "02-rouge": "Pour comparer, on calcule les deux périmètres. Le terrain rouge est un rectangle : 40 mètres, 20 mètres, 40 mètres et 20 mètres. 40 plus 20, 60. Plus 40, 100. Plus 20, 120. Le tour rouge fait 120 mètres.",
+  "03-bleu": "Le terrain bleu a trois côtés : 50 mètres, 30 mètres et 50 mètres. 50 plus 30, 80. Plus 50, 130. Le tour bleu fait 130 mètres. 130, c'est plus que 120 : le tour bleu est le plus long, même avec 3 côtés seulement !",
+  "04-question": "Question ! Un triangle a trois côtés de 5 centimètres. Un carré a quatre côtés de 4 centimètres. Lequel a le plus grand périmètre ? A : le carré. B : le triangle. C : ils sont pareils. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Triangle : 5 plus 5 plus 5, 15. Carré : 4 plus 4 plus 4 plus 4, 16. 16, c'est plus que 15 : c'est le carré.",
+  "05-piege": "Attention au piège ! Voici un carré de 5 mètres de côté, et un rectangle tout long et tout fin, de 9 mètres sur 1 mètre. Carré : 5 plus 5 plus 5 plus 5, 20. Rectangle : 9 plus 1 plus 9 plus 1, 20. Le même périmètre ! On ne juge pas à l'œil : on calcule.",
+  "06-compas": "Et sans règle ? On déplie le tour sur une ligne. Avec le compas, on reporte les côtés l'un après l'autre. Le segment obtenu, c'est le périmètre. On fait pareil avec l'autre figure : le segment le plus long, c'est le plus long tour.",
+  "07-question": "Question ! Malik déplie deux tours sur une ligne. Le segment du tour vert est plus long que celui du tour jaune. Quel tour est le plus long ? A : le jaune. B : le vert. C : on ne peut pas savoir sans règle. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le segment, c'est le tour déplié. Le segment le plus long donne le tour le plus long, sans rien mesurer.",
+  "08-defi": "À toi de jouer ! Malik a trois parcours. Un carré de 30 mètres de côté. Un rectangle de 50 mètres sur 20 mètres. Un triangle de 40, 40 et 30 mètres. Range-les du plus court au plus long. Mets pause, et cherche !",
+  "08b-correction": "Correction. Carré : 30 plus 30 plus 30 plus 30, 120. Rectangle : 50 plus 20 plus 50 plus 20, 140. Triangle : 40 plus 40 plus 30, 110. Du plus court au plus long : le triangle, le carré, puis le rectangle.",
+  "09-finale": "Ce que tu as appris. Pour comparer des périmètres, on les calcule tous, puis on compare les nombres. Sans règle, on déplie les tours au compas. Une figure peut avoir l'air plus petite et avoir le même tour.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
