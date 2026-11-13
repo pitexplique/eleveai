@@ -1188,7 +1188,8 @@
         "Shorts"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-14"
+      "pas_avant": "2026-11-14",
+      "url": "https://youtube.com/shorts/PHpl2Nz-Mw8"
     },
     {
       "id": "pisa-2025",
@@ -66225,7 +66226,8 @@
         "sport",
         "jeux-defis"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/7G96WKEjooU"
     },
     {
       "id": "6e-decimal-rang-short",
@@ -66273,7 +66275,8 @@
       "centres": [
         "jeux-defis"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/SkFGBdejdDM"
     },
     {
       "id": "6e-decimal-comparer",
@@ -71058,7 +71061,8 @@
       "centres": [
         "construction",
         "art-design"
-      ]
+      ],
+      "url": "https://youtu.be/tbHmBBjRL0o"
     },
     {
       "id": "4e-distrib-simple-short",
@@ -71105,7 +71109,8 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/dhUF6oNpJko"
     },
     {
       "id": "4e-distrib-double",
@@ -73358,6 +73363,1205 @@
       ],
       "centres": [
         "jeux-video"
+      ]
+    },
+    {
+      "id": "4e-facto-commun",
+      "pas_avant": "2026-12-20",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_facteur_commun",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.mp4",
+      "miniature": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.png",
+      "titre": "5x + 10 : qu'est-ce qui se répète ? — Le facteur commun — épisode 1 · Maths 4e",
+      "accroche": "Inès est logisticienne. Ce matin, 5 camions partent de l'entrepôt : dans chacun, x palettes de riz et 2 palettes d'eau. En tout : 5x + 10. Qu'est-ce qui se répète dans cette somme ?\n\nDans cette vidéo :\n• écrire chaque terme comme un produit : 5x = 5 × x, 10 = 5 × 2\n• le facteur commun : le 5 revient dans chaque terme\n• une lettre aussi peut être commune : x² + 7x\n• le piège : prendre le premier nombre qu'on voit (6x + 9 : c'est 3, pas 6)\n• pour être commun, il faut être dans CHAQUE terme : dans 3x + 5, x n'est pas commun\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : trouve le facteur commun de 10x + 15.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_facteur_commun&display=simple\n\n🔢 Épisode 1 sur 5 de la série Factorisation d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Voir ce qui se répète"
+        ],
+        [
+          "00:06",
+          "Inès, logisticienne"
+        ],
+        [
+          "00:24",
+          "Chaque terme en produit"
+        ],
+        [
+          "00:47",
+          "Une lettre en commun"
+        ],
+        [
+          "01:05",
+          "Question 1"
+        ],
+        [
+          "01:29",
+          "Le piège"
+        ],
+        [
+          "01:49",
+          "Dans chaque terme"
+        ],
+        [
+          "02:04",
+          "Question 2"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "02:54",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
+      "tags": [
+        "facteur commun",
+        "factorisation",
+        "factoriser",
+        "calcul littéral",
+        "logisticienne",
+        "camions",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:05",
+          "question": "Dans 7x + 14, quel est le facteur commun ?",
+          "choix": [
+            "7",
+            "14",
+            "x"
+          ],
+          "reponse": 0,
+          "explication": "7x, c'est 7 × x, et 14, c'est 7 × 2."
+        },
+        {
+          "t": "02:04",
+          "question": "Dans y² + 3y, quel est le facteur commun ?",
+          "choix": [
+            "3",
+            "y",
+            "y²"
+          ],
+          "reponse": 1,
+          "explication": "y², c'est y × y, et 3y, c'est 3 × y. Le 3 n'est pas dans y²."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "4e-facto-commun-short",
+      "pas_avant": "2026-12-20",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_facteur_commun",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-facto-commun",
+      "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.mp4",
+      "miniature": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.png",
+      "titre": "14, 21 et 35 : le nombre caché en 5 secondes ? 🔍 — 4e #Shorts",
+      "accroche": "14, 21 et 35. Un même nombre se cache dans les trois. 14 = 7 × 2, 21 = 7 × 3, 35 = 7 × 5 : le 7 est leur facteur commun.\nEt avec une lettre, ça marche aussi.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : quel est le facteur commun de 15x + 35 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_facteur_commun&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
+      "tags": [
+        "nombre caché",
+        "facteur commun",
+        "tables de multiplication",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Dans 5x + 15, quel est le facteur commun ?",
+          "choix": [
+            "5",
+            "15",
+            "x"
+          ],
+          "reponse": 0,
+          "explication": "5x, c'est 5 × x, et 15, c'est 5 × 3."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-facto-simple",
+      "pas_avant": "2026-12-21",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_factoriser_simple",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple.mp4",
+      "miniature": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple.png",
+      "titre": "9 × 37 + 9 × 63 de tête — Factoriser — épisode 2 · Maths 4e",
+      "accroche": "Maya est développeuse. Son programme doit calculer 9 × 37 + 9 × 63 : deux multiplications. Maya repère le facteur commun et écrit 9 × (37 + 63) = 9 × 100 = 900. Une seule multiplication, et de tête !\n\nDans cette vidéo :\n• factoriser 3x + 21 : le facteur commun 3 sort devant, 3(x + 7)\n• factoriser, c'est transformer une somme en produit : le chemin inverse de développer\n• avec un moins : 2x − 18 = 2(x − 9)\n• le piège : 6x + 6 = 6(x + 1), sans oublier le 1\n• une lettre en facteur : x² + 5x = x(x + 5)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : factorise 7x − 56.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_simple&display=simple\n\n🔢 Épisode 2 sur 5 de la série Factorisation d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une somme en produit"
+        ],
+        [
+          "00:06",
+          "Maya, développeuse"
+        ],
+        [
+          "00:31",
+          "La méthode"
+        ],
+        [
+          "01:02",
+          "Factoriser, développer"
+        ],
+        [
+          "01:16",
+          "Question 1"
+        ],
+        [
+          "01:56",
+          "Avec un moins"
+        ],
+        [
+          "02:11",
+          "Le piège du 1"
+        ],
+        [
+          "02:31",
+          "Une lettre en facteur"
+        ],
+        [
+          "02:48",
+          "Question 2"
+        ],
+        [
+          "03:31",
+          "Correction"
+        ],
+        [
+          "03:47",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
+      "tags": [
+        "factoriser",
+        "factorisation",
+        "facteur commun",
+        "calcul littéral",
+        "développeuse",
+        "programmation",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:16",
+          "question": "Factorise 5x + 35.",
+          "choix": [
+            "5(x + 35)",
+            "x(5 + 35)",
+            "5(x + 7)"
+          ],
+          "reponse": 2,
+          "explication": "35, c'est 5 × 7 : dans la parenthèse, on écrit 7, pas 35."
+        },
+        {
+          "t": "02:48",
+          "question": "Factorise y² + 8y.",
+          "choix": [
+            "y(y + 8)",
+            "y(y + 8y)",
+            "8(y² + y)"
+          ],
+          "reponse": 0,
+          "explication": "Le y sort devant : dans la parenthèse, il reste y et 8."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "4e-facto-simple-short",
+      "pas_avant": "2026-12-21",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_factoriser_simple",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-facto-simple",
+      "fichier": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple-short.mp4",
+      "miniature": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple-short.png",
+      "titre": "17 × 6 + 17 × 4 de tête, sans poser : le raccourci ⚡ — 4e #Shorts",
+      "accroche": "17 × 6 + 17 × 4, de tête, sans poser l'opération. Le raccourci : le 17 est dans les deux produits. On le sort devant : 17 × (6 + 4) = 17 × 10 = 170.\nC'est ça, factoriser.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : calcule de tête 23 × 7 + 23 × 3. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_simple&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
+      "tags": [
+        "calcul mental",
+        "raccourci",
+        "factoriser",
+        "de tête",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Factorise 3x + 15.",
+          "choix": [
+            "3(x + 15)",
+            "x(3 + 15)",
+            "3(x + 5)"
+          ],
+          "reponse": 2,
+          "explication": "15, c'est 3 × 5."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-facto-verifier",
+      "pas_avant": "2026-12-22",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_factoriser_verifier",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier.mp4",
+      "miniature": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier.png",
+      "titre": "6(x + 30) = 6x + 30 ? — Vérifier une factorisation — épisode 3 · Maths 4e",
+      "accroche": "Tom est game designer. Dans son jeu, un niveau rapporte 6 points par étoile, plus 30 points de bonus : 6x + 30. Tom simplifie sa formule en 6(x + 30). Avant de publier son jeu, il vérifie.\n\nDans cette vidéo :\n• pour vérifier une factorisation, on développe : 6(x + 30) donne 6x + 180, c'est faux\n• la bonne formule : 30 = 6 × 5, donc 6(x + 5)\n• l'erreur de signe : 4x − 12 n'est pas 4(x + 3)\n• avec une lettre en facteur : x² + 9x n'est pas x(x + 9x)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 5x + 45 = 5(x + 45) : juste ou faux ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_verifier&display=simple\n\n🔢 Épisode 3 sur 5 de la série Factorisation d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Être sûr de soi"
+        ],
+        [
+          "00:07",
+          "Tom, game designer"
+        ],
+        [
+          "00:30",
+          "On développe"
+        ],
+        [
+          "00:48",
+          "La bonne formule"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:48",
+          "L'erreur de signe"
+        ],
+        [
+          "02:08",
+          "Avec une lettre"
+        ],
+        [
+          "02:38",
+          "Question 2"
+        ],
+        [
+          "03:16",
+          "À toi de jouer"
+        ],
+        [
+          "03:31",
+          "Correction"
+        ],
+        [
+          "03:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
+      "tags": [
+        "vérifier une factorisation",
+        "développer pour vérifier",
+        "factorisation",
+        "calcul littéral",
+        "game designer",
+        "jeu vidéo",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "8x + 40 = 8(x + 5). Est-ce juste ?",
+          "choix": [
+            "oui",
+            "non, c'est 8(x + 40)",
+            "non, c'est 8x(1 + 5)"
+          ],
+          "reponse": 0,
+          "explication": "8 × x = 8x, et 8 × 5 = 40 : on retrouve 8x + 40."
+        },
+        {
+          "t": "02:38",
+          "question": "Léo factorise 9x − 27 en 9(x + 3). A-t-il raison ?",
+          "choix": [
+            "oui",
+            "non",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "9(x + 3) donne 9x + 27 : le moins a disparu, il fallait 9(x − 3)."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "4e-facto-verifier-short",
+      "pas_avant": "2026-12-22",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_factoriser_verifier",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-facto-verifier",
+      "fichier": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier-short.mp4",
+      "miniature": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier-short.png",
+      "titre": "4x + 20 = 4(x + 20) : ton copain a raison ? 🤔 — 4e #Shorts",
+      "accroche": "Ton copain écrit : 4x + 20 = 4(x + 20). Tu le crois ? Le secret pour en être sûr : on développe. 4 × x = 4x, 4 × 20 = 80 : on trouve 4x + 80, c'est faux !\nLa bonne réponse : 4(x + 5).\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : 6x + 42 = 6(x + 7) : juste ou faux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_verifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
+      "tags": [
+        "vérifier",
+        "développer",
+        "erreur",
+        "factorisation",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Laquelle est juste pour 3x − 21 ?",
+          "choix": [
+            "3(x − 21)",
+            "3(x + 7)",
+            "3(x − 7)"
+          ],
+          "reponse": 2,
+          "explication": "On développe : 3(x − 7) = 3x − 21."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-facto-maximum",
+      "pas_avant": "2026-12-23",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_factorisation_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum.mp4",
+      "miniature": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum.png",
+      "titre": "2x² + 6x = 2x(x + 3) — Factoriser au maximum — épisode 4 · Maths 4e",
+      "accroche": "Camille est paysagiste. Elle dessine une terrasse rectangulaire en deux parties, d'aires 2x² et 6x. Quelle largeur ont-elles en commun ? Pour la trouver, on sort tout ce qui est commun.\n\nDans cette vidéo :\n• chaque terme en produit : 2x² = 2 × x × x, 6x = 2 × 3 × x\n• le nombre ET la lettre sortent : 2x² + 6x = 2x(x + 3)\n• on vérifie en développant\n• le piège : s'arrêter trop tôt, 12x + 18 = 2(6x + 9) n'est pas fini\n• c'est fini quand les termes de la parenthèse n'ont plus rien en commun\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : factorise au maximum 3x² + 12x.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple\n\n🔢 Épisode 4 sur 5 de la série Factorisation d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Tout sortir"
+        ],
+        [
+          "00:07",
+          "Camille, paysagiste"
+        ],
+        [
+          "00:25",
+          "Un nombre et une lettre"
+        ],
+        [
+          "00:44",
+          "On sort 2x"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Le piège : s'arrêter trop tôt"
+        ],
+        [
+          "02:11",
+          "Quand est-ce fini ?"
+        ],
+        [
+          "02:23",
+          "Question 2"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
+      "tags": [
+        "factoriser au maximum",
+        "plus grand facteur commun",
+        "factorisation",
+        "calcul littéral",
+        "paysagiste",
+        "aire d'un rectangle",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Factorise au maximum 5x² + 10x.",
+          "choix": [
+            "5(x² + 2x)",
+            "5x(x + 2)",
+            "x(5x + 10)"
+          ],
+          "reponse": 1,
+          "explication": "A et C sont justes, mais pas finies : il reste un facteur commun dans la parenthèse."
+        },
+        {
+          "t": "02:23",
+          "question": "Quel est le plus grand facteur commun de 8x + 20 ?",
+          "choix": [
+            "2",
+            "8",
+            "4"
+          ],
+          "reponse": 2,
+          "explication": "8x = 4 × 2x et 20 = 4 × 5 : 2x et 5 n'ont plus rien en commun."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-facto-maximum-short",
+      "pas_avant": "2026-12-23",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_factorisation_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-facto-maximum",
+      "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum-short.mp4",
+      "miniature": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum-short.png",
+      "titre": "4x² + 8x : beaucoup s'arrêtent trop tôt. Et toi ? 🎯 — 4e #Shorts",
+      "accroche": "Factorise 4x² + 8x. Beaucoup d'élèves s'arrêtent trop tôt. Le secret : on sort tout ce qui est commun. Le plus grand nombre : 4. La lettre : x. Donc 4x² + 8x = 4x(x + 2).\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : factorise au maximum 10x² + 15x. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
+      "tags": [
+        "factoriser au maximum",
+        "tout sortir",
+        "factorisation",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Factorise au maximum 6x² + 9x.",
+          "choix": [
+            "3(2x² + 3x)",
+            "x(6x + 9)",
+            "3x(2x + 3)"
+          ],
+          "reponse": 2,
+          "explication": "Le 3 et le x sortent tous les deux."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-facto-defi",
+      "pas_avant": "2026-12-24",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_factorisation_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi.mp4",
+      "miniature": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi.png",
+      "titre": "8x + 96 = 8(x + 12) — Défis de factorisation — épisode 5 · Maths 4e",
+      "accroche": "Malik est comptable dans un club de football. Le club achète 8 tenues : un maillot à x euros et un short à 12 euros. Le prix total : 8x + 96. Malik veut l'écrire comme un produit. Trois défis : un vrai problème, les erreurs, un facteur négatif.\n\nDans cette vidéo :\n• un problème : 8x + 96 = 8(x + 12), 8 tenues fois le prix d'une tenue\n• corriger les erreurs : 7x + 7 n'est pas 7x, c'est 7(x + 1)\n• le défi des champions : un nombre négatif en facteur, −4x − 20 = −4(x + 5)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 9 jardinières de x fraisiers et 5 plants de menthe : écris le total, puis factorise-le.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple\n\n🔢 Épisode 5 sur 5 de la série Factorisation d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois défis"
+        ],
+        [
+          "00:08",
+          "Malik, comptable d'un club de foot"
+        ],
+        [
+          "00:27",
+          "Le prix en produit"
+        ],
+        [
+          "00:48",
+          "Question 1"
+        ],
+        [
+          "01:32",
+          "Corrige les erreurs"
+        ],
+        [
+          "02:01",
+          "Un facteur négatif"
+        ],
+        [
+          "02:25",
+          "Question 2"
+        ],
+        [
+          "03:02",
+          "À toi de jouer"
+        ],
+        [
+          "03:21",
+          "Correction"
+        ],
+        [
+          "03:38",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
+      "tags": [
+        "factorisation",
+        "problème",
+        "erreurs de factorisation",
+        "facteur négatif",
+        "calcul littéral",
+        "comptable",
+        "football",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "6 équipes de x filles et 4 garçons : 6x + 24 élèves. Sa forme factorisée ?",
+          "choix": [
+            "6(x + 24)",
+            "6(x + 4)",
+            "x(6 + 24)"
+          ],
+          "reponse": 1,
+          "explication": "6 équipes, de x + 4 élèves."
+        },
+        {
+          "t": "02:25",
+          "question": "Mets −3 en facteur dans −3x + 12.",
+          "choix": [
+            "−3(x − 4)",
+            "−3(x + 4)",
+            "3(x − 4)"
+          ],
+          "reponse": 0,
+          "explication": "−3 × (−4) = +12."
+        }
+      ],
+      "centres": [
+        "football",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "4e-facto-defi-short",
+      "pas_avant": "2026-12-24",
+      "prioritaire": true,
+      "notionId": "litteral_factorisation",
+      "microId": "litteral_factorisation_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-facto-defi",
+      "fichier": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi-short.mp4",
+      "miniature": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi-short.png",
+      "titre": "x² + 6x = x(x + 6x) : tu vois l'erreur cachée ? 🕵️ — 4e #Shorts",
+      "accroche": "Un élève écrit au tableau : x² + 6x = x(x + 6x). Il s'est trompé. On développe : x × x = x², x × 6x = 6x² : faux ! Le x est sorti, il ne reste que 6 : x(x + 6).\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : factorise 4x² + 4x. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
+      "tags": [
+        "erreur cachée",
+        "factorisation",
+        "développer pour vérifier",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Mets −2 en facteur dans −2x − 10.",
+          "choix": [
+            "−2(x − 5)",
+            "−2(x + 5)",
+            "2(x + 5)"
+          ],
+          "reponse": 1,
+          "explication": "−2 × 5 = −10."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-aire-comprendre",
+      "pas_avant": "2026-12-26",
+      "notionId": "aire",
+      "microId": "aire_comprendre",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.mp4",
+      "miniature": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.png",
+      "titre": "15 carreaux pour la cuisine : c'est quoi, l'aire ? — Comprendre l'aire — épisode 1 · Maths CM1",
+      "accroche": "Mathis est carreleur. Il doit couvrir le sol d'une cuisine avec des carreaux. Combien de carreaux ?\n\nDans cette vidéo :\n• couvrir une surface sans trou et sans superposer\n• l'aire, c'est la place que prend une surface : tout l'intérieur\n• le périmètre, c'est le tour (la plinthe) ; l'aire, c'est l'intérieur (le carrelage)\n• le piège : la figure la plus longue n'a pas toujours la plus grande aire\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : l'aire d'une terrasse de 3 rangées de carreaux.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple\n\n📐 Épisode 1 de la série Aire d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de place prend une surface ?"
+        ],
+        [
+          "00:05",
+          "Mathis, carreleur"
+        ],
+        [
+          "00:16",
+          "Couvrir le sol"
+        ],
+        [
+          "00:32",
+          "L'aire, c'est l'intérieur"
+        ],
+        [
+          "00:43",
+          "Le tour ou l'intérieur ?"
+        ],
+        [
+          "00:57",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Le piège"
+        ],
+        [
+          "01:49",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "À toi de jouer"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "02:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "aire",
+        "surface",
+        "carreaux",
+        "périmètre",
+        "carreleur",
+        "construction",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "Pour peindre un mur, que cherche-t-on ?",
+          "choix": [
+            "son périmètre",
+            "son aire",
+            "sa hauteur"
+          ],
+          "reponse": 1,
+          "explication": "La peinture couvre tout le mur. On cherche son aire."
+        },
+        {
+          "t": "01:49",
+          "question": "Quelle figure a la plus grande aire ?",
+          "choix": [
+            "la verte : 8 carreaux",
+            "la bleue : 7 carreaux",
+            "la rouge : 6 carreaux"
+          ],
+          "reponse": 0,
+          "explication": "On compte les carreaux. La verte en couvre 8 : c'est la plus grande aire."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-aire-comprendre-short",
+      "pas_avant": "2026-12-26",
+      "notionId": "aire",
+      "microId": "aire_comprendre",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-aire-comprendre",
+      "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre-short.mp4",
+      "miniature": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre-short-miniature.png",
+      "titre": "10 m de ficelle pour couvrir ma cabane : tu paries ? #maths #cm1",
+      "accroche": "Ti Margo veut couvrir le sol de sa cabane. Il fait le tour : 10 mètres, et il achète 10 mètres de ficelle... La ficelle fait le tour, mais le sol reste tout nu ! Le tour, c'est le périmètre. Pour couvrir, il faut l'aire : des carreaux.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un sol de 2 rangées de 4 carreaux. Combien de carreaux pour le couvrir ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "tags": [
+        "aire",
+        "périmètre",
+        "carreaux",
+        "cabane",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Mon sol a 2 rangées de 3 carreaux. Combien de carreaux pour le couvrir ?",
+          "choix": [
+            "10",
+            "5",
+            "6"
+          ],
+          "reponse": 2,
+          "explication": "3 carreaux, plus 3 carreaux : 6 carreaux. Mon sol est couvert !"
+        }
+      ],
+      "centres": [
+        "construction",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-aire-unite",
+      "pas_avant": "2026-12-28",
+      "notionId": "aire",
+      "microId": "aire_unite",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite.mp4",
+      "miniature": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite.png",
+      "titre": "12 cases ou 10 cases : quelle île est la plus grande ? — Comparer des aires — épisode 2 · Maths CM1",
+      "accroche": "Awa est créatrice de jeux vidéo. Sur la carte de son jeu, elle dessine deux îles avec des cases. Le joueur veut l'île la plus grande : laquelle ?\n\nDans cette vidéo :\n• comparer des aires en comptant avec une unité : la case\n• deux formes différentes peuvent avoir la même aire\n• le piège : 4 grandes cases contre 9 petites cases, ce n'est pas la même unité\n• pour comparer, on mesure avec la même unité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : la grotte (2 grandes cases) ou la rivière (7 petites cases) ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_unite&display=simple\n\n📐 Épisode 2 de la série Aire d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui a la plus grande surface ?"
+        ],
+        [
+          "00:05",
+          "Awa, créatrice de jeux vidéo"
+        ],
+        [
+          "00:19",
+          "Compter avec une unité"
+        ],
+        [
+          "00:37",
+          "Même aire, formes différentes"
+        ],
+        [
+          "00:54",
+          "Question 1"
+        ],
+        [
+          "01:24",
+          "Le piège des grandes cases"
+        ],
+        [
+          "01:53",
+          "La même unité"
+        ],
+        [
+          "02:01",
+          "Question 2"
+        ],
+        [
+          "02:34",
+          "À toi de jouer"
+        ],
+        [
+          "02:53",
+          "Correction"
+        ],
+        [
+          "03:12",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "comparer des aires",
+        "unité d'aire",
+        "cases",
+        "même aire",
+        "jeux vidéo",
+        "créatrice de jeux vidéo",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Le lac : 9 cases, la forêt : 11 cases, la plage : 7 cases. Qui a la plus grande aire ?",
+          "choix": [
+            "le lac",
+            "la plage",
+            "la forêt"
+          ],
+          "reponse": 2,
+          "explication": "11 cases, c'est le plus grand nombre de cases. La forêt a la plus grande aire."
+        },
+        {
+          "t": "02:01",
+          "question": "Deux figures couvrent chacune 6 cases, avec des formes différentes. Que peut-on dire ?",
+          "choix": [
+            "la plus longue est la plus grande",
+            "elles ont la même aire",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "Elles couvrent le même nombre de cases, avec la même unité. Elles ont la même aire."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-aire-unite-short",
+      "pas_avant": "2026-12-28",
+      "notionId": "aire",
+      "microId": "aire_unite",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-aire-unite",
+      "fichier": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite-short.mp4",
+      "miniature": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite-short-miniature.png",
+      "titre": "Ma sœur a 10 carrés de chocolat, moi 6 : pas juste ? #maths #cm1",
+      "accroche": "La sœur de Ti Margo a une tablette de 10 carrés, lui seulement 6... Mais ses carrés sont deux fois plus gros : un gros carré, c'est 2 petits !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une tablette de 5 gros carrés, une autre de 9 petits carrés. Un gros carré, c'est 2 petits. Laquelle est la plus grande ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "tags": [
+        "comparer des aires",
+        "unité",
+        "chocolat",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Mes 6 gros carrés, ça fait combien de petits carrés ?",
+          "choix": [
+            "12",
+            "8",
+            "6"
+          ],
+          "reponse": 0,
+          "explication": "6 fois 2 : 12 petits carrés. Ma tablette est plus grande que la sienne !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-aire-carre-rectangle",
+      "pas_avant": "2026-12-30",
+      "notionId": "aire",
+      "microId": "aire_carre_rectangle",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.mp4",
+      "miniature": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.png",
+      "titre": "4 rangées de 6 salades : combien de mètres carrés ? — L'aire du rectangle et du carré — épisode 3 · Maths CM1",
+      "accroche": "Lina est maraîchère. Elle plante des salades dans une parcelle rectangulaire, une salade par mètre carré. Combien de mètres carrés fait la parcelle, sans compter les cases une par une ?\n\nDans cette vidéo :\n• compter rangée par rangée : 6 + 6 + 6 + 6\n• plus rapide : on multiplie, 4 × 6 = 24 m²\n• l'aire d'un carré : le côté fois le côté\n• le piège : on n'ajoute pas 4 + 6, et on ne fait pas le tour (c'est le périmètre)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un jardin de 6 rangées de 8 cases, dont 20 déjà plantées.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple\n\n📐 Épisode 3 de la série Aire d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Compter les carreaux sans les compter ?"
+        ],
+        [
+          "00:06",
+          "Lina, maraîchère"
+        ],
+        [
+          "00:24",
+          "Rangée par rangée"
+        ],
+        [
+          "00:39",
+          "On multiplie"
+        ],
+        [
+          "00:57",
+          "L'aire d'un carré"
+        ],
+        [
+          "01:14",
+          "Question 1"
+        ],
+        [
+          "01:43",
+          "Le piège : ajouter ou faire le tour"
+        ],
+        [
+          "02:04",
+          "Question 2"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:48",
+          "Correction"
+        ],
+        [
+          "03:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "aire du rectangle",
+        "aire du carré",
+        "mètre carré",
+        "multiplier",
+        "rangées",
+        "maraîchère",
+        "potager",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:14",
+          "question": "Un rectangle a 3 rangées de 7 carreaux. Quelle est son aire ?",
+          "choix": [
+            "21 carreaux",
+            "10 carreaux",
+            "20 carreaux"
+          ],
+          "reponse": 0,
+          "explication": "3 rangées de 7 : 3 × 7 = 21. L'aire est de 21 carreaux."
+        },
+        {
+          "t": "02:04",
+          "question": "Un carré a 3 carreaux de côté. Quelle est son aire ?",
+          "choix": [
+            "12 carreaux",
+            "6 carreaux",
+            "9 carreaux"
+          ],
+          "reponse": 2,
+          "explication": "3 rangées de 3 carreaux : 3 × 3 = 9. L'aire du carré est de 9 carreaux."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm1-aire-carre-rectangle-short",
+      "pas_avant": "2026-12-30",
+      "notionId": "aire",
+      "microId": "aire_carre_rectangle",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-aire-carre-rectangle",
+      "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle-short.mp4",
+      "miniature": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle-short-miniature.png",
+      "titre": "Je compte 40 carreaux un par un… et je me perds ! #maths #cm1",
+      "accroche": "Ti Margo compte les carreaux de sa terrasse un par un : 1, 2, 3… 37, 38… perdu ! Sa petite sœur rigole : regarde les rangées ! 8 rangées de 5 carreaux, pas besoin de tout compter.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un carré de 6 carreaux de côté. Combien de carreaux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "tags": [
+        "aire du rectangle",
+        "rangées",
+        "multiplier",
+        "carreaux",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "8 rangées de 5 carreaux, ça fait combien de carreaux ?",
+          "choix": [
+            "13",
+            "40",
+            "35"
+          ],
+          "reponse": 1,
+          "explication": "8 × 5 : 40 carreaux. En une seconde !"
+        }
+      ],
+      "centres": [
+        "construction",
+        "jeux-defis"
       ]
     },
     {
@@ -75922,13 +77126,1545 @@
       ]
     },
     {
+      "id": "premiere-spe-suite-termes",
+      "notionId": "suites",
+      "microId": "suite_termes",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-01-28",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/18-termes/eleveai-maths-premiere-spe-suite-termes.mp4",
+      "miniature": "premiere-spe/maths/suites/18-termes/eleveai-maths-premiere-spe-suite-termes.png",
+      "titre": "Combien de points au niveau 9 ? — Calculer un terme d'une suite — épisode 18 · Maths 1re spé",
+      "accroche": "Chloé est game designer : au niveau n, le joueur doit gagner uₙ = 2n² + 10 points d'expérience. Comment trouver directement les points du niveau 9, sans passer par tous les autres ?\n\nDans cette vidéo :\n• forme explicite : on remplace n par sa valeur, partout (u₃ = 2 × 3² + 10 = 28)\n• sur un graphique : les points (n ; uₙ), le rang en abscisse, la valeur en ordonnée\n• le piège : uₙ₊₁, ce n'est pas uₙ + 1 : on remplace n par n + 1\n• récurrence : vₙ₊₁ = 2vₙ + 1, on avance de proche en proche depuis v₀ = 4\n• trouver un rang : on résout uₙ = 172, et on trouve n = 9\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Dans un autre jeu, uₙ = 5n − 3, pour n ≥ 0. Calcule u₁₀, écris uₙ₊₁ en fonction de n, puis trouve le rang n tel que uₙ = 72.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_termes&display=simple\n\n📈 Épisode 18 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Suites : calculer un terme · Chloé, game designer"
+        ],
+        [
+          "00:30",
+          "La forme explicite : u₃"
+        ],
+        [
+          "00:49",
+          "Les termes sur un graphique"
+        ],
+        [
+          "01:05",
+          "Question : u₅"
+        ],
+        [
+          "01:39",
+          "Le piège : uₙ₊₁"
+        ],
+        [
+          "01:54",
+          "Une récurrence : le bonus"
+        ],
+        [
+          "02:26",
+          "Trouver le rang n"
+        ],
+        [
+          "02:48",
+          "Question : le seuil de 100"
+        ],
+        [
+          "03:21",
+          "À toi de jouer"
+        ],
+        [
+          "03:46",
+          "Correction"
+        ],
+        [
+          "04:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "calculer un terme",
+        "forme explicite",
+        "récurrence",
+        "rang",
+        "jeu vidéo",
+        "game designer",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:05",
+          "question": "Pour uₙ = 2n² + 10, combien vaut u₅ ?",
+          "choix": [
+            "20",
+            "60",
+            "50"
+          ],
+          "reponse": 1,
+          "explication": "5² = 25 ; 2 × 25 = 50 ; 50 + 10 = 60. Le carré d'abord, puis la multiplication, puis l'ajout."
+        },
+        {
+          "t": "02:48",
+          "question": "Avec uₙ = 2n² + 10, à partir de quel niveau faut-il plus de 100 points ?",
+          "choix": [
+            "45",
+            "6",
+            "7"
+          ],
+          "reponse": 2,
+          "explication": "u₆ = 82 : pas encore. u₇ = 108 : ça dépasse 100. Le premier rang qui franchit le seuil, c'est 7."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ],
+      "aussi": [
+        {
+          "classe": "terminale-spe",
+          "notionId": "suite_numerique",
+          "microId": "suite_calculer_termes"
+        }
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-termes-short",
+      "notionId": "suites",
+      "microId": "suite_termes",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-01-29",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-termes",
+      "fichier": "premiere-spe/maths/suites/18-termes/eleveai-maths-premiere-spe-suite-termes-short.mp4",
+      "miniature": "premiere-spe/maths/suites/18-termes/eleveai-maths-premiere-spe-suite-termes-short.png",
+      "titre": "Tu trouves u₃ de tête ? 🔭 — 1re spé #Shorts",
+      "accroche": "Malik est astronome : la nuit n, son télescope repère uₙ = 3 × 2ⁿ nouvelles étoiles. Tu trouves u₃ de tête ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien vaut u₅ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_termes&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "astronomie",
+        "étoiles",
+        "télescope",
+        "puissance",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Avec uₙ = 3 × 2ⁿ, combien vaut u₃ ?",
+          "choix": [
+            "24",
+            "216",
+            "18"
+          ],
+          "reponse": 0,
+          "explication": "2³ = 8, et 3 × 8 = 24 : la puissance d'abord, la multiplication ensuite."
+        }
+      ],
+      "centres": [
+        "espace"
+      ],
+      "aussi": [
+        {
+          "classe": "terminale-spe",
+          "notionId": "suite_numerique",
+          "microId": "suite_calculer_termes"
+        }
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-recurrence",
+      "notionId": "suites",
+      "microId": "suite_recurrence",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-01-30",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/19-recurrence/eleveai-maths-premiere-spe-suite-recurrence.mp4",
+      "miniature": "premiere-spe/maths/suites/19-recurrence/eleveai-maths-premiere-spe-suite-recurrence.png",
+      "titre": "Une tortue prend 15 g par semaine : sa masse dans un an ? — Suite définie par récurrence — épisode 19 · Maths 1re spé",
+      "accroche": "Awa est vétérinaire dans un centre de soins pour tortues marines : à son arrivée, une jeune tortue pèse 40 g, et elle prend 15 g chaque semaine. Comment calculer un terme à partir du précédent, et quand passer à une formule directe ?\n\nDans cette vidéo :\n• une récurrence : un premier terme (u₀ = 40) et une règle pour passer au suivant (uₙ₊₁ = uₙ + 15)\n• on calcule de proche en proche : u₁ = 55, u₂ = 70, u₃ = 85\n• pour un terme lointain : on reconnaît une suite arithmétique, forme explicite uₙ = 40 + 15n, u₅₂ = 820 g\n• dans l'autre sens : vₙ = 5 × 2ⁿ donne vₙ₊₁ = 2vₙ avec v₀ = 5\n• le piège : si la suite commence à u₁, uₙ = 40 + 15(n − 1)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Une suite est définie par u₁ = 7 et, pour n ≥ 1, uₙ₊₁ = uₙ − 4. Donne sa forme explicite, puis calcule u₃₀.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_recurrence&display=simple\n\n📈 Épisode 19 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Suite définie par récurrence · Awa et la jeune tortue"
+        ],
+        [
+          "00:24",
+          "Un premier terme, une règle"
+        ],
+        [
+          "00:46",
+          "De proche en proche"
+        ],
+        [
+          "00:56",
+          "Question : combien vaut u₂ ?"
+        ],
+        [
+          "01:28",
+          "52 semaines : la forme explicite"
+        ],
+        [
+          "01:51",
+          "Dans l'autre sens : explicite → récurrence"
+        ],
+        [
+          "02:13",
+          "Le piège : la suite commence à u₁"
+        ],
+        [
+          "02:35",
+          "Question : quelle suite est explicite ?"
+        ],
+        [
+          "03:12",
+          "À toi de jouer"
+        ],
+        [
+          "03:34",
+          "Correction"
+        ],
+        [
+          "03:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "récurrence",
+        "forme explicite",
+        "de proche en proche",
+        "tortues marines",
+        "vétérinaire",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Une suite est définie par u₀ = 3 et uₙ₊₁ = 2uₙ − 1. Combien vaut u₂ ?",
+          "choix": [
+            "9",
+            "5",
+            "10"
+          ],
+          "reponse": 0,
+          "explication": "u₁ = 2 × 3 − 1 = 5, puis u₂ = 2 × 5 − 1 = 9."
+        },
+        {
+          "t": "02:35",
+          "question": "Laquelle de ces suites est définie de façon explicite ?",
+          "choix": [
+            "u₀ = 2 et uₙ₊₁ = 3uₙ",
+            "uₙ = n² − 4",
+            "u₁ = 5 et uₙ₊₁ = uₙ + n"
+          ],
+          "reponse": 1,
+          "explication": "uₙ est donné directement en fonction de n : on peut calculer u₁₀₀ tout de suite, sans les termes d'avant."
+        }
+      ],
+      "centres": [
+        "animaux-marins",
+        "sciences"
+      ],
+      "aussi": [
+        {
+          "classe": "terminale-spe",
+          "notionId": "suite_numerique",
+          "microId": "suite_explicite_recurrence"
+        }
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-recurrence-short",
+      "notionId": "suites",
+      "microId": "suite_recurrence",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-01-31",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-recurrence",
+      "fichier": "premiere-spe/maths/suites/19-recurrence/eleveai-maths-premiere-spe-suite-recurrence-short.mp4",
+      "miniature": "premiere-spe/maths/suites/19-recurrence/eleveai-maths-premiere-spe-suite-recurrence-short.png",
+      "titre": "Tu prévois l'épisode 3 en 10 secondes ? 🎬 — 1re spé #Shorts",
+      "accroche": "Une série est vue par 3 millions de personnes pour l'épisode 1 : u₁ = 3. À chaque épisode, l'audience (en millions) est multipliée par 2, puis on enlève 1 : uₙ₊₁ = 2uₙ − 1. Tu prévois l'épisode 3 ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien vaut u₅ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_recurrence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "séries",
+        "audience",
+        "spectateurs",
+        "récurrence",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "u₂ = 5 et uₙ₊₁ = 2uₙ − 1. Combien vaut u₃ ?",
+          "choix": [
+            "10",
+            "5",
+            "9"
+          ],
+          "reponse": 2,
+          "explication": "2 × 5 = 10, moins 1 : 9 millions. On part du terme précédent, et on n'oublie pas le − 1."
+        }
+      ],
+      "centres": [
+        "cinema-series"
+      ],
+      "aussi": [
+        {
+          "classe": "terminale-spe",
+          "notionId": "suite_numerique",
+          "microId": "suite_explicite_recurrence"
+        }
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-algorithme",
+      "notionId": "suites",
+      "microId": "suite_algorithme",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-01",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/20-algorithme/eleveai-maths-premiere-spe-suite-algorithme.mp4",
+      "miniature": "premiere-spe/maths/suites/20-algorithme/eleveai-maths-premiere-spe-suite-algorithme.png",
+      "titre": "Que calcule cette boucle Python ? — Suites et algorithmes : lire un programme — épisode 20 · Maths 1re spé",
+      "accroche": "Maxime est développeur dans une jeune entreprise qui entraîne une intelligence artificielle : la version 0 demande 3 heures de calcul, puis à chaque version le temps double et il ajoute 1 heure de tests. Que calcule sa boucle Python, et quel terme affiche-t-elle ?\n\nDans cette vidéo :\n• lire un programme ligne à ligne : la première ligne donne u₀, la boucle donne le passage au terme suivant\n• range(4) donne i = 0, 1, 2 et 3 : la boucle fait 4 tours, de u₀ à u₄\n• suivre u tour après tour : 3, 7, 15, 31, 63\n• la boucle tant que (while) : elle s'arrête dès que la condition devient fausse\n• le piège : print(n) affiche un rang, pas une valeur\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : u = 1 ; n = 0 ; tant que u < 50 : u = 3*u et n = n + 1 ; puis print(n). Qu'affiche le programme ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_algorithme&display=simple\n\n📈 Épisode 20 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Suites et Python · Maxime, développeur"
+        ],
+        [
+          "00:31",
+          "Le programme, ligne à ligne"
+        ],
+        [
+          "00:44",
+          "range(4) : 4 tours"
+        ],
+        [
+          "01:02",
+          "Tour après tour"
+        ],
+        [
+          "01:15",
+          "Question 1"
+        ],
+        [
+          "01:43",
+          "La boucle tant que"
+        ],
+        [
+          "02:04",
+          "Suivre la boucle"
+        ],
+        [
+          "02:19",
+          "Le piège : un rang"
+        ],
+        [
+          "02:34",
+          "Question 2"
+        ],
+        [
+          "03:11",
+          "À toi de jouer"
+        ],
+        [
+          "03:35",
+          "Correction"
+        ],
+        [
+          "03:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "algorithme",
+        "Python",
+        "boucle for",
+        "boucle while",
+        "range",
+        "programmation",
+        "intelligence artificielle",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:15",
+          "question": "u = 5 ; for i in range(3): u = u - 2 ; print(u). Qu'affiche le programme ?",
+          "choix": [
+            "1",
+            "3",
+            "−1"
+          ],
+          "reponse": 2,
+          "explication": "3 tours : 5, puis 3, puis 1, puis −1."
+        },
+        {
+          "t": "02:34",
+          "question": "u = 3 ; for i in range(2, 7): u = 2*u + 1 ; print(u). Quel terme de la suite le programme affiche-t-il ?",
+          "choix": [
+            "u₆",
+            "u₅",
+            "u₇"
+          ],
+          "reponse": 1,
+          "explication": "i va de 2 à 6 : cela fait 5 tours. On part de u₀ et on avance de 5 rangs : u₅."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-algorithme-short",
+      "notionId": "suites",
+      "microId": "suite_algorithme",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-02",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-algorithme",
+      "fichier": "premiere-spe/maths/suites/20-algorithme/eleveai-maths-premiere-spe-suite-algorithme-short.mp4",
+      "miniature": "premiere-spe/maths/suites/20-algorithme/eleveai-maths-premiere-spe-suite-algorithme-short.png",
+      "titre": "Tu devines ce qu'affiche ce programme ? 🐍 — 1re spé #Shorts",
+      "accroche": "L'énigme du jour : un programme Python de 3 lignes. u = 10, puis pour i allant de 0 à 2, u = 2*u − 5, puis print(u). Tu devines ce qu'il affiche ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec for i in range(5) (i de 0 à 4), quel nombre s'affiche ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_algorithme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "Python",
+        "énigme",
+        "programme",
+        "boucle",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "u = 10 ; for i in range(3): u = 2*u - 5 ; print(u). Qu'affiche le programme ?",
+          "choix": [
+            "45",
+            "15",
+            "25"
+          ],
+          "reponse": 0,
+          "explication": "3 tours : 10, puis 15, puis 25, puis 45."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-modeliser",
+      "notionId": "suites",
+      "microId": "suite_modeliser",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-03",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/21-modeliser/eleveai-maths-premiere-spe-suite-modeliser.mp4",
+      "miniature": "premiere-spe/maths/suites/21-modeliser/eleveai-maths-premiere-spe-suite-modeliser.png",
+      "titre": "Combien de chaises pour 25 tables ? — Modéliser une situation par une suite — épisode 21 · Maths 1re spé",
+      "accroche": "Lina est cheffe de salle dans un restaurant : pour les grands groupes, elle accole des tables carrées en ligne, avec une chaise sur chaque côté libre. 1 table : 4 chaises ; 2 tables : 6 ; 3 tables : 8. Comment trouver une formule qui marche pour toutes les figures ?\n\nDans cette vidéo :\n• observer ce qui change d'une étape à la suivante : + 2 chaises par table, suite arithmétique de raison 2\n• expliquer la formule : 2n chaises en haut et en bas, plus 2 aux bouts, uₙ = 2n + 2\n• trouver un rang : 2n + 2 = 40 donne n = 19 tables\n• ajouter ou multiplier : + 10 % par mois → géométrique ; − 10 % puis + 20 → ni l'une ni l'autre\n• le piège : 4n marche pour 1 table, pas pour 2 : on teste la formule sur les figures 1, 2 et 3\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Un carreleur entoure un carré de n × n dalles d'une bordure de dalles noires : 8 dalles pour la figure 1, 12 pour la figure 2, 16 pour la figure 3. Trouve uₙ, puis la figure qui utilise 100 dalles noires.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_modeliser&display=simple\n\n📈 Épisode 21 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Modéliser par une suite · Lina, cheffe de salle"
+        ],
+        [
+          "00:27",
+          "Observer : + 2 chaises"
+        ],
+        [
+          "00:43",
+          "Pourquoi 2 : uₙ = 2n + 2"
+        ],
+        [
+          "01:02",
+          "Question : 25 tables"
+        ],
+        [
+          "01:32",
+          "Trouver le rang : 40 personnes"
+        ],
+        [
+          "01:45",
+          "Ajouter ou multiplier"
+        ],
+        [
+          "02:05",
+          "Le piège : 4n"
+        ],
+        [
+          "02:22",
+          "Question : + 20 %"
+        ],
+        [
+          "02:56",
+          "À toi de jouer"
+        ],
+        [
+          "03:23",
+          "Correction"
+        ],
+        [
+          "03:46",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "modéliser",
+        "suite arithmétique",
+        "suite géométrique",
+        "formule",
+        "restaurant",
+        "cheffe de salle",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Avec uₙ = 2n + 2, combien de chaises pour 25 tables ?",
+          "choix": [
+            "100",
+            "52",
+            "54"
+          ],
+          "reponse": 1,
+          "explication": "u₂₅ = 2 × 25 + 2 = 52. Pas 4 × 25 : les côtés accolés n'ont pas de chaise."
+        },
+        {
+          "t": "02:22",
+          "question": "Le nombre de couverts servis augmente de 20 % chaque mois. Quelle est la nature de la suite ?",
+          "choix": [
+            "géométrique de raison 1,2",
+            "arithmétique de raison 20",
+            "géométrique de raison 0,2"
+          ],
+          "reponse": 0,
+          "explication": "Augmenter de 20 %, c'est multiplier par 1 + 0,2, soit 1,2."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-modeliser-short",
+      "notionId": "suites",
+      "microId": "suite_modeliser",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-04",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-modeliser",
+      "fichier": "premiere-spe/maths/suites/21-modeliser/eleveai-maths-premiere-spe-suite-modeliser-short.mp4",
+      "miniature": "premiere-spe/maths/suites/21-modeliser/eleveai-maths-premiere-spe-suite-modeliser-short.png",
+      "titre": "Combien de lignes aériennes pour 10 villes ? ✈️ — 1re spé #Shorts",
+      "accroche": "Une compagnie aérienne relie n villes, chacune avec toutes les autres, par une ligne directe : 3 villes, 3 lignes ; 4 villes, 6 lignes ; 5 villes, 10 lignes. Tu comptes les lignes sans les dessiner ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de lignes pour 20 villes ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_modeliser&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "avion",
+        "compagnie aérienne",
+        "villes",
+        "modéliser",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "Avec uₙ = n × (n − 1) ÷ 2, combien de lignes pour 10 villes ?",
+          "choix": [
+            "90",
+            "100",
+            "45"
+          ],
+          "reponse": 2,
+          "explication": "10 × 9 = 90, divisé par 2 : 45. Sans diviser par 2, chaque ligne serait comptée deux fois."
+        }
+      ],
+      "centres": [
+        "avions",
+        "transports"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-evolution",
+      "notionId": "suites",
+      "microId": "suite_evolution",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-05",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/22-evolution/eleveai-maths-premiere-spe-suite-evolution.mp4",
+      "miniature": "premiere-spe/maths/suites/22-evolution/eleveai-maths-premiere-spe-suite-evolution.png",
+      "titre": "Pourquoi + 10 % puis − 10 % ne fait pas zéro ? — Évolutions en pourcentage et suites — épisode 22 · Maths 1re spé",
+      "accroche": "Emma est conseillère bancaire : un jeune client a 1 000 € d'économies et hésite entre deux placements, + 40 € par an ou + 3 % par an. Pourquoi + 10 %, puis − 10 %, ne ramène pas au départ ?\n\nDans cette vidéo :\n• le coefficient multiplicateur : + 3 % → × 1,03 ; − 20 % → × 0,8\n• placé à 3 % par an : uₙ = 1 000 × 1,03ⁿ, une suite géométrique\n• linéaire ou exponentiel : + 40 € par an (arithmétique) contre + 3 % par an (géométrique), l'exponentielle finit par passer devant\n• le piège : + 10 % puis − 10 %, c'est × 0,99, une baisse de 1 %\n• revenir au départ : le coefficient réciproque 1 ÷ 1,25 = 0,8\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Un loyer de 600 € augmente de 2 % par an pendant 3 ans. Quel est le loyer final, au centime près ? Et quel est le taux d'évolution global ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_evolution&display=simple\n\n📈 Épisode 22 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Évolutions en pourcentage · Emma, conseillère bancaire"
+        ],
+        [
+          "00:22",
+          "Le coefficient multiplicateur"
+        ],
+        [
+          "00:40",
+          "Placé à 3 % : une suite géométrique"
+        ],
+        [
+          "01:04",
+          "Question : × 0,85"
+        ],
+        [
+          "01:41",
+          "Linéaire ou exponentiel"
+        ],
+        [
+          "02:21",
+          "Le piège : + 10 % puis − 10 %"
+        ],
+        [
+          "02:41",
+          "Question : revenir au départ"
+        ],
+        [
+          "03:18",
+          "À toi de jouer : le loyer"
+        ],
+        [
+          "03:40",
+          "Correction"
+        ],
+        [
+          "04:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "pourcentages",
+        "évolution",
+        "coefficient multiplicateur",
+        "suite géométrique",
+        "placement",
+        "banque",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "Un prix est multiplié par 0,85. Cela correspond à :",
+          "choix": [
+            "une baisse de 15 %",
+            "une baisse de 85 %",
+            "une hausse de 15 %"
+          ],
+          "reponse": 0,
+          "explication": "0,85 est plus petit que 1 : c'est une baisse. Et 1 − 0,85 = 0,15, soit 15 %."
+        },
+        {
+          "t": "02:41",
+          "question": "Un prix augmente de 25 %. De combien doit-il baisser pour revenir à sa valeur de départ ?",
+          "choix": [
+            "25 %",
+            "75 %",
+            "20 %"
+          ],
+          "reponse": 2,
+          "explication": "Le coefficient réciproque est l'inverse : 1 ÷ 1,25 = 0,8. C'est une baisse de 20 %."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-evolution-short",
+      "notionId": "suites",
+      "microId": "suite_evolution",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-06",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-evolution",
+      "fichier": "premiere-spe/maths/suites/22-evolution/eleveai-maths-premiere-spe-suite-evolution-short.mp4",
+      "miniature": "premiere-spe/maths/suites/22-evolution/eleveai-maths-premiere-spe-suite-evolution-short.png",
+      "titre": "+ 20 %, puis − 20 % : ça fait zéro ? 📸 — 1re spé #Shorts",
+      "accroche": "Hugo est photographe : il augmente son tarif de 20 %, 200 € deviennent 240 €. Puis il fait une promotion de 20 % : 240 × 0,8 = 192 €. Pas 200 !\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : + 50 %, puis − 50 %, quelle évolution au total, en pourcentage ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_evolution&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "pourcentages",
+        "photographe",
+        "promotion",
+        "coefficient multiplicateur",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "+ 20 %, puis − 20 %, c'est au total :",
+          "choix": [
+            "0 %",
+            "une baisse de 4 %",
+            "une hausse de 4 %"
+          ],
+          "reponse": 1,
+          "explication": "1,2 × 0,8 = 0,96 : c'est une baisse de 4 %."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-variation",
+      "notionId": "suites",
+      "microId": "suite_variation",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-07",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/23-variation/eleveai-maths-premiere-spe-suite-variation.mp4",
+      "miniature": "premiere-spe/maths/suites/23-variation/eleveai-maths-premiere-spe-suite-variation.png",
+      "titre": "Une suite monte-t-elle toujours ? — Sens de variation d'une suite — épisode 23 · Maths 1re spé",
+      "accroche": "Rania est technicienne de laboratoire : elle dilue une solution, et à chaque étape la concentration est divisée par 2, en partant de 80 mg/L. Comment prouver qu'une suite monte toujours, ou descend toujours ?\n\nDans cette vidéo :\n• croissante : uₙ₊₁ ≥ uₙ pour tout n ; décroissante : uₙ₊₁ ≤ uₙ pour tout n\n• méthode 1 : le signe de uₙ₊₁ − uₙ (uₙ = n² + 3 donne 2n + 1, positif : croissante)\n• méthode 2, termes strictement positifs : comparer uₙ₊₁ ÷ uₙ à 1 (0,5 < 1 : la concentration décroît)\n• le piège : pour une suite géométrique, regarder q ET le signe du premier terme (u₀ = −5, q = 2 : décroissante)\n• une suite peut n'être ni croissante ni décroissante : 6 ; −12 ; 24\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Pour tout entier naturel n, uₙ₊₁ − uₙ = 3n − 10. À partir de quel rang n a-t-on uₙ₊₁ ≥ uₙ ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_variation&display=simple\n\n📈 Épisode 23 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sens de variation · Rania, technicienne de laboratoire"
+        ],
+        [
+          "00:23",
+          "Croissante, décroissante"
+        ],
+        [
+          "00:40",
+          "Méthode 1 : le signe de uₙ₊₁ − uₙ"
+        ],
+        [
+          "00:59",
+          "Méthode 2 : le quotient"
+        ],
+        [
+          "01:20",
+          "Question : uₙ₊₁ = uₙ − n² − 1"
+        ],
+        [
+          "01:51",
+          "Le piège : q et le signe de u₀"
+        ],
+        [
+          "02:10",
+          "Question : uₙ₊₁ = −2uₙ"
+        ],
+        [
+          "02:42",
+          "À toi de jouer"
+        ],
+        [
+          "03:04",
+          "Correction : le rang 4"
+        ],
+        [
+          "03:25",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "sens de variation",
+        "suite croissante",
+        "suite décroissante",
+        "monotonie",
+        "laboratoire",
+        "dilution",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:20",
+          "question": "Pour tout n, uₙ₊₁ = uₙ − n² − 1. La suite est :",
+          "choix": [
+            "croissante",
+            "ni croissante ni décroissante",
+            "décroissante"
+          ],
+          "reponse": 2,
+          "explication": "uₙ₊₁ − uₙ = −n² − 1 : c'est négatif pour tout n."
+        },
+        {
+          "t": "02:10",
+          "question": "u₀ = 6 et uₙ₊₁ = −2 × uₙ. La suite est :",
+          "choix": [
+            "ni croissante ni décroissante",
+            "croissante",
+            "décroissante"
+          ],
+          "reponse": 0,
+          "explication": "6, −12, 24 : les termes changent de signe à chaque fois, ils montent puis descendent."
+        }
+      ],
+      "centres": [
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-variation-short",
+      "notionId": "suites",
+      "microId": "suite_variation",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-08",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-variation",
+      "fichier": "premiere-spe/maths/suites/23-variation/eleveai-maths-premiere-spe-suite-variation-short.mp4",
+      "miniature": "premiere-spe/maths/suites/23-variation/eleveai-maths-premiere-spe-suite-variation-short.png",
+      "titre": "La neige fond : tu vois le sens de variation ? 🏔️ — 1re spé #Shorts",
+      "accroche": "Mathis est météorologue : au sommet d'une montagne, la hauteur de neige n jours après le début du redoux vaut uₙ = 60 − 4n centimètres. Chaque jour, 4 cm de moins : la suite est décroissante.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec uₙ = 60 − 4n, au bout de combien de jours la neige a-t-elle fondu ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_variation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "neige",
+        "météo",
+        "montagne",
+        "sens de variation",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Les températures du matin sont 5, 3, 4, 2, puis 6 degrés. Cette suite est :",
+          "choix": [
+            "croissante",
+            "ni croissante ni décroissante",
+            "décroissante"
+          ],
+          "reponse": 1,
+          "explication": "Elle descend, remonte, redescend, puis remonte : elle n'est ni croissante ni décroissante."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-sommes",
+      "notionId": "suites",
+      "microId": "suite_sommes",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-09",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/24-sommes/eleveai-maths-premiere-spe-suite-sommes.mp4",
+      "miniature": "premiere-spe/maths/suites/24-sommes/eleveai-maths-premiere-spe-suite-sommes.png",
+      "titre": "Combien de places dans l'amphithéâtre ? — Somme des termes d'une suite arithmétique — épisode 24 · Maths 1re spé",
+      "accroche": "Nora est guide-conférencière dans un amphithéâtre romain : 40 places au premier rang, 4 de plus à chaque rang, 25 rangs. Combien de spectateurs pouvaient s'asseoir ici ? Et comment additionner 100 nombres en quelques secondes ?\n\nDans cette vidéo :\n• le détour de Gauss : 1 + 2 + … + 100, ranger par paires de 101, 50 × 101 = 5 050\n• la formule : 1 + 2 + … + n = n(n + 1) ÷ 2\n• somme de termes d'une suite arithmétique : nombre de termes × (premier + dernier) ÷ 2\n• compter les termes : de uₚ à u_q, il y a q − p + 1 termes\n• le piège : pour 25 rangs, on ajoute 4 seulement 24 fois (136 places, pas 140)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Calcule 7 + 10 + 13 + … + 61.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_sommes&display=simple\n\n📈 Épisode 24 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Somme des termes · Nora, guide-conférencière"
+        ],
+        [
+          "00:27",
+          "Gauss et les paires"
+        ],
+        [
+          "00:52",
+          "La formule"
+        ],
+        [
+          "01:08",
+          "L'amphithéâtre : 2 200 places"
+        ],
+        [
+          "01:28",
+          "Question : combien de termes ?"
+        ],
+        [
+          "02:00",
+          "Le piège : 24 sauts pour 25 rangs"
+        ],
+        [
+          "02:17",
+          "Question : 1 + 2 + … + 40"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:59",
+          "Correction : 646"
+        ],
+        [
+          "03:23",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "somme",
+        "suite arithmétique",
+        "Gauss",
+        "1 + 2 + … + n",
+        "amphithéâtre",
+        "guide-conférencière",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:28",
+          "question": "Combien de termes dans la somme u₅ + u₆ + … + u₃₀ ?",
+          "choix": [
+            "30",
+            "25",
+            "26"
+          ],
+          "reponse": 2,
+          "explication": "De u₅ à u₃₀ : 30 − 5 + 1 = 26 termes. On compte les deux bouts."
+        },
+        {
+          "t": "02:17",
+          "question": "Combien vaut 1 + 2 + … + 40 ?",
+          "choix": [
+            "1 600",
+            "820",
+            "840"
+          ],
+          "reponse": 1,
+          "explication": "40 × 41 = 1 640, divisé par 2 : 820."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-sommes-short",
+      "notionId": "suites",
+      "microId": "suite_sommes",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-10",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-sommes",
+      "fichier": "premiere-spe/maths/suites/24-sommes/eleveai-maths-premiere-spe-suite-sommes-short.mp4",
+      "miniature": "premiere-spe/maths/suites/24-sommes/eleveai-maths-premiere-spe-suite-sommes-short.png",
+      "titre": "1 + 2 + … + 30 plus vite qu'une calculatrice ? 🏊 — 1re spé #Shorts",
+      "accroche": "Jade est nageuse : 1 longueur le premier jour, 2 le deuxième, une de plus chaque jour, pendant 30 jours. Son total : 1 + 2 + … + 30 = 30 × 31 ÷ 2.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : en combien de jours aurait-elle nagé 210 longueurs en tout ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_sommes&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "natation",
+        "nageuse",
+        "Gauss",
+        "somme",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Jade nage 1 longueur le 1er jour, une de plus chaque jour, pendant 30 jours. Combien de longueurs en tout ?",
+          "choix": [
+            "465",
+            "900",
+            "450"
+          ],
+          "reponse": 0,
+          "explication": "30 × 31 = 930, divisé par 2 : 465 longueurs."
+        }
+      ],
+      "centres": [
+        "sport",
+        "natation"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-somme-geo",
+      "notionId": "suites",
+      "microId": "suite_somme_geo",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-11",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/25-somme-geo/eleveai-maths-premiere-spe-suite-somme-geo.mp4",
+      "miniature": "premiere-spe/maths/suites/25-somme-geo/eleveai-maths-premiere-spe-suite-somme-geo.png",
+      "titre": "Combien de malades en 6 semaines ? — Somme des termes d'une suite géométrique — épisode 25 · Maths 1re spé",
+      "accroche": "Yasmine est épidémiologiste : elle surveille un virus de la grippe. La première semaine, 50 nouveaux cas ; puis chaque semaine, 2 fois plus que la semaine d'avant. Combien de malades en tout sur 6 semaines ? Comment additionner des nombres qui doublent, sans tout poser ?\n\nDans cette vidéo :\n• l'astuce : S = 1 + 2 + … + 2⁵, on calcule 2S, on retire S : presque tout s'annule, S = 2⁶ − 1 = 63\n• la formule, pour q ≠ 1 : 1 + q + q² + … + qⁿ = (qⁿ⁺¹ − 1) ÷ (q − 1)\n• compter les termes : de q⁰ à qⁿ, il y a n + 1 termes\n• avec un premier terme u₀, on le met en facteur : 50 × 63 = 3 150 cas\n• le piège : sur 6 semaines, le dernier exposant est 5 ; en haut de la formule, 2⁶ et pas 2⁷\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Une suite géométrique a pour premier terme u₀ = 4 et pour raison 3. Calcule u₀ + u₁ + … + u₄.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_somme_geo&display=simple\n\n📈 Épisode 25 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Somme des termes d'une suite géométrique · Yasmine, épidémiologiste"
+        ],
+        [
+          "00:28",
+          "L'astuce : S, 2S, on retire S"
+        ],
+        [
+          "00:51",
+          "La formule et ses n + 1 termes"
+        ],
+        [
+          "01:09",
+          "Question : combien de termes ?"
+        ],
+        [
+          "01:37",
+          "50 en facteur : 3 150 cas"
+        ],
+        [
+          "01:58",
+          "Le piège de l'exposant"
+        ],
+        [
+          "02:16",
+          "Question : 1 + 2 + … + 2⁹"
+        ],
+        [
+          "02:47",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "somme",
+        "suite géométrique",
+        "1 + q + … + qⁿ",
+        "épidémiologie",
+        "grippe",
+        "épidémiologiste",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Combien de termes dans la somme 1 + 3 + 3² + … + 3⁸ ?",
+          "choix": [
+            "9",
+            "3",
+            "8"
+          ],
+          "reponse": 0,
+          "explication": "Les exposants vont de 0 à 8 : cela fait 9 termes. Le 1 du début, c'est 3⁰."
+        },
+        {
+          "t": "02:16",
+          "question": "Combien vaut 1 + 2 + 2² + … + 2⁹ ?",
+          "choix": [
+            "2 047",
+            "1 023",
+            "1 024"
+          ],
+          "reponse": 1,
+          "explication": "Le dernier exposant est 9 : (2¹⁰ − 1) ÷ (2 − 1) = 1 023."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-somme-geo-short",
+      "notionId": "suites",
+      "microId": "suite_somme_geo",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-12",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-somme-geo",
+      "fichier": "premiere-spe/maths/suites/25-somme-geo/eleveai-maths-premiere-spe-suite-somme-geo-short.mp4",
+      "miniature": "premiere-spe/maths/suites/25-somme-geo/eleveai-maths-premiere-spe-suite-somme-geo-short.png",
+      "titre": "Ça grimpe plus vite que tu ne crois ! 🎵 — 1re spé #Shorts",
+      "accroche": "Enzo publie son premier morceau de musique : le premier jour, 3 personnes le partagent ; puis chaque jour, 2 fois plus de nouvelles personnes que la veille. Sur 5 jours : 3 + 6 + 12 + 24 + 48 = 3 × (2⁵ − 1) = 93 personnes.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : sur 20 jours, combien de personnes en tout ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_somme_geo&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "musique",
+        "partage",
+        "viral",
+        "somme géométrique",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Et sur 10 jours, combien de personnes en tout ?",
+          "choix": [
+            "1 536",
+            "3 072",
+            "3 069"
+          ],
+          "reponse": 2,
+          "explication": "3 × (2¹⁰ − 1) = 3 × 1 023 = 3 069."
+        }
+      ],
+      "centres": [
+        "musique",
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-limite",
+      "notionId": "suites",
+      "microId": "suite_limite",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-13",
+      "ceinture": "verte",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/26-limite/eleveai-maths-premiere-spe-suite-limite.mp4",
+      "miniature": "premiere-spe/maths/suites/26-limite/eleveai-maths-premiere-spe-suite-limite.png",
+      "titre": "Faut-il agrandir le port ? — Limite d'une suite — épisode 26 · Maths 1re spé",
+      "accroche": "Karim est maître de port : son port de plaisance accueille 360 bateaux. Chaque année, la moitié partent, puis 100 nouveaux arrivent. Faut-il agrandir le port ? Vers quoi vont les termes d'une suite quand n devient très grand ?\n\nDans cette vidéo :\n• uₙ₊₁ = 0,5uₙ + 100 : 360, 280, 240, 220, 210, 205…\n• conjecturer une limite : les termes se rapprochent de 200, lim uₙ = 200\n• trouver la limite sans tout calculer : L = 0,5L + 100 donne L = 200\n• les limites à connaître : 1/n → 0 ; n² et 2ⁿ → +∞ ; qⁿ → 0 si −1 < q < 1\n• le piège : une suite géométrique de raison 2 ne tend pas toujours vers +∞ (−3 × 2ⁿ → −∞)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Pour tout entier naturel n, uₙ = 4 × 0,9ⁿ + 7. Vers quoi semble tendre uₙ ? Et vₙ = 2n² − 50 ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_limite&display=simple\n\n📈 Épisode 26 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Limite d'une suite · Karim, maître de port"
+        ],
+        [
+          "00:24",
+          "Les termes"
+        ],
+        [
+          "00:46",
+          "Conjecturer la limite"
+        ],
+        [
+          "01:05",
+          "L = 0,5L + 100"
+        ],
+        [
+          "01:19",
+          "Question 1"
+        ],
+        [
+          "01:53",
+          "Limites à connaître"
+        ],
+        [
+          "02:12",
+          "Le piège"
+        ],
+        [
+          "02:35",
+          "Question 2"
+        ],
+        [
+          "03:02",
+          "À toi de jouer"
+        ],
+        [
+          "03:26",
+          "Correction"
+        ],
+        [
+          "03:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "limite",
+        "limite d'une suite",
+        "conjecture",
+        "suite arithmético-géométrique",
+        "port",
+        "bateaux",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:19",
+          "question": "u₀ = 10 et uₙ₊₁ = 0,8uₙ + 6. Vers quelle valeur la suite semble-t-elle tendre ?",
+          "choix": [
+            "10",
+            "6",
+            "30"
+          ],
+          "reponse": 2,
+          "explication": "L = 0,8L + 6, donc 0,2L = 6, et L = 30."
+        },
+        {
+          "t": "02:35",
+          "question": "uₙ = 5 + 3/n, pour n ≥ 1. Vers quoi semble tendre uₙ ?",
+          "choix": [
+            "5",
+            "+∞",
+            "8"
+          ],
+          "reponse": 0,
+          "explication": "3/n s'approche de 0 quand n devient très grand : il reste 5."
+        }
+      ],
+      "centres": [
+        "transports",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-limite-short",
+      "notionId": "suites",
+      "microId": "suite_limite",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-14",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-limite",
+      "fichier": "premiere-spe/maths/suites/26-limite/eleveai-maths-premiere-spe-suite-limite-short.mp4",
+      "miniature": "premiere-spe/maths/suites/26-limite/eleveai-maths-premiere-spe-suite-limite-short.png",
+      "titre": "Le gâteau refroidit… jusqu'où ? 🎂 — 1re spé #Shorts",
+      "accroche": "Lou est pâtissière : son gâteau sort du four à 180 °C. Minute après minute, sa température suit uₙ₊₁ = 0,5uₙ + 10 : 180, 100, 60, 40, 30, 25 degrés…\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec uₙ₊₁ = 0,5uₙ + 12, vers quelle température le gâteau tend-il ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_limite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "pâtisserie",
+        "gâteau",
+        "température",
+        "limite",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Vers quelle température le gâteau semble-t-il tendre ?",
+          "choix": [
+            "10 °C",
+            "20 °C",
+            "0 °C"
+          ],
+          "reponse": 1,
+          "explication": "L = 0,5L + 10 donne L = 20 : la température de la cuisine."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-auxiliaire",
+      "notionId": "suites",
+      "microId": "suite_auxiliaire",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-15",
+      "ceinture": "bleue",
+      "type": "longue",
+      "fichier": "premiere-spe/maths/suites/27-auxiliaire/eleveai-maths-premiere-spe-suite-auxiliaire.mp4",
+      "miniature": "premiere-spe/maths/suites/27-auxiliaire/eleveai-maths-premiere-spe-suite-auxiliaire.png",
+      "titre": "La forêt va-t-elle disparaître ? — Suite auxiliaire, la méthode du bac — épisode 27 · Maths 1re spé",
+      "accroche": "Manon est technicienne forestière : une forêt compte 5 000 arbres. Chaque année, on coupe 10 % des arbres, puis on en plante 300. La forêt va-t-elle disparaître ? La méthode du bac pour trouver la formule de uₙ quand on multiplie ET on ajoute.\n\nDans cette vidéo :\n• uₙ₊₁ = 0,9uₙ + 300 : ni arithmétique, ni géométrique\n• étape 1 : la valeur d'équilibre, L = 0,9L + 300 donne L = 3 000\n• étape 2 : vₙ = uₙ − 3 000 est géométrique de raison 0,9\n• étape 3 : v₀ = 2 000, vₙ = 2 000 × 0,9ⁿ, puis uₙ = 2 000 × 0,9ⁿ + 3 000\n• étape 4 : 0,9ⁿ → 0, donc uₙ → 3 000 : la forêt se stabilise\n• le piège : la raison de v est 0,9 (pas 300), et on rajoute L à la fin\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : u₀ = 5 et, pour tout entier naturel n, uₙ₊₁ = 3uₙ − 4. Trouve L, montre que vₙ = uₙ − L est géométrique, puis donne uₙ et sa limite.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_auxiliaire&display=simple\n\n📈 Épisode 27 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Suite auxiliaire · Manon, technicienne forestière"
+        ],
+        [
+          "00:26",
+          "Le modèle"
+        ],
+        [
+          "00:48",
+          "Étape 1 : l'équilibre L"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:32",
+          "Étape 2 : vₙ = uₙ − L"
+        ],
+        [
+          "02:04",
+          "Étape 3 : la formule"
+        ],
+        [
+          "02:24",
+          "Question 2"
+        ],
+        [
+          "03:00",
+          "Le piège"
+        ],
+        [
+          "03:17",
+          "Étape 4 : la limite"
+        ],
+        [
+          "03:44",
+          "À toi de jouer"
+        ],
+        [
+          "04:09",
+          "Correction"
+        ],
+        [
+          "04:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suites",
+        "suite auxiliaire",
+        "suite arithmético-géométrique",
+        "valeur d'équilibre",
+        "méthode du bac",
+        "forêt",
+        "arbres",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Avec uₙ₊₁ = 0,5uₙ + 8, la valeur d'équilibre L vaut :",
+          "choix": [
+            "8",
+            "16",
+            "4"
+          ],
+          "reponse": 1,
+          "explication": "L = 0,5L + 8, donc 0,5L = 8, et L = 16."
+        },
+        {
+          "t": "02:24",
+          "question": "u₀ = 10, uₙ₊₁ = 0,5uₙ + 8 et vₙ = uₙ − 16. Combien vaut v₀ ?",
+          "choix": [
+            "−16",
+            "26",
+            "−6"
+          ],
+          "reponse": 2,
+          "explication": "v₀ = u₀ − L = 10 − 16 = −6."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-spe-suite-auxiliaire-short",
+      "notionId": "suites",
+      "microId": "suite_auxiliaire",
+      "classe": "premiere-spe",
+      "serie": "Maths 1re spé",
+      "prioritaire": true,
+      "pas_avant": "2027-02-16",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "premiere-spe-suite-auxiliaire",
+      "fichier": "premiere-spe/maths/suites/27-auxiliaire/eleveai-maths-premiere-spe-suite-auxiliaire-short.mp4",
+      "miniature": "premiere-spe/maths/suites/27-auxiliaire/eleveai-maths-premiere-spe-suite-auxiliaire-short.png",
+      "titre": "Le médicament dans le sang : l'équilibre en une ligne 💊 — 1re spé #Shorts",
+      "accroche": "Samuel est infirmier : son patient a 100 mg d'un médicament dans le sang. Chaque jour, le corps en élimine la moitié, puis il reçoit 40 mg : uₙ₊₁ = 0,5uₙ + 40. À l'équilibre, L = 0,5L + 40 donne L = 80.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec u₀ = 100, combien de milligrammes reste-t-il au jour 3 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_auxiliaire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+      "tags": [
+        "infirmier",
+        "médicament",
+        "santé",
+        "suite auxiliaire",
+        "suites",
+        "maths",
+        "1re spé",
+        "spé maths",
+        "suites",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Avec vₙ = uₙ − 80, la suite v est géométrique de raison :",
+          "choix": [
+            "0,5",
+            "80",
+            "40"
+          ],
+          "reponse": 0,
+          "explication": "La raison de v, c'est le coefficient devant uₙ : 0,5."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ]
+    },
+    {
       "id": "terminale-suite-reconnaitre",
       "notionId": "suite_numerique",
       "microId": "suite_reconnaitre",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-10",
+      "pas_avant": "2027-02-17",
       "ceinture": "verte",
       "type": "longue",
       "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.mp4",
@@ -76035,10 +78771,10 @@
       "id": "terminale-suite-reconnaitre-short",
       "notionId": "suite_numerique",
       "microId": "suite_reconnaitre",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-11",
+      "pas_avant": "2027-02-18",
       "ceinture": "blanche",
       "type": "short",
       "renvoie_vers": "terminale-suite-reconnaitre",
@@ -76082,10 +78818,10 @@
       "id": "terminale-suite-recurrence-preuve",
       "notionId": "suite_numerique",
       "microId": "suite_recurrence_preuve",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-12",
+      "pas_avant": "2027-02-19",
       "ceinture": "verte",
       "type": "longue",
       "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.mp4",
@@ -76207,10 +78943,10 @@
       "id": "terminale-suite-recurrence-preuve-short",
       "notionId": "suite_numerique",
       "microId": "suite_recurrence_preuve",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-13",
+      "pas_avant": "2027-02-20",
       "ceinture": "blanche",
       "type": "short",
       "renvoie_vers": "terminale-suite-recurrence-preuve",
@@ -76254,10 +78990,10 @@
       "id": "terminale-suite-variation",
       "notionId": "suite_numerique",
       "microId": "suite_variation",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-14",
+      "pas_avant": "2027-02-21",
       "ceinture": "verte",
       "type": "longue",
       "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.mp4",
@@ -76356,10 +79092,10 @@
       "id": "terminale-suite-variation-short",
       "notionId": "suite_numerique",
       "microId": "suite_variation",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-15",
+      "pas_avant": "2027-02-22",
       "ceinture": "blanche",
       "type": "short",
       "renvoie_vers": "terminale-suite-variation",
@@ -76403,10 +79139,10 @@
       "id": "terminale-suite-bornee",
       "notionId": "suite_numerique",
       "microId": "suite_bornee",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-16",
+      "pas_avant": "2027-02-23",
       "ceinture": "verte",
       "type": "longue",
       "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.mp4",
@@ -76505,10 +79241,10 @@
       "id": "terminale-suite-bornee-short",
       "notionId": "suite_numerique",
       "microId": "suite_bornee",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-17",
+      "pas_avant": "2027-02-24",
       "ceinture": "blanche",
       "type": "short",
       "renvoie_vers": "terminale-suite-bornee",
@@ -76553,10 +79289,10 @@
       "id": "terminale-suite-defi",
       "notionId": "suite_numerique",
       "microId": "suite_defi",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-18",
+      "pas_avant": "2027-02-25",
       "ceinture": "bleue",
       "type": "longue",
       "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.mp4",
@@ -76684,10 +79420,10 @@
       "id": "terminale-suite-defi-short",
       "notionId": "suite_numerique",
       "microId": "suite_defi",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-19",
+      "pas_avant": "2027-02-26",
       "ceinture": "blanche",
       "type": "short",
       "renvoie_vers": "terminale-suite-defi",
@@ -76732,10 +79468,10 @@
       "id": "terminale-suite-limite-interpreter",
       "notionId": "limite_suite",
       "microId": "limite_suite_interpreter",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-20",
+      "pas_avant": "2027-02-27",
       "ceinture": "verte",
       "type": "longue",
       "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.mp4",
@@ -76841,10 +79577,10 @@
       "id": "terminale-suite-limite-interpreter-short",
       "notionId": "limite_suite",
       "microId": "limite_suite_interpreter",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-21",
+      "pas_avant": "2027-02-28",
       "ceinture": "blanche",
       "type": "short",
       "renvoie_vers": "terminale-suite-limite-interpreter",
@@ -76888,10 +79624,10 @@
       "id": "terminale-suite-limite-calculer",
       "notionId": "limite_suite",
       "microId": "limite_suite_calculer",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-22",
+      "pas_avant": "2027-03-01",
       "ceinture": "verte",
       "type": "longue",
       "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.mp4",
@@ -76993,10 +79729,10 @@
       "id": "terminale-suite-limite-calculer-short",
       "notionId": "limite_suite",
       "microId": "limite_suite_calculer",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-23",
+      "pas_avant": "2027-03-02",
       "ceinture": "blanche",
       "type": "short",
       "renvoie_vers": "terminale-suite-limite-calculer",
@@ -77040,10 +79776,10 @@
       "id": "terminale-suite-limite-operations",
       "notionId": "limite_suite",
       "microId": "limite_suite_operations",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-24",
+      "pas_avant": "2027-03-03",
       "ceinture": "verte",
       "type": "longue",
       "fichier": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations.mp4",
@@ -77146,10 +79882,10 @@
       "id": "terminale-suite-limite-operations-short",
       "notionId": "limite_suite",
       "microId": "limite_suite_operations",
-      "classe": "terminale-spe",
+      "classe": "terminale",
       "serie": "Maths Tle spé",
       "prioritaire": true,
-      "pas_avant": "2027-01-25",
+      "pas_avant": "2027-03-04",
       "ceinture": "blanche",
       "type": "short",
       "renvoie_vers": "terminale-suite-limite-operations",
@@ -77190,1202 +79926,472 @@
       ]
     },
     {
-      "id": "4e-facto-commun",
-      "pas_avant": "2026-12-20",
+      "id": "terminale-suite-limite-comparaison",
+      "notionId": "limite_suite",
+      "microId": "limite_suite_comparaison",
+      "classe": "terminale",
+      "serie": "Maths Tle spé",
       "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_facteur_commun",
-      "classe": "4e",
-      "ceinture": "jaune",
-      "serie": "Maths 4e",
-      "type": "longue",
-      "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.mp4",
-      "miniature": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.png",
-      "titre": "5x + 10 : qu'est-ce qui se répète ? — Le facteur commun — épisode 1 · Maths 4e",
-      "accroche": "Inès est logisticienne. Ce matin, 5 camions partent de l'entrepôt : dans chacun, x palettes de riz et 2 palettes d'eau. En tout : 5x + 10. Qu'est-ce qui se répète dans cette somme ?\n\nDans cette vidéo :\n• écrire chaque terme comme un produit : 5x = 5 × x, 10 = 5 × 2\n• le facteur commun : le 5 revient dans chaque terme\n• une lettre aussi peut être commune : x² + 7x\n• le piège : prendre le premier nombre qu'on voit (6x + 9 : c'est 3, pas 6)\n• pour être commun, il faut être dans CHAQUE terme : dans 3x + 5, x n'est pas commun\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : trouve le facteur commun de 10x + 15.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_facteur_commun&display=simple\n\n🔢 Épisode 1 sur 5 de la série Factorisation d'EleveAI, en 4e.",
-      "chapitres": [
-        [
-          "00:00",
-          "Voir ce qui se répète"
-        ],
-        [
-          "00:06",
-          "Inès, logisticienne"
-        ],
-        [
-          "00:24",
-          "Chaque terme en produit"
-        ],
-        [
-          "00:47",
-          "Une lettre en commun"
-        ],
-        [
-          "01:05",
-          "Question 1"
-        ],
-        [
-          "01:29",
-          "Le piège"
-        ],
-        [
-          "01:49",
-          "Dans chaque terme"
-        ],
-        [
-          "02:04",
-          "Question 2"
-        ],
-        [
-          "02:40",
-          "Correction"
-        ],
-        [
-          "02:54",
-          "Ce que tu as appris"
-        ]
-      ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
-      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
-      "tags": [
-        "facteur commun",
-        "factorisation",
-        "factoriser",
-        "calcul littéral",
-        "logisticienne",
-        "camions",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:05",
-          "question": "Dans 7x + 14, quel est le facteur commun ?",
-          "choix": [
-            "7",
-            "14",
-            "x"
-          ],
-          "reponse": 0,
-          "explication": "7x, c'est 7 × x, et 14, c'est 7 × 2."
-        },
-        {
-          "t": "02:04",
-          "question": "Dans y² + 3y, quel est le facteur commun ?",
-          "choix": [
-            "3",
-            "y",
-            "y²"
-          ],
-          "reponse": 1,
-          "explication": "y², c'est y × y, et 3y, c'est 3 × y. Le 3 n'est pas dans y²."
-        }
-      ],
-      "centres": [
-        "transports"
-      ]
-    },
-    {
-      "id": "4e-facto-commun-short",
-      "pas_avant": "2026-12-20",
-      "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_facteur_commun",
-      "classe": "4e",
-      "ceinture": "jaune",
-      "serie": "Maths 4e",
-      "type": "short",
-      "renvoie_vers": "4e-facto-commun",
-      "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.mp4",
-      "miniature": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.png",
-      "titre": "14, 21 et 35 : le nombre caché en 5 secondes ? 🔍 — 4e #Shorts",
-      "accroche": "14, 21 et 35. Un même nombre se cache dans les trois. 14 = 7 × 2, 21 = 7 × 3, 35 = 7 × 5 : le 7 est leur facteur commun.\nEt avec une lettre, ça marche aussi.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : quel est le facteur commun de 15x + 35 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_facteur_commun&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
-      "tags": [
-        "nombre caché",
-        "facteur commun",
-        "tables de multiplication",
-        "calcul littéral",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI",
-        "ceinture jaune",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:24",
-          "question": "Dans 5x + 15, quel est le facteur commun ?",
-          "choix": [
-            "5",
-            "15",
-            "x"
-          ],
-          "reponse": 0,
-          "explication": "5x, c'est 5 × x, et 15, c'est 5 × 3."
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "4e-facto-simple",
-      "pas_avant": "2026-12-21",
-      "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_factoriser_simple",
-      "classe": "4e",
-      "ceinture": "jaune",
-      "serie": "Maths 4e",
-      "type": "longue",
-      "fichier": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple.mp4",
-      "miniature": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple.png",
-      "titre": "9 × 37 + 9 × 63 de tête — Factoriser — épisode 2 · Maths 4e",
-      "accroche": "Maya est développeuse. Son programme doit calculer 9 × 37 + 9 × 63 : deux multiplications. Maya repère le facteur commun et écrit 9 × (37 + 63) = 9 × 100 = 900. Une seule multiplication, et de tête !\n\nDans cette vidéo :\n• factoriser 3x + 21 : le facteur commun 3 sort devant, 3(x + 7)\n• factoriser, c'est transformer une somme en produit : le chemin inverse de développer\n• avec un moins : 2x − 18 = 2(x − 9)\n• le piège : 6x + 6 = 6(x + 1), sans oublier le 1\n• une lettre en facteur : x² + 5x = x(x + 5)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : factorise 7x − 56.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_simple&display=simple\n\n🔢 Épisode 2 sur 5 de la série Factorisation d'EleveAI, en 4e.",
-      "chapitres": [
-        [
-          "00:00",
-          "Une somme en produit"
-        ],
-        [
-          "00:06",
-          "Maya, développeuse"
-        ],
-        [
-          "00:31",
-          "La méthode"
-        ],
-        [
-          "01:02",
-          "Factoriser, développer"
-        ],
-        [
-          "01:16",
-          "Question 1"
-        ],
-        [
-          "01:56",
-          "Avec un moins"
-        ],
-        [
-          "02:11",
-          "Le piège du 1"
-        ],
-        [
-          "02:31",
-          "Une lettre en facteur"
-        ],
-        [
-          "02:48",
-          "Question 2"
-        ],
-        [
-          "03:31",
-          "Correction"
-        ],
-        [
-          "03:47",
-          "Ce que tu as appris"
-        ]
-      ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
-      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
-      "tags": [
-        "factoriser",
-        "factorisation",
-        "facteur commun",
-        "calcul littéral",
-        "développeuse",
-        "programmation",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:16",
-          "question": "Factorise 5x + 35.",
-          "choix": [
-            "5(x + 35)",
-            "x(5 + 35)",
-            "5(x + 7)"
-          ],
-          "reponse": 2,
-          "explication": "35, c'est 5 × 7 : dans la parenthèse, on écrit 7, pas 35."
-        },
-        {
-          "t": "02:48",
-          "question": "Factorise y² + 8y.",
-          "choix": [
-            "y(y + 8)",
-            "y(y + 8y)",
-            "8(y² + y)"
-          ],
-          "reponse": 0,
-          "explication": "Le y sort devant : dans la parenthèse, il reste y et 8."
-        }
-      ],
-      "centres": [
-        "technologie-ia"
-      ]
-    },
-    {
-      "id": "4e-facto-simple-short",
-      "pas_avant": "2026-12-21",
-      "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_factoriser_simple",
-      "classe": "4e",
-      "ceinture": "jaune",
-      "serie": "Maths 4e",
-      "type": "short",
-      "renvoie_vers": "4e-facto-simple",
-      "fichier": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple-short.mp4",
-      "miniature": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple-short.png",
-      "titre": "17 × 6 + 17 × 4 de tête, sans poser : le raccourci ⚡ — 4e #Shorts",
-      "accroche": "17 × 6 + 17 × 4, de tête, sans poser l'opération. Le raccourci : le 17 est dans les deux produits. On le sort devant : 17 × (6 + 4) = 17 × 10 = 170.\nC'est ça, factoriser.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : calcule de tête 23 × 7 + 23 × 3. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_simple&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
-      "tags": [
-        "calcul mental",
-        "raccourci",
-        "factoriser",
-        "de tête",
-        "calcul littéral",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI",
-        "ceinture jaune",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:24",
-          "question": "Factorise 3x + 15.",
-          "choix": [
-            "3(x + 15)",
-            "x(3 + 15)",
-            "3(x + 5)"
-          ],
-          "reponse": 2,
-          "explication": "15, c'est 3 × 5."
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "4e-facto-verifier",
-      "pas_avant": "2026-12-22",
-      "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_factoriser_verifier",
-      "classe": "4e",
-      "ceinture": "orange",
-      "serie": "Maths 4e",
-      "type": "longue",
-      "fichier": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier.mp4",
-      "miniature": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier.png",
-      "titre": "6(x + 30) = 6x + 30 ? — Vérifier une factorisation — épisode 3 · Maths 4e",
-      "accroche": "Tom est game designer. Dans son jeu, un niveau rapporte 6 points par étoile, plus 30 points de bonus : 6x + 30. Tom simplifie sa formule en 6(x + 30). Avant de publier son jeu, il vérifie.\n\nDans cette vidéo :\n• pour vérifier une factorisation, on développe : 6(x + 30) donne 6x + 180, c'est faux\n• la bonne formule : 30 = 6 × 5, donc 6(x + 5)\n• l'erreur de signe : 4x − 12 n'est pas 4(x + 3)\n• avec une lettre en facteur : x² + 9x n'est pas x(x + 9x)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 5x + 45 = 5(x + 45) : juste ou faux ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_verifier&display=simple\n\n🔢 Épisode 3 sur 5 de la série Factorisation d'EleveAI, en 4e.",
-      "chapitres": [
-        [
-          "00:00",
-          "Être sûr de soi"
-        ],
-        [
-          "00:07",
-          "Tom, game designer"
-        ],
-        [
-          "00:30",
-          "On développe"
-        ],
-        [
-          "00:48",
-          "La bonne formule"
-        ],
-        [
-          "01:09",
-          "Question 1"
-        ],
-        [
-          "01:48",
-          "L'erreur de signe"
-        ],
-        [
-          "02:08",
-          "Avec une lettre"
-        ],
-        [
-          "02:38",
-          "Question 2"
-        ],
-        [
-          "03:16",
-          "À toi de jouer"
-        ],
-        [
-          "03:31",
-          "Correction"
-        ],
-        [
-          "03:53",
-          "Ce que tu as appris"
-        ]
-      ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
-      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
-      "tags": [
-        "vérifier une factorisation",
-        "développer pour vérifier",
-        "factorisation",
-        "calcul littéral",
-        "game designer",
-        "jeu vidéo",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:09",
-          "question": "8x + 40 = 8(x + 5). Est-ce juste ?",
-          "choix": [
-            "oui",
-            "non, c'est 8(x + 40)",
-            "non, c'est 8x(1 + 5)"
-          ],
-          "reponse": 0,
-          "explication": "8 × x = 8x, et 8 × 5 = 40 : on retrouve 8x + 40."
-        },
-        {
-          "t": "02:38",
-          "question": "Léo factorise 9x − 27 en 9(x + 3). A-t-il raison ?",
-          "choix": [
-            "oui",
-            "non",
-            "on ne peut pas savoir"
-          ],
-          "reponse": 1,
-          "explication": "9(x + 3) donne 9x + 27 : le moins a disparu, il fallait 9(x − 3)."
-        }
-      ],
-      "centres": [
-        "jeux-video"
-      ]
-    },
-    {
-      "id": "4e-facto-verifier-short",
-      "pas_avant": "2026-12-22",
-      "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_factoriser_verifier",
-      "classe": "4e",
-      "ceinture": "orange",
-      "serie": "Maths 4e",
-      "type": "short",
-      "renvoie_vers": "4e-facto-verifier",
-      "fichier": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier-short.mp4",
-      "miniature": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier-short.png",
-      "titre": "4x + 20 = 4(x + 20) : ton copain a raison ? 🤔 — 4e #Shorts",
-      "accroche": "Ton copain écrit : 4x + 20 = 4(x + 20). Tu le crois ? Le secret pour en être sûr : on développe. 4 × x = 4x, 4 × 20 = 80 : on trouve 4x + 80, c'est faux !\nLa bonne réponse : 4(x + 5).\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : 6x + 42 = 6(x + 7) : juste ou faux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_verifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
-      "tags": [
-        "vérifier",
-        "développer",
-        "erreur",
-        "factorisation",
-        "calcul littéral",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI",
-        "ceinture orange",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:29",
-          "question": "Laquelle est juste pour 3x − 21 ?",
-          "choix": [
-            "3(x − 21)",
-            "3(x + 7)",
-            "3(x − 7)"
-          ],
-          "reponse": 2,
-          "explication": "On développe : 3(x − 7) = 3x − 21."
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "4e-facto-maximum",
-      "pas_avant": "2026-12-23",
-      "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_factorisation_defi",
-      "classe": "4e",
-      "ceinture": "orange",
-      "serie": "Maths 4e",
-      "type": "longue",
-      "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum.mp4",
-      "miniature": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum.png",
-      "titre": "2x² + 6x = 2x(x + 3) — Factoriser au maximum — épisode 4 · Maths 4e",
-      "accroche": "Camille est paysagiste. Elle dessine une terrasse rectangulaire en deux parties, d'aires 2x² et 6x. Quelle largeur ont-elles en commun ? Pour la trouver, on sort tout ce qui est commun.\n\nDans cette vidéo :\n• chaque terme en produit : 2x² = 2 × x × x, 6x = 2 × 3 × x\n• le nombre ET la lettre sortent : 2x² + 6x = 2x(x + 3)\n• on vérifie en développant\n• le piège : s'arrêter trop tôt, 12x + 18 = 2(6x + 9) n'est pas fini\n• c'est fini quand les termes de la parenthèse n'ont plus rien en commun\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : factorise au maximum 3x² + 12x.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple\n\n🔢 Épisode 4 sur 5 de la série Factorisation d'EleveAI, en 4e.",
-      "chapitres": [
-        [
-          "00:00",
-          "Tout sortir"
-        ],
-        [
-          "00:07",
-          "Camille, paysagiste"
-        ],
-        [
-          "00:25",
-          "Un nombre et une lettre"
-        ],
-        [
-          "00:44",
-          "On sort 2x"
-        ],
-        [
-          "01:06",
-          "Question 1"
-        ],
-        [
-          "01:46",
-          "Le piège : s'arrêter trop tôt"
-        ],
-        [
-          "02:11",
-          "Quand est-ce fini ?"
-        ],
-        [
-          "02:23",
-          "Question 2"
-        ],
-        [
-          "02:59",
-          "Correction"
-        ],
-        [
-          "03:16",
-          "Ce que tu as appris"
-        ]
-      ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
-      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
-      "tags": [
-        "factoriser au maximum",
-        "plus grand facteur commun",
-        "factorisation",
-        "calcul littéral",
-        "paysagiste",
-        "aire d'un rectangle",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:06",
-          "question": "Factorise au maximum 5x² + 10x.",
-          "choix": [
-            "5(x² + 2x)",
-            "5x(x + 2)",
-            "x(5x + 10)"
-          ],
-          "reponse": 1,
-          "explication": "A et C sont justes, mais pas finies : il reste un facteur commun dans la parenthèse."
-        },
-        {
-          "t": "02:23",
-          "question": "Quel est le plus grand facteur commun de 8x + 20 ?",
-          "choix": [
-            "2",
-            "8",
-            "4"
-          ],
-          "reponse": 2,
-          "explication": "8x = 4 × 2x et 20 = 4 × 5 : 2x et 5 n'ont plus rien en commun."
-        }
-      ],
-      "centres": [
-        "nature-ecologie",
-        "art-design"
-      ]
-    },
-    {
-      "id": "4e-facto-maximum-short",
-      "pas_avant": "2026-12-23",
-      "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_factorisation_defi",
-      "classe": "4e",
-      "ceinture": "orange",
-      "serie": "Maths 4e",
-      "type": "short",
-      "renvoie_vers": "4e-facto-maximum",
-      "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum-short.mp4",
-      "miniature": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum-short.png",
-      "titre": "4x² + 8x : beaucoup s'arrêtent trop tôt. Et toi ? 🎯 — 4e #Shorts",
-      "accroche": "Factorise 4x² + 8x. Beaucoup d'élèves s'arrêtent trop tôt. Le secret : on sort tout ce qui est commun. Le plus grand nombre : 4. La lettre : x. Donc 4x² + 8x = 4x(x + 2).\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : factorise au maximum 10x² + 15x. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
-      "tags": [
-        "factoriser au maximum",
-        "tout sortir",
-        "factorisation",
-        "calcul littéral",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI",
-        "ceinture orange",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:24",
-          "question": "Factorise au maximum 6x² + 9x.",
-          "choix": [
-            "3(2x² + 3x)",
-            "x(6x + 9)",
-            "3x(2x + 3)"
-          ],
-          "reponse": 2,
-          "explication": "Le 3 et le x sortent tous les deux."
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "4e-facto-defi",
-      "pas_avant": "2026-12-24",
-      "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_factorisation_defi",
-      "classe": "4e",
+      "pas_avant": "2027-03-05",
       "ceinture": "verte",
-      "serie": "Maths 4e",
       "type": "longue",
-      "fichier": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi.mp4",
-      "miniature": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi.png",
-      "titre": "8x + 96 = 8(x + 12) — Défis de factorisation — épisode 5 · Maths 4e",
-      "accroche": "Malik est comptable dans un club de football. Le club achète 8 tenues : un maillot à x euros et un short à 12 euros. Le prix total : 8x + 96. Malik veut l'écrire comme un produit. Trois défis : un vrai problème, les erreurs, un facteur négatif.\n\nDans cette vidéo :\n• un problème : 8x + 96 = 8(x + 12), 8 tenues fois le prix d'une tenue\n• corriger les erreurs : 7x + 7 n'est pas 7x, c'est 7(x + 1)\n• le défi des champions : un nombre négatif en facteur, −4x − 20 = −4(x + 5)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 9 jardinières de x fraisiers et 5 plants de menthe : écris le total, puis factorise-le.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple\n\n🔢 Épisode 5 sur 5 de la série Factorisation d'EleveAI, en 4e.",
+      "fichier": "terminale/maths/suites/36-limite-comparaison/eleveai-maths-terminale-suite-limite-comparaison.mp4",
+      "miniature": "terminale/maths/suites/36-limite-comparaison/eleveai-maths-terminale-suite-limite-comparaison.png",
+      "titre": "Une étoile qui scintille : vers quoi tend la moyenne ? — Comparaison et théorème des gendarmes — épisode 36 · Maths Tle spé",
+      "accroche": "Alice est astrophysicienne : elle mesure la lumière d'une étoile qui scintille. Chaque nuit, le signal oscille à cause de l'atmosphère. Vers quelle valeur la moyenne de ses mesures se stabilise-t-elle, malgré ces oscillations ? On ne sait pas la calculer directement : on va l'encadrer.\n\nDans cette vidéo :\n• encadrer : sin(n) est entre −1 et 1, donc 2 − 1/n ≤ 2 + sin(n)/n ≤ 2 + 1/n\n• le théorème des gendarmes : deux bornes de MÊME limite, la suite a cette limite\n• le théorème de comparaison : pour +∞ on minore, pour −∞ on majore\n• n + 3 cos(n) ≥ n − 3, donc elle tend vers +∞\n• le piège : être plus petite qu'une suite qui tend vers +∞ ne dit rien\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : pour n ≥ 1, la limite de vₙ = −n² + 4 sin(n), puis celle de wₙ = 1 + 2 cos(n)/n.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/limite-suite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=limite_suite&microId=limite_suite_comparaison&display=simple\n\n📈 Épisode 36 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
       "chapitres": [
         [
           "00:00",
-          "Trois défis"
+          "Comparaison et gendarmes · Alice, astrophysicienne : la moyenne qui se stabilise"
         ],
         [
-          "00:08",
-          "Malik, comptable d'un club de foot"
-        ],
-        [
-          "00:27",
-          "Le prix en produit"
-        ],
-        [
-          "00:48",
-          "Question 1"
-        ],
-        [
-          "01:32",
-          "Corrige les erreurs"
-        ],
-        [
-          "02:01",
-          "Un facteur négatif"
-        ],
-        [
-          "02:25",
-          "Question 2"
-        ],
-        [
-          "03:02",
-          "À toi de jouer"
-        ],
-        [
-          "03:21",
-          "Correction"
-        ],
-        [
-          "03:38",
-          "Ce que tu as appris"
-        ]
-      ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-factorisation",
-      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-factorisation",
-      "tags": [
-        "factorisation",
-        "problème",
-        "erreurs de factorisation",
-        "facteur négatif",
-        "calcul littéral",
-        "comptable",
-        "football",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:48",
-          "question": "6 équipes de x filles et 4 garçons : 6x + 24 élèves. Sa forme factorisée ?",
-          "choix": [
-            "6(x + 24)",
-            "6(x + 4)",
-            "x(6 + 24)"
-          ],
-          "reponse": 1,
-          "explication": "6 équipes, de x + 4 élèves."
-        },
-        {
-          "t": "02:25",
-          "question": "Mets −3 en facteur dans −3x + 12.",
-          "choix": [
-            "−3(x − 4)",
-            "−3(x + 4)",
-            "3(x − 4)"
-          ],
-          "reponse": 0,
-          "explication": "−3 × (−4) = +12."
-        }
-      ],
-      "centres": [
-        "football",
-        "argent-budget"
-      ]
-    },
-    {
-      "id": "4e-facto-defi-short",
-      "pas_avant": "2026-12-24",
-      "prioritaire": true,
-      "notionId": "litteral_factorisation",
-      "microId": "litteral_factorisation_defi",
-      "classe": "4e",
-      "ceinture": "orange",
-      "serie": "Maths 4e",
-      "type": "short",
-      "renvoie_vers": "4e-facto-defi",
-      "fichier": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi-short.mp4",
-      "miniature": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi-short.png",
-      "titre": "x² + 6x = x(x + 6x) : tu vois l'erreur cachée ? 🕵️ — 4e #Shorts",
-      "accroche": "Un élève écrit au tableau : x² + 6x = x(x + 6x). Il s'est trompé. On développe : x × x = x², x × 6x = 6x² : faux ! Le x est sorti, il ne reste que 6 : x(x + 6).\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : factorise 4x² + 4x. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #factorisation #4e #collège",
-      "tags": [
-        "erreur cachée",
-        "factorisation",
-        "développer pour vérifier",
-        "calcul littéral",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "EleveAI",
-        "ceinture orange",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:33",
-          "question": "Mets −2 en facteur dans −2x − 10.",
-          "choix": [
-            "−2(x − 5)",
-            "−2(x + 5)",
-            "2(x + 5)"
-          ],
-          "reponse": 1,
-          "explication": "−2 × 5 = −10."
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "cm1-aire-comprendre",
-      "pas_avant": "2026-12-26",
-      "notionId": "aire",
-      "microId": "aire_comprendre",
-      "classe": "cm1",
-      "ceinture": "jaune",
-      "serie": "Maths CM1",
-      "type": "longue",
-      "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.mp4",
-      "miniature": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.png",
-      "titre": "15 carreaux pour la cuisine : c'est quoi, l'aire ? — Comprendre l'aire — épisode 1 · Maths CM1",
-      "accroche": "Mathis est carreleur. Il doit couvrir le sol d'une cuisine avec des carreaux. Combien de carreaux ?\n\nDans cette vidéo :\n• couvrir une surface sans trou et sans superposer\n• l'aire, c'est la place que prend une surface : tout l'intérieur\n• le périmètre, c'est le tour (la plinthe) ; l'aire, c'est l'intérieur (le carrelage)\n• le piège : la figure la plus longue n'a pas toujours la plus grande aire\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : l'aire d'une terrasse de 3 rangées de carreaux.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple\n\n📐 Épisode 1 de la série Aire d'EleveAI, en CM1.",
-      "chapitres": [
-        [
-          "00:00",
-          "Combien de place prend une surface ?"
-        ],
-        [
-          "00:05",
-          "Mathis, carreleur"
-        ],
-        [
-          "00:16",
-          "Couvrir le sol"
-        ],
-        [
-          "00:32",
-          "L'aire, c'est l'intérieur"
+          "00:28",
+          "Encadrer : 2 + sin(n)/n"
         ],
         [
           "00:43",
-          "Le tour ou l'intérieur ?"
+          "Le théorème des gendarmes"
         ],
         [
           "00:57",
           "Question 1"
         ],
         [
-          "01:26",
-          "Le piège"
+          "01:30",
+          "Vers l'infini : le théorème de comparaison"
         ],
         [
-          "01:49",
+          "01:56",
+          "Le piège : majorer ne dit rien"
+        ],
+        [
+          "02:16",
           "Question 2"
         ],
         [
-          "02:19",
+          "02:54",
           "À toi de jouer"
         ],
         [
-          "02:40",
+          "03:15",
           "Correction"
         ],
         [
-          "02:52",
+          "03:42",
           "Ce que tu as appris"
         ]
       ],
       "tags": [
-        "aire",
-        "surface",
-        "carreaux",
-        "périmètre",
-        "carreleur",
-        "construction",
-        "aires",
+        "théorème des gendarmes",
+        "théorème de comparaison",
+        "encadrement",
+        "limite d'une suite",
+        "sinus",
+        "astrophysicienne",
+        "étoile",
         "maths",
-        "CM1",
-        "école",
-        "cycle 3",
-        "CRPE",
+        "terminale",
+        "spé maths",
+        "suites",
+        "bac",
+        "lycée",
         "EleveAI"
       ],
       "questions": [
         {
           "t": "00:57",
-          "question": "Pour peindre un mur, que cherche-t-on ?",
+          "question": "Pour tout n ≥ 1 : 5 − 3/n ≤ uₙ ≤ 5 + 1/n². La limite de uₙ est :",
           "choix": [
-            "son périmètre",
-            "son aire",
-            "sa hauteur"
-          ],
-          "reponse": 1,
-          "explication": "La peinture couvre tout le mur. On cherche son aire."
-        },
-        {
-          "t": "01:49",
-          "question": "Quelle figure a la plus grande aire ?",
-          "choix": [
-            "la verte : 8 carreaux",
-            "la bleue : 7 carreaux",
-            "la rouge : 6 carreaux"
+            "5",
+            "2",
+            "on ne peut pas conclure"
           ],
           "reponse": 0,
-          "explication": "On compte les carreaux. La verte en couvre 8 : c'est la plus grande aire."
+          "explication": "Les deux bornes tendent vers 5 : par les gendarmes, uₙ converge vers 5."
+        },
+        {
+          "t": "02:16",
+          "question": "Pour tout n ≥ 1 : 1 − 1/n ≤ uₙ ≤ 3 + 1/n. Que peut-on affirmer ?",
+          "choix": [
+            "uₙ converge vers 2",
+            "uₙ converge vers 1",
+            "on ne peut pas conclure sur la limite"
+          ],
+          "reponse": 2,
+          "explication": "Les bornes tendent vers 1 et vers 3 : deux limites différentes, les gendarmes ne s'appliquent pas."
         }
       ],
       "centres": [
-        "construction",
-        "art-design"
-      ]
+        "espace",
+        "sciences"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/limite-suite"
     },
     {
-      "id": "cm1-aire-comprendre-short",
-      "pas_avant": "2026-12-26",
-      "notionId": "aire",
-      "microId": "aire_comprendre",
-      "classe": "cm1",
+      "id": "terminale-suite-limite-comparaison-short",
+      "notionId": "limite_suite",
+      "microId": "limite_suite_comparaison",
+      "classe": "terminale",
+      "serie": "Maths Tle spé",
+      "prioritaire": true,
+      "pas_avant": "2027-03-06",
       "ceinture": "blanche",
-      "serie": "Maths CM1",
       "type": "short",
-      "renvoie_vers": "cm1-aire-comprendre",
-      "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre-short.mp4",
-      "miniature": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre-short-miniature.png",
-      "titre": "10 m de ficelle pour couvrir ma cabane : tu paries ? #maths #cm1",
-      "accroche": "Ti Margo veut couvrir le sol de sa cabane. Il fait le tour : 10 mètres, et il achète 10 mètres de ficelle... La ficelle fait le tour, mais le sol reste tout nu ! Le tour, c'est le périmètre. Pour couvrir, il faut l'aire : des carreaux.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un sol de 2 rangées de 4 carreaux. Combien de carreaux pour le couvrir ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "renvoie_vers": "terminale-suite-limite-comparaison",
+      "fichier": "terminale/maths/suites/36-limite-comparaison/eleveai-maths-terminale-suite-limite-comparaison-short.mp4",
+      "miniature": "terminale/maths/suites/36-limite-comparaison/eleveai-maths-terminale-suite-limite-comparaison-short.png",
+      "titre": "Trouver une limite sans connaître la suite ? 🧪 — Tle spé #Shorts",
+      "accroche": "Théo est technicien de laboratoire. Il ne connaît pas la formule de sa mesure uₙ, mais il sait que, pour n ≥ 1 : 8 − 1/n ≤ uₙ ≤ 8 + 2/n. 1/n et 2/n tendent vers 0 : les deux bornes se resserrent.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour n = 100, entre quels nombres se trouve forcément la mesure ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=limite_suite&microId=limite_suite_comparaison&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #Tlespé #lycée",
       "tags": [
-        "aire",
-        "périmètre",
-        "carreaux",
-        "cabane",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "aires",
+        "technicien de laboratoire",
+        "théorème des gendarmes",
+        "encadrement",
+        "limite",
         "maths",
-        "CM1",
-        "école",
-        "cycle 3",
-        "CRPE",
+        "terminale",
+        "spé maths",
+        "suites",
+        "bac",
+        "lycée",
         "EleveAI",
+        "ceinture blanche",
         "Shorts"
       ],
       "questions": [
         {
-          "t": "00:23",
-          "question": "Mon sol a 2 rangées de 3 carreaux. Combien de carreaux pour le couvrir ?",
+          "t": "00:30",
+          "question": "La mesure uₙ converge vers :",
           "choix": [
+            "8",
             "10",
-            "5",
-            "6"
-          ],
-          "reponse": 2,
-          "explication": "3 carreaux, plus 3 carreaux : 6 carreaux. Mon sol est couvert !"
-        }
-      ],
-      "centres": [
-        "construction",
-        "nature-ecologie"
-      ]
-    },
-    {
-      "id": "cm1-aire-unite",
-      "pas_avant": "2026-12-28",
-      "notionId": "aire",
-      "microId": "aire_unite",
-      "classe": "cm1",
-      "ceinture": "jaune",
-      "serie": "Maths CM1",
-      "type": "longue",
-      "fichier": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite.mp4",
-      "miniature": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite.png",
-      "titre": "12 cases ou 10 cases : quelle île est la plus grande ? — Comparer des aires — épisode 2 · Maths CM1",
-      "accroche": "Awa est créatrice de jeux vidéo. Sur la carte de son jeu, elle dessine deux îles avec des cases. Le joueur veut l'île la plus grande : laquelle ?\n\nDans cette vidéo :\n• comparer des aires en comptant avec une unité : la case\n• deux formes différentes peuvent avoir la même aire\n• le piège : 4 grandes cases contre 9 petites cases, ce n'est pas la même unité\n• pour comparer, on mesure avec la même unité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : la grotte (2 grandes cases) ou la rivière (7 petites cases) ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_unite&display=simple\n\n📐 Épisode 2 de la série Aire d'EleveAI, en CM1.",
-      "chapitres": [
-        [
-          "00:00",
-          "Qui a la plus grande surface ?"
-        ],
-        [
-          "00:05",
-          "Awa, créatrice de jeux vidéo"
-        ],
-        [
-          "00:19",
-          "Compter avec une unité"
-        ],
-        [
-          "00:37",
-          "Même aire, formes différentes"
-        ],
-        [
-          "00:54",
-          "Question 1"
-        ],
-        [
-          "01:24",
-          "Le piège des grandes cases"
-        ],
-        [
-          "01:53",
-          "La même unité"
-        ],
-        [
-          "02:01",
-          "Question 2"
-        ],
-        [
-          "02:34",
-          "À toi de jouer"
-        ],
-        [
-          "02:53",
-          "Correction"
-        ],
-        [
-          "03:12",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "comparer des aires",
-        "unité d'aire",
-        "cases",
-        "même aire",
-        "jeux vidéo",
-        "créatrice de jeux vidéo",
-        "aires",
-        "maths",
-        "CM1",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:54",
-          "question": "Le lac : 9 cases, la forêt : 11 cases, la plage : 7 cases. Qui a la plus grande aire ?",
-          "choix": [
-            "le lac",
-            "la plage",
-            "la forêt"
-          ],
-          "reponse": 2,
-          "explication": "11 cases, c'est le plus grand nombre de cases. La forêt a la plus grande aire."
-        },
-        {
-          "t": "02:01",
-          "question": "Deux figures couvrent chacune 6 cases, avec des formes différentes. Que peut-on dire ?",
-          "choix": [
-            "la plus longue est la plus grande",
-            "elles ont la même aire",
             "on ne peut pas savoir"
           ],
-          "reponse": 1,
-          "explication": "Elles couvrent le même nombre de cases, avec la même unité. Elles ont la même aire."
-        }
-      ],
-      "centres": [
-        "jeux-video",
-        "art-design"
-      ]
-    },
-    {
-      "id": "cm1-aire-unite-short",
-      "pas_avant": "2026-12-28",
-      "notionId": "aire",
-      "microId": "aire_unite",
-      "classe": "cm1",
-      "ceinture": "blanche",
-      "serie": "Maths CM1",
-      "type": "short",
-      "renvoie_vers": "cm1-aire-unite",
-      "fichier": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite-short.mp4",
-      "miniature": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite-short-miniature.png",
-      "titre": "Ma sœur a 10 carrés de chocolat, moi 6 : pas juste ? #maths #cm1",
-      "accroche": "La sœur de Ti Margo a une tablette de 10 carrés, lui seulement 6... Mais ses carrés sont deux fois plus gros : un gros carré, c'est 2 petits !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une tablette de 5 gros carrés, une autre de 9 petits carrés. Un gros carré, c'est 2 petits. Laquelle est la plus grande ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
-      "tags": [
-        "comparer des aires",
-        "unité",
-        "chocolat",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "aires",
-        "maths",
-        "CM1",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:16",
-          "question": "Mes 6 gros carrés, ça fait combien de petits carrés ?",
-          "choix": [
-            "12",
-            "8",
-            "6"
-          ],
           "reponse": 0,
-          "explication": "6 fois 2 : 12 petits carrés. Ma tablette est plus grande que la sienne !"
+          "explication": "Les deux bornes tendent vers 8 : coincée entre elles, la mesure tend vers 8."
         }
       ],
       "centres": [
-        "cuisine",
-        "jeux-defis"
+        "sciences",
+        "corps-sante"
       ]
     },
     {
-      "id": "cm1-aire-carre-rectangle",
-      "pas_avant": "2026-12-30",
-      "notionId": "aire",
-      "microId": "aire_carre_rectangle",
-      "classe": "cm1",
+      "id": "terminale-suite-limite-monotone-bornee",
+      "notionId": "limite_suite",
+      "microId": "limite_suite_monotone_bornee",
+      "classe": "terminale",
+      "serie": "Maths Tle spé",
+      "prioritaire": true,
+      "pas_avant": "2027-03-07",
       "ceinture": "verte",
-      "serie": "Maths CM1",
       "type": "longue",
-      "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.mp4",
-      "miniature": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.png",
-      "titre": "4 rangées de 6 salades : combien de mètres carrés ? — L'aire du rectangle et du carré — épisode 3 · Maths CM1",
-      "accroche": "Lina est maraîchère. Elle plante des salades dans une parcelle rectangulaire, une salade par mètre carré. Combien de mètres carrés fait la parcelle, sans compter les cases une par une ?\n\nDans cette vidéo :\n• compter rangée par rangée : 6 + 6 + 6 + 6\n• plus rapide : on multiplie, 4 × 6 = 24 m²\n• l'aire d'un carré : le côté fois le côté\n• le piège : on n'ajoute pas 4 + 6, et on ne fait pas le tour (c'est le périmètre)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un jardin de 6 rangées de 8 cases, dont 20 déjà plantées.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple\n\n📐 Épisode 3 de la série Aire d'EleveAI, en CM1.",
+      "fichier": "terminale/maths/suites/37-limite-monotone-bornee/eleveai-maths-terminale-suite-limite-monotone-bornee.mp4",
+      "miniature": "terminale/maths/suites/37-limite-monotone-bornee/eleveai-maths-terminale-suite-limite-monotone-bornee.png",
+      "titre": "Le lac du barrage va-t-il déborder ? — Le théorème de convergence monotone — épisode 37 · Maths Tle spé",
+      "accroche": "Yohan est hydrologue : il surveille le lac d'un barrage. Au départ, 5 millions de m³ d'eau ; chaque mois, 20 % de l'eau est relâchée vers la rivière, et les pluies en apportent 4 millions. Le lac va-t-il déborder, et à quel niveau va-t-il se stabiliser ?\n\nDans cette vidéo :\n• le modèle : u₀ = 5, uₙ₊₁ = 0,8 uₙ + 4, croissante et majorée par 20 (par récurrence)\n• le théorème : croissante et majorée, ou décroissante et minorée, la suite converge\n• le théorème donne la convergence, pas la valeur de la limite\n• trouver la limite : ℓ = 0,8 ℓ + 4, donc ℓ = 20\n• le piège : un majorant n'est pas forcément la limite\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : u₀ = 10 et uₙ₊₁ = 0,5 uₙ + 2 ; on admet que la suite est décroissante et minorée par 3. Que peut-on conclure, et quelle est sa limite ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/limite-suite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=limite_suite&microId=limite_suite_monotone_bornee&display=simple\n\n📈 Épisode 37 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
       "chapitres": [
         [
           "00:00",
-          "Compter les carreaux sans les compter ?"
+          "Convergence monotone · Yohan, hydrologue : le lac va-t-il déborder ?"
         ],
         [
-          "00:06",
-          "Lina, maraîchère"
+          "00:33",
+          "Le modèle : uₙ₊₁ = 0,8uₙ + 4"
         ],
         [
-          "00:24",
-          "Rangée par rangée"
+          "00:59",
+          "Le théorème de convergence monotone"
         ],
         [
-          "00:39",
-          "On multiplie"
-        ],
-        [
-          "00:57",
-          "L'aire d'un carré"
-        ],
-        [
-          "01:14",
+          "01:13",
           "Question 1"
         ],
         [
-          "01:43",
-          "Le piège : ajouter ou faire le tour"
+          "01:49",
+          "Trouver la limite : ℓ = 0,8ℓ + 4"
         ],
         [
-          "02:04",
+          "02:08",
+          "Le piège : un majorant n'est pas la limite"
+        ],
+        [
+          "02:28",
           "Question 2"
         ],
         [
-          "02:31",
+          "03:04",
           "À toi de jouer"
         ],
         [
-          "02:48",
+          "03:31",
           "Correction"
         ],
         [
-          "03:05",
+          "03:52",
           "Ce que tu as appris"
         ]
       ],
       "tags": [
-        "aire du rectangle",
-        "aire du carré",
-        "mètre carré",
-        "multiplier",
-        "rangées",
-        "maraîchère",
-        "potager",
-        "aires",
+        "convergence monotone",
+        "suite croissante majorée",
+        "suite décroissante minorée",
+        "limite d'une suite",
+        "point fixe",
+        "hydrologue",
+        "barrage",
         "maths",
-        "CM1",
-        "école",
-        "cycle 3",
-        "CRPE",
+        "terminale",
+        "spé maths",
+        "suites",
+        "bac",
+        "lycée",
         "EleveAI"
       ],
       "questions": [
         {
-          "t": "01:14",
-          "question": "Un rectangle a 3 rangées de 7 carreaux. Quelle est son aire ?",
+          "t": "01:13",
+          "question": "Une suite est croissante et majorée par 50. Que peut-on conclure ?",
           "choix": [
-            "21 carreaux",
-            "10 carreaux",
-            "20 carreaux"
+            "elle converge vers 50",
+            "elle converge, mais on ne connaît pas encore sa limite",
+            "elle tend vers +∞"
           ],
-          "reponse": 0,
-          "explication": "3 rangées de 7 : 3 × 7 = 21. L'aire est de 21 carreaux."
+          "reponse": 1,
+          "explication": "Le théorème donne la convergence, pas la valeur : 50 est un majorant, pas forcément la limite."
         },
         {
-          "t": "02:04",
-          "question": "Un carré a 3 carreaux de côté. Quelle est son aire ?",
+          "t": "02:28",
+          "question": "On sait seulement qu'une suite est décroissante. Pour appliquer le théorème, que faut-il encore démontrer ?",
           "choix": [
-            "12 carreaux",
-            "6 carreaux",
-            "9 carreaux"
+            "qu'elle est minorée",
+            "qu'elle est majorée",
+            "que sa limite est finie"
           ],
-          "reponse": 2,
-          "explication": "3 rangées de 3 carreaux : 3 × 3 = 9. L'aire du carré est de 9 carreaux."
+          "reponse": 0,
+          "explication": "Une suite qui descend a besoin d'un plancher : elle doit être minorée. « Sa limite est finie », c'est justement ce qu'on veut prouver."
         }
       ],
       "centres": [
         "nature-ecologie",
-        "cuisine"
-      ]
+        "sciences"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/limite-suite"
     },
     {
-      "id": "cm1-aire-carre-rectangle-short",
-      "pas_avant": "2026-12-30",
-      "notionId": "aire",
-      "microId": "aire_carre_rectangle",
-      "classe": "cm1",
+      "id": "terminale-suite-limite-monotone-bornee-short",
+      "notionId": "limite_suite",
+      "microId": "limite_suite_monotone_bornee",
+      "classe": "terminale",
+      "serie": "Maths Tle spé",
+      "prioritaire": true,
+      "pas_avant": "2027-03-08",
       "ceinture": "blanche",
-      "serie": "Maths CM1",
       "type": "short",
-      "renvoie_vers": "cm1-aire-carre-rectangle",
-      "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle-short.mp4",
-      "miniature": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle-short-miniature.png",
-      "titre": "Je compte 40 carreaux un par un… et je me perds ! #maths #cm1",
-      "accroche": "Ti Margo compte les carreaux de sa terrasse un par un : 1, 2, 3… 37, 38… perdu ! Sa petite sœur rigole : regarde les rangées ! 8 rangées de 5 carreaux, pas besoin de tout compter.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un carré de 6 carreaux de côté. Combien de carreaux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "renvoie_vers": "terminale-suite-limite-monotone-bornee",
+      "fichier": "terminale/maths/suites/37-limite-monotone-bornee/eleveai-maths-terminale-suite-limite-monotone-bornee-short.mp4",
+      "miniature": "terminale/maths/suites/37-limite-monotone-bornee/eleveai-maths-terminale-suite-limite-monotone-bornee-short.png",
+      "titre": "Ta batterie finit-elle à 100 % ? 🔋 — Tle spé #Shorts",
+      "accroche": "Élodie est ingénieure chez un constructeur de voitures électriques. Pour protéger la batterie, la charge, en %, au quart d'heure n, suit u₀ = 20 et uₙ₊₁ = 0,5 uₙ + 40 : 20, 50, 65, 72,5… la charge monte, et reste sous 100.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : en résolvant ℓ = 0,5 ℓ + 40, à quel pourcentage la charge se stabilise-t-elle ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=limite_suite&microId=limite_suite_monotone_bornee&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #Tlespé #lycée",
       "tags": [
-        "aire du rectangle",
-        "rangées",
-        "multiplier",
-        "carreaux",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "aires",
+        "voiture électrique",
+        "batterie",
+        "convergence monotone",
+        "limite",
         "maths",
-        "CM1",
-        "école",
-        "cycle 3",
-        "CRPE",
+        "terminale",
+        "spé maths",
+        "suites",
+        "bac",
+        "lycée",
         "EleveAI",
+        "ceinture blanche",
         "Shorts"
       ],
       "questions": [
         {
-          "t": "00:21",
-          "question": "8 rangées de 5 carreaux, ça fait combien de carreaux ?",
+          "t": "00:35",
+          "question": "La suite est croissante et majorée par 100. Que peut-on affirmer ?",
           "choix": [
-            "13",
-            "40",
-            "35"
+            "elle converge vers 100",
+            "elle tend vers +∞",
+            "elle converge vers un nombre inférieur ou égal à 100"
           ],
-          "reponse": 1,
-          "explication": "8 × 5 : 40 carreaux. En une seconde !"
+          "reponse": 2,
+          "explication": "Le théorème donne la convergence ; 100 est un plafond, pas forcément la limite."
         }
       ],
       "centres": [
-        "construction",
-        "jeux-defis"
+        "transports",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "terminale-suite-limite-defi",
+      "notionId": "limite_suite",
+      "microId": "limite_suite_defi",
+      "classe": "terminale",
+      "serie": "Maths Tle spé",
+      "prioritaire": true,
+      "pas_avant": "2027-03-09",
+      "ceinture": "bleue",
+      "type": "longue",
+      "fichier": "terminale/maths/suites/38-limite-defi/eleveai-maths-terminale-suite-limite-defi.mp4",
+      "miniature": "terminale/maths/suites/38-limite-defi/eleveai-maths-terminale-suite-limite-defi.png",
+      "titre": "200 tortues : se stabiliser ou disparaître ? — Un exercice de bac sur les limites de suites — épisode 38 · Maths Tle spé",
+      "accroche": "Maïa est biologiste marine dans une réserve où vivent 200 tortues. Chaque année, 25 % d'entre elles quittent la zone, et 100 jeunes tortues arrivent. Combien de tortues la réserve accueillera-t-elle sur le long terme ? Un vrai exercice de bac, en 4 questions.\n\nDans cette vidéo :\n• 1 · majorer par récurrence : uₙ ≤ 400\n• 2 · le sens de variation : uₙ₊₁ − uₙ = 0,25 (400 − uₙ) ≥ 0, la suite est croissante\n• 3 · le théorème de convergence monotone : elle converge vers un réel ℓ\n• 4 · la limite : ℓ = 0,75 ℓ + 100, donc ℓ = 400 tortues\n• le piège : ℓ = f(ℓ) seul ne prouve jamais la convergence (1,5 uₙ − 200 tend vers −∞)\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : u₀ = 0 et uₙ₊₁ = √(uₙ + 12) ; on admet que la suite converge vers un réel ℓ positif. Quelle équation vérifie ℓ, et que vaut ℓ ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/limite-suite\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=limite_suite&microId=limite_suite_defi&display=simple\n\n📈 Épisode 38 sur 38 de la série Suites d'EleveAI, de la 1re à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux destins pour 200 tortues · Maïa, biologiste marine"
+        ],
+        [
+          "00:28",
+          "L'énoncé du bac"
+        ],
+        [
+          "00:58",
+          "Majorer par récurrence"
+        ],
+        [
+          "01:34",
+          "Question 1 : l'hérédité"
+        ],
+        [
+          "02:10",
+          "La suite est croissante"
+        ],
+        [
+          "02:31",
+          "Question 2 : le théorème"
+        ],
+        [
+          "03:04",
+          "Calculer la limite"
+        ],
+        [
+          "03:20",
+          "Le piège : ℓ = f(ℓ) ne suffit pas"
+        ],
+        [
+          "03:44",
+          "Question 3 : la raison"
+        ],
+        [
+          "04:22",
+          "Défi : uₙ₊₁ = √(uₙ + 12)"
+        ],
+        [
+          "04:49",
+          "Correction du défi"
+        ],
+        [
+          "05:09",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "exercice type bac",
+        "limite d'une suite",
+        "convergence monotone",
+        "récurrence",
+        "point fixe",
+        "biologiste marine",
+        "tortues",
+        "maths",
+        "terminale",
+        "spé maths",
+        "suites",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:34",
+          "question": "Dans l'hérédité, on suppose uₖ ≤ 400 et on obtient uₖ₊₁ ≤ N. Que vaut N ?",
+          "choix": [
+            "300",
+            "500",
+            "400"
+          ],
+          "reponse": 2,
+          "explication": "0,75 × 400 + 100 = 300 + 100 = 400 : la propriété se transmet."
+        },
+        {
+          "t": "02:31",
+          "question": "La suite est croissante et majorée par 400. Le théorème de convergence monotone permet d'affirmer :",
+          "choix": [
+            "elle converge vers 400",
+            "elle converge vers un réel ℓ",
+            "elle tend vers +∞"
+          ],
+          "reponse": 1,
+          "explication": "Elle converge, mais le théorème ne donne pas la valeur de ℓ : il faut la calculer."
+        },
+        {
+          "t": "03:44",
+          "question": "Avec u₀ = 200 et uₙ₊₁ = 1,5uₙ − 200, la suite uₙ − 400 est géométrique de raison :",
+          "choix": [
+            "1,5",
+            "−200",
+            "0,5"
+          ],
+          "reponse": 0,
+          "explication": "uₙ − 400 = −200 × 1,5ⁿ ; 1,5 > 1, donc la suite tend vers −∞."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ],
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/limite-suite"
+    },
+    {
+      "id": "terminale-suite-limite-defi-short",
+      "notionId": "limite_suite",
+      "microId": "limite_suite_defi",
+      "classe": "terminale",
+      "serie": "Maths Tle spé",
+      "prioritaire": true,
+      "pas_avant": "2027-03-10",
+      "ceinture": "blanche",
+      "type": "short",
+      "renvoie_vers": "terminale-suite-limite-defi",
+      "fichier": "terminale/maths/suites/38-limite-defi/eleveai-maths-terminale-suite-limite-defi-short.mp4",
+      "miniature": "terminale/maths/suites/38-limite-defi/eleveai-maths-terminale-suite-limite-defi-short.png",
+      "titre": "Un ballon qui rebondit sans fin : distance infinie ? 🏀 — Tle spé #Shorts",
+      "accroche": "Léo est ingénieur chez un fabricant de ballons de basket. Dans son test, le premier trajet du ballon fait 2 mètres, et chaque trajet suivant vaut 0,5 fois le précédent : 2, 1, 0,5, 0,25 mètre. La distance totale est Sₙ = 2 × (1 − 0,5ⁿ⁺¹)/(1 − 0,5).\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : si chaque trajet vaut 0,75 fois le précédent, avec toujours 2 mètres au départ, quelle distance totale parcourt le ballon ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=limite_suite&microId=limite_suite_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #Tlespé #lycée",
+      "tags": [
+        "ballon de basket",
+        "somme géométrique",
+        "série",
+        "limite",
+        "maths",
+        "terminale",
+        "spé maths",
+        "suites",
+        "bac",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:39",
+          "question": "La distance totale Sₙ tend vers :",
+          "choix": [
+            "+∞",
+            "4 mètres",
+            "2 mètres"
+          ],
+          "reponse": 1,
+          "explication": "2 / (1 − 0,5) = 2 / 0,5 = 4 mètres : une infinité de rebonds, mais une distance finie."
+        }
+      ],
+      "centres": [
+        "sport",
+        "sciences"
       ]
     }
   ]
