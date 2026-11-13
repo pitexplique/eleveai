@@ -326,6 +326,21 @@ EPS = [
          sa="Malik est astronome : la nuit n, son télescope repère uₙ = 3 × 2ⁿ nouvelles étoiles. Tu trouves u₃ de tête ?",
          stoi="combien vaut u₅ ?", srep="96 : 2⁵ = 32, et 3 × 32 = 96.",
          stags=["astronomie", "étoiles", "télescope", "puissance", "suites"]),
+    dict(num="19", slug="recurrence", classe="premiere-spe", notion="suites", micro="suite_recurrence",
+         ceinture="verte", sc="blanche", centres=["animaux-marins", "sciences"], scentres=["cinema-series"],
+         titre="Une tortue prend 15 g par semaine : sa masse dans un an ? — Suite définie par récurrence — épisode 19 · Maths 1re spé",
+         intro="Awa est vétérinaire dans un centre de soins pour tortues marines : à son arrivée, une jeune tortue pèse 40 g, et elle prend 15 g chaque semaine. Comment calculer un terme à partir du précédent, et quand passer à une formule directe ?",
+         puces=["une récurrence : un premier terme (u₀ = 40) et une règle pour passer au suivant (uₙ₊₁ = uₙ + 15)", "on calcule de proche en proche : u₁ = 55, u₂ = 70, u₃ = 85", "pour un terme lointain : on reconnaît une suite arithmétique, forme explicite uₙ = 40 + 15n, u₅₂ = 820 g", "dans l'autre sens : vₙ = 5 × 2ⁿ donne vₙ₊₁ = 2vₙ avec v₀ = 5", "le piège : si la suite commence à u₁, uₙ = 40 + 15(n − 1)"],
+         defi="Une suite est définie par u₁ = 7 et, pour n ≥ 1, uₙ₊₁ = uₙ − 4. Donne sa forme explicite, puis calcule u₃₀.",
+         chap={"00-garde": "Suite définie par récurrence", "01-situation": "Awa et la jeune tortue", "02-recurrence": "Un premier terme, une règle", "03-proche": "De proche en proche", "04-question": "Question : combien vaut u₂ ?", "05-explicite": "52 semaines : la forme explicite", "06-inverse": "Dans l'autre sens : explicite → récurrence", "07-piege": "Le piège : la suite commence à u₁", "08-question": "Question : quelle suite est explicite ?", "09-defi": "À toi de jouer", "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+         qs=[("04-question", "Une suite est définie par u₀ = 3 et uₙ₊₁ = 2uₙ − 1. Combien vaut u₂ ?", ["9", "5", "10"], 0, "u₁ = 2 × 3 − 1 = 5, puis u₂ = 2 × 5 − 1 = 9."),
+             ("08-question", "Laquelle de ces suites est définie de façon explicite ?", ["u₀ = 2 et uₙ₊₁ = 3uₙ", "uₙ = n² − 4", "u₁ = 5 et uₙ₊₁ = uₙ + n"], 1, "uₙ est donné directement en fonction de n : on peut calculer u₁₀₀ tout de suite, sans les termes d'avant.")],
+         tags=["suites", "récurrence", "forme explicite", "de proche en proche", "tortues marines", "vétérinaire"],
+         st="Tu prévois l'épisode 3 en 10 secondes ? 🎬 — 1re spé #Shorts",
+         sq=("03-question", "u₂ = 5 et uₙ₊₁ = 2uₙ − 1. Combien vaut u₃ ?", ["10", "5", "9"], 2, "2 × 5 = 10, moins 1 : 9 millions. On part du terme précédent, et on n'oublie pas le − 1."),
+         sa="Une série est vue par 3 millions de personnes pour l'épisode 1 : u₁ = 3. À chaque épisode, l'audience (en millions) est multipliée par 2, puis on enlève 1 : uₙ₊₁ = 2uₙ − 1. Tu prévois l'épisode 3 ?",
+         stoi="combien vaut u₅ ?", srep="33 : u₄ = 2 × 9 − 1 = 17, puis u₅ = 2 × 17 − 1 = 33.",
+         stags=["séries", "audience", "spectateurs", "récurrence", "suites"]),
 ]
 # Les 4 vidéos communes : la même vidéo sert aussi la micro de la classe du dessus.
 AUSSI = {
