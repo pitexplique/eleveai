@@ -37,6 +37,8 @@ EP = [
      "on ajoute les 3 côtés !", True, "jaune", (0, 0), "perimetre"),
     ("quadrilatere", "02-quadrilatere", ["CALCULER LE PÉRIMÈTRE", "D'UN RECTANGLE"], "(60 + 40) × 2 = 200 cm",
      "la moitié du tour, × 2 !", True, "jaune", (0, 0), "perimetre"),
+    ("polygone", "03-polygone", ["CALCULER LE PÉRIMÈTRE", "D'UN POLYGONE"], "50 × 8 = 400 cm",
+     "une croix sur chaque côté !", True, "verte", (0, 0), "perimetre"),
 ]
 
 

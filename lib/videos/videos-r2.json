@@ -6082,6 +6082,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_unite&display=simple"
  },
+ "cm1-perimetre-polygone": {
+  "fichier": "cm1/maths/perimetre/03-polygone/eleveai-maths-cm1-perimetre-polygone.mp4",
+  "poster": "cm1/maths/perimetre/03-polygone/eleveai-maths-cm1-perimetre-polygone.png",
+  "vignette": null,
+  "titre": "Combien de bois autour d'une table à 8 côtés ? — Calculer le périmètre d'un polygone — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_polygone&display=simple"
+ },
+ "cm1-perimetre-polygone-short": {
+  "fichier": "cm1/maths/perimetre/03-polygone/eleveai-maths-cm1-perimetre-polygone-short.mp4",
+  "poster": "cm1/maths/perimetre/03-polygone/eleveai-maths-cm1-perimetre-polygone-short-miniature.png",
+  "vignette": null,
+  "titre": "Mon étoile a 5 pointes… donc 5 côtés ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_polygone&display=simple"
+ },
  "cm1-perimetre-quadrilatere": {
   "fichier": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere.mp4",
   "poster": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere.png",

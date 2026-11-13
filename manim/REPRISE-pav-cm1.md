@@ -114,5 +114,11 @@ Série aire CM1 terminée. Suite du plan CM1 (`PLAN-perimetre-aire-volume.md`) :
 - Miniatures, manifeste `cm1-perimetre-quadrilatere` (jaune, art-design + construction) + `-short` (blanche, 00:18 C) le **03/01/2027** ; fiche YouTube ; R2 du dossier 02-quadrilatere seul ; `generer-videos-r2.mjs` ; coach branché (2 vidéos).
 - ⚠️ Une autre session a déjà l'ép. 3 polygone en cours (entrée `cm1-perimetre-polygone` dans `videos-r2.json` non commitée) : ne pas la reprendre ici.
 
+## Fait le 13/11 (session 8 bis) — ✅ PÉRIMÈTRE ép. 3 POLYGONE fini
+- ✅ `manim/scripts/cm1/perimetre_polygone.py` (`PerimetrePolygoneCM1`, Emma menuisière ; outils dans le script : `pts_regulier(n, côté, u)`, `croix`, `numero`, `coin`) : octogone 50 × 8 = 400 ; plateau 40, 30, 50, 30, 20 à l'échelle (170) ; Q1 hexagone C 54 ; Q2 pentagone 7, 4, 6, 4, 5 (presque régulier, à l'échelle) B 26 ; défi bac à sable 150 × 5 = 750 > 700. Dry run AUDIT propre (seul « 974 »), planche -ql relue deux fois, HD `manim/sorties/cm1/maths/perimetre/03-polygone/` (3 min 48), bords 0. Questions 01:14 C, 02:03 B.
+  - ⚠️ Leçons : `au_mot` doit couvrir TOUTE la ligne qui suit (« Les 8 côtés sont égaux », pas « sont égaux ») sinon le « 8 » attend le suivant (+5 s) ; nombres énumérés vite (« 40, 30, 50… ») : extraits par paires (« 40, 30 ») et animations de 0,15 s ; dry run avec `--media_dir` à soi (le cache `media/texts` commun est verrouillé par l'autre rendu).
+- ✅ Short « L'étoile à 10 côtés » (`films/cm1-perimetre-polygone.js`, 68 s) : « 5 pointes, donc 5 côtés ? », la petite sœur compte 10 croix, 6 × 10 = 60 (A) ; défi panneau stop 8 × 30. Étoile R 290 / r 140 (plus maigre, les « 6 » s'entassent) ; numéros effacés quand les longueurs arrivent.
+- Miniatures (`miniature_aire_cm1.py perimetre-polygone`), manifeste `cm1-perimetre-polygone` (verte, construction + art-design) + `-short` (blanche, 00:19 A, art-design + jeux-defis) le **05/01/2027** ; fiche YouTube ; R2 du dossier 03-polygone seul ; `generer-videos-r2.mjs` ; coach branché (2 vidéos).
+
 ## Prochaine étape (session 9)
-Ép. 3 polygone : voir la session qui l'a commencé. Puis ép. 4 défi (bleue). Dates libres : 04/01 (1 paysage), 05/01… (≤ 2 paysages et 5 vidéos par jour).
+Ép. 4 défi (Karim, ceinture bleue ; questions B, C ; short escargots A) : même chaîne. Dates libres : 04/01 (1 paysage), 06/01 (1 paysage), 07/01… (≤ 2 paysages et 5 vidéos par jour).
