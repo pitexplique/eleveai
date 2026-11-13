@@ -1,0 +1,7 @@
+{
+  "voix": "cm1-perimetre-{ep}-short",
+  "sons": "public/sons/cm1-perimetre-{ep}-short",
+  "sortie": "manim/sorties/cm1/maths/perimetre/{num}-{ep}",
+  "nom": "eleveai-maths-cm1-perimetre-{ep}-short",
+  "episodes": { "triangle": "01", "quadrilatere": "02", "polygone": "03", "defi": "04" }
+}

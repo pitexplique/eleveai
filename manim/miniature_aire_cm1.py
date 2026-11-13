@@ -5,7 +5,7 @@
 # Rangées À CÔTÉ DE LEUR VIDÉO : manim/sorties/cm1/maths/aire/<NN-slug>/.
 # La durée « EN N MIN » est lue dans le mp4 : relancer après un re-rendu.
 #
-# Usage : python manim/miniature_aire_cm1.py [filtre]
+# Usage : python manim/miniature_aire_cm1.py [filtre]   (aire : « composer » ; périmètre : « perimetre-triangle »)
 
 import sys
 from pathlib import Path
@@ -32,6 +32,9 @@ EP = [
      "on coupe en rectangles !", True, "verte", (6, 3)),
     ("defi", "05-defi", ["CALCULER L'AIRE", "EN ENLEVANT UN TROU"], "24 − 4 = 20 m²",
      "on enlève la fenêtre !", True, "bleue", (6, 4)),
+    # Série PÉRIMÈTRE du CM1 (9e champ : la notion, sinon « aire ») ; python manim/miniature_aire_cm1.py perimetre-triangle
+    ("triangle", "01-triangle", ["CALCULER LE PÉRIMÈTRE", "D'UN TRIANGLE"], "20 + 25 + 25 = 70 cm",
+     "on ajoute les 3 côtés !", True, "jaune", (0, 0), "perimetre"),
 ]
 
 
@@ -48,11 +51,14 @@ def accroche(haut, bas, vert, ceinture, cases, y0=352):
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     filtre = sys.argv[1] if len(sys.argv) > 1 else ""
-    for slug, rep, tit, haut, bas, vert, ceint, cases in EP:
-        if filtre and filtre != slug:
+    for slug, rep, tit, haut, bas, vert, ceint, cases, *notion in EP:
+        notion = notion[0] if notion else "aire"
+        if filtre and filtre not in (slug, f"{notion}-{slug}"):
             continue
-        rel = f"cm1/maths/aire/{rep}"
-        nom = f"eleveai-maths-cm1-aire-{slug}"
+        if notion != "aire" and filtre == slug:  # « defi » seul = l'aire ; le périmètre se demande « perimetre-defi »
+            continue
+        rel = f"cm1/maths/{notion}/{rep}"
+        nom = f"eleveai-maths-cm1-{notion}-{slug}"
         mp4 = SORTIES / rel / (nom + ".mp4")
         if not mp4.exists():
             print("pas encore de vidéo :", nom)

@@ -6082,6 +6082,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_unite&display=simple"
  },
+ "cm1-perimetre-triangle": {
+  "fichier": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle.mp4",
+  "poster": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle.png",
+  "vignette": null,
+  "titre": "Combien de galon autour d'un fanion ? — Calculer le périmètre d'un triangle — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple"
+ },
+ "cm1-perimetre-triangle-short": {
+  "fichier": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle-short.mp4",
+  "poster": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle-short-miniature.png",
+  "vignette": null,
+  "titre": "J'ai 1 mètre de guirlande pour mon fanion… ça suffit ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple"
+ },
  "cm1-proba-comparer": {
   "fichier": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer.mp4",
   "poster": "cm1/maths/probabilites/03-comparer/eleveai-maths-cm1-proba-comparer.png",

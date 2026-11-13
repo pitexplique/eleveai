@@ -81150,6 +81150,156 @@
         "sport",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-perimetre-triangle",
+      "pas_avant": "2027-01-02",
+      "notionId": "perimetre",
+      "microId": "perimetre_triangle",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle.mp4",
+      "miniature": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle.png",
+      "titre": "Combien de galon autour d'un fanion ? — Calculer le périmètre d'un triangle — épisode 1 · Maths CM1",
+      "accroche": "Nina est décoratrice de fêtes. Elle coud un galon doré tout autour de ses fanions en triangle. Combien de centimètres de galon pour un fanion ?\n\nDans cette vidéo :\n• le périmètre, c'est la longueur du tour : un triangle a 3 côtés\n• on ajoute les 3 côtés : 20 + 25 + 25 = 70 cm\n• 3 côtés égaux : on multiplie un côté par 3 (30 × 3 = 90 cm)\n• le piège : oublier un côté\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une guirlande de 4 fanions.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple\n\n📏 Épisode 1 de la série Périmètre d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le périmètre d'un triangle"
+        ],
+        [
+          "00:07",
+          "Nina, décoratrice de fêtes"
+        ],
+        [
+          "00:23",
+          "Le tour : 3 côtés"
+        ],
+        [
+          "00:37",
+          "On ajoute les 3 côtés"
+        ],
+        [
+          "00:51",
+          "3 côtés égaux : × 3"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:45",
+          "Le piège : oublier un côté"
+        ],
+        [
+          "02:02",
+          "Question 2"
+        ],
+        [
+          "02:39",
+          "À toi de jouer"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "triangle",
+        "périmètre d'un triangle",
+        "côtés",
+        "centimètre",
+        "fanion",
+        "décoratrice",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Un triangle a des côtés de 6 cm, 8 cm et 10 cm. Quel est son périmètre ?",
+          "choix": [
+            "24 cm",
+            "14 cm",
+            "18 cm"
+          ],
+          "reponse": 0,
+          "explication": "On ajoute les 3 côtés : 6 + 8 = 14, puis 14 + 10 = 24. Le périmètre est de 24 cm."
+        },
+        {
+          "t": "02:02",
+          "question": "Un panneau routier en triangle a ses 3 côtés égaux : 70 cm chacun. Quel est son périmètre ?",
+          "choix": [
+            "140 cm",
+            "73 cm",
+            "210 cm"
+          ],
+          "reponse": 2,
+          "explication": "Les 3 côtés sont égaux : 70 × 3 = 210. Le périmètre est de 210 cm."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-perimetre-triangle-short",
+      "pas_avant": "2027-01-02",
+      "notionId": "perimetre",
+      "microId": "perimetre_triangle",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-perimetre-triangle",
+      "fichier": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle-short.mp4",
+      "miniature": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle-short-miniature.png",
+      "titre": "J'ai 1 mètre de guirlande pour mon fanion… ça suffit ? #maths #cm1",
+      "accroche": "Ti Margo fait un fanion en triangle pour sa cabane : 40 cm, 40 cm et 30 cm en bas. Il a 1 mètre de guirlande lumineuse. Ça suffit pour en faire le tour ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un fanion avec 3 côtés de 25 centimètres. Combien de centimètres de guirlande ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #perimetre #cm1",
+      "tags": [
+        "périmètre",
+        "triangle",
+        "guirlande",
+        "fanion",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "40 + 40 + 30, ça fait combien de centimètres ?",
+          "choix": [
+            "70",
+            "110",
+            "100"
+          ],
+          "reponse": 1,
+          "explication": "40 + 40 = 80, puis 80 + 30 = 110 cm. La guirlande de 100 cm est trop courte !"
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
     }
   ]
 }
