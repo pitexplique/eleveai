@@ -1202,6 +1202,91 @@ function LecteurArticle({
   );
 }
 
+/** Un article du jour, posé sur la page comme la Une (13/11/2026) : la vidéo
+ *  (paysage + short), le titre et le chapô avec Regarder / Lire / Écouter, puis
+ *  le défi en QCM, sans rien ouvrir. « Lire » ouvre l'article entier. */
+function ArticleDuJour({
+  a,
+  une,
+  inverse,
+  libelle,
+  petit,
+  videos,
+  surOuvrir,
+  surFini,
+}: {
+  a: Article;
+  une: boolean;
+  inverse: boolean;
+  libelle: string;
+  petit: boolean;
+  videos?: VideosArticle;
+  surOuvrir: () => void;
+  surFini: () => void;
+}) {
+  const avecVideo = Boolean(videos?.paysage || videos?.short);
+  return (
+    <article aria-label={`${une ? "À la Une" : "Aujourd'hui"} : ${a.titre}`} className={une ? "mt-6" : "mt-10 border-t-[3px] border-stone-900 pt-6"}>
+      <div className="grid items-center gap-5 md:grid-cols-2 md:gap-8">
+        <div className={inverse ? "md:order-2" : ""}>
+          {avecVideo ? (
+            <div className="overflow-hidden rounded-lg border-[3px] border-stone-900 bg-white p-2">
+              <BlocVideos v={videos} petit={petit} />
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={surOuvrir}
+              aria-label={`Lire : ${a.titre}`}
+              className="w-full overflow-hidden rounded-lg border-[3px] border-stone-900 transition hover:shadow-xl"
+            >
+              <ImageCarte fond={FOND_RUBRIQUE[a.rubrique]} dessin={dessinDe(a)} grand />
+            </button>
+          )}
+        </div>
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">
+            {une ? "À la Une" : "Aujourd'hui"} · {a.rubrique} · {libelle}
+          </p>
+          <h2
+            className={`mt-2 font-serif font-black leading-[1.05] tracking-tight text-stone-900 ${
+              une ? "text-3xl sm:text-5xl" : "text-2xl sm:text-4xl"
+            }`}
+          >
+            {a.titre}
+          </h2>
+          <p className={`mt-3 font-serif font-semibold leading-snug text-stone-800 ${petit ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"}`}>
+            {a.chapo}
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            {videos?.paysage && (
+              <Lien
+                href={`/video/${videos.paysage.id}`}
+                quoi={une ? "une" : "article"}
+                mise="quotidien"
+                className="inline-flex items-center gap-2 rounded-full bg-red-700 px-6 py-2.5 font-serif text-xl font-black text-white hover:bg-red-800"
+              >
+                <Play className="h-5 w-5" fill="currentColor" aria-hidden="true" /> Regarder
+              </Lien>
+            )}
+            <button
+              type="button"
+              onClick={surOuvrir}
+              className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-6 py-2.5 font-serif text-xl font-black text-white hover:bg-stone-700"
+            >
+              <BookOpen className="h-5 w-5" aria-hidden="true" /> Lire
+            </button>
+            <Ecouter a={a} grand />
+          </div>
+        </div>
+      </div>
+      <div className="mt-5">
+        <DefiArticle a={a} surFini={surFini} />
+      </div>
+    </article>
+  );
+}
+
 /** Les flèches du clavier : ← → dans la rangée, ↑ ↓ d'une rangée à l'autre. */
 function auClavier(e: React.KeyboardEvent<HTMLElement>) {
   if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp"].includes(e.key)) return;
@@ -1349,12 +1434,13 @@ export default function JournalClient(props: {
   // Les vidéos des articles, pour ce profil (13/11/2026).
   const videosDe = (a: Article) => videosArticles[a.id]?.[niveau];
   const vid = (a: Article) => videosDe(a)?.paysage ?? videosDe(a)?.short;
-  const videosUne = aLaUne && (videosDe(aLaUne)?.paysage || videosDe(aLaUne)?.short) ? videosDe(aLaUne) : undefined;
   // La rangée « En vidéo » : les paysages des autres articles du jour, la vidéo
   // du jour, puis les shorts (défis du niveau, ceux des articles). Sans doublon,
   // et sans les vidéos déjà montrées par la Une.
   const aRegarder = (() => {
-    const deja = new Set([videosUne?.paysage?.id, videosUne?.short?.id].filter(Boolean) as string[]);
+    const deja = new Set(
+      duJour.flatMap((a) => [videosDe(a)?.paysage?.id, videosDe(a)?.short?.id]).filter(Boolean) as string[],
+    );
     const l: VideoJournal[] = [];
     const ajoute = (v?: VideoJournal | null) => {
       if (v && !deja.has(v.id)) {
@@ -1362,13 +1448,10 @@ export default function JournalClient(props: {
         l.push(v);
       }
     };
-    const suite = duJour.slice(1);
-    suite.forEach((a) => ajoute(videosDe(a)?.paysage));
     // La vidéo du jour est tirée pour tout le site : seulement si elle est de
     // la classe du profil (13/11 : une vidéo de 2de montrée aux 6e-5e).
     if (CLASSES_VIDEO_DU_JOUR[niveau].includes(une.classe)) ajoute(une.paysage);
     e.shorts.forEach(ajoute);
-    suite.forEach((a) => ajoute(videosDe(a)?.short));
     return l.slice(0, 10);
   })();
   const articleOuvert = ouvert?.quoi === "article" ? parId.get(ouvert.id) : undefined;
@@ -1407,61 +1490,26 @@ export default function JournalClient(props: {
             <InterrupteurEdition ile={ile} surChoix={choisirIle} />
           </div>
 
-          {/* LA GRANDE UNE. */}
-          {aLaUne && (
-            <article aria-label={`À la Une : ${aLaUne.titre}`} className="mt-6 grid items-center gap-5 md:grid-cols-2 md:gap-8">
-              {/* ⭐ 13/11 : la Une s'ouvre sur SA vidéo (paysage + short), plus sur un émoji. */}
-              {videosUne ? (
-                <div className="overflow-hidden rounded-lg border-[3px] border-stone-900 bg-white p-2">
-                  <BlocVideos v={videosUne} petit={petit} />
-                </div>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => ouvrir(aLaUne, "une")}
-                  aria-label={`Lire : ${aLaUne.titre}`}
-                  className="overflow-hidden rounded-lg border-[3px] border-stone-900 transition hover:shadow-xl"
-                >
-                  <ImageCarte fond={FOND_RUBRIQUE[aLaUne.rubrique]} dessin={dessinDe(aLaUne)} grand />
-                </button>
-              )}
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-700">
-                  À la Une · {aLaUne.rubrique} · {libelle}
-                </p>
-                <h2 className="mt-2 font-serif text-3xl font-black leading-[1.05] tracking-tight text-stone-900 sm:text-5xl">
-                  {aLaUne.titre}
-                </h2>
-                <p className={`mt-3 font-serif font-semibold leading-snug text-stone-800 ${petit ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"}`}>
-                  {aLaUne.chapo}
-                </p>
-                <div className="mt-4 flex flex-wrap items-center gap-3">
-                  {videosUne?.paysage && (
-                    <Lien
-                      href={`/video/${videosUne.paysage.id}`}
-                      quoi="une"
-                      mise={mise}
-                      className="inline-flex items-center gap-2 rounded-full bg-red-700 px-6 py-2.5 font-serif text-xl font-black text-white hover:bg-red-800"
-                    >
-                      <Play className="h-5 w-5" fill="currentColor" aria-hidden="true" /> Regarder
-                    </Lien>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => ouvrir(aLaUne, "une")}
-                    className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-6 py-2.5 font-serif text-xl font-black text-white hover:bg-stone-700"
-                  >
-                    <BookOpen className="h-5 w-5" aria-hidden="true" /> Lire
-                  </button>
-                  <Ecouter a={aLaUne} grand />
-                </div>
-              </div>
-            </article>
-          )}
+          {/* LA GRANDE UNE, puis LES AUTRES NOUVELLES DU JOUR, toutes faites pareil
+              (13/11, Frédéric : « j'aime lorsqu'il y a la vidéo, l'article à lire
+              ou à écouter et le défi en QCM », « comme à la Une », « fais pareil
+              pour les autres ») : vidéo · article (Lire / Écouter) · QCM. */}
+          {duJour.map((a, i) => (
+            <ArticleDuJour
+              key={a.id}
+              a={a}
+              une={i === 0}
+              inverse={i % 2 === 1}
+              libelle={libelle}
+              petit={petit}
+              videos={videosDe(a)}
+              surOuvrir={() => ouvrir(a, i === 0 ? "une" : "nouveau")}
+              surFini={() => noter(a.id, "fini")}
+            />
+          ))}
 
-          {/* ⭐ 13/11 : « En vidéo » JUSTE SOUS LA UNE, et plus seulement 4 vidéos :
-              les paysages et shorts des articles du jour, la vidéo du jour,
-              les shorts de défi du niveau. */}
+          {/* « En vidéo » : la vidéo du jour et les shorts de défi du niveau (les
+              vidéos des articles du jour sont déjà dans leurs blocs). */}
           {aRegarder.length > 0 && (
             <Rangee titre="En vidéo" sous={`à regarder, puis à t’entraîner · ${libelle}`}>
               {aRegarder.map((v) => (
@@ -1475,12 +1523,6 @@ export default function JournalClient(props: {
               ))}
             </Rangee>
           )}
-
-          <Rangee titre="Nouveau aujourd'hui" sous={date}>
-            {duJour.map((a) => (
-              <CarteArticle key={a.id} a={a} petit={petit} etat={lus[a.id]} video={vid(a)} surOuvrir={() => ouvrir(a, "nouveau")} />
-            ))}
-          </Rangee>
 
           {aFinir.length > 0 && (
             <Rangee titre="Continuer à lire">
