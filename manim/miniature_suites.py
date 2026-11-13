@@ -97,6 +97,10 @@ EP = [
      ["COMPRENDRE LES SUITES :", "DES MOTS AUX SYMBOLES"], "u_{4} = 180", "+ après 4 ans : 180 élèves",
      "blanche", ["LE RANG OU", "LA VALEUR ?"], "la chaîne de dessin de Zoé",
      [("u_{5} = 90", 140, BLEU), ("5 mois → 90 abonnés", 100, VERT)]),
+    ("premiere-spe", "18-termes", "verte",
+     ["COMPRENDRE COMMENT", "CALCULER UN TERME"], "u_{n} = 2n² + 10", "+ niveau 3 : u_{3} = 28 points",
+     "blanche", ["DE TÊTE", "EN 10 S ?"], "les étoiles de Malik, astronome",
+     [("u_{n} = 3 × 2^{n}", 130, BLEU), ("u_{3} = ?", 120, VERT)]),
 ]
 # Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
 from suites_terminale_donnees import EP_TLE  # noqa: E402

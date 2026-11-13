@@ -311,6 +311,21 @@ EPS = [
          sa="Zoé lance sa chaîne de vidéos de dessin : 50 abonnés au départ, puis 8 de plus chaque mois. uₙ, c'est le nombre d'abonnés après n mois. Que veut dire u₅ = 90 ?",
          stoi="pour quel n a-t-on uₙ = 130 ?", srep="n = 10 : 50 + 10 × 8 = 130.",
          stags=["dessin", "chaîne vidéo", "abonnés", "notation", "suites"]),
+    dict(num="18", slug="termes", classe="premiere-spe", notion="suites", micro="suite_termes",
+         ceinture="verte", sc="blanche", centres=["jeux-video"], scentres=["espace"],
+         titre="Combien de points au niveau 9 ? — Calculer un terme d'une suite — épisode 18 · Maths 1re spé",
+         intro="Chloé est game designer : au niveau n, le joueur doit gagner uₙ = 2n² + 10 points d'expérience. Comment trouver directement les points du niveau 9, sans passer par tous les autres ?",
+         puces=["forme explicite : on remplace n par sa valeur, partout (u₃ = 2 × 3² + 10 = 28)", "sur un graphique : les points (n ; uₙ), le rang en abscisse, la valeur en ordonnée", "le piège : uₙ₊₁, ce n'est pas uₙ + 1 : on remplace n par n + 1", "récurrence : vₙ₊₁ = 2vₙ + 1, on avance de proche en proche depuis v₀ = 4", "trouver un rang : on résout uₙ = 172, et on trouve n = 9"],
+         defi="Dans un autre jeu, uₙ = 5n − 3, pour n ≥ 0. Calcule u₁₀, écris uₙ₊₁ en fonction de n, puis trouve le rang n tel que uₙ = 72.",
+         chap={"00-garde": "Suites : calculer un terme", "01-situation": "Chloé, game designer", "02-explicite": "La forme explicite : u₃", "03-graphique": "Les termes sur un graphique", "04-question": "Question : u₅", "05-piege": "Le piège : uₙ₊₁", "06-recurrence": "Une récurrence : le bonus", "07-rang": "Trouver le rang n", "08-question": "Question : le seuil de 100", "09-defi": "À toi de jouer", "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+         qs=[("04-question", "Pour uₙ = 2n² + 10, combien vaut u₅ ?", ["20", "60", "50"], 1, "5² = 25 ; 2 × 25 = 50 ; 50 + 10 = 60. Le carré d'abord, puis la multiplication, puis l'ajout."),
+             ("08-question", "Avec uₙ = 2n² + 10, à partir de quel niveau faut-il plus de 100 points ?", ["45", "6", "7"], 2, "u₆ = 82 : pas encore. u₇ = 108 : ça dépasse 100. Le premier rang qui franchit le seuil, c'est 7.")],
+         tags=["suites", "calculer un terme", "forme explicite", "récurrence", "rang", "jeu vidéo", "game designer"],
+         st="Tu trouves u₃ de tête ? 🔭 — 1re spé #Shorts",
+         sq=("03-question", "Avec uₙ = 3 × 2ⁿ, combien vaut u₃ ?", ["24", "216", "18"], 0, "2³ = 8, et 3 × 8 = 24 : la puissance d'abord, la multiplication ensuite."),
+         sa="Malik est astronome : la nuit n, son télescope repère uₙ = 3 × 2ⁿ nouvelles étoiles. Tu trouves u₃ de tête ?",
+         stoi="combien vaut u₅ ?", srep="96 : 2⁵ = 32, et 3 × 32 = 96.",
+         stags=["astronomie", "étoiles", "télescope", "puissance", "suites"]),
 ]
 # Les 4 vidéos communes : la même vidéo sert aussi la micro de la classe du dessus.
 AUSSI = {
