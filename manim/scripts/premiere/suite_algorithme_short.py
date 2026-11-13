@@ -44,6 +44,7 @@ class SuiteAlgorithmeShort(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiqu
     identite = "Maths 1re spé — EleveAI"
     ceinture = "blanche"
     place_coche = 0.15
+    largeur_texte = 3.9           # 6 % de marge de chaque côté (ép. 18-19)
     entete = _S16.entete
     q_reponse = _S18.q_reponse
     bouton_haut = _S18.bouton_haut
@@ -64,7 +65,7 @@ class SuiteAlgorithmeShort(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiqu
         l2 = self.t("tu devines", 46).next_to(l1, DOWN, buff=0.18)
         self.au_mot("Tu paries")
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.25)
-        o = ordinateur(1.15).move_to(P(-0.25, -0.55))
+        o = ordinateur(1.08).move_to(P(-0.2, -0.55))
         bo = fleche_boucle(0.34).move_to(P(1.62, -0.1))
         self.au_mot("tu devines")
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(o[:2], shift=UP * 0.1), run_time=0.3)
@@ -76,7 +77,7 @@ class SuiteAlgorithmeShort(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiqu
 
         # ── 01 : l'énigme du jour : la fenêtre, 3 lignes ──
         self.nouvel_ecran("01-situation", garder=(self.badge, self.titre_s))
-        prog = Programme(CODE, fs=26, numeros=["1", "2", "", "3"], pad=0.1, gouttiere=0.45).move_to(P(0, 1.2))
+        prog = Programme(CODE, fs=22, numeros=["1", "2", "", "3"], pad=0.15, gouttiere=0.4).move_to(P(0, 1.2))
         e1 = self.t("L'énigme du jour :", 46, JAUNE_TITRE).move_to(P(0, -0.55))
         self.au_mot("L'énigme")
         self.play(FadeIn(e1, shift=DOWN * 0.1), run_time=0.3)
@@ -110,10 +111,10 @@ class SuiteAlgorithmeShort(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiqu
         self.attendre_voix(marge=0.2)
 
         # ── 03 : question-pause → A (45) ; puis 10, 15, 25, 45 ──
-        cartes = VGroup(*[self.bouton_haut(L, nb, hauteur=1.3) for L, nb in zip("ABC", ("45", "15", "25"))])
-        for c, x in zip(cartes, (-1.42, 0, 1.42)):
-            c.move_to(P(x, -1.62))
-        qa = self.paragraphe(["Qu'affiche", "le programme ?"], 40, y=-0.12, buff=0.08)
+        cartes = VGroup(*[self.bouton_haut(L, nb, largeur=1.12, hauteur=1.6, fs=36, fs_nb=50) for L, nb in zip("ABC", ("45", "15", "25"))])
+        for c, x in zip(cartes, (-1.3, 0, 1.3)):
+            c.move_to(P(x, -1.45))
+        qa = self.paragraphe(["Qu'affiche", "le programme ?"], 40, y=0.05, buff=0.08)
         self._garder_q = (prog,)
 
         def e1():
@@ -121,15 +122,17 @@ class SuiteAlgorithmeShort(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiqu
             self.au_mot("Qu'affiche")
             self.play(FadeIn(qa, shift=UP * 0.1), run_time=0.3)
 
-        q = self.question_libre("03-question", [e1], cartes, P(0, -2.66))
+        q = self.question_libre("03-question", [e1], cartes, P(0, -2.62))
         self._garder_q = ()
         self.dire("03b-reponse")
         self.au_mot("Réponse A")
         self.q_reponse(q, 0)
-        tr = self.calcul([("3 tours", RAISON, "3 tours")], -2.1, centre=0.75, fs=44,
-                         avec=[FadeOut(qa), FadeOut(cartes[1]), FadeOut(cartes[2]),
-                               cartes[0].animate.scale(0.85).move_to(P(-1.2, -2.1))])
-        lg = LigneTermes(["10", "15", "25", "45"], centre=P(0, -0.3), pas=1.06, largeur=0.94, hauteur=0.72, fs=33)
+        cartes[0].generate_target()
+        cartes[0].target.scale(0.85).move_to(P(-1.2, -2.1))
+        cartes[0].target[0].stretch_to_fit_height(cartes[0].target[0].height + 0.18).set_stroke(width=6)
+        tr = self.calcul([("3 tours", RAISON, "3 tours")], -2.1, centre=0.6, fs=42,
+                         avec=[FadeOut(qa), FadeOut(cartes[1]), FadeOut(cartes[2]), MoveToTarget(cartes[0])])
+        lg = LigneTermes(["10", "15", "25", "45"], centre=P(0, -0.3), pas=0.98, largeur=0.84, hauteur=0.72, fs=32)
         self.suivre_tours(lg, ["10", "15", "25", "45"], prog, 2, 4, cote=DOWN, creux=0.2)
         self.play(*self.allumer_cases(lg, [3]), Indicate(tr, color=RAISON), run_time=0.4)
         self.attendre_voix(marge=0.8)
@@ -140,7 +143,7 @@ class SuiteAlgorithmeShort(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiqu
         et = self.t("Et toi ?", 50, JAUNE_TITRE).move_to(P(0, 3.45))
         self.play(FadeIn(et, shift=DOWN * 0.1), run_time=0.35)
         g3 = prog.glyphes(1, 15, 16)
-        cinq = Text("5", font="Consolas", font_size=26, color=RAISON).move_to(g3)
+        cinq = Text("5", font="Consolas", font_size=22, color=RAISON).move_to(g3)
         self.calcul([("avec i allant de", WHITE, "avec pour i"), ("0", RAISON, "0"), ("à", WHITE, None),
                      ("4", RAISON, "4")], -0.05, centre=0, fs=40, avec_morceau={3: [Transform(g3, cinq)]})
         self.play(Indicate(g3, color=RAISON, scale_factor=1.6), run_time=0.4)

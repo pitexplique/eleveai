@@ -448,10 +448,10 @@ class SuiteAlgorithme1reSpe(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiq
         prog, tit = self._prog, self._tit
         self.nouvel_ecran("03-range", garder=(prog, tit))
         g_rng, g_corps, g_u0 = prog.glyphes(1, 9, 17), prog.glyphes(1, 19), prog.glyphes(0)
-        boucles = VGroup(*[fleche_boucle(0.26, sw=5) for _ in range(4)]).arrange(RIGHT, buff=0.3).move_to(P(3.9, -0.45))
+        boucles = VGroup(*[fleche_boucle(0.26, sw=5) for _ in range(4)]).arrange(RIGHT, buff=0.3).move_to(P(4.15, -0.4))
         a = self.calc([("range(4)", FONCTION, "range de 4"), ("donne", WHITE, "donne"), ("i = 0,", WHITE, "0"),
-                       ("1,", WHITE, "1"), ("2", WHITE, "2"), ("et 3", WHITE, "et 3")], -0.45, centre=-2.5, fs=40,
-                      larg=7.6, avec_morceau={0: [Indicate(g_rng, color=FONCTION, scale_factor=1.15)],
+                       ("1,", WHITE, "1"), ("2", WHITE, "2"), ("et 3", WHITE, "et 3")], -0.45, centre=-1.85, fs=40,
+                      larg=8.2, avec_morceau={0: [Indicate(g_rng, color=FONCTION, scale_factor=1.15)],
                                               2: [Create(boucles[0])], 3: [Create(boucles[1])],
                                               4: [Create(boucles[2])], 5: [Create(boucles[3])]})
         q = self.t("4 tours", 40, RAISON).next_to(boucles, DOWN, buff=0.25)
@@ -516,14 +516,14 @@ class SuiteAlgorithme1reSpe(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiq
 
     def ecran_while(self):
         self.nouvel_ecran("06-while")
-        self.calc([("À partir de quelle version", WHITE, "à partir de quelle version"),
-                   ("le calcul dépasse-t-il", WHITE, "le calcul dépasse"), ("100 heures ?", TERME, "100")], 3.2,
-                  centre=0, fs=42, larg=12.4)
+        self.calc([("À partir de quelle version", WHITE, "à partir de quelle version")], 3.12, centre=0, fs=40, larg=12)
+        self.calc([("le calcul dépasse-t-il", WHITE, "le calcul dépasse"), ("100 heures ?", TERME, "100")], 2.48,
+                  centre=0, fs=40, larg=12)
         prog = Programme(self.WHILE, fs=44).move_to(P(-3.58, -0.45))
         xg = prog.glyphes(3)[0].get_left()[0] - 0.3
         guide = DashedLine(P(xg, prog.ycentre(3) + 0.3), P(xg, prog.ycentre(4) - 0.3), color=RAISON,
                            stroke_width=3, dash_length=0.08)
-        fs, x0, dx = 36, -0.15, 0.55
+        fs, x0, dx = 36, -0.22, 0.45
         tr = [self.ligne(m, fs) for m in (
             [("u prend la valeur", WHITE, None, {"u": TERME}), ("3", TERME)],
             [("n prend la valeur", WHITE, None, {"n": RANG}), ("0", RANG)],
@@ -559,8 +559,8 @@ class SuiteAlgorithme1reSpe(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiq
         bars = [Rectangle(width=max(k * v, 0.07), height=0.4, fill_color=TERME, fill_opacity=1, stroke_width=0)
                 .move_to(P(x0, y), aligned_edge=LEFT) for v, y in zip(vals, ys)]
         labs = [self.t(fr(v), 32, WHITE).next_to(b, RIGHT, buff=0.14) for v, b in zip(vals, bars)]
-        fls = [CurvedArrow(P(x0 - 0.1, ys[i] - 0.05), P(x0 - 0.1, ys[i + 1] + 0.05), angle=PI * 0.75, color=GREY_B,
-                           stroke_width=3.5, tip_length=0.13) for i in range(len(vals) - 1)]
+        fls = [CurvedArrow(P(x0 - 0.3, ys[i] - 0.02), P(x0 - 0.3, ys[i + 1] + 0.02), angle=PI * 0.8, color=GREY_B,
+                           stroke_width=4.5, tip_length=0.16) for i in range(len(vals) - 1)]
         corps = VGroup(prog.lignes[3], prog.lignes[4])
         for i, v in enumerate(vals):
             self.suivre(fr(v))
@@ -598,11 +598,11 @@ class SuiteAlgorithme1reSpe(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiq
         self.titre("Le piège !", PIEGE, 48, extrait="piège", y=3.2)
         pr = Programme(["print(n)"], fs=60).move_to(P(-4.4, 1.75))
         self.calc([("Ce programme affiche", WHITE, "Ce programme affiche"), ("n,", RANG, "n, pas"), ("pas", WHITE, None),
-                   ("u", TERME, None)], 1.75, x=-1.8, fs=46, larg=8.3, avec_morceau={0: [FadeIn(pr)]})
+                   ("u", TERME, None)], 1.75, x=-1.8, fs=46, larg=7.7, avec_morceau={0: [FadeIn(pr)]})
         self.play(Indicate(pr.glyphes(0, 6, 7), color=RANG, scale_factor=1.6), run_time=0.45)
         rg = self.calc([("un rang :", RANG, "un rang"), ("5", JUSTE, "5")], 0.2, centre=-3.2, fs=50, larg=5.6)
         self.play(Create(self.encadre(rg, JUSTE, 0.22)), run_time=0.3)
-        va = self.calc([("une valeur :", TERME, "pas une valeur"), ("127", WHITE, "127")], 0.2, centre=2.6, fs=50,
+        va = self.calc([("une valeur :", TERME, "pas une valeur"), ("127", WHITE, "127")], 0.2, centre=2.0, fs=50,
                        larg=5.6)
         self.play(Create(self.croix(va.get_right() + RIGHT * 0.65, 0.3)), va.animate.set_opacity(0.55), run_time=0.35)
         c = self.calc([("Version", WHITE, "C'est à la version"), ("5", RANG, "5"), (": le calcul dépasse", WHITE,
@@ -636,9 +636,10 @@ class SuiteAlgorithme1reSpe(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiq
                    ("5 tours", RAISON, "5 tours")], -2.3, centre=-2.6, fs=42, larg=6.4,
                   avec_morceau={0: [Indicate(prog.glyphes(1, 9, 20), color=FONCTION, scale_factor=1.12)],
                                 5: [LaggedStart(*[Create(b) for b in boucles], lag_ratio=0.25)]})
-        c = self.calc([("On part de", WHITE, "On part de"), ("u₀", TERME, "u indice 0"), ("et on avance de", WHITE, "et on avance"),
-                       ("5 rangs :", RAISON, "5 rangs"), ("u₅", JUSTE, "u indice 5")], -3.1, centre=-0.7, fs=42, larg=11)
-        self.play(Create(self.encadre(c[-1], JUSTE, 0.1)), run_time=0.3)
+        c = self.calc([("On part de", WHITE, "On part de"), ("u₀,", TERME, "u indice 0"), ("on avance de", WHITE, "et on avance"),
+                       ("5 rangs :", RAISON, "5 rangs"), ("u₅", JUSTE, "u indice 5")], -3.05, centre=-1.0, fs=40, larg=10.2)
+        self.play(c[-1].animate.scale(1.55, about_edge=LEFT).shift(RIGHT * 0.16), run_time=0.25)
+        self.play(Create(self.encadre(c[-1], JUSTE, 0.12)), run_time=0.3)
         self.attendre_voix(marge=0.6)
 
     # ── 10 : le défi : tant que u < 50, u = 3u ─────────────────────────────
@@ -672,9 +673,9 @@ class SuiteAlgorithme1reSpe(AuditMilliers, OutilsAlgo, OutilsEp12, OutilsGraphiq
         self.au_mot("Correction")
         cor = self.t("Correction", 46, JUSTE).move_to(tit)
         self.play(ReplacementTransform(tit, cor), *[FadeOut(m) for m in efface],
-                  prog.animate.scale(0.74).to_corner(UL, buff=0.45), run_time=0.45)
+                  prog.animate.scale(0.68).to_corner(UL, buff=0.45).shift(DOWN * 0.68), run_time=0.45)
         self.remove(*efface)
-        self.suivi_while(prog, [1, 3, 9, 27, 81], 50, x0=-0.4, y_haut=2.35, lmax=4.4)
+        self.suivi_while(prog, [1, 3, 9, 27, 81], 50, x0=-0.4, y_haut=1.9, pas=0.5, lmax=4.4)
         self.calc([("c'est le premier rang", WHITE, "c'est le premier rang"), ("n", RANG, None), ("où", WHITE, None),
                    ("uₙ", TERME, "u indice n"), ("dépasse", WHITE, "dépasse"), ("50", JUSTE, "50")], -2.85, centre=-1.0,
                   fs=40, larg=10)
