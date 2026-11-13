@@ -16,7 +16,7 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 | 33 | limite-interpreter | limite_suite_interpreter | 04 A, 08 C ; A | ✅ `1b32d10c` + `6f85ce6a` (4:58 / 1:24), relu, bords 0 ; questions 01:10 A, 03:01 C ; short 00:37 A |
 | 34 | limite-calculer | limite_suite_calculer | 04 B, 06 A ; C | ✅ `8eb50db8` + `2e27f97f` + `f99754fd` (4:32 / 1:14), relu, bords 0 ; questions 01:14 B, 02:06 A ; short 00:29 C |
 | 35 | limite-operations | limite_suite_operations | 04 C, 07 B ; B | ✅ `2e27f97f` + `c5335870` (4:19 / 1:05), relu, bords 0 ; questions 01:03 C, 02:12 B ; short 00:25 B |
-| 36 | limite-comparaison | limite_suite_comparaison | 04 A, 07 C ; A | ✅ ACCEPTÉ (`881870ba`, `3923cc94`, `c30e1d58`) 4:13 / 1:07, bords 0 ; questions 00:56 A, 02:15 C ; short 00:29 A ; passe finale à faire avec 37-38 |
+| 36 | limite-comparaison | limite_suite_comparaison | 04 A, 07 C ; A | ✅ ACCEPTÉ (`881870ba`, `3923cc94`, `c30e1d58`) 4:13 / 1:07, bords 0 ; questions 00:56 A, 02:15 C ; short 00:29 A  |
 | 37 | limite-monotone-bornee | limite_suite_monotone_bornee | 04 B, 07 A ; C | ✅ `7bf2e279` (4:22 / 1:24), relu, bords 0 ; questions 01:13 B, 02:28 A ; short 00:35 C |
 | 38 | limite-defi (bleue) | limite_suite_defi | 04 C, 06 B, 09 A ; B | ✅ `eca96daa` (5:40 / 1:26), relu, bords 0 ; questions 01:34 C, 02:30 B, 03:43 A ; short 00:38 B |
 
@@ -40,8 +40,11 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 - 13/11 (session « épisodes 37-38 », lancée par la session 36-38) : ép. 37 rendu, relu, 7 défauts renvoyés (bas du short vide de 36 à 49 s, bouton C à moitié écrit, ✓ sur « nombre », axes vides, « 72,5 » serré, marges des cadres verts, « ℓ = 4 » sur les points) ; ACCEPTÉ `7bf2e279`.
 - 13/11 : ép. 38 (défi, bleue) rendu, relu, 9 défauts renvoyés en deux tours (cadre 4 vide à l'énoncé, uₖ / uₖ₊₁ collés, cadre « = 400 », graphique « 2 · Sens » encombré, carré orange sans légende du short, phrase à deux tailles puis mal centrée) ; ACCEPTÉ `eca96daa`. Rapports `ep-37.md`, `ep-38.md`. Passe finale 36-38 : session mère.
 
-## ⏰ REPRISE : 36 accepté ; restent 37, 38 puis la passe finale 36-38
-- Ajouter 36-38 : leurs lignes dans `EPS_TLE` / `EP_TLE` de `manim/suites_terminale_donnees.py` (depuis `ep-NN.md`), puis `passe_suites.py temps terminale-suite-limite-…`, prévenir la session suites 1re, `manifeste`, `fiches-youtube.py terminale-suite-`, R2 (`r2-videos.ps1 -Rclone "copy manim/sorties/terminale/maths/suites R2:terminale/maths/suites --exclude planche-* --exclude fiche-youtube.md"`, lancé depuis bash), `vignettes-videos.py`, `generer-videos-r2.mjs`.
+## ✅ SÉRIE TLE FINIE (13/11) : 28 → 38 rendus, relus, au manifeste, sur R2
+- 13/11 ~7 h 15 : PASSE FINALE 36-38 FAITE (`2803bb62` données 36-37, puis le commit des données 38) : lignes `EPS_TLE` / `EP_TLE`, temps mesurés (36 : 252,1 s / 66,5 s ; 37 : 260,6 / 82,6 ; 38 : 339,0 / 84,6), miniatures relues, manifeste (36-37 ajoutés par le passage de la session suites 1re à 5 h 37, 38 par le nôtre : 1338 → 1340, rien d'autre modifié), fiches YouTube (11), vignettes, R2 `terminale/maths/suites` 66 fichiers, check 0 différence, table R2 88 lignes Tle.
+- 📅 Calendrier : `DEBUT` de `passe_suites.py` passé au 25/12 (`0140492b`, le collège d'abord) : paysages Tle 28 → 38 du 17/02 au 09/03/2027, un jour sur deux, short le lendemain.
+- ⛔ `manim/manifeste-youtube.json` et `lib/videos/*.json` NON committés : au push, avec les autres sessions.
+- Reste hors de ce périmètre : brancher les vidéos au coach (micros `limite_suite_*`), le `V` des métiers dans la matrice métiers, l'envoi YouTube.
 
 ### Ancienne consigne (12/11) : restent 36, 37, 38
 1. Lire `mission-commune.md` et `ep-34.md` / `ep-35.md` (gabarits les plus récents) dans `C:\Users\FRED\AppData\Local\Claude-Data\claude_pzs8sxrjxfjjc\side-session-notes\local_67461f00-b575-469d-af35-949aecf360b7\`.
