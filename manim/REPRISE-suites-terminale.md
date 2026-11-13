@@ -16,7 +16,7 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 | 33 | limite-interpreter | limite_suite_interpreter | 04 A, 08 C ; A | ✅ `1b32d10c` + `6f85ce6a` (4:58 / 1:24), relu, bords 0 ; questions 01:10 A, 03:01 C ; short 00:37 A |
 | 34 | limite-calculer | limite_suite_calculer | 04 B, 06 A ; C | ✅ `8eb50db8` + `2e27f97f` + `f99754fd` (4:32 / 1:14), relu, bords 0 ; questions 01:14 B, 02:06 A ; short 00:29 C |
 | 35 | limite-operations | limite_suite_operations | 04 C, 07 B ; B | ✅ `2e27f97f` + `c5335870` (4:19 / 1:05), relu, bords 0 ; questions 01:03 C, 02:12 B ; short 00:25 B |
-| 36 | limite-comparaison | limite_suite_comparaison | 04 A, 07 C ; A | à rendre |
+| 36 | limite-comparaison | limite_suite_comparaison | 04 A, 07 C ; A | rendu `881870ba` (4:13 / 1:07), bords 0 ; questions 00:56 A, 02:15 C ; short 00:29 A ; 6 retouches de relecture en cours |
 | 37 | limite-monotone-bornee | limite_suite_monotone_bornee | 04 B, 07 A ; C | à rendre |
 | 38 | limite-defi (bleue) | limite_suite_defi | 04 C, 06 B, 09 A ; B | à rendre |
 
@@ -34,7 +34,13 @@ Sorties `manim/sorties/terminale/maths/suites/NN-<slug>/`. Ceintures : paysage v
 - 12/11 ~5 h : ép. 35 ACCEPTÉ (`c5335870` : les 8 retouches sont vérifiées image par image, à 132, 170, 187, 227 et 247 s pour la paysage, à 9, 34 et 54 s pour le short). Deux `.cues.tsv` de travail ne sont pas suivis dans `manim/scripts/terminale/` (pas committés).
 - 12/11 : consigne de Frédéric (usage hebdomadaire presque épuisé) : on s'arrête après 35, sans lancer 36 à 38. Rien n'est poussé de notre côté : la session « Contextez hebdomadaire et vidéos » poussera.
 
-## ⏰ REPRISE samedi 14/11 à 9 h : restent 36, 37, 38
+- 12/11 soir (session « Terminale suites 36-38 + passe finale », `local_…` lancée par la session principale) : PASSE FINALE 28-35 FAITE (`ecb40481`) : données dans `manim/suites_terminale_donnees.py` (EPS_TLE, EP_TLE, EXOS_TLE), branchées par 2-4 lignes après les listes de `passe_suites.py` / `miniature_suites.py` (accord de la session suites 1re) ; notions : 28-32 `suite_numerique`, 33-38 `limite_suite` ; miniatures relues (4 retouches de shorts) ; temps mesurés ; manifeste 10/01 → 25/01 (16 entrées, rien d'autre touché) ; fiches YouTube ; R2 `terminale/maths/suites` 48 fichiers, check 0 différence (paysage 28 sans étoile incluse) ; vignettes et table R2 régénérées. ⛔ manifeste + `lib/videos/*.json` non committés (au push).
+- 12/11 soir : ép. 36 rendu (`881870ba`), relu : 6 défauts renvoyés (suite → 0 posée sur l'axe à 132 s, lignes décalées, « n − 3 » collé aux points, « Pour wₙ », bouton C vide du short à 36 s, bas du short vide à 46 s).
+
+## ⏰ REPRISE : restent 36 (retouches), 37, 38
+- Ajouter 36-38 : leurs lignes dans `EPS_TLE` / `EP_TLE` de `manim/suites_terminale_donnees.py` (depuis `ep-NN.md`), puis `passe_suites.py temps terminale-suite-limite-…`, prévenir la session suites 1re, `manifeste`, `fiches-youtube.py terminale-suite-`, R2 (`r2-videos.ps1 -Rclone "copy manim/sorties/terminale/maths/suites R2:terminale/maths/suites --exclude planche-* --exclude fiche-youtube.md"`, lancé depuis bash), `vignettes-videos.py`, `generer-videos-r2.mjs`.
+
+### Ancienne consigne (12/11) : restent 36, 37, 38
 1. Lire `mission-commune.md` et `ep-34.md` / `ep-35.md` (gabarits les plus récents) dans `C:\Users\FRED\AppData\Local\Claude-Data\claude_pzs8sxrjxfjjc\side-session-notes\local_67461f00-b575-469d-af35-949aecf360b7\`.
 2. Lancer un agent par épisode (36, puis 37 ; 38 est le défi en ceinture BLEUE), avec les lettres du tableau ci-dessus. Paysage en ceinture verte, short en ceinture blanche.
 3. Circuit : voix `scripts/generer-voix.ps1 -Debit -6` → dry run `AUDIT=1 BORDS=1` (0 AVANCE, 0 RETARD, 0 BORD) → planche -ql relue → HD `-qh --disable_caching` sous le verrou `%TEMP%\eleveai-rendu-hd.lock` (mkdir/rmdir), avec au moins 2 Go libres et au plus 1 autre rendu lourd sur le poste → `python scripts/verifier-bords-video.py` donne 0 → planches finales.
