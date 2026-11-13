@@ -356,14 +356,12 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
             sc.play(FadeIn(lg3[0], shift=UP * 0.1), run_time=0.3)
             sc.rep_fini()
 
-        self.XL = -0.9  # la colonne s'élargit : les choix gardent leur taille
         self.question_pause("07-question", "07b-reponse",
                             ["Une figure a 5 côtés.", "Léa trouve 18 cm.", "Quelle est son erreur ?"],
                             [self.choix("Elle a compté" + chr(10) + "un côté deux fois.", 26),
                              self.choix("Elle a multiplié.", 26), self.choix("Elle a oublié un côté.", 26)], 2,
                             ["4 + 6 + 3 + 5 + 7 = 25.", "Sans le 7 : 18.", "Léa a oublié le dernier côté."],
                             mot_q="Une figure", autres_q=autres_q, autres_r=apres)
-        del self.XL
 
     # ── 08 : le défi ────────────────────────────────────────────────────────
     def hexagone(self):
