@@ -8,3 +8,6 @@ Poussé le 11/11 : `76c9cc66` (table R2, manifeste, bilans des vidéos finies) +
 - **Suites lycée** : retouche du short 34 (`suite_limite_calculer*.py`), 1re géo explicite/graphique/variation et Tle limite-opérations non commités. Reprise : `manim/REPRISE-suites.md`. ⛔ 01-04 doivent être prêts avant le 16/11 12 h 30.
 - **Lettres pas à pas (belle écriture)** : session « Lettres pas à pas : g et u » ARRÊTÉE en plein travail ; reprise `manim/REPRISE-pas-a-pas-chiffres.md`.
 - ⛔ Avant tout rendu : vérifier qu'aucun vieux processus python ne tourne (2 rendus max).
+
+## ✅ 13/11 ~5 h 40 (Réunion) : push du matin fait par le chef d'orchestre
+`ee14b589` poussé (18 commits) : manifeste (calcul posé/mental 6e, facto 4e, suites 1re 01-17, Tle 28-35), `lib/videos/*.json`, métiers facto. Les suites 01-04 sont donc en ligne pour le 16/11. Laissés de côté (en cours dans leurs sessions) : journal (`app/accueil-journal`, `lib/accueil/articles.ts`), coach (`app/coach/serie`), scripts suites 18 et Tle 36. Prochain push : ce soir. Puis `--ecrire` du coach (calcul posé, calcul mental, facto).
