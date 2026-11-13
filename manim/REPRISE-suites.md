@@ -59,7 +59,10 @@ Sorties : `manim/sorties/<classe>/maths/suites/NN-<slug>/`. Briefs : `manim/brie
 - 13/11 : ⚠ `DEBUT` de `passe_suites.py` = 25/12 (collège d'abord, `0140492b`) : épisode k → 25/12 + 2(k − 1).
 - ✅ 18 termes PRÊT (`831c0e2e`, `c97c1ccc` retouches ; passe finale `f9b9f036`) : paysage 4:37 Q 01:05 → B, 02:48 → C ; short 1:02 Q 00:27 → A (commentaire 96) ; manifeste 28 → 29/01/2027 ; fiche, R2 (4 fichiers, 0 différence), table R2.
 - ✅ 19 recurrence PRÊT (`3cb22cc3`, `ab3891cd` short retouché ; passe finale `7cb89467`) : paysage 4:29 Q 00:56 → A, 02:35 → B ; short 1:05 Q 00:30 → C (commentaire 33) ; manifeste 30 → 31/01/2027 ; fiche, R2 (4 fichiers, 0 différence), table R2.
-- 20 algorithme en cours ; 21 modeliser lancé le 13/11 (rapport `ep-21.md`).
+- ✅ 20 algorithme PRÊT (`bdd0e32e`, `c828475e`, `e10dd166` retouches ; passe finale `804c6c25`) : paysage 4:21 Q 01:15 → C, 02:34 → B ; short 0:57 Q 00:21 → A (commentaire 165) ; manifeste 01 → 02/02/2027 ; fiche, R2 (0 différence), table R2.
+- 21 modeliser (`d7bd5f49`) : renvoyé le 13/11 pour défauts mineurs (fin manquante sur la planche, ② mal placé, marges, « 100 » qui touche ses boutons). À sa passe finale : centres `cuisine` (paysage), short `avions` + `transports` (« voyages » n'existe pas).
+- 22 evolution lancé le 13/11 (A/C, short B ; rapport `ep-22.md`). Restent 23 → 27 (lettres plus haut ; 27 ceinture bleue).
+- Outils des agents : copier `%TEMP%\agent-suites-21\` (son `hd.sh` ne retire que SON verrou).
 
 ## ▶ REPRISE samedi 14/11 à 9 h : épisodes 16 à 27 (état au 12/11 4 h 20)
 - **01 à 15 PRÊTS** : HD relus soi-même planche par planche, miniatures, 30 entrées au manifeste (`pas_avant` 17/11 → 16/12), `fiche-youtube.md`, R2 `premiere/maths/suites` (check : 87 fichiers, 0 différence), table R2 régénérée. Rien poussé de notre côté.
