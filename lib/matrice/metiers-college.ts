@@ -300,9 +300,12 @@ export const METIERS_4E: Record<string, LienMetier[]> = {
     M("paysagiste", "calcule l'aire de l'allée qui entoure un bassin carré."),
   ],
   litteral_factorisation: [
-    F("logisticien", "regroupe les frais communs à chaque livraison pour simplifier son calcul de coût."),
-    M("game-designer", "simplifie la formule des points pour que le jeu calcule plus vite."),
-    F("developpeur", "met un facteur commun en évidence pour faire moins d'opérations dans son programme."),
+    F("logisticien", "regroupe ce qui se répète dans chaque camion : 5x + 10 = 5(x + 2) palettes.", V),
+    M("game-designer", "vérifie la formule des points de son jeu en la développant : 6(x + 5) = 6x + 30.", V),
+    F("developpeur", "met un facteur commun en évidence pour faire moins d'opérations dans son programme : 9 × 37 + 9 × 63 = 9 × 100.", V),
+    F("paysagiste", "trouve la largeur commune aux deux parties d'une terrasse : 2x² + 6x = 2x(x + 3).", V),
+    M("comptable", "écrit le prix de 8 tenues d'un club de foot comme un produit : 8x + 96 = 8(x + 12).", V),
+    M("jardinier", "compte les plants de 9 jardinières d'un coup : 9x + 45 = 9(x + 5).", V),
   ],
   equation_resolution: [
     F("monteur", "trouve combien de plans de 8 s tiennent dans une bande-annonce de 2 minutes.", V),

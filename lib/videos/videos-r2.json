@@ -984,6 +984,96 @@
   "youtube": "Zbnwg-0cKE0",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_expression&microId=litteral_expression_traduire&display=simple"
  },
+ "4e-facto-commun": {
+  "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.mp4",
+  "poster": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.png",
+  "vignette": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.vignette.webp",
+  "titre": "5x + 10 : qu'est-ce qui se répète ? — Le facteur commun — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_facteur_commun&display=simple"
+ },
+ "4e-facto-commun-short": {
+  "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.mp4",
+  "poster": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.png",
+  "vignette": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.vignette.webp",
+  "titre": "14, 21 et 35 : le nombre caché en 5 secondes ? 🔍 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_facteur_commun&display=simple"
+ },
+ "4e-facto-defi": {
+  "fichier": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi.mp4",
+  "poster": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi.png",
+  "vignette": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi.vignette.webp",
+  "titre": "8x + 96 = 8(x + 12) — Défis de factorisation — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple"
+ },
+ "4e-facto-defi-short": {
+  "fichier": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi-short.mp4",
+  "poster": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi-short.png",
+  "vignette": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi-short.vignette.webp",
+  "titre": "x² + 6x = x(x + 6x) : tu vois l'erreur cachée ? 🕵️ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple"
+ },
+ "4e-facto-maximum": {
+  "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum.mp4",
+  "poster": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum.png",
+  "vignette": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum.vignette.webp",
+  "titre": "2x² + 6x = 2x(x + 3) — Factoriser au maximum — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple"
+ },
+ "4e-facto-maximum-short": {
+  "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum-short.mp4",
+  "poster": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum-short.png",
+  "vignette": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum-short.vignette.webp",
+  "titre": "4x² + 8x : beaucoup s'arrêtent trop tôt. Et toi ? 🎯 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factorisation_defi&display=simple"
+ },
+ "4e-facto-simple": {
+  "fichier": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple.mp4",
+  "poster": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple.png",
+  "vignette": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple.vignette.webp",
+  "titre": "9 × 37 + 9 × 63 de tête — Factoriser — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_simple&display=simple"
+ },
+ "4e-facto-simple-short": {
+  "fichier": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple-short.mp4",
+  "poster": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple-short.png",
+  "vignette": "4e/maths/factorisation/02-simple/eleveai-maths-4e-facto-simple-short.vignette.webp",
+  "titre": "17 × 6 + 17 × 4 de tête, sans poser : le raccourci ⚡ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_simple&display=simple"
+ },
+ "4e-facto-verifier": {
+  "fichier": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier.mp4",
+  "poster": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier.png",
+  "vignette": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier.vignette.webp",
+  "titre": "6(x + 30) = 6x + 30 ? — Vérifier une factorisation — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_verifier&display=simple"
+ },
+ "4e-facto-verifier-short": {
+  "fichier": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier-short.mp4",
+  "poster": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier-short.png",
+  "vignette": "4e/maths/factorisation/03-verifier/eleveai-maths-4e-facto-verifier-short.vignette.webp",
+  "titre": "4x + 20 = 4(x + 20) : ton copain a raison ? 🤔 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&microId=litteral_factoriser_verifier&display=simple"
+ },
  "4e-frac-additionner": {
   "fichier": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner.mp4",
   "poster": "4e/maths/fractions/06-additionner/eleveai-maths-4e-frac-additionner.png",
@@ -8551,54 +8641,6 @@
   "short": false,
   "youtube": null
  },
- "maths-4e-facto-commun": {
-  "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.mp4",
-  "poster": null,
-  "vignette": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun.vignette.webp",
-  "titre": "maths 4e facto commun",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-facto-commun-short": {
-  "fichier": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.mp4",
-  "poster": null,
-  "vignette": "4e/maths/factorisation/01-commun/eleveai-maths-4e-facto-commun-short.vignette.webp",
-  "titre": "maths 4e facto commun short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-facto-defi": {
-  "fichier": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e facto defi",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-facto-defi-short": {
-  "fichier": "4e/maths/factorisation/05-defi/eleveai-maths-4e-facto-defi-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e facto defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-4e-facto-maximum": {
-  "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e facto maximum",
-  "short": false,
-  "youtube": null
- },
- "maths-4e-facto-maximum-short": {
-  "fichier": "4e/maths/factorisation/04-maximum/eleveai-maths-4e-facto-maximum-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths 4e facto maximum short",
-  "short": true,
-  "youtube": null
- },
  "maths-cp-chiffre-0-droitier-portrait": {
   "fichier": "cp/maths/shorts/fr/chiffre-0/eleveai-maths-cp-chiffre-0-droitier-portrait.mp4",
   "poster": null,
@@ -8999,134 +9041,6 @@
   "poster": null,
   "vignette": "terminale/maths/analyse/convexite/eleveai-maths-terminale-convexite-reconnaitre-short.vignette.webp",
   "titre": "maths terminale convexite reconnaitre short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-bornee": {
-  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.vignette.webp",
-  "titre": "maths terminale suite bornee",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-bornee-short": {
-  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.vignette.webp",
-  "titre": "maths terminale suite bornee short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-defi": {
-  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.vignette.webp",
-  "titre": "maths terminale suite defi",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-defi-short": {
-  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.vignette.webp",
-  "titre": "maths terminale suite defi short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-limite-calculer": {
-  "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.vignette.webp",
-  "titre": "maths terminale suite limite calculer",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-limite-calculer-short": {
-  "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer-short.vignette.webp",
-  "titre": "maths terminale suite limite calculer short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-limite-interpreter": {
-  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.vignette.webp",
-  "titre": "maths terminale suite limite interpreter",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-limite-interpreter-short": {
-  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.vignette.webp",
-  "titre": "maths terminale suite limite interpreter short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-limite-operations": {
-  "fichier": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths terminale suite limite operations",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-limite-operations-short": {
-  "fichier": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations-short.mp4",
-  "poster": null,
-  "vignette": null,
-  "titre": "maths terminale suite limite operations short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-reconnaitre": {
-  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.vignette.webp",
-  "titre": "maths terminale suite reconnaitre",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-reconnaitre-short": {
-  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.vignette.webp",
-  "titre": "maths terminale suite reconnaitre short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-recurrence-preuve": {
-  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.vignette.webp",
-  "titre": "maths terminale suite recurrence preuve",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-recurrence-preuve-short": {
-  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.vignette.webp",
-  "titre": "maths terminale suite recurrence preuve short",
-  "short": true,
-  "youtube": null
- },
- "maths-terminale-suite-variation": {
-  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.vignette.webp",
-  "titre": "maths terminale suite variation",
-  "short": false,
-  "youtube": null
- },
- "maths-terminale-suite-variation-short": {
-  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.mp4",
-  "poster": null,
-  "vignette": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.vignette.webp",
-  "titre": "maths terminale suite variation short",
   "short": true,
   "youtube": null
  },
@@ -14686,5 +14600,133 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
+ },
+ "maths-terminale-suite-bornee": {
+  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee.vignette.webp",
+  "titre": "maths terminale suite bornee",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-bornee-short": {
+  "fichier": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/31-bornee/eleveai-maths-terminale-suite-bornee-short.vignette.webp",
+  "titre": "maths terminale suite bornee short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-defi": {
+  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi.vignette.webp",
+  "titre": "maths terminale suite defi",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-defi-short": {
+  "fichier": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/32-defi/eleveai-maths-terminale-suite-defi-short.vignette.webp",
+  "titre": "maths terminale suite defi short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-calculer": {
+  "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.vignette.webp",
+  "titre": "maths terminale suite limite calculer",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-calculer-short": {
+  "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer-short.vignette.webp",
+  "titre": "maths terminale suite limite calculer short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-interpreter": {
+  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter.vignette.webp",
+  "titre": "maths terminale suite limite interpreter",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-interpreter-short": {
+  "fichier": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/33-limite-interpreter/eleveai-maths-terminale-suite-limite-interpreter-short.vignette.webp",
+  "titre": "maths terminale suite limite interpreter short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-operations": {
+  "fichier": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite limite operations",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-limite-operations-short": {
+  "fichier": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations-short.mp4",
+  "poster": null,
+  "vignette": null,
+  "titre": "maths terminale suite limite operations short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-reconnaitre": {
+  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.vignette.webp",
+  "titre": "maths terminale suite reconnaitre",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-reconnaitre-short": {
+  "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre-short.vignette.webp",
+  "titre": "maths terminale suite reconnaitre short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-recurrence-preuve": {
+  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve.vignette.webp",
+  "titre": "maths terminale suite recurrence preuve",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-recurrence-preuve-short": {
+  "fichier": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/29-recurrence-preuve/eleveai-maths-terminale-suite-recurrence-preuve-short.vignette.webp",
+  "titre": "maths terminale suite recurrence preuve short",
+  "short": true,
+  "youtube": null
+ },
+ "maths-terminale-suite-variation": {
+  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation.vignette.webp",
+  "titre": "maths terminale suite variation",
+  "short": false,
+  "youtube": null
+ },
+ "maths-terminale-suite-variation-short": {
+  "fichier": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/suites/30-variation/eleveai-maths-terminale-suite-variation-short.vignette.webp",
+  "titre": "maths terminale suite variation short",
+  "short": true,
+  "youtube": null
  }
 }

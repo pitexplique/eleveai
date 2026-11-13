@@ -47,17 +47,25 @@ class FactoSimpleShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         cartes.set_x(0)
         pause.next_to(cartes, DOWN, buff=0.14).set_x(0)
         ph.arrange(DOWN, buff=0.08).next_to(cartes, DOWN, buff=0.1).set_x(0)
-        # 12/11 relecture : la phrase de réponse à la taille des lignes de la question (elle était minuscule),
-        # au plus 3,8 de large, jamais sous y -2,6 (Ti-Margo)
-        if len(ph.submobjects) and len(q.submobjects):
-            k = q[0].height / ph[0].height
-            k = min(k, 3.8 / ph.width)
-            haut = ph.get_top()[1]
-            if haut - k * ph.height < -2.6:
-                k = (haut + 2.6) / ph.height
-            if k > 1.0:
-                ph.scale(k, about_point=ph.get_top()).set_x(0)
         return tete, q, cartes, pause, rebours, ph
+    def monter_reponse(self, bonne, haut_max=-2.75):
+        """13/11 : les deux mauvaises cartes s'effacent, la bonne monte à la place de A : la phrase de
+        réponse (coupée en lignes courtes) a la place d'être grande, jamais sous y -2,75 (Ti-Margo)."""
+        cartes, ph = self.cartes_q, self.ph_q
+        b = cartes[bonne]
+        ok = self.mobjects[-1]  # la coche, posée juste avant autres_r
+        d = cartes[0].get_center() - b.get_center()
+        anims = [FadeOut(cartes[j]) for j in range(3) if j != bonne]
+        if bonne != 0:
+            anims.append(b.animate.shift(d))
+            if ok is not b and ok not in b.get_family():
+                anims.append(ok.animate.shift(d))
+        self.play(*anims, run_time=0.2)
+        haut = cartes[0].get_bottom()[1] - 0.2
+        ph.arrange(DOWN, buff=0.16)
+        k = min(0.5 / max(l.height for l in ph), 3.7 / ph.width, (haut - haut_max) / ph.height)
+        ph.scale(k).next_to(P(0, haut), DOWN, buff=0).set_x(0)
+
     fin_05_11 = DistribSimpleShort4e.fin_05_11  # la fin du 05/11, telle quelle
 
     def eq_dans_q(self, i, s, phrase, n=1, fs=None, lettres="xytn", couleur=WHITE):
@@ -144,14 +152,15 @@ class FactoSimpleShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
             sc.eq_dans_q(0, "Factorise 3x + 15.", "Factorise 3 x plus 15.", lettres="x", fs=34, couleur=JAUNE_TITRE)
 
         def apres(sc):
-            sc.ph_eq(0, "Réponse C : 3(x + 5).", "Réponse C : 3 fois, entre parenthèses, x plus 5.", lettres="x",
-                     premier=True)
-            sc.ph_eq(1, "15 = 3 × 5.", "15, c'est 3 fois 5.")
+            sc.monter_reponse(2)
+            sc.ph_eq(0, "Réponse C :", "Réponse C :", premier=True)
+            sc.ph_eq(1, "3(x + 5).", "3 fois, entre parenthèses, x plus 5.", lettres="x")
+            sc.ph_eq(2, "15 = 3 × 5.", "15, c'est 3 fois 5.")
             sc.rep_fini()
 
         self.question_pause("01q-question", "01r-reponse", ["Et avec une lettre ?", "Factorise 3x + 15."],
                             [Eq("3(x + 15)", 34), Eq("x(3 + 15)", 34), Eq("3(x + 5)", 34)], 2,
-                            ["Réponse C : 3(x + 5).", "15 = 3 × 5."],
+                            ["Réponse C :", "3(x + 5).", "15 = 3 × 5."],
                             avant_q=avant, autres_r=apres)
         self.vider(garder)
 
