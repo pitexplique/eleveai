@@ -136,7 +136,7 @@ EP = [
     ("premiere-spe", "27-auxiliaire", "bleue",
      ["SUITE AUXILIAIRE", "LA MÉTHODE DU BAC"], "u_{n+1} = 0,9u_{n} + 300", "+ L = 3 000",
      "blanche", ["L'ÉQUILIBRE", "EN UNE LIGNE"], "le médicament dans le sang",
-     [("L = 0,5L + 40", 80, BLEU), ("L = ?", 110, VERT)]),
+     [("L = 0,5L + 40", 100, BLEU), ("L = ?", 110, VERT)]),
 ]
 # Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
 from suites_terminale_donnees import EP_TLE  # noqa: E402
