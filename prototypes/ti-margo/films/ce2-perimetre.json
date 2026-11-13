@@ -1,0 +1,7 @@
+{
+  "voix": "ce2-perimetre-{ep}-short",
+  "sons": "public/sons/ce2-perimetre-{ep}-short",
+  "sortie": "manim/sorties/ce2/maths/perimetre/{num}-{ep}",
+  "nom": "eleveai-maths-ce2-perimetre-{ep}-short",
+  "episodes": { "comprendre": "01", "polygone": "02", "comparer": "03" }
+}

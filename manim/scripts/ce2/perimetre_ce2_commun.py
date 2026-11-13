@@ -170,6 +170,21 @@ class PaysagePerimetreCE2(PaysageCalculPose):
             f.sans_synchro = True
         return r
 
+    def ligne_somme(self, prec, reste, fs=40, couleur=None):
+        """« 13 + 8 = 21 » quand la voix dit « Plus 8, 21 » : le 13 (déjà dit, déjà écrit au-dessus)
+        est hors synchro et hors audit ; le reste paraît au mot."""
+        c = couleur or BLEU_D
+        lg = self.ligne([(prec, c), (reste, c)], fs, buff=0.16)
+        hors_audit(lg[0])
+        return lg
+
+    def au_fil(self, lg, debut=0, run_time=0.18):
+        """Les morceaux lg[debut:] l'un après l'autre : la synchro par jetons attend chacun
+        à son nombre (« 5 », « + 5 », « + 5 », « = 15. »)."""
+        for m in lg[debut:]:
+            self.play(FadeIn(m, shift=UP * 0.08), run_time=run_time)
+        return lg
+
     def tour_cote(self, fig, i, run_time=0.5, mobile=None):
         """Le côté i passe en orange (le tour avance) ; `mobile` (fourmi, point) le suit."""
         c = fig.cote(i)
