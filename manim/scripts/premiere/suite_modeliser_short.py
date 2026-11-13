@@ -122,16 +122,16 @@ class SuiteModeliserShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuite
         av = avion(0.7).move_to(P(-1.4, 2.0))
         self.play(FadeIn(carte), FadeIn(av, shift=RIGHT * 0.3), run_time=0.35)
         self.play(av.animate.move_to(P(1.4, 2.0)), run_time=0.9, rate_func=linear)
-        self.calcul([("n villes,", RANG, "n villes"), ("toutes reliées", WHITE, "toutes les autres")], -0.15, centre=0,
+        self.calcul([("n villes,", RANG, "n villes"), ("toutes reliées", WHITE, "toutes les autres")], -0.1, centre=0,
                     fs=40, avec=[FadeOut(av)])
         xs = (-1.25, 0.0, 1.25)
-        lg = LigneTermes(["3", "6", "10"], xs=xs, centre=P(0, -1.85), largeur=1.05, hauteur=0.95, fs=50)
-        h_v = VGroup(*[Arrow(P(x, -1.12), P(x, -1.36), buff=0, stroke_width=4, color=GREY_B, tip_length=0.12,
+        lg = LigneTermes(["3", "6", "10"], xs=xs, centre=P(0, -1.68), largeur=1.05, hauteur=0.95, fs=50)
+        h_v = VGroup(*[Arrow(P(x, -0.95), P(x, -1.18), buff=0, stroke_width=4, color=GREY_B, tip_length=0.12,
                              max_tip_length_to_length_ratio=0.5) for x in xs])
-        h_l = self.t("lignes", 38, TERME).move_to(P(0, -2.75))
+        h_l = self.t("lignes", 38, TERME).move_to(P(0, -2.5))
         traits = {}
         for k, n in enumerate((3, 4, 5)):
-            lab = self.t(str(n), 46, RANG).move_to(P(xs[k], -0.8))
+            lab = self.t(str(n), 46, RANG).move_to(P(xs[k], -0.66))
             self.suivre(f"{n} villes")
             nv = [vs[i] for i in range(n)] if n == 3 else [vs[n - 1]]
             self.play(*[GrowFromCenter(v) for v in nv], FadeIn(lab, scale=1.3), GrowArrow(h_v[k]),
@@ -173,17 +173,20 @@ class SuiteModeliserShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuite
         self.attendre_voix(marge=0.3)
 
         # ── 03 : question-pause → C (45) ; puis 10 × 9 = 90 et 90 ÷ 2 = 45 ──
-        cartes = VGroup(*[self.bouton_haut(Ln, nb) for Ln, nb in zip("ABC", ("90", "100", "45"))])
-        for c, x in zip(cartes, (-1.36, 0, 1.36)):
+        cartes = VGroup(*[self.bouton_haut(Ln, nb, largeur=1.3, fs_nb=38) for Ln, nb in zip("ABC", ("90", "100", "45"))])
+        for c, x in zip(cartes, (-1.4, 0, 1.4)):
             c.move_to(P(x, -0.6))
 
         def e1():
+            self.largeur_texte = 3.85     # la pause (déjà placée) était bornée à 3,4 : marge de 6 % avec le rebours
             self.calcul([("Combien de lignes", WHITE, "Combien de lignes")], 2.6, centre=0, fs=46)
             self.calcul([("pour", WHITE, None), ("10 villes ?", RANG, "10")], 1.95, centre=0, fs=46)
             rap = self.formule(38, 0.95)
             self.play(FadeIn(rap, shift=UP * 0.1), run_time=0.25)
 
+        self.largeur_texte = 3.4
         q = self.question_libre("03-question", [e1], cartes, P(0, -1.8))
+        self.largeur_texte = 3.85
         self.dire("03b-reponse")
         self.au_mot("Réponse C")
         self.q_reponse(q, 2)

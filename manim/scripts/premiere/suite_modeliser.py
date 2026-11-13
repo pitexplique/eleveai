@@ -359,35 +359,37 @@ class SuiteModeliser1reSpe(AuditMilliers, OutilsEp12, OutilsGraphique, PaysageSu
         self.nouvel_ecran("06-nature")
         self.titre("Pas toujours en ajoutant", JAUNE_TITRE, 46, extrait="pas toujours", y=3.2)
         xg, xd, larg = -3.3, 3.3, 5.6
-        cg = self.carte(6.1, 4.4, P(xg, 0.25), TERME)
-        cd = self.carte(6.1, 4.4, P(xd, 0.25), RAISON)
+        cg = self.carte(6.1, 4.6, P(xg, 0.22), TERME)
+        cd = self.carte(6.1, 4.6, P(xd, 0.22), RAISON)
         self.play(FadeIn(cg), FadeIn(cd), run_time=0.3)
-        self.calc([("Réservations :", WHITE, "réservations")], 2.0, centre=xg, fs=36, larg=larg)
-        self.calc([("+ 10 % par mois", RAISON, "10 %")], 1.33, centre=xg, fs=36, larg=larg)
-        self.calc([("→ on multiplie par", WHITE, "on multiplie par"), ("1,1", RAISON, "1,1")], 0.66, centre=xg, fs=36,
+        fs, larg = 36, 5.3
+        self.calc([("Réservations :", WHITE, "réservations")], 2.12, centre=xg, fs=fs, larg=larg)
+        self.calc([("+ 10 % par mois", RAISON, "10 %")], 1.52, centre=xg, fs=fs, larg=larg)
+        self.calc([("on multiplie par", WHITE, "on multiplie par"), ("1,1", RAISON, "1,1")], 0.92, centre=xg, fs=fs,
                   larg=larg)
         bars = VGroup(*[Rectangle(width=0.5, height=0.55 * 1.1 ** k, fill_color=TERME, fill_opacity=1, stroke_width=0)
-                        .move_to(P(xg - 1.6 + 0.8 * k, -1.0), aligned_edge=DOWN) for k in range(5)])
+                        .move_to(P(xg - 1.6 + 0.8 * k, -0.95), aligned_edge=DOWN) for k in range(5)])
         self.play(LaggedStart(*[GrowFromEdge(b, DOWN) for b in bars], lag_ratio=0.25), run_time=0.7)
-        self.calc([("suite géométrique", JUSTE, "suite géométrique")], -1.45, centre=xg, fs=42, larg=larg)
-        self.calc([("Clients :", WHITE, "Si on perd")], 2.0, centre=xd, fs=36, larg=larg)
-        self.calc([("− 10 %,", RAISON, "10 %"), ("puis + 20", RAISON, "20")], 1.33, centre=xd, fs=36, larg=larg)
-        self.calc([("on multiplie", WHITE, "on multiplie ET"), ("ET", JAUNE_TITRE, None), ("on ajoute", WHITE, "on ajoute")],
-                  0.66, centre=xd, fs=36, larg=5.85)
+        self.calc([("suite géométrique", JUSTE, "suite géométrique")], -1.55, centre=xg, fs=42, larg=larg)
+        self.calc([("Clients :", WHITE, "Si on perd"), ("− 10 %,", RAISON, "10 %")], 2.12, centre=xd, fs=fs, larg=larg)
+        self.calc([("puis + 20", RAISON, "20")], 1.52, centre=xd, fs=fs, larg=larg)
+        self.calc([("on multiplie", WHITE, "on multiplie ET"), ("ET", JAUNE_TITRE, None)], 0.92, centre=xd, fs=fs,
+                  larg=larg)
+        self.calc([("on ajoute", WHITE, "on ajoute")], 0.32, centre=xd, fs=fs, larg=larg)
         self._machine(xd)
-        self.calc([("ni arithmétique,", JAUNE_TITRE, "ni arithmétique")], -0.92, centre=xd, fs=40, larg=larg)
-        self.calc([("ni géométrique", JAUNE_TITRE, "ni géométrique")], -1.55, centre=xd, fs=40, larg=larg)
+        self.calc([("ni arithmétique,", JAUNE_TITRE, "ni arithmétique")], -1.17, centre=xd, fs=38, larg=larg)
+        self.calc([("ni géométrique", JAUNE_TITRE, "ni géométrique")], -1.7, centre=xd, fs=38, larg=larg)
         self.attendre_voix(marge=0.5)
 
     def _machine(self, x):
         """uₙ → × → + → uₙ₊₁ : deux opérations à la suite (sans nombre)."""
-        bloc = lambda t, c, w: VGroup(RoundedRectangle(width=w, height=0.62, corner_radius=0.1, stroke_color=c,  # noqa
+        bloc = lambda t, c, w: VGroup(RoundedRectangle(width=w, height=0.74, corner_radius=0.1, stroke_color=c,  # noqa
                                                        stroke_width=3, fill_color=FOND_CARTE, fill_opacity=1),
-                                      Text(t, font_size=34, color=c if t in "×+" else WHITE))
-        els = [bloc("uₙ", TERME, 0.9), bloc("×", RAISON, 0.62), bloc("+", RAISON, 0.62), bloc("uₙ₊₁", TERME, 1.15)]
+                                      Text(t, font_size=40, color=c if t in "×+" else WHITE))
+        els = [bloc("uₙ", TERME, 1.0), bloc("×", RAISON, 0.72), bloc("+", RAISON, 0.72), bloc("uₙ₊₁", TERME, 1.4)]
         for e in els:
             e[1].move_to(e[0])
-        g = VGroup(*els).arrange(RIGHT, buff=0.5).move_to(P(x, -0.2))
+        g = VGroup(*els).arrange(RIGHT, buff=0.34).move_to(P(x, -0.42))
         fl = VGroup(*[Arrow(els[k].get_right(), els[k + 1].get_left(), buff=0.06, stroke_width=4, color=GREY_A,
                             max_tip_length_to_length_ratio=0.35) for k in range(3)])
         self.play(LaggedStart(*[FadeIn(e, scale=0.8) for e in els], *[GrowArrow(f) for f in fl], lag_ratio=0.15),
@@ -412,23 +414,32 @@ class SuiteModeliser1reSpe(AuditMilliers, OutilsEp12, OutilsGraphique, PaysageSu
         self.calc([("il y en a", WHITE, "il y en a"), ("6", JUSTE, "6")], -1.15, centre=xb, fs=38, larg=5.4,
                   avec=[Indicate(f2.chaises, color=JUSTE, scale_factor=1.15)])
         self.play(Create(self.barre_lisible(VGroup(faux[1], faux[2]))), run_time=0.3)
-        self.calc([("Une formule doit marcher pour", JAUNE_TITRE, "Une formule doit"),
-                   ("toutes les figures :", JAUNE_TITRE, "toutes les figures")], -2.15, centre=-0.6, fs=38, larg=12)
+        self.calc([("Une formule doit marcher", JAUNE_TITRE, "Une formule doit")], -1.9, centre=-0.6, fs=38, larg=10)
+        self.calc([("pour toutes les figures :", JAUNE_TITRE, "toutes les figures")], -2.48, centre=-0.6, fs=38, larg=10)
         self.calc([("teste-la sur les figures", WHITE, "teste-la"), ("1,", TERME, "1"), ("2", TERME, "2"),
-                   ("et 3", TERME, "3")], -2.85, centre=-0.6, fs=38, larg=10.4)
+                   ("et 3", TERME, "3")], -3.06, centre=-0.6, fs=38, larg=10)
         self.attendre_voix(marge=0.5)
 
     # ── 08 : question-pause n° 2 : + 20 % → A (géométrique de raison 1,2) ──
 
     def ecran_question2(self):
         fs = 38
-        l1 = self.t("Le nombre de couverts servis augmente", fs)
-        l2 = self.t("de 20 % chaque mois.", fs)
-        l3 = self.t("Quelle est la nature de la suite ?", fs, JAUNE_TITRE)
-        dessin = lambda: self.play(FadeIn(assiette(0.85).move_to(P(-5.9, 0.15)), scale=0.8), run_time=0.3)  # noqa
-        q = self.poser_question("08-question", [(l1, "Le nombre de couverts"), (l2, "20"), (l3, "Quelle est")],
-                                ["géométrique de raison 1,2", "arithmétique de raison 20", "géométrique de raison 0,2"],
-                                0, largeur=9.2, fs=fs, dessin=dessin)
+        corps = [self.t(c, fs, WHITE, 1e9) for c in
+                 ("géométrique de raison 1,2", "arithmétique de raison 20", "géométrique de raison 0,2")]
+        cartes = VGroup(*[self.bouton(Ln, c, 9.2, fs) for Ln, c in zip("ABC", corps)]).arrange(DOWN, buff=0.16)
+        cartes.move_to(P(0.5, -0.6))
+
+        def e1():
+            self.calc([("Le nombre de couverts servis augmente", WHITE, "Le nombre de couverts")], 2.5, centre=0,
+                      fs=fs, larg=12)
+            self.calc([("de 20 % chaque mois.", WHITE, "20")], 1.95, centre=0, fs=fs, larg=12)
+            self.calc([("Quelle est la nature de la suite ?", JAUNE_TITRE, "Quelle est")], 1.4, centre=0, fs=fs,
+                      larg=12)
+
+        def dessin():
+            self.play(FadeIn(assiette(0.8).move_to(P(-5.45, -0.6)), scale=0.8), run_time=0.3)
+
+        q = self.question_libre("08-question", [e1], cartes, P(0.5, -2.5), dessin=dessin)
         self.dire("08b-reponse")
         self.au_mot("Réponse A")
         self.q_reponse(q, 0)
