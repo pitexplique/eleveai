@@ -120,7 +120,6 @@ import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
 import NOTIONS_AVEC_CARTE from "@/lib/cartes/notions-avec-carte.json";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import BoiteAOutils from "@/components/BoiteAOutils";
-import FloatingCoach from "@/components/FloatingCoach";
 import AQuoiCaSert from "./AQuoiCaSert";
 import Image from "next/image";
 
@@ -2074,9 +2073,8 @@ function handleInputKeyDown(
             Question suivante →
           </button>
         ) : null}
-        <div className="flex justify-center print:hidden">
-          <FloatingCoach enBas />
-        </div>
+        {/* ⛔ 12/11/2026 — Frédéric : « Demande à l'IA » retiré du coach (simple et
+            complet) ; l'aide passe par « Ti Margo t’explique ton erreur ». */}
       </>
     );
   }
@@ -2798,7 +2796,6 @@ function handleInputKeyDown(
       </div>
     </div>
     {calculatriceAutorisee && <BoiteAOutils />}
-    <FloatingCoach />
   </main>
 );
 }
@@ -2922,7 +2919,7 @@ function CoachErrorHelp({
           onClick={start}
           className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-5 py-2.5 text-sm font-black text-white shadow-md transition hover:brightness-105"
         >
-          🤖 Demande une explication
+          🙋 Ti Margo t&rsquo;explique ton erreur
         </button>
       </div>
     );
@@ -2931,7 +2928,7 @@ function CoachErrorHelp({
   return (
     <div className="rounded-[28px] border border-cyan-200 bg-[#05213f] p-4 text-white shadow-sm">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-sm font-black">🤖 L&rsquo;IA t&rsquo;explique ton erreur</span>
+        <span className="text-sm font-black">🙋 Ti Margo t&rsquo;explique ton erreur</span>
         <button
           type="button"
           onClick={() => setOpen(false)}

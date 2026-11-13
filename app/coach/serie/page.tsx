@@ -17,7 +17,7 @@ function CoachFallback() {
 export default function CoachPage() {
   return (
     <Suspense fallback={<CoachFallback />}>
-      {/* « Demande à l'IA » est posé par TutorV4Client (en bas en vue simple, 27/10). */}
+      {/* « Demande à l’IA » retiré du coach le 12/11 (Ti Margo aide à la place). */}
       <TutorV4Client />
     </Suspense>
   );
