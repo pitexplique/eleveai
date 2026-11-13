@@ -65,6 +65,7 @@ class SuiteRecurrenceShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuit
     place_coche = 0.15
     entete = _S16.entete
     q_reponse = _S16.q_reponse
+    largeur_texte = 3.7           # 6 % de marge (et plus) de chaque côté (retour du 13/11) ; la fin commune garde 4,1
 
     def regrouper(self, *groupes):
         """Chaque groupe redevient UN objet de la scène (ses morceaux montrés un
@@ -76,7 +77,7 @@ class SuiteRecurrenceShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuit
     def construct(self):
         # ── 00 : la garde : le titre, l'échelle (70 %), le pari ──
         self.dire("00-garde")
-        self.entete("Suite par récurrence", extrait="Suite par", fs=38)
+        self.entete("Suite par récurrence", extrait="Suite par", fs=32)
         self.calcul([("Tu paries que", WHITE, "Tu paries")], 2.15, centre=0, fs=42)
         self.calcul([("tu prévois", WHITE, "tu prévois")], 1.55, centre=0, fs=42)
         self.calcul([("l'épisode", RAISON, "l'épisode"), ("3", RAISON, "3")], 0.9, centre=0, fs=50)
@@ -93,7 +94,7 @@ class SuiteRecurrenceShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuit
         self.play(FadeIn(tv, shift=UP * 0.15), run_time=0.35)
         self.suivre("3 millions")
         foule = VGroup(*[spectateur(P(*PLACES[k])) for k in range(3)])
-        mil = self.t("3 millions", 26, TERME).move_to(P(1.15, 0.95))
+        mil = self.t("3 millions", 24, TERME).move_to(P(1.0, 0.95))
         self.play(LaggedStart(*[GrowFromCenter(s) for s in foule], lag_ratio=0.3), FadeIn(mil), run_time=0.5)
         self.au_mot("l'épisode 1")
         self.play(FadeIn(ep, shift=UP * 0.1), run_time=0.25)
@@ -108,7 +109,7 @@ class SuiteRecurrenceShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuit
         l2 = self.calcul([("× 2,", RAISON, "multiplié par 2"), ("puis", WHITE, "puis"), ("− 1", PIEGE, "on enlève 1")],
                          -0.45, centre=0, fs=42)
         f = self.calcul([("uₙ₊₁ =", TERME, "u indice n plus 1"), ("2uₙ", RAISON, "2 u indice n"),
-                         ("− 1", PIEGE, "moins 1")], -1.15, centre=0, fs=38)
+                         ("− 1", PIEGE, "moins 1")], -1.15, centre=0, fs=34)
         cf = self.encadre(f, RAISON, 0.12)
         self.play(Create(cf), run_time=0.3)
         self.attendre_voix(marge=0.3)
@@ -127,8 +128,8 @@ class SuiteRecurrenceShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuit
                                       3: [part.animate.set_color(PIEGE)]})
         sa = lg.saut(0, "× 2 − 1", cote=UP, fs=28)
         sa[1]._pas_audit = True
-        m5 = self.t("5 millions", 26, TERME).move_to(mil)
-        self.play(FadeOut(part, shift=RIGHT * 0.4), Create(sa[0]), FadeIn(sa[1]), lg.cases[1][1].animate.set_opacity(1),
+        m5 = self.t("5 millions", 24, TERME).move_to(mil)
+        self.play(FadeOut(part, scale=0.4), Create(sa[0]), FadeIn(sa[1]), lg.cases[1][1].animate.set_opacity(1),
                   Transform(mil, m5), run_time=0.4)
         cad5 = self.encadre(c[-1].copy().shift(RIGHT * 0.1), JUSTE, 0.07)
         self.play(c[-1].animate.shift(RIGHT * 0.1), Create(cad5), *self.allumer_cases(lg, [1]), run_time=0.3)
@@ -175,7 +176,7 @@ class SuiteRecurrenceShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuit
         self.nouvel_ecran("04-commentaire")
         self.au_mot("Et toi")
         et = self.t("Et toi ?", 50, JAUNE_TITRE).move_to(P(0, 3.45))
-        lg = LigneTermes(["3", "5", "9", "?", "?"], centre=P(0, 0.05), pas=0.85, largeur=0.66, hauteur=0.62, fs=30,
+        lg = LigneTermes(["3", "5", "9", "?", "?"], centre=P(0, 0.05), pas=0.8, largeur=0.62, hauteur=0.6, fs=30,
                          noms=[u(k) for k in range(1, 6)], fs_noms=26)
         for c in lg.cases[:3]:
             c[1]._pas_audit = True            # les termes déjà calculés (écrans 01 à 03)
@@ -190,4 +191,5 @@ class SuiteRecurrenceShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuit
         self.attendre_voix(marge=0.6)
 
         # ── 05 : la fin ──
+        self.largeur_texte = 4.1      # « Entraîne-toi sur » : la fin commune, telle quelle
         self.fin_short("05-abonne")
