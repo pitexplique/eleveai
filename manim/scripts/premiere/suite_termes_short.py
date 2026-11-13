@@ -72,6 +72,8 @@ class SuiteTermesShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuites):
     identite = "Maths 1re spé — EleveAI"
     ceinture = "blanche"
     place_coche = 0.15
+    largeur_texte = 3.85          # 12/11 : une vraie marge latérale (≈ 6 %) pour les textes pleine largeur
+    k_allumer = 1.03
     entete = _S16.entete
 
     def q_reponse(self, q, bonne):
@@ -90,14 +92,14 @@ class SuiteTermesShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuites):
         self.insister(b, self.k_allumer, run_time=0.18)
         return ok
 
-    def bouton_haut(self, lettre, texte, largeur=1.2, hauteur=1.6, fs=40, fs_nb=56):
+    def bouton_haut(self, lettre, texte, largeur=1.24, hauteur=1.6, fs=40, fs_nb=42):
         """Un bouton en hauteur : la lettre en haut, le nombre en grand dessous
         (même structure que le module commun : VGroup(cadre, VGroup(rond+lettre, corps)))."""
         rond = Circle(radius=0.25 * fs / 32, fill_color=TERME, fill_opacity=1, stroke_width=0)
         lt = Text(lettre, font_size=fs, color=WHITE, weight=BOLD).move_to(rond)
         c = Text(texte, font_size=fs_nb, color=WHITE)
-        if c.width > largeur - 0.24:
-            c.scale_to_fit_width(largeur - 0.24)
+        if c.width > largeur - 0.16:  # 216, 24 et 18 : la même taille
+            c.scale_to_fit_width(largeur - 0.16)
         ligne = VGroup(VGroup(rond, lt), c).arrange(DOWN, buff=0.18)
         cadre = RoundedRectangle(width=largeur, height=hauteur, corner_radius=0.14, stroke_color=TERME,
                                  stroke_width=3, fill_color=FOND_CARTE, fill_opacity=1)
@@ -169,7 +171,7 @@ class SuiteTermesShort(AuditMilliers, OutilsEp12, OutilsGraphique, ShortSuites):
 
         # ── 03 : question-pause → A (24) ; puis 2³ = 8 et 3 × 8 = 24 ──
         cartes = VGroup(*[self.bouton_haut(L, nb) for L, nb in zip("ABC", ("24", "216", "18"))])
-        for c, x in zip(cartes, (-1.42, 0, 1.42)):
+        for c, x in zip(cartes, (-1.36, 0, 1.36)):
             c.move_to(P(x, -0.05))
 
         def e1():

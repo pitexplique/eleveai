@@ -341,18 +341,18 @@ class SuiteTermes1reSpe(AuditMilliers, OutilsEp12, OutilsGraphique, PaysageSuite
     def ecran_recurrence(self):
         self.nouvel_ecran("06-recurrence")
         self.titre("Le bonus de Chloé", JAUNE_TITRE, 46, extrait="bonus", y=3.2)
-        lg = LigneTermes(["4", "9", "19", "39"], centre=P(0, -0.45), pas=2.7, largeur=1.35, hauteur=0.85, fs=42,
+        lg = LigneTermes(["4", "9", "19", "39"], centre=P(0, -0.6), pas=2.7, largeur=1.35, hauteur=0.85, fs=42,
                          noms=[u(k, "v") for k in range(4)], fs_noms=32)
-        self.calc([("Niveau 0 :", WHITE, "0"), ("v₀ =", TERME, "le bonus vaut"), ("4", TERME, "4")], 2.3, centre=-3.4,
+        self.calc([("Niveau 0 :", WHITE, "0"), ("v₀ =", TERME, "le bonus vaut"), ("4", TERME, "4")], 2.42, centre=-3.4,
                   fs=40, larg=5.6, avec_morceau={2: [FadeIn(lg.cases[0][0], scale=0.8), FadeIn(lg.cases[0][1], scale=1.4),
                                                      FadeIn(lg.noms[0])]})
         self.calc([("À chaque niveau :", WHITE, "à chaque niveau"), ("× 2", RAISON, "double"), ("puis + 1", RAISON, "ajoute 1")],
-                  2.3, centre=3.0, fs=38, larg=6.6)
+                  2.42, centre=3.0, fs=38, larg=6.6)
         f = self.calc([("vₙ₊₁ =", TERME, "v indice n plus 1 égale"), ("2vₙ", WHITE, "2 v indice n"), ("+ 1", WHITE, "plus 1")],
-                      1.35, centre=-3.0, fs=52, larg=5.6)
+                      1.3, centre=-3.1, fs=52, larg=5.6)
         self.play(Create(self.encadre(f, RAISON, 0.16)), run_time=0.3)
-        self.calc([("une récurrence :", JAUNE_TITRE, "récurrence")], 1.66, centre=3.1, fs=34, larg=6)
-        self.calc([("de proche en proche", RAISON, "de proche en proche")], 1.1, centre=3.1, fs=34, larg=6)
+        self.calc([("une récurrence :", JAUNE_TITRE, "récurrence")], 1.55, centre=3.3, fs=34, larg=6)
+        self.calc([("de proche en proche", RAISON, "de proche en proche")], 0.98, centre=3.3, fs=34, larg=6)
         xc = -0.8
         for k, (a, b) in enumerate(((4, 9), (9, 19))):
             y = -1.75 - 0.72 * k
@@ -398,8 +398,6 @@ class SuiteTermes1reSpe(AuditMilliers, OutilsEp12, OutilsGraphique, PaysageSuite
         n9 = self.t("niveau 9", 36, JUSTE).move_to(niv)
         l4 = self.calc([("n =", RANG, "et n égale"), ("9", JUSTE, "9")], -2.05, centre=x1, fs=fs, larg=6,
                        avec=[jg.remplir(1.0)])
-        rq = self.t("(n ≥ 0 : c'est un rang)", 30, GREY_A, audit=False).next_to(l4, DOWN, buff=0.3)
-        self.play(FadeIn(rq), run_time=0.25)
         self.au_mot("C'est le niveau")
         self.suivre("9")
         self.play(Create(self.encadre(l4, JUSTE, 0.16)), ReplacementTransform(niv, n9), run_time=0.4)
@@ -421,26 +419,26 @@ class SuiteTermes1reSpe(AuditMilliers, OutilsEp12, OutilsGraphique, PaysageSuite
         self.dire("08b-reponse")
         self.au_mot("Réponse C")
         self.q_reponse(q, 2)
-        xb, base, k = 3.3, -2.85, 1.9 / 108
+        xb, base, k = 3.9, -2.85, 1.9 / 108
         b6 = Rectangle(width=0.55, height=k * 82, fill_color=PIEGE, fill_opacity=1, stroke_width=0)
         b6.move_to(P(xb, base), aligned_edge=DOWN)
         b7 = Rectangle(width=0.55, height=k * 108, fill_color=JUSTE, fill_opacity=1, stroke_width=0)
         b7.move_to(P(xb + 0.9, base), aligned_edge=DOWN)
-        seuil = DashedLine(P(xb - 0.6, base + k * 100), P(xb + 1.5, base + k * 100), color=RAISON, stroke_width=3,
-                           dash_length=0.1)
-        cent = self.t("100", 30, RAISON).next_to(seuil, LEFT, buff=0.12)
+        seuil = DashedLine(P(xb - 0.5, base + k * 100), P(xb + 0.55, base + k * 100), color=RAISON, stroke_width=3,
+                           dash_length=0.1)  # s'arrête avant la barre u₇
+        cent = self.t("100", 30, RAISON).next_to(seuil, LEFT, buff=0.2)
         n6 = self.t("u₆", 30, TERME, audit=False).next_to(b6, DOWN, buff=0.08)
         n7 = self.t("u₇", 30, TERME, audit=False).next_to(b7, DOWN, buff=0.08)
-        xc = -2.6
-        self.calc([("u₆ =", TERME, "u indice 6"), ("82", WHITE, "82"), (": pas encore", PIEGE, "pas encore")], -1.2,
-                  centre=xc, fs=42, larg=7, avec_morceau={1: [GrowFromEdge(b6, DOWN), FadeIn(n6), Create(seuil)]})
+        xc = -2.3
+        self.calc([("u₆ =", TERME, "u indice 6"), ("82", WHITE, "82"), (": pas encore", PIEGE, "pas encore")], -1.05,
+                  centre=xc, fs=40, larg=8.4, avec_morceau={1: [GrowFromEdge(b6, DOWN), FadeIn(n6), Create(seuil)]})
         self.calc([("u₇ =", TERME, "u indice 7"), ("108", WHITE, "108"), (": ça dépasse", JUSTE, "ça dépasse"),
-                   ("100", JUSTE, "100")], -1.95, centre=xc, fs=42, larg=7,
+                   ("100", JUSTE, "100")], -1.75, centre=xc, fs=40, larg=8.4,
                   avec_morceau={1: [GrowFromEdge(b7, DOWN), FadeIn(n7)], 3: [FadeIn(cent)]})
-        c = self.calc([("Le premier rang qui franchit le seuil :", WHITE, "Le premier rang"), ("7", JUSTE, "7")], -2.75,
-                      centre=-1.8, fs=40, larg=8.6)
-        self.play(c[-1].animate.shift(RIGHT * 0.12), run_time=0.15)
-        self.play(Create(self.encadre(c[-1], JUSTE, 0.12)), Indicate(b7, color=JUSTE), run_time=0.35)
+        self.calc([("Le premier rang qui franchit", WHITE, "Le premier rang")], -2.45, centre=xc, fs=40, larg=8.4)
+        c = self.calc([("le seuil :", WHITE, None), ("7", JUSTE, "7")], -3.12, centre=xc, fs=40, larg=8.4)
+        self.play(c[-1].animate.shift(RIGHT * 0.15), run_time=0.15)
+        self.play(Create(self.encadre(c[-1], JUSTE, 0.18)), Indicate(b7, color=JUSTE), run_time=0.35)
         self.attendre_voix(marge=0.5)
 
     # ── 09 : le défi : uₙ = 5n − 3 ─────────────────────────────────────────
