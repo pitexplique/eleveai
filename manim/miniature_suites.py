@@ -113,6 +113,10 @@ EP = [
      ["COMPRENDRE COMMENT", "MODÉLISER PAR UNE SUITE"], "u_{n} = 2n + 2", "+ 25 tables : 52 chaises",
      "blanche", ["COMBIEN DE", "LIGNES ?"], "10 villes, toutes reliées",
      [("3 → 6 → 10 → …", 120, BLEU), ("10 villes : ?", 120, VERT)]),
+    ("premiere-spe", "23-variation", "verte",
+     ["COMPRENDRE LE SENS", "DE VARIATION"], "u_{n+1} − u_{n} = 2n + 1", "+ positif : la suite est croissante",
+     "blanche", ["EN UN COUP", "D'ŒIL ?"], "la neige qui fond",
+     [("5 ; 3 ; 4 ; 2 ; 6", 120, BLEU), ("croissante ? décroissante ?", 60, VERT)]),
 ]
 # Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
 from suites_terminale_donnees import EP_TLE  # noqa: E402

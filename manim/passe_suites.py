@@ -371,6 +371,21 @@ EPS = [
          sa="Une compagnie aérienne relie n villes, chacune avec toutes les autres, par une ligne directe : 3 villes, 3 lignes ; 4 villes, 6 lignes ; 5 villes, 10 lignes. Tu comptes les lignes sans les dessiner ?",
          stoi="combien de lignes pour 20 villes ?", srep="190 : 20 × 19 = 380, divisé par 2.",
          stags=["avion", "compagnie aérienne", "villes", "modéliser", "suites"]),
+    dict(num="23", slug="variation", classe="premiere-spe", notion="suites", micro="suite_variation",
+         ceinture="verte", sc="blanche", centres=["sciences"], scentres=["meteo-climat", "nature-ecologie"],
+         titre="Une suite monte-t-elle toujours ? — Sens de variation d'une suite — épisode 23 · Maths 1re spé",
+         intro="Rania est technicienne de laboratoire : elle dilue une solution, et à chaque étape la concentration est divisée par 2, en partant de 80 mg/L. Comment prouver qu'une suite monte toujours, ou descend toujours ?",
+         puces=["croissante : uₙ₊₁ ≥ uₙ pour tout n ; décroissante : uₙ₊₁ ≤ uₙ pour tout n", "méthode 1 : le signe de uₙ₊₁ − uₙ (uₙ = n² + 3 donne 2n + 1, positif : croissante)", "méthode 2, termes strictement positifs : comparer uₙ₊₁ ÷ uₙ à 1 (0,5 < 1 : la concentration décroît)", "le piège : pour une suite géométrique, regarder q ET le signe du premier terme (u₀ = −5, q = 2 : décroissante)", "une suite peut n'être ni croissante ni décroissante : 6 ; −12 ; 24"],
+         defi="Pour tout entier naturel n, uₙ₊₁ − uₙ = 3n − 10. À partir de quel rang n a-t-on uₙ₊₁ ≥ uₙ ?",
+         chap={"00-garde": "Sens de variation", "01-situation": "Rania, technicienne de laboratoire", "02-definition": "Croissante, décroissante", "03-difference": "Méthode 1 : le signe de uₙ₊₁ − uₙ", "04-quotient": "Méthode 2 : le quotient", "05-question": "Question : uₙ₊₁ = uₙ − n² − 1", "06-piege": "Le piège : q et le signe de u₀", "07-question": "Question : uₙ₊₁ = −2uₙ", "08-defi": "À toi de jouer", "08b-correction": "Correction : le rang 4", "09-finale": "Ce que tu as appris"},
+         qs=[("05-question", "Pour tout n, uₙ₊₁ = uₙ − n² − 1. La suite est :", ["croissante", "ni croissante ni décroissante", "décroissante"], 2, "uₙ₊₁ − uₙ = −n² − 1 : c'est négatif pour tout n."),
+             ("07-question", "u₀ = 6 et uₙ₊₁ = −2 × uₙ. La suite est :", ["ni croissante ni décroissante", "croissante", "décroissante"], 0, "6, −12, 24 : les termes changent de signe à chaque fois, ils montent puis descendent.")],
+         tags=["suites", "sens de variation", "suite croissante", "suite décroissante", "monotonie", "laboratoire", "dilution"],
+         st="La neige fond : tu vois le sens de variation ? 🏔️ — 1re spé #Shorts",
+         sq=("03-question", "Les températures du matin sont 5, 3, 4, 2, puis 6 degrés. Cette suite est :", ["croissante", "ni croissante ni décroissante", "décroissante"], 1, "Elle descend, remonte, redescend, puis remonte : elle n'est ni croissante ni décroissante."),
+         sa="Mathis est météorologue : au sommet d'une montagne, la hauteur de neige n jours après le début du redoux vaut uₙ = 60 − 4n centimètres. Chaque jour, 4 cm de moins : la suite est décroissante.",
+         stoi="avec uₙ = 60 − 4n, au bout de combien de jours la neige a-t-elle fondu ?", srep="15 jours : 60 − 4n = 0 donne n = 15.",
+         stags=["neige", "météo", "montagne", "sens de variation", "suites"]),
 ]
 # Les 4 vidéos communes : la même vidéo sert aussi la micro de la classe du dessus.
 AUSSI = {
