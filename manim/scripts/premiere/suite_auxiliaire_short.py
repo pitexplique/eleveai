@@ -154,7 +154,7 @@ class SuiteAuxiliaireShort(Bords6Cases, Bords6Objets, OutilsAuxiliaire, AuditMil
 
         # ── 02 : EN HAUT la balance « éliminé / dose » ; EN BAS L = 80, alignés ──
         self.nouvel_ecran("02-equilibre", garder=(self.badge, self.titre_s))
-        self.ecrire([[("À l'équilibre :", JUSTE, "À l'équilibre")]], 2.42, fs=42)
+        self.ecrire([[("À l'équilibre :", JUSTE, "À l'équilibre")]], 2.15, fs=42)
         bal = balance(P(0, -0.05), larg=2.2, angle=0.2, haut=1.5)
         self.play(FadeIn(bal), run_time=0.3)
         bal2 = balance(P(0, -0.05), larg=2.2, angle=0.0, haut=1.5)

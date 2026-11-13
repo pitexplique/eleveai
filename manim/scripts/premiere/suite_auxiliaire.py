@@ -446,9 +446,9 @@ class SuiteAuxiliaire1reSpe(Bords6Cases, Bords6Objets, OutilsAuxiliaire, AuditMi
         self.ecrire([[("elle se stabilise", WHITE, "elle se stabilise")]], -1.05, centre=xc, fs=38, larg=lc)
         self.ecrire([[("autour de", WHITE, "autour"), ("3 000 arbres.", JUSTE, "3 000 arbres")]], -1.6, centre=xc, fs=38,
                     larg=lc)
-        self.ecrire([[("Après 10 ans :", WHITE, "Après 10 ans"), ("u_{10} =", TERME, None), ("2 000 × 0,9¹⁰", RAISON, "2 000 fois"),
-                      ("+ 3 000", TERME, "plus 3 000"), ("≈ 3 697", JUSTE, "3 697")]], -2.6, centre=-0.45, fs=46,
-                    larg=11.4, avec_part={0: [Indicate(pts[10], color=JAUNE_TITRE, scale_factor=2.2)]})
+        self.ecrire([[("Après 10 ans :", WHITE, "Après 10 ans"), ("2 000 × 0,9¹⁰", RAISON, "2 000 fois"),
+                      ("+ 3 000", TERME, "plus 3 000"), ("≈ 3 697", JUSTE, "3 697")]], -2.6, centre=-0.8, fs=46,
+                    larg=10.6, avec_part={0: [Indicate(pts[10], color=JAUNE_TITRE, scale_factor=2.2)]})
         self.play(Indicate(pts[10], color=JUSTE, scale_factor=2.0), run_time=0.4)
         self.attendre_voix(marge=0.5)
 
@@ -461,7 +461,7 @@ class SuiteAuxiliaire1reSpe(Bords6Cases, Bords6Objets, OutilsAuxiliaire, AuditMi
         carte = self.carte(2.4, 4.3, P(4.75, 0.55), RAISON)
         m = machine(P(4.45, 0.55), "× 3", "− 4", self.ligne, fs=40, ecart=1.45, vertical=True)
         l1 = self.ecrire([[("u_{0} =", TERME, "u indice 0"), ("5", WHITE, "5"),
-                           ("et, pour tout entier naturel n :", WHITE, "pour tout")]], 2.3, centre=xg, fs=42, larg=lg,
+                           ("et, pour tout entier naturel n :", WHITE, "pour tout")]], 2.3, centre=xg, fs=48, larg=lg,
                          avec=[FadeIn(carte), FadeIn(m.c1, scale=0.8)])
         l2 = self.ecrire([[("u_{n + 1} =", TERME, "u indice n plus 1"), ("3", RAISON, "3"), ("u_{n}", TERME, None),
                            ("− 4", RAISON, "4")]], 1.35, centre=xg, fs=62, larg=lg,
@@ -487,7 +487,7 @@ class SuiteAuxiliaire1reSpe(Bords6Cases, Bords6Objets, OutilsAuxiliaire, AuditMi
         self.remove(*efface)
         xg, lg = -3.45, 5.6
         r0 = self.ecrire([[("L =", TERME, "L égale"), ("3", RAISON, "3 L"), ("L", TERME, None), ("− 4", WHITE, "4"),
-                           ("donne", WHITE, "donne"), ("L = 2", JUSTE, "L égale 2")]], 2.3, centre=xg, fs=46, larg=lg)
+                           ("donne", WHITE, "donne"), ("L = 2", JUSTE, "L égale 2")]], 2.3, centre=-2.65, fs=50, larg=6.5)
         self.boite(r0.parts[-1:])
         xe, fs = -4.15, 44
         self.ecrire_eq([("v_{n + 1}", RAISON, "v indice n plus 1"), ("=", WHITE, None), ("3", RAISON, "3 u"),
