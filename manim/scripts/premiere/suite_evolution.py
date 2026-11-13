@@ -136,10 +136,17 @@ class Bords6:
         vus = getattr(self, "_bords6_vus", set())
         for mob in self.mobjects:
             for f in mob.get_family():
-                if isinstance(f, Text) and f.submobjects and max(g.get_fill_opacity() for g in f.submobjects) > 0.05:
+                # les Text, mais aussi les morceaux de calc() (VGroup portant original_text) et les cadres
+                est_texte = isinstance(f, Text) or (hasattr(f, "original_text") and isinstance(f, VMobject))
+                est_cadre = isinstance(f, SurroundingRectangle)
+                if not (est_texte or est_cadre) or not f.get_family():
+                    continue
+                vis = max(max(g.get_fill_opacity(), g.get_stroke_opacity()) for g in f.get_family())
+                if vis > 0.05 and f.width > 0.01:
                     g, d = f.get_left()[0], f.get_right()[0]
                     if g < -lx - 0.01 or d > lx + 0.01:
-                        c = (cle, f.original_text[:24], round(g, 2), round(d, 2))
+                        nom = getattr(f, "original_text", "cadre")
+                        c = (cle, str(nom)[:24], round(g, 2), round(d, 2))
                         if c not in vus:
                             vus.add(c)
                             print(f"BORD6 {c[0]} « {c[1]} » x[{c[2]}, {c[3]}]", flush=True)
@@ -196,7 +203,7 @@ class SuiteEvolution1reSpe(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, P
 
     def ecran_situation(self):
         self.nouvel_ecran("01-situation")
-        x = -4.6
+        x = -4.3
         pers = emma(0.95).move_to(P(x, 2.05))
         nom = self.t("Emma", 44, JAUNE_TITRE).move_to(P(x, 0.68))
         m1 = self.t("conseillère", 34, TERME).move_to(P(x, 0.08))
@@ -216,8 +223,8 @@ class SuiteEvolution1reSpe(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, P
                   centre=2.0, fs=38, larg=7.4)
         cartes = VGroup(carte_q().move_to(P(0.6, -1.6)), carte_q().move_to(P(3.4, -1.6)))
         self.play(LaggedStart(*[FadeIn(c, scale=0.8) for c in cartes], lag_ratio=0.3), run_time=0.5)
-        self.calc([("Emma va l'aider", WHITE, "Emma va")], -1.25, centre=x, fs=36, larg=4)
-        self.calc([("à choisir", JUSTE, "à choisir")], -1.82, centre=x, fs=36, larg=4,
+        self.calc([("Emma va l'aider", WHITE, "Emma va")], -1.25, centre=x, fs=36, larg=3.8)
+        self.calc([("à choisir", JUSTE, "à choisir")], -1.82, centre=x, fs=36, larg=3.8,
                   avec=[Indicate(cartes, color=JUSTE, scale_factor=1.06)])
         self.attendre_voix(marge=0.5)
 
@@ -257,12 +264,14 @@ class SuiteEvolution1reSpe(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, P
                          fs=38, noms=["u₀", "u₁", "u₂"], fs_noms=32)
         arcs = [lg.saut(k, "× 1,03", cote=UP, fs=32) for k in range(2)]
         cadres = [FadeIn(lg.cases[k][0], scale=0.8) for k in (1, 2)] + [FadeIn(lg.noms[k]) for k in (1, 2)]
+        u1 = Text("1 030", font_size=38, color=WHITE).move_to(lg.cases[1][0])
+        u1._pas_audit = True      # écrit, pas dit : 1 000 × 1,03
         self.calc([("u₀ =", TERME, "u indice 0"), ("1 000", WHITE, "1 000"), (";", GREY_B, None),
                    ("uₙ₊₁ =", TERME, "u indice n plus 1"), ("1,03", RAISON, "1,03"), ("× uₙ", TERME, "fois u indice n")],
                   2.05, centre=0, fs=44, larg=12,
                   avec_morceau={1: [FadeIn(lg.cases[0][0], scale=0.8), FadeIn(lg.cases[0][1], scale=1.4),
                                     FadeIn(lg.noms[0])], 3: cadres,
-                                4: [Create(a[0]) for a in arcs] + [FadeIn(a[1], scale=1.3) for a in arcs]})
+                                4: [Create(a[0]) for a in arcs] + [FadeIn(a[1], scale=1.3) for a in arcs] + [FadeIn(u1, scale=1.4)]})
         f = self.calc([("uₙ =", TERME, "Donc u indice n"), ("1 000 ×", WHITE, "1 000 fois"),
                        ("1,03ⁿ", RAISON, "1,03 puissance n")], -1.38, centre=0, fs=54, larg=10)
         self.play(Create(self.encadre(f, TERME, 0.2)), run_time=0.35)
@@ -278,7 +287,9 @@ class SuiteEvolution1reSpe(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, P
     def ecran_question1(self):
         fs = 40
         corps = [self.t(c, fs, WHITE, 1e9) for c in ("une baisse de 15 %", "une baisse de 85 %", "une hausse de 15 %")]
-        cartes = VGroup(*[self.bouton(Ln, c, 6.6, fs) for Ln, c in zip("ABC", corps)]).arrange(DOWN, buff=0.18)
+        self.place_coche = 1.5        # la coche ✓ garde une marge après « 15 % » (relecture 13/11)
+        cartes = VGroup(*[self.bouton(Ln, c, 7.6, fs) for Ln, c in zip("ABC", corps)]).arrange(DOWN, buff=0.18)
+        self.place_coche = PaysageSuites.place_coche
         cartes.move_to(P(0, -0.5))
 
         def e1():
@@ -307,38 +318,41 @@ class SuiteEvolution1reSpe(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, P
         self.nouvel_ecran("05-lineaire-exponentiel")
         self.calc([("Emma compare", WHITE, "Emma compare"), ("deux offres", JAUNE_TITRE, "deux offres")], 3.3, centre=0,
                   fs=38, larg=12)
-        ca = self.carte(5.9, 2.62, P(-3.2, 1.66), TERME)
-        cb = self.carte(5.9, 2.62, P(3.2, 1.66), RAISON)
-        na = nuage_mini([1, 1.45, 1.9, 2.35, 2.8], 0.9, 0.8, droite=True).move_to(P(-0.8, 2.45))
+        ca = self.carte(5.9, 2.36, P(-3.2, 1.8), TERME)
+        cb = self.carte(5.9, 2.36, P(3.2, 1.8), RAISON)
+        na = nuage_mini([1, 1.45, 1.9, 2.35, 2.8], 0.8, 0.8, droite=True).move_to(P(-0.72, 2.45))
         nb = nuage_mini([1, 1.2, 1.5, 2.0, 2.8], 1.0, 0.8, couleur=RAISON).move_to(P(5.4, 2.45))
-        xa, xb, fs = -5.8, 0.6, 30
+        xa, xb, fs = -5.8, 0.6, 28
         self.au_mot("Offre A")
         self.play(FadeIn(ca), run_time=0.2)
-        self.calc([("Offre A", JAUNE_TITRE, None)], 2.6, x=xa, fs=34, larg=4)
-        self.calc([("+ 40 €", RAISON, "40"), ("chaque année", WHITE, "chaque année")], 2.04, x=xa, fs=fs, larg=4.4,
+        self.calc([("Offre A", JAUNE_TITRE, None)], 2.62, x=xa, fs=34, larg=4)
+        self.calc([("+ 40 €", RAISON, "40"), ("chaque année", WHITE, "chaque année")], 2.1, x=xa, fs=fs, larg=4.4,
                   avec=[FadeIn(na, scale=0.8)])
-        self.calc([("évolution linéaire", WHITE, "évolution linéaire")], 1.46, x=xa, fs=fs, larg=4.2)
-        self.calc([("suite arithmétique", TERME, "suite arithmétique")], 0.88, x=xa, fs=fs, larg=4.2)
+        self.calc([("évolution linéaire", WHITE, "évolution linéaire")], 1.58, x=xa, fs=fs, larg=4.2)
+        self.calc([("suite arithmétique", TERME, "suite arithmétique")], 1.06, x=xa, fs=fs, larg=4.2)
         self.au_mot("Offre B")
         self.play(FadeIn(cb), run_time=0.2)
-        self.calc([("Offre B", JAUNE_TITRE, None)], 2.6, x=xb, fs=34, larg=3.6)
-        self.calc([("+ 3 %", RAISON, "3 %"), ("par an", WHITE, "par an")], 2.04, x=xb, fs=fs, larg=3.6,
+        self.calc([("Offre B", JAUNE_TITRE, None)], 2.62, x=xb, fs=34, larg=3.6)
+        self.calc([("+ 3 %", RAISON, "3 %"), ("par an", WHITE, "par an")], 2.1, x=xb, fs=fs, larg=3.6,
                   avec=[FadeIn(nb, scale=0.8)])
-        self.calc([("évolution exponentielle", WHITE, "évolution exponentielle")], 1.46, x=xb, fs=fs, larg=5.3)
-        self.calc([("suite géométrique", TERME, "suite géométrique")], 0.88, x=xb, fs=fs, larg=5.3)
-        fs = 34
-        self.calc([("Après 10 ans", JAUNE_TITRE, "Après 10 ans")], -0.02, centre=0, fs=38)
-        self.calc([("1 000", WHITE, "1 000 plus"), ("+ 10 ×", WHITE, "10 fois"), ("40", WHITE, "40"), ("=", WHITE, "égale"),
-                   ("1 400 €", TERME, "1 400")], -0.62, centre=-3.2, fs=fs, larg=5.8)
-        self.calc([("1 000 ×", WHITE, "1 000 fois"), ("1,03¹⁰", RAISON, "1,03 puissance 10"), ("≈", WHITE, "environ"),
-                   ("1 343,92 €", TERME, "1 343,92")], -0.62, centre=3.2, fs=fs, larg=5.8)
-        self.calc([("Après 20 ans", JAUNE_TITRE, "après 20 ans")], -1.42, centre=0, fs=38)
-        self.calc([("1 800 €", TERME, "1 800")], -2.08, centre=-3.2, fs=40, larg=5)
-        b = self.calc([("≈", WHITE, "environ"), ("1 806 €", JUSTE, "1 806")], -2.08, centre=3.2, fs=40, larg=5)
-        self.play(b[-1].animate.shift(RIGHT * 0.16), run_time=0.12)
+        self.calc([("évolution exponentielle", WHITE, "évolution exponentielle")], 1.58, x=xb, fs=fs, larg=5.3)
+        self.calc([("suite géométrique", TERME, "suite géométrique")], 1.06, x=xb, fs=fs, larg=5.3)
+        # chaque calcul sous SA carte, sur deux lignes, plus grand (relecture du 13/11)
+        fs = 38
+        self.calc([("Après 10 ans", JAUNE_TITRE, "Après 10 ans")], 0.1, centre=0, fs=38)
+        self.calc([("1 000", WHITE, "1 000 plus"), ("+ 10 ×", WHITE, "10 fois"), ("40", WHITE, "40")], -0.48,
+                  centre=-3.2, fs=fs, larg=5.6)
+        self.calc([("=", WHITE, "égale"), ("1 400 €", TERME, "1 400")], -1.02, centre=-3.2, fs=fs, larg=5.6)
+        self.calc([("1 000 ×", WHITE, "1 000 fois"), ("1,03¹⁰", RAISON, "1,03 puissance 10")], -0.48, centre=3.2,
+                  fs=fs, larg=5.6)
+        self.calc([("≈", WHITE, "environ"), ("1 343,92 €", TERME, "1 343,92")], -1.02, centre=3.2, fs=fs, larg=5.6)
+        self.calc([("Après 20 ans", JAUNE_TITRE, "après 20 ans")], -1.62, centre=0, fs=38)
+        self.calc([("1 800 €", TERME, "1 800")], -2.2, centre=-3.2, fs=40, larg=5)
+        b = self.calc([("≈", WHITE, "environ"), ("1 806 €", JUSTE, "1 806")], -2.2, centre=3.2, fs=40, larg=5)
+        self.play(b[-1].animate.shift(RIGHT * 0.1), run_time=0.12)
         self.play(Create(self.encadre(b[-1], JUSTE, 0.1)), run_time=0.3)
         self.calc([("l'exponentielle", RAISON, "l'exponentielle"), ("finit par passer devant !", JUSTE, "finit par")],
-                  -2.88, centre=-0.6, fs=40, larg=10.4, avec=[Indicate(nb.pts, color=JUSTE, scale_factor=1.4)])
+                  -2.88, centre=0, fs=38, larg=11, avec=[Indicate(nb.pts, color=JUSTE, scale_factor=1.4)])
         self.attendre_voix(marge=0.5)
 
     # ── 06 : le piège : + 10 % puis − 10 % ≠ 0 ─────────────────────────────
@@ -414,9 +428,9 @@ class SuiteEvolution1reSpe(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, P
                         avec_morceau={1: [GrowArrow(fl[1]), FadeIn(labs[1], scale=1.3), GrowArrow(fl[2]),
                                          FadeIn(labs[2], scale=1.3), FadeIn(m3, scale=0.8), FadeIn(q3, scale=1.5)]})
         l2 = self.calc([("Quel est le loyer final,", WHITE, "Quel est le loyer"), ("au centime près ?", WHITE, "au centime")],
-                       -1.6, centre=-0.4, fs=40, larg=12)
+                       -1.6, centre=-0.3, fs=40, larg=11.4)
         l3 = self.calc([("Et quel est le", WHITE, "Et quel est"), ("taux d'évolution global ?", RAISON, "taux d'évolution")],
-                       -2.3, centre=-0.4, fs=40, larg=12)
+                       -2.3, centre=-0.3, fs=40, larg=11.4)
         self.defi_pause(-3.08, x=-0.8)
         self._defi = (tit, [l1, l1b, l2, l3], labs, q3)
 

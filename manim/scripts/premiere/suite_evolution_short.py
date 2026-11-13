@@ -131,9 +131,11 @@ class SuiteEvolutionShort(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, Sh
         lg.cases[2].remove(vieux)
         n192 = Text("192", font_size=30, color=JUSTE).move_to(lg.cases[2][0])
         p192 = self.prix("192 €", JUSTE)
+        self.largeur_texte = 3.3          # cadre de 192 compris : 6 % de marge de chaque côté
         c = self.calcul([("240 ×", WHITE, "240 fois"), ("0,8", PIEGE, "0,8"), ("=", WHITE, None), ("192", JUSTE, "192")],
-                        -1.78, centre=-0.15, fs=44, avec_morceau={3: [FadeIn(n192, scale=1.4), FadeOut(p240),
-                                                                  FadeIn(p192, scale=1.3)]})
+                        -1.78, centre=-0.1, fs=44, avec_morceau={3: [FadeIn(n192, scale=1.4), FadeOut(p240),
+                                                                 FadeIn(p192, scale=1.3)]})
+        self.largeur_texte = 3.85
         lg.cases[2].add(n192)
         self.play(c[-1].animate.shift(RIGHT * 0.1), run_time=0.12)
         self.play(Create(self.encadre(c[-1], JUSTE, 0.1)), *self.allumer_cases(lg, [2]), run_time=0.3)
@@ -163,8 +165,10 @@ class SuiteEvolutionShort(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, Sh
         self.dire("03b-reponse")
         self.au_mot("Réponse B")
         self.q_reponse(q, 1)
+        self.largeur_texte = 3.3          # cadre de 0,96 compris : 6 % de marge de chaque côté (relecture 13/11)
         c = self.calcul([("1,2 ×", RAISON, "1,2 fois"), ("0,8", PIEGE, "0,8"), ("=", WHITE, "égale"), ("0,96", JUSTE, "0,96")],
                         -2.12, centre=-0.1, fs=44)
+        self.largeur_texte = 3.85
         self.play(c[-1].animate.shift(RIGHT * 0.1), run_time=0.12)
         self.play(Create(self.encadre(c[-1], JUSTE, 0.1)), run_time=0.25)
         self.calcul([("une baisse de", WHITE, "une baisse"), ("4 %", JUSTE, "4 %")], -2.72, centre=0, fs=44)
