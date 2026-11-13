@@ -79,7 +79,7 @@ FILMS.comparer=function(outils){
     <rect x="35" y="70" width="110" height="110" fill="#c08550" stroke="#ff922b" stroke-width="8"/>
     <rect x="170" y="112" width="130" height="26" fill="#c08550" stroke="#74c0fc" stroke-width="8"/>
     <text x="235" y="215" font-family="Segoe UI" font-weight="800" font-size="56" fill="#ffd43b" text-anchor="middle">?</text></svg>`;
-  poserMiniature(outils,acc+1,'La plus petite<br>a le plus<br>petit tour ?'+PARI,mini);
+  poserMiniature(outils,acc+1,'La plus petite a<br>le plus petit tour ?'+PARI,mini);
   return { clips,FIN,titre:'La course des tables',ceinture:0,finTitre:tCourse-.08,groupes,finClip:'05-abonne',
     cuts:[tCourse-.08,cou,q,r,ouf,com,f],
     question:{ qc:'02-question',rc:'02b-reponse',finR:ouf,cpt:fin('02-question')+.1,bonne:2,tBon:tC-r,
