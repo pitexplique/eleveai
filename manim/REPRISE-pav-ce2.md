@@ -13,10 +13,11 @@ Ceintures : paysages 01 blanche, 02 jaune, 03 orange ; shorts blanche. Centres :
 | 03 comparer | ✅ HD (4 min 13), bords 0, planche relue (réponse Q2 sous la carte C, « On fait pareil » à taille normale), miniature | ✅ « La course des tables », miniature : titre sur 2 lignes |
 
 ✅ Manifeste : 6 entrées `ce2-perimetre-*` (25, 27, 29/12), fiches YouTube écrites, 12 fichiers sur R2 (`ce2/maths/perimetre/`), `lib/videos/videos-r2.json` + `bilans-videos.json` (nos clés ; les 2 anciennes clés auto `maths-ce2-perimetre-comprendre[-short]` remplacées) — commit `d570dc8b`. Plan coché (CE2 01-03). Rien poussé.
-⏳ Coach : `node scripts/brancher-videos-coach.mjs --classe ce2 --notion perimetre --ecrire` (6 à brancher) APRÈS le push du chef d'orchestre.
+✅ Poussé (origin/main `541042bd`) ; coach : les 6 vidéos sont branchées sur leurs micros (`brancher-videos-coach.mjs --classe ce2 --notion perimetre --tout` : 6 déjà branchées, 0 à brancher).
 
 ⛔ Leçons session 3 :
-- Filtrer la sortie du dry run avec `tr '' '
+- Filtrer la sortie du dry run avec `tr '
+' '
 ' | grep -a …` : sans `tr`, les barres de progression collent les lignes et des AUDIT passent inaperçus.
 - À 15 images/s, `au_mot` peut finir 0,06 s AVANT la marque → AUDIT-TARD/AVANCE : ajouter `self.wait(0.07)` après.
 - Nombres répétés (« 3 plus 3 plus 3 ») : la synchro par jetons s'y perd → caler chaque morceau sur un extrait qui COMMENCE par son nombre (« 3, 12. », « 1 plus 9 »), pas sur « Plus 3 » (sinon affiché avant le nombre). `somme(..., mots=[...])` dans perimetre_comparer.py, `somme_au_mot(..., res_mot=)` dans perimetre_polygone.py.
@@ -33,7 +34,6 @@ Outils hors dépôt (scratchpad de la session 3, à recréer si perdus) : `hd.sh
 - `$TEMP/claude/mots.py` (hors dépôt) : mot@instant d'un clip, pour caler les `au_mot`. À recréer si besoin : lit `manim/voix/ce2-perimetre-<slug>.json` et `manim/scripts/ce2/perimetre_<slug>_marques.json`.
 
 ## Reste
-1. Coach `--ecrire` après le push (voir plus haut).
-2. Suite du plan CE2 : `ce2_perimetre_rectangle`, `ce2_perimetre_defi`, puis contenance et solides (voix à écrire et à faire valider À DEUX).
+1. Suite du plan CE2 : `ce2_perimetre_rectangle`, `ce2_perimetre_defi`, puis contenance et solides (voix à écrire et à faire valider À DEUX).
 
 ⛔ RAM : un seul rendu HD sur le PC (verrou), aperçus `-ql`, rien sous 2,5 Go libres, un seul processus manim à soi, aucun sous-agent qui rend.
