@@ -341,6 +341,21 @@ EPS = [
          sa="Une série est vue par 3 millions de personnes pour l'épisode 1 : u₁ = 3. À chaque épisode, l'audience (en millions) est multipliée par 2, puis on enlève 1 : uₙ₊₁ = 2uₙ − 1. Tu prévois l'épisode 3 ?",
          stoi="combien vaut u₅ ?", srep="33 : u₄ = 2 × 9 − 1 = 17, puis u₅ = 2 × 17 − 1 = 33.",
          stags=["séries", "audience", "spectateurs", "récurrence", "suites"]),
+    dict(num="20", slug="algorithme", classe="premiere-spe", notion="suites", micro="suite_algorithme",
+         ceinture="verte", sc="blanche", centres=["technologie-ia"], scentres=["jeux-defis", "technologie-ia"],
+         titre="Que calcule cette boucle Python ? — Suites et algorithmes : lire un programme — épisode 20 · Maths 1re spé",
+         intro="Maxime est développeur dans une jeune entreprise qui entraîne une intelligence artificielle : la version 0 demande 3 heures de calcul, puis à chaque version le temps double et il ajoute 1 heure de tests. Que calcule sa boucle Python, et quel terme affiche-t-elle ?",
+         puces=["lire un programme ligne à ligne : la première ligne donne u₀, la boucle donne le passage au terme suivant", "range(4) donne i = 0, 1, 2 et 3 : la boucle fait 4 tours, de u₀ à u₄", "suivre u tour après tour : 3, 7, 15, 31, 63", "la boucle tant que (while) : elle s'arrête dès que la condition devient fausse", "le piège : print(n) affiche un rang, pas une valeur"],
+         defi="u = 1 ; n = 0 ; tant que u < 50 : u = 3*u et n = n + 1 ; puis print(n). Qu'affiche le programme ?",
+         chap={"00-garde": "Suites et Python", "01-situation": "Maxime, développeur", "02-programme": "Le programme, ligne à ligne", "03-range": "range(4) : 4 tours", "04-tours": "Tour après tour", "05-question": "Question 1", "06-while": "La boucle tant que", "07-while-tours": "Suivre la boucle", "08-piege": "Le piège : un rang", "09-question": "Question 2", "10-defi": "À toi de jouer", "10b-correction": "Correction", "11-finale": "Ce que tu as appris"},
+         qs=[("05-question", "u = 5 ; for i in range(3): u = u - 2 ; print(u). Qu'affiche le programme ?", ["1", "3", "−1"], 2, "3 tours : 5, puis 3, puis 1, puis −1."),
+             ("09-question", "u = 3 ; for i in range(2, 7): u = 2*u + 1 ; print(u). Quel terme de la suite le programme affiche-t-il ?", ["u₆", "u₅", "u₇"], 1, "i va de 2 à 6 : cela fait 5 tours. On part de u₀ et on avance de 5 rangs : u₅.")],
+         tags=["suites", "algorithme", "Python", "boucle for", "boucle while", "range", "programmation", "intelligence artificielle"],
+         st="Tu devines ce qu'affiche ce programme ? 🐍 — 1re spé #Shorts",
+         sq=("03-question", "u = 10 ; for i in range(3): u = 2*u - 5 ; print(u). Qu'affiche le programme ?", ["45", "15", "25"], 0, "3 tours : 10, puis 15, puis 25, puis 45."),
+         sa="L'énigme du jour : un programme Python de 3 lignes. u = 10, puis pour i allant de 0 à 2, u = 2*u − 5, puis print(u). Tu devines ce qu'il affiche ?",
+         stoi="avec for i in range(5) (i de 0 à 4), quel nombre s'affiche ?", srep="165 : 10, 15, 25, 45, 85, 165.",
+         stags=["Python", "énigme", "programme", "boucle", "suites"]),
 ]
 # Les 4 vidéos communes : la même vidéo sert aussi la micro de la classe du dessus.
 AUSSI = {
