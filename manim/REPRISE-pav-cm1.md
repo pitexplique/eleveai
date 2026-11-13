@@ -63,3 +63,15 @@ Ceintures (proposées, validées avec les voix le 13/11) : paysages jaune (ép. 
 ## Prochaine étape
 1. Frédéric valide les voix 4-5 (à deux) → WAV (Julie, débit −6) → `python manim/scripts/cm1/aire_marques.py composer` puis `defi` (⚠️ jamais sans argument : cela réécrirait les marques de l'ép. 3, dont 3 posées à la main).
 2. Scripts `aire_composer.py` et `aire_defi.py` sur le modèle de `aire_carre_rectangle.py` (garder `_ph_haut` et `poser_lignes`), puis la même chaîne : dry run, planche, HD, short, manifeste (places après le 30/12), R2, coach.
+
+## Fait le 13/11 après-midi (session 5, passée la main à 62 %)
+- ✅ Voix 4-5 VALIDÉES par Frédéric (après relecture : ép. 5 « carreaux » partout, choix C = 20 m² porte oubliée, short 25 contre 24) ; WAV + marques faits (`aire_marques.py composer defi`).
+- Commun : `yanis`, `chloe`, mixin `PhraseAGauche` (`question_gauche(..., haut, sans_audit, couper, q_sans_audit, hors)`) ; l'ép. 3 garde sa copie à lui (pas touché).
+- ✅ **Ép. 4 `aire_composer.py`** : dry run propre, planche -ql relue et corrigée, **HD rendu** `manim/sorties/cm1/maths/aire/04-composer/` (3 min 37), bords 0. Questions 01:08 rép 2 (C), 01:56 rép 1 (B).
+- ✅ Short 4 « Le gâteau en L » : `prototypes/ti-margo/films/cm1-aire-composer.js`, contrôle relu, film + miniature rendus (`-short.mp4`, `-short-miniature.png`). Épisodes 04-05 déclarés dans `films/cm1-aire.json`, cues composer générées.
+- ⏳ Ép. 5 `aire_defi.py` écrit : dry run AUDIT PROPRE (seul « 974 »). Questions 01:02 rép 0 (A), 01:59 rép 1 (B).
+
+## Prochaine étape (session 6)
+1. Ép. 4 : miniature paysage (`python manim/miniature_aire_cm1.py composer` — ajouter l'épisode au script s'il n'y est pas), manifeste `cm1-aire-composer` (verte, centres construction/art-design) + `-short` (blanche, question short à lire dans le contrôle : 02-question ≈ 00:21, rép 2) après le 30/12, fiche YouTube, R2 du dossier aire seul, `generer-videos-r2.mjs`, `brancher-videos-coach.mjs --id cm1-aire-composer,cm1-aire-composer-short --ecrire`.
+2. Ép. 5 : planche -ql (aperçu complet + images à ECRAN suivant − 1,2 s), HD sous verrou (`media-aire-05`, sortie `05-defi/`), bords ; short `FILMS['defi']` dans `films/cm1-aire-defi.js` (modèle `cm1-aire-composer.js` ; durées WAV : 00 9.5, 01 7.43, 02 13.61, 02b 13.48, 03 4.68, 04 10.52, 05 6.04 ; jardins 5×5 contre 3×8, réponse A) après `python scripts/ti-margo-cues.py cm1-aire defi` ; puis même publication (ceinture bleue).
+3. Commit PAR CHEMIN, cocher le plan, mettre à jour la mémoire `serie-aire-cm1.md`. Pas de push.

@@ -115,6 +115,20 @@ def lina(s=1.0):
     return p
 
 
+def yanis(s=1.0):
+    """Yanis, architecte : chemise bleue, casque de chantier blanc."""
+    p = personne(peau="#8d5524", tenue="#1d4ed8", cheveux="#111827", s=s)
+    p.add(casquette(p, "#f8fafc"))
+    return p
+
+
+def chloe(s=1.0):
+    """Chloé, peintre en bâtiment : combinaison blanche, casquette bleue, cheveux longs."""
+    p = personne(peau="#e0ac69", tenue="#e5e7eb", cheveux="#b45309", longs=True, s=s)
+    p.add(casquette(p, "#2563eb"))
+    return p
+
+
 class PaysageAireCM1(PaysageCalculPose):
     identite = "Maths CM1 — EleveAI"
     ceinture = "jaune"
@@ -130,3 +144,58 @@ class PaysageAireCM1(PaysageCalculPose):
         for f in r[4].get_family():
             f.sans_synchro = True
         return r
+
+
+class PhraseAGauche:
+    """(Ép. 3 → 5) La phrase de réponse d'une question-pause : sous la figure, à gauche, en 34
+    (sinon réduite par Ti-Margo), posée ligne après ligne DANS L'ORDRE.
+    `_ph_sans_audit` : lignes au mot mais hors audit (un nombre redit) ;
+    `_ph_couper` {i: (morceau, morceau)} : ligne coupée, chaque morceau à son mot ;
+    `_ph_haut` : le haut de la phrase (None = disposition de la base)."""
+    _ph_sans_audit = ()
+    _ph_couper = {}
+    _ph_haut = None
+    _q_sans_audit = ()
+    _ph_hors = ()
+
+    def _disposer_q(self, question, choix, phrase):
+        r = list(super()._disposer_q(question, choix, phrase))
+        ph = r[5]
+        fs0 = ph[0].font_size  # (avant la coupe : une ligne coupée est un VGroup)
+        for i, morceaux in self._ph_couper.items():
+            l = ph.submobjects[i]
+            coul = l.submobjects[0].get_fill_color()  # (le Text parent est noir : la couleur est sur ses lettres)
+            g = VGroup(*[Text(m, font_size=l.font_size, color=coul, font=l.font) for m in morceaux])
+            g.arrange(RIGHT, buff=0.18).move_to(l)
+            ph.submobjects[i] = g
+        for i in self._ph_sans_audit:
+            for f in ph[i].get_family():
+                f._pas_audit = True
+        for i in self._ph_hors:  # hors synchro : posée juste après la précédente
+            hors_audit(ph[i])
+        for i in self._q_sans_audit:  # une ligne de la question dont le nombre est redit
+            for f in r[1][i].get_family():
+                f._pas_audit = True
+        if self._ph_haut is not None:
+            ph.scale(34 / fs0).arrange(DOWN, aligned_edge=LEFT, buff=0.16)
+            if ph.width > 5.6:
+                ph.scale_to_fit_width(5.6)
+            ph.align_to(P(-6.1, 0), LEFT).align_to(P(0, self._ph_haut), UP)
+        return tuple(r)
+
+    def poser_lignes(self, mob, anim="fade", run_time=0.4):
+        if self._ph_haut is None or mob is not getattr(self, "ph_q", None):
+            return super().poser_lignes(mob, anim, run_time)
+        a = {"fade": lambda m: FadeIn(m, shift=RIGHT * 0.2), "up": lambda m: FadeIn(m, shift=UP * 0.2)}[anim]
+        for m in mob.submobjects:
+            self.play(a(m), run_time=run_time)
+        return mob
+
+    def question_gauche(self, cle_q, cle_r, question, choix, bonne, phrase, haut, sans_audit=(), couper=None,
+                        q_sans_audit=(), hors=(), **kw):
+        self._ph_sans_audit, self._ph_couper, self._ph_haut = tuple(sans_audit), dict(couper or {}), haut
+        self._q_sans_audit, self._ph_hors = tuple(q_sans_audit), tuple(hors)
+        try:
+            self.question_pause(cle_q, cle_r, question, choix, bonne, phrase, **kw)
+        finally:
+            self._ph_sans_audit, self._ph_couper, self._ph_haut, self._q_sans_audit, self._ph_hors = (), {}, None, (), ()
