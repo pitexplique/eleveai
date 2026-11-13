@@ -113,20 +113,20 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
     # ── 02 : le tour rouge ──────────────────────────────────────────────────
     def ecran_rouge(self):
         self.ecran("02-rouge")
-        r = terrain_rouge(P(-3.6, 0.6), e=0.085, textes=["40 m", "20 m", "40 m", "20 m"], fs=32)
-        self.au_mot("on calcule les deux")
-        l0 = self.t("On calcule les deux périmètres.", 32)
-        self.col(l0, 2.8)
+        r = terrain_rouge(P(-3.0, 0.6), e=0.085, textes=["40 m", "20 m", "40 m", "20 m"], fs=32)
+        self.au_mot("Pour comparer")
+        l0 = self.bloc(["Pour comparer, on calcule", "les deux périmètres."], 32)
+        self.col(l0, 2.75)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.35)
         self.au_mot("Le terrain rouge")
-        l1 = self.t("Le terrain rouge : un rectangle.", 32, "#fca5a5")
-        self.col(l1, 1.95)
+        l1 = self.t("Le terrain rouge est un rectangle.", 30, "#fca5a5")
+        self.col(l1, 1.75, xl=0.1)
         self.play(FadeIn(l1, shift=UP * 0.1), FadeIn(r), run_time=0.4)
         for i, (mot, n) in enumerate((("40 mètres", 1), ("20 mètres", 1), ("40 mètres", 2), ("20 mètres", 2))):
             self.au_mot(mot, n)
             self.play(FadeIn(r.lab[i], scale=1.3), Create(r.cote(i)), run_time=0.3)
         lg = self.ligne([("40 + 20 = 60", BLEU_D)], 36)
-        self.col(lg, 1.0)
+        self.col(lg, 0.95)
         self.au_mot("40 plus 20")
         self.au_fil(lg)
         for k, (a, b, c) in enumerate((("60", "40", "100"), ("100", "20", "120"))):
@@ -156,27 +156,28 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
             self.au_mot(mot, n)
             self.play(FadeIn(b.lab[i], scale=1.3), Create(b.cote(i)), run_time=0.3)
         lg = self.ligne([("50 + 30 = 80", BLEU_D)], 36)
-        self.col(lg, 1.95)
+        self.col(lg, 2.0)
         self.au_mot("plus 30")
         self.au_fil(lg)
         l2 = self.ligne([("80", BLEU_D), ("+ 50", BLEU_D), ("= 130", BLEU_D)], 36, buff=0.16)
         hors_audit(l2[0])
-        self.col(l2, 1.2)
+        self.col(l2, 1.3)
         self.au_mot("Plus 50")
         self.play(FadeIn(l2[0:2], shift=UP * 0.08), run_time=0.22)
         self.au_fil(l2, 2)
         self.au_mot("Le tour bleu fait")
         g = self.gros("Tour bleu : 130 m", couleur="#93c5fd", fs=36)
-        self.col(g, 0.25)
-        self.play(FadeIn(g, scale=1.2), run_time=0.4)
-        self.au_mot("c'est plus que")
-        c1 = self.ligne([("130 m, c'est plus que", WHITE), ("120 m.", "#fca5a5")], 32, buff=0.16)
-        self.col(c1, -0.85)
+        self.col(g, 0.45)
+        self.play(FadeIn(g, scale=1.2), run_time=0.2)
+        self.au_mot("130, c'est")
+        c1 = self.ligne([("130, c'est plus que", WHITE), ("120 :", "#fca5a5")], 32, buff=0.16)
+        hors_audit(c1[0])  # 130 : déjà dit et écrit juste au-dessus
+        self.col(c1, -0.35, xl=0.2)
         self.play(FadeIn(c1[0], shift=UP * 0.08), run_time=0.25)
         self.au_fil(c1, 1)
         self.au_mot("le tour bleu est le plus long")
         c2 = self.bloc(["Le tour bleu est le plus long,", "même avec 3 côtés seulement !"], 32, VERT_OK)
-        self.col(c2, -2.1)
+        self.col(c2, -1.15, xl=0.2)
         self.play(FadeIn(c2[0], shift=UP * 0.1), Indicate(b, color=BLEU_T, scale_factor=1.06), run_time=0.4)
         self.au_mot("même avec")
         self.play(FadeIn(c2[1], shift=UP * 0.1), run_time=0.3)
@@ -197,19 +198,20 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
             sc.add(*tri.lab, car.lab[0])
 
         def apres(sc):
-            lg = sc.rep_bas(0, ["Triangle :", "5", "+ 5", "+ 5", "= 15."], fs=32)
+            lg = sc.rep_bas(0, ["Triangle :", "5", "+ 5", "+ 5", "= 15."], fs=32, y0=-1.95, pas=0.55)
             sc.au_mot("Triangle")
             sc.play(FadeIn(lg[0], shift=UP * 0.08), Create(tri.contour(sw=7)), run_time=0.3)
             sc.au_fil(lg, 1)
-            lg2 = sc.rep_bas(1, ["Carré :", "4", "+ 4", "+ 4", "+ 4", "= 16."], fs=32)
+            lg2 = sc.rep_bas(1, ["Carré :", "4", "+ 4", "+ 4", "+ 4", "= 16."], fs=32, y0=-1.95, pas=0.55)
             sc.au_mot("Carré")
             sc.play(FadeIn(lg2[0], shift=UP * 0.08), Create(car.contour(sw=7)), run_time=0.3)
             sc.au_fil(lg2, 1)
-            lg3 = sc.rep_bas(2, ["16, c'est plus que 15 : c'est le carré."], fs=32)
+            lg3 = sc.rep_bas(2, ["16, c'est plus que 15 : c'est le carré."], fs=32, y0=-1.95, pas=0.55)
             sc.au_mot("16, c'est")
             sc.play(FadeIn(lg3[0], scale=1.1), run_time=0.3)
             sc.rep_fini()
 
+        self.XL = -0.3  # la colonne s'élargit : l'énoncé garde sa taille
         self.question_pause("04-question", "04b-reponse",
                             ["Un triangle a trois côtés de 5 cm.", "Un carré a quatre côtés de 4 cm.",
                              "Lequel a le plus grand périmètre ?"],
@@ -217,6 +219,7 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
                             ["Triangle : 5 + 5 + 5 = 15.", "Carré : 4 + 4 + 4 + 4 = 16.",
                              "16, c'est plus que 15 : c'est le carré."],
                             mot_q="Un triangle", autres_q=autres_q, autres_r=apres)
+        del self.XL
 
     # ── 05 : le piège (même tour) ───────────────────────────────────────────
     def ecran_piege(self):
@@ -225,8 +228,8 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
         tit = self.t("Attention au piège !", 46, ROUGE_ERREUR)
         gauche(tit, -6.2, 3.05)
         self.play(Write(tit), run_time=0.35)
-        car = FigureCotee(rect_pts(5, 5), ["5 m", None, None, None], e=0.4, centre=P(-5.0, 0.95), fs=30, remplir="#7c2d12")
-        rec = FigureCotee(rect_pts(9, 1), ["9 m", "1 m", None, None], e=0.4, centre=P(-0.9, 0.55), fs=30,
+        car = FigureCotee(rect_pts(5, 5), ["5 m", None, None, None], e=0.4, centre=P(-5.0, 1.3), fs=30, remplir="#7c2d12")
+        rec = FigureCotee(rect_pts(9, 1), ["9 m", "1 m", None, None], e=0.4, centre=P(-0.9, 0.9), fs=30,
                           remplir="#7c2d12")
         self.au_mot("Voici un carré")
         self.play(FadeIn(car), run_time=0.35)
@@ -247,8 +250,8 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
         gauche(g, -6.2, -2.4)
         self.play(FadeIn(g, scale=1.2), run_time=0.4)
         self.au_mot("On ne juge pas")
-        l = self.bloc(["On ne juge pas à l'œil :", "on calcule."], 32, JAUNE_TITRE)
-        self.col(l, -2.4, xl=1.3)
+        l = self.ligne([("On ne juge pas à l'œil :", JAUNE_TITRE), ("on calcule.", JAUNE_TITRE)], 32, buff=0.2)
+        gauche(l, -6.2, -3.2)
         self.play(FadeIn(l[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("on calcule")
         self.play(FadeIn(l[1], shift=UP * 0.1), run_time=0.3)
@@ -301,8 +304,8 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
         tp = self.t("le périmètre", 28, VERT_OK).next_to(acc, DOWN, buff=0.08)
         self.play(FadeIn(tp, scale=1.2), Create(tri.contour(sw=7)), run_time=0.4)
         self.au_mot("On fait pareil")
-        l3 = self.bloc(["Pareil avec l'autre figure :", "le segment le plus long,", "c'est le plus long tour."], 30)
-        self.col(l3, -0.55, xl=0.6)
+        l3 = self.bloc(["On fait pareil avec l'autre figure :", "le segment le plus long,", "c'est le plus long tour."], 30)
+        self.col(l3, -0.55, xl=0.4)
         self.play(FadeIn(l3[0], shift=UP * 0.1), run_time=0.3)
         base2 = Line(P(x0 - 0.1, y2), P(0.3, y2), color=GRAY_B, stroke_width=2)
         self.add(base2)
@@ -321,33 +324,37 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
     def ecran_question2(self):
         self.clear()
         self.add_mascotte()
-        jaune = Line(P(-6.0, 1.75), P(-3.3, 1.75), color="#facc15", stroke_width=10)
-        vert = Line(P(-6.0, 0.95), P(-1.6, 0.95), color="#4ade80", stroke_width=10)
+        jaune = Line(P(-6.2, 1.9), P(-4.6, 1.9), color="#facc15", stroke_width=10)
+        vert = Line(P(-6.2, 0.95), P(-3.3, 0.95), color="#4ade80", stroke_width=10)
         tj = self.t("tour jaune", 24, "#facc15").next_to(jaune, UP, buff=0.12).align_to(jaune, LEFT)
         tv = self.t("tour vert", 24, "#4ade80").next_to(vert, UP, buff=0.12).align_to(vert, LEFT)
+        hors_audit(tj)  # des étiquettes : « deux tours » est dit avant
+        hors_audit(tv)
 
         def autres_q(sc):
             sc.play(Create(jaune), Create(vert), FadeIn(tj), FadeIn(tv), run_time=0.4)
 
         def apres(sc):
-            lg = sc.rep_bas(0, ["Le segment, c'est le tour déplié."], fs=32)
+            lg = sc.rep_bas(0, ["Le segment, c'est le tour déplié."], fs=32, y0=-2.1, pas=0.5)
             sc.au_mot("Le segment, c'est")
             sc.play(FadeIn(lg[0], shift=UP * 0.1), run_time=0.3)
-            lg2 = sc.rep_bas(1, ["Le plus long segment donne"], fs=32)
+            lg2 = sc.rep_bas(1, ["Le segment le plus long donne"], fs=32, y0=-2.1, pas=0.5)
             sc.au_mot("Le segment le plus long")
             sc.play(FadeIn(lg2[0], shift=UP * 0.1), Indicate(vert, color="#4ade80", scale_factor=1.06), run_time=0.35)
-            lg3 = sc.rep_bas(2, ["le plus long tour, sans rien mesurer."], fs=32)
+            lg3 = sc.rep_bas(2, ["le tour le plus long, sans rien mesurer."], fs=32, y0=-2.1, pas=0.5)
             sc.au_mot("le tour le plus long")
             sc.play(FadeIn(lg3[0], shift=UP * 0.1), run_time=0.3)
             sc.rep_fini()
 
+        self.XL = -0.9  # la colonne s'élargit : l'énoncé garde sa taille
         self.question_pause("07-question", "07b-reponse",
-                            ["Malik déplie deux tours sur une ligne.", "Le segment du tour vert est plus long",
-                             "que celui du tour jaune. Quel tour est le plus long ?"],
-                            [self.choix("Le jaune."), self.choix("Le vert."), self.choix("On ne peut pas savoir sans règle.")],
-                            1, ["Le segment, c'est le tour déplié.", "Le plus long segment donne",
-                                "le plus long tour, sans rien mesurer."],
+                            ["Malik déplie deux tours sur une ligne.", "Le segment vert est plus long.",
+                             "Quel tour est le plus long ?"],
+                            [self.choix("Le jaune.", 26), self.choix("Le vert.", 26), self.choix("On ne peut pas savoir" + chr(10) + "sans règle.", 26)],
+                            1, ["Le segment, c'est le tour déplié.", "Le segment le plus long donne",
+                                "le tour le plus long, sans rien mesurer."],
                             mot_q="Malik", autres_q=autres_q, autres_r=apres)
+        del self.XL
 
     # ── 08 : le défi ────────────────────────────────────────────────────────
     def trois(self):
@@ -371,6 +378,10 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
         gauche(l0, -6.2, 2.15)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.3)
         car, rec, tri = self.trois()
+        for f in (car, rec, tri):
+            f.shift(UP * 0.35)
+            for x in f.lab:
+                x.shift(UP * 0.35)
         self.au_mot("Un carré")
         self.play(FadeIn(car), run_time=0.3)
         self.au_mot("30 mètres")
@@ -389,9 +400,9 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
         self.play(FadeIn(tri.lab[0], scale=1.3), run_time=0.2)
         self.au_mot("Range-les")
         q = self.t("Range-les du plus court au plus long.", 34, JAUNE_TITRE)
-        gauche(q, -6.2, -1.5)
+        gauche(q, -6.2, -1.0)
         self.play(FadeIn(q, shift=UP * 0.1), run_time=0.45)
-        self.pause_defi(y=-2.45)
+        self.pause_defi(y=-1.6)
 
     def ecran_correction(self):
         self.ecran("08b-correction", 0.65)
@@ -415,9 +426,7 @@ class PerimetreComparerBase(PaysagePerimetreCE2):
         gauche(l, -6.2, -2.4)
         self.play(FadeIn(l, shift=UP * 0.1), run_time=0.3)
         ordre = self.ligne([("le triangle,", WHITE), ("le carré,", WHITE), ("puis le rectangle.", WHITE)], 32, buff=0.2)
-        ordre.next_to(l, RIGHT, buff=0.2)
-        if ordre.get_right()[0] > 6.5:
-            ordre.scale_to_fit_width(6.5 - ordre.get_left()[0])
+        gauche(ordre, -6.2, -3.1)
         for m, fig, mot in ((ordre[0], tri, "le triangle"), (ordre[1], car, "le carré"), (ordre[2], rec, "puis le rectangle")):
             self.au_mot(mot)
             self.play(FadeIn(m, shift=UP * 0.08), Indicate(fig, color=TOUR, scale_factor=1.1), run_time=0.3)

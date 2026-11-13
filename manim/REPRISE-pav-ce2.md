@@ -4,15 +4,17 @@ Plan : `manim/PLAN-perimetre-aire-volume.md` (section « ## CE2 »). Vidéos COM
 ⛔ Les 6 voix (paysage + short des épisodes 01, 02, 03) sont VALIDÉES par Frédéric le 13/11 : ne pas les redemander.
 Ceintures : paysages 01 blanche, 02 jaune, 03 orange ; shorts blanche. Centres : 01 nature-ecologie + animaux, 02 nature-ecologie, 03 sport.
 
-## État au 13/11, fin de la session 2 (arrêtée à 74 % de contexte)
+## État au 13/11, session 3 (arrêt pour compactage à ~60 %)
 
-| Épisode | Paysage (script) | Paysage état | Short (film Ti Margo) | Short état |
-|---|---|---|---|---|
-| 01 comprendre | `scripts/ce2/perimetre_comprendre.py` | ✅ dry run 0 AUDIT/BORD/TARD, `-ql` relu, **HD rendu** `sorties/ce2/maths/perimetre/01-comprendre/…comprendre.mp4` (224,6 s), bords 0, planche HD relue | `films/ce2-perimetre.js` (`FILMS.comprendre`) | ✅ RENDU (`…comprendre-short.mp4` + `…-short-miniature.png`) : reste la planche à relire |
-| 02 polygone | `scripts/ce2/perimetre_polygone.py` | ÉCRIT, ⏳ premier dry run lancé (résultat perdu : le relancer) | `films/ce2-perimetre-polygone.js` | contrôlé (planche OK, cabane agrandie à S=100 après : recontrôler 2-3 images) |
-| 03 comparer | `scripts/ce2/perimetre_comparer.py` | ÉCRIT, jamais lancé | `films/ce2-perimetre-comparer.js` | contrôlé (tables resserrées S=52) |
+| Épisode | Paysage | Short |
+|---|---|---|
+| 01 comprendre | ✅ HD rendu, bords 0, planche relue ; ✅ miniature paysage faite et relue | ✅ rendu, planche + miniature relues (OK) |
+| 02 polygone | ✅ dry run 0 (seul le faux positif 974) ; ✅ `-ql` relu deux fois, défauts corrigés (cotes « 3 m » écartées, numéros 1-6 posés en cotes, « Mais 9… » sur 2 lignes, question du défi sur 3 lignes, choix Q2 en fs 22, question 07 sans les nombres) → **PRÊT POUR LE HD** | film corrigé (question sur 3 lignes « Combien de mètres / de guirlande pour / faire tout le tour ? »), contrôlé → à rendre |
+| 03 comparer | ✅ dry run 0 avant la dernière retouche ; `-ql` relu 3 fois. Dernière retouche NON VÉRIFIÉE : choix C de Q2 sur 2 lignes (`chr(10)`), c1/c2 de 03-bleu en xl=0.2, l1 de 02-rouge fs 30 xl=0.1, réponses Q2 y0=−2,1 pas 0,5 → refaire dry run + `-ql` + images 39 s, 61 s, 125 s, 201 s | film corrigé (choix B = « mon copain,<br>sur la table carrée », texte exact de la voix), contrôlé → à rendre |
 
-Seul « reste » connu de l'audit : `AUDIT-ABSENT 10-abonne « 974 » (@eleveai974)` = écran de fin COMMUN imposé par REGLES.md, faux positif accepté.
+Retouches faites en session 3 (03) : voix = écrit (« Pour comparer, on calcule… », « est un rectangle », « On fait pareil avec l'autre figure », « Le segment le plus long donne le tour le plus long »), « 130, c'est plus que 120 : » (130 hors_audit), terrain rouge centre −3,0, piège : figures remontées et morale sur une ligne en bas, défi : figures +0,35 et pause à −1,6, correction : l'ordre sur sa propre ligne (−3,1), Q1 et Q2 : `self.XL` abaissé le temps de la question (−0,3 et −0,9) puis `del self.XL`.
+Outils hors dépôt (scratchpad de la session 3, à recréer si perdus) : `hd.sh` (verrou mkdir `C:/Users/FRED/AppData/Local/Temp/eleveai-rendu-hd.lock` + rendu), `images.py <mp4> <png> t1 t2…` (images à des instants, PyAV).
+⛔ `planche-video.py` ne garde que la DERNIÈRE image de chaque écran : regarder aussi 2-3 instants au milieu (`images.py`). Le `_muet.mp4` laissé par `ti-margo-short.mjs film` dans le dossier de sortie : le supprimer avant R2.
 
 ### Outils faits en session 2
 - Commun `perimetre_ce2_commun.py` : `ligne_somme(prec, reste)` (le nombre déjà dit hors synchro), `au_fil(lg, debut)` (chaque morceau à son nombre).
@@ -22,18 +24,11 @@ Seul « reste » connu de l'audit : `AUDIT-ABSENT 10-abonne « 974 » (@eleveai9
 - `$TEMP/claude/mots.py` (hors dépôt) : mot@instant d'un clip, pour caler les `au_mot`. À recréer si besoin : lit `manim/voix/ce2-perimetre-<slug>.json` et `manim/scripts/ce2/perimetre_<slug>_marques.json`.
 
 ## Reste (dans l'ordre)
-1. Short 01 : rendu ✅ ; relire sa planche et sa miniature (`python scripts/ti-margo-planche.py <mp4> <png> 40`).
-2. Miniature paysage 01 : `python manim/miniature_perimetre_ce2.py comprendre` (la relire).
-3. Ép. 02 : dry run `AUDIT=1 BORDS=1 PYTHONIOENCODING=utf-8 python -m manim render --dry_run --progress_bar none manim/scripts/ce2/perimetre_polygone.py PerimetrePolygoneCE2 2>&1 | grep -E "AUDIT|BORD|TARD|RETARD|Traceback|Error" | sort | uniq` → 0 → `-ql` (media dans le scratchpad) + planche → verrou `%TEMP%\eleveai-rendu-hd.lock` → HD (commande en tête du script) → copier vers `sorties/ce2/maths/perimetre/02-polygone/` → `python scripts/verifier-bords-video.py <mp4>` = 0 → short `film` + `miniature` → miniature paysage.
-4. Ép. 03 : même chaîne (`perimetre_comparer.py`, `PerimetreComparerCE2`, sortie `03-comparer/`).
-5. `python manim/passe_perimetre_ce2.py temps` puis `voir` (titres ≤ 100) puis `manifeste` ; `python scripts/fiches-youtube.py` ; R2 : `scripts/r2-videos.ps1` (à blanc) puis `-Envoyer`, `node scripts/generer-videos-r2.mjs` ; `lib/videos/*` : NOS clés seulement (`git hash-object -w` + `git update-index --cacheinfo`, jamais `git commit -- lib/videos/...`).
-6. Cocher `manim/PLAN-perimetre-aire-volume.md` (CE2 01-03), mettre cette note à jour, commit PAR CHEMIN, pas de push.
-7. Coach : `node scripts/brancher-videos-coach.mjs --classe ce2 --notion perimetre` (lecture seule) — `--ecrire` APRÈS le push du chef d'orchestre.
+1. Ép. 03 : dry run + `-ql` de la dernière retouche (voir tableau), relire.
+2. Ép. 02 : HD sous le verrou (`python -m manim render -qh --disable_caching manim/scripts/ce2/perimetre_polygone.py PerimetrePolygoneCE2 -o eleveai-maths-ce2-perimetre-polygone --media_dir <scratchpad>/hd02`) → copier vers `sorties/ce2/maths/perimetre/02-polygone/` → `python scripts/verifier-bords-video.py <mp4>` = 0 → planche HD → short `node scripts/ti-margo-short.mjs ce2-perimetre polygone film` puis `… miniature` (relire planche `ti-margo-planche.py <mp4> <png> 40`) → `python manim/miniature_perimetre_ce2.py polygone`.
+3. Ép. 03 : même chaîne (`perimetre_comparer.py`, `PerimetreComparerCE2`, `03-comparer/`, `comparer`).
+4. `python manim/passe_perimetre_ce2.py temps` puis `voir` (titres ≤ 100) puis `manifeste` ; `python scripts/fiches-youtube.py` ; R2 : `scripts/r2-videos.ps1` (à blanc) puis `-Envoyer`, `node scripts/generer-videos-r2.mjs` ; `lib/videos/*` : NOS clés seulement (`git hash-object -w` + `git update-index --cacheinfo`, jamais `git commit -- lib/videos/...`).
+5. Cocher `manim/PLAN-perimetre-aire-volume.md` (CE2 01-03), mettre cette note à jour, commit PAR CHEMIN, pas de push.
+6. Coach : `node scripts/brancher-videos-coach.mjs --classe ce2 --notion perimetre` (lecture seule) — `--ecrire` APRÈS le push du chef d'orchestre.
 
 ⛔ RAM : un seul rendu HD sur le PC (verrou), aperçus `-ql`, rien sous 2,5 Go libres, un seul processus manim à soi, aucun sous-agent qui rend.
-
-## Dry run 02 (fin de session 2) : à corriger
-- `TypeError: find() argument 1 must be str` dans `ecran_correction` (08b) : `somme_au_mot(..., ("Plus 3", k + 1), ...)` passe un tuple ; `au_mot` attend `(extrait, n)` séparés → ajouter un paramètre `n` à `somme_au_mot` et appeler `self.au_mot(mot, n)`. Attention : « 3 plus 3 » compte pour un « Plus 3 » ? (au_mot est sensible à la casse : « Plus 3 » majuscule = les 4 seules occurrences).
-- 03-calcul : RETARD « Plus 3 » 1,0 s et 3,05 s (les 3 « Plus 3 » : passer n = 1, 2, 3 à au_mot, sinon il retrouve le 1er) ; BORD : étiquette « 5 m » à x −6,7 → centre du potager −3,5.
-- 07-question : AUDIT-TARD sur « 4, 6, 3, 5 et 7 » (la ligne de question paraît d'un bloc) → écrire la question sans les nombres sur la 1re ligne (« Une figure a 5 côtés. ») et les nombres sur les étiquettes de la figure, ou couper la ligne.
-- TARD : 02 « abord » (le texte « D'abord, on compte les côtés. » au mot « D'abord ») ; 05 « mesure » (poser « mesure 1 cm. » au mot « mesure ») ; 08 « parterre » (l0[1] au mot « un parterre »). RETARD 00 « oublier un côté » 0,34 s : raccourcir l'animation d'avant.

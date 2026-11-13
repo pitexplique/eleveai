@@ -35,7 +35,11 @@ def sofia(s=1.0):
 
 
 def potager(centre, e=0.6, textes=None, fs=30):
-    return FigureCotee(POTAGER, textes, e=e, centre=centre, fs=fs, remplir="#3f2a14", sw=5)
+    f = FigureCotee(POTAGER, textes, e=e, centre=centre, fs=fs, remplir="#3f2a14", sw=5)
+    if textes:  # les deux « 3 m » du coin rentrant se touchent : on les écarte
+        f.lab[2].shift(RIGHT * 0.3)
+        f.lab[3].shift(UP * 0.4)
+    return f
 
 
 def points_cotes(fig, couleur=JAUNE_TITRE, r=0.11):
@@ -80,13 +84,13 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
     nom_voix = "ce2-perimetre-polygone"
     fichier_marques = "perimetre_polygone_marques.json"
 
-    def somme_au_mot(self, prec, terme, res, mot, y, fs=36, xl=None, avec=()):
+    def somme_au_mot(self, prec, terme, res, mot, y, fs=36, xl=None, avec=(), n=1):
         """« 8 + 3 = 11 » quand la voix dit « Plus 3, 11 » : le 8 (déjà dit) hors synchro,
         « + 3 » au mot, « = 11 » au résultat."""
         lg = self.ligne([(prec, BLEU_D), ("+ " + terme, BLEU_D), ("= " + res, BLEU_D)], fs, buff=0.16)
         hors_audit(lg[0])
         self.col(lg, y, xl=xl)
-        self.au_mot(mot)
+        self.au_mot(mot, n)
         self.play(FadeIn(lg[0:2], shift=UP * 0.1), *avec, run_time=0.25)
         self.play(FadeIn(lg[2], shift=UP * 0.1), run_time=0.2)
         return lg
@@ -98,12 +102,12 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.dire("00-garde")
         titre, ident, ech = self.garde("Le périmètre d'un polygone", self.identite, self.ceinture, y_ech=-2.45)
         self.au_mot("Le périmètre")
-        self.play(Write(titre), FadeIn(ident, shift=DOWN * 0.2), FadeIn(ech), run_time=0.7)
+        self.play(Write(titre), FadeIn(ident, shift=DOWN * 0.2), FadeIn(ech), run_time=0.5)
         q = self.bloc(["Comment ne jamais", "oublier un côté ?"], 40)
         q.move_to(P(0, 0.35)).align_to(P(-6.2, 0), LEFT)
         pg = potager(P(3.9, 0.4), e=0.36)
         self.au_mot("Comment")
-        self.play(FadeIn(q, shift=UP * 0.2), FadeIn(pg), run_time=0.4)
+        self.play(FadeIn(q, shift=UP * 0.2), FadeIn(pg), run_time=0.3)
         self.au_mot("oublier un côté")
         self.play(Create(pg.contour(sw=9)), run_time=1.0)
         self.play(FadeIn(points_cotes(pg), lag_ratio=0.15), run_time=0.5)
@@ -135,7 +139,7 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.play(Create(bord), run_time=0.9)
         self.au_mot("Combien")
         q = self.bloc(["Combien de mètres", "de bordure ?"], 40, JAUNE_TITRE)
-        self.col(q, 0.4, xl=2.55)
+        self.col(q, 0.4, xl=1.6)
         self.play(FadeIn(q, shift=UP * 0.15), run_time=0.5)
         self.attendre_voix()
 
@@ -144,7 +148,7 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.ecran("02-compter")
         pg = potager(P(-3.3, 0.2), e=0.65)
         self.add(pg)
-        self.au_mot("on compte les côtés")
+        self.au_mot("D'abord")
         l1 = self.t("D'abord, on compte les côtés.", 34)
         self.col(l1, 2.6)
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.35)
@@ -153,13 +157,9 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.col(l2, 1.6)
         self.play(FadeIn(l2, shift=UP * 0.1), run_time=0.3)
         pts = points_cotes(pg, r=0.13)
-        s = pg.sommets()
-        nums = VGroup()
-        for i in range(6):
-            m = (s[i] + s[(i + 1) % 6]) / 2
-            c = pg.get_center()
-            d = (m - c) / (np.linalg.norm(m - c) or 1)
-            nums.add(self.t(str(i + 1), 34, JAUNE_TITRE).move_to(m + d * 0.42))
+        # les numéros posés comme des cotes (normale extérieure de chaque côté)
+        nums = potager(P(-3.3, 0.2), e=0.65, textes=[str(i + 1) for i in range(6)], fs=34).lab
+        nums.set_color(JAUNE_TITRE)
         for i in range(6):
             self.au_mot(f"{i + 1}," if i < 5 else "6.")
             self.play(FadeIn(pts[i], scale=2), FadeIn(nums[i], scale=1.4), Create(pg.cote(i, JAUNE_TITRE, 8)),
@@ -178,7 +178,7 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
     # ── 03 : le tour, 6 nombres ─────────────────────────────────────────────
     def ecran_calcul(self):
         self.ecran("03-calcul")
-        pg = potager(P(-3.7, 0.2), e=0.6, textes=COTES_POTAGER, fs=30)
+        pg = potager(P(-3.5, 0.2), e=0.6, textes=COTES_POTAGER, fs=30)
         self.add(pg, *pg.lab)
         dep = depart(pg.sommets()[0])
         self.au_mot("On part d'un coin")
@@ -190,8 +190,10 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.col(l1, 2.1, xl=0.2)
         self.play(FadeIn(l1, shift=UP * 0.1), Create(pg.cote(0)), Indicate(pg.lab[0], color=TOUR), run_time=0.35)
         suite = (("6", "2", "8"), ("8", "3", "11"), ("11", "3", "14"), ("14", "3", "17"), ("17", "5", "22"))
+        vus = {}
         for k, (a, b, r) in enumerate(suite):
-            self.somme_au_mot(a, b, r, "Plus " + b, 1.5 - 0.6 * k, xl=0.2,
+            vus[b] = vus.get(b, 0) + 1  # « Plus 3 » dit trois fois : la n-ième
+            self.somme_au_mot(a, b, r, "Plus " + b, 1.5 - 0.6 * k, xl=0.2, n=vus[b],
                               avec=[Create(pg.cote(k + 1)), Indicate(pg.lab[k + 1], color=TOUR)])
         self.au_mot("On est revenu")
         l2 = self.bloc(["Revenu au départ, avec", "6 nombres : c'est bon !"], 30, VERT_OK)
@@ -254,9 +256,11 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.col(l1, 1.75, xl=0.6)
         seg = qd.segments()
         self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.3)
+        self.au_mot("mesure")
+        self.play(FadeIn(l1[1], shift=UP * 0.1), run_time=0.3)
         self.au_mot("1 centimètre")
         un = self.t("1 cm", 26, TOUR).next_to(seg[0], DOWN, buff=0.12)
-        self.play(FadeIn(l1[1], shift=UP * 0.1), Create(seg[0]), FadeIn(un, scale=1.3), run_time=0.35)
+        self.play(Create(seg[0]), FadeIn(un, scale=1.3), run_time=0.35)
         self.au_mot("On suit le bord")
         l2 = self.bloc(["On suit le bord avec le doigt,", "et on compte :"], 32, TOUR)
         self.col(l2, 0.35, xl=0.6)
@@ -298,20 +302,22 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.play(FadeIn(l1, shift=UP * 0.1), LaggedStart(*[FadeIn(k, scale=0.6) for k in qd.cases], lag_ratio=0.15),
                   run_time=0.7)
         self.au_mot("Mais 9")
-        l2 = self.t("Mais 9, ce n'est pas son périmètre !", 30, ROUGE_ERREUR)
-        self.col(l2, 1.0, xl=0.6)
-        self.play(FadeIn(l2, shift=UP * 0.1), run_time=0.35)
+        l2 = self.bloc(["Mais 9, ce n'est pas", "son périmètre !"], 32, ROUGE_ERREUR)
+        self.col(l2, 0.85, xl=0.6)
+        self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.3)
+        self.au_mot("son périmètre")
+        self.play(FadeIn(l2[1], shift=UP * 0.1), run_time=0.25)
         self.au_mot("Les carreaux")
         l3 = self.t("Les carreaux, c'est le dedans.", 32, "#7dd3fc")
-        self.col(l3, 0.1, xl=0.6)
+        self.col(l3, -0.2, xl=0.6)
         self.play(FadeIn(l3, shift=UP * 0.1), Indicate(qd.cases, color="#7dd3fc", scale_factor=1.05), run_time=0.45)
         self.au_mot("Le périmètre, c'est le bord")
         l4 = self.t("Le périmètre, c'est le bord :", 32, TOUR)
-        self.col(l4, -0.8, xl=0.6)
+        self.col(l4, -1.0, xl=0.6)
         self.play(FadeIn(l4, shift=UP * 0.1), Create(Polygon(*qd.pts, stroke_color=TOUR, stroke_width=10)), run_time=0.6)
         self.au_mot("14 centimètres")
         g = self.gros("14 cm", fs=40)
-        self.col(g, -1.85, xl=0.6)
+        self.col(g, -2.0, xl=0.6)
         self.play(FadeIn(g, scale=1.2), run_time=0.35)
         self.insister(g, 1.12, 0.25)
         self.attendre_voix()
@@ -344,9 +350,9 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
             sc.rep_fini()
 
         self.question_pause("07-question", "07b-reponse",
-                            ["Une figure a 5 côtés : 4, 6, 3, 5 et 7 cm.", "Léa trouve 18 cm.", "Quelle est son erreur ?"],
-                            [self.choix("Elle a compté un côté deux fois."), self.choix("Elle a multiplié."),
-                             self.choix("Elle a oublié un côté.")], 2,
+                            ["Une figure a 5 côtés.", "Léa trouve 18 cm.", "Quelle est son erreur ?"],
+                            [self.choix("Elle a compté un côté deux fois.", 22), self.choix("Elle a multiplié.", 22),
+                             self.choix("Elle a oublié un côté.", 22)], 2,
                             ["4 + 6 + 3 + 5 + 7 = 25.", "Sans le 7 : 18.", "Léa a oublié le dernier côté."],
                             mot_q="Une figure", autres_q=autres_q, autres_r=apres)
 
@@ -376,7 +382,7 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         l0 = self.bloc(["Sofia plante des fleurs dans", "un parterre à 6 côtés égaux."], 32)
         self.col(l0, 2.1)
         self.play(FadeIn(l0[0], shift=UP * 0.1), FadeIn(hx), FadeIn(fl), run_time=0.4)
-        self.au_mot("6 côtés")
+        self.au_mot("un parterre")
         self.play(FadeIn(l0[1], shift=UP * 0.1), run_time=0.3)
         self.au_mot("3 mètres")
         l1 = self.t("Chaque côté mesure 3 m.", 32)
@@ -384,8 +390,8 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.play(FadeIn(l1, shift=UP * 0.1), LaggedStart(*[FadeIn(x, scale=1.3) for x in hx.lab], lag_ratio=0.2),
                   run_time=0.6)
         self.au_mot("Combien")
-        q = self.bloc(["Combien de mètres de bordure", "pour en faire le tour ?"], 34, JAUNE_TITRE)
-        self.col(q, -0.1)
+        q = self.bloc(["Combien de mètres de", "bordure pour en faire", "le tour ?"], 34, JAUNE_TITRE)
+        self.col(q, -0.15)
         self.play(FadeIn(q, shift=UP * 0.1), Wiggle(fl), run_time=0.5)
         self.pause_defi(y=-1.6)
 
@@ -405,7 +411,7 @@ class PerimetrePolygoneBase(PaysagePerimetreCE2):
         self.play(FadeIn(l1, shift=UP * 0.1), Create(hx.cote(0)), Create(hx.cote(1)), run_time=0.3)
         suite = (("6", "9"), ("9", "12"), ("12", "15"), ("15", "18"))
         for k, (a, r) in enumerate(suite):
-            self.somme_au_mot(a, "3", r, ("Plus 3", k + 1), 0.92 - 0.58 * k, avec=[Create(hx.cote(k + 2))])
+            self.somme_au_mot(a, "3", r, "Plus 3", 0.92 - 0.58 * k, avec=[Create(hx.cote(k + 2))], n=k + 1)
         self.au_mot("18 mètres de bordure")
         g = self.gros("18 m de bordure", fs=40)
         for x in g.get_family():

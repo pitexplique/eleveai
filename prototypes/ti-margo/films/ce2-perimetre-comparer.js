@@ -84,7 +84,7 @@ FILMS.comparer=function(outils){
     cuts:[tCourse-.08,cou,q,r,ouf,com,f],
     question:{ qc:'02-question',rc:'02b-reponse',finR:ouf,cpt:fin('02-question')+.1,bonne:2,tBon:tC-r,
       phrase:phraseQ,pause:pauseQ,
-      choix:[['moi, sur la table longue',tq('A'),tq('moi')],['mon copain, sur la carrée',tq('B'),tq('mon')],['on fait pareil',tq('C'),tq('on')]],
+      choix:[['moi, sur la table longue',tq('A'),tq('moi')],['mon copain,<br>sur la table carrée',tq('B'),tq('mon')],['on fait pareil',tq('C'),tq('on')]],
       tete:[[r+.1,'Réponse '],[tC,'C !']],reponse:[r1,r2],suite:[r3] },
     jouer(P,T,cam){
       const g=gestes(P,T); dessiner(T);

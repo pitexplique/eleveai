@@ -77,7 +77,7 @@ FILMS.polygone=function(outils){
     ...suiteDe(f,60,60,[a4('À toi : un triangle a'),a4('des côtés de 5,'),a4('6 et 7 centimètres.')],[a4('Quel est son périmètre ?')],[a4('Réponds en commentaire !')])
   ];
   qd('Question !');
-  const phraseQ=[qd('Combien de mètres de guirlande'),qd('pour faire tout le tour ?')];
+  const phraseQ=[qd('Combien de mètres'),qd('de guirlande pour'),qd('faire tout le tour ?')];
   const tq=(m,n=1)=>mot('02-question',m,n)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
   rd.jusque('4'); const r1=rd('4 + 3 = 7,');
