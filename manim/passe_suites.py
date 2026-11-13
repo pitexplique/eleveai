@@ -356,6 +356,21 @@ EPS = [
          sa="L'énigme du jour : un programme Python de 3 lignes. u = 10, puis pour i allant de 0 à 2, u = 2*u − 5, puis print(u). Tu devines ce qu'il affiche ?",
          stoi="avec for i in range(5) (i de 0 à 4), quel nombre s'affiche ?", srep="165 : 10, 15, 25, 45, 85, 165.",
          stags=["Python", "énigme", "programme", "boucle", "suites"]),
+    dict(num="21", slug="modeliser", classe="premiere-spe", notion="suites", micro="suite_modeliser",
+         ceinture="verte", sc="blanche", centres=["cuisine"], scentres=["avions", "transports"],
+         titre="Combien de chaises pour 25 tables ? — Modéliser une situation par une suite — épisode 21 · Maths 1re spé",
+         intro="Lina est cheffe de salle dans un restaurant : pour les grands groupes, elle accole des tables carrées en ligne, avec une chaise sur chaque côté libre. 1 table : 4 chaises ; 2 tables : 6 ; 3 tables : 8. Comment trouver une formule qui marche pour toutes les figures ?",
+         puces=["observer ce qui change d'une étape à la suivante : + 2 chaises par table, suite arithmétique de raison 2", "expliquer la formule : 2n chaises en haut et en bas, plus 2 aux bouts, uₙ = 2n + 2", "trouver un rang : 2n + 2 = 40 donne n = 19 tables", "ajouter ou multiplier : + 10 % par mois → géométrique ; − 10 % puis + 20 → ni l'une ni l'autre", "le piège : 4n marche pour 1 table, pas pour 2 : on teste la formule sur les figures 1, 2 et 3"],
+         defi="Un carreleur entoure un carré de n × n dalles d'une bordure de dalles noires : 8 dalles pour la figure 1, 12 pour la figure 2, 16 pour la figure 3. Trouve uₙ, puis la figure qui utilise 100 dalles noires.",
+         chap={"00-garde": "Modéliser par une suite", "01-situation": "Lina, cheffe de salle", "02-observer": "Observer : + 2 chaises", "03-formule": "Pourquoi 2 : uₙ = 2n + 2", "04-question": "Question : 25 tables", "05-rang": "Trouver le rang : 40 personnes", "06-nature": "Ajouter ou multiplier", "07-piege": "Le piège : 4n", "08-question": "Question : + 20 %", "09-defi": "À toi de jouer", "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+         qs=[("04-question", "Avec uₙ = 2n + 2, combien de chaises pour 25 tables ?", ["100", "52", "54"], 1, "u₂₅ = 2 × 25 + 2 = 52. Pas 4 × 25 : les côtés accolés n'ont pas de chaise."),
+             ("08-question", "Le nombre de couverts servis augmente de 20 % chaque mois. Quelle est la nature de la suite ?", ["géométrique de raison 1,2", "arithmétique de raison 20", "géométrique de raison 0,2"], 0, "Augmenter de 20 %, c'est multiplier par 1 + 0,2, soit 1,2.")],
+         tags=["suites", "modéliser", "suite arithmétique", "suite géométrique", "formule", "restaurant", "cheffe de salle"],
+         st="Combien de lignes aériennes pour 10 villes ? ✈️ — 1re spé #Shorts",
+         sq=("03-question", "Avec uₙ = n × (n − 1) ÷ 2, combien de lignes pour 10 villes ?", ["90", "100", "45"], 2, "10 × 9 = 90, divisé par 2 : 45. Sans diviser par 2, chaque ligne serait comptée deux fois."),
+         sa="Une compagnie aérienne relie n villes, chacune avec toutes les autres, par une ligne directe : 3 villes, 3 lignes ; 4 villes, 6 lignes ; 5 villes, 10 lignes. Tu comptes les lignes sans les dessiner ?",
+         stoi="combien de lignes pour 20 villes ?", srep="190 : 20 × 19 = 380, divisé par 2.",
+         stags=["avion", "compagnie aérienne", "villes", "modéliser", "suites"]),
 ]
 # Les 4 vidéos communes : la même vidéo sert aussi la micro de la classe du dessus.
 AUSSI = {

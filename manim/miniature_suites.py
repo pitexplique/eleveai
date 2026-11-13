@@ -109,6 +109,10 @@ EP = [
      ["COMPRENDRE UNE BOUCLE", "PYTHON SUR UNE SUITE"], "u = 2*u + 1", "+ range(4) : 4 tours → u_{4} = 63",
      "blanche", ["QU'AFFICHE", "CE CODE ?"], "l'énigme Python du jour",
      [("u = 2*u − 5", 120, BLEU), ("u = 10, 3 tours → ?", 100, VERT)]),
+    ("premiere-spe", "21-modeliser", "verte",
+     ["COMPRENDRE COMMENT", "MODÉLISER PAR UNE SUITE"], "u_{n} = 2n + 2", "+ 25 tables : 52 chaises",
+     "blanche", ["COMBIEN DE", "LIGNES ?"], "10 villes, toutes reliées",
+     [("3 → 6 → 10 → …", 120, BLEU), ("10 villes : ?", 120, VERT)]),
 ]
 # Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
 from suites_terminale_donnees import EP_TLE  # noqa: E402
