@@ -1,8 +1,8 @@
 {
   "00-accroche": "Mon copain Noé se vante : la clôture de son jardin est plus longue que la mienne. Donc son jardin est plus grand ! Vraiment ?",
-  "01-jardins": "Mon jardin : un carré de 4 carreaux de côté. Le jardin de Noé : 2 rangées de 7 carreaux.",
+  "01-jardins": "Mon jardin : un carré de 5 carreaux de côté. Le jardin de Noé : 3 rangées de 8 carreaux.",
   "02-question": "Question ! Qui a le jardin avec la plus grande aire ? A : moi, Ti Margo. B : Noé. C : la même aire. Mets pause, et choisis !",
-  "02b-reponse": "Réponse A ! Moi : 4 fois 4, 16 carreaux. Noé : 2 fois 7, 14 carreaux. Une clôture plus longue, ça ne veut pas dire plus de place !",
+  "02b-reponse": "Réponse A ! Moi : 5 fois 5, 25 carreaux. Noé : 3 fois 8, 24 carreaux. Une clôture plus longue, ça ne veut pas dire plus de place !",
   "03-ouf": "Ouf ! Noé, tu viens planter des tomates chez moi ?",
   "04-commentaire": "À toi : une bande de 1 rangée de 9 carreaux, et un carré de 3 carreaux de côté. Lequel a la plus grande aire ? Réponds en commentaire !",
   "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
