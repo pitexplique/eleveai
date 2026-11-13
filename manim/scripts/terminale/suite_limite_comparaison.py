@@ -52,8 +52,8 @@ assert all(2 - 1 / n <= U[n] <= 2 + 1 / n for n in NS) and abs(U[1999] - 2) < 1e
 assert 3 / 1999 < 2e-3 and 1 / 1999 ** 2 < 1e-6                                # 04 : bornes → 5 (A)
 C5 = {n: n + 3 * math.cos(n) for n in NS}
 assert all(C5[n] >= n - 3 for n in NS)                                        # 05 : uₙ ≥ n − 3 → +∞
-P6 = {"0": lambda n: 6 * n / (n * n + 5), "7": lambda n: 7 * n / (n + 6), "−∞": lambda n: -n}
-assert all(f(n) <= n for f in P6.values() for n in NS)                        # 06 : toutes sous y = n
+P6 = {"0": lambda n: 8 * n / (n * n + 7), "7": lambda n: 7 - 16.2 / n + 6.8 / n ** 2, "−∞": lambda n: -n / 4}
+assert all(f(n) <= n for f in P6.values() for n in NS) and all(P6["7"](k / 20) <= k / 20 for k in range(20, 400))                        # 06 : toutes sous y = n
 assert abs(P6["7"](10 ** 6) - 7) < 1e-4 and P6["0"](10 ** 6) < 1e-5
 assert (1 - 1 / 10 ** 6, 3 + 1 / 10 ** 6) and 1 != 3                          # 07 : bornes → 1 et → 3 (C)
 V8 = {n: -n * n + 4 * math.sin(n) for n in NS}
@@ -351,10 +351,10 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
 
     # ── 04 : question-pause n° 1 → A (5 − 3/n ≤ uₙ ≤ 5 + 1/n² : → 5) ──────
 
-    def entonnoir(self, f_bas, f_haut, f_u, ur, cible=None, bg=P(2.1, -2.3), hd=P(4.8, 0.95), n_fin=12.6):
+    def entonnoir(self, f_bas, f_haut, f_u, ur, cible=None, bg=P(2.1, -2.3), hd=P(4.8, 0.95), n_fin=12.6, nom_u="uₙ"):
         """Un petit repère : les deux bornes tracées en entier, les termes, deux gendarmes au bout ;
         renvoie (nu, groupe des bornes, termes, gendarmes, trait de la limite)."""
-        nu = NuageTermes((0, 13.0), ur, bg, hd, fs=24)
+        nu = NuageTermes((0, 13.0), ur, bg, hd, nom_u=nom_u, fs=24)
         bornes = VGroup(self.courbe(nu, f_haut, 1, n_fin), self.courbe(nu, f_bas, 1, n_fin))
         termes = self.points(nu, f_u, range(1, 13))
         gd = VGroup(gendarme(0.27).next_to(nu.G(n_fin, f_haut(n_fin)), UP, buff=0.03),
@@ -432,7 +432,7 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
         self.au_mot("piège")
         self.play(FadeIn(tit, scale=1.3), run_time=0.35)
         x0 = -6.2
-        nu = NuageTermes((0, 13.0), (-13.0, 13.0), P(2.55, -2.35), P(5.3, 2.3), fs=26)
+        nu = NuageTermes((0, 13.0), (-3.5, 13.0), P(2.55, -2.35), P(5.3, 2.3), fs=26)
         plafond = self.courbe(nu, lambda t: t, 0, 12.6, RAISON, 5)
         lp = self.t("n", 30, RAISON, audit=False).next_to(nu.G(12.6, 12.6), RIGHT, buff=0.12)
         self.ligne([("Être plus petite qu'une suite", WHITE, "Être plus petite")], 2.2, x=x0, fs=37)
@@ -442,12 +442,12 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
                    0.6, x=x0, fs=37)
         series = []
         for cle, f in P6.items():
-            pts = self.points(nu, f, range(1, 13), TERME, 0.07)
+            pts = self.points(nu, f, range(2 if cle == "7" else 1, 13), TERME, 0.07)  # u₁ = −2,4 isolé : dessiné dès n = 2
             series.append(pts)
         y0, y7 = nu.G(10.5, P6["0"](10.5))[1], nu.G(10.5, P6["7"](10.5))[1]
-        e0 = self.t("→ 0", 28, JUSTE, audit=False).move_to(P(nu.G(10.5, 0)[0], (y0 + y7) / 2))
-        e7 = self.t("→ 7", 30, JUSTE, audit=False).next_to(nu.G(12.6, 7 * 12 / 18), RIGHT, buff=0.12)
-        em = self.t("→ −∞", 30, JUSTE, audit=False).next_to(nu.G(8, -9.5), LEFT, buff=0.1)
+        e0 = self.t("→ 0", 28, JUSTE, audit=False).move_to(P(nu.G(10.5, 0)[0], y0 + 0.36))
+        e7 = self.t("→ 7", 30, JUSTE, audit=False).next_to(nu.G(12.6, P6["7"](12)), RIGHT, buff=0.12)
+        em = self.t("→ −∞", 30, JUSTE, audit=False).move_to(nu.G(4.5, -2.9))
         lag = lambda pts: LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.08)  # noqa: E731
         self.ligne([("vers 0,", JUSTE, "vers 0"), ("vers 7,", JUSTE, "vers 7"), ("ou vers −∞.", JUSTE, "ou vers moins")],
                    -0.2, x=x0, fs=38, avec_k={0: [lag(series[0]), FadeIn(e0)], 1: [lag(series[1]), FadeIn(e7)],
@@ -521,7 +521,7 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
         self.remove(*autres)
         x0 = -6.2
         # vₙ : sous le plafond 4 − n² qui plonge
-        nu = NuageTermes((0, 8.6), (-68, 8), P(2.5, -2.1), P(5.0, 2.3), fs=26)
+        nu = NuageTermes((0, 8.6), (-68, 8), P(2.5, -2.1), P(5.0, 2.3), nom_u="vₙ", fs=26)
         plaf = self.courbe(nu, lambda t: 4 - t * t, 0, 8.4, RAISON, 5)
         pts = self.points(nu, lambda n: V8[n], range(1, 9))
         bas = Arrow(nu.G(8.6, -30) + RIGHT * 0.3, nu.G(8.6, -66) + RIGHT * 0.3, buff=0, color=JUSTE, stroke_width=6,
@@ -538,7 +538,8 @@ class SuiteLimiteComparaisonTle(VerifMargo, OutilsCalcul, PaysageSuites):
         self.au_mot("Pour w")
         self.play(*[FadeOut(m) for m in (nu.ax_n, nu.ax_u, nu.lab_n, nu.lab_u, plaf, pts, bas)], run_time=0.25)
         nw, bornes, termes, gd, lim = self.entonnoir(lambda t: 1 - 2 / t, lambda t: 1 + 2 / t,
-                                                     lambda n: W8[n], (-1.4, 3.4), 1, bg=P(2.85, -2.1), hd=P(5.0, 2.0))
+                                                     lambda n: W8[n], (-1.4, 3.4), 1, bg=P(2.85, -2.1), hd=P(5.0, 2.0),
+                                                     nom_u="wₙ")
         g = self.lmaths([("t", [("Pour wₙ :", GREY_A, None), ("1 −", RAISON, "1 moins")]),
                          ("f", [("2", RAISON, "2 sur")], [("n", RAISON, None)]),
                          ("t", [("≤", WHITE, "inférieur ou égal à w"), ("wₙ", TERME, None),
