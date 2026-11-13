@@ -1,0 +1,16 @@
+{
+  "00-garde": "Un défi de périmètre. Faire plusieurs tours, et retrouver un côté qui manque.",
+  "01-situation": "Voici Karim. Il est éleveur de chevaux. Il pose une clôture autour d'un pré rectangulaire de 40 mètres sur 30 mètres. Il met 3 rangées de fil. Combien de mètres de fil ?",
+  "02-un-tour": "D'abord, un seul tour. 40 plus 30, 70 : la moitié du tour. 70 fois 2, 140 mètres.",
+  "03-trois-tours": "Mais il y a 3 rangées de fil : 3 tours. 140 fois 3, 420. Karim doit acheter 420 mètres de fil.",
+  "04-cote": "Un autre pré, en triangle, a un périmètre de 100 mètres. Deux côtés mesurent 30 mètres et 45 mètres. Et le troisième ? 30 plus 45, 75. 100 moins 75, 25. Le troisième côté mesure 25 mètres.",
+  "05-question": "Question ! Un carré a un périmètre de 36 centimètres. Combien mesure un côté ? A : 18 centimètres. B : 9 centimètres. C : 6 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Un carré a 4 côtés égaux. 36 divisé par 4, 9 : car 9 fois 4, 36. Un côté mesure 9 centimètres.",
+  "06-piege": "Attention au piège ! Pour un côté qui manque, on enlève les côtés connus du périmètre : on ne les ajoute pas ! 30 plus 45 plus 100, ça ferait 175 mètres : bien trop long pour un seul côté.",
+  "07-question": "Question ! Une piste de vélo fait 200 mètres de tour. Léa fait 4 tours. Combien de mètres a-t-elle roulé ? A : 204 mètres. B : 50 mètres. C : 800 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 4 tours de 200 mètres : 200 fois 4, 800. Léa a roulé 800 mètres.",
+  "08-defi": "À toi de jouer ! Karim a 300 mètres de fil. Il veut clôturer un pré carré de 25 mètres de côté, avec 3 rangées de fil. A-t-il assez de fil ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un tour : 25 fois 4, 100 mètres. 3 tours : 100 fois 3, 300 mètres. Karim a 300 mètres : c'est juste assez, il ne reste rien !",
+  "09-finale": "Ce que tu as appris. Plusieurs tours : on calcule un tour, puis on multiplie. Un côté qui manque : le périmètre moins les côtés connus.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

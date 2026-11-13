@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer le périmètre d'un rectangle ou d'un carré. Faut-il mesurer les 4 côtés ?",
+  "01-situation": "Voici Lucas. Il est encadreur. Il fabrique des cadres en bois pour les tableaux. Pour ce tableau rectangulaire, combien de centimètres de baguette lui faut-il ?",
+  "02-rectangle": "Un rectangle a 4 côtés. Les côtés d'en face sont égaux. Ce tableau mesure 60 centimètres de long et 40 centimètres de large. Donc 60 en haut, 60 en bas, 40 à gauche, 40 à droite.",
+  "03-additionner": "On fait le tour : 60 plus 40, 100. Plus 60, 160. Plus 40, 200. Il faut 200 centimètres de baguette. Plus vite : une longueur plus une largeur, 100, c'est la moitié du tour. 100 fois 2, 200.",
+  "04-carre": "Pour un tableau carré de 35 centimètres de côté, les 4 côtés sont égaux. 35 fois 4, 140. Il faut 140 centimètres de baguette.",
+  "05-question": "Question ! Un rectangle mesure 9 centimètres de long et 5 centimètres de large. Quel est son périmètre ? A : 14 centimètres. B : 28 centimètres. C : 45 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 9 plus 5, 14 : c'est la moitié du tour. 14 fois 2, 28. Le périmètre est de 28 centimètres.",
+  "06-piege": "Attention au piège ! Pour un rectangle de 6 sur 4, 6 fois 4, 24, c'est son aire : les carreaux du dedans. Le périmètre, c'est le tour : 6 plus 4, plus 6, plus 4, 20 centimètres.",
+  "07-question": "Question ! Un carré a des côtés de 12 centimètres. Quel est son périmètre ? A : 48 centimètres. B : 24 centimètres. C : 144 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Un carré a 4 côtés égaux : 12 fois 4, 48. Le périmètre est de 48 centimètres.",
+  "08-defi": "À toi de jouer ! Lucas a une baguette de 300 centimètres. Il encadre un tableau de 80 centimètres sur 50 centimètres. Combien de centimètres de baguette lui restera-t-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 80 plus 50, 130 : la moitié du tour. 130 fois 2, 260 centimètres. Il reste 300 moins 260, 40 centimètres de baguette.",
+  "09-finale": "Ce que tu as appris. Un rectangle : la longueur plus la largeur, puis fois 2. Un carré : le côté fois 4. Le périmètre n'est pas l'aire : on fait le tour.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

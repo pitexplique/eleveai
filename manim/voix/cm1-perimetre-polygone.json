@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer le périmètre d'un polygone. Une figure à 5 ou 8 côtés : comment faire le tour ?",
+  "01-situation": "Voici Emma. Elle est menuisière. Elle fabrique une table à 8 côtés : un octogone. Elle veut coller une bande de bois tout autour du plateau. Combien de centimètres de bande ?",
+  "02-compter": "D'abord, on compte les côtés. On fait une petite croix sur chaque côté compté : 1, 2, 3, 4, 5, 6, 7, 8. L'octogone a 8 côtés. Chacun mesure 50 centimètres.",
+  "03-multiplier": "Les 8 côtés sont égaux. Au lieu d'ajouter 50 huit fois, on calcule 50 fois 8 : 400. Il faut 400 centimètres de bande.",
+  "04-differents": "Un autre plateau a 5 côtés différents : 40, 30, 50, 30 et 20 centimètres. On les ajoute dans l'ordre du tour : 40 plus 30, 70. Plus 50, 120. Plus 30, 150. Plus 20, 170 centimètres.",
+  "05-question": "Question ! Un hexagone a 6 côtés égaux de 9 centimètres. Quel est son périmètre ? A : 15 centimètres. B : 45 centimètres. C : 54 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 6 côtés de 9 centimètres : 9 fois 6, 54. Le périmètre est de 54 centimètres.",
+  "06-piege": "Attention au piège ! Quand il y a beaucoup de côtés, on en oublie un, ou on en compte un deux fois. On part d'un coin, on fait une croix sur chaque côté, et on s'arrête quand on revient au départ.",
+  "07-question": "Question ! Un pentagone a des côtés de 7, 4, 6, 4 et 5 centimètres. Quel est son périmètre ? A : 22 centimètres. B : 26 centimètres. C : 20 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 7 plus 4, 11. Plus 6, 17. Plus 4, 21. Plus 5, 26. Le périmètre est de 26 centimètres.",
+  "08-defi": "À toi de jouer ! Emma pose une bordure autour d'un bac à sable à 5 côtés égaux. Chaque côté mesure 150 centimètres. Elle a 700 centimètres de bordure. Est-ce assez ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 5 côtés de 150 centimètres : 150 fois 5, 750 centimètres. Emma a 700 centimètres : ce n'est pas assez ! Il manque 750 moins 700, 50 centimètres.",
+  "09-finale": "Ce que tu as appris. Le périmètre d'un polygone, c'est la somme de tous ses côtés. On compte les côtés avec une croix. Si tous les côtés sont égaux : un côté fois le nombre de côtés.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

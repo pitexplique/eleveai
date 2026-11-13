@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer le périmètre d'un triangle. Combien de galon pour faire le tour d'un fanion ?",
+  "01-situation": "Voici Nina. Elle est décoratrice de fêtes. Elle fabrique des fanions en forme de triangle. Autour de chaque fanion, elle coud un galon doré. Combien de centimètres de galon pour un fanion ?",
+  "02-tour": "Le périmètre, c'est la longueur du tour. Un triangle a 3 côtés. Ce fanion mesure 20 centimètres en haut, 25 centimètres à gauche, et 25 centimètres à droite.",
+  "03-additionner": "On ajoute les 3 côtés, en faisant le tour : 20 plus 25, 45. Plus 25, 70. Il faut 70 centimètres de galon.",
+  "04-egaux": "Un autre fanion a ses 3 côtés égaux : 30 centimètres chacun. Au lieu de 30 plus 30 plus 30, on calcule 30 fois 3 : 90. Le périmètre est de 90 centimètres.",
+  "05-question": "Question ! Un triangle a des côtés de 6 centimètres, 8 centimètres et 10 centimètres. Quel est son périmètre ? A : 24 centimètres. B : 14 centimètres. C : 18 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. On ajoute les 3 côtés : 6 plus 8, 14. Plus 10, 24. Le périmètre est de 24 centimètres.",
+  "06-piege": "Attention au piège ! Le périmètre, c'est le tour entier. Si on oublie un côté : 20 plus 25, 45 centimètres… et il manque un morceau de galon ! On compte les 3 côtés, chacun une seule fois.",
+  "07-question": "Question ! Un panneau routier en triangle a ses 3 côtés égaux : 70 centimètres chacun. Quel est son périmètre ? A : 140 centimètres. B : 73 centimètres. C : 210 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Les 3 côtés sont égaux : 70 fois 3, 210. Le périmètre est de 210 centimètres.",
+  "08-defi": "À toi de jouer ! Nina fait une guirlande de 4 fanions. Chaque fanion a des côtés de 15 centimètres, 20 centimètres et 20 centimètres. Combien de centimètres de galon pour les 4 fanions ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un fanion : 15 plus 20, 35. Plus 20, 55 centimètres. Pour 4 fanions : 55 fois 4, 220. Il faut 220 centimètres de galon.",
+  "09-finale": "Ce que tu as appris. Le périmètre d'un triangle, c'est la somme de ses 3 côtés. Si les 3 côtés sont égaux, on multiplie un côté par 3. On n'oublie aucun côté.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

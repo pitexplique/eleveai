@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Course d'escargots ! J'ai 20 mètres de ruban pour faire une piste en triangle. Deux côtés : 8 mètres et 7 mètres. Et le dernier ?",
+  "01-ruban": "J'ajoute les deux côtés : 8 plus 7, 15 mètres. Le reste du ruban, c'est pour le troisième côté.",
+  "02-question": "Question ! Combien de mètres de ruban pour le dernier côté ? A : 5 mètres. B : 15 mètres. C : 35 mètres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! 20 moins 15, 5 mètres. La piste est fermée !",
+  "03-ouf": "Partez ! … Bon, ils arriveront peut-être demain.",
+  "04-commentaire": "À toi : un ruban de 30 mètres, et un triangle avec deux côtés de 10 et 12 mètres. Combien pour le troisième ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

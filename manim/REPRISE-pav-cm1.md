@@ -85,3 +85,12 @@ Ceintures (proposées, validées avec les voix le 13/11) : paysages jaune (ép. 
 
 ## Prochaine étape (session 7)
 Série aire CM1 terminée. Suite du plan CM1 (`PLAN-perimetre-aire-volume.md`) : périmètre du triangle, quadrilatère, polygone, défi (niveau CM1, pas de doublon CE2), puis contenance, puis solides. Voix à écrire puis valider À DEUX avant tout rendu.
+
+## Fait le 13/11 (session 7) — voix PÉRIMÈTRE CM1 ✅ VALIDÉES (« Oui, valide les 8 »), WAV + marques faits
+- `manim/voix/cm1-perimetre-{triangle,quadrilatere,polygone,defi}(-short).json` (micros `perimetre_triangle`, `_quadrilatere`, `_polygone`, `_defi` ; `perimetre_comprendre` reste la vidéo CE2 par `aussi`).
+- Ép. 1 triangle : Nina, décoratrice de fêtes (fanion 20 + 25 + 25 = 70 cm ; 3 côtés égaux → × 3) ; questions A, C ; short : guirlande de 100 cm pour un fanion de 110 cm, B. Ceinture jaune.
+- Ép. 2 quadrilatère : Lucas, encadreur (60 × 40 → (60 + 40) × 2 = 200 cm ; carré 35 × 4) ; piège aire ≠ périmètre ; questions B, A ; short : Ti Margo fait la moitié du tour du terrain, C. Ceinture jaune.
+- Ép. 3 polygone : Emma, menuisière (octogone 50 × 8 = 400 cm ; 5 côtés différents = 170 cm ; croix sur chaque côté) ; questions C, B ; short : étoile de Noël à 10 côtés, A. Ceinture verte.
+- Ép. 4 défi : Karim, éleveur de chevaux (3 rangées de fil = 3 tours ; côté manquant = périmètre − côtés connus ; carré 36 ÷ 4) ; questions B, C ; short : course d'escargots, côté manquant, A. Ceinture bleue.
+- ✅ WAV `public/sons/cm1-perimetre-<ep>[-short]/` (Julie, débit −6, ignorés par git). ✅ Marques : `python manim/scripts/cm1/aire_marques.py perimetre:triangle perimetre:quadrilatere perimetre:polygone perimetre:defi` → `manim/scripts/cm1/perimetre_<ep>_marques.json` (0 mot introuvable). ⚠️ jamais sans argument.
+- Prochaine étape (session 8) : scripts `manim/scripts/cm1/perimetre_<ep>.py` sur le modèle de `aire_composer.py` / `aire_defi.py` (base `PaysageAireCM1`, mixin `PhraseAGauche`, personnages à ajouter au commun : `nina`, `lucas`, `emma`, `karim` ; contour orange `contour` pour le tour), puis la chaîne habituelle : dry run AUDIT=1 BORDS=1 → planche -ql relue → HD sous verrou (`media-perimetre-0N`, sortie `manim/sorties/cm1/maths/perimetre/0N-<ep>/`) → bords 0 → short `films/cm1-perimetre-<ep>.js` (nouvelle série `cm1-perimetre` à déclarer comme `cm1-aire.json`) → miniatures → manifeste (places après le 01/01/2027) → fiche, R2, coach.

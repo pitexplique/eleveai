@@ -2,6 +2,8 @@
 # Série PÉRIMÈTRE, AIRE… du CM1 (13/11/2026) : les marques mot à mot des voix paysage (Julie, débit −6).
 # Copie de manim/scripts/6e/calcul_pose_marques.py (même conversion), autres chemins.
 #   python manim/scripts/cm1/aire_marques.py comprendre unite carre-rectangle
+#   python manim/scripts/cm1/aire_marques.py perimetre:triangle perimetre:defi   (autre notion)
+# ⛔ JAMAIS sans argument : réécrirait les marques de l'aire ép. 3 (3 posées à la main).
 # Sortie : manim/scripts/cm1/aire_<slug avec _>_marques.json
 # Même format que scripts/cues2marques.py, qui perd les mots répétés (« 5 centimètres,
 # 5 centimètres, 5 centimètres ») : ici, seules les cues répétées « nombre + mot » sont retirées.
@@ -80,13 +82,16 @@ def convertir(textes, tsv):
     return res
 
 
-for slug in sys.argv[1:] or SLUGS:
-    voix = RACINE / "manim" / "voix" / f"cm1-aire-{slug}.json"
+# « perimetre:triangle » : une autre notion du CM1 (voix cm1-perimetre-triangle.json → perimetre_triangle_marques.json).
+for arg in sys.argv[1:] or SLUGS:
+    notion, _, slug = arg.rpartition(":")
+    notion = notion or "aire"
+    voix = RACINE / "manim" / "voix" / f"cm1-{notion}-{slug}.json"
     with tempfile.TemporaryDirectory() as d:
         base = str(Path(d) / slug)
         subprocess.run(["powershell", "-NoProfile", "-File", str(RACINE / "scripts" / "marques_dump.ps1"), "-Fichier",
                         str(voix), "-Sortie", base, "-Debit", "-6"], check=True, capture_output=True)
         res = convertir(json.loads(voix.read_text(encoding="utf-8")), base + ".cues.tsv")
-    sortie = ICI / f"aire_{slug.replace('-', '_')}_marques.json"
+    sortie = ICI / f"{notion}_{slug.replace('-', '_')}_marques.json"
     sortie.write_text(json.dumps(res, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(slug, len(res), "clips")

@@ -41,10 +41,10 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 
 **Périmètre** (5)
 - [ ] Comprendre ce qu’est un périmètre — `perimetre_comprendre` — ↪ vidéo CE2 `ce2_perimetre_comprendre` par `aussi` (pas de vidéo CM1)
-- [ ] Calculer le périmètre d’un triangle — `perimetre_triangle`
-- [ ] Calculer le périmètre d’un quadrilatère — `perimetre_quadrilatere`
-- [ ] Calculer le périmètre d’un polygone simple — `perimetre_polygone`
-- [ ] Résoudre un défi de périmètre — `perimetre_defi`
+- [ ] Calculer le périmètre d’un triangle — `perimetre_triangle` — ✅ 13/11 voix validée (WAV + marques)
+- [ ] Calculer le périmètre d’un quadrilatère — `perimetre_quadrilatere` — ✅ 13/11 voix validée (WAV + marques)
+- [ ] Calculer le périmètre d’un polygone simple — `perimetre_polygone` — ✅ 13/11 voix validée (WAV + marques)
+- [ ] Résoudre un défi de périmètre — `perimetre_defi` — ✅ 13/11 voix validée (WAV + marques)
 
 **Aire** (5)
 - [x] Comprendre ce qu’est une aire — `aire_comprendre` — ✅ 13/11 voix validée ; ✅ 13/11 paysage HD (3 min 20, bords 0) + short dessin animé (71 s), manifeste 26/12, R2, coach (`manim/sorties/cm1/maths/aire/01-comprendre/`)
