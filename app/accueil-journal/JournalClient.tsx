@@ -584,6 +584,23 @@ function BlocVideos({ v, petit = false }: { v?: VideosArticle; petit?: boolean }
   );
 }
 
+/** « Regarder » (13/11 : tout article a Regarder · Lire · Écouter · QCM) :
+ *  la paysage de l'article, sinon son short. */
+function Regarder({ videos, quoi = "article" }: { videos?: VideosArticle; quoi?: Rubrique }) {
+  const v = videos?.paysage ?? videos?.short;
+  if (!v) return null;
+  return (
+    <Lien
+      href={`/video/${v.id}`}
+      quoi={quoi}
+      mise="quotidien"
+      className="inline-flex items-center gap-2 rounded-full bg-red-700 px-6 py-2.5 font-serif text-xl font-black text-white hover:bg-red-800"
+    >
+      <Play className="h-5 w-5" fill="currentColor" aria-hidden="true" /> Regarder
+    </Lien>
+  );
+}
+
 function Ecouter({ a, grand = false }: { a: Article; grand?: boolean }) {
   const [parle, setParle] = useState(false);
   const [possible, setPossible] = useState(false);
@@ -689,8 +706,19 @@ function ArticleUne({
       >
         {a.chapo}
       </p>
-      <div className="mt-3">
-        <Ecouter a={a} />
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        <Regarder videos={videos} />
+        <button
+          type="button"
+          onClick={() => {
+            setSuite(true);
+            document.getElementById(`texte-${a.id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+          className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-6 py-2.5 font-serif text-xl font-black text-white hover:bg-stone-700"
+        >
+          <BookOpen className="h-5 w-5" aria-hidden="true" /> Lire
+        </button>
+        <Ecouter a={a} grand />
       </div>
       {/* Les vidéos écrites à la main dans l'article (13/11/2026) : des liens vers /video/<id>, où la
           vidéo s'ouvre en pause. Rien ne se lance ici. */}
@@ -711,7 +739,7 @@ function ArticleUne({
           ))}
         </ul>
       ) : null}
-      <div className="mt-5 grid gap-6 md:grid-cols-[1fr_16rem]">
+      <div id={`texte-${a.id}`} className="mt-5 grid scroll-mt-4 gap-6 md:grid-cols-[1fr_16rem]">
         {/* Aux petits niveaux : plus grand, plus aéré, pas de lettrine (elle
             gêne ceux qui déchiffrent). */}
         <div
@@ -1259,16 +1287,7 @@ function ArticleDuJour({
             {a.chapo}
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-3">
-            {videos?.paysage && (
-              <Lien
-                href={`/video/${videos.paysage.id}`}
-                quoi={une ? "une" : "article"}
-                mise="quotidien"
-                className="inline-flex items-center gap-2 rounded-full bg-red-700 px-6 py-2.5 font-serif text-xl font-black text-white hover:bg-red-800"
-              >
-                <Play className="h-5 w-5" fill="currentColor" aria-hidden="true" /> Regarder
-              </Lien>
-            )}
+            <Regarder videos={videos} quoi={une ? "une" : "article"} />
             <button
               type="button"
               onClick={surOuvrir}
