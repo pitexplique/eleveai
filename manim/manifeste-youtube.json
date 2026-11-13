@@ -77931,6 +77931,158 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-aire-comprendre",
+      "pas_avant": "2026-12-26",
+      "notionId": "aire",
+      "microId": "aire_comprendre",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.mp4",
+      "miniature": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.png",
+      "titre": "15 carreaux pour la cuisine : c'est quoi, l'aire ? — Comprendre l'aire — épisode 1 · Maths CM1",
+      "accroche": "Mathis est carreleur. Il doit couvrir le sol d'une cuisine avec des carreaux. Combien de carreaux ?\n\nDans cette vidéo :\n• couvrir une surface sans trou et sans superposer\n• l'aire, c'est la place que prend une surface : tout l'intérieur\n• le périmètre, c'est le tour (la plinthe) ; l'aire, c'est l'intérieur (le carrelage)\n• le piège : la figure la plus longue n'a pas toujours la plus grande aire\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : l'aire d'une terrasse de 3 rangées de carreaux.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple\n\n📐 Épisode 1 de la série Aire d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de place prend une surface ?"
+        ],
+        [
+          "00:05",
+          "Mathis, carreleur"
+        ],
+        [
+          "00:16",
+          "Couvrir le sol"
+        ],
+        [
+          "00:32",
+          "L'aire, c'est l'intérieur"
+        ],
+        [
+          "00:43",
+          "Le tour ou l'intérieur ?"
+        ],
+        [
+          "00:57",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Le piège"
+        ],
+        [
+          "01:49",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "À toi de jouer"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "02:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "aire",
+        "surface",
+        "carreaux",
+        "périmètre",
+        "carreleur",
+        "construction",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "Pour peindre un mur, que cherche-t-on ?",
+          "choix": [
+            "son périmètre",
+            "son aire",
+            "sa hauteur"
+          ],
+          "reponse": 1,
+          "explication": "La peinture couvre tout le mur. On cherche son aire."
+        },
+        {
+          "t": "01:49",
+          "question": "Quelle figure a la plus grande aire ?",
+          "choix": [
+            "la verte : 8 carreaux",
+            "la bleue : 7 carreaux",
+            "la rouge : 6 carreaux"
+          ],
+          "reponse": 0,
+          "explication": "On compte les carreaux. La verte en couvre 8 : c'est la plus grande aire."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-aire-comprendre-short",
+      "pas_avant": "2026-12-26",
+      "notionId": "aire",
+      "microId": "aire_comprendre",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-aire-comprendre",
+      "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre-short.mp4",
+      "miniature": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre-short-miniature.png",
+      "titre": "10 m de ficelle pour couvrir ma cabane : tu paries ? #maths #cm1",
+      "accroche": "Ti Margo veut couvrir le sol de sa cabane. Il fait le tour : 10 mètres, et il achète 10 mètres de ficelle... La ficelle fait le tour, mais le sol reste tout nu ! Le tour, c'est le périmètre. Pour couvrir, il faut l'aire : des carreaux.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un sol de 2 rangées de 4 carreaux. Combien de carreaux pour le couvrir ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "tags": [
+        "aire",
+        "périmètre",
+        "carreaux",
+        "cabane",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:23",
+          "question": "Mon sol a 2 rangées de 3 carreaux. Combien de carreaux pour le couvrir ?",
+          "choix": [
+            "10",
+            "5",
+            "6"
+          ],
+          "reponse": 2,
+          "explication": "3 carreaux, plus 3 carreaux : 6 carreaux. Mon sol est couvert !"
+        }
+      ],
+      "centres": [
+        "construction",
+        "nature-ecologie"
+      ]
     }
   ]
 }

@@ -1,0 +1,7 @@
+{
+  "voix": "cm1-aire-{ep}-short",
+  "sons": "public/sons/cm1-aire-{ep}-short",
+  "sortie": "manim/sorties/cm1/maths/aire/{num}-{ep}",
+  "nom": "eleveai-maths-cm1-aire-{ep}-short",
+  "episodes": { "comprendre": "01", "unite": "02", "carre-rectangle": "03" }
+}

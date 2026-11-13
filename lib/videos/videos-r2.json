@@ -5758,6 +5758,24 @@
   "short": true,
   "youtube": null
  },
+ "cm1-aire-comprendre": {
+  "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.mp4",
+  "poster": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.png",
+  "vignette": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.vignette.webp",
+  "titre": "15 carreaux pour la cuisine : c'est quoi, l'aire ? — Comprendre l'aire — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
+ },
+ "cm1-aire-comprendre-short": {
+  "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre-short.mp4",
+  "poster": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre-short-miniature.png",
+  "vignette": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre-short-miniature.vignette.webp",
+  "titre": "10 m de ficelle pour couvrir ma cabane : tu paries ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
+ },
  "cm1-decimal-droite": {
   "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.mp4",
   "poster": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.png",

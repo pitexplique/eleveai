@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je veux couvrir le sol de ma cabane. J'ai fait le tour : 10 mètres. J'achète 10 mètres de ficelle !",
+  "01-ficelle": "Oups ! La ficelle fait le tour… mais le sol est toujours tout nu ! Le tour, c'est le périmètre. Pour couvrir le sol, il faut l'aire : des carreaux.",
+  "02-question": "Question ! Mon sol a 2 rangées de 3 carreaux. Combien de carreaux pour le couvrir ? A : 10. B : 5. C : 6. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 3 carreaux, plus 3 carreaux : 6 carreaux. Mon sol est couvert !",
+  "03-ouf": "Ouf ! Et la ficelle ? Je la garde pour mon cerf-volant.",
+  "04-commentaire": "À toi : un sol de 2 rangées de 4 carreaux. Combien de carreaux pour le couvrir ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

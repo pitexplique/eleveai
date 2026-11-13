@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire. Combien de place prend une surface ?",
+  "01-situation": "Voici Mathis. Il est carreleur. Il doit couvrir le sol d'une cuisine avec des carreaux. Combien de carreaux doit-il poser ?",
+  "02-couvrir": "Mathis pose les carreaux un par un, sans trou et sans les superposer. Première rangée : 5 carreaux. Deuxième rangée : 5. Troisième rangée : 5. Le sol est couvert. On compte : 15 carreaux.",
+  "03-aire": "La place que prend le sol, c'est son aire. L'aire de la cuisine, c'est 15 carreaux. L'aire, c'est tout l'intérieur, pas seulement le bord.",
+  "04-tour": "Et le bord ? Tout autour de la cuisine, Mathis colle une plinthe. La plinthe fait le tour : c'est le périmètre. Le carrelage couvre l'intérieur : c'est l'aire.",
+  "05-question": "Question ! Pour savoir combien de peinture il faut pour peindre un mur, que cherche-t-on ? A : son périmètre. B : son aire. C : sa hauteur. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. La peinture couvre tout le mur, l'intérieur. On cherche son aire.",
+  "06-piege": "Attention au piège ! Voici une longue bande de 6 carreaux, et un carré de 3 rangées de 3 carreaux. La bande a l'air plus grande. On compte : la bande, 6 carreaux. Le carré, 9 carreaux. Le carré a la plus grande aire. Le plus long n'a pas toujours la plus grande aire.",
+  "07-question": "Question ! Quelle figure a la plus grande aire ? A : la figure verte, 8 carreaux. B : la figure bleue, 7 carreaux. C : la figure rouge, 6 carreaux. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. On compte les carreaux de chaque figure. La verte en couvre 8 : c'est la plus grande aire.",
+  "08-defi": "À toi de jouer ! Mathis carrelle une terrasse. Première rangée : 5 carreaux. Deuxième rangée : 5 carreaux. Troisième rangée : 3 carreaux. Quelle est l'aire de la terrasse, en carreaux ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On compte tous les carreaux. 5 plus 5, 10. Plus 3, 13. L'aire de la terrasse est de 13 carreaux.",
+  "09-finale": "Ce que tu as appris. L'aire, c'est la place que prend une surface, tout l'intérieur. On la mesure en comptant les carreaux qui la couvrent. Le périmètre, c'est le tour ; l'aire, c'est l'intérieur.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

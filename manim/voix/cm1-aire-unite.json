@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des aires. Qui a la plus grande surface ?",
+  "01-situation": "Voici Awa. Elle est créatrice de jeux vidéo. Sur la carte de son jeu, elle dessine deux îles avec des cases. Le joueur veut l'île la plus grande. Laquelle est-ce ?",
+  "02-compter": "Pour comparer, on prend une unité : la case. On compte les cases de chaque île. L'île du volcan : 12 cases. L'île des palmiers : 10 cases. 12, c'est plus que 10. L'île du volcan a la plus grande aire.",
+  "03-meme-aire": "Awa dessine deux maisons : une longue maison et une maison carrée. Elles n'ont pas la même forme. On compte : 8 cases, et 8 cases. Elles ont la même aire ! Deux formes différentes peuvent avoir la même aire.",
+  "04-question": "Question ! Le lac couvre 9 cases, la forêt 11 cases, la plage 7 cases. Qui a la plus grande aire ? A : le lac. B : la plage. C : la forêt. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. 11 cases, c'est le plus grand nombre de cases. La forêt a la plus grande aire.",
+  "05-piege": "Attention au piège ! Le château est mesuré avec des grandes cases : 4 grandes cases. Le jardin, avec des petites cases : 9 petites cases. 9, c'est plus que 4… mais les cases ne sont pas pareilles ! Une grande case, c'est 4 petites cases. Le château, c'est donc 4 fois 4 : 16 petites cases. Le château est plus grand que le jardin.",
+  "06-meme-unite": "Pour comparer des aires, on mesure avec la même unité. Sinon, on ne peut pas comparer les nombres.",
+  "07-question": "Question ! Deux figures couvrent chacune 6 cases, avec des formes différentes. Que peut-on dire ? A : la plus longue est la plus grande. B : elles ont la même aire. C : on ne peut pas savoir. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Elles couvrent le même nombre de cases, avec la même unité. Elles ont la même aire.",
+  "08-defi": "À toi de jouer ! Dans le jeu d'Awa, la grotte couvre 2 grandes cases. La rivière couvre 7 petites cases. Une grande case, c'est 4 petites cases. Laquelle a la plus grande aire ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On met tout en petites cases. La grotte : 2 grandes cases, c'est 4 plus 4, 8 petites cases. La rivière : 7 petites cases. 8, c'est plus que 7. La grotte a la plus grande aire.",
+  "09-finale": "Ce que tu as appris. Pour comparer des aires, on compte avec la même unité. Deux formes différentes peuvent avoir la même aire. Si les unités sont différentes, on les change d'abord.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
