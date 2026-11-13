@@ -6,7 +6,7 @@ Tu reprends la série PÉRIMÈTRE du **CE2** (micros `ce2_perimetre_{comprendre,
 
 ⛔ Les 6 voix sont VALIDÉES (13/11) : ne pas les redemander. Ceintures : 01 blanche, 02 jaune, 03 orange ; shorts blanche.
 
-Prochaine action : vérifier le short 01 (mp4 + miniature, lancés en fin de session 2), la miniature paysage 01, puis le dry run AUDIT de l'épisode 02 (`perimetre_polygone.py`, jamais relu) et toute la chaîne 02, puis 03, puis manifeste/R2/plan.
+Prochaine action : relire la planche du short 01 (déjà rendu), la miniature paysage 01, puis le dry run AUDIT de l'épisode 02 (`perimetre_polygone.py`, jamais relu) et toute la chaîne 02, puis 03, puis manifeste/R2/plan.
 
 C'est fini quand les 6 vidéos sont rendues, au manifeste et sur R2, le plan est coché et la note de reprise est à jour.
 

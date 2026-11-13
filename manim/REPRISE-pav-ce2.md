@@ -8,7 +8,7 @@ Ceintures : paysages 01 blanche, 02 jaune, 03 orange ; shorts blanche. Centres :
 
 | Épisode | Paysage (script) | Paysage état | Short (film Ti Margo) | Short état |
 |---|---|---|---|---|
-| 01 comprendre | `scripts/ce2/perimetre_comprendre.py` | ✅ dry run 0 AUDIT/BORD/TARD, `-ql` relu, **HD rendu** `sorties/ce2/maths/perimetre/01-comprendre/…comprendre.mp4` (224,6 s), bords 0, planche HD relue | `films/ce2-perimetre.js` (`FILMS.comprendre`) | contrôlé ; ⏳ `film` + `miniature` LANCÉS en fin de session 2 : vérifier que `…comprendre-short.mp4` et `…-short-miniature.png` existent (sinon relancer) |
+| 01 comprendre | `scripts/ce2/perimetre_comprendre.py` | ✅ dry run 0 AUDIT/BORD/TARD, `-ql` relu, **HD rendu** `sorties/ce2/maths/perimetre/01-comprendre/…comprendre.mp4` (224,6 s), bords 0, planche HD relue | `films/ce2-perimetre.js` (`FILMS.comprendre`) | ✅ RENDU (`…comprendre-short.mp4` + `…-short-miniature.png`) : reste la planche à relire |
 | 02 polygone | `scripts/ce2/perimetre_polygone.py` | ÉCRIT, ⏳ premier dry run lancé (résultat perdu : le relancer) | `films/ce2-perimetre-polygone.js` | contrôlé (planche OK, cabane agrandie à S=100 après : recontrôler 2-3 images) |
 | 03 comparer | `scripts/ce2/perimetre_comparer.py` | ÉCRIT, jamais lancé | `films/ce2-perimetre-comparer.js` | contrôlé (tables resserrées S=52) |
 
@@ -22,7 +22,7 @@ Seul « reste » connu de l'audit : `AUDIT-ABSENT 10-abonne « 974 » (@eleveai9
 - `$TEMP/claude/mots.py` (hors dépôt) : mot@instant d'un clip, pour caler les `au_mot`. À recréer si besoin : lit `manim/voix/ce2-perimetre-<slug>.json` et `manim/scripts/ce2/perimetre_<slug>_marques.json`.
 
 ## Reste (dans l'ordre)
-1. Short 01 : vérifier mp4 + miniature (sinon `node scripts/ti-margo-short.mjs ce2-perimetre comprendre film` puis `miniature`), planche (`python scripts/ti-margo-planche.py <mp4> <png> 40`).
+1. Short 01 : rendu ✅ ; relire sa planche et sa miniature (`python scripts/ti-margo-planche.py <mp4> <png> 40`).
 2. Miniature paysage 01 : `python manim/miniature_perimetre_ce2.py comprendre` (la relire).
 3. Ép. 02 : dry run `AUDIT=1 BORDS=1 PYTHONIOENCODING=utf-8 python -m manim render --dry_run --progress_bar none manim/scripts/ce2/perimetre_polygone.py PerimetrePolygoneCE2 2>&1 | grep -E "AUDIT|BORD|TARD|RETARD|Traceback|Error" | sort | uniq` → 0 → `-ql` (media dans le scratchpad) + planche → verrou `%TEMP%\eleveai-rendu-hd.lock` → HD (commande en tête du script) → copier vers `sorties/ce2/maths/perimetre/02-polygone/` → `python scripts/verifier-bords-video.py <mp4>` = 0 → short `film` + `miniature` → miniature paysage.
 4. Ép. 03 : même chaîne (`perimetre_comparer.py`, `PerimetreComparerCE2`, sortie `03-comparer/`).
