@@ -37,6 +37,7 @@ class AireCarreRectangleBase(PaysageAireCM1):
     ceinture = "verte"
     _ph_sans_audit = ()
     _ph_couper = {}
+    _ph_haut = None  # la phrase de réponse : sous la figure, à gauche, en 34 (sinon, réduite par Ti-Margo)
 
     def _disposer_q(self, question, choix, phrase):
         """Les lignes de réponse rangées dans `_ph_sans_audit` restent AU MOT
@@ -46,13 +47,30 @@ class AireCarreRectangleBase(PaysageAireCM1):
         ph = r[5]
         for i, morceaux in self._ph_couper.items():
             l = ph.submobjects[i]
-            g = VGroup(*[Text(m, font_size=l.font_size, color=l.get_color(), font=l.font) for m in morceaux])
+            coul = l.submobjects[0].get_fill_color()  # (le Text parent est noir : la couleur est sur ses lettres)
+            g = VGroup(*[Text(m, font_size=l.font_size, color=coul, font=l.font) for m in morceaux])
             g.arrange(RIGHT, buff=0.18).move_to(l)
             ph.submobjects[i] = g
         for i in self._ph_sans_audit:
             for f in ph[i].get_family():
                 f._pas_audit = True
+        if self._ph_haut is not None:
+            ph.scale(34 / ph[0].font_size).arrange(DOWN, aligned_edge=LEFT, buff=0.16)
+            if ph.width > 5.6:
+                ph.scale_to_fit_width(5.6)
+            ph.align_to(P(-6.1, 0), LEFT).align_to(P(0, self._ph_haut), UP)
         return tuple(r)
+
+    def poser_lignes(self, mob, anim="fade", run_time=0.4):
+        """La phrase de réponse : ligne après ligne, DANS L'ORDRE (chacune attend son mot dans play) ;
+        _par_lots les rangeait par le premier mot dit, et « est de 9 carreaux. » (le 9 de « 3 fois 3, 9 »)
+        passait avant « L'aire du carré »."""
+        if self._ph_haut is None or mob is not getattr(self, "ph_q", None):
+            return super().poser_lignes(mob, anim, run_time)
+        a = {"fade": lambda m: FadeIn(m, shift=RIGHT * 0.2), "up": lambda m: FadeIn(m, shift=UP * 0.2)}[anim]
+        for m in mob.submobjects:
+            self.play(a(m), run_time=run_time)
+        return mob
 
     def parcelle(self, c=0.6, pos=P(-3.5, 0.3), plantee=True):
         return rect_cases(6, 4, c, SALADE if plantee else TERRE, SALADE_B if plantee else TERRE_B).move_to(pos)
@@ -96,7 +114,7 @@ class AireCarreRectangleBase(PaysageAireCM1):
         self.play(Indicate(g[5], color=JAUNE_TITRE, scale_factor=1.3), Create(lien), FadeIn(gc, scale=0.6),
                   FadeIn(un_m), run_time=0.6)
         self.au_mot("un mètre carré")
-        m2 = hors_audit(Text("1 m²", font_size=40, color="#052e16", weight=BOLD).move_to(gc))
+        m2 = hors_audit(Text("1 m²", font_size=32, color="#052e16", weight=BOLD).move_to(gc))
         self.play(FadeIn(m2, scale=1.3), run_time=0.4)
         self.au_mot("Combien")
         q = self.t("Combien de mètres carrés ?", 42, JAUNE_TITRE).move_to(P(-0.4, -2.55))
@@ -158,8 +176,8 @@ class AireCarreRectangleBase(PaysageAireCM1):
         self.col(res, -0.15)
         self.play(FadeIn(res, scale=1.2), Indicate(g, color=VERT_OK, scale_factor=1.04), run_time=0.5)
         self.au_mot("Pour un rectangle")
-        l4 = self.bloc(["Rectangle : nombre de rangées", "× nombre de cases d'une rangée"], 30, JAUNE_TITRE)
-        self.col(l4, -1.55)
+        l4 = self.bloc(["Rectangle : rangées", "× cases d'une rangée"], 34, JAUNE_TITRE)
+        gauche(l4, -6.1, -1.85)
         self.play(FadeIn(l4, shift=UP * 0.1), run_time=0.45)
         self.attendre_voix()
 
@@ -206,13 +224,15 @@ class AireCarreRectangleBase(PaysageAireCM1):
         def apres(sc):
             sc.play(FadeIn(numeros(g, 20, "#0f172a")), g.animate.set_fill(VERT_F), run_time=0.4)
 
-        self._ph_sans_audit = (2,)  # « L'aire est de 21 carreaux. » : le 21 est REDIT (montré au mot « L'aire »)
+        self._ph_sans_audit = (3,)  # « 21 carreaux. » : le 21 est REDIT (montré au mot « L'aire »)
+        self._ph_haut = -0.6
         self.question_pause("05-question", "05b-reponse", ["Un rectangle a 3 rangées", "de 7 carreaux.",
                                                            "Quelle est son aire ?"],
                             [self.choix("21 carreaux"), self.choix("10 carreaux"), self.choix("20 carreaux")], 0,
-                            ["3 rangées de 7 :", "3 × 7 = 21.", "L'aire est de 21 carreaux."],
+                            ["3 rangées de 7 :", "3 × 7 = 21.", "L'aire est de", "21 carreaux."],
                             mot_q="Un rectangle", autres_q=autres_q, autres_r=apres)
         self._ph_sans_audit = ()
+        self._ph_haut = None
 
     # ── 06 : le piège (ajouter, ou faire le tour) ───────────────────────────
     def ecran_piege(self):
@@ -259,7 +279,7 @@ class AireCarreRectangleBase(PaysageAireCM1):
     def ecran_question2(self):
         self.clear()
         self.add_mascotte()
-        g = rect_cases(3, 3, 0.7, ROSE_D, "#831843").move_to(P(-3.7, 0.6))
+        g = rect_cases(3, 3, 0.7, ROSE_D, "#831843").move_to(P(-3.7, 1.35))
 
         def autres_q(sc):
             sc.play(FadeIn(g), run_time=0.35)
@@ -268,12 +288,16 @@ class AireCarreRectangleBase(PaysageAireCM1):
             sc.play(FadeIn(numeros(g, 24, "#0f172a")), g.animate.set_fill(VERT_F), run_time=0.4)
 
         self._ph_couper = {1: ("3 × 3", "= 9.")}  # « 3 fois 3 » est dit 1 s avant « 9 »
+        self._ph_sans_audit = (3,)  # « est de 9 carreaux. » : le 9 est REDIT
+        self._ph_haut = 0.0
         self.question_pause("07-question", "07b-reponse", ["Un carré a 3 carreaux", "de côté.",
                                                            "Quelle est son aire ?"],
                             [self.choix("12 carreaux"), self.choix("6 carreaux"), self.choix("9 carreaux")], 2,
-                            ["3 rangées de 3 carreaux :", "3 × 3 = 9.", "L'aire du carré est de 9 carreaux."],
+                            ["3 rangées de 3 :", "3 × 3 = 9.", "L'aire du carré", "est de 9 carreaux."],
                             mot_q="Un carré", autres_q=autres_q, autres_r=apres)
         self._ph_couper = {}
+        self._ph_sans_audit = ()
+        self._ph_haut = None
 
     # ── 08 : le défi (en deux étapes) ───────────────────────────────────────
     def jardin(self):
@@ -291,18 +315,18 @@ class AireCarreRectangleBase(PaysageAireCM1):
         terre = [q.copy().set_fill(TERRE).set_stroke(TERRE_B) for q in g[:20]]
         self.au_mot("Le grand jardin")
         l1 = self.ligne([("6 rangées", ORANGE_RETENUE), ("de 8 cases", CARREAU)], 34)
-        self.col(l1, 2.2)
+        self.col(l1, 2.2, 0.35)
         self.play(FadeIn(VGroup(*terre, *g[20:])), run_time=0.4)
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.4)
         self.au_mot("Elle a déjà planté")
         l2 = self.t("Déjà planté : 20 cases", 34, SALADE)
-        self.col(l2, 1.5)
+        self.col(l2, 1.5, 0.35)
         self.play(FadeIn(l2, shift=UP * 0.1), LaggedStart(*[FadeIn(q, scale=1.3) for q in g[:20]], lag_ratio=0.03),
                   run_time=0.7)
         self.remove(*terre)
         self.au_mot("Combien")
         q = self.bloc(["Combien de mètres carrés", "reste-t-il à planter ?"], 36, JAUNE_TITRE)
-        self.col(q, 0.35)
+        self.col(q, 0.35, 0.35)
         self.play(FadeIn(q, shift=UP * 0.1), Wiggle(VGroup(*g[20:])), run_time=0.5)
         self.pause_defi(y=-1.6)  # au-dessus de Ti-Margo
 
@@ -314,23 +338,23 @@ class AireCarreRectangleBase(PaysageAireCM1):
         self.add(g)
         self.au_mot("D'abord")
         l0 = self.t("D'abord, l'aire du jardin :", 32)
-        self.col(l0, 2.2)
+        self.col(l0, 2.2, 0.35)
         self.play(FadeIn(l0, shift=UP * 0.1), Indicate(g, scale_factor=1.03), run_time=0.4)
         l1 = self.ligne([("6 × 8", BLEU_D), ("= 48 m²", VERT_OK)], 40, buff=0.3)
-        self.col(l1, 1.5)
+        self.col(l1, 1.5, 0.35)
         self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.35)
         self.play(FadeIn(l1[1], shift=UP * 0.1), run_time=0.3)
         self.au_mot("Ensuite")
         l2 = self.bloc(["Ensuite, on enlève", "ce qui est planté :"], 32)
-        self.col(l2, 0.55)
+        self.col(l2, 0.55, 0.35)
         self.play(FadeIn(l2, shift=UP * 0.1), Indicate(VGroup(*g[:20]), color=SALADE, scale_factor=1.04), run_time=0.45)
         l3 = self.ligne([("48 − 20", BLEU_D), ("= 28", VERT_OK)], 40, buff=0.3)
-        self.col(l3, -0.4)
+        self.col(l3, -0.4, 0.35)
         self.play(FadeIn(l3[0], shift=UP * 0.1), run_time=0.35)
         self.play(FadeIn(l3[1], shift=UP * 0.1), run_time=0.3)
         self.au_mot("Il reste")
         res = self.gros("Il reste 28 m²", fs=42)
-        self.col(res, -1.4)
+        self.col(res, -1.4, 0.35)
         self.play(FadeIn(res, scale=1.2), Indicate(VGroup(*g[20:]), color=VERT_OK, scale_factor=1.04), run_time=0.5)
         self.insister(res, 1.1, 0.25)
         self.attendre_voix()

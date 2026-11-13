@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer une aire en découpant. Comment trouver l'aire d'une figure qui n'est pas un rectangle ?",
+  "01-situation": "Voici Yanis. Il est architecte. Il dessine le plan d'un appartement en forme de L, sur un quadrillage. Chaque carreau fait 1 mètre carré. Quelle est l'aire de l'appartement ?",
+  "02-decouper": "Le L n'est pas un rectangle. Mais on peut le découper en deux rectangles. En haut, 2 rangées de 6 carreaux. En bas, 3 rangées de 2 carreaux.",
+  "03-additionner": "On calcule l'aire de chaque partie. En haut : 2 fois 6, 12. En bas : 3 fois 2, 6. Puis on ajoute les deux aires : 12 plus 6, 18. L'appartement fait 18 mètres carrés.",
+  "04-autrement": "On peut aussi découper autrement. À gauche : 5 rangées de 2, 10. À droite : 2 rangées de 4, 8. 10 plus 8, 18. Toujours 18 mètres carrés ! La façon de découper ne change pas l'aire.",
+  "05-question": "Question ! Une figure est faite de deux rectangles : l'un de 8 carreaux, l'autre de 5 carreaux. Quelle est son aire ? A : 40 carreaux. B : 3 carreaux. C : 13 carreaux. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. On ajoute les aires des deux parties : 8 plus 5, 13. L'aire est de 13 carreaux.",
+  "06-piege": "Attention au piège ! Quand on découpe, les parties ne doivent pas se chevaucher. Un carreau compté deux fois, et on trouve trop. Et on n'oublie aucun carreau. Chaque carreau compte une seule fois !",
+  "07-question": "Question ! Une figure est faite d'un rectangle de 2 rangées de 4 carreaux, et d'un carré de 2 carreaux de côté. Quelle est son aire ? A : 10 carreaux. B : 12 carreaux. C : 16 carreaux. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le rectangle : 2 fois 4, 8. Le carré : 2 fois 2, 4. 8 plus 4, 12. L'aire est de 12 carreaux.",
+  "08-defi": "À toi de jouer ! Yanis dessine une terrasse en forme de T. En haut, une bande de 1 rangée de 7 carreaux. En dessous, une partie de 4 rangées de 3 carreaux. Chaque carreau fait 1 mètre carré. Quelle est l'aire de la terrasse ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La bande du haut : 1 fois 7, 7 mètres carrés. La partie du bas : 4 fois 3, 12 mètres carrés. On ajoute : 7 plus 12, 19. La terrasse fait 19 mètres carrés.",
+  "09-finale": "Ce que tu as appris. Une figure qui n'est pas un rectangle, on la découpe en rectangles. On calcule l'aire de chaque partie, puis on ajoute. Chaque carreau compte une seule fois.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

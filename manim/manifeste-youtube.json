@@ -78234,6 +78234,159 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-aire-carre-rectangle",
+      "pas_avant": "2026-12-30",
+      "notionId": "aire",
+      "microId": "aire_carre_rectangle",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.mp4",
+      "miniature": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.png",
+      "titre": "4 rangées de 6 salades : combien de mètres carrés ? — L'aire du rectangle et du carré — épisode 3 · Maths CM1",
+      "accroche": "Lina est maraîchère. Elle plante des salades dans une parcelle rectangulaire, une salade par mètre carré. Combien de mètres carrés fait la parcelle, sans compter les cases une par une ?\n\nDans cette vidéo :\n• compter rangée par rangée : 6 + 6 + 6 + 6\n• plus rapide : on multiplie, 4 × 6 = 24 m²\n• l'aire d'un carré : le côté fois le côté\n• le piège : on n'ajoute pas 4 + 6, et on ne fait pas le tour (c'est le périmètre)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un jardin de 6 rangées de 8 cases, dont 20 déjà plantées.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple\n\n📐 Épisode 3 de la série Aire d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Compter les carreaux sans les compter ?"
+        ],
+        [
+          "00:06",
+          "Lina, maraîchère"
+        ],
+        [
+          "00:24",
+          "Rangée par rangée"
+        ],
+        [
+          "00:39",
+          "On multiplie"
+        ],
+        [
+          "00:57",
+          "L'aire d'un carré"
+        ],
+        [
+          "01:14",
+          "Question 1"
+        ],
+        [
+          "01:43",
+          "Le piège : ajouter ou faire le tour"
+        ],
+        [
+          "02:04",
+          "Question 2"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:48",
+          "Correction"
+        ],
+        [
+          "03:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "aire du rectangle",
+        "aire du carré",
+        "mètre carré",
+        "multiplier",
+        "rangées",
+        "maraîchère",
+        "potager",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:14",
+          "question": "Un rectangle a 3 rangées de 7 carreaux. Quelle est son aire ?",
+          "choix": [
+            "21 carreaux",
+            "10 carreaux",
+            "20 carreaux"
+          ],
+          "reponse": 0,
+          "explication": "3 rangées de 7 : 3 × 7 = 21. L'aire est de 21 carreaux."
+        },
+        {
+          "t": "02:04",
+          "question": "Un carré a 3 carreaux de côté. Quelle est son aire ?",
+          "choix": [
+            "12 carreaux",
+            "6 carreaux",
+            "9 carreaux"
+          ],
+          "reponse": 2,
+          "explication": "3 rangées de 3 carreaux : 3 × 3 = 9. L'aire du carré est de 9 carreaux."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm1-aire-carre-rectangle-short",
+      "pas_avant": "2026-12-30",
+      "notionId": "aire",
+      "microId": "aire_carre_rectangle",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-aire-carre-rectangle",
+      "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle-short.mp4",
+      "miniature": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle-short-miniature.png",
+      "titre": "Je compte 40 carreaux un par un… et je me perds ! #maths #cm1",
+      "accroche": "Ti Margo compte les carreaux de sa terrasse un par un : 1, 2, 3… 37, 38… perdu ! Sa petite sœur rigole : regarde les rangées ! 8 rangées de 5 carreaux, pas besoin de tout compter.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un carré de 6 carreaux de côté. Combien de carreaux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "tags": [
+        "aire du rectangle",
+        "rangées",
+        "multiplier",
+        "carreaux",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "8 rangées de 5 carreaux, ça fait combien de carreaux ?",
+          "choix": [
+            "13",
+            "40",
+            "35"
+          ],
+          "reponse": 1,
+          "explication": "8 × 5 : 40 carreaux. En une seconde !"
+        }
+      ],
+      "centres": [
+        "construction",
+        "jeux-defis"
+      ]
     }
   ]
 }

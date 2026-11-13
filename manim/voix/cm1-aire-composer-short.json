@@ -1,0 +1,9 @@
+{
+  "00-accroche": "J'ai fait un gâteau en forme de L pour mon anniversaire ! Combien de parts carrées ? Ce n'est pas un rectangle… je suis bloqué !",
+  "01-decouper": "Ma petite sœur prend le couteau : on coupe en deux rectangles ! En haut, 2 rangées de 4 parts. En bas, 2 rangées de 2 parts.",
+  "02-question": "Question ! 2 fois 4, plus 2 fois 2, ça fait combien de parts ? A : 10. B : 16. C : 12. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 8 plus 4 : 12 parts de gâteau. Une pour chaque copain !",
+  "03-ouf": "Ouf ! Onze copains… et une part pour moi !",
+  "04-commentaire": "À toi : un gâteau fait d'un rectangle de 3 rangées de 5 parts, et d'un carré de 2 parts de côté. Combien de parts ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

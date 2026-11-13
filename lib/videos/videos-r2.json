@@ -5758,6 +5758,24 @@
   "short": true,
   "youtube": null
  },
+ "cm1-aire-carre-rectangle": {
+  "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.mp4",
+  "poster": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.png",
+  "vignette": null,
+  "titre": "4 rangées de 6 salades : combien de mètres carrés ? — L'aire du rectangle et du carré — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple"
+ },
+ "cm1-aire-carre-rectangle-short": {
+  "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle-short.mp4",
+  "poster": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle-short-miniature.png",
+  "vignette": null,
+  "titre": "Je compte 40 carreaux un par un… et je me perds ! #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple"
+ },
  "cm1-aire-comprendre": {
   "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.mp4",
   "poster": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.png",
