@@ -132,7 +132,11 @@ EP = [
     ("premiere-spe", "26-limite", "verte",
      ["COMPRENDRE LA LIMITE", "D'UNE SUITE"], "360 → 280 → 240 → …", "+ lim u_{n} = 200",
      "blanche", ["JUSQU'OÙ", "ÇA DESCEND ?"], "le gâteau qui refroidit",
-     [("180 → 100 → 60 → …", 90, BLEU), ("→ ? °C", 110, VERT)]),
+     [("180 → 100 → 60 → …", 72, BLEU), ("→ ? °C", 110, VERT)]),
+    ("premiere-spe", "27-auxiliaire", "bleue",
+     ["SUITE AUXILIAIRE", "LA MÉTHODE DU BAC"], "u_{n+1} = 0,9u_{n} + 300", "+ L = 3 000",
+     "blanche", ["L'ÉQUILIBRE", "EN UNE LIGNE"], "le médicament dans le sang",
+     [("L = 0,5L + 40", 80, BLEU), ("L = ?", 110, VERT)]),
 ]
 # Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
 from suites_terminale_donnees import EP_TLE  # noqa: E402

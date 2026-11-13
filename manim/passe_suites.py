@@ -446,6 +446,21 @@ EPS = [
          sa="Lou est pâtissière : son gâteau sort du four à 180 °C. Minute après minute, sa température suit uₙ₊₁ = 0,5uₙ + 10 : 180, 100, 60, 40, 30, 25 degrés…",
          stoi="avec uₙ₊₁ = 0,5uₙ + 12, vers quelle température le gâteau tend-il ?", srep="24 °C : L = 0,5L + 12 donne L = 24.",
          stags=["pâtisserie", "gâteau", "température", "limite", "suites"]),
+    dict(num="27", slug="auxiliaire", classe="premiere-spe", notion="suites", micro="suite_auxiliaire",
+         ceinture="bleue", sc="blanche", centres=["nature-ecologie", "sciences"], scentres=["corps-sante", "sciences"],
+         titre="La forêt va-t-elle disparaître ? — Suite auxiliaire, la méthode du bac — épisode 27 · Maths 1re spé",
+         intro="Manon est technicienne forestière : une forêt compte 5 000 arbres. Chaque année, on coupe 10 % des arbres, puis on en plante 300. La forêt va-t-elle disparaître ? La méthode du bac pour trouver la formule de uₙ quand on multiplie ET on ajoute.",
+         puces=["uₙ₊₁ = 0,9uₙ + 300 : ni arithmétique, ni géométrique", "étape 1 : la valeur d'équilibre, L = 0,9L + 300 donne L = 3 000", "étape 2 : vₙ = uₙ − 3 000 est géométrique de raison 0,9", "étape 3 : v₀ = 2 000, vₙ = 2 000 × 0,9ⁿ, puis uₙ = 2 000 × 0,9ⁿ + 3 000", "étape 4 : 0,9ⁿ → 0, donc uₙ → 3 000 : la forêt se stabilise", "le piège : la raison de v est 0,9 (pas 300), et on rajoute L à la fin"],
+         defi="u₀ = 5 et, pour tout entier naturel n, uₙ₊₁ = 3uₙ − 4. Trouve L, montre que vₙ = uₙ − L est géométrique, puis donne uₙ et sa limite.",
+         chap={"00-garde": "Suite auxiliaire", "01-situation": "Manon, technicienne forestière", "02-modele": "Le modèle", "03-point-fixe": "Étape 1 : l'équilibre L", "04-question": "Question 1", "05-auxiliaire": "Étape 2 : vₙ = uₙ − L", "06-formule": "Étape 3 : la formule", "07-question": "Question 2", "08-piege": "Le piège", "09-limite": "Étape 4 : la limite", "10-defi": "À toi de jouer", "10b-correction": "Correction", "11-finale": "Ce que tu as appris"},
+         qs=[("04-question", "Avec uₙ₊₁ = 0,5uₙ + 8, la valeur d'équilibre L vaut :", ["8", "16", "4"], 1, "L = 0,5L + 8, donc 0,5L = 8, et L = 16."),
+             ("07-question", "u₀ = 10, uₙ₊₁ = 0,5uₙ + 8 et vₙ = uₙ − 16. Combien vaut v₀ ?", ["−16", "26", "−6"], 2, "v₀ = u₀ − L = 10 − 16 = −6.")],
+         tags=["suites", "suite auxiliaire", "suite arithmético-géométrique", "valeur d'équilibre", "méthode du bac", "forêt", "arbres"],
+         st="Le médicament dans le sang : l'équilibre en une ligne 💊 — 1re spé #Shorts",
+         sq=("03-question", "Avec vₙ = uₙ − 80, la suite v est géométrique de raison :", ["0,5", "80", "40"], 0, "La raison de v, c'est le coefficient devant uₙ : 0,5."),
+         sa="Samuel est infirmier : son patient a 100 mg d'un médicament dans le sang. Chaque jour, le corps en élimine la moitié, puis il reçoit 40 mg : uₙ₊₁ = 0,5uₙ + 40. À l'équilibre, L = 0,5L + 40 donne L = 80.",
+         stoi="avec u₀ = 100, combien de milligrammes reste-t-il au jour 3 ?", srep="82,5 mg : u₁ = 90, u₂ = 85, u₃ = 82,5.",
+         stags=["infirmier", "médicament", "santé", "suite auxiliaire", "suites"]),
 ]
 # Les 4 vidéos communes : la même vidéo sert aussi la micro de la classe du dessus.
 AUSSI = {
