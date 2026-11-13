@@ -263,35 +263,36 @@ class SuiteLimite1reSpe(Bords6Textes, Bords6Objets, AuditMilliers, OutilsSommes,
         self.nouvel_ecran("03-conjecture")
         rp = Repere((0, 8), (0, 400), P(-5.3, -2.55), P(-1.05, 2.45), grad_u=(100, 200, 300, 400), grad_n=(2, 4, 6, 8))
         pts = [rp.point(n, v) for n, v in enumerate(PORT[:8])]
-        xc, lc = 3.1, 5.4
-        self.ecrire([[("Les termes se rapprochent", WHITE, "Les termes")]], 2.6, centre=xc, fs=36, larg=lc,
-                    avec=[FadeIn(rp), LaggedStart(*[GrowFromCenter(p) for p in pts], lag_ratio=0.12)], run_time=1.0)
+        xc, lc = 3.25, 5.8
+        self.ecrire([[("Les termes se", WHITE, "Les termes")]], 2.95, centre=xc, fs=46, larg=lc,
+                    avec=[FadeIn(rp), LaggedStart(*[GrowFromCenter(p) for p in pts], lag_ratio=0.12)], run_time=0.45)
         dr = rp.droite(200)
         l200 = self.t("200", 32, JUSTE, audit=False).next_to(dr, RIGHT, buff=0.12)
-        self.ecrire([[("de", WHITE, None), ("200,", JUSTE, "200"), ("de plus en plus près", WHITE, "de plus en plus")]],
-                    2.05, centre=xc, fs=36, larg=lc, avec=[Create(dr), FadeIn(l200)])
+        self.ecrire([[("rapprochent de", WHITE, "rapprochent"), ("200,", JUSTE, "200")]], 2.35, centre=xc, fs=46, larg=lc,
+                    avec=[Create(dr), FadeIn(l200)])
+        self.ecrire([[("de plus en plus près", WHITE, "de plus en plus")]], 1.75, centre=xc, fs=46, larg=lc)
         ecarts = VGroup(*[Line(p.get_center() + DOWN * 0.1, P(p.get_x(), dr.get_y()), stroke_color=RAISON, stroke_width=4)
                           for p in pts[:5]])
         self.play(LaggedStart(*[Create(e) for e in ecarts], lag_ratio=0.2), run_time=0.8)
-        lim = self.t("lim", 54, WHITE, audit=False)
-        sous = self.t("n → +∞", 30, WHITE, audit=False).next_to(lim, DOWN, buff=0.08)
-        un, (pu,) = self.ligne([("u_{n}", TERME, None)], 54)
+        lim = self.t("lim", 62, WHITE, audit=False)
+        sous = self.t("n → +∞", 38, WHITE, audit=False).next_to(lim, DOWN, buff=0.1)  # ≈ 61 % de « lim »
+        un, (pu,) = self.ligne([("u_{n}", TERME, None)], 62)
         un.next_to(lim, RIGHT, buff=0.22).align_to(lim, DOWN).shift(DOWN * 0.04)
-        eg, peg = self.ligne([("=", WHITE, None), ("200", JUSTE, None)], 54)
+        eg, peg = self.ligne([("=", WHITE, None), ("200", JUSTE, None)], 62)
         eg.next_to(un, RIGHT, buff=0.22).align_to(lim, DOWN)
-        bloc = VGroup(lim, sous, un, eg).move_to(P(xc, 0.75))
+        bloc = VGroup(lim, sous, un, eg).move_to(P(xc, 0.42))
         self.au_mot("la limite")
         self.play(FadeIn(lim, shift=UP * 0.1), FadeIn(un, shift=UP * 0.1), run_time=0.3)
         self.au_mot("quand n tend")
         self.play(FadeIn(sous, shift=UP * 0.1), run_time=0.3)
         self.au_mot("est 200")
         self.play(FadeIn(eg, shift=UP * 0.1), run_time=0.3)
-        self.play(Create(self.encadre(bloc, JUSTE, 0.18)), Indicate(dr, color=JUSTE), run_time=0.4)
-        self.ecrire([[("La suite semble", WHITE, "la suite semble")]], -0.6, centre=xc, fs=36, larg=lc)
-        self.ecrire([[("tendre vers", WHITE, "tendre"), ("200.", JUSTE, "200")]], -1.12, centre=xc, fs=36, larg=lc)
-        self.ecrire([[("Pas besoin d'agrandir :", JAUNE_TITRE, "Pas besoin")]], -1.75, centre=xc, fs=36, larg=lc)
-        self.ecrire([[("autour de", WHITE, "autour"), ("200 bateaux", JUSTE, "200 bateaux")]], -2.27,
-                    centre=xc - 0.3, fs=36, larg=lc - 0.4)
+        self.play(Create(self.encadre(bloc, JUSTE, 0.32)), Indicate(dr, color=JUSTE), run_time=0.4)
+        self.ecrire([[("La suite semble", WHITE, "la suite semble")]], -0.78, centre=xc, fs=40, larg=lc)
+        self.ecrire([[("tendre vers", WHITE, "tendre"), ("200.", JUSTE, "200")]], -1.3, centre=xc, fs=40, larg=lc)
+        self.ecrire([[("Pas besoin d'agrandir :", JAUNE_TITRE, "Pas besoin")]], -1.9, centre=xc, fs=38, larg=lc)
+        self.ecrire([[("autour de", WHITE, "autour"), ("200 bateaux", JUSTE, "200 bateaux")]], -2.4,
+                    centre=xc - 0.4, fs=38, larg=lc - 0.9)
         self.attendre_voix(marge=0.5)
 
     # ── 04 : sans calculer les termes : L = 0,5L + 100 ────────────────────
@@ -345,36 +346,37 @@ class SuiteLimite1reSpe(Bords6Textes, Bords6Objets, AuditMilliers, OutilsSommes,
 
     def ecran_references(self):
         self.nouvel_ecran("06-references")
-        self.titre("Quelques limites à connaître", JAUNE_TITRE, 46, extrait="Quelques limites", y=3.2)
-        xs, yc, w, h = (-4.05, 0.0, 4.05), 0.02, 3.8, 4.5
+        self.titre("Quelques limites à connaître", JAUNE_TITRE, 46, extrait="Quelques limites", y=3.17)
+        xs, yc, w, h = (-4.15, 0.0, 4.15), 0.24, 4.0, 5.0   # cartes hautes (vers le haut), 6 % de marge
         cartes = [self.carte(w, h, P(x, yc)) for x in xs]
         self.play(*[FadeIn(c) for c in cartes], run_time=0.3)
-        lc = w - 0.5
+        lc = w - 0.9                                     # marge intérieure des cartes
+        yn = -1.3                                        # les petits graphiques, en bas des cartes
         # 1/n → 0
-        m1 = mini_lim([1 / k for k in range(1, 9)], 0, 3.1, 1.7, P(xs[0], -1.25), ua=-0.15)
+        m1 = mini_lim([1 / k for k in range(1, 9)], 0, 3.3, 1.6, P(xs[0], yn), ua=-0.15)
         self.play(FadeIn(m1.axes), run_time=0.2)
         self.ecrire([("frac", [("1", WHITE, "1 sur n")], [("n", TERME, None)]), [("→ 0", JUSTE, "s'approche de 0")]],
-                    1.35, centre=xs[0], fs=54, larg=lc,
+                    1.45, centre=xs[0], fs=76, larg=lc,
                     avec=[LaggedStart(*[GrowFromCenter(p) for p in m1.pts], lag_ratio=0.15), Create(m1.ligne)])
         # n² et 2ⁿ → +∞
-        m2 = mini_lim([k ** 2 for k in range(7)], None, 3.1, 1.7, P(xs[1], -1.25))
-        fl2 = Arrow(m2.pts[-1].get_center() + DOWN * 0.05, m2.pts[-1].get_center() + UP * 0.42 + RIGHT * 0.1,
+        m2 = mini_lim([k ** 2 for k in range(7)], None, 3.3, 1.6, P(xs[1], yn))
+        fl2 = Arrow(m2.pts[-1].get_center() + DOWN * 0.05, m2.pts[-1].get_center() + UP * 0.38 + RIGHT * 0.1,
                     buff=0.1, color=JUSTE, stroke_width=5, max_tip_length_to_length_ratio=0.35)
-        self.ecrire([[("n²", TERME, "n au carré"), ("et", WHITE, None), ("2ⁿ", TERME, "2 puissance n")]], 1.75,
-                    centre=xs[1], fs=50, larg=lc, avec=[FadeIn(m2.axes)])
-        self.ecrire([[("dépassent", WHITE, "dépassent")]], 1.16, centre=xs[1], fs=34, larg=lc,
+        self.ecrire([[("n²", TERME, "n au carré"), ("et", WHITE, None), ("2ⁿ", TERME, "2 puissance n")]], 2.22,
+                    centre=xs[1], fs=62, larg=lc, avec=[FadeIn(m2.axes)])
+        self.ecrire([[("dépassent", WHITE, "dépassent")]], 1.52, centre=xs[1], fs=44, larg=lc,
                     avec=[LaggedStart(*[GrowFromCenter(p) for p in m2.pts], lag_ratio=0.15)])
-        self.ecrire([[("tout nombre :", WHITE, "tout nombre")]], 0.72, centre=xs[1], fs=34, larg=lc)
-        self.ecrire([[("→ +∞", JUSTE, "plus l'infini")]], 0.1, centre=xs[1], fs=46, larg=lc, avec=[GrowArrow(fl2)])
-        # −1 < q < 1 : qⁿ → 0 (0,5ⁿ)
-        m3 = mini_lim([0.5 ** k for k in range(8)], 0, 3.1, 1.7, P(xs[2], -1.25), ua=-0.15)
+        self.ecrire([[("tout nombre :", WHITE, "tout nombre")]], 0.9, centre=xs[1], fs=44, larg=lc)
+        self.ecrire([[("→ +∞", JUSTE, "plus l'infini")]], 0.1, centre=xs[1], fs=68, larg=lc, avec=[GrowArrow(fl2)])
+        # −1 < q < 1 : qⁿ → 0 ; par exemple 0,5ⁿ
+        m3 = mini_lim([0.5 ** k for k in range(8)], 0, 3.3, 1.6, P(xs[2], yn), ua=-0.15)
         self.ecrire([[("Si", WHITE, "pour q"), ("−1 <", WHITE, "moins 1"), ("q", RAISON, None), ("< 1 :", WHITE, "et 1")]],
-                    1.7, centre=xs[2], fs=46, larg=lc, avec=[FadeIn(m3.axes)])
-        self.ecrire([[("qⁿ", RAISON, "q puissance n"), ("→ 0", JUSTE, "tend vers 0")]], 1.03, centre=xs[2], fs=48,
+                    2.22, centre=xs[2], fs=46, larg=lc, avec=[FadeIn(m3.axes)])
+        self.ecrire([[("qⁿ", RAISON, "q puissance n"), ("→ 0", JUSTE, "tend vers 0")]], 1.38, centre=xs[2], fs=70,
                     larg=lc)
-        self.ecrire([[("par exemple :", GREY_A, "par exemple"), ("0,5ⁿ", RAISON, "0,5 puissance")]], 0.42, centre=xs[2],
-                    fs=40, larg=lc, avec=[LaggedStart(*[GrowFromCenter(p) for p in m3.pts], lag_ratio=0.15),
-                                          Create(m3.ligne)])
+        self.ecrire([[("par exemple :", GREY_A, "par exemple")]], 0.7, centre=xs[2], fs=42, larg=lc)
+        self.ecrire([[("0,5ⁿ", RAISON, "0,5 puissance")]], -0.1, centre=xs[2], fs=60, larg=lc,
+                    avec=[LaggedStart(*[GrowFromCenter(p) for p in m3.pts], lag_ratio=0.15), Create(m3.ligne)])
         self.attendre_voix(marge=0.5)
 
     # ── 07 : le piège : raison 2, mais u₀ = −3 → −∞ ──────────────────────
