@@ -31,3 +31,9 @@ Seul « reste » connu de l'audit : `AUDIT-ABSENT 10-abonne « 974 » (@eleveai9
 7. Coach : `node scripts/brancher-videos-coach.mjs --classe ce2 --notion perimetre` (lecture seule) — `--ecrire` APRÈS le push du chef d'orchestre.
 
 ⛔ RAM : un seul rendu HD sur le PC (verrou), aperçus `-ql`, rien sous 2,5 Go libres, un seul processus manim à soi, aucun sous-agent qui rend.
+
+## Dry run 02 (fin de session 2) : à corriger
+- `TypeError: find() argument 1 must be str` dans `ecran_correction` (08b) : `somme_au_mot(..., ("Plus 3", k + 1), ...)` passe un tuple ; `au_mot` attend `(extrait, n)` séparés → ajouter un paramètre `n` à `somme_au_mot` et appeler `self.au_mot(mot, n)`. Attention : « 3 plus 3 » compte pour un « Plus 3 » ? (au_mot est sensible à la casse : « Plus 3 » majuscule = les 4 seules occurrences).
+- 03-calcul : RETARD « Plus 3 » 1,0 s et 3,05 s (les 3 « Plus 3 » : passer n = 1, 2, 3 à au_mot, sinon il retrouve le 1er) ; BORD : étiquette « 5 m » à x −6,7 → centre du potager −3,5.
+- 07-question : AUDIT-TARD sur « 4, 6, 3, 5 et 7 » (la ligne de question paraît d'un bloc) → écrire la question sans les nombres sur la 1re ligne (« Une figure a 5 côtés. ») et les nombres sur les étiquettes de la figure, ou couper la ligne.
+- TARD : 02 « abord » (le texte « D'abord, on compte les côtés. » au mot « D'abord ») ; 05 « mesure » (poser « mesure 1 cm. » au mot « mesure ») ; 08 « parterre » (l0[1] au mot « un parterre »). RETARD 00 « oublier un côté » 0,34 s : raccourcir l'animation d'avant.
