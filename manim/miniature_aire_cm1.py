@@ -35,6 +35,8 @@ EP = [
     # Série PÉRIMÈTRE du CM1 (9e champ : la notion, sinon « aire ») ; python manim/miniature_aire_cm1.py perimetre-triangle
     ("triangle", "01-triangle", ["CALCULER LE PÉRIMÈTRE", "D'UN TRIANGLE"], "20 + 25 + 25 = 70 cm",
      "on ajoute les 3 côtés !", True, "jaune", (0, 0), "perimetre"),
+    ("quadrilatere", "02-quadrilatere", ["CALCULER LE PÉRIMÈTRE", "D'UN RECTANGLE"], "(60 + 40) × 2 = 200 cm",
+     "la moitié du tour, × 2 !", True, "jaune", (0, 0), "perimetre"),
 ]
 
 

@@ -6082,6 +6082,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_unite&display=simple"
  },
+ "cm1-perimetre-quadrilatere": {
+  "fichier": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere.mp4",
+  "poster": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere.png",
+  "vignette": null,
+  "titre": "Combien de baguette pour encadrer un tableau ? — Calculer le périmètre d'un rectangle ou d'un carré — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_quadrilatere&display=simple"
+ },
+ "cm1-perimetre-quadrilatere-short": {
+  "fichier": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere-short.mp4",
+  "poster": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere-short-miniature.png",
+  "vignette": null,
+  "titre": "J'ai fait le tour du terrain en 30 pas… vraiment ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_quadrilatere&display=simple"
+ },
  "cm1-perimetre-triangle": {
   "fichier": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle.mp4",
   "poster": "cm1/maths/perimetre/01-triangle/eleveai-maths-cm1-perimetre-triangle.png",

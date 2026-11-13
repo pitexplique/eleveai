@@ -106,3 +106,13 @@ Série aire CM1 terminée. Suite du plan CM1 (`PLAN-perimetre-aire-volume.md`) :
 
 ## Prochaine étape (session 8)
 Ép. 2 `perimetre_quadrilatere` (Lucas, encadreur ; ceinture jaune ; questions B, A ; short C), puis ép. 3 polygone (verte), ép. 4 défi (bleue) : même chaîne. Dates libres : 03/01 (0 paysage), 04/01, 05/01… (≤ 2 paysages et 5 vidéos par jour).
+
+## Fait le 13/11 (session 8) — ✅ PÉRIMÈTRE ép. 2 QUADRILATÈRE fini
+- ✅ `manim/scripts/cm1/perimetre_quadrilatere.py` (`PerimetreQuadrilatereCM1`, Lucas encadreur ; `pts_rect`, `tableau` (toile + cadre de bois), `baguette` dans le script) : dry run AUDIT propre (seul « 974 »), planche -ql relue deux fois, HD `manim/sorties/cm1/maths/perimetre/02-quadrilatere/` (3 min 46), bords 0. Questions 01:14 B, 02:09 A.
+  - ⚠️ Leçons : `autres_r` (animation jouée avant la phrase de réponse) retarde la 1re ligne si elle commence par un nombre (« 9 + 5 ») → pas d'`autres_r` dans ce cas ; une ligne de ≥ 30 caractères en 34 est réduite par `col` → la couper sur deux rangs (`pile`) ; RETARD = l'animation d'avant est trop longue (0,2 s suffit).
+- ✅ Short « La moitié du tour » (`films/cm1-perimetre-quadrilatere.js`, 67 s) : terrain 20 × 10 pas, Ti Margo s'arrête à 30 pas, réponse C 60. Étiquettes des côtés verticaux : taille 46, écart 96 (sinon coupées au bord ou collées au calcul).
+- Miniatures, manifeste `cm1-perimetre-quadrilatere` (jaune, art-design + construction) + `-short` (blanche, 00:18 C) le **03/01/2027** ; fiche YouTube ; R2 du dossier 02-quadrilatere seul ; `generer-videos-r2.mjs` ; coach branché (2 vidéos).
+- ⚠️ Une autre session a déjà l'ép. 3 polygone en cours (entrée `cm1-perimetre-polygone` dans `videos-r2.json` non commitée) : ne pas la reprendre ici.
+
+## Prochaine étape (session 9)
+Ép. 3 polygone : voir la session qui l'a commencé. Puis ép. 4 défi (bleue). Dates libres : 04/01 (1 paysage), 05/01… (≤ 2 paysages et 5 vidéos par jour).

@@ -42,7 +42,7 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 **Périmètre** (5)
 - [ ] Comprendre ce qu’est un périmètre — `perimetre_comprendre` — ↪ vidéo CE2 `ce2_perimetre_comprendre` par `aussi` (pas de vidéo CM1)
 - [x] Calculer le périmètre d’un triangle — `perimetre_triangle` — ✅ 13/11 voix validée ; ✅ 13/11 paysage HD (3 min 43, bords 0) + short dessin animé « La guirlande du fanion », manifeste 02/01/2027, R2, coach (`manim/sorties/cm1/maths/perimetre/01-triangle/`)
-- [ ] Calculer le périmètre d’un quadrilatère — `perimetre_quadrilatere` — ✅ 13/11 voix validée (WAV + marques)
+- [x] Calculer le périmètre d’un quadrilatère — `perimetre_quadrilatere` — ✅ 13/11 voix validée ; ✅ 13/11 paysage HD (3 min 46, bords 0) + short dessin animé « La moitié du tour », manifeste 03/01/2027, R2, coach (`manim/sorties/cm1/maths/perimetre/02-quadrilatere/`)
 - [ ] Calculer le périmètre d’un polygone simple — `perimetre_polygone` — ✅ 13/11 voix validée (WAV + marques)
 - [ ] Résoudre un défi de périmètre — `perimetre_defi` — ✅ 13/11 voix validée (WAV + marques)
 

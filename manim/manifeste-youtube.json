@@ -81300,6 +81300,160 @@
         "art-design",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-perimetre-quadrilatere",
+      "pas_avant": "2027-01-03",
+      "notionId": "perimetre",
+      "microId": "perimetre_quadrilatere",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere.mp4",
+      "miniature": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere.png",
+      "titre": "Combien de baguette pour encadrer un tableau ? — Calculer le périmètre d'un rectangle ou d'un carré — épisode 2 · Maths CM1",
+      "accroche": "Lucas est encadreur. Il fabrique des cadres en bois pour les tableaux. Pour un tableau de 60 cm sur 40 cm, combien de centimètres de baguette lui faut-il ?\n\nDans cette vidéo :\n• un rectangle a 4 côtés, les côtés d'en face sont égaux\n• on fait le tour : 60 + 40 + 60 + 40 = 200 cm\n• plus vite : (longueur + largeur) × 2, la moitié du tour fois 2\n• un carré : le côté × 4 (35 × 4 = 140 cm)\n• le piège : l'aire (les carreaux du dedans) n'est pas le périmètre (le tour)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien de baguette reste-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_quadrilatere&display=simple\n\n📏 Épisode 2 de la série Périmètre d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le périmètre d'un rectangle ou d'un carré"
+        ],
+        [
+          "00:07",
+          "Lucas, encadreur"
+        ],
+        [
+          "00:20",
+          "Le rectangle : côtés d'en face égaux"
+        ],
+        [
+          "00:38",
+          "On fait le tour, puis × 2"
+        ],
+        [
+          "01:00",
+          "Le carré : côté × 4"
+        ],
+        [
+          "01:14",
+          "Question 1"
+        ],
+        [
+          "01:51",
+          "Le piège : aire ou périmètre ?"
+        ],
+        [
+          "02:09",
+          "Question 2"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "rectangle",
+        "carré",
+        "périmètre d'un rectangle",
+        "périmètre d'un carré",
+        "longueur",
+        "largeur",
+        "aire et périmètre",
+        "centimètre",
+        "encadreur",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:14",
+          "question": "Un rectangle mesure 9 cm de long et 5 cm de large. Quel est son périmètre ?",
+          "choix": [
+            "14 cm",
+            "28 cm",
+            "45 cm"
+          ],
+          "reponse": 1,
+          "explication": "9 + 5 = 14 : c'est la moitié du tour. 14 × 2 = 28. Le périmètre est de 28 cm."
+        },
+        {
+          "t": "02:09",
+          "question": "Un carré a des côtés de 12 cm. Quel est son périmètre ?",
+          "choix": [
+            "48 cm",
+            "24 cm",
+            "144 cm"
+          ],
+          "reponse": 0,
+          "explication": "Un carré a 4 côtés égaux : 12 × 4 = 48. Le périmètre est de 48 cm."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "construction"
+      ]
+    },
+    {
+      "id": "cm1-perimetre-quadrilatere-short",
+      "pas_avant": "2027-01-03",
+      "notionId": "perimetre",
+      "microId": "perimetre_quadrilatere",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-perimetre-quadrilatere",
+      "fichier": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere-short.mp4",
+      "miniature": "cm1/maths/perimetre/02-quadrilatere/eleveai-maths-cm1-perimetre-quadrilatere-short-miniature.png",
+      "titre": "J'ai fait le tour du terrain en 30 pas… vraiment ? #maths #cm1",
+      "accroche": "Le maître demande à Ti Margo de faire le tour du terrain en comptant ses pas : 20 pas de long, 10 pas de large. Il compte 20 + 10 = 30 pas, et c'est fini… vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un terrain carré de 15 pas de côté. Combien de pas pour en faire le tour ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_quadrilatere&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #perimetre #cm1",
+      "tags": [
+        "périmètre",
+        "rectangle",
+        "moitié du tour",
+        "terrain",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "20 + 10, + 20, + 10 : combien de pas pour tout le tour ?",
+          "choix": [
+            "30",
+            "200",
+            "60"
+          ],
+          "reponse": 2,
+          "explication": "30 pas, c'est la moitié du tour. Fois 2 : 60 pas pour tout le tour."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
     }
   ]
 }
