@@ -74565,6 +74565,312 @@
       ]
     },
     {
+      "id": "cm1-aire-composer",
+      "pas_avant": "2026-12-31",
+      "notionId": "aire",
+      "microId": "aire_composer",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/aire/04-composer/eleveai-maths-cm1-aire-composer.mp4",
+      "miniature": "cm1/maths/aire/04-composer/eleveai-maths-cm1-aire-composer.png",
+      "titre": "Un appartement en L : combien de mètres carrés ? — Calculer une aire en découpant — épisode 4 · Maths CM1",
+      "accroche": "Yanis est architecte. Il dessine le plan d'un appartement en forme de L, sur un quadrillage : chaque carreau fait 1 mètre carré. Ce n'est pas un rectangle… alors comment trouver son aire ?\n\nDans cette vidéo :\n• découper le L en deux rectangles : 2 × 6 = 12 et 3 × 2 = 6\n• puis ajouter les aires : 12 + 6 = 18 m²\n• découper autrement donne la même aire : 10 + 8 = 18 m²\n• le piège : les parties ne se chevauchent pas, et on n'oublie aucun carreau\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une terrasse en forme de T.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_composer&display=simple\n\n📐 Épisode 4 de la série Aire d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une aire qui n'est pas un rectangle ?"
+        ],
+        [
+          "00:07",
+          "Yanis, architecte"
+        ],
+        [
+          "00:22",
+          "Découper en rectangles"
+        ],
+        [
+          "00:34",
+          "On ajoute les aires"
+        ],
+        [
+          "00:50",
+          "Découper autrement"
+        ],
+        [
+          "01:08",
+          "Question 1"
+        ],
+        [
+          "01:41",
+          "Le piège : chevaucher ou oublier"
+        ],
+        [
+          "01:56",
+          "Question 2"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:54",
+          "Correction"
+        ],
+        [
+          "03:12",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "aire",
+        "figure composée",
+        "découper",
+        "mètre carré",
+        "rectangles",
+        "architecte",
+        "plan",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:08",
+          "question": "Une figure est faite de deux rectangles : l'un de 8 carreaux, l'autre de 5 carreaux. Quelle est son aire ?",
+          "choix": [
+            "40 carreaux",
+            "3 carreaux",
+            "13 carreaux"
+          ],
+          "reponse": 2,
+          "explication": "On ajoute les aires des deux parties : 8 + 5 = 13. L'aire est de 13 carreaux."
+        },
+        {
+          "t": "01:56",
+          "question": "Une figure est faite d'un rectangle de 2 rangées de 4 carreaux et d'un carré de 2 carreaux de côté. Quelle est son aire ?",
+          "choix": [
+            "10 carreaux",
+            "12 carreaux",
+            "16 carreaux"
+          ],
+          "reponse": 1,
+          "explication": "Le rectangle : 2 × 4 = 8. Le carré : 2 × 2 = 4. 8 + 4 = 12 : l'aire est de 12 carreaux."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-aire-composer-short",
+      "pas_avant": "2026-12-31",
+      "notionId": "aire",
+      "microId": "aire_composer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-aire-composer",
+      "fichier": "cm1/maths/aire/04-composer/eleveai-maths-cm1-aire-composer-short.mp4",
+      "miniature": "cm1/maths/aire/04-composer/eleveai-maths-cm1-aire-composer-short-miniature.png",
+      "titre": "Mon gâteau en L n'est pas un rectangle… combien de parts ? #maths #cm1",
+      "accroche": "Ti Margo a fait un gâteau en forme de L pour son anniversaire. Combien de parts carrées ? Ce n'est pas un rectangle… bloqué ! Sa petite sœur prend le couteau : on coupe en deux rectangles.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un gâteau fait d'un rectangle de 3 rangées de 5 parts, et d'un carré de 2 parts de côté. Combien de parts ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_composer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "tags": [
+        "aire",
+        "figure composée",
+        "découper",
+        "gâteau",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "2 × 4 + 2 × 2, ça fait combien de parts ?",
+          "choix": [
+            "10",
+            "16",
+            "12"
+          ],
+          "reponse": 2,
+          "explication": "8 + 4 : 12 parts de gâteau. Une pour chaque copain !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-aire-defi",
+      "pas_avant": "2027-01-01",
+      "notionId": "aire",
+      "microId": "aire_defi",
+      "classe": "cm1",
+      "ceinture": "bleue",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/aire/05-defi/eleveai-maths-cm1-aire-defi.mp4",
+      "miniature": "cm1/maths/aire/05-defi/eleveai-maths-cm1-aire-defi.png",
+      "titre": "Un mur avec une fenêtre : combien de mètres carrés à peindre ? — Défi d'aire — épisode 5 · Maths CM1",
+      "accroche": "Chloé est peintre en bâtiment. Elle doit peindre un mur quadrillé en carreaux de 1 mètre carré… mais il y a une fenêtre, qu'on ne peint pas ! Quelle surface faut-il peindre, et combien de pots acheter ?\n\nDans cette vidéo :\n• tout le mur d'abord : 3 × 8 = 24 m²\n• puis on enlève la fenêtre : 24 − 4 = 20 m²\n• un pot couvre 10 m² : il faut 2 pots\n• le piège : deux figures peuvent avoir le même tour, mais pas la même aire\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : le sol d'une salle en L, et le nombre de pots.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_defi&display=simple\n\n📐 Épisode 5 de la série Aire d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un défi d'aire"
+        ],
+        [
+          "00:06",
+          "Chloé, peintre en bâtiment"
+        ],
+        [
+          "00:25",
+          "Tout le mur"
+        ],
+        [
+          "00:36",
+          "On enlève la fenêtre"
+        ],
+        [
+          "00:49",
+          "Combien de pots ?"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:35",
+          "Le piège : même tour, pas même aire"
+        ],
+        [
+          "01:59",
+          "Question 2"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "03:06",
+          "Correction"
+        ],
+        [
+          "03:23",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "aire",
+        "problème d'aire",
+        "enlever",
+        "aire et périmètre",
+        "mètre carré",
+        "peintre",
+        "peinture",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Un mur de 4 rangées de 5 carreaux a une porte de 2 carreaux. Quelle surface faut-il peindre ?",
+          "choix": [
+            "18 m²",
+            "22 m²",
+            "20 m²"
+          ],
+          "reponse": 0,
+          "explication": "Le mur : 4 × 5 = 20. On enlève la porte : 20 − 2 = 18 m²."
+        },
+        {
+          "t": "01:59",
+          "question": "Le jardin de Chloé est un carré de 4 carreaux de côté. Celui de son voisin a 2 rangées de 7 carreaux. Qui a le jardin avec la plus grande aire ?",
+          "choix": [
+            "le voisin",
+            "Chloé",
+            "les deux ont la même aire"
+          ],
+          "reponse": 1,
+          "explication": "Chloé : 4 × 4 = 16 carreaux. Le voisin : 2 × 7 = 14 carreaux. 16, c'est plus que 14 : le jardin de Chloé a la plus grande aire."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-aire-defi-short",
+      "pas_avant": "2027-01-01",
+      "notionId": "aire",
+      "microId": "aire_defi",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-aire-defi",
+      "fichier": "cm1/maths/aire/05-defi/eleveai-maths-cm1-aire-defi-short.mp4",
+      "miniature": "cm1/maths/aire/05-defi/eleveai-maths-cm1-aire-defi-short-miniature.png",
+      "titre": "Sa clôture est plus longue… donc son jardin est plus grand ? #maths #cm1",
+      "accroche": "Noé se vante : la clôture de son jardin est plus longue que celle de Ti Margo. Donc son jardin est plus grand ? Ti Margo compte les carreaux : un carré de 5 sur 5, contre 3 rangées de 8.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une bande de 1 rangée de 9 carreaux, et un carré de 3 carreaux de côté. Lequel a la plus grande aire ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "tags": [
+        "aire",
+        "aire et périmètre",
+        "comparer des aires",
+        "jardin",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Qui a le jardin avec la plus grande aire ?",
+          "choix": [
+            "moi, Ti Margo",
+            "Noé",
+            "la même aire"
+          ],
+          "reponse": 0,
+          "explication": "Ti Margo : 5 × 5 = 25 carreaux. Noé : 3 × 8 = 24 carreaux. Une clôture plus longue, ça ne veut pas dire plus de place !"
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "premiere-suite-arith-reconnaitre",
       "notionId": "lin_suite_arithmetique",
       "microId": "lin_suite_reconnaitre",

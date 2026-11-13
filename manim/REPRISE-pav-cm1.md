@@ -75,3 +75,13 @@ Ceintures (proposées, validées avec les voix le 13/11) : paysages jaune (ép. 
 1. Ép. 4 : miniature paysage (`python manim/miniature_aire_cm1.py composer` — ajouter l'épisode au script s'il n'y est pas), manifeste `cm1-aire-composer` (verte, centres construction/art-design) + `-short` (blanche, question short à lire dans le contrôle : 02-question ≈ 00:21, rép 2) après le 30/12, fiche YouTube, R2 du dossier aire seul, `generer-videos-r2.mjs`, `brancher-videos-coach.mjs --id cm1-aire-composer,cm1-aire-composer-short --ecrire`.
 2. Ép. 5 : planche -ql (aperçu complet + images à ECRAN suivant − 1,2 s), HD sous verrou (`media-aire-05`, sortie `05-defi/`), bords ; short `FILMS['defi']` dans `films/cm1-aire-defi.js` (modèle `cm1-aire-composer.js` ; durées WAV : 00 9.5, 01 7.43, 02 13.61, 02b 13.48, 03 4.68, 04 10.52, 05 6.04 ; jardins 5×5 contre 3×8, réponse A) après `python scripts/ti-margo-cues.py cm1-aire defi` ; puis même publication (ceinture bleue).
 3. Commit PAR CHEMIN, cocher le plan, mettre à jour la mémoire `serie-aire-cm1.md`. Pas de push.
+
+## Fait le 13/11 après-midi (session 6) — ✅ AIRE CM1 FINIE (5 épisodes)
+- ✅ **Ép. 4 publié** : miniature paysage (`miniature_aire_cm1.py composer`, épisodes 04-05 ajoutés au script), manifeste `cm1-aire-composer` (verte, questions 01:08 C, 01:56 B, centres construction/art-design) + `-short` (blanche, 00:21 C, cuisine/jeux-defis) le **31/12**, fiche YouTube, R2 (dossier aire seul), `generer-videos-r2.mjs`, coach branché.
+- ✅ **Ép. 5** `aire_defi.py` : planche -ql relue deux fois, corrigés : colonne de droite décalée (`xl=-0.6` écrans 02-03, `-0.9` au piège, sinon réduite contre le bord), piège descendu sous le titre et figures en face de leurs lignes, carré rose écarté du cadre final, pot du défi posé sous la salle (collait au texte), « 2 pots : 20 m², pas assez ! » espacé à la correction. Dry run AUDIT propre (seul « 974 »). HD `05-defi/`, `verifier-bords-video.py` = 0.
+  - Short « La clôture de Noé » : `prototypes/ti-margo/films/cm1-aire-defi.js` (`FILMS['defi']`, jardins 5 × 5 contre 3 × 8, réponse A). ⚠️ `mot('02-question','A')` attrapait le « a » de « Qui a le jardin » : `tq('A',2)`.
+  - Manifeste `cm1-aire-defi` (bleue, 01:02 A, 01:59 B) + `-short` (blanche, 00:18 A, nature-ecologie/jeux-defis) le **01/01/2027**, fiche, R2, coach.
+- Outils session 6 (scratchpad) : `entrees.py <ep> <date> <t short>` (entrées du manifeste depuis le dry run), `upsert-manifeste.py`, `planche5.sh`.
+
+## Prochaine étape (session 7)
+Série aire CM1 terminée. Suite du plan CM1 (`PLAN-perimetre-aire-volume.md`) : périmètre du triangle, quadrilatère, polygone, défi (niveau CM1, pas de doublon CE2), puis contenance, puis solides. Voix à écrire puis valider À DEUX avant tout rendu.

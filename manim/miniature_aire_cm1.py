@@ -28,6 +28,10 @@ EP = [
      "avec la même unité !", True, "jaune", (4, 3)),
     ("carre-rectangle", "03-carre-rectangle", ["CALCULER L'AIRE", "D'UN RECTANGLE"], "4 × 6 = 24 m²",
      "rangées × carreaux par rangée", True, "verte", (6, 4)),
+    ("composer", "04-composer", ["CALCULER L'AIRE", "D'UNE FIGURE EN L"], "12 + 6 = 18 m²",
+     "on coupe en rectangles !", True, "verte", (6, 3)),
+    ("defi", "05-defi", ["CALCULER L'AIRE", "EN ENLEVANT UN TROU"], "24 − 4 = 20 m²",
+     "on enlève la fenêtre !", True, "bleue", (6, 4)),
 ]
 
 

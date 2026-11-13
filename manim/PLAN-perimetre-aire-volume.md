@@ -50,8 +50,8 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Comprendre ce qu’est une aire — `aire_comprendre` — ✅ 13/11 voix validée ; ✅ 13/11 paysage HD (3 min 20, bords 0) + short dessin animé (71 s), manifeste 26/12, R2, coach (`manim/sorties/cm1/maths/aire/01-comprendre/`)
 - [x] Comparer des aires avec une unité — `aire_unite` — ✅ 13/11 paysage HD + short dessin animé, manifeste 28/12, R2, coach
 - [x] Calculer l’aire d’un carré ou d’un rectangle — `aire_carre_rectangle` — ✅ 13/11 paysage HD (3 min 31, bords 0) + short dessin animé « Perdu dans les carreaux » (68 s), manifeste 30/12, R2, coach
-- [ ] Calculer une aire par découpage ou assemblage — `aire_composer` — ⏳ 13/11 voix écrites (`voix/cm1-aire-composer(-short).json`), à valider à deux
-- [ ] Résoudre un défi d’aire — `aire_defi` — ⏳ 13/11 voix écrites (`voix/cm1-aire-defi(-short).json`), à valider à deux
+- [x] Calculer une aire par découpage ou assemblage — `aire_composer` — ✅ 13/11 paysage HD (3 min 37, bords 0) + short dessin animé « Le gâteau en L », manifeste 31/12, R2, coach
+- [x] Résoudre un défi d’aire — `aire_defi` — ✅ 13/11 paysage HD (bords 0) + short dessin animé « La clôture de Noé », manifeste 01/01/2027, R2, coach
 
 **Volume et contenance** (4)
 - [ ] Comparer des contenances — `contenance_comparer`

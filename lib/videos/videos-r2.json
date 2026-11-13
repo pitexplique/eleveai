@@ -5776,6 +5776,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple"
  },
+ "cm1-aire-composer": {
+  "fichier": "cm1/maths/aire/04-composer/eleveai-maths-cm1-aire-composer.mp4",
+  "poster": "cm1/maths/aire/04-composer/eleveai-maths-cm1-aire-composer.png",
+  "vignette": null,
+  "titre": "Un appartement en L : combien de mètres carrés ? — Calculer une aire en découpant — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_composer&display=simple"
+ },
+ "cm1-aire-composer-short": {
+  "fichier": "cm1/maths/aire/04-composer/eleveai-maths-cm1-aire-composer-short.mp4",
+  "poster": "cm1/maths/aire/04-composer/eleveai-maths-cm1-aire-composer-short-miniature.png",
+  "vignette": null,
+  "titre": "Mon gâteau en L n'est pas un rectangle… combien de parts ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_composer&display=simple"
+ },
  "cm1-aire-comprendre": {
   "fichier": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.mp4",
   "poster": "cm1/maths/aire/01-comprendre/eleveai-maths-cm1-aire-comprendre.png",
@@ -5793,6 +5811,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
+ },
+ "cm1-aire-defi": {
+  "fichier": "cm1/maths/aire/05-defi/eleveai-maths-cm1-aire-defi.mp4",
+  "poster": "cm1/maths/aire/05-defi/eleveai-maths-cm1-aire-defi.png",
+  "vignette": null,
+  "titre": "Un mur avec une fenêtre : combien de mètres carrés à peindre ? — Défi d'aire — épisode 5 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_defi&display=simple"
+ },
+ "cm1-aire-defi-short": {
+  "fichier": "cm1/maths/aire/05-defi/eleveai-maths-cm1-aire-defi-short.mp4",
+  "poster": "cm1/maths/aire/05-defi/eleveai-maths-cm1-aire-defi-short-miniature.png",
+  "vignette": null,
+  "titre": "Sa clôture est plus longue… donc son jardin est plus grand ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_defi&display=simple"
  },
  "cm1-aire-unite": {
   "fichier": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite.mp4",
