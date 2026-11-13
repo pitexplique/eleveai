@@ -31,7 +31,7 @@ from suite_geo_interpreter_short import SuiteGeoInterpreterShort as _S16  # noqa
 from suite_termes_short import SuiteTermesShort as _S18  # noqa: E402  (ép. 18 : q_reponse)
 from suite_modeliser import SuiteModeliser1reSpe as _P21  # noqa: E402  (ép. 21 : ligne sans ligature)
 from suite_evolution import Bords6  # noqa: E402  (ép. 22 : 6 % de marge)
-from suite_somme_geo import Frac, OutilsSommeGeo  # noqa: E402  (la paysage : la formule à fraction)
+from suite_somme_geo import Bords6Cases, Frac, OutilsSommeGeo  # noqa: E402  (la paysage : la formule à fraction)
 
 assert [3 * 2 ** k for k in range(5)] == [3, 6, 12, 24, 48] and sum([3, 6, 12, 24, 48]) == 93 == 3 * 31   # 02
 assert 3 * (2 ** 10 - 1) == 3 * 1023 == 3069 and 3 * 2 ** 9 == 1536 and 3 * 2 ** 10 == 3072   # question : C
@@ -68,7 +68,7 @@ def bonhomme(s=1.0, couleur=TERME):
                                    stroke_width=0).move_to(P(0, -0.08))).scale(s)
 
 
-class SuiteSommeGeoShort(Bords6, AuditMilliers, OutilsSommeGeo, OutilsEp12, OutilsGraphique, ShortSuites):
+class SuiteSommeGeoShort(Bords6Cases, AuditMilliers, OutilsSommeGeo, OutilsEp12, OutilsGraphique, ShortSuites):
     fichier_marques = "suite_somme_geo_short_marques.json"
     nom_voix = "premiere-spe-suite-somme-geo-short"
     identite = "Maths 1re spé — EleveAI"
@@ -108,8 +108,8 @@ class SuiteSommeGeoShort(Bords6, AuditMilliers, OutilsSommeGeo, OutilsEp12, Outi
                     avec=[FadeIn(nt, shift=UP * 0.3, scale=0.6)])
         self.calcul([("morceau de musique", RAISON, "morceau")], 0.47, centre=0, fs=27,
                     avec=[nt.animate.shift(UP * 0.12).rotate(0.15)])
-        xs = [-1.72 + 0.86 * k for k in range(5)]
-        lg = LigneTermes(["3"] + ["?"] * 4, xs=xs, centre=P(0, -1.1), largeur=0.74, hauteur=0.74, fs=30,
+        xs = [-1.56 + 0.78 * k for k in range(5)]   # cases à plus de 6 % des bords (relecture 13/11)
+        lg = LigneTermes(["3"] + ["?"] * 4, xs=xs, centre=P(0, -1.1), largeur=0.64, hauteur=0.7, fs=26,
                          noms=[f"J{k}" for k in range(1, 6)], fs_noms=24)
         gens = VGroup(*[bonhomme(1.0).move_to(P(0.88 + 0.42 * k, 1.45)) for k in range(3)])
         self.au_mot("Le premier jour")
@@ -119,7 +119,7 @@ class SuiteSommeGeoShort(Bords6, AuditMilliers, OutilsSommeGeo, OutilsEp12, Outi
         self.au_mot("partagent")
         self.play(LaggedStart(*[FadeIn(g, shift=DOWN * 0.15) for g in gens], lag_ratio=0.3),
                   Indicate(lg.cases[0], color=TERME, scale_factor=1.12), run_time=0.6)
-        arcs = [lg.saut(k, "× 2", cote=UP, fs=26) for k in range(4)]
+        arcs = [lg.saut(k, "× 2", cote=UP, fs=24) for k in range(4)]
         self.calcul([("Puis chaque jour,", WHITE, "Puis chaque")], -2.24, centre=0, fs=34)
         self.calcul([("2 fois plus", RAISON, "2 fois plus")], -2.72, centre=0, fs=36,
                     avec=[LaggedStart(*[AnimationGroup(Create(a[0]), FadeIn(a[1], scale=1.3),
@@ -136,7 +136,7 @@ class SuiteSommeGeoShort(Bords6, AuditMilliers, OutilsSommeGeo, OutilsEp12, Outi
         self.play(FadeIn(sur, shift=DOWN * 0.1), FadeOut(lg.noms), lg.cases.animate.shift(UP * 2.72), run_time=0.4)
         for k, v in enumerate(["6", "12", "24", "48"]):
             c = lg.cases[k + 1]
-            t = Text(v, font_size=30, color=WHITE).move_to(c[0])
+            t = Text(v, font_size=26, color=WHITE).move_to(c[0])
             self.suivre(v)
             self.play(FadeOut(c[1]), FadeIn(t, scale=1.4), run_time=0.2)
             c.remove(c[1])

@@ -97,6 +97,31 @@ class Frac:
         self.num, self.den, self.ex_barre = num, den, ex_barre
 
 
+class Bords6Cases(Bords6):
+    """Bords6 de l'ép. 22, plus les CADRES (cases, boutons, cartes : RoundedRectangle,
+    contour compris) : à 6 % des bords gauche et droit (relecture du 13/11)."""
+
+    def _bords(self):
+        super()._bords()
+        cle = getattr(self, "_cle_voix", "?") or "?"
+        if "abonne" in cle:
+            return
+        lx = config.frame_width / 2 - config.frame_width * 0.06
+        vus = getattr(self, "_bords6_vus", set())
+        for mob in self.mobjects:
+            for f in mob.get_family():
+                if not isinstance(f, RoundedRectangle) or max(f.get_fill_opacity(), f.get_stroke_opacity()) < 0.05:
+                    continue
+                e = f.get_stroke_width() / 100 / 2      # la moitié du contour (en unités)
+                g, d = f.get_left()[0] - e, f.get_right()[0] + e
+                if g < -lx - 0.01 or d > lx + 0.01:
+                    c = (cle, "case", round(g, 2), round(d, 2))
+                    if c not in vus:
+                        vus.add(c)
+                        print(f"BORD6 {c[0]} « {c[1]} » x[{c[2]}, {c[3]}]", flush=True)
+        self._bords6_vus = vus
+
+
 class OutilsSommeGeo:
     """Les outils de l'épisode (paysage ET short) : la formule avec fraction."""
 
@@ -168,7 +193,7 @@ class OutilsSommeGeo:
         return blocs
 
 
-class SuiteSommeGeo1reSpe(Bords6, AuditMilliers, OutilsSommeGeo, OutilsEp12, OutilsGraphique, PaysageSuites):
+class SuiteSommeGeo1reSpe(Bords6Cases, AuditMilliers, OutilsSommeGeo, OutilsEp12, OutilsGraphique, PaysageSuites):
     fichier_marques = "suite_somme_geo_marques.json"
     nom_voix = "premiere-spe-suite-somme-geo"
     identite = "Maths 1re spé — EleveAI"
@@ -247,7 +272,7 @@ class SuiteSommeGeo1reSpe(Bords6, AuditMilliers, OutilsSommeGeo, OutilsEp12, Out
 
     # ── 02 : l'astuce : S, puis 2S, on retire S ────────────────────────────
 
-    def rangee_alignee(self, morceaux, colonnes, x_droite_nom, y, fs=52):
+    def rangee_alignee(self, morceaux, colonnes, x_droite_nom, y, fs=56):
         """Une ligne de somme dont chaque terme est dans SA colonne (les termes
         égaux l'un sous l'autre), le nom (« S = ») calé à droite sur x_droite_nom.
         morceaux[0] = le nom ; puis terme, « + », terme… ; même ligne de base."""
@@ -256,8 +281,8 @@ class SuiteSommeGeo1reSpe(Bords6, AuditMilliers, OutilsSommeGeo, OutilsEp12, Out
         parts[0].shift(RIGHT * (x_droite_nom - parts[0].get_right()[0]))
         for k, c in enumerate(colonnes):
             parts[1 + 2 * k].set_x(c)
-            if k > 0:
-                parts[2 * k].set_x((colonnes[k - 1] + c) / 2)
+        for k in range(1, len(colonnes)):  # chaque « + » au milieu du VIDE entre ses deux termes
+            parts[2 * k].set_x((parts[2 * k - 1].get_right()[0] + parts[2 * k + 1].get_left()[0]) / 2)
         return tx, parts
 
     def jouer_parts(self, parts, extraits, avec_morceau=None):
@@ -275,8 +300,8 @@ class SuiteSommeGeo1reSpe(Bords6, AuditMilliers, OutilsSommeGeo, OutilsEp12, Out
 
     def ecran_astuce(self):
         self.nouvel_ecran("02-astuce")
-        cols = [-3.0 + 1.5 * k for k in range(6)]
-        xn, y1, y2 = -3.75, 2.8, 1.55
+        cols = [-3.3 + 1.75 * k for k in range(6)]   # colonnes larges : les « + » respirent (relecture 13/11)
+        xn, y1, y2 = -4.05, 2.95, 1.45
         m1 = [("S =", TERME, "S égale"), ("1", WHITE, "1 plus 2"), ("+", GREY_A, None), ("2", WHITE, None),
               ("+", GREY_A, None), ("2²", WHITE, "2 au carré"), ("+", GREY_A, "plus …"), ("…", WHITE, None),
               ("+", GREY_A, None), ("2⁵", WHITE, "2 puissance 5")]
@@ -286,14 +311,15 @@ class SuiteSommeGeo1reSpe(Bords6, AuditMilliers, OutilsSommeGeo, OutilsEp12, Out
               ("+", GREY_A, "plus …"), ("…", WHITE, None), ("+", GREY_A, None), ("2⁵", WHITE, None),
               ("+", GREY_A, None), ("2⁶", RAISON, "2 puissance 6")]
         l2, p2 = self.rangee_alignee(m2, cols[1:], xn, y2)
-        fois = self.t("× 2", 36, RAISON).move_to(P(5.7, (y1 + y2) / 2 + 0.05))
-        fl = Arrow(P(5.15, y1 - 0.3), P(5.15, y2 + 0.3), buff=0, color=RAISON, stroke_width=5,
+        # « ↓ × 2 » ENTRE les deux noms (S = / 2S =), loin du bout des lignes
+        fl = Arrow(P(xn - 1.3, y1 - 0.36), P(xn - 1.3, y2 + 0.36), buff=0, color=RAISON, stroke_width=5,
                    max_tip_length_to_length_ratio=0.3)
+        fois = self.t("× 2", 40, RAISON).next_to(fl, RIGHT, buff=0.14)
         self.suivre("multiplie par")
         self.suivre("2")
         self.play(GrowArrow(fl), FadeIn(fois, scale=1.3), run_time=0.4)
         self.jouer_parts(p2, [m[2] for m in m2])
-        regle = Line(P(-5.3, 0.88), P(5.0, 0.88), stroke_width=3, color=GREY_B)
+        regle = Line(P(-5.8, 0.88), P(5.8, 0.88), stroke_width=3, color=GREY_B)
         self.calc([("On retire S :", RAISON, "On retire S"), ("presque tout s'annule", WHITE, "presque tout")], 0.25,
                   centre=0, fs=40, larg=12, avec_morceau={0: [Create(regle)]})
         communs = (p1[3], p1[5], p1[7], p1[9], p2[1], p2[3], p2[5], p2[7])
