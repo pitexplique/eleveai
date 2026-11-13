@@ -38,22 +38,29 @@ def rect_cases(n_col, n_rang, c=0.5, couleur=CARREAU, bord=CARREAU_B):
 
 
 def grande_case(c=1.0, couleur="#94a3b8", bord="#334155"):
-    """Une GRANDE case (côté c = 2 petites) ; .traits = les deux traits qui la coupent en 4 petites
-    (à montrer au mot « une grande case, c'est 4 petites cases »)."""
-    q = carreau(c, couleur, bord, 3)
-    tr = VGroup(DashedLine(q.get_top(), q.get_bottom(), color=bord, stroke_width=3, dash_length=0.08),
-                DashedLine(q.get_left(), q.get_right(), color=bord, stroke_width=3, dash_length=0.08))
-    g = VGroup(q)
-    g.traits = tr
+    """Une GRANDE case (côté c = 2 petites). Ses traits (coupée en 4 petites) : traits_de(g), au moment voulu."""
+    g = VGroup(carreau(c, couleur, bord, 3))
+    g.bord = bord
     return g
 
 
-def petites_de(g):
-    """Les 4 petites cases (invisibles, pour les numéros) d'une grande case."""
+def traits_de(g):
+    """Les deux traits qui coupent une grande case en 4 petites, là où elle est MAINTENANT."""
     q = g[0]
-    c = q.width / 2
-    return VGroup(*[Square(c, stroke_width=0, fill_opacity=0).move_to(q.get_center() + P(dx * c / 2, dy * c / 2))
-                    for dy in (1, -1) for dx in (-1, 1)])
+    return VGroup(DashedLine(q.get_top(), q.get_bottom(), color=g.bord, stroke_width=3, dash_length=0.08),
+                  DashedLine(q.get_left(), q.get_right(), color=g.bord, stroke_width=3, dash_length=0.08))
+
+
+def petites_de(*gs):
+    """Les petites cases (invisibles, pour les numéros) de grandes cases, rangée par rangée, de gauche à droite."""
+    res = []
+    for g in gs:
+        q = g[0]
+        c = q.width / 2
+        res += [Square(c, stroke_width=0, fill_opacity=0).move_to(q.get_center() + P(dx * c / 2, dy * c / 2))
+                for dy in (1, -1) for dx in (-1, 1)]
+    res.sort(key=lambda s: (-round(s.get_center()[1], 2), s.get_center()[0]))
+    return VGroup(*res)
 
 
 def rangee(g, j, n_col):

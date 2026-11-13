@@ -78083,6 +78083,157 @@
         "construction",
         "nature-ecologie"
       ]
+    },
+    {
+      "id": "cm1-aire-unite",
+      "pas_avant": "2026-12-28",
+      "notionId": "aire",
+      "microId": "aire_unite",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite.mp4",
+      "miniature": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite.png",
+      "titre": "12 cases ou 10 cases : quelle île est la plus grande ? — Comparer des aires — épisode 2 · Maths CM1",
+      "accroche": "Awa est créatrice de jeux vidéo. Sur la carte de son jeu, elle dessine deux îles avec des cases. Le joueur veut l'île la plus grande : laquelle ?\n\nDans cette vidéo :\n• comparer des aires en comptant avec une unité : la case\n• deux formes différentes peuvent avoir la même aire\n• le piège : 4 grandes cases contre 9 petites cases, ce n'est pas la même unité\n• pour comparer, on mesure avec la même unité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : la grotte (2 grandes cases) ou la rivière (7 petites cases) ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_unite&display=simple\n\n📐 Épisode 2 de la série Aire d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui a la plus grande surface ?"
+        ],
+        [
+          "00:05",
+          "Awa, créatrice de jeux vidéo"
+        ],
+        [
+          "00:19",
+          "Compter avec une unité"
+        ],
+        [
+          "00:37",
+          "Même aire, formes différentes"
+        ],
+        [
+          "00:54",
+          "Question 1"
+        ],
+        [
+          "01:24",
+          "Le piège des grandes cases"
+        ],
+        [
+          "01:53",
+          "La même unité"
+        ],
+        [
+          "02:01",
+          "Question 2"
+        ],
+        [
+          "02:34",
+          "À toi de jouer"
+        ],
+        [
+          "02:53",
+          "Correction"
+        ],
+        [
+          "03:12",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "comparer des aires",
+        "unité d'aire",
+        "cases",
+        "même aire",
+        "jeux vidéo",
+        "créatrice de jeux vidéo",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Le lac : 9 cases, la forêt : 11 cases, la plage : 7 cases. Qui a la plus grande aire ?",
+          "choix": [
+            "le lac",
+            "la plage",
+            "la forêt"
+          ],
+          "reponse": 2,
+          "explication": "11 cases, c'est le plus grand nombre de cases. La forêt a la plus grande aire."
+        },
+        {
+          "t": "02:01",
+          "question": "Deux figures couvrent chacune 6 cases, avec des formes différentes. Que peut-on dire ?",
+          "choix": [
+            "la plus longue est la plus grande",
+            "elles ont la même aire",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "Elles couvrent le même nombre de cases, avec la même unité. Elles ont la même aire."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-aire-unite-short",
+      "pas_avant": "2026-12-28",
+      "notionId": "aire",
+      "microId": "aire_unite",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-aire-unite",
+      "fichier": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite-short.mp4",
+      "miniature": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite-short-miniature.png",
+      "titre": "Ma sœur a 10 carrés de chocolat, moi 6 : pas juste ? #maths #cm1",
+      "accroche": "La sœur de Ti Margo a une tablette de 10 carrés, lui seulement 6... Mais ses carrés sont deux fois plus gros : un gros carré, c'est 2 petits !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une tablette de 5 gros carrés, une autre de 9 petits carrés. Un gros carré, c'est 2 petits. Laquelle est la plus grande ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm1",
+      "tags": [
+        "comparer des aires",
+        "unité",
+        "chocolat",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Mes 6 gros carrés, ça fait combien de petits carrés ?",
+          "choix": [
+            "12",
+            "8",
+            "6"
+          ],
+          "reponse": 0,
+          "explication": "6 fois 2 : 12 petits carrés. Ma tablette est plus grande que la sienne !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }

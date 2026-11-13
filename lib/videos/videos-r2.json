@@ -5776,6 +5776,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
  },
+ "cm1-aire-unite": {
+  "fichier": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite.mp4",
+  "poster": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite.png",
+  "vignette": null,
+  "titre": "12 cases ou 10 cases : quelle île est la plus grande ? — Comparer des aires — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_unite&display=simple"
+ },
+ "cm1-aire-unite-short": {
+  "fichier": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite-short.mp4",
+  "poster": "cm1/maths/aire/02-unite/eleveai-maths-cm1-aire-unite-short-miniature.png",
+  "vignette": null,
+  "titre": "Ma sœur a 10 carrés de chocolat, moi 6 : pas juste ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_unite&display=simple"
+ },
  "cm1-decimal-droite": {
   "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.mp4",
   "poster": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.png",

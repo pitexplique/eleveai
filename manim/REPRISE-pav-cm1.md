@@ -43,3 +43,11 @@ Ceintures (proposées, validées avec les voix le 13/11) : paysages jaune (ép. 
 4. Ép. 2 (`aire_unite`) et 3 (`aire_carre_rectangle`) : même chaîne (voix et marques déjà prêtes, scripts à écrire sur le modèle de `aire_comprendre.py`).
 5. Écrire ensuite les voix de `aire_composer` et `aire_defi` (validation à deux).
 - Rien committé, rien poussé. Commit par chemin seulement, pas de push (le chef d'orchestre pousse).
+
+## Fait le 13/11 midi (session 3, passée la main à 78 % de contexte)
+- ✅ **Ép. 2 FINI** : paysage HD 3 min 32 (bords 0) + short dessin animé « Le chocolat pas juste » 63 s (`prototypes/ti-margo/films/cm1-aire-unite.js` = `FILMS.unite`, chargé à part car `cm1-aire.js` contient déjà `FILMS.comprendre`), miniatures, manifeste `cm1-aire-unite` + `-short` le 28/12 (questions 00:54 C, 02:01 B ; short 00:16 A), fiche YouTube, R2 (dossier aire seul), `generer-videos-r2.mjs`, coach branché.
+- Commun : `pile()`, `grande_case()`, `traits_de()`, `petites_de()` dans `aire_cm1_commun.py`.
+- ⏳ **Ép. 3** `aire_carre_rectangle.py` : dry run `AUDIT=1 BORDS=1` PROPRE (seul « 974 »). Réglés : « 4 × 6 » du piège `hors_audit` (4 et 6 redits), ligne « L'aire est de 21 carreaux. » hors audit (`_ph_sans_audit`), ligne « 3 × 3 = 9. » coupée en deux morceaux (`_ph_couper`) et 3 marques ajoutées à la main dans `aire_carre_rectangle_marques.json` (07b : « 3 fois 3, » mesuré au silence ffmpeg, WinRT les avait perdues — ⚠️ relancer `aire_marques.py` les effacerait). Questions 01:14 A, 02:04 C.
+- Reste ép. 3 : planche `-ql` relue, HD sous verrou, bords, short `FILMS['carre-rectangle']` (nouveau fichier `films/cm1-aire-carre-rectangle.js` + `cm1-aire-cues.js` via `python scripts/ti-margo-cues.py cm1-aire carre-rectangle` ; voix `cm1-aire-carre-rectangle-short`, Ti Margo compte 8 × 5 carreaux un par un, réponse B), miniature `python manim/miniature_aire_cm1.py carre-rectangle`, manifeste le 30/12, fiche, R2, coach.
+- Puis voix `aire_composer` et `aire_defi` à écrire et valider À DEUX avant tout rendu.
+- Outils de la session 3 (scratchpad, à refaire si perdus) : upsert du manifeste depuis un json de mes seules entrées ; indexation git de MES seules entrées dans manifeste / videos-r2.json / bilans-videos.json (partir de HEAD, insérer mes clés sans réordonner).
