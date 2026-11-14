@@ -79,7 +79,7 @@ Outils en plus : `side-session-notes/local_802c60e4-c38c-4c4d-8d27-3ed600b51bd7/
 - 02 unites : écran 03 en lignes courtes (« un carré de 1 dm » / « de côté, » ; « Une affiche : » / « 5 dm sur 4 dm » ; 20 dm² à y −2.2) ; piège : colonne à xl −1.9 (rien réduit) ; correction : xl −1.3. Planche relue. HD lancé (`hd-unites.log`) → RELIRE à l'image le piège (≈ 01:39-01:58).
 - 01 comprendre : dry run propre (« = 9 » vérifié), planche relue ; corrigé : encadré du piège en 2 Text, carte de choix avec place pour la coche (`_carte_choix`). HD en file (`hd-comprendre.log`) → RELIRE la réponse Q1 (≈ 01:45) et le piège.
 - 06 composer : planche relue ; piège : les 2 encadrés écartés (y −1.85 / −2.95). HD en file (`hd-composer.log`) → relire le piège (≈ 01:39-01:54). `ep-composer.json` écrit (ecrire_ep.py, 21/03/2027, short Q 00:16 B).
-- RESTE pour 01, 02, 06 : bords 0 → miniature → `entrees_aire.py` → fiche → vignettes → R2 → generer-videos-r2 → coach → commit (indexer_cles.py + scripts `aire_comprendre.py`, `aire_composer.py`, `aire_unites.py`, `aire_cm2_commun.py`) → plan + mémoire.
+- ✅ **AIRE CM2 FINIE (7/7)** : 01, 02, 06 en HD (bords 0, écrans retouchés relus à l'image ; 06 rendu 2 fois : encadrés du piège et « = 24 m² » sur la ligne d'écriture), miniatures, manifeste 16, 17, 21/03/2027, fiches, R2 (check 7/7), coach branché ; plan coché ; mémoire à jour. Pas poussé.
 
 ## PÉRIMÈTRE CM2 — session 1 (14/11, passée la main à 68 %)
 - ✅ WAV des 10 voix : `public/sons/cm2-perimetre-<ep>[-short]/` (Julie, débit −6, ignorés par git).

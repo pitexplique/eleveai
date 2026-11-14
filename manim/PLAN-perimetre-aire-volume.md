@@ -83,14 +83,14 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Calculer le périmètre d’un polygone — `perimetre_polygone`
 - [x] Résoudre un défi de périmètre — `perimetre_defi`
 
-**Aire** (7)
-- [ ] Comprendre ce qu’est une aire — `aire_comprendre`
-- [ ] Utiliser cm², dm² et m² — `aire_unites`
-- [ ] Convertir des aires — `aire_convertir_unites`
-- [ ] Calculer l’aire d’un carré ou d’un rectangle — `aire_carre_rectangle`
-- [ ] Calculer l’aire d’un triangle rectangle — `aire_triangle_rectangle`
-- [ ] Calculer une aire par découpage ou assemblage — `aire_composer`
-- [ ] Résoudre un défi d’aire — `aire_defi`
+**Aire** (7) — ✅ 14/11 : 7 paysages HD (bords 0) + 7 shorts dessin animé, manifeste 16 → 22/03/2027, R2, coach (`manim/sorties/cm2/maths/aire/`)
+- [x] Comprendre ce qu’est une aire — `aire_comprendre`
+- [x] Utiliser cm², dm² et m² — `aire_unites`
+- [x] Convertir des aires — `aire_convertir_unites`
+- [x] Calculer l’aire d’un carré ou d’un rectangle — `aire_carre_rectangle`
+- [x] Calculer l’aire d’un triangle rectangle — `aire_triangle_rectangle`
+- [x] Calculer une aire par découpage ou assemblage — `aire_composer`
+- [x] Résoudre un défi d’aire — `aire_defi`
 
 **Volume et contenance** (4)
 - [ ] Comparer des contenances — `contenance_comparer`

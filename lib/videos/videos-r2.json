@@ -16019,5 +16019,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
+ },
+ "cm2-aire-composer": {
+  "fichier": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer.mp4",
+  "poster": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer.png",
+  "vignette": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer.vignette.webp",
+  "titre": "Un enclos en L : combien de m² d'herbe ? — L'aire par découpage — épisode 6 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_composer&display=simple"
+ },
+ "cm2-aire-composer-short": {
+  "fichier": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer-short.mp4",
+  "poster": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer-short-miniature.png",
+  "vignette": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer-short-miniature.vignette.webp",
+  "titre": "Du gazon autour du bac à sable : combien de carreaux ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_composer&display=simple"
  }
 }
