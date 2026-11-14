@@ -24,11 +24,9 @@ import { donneesDuJournal } from "./donnees";
 // (« comprendre le monde avec les maths »), lié depuis le bandeau en haut de
 // la page d'accueil seulement (components/BandeauJournal.tsx, 11/11). Il s'indexe donc.
 export const metadata: Metadata = {
-  // ⭐ 14/11/2026, Frédéric : « journal scientifique éducatif interactif ».
-  // La Réunion reste dans la description, pas dans le titre (site francophone).
-  title: "Journal scientifique éducatif et interactif | EleveAI",
+  title: "Le Journal d'EleveAI : comprendre le monde et le changer",
   description:
-    "Le journal scientifique éducatif et interactif d'EleveAI, écrit depuis La Réunion : chaque semaine, une vidéo, un article à lire ou à écouter et un défi pour comprendre le monde avec les maths (planète, espace, santé, argent, sport, technologie), du CP aux adultes.",
+    "Chaque jour, un article pour comprendre le monde (planète, espace, santé, argent, sport, technologie) les maths qui l'expliquent et un geste pour le changer, du CP aux adultes.",
   alternates: { canonical: "/accueil-journal" },
 };
 
