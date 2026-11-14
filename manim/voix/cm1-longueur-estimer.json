@@ -1,0 +1,16 @@
+{
+  "00-garde": "Estimer une longueur. Ce sentier fait-il 3 mètres, ou 3 kilomètres ?",
+  "01-situation": "Voici Sarah. Elle est guide nature. Elle emmène une classe en balade en forêt. Sur le panneau, l'unité est effacée : sentier, 3… Mètres ou kilomètres ? Sans mesurer, il faut estimer.",
+  "02-reperes": "Pour estimer, on compare avec des repères. 1 millimètre, c'est l'épaisseur d'une carte. 1 centimètre, c'est la largeur de ton doigt. 1 mètre, c'est un grand pas. 1 kilomètre, c'est un quart d'heure de marche.",
+  "03-sentier": "3 mètres, c'est trois grands pas : bien trop court pour une balade. 3 kilomètres, c'est environ trois quarts d'heure de marche. Le sentier fait 3 kilomètres.",
+  "04-unite": "Choisis d'abord la bonne unité. Ce qui tient dans la main, comme une feuille ou un caillou : les centimètres. Une salle ou un arbre : les mètres. Un trajet : les kilomètres.",
+  "05-question": "Question ! Quelle est la hauteur d'une porte ? A : 2 centimètres. B : 20 mètres. C : 2 mètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Une porte est un peu plus haute qu'un adulte : environ 2 mètres.",
+  "06-piege": "Attention au piège ! Le nombre seul ne suffit pas : c'est l'unité qui compte. Un crayon de 15 centimètres, d'accord. Un crayon de 15 mètres serait plus haut qu'une maison !",
+  "07-question": "Question ! Sarah montre une fourmi sur une feuille. Combien mesure-t-elle ? A : 5 millimètres. B : 5 centimètres. C : 5 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Une fourmi est minuscule, plus petite que la largeur d'un doigt : 5 millimètres.",
+  "08-defi": "À toi de jouer ! Associe chaque chose à sa longueur : une coccinelle, un arbre, un bâton de marche, la balade. Les longueurs : 1 mètre, 8 mètres, 6 millimètres, 4 kilomètres. Mets pause, et cherche !",
+  "08b-correction": "Correction. La coccinelle, 6 millimètres. Le bâton de marche, 1 mètre. L'arbre, 8 mètres. La balade, 4 kilomètres.",
+  "09-finale": "Ce que tu as appris. Pour estimer, on compare avec des repères : le doigt pour le centimètre, le grand pas pour le mètre, la marche pour le kilomètre. Et on vérifie toujours l'unité.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

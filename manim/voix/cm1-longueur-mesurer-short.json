@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Ma règle est cassée : elle commence au 4 ! Je mesure mon crayon : il va du 4 au 10. Il mesure 10 centimètres !",
+  "01-unite": "Mais attends… mon crayon ne commence pas au 0 !",
+  "02-question": "Question ! Combien mesure vraiment mon crayon ? A : 10 centimètres. B : 14 centimètres. C : 6 centimètres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! La fin moins le début : 10 moins 4, 6. Mon crayon mesure 6 centimètres.",
+  "03-ouf": "Bon… je vais recoller ma règle !",
+  "04-commentaire": "À toi : une gomme va du 3 au 8 sur la règle. Combien mesure-t-elle ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

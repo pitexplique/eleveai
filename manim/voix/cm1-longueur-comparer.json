@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des longueurs. Lequel est le plus long : 1 mètre ou 85 centimètres ?",
+  "01-situation": "Voici Jade. Elle est couturière. Pour finir une robe, il lui faut le plus long de ses deux rubans : un de 1 mètre, et un de 85 centimètres. Lequel choisir ?",
+  "02-meme-unite": "Avec la même unité, c'est facile. Un ruban de 85 centimètres, un autre de 60 centimètres : 85 est plus grand que 60. Le ruban de 85 centimètres est le plus long.",
+  "03-convertir": "Avec deux unités différentes, on met d'abord la même unité. 1 mètre, c'est 100 centimètres. On compare 100 centimètres et 85 centimètres : 100 est plus grand. Le ruban de 1 mètre est le plus long : Jade le prend.",
+  "04-egalites": "Retiens aussi : 1 centimètre, c'est 10 millimètres. Et 1 kilomètre, c'est 1000 mètres.",
+  "05-question": "Question ! Qu'est-ce qui est le plus long : un ruban de 2 mètres, ou une bande de 180 centimètres ? A : la bande. B : le ruban. C : c'est pareil. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 2 mètres, c'est 200 centimètres. 200 est plus grand que 180 : le ruban est le plus long.",
+  "06-piege": "Attention au piège ! 85 est plus grand que 1, mais 85 centimètres, ce n'est pas plus long que 1 mètre ! Regarde toujours les unités : 1 mètre, c'est 100 centimètres.",
+  "07-question": "Question ! Trois fils : 1 mètre, 95 centimètres et 1 mètre 10 centimètres. Lequel est le plus court ? A : 1 mètre. B : 1 mètre 10 centimètres. C : 95 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 1 mètre, c'est 100 centimètres. 1 mètre 10 centimètres, c'est 110 centimètres. 95 est le plus petit : le fil de 95 centimètres est le plus court.",
+  "08-defi": "À toi de jouer ! Jade range quatre rubans, du plus court au plus long : une ficelle de 2 mètres, un galon de 150 centimètres, un ruban de 1 mètre 80 centimètres et une dentelle de 90 centimètres. Dans quel ordre ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On met tout en centimètres. 2 mètres, 200 centimètres. 1 mètre 80 centimètres, 180 centimètres. Du plus court au plus long : la dentelle, 90 ; le galon, 150 ; le ruban, 180 ; la ficelle, 200.",
+  "09-finale": "Ce que tu as appris. Pour comparer des longueurs, on met d'abord la même unité. 1 mètre, c'est 100 centimètres. Puis on compare les nombres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

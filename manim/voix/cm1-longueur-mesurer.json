@@ -1,0 +1,17 @@
+{
+  "00-garde": "Mesurer une longueur. Comment lire une règle sans se tromper ?",
+  "01-situation": "Voici Adam. Il dessine des bandes dessinées. Chaque case de sa planche doit avoir la bonne taille. Il prend sa règle graduée pour mesurer.",
+  "02-regle": "Sur la règle, les grands traits avec un nombre sont les centimètres. Entre deux, les petits traits sont les millimètres : 10 millimètres dans 1 centimètre.",
+  "03-zero": "Pour mesurer, on pose le début sur le 0, pas au bout de la règle. Le côté de la case part du 0 et arrive sur le 8 : il mesure 8 centimètres.",
+  "04-decale": "Si le début n'est pas sur le 0, on fait la fin moins le début. Le crayon d'Adam va de 3 à 10 : 10 moins 3, 7. Il mesure 7 centimètres.",
+  "05-question": "Question ! Une gomme est posée de 2 à 6 sur la règle. Combien mesure-t-elle ? A : 6 centimètres. B : 4 centimètres. C : 8 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. La fin moins le début : 6 moins 2, 4. La gomme mesure 4 centimètres.",
+  "06-piege": "Attention au piège ! Si Adam pose son crayon sur le 1, la fin tombe sur le 8. Il croit lire 8 centimètres, mais le crayon en mesure 7. On part toujours du 0.",
+  "07-mm": "Et si la fin tombe entre deux nombres ? On compte les petits traits. Ce trait arrive sur le 5, plus 3 petits traits : 5 centimètres 3 millimètres, c'est 53 millimètres.",
+  "08-question": "Question ! Un trait mesure 4 centimètres 5 millimètres. Combien de millimètres ? A : 45 millimètres. B : 9 millimètres. C : 405 millimètres. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 4 centimètres, c'est 40 millimètres. Plus 5 : 45 millimètres.",
+  "09-defi": "À toi de jouer ! Adam trace un trait qui part de 2 centimètres et arrive à 8 centimètres 6 millimètres. Combien mesure le trait, en millimètres ? Mets pause, et cherche !",
+  "09b-correction": "Correction. La fin moins le début : 8 centimètres 6 millimètres, moins 2 centimètres. Il reste 6 centimètres 6 millimètres. C'est 66 millimètres.",
+  "10-finale": "Ce que tu as appris. Pour mesurer, on part du 0. Sinon, on fait la fin moins le début. Les petits traits sont les millimètres : 1 centimètre, c'est 10 millimètres.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

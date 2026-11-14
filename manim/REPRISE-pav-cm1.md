@@ -183,3 +183,12 @@ Reprendre la liste « Prochaine étape (session 11) » ci-dessus à partir du sh
   - ⚠️ Leçon : « deux cent cinquante moins » donne 4 jetons « 250 moins » que `fusionnerNombres` ne fusionne pas (pas un nombre seul) → on en garde 2 dans le film (le 1er pour « 250 », le 4e pour « − »).
 - Manifeste 13/01/2027 (bleue, animaux + nature-ecologie ; short 00:28 B), fiche, R2 04-defi, videos-r2 + bilans (nos clés), coach branché.
 - Calendrier YouTube de la série : 07, 09, 11, 13/01/2027 (1 paysage + 1 short par jour). Rien de poussé.
+
+## Session 13 (14/11) — voix LONGUEURS CM1 écrites, ⏳ EN ATTENTE DU OUI de Frédéric
+- `manim/voix/cm1-longueur-{comparer,convertir,estimer,mesurer,defi}(-short).json` (micros `longueur_<ep>` de `lib/tutor-v4/questionBank/cm1/maths/longueur.bank.ts`).
+- Ép. 1 comparer : Jade, couturière (1 m contre 85 cm) ; Q B, C ; short saut en longueur 2 m contre 150 cm, A ; jaune ; mode + art-design.
+- Ép. 2 convertir : Bilal, électricien (5 m = 500 cm, tableau, 2 m 5 cm = 205 cm) ; Q A, B ; short ficelle du cerf-volant, C ; verte ; sciences + construction.
+- Ép. 3 estimer : Sarah, guide nature (sentier 3 km, repères doigt / pas / marche) ; Q C, A ; short « je mesure 15 mètres », B ; jaune ; nature-ecologie + animaux.
+- Ép. 4 mesurer : Adam, dessinateur de BD (partir du 0, fin − début, mm) ; Q B, A ; short règle cassée 4 → 10, C ; jaune ; art-design.
+- Ép. 5 défi : Zoé, factrice à vélo (3 km − 1 km 200 m = 1800 m ; tours, morceaux, assez) ; Q C, B ; short plage 1 km − 600 m, A ; bleue ; transports + sport.
+- Réponses : 5 A, 5 B, 5 C. Shorts blanche. Rien généré ni rendu avant le oui.

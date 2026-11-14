@@ -1,0 +1,16 @@
+{
+  "00-garde": "Convertir des longueurs. Combien de centimètres dans 5 mètres ?",
+  "01-situation": "Voici Bilal. Il est électricien. Pour brancher une lampe, il doit couper 5 mètres de câble. Mais son plan est écrit en centimètres. Combien de centimètres doit-il couper ?",
+  "02-tableau": "Les unités de longueur se rangent dans un tableau : kilomètre, hectomètre, décamètre, mètre, décimètre, centimètre, millimètre. D'une colonne à la suivante, c'est 10 fois plus petit.",
+  "03-placer": "On écrit 5 dans la colonne des mètres. On veut des centimètres : un zéro dans les décimètres, un zéro dans les centimètres. 5 mètres, c'est 500 centimètres. Bilal coupe 500 centimètres.",
+  "04-egalites": "Les égalités à connaître : 1 mètre, c'est 100 centimètres. 1 centimètre, c'est 10 millimètres. 1 kilomètre, c'est 1000 mètres. Dans une unité plus petite, le nombre est plus grand.",
+  "05-question": "Question ! 3 mètres, c'est combien de centimètres ? A : 300 centimètres. B : 30 centimètres. C : 3000 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 1 mètre, c'est 100 centimètres. Donc 3 mètres, c'est 300 centimètres.",
+  "06-piege": "Attention au piège ! 2 mètres 5 centimètres, ce n'est pas 25 centimètres. 2 mètres, c'est 200 centimètres. Plus 5 : 205 centimètres. Le zéro garde sa place.",
+  "07-question": "Question ! Bilal tire une ligne électrique de 2 kilomètres. Combien de mètres ? A : 200 mètres. B : 2000 mètres. C : 20 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 1 kilomètre, c'est 1000 mètres. Donc 2 kilomètres, c'est 2000 mètres.",
+  "08-defi": "À toi de jouer ! Bilal a deux câbles : un de 1 mètre 25 centimètres, et un de 4 mètres 8 centimètres. Combien de centimètres pour chacun ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 1 mètre, c'est 100 centimètres. Plus 25 : 125 centimètres. 4 mètres, c'est 400 centimètres. Plus 8 : 408 centimètres. Attention au zéro !",
+  "09-finale": "Ce que tu as appris. Pour convertir, on place le nombre dans le tableau de conversion. 1 mètre, c'est 100 centimètres. 1 centimètre, c'est 10 millimètres. 1 kilomètre, c'est 1000 mètres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

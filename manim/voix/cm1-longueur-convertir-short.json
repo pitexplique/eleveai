@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Pour mon cerf-volant, il me faut 2 mètres de ficelle. Au magasin, la ficelle se vend au centimètre. Facile : je demande 2 centimètres !",
+  "01-unite": "Le vendeur me donne un tout petit bout. Il est grand comme mon doigt !",
+  "02-question": "Question ! Combien de centimètres fallait-il demander ? A : 2 centimètres. B : 20 centimètres. C : 200 centimètres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 1 mètre, c'est 100 centimètres. Donc 2 mètres, c'est 200 centimètres.",
+  "03-ouf": "Mon cerf-volant vole enfin… et moi avec !",
+  "04-commentaire": "À toi : l'école est à 1 kilomètre de chez moi. Combien de mètres ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,15 @@
+{
+  "00-garde": "Un défi de longueurs. Combien de mètres reste-t-il à pédaler ?",
+  "01-situation": "Voici Zoé. Elle est factrice : elle distribue le courrier à vélo. Sa tournée fait 3 kilomètres. Elle a déjà roulé 1 kilomètre 200 mètres. Combien de mètres lui reste-t-il ?",
+  "02-meme-unite": "Avant de calculer, on écrit tout dans la même unité. 3 kilomètres, c'est 3000 mètres. 1 kilomètre 200 mètres, c'est 1200 mètres.",
+  "03-calcul": "Le schéma en barre aide : toute la barre, c'est la tournée. Une part, ce qui est fait. L'autre, ce qui reste. 3000 moins 1200, 1800. Il reste 1800 mètres à Zoé.",
+  "04-question": "Question ! Zoé fait 4 fois le tour du stade à vélo. Un tour fait 250 mètres. Combien de mètres en tout ? A : 254 mètres. B : 2500 mètres. C : 1000 mètres. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Un tour, 4 fois : 250 fois 4, 1000 mètres. C'est 1 kilomètre !",
+  "05-piege": "Attention au piège ! On ne calcule jamais avec deux unités différentes. 3 mètres moins 40 centimètres, ce n'est pas 3 moins 40 ! 3 mètres, c'est 300 centimètres. 300 moins 40, 260 centimètres.",
+  "06-question": "Question ! Zoé a une ficelle de 2 mètres. Elle coupe des morceaux de 50 centimètres pour attacher les colis. Combien de morceaux ? A : 25 morceaux. B : 4 morceaux. C : 100 morceaux. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 2 mètres, c'est 200 centimètres. 200 divisé par 50 : 4 morceaux.",
+  "07-defi": "À toi de jouer ! Zoé a 3 mètres de ruban. Chaque colis cadeau demande 45 centimètres de ruban. Elle a 6 colis. A-t-elle assez de ruban ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Ce qu'il faut : 45 centimètres, 6 fois : 270 centimètres. Ce qu'elle a : 3 mètres, c'est 300 centimètres. 300 est plus grand que 270 : elle a assez, et il reste 30 centimètres.",
+  "08-finale": "Ce que tu as appris. Pour résoudre un problème de longueurs, on écrit tout dans la même unité. Puis on calcule. Et on n'oublie pas l'unité dans la réponse.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
