@@ -86129,6 +86129,159 @@
         "animaux",
         "nature-ecologie"
       ]
+    },
+    {
+      "id": "cm2-aire-convertir-unites",
+      "pas_avant": "2027-03-18",
+      "notionId": "aire",
+      "microId": "aire_convertir_unites",
+      "classe": "cm2",
+      "ceinture": "bleue",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.mp4",
+      "miniature": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.png",
+      "titre": "1 dm² = 100 cm², pas 10 ! — Convertir des aires — épisode 3 · Maths CM2",
+      "accroche": "Kenzo est vitrier. Un client commande une vitre de 3 dm², mais sa machine compte en cm². Quel nombre doit-il taper ? Pourquoi 1 dm² vaut 100 cm², et pas 10 ?\n\nDans cette vidéo :\n• 1 dm², c'est un carré de 10 cm de côté : 10 rangées de 10, donc 100 cm²\n• 3 dm² = 3 × 100 = 300 cm²\n• 1 m² = 100 dm² = 10 000 cm²\n• le piège : pour les aires, on multiplie par 100 à chaque unité, pas par 10\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 6 vitres de 50 cm² dans une plaque de 3 dm² : est-ce assez ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_convertir_unites&display=simple\n\n📐 Épisode 3 de la série Aire d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Pourquoi 1 dm² = 100 cm² ?"
+        ],
+        [
+          "00:07",
+          "Kenzo, vitrier"
+        ],
+        [
+          "00:24",
+          "10 rangées de 10"
+        ],
+        [
+          "00:41",
+          "Convertir : × 100"
+        ],
+        [
+          "00:49",
+          "Et le m² ?"
+        ],
+        [
+          "01:08",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Le piège : × 100, pas × 10"
+        ],
+        [
+          "02:00",
+          "Question 2"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "03:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "convertir des aires",
+        "conversion",
+        "décimètre carré",
+        "centimètre carré",
+        "mètre carré",
+        "fois 100",
+        "vitrier",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:08",
+          "question": "5 dm², c'est combien de cm² ?",
+          "choix": [
+            "50 cm²",
+            "5 cm²",
+            "500 cm²"
+          ],
+          "reponse": 2,
+          "explication": "1 dm², c'est 100 cm². 5 × 100 = 500 cm²."
+        },
+        {
+          "t": "02:00",
+          "question": "Une fenêtre fait 2 m². Combien de dm² ?",
+          "choix": [
+            "20 dm²",
+            "200 dm²",
+            "2 000 dm²"
+          ],
+          "reponse": 1,
+          "explication": "1 m² = 100 dm². 2 × 100 = 200 dm²."
+        }
+      ],
+      "centres": [
+        "construction",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm2-aire-convertir-unites-short",
+      "pas_avant": "2027-03-18",
+      "notionId": "aire",
+      "microId": "aire_convertir_unites",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-aire-convertir-unites",
+      "fichier": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short.mp4",
+      "miniature": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short-miniature.png",
+      "titre": "Combien d'autocollants dans 1 dm² ? Ma sœur dit 10… #maths #cm2",
+      "accroche": "Ti Margo remplit son album : une page carrée de 10 cm de côté, 1 dm², et des autocollants de 1 cm². Sa sœur dit : 10 autocollants par page. Et toi ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un album de 4 pages de 1 dm². Combien d'autocollants de 1 cm² pour tout remplir ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_convertir_unites&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm2",
+      "tags": [
+        "convertir des aires",
+        "décimètre carré",
+        "centimètre carré",
+        "autocollants",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Combien d'autocollants de 1 cm² pour remplir une page de 1 dm² ?",
+          "choix": [
+            "10",
+            "1 000",
+            "100"
+          ],
+          "reponse": 2,
+          "explication": "10 rangées de 10 : 10 × 10 = 100. 1 dm² = 100 cm²."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
     }
   ]
 }

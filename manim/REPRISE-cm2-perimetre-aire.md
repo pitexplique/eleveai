@@ -52,6 +52,26 @@ Notes et outils : `side-session-notes/local_e931467e-2c23-4163-86c5-b91473d4ac99
 3. Dates : APRÈS les 5 dates du périmètre CM2 (relire cette reprise / le manifeste) et après Longueurs (CM1 finit le 24/02/2027 ; CE2 à relire), ≤ 2 paysages et 5 vidéos par jour ; 1 paysage + 1 short par jour.
 4. Cocher le plan `manim/PLAN-perimetre-aire-volume.md` (CM2 aire), mémoire `serie-perimetre-aire-cm2.md`, commit PAR CHEMIN, jamais de push.
 
+## AIRE CM2 — session 2 « cm2-aire-suite » (14/11 après-midi, passée la main à 65 %)
+Notes/outils `N = side-session-notes/local_e931467e-2c23-4163-86c5-b91473d4ac99/` : `drylock.sh <fichier> <Scène>` (dry run sous `%TEMP%\eleveai-dry-a2.lock`), `chaine.sh <fichier> <Scène> <0N> <ep-tirets>` (dry run ; s'il est propre → HD sous verrou → bords ; log `hd-<ep>.log`), `chaine-ql.sh <fichier> <Scène> <ep-tirets>` (dry run → aperçu -ql → planche `%TEMP%\a2pl_<ep>\`), `ecrire_ep.py` (écrit les `ep-*.json`), `entrees_aire.py <ep>`, `rapports-sous-agents-aire.md` (rapports des agents qui ont écrit les scripts). ⛔ La session doublon « Aire CM2 : HD des 7 paysages » s'est arrêtée ; la session mère `local_de1e806e` ne lance plus rien.
+- **Dates (manifeste)** : 1 paysage + son short par jour, APRÈS le périmètre CM2 (11 → 15/03) : 16/03 comprendre, 17/03 unites, 18/03 convertir, 19/03 carré-rectangle, 20/03 triangle, 21/03 composer, 22/03 défi (2027). `ep-*.json` écrits pour unites, convertir, carre-rectangle, triangle, defi (+ `ep-comprendre.json` de la session doublon, date 16/03 OK) ; RESTE `ep-composer.json`.
+- **Shorts** : les 7 FINIS et commités (15911ef0, 61743c9f).
+| Ép. | Scène | État |
+|---|---|---|
+| 01 comprendre | `AireComprendreCM2` | ⏳ agent de la session mère en cours (rapport attendu dans `rapports-sous-agents-aire.md`) ; TARD « = 9 » de 08b corrigé par la session doublon, dry run à refaire ; puis planche, HD |
+| 02 unites | `AireUnitesCM2` | corrigé après planche (bord droit écran 03 et correction, m² du piège, pause du défi, choix Q2 « 6 cm² / 6 m² / 6 dm² ») ; `chaine-ql.sh` lancé → RELIRE `%TEMP%\a2pl_unites\planche*.png`, puis HD |
+| 03 convertir-unites | `AireConvertirUnitesCM2` | ✅ HD bords 0, miniature, manifeste (Q 01:08 C, 02:00 B), fiche, vignettes, R2 (7 fichiers, check OK), coach branché ; manifeste PAS encore commité |
+| 04 carre-rectangle | `AireCarreRectangleCM2` | 1er HD : 1 bord (109,5 s, « 50 cm » grossi par Indicate au piège) → corrigé (panneau x −3.0, Indicate 1.12), HD supprimé ; `chaine.sh` relancé (dry → HD → bords) |
+| 05 triangle-rectangle | `AireTriangleRectangleCM2` | BORD défi corrigé (tarte x −2.75), Q2 sur le gabarit de Q1 (ne touche plus Ti-Margo), défi et écran 04 desserrés ; dry propre, planche relue ; HD lancé (`hd-triangle-rectangle.log`) |
+| 06 composer | `AireComposerCM2` | ⏳ agent de la session mère en cours (dernier dry : 3 RETARD 0,5 s) |
+| 07 defi | `AireDefiCM2` | défi : « pour un arbre. » sur sa propre ligne ; `chaine.sh` lancé (dry → HD → bords) |
+⚠️ Ces HD tournaient en tâches de fond de la session 2 : vérifier `ls manim/sorties/cm2/maths/aire/0N-*/` et les `hd-*.log` ; un HD absent = relancer `chaine.sh`. Un seul HD à la fois sur le PC (verrou commun).
+### Prochaine étape (session 3)
+1. Finir les HD (04, 05, 07, puis 02, 01, 06), `verifier-bords-video.py` = 0 ; relire à l'image chaque écran retouché.
+2. Pour chaque ép. : `python manim/miniature_aire_cm2.py <ep>` (après le HD) → `python <N>/entrees_aire.py <ep>` (diff du manifeste : seulement nos 2 entrées) → `python scripts/fiches-youtube.py cm2-aire-<ep>` → `python scripts/vignettes-videos.py` → R2 (`.\scripts\r2-videos.ps1 -Rclone "copy manim/sorties/cm2/maths/aire/0N-<ep> R2:cm2/maths/aire/0N-<ep> --include *.{mp4,png,webp} -q"` puis `check --one-way`) → `node scripts/generer-videos-r2.mjs` → coach `node scripts/brancher-videos-coach.mjs --id cm2-aire-<ep>,cm2-aire-<ep>-short --ecrire` (écrit en PRODUCTION).
+3. Commit PAR CHEMIN : `manifeste-youtube.json`, `lib/videos/videos-r2.json`, `bilans-videos.json` ont des modifs NON commitées d'autres sessions → ne committer QUE nos clés `cm2-aire-*` (version HEAD + nos entrées, via `git hash-object -w` + `git update-index --cacheinfo`, sans toucher la copie de travail). Scripts : `git add manim/scripts/cm2/aire_<ep>.py` un par un.
+4. Cocher le plan `manim/PLAN-perimetre-aire-volume.md` (CM2 aire), mémoire `serie-perimetre-aire-cm2.md`. Jamais de push.
+
 ## PÉRIMÈTRE CM2 — session 1 (14/11, passée la main à 68 %)
 - ✅ WAV des 10 voix : `public/sons/cm2-perimetre-<ep>[-short]/` (Julie, débit −6, ignorés par git).
 - ✅ Marques : `python manim/scripts/cm2/perimetre_marques.py comprendre triangle quadrilatere polygone defi` → `manim/scripts/cm2/perimetre_<ep>_marques.json` (copie de `cm1/aire_marques.py` ; triangle 06-piege « 80, 1 et 1 ! 1 mètre » corrigé DANS le script (`CORRIGER`), relancer ne le perd pas ; sans argument : ne fait rien).
