@@ -228,10 +228,13 @@ class LongueurChoisirUniteBase(PaysageLongueurCE2):
         for ex, quoi, unite, u, d, y in lignes:
             t = self.ligne([(quoi + " :", WHITE), (unite, VERT_OK)], 30, buff=0.22)
             gauche(t, -6.2, y)
-            uu = self.t(u, 60, VERT_OK).move_to(P(5.5, y))
+            uu = self.t(u, 60, VERT_OK).move_to(P(5.8, y))
             d.move_to(P(3.4, y))
             if d.get_left()[0] < t.get_right()[0] + 0.3:
                 d.shift(RIGHT * (t.get_right()[0] + 0.3 - d.get_left()[0]))
+            place = uu.get_left()[0] - 0.35 - d.get_left()[0]  # le dessin ne touche pas l'unité
+            if d.width > place:
+                d.scale_to_fit_width(place, about_edge=LEFT)
             self.au_mot(ex)
             self.play(FadeIn(t[0], shift=UP * 0.1), FadeIn(d, shift=LEFT * 0.2), run_time=0.35)
             self.play(FadeIn(t[1], scale=1.1), FadeIn(uu, scale=1.3), run_time=0.3)
@@ -352,7 +355,8 @@ class LongueurChoisirUniteBase(PaysageLongueurCE2):
             self.play(Indicate(g[i], scale_factor=1.06), run_time=0.3)
             self.au_mot(mot)
             e = self.t(u, 54, VERT_OK).next_to(g[i], DOWN, buff=0.35)
-            e.set_y(g.get_bottom()[1] - 0.35 - 0.3)  # les trois unités sur une même ligne
+            # les trois unités sur une même ligne de BASE (le « k » de km montait le centre)
+            e.shift(UP * (g.get_bottom()[1] - 0.95 - e[-1].get_bottom()[1]))
             self.play(FadeIn(e, scale=1.3), run_time=0.3)
             if ex2:
                 v = self.t(val, 30, JAUNE_TITRE).next_to(e, DOWN, buff=0.2)

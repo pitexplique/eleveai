@@ -168,19 +168,19 @@ class LongueurEstimerBase(PaysageLongueurCE2):
         ja = jardin(1.1).move_to(P(1.4, 1.9))
         self.au_mot("elle crée des jardins")
         self.play(FadeIn(ja, shift=UP * 0.3), run_time=0.45)
-        mr = mini_ruban(1.0).move_to(P(-1.6, -0.4))
-        l1 = self.t("Pas toujours son mètre ruban…", 34)
+        mr = mini_ruban(1.0).move_to(P(-2.15, -0.4))
+        l1 = self.bloc(["Pas toujours son", "mètre ruban…"], 32, WHITE, buff=0.12)
         gauche(l1, -0.6, -0.4)
         self.au_mot("Elle n'a pas toujours son mètre ruban")
         self.play(FadeIn(mr, shift=UP * 0.2), FadeIn(l1, shift=UP * 0.1), run_time=0.4)
         self.play(Create(croix(mr)), run_time=0.3)
         self.au_mot("Alors elle estime")
         l2 = self.t("Alors elle ESTIME :", 40, JAUNE_TITRE)
-        gauche(l2, -2.6, -1.6)
+        gauche(l2, -2.6, -1.55)
         self.play(FadeIn(l2, scale=1.15), run_time=0.4)
         self.au_mot("elle compare à des longueurs qu'elle connaît par cœur")
-        l3 = self.t("elle compare à des longueurs qu'elle connaît.", 32, VERT_OK)
-        gauche(l3, -2.6, -2.45)
+        l3 = self.bloc(["elle compare à des longueurs", "qu'elle connaît."], 30, VERT_OK, buff=0.1)
+        gauche(l3, -2.6, -2.55)
         self.play(FadeIn(l3, shift=UP * 0.1), run_time=0.4)
         self.attendre_voix()
 
@@ -238,7 +238,7 @@ class LongueurEstimerBase(PaysageLongueurCE2):
         hors_audit(r[1])  # « 6 » déjà dit (« 6 grands pas ») : posé à « 6 mètres »
         self.aux_extraits([r[1]], [("6 mètres", 1)], run_time=0.3)
         self.insister(r[1], 1.2, 0.25)
-        self.attendre_voix()
+        self.attendre_voix(marge=1.2)
 
     # ── 04 : d'autres repères : la porte, la marche ─────────────────────────
     def ecran_porte(self):
@@ -307,16 +307,16 @@ class LongueurEstimerBase(PaysageLongueurCE2):
         l0 = self.t("Estimer, ce n'est pas deviner au hasard.", 34)
         gauche(l0, -6.2, 2.2)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.35)
-        l1 = self.ligne([("Hugo dit : mon doigt fait", WHITE), ("1 m", ROUGE_ERREUR), ("de large.", WHITE)], 34,
+        l1 = self.ligne([("Hugo dit : mon doigt fait", WHITE), ("1 m", ROUGE_ERREUR), ("de large.", WHITE)], 32,
                         buff=0.2)
         gauche(l1, -6.2, 1.3)
         self.au_mot("Hugo dit")
         self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.3)
-        self.au_mot("1 mètre de large")
-        self.play(FadeIn(l1[1], scale=1.2), FadeIn(l1[2]), run_time=0.3)
+        hors_audit(l1[1])  # « 1 » redit plus loin (« 1 mètre, c'est ») : posé à SON extrait
+        self.aux_extraits([VGroup(l1[1], l1[2])], [("1 mètre de large", 1)], run_time=0.25)
         self.au_mot("Impossible")
-        im = self.t("Impossible !", 40, ROUGE_ERREUR)
-        gauche(im, 2.2, 1.3)
+        im = self.t("Impossible !", 36, ROUGE_ERREUR).next_to(l1, RIGHT, buff=0.45)
+        im.shift(UP * (l1[0][0].get_bottom()[1] - im[0].get_bottom()[1]))  # même ligne de base
         self.play(FadeIn(im, scale=1.3), Wiggle(l1[1]), run_time=0.45)
         W = 10.0
         rb = Rectangle(width=W, height=0.45, fill_color="#fde047", fill_opacity=1, stroke_color="#a16207",
@@ -369,7 +369,7 @@ class LongueurEstimerBase(PaysageLongueurCE2):
     def le_banc(self):
         b = banc(5.0)
         mains = VGroup(*[main(0.42) for _ in range(10)]).arrange(RIGHT, buff=0.06)
-        mains.scale_to_fit_width(b[2].width).next_to(b[2], UP, buff=0.05)
+        mains.scale_to_fit_width(b[1].width).next_to(b[1], UP, buff=0.05)  # sur le dossier, bien visibles
         return b, mains
 
     def ecran_defi(self):
@@ -399,24 +399,32 @@ class LongueurEstimerBase(PaysageLongueurCE2):
         tit = self.t("Correction", 50, JAUNE_TITRE).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.35)
         b, mains = self.le_banc()
-        VGroup(b, mains).scale(0.8).move_to(P(2.6, 1.0))
+        VGroup(b, mains).scale(0.7).move_to(P(4.3, 0.45))  # à droite, sous la ligne « 10 × 10 = 100 cm »
         self.add(b, mains)
         l1 = self.ligne([("Une main :", WHITE), ("environ 10 cm", VERT_OK)], 38, buff=0.25)
         gauche(l1, -6.2, 2.2)
         self.au_mot("Une main, environ")
         self.play(FadeIn(l1[0], shift=UP * 0.1), Indicate(mains[0], scale_factor=1.3), run_time=0.35)
-        self.au_mot("10 centimètres")
+        self.au_mot("environ 10")
         self.play(FadeIn(l1[1], scale=1.1), run_time=0.3)
         l2 = self.ligne([("10 mains :", WHITE), ("10 × 10", BLEU_D), ("= 100 cm", VERT_OK)], 40, buff=0.25)
         gauche(l2, -6.2, 1.2)
         for m in l2:
-            hors_audit(m)  # « 10 » redit : chaque morceau à son extrait
-        self.aux_extraits([l2[0], l2[1], l2[2]], [("10 mains", 1), ("10 fois 10", 1), "100 centimètres"],
-                          run_time=0.3)
-        rb = ruban(4.0, VERT_OK, 0.3).next_to(b, DOWN, buff=0.5)
-        e = hors_audit(self.t("environ 1 m", 34, VERT_OK)).next_to(rb, DOWN, buff=0.2)
+            hors_audit(m)  # « 10 » redit : chaque morceau à son instant
+            for f in m.get_family():
+                f.sans_synchro = True
+        # « 10 mains : 10 fois 10 » n'a pas de marques (TTS) : instants mesurés sur le WAV
+        # (« 10 mains » 4,80 s, « 10 fois 10 » 5,50 s)
+        for m, t in ((l2[0], 4.85), (l2[1], 5.55)):
+            reste = self._debut_voix + t - self.renderer.time
+            if reste > 0.05:
+                self.wait(reste)
+            self.play(FadeIn(m, shift=UP * 0.08), run_time=0.2)
+        self.aux_extraits([l2[2]], ["100 centimètres"], run_time=0.2)
+        rb = ruban(b.width, VERT_OK, 0.25).next_to(b, DOWN, buff=0.25)
+        e = hors_audit(self.t("environ 1 m", 30, VERT_OK)).next_to(rb, DOWN, buff=0.15)
         r = self.ligne([("Le banc mesure", WHITE), ("environ 1 m.", VERT_OK)], 44, buff=0.3)
-        gauche(r, -6.2, -1.9)
+        gauche(r, -6.2, -2.3)
         self.au_mot("Le banc mesure environ")
         self.play(FadeIn(r[0], shift=UP * 0.1), GrowFromEdge(rb, LEFT), run_time=0.4)
         self.aux_extraits([VGroup(r[1], e)], [("1 mètre", 1)], run_time=0.3)
@@ -432,17 +440,36 @@ class LongueurEstimerBase(PaysageLongueurCE2):
             ("un doigt, environ 1 cm ;", "une main, environ 1 dm ;", "un grand pas, environ 1 m."),
             ("Puis on vérifie que", "le nombre est raisonnable.")], fs=32)
         bloc = lignes[1][1]
-        l_main, l_pas = bloc[1], bloc[2]
-        bloc.remove(l_main, l_pas)  # chaque repère posé à SON mot (le « 1 » est redit)
+        # chaque repère en 3 morceaux, chacun à SON mot : « un doigt, » / « environ » / « 1 cm ; »
+        # (le « 1 » est redit trois fois ; « environ » est dit 0,5 s avant le nombre)
+        decoupe = [("un doigt,", "environ", "1 cm ;"), ("une main,", "environ", "1 dm ;"),
+                   ("un grand pas,", "environ", "1 m.")]
+        reperes = []
+        for orig, mots in zip(list(bloc), decoupe):
+            m = VGroup(*[self.t(x, 32) for x in mots]).arrange(RIGHT, buff=0.16)
+            for x in m[1:]:
+                x.shift(UP * (m[0][0].get_bottom()[1] - x[0].get_bottom()[1]))
+            m.scale(orig[0].height / m[0][0].height)
+            m.shift(orig[0].get_corner(DL) - m[0][0].get_corner(DL))
+            for x in m:
+                hors_audit(x)
+                for f in x.get_family():
+                    f.sans_synchro = True
+            reperes.append(m)
+            bloc.remove(orig)
         self.add(fig)
         self.au_mot("Pour estimer")
         self.montrer_ligne(lignes[0], Indicate(fig, scale_factor=1.05))
-        self.au_mot("1 centimètre")
-        self.montrer_ligne(lignes[1])
-        self.au_mot("1 décimètre")
-        self.play(FadeIn(l_main, shift=RIGHT * 0.2), run_time=0.3)
-        self.au_mot("1 mètre")
-        self.play(FadeIn(l_pas, shift=RIGHT * 0.2), run_time=0.3)
+        self.au_mot("un doigt")
+        self.play(Create(lignes[1][0]), FadeIn(reperes[0][0], shift=RIGHT * 0.2), run_time=0.3)
+        etapes = [("environ 1 centimètre", reperes[0][1]), ("1 centimètre", reperes[0][2]),
+                  ("une main", reperes[1][0]), ("environ 1 décimètre", reperes[1][1]),
+                  ("1 décimètre", reperes[1][2]), ("un grand pas", reperes[2][0]),
+                  ("environ 1 mètre", reperes[2][1]), ("1 mètre", reperes[2][2])]
+        for ex, m in etapes:
+            self.au_mot(ex)
+            self.wait(0.07)
+            self.play(FadeIn(m, shift=RIGHT * 0.15), run_time=0.2)
         self.au_mot("Puis on vérifie")
         self.montrer_ligne(lignes[2])
         self.attendre_voix(marge=1.0)

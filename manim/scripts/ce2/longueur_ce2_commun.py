@@ -84,8 +84,8 @@ def elodie(s=1.0):
 
 
 def jules(s=1.0):
-    """Jules, technicien de concert : tee-shirt noir, casque audio autour du cou."""
-    p = visage(personne(peau="#8d5524", tenue="#111827", cheveux="#111827", s=s))
+    """Jules, technicien de concert : tee-shirt gris ardoise (noir, il disparaissait sur le fond), casque audio."""
+    p = visage(personne(peau="#8d5524", tenue="#475569", cheveux="#3b2416", s=s))
     c, r = p.tete.get_center(), p.tete.width / 2
     p.add(Arc(radius=r * 0.75, start_angle=PI * 1.1, angle=PI * 0.8, color="#f97316", stroke_width=8 * s)
           .move_to(c + P(0, -r * 1.25)))
