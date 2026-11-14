@@ -401,7 +401,7 @@ export const monnaieBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Comment écrit-on « 4 euros et 5 centimes » avec une virgule ?",
     format: "qcm",
-    choices: ["4,05 €", "4,5 €", "4,50 €", "45 €"],
+    choices: ["4,05 €", "4,5 €", "5,04 €", "45 €"],
     expected: ["4,05 €"],
     comparator: "mcq_exact",
     hint: "Après la virgule, il y a toujours DEUX chiffres : les dizaines de centimes, puis les centimes.",

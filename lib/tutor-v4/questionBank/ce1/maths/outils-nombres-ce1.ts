@@ -50,10 +50,33 @@ export function shuffle<T>(items: readonly T[]): T[] {
 }
 
 /** La bonne réponse et trois leurres DIFFÉRENTS d'elle et entre eux, au hasard. */
+/** ⛔ 14/11/2026 — la VALEUR d'un choix : « 2,1 € » et « 2,10 € », « 280 € » et
+ *  « 280,00 € », « 5/10 » et « 4/8 » sont le même choix. Sans ce tri, un piège
+ *  pouvait valoir la bonne réponse (deux réponses justes) ou doubler un autre piège. */
+export function valeurDuChoix(s: string): string {
+  const t = s.trim().replace(/\s+/g, " ");
+  const f = /^(\d+)\/(\d+)\s*(.*)$/.exec(t);
+  if (f && Number(f[2]) !== 0 && !/\d/.test(f[3])) return `${(Number(f[1]) / Number(f[2])).toFixed(6)}|${f[3]}`;
+  const d = /^(\d+(?:[.,]\d+)?)\s*(.*)$/.exec(t);
+  if (d && !/\d/.test(d[2])) return `${Number(d[1].replace(",", ".")).toFixed(6)}|${d[2]}`;
+  return t;
+}
+/** Les pièges distincts par leur valeur, et différents de la bonne réponse. */
+export function piegesDistincts(correct: string, pieges: readonly string[]): string[] {
+  const vus = new Set([valeurDuChoix(correct)]);
+  const out: string[] = [];
+  for (const p of pieges) {
+    if (!p || !p.trim()) continue;
+    const v = valeurDuChoix(p);
+    if (vus.has(v)) continue;
+    vus.add(v);
+    out.push(p);
+  }
+  return out;
+}
+
 export function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct && w.trim() !== ""),
-  ).slice(0, 3);
+  const distracteurs = shuffle(piegesDistincts(correct, wrongs)).slice(0, 3);
   return shuffle([correct, ...distracteurs]);
 }
 

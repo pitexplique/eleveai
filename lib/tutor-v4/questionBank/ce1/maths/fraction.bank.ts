@@ -229,7 +229,14 @@ const garder = (bonne: string, pieges: (string | false)[]) =>
     .filter((x): x is string => !!x && x !== bonne)
     // Pas de fraction plus grande que 1 parmi les pièges (sauf « 4/1 », l'écriture à l'envers d'une part unité).
     .filter((x) => { const m = /^(\d+)\/(\d+)$/.exec(x); return !m || Number(m[1]) <= Number(m[2]) || m[2] === "1"; })
-    .filter((x, i, t) => t.indexOf(x) === i);
+    // ⛔ 14/11/2026 : distincts par la VALEUR, pas par l'écriture : « 5/10 » et « 4/8 »
+    // (ou « 1/1 » et « 2/2 ») étaient proposés ensemble, deux choix de même valeur.
+    .filter((x, i, t) => valeurFr(x) !== valeurFr(bonne) && t.findIndex((y) => valeurFr(y) === valeurFr(x)) === i);
+/** La valeur d'une fraction écrite « n/d » (sinon le texte lui-même). */
+function valeurFr(x: string): string {
+  const m = /^(\d+)\/(\d+)$/.exec(x);
+  return m ? (Number(m[1]) / Number(m[2])).toFixed(6) : x;
+}
 
 /** Les pièges classiques d'écriture : à l'envers, colorié/non colorié, le voisin. */
 function piegesFraction(n: number, d: number): string[] {
@@ -1067,7 +1074,7 @@ export const fractionBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Comment s'écrit « un demi » avec des chiffres ?",
     format: "qcm",
-    choices: ["1/2", "2/1", "1/1", "2/2"],
+    choices: ["1/2", "2/1", "1/1", "1/3"],
     expected: ["1/2"],
     comparator: "mcq_exact",
     hint: "Le nombre de parts prises est en haut, le nombre de parts en tout est en bas.",
@@ -1463,7 +1470,7 @@ export const fractionBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Combien font 2/5 + 1/5 ?",
     format: "qcm",
-    choices: ["3/5", "3/10", "2/10", "1/5"],
+    choices: ["3/5", "3/10", "4/5", "1/5"],
     expected: ["3/5"],
     comparator: "mcq_exact",
     hint: "Les parts sont des cinquièmes des deux côtés : elles ne changent pas de taille.",
