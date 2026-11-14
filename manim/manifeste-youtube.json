@@ -85513,6 +85513,622 @@
         "animaux",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-perimetre-comprendre",
+      "pas_avant": "2027-03-11",
+      "notionId": "perimetre",
+      "microId": "perimetre_comprendre",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre.mp4",
+      "miniature": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre.png",
+      "titre": "Le ruban ou le tapis : lequel fait le tour ? — Comprendre le périmètre — épisode 1 · Maths CM2",
+      "accroche": "Noah est régisseur de concerts. Autour de la scène, il pose un ruban lumineux ; sur le sol, un tapis noir. Le ruban et le tapis, est-ce qu'on les mesure pareil ?\n\nDans cette vidéo :\n• le périmètre, c'est la longueur du tour ; l'aire, c'est la surface du dedans\n• une scène de 8 m sur 5 m : 8 + 5 + 8 + 5 = 26 m de ruban\n• un périmètre se mesure en m, cm, km ; une aire en m²\n• deux formes différentes peuvent avoir le même tour (un carré de 6,5 m)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : le rouleau de ruban est-il assez long ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_comprendre&display=simple\n\n📏 Épisode 1 de la série Périmètre d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comprendre le périmètre"
+        ],
+        [
+          "00:06",
+          "Noah, régisseur de concerts"
+        ],
+        [
+          "00:24",
+          "Le tour : le périmètre"
+        ],
+        [
+          "00:43",
+          "Le dedans : l'aire"
+        ],
+        [
+          "00:58",
+          "Même tour, formes différentes"
+        ],
+        [
+          "01:15",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "Le piège : m ou m² ?"
+        ],
+        [
+          "02:05",
+          "Question 2"
+        ],
+        [
+          "02:36",
+          "À toi de jouer"
+        ],
+        [
+          "02:52",
+          "Correction"
+        ],
+        [
+          "03:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "aire et périmètre",
+        "le tour d'une figure",
+        "longueur",
+        "unités de longueur",
+        "mètre",
+        "régisseur",
+        "concert",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:15",
+          "question": "Pour savoir combien de grillage il faut autour d'un champ, que calcule-t-on ?",
+          "choix": [
+            "son aire",
+            "son périmètre",
+            "son volume"
+          ],
+          "reponse": 1,
+          "explication": "Le grillage fait le tour du champ : on calcule son périmètre, une longueur."
+        },
+        {
+          "t": "02:05",
+          "question": "Quelle unité peut exprimer un périmètre ?",
+          "choix": [
+            "le litre",
+            "le mètre carré",
+            "le mètre"
+          ],
+          "reponse": 2,
+          "explication": "Un périmètre est une longueur : on l'exprime en mètres, en centimètres ou en kilomètres. Le mètre carré, c'est pour les aires."
+        }
+      ],
+      "centres": [
+        "musique",
+        "cinema-series"
+      ]
+    },
+    {
+      "id": "cm2-perimetre-comprendre-short",
+      "pas_avant": "2027-03-11",
+      "notionId": "perimetre",
+      "microId": "perimetre_comprendre",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-perimetre-comprendre",
+      "fichier": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre-short.mp4",
+      "miniature": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre-short-miniature.png",
+      "titre": "20 allumettes : l'enclos long ou l'enclos carré ? #maths #cm2",
+      "accroche": "Ti Margo a 20 allumettes pour faire la barrière de l'enclos de sa tortue. Un enclos long, ou un enclos carré : lequel a le plus grand tour ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec 20 allumettes, un enclos de 6 allumettes en haut et 6 en bas. Combien d'allumettes sur chaque petit côté ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #perimetre #cm2",
+      "tags": [
+        "périmètre",
+        "même périmètre",
+        "le tour d'une figure",
+        "allumettes",
+        "enclos",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Lequel a le plus grand tour ?",
+          "choix": [
+            "les deux, pareil",
+            "l'enclos long",
+            "l'enclos carré"
+          ],
+          "reponse": 0,
+          "explication": "L'enclos long : 8 + 8 + 2 + 2 = 20 allumettes. L'enclos carré : 5 × 4 = 20 allumettes. Le même tour !"
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-perimetre-quadrilatere",
+      "pas_avant": "2027-03-13",
+      "notionId": "perimetre",
+      "microId": "perimetre_quadrilatere",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere.mp4",
+      "miniature": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere.png",
+      "titre": "Combien de ligne autour d'un terrain ? — Périmètre du rectangle et du carré — épisode 3 · Maths CM2",
+      "accroche": "Rayan est jardinier de stade. Avant chaque match, il trace les lignes blanches du terrain de foot : un rectangle de 100 m sur 64 m. Combien de mètres de ligne pour en faire le tour ?\n\nDans cette vidéo :\n• un rectangle a 2 longueurs et 2 largeurs : 100 + 64 + 100 + 64\n• plus rapide : la moitié du tour (100 + 64 = 164), puis × 2 = 328 m\n• un carré : le côté × 4 (12,5 × 4 = 50 m)\n• un quadrilatère quelconque : on additionne les 4 côtés\n• le piège : 164 n'est que la moitié du tour, et 100 × 64 donne l'aire\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : la peinture suffit-elle pour 2 tours du terrain de handball ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_quadrilatere&display=simple\n\n📏 Épisode 3 de la série Périmètre d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le périmètre du rectangle et du carré"
+        ],
+        [
+          "00:08",
+          "Rayan, jardinier de stade"
+        ],
+        [
+          "00:27",
+          "Les 4 côtés du rectangle"
+        ],
+        [
+          "00:39",
+          "La moitié du tour, puis × 2"
+        ],
+        [
+          "00:57",
+          "Le carré : le côté × 4"
+        ],
+        [
+          "01:14",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Le piège : doubler, et pas L × l"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:48",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:28",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "périmètre du rectangle",
+        "périmètre du carré",
+        "quadrilatère",
+        "moitié du tour",
+        "nombres à virgule",
+        "mètre",
+        "terrain de foot",
+        "jardinier de stade",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:14",
+          "question": "Un rectangle mesure 9 mètres de long et 6 mètres de large. Quel est son périmètre ?",
+          "choix": [
+            "30 m",
+            "54 m",
+            "15 m"
+          ],
+          "reponse": 0,
+          "explication": "9 + 6 = 15 : c'est la moitié du tour. On double : 15 × 2 = 30 m."
+        },
+        {
+          "t": "02:06",
+          "question": "Un quadrilatère a des côtés de 3,5 m, 4 m, 2,5 m et 5 m. Quel est son périmètre ?",
+          "choix": [
+            "14,10 m",
+            "15 m",
+            "14 m"
+          ],
+          "reponse": 1,
+          "explication": "Ses côtés ne sont pas égaux : on additionne les 4. 3,5 + 2,5 = 6 ; + 4 = 10 ; + 5 = 15 m."
+        }
+      ],
+      "centres": [
+        "football",
+        "handball-volley"
+      ]
+    },
+    {
+      "id": "cm2-perimetre-quadrilatere-short",
+      "pas_avant": "2027-03-13",
+      "notionId": "perimetre",
+      "microId": "perimetre_quadrilatere",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-perimetre-quadrilatere",
+      "fichier": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere-short.mp4",
+      "miniature": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere-short-miniature.png",
+      "titre": "2 tours du terrain de basket : 86 mètres ? #maths #cm2",
+      "accroche": "Le coach dit à Ti Margo : fais 2 tours du terrain de basket, 28 m sur 15 m. Il calcule vite : 28 + 15 = 43, donc 2 tours = 86 m… vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un terrain carré de 20 m de côté. Combien de mètres pour 3 tours ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_quadrilatere&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #perimetre #cm2",
+      "tags": [
+        "périmètre",
+        "périmètre du rectangle",
+        "moitié du tour",
+        "terrain de basket",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Combien de mètres Ti Margo court-il vraiment, pour 2 tours ?",
+          "choix": [
+            "172 mètres",
+            "86 mètres",
+            "420 mètres"
+          ],
+          "reponse": 0,
+          "explication": "28 + 15, c'est seulement la moitié du tour. Un tour : 43 × 2 = 86 m. Deux tours : 86 × 2 = 172 m."
+        }
+      ],
+      "centres": [
+        "basket",
+        "sport"
+      ]
+    },
+    {
+      "id": "cm2-perimetre-polygone",
+      "pas_avant": "2027-03-14",
+      "notionId": "perimetre",
+      "microId": "perimetre_polygone",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone.mp4",
+      "miniature": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone.png",
+      "titre": "Combien de fil d'argent pour un bijou ? — Le périmètre d'un polygone — épisode 4 · Maths CM2",
+      "accroche": "Inaya est créatrice de bijoux. Elle entoure le bord d'un pendentif en forme d'hexagone d'un fil d'argent. Combien de fil pour un pendentif ?\n\nDans cette vidéo :\n• côtés égaux : on multiplie (1,2 × 6 = 7,2 cm)\n• côtés différents : on additionne tout, en cochant chaque côté (2 + 1,5 + 3 + 2,5 + 1 = 10 cm)\n• sur un quadrillage : on compte les côtés de carreaux du bord (12 cm)\n• le piège : les traits à l'intérieur ne font pas partie du tour\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : combien de pendentifs avec une bobine de 50 cm ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_polygone&display=simple\n\n📏 Épisode 4 de la série Périmètre d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le périmètre d'un polygone"
+        ],
+        [
+          "00:07",
+          "Inaya, créatrice de bijoux"
+        ],
+        [
+          "00:23",
+          "Côtés égaux : on multiplie"
+        ],
+        [
+          "00:39",
+          "Côtés différents : on additionne tout"
+        ],
+        [
+          "01:03",
+          "Sur un quadrillage : le bord"
+        ],
+        [
+          "01:20",
+          "Question 1"
+        ],
+        [
+          "01:57",
+          "Le piège : les traits du dedans"
+        ],
+        [
+          "02:13",
+          "Question 2"
+        ],
+        [
+          "02:53",
+          "À toi de jouer"
+        ],
+        [
+          "03:10",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "périmètre d'un polygone",
+        "polygone",
+        "hexagone",
+        "pentagone",
+        "octogone",
+        "quadrillage",
+        "nombres à virgule",
+        "centimètre",
+        "bijoux",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:20",
+          "question": "Un octogone a ses 8 côtés égaux à 2,5 cm. Quel est son périmètre ?",
+          "choix": [
+            "10,5 cm",
+            "20 cm",
+            "16,5 cm"
+          ],
+          "reponse": 1,
+          "explication": "2,5 × 8 : 2 × 8 = 16, et 5 dixièmes × 8 = 4. 16 + 4 = 20 cm."
+        },
+        {
+          "t": "02:13",
+          "question": "Un pentagone a des côtés de 4 cm, 3,5 cm, 2 cm, 4 cm et 1,5 cm. Quel est son périmètre ?",
+          "choix": [
+            "15 cm",
+            "13 cm",
+            "14,10 cm"
+          ],
+          "reponse": 0,
+          "explication": "3,5 + 1,5 = 5 ; + 4 + 2 + 4 = 15 cm. On n'oublie aucun des 5 côtés."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "mode"
+      ]
+    },
+    {
+      "id": "cm2-perimetre-polygone-short",
+      "pas_avant": "2027-03-14",
+      "notionId": "perimetre",
+      "microId": "perimetre_polygone",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-perimetre-polygone",
+      "fichier": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone-short.mp4",
+      "miniature": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone-short-miniature.png",
+      "titre": "Le ruban autour du train de biscuits : 160 cm ? #maths #cm2",
+      "accroche": "Ti Margo colle 4 biscuits carrés de 10 cm en ligne et veut mettre un ruban tout autour. Un biscuit : 40 cm. 4 biscuits : 160 cm de ruban… vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 3 biscuits carrés de 10 cm, collés en ligne. Combien de centimètres de ruban tout autour ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_polygone&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #perimetre #cm2",
+      "tags": [
+        "périmètre",
+        "périmètre d'un polygone",
+        "figure composée",
+        "le bord",
+        "biscuits",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Combien de ruban autour du train de biscuits ?",
+          "choix": [
+            "100 centimètres",
+            "160 centimètres",
+            "40 centimètres"
+          ],
+          "reponse": 0,
+          "explication": "Le ruban ne passe pas entre les biscuits. En haut 40, en bas 40, et 10 à chaque bout : 40 + 40 + 10 + 10 = 100 cm."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-perimetre-defi",
+      "pas_avant": "2027-03-15",
+      "notionId": "perimetre",
+      "microId": "perimetre_defi",
+      "classe": "cm2",
+      "ceinture": "bleue",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi.mp4",
+      "miniature": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi.png",
+      "titre": "Combien de fil pour le robot tondeuse ? — Défi de périmètre — épisode 5 · Maths CM2",
+      "accroche": "Malo est technicien en robotique : il installe des robots tondeuses. Pour que le robot reste dans le jardin, il enterre un fil tout autour. Combien de fil, et combien de rouleaux ?\n\nDans cette vidéo :\n• un jardin de 18,5 m sur 12 m : 61 m de fil, donc 2 rouleaux de 50 m\n• retrouver la largeur : la moitié du tour (50 ÷ 2 = 25), moins la longueur (25 − 15 = 10 m)\n• le côté d'un carré : le périmètre ÷ 4 (34 ÷ 4 = 8,5 m)\n• le piège : 50 − 15 est faux, le tour contient deux longueurs\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : combien de mètres de fil Malo doit-il encore acheter ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_defi&display=simple\n\n📏 Épisode 5 de la série Périmètre d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Défi de périmètre"
+        ],
+        [
+          "00:07",
+          "Malo, technicien en robotique"
+        ],
+        [
+          "00:23",
+          "Combien de rouleaux de fil ?"
+        ],
+        [
+          "00:43",
+          "Retrouver la largeur"
+        ],
+        [
+          "01:06",
+          "Le côté d'un carré : ÷ 4"
+        ],
+        [
+          "01:20",
+          "Question 1"
+        ],
+        [
+          "01:54",
+          "Le piège : la moitié du tour d'abord"
+        ],
+        [
+          "02:13",
+          "Question 2"
+        ],
+        [
+          "02:53",
+          "À toi de jouer"
+        ],
+        [
+          "03:12",
+          "Correction"
+        ],
+        [
+          "03:28",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "retrouver un côté",
+        "largeur d'un rectangle",
+        "côté d'un carré",
+        "moitié du tour",
+        "problème",
+        "nombres à virgule",
+        "robot tondeuse",
+        "robotique",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:20",
+          "question": "Un carré a un périmètre de 28 cm. Combien mesure un côté ?",
+          "choix": [
+            "14 cm",
+            "7 cm",
+            "24 cm"
+          ],
+          "reponse": 1,
+          "explication": "Les 4 côtés sont égaux : 28 ÷ 4 = 7. On vérifie : 7 × 4 = 28."
+        },
+        {
+          "t": "02:13",
+          "question": "Un rectangle a un périmètre de 18 cm. Sa longueur mesure 6 cm. Quelle est sa largeur ?",
+          "choix": [
+            "3 cm",
+            "12 cm",
+            "6 cm"
+          ],
+          "reponse": 0,
+          "explication": "La moitié du tour : 18 ÷ 2 = 9. 9 − 6 = 3 cm. On vérifie : (6 + 3) × 2 = 18."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm2-perimetre-defi-short",
+      "pas_avant": "2027-03-15",
+      "notionId": "perimetre",
+      "microId": "perimetre_defi",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-perimetre-defi",
+      "fichier": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi-short.mp4",
+      "miniature": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi-short-miniature.png",
+      "titre": "36 m de grillage pour un enclos carré : le côté ? #maths #cm2",
+      "accroche": "Ti Margo a 36 m de grillage pour faire un enclos carré à ses poules, et il veut utiliser tout le grillage. Combien mesure chaque côté ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 50 m de grillage pour un enclos carré. Combien mesure chaque côté ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #perimetre #cm2",
+      "tags": [
+        "périmètre",
+        "périmètre du carré",
+        "retrouver le côté",
+        "division",
+        "enclos",
+        "poules",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien mesure chaque côté de l'enclos ?",
+          "choix": [
+            "18 mètres",
+            "32 mètres",
+            "9 mètres"
+          ],
+          "reponse": 2,
+          "explication": "4 côtés égaux : 36 ÷ 4 = 9 m. On vérifie : 9 × 4 = 36. Tout le grillage est utilisé !"
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ]
     }
   ]
 }

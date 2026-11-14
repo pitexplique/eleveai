@@ -7126,6 +7126,78 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=fraction&microId=fraction_representer&display=simple"
  },
+ "cm2-perimetre-comprendre": {
+  "fichier": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre.mp4",
+  "poster": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre.png",
+  "vignette": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre.vignette.webp",
+  "titre": "Le ruban ou le tapis : lequel fait le tour ? — Comprendre le périmètre — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_comprendre&display=simple"
+ },
+ "cm2-perimetre-comprendre-short": {
+  "fichier": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre-short.mp4",
+  "poster": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre-short-miniature.png",
+  "vignette": "cm2/maths/perimetre/01-comprendre/eleveai-maths-cm2-perimetre-comprendre-short-miniature.vignette.webp",
+  "titre": "20 allumettes : l'enclos long ou l'enclos carré ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_comprendre&display=simple"
+ },
+ "cm2-perimetre-defi": {
+  "fichier": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi.mp4",
+  "poster": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi.png",
+  "vignette": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi.vignette.webp",
+  "titre": "Combien de fil pour le robot tondeuse ? — Défi de périmètre — épisode 5 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_defi&display=simple"
+ },
+ "cm2-perimetre-defi-short": {
+  "fichier": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi-short.mp4",
+  "poster": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi-short-miniature.png",
+  "vignette": "cm2/maths/perimetre/05-defi/eleveai-maths-cm2-perimetre-defi-short-miniature.vignette.webp",
+  "titre": "36 m de grillage pour un enclos carré : le côté ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_defi&display=simple"
+ },
+ "cm2-perimetre-polygone": {
+  "fichier": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone.mp4",
+  "poster": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone.png",
+  "vignette": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone.vignette.webp",
+  "titre": "Combien de fil d'argent pour un bijou ? — Le périmètre d'un polygone — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_polygone&display=simple"
+ },
+ "cm2-perimetre-polygone-short": {
+  "fichier": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone-short.mp4",
+  "poster": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone-short-miniature.png",
+  "vignette": "cm2/maths/perimetre/04-polygone/eleveai-maths-cm2-perimetre-polygone-short-miniature.vignette.webp",
+  "titre": "Le ruban autour du train de biscuits : 160 cm ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_polygone&display=simple"
+ },
+ "cm2-perimetre-quadrilatere": {
+  "fichier": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere.mp4",
+  "poster": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere.png",
+  "vignette": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere.vignette.webp",
+  "titre": "Combien de ligne autour d'un terrain ? — Périmètre du rectangle et du carré — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_quadrilatere&display=simple"
+ },
+ "cm2-perimetre-quadrilatere-short": {
+  "fichier": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere-short.mp4",
+  "poster": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere-short-miniature.png",
+  "vignette": "cm2/maths/perimetre/03-quadrilatere/eleveai-maths-cm2-perimetre-quadrilatere-short-miniature.vignette.webp",
+  "titre": "2 tours du terrain de basket : 86 mètres ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_quadrilatere&display=simple"
+ },
  "cm2-proba-comparer": {
   "fichier": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.mp4",
   "poster": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.png",
