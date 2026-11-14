@@ -176,7 +176,7 @@ def carre_u(c, couleur, bord, sw=3):
     return Square(c, fill_color=couleur, fill_opacity=1, stroke_color=bord, stroke_width=sw)
 
 
-class AireUnitesBase(PaysageAireCM2G):
+class AireUnitesBase(LigneAlignee, PaysageAireCM2G):
     nom_voix = "cm2-aire-unites"
     fichier_marques = "aire_unites_marques.json"
     ceinture = "verte"
@@ -293,15 +293,17 @@ class AireUnitesBase(PaysageAireCM2G):
         self.col(l0, 2.75)
         self.play(FadeIn(l0, shift=UP * 0.1), FadeIn(u, scale=0.4), run_time=0.45)
         self.play(FadeIn(petit, scale=2), FadeIn(nc), run_time=0.3)
-        l1 = self.ligne([("un carré de", WHITE), ("1 dm", DM_C), ("de côté,", WHITE)], 31, buff=0.15)
-        self.col(l1, 2.0)
+        l1 = self.ligne([("un carré de", WHITE), ("1 dm", DM_C)], 32, buff=0.15)
+        self.col(l1, 2.05)
+        l1b = self.t("de côté,", 32)
+        self.col(l1b, 1.55)
         self.au_mot("un carré de")
         self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("1 décimètre")
         c1 = cote_txt("1 dm", u, LEFT)
         self.play(FadeIn(l1[1], shift=UP * 0.1), FadeIn(c1), run_time=0.3)
         self.au_mot("de côté")
-        self.play(FadeIn(l1[2], shift=UP * 0.1), run_time=0.3)
+        self.play(FadeIn(l1b, shift=UP * 0.1), run_time=0.3)
         # la règle : 10 graduations sous le carré
         b = u.get_bottom()[1] - 0.12
         regle = VGroup(Line(P(u.get_left()[0], b), P(u.get_right()[0], b), stroke_color=WHITE, stroke_width=3),
@@ -309,18 +311,19 @@ class AireUnitesBase(PaysageAireCM2G):
                               stroke_color=WHITE, stroke_width=2.5) for k in range(11)])
         c10 = cote_txt("10 cm", regle, DOWN, buff=0.08)
         l2 = self.t("soit 10 cm", 34, CM_C)
-        self.col(l2, 1.4)
+        self.col(l2, 0.95)
         self.au_mot("10 centimètres")
         self.play(FadeIn(l2, shift=UP * 0.1), Create(regle), FadeIn(c10), run_time=0.45)
         ma = main_ouverte(1.0).move_to(P(-1.95, 1.65))
         self.au_mot("à peu près")
         l3 = self.bloc(["à peu près", "une main ouverte"], 34, GRAY_B)
-        self.col(l3, 0.5)
+        self.col(l3, 0.0)
         self.play(FadeIn(l3, shift=UP * 0.1), FadeIn(ma, shift=LEFT * 0.3), run_time=0.45)
         af = affiche(2.5, 2.0).move_to(P(-3.6, -1.85))
         self.au_mot("Une affiche")
-        l4 = self.ligne([("Une affiche :", "#f9a8d4"), ("5 dm sur 4 dm", WHITE)], 33)
-        self.col(l4, -0.45)
+        l4 = VGroup(self.t("Une affiche :", 33, "#f9a8d4"), self.t("5 dm sur 4 dm", 33))
+        self.col(l4[0], -0.85)
+        self.col(l4[1], -1.35)
         self.play(FadeIn(af, scale=0.6), FadeIn(l4[0], shift=UP * 0.1), run_time=0.4)
         self.play(FadeIn(l4[1], shift=UP * 0.1), run_time=0.3)
         self.add(cote_txt("5 dm", af, UP, buff=0.1), cote_txt("4 dm", af, LEFT))
@@ -329,7 +332,7 @@ class AireUnitesBase(PaysageAireCM2G):
         self.play(ReplacementTransform(u.copy(), cible), Create(gr), *estomper(af), run_time=0.6)
         self.au_mot("20 décimètres")
         res = self.gros("20 dm²", fs=46)
-        self.col(res, -1.4)
+        self.col(res, -2.2)
         self.play(FadeIn(res, scale=1.2), FadeIn(numeros(cases_de(af, 5, 4), 20, "#0f172a")), run_time=0.5)
         self.attendre_voix()
 
@@ -447,6 +450,7 @@ class AireUnitesBase(PaysageAireCM2G):
         gauche(tit, -6.2, 3.05)
         self.play(Write(tit), run_time=0.35)
         a = 2.3
+        XP = -1.9  # la colonne commence plus à gauche : rien de réduit, rien au bord
         x0 = -5.35
         trait = VGroup(Line(P(x0, 1.55), P(x0 + a, 1.55), stroke_color=ORANGE_RETENUE, stroke_width=10),
                        Line(P(x0, 1.35), P(x0, 1.75), stroke_color=ORANGE_RETENUE, stroke_width=6),
@@ -457,16 +461,16 @@ class AireUnitesBase(PaysageAireCM2G):
         cm = m2("1 m²", 40, "#1e1b4b").move_to(ca)
         self.au_mot("Un mètre carré")
         l1 = self.bloc(["Un mètre carré,", "ce n'est pas un mètre !"], 34, ROUGE_ERREUR)
-        self.col(l1, 2.3)
+        self.col(l1, 1.95, xl=XP)
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.45)
         l2 = self.pile([("Le mètre : une longueur,", ORANGE_RETENUE), ("un trait.", WHITE)], 34)
-        self.col(l2, 1.1)
+        self.col(l2, 0.8, xl=XP)
         self.au_mot("Le mètre mesure")
         self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.35)
         self.au_mot("un trait")
         self.play(FadeIn(l2[1], shift=UP * 0.1), Create(trait), FadeIn(ct), run_time=0.45)
         l3 = self.pile([("Le mètre carré :", M_C), ("une surface,", M_C), ("un carré entier.", WHITE)], 34)
-        self.col(l3, -0.4)
+        self.col(l3, -0.55, xl=XP)
         self.au_mot("Le mètre carré mesure")
         self.play(FadeIn(l3[0], shift=UP * 0.1), run_time=0.35)
         self.au_mot("une surface")
@@ -480,7 +484,7 @@ class AireUnitesBase(PaysageAireCM2G):
         gm = Text("m", font_size=96, color=M_C, weight=BOLD)
         deux = Text("2", font_size=52, color=JAUNE_TITRE, weight=BOLD)
         ecrit = VGroup(l4, gm).arrange(RIGHT, buff=0.35, aligned_edge=DOWN)
-        self.col(ecrit, -1.7)
+        self.col(ecrit, -2.15, xl=XP)
         deux.next_to(gm, UR, buff=0.02).shift(DOWN * 0.3)
         self.play(FadeIn(l4, shift=UP * 0.1), FadeIn(gm, scale=1.2), run_time=0.4)
         self.au_mot("2 en haut")
@@ -556,7 +560,7 @@ class AireUnitesBase(PaysageAireCM2G):
                  (ba, "La banderole", "La banderole :", "5 × 2", "= 10 m²", (5, 2), "#38bdf8", "#0f172a")]
         for (o, mot, nom, calc, res, (nc, nr), coul, cg), y in zip(specs, self.YS):
             lg = self.ligne([(nom, coul), (calc, BLEU_D), (res, VERT_OK)], 31, buff=0.2)
-            self.col(lg, y)
+            self.col(lg, y, xl=-1.3)  # plus à gauche : la ligne n'est plus réduite contre le bord
             self.au_mot(mot)
             self.play(FadeIn(lg[0], shift=UP * 0.1), Indicate(o, color=coul, scale_factor=1.06), run_time=0.4)
             gr = grille(o.fond.width, o.fond.height, nc, nr, cg, 2).move_to(o.fond)

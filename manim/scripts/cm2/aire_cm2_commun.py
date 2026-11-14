@@ -92,6 +92,38 @@ def m2(texte, fs=32, couleur=WHITE):
     return hors_audit(Text(texte, font_size=fs, color=couleur, weight=BOLD))
 
 
+SUR_LIGNE = set("acemnorsuvwxzéèêàâîôûù0123456789ABCDEFGHIKLMNOPRSTUVWXYZ")
+
+
+def ligne_de_base(t):
+    """L'ordonnée de la ligne d'écriture d'un Text : le bas de sa première lettre sans jambage."""
+    lettres = [c for c in getattr(t, "text", "") if not c.isspace()]
+    if not lettres or len(lettres) != len(t.submobjects):
+        return None
+    for c, g in zip(lettres, t.submobjects):
+        if c in SUR_LIGNE:
+            return g.get_bottom()[1]
+    return None
+
+
+def aligner_base(morceaux):
+    """Pose les morceaux d'une ligne sur la MÊME ligne d'écriture (arrange aligne les centres :
+    « de 4 » tombait plus bas que « 3 rangées » à cause du jambage du g). Copie de aire_defi.py."""
+    b0 = ligne_de_base(morceaux[0])
+    for m in morceaux[1:]:
+        b = ligne_de_base(m)
+        if b0 is not None and b is not None:
+            m.shift(UP * (b0 - b))
+    return morceaux
+
+
+class LigneAlignee:
+    """Mixin : self.ligne(...) pose ses morceaux sur une même ligne d'écriture."""
+
+    def ligne(self, morceaux, fs=40, buff=0.2):
+        return aligner_base(super().ligne(morceaux, fs, buff))
+
+
 class PaysageAireCM2(PaysageAireCM1):
     identite = "Maths CM2 — EleveAI"
     ceinture = "verte"

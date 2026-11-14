@@ -15983,5 +15983,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_triangle_rectangle&display=simple"
+ },
+ "cm2-aire-unites": {
+  "fichier": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites.mp4",
+  "poster": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites.png",
+  "vignette": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites.vignette.webp",
+  "titre": "Timbre, affiche ou bâche : quelle unité d'aire ? — Les unités d'aire — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_unites&display=simple"
+ },
+ "cm2-aire-unites-short": {
+  "fichier": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites-short.mp4",
+  "poster": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites-short-miniature.png",
+  "vignette": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites-short-miniature.vignette.webp",
+  "titre": "J'ai commandé un tapis de 4 cm² au lieu de 4 m² ! #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_unites&display=simple"
  }
 }

@@ -72,6 +72,15 @@ Notes/outils `N = side-session-notes/local_e931467e-2c23-4163-86c5-b91473d4ac99/
 3. Commit PAR CHEMIN : `manifeste-youtube.json`, `lib/videos/videos-r2.json`, `bilans-videos.json` ont des modifs NON commitées d'autres sessions → ne committer QUE nos clés `cm2-aire-*` (version HEAD + nos entrées, via `git hash-object -w` + `git update-index --cacheinfo`, sans toucher la copie de travail). Scripts : `git add manim/scripts/cm2/aire_<ep>.py` un par un.
 4. Cocher le plan `manim/PLAN-perimetre-aire-volume.md` (CM2 aire), mémoire `serie-perimetre-aire-cm2.md`. Jamais de push.
 
+## AIRE CM2 — session 3 « cm2-aire-fin » (14/11 soir)
+Outils en plus : `side-session-notes/local_802c60e4-c38c-4c4d-8d27-3ed600b51bd7/indexer_cles.py cm2-aire- <fichiers json>` (met dans l'INDEX : HEAD + nos seules clés `cm2-aire-*`, copie de travail intacte ; puis `git commit` sans `-a`).
+- ✅ 04, 05, 07 PUBLIÉS (commit 401811fe) : miniatures, manifeste 19, 20, 22/03/2027 (titre 04 raccourci : « Panneaux solaires : combien de m² ? … »), fiches, vignettes, R2 (check 7/7), coach branché (6 vidéos). 03 convertir désormais commité aussi dans manifeste / videos-r2 / bilans.
+- Commun : `LigneAlignee` + `aligner_base` (copie de aire_defi) dans `aire_cm2_commun.py` → appliqué à 01, 02, 06 (« de 4 » posé sur la ligne d'écriture).
+- 02 unites : écran 03 en lignes courtes (« un carré de 1 dm » / « de côté, » ; « Une affiche : » / « 5 dm sur 4 dm » ; 20 dm² à y −2.2) ; piège : colonne à xl −1.9 (rien réduit) ; correction : xl −1.3. Planche relue. HD lancé (`hd-unites.log`) → RELIRE à l'image le piège (≈ 01:39-01:58).
+- 01 comprendre : dry run propre (« = 9 » vérifié), planche relue ; corrigé : encadré du piège en 2 Text, carte de choix avec place pour la coche (`_carte_choix`). HD en file (`hd-comprendre.log`) → RELIRE la réponse Q1 (≈ 01:45) et le piège.
+- 06 composer : planche relue ; piège : les 2 encadrés écartés (y −1.85 / −2.95). HD en file (`hd-composer.log`) → relire le piège (≈ 01:39-01:54). `ep-composer.json` écrit (ecrire_ep.py, 21/03/2027, short Q 00:16 B).
+- RESTE pour 01, 02, 06 : bords 0 → miniature → `entrees_aire.py` → fiche → vignettes → R2 → generer-videos-r2 → coach → commit (indexer_cles.py + scripts `aire_comprendre.py`, `aire_composer.py`, `aire_unites.py`, `aire_cm2_commun.py`) → plan + mémoire.
+
 ## PÉRIMÈTRE CM2 — session 1 (14/11, passée la main à 68 %)
 - ✅ WAV des 10 voix : `public/sons/cm2-perimetre-<ep>[-short]/` (Julie, débit −6, ignorés par git).
 - ✅ Marques : `python manim/scripts/cm2/perimetre_marques.py comprendre triangle quadrilatere polygone defi` → `manim/scripts/cm2/perimetre_<ep>_marques.json` (copie de `cm1/aire_marques.py` ; triangle 06-piege « 80, 1 et 1 ! 1 mètre » corrigé DANS le script (`CORRIGER`), relancer ne le perd pas ; sans argument : ne fait rien).
