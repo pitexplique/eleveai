@@ -1,0 +1,7 @@
+{
+  "voix": "ce2-contenance-{ep}-short",
+  "sons": "public/sons/ce2-contenance-{ep}-short",
+  "sortie": "manim/sorties/ce2/maths/contenance/{num}-{ep}",
+  "nom": "eleveai-maths-ce2-contenance-{ep}-short",
+  "episodes": { "unites": "01", "relations": "02", "comparer": "03", "probleme": "04", "defi": "05" }
+}

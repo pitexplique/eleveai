@@ -161,3 +161,15 @@ def yanis(s=1.0):
 class PaysageContenanceCE2(PaysageContenanceCM1):
     identite = "Maths CE2 — EleveAI"
     ceinture = "blanche"
+
+    def aux_extraits(self, morceaux, extraits, run_time=0.18):
+        """Chaque morceau à SON extrait de la voix : extraits (texte) ou (texte, n, délai).
+        Les morceaux sortent de la synchro automatique (un nombre redit)."""
+        for m, ex in zip(morceaux, extraits):
+            for f in m.get_family():
+                f.sans_synchro = True
+            ex = list(ex) if isinstance(ex, (tuple, list)) else [ex]
+            ex, n, delai = (ex + [1, 0.0][len(ex) - 1:])[:3]
+            self.au_mot(ex, n)
+            self.wait(0.07 + delai)
+            self.play(FadeIn(m, shift=UP * 0.08), run_time=run_time)
