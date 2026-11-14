@@ -14,6 +14,7 @@ import {
   barreEgale,
   choix,
   choixN,
+  deuxPersonnes,
   maj,
   objetsEnVrac,
   objetsGroupes,
@@ -23,14 +24,6 @@ import {
   rint,
   type Prenom,
 } from "@/lib/tutor-v4/questionBank/ce2/maths/outils-calcul-ce2";
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomChoice<T>(items: T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
 
 function shuffle<T>(items: T[]): T[] {
   return melangeEnPlace([...items]);
@@ -129,7 +122,7 @@ type Q = TutorGeneratedQuestionV4;
 type Etoile = 1 | 2 | 3;
 
 /** « de pommes », « d’œufs ». */
-const deM = (mot: string) => (/^[aeiouyàâéèêëîïôœ]/i.test(mot) ? `d’${mot}` : `de ${mot}`);
+const deM = (mot: string) => (/^[aeiouàâéèêëîïôœ]/i.test(mot) ? `d’${mot}` : `de ${mot}`);
 
 type Nom = { un: string; des: string; fem: boolean };
 const nm = (un: string, des: string, fem = false): Nom => ({ un, des, fem });
@@ -197,9 +190,9 @@ const chacun = (n: Nom) => (n.fem ? "chacune" : "chacun");
  * même phrase revient moins vite à l'identique.
  */
 function habille(text: string): string {
-  if (Math.random() < 0.65 || /^Pic /.test(text)) return text;
+  if (Math.random() < 0.65 || /^(Pic |Défi|Nombre mystère)/.test(text)) return text;
   const p = quelquun();
-  const suite = /^(On|Si|Tu|Une|Un|Quelle|Quel|Combien|Les|Famille|Avec|Complète|Diviser|Pour|Dans|Lis|Que|Comment|Trouve|Partage|Regarde|Au|Aux|À|Chez|Sur|Le|La|L’|Il|Elle)(?=[\s’])/.test(text)
+  const suite = /^(On|Si|Tu|Une|Un|Quelle|Quel|Combien|Les|Famille|Avec|Complète|Diviser|Pour|Dans|Lis|Que|Comment|Trouve|Partage|Regarde|Au|Aux|À|Chez|Sur|Le|La|L’|Il|Elle|Avant|Sans|Pose|Effectue|Vérifie|Voici|Calcule|Nombre|Division|Après)(?=[\s’])/.test(text)
     ? minus(text)
     : text;
   return pick([
@@ -1078,6 +1071,1281 @@ const GABARITS_SENS_LIEN: TutorBankItemV4[] = [
   gab("cm1_division_lien_tpl_mult_aide_e3", L, 3, "Cherche dans la table du diviseur.", ["lien_multiplication", "qcm"], () => multAideQ(3)),
 ];
 
+/* =========================================================
+   DIVISION_POSEE, DIVISION_RESTE, DIVISION_PROBLEME, DIVISION_DEFI
+   — LES GABARITS (14/11/2026)
+
+   ⛔ POURQUOI. Mesuré avec scripts/mesurer-squelettes-coach.ts : 3, 6, 10 et
+   8 squelettes, 11 à 18 répétitions sur 20 ; le problème n'avait aucun dessin
+   et 46 % de Réunion (« au marché de Saint-Pierre » à chaque fois). Pas de
+   vidéo branchée sur ces micros : vocabulaire du cycle 3 (dividende,
+   diviseur, quotient, reste, la potence, « on commence par la gauche »,
+   « dividende = diviseur × quotient + reste »).
+
+   ⭐ LES PIÈGES = DE VRAIES ERREURS D'ÉLÈVE : diviser chiffre par chiffre
+   sans reporter le reste (96 ÷ 6 → 11), oublier le 0 du quotient
+   (412 ÷ 4 → 13), prendre le quotient pour le reste, garder un reste plus
+   grand que le diviseur, oublier le reste, compter le reste comme un paquet
+   complet (ou l'oublier quand il faut une voiture de plus).
+   Signe « ÷ » partout, jamais « / ».
+========================================================= */
+
+type E5 = 1 | 2 | 3 | 4 | 5;
+
+/** Une division euclidienne : dividende N, diviseur d, quotient q, reste r. */
+type Div = { N: number; d: number; q: number; r: number };
+const div = (d: number, q: number, r = 0): Div => ({ N: d * q + r, d, q, r });
+
+/** « un », « une ». */
+const unUne = (n: Nom) => (n.fem ? "une" : "un");
+/** « complets », « complètes ». */
+const complets = (n: Nom) => (n.fem ? "complètes" : "complets");
+
+/**
+ * Les nombres d'une division POSÉE, par étoile : 2 chiffres ÷ 1 chiffre à
+ * quotient de 2 chiffres (★2 : 84 ÷ 4, 96 ÷ 6), jusqu'à 540 (★3), 3 chiffres
+ * avec souvent un 0 au quotient (★4 : 412 ÷ 4 = 103).
+ */
+function tiragePose(e: E5, avecReste = false): Div {
+  if (e <= 2) {
+    const d = rint(2, 6);
+    const r = avecReste ? rint(1, d - 1) : 0;
+    return div(d, rint(11, Math.floor((99 - r) / d)), r);
+  }
+  if (e === 3) {
+    const d = rint(3, 9);
+    return div(d, rint(12, 60), avecReste ? rint(1, d - 1) : 0);
+  }
+  const d = rint(3, 9);
+  const r = avecReste ? rint(1, d - 1) : 0;
+  const qmin = Math.max(21, Math.ceil((100 - r) / d));
+  const qmax = Math.floor((999 - r) / d);
+  const tous = Array.from({ length: qmax - qmin + 1 }, (_, i) => qmin + i);
+  const avecZero = tous.filter((q) => /.0/.test(String(q)));
+  return div(d, Math.random() < 0.4 && avecZero.length ? pick(avecZero) : pick(tous), r);
+}
+
+/** Les nombres d'une division AVEC RESTE : tables (★3), quotient jusqu'à 15 (★4), petite collection à dessiner. */
+function tirageReste(e: E5 | "petit"): Div {
+  if (e === "petit") {
+    const d = rint(2, 5);
+    return div(d, rint(3, 5), rint(1, d - 1));
+  }
+  const d = rint(e <= 3 ? 2 : 3, 9);
+  return div(d, e <= 3 ? rint(2, 9) : rint(6, 15), rint(1, d - 1));
+}
+
+/** L'erreur « chiffre par chiffre » : 96 ÷ 6 → 9 ÷ 6 = 1, 6 ÷ 6 = 1 → 11 (le reste n'est pas reporté). */
+function chiffreParChiffre(N: number, d: number): number | undefined {
+  const v = Number(
+    String(N)
+      .split("")
+      .map((c) => Math.floor(Number(c) / d))
+      .join(""),
+  );
+  return v > 0 ? v : undefined;
+}
+/** L'erreur du 0 oublié au quotient : 103 → 13, 120 → 12. */
+const zeroOublie = (q: number) =>
+  /.0/.test(String(q)) ? Number(String(q)[0] + String(q).slice(1).replace(/0/g, "")) : undefined;
+
+const piegesPose = ({ N, d, q, r }: Div) =>
+  [chiffreParChiffre(N, d), zeroOublie(q), q + 1, q - 1, q + 10, r > 0 ? r : N - d].filter(
+    (v): v is number => v !== undefined,
+  );
+
+const RANGS: readonly [string, string][] = [
+  ["unité", "unités"],
+  ["dizaine", "dizaines"],
+  ["centaine", "centaines"],
+];
+/** « 15 dizaines » : un nombre et son rang (0 = unités). */
+const enRang = (k: number, rang: number) => `${k} ${k > 1 ? RANGS[rang][1] : RANGS[rang][0]}`;
+
+/** Les étapes de la potence, de la gauche vers la droite. */
+function etapes(N: number, d: number): string {
+  const s = String(N);
+  const out: string[] = [];
+  let cur = 0;
+  for (let i = 0; i < s.length; i++) {
+    cur = cur * 10 + Number(s[i]);
+    if (!out.length && cur < d && i < s.length - 1) continue;
+    const k = Math.floor(cur / d);
+    out.push(`en ${enRang(cur, s.length - 1 - i)}, ${d} va ${k} fois, reste ${cur - k * d}`);
+    cur -= k * d;
+  }
+  return maj(out.join(" ; ")) + ".";
+}
+
+const verif = ({ N, d, q, r }: Div) => `${d} × ${q}${r ? ` + ${r}` : ""} = ${N}`;
+
+function expPose(D: Div, conclusion?: string): string {
+  return exp(
+    "Dans une division posée, on cherche combien de fois le diviseur est contenu dans le dividende.",
+    "On commence par la gauche : on partage d’abord les plus grandes unités, puis on abaisse le chiffre suivant.",
+    `${etapes(D.N, D.d)} Vérification : ${verif(D)}.`,
+    conclusion ?? (D.r ? `${D.N} ÷ ${D.d} : quotient ${D.q}, reste ${D.r}.` : `${D.N} ÷ ${D.d} = ${D.q}.`),
+  );
+}
+
+/** La potence, sans le résultat. */
+const potence = (D: Div, questionLabel?: string, title?: string) =>
+  divisionCanvas({ dividende: D.N, diviseur: D.d, quotient: D.q, reste: D.r, questionLabel, title, showResult: false });
+
+/** La table du diviseur autour du dividende : « entre quels multiples se trouve 38 ? ». */
+function tableMultiples({ N, d, q }: Div): TableauDonneesCanvasData {
+  const k0 = Math.max(1, q - 1);
+  const ks = [k0, k0 + 1, k0 + 2, k0 + 3];
+  return {
+    kind: "tableau_donnees",
+    title: `La table de ${d}`,
+    coin: "×",
+    headers: ks.map(String),
+    rows: [{ label: String(d), values: ks.map((k) => d * k) }],
+    questionLabel: `Entre quels multiples de ${d} se trouve ${N} ?`,
+    display: { compact: true },
+  } as TableauDonneesCanvasData;
+}
+
+/** Le dessin d'une division avec reste : en vrac si la collection est petite, sinon la table ou la potence. */
+function dessinReste(D: Div, s?: Sit): Q["canvas"] {
+  if (s?.dessin && D.N <= 30 && Math.random() < 0.7) return objetsEnVrac(s.dessin, D.N);
+  return Math.random() < 0.5 && D.q <= 20 ? tableMultiples(D) : potence(D, "Trouve le plus grand multiple du diviseur.");
+}
+
+const unMetier = () => pick(SITS.filter((s) => s.metier)).metier!;
+
+/* ---------------- DIVISION_POSEE ---------------- */
+
+function quotientQ(e: E5): Q {
+  const D = tiragePose(e, e === 4 ? Math.random() < 0.5 : e === 3 ? Math.random() < 0.3 : false);
+  const { N, d, q, r } = D;
+  const p = quelquun();
+  const m = unMetier();
+  const quel = r ? " Quel est le quotient ?" : "";
+  return qcmN(
+    pick([
+      `Pose et calcule ${N} ÷ ${d}.${quel}`,
+      `Quel est le quotient de ${N} ÷ ${d} ?`,
+      `${p.nom} pose la division ${N} ÷ ${d}. Quel quotient trouve-t-${p.il} ?`,
+      `Calcule ${N} ÷ ${d} en posant la division.${quel}`,
+      `Dans la potence de ${N} ÷ ${d}, quel nombre s’écrit sous le diviseur ?`,
+      `Combien de fois ${d} est-il contenu dans ${N} ?`,
+      `${m.nom} pose ${N} ÷ ${d} pour ses comptes. Quel quotient trouve-t-${m.il} ?`,
+      `Sur son cahier, ${p.nom} pose ${N} ÷ ${d}. Quel nombre écrit-${p.il} au quotient ?`,
+    ]),
+    q,
+    piegesPose(D),
+    expPose(D),
+    potence(D, pick(["Commence par la gauche.", "Quel est le quotient ?", "Pose la division."])),
+  );
+}
+
+/** Combien de chiffres aura le quotient ? On regarde le premier chiffre à gauche. */
+function nbChiffresQ(e: E5): Q {
+  const d = rint(e <= 2 ? 3 : 2, 9);
+  const N = e <= 2 ? rint(12, 99) : rint(102, 999);
+  const q = Math.floor(N / d);
+  const r = N % d;
+  const n = String(q).length;
+  const s = String(N);
+  const premier = Number(s[0]);
+  const haut = s.length - 1;
+  const lib = (k: number) => `${k} chiffre${k > 1 ? "s" : ""}`;
+  const p = quelquun();
+  return qcmM(
+    pick([
+      `Sans finir le calcul : combien de chiffres aura le quotient de ${N} ÷ ${d} ?`,
+      `${p.nom} va poser ${N} ÷ ${d}. Combien de chiffres aura son quotient ?`,
+      `Avant de poser ${N} ÷ ${d}, on prévoit la taille du quotient. Combien de chiffres aura-t-il ?`,
+      `Le quotient de ${N} ÷ ${d} s’écrira avec combien de chiffres ?`,
+    ]),
+    lib(n),
+    [1, 2, 3].filter((k) => k !== n).map(lib),
+    exp(
+      "Le premier chiffre du quotient dit son rang : il y a autant de chiffres que de rangs à partir de celui-là.",
+      "On regarde le premier chiffre à gauche du dividende et on le compare au diviseur.",
+      premier >= d
+        ? `${premier} ≥ ${d} : on partage déjà les ${RANGS[haut][1]}, le quotient commence aux ${RANGS[haut][1]}. ${N} ÷ ${d} = ${q}${r ? ` reste ${r}` : ""}.`
+        : `${premier} < ${d} : on prend ${enRang(Number(s.slice(0, 2)), haut - 1)}, le quotient commence aux ${RANGS[haut - 1][1]}. ${N} ÷ ${d} = ${q}${r ? ` reste ${r}` : ""}.`,
+      `Le quotient a ${lib(n)}.`,
+    ),
+    parfois(0.8, () => potence(div(d, q, r), "Regarde le premier chiffre à gauche.")),
+  );
+}
+
+/** Le premier partage de la potence, ou le premier chiffre du quotient. */
+function premierPasQ(e: E5): Q {
+  const D = tiragePose(e, Math.random() < 0.4);
+  const { N, d } = D;
+  const s = String(N);
+  const L = s.length;
+  const c = Number(s[0]);
+  const deux = Number(s.slice(0, 2));
+  const unites = Number(s[L - 1]);
+  const p = quelquun();
+  const debut = c >= d ? c : deux;
+  if (Math.random() < 0.5) {
+    const q1 = Math.floor(debut / d);
+    return qcmN(
+      pick([
+        `On pose ${N} ÷ ${d}. Quel est le premier chiffre du quotient ?`,
+        `${p.nom} pose ${N} ÷ ${d}. Quel chiffre écrit-${p.il} en premier sous le diviseur ?`,
+        `Dans la potence de ${N} ÷ ${d}, quel est le premier chiffre du quotient ?`,
+      ]),
+      q1,
+      [c, q1 + 1, d, debut - d, Math.floor(unites / d)],
+      exp(
+        "On commence la division posée par la gauche.",
+        `${c >= d ? `${c} ≥ ${d} : on partage ${enRang(c, L - 1)}.` : `${c} < ${d} : on prend ${enRang(deux, L - 2)}.`}`,
+        `En ${debut}, ${d} va ${q1} fois (${d} × ${q1} = ${d * q1}).`,
+        `Le premier chiffre du quotient est ${q1}.`,
+      ),
+      potence(D, "On commence par la gauche."),
+    );
+  }
+  const correct = c >= d ? enRang(c, L - 1) : enRang(deux, L - 2);
+  const pieges =
+    c >= d
+      ? [L === 3 ? enRang(Number(s[1]), 1) : enRang(1, 1), enRang(unites, 0)]
+      : [enRang(c, L - 1), enRang(unites, 0)];
+  return qcmM(
+    pick([
+      `On pose ${N} ÷ ${d}. On commence par la gauche : que partage-t-on en premier ?`,
+      `${p.nom} pose ${N} ÷ ${d}. Quel est son premier partage ?`,
+      `Dans la potence de ${N} ÷ ${d}, que partage-t-on d’abord ?`,
+    ]),
+    correct,
+    pieges.filter((x) => x !== correct),
+    exp(
+      "On commence la division posée par la gauche, jamais par les unités.",
+      "On prend le premier chiffre ; s’il est plus petit que le diviseur, on prend les deux premiers.",
+      c >= d
+        ? `${c} ≥ ${d} : on partage d’abord ${correct}.`
+        : `${c} < ${d} : ${enRang(c, L - 1)} ne se partage pas en ${d}. On prend ${correct}.`,
+      `On partage d’abord ${correct}.`,
+    ),
+    potence(D, "Par où commence-t-on ?"),
+  );
+}
+
+/** Les étapes d'une division à 2 chiffres : le chiffre des dizaines, le reste des dizaines, les unités abaissées. */
+function etapesQ(e: E5): Q {
+  let D = tiragePose(2, e >= 3 && Math.random() < 0.5);
+  for (let i = 0; i < 30 && Math.floor(D.N / 10) % D.d === 0; i++) D = tiragePose(2, e >= 3 && Math.random() < 0.5);
+  if (e >= 3 && Math.random() < 0.5) {
+    const d = rint(6, 8);
+    const r = Math.random() < 0.5 ? rint(1, d - 1) : 0;
+    D = div(d, rint(11, Math.floor((99 - r) / d)), r);
+  }
+  const { N, d } = D;
+  const t = Math.floor(N / 10);
+  const u = N % 10;
+  const f1 = Math.floor(t / d);
+  const r1 = t % d;
+  const p = quelquun();
+  const fam = r1 > 0 ? rint(1, 3) : 1;
+  const intro = pick([`On pose ${N} ÷ ${d}.`, `${p.nom} pose ${N} ÷ ${d}.`, `${p.nom} écrit la potence de ${N} ÷ ${d}.`]);
+  const expl = expPose(D);
+  if (fam === 1)
+    return qcmN(
+      `${intro} ${pick([`En ${enRang(t, 1)}, combien de fois ${d} ?`, `On partage d’abord les ${t} dizaines. Combien de dizaines dans chaque part ?`, `Quel chiffre écrit-on d’abord au quotient ?`])}`,
+      f1,
+      [t, r1, f1 + 1, d],
+      expl,
+      potence(D, "On commence par les dizaines."),
+    );
+  if (fam === 2)
+    return qcmN(
+      `${intro} ${pick([`En ${enRang(t, 1)}, ${d} va ${f1} fois. Combien de dizaines reste-t-il ?`, `Après le partage des ${t} dizaines, combien de dizaines reste-t-il ?`])}`,
+      r1,
+      [f1, t - f1, d - r1, r1 + 1],
+      expl,
+      potence(D, "Que reste-t-il des dizaines ?"),
+    );
+  return qcmN(
+    `${intro} ${pick([
+      `Il reste ${enRang(r1, 1)}. On abaisse le ${u}. Combien d’unités partage-t-on maintenant ?`,
+      `Après les dizaines, il reste ${enRang(r1, 1)}. Avec les ${u} unités, combien d’unités faut-il partager ?`,
+    ])}`,
+    r1 * 10 + u,
+    [u, r1 + u, r1 * 10, (r1 + 1) * 10 + u],
+    exp(
+      "Le reste des dizaines n’est pas perdu : on l’échange contre des unités.",
+      `${enRang(r1, 1)}, c’est ${r1 * 10} unités ; on ajoute les ${u} unités abaissées.`,
+      `${r1 * 10} + ${u} = ${r1 * 10 + u}. Puis ${etapes(N, d)}`,
+      `On partage ${r1 * 10 + u} unités.`,
+    ),
+    potence(D, "On abaisse le chiffre des unités."),
+  );
+}
+
+/** Quel calcul vérifie la division ? dividende = diviseur × quotient + reste. */
+function verifierPoseQ(D: Div): Q {
+  const { N, d, q, r } = D;
+  const p = quelquun();
+  const faux = (
+    [
+      [`${d} × ${q}`, d * q],
+      [`${d} × ${q} − ${r}`, d * q - r],
+      [`${q} × ${r} + ${d}`, q * r + d],
+      [`${d} + ${q} + ${r}`, d + q + r],
+      [`${N} × ${d} + ${r}`, N * d + r],
+    ] as [string, number][]
+  )
+    .filter(([, v]) => v !== N)
+    .map(([x]) => x);
+  return qcmM(
+    pick([
+      `${p.nom} a posé ${N} ÷ ${d} : quotient ${q}, reste ${r}. Quel calcul doit redonner ${N} ?`,
+      `Pour vérifier ${N} ÷ ${d} = ${q} reste ${r}, quel calcul fait-on ?`,
+      `${N} ÷ ${d} : ${p.nom} trouve ${q} reste ${r}. Quel calcul permet de vérifier ?`,
+      `On a trouvé ${N} ÷ ${d} = ${q} reste ${r}. Quel calcul doit donner ${N} ?`,
+    ]),
+    `${d} × ${q} + ${r}`,
+    faux,
+    exp(
+      "Une division se vérifie par une multiplication : dividende = diviseur × quotient + reste.",
+      "On multiplie le diviseur par le quotient, puis on ajoute le reste.",
+      `${d} × ${q} = ${d * q}, puis ${d * q} + ${r} = ${N}.`,
+      `Le calcul est ${d} × ${q} + ${r}.`,
+    ),
+    divisionCanvas({ dividende: N, diviseur: d, quotient: q, reste: r, title: `La division ${deM(p.nom)}`, showResult: Math.random() < 0.5 }),
+  );
+}
+
+/** Le travail d'un élève : juste, reste trop grand, quotient trop grand, 0 oublié, reste oublié. */
+function erreurQ(D: Div): Q {
+  const { N, d, q, r } = D;
+  const p = quelquun();
+  const z = zeroOublie(q);
+  type T = "juste" | "resteTrop" | "quotientTrop" | "zero" | "oubliReste";
+  const types: T[] = ["juste", "resteTrop", "quotientTrop"];
+  if (z) types.push("zero");
+  if (r > 0) types.push("oubliReste");
+  const t = pick(types);
+  const [qe, re] =
+    t === "juste" ? [q, r] : t === "resteTrop" ? [q - 1, r + d] : t === "quotientTrop" ? [q + 1, r] : t === "zero" ? [z!, r] : [q, 0];
+  const J = "C’est juste.";
+  const RT = "Faux : le reste est trop grand, on pouvait faire un groupe de plus.";
+  const QT = "Faux : le quotient est trop grand.";
+  const Z = "Faux : il manque un 0 au quotient.";
+  const OR = `Faux : ${p.il} a oublié le reste.`;
+  const quatrieme = t === "zero" ? Z : t === "oubliReste" ? OR : z ? Z : OR;
+  const bonne = { juste: J, resteTrop: RT, quotientTrop: QT, zero: Z, oubliReste: OR }[t];
+  const choices = shuffle([J, RT, QT, quatrieme]);
+  const pourquoi = {
+    juste: `${d} × ${q}${r ? ` + ${r}` : ""} = ${N} et ${r} < ${d} : tout est juste.`,
+    resteTrop: `Le reste ${re} n’est pas plus petit que ${d} : on pouvait encore faire un groupe. ${verif(D)}.`,
+    quotientTrop: `${d} × ${qe} = ${d * qe}, c’est plus que ${N}. Le bon quotient est ${q}.`,
+    zero: `${d} × ${qe} = ${d * qe}, très loin de ${N} : il manque un 0 au quotient. Le bon quotient est ${q}.`,
+    oubliReste: `${d} × ${q} = ${d * q}, il manque ${r} pour faire ${N} : le reste est ${r}.`,
+  }[t];
+  return {
+    text: habille(
+      pick([
+        `${p.nom} pose ${N} ÷ ${d} et trouve : quotient ${qe}, reste ${re}. Qu’en penses-tu ?`,
+        `Voici la division ${deM(p.nom)} : ${N} ÷ ${d} = ${qe} reste ${re}. Est-ce juste ?`,
+        `${p.nom} annonce : « ${N} ÷ ${d}, ça fait ${qe} et il reste ${re}. » A-t-${p.il} raison ?`,
+        `Vérifie le travail ${deM(p.nom)} : ${N} ÷ ${d}, quotient ${qe}, reste ${re}.`,
+      ]),
+    ),
+    format: "qcm",
+    choices,
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: exp(
+      "On vérifie une division : dividende = diviseur × quotient + reste, et le reste doit être plus petit que le diviseur.",
+      `On calcule ${d} × ${qe} + ${re} et on compare à ${N}.`,
+      pourquoi,
+      t === "juste" ? `${p.nom} a raison.` : `${N} ÷ ${d} = ${q}${r ? ` reste ${r}` : ""}.`,
+    ),
+    canvas: divisionCanvas({ dividende: N, diviseur: d, quotient: qe, reste: re, title: `La division ${deM(p.nom)}`, showResult: true }),
+  };
+}
+
+/** Un problème qui se résout par une division posée. */
+function problemePoseQ(e: E5): Q {
+  const D = tiragePose(e);
+  const { N, d, q } = D;
+  const s = sit();
+  const p = quelquun();
+  const partage = Math.random() < 0.55;
+  return qcmN(
+    partage ? textePartage(s, N, d, p, 3) : texteGroupement(s, N, d, p, 3),
+    q,
+    piegesPose(D),
+    expPose(D, partage ? `Il y a ${q} ${s.chose.des} pour chaque ${s.qui.un}.` : `On remplit ${q} ${s.boite.des}.`),
+    Math.random() < 0.75 ? potence(D, "Pose la division.") : partage ? barreEgale(d, null, String(N)) : barreGroupes(d, N, s.boite),
+  );
+}
+
+/* ---------------- DIVISION_RESTE ---------------- */
+
+function resteQ(e: E5): Q {
+  const petit = e <= 3 && Math.random() < 0.3;
+  const D = tirageReste(petit ? "petit" : e);
+  const { N, d, q, r } = D;
+  const p = quelquun();
+  const m = unMetier();
+  const s = petit ? sitDessinable() : undefined;
+  return qcmM(
+    pick([
+      `Quel est le reste de ${N} ÷ ${d} ?`,
+      `Dans la division ${N} ÷ ${d}, quel est le reste ?`,
+      `${p.nom} calcule ${N} ÷ ${d}. Combien reste-t-il à la fin ?`,
+      `${N} ÷ ${d} = ${q} reste … Quel est le reste ?`,
+      `Pose ${N} ÷ ${d}. Quel est le reste ?`,
+      `Dans la table de ${d}, le multiple juste avant ${N} est ${d * q}. Quel est le reste de ${N} ÷ ${d} ?`,
+      `${m.nom} divise ${N} par ${d}. Quel reste trouve-t-${m.il} ?`,
+    ]),
+    String(r),
+    [String(q), String(r + d), "0", String(d - r), String(r + 1), String(d)],
+    exp(
+      "Le reste, c’est ce qui reste quand on a fait tous les groupes complets. Il est toujours plus petit que le diviseur.",
+      `On cherche le plus grand multiple de ${d} qui ne dépasse pas ${N}.`,
+      `${d} × ${q} = ${d * q} et ${d} × ${q + 1} = ${d * (q + 1)}. ${N} − ${d * q} = ${r}.`,
+      `Le reste est ${r} (et le quotient ${q}).`,
+    ),
+    dessinReste(D, s),
+  );
+}
+
+function quotientResteQ(e: E5): Q {
+  const petit = e <= 3 && Math.random() < 0.25;
+  const D = tirageReste(petit ? "petit" : e);
+  const { N, d, q, r } = D;
+  const p = quelquun();
+  const f = (a: number, b: number) => `${a} reste ${b}`;
+  const pieges = [f(q, 0), f(q + 1, r), f(q, r + 1)];
+  if (q > 1) pieges.push(f(q - 1, r + d));
+  if (r !== q && !(d * r + q === N && q < d)) pieges.push(f(r, q));
+  return qcmM(
+    pick([
+      `${N} ÷ ${d} = ? Donne le quotient et le reste.`,
+      `${p.nom} pose ${N} ÷ ${d}. Qu’écrit-${p.il} à la fin ?`,
+      `Quel est le résultat de la division ${N} ÷ ${d} ?`,
+      `Complète : ${N} ÷ ${d} = … reste …`,
+      `Effectue la division ${N} ÷ ${d}.`,
+    ]),
+    f(q, r),
+    pieges,
+    exp(
+      "Diviser avec un reste : dividende = diviseur × quotient + reste, avec un reste plus petit que le diviseur.",
+      `On cherche combien de fois ${d} va dans ${N}, puis ce qui reste.`,
+      `${d} × ${q} = ${d * q}, et ${N} − ${d * q} = ${r}, plus petit que ${d}.`,
+      `${N} ÷ ${d} = ${q} reste ${r}.`,
+    ),
+    dessinReste(D, petit ? sitDessinable() : undefined),
+  );
+}
+
+/** Quel reste est possible (ou impossible) dans une division par d ? */
+function restePossibleQ(): Q {
+  const d = rint(3, 9);
+  const p = quelquun();
+  const fam = rint(1, 3);
+  const regle = exp(
+    "Le reste est toujours plus petit que le diviseur.",
+    `Si le reste valait ${d} ou plus, on pourrait encore faire un groupe de ${d}.`,
+    `Dans une division par ${d}, les restes possibles vont de 0 à ${d - 1}.`,
+    "",
+  );
+  const dessin = () => (d <= 5 ? objetsGroupes(quoiDessin(), 2, d, d - 1) : undefined);
+  if (fam === 1) {
+    const ok = rint(1, d - 1);
+    return qcmM(
+      pick([
+        `Dans une division par ${d}, quel nombre peut être le reste ?`,
+        `${p.nom} divise un nombre par ${d}. Quel reste peut-${p.il} trouver ?`,
+        `On divise par ${d}. Lequel de ces nombres peut être le reste ?`,
+      ]),
+      String(ok),
+      [String(d), String(d + 1), String(d + 2), String(2 * d)],
+      regle + `${ok} est plus petit que ${d} : c’est possible.`,
+      parfois(0.6, dessin),
+    );
+  }
+  if (fam === 2) {
+    const ko = d + rint(0, 2);
+    const oks = shuffle(Array.from({ length: d - 1 }, (_, i) => i + 1)).slice(0, 3);
+    return qcmM(
+      pick([
+        `Dans une division par ${d}, quel reste est impossible ?`,
+        `${p.nom} divise par ${d}. Quel reste ne peut-${p.il} PAS trouver ?`,
+        `On divise par ${d}. Lequel de ces nombres ne peut pas être le reste ?`,
+      ]),
+      String(ko),
+      oks.map(String),
+      regle + `${ko} n’est pas plus petit que ${d} : c’est impossible.`,
+      parfois(0.6, dessin),
+    );
+  }
+  return qcmN(
+    pick([
+      `Quel est le plus grand reste possible dans une division par ${d} ?`,
+      `${p.nom} divise un nombre par ${d}. Quel est le plus grand reste qu’${p.il} peut trouver ?`,
+      `Dans une division par ${d}, le reste peut aller jusqu’à combien ?`,
+    ]),
+    d - 1,
+    [d, d + 1, d - 2, 2 * d - 1],
+    regle + `Le plus grand reste est ${d - 1}.`,
+    parfois(0.7, dessin),
+  );
+}
+
+/** Combien de paquets COMPLETS ? Le reste ne fait pas un paquet. */
+function sachetsCompletsQ(e: E5): Q {
+  const petit = e <= 3 && Math.random() < 0.35;
+  const s = petit ? sitDessinable() : sit();
+  const D = tirageReste(petit ? "petit" : e);
+  const { N, d: k, q, r } = D;
+  const c = s.chose;
+  const b = s.boite;
+  const p = quelquun();
+  const tournures = [
+    `${s.ou}, on range ${N} ${c.des} dans des ${b.des} de ${k}. Combien ${deM(b.des)} ${complets(b)} ?`,
+    `${p.nom} a ${N} ${c.des}. ${maj(p.il)} les met par ${k} dans des ${b.des}. Combien ${deM(b.des)} ${complets(b)} remplit-${p.il} ?`,
+    `Avec ${N} ${c.des}, combien ${deM(b.des)} ${complets(b)} de ${k} peut-on faire ?`,
+    `${N} ${c.des}, ${k} par ${b.un} : combien ${deM(b.des)} ${complets(b)} ?`,
+  ];
+  if (s.metier) tournures.push(`${s.metier.nom} range ${N} ${c.des} par ${b.des} de ${k}. Combien ${deM(b.des)} ${complets(b)} obtient-${s.metier.il} ?`);
+  return qcmN(
+    pick(tournures),
+    q,
+    [q + 1, r, q - 1, k, N - k],
+    exp(
+      "Quand on demande les groupes complets, le reste ne compte pas comme un groupe.",
+      `On divise : ${N} ÷ ${k}.`,
+      `${k} × ${q} = ${k * q}, il reste ${r} ${c.des}, pas assez pour ${unUne(b)} ${b.un} de plus.`,
+      `On remplit ${q} ${b.des} ${complets(b)}.`,
+    ),
+    petit && s.dessin ? objetsEnVrac(s.dessin, N) : Math.random() < 0.5 ? barreGroupes(k, N, b) : potence(D, `Combien ${deM(b.des)} ${complets(b)} ?`),
+  );
+}
+
+/** Combien en reste-t-il à part ? */
+function resteContexteQ(e: E5): Q {
+  const petit = e <= 3 && Math.random() < 0.35;
+  const s = petit ? sitDessinable() : sit();
+  const D = tirageReste(petit ? "petit" : e);
+  const { N, d: k, q, r } = D;
+  const c = s.chose;
+  const b = s.boite;
+  const p = quelquun();
+  const pleins = `${b.fem ? "toutes" : "tous"} les ${b.des} sont ${b.fem ? "pleines" : "pleins"}`;
+  const tournures = [
+    `${s.ou}, on range ${N} ${c.des} dans des ${b.des} de ${k}. Combien ${deM(c.des)} reste-t-il à part ?`,
+    `${p.nom} fait des ${b.des} de ${k} avec ${N} ${c.des}. Combien ${deM(c.des)} restent hors des ${b.des} ?`,
+    `On met ${N} ${c.des} par ${k}. Quand ${pleins}, combien ${deM(c.des)} reste-t-il ?`,
+    `${N} ${c.des} à ranger par ${b.des} de ${k}. Combien en reste-t-il à la fin ?`,
+  ];
+  if (s.metier) tournures.push(`${s.metier.nom} range ${N} ${c.des} par ${b.des} de ${k}. Combien ${deM(c.des)} lui reste-t-il à part ?`);
+  return qcmN(
+    pick(tournures),
+    r,
+    [q, r + k, k - r, k, r + 1],
+    exp(
+      "Le reste, c’est ce qui ne remplit pas un groupe complet.",
+      `On divise : ${N} ÷ ${k}.`,
+      `${k} × ${q} = ${k * q}, et ${N} − ${k * q} = ${r}.`,
+      `Il reste ${r} ${c.des} (${q} ${b.des} sont ${b.fem ? "pleines" : "pleins"}).`,
+    ),
+    petit && s.dessin ? objetsEnVrac(s.dessin, N) : dessinReste(D),
+  );
+}
+
+type Transport = { ou: string; qui: string; cont: Nom };
+const TRANSPORTS: readonly Transport[] = [
+  { ou: "Pour la sortie scolaire", qui: "élèves", cont: nm("minibus", "minibus") },
+  { ou: "Au camping", qui: "campeurs", cont: nm("tente", "tentes", true) },
+  { ou: "À la cantine", qui: "enfants", cont: nm("table", "tables", true) },
+  { ou: "Au lac", qui: "promeneurs", cont: nm("barque", "barques", true) },
+  { ou: "À la montagne", qui: "skieurs", cont: nm("cabine", "cabines", true) },
+  { ou: "Au spectacle de l’école", qui: "parents", cont: nm("rangée de chaises", "rangées de chaises", true) },
+  { ou: "Au parc d’attractions", qui: "visiteurs", cont: nm("wagon", "wagons") },
+  { ou: "À la gare", qui: "voyageurs", cont: nm("taxi", "taxis") },
+  { ou: "Au club de canoë", qui: "sportifs", cont: nm("canoë", "canoës") },
+  { ou: "Pour l’excursion", qui: "randonneurs", cont: nm("voiture", "voitures", true) },
+  { ou: "En colonie", qui: "enfants", cont: nm("chambre", "chambres", true) },
+  { ou: "Au mariage", qui: "invités", cont: nm("table", "tables", true) },
+  { ou: "Au stade", qui: "supporters", cont: nm("car", "cars") },
+  { ou: "À l’aéroport", qui: "passagers", cont: nm("navette", "navettes", true) },
+];
+
+/** Il faut UN de plus pour le reste : « combien de voitures pour tout le monde ? ». */
+function combienFautIlQ(e: E5): Q {
+  const T = pick(TRANSPORTS);
+  const D = e >= 5 ? div(rint(4, 9), rint(8, 20)) : tirageReste(e);
+  if (D.r === 0) {
+    D.r = rint(1, D.d - 1);
+    D.N += D.r;
+  }
+  const { N, d: k, q, r } = D;
+  const c = T.cont;
+  const p = quelquun();
+  const vides = e >= 5 && Math.random() < 0.35;
+  const text = vides
+    ? pick([
+        `${T.ou}, ${N} ${T.qui} prennent place dans des ${c.des} de ${k} places. On remplit au maximum. Combien de places restent vides dans ${c.fem ? "la dernière" : "le dernier"} ?`,
+        `${N} ${T.qui}, ${k} places par ${c.un}. On en remplit le plus possible. Combien de places vides reste-t-il dans ${c.fem ? "la dernière" : "le dernier"} ?`,
+      ])
+    : pick([
+        `${T.ou}, ${N} ${T.qui} doivent prendre place dans des ${c.des} de ${k} places. Combien ${deM(c.des)} faut-il au minimum ?`,
+        `${N} ${T.qui}, ${k} places par ${c.un}. Combien ${deM(c.des)} faut-il pour que personne ne reste à part ?`,
+        `${T.ou}, chaque ${c.un} a ${k} places. Il y a ${N} ${T.qui}. Combien ${deM(c.des)} faut-il pour tout le monde ?`,
+        `${p.nom} organise : ${N} ${T.qui}, des ${c.des} de ${k} places. Combien ${deM(c.des)} doit-${p.il} prévoir ?`,
+      ]);
+  return qcmN(
+    text,
+    vides ? k - r : q + 1,
+    vides ? [r, k, q, k - r + 1] : [q, r, q + r, q + 2],
+    exp(
+      "Le reste aussi a besoin de place : il faut parfois un groupe de plus.",
+      `On divise : ${N} ÷ ${k}.`,
+      `${N} ÷ ${k} = ${q} reste ${r} : ${q} ${c.des} pleins, et ${r} ${T.qui} de plus.`.replace(" pleins", c.fem ? " pleines" : " pleins"),
+      vides
+        ? `${c.fem ? "La dernière" : "Le dernier"} n’a que ${r} ${T.qui} : il reste ${k - r} places vides.`
+        : `Il faut ${q + 1} ${c.des}.`,
+    ),
+    Math.random() < 0.5
+      ? barre([[`1 ${c.un}`, `${k} places`], ["encore…", null]], `${N} ${T.qui}`, `Combien ${deM(c.des)} pour tout le monde ?`)
+      : potence(D, "Et ceux qui restent ?"),
+  );
+}
+
+/** Combien en manque-t-il pour remplir un paquet de plus ? */
+function combienManqueQ(e: E5): Q {
+  const petit = e <= 3 && Math.random() < 0.3;
+  const s = petit ? sitDessinable() : sit();
+  const D = tirageReste(petit ? "petit" : e);
+  const { N, d: k, q, r } = D;
+  const c = s.chose;
+  const b = s.boite;
+  const p = quelquun();
+  return qcmN(
+    pick([
+      `On range ${N} ${c.des} par ${b.des} de ${k}. Combien ${deM(c.des)} manque-t-il pour remplir ${unUne(b)} ${b.un} de plus ?`,
+      `${p.nom} a ${N} ${c.des} et fait des ${b.des} de ${k}. Combien ${deM(c.des)} lui manque-t-il pour ${unUne(b)} ${b.un} de plus ?`,
+      `${s.ou}, ${N} ${c.des} sont ${accord("rangé", c)} par ${k}. Combien en faudrait-il en plus pour que le dernier paquet soit plein ?`,
+    ]),
+    k - r,
+    [r, k, q, k - r + 1, k + r],
+    exp(
+      "Le reste ne remplit pas un paquet : il manque la différence avec le diviseur.",
+      `On divise ${N} ÷ ${k}, puis on compare le reste à ${k}.`,
+      `${N} ÷ ${k} = ${q} reste ${r}, et ${k} − ${r} = ${k - r}.`,
+      `Il manque ${k - r} ${c.des}.`,
+    ),
+    petit && s.dessin ? objetsEnVrac(s.dessin, N) : potence(D, "Que reste-t-il ? Combien en manque-t-il ?"),
+  );
+}
+
+/** dividende = diviseur × quotient + reste. */
+function egaliteQ(e: E5): Q {
+  const D = tirageReste(e);
+  const { N, d, q, r } = D;
+  const p = quelquun();
+  if (Math.random() < 0.5) {
+    const faux = (
+      [
+        [`${N} = ${d} × ${q} − ${r}`, d * q - r],
+        [`${N} = ${d} × ${r} + ${q}`, d * r + q],
+        [`${N} = ${d} + ${q} + ${r}`, d + q + r],
+        [`${N} = ${d} × ${q + 1} + ${r}`, d * (q + 1) + r],
+      ] as [string, number][]
+    )
+      .filter(([, v]) => v !== N)
+      .map(([x]) => x);
+    return qcmM(
+      pick([
+        `${N} ÷ ${d} = ${q} reste ${r}. Quelle égalité est juste ?`,
+        `${p.nom} trouve ${N} ÷ ${d} = ${q} reste ${r}. Quelle égalité le prouve ?`,
+        `Quelle égalité correspond à la division ${N} ÷ ${d} = ${q} reste ${r} ?`,
+      ]),
+      `${N} = ${d} × ${q} + ${r}`,
+      faux,
+      exp("dividende = diviseur × quotient + reste.", "On multiplie le diviseur par le quotient, puis on ajoute le reste.", `${d} × ${q} = ${d * q} ; ${d * q} + ${r} = ${N}.`, `${N} = ${d} × ${q} + ${r}.`),
+      potence(D, "dividende = diviseur × quotient + reste"),
+    );
+  }
+  return qcmN(
+    pick([`Complète : ${N} = ${d} × ${q} + … (le reste).`, `${N} = ${d} × ${q} + ? Quel nombre manque ?`, `${p.nom} écrit ${N} = ${d} × ${q} + … Que vaut le reste ?`]),
+    r,
+    [q, r + d, d, r + 1, d - r],
+    exp("dividende = diviseur × quotient + reste.", `On calcule ${d} × ${q}, puis ce qui manque pour aller jusqu’à ${N}.`, `${d} × ${q} = ${d * q}, et ${N} − ${d * q} = ${r}.`, `Le reste est ${r}.`),
+    parfois(0.7, () => tableMultiples(D)),
+  );
+}
+
+/** Le dessin des paquets : quelle division raconte-t-il ? */
+function dessinResteQ(): Q {
+  const s = sitDessinable();
+  const k = rint(2, 5);
+  const q = rint(2, 6);
+  const r = rint(1, k - 1);
+  const N = k * q + r;
+  const c = s.chose;
+  const p = quelquun();
+  const f = (a: number, b: number) => `${N} ÷ ${k} = ${a} reste ${b}`;
+  return qcmM(
+    pick([
+      `Le dessin montre ${N} ${c.des} ${accord("rangé", c)} par ${k}. Quelle division correspond ?`,
+      `${p.nom} a rangé ses ${N} ${c.des} par ${k}. Quelle division raconte le dessin ?`,
+      `Regarde le dessin : ${N} ${c.des} en paquets de ${k}. Quelle division écrire ?`,
+    ]),
+    f(q, r),
+    [f(q, 0), f(q + 1, r), ...(q > 1 ? [f(q - 1, r + k)] : []), f(q, r + 1)],
+    exp("Le dessin montre les paquets complets (le quotient) et ce qui reste à part (le reste).", `On compte les paquets de ${k}, puis les ${c.des} ${accord("seul", c)}.`, `${q} paquets de ${k} : ${k * q} ; il en reste ${r}. ${k} × ${q} + ${r} = ${N}.`, `${f(q, r)}.`),
+    objetsGroupes(s.dessin!, q, k, r),
+  );
+}
+
+/* ---------------- DIVISION_PROBLEME ---------------- */
+
+/** Les nombres d'un problème (★3) : n de 2 à 8 (le dessin en barres tient), quotient de 4 à 15. */
+const nombresPb = (): [number, number] => [rint(2, 8), rint(4, 15)];
+const piegesPb = (t: number, n: number, q: number) => [t - n, n, q + 1, q - 1, t * n, q + n];
+
+function partagePbQ(): Q {
+  const [n, q] = nombresPb();
+  const t = n * q;
+  const s = sit();
+  return qcmN(
+    textePartage(s, t, n, quelquun(), 3),
+    q,
+    piegesPb(t, n, q),
+    exp("Partager en parts égales, c’est diviser.", `On divise le total par le nombre de parts : ${t} ÷ ${n}.`, calculDivision(t, n, q), `Il y a ${q} ${s.chose.des} pour chaque ${s.qui.un}.`),
+    dessinPartage(s, t, n),
+  );
+}
+
+function groupementPbQ(): Q {
+  const [n, q] = nombresPb();
+  const t = n * q;
+  const s = sit();
+  return qcmN(
+    texteGroupement(s, t, n, quelquun(), 3),
+    q,
+    piegesPb(t, n, q),
+    exp("Faire des groupes de même taille et les compter, c’est diviser.", `On cherche combien de fois ${n} tient dans ${t} : ${t} ÷ ${n}.`, calculDivision(t, n, q), `On remplit ${q} ${s.boite.des}.`),
+    dessinGroupement(s, t, n),
+  );
+}
+
+/**
+ * Un récit de la vie : un partage (n parts, on cherche la part) ou un
+ * groupement (n = la taille d'un groupe, on cherche le nombre de groupes).
+ */
+type Recit = {
+  sens: "partage" | "groupement";
+  /** L'unité de la réponse (« cm », « € », « jours »…). */
+  u: string;
+  /** L'unité du total, pour le dessin. */
+  ut: string;
+  /** Un groupe, pour le dessin d'un groupement (« 1 morceau »). */
+  un: string;
+  texte: (t: number, n: number, p: Prenom) => string;
+  /** Les bornes de n et du quotient si les nombres par défaut sonnent faux. */
+  n?: [number, number];
+  q?: [number, number];
+};
+const rc = (sens: Recit["sens"], u: string, ut: string, un: string, texte: Recit["texte"], n?: [number, number], q?: [number, number]): Recit => ({ sens, u, ut, un, texte, n, q });
+
+const RECITS_MESURES: readonly Recit[] = [
+  rc("groupement", "morceaux", "cm", "morceau", (t, n) => `La couturière coupe un ruban de ${t} cm en morceaux de ${n} cm. Combien de morceaux obtient-elle ?`),
+  rc("partage", "cm", "cm", "", (t, n, p) => `${p.nom} scie une planche de ${t} cm en ${n} morceaux de même longueur. Combien mesure un morceau ?`),
+  rc("partage", "m", "m", "", (t, n) => `Une course de relais fait ${t} m. Les ${n} coureurs de l’équipe courent la même distance. Combien de mètres court chacun ?`, [2, 8], [25, 60]),
+  rc("partage", "km", "km", "", (t, n) => `Une cycliste parcourt ${t} km en ${n} étapes de même longueur. Combien de kilomètres fait chaque étape ?`, [3, 8], [12, 40]),
+  rc("groupement", "guirlandes", "m", "guirlande", (t, n) => `Avec ${t} m de fil, la décoratrice fait des guirlandes de ${n} m. Combien de guirlandes fait-elle ?`),
+  rc("partage", "bulbes", "bulbes", "", (t, n) => `Le jardinier plante ${t} bulbes de tulipes en ${n} massifs égaux. Combien de bulbes par massif ?`),
+  rc("partage", "L", "L", "", (t, n) => `Le pompier verse ${t} litres d’eau dans ${n} seaux, autant dans chacun. Combien de litres par seau ?`),
+  rc("partage", "kg", "kg", "", (t, n) => `Le maçon répartit ${t} kg de sable dans ${n} brouettes, autant dans chacune. Combien de kilos par brouette ?`),
+  rc("groupement", "bouteilles", "L", "bouteille", (t, n) => `La cuisinière verse ${t} L de jus dans des bouteilles de ${n} L. Combien de bouteilles remplit-elle ?`, [2, 5]),
+];
+
+const RECITS_ARGENT: readonly Recit[] = [
+  rc("groupement", "livres", "€", "livre", (t, n, p) => `${p.nom} a ${t} € d’économies. Un livre coûte ${n} €. Combien de livres peut-${p.il} acheter ?`),
+  rc("partage", "€", "€", "", (t, n) => `${n} amis offrent un cadeau qui coûte ${t} €. Chacun paie la même somme. Combien paie chacun ?`),
+  rc("partage", "€", "€", "", (t, n) => `Le club achète ${n} ballons identiques pour ${t} €. Combien coûte un ballon ?`),
+  rc("groupement", "places", "€", "place", (t, n) => `La maîtresse a ${t} € pour la sortie. Une place de cinéma coûte ${n} €. Combien de places peut-elle payer ?`),
+  rc("partage", "€", "€", "", (t, n) => `${n} enfants se partagent ${t} € gagnés à la vente de gâteaux. Combien reçoit chacun ?`),
+  rc("groupement", "plants", "€", "plant", (t, n) => `La jardinière dépense ${t} € en plants de tomates à ${n} € le plant. Combien de plants achète-t-elle ?`),
+  rc("groupement", "semaines", "€", "semaine", (t, n, p) => `${p.nom} met ${n} € de côté chaque semaine. Combien de semaines lui faut-il pour avoir ${t} € ?`),
+  rc("partage", "€", "€", "", (t, n) => `Le fleuriste vend ${n} bouquets identiques pour ${t} € en tout. Combien coûte un bouquet ?`),
+];
+
+const RECITS_QUOTIDIEN: readonly Recit[] = [
+  rc("groupement", "jours", "pages", "jour", (t, n, p) => `Un livre a ${t} pages. ${p.nom} lit ${n} pages par jour. En combien de jours finit-${p.il} le livre ?`),
+  rc("partage", "baguettes", "baguettes", "", (t, n) => `La boulangère cuit ${t} baguettes en ${n} fournées égales. Combien de baguettes par fournée ?`),
+  rc("groupement", "voyages", "caisses", "voyage", (t, n) => `Un camion porte ${n} caisses à chaque voyage. Il doit livrer ${t} caisses. Combien de voyages fait-il ?`),
+  rc("partage", "salades", "salades", "", (t, n) => `Le maraîcher plante ${t} salades en ${n} rangées égales. Combien de salades par rangée ?`),
+  rc("partage", "min", "min", "", (t, n) => `La maîtresse a ${t} minutes pour ${n} ateliers de même durée. Combien de minutes dure chaque atelier ?`, [2, 6], [8, 15]),
+  rc("groupement", "jours", "comprimés", "jour", (t, n) => `La vétérinaire donne ${n} comprimés par jour à un chien. La boîte en contient ${t}. Combien de jours dure la boîte ?`, [2, 4]),
+  rc("groupement", "minutes", "pages", "minute", (t, n) => `L’imprimante sort ${n} pages par minute. Combien de minutes pour imprimer ${t} pages ?`),
+  rc("partage", "élèves", "élèves", "", (t, n) => `L’école répartit ${t} élèves en ${n} classes de même effectif. Combien d’élèves par classe ?`, [3, 6], [20, 28]),
+  rc("groupement", "rangées", "chaises", "rangée", (t, n) => `Le gardien installe ${t} chaises par rangées de ${n}. Combien de rangées obtient-il ?`),
+  rc("partage", "pommes", "pommes", "", (t, n) => `L’arboricultrice cueille ${t} pommes sur ${n} arbres, autant sur chacun. Combien de pommes par arbre ?`),
+];
+
+function recitQ(liste: readonly Recit[]): Q {
+  const R = pick(liste);
+  const n = rint(...(R.n ?? [2, 8]));
+  const q = rint(...(R.q ?? [4, 15]));
+  const t = n * q;
+  const p = quelquun();
+  const partage = R.sens === "partage";
+  const lu = (v: number) => (["€", "cm", "m", "km", "L", "kg", "min"].includes(R.ut) ? `${v} ${R.ut}` : String(v));
+  const pieges = piegesPb(t, n, q);
+  const Qn = qcmN(
+    R.texte(t, n, p),
+    q,
+    pieges,
+    exp(
+      partage ? "Partager en parts égales, c’est diviser." : "Chercher combien de fois une quantité tient dans une autre, c’est diviser.",
+      partage ? `On divise le total par le nombre de parts : ${t} ÷ ${n}.` : `On cherche combien de fois ${n} tient dans ${t} : ${t} ÷ ${n}.`,
+      calculDivision(t, n, q),
+      `La réponse est ${q} ${R.u}.`,
+    ),
+    partage
+      ? barreEgale(n, null, `${t} ${R.ut}`)
+      : barre([[`1 ${R.un}`, lu(n)], ["encore…", null]], `${t} ${R.ut}`, `Combien de fois ${lu(n)} dans ${t} ${R.ut} ?`),
+  );
+  // L'unité dans les choix : « 12 cm », « 7 jours ».
+  return { ...Qn, choices: choixN(q, pieges, R.u), expected: [rep(q, R.u)] };
+}
+
+/** Quel calcul résout le problème ? Parfois c'est une multiplication (le piège inverse). */
+function choisirCalculPbQ(): Q {
+  const R = pick([...RECITS_MESURES, ...RECITS_ARGENT, ...RECITS_QUOTIDIEN]);
+  const n = rint(...(R.n ?? [2, 8]));
+  const q = rint(...(R.q ?? [4, 15]));
+  const t = n * q;
+  const p = quelquun();
+  const question = pick(["Quel calcul permet de répondre ?", "Quel calcul faut-il faire ?", "Quelle opération choisis-tu ?"]);
+  if (Math.random() < 0.3) {
+    // La même quantité répétée : une multiplication.
+    const s = sit();
+    const text = pick([
+      `${s.ou}, on remplit ${n} ${s.boite.des} de ${q} ${s.chose.des}. Combien ${deM(s.chose.des)} en tout ? ${question}`,
+      `${p.nom} lit ${n} pages par jour pendant ${q} jours. Combien de pages lit-${p.il} ? ${question}`,
+      `Un ticket coûte ${n} €. On en achète ${q}. Combien paie-t-on ? ${question}`,
+    ]);
+    return qcmM(
+      text,
+      `${n} × ${q}`,
+      [`${n * q} ÷ ${n}`, `${n} + ${q}`, `${q} ÷ ${n}`],
+      exp("On choisit l’opération d’après l’histoire.", "La même quantité revient plusieurs fois : c’est une multiplication, pas une division.", `${n} × ${q} = ${n * q}.`, `Le calcul est ${n} × ${q}.`),
+      barreEgale(n, String(q), null),
+    );
+  }
+  return qcmM(
+    `${R.texte(t, n, p)} ${question}`,
+    `${t} ÷ ${n}`,
+    [`${t} × ${n}`, `${n} ÷ ${t}`, `${t} − ${n}`, `${t} + ${n}`],
+    exp(
+      R.sens === "partage" ? "Partager en parts égales, c’est diviser." : "Chercher combien de fois une quantité tient dans une autre, c’est diviser.",
+      "Le grand nombre se partage, il passe en premier.",
+      `${t} ÷ ${n} = ${q}.`,
+      `Le calcul est ${t} ÷ ${n}.`,
+    ),
+    R.sens === "partage" ? barreEgale(n, null, `${t} ${R.ut}`) : barre([[`1 ${R.un}`, `${n}`], ["encore…", null]], `${t} ${R.ut}`),
+  );
+}
+
+type Duo = { ou: string; a: string; b: string; boite: Nom };
+const DUOS: readonly Duo[] = [
+  { ou: "À la cantine", a: "pommes", b: "poires", boite: nm("corbeille", "corbeilles", true) },
+  { ou: "Dans la classe", a: "crayons", b: "gommes", boite: nm("trousse", "trousses", true) },
+  { ou: "Chez la fleuriste", a: "roses", b: "tulipes", boite: nm("bouquet", "bouquets") },
+  { ou: "À la récré", a: "billes", b: "cartes", boite: nm("sachet", "sachets") },
+  { ou: "À la boulangerie", a: "croissants", b: "pains au chocolat", boite: nm("plateau", "plateaux") },
+  { ou: "À la ferme", a: "œufs", b: "fromages", boite: nm("boîte", "boîtes", true) },
+  { ou: "Au club de foot", a: "ballons", b: "maillots", boite: nm("filet", "filets") },
+  { ou: "À la bibliothèque", a: "romans", b: "bandes dessinées", boite: nm("étagère", "étagères", true) },
+  { ou: "Au magasin de jouets", a: "petites voitures", b: "toupies", boite: nm("boîte", "boîtes", true) },
+  { ou: "Au potager", a: "radis", b: "carottes", boite: nm("botte", "bottes", true) },
+  { ou: "À la papeterie", a: "cahiers", b: "classeurs", boite: nm("paquet", "paquets") },
+  { ou: "À l’animalerie", a: "poissons rouges", b: "tortues", boite: nm("aquarium", "aquariums") },
+  { ou: "À l’atelier de perles", a: "perles bleues", b: "perles rouges", boite: nm("collier", "colliers") },
+];
+
+/** Une donnée inutile : on ne divise que ce que la question demande. */
+function donneeInutileQ(): Q {
+  const D = pick(DUOS);
+  const k = rint(2, 8);
+  const q = rint(3, 12);
+  let m = rint(2, 9);
+  while (m === q) m = rint(2, 9);
+  const t = k * q;
+  const x = k * m;
+  const p = quelquun();
+  const b = D.boite;
+  return qcmN(
+    pick([
+      `${D.ou}, il y a ${t} ${D.a} et ${x} ${D.b}. On fait des ${b.des} de ${k} ${D.a}. Combien ${deM(b.des)} ${deM(D.a)} ?`,
+      `${p.nom} a ${x} ${D.b} et ${t} ${D.a}. ${maj(p.il)} range seulement les ${D.a}, par ${b.des} de ${k}. Combien ${deM(b.des)} remplit-${p.il} ?`,
+      `${D.ou}, on compte ${t} ${D.a} et ${x} ${D.b}. Les ${D.a} vont par ${k} dans des ${b.des}. Combien ${deM(b.des)} faut-il ?`,
+    ]),
+    q,
+    [q + m, m, q + 1, t - k],
+    exp(
+      "Dans un problème, on choisit les nombres utiles : la question ne parle que d’une sorte d’objets.",
+      `Les ${x} ${D.b} ne servent pas. On divise : ${t} ÷ ${k}.`,
+      calculDivision(t, k, q),
+      `Il faut ${q} ${b.des}.`,
+    ),
+    barreGroupes(k, t, b),
+  );
+}
+
+type Groupe = { ou: string; qui: string; g: Nom; chef?: { nom: string; il: "il" | "elle" } };
+const GROUPES: readonly Groupe[] = [
+  { ou: "Au tournoi de basket", qui: "joueurs", g: nm("équipe", "équipes", true), chef: { nom: "L’entraîneuse", il: "elle" } },
+  { ou: "Au cours de danse", qui: "danseurs", g: nm("groupe", "groupes"), chef: { nom: "Le professeur de danse", il: "il" } },
+  { ou: "À la chorale", qui: "chanteurs", g: nm("rang", "rangs"), chef: { nom: "La cheffe de chœur", il: "elle" } },
+  { ou: "En classe de découverte", qui: "élèves", g: nm("chambre", "chambres", true), chef: { nom: "L’animateur", il: "il" } },
+  { ou: "Au club d’échecs", qui: "joueurs", g: nm("table", "tables", true) },
+  { ou: "Pour le cross de l’école", qui: "coureurs", g: nm("vague", "vagues", true), chef: { nom: "Le professeur de sport", il: "il" } },
+  { ou: "Au centre aéré", qui: "enfants", g: nm("atelier", "ateliers"), chef: { nom: "La directrice", il: "elle" } },
+  { ou: "À la piscine", qui: "nageurs", g: nm("couloir", "couloirs"), chef: { nom: "La maîtresse-nageuse", il: "elle" } },
+  { ou: "Au club de rugby", qui: "joueurs", g: nm("équipe", "équipes", true) },
+  { ou: "À l’atelier cuisine", qui: "apprentis cuisiniers", g: nm("plan de travail", "plans de travail"), chef: { nom: "Le chef cuisinier", il: "il" } },
+  { ou: "À la fanfare", qui: "musiciens", g: nm("rangée", "rangées", true) },
+  { ou: "Au mariage", qui: "invités", g: nm("table", "tables", true), chef: { nom: "Le traiteur", il: "il" } },
+  { ou: "Au musée", qui: "visiteurs", g: nm("groupe", "groupes"), chef: { nom: "La guide", il: "elle" } },
+  { ou: "Au club de théâtre", qui: "acteurs", g: nm("troupe", "troupes", true) },
+];
+
+/** Des équipes, des groupes, des tables : grouper ou partager des personnes. */
+function equipesQ(): Q {
+  const G = pick(GROUPES);
+  const [n, q] = nombresPb();
+  const t = n * q;
+  const g = G.g;
+  const partage = Math.random() < 0.4;
+  if (partage) {
+    const egaux = g.fem ? "égales" : "égaux";
+    return qcmN(
+      pick([
+        `${G.ou}, ${t} ${G.qui} se répartissent en ${n} ${g.des} ${egaux}. Combien ${deM(G.qui)} dans chaque ${g.un} ?`,
+        `${G.chef ? G.chef.nom : "On"} répartit ${t} ${G.qui} en ${n} ${g.des} ${egaux}. Combien ${deM(G.qui)} par ${g.un} ?`,
+        `${t} ${G.qui}, ${n} ${g.des}, autant dans chacun : combien ${deM(G.qui)} par ${g.un} ?`.replace("chacun", g.fem ? "chacune" : "chacun"),
+      ]),
+      q,
+      piegesPb(t, n, q),
+      exp("Partager en parts égales, c’est diviser.", `${t} ÷ ${n}.`, calculDivision(t, n, q), `Il y a ${q} ${G.qui} par ${g.un}.`),
+      barreEgale(n, null, `${t} ${G.qui}`),
+    );
+  }
+  return qcmN(
+    pick([
+      `${G.ou}, ${t} ${G.qui} font des ${g.des} de ${n}. Combien ${deM(g.des)} y a-t-il ?`,
+      `${G.ou}, on répartit ${t} ${G.qui} en ${g.des} de ${n}. Combien ${deM(g.des)} forme-t-on ?`,
+      `${t} ${G.qui} se mettent par ${g.des} de ${n}. Combien ${deM(g.des)} ?`,
+      `${G.chef ? `${G.chef.nom} a` : "Il y a"} ${t} ${G.qui}. ${G.chef ? maj(G.chef.il) : "On"} fait des ${g.des} de ${n}. Combien ${deM(g.des)} ?`,
+    ]),
+    q,
+    piegesPb(t, n, q),
+    exp("Faire des groupes de même taille et les compter, c’est diviser.", `On cherche combien de fois ${n} tient dans ${t} : ${t} ÷ ${n}.`, calculDivision(t, n, q), `On forme ${q} ${g.des}.`),
+    barre([[`1 ${g.un}`, String(n)], ["encore…", null]], `${t} ${G.qui}`, `Combien ${deM(g.des)} de ${n} ?`),
+  );
+}
+
+/* ---------------- DIVISION_DEFI ---------------- */
+
+/** Deux étapes (★4) ou trois (★5) : partager puis ajouter ou retirer. */
+function deuxEtapesQ(e: E5): Q {
+  const s = sit();
+  const c = s.chose;
+  const w = s.qui;
+  const n = rint(3, 8);
+  const q = rint(5, 12);
+  const a = rint(2, Math.min(4, q - 1));
+  const retire = Math.random() < 0.5;
+  const fin = retire ? q - a : q + a;
+  const etape2 = retire ? `on reprend ${a} ${c.des} à chaque ${w.un}` : `on donne encore ${a} ${c.des} à chaque ${w.un}`;
+  if (e >= 5) {
+    const [p1, p2] = deuxPersonnes();
+    const t = n * q;
+    const x = rint(Math.ceil(t / 4), Math.floor((3 * t) / 4));
+    const y = t - x;
+    const ils = p1.il === "elle" && p2.il === "elle" ? "Elles" : "Ils";
+    return qcmN(
+      `Défi : ${p1.nom} a ${x} ${c.des}, ${p2.nom} en a ${y}. ${ils} réunissent tout et partagent entre ${n} ${w.des}. Puis ${etape2}. Combien ${deM(c.des)} pour chaque ${w.un} ?`,
+      fin,
+      [q, retire ? q + a : q - a, t - a, Math.floor(x / n), fin + 1],
+      exp("Un défi en trois étapes : réunir, partager, puis ajuster.", "On calcule dans l’ordre de l’histoire.", `${x} + ${y} = ${t} ; ${t} ÷ ${n} = ${q} ; ${q} ${retire ? "−" : "+"} ${a} = ${fin}.`, `Il y a ${fin} ${c.des} pour chaque ${w.un}.`),
+      barre([[p1.nom, String(x)], [p2.nom, String(y)]], null, `Puis ÷ ${n}, puis ${retire ? "−" : "+"} ${a}`),
+    );
+  }
+  const t = n * q;
+  return qcmN(
+    pick([
+      `Défi : ${t} ${c.des} sont ${accord("partagé", c)} entre ${n} ${w.des}. Puis ${etape2}. Combien ${deM(c.des)} pour chaque ${w.un} maintenant ?`,
+      `${s.ou}, on partage ${t} ${c.des} entre ${n} ${w.des}. Ensuite, ${etape2}. Combien ${deM(c.des)} pour chaque ${w.un} ?`,
+      `${s.metier ? s.metier.nom : "On"} partage ${t} ${c.des} entre ${n} ${w.des}, puis ${etape2.replace(/^on /, s.metier ? "" : "on ")}. Combien ${deM(c.des)} pour chaque ${w.un} à la fin ?`,
+    ]),
+    fin,
+    [q, retire ? q + a : q - a, t - a, t + a, fin + 1],
+    exp("Un défi en deux étapes : d’abord partager, puis ajuster.", "On calcule dans l’ordre de l’histoire.", `${t} ÷ ${n} = ${q}, puis ${q} ${retire ? "−" : "+"} ${a} = ${fin}.`, `Il y a ${fin} ${c.des} pour chaque ${w.un}.`),
+    parfois(0.8, () => barreEgale(n, null, String(t))),
+  );
+}
+
+/** Réunir deux quantités, puis partager. */
+function reunirPartagerQ(): Q {
+  const s = sit();
+  const c = s.chose;
+  const [p1, p2] = deuxPersonnes();
+  const n = rint(3, 8);
+  const q = rint(4, 12);
+  const t = n * q;
+  const x = rint(Math.ceil(t / 4), Math.floor((3 * t) / 4));
+  const y = t - x;
+  const ils = p1.il === "elle" && p2.il === "elle" ? "elles" : "ils";
+  return qcmN(
+    pick([
+      `${p1.nom} a ${x} ${c.des} et ${p2.nom} en a ${y}. ${maj(ils)} mettent tout ensemble et font ${n} parts égales. Combien ${deM(c.des)} dans chaque part ?`,
+      `Défi : ${x} ${c.des} d’un côté, ${y} de l’autre. On réunit tout et on partage entre ${n} ${s.qui.des}. Combien pour chaque ${s.qui.un} ?`,
+      `${s.ou}, ${p1.nom} apporte ${x} ${c.des} et ${p2.nom} ${y}. On les partage entre ${n} ${s.qui.des}. Combien ${deM(c.des)} pour chaque ${s.qui.un} ?`,
+    ]),
+    q,
+    [t, t - n, q + 1, Math.floor(x / n) + y, q - 1],
+    exp("Deux étapes : d’abord réunir, ensuite partager.", "On additionne, puis on divise le total.", `${x} + ${y} = ${t}, puis ${t} ÷ ${n} = ${q}.`, `${q} ${c.des} dans chaque part.`),
+    barre([[p1.nom, String(x)], [p2.nom, String(y)]], null, `Le total, puis ÷ ${n}`),
+  );
+}
+
+/** Je pense à un nombre : divisé par d, il donne q reste r. */
+function nombreMystereQ(): Q {
+  const d = rint(3, 9);
+  const q = rint(4, 15);
+  const r = rint(1, d - 1);
+  const N = d * q + r;
+  const p = quelquun();
+  return qcmN(
+    pick([
+      `Défi : je pense à un nombre. Divisé par ${d}, il donne ${q} et il reste ${r}. Quel est ce nombre ?`,
+      `${p.nom} pense à un nombre. Dans la division par ${d}, le quotient est ${q} et le reste ${r}. Quel est ce nombre ?`,
+      `Nombre mystère : ? ÷ ${d} = ${q} reste ${r}. Quel est le nombre caché ?`,
+    ]),
+    N,
+    [d * q, q + d + r, d * q - r, d * (q + 1), q * r + d],
+    exp("On remonte la division : dividende = diviseur × quotient + reste.", `On multiplie ${d} par ${q}, puis on ajoute le reste ${r}.`, `${d} × ${q} = ${d * q}, puis ${d * q} + ${r} = ${N}.`, `Le nombre est ${N}.`),
+    calculPoseCanvas({
+      operation: "division",
+      title: "Le nombre mystère",
+      numbers: ["?", String(d)],
+      result: String(q),
+      division: { dividende: "?", diviseur: String(d), quotient: String(q), reste: String(r) },
+      questionLabel: "dividende = diviseur × quotient + reste",
+      display: { showResult: true, showRetenues: false },
+    }),
+  );
+}
+
+/** Le plus grand (ou le plus petit) dividende pour un quotient donné. */
+function extremeDividendeQ(): Q {
+  const d = rint(3, 9);
+  const q = rint(4, 12);
+  const grand = Math.random() < 0.6;
+  const p = quelquun();
+  const rep_ = grand ? d * q + d - 1 : d * q;
+  return qcmN(
+    grand
+      ? pick([
+          `Défi : dans une division par ${d}, le quotient est ${q}. Quel est le plus grand dividende possible ?`,
+          `${p.nom} divise un nombre par ${d} et trouve le quotient ${q}. Quel est le plus grand nombre possible ?`,
+        ])
+      : pick([
+          `Défi : dans une division par ${d}, le quotient est ${q}. Quel est le plus petit dividende possible ?`,
+          `${p.nom} divise un nombre par ${d} et trouve le quotient ${q}. Quel est le plus petit nombre possible ?`,
+        ]),
+    rep_,
+    grand ? [d * q, d * (q + 1), d * q + d, d + q] : [d * q - 1, d * q + 1, d * q + d - 1, d + q],
+    exp(
+      "dividende = diviseur × quotient + reste, et le reste va de 0 au diviseur moins 1.",
+      grand ? `Le plus grand reste possible est ${d - 1}.` : "Le plus petit reste possible est 0.",
+      `${d} × ${q} + ${grand ? d - 1 : 0} = ${rep_}.`,
+      `Le ${grand ? "plus grand" : "plus petit"} dividende est ${rep_}.`,
+    ),
+    calculPoseCanvas({
+      operation: "division",
+      title: "Quel dividende ?",
+      numbers: ["?", String(d)],
+      result: String(q),
+      division: { dividende: "?", diviseur: String(d), quotient: String(q), reste: "?" },
+      questionLabel: `Le reste peut aller de 0 à ${d - 1}.`,
+      display: { showResult: true, showRetenues: false },
+    }),
+  );
+}
+
+const ARTICLES: readonly string[] = [
+  "stylos", "cahiers", "croissants", "places de cinéma", "cartes postales", "balles de tennis",
+  "pots de peinture", "plants de tomates", "tickets de bus", "livres de poche", "bouquets de fleurs", "paquets de graines",
+];
+
+/** Le prix d'un, puis le prix de plusieurs : diviser, puis multiplier. */
+function prixUnitaireQ(): Q {
+  const art = pick(ARTICLES);
+  const k = rint(2, 9);
+  const n = rint(3, 8);
+  let m = rint(2, 9);
+  while (m === n) m = rint(2, 9);
+  const t = k * n;
+  const p = quelquun();
+  return {
+    ...qcmN(
+      pick([
+        `${n} ${art} coûtent ${t} €. Combien coûtent ${m} ${art} ?`,
+        `${p.nom} paie ${t} € pour ${n} ${art}. Combien paierait-${p.il} pour ${m} ${art} ?`,
+        `Défi : si ${n} ${art} coûtent ${t} €, combien coûtent ${m} ${art} au même prix ?`,
+        `Au magasin, ${n} ${art} valent ${t} €. Quel est le prix de ${m} ${art} ?`,
+      ]),
+      m * k,
+      [k, n * m, t + m - n, t * m, m * k + k],
+      exp("Deux étapes : d’abord le prix d’un, ensuite le prix de plusieurs.", `On divise ${t} € par ${n}, puis on multiplie par ${m}.`, `${t} ÷ ${n} = ${k} € ; ${k} × ${m} = ${m * k} €.`, `${m} ${art} coûtent ${m * k} €.`),
+      {
+        kind: "tableau_donnees",
+        coin: "",
+        headers: ["Achat 1", "Achat 2"],
+        rows: [
+          { label: `Nombre de ${art}`, values: [n, m] },
+          { label: "Prix (€)", values: [t, "?"] },
+        ],
+        display: { compact: true },
+      } as TableauDonneesCanvasData,
+    ),
+    choices: choixN(m * k, [k, n * m, t + m - n, t * m, m * k + k], "€"),
+    expected: [rep(m * k, "€")],
+  };
+}
+
+/** Partager deux fois : entre les groupes, puis dans chaque groupe. */
+function partageDeuxFoisQ(): Q {
+  const s = sit();
+  const c = s.chose;
+  const G = pick([
+    { g: nm("classe", "classes", true), m: "groupes" },
+    { g: nm("équipe", "équipes", true), m: "joueurs" },
+    { g: nm("table", "tables", true), m: "enfants" },
+    { g: nm("famille", "familles", true), m: "enfants" },
+    { g: nm("patrouille", "patrouilles", true), m: "scouts" },
+    { g: nm("cabane", "cabanes", true), m: "campeurs" },
+  ]);
+  const a = rint(2, 5);
+  const b = rint(2, 5);
+  const q = rint(2, 9);
+  const t = a * b * q;
+  return qcmN(
+    pick([
+      `Défi : ${t} ${c.des} sont ${accord("partagé", c)} entre ${a} ${G.g.des}. Dans chaque ${G.g.un}, on partage ensuite entre ${b} ${G.m}. Combien ${deM(c.des)} pour chacun des ${G.m} ?`,
+      `Pour la grande fête, on partage ${t} ${c.des} entre ${a} ${G.g.des}, puis chaque ${G.g.un} partage sa part entre ses ${b} ${G.m}. Combien ${deM(c.des)} pour chacun ?`,
+    ]),
+    q,
+    [t / a, t / b, a * b, q + 1, Number.isInteger(t / (a + b)) ? t / (a + b) : q * a],
+    exp("Deux partages à la suite.", `On partage d’abord entre les ${a} ${G.g.des}, puis chaque part entre ${b}.`, `${t} ÷ ${a} = ${t / a}, puis ${t / a} ÷ ${b} = ${q}.`, `Chacun reçoit ${q} ${c.des}.`),
+    barreEgale(a, null, String(t)),
+  );
+}
+
+/** « 3 fois plus » : le total en parts égales. */
+function partsInegalesQ(): Q {
+  const [p1, p2] = deuxPersonnes();
+  const c = sit().chose;
+  const m = rint(2, 5);
+  const x = rint(3, 15);
+  const t = x * (m + 1);
+  const eux = p1.il === "elle" && p2.il === "elle" ? "elles" : "eux";
+  const ils = eux === "elles" ? "elles" : "ils";
+  const pourP2 = Math.random() < 0.6;
+  const rep_ = pourP2 ? x : x * m;
+  return qcmN(
+    `Défi : ${p1.nom} a ${m} fois plus ${deM(c.des)} ${/^[aeiouyàâéèêëîïôœh]/i.test(p2.nom) ? "qu’" : "que "}${p2.nom}. À ${eux} deux, ${ils} en ont ${t}. Combien ${pourP2 ? p2.nom : p1.nom} en a-t-${(pourP2 ? p2 : p1).il} ?`,
+    rep_,
+    pourP2 ? [Math.floor(t / m), x * m, Math.floor(t / 2), t - m] : [x, Math.floor(t / m), Math.floor(t / 2), t - x * (m - 1)],
+    exp(
+      `${p2.nom} a 1 part, ${p1.nom} en a ${m} : ensemble, ${m + 1} parts égales.`,
+      `On divise le total par ${m + 1}.`,
+      `${t} ÷ ${m + 1} = ${x} ; ${p1.nom} a ${m} × ${x} = ${x * m}.`,
+      `${pourP2 ? p2.nom : p1.nom} a ${rep_} ${c.des}.`,
+    ),
+    barre(
+      [[p2.nom, null], ...Array.from({ length: m }, () => [p1.nom, null] as [string, null])],
+      String(t),
+    ),
+  );
+}
+
+/* ---------------- L'installation ---------------- */
+
+function gab5(id: string, microId: string, difficulty: E5, hint: string, tags: string[], generate: () => Q): TutorBankItemV4 {
+  return { ...gab(id, microId, 1, hint, tags, generate), difficulty } as TutorBankItemV4;
+}
+
+const P = "division_posee";
+const R_ = "division_reste";
+const PB = "division_probleme";
+const DF = "division_defi";
+
+const GABARITS_POSEE_DEFI: TutorBankItemV4[] = [
+  // DIVISION_POSEE ★2 : 2 chiffres ÷ 1 chiffre, les étapes de la potence.
+  gab5("cm1_division_posee_tpl_quotient_e2", P, 2, "Commence par la gauche : les dizaines d’abord.", ["posee", "canvas"], () => quotientQ(2)),
+  gab5("cm1_division_posee_tpl_etapes_e2", P, 2, "Le reste des dizaines s’échange contre des unités.", ["posee", "etapes", "canvas"], () => etapesQ(2)),
+  gab5("cm1_division_posee_tpl_nb_chiffres_e2", P, 2, "Compare le premier chiffre à gauche au diviseur.", ["posee", "estimation"], () => nbChiffresQ(2)),
+  gab5("cm1_division_posee_tpl_premier_pas_e2", P, 2, "On commence par la gauche, jamais par les unités.", ["posee", "methode", "canvas"], () => premierPasQ(2)),
+  gab5("cm1_division_posee_tpl_probleme_e2", P, 2, "Pose la division : total ÷ nombre de parts.", ["posee", "probleme", "canvas"], () => problemePoseQ(2)),
+  // ★3 : jusqu'à 3 chiffres, vérifier.
+  gab5("cm1_division_posee_tpl_etapes_e3", P, 3, "Le reste des dizaines s’échange contre des unités.", ["posee", "etapes", "canvas"], () => etapesQ(3)),
+  gab5("cm1_division_posee_tpl_nb_chiffres_e3", P, 3, "Compare le premier chiffre à gauche au diviseur.", ["posee", "estimation"], () => nbChiffresQ(3)),
+  gab5("cm1_division_posee_tpl_premier_pas_e3", P, 3, "Si le premier chiffre est trop petit, prends les deux premiers.", ["posee", "methode", "canvas"], () => premierPasQ(3)),
+  gab5("cm1_division_posee_tpl_verifier_e3", P, 3, "dividende = diviseur × quotient + reste.", ["posee", "verification", "canvas"], () => verifierPoseQ(tiragePose(3, true))),
+  gab5("cm1_division_posee_tpl_probleme_e3", P, 3, "Pose la division : total ÷ nombre de parts.", ["posee", "probleme", "canvas"], () => problemePoseQ(3)),
+  // ★4 : 3 chiffres, le 0 du quotient, l'erreur d'un élève.
+  gab5("cm1_division_posee_tpl_quotient_e4", P, 4, "N’oublie pas le 0 quand le diviseur ne va pas.", ["posee", "zero", "canvas"], () => quotientQ(4)),
+  gab5("cm1_division_posee_tpl_nb_chiffres_e4", P, 4, "Compare le premier chiffre à gauche au diviseur.", ["posee", "estimation"], () => nbChiffresQ(4)),
+  gab5("cm1_division_posee_tpl_premier_pas_e4", P, 4, "Si le premier chiffre est trop petit, prends les deux premiers.", ["posee", "methode", "canvas"], () => premierPasQ(4)),
+  gab5("cm1_division_posee_tpl_verifier_e4", P, 4, "dividende = diviseur × quotient + reste.", ["posee", "verification", "canvas"], () => verifierPoseQ(tiragePose(4, true))),
+  gab5("cm1_division_posee_tpl_probleme_e4", P, 4, "Pose la division : total ÷ nombre de parts.", ["posee", "probleme", "canvas"], () => problemePoseQ(4)),
+
+  // DIVISION_RESTE ★3 : trouver le reste, le reste plus petit que le diviseur.
+  gab5("cm1_division_reste_tpl_reste_e3", R_, 3, "Cherche le plus grand multiple du diviseur qui ne dépasse pas.", ["reste", "canvas"], () => resteQ(3)),
+  gab5("cm1_division_reste_tpl_quotient_reste_e3", R_, 3, "Le reste est plus petit que le diviseur.", ["reste", "canvas"], () => quotientResteQ(3)),
+  gab5("cm1_division_reste_tpl_possible_e3", R_, 3, "Le reste est toujours plus petit que le diviseur.", ["reste", "propriete"], restePossibleQ),
+  gab5("cm1_division_reste_tpl_complets_e3", R_, 3, "Le reste ne fait pas un paquet complet.", ["reste", "interpretation", "canvas"], () => sachetsCompletsQ(3)),
+  gab5("cm1_division_reste_tpl_a_part_e3", R_, 3, "Ce qui ne remplit pas un paquet, c’est le reste.", ["reste", "interpretation", "canvas"], () => resteContexteQ(3)),
+  gab5("cm1_division_reste_tpl_dessin_e3", R_, 3, "Compte les paquets complets, puis ce qui reste à part.", ["reste", "canvas"], dessinResteQ),
+  // ★4 : interpréter le reste, l'égalité, l'erreur d'un élève.
+  gab5("cm1_division_reste_tpl_quotient_reste_e4", R_, 4, "Le reste est plus petit que le diviseur.", ["reste", "canvas"], () => quotientResteQ(4)),
+  gab5("cm1_division_reste_tpl_a_part_e4", R_, 4, "Ce qui ne remplit pas un paquet, c’est le reste.", ["reste", "interpretation", "canvas"], () => resteContexteQ(4)),
+  gab5("cm1_division_reste_tpl_faut_il_e4", R_, 4, "Ceux qui restent ont besoin de place aussi.", ["reste", "interpretation", "canvas"], () => combienFautIlQ(4)),
+  gab5("cm1_division_reste_tpl_manque_e4", R_, 4, "Compare le reste au diviseur.", ["reste", "interpretation", "canvas"], () => combienManqueQ(4)),
+  gab5("cm1_division_reste_tpl_egalite_e4", R_, 4, "dividende = diviseur × quotient + reste.", ["reste", "verification", "canvas"], () => egaliteQ(4)),
+  gab5("cm1_division_reste_tpl_erreur_e4", R_, 4, "Vérifie : diviseur × quotient + reste, et reste plus petit que le diviseur.", ["reste", "erreur", "canvas"], () => erreurQ(tirageReste(4))),
+
+  // DIVISION_PROBLEME ★3 : des récits de la vie, chacun son dessin.
+  gab5("cm1_division_probleme_tpl_partage_e3", PB, 3, "Partager en parts égales, c’est diviser.", ["probleme", "partage", "canvas"], partagePbQ),
+  gab5("cm1_division_probleme_tpl_groupement_e3", PB, 3, "Combien de fois le petit nombre tient-il dans le grand ?", ["probleme", "groupes", "canvas"], groupementPbQ),
+  gab5("cm1_division_probleme_tpl_mesures_e3", PB, 3, "Longueurs, masses, litres : on divise comme pour des objets.", ["probleme", "mesures", "canvas"], () => recitQ(RECITS_MESURES)),
+  gab5("cm1_division_probleme_tpl_argent_e3", PB, 3, "Le prix total ÷ le prix d’un, ou ÷ le nombre de personnes.", ["probleme", "argent", "canvas"], () => recitQ(RECITS_ARGENT)),
+  gab5("cm1_division_probleme_tpl_quotidien_e3", PB, 3, "Partager ou faire des groupes : c’est une division.", ["probleme", "canvas"], () => recitQ(RECITS_QUOTIDIEN)),
+  gab5("cm1_division_probleme_tpl_choisir_e3", PB, 3, "Partager ou grouper : ÷. Répéter la même quantité : ×.", ["probleme", "choisir_operation", "canvas"], choisirCalculPbQ),
+
+  // DIVISION_DEFI ★4 : deux étapes.
+  gab5("cm1_division_defi_tpl_deux_etapes_e4", DF, 4, "Partage d’abord, puis ajuste.", ["defi", "deux_etapes", "canvas"], () => deuxEtapesQ(4)),
+  gab5("cm1_division_defi_tpl_reunir_e4", DF, 4, "Réunis d’abord, partage ensuite.", ["defi", "deux_etapes", "canvas"], reunirPartagerQ),
+  gab5("cm1_division_defi_tpl_prix_e4", DF, 4, "Trouve d’abord le prix d’un.", ["defi", "deux_etapes", "canvas"], prixUnitaireQ),
+  gab5("cm1_division_defi_tpl_parts_e4", DF, 4, "Compte les parts égales en tout.", ["defi", "parts", "canvas"], partsInegalesQ),
+  gab5("cm1_division_defi_tpl_verifier_e4", DF, 4, "dividende = diviseur × quotient + reste.", ["defi", "verification", "canvas"], () => verifierPoseQ(tirageReste(4))),
+  // ★5 : trois étapes, nombre mystère, le reste qui demande une place de plus.
+  gab5("cm1_division_defi_tpl_mystere_e5", DF, 5, "Remonte la division : diviseur × quotient + reste.", ["defi", "mystere", "canvas"], nombreMystereQ),
+  gab5("cm1_division_defi_tpl_partage_deux_fois_e5", DF, 5, "Deux partages à la suite.", ["defi", "deux_etapes", "canvas"], partageDeuxFoisQ),
+  gab5("cm1_division_defi_tpl_extreme_e5", DF, 5, "Le reste va de 0 au diviseur moins 1.", ["defi", "reste", "canvas"], extremeDividendeQ),
+  gab5("cm1_division_defi_tpl_places_e5", DF, 5, "Ceux qui restent ont besoin de place aussi.", ["defi", "reste", "canvas"], () => combienFautIlQ(5)),
+];
+
 export const divisionBank: TutorBankItemV4[] = [
   // ============================================================
   // DIVISION_SENS
@@ -1480,32 +2748,8 @@ export const divisionBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise les tables pour trouver le quotient.",
     tags: ["cm1", "division", "posee", "exacte", "template", "canvas"],
-    generate: () => {
-      const diviseur = randomChoice([3, 4, 5, 6, 7, 8, 9]);
-      const quotient = randomChoice([11, 12, 13, 14, 15, 16, 18, 20]);
-      const dividende = diviseur * quotient;
-
-      return {
-        text: `Calcule : ${dividende} ÷ ${diviseur}`,
-        format: "short",
-        expected: [String(quotient)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Une division exacte donne un reste égal à 0.",
-          "On cherche combien de fois le diviseur est contenu dans le dividende.",
-          `${dividende} ÷ ${diviseur} = ${quotient}.`,
-          `Le quotient est ${quotient}.`
-        ),
-        canvas: divisionCanvas({
-          dividende,
-          diviseur,
-          quotient,
-          title: "Division posée",
-          questionLabel: "Calcule le quotient.",
-          showResult: false,
-        }),
-      };
-    },
+    // 14/11/2026 : une seule phrase « Calcule : … ÷ … » devenue 8 tournures, avec reste parfois.
+    generate: () => quotientQ(3),
   },
 
   {
@@ -1519,34 +2763,8 @@ export const divisionBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Vérifie avec la multiplication inverse.",
     tags: ["cm1", "division", "posee", "erreur", "template", "qcm", "canvas"],
-    generate: () => {
-      const diviseur = randomChoice([4, 5, 6, 7, 8, 9]);
-      const quotient = randomChoice([8, 9, 10, 11, 12]);
-      const dividende = diviseur * quotient;
-      const wrong = quotient + randomChoice([-2, -1, 1, 2]);
-
-      return {
-        text: `Un élève affirme que ${dividende} ÷ ${diviseur} = ${wrong}. A-t-il raison ?`,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: ["non"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On peut vérifier une division avec une multiplication.",
-          "On multiplie le diviseur par le quotient annoncé.",
-          `${diviseur} × ${quotient} = ${dividende}, donc ${dividende} ÷ ${diviseur} = ${quotient}, et non ${wrong}.`,
-          "L’élève n’a pas raison."
-        ),
-        canvas: divisionCanvas({
-          dividende,
-          diviseur,
-          quotient,
-          title: "Vérifier une division",
-          questionLabel: "Le quotient annoncé est-il correct ?",
-          showResult: false,
-        }),
-      };
-    },
+    // 14/11/2026 : la réponse était TOUJOURS « non » ; maintenant juste, reste trop grand, quotient trop grand, 0 oublié ou reste oublié.
+    generate: () => erreurQ(tiragePose(4, Math.random() < 0.6)),
   },
 
   // ============================================================
@@ -1662,34 +2880,8 @@ export const divisionBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche le plus grand multiple inférieur ou égal au nombre total.",
     tags: ["cm1", "division", "reste", "template", "canvas"],
-    generate: () => {
-      const diviseur = randomChoice([3, 4, 5, 6, 7, 8, 9]);
-      const quotient = randomChoice([4, 5, 6, 7, 8, 9]);
-      const reste = randomInt(1, diviseur - 1);
-      const dividende = diviseur * quotient + reste;
-
-      return {
-        text: `Dans la division ${dividende} ÷ ${diviseur}, quel est le reste ?`,
-        format: "short",
-        expected: [String(reste)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le reste est ce qui reste après avoir formé tous les groupes complets.",
-          "On cherche le plus grand multiple du diviseur inférieur ou égal au dividende.",
-          `${diviseur} × ${quotient} = ${diviseur * quotient}, puis ${dividende} - ${diviseur * quotient} = ${reste}.`,
-          `Le reste est ${reste}.`
-        ),
-        canvas: divisionCanvas({
-          dividende,
-          diviseur,
-          quotient,
-          reste,
-          title: "Division avec reste",
-          questionLabel: "Trouve le reste.",
-          showResult: false,
-        }),
-      };
-    },
+    // 14/11/2026 : 7 tournures, pièges = quotient pris pour le reste, reste ≥ diviseur, reste oublié.
+    generate: () => resteQ(4),
   },
 
   {
@@ -1700,37 +2892,11 @@ export const divisionBank: TutorBankItemV4[] = [
     notionId: "division",
     microId: "division_reste",
     difficulty: 4,
-    theme: "reunion",
+    theme: "neutral",
     hint: "Le reste ne permet pas de faire un sachet complet.",
-    tags: ["cm1", "division", "reste", "reunion", "template", "canvas"],
-    generate: () => {
-      const taille = randomChoice([4, 5, 6, 8]);
-      const sachets = randomChoice([5, 6, 7, 8, 9]);
-      const reste = randomInt(1, taille - 1);
-      const total = taille * sachets + reste;
-
-      return {
-        text: `On a ${total} fruits. On prépare des sachets de ${taille} fruits. Combien de sachets complets peut-on faire ?`,
-        format: "short",
-        expected: [String(sachets)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand on demande des groupes complets, le reste n’est pas compté comme un groupe.",
-          "On cherche combien de sachets entiers on peut remplir.",
-          `${taille} × ${sachets} = ${taille * sachets}, et il reste ${reste}.`,
-          `On peut faire ${sachets} sachets complets.`
-        ),
-        canvas: divisionCanvas({
-          dividende: total,
-          diviseur: taille,
-          quotient: sachets,
-          reste,
-          title: "Sachets complets",
-          questionLabel: "Combien de sachets complets ?",
-          showResult: false,
-        }),
-      };
-    },
+    tags: ["cm1", "division", "reste", "template", "canvas"],
+    // 14/11/2026 : « On a … fruits » à chaque fois ; maintenant 28 situations (La Réunion ≈ 1 sur 28).
+    generate: () => sachetsCompletsQ(4),
   },
 
   // ============================================================
@@ -1824,24 +2990,8 @@ export const divisionBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On cherche combien de groupes identiques on peut faire.",
     tags: ["cm1", "division", "probleme", "equipes", "template"],
-    generate: () => {
-      const tailleEquipe = randomChoice([3, 4, 5, 6, 8]);
-      const equipes = randomChoice([4, 5, 6, 7, 8]);
-      const total = tailleEquipe * equipes;
-
-      return {
-        text: `On a ${total} élèves. On fait des équipes de ${tailleEquipe} élèves. Combien d’équipes peut-on former ?`,
-        format: "short",
-        expected: [String(equipes)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La division sert à former des groupes égaux.",
-          "On divise le nombre total par la taille d’un groupe.",
-          `${total} ÷ ${tailleEquipe} = ${equipes}.`,
-          `On peut former ${equipes} équipes.`
-        ),
-      };
-    },
+    // 14/11/2026 : 14 situations de groupes (sport, danse, chorale, mariage…), grouper ou partager, avec le dessin.
+    generate: () => equipesQ(),
   },
 
   {
@@ -1852,27 +3002,11 @@ export const divisionBank: TutorBankItemV4[] = [
     notionId: "division",
     microId: "division_probleme",
     difficulty: 3,
-    theme: "reunion",
+    theme: "neutral",
     hint: "On partage les fruits en sachets identiques.",
-    tags: ["cm1", "division", "probleme", "reunion", "marche", "template"],
-    generate: () => {
-      const parSachet = randomChoice([4, 5, 6, 8, 10]);
-      const sachets = randomChoice([4, 5, 6, 7, 8, 9]);
-      const total = parSachet * sachets;
-
-      return {
-        text: `Au marché de Saint-Pierre, on range ${total} fruits dans des sachets de ${parSachet}. Combien de sachets peut-on préparer ?`,
-        format: "short",
-        expected: [String(sachets)],
-        comparator: "number_equal",
-        explanation: exp(
-          "La division permet de calculer le nombre de groupes égaux.",
-          "On divise le nombre total de fruits par le nombre de fruits dans un sachet.",
-          `${total} ÷ ${parSachet} = ${sachets}.`,
-          `On peut préparer ${sachets} sachets.`
-        ),
-      };
-    },
+    tags: ["cm1", "division", "probleme", "marche", "template"],
+    // 14/11/2026 : « Au marché de Saint-Pierre » servi à chaque fois ; devenu un problème à donnée inutile, 13 situations.
+    generate: () => donneeInutileQ(),
   },
 
   // ============================================================
@@ -1970,26 +3104,8 @@ export const divisionBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Partage d’abord, puis applique la deuxième étape.",
     tags: ["cm1", "division", "defi", "deux_etapes", "template"],
-    generate: () => {
-      const personnes = randomChoice([4, 5, 6, 8]);
-      const chacun = randomChoice([6, 7, 8, 9, 10]);
-      const retire = randomChoice([1, 2, 3]);
-      const total = personnes * chacun;
-      const final = chacun - retire;
-
-      return {
-        text: `Défi : ${total} objets sont partagés entre ${personnes} enfants. Puis chaque enfant donne ${retire} objets. Combien lui en reste-t-il ?`,
-        format: "short",
-        expected: [String(final)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Un problème à deux étapes demande de faire les calculs dans l’ordre.",
-          "On partage d’abord, puis on retire une quantité.",
-          `${total} ÷ ${personnes} = ${chacun}, puis ${chacun} - ${retire} = ${final}.`,
-          `Il reste ${final} objets à chaque enfant.`
-        ),
-      };
-    },
+    // 14/11/2026 : trois étapes (réunir, partager, ajuster), 28 situations.
+    generate: () => deuxEtapesQ(5),
   },
 
   {
@@ -2000,37 +3116,11 @@ export const divisionBank: TutorBankItemV4[] = [
     notionId: "division",
     microId: "division_defi",
     difficulty: 5,
-    theme: "reunion",
+    theme: "neutral",
     hint: "On ne compte que les groupes complets.",
-    tags: ["cm1", "division", "defi", "reste", "reunion", "template", "canvas"],
-    generate: () => {
-      const taille = randomChoice([4, 5, 6, 8]);
-      const groupes = randomChoice([6, 7, 8, 9]);
-      const reste = randomInt(1, taille - 1);
-      const total = taille * groupes + reste;
-
-      return {
-        text: `Défi sortie nature : ${total} élèves doivent monter dans des groupes de ${taille}. Combien de groupes complets peut-on former ?`,
-        format: "short",
-        expected: [String(groupes)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Quand on demande des groupes complets, le reste ne forme pas un groupe entier.",
-          "On cherche combien de groupes de taille donnée on peut former.",
-          `${taille} × ${groupes} = ${taille * groupes}, et il reste ${reste}.`,
-          `On peut former ${groupes} groupes complets.`
-        ),
-        canvas: divisionCanvas({
-          dividende: total,
-          diviseur: taille,
-          quotient: groupes,
-          reste,
-          title: "Défi division avec reste",
-          questionLabel: "Combien de groupes complets ?",
-          showResult: false,
-        }),
-      };
-    },
+    tags: ["cm1", "division", "defi", "reste", "template", "canvas"],
+    // 14/11/2026 : « Défi sortie nature » figé ; maintenant 28 situations, grands nombres.
+    generate: () => sachetsCompletsQ(5),
   },
 
   {
@@ -2042,10 +3132,17 @@ export const divisionBank: TutorBankItemV4[] = [
     microId: "division_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique comment vérifier le résultat d’une division.",
-    format: "open",
-    expected: ["multiplier", "diviseur", "quotient", "reste", "vérifier"],
-    comparator: "contains_keyword",
+    // 14/11/2026 : question « open » (CM1 = zéro clavier) devenue un QCM.
+    text: "Comment vérifie-t-on le résultat d’une division avec un reste ?",
+    format: "qcm",
+    choices: [
+      "On multiplie le diviseur par le quotient, puis on ajoute le reste : on doit retrouver le dividende.",
+      "On additionne le diviseur et le quotient : on doit retrouver le dividende.",
+      "On multiplie le dividende par le reste : on doit retrouver le quotient.",
+      "On divise le quotient par le diviseur : on doit retrouver le reste.",
+    ],
+    expected: ["On multiplie le diviseur par le quotient, puis on ajoute le reste : on doit retrouver le dividende."],
+    comparator: "mcq_exact",
     hint: "Pense à la multiplication inverse.",
     explanation: exp(
       "Une division peut être vérifiée avec une multiplication.",
@@ -2053,7 +3150,7 @@ export const divisionBank: TutorBankItemV4[] = [
       "Par exemple, si 38 ÷ 6 = 6 reste 2, on vérifie : 6 × 6 + 2 = 38.",
       "La multiplication permet donc de vérifier la division."
     ),
-    tags: ["cm1", "division", "defi", "open", "verification"],
+    tags: ["cm1", "division", "defi", "qcm", "verification"],
   },
 
   // ============================================================
@@ -2793,4 +3890,6 @@ export const divisionBank: TutorBankItemV4[] = [
 
   // DIVISION_SENS et DIVISION_LIEN_MULTIPLICATION : les gabarits du 14/11/2026.
   ...GABARITS_SENS_LIEN,
+  // DIVISION_POSEE, _RESTE, _PROBLEME, _DEFI : les gabarits du 14/11/2026.
+  ...GABARITS_POSEE_DEFI,
 ];
