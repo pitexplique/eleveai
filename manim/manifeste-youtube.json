@@ -81782,6 +81782,162 @@
       ]
     },
     {
+      "id": "cm1-contenance-defi",
+      "pas_avant": "2027-01-13",
+      "notionId": "contenance",
+      "microId": "contenance_defi",
+      "classe": "cm1",
+      "ceinture": "bleue",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi.mp4",
+      "miniature": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi.png",
+      "titre": "2 litres de miel, des pots de 25 cL : combien de pots ? — Un défi de contenances — épisode 4 · Maths CM1",
+      "accroche": "Nora est apicultrice. Elle a récolté 2 litres de miel et le met dans des pots de 25 centilitres. Combien de pots peut-elle remplir ? Pour résoudre un défi, on met tout dans la même unité, puis on calcule.\n\nDans cette vidéo :\n• d'abord la même unité : 2 L = 2 × 100 = 200 cL\n• combien de fois 25 dans 200 ? 25 × 8 = 200 : 8 pots\n• on ajoute : encore 50 cL, 2 pots de plus (250 cL, 10 pots)\n• le piège : 2 L + 50 cL, ce n'est pas 52 !\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Nora a 3 L de miel et 10 pots de 25 cL. A-t-elle assez de pots pour tout le miel ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_defi&display=simple\n\n🧃 Épisode 4 de la série Contenance d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un défi de contenances"
+        ],
+        [
+          "00:06",
+          "Nora, apicultrice"
+        ],
+        [
+          "00:21",
+          "D'abord, la même unité"
+        ],
+        [
+          "00:29",
+          "Combien de fois 25 dans 200 ?"
+        ],
+        [
+          "00:39",
+          "Encore 50 cL : on ajoute"
+        ],
+        [
+          "00:53",
+          "Question 1"
+        ],
+        [
+          "01:31",
+          "Le piège : 2 L + 50 cL, ce n'est pas 52"
+        ],
+        [
+          "01:48",
+          "Question 2"
+        ],
+        [
+          "02:30",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "03:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "contenance",
+        "défi contenance",
+        "problème de contenance",
+        "convertir",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "miel",
+        "apicultrice",
+        "abeilles",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "Une bouteille de 1 L et 500 mL, des verres de 250 mL. Combien de verres ?",
+          "choix": [
+            "15 verres",
+            "4 verres",
+            "6 verres"
+          ],
+          "reponse": 2,
+          "explication": "1 L et 500 mL = 1000 + 500 = 1500 mL. 250 × 6 = 1500 : on remplit 6 verres."
+        },
+        {
+          "t": "01:48",
+          "question": "Un seau de 5 L d'eau. Nora en verse 150 cL. Combien de cL reste-t-il ?",
+          "choix": [
+            "350 cL",
+            "145 cL",
+            "650 cL"
+          ],
+          "reponse": 0,
+          "explication": "5 L = 500 cL. 500 − 150 = 350 : il reste 350 cL d'eau."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-contenance-defi-short",
+      "pas_avant": "2027-01-13",
+      "notionId": "contenance",
+      "microId": "contenance_defi",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-contenance-defi",
+      "fichier": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi-short.mp4",
+      "miniature": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi-short-miniature.png",
+      "titre": "2 litres de jus pour 25 élèves : assez ? #maths #cm1",
+      "accroche": "Fête de la classe ! Ti Margo a 2 bouteilles de jus de 1 litre. Ils sont 25 élèves, avec un gobelet de 10 centilitres chacun. « 25, c'est bien plus que 2 : il en manque plein ! » Vraiment ? Mets la même unité !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 3 bouteilles de 1 litre, et des gobelets de 20 centilitres. Combien de gobelets peut-on remplir ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm1",
+      "tags": [
+        "contenance",
+        "défi",
+        "litre",
+        "centilitre",
+        "jus",
+        "fête",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:28",
+          "question": "Ai-je assez de jus ?",
+          "choix": [
+            "oui, il en reste",
+            "non, il manque 50 cL",
+            "oui, tout juste"
+          ],
+          "reponse": 1,
+          "explication": "2 L = 200 cL et 25 × 10 cL = 250 cL. 250 − 200 = 50 cL : il manque 5 gobelets."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "ce2-perimetre-comprendre",
       "pas_avant": "2026-12-25",
       "prioritaire": true,

@@ -5974,6 +5974,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple"
  },
+ "cm1-contenance-defi": {
+  "fichier": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi.mp4",
+  "poster": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi.png",
+  "vignette": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi.vignette.webp",
+  "titre": "2 litres de miel, des pots de 25 cL : combien de pots ? — Un défi de contenances — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_defi&display=simple"
+ },
+ "cm1-contenance-defi-short": {
+  "fichier": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi-short.mp4",
+  "poster": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi-short-miniature.png",
+  "vignette": "cm1/maths/contenance/04-defi/eleveai-maths-cm1-contenance-defi-short-miniature.vignette.webp",
+  "titre": "2 litres de jus pour 25 élèves : assez ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_defi&display=simple"
+ },
  "cm1-contenance-estimer": {
   "fichier": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer.mp4",
   "poster": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer.png",

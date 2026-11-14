@@ -176,3 +176,10 @@ Reprendre la liste « Prochaine étape (session 11) » ci-dessus à partir du sh
 - `manim/scripts/cm1/contenance_estimer.py` (`ContenanceEstimerCM1`, Malik pompier, jaune) : dry run propre, planches -ql et HD relues, bords 0. Questions 01:03 A, 01:52 B.
 - Short « La piscine… au verre ? » (`films/cm1-contenance-estimer.js`, réponse C 4 verres, puis 4000 verres et le tuyau) ; film + miniature, `_muet.mp4` supprimé.
 - Manifeste 11/01/2027 (jaune, sciences + nature-ecologie ; short 00:17 C), fiche, R2 03-estimer, videos-r2 + bilans (nos clés), coach branché.
+
+## Fait le 14/11 (session 12, fin) — ✅ CONTENANCE ép. 4 DÉFI fini → ✅ SÉRIE CONTENANCE CM1 FINIE (4 paysages + 4 shorts)
+- `manim/scripts/cm1/contenance_defi.py` (`ContenanceDefiCM1`, Nora apicultrice, bleue) : dry run propre, planche -ql relue (corrigés : question 1 coupée en 4 lignes, plus lisible ; dessin de la question 2 = seau → pichet avec une flèche, au lieu d'une abeille sur un rectangle brun), HD 04-defi, bords 0. Questions 00:53 C, 01:48 A.
+- Short « Assez de jus ? » (`films/cm1-contenance-defi.js`, réponse B, il manque 50 cL = 5 gobelets) ; film + miniature, `_muet.mp4` supprimé.
+  - ⚠️ Leçon : « deux cent cinquante moins » donne 4 jetons « 250 moins » que `fusionnerNombres` ne fusionne pas (pas un nombre seul) → on en garde 2 dans le film (le 1er pour « 250 », le 4e pour « − »).
+- Manifeste 13/01/2027 (bleue, animaux + nature-ecologie ; short 00:28 B), fiche, R2 04-defi, videos-r2 + bilans (nos clés), coach branché.
+- Calendrier YouTube de la série : 07, 09, 11, 13/01/2027 (1 paysage + 1 short par jour). Rien de poussé.
