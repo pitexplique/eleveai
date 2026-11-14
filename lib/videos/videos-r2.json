@@ -5956,6 +5956,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_comparer&display=simple"
  },
+ "cm1-contenance-convertir": {
+  "fichier": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir.mp4",
+  "poster": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir.png",
+  "vignette": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir.vignette.webp",
+  "titre": "Combien de centilitres dans 2 litres ? — Convertir des contenances — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple"
+ },
+ "cm1-contenance-convertir-short": {
+  "fichier": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir-short.mp4",
+  "poster": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir-short-miniature.png",
+  "vignette": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir-short-miniature.vignette.webp",
+  "titre": "1 cL de sirop = combien de cuillères ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple"
+ },
  "cm1-decimal-droite": {
   "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.mp4",
   "poster": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.png",

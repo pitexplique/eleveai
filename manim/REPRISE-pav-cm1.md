@@ -165,3 +165,9 @@ Reprendre la liste « Prochaine étape (session 11) » ci-dessus à partir du sh
 - Manifeste `cm1-contenance-comparer` (jaune, cuisine + argent-budget : « commerce » n'est pas un centre) + `-short` (blanche, 00:21 B) le **07/01/2027** ; fiche YouTube ; R2 du dossier 01-comparer seul ; `generer-videos-r2.mjs` (seules nos clés gardées) ; coach branché (2 vidéos).
 - Outils (scratchpad session 12) : `chap.py` (dry run qui imprime l'instant de chaque clip : `MOD=contenance_<ep> SCENE=<Scene> python -m manim render --dry_run chap.py Chap`), `eps.py` + `pub.py <ep>` (entrées du manifeste), `garder.py cm1-contenance` (ne garder que nos clés dans videos-r2.json et bilans-videos.json).
 - Dates prévues : ép. 2 le 09/01, ép. 3 le 11/01, ép. 4 le 13/01/2027.
+
+## Fait le 14/11 (session 12, suite) — ✅ CONTENANCE ép. 2 CONVERTIR fini
+- `manim/scripts/cm1/contenance_convertir.py` (`ContenanceConvertirCM1`, Sofia pâtissière, verte) : dry run propre, planche relue, HD 02-convertir, bords 0. Questions 01:12 B, 02:00 C.
+- Short « Combien de cuillères de sirop ? » (`films/cm1-contenance-convertir.js`, réponse A ; outils ajoutés dans `cm1-contenance.js` : forme `'verre'`, `cuillereCraie`, `GRENADINE`, `piscineCraie`) ; film + miniature, `_muet.mp4` supprimé.
+- Manifeste 09/01/2027 (verte, cuisine + sciences ; short 00:18 A), fiche, R2 02-convertir, videos-r2 + bilans (nos clés), coach branché.
+- ⚠️ Leçons : un gros résultat « 2 L = 200 cL » d'un seul Text perd `hors_audit` à la découpe de la synchro → morceaux séparés ; « vers les cL » → TARD (« vers » dit à la fin) : écrire les mots dits (« pour les cL »).

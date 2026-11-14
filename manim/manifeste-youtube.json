@@ -81467,6 +81467,165 @@
       ]
     },
     {
+      "id": "cm1-contenance-convertir",
+      "pas_avant": "2027-01-09",
+      "notionId": "contenance",
+      "microId": "contenance_convertir",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir.mp4",
+      "miniature": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir.png",
+      "titre": "Combien de centilitres dans 2 litres ? — Convertir des contenances — épisode 2 · Maths CM1",
+      "accroche": "Sofia est pâtissière. Sa recette de crème demande 2 litres de lait, mais son verre doseur est gradué en centilitres. Combien de centilitres doit-elle verser ?\n\nDans cette vidéo :\n• les trois égalités : 1 L = 100 cL, 1 L = 1000 mL, 1 cL = 10 mL\n• des litres vers les centilitres : × 100 (2 L = 200 cL)\n• des centilitres vers les millilitres : × 10 (5 cL = 50 mL)\n• vers le litre, on divise (300 cL = 3 L ; 4000 mL = 4 L)\n• le piège : 3 L, ce n'est pas 300 mL\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 1 L de crème, on en verse 25 cL. Combien en reste-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple\n\n🧃 Épisode 2 de la série Contenance d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Convertir des contenances"
+        ],
+        [
+          "00:06",
+          "Sofia, pâtissière"
+        ],
+        [
+          "00:21",
+          "Les trois égalités à retenir"
+        ],
+        [
+          "00:34",
+          "Des litres vers les centilitres : × 100"
+        ],
+        [
+          "00:46",
+          "Des centilitres vers les millilitres : × 10"
+        ],
+        [
+          "00:58",
+          "Vers le litre : on divise"
+        ],
+        [
+          "01:12",
+          "Question 1"
+        ],
+        [
+          "01:42",
+          "Le piège : 3 L, ce n'est pas 300 mL"
+        ],
+        [
+          "02:00",
+          "Question 2"
+        ],
+        [
+          "02:30",
+          "À toi de jouer"
+        ],
+        [
+          "02:47",
+          "Correction"
+        ],
+        [
+          "03:01",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "contenance",
+        "convertir des contenances",
+        "conversion",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "L cL mL",
+        "pâtisserie",
+        "recette",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Combien de millilitres dans 3 litres ?",
+          "choix": [
+            "300 mL",
+            "3000 mL",
+            "30 mL"
+          ],
+          "reponse": 1,
+          "explication": "1 L = 1000 mL. 3 × 1000 = 3000 : 3 L = 3000 mL."
+        },
+        {
+          "t": "02:00",
+          "question": "Combien de litres font 600 centilitres ?",
+          "choix": [
+            "60 L",
+            "6000 L",
+            "6 L"
+          ],
+          "reponse": 2,
+          "explication": "600 ÷ 100 = 6, car 6 × 100 = 600 : 600 cL = 6 L."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm1-contenance-convertir-short",
+      "pas_avant": "2027-01-09",
+      "notionId": "contenance",
+      "microId": "contenance_convertir",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-contenance-convertir",
+      "fichier": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir-short.mp4",
+      "miniature": "cm1/maths/contenance/02-convertir/eleveai-maths-cm1-contenance-convertir-short-miniature.png",
+      "titre": "1 cL de sirop = combien de cuillères ? #maths #cm1",
+      "accroche": "Ti Margo prépare son jus : la recette dit 1 centilitre de sirop de grenadine. 1 centilitre, c'est 10 millilitres… « Donc 10 cuillères ! » Mais sa cuillère contient 5 millilitres. Combien de cuillères, alors ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 3 centilitres de sirop, avec une cuillère de 5 millilitres. Combien de cuillères ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm1",
+      "tags": [
+        "contenance",
+        "convertir",
+        "centilitre",
+        "millilitre",
+        "sirop",
+        "cuillère",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Combien de cuillères de 5 mL pour faire 10 mL ?",
+          "choix": [
+            "2 cuillères",
+            "10 cuillères",
+            "5 cuillères"
+          ],
+          "reponse": 0,
+          "explication": "5 + 5 = 10 mL : 2 cuillères suffisent."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "ce2-perimetre-comprendre",
       "pas_avant": "2026-12-25",
       "prioritaire": true,
