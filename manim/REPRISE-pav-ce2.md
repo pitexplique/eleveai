@@ -151,3 +151,16 @@ R2 : `bash <scratchpad>/r2.sh ce2/maths/contenance` n'existe que dans l'ancienne
 5. R2 (ci-dessus), `node scripts/generer-videos-r2.mjs` → ne committer que les clés `ce2-contenance-*` de `lib/videos/videos-r2.json` (le fichier a des modifs d'autres sessions : `git add -p` ou patch filtré).
 6. Coach : `node scripts/brancher-videos-coach.mjs --classe ce2 --notion contenance --tout` puis `--ecrire` ; vérifier les alias cm1.
 7. Cocher les 5 lignes CE2 contenance de `manim/PLAN-perimetre-aire-volume.md`, mémoire `serie-contenance-ce2.md`, commit PAR CHEMIN, pas de push.
+
+## Session 9 (14/11, 07 h 55-08 h 20) : série CONTENANCE CE2 FINIE
+✅ Le « Reste » de la session 8 bis est fait :
+- 04 problème : HD fini (3 min 20), bords 0, planche HD relue ; `_muet.vignette.webp` orphelin supprimé.
+- 05 défi : aperçu -ql relu → 3 défauts corrigés dans `contenance_defi.py` : 01 les 3 « 50 cL » des bouteilles se chevauchaient (buff 0.55, fs 20), 02 idem (buff 0.7), 08 la voiture recouvrait « voiture, » (`next_to(l1, RIGHT)`). Dry run propre, HD (3 min 41), bords 0, planche HD relue.
+- Film short 05 (1 min 09) et sa miniature relus, propres.
+- Miniatures paysage 04 (orange) et 05 (bleue) ; `temps` ; manifeste : 10 entrées `ce2-contenance-*` (15, 17, 19, 21, 23/01/2027 ; ces jours n'avaient qu'un short), réponses vérifiées ; `aussi` cm1 sur 02 et 03 ; fiches YouTube ; vignettes.
+- R2 : 35 fichiers dans `ce2/maths/contenance/` (`rclone check` : 0 différence). `videos-r2.json` : nos 10 clés seulement (les 18 clés CM1/1re que le générateur réécrivait ont été remises telles quelles) ; `bilans-videos.json` : nos 10 ajouts.
+- Coach : 10/10 branchées sur les micros `ce2_contenance_*`. Côté CM1, `contenance_convertir` et `contenance_comparer` gardent leurs vidéos CM1 (le coach n'en montre qu'une) ; l'`aussi` reste dans le manifeste.
+- Plan coché (CE2 contenance 5/5). Rien poussé.
+
+### Reste
+Suite du plan CE2 : solides (session `solides-ce2-prod`, voir `manim/REPRISE-solides.md`).

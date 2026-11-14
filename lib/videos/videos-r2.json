@@ -5758,6 +5758,96 @@
   "short": true,
   "youtube": null
  },
+ "ce2-contenance-comparer": {
+  "fichier": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer.mp4",
+  "poster": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer.png",
+  "vignette": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer.vignette.webp",
+  "titre": "5 dL ou 75 cL : qui a le plus d'eau ? — Comparer des contenances — épisode 3 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_comparer&display=simple"
+ },
+ "ce2-contenance-comparer-short": {
+  "fichier": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer-short.mp4",
+  "poster": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer-short-miniature.png",
+  "vignette": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer-short-miniature.vignette.webp",
+  "titre": "Le jus a baissé, il en a perdu ? Tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_comparer&display=simple"
+ },
+ "ce2-contenance-defi": {
+  "fichier": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi.mp4",
+  "poster": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi.png",
+  "vignette": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi.vignette.webp",
+  "titre": "Assez d'huile pour le moteur ? — Un défi de contenances — épisode 5 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_defi&display=simple"
+ },
+ "ce2-contenance-defi-short": {
+  "fichier": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi-short.mp4",
+  "poster": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi-short-miniature.png",
+  "vignette": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi-short-miniature.vignette.webp",
+  "titre": "50 cL, 5 dL ou un demi-litre : qui a raison ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_defi&display=simple"
+ },
+ "ce2-contenance-probleme": {
+  "fichier": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme.mp4",
+  "poster": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme.png",
+  "vignette": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme.vignette.webp",
+  "titre": "Combien reste-t-il dans l'arrosoir ? — Un problème de contenances — épisode 4 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_probleme&display=simple"
+ },
+ "ce2-contenance-probleme-short": {
+  "fichier": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme-short.mp4",
+  "poster": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme-short-miniature.png",
+  "vignette": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme-short-miniature.vignette.webp",
+  "titre": "2 litres moins 50 centilitres, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_probleme&display=simple"
+ },
+ "ce2-contenance-relations": {
+  "fichier": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations.mp4",
+  "poster": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations.png",
+  "vignette": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations.vignette.webp",
+  "titre": "Combien de verres pour 1 litre ? — Litre, décilitre, centilitre — épisode 2 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_relations&display=simple"
+ },
+ "ce2-contenance-relations-short": {
+  "fichier": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations-short.mp4",
+  "poster": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations-short-miniature.png",
+  "vignette": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations-short-miniature.vignette.webp",
+  "titre": "Un seul verre pour remplir 1 litre, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_relations&display=simple"
+ },
+ "ce2-contenance-unites": {
+  "fichier": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites.mp4",
+  "poster": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites.png",
+  "vignette": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites.vignette.webp",
+  "titre": "Avec quoi mesurer un liquide ? — Les unités de contenance — épisode 1 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_unites&display=simple"
+ },
+ "ce2-contenance-unites-short": {
+  "fichier": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites-short.mp4",
+  "poster": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites-short-miniature.png",
+  "vignette": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites-short-miniature.vignette.webp",
+  "titre": "20 cm de limonade, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_unites&display=simple"
+ },
  "ce2-perimetre-comparer": {
   "fichier": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.mp4",
   "poster": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.png",

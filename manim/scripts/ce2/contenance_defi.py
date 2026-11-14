@@ -93,7 +93,7 @@ class ContenanceDefiBase(PaysageContenanceCE2):
         self.au_mot("4 litres")
         self.play(FadeIn(l1[1:], shift=UP * 0.1), run_time=0.3)
         bi = bidon_huile(1.3, 1.0).move_to(P(-2.8, -1.2))
-        bs = VGroup(*[bout50() for _ in range(3)]).arrange(RIGHT, buff=0.2).move_to(P(-0.9, -1.35))
+        bs = VGroup(*[bout50() for _ in range(3)]).arrange(RIGHT, buff=0.55).move_to(P(-0.7, -1.35))
         l2 = self.ligne([("Yanis a un bidon de", WHITE), ("2 L", JAUNE_TITRE)], 32, buff=0.18)
         self.col(l2, 1.0, 0.9)
         self.au_mot("Yanis a un bidon")
@@ -108,7 +108,7 @@ class ContenanceDefiBase(PaysageContenanceCE2):
                   LaggedStart(*[FadeIn(b, shift=UP * 0.2) for b in bs], lag_ratio=0.15), run_time=0.45)
         self.au_mot("50 centilitres")
         self.play(FadeIn(l3[3], shift=UP * 0.1),
-                  FadeIn(VGroup(*[contenance(b, "50 cL", 22) for b in bs])), run_time=0.3)
+                  FadeIn(VGroup(*[contenance(b, "50 cL", 20) for b in bs])), run_time=0.3)
         self.au_mot("Est-ce assez")
         q = self.t("Est-ce assez ?", 42, JAUNE_TITRE)
         self.col(q, -0.75, 0.9)
@@ -118,7 +118,7 @@ class ContenanceDefiBase(PaysageContenanceCE2):
     # ── 02 : les bouteilles ─────────────────────────────────────────────────
     def ecran_bouteilles(self):
         self.ecran("02-bouteilles")
-        bs = VGroup(*[bout50() for _ in range(3)]).arrange(RIGHT, buff=0.4).scale(1.3).move_to(P(-3.8, 0.3))
+        bs = VGroup(*[bout50() for _ in range(3)]).arrange(RIGHT, buff=0.7).scale(1.3).move_to(P(-3.8, 0.3))  # étiquettes séparées
         ets = VGroup(*[contenance(b, "50 cL", 28) for b in bs])
         self.add(bs, ets)
         self.au_mot("D'abord, les bouteilles")
@@ -300,7 +300,7 @@ class ContenanceDefiBase(PaysageContenanceCE2):
         l1 = self.ligne([("Il verse", WHITE), ("2 L", JAUNE_TITRE), ("dans une voiture,", WHITE)], 34, buff=0.2)
         gauche(l1, -2.4, 1.25)
         self.au_mot("Il en verse 2 litres")
-        vo = voiture(0.6).move_to(P(4.8, 1.25))
+        vo = voiture(0.5).next_to(l1, RIGHT, buff=0.3)  # après « voiture, » (la recouvrait)
         self.play(FadeIn(l1, shift=UP * 0.1), FadeIn(vo, shift=LEFT * 0.3), run_time=0.4)
         l2 = self.ligne([("puis", WHITE), ("150 cL", JAUNE_TITRE), ("dans une moto.", WHITE)], 34, buff=0.2)
         gauche(l2, -2.4, 0.5)

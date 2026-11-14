@@ -83451,6 +83451,782 @@
       "centres": [
         "cuisine"
       ]
+    },
+    {
+      "id": "ce2-contenance-unites",
+      "pas_avant": "2027-01-15",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_unites",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites.mp4",
+      "miniature": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites.png",
+      "titre": "Avec quoi mesurer un liquide ? — Les unités de contenance — épisode 1 · Maths CE2",
+      "accroche": "Lucas est chef cuisinier. Pour sa soupe, il verse de l'eau, du lait et de la crème. Pour ne pas se tromper, il mesure. Mais avec quelle unité ?\n\nDans cette vidéo :\n• la contenance : ce qu'un récipient contient quand il est plein\n• une longueur en mètres, une contenance en litres (L)\n• pour les petites quantités : le décilitre (dL) et le centilitre (cL)\n• le piège : on ne mesure pas un liquide avec une règle\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : une marmite, un verre, une cuillère : quelle unité pour chacun ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_unites&display=simple\n\n🔢 Épisode 1 de la série Contenance d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Avec quoi mesurer ?"
+        ],
+        [
+          "00:22",
+          "La contenance"
+        ],
+        [
+          "00:34",
+          "Le litre"
+        ],
+        [
+          "00:45",
+          "Décilitre et centilitre"
+        ],
+        [
+          "01:04",
+          "Question 1"
+        ],
+        [
+          "01:35",
+          "Du plus grand au plus petit"
+        ],
+        [
+          "01:48",
+          "Le piège"
+        ],
+        [
+          "02:03",
+          "Question 2"
+        ],
+        [
+          "02:38",
+          "À toi de jouer"
+        ],
+        [
+          "02:54",
+          "Correction"
+        ],
+        [
+          "03:10",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "contenance",
+        "litre",
+        "décilitre",
+        "centilitre",
+        "unités de contenance",
+        "cuisinier",
+        "cuisine",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "Que mesure-t-on avec un litre ?",
+          "choix": [
+            "ce qu'un récipient peut contenir",
+            "la longueur d'un objet",
+            "la masse d'un objet"
+          ],
+          "reponse": 0,
+          "explication": "Le litre mesure une contenance : ce qu'on peut verser dans un récipient. La longueur se mesure en mètres, la masse en grammes."
+        },
+        {
+          "t": "02:03",
+          "question": "Sur une bouteille de sirop, on lit 75, puis les lettres c et L. Que veulent-elles dire ?",
+          "choix": [
+            "centimètre",
+            "décilitre",
+            "centilitre"
+          ],
+          "reponse": 2,
+          "explication": "Le L dit litre, le c dit centi : c'est le centilitre. La bouteille contient 75 centilitres de sirop."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce2-contenance-unites-short",
+      "pas_avant": "2027-01-15",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_unites",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-contenance-unites",
+      "fichier": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites-short.mp4",
+      "miniature": "ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites-short-miniature.png",
+      "titre": "20 cm de limonade, tu paries ? #maths #ce2",
+      "accroche": "J'ai fait de la limonade. Combien j'en ai ? Je sors ma règle : 20 centimètres de limonade ! Hé… une règle mesure des longueurs, pas des liquides.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : la plus petite unité, c'est le litre, le décilitre ou le centilitre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_unites&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #ce2 #primaire",
+      "tags": [
+        "contenance",
+        "litre",
+        "limonade",
+        "règle",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Pour mesurer ce que contient une bouteille, quelle unité ?",
+          "choix": [
+            "le centimètre",
+            "le litre",
+            "le kilogramme"
+          ],
+          "reponse": 1,
+          "explication": "Le litre mesure une contenance. Pour les petites quantités, il y a le décilitre et le centilitre."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-contenance-relations",
+      "pas_avant": "2027-01-17",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_relations",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations.mp4",
+      "miniature": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations.png",
+      "titre": "Combien de verres pour 1 litre ? — Litre, décilitre, centilitre — épisode 2 · Maths CE2",
+      "accroche": "Amina est chimiste. Dans son laboratoire, elle doit remplir un grand flacon de 1 litre avec un petit pot de 1 décilitre. Combien de fois doit-elle verser ?\n\nDans cette vidéo :\n• 10 pots de 1 dL remplissent 1 L : 1 L = 10 dL\n• 100 pots de 1 cL : 1 L = 100 cL\n• 1 dL = 10 cL\n• le piège : 1 L, ce n'est pas 10 cL\n• plusieurs litres : 2 L = 20 dL = 200 cL\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Amina verse 1 L, puis encore 5 dL : combien de décilitres en tout ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_relations&display=simple\n\n🔢 Épisode 2 de la série Contenance d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de petits verres ?"
+        ],
+        [
+          "00:23",
+          "10 décilitres"
+        ],
+        [
+          "00:55",
+          "Question 1"
+        ],
+        [
+          "01:20",
+          "Le piège"
+        ],
+        [
+          "01:36",
+          "Plusieurs litres"
+        ],
+        [
+          "01:47",
+          "Question 2"
+        ],
+        [
+          "02:18",
+          "À toi de jouer"
+        ],
+        [
+          "02:32",
+          "Correction"
+        ],
+        [
+          "02:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "contenance",
+        "litre",
+        "décilitre",
+        "centilitre",
+        "conversion",
+        "chimiste",
+        "laboratoire",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "Combien y a-t-il de décilitres dans 1 litre ?",
+          "choix": [
+            "10 décilitres",
+            "100 décilitres",
+            "1 décilitre"
+          ],
+          "reponse": 0,
+          "explication": "Déci veut dire dix : 1 litre, c'est 10 décilitres."
+        },
+        {
+          "t": "01:47",
+          "question": "Amina a un bidon de 3 litres. Combien de centilitres ?",
+          "choix": [
+            "30 centilitres",
+            "3 centilitres",
+            "300 centilitres"
+          ],
+          "reponse": 2,
+          "explication": "1 litre, c'est 100 centilitres. 3 litres : 3 × 100, 300 centilitres."
+        }
+      ],
+      "centres": [
+        "sciences"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "contenance",
+          "microId": "contenance_convertir"
+        }
+      ]
+    },
+    {
+      "id": "ce2-contenance-relations-short",
+      "pas_avant": "2027-01-17",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_relations",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-contenance-relations",
+      "fichier": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations-short.mp4",
+      "miniature": "ce2/maths/contenance/02-relations/eleveai-maths-ce2-contenance-relations-short-miniature.png",
+      "titre": "Un seul verre pour remplir 1 litre, tu paries ? #maths #ce2",
+      "accroche": "Je remplis ma bouteille de 1 litre avec mon petit verre de 1 décilitre. Un seul verre suffit, non ? Raté… je verse, et je compte !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de cuillères de 1 centilitre pour remplir 1 litre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_relations&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #ce2 #primaire",
+      "tags": [
+        "contenance",
+        "décilitre",
+        "verre",
+        "bouteille",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien de verres de 1 décilitre pour remplir la bouteille de 1 litre ?",
+          "choix": [
+            "100 verres",
+            "10 verres",
+            "5 verres"
+          ],
+          "reponse": 1,
+          "explication": "10 décilitres, c'est 1 litre. La bouteille est pleine !"
+        }
+      ],
+      "centres": [
+        "sciences",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "contenance",
+          "microId": "contenance_convertir"
+        }
+      ]
+    },
+    {
+      "id": "ce2-contenance-comparer",
+      "pas_avant": "2027-01-19",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_comparer",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer.mp4",
+      "miniature": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer.png",
+      "titre": "5 dL ou 75 cL : qui a le plus d'eau ? — Comparer des contenances — épisode 3 · Maths CE2",
+      "accroche": "Théo est entraîneur de football. Avant le match, ses joueurs remplissent leurs gourdes. Kevin a une gourde de 5 décilitres, Maya une bouteille de 75 centilitres. Qui emporte le plus d'eau ?\n\nDans cette vidéo :\n• même unité : on compare les nombres (60 cL > 40 cL)\n• deux unités : d'abord la même unité, 5 dL = 50 cL\n• le piège : 75 est plus grand que 1, mais 1 L = 100 cL\n• la forme ne dit pas la contenance : bouteille fine ou saladier, même quantité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : ranger 1 L, 8 dL et 90 cL de la plus petite à la plus grande.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_comparer&display=simple\n\n🔢 Épisode 3 de la série Contenance d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui emporte le plus ?"
+        ],
+        [
+          "00:27",
+          "La même unité"
+        ],
+        [
+          "00:42",
+          "Deux unités"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:38",
+          "Le piège de la forme"
+        ],
+        [
+          "01:57",
+          "Question 2"
+        ],
+        [
+          "02:30",
+          "À toi de jouer"
+        ],
+        [
+          "02:46",
+          "Correction"
+        ],
+        [
+          "03:04",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "contenance",
+        "comparer des contenances",
+        "décilitre",
+        "centilitre",
+        "entraîneur",
+        "football",
+        "gourde",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Qu'est-ce qui contient le plus : 1 litre, ou 75 centilitres ?",
+          "choix": [
+            "1 litre",
+            "75 centilitres",
+            "c'est pareil"
+          ],
+          "reponse": 0,
+          "explication": "1 litre, c'est 100 centilitres. 100 est plus grand que 75. Attention : 75 est plus grand que 1, mais les unités ne sont pas les mêmes !"
+        },
+        {
+          "t": "01:57",
+          "question": "On verse 1 litre d'eau dans un seau très large. L'eau monte à peine. Combien d'eau dans le seau ?",
+          "choix": [
+            "moins de 1 litre",
+            "1 litre",
+            "plus de 1 litre"
+          ],
+          "reponse": 1,
+          "explication": "On n'a rien ajouté, rien enlevé : il y a toujours 1 litre. Le seau est large, alors l'eau monte moins haut."
+        }
+      ],
+      "centres": [
+        "sport"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "contenance",
+          "microId": "contenance_comparer"
+        }
+      ]
+    },
+    {
+      "id": "ce2-contenance-comparer-short",
+      "pas_avant": "2027-01-19",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_comparer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-contenance-comparer",
+      "fichier": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer-short.mp4",
+      "miniature": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer-short-miniature.png",
+      "titre": "Le jus a baissé, il en a perdu ? Tu paries ? #maths #ce2",
+      "accroche": "Mon copain verse son jus de sa bouteille haute dans un saladier. Regarde : le jus a baissé ! Il en a perdu ? Il n'a rien bu, rien renversé…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : qui contient le plus, 5 décilitres ou 40 centilitres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #ce2 #primaire",
+      "tags": [
+        "contenance",
+        "comparer",
+        "saladier",
+        "forme",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Dans le saladier, il y a…",
+          "choix": [
+            "moins de jus",
+            "autant de jus",
+            "plus de jus"
+          ],
+          "reponse": 1,
+          "explication": "C'est le même jus, la même quantité. La forme ne dit pas combien un récipient contient."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "contenance",
+          "microId": "contenance_comparer"
+        }
+      ]
+    },
+    {
+      "id": "ce2-contenance-probleme",
+      "pas_avant": "2027-01-21",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_probleme",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme.mp4",
+      "miniature": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme.png",
+      "titre": "Combien reste-t-il dans l'arrosoir ? — Un problème de contenances — épisode 4 · Maths CE2",
+      "accroche": "Mélissa est horticultrice : elle fait pousser des fleurs dans une serre. Son arrosoir contient 5 litres. Elle arrose deux plants, avec 80 centilitres chacun. Combien de centilitres reste-t-il ?\n\nDans cette vidéo :\n• d'abord la même unité : 5 L = 500 cL\n• ajouter ce qu'on verse : 80 + 80 = 160 cL\n• enlever : 500 − 160 = 340 cL\n• le piège : 2 L + 50 cL, ce n'est pas 52\n• répéter : 4 L avec un pichet de 50 cL, 8 pichets\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : remplir un bac de 4 L avec un pichet de 50 cL : combien de pichets ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_probleme&display=simple\n\n🔢 Épisode 4 de la série Contenance d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien reste-t-il ?"
+        ],
+        [
+          "00:25",
+          "La même unité"
+        ],
+        [
+          "00:42",
+          "Ce qui reste"
+        ],
+        [
+          "00:54",
+          "Question 1"
+        ],
+        [
+          "01:32",
+          "Le piège"
+        ],
+        [
+          "01:46",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "À toi de jouer"
+        ],
+        [
+          "02:42",
+          "Correction"
+        ],
+        [
+          "02:54",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "contenance",
+        "problème",
+        "centilitre",
+        "litre",
+        "horticultrice",
+        "serre",
+        "arrosoir",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Pour la fête de la serre, Mélissa mélange 2 litres de jus et 50 centilitres d'eau. Combien de centilitres de boisson en tout ?",
+          "choix": [
+            "250 centilitres",
+            "52 centilitres",
+            "70 centilitres"
+          ],
+          "reponse": 0,
+          "explication": "2 litres : 2 × 100, 200 centilitres. 200 + 50, 250 centilitres de boisson."
+        },
+        {
+          "t": "01:46",
+          "question": "Une bouteille contient 1 litre. Mélissa remplit 3 verres de 20 centilitres. Combien de centilitres reste-t-il ?",
+          "choix": [
+            "60 centilitres",
+            "97 centilitres",
+            "40 centilitres"
+          ],
+          "reponse": 2,
+          "explication": "3 verres de 20 : 3 × 20, 60 centilitres. 1 litre, c'est 100 centilitres. 100 − 60, 40. Il reste 40 centilitres."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "ce2-contenance-probleme-short",
+      "pas_avant": "2027-01-21",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_probleme",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-contenance-probleme",
+      "fichier": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme-short.mp4",
+      "miniature": "ce2/maths/contenance/04-probleme/eleveai-maths-ce2-contenance-probleme-short-miniature.png",
+      "titre": "2 litres moins 50 centilitres, tu paries ? #maths #ce2",
+      "accroche": "Mon arrosoir contient 2 litres. J'arrose mes 3 plantes, 50 centilitres chacune. Il reste… 2 moins 50 ? Impossible ! La même unité d'abord…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : un seau de 3 litres. Tu verses 4 verres de 25 centilitres. Combien de centilitres reste-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #ce2 #primaire",
+      "tags": [
+        "contenance",
+        "problème",
+        "arrosoir",
+        "plantes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Combien de centilitres reste-t-il dans l'arrosoir ?",
+          "choix": [
+            "150 centilitres",
+            "0 centilitre",
+            "50 centilitres"
+          ],
+          "reponse": 2,
+          "explication": "3 plantes : 3 × 50, 150 centilitres. 200 − 150, 50 centilitres."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-contenance-defi",
+      "pas_avant": "2027-01-23",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_defi",
+      "classe": "ce2",
+      "ceinture": "bleue",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi.mp4",
+      "miniature": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi.png",
+      "titre": "Assez d'huile pour le moteur ? — Un défi de contenances — épisode 5 · Maths CE2",
+      "accroche": "Yanis est mécanicien. Le moteur d'une voiture a besoin de 4 litres d'huile. Yanis a un bidon de 2 litres et 3 bouteilles de 50 centilitres. Est-ce assez ?\n\nDans cette vidéo :\n• répéter : 3 × 50 = 150 cL\n• convertir et ajouter : 2 L = 200 cL, 200 + 150 = 350 cL\n• comparer : 350 cL, c'est moins que 400 cL ; il manque 50 cL\n• le piège : 150 cL, ce n'est pas 15 L ; c'est 1 L et 50 cL\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : un bidon de 5 L : 2 L pour une voiture, 150 cL pour une moto. Combien en reste-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_defi&display=simple\n\n🔢 Épisode 5 de la série Contenance d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Assez d'huile ?"
+        ],
+        [
+          "00:29",
+          "Le bidon, et le total"
+        ],
+        [
+          "00:39",
+          "Assez ?"
+        ],
+        [
+          "00:57",
+          "Question 1"
+        ],
+        [
+          "01:39",
+          "Le piège"
+        ],
+        [
+          "01:53",
+          "Question 2"
+        ],
+        [
+          "02:38",
+          "À toi de jouer"
+        ],
+        [
+          "02:55",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "contenance",
+        "défi",
+        "problème",
+        "centilitre",
+        "litre",
+        "mécanicien",
+        "garage",
+        "voiture",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "Une voiture a besoin de 3 litres de liquide de refroidissement. Yanis a 2 bouteilles de 1 litre, et une bouteille de 50 centilitres. Combien lui manque-t-il ?",
+          "choix": [
+            "1 litre",
+            "50 centilitres",
+            "2 litres"
+          ],
+          "reponse": 1,
+          "explication": "2 bouteilles de 1 litre : 200 centilitres. Plus 50, 250. 300 − 250, 50. Il manque 50 centilitres."
+        },
+        {
+          "t": "01:53",
+          "question": "Yanis a une bouteille d'eau de 1 litre. Il remplit 3 verres de 25 centilitres pour ses collègues. Peut-il en remplir un quatrième ?",
+          "choix": [
+            "oui, tout juste",
+            "non, il manque 25 centilitres",
+            "oui, et il en reste 25"
+          ],
+          "reponse": 0,
+          "explication": "3 verres : 3 × 25, 75 centilitres. 100 − 75, 25 : il reste juste 25 centilitres. Le quatrième verre se remplit tout juste !"
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "ce2-contenance-defi-short",
+      "pas_avant": "2027-01-23",
+      "prioritaire": true,
+      "notionId": "contenance",
+      "microId": "ce2_contenance_defi",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-contenance-defi",
+      "fichier": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi-short.mp4",
+      "miniature": "ce2/maths/contenance/05-defi/eleveai-maths-ce2-contenance-defi-short-miniature.png",
+      "titre": "50 cL, 5 dL ou un demi-litre : qui a raison ? #maths #ce2",
+      "accroche": "Mes trois amis se disputent pour la même bouteille. Léa dit 50 centilitres, Kevin 5 décilitres, Maya un demi-litre. Il y en a forcément deux qui se trompent ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : 1 litre et 5 décilitres, ça fait combien de centilitres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #ce2 #primaire",
+      "tags": [
+        "contenance",
+        "défi",
+        "demi-litre",
+        "qui a raison",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture orange",
+        "contenance",
+        "litre",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Qui a raison ?",
+          "choix": [
+            "seulement Léa",
+            "personne",
+            "les trois"
+          ],
+          "reponse": 2,
+          "explication": "5 décilitres : 5 × 10, 50 centilitres. Un demi-litre : la moitié de 100, 50 centilitres. C'est pareil !"
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

@@ -14,11 +14,11 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Résoudre un défi de périmètre — `ce2_perimetre_defi`
 
 **Volume et contenance** (5)
-- [ ] Connaître les unités L, dL et cL — `ce2_contenance_unites`
-- [ ] Savoir que 1 L vaut 10 dL et 100 cL — `ce2_contenance_relations`
-- [ ] Comparer des contenances — `ce2_contenance_comparer`
-- [ ] Résoudre un problème de contenances — `ce2_contenance_probleme`
-- [ ] Résoudre un défi de contenances — `ce2_contenance_defi`
+- [x] Connaître les unités L, dL et cL — `ce2_contenance_unites`
+- [x] Savoir que 1 L vaut 10 dL et 100 cL — `ce2_contenance_relations`
+- [x] Comparer des contenances — `ce2_contenance_comparer`
+- [x] Résoudre un problème de contenances — `ce2_contenance_probleme`
+- [x] Résoudre un défi de contenances — `ce2_contenance_defi`
 
 **Solides et espace** (5)
 - [x] Nommer un cube, une boule, un pavé, un cône, une pyramide ou un cylindre — `ce2_solide_reconnaitre`
