@@ -1,5 +1,6 @@
 // lib/tutor-v4/question-banks/maths/cm1/index.ts
 
+import { choixDistinctsParValeur } from "../../choixDistinctsParValeur";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 import { trierClasserBank } from "./trier-classer.bank";
@@ -39,7 +40,7 @@ import { geometrieTrousBank } from "./geometrie-trous.bank";
 
 // Zéro clavier en CM1 : short numériques -> QCM, et open « Explique… » retirées
 // (cf. applyMathsKeyboardFree). Appliqué à TOUTES les banques maths CM1.
-export const mathsCm1QuestionBank: TutorBankItemV4[] = [
+export const mathsCm1QuestionBank: TutorBankItemV4[] = choixDistinctsParValeur([
   ...applyMathsKeyboardFree(nombresEntiersBank),
   ...applyMathsKeyboardFree(suitesBank),
   ...applyMathsKeyboardFree(MultiplicationTablesBank),
@@ -73,7 +74,7 @@ export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...calculTrousBank,
   ...geometrieTrousBank,
   ...trierClasserBank,
-];
+]);
 
 export function getMathCm1QuestionBank(args?: {
   notionId?: string | null;
