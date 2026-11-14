@@ -40,6 +40,24 @@ class SolidesPatronBase(PaysageSolidesCM1):
     nom_voix = "cm1-solides-patron"
     fichier_marques = "solides_patron_marques.json"
 
+    def _disposer_q(self, question, choix, phrase):
+        """14/11 : « 2 disques et 1 rectangle » remplit la carte, et la coche (réduite autour du
+        centre de la carte après le × 1,08) revenait sur « rectangle ». La colonne de la question
+        part 0,4 plus à gauche et les cartes s'élargissent d'autant (bord droit inchangé)."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        d = 0.4
+        for m in (tete, q, pause):
+            m.shift(LEFT * d)
+        for c in cartes:
+            cadre, ligne = c[0], c[1]
+            neuf = RoundedRectangle(width=cadre.width + d, height=cadre.height, corner_radius=0.14,
+                                    stroke_color=cadre.get_stroke_color(), stroke_width=cadre.get_stroke_width(),
+                                    fill_color=cadre.get_fill_color(), fill_opacity=cadre.get_fill_opacity())
+            neuf.align_to(cadre, RIGHT).align_to(cadre, UP)
+            cadre.become(neuf)
+            ligne.shift(LEFT * d)
+        return tete, q, cartes, pause, rebours, ph
+
     def plier_tout(self, pa, ordre, run_time=2.4, rt_tilt=0.7):
         """ordre : liste d'étapes (noms des carrés qui se plient ensemble)."""
         self.play(pa.plier(tilt=0, run_time=rt_tilt))
@@ -222,8 +240,8 @@ class SolidesPatronBase(PaysageSolidesCM1):
 
         self.question_pause("05-question", "05b-reponse",
                             ["Quel est le patron", "d'un cylindre ?"],
-                            [self.choix("1 carré et 4 triangles", fs=24), self.choix("2 disques et 1 rectangle", fs=24),
-                             self.choix("6 rectangles", fs=24)], 1,
+                            [self.choix("1 carré et 4 triangles", fs=22), self.choix("2 disques et 1 rectangle", fs=22),
+                             self.choix("6 rectangles", fs=22)], 1,
                             ["Les 2 disques : le dessus et le dessous.", "Le rectangle s'enroule autour.",
                              "1 carré et 4 triangles : la pyramide."],
                             mot_q="Quel est le patron", autres_q=autres_q, autres_r=apres)

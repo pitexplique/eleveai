@@ -23,8 +23,8 @@ SERIE = RACINE / "manim" / "sorties" / "cm1" / "maths" / "solides"
 VOIX = RACINE / "manim" / "voix"
 MANIFESTE = RACINE / "manim" / "manifeste-youtube.json"
 TEMPS = SERIE / "temps.json"
-NOTION = "solides"
-COACH = "https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=solides&microId={micro}&display=simple"
+NOTION = "solide"  # la notion CM1 du coach s'appelle « solide » (CE2 : « solides »)
+COACH = "https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=solide&microId={micro}&display=simple"
 NOM_CEINT = {"blanche": "Ceinture blanche", "verte": "Ceinture verte", "jaune": "Ceinture jaune", "orange": "Ceinture orange", "bleue": "Ceinture bleue"}
 
 # Dates : 26, 28 et 30/01/2027 (manifeste relu le 14/11 : 1 paysage ces jours-là, donc libres).

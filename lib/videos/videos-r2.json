@@ -6658,6 +6658,60 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple"
  },
+ "cm1-solides-defi": {
+  "fichier": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi.mp4",
+  "poster": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi.png",
+  "vignette": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi.vignette.webp",
+  "titre": "Des cubes empilés : combien sont cachés ? Un défi — Défi : les cubes cachés — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_defi&display=simple"
+ },
+ "cm1-solides-defi-short": {
+  "fichier": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi-short.mp4",
+  "poster": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi-short-miniature.png",
+  "vignette": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi-short-miniature.vignette.webp",
+  "titre": "4 caisses en tout dans ma pyramide, tu paries ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_defi&display=simple"
+ },
+ "cm1-solides-patron": {
+  "fichier": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron.mp4",
+  "poster": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron.png",
+  "vignette": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron.vignette.webp",
+  "titre": "Quel dessin à plat devient quel solide ? Les patrons — Reconnaître un patron — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_patron&display=simple"
+ },
+ "cm1-solides-patron-short": {
+  "fichier": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron-short.mp4",
+  "poster": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron-short-miniature.png",
+  "vignette": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron-short-miniature.vignette.webp",
+  "titre": "Le 1 à côté du 6 sur mon dé, tu paries ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_patron&display=simple"
+ },
+ "cm1-solides-prisme": {
+  "fichier": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme.mp4",
+  "poster": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme.png",
+  "vignette": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme.vignette.webp",
+  "titre": "Le prisme droit : faces, sommets, arêtes sans se tromper — Le prisme droit — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_prisme&display=simple"
+ },
+ "cm1-solides-prisme-short": {
+  "fichier": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme-short.mp4",
+  "poster": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme-short-miniature.png",
+  "vignette": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme-short-miniature.vignette.webp",
+  "titre": "Ma tente est une pyramide, tu paries ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_prisme&display=simple"
+ },
  "cm1-stats-graphique-completer": {
   "fichier": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.mp4",
   "poster": "cm1/maths/statistiques/06-graphique-completer/eleveai-maths-cm1-stats-graphique-completer.png",

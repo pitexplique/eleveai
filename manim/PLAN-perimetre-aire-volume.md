@@ -60,12 +60,12 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Résoudre un défi de contenances — `contenance_defi` — ✅ 14/11 paysage (Nora, bleue, 3 min 28) + short « Assez de jus ? » ; manifeste 13/01/2027, R2, coach
 
 **Solides et espace** (6)
-- [ ] Reconnaître les solides usuels — `solide_reconnaitre`
-- [ ] Identifier sommets, arêtes et faces — `solide_sommet_arete_face`
-- [ ] Identifier les faces d’un solide — `solide_face`
-- [ ] Reconnaître un patron de solide simple — `solide_patron`
-- [ ] Décrire un prisme droit (faces, sommets, arêtes, patron) — `solide_prisme`
-- [ ] Résoudre un défi sur les solides — `solide_defi`
+- [x] Reconnaître les solides usuels — `solide_reconnaitre` — ↪ vidéo CE2 `ce2-solides-reconnaitre` par `aussi`
+- [x] Identifier sommets, arêtes et faces — `solide_sommet_arete_face` — ↪ vidéo CE2 `ce2-solides-decrire` par `aussi`
+- [x] Identifier les faces d’un solide — `solide_face` — ↪ vidéo CE2 `ce2-solides-decrire` et `ce2-solides-pyramide` par `aussi`
+- [x] Reconnaître un patron de solide simple — `solide_patron` — ✅ 14/11 paysage (Rose, verte, 3 min 46) + short Ti Margo ; manifeste 28/01/2027, R2, coach
+- [x] Décrire un prisme droit (faces, sommets, arêtes, patron) — `solide_prisme` — ✅ 14/11 paysage (Sacha, verte, 3 min 38) + short Ti Margo ; manifeste 26/01/2027, R2, coach
+- [x] Résoudre un défi sur les solides — `solide_defi` — ✅ 14/11 paysage (Ilan, bleue, 3 min 29) + short Ti Margo ; manifeste 30/01/2027, R2, coach
 
 **Longueurs et conversions** (5)
 - [ ] Comparer des longueurs — `longueur_comparer`

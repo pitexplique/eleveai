@@ -70,3 +70,10 @@ Outils de rendu (copie) : scratchpad de la session, `outils/` (dry.sh avec `--me
 ✅ Manifeste : 8 `aussi` cm1 ajoutés sur ce2-solides-reconnaitre/decrire/pyramide (paysage + short) par `outils-solides-cm1/aussi.py` (idempotent).
 Outils : dossier de notes de la session `local_b2fa8e5d…`, `outils-solides-cm1/` (dry.sh, hd.sh, hdram.sh = attend 2,5 Go puis verrou, images.py = planche d'images, r2.sh, aussi.py).
 ⏭ Reste : HD 02 vérifié + bords 0 → `python manim/miniature_solides_cm1.py` → `python manim/passe_solides_cm1.py temps` puis `manifeste` → `python scripts/fiches-youtube.py cm1-solides-` → `python scripts/vignettes-videos.py` → R2 (`r2.sh cm1/maths/solides` puis `check`) → `lib/videos` (sauvegarder videos-r2.json, `node scripts/generer-videos-r2.mjs`, ne garder que `cm1-solides-*`, tri localeCompare, indent 1 ; bilans : nos ajouts) → coach (`brancher-videos-coach.mjs --classe cm1 --notion solides --tout` puis `--ecrire`) → plan coché → mémoire + MEMORY.md → supprimer `.tmp-solides-cm1-page.mjs` → commits par chemin, pas de push.
+
+### Session 5 (14/11, fin de la production CM1) — ✅ CM1 FINI
+✅ Carte B de la question 1 du 02 : le défaut venait de la coche (créée à « bord − 0,33 » puis réduite autour du centre de la carte après le × 1,08 : elle recule de ~0,17 sur le texte). Correction locale dans `SolidesPatronBase._disposer_q` (colonne de la question 0,4 plus à gauche, cartes 0,4 plus larges, bord droit inchangé) + choix en fs 22 : le texte finit à 5,26, la coche à ~5,44. Dry run 0 alerte, HD 02 re-rendu (11:05), images relues.
+✅ Bords 0 sur les 3 HD ; miniatures ; `temps` (prisme 3 min 38, patron 3 min 46, défi 3 min 29) ; manifeste 26, 28, 30/01/2027.
+⚠️ La notion CM1 du coach s'appelle `solide` (CE2 : `solides`) : `NOTION` de `passe_solides_cm1.py`, liens coach des descriptions et 8 `aussi` corrigés (`aussi.py` aussi).
+✅ Fiches YouTube, vignettes (le script plante plus loin sur un `_muet.mp4` en cours d'une autre session, longueur CM1 : nos 9 vignettes sont faites), R2 21 fichiers 0 différence, `lib/videos` (nos 6 clés seules), coach 12/12 branchées, plan coché.
+

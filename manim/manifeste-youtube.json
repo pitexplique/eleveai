@@ -82802,7 +82802,7 @@
       "aussi": [
         {
           "classe": "cm1",
-          "notionId": "solides",
+          "notionId": "solide",
           "microId": "solide_reconnaitre"
         }
       ]
@@ -82859,7 +82859,7 @@
       "aussi": [
         {
           "classe": "cm1",
-          "notionId": "solides",
+          "notionId": "solide",
           "microId": "solide_reconnaitre"
         }
       ]
@@ -82973,12 +82973,12 @@
       "aussi": [
         {
           "classe": "cm1",
-          "notionId": "solides",
+          "notionId": "solide",
           "microId": "solide_sommet_arete_face"
         },
         {
           "classe": "cm1",
-          "notionId": "solides",
+          "notionId": "solide",
           "microId": "solide_face"
         }
       ]
@@ -83035,12 +83035,12 @@
       "aussi": [
         {
           "classe": "cm1",
-          "notionId": "solides",
+          "notionId": "solide",
           "microId": "solide_sommet_arete_face"
         },
         {
           "classe": "cm1",
-          "notionId": "solides",
+          "notionId": "solide",
           "microId": "solide_face"
         }
       ]
@@ -83149,7 +83149,7 @@
       "aussi": [
         {
           "classe": "cm1",
-          "notionId": "solides",
+          "notionId": "solide",
           "microId": "solide_face"
         }
       ]
@@ -83205,7 +83205,7 @@
       "aussi": [
         {
           "classe": "cm1",
-          "notionId": "solides",
+          "notionId": "solide",
           "microId": "solide_face"
         }
       ]
@@ -84278,6 +84278,468 @@
       ],
       "centres": [
         "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-solides-prisme",
+      "pas_avant": "2027-01-26",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_prisme",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme.mp4",
+      "miniature": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme.png",
+      "titre": "Le prisme droit : faces, sommets, arêtes sans se tromper — Le prisme droit — épisode 1 · Maths CM1",
+      "accroche": "Sacha est guide de montagne. Ce soir, son groupe dort sous la tente. Sa forme n'est ni un cube, ni une pyramide : c'est un prisme droit. Comment compter ses faces, ses sommets et ses arêtes ?\n\nDans cette vidéo :\n• deux bases pareilles, l'une en face de l'autre (ici deux triangles)\n• autour, des faces rectangulaires : autant que de côtés de la base\n• faces = côtés + 2 ; sommets = 2 × côtés ; arêtes = 3 × côtés\n• le piège : la pyramide a une seule base et une pointe\n• le patron de la tente : 3 rectangles en bande et 2 triangles\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un écrou en prisme à base hexagonale : combien de sommets et d'arêtes ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_prisme&display=simple\n\n🔢 Épisode 1 de la série Solides et espace d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment tout compter ?"
+        ],
+        [
+          "00:23",
+          "Les deux bases"
+        ],
+        [
+          "00:33",
+          "Les rectangles autour"
+        ],
+        [
+          "00:47",
+          "Faces, sommets, arêtes"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Prisme ou pyramide ?"
+        ],
+        [
+          "01:55",
+          "Le patron de la tente"
+        ],
+        [
+          "02:07",
+          "Question 2"
+        ],
+        [
+          "02:40",
+          "À toi de jouer"
+        ],
+        [
+          "02:54",
+          "Correction"
+        ],
+        [
+          "03:10",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "prisme droit",
+        "solides",
+        "faces",
+        "arêtes",
+        "sommets",
+        "patron",
+        "tente",
+        "guide de montagne",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Un crayon a la forme d'un prisme à base hexagonale : sa base a 6 côtés. Combien a-t-il de faces ?",
+          "choix": [
+            "6 faces",
+            "8 faces",
+            "12 faces"
+          ],
+          "reponse": 1,
+          "explication": "6 rectangles autour, plus les 2 bases : 6 + 2, 8 faces."
+        },
+        {
+          "t": "02:07",
+          "question": "Un prisme a pour base un pentagone : 5 côtés. Combien a-t-il d'arêtes ?",
+          "choix": [
+            "15 arêtes",
+            "10 arêtes",
+            "7 arêtes"
+          ],
+          "reponse": 0,
+          "explication": "5 arêtes sur une base, 5 sur l'autre, et 5 qui relient : 3 × 5, 15 arêtes. 10, ce sont les sommets."
+        }
+      ],
+      "centres": [
+        "sport",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-solides-prisme-short",
+      "pas_avant": "2027-01-26",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_prisme",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-solides-prisme",
+      "fichier": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme-short.mp4",
+      "miniature": "cm1/maths/solides/01-prisme/eleveai-maths-cm1-solides-prisme-short-miniature.png",
+      "titre": "Ma tente est une pyramide, tu paries ? #maths #cm1",
+      "accroche": "J'ai monté ma tente. Une vraie pyramide ! Bon… elle n'a pas de pointe. Elle a une longue arête, tout en haut.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : combien d'arêtes a ma tente ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_prisme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #cm1 #primaire",
+      "tags": [
+        "prisme",
+        "pyramide",
+        "tente",
+        "camping",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Ma tente est un prisme. Combien a-t-elle de faces, le sol compris ?",
+          "choix": [
+            "3 faces",
+            "4 faces",
+            "5 faces"
+          ],
+          "reponse": 2,
+          "explication": "2 triangles, plus 3 rectangles : les deux pans du toit et le sol. 2 + 3, 5 faces."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-solides-patron",
+      "pas_avant": "2027-01-28",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_patron",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron.mp4",
+      "miniature": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron.png",
+      "titre": "Quel dessin à plat devient quel solide ? Les patrons — Reconnaître un patron — épisode 2 · Maths CM1",
+      "accroche": "Rose est créatrice de jeux de société. Pour son nouveau jeu, elle fabrique un dé, des pions et une boîte en carton. Chaque pièce commence par un patron : quel dessin à plat devient quel solide ?\n\nDans cette vidéo :\n• le cube a 11 patrons, pas seulement la croix\n• vérifier un patron : on plie dans sa tête, un carré après l'autre\n• pavé : 6 rectangles ; pyramide : un carré et 4 triangles ; cylindre : 2 disques et un rectangle\n• le dé : deux faces opposées font 7 et ne se touchent jamais sur le patron\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le patron d'un dé avec 1, 2 et 3 : quels nombres dans les trois cases vides ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_patron&display=simple\n\n🔢 Épisode 2 de la série Solides et espace d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quel dessin, quel solide ?"
+        ],
+        [
+          "00:21",
+          "Les 11 patrons du cube"
+        ],
+        [
+          "00:37",
+          "Plier dans sa tête"
+        ],
+        [
+          "00:56",
+          "Chaque solide a son patron"
+        ],
+        [
+          "01:13",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Le dé : faces opposées"
+        ],
+        [
+          "02:15",
+          "Question 2"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Correction"
+        ],
+        [
+          "03:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "patron",
+        "solides",
+        "cube",
+        "dé",
+        "pyramide",
+        "cylindre",
+        "pavé droit",
+        "jeux de société",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Quel est le patron d'un cylindre ?",
+          "choix": [
+            "un carré et 4 triangles",
+            "2 disques et un rectangle",
+            "6 rectangles"
+          ],
+          "reponse": 1,
+          "explication": "Les 2 disques font le dessus et le dessous. Le rectangle s'enroule autour. Le carré et les 4 triangles, c'est la pyramide."
+        },
+        {
+          "t": "02:15",
+          "question": "Sur un dé, quelle face est en face du 2 ?",
+          "choix": [
+            "le 3",
+            "le 6",
+            "le 5"
+          ],
+          "reponse": 2,
+          "explication": "Deux faces opposées font 7 : 7 − 2, 5. Le 5 est en face du 2."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-solides-patron-short",
+      "pas_avant": "2027-01-28",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_patron",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-solides-patron",
+      "fichier": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron-short.mp4",
+      "miniature": "cm1/maths/solides/02-patron/eleveai-maths-cm1-solides-patron-short-miniature.png",
+      "titre": "Le 1 à côté du 6 sur mon dé, tu paries ? #maths #cm1",
+      "accroche": "Je fabrique mon dé. J'écris les nombres au hasard : 1 ici, 6 juste à côté… Hé ! Sur un vrai dé, ils sont face à face !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : sur un vrai dé, quelle face est en face du 1 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_patron&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #cm1 #primaire",
+      "tags": [
+        "dé",
+        "patron",
+        "faces opposées",
+        "cube",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Sur un vrai dé, quelle face est en face du 3 ?",
+          "choix": [
+            "le 6",
+            "le 2",
+            "le 4"
+          ],
+          "reponse": 2,
+          "explication": "7 − 3, 4. Sur le patron, le 4 n'est jamais collé au 3 : il y a un carré entre eux."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-solides-defi",
+      "pas_avant": "2027-01-30",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_defi",
+      "classe": "cm1",
+      "ceinture": "bleue",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi.mp4",
+      "miniature": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi.png",
+      "titre": "Des cubes empilés : combien sont cachés ? Un défi — Défi : les cubes cachés — épisode 3 · Maths CM1",
+      "accroche": "Ilan crée des décors de jeux vidéo avec des blocs en forme de cube : escaliers, murs, maisons. Combien de cubes lui faut-il, quand certains sont cachés ?\n\nDans cette vidéo :\n• un escalier : on compte colonne par colonne\n• sur un dessin, les cubes du dessous et du fond sont cachés : ils comptent aussi\n• un pavé de cubes : on compte étage par étage (3 × 2 = 6, puis 6 + 6 = 12)\n• le piège : additionner au lieu de compter les rangées\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une maison de 4 × 3 × 2 cubes, 10 déjà posés : combien en manque-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_defi&display=simple\n\n🔢 Épisode 3 de la série Solides et espace d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de cubes cachés ?"
+        ],
+        [
+          "00:23",
+          "L'escalier"
+        ],
+        [
+          "00:41",
+          "Les cubes cachés"
+        ],
+        [
+          "00:51",
+          "Étage par étage"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:45",
+          "Le piège"
+        ],
+        [
+          "01:55",
+          "Question 2"
+        ],
+        [
+          "02:30",
+          "À toi de jouer"
+        ],
+        [
+          "02:47",
+          "Correction"
+        ],
+        [
+          "03:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "cubes",
+        "solides",
+        "empilement",
+        "pavé droit",
+        "défi",
+        "jeux vidéo",
+        "dénombrer",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Un grand cube est fait de petits cubes : 2 en longueur, 2 en largeur, 2 en hauteur. Combien de petits cubes ?",
+          "choix": [
+            "8 cubes",
+            "6 cubes",
+            "4 cubes"
+          ],
+          "reponse": 0,
+          "explication": "Un étage : 2 × 2, 4. Deux étages : 4 + 4, 8 petits cubes. 4, c'est un seul étage !"
+        },
+        {
+          "t": "01:55",
+          "question": "Ilan construit un mur : 4 cubes de long, 3 cubes de haut, 1 cube d'épaisseur. Combien de cubes ?",
+          "choix": [
+            "7 cubes",
+            "12 cubes",
+            "10 cubes"
+          ],
+          "reponse": 1,
+          "explication": "3 rangées de 4 cubes : 3 × 4, 12 cubes. 7, c'est 4 + 3 : on a additionné au lieu de compter les rangées."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "construction"
+      ]
+    },
+    {
+      "id": "cm1-solides-defi-short",
+      "pas_avant": "2027-01-30",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_defi",
+      "classe": "cm1",
+      "ceinture": "orange",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-solides-defi",
+      "fichier": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi-short.mp4",
+      "miniature": "cm1/maths/solides/03-defi/eleveai-maths-cm1-solides-defi-short-miniature.png",
+      "titre": "4 caisses en tout dans ma pyramide, tu paries ? #maths #cm1",
+      "accroche": "J'empile des caisses en pyramide. En haut, 1 caisse. Je regarde d'en haut… je vois 4 caisses. Donc 4 caisses en tout ! Vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : une pyramide de caisses avec 3 × 3 en bas, 2 × 2 au milieu et 1 en haut : combien de caisses ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=solide&microId=solide_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #cm1 #primaire",
+      "tags": [
+        "cubes",
+        "empilement",
+        "caisses",
+        "pyramide",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture orange",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "En bas, 2 rangées de 2 caisses. En haut, 1 caisse. Combien de caisses en tout ?",
+          "choix": [
+            "5 caisses",
+            "4 caisses",
+            "3 caisses"
+          ],
+          "reponse": 0,
+          "explication": "En bas : 2 × 2, 4. En haut : 1. 4 + 1, 5 caisses. Celles du dessous comptent aussi !"
+        }
+      ],
+      "centres": [
+        "construction"
       ]
     }
   ]
