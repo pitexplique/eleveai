@@ -6,6 +6,7 @@ import { Fragment, useEffect, useMemo, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 import { hrefFiche, titreFiche } from "@/lib/fiches/registre";
 import { prenomFromNom } from "@/lib/prenom";
+import ArticlesARelire from "./ArticlesARelire";
 
 type CompositionFiche = {
   matiere: string;
@@ -508,6 +509,8 @@ export default function DashboardProfClient() {
                 Ouvrir →
               </span>
             </Link>
+
+            {user?.token && <ArticlesARelire token={user.token} />}
 
             {/* MES FICHES DE COURS (compositions enregistrées) */}
             <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">

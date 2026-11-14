@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 import CarteMesNotions, { type Notion as NotionCompris } from "./CarteMesNotions";
 import CartePassions from "./CartePassions";
+import CarteEcrireJournal from "./CarteEcrireJournal";
 import CarteAvatar from "./CarteAvatar";
 import CartePseudo from "./CartePseudo";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
@@ -454,6 +455,7 @@ export default function DashboardEleveClient() {
         <CarteAvatar />
         <CartePassions />
         <CarteCodeParent />
+        <CarteEcrireJournal />
 
 
         {messagesProf.length > 0 && (
