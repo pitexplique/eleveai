@@ -5,6 +5,9 @@ import type {
   TutorBankItemV4,
   TutorGeneratedQuestionV4,
   TableauDonneesCanvasData,
+  ObjetId,
+  ObjetsCanvasData,
+  SchemaBarreCanvasData,
 } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
@@ -70,11 +73,15 @@ function tableCanvas(data: {
   return {
     kind: "tableau_donnees",
     title: data.title ?? `Table de ${data.table}`,
-    headers: ["Calcul", "Résultat"],
+    // ⛔ 14/11/2026 : « Calcul » était un en-tête de colonne de valeurs, alors
+    // que les libellés ont leur colonne à eux (le coin) : trois en-têtes pour
+    // deux colonnes, et le surlignage visait une colonne qui n'existait pas.
+    coin: "Calcul",
+    headers: ["Résultat"],
     rows,
     highlight:
       data.multiplicateur !== undefined
-        ? { row: data.multiplicateur - 1, col: 1 }
+        ? { cell: { row: data.multiplicateur - 1, col: 0 } }
         : undefined,
     questionLabel:
       data.questionLabel ??
@@ -83,7 +90,7 @@ function tableCanvas(data: {
       compact: true,
       striped: true,
     },
-  };
+  } as TableauDonneesCanvasData;
 }
 
 function miniTableCanvas(data: {
@@ -96,14 +103,14 @@ function miniTableCanvas(data: {
   return {
     kind: "tableau_donnees",
     title: data.title ?? `Mini-table de ${data.table}`,
-    headers: ["Calcul", "Résultat"],
+    coin: "Calcul",
+    headers: ["Résultat"],
     rows: data.multiplicateurs.map((k) => ({
       label: `${data.table} × ${k}`,
       values: [k === data.missing ? "?" : data.table * k],
     })),
     highlight: {
-      row: data.multiplicateurs.indexOf(data.missing),
-      col: 1,
+      cell: { row: data.multiplicateurs.indexOf(data.missing), col: 0 },
     },
     questionLabel:
       data.questionLabel ??
@@ -112,7 +119,7 @@ function miniTableCanvas(data: {
       compact: true,
       striped: true,
     },
-  };
+  } as TableauDonneesCanvasData;
 }
 
 // ============================================================
@@ -1191,6 +1198,217 @@ function paire(min: number, max: number): () => [number, number] {
   return () => [randomInt(min, max), randomInt(min, max)];
 }
 
+// ============================================================
+// TABLES_TROUS — LES DESSINS (14/11/2026)
+// ============================================================
+// ⛔ POURQUOI. Mesuré avec .tmp-audit-ce2-cm1.ts : 6 % des énoncés servis
+// avaient une figure. Frédéric adore les schémas de billes pour × et ÷. Chaque
+// famille de `tables_trous` reçoit maintenant, trois fois sur quatre, un dessin
+// COHÉRENT avec a × ? = r (a la table, b le facteur cherché, r le produit) :
+// - le tableau des tables en morceau, la colonne de b en « ? » (la vidéo :
+//   « la ligne, le résultat, puis le haut de la colonne ») ;
+// - la table de a, la ligne du trou écrite « a × ? » ;
+// - r billes en rangées de a (★2 seulement, le dessin aide à compter) ;
+// - un schéma en barres : r partagé en a parts, ou des paquets de a.
+// Seules les familles installées dans `tables_trous` sont habillées : les
+// autres micros ne changent pas.
+
+/** Le tableau des tables, 3 lignes × 5 colonnes, la case a × b surlignée, l'en-tête de b caché. */
+function morceauDeTableau(a: number, b: number): TableauDonneesCanvasData | undefined {
+  if (a < 2 || a > 10 || b < 1 || b > 10) return undefined;
+  const l0 = Math.min(Math.max(a - 1, 2), 8);
+  const c0 = Math.min(Math.max(b - 2, 1), 6);
+  const lignes = [l0, l0 + 1, l0 + 2];
+  const cols = [c0, c0 + 1, c0 + 2, c0 + 3, c0 + 4];
+  return {
+    kind: "tableau_donnees",
+    title: "Le tableau des tables",
+    coin: "×",
+    headers: cols.map((c) => (c === b ? "?" : String(c))),
+    rows: lignes.map((l) => ({ label: String(l), values: cols.map((c) => l * c) })),
+    highlight: { cell: { row: lignes.indexOf(a), col: cols.indexOf(b) } },
+    questionLabel: `Ligne de ${a} : ${a * b}. En haut de la colonne ?`,
+    display: { compact: true },
+  } as TableauDonneesCanvasData;
+}
+
+/** La table de a, la ligne du trou écrite « a × ? » : le résultat se voit, le facteur non. */
+function tableATrou(a: number, b: number): TableauDonneesCanvasData {
+  const ks = voisinsDe(b);
+  return {
+    kind: "tableau_donnees",
+    title: `Table de ${a}`,
+    coin: "Calcul",
+    headers: ["Résultat"],
+    rows: ks.map((k) => ({ label: k === b ? `${a} × ?` : `${a} × ${k}`, values: [a * k] })),
+    highlight: { cell: { row: ks.indexOf(b), col: 0 } },
+    questionLabel: `Quelle ligne donne ${a * b} ?`,
+    display: { compact: true, striped: true },
+  } as TableauDonneesCanvasData;
+}
+
+const BILLES: readonly ObjetId[] = ["pomme", "ballon", "etoile", "fleur", "poisson", "banane", "livre", "voiture"];
+
+/** r objets en rangées de a (a ≤ 5, au plus 6 rangées) : on compte les rangées. */
+function rangeesDe(a: number, b: number): ObjetsCanvasData | undefined {
+  if (a > 5 || b > 6) return undefined;
+  const quoi = randomChoice(BILLES);
+  return {
+    kind: "objets",
+    mode: "couleur",
+    elements: Array.from({ length: b }, () => ({ quoi, nombre: a })),
+    colonnes: 1,
+    consigne: `${a * b} en rangées de ${a} : combien de rangées ?`,
+  };
+}
+
+/** r partagé en a parts égales (a ≤ 8) : chaque part vaut le facteur cherché. */
+function barrePartsDe(a: number, b: number): SchemaBarreCanvasData | undefined {
+  if (a > 8) return undefined;
+  return {
+    kind: "schema_barre",
+    total: String(a * b),
+    parts: Array.from({ length: a }, () => ({ label: "", unknown: true })),
+    questionLabel: `${a * b} partagé en ${a} parts égales`,
+    display: { showTotal: true, showPartLabels: false, showValues: true, showQuestion: true },
+  } as SchemaBarreCanvasData;
+}
+
+/** Des paquets de a dans r : un paquet connu, le nombre de paquets à trouver. */
+function barrePaquetsDe(a: number, b: number): SchemaBarreCanvasData {
+  return {
+    kind: "schema_barre",
+    total: String(a * b),
+    parts: [{ label: "1 paquet", value: String(a) }, { label: "encore…", unknown: true }],
+    questionLabel: `Combien de paquets de ${a} dans ${a * b} ?`,
+    display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+  } as SchemaBarreCanvasData;
+}
+
+type Dessin = (a: number, b: number) => Question["canvas"] | undefined;
+
+/** Habille une famille : trois fois sur quatre, un des dessins proposés (le premier qui tient). */
+function avecDessin(f: Famille, dessins: Dessin[], p = 0.75): Famille {
+  return {
+    ...f,
+    gen: (a, b) => {
+      const q = f.gen(a, b);
+      if (q.canvas || Math.random() >= p) return q;
+      for (const d of shuffle(dessins)) {
+        const c = d(a, b);
+        if (c) return { ...q, canvas: c };
+      }
+      return q;
+    },
+  };
+}
+
+/** « 56 ÷ 8 sans poser la division ? 8 fois combien font 56 ? » (le short de la micro). */
+function genFoisCombien(a: number, b: number): Question {
+  const r = a * b;
+  const p = prenom();
+  const tournures = [
+    `${a} fois combien font ${r} ?`,
+    `${r} ÷ ${a} sans poser la division : ${a} fois combien font ${r} ?`,
+    `Diviser, c’est se demander : ${a} fois combien font ${r} ? Quel est ce nombre ?`,
+    `Récite la table de ${a} jusqu’à ${r}. Stop ! ${a} fois combien ?`,
+    `${p} récite : ${suiteTable(a, Math.min(b, 4))}… jusqu’à ${r}. Stop ! ${a} fois combien font ${r} ?`,
+    `${p} cherche ${r} ÷ ${a} avec la table de ${a}. ${a} fois combien font ${r} ?`,
+    `Défi éclair : ${a} fois combien font ${r} ?`,
+    `Sans poser la division, ${p} veut ${r} ÷ ${a}. ${a} fois combien font ${r} ?`,
+  ];
+  return {
+    text: randomChoice(tournures),
+    format: "short",
+    expected: [String(b)],
+    comparator: "number_equal",
+    explanation: exp(
+      `Diviser ${r} par ${a}, c’est se demander : ${a} fois combien font ${r} ?`,
+      `On récite la table de ${a} : ${suiteTable(a, b)}. Stop !`,
+      `${a} × ${b} = ${r}, donc ${r} ÷ ${a} = ${b}. Et en cadeau : ${r} ÷ ${b} = ${a}.`,
+      `Le nombre cherché est ${b}.`,
+    ),
+  };
+}
+
+/** Lire le facteur manquant dans le tableau des tables (la paysage). */
+function genLireTableau(a: number, b: number): Question {
+  const r = a * b;
+  const p = prenom();
+  const tournures = [
+    `Dans le tableau, sur la ligne de ${a}, on trouve ${r}. Quel nombre est en haut de la colonne ?`,
+    `Lis le tableau : ligne de ${a}, on avance jusqu’à ${r}. Complète : ${a} × ? = ${r}`,
+    `${p} cherche ${r} sur la ligne de ${a}. Quel nombre lit-on en haut de sa colonne ?`,
+    `Le tableau des tables : ${a} × ? = ${r}. Quel nombre cache le « ? » ?`,
+    `Ligne de ${a}, case ${r} : quel est le nombre en haut de la colonne ?`,
+  ];
+  return {
+    text: randomChoice(tournures),
+    format: "short",
+    expected: [String(b)],
+    comparator: "number_equal",
+    explanation: exp(
+      "Le tableau des tables se lit dans les deux sens.",
+      `On va sur la ligne de ${a}, on avance jusqu’à ${r}, on remonte en haut de la colonne.`,
+      `${a} × ${b} = ${r}.`,
+      `Le nombre cherché est ${b}.`,
+    ),
+    canvas: morceauDeTableau(a, b),
+  };
+}
+
+const MOTS_BILLES: Record<string, string> = {
+  pomme: "pommes", ballon: "ballons", etoile: "étoiles", fleur: "fleurs",
+  poisson: "poissons", banane: "bananes", livre: "livres", voiture: "petites voitures",
+};
+
+/** Le schéma de billes : r objets en rangées de a, combien de rangées ? */
+function genRangees(a: number, b: number): Question {
+  const r = a * b;
+  const p = prenom();
+  const dessin = rangeesDe(a, b);
+  const quoi = dessin ? dessin.elements[0].quoi : randomChoice(BILLES);
+  const mots = MOTS_BILLES[quoi];
+  const tournures = [
+    `${p} range ${r} ${mots} en rangées de ${a}. Combien de rangées fait-on ?`,
+    `On aligne ${r} ${mots}, ${a} par rangée. Combien de rangées ? Complète : ${a} × ? = ${r}`,
+    `${r} ${mots} sont alignés par ${a}. Combien de rangées y a-t-il ?`.replace("alignés", quoi === "pomme" || quoi === "etoile" || quoi === "fleur" || quoi === "banane" || quoi === "voiture" ? "alignées" : "alignés"),
+    `Sur la table, ${p} pose ${r} ${mots} en rangées de ${a}. Combien de rangées ?`,
+    `Il y a ${r} ${mots} en rangées de ${a}. ${a} fois combien font ${r} ?`,
+  ];
+  return {
+    text: randomChoice(tournures),
+    format: "short",
+    expected: [String(b)],
+    comparator: "number_equal",
+    explanation: exp(
+      "Des rangées égales, c’est une multiplication : rangées × objets par rangée.",
+      `On cherche le nombre de rangées : ${a} × ? = ${r}. On récite la table de ${a} : ${suiteTable(a, b)}.`,
+      `${a} × ${b} = ${r}.`,
+      `Il y a ${b} rangées.`,
+    ),
+    canvas: dessin ?? barrePaquetsDe(a, b),
+  };
+}
+
+const TROUS_TABLE: Dessin[] = [morceauDeTableau, tableATrou, barrePartsDe];
+const FT = {
+  facteur: avecDessin(F.facteur, [...TROUS_TABLE, rangeesDe]),
+  facteurSansBilles: avecDessin(F.facteur, TROUS_TABLE),
+  facteurQcm: avecDessin(F.facteurQcm, [...TROUS_TABLE, rangeesDe]),
+  groupesInverse: avecDessin(F.groupesInverse, [barrePaquetsDe, tableATrou]),
+  division: avecDessin(F.division, [barrePartsDe, morceauDeTableau]),
+  divisionAide: avecDessin(F.divisionAide, [morceauDeTableau, tableATrou]),
+  tauxInverse: avecDessin(F.tauxInverse, [barrePaquetsDe, tableATrou]),
+  foisCombien: avecDessin(
+    { nom: "fois_combien", hint: "Récite la table jusqu’au nombre, puis stop !", tag: "division", gen: genFoisCombien },
+    [morceauDeTableau, tableATrou, barrePartsDe],
+    0.8,
+  ),
+  lireTableau: { nom: "lire_tableau", hint: "La ligne, le résultat, puis le haut de la colonne.", tag: "tableau", gen: genLireTableau } as Famille,
+  rangees: { nom: "rangees_billes", hint: "Compte de tant en tant : une rangée à la fois.", tag: "billes", gen: genRangees } as Famille,
+};
+
 export const MultiplicationTablesBank: TutorBankItemV4[] = [
   // ============================================================
   // TABLE_2
@@ -1247,13 +1465,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "2 × 7 = 14.",
       "Le nombre manquant est 7."
     ),
-    canvas: miniTableCanvas({
-      table: 2,
-      multiplicateurs: [5, 6, 7, 8, 9],
-      missing: 7,
-      title: "Table de 2 à trou",
-      questionLabel: "Quelle ligne donne 14 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 2 × 7 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(2, 7),
     tags: ["cm1", "tables", "table_2", "facteur_manquant", "canvas"],
   },
 
@@ -1425,13 +1638,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "3 × 9 = 27.",
       "Le nombre manquant est 9."
     ),
-    canvas: miniTableCanvas({
-      table: 3,
-      multiplicateurs: [6, 7, 8, 9, 10],
-      missing: 9,
-      title: "Table de 3 à trou",
-      questionLabel: "Quelle ligne donne 27 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 3 × 9 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(3, 9),
     tags: ["cm1", "tables", "table_3", "facteur_manquant", "canvas"],
   },
 
@@ -1640,13 +1848,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "4 × 7 = 28.",
       "Le nombre manquant est 7."
     ),
-    canvas: miniTableCanvas({
-      table: 4,
-      multiplicateurs: [5, 6, 7, 8, 9],
-      missing: 7,
-      title: "Table de 4 à trou",
-      questionLabel: "Quelle ligne donne 28 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 4 × 7 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(4, 7),
     tags: ["cm1", "tables", "table_4", "facteur_manquant", "canvas"],
   },
 
@@ -1855,13 +2058,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "5 × 8 = 40.",
       "Le nombre manquant est 8."
     ),
-    canvas: miniTableCanvas({
-      table: 5,
-      multiplicateurs: [6, 7, 8, 9, 10],
-      missing: 8,
-      title: "Table de 5 à trou",
-      questionLabel: "Quelle ligne donne 40 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 5 × 8 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(5, 8),
     tags: ["cm1", "tables", "table_5", "facteur_manquant", "canvas"],
   },
 
@@ -2098,13 +2296,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "6 × 7 = 42.",
       "Le nombre manquant est 7."
     ),
-    canvas: miniTableCanvas({
-      table: 6,
-      multiplicateurs: [5, 6, 7, 8, 9],
-      missing: 7,
-      title: "Table de 6 à trou",
-      questionLabel: "Quelle ligne donne 42 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 6 × 7 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(6, 7),
     tags: ["cm1", "tables", "table_6", "facteur_manquant", "canvas"],
   },
 
@@ -2342,13 +2535,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "7 × 9 = 63.",
       "Le nombre manquant est 9."
     ),
-    canvas: miniTableCanvas({
-      table: 7,
-      multiplicateurs: [6, 7, 8, 9, 10],
-      missing: 9,
-      title: "Table de 7 à trou",
-      questionLabel: "Quelle ligne donne 63 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 7 × 9 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(7, 9),
     tags: ["cm1", "tables", "table_7", "facteur_manquant", "canvas"],
   },
 
@@ -2585,13 +2773,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "8 × 8 = 64.",
       "Le nombre manquant est 8."
     ),
-    canvas: miniTableCanvas({
-      table: 8,
-      multiplicateurs: [6, 7, 8, 9, 10],
-      missing: 8,
-      title: "Table de 8 à trou",
-      questionLabel: "Quelle ligne donne 64 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 8 × 8 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(8, 8),
     tags: ["cm1", "tables", "table_8", "facteur_manquant", "canvas"],
   },
 
@@ -2829,13 +3012,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "9 × 9 = 81.",
       "Le nombre manquant est 9."
     ),
-    canvas: miniTableCanvas({
-      table: 9,
-      multiplicateurs: [6, 7, 8, 9, 10],
-      missing: 9,
-      title: "Table de 9 à trou",
-      questionLabel: "Quelle ligne donne 81 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 9 × 9 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(9, 9),
     tags: ["cm1", "tables", "table_9", "facteur_manquant", "canvas"],
   },
 
@@ -3073,13 +3251,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "10 × 8 = 80.",
       "Le nombre manquant est 8."
     ),
-    canvas: miniTableCanvas({
-      table: 10,
-      multiplicateurs: [6, 7, 8, 9, 10],
-      missing: 8,
-      title: "Table de 10 à trou",
-      questionLabel: "Quelle ligne donne 80 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 10 × 8 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(10, 8),
     tags: ["cm1", "tables", "table_10", "facteur_manquant", "canvas"],
   },
 
@@ -3419,13 +3592,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "8 × 7 = 56.",
       "Le nombre manquant est 7."
     ),
-    canvas: miniTableCanvas({
-      table: 8,
-      multiplicateurs: [5, 6, 7, 8, 9],
-      missing: 7,
-      title: "Table de 8 à trou",
-      questionLabel: "Quelle ligne donne 56 ?",
-    }),
+    // ⛔ 14/11/2026 : la mini-table écrivait « 8 × 7 = ? » : elle donnait le facteur cherché.
+    canvas: tableATrou(8, 7),
     tags: ["cm1", "tables", "trous", "facteur_manquant", "canvas"],
   },
 
@@ -3449,6 +3617,7 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "48 est le sixième nombre de la table : 6 × 8 = 48.",
       "Le nombre manquant est 6."
     ),
+    canvas: tableATrou(8, 6),
     tags: ["cm1", "tables", "trous", "facteur_manquant"],
   },
 
@@ -3473,6 +3642,7 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "6 × 8 = 48.",
       "Le nombre manquant est 8."
     ),
+    canvas: morceauDeTableau(6, 8),
     tags: ["cm1", "tables", "trous", "qcm"],
   },
 
@@ -3497,6 +3667,7 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "42 ÷ 7 = 6.",
       "La division utile est 42 ÷ 7."
     ),
+    canvas: barrePartsDe(7, 6),
     tags: ["cm1", "tables", "trous", "division", "qcm"],
   },
 
@@ -3516,13 +3687,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       const manquant = randomInt(3, 10);
       return {
         ...genFacteur(a, manquant, "droite"),
-        canvas: miniTableCanvas({
-          table: a,
-          multiplicateurs: voisinsDe(manquant),
-          missing: manquant,
-          title: `Table de ${a} à trou`,
-          questionLabel: `Quelle ligne donne ${a * manquant} ?`,
-        }),
+        // ⛔ 14/11/2026 : la mini-table écrivait « a × manquant = ? » : elle donnait la réponse.
+        canvas: tableATrou(a, manquant),
       };
     },
   },
@@ -3538,7 +3704,8 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Tu peux échanger l’ordre des facteurs.",
     tags: ["cm1", "tables", "trous", "commutativite", "template"],
-    generate: () => genFacteur(randomInt(4, 9), randomInt(3, 10), "gauche"),
+    generate: () =>
+      avecDessin({ ...F.facteur, gen: (a, b) => genFacteur(a, b, "gauche") }, TROUS_TABLE).gen(randomInt(4, 9), randomInt(3, 10)),
   },
 
   {
@@ -3552,7 +3719,7 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Teste chaque facteur proposé.",
     tags: ["cm1", "tables", "trous", "qcm", "template"],
-    generate: () => genFacteurQcm(randomInt(6, 9), randomInt(4, 9)),
+    generate: () => FT.facteurQcm.gen(randomInt(6, 9), randomInt(4, 9)),
   },
 
   // ============================================================
@@ -3858,6 +4025,7 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "6 × 7 = 42.",
       "Le nombre manquant est 7."
     ),
+    canvas: barrePartsDe(6, 7),
     tags: ["cm1", "tables", "tables_trous", "facteur_manquant", "short"],
   },
 
@@ -3881,6 +4049,7 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "7 × 8 = 56.",
       "Le nombre manquant est 7."
     ),
+    canvas: tableATrou(8, 7),
     tags: ["cm1", "tables", "tables_trous", "facteur_manquant", "short"],
   },
 
@@ -3904,6 +4073,7 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
       "9 × 9 = 81.",
       "Le nombre manquant est 9."
     ),
+    canvas: morceauDeTableau(9, 9),
     tags: ["cm1", "tables", "tables_trous", "facteur_manquant", "short"],
   },
 
@@ -3982,7 +4152,9 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
     prefixe: "cm1_tables_trous_tpl_etoile2",
     difficulty: 2,
     tags: ["cm1", "tables", "trous"],
-    familles: [F.facteur, F.facteurQcm, F.groupesInverse, F.division, F.tauxInverse],
+    // 14/11/2026 : les mêmes familles (mêmes ids), habillées d'un dessin, et
+    // deux nouvelles : « 8 fois combien font 56 ? » (le short) et le tableau.
+    familles: [FT.facteur, FT.facteurQcm, FT.groupesInverse, FT.division, FT.tauxInverse, FT.foisCombien, FT.lireTableau, FT.rangees],
     tirer: () => [randomInt(2, 9), randomInt(2, 10)],
   }),
   ...gabaritsFamilles({
@@ -3990,7 +4162,7 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
     prefixe: "cm1_tables_trous_tpl_etoile3",
     difficulty: 3,
     tags: ["cm1", "tables", "trous"],
-    familles: [F.groupesInverse, F.tauxInverse, F.division, F.divisionAide],
+    familles: [FT.groupesInverse, FT.tauxInverse, FT.division, FT.divisionAide, FT.lireTableau, FT.foisCombien],
     tirer: paire(3, 9),
   }),
   ...gabaritsFamilles({
@@ -3998,7 +4170,7 @@ export const MultiplicationTablesBank: TutorBankItemV4[] = [
     prefixe: "cm1_tables_trous_tpl_etoile4",
     difficulty: 4,
     tags: ["cm1", "tables", "trous"],
-    familles: [F.facteur, F.tauxInverse, F.groupesInverse, F.divisionAide],
+    familles: [FT.facteurSansBilles, FT.tauxInverse, FT.groupesInverse, FT.divisionAide],
     tirer: paire(6, 9),
   }),
 

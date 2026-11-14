@@ -231,11 +231,20 @@ function resolve(
   return { kind: "keep" };
 }
 
+// ⭐ 14/11/2026 — une question devenue QCM ne garde pas de case à remplir dans son
+// dessin : le tableau de proportionnalité (`missing`) dessinait un champ de saisie
+// au CM1, alors qu'on répond en cliquant. La case reste surlignée et montre « ? ».
+function sansCaseASaisir<T>(q: T): T {
+  const c = (q as { canvas?: { missing?: unknown[]; display?: Record<string, unknown> } }).canvas;
+  if (!c || !Array.isArray(c.missing) || !c.missing.length) return q;
+  return { ...q, canvas: { ...c, display: { ...(c.display ?? {}), showMissing: false } } };
+}
+
 function transformItem(item: TutorBankItemV4): TutorBankItemV4 | null {
   if (item.kind === "fixed") {
     const r = resolve(item.format, item.text, item.expected);
     if (r.kind === "drop") return null;
-    return r.kind === "override" ? { ...item, ...r.override } : item;
+    return r.kind === "override" ? sansCaseASaisir({ ...item, ...r.override }) : item;
   }
 
   // Template : on « renifle » une génération pour repérer les "open" à retirer
@@ -256,7 +265,7 @@ function transformItem(item: TutorBankItemV4): TutorBankItemV4 | null {
     generate: () => {
       const q = originalGenerate();
       const r = resolve(q.format, q.text, q.expected);
-      return r.kind === "override" ? { ...q, ...r.override } : q;
+      return r.kind === "override" ? sansCaseASaisir({ ...q, ...r.override }) : q;
     },
   };
 }

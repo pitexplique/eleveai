@@ -4,6 +4,7 @@ import { renfortPropCM } from "@/lib/tutor-v4/questionBank/cm2/maths/proportionn
 import type {
   TutorBankItemV4,
   TableauProportionnaliteCanvasData,
+  SchemaBarreCanvasData,
 } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
@@ -4222,10 +4223,495 @@ const anciens: TutorBankItemV4[] = [
   },
 ];
 
+/* =========================================================
+   DESSINS (14/11/2026) — au CM, au moins la moitié des énoncés avec une figure.
+   Mesure du 14/11 : 0 % de dessins sur 5 micros sur 7 (prop_tableau 48 %,
+   prop_coefficient 1 %). Ces gabarits posent les exercices types des vidéos,
+   avec leurs mots : « fois plus », « fois moins » (schéma en barres : les parts
+   recopiées ou partagées), « on regarde chaque colonne », « on multiplie la
+   ligne du haut par le même nombre », « le coefficient, ce n'est pas l'écart »,
+   « on range les données dans un tableau », « la valeur pour 1 ».
+   ⛔ Tableau sans case `missing` : elle dessinait un champ de saisie, et le CM1
+   est sans clavier. La case cherchée porte « ? », surlignée.
+   ========================================================= */
+
+type SitD = {
+  lieu: string;
+  /** La grandeur du haut, au singulier et au pluriel : « rangée », « rangées ». */
+  a: string;
+  as: string;
+  /** La grandeur du bas, au pluriel, pour « 3 œufs pour 1 gâteau ». */
+  b: string;
+  lien: (n: number, m: number) => string;
+  demande: (n: number) => string;
+  labelA: string;
+  labelB: string;
+  uB: string;
+  k: number[];
+  /** Le nombre du bas est fixé par la nature (pattes, joueuses) : pas de « non ». */
+  fixe?: boolean;
+};
+
+const SITS_D: SitD[] = [
+  { lieu: "Dans le jardin de Fatou, la maraîchère", a: "rangée", as: "rangées", b: "salades", lien: (n, m) => `${n} rangées ont ${m} salades`, demande: (n) => `Combien de salades ont ${n} rangées ?`, labelA: "Rangées", labelB: "Salades", uB: "", k: [5, 6, 8] },
+  { lieu: "Chez Malik, le peintre", a: "mur", as: "murs", b: "litres", lien: (n, m) => `pour ${n} murs, il faut ${m} litres de peinture`, demande: (n) => `Combien de litres faut-il pour ${n} murs ?`, labelA: "Murs", labelB: "Peinture (L)", uB: "L", k: [2, 3, 4] },
+  { lieu: "Dans le petit train de Léna", a: "wagon", as: "wagons", b: "places", lien: (n, m) => `${n} wagons ont ${m} places`, demande: (n) => `Combien de places ont ${n} wagons ?`, labelA: "Wagons", labelB: "Places", uB: "", k: [10, 20], fixe: true },
+  { lieu: "À la pâtisserie de Nora", a: "gâteau", as: "gâteaux", b: "œufs", lien: (n, m) => `pour ${n} gâteaux, Nora utilise ${m} œufs`, demande: (n) => `Combien d’œufs faut-il pour ${n} gâteaux ?`, labelA: "Gâteaux", labelB: "Œufs", uB: "", k: [2, 3, 4] },
+  { lieu: "Dans l’atelier de Zoé, l’ingénieure", a: "robot", as: "robots", b: "piles", lien: (n, m) => `${n} robots ont besoin de ${m} piles`, demande: (n) => `Combien de piles faut-il pour ${n} robots ?`, labelA: "Robots", labelB: "Piles", uB: "", k: [2, 3, 4] },
+  { lieu: "Au parc animalier", a: "sac", as: "sacs", b: "kg", lien: (n, m) => `${n} sacs de graines pèsent ${m} kg`, demande: (n) => `Combien pèsent ${n} sacs ?`, labelA: "Sacs", labelB: "Masse (kg)", uB: "kg", k: [5, 7, 8, 10] },
+  { lieu: "Au match de basket d’Adam", a: "panier", as: "paniers", b: "points", lien: (n, m) => `${n} paniers rapportent ${m} points`, demande: (n) => `Combien de points rapportent ${n} paniers ?`, labelA: "Paniers", labelB: "Points", uB: "", k: [2, 3], fixe: true },
+  { lieu: "À la jardinerie", a: "sachet", as: "sachets", b: "graines", lien: (n, m) => `${n} sachets contiennent ${m} graines`, demande: (n) => `Combien de graines contiennent ${n} sachets ?`, labelA: "Sachets", labelB: "Graines", uB: "", k: [4, 5, 6, 10] },
+  { lieu: "Chez Camille, l’apicultrice", a: "ruche", as: "ruches", b: "kg de miel", lien: (n, m) => `${n} ruches donnent ${m} kg de miel`, demande: (n) => `Combien de kilos de miel donnent ${n} ruches ?`, labelA: "Ruches", labelB: "Miel (kg)", uB: "kg", k: [10, 15, 20] },
+  { lieu: "À la papeterie", a: "cahier", as: "cahiers", b: "€", lien: (n, m) => `${n} cahiers coûtent ${m} €`, demande: (n) => `Combien coûtent ${n} cahiers ?`, labelA: "Cahiers", labelB: "Prix (€)", uB: "€", k: [2, 3, 4] },
+  { lieu: "Au cinéma du quartier", a: "place", as: "places", b: "€", lien: (n, m) => `${n} places de cinéma coûtent ${m} €`, demande: (n) => `Combien coûtent ${n} places ?`, labelA: "Places", labelB: "Prix (€)", uB: "€", k: [5, 6, 7] },
+  { lieu: "À l’atelier bijoux", a: "bracelet", as: "bracelets", b: "perles", lien: (n, m) => `pour ${n} bracelets, il faut ${m} perles`, demande: (n) => `Combien de perles faut-il pour ${n} bracelets ?`, labelA: "Bracelets", labelB: "Perles", uB: "", k: [10, 12, 15] },
+  { lieu: "Sur la voie verte", a: "heure", as: "heures", b: "km", lien: (n, m) => `en ${n} heures, Noah parcourt ${m} km à vélo`, demande: (n) => `Combien de kilomètres parcourt-il en ${n} heures ?`, labelA: "Durée (h)", labelB: "Distance (km)", uB: "km", k: [10, 12, 15] },
+  { lieu: "Pendant les vacances", a: "jour", as: "jours", b: "pages", lien: (n, m) => `en ${n} jours, Inès lit ${m} pages`, demande: (n) => `Combien de pages lit-elle en ${n} jours ?`, labelA: "Jours", labelB: "Pages", uB: "", k: [10, 15, 20] },
+  { lieu: "Au tournoi de foot", a: "équipe", as: "équipes", b: "joueuses", lien: (n, m) => `${n} équipes comptent ${m} joueuses`, demande: (n) => `Combien de joueuses comptent ${n} équipes ?`, labelA: "Équipes", labelB: "Joueuses", uB: "", k: [7, 11], fixe: true },
+  { lieu: "Au vivarium", a: "araignée", as: "araignées", b: "pattes", lien: (n, m) => `${n} araignées ont ${m} pattes`, demande: (n) => `Combien de pattes ont ${n} araignées ?`, labelA: "Araignées", labelB: "Pattes", uB: "", k: [8], fixe: true },
+  { lieu: "À la boulangerie", a: "croissant", as: "croissants", b: "€", lien: (n, m) => `${n} croissants coûtent ${m} €`, demande: (n) => `Combien coûtent ${n} croissants ?`, labelA: "Croissants", labelB: "Prix (€)", uB: "€", k: [1, 2] },
+  { lieu: "Dans le potager de l’école", a: "arrosoir", as: "arrosoirs", b: "litres", lien: (n, m) => `${n} arrosoirs contiennent ${m} litres d’eau`, demande: (n) => `Combien de litres contiennent ${n} arrosoirs ?`, labelA: "Arrosoirs", labelB: "Eau (L)", uB: "L", k: [5, 10] },
+  { lieu: "Dans la recette de Mamie", a: "œuf", as: "œufs", b: "crêpes", lien: (n, m) => `avec ${n} œufs, on fait ${m} crêpes`, demande: (n) => `Combien de crêpes fait-on avec ${n} œufs ?`, labelA: "Œufs", labelB: "Crêpes", uB: "", k: [4, 5, 6] },
+  { lieu: "Au marché", a: "mangue", as: "mangues", b: "€", lien: (n, m) => `${n} mangues coûtent ${m} €`, demande: (n) => `Combien coûtent ${n} mangues ?`, labelA: "Mangues", labelB: "Prix (€)", uB: "€", k: [2, 3] },
+  { lieu: "À la salle des fêtes", a: "rangée", as: "rangées", b: "chaises", lien: (n, m) => `${n} rangées comptent ${m} chaises`, demande: (n) => `Combien de chaises y a-t-il dans ${n} rangées ?`, labelA: "Rangées", labelB: "Chaises", uB: "", k: [6, 8, 10] },
+];
+const SITS_D_LIBRES = SITS_D.filter((s) => !s.fixe);
+
+const capD = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const minD = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
+/** « de rangées », « d’œufs », « d’heures ». */
+const deD = (mot: string) => (/^[aeiouyéèêœh]/i.test(mot) ? `d’${mot}` : `de ${mot}`);
+const avecU = (v: number, s: { uB: string }) => (s.uB ? `${v} ${s.uB}` : String(v));
+const DEF_D = "deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.";
+
+function piegesD(bon: number, xs: number[]) {
+  return xs.filter((x) => Number.isInteger(x) && x > 0 && x !== bon);
+}
+
+function qcmD(bon: string, pieges: string[]) {
+  return { format: "qcm" as const, choices: makeChoices(bon, pieges), expected: [bon], comparator: "mcq_exact" as const };
+}
+
+/** Un tableau sans champ de saisie : la case cherchée porte « ? » et elle est surlignée. */
+function tableauD(rowLabels: string[], values: (string | number)[][], cherche: Array<{ row: number; col: number }>, colLabels?: string[]) {
+  return tableauProportionnaliteCanvas({
+    rows: values.length,
+    cols: values[0].length,
+    rowLabels,
+    colLabels,
+    values: values.map((r) => r.map(String)),
+    missing: [],
+    highlightedCells: cherche,
+    display: { showRowLabels: true, showColLabels: !!colLabels, showMissing: false, showGrid: true },
+  });
+}
+
+/** Fois plus (sens 1) : n2 = f × n1, les parts recopiées. Fois moins (sens −1) : n1 partagé en f. */
+function genFoisDessin(sens: 1 | -1, niveau: 2 | 3) {
+  const s = randomChoice(SITS_D);
+  const k = randomChoice(s.k);
+  const f = niveau === 2 ? randomChoice([2, 3]) : randomChoice([3, 4, 5]);
+  const petit = randomInt(2, niveau === 2 ? 5 : 4);
+  const [n1, n2] = sens === 1 ? [petit, petit * f] : [petit * f, petit];
+  const m1 = n1 * k;
+  const m2 = n2 * k;
+  const mot = sens === 1 ? "fois plus" : "fois moins";
+  const t = randomInt(1, 5);
+  const q = s.demande(n2);
+  const text =
+    t === 1
+      ? `${capD(s.lien(n1, m1))}. ${q}`
+      : t === 2
+        ? `${s.lieu}, ${s.lien(n1, m1)}. ${q}`
+        : t === 3
+          ? `${s.lieu} : ${s.lien(n1, m1)}. ${n2}, c’est ${f} ${mot} que ${n1}. ${q}`
+          : t === 4
+            ? `${capD(s.lien(n1, m1))}. On prend ${f} ${mot} ${deD(s.as)}. ${q}`
+            : `Regarde le schéma. ${s.lieu}, ${s.lien(n1, m1)}. ${q}`;
+  const pieges =
+    sens === 1
+      ? piegesD(m2, [m1 + f, m1 + (n2 - n1), m1 * n2, m2 + k, m2 - k, m1])
+      : piegesD(m2, [m1 - f, m1 * f, m1 - n2, m2 + k, m2 - k, k]);
+  const canvas: SchemaBarreCanvasData =
+    sens === 1
+      ? {
+          kind: "schema_barre",
+          title: `Chaque case : ${n1} ${s.as}`,
+          total: "?",
+          parts: Array.from({ length: f }, () => ({ label: `${n1} ${s.as}`, value: avecU(m1, s) })),
+          display: { showTotal: true, showPartLabels: f <= 3, showValues: true, showQuestion: false },
+        }
+      : {
+          kind: "schema_barre",
+          title: `${n1} ${s.as} en ${f} parts égales`,
+          total: avecU(m1, s),
+          parts: Array.from({ length: f }, (_, i) => (i === 0 ? { label: `${n2} ${s.as}`, unknown: true } : { label: `${n2} ${s.as}` })),
+          display: { showTotal: true, showPartLabels: f <= 3, showValues: false, showQuestion: false },
+        };
+  return {
+    text,
+    ...qcmD(avecU(m2, s), pieges.map((x) => avecU(x, s))),
+    explanation: exp(
+      DEF_D,
+      `${n2} ${s.as}, c’est ${f} ${mot} que ${n1} ${s.as} : on ${sens === 1 ? "multiplie" : "divise"} aussi l’autre nombre par ${f}. ${f} ${mot}, ce n’est pas ${f} de ${sens === 1 ? "plus" : "moins"} !`,
+      sens === 1 ? `${m1} × ${f} = ${m2}.` : `${m1} ÷ ${f} = ${m2}.`,
+      `la réponse est ${avecU(m2, s)}.`,
+    ),
+    canvas,
+  };
+}
+
+/** Reconnaître : on regarde chaque colonne du tableau. Le « non » est souvent un ajout. */
+function genReconnaitreDessin(niveau: 1 | 2 | 3) {
+  const prop = Math.random() < 0.5;
+  const s = randomChoice(prop ? SITS_D : SITS_D_LIBRES);
+  const k = randomChoice(s.k);
+  const a = randomInt(1, 3);
+  const ns = niveau === 1 ? [a, 2 * a] : niveau === 2 ? [a, 2 * a, 3 * a] : [a, a + randomInt(1, 3), a + randomInt(4, 6)];
+  let ms = ns.map((x) => x * k);
+  let ajout = 0;
+  if (!prop) {
+    if (Math.random() < 0.5) {
+      ajout = randomInt(2, 6);
+      ms = ns.map((x) => x + ajout);
+    } else ms[ms.length - 1] += randomChoice([1, 2, 3]);
+  }
+  const t = randomInt(1, 4);
+  const text =
+    t === 1
+      ? `${s.lieu}, on a rempli ce tableau. Est-ce une situation de proportionnalité ?`
+      : t === 2
+        ? `Regarde chaque colonne du tableau. ${s.lieu}, le nombre du bas est-il proportionnel au nombre du haut ?`
+        : t === 3
+          ? `${s.lieu} : dans ce tableau, passe-t-on toujours d’en haut à en bas en multipliant par le même nombre ?`
+          : `Voici le tableau noté ${minD(s.lieu)}. Multiplie-t-on toujours par le même nombre ?`;
+  const cols = ns.map((x, i) => (ms[i] % x === 0 ? `${x} × ${ms[i] / x} = ${ms[i]}` : `${x} × ? ne donne pas ${ms[i]}`)).join(" ; ");
+  return {
+    text,
+    format: "qcm" as const,
+    choices: ["oui", "non"],
+    expected: [prop ? "oui" : "non"],
+    comparator: "mcq_exact" as const,
+    explanation: exp(
+      DEF_D,
+      "on regarde chaque colonne : multiplie-t-on toujours par le même nombre ?",
+      cols + ".",
+      prop
+        ? `on multiplie toujours par ${k} : c’est proportionnel.`
+        : ajout
+          ? `on ajoute toujours ${ajout}, on ne multiplie pas : ce n’est pas proportionnel.`
+          : "on ne multiplie pas toujours par le même nombre : ce n’est pas proportionnel.",
+    ),
+    canvas: tableauD([s.labelA, s.labelB], [ns, ms], []),
+  };
+}
+
+/** Le piège des âges (vidéo) : on ajoute, on ne multiplie pas. */
+const FRATRIES: Array<[string, string]> = [["Lili", "Bob"], ["Nina", "Tom"], ["Jade", "Hugo"], ["Léo", "Sarah"], ["Inès", "Mehdi"], ["Lucie", "Paul"], ["Kenza", "Yanis"]];
+function genAgesDessin(niveau: 2 | 3) {
+  const [p1, p2] = randomChoice(FRATRIES);
+  const a = randomInt(2, 5);
+  let d = randomInt(2, 5);
+  // Pas de « 5 ans et 10 ans » : le tableau commencerait par un double, et le piège tomberait.
+  while ((a + d) % a === 0) d = randomInt(2, 5);
+  const f = randomInt(2, niveau === 2 ? 3 : 5);
+  const t1 = a * f;
+  const bon = t1 + d;
+  const canvas = tableauD([`Âge ${deD(p1)}`, `Âge ${deD(p2)}`], [[a, t1], [a + d, "?"]], [{ row: 1, col: 1 }], ["Aujourd’hui", "Plus tard"]);
+  if (niveau === 3 && Math.random() < 0.4) {
+    return {
+      text: `${p1} a ${a} ans, ${p2} a ${a + d} ans. L’âge de ${p2} est-il proportionnel à l’âge de ${p1} ?`,
+      format: "qcm" as const,
+      choices: ["oui", "non"],
+      expected: ["non"],
+      comparator: "mcq_exact" as const,
+      explanation: exp(DEF_D, "on regarde si on multiplie ou si on ajoute.", `${p2} a toujours ${d} ans de plus : quand ${p1} aura ${t1} ans, ${p2} aura ${t1} + ${d} = ${bon} ans.`, "on ajoute, on ne multiplie pas : ce n’est pas proportionnel."),
+      canvas,
+    };
+  }
+  const text = randomChoice([
+    `${p1} a ${a} ans, ${p2} a ${a + d} ans. Quand ${p1} aura ${t1} ans, quel âge aura ${p2} ?`,
+    `Aujourd’hui, ${p1} a ${a} ans et ${p2} ${a + d} ans. Plus tard, ${p1} aura ${t1} ans. Et ${p2} ?`,
+    `Attention au piège ! ${p1} a ${a} ans, ${p2} a ${a + d} ans. Quel âge aura ${p2} quand ${p1} aura ${t1} ans ?`,
+  ]);
+  return {
+    text,
+    ...qcmD(`${bon} ans`, piegesD(bon, [(a + d) * f, t1, bon + d, t1 * d]).map((x) => `${x} ans`)),
+    explanation: exp(
+      "quand on AJOUTE toujours le même nombre, ce n’est pas de la proportionnalité.",
+      `${p2} a toujours ${d} ans de plus que ${p1} : on ajoute ${d}, on ne multiplie pas.`,
+      `${t1} + ${d} = ${bon}.`,
+      `${p2} aura ${bon} ans, et pas ${(a + d) * f} !`,
+    ),
+    canvas,
+  };
+}
+
+/** Compléter un tableau : la case « ? », ou « par quel nombre passe-t-on d'en haut à en bas ? ». */
+function genTableauDessin(niveau: 1 | 2 | 3) {
+  const s = randomChoice(SITS_D);
+  const k = randomChoice(s.k);
+  let ns: number[];
+  if (niveau === 1) {
+    const x = randomInt(2, 4);
+    ns = [1, x, x + randomInt(1, 4)];
+  } else if (niveau === 2) {
+    const x = randomInt(2, 4);
+    ns = [x, 2 * x, randomChoice([3 * x, 2 * x + randomInt(1, 3)])];
+  } else {
+    const x = randomInt(2, 4);
+    const y = x + randomInt(1, 4);
+    ns = [x, y, x + y];
+  }
+  const ms = ns.map((x) => x * k);
+  const trou = 2;
+  // ★2-3 : « par quel nombre passe-t-on d'en haut à en bas ? » (vidéo, question 08).
+  if (niveau >= 2 && Math.random() < 0.35) {
+    const fCol = ns[1] / ns[0];
+    const colEntier = Number.isInteger(fCol) && fCol !== k;
+    const bon = `× ${k}`;
+    const pieges = [`+ ${ms[0] - ns[0]}`, ...(colEntier ? [`× ${fCol}`] : []), `× ${k + 1}`, `+ ${k}`].filter((x) => x !== bon && x !== "+ 0");
+    return {
+      text: randomChoice([
+        `${s.lieu}, voici un tableau de proportionnalité. Par quel nombre passe-t-on d’en haut à en bas ?`,
+        `${capD(s.lien(ns[1], ms[1]))}. Dans ce tableau, par quel nombre multiplie-t-on la ligne du haut ?`,
+        `${s.lieu} : quelle opération fait passer de la ligne du haut à la ligne du bas ?`,
+      ]),
+      ...qcmD(bon, pieges),
+      explanation: exp(DEF_D, "on cherche par quel nombre on multiplie le haut pour obtenir le bas.", ns.map((x, i) => `${x} × ${k} = ${ms[i]}`).join(" ; ") + ".", `on multiplie toujours par ${k}.${colEntier ? ` × ${fCol}, c’est pour passer d’une colonne à l’autre !` : ""}`),
+      canvas: tableauD([s.labelA, s.labelB], [ns, ms], []),
+    };
+  }
+  const enHaut = niveau === 3 && Math.random() < 0.3;
+  const bon = enHaut ? ns[trou] : ms[trou];
+  const haut: (string | number)[] = ns.map((x, i) => (enHaut && i === trou ? "?" : x));
+  const bas: (string | number)[] = ms.map((x, i) => (!enHaut && i === trou ? "?" : x));
+  const pieges = enHaut
+    ? piegesD(bon, [ms[trou] - k, bon + 1, bon * 2, ms[trou] - ms[1]])
+    : piegesD(bon, [ns[trou] + k, ms[1] + (ns[trou] - ns[1]), bon + k, ns[trou] * (k + 1), ms[0] + ms[1] + 1]);
+  const text = randomChoice([
+    `${s.lieu}, on range les nombres dans ce tableau de proportionnalité. Quel nombre va dans la case « ? » ?`,
+    `${s.lieu} : complète ce tableau de proportionnalité. Que vaut la case « ? » ?`,
+    `${capD(s.lien(ns[1], ms[1]))}. Complète le tableau : quel nombre cache le « ? » ?`,
+    `${s.lieu}, ${s.lien(ns[1], ms[1])}. Dans le tableau, quelle valeur remplace le « ? » ?`,
+  ]);
+  const methode =
+    niveau === 3 && !enHaut
+      ? `${ns[2]} = ${ns[0]} + ${ns[1]} : on peut ajouter les colonnes (${ms[0]} + ${ms[1]}), ou multiplier par ${k}.`
+      : `on multiplie la ligne du haut par le même nombre : ${ms[0]} ÷ ${ns[0]} = ${k}.`;
+  return {
+    text,
+    ...qcmD(avecU(bon, enHaut ? { uB: "" } : s), pieges.map((x) => avecU(x, enHaut ? { uB: "" } : s))),
+    explanation: exp(DEF_D, methode, enHaut ? `${ms[trou]} ÷ ${k} = ${ns[trou]}.` : `${ns[trou]} × ${k} = ${ms[trou]}.`, `la case « ? » vaut ${bon}. On n’ajoute jamais le même nombre.`),
+    canvas: tableauD([s.labelA, s.labelB], [haut, bas], [enHaut ? { row: 0, col: trou } : { row: 1, col: trou }]),
+  };
+}
+
+/** Le coefficient : le trouver (ce n'est pas l'écart), dire ce qu'il veut dire, s'en servir. */
+function genCoeffDessin(niveau: 2 | 3 | 4) {
+  const s = randomChoice(SITS_D.filter((x) => x.k.every((v) => v > 1)));
+  const k = randomChoice(s.k);
+  const n = randomInt(2, 7);
+  const m = n * k;
+  const t = niveau === 2 ? randomInt(1, 2) : niveau === 3 ? randomInt(1, 3) : randomInt(2, 3);
+  if (t === 1) {
+    return {
+      text: randomChoice([
+        `${capD(s.lien(n, m))}. Quel est le coefficient de proportionnalité ?`,
+        `${s.lieu}, ${s.lien(n, m)}. Par quel nombre passe-t-on de ${n} à ${m} ?`,
+        `${s.lieu} : voici le tableau. Quel est le coefficient de proportionnalité ?`,
+        `Dans ce tableau, ${s.lien(n, m)}. Trouve le coefficient.`,
+      ]),
+      ...qcmD(String(k), piegesD(k, [m - n, n, m + n, k + 1]).map(String)),
+      explanation: exp(DEF_D, "on cherche par quel nombre on multiplie le haut pour obtenir le bas. Le coefficient, ce n’est pas l’écart.", `${n} × ${k} = ${m}.`, `le coefficient est ${k}${m - n !== k ? ` (l’écart ${m - n} donnerait ${n} × ${m - n} = ${n * (m - n)}, pas ${m})` : ""}.`),
+      canvas: tableauD([s.labelA, s.labelB], [[n], [m]], []),
+    };
+  }
+  if (t === 2) {
+    const bon = `${k} ${s.b} pour 1 ${s.a}`;
+    return {
+      text: randomChoice([
+        `${capD(s.lien(n, m))}. Le coefficient de proportionnalité veut dire :`,
+        `${s.lieu}, ${s.lien(n, m)}. Que vaut la case « ? » sous le 1 ?`,
+        `${s.lieu} : complète la colonne du 1. Combien pour un seul ?`,
+      ]),
+      ...qcmD(bon, [`${n} ${s.b} pour 1 ${s.a}`, `${m - n} ${s.b} pour 1 ${s.a}`, `${m} ${s.b} pour 1 ${s.a}`, `${k + 1} ${s.b} pour 1 ${s.a}`].filter((x) => x !== bon)),
+      explanation: exp(DEF_D, "le coefficient donne la quantité pour 1.", `${m} ÷ ${n} = ${k}.`, `${bon}.`),
+      canvas: tableauD([s.labelA, s.labelB], [[1, n], ["?", m]], [{ row: 1, col: 0 }]),
+    };
+  }
+  let n2 = randomInt(3, 10);
+  while (n2 === n || n2 % n === 0) n2 = randomInt(3, 10);
+  const bon = n2 * k;
+  return {
+    text: randomChoice([
+      `${capD(s.lien(n, m))}. ${s.demande(n2)}`,
+      `${s.lieu}, ${s.lien(n, m)}. Trouve le coefficient, puis : ${minD(s.demande(n2))}`,
+      `${s.lieu} : ${s.lien(n, m)}. Avec le coefficient, réponds : ${minD(s.demande(n2))}`,
+      `Complète le tableau. ${capD(s.lien(n, m))}. ${s.demande(n2)}`,
+    ]),
+    ...qcmD(avecU(bon, s), piegesD(bon, [n2 * (m - n), m + (n2 - n), n2 + k, bon + k, bon - k]).map((x) => avecU(x, s))),
+    explanation: exp(DEF_D, `on cherche le coefficient : ${m} ÷ ${n} = ${k}, soit ${k} ${s.b} pour 1 ${s.a}.`, `${n2} × ${k} = ${bon}.`, `la réponse est ${avecU(bon, s)}.`),
+    canvas: tableauD([s.labelA, s.labelB], [[n, n2], [m, "?"]], [{ row: 1, col: 1 }]),
+  };
+}
+
+/** Problème : on range les données dans un tableau, on calcule, on laisse le nombre inutile. */
+function inutileD(): { phrase: string; v: number } {
+  const v = randomInt(3, 40);
+  return randomChoice([
+    { phrase: `La séance dure ${v} minutes.`, v },
+    { phrase: `Il fait ${v} °C dehors.`, v },
+    { phrase: `L’atelier est ouvert depuis ${v} ans.`, v },
+    { phrase: `Le carton mesure ${v} cm de haut.`, v },
+    { phrase: `Il y a ${v} élèves dans la classe.`, v },
+  ]);
+}
+function genProblemeDessin(niveau: 3 | 4) {
+  const s = randomChoice(SITS_D);
+  const k = randomChoice(s.k);
+  const a = randomInt(2, 5);
+  let b = randomInt(2, 6);
+  while (b === a) b = randomInt(2, 6);
+  const t = randomInt(1, niveau === 3 ? 3 : 4);
+  const inu = niveau === 4 && Math.random() < 0.6 ? inutileD() : null;
+  const intro = `${s.lieu}, ${s.lien(a, a * k)} et ${s.lien(b, b * k)}.${inu ? " " + inu.phrase : ""}`;
+  if (t === 4) {
+    // Sens inverse : avec M, combien de … ?
+    const c = a + b + randomInt(1, 3);
+    const M = c * k;
+    return {
+      text: `${intro} Avec ${M} ${s.b}, combien ${deD(s.as)} ? Aide-toi du tableau.`,
+      ...qcmD(String(c), piegesD(c, [M - a * k, c + 1, M - k, inu ? c + inu.v : c * 2]).map(String)),
+      explanation: exp(DEF_D, `on range les données dans un tableau, puis on cherche la valeur pour 1 : ${a * k} ÷ ${a} = ${k}.`, `${M} ÷ ${k} = ${c}.`, `il y a ${c} ${s.as}.${inu ? " Le nombre " + inu.v + " ne servait à rien." : ""}`),
+      canvas: tableauD([s.labelA, s.labelB], [[a, b, "?"], [a * k, b * k, M]], [{ row: 0, col: 2 }]),
+    };
+  }
+  const c = t === 1 || t === 3 ? a + b : 2 * b === a ? 2 * a : 2 * b;
+  const bon = c * k;
+  const base2 = c === 2 * b ? b : a;
+  const calc = c === a + b ? `${c} = ${a} + ${b} : on ajoute les deux colonnes, ${a * k} + ${b * k} = ${bon}.` : `${c} = 2 × ${base2} : 2 fois plus, ${base2 * k} × 2 = ${bon}.`;
+  const q = s.demande(c);
+  const text =
+    t === 3
+      ? `${intro} Range les données dans le tableau, puis réponds : ${minD(q)}`
+      : randomChoice([`${intro} ${q}`, `Étape 1 : que cherche-t-on ? ${intro} ${q}`]);
+  return {
+    text,
+    ...qcmD(avecU(bon, s), piegesD(bon, [a * k + b * k + k, c + k, b * k + (c - b), bon + k, inu ? bon + inu.v : bon - k, a * b * k]).map((x) => avecU(x, s))),
+    explanation: exp(DEF_D, "on cherche la question, on range les données dans un tableau, on calcule, puis on répond par une phrase.", calc, `il faut ${avecU(bon, s)} pour ${c} ${s.as}.${inu ? " Le nombre " + inu.v + " était inutile : on l’a laissé de côté." : ""}`),
+    canvas: tableauD([s.labelA, s.labelB], [[a, b, c], [a * k, b * k, "?"]], [{ row: 1, col: 2 }]),
+  };
+}
+
+/** Défi : comparer des offres par la valeur pour 1 (vidéo d'Ilyes). */
+type OffreD = { lieu: string; cont: string; conts: string; labelA: string; labelB: string; q: string; mode: "max" | "min"; u: string; k: number[] };
+const OFFRES_D: OffreD[] = [
+  { lieu: "Au parc animalier, Ilyes commande des graines", cont: "sac", conts: "sacs", labelA: "Sacs", labelB: "Masse (kg)", q: "Dans quelle offre les sacs sont-ils les plus lourds ?", mode: "max", u: "kg", k: [6, 7, 8, 9, 10] },
+  { lieu: "Pour les singes du parc", cont: "caisse", conts: "caisses", labelA: "Caisses", labelB: "Bananes", q: "Où les caisses ont-elles le plus de bananes ?", mode: "max", u: "bananes", k: [8, 9, 10, 12] },
+  { lieu: "Pour les chèvres de la ferme", cont: "seau", conts: "seaux", labelA: "Seaux", labelB: "Eau (L)", q: "Où les seaux contiennent-ils le plus d’eau ?", mode: "max", u: "L", k: [5, 6, 8, 10] },
+  { lieu: "Au marché", cont: "barquette", conts: "barquettes", labelA: "Barquettes", labelB: "Fraises", q: "Où les barquettes ont-elles le plus de fraises ?", mode: "max", u: "fraises", k: [12, 15, 20] },
+  { lieu: "À la boulangerie", cont: "croissant", conts: "croissants", labelA: "Croissants", labelB: "Prix (€)", q: "Où le croissant est-il le moins cher ?", mode: "min", u: "€", k: [1, 2, 3] },
+  { lieu: "À la papeterie", cont: "cahier", conts: "cahiers", labelA: "Cahiers", labelB: "Prix (€)", q: "Où le cahier est-il le moins cher ?", mode: "min", u: "€", k: [2, 3, 4, 5] },
+  { lieu: "Au club de sport", cont: "bouteille", conts: "bouteilles", labelA: "Bouteilles", labelB: "Prix (€)", q: "Où la bouteille d’eau est-elle la moins chère ?", mode: "min", u: "€", k: [1, 2, 3] },
+  { lieu: "Pour le refuge des chats", cont: "sac", conts: "sacs", labelA: "Sacs", labelB: "Croquettes (kg)", q: "Dans quelle offre les sacs de croquettes sont-ils les plus lourds ?", mode: "max", u: "kg", k: [2, 3, 4, 5] },
+];
+function genOffresDessin(niveau: 4 | 5) {
+  const o = randomChoice(OFFRES_D);
+  const nb = niveau === 5 && Math.random() < 0.6 ? 3 : 2;
+  const lettres = ["A", "B", "C"].slice(0, nb);
+  let unit: number[];
+  const egal = nb === 2 && Math.random() < 0.25;
+  if (egal) {
+    const v = randomChoice(o.k);
+    unit = [v, v];
+  } else {
+    do unit = lettres.map(() => randomChoice(o.k));
+    while (new Set(unit).size < nb);
+  }
+  let ns: number[];
+  do ns = lettres.map(() => randomInt(2, 6));
+  while (new Set(ns).size < nb);
+  const tot = ns.map((n, i) => n * unit[i]);
+  const best = o.mode === "max" ? Math.max(...unit) : Math.min(...unit);
+  const iBest = unit.indexOf(best);
+  const bon = egal ? "elles se valent" : `l’offre ${lettres[iBest]}`;
+  const offresTxt = lettres.map((l, i) => `offre ${l} : ${ns[i]} ${o.conts}, ${tot[i]} ${o.u}`).join(" ; ");
+  const text = randomChoice([
+    `${o.lieu}. ${capD(offresTxt)}. ${o.q}`,
+    `${o.lieu} : voici les offres dans le tableau. ${o.q}`,
+    `Le grand défi ! ${o.lieu}. ${capD(offresTxt)}. ${o.q}`,
+    `${o.lieu}. Attention : ne compare pas seulement les totaux ! ${o.q}`,
+  ]);
+  const choices = [...lettres.map((l) => `l’offre ${l}`), "elles se valent"];
+  return {
+    text,
+    format: "qcm" as const,
+    choices,
+    expected: [bon],
+    comparator: "mcq_exact" as const,
+    explanation: exp(
+      "pour comparer des offres, on calcule la valeur pour 1, puis on compare.",
+      `on divise le total par le nombre de ${o.conts}.`,
+      lettres.map((l, i) => `${l} : ${tot[i]} ÷ ${ns[i]} = ${unit[i]}`).join(" ; ") + ".",
+      egal ? `${unit[0]} ${o.u} pour 1 ${o.cont} des deux côtés : elles se valent.` : `${bon} gagne : ${best} ${o.u} pour 1 ${o.cont}.`,
+    ),
+    canvas: tableauD([o.labelA, o.labelB], [ns, tot], [], lettres.map((l) => `Offre ${l}`)),
+  };
+}
+
+function tplD(microId: string, difficulty: number, rang: number, generate: () => any, hint: string): TutorBankItemV4 {
+  return {
+    kind: "template",
+    id: `cm1_prop_${microId.replace(/^prop_/, "")}_dessin_${difficulty}_${rang}`,
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "proportionnalite",
+    microId,
+    difficulty,
+    theme: "neutral",
+    hint,
+    tags: ["cm1", "proportionnalite", microId, "template", "canvas", "qcm"],
+    generate,
+  } as TutorBankItemV4;
+}
+
+const H_D_FOIS = "3 fois plus, ce n’est pas 3 de plus : on multiplie (ou on divise) les deux nombres par le même nombre.";
+const H_D_REC = "Regarde chaque colonne : multiplie-t-on toujours par le même nombre ?";
+const H_D_AGE = "On ajoute ou on multiplie ? L’aîné a toujours le même nombre d’années de plus.";
+const H_D_TAB = "On multiplie la ligne du haut par le même nombre.";
+const H_D_COEF = "Le coefficient, c’est la quantité pour 1. Ce n’est pas l’écart.";
+const H_D_PB = "Range les données dans le tableau. Une colonne peut être la somme de deux autres.";
+const H_D_DEFI = "Calcule la valeur pour 1 dans chaque offre, puis compare.";
+
+const r123 = [1, 2, 3];
+const avecDessins: TutorBankItemV4[] = [
+  ...r123.map((r) => tplD("prop_fois_plus", 2, r, () => genFoisDessin(1, 2), H_D_FOIS)),
+  ...r123.map((r) => tplD("prop_fois_plus", 3, r, () => genFoisDessin(1, 3), H_D_FOIS)),
+  ...r123.map((r) => tplD("prop_fois_moins", 2, r, () => genFoisDessin(-1, 2), H_D_FOIS)),
+  ...r123.map((r) => tplD("prop_fois_moins", 3, r, () => genFoisDessin(-1, 3), H_D_FOIS)),
+  ...r123.map((r) => tplD("prop_reconnaitre", 1, r, () => genReconnaitreDessin(1), H_D_REC)),
+  ...[1, 2].map((r) => tplD("prop_reconnaitre", 2, r, () => genReconnaitreDessin(2), H_D_REC)),
+  tplD("prop_reconnaitre", 2, 3, () => genAgesDessin(2), H_D_AGE),
+  ...[1, 2].map((r) => tplD("prop_reconnaitre", 3, r, () => genReconnaitreDessin(3), H_D_REC)),
+  tplD("prop_reconnaitre", 3, 3, () => genAgesDessin(3), H_D_AGE),
+  ...r123.map((r) => tplD("prop_tableau", 1, r, () => genTableauDessin(1), H_D_TAB)),
+  ...r123.map((r) => tplD("prop_tableau", 2, r, () => genTableauDessin(2), H_D_TAB)),
+  ...r123.map((r) => tplD("prop_tableau", 3, r, () => genTableauDessin(3), H_D_TAB)),
+  ...r123.map((r) => tplD("prop_coefficient", 2, r, () => genCoeffDessin(2), H_D_COEF)),
+  ...r123.map((r) => tplD("prop_coefficient", 3, r, () => genCoeffDessin(3), H_D_COEF)),
+  ...r123.map((r) => tplD("prop_coefficient", 4, r, () => genCoeffDessin(4), H_D_COEF)),
+  ...r123.map((r) => tplD("prop_probleme", 3, r, () => genProblemeDessin(3), H_D_PB)),
+  ...r123.map((r) => tplD("prop_probleme", 4, r, () => genProblemeDessin(4), H_D_PB)),
+  ...r123.map((r) => tplD("prop_defi", 4, r, () => (r === 3 ? genProblemeDessin(4) : genOffresDessin(4)), H_D_DEFI)),
+  ...r123.map((r) => tplD("prop_defi", 5, r, () => genOffresDessin(5), H_D_DEFI)),
+];
+
 // 28/10 : les anciens gabarits (1 ou 2 phrases chacun, des questions « open »)
 // sont remplacés par le renfort (QCM ou réponse courte) ; on garde les items
 // figés, sauf les « open ».
 export const proportionnaliteBank: TutorBankItemV4[] = [
   ...anciens.filter((item) => item.kind === "fixed" && (item as any).format !== "open"),
   ...renfortPropCM("cm1"),
+  ...avecDessins,
 ];

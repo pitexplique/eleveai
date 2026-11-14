@@ -751,17 +751,60 @@ function actionPasHasard(): Action {
   return { txt: "regarde la date sur le calendrier", pourquoi: "La date se lit : il n’y a pas de hasard." };
 }
 
+// ⭐ 14/11/2026 — 2 % de dessins sur cette micro : les actions ci-dessous
+// portent le MATÉRIEL de l'expérience (dé, sac de billes, roue), dessiné.
+// Le même matériel sert au hasard ET au « pas hasard » : ce qui change, c'est
+// le geste (lancer / poser le dé, tirer sans regarder / regarder et choisir,
+// faire tourner / arrêter la roue avec la main). Le dessin ne donne donc
+// jamais la réponse.
+type ActionD = Action & { canvas?: CanvasProbabilitesData };
+const OBJETS_RONDS = OBJETS.filter((o) => /^(bille|boule|jeton|bonbon|perle|balle|pion)$/.test(o.s));
+function urneDessin(): Urne {
+  return urne(randomInt(2, 3), { min: 1, max: 4, o: randomChoice(OBJETS_RONDS) });
+}
+function actionHasardDessin(): ActionD {
+  const f = randomInt(0, 4);
+  if (f === 0) return { txt: `lance ${randomChoice(DES)}`, pourquoi: "On ne sait pas quelle face va sortir.", canvas: deCanvas() };
+  if (f === 1 || f === 2) {
+    const u = urneDessin();
+    const geste = randomChoice([`tire ${unO(u.o)} dans ${u.cont.un} sans regarder`, `prend ${unO(u.o)} au hasard dans ${u.cont.un}`, `pioche ${unO(u.o)} dans ${u.cont.un}, les yeux fermés`]);
+    return { txt: `${geste}. Voici ce qu’il y a dedans`, pourquoi: `On ne sait pas de quelle couleur sera ${leTire(u.o)}.`, canvas: canvasUrne(u) };
+  }
+  const r = roue(randomInt(2, 4));
+  return { txt: `fait tourner ${r.nom}, dessinée ici`, pourquoi: "On ne sait pas où la roue va s’arrêter.", canvas: canvasRoue(r) };
+}
+function actionPasHasardDessin(): ActionD {
+  const f = randomInt(0, 4);
+  if (f === 0) {
+    const k = randomChoice(FACES);
+    return { txt: `pose le dé sur la face ${k}, sans le lancer`, pourquoi: `On choisit la face : on sait que ce sera ${k}.`, canvas: deCanvas([k]) };
+  }
+  if (f === 1 || f === 2) {
+    const u = urneDessin();
+    const c = randomChoice(u.couls);
+    return {
+      txt: `ouvre ${u.cont.le}, regarde bien et choisit ${unO(u.o, c)}. Voici ce qu’il y a dedans`,
+      pourquoi: `On regarde et on choisit : on sait déjà que ce sera ${unO(u.o, c)}.`,
+      canvas: canvasUrne(u),
+    };
+  }
+  const r = roue(randomInt(2, 4));
+  const c = randomChoice(r.couls);
+  return { txt: `arrête ${r.nom} avec la main sur une part ${c.fs}`, pourquoi: `On arrête la roue où on veut : on sait que ce sera ${c.fs}.`, canvas: canvasRoue(r) };
+}
+
 const DEF_HASARD = "Une situation de hasard : on ne connaît pas le résultat à l’avance.";
 
 function genHasard(niv: Niv): Q {
   const t = randomInt(0, niv === 1 ? 3 : 6);
   const P = prenom();
+  const dessin = Math.random() < 0.8;
   if (t <= 3) {
     const h = Math.random() < 0.5;
-    const a = h ? actionHasard() : actionPasHasard();
+    const a: ActionD = dessin ? (h ? actionHasardDessin() : actionPasHasardDessin()) : h ? actionHasard() : actionPasHasard();
     const sit = `${P} ${a.txt}.`;
     const concl = h ? "C’est une situation de hasard." : "Ce n’est pas une situation de hasard.";
-    const base = { format: "qcm" as const, comparator: "mcq_exact" as const, explanation: exp(DEF_HASARD, "On se demande si on connaît le résultat à l’avance.", a.pourquoi, concl) };
+    const base = { format: "qcm" as const, comparator: "mcq_exact" as const, explanation: exp(DEF_HASARD, "On se demande si on connaît le résultat à l’avance.", a.pourquoi, concl), canvas: a.canvas };
     if (t === 0) return { ...base, text: `${sit} Est-ce une situation de hasard ?`, choices: ["oui", "non"], expected: [h ? "oui" : "non"] };
     if (t === 1) return { ...base, text: `${sit} Peut-on connaître le résultat à l’avance ?`, choices: ["oui", "non"], expected: [h ? "non" : "oui"] };
     if (t === 2) return { ...base, text: `${sit} Le résultat dépend-il du hasard ?`, choices: ["oui", "non"], expected: [h ? "oui" : "non"] };
@@ -793,7 +836,7 @@ function genHasard(niv: Niv): Q {
     };
   }
   // Pourquoi est-ce une situation de hasard ?
-  const a = actionHasard();
+  const a: ActionD = dessin ? actionHasardDessin() : actionHasard();
   const correct = "on ne sait pas à l’avance quel sera le résultat";
   return {
     text: `${P} ${a.txt}. Pourquoi est-ce une situation de hasard ?`,
@@ -807,6 +850,7 @@ function genHasard(niv: Niv): Q {
     expected: [correct],
     comparator: "mcq_exact",
     explanation: exp(DEF_HASARD, "On cherche si plusieurs résultats peuvent arriver.", a.pourquoi, `C’est du hasard : ${correct}.`),
+    canvas: a.canvas,
   };
 }
 
@@ -1373,7 +1417,8 @@ function defiRendre(): Q {
 }
 
 function genDefi(niv: Niv): Q {
-  if (niv <= 3) return randomChoice([defiQuelEvenement, defiQuelContenant, () => cmpTombola(), () => cmpTombola(false)])();
+  // 14/11 : l'événement (dé ou sac dessiné) pèse double, pour que la moitié des défis aient un dessin.
+  if (niv <= 3) return randomChoice([defiQuelEvenement, defiQuelEvenement, defiQuelContenant, () => cmpTombola(Math.random() < 0.5)])();
   return randomChoice([defiAjouterEnlever, defiRendre, rdsChances, cmpDeuxSacs])();
 }
 
