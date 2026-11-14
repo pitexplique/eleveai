@@ -41,7 +41,66 @@ export const REACTIONS = {
   tiMargo: true,
   /** Mauvaise réponse : le dessin penche la tête ou tremble doucement. */
   faux: true,
+  /** Un petit son à CHAQUE réponse, avec ou sans dessin : « ok » (deux notes
+   *  qui montent) ou « oups » (une note douce qui descend). Ajout du 14/11,
+   *  Frédéric : « tu pourrais rajouter un son : ok ou oups ». */
+  son: true,
 } as const;
+
+/** Le volume des sons (0 à 1). Bas exprès : la classe entière l'entend. */
+export const VOLUME_SON = 0.18;
+
+let contexteAudio: AudioContext | null = null;
+
+/** Joue « ok » ou « oups », synthétisés par le navigateur (aucun fichier).
+ *  Silencieux si `REACTIONS.son` est à false ou si le navigateur refuse. */
+export function jouerSon(type: TypeReaction): void {
+  if (!REACTIONS.son || typeof window === "undefined") return;
+  try {
+    const Ctx =
+      window.AudioContext ??
+      (window as unknown as { webkitAudioContext?: typeof AudioContext })
+        .webkitAudioContext;
+    if (!Ctx) return;
+    contexteAudio ??= new Ctx();
+    const ctx = contexteAudio;
+    if (ctx.state === "suspended") void ctx.resume();
+    const t0 = ctx.currentTime + 0.01;
+
+    const note = (
+      debut: number,
+      duree: number,
+      freq: number,
+      freqFin: number,
+      forme: OscillatorType
+    ) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = forme;
+      osc.frequency.setValueAtTime(freq, debut);
+      if (freqFin !== freq) {
+        osc.frequency.exponentialRampToValueAtTime(freqFin, debut + duree);
+      }
+      gain.gain.setValueAtTime(0.0001, debut);
+      gain.gain.exponentialRampToValueAtTime(VOLUME_SON, debut + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, debut + duree);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(debut);
+      osc.stop(debut + duree + 0.02);
+    };
+
+    if (type === "juste") {
+      // « ok » : deux notes claires qui montent (mi → la).
+      note(t0, 0.14, 659, 659, "sine");
+      note(t0 + 0.11, 0.24, 880, 880, "sine");
+    } else {
+      // « oups » : une note douce qui glisse vers le bas, sans dureté.
+      note(t0, 0.32, 392, 262, "triangle");
+    }
+  } catch {
+    /* Pas de son : ce n'est jamais bloquant. */
+  }
+}
 
 const ANIMAUX = new Set(["animaux", "personnage"]);
 const OBJETS = new Set([

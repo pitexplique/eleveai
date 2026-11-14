@@ -101,6 +101,7 @@ import {
 import TutorSimpleView from "./TutorSimpleView";
 import ReactionDessin, {
   DUREE_REACTION_MS,
+  jouerSon,
   mouvementReduit,
   reactionPrevue,
   type TypeReaction,
@@ -1707,6 +1708,7 @@ function continueAfterExplanation() {
          de la question réagit ~0,7 s. Sans dessin, ou si l'élève a demandé
          moins d'animations, rien ne change et rien n'attend. */
       const typeReaction: TypeReaction = typed.result.ok ? "juste" : "faux";
+      jouerSon(typeReaction);
       if (
         reactionPrevue(currentQuestion.canvas, classe, typeReaction) &&
         !mouvementReduit()
