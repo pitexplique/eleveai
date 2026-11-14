@@ -68,11 +68,11 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Résoudre un défi sur les solides — `solide_defi` — ✅ 14/11 paysage (Ilan, bleue, 3 min 29) + short Ti Margo ; manifeste 30/01/2027, R2, coach
 
 **Longueurs et conversions** (5)
-- [ ] Comparer des longueurs — `longueur_comparer`
-- [ ] Convertir des longueurs simples — `longueur_convertir`
-- [ ] Estimer une longueur — `longueur_estimer`
-- [ ] Mesurer une longueur — `longueur_mesurer`
-- [ ] Résoudre un défi de longueurs — `longueur_defi`
+- [x] Comparer des longueurs — `longueur_comparer` — ✅ 14/11 paysage (Jade, jaune, 3 min 37) + short « Qui a sauté le plus loin ? » ; manifeste 16/02/2027, R2, coach
+- [x] Convertir des longueurs simples — `longueur_convertir` — ✅ 14/11 paysage (Bilal, verte, 3 min 27) + short « Combien de centimètres ? » ; manifeste 18/02/2027, R2, coach
+- [x] Estimer une longueur — `longueur_estimer` — ✅ 14/11 paysage (Sarah, jaune, 3 min 16) + short « Ma vraie taille ? » ; manifeste 20/02/2027, R2, coach
+- [x] Mesurer une longueur — `longueur_mesurer` — ✅ 14/11 paysage (Adam, jaune, 3 min 21) + short « La règle cassée » ; manifeste 22/02/2027, R2, coach
+- [x] Résoudre un défi de longueurs — `longueur_defi` — ✅ 14/11 paysage (Zoé, bleue, 3 min 21) + short « Il reste combien ? » ; manifeste 24/02/2027, R2, coach
 
 ## CM2
 

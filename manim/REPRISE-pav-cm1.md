@@ -218,3 +218,11 @@ Outils (dossier de notes de la session 14 : `side-session-notes/local_1c77ab8e-a
 2. Miniatures paysage 02-05.
 3. Par épisode (dès que le HD + la miniature sont là) : `python <notes>/entrees_longueur.py <ep>` (vérifier ensuite le diff du manifeste : seules nos 2 entrées), `python scripts/fiches-youtube.py cm1-longueur-<ep>`, R2 du seul dossier `cm1/maths/longueur/0N-<ep>` (`r2-videos.ps1 -Rclone "copy … R2:cm1/maths/longueur/0N-<ep> --include *.{mp4,png,webp}"`), `node scripts/generer-videos-r2.mjs` (ne garder que nos clés dans `lib/videos/videos-r2.json` / `bilans-videos.json`), coach `node scripts/brancher-videos-coach.mjs --id cm1-longueur-<ep>,cm1-longueur-<ep>-short --ecrire`.
 4. Plan `manim/PLAN-perimetre-aire-volume.md` coché (Longueurs CM1), mémoire `serie-longueur-cm1.md`, commit PAR CHEMIN, jamais de push.
+
+## Session 15 (14/11) — ✅ LONGUEURS CM1 FINIE : 5 paysages + 5 shorts, manifeste, R2, coach
+- Ép. 03 estimer : dry run + planche -ql relus ; corrigé l'énoncé de la question 2 (« Sarah montre une fourmi / sur une feuille. / Combien mesure-t-elle ? » : trois lignes sans jambage collées → `_q_pas = 0.56`, hauts des lignes à pas fixe, dans `longueur_estimer.py`) ; dry run propre après ; ✅ HD 3 min 16, bords 0.
+- ✅ HD 02 (3 min 27), 05 (2ᵉ rendu, 3 min 21 ; écran du piège ≈ 01:40 relu : les ciseaux, puis 260 cm + 40 cm, propre) ; les 5 HD : `verifier-bords-video.py` = 0.
+- ✅ Miniatures paysage 02-05 ; vignettes webp (`scripts/vignettes-videos.py`) ; R2 `cm1/maths/longueur/` : 5 × (paysage, png, short, miniature short) + 15 webp.
+- ⚠️ DATES CHANGÉES : les 15, 17, 19, 21/01 avaient été prises entre-temps par Contenance CE2 (1 paysage + 2 shorts chacun). Longueurs CM1 = 16, 18, 20, 22, 24/02/2027 (01 → 05 ; ces jours n'avaient qu'un short), loin des Longueurs CE2 (après le 24/01).
+- Manifeste : 10 entrées `cm1-longueur-*` ; fiches YouTube ; `videos-r2.json` + `bilans-videos.json` : seules nos 10 clés committées (les autres modifs du générateur et les `url` d'une autre session laissées non commitées) ; coach : `brancher-videos-coach.mjs --id …` × 10 branchées.
+- Plan coché. Pas de push.

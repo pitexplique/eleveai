@@ -84741,6 +84741,778 @@
       "centres": [
         "construction"
       ]
+    },
+    {
+      "id": "cm1-longueur-comparer",
+      "pas_avant": "2027-02-16",
+      "notionId": "longueur",
+      "microId": "longueur_comparer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/longueur/01-comparer/eleveai-maths-cm1-longueur-comparer.mp4",
+      "miniature": "cm1/maths/longueur/01-comparer/eleveai-maths-cm1-longueur-comparer.png",
+      "titre": "1 m ou 85 cm : lequel est le plus long ? — Comparer des longueurs — épisode 1 · Maths CM1",
+      "accroche": "Jade est couturière. Pour finir une robe, il lui faut le plus long de ses deux rubans : un de 1 mètre, et un de 85 centimètres. Lequel choisir ?\n\nDans cette vidéo :\n• même unité : on compare les nombres (85 cm > 60 cm)\n• deux unités : on convertit d'abord (1 m = 100 cm)\n• à retenir : 1 cm = 10 mm, 1 km = 1000 m\n• le piège : 85 est plus grand que 1, mais 85 cm, ce n'est pas plus long que 1 m\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : ranger une ficelle, un galon, un ruban et une dentelle, du plus court au plus long.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_comparer&display=simple\n\n📏 Épisode 1 de la série Longueurs d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comparer des longueurs"
+        ],
+        [
+          "00:07",
+          "Jade, couturière"
+        ],
+        [
+          "00:21",
+          "Même unité : on compare les nombres"
+        ],
+        [
+          "00:37",
+          "Deux unités : d'abord la même unité"
+        ],
+        [
+          "00:55",
+          "1 cm = 10 mm, 1 km = 1000 m"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:34",
+          "Le piège : 85 cm, ce n'est pas plus que 1 m"
+        ],
+        [
+          "01:48",
+          "Question 2"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:50",
+          "Correction"
+        ],
+        [
+          "03:12",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "comparer des longueurs",
+        "mètre",
+        "centimètre",
+        "millimètre",
+        "kilomètre",
+        "m cm mm km",
+        "conversion",
+        "couture",
+        "ruban",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Qu'est-ce qui est le plus long : un ruban de 2 m, ou une bande de 180 cm ?",
+          "choix": [
+            "la bande",
+            "le ruban",
+            "c'est pareil"
+          ],
+          "reponse": 1,
+          "explication": "2 m = 200 cm. 200 est plus grand que 180 : le ruban est le plus long."
+        },
+        {
+          "t": "01:48",
+          "question": "Trois fils : 1 m, 95 cm et 1 m 10 cm. Lequel est le plus court ?",
+          "choix": [
+            "1 m",
+            "1 m 10 cm",
+            "95 cm"
+          ],
+          "reponse": 2,
+          "explication": "1 m = 100 cm et 1 m 10 cm = 110 cm. 95 est le plus petit : le fil de 95 cm est le plus court."
+        }
+      ],
+      "centres": [
+        "mode",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-longueur-comparer-short",
+      "pas_avant": "2027-02-16",
+      "notionId": "longueur",
+      "microId": "longueur_comparer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-longueur-comparer",
+      "fichier": "cm1/maths/longueur/01-comparer/eleveai-maths-cm1-longueur-comparer-short.mp4",
+      "miniature": "cm1/maths/longueur/01-comparer/eleveai-maths-cm1-longueur-comparer-short-miniature.png",
+      "titre": "150 contre 2 : qui a sauté le plus loin ? #maths #cm1",
+      "accroche": "Concours de saut en longueur : Ti Margo a sauté 150, Noé seulement 2. « 150, c'est bien plus que 2 : j'ai gagné ! » Vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une corde de 3 mètres, et une ficelle de 250 centimètres. Laquelle est la plus longue ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm1",
+      "tags": [
+        "longueur",
+        "comparer",
+        "mètre",
+        "centimètre",
+        "saut en longueur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "150 cm contre 2 m : qui a sauté le plus loin ?",
+          "choix": [
+            "Noé (2 m)",
+            "moi, Ti Margo (150 cm)",
+            "c'est pareil"
+          ],
+          "reponse": 0,
+          "explication": "2 m = 200 cm. 200 contre 150 : Noé a sauté 50 cm de plus."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-longueur-mesurer",
+      "pas_avant": "2027-02-22",
+      "notionId": "longueur",
+      "microId": "longueur_mesurer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/longueur/04-mesurer/eleveai-maths-cm1-longueur-mesurer.mp4",
+      "miniature": "cm1/maths/longueur/04-mesurer/eleveai-maths-cm1-longueur-mesurer.png",
+      "titre": "Comment lire une règle sans se tromper ? — Mesurer une longueur — épisode 4 · Maths CM1",
+      "accroche": "Adam dessine des bandes dessinées. Chaque case de sa planche doit avoir la bonne taille. Il prend sa règle graduée pour mesurer. Comment la lire sans se tromper ?\n\nDans cette vidéo :\n• la règle : les centimètres (grands traits) et les millimètres (petits traits)\n• on pose le début sur le 0, pas au bout de la règle\n• si le début n'est pas sur le 0 : la fin moins le début (10 − 3 = 7 cm)\n• lire les millimètres : 5 cm 3 mm = 53 mm\n• le piège : poser le crayon sur le 1\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un trait de 2 cm à 8 cm 6 mm, en millimètres.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_mesurer&display=simple\n\n📏 Épisode 4 de la série Longueurs d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Mesurer une longueur"
+        ],
+        [
+          "00:05",
+          "Adam, dessinateur de BD"
+        ],
+        [
+          "00:18",
+          "Les cm et les mm de la règle"
+        ],
+        [
+          "00:29",
+          "On part du 0"
+        ],
+        [
+          "00:41",
+          "Sinon : la fin moins le début"
+        ],
+        [
+          "00:53",
+          "Question 1"
+        ],
+        [
+          "01:24",
+          "Le piège : partir du 1"
+        ],
+        [
+          "01:39",
+          "Lire les millimètres"
+        ],
+        [
+          "01:53",
+          "Question 2"
+        ],
+        [
+          "02:25",
+          "À toi de jouer"
+        ],
+        [
+          "02:41",
+          "Correction"
+        ],
+        [
+          "02:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "mesurer une longueur",
+        "règle graduée",
+        "centimètre",
+        "millimètre",
+        "lire une règle",
+        "bande dessinée",
+        "dessin",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "Une gomme est posée de 2 à 6 sur la règle. Combien mesure-t-elle ?",
+          "choix": [
+            "6 cm",
+            "4 cm",
+            "8 cm"
+          ],
+          "reponse": 1,
+          "explication": "La fin moins le début : 6 − 2 = 4. La gomme mesure 4 cm."
+        },
+        {
+          "t": "01:53",
+          "question": "Un trait mesure 4 cm 5 mm. Combien de millimètres ?",
+          "choix": [
+            "45 mm",
+            "9 mm",
+            "405 mm"
+          ],
+          "reponse": 0,
+          "explication": "4 cm = 40 mm. Plus 5 : 45 mm."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "dessin-manga"
+      ]
+    },
+    {
+      "id": "cm1-longueur-mesurer-short",
+      "pas_avant": "2027-02-22",
+      "notionId": "longueur",
+      "microId": "longueur_mesurer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-longueur-mesurer",
+      "fichier": "cm1/maths/longueur/04-mesurer/eleveai-maths-cm1-longueur-mesurer-short.mp4",
+      "miniature": "cm1/maths/longueur/04-mesurer/eleveai-maths-cm1-longueur-mesurer-short-miniature.png",
+      "titre": "Ma règle est cassée : mon crayon mesure 10 cm ? #maths #cm1",
+      "accroche": "La règle de Ti Margo est cassée : elle commence au 4 ! Son crayon va du 4 au 10. « Il mesure 10 centimètres ! » Mais attends… le crayon ne commence pas au 0.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une gomme va du 3 au 8 sur la règle. Combien mesure-t-elle ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_mesurer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm1",
+      "tags": [
+        "longueur",
+        "mesurer",
+        "règle",
+        "centimètre",
+        "règle cassée",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "La règle commence au 4, le crayon va du 4 au 10 : combien mesure-t-il ?",
+          "choix": [
+            "10 cm",
+            "14 cm",
+            "6 cm"
+          ],
+          "reponse": 2,
+          "explication": "La fin moins le début : 10 − 4 = 6. Le crayon mesure 6 cm."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-longueur-defi",
+      "pas_avant": "2027-02-24",
+      "notionId": "longueur",
+      "microId": "longueur_defi",
+      "classe": "cm1",
+      "ceinture": "bleue",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/longueur/05-defi/eleveai-maths-cm1-longueur-defi.mp4",
+      "miniature": "cm1/maths/longueur/05-defi/eleveai-maths-cm1-longueur-defi.png",
+      "titre": "Combien de mètres reste-t-il à pédaler ? — Un défi de longueurs — épisode 5 · Maths CM1",
+      "accroche": "Zoé est factrice : elle distribue le courrier à vélo. Sa tournée fait 3 kilomètres. Elle a déjà roulé 1 kilomètre 200 mètres. Combien de mètres lui reste-t-il ?\n\nDans cette vidéo :\n• d'abord la même unité : 3 km = 3000 m, 1 km 200 m = 1200 m\n• le schéma en barre : la tournée, ce qui est fait, ce qui reste (3000 − 1200 = 1800 m)\n• des tours (× 4) et des morceaux (200 cm ÷ 50 cm)\n• le piège : on ne calcule jamais avec deux unités différentes (3 m − 40 cm = 260 cm)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 3 m de ruban pour 6 colis de 45 cm, est-ce assez ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_defi&display=simple\n\n📏 Épisode 5 de la série Longueurs d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un défi de longueurs"
+        ],
+        [
+          "00:05",
+          "Zoé, factrice à vélo"
+        ],
+        [
+          "00:21",
+          "D'abord la même unité"
+        ],
+        [
+          "00:33",
+          "Le schéma en barre : 3000 − 1200"
+        ],
+        [
+          "00:50",
+          "Question 1"
+        ],
+        [
+          "01:25",
+          "Le piège : deux unités différentes"
+        ],
+        [
+          "01:45",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "À toi de jouer"
+        ],
+        [
+          "02:36",
+          "Correction"
+        ],
+        [
+          "02:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "problème de longueurs",
+        "conversion",
+        "kilomètre",
+        "mètre",
+        "centimètre",
+        "schéma en barre",
+        "factrice",
+        "vélo",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "4 tours du stade, un tour fait 250 m. Combien de mètres en tout ?",
+          "choix": [
+            "254 m",
+            "2500 m",
+            "1000 m"
+          ],
+          "reponse": 2,
+          "explication": "250 × 4 = 1000 m. C'est 1 km !"
+        },
+        {
+          "t": "01:45",
+          "question": "Une ficelle de 2 m, des morceaux de 50 cm. Combien de morceaux ?",
+          "choix": [
+            "25 morceaux",
+            "4 morceaux",
+            "100 morceaux"
+          ],
+          "reponse": 1,
+          "explication": "2 m = 200 cm. 200 ÷ 50 = 4 morceaux."
+        }
+      ],
+      "centres": [
+        "transports",
+        "velo"
+      ]
+    },
+    {
+      "id": "cm1-longueur-defi-short",
+      "pas_avant": "2027-02-24",
+      "notionId": "longueur",
+      "microId": "longueur_defi",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-longueur-defi",
+      "fichier": "cm1/maths/longueur/05-defi/eleveai-maths-cm1-longueur-defi-short.mp4",
+      "miniature": "cm1/maths/longueur/05-defi/eleveai-maths-cm1-longueur-defi-short-miniature.png",
+      "titre": "1 km moins 600 m… impossible ? #maths #cm1",
+      "accroche": "Ti Margo va à la plage, à 1 kilomètre. Il a déjà marché 600 mètres. « 1 moins 600… impossible ! Je suis perdu ? » Attends : 1 kilomètre, c'est 1000 mètres !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une piste de 500 mètres, 3 tours. Combien de mètres en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm1",
+      "tags": [
+        "longueur",
+        "problème",
+        "kilomètre",
+        "mètre",
+        "plage",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "La plage est à 1 km, j'ai marché 600 m : combien de mètres me reste-t-il ?",
+          "choix": [
+            "400 m",
+            "599 m",
+            "1600 m"
+          ],
+          "reponse": 0,
+          "explication": "1 km = 1000 m. 1000 − 600 = 400 m."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-longueur-convertir",
+      "pas_avant": "2027-02-18",
+      "notionId": "longueur",
+      "microId": "longueur_convertir",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/longueur/02-convertir/eleveai-maths-cm1-longueur-convertir.mp4",
+      "miniature": "cm1/maths/longueur/02-convertir/eleveai-maths-cm1-longueur-convertir.png",
+      "titre": "5 m, c'est combien de cm ? — Convertir des longueurs — épisode 2 · Maths CM1",
+      "accroche": "Bilal est électricien. Pour brancher une lampe, il doit couper 5 mètres de câble. Mais son plan est écrit en centimètres. Combien de centimètres doit-il couper ?\n\nDans cette vidéo :\n• le tableau de conversion : km, hm, dam, m, dm, cm, mm (10 fois plus petit à chaque colonne)\n• placer le nombre et ajouter les zéros : 5 m = 500 cm\n• les égalités : 1 m = 100 cm, 1 cm = 10 mm, 1 km = 1000 m\n• le piège : 2 m 5 cm, ce n'est pas 25 cm, c'est 205 cm\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 1 m 25 cm et 4 m 8 cm, en centimètres.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_convertir&display=simple\n\n📏 Épisode 2 de la série Longueurs d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Convertir des longueurs"
+        ],
+        [
+          "00:06",
+          "Bilal, électricien"
+        ],
+        [
+          "00:21",
+          "Le tableau de conversion"
+        ],
+        [
+          "00:36",
+          "5 m = 500 cm"
+        ],
+        [
+          "00:53",
+          "Les égalités à connaître"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:37",
+          "Le piège : 2 m 5 cm = 205 cm"
+        ],
+        [
+          "01:54",
+          "Question 2"
+        ],
+        [
+          "02:24",
+          "À toi de jouer"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "02:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "convertir des longueurs",
+        "tableau de conversion",
+        "mètre",
+        "centimètre",
+        "millimètre",
+        "kilomètre",
+        "m cm mm km",
+        "électricien",
+        "câble",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "3 m, c'est combien de centimètres ?",
+          "choix": [
+            "300 cm",
+            "30 cm",
+            "3000 cm"
+          ],
+          "reponse": 0,
+          "explication": "1 m = 100 cm. Donc 3 m = 300 cm."
+        },
+        {
+          "t": "01:54",
+          "question": "Une ligne électrique de 2 km : combien de mètres ?",
+          "choix": [
+            "200 m",
+            "2000 m",
+            "20 m"
+          ],
+          "reponse": 1,
+          "explication": "1 km = 1000 m. Donc 2 km = 2000 m."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "construction"
+      ]
+    },
+    {
+      "id": "cm1-longueur-convertir-short",
+      "pas_avant": "2027-02-18",
+      "notionId": "longueur",
+      "microId": "longueur_convertir",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-longueur-convertir",
+      "fichier": "cm1/maths/longueur/02-convertir/eleveai-maths-cm1-longueur-convertir-short.mp4",
+      "miniature": "cm1/maths/longueur/02-convertir/eleveai-maths-cm1-longueur-convertir-short-miniature.png",
+      "titre": "2 mètres de ficelle… j'ai demandé 2 cm ! #maths #cm1",
+      "accroche": "Pour son cerf-volant, Ti Margo a besoin de 2 mètres de ficelle. Au magasin, la ficelle se vend au centimètre. « Facile : je demande 2 centimètres ! » Vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : l'école est à 1 kilomètre de chez moi. Combien de mètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_convertir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm1",
+      "tags": [
+        "longueur",
+        "convertir",
+        "mètre",
+        "centimètre",
+        "cerf-volant",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "2 m de ficelle : combien de centimètres fallait-il demander ?",
+          "choix": [
+            "2 cm",
+            "20 cm",
+            "200 cm"
+          ],
+          "reponse": 2,
+          "explication": "1 m = 100 cm. Donc 2 m = 200 cm."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-longueur-estimer",
+      "pas_avant": "2027-02-20",
+      "notionId": "longueur",
+      "microId": "longueur_estimer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/longueur/03-estimer/eleveai-maths-cm1-longueur-estimer.mp4",
+      "miniature": "cm1/maths/longueur/03-estimer/eleveai-maths-cm1-longueur-estimer.png",
+      "titre": "3 m ou 3 km, ce sentier ? — Estimer une longueur — épisode 3 · Maths CM1",
+      "accroche": "Sarah est guide nature. Elle emmène une classe en balade en forêt. Sur le panneau, l'unité est effacée : sentier, 3… Mètres ou kilomètres ? Sans mesurer, il faut estimer.\n\nDans cette vidéo :\n• les repères : 1 mm l'épaisseur d'une carte, 1 cm la largeur du doigt, 1 m un grand pas, 1 km un quart d'heure de marche\n• 3 m ou 3 km : on compare aux repères\n• choisir la bonne unité : cm dans la main, m pour une salle ou un arbre, km pour un trajet\n• le piège : le nombre seul ne suffit pas, c'est l'unité qui compte\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une coccinelle, un arbre, un bâton de marche et la balade, chacun avec sa longueur.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple\n\n📏 Épisode 3 de la série Longueurs d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Estimer une longueur"
+        ],
+        [
+          "00:07",
+          "Sarah, guide nature"
+        ],
+        [
+          "00:24",
+          "Les repères : doigt, pas, marche"
+        ],
+        [
+          "00:41",
+          "3 m ou 3 km ?"
+        ],
+        [
+          "00:53",
+          "Choisir la bonne unité"
+        ],
+        [
+          "01:07",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "Le piège : c'est l'unité qui compte"
+        ],
+        [
+          "01:47",
+          "Question 2"
+        ],
+        [
+          "02:17",
+          "À toi de jouer"
+        ],
+        [
+          "02:36",
+          "Correction"
+        ],
+        [
+          "02:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "estimer une longueur",
+        "ordre de grandeur",
+        "repères",
+        "mètre",
+        "centimètre",
+        "millimètre",
+        "kilomètre",
+        "randonnée",
+        "forêt",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:07",
+          "question": "Quelle est la hauteur d'une porte ?",
+          "choix": [
+            "2 cm",
+            "20 m",
+            "2 m"
+          ],
+          "reponse": 2,
+          "explication": "Une porte est un peu plus haute qu'un adulte : environ 2 m."
+        },
+        {
+          "t": "01:47",
+          "question": "Une fourmi sur une feuille : combien mesure-t-elle ?",
+          "choix": [
+            "5 mm",
+            "5 cm",
+            "5 m"
+          ],
+          "reponse": 0,
+          "explication": "Une fourmi est minuscule, plus petite que la largeur d'un doigt : 5 mm."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "animaux"
+      ]
+    },
+    {
+      "id": "cm1-longueur-estimer-short",
+      "pas_avant": "2027-02-20",
+      "notionId": "longueur",
+      "microId": "longueur_estimer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-longueur-estimer",
+      "fichier": "cm1/maths/longueur/03-estimer/eleveai-maths-cm1-longueur-estimer-short.mp4",
+      "miniature": "cm1/maths/longueur/03-estimer/eleveai-maths-cm1-longueur-estimer-short-miniature.png",
+      "titre": "« Je mesure 15 mètres ! » Vraiment, Ti Margo ? #maths #cm1",
+      "accroche": "La maîtresse demande la taille de chacun. Ti Margo : « Je mesure 15 mètres ! Je suis le plus grand de la classe ! » Hum… 15 mètres, c'est plus haut que l'école.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : ta table de classe mesure 70… 70 millimètres, 70 centimètres ou 70 mètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm1",
+      "tags": [
+        "longueur",
+        "estimer",
+        "ordre de grandeur",
+        "centimètre",
+        "mètre",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien mesure vraiment Ti Margo ?",
+          "choix": [
+            "15 mm",
+            "15 cm",
+            "15 m"
+          ],
+          "reponse": 1,
+          "explication": "Il tient sur une règle de 30 cm : il mesure 15 cm. 15 mm, ce serait une fourmi !"
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
     }
   ]
 }

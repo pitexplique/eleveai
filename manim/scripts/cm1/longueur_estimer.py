@@ -238,6 +238,22 @@ class LongueurEstimerBase(PaysageLongueurCM1):
     nom_voix = "cm1-longueur-estimer"
     fichier_marques = "longueur_estimer_marques.json"
     ceinture = "jaune"
+    _q_pas = None  # (écran 07) l'écart entre les hauts des lignes de la question
+
+    def _disposer_q(self, question, choix, phrase):
+        """(14/11) Trois lignes sans jambage se collaient : on les pose à pas fixe
+        (les trois ont une majuscule ou un f/l : leurs hauts sont à la même hauteur de lettre)."""
+        r = list(super()._disposer_q(question, choix, phrase))
+        if self._q_pas:
+            tete, q, cartes, pause = r[:4]
+            haut, gauche = q.get_top()[1], q.get_left()[0]
+            for i, l in enumerate(q):
+                l.align_to(P(gauche, 0), LEFT).align_to(P(0, haut - i * self._q_pas), UP)
+            d = cartes.get_top()[1] - (q.get_bottom()[1] - 0.2)
+            if d > 0:
+                cartes.shift(DOWN * d)
+                pause.shift(DOWN * d)
+        return tuple(r)
 
     def foret(self, pos, s=1.0):
         """Un sentier qui serpente entre les sapins."""
@@ -498,11 +514,15 @@ class LongueurEstimerBase(PaysageLongueurCM1):
         def apres(sc):
             sc.play(FadeIn(dg, shift=LEFT * 0.2), run_time=0.2)
 
-        self.question_gauche("07-question", "07b-reponse",
-                             ["Sarah montre une fourmi", "sur une feuille.", "Combien mesure-t-elle ?"],
-                             [self.choix("5 mm"), self.choix("5 cm"), self.choix("5 m")], 0,
-                             ["Une fourmi est minuscule,", "plus petite que la largeur", "d'un doigt :", "5 mm."],
-                             -0.75, mot_q="Sarah montre", autres_q=autres_q, autres_r=apres)
+        self._q_pas = 0.56
+        try:
+            self.question_gauche("07-question", "07b-reponse",
+                                 ["Sarah montre une fourmi", "sur une feuille.", "Combien mesure-t-elle ?"],
+                                 [self.choix("5 mm"), self.choix("5 cm"), self.choix("5 m")], 0,
+                                 ["Une fourmi est minuscule,", "plus petite que la largeur", "d'un doigt :", "5 mm."],
+                                 -0.75, mot_q="Sarah montre", autres_q=autres_q, autres_r=apres)
+        finally:
+            self._q_pas = None
 
     # ── 08 : le défi (qui va avec quoi ?) ───────────────────────────────────
     XD4 = (-4.8, -2.0, 0.8, 3.6)
