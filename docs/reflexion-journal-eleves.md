@@ -300,3 +300,36 @@ Exemple de défi QCM : « Sur le plan, la varangue mesure 4 cm. L'échelle est
 1 cm pour 1 m. Quelle est sa vraie longueur ? » A. 40 cm · B. 4 m · C. 400 m.
 
 Photos possibles : la maquette, le plan, une case (sans personne).
+
+### Ce que l'architecte a ajouté (14/11)
+
+**Ses consignes :**
+
+- Il a prêté ses plans pour la classe. **On n'en publie aucun détail** :
+  ni le plan, ni les cotes, ni une photo du plan. Ils servent seulement en
+  classe. Les plans ne vont pas dans ce dépôt.
+- **Le nom de son studio apparaît en bas de l'article**, en remerciement
+  (« Merci au studio … pour son aide »). C'est son seul crédit.
+
+**Son idée : la case change avec l'altitude.** Dans les Bas, il fait chaud
+et le soleil tape : on fait de grandes avancées de toit et une varangue
+profonde pour faire de l'ombre. Dans les Hauts, il fait plus frais et il
+pleut plus : les avancées et les ouvertures ne sont pas les mêmes.
+
+Cela donne une meilleure question de départ :
+**« Pourquoi une case des Bas n'est pas construite comme une case des Hauts ? »**
+
+Maths de 6e qu'on peut y mettre :
+
+- **L'ombre de l'avancée.** Un bâton planté au soleil, on mesure son ombre
+  à différentes heures. Plus l'avancée est longue, plus l'ombre protège la
+  façade. Mesures, tableau, comparer.
+- **La température qui baisse en montant.** Environ 6 °C de moins tous les
+  1 000 m. On compare la côte et un village des Hauts (par exemple vers
+  1 200 m) avec un tableau et une soustraction de décimaux.
+- **L'échelle** sur des dessins simples faits par les élèves (pas sur ses
+  plans).
+
+Nouvel exemple de défi QCM : « Sur la côte, il fait 30 °C. Il fait environ
+6 °C de moins tous les 1 000 m. Quelle température vers 1 000 m ? »
+A. 36 °C · B. 24 °C · C. 6 °C.
