@@ -1,0 +1,7 @@
+{
+  "voix": "cm1-solides-{ep}-short",
+  "sons": "public/sons/cm1-solides-{ep}-short",
+  "sortie": "manim/sorties/cm1/maths/solides/{num}-{ep}",
+  "nom": "eleveai-maths-cm1-solides-{ep}-short",
+  "episodes": { "prisme": "01", "patron": "02", "defi": "03" }
+}
