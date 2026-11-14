@@ -5938,6 +5938,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=aire&microId=aire_unite&display=simple"
  },
+ "cm1-contenance-comparer": {
+  "fichier": "cm1/maths/contenance/01-comparer/eleveai-maths-cm1-contenance-comparer.mp4",
+  "poster": "cm1/maths/contenance/01-comparer/eleveai-maths-cm1-contenance-comparer.png",
+  "vignette": "cm1/maths/contenance/01-comparer/eleveai-maths-cm1-contenance-comparer.vignette.webp",
+  "titre": "1 L ou 75 cL : laquelle contient le plus ? — Comparer des contenances — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_comparer&display=simple"
+ },
+ "cm1-contenance-comparer-short": {
+  "fichier": "cm1/maths/contenance/01-comparer/eleveai-maths-cm1-contenance-comparer-short.mp4",
+  "poster": "cm1/maths/contenance/01-comparer/eleveai-maths-cm1-contenance-comparer-short-miniature.png",
+  "vignette": "cm1/maths/contenance/01-comparer/eleveai-maths-cm1-contenance-comparer-short-miniature.vignette.webp",
+  "titre": "1 L contre 75 cL : qui a le plus de jus ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_comparer&display=simple"
+ },
  "cm1-decimal-droite": {
   "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.mp4",
   "poster": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.png",

@@ -41,6 +41,15 @@ EP = [
      "une croix sur chaque côté !", True, "verte", (0, 0), "perimetre"),
     ("defi", "04-defi", ["RÉSOUDRE UN DÉFI", "DE PÉRIMÈTRE"], "3 tours : 140 × 3 = 420 m",
      "un tour, puis × le nombre de tours !", True, "bleue", (0, 0), "perimetre"),
+    # Série CONTENANCE du CM1 ; python manim/miniature_aire_cm1.py contenance-comparer
+    ("comparer", "01-comparer", ["COMPARER", "DES CONTENANCES"], "1 L = 100 cL > 75 cL",
+     "même unité, puis on compare !", True, "jaune", (0, 0), "contenance"),
+    ("convertir", "02-convertir", ["CONVERTIR", "L, cL ET mL"], "2 L = 200 cL",
+     "1 L = 100 cL, 1 cL = 10 mL", True, "verte", (0, 0), "contenance"),
+    ("estimer", "03-estimer", ["ESTIMER", "UNE CONTENANCE"], "une citerne ≈ 3 000 L",
+     "on compare à des repères !", True, "jaune", (0, 0), "contenance"),
+    ("defi", "04-defi", ["RÉSOUDRE UN DÉFI", "DE CONTENANCE"], "2 L = 200 cL = 8 pots de 25 cL",
+     "on convertit, puis on partage !", True, "bleue", (0, 0), "contenance"),
 ]
 
 

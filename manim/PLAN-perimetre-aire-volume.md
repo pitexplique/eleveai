@@ -54,7 +54,7 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Résoudre un défi d’aire — `aire_defi` — ✅ 13/11 paysage HD (bords 0) + short dessin animé « La clôture de Noé », manifeste 01/01/2027, R2, coach
 
 **Volume et contenance** (4)
-- [ ] Comparer des contenances — `contenance_comparer` — ✅ 14/11 voix validée, WAV + marques
+- [x] Comparer des contenances — `contenance_comparer` — ✅ 14/11 paysage (Inès, jaune, 3 min 31) + short « Qui a le plus de jus ? » ; manifeste 07/01/2027, R2, coach
 - [ ] Convertir des contenances simples — `contenance_convertir` — ✅ 14/11 voix validée, WAV + marques
 - [ ] Estimer une contenance — `contenance_estimer` — ✅ 14/11 voix validée, WAV + marques
 - [ ] Résoudre un défi de contenances — `contenance_defi` — ✅ 14/11 voix validée, WAV + marques

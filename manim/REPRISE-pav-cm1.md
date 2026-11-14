@@ -158,3 +158,10 @@ CONTENANCE CM1 (plan, section CM1), puis les solides : voix à écrire et valide
 
 ## Prochaine étape (session 12)
 Reprendre la liste « Prochaine étape (session 11) » ci-dessus à partir du short de l'ép. 1 (déboguer, contrôler image par image, `film`, `miniature`, supprimer le `_muet.mp4`), puis miniature paysage, manifeste (après le 06/01/2027), fiche, R2, coach ; ensuite ép. 2-4.
+
+## Fait le 14/11 (session 12) — ✅ CONTENANCE ép. 1 COMPARER fini
+- Bords HD = 0. Short « Qui a le plus de jus ? » (`films/cm1-contenance-comparer.js`, 67,7 s) contrôlé : corrigés la coche posée sur « ma sœur », « 75 > 1 » serré, « 1 L = 100 cL » coupé en deux lignes ; film + miniature « Dessin animé », `_muet.mp4` supprimé.
+- Miniature paysage : `python manim/miniature_aire_cm1.py contenance-comparer` (les 4 entrées contenance sont déjà dans `EP`).
+- Manifeste `cm1-contenance-comparer` (jaune, cuisine + argent-budget : « commerce » n'est pas un centre) + `-short` (blanche, 00:21 B) le **07/01/2027** ; fiche YouTube ; R2 du dossier 01-comparer seul ; `generer-videos-r2.mjs` (seules nos clés gardées) ; coach branché (2 vidéos).
+- Outils (scratchpad session 12) : `chap.py` (dry run qui imprime l'instant de chaque clip : `MOD=contenance_<ep> SCENE=<Scene> python -m manim render --dry_run chap.py Chap`), `eps.py` + `pub.py <ep>` (entrées du manifeste), `garder.py cm1-contenance` (ne garder que nos clés dans videos-r2.json et bilans-videos.json).
+- Dates prévues : ép. 2 le 09/01, ép. 3 le 11/01, ép. 4 le 13/01/2027.

@@ -38,23 +38,23 @@ FILMS['comparer']=function(outils){
       tab.maj(); return; }
     /* les deux bouteilles : la sienne (1 L), la mienne (75 cL) */
     if(T>=tBout){ const z=zoom(T,tBout,.4); bouteilleCraie(c,BS.x,BS.y,BS.w,BS.h,.85,JUS,z); bouteilleCraie(c,BM.x,BM.y,BM.w,BM.h,.85,JUS,z,'#1971c2'); }
-    if(T>=tSienne) ecrire(c,'ma sœur',BS.x,110,40*zoom(T,tSienne,.4),CRAIE.gris);
-    if(T>=tMienne) ecrire(c,'moi',BM.x,240,40*zoom(T,tMienne,.4),CRAIE.gris);
+    if(T>=tSienne) ecrire(c,'ma sœur',BS.x,110,46*zoom(T,tSienne,.4),CRAIE.gris);
+    if(T>=tMienne) ecrire(c,'moi',BM.x,240,46*zoom(T,tMienne,.4),CRAIE.gris);
     const unite=T>=t100&&T<com;
     if(T>=t1L) ecrire(c,unite?'100 cL':'1 L',BS.x,660,(unite?50:58)*(unite?zoom(T,t100,.4):zoom(T,t1L,.4)),unite?CRAIE.ok:CRAIE.jaune);
     if(T>=t75) ecrire(c,'75 cL',BM.x,660,50*zoom(T,t75,.4),CRAIE.jaune);
     if(T<uni){
-      if(T>=t75b){ ecrire(c,'75',XR-90,300,110*zoom(T,t75b,.4),CRAIE.faux); }
-      if(T>=t75b+.9){ ecrire(c,'>',XR,300,90,CRAIE.blanc); ecrire(c,'1',XR+90,300,110,CRAIE.faux); }
+      if(T>=t75b){ ecrire(c,'75',XR-130,300,110*zoom(T,t75b,.4),CRAIE.faux); }
+      if(T>=t75b+.9){ ecrire(c,'>',XR,300,90,CRAIE.blanc); ecrire(c,'1',XR+110,300,110,CRAIE.faux); }
       if(T>=tGagne) ecrire(c,"j'ai gagné ?",XR,470,58*zoom(T,tGagne,.4),CRAIE.gris);
     } else if(T<ouf){
       if(T>=tUnites) ecrire(c,'les unités !',XR,200,58*zoom(T,tUnites,.4),CRAIE.faux);
-      if(T>=t1Lu) ecrire(c,'1 L',XR-120,330,78*zoom(T,t1Lu,.4),CRAIE.jaune);
-      if(T>=t100) ecrire(c,'= 100 cL',XR+70,330,78*zoom(T,t100,.4),CRAIE.ok);
+      if(T>=t1Lu) ecrire(c,'1 L',XR,320,78*zoom(T,t1Lu,.4),CRAIE.jaune);
+      if(T>=t100) ecrire(c,'= 100 cL',XR,430,78*zoom(T,t100,.4),CRAIE.ok);
     } else { /* la réponse : 100 cL contre 75 cL, ma sœur a 25 cL de plus */
       ecrire(c,'100 cL',XR,200,72,CRAIE.ok); ecrire(c,'>',XR,290,72,CRAIE.blanc); ecrire(c,'75 cL',XR,380,72,CRAIE.jaune);
       ecrire(c,'+ 25 cL',XR,500,64*zoom(T,ouf,.4),CRAIE.ok);
-      coche(c,BS.x-60,140,.5); }
+      coche(c,BS.x+100,125,.5); }
     tab.maj();
   }
 
