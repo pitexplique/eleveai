@@ -87554,6 +87554,162 @@
         "sport",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-perimetre-triangle",
+      "pas_avant": "2027-03-12",
+      "notionId": "perimetre",
+      "microId": "perimetre_triangle",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.mp4",
+      "miniature": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.png",
+      "titre": "Combien de bande autour d'une voile ? — Le périmètre du triangle — épisode 2 · Maths CM2",
+      "accroche": "Maëlle est voilière : elle fabrique les voiles des bateaux. Tout autour d'une voile, elle coud une bande solide. Combien de mètres de bande pour cette voile ?\n\nDans cette vidéo :\n• un triangle a 3 côtés : on les additionne (4 + 3,5 + 2,5 = 10 m)\n• additionner des nombres à virgule : 5 dixièmes + 5 dixièmes = 1\n• le triangle équilatéral : le côté × 3 (1,5 × 3)\n• le piège : 80 cm et 1 m, on convertit avant d'additionner\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : combien de bande restera-t-il pour 3 voiles ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple\n\n📏 Épisode 2 de la série Périmètre d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le périmètre du triangle"
+        ],
+        [
+          "00:07",
+          "Maëlle, voilière"
+        ],
+        [
+          "00:23",
+          "Les 3 côtés"
+        ],
+        [
+          "00:37",
+          "Additionner des nombres à virgule"
+        ],
+        [
+          "00:49",
+          "Triangle équilatéral : côté × 3"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:42",
+          "Le piège : convertir d'abord"
+        ],
+        [
+          "02:04",
+          "Question 2"
+        ],
+        [
+          "02:41",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:18",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "périmètre",
+        "triangle",
+        "périmètre d'un triangle",
+        "triangle équilatéral",
+        "nombres décimaux",
+        "convertir",
+        "centimètre",
+        "mètre",
+        "voilière",
+        "bateau",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Un triangle a 2 côtés égaux de 6 cm et une base de 4 cm. Quel est son périmètre ?",
+          "choix": [
+            "10 cm",
+            "16 cm",
+            "24 cm"
+          ],
+          "reponse": 1,
+          "explication": "Les 2 côtés égaux comptent chacun : 6 + 6 = 12. Plus la base, 4 : 16 cm."
+        },
+        {
+          "t": "02:04",
+          "question": "Une voile a des côtés de 2 m, 1,5 m et 2,5 m. Quel est son périmètre ?",
+          "choix": [
+            "6 m",
+            "5,10 m",
+            "4 m"
+          ],
+          "reponse": 0,
+          "explication": "1,5 + 2,5 : 5 dixièmes + 5 dixièmes = 1, donc 4. Plus 2 : 6 m."
+        }
+      ],
+      "centres": [
+        "bateaux",
+        "sport"
+      ]
+    },
+    {
+      "id": "cm2-perimetre-triangle-short",
+      "pas_avant": "2027-03-12",
+      "notionId": "perimetre",
+      "microId": "perimetre_triangle",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-perimetre-triangle",
+      "fichier": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short.mp4",
+      "miniature": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short-miniature.png",
+      "titre": "Mon cerf-volant : 60 + 60 + 1 = 121 ? #maths #cm2",
+      "accroche": "Ti Margo veut coller des lumières tout autour de son cerf-volant triangle : 60 cm, 60 cm et 1 m. Il additionne 60 + 60 + 1… vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un cerf-volant de 70 cm, 70 cm et 1 m. Combien de centimètres de lumières ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #perimetre #cm2",
+      "tags": [
+        "périmètre",
+        "périmètre du triangle",
+        "convertir",
+        "mètre",
+        "centimètre",
+        "cerf-volant",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Combien de centimètres de lumières ?",
+          "choix": [
+            "121",
+            "160",
+            "220"
+          ],
+          "reponse": 2,
+          "explication": "1 m, c'est 100 cm. 60 + 60 = 120, plus 100 : 220 cm. On convertit d'abord !"
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
     }
   ]
 }

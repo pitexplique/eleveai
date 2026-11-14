@@ -15893,5 +15893,23 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
+ },
+ "cm2-perimetre-triangle": {
+  "fichier": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.mp4",
+  "poster": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.png",
+  "vignette": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.vignette.webp",
+  "titre": "Combien de bande autour d'une voile ? — Le périmètre du triangle — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple"
+ },
+ "cm2-perimetre-triangle-short": {
+  "fichier": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short.mp4",
+  "poster": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short-miniature.png",
+  "vignette": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short-miniature.vignette.webp",
+  "titre": "Mon cerf-volant : 60 + 60 + 1 = 121 ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple"
  }
 }
