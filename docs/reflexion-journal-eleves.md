@@ -191,3 +191,26 @@ semaine). On code le bouton « Publier » seulement si ça marche avec les
 7. Ouvrir plus tard à d'autres profs et d'autres collèges ?
 8. Une vidéo par article : seulement la vidéo de la notion, ou aussi un short
    dessin animé fait à partir de l'article ?
+
+## 10. Décidé : le premier article
+
+**En classe, avec les 6e, sur les tirs au but** (réponse de Frédéric, 14/11).
+
+Question de départ : « Tirer au but : qui marque le plus souvent ? »
+
+Déroulé possible en 2 séances :
+
+1. **Dans la cour (1 h).** Par groupes de 4 : un tireur, un gardien, un
+   compteur, un secrétaire. Chaque élève tire 10 fois. Le secrétaire note
+   les buts sur une fiche. On peut comparer pied droit / pied gauche, ou
+   tir de près / tir de loin.
+2. **En classe (1 h).** On calcule le pourcentage de réussite du groupe et
+   de la classe (sur 10 tirs : 7 buts = 70 %). On fait un diagramme en
+   barres. Un petit groupe écrit 5 à 8 phrases. La classe vote le QCM.
+
+Maths de 6e : fréquence, pourcentage simple, diagramme en barres, comparer.
+Protection : on publie les résultats par groupe ou pour la classe, jamais
+le score d'un élève nommé. Photo possible : le ballon, le but, les fiches.
+
+Exemple de défi QCM : « Une classe a tiré 200 fois et marqué 130 buts.
+Quel est son pourcentage de réussite ? » A. 65 % · B. 130 % · C. 13 %.
