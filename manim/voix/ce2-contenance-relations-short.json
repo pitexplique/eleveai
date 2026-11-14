@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je remplis ma bouteille de 1 litre avec mon petit verre de 1 décilitre. Un seul verre suffit, non ?",
+  "01-oups": "Raté, il en faut encore ! Je verse, et je compte : 1, 2, 3…",
+  "02-question": "Question ! Combien de verres de 1 décilitre pour remplir la bouteille de 1 litre ? A : 100 verres. B : 10 verres. C : 5 verres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 10 décilitres, c'est 1 litre. La bouteille est pleine !",
+  "03-ouf": "Ouf ! Et avec ma minuscule cuillère de 1 centilitre ? Euh… j'ai le temps ?",
+  "04-commentaire": "À toi : combien de cuillères de 1 centilitre pour remplir 1 litre ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

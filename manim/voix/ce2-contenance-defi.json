@@ -1,0 +1,16 @@
+{
+  "00-garde": "Un défi de contenances. Assez d'huile pour le moteur ?",
+  "01-situation": "Voici Yanis. Il est mécanicien : il répare des voitures. Le moteur d'une voiture a besoin de 4 litres d'huile. Yanis a un bidon de 2 litres, et 3 bouteilles de 50 centilitres. Est-ce assez ?",
+  "02-bouteilles": "D'abord, les bouteilles : 3 fois 50, 150 centilitres.",
+  "03-bidon": "Puis le bidon : 2 litres, c'est 200 centilitres. En tout : 200 plus 150, 350 centilitres.",
+  "04-comparer": "Le moteur a besoin de 4 litres : 400 centilitres. 350, c'est moins que 400 : ce n'est pas assez ! Il manque 400 moins 350, 50 centilitres. Une bouteille de plus !",
+  "05-question": "Question ! Une voiture a besoin de 3 litres de liquide de refroidissement. Yanis a 2 bouteilles de 1 litre, et une bouteille de 50 centilitres. Combien lui manque-t-il ? A : 1 litre. B : 50 centilitres. C : 2 litres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 2 bouteilles de 1 litre : 200 centilitres. Plus 50, 250. 300 moins 250, 50. Il manque 50 centilitres.",
+  "06-piege": "Attention au piège ! 150 centilitres, ce n'est pas 15 litres. 100 centilitres font 1 litre : 150 centilitres, c'est 1 litre et 50 centilitres.",
+  "07-question": "Question ! Yanis a une bouteille d'eau de 1 litre. Il remplit 3 verres de 25 centilitres pour ses collègues. Peut-il en remplir un quatrième ? A : oui, tout juste. B : non, il manque 25 centilitres. C : oui, et il en reste 25. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 3 verres : 3 fois 25, 75 centilitres. 100 moins 75, 25 : il reste juste 25 centilitres. Le quatrième verre se remplit tout juste !",
+  "08-defi": "À toi de jouer ! Yanis a un bidon de 5 litres d'huile. Il en verse 2 litres dans une voiture, puis 150 centilitres dans une moto. Combien en reste-t-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 5 litres, 500 centilitres. 2 litres, 200 centilitres. 500 moins 200, 300. 300 moins 150, 150. Il reste 150 centilitres : 1 litre et 50 centilitres.",
+  "09-finale": "Ce que tu as appris. Dans un défi, on met tout dans la même unité, souvent en centilitres. On calcule étape par étape. Et on peut revenir aux litres : 100 centilitres font 1 litre.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

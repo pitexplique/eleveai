@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Mon copain verse son jus de sa bouteille haute dans un saladier. Regarde : le jus a baissé ! Il en a perdu ?",
+  "01-oups": "Il n'a rien bu, rien renversé… Le saladier est juste plus large.",
+  "02-question": "Question ! Dans le saladier, il y a… A : moins de jus. B : autant de jus. C : plus de jus. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! C'est le même jus, la même quantité. La forme ne dit pas combien un récipient contient.",
+  "03-ouf": "Bon, je reverse tout dans la bouteille. Elle est haute, mais pas plus pleine !",
+  "04-commentaire": "À toi : qui contient le plus, 5 décilitres ou 40 centilitres ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

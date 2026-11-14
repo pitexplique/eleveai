@@ -2,6 +2,7 @@
 # Série PÉRIMÈTRE, AIRE… du CE2 (13/11/2026) : les marques mot à mot des voix paysage (Julie, débit −6).
 # Copie de manim/scripts/6e/calcul_pose_marques.py (même conversion), autres chemins.
 #   python manim/scripts/ce2/perimetre_marques.py comprendre polygone comparer
+#   python manim/scripts/ce2/perimetre_marques.py contenance:unites  (autre notion du CE2)
 # Sortie : manim/scripts/ce2/perimetre_<slug avec _>_marques.json
 # Même format que scripts/cues2marques.py, qui perd les mots répétés (« 5 centimètres,
 # 5 centimètres, 5 centimètres ») : ici, seules les cues répétées « nombre + mot » sont retirées.
@@ -80,13 +81,15 @@ def convertir(textes, tsv):
     return res
 
 
-for slug in sys.argv[1:] or SLUGS:
-    voix = RACINE / "manim" / "voix" / f"ce2-perimetre-{slug}.json"
+for arg in sys.argv[1:] or SLUGS:
+    # « contenance:unites » → voix ce2-contenance-unites, marques contenance_unites_marques.json
+    notion, slug = arg.split(":") if ":" in arg else ("perimetre", arg)
+    voix = RACINE / "manim" / "voix" / f"ce2-{notion}-{slug}.json"
     with tempfile.TemporaryDirectory() as d:
         base = str(Path(d) / slug)
         subprocess.run(["powershell", "-NoProfile", "-File", str(RACINE / "scripts" / "marques_dump.ps1"), "-Fichier",
                         str(voix), "-Sortie", base, "-Debit", "-6"], check=True, capture_output=True)
         res = convertir(json.loads(voix.read_text(encoding="utf-8")), base + ".cues.tsv")
-    sortie = ICI / f"perimetre_{slug.replace('-', '_')}_marques.json"
+    sortie = ICI / f"{notion}_{slug.replace('-', '_')}_marques.json"
     sortie.write_text(json.dumps(res, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(slug, len(res), "clips")

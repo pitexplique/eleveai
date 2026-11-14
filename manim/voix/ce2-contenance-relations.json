@@ -1,0 +1,17 @@
+{
+  "00-garde": "Litre, décilitre et centilitre. Combien de petits verres pour remplir 1 litre ?",
+  "01-situation": "Voici Amina. Elle est chimiste : elle fait des expériences dans un laboratoire. Elle doit remplir un grand flacon de 1 litre avec un petit pot de 1 décilitre. Combien de fois doit-elle verser ?",
+  "02-dl": "Elle verse, et elle compte : 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Le flacon est plein ! 10 décilitres, c'est 1 litre.",
+  "03-cl": "Et avec un tout petit pot de 1 centilitre ? Il en faut beaucoup plus : 100 ! 100 centilitres, c'est 1 litre.",
+  "04-dl-cl": "10 décilitres font 1 litre, et 100 centilitres aussi. Donc dans 1 décilitre, il y a 10 centilitres.",
+  "05-question": "Question ! Combien y a-t-il de décilitres dans 1 litre ? A : 10 décilitres. B : 100 décilitres. C : 1 décilitre. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Déci veut dire dix : 1 litre, c'est 10 décilitres.",
+  "06-piege": "Attention au piège ! Un élève écrit : 1 litre égale 10 centilitres. Faux ! Il a confondu le décilitre et le centilitre. 1 litre, c'est 10 décilitres, et c'est 100 centilitres.",
+  "07-plusieurs": "Avec plusieurs litres, on répète. 2 litres : 2 fois 10, 20 décilitres. Ou 2 fois 100, 200 centilitres.",
+  "08-question": "Question ! Amina a un bidon de 3 litres. Combien de centilitres ? A : 30 centilitres. B : 3 centilitres. C : 300 centilitres. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 1 litre, c'est 100 centilitres. 3 litres : 3 fois 100, 300 centilitres.",
+  "09-defi": "À toi de jouer ! Amina verse 1 litre, puis encore 5 décilitres dans un flacon. Combien de décilitres en tout ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 1 litre, c'est 10 décilitres. 10 plus 5, 15. Il y a 15 décilitres dans le flacon.",
+  "10-finale": "Ce que tu as appris. 1 litre, c'est 10 décilitres, et c'est 100 centilitres. 1 décilitre, c'est 10 centilitres. Déci veut dire dix, centi veut dire cent.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

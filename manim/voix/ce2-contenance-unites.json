@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les unités de contenance. Avec quoi mesure-t-on ce que contient une bouteille ?",
+  "01-situation": "Voici Lucas. Il est chef cuisinier. Pour sa soupe, il verse de l'eau, du lait et de la crème. Pour ne pas se tromper, il mesure. Mais avec quelle unité ?",
+  "02-contenance": "La contenance, c'est la quantité de liquide qu'un récipient peut contenir quand il est plein. Une longueur se mesure en mètres. Une contenance se mesure en litres.",
+  "03-litre": "Le litre s'écrit avec un grand L. Cette bouteille d'eau contient 1 litre. La grande marmite de Lucas contient 5 litres.",
+  "04-dl-cl": "Pour les petites quantités, on partage le litre. Le décilitre : déci veut dire dix. Le centilitre : centi veut dire cent. Le petit verre de Lucas contient 1 décilitre. Une grosse cuillère de crème, environ 1 centilitre.",
+  "05-question": "Question ! Que mesure-t-on avec un litre ? A : ce qu'un récipient peut contenir. B : la longueur d'un objet. C : la masse d'un objet. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Le litre mesure une contenance : ce qu'on peut verser dans un récipient. La longueur se mesure en mètres, la masse en grammes.",
+  "06-ranger": "On range les trois unités, de la plus petite à la plus grande : le centilitre, le décilitre, le litre. Plus on partage le litre, plus la part est petite.",
+  "07-piege": "Attention au piège ! Les lettres c et L ne veulent pas dire centimètre. C'est la dernière lettre qui dit ce qu'on mesure : m pour les mètres, L pour les litres. c et L, c'est le centilitre.",
+  "08-question": "Question ! Sur une bouteille de sirop, on lit 75, puis les lettres c et L. Que veulent-elles dire ? A : centimètre. B : décilitre. C : centilitre. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. Le L dit litre, le c dit centi : c'est le centilitre. La bouteille contient 75 centilitres de sirop.",
+  "09-defi": "À toi de jouer ! Lucas a trois récipients : une marmite, un verre et une cuillère. Quelle unité pour chacun : le litre, le décilitre ou le centilitre ? Mets pause, et cherche !",
+  "09b-correction": "Correction. La marmite contient beaucoup : des litres. Le verre, quelques décilitres. La cuillère, un tout petit peu : des centilitres. Une grande quantité, une grande unité.",
+  "10-finale": "Ce que tu as appris. La contenance se mesure en litres, en décilitres et en centilitres. Le litre est la plus grande des trois, le centilitre la plus petite. Le grand L veut dire litre.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

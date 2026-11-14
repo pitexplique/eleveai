@@ -1,0 +1,15 @@
+{
+  "00-garde": "Comparer des contenances. Qui emporte le plus d'eau : 5 décilitres ou 75 centilitres ?",
+  "01-situation": "Voici Théo. Il est entraîneur de football. Avant le match, ses joueurs remplissent leurs gourdes. Kevin a une gourde de 5 décilitres. Maya, une bouteille de 75 centilitres. Qui emporte le plus d'eau ?",
+  "02-meme-unite": "Avec la même unité, c'est facile. Une gourde de 40 centilitres, une autre de 60 centilitres : 60 est plus grand que 40. La gourde de 60 centilitres contient le plus.",
+  "03-convertir": "Avec deux unités différentes, on met d'abord la même unité. 1 décilitre, c'est 10 centilitres. Donc 5 décilitres : 5 fois 10, 50 centilitres. On compare 50 et 75 : 75 est plus grand. Maya emporte le plus d'eau !",
+  "04-question": "Question ! Qu'est-ce qui contient le plus : 1 litre, ou 75 centilitres ? A : 1 litre. B : 75 centilitres. C : c'est pareil. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 1 litre, c'est 100 centilitres. 100 est plus grand que 75. Attention : 75 est plus grand que 1, mais les unités ne sont pas les mêmes !",
+  "05-forme": "Attention à un autre piège : la forme ! Théo verse l'eau d'une bouteille haute et fine dans un saladier large et bas. Dans le saladier, l'eau paraît basse. Mais il n'y a pas moins d'eau : c'est la même quantité. La forme ne dit pas la contenance.",
+  "06-question": "Question ! On verse 1 litre d'eau dans un seau très large. L'eau monte à peine. Combien d'eau dans le seau ? A : moins de 1 litre. B : 1 litre. C : plus de 1 litre. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. On n'a rien ajouté, rien enlevé : il y a toujours 1 litre. Le seau est large, alors l'eau monte moins haut.",
+  "07-defi": "À toi de jouer ! Théo range trois bouteilles, de la plus petite à la plus grande : 1 litre, 8 décilitres et 90 centilitres. Dans quel ordre ? Mets pause, et cherche !",
+  "07b-correction": "Correction. On met tout en centilitres. 1 litre, 100 centilitres. 8 décilitres, 80 centilitres. Du plus petit au plus grand : 8 décilitres, puis 90 centilitres, puis 1 litre.",
+  "08-finale": "Ce que tu as appris. Pour comparer des contenances, on met d'abord la même unité, puis on compare les nombres. Et la forme d'un récipient ne dit pas combien il contient.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

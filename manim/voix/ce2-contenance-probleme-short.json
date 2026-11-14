@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Mon arrosoir contient 2 litres. J'arrose mes 3 plantes, 50 centilitres chacune. Il reste… 2 moins 50 ? Impossible !",
+  "01-oups": "Ah oui : la même unité d'abord ! 2 litres, c'est 200 centilitres.",
+  "02-question": "Question ! Combien de centilitres reste-t-il dans l'arrosoir ? A : 150 centilitres. B : 0 centilitre. C : 50 centilitres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 3 plantes : 3 fois 50, 150 centilitres. 200 moins 150, 50 centilitres.",
+  "03-ouf": "Il en reste juste assez pour mon cactus. Il ne boit pas beaucoup !",
+  "04-commentaire": "À toi : un seau de 3 litres. Tu verses 4 verres de 25 centilitres. Combien de centilitres reste-t-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

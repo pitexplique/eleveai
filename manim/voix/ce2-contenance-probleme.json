@@ -1,0 +1,16 @@
+{
+  "00-garde": "Un problème de contenances. Combien reste-t-il dans l'arrosoir ?",
+  "01-situation": "Voici Mélissa. Elle est horticultrice : elle fait pousser des fleurs dans une serre. Son arrosoir contient 5 litres. Elle arrose deux plants, avec 80 centilitres chacun. Combien de centilitres reste-t-il dans l'arrosoir ?",
+  "02-convertir": "D'abord, la même unité. 1 litre, c'est 100 centilitres. 5 litres : 5 fois 100, 500 centilitres.",
+  "03-verse": "Les deux plants : 80 plus 80, 160 centilitres.",
+  "04-reste": "On enlève ce qu'elle a versé. 500 moins 160, 340. Il reste 340 centilitres dans l'arrosoir.",
+  "05-question": "Question ! Pour la fête de la serre, Mélissa mélange 2 litres de jus et 50 centilitres d'eau. Combien de centilitres de boisson en tout ? A : 250 centilitres. B : 52 centilitres. C : 70 centilitres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 2 litres : 2 fois 100, 200 centilitres. 200 plus 50, 250 centilitres de boisson.",
+  "06-piege": "Attention au piège ! 2 litres plus 50 centilitres, ce n'est pas 52 ! On n'ajoute pas des litres et des centilitres. On convertit d'abord, puis on calcule.",
+  "07-question": "Question ! Une bouteille contient 1 litre. Mélissa remplit 3 verres de 20 centilitres. Combien de centilitres reste-t-il ? A : 60 centilitres. B : 97 centilitres. C : 40 centilitres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 3 verres de 20 : 3 fois 20, 60 centilitres. 1 litre, c'est 100 centilitres. 100 moins 60, 40. Il reste 40 centilitres.",
+  "08-defi": "À toi de jouer ! Mélissa remplit un bac de 4 litres avec un pichet de 50 centilitres. Combien de pichets lui faut-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 1 litre, c'est 100 centilitres : 50 plus 50, donc 2 pichets. Pour 4 litres : 4 fois 2, 8 pichets.",
+  "09-finale": "Ce que tu as appris. Dans un problème de contenances, on met tout dans la même unité. Puis on choisit le calcul : ajouter, enlever ou répéter. Et on écrit l'unité dans la réponse.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

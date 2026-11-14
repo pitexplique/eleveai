@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'ai fait de la limonade. Combien j'en ai ? Je sors ma règle : 20 centimètres de limonade !",
+  "01-oups": "Hé ! Une règle mesure des longueurs, pas des liquides. Sur ma bouteille, c'est écrit : 1 litre.",
+  "02-question": "Question ! Pour mesurer ce que contient une bouteille, quelle unité ? A : le centimètre. B : le litre. C : le kilogramme. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Le litre mesure une contenance. Pour les petites quantités, il y a le décilitre et le centilitre.",
+  "03-ouf": "Ma limonade : 1 litre. Qui en veut ?",
+  "04-commentaire": "À toi : la plus petite unité, c'est le litre, le décilitre ou le centilitre ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
