@@ -88318,6 +88318,161 @@
         "construction",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-aire-comprendre",
+      "pas_avant": "2027-03-16",
+      "notionId": "aire",
+      "microId": "aire_comprendre",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.mp4",
+      "miniature": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.png",
+      "titre": "Deux couvertures, même tissu ? — Comprendre l'aire — épisode 1 · Maths CM2",
+      "accroche": "Elsa est couturière : elle coud des couvertures en patchwork, avec des carrés de tissu. Deux clients veulent des couvertures de formes différentes. Laquelle demande le plus de tissu ?\n\nDans cette vidéo :\n• l'aire, c'est la mesure d'une surface, en carrés-unités : 3 × 4 = 12 et 2 × 6 = 12\n• 2 demi-carrés font 1 carré entier : 10 carrés et 4 demis, c'est 12 carrés\n• aire et périmètre, ce n'est pas pareil : même aire, tours de 14 et de 16\n• le piège : un plus grand tour ne veut pas dire une plus grande aire\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une couverture de 4 rangées de 5 carrés, et son galon.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_comprendre&display=simple\n\n📐 Épisode 1 de la série Aire d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment mesurer une surface ?"
+        ],
+        [
+          "00:06",
+          "Elsa, couturière"
+        ],
+        [
+          "00:22",
+          "Compter les carrés-unités"
+        ],
+        [
+          "00:43",
+          "Les demi-carrés"
+        ],
+        [
+          "01:01",
+          "Aire ou périmètre ?"
+        ],
+        [
+          "01:19",
+          "Question 1"
+        ],
+        [
+          "01:49",
+          "Le piège : le plus grand tour"
+        ],
+        [
+          "02:07",
+          "Question 2"
+        ],
+        [
+          "02:36",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Correction"
+        ],
+        [
+          "03:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "aire",
+        "comprendre l'aire",
+        "surface",
+        "carré-unité",
+        "demi-carré",
+        "périmètre",
+        "aire et périmètre",
+        "couturière",
+        "patchwork",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:19",
+          "question": "L'aire d'une figure, c'est… ?",
+          "choix": [
+            "la mesure de sa surface",
+            "la longueur de son tour",
+            "le nombre de ses côtés"
+          ],
+          "reponse": 0,
+          "explication": "L'aire mesure la surface, toute la place à l'intérieur. La longueur du tour, c'est le périmètre."
+        },
+        {
+          "t": "02:07",
+          "question": "Une figure est faite de 6 carrés entiers et de 4 demi-carrés. Quelle est son aire ?",
+          "choix": [
+            "10 carrés",
+            "6 carrés",
+            "8 carrés"
+          ],
+          "reponse": 2,
+          "explication": "4 demi-carrés, c'est 2 carrés entiers. 6 + 2 = 8 : l'aire est de 8 carrés."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "mode"
+      ]
+    },
+    {
+      "id": "cm2-aire-comprendre-short",
+      "pas_avant": "2027-03-16",
+      "notionId": "aire",
+      "microId": "aire_comprendre",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-aire-comprendre",
+      "fichier": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short.mp4",
+      "miniature": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short-miniature.png",
+      "titre": "Sa serviette de plage a l'air plus grande… vraiment ? #maths #cm2",
+      "accroche": "La serviette de plage de Ti Margo : 3 rangées de 4 carreaux. Celle de sa sœur est toute longue : 2 rangées de 6 carreaux, et son tour est plus long. Laquelle a la plus grande aire ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une serviette de 1 seule rangée de 12 carreaux. Combien de côtés de carreau mesure son tour ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm2",
+      "tags": [
+        "aire",
+        "comprendre l'aire",
+        "périmètre",
+        "serviette de plage",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Quelle serviette a la plus grande aire ?",
+          "choix": [
+            "celle de Ti Margo",
+            "celle de sa sœur",
+            "les deux, pareil"
+          ],
+          "reponse": 2,
+          "explication": "3 rangées de 4 : 12 carreaux. 2 rangées de 6 : 12 carreaux. La même aire ! Seul le tour change."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "mode"
+      ]
     }
   ]
 }

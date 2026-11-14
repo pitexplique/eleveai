@@ -16001,5 +16001,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_unites&display=simple"
+ },
+ "cm2-aire-comprendre": {
+  "fichier": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.mp4",
+  "poster": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.png",
+  "vignette": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.vignette.webp",
+  "titre": "Deux couvertures, même tissu ? — Comprendre l'aire — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
+ },
+ "cm2-aire-comprendre-short": {
+  "fichier": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short.mp4",
+  "poster": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short-miniature.png",
+  "vignette": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short-miniature.vignette.webp",
+  "titre": "Sa serviette de plage a l'air plus grande… vraiment ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
  }
 }
