@@ -146,3 +146,10 @@ class PaysageLongueurCE2(PaysageLongueurCM1):
             self.au_mot(ex, n)
             self.wait(0.07 + delai)
             self.play(FadeIn(m, shift=UP * 0.08), run_time=run_time)
+
+    def pause_defi(self, y=-2.6, marge=2.0, x=-6.2):
+        """« Mets pause, et cherche ! » à GAUCHE (à droite, il collait à Ti-Margo)."""
+        self.au_mot("Mets pause")
+        p = gauche(self.t("Mets pause, et cherche !", 32, ORANGE_RETENUE), x, y)
+        self.play(Write(p), run_time=0.8)
+        self.attendre_voix(marge=marge)

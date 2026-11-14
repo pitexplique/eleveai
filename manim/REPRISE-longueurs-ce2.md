@@ -41,3 +41,20 @@ Commande aperçu : `PYTHONIOENCODING=utf-8 python -m manim render -ql manim/scri
 3. Shorts Ti Margo : série `ce2-longueur` (`prototypes/ti-margo/films/ce2-longueur.json` + `ce2-longueur-cues.js` + `films/ce2-longueur-<ep>.js`, modèle `films/ce2-contenance*.js`), ceintures/réponses du tableau, `python scripts/ti-margo-cues.py ce2-longueur <ép>`, contrôle image par image, miniature « Dessin animé », supprimer `_muet.mp4`.
 4. Miniatures paysage (copier `manim/miniature_contenance_ce2.py`), passe manifeste (copier `manim/passe_contenance_ce2.py` ; dates libres après le 24/01/2027, vérifier ; centres du tableau ; `aussi` vers cm1 `longueur_*` si pertinent), fiches YouTube, vignettes, R2 (rclone, voir REPRISE-pav-ce2 session 8 bis), `videos-r2.json` (nos clés seulement), coach (`brancher-videos-coach.mjs --classe ce2 --notion longueur --tout`), ajouter les 6 métiers à la matrice, plan coché, mémoire `serie-longueurs-ce2.md`.
 5. Commit PAR CHEMIN, pas de push.
+
+## Session 2 (14/11, à partir de 11 h)
+✅ 01 unités : dry run propre (2 TARD corrigés), aperçu -ql relu, HD fini, bords 0. HD relancé (11 h 50) pour mettre « Mets pause, et cherche ! » à GAUCHE (`pause_defi` du commun : à droite, il collait Ti-Margo).
+✅ 02 relations : `longueur_relations.py` (`LongueurRelationsCE2`, mètre ruban `metre_ruban()`), aperçu relu (titre = voix, zoom du dm sous la barre, accolade sous le bac à sable), HD fini, bords 0.
+✅ 03 mesurer : `longueur_mesurer.py` (`LongueurMesurerCE2`, carte du ciel, `segment_sur_regle`), aperçu relu (choix courts, zoom du défi décalé), HD fini, bords 0.
+⏳ 04 comparer : `longueur_comparer.py` (`LongueurComparerCE2`, animaux marins, `avec_ruban`), dry run propre, aperçu -ql RENDU, À RELIRE : `C:/Users/FRED/AppData/Local/Temp/lg/ql04/videos/longueur_comparer/480p15/apercu-lg-04.mp4`.
+⏳ 05 choisir l'unité : `longueur_choisir_unite.py` (`LongueurChoisirUniteCE2`, Karim, avion, valise, billet, hublot), dry run PROPRE ; aperçu -ql à faire.
+⏳ HD 01 (2e rendu, pause à gauche) en ATTENTE du verrou à la relève (journal `side-session-notes/local_54f81ee5-…/hd-01b.log`, « fini » à la fin) ; s'il n'y a ni « début » ni « fini », le relancer : `bash <notes>/hd-ram.sh longueur_unites.py LongueurUnitesCE2 eleveai-maths-ce2-longueur-unites manim/scripts/ce2/media-lg-01 manim/sorties/ce2/maths/longueur/01-unites`, puis bords.
+Passée la main à 72 % de contexte.
+Outil : `side-session-notes/local_54f81ee5-…/hd-ram.sh <args de hd.sh>` attend 2,5 Go libres puis lance hd.sh (verrou).
+⛔ Synchro : un texte attend TOUS ses mots (« 4 petits traits après le 5 » attend le « 5 ») → couper la ligne en morceaux posés chacun à son mot ; un nombre redit loin du premier → TARD : retirer le nombre du texte ou le poser par `aux_extraits`.
+
+### Reste (dans l'ordre)
+1. Relire l'aperçu 04 (`python <notes chef>/images.py <mp4> <png> t…`, toutes les 6 s), corriger, dry run, HD (`hd-ram.sh longueur_comparer.py LongueurComparerCE2 eleveai-maths-ce2-longueur-comparer manim/scripts/ce2/media-lg-04 manim/sorties/ce2/maths/longueur/04-comparer`), bords.
+2. 05 : aperçu -ql (`… -o apercu-lg-05 --media_dir C:/Users/FRED/AppData/Local/Temp/lg/ql05`), relu, HD (`media-lg-05`, sortie `05-choisir-unite/`), bords.
+3. 06 estimer (Élodie, jaune ; Q A, B), 07 problème (Jules, orange ; Q C, A), 08 défi (Maya, bleue ; Q B, C) : scripts sur le modèle de 01-05 (lire les clés de chaque JSON de voix : les numéros d'écrans changent d'un épisode à l'autre), même cycle. `pause_defi` du commun met « Mets pause » à gauche.
+4. Puis le « Reste » de la session 1, points 3 à 5 (shorts Ti Margo `ce2-longueur`, miniatures, manifeste, fiches, R2, `videos-r2.json`, coach, 6 métiers, plan, mémoire).

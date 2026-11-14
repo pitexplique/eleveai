@@ -122,7 +122,7 @@ class LongueurUnitesBase(PaysageLongueurCE2):
         fl = fleche_double(pl.get_corner(UL) + UP * 0.25, pl.get_corner(UR) + UP * 0.25)
         l2 = self.t("il la mesure.", 32, JAUNE_TITRE).next_to(l1, RIGHT, buff=0.2)
         self.play(FadeIn(l2, shift=UP * 0.1), GrowFromCenter(fl), run_time=0.4)
-        self.au_mot("quelle unité")
+        self.au_mot("Mais avec quelle unité")
         q = self.t("Mais avec quelle unité ?", 40, JAUNE_TITRE)
         self.col(q, -2.5, -3.5)
         self.play(FadeIn(q, scale=1.1), Wiggle(pl), run_time=0.5)
@@ -135,11 +135,13 @@ class LongueurUnitesBase(PaysageLongueurCE2):
         l0 = self.ligne([("L'unité de longueur :", WHITE), ("le mètre", JAUNE_TITRE)], 40, buff=0.25)
         gauche(l0, -6.2, 2.8)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.4)
-        self.au_mot("petit m")
+        self.au_mot("Il s'écrit")
         l1 = self.t("Il s'écrit avec un petit", 34)
         gauche(l1, -6.2, 1.7)
         m = self.t("m", 110, VERT_OK).next_to(l1, RIGHT, buff=0.35)
-        self.play(FadeIn(l1, shift=UP * 0.1), GrowFromCenter(m), run_time=0.5)
+        self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.35)
+        self.au_mot("petit m")
+        self.play(GrowFromCenter(m), run_time=0.35)
         pl = planche(5.0).move_to(P(-2.4, -0.4))
         self.au_mot("La planche de Samuel")
         self.play(FadeIn(pl, shift=LEFT * 0.3), run_time=0.35)
@@ -371,7 +373,7 @@ class LongueurUnitesBase(PaysageLongueurCE2):
         self.ecran("10-finale", 0.65)
         fig = VGroup(piece(0.25), doigt(0.7), main(0.8), planche(1.8, 0.25)) \
             .arrange(RIGHT, buff=0.3, aligned_edge=DOWN)
-        fig.scale_to_fit_width(3.2)
+        fig.scale_to_fit_width(3.9)
         lignes = self.finale_gauche(fig, textes=[
             ("Les longueurs se mesurent", "en km, m, dm, cm et mm."),
             ("Le kilomètre est le plus grand,", "le millimètre le plus petit."),
