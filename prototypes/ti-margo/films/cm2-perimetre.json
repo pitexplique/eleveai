@@ -1,0 +1,7 @@
+{
+  "voix": "cm2-perimetre-{ep}-short",
+  "sons": "public/sons/cm2-perimetre-{ep}-short",
+  "sortie": "manim/sorties/cm2/maths/perimetre/{num}-{ep}",
+  "nom": "eleveai-maths-cm2-perimetre-{ep}-short",
+  "episodes": { "comprendre": "01", "triangle": "02", "quadrilatere": "03", "polygone": "04", "defi": "05" }
+}

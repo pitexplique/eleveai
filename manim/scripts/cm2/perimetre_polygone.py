@@ -215,6 +215,15 @@ class PerimetrePolygoneBase(PaysagePerimetreCM2):
             n = np.array([-v[1], v[0], 0]) / (np.linalg.norm(v) or 1)   # vers l'extérieur (tour horaire)
             nums.add(hors_audit(Text(str(k + 1), font_size=22, color=WHITE, weight=BOLD)
                                 .move_to(s.get_center() + n * 0.28)))
+        # deux numéros trop proches (coin rentrant du L) : chacun glisse le long de son côté
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                d = nums[j].get_center() - nums[i].get_center()
+                if np.linalg.norm(d) < 0.4:
+                    for k, sg in ((i, -1), (j, 1)):
+                        u = bords[k].get_end() - bords[k].get_start()
+                        u = u / (np.linalg.norm(u) or 1)
+                        nums[k].shift(u * (0.22 if np.dot(u, d * sg) > 0 else -0.13))
         self.play(FadeIn(l2, shift=UP * 0.1), run_time=0.3)
         self.play(LaggedStart(*[AnimationGroup(Create(s), FadeIn(n)) for s, n in zip(bords, nums)],
                               lag_ratio=0.25), run_time=1.2)
@@ -230,8 +239,8 @@ class PerimetrePolygoneBase(PaysagePerimetreCM2):
 
     # ── 05 : QUESTION 1 (réponse B) ─────────────────────────────────────────
     def figure_q1(self):
-        p = poly(pts_regulier(8, 2.5, 0.42), "#fbbf24", "#92400e").move_to(P(-3.7, 1.75))
-        return VGroup(p, etiquettes(p, ["2,5 cm"], cotes=[0], fs=24))
+        p = poly(pts_regulier(8, 2.5, 0.38), "#fbbf24", "#92400e").move_to(P(-3.7, 1.5))
+        return VGroup(p, etiquettes(p, ["2,5 cm"], cotes=[4], fs=24))   # en haut : la phrase vient dessous
 
     def ecran_question1(self):
         self.clear()
@@ -328,12 +337,16 @@ class PerimetrePolygoneBase(PaysagePerimetreCM2):
         l0 = self.ligne([("Une bobine de", WHITE), ("50 cm", ARGENT)], 34, buff=0.18)
         self.col(l0, 2.2, 0.35)
         self.play(FadeIn(l0, shift=UP * 0.1), FadeIn(bo, scale=1.2), run_time=0.5)
+        self.au_mot("Combien de pendentifs")
+        q0 = self.t("Combien de pendentifs", 38, JAUNE_TITRE)
+        self.col(q0, 1.3, 0.35)
+        self.play(FadeIn(q0, shift=UP * 0.1), run_time=0.3)
         self.au_mot("à 6 côtés de 1,2 centimètre")
-        l1 = self.bloc(["Des pendentifs à 6 côtés", "de 1,2 cm"], 34)
-        self.col(l1, 1.15, 0.35)
-        self.play(FadeIn(l1, shift=UP * 0.1), FadeIn(h, scale=1.2), FadeIn(eh), run_time=0.5)
+        l1 = self.t("à 6 côtés de 1,2 cm", 34)
+        self.col(l1, 0.6, 0.35)
+        self.play(FadeIn(l1, shift=UP * 0.1), FadeIn(h, scale=1.2), FadeIn(eh), run_time=0.4)
         self.au_mot("peut-elle entourer")
-        q = self.bloc(["Combien peut-elle", "en entourer ?"], 38, JAUNE_TITRE)
+        q = self.t("peut-elle entourer ?", 38, JAUNE_TITRE)
         self.col(q, -0.1, 0.35)
         self.play(FadeIn(q, shift=UP * 0.1), Wiggle(h), run_time=0.5)
         self.pause_defi(y=-1.3)

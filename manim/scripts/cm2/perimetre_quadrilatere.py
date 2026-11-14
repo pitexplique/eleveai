@@ -219,25 +219,25 @@ class PerimetreQuadrilatereBase(PaysagePerimetreCM2):
         self.col(l0, 2.2)
         self.play(FadeIn(l0, shift=UP * 0.1), Create(cote_tour(p, 0)), Create(cote_tour(p, 1)), run_time=0.45)
         self.au_mot("la moitié du tour")
-        l1 = self.t("seulement la moitié du tour !", 32, ROUGE_ERREUR)
-        self.col(l1, 1.45)
+        l1 = self.bloc(["seulement la moitié", "du tour !"], 32, ROUGE_ERREUR)
+        self.col(l1, 1.3)
         manque = VGroup(DashedLine(p.get_vertices()[2], p.get_vertices()[3], color=ROUGE_ERREUR, stroke_width=8),
                         DashedLine(p.get_vertices()[3], p.get_vertices()[0], color=ROUGE_ERREUR, stroke_width=8))
         self.play(FadeIn(l1, shift=UP * 0.1), Create(manque), run_time=0.5)
         self.au_mot("Il faut doubler")
         l2 = self.t("Il faut doubler.", 36, VERT_OK)
-        self.col(l2, 0.6)
+        self.col(l2, 0.4)
         self.play(FadeIn(l2, shift=UP * 0.1), FadeOut(manque), Create(cote_tour(p, 2)), Create(cote_tour(p, 3)),
                   run_time=0.5)
         self.au_mot("on ne multiplie pas 100 par 64")
         l3 = self.t("100 × 64", 40, ROUGE_ERREUR)
-        self.col(l3, -0.35)
+        self.col(l3, -0.5)
         barre = Line(l3.get_left(), l3.get_right(), color=ROUGE_ERREUR, stroke_width=6)
         self.play(FadeIn(l3, shift=UP * 0.1), run_time=0.3)
         self.play(Create(barre), run_time=0.25)
         self.au_mot("l'aire de la pelouse")
         l4 = self.bloc(["= l'aire de la pelouse,", "pas la longueur de la ligne !"], 32, GRAY_B)
-        self.col(l4, -1.35)
+        self.col(l4, -1.5)
         self.play(FadeIn(l4[0], shift=UP * 0.1), Indicate(p, color=PELOUSE, scale_factor=1.03), run_time=0.5)
         self.au_mot("pas la longueur de la ligne")
         self.play(FadeIn(l4[1], shift=UP * 0.1), run_time=0.3)
@@ -263,7 +263,7 @@ class PerimetreQuadrilatereBase(PaysagePerimetreCM2):
             sc.play(Create(tour(g[0])), run_time=0.6)
 
         self.question_gauche("07-question", "07b-reponse",
-                             ["Un quadrilatère : 3,5 m, 4 m,", "2,5 m et 5 m.", "Quel est son périmètre ?"],
+                             ["Un quadrilatère a des côtés", "de 3,5 m, 4 m,", "2,5 m et 5 m.", "Quel est son périmètre ?"],
                              [self.choix("14,10 m"), self.choix("15 m"), self.choix("14 m")], 1,
                              ["Côtés pas égaux :", "on additionne les 4.", "3,5 + 2,5 = 6,", "+ 4 = 10,",
                               "+ 5 = 15 m."],
@@ -343,11 +343,11 @@ class PerimetreQuadrilatereBase(PaysagePerimetreCM2):
         self.play(FadeIn(c2, shift=UP * 0.1), run_time=0.25)
         self.au_mot("240 est plus petit que 250")
         d1 = self.t("240 < 250 : oui !", 40, VERT_OK)
-        self.col(d1, -1.25, 0.35)
+        self.col(d1, -1.15, 0.35)
         self.play(FadeIn(d1, shift=UP * 0.1), Wiggle(po), run_time=0.45)
         self.au_mot("pour 10 mètres")
         res = self.bloc(["Il reste de la peinture", "pour 10 m."], 34, VERT_OK)
-        self.col(res, -2.2, 0.35)
+        self.col(res, -1.9, 0.35)
         self.play(FadeIn(res, scale=1.1), run_time=0.45)
         self.attendre_voix()
 
