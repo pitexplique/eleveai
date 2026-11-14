@@ -78,7 +78,7 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 
 **Périmètre** (5)
 - [x] Comprendre ce qu’est un périmètre — `perimetre_comprendre`
-- [ ] Calculer le périmètre d’un triangle — `perimetre_triangle` (⏳ paysage HD faite ; short à refaire : la voix du « À toi » donne un triangle plat, en attente de Frédéric)
+- [x] Calculer le périmètre d’un triangle — `perimetre_triangle` — ✅ 14/11 paysage HD (bords 0) + short dessin animé « Le cerf-volant lumineux » (« À toi » 70 cm, 70 cm, 1 m → 240 cm), manifeste 12/03/2027, R2, coach (`manim/sorties/cm2/maths/perimetre/02-triangle/`)
 - [x] Calculer le périmètre d’un quadrilatère — `perimetre_quadrilatere`
 - [x] Calculer le périmètre d’un polygone — `perimetre_polygone`
 - [x] Résoudre un défi de périmètre — `perimetre_defi`
