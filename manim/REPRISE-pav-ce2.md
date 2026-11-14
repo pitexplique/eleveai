@@ -71,3 +71,17 @@ Outils (copiés dans le dossier de notes partagé `side-session-notes/local_78d7
 2. Regarder le film défi rendu (images à 10, 20, 58.9 « Musique », 66) et les 2 miniatures short (« Dessin animé ») ; supprimer les `_muet.mp4`.
 3. Miniatures paysage (`manim/miniature_perimetre_ce2.py` : 04 orange, 05 bleue), `manim/passe_perimetre_ce2.py manifeste` (dates libres après le 29/12), fiches YouTube, R2, `generer-videos-r2.mjs`, coach (`brancher-videos-coach.mjs --classe ce2 --notion perimetre --tout`), plan coché, mémoire `serie-perimetre-ce2.md`.
 4. Commit PAR CHEMIN des vidéos, pas de push ; donner les hashs.
+
+## Session 6 (14/11, 03 h 20-03 h 40) : 04 rectangle et 05 défi FINIS — commit `5965d4a9`
+✅ Le « Reste » de la session 5 est fait :
+- HD défi fini (3 min 52), bords 0 sur les 2 paysages ; images HD relues (04 : 8 instants, 05 : 8 instants), propres.
+- Film du short défi (1 min 18) et 2 miniatures de shorts (« Dessin animé », ceintures jaune / orange) relus ; `_muet.mp4` supprimé.
+  `verifier-bords-video.py` ne s'applique pas aux shorts dessin animé (décor plein écran : 75-78 « instants » attendus).
+- Miniatures paysage : 04 « LE PÉRIMÈTRE DU RECTANGLE » orange, 05 « UN DÉFI DE PÉRIMÈTRE » bleue (« EN 4 MIN »).
+- Manifeste : 4 entrées, 04 le 30/12/2026, 05 le 01/01/2027 (jours libres : ≤ 2 paysages, ≤ 5 vidéos). `passe_perimetre_ce2.py` a maintenant `s_ceinture` (ceinture du short, blanche par défaut) ; titre 04 raccourci à 99 caractères.
+- Fiches YouTube (`scripts/fiches-youtube.py ce2-perimetre-`), vignettes webp, R2 (dossiers 04 et 05 + webp de 01-03, par rclone direct : `r2-videos.ps1` plante sous PowerShell 5.1 à cause de l'avis « Config file not found » sur stderr).
+- `generer-videos-r2.mjs` : seules les clés `ce2-perimetre-*` gardées dans `videos-r2.json` (le générateur ajoutait des vignettes CM1/1re pas encore sur R2) ; `bilans-videos.json` : nos 4 ajouts.
+- Coach : 10/10 vidéos de la notion `perimetre` (CE2) branchées. Plan coché (CE2 périmètre 5/5). Rien poussé.
+
+### Reste
+Suite du plan CE2 : contenance, puis solides (voix à écrire et à faire valider À DEUX).
