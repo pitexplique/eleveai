@@ -123,7 +123,7 @@ class LongueurComparerBase(PaysageLongueurCM1):
     # ── 03 : deux unités : on convertit d'abord ─────────────────────────────
     def ecran_convertir(self):
         self.ecran("03-convertir")
-        g = self.deux_rubans(P(-3.9, 0.6), 0.8)
+        g = self.deux_rubans(P(-4.3, 0.6), 0.8)
         a, b = g
         ea, eb = etiq(a, "1 m", 30), etiq(b, "85 cm", 30)
         self.add(g, ea, eb)
@@ -289,7 +289,7 @@ class LongueurComparerBase(PaysageLongueurCM1):
         """Ficelle 2 m, galon 150 cm, ruban 1 m 80 cm, dentelle 90 cm (dans l'ordre de la voix)."""
         lg = [200, 150, 180, 90]
         cs = ["#e5e7eb", RUBAN4, RUBAN, RUBAN3]
-        return rubans_alignes(lg, cs, self.EC, buff=0.58, ep=0.3)
+        return rubans_alignes(lg, cs, self.EC, buff=0.8, ep=0.3)
 
     def ecran_defi(self):
         self.ecran("08-defi", 0.65)
@@ -352,8 +352,8 @@ class LongueurComparerBase(PaysageLongueurCM1):
         ordre = [3, 1, 2, 0]
         cible = VGroup(*[VGroup(ets[i], q4[i]).copy() for i in ordre])
         for c in cible:
-            c[0].next_to(c[1], UP, buff=0.06).align_to(c[1], LEFT)
-        cible.arrange(DOWN, buff=0.14, aligned_edge=LEFT).move_to(P(0.9, -1.6))
+            c[0].next_to(c[1], UP, buff=0.08).align_to(c[1], LEFT)
+        cible.arrange(DOWN, buff=0.3, aligned_edge=LEFT).move_to(P(0.9, -1.7))
         self.play(*[Transform(VGroup(ets[i], q4[i]), cible[k]) for k, i in enumerate(ordre)], run_time=1.0)
         res = [("la dentelle, 90", "90"), ("le galon, 150", "150"), ("le ruban, 180", "180"),
                ("la ficelle, 200", "200")]

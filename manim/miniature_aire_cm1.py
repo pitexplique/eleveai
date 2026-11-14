@@ -50,6 +50,17 @@ EP = [
      "on compare à des repères !", True, "jaune", (0, 0), "contenance"),
     ("defi", "04-defi", ["RÉSOUDRE UN DÉFI", "DE CONTENANCE"], "2 L = 200 cL = 8 pots de 25 cL",
      "on convertit, puis on partage !", True, "bleue", (0, 0), "contenance"),
+    # Série LONGUEUR du CM1 ; python manim/miniature_aire_cm1.py longueur-comparer
+    ("comparer", "01-comparer", ["COMPARER", "DES LONGUEURS"], "1 m = 100 cm > 85 cm",
+     "même unité, puis on compare !", True, "jaune", (0, 0), "longueur"),
+    ("convertir", "02-convertir", ["CONVERTIR", "km, m, cm ET mm"], "2 m 5 cm = 205 cm",
+     "1 m = 100 cm, 1 cm = 10 mm", True, "verte", (0, 0), "longueur"),
+    ("estimer", "03-estimer", ["ESTIMER", "UNE LONGUEUR"], "un sentier ≈ 3 km",
+     "on compare à des repères !", True, "jaune", (0, 0), "longueur"),
+    ("mesurer", "04-mesurer", ["MESURER", "AVEC UNE RÈGLE"], "du 0, ou : fin − début",
+     "on part bien du zéro !", True, "jaune", (0, 0), "longueur"),
+    ("defi", "05-defi", ["RÉSOUDRE UN DÉFI", "DE LONGUEURS"], "3 km − 1 km 200 m = 1 800 m",
+     "on convertit, puis on calcule !", True, "bleue", (0, 0), "longueur"),
 ]
 
 
