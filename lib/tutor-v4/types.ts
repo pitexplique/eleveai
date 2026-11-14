@@ -102,6 +102,10 @@ import type { CanvasFigure } from "./types_canvas";
 export type TutorMode = "evaluation" | "coaching";
 export type QuestionFormat = "short" | "qcm" | "open";
 
+/** ⭐ 14/11/2026 — « pave » : une réponse « short » se donne au pavé numérique
+ *  enfant (gros boutons, pas de clavier système). Voir lib/tutor-v4/paveNumerique.ts. */
+export type SaisieReponse = "pave";
+
 export type ComparatorName =
   | "exact_text"
   | "mcq_exact"
@@ -180,6 +184,7 @@ export type TutorQuestionOption = {
   canvas?: CanvasFigure;
   audioSrc?: string;
   choiceDiagnostics?: ChoiceDiagnostic[];
+  saisie?: SaisieReponse;
   meta: QuestionVariantMeta;
 };
 
@@ -533,6 +538,7 @@ export type TutorGeneratedQuestionV4 = {
   explanation?: string;
   canvas?: CanvasFigure;
   choiceDiagnostics?: ChoiceDiagnostic[];
+  saisie?: SaisieReponse;
 };
 
 export type TutorBankItemFixedV4 = {
@@ -555,6 +561,7 @@ export type TutorBankItemFixedV4 = {
   canvas?: CanvasFigure;
   audioSrc?: string;
   choiceDiagnostics?: ChoiceDiagnostic[];
+  saisie?: SaisieReponse;
 };
 
 export type TutorBankItemTemplateV4 = {

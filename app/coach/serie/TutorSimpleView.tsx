@@ -13,6 +13,7 @@ import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorMode, TutorQuestionOption } from "@/lib/tutor-v4/types";
 import BoutonVideoCompetence from "./BoutonVideoCompetence";
 import AQuoiCaSert from "./AQuoiCaSert";
+import PaveNumerique from "./PaveNumerique";
 
 type TutorSimpleViewProps = {
   classe: Classe;
@@ -467,6 +468,19 @@ export default function TutorSimpleView({
                       );
                     })}
                   </div>
+                ) : currentQuestion.format === "short" && currentQuestion.saisie === "pave" ? (
+                  /* ⭐ 14/11/2026 — le pavé numérique enfant (façon IXL) : on
+                     clique, on ne tape pas. Voir PaveNumerique.tsx. */
+                  <PaveNumerique
+                    key={currentQuestion.id}
+                    attendue={currentQuestion.expected[0]}
+                    classe={classe}
+                    saisie={answer}
+                    setSaisie={setAnswer}
+                    onEnvoyer={onQcmClick}
+                    disabled={busy}
+                    grand={classBoard}
+                  />
                 ) : currentQuestion.format === "open" ? (
                   <div className="space-y-4">
                     <textarea

@@ -99,6 +99,7 @@ import {
 // `fixed` et rendait mal. En attendant de revoir le principe, l'aide passe par
 // l'explication IA proposée sur l'écran d'erreur (`CoachErrorHelp`).
 import TutorSimpleView from "./TutorSimpleView";
+import PaveNumerique from "./PaveNumerique";
 import BoutonVideoCompetence from "./BoutonVideoCompetence";
 
 const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
@@ -2541,6 +2542,20 @@ function handleInputKeyDown(
                         })}
                       </div>
                     </div>
+                  ) : currentQuestion.format === "short" &&
+                    currentQuestion.saisie === "pave" ? (
+                    /* ⭐ 14/11/2026 — le pavé numérique enfant (façon IXL) :
+                       on clique, on ne tape pas. Voir PaveNumerique.tsx. */
+                    <PaveNumerique
+                      key={currentQuestion.id}
+                      attendue={currentQuestion.expected[0]}
+                      classe={classe}
+                      saisie={answer}
+                      setSaisie={setAnswer}
+                      onEnvoyer={(reponse) => void handleQcmClick(reponse)}
+                      disabled={busy || wrongAnswerPanelOpen}
+                      grand={classBoard}
+                    />
                   ) : currentQuestion.format === "open" ? (
                     <div className="space-y-3">
                       <div className="text-sm font-bold text-slate-800">

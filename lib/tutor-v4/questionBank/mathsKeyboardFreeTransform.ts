@@ -1,5 +1,6 @@
 // Transforme les questions à RÉPONSE TAPÉE (format "short", réponse numérique)
-// en QCM cliquables, pour supprimer la saisie clavier en primaire (CM1/CM2).
+// en QCM cliquables — ou, depuis le 14/11/2026, pour la moitié d'entre elles, en
+// réponse au PAVÉ NUMÉRIQUE ENFANT (`saisie: "pave"`, voir resolve()) — pour supprimer la saisie clavier en primaire (CM1/CM2).
 // Demande du principal (20/06/2026) : en CM1/CM2 les élèves tapent trop
 // lentement → on remplace la frappe par un clic.
 //
@@ -18,6 +19,7 @@ import type {
   TutorBankItemV4,
 } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import { lirePave } from "@/lib/tutor-v4/paveNumerique";
 
 type Parsed = {
   value: number;
@@ -116,8 +118,10 @@ function pickDistractorValues(parsed: Parsed): number[] {
 
 type QcmOverride = {
   format: QuestionFormat;
-  choices: string[];
+  choices?: string[];
   comparator: ComparatorName;
+  /** « pave » : la question reste « short », réponse au pavé numérique enfant. */
+  saisie?: "pave";
   /**
    * Réécrit la réponse attendue quand les propositions ne sortent PAS de
    * `expected` — c'est le cas des QCM d'opérations, fabriqués à partir d'une
@@ -215,14 +219,45 @@ type Resolution =
   | { kind: "drop" }
   | { kind: "override"; override: QcmOverride };
 
+// ⭐ 14/11/2026 — LE PAVÉ NUMÉRIQUE ENFANT (Frédéric, devant IXL : « pas
+// seulement des QCM, des claviers enfants ? »). La règle « zéro clavier » est
+// NUANCÉE : on ne tape toujours pas, on clique sur un pavé de gros boutons.
+// Environ UNE réponse numérique sur deux reste donc en « short » avec
+// `saisie: "pave"`, l'autre devient un QCM comme avant. Le tirage est
+// DÉTERMINISTE : un item figé l'est par son id, une génération de gabarit par
+// son id + son énoncé (le même énoncé est toujours servi de la même façon).
+// Le correcteur reste `number_equal`, et l'unité est un suffixe FIXE du pavé :
+// l'élève envoie « 24 m », jamais « 24 » seul (⛔ en périmètre).
+function hachage(texte: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < texte.length; i++) {
+    h ^= texte.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+// Le pavé ne se propose que si le suffixe ne donne rien : pas quand l'énoncé
+// demande l'unité (l'afficher serait la réponse).
+function paveOverride(text: string, expected: string[]): QcmOverride | null {
+  if (/unit[ée]/i.test(text)) return null;
+  if (!lirePave(expected[0])) return null;
+  return { format: "short", comparator: "number_equal", saisie: "pave" };
+}
+
 function resolve(
   format: QuestionFormat,
   text: string,
-  expected: string[]
+  expected: string[],
+  cle: string
 ): Resolution {
   if (format === "short") {
+    const pave = paveOverride(text, expected);
+    if (pave && hachage(cle) % 2 === 0) return { kind: "override", override: pave };
     const override = qcmOverride(format, expected);
-    return override ? { kind: "override", override } : { kind: "keep" };
+    if (override) return { kind: "override", override };
+    // Pas de QCM possible (trop peu de distracteurs) : le pavé plutôt que le clavier.
+    return pave ? { kind: "override", override: pave } : { kind: "keep" };
   }
   if (format === "open") {
     const override = operationOverride(text, expected);
@@ -240,9 +275,14 @@ function sansCaseASaisir<T>(q: T): T {
   return { ...q, canvas: { ...c, display: { ...(c.display ?? {}), showMissing: false } } };
 }
 
+// Déjà passé au pavé (une banque qui s'applique la transformation, puis l'index
+// qui la réapplique) : on n'y retouche pas.
+const dejaAuPave = (q: { saisie?: string }) => q.saisie === "pave";
+
 function transformItem(item: TutorBankItemV4): TutorBankItemV4 | null {
   if (item.kind === "fixed") {
-    const r = resolve(item.format, item.text, item.expected);
+    if (dejaAuPave(item)) return item;
+    const r = resolve(item.format, item.text, item.expected, item.id);
     if (r.kind === "drop") return null;
     return r.kind === "override" ? sansCaseASaisir({ ...item, ...r.override }) : item;
   }
@@ -255,16 +295,21 @@ function transformItem(item: TutorBankItemV4): TutorBankItemV4 | null {
   } catch {
     sniff = null;
   }
-  if (sniff && resolve(sniff.format, sniff.text, sniff.expected).kind === "drop") {
+  if (
+    sniff &&
+    !dejaAuPave(sniff) &&
+    resolve(sniff.format, sniff.text, sniff.expected, item.id).kind === "drop"
+  ) {
     return null;
   }
 
   const originalGenerate = item.generate;
   return {
     ...item,
-    generate: () => {
-      const q = originalGenerate();
-      const r = resolve(q.format, q.text, q.expected);
+    generate: (...args: Parameters<typeof originalGenerate>) => {
+      const q = originalGenerate(...args);
+      if (dejaAuPave(q)) return q;
+      const r = resolve(q.format, q.text, q.expected, `${item.id}|${q.text}`);
       return r.kind === "override" ? sansCaseASaisir({ ...q, ...r.override }) : q;
     },
   };

@@ -85,6 +85,7 @@ function materializeBankItem(
   canvas?: CanvasFigure;
   audioSrc?: string;
   choiceDiagnostics?: ChoiceDiagnostic[];
+  saisie?: TutorQuestionOption["saisie"];
   difficulty: number;
 } {
   if (item.kind === "fixed") {
@@ -117,6 +118,7 @@ function materializeBankItem(
       canvas: item.canvas,
       audioSrc: item.audioSrc,
       choiceDiagnostics: item.choiceDiagnostics,
+      saisie: item.saisie,
       difficulty: item.difficulty,
     };
   }
@@ -153,6 +155,7 @@ function materializeBankItem(
     explanation: generated.explanation,
     canvas: generated.canvas,
     choiceDiagnostics: generated.choiceDiagnostics,
+    saisie: generated.saisie,
     difficulty: item.difficulty,
   };
 }
@@ -245,6 +248,7 @@ function toTutorQuestionOption(
     canvas: q.canvas,
     audioSrc: q.audioSrc,
     choiceDiagnostics: q.choiceDiagnostics,
+    saisie: q.saisie,
     meta: {
       familyId: inferFamilyId(item),
       theme: inferTheme(q.text),
