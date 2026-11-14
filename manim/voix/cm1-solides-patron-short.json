@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je fabrique mon dé. J'écris les nombres au hasard : 1 ici, 6 juste à côté…",
+  "01-oups": "Hé ! Sur mon dé, le 1 touche le 6 ! Sur un vrai dé, ils sont face à face, et ils font 7 !",
+  "02-question": "Question ! Sur un vrai dé, quelle face est en face du 3 ? A : le 6. B : le 2. C : le 4. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 7 moins 3, 4. Sur le patron, le 4 n'est jamais collé au 3 : il y a un carré entre eux.",
+  "03-ouf": "Ouf ! Mon dé est un vrai dé. Je le lance… 4 !",
+  "04-commentaire": "À toi : sur un vrai dé, quelle face est en face du 1 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

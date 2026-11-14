@@ -1,0 +1,17 @@
+{
+  "00-garde": "Reconnaître un patron. Quel dessin à plat devient quel solide ?",
+  "01-situation": "Voici Rose. Elle est créatrice de jeux de société. Pour son nouveau jeu, elle fabrique un dé, des pions et une boîte, tout en carton. Chaque pièce commence par un patron.",
+  "02-autres-cube": "Le patron du cube a 6 carrés. La croix n'est pas le seul ! En voici deux autres : une bande de 4 carrés avec un carré au-dessus et un au-dessous, décalés ; et un escalier. Il y a 11 patrons du cube en tout.",
+  "03-plier": "Pour savoir si un dessin est un patron du cube, on plie dans sa tête. On choisit un carré pour le fond. Les carrés qui le touchent se relèvent. Le dernier se rabat en couvercle. Si deux carrés arrivent au même endroit, ce n'est pas un patron.",
+  "04-solides": "Chaque solide a son patron. Le pavé droit : 6 rectangles, pareils deux par deux. La pyramide à base carrée : un carré et 4 triangles. Le cylindre : 2 disques et un rectangle, qui s'enroule.",
+  "05-question": "Question ! Quel est le patron d'un cylindre ? A : un carré et 4 triangles. B : 2 disques et un rectangle. C : 6 rectangles. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Les 2 disques font le dessus et le dessous. Le rectangle s'enroule autour. Le carré et les 4 triangles, c'est la pyramide.",
+  "06-de": "Maintenant, le dé de Rose. Sur un vrai dé, deux faces opposées font toujours 7. 1 en face de 6, 2 en face de 5, 3 en face de 4. Sur le patron, deux faces opposées ne se touchent jamais : il y a toujours un carré entre elles.",
+  "07-piege": "Attention au piège ! Deux carrés qui se touchent sur le patron sont voisins sur le dé. Ils ne peuvent pas être opposés.",
+  "08-question": "Question ! Sur un dé, quelle face est en face du 2 ? A : le 3. B : le 6. C : le 5. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. Deux faces opposées font 7 : 7 moins 2, 5. Le 5 est en face du 2.",
+  "09-defi": "À toi de jouer ! Rose a écrit 1, 2 et 3 sur le patron de son dé. Quels nombres doit-elle écrire dans les trois cases vides ? Mets pause, et cherche !",
+  "09b-correction": "Correction. On plie dans sa tête. La case au bout de la bande arrive en face du 1 : on écrit 6. La case en face du 2 : 5. La dernière, en face du 3 : 4. Chaque paire fait 7.",
+  "10-finale": "Ce que tu as appris. Le cube a 11 patrons, pas seulement la croix. Pour vérifier, on plie dans sa tête, un carré après l'autre. Et chaque solide a son patron : rectangles pour le pavé, triangles et une base pour la pyramide, disques et rectangle pour le cylindre.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

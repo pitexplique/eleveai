@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'empile des caisses en pyramide. En haut, 1 caisse. Je regarde d'en haut… je vois 4 caisses. Donc 4 caisses en tout !",
+  "01-oups": "Hé ! Il y a une caisse cachée en dessous : la caisse du haut ne flotte pas !",
+  "02-question": "Question ! En bas, 2 rangées de 2 caisses. En haut, 1 caisse. Combien de caisses en tout ? A : 5 caisses. B : 4 caisses. C : 3 caisses. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! En bas : 2 fois 2, 4. En haut : 1. 4 plus 1, 5 caisses. Celles du dessous comptent aussi !",
+  "03-ouf": "Ouf ! 5 caisses. Ma pyramide tient debout !",
+  "04-commentaire": "À toi : une pyramide de caisses avec 3 fois 3 en bas, 2 fois 2 au milieu et 1 en haut. Combien de caisses ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

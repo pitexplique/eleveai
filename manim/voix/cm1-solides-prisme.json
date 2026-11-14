@@ -1,0 +1,17 @@
+{
+  "00-garde": "Le prisme droit. Faces, sommets, arêtes : comment tout compter sans se tromper ?",
+  "01-situation": "Voici Sacha. Elle est guide de montagne. Ce soir, son groupe dort sous la tente. Regarde sa forme : ce n'est ni un cube, ni une pyramide. C'est un prisme droit.",
+  "02-bases": "Un prisme droit a deux bases, pareilles, l'une en face de l'autre. Pour la tente, les bases sont deux triangles : l'entrée, et le fond.",
+  "03-laterales": "Autour, les faces sont droites comme des murs : ce sont des rectangles. Le triangle a 3 côtés : il y a 3 rectangles. Le toit à gauche, le toit à droite, et le sol.",
+  "04-compter": "Comptons. Les faces : 2 bases, plus 3 rectangles. 3 plus 2, 5 faces. Les sommets : 3 en bas devant, 3 au fond. 2 fois 3, 6 sommets. Les arêtes : 3 devant, 3 au fond, et 3 qui relient. 3 fois 3, 9 arêtes.",
+  "05-question": "Question ! Un crayon a la forme d'un prisme à base hexagonale : sa base a 6 côtés. Combien a-t-il de faces ? A : 6 faces. B : 8 faces. C : 12 faces. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 6 rectangles autour, plus les 2 bases : 6 plus 2, 8 faces.",
+  "06-piege": "Attention au piège ! Le prisme et la pyramide se ressemblent parfois. Mais la pyramide a une seule base, et une pointe. Le prisme a deux bases pareilles, et pas de pointe.",
+  "07-patron": "Et son patron ? On déplie la tente : 3 rectangles collés en bande, et les 2 triangles, un de chaque côté. Replié, il redevient la tente.",
+  "08-question": "Question ! Un prisme a pour base un pentagone : 5 côtés. Combien a-t-il d'arêtes ? A : 15 arêtes. B : 10 arêtes. C : 7 arêtes. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 5 arêtes sur une base, 5 sur l'autre, et 5 qui relient : 3 fois 5, 15 arêtes. 10, ce sont les sommets.",
+  "09-defi": "À toi de jouer ! Un écrou a la forme d'un prisme à base hexagonale. Combien a-t-il de sommets, et combien d'arêtes ? Mets pause, et cherche !",
+  "09b-correction": "Correction. La base a 6 côtés. Les sommets : 6 sur chaque base, 2 fois 6, 12 sommets. Les arêtes : 6 en haut, 6 en bas, 6 qui relient, 3 fois 6, 18 arêtes.",
+  "10-finale": "Ce que tu as appris. Un prisme droit a deux bases pareilles, et des rectangles autour. Tout part du nombre de côtés de la base : les faces, c'est ce nombre plus 2 ; les sommets, 2 fois ce nombre ; les arêtes, 3 fois ce nombre.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

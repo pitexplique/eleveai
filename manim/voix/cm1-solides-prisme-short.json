@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! J'ai monté ma tente. Une vraie pyramide ! Bon… elle n'a pas de pointe. Elle a une longue arête, tout en haut.",
+  "01-oups": "Hé ! Une pyramide a une seule base. Ma tente en a deux : un triangle devant, un triangle au fond !",
+  "02-question": "Question ! Ma tente est un prisme. Combien a-t-elle de faces, le sol compris ? A : 3 faces. B : 4 faces. C : 5 faces. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 2 triangles, plus 3 rectangles : les deux pans du toit et le sol. 2 plus 3, 5 faces.",
+  "03-ouf": "Ouf ! Mon prisme est bien fermé. Bonne nuit !",
+  "04-commentaire": "À toi : combien d'arêtes a ma tente ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
