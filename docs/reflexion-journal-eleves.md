@@ -194,7 +194,7 @@ semaine). On code le bouton « Publier » seulement si ça marche avec les
 
 ## 10. Décidé : le premier article
 
-**En classe, avec les 6e, sur les tirs au but** (réponse de Frédéric, 14/11).
+**En classe, avec les 6e, sur les tirs au but, avant Noël** (réponses de Frédéric, 14/11).
 
 Question de départ : « Tirer au but : qui marque le plus souvent ? »
 
