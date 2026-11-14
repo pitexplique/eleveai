@@ -9,7 +9,7 @@ Plan cochable : `manim/PLAN-perimetre-aire-volume.md`, section « ## CM2 ». Ban
 - Voix validée À DEUX avant tout rendu. ⛔ Le 14/11, aucun WAV ni rendu : deux sessions Longueurs occupent le rendu HD du seul PC.
 - La Réunion : une seule mention sur 24 voix (aire_unites : « La Réunion fait environ 2 500 kilomètres carrés »).
 
-## Les 24 voix (`manim/voix/`) — ⏳ EN ATTENTE DU OUI de Frédéric
+## Les 24 voix (`manim/voix/`) — ✅ VALIDÉES par Frédéric le 14/11/2026 (« Oui, valide les 24 »), ceintures comprises ; ni WAV ni rendu encore
 | Ép. | Micro | Fichiers | Métier / décor | Questions paysage | Short (réponse) | Ceinture | Centres proposés |
 |---|---|---|---|---|---|---|---|
 | P1 | `perimetre_comprendre` | `cm2-perimetre-comprendre(-short)` | Noah, régisseur de concerts (scène 8 × 5, ruban 26 m ; carré 6,5 m, même tour) | B, C | 20 allumettes, enclos long / carré : A | jaune | musique, cinema-series |
@@ -30,8 +30,8 @@ Plan cochable : `manim/PLAN-perimetre-aire-volume.md`, section « ## CM2 ». Ban
 - Métiers : la matrice (`npx tsx scripts/metiers-pour-video.ts cm2 perimetre|aire`) ne propose que 3 métiers (éleveuse, carreleur, jardinière), déjà pris au CM1 : métiers choisis hors matrice, 6 filles / 6 garçons, aucun repris du CM1 ou du CE2. Pas de lignes CM2 dans `metiers-college.ts` : rien à marquer.
 - Clés : paysage `00-garde … 10-abonne` (comme le CM1) ; short `00-accroche, 01-…, 02-question, 02b-reponse, 03-ouf, 04-commentaire, 05-abonne` (seule la clé 01 change de nom selon l'épisode).
 
-## Prochaine étape (après le oui de Frédéric, et quand le rendu HD est libre)
-1. Corriger les voix selon ses retours (fichiers `manim/voix/cm2-*.json`).
+## Prochaine étape (voix validées ; attendre que le rendu HD soit libre)
+1. Voix figées : ne plus les retoucher sans lui.
 2. WAV (Julie, débit −6) dans `public/sons/cm2-<notion>-<ep>[-short]/` ; marques : adapter `manim/scripts/cm1/aire_marques.py` (ou une copie `manim/scripts/cm2/`) aux noms `cm2-…` ; ⚠️ jamais sans argument.
 3. Scripts `manim/scripts/cm2/perimetre_<ep>.py` et `aire_<ep>.py` sur le modèle CM1 (`perimetre_cm1_commun.py`, `aire_cm1_commun.py`, mixin `PhraseAGauche`) ; personnages à ajouter : noah, maelle, rayan, inaya, malo, elsa, tom, kenzo, yasmine, baptiste, nadia, romane. Puis la chaîne habituelle : dry run AUDIT=1 BORDS=1 → planche -ql → UN HD sous verrou `%TEMP%\eleveai-rendu-hd.lock` (≥ 2,5 Go libres) → `verifier-bords-video.py` = 0 → short Ti Margo (séries `films/cm2-perimetre.json`, `cm2-aire.json`) → miniatures « Dessin animé » → manifeste (dates libres après la série Longueurs) → fiche YouTube, R2, coach.
 4. Commit PAR CHEMIN, jamais de push.
