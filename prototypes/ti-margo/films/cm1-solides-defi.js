@@ -40,7 +40,7 @@ FILMS.defi=function(outils){
       const pos=[...BAS,...(T>=tHaut?[HAUT]:[])];
       caisses(c,pos,o);
       if(T>=tRegarde){ const u=zoom(T,tRegarde,.4); rond(c,W-140,90,34*u,'#f8f9fa'); rond(c,W-140,90,15*u,'#1f3b2c'); }
-      if(T>=tVois){ [[0,0,0],[1,0,0],[1,0,1],HAUT].forEach((p,k)=>{ if(T>=tVois+.15*k){ const d=dessus(p); ecrire(c,String(k+1),d[0],d[1]+4,66,CRAIE.jaune); } }); }
+      if(T>=tVois){ [[0,0,0],[1,0,0],[1,0,1],HAUT].forEach((p,k)=>{ if(T>=tVois+.15*k){ const d=dessus(p); ecrire(c,String(k+1),d[0],d[1]+4,72,'#6b2f0a'); } }); }
       if(T>=tTout) ecrire(c,'4 en tout ?',X,70,60*zoom(T,tTout,.4),CRAIE.blanc);
       tab.maj(); return; }
     if(T<q){ /* oups : la caisse cachée sous celle du haut */

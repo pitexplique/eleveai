@@ -79,10 +79,10 @@ class SolidesPrismeBase(PaysageSolidesCM1):
         t = la_tente(1.25, P(1.6, -1.6))
         self.au_mot("sous la tente")
         self.play(FadeIn(t, shift=UP * 0.3), run_time=0.5)
-        c = cube(e=0.8, centre=P(-2.6, 2.5))
-        py = pyramide(4, 1.0, 1.1, e=0.9, centre=P(-0.6, 2.5))
-        x1 = self.t("ni un cube,", 30).next_to(c, DOWN, buff=0.15)
-        x2 = self.t("ni une pyramide", 30).next_to(py, DOWN, buff=0.15)
+        c = cube(e=0.8, centre=P(-3.2, 2.5))
+        py = pyramide(4, 1.0, 1.1, e=0.9, centre=P(-0.5, 2.5))
+        x1 = self.t("ni un cube,", 26).next_to(c, DOWN, buff=0.15)
+        x2 = self.t("ni une pyramide", 26).next_to(py, DOWN, buff=0.15)
         self.au_mot("ce n'est ni un cube")
         self.play(FadeIn(c), FadeIn(x1), run_time=0.35)
         self.play(Create(VGroup(Line(c.get_corner(UL), c.get_corner(DR)), Line(c.get_corner(DL), c.get_corner(UR)))
@@ -92,7 +92,7 @@ class SolidesPrismeBase(PaysageSolidesCM1):
         self.play(Create(VGroup(Line(py.get_corner(UL), py.get_corner(DR)), Line(py.get_corner(DL), py.get_corner(UR)))
                          .set_stroke(ROUGE_ERREUR, 7)), run_time=0.3)
         self.au_mot("C'est un prisme droit")
-        g = self.gros("C'est un prisme droit.", couleur=JAUNE_TITRE, fs=34).move_to(P(3.3, 2.6))
+        g = self.gros("C'est un prisme droit.", couleur=JAUNE_TITRE, fs=34).move_to(P(3.5, 2.6))
         self.play(FadeIn(g, scale=1.2), Indicate(t, color=JAUNE_TITRE, scale_factor=1.05), run_time=0.5)
         self.attendre_voix()
 
@@ -213,10 +213,11 @@ class SolidesPrismeBase(PaysageSolidesCM1):
             sc.play(FadeIn(cr, shift=RIGHT * 0.3), run_time=0.35)
 
         def apres(sc):
-            lg = sc.rep_bas(0, [("6 rectangles autour", LAT_C), ("+ les 2 bases", BASE_C)], fs=32, buff=0.25, y0=-1.8, pas=0.6)
+            lg = VGroup(sc.rep_bas(0, [("6 rectangles autour", LAT_C)], fs=32, y0=-1.8, pas=0.6)[0],
+                        sc.rep_bas(1, [("+ les 2 bases", BASE_C)], fs=32, y0=-1.8, pas=0.6)[0])
             sc.aux_extraits([lg[0]], ["6 rectangles autour"])
             sc.aux_extraits([lg[1]], [("les 2 bases", 1, 0.15)])
-            lg2 = sc.rep_bas(1, ["6 + 2", "= 8 faces."], fs=32, buff=0.2, y0=-1.8, pas=0.6)
+            lg2 = sc.rep_bas(2, ["6 + 2", "= 8 faces."], fs=32, buff=0.2, y0=-1.8, pas=0.6)
             sc.aux_extraits(lg2, ["6 plus 2", "8 faces"])
             sc.rep_fini()
 
@@ -259,7 +260,7 @@ class SolidesPrismeBase(PaysageSolidesCM1):
     def ecran_patron(self):
         self.ecran("07-patron")
         pc, par = patron_tente(1.0, 1.5)
-        pa = PatronLibre(pc, par, e=0.95, centre=P(-3.4, -0.1), couleur=TOILE,
+        pa = PatronLibre(pc, par, e=1.25, centre=P(-3.6, -0.1), couleur=TOILE,
                          couleurs={"entree": BASE_C, "fond": BASE_C})
         pa.tilt = 0
         pa.angles.update(PLI_TENTE)
@@ -304,16 +305,17 @@ class SolidesPrismeBase(PaysageSolidesCM1):
             sc.play(FadeIn(pr, shift=UP * 0.2), run_time=0.35)
 
         def apres(sc):
-            lg = sc.rep_bas(0, [("5 sur une base", ARETE_C), ("+ 5 sur l'autre", ARETE_C), ("+ 5 qui relient", ARETE_C)],
-                            fs=26, buff=0.16, y0=-1.8, pas=0.55)
+            lg = sc.rep_bas(0, [("5 sur une base", ARETE_C), ("+ 5 sur l'autre", ARETE_C)],
+                            fs=28, buff=0.16, y0=-1.7, pas=0.5)
+            lg.add(sc.rep_bas(1, [("+ 5 qui relient", ARETE_C)], fs=28, y0=-1.7, pas=0.5)[0])
             gr = [[(i, (i + 1) % 5) for i in range(5)], [(5 + i, 5 + (i + 1) % 5) for i in range(5)],
                   [(i, 5 + i) for i in range(5)]]
             for k, ex in enumerate(["5 arêtes sur une base", "5 sur l'autre", "5 qui relient"]):
                 sc.aux_extraits([lg[k]], [ex])
                 sc.play(*[Create(pr.arete_ab(a, b, sw=7)) for a, b in gr[k]], run_time=0.3)
-            lg2 = sc.rep_bas(1, ["3 × 5", "= 15 arêtes."], fs=30, buff=0.2, y0=-1.8, pas=0.55)
+            lg2 = sc.rep_bas(2, ["3 × 5", "= 15 arêtes."], fs=30, buff=0.2, y0=-1.7, pas=0.5)
             sc.aux_extraits(lg2, ["3 fois 5", "15 arêtes"])
-            lg3 = sc.rep_bas(2, [("10, ce sont les sommets.", SOMMET_C)], fs=30, y0=-1.8, pas=0.55)
+            lg3 = sc.rep_bas(3, [("10, ce sont les sommets.", SOMMET_C)], fs=30, y0=-1.7, pas=0.5)
             sc.aux_extraits([lg3[0]], ["10, ce sont"])
             sc.rep_fini()
 

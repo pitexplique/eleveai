@@ -51,7 +51,7 @@ FILMS.prisme=function(outils){
     /* ouf : la tente fermée, la lune et les étoiles */
     tente(c,X-60,440,290);
     rond(c,W-150,130,60,'#fff3bf'); rond(c,W-125,115,55,'#1f3b2c');
-    [[120,110],[260,70],[420,140],[700,80]].forEach(([x,y],k)=>{ if(T>=ouf+.3*k) rond(c,x,y,9,CRAIE.jaune); });
+    [[90,90],[170,210],[660,200],[730,70]].forEach(([x,y],k)=>{ if(T>=ouf+.3*k) rond(c,x,y,9,CRAIE.jaune); });
     if(T>=tFerme) coche(c,W-150,620,.7);
     if(T>=tNuit) ecrire(c,'Bonne nuit !',X-60,110,60*zoom(T,tNuit,.4),'#fff3bf');
     tab.maj();
@@ -70,7 +70,7 @@ FILMS.prisme=function(outils){
   const phraseQ=[qd('Ma tente est un prisme.'),qd('Combien a-t-elle de faces,'),qd('le sol compris ?')];
   const tq=(m,n=1)=>mot('02-question',m,n)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
-  rd.saute(2); const r1=rd('2 triangles,'), r2=rd('plus 3 rectangles :'), r3=rd('les deux pans du toit et le sol.'), r4=rd('2 plus 3, 5 faces.');
+  rd.saute(2); const r1=rd('2 triangles,'), r2=rd('plus 3 rectangles :'), r3=rd('les deux pans du toit'), r3b=rd('et le sol.'), r4=rd('2 plus 3, 5 faces.');
   const tC=mot('02b-reponse','C');
 
   const mini=`<svg width="330" height="250" viewBox="0 0 330 250"><rect x="6" y="6" width="318" height="238" rx="18" fill="#1f3b2c" stroke="#8a5a2b" stroke-width="12"/>
@@ -84,7 +84,7 @@ FILMS.prisme=function(outils){
     question:{ qc:'02-question',rc:'02b-reponse',finR:ouf,cpt:fin('02-question')+.1,bonne:2,tBon:tC-r,
       phrase:phraseQ,pause:pauseQ,
       choix:[['3 faces',tq('A'),tq('3')],['4 faces',tq('B'),tq('4')],['5 faces',tq('C'),tq('5')]],
-      tete:[[r+.1,'Réponse '],[tC,'C !']],reponse:[r1,r2,r3,r4],suite:[] },
+      tete:[[r+.1,'Réponse '],[tC,'C !']],reponse:[r1,r2,r3,r3b,r4],suite:[] },
     jouer(P,T,cam){
       const g=gestes(P,T); dessiner(T);
       const dansQ=T>=q&&T<ouf, dansF=T>=f, gros=T<tJe-.08;

@@ -210,11 +210,12 @@ class SolidesDefiBase(PaysageSolidesCM1):
             sc.au_mot("Un étage")
             sc.play(FadeIn(lg[0]), h.animate.shift(UP * 0.9), run_time=0.35)
             sc.aux_extraits(lg[1:], ["2 fois 2", "4. Deux"])
-            lg2 = sc.rep_bas(1, ["Deux étages :", "4 + 4", "= 8 petits cubes."], fs=32, buff=0.2, y0=-1.4, pas=0.6)
+            lg2a = sc.rep_bas(1, ["Deux étages :"], fs=32, buff=0.2, y0=-1.4, pas=0.6)
+            lg2 = sc.rep_bas(2, ["4 + 4", "= 8 petits cubes."], fs=32, buff=0.2, y0=-1.4, pas=0.6)
             sc.au_mot("Deux étages")
-            sc.play(FadeIn(lg2[0]), h.animate.shift(DOWN * 0.9), run_time=0.35)
-            sc.aux_extraits(lg2[1:], ["4 plus 4", "8 petits cubes"])
-            lg3 = sc.rep_bas(2, [("4, c'est un seul étage !", ORANGE_RETENUE)], fs=32, y0=-1.4, pas=0.6)
+            sc.play(FadeIn(lg2a[0]), h.animate.shift(DOWN * 0.9), run_time=0.35)
+            sc.aux_extraits(lg2[0:], ["4 plus 4", "8 petits cubes"])
+            lg3 = sc.rep_bas(3, [("4, c'est un seul étage !", ORANGE_RETENUE)], fs=32, y0=-1.4, pas=0.6)
             sc.aux_extraits([lg3[0]], [("4, c'est", 1)])
             sc.rep_fini()
 
@@ -261,14 +262,15 @@ class SolidesDefiBase(PaysageSolidesCM1):
             sc.play(FadeIn(emp, shift=UP * 0.2), run_time=0.35)
 
         def apres(sc):
-            lg = sc.rep_bas(0, ["3 rangées de 4 cubes :", "3 × 4", "= 12 cubes."], fs=32, buff=0.2, y0=-1.4, pas=0.6)
+            lg = sc.rep_bas(0, ["3 rangées de 4 cubes :"], fs=32, buff=0.2, y0=-1.4, pas=0.6)
+            lg.add(*sc.rep_bas(1, ["3 × 4", "= 12 cubes."], fs=32, buff=0.2, y0=-1.4, pas=0.6))
             rang = [VGroup(*[c for q, c in emp.cubes.items() if q[1] == y]) for y in range(3)]
             sc.aux_extraits([VGroup(lg[0], *[SurroundingRectangle(r, color=JAUNE_TITRE, buff=0.03) for r in rang])],
                             ["3 rangées de 4"])
             sc.aux_extraits(lg[1:], ["3 fois 4", "12 cubes"])
-            lg2 = sc.rep_bas(1, [("7, c'est 4 + 3 : on a additionné", ORANGE_RETENUE)], fs=30, y0=-1.4, pas=0.6)
+            lg2 = sc.rep_bas(2, [("7, c'est 4 + 3 : on a additionné", ORANGE_RETENUE)], fs=30, y0=-1.4, pas=0.6)
             sc.aux_extraits([lg2[0]], [("7, c'est", 1)])
-            lg3 = sc.rep_bas(2, [("au lieu de compter les rangées.", ORANGE_RETENUE)], fs=30, y0=-1.4, pas=0.6)
+            lg3 = sc.rep_bas(3, [("au lieu de compter les rangées.", ORANGE_RETENUE)], fs=30, y0=-1.4, pas=0.6)
             sc.au_mot("au lieu de compter")
             sc.play(FadeIn(lg3), run_time=0.3)
             sc.rep_fini()

@@ -163,9 +163,9 @@ class SolidesPatronBase(PaysageSolidesCM1):
         tit = self.t("Chaque solide a son patron", 42, JAUNE_TITRE).move_to(P(0, 3.1))
         self.play(Write(tit), run_time=0.4)
         pc, par, pli = patron_pave(1.3, 0.8, 0.55)
-        pv = PatronLibre(pc, par, e=0.62, centre=P(-4.3, 0.6), couleur="#60a5fa")
+        pv = PatronLibre(pc, par, e=0.8, centre=P(-4.5, 0.6), couleur="#60a5fa")
         self.au_mot("Le pavé droit")
-        t1 = self.t("Le pavé droit :", 30, "#60a5fa").move_to(P(-4.3, -1.5))
+        t1 = self.t("Le pavé droit :", 30, "#60a5fa").move_to(P(-4.5, -1.5))
         self.play(FadeIn(pv), FadeIn(t1), run_time=0.35)
         l1 = self.ligne([("6 rectangles,", WHITE)], 28).next_to(t1, DOWN, buff=0.12)
         self.aux_extraits(l1, ["6 rectangles"])
@@ -174,26 +174,28 @@ class SolidesPatronBase(PaysageSolidesCM1):
         self.play(pv.plier(tilt=0, run_time=0.5))
         self.play(pv.plier(pli, run_time=1.0))
         pc, par, pli2 = patron_pyramide(0.9, 0.85)
-        py = PatronLibre(pc, par, e=0.62, centre=P(-0.2, 0.6), couleur="#facc15", couleurs={"base": "#fb923c"})
+        py = PatronLibre(pc, par, e=0.8, centre=P(-0.5, 0.6), couleur="#facc15", couleurs={"base": "#fb923c"})
         self.au_mot("La pyramide à base carrée")
-        t2 = self.t("La pyramide :", 30, "#facc15").move_to(P(-0.2, -1.5))
+        t2 = self.t("La pyramide :", 30, "#facc15").move_to(P(-0.5, -1.5))
         self.play(FadeIn(py), FadeIn(t2), run_time=0.35)
-        l2 = self.ligne([("un carré", WHITE), ("et 4 triangles", WHITE)], 28, buff=0.18).next_to(t2, DOWN, buff=0.12)
+        l2 = self.ligne([("un carré", WHITE), ("et 4 triangles", WHITE)], 28, buff=0.18)
+        l2.arrange(DOWN, buff=0.1).next_to(t2, DOWN, buff=0.12)
         self.aux_extraits(l2, ["un carré", "4 triangles"])
         self.play(py.plier(tilt=0, run_time=0.5))
         self.play(py.plier(pli2, run_time=1.0))
         self.au_mot("Le cylindre")
-        rect = Rectangle(width=2.2, height=1.1, fill_color="#c084fc", fill_opacity=0.9, stroke_color=WHITE,
-                         stroke_width=4).move_to(P(4.2, 0.6))
-        d1 = Circle(radius=0.35, fill_color="#e879f9", fill_opacity=0.9, stroke_color=WHITE, stroke_width=4) \
+        rect = Rectangle(width=2.8, height=1.4, fill_color="#c084fc", fill_opacity=0.9, stroke_color=WHITE,
+                         stroke_width=4).move_to(P(3.6, 0.6))
+        d1 = Circle(radius=0.45, fill_color="#e879f9", fill_opacity=0.9, stroke_color=WHITE, stroke_width=4) \
             .next_to(rect, UP, buff=0)
         d2 = d1.copy().next_to(rect, DOWN, buff=0)
-        t3 = self.t("Le cylindre :", 30, "#c084fc").move_to(P(4.2, -1.5))
+        t3 = self.t("Le cylindre :", 30, "#c084fc").move_to(P(3.6, -1.5))
         self.play(FadeIn(VGroup(rect, d1, d2)), FadeIn(t3), run_time=0.35)
-        l3 = self.ligne([("2 disques", WHITE), ("et un rectangle", WHITE)], 26, buff=0.18).next_to(t3, DOWN, buff=0.12)
+        l3 = self.ligne([("2 disques", WHITE), ("et un rectangle", WHITE)], 28, buff=0.18)
+        l3.arrange(DOWN, buff=0.1).next_to(t3, DOWN, buff=0.12)
         self.aux_extraits(l3, ["2 disques", "un rectangle"])
         self.au_mot("qui s'enroule")
-        cy = Cylindre(0.4, 1.1, centre=P(4.2, 0.6), couleur="#c084fc")
+        cy = Cylindre(0.5, 1.4, centre=P(3.6, 0.6), couleur="#c084fc")
         self.play(ReplacementTransform(VGroup(rect, d1, d2), cy), run_time=1.0)
         self.attendre_voix()
 
@@ -207,20 +209,21 @@ class SolidesPatronBase(PaysageSolidesCM1):
             sc.play(FadeIn(cy, shift=UP * 0.2), run_time=0.35)
 
         def apres(sc):
-            lg = sc.rep_bas(0, [("Les 2 disques : le dessus et le dessous.", "#e879f9")], fs=30, y0=-1.4, pas=0.6)
-            sc.aux_extraits([lg[0]], [("Les 2 disques", 1, 0.2)])
+            lg = sc.rep_bas(0, [("Les 2 disques : le dessus", "#e879f9")], fs=30, y0=-1.4, pas=0.6)
+            lgb = sc.rep_bas(1, [("et le dessous.", "#e879f9")], fs=30, y0=-1.4, pas=0.6)
+            sc.aux_extraits([VGroup(lg[0], lgb[0])], [("Les 2 disques", 1, 0.2)])
             sc.play(FadeIn(cy.disque_haut("#e879f9")), FadeIn(cy.disque_bas("#e879f9")), run_time=0.3)
-            lg2 = sc.rep_bas(1, [("Le rectangle s'enroule autour.", "#c084fc")], fs=30, y0=-1.4, pas=0.6)
+            lg2 = sc.rep_bas(2, [("Le rectangle s'enroule autour.", "#c084fc")], fs=30, y0=-1.4, pas=0.6)
             sc.au_mot("Le rectangle s'enroule")
             sc.play(FadeIn(lg2), Indicate(cy.corps, color=WHITE), run_time=0.35)
-            lg3 = sc.rep_bas(2, [("1 carré et 4 triangles : la pyramide.", ORANGE_RETENUE)], fs=30, y0=-1.4, pas=0.6)
+            lg3 = sc.rep_bas(3, [("1 carré et 4 triangles : la pyramide.", ORANGE_RETENUE)], fs=30, y0=-1.4, pas=0.6)
             sc.aux_extraits([lg3[0]], ["Le carré et les 4 triangles"])
             sc.rep_fini()
 
         self.question_pause("05-question", "05b-reponse",
                             ["Quel est le patron", "d'un cylindre ?"],
-                            [self.choix("1 carré et 4 triangles"), self.choix("2 disques et 1 rectangle"),
-                             self.choix("6 rectangles")], 1,
+                            [self.choix("1 carré et 4 triangles", fs=24), self.choix("2 disques et 1 rectangle", fs=24),
+                             self.choix("6 rectangles", fs=24)], 1,
                             ["Les 2 disques : le dessus et le dessous.", "Le rectangle s'enroule autour.",
                              "1 carré et 4 triangles : la pyramide."],
                             mot_q="Quel est le patron", autres_q=autres_q, autres_r=apres)
@@ -283,7 +286,7 @@ class SolidesPatronBase(PaysageSolidesCM1):
         self.play(FadeIn(pa), FadeIn(l0, shift=UP * 0.1), run_time=0.4)
         self.au_mot("sont voisins sur le dé")
         l1 = self.t("sont voisins sur le dé.", 32, ORANGE_RETENUE)
-        gauche(l1, 0.4, 0.75)
+        gauche(l1, 0.2, 0.85)
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.3)
         self.play(pa.plier(tilt=0, run_time=0.6))
         self.play(pa.plier({k: 90 for k in ("g", "d", "av", "ar", "couv")}, run_time=1.2))

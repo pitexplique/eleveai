@@ -82798,6 +82798,13 @@
       ],
       "centres": [
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "solides",
+          "microId": "solide_reconnaitre"
+        }
       ]
     },
     {
@@ -82848,6 +82855,13 @@
       ],
       "centres": [
         "cuisine"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "solides",
+          "microId": "solide_reconnaitre"
+        }
       ]
     },
     {
@@ -82955,6 +82969,18 @@
       "centres": [
         "transports",
         "argent-budget"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "solides",
+          "microId": "solide_sommet_arete_face"
+        },
+        {
+          "classe": "cm1",
+          "notionId": "solides",
+          "microId": "solide_face"
+        }
       ]
     },
     {
@@ -83005,6 +83031,18 @@
       ],
       "centres": [
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "solides",
+          "microId": "solide_sommet_arete_face"
+        },
+        {
+          "classe": "cm1",
+          "notionId": "solides",
+          "microId": "solide_face"
+        }
       ]
     },
     {
@@ -83107,6 +83145,13 @@
       ],
       "centres": [
         "histoire-geographie"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "solides",
+          "microId": "solide_face"
+        }
       ]
     },
     {
@@ -83156,6 +83201,13 @@
       ],
       "centres": [
         "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "solides",
+          "microId": "solide_face"
+        }
       ]
     },
     {
