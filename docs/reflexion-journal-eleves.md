@@ -256,3 +256,17 @@ des parents ? » Oui, et ça va bien avec « les maths sont partout ».
 d'un club de foot du coin (ou un parent qui entraîne) pour la séance dans
 la cour. Il donne un chiffre vrai (« en match, on marque environ 3 tirs
 au but sur 4 ») que les élèves comparent avec le leur.
+
+**Une première piste concrète : un parent architecte** (14/11). Un parent
+d'élève est architecte. Idées d'articles avec lui, pour les 6e :
+
+- **« Le plan de notre classe »** : on mesure la salle, on la dessine à
+  l'échelle (1 cm pour 1 m), on calcule l'aire et le périmètre. Il montre
+  un vrai plan et explique à quoi servent ces calculs dans son métier.
+  Très lié à la série « périmètre, aire, volume » des vidéos.
+- **« Une maison qui résiste aux cyclones »** : la case créole, la pente du
+  toit, la varangue. Mesures d'angles, de longueurs, et un peu de science
+  (le vent, la pluie).
+
+Dans l'article : « Merci à notre invité, architecte », sans nom de famille
+et sans dire de quel élève il est le parent.
