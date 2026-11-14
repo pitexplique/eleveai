@@ -66,11 +66,12 @@ Les SVG de `manim/assets/animaux/` sont **générés** (ne pas les retoucher) ; 
 cadre invisible de 60 × 60 en tête de chacun garde les proportions du coach
 (SVGMobject ignore le viewBox).
 
-## Pas encore fait
+## Dans le coach (14/11/2026)
 
-- **Brancher au coach** : ajouter un `kind: "animaux"` à `CanvasFigure`
-  (`lib/tutor-v4/types.ts`) et un cas dans `CanvasRenderer` qui rend
-  `<GrilleAnimaux>` — pas fait le 14/11 parce que `types.ts` et les banques
-  étaient en cours d'édition par une autre session.
+Branchée : `kind: "animaux"` → `lib/canvas/AnimauxCanvas.tsx` ; helper et
+familles de questions dans `lib/tutor-v4/questionBank/cycle2/maths/animaux.ts` ;
+banques `cp/maths/animaux.bank.ts` et `ce1/maths/animaux.bank.ts`. Voir
+`lib/canvas/CATALOGUE.md`.
+
 - Les 4 animaux d'`ObjetsCanvas` (chat, poisson, oiseau, papillon) sont des
   copies des dessins d'ici ; à terme `ObjetsCanvas` pourra les importer.

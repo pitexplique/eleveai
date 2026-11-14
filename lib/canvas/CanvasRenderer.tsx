@@ -51,6 +51,7 @@ import ConjugaisonCanvas from "./ConjugaisonCanvas";
 import PersonnageCanvas from "./PersonnageCanvas";
 import ObjetsCanvas from "./ObjetsCanvas";
 import MonnaieCanvas from "./MonnaieCanvas";
+import AnimauxCanvas from "./AnimauxCanvas";
 import BaseDixCanvas from "./BaseDixCanvas";
 import ReglureCanvas from "./ReglureCanvas";
 
@@ -214,6 +215,10 @@ export default function CanvasRenderer({ figure }: Props) {
     // Les pièces et billets en euros (cycle 2) : compter, payer, rendre.
     case "monnaie":
       return <MonnaieCanvas figure={figure} />;
+
+    // Les animaux à compter (cycle 2) : dénombrer, comparer, grouper, partager.
+    case "animaux":
+      return <AnimauxCanvas figure={figure} />;
 
     // Plaques, barres, cubes, cadres de dix (cycle 2) : la numération.
     case "base_dix":

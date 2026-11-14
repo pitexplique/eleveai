@@ -21,6 +21,7 @@ import { solidesBank } from "./solides.bank";
 import { reperageBank } from "./reperage.bank";
 import { donneesBank } from "./donnees.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
+import { animauxCe1Bank } from "./animaux.bank";
 import { trierClasserBank } from "./trier-classer.bank";
 
 // ⏳ LE CE1 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
@@ -63,6 +64,8 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...reperageBank,
   ...donneesBank,
   ...algorithmiqueBank,
+  // ⭐ 14/11/2026 : les animaux à compter (lib/canvas/animaux), en plus des banques ci-dessus.
+  ...animauxCe1Bank,
   ...trierClasserBank,
 ];
 

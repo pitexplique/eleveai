@@ -93,6 +93,10 @@ export type {
   MonnaieValeur,
   MonnaieElement,
   MonnaieCanvasData,
+  AnimalCanvasId,
+  AnimauxGroupe,
+  AnimauxCollection,
+  AnimauxCanvasData,
   BaseDixCanvasData,
   ReglureCanvasData
 } from "./types_canvas";

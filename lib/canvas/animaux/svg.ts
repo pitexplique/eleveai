@@ -83,6 +83,9 @@ export type OptionsGrille = {
   coloriage?: boolean;
   /** Fond de la grille (défaut blanc ; "none" pour transparent). */
   fond?: string;
+  /** Texte lu par les lecteurs d'écran. ⛔ Dans le coach, TOUJOURS le fournir :
+   *  par défaut il dit « 7 poules », c'est-à-dire la réponse. */
+  titre?: string;
 };
 
 /** Petit générateur pseudo-aléatoire déterministe (mulberry32). */
@@ -152,7 +155,7 @@ export function svgGrille(groupes: GroupeAnimaux[], o: OptionsGrille = {}): stri
   const nomGroupes = groupes.map((g) => `${g.nombre} ${g.nombre > 1 ? FICHES[g.animal].pluriel : FICHES[g.animal].un.replace(/^une? /, "")}`);
   const fond = o.fond ?? "#ffffff";
   return (
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${largeur} ${hauteur}" width="${largeur}" height="${hauteur}" role="img" aria-label="${nomGroupes.join(", ")}">` +
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${largeur} ${hauteur}" width="${largeur}" height="${hauteur}" role="img" aria-label="${(o.titre ?? nomGroupes.join(", ")).replace(/"/g, "&quot;")}">` +
     (fond === "none" ? "" : `<rect width="${largeur}" height="${hauteur}" fill="${fond}" rx="12"/>`) +
     cases.join("") +
     `</svg>`

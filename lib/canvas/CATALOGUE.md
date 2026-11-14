@@ -373,8 +373,23 @@ trait.
 
 ⭐ **Pour COMPTER des animaux, voir `lib/canvas/animaux/`** (14/11/2026) :
 24 animaux au même contrat 60 × 60 (dont 4 de La Réunion), grille de N à
-compter, mélange et vrac à graine fixe, export SVG pour Manim. Pas encore un
-`kind` du coach : mode d'emploi et branchement dans son `README.md`.
+compter, mélange et vrac à graine fixe, export SVG pour Manim.
+
+### `animaux` — les animaux à compter (14/11/2026)
+
+`kind: "animaux"` (`AnimauxCanvas.tsx`) : une collection (`groupes`) ou
+plusieurs côte à côte (`collections`, chacune avec un `nom`), `colonnes`
+(5 par défaut), `disposition` `"grille"` | `"vrac"`, `melange`, `graine`,
+`taille`, `mode`, `consigne`, `description`. Dénombrer, comparer, ajouter /
+retirer, lignes égales (×), pattes, partager. Dans une banque, toujours passer
+par le helper **`animauxCanvas({...})`** de
+`questionBank/cycle2/maths/animaux.ts` (il tire la graine une fois) et ses
+familles toutes faites (`denombrer`, `compterParmi`, `comparerCollections`,
+`fileOrdinal`, `arriventPuisPartent`, `rangeesTotal`/`Addition`/
+`Multiplication`/`Commutativite`, `pattes`, `partager`, `combienDePlus`).
+⛔ Aucun nombre écrit, ni à l'écran ni dans l'aria-label. ⛔ Animaux de La
+Réunion hors des tirages par défaut (≈ 4 % au plus). Banques :
+`cp/maths/animaux.bank.ts`, `ce1/maths/animaux.bank.ts`.
 
 ---
 

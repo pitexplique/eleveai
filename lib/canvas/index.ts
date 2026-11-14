@@ -45,6 +45,7 @@ export { default as ConjugaisonCanvas } from "./ConjugaisonCanvas";
 export { default as PersonnageCanvas } from "./PersonnageCanvas";
 export { default as ObjetsCanvas } from "./ObjetsCanvas";
 export { default as MonnaieCanvas } from "./MonnaieCanvas";
+export { default as AnimauxCanvas } from "./AnimauxCanvas";
 export { default as BaseDixCanvas } from "./BaseDixCanvas";
 export { default as ReglureCanvas } from "./ReglureCanvas";
 

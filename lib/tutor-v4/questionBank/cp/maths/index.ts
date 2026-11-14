@@ -16,6 +16,7 @@ import { problemeBank } from "./probleme.bank";
 import { suiteNombreBank } from "./suite-nombre.bank";
 import { donneesBank } from "./donnees.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
+import { animauxCpBank } from "./animaux.bank";
 
 // ✅ LE CP A QUITTÉ LE CONSTRUCTEUR COMMUN — 09/08/2026.
 //
@@ -55,6 +56,8 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...suiteNombreBank,
   ...donneesBank,
   ...algorithmiqueBank,
+  // ⭐ 14/11/2026 : les animaux à compter (lib/canvas/animaux), en plus des banques ci-dessus.
+  ...animauxCpBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));

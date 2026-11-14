@@ -2018,6 +2018,54 @@ export type MonnaieCanvasData = {
   size?: { width?: number };
 };
 
+// ─── LES ANIMAUX À COMPTER (cycle 2) ──────────────────────────────────────────
+// Ajouté le 14/11/2026 : la bibliothèque d'animaux (`lib/canvas/animaux`, 24
+// animaux SVG 60 × 60) devient un canvas du coach. Une ou plusieurs
+// COLLECTIONS, chacune faite de groupes d'animaux, posées en grille (5 par
+// ligne par défaut) ou en vrac. Sert à dénombrer, comparer deux collections,
+// ajouter / retirer, faire des groupes égaux, partager.
+// ⛔ Le dessin n'écrit JAMAIS un nombre (ce serait la réponse) : seulement le
+// `nom` d'une collection (« Lou », « la mare ») et la `consigne`.
+// ⭐ `graine` fixe le mélange et le vrac : le gabarit la tire UNE fois, le
+// dessin ne bouge plus quand la question est ré-affichée.
+// Le helper de banque est `animauxCanvas()` (questionBank/cycle2/maths/animaux.ts).
+
+export type AnimalCanvasId = import("@/lib/canvas/animaux/dessins").AnimalId;
+
+export type AnimauxGroupe = {
+  animal: AnimalCanvasId;
+  nombre: number;
+  /** Remplace la couleur principale : seulement quand la couleur EST la donnée. */
+  couleur?: string;
+};
+
+export type AnimauxCollection = {
+  /** Écrit au-dessus de la collection (« Lou », « la mare »). Jamais un nombre. */
+  nom?: string;
+  groupes: AnimauxGroupe[];
+};
+
+export type AnimauxCanvasData = {
+  kind: "animaux";
+  /** Une seule collection (le cas courant)… */
+  groupes?: AnimauxGroupe[];
+  /** …ou plusieurs, côte à côte, à comparer ou à réunir. Remplace `groupes`. */
+  collections?: AnimauxCollection[];
+  /** Animaux par ligne (défaut 5 : on compte par paquets de cinq). */
+  colonnes?: number;
+  /** "grille" (défaut) ou "vrac" (décalés et tournés : il faut pointer pour compter). */
+  disposition?: "grille" | "vrac";
+  /** Mélanger les groupes d'une collection (défaut : oui dès deux groupes). */
+  melange?: boolean;
+  graine?: number;
+  /** Côté d'un animal en px (défaut 48 ; le dessin rétrécit à la largeur de la carte). */
+  taille?: number;
+  mode?: "couleur" | "coloriage";
+  consigne?: string;
+  /** Texte lu par les lecteurs d'écran ; jamais la réponse. */
+  description?: string;
+};
+
 // ─── LE MATÉRIEL DE NUMÉRATION (cycle 2) ──────────────────────────────────────
 // Ajouté le 10/11/2026 : plaques de cent (10 × 10), barres de dix, cubes unités,
 // et cubes de mille. Chaque barre montre ses 10 carreaux : on peut recompter.
@@ -2333,6 +2381,7 @@ export type CanvasFigure =
   | ReglureCanvasData
   | ObjetsCanvasData
   | MonnaieCanvasData
+  | AnimauxCanvasData
   | BaseDixCanvasData
   | PersonnageCanvasData
   | ConjugaisonCanvasData
