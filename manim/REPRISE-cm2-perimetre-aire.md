@@ -62,7 +62,7 @@ Notes/outils `N = side-session-notes/local_e931467e-2c23-4163-86c5-b91473d4ac99/
 | 02 unites | `AireUnitesCM2` | corrigé après planche (bord droit écran 03 et correction, m² du piège, pause du défi, choix Q2 « 6 cm² / 6 m² / 6 dm² ») ; `chaine-ql.sh` lancé → RELIRE `%TEMP%\a2pl_unites\planche*.png`, puis HD |
 | 03 convertir-unites | `AireConvertirUnitesCM2` | ✅ HD bords 0, miniature, manifeste (Q 01:08 C, 02:00 B), fiche, vignettes, R2 (7 fichiers, check OK), coach branché ; manifeste PAS encore commité |
 | 04 carre-rectangle | `AireCarreRectangleCM2` | 1er HD : 1 bord (109,5 s, « 50 cm » grossi par Indicate au piège) → corrigé (panneau x −3.0, Indicate 1.12), HD supprimé ; `chaine.sh` relancé (dry → HD → bords) |
-| 05 triangle-rectangle | `AireTriangleRectangleCM2` | BORD défi corrigé (tarte x −2.75), Q2 sur le gabarit de Q1 (ne touche plus Ti-Margo), défi et écran 04 desserrés ; dry propre, planche relue ; HD lancé (`hd-triangle-rectangle.log`) |
+| 05 triangle-rectangle | `AireTriangleRectangleCM2` | ✅ HD bords 0 (15:59, `05-triangle-rectangle/`) ; RESTE miniature → manifeste → fiche → R2 → coach |
 | 06 composer | `AireComposerCM2` | ⏳ agent de la session mère en cours (dernier dry : 3 RETARD 0,5 s) |
 | 07 defi | `AireDefiCM2` | défi : « pour un arbre. » sur sa propre ligne ; `chaine.sh` lancé (dry → HD → bords) |
 ⚠️ Ces HD tournaient en tâches de fond de la session 2 : vérifier `ls manim/sorties/cm2/maths/aire/0N-*/` et les `hd-*.log` ; un HD absent = relancer `chaine.sh`. Un seul HD à la fois sur le PC (verrou commun).
