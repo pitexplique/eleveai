@@ -928,6 +928,7 @@ const DESSIN_ARTICLE: Record<string, string> = {
   "reunion-foot-payet": "⚽", "reunion-velo-maido": "🚴", "reunion-moringue": "🥁", "reunion-canne-a-sucre": "🌾",
   "reunion-poissons-lagon": "🐠", "reunion-soleil": "😎", "reunion-vivre-ensemble": "🫶", "reunion-record-pluie": "☔",
   "reunion-diagonale": "🥾", "reunion-altitude": "🏔️", "reunion-lave-nouvelles-terres": "🌋", "reunion-parc-national": "🌳",
+  "reunion-case-bas-hauts": "🏠",
 };
 export const dessinDe = (a: Article) => DESSIN_ARTICLE[a.id] ?? DESSIN_RUBRIQUE[a.rubrique];
 

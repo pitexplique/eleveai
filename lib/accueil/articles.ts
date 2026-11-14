@@ -1441,6 +1441,45 @@ export const ARTICLES: Article[] = [
     niveau: "dès le CM2",
     source: "Parc national de La Réunion (créé en 2007) ; UNESCO, « Pitons, cirques et remparts de l'île de La Réunion » (2010).",
   },
+  {
+    // 14/11/2026 : l'idée d'un architecte, parent d'élève de Frédéric : « en
+    // fonction de l'altitude, la case n'est pas construite pareil, surtout pour
+    // les avancées et la protection du soleil ». ⛔ Ses consignes : AUCUN détail
+    // de ses plans ; le nom du studio en bas de l'article (Frédéric : « tu peux
+    // publier Manapany »). Rien ici ne vient de ses plans : principes généraux.
+    id: "reunion-case-bas-hauts",
+    coach: ["echelles", "geometrie"],
+    reunion: true,
+    uneLe: "2026-11-14",
+    niveaux: ["6e-5e"],
+    rubrique: "Planète",
+    titre: "Pourquoi une case des Bas n'est pas construite comme une case des Hauts",
+    chapo: "Au bord de la mer, on se protège du soleil. Dans les Hauts, on cherche sa chaleur. Les architectes calculent la longueur des avancées de toit.",
+    corps: [
+      "Une avancée, c'est la partie du toit ou de l'étage qui dépasse du mur. La varangue de la case créole en est une : une terrasse couverte, à l'ombre.",
+      "Dans les Bas, il fait chaud presque toute l'année. On fait de grandes avancées et des varangues profondes : le soleil ne touche pas les murs ni les fenêtres, et l'air circule.",
+      "En été, à midi, le soleil est presque au-dessus de nos têtes : une avancée d'un mètre suffit à mettre la façade à l'ombre. Le matin et le soir, le soleil est bas : on ajoute des lames de bois verticales, des brise-soleil.",
+      "Dans les Hauts, il fait plus frais et il pleut plus. Les avancées protègent surtout de la pluie, et on les règle pour laisser entrer le soleil d'hiver, plus bas dans le ciel, qui réchauffe la maison.",
+      "Tout cela se dessine sur un plan, à l'échelle, avant de construire : chaque centimètre du dessin devient une vraie longueur.",
+    ],
+    maths: {
+      titre: "La hauteur du soleil et l'échelle",
+      lignes: [
+        "À La Réunion, à midi : le soleil monte presque à 90° en décembre, mais seulement à 45° environ en juin.",
+        "À 45°, l'ombre d'un bâton est aussi longue que le bâton : 1 m de bâton → 1 m d'ombre.",
+        "Plan à l'échelle 1 cm pour 1 m : une avancée de 1,5 m se dessine avec 1,5 cm.",
+      ],
+    },
+    defi: {
+      question: "Sur un plan à l'échelle 1 cm pour 1 m, une varangue mesure 2,5 cm de profondeur. Quelle est sa vraie profondeur ?",
+      choix: ["25 cm", "250 m", "2,5 m"],
+      bonne: 2,
+      explication: "1 cm sur le plan = 1 m en vrai, donc 2,5 cm = 2,5 m. 25 cm, c'est oublier l'échelle ; 250 m, c'est confondre les unités.",
+    },
+    agir: "Plante un bâton au soleil dans la cour et mesure son ombre à 9 h, à midi et à 15 h. Note-les dans un tableau : à quelle heure l'ombre est-elle la plus courte ?",
+    niveau: "dès la 6e",
+    source: "Principes de l'architecture tropicale (varangue, débords de toit, brise-soleil) ; hauteur du soleil à 21° de latitude sud. Merci à Studio A architectes (Manapany-les-Bains) pour son aide.",
+  },
 ];
 
 /** Le pas des « autres nouvelles » : premier avec n, pour que la Une et les
