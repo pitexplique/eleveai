@@ -2,43 +2,10 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { gabaritsDecimalDroite } from "../../cm1/maths/decimal-droite.gen";
-import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
-
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomChoice<T>(items: T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
-}
-
-function shuffle<T>(items: T[]): T[] {
-  return melangeEnPlace([...items]);
-}
+import { gabaritsDecimauxCm2 } from "./nombres-decimaux-outils";
 
 function formatComma(n: number | string) {
   return String(n).replace(".", ",");
-}
-
-function expectedDecimal(n: number) {
-  const s = String(n);
-  return [s, formatComma(s)];
-}
-
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
-  // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
-  // valeur de départ…) affichait la même proposition deux fois, et l'élève
-  // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
-  // aussi une chance aux distracteurs surnuméraires de prendre la place.
-  // ⚠️ 04/08/2026 — la bonne réponse était jetée dans le même chapeau que les
-  // pièges : à cinq pièges écrits, le mélange pouvait la laisser au fond et
-  // le découpage à quatre l'emportait. L'élève voyait alors quatre pièges et
-  // rien d'autre. On la met de côté, on tire trois distracteurs, on mélange.
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
 }
 
 function exp(
@@ -137,68 +104,6 @@ export const nombresDecimauxBank: TutorBankItemV4[] = [
     tags: ["cm2", "nombre_decimal", "lecture", "centieme", "piege"],
   },
 
-  {
-    kind: "template",
-    id: "cm2_decimal_lire_tpl_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_lire",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "Le chiffre des dixièmes se place juste après la virgule.",
-    tags: ["cm2", "nombre_decimal", "lecture", "template"],
-    generate: () => {
-      const u = randomInt(1, 9);
-      const d = randomInt(1, 9);
-      const value = Number(`${u}.${d}`);
-
-      return {
-        text: `Écris en chiffres : ${u} unités et ${d} dixièmes.`,
-        format: "short",
-        expected: expectedDecimal(value),
-        comparator: "number_equal",
-        explanation: exp(
-          "Un nombre décimal peut s’écrire avec une partie entière et une partie décimale.",
-          "On écrit les unités avant la virgule et les dixièmes après la virgule.",
-          `${u} unités et ${d} dixièmes s’écrivent ${formatComma(value)}.`,
-          `La réponse est ${formatComma(value)}.`
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_decimal_lire_tpl_2_centiemes",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_lire",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Les centièmes se placent au deuxième rang après la virgule.",
-    tags: ["cm2", "nombre_decimal", "lecture", "centiemes", "template"],
-    generate: () => {
-      const u = randomInt(1, 9);
-      const c = randomInt(1, 9);
-      const valueText = `${u},0${c}`;
-
-      return {
-        text: `Écris en chiffres : ${u} unités et ${c} centièmes.`,
-        format: "short",
-        expected: [valueText, valueText.replace(",", ".")],
-        comparator: "number_equal",
-        explanation: exp(
-          "Les centièmes occupent le deuxième rang après la virgule.",
-          "S’il n’y a pas de dixième, on écrit 0 au rang des dixièmes.",
-          `${u} unités et ${c} centièmes s’écrivent ${valueText}.`,
-          `La réponse est ${valueText}.`
-        ),
-      };
-    },
-  },
-
   // ============================================================
   // DECIMAL_FRACTION
   // ============================================================
@@ -247,97 +152,6 @@ export const nombresDecimauxBank: TutorBankItemV4[] = [
       "La réponse est 0,34."
     ),
     tags: ["cm2", "nombre_decimal", "fraction_decimale", "centieme"],
-  },
-
-  {
-    kind: "template",
-    id: "cm2_decimal_fraction_tpl_1_dixiemes",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_fraction",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "n/10 signifie n dixièmes.",
-    tags: ["cm2", "nombre_decimal", "fraction_decimale", "template"],
-    generate: () => {
-      const n = randomInt(1, 9);
-      const value = n / 10;
-
-      return {
-        text: `Écris en décimal : ${n}/10`,
-        format: "short",
-        expected: expectedDecimal(value),
-        comparator: "fraction_decimal_equivalent",
-        explanation: exp(
-          "Une fraction décimale peut s’écrire avec une virgule.",
-          "On écrit les dixièmes au premier rang après la virgule.",
-          `${n}/10 = ${formatComma(value)}.`,
-          `La réponse est ${formatComma(value)}.`
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_decimal_fraction_tpl_2_centiemes",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_fraction",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "n/100 signifie n centièmes.",
-    tags: ["cm2", "nombre_decimal", "fraction_decimale", "centiemes", "template"],
-    generate: () => {
-      const n = randomChoice([12, 25, 34, 48, 56, 75, 90]);
-      const value = n / 100;
-
-      return {
-        text: `Écris en décimal : ${n}/100`,
-        format: "short",
-        expected: expectedDecimal(value),
-        comparator: "fraction_decimal_equivalent",
-        explanation: exp(
-          "Une fraction décimale de dénominateur 100 donne des centièmes.",
-          "On écrit deux chiffres après la virgule.",
-          `${n}/100 = ${formatComma(value)}.`,
-          `La réponse est ${formatComma(value)}.`
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_decimal_fraction_qcm_tpl_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_fraction",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Attention : 6/100 n’est pas 0,6.",
-    tags: ["cm2", "nombre_decimal", "fraction_decimale", "qcm", "piege"],
-    generate: () => {
-      const n = randomInt(2, 9);
-      const correct = `0,0${n}`;
-
-      return {
-        text: `Quelle écriture décimale correspond à ${n}/100 ?`,
-        format: "qcm",
-        choices: makeChoices(correct, [`0,${n}`, `${n},00`, `0,${n}0`]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Une fraction sur 100 indique des centièmes.",
-          "On place le chiffre au rang des centièmes.",
-          `${n}/100 = ${correct}.`,
-          `La bonne réponse est ${correct}.`
-        ),
-      };
-    },
   },
 
   // ============================================================
@@ -390,71 +204,6 @@ export const nombresDecimauxBank: TutorBankItemV4[] = [
     tags: ["cm2", "nombre_decimal", "rang", "centieme"],
   },
 
-  {
-    kind: "template",
-    id: "cm2_decimal_valeur_tpl_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_valeur_chiffre",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Après la virgule : dixièmes, centièmes.",
-    tags: ["cm2", "nombre_decimal", "rang", "template"],
-    generate: () => {
-      const u = randomInt(1, 9);
-      const d = randomInt(1, 9);
-      const c = randomInt(1, 9);
-      const number = `${u},${d}${c}`;
-
-      return {
-        text: `Dans ${number}, quel chiffre est au rang des dixièmes ?`,
-        format: "short",
-        expected: [String(d)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le chiffre des dixièmes est le premier chiffre après la virgule.",
-          "On observe la position des chiffres.",
-          `Dans ${number}, le chiffre ${d} est juste après la virgule.`,
-          `La réponse est ${d}.`
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_decimal_valeur_qcm_tpl_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_valeur_chiffre",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Le deuxième chiffre après la virgule est au rang des centièmes.",
-    tags: ["cm2", "nombre_decimal", "rang", "qcm", "template"],
-    generate: () => {
-      const u = randomInt(1, 9);
-      const d = randomInt(1, 9);
-      const c = randomInt(1, 9);
-      const number = `${u},${d}${c}`;
-
-      return {
-        text: `Quel est le rang du chiffre ${c} dans ${number} ?`,
-        format: "qcm",
-        choices: shuffle(["unités", "dixièmes", "centièmes", "centaines"]),
-        expected: ["centièmes"],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Dans un nombre décimal, les chiffres après la virgule ont des rangs précis.",
-          "On lit les chiffres de gauche à droite après la virgule.",
-          `Dans ${number}, ${d} est au rang des dixièmes et ${c} au rang des centièmes.`,
-          `Le chiffre ${c} est au rang des centièmes.`
-        ),
-      };
-    },
-  },
-
   // ============================================================
   // DECIMAL_COMPARER
   // ============================================================
@@ -505,70 +254,6 @@ export const nombresDecimauxBank: TutorBankItemV4[] = [
     tags: ["cm2", "nombre_decimal", "comparaison", "piege"],
   },
 
-  {
-    kind: "template",
-    id: "cm2_decimal_comparer_tpl_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Compare chiffre par chiffre.",
-    tags: ["cm2", "nombre_decimal", "comparaison", "template"],
-    generate: () => {
-      const a = Number((randomInt(10, 99) / 100).toFixed(2));
-      let b = Number((randomInt(10, 99) / 100).toFixed(2));
-      while (b === a) b = Number((randomInt(10, 99) / 100).toFixed(2));
-
-      const max = Math.max(a, b);
-
-      return {
-        text: `Quel nombre est le plus grand : ${formatComma(a)} ou ${formatComma(b)} ?`,
-        format: "short",
-        expected: expectedDecimal(max),
-        comparator: "number_equal",
-        explanation: exp(
-          "Comparer des décimaux consiste à comparer leur valeur.",
-          "On compare les chiffres dans l’ordre : unités, dixièmes, centièmes.",
-          `Entre ${formatComma(a)} et ${formatComma(b)}, le plus grand est ${formatComma(max)}.`,
-          `La réponse est ${formatComma(max)}.`
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_decimal_comparer_qcm_tpl_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "0,6 = 0,60.",
-    tags: ["cm2", "nombre_decimal", "comparaison", "qcm", "template"],
-    generate: () => {
-      const correct = "0,6";
-      const choices = shuffle(["0,6", "0,56", "0,509", "0,59"]);
-
-      return {
-        text: "Quel est le plus grand nombre ?",
-        format: "qcm",
-        choices,
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On peut ajouter des zéros à droite d’un nombre décimal sans changer sa valeur.",
-          "On écrit 0,6 sous la forme 0,600.",
-          "0,600 est plus grand que 0,590, 0,560 et 0,509.",
-          "Le plus grand nombre est 0,6."
-        ),
-      };
-    },
-  },
-
   // ============================================================
   // DECIMAL_ORDONNER
   // ============================================================
@@ -600,54 +285,6 @@ export const nombresDecimauxBank: TutorBankItemV4[] = [
       "L’ordre croissant est 0,35 ; 0,4 ; 0,5."
     ),
     tags: ["cm2", "nombre_decimal", "ordonner", "qcm"],
-  },
-
-  {
-    kind: "template",
-    id: "cm2_decimal_ordonner_tpl_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_ordonner",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Écris les nombres avec le même nombre de chiffres après la virgule.",
-    tags: ["cm2", "nombre_decimal", "ordonner", "template"],
-    generate: () => {
-      const values = shuffle([0.4, 0.35, 0.5, 0.305]).slice(0, 3);
-      const sorted = [...values].sort((a, b) => a - b);
-
-      const correct = sorted.map(formatComma).join(" ; ");
-
-      // ⚠️ Les deux derniers pièges étaient deux mélanges tirés au hasard des
-      // MÊMES trois nombres : ils tombaient souvent l'un sur l'autre, ou sur
-      // l'ordre correct, et il ne restait qu'une proposition en face. On liste
-      // donc les six rangements possibles, on écarte le bon, et on en prend
-      // trois : ils sont distincts par construction.
-      const [p, q, r] = sorted;
-      const rangements = [
-        [p, q, r],
-        [p, r, q],
-        [q, p, r],
-        [q, r, p],
-        [r, p, q],
-        [r, q, p],
-      ].map((ordre) => ordre.map(formatComma).join(" ; "));
-
-      return {
-        text: `Range dans l’ordre croissant : ${values.map(formatComma).join(" ; ")}`,
-        format: "qcm",
-        choices: makeChoices(correct, shuffle(rangements)),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Ranger dans l’ordre croissant signifie aller du plus petit au plus grand.",
-          "On compare les nombres décimaux entre eux.",
-          `L’ordre croissant est ${correct}.`,
-          `La réponse est ${correct}.`
-        ),
-      };
-    },
   },
 
   // ============================================================
@@ -751,38 +388,6 @@ export const nombresDecimauxBank: TutorBankItemV4[] = [
     tags: ["cm2", "nombre_decimal", "arrondir"],
   },
 
-  {
-    kind: "template",
-    id: "cm2_decimal_arrondir_tpl_1",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_arrondir",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Si le dixième est 5 ou plus, on arrondit à l’unité supérieure.",
-    tags: ["cm2", "nombre_decimal", "arrondir", "template"],
-    generate: () => {
-      const unit = randomInt(2, 9);
-      const tenth = randomInt(1, 9);
-      const value = unit + tenth / 10;
-      const rounded = Math.round(value);
-
-      return {
-        text: `Arrondis ${formatComma(value)} à l’unité la plus proche.`,
-        format: "short",
-        expected: [String(rounded)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Arrondir à l’unité consiste à choisir l’entier le plus proche.",
-          "On regarde le chiffre des dixièmes.",
-          `${formatComma(value)} est plus proche de ${rounded}.`,
-          `La réponse est ${rounded}.`
-        ),
-      };
-    },
-  },
-
   // ============================================================
   // DECIMAL_DEFI
   // ============================================================
@@ -840,34 +445,10 @@ export const nombresDecimauxBank: TutorBankItemV4[] = [
     tags: ["cm2", "nombre_decimal", "defi", "reunion", "piege"],
   },
 
-  {
-    kind: "template",
-    id: "cm2_decimal_defi_tpl_1_eau",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "nombre_decimal",
-    microId: "decimal_defi",
-    difficulty: 4,
-    theme: "reunion",
-    hint: "On partage la quantité en parts égales.",
-    tags: ["cm2", "nombre_decimal", "defi", "eau", "template"],
-    generate: () => {
-      const divisor = randomChoice([2, 3, 4, 5]);
-      const quotient = randomChoice([0.5, 1.2, 1.5, 2.4]);
-      const total = Number((divisor * quotient).toFixed(1));
 
-      return {
-        text: `On partage ${formatComma(total)} litres d’eau entre ${divisor} gourdes. Quelle quantité y a-t-il dans chaque gourde ?`,
-        format: "short",
-        expected: expectedDecimal(quotient),
-        comparator: "number_equal",
-        explanation: exp(
-          "Partager une quantité, c’est diviser.",
-          "On divise la quantité totale par le nombre de gourdes.",
-          `${formatComma(total)} ÷ ${divisor} = ${formatComma(quotient)}.`,
-          `Chaque gourde contient ${formatComma(quotient)} litre(s).`
-        ),
-      };
-    },
-  },
+  // ⭐ 14/11/2026 — lire, fraction, valeur du chiffre, comparer, ranger, arrondir,
+  // défi : 1 à 4 squelettes (16 à 19 répétitions sur 20) → gabarits jusqu'aux
+  // millièmes dans nombres-decimaux-outils.ts (tableau de numération, droite
+  // graduée, bandes de 10, grilles de 100). Les id des anciens gabarits y sont repris.
+  ...gabaritsDecimauxCm2,
 ];
