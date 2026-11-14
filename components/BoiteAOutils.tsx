@@ -364,7 +364,10 @@ export default function BoiteAOutils({ aGauche }: { aGauche?: boolean } = {}) {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Ouvrir la calculatrice"
-        className={`fixed bottom-5 ${place} z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden`}
+        // ⛔ 14/11/2026 — sur téléphone, le bouton flottant cachait un coin de
+        // « Valider » du pavé numérique : il s'efface pendant le pavé (sur
+        // tablette et ordinateur, il reste).
+        className={`fixed bottom-5 ${place} z-50 flex items-center gap-2 max-sm:[body[data-pave-ouvert]_&]:hidden rounded-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden`}
       >
         🧮 <span className="hidden sm:inline">Calculatrice</span>
       </button>
@@ -372,7 +375,7 @@ export default function BoiteAOutils({ aGauche }: { aGauche?: boolean } = {}) {
   }
 
   return (
-    <aside className={`fixed bottom-5 ${place} z-50 flex w-[290px] flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-[#f5f8ff] text-slate-800 shadow-2xl sm:w-[320px] print:hidden`}>
+    <aside data-calculatrice-ouverte className={`fixed bottom-5 ${place} z-50 flex w-[290px] flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-[#f5f8ff] text-slate-800 shadow-2xl sm:w-[320px] print:hidden`}>
       <div className="flex items-center justify-between bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 px-5 py-4">
         <div>
           <p className="font-black text-white">🧮 Calculatrice</p>

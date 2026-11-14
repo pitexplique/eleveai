@@ -85,6 +85,14 @@ export default function PaveNumerique({
     onEnvoyer(lecture ? composerReponsePave(s, lecture) : s);
   }
 
+  // ⛔ 14/11/2026 — sur téléphone, le bouton flottant « Calculatrice » cachait
+  // un coin de « Valider » : il s'efface tant que le pavé est affiché
+  // (components/BoiteAOutils.tsx lit cet attribut).
+  useEffect(() => {
+    document.body.setAttribute("data-pave-ouvert", "");
+    return () => document.body.removeAttribute("data-pave-ouvert");
+  }, []);
+
   // Le clavier physique de l'ordinateur reste utilisable (aucun champ n'a le focus).
   useEffect(() => {
     if (directs) return;
@@ -92,6 +100,8 @@ export default function PaveNumerique({
       if (e.ctrlKey || e.metaKey || e.altKey) return;
       const cible = e.target as HTMLElement | null;
       if (cible && /^(INPUT|TEXTAREA|SELECT)$/.test(cible.tagName)) return;
+      // Calculatrice ouverte : les chiffres tapés sont pour elle, pas pour le pavé.
+      if (document.querySelector("[data-calculatrice-ouverte]")) return;
       if (/^[0-9]$/.test(e.key)) {
         e.preventDefault();
         ajouter(e.key);
