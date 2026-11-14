@@ -1,8 +1,14 @@
 // lib/tutor-v4/question-banks/maths/cm1/solides.bank.ts
 // Règles CM1 : QCM uniquement (sauf short numérique), max templates, 5-6+ questions/microskill
+// ⭐ 14/11/2026 — les gabarits vivent dans `solides-outils.ts` (situations × tournures,
+// dessins). Ici, seuls les items figés justes restent. Les anciens gabarits
+// (« Un orange a la forme d'un… », « Un pyramide d'Égypte… », 13 à 40 squelettes par
+// micro) sont retirés. ⛔ Les dessins ne portent plus d'étiquette : le canvas écrivait
+// « cône », « boule », « pyramide » sur la figure dont on demandait le nom.
 
 import type { TutorBankItemV4, Solide3DCanvasData } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import { solidesGabarits } from "./solides-outils";
 
 // ── HELPERS ──────────────────────────────────────────────────────────────────
 
@@ -26,22 +32,19 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   return shuffle([correct, ...distracteurs]);
 }
 
-function pickOne<T>(arr: readonly T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
 function solideCanvas(data: Omit<Solide3DCanvasData, "kind">): Solide3DCanvasData {
-  return { kind: "solide_3d", ...data };
+  return { kind: "solide_3d", highlight: { base: false, hauteur: false }, ...data };
 }
+const SANS_ETIQUETTE = { showLabels: false, showDimensions: false, showFormulaHint: false };
 
 // ── CANVASES ─────────────────────────────────────────────────────────────────
 
-const CUBE = solideCanvas({ solide: "cube", display: { showLabels: true } });
-const PAVE = solideCanvas({ solide: "pave_droit", display: { showLabels: true } });
-const CYLINDRE = solideCanvas({ solide: "cylindre", display: { showLabels: true } });
-const CONE = solideCanvas({ solide: "cone", display: { showLabels: true } });
-const BOULE = solideCanvas({ solide: "boule", display: { showLabels: true } });
-const PYRAMIDE = solideCanvas({ solide: "pyramide", display: { showLabels: true } });
+const CUBE = solideCanvas({ solide: "cube", display: SANS_ETIQUETTE });
+const PAVE = solideCanvas({ solide: "pave_droit", display: SANS_ETIQUETTE });
+const CYLINDRE = solideCanvas({ solide: "cylindre", display: SANS_ETIQUETTE });
+const CONE = solideCanvas({ solide: "cone", display: SANS_ETIQUETTE });
+const BOULE = solideCanvas({ solide: "boule", display: SANS_ETIQUETTE });
+const PYRAMIDE = solideCanvas({ solide: "pyramide", display: SANS_ETIQUETTE });
 
 // Données des solides
 const SOLIDES = [
@@ -57,10 +60,6 @@ type SolideName = typeof SOLIDES[number]["nom"];
 
 function wrongSolides(correct: SolideName, n = 3): string[] {
   return shuffle(SOLIDES.filter(s => s.nom !== correct).map(s => s.nom)).slice(0, n);
-}
-
-function assemblageCanvas(cubes: { x: number; y: number; z: number }[]): Solide3DCanvasData {
-  return solideCanvas({ solide: "assemblage_cubes", cubes, display: { showLabels: false } });
 }
 
 // ── SOLIDE_RECONNAITRE ────────────────────────────────────────────────────────
@@ -85,84 +84,6 @@ const solideReconnaitre: TutorBankItemV4[] = [
   })),
 
   // Templates : objet du quotidien → quel solide ?
-  {
-    kind: "template",
-    id: "cm1-solide-rec-t001",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_reconnaitre",
-    difficulty: 1, theme: "neutral",
-    hint: "Pense à la forme de l'objet.",
-    tags: ["solide", "objet", "quotidien"],
-    generate: () => {
-      const s = pickOne(SOLIDES.filter(s => s.objets.length > 0));
-      const objet = pickOne(s.objets as readonly string[]);
-      const wrongs = wrongSolides(s.nom);
-      return {
-        text: `Un ${objet} a la forme d'un…`,
-        choices: makeChoices(s.nom, wrongs),
-        expected: [s.nom],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        explanation: `Un ${objet} est un ${s.nom}.`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cm1-solide-rec-t002",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_reconnaitre",
-    difficulty: 2, theme: "neutral",
-    hint: "La description des faces aide à identifier le solide.",
-    tags: ["solide", "description"],
-    generate: () => {
-      const descriptions: Array<{ desc: string; nom: SolideName }> = [
-        { desc: "Il a toutes ses faces en forme de carré", nom: "cube" },
-        { desc: "Il a 2 bases circulaires et une surface courbe", nom: "cylindre" },
-        { desc: "Il a une base circulaire et se termine en pointe", nom: "cône" },
-        { desc: "Il est entièrement arrondi, sans face plane", nom: "boule" },
-        { desc: "Il a 6 faces rectangulaires", nom: "pavé droit" },
-        { desc: "Il a une base carrée et 4 faces triangulaires", nom: "pyramide" },
-      ];
-      const item = pickOne(descriptions);
-      const wrongs = wrongSolides(item.nom);
-      return {
-        text: `${item.desc}. De quel solide s'agit-il ?`,
-        choices: makeChoices(item.nom, wrongs),
-        expected: [item.nom],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        explanation: `Cette description correspond au ${item.nom}.`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cm1-solide-rec-t003",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_reconnaitre",
-    difficulty: 2, theme: "neutral",
-    hint: "Pense à si ce solide peut rouler, glisser ou tenir en équilibre.",
-    tags: ["solide", "propriété"],
-    generate: () => {
-      const questions = [
-        { q: "Quel solide peut rouler dans toutes les directions ?", r: "boule", wrongs: ["cube", "pyramide", "pavé droit"] },
-        { q: "Quel solide a le plus de faces identiques ?", r: "cube", wrongs: ["cylindre", "cône", "pyramide"] },
-        { q: "Quel solide n'a aucune face plane ?", r: "boule", wrongs: ["cube", "cylindre", "pyramide"] },
-        { q: "Quel solide a exactement 1 sommet (une pointe) ?", r: "cône", wrongs: ["cylindre", "boule", "pavé droit"] },
-        { q: "Quel solide peut glisser et rouler ?", r: "cylindre", wrongs: ["cube", "pyramide", "boule"] },
-      ];
-      const item = pickOne(questions);
-      return {
-        text: item.q,
-        choices: makeChoices(item.r, item.wrongs),
-        expected: [item.r],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        explanation: `La réponse est le ${item.r}.`,
-      };
-    },
-  },
 
   // Top-up : objets concrets → solide (fixes avec canvas)
   {
@@ -268,106 +189,6 @@ const solideReconnaitre: TutorBankItemV4[] = [
 const solideSAF: TutorBankItemV4[] = [
   // Templates : questions sur le nombre de faces/sommets/arêtes
   {
-    kind: "template",
-    id: "cm1-solide-saf-t001",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_sommet_arete_face",
-    difficulty: 2, theme: "neutral",
-    hint: "Compte toutes les faces du solide.",
-    tags: ["faces", "comptage"],
-    generate: () => {
-      const s = pickOne(SOLIDES.filter(s => s.faces > 0));
-      const wrongs = [s.faces - 2, s.faces - 1, s.faces + 1, s.faces + 2]
-        .filter(n => n !== s.faces && n > 0).map(String).slice(0, 3);
-      return {
-        text: `Combien de faces a un ${s.nom} ?`,
-        choices: makeChoices(String(s.faces), wrongs),
-        expected: [String(s.faces)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        canvas: s.canvas,
-        explanation: `Un ${s.nom} a ${s.faces} faces.`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cm1-solide-saf-t002",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_sommet_arete_face",
-    difficulty: 2, theme: "neutral",
-    hint: "Un sommet c'est un coin pointu.",
-    tags: ["sommets", "comptage"],
-    generate: () => {
-      const solidesAvecSommets = SOLIDES.filter(s => s.sommets > 0);
-      const s = pickOne(solidesAvecSommets);
-      const wrongs = [s.sommets - 2, s.sommets - 1, s.sommets + 1, s.sommets + 2]
-        .filter(n => n !== s.sommets && n > 0).map(String).slice(0, 3);
-      return {
-        text: `Combien de sommets a un ${s.nom} ?`,
-        choices: makeChoices(String(s.sommets), wrongs),
-        expected: [String(s.sommets)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        canvas: s.canvas,
-        explanation: `Un ${s.nom} a ${s.sommets} sommets.`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cm1-solide-saf-t003",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_sommet_arete_face",
-    difficulty: 2, theme: "neutral",
-    hint: "Une arête c'est le bord entre deux faces.",
-    tags: ["arêtes", "comptage"],
-    generate: () => {
-      const solidesAvecAretes = SOLIDES.filter(s => s.aretes > 0);
-      const s = pickOne(solidesAvecAretes);
-      const wrongs = [s.aretes - 2, s.aretes - 1, s.aretes + 1, s.aretes + 2]
-        .filter(n => n !== s.aretes && n > 0).map(String).slice(0, 3);
-      return {
-        text: `Combien d'arêtes a un ${s.nom} ?`,
-        choices: makeChoices(String(s.aretes), wrongs),
-        expected: [String(s.aretes)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        canvas: s.canvas,
-        explanation: `Un ${s.nom} a ${s.aretes} arêtes.`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cm1-solide-saf-t004",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_sommet_arete_face",
-    difficulty: 3, theme: "neutral",
-    hint: "Identifie le solide à partir de ses caractéristiques.",
-    tags: ["faces", "sommets", "arêtes", "identification"],
-    generate: () => {
-      const enigmes = [
-        { desc: "J'ai 6 faces, 8 sommets et 12 arêtes. Toutes mes faces sont des carrés.", nom: "cube" },
-        { desc: "J'ai 6 faces, 8 sommets et 12 arêtes. Mes faces sont des rectangles.", nom: "pavé droit" },
-        { desc: "J'ai 5 faces, 5 sommets et 8 arêtes.", nom: "pyramide" },
-        { desc: "Je n'ai aucun sommet, aucune arête et aucune face plane.", nom: "boule" },
-        { desc: "J'ai 2 faces circulaires, 0 sommet et 0 arête.", nom: "cylindre" },
-        { desc: "J'ai 1 face circulaire et 1 sommet.", nom: "cône" },
-      ];
-      const e = pickOne(enigmes);
-      const wrongs = wrongSolides(e.nom as SolideName);
-      return {
-        text: `${e.desc} Quel solide suis-je ?`,
-        choices: makeChoices(e.nom, wrongs),
-        expected: [e.nom],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        explanation: `C'est le ${e.nom}.`,
-      };
-    },
-  },
-  {
     kind: "fixed",
     id: "cm1-solide-saf-001",
     niveau: "cm1", matiere: "maths",
@@ -406,9 +227,10 @@ const solideSAF: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_sommet_arete_face",
     difficulty: 2, theme: "neutral",
     text: "Combien de sommets a un cube ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("8", ["4", "6", "12"]),
     expected: ["8"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: CUBE,
     hint: "Compte les coins du cube.",
     explanation: "Un cube a 8 sommets.",
@@ -421,9 +243,10 @@ const solideSAF: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_sommet_arete_face",
     difficulty: 2, theme: "neutral",
     text: "Combien d'arêtes a un cube ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("12", ["8", "9", "6"]),
     expected: ["12"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: CUBE,
     hint: "Compte tous les bords du cube.",
     explanation: "Un cube a 12 arêtes.",
@@ -436,9 +259,10 @@ const solideSAF: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_sommet_arete_face",
     difficulty: 2, theme: "neutral",
     text: "Combien de faces a un pavé droit ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("6", ["3", "4", "8"]),
     expected: ["6"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: PAVE,
     hint: "Pense à une boîte : dessus, dessous et les côtés.",
     explanation: "Un pavé droit a 6 faces.",
@@ -451,9 +275,10 @@ const solideSAF: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_sommet_arete_face",
     difficulty: 3, theme: "neutral",
     text: "Combien de sommets a une pyramide à base carrée ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("5", ["4", "1", "8"]),
     expected: ["5"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: PYRAMIDE,
     hint: "Les 4 coins de la base plus la pointe.",
     explanation: "Une pyramide à base carrée a 5 sommets : 4 sur la base et 1 au sommet (la pointe).",
@@ -464,83 +289,6 @@ const solideSAF: TutorBankItemV4[] = [
 // ── SOLIDE_FACE ───────────────────────────────────────────────────────────────
 
 const solideFace: TutorBankItemV4[] = [
-  {
-    kind: "template",
-    id: "cm1-solide-face-t001",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_face",
-    difficulty: 2, theme: "neutral",
-    hint: "Regarde la forme des faces du solide.",
-    tags: ["face", "forme"],
-    generate: () => {
-      const questions = [
-        { q: "Quelles sont les formes des faces d'un cube ?", r: "Des carrés", wrongs: ["Des rectangles", "Des triangles", "Des cercles"] },
-        { q: "Quelles sont les formes des faces d'un pavé droit ?", r: "Des rectangles", wrongs: ["Des carrés uniquement", "Des triangles", "Des cercles"] },
-        { q: "Quelles sont les formes des bases d'un cylindre ?", r: "Des cercles", wrongs: ["Des carrés", "Des triangles", "Des rectangles"] },
-        { q: "Quelle est la forme de la base d'un cône ?", r: "Un cercle", wrongs: ["Un carré", "Un triangle", "Un rectangle"] },
-        { q: "Quelle est la forme de la base d'une pyramide à base carrée ?", r: "Un carré", wrongs: ["Un cercle", "Un triangle", "Un rectangle"] },
-        { q: "Quelles sont les faces latérales d'une pyramide ?", r: "Des triangles", wrongs: ["Des carrés", "Des rectangles", "Des cercles"] },
-      ];
-      const item = pickOne(questions);
-      return {
-        text: item.q,
-        choices: makeChoices(item.r, item.wrongs),
-        expected: [item.r],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        explanation: `${item.q.replace("?", "")} → ${item.r}.`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cm1-solide-face-t002",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_face",
-    difficulty: 2, theme: "neutral",
-    hint: "Compte les faces planes uniquement.",
-    tags: ["face", "comptage", "planes"],
-    generate: () => {
-      const s = pickOne(SOLIDES);
-      const wrongs = [s.faces - 1, s.faces + 1, s.faces + 2]
-        .filter(n => n !== s.faces && n >= 0).map(String).slice(0, 3);
-      return {
-        text: `Combien de faces planes a un ${s.nom} ?`,
-        choices: makeChoices(String(s.faces), wrongs),
-        expected: [String(s.faces)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        canvas: s.canvas,
-        explanation: `Un ${s.nom} a ${s.faces} face(s) plane(s).`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cm1-solide-face-t003",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_face",
-    difficulty: 3, theme: "neutral",
-    hint: "Certains solides ont des faces courbes.",
-    tags: ["face", "courbe", "plane"],
-    generate: () => {
-      const questions = [
-        { q: "Quel solide a une surface entièrement courbe (aucune face plane) ?", r: "boule", wrongs: ["cube", "cylindre", "pyramide"] },
-        { q: "Quel solide a 2 faces planes et 1 surface courbe ?", r: "cylindre", wrongs: ["cube", "boule", "pyramide"] },
-        { q: "Quel solide a 1 face plane et 1 surface courbe ?", r: "cône", wrongs: ["cube", "boule", "pavé droit"] },
-        { q: "Quel solide a seulement des faces planes ?", r: "cube", wrongs: ["cylindre", "cône", "boule"] },
-      ];
-      const item = pickOne(questions);
-      return {
-        text: item.q,
-        choices: makeChoices(item.r, item.wrongs),
-        expected: [item.r],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        explanation: `La réponse est le ${item.r}.`,
-      };
-    },
-  },
   {
     kind: "fixed",
     id: "cm1-solide-face-001",
@@ -595,9 +343,10 @@ const solideFace: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_face",
     difficulty: 2, theme: "neutral",
     text: "Combien de faces planes a une boule ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("0", ["1", "2", "6"]),
     expected: ["0"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: BOULE,
     hint: "La boule est entièrement arrondie.",
     explanation: "Une boule n'a aucune face plane : sa surface est entièrement courbe.",
@@ -642,9 +391,10 @@ const solideFace: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_face",
     difficulty: 2, theme: "neutral",
     text: "Combien de faces planes a un cône ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("1", ["0", "2", "3"]),
     expected: ["1"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: CONE,
     hint: "Sa base est plane, le reste est courbe.",
     explanation: "Un cône a 1 face plane (sa base circulaire) et une surface courbe.",
@@ -655,58 +405,6 @@ const solideFace: TutorBankItemV4[] = [
 // ── SOLIDE_PATRON ─────────────────────────────────────────────────────────────
 
 const solidePatron: TutorBankItemV4[] = [
-  {
-    kind: "template",
-    id: "cm1-solide-patron-t001",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_patron",
-    difficulty: 2, theme: "neutral",
-    hint: "Le patron contient toutes les faces du solide.",
-    tags: ["patron", "identification"],
-    generate: () => {
-      const patrons = [
-        { desc: "6 carrés identiques", nom: "cube", wrongs: ["pavé droit", "pyramide", "cylindre"] },
-        { desc: "2 cercles et un rectangle", nom: "cylindre", wrongs: ["cône", "boule", "cube"] },
-        { desc: "1 cercle et 1 secteur de disque", nom: "cône", wrongs: ["cylindre", "boule", "pyramide"] },
-        { desc: "1 carré et 4 triangles", nom: "pyramide", wrongs: ["cube", "pavé droit", "cône"] },
-        { desc: "6 rectangles (pas tous identiques)", nom: "pavé droit", wrongs: ["cube", "cylindre", "pyramide"] },
-      ];
-      const p = pickOne(patrons);
-      return {
-        text: `Un patron est fait de : ${p.desc}. Quel solide peut-on construire ?`,
-        choices: makeChoices(`un ${p.nom}`, p.wrongs.map(w => `un ${w}`)),
-        expected: [`un ${p.nom}`],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        explanation: `Ce patron permet de construire un ${p.nom}.`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cm1-solide-patron-t002",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_patron",
-    difficulty: 3, theme: "neutral",
-    hint: "Compte les faces dans le patron.",
-    tags: ["patron", "faces"],
-    generate: () => {
-      const questions = [
-        { q: "Combien de faces trouve-t-on dans le patron d'un cube ?", r: "6", wrongs: ["4", "8", "12"] },
-        { q: "Combien de pièces compose le patron d'un cylindre ?", r: "3 (2 cercles + 1 rectangle)", wrongs: ["2", "4", "6"] },
-        { q: "Combien de triangles y a-t-il dans le patron d'une pyramide à base carrée ?", r: "4", wrongs: ["3", "5", "6"] },
-      ];
-      const item = pickOne(questions);
-      return {
-        text: item.q,
-        choices: makeChoices(item.r, item.wrongs),
-        expected: [item.r],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        explanation: `${item.q.replace("?", "")} → ${item.r}.`,
-      };
-    },
-  },
   {
     kind: "fixed",
     id: "cm1-solide-patron-001",
@@ -762,9 +460,10 @@ const solidePatron: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_patron",
     difficulty: 2, theme: "neutral",
     text: "Le patron d'un cube est composé de combien de carrés ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("6", ["4", "8", "12"]),
     expected: ["6"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: CUBE,
     hint: "Autant que de faces du cube.",
     explanation: "Le patron d'un cube comporte 6 carrés, un par face.",
@@ -793,9 +492,10 @@ const solidePatron: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_patron",
     difficulty: 3, theme: "neutral",
     text: "Le patron d'une pyramide à base carrée comporte 1 carré et combien de triangles ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("4", ["3", "5", "1"]),
     expected: ["4"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: PYRAMIDE,
     hint: "Un triangle par côté de la base carrée.",
     explanation: "Le patron d'une pyramide à base carrée comporte 1 carré (la base) et 4 triangles.",
@@ -837,60 +537,6 @@ const solidePatron: TutorBankItemV4[] = [
 // ── SOLIDE_DEFI ───────────────────────────────────────────────────────────────
 
 const solideDefi: TutorBankItemV4[] = [
-  {
-    kind: "template",
-    id: "cm1-solide-def-t001",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_defi",
-    difficulty: 3, theme: "neutral",
-    hint: "Compte tous les petits cubes, même ceux cachés.",
-    tags: ["défi", "assemblage", "cubes"],
-    generate: () => {
-      const assemblages = [
-        { cubes: [{x:0,y:0,z:0},{x:1,y:0,z:0},{x:0,y:1,z:0},{x:1,y:1,z:0},{x:0,y:0,z:1},{x:1,y:0,z:1}], n: 6 },
-        { cubes: [{x:0,y:0,z:0},{x:1,y:0,z:0},{x:2,y:0,z:0},{x:0,y:1,z:0},{x:0,y:0,z:1}], n: 5 },
-        { cubes: [{x:0,y:0,z:0},{x:1,y:0,z:0},{x:0,y:1,z:0},{x:0,y:0,z:1}], n: 4 },
-        { cubes: [{x:0,y:0,z:0},{x:1,y:0,z:0},{x:2,y:0,z:0},{x:1,y:1,z:0},{x:1,y:0,z:1}], n: 5 },
-      ];
-      const a = pickOne(assemblages);
-      const wrongs = [a.n - 1, a.n + 1, a.n + 2].map(String);
-      return {
-        text: "Combien de petits cubes ont été utilisés pour construire ce solide ?",
-        choices: makeChoices(String(a.n), wrongs),
-        expected: [String(a.n)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        canvas: assemblageCanvas(a.cubes),
-        explanation: `Il y a ${a.n} petits cubes.`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "cm1-solide-def-t002",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_defi",
-    difficulty: 3, theme: "neutral",
-    hint: "Utilise les caractéristiques (faces, sommets, arêtes) pour identifier.",
-    tags: ["défi", "identification"],
-    generate: () => {
-      const enigmes = [
-        { desc: "J'ai le même nombre de faces que de sommets (5 et 5). Je suis une…", r: "pyramide à base carrée", wrongs: ["cube", "boule", "cylindre"] },
-        { desc: "Je peux rouler mais je ne suis pas une boule. J'ai 2 faces circulaires.", r: "cylindre", wrongs: ["cube", "cône", "pyramide"] },
-        { desc: "J'ai 0 face, 0 sommet, 0 arête.", r: "boule", wrongs: ["cylindre", "cône", "cube"] },
-        { desc: "Mes 6 faces sont des rectangles mais pas toutes identiques.", r: "pavé droit", wrongs: ["cube", "pyramide", "cylindre"] },
-      ];
-      const e = pickOne(enigmes);
-      return {
-        text: e.desc,
-        choices: makeChoices(e.r, e.wrongs),
-        expected: [e.r],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
-        explanation: `La réponse est le ${e.r}.`,
-      };
-    },
-  },
   {
     kind: "fixed",
     id: "cm1-solide-def-001",
@@ -945,9 +591,10 @@ const solideDefi: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_defi",
     difficulty: 3, theme: "neutral",
     text: "Combien de petits cubes faut-il pour construire un grand cube de 2 cubes de côté (2 × 2 × 2) ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("8", ["6", "4", "12"]),
     expected: ["8"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     hint: "2 × 2 × 2.",
     explanation: "Un grand cube de 2 de côté contient 2 × 2 × 2 = 8 petits cubes.",
     tags: ["défi", "cube", "comptage"],
@@ -959,9 +606,10 @@ const solideDefi: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_defi",
     difficulty: 3, theme: "neutral",
     text: "Sur un cube, combien d'arêtes partent de chaque sommet ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("3", ["2", "4", "6"]),
     expected: ["3"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: CUBE,
     hint: "Regarde un coin du cube.",
     explanation: "À chaque sommet d'un cube se rejoignent 3 arêtes.",
@@ -990,27 +638,14 @@ const solideDefi: TutorBankItemV4[] = [
     notionId: "solide", microId: "solide_defi",
     difficulty: 2, theme: "neutral",
     text: "Combien d'arêtes a une boule ?",
-    format: "short",
+    format: "qcm",
+    choices: makeChoices("0", ["12", "8", "1"]),
     expected: ["0"],
-    comparator: "number_equal",
+    comparator: "mcq_exact",
     canvas: BOULE,
     hint: "Une boule est entièrement lisse et arrondie.",
     explanation: "Une boule n'a aucune arête : 0.",
     tags: ["défi", "boule"],
-  },
-  {
-    kind: "fixed",
-    id: "cm1-solide-def-008",
-    niveau: "cm1", matiere: "maths",
-    notionId: "solide", microId: "solide_defi",
-    difficulty: 2, theme: "neutral",
-    text: "Si j'empile 3 cubes les uns sur les autres, combien de cubes ai-je utilisés ?",
-    format: "short",
-    expected: ["3"],
-    comparator: "number_equal",
-    hint: "Compte simplement les cubes empilés.",
-    explanation: "Empiler 3 cubes utilise 3 cubes.",
-    tags: ["défi", "cubes", "comptage"],
   },
 ];
 
@@ -1041,4 +676,5 @@ export const solidesBank: TutorBankItemV4[] = [
   ...solideFace,
   ...solidePatron,
   ...solideDefi,
+  ...solidesGabarits,
 ];
