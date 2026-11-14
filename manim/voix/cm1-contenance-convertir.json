@@ -1,0 +1,17 @@
+{
+  "00-garde": "Convertir des contenances. Combien de centilitres dans 2 litres de lait ?",
+  "01-situation": "Voici Sofia. Elle est pâtissière. Sa recette de crème demande 2 litres de lait. Mais son verre doseur est gradué en centilitres. Combien de centilitres doit-elle verser ?",
+  "02-relations": "Retiens trois égalités. 1 litre, c'est 100 centilitres. 1 litre, c'est 1000 millilitres. Et 1 centilitre, c'est 10 millilitres.",
+  "03-litres-vers-cl": "Des litres vers les centilitres, on multiplie par 100. 2 litres : 2 fois 100, 200 centilitres. Sofia verse 200 centilitres de lait.",
+  "04-cl-vers-ml": "Des centilitres vers les millilitres, on multiplie par 10. Sofia ajoute 5 centilitres de sirop de vanille : 5 fois 10, 50 millilitres.",
+  "04b-vers-litres": "Pour revenir aux litres, on divise. 300 centilitres : 300 divisé par 100, 3 litres. 4000 millilitres : 4000 divisé par 1000, 4 litres.",
+  "05-question": "Question ! Combien de millilitres dans 3 litres ? A : 300 millilitres. B : 3000 millilitres. C : 30 millilitres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 1 litre, c'est 1000 millilitres. 3 fois 1000, 3000. 3 litres, c'est 3000 millilitres.",
+  "06-piege": "Attention au piège ! 3 litres, ce n'est pas 300 millilitres. 300, ce sont des centilitres. Pour les centilitres, on multiplie par 100 ; pour les millilitres, par 1000. Vérifie toujours vers quelle unité tu vas.",
+  "07-question": "Question ! Combien de litres font 600 centilitres ? A : 60 litres. B : 6000 litres. C : 6 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 600 divisé par 100, 6 : car 6 fois 100, 600. 600 centilitres, c'est 6 litres.",
+  "08-defi": "À toi de jouer ! Sofia a une bouteille de 1 litre de crème. Elle en verse 25 centilitres dans un bol. Combien de centilitres reste-t-il dans la bouteille ? Mets pause, et cherche !",
+  "08b-correction": "Correction. D'abord, la même unité : 1 litre, 100 centilitres. Puis 100 moins 25, 75. Il reste 75 centilitres de crème.",
+  "09-finale": "Ce que tu as appris. 1 litre, c'est 100 centilitres, ou 1000 millilitres. 1 centilitre, c'est 10 millilitres. Vers une unité plus petite, on multiplie ; vers le litre, on divise.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

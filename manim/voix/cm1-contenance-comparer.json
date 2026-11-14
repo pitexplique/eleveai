@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des contenances. Laquelle contient le plus : 1 litre ou 75 centilitres ?",
+  "01-situation": "Voici Inès. Elle vend des jus de fruits frais au marché. Elle a deux bouteilles : une de 1 litre, et une de 75 centilitres. Un client veut la plus grande. Laquelle lui donner ?",
+  "02-contenance": "La contenance, c'est ce qu'un récipient peut contenir quand il est plein. On la mesure en litres, en centilitres ou en millilitres.",
+  "03-meme-unite": "Avec la même unité, c'est facile. Une bouteille de 75 centilitres, une autre de 50 centilitres : 75 est plus grand que 50. La bouteille de 75 centilitres contient le plus.",
+  "04-convertir": "Avec deux unités différentes, on met d'abord la même unité. 1 litre, c'est 100 centilitres. On compare 100 centilitres et 75 centilitres : 100 est plus grand. La bouteille de 1 litre contient le plus : Inès la donne au client. Et 1 litre, c'est aussi 1000 millilitres.",
+  "05-question": "Question ! Qu'est-ce qui contient le plus : un pichet de 2 litres, ou une carafe de 150 centilitres ? A : la carafe. B : c'est pareil. C : le pichet. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 2 litres, c'est 200 centilitres. 200 est plus grand que 150 : le pichet contient le plus.",
+  "06-piege": "Attention au piège ! 75 est plus grand que 1, mais 75 centilitres, ce n'est pas plus que 1 litre ! Regarde toujours les unités : 1 litre, c'est 100 centilitres.",
+  "07-question": "Question ! Trois bouteilles : 1 litre, 90 centilitres et 120 centilitres. Laquelle contient le plus ? A : 120 centilitres. B : 1 litre. C : 90 centilitres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 1 litre, c'est 100 centilitres. 120 est plus grand que 100 et que 90 : la bouteille de 120 centilitres contient le plus.",
+  "08-defi": "À toi de jouer ! Inès range quatre récipients, du plus petit au plus grand : un bidon de 2 litres, un verre de 200 millilitres, une bouteille de 1 litre et une grande gourde de 1500 millilitres. Dans quel ordre ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On met tout en millilitres. 1 litre, 1000 millilitres. 2 litres, 2000 millilitres. Du plus petit au plus grand : le verre, 200 ; la bouteille, 1000 ; la gourde, 1500 ; le bidon, 2000.",
+  "09-finale": "Ce que tu as appris. Pour comparer des contenances, on met d'abord la même unité. 1 litre, c'est 100 centilitres, ou 1000 millilitres. Puis on compare les nombres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

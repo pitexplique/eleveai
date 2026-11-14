@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Fête de la classe ! J'ai 2 bouteilles de jus de 1 litre. Nous sommes 25 élèves, avec un gobelet de 10 centilitres chacun. 25 élèves, 2 bouteilles… 25, c'est bien plus que 2 : il en manque plein !",
+  "01-calcul": "Attends, je mets la même unité. 2 litres : 200 centilitres. 25 gobelets de 10 centilitres : 250 centilitres.",
+  "02-question": "Question ! Ai-je assez de jus ? A : oui, il en reste. B : non, il manque 50 centilitres. C : oui, tout juste. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 250 moins 200, 50 centilitres : il manque 5 gobelets.",
+  "03-ouf": "J'achète une bouteille de plus… et le reste, c'est pour moi !",
+  "04-commentaire": "À toi : 3 bouteilles de 1 litre, et des gobelets de 20 centilitres. Combien de gobelets peut-on remplir ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

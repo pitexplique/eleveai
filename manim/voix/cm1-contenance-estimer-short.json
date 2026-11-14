@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Il fait chaud ! Je remplis la piscine gonflable avec mon verre de 25 centilitres. Elle contient 1000 litres. Ça va aller vite !",
+  "01-litre": "D'abord, un seul litre. 1 litre, c'est 100 centilitres.",
+  "02-question": "Question ! Combien de verres de 25 centilitres pour remplir 1 litre ? A : 25 verres. B : 40 verres. C : 4 verres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 25 fois 4, 100 centilitres : 4 verres pour 1 litre. Alors pour 1000 litres… 4000 verres !",
+  "03-ouf": "4000 verres ?! Bon… je prends le tuyau d'arrosage.",
+  "04-commentaire": "À toi : combien de verres de 25 centilitres pour remplir un seau de 10 litres ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -131,3 +131,12 @@ Série aire CM1 terminée. Suite du plan CM1 (`PLAN-perimetre-aire-volume.md`) :
 
 ## Prochaine étape (session 10)
 CONTENANCE CM1 (plan, section CM1), puis les solides : voix à écrire et valider À DEUX avant tout rendu.
+
+## Session 10 (14/11) — voix CONTENANCE CM1 ✅ VALIDÉES (« Oui, valide les 8 »), WAV + marques faits
+- `manim/voix/cm1-contenance-{comparer,convertir,estimer,defi}(-short).json` (micros `contenance_comparer`, `_convertir`, `_estimer`, `_defi` ; unités L, cL, mL, entiers, comme la banque et la fiche).
+- Ép. 1 comparer : Inès, vendeuse de jus au marché (1 L contre 75 cL) ; Q C, A ; short « 75 > 1 ? » B ; jaune.
+- Ép. 2 convertir : Sofia, pâtissière (2 L = 200 cL ; 5 cL = 50 mL) ; Q B, C ; short sirop et cuillère de 5 mL A ; verte.
+- Ép. 3 estimer : Malik, pompier (citerne ≈ 3000 L, repères cuillère → baignoire) ; Q A, B ; short piscine gonflable au verre C ; jaune.
+- Ép. 4 défi : Nora, apicultrice (2 L de miel en pots de 25 cL) ; Q C, A ; short fête de la classe B ; bleue.
+- ✅ WAV `public/sons/cm1-contenance-<ep>[-short]/` (Julie, débit −6, ignorés par git). ✅ Marques : `python manim/scripts/cm1/aire_marques.py contenance:comparer contenance:convertir contenance:estimer contenance:defi` → `manim/scripts/cm1/contenance_<ep>_marques.json` (0 introuvable).
+- Prochaine étape : scripts `manim/scripts/cm1/contenance_<ep>.py` (commun à créer : `contenance_cm1_commun.py`, sur `PaysagePerimetreCM1`, récipients gradués ; personnages `ines`, `sofia`, `malik`, `nora`), puis la chaîne habituelle ; manifeste après le 06/01/2027.

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Un défi de contenances. Mettre la même unité, puis calculer.",
+  "01-situation": "Voici Nora. Elle est apicultrice : elle élève des abeilles. Elle a récolté 2 litres de miel. Elle le verse dans des pots de 25 centilitres. Combien de pots peut-elle remplir ?",
+  "02-convertir": "D'abord, la même unité. 2 litres : 2 fois 100, 200 centilitres.",
+  "03-combien-de-fois": "Puis on cherche combien de fois 25 dans 200. 25 fois 8, 200. Nora remplit 8 pots de miel.",
+  "04-ajouter": "Le lendemain, elle récolte encore 50 centilitres : 2 pots de plus, car 25 plus 25, 50. En tout : 250 centilitres de miel, et 10 pots.",
+  "05-question": "Question ! Une bouteille de 1 litre et 500 millilitres de jus. On remplit des verres de 250 millilitres. Combien de verres ? A : 15 verres. B : 4 verres. C : 6 verres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 1 litre et 500 millilitres : 1000 plus 500, 1500 millilitres. 250 fois 6, 1500. On remplit 6 verres.",
+  "06-piege": "Attention au piège ! 2 litres plus 50 centilitres, ce n'est pas 52 ! On n'ajoute pas des litres et des centilitres. On convertit d'abord : 200 centilitres plus 50, 250 centilitres.",
+  "07-question": "Question ! Un seau contient 5 litres d'eau. Nora en verse 150 centilitres dans un abreuvoir pour ses abeilles. Combien de centilitres reste-t-il ? A : 350 centilitres. B : 145 centilitres. C : 650 centilitres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 5 litres, 500 centilitres. 500 moins 150, 350. Il reste 350 centilitres d'eau.",
+  "08-defi": "À toi de jouer ! Nora a 3 litres de miel, et 10 pots de 25 centilitres. A-t-elle assez de pots pour tout le miel ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 3 litres : 300 centilitres. 10 pots de 25 centilitres : 25 fois 10, 250 centilitres. 250, c'est moins que 300 : il manque 50 centilitres, donc 2 pots de plus !",
+  "09-finale": "Ce que tu as appris. Dans un défi de contenances, on met tout dans la même unité. Puis on calcule : on ajoute, on enlève, ou on cherche combien de fois.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

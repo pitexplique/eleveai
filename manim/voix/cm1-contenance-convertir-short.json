@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je prépare mon jus de fruits. La recette dit : 1 centilitre de sirop de grenadine. 1 centilitre, c'est 10 millilitres. 10 ! Donc 10 cuillères !",
+  "01-cuillere": "Maman m'arrête : ta cuillère contient 5 millilitres !",
+  "02-question": "Question ! Combien de cuillères de 5 millilitres pour faire 10 millilitres ? A : 2 cuillères. B : 10 cuillères. C : 5 cuillères. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! 5 plus 5, 10 millilitres : 2 cuillères suffisent.",
+  "03-ouf": "Ouf ! Avec 10 cuillères, mon jus aurait été tout rouge… et tout collant !",
+  "04-commentaire": "À toi : 3 centilitres de sirop, avec une cuillère de 5 millilitres. Combien de cuillères ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

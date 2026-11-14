@@ -1,0 +1,16 @@
+{
+  "00-garde": "Estimer une contenance. Sans la mesurer, combien d'eau dans une citerne de pompier ?",
+  "01-situation": "Voici Malik. Il est pompier. Son camion transporte une grosse citerne d'eau. Combien de litres dedans : 30 litres, 300 litres ou 3000 litres ? Pour estimer, il faut des repères.",
+  "02-reperes": "Voici des repères. Une petite cuillère : 5 millilitres. Un verre : 20 centilitres. Une bouteille : 1 litre. Un seau : 10 litres. Une baignoire : environ 150 litres.",
+  "03-unite": "Pour un petit récipient, on parle en millilitres ou en centilitres. Pour un grand récipient, en litres.",
+  "04-citerne": "La citerne est bien plus grande qu'une baignoire. 30 litres, ce n'est que 3 seaux : bien trop peu ! Elle contient environ 3000 litres : autant que 20 baignoires.",
+  "05-question": "Question ! Quelle est la contenance d'une gourde d'élève ? A : 500 millilitres. B : 50 litres. C : 5 millilitres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Une gourde tient dans un cartable : environ 500 millilitres, un demi-litre. 50 litres, ce serait 5 seaux ! Et 5 millilitres, une seule petite cuillère.",
+  "06-piege": "Attention au piège ! Le nombre seul ne suffit pas, regarde l'unité. 10 litres pour une petite cuillère, c'est impossible. Mais 10 litres pour un seau, c'est juste.",
+  "07-question": "Question ! Combien d'eau dans une baignoire pleine ? A : 15 centilitres. B : 150 litres. C : 1500 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Une baignoire, environ 150 litres : à peu près 15 seaux. 15 centilitres, ce serait moins qu'un verre ! Et 1500 litres, la moitié d'une citerne de pompier.",
+  "08-defi": "À toi de jouer ! Trois récipients : une tasse, un arrosoir et une piscine gonflable. Trois contenances : 10 litres, 25 centilitres et 2000 litres. Qui va avec quoi ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La tasse, un peu plus qu'un verre : 25 centilitres. L'arrosoir, comme un seau : 10 litres. La piscine gonflable, plus de 10 baignoires : 2000 litres.",
+  "09-finale": "Ce que tu as appris. Pour estimer, on compare à des repères : la cuillère, le verre, la bouteille, le seau. Petit récipient : millilitres ou centilitres. Grand récipient : litres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
