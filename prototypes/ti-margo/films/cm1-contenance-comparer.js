@@ -18,13 +18,13 @@ FILMS['comparer']=function(outils){
   poserClasse(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55});
   outils.panneau.style.display='none'; cssCartes();
 
-  const tBout=mot('00-accroche','bouteille'), tSienne=mot('00-accroche','sienne'), t1L=mot('00-accroche','1 litre'),
+  const tBout=mot('00-accroche','bouteille'), tSienne=mot('00-accroche','sienne'), t1L=mot('00-accroche','litre'),
         tMienne=mot('00-accroche','mienne'), t75=mot('00-accroche','75'), t75b=mot('00-accroche','75',2),
         tGagne=mot('00-accroche','gagné'), tOn=mot('00-accroche','on');
-  const tUnites=mot('01-unite','unités'), t1Lu=mot('01-unite','1 litre'), t100=mot('01-unite','100');
+  const tUnites=mot('01-unite','unités'), t1Lu=mot('01-unite','litre'), t100=mot('01-unite','100');
   const tContre=mot('02b-reponse','contre'), t25=mot('02b-reponse','25');
   const tBon=mot('03-ouf','Bon'), tDessin=mot('03-ouf','dessin');
-  const tBidon=mot('04-commentaire','bidon'), t3L=mot('04-commentaire','3 litres'), tBass=mot('04-commentaire','bassine'),
+  const tBidon=mot('04-commentaire','bidon'), t3L=mot('04-commentaire','litres'), tBass=mot('04-commentaire','bassine'),
         t250=mot('04-commentaire','250'), tLeq=mot('04-commentaire','Lequel'), tRep=mot('04-commentaire','Réponds');
   const finTitre=tOn-.08, XR=790;
 
