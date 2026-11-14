@@ -37,3 +37,24 @@ Outils hors dépôt (scratchpad de la session 3, à recréer si perdus) : `hd.sh
 1. Suite du plan CE2 : `ce2_perimetre_rectangle`, `ce2_perimetre_defi`, puis contenance et solides (voix à écrire et à faire valider À DEUX).
 
 ⛔ RAM : un seul rendu HD sur le PC (verrou), aperçus `-ql`, rien sous 2,5 Go libres, un seul processus manim à soi, aucun sous-agent qui rend.
+
+## Session 4 (14/11) : ÉPISODES 04 rectangle et 05 défi — passée la main à 67 %
+✅ Les 4 voix VALIDÉES par Frédéric le 14/11 (« Oui, valide ») : `manim/voix/ce2-perimetre-{rectangle,defi}[-short].json`. Ne pas les redemander.
+Ceintures validées avec : paysage 04 ORANGE, paysage 05 BLEUE, short 04 JAUNE, short 05 ORANGE.
+Métiers / centres : 04 Kenza couturière (art-design) ; short 04 potager de Mamie (nature-ecologie) ; 05 Zoé soigneuse en refuge (animaux) ; short 05 scène de danse (musique).
+Bonnes réponses : 04 Q1 C (05-question), Q2 B (08-question) ; short 04 A ; 05 Q1 C (04-question), Q2 A (07-question) ; short 05 B.
+✅ WAV (Julie, débit −6) dans `public/sons/ce2-perimetre-{rectangle,defi}[-short]/` ; marques `perimetre_{rectangle,defi}_marques.json` (0 introuvable).
+✅ Commun : `aux_extraits(morceaux, extraits)` (chaque morceau à SON extrait, (texte, n, délai)), `somme_lg(...)`, `codes(fig)` ajoutés à `perimetre_ce2_commun.py`.
+✅ `perimetre_rectangle.py` (`PerimetreRectangleCE2`) : dry run PROPRE (0 AUDIT, 0 BORD, 0 TARD ; seul « 974 »). Questions 01:09 rép 2 (C), 02:35 rép 1 (B). Durée ≈ 4 min 10.
+  Aperçu -ql relu une fois ; corrigés ensuite (PAS encore revus en image) : garde (figures plus à droite), 03 (lignes à x=0.4), 06 (rectangle plus petit à gauche), 07 (« un mouchoir carré » plus bas), 09 et 09b (coussin, lignes, encadré à gauche). → refaire un aperçu -ql et le relire avant le HD.
+⏳ `perimetre_defi.py` (`PerimetreDefiCE2`) : dernier dry run : seul reste AUDIT-TARD « 24 » de 07b (corrigé : « 24, » seul morceau, à vérifier). Questions 00:53 rép 2 (C), 02:05 rép 0 (A). Pas encore d'aperçu.
+⛔ Leçon : la synchro par jetons attend TOUS les mots d'un morceau (« 24, ce serait le tour » attend « tour ») → un morceau = le nombre seul ; et `au_mot("2 mètres")` trouve d'abord « 12 mètres » : prendre « de 2 mètres ». Lancer les dry runs avec `PYTHONIOENCODING=utf-8` (sinon l'audit plante sur « − »).
+Outils hors dépôt (à recréer) : `$TEMP/claude/mots.py <slug> <clé>` (mot@instant), `$TEMP/claude/images.py <mp4> <png> t…` (planche 3 colonnes, PyAV).
+
+### Reste (dans l'ordre)
+1. Défi : dry run propre → aperçu -ql (media dans $TEMP), planche relue (images à mi-écran ET fin d'écran).
+2. Rectangle : nouvel aperçu -ql relu.
+3. HD de chacun sous verrou `%TEMP%\eleveai-rendu-hd.lock` (`-qh --disable_caching … --media_dir manim/scripts/ce2/media-per-04 / -05`), sortie `manim/sorties/ce2/maths/perimetre/04-rectangle/` et `05-defi/`, `python scripts/verifier-bords-video.py` = 0.
+4. Shorts Ti Margo : `FILMS.rectangle` et `FILMS.defi` dans `prototypes/ti-margo/films/ce2-perimetre-cues.js` + films (modèle des 3 épisodes, `films/ce2-perimetre.json` à compléter), `python scripts/ti-margo-cues.py ce2-perimetre <ép>`, contrôle image par image, miniature « Dessin animé », supprimer le `_muet.mp4`.
+5. Miniatures paysage (`manim/miniature_perimetre_ce2.py` : ajouter 04 orange, 05 bleue), `manim/passe_perimetre_ce2.py manifeste` (dates libres après le 29/12), fiches YouTube, R2, `generer-videos-r2.mjs`, coach (`brancher-videos-coach.mjs --classe ce2 --notion perimetre --tout`), plan coché, mémoire `serie-perimetre-ce2.md`.
+6. Commit PAR CHEMIN, pas de push.

@@ -193,3 +193,46 @@ class PaysagePerimetreCE2(PaysageCalculPose):
         else:
             self.play(Create(c), run_time=run_time)
         return c
+
+    # ── ajoutés pour les épisodes 04 (rectangle) et 05 (défi), 14/11 ─────────
+    def aux_extraits(self, morceaux, extraits, run_time=0.18):
+        """Chaque morceau à SON extrait de la voix (nombres répétés : la synchro par jetons s'y
+        perd). Un extrait = « texte » ou (« texte », occurrence, délai). L'audit vérifie toujours."""
+        for m, ex in zip(morceaux, extraits):
+            for f in m.get_family():
+                f.sans_synchro = True
+            ex = list(ex) if isinstance(ex, (tuple, list)) else [ex]
+            ex, n, delai = (ex + [1, 0.0][len(ex) - 1:])[:3]
+            self.au_mot(ex, n)
+            self.wait(0.07 + delai)  # au-delà de l'arrondi d'image de l'aperçu
+            self.play(FadeIn(m, shift=UP * 0.08), run_time=run_time)
+
+    def somme_lg(self, morceaux, y, mot, fs=34, x=None, xl=None, couleur=BLEU_D, avec=(), mots=None,
+                 couleur0=WHITE):
+        """Une somme écrite au fil de la voix : le titre (« Longueurs : ») au mot, puis chaque
+        nombre à son tour (au_fil, ou à son extrait si `mots`)."""
+        lg = self.ligne([(m, couleur if k else couleur0) for k, m in enumerate(morceaux)], fs, buff=0.16)
+        if x is not None:
+            gauche(lg, x, y)
+        else:
+            self.col(lg, y, xl=xl)
+        self.au_mot(mot)
+        self.play(FadeIn(lg[0], shift=UP * 0.08), *avec, run_time=0.25)
+        if mots is None:
+            self.au_fil(lg, 1)
+        else:
+            self.aux_extraits(lg[1:], mots)
+        return lg
+
+
+def codes(fig, couleur=WHITE, long=0.22):
+    """Les petits traits qui disent « côtés égaux », au milieu de chaque côté."""
+    s = fig.sommets()
+    g = VGroup()
+    for i in range(len(s)):
+        a, b = s[i], s[(i + 1) % len(s)]
+        d = (b - a) / (np.linalg.norm(b - a) or 1)
+        n = np.array([-d[1], d[0], 0])
+        m = (a + b) / 2
+        g.add(Line(m - n * long / 2, m + n * long / 2, color=couleur, stroke_width=4))
+    return g

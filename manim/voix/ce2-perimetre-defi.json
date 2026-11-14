@@ -1,0 +1,16 @@
+{
+  "00-garde": "Un défi de périmètre. Une porte, des cages collées : que devient le tour ?",
+  "01-situation": "Voici Zoé. Elle est soigneuse dans un refuge pour animaux. Elle construit un enclos pour les tortues : un rectangle de 12 mètres sur 5 mètres. Mais elle laisse une porte de 2 mètres. Combien de mètres de grillage doit-elle acheter ?",
+  "02-tour": "D'abord, tout le tour. 12 plus 5, 17. Plus 12, 29. Plus 5, 34. Le tour complet fait 34 mètres.",
+  "03-porte": "Mais à la porte, pas de grillage ! On enlève les 2 mètres de la porte. 34 moins 2, 32. Zoé achète 32 mètres de grillage.",
+  "04-question": "Question ! Un enclos carré a des côtés de 5 mètres. On laisse une porte de 1 mètre. Combien de mètres de grillage ? A : 20 mètres. B : 21 mètres. C : 19 mètres. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Tout le tour : 5 fois 4, 20. Moins la porte : 20 moins 1, 19 mètres.",
+  "05-colles": "Deuxième défi. Zoé colle deux cages carrées de 3 mètres de côté, l'une contre l'autre. Quel est le tour de la grande cage ? Le côté collé est au milieu : il n'est plus sur le bord. On suit le bord : 6 côtés de 3 mètres. 3 fois 6, 18. Le tour fait 18 mètres.",
+  "06-piege": "Attention au piège ! On ne fait pas le tour de chaque cage : 12 plus 12, 24, c'est trop ! Les côtés collés sont à l'intérieur : ils ne font pas partie du tour.",
+  "07-question": "Question ! Trois carrés de 2 mètres de côté sont collés en ligne. Quel est le périmètre de la grande figure ? A : 16 mètres. B : 24 mètres. C : 12 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. La grande figure est un rectangle de 6 mètres sur 2 mètres. 6 plus 2, 8. Plus 6, 14. Plus 2, 16. 24, ce serait le tour des trois carrés séparés.",
+  "08-defi": "À toi de jouer ! Pour les lapins, Zoé colle deux enclos carrés de 4 mètres de côté. Elle laisse une porte de 1 mètre. Combien de mètres de grillage lui faut-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La grande figure est un rectangle de 8 mètres sur 4 mètres. 8 plus 4, 12. Plus 8, 20. Plus 4, 24. Moins la porte : 24 moins 1, 23. Il faut 23 mètres de grillage.",
+  "09-finale": "Ce que tu as appris. Avec une porte : on calcule tout le tour, puis on enlève la porte. Avec des figures collées : les côtés collés sont dedans, on ne les compte pas. Un défi, c'est une étape après l'autre.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
