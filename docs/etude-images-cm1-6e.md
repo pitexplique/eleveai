@@ -82,6 +82,10 @@ dans une boîte qu'on colorie aux deux tiers, ce n'est pas infantilisant :
 c'est le sens même de la fraction. Un poussin qui sourit à côté de
 « 345 ou 354 ? » serait infantilisant.
 
+Le plaisir est le second critère (section 5). Il passe d'abord par la
+**réaction du dessin après la réponse**, qui ne coûte aucune lecture, et pas
+par des dessins décoratifs dans l'énoncé.
+
 Ce dosage respecte la règle du collège (★1-★2 sans contexte). Un dessin
 d'objets sans prénom ni phrase n'est pas un contexte. Au contraire, il
 remplace des mots : « Combien de jetons sont rouges ? » en 6 mots, plus une
@@ -198,7 +202,79 @@ Il faut aussi pouvoir régler `colonnes` dans `animauxCanvas` et
 `ObjetsCanvas`, pour obtenir des dispositions rectangulaires a × b et la
 grille de 10 × 10.
 
-## 5. L'effort à prévoir
+## 5. Le plaisir, critère à part entière (ajout de Frédéric : « ça rendrait plus fun »)
+
+Le plaisir et l'envie de continuer comptent autant que la compréhension.
+Aujourd'hui, le coach dit « Bravo » et affiche « 🔥 Série N »
+(`app/coach/serie/TutorV4Client.tsx`). Aucun dessin ne réagit. Il y a deux
+leviers différents :
+- **le fun dans la question**, c'est-à-dire ce qu'on compte et ce qui fait
+  sourire. Il doit rester **muet** : rien de plus à lire ;
+- **le fun dans la réaction**, c'est-à-dire ce qui se passe après la réponse.
+  Là, rien ne gêne la lecture, puisque la question est finie. C'est le
+  levier le plus sûr, et il vaut pour les trois classes.
+
+Le garde-fou est le même partout : **le fun ne rajoute jamais de mots à
+l'énoncé**. Une situation drôle se dit en un dessin, pas en une phrase de
+plus. Elle reste ★3 et plus au collège, et ne dépasse pas 25 mots (REGLES-6E).
+
+**CM1** (9-10 ans, ils aiment encore les animaux) :
+- **Réaction** : l'animal de la question réagit à la réponse. À la bonne
+  réponse, la poule saute, la grenouille fait un bond, le chat ronronne
+  (une animation CSS d'une demi-seconde). À la mauvaise réponse, il penche la
+  tête sans aucun air triste, puis le corrigé l'entoure.
+- **Collections drôles** à compter :
+  - « Combien de pattes dans le poulailler ? », avec une araignée cachée
+    dans la grille ;
+  - le « trouve l'intrus » de `famille` : l'escargot parmi les insectes ;
+  - 6 × 8 escargots en rangées, avec un seul qui va dans l'autre sens.
+- **Collection de la série** : chaque série de 5 bonnes réponses gagne un
+  animal dans son « zoo » (les 24 dessins existent déjà). C'est l'envie de
+  revenir, façon album d'images.
+- **Situations à ★3** : « les fourmis partagent 23 miettes en 4 files »,
+  avec le reste dessiné qui repart tout seul.
+
+**CM2** (10-11 ans, le « bébé » commence à gêner) :
+- **Réaction** : les objets « grands » remplacent les animaux. La canette
+  qui pétille, la pièce qui tombe dans la tirelire en proportionnalité, la
+  grille de 100 jetons qui se remplit jusqu'au pourcentage juste. Le dessin
+  de la question termine son geste.
+- **Collections à compter** qui leur ressemblent : cartes de collection
+  (sans marque), billes, tickets, stickers. « 25 % de mes 100 stickers sont
+  brillants » se voit sur la grille.
+- **Situations drôles à ★3** :
+  - le distributeur qui rend trop de monnaie : faut-il le dire ? ;
+  - « 3 croissants à 1,50 € ou le lot de 7 à 9 € ? » ;
+  - le plan à l'échelle d'une chambre en désordre.
+- Animaux encore possibles, mais seulement comme **données vraies** :
+  « Combien de pattes pour 7 araignées ? » plutôt que « la poule est
+  contente ».
+
+**6e** (11-12 ans, et ils lisent mal) :
+- **Réaction sobre, mais visible** : pas de cri ni de poussin. Le pictogramme
+  qui se complète, la boîte d'œufs qui se ferme quand la fraction est juste,
+  la jauge 10 × 10 qui se remplit. **Ti Margo** peut réagir (il est déjà
+  accepté par les 6e, voir `TiMargoBulle.tsx`). C'est la seule « mascotte » à
+  garder au collège.
+- **Fun par la passion** : des objets de leur monde, en statistiques et en
+  probabilités (`ballon_basket`, `manette`, cartes, tickets de cinéma), en
+  écho à `/passions`. Exemple : une urne de cartes rares et communes, et
+  « Quelle chance de tirer une rare ? ».
+- **Défis rares (★4-★5)** :
+  - « Combien de jetons faut-il ajouter pour arriver à 50 % ? » ;
+  - un pictogramme truqué à démasquer, où un dessin vaut 2 et non 1 ;
+  - le plus petit nombre d'œufs qu'on peut partager en tiers ET en quarts.
+- **Collection de séance** : un objet gagné par série (une carte à
+  collectionner). Elle ne s'affiche qu'au tableau de bord élève, jamais dans
+  la question.
+- ⛔ En 6e, il faut éviter les animaux qui sourient, les dessins sans rapport
+  avec le calcul, et les blagues écrites, qui sont à lire.
+
+Le tout reste à valider à deux, pour la même raison que le script des vidéos :
+il faut **demander aux élèves** de Frédéric (6e et 4e) quelle réaction leur
+plaît, avant de la généraliser.
+
+## 6. L'effort à prévoir
 
 | Chantier | Effort |
 |---|---|
@@ -207,9 +283,14 @@ grille de 10 × 10.
 | CM1 : environ 40 gabarits (tables, fraction de quantité, division, probabilités, proportionnalité) | 1 session, environ 1 journée |
 | CM2 : environ 30 gabarits (pourcentage, proportionnalité, fraction de quantité, échelle) | 1 session, **après** local_81855025 |
 | 6e : environ 45 gabarits (pourcentages, fractions, proportionnalité, statistiques, probabilités) | 1 à 2 sessions, à relire selon REGLES-6E |
+| Fun : réaction du dessin à la bonne réponse (animation CSS du canvas de la question, + Ti Margo en 6e) | 1 session, environ ½ journée, dans le client du coach |
+| Fun : « zoo » ou collection de cartes gagnée par série (CM1 : animaux ; 6e : cartes, au tableau de bord) | 1 session, environ ½ à 1 journée, avec un stockage par élève |
 | Vérifier les squelettes et les répétitions (`mesurer-squelettes-coach.ts`) et refaire cette mesure | inclus dans chaque session |
 
-Il faut compter **4 à 5 sessions**, réparties sur 2 à 3 blocs de travail.
+Il faut compter **4 à 5 sessions** pour les images, plus **1 à 2 sessions**
+pour le fun, réparties sur 3 à 4 blocs de travail. La réaction à la bonne
+réponse est le meilleur rapport entre l'effort et le plaisir : elle vaut
+pour toutes les classes et ne touche à aucun gabarit.
 Voici ce qu'on peut viser après ce chantier :
 - illustrations du CM1 : de 0,8 % à environ 8 % ;
 - illustrations du CM2 : de 0,5 % à environ 6 % ;
