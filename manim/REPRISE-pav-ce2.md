@@ -140,7 +140,7 @@ Commit `7cd4d839`. Rien poussé.
 ## Session 8 bis (14/11 midi) : shorts faits, passe prête
 ✅ 5 shorts Ti Margo écrits et contrôlés (`films/ce2-contenance-<ep>.js`, commun `ce2-contenance.js` avec `deuxAuPlus()` : WinRT triple parfois un jeton, « 200 moins »). Commit `7fe214be`. Films + miniatures 01, 02, 03, 04 rendus (04 relu, propre) ; film 05 en cours de rendu à la relève (journal `$TEMP/film-defi.log`).
 ✅ `manim/miniature_contenance_ce2.py` (miniatures paysage 01-03 faites) et `manim/passe_contenance_ce2.py` (temps / voir / manifeste ; dates 15, 17, 19, 21, 23/01/2027 ; `AUSSI_CM1` : 02 → cm1 `contenance_convertir`, 03 → cm1 `contenance_comparer`, sur la paysage ET le short). `temps.json` mesuré pour 01-03 + shorts 01-03.
-⏳ À la relève : HD 04 en cours sous verrou (journal `hd-04.log` dans les notes `local_460eb91c-…`), puis l'aperçu -ql de 05 part tout seul dans `$TEMP/ql05`.
+✅ HD 04 FINI (bords 0, planche HD pas encore relue) ; aperçu -ql de 05 rendu : `$TEMP/ql05/videos/contenance_defi/480p15/apercu-cont-05.mp4` (à relire). Film 05 + miniature rendus (à relire).
 R2 : `bash <scratchpad>/r2.sh ce2/maths/contenance` n'existe que dans l'ancienne session ; refaire : variables `RCLONE_CONFIG_R2_*` (TYPE=s3, PROVIDER=Cloudflare, ACCESS_KEY_ID / SECRET_ACCESS_KEY / ENDPOINT = `R2_*` de `.env.local`, NO_CHECK_BUCKET=true) puis `rclone copy manim/sorties/ce2/maths/contenance r2:eleveai-videos/ce2/maths/contenance --filter "+ *.mp4" --filter "+ *.png" --filter "+ *.webp" --filter "- *"` (`r2-videos.ps1` plante sous PowerShell 5.1).
 
 ### Reste (dans l'ordre)
