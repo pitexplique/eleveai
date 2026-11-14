@@ -1,0 +1,7 @@
+{
+  "voix": "cm2-aire-{ep}-short",
+  "sons": "public/sons/cm2-aire-{ep}-short",
+  "sortie": "manim/sorties/cm2/maths/aire/{num}-{ep}",
+  "nom": "eleveai-maths-cm2-aire-{ep}-short",
+  "episodes": { "comprendre": "01", "unites": "02", "convertir-unites": "03", "carre-rectangle": "04", "triangle-rectangle": "05", "composer": "06", "defi": "07" }
+}
