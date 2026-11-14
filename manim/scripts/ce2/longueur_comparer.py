@@ -182,6 +182,7 @@ class LongueurComparerBase(PaysageLongueurCE2):
         self.ecran("02-meme-unite")
         self.au_mot("Pour comparer")
         l0 = self.ligne([("Pour comparer :", JAUNE_TITRE), ("la même unité !", VERT_OK)], 40, buff=0.25)
+        l0[1].shift(UP * (l0[0][0].get_bottom()[1] - l0[1].get_bottom()[1]))  # même ligne de base (« p » descend)
         gauche(l0, -6.2, 2.9)
         self.play(FadeIn(l0[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("dans la même unité")
@@ -332,7 +333,7 @@ class LongueurComparerBase(PaysageLongueurCE2):
             sc.play(Indicate(t1, color=VERT_OK, scale_factor=1.05), run_time=0.25)
 
         self.question_gauche("07-question", "07b-reponse",
-                             ["Le bateau de Lina fait", "deux trajets : 950 m,", "puis 1 km.",
+                             ["Le bateau de Lina fait deux", "trajets : 950 m, puis 1 km.",
                               "Lequel est le plus court ?"],
                              [self.choix("celui de 950 m"), self.choix("celui de 1 km"),
                               self.choix("ils sont pareils")], 0,
@@ -376,7 +377,7 @@ class LongueurComparerBase(PaysageLongueurCE2):
         l0 = self.t("Du plus court au plus long :", 32, GRAY_B)
         gauche(l0, -6.2, 1.5)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.3)
-        E = 0.025
+        E = 0.022
         rang = [("la méduse, 30", meduse(0.6), 30, MEDUSE, "1. la méduse : 30 cm", 0.6),
                 ("Le poisson, 150", poisson(1.2), 150, POISSON, "2. le poisson : 150 cm", -0.5),
                 ("L'algue, 200", algue(1.8), 200, ALGUE, "3. l'algue : 200 cm", -1.6)]
@@ -384,8 +385,8 @@ class LongueurComparerBase(PaysageLongueurCE2):
             d.move_to(P(-5.2, y))
             r = ruban(cm * E, coul, 0.24).move_to(P(0, y)).align_to(P(-4.0, 0), LEFT)
             t = hors_audit(self.t(txt, 32, coul)).next_to(r, RIGHT, buff=0.3)
-            if t.get_right()[0] > 5.4:
-                t.shift(LEFT * (t.get_right()[0] - 5.4))
+            if t.get_right()[0] > 5.0:
+                t.shift(LEFT * (t.get_right()[0] - 5.0))
             self.au_mot(ex)
             self.wait(0.07)
             self.play(FadeIn(d, shift=RIGHT * 0.2), GrowFromEdge(r, LEFT), FadeIn(t), run_time=0.4)
@@ -399,15 +400,17 @@ class LongueurComparerBase(PaysageLongueurCE2):
                                                                                          aligned_edge=LEFT)
         lignes = self.finale_gauche(fig, textes=[
             ("Pour comparer deux longueurs :", "la même unité, puis les nombres."),
-            ("Un grand nombre", "ne veut pas dire une grande longueur :"),
-            ("regarde l'unité !",)], fs=32)
+            ("Un grand nombre ne veut pas dire", "une grande longueur :", "regarde l'unité !")], fs=32)
+        der = lignes[1][1][-1]  # « regarde l'unité ! » : même coche, posée à son mot
+        lignes[1][1].remove(der)
+        der.align_to(lignes[1][1], LEFT)
         self.add(fig)
         self.au_mot("Pour comparer deux longueurs")
         self.montrer_ligne(lignes[0], Indicate(fig, scale_factor=1.05))
         self.au_mot("Un grand nombre")
         self.montrer_ligne(lignes[1])
         self.au_mot("regarde l'unité")
-        self.montrer_ligne(lignes[2])
+        self.play(FadeIn(der, shift=RIGHT * 0.2), run_time=0.35)
         self.attendre_voix(marge=1.0)
 
     def construct(self):

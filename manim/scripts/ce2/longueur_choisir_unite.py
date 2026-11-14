@@ -86,7 +86,14 @@ def couloir(s=1.0):
                           fill_color="#cbd5e1", fill_opacity=1, stroke_width=0),
                   Polygon(P(1.4 * s, -0.6 * s), P(0.4 * s, 0.2 * s), P(0.4 * s, 0.9 * s), P(1.4 * s, 1.1 * s),
                           fill_color="#e2e8f0", fill_opacity=1, stroke_width=0))
-    return VGroup(sol, murs)
+    fond = Rectangle(width=0.8 * s, height=0.7 * s, fill_color="#334155", fill_opacity=1, stroke_width=0)
+    fond.move_to(P(0, 0.55 * s))
+    plaf = Polygon(P(-1.4 * s, 1.1 * s), P(1.4 * s, 1.1 * s), P(0.4 * s, 0.9 * s), P(-0.4 * s, 0.9 * s),
+                   fill_color="#f1f5f9", fill_opacity=1, stroke_width=0)
+    raie = Line(P(0, -0.6 * s), P(0, 0.2 * s), color="#facc15", stroke_width=3)
+    porte_f = Rectangle(width=0.3 * s, height=0.45 * s, fill_color="#0ea5e9", fill_opacity=1, stroke_width=0)
+    porte_f.move_to(P(0, 0.2 * s), aligned_edge=DOWN)
+    return VGroup(sol, murs, plaf, fond, porte_f, raie)
 
 
 def pouce(s=1.0, couleur="#e0ac69"):
@@ -153,7 +160,7 @@ class LongueurChoisirUniteBase(PaysageLongueurCE2):
         l0 = self.bloc(["On choisit l'unité", "qui donne un nombre simple."], 38, JAUNE_TITRE, buff=0.15)
         gauche(l0, -6.2, 2.6)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.4)
-        st = stylo(3.2).move_to(P(2.6, 2.4))
+        st = stylo(3.2).move_to(P(3.6, 1.2))
         self.add(st)
         self.play(FadeIn(st, shift=LEFT * 0.3), run_time=0.3)
         b = self.ligne([("en centimètres :", WHITE), ("14", VERT_OK)], 44, buff=0.3)
@@ -219,10 +226,12 @@ class LongueurChoisirUniteBase(PaysageLongueurCE2):
                   ("Pour une chose toute fine", "une chose toute fine", "le millimètre", "mm",
                    billet(0.9), -1.5)]
         for ex, quoi, unite, u, d, y in lignes:
-            t = self.ligne([(quoi + " :", WHITE), (unite, VERT_OK)], 34, buff=0.25)
+            t = self.ligne([(quoi + " :", WHITE), (unite, VERT_OK)], 30, buff=0.22)
             gauche(t, -6.2, y)
-            uu = self.t(u, 60, VERT_OK).move_to(P(5.3, y))
-            d.move_to(P(3.0, y))
+            uu = self.t(u, 60, VERT_OK).move_to(P(5.5, y))
+            d.move_to(P(3.4, y))
+            if d.get_left()[0] < t.get_right()[0] + 0.3:
+                d.shift(RIGHT * (t.get_right()[0] + 0.3 - d.get_left()[0]))
             self.au_mot(ex)
             self.play(FadeIn(t[0], shift=UP * 0.1), FadeIn(d, shift=LEFT * 0.2), run_time=0.35)
             self.play(FadeIn(t[1], scale=1.1), FadeIn(uu, scale=1.3), run_time=0.3)
@@ -241,7 +250,7 @@ class LongueurChoisirUniteBase(PaysageLongueurCE2):
             sc.play(Indicate(co, color=VERT_OK, scale_factor=1.05), run_time=0.25)
 
         self.question_gauche("05-question", "05b-reponse",
-                             ["Avec quelle unité mesure-t-on", "la longueur d'un couloir", "de l'aéroport ?"],
+                             ["Avec quelle unité", "mesure-t-on la longueur", "d'un couloir de l'aéroport ?"],
                              [self.choix("le millimètre"), self.choix("le mètre"), self.choix("le kilomètre")], 1,
                              ["Pour un couloir, le mètre", "donne un nombre simple.",
                               "Le km : pour les routes ;", "le mm : les choses fines."],
@@ -256,12 +265,14 @@ class LongueurChoisirUniteBase(PaysageLongueurCE2):
         self.play(Write(tit), run_time=0.35)
         self.au_mot("Tom écrit")
         l0 = self.ligne([("Tom écrit : la porte mesure", WHITE), ("2 cm", ROUGE_ERREUR)], 36, buff=0.22)
+        l0[1].shift(UP * (l0[0][0].get_bottom()[1] - l0[1].get_bottom()[1]))  # même ligne de base
         gauche(l0, -6.2, 2.0)
         self.play(FadeIn(l0[0], shift=UP * 0.1), run_time=0.35)
         self.au_mot("2 centimètres de haut")
         self.play(FadeIn(l0[1], scale=1.2), run_time=0.3)
         self.au_mot("Le nombre 2 est juste")
         l1 = self.ligne([("Le nombre 2 : juste.", VERT_OK), ("L'unité : fausse !", ROUGE_ERREUR)], 34, buff=0.4)
+        l1[1].shift(UP * (l1[0][0].get_bottom()[1] - l1[1].get_bottom()[1]))  # « j » descend
         gauche(l1, -6.2, 1.1)
         hors_audit(l1[0])
         self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.3)
@@ -321,6 +332,7 @@ class LongueurChoisirUniteBase(PaysageLongueurCE2):
         lab = ["la valise", "le trajet", "le billet"]
         for k, ex in enumerate(noms):
             e = self.t(lab[k], 28, GRAY_B).next_to(g[k], DOWN, buff=0.25)
+            e.set_y(g.get_bottom()[1] - 0.25 - e.height / 2)  # les trois à la même hauteur
             self.au_mot(ex)
             self.play(FadeIn(g[k], shift=UP * 0.2), FadeIn(e), run_time=0.3)
         self.play(Wiggle(g), run_time=0.5)
@@ -332,17 +344,19 @@ class LongueurChoisirUniteBase(PaysageLongueurCE2):
         self.play(Write(tit), run_time=0.35)
         g = self.trois().shift(UP * 0.8)
         self.add(g)
-        rep = [("La valise", "des centimètres", "cm", "environ 60", "≈ 60 cm", 0),
+        rep = [("La valise", "des centimètres", "cm", "environ 60", "environ 60 cm", 0),
                ("Le trajet entre deux villes", "des kilomètres", "km", None, None, 1),
-               ("L'épaisseur d'un billet", "des millimètres", "mm", "à peine 1", "≈ 1 mm", 2)]
+               ("L'épaisseur d'un billet", "des millimètres", "mm", "à peine 1", "à peine 1 mm", 2)]
         for ex, mot, u, ex2, val, i in rep:
             self.au_mot(ex)
             self.play(Indicate(g[i], scale_factor=1.06), run_time=0.3)
             self.au_mot(mot)
             e = self.t(u, 54, VERT_OK).next_to(g[i], DOWN, buff=0.35)
+            e.set_y(g.get_bottom()[1] - 0.35 - 0.3)  # les trois unités sur une même ligne
             self.play(FadeIn(e, scale=1.3), run_time=0.3)
             if ex2:
-                v = self.t(val, 32, JAUNE_TITRE).next_to(e, DOWN, buff=0.2)
+                v = self.t(val, 30, JAUNE_TITRE).next_to(e, DOWN, buff=0.2)
+                v.set_y(g.get_bottom()[1] - 1.35)
                 self.au_mot(ex2)
                 self.play(FadeIn(v, shift=UP * 0.1), run_time=0.3)
         self.attendre_voix()
