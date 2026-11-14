@@ -31,7 +31,7 @@ NOM_CEINT = {"blanche": "Ceinture blanche", "jaune": "Ceinture jaune", "orange":
 # Dates : 16, 18, 20, 22 et 24/01/2027 (manifeste relu le 14/11 : 1 paysage par jour ces jours-là, on passe à 2 paysages et 3 vidéos).
 EP = [
  dict(n=1, slug="reconnaitre", micro="ce2_solide_reconnaitre", nom="Les solides", date="2027-01-16", ceinture="blanche",
-      titre="Cube, pavé, boule ou cylindre : comment s'appellent ces formes ?",
+      titre="Cube, pavé, boule : comment s'appellent ces formes ?",
       intro="Jade tient un magasin de jouets. Ce matin, elle range ses étagères : une étagère pour chaque forme. Mais comment s'appellent ces formes qu'on peut prendre dans la main ?",
       points=["un solide : une forme qu'on peut prendre dans la main",
               "le cube et le pavé : des faces plates, des carrés ou des rectangles",
@@ -48,8 +48,8 @@ EP = [
       s_accroche="Ma sœur a caché un objet dans ce sac. Je ne regarde pas, je touche : c'est rond en bas… et ça pique en haut ! Une pyramide ? Pourquoi ma sœur rigole ?",
       s_toi="une boîte de conserve, c'est quel solide ?",
       s_tags=["solides", "cône", "pyramide", "sac mystère"], s_centres=["cuisine"]),
- dict(n=2, slug="decrire", micro="ce2_solide_decrire", nom="Faces, arêtes et sommets", date="2027-01-18", ceinture="jaune",
-      titre="Faces, arêtes, sommets : comment compter sans en oublier ?",
+ dict(n=2, slug="decrire", micro="ce2_solide_decrire", nom="Décrire un solide", date="2027-01-18", ceinture="jaune",
+      titre="Faces, arêtes, sommets : comment les compter ?",
       intro="Hugo est logisticien : il prépare des colis qui partent en camion. Ce colis est un cube. Il doit coller des étiquettes, mettre du scotch et protéger les coins. Combien de chaque ?",
       points=["les faces : les surfaces plates, 6 pour le cube",
               "les arêtes : là où deux faces se touchent, 4 en haut, 4 en bas, 4 debout = 12",
@@ -103,7 +103,7 @@ EP = [
       s_toi="dans la croix, combien de carrés touchent le carré du milieu ?",
       s_tags=["patron du cube", "dé", "croix"], s_centres=["jeux-defis"]),
  dict(n=5, slug="defi", micro="ce2_solide_defi", nom="Un défi sur les solides", date="2027-01-24", ceinture="bleue",
-      titre="Des indices, des arêtes à mesurer : sauras-tu tout trouver ?",
+      titre="Indices et arêtes : sauras-tu tout trouver ?",
       intro="Lou est créatrice de lampes. Ses lampes ont la forme de solides, et elle pose un fil de lumière sur leurs arêtes. Deux défis l'attendent : une lampe mystère à deviner, et du fil à mesurer.",
       points=["deviner un solide avec des indices : faces, arêtes, sommets",
               "un cube a 12 arêtes, toutes de la même longueur",

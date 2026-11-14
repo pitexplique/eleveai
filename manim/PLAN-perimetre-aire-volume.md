@@ -21,11 +21,11 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [ ] Résoudre un défi de contenances — `ce2_contenance_defi`
 
 **Solides et espace** (5)
-- [ ] Nommer un cube, une boule, un pavé, un cône, une pyramide ou un cylindre — `ce2_solide_reconnaitre`
-- [ ] Décrire un solide avec faces, arêtes et sommets — `ce2_solide_decrire`
-- [ ] Connaître la nature des faces… — `ce2_solide_faces_pyramide`
-- [ ] Construire un cube à partir… — `ce2_solide_patron`
-- [ ] Résoudre un défi sur les solides — `ce2_solide_defi`
+- [x] Nommer un cube, une boule, un pavé, un cône, une pyramide ou un cylindre — `ce2_solide_reconnaitre`
+- [x] Décrire un solide avec faces, arêtes et sommets — `ce2_solide_decrire`
+- [x] Connaître la nature des faces… — `ce2_solide_faces_pyramide`
+- [x] Construire un cube à partir… — `ce2_solide_patron`
+- [x] Résoudre un défi sur les solides — `ce2_solide_defi`
 
 **Longueurs et conversions** (8)
 - [ ] Connaître les unités m, dm, cm, mm et km — `ce2_longueur_unites`

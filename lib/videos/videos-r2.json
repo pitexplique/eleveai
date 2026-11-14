@@ -5848,6 +5848,96 @@
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_rectangle&display=simple"
  },
+ "ce2-solides-decrire": {
+  "fichier": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire.mp4",
+  "poster": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire.png",
+  "vignette": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire.vignette.webp",
+  "titre": "Faces, arêtes, sommets : comment les compter ? — Décrire un solide — épisode 2 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_decrire&display=simple"
+ },
+ "ce2-solides-decrire-short": {
+  "fichier": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire-short.mp4",
+  "poster": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire-short-miniature.png",
+  "vignette": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire-short-miniature.vignette.webp",
+  "titre": "4 gommettes sur mon dé, c'est fini, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_decrire&display=simple"
+ },
+ "ce2-solides-defi": {
+  "fichier": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi.mp4",
+  "poster": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi.png",
+  "vignette": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi.vignette.webp",
+  "titre": "Indices et arêtes : sauras-tu tout trouver ? — Un défi sur les solides — épisode 5 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_defi&display=simple"
+ },
+ "ce2-solides-defi-short": {
+  "fichier": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi-short.mp4",
+  "poster": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi-short-miniature.png",
+  "vignette": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi-short-miniature.vignette.webp",
+  "titre": "8 spaghettis pour un cube, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_defi&display=simple"
+ },
+ "ce2-solides-patron": {
+  "fichier": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron.mp4",
+  "poster": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron.png",
+  "vignette": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron.vignette.webp",
+  "titre": "Comment un carton à plat devient-il un cube ? — Le patron du cube — épisode 4 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_patron&display=simple"
+ },
+ "ce2-solides-patron-short": {
+  "fichier": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron-short.mp4",
+  "poster": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron-short-miniature.png",
+  "vignette": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron-short-miniature.vignette.webp",
+  "titre": "6 carrés en ligne, et hop, un dé, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_patron&display=simple"
+ },
+ "ce2-solides-pyramide": {
+  "fichier": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide.mp4",
+  "poster": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide.png",
+  "vignette": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide.vignette.webp",
+  "titre": "Une pyramide, est-ce seulement des triangles ? — Les faces d'une pyramide — épisode 3 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_faces_pyramide&display=simple"
+ },
+ "ce2-solides-pyramide-short": {
+  "fichier": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide-short.mp4",
+  "poster": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide-short-miniature.png",
+  "vignette": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide-short-miniature.vignette.webp",
+  "titre": "4 triangles, 4 pots de peinture : fini, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_faces_pyramide&display=simple"
+ },
+ "ce2-solides-reconnaitre": {
+  "fichier": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre.mp4",
+  "poster": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre.png",
+  "vignette": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre.vignette.webp",
+  "titre": "Cube, pavé, boule : comment s'appellent ces formes ? — Les solides — épisode 1 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_reconnaitre&display=simple"
+ },
+ "ce2-solides-reconnaitre-short": {
+  "fichier": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre-short.mp4",
+  "poster": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre-short-miniature.png",
+  "vignette": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre-short-miniature.vignette.webp",
+  "titre": "Rond en bas, pointu en haut : une pyramide, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_reconnaitre&display=simple"
+ },
  "cm1-aire-carre-rectangle": {
   "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.mp4",
   "poster": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.png",

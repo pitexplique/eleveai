@@ -24,7 +24,7 @@ EP = [
     ("decrire", "02-decrire", ["FACES, ARÊTES", "ET SOMMETS"], "cube : 6 faces, 12 arêtes, 8 sommets", "on compte sans rien oublier !", True, "jaune"),
     ("pyramide", "03-pyramide", ["COMPRENDRE", "LA PYRAMIDE"], "4 triangles + 1 carré = 5 faces", "une base, une pointe !", False, "jaune"),
     ("patron", "04-patron", ["LE PATRON", "DU CUBE"], "6 carrés qui se plient en cube", "pas n'importe comment !", False, "orange"),
-    ("defi", "05-defi", ["UN DÉFI", "DE SOLIDES"], "12 × 10 = 120 cm de fil", "assez de fil pour la lampe ?", True, "bleue"),
+    ("defi", "05-defi", ["UN DÉFI", "DE SOLIDES"], "12 arêtes × 5 cm = 60 cm", "combien de fil pour la lampe ?", True, "bleue"),
 ]
 
 

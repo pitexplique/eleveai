@@ -82697,6 +82697,760 @@
         "musique",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "ce2-solides-reconnaitre",
+      "pas_avant": "2027-01-16",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_reconnaitre",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre.mp4",
+      "miniature": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre.png",
+      "titre": "Cube, pavé, boule : comment s'appellent ces formes ? — Les solides — épisode 1 · Maths CE2",
+      "accroche": "Jade tient un magasin de jouets. Ce matin, elle range ses étagères : une étagère pour chaque forme. Mais comment s'appellent ces formes qu'on peut prendre dans la main ?\n\nDans cette vidéo :\n• un solide : une forme qu'on peut prendre dans la main\n• le cube et le pavé : des faces plates, des carrés ou des rectangles\n• la boule et le cylindre : ils roulent\n• le cône et la pyramide : une pointe, mais pas la même base\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : une bille, un cube de construction et une petite canette : quel est le nom de chaque solide ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_reconnaitre&display=simple\n\n🔢 Épisode 1 de la série Solides et espace d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment s'appellent ces formes ?"
+        ],
+        [
+          "00:19",
+          "Un solide"
+        ],
+        [
+          "00:45",
+          "Question 1"
+        ],
+        [
+          "01:11",
+          "Ce qui roule"
+        ],
+        [
+          "01:25",
+          "Ce qui a une pointe"
+        ],
+        [
+          "01:41",
+          "Le piège"
+        ],
+        [
+          "01:54",
+          "Question 2"
+        ],
+        [
+          "02:20",
+          "À toi de jouer"
+        ],
+        [
+          "02:36",
+          "Correction"
+        ],
+        [
+          "02:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "solides",
+        "cube",
+        "pavé",
+        "boule",
+        "cylindre",
+        "cône",
+        "pyramide",
+        "magasin de jouets",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:45",
+          "question": "Une brique de lait, c'est quel solide ?",
+          "choix": [
+            "un pavé droit",
+            "un cube",
+            "une pyramide"
+          ],
+          "reponse": 0,
+          "explication": "Ses faces sont des rectangles, pas toutes carrées : c'est un pavé droit."
+        },
+        {
+          "t": "01:54",
+          "question": "Un cornet de glace, c'est quel solide ?",
+          "choix": [
+            "une pyramide",
+            "un cône",
+            "un cylindre"
+          ],
+          "reponse": 1,
+          "explication": "Le cornet est rond, et il finit en pointe : c'est un cône."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-solides-reconnaitre-short",
+      "pas_avant": "2027-01-16",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_reconnaitre",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-solides-reconnaitre",
+      "fichier": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre-short.mp4",
+      "miniature": "ce2/maths/solides/01-reconnaitre/eleveai-maths-ce2-solides-reconnaitre-short-miniature.png",
+      "titre": "Rond en bas, pointu en haut : une pyramide, tu paries ? #maths #ce2",
+      "accroche": "Ma sœur a caché un objet dans ce sac. Je ne regarde pas, je touche : c'est rond en bas… et ça pique en haut ! Une pyramide ? Pourquoi ma sœur rigole ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : une boîte de conserve, c'est quel solide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #ce2 #primaire",
+      "tags": [
+        "solides",
+        "cône",
+        "pyramide",
+        "sac mystère",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Rond en bas, pointu en haut : c'est quel solide ?",
+          "choix": [
+            "une pyramide",
+            "un cylindre",
+            "un cône"
+          ],
+          "reponse": 2,
+          "explication": "C'est un cône : un disque en bas, et une pointe en haut. La pyramide, elle, a des faces plates en triangles."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce2-solides-decrire",
+      "pas_avant": "2027-01-18",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_decrire",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire.mp4",
+      "miniature": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire.png",
+      "titre": "Faces, arêtes, sommets : comment les compter ? — Décrire un solide — épisode 2 · Maths CE2",
+      "accroche": "Hugo est logisticien : il prépare des colis qui partent en camion. Ce colis est un cube. Il doit coller des étiquettes, mettre du scotch et protéger les coins. Combien de chaque ?\n\nDans cette vidéo :\n• les faces : les surfaces plates, 6 pour le cube\n• les arêtes : là où deux faces se touchent, 4 en haut, 4 en bas, 4 debout = 12\n• les sommets : les coins, 4 en haut et 4 en bas = 8\n• le piège : on ne voit pas tout, il faut compter aussi ce qui est caché\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un colis en forme de pyramide à base carrée : combien de faces, d'arêtes et de sommets ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_decrire&display=simple\n\n🔢 Épisode 2 de la série Solides et espace d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comment les compter ?"
+        ],
+        [
+          "00:23",
+          "Les faces"
+        ],
+        [
+          "00:41",
+          "Les arêtes"
+        ],
+        [
+          "00:59",
+          "Les sommets"
+        ],
+        [
+          "01:12",
+          "Question 1"
+        ],
+        [
+          "01:42",
+          "Le piège"
+        ],
+        [
+          "01:57",
+          "Ce qui est caché"
+        ],
+        [
+          "02:07",
+          "Question 2"
+        ],
+        [
+          "02:34",
+          "À toi de jouer"
+        ],
+        [
+          "02:48",
+          "Correction"
+        ],
+        [
+          "03:07",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "solides",
+        "faces",
+        "arêtes",
+        "sommets",
+        "cube",
+        "pavé",
+        "logisticien",
+        "colis",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Hugo prépare maintenant un colis en pavé droit. Combien a-t-il de sommets ?",
+          "choix": [
+            "6 sommets",
+            "8 sommets",
+            "12 sommets"
+          ],
+          "reponse": 1,
+          "explication": "Comme le cube, le pavé droit a 4 coins en haut et 4 coins en bas : 8 sommets."
+        },
+        {
+          "t": "02:07",
+          "question": "Combien d'arêtes a un pavé droit ?",
+          "choix": [
+            "8 arêtes",
+            "6 arêtes",
+            "12 arêtes"
+          ],
+          "reponse": 2,
+          "explication": "4 en haut, 4 en bas, et 4 qui montent : 12 arêtes. 8, ce sont les sommets."
+        }
+      ],
+      "centres": [
+        "transports",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "ce2-solides-decrire-short",
+      "pas_avant": "2027-01-18",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_decrire",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-solides-decrire",
+      "fichier": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire-short.mp4",
+      "miniature": "ce2/maths/solides/02-decrire/eleveai-maths-ce2-solides-decrire-short-miniature.png",
+      "titre": "4 gommettes sur mon dé, c'est fini, tu paries ? #maths #ce2",
+      "accroche": "Je colle une gommette sur chaque coin de mon dé géant : 1, 2, 3, 4. C'est fini ? Je retourne le dé… dessous, il y a encore des coins tout nus !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de sommets a une pyramide à base carrée ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_decrire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #ce2 #primaire",
+      "tags": [
+        "sommets",
+        "cube",
+        "dé",
+        "gommettes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Combien de sommets a un cube ?",
+          "choix": [
+            "4 sommets",
+            "6 sommets",
+            "8 sommets"
+          ],
+          "reponse": 2,
+          "explication": "4 coins en haut, et 4 coins en bas : 8 sommets. 6, ce sont les faces !"
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-solides-pyramide",
+      "pas_avant": "2027-01-20",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_faces_pyramide",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide.mp4",
+      "miniature": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide.png",
+      "titre": "Une pyramide, est-ce seulement des triangles ? — Les faces d'une pyramide — épisode 3 · Maths CE2",
+      "accroche": "Amina est archéologue : elle étudie les monuments très anciens. Elle fabrique une maquette en carton d'une pyramide d'Égypte. Quelles formes doit-elle découper ?\n\nDans cette vidéo :\n• des triangles qui montent vers la pointe\n• une base, en dessous : un carré pour la pyramide d'Égypte\n• 4 triangles + 1 carré = 5 faces\n• le piège : la base cachée compte aussi ; base triangulaire, rectangulaire…\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une pyramide à base triangulaire : combien de faces en tout ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_faces_pyramide&display=simple\n\n🔢 Épisode 3 de la série Solides et espace d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Seulement des triangles ?"
+        ],
+        [
+          "00:21",
+          "Les triangles"
+        ],
+        [
+          "00:32",
+          "La base"
+        ],
+        [
+          "00:50",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "Le piège du dessous"
+        ],
+        [
+          "01:32",
+          "D'autres bases"
+        ],
+        [
+          "01:51",
+          "Question 2"
+        ],
+        [
+          "02:26",
+          "À toi de jouer"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "02:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "solides",
+        "pyramide",
+        "faces",
+        "base",
+        "triangle",
+        "archéologue",
+        "Égypte",
+        "maquette",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "De quelle forme sont les faces qui montent vers la pointe d'une pyramide ?",
+          "choix": [
+            "des carrés",
+            "des disques",
+            "des triangles"
+          ],
+          "reponse": 2,
+          "explication": "Les faces qui montent vers la pointe sont toujours des triangles."
+        },
+        {
+          "t": "01:51",
+          "question": "La base d'une pyramide a 5 côtés. Combien de triangles montent vers la pointe ?",
+          "choix": [
+            "5 triangles",
+            "4 triangles",
+            "6 triangles"
+          ],
+          "reponse": 0,
+          "explication": "Autant de triangles que la base a de côtés : 5 côtés, 5 triangles. Avec la base, cela fait 6 faces."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "ce2-solides-pyramide-short",
+      "pas_avant": "2027-01-20",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_faces_pyramide",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-solides-pyramide",
+      "fichier": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide-short.mp4",
+      "miniature": "ce2/maths/solides/03-pyramide/eleveai-maths-ce2-solides-pyramide-short-miniature.png",
+      "titre": "4 triangles, 4 pots de peinture : fini, tu paries ? #maths #ce2",
+      "accroche": "Je peins ma pyramide en carton : un pot de peinture par triangle, 4 triangles, 4 pots ! Je la soulève… et dessous, il reste un carré tout blanc !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : une pyramide à base rectangulaire a combien de faces ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_faces_pyramide&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #ce2 #primaire",
+      "tags": [
+        "pyramide",
+        "faces",
+        "peinture",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien de faces a ma pyramide à base carrée ?",
+          "choix": [
+            "5 faces",
+            "4 faces",
+            "6 faces"
+          ],
+          "reponse": 0,
+          "explication": "4 triangles, plus le carré du dessous : 5 faces. Il me faut un pot de plus !"
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "ce2-solides-patron",
+      "pas_avant": "2027-01-22",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_patron",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron.mp4",
+      "miniature": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron.png",
+      "titre": "Comment un carton à plat devient-il un cube ? — Le patron du cube — épisode 4 · Maths CE2",
+      "accroche": "Théo est designer d'emballages : il invente les boîtes qu'on trouve dans les magasins. Il veut une boîte en forme de cube, qu'il dessine d'abord à plat, sur un carton.\n\nDans cette vidéo :\n• un patron : on le découpe, on le plie, il se referme en solide\n• le patron du cube : 6 carrés, un par face\n• la croix : un fond, 4 côtés qui se relèvent, un couvercle qui se rabat\n• le piège : 6 carrés en ligne ne font pas un cube\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : la croix de Théo n'a que 5 carrés : où ajouter le sixième ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_patron&display=simple\n\n🔢 Épisode 4 de la série Solides et espace d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un carton à plat"
+        ],
+        [
+          "00:22",
+          "Un patron"
+        ],
+        [
+          "00:42",
+          "On plie"
+        ],
+        [
+          "00:56",
+          "Question 1"
+        ],
+        [
+          "01:23",
+          "Le piège"
+        ],
+        [
+          "01:42",
+          "Question 2"
+        ],
+        [
+          "02:12",
+          "À toi de jouer"
+        ],
+        [
+          "02:28",
+          "Correction"
+        ],
+        [
+          "02:44",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "solides",
+        "patron",
+        "patron du cube",
+        "cube",
+        "plier",
+        "designer",
+        "emballage",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Combien de carrés faut-il dans le patron d'un cube ?",
+          "choix": [
+            "4 carrés",
+            "6 carrés",
+            "8 carrés"
+          ],
+          "reponse": 1,
+          "explication": "Un carré pour chaque face : le cube a 6 faces, donc 6 carrés."
+        },
+        {
+          "t": "01:42",
+          "question": "Lequel de ces dessins se replie en cube ?",
+          "choix": [
+            "la croix",
+            "les 6 carrés en ligne",
+            "les 2 rangées de 3"
+          ],
+          "reponse": 0,
+          "explication": "La croix se referme bien. Les 6 carrés en ligne s'enroulent comme un tunnel : le dessus et le dessous restent ouverts."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "ce2-solides-patron-short",
+      "pas_avant": "2027-01-22",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_patron",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-solides-patron",
+      "fichier": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron-short.mp4",
+      "miniature": "ce2/maths/solides/04-patron/eleveai-maths-ce2-solides-patron-short-miniature.png",
+      "titre": "6 carrés en ligne, et hop, un dé, tu paries ? #maths #ce2",
+      "accroche": "Je fabrique un dé géant : 6 carrés de carton, collés en ligne. Je plie… je plie… C'est un tunnel ! Le dessus et le dessous sont ouverts !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : dans la croix, combien de carrés touchent le carré du milieu ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_patron&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #ce2 #primaire",
+      "tags": [
+        "patron du cube",
+        "dé",
+        "croix",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Quel dessin fait un vrai dé ?",
+          "choix": [
+            "les 6 carrés en ligne",
+            "la croix",
+            "les 2 rangées de 3"
+          ],
+          "reponse": 1,
+          "explication": "La croix : un fond, 4 côtés qui se relèvent, et un couvercle qui se rabat."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-solides-defi",
+      "pas_avant": "2027-01-24",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_defi",
+      "classe": "ce2",
+      "ceinture": "bleue",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi.mp4",
+      "miniature": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi.png",
+      "titre": "Indices et arêtes : sauras-tu tout trouver ? — Un défi sur les solides — épisode 5 · Maths CE2",
+      "accroche": "Lou est créatrice de lampes. Ses lampes ont la forme de solides, et elle pose un fil de lumière sur leurs arêtes. Deux défis l'attendent : une lampe mystère à deviner, et du fil à mesurer.\n\nDans cette vidéo :\n• deviner un solide avec des indices : faces, arêtes, sommets\n• un cube a 12 arêtes, toutes de la même longueur\n• le fil d'un cube : 12 × la longueur d'une arête\n• le piège : 8 sommets, ce n'est pas 12 arêtes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une lampe en cube avec des arêtes de 10 cm, et 100 cm de fil : est-ce assez ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_defi&display=simple\n\n🔢 Épisode 5 de la série Solides et espace d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un défi sur les solides"
+        ],
+        [
+          "00:20",
+          "La lampe mystère"
+        ],
+        [
+          "00:39",
+          "Le piège"
+        ],
+        [
+          "00:52",
+          "Question 1"
+        ],
+        [
+          "01:25",
+          "Le fil de lumière"
+        ],
+        [
+          "01:45",
+          "Question 2"
+        ],
+        [
+          "02:20",
+          "À toi de jouer"
+        ],
+        [
+          "02:35",
+          "Correction"
+        ],
+        [
+          "02:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "solides",
+        "arêtes",
+        "cube",
+        "pyramide",
+        "devinette",
+        "lampe",
+        "créatrice",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Une lampe a 2 faces plates en forme de disque, et elle peut rouler. C'est quel solide ?",
+          "choix": [
+            "une boule",
+            "un cône",
+            "un cylindre"
+          ],
+          "reponse": 2,
+          "explication": "Un disque en haut, un disque en bas, et ça roule : c'est un cylindre. Le cône n'a qu'un disque, et la boule n'en a aucun."
+        },
+        {
+          "t": "01:45",
+          "question": "Une petite lampe en cube a des arêtes de 3 centimètres. Combien faut-il de fil ?",
+          "choix": [
+            "24 centimètres",
+            "36 centimètres",
+            "18 centimètres"
+          ],
+          "reponse": 1,
+          "explication": "12 arêtes de 3 centimètres : 12 × 3, 36. 24, c'est 8 × 3 : on a compté les sommets !"
+        }
+      ],
+      "centres": [
+        "sciences",
+        "construction"
+      ]
+    },
+    {
+      "id": "ce2-solides-defi-short",
+      "pas_avant": "2027-01-24",
+      "prioritaire": true,
+      "notionId": "solides",
+      "microId": "ce2_solide_defi",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-solides-defi",
+      "fichier": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi-short.mp4",
+      "miniature": "ce2/maths/solides/05-defi/eleveai-maths-ce2-solides-defi-short-miniature.png",
+      "titre": "8 spaghettis pour un cube, tu paries ? #maths #ce2",
+      "accroche": "Je construis un cube avec des spaghettis et des boules de pâte à modeler. Un spaghetti par arête : j'en prends 8 ! Il reste des trous partout… mon cube s'écroule !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : pour une pyramide à base carrée, combien de spaghettis ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=solides&microId=ce2_solide_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #ce2 #primaire",
+      "tags": [
+        "arêtes",
+        "cube",
+        "spaghettis",
+        "pâte à modeler",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture orange",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Combien de spaghettis faut-il pour un cube ?",
+          "choix": [
+            "12 spaghettis",
+            "8 spaghettis",
+            "6 spaghettis"
+          ],
+          "reponse": 0,
+          "explication": "Un cube a 12 arêtes : 4 en haut, 4 en bas, et 4 debout. Et 8 boules, pour les 8 sommets."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
     }
   ]
 }
