@@ -284,6 +284,9 @@ const ROUTES: RouteConfig[] = [
 
   // ── LA COMMUNAUTÉ DU JOURNAL (courrier des lecteurs, honneurs, contributions)
   // Pages publiques mises en avant par la Une depuis la refonte journal.
+  // ⭐ 14/11/2026 : LE JOURNAL LUI-MÊME y manquait (indexable depuis le 10/11,
+  // lié par le bandeau de l'accueil). Il change chaque jour → daily.
+  { path: "/accueil-journal", priority: 0.85, changeFrequency: "daily", lastMod: new Date("2026-11-14") },
   { path: "/votre-avis",      priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
   { path: "/remerciements",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
   { path: "/besoin-de-vous",  priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
