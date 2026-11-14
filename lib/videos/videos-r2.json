@@ -5848,6 +5848,150 @@
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=contenance&microId=ce2_contenance_unites&display=simple"
  },
+ "ce2-longueur-choisir-unite": {
+  "fichier": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite.mp4",
+  "poster": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite.png",
+  "vignette": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite.vignette.webp",
+  "titre": "Pourquoi trois unités différentes ? — Choisir la bonne unité — épisode 5 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_choisir_unite&display=simple"
+ },
+ "ce2-longueur-choisir-unite-short": {
+  "fichier": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite-short.mp4",
+  "poster": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite-short-miniature.png",
+  "vignette": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite-short-miniature.vignette.webp",
+  "titre": "Mamie habite à 3 millions de cm, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_choisir_unite&display=simple"
+ },
+ "ce2-longueur-comparer": {
+  "fichier": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer.mp4",
+  "poster": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer.png",
+  "vignette": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer.vignette.webp",
+  "titre": "1 m ou 90 cm : qui est le plus long ? — Comparer des longueurs — épisode 4 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_comparer&display=simple"
+ },
+ "ce2-longueur-comparer-short": {
+  "fichier": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer-short.mp4",
+  "poster": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer-short-miniature.png",
+  "vignette": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer-short-miniature.vignette.webp",
+  "titre": "1 dm contre 9 cm : le plus long, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_comparer&display=simple"
+ },
+ "ce2-longueur-defi": {
+  "fichier": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi.mp4",
+  "poster": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi.png",
+  "vignette": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi.vignette.webp",
+  "titre": "12 cm, 120 mm, 1 dm et 2 cm : qui a raison ? — Un défi de longueurs — épisode 8 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_defi&display=simple"
+ },
+ "ce2-longueur-defi-short": {
+  "fichier": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi-short.mp4",
+  "poster": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi-short-miniature.png",
+  "vignette": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi-short-miniature.vignette.webp",
+  "titre": "6 dm, 60 cm, 600 mm : qui a raison ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_defi&display=simple"
+ },
+ "ce2-longueur-estimer": {
+  "fichier": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer.mp4",
+  "poster": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer.png",
+  "vignette": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer.vignette.webp",
+  "titre": "Mesurer sans règle, c'est possible ? — Estimer une longueur — épisode 6 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_estimer&display=simple"
+ },
+ "ce2-longueur-estimer-short": {
+  "fichier": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer-short.mp4",
+  "poster": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer-short-miniature.png",
+  "vignette": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer-short-miniature.vignette.webp",
+  "titre": "Un mur mesuré avec ma queue, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_estimer&display=simple"
+ },
+ "ce2-longueur-mesurer": {
+  "fichier": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer.mp4",
+  "poster": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer.png",
+  "vignette": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer.vignette.webp",
+  "titre": "Où poser la règle pour mesurer ? — Mesurer avec une règle — épisode 3 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_mesurer&display=simple"
+ },
+ "ce2-longueur-mesurer-short": {
+  "fichier": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer-short.mp4",
+  "poster": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer-short-miniature.png",
+  "vignette": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer-short-miniature.vignette.webp",
+  "titre": "Ma banane fait 12 cm, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_mesurer&display=simple"
+ },
+ "ce2-longueur-probleme": {
+  "fichier": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme.mp4",
+  "poster": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme.png",
+  "vignette": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme.vignette.webp",
+  "titre": "3 m et 250 cm : quelle longueur en tout ? — Un problème de longueurs — épisode 7 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_probleme&display=simple"
+ },
+ "ce2-longueur-probleme-short": {
+  "fichier": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme-short.mp4",
+  "poster": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme-short-miniature.png",
+  "vignette": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme-short-miniature.vignette.webp",
+  "titre": "1 m + 50 cm = 51 cm, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_probleme&display=simple"
+ },
+ "ce2-longueur-relations": {
+  "fichier": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations.mp4",
+  "poster": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations.png",
+  "vignette": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations.vignette.webp",
+  "titre": "1 mètre, c'est combien de centimètres ? — Mètre, décimètre, centimètre — épisode 2 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_relations&display=simple"
+ },
+ "ce2-longueur-relations-short": {
+  "fichier": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations-short.mp4",
+  "poster": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations-short-miniature.png",
+  "vignette": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations-short-miniature.vignette.webp",
+  "titre": "100 cm de ficelle, c'est trop ? Tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_relations&display=simple"
+ },
+ "ce2-longueur-unites": {
+  "fichier": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites.mp4",
+  "poster": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites.png",
+  "vignette": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites.vignette.webp",
+  "titre": "Avec quelle unité mesurer ? — Les unités de longueur — épisode 1 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_unites&display=simple"
+ },
+ "ce2-longueur-unites-short": {
+  "fichier": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites-short.mp4",
+  "poster": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites-short-miniature.png",
+  "vignette": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites-short-miniature.vignette.webp",
+  "titre": "Ma queue mesure 10 kilomètres, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_unites&display=simple"
+ },
  "ce2-perimetre-comparer": {
   "fichier": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.mp4",
   "poster": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.png",

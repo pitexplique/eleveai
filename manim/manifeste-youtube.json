@@ -86282,6 +86282,1278 @@
         "art-design",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "ce2-longueur-unites",
+      "pas_avant": "2027-01-31",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_unites",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites.mp4",
+      "miniature": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites.png",
+      "titre": "Avec quelle unité mesurer ? — Les unités de longueur — épisode 1 · Maths CE2",
+      "accroche": "Samuel est menuisier : il fabrique des tables et des étagères en bois. Avant de couper une planche, il la mesure. Mais avec quelle unité ?\n\nDans cette vidéo :\n• l'unité de longueur : le mètre (m)\n• pour les petites longueurs : le décimètre (dm), le centimètre (cm), le millimètre (mm)\n• pour les grandes distances : le kilomètre (km)\n• ranger les unités : mm, cm, dm, m, km\n• le piège : m, c'est le mètre ; mm, c'est le millimètre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : une table, le trajet jusqu'à la scierie, un clou : quelle unité pour chacun ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_unites&display=simple\n\n🔢 Épisode 1 de la série Longueurs d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Avec quelle unité ?"
+        ],
+        [
+          "00:20",
+          "Le mètre"
+        ],
+        [
+          "00:32",
+          "Les petites longueurs"
+        ],
+        [
+          "00:50",
+          "Le kilomètre"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:31",
+          "Ranger les unités"
+        ],
+        [
+          "01:42",
+          "Le piège"
+        ],
+        [
+          "01:55",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "03:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "unités de longueur",
+        "mètre",
+        "centimètre",
+        "kilomètre",
+        "menuisier",
+        "bois",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Avec quelle unité mesure-t-on l'épaisseur d'une pièce de monnaie ?",
+          "choix": [
+            "le mètre",
+            "le millimètre",
+            "le kilomètre"
+          ],
+          "reponse": 1,
+          "explication": "Une pièce est très fine : on la mesure en millimètres. C'est la plus petite des cinq unités."
+        },
+        {
+          "t": "01:55",
+          "question": "Sur une boîte de vis, Samuel lit 30, puis les lettres m m. Que veulent-elles dire ?",
+          "choix": [
+            "millimètre",
+            "mètre",
+            "centimètre"
+          ],
+          "reponse": 0,
+          "explication": "m m, c'est le millimètre. Les vis mesurent 30 millimètres. Une vis de 30 mètres, ce serait plus haut qu'une maison !"
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "ce2-longueur-unites-short",
+      "pas_avant": "2027-01-31",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_unites",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-longueur-unites",
+      "fichier": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites-short.mp4",
+      "miniature": "ce2/maths/longueur/01-unites/eleveai-maths-ce2-longueur-unites-short-miniature.png",
+      "titre": "Ma queue mesure 10 kilomètres, tu paries ? #maths #ce2",
+      "accroche": "Je mesure ma queue. Elle fait 10… kilomètres ? Je suis le plus long margouillat du monde ! Hé… 10 kilomètres, c'est plus long qu'une ville entière.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : la plus petite unité, c'est le mètre, le centimètre ou le millimètre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_unites&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #ce2 #primaire",
+      "tags": [
+        "longueur",
+        "unités",
+        "margouillat",
+        "kilomètre",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Pour la queue d'un margouillat, quelle unité ?",
+          "choix": [
+            "le kilomètre",
+            "le mètre",
+            "le centimètre"
+          ],
+          "reponse": 2,
+          "explication": "Le centimètre, pour les petites longueurs. Le kilomètre, c'est pour les routes."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-longueur-relations",
+      "pas_avant": "2027-02-02",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_relations",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations.mp4",
+      "miniature": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations.png",
+      "titre": "1 mètre, c'est combien de centimètres ? — Mètre, décimètre, centimètre — épisode 2 · Maths CE2",
+      "accroche": "Nina est entraîneuse d'athlétisme. Ses élèves sautent dans le sable et courent sur la piste. Nina mesure tout : en mètres, en centimètres, et même en kilomètres.\n\nDans cette vidéo :\n• 1 m = 100 cm (centi veut dire cent)\n• 1 m = 10 dm et 1 dm = 10 cm\n• 1 cm = 10 mm\n• 1 km = 1000 m (kilo veut dire mille)\n• le piège : 1 m, ce n'est pas 10 cm\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Sami saute 1 mètre et 30 centimètres : combien de centimètres en tout ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_relations&display=simple\n\n🔢 Épisode 2 de la série Longueurs d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de centimètres ?"
+        ],
+        [
+          "00:22",
+          "1 m = 100 cm"
+        ],
+        [
+          "00:33",
+          "1 m = 10 dm"
+        ],
+        [
+          "00:53",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "1 km = 1000 m"
+        ],
+        [
+          "01:30",
+          "Le piège"
+        ],
+        [
+          "01:43",
+          "Question 2"
+        ],
+        [
+          "02:14",
+          "À toi de jouer"
+        ],
+        [
+          "02:26",
+          "Correction"
+        ],
+        [
+          "02:37",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "conversion",
+        "mètre",
+        "centimètre",
+        "décimètre",
+        "athlétisme",
+        "saut en longueur",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "Combien de centimètres dans 1 mètre ?",
+          "choix": [
+            "10",
+            "1000",
+            "100"
+          ],
+          "reponse": 2,
+          "explication": "1 mètre égale 100 centimètres. 10, c'est le nombre de décimètres dans 1 mètre."
+        },
+        {
+          "t": "01:43",
+          "question": "Lou saute 2 mètres. Combien de centimètres ?",
+          "choix": [
+            "20 centimètres",
+            "200 centimètres",
+            "2000 centimètres"
+          ],
+          "reponse": 1,
+          "explication": "1 mètre, c'est 100 centimètres. 2 mètres, c'est 2 × 100 : 200 centimètres."
+        }
+      ],
+      "centres": [
+        "sport"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "longueur",
+          "microId": "longueur_convertir"
+        }
+      ]
+    },
+    {
+      "id": "ce2-longueur-relations-short",
+      "pas_avant": "2027-02-02",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_relations",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-longueur-relations",
+      "fichier": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations-short.mp4",
+      "miniature": "ce2/maths/longueur/02-relations/eleveai-maths-ce2-longueur-relations-short-miniature.png",
+      "titre": "100 cm de ficelle, c'est trop ? Tu paries ? #maths #ce2",
+      "accroche": "Je voulais 1 mètre de ficelle pour mon cerf-volant. Le vendeur m'en donne 100 centimètres. 100 ? C'est beaucoup trop ! Je mesure…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de mètres dans 1 kilomètre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_relations&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #ce2 #primaire",
+      "tags": [
+        "longueur",
+        "mètre",
+        "centimètre",
+        "cerf-volant",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Combien de centimètres dans 2 mètres ?",
+          "choix": [
+            "200",
+            "20",
+            "2"
+          ],
+          "reponse": 0,
+          "explication": "1 mètre, c'est 100 centimètres. 2 mètres, c'est 200 centimètres."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "longueur",
+          "microId": "longueur_convertir"
+        }
+      ]
+    },
+    {
+      "id": "ce2-longueur-mesurer",
+      "pas_avant": "2027-02-04",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_mesurer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer.mp4",
+      "miniature": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer.png",
+      "titre": "Où poser la règle pour mesurer ? — Mesurer avec une règle — épisode 3 · Maths CE2",
+      "accroche": "Clara est astronome : elle observe les étoiles. Sur sa carte du ciel, elle relie les étoiles par des segments. Pour que sa carte soit juste, elle mesure chaque segment avec sa règle.\n\nDans cette vidéo :\n• poser le 0 sur le début du segment\n• lire le nombre sous l'autre bout\n• les millimètres : 5 cm et 4 mm\n• le piège : le segment commence sur le 2 ; on compte de 2 à 9\n• tracer un segment de 8 cm\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un segment qui commence sur le 0 et s'arrête 3 petits traits après le 4 : combien mesure-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_mesurer&display=simple\n\n🔢 Épisode 3 de la série Longueurs d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où poser la règle ?"
+        ],
+        [
+          "00:22",
+          "Le 0 au début"
+        ],
+        [
+          "00:41",
+          "Les millimètres"
+        ],
+        [
+          "00:54",
+          "Question 1"
+        ],
+        [
+          "01:25",
+          "Le piège"
+        ],
+        [
+          "01:43",
+          "Tracer un segment"
+        ],
+        [
+          "01:54",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "02:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "mesurer",
+        "règle graduée",
+        "segment",
+        "millimètre",
+        "astronome",
+        "étoiles",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Pour mesurer un segment, où pose-t-on son début ?",
+          "choix": [
+            "sur le 0 de la règle",
+            "sur le bord de la règle",
+            "sur le 1"
+          ],
+          "reponse": 0,
+          "explication": "On pose le début sur le 0. Le bord de la règle ne compte pas : il y a souvent un petit morceau avant le 0."
+        },
+        {
+          "t": "01:54",
+          "question": "La règle de Clara est décalée : le début est sur le 3, la fin sur le 8. Combien mesure le segment ?",
+          "choix": [
+            "8 centimètres",
+            "11 centimètres",
+            "5 centimètres"
+          ],
+          "reponse": 2,
+          "explication": "De 3 à 8 : 8 − 3, 5. Le segment mesure 5 centimètres."
+        }
+      ],
+      "centres": [
+        "espace"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "longueur",
+          "microId": "longueur_mesurer"
+        }
+      ]
+    },
+    {
+      "id": "ce2-longueur-mesurer-short",
+      "pas_avant": "2027-02-04",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_mesurer",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-longueur-mesurer",
+      "fichier": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer-short.mp4",
+      "miniature": "ce2/maths/longueur/03-mesurer/eleveai-maths-ce2-longueur-mesurer-short-miniature.png",
+      "titre": "Ma banane fait 12 cm, tu paries ? #maths #ce2",
+      "accroche": "Je mesure ma banane. Le bout tombe sur le 12 : ma banane fait 12 centimètres ! Oups… elle commençait sur le 2, pas sur le 0.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un crayon va du 0 au 9 sur la règle. Combien mesure-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_mesurer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #ce2 #primaire",
+      "tags": [
+        "longueur",
+        "règle",
+        "mesurer",
+        "banane",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Ma banane va du 2 au 12. Combien mesure-t-elle ?",
+          "choix": [
+            "12 centimètres",
+            "10 centimètres",
+            "14 centimètres"
+          ],
+          "reponse": 1,
+          "explication": "12 − 2, 10. Ma banane mesure 10 centimètres."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "longueur",
+          "microId": "longueur_mesurer"
+        }
+      ]
+    },
+    {
+      "id": "ce2-longueur-comparer",
+      "pas_avant": "2027-02-06",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_comparer",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer.mp4",
+      "miniature": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer.png",
+      "titre": "1 m ou 90 cm : qui est le plus long ? — Comparer des longueurs — épisode 4 · Maths CE2",
+      "accroche": "Lina est biologiste marine : elle étudie les animaux de la mer. Aujourd'hui, elle mesure une tortue de 1 mètre et un petit requin de 90 centimètres. Qui est le plus long ?\n\nDans cette vidéo :\n• deux unités : d'abord la même unité, 1 m = 100 cm\n• puis on compare les nombres : 100 > 90\n• même unité : on compare directement (250 cm et 180 cm)\n• le piège : 90 est plus grand que 1, mais 90 cm est plus court que 1 m\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : ranger du plus court au plus long : une algue de 2 m, un poisson de 150 cm, une méduse de 30 cm.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_comparer&display=simple\n\n🔢 Épisode 4 de la série Longueurs d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui est le plus long ?"
+        ],
+        [
+          "00:31",
+          "Comparer"
+        ],
+        [
+          "00:42",
+          "Déjà la même unité"
+        ],
+        [
+          "00:55",
+          "Question 1"
+        ],
+        [
+          "01:25",
+          "Le piège"
+        ],
+        [
+          "01:40",
+          "Question 2"
+        ],
+        [
+          "02:20",
+          "À toi de jouer"
+        ],
+        [
+          "02:35",
+          "Correction"
+        ],
+        [
+          "02:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "comparer des longueurs",
+        "mètre",
+        "centimètre",
+        "biologiste marine",
+        "tortue",
+        "requin",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "Qui est le plus long : un poisson de 80 centimètres, ou une anguille de 1 mètre ?",
+          "choix": [
+            "le poisson",
+            "ils sont pareils",
+            "l'anguille"
+          ],
+          "reponse": 2,
+          "explication": "1 mètre, c'est 100 centimètres. 100 est plus grand que 80 : l'anguille est la plus longue."
+        },
+        {
+          "t": "01:40",
+          "question": "Le bateau de Lina fait deux trajets : 950 mètres, puis 1 kilomètre. Lequel est le plus court ?",
+          "choix": [
+            "celui de 950 mètres",
+            "celui de 1 kilomètre",
+            "ils sont pareils"
+          ],
+          "reponse": 0,
+          "explication": "1 kilomètre, c'est 1000 mètres. 950 est plus petit que 1000 : le trajet de 950 mètres est le plus court. Il manque 50 mètres pour faire 1 kilomètre."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "longueur",
+          "microId": "longueur_comparer"
+        }
+      ]
+    },
+    {
+      "id": "ce2-longueur-comparer-short",
+      "pas_avant": "2027-02-06",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_comparer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-longueur-comparer",
+      "fichier": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer-short.mp4",
+      "miniature": "ce2/maths/longueur/04-comparer/eleveai-maths-ce2-longueur-comparer-short-miniature.png",
+      "titre": "1 dm contre 9 cm : le plus long, tu paries ? #maths #ce2",
+      "accroche": "Mon copain le gecko mesure 1 décimètre. Moi, 9 centimètres. 9 est plus grand que 1 : c'est moi le plus long ! Hé, attends…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : qui est le plus long, 2 mètres ou 150 centimètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #ce2 #primaire",
+      "tags": [
+        "longueur",
+        "comparer",
+        "gecko",
+        "décimètre",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Qui est le plus long : 1 mètre, ou 90 centimètres ?",
+          "choix": [
+            "90 centimètres",
+            "1 mètre",
+            "c'est pareil"
+          ],
+          "reponse": 1,
+          "explication": "1 mètre, c'est 100 centimètres. 100 est plus grand que 90."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "longueur",
+          "microId": "longueur_comparer"
+        }
+      ]
+    },
+    {
+      "id": "ce2-longueur-choisir-unite",
+      "pas_avant": "2027-02-08",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_choisir_unite",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite.mp4",
+      "miniature": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite.png",
+      "titre": "Pourquoi trois unités différentes ? — Choisir la bonne unité — épisode 5 · Maths CE2",
+      "accroche": "Karim est pilote d'avion. Son avion mesure 40 mètres de long. Il vole 900 kilomètres jusqu'à une autre ville. Et son stylo mesure 14 centimètres. Pourquoi trois unités différentes ?\n\nDans cette vidéo :\n• on choisit l'unité qui donne un nombre simple à dire\n• les grandes distances : le kilomètre (900 km, pas 900 000 m)\n• une pièce ou un avion : le mètre ; un objet dans la main : le centimètre ; une chose fine : le millimètre\n• le piège : une porte de 2 cm ? Le nombre est juste, l'unité est fausse\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une valise, le trajet entre deux villes, l'épaisseur d'un billet d'avion : quelle unité ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_choisir_unite&display=simple\n\n🔢 Épisode 5 de la série Longueurs d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois unités ?"
+        ],
+        [
+          "00:25",
+          "Un nombre simple"
+        ],
+        [
+          "00:38",
+          "Les grandes distances"
+        ],
+        [
+          "00:51",
+          "Des repères"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:36",
+          "Le piège"
+        ],
+        [
+          "01:53",
+          "Question 2"
+        ],
+        [
+          "02:26",
+          "À toi de jouer"
+        ],
+        [
+          "02:39",
+          "Correction"
+        ],
+        [
+          "02:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "unités de longueur",
+        "kilomètre",
+        "centimètre",
+        "pilote",
+        "avion",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Avec quelle unité mesure-t-on la longueur d'un couloir de l'aéroport ?",
+          "choix": [
+            "le millimètre",
+            "le mètre",
+            "le kilomètre"
+          ],
+          "reponse": 1,
+          "explication": "Pour un couloir, le mètre donne un nombre simple. Le kilomètre, c'est pour les routes, et le millimètre pour les choses toutes fines."
+        },
+        {
+          "t": "01:53",
+          "question": "Karim lit : le hublot mesure 30. Quelle unité ?",
+          "choix": [
+            "30 kilomètres",
+            "30 millimètres",
+            "30 centimètres"
+          ],
+          "reponse": 2,
+          "explication": "Un hublot est à peu près grand comme une feuille de cahier : 30 centimètres. 30 millimètres, ce serait la taille d'un bouton !"
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "ce2-longueur-choisir-unite-short",
+      "pas_avant": "2027-02-08",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_choisir_unite",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-longueur-choisir-unite",
+      "fichier": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite-short.mp4",
+      "miniature": "ce2/maths/longueur/05-choisir-unite/eleveai-maths-ce2-longueur-choisir-unite-short-miniature.png",
+      "titre": "Mamie habite à 3 millions de cm, tu paries ? #maths #ce2",
+      "accroche": "Je vais chez Mamie. Elle habite à 3 millions de centimètres ! Je n'arrive même pas à l'écrire. Trop de zéros…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : avec quelle unité mesures-tu ta gomme ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_choisir_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #ce2 #primaire",
+      "tags": [
+        "longueur",
+        "kilomètre",
+        "unité",
+        "Mamie",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Avec quelle unité mesure-t-on un trajet en voiture ?",
+          "choix": [
+            "le kilomètre",
+            "le centimètre",
+            "le millimètre"
+          ],
+          "reponse": 0,
+          "explication": "Le kilomètre, pour les grandes distances. Le nombre reste court."
+        }
+      ],
+      "centres": [
+        "transports",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-longueur-estimer",
+      "pas_avant": "2027-02-10",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_estimer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer.mp4",
+      "miniature": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer.png",
+      "titre": "Mesurer sans règle, c'est possible ? — Estimer une longueur — épisode 6 · Maths CE2",
+      "accroche": "Élodie est paysagiste : elle crée des jardins. Elle n'a pas toujours son mètre ruban. Alors elle estime : elle compare à des longueurs qu'elle connaît par cœur.\n\nDans cette vidéo :\n• des repères : un doigt environ 1 cm, une main environ 1 dm, un grand pas environ 1 m\n• 6 grands pas : une allée d'environ 6 m\n• une porte : environ 2 m ; un quart d'heure de marche : environ 1 km\n• le piège : un doigt de 1 m de large ? Impossible !\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un banc de 10 largeurs de main : environ combien mesure-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_estimer&display=simple\n\n🔢 Épisode 6 de la série Longueurs d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sans règle ?"
+        ],
+        [
+          "00:19",
+          "Des repères"
+        ],
+        [
+          "00:32",
+          "Les grands pas"
+        ],
+        [
+          "00:42",
+          "Une porte, une marche"
+        ],
+        [
+          "00:53",
+          "Question 1"
+        ],
+        [
+          "01:25",
+          "Le piège"
+        ],
+        [
+          "01:42",
+          "Question 2"
+        ],
+        [
+          "02:13",
+          "À toi de jouer"
+        ],
+        [
+          "02:26",
+          "Correction"
+        ],
+        [
+          "02:38",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "estimer",
+        "ordre de grandeur",
+        "mètre",
+        "paysagiste",
+        "jardin",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:53",
+          "question": "Une feuille d'arbre est aussi longue qu'une main. Environ combien mesure-t-elle ?",
+          "choix": [
+            "1 décimètre",
+            "1 mètre",
+            "1 kilomètre"
+          ],
+          "reponse": 0,
+          "explication": "Une main, c'est environ 1 décimètre : 10 centimètres. 1 mètre, ce serait une feuille géante !"
+        },
+        {
+          "t": "01:42",
+          "question": "Élodie plante un arbre deux × plus haut qu'une porte. Environ combien mesure-t-il ?",
+          "choix": [
+            "2 mètres",
+            "4 mètres",
+            "40 mètres"
+          ],
+          "reponse": 1,
+          "explication": "Une porte, environ 2 mètres. Deux × plus haut : 2 + 2, 4 mètres."
+        }
+      ],
+      "centres": [
+        "nature-ecologie"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "longueur",
+          "microId": "longueur_estimer"
+        }
+      ]
+    },
+    {
+      "id": "ce2-longueur-estimer-short",
+      "pas_avant": "2027-02-10",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_estimer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-longueur-estimer",
+      "fichier": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer-short.mp4",
+      "miniature": "ce2/maths/longueur/06-estimer/eleveai-maths-ce2-longueur-estimer-short-miniature.png",
+      "titre": "Un mur mesuré avec ma queue, tu paries ? #maths #ce2",
+      "accroche": "Combien mesure mon mur ? Pas de règle… Je le mesure avec ma queue ! Elle fait 10 centimètres. Je la pose une fois, deux fois… 10 fois.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : environ combien mesure la hauteur d'une porte ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #ce2 #primaire",
+      "tags": [
+        "longueur",
+        "estimer",
+        "mur",
+        "margouillat",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "10 × ma queue de 10 centimètres : combien mesure le mur ?",
+          "choix": [
+            "10 centimètres",
+            "20 centimètres",
+            "1 mètre"
+          ],
+          "reponse": 2,
+          "explication": "10 × 10, 100 centimètres : 1 mètre."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm1",
+          "notionId": "longueur",
+          "microId": "longueur_estimer"
+        }
+      ]
+    },
+    {
+      "id": "ce2-longueur-probleme",
+      "pas_avant": "2027-02-12",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_probleme",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme.mp4",
+      "miniature": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme.png",
+      "titre": "3 m et 250 cm : quelle longueur en tout ? — Un problème de longueurs — épisode 7 · Maths CE2",
+      "accroche": "Jules est technicien de concert : il installe les lumières et les haut-parleurs. Pour brancher une enceinte, il met bout à bout un câble de 3 mètres et un câble de 250 centimètres. Quelle longueur en tout ?\n\nDans cette vidéo :\n• d'abord la même unité : 3 m = 300 cm\n• additionner : 300 + 250 = 550 cm, soit 5 m et 50 cm\n• le piège : 3 + 250 = 253 ne veut rien dire\n• deux étapes : 65 + 45 = 110, puis 200 − 110 = 90 cm\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : trois câbles bout à bout : 1 m, 50 cm et encore 1 m. Quelle longueur en tout, en centimètres ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_probleme&display=simple\n\n🔢 Épisode 7 de la série Longueurs d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quelle longueur en tout ?"
+        ],
+        [
+          "00:32",
+          "Additionner"
+        ],
+        [
+          "00:45",
+          "Le piège"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:32",
+          "Deux étapes"
+        ],
+        [
+          "01:46",
+          "Le calcul"
+        ],
+        [
+          "02:00",
+          "Question 2"
+        ],
+        [
+          "02:34",
+          "À toi de jouer"
+        ],
+        [
+          "02:50",
+          "Correction"
+        ],
+        [
+          "03:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "problème",
+        "mètre",
+        "centimètre",
+        "technicien",
+        "concert",
+        "câble",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "Jules met bout à bout un câble de 2 mètres et un câble de 40 centimètres. Quelle longueur en tout ?",
+          "choix": [
+            "42 centimètres",
+            "60 centimètres",
+            "240 centimètres"
+          ],
+          "reponse": 2,
+          "explication": "2 mètres, c'est 200 centimètres. 200 + 40, 240 centimètres."
+        },
+        {
+          "t": "02:00",
+          "question": "Jules a 1 mètre de ruban adhésif. Il en utilise 30 centimètres. Combien en reste-t-il ?",
+          "choix": [
+            "70 centimètres",
+            "29 centimètres",
+            "130 centimètres"
+          ],
+          "reponse": 0,
+          "explication": "1 mètre, c'est 100 centimètres. 100 − 30, 70 centimètres."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "ce2-longueur-probleme-short",
+      "pas_avant": "2027-02-12",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_probleme",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-longueur-probleme",
+      "fichier": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme-short.mp4",
+      "miniature": "ce2/maths/longueur/07-probleme/eleveai-maths-ce2-longueur-probleme-short-miniature.png",
+      "titre": "1 m + 50 cm = 51 cm, tu paries ? #maths #ce2",
+      "accroche": "J'attache deux cordes pour faire une grande corde à sauter : 1 mètre, et 50 centimètres. 1 plus 50 : 51 ! C'est tout petit…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : 2 mètres de ruban et 30 centimètres, combien de centimètres en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #ce2 #primaire",
+      "tags": [
+        "longueur",
+        "problème",
+        "corde à sauter",
+        "conversion",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "1 mètre et 50 centimètres : combien de centimètres en tout ?",
+          "choix": [
+            "51",
+            "150",
+            "60"
+          ],
+          "reponse": 1,
+          "explication": "100 + 50, 150 centimètres."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-longueur-defi",
+      "pas_avant": "2027-02-14",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_defi",
+      "classe": "ce2",
+      "ceinture": "bleue",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi.mp4",
+      "miniature": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi.png",
+      "titre": "12 cm, 120 mm, 1 dm et 2 cm : qui a raison ? — Un défi de longueurs — épisode 8 · Maths CE2",
+      "accroche": "Maya est pâtissière. Autour de chaque gâteau, elle met un ruban. Ses trois apprentis mesurent le même ruban : 12 centimètres, 120 millimètres, 1 décimètre et 2 centimètres. Qui a raison ?\n\nDans cette vidéo :\n• tout en centimètres : 120 mm = 12 cm\n• 1 dm et 2 cm = 10 + 2 = 12 cm : les trois ont raison\n• 1 m = 100 cm : 4 morceaux de 25 cm\n• le piège : 120 mm, ce n'est pas 120 cm\n• 2 m de ruban, 50 cm par gâteau : 4 gâteaux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 1 m de ruban, 40 cm puis 35 cm : en reste-t-il assez pour un gâteau de 30 cm ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_defi&display=simple\n\n🔢 Épisode 8 de la série Longueurs d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui a raison ?"
+        ],
+        [
+          "00:27",
+          "Les millimètres"
+        ],
+        [
+          "00:38",
+          "Le décimètre"
+        ],
+        [
+          "00:51",
+          "Question 1"
+        ],
+        [
+          "01:21",
+          "Un nouveau défi"
+        ],
+        [
+          "01:32",
+          "Le calcul"
+        ],
+        [
+          "01:48",
+          "Le piège"
+        ],
+        [
+          "02:03",
+          "Question 2"
+        ],
+        [
+          "02:42",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "longueur",
+        "défi",
+        "conversion",
+        "millimètre",
+        "décimètre",
+        "pâtissière",
+        "gâteau",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "Laquelle de ces longueurs est égale à 3 décimètres ?",
+          "choix": [
+            "3 centimètres",
+            "30 centimètres",
+            "300 centimètres"
+          ],
+          "reponse": 1,
+          "explication": "1 décimètre, c'est 10 centimètres. 3 décimètres, c'est 3 × 10 : 30 centimètres."
+        },
+        {
+          "t": "02:03",
+          "question": "Maya a 2 mètres de ruban. Chaque gâteau a besoin de 50 centimètres. Pour combien de gâteaux a-t-elle assez de ruban ?",
+          "choix": [
+            "2 gâteaux",
+            "50 gâteaux",
+            "4 gâteaux"
+          ],
+          "reponse": 2,
+          "explication": "2 mètres, c'est 200 centimètres. 50, 100, 150, 200 : 4 morceaux de 50 centimètres. Assez pour 4 gâteaux."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce2-longueur-defi-short",
+      "pas_avant": "2027-02-14",
+      "prioritaire": true,
+      "notionId": "longueur",
+      "microId": "ce2_longueur_defi",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-longueur-defi",
+      "fichier": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi-short.mp4",
+      "miniature": "ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi-short-miniature.png",
+      "titre": "6 dm, 60 cm, 600 mm : qui a raison ? #maths #ce2",
+      "accroche": "Trois amis mesurent mon skate. Le premier dit 6 décimètres. Le deuxième, 60 centimètres. Le troisième, 600 millimètres. Ils se disputent !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : 1 mètre, c'est combien de décimètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #ce2 #primaire",
+      "tags": [
+        "longueur",
+        "défi",
+        "skate",
+        "qui a raison",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture orange",
+        "longueur",
+        "mesure",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Qui a raison ?",
+          "choix": [
+            "les trois",
+            "seulement celui des centimètres",
+            "personne"
+          ],
+          "reponse": 0,
+          "explication": "C'est la même longueur, écrite de trois façons."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
     }
   ]
 }

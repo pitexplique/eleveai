@@ -120,3 +120,12 @@ Passée la main à 65 % (15 h 45).
 3. `node scripts/generer-videos-r2.mjs` → ne garder QUE les clés `ce2-longueur-*` de `lib/videos/videos-r2.json` (et `bilans-videos.json`) : remettre telles quelles les clés des autres sessions (voir REPRISE-pav-ce2 session 9).
 4. Coach : `node scripts/brancher-videos-coach.mjs --classe ce2 --notion longueur --tout` puis `--ecrire` (16/16).
 5. Cocher les 8 lignes CE2 longueurs de `manim/PLAN-perimetre-aire-volume.md` (l. 31-38), mémoire `serie-longueurs-ce2.md`, commit PAR CHEMIN, pas de push.
+
+## Session 7 (14/11, 15 h 50 →)
+✅ HD 08 FINI (15 h 49-15 h 54), bords 0, planche HD relue (`$TEMP/lg/png/hd08a.png`, `hd08b.png`) : écran 03 propre, « = 3 × 10 » apparaît à 77 s avec la voix. → les 16 vidéos sont rendues et relues.
+✅ Miniature 08 (bleue, « EN 4 MIN ») relue ; `temps defi` ; `voir` : 16 entrées, réponses = tableau ; manifeste : 1432 → 1448 (nos 16 entrées seules, 31/01 → 14/02/2027) ; fiches YouTube (8) ; vignettes ; R2 : 56 fichiers, 0 différence.
+✅ `videos-r2.json` et `bilans-videos.json` : nos 16 clés `ce2-longueur-*` seulement (les autres clés remises telles quelles ; commit = HEAD + nos clés, via `git update-index`).
+✅ Coach : 16/16 branchées (`brancher-videos-coach.mjs --classe ce2 --notion longueur --tout --ecrire`).
+✅ Plan coché (CE2 longueurs 8/8). Mémoire à jour. Commit par chemin, rien poussé.
+
+### SÉRIE LONGUEURS CE2 FINIE (14/11, 16 h).

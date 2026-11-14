@@ -28,14 +28,14 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Résoudre un défi sur les solides — `ce2_solide_defi`
 
 **Longueurs et conversions** (8)
-- [ ] Connaître les unités m, dm, cm, mm et km — `ce2_longueur_unites`
-- [ ] Utiliser les relations entre unités de longueur — `ce2_longueur_relations`
-- [ ] Mesurer et tracer des segments — `ce2_longueur_mesurer`
-- [ ] Comparer des longueurs — `ce2_longueur_comparer`
-- [ ] Choisir… — `ce2_longueur_choisir_unite`
-- [ ] Estimer une longueur à partir de références — `ce2_longueur_estimer`
-- [ ] Résoudre un problème de longueurs — `ce2_longueur_probleme`
-- [ ] Résoudre un défi de longueurs — `ce2_longueur_defi`
+- [x] Connaître les unités m, dm, cm, mm et km — `ce2_longueur_unites`
+- [x] Utiliser les relations entre unités de longueur — `ce2_longueur_relations`
+- [x] Mesurer et tracer des segments — `ce2_longueur_mesurer`
+- [x] Comparer des longueurs — `ce2_longueur_comparer`
+- [x] Choisir… — `ce2_longueur_choisir_unite`
+- [x] Estimer une longueur à partir de références — `ce2_longueur_estimer`
+- [x] Résoudre un problème de longueurs — `ce2_longueur_probleme`
+- [x] Résoudre un défi de longueurs — `ce2_longueur_defi`
 
 ## CM1
 
