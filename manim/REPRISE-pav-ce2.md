@@ -85,3 +85,39 @@ Outils (copiés dans le dossier de notes partagé `side-session-notes/local_78d7
 
 ### Reste
 Suite du plan CE2 : contenance, puis solides (voix à écrire et à faire valider À DEUX).
+
+## Session 7 (14/11) : série CONTENANCE CE2 — voix écrites, EN ATTENTE de Frédéric
+Unités L, dL, cL seulement (pas de mL, pas de virgule, pas de tableau : banque `ce2/maths/contenance.bank.ts`). Les vidéos CM1 utilisent les mL → pas de reprise par `aussi` côté CE2 ; à la fin, relier les vidéos CE2 au CM1 par `aussi` si pertinent.
+✅ Voix VALIDÉES par Frédéric le 14/11 (« Oui, valide les 10 », ceintures comprises) : `manim/voix/ce2-contenance-{unites,relations,comparer,probleme,defi}[-short].json`. Ne pas les redemander.
+| Ép. | Métier / centre | Ceinture proposée paysage / short | Bonnes réponses (Q1, Q2 ; short) |
+|---|---|---|---|
+| 01 unités | Lucas, chef cuisinier (cuisine) ; short limonade à la règle | blanche / blanche | A, C ; B |
+| 02 relations | Amina, chimiste (sciences) ; short verre de 1 dL | jaune / blanche | A, C ; B |
+| 03 comparer | Théo, entraîneur de foot (sport) ; short saladier | orange / jaune | A, B ; B |
+| 04 problème | Mélissa, horticultrice (nature-ecologie) ; short arrosoir | orange / jaune | A, C ; C |
+| 05 défi | Yanis, mécanicien (transports) ; short « qui a raison ? » | bleue / orange | B, A ; C |
+
+### Session 7, suite (14/11 matin) — passée la main
+✅ WAV (Julie, débit −6) `public/sons/ce2-contenance-<ep>[-short]/` ; marques paysages : `python manim/scripts/ce2/perimetre_marques.py contenance:<ep>` (arg `notion:slug` ajouté) → `manim/scripts/ce2/contenance_<ep>_marques.json`, 0 introuvable.
+✅ Commun `manim/scripts/ce2/contenance_ce2_commun.py` : importe `contenance_cm1_commun` (récipients, vider/remplir, `contenance(r, "75 cL", audit=)`, base `PaysageContenanceCM1` = même style que la série CM1) ; ajoute marmite, cuillère, saladier, seau, arrosoir, plant, et les 5 personnages (lucas, amina, theo, melissa, yanis, avec `visage`).
+✅ 01 unités : `contenance_unites.py` (`ContenanceUnitesCE2`), dry run propre, aperçu relu, HD FINI `manim/sorties/ce2/maths/contenance/01-unites/eleveai-maths-ce2-contenance-unites.mp4` (3 min 37), bords 0, images HD relues. Questions : 05 rép A, 08 rép C.
+⏳ 02 relations : `contenance_relations.py` (`ContenanceRelationsCE2`), dry run propre, aperçu relu (flacon : les tranches de liquide sont DANS le groupe, transparentes, `verser(p)`), HD LANCÉ sous verrou (journal `side-session-notes/local_a8230a7d-…/hd-02.log`, « fini » à la fin ; sortie copiée dans `02-relations/`). Questions : 05 rép A, 08 rép C.
+Commit `918f2155` (voix, marques, commun, scripts 01-02). Rien poussé.
+Outils dans le dossier de notes `side-session-notes/local_a8230a7d-e97a-494c-9c75-fe471337869e/` : `hd.sh <fichier.py> <Scene> <nom> <media_dir> <dossier-sortie>` (verrou mkdir, attend son tour), `images.py <mp4> <png> t…`, `planche.py`.
+
+⛔ Leçons de synchro (série contenance, base CM1) :
+- Un morceau affiché ATTEND tous ses nombres : « 100 cL = 1 L » montré à « 100 centilitres » attend le PROCHAIN « 1 » dit → mettre `hors_audit` sur un morceau dont le nombre est déjà dit (ça l'enlève aussi de la synchro).
+- L'audit rattache un nombre répété à sa PREMIÈRE occurrence (« 1 dL » après « 1 litre » → TARD de 1,8 s) : `hors_audit` justifié en commentaire, et le morceau posé à son extrait (`aux_extraits`, extraits `(texte, n, délai)`).
+- « 2 fois 100 » se dit d'un trait : un seul morceau « 2 × 100 » avec un délai de 0,3 s (sinon AVANCE sur 100) ; « ou 2 × » à part, `hors_audit`.
+- `au_mot("a b")` se déclenche à la marque du DERNIER mot ; une suite de `play` trop longue donne un RETARD sur le `au_mot` suivant : raccourcir les run_time.
+- Choix de question trop long : `"ligne 1" + chr(10) + "ligne 2"` ; phrase de réponse de 4 lignes au plus (sinon texte minuscule).
+- Lancer les dry runs avec `PYTHONIOENCODING=utf-8` et filtrer `tr '' '
+' | grep -a -E "AUDIT|BORD|RETARD|Error|Traceback"`.
+
+### Reste (dans l'ordre)
+1. 02 : attendre « fini » dans hd-02.log, `python scripts/verifier-bords-video.py` = 0, images HD relues.
+2. Paysages 03 comparer (Théo, orange), 04 problème (Mélissa, orange), 05 défi (Yanis, bleue) : scripts sur le modèle de `contenance_unites.py` / `contenance_relations.py`, dry run propre, aperçu -ql relu, HD sous verrou (`media-cont-03..05`, sorties `03-comparer`, `04-probleme`, `05-defi`). Bonnes réponses : 03 Q1 A (04-question), Q2 B (06-question) ; 04 Q1 A (05-question), Q2 C (07-question) ; 05 Q1 B (05-question), Q2 A (07-question).
+3. Shorts Ti Margo des 5 épisodes : série `ce2-contenance` (json + cues + un fichier `films/ce2-contenance-<ep>.js` par épisode, modèle `films/ce2-perimetre*.js` et `films/cm1-contenance*.js`, `ce2-commun.js` déjà là) ; ceintures shorts 01 blanche, 02 blanche, 03 jaune, 04 jaune, 05 orange ; réponses 01 B, 02 B, 03 B, 04 C, 05 C. `python scripts/ti-margo-cues.py ce2-contenance <ép>`, contrôle image par image, miniature « Dessin animé », supprimer le `_muet.mp4`.
+4. Miniatures paysage (copier `manim/miniature_perimetre_ce2.py` → contenance, ceinture par épisode), passe manifeste (copier `manim/passe_perimetre_ce2.py`) : dates 15, 17, 19, 21, 23/01/2027 À VÉRIFIER libres ; centres 01 cuisine, 02 sciences, 03 sport, 04 nature-ecologie, 05 transports ; fiches YouTube, R2 (rclone direct), `generer-videos-r2.mjs` (ne garder que les clés `ce2-contenance-*`), coach (`brancher-videos-coach.mjs --classe ce2 --notion contenance --tout`).
+5. `aussi` : relier les vidéos CE2 au CM1 si pertinent (ex. 02 relations → `contenance_convertir` CM1 ; 03 comparer → `contenance_comparer` CM1).
+6. Plan coché, mémoire `serie-contenance-ce2.md`, commit PAR CHEMIN, pas de push.
