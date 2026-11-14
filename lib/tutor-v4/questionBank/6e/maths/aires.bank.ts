@@ -1,5 +1,5 @@
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
-import type { QuadrilatereCanvasData, FigureLibreCanvasData } from "@/lib/tutor-v4/types_canvas";
+import type { QuadrilatereCanvasData, QuadrilatereCanvasSideLabel, FigureLibreCanvasData, ConstructionCanvasData } from "@/lib/tutor-v4/types_canvas";
 import { PRENOMS, pick, de, type Prenom } from "./entiers.bank";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
@@ -128,20 +128,185 @@ const AUTRES_UNITES = ["kg", "g", "L"];
 const UNITES_NUES = ["cm", "cm", "dm", "m"];
 const NOMS_RECT = ["", "", "", "ABCD", "EFGH", "MNOP"];
 /** Un rectangle (ou un carré) dessiné, ses côtés écrits dessus : l'élève lit la figure, pas une phrase. */
-function quadriCote(L: number, l: number, u: string, carre: boolean): QuadrilatereCanvasData {
-  const w = 180;
-  const h = carre ? w : Math.max(50, Math.round((w * l) / L));
+function quadriCote(L: number, l: number, u: string, carre: boolean, nom = "ABCD", etiquettes?: { L?: string; l?: string }): QuadrilatereCanvasData {
+  // 14/11/2026 : le plus grand côté fait 180 px, l'autre à l'échelle (50 px au moins).
+  const k = 180 / Math.max(L, l);
+  const w = carre ? 180 : Math.max(50, Math.round(L * k));
+  const h = carre ? 180 : Math.max(50, Math.round(l * k));
   const x0 = 50;
   const y0 = 50;
+  const eL = etiquettes?.L ?? `${nf(L)} ${u}`;
+  const el = etiquettes?.l ?? `${nf(l)} ${u}`;
+  const lettres = nom.length === 4 ? { A: nom[0], B: nom[1], C: nom[2], D: nom[3] } : undefined;
   return {
     kind: "quadrilatere" as const,
     points: { A: { x: x0, y: y0 }, B: { x: x0 + w, y: y0 }, C: { x: x0 + w, y: y0 + h }, D: { x: x0, y: y0 + h } },
-    sideLabels: carre ? { AB: `${nf(L)} ${u}` } : { AB: `${nf(L)} ${u}`, BC: `${nf(l)} ${u}` },
-    display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+    ...(lettres ? { labels: lettres } : {}),
+    sideLabels: carre ? { AB: eL } : { AB: eL, BC: el },
+    display: { showPoints: true, showLabels: !!lettres, showSides: true, showAngles: false },
     marks: {
       rightAnglesAt: ["A", "B", "C", "D"],
-      equalSides: carre ? [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]] : [["AB", "CD"], ["BC", "DA"]],
+      // 14/11/2026 : le codage tombait au milieu du côté, SUR la mesure écrite. On ne code
+      // que les côtés sans mesure : les trois autres côtés du carré, rien au rectangle
+      // (ses angles droits suffisent).
+      ...(carre ? { equalSides: [["BC", "CD"], ["CD", "DA"]] as [QuadrilatereCanvasSideLabel, QuadrilatereCanvasSideLabel][] } : {}),
     },
+  };
+}
+/** Le même rectangle en canvas `construction` : pour un énoncé qui écrit déjà ses côtés
+ *  (les correcteurs relisent les `sideLabels` d'un quadrilatère comme des données en plus). */
+export function rectangleTrace(L: number, l: number, u: string, carre: boolean, nom = ""): ConstructionCanvasData {
+  const [w, h] = carre ? [4, 4] : [L, Math.max(l, L * 0.28)];
+  const c = polygoneTrace([{ x: 0, y: 0 }, { x: w, y: 0 }, { x: w, y: h }, { x: 0, y: h }], {
+    textes: carre ? [`${nf(L)} ${u}`] : [`${nf(L)} ${u}`, `${nf(l)} ${u}`],
+    codes: carre ? [1, 1, 1, 1] : undefined,
+    droits: true,
+    description: carre ? `Un carré de côté ${nf(L)} ${u}` : `Un rectangle de ${nf(L)} ${u} sur ${nf(l)} ${u}`,
+  });
+  if (nom.length === 4) c.points = c.points.map((p, i) => ({ ...p, cache: false, nom: nom[i] }));
+  return c;
+}
+/** Le rectangle (ou le carré) d'un énoncé, sans lettres si l'énoncé n'en donne pas. */
+export function rectangleCote(L: number, l: number, u: string, carre: boolean, nom = "", etiquettes?: { L?: string; l?: string }) {
+  return quadriCote(L, l, u, carre, nom, etiquettes);
+}
+
+// ─── Figures tracées (canvas `construction`, repère de maths, y vers le haut) ─
+// 14/11/2026 : plus de figures dans les aires et les périmètres de 6e. Les
+// coordonnées viennent des nombres tirés : le dessin est à l'échelle.
+type Pt2 = { x: number; y: number };
+type SegC = NonNullable<ConstructionCanvasData["segments"]>[number];
+/** Un polygone (fond léger), des légendes sur ses côtés, des codages, des angles droits. */
+export function polygoneTrace(
+  pts: Pt2[],
+  o: { textes?: (string | undefined)[]; codes?: number[]; droits?: boolean; fond?: string; description?: string } = {},
+): ConstructionCanvasData {
+  const ids = pts.map((_, i) => `P${i}`);
+  const n = ids.length;
+  const segments: SegC[] = [];
+  ids.forEach((id, i) => {
+    const t = o.textes?.[i];
+    const c = o.codes?.[i];
+    if (t || c) segments.push({ a: id, b: ids[(i + 1) % n], ...(t ? { texte: t } : {}), ...(c ? { code: c } : {}) });
+  });
+  return {
+    kind: "construction",
+    points: pts.map((p, i) => ({ id: ids[i], x: p.x, y: p.y, cache: true })),
+    polygones: [{ sommets: ids, ...(o.fond ? { fond: o.fond } : {}) }],
+    segments,
+    ...(o.droits ? { angles: ids.map((id, i) => ({ sommet: id, de: ids[(i + n - 1) % n], vers: ids[(i + 1) % n], droit: true })) } : {}),
+    description: o.description ?? "Une figure",
+  };
+}
+/** Les sommets d'un polygone régulier de côté c, un côté horizontal en bas. */
+export function sommetsReguliers(n: number, c: number): Pt2[] {
+  const R = c / (2 * Math.sin(Math.PI / n));
+  return Array.from({ length: n }, (_, k) => {
+    const t = -Math.PI / 2 - Math.PI / n + (2 * Math.PI * k) / n;
+    return { x: R * Math.cos(t), y: R * Math.sin(t) };
+  });
+}
+/** La figure nommée par l'énoncé (« un carré », « un disque »…), sans mesure ni nom : elle montre de quoi on parle. */
+export function figureNue(nom: string): ConstructionCanvasData | undefined {
+  const f = nom.replace(/^(un|une) /, "");
+  const tous = (n: number) => Array.from({ length: n }, () => 1);
+  if (f === "carré") return polygoneTrace([{ x: 0, y: 0 }, { x: 4, y: 0 }, { x: 4, y: 4 }, { x: 0, y: 4 }], { codes: tous(4), droits: true, description: "Un carré" });
+  if (f === "rectangle") return polygoneTrace([{ x: 0, y: 0 }, { x: 6, y: 0 }, { x: 6, y: 3.5 }, { x: 0, y: 3.5 }], { droits: true, description: "Un rectangle" });
+  if (f === "triangle") return polygoneTrace([{ x: 0, y: 0 }, { x: 6, y: 0 }, { x: 2, y: 3.6 }], { description: "Un triangle" });
+  if (f === "losange") return polygoneTrace([{ x: 0, y: 0 }, { x: 4, y: 0 }, { x: 6, y: 2 * Math.sqrt(3) }, { x: 2, y: 2 * Math.sqrt(3) }], { codes: tous(4), description: "Un losange" });
+  if (f === "hexagone") return polygoneTrace(sommetsReguliers(6, 3), { codes: tous(6), description: "Un hexagone" });
+  if (f === "pentagone") return polygoneTrace(sommetsReguliers(5, 3), { codes: tous(5), description: "Un pentagone" });
+  if (f === "octogone") return polygoneTrace(sommetsReguliers(8, 2), { codes: tous(8), description: "Un octogone" });
+  if (f === "disque")
+    return { kind: "construction", points: [{ id: "O", x: 0, y: 0, cache: true }], cercles: [{ centre: "O", rayon: 3, fond: "#dbeafe" }], description: "Un disque" };
+  return undefined;
+}
+/** Deux figures posées côte à côte (rectangles ou carrés), chacune avec ses côtés écrits. */
+function deuxQuadrisTraces(a: [number, number, string, string?], b: [number, number, string, string?], u: string): ConstructionCanvasData {
+  const ecart = Math.max(a[0], a[1], b[0], b[1]) * 0.35 + 1;
+  const pts = [
+    { id: "A0", x: 0, y: 0 }, { id: "A1", x: a[0], y: 0 }, { id: "A2", x: a[0], y: a[1] }, { id: "A3", x: 0, y: a[1] },
+    { id: "B0", x: a[0] + ecart, y: 0 }, { id: "B1", x: a[0] + ecart + b[0], y: 0 }, { id: "B2", x: a[0] + ecart + b[0], y: b[1] }, { id: "B3", x: a[0] + ecart, y: b[1] },
+  ].map((p) => ({ ...p, cache: true }));
+  const carreA = a[0] === a[1];
+  const carreB = b[0] === b[1];
+  const seg = (x: string, y: string, t?: string, code?: number): SegC => ({ a: x, b: y, ...(t ? { texte: t } : {}), ...(code ? { code } : {}) });
+  const segments: SegC[] = [
+    seg("A0", "A1", a[2], carreA ? 1 : undefined),
+    carreA ? seg("A1", "A2", undefined, 1) : seg("A3", "A0", a[3] ?? `${nf(a[1])} ${u}`),
+    ...(carreA ? [seg("A2", "A3", undefined, 1), seg("A3", "A0", undefined, 1)] : []),
+    seg("B0", "B1", b[2], carreB ? 2 : undefined),
+    carreB ? seg("B1", "B2", undefined, 2) : seg("B1", "B2", b[3] ?? `${nf(b[1])} ${u}`),
+    ...(carreB ? [seg("B2", "B3", undefined, 2), seg("B3", "B0", undefined, 2)] : []),
+  ];
+  return {
+    kind: "construction",
+    points: pts,
+    polygones: [{ sommets: ["A0", "A1", "A2", "A3"] }, { sommets: ["B0", "B1", "B2", "B3"], fond: "#fef3c7" }],
+    segments,
+    angles: [
+      { sommet: "A0", de: "A3", vers: "A1", droit: true },
+      { sommet: "B0", de: "B3", vers: "B1", droit: true },
+    ],
+    description: "Deux figures côte à côte",
+  };
+}
+/** Un rectangle L × l dont on a retiré (ou recouvert) un carré c × c, au milieu. */
+function rectangleTroue(L: number, l: number, c: number, u: string): ConstructionCanvasData {
+  const [x, y] = [(L - c) / 2, (l - c) / 2];
+  return {
+    kind: "construction",
+    points: [
+      { id: "A", x: 0, y: 0 }, { id: "B", x: L, y: 0 }, { id: "C", x: L, y: l }, { id: "D", x: 0, y: l },
+      { id: "E", x, y }, { id: "F", x: x + c, y }, { id: "G", x: x + c, y: y + c }, { id: "H", x, y: y + c },
+    ].map((p) => ({ ...p, cache: true })),
+    polygones: [{ sommets: ["A", "B", "C", "D"] }, { sommets: ["E", "F", "G", "H"], fond: "#ffffff" }],
+    segments: [
+      { a: "A", b: "B", texte: `${nf(L)} ${u}` },
+      { a: "D", b: "A", texte: `${nf(l)} ${u}` },
+      { a: "H", b: "G", texte: `${nf(c)} ${u}` },
+      { a: "E", b: "F", code: 1 }, { a: "F", b: "G", code: 1 }, { a: "G", b: "H", code: 1 }, { a: "H", b: "E", code: 1 },
+    ],
+    angles: [{ sommet: "A", de: "D", vers: "B", droit: true }],
+    description: "Un rectangle et un carré au milieu",
+  };
+}
+/** Deux rectangles accolés par le bas : a × b à gauche, c × d à droite (une forme en L, ou en marche). */
+function formeEnL(a: number, b: number, c: number, d: number, u: string): ConstructionCanvasData {
+  const m = Math.min(b, d);
+  return {
+    kind: "construction",
+    points: [
+      { id: "A", x: 0, y: 0 }, { id: "M", x: a, y: 0 }, { id: "B", x: a + c, y: 0 }, { id: "C", x: a + c, y: d },
+      { id: "N", x: a, y: d }, { id: "P", x: a, y: b }, { id: "D", x: 0, y: b }, { id: "Q", x: a, y: m },
+    ].map((p) => ({ ...p, cache: true })),
+    polygones: [{ sommets: b === d ? ["A", "B", "C", "D"] : ["A", "B", "C", "N", "P", "D"] }],
+    segments: [
+      { a: "A", b: "M", texte: `${nf(a)} ${u}` },
+      { a: "D", b: "A", texte: `${nf(b)} ${u}` },
+      { a: "M", b: "B", texte: `${nf(c)} ${u}` },
+      { a: "B", b: "C", texte: `${nf(d)} ${u}` },
+      { a: "M", b: "Q", pointille: true },
+    ],
+    angles: [{ sommet: "A", de: "D", vers: "B", droit: true }],
+    description: "Une figure faite de deux rectangles",
+  };
+}
+/** Un rectangle (ou un carré) partagé en k bandes égales, en pointillés. */
+function rectangleEnParts(L: number, l: number, k: number, u: string, carre: boolean): ConstructionCanvasData {
+  const pts = [{ id: "A", x: 0, y: 0 }, { id: "B", x: L, y: 0 }, { id: "C", x: L, y: l }, { id: "D", x: 0, y: l }];
+  const coupes: SegC[] = [];
+  for (let i = 1; i < k; i++) {
+    pts.push({ id: `b${i}`, x: (L * i) / k, y: 0 }, { id: `h${i}`, x: (L * i) / k, y: l });
+    coupes.push({ a: `b${i}`, b: `h${i}`, pointille: true });
+  }
+  return {
+    kind: "construction",
+    points: pts.map((p) => ({ ...p, cache: true })),
+    polygones: [{ sommets: ["A", "B", "C", "D"] }],
+    segments: [{ a: "A", b: "B", texte: `${nf(L)} ${u}` }, ...(carre ? [] : [{ a: "D", b: "A", texte: `${nf(l)} ${u}` }]), ...coupes],
+    angles: [{ sommet: "A", de: "D", vers: "B", droit: true }],
+    description: `Une figure partagée en ${k} parts égales`,
   };
 }
 
@@ -157,12 +322,14 @@ function genAireComprendreUniteNue() {
     const c = randomInt(2, 12);
     const L = randomInt(4, 12);
     const l = randomInt(2, L - 1);
-    const text = pick([
+    const k = randomInt(0, 2);
+    const text = [
       `Un carré mesure ${c} ${u} de côté. Son aire s’écrit en…`,
       `Côté du carré : ${c} ${u}. Quelle unité pour son aire ?`,
       `Un rectangle mesure ${L} ${u} sur ${l} ${u}. Son aire s’écrit en…`,
-    ]);
-    return { text, format: "qcm" as const, choices, expected: [`${u}²`], comparator: "mcq_exact" as const, explanation: explication };
+    ][k];
+    const canvas = k < 2 ? rectangleCote(c, c, u, true) : rectangleCote(L, l, u, false);
+    return { text, format: "qcm" as const, choices, expected: [`${u}²`], comparator: "mcq_exact" as const, explanation: explication, canvas };
   }
   const n = randomInt(4, 90);
   const N = nf(n);
@@ -198,6 +365,8 @@ function genAireComprendreGrandeurNue() {
     `Quelle grandeur mesure ${quoi} d’un ${f} ?`,
     `${maj(quoi)} d’un ${f} : quelle grandeur mesure-t-on ?`,
   ]);
+  // La figure nommée, sans rien surligner : ni l'intérieur ni le bord.
+  const canvas = figureNue(f);
   const pourquoi =
     rep === "l’aire"
       ? "L’intérieur, toute la surface : on mesure l’aire."
@@ -211,6 +380,7 @@ function genAireComprendreGrandeurNue() {
     expected: [rep],
     comparator: "mcq_exact" as const,
     explanation: expl(pourquoi),
+    ...(canvas ? { canvas } : {}),
   };
 }
 
@@ -336,26 +506,18 @@ function genAireCompterLignesNue() {
   const explication = expl(
     `Chaque carreau a une aire de 1 ${u}. On compte tous les carreaux : ${lignes.join(" + ")} = ${total}. L’aire est donc ${total} ${u}.`
   );
+  // Le dessin : une ligne de carreaux par rangée, calées à gauche (seulement quand on compte : écrites, les lignes se passent de dessin).
+  const canvas = lignesDeCarreaux(lignes);
   const base = { format: "short" as const, expected: avecUnite(total, u), comparator: "number_equal" as const, explanation: explication };
   if (n === 4 || Math.random() < 0.5) {
-    // Le dessin : une ligne de carreaux par rangée, calées à gauche.
-    const filledCells: FigureLibreCanvasData["grid"]["filledCells"] = [];
-    lignes.forEach((k, r) => {
-      for (let c = 0; c < k; c++) filledCells.push([r, c]);
-    });
     return {
       ...base,
+      canvas,
       text: pick([
         `Un carreau fait 1 ${u}. Calcule l’aire de la figure.`,
         `Chaque carreau mesure 1 ${u}. Quelle est l’aire de la figure ?`,
         `Compte les carreaux de 1 ${u}. Écris l’aire de la figure.`,
       ]),
-      canvas: {
-        kind: "figure_libre" as const,
-        grid: { rows: n + 1, cols: 10, filledCells },
-        display: { showGrid: true, showFilled: true, showPerimeter: true },
-        size: { cellSize: 26, padding: 14 },
-      },
     };
   }
   const liste = lignes.slice(0, -1).join(", ") + " et " + lignes[n - 1];
@@ -367,6 +529,38 @@ function genAireCompterLignesNue() {
     ]),
   };
 }
+/** Une ligne de carreaux par rangée, calées à gauche : la figure des « lignes de carreaux ». */
+function lignesDeCarreaux(lignes: number[]) {
+  const filledCells: FigureLibreCanvasData["grid"]["filledCells"] = [];
+  lignes.forEach((k, r) => {
+    for (let c = 0; c < k; c++) filledCells.push([r, c]);
+  });
+  return {
+    kind: "figure_libre" as const,
+    grid: { rows: lignes.length + 1, cols: 10, filledCells },
+    display: { showGrid: true, showFilled: true, showPerimeter: true },
+    size: { cellSize: 26, padding: 14 },
+  };
+}
+
+/** Le carrelage d'un énoncé qui ÉCRIT déjà ses lignes (canvas `construction`, pas un quadrillage
+ *  à compter) : une ligne de carreaux par rangée, calées à gauche, à l'échelle. */
+function carrelageTrace(lignes: number[], description: string): ConstructionCanvasData {
+  const points: ConstructionCanvasData["points"] = [];
+  const polygones: NonNullable<ConstructionCanvasData["polygones"]> = [];
+  lignes.forEach((k, r) => {
+    for (let c = 0; c < k; c++) {
+      const id = `c${r}_${c}`;
+      const y = -r;
+      points.push(
+        { id: `${id}a`, x: c, y, cache: true }, { id: `${id}b`, x: c + 1, y, cache: true },
+        { id: `${id}c`, x: c + 1, y: y + 1, cache: true }, { id: `${id}d`, x: c, y: y + 1, cache: true },
+      );
+      polygones.push({ sommets: [`${id}a`, `${id}b`, `${id}c`, `${id}d`], fond: "#bfdbfe" });
+    }
+  });
+  return { kind: "construction", points, polygones, description };
+}
 
 function genAireCompterLignes() {
   const ctx = pick(PAVAGES);
@@ -377,6 +571,7 @@ function genAireCompterLignes() {
   const total = lignes.reduce((a, b) => a + b, 0);
   return {
     text: `${ctx.intro(p)} Lignes : ${liste} ${ctx.carre}. ${pick(QUESTIONS_AIRE_COUVERTE)}`,
+    canvas: carrelageTrace(lignes, `Des lignes de ${liste} carreaux`),
     format: "short" as const,
     expected: avecUnite(total, ctx.u),
     comparator: "number_equal" as const,
@@ -399,6 +594,7 @@ function genAireCompterRangees() {
   ]);
   return {
     text: `${ctx.intro(p)} ${forme} ${pick(QUESTIONS_AIRE_COUVERTE)}`,
+    canvas: carrelageTrace(Array.from({ length: a }, () => b), `${a} rangées de ${b} carreaux`),
     format: "qcm" as const,
     choices: makeChoices(`${good} ${ctx.u}`, [
       `${a + b} ${ctx.u}`,
@@ -473,6 +669,8 @@ function genAireConvertir() {
     expected: avecUnite(c.r, c.vers),
     comparator: "number_equal" as const,
     explanation: expl(explConversion(c)),
+    // Le carré découpé en 10 × 10 : la méthode (1 grande unité = 100 petites), pas le résultat.
+    canvas: carreDecoupe([]),
   };
 }
 
@@ -503,6 +701,7 @@ function genAireConvertirPiege() {
     choices: makeChoices(`${nf(c.r)} ${c.vers}`, pieges.map((x) => `${nf(x)} ${c.vers}`)),
     expected: [`${nf(c.r)} ${c.vers}`],
     comparator: "mcq_exact" as const,
+    canvas: carreDecoupe([]),
     explanation: expl(
       `${explConversion(c)} Le piège : multiplier ou diviser par 10, comme pour les longueurs. Une aire est un produit de DEUX longueurs : 10 × 10 = 100.`
     ),
@@ -608,7 +807,7 @@ function genAireRectangleNu(etoile: 1 | 2) {
       `Longueur ${Ls} et largeur ${ls} : calcule l’aire du rectangle${nom ? ` ${nom}` : ""}.`,
       `Quelle est l’aire ${duR} de ${ls} sur ${Ls} ?`,
     );
-  return { ...base, text: pick(formes) };
+  return { ...base, text: pick(formes), canvas: rectangleTrace(L, l, u, false, nom) };
 }
 
 /** ★1-★2 : un carré nu, écrit ou dessiné. */
@@ -638,7 +837,7 @@ function genAireCarreNu(etoile: 1 | 2) {
     `Côté du carré${nom ? ` ${nom}` : ""} : ${cs}. Calcule son aire.`,
   ];
   if (etoile === 2) formes.push(`Quelle est l’aire ${duC} de côté ${cs} ?`, `${maj(leC)} a pour côté ${cs}. Quelle est son aire ?`);
-  return { ...base, text: pick(formes) };
+  return { ...base, text: pick(formes), canvas: rectangleTrace(c, c, u, true, nom) };
 }
 
 function genAireRectangle(etoile: 1 | 2 | 3) {
@@ -665,6 +864,7 @@ function genAireRectangle(etoile: 1 | 2 | 3) {
     : pick(["Quelle est l’aire de ce rectangle ?", "Calcule l’aire du rectangle.", "Combien mesure l’aire de ce rectangle ?"]);
   const base = {
     text: `${intro} ${question}`,
+    canvas: rectangleTrace(L, l, u, false),
     explanation: expl(
       `L’aire d’un rectangle est longueur × largeur : ${nf(L)} × ${nf(l)} = ${nf(A)}. Des ${u} fois des ${u} donnent des ${u}² : l’aire est ${nf(A)} ${u}².`
     ),
@@ -710,6 +910,7 @@ function genAireCarre(etoile: 1 | 2 | 3) {
     : pick(["Quelle est l’aire de ce carré ?", "Calcule l’aire du carré.", "Combien mesure l’aire de ce carré ?"]);
   const base = {
     text: `${intro} ${question}`,
+    canvas: rectangleTrace(c, c, u, true),
     explanation: expl(`L’aire d’un carré est côté × côté : ${c} × ${c} = ${nf(A)}. L’aire est ${nf(A)} ${u}².`),
   };
   if (etoile < 3)
@@ -955,6 +1156,7 @@ function tirerDecomposition() {
       r: a * b + c * d,
       pieges: [a * b, c * d, a + b + c + d, a * b + c + d, a * b + c * d + 1],
       calc: `On ajoute les aires des deux rectangles : ${a} × ${b} + ${c} × ${d} = ${a * b} + ${c * d} = ${a * b + c * d} ${u}².`,
+      canvas: formeEnL(a, b, c, d, u),
     };
   }
   const t = pick(TROUS);
@@ -968,6 +1170,7 @@ function tirerDecomposition() {
     r: L * l - c * c,
     pieges: [L * l, L * l + c * c, L * l - c, L * l - 4 * c],
     calc: `On part du grand rectangle et on retire le carré : ${L} × ${l} − ${c} × ${c} = ${L * l} − ${c * c} = ${L * l - c * c} ${u}².`,
+    canvas: rectangleTroue(L, l, c, u),
   };
 }
 
@@ -975,9 +1178,10 @@ function genAireDecomposer(qcm: boolean) {
   const d = tirerDecomposition();
   const u2 = `${d.u}²`;
   if (!qcm)
-    return { text: d.text, format: "short" as const, expected: avecUnite(d.r, u2), comparator: "number_equal" as const, explanation: expl(d.calc) };
+    return { text: d.text, format: "short" as const, expected: avecUnite(d.r, u2), comparator: "number_equal" as const, explanation: expl(d.calc), canvas: d.canvas };
   return {
     text: d.text,
+    canvas: d.canvas,
     format: "qcm" as const,
     choices: makeChoices(`${nf(d.r)} ${u2}`, d.pieges.map((x) => `${nf(x)} ${u2}`)),
     expected: [`${nf(d.r)} ${u2}`],
@@ -1030,6 +1234,7 @@ function genAireProblemeSimpleNu() {
   ]);
   return {
     text,
+    canvas: rectangleCote(L, l, "m", false),
     format: "short" as const,
     expected: avecUnite(A, "m²"),
     comparator: "number_equal" as const,
@@ -1052,6 +1257,7 @@ function genAireProblemeSimple() {
   ]);
   return {
     text,
+    canvas: rectangleCote(L, l, "m", false),
     format: "short" as const,
     expected: avecUnite(A, "m²"),
     comparator: "number_equal" as const,
@@ -1082,9 +1288,11 @@ function genAireProblemeDeuxEtapes(qcm: boolean) {
       `${m.Quoi} ${m.pl ? "coûtent" : "coûte"} ${pu} € le m². ${p.nom} en veut pour tout le sol ${duLieu(o)} : ${nf(L)} m sur ${l} m. Calcule le prix à payer.`,
     ]);
     const calc = `D’abord l’aire du sol : ${nf(L)} × ${l} = ${nf(A)} m². Puis le prix : ${nf(A)} × ${pu} = ${nf(cout)} €.`;
-    if (!qcm) return { text, format: "short" as const, expected: avecUnite(cout, "€"), comparator: "number_equal" as const, explanation: expl(calc) };
+    const canvas = rectangleCote(L, l, "m", false);
+    if (!qcm) return { text, format: "short" as const, expected: avecUnite(cout, "€"), comparator: "number_equal" as const, explanation: expl(calc), canvas };
     return {
       text,
+      canvas,
       format: "qcm" as const,
       choices: makeChoices(`${nf(cout)} €`, [
         `${nf(2 * (L + l) * pu)} €`,
@@ -1107,6 +1315,7 @@ function genAireProblemeDeuxEtapes(qcm: boolean) {
     const text = `${p.nom} ${c.action(o)}. ${maj(leLieu(o))} mesure ${L} m sur ${l} m. ${c.objet} couvre ${k} m². Combien de ${c.objets} lui faut-il ?`;
     return {
       text,
+      canvas: rectangleCote(L, l, "m", false),
       format: "short" as const,
       expected: avecUnite(n, c.objets),
       comparator: "number_equal" as const,
@@ -1134,6 +1343,8 @@ function genAireDefiPieges() {
     ]);
     return {
       text,
+      // Le petit carré et le grand, à l'échelle ; le côté du grand reste à calculer.
+      canvas: deuxQuadrisTraces([c, c, `${c} ${u}`], [k * c, k * c, "?"], u),
       format: "qcm" as const,
       choices: makeChoices(`${B} ${u}²`, [`${k * A} ${u}²`, `${A + k} ${u}²`, `${4 * k * c} ${u}²`, `${B + A} ${u}²`]),
       expected: [`${B} ${u}²`],
@@ -1185,6 +1396,7 @@ function genAireDefiCoteManquant() {
   ]);
   return {
     text,
+    canvas: rectangleCote(L, l, u, false, "", chercheLargeur ? { l: "?" } : { L: "?" }),
     format: "short" as const,
     expected: avecUnite(r, u),
     comparator: "number_equal" as const,
@@ -1212,6 +1424,7 @@ function genAireDefiCarreInverse() {
   const r = perimetre ? 4 * c : c;
   return {
     text: `${intro} ${question}`,
+    canvas: rectangleCote(c, c, u, true, "", { L: "?" }),
     format: "short" as const,
     expected: avecUnite(r, u),
     comparator: "number_equal" as const,
@@ -1258,6 +1471,11 @@ const mot = (grand: boolean) => (grand ? "grande" : "petite");
 // ----- Le quadrillage
 function grilleA(filledCells: Cel[], rows: number, cols: number) {
   return { kind: "figure_libre" as const, grid: { rows, cols, filledCells }, display: { showGrid: true, showFilled: true, showPerimeter: true }, size: { cellSize: 26, padding: 14 } };
+}
+/** Un rectangle de a rangées de b carreaux, une marge d'un carreau ; les carreaux rétrécissent s'il est large. */
+function grilleRect(a: number, b: number) {
+  const g = grilleA(casesRect(a, b), a + 2, b + 2);
+  return { ...g, size: { cellSize: Math.min(26, Math.floor(320 / (b + 2))), padding: 14 } };
 }
 /** Un rectangle plein, sa rangée du haut en `r0`, sa colonne de gauche en `c0`. */
 function casesRect(a: number, b: number, r0 = 1, c0 = 1): Cel[] {
@@ -1334,6 +1552,7 @@ function genComprendreVrai(): QAire {
     aire ? "son intérieur" : "son contour",
     ["son intérieur", "son contour", "un seul côté", "un seul sommet"],
     "L’aire mesure tout l’intérieur de la figure, le périmètre seulement son contour.",
+    figureNue(f),
   );
 }
 const NOM_UNITE: Record<string, string> = { cm: "centimètre", dm: "décimètre", m: "mètre" };
@@ -1348,6 +1567,7 @@ function genComprendreUnitePetite(): QAire {
       `1 ${u}²`,
       [`2 ${u}²`, `4 ${u}²`, `1 ${u}`],
       defn,
+      rectangleCote(1, 1, u, true),
     );
   if (mode === "cote1")
     return qcmA(
@@ -1435,12 +1655,14 @@ function genCompterTexte(): QAire {
       ]),
       avecUnite(n, u),
       `Chaque carreau vaut 1 ${u}. ${n} carreaux font ${n} ${u}.`,
+      grilleA(formeCases(n, 4, 6), 4, 6),
     );
   if (mode === "inverse")
     return courtA(
       pick([`Une aire de ${n} ${u}. Combien de carreaux de 1 ${u} ?`, `Combien de carreaux de 1 ${u} pour ${n} ${u} ?`, `Pour couvrir ${n} ${u}, combien de carreaux de 1 ${u} ?`, `${n} ${u} font combien de carreaux de 1 ${u} ?`]),
       nombreOuCarreaux(n),
       `Chaque carreau couvre 1 ${u}. Pour ${n} ${u}, il en faut ${n}.`,
+      grilleA(formeCases(n, 4, 6), 4, 6),
     );
   if (mode === "plus")
     return courtA(
@@ -1548,6 +1770,7 @@ function genCompterRangees2(): QAire {
   while (b === a) b = randomInt(3, 10);
   const total = a * b;
   const calc = `${a} rangées de ${b} carreaux : ${a} × ${b} = ${total}. L’aire est ${total} ${u}.`;
+  const grille = grilleRect(a, b);
   const mode = pick(["texte", "calcul", "piege", "figure"] as const);
   if (mode === "texte")
     return courtA(
@@ -1559,6 +1782,7 @@ function genCompterRangees2(): QAire {
       ]),
       avecUnite(total, u),
       calc,
+      grille,
     );
   if (mode === "calcul")
     return qcmA(
@@ -1566,6 +1790,7 @@ function genCompterRangees2(): QAire {
       `${a} × ${b}`,
       piegesDeValeur(total, [[`${a} + ${b}`, a + b], [`2 × (${a} + ${b})`, 2 * (a + b)], [`${a} × ${a}`, a * a], [`${b} × ${b}`, b * b]]),
       calc,
+      carrelageTrace(Array.from({ length: a }, () => b), `${a} rangées de ${b} carreaux`),
     );
   if (mode === "piege")
     return qcmA(
@@ -1573,6 +1798,7 @@ function genCompterRangees2(): QAire {
       `${total} ${u}`,
       [`${a + b} ${u}`, `${total + 1} ${u}`, `${total - 1} ${u}`, `${total + a} ${u}`],
       `${calc} Additionner ${a} + ${b} ne compte pas les carreaux.`,
+      grille,
     );
   const r = randomInt(2, 5);
   const c = randomInt(3, 8);
@@ -1636,6 +1862,7 @@ function genCompterValeur2(): QAire {
     pick([`Une figure de ${n} carreaux mesure ${X} ${u}. Aire d’un carreau ?`, `${n} carreaux égaux couvrent ${X} ${u}. Que vaut un carreau ?`, `${X} ${u} pour ${n} carreaux égaux. Calcule l’aire d’un carreau.`]),
     avecUnite(v, u),
     `${X} ÷ ${n} = ${v}. Un carreau vaut ${v} ${u}.`,
+    carrelageTrace(Array.from({ length: Math.ceil(n / 6) }, (_, r) => Math.min(6, n - 6 * r)), `${n} carreaux égaux`),
   );
 }
 function genCompterManque2(): QAire {
@@ -1713,16 +1940,18 @@ function genQuadCalcul(carre: boolean, etoile: 1 | 2): QAire {
   const q = tirerQuad(carre, etoile);
   const { u, u2, L, l, A, P, dims, nom, Nom } = q;
   const calc = explQuad(carre, L, l, u);
+  const fig = rectangleCote(L, l, u, carre);
   const mode = pick(["calcul", "completer", "formule", "vrai"] as const);
   if (mode === "calcul") {
     const c = calculsQuad(carre, L, l);
-    return qcmA(pick([`Quel calcul donne l’aire d’un ${nom} ${dims} ?`, `Aire d’un ${nom} ${dims} : choisis le calcul.`, `${Nom} ${dims} : quel calcul pour l’aire ?`]), c.juste, c.faux, calc);
+    return qcmA(pick([`Quel calcul donne l’aire d’un ${nom} ${dims} ?`, `Aire d’un ${nom} ${dims} : choisis le calcul.`, `${Nom} ${dims} : quel calcul pour l’aire ?`]), c.juste, c.faux, calc, fig);
   }
   if (mode === "completer")
     return courtA(
       pick([`Complète : ${L} ${u} × ${l} ${u} = … ${u2}.`, `Écris le résultat : ${L} ${u} × ${l} ${u} = … ${u2}.`, `Trouve le nombre manquant : ${L} ${u} × ${l} ${u} = … ${u2}.`]),
       nombreOuUnite(A, u2),
       `${L} × ${l} = ${A}. Des ${u} fois des ${u} donnent des ${u2}.`,
+      fig,
     );
   if (mode === "formule") {
     const a = carre ? "côté" : "longueur";
@@ -1749,6 +1978,8 @@ function genQuadCalcul(carre: boolean, etoile: 1 | 2): QAire {
     vrai ? "vrai" : "faux",
     [vrai ? "faux" : "vrai"],
     calc,
+    // « Vrai ? » tout court : le correcteur lit alors le texte seul, sans figure.
+    vf === "Vrai ?" ? undefined : fig,
   );
 }
 function genQuadLire(carre: boolean, etoile: 1 | 2): QAire {
@@ -1828,7 +2059,7 @@ function genRectangleDeuxPas(): QAire {
     const k = pick([2, 3]);
     const L = k * l;
     const texte = k === 2 ? pick([`Largeur ${l} ${u}. La longueur est le double. Calcule l’aire.`, `Un rectangle : largeur ${l} ${u}, longueur 2 fois plus grande. Calcule l’aire.`]) : `Largeur ${l} ${u}, longueur 3 fois plus grande. Quelle est l’aire ?`;
-    return courtA(texte, avecUnite(L * l, u2), `La longueur mesure ${k} × ${l} = ${L} ${u}. L’aire est ${L} × ${l} = ${L * l} ${u2}.`);
+    return courtA(texte, avecUnite(L * l, u2), `La longueur mesure ${k} × ${l} = ${L} ${u}. L’aire est ${L} × ${l} = ${L * l} ${u2}.`, rectangleCote(L, l, u, false, "", { L: "?" }));
   }
   if (mode === "plus") {
     const l = randomInt(2, 9);
@@ -1838,6 +2069,7 @@ function genRectangleDeuxPas(): QAire {
       pick([`Largeur ${l} ${u}. Longueur : ${k} ${u} de plus. Calcule l’aire.`, `Un rectangle a ${l} ${u} de large et ${k} ${u} de plus en long. Aire ?`]),
       avecUnite(L * l, u2),
       `La longueur mesure ${l} + ${k} = ${L} ${u}. L’aire est ${L} × ${l} = ${L * l} ${u2}.`,
+      rectangleCote(L, l, u, false, "", { L: "?" }),
     );
   }
   if (mode === "moins") {
@@ -1848,6 +2080,7 @@ function genRectangleDeuxPas(): QAire {
       pick([`Longueur ${L} ${u}. Largeur : ${k} ${u} de moins. Calcule l’aire.`, `Un rectangle a ${L} ${u} de long et ${k} ${u} de moins en large. Aire ?`]),
       avecUnite(L * l, u2),
       `La largeur mesure ${L} − ${k} = ${l} ${u}. L’aire est ${L} × ${l} = ${L * l} ${u2}.`,
+      rectangleCote(L, l, u, false, "", { l: "?" }),
     );
   }
   if (mode === "perimetre") {
@@ -1858,6 +2091,7 @@ function genRectangleDeuxPas(): QAire {
       pick([`Périmètre ${P} ${u}, longueur ${L} ${u}. Calcule l’aire du rectangle.`, `Un rectangle a ${P} ${u} de tour et ${L} ${u} de long. Aire ?`]),
       avecUnite(L * l, u2),
       `La moitié du périmètre est ${P} ÷ 2 = ${L + l} ${u}. La largeur est ${L + l} − ${L} = ${l} ${u}. L’aire est ${L} × ${l} = ${L * l} ${u2}.`,
+      rectangleCote(L, l, u, false, "", { l: "?" }),
     );
   }
   if (mode === "retrouver") {
@@ -1870,6 +2104,7 @@ function genRectangleDeuxPas(): QAire {
       pick([`Aire ${A} ${u2}, ${nomC} ${connu} ${u}. Trouve la ${nomR}.`, `Un rectangle a pour aire ${A} ${u2}. Sa ${nomC} mesure ${connu} ${u}. ${maj(nomR)} ?`]),
       avecUnite(cherche, u),
       `${A} ÷ ${connu} = ${cherche}. Vérification : ${connu} × ${cherche} = ${A}. La ${nomR} est ${cherche} ${u}.`,
+      rectangleCote(L, l, u, false, "", largeur ? { l: "?" } : { L: "?" }),
     );
   }
   const n = randomInt(2, 4);
@@ -1879,6 +2114,7 @@ function genRectangleDeuxPas(): QAire {
     pick([`${n} rectangles de ${L} ${u} sur ${l} ${u}. Calcule l’aire totale.`, `Calcule l’aire de ${n} rectangles de ${L} ${u} sur ${l} ${u}.`]),
     avecUnite(n * L * l, u2),
     `Un rectangle : ${L} × ${l} = ${L * l} ${u2}. ${n} rectangles : ${n} × ${L * l} = ${n * L * l} ${u2}.`,
+    rectangleCote(L, l, u, false),
   );
 }
 function genCarreDeuxPas(): QAire {
@@ -1887,24 +2123,29 @@ function genCarreDeuxPas(): QAire {
   const c = randomInt(2, 12);
   const A = c * c;
   const P = 4 * c;
+  const inconnu = rectangleCote(c, c, u, true, "", { L: "?" });
+  const connu = rectangleCote(c, c, u, true);
   const mode = pick(["perimetre", "cote", "tour", "plusieurs", "deux", "ecart", "agrandi"] as const);
   if (mode === "perimetre")
     return courtA(
       pick([`Un carré a ${P} ${u} de périmètre. Calcule son aire.`, `Périmètre d’un carré : ${P} ${u}. Quelle est son aire ?`, `Un carré a ${P} ${u} de tour. Trouve son aire.`]),
       avecUnite(A, u2),
       `Le côté mesure ${P} ÷ 4 = ${c} ${u}. L’aire est ${c} × ${c} = ${A} ${u2}.`,
+      inconnu,
     );
   if (mode === "cote")
     return courtA(
       pick([`Un carré a pour aire ${A} ${u2}. Trouve son côté.`, `Aire d’un carré : ${A} ${u2}. Combien mesure son côté ?`, `Quel côté pour un carré de ${A} ${u2} ?`]),
       avecUnite(c, u),
       `On cherche le nombre qui, multiplié par lui-même, donne ${A} : ${c} × ${c} = ${A}. Le côté mesure ${c} ${u}.`,
+      inconnu,
     );
   if (mode === "tour")
     return courtA(
       pick([`Un carré a pour aire ${A} ${u2}. Calcule son périmètre.`, `Aire d’un carré : ${A} ${u2}. Combien mesure son tour ?`]),
       avecUnite(P, u),
       `${c} × ${c} = ${A} : le côté mesure ${c} ${u}. Le périmètre est 4 × ${c} = ${P} ${u}.`,
+      inconnu,
     );
   if (mode === "plusieurs") {
     const n = randomInt(2, 4);
@@ -1912,6 +2153,7 @@ function genCarreDeuxPas(): QAire {
       pick([`${n} carrés de côté ${c} ${u}. Calcule l’aire totale.`, `Calcule l’aire de ${n} carrés de côté ${c} ${u}.`]),
       avecUnite(n * A, u2),
       `Un carré : ${c} × ${c} = ${A} ${u2}. ${n} carrés : ${n} × ${A} = ${n * A} ${u2}.`,
+      connu,
     );
   }
   let d = randomInt(2, 12);
@@ -1921,6 +2163,7 @@ function genCarreDeuxPas(): QAire {
       pick([`Un carré de côté ${c} ${u} et un carré de côté ${d} ${u}. Aire totale ?`, `Carrés de côtés ${c} ${u} et ${d} ${u}. Calcule leur aire totale.`]),
       avecUnite(A + d * d, u2),
       `${c} × ${c} = ${A} et ${d} × ${d} = ${d * d}. Total : ${A} + ${d * d} = ${A + d * d} ${u2}.`,
+      deuxQuadrisTraces([c, c, `${c} ${u}`], [d, d, `${d} ${u}`], u),
     );
   if (mode === "ecart") {
     const [g, p] = [Math.max(c, d), Math.min(c, d)];
@@ -1928,15 +2171,16 @@ function genCarreDeuxPas(): QAire {
       pick([`Carré de côté ${g} ${u}, carré de côté ${p} ${u}. Calcule l’écart des aires.`, `Écart entre l’aire d’un carré de côté ${g} ${u} et de côté ${p} ${u} ?`]),
       avecUnite(g * g - p * p, u2),
       `${g} × ${g} = ${g * g} et ${p} × ${p} = ${p * p}. Écart : ${g * g} − ${p * p} = ${g * g - p * p} ${u2}.`,
+      deuxQuadrisTraces([g, g, `${g} ${u}`], [p, p, `${p} ${u}`], u),
     );
   }
   const k = randomInt(1, 4);
   if (Math.random() < 0.5) {
     const n2 = 2 * c;
-    return courtA(`Un carré de côté ${c} ${u}. Son côté double. Nouvelle aire ?`, avecUnite(n2 * n2, u2), `Le nouveau côté mesure 2 × ${c} = ${n2} ${u}. L’aire est ${n2} × ${n2} = ${n2 * n2} ${u2}.`);
+    return courtA(`Un carré de côté ${c} ${u}. Son côté double. Nouvelle aire ?`, avecUnite(n2 * n2, u2), `Le nouveau côté mesure 2 × ${c} = ${n2} ${u}. L’aire est ${n2} × ${n2} = ${n2 * n2} ${u2}.`, connu);
   }
   const n2 = c + k;
-  return courtA(`Un carré de côté ${c} ${u} gagne ${k} ${u} de côté. Nouvelle aire ?`, avecUnite(n2 * n2, u2), `Le nouveau côté mesure ${c} + ${k} = ${n2} ${u}. L’aire est ${n2} × ${n2} = ${n2 * n2} ${u2}.`);
+  return courtA(`Un carré de côté ${c} ${u} gagne ${k} ${u} de côté. Nouvelle aire ?`, avecUnite(n2 * n2, u2), `Le nouveau côté mesure ${c} + ${k} = ${n2} ${u}. L’aire est ${n2} × ${n2} = ${n2 * n2} ${u2}.`, connu);
 }
 
 // ----- AIRE_COMPARER, ★1
@@ -2211,18 +2455,21 @@ function genProblemeAssembler(): QAire {
       pick([`${n} carrés de ${c} ${u} de côté. Calcule l’aire totale.`, `Calcule l’aire de ${n} carrés de côté ${c} ${u}.`, `Aire totale de ${n} carrés de côté ${c} ${u} ?`]),
       avecUnite(n * c * c, u2),
       `Un carré : ${c} × ${c} = ${c * c} ${u2}. ${n} carrés : ${n} × ${c * c} = ${n * c * c} ${u2}.`,
+      rectangleCote(c, c, u, true),
     );
   if (mode === "rectangles")
     return courtA(
       pick([`${n} rectangles de ${L} ${u} sur ${l} ${u}. Calcule l’aire totale.`, `Calcule l’aire de ${n} rectangles de ${L} ${u} sur ${l} ${u}.`, `Aire totale de ${n} rectangles de ${L} ${u} sur ${l} ${u} ?`]),
       avecUnite(n * L * l, u2),
       `Un rectangle : ${L} × ${l} = ${L * l} ${u2}. ${n} rectangles : ${n} × ${L * l} = ${n * L * l} ${u2}.`,
+      rectangleCote(L, l, u, false),
     );
   if (mode === "mixte")
     return courtA(
       pick([`Rectangle de ${L} ${u} sur ${l} ${u}, carré de côté ${c} ${u}. Aire totale ?`, `Calcule l’aire totale : rectangle de ${L} ${u} sur ${l} ${u}, carré de côté ${c} ${u}.`, `Carré de côté ${c} ${u}, rectangle de ${L} ${u} sur ${l} ${u}. Aire des deux ?`]),
       avecUnite(L * l + c * c, u2),
       `${L} × ${l} = ${L * l} et ${c} × ${c} = ${c * c}. Total : ${L * l} + ${c * c} = ${L * l + c * c} ${u2}.`,
+      deuxQuadrisTraces([L, l, `${L} ${u}`], [c, c, `${c} ${u}`], u),
     );
   const [x, y] = [randomInt(6, 60), randomInt(6, 60)];
   return courtA(
@@ -2253,6 +2500,7 @@ function genProblemeReste(): QAire {
       pick([`Un rectangle de ${L} ${u} sur ${l} ${u}. ${x} ${u2} sont coloriés. Combien reste-t-il ?`, `Rectangle de ${L} ${u} sur ${l} ${u} : ${x} ${u2} coloriés. Quelle aire reste à colorier ?`]),
       avecUnite(A - x, u2),
       `L’aire totale : ${L} × ${l} = ${A} ${u2}. Il reste ${A} − ${x} = ${A - x} ${u2}.`,
+      rectangleCote(L, l, u, false),
     );
   }
   if (mode === "moins") {
@@ -2263,12 +2511,14 @@ function genProblemeReste(): QAire {
         pick([`Un grand carré de côté ${G} ${u}, moins un carré de côté ${c} ${u}. Aire ?`, `Carré de côté ${G} ${u} moins carré de côté ${c} ${u}. Aire restante ?`]),
         avecUnite(G * G - c * c, u2),
         `${G} × ${G} = ${G * G} et ${c} × ${c} = ${c * c}. Il reste ${G * G} − ${c * c} = ${G * G - c * c} ${u2}.`,
+        rectangleTroue(G, G, c, u),
       );
     }
     return courtA(
       `Rectangle de ${L} ${u} sur ${l} ${u} moins un carré de côté ${c} ${u}. Aire ?`,
       avecUnite(A - c * c, u2),
       `${L} × ${l} = ${A} et ${c} × ${c} = ${c * c}. Il reste ${A} − ${c * c} = ${A - c * c} ${u2}.`,
+      rectangleTroue(L, l, c, u),
     );
   }
   if (Math.random() < 0.5) {
@@ -2278,6 +2528,7 @@ function genProblemeReste(): QAire {
       `Carré de côté ${c} ${u} coupé en ${kc} parts égales. Aire d’une part ?`,
       avecUnite((c * c) / kc, u2),
       `${c} × ${c} = ${c * c} ${u2}. ${c * c} ÷ ${kc} = ${(c * c) / kc} ${u2}.`,
+      rectangleEnParts(c, c, kc, u, true),
     );
   }
   // La longueur est un multiple de k : le partage tombe juste.
@@ -2288,45 +2539,54 @@ function genProblemeReste(): QAire {
     `Rectangle de ${LP} ${u} sur ${lP} ${u} coupé en ${k} parts égales. Aire d’une part ?`,
     avecUnite((LP * lP) / k, u2),
     `${LP} × ${lP} = ${LP * lP} ${u2}. ${LP * lP} ÷ ${k} = ${(LP * lP) / k} ${u2}.`,
+    rectangleEnParts(LP, lP, k, u, false),
   );
 }
 function genProblemeRetrouver(): QAire {
   const u = uProbleme();
   const u2 = `${u}²`;
   const c = randomInt(2, 12);
+  const carreInconnu = rectangleCote(c, c, u, true, "", { L: "?" });
   const mode = pick(["cote", "coteRect", "tour", "aireDuTour", "aireDuTourRect"] as const);
   if (mode === "cote")
     return courtA(
       pick([`Un carré a pour aire ${c * c} ${u2}. Trouve son côté.`, `Aire du carré : ${c * c} ${u2}. Combien mesure son côté ?`, `Un carré couvre ${c * c} ${u2}. Quel est son côté ?`]),
       avecUnite(c, u),
       `On cherche le nombre qui, multiplié par lui-même, donne ${c * c} : ${c} × ${c} = ${c * c}. Le côté mesure ${c} ${u}.`,
+      carreInconnu,
     );
   if (mode === "tour")
     return courtA(
       pick([`Un carré a pour aire ${c * c} ${u2}. Calcule son périmètre.`, `Aire du carré : ${c * c} ${u2}. Combien mesure son tour ?`]),
       avecUnite(4 * c, u),
       `${c} × ${c} = ${c * c} : le côté mesure ${c} ${u}. Le périmètre est 4 × ${c} = ${4 * c} ${u}.`,
+      carreInconnu,
     );
   if (mode === "aireDuTour")
     return courtA(
       pick([`Un carré a ${4 * c} ${u} de périmètre. Calcule son aire.`, `Périmètre du carré : ${4 * c} ${u}. Quelle est son aire ?`]),
       avecUnite(c * c, u2),
       `Le côté mesure ${4 * c} ÷ 4 = ${c} ${u}. L’aire est ${c} × ${c} = ${c * c} ${u2}.`,
+      carreInconnu,
     );
   const L = randomInt(4, 12);
   const l = randomInt(2, L - 1);
-  if (mode === "aireDuTourRect")
+  if (mode === "aireDuTourRect") {
+    const parLongueur = Math.random() < 0.5;
     return courtA(
-      pick([`Périmètre ${2 * (L + l)} ${u}, longueur ${L} ${u}. Calcule l’aire du rectangle.`, `Un rectangle a ${2 * (L + l)} ${u} de tour et ${l} ${u} de large. Aire ?`]),
+      parLongueur ? `Périmètre ${2 * (L + l)} ${u}, longueur ${L} ${u}. Calcule l’aire du rectangle.` : `Un rectangle a ${2 * (L + l)} ${u} de tour et ${l} ${u} de large. Aire ?`,
       avecUnite(L * l, u2),
       `La moitié du périmètre : ${L + l} ${u}. L’autre côté en découle. L’aire est ${L} × ${l} = ${L * l} ${u2}.`,
+      rectangleCote(L, l, u, false, "", parLongueur ? { l: "?" } : { L: "?" }),
     );
+  }
   const largeur = Math.random() < 0.5;
   const [connu, cherche, nomC, nomR] = largeur ? [L, l, "longueur", "largeur"] : [l, L, "largeur", "longueur"];
   return courtA(
     pick([`Rectangle d’aire ${L * l} ${u2}, ${nomC} ${connu} ${u}. Trouve sa ${nomR}.`, `Un rectangle a pour aire ${L * l} ${u2}. Sa ${nomC} mesure ${connu} ${u}. Trouve sa ${nomR}.`, `Aire ${L * l} ${u2}, ${nomC} ${connu} ${u}. Calcule la ${nomR} du rectangle.`]),
     avecUnite(cherche, u),
     `${L * l} ÷ ${connu} = ${cherche}. La ${nomR} mesure ${cherche} ${u}.`,
+    rectangleCote(L, l, u, false, "", largeur ? { l: "?" } : { L: "?" }),
   );
 }
 function genProblemeCarreaux(): QAire {
@@ -2340,6 +2600,7 @@ function genProblemeCarreaux(): QAire {
       pick([`Combien de carrés de 1 ${u2} remplissent un rectangle de ${L} ${u} sur ${l} ${u} ?`, `Un rectangle de ${L} ${u} sur ${l} ${u}. Combien de carrés de 1 ${u2} ?`]),
       [nf(L * l), `${L * l} carrés`],
       `L’aire est ${L} × ${l} = ${L * l} ${u2}. Il faut ${L * l} carrés de 1 ${u2}.`,
+      rectangleCote(L, l, u, false),
     );
   }
   if (mode === "uniteCarre") {
@@ -2348,6 +2609,7 @@ function genProblemeCarreaux(): QAire {
       pick([`Un carré de ${c} ${u} de côté. Combien de carrés de 1 ${u2} dedans ?`, `Combien de carrés de 1 ${u2} dans un carré de côté ${c} ${u} ?`]),
       [nf(c * c), `${c * c} carrés`],
       `L’aire est ${c} × ${c} = ${c * c} ${u2}. Il faut ${c * c} carrés de 1 ${u2}.`,
+      rectangleCote(c, c, u, true),
     );
   }
   const k = pick([2, 3, 4, 5]);
@@ -2366,6 +2628,7 @@ function genProblemeCarreaux(): QAire {
     pick([`Rectangle de ${L} ${u} sur ${l} ${u}, carreaux de ${c} ${u2}. Combien de carreaux ?`, `Combien de carreaux de ${c} ${u2} pour un rectangle de ${L} ${u} sur ${l} ${u} ?`]),
     nombreOuCarreaux((L * l) / c),
     `L’aire est ${L} × ${l} = ${L * l} ${u2}. ${L * l} ÷ ${c} = ${(L * l) / c} carreaux.`,
+    rectangleCote(L, l, u, false),
   );
 }
 function genProblemeModifier(): QAire {
@@ -2374,6 +2637,7 @@ function genProblemeModifier(): QAire {
   const L = randomInt(4, 12);
   const l = randomInt(2, L - 1);
   const dims = `${L} ${u} sur ${l} ${u}`;
+  const avant = rectangleCote(L, l, u, false);
   const k = randomInt(1, 4);
   const mode = pick(["double", "ajout", "gain", "carreDouble", "carreAjout"] as const);
   if (mode === "double") {
@@ -2384,6 +2648,7 @@ function genProblemeModifier(): QAire {
       `Un rectangle de ${dims}. La ${cote} ${facteur}. ${pick(["Nouvelle aire ?", "Quelle aire obtient-on ?"])}`,
       avecUnite(m * L * l, u2),
       `La ${cote} est multipliée par ${m} : l’aire aussi. ${m} × ${L * l} = ${m * L * l} ${u2}.`,
+      avant,
     );
   }
   if (mode === "ajout") {
@@ -2394,6 +2659,7 @@ function genProblemeModifier(): QAire {
       pick([`Rectangle de ${dims}. On ajoute ${k} ${u} à la ${nomC}. Aire ?`, `Rectangle de ${dims}. La ${nomC} gagne ${k} ${u}. Nouvelle aire ?`]),
       avecUnite(r, u2),
       `Les nouveaux côtés : ${lg ? L + k : L} ${u} et ${lg ? l : l + k} ${u}. L’aire est ${r} ${u2}.`,
+      avant,
     );
   }
   if (mode === "gain") {
@@ -2404,12 +2670,13 @@ function genProblemeModifier(): QAire {
       `Un rectangle de ${dims} : sa ${nomC} gagne ${k} ${u}. Aire gagnée ?`,
       avecUnite(r, u2),
       `Le rectangle ajouté mesure ${k} ${u} sur ${lg ? l : L} ${u} : ${r} ${u2}.`,
+      avant,
     );
   }
   const c = randomInt(2, 9);
   if (mode === "carreDouble")
-    return courtA(`Un carré de côté ${c} ${u}. Son côté double. Nouvelle aire ?`, avecUnite(4 * c * c, u2), `Le nouveau côté : 2 × ${c} = ${2 * c} ${u}. L’aire : ${2 * c} × ${2 * c} = ${4 * c * c} ${u2}.`);
-  return courtA(`Un carré de côté ${c} ${u} gagne ${k} ${u} de côté. Nouvelle aire ?`, avecUnite((c + k) * (c + k), u2), `Le nouveau côté : ${c} + ${k} = ${c + k} ${u}. L’aire : ${c + k} × ${c + k} = ${(c + k) * (c + k)} ${u2}.`);
+    return courtA(`Un carré de côté ${c} ${u}. Son côté double. Nouvelle aire ?`, avecUnite(4 * c * c, u2), `Le nouveau côté : 2 × ${c} = ${2 * c} ${u}. L’aire : ${2 * c} × ${2 * c} = ${4 * c * c} ${u2}.`, rectangleCote(c, c, u, true));
+  return courtA(`Un carré de côté ${c} ${u} gagne ${k} ${u} de côté. Nouvelle aire ?`, avecUnite((c + k) * (c + k), u2), `Le nouveau côté : ${c} + ${k} = ${c + k} ${u}. L’aire : ${c + k} × ${c + k} = ${(c + k) * (c + k)} ${u2}.`, rectangleCote(c, c, u, true));
 }
 
 /** Les champs communs d'un gabarit neuf : chacun a son correcteur (correcteurs/aires.ts). */

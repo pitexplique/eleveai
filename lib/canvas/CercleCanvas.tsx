@@ -196,8 +196,20 @@ export default function CercleCanvas({ figure }: Props) {
           if (!from || !to) return null;
 
           const color = segmentColor(segment.kind, colors, segment.color);
-          const midX = (from.x + to.x) / 2;
-          const midY = (from.y + to.y) / 2;
+          // ⛔ 14/11/2026 : l'étiquette d'un DIAMÈTRE se posait sur le centre (son
+          // milieu) et le point O la cachait. Un segment dont le milieu tombe près
+          // d'un point dessiné s'écarte de 26 px, perpendiculairement, vers le haut.
+          const segLen = Math.hypot(to.x - from.x, to.y - from.y) || 1;
+          let nx = -(to.y - from.y) / segLen;
+          let ny = (to.x - from.x) / segLen;
+          if (ny > 0) { nx = -nx; ny = -ny; }
+          const mx = (from.x + to.x) / 2;
+          const my = (from.y + to.y) / 2;
+          const surUnPoint = points.some(
+            (p) => p.id !== segment.from && p.id !== segment.to && Math.hypot(p.x - mx, p.y - my) < 14,
+          );
+          const midX = surUnPoint ? mx + nx * 26 : mx;
+          const midY = surUnPoint ? my + ny * 26 + 12 : my;
 
           return (
             <g key={segment.id}>

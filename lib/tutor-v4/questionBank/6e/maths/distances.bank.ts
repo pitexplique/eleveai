@@ -178,6 +178,7 @@ function genDistanceNotation(simple = false) {
   if (Math.random() < 0.6) {
     const bonne = `${P}${Q} = ${D}`;
     return {
+      canvas: segment(P, Q, { etiquette: D }),
       text: `${situation} ${pick(simple ? ["Quelle écriture est correcte ?", "Comment l’écrire ?", "Quelle égalité est juste ?", "Choisis la bonne écriture."] : ["Quelle écriture est correcte ?", "Comment écrire cette information ?", "Laquelle de ces égalités est juste ?"])}`,
       format: "qcm" as const,
       choices: shuffle([bonne, `[${P}${Q}] = ${D}`, `(${P}${Q}) = ${D}`, `${P}${Q} = [${D}]`]),
@@ -337,7 +338,10 @@ function genDistanceEstMilieu() {
   const nonHors = `non : ${P} n’est pas sur le segment [${A}${B}]`;
   const jamais = "on ne peut pas savoir";
   const juste = cas === "oui" ? oui : cas === "inegal" ? nonInegal : nonHors;
+  // 14/11/2026 : la figure suit le texte (P posé à PA ÷ AB sur le segment, ou au-dessus).
+  const canvas = cas === "hors" ? segment(A, B, { horsSegment: { label: P, x: 170, y: 60 } }) : segmentPoints(A, B, [{ label: P, frac: e / (e + d) }]);
   return {
+    canvas,
     text: `${position} ${P}${A} = ${e} ${u} et ${P}${B} = ${d} ${u}. ${P} est-il le milieu de [${A}${B}] ?`,
     format: "qcm" as const,
     choices: shuffle([oui, nonInegal, nonHors, jamais]),
@@ -404,7 +408,33 @@ function genDistanceInegalite() {
     ? `${A}${C} + ${C}${B} = ${ac} + ${cb} = ${ac + cb} = ${A}${B} : il y a égalité, donc ${C} est sur le segment [${A}${B}].`
     : `${A}${C} + ${C}${B} = ${ac} + ${cb} = ${ac + cb}, plus grand que ${A}${B} = ${ab} : pas d’égalité, ${C} n’est pas sur le segment [${A}${B}].`;
   if (forme === "longueur" || forme === "combien") {
+    // 14/11/2026 : figure à l'échelle (C placé par ses deux distances), seulement quand on
+    // demande la LONGUEUR du détour : pour « C est-il sur [AB] ? », le dessin donnerait la réponse.
+    const xc = (ac * ac - cb * cb + ab * ab) / (2 * ab);
+    const yc = Math.sqrt(Math.max(0, ac * ac - xc * xc));
+    const [gauche, droite] = [Math.min(0, xc), Math.max(ab, xc)];
+    const k = Math.min(260 / (droite - gauche), yc > 0 ? 130 / yc : Infinity);
+    const px = (x: number) => 170 + k * (x - (gauche + droite) / 2);
+    const pa = { x: px(0), y: 175 };
+    const pb = { x: px(ab), y: 175 };
+    const pc = { x: px(xc), y: 175 - k * yc };
+    const canvas: DroitesCanvasData = {
+      kind: "droites",
+      size: { width: 340, height: 220 },
+      lines: [
+        { id: "AB", type: "segment", from: pa, to: pb, display: { showLabel: false } },
+        { id: "AC", type: "segment", from: pa, to: pc, dashed: true, color: "#ef4444" },
+        { id: "CB", type: "segment", from: pc, to: pb, dashed: true, color: "#ef4444" },
+      ],
+      points: [
+        { ...pa, label: A },
+        { ...pb, label: B },
+        { ...pc, label: C, color: "#ef4444", highlight: true },
+      ],
+      display: { showLabels: true, showPoints: true },
+    };
     return {
+      canvas,
       text: `${intro} ${forme === "longueur" ? `De combien le trajet par ${C} est-il plus long ?` : `Combien de plus en passant par ${C} ?`}`,
       format: "short" as const,
       expected: avecUnite(ac + cb - ab, l.u),
@@ -481,6 +511,7 @@ function genDistanceDefiMilieux() {
   ];
   const intro = pick(intros.filter(([us]) => us.includes(u)).map(([, s]) => s));
   return {
+    canvas: segmentPoints(A, B, [{ label: M, frac: 0.5 }, { label: N, frac: coteA ? 0.25 : 0.75 }]),
     text: `${intro} ${A}${B} = ${ab} ${u}. ${pick([`Combien mesure ${X}${Y} ?`, `Calcule ${X}${Y}.`, `Quelle est la longueur ${X}${Y} ?`])}`,
     format: "short" as const,
     expected: avecUnite(r, u),
@@ -529,7 +560,7 @@ const qc = (text: string, juste: string, faux: string[], calcul: string, canvas?
 const lg = (text: string, v: number, u: string, calcul: string, canvas?: DroitesCanvasData): G => ({
   text, format: "short", expected: avecUnite(v, u), comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
 });
-const nb = (text: string, n: number, calcul: string): G => ({ text, format: "short", expected: [nf(n)], comparator: "number_equal", explanation: expl(calcul) });
+const nb = (text: string, n: number, calcul: string, canvas?: DroitesCanvasData): G => ({ text, format: "short", expected: [nf(n)], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}) });
 /** Une réponse en lettres : toutes les écritures justes (MB et BM). */
 const lt = (text: string, justes: string[], calcul: string, canvas?: DroitesCanvasData): G => ({
   text, format: "short", expected: justes, comparator: "exact_text", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
@@ -580,10 +611,10 @@ function genMilAutre(): G {
     () => lg(`${d}. ${M} est le milieu de [${A}${B}]. Combien mesure ${y} ?`, v, u, pourquoi, fig),
     () => lg(`${d} et ${M} est le milieu de [${A}${B}]. Calcule ${y}.`, v, u, pourquoi, fig),
     () => lg(`[${A}${B}] a pour milieu ${M}. Si ${d}, que vaut ${y} ?`, v, u, pourquoi, fig),
-    () => lg(`L’une des moitiés de [${A}${B}] mesure ${v} ${u}. Combien mesure l’autre ?`, v, u, pourquoi),
-    () => lg(`Une moitié de [${A}${B}] mesure ${v} ${u}. Que mesure l’autre ?`, v, u, pourquoi),
-    () => lg(`[${A}${B}] est coupé en deux moitiés. L’une mesure ${v} ${u}. Et l’autre ?`, v, u, pourquoi),
-    () => lg(`Les moitiés de [${A}${B}] sont égales. L’une fait ${v} ${u}. Et l’autre ?`, v, u, pourquoi),
+    () => lg(`L’une des moitiés de [${A}${B}] mesure ${v} ${u}. Combien mesure l’autre ?`, v, u, pourquoi, fig),
+    () => lg(`Une moitié de [${A}${B}] mesure ${v} ${u}. Que mesure l’autre ?`, v, u, pourquoi, fig),
+    () => lg(`[${A}${B}] est coupé en deux moitiés. L’une mesure ${v} ${u}. Et l’autre ?`, v, u, pourquoi, fig),
+    () => lg(`Les moitiés de [${A}${B}] sont égales. L’une fait ${v} ${u}. Et l’autre ?`, v, u, pourquoi, fig),
   ])();
 }
 /** Deux points sur le segment : lequel est le milieu ? La réponse se LIT sur le dessin. */
@@ -631,13 +662,14 @@ function genMilEgalite(): G {
   const eq = juste ? `${x} = ${y}` : shuffle([pick([x, y]), AB]).join(" = ");
   const intro = introMilieu(A, B, M);
   const pourquoi = `Les deux moitiés sont égales : ${A}${M} = ${M}${B}. Le segment entier ${A}${B} vaut le double.`;
+  const fig = segment(A, B, { milieu: { label: M, sur: true } });
   return pick([
-    () => ouiNon(`${intro} A-t-on ${eq} ?`, juste, pourquoi),
-    () => ouiNon(`${intro} Est-ce que ${eq} ?`, juste, pourquoi),
-    () => ouiNon(`${intro} ${eq} est-il juste ?`, juste, pourquoi),
-    () => ouiNon(`${intro} L’égalité ${eq} est-elle juste ?`, juste, pourquoi),
-    () => vraiFaux(`${intro} ${eq} : vrai ou faux ?`, juste, pourquoi),
-    () => vraiFaux(`${intro} Vrai ou faux : ${eq}.`, juste, pourquoi),
+    () => ouiNon(`${intro} A-t-on ${eq} ?`, juste, pourquoi, fig),
+    () => ouiNon(`${intro} Est-ce que ${eq} ?`, juste, pourquoi, fig),
+    () => ouiNon(`${intro} ${eq} est-il juste ?`, juste, pourquoi, fig),
+    () => ouiNon(`${intro} L’égalité ${eq} est-elle juste ?`, juste, pourquoi, fig),
+    () => vraiFaux(`${intro} ${eq} : vrai ou faux ?`, juste, pourquoi, fig),
+    () => vraiFaux(`${intro} Vrai ou faux : ${eq}.`, juste, pourquoi, fig),
   ])();
 }
 /** Compléter : quelle longueur est égale à celle-ci ? La réponse est un NOM, pas un nombre. */
@@ -646,13 +678,14 @@ function genMilCompleter(): G {
   const intro = introMilieu(A, B, M);
   const pourquoi = `${M} coupe le segment en deux longueurs égales : ${x} = ${y}.`;
   const faux = [AB, `2 × ${AB}`];
+  const fig = segment(A, B, { milieu: { label: M, sur: true } });
   return pick([
-    () => qc(`${intro} Quelle longueur est égale à ${x} ?`, y, faux, pourquoi),
-    () => qc(`${intro} Trouve la longueur égale à ${x}.`, y, faux, pourquoi),
-    () => qc(`${intro} Choisis la longueur égale à ${x}.`, y, faux, pourquoi),
-    () => qc(`${intro} ${x} est égal à quelle longueur ?`, y, faux, pourquoi),
-    () => lt(`${intro} Complète : ${x} = …`, [y, envers(y)], pourquoi),
-    () => lt(`${intro} Écris l’autre moitié que ${x}.`, [y, envers(y)], pourquoi),
+    () => qc(`${intro} Quelle longueur est égale à ${x} ?`, y, faux, pourquoi, fig),
+    () => qc(`${intro} Trouve la longueur égale à ${x}.`, y, faux, pourquoi, fig),
+    () => qc(`${intro} Choisis la longueur égale à ${x}.`, y, faux, pourquoi, fig),
+    () => qc(`${intro} ${x} est égal à quelle longueur ?`, y, faux, pourquoi, fig),
+    () => lt(`${intro} Complète : ${x} = …`, [y, envers(y)], pourquoi, fig),
+    () => lt(`${intro} Écris l’autre moitié que ${x}.`, [y, envers(y)], pourquoi, fig),
   ])();
 }
 /** Le tout et la moitié : « deux fois », « le double », « la moitié ». */
@@ -662,13 +695,14 @@ function genMilDouble(): G {
   const court = `[${A}${B}] a pour milieu ${M}.`;
   const pourquoi = `${M} coupe [${A}${B}] en deux moitiés égales : ${AB} = 2 × ${x}.`;
   const mots = ["la moitié", "le double", "le tiers", "le quart"];
+  const fig = segment(A, B, { milieu: { label: M, sur: true } });
   return pick([
-    () => nb(`${intro} ${AB} vaut combien de fois ${x} ?`, 2, pourquoi),
-    () => nb(`${intro} Complète : ${AB} = … × ${x}.`, 2, pourquoi),
-    () => lt(`${court} ${x} est la moitié de quelle longueur ?`, [`${A}${B}`, `${B}${A}`], pourquoi),
-    () => lt(`${court} ${AB} est le double de quelle longueur ?`, [x, envers(x), y, envers(y)], pourquoi),
-    () => qc(`${intro} Choisis : ${x} est … de ${AB}.`, "la moitié", mots.filter((m) => m !== "la moitié"), pourquoi),
-    () => qc(`${intro} Choisis : ${AB} est … de ${x}.`, "le double", mots.filter((m) => m !== "le double"), pourquoi),
+    () => nb(`${intro} ${AB} vaut combien de fois ${x} ?`, 2, pourquoi, fig),
+    () => nb(`${intro} Complète : ${AB} = … × ${x}.`, 2, pourquoi, fig),
+    () => lt(`${court} ${x} est la moitié de quelle longueur ?`, [`${A}${B}`, `${B}${A}`], pourquoi, fig),
+    () => lt(`${court} ${AB} est le double de quelle longueur ?`, [x, envers(x), y, envers(y)], pourquoi, fig),
+    () => qc(`${intro} Choisis : ${x} est … de ${AB}.`, "la moitié", mots.filter((m) => m !== "la moitié"), pourquoi, fig),
+    () => qc(`${intro} Choisis : ${AB} est … de ${x}.`, "le double", mots.filter((m) => m !== "le double"), pourquoi, fig),
   ])();
 }
 /** La définition, à juger phrase par phrase. Les phrases sont dans le correcteur aussi. */
@@ -726,18 +760,22 @@ function genMilVerdict(): G {
   const oui = cas === "oui";
   const [pa, pb] = [`${P}${A} = ${a} ${u}`, `${P}${B} = ${b} ${u}`];
   const pourquoi = cas === "hors" ? `${P} n’est pas sur [${A}${B}] : ce n’est pas le milieu, même à égale distance.` : oui ? `${P} est sur [${A}${B}] et ${a} = ${b} : c’est le milieu.` : `${a} ≠ ${b} : les deux longueurs diffèrent.`;
-  if (cas === "hors")
+  // 14/11/2026 : la figure suit le texte — P sur le segment à PA ÷ AB, ou au-dessus (PA = PB).
+  if (cas === "hors") {
+    const figHors = segment(A, B, { horsSegment: { label: P, x: 170, y: 60 } });
     return pick([
-      () => ouiNon(`${P} n’est pas sur [${A}${B}]. ${P}${A} = ${P}${B} = ${a} ${u}. Est-ce le milieu ?`, false, pourquoi),
-      () => ouiNon(`${P} est hors de [${A}${B}]. ${P}${A} = ${P}${B} = ${a} ${u}. Est-ce le milieu ?`, false, pourquoi),
+      () => ouiNon(`${P} n’est pas sur [${A}${B}]. ${P}${A} = ${P}${B} = ${a} ${u}. Est-ce le milieu ?`, false, pourquoi, figHors),
+      () => ouiNon(`${P} est hors de [${A}${B}]. ${P}${A} = ${P}${B} = ${a} ${u}. Est-ce le milieu ?`, false, pourquoi, figHors),
     ])();
+  }
+  const fig = segmentPoints(A, B, [{ label: P, frac: a / (a + b) }]);
   return pick([
-    () => ouiNon(`${P} est sur [${A}${B}]. ${A}${B} = ${a + b} ${u} et ${P}${A} = ${a} ${u}. Est-ce le milieu ?`, oui, pourquoi),
-    () => ouiNon(`${pa} et ${pb}. ${P} est sur [${A}${B}]. Est-ce le milieu ?`, oui, pourquoi),
-    () => ouiNon(`${P} est entre ${A} et ${B}. ${pa}, ${pb}. Est-ce le milieu ?`, oui, pourquoi),
-    () => ouiNon(`Sur [${A}${B}], ${pa} et ${pb}. ${P} est-il le milieu ?`, oui, pourquoi),
-    () => ouiNon(`${P} est sur [${A}${B}]. ${pa}. ${pb}. Milieu ou non ?`, oui, pourquoi),
-    () => ouiNon(`${A}${B} = ${a + b} ${u}. ${P} est sur [${A}${B}] et ${P}${A} = ${a} ${u}. Est-ce le milieu ?`, oui, pourquoi),
+    () => ouiNon(`${P} est sur [${A}${B}]. ${A}${B} = ${a + b} ${u} et ${P}${A} = ${a} ${u}. Est-ce le milieu ?`, oui, pourquoi, fig),
+    () => ouiNon(`${pa} et ${pb}. ${P} est sur [${A}${B}]. Est-ce le milieu ?`, oui, pourquoi, fig),
+    () => ouiNon(`${P} est entre ${A} et ${B}. ${pa}, ${pb}. Est-ce le milieu ?`, oui, pourquoi, fig),
+    () => ouiNon(`Sur [${A}${B}], ${pa} et ${pb}. ${P} est-il le milieu ?`, oui, pourquoi, fig),
+    () => ouiNon(`${P} est sur [${A}${B}]. ${pa}. ${pb}. Milieu ou non ?`, oui, pourquoi, fig),
+    () => ouiNon(`${A}${B} = ${a + b} ${u}. ${P} est sur [${A}${B}] et ${P}${A} = ${a} ${u}. Est-ce le milieu ?`, oui, pourquoi, fig),
   ])();
 }
 /** Sur une droite graduée : le milieu se trouve en partant de la moitié de l'écart. */
@@ -774,7 +812,7 @@ function genMilUnites(): G {
   const r = (v / 2) * c.f;
   const intro = introMilieu(A, B, M);
   const q = pick([`Donne ${x} en ${c.vers}.`, `Calcule ${x} en ${c.vers}.`, `Écris ${x} en ${c.vers}.`, `Combien mesure ${x} en ${c.vers} ?`, `${x} mesure combien de ${c.vers} ?`, `Réponds en ${c.vers} : ${x} = …`]);
-  return lg(`${intro} ${AB} = ${v} ${c.de}. ${q}`, r, c.vers, `${x} = ${v} ÷ 2 = ${nf(v / 2)} ${c.de}. Et 1 ${c.de} = ${nf(c.f)} ${c.vers}, donc ${x} = ${nf(r)} ${c.vers}.`);
+  return lg(`${intro} ${AB} = ${v} ${c.de}. ${q}`, r, c.vers, `${x} = ${v} ÷ 2 = ${nf(v / 2)} ${c.de}. Et 1 ${c.de} = ${nf(c.f)} ${c.vers}, donc ${x} = ${nf(r)} ${c.vers}.`, segment(A, B, { milieu: { label: M, sur: true } }));
 }
 /** La somme des deux moitiés : c'est le segment entier. */
 function genMilSomme(): G {
@@ -785,12 +823,13 @@ function genMilSomme(): G {
   const s = `${x} + ${y}`;
   const donneLaSomme = `La somme vaut ${v} ${u}, en deux moitiés égales : ${v} ÷ 2 = ${v / 2} ${u}.`;
   const donneMoitie = `Les deux moitiés sont égales : ${v} + ${v} = ${2 * v} ${u}.`;
+  const fig = segment(A, B, { milieu: { label: M, sur: true } });
   return pick([
-    () => lg(`${intro} ${s} = ${v} ${u}. Calcule ${x}.`, v / 2, u, donneLaSomme),
-    () => lg(`${intro} ${s} = ${v} ${u}. Combien mesure ${y} ?`, v / 2, u, donneLaSomme),
-    () => lg(`${intro} La somme ${s} vaut ${v} ${u}. Trouve ${y}.`, v / 2, u, donneLaSomme),
-    () => lg(`${intro} ${x} = ${v} ${u}. Calcule ${s}.`, 2 * v, u, donneMoitie),
-    () => lg(`${intro} ${x} = ${v} ${u}. Que vaut ${s} ?`, 2 * v, u, donneMoitie),
+    () => lg(`${intro} ${s} = ${v} ${u}. Calcule ${x}.`, v / 2, u, donneLaSomme, fig),
+    () => lg(`${intro} ${s} = ${v} ${u}. Combien mesure ${y} ?`, v / 2, u, donneLaSomme, fig),
+    () => lg(`${intro} La somme ${s} vaut ${v} ${u}. Trouve ${y}.`, v / 2, u, donneLaSomme, fig),
+    () => lg(`${intro} ${x} = ${v} ${u}. Calcule ${s}.`, 2 * v, u, donneMoitie, fig),
+    () => lg(`${intro} ${x} = ${v} ${u}. Que vaut ${s} ?`, 2 * v, u, donneMoitie, fig),
   ])();
 }
 /** L'égalité juste (ou la seule fausse) parmi quatre : le correcteur les évalue toutes. */
@@ -805,7 +844,7 @@ function genMilIntrus(): G {
     ? pick(["Quelle égalité est juste ?", "Choisis l’égalité juste.", "Coche l’égalité vraie.", "Une seule égalité est juste : laquelle ?"])
     : pick(["Quelle égalité est fausse ?", "Trouve l’égalité fausse."]);
   const [bonnes, autres] = cherche ? [vraies, fausses] : [fausses, vraies];
-  return qc(`${intro} ${q}`, pick(bonnes), shuffle(autres).slice(0, 3), pourquoi);
+  return qc(`${intro} ${q}`, pick(bonnes), shuffle(autres).slice(0, 3), pourquoi, segment(A, B, { milieu: { label: M, sur: true } }));
 }
 /** Une longueur ÉCRITE sur la figure, et le texte dit où est le milieu. */
 function genMilFigureCote(): G {

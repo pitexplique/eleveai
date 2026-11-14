@@ -76,6 +76,7 @@ function genVolumeUnite() {
     ]);
     return {
       text,
+      canvas: dessinObjet(o.de), // 14/11/2026 : la forme de l'objet, sans aucune mesure
       format: "qcm" as const,
       choices: shuffle([`${u}³`, `${u}²`, u, autre]),
       expected: [`${u}³`],
@@ -94,6 +95,7 @@ function genVolumeUnite() {
   ]);
   return {
     text,
+    canvas: dessinObjet(o.de),
     format: "qcm" as const,
     choices: shuffle([`${N} ${u}³`, `${N} ${u}²`, `${N} ${u}`, `${N} ${autre}`]),
     expected: [`${N} ${u}³`],
@@ -137,6 +139,8 @@ function genVolumeGrandeur() {
     expected: [a.rep],
     comparator: "mcq_exact" as const,
     explanation: expl(pourquoi),
+    // 14/11/2026 : l'objet, neutre (aucune face, aucun bord surligné) : il ne désigne pas la grandeur.
+    canvas: dessinObjet(a.phrase),
   };
 }
 
@@ -160,6 +164,78 @@ const CONSTRUCTIONS: { intro: (p: Prenom) => string; u: string }[] = [
 ];
 const questionVolume = () => pick(["Quel est le volume ?", "Calcule le volume total.", "Quel volume obtient-on ?", "Combien mesure le volume ?"]);
 
+// ═══════════════════════════════════════════════════════════════════════════
+// ⭐ 14/11/2026 — PLUS DE FIGURES (13 % des énoncés en avaient). Les cubes
+// décrits par le texte sont DESSINÉS : étages, couches, rangées, morceaux
+// séparés d'un cube vide. Le canvas `assemblage_cubes` projette depuis une
+// origine fixe (160, 170), pas de 32 px : `cubesCadres` décale le solide pour
+// qu'il tienne dans les 340 px, et ne rend RIEN s'il déborde (pas de figure
+// plutôt qu'une figure coupée). Jamais le compte écrit (`showLabels: false`).
+// ═══════════════════════════════════════════════════════════════════════════
+type Cube = { x: number; y: number; z: number };
+function cubesCadres(cubes: Cube[]) {
+  if (!cubes.length) return undefined;
+  let mieux: { dx: number; dy: number; score: number } | null = null;
+  for (let dx = -8; dx <= 8; dx++)
+    for (let dy = -8; dy <= 8; dy++) {
+      let [gauche, droite, haut, bas] = [Infinity, -Infinity, Infinity, -Infinity];
+      for (const c of cubes) {
+        const px = 160 + (c.x + dx - c.y - dy) * 27.2;
+        const py = 170 + (c.x + dx + c.y + dy) * 15.36 - c.z * 32;
+        [gauche, droite, haut, bas] = [Math.min(gauche, px - 27.2), Math.max(droite, px + 27.2), Math.min(haut, py - 32), Math.max(bas, py + 30.72)];
+      }
+      if (gauche < 4 || droite > 336 || haut < 4) continue;
+      const score = bas + Math.abs((gauche + droite) / 2 - 170);
+      if (!mieux || score < mieux.score) mieux = { dx, dy, score };
+    }
+  if (!mieux) return undefined;
+  const { dx, dy } = mieux;
+  return figureCubes(cubes.map((c) => ({ x: c.x + dx, y: c.y + dy, z: c.z })));
+}
+/** n cubes en mur (plan y = 0), `largeur` par rangée : rangées pleines en bas, le reste au-dessus, à gauche. */
+function mur(n: number, largeur: number, x0 = 0): Cube[] {
+  return Array.from({ length: n }, (_, i) => ({ x: x0 + (i % largeur), y: 0, z: Math.floor(i / largeur) }));
+}
+/** Des morceaux posés côte à côte, séparés d'une place vide : on les voit distincts. */
+function morceaux(ns: number[], largeurMax = 4): Cube[] {
+  let x0 = 0;
+  const cubes: Cube[] = [];
+  for (const n of ns) {
+    const w = Math.min(n, largeurMax);
+    cubes.push(...mur(n, w, x0));
+    x0 += w + 1;
+  }
+  return cubes;
+}
+/** Un pavé de cubes : `long` cubes par rangée, `rangees` rangées, `couches` couches. */
+function paveDeCubes(long: number, rangees: number, couches: number): Cube[] {
+  const cubes: Cube[] = [];
+  for (let z = 0; z < couches; z++) for (let y = 0; y < rangees; y++) for (let x = 0; x < long; x++) cubes.push({ x, y, z });
+  return cubes;
+}
+/** Le premier découpage en murs de largeur 3 à 7 qui tient dans le cadre. */
+function cubesCadresLargeur(fabrique: (largeur: number) => Cube[], largeurs = [5, 4, 6, 3, 7], zMax = 3) {
+  // Des murs de 4 rangées au plus : plus haut, deux murs côte à côte se lisent mal (aperçu du 14/11).
+  for (const w of largeurs) {
+    const cubes = fabrique(w);
+    if (Math.max(...cubes.map((c) => c.z)) > zMax) continue;
+    const f = cubesCadres(cubes);
+    if (f) return f;
+  }
+  return undefined;
+}
+/** L'objet dessiné SANS mesure (volume_unite, volume_lire) : la forme seule, rien qui donne l'unité ni la grandeur. */
+function dessinObjet(de: string) {
+  const solide: "cube" | "pave_droit" | "cylindre" | "boule" | null =
+    /dé à jouer|sucre/.test(de) ? "cube"
+    : /yaourt|verre|citerne|trousse|sac de couchage|seau|moule à gâteau|pot de peinture/.test(de) ? "cylindre"
+    : /balle|boule/.test(de) ? "boule"
+    : /gomme|boîte|piscine|chambre|benne|conteneur|abri|salle|aquarium|carton|frigo|valise|coffre|bac|niche|jardinière|tiroir|glacière/.test(de) ? "pave_droit"
+    : null;
+  if (!solide) return undefined;
+  return { kind: "solide_3d" as const, solide, highlight: { base: false }, display: { showLabels: false, showDimensions: false, showFormulaHint: false } };
+}
+
 function genVolumeCompterEtages() {
   const c = pick(CONSTRUCTIONS);
   const p = pick(PRENOMS);
@@ -176,6 +252,8 @@ function genVolumeCompterEtages() {
     expected: avecUnite(total, c.u),
     comparator: "number_equal" as const,
     explanation: expl(`Chaque cube a un volume de 1 ${c.u}. On compte tous les cubes : ${k.join(" + ")} = ${total}. Le volume est ${total} ${c.u}.`),
+    // 14/11/2026 : les étages du texte, dessinés en escalier (aucun cube caché).
+    canvas: cubesCadres(k.flatMap((nb, z) => mur(nb, nb).map((c) => ({ ...c, z })))),
   };
 }
 
@@ -197,8 +275,11 @@ function genVolumeCompterCouches(qcm: boolean) {
     ? `Une couche contient ${b} × ${d} = ${b * d} cubes. Il y a ${a} couches : ${a} × ${b * d} = ${total} cubes. Le volume est ${total} ${c.u}.`
     : `${a} étages de ${b} cubes : ${a} × ${b} = ${total} cubes. Le volume est ${total} ${c.u}.`;
   const text = `${c.intro(p)} ${forme} ${questionVolume()}`;
-  if (!qcm) return { text, format: "short" as const, expected: avecUnite(total, c.u), comparator: "number_equal" as const, explanation: expl(calc) };
+  // 14/11/2026 : le pavé du texte (d cubes par rangée, b rangées, a couches), ou le mur de a étages de b cubes.
+  const canvas = cubesCadres(triple ? paveDeCubes(d, b, a) : mur(a * b, b));
+  if (!qcm) return { text, format: "short" as const, expected: avecUnite(total, c.u), comparator: "number_equal" as const, explanation: expl(calc), canvas };
   return {
+    canvas,
     text,
     format: "qcm" as const,
     choices: makeChoices(`${total} ${c.u}`, [
@@ -232,6 +313,7 @@ function genVolumeAssembler() {
     expected: avecUnite(total, c.u),
     comparator: "number_equal" as const,
     explanation: expl(`Assembler ne change pas le nombre de cubes : on additionne les volumes. ${k.join(" + ")} = ${total} ${c.u}.`),
+    canvas: cubesCadresLargeur((w) => morceaux(k, w), [4, 3, 5]), // 14/11/2026 : les deux morceaux, avant assemblage
   };
 }
 
@@ -250,6 +332,7 @@ function genVolumeAssemblerRetirer() {
     expected: avecUnite(total, c.u),
     comparator: "number_equal" as const,
     explanation: expl(`On ajoute les cubes posés, on enlève les cubes retirés : ${a} + ${b} − ${r} = ${total}. Le volume est ${total} ${c.u}.`),
+    canvas: cubesCadres(mur(a, 5)), // 14/11/2026 : les ${a} cubes posés au départ, seulement
   };
 }
 
@@ -269,6 +352,8 @@ function genVolumeAssemblerEtages() {
     expected: [`${total} ${c.u}`],
     comparator: "mcq_exact" as const,
     explanation: expl(`Les étages contiennent ${a} × ${b} = ${a * b} cubes. On ajoute les autres cubes : ${a * b} + ${d} = ${total}. Le volume est ${total} ${c.u}.`),
+    // 14/11/2026 : les étages, puis les ${d} cubes à part (s'ils tiennent dans le cadre).
+    canvas: cubesCadres([...mur(a * b, b), ...mur(d, Math.min(d, 3), b + 1)]),
   };
 }
 
@@ -350,9 +435,12 @@ function genVolumeComparerPiles() {
   const egal = `${o.f ? "elles" : "ils"} ont le même volume`;
   const juste = V1 === V2 ? egal : (V1 > V2) === grand ? celui(p) : celui(q);
   const Le = o.f ? "La" : "Le";
+  // 14/11/2026 : les deux constructions, celle du premier nommé à gauche (rien si elles ne tiennent pas).
+  const canvas = cubesCadres([...mur(a * b, b), ...mur(c * d, d, b + 1)]);
   const text = `Mêmes cubes. ${Le} ${o.nom} ${de(p.nom)} : ${a} ${mot} de ${b} cubes. ${o.f ? "Celle" : "Celui"} ${de(q.nom)} : ${c} ${mot} de ${d} cubes. ${o.f ? "Laquelle" : "Lequel"} a le plus ${grand ? "grand" : "petit"} volume ?`;
   return {
     text,
+    canvas,
     format: "qcm" as const,
     choices: shuffle([celui(p), celui(q), egal]),
     expected: [juste],
@@ -401,6 +489,7 @@ function genVolumeLireMesures(combien: 2 | 4) {
     expected: avecUnite(Number(vol.split(" ").slice(0, -1).join("").replace(",", ".")), vol.split(" ").pop()!),
     comparator: "number_equal" as const,
     explanation: expl(`Un volume s’écrit avec une unité cube (cm³, dm³, m³). La seule mesure de ce genre est ${vol}. Les autres sont une longueur, une aire ou une masse.`),
+    canvas: dessinObjet(f.de), // 14/11/2026 : l'objet de la fiche, sans aucune mesure
   };
 }
 
@@ -453,6 +542,7 @@ function genVolumeLireLettres() {
     ]);
     return {
       text,
+      canvas: text.includes(objet) ? dessinObjet(objet) : undefined, // 14/11/2026 : l'objet nommé, sans mesure
       format: "qcm" as const,
       choices: makeChoices(`${nf(n)} ${u}`, [`${nf(n)} ${u.replace("³", "²")}`, ...pieges.map((x) => `${nf(x)} ${u}`)]),
       expected: [`${nf(n)} ${u}`],
@@ -464,12 +554,14 @@ function genVolumeLireLettres() {
     `${enLettres(n)} ${UNITES_MOTS[u].replace(" cubes", " carrés")}`,
     ...pieges.filter((x) => x < 1000).map((x) => `${enLettres(x)} ${UNITES_MOTS[u]}`),
   ];
+  const texte = pick([
+    `Sur ${objet}, ${p.nom} lit ${nf(n)} ${u}. Comment se lit ce volume ?`,
+    `Comment lit-on ${nf(n)} ${u} ?`,
+    `${p.nom} doit lire à voix haute : ${nf(n)} ${u}. Que doit-${il(p)} dire ?`,
+  ]);
   return {
-    text: pick([
-      `Sur ${objet}, ${p.nom} lit ${nf(n)} ${u}. Comment se lit ce volume ?`,
-      `Comment lit-on ${nf(n)} ${u} ?`,
-      `${p.nom} doit lire à voix haute : ${nf(n)} ${u}. Que doit-${il(p)} dire ?`,
-    ]),
+    text: texte,
+    canvas: texte.includes(objet) ? dessinObjet(objet) : undefined,
     format: "qcm" as const,
     choices: makeChoices(lettres, leurres),
     expected: [lettres],
@@ -494,6 +586,35 @@ const PAVES: { nom: string; f: boolean; u: string; L: [number, number]; l: [numb
   { nom: "brique de jus", f: true, u: "cm", L: [6, 8], l: [4, 5], h: [9, 12] },
 ];
 const tirerIntervalle = (r: [number, number]) => randomInt(r[0], r[1]);
+/**
+ * 14/11/2026 — Le pavé du texte, ses trois longueurs écrites (jamais le volume, pas de
+ * formule). Le dessin du canvas a des proportions FIXES (face de 140 × 100, plus large
+ * que haute) : on ne l'emploie que si la longueur dépasse la hauteur ; sinon, un pavé de
+ * cubes à l'échelle s'il tient dans le cadre ; sinon rien. `h` peut valoir « ? ».
+ */
+function dessinPave(L: number, l: number, h: number | "?", u: string, hauteurReelle = typeof h === "number" ? h : 0) {
+  if (hauteurReelle < L)
+    return {
+      kind: "solide_3d" as const,
+      solide: "pave_droit" as const,
+      dimensions: { longueur: L, largeur: l, ...(typeof h === "number" ? { hauteur: h } : {}) },
+      labels: { longueur: `${nf(L)} ${u}`, largeur: `${nf(l)} ${u}`, hauteur: typeof h === "number" ? `${nf(h)} ${u}` : "?" },
+      highlight: { base: false },
+      display: { showLabels: false, showDimensions: true, showFormulaHint: false },
+    };
+  return typeof h === "number" && L <= 6 && l <= 5 && h <= 5 ? cubesCadres(paveDeCubes(L, l, h)) : undefined;
+}
+/** Un cube, son arête écrite (« 4 cm », « 1 dm » ou « ? »), sans volume ni formule. */
+function dessinCube(arete: string, cote?: number) {
+  return {
+    kind: "solide_3d" as const,
+    solide: "cube" as const,
+    ...(cote ? { dimensions: { cote } } : {}),
+    labels: { cote: arete },
+    highlight: { base: false },
+    display: { showLabels: false, showDimensions: true, showFormulaHint: false },
+  };
+}
 const leMot = (o: { nom: string; f: boolean }) => (/^[aeiou]/.test(o.nom) ? `l’${o.nom}` : `${o.f ? "la" : "le"} ${o.nom}`);
 const maj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -523,6 +644,7 @@ function genVolumePave() {
     explanation: expl(
       `Volume d’un pavé droit = longueur × largeur × hauteur. Une couche contient ${L} × ${l} = ${L * l} cubes de 1 ${u}³ ; il y a ${h} couches : ${L * l} × ${h} = ${nf(V)}. ${parCubes ? `Il faut ${nf(V)} cubes.` : `Le volume est ${nf(V)} ${u}³.`}`
     ),
+    canvas: dessinPave(L, l, h, u),
   };
 }
 
@@ -545,6 +667,7 @@ function genVolumeDefiQcm() {
       expected: [`${V} ${u}³`],
       comparator: "mcq_exact" as const,
       explanation: expl(`Le cube est un pavé dont les trois dimensions valent ${a} ${u} : ${a} × ${a} × ${a} = ${V} ${u}³. Ce n’est ni ${a} × 3, ni ${a} × ${a}.`),
+      canvas: dessinCube(`${a} ${u}`, a), // 14/11/2026 : l'arête écrite, pas le volume
     };
   }
   // Deux boîtes : le volume se calcule, il ne se devine pas.
@@ -586,6 +709,7 @@ function genVolumeDefiInverse() {
       expected: avecUnite(a, u),
       comparator: "number_equal" as const,
       explanation: expl(`On cherche le nombre qui, multiplié trois fois par lui-même, donne ${nf(V)} : ${a} × ${a} × ${a} = ${nf(V)}. L’arête mesure ${a} ${u}.`),
+      canvas: dessinCube("?"), // 14/11/2026 : l'arête cherchée, marquée « ? »
     };
   }
   // Un aquarium (ou un bac) au fond connu : la hauteur d'eau = volume ÷ aire du fond.
@@ -609,6 +733,8 @@ function genVolumeDefiInverse() {
     expected: avecUnite(h, o.u),
     comparator: "number_equal" as const,
     explanation: expl(`Une couche de 1 ${o.u} de haut contient ${L} × ${l} = ${L * l} ${o.u}³. Combien de couches pour ${V} ${o.u}³ ? ${V} ÷ ${L * l} = ${h}. La hauteur est ${h} ${o.u}.`),
+    // 14/11/2026 : le fond écrit, la hauteur cherchée en « ? » (seulement si le dessin, plus large que haut, ne ment pas).
+    canvas: dessinPave(Math.max(L, l), Math.min(L, l), "?", o.u, h),
   };
 }
 
@@ -628,6 +754,7 @@ function genVolumeUniteSimple() {
   if (Math.random() < 0.5) {
     return {
       text: pick([`Quelle unité choisir pour le volume ${o.de} ?`, `Choisis l’unité du volume ${o.de}.`]),
+      canvas: dessinObjet(o.de), // 14/11/2026 : la forme de l'objet, sans aucune mesure
       format: "qcm" as const,
       choices: shuffle([`${u}³`, `${u}²`, u, autre]),
       expected: [`${u}³`],
@@ -640,6 +767,7 @@ function genVolumeUniteSimple() {
   const N = nf(randomInt(o.min, o.max));
   return {
     text: pick([`Quelle mesure peut être le volume ${o.de} ?`, `Choisis la mesure du volume ${o.de}.`]),
+    canvas: dessinObjet(o.de),
     format: "qcm" as const,
     choices: shuffle([`${N} ${u}³`, `${N} ${u}²`, `${N} ${u}`, `${N} ${autre}`]),
     expected: [`${N} ${u}³`],
@@ -671,6 +799,7 @@ function genVolumeGrandeurSimple() {
         : "Faire le tour d’une surface, c’est le périmètre.";
   return {
     text: pick([`Pour ${a.phrase}, que faut-il connaître ?`, `Pour ${a.phrase}, quelle grandeur compte ?`]),
+    canvas: dessinObjet(a.phrase), // 14/11/2026 : l'objet, neutre : il ne désigne pas la grandeur
     format: "qcm" as const,
     choices: shuffle(["le volume", "l’aire", "le périmètre", "la masse"]),
     expected: [a.rep],
@@ -781,6 +910,7 @@ function genVolumeAssemblerSimple() {
     expected: avecUnite(total, u),
     comparator: "number_equal" as const,
     explanation: expl(`Assembler ne change pas le nombre de cubes : on additionne. ${k.join(" + ")} = ${total}. Le volume est ${total} ${u}.`),
+    canvas: cubesCadresLargeur((w) => morceaux(k, w), [4, 3, 2, 5]), // 14/11/2026 : les morceaux avant assemblage (rien s'ils ne tiennent pas)
   };
 }
 
@@ -878,8 +1008,7 @@ function genVolumeCompterRangees() {
   const a = randomInt(2, 5);
   const b = randomInt(2, 6);
   const total = a * b;
-  return {
-    text: pick([
+  const text = pick([
       `Le solide a ${a} rangées de ${b} cubes de 1 ${u}. Quel est son volume ?`,
       `${a} rangées de ${b} cubes de 1 ${u}. Calcule le volume.`,
       `Un solide : ${a} étages de ${b} cubes de 1 ${u}. Quel volume ?`,
@@ -888,7 +1017,11 @@ function genVolumeCompterRangees() {
       `Multiplie : ${a} rangées de ${b} cubes de 1 ${u}. Écris le volume.`,
       `Écris le volume de ${a} étages de ${b} cubes de 1 ${u}.`,
       `Quel volume font ${a} rangées de ${b} cubes de 1 ${u} ?`,
-    ]),
+    ]);
+  return {
+    text,
+    // 14/11/2026 : des rangées posées à plat, ou des étages / couches empilés — comme le dit le texte.
+    canvas: cubesCadres(/rangées/.test(text) ? paveDeCubes(b, a, 1) : mur(a * b, b)),
     format: "short" as const,
     expected: avecUnite(total, u),
     comparator: "number_equal" as const,
@@ -915,6 +1048,7 @@ function genVolumeCompterNombre() {
     expected: avecUnite(n, u),
     comparator: "number_equal" as const,
     explanation: expl(`Chaque cube a un volume de 1 ${u}. ${n} cubes font ${n} ${u}.`),
+    canvas: cubesCadres(mur(n, 5)), // 14/11/2026 : les ${n} cubes du texte
   };
 }
 
@@ -992,6 +1126,7 @@ function genVolumeAssemblerManque() {
     expected: avecUnite(t - a, u),
     comparator: "number_equal" as const,
     explanation: expl(`Les deux morceaux font ${T} ensemble : ${t} − ${a} = ${t - a}. L’autre morceau fait ${t - a} ${u}.`),
+    canvas: cubesCadresLargeur((w) => mur(a, w), [5, 6, 7, 8, 9], 4), // 14/11/2026 : le morceau CONNU seul, en cubes de 1
   };
 }
 
@@ -1016,6 +1151,8 @@ function genVolumeAssemblerPartage() {
     expected: avecUnite(v, u),
     comparator: "number_equal" as const,
     explanation: expl(`Les morceaux sont égaux, on partage : ${n * v} ÷ ${n} = ${v}. Un morceau fait ${v} ${u}.`),
+    // 14/11/2026 : le solide ENTIER en cubes de 1, en rangées dont la longueur n'est ni n ni v (ni leur double) : le dessin ne fait pas le partage.
+    canvas: cubesCadresLargeur((w) => mur(n * v, w), [4, 5, 6, 7, 8, 9].filter((w) => ![n, v, 2 * n, 2 * v].includes(w)), 4),
   };
 }
 
@@ -1041,6 +1178,7 @@ function genVolumeAssemblerAjout() {
     expected: avecUnite(a + b, u),
     comparator: "number_equal" as const,
     explanation: expl(`Assembler, c’est additionner les volumes : ${a} + ${b} = ${a + b}. Le volume est ${a + b} ${u}.`),
+    canvas: cubesCadresLargeur((w) => morceaux([a, b], w), [5, 4, 6]), // 14/11/2026 : les deux solides en cubes de 1 (rien s'ils ne tiennent pas)
   };
 }
 
@@ -1065,6 +1203,7 @@ function genVolumeAssemblerFois() {
     expected: avecUnite(n * v, u),
     comparator: "number_equal" as const,
     explanation: expl(`${n} blocs identiques : ${n} × ${v} = ${n * v}. Le volume est ${n * v} ${u}.`),
+    canvas: cubesCadres(mur(v, Math.min(v, 3))), // 14/11/2026 : UN bloc, en cubes de 1 ; la multiplication reste à faire
   };
 }
 
@@ -1090,6 +1229,7 @@ function genVolumeAssemblerForme() {
     expected: [V],
     comparator: "mcq_exact" as const,
     explanation: expl(`Le nombre de cubes ne change pas : la forme change, le volume reste ${V}.`),
+    canvas: cubesCadresLargeur((w) => mur(v, w), [6, 7, 8, 9, 5], 4), // 14/11/2026 : le solide de départ (rien s'il ne tient pas)
   };
 }
 
@@ -1144,6 +1284,8 @@ function genVolumeComparerEcart() {
     expected: avecUnite(hi - lo, u),
     comparator: "number_equal" as const,
     explanation: expl(`On soustrait le plus petit du plus grand : ${hi} − ${lo} = ${hi - lo}. L’écart est ${hi - lo} ${u}.`),
+    // 14/11/2026 : les deux solides en cubes de 1, le plus petit à gauche (rien s'ils ne tiennent pas).
+    canvas: cubesCadresLargeur((w) => morceaux([lo, hi], w), [5, 4, 6]),
   };
 }
 
@@ -1370,6 +1512,7 @@ function genVolumeLireEnCubes() {
     expected: avecUnite(n, "cubes"),
     comparator: "number_equal" as const,
     explanation: expl(`Un cube de 1 ${u} compte pour 1. ${N} correspond donc à ${n} cubes.`),
+    canvas: dessinCube(`1 ${u.replace("³", "")}`, 1), // 14/11/2026 : le cube unité, son arête de 1
   };
 }
 
@@ -1444,7 +1587,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_unite",
     difficulty: 1,
     theme: "neutral",
-    text: "Quelle unité est adaptée pour mesurer le volume d’un aquarium ?",
+    canvas: dessinObjet("aquarium"), text: "Quelle unité est adaptée pour mesurer le volume d’un aquarium ?",
     format: "qcm",
     choices: ["cm", "cm²", "cm³", "kg"],
     expected: ["cm³"],
@@ -1537,7 +1680,7 @@ export const volumesBank: TutorBankItemV4[] = [
     // 03/11/2026 : un lieu = un contexte → ★3 (règle 6e).
     difficulty: 3,
     theme: "reunion",
-    text: "Pour mesurer le volume d’un grand bac à poissons à La Réunion, quelle unité peut-on utiliser ?",
+    canvas: dessinObjet("bac"), text: "Pour mesurer le volume d’un grand bac à poissons à La Réunion, quelle unité peut-on utiliser ?",
     format: "qcm",
     choices: ["m", "m²", "m³", "cm"],
     expected: ["m³"],
@@ -1588,7 +1731,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_compter",
     difficulty: 2,
     theme: "neutral",
-    text: "Un empilement contient 10 cubes unités. Quel est son volume ?",
+    canvas: cubesCadres(mur(10, 5)), text: "Un empilement contient 10 cubes unités. Quel est son volume ?",
     format: "short",
     expected: ["10"],
     comparator: "number_equal",
@@ -1610,7 +1753,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_compter",
     difficulty: 3,
     theme: "neutral",
-    text: "Un pavé est formé de 2 rangées de 4 cubes. Quel est son volume en cubes unités ?",
+    canvas: cubesCadres(paveDeCubes(4, 2, 1)), text: "Un pavé est formé de 2 rangées de 4 cubes. Quel est son volume en cubes unités ?",
     format: "short",
     expected: ["8"],
     comparator: "number_equal",
@@ -1632,7 +1775,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_compter",
     difficulty: 2,
     theme: "neutral",
-    text: "Un solide contient 12 cubes unités. Son volume vaut…",
+    canvas: cubesCadres(mur(12, 4)), text: "Un solide contient 12 cubes unités. Son volume vaut…",
     format: "qcm",
     choices: ["12", "6", "24", "3"],
     expected: ["12"],
@@ -1655,7 +1798,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_compter",
     difficulty: 3,
     theme: "neutral",
-    text: "Un pavé est formé de 3 couches de 5 cubes chacune. Quel est son volume ?",
+    canvas: cubesCadres(mur(15, 5)), text: "Un pavé est formé de 3 couches de 5 cubes chacune. Quel est son volume ?",
     format: "qcm",
     choices: ["8", "10", "15", "20"],
     expected: ["15"],
@@ -1750,7 +1893,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Un solide A contient 14 cubes. Un solide B contient 12 cubes. Lequel a le plus grand volume ?",
+    canvas: cubesCadresLargeur((w) => morceaux([14, 12], w), [5, 4, 6]), text: "Un solide A contient 14 cubes. Un solide B contient 12 cubes. Lequel a le plus grand volume ?",
     format: "qcm",
     choices: ["A", "B", "Ils sont égaux", "On ne peut pas savoir"],
     expected: ["A"],
@@ -1799,7 +1942,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_assemblage",
     difficulty: 3,
     theme: "neutral",
-    text: "On assemble deux solides de 4 cubes et 3 cubes. Quel est le volume total ?",
+    canvas: cubesCadres(morceaux([4, 3])), text: "On assemble deux solides de 4 cubes et 3 cubes. Quel est le volume total ?",
     format: "short",
     expected: ["7"],
     comparator: "number_equal",
@@ -1821,7 +1964,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_assemblage",
     difficulty: 3,
     theme: "neutral",
-    text: "Un solide de 6 cubes est collé à un solide de 5 cubes. Quel est le volume total ?",
+    canvas: cubesCadresLargeur((w) => morceaux([6, 5], w), [3, 4]), text: "Un solide de 6 cubes est collé à un solide de 5 cubes. Quel est le volume total ?",
     format: "short",
     expected: ["11"],
     comparator: "number_equal",
@@ -1843,7 +1986,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_assemblage",
     difficulty: 3,
     theme: "neutral",
-    text: "On assemble 8 cubes et 4 cubes. Le volume total est…",
+    canvas: cubesCadres(morceaux([8, 4])), text: "On assemble 8 cubes et 4 cubes. Le volume total est…",
     format: "qcm",
     choices: ["4", "8", "12", "16"],
     expected: ["12"],
@@ -1866,7 +2009,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_assemblage",
     difficulty: 4,
     theme: "neutral",
-    text: "Un solide A de 10 cubes est coupé en deux morceaux de 4 cubes et 6 cubes. Si on réassemble les deux morceaux, quel volume retrouve-t-on ?",
+    canvas: cubesCadres(morceaux([4, 6], 3)), text: "Un solide A de 10 cubes est coupé en deux morceaux de 4 cubes et 6 cubes. Si on réassemble les deux morceaux, quel volume retrouve-t-on ?",
     format: "qcm",
     choices: ["4", "6", "10", "14"],
     expected: ["10"],
@@ -1915,7 +2058,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_lire",
     difficulty: 2,
     theme: "neutral",
-    text: "Un solide fait 24 cm³. Combien de cubes de 1 cm³ contient-il ?",
+    canvas: dessinCube("1 cm", 1), text: "Un solide fait 24 cm³. Combien de cubes de 1 cm³ contient-il ?",
     format: "short",
     expected: ["24 cubes"],
     comparator: "number_equal",
@@ -1983,7 +2126,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_lire",
     difficulty: 3,
     theme: "reunion",
-    text: "Un bac de culture a un volume de 30 cm³. Combien de cubes unités cela représente-t-il ?",
+    canvas: dessinCube("1 cm", 1), text: "Un bac de culture a un volume de 30 cm³. Combien de cubes unités cela représente-t-il ?",
     format: "short",
     expected: ["30 cubes"],
     comparator: "number_equal",
@@ -2414,7 +2557,7 @@ export const volumesBank: TutorBankItemV4[] = [
 
   // ===== TOP-UP — VOLUME_UNITE =====
   { kind: "fixed", id: "volume_unite_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_unite", difficulty: 1, theme: "neutral",
-    text: "Quelle unité est adaptée pour mesurer le volume d’une piscine ?", format: "qcm", choices: ["m³", "m²", "m", "kg"], expected: ["m³"], comparator: "mcq_exact",
+    canvas: dessinObjet("piscine"), text: "Quelle unité est adaptée pour mesurer le volume d’une piscine ?", format: "qcm", choices: ["m³", "m²", "m", "kg"], expected: ["m³"], comparator: "mcq_exact",
     hint: "Une grande place occupée en 3 dimensions.", explanation: expl("Une piscine occupe un grand espace en trois dimensions. On utilise une unité cube adaptée aux grandes tailles : le mètre cube (m³)."), tags: ["volume_solide", "unite", "qcm"] },
   { kind: "fixed", id: "volume_unite_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_unite", difficulty: 2, theme: "neutral",
     text: "Un volume se mesure avec des unités...", format: "qcm", choices: ["cubes", "carrées", "de longueur", "de masse"], expected: ["cubes"], comparator: "mcq_exact",
@@ -2428,49 +2571,49 @@ export const volumesBank: TutorBankItemV4[] = [
     text: "Dans l’écriture 25 cm³, quel est le volume ?", format: "short", expected: ["25 cm³"], comparator: "number_equal",
     hint: "Lis le nombre avant l’unité.", explanation: expl("Dans 25 cm³, le nombre 25 indique la quantité de volume. Le volume vaut 25 cm³."), tags: ["volume_solide", "lire"] },
   { kind: "fixed", id: "volume_lire_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_lire", difficulty: 1, theme: "neutral",
-    text: "Un cube a 1 cm de côté. Quel est son volume ?", format: "short", expected: ["1 cm³"], comparator: "number_equal",
+    canvas: dessinCube("1 cm", 1), text: "Un cube a 1 cm de côté. Quel est son volume ?", format: "short", expected: ["1 cm³"], comparator: "number_equal",
     hint: "C’est le cube unité.", explanation: expl("Un cube de 1 cm de côté est le cube unité : son volume est 1 cm³."), tags: ["volume_solide", "lire", "cube_unite"] },
   { kind: "fixed", id: "volume_lire_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_lire", difficulty: 2, theme: "neutral",
-    text: "Un solide est formé de 14 cubes unités. Quel est son volume ?", format: "short", expected: ["14"], comparator: "number_equal",
+    canvas: cubesCadres(mur(14, 5)), text: "Un solide est formé de 14 cubes unités. Quel est son volume ?", format: "short", expected: ["14"], comparator: "number_equal",
     hint: "Chaque cube vaut 1 cm³.", explanation: expl("Chaque cube unité vaut 1 cm³. Un solide de 14 cubes a donc un volume de 14 cm³."), tags: ["volume_solide", "lire"] },
 
   // ===== TOP-UP — VOLUME_COMPARER =====
   { kind: "fixed", id: "volume_comparer_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 2, theme: "neutral",
-    text: "Solide A : 12 cubes. Solide B : 9 cubes. Quel solide a le plus grand volume ?", format: "qcm", choices: ["le solide A", "le solide B", "ils sont égaux"], expected: ["le solide A"], comparator: "mcq_exact",
+    canvas: cubesCadres(morceaux([12, 9])), text: "Solide A : 12 cubes. Solide B : 9 cubes. Quel solide a le plus grand volume ?", format: "qcm", choices: ["le solide A", "le solide B", "ils sont égaux"], expected: ["le solide A"], comparator: "mcq_exact",
     hint: "Compare le nombre de cubes.", explanation: expl("On compte les cubes : A = 12, B = 9. Comme 12 > 9, le solide A a le plus grand volume."), tags: ["volume_solide", "comparer", "qcm"] },
   { kind: "fixed", id: "volume_comparer_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 2, theme: "neutral",
-    text: "Deux solides sont faits chacun de 8 cubes. Ont-ils le même volume ?", format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
+    canvas: cubesCadres([...mur(8, 4), ...mur(8, 2, 5)]), text: "Deux solides sont faits chacun de 8 cubes. Ont-ils le même volume ?", format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
     hint: "Compte les cubes de chacun.", explanation: expl("Les deux solides ont 8 cubes, donc le même volume : 8 cm³. La forme peut être différente, mais le volume est identique."), tags: ["volume_solide", "comparer", "qcm"] },
   { kind: "fixed", id: "volume_comparer_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 2, theme: "neutral",
-    text: "Calcule l’écart entre 15 cubes et 9 cubes.", format: "short", expected: ["6 cubes"], comparator: "number_equal",
+    canvas: cubesCadresLargeur((w) => morceaux([15, 9], w), [5, 4]), text: "Calcule l’écart entre 15 cubes et 9 cubes.", format: "short", expected: ["6 cubes"], comparator: "number_equal",
     hint: "Calcule 15 − 9.", explanation: expl("On calcule l’écart : 15 - 9 = 6. Le premier solide a 6 cubes de plus."), tags: ["volume_solide", "comparer"] },
 
   // ===== TOP-UP — VOLUME_ASSEMBLAGE =====
   { kind: "fixed", id: "volume_assemblage_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 2, theme: "neutral",
-    text: "On assemble 5 cubes et 6 cubes. Combien de cubes en tout ?", format: "short", expected: ["11"], comparator: "number_equal",
+    canvas: cubesCadres(morceaux([5, 6], 3)), text: "On assemble 5 cubes et 6 cubes. Combien de cubes en tout ?", format: "short", expected: ["11"], comparator: "number_equal",
     hint: "Additionne les cubes.", explanation: expl("On additionne les volumes : 5 + 6 = 11 cubes, soit 11 cm³."), tags: ["volume_solide", "assemblage"] },
   { kind: "fixed", id: "volume_assemblage_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 2, theme: "neutral",
-    text: "Un pavé est formé de 2 couches de 6 cubes. Combien de cubes contient-il ?", format: "short", expected: ["12 cubes"], comparator: "number_equal",
+    canvas: cubesCadres(mur(12, 6)), text: "Un pavé est formé de 2 couches de 6 cubes. Combien de cubes contient-il ?", format: "short", expected: ["12 cubes"], comparator: "number_equal",
     hint: "2 × 6.", explanation: expl("Chaque couche a 6 cubes, et il y a 2 couches : 2 × 6 = 12 cubes."), tags: ["volume_solide", "assemblage"] },
   { kind: "fixed", id: "volume_assemblage_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 3, theme: "neutral",
-    text: "Un grand cube est formé de petits cubes : 2 sur chaque arête (2 × 2 × 2). Combien de petits cubes contient-il ?", format: "short", expected: ["8 cubes"], comparator: "number_equal",
+    canvas: cubesCadres(paveDeCubes(2, 2, 2)), text: "Un grand cube est formé de petits cubes : 2 sur chaque arête (2 × 2 × 2). Combien de petits cubes contient-il ?", format: "short", expected: ["8 cubes"], comparator: "number_equal",
     hint: "2 × 2 × 2.", explanation: expl("On multiplie les trois dimensions : 2 × 2 × 2 = 8 petits cubes."), tags: ["volume_solide", "assemblage"] },
   { kind: "fixed", id: "volume_assemblage_topup_4", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 2, theme: "neutral",
-    text: "On empile 3 étages de 4 cubes chacun. Combien de cubes en tout ?", format: "short", expected: ["12 cubes"], comparator: "number_equal",
+    canvas: cubesCadres(mur(12, 4)), text: "On empile 3 étages de 4 cubes chacun. Combien de cubes en tout ?", format: "short", expected: ["12 cubes"], comparator: "number_equal",
     hint: "3 × 4.", explanation: expl("3 étages de 4 cubes : 3 × 4 = 12 cubes."), tags: ["volume_solide", "assemblage"] },
 
   // ===== TOP-UP — VOLUME_DEFI =====
   { kind: "fixed", id: "volume_defi_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 3, theme: "neutral",
-    text: "Défi : quel est le volume (en cm³) d’un pavé droit de dimensions 3 cm × 2 cm × 4 cm ?", format: "short", expected: ["24 cm³"], comparator: "number_equal",
+    canvas: dessinPave(3, 2, 4, "cm"), text: "Défi : quel est le volume (en cm³) d’un pavé droit de dimensions 3 cm × 2 cm × 4 cm ?", format: "short", expected: ["24 cm³"], comparator: "number_equal",
     hint: "Volume = Longueur × largeur × hauteur.", explanation: expl("Le volume d’un pavé droit est Longueur × largeur × hauteur : 3 × 2 × 4 = 24, donc 24 cm³."), tags: ["volume_solide", "defi", "pave"] },
   { kind: "fixed", id: "volume_defi_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 3, theme: "neutral",
-    text: "Défi : quel est le volume (en cm³) d’un cube d’arête 3 cm ?", format: "short", expected: ["27 cm³"], comparator: "number_equal",
+    canvas: dessinCube("3 cm", 3), text: "Défi : quel est le volume (en cm³) d’un cube d’arête 3 cm ?", format: "short", expected: ["27 cm³"], comparator: "number_equal",
     hint: "3 × 3 × 3.", explanation: expl("Le volume d’un cube est arête × arête × arête : 3 × 3 × 3 = 27, donc 27 cm³."), tags: ["volume_solide", "defi", "cube"] },
   { kind: "fixed", id: "volume_defi_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 2, theme: "neutral",
-    text: "Calcule le volume d’un pavé droit de 5 cm × 2 cm × 1 cm.", format: "short", expected: ["10 cm³"], comparator: "number_equal",
+    canvas: dessinPave(5, 2, 1, "cm"), text: "Calcule le volume d’un pavé droit de 5 cm × 2 cm × 1 cm.", format: "short", expected: ["10 cm³"], comparator: "number_equal",
     hint: "5 × 2 × 1.", explanation: expl("Volume = 5 × 2 × 1 = 10, donc 10 cm³."), tags: ["volume_solide", "defi", "pave"] },
   { kind: "fixed", id: "volume_defi_topup_4", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 3, theme: "neutral",
-    text: "Défi : combien de cubes de 1 cm³ faut-il pour remplir entièrement une boîte de 2 cm × 3 cm × 2 cm ?", format: "short", expected: ["12 cubes"], comparator: "number_equal",
+    canvas: dessinPave(3, 2, 2, "cm"), text: "Défi : combien de cubes de 1 cm³ faut-il pour remplir entièrement une boîte de 2 cm × 3 cm × 2 cm ?", format: "short", expected: ["12 cubes"], comparator: "number_equal",
     hint: "Calcule le volume de la boîte.", explanation: expl("Le volume de la boîte est 2 × 3 × 2 = 12 cm³. Il faut donc 12 cubes de 1 cm³ pour la remplir."), tags: ["volume_solide", "defi"] },
 
   // ⭐ 07/11/2026 — les modes neufs de ★1-★2 (voir plus haut).

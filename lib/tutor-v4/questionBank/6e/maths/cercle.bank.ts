@@ -248,6 +248,75 @@ function figureRayonSeul(c: string, r: number, u: "cm" | "m", disque = false) {
 }
 
 /**
+ * ⭐ 14/11/2026 — LA DONNÉE DE L'ÉNONCÉ PORTÉE SUR LA FIGURE : le rayon OU le
+ * diamètre, celui que dit le texte, coté de sa longueur ; points sans nom.
+ * Sans `label`, le segment est tracé sans longueur : c'est celui qu'on cherche
+ * (sa mesure ne s'écrit jamais sur la figure).
+ */
+function figureDonnee(seg: "rayon" | "diametre", label?: string) {
+  const a = randomInt(0, 50);
+  const l = label ? { label } : {};
+  return seg === "rayon"
+    ? figureCercle("_0", [{ id: "_1", angle: a }], [{ kind: "rayon", from: "_0", to: "_1", ...l }])
+    : figureCercle("_0", [{ id: "_1", angle: a + 180 }, { id: "_2", angle: a }], [{ kind: "diametre", from: "_1", to: "_2", ...l }]);
+}
+
+/**
+ * Deux disques côte à côte, À LA MÊME ÉCHELLE, chacun avec son diamètre coté :
+ * on voit que le grand tour va avec le grand diamètre. Canvas `construction`
+ * (le canvas `cercle` ne sait tracer qu'un cercle).
+ */
+function deuxDisques(d1: number, d2: number, u: string) {
+  const [r1, r2] = [d1 / 2, d2 / 2];
+  const x2 = r1 + Math.max(r1, r2) * 0.5 + r2;
+  return {
+    kind: "construction" as const,
+    points: [
+      { id: "O1", x: 0, y: 0, cache: true }, { id: "P1", x: -r1, y: 0, cache: true }, { id: "Q1", x: r1, y: 0, cache: true },
+      { id: "O2", x: x2, y: 0, cache: true }, { id: "P2", x: x2 - r2, y: 0, cache: true }, { id: "Q2", x: x2 + r2, y: 0, cache: true },
+    ],
+    cercles: [{ centre: "O1", rayon: r1 }, { centre: "O2", rayon: r2 }],
+    segments: [{ a: "P1", b: "Q1", texte: `${d1} ${u}` }, { a: "P2", b: "Q2", texte: `${d2} ${u}` }],
+    description: `Deux disques de diamètres ${d1} ${u} et ${d2} ${u}`,
+  };
+}
+
+/**
+ * Deux cercles de centres A et B (rayons a et b, AB = c, À L'ÉCHELLE) : les
+ * longueurs données s'écrivent, celle qu'on cherche jamais. `M` : un point
+ * commun aux deux cercles (il faut |a − b| < c < a + b) ; `rayonA` : un rayon
+ * de A coté, tracé vers le haut ; `AB` : le segment des centres, coté.
+ */
+function deuxCercles(
+  A: string, B: string, a: number, b: number | null, c: number,
+  o: { M?: string; MA?: boolean; MB?: boolean; AB?: boolean; rayonA?: boolean; u?: string },
+) {
+  const u = o.u ?? "cm";
+  const pts: { id: string; x: number; y: number; nom?: string; cache?: boolean }[] = [
+    { id: A, x: 0, y: 0, nom: A },
+    { id: B, x: c, y: 0, nom: B },
+  ];
+  const segs: { a: string; b: string; texte?: string }[] = [];
+  if (o.M && b !== null) {
+    const x = (c * c + a * a - b * b) / (2 * c);
+    pts.push({ id: o.M, x, y: Math.sqrt(Math.max(0, a * a - x * x)), nom: o.M });
+    segs.push({ a: o.M, b: A, ...(o.MA ? { texte: `${a} ${u}` } : {}) }, { a: o.M, b: B, ...(o.MB ? { texte: `${b} ${u}` } : {}) });
+  }
+  if (o.rayonA) {
+    pts.push({ id: "_R", x: a * Math.cos((2 * Math.PI) / 3), y: a * Math.sin((2 * Math.PI) / 3), cache: true });
+    segs.push({ a: A, b: "_R", texte: `${a} ${u}` });
+  }
+  if (o.AB) segs.push({ a: A, b: B, texte: `${c} ${u}` });
+  return {
+    kind: "construction" as const,
+    points: pts,
+    cercles: [{ centre: A, rayon: a }, ...(b !== null ? [{ centre: B, rayon: b }] : [])],
+    segments: segs,
+    description: `Cercles de centres ${A} et ${B}`,
+  };
+}
+
+/**
  * Le périmètre d'un disque dont on donne le diamètre (★2) ou le rayon (★3).
  * ★2 nu (03/11/2026, REGLES-6E.md) : « Calcule le périmètre d’un disque de
  * diamètre 6 cm (π ≈ 3,14). » ; les objets ronds et les prénoms passent à ★3.
@@ -314,6 +383,7 @@ function perimetreDepuis(donne: "diametre" | "rayon", ctx = true, objet = false)
         ? `P = π × d = 3,14 × ${d} = ${fr(P)} ${o.u}.`
         : `d = 2 × ${r} = ${d} ${o.u}, puis P = π × d = 3,14 × ${d} = ${fr(P)} ${o.u}.`,
     ),
+    canvas: figureDonnee(donne, `${v} ${o.u}`),
   };
 }
 
@@ -341,9 +411,10 @@ function perimetreNu(): TutorGeneratedQuestionV4 {
     expected: [`${fr(P)} ${u}`, fr(P)],
     comparator: "number_equal",
     explanation: expl(`P = π × d = 3,14 × ${d} = ${fr(P)} ${u}.`),
-    ...(k === 2
-      ? { canvas: figureCercle("_0", [{ id: A, angle: a + 180 }, { id: B, angle: a }], [{ kind: "diametre", from: A, to: B, label: `${d} ${u}` }]) }
-      : {}),
+    canvas:
+      k === 2
+        ? figureCercle("_0", [{ id: A, angle: a + 180 }, { id: B, angle: a }], [{ kind: "diametre", from: A, to: B, label: `${d} ${u}` }])
+        : figureDonnee("diametre", `${d} ${u}`),
   };
 }
 
@@ -401,6 +472,7 @@ function genRayonVersDiametre(ctx: boolean): TutorGeneratedQuestionV4 {
     expected: [`${2 * r} ${o.u}`, String(2 * r)],
     comparator: "number_equal",
     explanation: expl(`Le diamètre vaut deux rayons : 2 × ${r} = ${2 * r} ${o.u}.`),
+    canvas: figureDonnee("rayon", `${r} ${o.u}`),
   };
 }
 
@@ -457,6 +529,7 @@ function genDiametreVersRayon(ctx: boolean): TutorGeneratedQuestionV4 {
     expected: [`${r} ${o.u}`, String(r)],
     comparator: "number_equal",
     explanation: expl(`Le rayon est la moitié du diamètre : ${d} ÷ 2 = ${r} ${o.u}.`),
+    canvas: figureDonnee("diametre", `${d} ${o.u}`),
   };
 }
 
@@ -603,7 +676,7 @@ const nb = (text: string, n: number, calcul: string, canvas?: unknown): G =>
 const lt = (text: string, justes: string[], calcul: string, canvas?: unknown): G =>
   ({ text, format: "short", expected: justes, comparator: "exact_text", explanation: expl(calcul), ...(canvas ? { canvas } : {}) }) as G;
 const ouiNon = (text: string, oui: boolean, calcul: string, canvas?: unknown) => qc(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
-const vraiFaux = (text: string, vrai: boolean, calcul: string) => qc(text, vrai ? "vrai" : "faux", [vrai ? "faux" : "vrai"], calcul);
+const vraiFaux = (text: string, vrai: boolean, calcul: string, canvas?: unknown) => qc(text, vrai ? "vrai" : "faux", [vrai ? "faux" : "vrai"], calcul, canvas);
 const POSITIONS = ["sur le cercle", "à l'intérieur du disque, mais pas sur le cercle", "à l'extérieur du disque", "au centre du cercle"];
 
 // ----- CERCLE_VOCABULAIRE ★1
@@ -699,23 +772,24 @@ function genVocCalc1(): G {
   const d = 2 * r;
   if (Math.random() < 0.5) {
     const t = pick([`Un rayon mesure ${r} cm. Combien mesure le diamètre ?`, `Rayon : ${r} cm. Quel est le diamètre ?`, `Le rayon vaut ${r} cm. Trouve le diamètre.`, `Rayon de ${r} cm : écris le diamètre.`]);
-    return lg(t, d, "cm", `d = 2 × ${r} = ${d} cm.`);
+    return lg(t, d, "cm", `d = 2 × ${r} = ${d} cm.`, figureDonnee("rayon", `${r} cm`));
   }
   const t = pick([`Un diamètre mesure ${d} cm. Combien mesure le rayon ?`, `Diamètre : ${d} cm. Quel est le rayon ?`, `Le diamètre vaut ${d} cm. Trouve le rayon.`, `Diamètre de ${d} cm : écris le rayon.`]);
-  return lg(t, r, "cm", `r = ${d} ÷ 2 = ${r} cm.`);
+  return lg(t, r, "cm", `r = ${d} ÷ 2 = ${r} cm.`, figureDonnee("diametre", `${d} cm`));
 }
 /** Le compas et la règle. */
 function genVocOutil(): G {
   const n = randomInt(2, 12);
   const cas = randomInt(0, 7);
-  if (cas === 0) return qc("Quel instrument trace un cercle ?", "un compas", ["une équerre", "un rapporteur", "une règle"], "Le compas garde le même écart autour du centre.");
+  if (cas === 0) return qc("Quel instrument trace un cercle ?", "un compas", ["une équerre", "un rapporteur", "une règle"], "Le compas garde le même écart autour du centre.", figureCercle("_0", [], []));
   if (cas === 1) return qc("Où pique-t-on la pointe du compas ?", "au centre", ["sur le cercle", "sur un rayon", "sur une corde"], "On pique la pointe au centre du cercle.");
   if (cas === 2) return qc("L’écart du compas donne quelle longueur ?", "le rayon", ["le diamètre", "le tour", "la corde"], "L’écart du compas est le rayon.");
   if (cas === 3) return qc("Avec quoi mesure-t-on un rayon ?", "une règle graduée", ["un rapporteur", "une équerre", "un crayon"], "Un rayon est une longueur : on la mesure à la règle graduée.");
-  if (cas === 4) return lg(`Compas écarté de ${n} cm. Quel est le rayon ?`, n, "cm", `L’écart du compas est le rayon : ${n} cm.`);
-  if (cas === 5) return lg(`Compas écarté de ${n} cm. Quel est le diamètre ?`, 2 * n, "cm", `L’écart est le rayon, le diamètre vaut 2 × ${n} = ${2 * n} cm.`);
-  if (cas === 6) return lg(`Rayon de ${n} cm : de combien écarter le compas ?`, n, "cm", `L’écart du compas est le rayon : ${n} cm.`);
-  return lg(`Diamètre de ${2 * n} cm : de combien écarter le compas ?`, n, "cm", `L’écart est le rayon : ${2 * n} ÷ 2 = ${n} cm.`);
+  // La longueur donnée sur la figure ; « Compas écarté de 5 cm. Quel est le rayon ? » : le rayon tracé sans longueur.
+  if (cas === 4) return lg(`Compas écarté de ${n} cm. Quel est le rayon ?`, n, "cm", `L’écart du compas est le rayon : ${n} cm.`, figureDonnee("rayon"));
+  if (cas === 5) return lg(`Compas écarté de ${n} cm. Quel est le diamètre ?`, 2 * n, "cm", `L’écart est le rayon, le diamètre vaut 2 × ${n} = ${2 * n} cm.`, figureDonnee("rayon", `${n} cm`));
+  if (cas === 6) return lg(`Rayon de ${n} cm : de combien écarter le compas ?`, n, "cm", `L’écart du compas est le rayon : ${n} cm.`, figureDonnee("rayon"));
+  return lg(`Diamètre de ${2 * n} cm : de combien écarter le compas ?`, n, "cm", `L’écart est le rayon : ${2 * n} ÷ 2 = ${n} cm.`, figureDonnee("diametre", `${2 * n} cm`));
 }
 
 // ----- CERCLE_VOCABULAIRE ★2
@@ -726,13 +800,17 @@ function genVocCorde(): G {
   const possible = Math.random() < 0.5;
   const c = possible ? randomInt(2, d - 1) : d + randomInt(1, 5);
   const pourquoi = `La plus longue corde est le diamètre, ${d} cm : ${c} cm ${possible ? "ne le dépasse pas" : "le dépasse"}.`;
+  // La donnée sur la figure (le rayon ou le diamètre de l’énoncé) ; la corde n’est pas dessinée. « La plus
+  // longue corde mesure 12 cm » reste sans figure : la dessiner en diamètre donnerait la clé.
+  const figR = figureDonnee("rayon", `${r} cm`);
+  const figD = figureDonnee("diametre", `${d} cm`);
   switch (randomInt(0, 7)) {
-    case 0: return ouiNon(`Un cercle a un rayon de ${r} cm. Une corde peut-elle mesurer ${c} cm ?`, possible, pourquoi);
-    case 1: return ouiNon(`Rayon : ${r} cm. Une corde de ${c} cm est-elle possible ?`, possible, pourquoi);
-    case 2: return ouiNon(`Un diamètre mesure ${d} cm. Une corde peut-elle mesurer ${c} cm ?`, possible, pourquoi);
-    case 3: return ouiNon(`Diamètre : ${d} cm. Une corde de ${c} cm est-elle possible ?`, possible, pourquoi);
-    case 4: return lg(`Un cercle a un rayon de ${r} cm. Combien mesure sa plus longue corde ?`, d, "cm", `La plus longue corde est le diamètre : 2 × ${r} = ${d} cm.`);
-    case 5: return lg(`Combien mesure la plus longue corde d’un cercle de rayon ${r} cm ?`, d, "cm", `La plus longue corde est le diamètre : 2 × ${r} = ${d} cm.`);
+    case 0: return ouiNon(`Un cercle a un rayon de ${r} cm. Une corde peut-elle mesurer ${c} cm ?`, possible, pourquoi, figR);
+    case 1: return ouiNon(`Rayon : ${r} cm. Une corde de ${c} cm est-elle possible ?`, possible, pourquoi, figR);
+    case 2: return ouiNon(`Un diamètre mesure ${d} cm. Une corde peut-elle mesurer ${c} cm ?`, possible, pourquoi, figD);
+    case 3: return ouiNon(`Diamètre : ${d} cm. Une corde de ${c} cm est-elle possible ?`, possible, pourquoi, figD);
+    case 4: return lg(`Un cercle a un rayon de ${r} cm. Combien mesure sa plus longue corde ?`, d, "cm", `La plus longue corde est le diamètre : 2 × ${r} = ${d} cm.`, figR);
+    case 5: return lg(`Combien mesure la plus longue corde d’un cercle de rayon ${r} cm ?`, d, "cm", `La plus longue corde est le diamètre : 2 × ${r} = ${d} cm.`, figR);
     case 6: return lg(`La plus longue corde d’un cercle mesure ${d} cm. Quel est son rayon ?`, r, "cm", `La plus longue corde est le diamètre : ${d} ÷ 2 = ${r} cm.`);
     default: return lg(`Quel est le rayon si la plus longue corde mesure ${d} cm ?`, r, "cm", `La plus longue corde est le diamètre : ${d} ÷ 2 = ${r} cm.`);
   }
@@ -791,18 +869,23 @@ function genVocVF2(): G {
   const xD = juste ? d : pick([r, r + 2, 3 * r, 4 * r]);
   const xR = juste ? r : pick([d, d + 2, 2 * d]);
   const dd = `Le diamètre vaut deux rayons : 2 × ${r} = ${d} cm.`;
+  // Sur la figure, seule la longueur SÛRE de l'énoncé (le rayon r ou le diamètre d) ; celle à vérifier n'y est pas.
+  const figR = figureDonnee("rayon", `${r} cm`);
+  const figD = figureDonnee("diametre", `${d} cm`);
   switch (randomInt(0, 7)) {
-    case 0: return vraiFaux(`Vrai ou faux : un rayon de ${r} cm donne un diamètre de ${xD} cm.`, juste, dd);
-    case 1: return vraiFaux(`Vrai ou faux : un diamètre de ${d} cm donne un rayon de ${xR} cm.`, juste, dd);
-    case 2: return ouiNon(`Rayon ${r} cm et diamètre ${xD} cm : est-ce possible ?`, juste, dd);
-    case 3: return ouiNon(`Diamètre ${d} cm et rayon ${xR} cm : est-ce possible ?`, juste, dd);
-    case 4: return ouiNon(`d = 2 × r. Avec r = ${r} cm, a-t-on d = ${xD} cm ?`, juste, dd);
-    case 5: return ouiNon(`r = d ÷ 2. Avec d = ${d} cm, a-t-on r = ${xR} cm ?`, juste, dd);
+    case 0: return vraiFaux(`Vrai ou faux : un rayon de ${r} cm donne un diamètre de ${xD} cm.`, juste, dd, figR);
+    case 1: return vraiFaux(`Vrai ou faux : un diamètre de ${d} cm donne un rayon de ${xR} cm.`, juste, dd, figD);
+    case 2: return ouiNon(`Rayon ${r} cm et diamètre ${xD} cm : est-ce possible ?`, juste, dd, figR);
+    case 3: return ouiNon(`Diamètre ${d} cm et rayon ${xR} cm : est-ce possible ?`, juste, dd, figD);
+    case 4: return ouiNon(`d = 2 × r. Avec r = ${r} cm, a-t-on d = ${xD} cm ?`, juste, dd, figR);
+    case 5: return ouiNon(`r = d ÷ 2. Avec d = ${d} cm, a-t-on r = ${xR} cm ?`, juste, dd, figD);
     case 6: {
       const [A, B] = lettres(2);
-      return ouiNon(`[${A}${B}] est un diamètre de ${d} cm. Le rayon mesure-t-il ${xR} cm ?`, juste, dd);
+      const a = randomInt(0, 50);
+      return ouiNon(`[${A}${B}] est un diamètre de ${d} cm. Le rayon mesure-t-il ${xR} cm ?`, juste, dd,
+        figureCercle("_0", [{ id: A, angle: a + 180 }, { id: B, angle: a }], [{ kind: "diametre", from: A, to: B, label: `${d} cm` }]));
     }
-    default: return ouiNon(`Un cercle : rayon ${r} cm, diamètre ${xD} cm. Est-ce juste ?`, juste, dd);
+    default: return ouiNon(`Un cercle : rayon ${r} cm, diamètre ${xD} cm. Est-ce juste ?`, juste, dd, figR);
   }
 }
 
@@ -860,11 +943,12 @@ function genPropMult1(): G {
   const b = a * k;
   const m = `${b} ÷ ${a} = ${k} : le tour et le diamètre sont multipliés par le même nombre.`;
   const faux = ["il ne change pas", `il augmente de ${b - a} cm`, fois(k + 1)];
+  const fig = deuxDisques(a, b, "cm");
   switch (randomInt(0, 5)) {
-    case 0: return qc(`Le diamètre passe de ${a} cm à ${b} cm. Et le tour ?`, fois(k), faux, m);
-    case 1: return nb(`Diamètre : de ${a} cm à ${b} cm. Par combien multiplier le tour ?`, k, m);
-    case 2: return nb(`De ${a} cm à ${b} cm de diamètre : tour multiplié par ?`, k, m);
-    case 3: return qc(`Un diamètre de ${a} cm devient ${b} cm. Que fait le tour ?`, fois(k), faux, m);
+    case 0: return qc(`Le diamètre passe de ${a} cm à ${b} cm. Et le tour ?`, fois(k), faux, m, fig);
+    case 1: return nb(`Diamètre : de ${a} cm à ${b} cm. Par combien multiplier le tour ?`, k, m, fig);
+    case 2: return nb(`De ${a} cm à ${b} cm de diamètre : tour multiplié par ?`, k, m, fig);
+    case 3: return qc(`Un diamètre de ${a} cm devient ${b} cm. Que fait le tour ?`, fois(k), faux, m, fig);
     case 4: return qc(`Le tour passe de ${fr(a * 3.14)} cm à ${fr(b * 3.14)} cm. Et le diamètre ?`, fois(k), ["il ne change pas", `il augmente de ${fr((b - a) * 3.14)} cm`, fois(k + 1)], `${fr(b * 3.14)} ÷ ${fr(a * 3.14)} = ${k} : le diamètre est multiplié par le même nombre.`);
     default: return nb(`Tour de ${fr(a * 3.14)} cm, puis de ${fr(b * 3.14)} cm : multiplié par ?`, k, `${fr(b * 3.14)} ÷ ${fr(a * 3.14)} = ${k}.`);
   }
@@ -876,11 +960,11 @@ function genPropPi(): G {
   switch (randomInt(0, 7)) {
     case 0: return qc("Tour ÷ diamètre vaut environ combien ?", "3,14", ["2", "1", "6,28"], m);
     case 1: return qc("Comment s’appelle le nombre tour ÷ diamètre ?", "π", ["d", "r", "P"], m);
-    case 2: return qc("Environ combien de diamètres font un tour ?", "environ 3", ["environ 1", "environ 2", "environ 6"], m);
+    case 2: return qc("Environ combien de diamètres font un tour ?", "environ 3", ["environ 1", "environ 2", "environ 6"], m, figureDonnee("diametre"));
     case 3: return qc("Le nombre π vaut environ :", "3,14", ["2", "31,4", "1,14"], m);
     case 4: return ouiNon("Le nombre π change-t-il avec le disque ?", false, m);
-    case 5: return lg(`Un disque a un diamètre de 1 ${u}. Quel est son tour ?`, 3.14, u, `3,14 × 1 = 3,14 ${u}.`);
-    case 6: return lg(`Diamètre 1 ${u} : combien mesure le tour ?`, 3.14, u, `3,14 × 1 = 3,14 ${u}.`);
+    case 5: return lg(`Un disque a un diamètre de 1 ${u}. Quel est son tour ?`, 3.14, u, `3,14 × 1 = 3,14 ${u}.`, figureDonnee("diametre", `1 ${u}`));
+    case 6: return lg(`Diamètre 1 ${u} : combien mesure le tour ?`, 3.14, u, `3,14 × 1 = 3,14 ${u}.`, figureDonnee("diametre", `1 ${u}`));
     default: return qc("Par quel nombre multiplier le diamètre pour obtenir le tour ?", "3,14", ["2", "10", "1"], m);
   }
 }
@@ -929,14 +1013,16 @@ function genPropValeur2(): G {
   const rapport = descend ? `divisé par ${k}` : `multiplié par ${k}`;
   const cTour = `Le diamètre est ${rapport}, donc le tour aussi : ${tc} cm.`;
   const cDiam = `Le tour est ${rapport}, donc le diamètre aussi : ${c} cm.`;
+  // Le disque connu sur la figure : son diamètre, celui de l'énoncé.
+  const fig = figureDonnee("diametre", `${d} cm`);
   switch (randomInt(0, 6)) {
-    case 0: return lg(`Diamètre ${d} cm : tour ${t} cm. Quel est le tour pour diamètre ${c} cm ?`, c * 3.14, "cm", cTour);
-    case 1: return lg(`Un diamètre de ${d} cm donne un tour de ${t} cm. Et ${c} cm ?`, c * 3.14, "cm", cTour);
-    case 2: return lg(`Le tour vaut ${t} cm pour ${d} cm de diamètre. Et pour ${c} cm ?`, c * 3.14, "cm", cTour);
-    case 3: return lg(`Pour ${d} cm de diamètre, le tour fait ${t} cm. Et pour ${c} cm ?`, c * 3.14, "cm", cTour);
-    case 4: return lg(`Diamètre ${d} cm : tour ${t} cm. Quel diamètre pour un tour de ${tc} cm ?`, c, "cm", cDiam);
-    case 5: return lg(`Un tour de ${t} cm pour ${d} cm de diamètre. Quel diamètre pour ${tc} cm ?`, c, "cm", cDiam);
-    default: return lg(`Tour ${t} cm, diamètre ${d} cm. Quel diamètre pour un tour de ${tc} cm ?`, c, "cm", cDiam);
+    case 0: return lg(`Diamètre ${d} cm : tour ${t} cm. Quel est le tour pour diamètre ${c} cm ?`, c * 3.14, "cm", cTour, fig);
+    case 1: return lg(`Un diamètre de ${d} cm donne un tour de ${t} cm. Et ${c} cm ?`, c * 3.14, "cm", cTour, fig);
+    case 2: return lg(`Le tour vaut ${t} cm pour ${d} cm de diamètre. Et pour ${c} cm ?`, c * 3.14, "cm", cTour, fig);
+    case 3: return lg(`Pour ${d} cm de diamètre, le tour fait ${t} cm. Et pour ${c} cm ?`, c * 3.14, "cm", cTour, fig);
+    case 4: return lg(`Diamètre ${d} cm : tour ${t} cm. Quel diamètre pour un tour de ${tc} cm ?`, c, "cm", cDiam, fig);
+    case 5: return lg(`Un tour de ${t} cm pour ${d} cm de diamètre. Quel diamètre pour ${tc} cm ?`, c, "cm", cDiam, fig);
+    default: return lg(`Tour ${t} cm, diamètre ${d} cm. Quel diamètre pour un tour de ${tc} cm ?`, c, "cm", cDiam, fig);
   }
 }
 /** Tour ÷ diamètre, avec les vrais nombres. */
@@ -944,13 +1030,14 @@ function genPropRapport2(): G {
   const d = randomInt(2, 20);
   const t = fr(d * 3.14);
   const m = `${t} ÷ ${d} = 3,14 : c’est le nombre π.`;
+  const fig = figureDonnee("diametre", `${d} cm`);
   switch (randomInt(0, 6)) {
-    case 0: return nb(`Tour ${t} cm, diamètre ${d} cm. Calcule tour ÷ diamètre.`, 3.14, m);
-    case 1: return nb(`Diamètre ${d} cm, tour ${t} cm. Que vaut tour ÷ diamètre ?`, 3.14, m);
-    case 2: return nb(`Tour ÷ diamètre : calcule ${t} ÷ ${d}.`, 3.14, m);
-    case 3: return nb(`Tour ÷ diamètre, avec ${t} cm et ${d} cm : combien ?`, 3.14, m);
-    case 4: return nb(`Un tour de ${t} cm pour ${d} cm de diamètre. Calcule le quotient.`, 3.14, m);
-    case 5: return nb(`Diamètre ${d} cm, tour ${t} cm. Combien de diamètres dans ce tour ?`, 3.14, m);
+    case 0: return nb(`Tour ${t} cm, diamètre ${d} cm. Calcule tour ÷ diamètre.`, 3.14, m, fig);
+    case 1: return nb(`Diamètre ${d} cm, tour ${t} cm. Que vaut tour ÷ diamètre ?`, 3.14, m, fig);
+    case 2: return nb(`Tour ÷ diamètre : calcule ${t} ÷ ${d}.`, 3.14, m, fig);
+    case 3: return nb(`Tour ÷ diamètre, avec ${t} cm et ${d} cm : combien ?`, 3.14, m, fig);
+    case 4: return nb(`Un tour de ${t} cm pour ${d} cm de diamètre. Calcule le quotient.`, 3.14, m, fig);
+    case 5: return nb(`Diamètre ${d} cm, tour ${t} cm. Combien de diamètres dans ce tour ?`, 3.14, m, fig);
     default: return nb("Le tableau donne un diamètre et son tour. Calcule tour ÷ diamètre.", 3.14, m, tableauPlein([d], null));
   }
 }
@@ -961,15 +1048,16 @@ function genPropVerif2(): G {
   const x = juste ? d * 3.14 : d * pick([2, 4, 6.28]);
   const X = fr(x);
   const m = `3,14 × ${d} = ${fr(d * 3.14)} cm${juste ? " : c’est juste" : ` et pas ${X} cm`}.`;
+  const fig = figureDonnee("diametre", `${d} cm`);
   switch (randomInt(0, 7)) {
-    case 0: return ouiNon(`Diamètre ${d} cm, tour ${X} cm. Est-ce possible ?`, juste, m);
-    case 1: return ouiNon(`Un disque de diamètre ${d} cm a un tour de ${X} cm. Est-ce juste ?`, juste, m);
-    case 2: return ouiNon(`Tour de ${X} cm pour ${d} cm de diamètre : est-ce juste ?`, juste, m);
-    case 3: return vraiFaux(`Vrai ou faux : un diamètre de ${d} cm donne un tour de ${X} cm.`, juste, m);
-    case 4: return vraiFaux(`Vrai ou faux : pour ${d} cm de diamètre, le tour fait ${X} cm.`, juste, m);
+    case 0: return ouiNon(`Diamètre ${d} cm, tour ${X} cm. Est-ce possible ?`, juste, m, fig);
+    case 1: return ouiNon(`Un disque de diamètre ${d} cm a un tour de ${X} cm. Est-ce juste ?`, juste, m, fig);
+    case 2: return ouiNon(`Tour de ${X} cm pour ${d} cm de diamètre : est-ce juste ?`, juste, m, fig);
+    case 3: return vraiFaux(`Vrai ou faux : un diamètre de ${d} cm donne un tour de ${X} cm.`, juste, m, fig);
+    case 4: return vraiFaux(`Vrai ou faux : pour ${d} cm de diamètre, le tour fait ${X} cm.`, juste, m, fig);
     case 5: return ouiNon(`Le tour fait ${X} cm. Le diamètre peut-il mesurer ${d} cm ?`, juste, m);
     case 6: return ouiNon(`Ce calcul est-il juste : ${d} × 3,14 = ${X} ?`, juste, m);
-    default: return ouiNon(`Diamètre ${d} cm. Le tour peut-il mesurer ${X} cm ?`, juste, m);
+    default: return ouiNon(`Diamètre ${d} cm. Le tour peut-il mesurer ${X} cm ?`, juste, m, fig);
   }
 }
 /** Le rapport entre deux diamètres ou deux tours. */
@@ -981,14 +1069,15 @@ function genPropFois2(): G {
   const t2 = fr(b * 3.14);
   const mD = `${b} ÷ ${a} = ${k} : le tour est multiplié par ${k}.`;
   const mT = `${t2} ÷ ${t1} = ${k} : le diamètre est multiplié par ${k}.`;
+  const fig = deuxDisques(a, b, "cm");
   switch (randomInt(0, 6)) {
-    case 0: return nb(`Le diamètre passe de ${a} cm à ${b} cm. Par combien le tour est-il multiplié ?`, k, mD);
-    case 1: return nb(`Le diamètre va de ${a} cm à ${b} cm. Le tour est multiplié par ?`, k, mD);
-    case 2: return nb(`Deux diamètres : ${a} cm et ${b} cm. Le grand tour vaut combien de petits tours ?`, k, mD);
+    case 0: return nb(`Le diamètre passe de ${a} cm à ${b} cm. Par combien le tour est-il multiplié ?`, k, mD, fig);
+    case 1: return nb(`Le diamètre va de ${a} cm à ${b} cm. Le tour est multiplié par ?`, k, mD, fig);
+    case 2: return nb(`Deux diamètres : ${a} cm et ${b} cm. Le grand tour vaut combien de petits tours ?`, k, mD, fig);
     case 3: return nb(`Le tour passe de ${t1} cm à ${t2} cm. Par combien le diamètre est-il multiplié ?`, k, mT);
     case 4: return nb(`Le tour va de ${t1} cm à ${t2} cm. Le diamètre est multiplié par ?`, k, mT);
     case 5: return nb(`Un tour fait ${t2} cm, un autre ${t1} cm. Combien de fois plus grand ?`, k, mT);
-    default: return qc(`Le diamètre de ${a} cm devient ${b} cm. Que fait le tour ?`, fois(k), ["il ne change pas", `il augmente de ${b - a} cm`, fois(k + 1)], mD);
+    default: return qc(`Le diamètre de ${a} cm devient ${b} cm. Que fait le tour ?`, fois(k), ["il ne change pas", `il augmente de ${b - a} cm`, fois(k + 1)], mD, fig);
   }
 }
 /** Une colonne fausse dans le tableau. */
@@ -1057,9 +1146,10 @@ function genPeriCalculChoisi(): G {
     `Choisis le calcul du périmètre, avec ${unUn} de ${v} cm.`,
     `Un disque a ${unUn} de ${v} cm. Quel calcul convient ?`,
   ]);
+  const fig = figureDonnee(rayon ? "rayon" : "diametre", `${v} cm`);
   return rayon
-    ? qc(t, `2 × 3,14 × ${v}`, [`3,14 × ${v}`, `2 + 3,14 + ${v}`, `${v} × ${v}`], `Avec le rayon : P = 2 × π × r = 2 × 3,14 × ${v}.`)
-    : qc(t, `3,14 × ${v}`, [`3,14 + ${v}`, `${v} × ${v}`, `2 × ${v}`], `Avec le diamètre : P = π × d = 3,14 × ${v}.`);
+    ? qc(t, `2 × 3,14 × ${v}`, [`3,14 × ${v}`, `2 + 3,14 + ${v}`, `${v} × ${v}`], `Avec le rayon : P = 2 × π × r = 2 × 3,14 × ${v}.`, fig)
+    : qc(t, `3,14 × ${v}`, [`3,14 + ${v}`, `${v} × ${v}`, `2 × ${v}`], `Avec le diamètre : P = π × d = 3,14 × ${v}.`, fig);
 }
 /** Un calcul facile : des diamètres ronds. */
 function genPeriCalculSimple(): G {
@@ -1074,7 +1164,7 @@ function genPeriCalculSimple(): G {
     `Combien mesure le tour pour ${d} cm de diamètre (π ≈ 3,14) ?`,
     `Écris le périmètre pour un diamètre de ${d} cm (π ≈ 3,14).`,
   ]);
-  return lg(t, Number((d * 3.14).toFixed(2)), "cm", `P = π × d = 3,14 × ${d} = ${fr(d * 3.14)} cm.`);
+  return lg(t, Number((d * 3.14).toFixed(2)), "cm", `P = π × d = 3,14 × ${d} = ${fr(d * 3.14)} cm.`, figureDonnee("diametre", `${d} cm`));
 }
 /** Quel nombre va dans la formule ? Le geste avant le calcul. */
 function genPeriDansFormule(): G {
@@ -1083,14 +1173,14 @@ function genPeriDansFormule(): G {
   const dbl = `d = 2 × ${r} = ${d} cm.`;
   const mt = `r = ${d} ÷ 2 = ${r} cm.`;
   switch (randomInt(0, 7)) {
-    case 0: return lg(`Le rayon est ${r} cm. Quel diamètre mettre dans P = π × d ?`, d, "cm", dbl);
-    case 1: return lg(`Rayon ${r} cm. Que vaut d dans P = π × d ?`, d, "cm", dbl);
+    case 0: return lg(`Le rayon est ${r} cm. Quel diamètre mettre dans P = π × d ?`, d, "cm", dbl, figureDonnee("rayon", `${r} cm`));
+    case 1: return lg(`Rayon ${r} cm. Que vaut d dans P = π × d ?`, d, "cm", dbl, figureDonnee("rayon", `${r} cm`));
     case 2: return lg(`P = 3,14 × ${d} cm. Quel est le diamètre ?`, d, "cm", `Le diamètre est le nombre multiplié par 3,14 : ${d} cm.`);
     case 3: return lg(`P = 3,14 × ${d} cm. Que vaut d ?`, d, "cm", `Le diamètre est le nombre multiplié par 3,14 : ${d} cm.`);
     case 4: return lg(`P = 3,14 × ${d} cm. Quel est le rayon ?`, r, "cm", mt);
     case 5: return lg(`P = 2 × 3,14 × ${r} cm. Quel est le rayon ?`, r, "cm", `Dans P = 2 × π × r, le rayon est ${r} cm.`);
     case 6: return lg(`P = 2 × 3,14 × ${r} cm. Quel est le diamètre ?`, d, "cm", dbl);
-    default: return lg(`Avant de calculer P, que vaut d si r = ${r} cm ?`, d, "cm", dbl);
+    default: return lg(`Avant de calculer P, que vaut d si r = ${r} cm ?`, d, "cm", dbl, figureDonnee("rayon", `${r} cm`));
   }
 }
 
@@ -1112,7 +1202,7 @@ function genPeriRayon2(): G {
     `Trouve la longueur du tour : rayon ${r} ${u} (π ≈ 3,14).`,
     `Prends π ≈ 3,14. Calcule le périmètre d’un disque de rayon ${r} ${u}.`,
   ][k];
-  const canvas = k === 5 ? figureCercle(C, [{ id: A, angle: randomInt(0, 60) }], [{ kind: "rayon", from: C, to: A, label: `${r} ${u}` }]) : undefined;
+  const canvas = k === 5 ? figureCercle(C, [{ id: A, angle: randomInt(0, 60) }], [{ kind: "rayon", from: C, to: A, label: `${r} ${u}` }]) : figureDonnee("rayon", `${r} ${u}`);
   return lg(t, Number((d * 3.14).toFixed(2)), u, `d = 2 × ${r} = ${d} ${u}, puis P = 3,14 × ${d} = ${fr(d * 3.14)} ${u}.`, canvas);
 }
 /** La longueur n'est que sur la figure : rayon ou diamètre, à l'élève de voir. */
@@ -1149,7 +1239,9 @@ function genPeriInverse2(): G {
     `Le tour mesure ${P} cm. Combien mesure le ${quoi} (π ≈ 3,14) ?`,
     `Calcule le ${quoi} d’un disque de périmètre ${P} cm (π ≈ 3,14).`,
   ]);
-  return quoi === "diamètre" ? lg(t, d, "cm", m) : lg(t, d / 2, "cm", `${m} Puis r = ${d} ÷ 2 = ${d / 2} cm.`);
+  // Le segment cherché est tracé, sans sa longueur.
+  const fig = figureDonnee(quoi === "diamètre" ? "diametre" : "rayon");
+  return quoi === "diamètre" ? lg(t, d, "cm", m, fig) : lg(t, d / 2, "cm", `${m} Puis r = ${d} ÷ 2 = ${d / 2} cm.`, fig);
 }
 /** Trois disques, donnés par rayon ou diamètre : le tour se compare sans calcul. */
 function genPeriComparer2(): G {
@@ -1172,11 +1264,12 @@ function genPeriErreur2(): G {
   const x = juste ? bonNb : rayon ? v : 2 * v;
   const mot = rayon ? "rayon" : "diamètre";
   const m = rayon ? `Le rayon se double d’abord : P = 3,14 × ${bonNb}.` : `Le diamètre se met tel quel : P = 3,14 × ${bonNb}.`;
+  const fig = figureDonnee(rayon ? "rayon" : "diametre", `${v} cm`);
   switch (randomInt(0, 3)) {
-    case 0: return ouiNon(`${maj(mot)} ${v} cm. On écrit P = 3,14 × ${x}. Est-ce juste ?`, juste, m);
-    case 1: return vraiFaux(`Vrai ou faux : pour un ${mot} de ${v} cm, P = 3,14 × ${x}.`, juste, m);
-    case 2: return ouiNon(`Un disque de ${mot} ${v} cm a pour périmètre 3,14 × ${x}. Juste ?`, juste, m);
-    default: return ouiNon(`${maj(mot)} ${v} cm. Le calcul 3,14 × ${x} donne-t-il le périmètre ?`, juste, m);
+    case 0: return ouiNon(`${maj(mot)} ${v} cm. On écrit P = 3,14 × ${x}. Est-ce juste ?`, juste, m, fig);
+    case 1: return vraiFaux(`Vrai ou faux : pour un ${mot} de ${v} cm, P = 3,14 × ${x}.`, juste, m, fig);
+    case 2: return ouiNon(`Un disque de ${mot} ${v} cm a pour périmètre 3,14 × ${x}. Juste ?`, juste, m, fig);
+    default: return ouiNon(`${maj(mot)} ${v} cm. Le calcul 3,14 × ${x} donne-t-il le périmètre ?`, juste, m, fig);
   }
 }
 /** Un ordre de grandeur : le tour vaut environ 3 diamètres. */
@@ -1193,7 +1286,7 @@ function genPeriEstim2(): G {
   ]);
   const ec = (n: number) => `environ ${n} cm`;
   const faux = rayon ? [ec(3 * v), ec(v * v), ec(v)] : [ec(d), ec(2 * d), ec(d * d)];
-  return qc(t, ec(3 * d), faux, `Le tour vaut un peu plus de 3 diamètres : 3 × ${d} = ${3 * d}, donc environ ${3 * d} cm.`);
+  return qc(t, ec(3 * d), faux, `Le tour vaut un peu plus de 3 diamètres : 3 × ${d} = ${3 * d}, donc environ ${3 * d} cm.`, figureDonnee(rayon ? "rayon" : "diametre", `${v} cm`));
 }
 
 // ----- CERCLE_ENSEMBLE ★2
@@ -1233,7 +1326,21 @@ function genEnsOuiNon2(): G {
     `Cercle de rayon ${r} cm, centre ${O}. ${O}${M} = ${x} cm. ${M} est-il dessus ?`,
   ]);
   const oui = /dedans/.test(t) ? x <= r : /dessus/.test(t) ? x === r : vrai;
-  return ouiNon(t, oui, `On compare ${x} cm au rayon ${r} cm. Le disque contient aussi le cercle, son bord.`);
+  return ouiNon(t, oui, `On compare ${x} cm au rayon ${r} cm. Le disque contient aussi le cercle, son bord.`, figureRayonSeul(O, r, "cm"));
+}
+/**
+ * Un point M posé sur le cercle de centre O, et la donnée de l'énoncé : le rayon
+ * coté vers un autre point (figR), le diamètre coté (figD), ou [OM] coté (figOM).
+ * [OM] n'est coté que quand l'énoncé donne OM ; sinon M est seul sur le cercle.
+ */
+function figuresPointSurCercle(O: string, M: string, r: number) {
+  const a = randomInt(0, 40);
+  const b = a + randomInt(110, 160);
+  return [
+    figureCercle(O, [{ id: "_1", angle: a }, { id: M, angle: b }], [{ kind: "rayon", from: O, to: "_1", label: `${r} cm` }]),
+    figureCercle(O, [{ id: "_1", angle: a + 180 }, { id: "_2", angle: a }, { id: M, angle: b }], [{ kind: "diametre", from: "_1", to: "_2", label: `${2 * r} cm` }]),
+    figureCercle(O, [{ id: M, angle: b }], [{ kind: "rayon", from: O, to: M, label: `${r} cm` }]),
+  ];
 }
 /** Un point SUR le cercle : sa distance au centre est le rayon. */
 function genEnsDistance2(): G {
@@ -1241,15 +1348,16 @@ function genEnsDistance2(): G {
   const d = 2 * r;
   const [O, M] = lettres(2);
   const m = `${M} est sur le cercle : ${O}${M} est un rayon, ${r} cm.`;
+  const [figR, figD, figOM] = figuresPointSurCercle(O, M, r);
   switch (randomInt(0, 7)) {
-    case 0: return lg(`${M} est sur le cercle de centre ${O}, de rayon ${r} cm. Calcule ${O}${M}.`, r, "cm", m);
-    case 1: return lg(`Rayon ${r} cm, centre ${O}. ${M} est sur le cercle. Combien mesure ${O}${M} ?`, r, "cm", m);
-    case 2: return lg(`${M} est sur le cercle de centre ${O}. Son diamètre vaut ${d} cm. Calcule ${O}${M}.`, r, "cm", m);
-    case 3: return lg(`Diamètre ${d} cm, centre ${O}. ${M} est sur le cercle. Combien mesure ${O}${M} ?`, r, "cm", m);
+    case 0: return lg(`${M} est sur le cercle de centre ${O}, de rayon ${r} cm. Calcule ${O}${M}.`, r, "cm", m, figR);
+    case 1: return lg(`Rayon ${r} cm, centre ${O}. ${M} est sur le cercle. Combien mesure ${O}${M} ?`, r, "cm", m, figR);
+    case 2: return lg(`${M} est sur le cercle de centre ${O}. Son diamètre vaut ${d} cm. Calcule ${O}${M}.`, r, "cm", m, figD);
+    case 3: return lg(`Diamètre ${d} cm, centre ${O}. ${M} est sur le cercle. Combien mesure ${O}${M} ?`, r, "cm", m, figD);
     case 4: return lg(`${M} est sur le cercle de centre ${O}. ${O}${M} = ${r} cm. Quel est le rayon ?`, r, "cm", m);
-    case 5: return lg(`${M} est sur le cercle de centre ${O}. ${O}${M} = ${r} cm. Quel est le diamètre ?`, d, "cm", `${m} Le diamètre vaut ${d} cm.`);
+    case 5: return lg(`${M} est sur le cercle de centre ${O}. ${O}${M} = ${r} cm. Quel est le diamètre ?`, d, "cm", `${m} Le diamètre vaut ${d} cm.`, figOM);
     case 6: return lg(`${O}${M} = ${r} cm, et ${M} est sur le cercle de centre ${O}. Trouve le rayon.`, r, "cm", m);
-    default: return lg(`${O}${M} = ${r} cm, et ${M} est sur le cercle de centre ${O}. Trouve le diamètre.`, d, "cm", `${m} Le diamètre vaut ${d} cm.`);
+    default: return lg(`${O}${M} = ${r} cm, et ${M} est sur le cercle de centre ${O}. Trouve le diamètre.`, d, "cm", `${m} Le diamètre vaut ${d} cm.`, figOM);
   }
 }
 /** La figure porte trois points : un dessus, un dedans, un dehors. On lit. */
@@ -1334,11 +1442,12 @@ function genEnsRayon3(): G {
   const q = Math.random() < 0.5;
   const m = `${M} est sur le cercle : ${O}${M} est un rayon, de ${r} cm, et le diamètre vaut ${d} cm.`;
   const Il = maj(il(p));
+  const [figR, figD, figOM] = figuresPointSurCercle(O, M, r);
   switch (randomInt(0, 3)) {
-    case 0: return q ? lg(`${p.nom} place ${M} sur un cercle de centre ${O}. ${Il} mesure ${O}${M} = ${r} cm. Quel est le rayon ?`, r, "cm", m) : lg(`${p.nom} place ${M} sur un cercle de centre ${O}. ${Il} mesure ${O}${M} = ${r} cm. Quel est le diamètre ?`, d, "cm", m);
-    case 1: return q ? lg(`${p.nom} trace un cercle de centre ${O}. ${M} est dessus, et ${O}${M} = ${r} cm. Quel est le rayon ?`, r, "cm", m) : lg(`${p.nom} trace un cercle de centre ${O}. ${M} est dessus, et ${O}${M} = ${r} cm. Quel est le diamètre ?`, d, "cm", m);
-    case 2: return lg(`${p.nom} trace un cercle de centre ${O}, de rayon ${r} cm. ${M} est sur ce cercle. Combien mesure ${O}${M} ?`, r, "cm", m);
-    default: return lg(`${p.nom} trace un cercle de centre ${O}, de diamètre ${d} cm. ${M} est sur ce cercle. Combien mesure ${O}${M} ?`, r, "cm", m);
+    case 0: return q ? lg(`${p.nom} place ${M} sur un cercle de centre ${O}. ${Il} mesure ${O}${M} = ${r} cm. Quel est le rayon ?`, r, "cm", m) : lg(`${p.nom} place ${M} sur un cercle de centre ${O}. ${Il} mesure ${O}${M} = ${r} cm. Quel est le diamètre ?`, d, "cm", m, figOM);
+    case 1: return q ? lg(`${p.nom} trace un cercle de centre ${O}. ${M} est dessus, et ${O}${M} = ${r} cm. Quel est le rayon ?`, r, "cm", m) : lg(`${p.nom} trace un cercle de centre ${O}. ${M} est dessus, et ${O}${M} = ${r} cm. Quel est le diamètre ?`, d, "cm", m, figOM);
+    case 2: return lg(`${p.nom} trace un cercle de centre ${O}, de rayon ${r} cm. ${M} est sur ce cercle. Combien mesure ${O}${M} ?`, r, "cm", m, figR);
+    default: return lg(`${p.nom} trace un cercle de centre ${O}, de diamètre ${d} cm. ${M} est sur ce cercle. Combien mesure ${O}${M} ?`, r, "cm", m, figD);
   }
 }
 /** Trois distances, un rayon : on trie les points. */
@@ -1355,7 +1464,8 @@ function genEnsListe3(): G {
     ["Quel point est à l’intérieur ?", (x) => x < r],
   ]);
   const bon = noms[dist.findIndex(test)];
-  return qc(`${listeD} ${intro} ${q}`, bon, noms.filter((n) => n !== bon), `On compare chaque distance au rayon ${r} cm.`);
+  // Le cercle et son rayon seulement : placer A, B, C trahirait la réponse.
+  return qc(`${listeD} ${intro} ${q}`, bon, noms.filter((n) => n !== bon), `On compare chaque distance au rayon ${r} cm.`, figureRayonSeul(O, r, "cm"));
 }
 /** Quelle distance convient ? La question prise à l'envers. */
 function genEnsChoixDistance3(): G {
@@ -1365,10 +1475,11 @@ function genEnsChoixDistance3(): G {
   const intro = pick([`Le cercle de centre ${O} a pour rayon ${r} cm.`, `${p.nom} trace un cercle de centre ${O}, de rayon ${r} cm.`, `${p.nom} écarte son compas de ${r} cm et pique en ${O}.`]);
   const ec = (x: number) => `${O}${M} = ${x} cm`;
   const m = `On compare la distance au rayon ${r} cm.`;
+  const fig = figureRayonSeul(O, r, "cm");
   return pick<() => G>([
-    () => qc(`${intro} Quelle distance place ${M} sur le cercle ?`, ec(r), [ec(r - 1), ec(r + 1), ec(2 * r)], m),
-    () => qc(`${intro} Quelle distance place ${M} à l’intérieur du disque ?`, ec(randomInt(1, r - 1)), [ec(r), ec(r + 1), ec(2 * r)], m),
-    () => qc(`${intro} Quelle distance place ${M} hors du disque ?`, ec(r + randomInt(2, 4)), [ec(r), ec(r - 1), ec(1)], m),
+    () => qc(`${intro} Quelle distance place ${M} sur le cercle ?`, ec(r), [ec(r - 1), ec(r + 1), ec(2 * r)], m, fig),
+    () => qc(`${intro} Quelle distance place ${M} à l’intérieur du disque ?`, ec(randomInt(1, r - 1)), [ec(r), ec(r + 1), ec(2 * r)], m, fig),
+    () => qc(`${intro} Quelle distance place ${M} hors du disque ?`, ec(r + randomInt(2, 4)), [ec(r), ec(r - 1), ec(1)], m, fig),
   ])();
 }
 /** Le segment décrit en mots : rayon, diamètre ou corde. */
@@ -1384,7 +1495,15 @@ function genEnsCorde3(): G {
     [`${p.nom} relie ${A} et ${B}, deux points du cercle de centre ${O}, sans passer par ${O}. Ce segment est :`, "une corde"],
     [`${p.nom} relie le centre ${O} au point ${A} du cercle. Ce segment est :`, "un rayon"],
   ]);
-  return qc(cas[0], cas[1], choix.filter((c) => c !== cas[1]), "Rayon : du centre au cercle. Diamètre : deux points du cercle, par le centre. Corde : deux points du cercle.");
+  // La figure montre ce que le texte DIT du segment (par le centre ou non) : rien de plus.
+  const a = randomInt(0, 60);
+  const fig =
+    cas[1] === "un rayon"
+      ? figureCercle(O, [{ id: A, angle: a }], [{ kind: "segment", from: O, to: A }])
+      : cas[1] === "un diamètre"
+        ? figureCercle(O, [{ id: A, angle: a + 180 }, { id: B, angle: a }], [{ kind: "segment", from: A, to: B }])
+        : figureCercle(O, [{ id: A, angle: a + 110 }, { id: B, angle: a }], [{ kind: "segment", from: A, to: B }]);
+  return qc(cas[0], cas[1], choix.filter((c) => c !== cas[1]), "Rayon : du centre au cercle. Diamètre : deux points du cercle, par le centre. Corde : deux points du cercle.", fig);
 }
 
 // ⭐ 07/11/2026 — cercle_distance ★5 n'avait qu'un gabarit et un figé : les prénoms
@@ -1433,9 +1552,11 @@ function genDeuxTouche(sansToucher: boolean): G {
         `Un cercle de centre ${B} touche de l’extérieur le cercle de centre ${A}, de rayon ${a} cm. Sachant que ${A}${B} = ${c} cm, trouve le rayon du cercle de centre ${B}.`,
         `Quel est le rayon du cercle de centre ${B}, s’il touche de l’extérieur le cercle de centre ${A} de rayon ${a} cm ? On a ${A}${B} = ${c} cm.`,
       ]);
+  // Le cercle de A, son rayon et AB cotés ; le cercle de B (quand il touche) tracé sans son rayon.
+  const fig = deuxCercles(A, B, a, sansToucher ? null : r, c, { rayonA: true, AB: true });
   return lg(text, v, "cm", sansToucher
     ? `Pour se toucher de l’extérieur, il faudrait ${c} − ${a} = ${r} cm. Sans toucher, le plus grand rayon entier est ${v} cm.`
-    : `Les deux rayons, bout à bout, font la distance entre les centres : ${c} − ${a} = ${v} cm.`);
+    : `Les deux rayons, bout à bout, font la distance entre les centres : ${c} − ${a} = ${v} cm.`, fig);
 }
 function genDeuxCoupent(): G {
   const [A, B] = lettres(2);
@@ -1499,7 +1620,8 @@ function genDeuxSomme(): G {
       `Deux cercles se coupent en ${M} : ${ra} ; ${rb}. Trouve ${M}${A} + ${M}${B}.`,
       `Sans mesurer : ${M} est sur le cercle de ${ra} et sur le cercle de ${rb}. Combien font ${M}${A} + ${M}${B} ?`,
     ]);
-    return lg(text, a + b, "cm", `${M}${A} est un rayon du premier cercle, ${M}${B} un rayon du second : ${a} + ${b} = ${a + b} cm.`);
+    // [MA] et [MB] tracés sans longueur : voir que ce sont des rayons, c'est la question.
+    return lg(text, a + b, "cm", `${M}${A} est un rayon du premier cercle, ${M}${B} un rayon du second : ${a} + ${b} = ${a + b} cm.`, deuxCercles(A, B, a, b, c, { M }));
   }
   const text = pick([
     `${M} est sur le cercle de ${ra}, et sur celui de ${rb}. ${A}${B} = ${c} cm. Calcule le périmètre du triangle ${M}${A}${B}.`,
@@ -1507,7 +1629,7 @@ function genDeuxSomme(): G {
     `${A}${B} = ${c} cm. Le point ${M} appartient au cercle de ${ra} et au cercle de ${rb}. Donne le périmètre de ${M}${A}${B}.`,
     `Le triangle ${M}${A}${B} a son sommet ${M} sur le cercle de ${ra} et sur le cercle de ${rb}. ${A}${B} = ${c} cm. Trouve son périmètre.`,
   ]);
-  return lg(text, a + b + c, "cm", `${M}${A} = ${a} cm et ${M}${B} = ${b} cm sont des rayons : ${a} + ${b} + ${c} = ${a + b + c} cm.`);
+  return lg(text, a + b + c, "cm", `${M}${A} = ${a} cm et ${M}${B} = ${b} cm sont des rayons : ${a} + ${b} + ${c} = ${a + b + c} cm.`, deuxCercles(A, B, a, b, c, { M, AB: true }));
 }
 
 export const cercleBank: TutorBankItemV4[] = [
@@ -2215,6 +2337,7 @@ export const cercleBank: TutorBankItemV4[] = [
           expected: [`${fr(total)} ${o.u}`, fr(total)],
           comparator: "number_equal",
           explanation: expl(`Un tour = le périmètre : 3,14 × ${d} = ${fr(P)} ${o.u}. Pour ${k} tours : ${fr(P)} × ${k} = ${fr(total)} ${o.u}.`),
+          canvas: figureDonnee("diametre", `${d} ${o.u}`),
         };
       }
       // Du tour au diamètre ou au rayon : une division par 3,14 qui tombe juste.
@@ -2233,6 +2356,7 @@ export const cercleBank: TutorBankItemV4[] = [
         expected: [`${r} ${o.u}`, String(r)],
         comparator: "number_equal",
         explanation: expl(`d = P ÷ π = ${fr(P)} ÷ 3,14 = ${d} ${o.u}.${veutRayon ? ` Puis r = d ÷ 2 = ${d / 2} ${o.u}.` : ""}`),
+        canvas: figureDonnee(veutRayon ? "rayon" : "diametre"),
       };
     },
   },
@@ -2296,6 +2420,7 @@ export const cercleBank: TutorBankItemV4[] = [
         expected: [ok ? oui : non],
         comparator: "mcq_exact",
         explanation: expl(`Le tour vaut 3,14 × ${d} = ${fr(P)} cm. Le ruban mesure ${ruban} cm : ${ok ? "c’est plus, il suffit" : "c’est moins, il est trop court"}.`),
+        canvas: figureDonnee("diametre", `${d} cm`),
       };
     },
   },
@@ -2340,6 +2465,7 @@ export const cercleBank: TutorBankItemV4[] = [
           expected: [bon],
           comparator: "mcq_exact",
           explanation: expl(`${fr(faux)} = 3,14 × ${r} : c’est le rayon qui a été multiplié. Le diamètre vaut 2 × ${r} = ${2 * r} cm, donc P = 3,14 × ${2 * r} = ${fr(juste)} cm.`),
+          canvas: figureDonnee("rayon", `${r} cm`),
         };
       }
       if (cas === 1) {
@@ -2657,6 +2783,7 @@ export const cercleBank: TutorBankItemV4[] = [
             x === r ? `c’est égal, ${M} est SUR le cercle — donc aussi dans le disque, qui contient son bord` : x < r ? `c’est plus petit, ${M} est à l’intérieur du disque, pas sur le cercle` : `c’est plus grand, ${M} est à l’extérieur du disque`
           }. La direction ne compte jamais.`,
         ),
+        canvas: figureRayonSeul(O, r, "cm"),
       };
     },
   },
@@ -2929,7 +3056,8 @@ export const cercleBank: TutorBankItemV4[] = [
           choices: shuffle([bon, `sur le cercle de centre ${P} et de rayon ${L} m`, `dans le disque de centre ${P} et de rayon ${2 * L} m`, `dans un carré de côté ${L} m`]),
           expected: [bon],
           comparator: "mcq_exact",
-          // 07/11 : plus de figure ici, le disque colorié donnait la réponse.
+          // 07/11 : le disque colorié donnait la réponse. 14/11 : le cercle seul, corde = rayon, rien de colorié.
+          canvas: figureCercle(P, [{ id: "_1", angle: randomInt(20, 160) }], [{ kind: "rayon", from: P, to: "_1", label: `${L} m` }]),
           explanation: expl(`L'animal va partout où sa distance à ${P} est de ${L} m au plus : corde tendue, il est sur le cercle ; corde détendue, il est à l'intérieur. La zone est le DISQUE de centre ${P} et de rayon ${L} m.`),
         };
       }

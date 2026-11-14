@@ -1,6 +1,7 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS, pick, de, type Prenom } from "./entiers.bank";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import type { ConstructionCanvasData } from "@/lib/tutor-v4/types_canvas";
 
 function shuffle<T>(arr: T[]): T[] {
   return melangeEnPlace([...arr]);
@@ -72,6 +73,116 @@ function phraseConversion(v: number, de_: Unite, vers: Unite) {
   return k > 0
     ? `1 ${de_} = ${f} ${vers}. On multiplie par ${f} : chaque chiffre prend une valeur ${f} fois plus grande. ${L(v, de_)} = ${L(r, vers)}.`
     : `1 ${vers} = ${f} ${de_}. On divise par ${f} : chaque chiffre prend une valeur ${f} fois plus petite. ${L(v, de_)} = ${L(r, vers)}.`;
+}
+
+// ----- 14/11/2026 : LES SEGMENTS DES ÉNONCÉS (canvas `construction`, à l'échelle).
+// ⛔ Le dessin porte les DONNÉES (« 3,5 km »), jamais le résultat : la longueur
+// cherchée est un « ? », une conversion garde la longueur de départ.
+type Morceau = { de: number; a: number; texte?: string; code?: number; pointille?: boolean; couleur?: string; epais?: boolean };
+const BLEU_INCONNU = "#2563eb";
+/** Des rangées de segments posés sur une même règle (abscisses = longueurs dans une même unité). */
+function barres(rangees: Morceau[][], description: string): ConstructionCanvasData {
+  const total = Math.max(...rangees.flat().map((m) => m.a));
+  const ecart = total * 0.3;
+  const tic = total * 0.035;
+  const points: ConstructionCanvasData["points"] = [
+    { id: "haut", x: 0, y: total * 0.12, cache: true },
+    { id: "bas", x: 0, y: -(rangees.length - 1) * ecart - total * 0.12, cache: true },
+  ];
+  const segments: NonNullable<ConstructionCanvasData["segments"]> = [];
+  rangees.forEach((r, i) => {
+    const y = -i * ecart;
+    const bouts = new Set<number>();
+    r.forEach((m, j) => {
+      const [a, b] = [`r${i}m${j}a`, `r${i}m${j}b`];
+      points.push({ id: a, x: m.de, y, cache: true }, { id: b, x: m.a, y, cache: true });
+      segments.push({
+        a, b,
+        ...(m.texte ? { texte: m.texte } : {}),
+        ...(m.code ? { code: m.code } : {}),
+        ...(m.pointille ? { pointille: true } : {}),
+        ...(m.couleur ? { couleur: m.couleur } : {}),
+        epais: m.epais ?? true,
+      });
+      bouts.add(m.de);
+      bouts.add(m.a);
+    });
+    // Un petit trait à chaque bout de morceau, comme sur une règle.
+    [...bouts].forEach((x, k) => {
+      points.push({ id: `r${i}t${k}h`, x, y: y + tic, cache: true }, { id: `r${i}t${k}b`, x, y: y - tic, cache: true });
+      segments.push({ a: `r${i}t${k}h`, b: `r${i}t${k}b` });
+    });
+  });
+  return { kind: "construction", points, segments, description };
+}
+/** Un segment qui porte sa longueur (la donnée de l'énoncé). */
+function segmentCote(texte: string): ConstructionCanvasData {
+  return barres([[{ de: 0, a: 10, texte }]], `Un segment de ${texte}`);
+}
+/** Des morceaux bout à bout ; au-dessus, la longueur totale (« ? » si on la cherche). */
+function barreSomme(vals: number[], textes: string[], totalTexte = "?"): ConstructionCanvasData {
+  let x = 0;
+  const morceaux = vals.map((v, i) => {
+    const m = { de: x, a: x + v, texte: textes[i] };
+    x += v;
+    return m;
+  });
+  return barres([[{ de: 0, a: x, texte: totalTexte, couleur: totalTexte === "?" ? BLEU_INCONNU : undefined }], morceaux], "Des longueurs mises bout à bout");
+}
+/** En haut la longueur de départ ; en bas ce qu'on enlève, puis ce qui reste (« ? »). */
+function barreReste(total: number, coupes: number[], totalTexte: string, coupesTextes: string[]): ConstructionCanvasData {
+  let x = 0;
+  const morceaux: Morceau[] = coupes.map((v, i) => {
+    const m = { de: x, a: x + v, texte: coupesTextes[i], pointille: true };
+    x += v;
+    return m;
+  });
+  morceaux.push({ de: x, a: total, texte: "?", couleur: BLEU_INCONNU });
+  return barres([[{ de: 0, a: total, texte: totalTexte }], morceaux], "Une longueur dont on enlève des morceaux");
+}
+/** n morceaux égaux bout à bout (le premier écrit) ; au-dessus, le total cherché. */
+function barreFois(v: number, n: number, texte: string): ConstructionCanvasData {
+  const morceaux = Array.from({ length: n }, (_, i) => ({ de: i * v, a: (i + 1) * v, ...(i === 0 ? { texte } : {}) }));
+  return barres([[{ de: 0, a: n * v, texte: "?", couleur: BLEU_INCONNU }], morceaux], `${n} longueurs égales bout à bout`);
+}
+/** En haut la longueur à partager ; en bas n parts égales, la première cherchée. */
+function barrePartage(total: number, n: number, totalTexte: string): ConstructionCanvasData {
+  const p = total / n;
+  const morceaux = Array.from({ length: n }, (_, i) => ({ de: i * p, a: (i + 1) * p, ...(i === 0 ? { texte: "?", couleur: BLEU_INCONNU } : {}) }));
+  return barres([[{ de: 0, a: total, texte: totalTexte }], morceaux], `Une longueur partagée en ${n} parts égales`);
+}
+/** Deux longueurs partant du même bord ; l'écart, en pointillés, est cherché. */
+function barreEcart(a: number, b: number, ta: string, tb: string): ConstructionCanvasData {
+  const [g, p] = [Math.max(a, b), Math.min(a, b)];
+  const ecartM: Morceau = { de: p, a: g, texte: "?", pointille: true, couleur: BLEU_INCONNU, epais: false };
+  return barres(
+    [
+      [{ de: 0, a, texte: ta }, ...(a < b ? [ecartM] : [])],
+      [{ de: 0, a: b, texte: tb }, ...(b < a ? [ecartM] : [])],
+    ],
+    "Deux longueurs et leur écart",
+  );
+}
+/** En haut la longueur totale ; en bas un seul morceau, à l'échelle (on ne découpe pas à la place de l'élève). */
+function barreMorceau(total: number, part: number, totalTexte: string, partTexte: string): ConstructionCanvasData {
+  return barres([[{ de: 0, a: total, texte: totalTexte }], [{ de: 0, a: part, texte: partTexte, couleur: BLEU_INCONNU }]], "Une longueur et un morceau");
+}
+/** Deux bornes partant du même bord : « plus de … », « moins de … ». */
+function deuxBornes(lo: number, hi: number, tlo: string, thi: string): ConstructionCanvasData {
+  return barres([[{ de: 0, a: lo, texte: `plus de ${tlo}` }], [{ de: 0, a: hi, texte: `moins de ${thi}` }]], "Deux longueurs : le minimum et le maximum");
+}
+/** Une piste vue de dessus : un tour, sa longueur écrite au milieu. */
+function pisteTour(texte: string): ConstructionCanvasData {
+  return {
+    kind: "construction",
+    points: [
+      { id: "O", x: 0, y: 0, cache: true }, { id: "G", x: -3, y: 0, cache: true }, { id: "D", x: 3, y: 0, cache: true },
+      { id: "S", x: 0, y: -4, nom: "départ" },
+    ],
+    cercles: [{ centre: "O", rayon: 4, fond: "#ecfccb" }, { centre: "O", rayon: 3.2, fond: "#ffffff", pointille: true }],
+    segments: [{ a: "G", b: "D", texte, sansTrait: true }],
+    description: `Une piste : ${texte}`,
+  };
 }
 
 // ----- MESURER : l'unité adaptée à un objet (★1), une mesure vraisemblable (★2).
@@ -173,6 +284,8 @@ function genUnite(etoile: 1 | 2) {
     const choix = [L(k, pt), ...shuffle(faux).slice(0, 3).map((x) => L(x, pt))];
     return {
       text: `${ouverture ? ouverture + "\n" : ""}${pick([`1 ${g} correspond à…`, `À combien de ${NOM_UNITE[pt]} correspond 1 ${g} ?`, `Choisis la bonne égalité : 1 ${g} = …`])}`,
+      // Le segment porte la donnée (« 1 km »), pas l'égalité cherchée.
+      canvas: segmentCote(`1 ${g}`),
       format: "qcm" as const,
       choices: shuffle(choix),
       expected: [L(k, pt)],
@@ -189,6 +302,7 @@ function genUnite(etoile: 1 | 2) {
   ]);
   return {
     text: `${ouverture ? ouverture + "\n" : ""}${question}`,
+    canvas: segmentCote(`1 ${g}`),
     format: "short" as const,
     expected: attendu(k, pt),
     comparator: "number_equal" as const,
@@ -275,10 +389,13 @@ function genConvertir(etoile: 2 | 3, qcm = false) {
         `Un segment mesure ${l}. Combien cela fait-il en ${NOM_UNITE[t]} ?`,
       ]);
   const explication = expl(phraseConversion(v, c.u, t));
+  // Le segment porte la longueur de départ, jamais la longueur convertie.
+  const canvas = segmentCote(l);
   if (qcm) {
     const faux = [r * 10, r / 10, r * 100, r / 100].map(arrondi).filter((x) => arrondi(x * 100) === Math.round(x * 100) && x !== r);
     return {
       text,
+      canvas,
       format: "qcm" as const,
       choices: shuffle([L(r, t), ...shuffle(faux).slice(0, 3).map((x) => L(x, t))]),
       expected: [L(r, t)],
@@ -286,7 +403,7 @@ function genConvertir(etoile: 2 | 3, qcm = false) {
       explanation: explication,
     };
   }
-  return { text, format: "short" as const, expected: attendu(r, t), comparator: "number_equal" as const, explanation: explication };
+  return { text, canvas, format: "short" as const, expected: attendu(r, t), comparator: "number_equal" as const, explanation: explication };
 }
 
 // ----- COMPARER : deux longueurs dans deux unités ; on convertit avant de comparer.
@@ -530,7 +647,15 @@ function genProbleme(etoile: 3 | 4) {
     }
     const question = pick(c.questions)(p, q);
     const consigneUnite = enGrande ? `\nDonne la réponse en ${NOM_UNITE[c.base]}.` : "";
+    // Le schéma de l'énoncé, à l'échelle (toutes les longueurs en unité de base) ; la réponse est un « ? ».
+    const canvas =
+      c.fam === "somme" ? barreSomme(vals, ecrits)
+      : c.fam === "reste" ? barreReste(vals[0], vals.slice(1), ecrits[0], ecrits.slice(1))
+      : c.fam === "fois" ? barreFois(vals[0], n, ecrits[0])
+      : c.fam === "partage" ? barrePartage(vals[0], n, ecrits[0])
+      : barreEcart(vals[0], vals[1], ecrits[0], ecrits[1]);
     return {
+      canvas,
       text: `${c.phrase(p, q, ecrits, n)}\n${question}${consigneUnite}`,
       format: "short" as const,
       expected: attendu(r, c.base),
@@ -571,6 +696,7 @@ function genDefiDeuxUnites() {
   const t: Unite = versBase ? c.base : c.grande;
   const r = versBase ? total : total / f;
   return {
+    canvas: segmentCote(`${L(g, c.grande)} ${L(b, c.base)}`),
     text: `${defi(pick([
       (l: string) => `Une longueur mesure ${l}.`,
       (l: string) => `Un segment mesure ${l}.`,
@@ -609,6 +735,7 @@ function genDefiMorceaux() {
     const total = part * n;
     if (decimalesDe(total / f) > 2 || total / f < 0.5 || total / f > 20) continue;
     return {
+      canvas: barreMorceau(total, part, L(total / f, c.grande), L(part, c.base)),
       text: defi(c.phrase(p, L(total / f, c.grande), L(part, c.base))),
       format: "short" as const,
       expected: [`${n} ${c.mot}`],
@@ -646,6 +773,7 @@ function genDefiEncadrement() {
     const choix = [ecrire(dedans), ...[...dehors].map(ecrire)];
     if (new Set(choix).size !== 4) continue;
     return {
+      canvas: deuxBornes(lo, hi, bas, haut),
       text: defi(pick([
         `Pour ${projet}, ${p.nom} cherche ${objet} de plus de ${bas} et de moins de ${haut}.\nQuelle longueur convient ?`,
         `${p.nom} veut ${objet} pour ${projet}. Il faut plus de ${bas} et moins de ${haut}.\nQuelle longueur choisir ?`,
@@ -674,6 +802,7 @@ function genDefiTours() {
       if (decimalesDe(total / 1000) > 2) continue;
       const eux = p.f && q.f ? "à elles deux" : "à eux deux";
       return {
+        canvas: pisteTour(`1 tour : ${L(tour, "m")}`),
         text: `Défi : le tour ${lieu} fait ${L(tour, "m")}. ${p.nom} fait ${n} tours et ${q.nom} fait ${m} tours.\nQuelle distance ont-${p.f && q.f ? "elles" : "ils"} parcourue ${eux} ?\nDonne la réponse en kilomètres.`,
         format: "short" as const,
         expected: attendu(total / 1000, "km"),
@@ -685,6 +814,7 @@ function genDefiTours() {
     const reste = objectif * 1000 - n * tour;
     if (reste <= 0) continue;
     return {
+      canvas: pisteTour(`1 tour : ${L(tour, "m")}`),
       text: `Défi : ${p.nom} veut parcourir ${L(objectif, "km")}. Le tour ${lieu} fait ${L(tour, "m")}. ${il(p) === "elle" ? "Elle" : "Il"} a déjà fait ${n} tours.\nQuelle distance lui reste-t-il à parcourir ?\nDonne la réponse en mètres.`,
       format: "short" as const,
       expected: attendu(reste, "m"),
@@ -989,7 +1119,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_convertir",
     difficulty: 2,
     theme: "neutral",
-    text: "Convertis 2 m en cm.",
+    text: "Convertis 2 m en cm.", canvas: segmentCote("2 m"),
     format: "short",
     expected: ["200"],
     comparator: "number_equal",
@@ -1011,7 +1141,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_convertir",
     difficulty: 2,
     theme: "neutral",
-    text: "Convertis 300 cm en m.",
+    text: "Convertis 300 cm en m.", canvas: segmentCote("300 cm"),
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
@@ -1033,7 +1163,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_convertir",
     difficulty: 2,
     theme: "neutral",
-    text: "Convertis 4 km en m.",
+    text: "Convertis 4 km en m.", canvas: segmentCote("4 km"),
     format: "short",
     expected: ["4000"],
     comparator: "number_equal",
@@ -1055,7 +1185,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_convertir",
     difficulty: 2,
     theme: "neutral",
-    text: "Convertis 70 mm en cm.",
+    text: "Convertis 70 mm en cm.", canvas: segmentCote("70 mm"),
     format: "short",
     expected: ["7"],
     comparator: "number_equal",
@@ -1077,7 +1207,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_convertir",
     difficulty: 3,
     theme: "neutral",
-    text: "Convertis 2,5 m en cm.",
+    text: "Convertis 2,5 m en cm.", canvas: segmentCote("2,5 m"),
     format: "short",
     expected: ["250"],
     comparator: "number_equal",
@@ -1099,7 +1229,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_convertir",
     difficulty: 3,
     theme: "neutral",
-    text: "Convertis 150 cm en m.",
+    text: "Convertis 150 cm en m.", canvas: segmentCote("150 cm"),
     format: "short",
     expected: ["1,5", "1.5"],
     comparator: "number_equal",
@@ -1121,7 +1251,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_convertir",
     difficulty: 2,
     theme: "neutral",
-    text: "Combien font 500 cm en mètres ?",
+    text: "Combien font 500 cm en mètres ?", canvas: segmentCote("500 cm"),
     format: "qcm",
     choices: ["5", "50", "0,5", "5000"],
     expected: ["5"],
@@ -1144,7 +1274,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_convertir",
     difficulty: 2,
     theme: "neutral",
-    text: "Combien font 3 km en mètres ?",
+    text: "Combien font 3 km en mètres ?", canvas: segmentCote("3 km"),
     format: "qcm",
     choices: ["30", "300", "3000", "30000"],
     expected: ["3000"],
@@ -1167,7 +1297,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_convertir",
     difficulty: 3,
     theme: "reunion",
-    text: "Un sentier de randonnée à La Réunion mesure 5 km. Combien cela fait-il en mètres ?",
+    text: "Un sentier de randonnée à La Réunion mesure 5 km. Combien cela fait-il en mètres ?", canvas: segmentCote("5 km"),
     format: "short",
     expected: ["5000"],
     comparator: "number_equal",
@@ -1338,7 +1468,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_probleme",
     difficulty: 3,
     theme: "neutral",
-    text: "Un terrain mesure 10 m de long. On ajoute 5 m. Quelle est la nouvelle longueur ?",
+    text: "Un terrain mesure 10 m de long. On ajoute 5 m. Quelle est la nouvelle longueur ?", canvas: barreSomme([10, 5], ["10 m", "5 m"]),
     format: "short",
     expected: ["15"],
     comparator: "number_equal",
@@ -1360,7 +1490,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_probleme",
     difficulty: 3,
     theme: "neutral",
-    text: "Une corde mesure 2 m. On coupe 50 cm. Quelle longueur reste-t-il en cm ?",
+    text: "Une corde mesure 2 m. On coupe 50 cm. Quelle longueur reste-t-il en cm ?", canvas: barreReste(200, [50], "2 m", ["50 cm"]),
     format: "short",
     expected: ["150"],
     comparator: "number_equal",
@@ -1382,7 +1512,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_probleme",
     difficulty: 3,
     theme: "neutral",
-    text: "Une planche de 3 m est partagée en 3 parts égales. Quelle est la longueur d’une part en m ?",
+    text: "Une planche de 3 m est partagée en 3 parts égales. Quelle est la longueur d’une part en m ?", canvas: barrePartage(3, 3, "3 m"),
     format: "short",
     expected: ["1"],
     comparator: "number_equal",
@@ -1404,7 +1534,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_probleme",
     difficulty: 3,
     theme: "neutral",
-    text: "Un ruban mesure 250 cm. On utilise 100 cm. Quelle longueur reste-t-il ?",
+    text: "Un ruban mesure 250 cm. On utilise 100 cm. Quelle longueur reste-t-il ?", canvas: barreReste(250, [100], "250 cm", ["100 cm"]),
     format: "short",
     expected: ["150"],
     comparator: "number_equal",
@@ -1426,7 +1556,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_probleme",
     difficulty: 3,
     theme: "neutral",
-    text: "Un ruban de 4 m est coupé en 2 morceaux égaux. Quelle est la longueur d’un morceau ?",
+    text: "Un ruban de 4 m est coupé en 2 morceaux égaux. Quelle est la longueur d’un morceau ?", canvas: barrePartage(4, 2, "4 m"),
     format: "qcm",
     choices: ["1 m", "2 m", "3 m", "8 m"],
     expected: ["2 m"],
@@ -1449,7 +1579,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_probleme",
     difficulty: 4,
     theme: "reunion",
-    text: "Un sentier à La Réunion mesure 6 km. Une première partie fait 2 km. Quelle longueur reste-t-il à parcourir en km ?",
+    text: "Un sentier à La Réunion mesure 6 km. Une première partie fait 2 km. Quelle longueur reste-t-il à parcourir en km ?", canvas: barreReste(6, [2], "6 km", ["2 km"]),
     format: "short",
     expected: ["4"],
     comparator: "number_equal",
@@ -1500,7 +1630,7 @@ export const longueursBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     // 08/10/2026 : question rendue précise (Frédéric).
-    text: "Pour comparer 2 m et 150 cm, on écrit 2 m en cm.\nCombien fait 2 m en cm ?",
+    text: "Pour comparer 2 m et 150 cm, on écrit 2 m en cm.\nCombien fait 2 m en cm ?", canvas: segmentCote("2 m"),
     format: "short",
     expected: ["200 cm"],
     comparator: "number_equal",
@@ -1544,7 +1674,7 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "À La Réunion, un trajet fait 2 km le matin et 1500 m l’après-midi. Quelle distance totale a-t-on parcourue en mètres ?",
+    text: "À La Réunion, un trajet fait 2 km le matin et 1500 m l’après-midi. Quelle distance totale a-t-on parcourue en mètres ?", canvas: barreSomme([2000, 1500], ["2 km", "1500 m"]),
     format: "short",
     expected: ["3500"],
     comparator: "number_equal",
@@ -1823,20 +1953,20 @@ export const longueursBank: TutorBankItemV4[] = [
     text: "Combien y a-t-il de millimètres dans 1 mètre ?", format: "short", expected: ["1000", "1 000"], comparator: "number_equal",
     hint: "1 m = 100 cm, et chaque centimètre vaut 10 mm.", explanation: expl("Un mètre contient 100 centimètres, et chaque centimètre contient 10 millimètres : 100 × 10 = 1 000 millimètres."), tags: ["aire_longueur", "mesure", "conversion"] },
   { kind: "fixed", id: "aire_longueur_mesurer_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 2, theme: "neutral",
-    text: "Convertis 3 m en centimètres.", format: "short", expected: ["300"], comparator: "number_equal",
+    text: "Convertis 3 m en centimètres.", canvas: segmentCote("3 m"), format: "short", expected: ["300"], comparator: "number_equal",
     hint: "1 m = 100 cm.", explanation: expl("On multiplie par 100 : 3 × 100 = 300. Donc 3 m = 300 cm."), tags: ["aire_longueur", "mesure", "conversion"] },
 
   // ===== TOP-UP — AIRE_LONGUEUR_DEFI =====
   { kind: "fixed", id: "aire_longueur_defi_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_defi", difficulty: 2, theme: "neutral",
-    text: "Défi : convertis 2 km en mètres.", format: "short", expected: ["2000", "2 000"], comparator: "number_equal",
+    text: "Défi : convertis 2 km en mètres.", canvas: segmentCote("2 km"), format: "short", expected: ["2000", "2 000"], comparator: "number_equal",
     hint: "1 km = 1 000 m.", explanation: expl("On multiplie par 1 000 : 2 × 1 000 = 2 000. Donc 2 km = 2 000 m."), tags: ["aire_longueur", "defi", "conversion"] },
   { kind: "fixed", id: "aire_longueur_defi_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_defi", difficulty: 3, theme: "neutral",
-    text: "Défi : un ruban mesure 1 m. On en coupe 35 cm. Quelle longueur reste-t-il, en cm ?", format: "short", expected: ["65"], comparator: "number_equal",
+    text: "Défi : un ruban mesure 1 m. On en coupe 35 cm. Quelle longueur reste-t-il, en cm ?", canvas: barreReste(100, [35], "1 m", ["35 cm"]), format: "short", expected: ["65"], comparator: "number_equal",
     hint: "Convertis d’abord 1 m en cm.", explanation: expl("1 m = 100 cm. On enlève 35 cm : 100 - 35 = 65. Il reste 65 cm."), tags: ["aire_longueur", "defi", "conversion"] },
   { kind: "fixed", id: "aire_longueur_defi_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_defi", difficulty: 3, theme: "reunion",
-    text: "Défi : Léa marche 1 km puis encore 250 m. Quelle distance a-t-elle parcourue, en mètres ?", format: "short", expected: ["1250", "1 250"], comparator: "number_equal",
+    text: "Défi : Léa marche 1 km puis encore 250 m. Quelle distance a-t-elle parcourue, en mètres ?", canvas: barreSomme([1000, 250], ["1 km", "250 m"]), format: "short", expected: ["1250", "1 250"], comparator: "number_equal",
     hint: "Convertis le km en m avant d’additionner.", explanation: expl("1 km = 1 000 m. On additionne : 1 000 + 250 = 1 250 m."), tags: ["aire_longueur", "defi", "conversion", "reunion"] },
   { kind: "fixed", id: "aire_longueur_defi_topup_4", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_defi", difficulty: 3, theme: "neutral",
-    text: "Défi : combien de centimètres y a-t-il dans 2,5 m ?", format: "short", expected: ["250"], comparator: "number_equal",
+    text: "Défi : combien de centimètres y a-t-il dans 2,5 m ?", canvas: segmentCote("2,5 m"), format: "short", expected: ["250"], comparator: "number_equal",
     hint: "1 m = 100 cm.", explanation: expl("On multiplie par 100 : 2,5 × 100 = 250. Donc 2,5 m = 250 cm."), tags: ["aire_longueur", "defi", "conversion"] },
 ];

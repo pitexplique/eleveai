@@ -30,6 +30,8 @@
 import type { TutorBankItemV4, DroitesCanvasData, CercleCanvasData, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS, de, type Prenom } from "./entiers.bank";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import type { ConstructionCanvasData } from "@/lib/tutor-v4/types_canvas";
+import * as geo from "@/lib/canvas/construction";
 
 function shuffle<T>(arr: T[]): T[] {
   return melangeEnPlace([...arr]);
@@ -176,6 +178,82 @@ function cercleAvecCorde(opts: { centreVisible: boolean; noms?: { o: string; p: 
 }
 
 // =====================================================================
+// ⭐ 14/11/2026 — UNE FIGURE PAR ÉNONCÉ (ses 6e lisent difficilement). Le canvas
+// `construction` (lib/canvas/construction.ts) : coordonnées de maths, cadre ajusté seul.
+// [EF] est posé de (−w ; 0) à (w ; 0) ; la médiatrice est l'axe des ordonnées. Un point
+// donné par ses deux distances est CALCULÉ (ptDistances), jamais placé à l'œil.
+// ⛔ La figure ne porte que les données : la longueur cherchée s'écrit « ? ».
+// =====================================================================
+type Pf = { x: number; y: number };
+/** Le point à la distance a de E (−w ; 0) et b de F (w ; 0), au-dessus (ou au-dessous) de [EF]. */
+function ptDistances(w: number, a: number, b: number, haut = true): Pf {
+  const x = (a * a - b * b) / (4 * w);
+  const y2 = a * a - (x + w) ** 2;
+  return { x, y: (haut ? 1 : -1) * Math.sqrt(Math.max(y2, 0.04 * w * w)) };
+}
+type FigMedPoint = { nom: string; p: Pf; texteE?: string; texteF?: string; code?: number; traits?: boolean };
+function figMed(o: {
+  E: string;
+  F: string;
+  /** La demi-longueur de [EF], dans l'unité des autres données. */
+  w?: number;
+  /** Un point de [EF], à l'abscisse x (0 = le milieu). */
+  K?: { nom: string; x?: number };
+  /** La droite qui coupe [EF] en K (ou au milieu), à `angle` degrés de [K F). */
+  med?: { nom?: string; angle?: number; texteAngle?: string; sansAngle?: boolean; pointille?: boolean };
+  /** Les deux moitiés codées (seulement si K est le milieu). */
+  codes?: boolean;
+  texteEF?: string;
+  texteEK?: string;
+  texteKF?: string;
+  pts?: FigMedPoint[];
+  cercles?: { centre: string; rayon: number }[];
+}): ConstructionCanvasData {
+  const w = o.w ?? 3;
+  const xK = o.K?.x ?? 0;
+  const pts: Record<string, Pf> = { [o.E]: { x: -w, y: 0 }, [o.F]: { x: w, y: 0 } };
+  // K sans nom (nom "") : le point de coupe reste caché, la figure garde ses codages.
+  const idK = o.K?.nom || "_k";
+  const cache: string[] = [];
+  if (o.K || o.med) pts[idK] = { x: xK, y: 0 };
+  if (idK === "_k") cache.push("_k");
+  const segments: NonNullable<ConstructionCanvasData["segments"]> = [];
+  if (o.K) {
+    segments.push(
+      { a: o.E, b: idK, code: o.codes ? 1 : undefined, texte: o.texteEK },
+      { a: idK, b: o.F, code: o.codes ? 1 : undefined, texte: o.texteKF },
+    );
+    if (o.texteEF) segments.push({ a: o.E, b: o.F, sansTrait: true, texte: o.texteEF });
+  } else segments.push({ a: o.E, b: o.F, texte: o.texteEF });
+  const droites: NonNullable<ConstructionCanvasData["droites"]> = [];
+  const angles: NonNullable<ConstructionCanvasData["angles"]> = [];
+  if (o.med) {
+    const a = ((o.med.angle ?? 90) * Math.PI) / 180;
+    const h = 1.5 * w;
+    pts._m1 = { x: xK + Math.cos(a) * h, y: Math.sin(a) * h };
+    pts._m2 = { x: xK - Math.cos(a) * 0.6 * w, y: -Math.sin(a) * 0.6 * w };
+    pts._m3 = { x: xK + Math.cos(a) * 1.15 * h, y: Math.sin(a) * 1.15 * h };
+    cache.push("_m1", "_m2", "_m3");
+    droites.push({ a: idK, b: "_m1", couleur: "#2563eb", pointille: o.med.pointille });
+    if (o.med.nom) segments.push({ a: "_m1", b: "_m3", sansTrait: true, texte: o.med.nom });
+    if (!o.med.sansAngle) {
+      const droit = (o.med.angle ?? 90) === 90 && !o.med.texteAngle;
+      angles.push({ sommet: idK, de: o.F, vers: "_m1", droit, texte: o.med.texteAngle });
+    }
+  }
+  for (const pt of o.pts ?? []) {
+    pts[pt.nom] = pt.p;
+    if (pt.traits !== false) {
+      segments.push(
+        { a: pt.nom, b: o.E, pointille: true, couleur: "#7c3aed", texte: pt.texteE, code: pt.code },
+        { a: pt.nom, b: o.F, pointille: true, couleur: "#7c3aed", texte: pt.texteF, code: pt.code },
+      );
+    }
+  }
+  return geo.figureConstruction(pts, { segments, droites, angles, cercles: o.cercles }, cache);
+}
+
+// =====================================================================
 // ⭐ 06/10/2026 — DES SITUATIONS, PAS UNE PHRASE (PASSATION-COACH-MATHS-6E-CONSIGNE.md).
 // Mesuré le 05/10 : 7 à 12 squelettes par micro, 13 à 18 répétitions sur 20 —
 // le segment s'appelait toujours [AB]. Les gabarits tirent maintenant les noms
@@ -257,6 +335,7 @@ function genMedDefinition(): Q {
   if (mode === "definition") {
     const juste = `la droite perpendiculaire à ${s} qui passe par son milieu`;
     return {
+      canvas: figMed({ E, F }),
       text: courtM([introSimple(E, F)], [`Qu’est-ce que la médiatrice de ${s} ?`, `Quelle droite est la médiatrice de ${s} ?`, `Choisis la définition de la médiatrice de ${s}.`], 12),
       format: "qcm",
       choices: shuffle([juste, `la droite qui passe par le milieu de ${s}`, `la droite perpendiculaire à ${s} qui passe par ${E}`, `la droite parallèle à ${s} qui passe par son milieu`]),
@@ -268,6 +347,7 @@ function genMedDefinition(): Q {
   if (mode === "conditions") {
     const juste = `elle coupe ${s} en son milieu, à angle droit`;
     return {
+      canvas: figMed({ E, F }),
       text: courtM([introSimple(E, F)], [`Que sait-on de la médiatrice de ${s} ?`, `Comment la médiatrice de ${s} coupe-t-elle ${s} ?`, `Où la médiatrice coupe-t-elle ${s} ?`], 12),
       format: "qcm",
       choices: shuffle([juste, `elle coupe ${s} en ${E}, à angle droit`, `elle coupe ${s} en son milieu, en biais`, `elle ne coupe pas ${s}`]),
@@ -278,6 +358,7 @@ function genMedDefinition(): Q {
   }
   const juste = "une seule";
   return {
+    canvas: figMed({ E, F }),
     text: courtM([introSimple(E, F)], [`Combien de médiatrices le segment ${s} a-t-il ?`, `Combien de médiatrices peut-on tracer pour ${s} ?`, `Combien ${s} a-t-il de médiatrices ?`], 12),
     format: "qcm",
     choices: shuffle([juste, "deux", "une infinité", "aucune"]),
@@ -329,6 +410,8 @@ function genMedMesures(): Q {
   const c = choixMediatrice(s);
   const rep = perp && parMilieu ? c.oui : perp ? c.pasMilieu : parMilieu ? c.pasPerp : c.aucune;
   return {
+    // L'angle et EK, dessinés à leur vraie mesure ; rien n'est codé : c'est à l'élève de conclure.
+    canvas: figMed({ E, F, w: L / 2, K: { nom: K, x: x - L / 2 }, med: { nom: "(d)", angle, texteAngle: `${angle}°` }, texteEK: `${fr(x)} cm`, texteEF: `${fr(L)} cm` }),
     // 07/11/2026 : 34 mots ramenés à 25 au plus (★3).
     text: `${pick([`${P.nom} trace un segment ${s} de ${fr(L)} cm.`, `Le segment ${s} mesure ${fr(L)} cm.`, `Sur une feuille, ${P.nom} mesure ${E}${F} = ${fr(L)} cm.`, `${P.nom} dessine ${s}, long de ${fr(L)} cm.`])} ${pick([`(d) coupe ${s} en ${K}, à ${angle}°, avec ${E}${K} = ${fr(x)} cm.`, `À ${angle}°, (d) coupe ${s} en ${K}, avec ${E}${K} = ${fr(x)} cm.`])} ${pick([`(d) est-elle sa médiatrice ?`, `Est-ce la médiatrice de ${s} ?`, `Est-ce sa médiatrice ?`])}`,
     format: "qcm",
@@ -371,6 +454,8 @@ function genMedRaisons(): Q {
     expected: [cas.juste],
     comparator: "mcq_exact",
     explanation: expl(cas.r),
+    // Le segment seul : une droite dessinée trancherait la question.
+    canvas: figMed({ E, F }),
   };
 }
 
@@ -411,7 +496,9 @@ function genMedDistance(situation = false): Q {
         25,
       )
     : courtM([`${K} est sur la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`, `Le point ${K} est sur la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`, `${K} appartient à la médiatrice de ${s}. ${K}${X} = ${fr(d)} ${u}.`, `${K}${X} = ${fr(d)} ${u}, et ${K} est sur la médiatrice de ${s}.`], [`Combien mesure ${K}${Y} ?`, `Que vaut ${K}${Y} ?`, `Trouve ${K}${Y}.`, `Calcule ${K}${Y}.`, `Donne la longueur ${K}${Y}.`], 16);
+  const donnee = `${fr(d)} ${u}`;
   return {
+    canvas: figMed({ E, F, w: 0.6 * d, med: {}, pts: [{ nom: K, p: { x: 0, y: 0.8 * d }, texteE: X === E ? donnee : "?", texteF: X === F ? donnee : "?" }] }),
     text,
     format: "short",
     expected: [`${fr(d)} ${u}`],
@@ -429,6 +516,7 @@ function genMedTrajet(): Q {
     // 07/11/2026 : 46 mots ramenés à 25 au plus (★3) ; [EF] n'y est plus mesuré, on n'en a pas besoin.
     const objet = pick(LIEUX.filter((x) => x.u === u && motsV(x.quoi) <= 2));
     return {
+      canvas: figMed({ E, F, w: b / 2, med: {}, pts: [{ nom: K, p: { x: 0, y: Math.sqrt(a * a - (b / 2) ** 2) }, texteE: `${fr(a)} ${u}` }] }),
       text: tient(
         croise(
           [`${cap(objet.quoi)} est en ${K}, sur la médiatrice de ${s}. ${K}${E} = ${fr(a)} ${u}.`, `${K}${E} = ${fr(a)} ${u}. ${cap(objet.quoi)} est en ${K}, sur la médiatrice de ${s}.`],
@@ -443,6 +531,7 @@ function genMedTrajet(): Q {
     };
   }
   return {
+    canvas: figMed({ E, F, w: b / 2, med: {}, texteEF: `${fr(b)} cm`, pts: [{ nom: K, p: { x: 0, y: Math.sqrt(a * a - (b / 2) ** 2) }, texteE: `${fr(a)} cm`, texteF: "?" }] }),
     text: `${pick([`Le point ${K} est`, `${K} est`])} sur la médiatrice de ${s}. ${K}${E} = ${fr(a)} cm et ${E}${F} = ${fr(b)} cm. ${pick([`Quel est le périmètre du triangle ${E}${F}${K} ?`, `Calcule le périmètre du triangle ${E}${F}${K}.`, `Trouve le périmètre de ${E}${F}${K}.`])}`,
     format: "short",
     expected: [`${fr(2 * a + b)} cm`],
@@ -460,7 +549,10 @@ function genMedReciproque(): Q {
   const [dE, dF] = Math.random() < 0.5 ? [a, b] : [b, a];
   const oui = `oui : ${K}${E} = ${K}${F}`;
   const non = `non : ${K}${E} et ${K}${F} sont différentes`;
+  const wR = 0.35 * (dE + dF);
   return {
+    // K placé par ses deux distances (calculé) ; la médiatrice n'est pas tracée.
+    canvas: figMed({ E, F, w: wR, pts: [{ nom: K, p: ptDistances(wR, dE, dF), texteE: `${fr(dE)} ${u}`, texteF: `${fr(dF)} ${u}` }] }),
     text: `${enSituation ? `${cap(l.entre)} sont aux points ${E} et ${F}. ${P.nom} a placé ${l.quoi} au point ${K}.` : `${P.nom} a placé un point ${K}.`} On mesure ${K}${E} = ${fr(dE)} ${u} et ${K}${F} = ${fr(dF)} ${u}. ${pick([`Le point ${K} est-il sur la médiatrice de ${s} ?`, `${K} appartient-il à la médiatrice de ${s} ?`])}`,
     format: "qcm",
     choices: shuffle([oui, non, `oui : ${K} est le milieu de ${s}`, "on ne peut pas savoir sans figure"]),
@@ -520,6 +612,7 @@ function genMedCompas(): Q {
   if (Math.random() < 0.35) {
     const juste = `la médiatrice de ${s}`;
     return {
+      canvas: figMed({ E, F }),
       text: courtM([`On plie la feuille : ${E} vient sur ${F}.`, `Plie la feuille pour poser ${E} sur ${F}.`, `Plie la feuille : ${F} se pose sur ${E}.`], ["Que représente le pli ?", "Quelle droite trace le pli ?", "Quelle droite forme le pli ?", "Que trace le pli ?"], 16),
       format: "qcm",
       choices: shuffle([juste, `le segment ${s}`, `la perpendiculaire à ${s} passant par ${E}`, `une parallèle à ${s}`]),
@@ -533,6 +626,7 @@ function genMedCompas(): Q {
   const juste = Math.min(L, Math.floor(demi) + randomInt(1, 3));
   const fausses = [...new Set([demi, Math.max(1, Math.floor(demi) - 1), Math.max(1, Math.floor(demi / 2))])].filter((x) => x <= demi && x !== juste);
   return {
+    canvas: figMed({ E, F, texteEF: `${fr(L)} cm` }),
     text: courtM([`${s} mesure ${fr(L)} cm.`, `Le segment ${s} mesure ${fr(L)} cm.`, `${E}${F} = ${fr(L)} cm.`], ["Quel écartement de compas convient pour sa médiatrice ?", "Quelle ouverture de compas pour tracer sa médiatrice ?", "Choisis l’écartement du compas pour tracer sa médiatrice.", "Quel écartement choisir pour tracer sa médiatrice ?", "Quel écartement permet aux arcs de se couper ?"], 16),
     format: "qcm",
     choices: shuffle([`${fr(juste)} cm`, ...fausses.slice(0, 3).map((x) => `${fr(x)} cm`)]),
@@ -559,6 +653,7 @@ function genMedMilieu(): Q {
   const L = randomInt(sp.min, sp.max);
   const demi = L / 2;
   return {
+    canvas: figMed({ E, F, texteEF: `${fr(L)} ${sp.u}` }),
     // 07/11/2026 : 40 mots ramenés à 25 au plus (★3).
     text: `${P.nom} trace un segment [${E}${F}] de ${fr(L)} ${sp.u} ${sp.phrase}. ${pick([`Pour sa médiatrice, à quelle distance de ${E} pose-t-${il(P)} l’équerre ?`, `Pour tracer sa médiatrice, à combien de ${E} pose-t-${il(P)} l’équerre ?`, `Où poser l’équerre pour sa médiatrice : à combien de ${E} ?`])}`,
     format: "short",
@@ -583,6 +678,8 @@ function genMedArcs(): Q {
       rate: "les arcs ne se coupent pas : l’écartement est trop petit",
     };
     return {
+      // Le segment et sa longueur ; les arcs ne sont pas tracés : ce serait la réponse.
+      canvas: figMed({ E, F, texteEF: `${fr(L)} cm` }),
       text: `${introSegment(E, F, P)} Il mesure ${fr(L)} cm. ${P.nom} ouvre son compas de ${fr(x)} cm et trace un arc depuis ${E}, puis un arc depuis ${F}. Que se passe-t-il ?`,
       format: "qcm",
       choices: shuffle([...Object.values(r), `les arcs se coupent en ${E} et en ${F}`]),
@@ -602,6 +699,7 @@ function genMedArcs(): Q {
   if (mode === "deuxPoints") {
     const juste = "par deux points, il ne passe qu’une seule droite";
     return {
+      canvas: figMed({ E, F }),
       text: `${P.nom} a trouvé deux points à égale distance de ${E} et de ${F}. Pourquoi cela suffit-il pour tracer la médiatrice de ${s} ?`,
       format: "qcm",
       choices: shuffle([juste, "deux points sont toujours alignés avec le milieu", `il faut en fait trois points`, "parce que le compas est précis"]),
@@ -612,6 +710,7 @@ function genMedArcs(): Q {
   }
   const juste = `pour que les points obtenus soient à égale distance de ${E} et de ${F}`;
   return {
+    canvas: figMed({ E, F }),
     text: `Pour tracer la médiatrice de ${s} au compas, ${P.nom} garde le MÊME écartement depuis ${E} et depuis ${F}. Pourquoi ?`,
     format: "qcm",
     choices: shuffle([juste, "pour que le dessin soit plus joli", "pour que la droite soit horizontale", "pour gagner du temps"]),
@@ -698,6 +797,8 @@ function genMedProbleme(): Q {
     const ro = pick(RONDS);
     const juste = "tracer deux cordes et leurs médiatrices : le centre est à leur croisement";
     return {
+      // Le contour seul, son centre perdu (point caché).
+      canvas: geo.figureConstruction({ _o: geo.point(0, 0) }, { cercles: [{ centre: "_o", rayon: 3 }] }, ["_o"]),
       text: `${P.nom} a dessiné le contour d’${ro.nom.replace(/^une? /, (m) => (m === "une " ? "une " : "un "))} mais a perdu son centre. ${pick(["Comment le retrouver ?", "Quelle méthode permet de le retrouver ?"])}`,
       format: "qcm",
       choices: shuffle([juste, "tracer une seule corde et prendre son milieu", "plier la feuille une seule fois au hasard", "mesurer un rayon au hasard"]),
@@ -729,6 +830,8 @@ function genMedDefiDistances(): Q {
   if (mode === "SM") {
     const juste = `oui : ${S} et ${M} sont tous les deux sur la médiatrice`;
     return {
+      // La droite (SM) n'est pas tracée : c'est d'elle qu'on parle.
+      canvas: figMed({ E, F, w: 0.6 * d, K: { nom: M }, codes: true, pts: [{ nom: S, p: { x: 0, y: 0.8 * d }, texteE: `${d} cm`, texteF: `${d} cm` }] }),
       text: `${P.nom} place un point ${S} tel que ${S}${E} = ${S}${F} = ${d} cm. ${M} est le milieu de ${s}. La droite (${S}${M}) est-elle la médiatrice de ${s} ?`,
       format: "qcm",
       choices: shuffle([juste, `non : il faudrait mesurer un angle`, `non : ${S} n’est pas sur ${s}`, `oui : toute droite qui passe par ${M} convient`]),
@@ -740,7 +843,9 @@ function genMedDefiDistances(): Q {
   if (mode === "nonEgal") {
     const autre = d + pick([1, 2, 3]);
     const juste = `non : ${S}${E} et ${S}${F} sont différentes`;
+    const wS = 0.35 * (d + autre);
     return {
+      canvas: figMed({ E, F, w: wS, pts: [{ nom: S, p: ptDistances(wS, d, autre), texteE: `${d} cm`, texteF: `${autre} cm` }] }),
       text: `${P.nom} place un point ${S} tel que ${S}${E} = ${d} cm et ${S}${F} = ${autre} cm. Le point ${S} est-il sur la médiatrice de ${s} ?`,
       format: "qcm",
       choices: shuffle([juste, `oui : ${S}${E} = ${S}${F}`, `oui : ${S} est près de ${s}`, "on ne peut pas savoir"]),
@@ -752,6 +857,13 @@ function genMedDefiDistances(): Q {
   const d2 = d + pick([2, 3, 4]);
   const juste = `la médiatrice de ${s}`;
   return {
+    canvas: figMed({
+      E, F, w: 0.6 * d,
+      pts: [
+        { nom: S, p: { x: 0, y: 0.8 * d }, texteE: `${d} cm`, texteF: `${d} cm` },
+        { nom: T, p: { x: 0, y: -Math.sqrt(d2 * d2 - 0.36 * d * d) }, texteE: `${d2} cm`, texteF: `${d2} cm` },
+      ],
+    }),
     text: `On sait que ${S}${E} = ${S}${F} = ${d} cm et que ${T}${E} = ${T}${F} = ${d2} cm. ${pick([`Que représente la droite (${S}${T}) ?`, `Quelle est la droite (${S}${T}) ?`])}`,
     format: "qcm",
     choices: shuffle([juste, `la perpendiculaire à ${s} passant par ${E}`, `une parallèle à ${s}`, "une droite quelconque"]),
@@ -769,7 +881,9 @@ function genMedDefiRaisons(): Q {
     const [S, U, V] = shuffle([E, F, G]);
     const s = `[${[U, V].sort().join("")}]`;
     const juste = `oui : ${S}${U} = ${S}${V}, donc ${S} est à égale distance de ${U} et de ${V}`;
+    const [U1, V1] = [U, V].sort();
     return {
+      canvas: figMed({ E: U1, F: V1, w: 0.6 * a, pts: [{ nom: S, p: { x: 0, y: 0.8 * a }, texteE: `${a} cm`, texteF: `${a} cm` }] }),
       text: `Le triangle ${E}${F}${G} est isocèle en ${S}, avec ${S}${U} = ${S}${V} = ${a} cm. ${P.nom} se demande si ${S} est sur la médiatrice de ${s}. Est-ce le cas ?`,
       format: "qcm",
       choices: shuffle([juste, `non : ${S} n’est pas sur le segment ${s}`, `oui : ${S} est le milieu de ${s}`, `cela dépend de la longueur de ${s}`]),
@@ -782,6 +896,7 @@ function genMedDefiRaisons(): Q {
     const s = `[${E}${F}]`;
     const juste = `${E} vient se poser exactement sur ${F}`;
     return {
+      canvas: figMed({ E, F, med: { nom: "pli", pointille: true } }),
       text: `${P.nom} plie sa feuille le long de la médiatrice de ${s}. Que devient le point ${E} ?`,
       format: "qcm",
       choices: shuffle([juste, `${E} reste à sa place`, `${E} vient sur le milieu de ${s}`, `${E} disparaît du pli`]),
@@ -794,6 +909,8 @@ function genMedDefiRaisons(): Q {
   const trois = l.entre.replace(/^deux /, "trois ");
   const juste = "deux médiatrices suffisent : leur croisement convient";
   return {
+    // Trois points non alignés, rien d'autre.
+    canvas: geo.figureConstruction({ [E]: geo.point(-3, 0), [F]: geo.point(3, 0.6), [G]: geo.point(0.4, 3.2) }),
     text: `${P.nom} veut placer ${l.quoi} à égale distance de ${trois}, notés ${E}, ${F} et ${G}, qui ne sont pas sur une même ligne. Combien de médiatrices doit-${il(P)} tracer au minimum ?`,
     format: "qcm",
     choices: shuffle([juste, "une seule médiatrice suffit", "il faut tracer trois médiatrices", "aucune : on prend le milieu de [" + E + F + "]"]),
@@ -812,22 +929,22 @@ function genMedDefiRaisons(): Q {
 // ★1 : 12 mots au plus. ★2 : 15 mots au plus. Aucun prénom, aucun objet à ★1-★2.
 // Correcteurs : correcteurs/mediatrice.ts, section du 07/11.
 // =====================================================================
-const qc = (text: string, juste: string, faux: string[], calcul: string, canvas?: DroitesCanvasData): Q => ({
+const qc = (text: string, juste: string, faux: string[], calcul: string, canvas?: DroitesCanvasData | ConstructionCanvasData): Q => ({
   text, format: "qcm", choices: shuffle([juste, ...faux]), expected: [juste], comparator: "mcq_exact", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
 });
-const ouiNon = (text: string, oui: boolean, calcul: string, canvas?: DroitesCanvasData) => qc(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
+const ouiNon = (text: string, oui: boolean, calcul: string, canvas?: DroitesCanvasData | ConstructionCanvasData) => qc(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
 const vraiFaux = (text: string, vrai: boolean, calcul: string) => qc(text, vrai ? "vrai" : "faux", [vrai ? "faux" : "vrai"], calcul);
 /** Réponse courte : une longueur avec son unité. */
-const lg = (text: string, v: number, u: string, calcul: string, canvas?: DroitesCanvasData): Q => ({
+const lg = (text: string, v: number, u: string, calcul: string, canvas?: DroitesCanvasData | ConstructionCanvasData): Q => ({
   text, format: "short", expected: [`${fr(v)} ${u}`], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
 });
 /** Réponse courte en degrés. */
-const dg = (text: string, v: number, calcul: string, canvas?: DroitesCanvasData): Q => ({
+const dg = (text: string, v: number, calcul: string, canvas?: DroitesCanvasData | ConstructionCanvasData): Q => ({
   text, format: "short", expected: [`${v}°`, String(v)], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
 });
 /** Réponse courte : un nombre sans unité. */
-const nb = (text: string, n: number, calcul: string): Q => ({
-  text, format: "short", expected: [String(n)], comparator: "number_equal", explanation: expl(calcul),
+const nb = (text: string, n: number, calcul: string, canvas?: ConstructionCanvasData): Q => ({
+  text, format: "short", expected: [String(n)], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
 });
 /** Réponse courte en lettres : toutes les écritures justes sont acceptées. */
 const lt = (text: string, justes: string[], calcul: string): Q => ({
@@ -980,10 +1097,22 @@ function genDefMesuresCourtes(): Q {
   const d = mil
     ? pick([`(d) coupe ${s} en son milieu, à ${ang}°.`, `(d) coupe ${s} en ${K}, à ${ang}°, avec ${E}${K} = ${K}${F}.`, `À ${ang}°, (d) coupe ${s} en son milieu.`])
     : pick([`(d) coupe ${s} à ${ang}°, mais pas en son milieu.`, `(d) coupe ${s} à ${ang}°, à côté de son milieu.`, `(d) coupe ${s} à ${ang}°, en ${E}.`]);
+  // La figure suit la phrase : coupe en E, en K (milieu codé), ou à côté du milieu.
+  const enE = d.endsWith(`en ${E}.`);
+  const nomK = d.includes(` en ${K},`) ? K : "";
+  const a = (ang * Math.PI) / 180;
+  const canvas = enE
+    ? geo.figureConstruction(
+        { [E]: geo.point(-3, 0), [F]: geo.point(3, 0), _m1: geo.point(-3 + Math.cos(a) * 4.5, Math.sin(a) * 4.5), _m2: geo.point(-3 - Math.cos(a) * 1.8, -Math.sin(a) * 1.8), _m3: geo.point(-3 + Math.cos(a) * 5.2, Math.sin(a) * 5.2) },
+        { segments: [{ a: E, b: F }, { a: "_m1", b: "_m3", sansTrait: true, texte: "(d)" }], droites: [{ a: E, b: "_m1", couleur: "#2563eb" }], angles: [{ sommet: E, de: F, vers: "_m1", texte: `${ang}°` }] },
+        ["_m1", "_m2", "_m3"],
+      )
+    : figMed({ E, F, K: { nom: nomK, x: mil ? 0 : pick([-1.3, 1.3]) }, codes: mil, med: { nom: "(d)", angle: ang, texteAngle: `${ang}°` } });
   return ouiNon(
     tient(croise([d], [`Est-ce la médiatrice de ${s} ?`, `Est-ce sa médiatrice ?`, `(d) est-elle sa médiatrice ?`, `(d) est-elle la médiatrice de ${s} ?`]), 15),
     ang === 90 && mil,
     `Il faut un angle de 90° ET le milieu. Ici : ${ang}°, ${mil ? "par le milieu" : "pas par le milieu"}.`,
+    canvas,
   );
 }
 function genDefNombreK(): Q {
@@ -994,11 +1123,14 @@ function genDefNombreK(): Q {
   const L = randomInt(4, 18);
   if (Math.random() < 0.6) {
     const X = pick([`${E}${K}`, `${K}${F}`]);
-    return lg(tient(croise(intros.flatMap((i) => [`${i} ${s} mesure ${L} cm.`, `${i} ${E}${F} = ${L} cm.`]), verbes(X)), 15), L / 2, "cm", `${K} est le milieu de ${s} : ${X} = ${L} ÷ 2 = ${fr(L / 2)} cm.`);
+    // Le correcteur relit la médiatrice sur un canvas « droites » : la droite (d), son angle droit, le milieu.
+    const fig = segmentEtDroite({ perpendiculaire: true, parMilieu: true, marquerMilieu: true, noms: { a: E, b: F, m: K } });
+    return lg(tient(croise(intros.flatMap((i) => [`${i} ${s} mesure ${L} cm.`, `${i} ${E}${F} = ${L} cm.`]), verbes(X)), 15), L / 2, "cm", `${K} est le milieu de ${s} : ${X} = ${L} ÷ 2 = ${fr(L / 2)} cm.`, fig);
   }
   const demi = L / 2;
   const X = pick([`${K}${F}`, `${E}${F}`]);
-  return lg(tient(croise(intros.map((i) => `${i} ${E}${K} = ${fr(demi)} cm.`), verbes(X)), 15), X === `${E}${F}` ? L : demi, "cm", `${K} est le milieu de ${s}, donc ${K}${F} = ${E}${K} = ${fr(demi)} cm et ${E}${F} = ${L} cm.`);
+  const fig = segmentEtDroite({ perpendiculaire: true, parMilieu: true, marquerMilieu: true, noms: { a: E, b: F, m: K } });
+  return lg(tient(croise(intros.map((i) => `${i} ${E}${K} = ${fr(demi)} cm.`), verbes(X)), 15), X === `${E}${F}` ? L : demi, "cm", `${K} est le milieu de ${s}, donc ${K}${F} = ${E}${K} = ${fr(demi)} cm et ${E}${F} = ${L} cm.`, fig);
 }
 function genDefCombien(): Q {
   const [E, F] = lettres(2);
@@ -1044,14 +1176,18 @@ function genDefSituation(): Q {
   const trait = pick(TRAITS);
   const intro = `${bout} sont en ${E} et ${F}.`;
   const r = DEF_COURTE(s);
+  // Le trait dessiné comme la phrase le décrit : milieu codé, angle à sa mesure.
+  const figTrait = (milieu: boolean, angle: number) =>
+    figMed({ E, F, K: { nom: "", x: milieu ? 0 : pick([-1.3, 1.3]) }, codes: milieu, med: angle === 90 ? {} : { angle, texteAngle: `${angle}°` } });
   if (Math.random() < 0.35)
-    return qc(tient(croise([`${intro} ${cap(trait)} coupe ${s} en son milieu, à 90°.`], [`Que représente ${trait.replace(/^une /, "cette ")} pour ${s} ?`, `Que représente-t-elle pour ${s} ?`]), 25), "sa médiatrice", ["son milieu", "une parallèle à ce segment", "son prolongement"], r);
+    return qc(tient(croise([`${intro} ${cap(trait)} coupe ${s} en son milieu, à 90°.`], [`Que représente ${trait.replace(/^une /, "cette ")} pour ${s} ?`, `Que représente-t-elle pour ${s} ?`]), 25), "sa médiatrice", ["son milieu", "une parallèle à ce segment", "son prolongement"], r, figTrait(true, 90));
+  const angle = pick([60, 70, 80, 110, 120]);
   const cas = pick([
-    { d: `coupe ${s} en son milieu, à 90°.`, oui: true },
-    { d: `coupe ${s} en son milieu, à ${pick([60, 70, 80, 110, 120])}°.`, oui: false },
-    { d: `coupe ${s} à 90°, à côté de son milieu.`, oui: false },
+    { d: `coupe ${s} en son milieu, à 90°.`, oui: true, m: true, a: 90 },
+    { d: `coupe ${s} en son milieu, à ${angle}°.`, oui: false, m: true, a: angle },
+    { d: `coupe ${s} à 90°, à côté de son milieu.`, oui: false, m: false, a: 90 },
   ]);
-  return ouiNon(tient(croise([`${intro} ${cap(trait)} ${cas.d}`], [`Est-ce la médiatrice de ${s} ?`, `Est-ce sa médiatrice ?`, `${cap(trait.replace(/^une /, "cette "))} est-elle la médiatrice de ${s} ?`]), 25), cas.oui, r);
+  return ouiNon(tient(croise([`${intro} ${cap(trait)} ${cas.d}`], [`Est-ce la médiatrice de ${s} ?`, `Est-ce sa médiatrice ?`, `${cap(trait.replace(/^une /, "cette "))} est-elle la médiatrice de ${s} ?`]), 25), cas.oui, r, figTrait(cas.m, cas.a));
 }
 function genDefSituationCalcul(): Q {
   const [E, F] = lettres(2);
@@ -1062,11 +1198,12 @@ function genDefSituationCalcul(): Q {
   const mode = pick(["distance", "distance", "angle", "inverse"] as const);
   if (mode === "inverse") {
     const x = randomInt(2, 25);
-    return lg(tient(croise([`${trait} est la médiatrice de ${s}. Elle coupe ${s} à ${x} m de ${E}.`], [`Combien mesure ${E}${F} ?`, `Quelle est la longueur de ${s} ?`, `Calcule ${E}${F}.`]), 25), 2 * x, "m", `Elle coupe ${s} en son milieu : ${E}${F} = 2 × ${x} = ${2 * x} m.`);
+    return lg(tient(croise([`${trait} est la médiatrice de ${s}. Elle coupe ${s} à ${x} m de ${E}.`], [`Combien mesure ${E}${F} ?`, `Quelle est la longueur de ${s} ?`, `Calcule ${E}${F}.`]), 25), 2 * x, "m", `Elle coupe ${s} en son milieu : ${E}${F} = 2 × ${x} = ${2 * x} m.`, figMed({ E, F, K: { nom: "" }, med: {}, texteEK: `${x} m`, texteEF: "?" }));
   }
   const intro = `${bout} sont en ${E} et ${F}, avec ${E}${F} = ${L} m. ${trait} est la médiatrice de ${s}.`;
-  if (mode === "angle") return dg(tient(croise([intro], [`Quel angle fait-elle avec ${s} ?`, `Quel angle, en degrés, fait-elle avec ${s} ?`]), 25), 90, `La médiatrice est perpendiculaire à ${s} : 90°.`);
-  return lg(tient(croise([intro], [`À quelle distance de ${E} coupe-t-elle ${s} ?`, `À combien de ${E} coupe-t-elle ${s} ?`]), 25), L / 2, "m", `Elle coupe ${s} en son milieu : ${L} ÷ 2 = ${fr(L / 2)} m.`);
+  // L'angle demandé porte « ? », sans la marque d'angle droit.
+  if (mode === "angle") return dg(tient(croise([intro], [`Quel angle fait-elle avec ${s} ?`, `Quel angle, en degrés, fait-elle avec ${s} ?`]), 25), 90, `La médiatrice est perpendiculaire à ${s} : 90°.`, figMed({ E, F, med: { texteAngle: "?" }, texteEF: `${L} m` }));
+  return lg(tient(croise([intro], [`À quelle distance de ${E} coupe-t-elle ${s} ?`, `À combien de ${E} coupe-t-elle ${s} ?`]), 25), L / 2, "m", `Elle coupe ${s} en son milieu : ${L} ÷ 2 = ${fr(L / 2)} m.`, figMed({ E, F, K: { nom: "" }, med: {}, texteEK: "?", texteEF: `${L} m` }));
 }
 
 // ----- MEDIATRICE_PROPRIETE, ★2
@@ -1076,11 +1213,13 @@ function genPropDeduire(): Q {
   const [X, Y] = Math.random() < 0.5 ? [E, F] : [F, E];
   const intros = [`${K} est sur la médiatrice de ${s}.`, `Le point ${K} est sur la médiatrice de ${s}.`, `${K} appartient à la médiatrice de ${s}.`];
   const r = `Tout point de la médiatrice de ${s} est à égale distance de ${E} et de ${F} : ${K}${E} = ${K}${F}.`;
+  // K sur la médiatrice, ses deux distances en pointillés, sans codage (c'est la déduction demandée).
+  const fig = figMed({ E, F, med: {}, pts: [{ nom: K, p: { x: 0, y: pick([2.4, 3, 3.6]) } }] });
   if (Math.random() < 0.35)
-    return lt(tient(croise(intros, [`Quelle longueur est égale à ${K}${X} ?`, `Écris la longueur égale à ${K}${X}.`]), 15), [`${K}${Y}`, `${Y}${K}`], r);
+    return { ...lt(tient(croise(intros, [`Quelle longueur est égale à ${K}${X} ?`, `Écris la longueur égale à ${K}${X}.`]), 15), [`${K}${Y}`, `${Y}${K}`], r), canvas: fig };
   return qc(
     tient(croise(intros, ["Que peut-on en déduire ?", "Quelle égalité est vraie ?", `Que sait-on de ${K}${E} et ${K}${F} ?`]), 15),
-    `${K}${E} = ${K}${F}`, [`${K} est le milieu de ${s}`, `${K}${E} + ${K}${F} = ${E}${F}`, `${K}${E} = ${E}${F}`], r,
+    `${K}${E} = ${K}${F}`, [`${K} est le milieu de ${s}`, `${K}${E} + ${K}${F} = ${E}${F}`, `${K}${E} = ${E}${F}`], r, fig,
   );
 }
 function genPropReciproqueCourte(): Q {
@@ -1092,9 +1231,11 @@ function genPropReciproqueCourte(): Q {
     const eg = Math.random() < 0.5;
     const b = eg ? a : a + pick([1, 2, 3]);
     const [u, v] = Math.random() < 0.5 ? [a, b] : [b, a];
+    const wR = 0.35 * (u + v);
     return ouiNon(
       tient(croise([`${K}${E} = ${u} cm et ${K}${F} = ${v} cm.`, `${K}${F} = ${v} cm et ${K}${E} = ${u} cm.`], [`${K} est-il sur la médiatrice de ${s} ?`, `${K} appartient-il à la médiatrice de ${s} ?`, `Le point ${K} est-il sur la médiatrice de ${s} ?`]), 15),
       eg, eg ? r : `${u} cm et ${v} cm : ${K} n’est pas à égale distance de ${E} et de ${F}.`,
+      figMed({ E, F, w: wR, pts: [{ nom: K, p: ptDistances(wR, u, v), texteE: `${u} cm`, texteF: `${v} cm` }] }),
     );
   }
   const juste = `sur la médiatrice de ${s}`;
@@ -1144,11 +1285,15 @@ function genPropSommeTriangle(): Q {
   const i = `${K} est sur la médiatrice de ${s}.`;
   const v = randomInt(3, 14);
   const r = `${K} est sur la médiatrice de ${s} : ${K}${E} = ${K}${F}.`;
+  // K sur la médiatrice, à la vraie distance v (demi-base 0,6 v) ; aucun codage : l'égalité est à déduire.
+  const surMed = (texteE?: string) => figMed({ E, F, w: 0.6 * v, med: {}, pts: [{ nom: K, p: { x: 0, y: 0.8 * v }, texteE }] });
   return pick([
-    () => lg(`${i} ${K}${E} + ${K}${F} = ${2 * v} cm. ${pick([`Calcule ${K}${E}.`, `Trouve ${K}${F}.`, `Combien mesure ${K}${E} ?`])}`, v, "cm", `${r} Chacune vaut ${2 * v} ÷ 2 = ${v} cm.`),
-    () => lg(`${i} ${K}${E} = ${v} cm. ${pick([`Calcule ${K}${E} + ${K}${F}.`, `Que vaut ${K}${E} + ${K}${F} ?`])}`, 2 * v, "cm", `${r} La somme vaut ${v} + ${v} = ${2 * v} cm.`),
-    () => qc(`${i} ${pick([`Quelle est la nature du triangle ${E}${F}${K} ?`, `Comment est le triangle ${E}${F}${K} ?`])}`, `isocèle en ${K}`, [`isocèle en ${E}`, `isocèle en ${F}`, `rectangle en ${K}`], `${r} Deux côtés égaux partent de ${K}.`),
-    () => qc(`Le triangle ${E}${F}${K} est isocèle en ${K}. ${pick([`Où se trouve ${K} ?`, `Sur quelle droite est ${K} ?`])}`, `sur la médiatrice de ${s}`, [`sur la droite (${E}${F})`, `sur la parallèle à ${s}`, `au milieu de ${s}`], `Isocèle en ${K} : ${K}${E} = ${K}${F}, donc ${K} est sur la médiatrice de ${s}.`),
+    () => lg(`${i} ${K}${E} + ${K}${F} = ${2 * v} cm. ${pick([`Calcule ${K}${E}.`, `Trouve ${K}${F}.`, `Combien mesure ${K}${E} ?`])}`, v, "cm", `${r} Chacune vaut ${2 * v} ÷ 2 = ${v} cm.`, surMed()),
+    () => lg(`${i} ${K}${E} = ${v} cm. ${pick([`Calcule ${K}${E} + ${K}${F}.`, `Que vaut ${K}${E} + ${K}${F} ?`])}`, 2 * v, "cm", `${r} La somme vaut ${v} + ${v} = ${2 * v} cm.`, surMed(`${v} cm`)),
+    () => qc(`${i} ${pick([`Quelle est la nature du triangle ${E}${F}${K} ?`, `Comment est le triangle ${E}${F}${K} ?`])}`, `isocèle en ${K}`, [`isocèle en ${E}`, `isocèle en ${F}`, `rectangle en ${K}`], `${r} Deux côtés égaux partent de ${K}.`, surMed()),
+    // Isocèle en K : les deux côtés codés (donnée de l'énoncé), la médiatrice n'est pas tracée.
+    () => qc(`Le triangle ${E}${F}${K} est isocèle en ${K}. ${pick([`Où se trouve ${K} ?`, `Sur quelle droite est ${K} ?`])}`, `sur la médiatrice de ${s}`, [`sur la droite (${E}${F})`, `sur la parallèle à ${s}`, `au milieu de ${s}`], `Isocèle en ${K} : ${K}${E} = ${K}${F}, donc ${K} est sur la médiatrice de ${s}.`,
+      geo.figureConstruction({ [E]: geo.point(-2.4, 0), [F]: geo.point(2.4, 0), [K]: geo.point(0, 3.4) }, { segments: [{ a: E, b: F }, { a: K, b: E, code: 1 }, { a: K, b: F, code: 1 }] })),
   ])();
 }
 function genPropVraiFaux(): Q {
@@ -1183,13 +1328,23 @@ function genPropPerimetre(): Q {
     return lg(
       `${intro} ${pick([`Le triangle ${E}${F}${K} a pour périmètre ${P} ${u}.`, `Le périmètre de ${E}${F}${K} est ${P} ${u}.`, `Le tour du triangle ${E}${F}${K} mesure ${P} ${u}.`])} ${E}${F} = ${b} ${u}. ${pick([`Combien mesure ${K}${X} ?`, `Calcule ${K}${X}.`, `Déduis-en ${K}${X}.`])}`,
       a, u, `${K}${E} = ${K}${F}. Les deux côtés égaux font ${P} − ${b} = ${P - b} ${u}, donc chacun mesure ${P - b} ÷ 2 = ${a} ${u}.`,
+      figMed({ E, F, w: b / 2, med: {}, texteEF: `${b} ${u}`, pts: [{ nom: K, p: { x: 0, y: Math.sqrt(a * a - (b * b) / 4) }, texteE: X === E ? "?" : undefined, texteF: X === F ? "?" : undefined }] }),
     );
   }
   const c = randomInt(5, 14);
   const deux = `${K} et ${T} sont sur la médiatrice de ${s}, de part et d’autre de ${s}. ${K}${E} = ${a} cm et ${T}${F} = ${c} cm.`;
+  const wQ = 0.6 * Math.min(a, c);
+  const figDeux = (q: boolean) =>
+    figMed({
+      E, F, w: wQ, med: {},
+      pts: [
+        { nom: K, p: { x: 0, y: Math.sqrt(a * a - wQ * wQ) }, texteE: `${a} cm`, texteF: q ? "?" : undefined },
+        { nom: T, p: { x: 0, y: -Math.sqrt(c * c - wQ * wQ) }, texteF: `${c} cm`, texteE: q ? "?" : undefined },
+      ],
+    });
   if (mode === "quadri")
-    return lg(`${deux} ${pick([`Quel est le périmètre du quadrilatère ${E}${K}${F}${T} ?`, `Calcule le périmètre de ${E}${K}${F}${T}.`])}`, 2 * (a + c), "cm", `${K}${F} = ${K}${E} = ${a} cm et ${T}${E} = ${T}${F} = ${c} cm. Périmètre : ${a} + ${a} + ${c} + ${c} = ${2 * (a + c)} cm.`);
-  return lg(`${deux} ${pick([`Combien mesure ${K}${F} + ${T}${E} ?`, `Calcule ${K}${F} + ${T}${E}.`])}`, a + c, "cm", `${K}${F} = ${K}${E} = ${a} cm et ${T}${E} = ${T}${F} = ${c} cm. Somme : ${a + c} cm.`);
+    return lg(`${deux} ${pick([`Quel est le périmètre du quadrilatère ${E}${K}${F}${T} ?`, `Calcule le périmètre de ${E}${K}${F}${T}.`])}`, 2 * (a + c), "cm", `${K}${F} = ${K}${E} = ${a} cm et ${T}${E} = ${T}${F} = ${c} cm. Périmètre : ${a} + ${a} + ${c} + ${c} = ${2 * (a + c)} cm.`, figDeux(false));
+  return lg(`${deux} ${pick([`Combien mesure ${K}${F} + ${T}${E} ?`, `Calcule ${K}${F} + ${T}${E}.`])}`, a + c, "cm", `${K}${F} = ${K}${E} = ${a} cm et ${T}${E} = ${T}${F} = ${c} cm. Somme : ${a + c} cm.`, figDeux(true));
 }
 function genPropCote(): Q {
   const [E, F, K] = lettres(3);
@@ -1241,18 +1396,28 @@ function genPropCercle(): Q {
   const [E, F, K] = lettres(3);
   const s = `[${E}${F}]`;
   const r = randomInt(3, 12);
+  // Les cercles sont tracés à leurs rayons, K est leur point de rencontre CALCULÉ.
+  const deuxCercles = (r1: number, r2: number) => {
+    const w = 0.375 * (r1 + r2);
+    return figMed({ E, F, w, pts: [{ nom: K, p: ptDistances(w, r1, r2), traits: false }], cercles: [{ centre: E, rayon: r1 }, { centre: F, rayon: r2 }] });
+  };
+  /** Un cercle de centre K (sur la médiatrice) passant par E et F. */
+  const cercleK = (rayon: number) => {
+    const w = 0.7 * rayon;
+    return figMed({ E, F, w, pts: [{ nom: K, p: { x: 0, y: Math.sqrt(rayon * rayon - w * w) }, traits: false }], cercles: [{ centre: K, rayon }] });
+  };
   return pick([
     () => {
       const juste = `oui : ${K}${E} = ${K}${F}, ce sont deux rayons de même longueur`;
-      return qc(`${pick([`Deux cercles de même rayon, de centres ${E} et ${F}, se coupent en ${K}.`, `Deux cercles de rayon ${r} cm ont pour centres ${E} et ${F}. Ils se coupent en ${K}.`])} ${K} est-il sur la médiatrice de ${s} ?`, juste, [`non : ${K} n’est pas sur ${s}`, `oui : ${K} est le milieu de ${s}`, "on ne peut pas savoir"], `${K} est sur les deux cercles : ${K}${E} et ${K}${F} sont deux rayons égaux, donc ${K} est sur la médiatrice de ${s}.`);
+      return qc(`${pick([`Deux cercles de même rayon, de centres ${E} et ${F}, se coupent en ${K}.`, `Deux cercles de rayon ${r} cm ont pour centres ${E} et ${F}. Ils se coupent en ${K}.`])} ${K} est-il sur la médiatrice de ${s} ?`, juste, [`non : ${K} n’est pas sur ${s}`, `oui : ${K} est le milieu de ${s}`, "on ne peut pas savoir"], `${K} est sur les deux cercles : ${K}${E} et ${K}${F} sont deux rayons égaux, donc ${K} est sur la médiatrice de ${s}.`, deuxCercles(r, r));
     },
     () => {
       const r2 = r + pick([1, 2, 3]);
       const juste = `non : ${K}${E} et ${K}${F} sont différentes`;
-      return qc(`${pick([`Le cercle de centre ${E} a pour rayon ${r} cm, celui de centre ${F} a pour rayon ${r2} cm. Ils se coupent en ${K}.`, `Un cercle de centre ${E} et de rayon ${r} cm coupe en ${K} un cercle de centre ${F} et de rayon ${r2} cm.`])} ${K} est-il sur la médiatrice de ${s} ?`, juste, [`oui : ${K} est sur les deux cercles`, `oui : ${K} est le milieu de ${s}`, "on ne peut pas savoir"], `${K}${E} = ${r} cm et ${K}${F} = ${r2} cm : ${K} n’est pas à égale distance de ${E} et de ${F}.`);
+      return qc(`${pick([`Le cercle de centre ${E} a pour rayon ${r} cm, celui de centre ${F} a pour rayon ${r2} cm. Ils se coupent en ${K}.`, `Un cercle de centre ${E} et de rayon ${r} cm coupe en ${K} un cercle de centre ${F} et de rayon ${r2} cm.`])} ${K} est-il sur la médiatrice de ${s} ?`, juste, [`oui : ${K} est sur les deux cercles`, `oui : ${K} est le milieu de ${s}`, "on ne peut pas savoir"], `${K}${E} = ${r} cm et ${K}${F} = ${r2} cm : ${K} n’est pas à égale distance de ${E} et de ${F}.`, deuxCercles(r, r2));
     },
-    () => qc(pick([`Un cercle de centre ${K} passe par ${E} et par ${F}. Où se trouve ${K} ?`, `${E} et ${F} sont sur un cercle de centre ${K}. Sur quelle droite est ${K} ?`]), `sur la médiatrice de ${s}`, [`sur la droite (${E}${F})`, `au milieu de ${s}`, `sur la perpendiculaire à ${s} en ${E}`], `${K}${E} et ${K}${F} sont deux rayons : ${K} est à égale distance de ${E} et de ${F}.`),
-    () => lg(pick([`${E} et ${F} sont sur un cercle de centre ${K} et de rayon ${r} cm. Combien mesure ${K}${E} + ${K}${F} ?`, `Un cercle de centre ${K} et de rayon ${r} cm passe par ${E} et ${F}. Calcule ${K}${E} + ${K}${F}.`]), 2 * r, "cm", `${K}${E} et ${K}${F} sont deux rayons : ${r} + ${r} = ${2 * r} cm.`),
+    () => qc(pick([`Un cercle de centre ${K} passe par ${E} et par ${F}. Où se trouve ${K} ?`, `${E} et ${F} sont sur un cercle de centre ${K}. Sur quelle droite est ${K} ?`]), `sur la médiatrice de ${s}`, [`sur la droite (${E}${F})`, `au milieu de ${s}`, `sur la perpendiculaire à ${s} en ${E}`], `${K}${E} et ${K}${F} sont deux rayons : ${K} est à égale distance de ${E} et de ${F}.`, cercleK(4)),
+    () => lg(pick([`${E} et ${F} sont sur un cercle de centre ${K} et de rayon ${r} cm. Combien mesure ${K}${E} + ${K}${F} ?`, `Un cercle de centre ${K} et de rayon ${r} cm passe par ${E} et ${F}. Calcule ${K}${E} + ${K}${F}.`]), 2 * r, "cm", `${K}${E} et ${K}${F} sont deux rayons : ${r} + ${r} = ${2 * r} cm.`, cercleK(r)),
     () => ouiNon(pick([`${K} est sur la médiatrice de ${s}. Le cercle de centre ${K} passe par ${E}. Passe-t-il par ${F} ?`, `Un cercle de centre ${K} passe par ${E}, et ${K} est sur la médiatrice de ${s}. ${F} est-il sur ce cercle ?`]), true, `${K}${F} = ${K}${E} : ${F} est à la même distance de ${K} que ${E}, il est sur le cercle.`),
   ])();
 }
@@ -1308,11 +1473,13 @@ function genConsMilieuNombre(): Q {
     return lg(
       `${donnee} ${pick([`À quelle distance de ${X} poser l’équerre ?`, `À combien de ${X} est son milieu ?`, `Où poser l’équerre : à combien de ${X} ?`, `Son milieu est à combien de ${X} ?`])}`,
       L / 2, "cm", `L’équerre se pose au milieu : ${L} ÷ 2 = ${fr(L / 2)} cm.`,
+      figMed({ E, F, texteEF: `${L} cm` }),
     );
   const x = randomInt(2, 12);
   return lg(
     pick([`Le milieu de ${s} est à ${x} cm de ${X}. Combien mesure ${s} ?`, `L’équerre est posée au milieu de ${s}, à ${x} cm de ${X}. Calcule ${E}${F}.`, `Le milieu de ${s} est à ${x} cm de ${X}. Trouve ${E}${F}.`]),
     2 * x, "cm", `Le segment mesure deux fois ${x} cm : ${2 * x} cm.`,
+    figMed({ E, F, K: { nom: "" }, codes: true, texteEK: X === E ? `${x} cm` : undefined, texteKF: X === F ? `${x} cm` : undefined, texteEF: "?" }),
   );
 }
 function genConsEcartement(): Q {
@@ -1324,7 +1491,9 @@ function genConsEcartement(): Q {
   const grand = () => Math.floor(demi) + randomInt(1, 3);
   const petit = () => Math.max(1, Math.ceil(demi) - randomInt(1, 2));
   const r = `L’écartement doit dépasser la moitié de ${E}${F} : plus de ${L} ÷ 2 = ${fr(demi)} cm.`;
-  return pick([
+  // Le segment et sa longueur (le dernier cas n'a pas de nombre : le segment seul).
+  const fig = figMed({ E, F, texteEF: `${L} cm` });
+  const q: Q = pick([
     () => {
       const ok = Math.random() < 0.5;
       const x = ok ? grand() : petit();
@@ -1338,9 +1507,10 @@ function genConsEcartement(): Q {
     },
     () => {
       const cas = pick([{ t: "vaut la moitié de", n: 1 }, { t: "vaut moins que la moitié de", n: 0 }, { t: "vaut plus que la moitié de", n: 2 }]);
-      return qc(`L’écartement ${cas.t} ${s}. ${pick(["Combien de points communs ont les arcs ?", "Les arcs se coupent combien de fois ?"])}`, String(cas.n), ["0", "1", "2", "3"].filter((x) => x !== String(cas.n)), r);
+      return { ...qc(`L’écartement ${cas.t} ${s}. ${pick(["Combien de points communs ont les arcs ?", "Les arcs se coupent combien de fois ?"])}`, String(cas.n), ["0", "1", "2", "3"].filter((x) => x !== String(cas.n)), r), canvas: figMed({ E, F }) };
     },
   ])();
+  return { canvas: fig, ...q };
 }
 function genConsArcs(): Q {
   const [E, F, S, T] = lettres(4);

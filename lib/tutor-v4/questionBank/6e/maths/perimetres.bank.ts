@@ -1,6 +1,8 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { PRENOMS, pick, de, type Prenom } from "./entiers.bank";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import { rectangleCote, polygoneTrace, sommetsReguliers, figureNue } from "./aires.bank";
+import type { ConstructionCanvasData } from "@/lib/tutor-v4/types_canvas";
 
 function shuffle<T>(arr: T[]): T[] {
   return melangeEnPlace([...arr]);
@@ -120,31 +122,78 @@ const NOMMER: Record<string, string[]> = {
   triangle: ["", "", "ABC", "EFG", "MNP", "RST"],
 };
 /** [« un carré » / « le carré ABCD », « d’un carré » / « du carré ABCD »]. */
-function figureNommee(f: "carré" | "rectangle" | "triangle"): [string, string] {
+function figureNommee(f: "carré" | "rectangle" | "triangle"): [string, string, string] {
   const x = pick(NOMMER[f]);
-  return x ? [`le ${f} ${x}`, `du ${f} ${x}`] : [`un ${f}`, `d’un ${f}`];
+  return x ? [`le ${f} ${x}`, `du ${f} ${x}`, x] : [`un ${f}`, `d’un ${f}`, ""];
 }
-function texteCarreSimple(C: string): string {
+/** 14/11/2026 : le texte ET les lettres de la figure, pour que le dessin porte le même nom. */
+function texteCarreSimple(C: string): { text: string; nom: string } {
   const V = pick(VERBES);
-  const [un, dun] = figureNommee("carré");
-  return pick([
+  const [un, dun, nom] = figureNommee("carré");
+  return { nom, text: pick([
     `${V} le périmètre ${dun} de côté ${C}.`,
     `${V} le périmètre ${dun} de ${C} de côté.`,
     `${maj(un)} a pour côté ${C}. ${V} son périmètre.`,
     `${maj(un)} mesure ${C} de côté. Quel est son périmètre ?`,
     `Quel est le périmètre ${dun} de côté ${C} ?`,
     `Côté ${dun} : ${C}. ${V} son périmètre.`,
-  ]);
+  ]) };
 }
-function texteRectangleSimple(A: string, B: string): string {
+function texteRectangleSimple(A: string, B: string): { text: string; nom: string } {
   const V = pick(VERBES);
-  const [un, dun] = figureNommee("rectangle");
-  return pick([
+  const [un, dun, nom] = figureNommee("rectangle");
+  return { nom, text: pick([
     `${V} le périmètre ${dun} de ${A} sur ${B}.`,
     `${maj(un)} mesure ${A} sur ${B}. ${V} son périmètre.`,
     `${maj(un)} de ${A} sur ${B} : ${V.toLowerCase()} son périmètre.`,
     `Longueur ${A}, largeur ${B} : ${V.toLowerCase()} le périmètre ${dun}.`,
-  ]);
+  ]) };
+}
+
+// ----- 14/11/2026 : LES FIGURES DES ÉNONCÉS, à l'échelle des nombres tirés.
+/** Un triangle de côtés donnés (dans l'ordre de l'énoncé), le plus grand en base ; rien s'il est trop plat pour être lu. */
+function triangleDeCotes(vals: number[], u: U) {
+  const [c, a, b] = [...vals].sort((x, y) => y - x);
+  const x = (b * b + c * c - a * a) / (2 * c);
+  const h2 = b * b - x * x;
+  if (h2 <= 0 || Math.sqrt(h2) < 0.18 * c) return undefined;
+  const [A, B, C] = cadrerFigure([{ x: 0, y: 0 }, { x: c, y: 0 }, { x, y: Math.sqrt(h2) }]);
+  return {
+    kind: "triangle" as const,
+    size: { width: 320, height: 250 },
+    points: { A, B, C },
+    sideLabels: { AB: L(c, u), BC: L(a, u), CA: L(b, u) },
+    display: { showPoints: true, showLabels: false, showSides: true, showAngles: false },
+  };
+}
+/** Un polygone à côtés égaux (régulier, ou losange à 70°), un côté écrit, tous codés égaux. */
+function polygoneCotesEgaux(nomFigure: string, n: number, c: number, u: U): ConstructionCanvasData {
+  const t = (70 * Math.PI) / 180;
+  const pts = nomFigure === "losange"
+    ? [{ x: 0, y: 0 }, { x: c, y: 0 }, { x: c + c * Math.cos(t), y: c * Math.sin(t) }, { x: c * Math.cos(t), y: c * Math.sin(t) }]
+    : sommetsReguliers(n, c);
+  return polygoneTrace(pts, { textes: [L(c, u)], codes: Array.from({ length: n }, () => 1), description: `Un ${nomFigure} de côté ${L(c, u)}` });
+}
+/** Un enclos rectangulaire (ou carré) dont le bas laisse une ouverture, en pointillés. */
+function enclosOuvert(a: number, b: number, u: U, carre: boolean, w: number): ConstructionCanvasData {
+  const g0 = (a - w) / 2;
+  return {
+    kind: "construction",
+    points: [
+      { id: "A", x: 0, y: 0 }, { id: "G", x: g0, y: 0 }, { id: "H", x: g0 + w, y: 0 }, { id: "B", x: a, y: 0 }, { id: "C", x: a, y: b }, { id: "D", x: 0, y: b },
+    ].map((p) => ({ ...p, cache: true })),
+    polygones: [{ sommets: ["A", "B", "C", "D"], contour: "none" }],
+    segments: [
+      { a: "D", b: "C", texte: L(a, u), ...(carre ? { code: 1 } : {}) },
+      { a: "D", b: "A", ...(carre ? { code: 1 } : { texte: L(b, u) }) },
+      { a: "B", b: "C", ...(carre ? { code: 1 } : {}) },
+      { a: "A", b: "G" },
+      { a: "H", b: "B" },
+      { a: "G", b: "H", pointille: true, couleur: "#dc2626", texte: L(w, u) },
+    ],
+    angles: [{ sommet: "D", de: "A", vers: "C", droit: true }],
+    description: "Un enclos et son ouverture",
+  };
 }
 
 // ----- CARRÉ
@@ -154,8 +203,11 @@ function genCarre(etoile: 1 | 2 | 3, qcm = false) {
   const c = tirer(o.min, o.max, 0);
   const per = 4 * c;
   const C = L(c, o.u);
-  const text = etoile <= 2
-    ? texteCarreSimple(C)
+  const simple = etoile <= 2 ? texteCarreSimple(C) : null;
+  // 14/11/2026 : le carré dessiné, son côté écrit (et ses lettres si l'énoncé le nomme).
+  const canvas = rectangleCote(c, c, o.u, true, simple?.nom ?? "", { L: C });
+  const text = simple
+    ? simple.text
     : pick([
         `${p.nom} a ${o.nom} de ${C} de côté.\nQuel est son périmètre ?`,
         `${maj(o.nom)} a un côté de ${C}.\n${p.nom} veut faire le tour avec ${o.tour}. Quelle longueur lui faut-il ?`,
@@ -168,6 +220,7 @@ function genCarre(etoile: 1 | 2 | 3, qcm = false) {
     const aire = c * c !== per ? [`${fr(c * c)} ${o.u}²`] : [];
     return {
       text,
+      canvas,
       format: "qcm" as const,
       choices: shuffle([L(per, o.u), ...shuffle([...aire, ...faux]).slice(0, 3)]),
       expected: [L(per, o.u)],
@@ -175,7 +228,7 @@ function genCarre(etoile: 1 | 2 | 3, qcm = false) {
       explanation: explication + (aire.length ? ` Attention : ${fr(c)} × ${fr(c)} = ${fr(c * c)} ${o.u}² donnerait l’aire, pas le périmètre.` : ""),
     };
   }
-  return { text, format: "short" as const, expected: avecUnite(per, o.u), comparator: "number_equal" as const, explanation: explication };
+  return { text, canvas, format: "short" as const, expected: avecUnite(per, o.u), comparator: "number_equal" as const, explanation: explication };
 }
 
 // ----- RECTANGLE (★1 : entiers ; ★2 : QCM ; ★3 : décimaux ou deux unités)
@@ -205,8 +258,11 @@ function genRectangle(etoile: 1 | 2 | 3, qcm = false) {
   const A = uL === "m" && o.u === "cm" ? L(Lg / 100, "m") : L(Lg, uL);
   const B = L(lg, ul);
   const pron = /^une /.test(o.nom) ? "Elle" : "Il";
-  const text = etoile <= 2
-    ? texteRectangleSimple(A, B)
+  const simple = etoile <= 2 ? texteRectangleSimple(A, B) : null;
+  // Le rectangle dessiné à l'échelle (Lg et lg sont dans la même unité), ses côtés écrits comme dans l'énoncé.
+  const canvas = rectangleCote(Lg, lg, ul, false, simple?.nom ?? "", { L: A, l: B });
+  const text = simple
+    ? simple.text
     : Math.random() < 0.75 || qcm || etoile === 3
     ? pick([
         `${maj(o.nom)} mesure ${A} de long et ${B} de large.\nQuel est son périmètre ?`,
@@ -222,6 +278,7 @@ function genRectangle(etoile: 1 | 2 | 3, qcm = false) {
     const aire = [`${fr(Lg * lg)} ${ul}²`];
     return {
       text: text + consigne,
+      canvas,
       format: "qcm" as const,
       choices: shuffle([L(per, ul), ...shuffle([...new Set([...aire, ...faux])].filter((x) => x !== L(per, ul))).slice(0, 3)]),
       expected: [L(per, ul)],
@@ -229,7 +286,7 @@ function genRectangle(etoile: 1 | 2 | 3, qcm = false) {
       explanation: explication + ` Attention : ${L(Lg, ul)} × ${B} donnerait l’aire (en ${ul}²), pas le périmètre.`,
     };
   }
-  return { text: text + consigne, format: "short" as const, expected: avecUnite(per, ul), comparator: "number_equal" as const, explanation: explication };
+  return { text: text + consigne, canvas, format: "short" as const, expected: avecUnite(per, ul), comparator: "number_equal" as const, explanation: explication };
 }
 
 // ----- COMPRENDRE : le périmètre est le TOUR, une longueur (pas une surface).
@@ -268,8 +325,11 @@ function genComprendreSimple() {
         `Quelle grandeur mesure ${quoi} d’${f} ?`,
         `${maj(quoi)} d’${f} : quelle grandeur faut-il calculer ?`,
       ]);
+  // La figure nommée, sans rien surligner (ni le bord ni l'intérieur).
+  const canvas = figureNue(f);
   return {
     text,
+    ...(canvas ? { canvas } : {}),
     format: "qcm" as const,
     choices: deux ? shuffle(["le périmètre", "l’aire"]) : shuffle(["le périmètre", "l’aire", "le volume", "la masse"]),
     expected: [tour ? "le périmètre" : "l’aire"],
@@ -309,6 +369,8 @@ function genComprendre(etoile: 1 | 2 | 3 | 4) {
     const o = { nom: pick(FIGURES_NUES), u: pick(["mm", "cm", "m", "km"] as U[]) };
     const n = randomInt(12, 90);
     const quoi = Math.random() < 0.75 ? "périmètre" : "aire";
+    const fig = figureNue(o.nom);
+    const canvas = fig ? { canvas: fig } : {};
     const bon = quoi === "périmètre" ? `${n} ${o.u}` : `${n} ${o.u}²`;
     if (Math.random() < 0.5) {
       return {
@@ -317,6 +379,7 @@ function genComprendre(etoile: 1 | 2 | 3 | 4) {
           `Quelle écriture peut désigner ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom} ?`,
           `Choisis une écriture possible pour ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom}.`,
         ]),
+        ...canvas,
         format: "qcm" as const,
         choices: shuffle([`${n} ${o.u}`, `${n} ${o.u}²`, `${n} ${o.u}³`, `${n} kg`]),
         expected: [bon],
@@ -330,6 +393,7 @@ function genComprendre(etoile: 1 | 2 | 3 | 4) {
         `Quelle unité choisir pour ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom} ?`,
         `Choisis l’unité pour ${quoi === "aire" ? "l’aire" : "le périmètre"} d’${o.nom}.`,
       ]),
+      ...canvas,
       format: "qcm" as const,
       choices: shuffle([o.u, `${o.u}²`, `${o.u}³`, "kg"]),
       expected: [quoi === "périmètre" ? o.u : `${o.u}²`],
@@ -350,6 +414,7 @@ function genComprendre(etoile: 1 | 2 | 3 | 4) {
       `${p.nom} dit que le périmètre ${du(o.nom)} de ${L(a, o.u)} sur ${L(b, o.u)} vaut ${fr(a * b)}.\nQuelle est la bonne réponse ?`,
       `${p.nom} mesure ${o.nom} : ${L(a, o.u)} sur ${L(b, o.u)}.\nQuel est son périmètre ?`,
     ]),
+    canvas: rectangleCote(a, b, o.u, false, "", { L: L(a, o.u), l: L(b, o.u) }),
     format: "qcm" as const,
     choices: shuffle(choix),
     expected: [L(per, o.u)],
@@ -404,7 +469,9 @@ function genFigure(etoile: 1 | 2 | 3 | 4) {
     } while (a + b <= c || a + c <= b || b + c <= a);
     const s = [a, b, c].map((x) => L(x, o.u));
     const per = a + b + c;
+    const tri = triangleDeCotes([a, b, c], o.u);
     return {
+      ...(tri ? { canvas: tri } : {}),
       text: pick([
         ...(() => {
           // Nommé (ABC), la liste perd son « et » pour rester à 12 mots.
@@ -426,6 +493,7 @@ function genFigure(etoile: 1 | 2 | 3 | 4) {
     const c = tirer(o.min, Math.min(o.max, 40));
     const per = f.n * c;
     return {
+      canvas: polygoneCotesEgaux(f.nom, f.n, c, o.u),
       text: pick([
         `Calcule le périmètre d’un ${f.nom} de côté ${L(c, o.u)}.`,
         `Un ${f.nom} a pour côté ${L(c, o.u)}. Calcule son périmètre.`,
@@ -448,7 +516,9 @@ function genFigure(etoile: 1 | 2 | 3 | 4) {
     } while (a + b <= c || a + c <= b || b + c <= a);
     const s = [a, b, c].map((x) => L(x, o.u));
     const per = a + b + c;
+    const tri = triangleDeCotes([a, b, c], o.u);
     return {
+      ...(tri ? { canvas: tri } : {}),
       text: pick([
         `Les côtés ${du(o.nom)} mesurent ${listeCotes(s)}.\nQuel est son périmètre ?`,
         `${p.nom} mesure ${o.nom} : ${listeCotes(s)}.\nCalcule son périmètre.`,
@@ -466,6 +536,7 @@ function genFigure(etoile: 1 | 2 | 3 | 4) {
     const c = tirer(o.min, o.max);
     const per = f.n * c;
     return {
+      canvas: polygoneCotesEgaux(f.nom, f.n, c, o.u),
       text: `${o.quoi(f.nom)} de côté ${L(c, o.u)}.\n${pick(["Quel est son périmètre ?", `${p.nom} en fait le tour. Quelle longueur ?`, "Calcule son périmètre."])}`,
       format: "short" as const,
       expected: avecUnite(per, o.u),
@@ -573,6 +644,7 @@ function genProbleme(etoile: 2 | 3 | 4 | 5) {
   const per = carre ? 4 * a : 2 * (a + b);
   const dims = carre ? `${L(a, u)} de côté` : `${L(a, u)} sur ${L(b, u)}`;
   const calcul = carre ? `4 × ${L(a, u)} = ${L(per, u)}` : `2 × (${L(a, u)} + ${L(b, u)}) = ${L(per, u)}`;
+  const canvas = rectangleCote(a, b, u, carre, "", { L: L(a, u), l: L(b, u) });
   if (etoile === 2) {
     // 03/11/2026 : ★2, faire le tour d'une figure nue (le carré ou le rectangle est dit, pas d'objet).
     const fig = carre ? "carré" : "rectangle";
@@ -586,6 +658,7 @@ function genProbleme(etoile: 2 | 3 | 4 | 5) {
         `${pick(VERBES)} la longueur du tour d’un ${fig} de ${dims}.`,
         `${pick(VERBES)} la longueur d’un fil qui entoure un ${fig} de ${dims}.`,
       ]),
+      canvas,
       format: "short" as const,
       expected: avecUnite(per, u),
       comparator: "number_equal" as const,
@@ -599,6 +672,7 @@ function genProbleme(etoile: 2 | 3 | 4 | 5) {
         `${maj(nom)} mesure ${dims}. On veut l’entourer avec ${tour}.\nQuelle longueur faut-il prévoir ?`,
         `${p.nom} veut décorer ${leNom(nom)} de ${dims}.\nQuelle longueur ${deMatiere(tour)} faut-il pour le tour ?`,
       ]),
+      canvas,
       format: "short" as const,
       expected: avecUnite(per, u),
       comparator: "number_equal" as const,
@@ -614,6 +688,7 @@ function genProbleme(etoile: 2 | 3 | 4 | 5) {
     const total = n * per;
     return {
       text: `${maj(nom)} mesure ${dims}. ${p.nom} en fait ${n} fois le tour en courant.\nQuelle distance parcourt-${il(p)} ?`,
+      canvas,
       format: "short" as const,
       expected: avecUnite(total, u),
       comparator: "number_equal" as const,
@@ -626,10 +701,12 @@ function genProbleme(etoile: 2 | 3 | 4 | 5) {
     `${p.nom} pose ${tour} autour ${du(nom)} de ${dims}. On garde ${ouverture} de ${L(largeurOuv, u)} sans ${tour.replace(/^(un|une|du|de la|des) /, "")}.\nQuelle longueur lui faut-il ?`,
   ]);
   const explication = expl(`Le tour complet : ${calcul}. On enlève ${ouverture} : ${L(per, u)} − ${L(largeurOuv, u)} = ${L(reste, u)}.`);
+  const ouvert = enclosOuvert(a, b, u, carre, largeurOuv);
   if (etoile === 5) {
     const faux = [per, arrondi(a + b - largeurOuv), arrondi(per + largeurOuv), arrondi(2 * a + b - largeurOuv)].filter((x) => x !== reste);
     return {
       text,
+      canvas: ouvert,
       format: "qcm" as const,
       choices: shuffle([L(reste, u), ...shuffle([...new Set(faux.map((x) => L(x, u)))]).slice(0, 3)]),
       expected: [L(reste, u)],
@@ -637,7 +714,7 @@ function genProbleme(etoile: 2 | 3 | 4 | 5) {
       explanation: explication,
     };
   }
-  return { text, format: "short" as const, expected: avecUnite(reste, u), comparator: "number_equal" as const, explanation: explication };
+  return { text, canvas: ouvert, format: "short" as const, expected: avecUnite(reste, u), comparator: "number_equal" as const, explanation: explication };
 }
 
 // ----- DÉFIS : retrouver un côté, prévoir une variation, comparer des contours.
@@ -653,6 +730,7 @@ function genDefiInverse(etoile: 4 | 5) {
         `${p.nom} a fait le tour ${du(o.nom)} : ${L(per, o.u)} en tout.\nQuelle est la longueur d’un côté ?`,
         `${maj(o.nom)} a un périmètre de ${L(per, o.u)}.\nTrouve la longueur de son côté.`,
       ])),
+      canvas: rectangleCote(c, c, o.u, true, "", { L: "?" }),
       format: "short" as const,
       expected: avecUnite(c, o.u),
       comparator: "number_equal" as const,
@@ -669,6 +747,7 @@ function genDefiInverse(etoile: 4 | 5) {
       `Le périmètre ${du(o.nom)} est ${L(per, o.u)}. Sa longueur est ${L(a, o.u)}.\nQuelle est sa largeur ?`,
       `${p.nom} sait que ${leNom(o.nom)} a un périmètre de ${L(per, o.u)} et une longueur de ${L(a, o.u)}.\nCombien mesure la largeur ?`,
     ])),
+    canvas: rectangleCote(a, b, o.u, false, "", { L: L(a, o.u), l: "?" }),
     format: "short" as const,
     expected: avecUnite(b, o.u),
     comparator: "number_equal" as const,
@@ -687,6 +766,7 @@ function genDefiVariation() {
   const action = quoi === "deux" ? `allonge la longueur ET la largeur de ${L(x, o.u)} chacune` : `allonge seulement la ${quoi} de ${L(x, o.u)}`;
   return {
     text: defi(`${maj(o.nom)} mesure ${L(a, o.u)} sur ${L(b, o.u)}. ${p.nom} ${action}.\n${pick(["De combien le périmètre augmente-t-il ?", "Le périmètre grandit de combien ?"])}`),
+    canvas: rectangleCote(a, b, o.u, false, "", { L: L(a, o.u), l: L(b, o.u) }),
     format: "short" as const,
     expected: avecUnite(delta, o.u),
     comparator: "number_equal" as const,
@@ -716,6 +796,7 @@ function genDefiMemePerimetre() {
       `Un carré mesure ${L(c, u)} de côté. ${p.nom} cherche un rectangle qui a le même périmètre.\nLequel choisir ?`,
       `Quel rectangle a le même contour qu’un carré de ${L(c, u)} de côté ? ${p.nom} hésite.`,
     ])),
+    canvas: rectangleCote(c, c, u, true, "", { L: L(c, u) }),
     format: "qcm" as const,
     choices: shuffle([bon, ...[...faux].slice(0, 3)]),
     expected: [bon],

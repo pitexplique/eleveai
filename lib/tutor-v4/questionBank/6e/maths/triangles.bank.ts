@@ -1,4 +1,4 @@
-import type { TutorBankItemV4, TriangleCanvasData, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, TriangleCanvasData, TutorGeneratedQuestionV4, DroitesCanvasData } from "@/lib/tutor-v4/types";
 import { PRENOMS, de, type Prenom } from "./entiers.bank";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
@@ -1115,7 +1115,7 @@ function genAngleManquantQcm(ctx = false): Q {
   const pieges = [180 - a, 180 - b, a + b, 90 - Math.min(a, b), rep + 10, rep - 10].filter((x) => x > 0 && x < 180 && x !== rep);
   return {
     ...(ctx
-      ? { text: `${situationCourte(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Combien mesure l’angle en ${cache} ?`, `Trouve l’angle en ${cache}.`])}` }
+      ? { text: `${situationCourte(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Combien mesure l’angle en ${cache} ?`, `Trouve l’angle en ${cache}.`])}`, canvas: angleManquantNu(t).canvas }
       : angleManquantNu(t)),
     format: "qcm",
     choices: shuffle([`${rep}°`, ...shuffle([...new Set(pieges)]).slice(0, 3).map((x) => `${x}°`)]),
@@ -1131,7 +1131,7 @@ function genAngleManquantCourt(ctx = false): Q {
   const b = vals[V];
   return {
     ...(ctx
-      ? { text: `${situationCourte(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Calcule l’angle en ${cache}.`, `Combien mesure l’angle en ${cache} ?`, `Quel est le troisième angle ?`])}` }
+      ? { text: `${situationCourte(N, o, P)} ${donneesDeuxAngles(U, V, a, b, P)} ${pick([`Calcule l’angle en ${cache}.`, `Combien mesure l’angle en ${cache} ?`, `Quel est le troisième angle ?`])}`, canvas: angleManquantNu(t).canvas }
       : angleManquantNu(t)),
     format: "short",
     expected: [`${rep}°`],
@@ -1274,6 +1274,7 @@ function genPossibleSimple(ctx = false): Q {
     expected: [cas === "possible" ? "oui" : "non"],
     comparator: "mcq_exact",
     explanation: expl(pourquoiPossible(ls, m.u)),
+    canvas: baguettes(ls, m.u), // 14/11/2026 : les trois baguettes, séparées, à l'échelle
   };
 }
 function genPossibleLimite(): Q {
@@ -1287,6 +1288,7 @@ function genPossibleLimite(): Q {
     expected: [cas === "possible" ? "oui" : "non"],
     comparator: "mcq_exact",
     explanation: expl(pourquoiPossible(ls, m.u)),
+    canvas: baguettes(ls, m.u), // 14/11/2026 : les trois baguettes, séparées, à l'échelle
   };
 }
 function genTroisiemeCote(): Q {
@@ -1318,6 +1320,7 @@ function genTroisiemeCote(): Q {
     explanation: expl(
       `Le troisième côté doit être plus petit que ${fr(a)} + ${fr(b)} = ${fr(hi)} ${m.u}, et plus grand que ${fr(a)} − ${fr(b)} = ${fr(lo)} ${m.u} (sinon les deux autres ne se rejoignent pas). Seul ${fr(juste)} ${m.u} convient.`,
     ),
+    canvas: baguettes([a, b], m.u), // 14/11/2026 : les DEUX morceaux connus seulement ; le troisième reste à choisir
   };
 }
 
@@ -1396,8 +1399,10 @@ function genDefiIsoceleAngles(): Q {
   const o = objet();
   const [X, Y, Z] = sommetsTriangle();
   const N = `${X}${Y}${Z}`;
-  const [S, U] = shuffle([X, Y, Z]);
+  const [S, U, V] = shuffle([X, Y, Z]);
   const mode = pick(["sommet", "base", "equi", "rectIso"] as const);
+  // 14/11/2026 : le sommet principal S en haut (C du dessin), U en bas à gauche (A).
+  const iso = (base: number, lab: Lab) => figure(pointsParAngles(base, base), [U, V, S], { marks: { equalSides: [["BC", "CA"]] }, angleLabels: lab });
   if (mode === "equi")
     return {
       text: `${situationCourte(N, o, P)} Ce triangle est équilatéral. ${pick(["Combien mesure chacun de ses angles ?", `Combien mesure l’angle en ${S} ?`])}`,
@@ -1405,6 +1410,7 @@ function genDefiIsoceleAngles(): Q {
       expected: ["60°"],
       comparator: "number_equal",
       explanation: expl("Ses trois angles sont égaux et font 180° en tout : chacun mesure 180 ÷ 3 = 60°."),
+      canvas: figureEquilaterale([U, V, S], { C: "?" }),
     };
   if (mode === "rectIso")
     return {
@@ -1413,6 +1419,7 @@ function genDefiIsoceleAngles(): Q {
       expected: ["45°"],
       comparator: "number_equal",
       explanation: expl(`L’angle droit en ${S} mesure 90°. Les deux autres angles sont égaux et se partagent 180 − 90 = 90°, donc chacun mesure 90 ÷ 2 = 45°.`),
+      canvas: figure(pointsParAngles(45, 45), [U, V, S], { marks: { rightAngleAt: "C", equalSides: [["BC", "CA"]] }, angleLabels: { A: "?" } }),
     };
   if (mode === "sommet") {
     const sommet = randomInt(20, 150);
@@ -1423,6 +1430,7 @@ function genDefiIsoceleAngles(): Q {
       expected: [`${fr(base)}°`],
       comparator: "number_equal",
       explanation: expl(`Les deux angles à la base sont égaux. Ils se partagent 180 − ${sommet} = ${180 - sommet}°, donc chacun mesure ${180 - sommet} ÷ 2 = ${fr(base)}°.`),
+      canvas: iso(base, { C: `${sommet}°`, A: "?" }),
     };
   }
   const base = randomInt(15, 85);
@@ -1432,6 +1440,7 @@ function genDefiIsoceleAngles(): Q {
     expected: [`${180 - 2 * base}°`],
     comparator: "number_equal",
     explanation: expl(`Les deux angles à la base mesurent ${base}° chacun. L’angle en ${S} vaut 180 − ${base} − ${base} = ${180 - 2 * base}°.`),
+    canvas: iso(base, { A: `${base}°`, C: "?" }),
   };
 }
 function genDefiIsoceleBase(): Q {
@@ -1502,18 +1511,62 @@ function genDefiIsocelePerimetreDeuxCotes(): Q {
 type Noms = [string, string, string];
 type CoteFig = "AB" | "BC" | "CA";
 const voir = () => pick(["Observe la figure.", "Regarde la figure.", "Lis la figure."]);
-function qcm(text: string, juste: string, faux: string[], calcul: string, canvas?: TriangleCanvasData): Q {
+function qcm(text: string, juste: string, faux: string[], calcul: string, canvas?: TriangleCanvasData | DroitesCanvasData): Q {
   return { text, format: "qcm", choices: shuffle([juste, ...faux]), expected: [juste], comparator: "mcq_exact", explanation: expl(calcul), ...(canvas ? { canvas } : {}) };
 }
-function court(text: string, juste: string, calcul: string, canvas?: TriangleCanvasData): Q {
+function court(text: string, juste: string, calcul: string, canvas?: TriangleCanvasData | DroitesCanvasData): Q {
   return { text, format: "short", expected: [juste], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}) };
 }
 /** Réponse courte en lettres : toutes les écritures justes sont acceptées. */
 function courtLettres(text: string, justes: string[], calcul: string, canvas?: TriangleCanvasData): Q {
   return { text, format: "short", expected: justes, comparator: "exact_text", explanation: expl(calcul), ...(canvas ? { canvas } : {}) };
 }
-const ouiNon = (text: string, oui: boolean, calcul: string, canvas?: TriangleCanvasData) => qcm(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
+const ouiNon = (text: string, oui: boolean, calcul: string, canvas?: TriangleCanvasData | DroitesCanvasData) => qcm(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
 const vraiFaux = (text: string, vrai: boolean, calcul: string, canvas?: TriangleCanvasData) => qcm(text, vrai ? "vrai" : "faux", [vrai ? "faux" : "vrai"], calcul, canvas);
+// ═════════════════════════════════════════════════════════════════════
+// ⭐ 14/11/2026 — PLUS DE FIGURES EN « PROPRIÉTÉS » (29 % des énoncés en avaient).
+// Les deux angles donnés sont ÉCRITS sur le triangle dessiné à leurs mesures,
+// l'angle cherché porte « ? », un angle droit donné a son petit carré. Aucune
+// figure quand elle trancherait la question : « ces angles forment-ils un
+// triangle ? » (on ne dessine pas un triangle qui n'existe pas), « est-il aigu,
+// droit ou obtus ? » (la forme le dirait), les vrai/faux sur ce qu'un triangle
+// PEUT avoir. L'inégalité triangulaire : les trois BAGUETTES, à l'échelle,
+// séparées — jamais un essai de triangle, fermé ou ouvert.
+// ═════════════════════════════════════════════════════════════════════
+type Lab = Partial<Record<"A" | "B" | "C", string>>;
+/** Le triangle d'angles angA (en A, à gauche) et angB (en B, à droite) ; C en haut. */
+function figureAngles(angA: number, angB: number, noms: Noms, lab: Lab, plus: Partial<TriangleCanvasData> = {}): TriangleCanvasData {
+  const angles = { A: angA, B: angB, C: 180 - angA - angB };
+  const droit = (["A", "B", "C"] as const).find((k) => angles[k] === 90);
+  // Le petit carré seulement si l'angle droit est une DONNÉE (jamais sur l'angle cherché).
+  const carre = droit && lab[droit] !== "?" ? { marks: { rightAngleAt: droit, ...(plus.marks ?? {}) } } : {};
+  return figure(pointsParAngles(angA, angB), noms, { angleLabels: lab, ...plus, ...carre });
+}
+/** Un triangle équilatéral, ses trois côtés codés égaux. */
+function figureEquilaterale(noms: Noms, lab: Lab = {}): TriangleCanvasData {
+  return figure(pointsParCotes(1, 1, 1), noms, { marks: { equalSides: [["AB", "BC"], ["BC", "CA"]] }, angleLabels: lab });
+}
+/** Trois baguettes à l'échelle, séparées, chacune avec sa longueur (ou « XY = 4 cm »). */
+function baguettes(ls: number[], u: string, noms?: string[]): DroitesCanvasData {
+  const max = Math.max(...ls);
+  const k = 250 / max;
+  return {
+    kind: "droites",
+    size: { width: 340, height: 200 },
+    lines: ls.map((l, i) => ({
+      id: `b${i}`,
+      type: "segment" as const,
+      from: { x: 45, y: 50 + 55 * i },
+      to: { x: 45 + k * l, y: 50 + 55 * i },
+      label: `${noms ? `${noms[i]} = ` : ""}${fr(l)} ${u}`,
+      color: ["#2563eb", "#16a34a", "#ea580c"][i],
+      strokeWidth: 7,
+      display: { showLabel: true },
+    })),
+    points: [],
+    display: { showLabels: true, showPoints: false },
+  };
+}
 const permutations = (x: string, y: string, z: string) => [x + y + z, x + z + y, y + x + z, y + z + x, z + x + y, z + y + x];
 /** Trois sommets, deux lettres étrangères et une figure quelconque aux mêmes noms. */
 function troisSommets() {
@@ -2748,11 +2801,13 @@ function genSommeVraiFaux(): Q {
       pick(["Complète : la somme des angles d’un triangle vaut … °.", "Complète : les 3 angles d’un triangle font … °.", "Dans un triangle, les 3 angles font combien de degrés ?"]),
       "180°",
       "Dans TOUS les triangles, la somme des trois angles vaut 180°.",
+      dessinQuelconque(sommetsTriangle()), // 14/11/2026 : un triangle sans mesure : il ne donne pas 180
     );
   return vraiFaux(
     pick([`La somme des angles d’un triangle vaut ${v}°. Vrai ou faux ?`, `Les 3 angles d’un triangle font ${v}°. Vrai ou faux ?`, `Tout triangle a des angles qui font ${v}°. Vrai ou faux ?`, `Dans un triangle, les 3 angles font ${v}°. Vrai ou faux ?`, `Les angles d’un triangle font toujours ${v}° en tout. Vrai ou faux ?`, `Un triangle a toujours ${v}° d’angles en tout. Vrai ou faux ?`]),
     vrai,
     "Dans TOUS les triangles, la somme des trois angles vaut 180°.",
+    dessinQuelconque(sommetsTriangle()), // 14/11/2026 : un triangle, sans aucune mesure : il ne tranche pas
   );
 }
 function genSommeTrios(): Q {
@@ -2798,12 +2853,14 @@ function genSommeReste(): Q {
       pick(["Un triangle a un angle droit. Combien font les 2 autres angles ?", "Avec un angle droit, combien font les 2 autres angles ?", "Triangle rectangle : calcule la somme des 2 angles aigus."]),
       "90°",
       "L’angle droit prend 90°. Il reste 180 − 90 = 90° pour les deux autres.",
+      figure(pointsParAngles(35, 55), t.noms, { marks: { rightAngleAt: "C" } }), // 14/11/2026 : l'angle droit, son petit carré
     );
   const d = t.a + t.b;
   return court(
     pick([`Dans un triangle, deux angles font ${d}° en tout. Combien mesure le troisième ?`, `Dans un triangle, deux angles font ${d}°. Calcule le troisième.`, `Il reste un angle. Les 2 autres font ${d}°. Combien mesure-t-il ?`]),
     `${180 - d}°`,
     `180 − ${d} = ${180 - d}°.`,
+    figure(pointsParAngles(t.a, t.b), t.noms, { angleLabels: { C: "?" } }), // 14/11/2026 : les deux connus en bas, sans leur détail
   );
 }
 function genSommeEcart(): Q {
@@ -2829,6 +2886,7 @@ function genSommeEcart(): Q {
     pick([`Les angles du triangle ${X}${Y}${Z} font ${v}° en tout. Vrai ou faux ?`, `La somme des angles d’un triangle peut valoir ${v}°. Vrai ou faux ?`, `Les 3 angles d’un triangle font ${v}° en tout. Vrai ou faux ?`]),
     oui,
     "La somme des angles d’un triangle vaut toujours 180°.",
+    dessinQuelconque([X, Y, Z]), // 14/11/2026 : le triangle nommé, sans mesure
   );
 }
 function genSommeEgaux(): Q {
@@ -2838,6 +2896,7 @@ function genSommeEgaux(): Q {
       pick(["Trois angles égaux font 180°. Combien mesure chacun ?", "Un triangle a 3 angles égaux. Calcule un de ces angles.", "Les 3 angles d’un triangle sont égaux. Combien mesure chacun ?"]),
       "60°",
       "180 ÷ 3 = 60°.",
+      figure(pointsParAngles(60, 60), sommetsTriangle(), { marks: { equalAngles: [["A", "B"], ["B", "C"]] }, angleLabels: { C: "?" } }),
     );
   if (mode === "deuxConnus") {
     const b = pick([20, 30, 40, 50, 70, 80]);
@@ -2845,6 +2904,7 @@ function genSommeEgaux(): Q {
       pick([`Dans un triangle, deux angles mesurent ${b}° chacun. Calcule le troisième.`, `Dans un triangle, deux angles égaux font ${b}° chacun. Combien mesure le troisième ?`, `Dans un triangle, deux angles mesurent ${b}° chacun. Trouve le dernier.`, `Dans un triangle, deux angles mesurent ${b}° chacun. Que reste-t-il pour le troisième ?`]),
       `${180 - 2 * b}°`,
       `${b} + ${b} = ${2 * b}. Il reste 180 − ${2 * b} = ${180 - 2 * b}°.`,
+      figureAngles(b, b, sommetsTriangle(), { A: `${b}°`, B: `${b}°`, C: "?" }),
     );
   }
   const c = pick([20, 40, 60, 80, 100, 120]);
@@ -2852,6 +2912,7 @@ function genSommeEgaux(): Q {
     pick([`Dans un triangle, un angle mesure ${c}°. Les 2 autres sont égaux. Combien mesure chacun ?`, `Un triangle a un angle de ${c}°. Les 2 autres sont égaux. Calcule chacun.`, `Dans un triangle, un angle mesure ${c}°. Les 2 autres sont égaux. Trouve leur mesure.`]),
     `${(180 - c) / 2}°`,
     `180 − ${c} = ${180 - c}, puis ${180 - c} ÷ 2 = ${(180 - c) / 2}°.`,
+    figure(pointsParAngles((180 - c) / 2, (180 - c) / 2), sommetsTriangle(), { marks: { equalAngles: [["A", "B"]] }, angleLabels: { C: `${c}°`, A: "?" } }),
   );
 }
 
@@ -2871,10 +2932,13 @@ function pieges(a: number, b: number, rep: number) {
 function genManquantCalcul(): Q {
   const { a, b, rep } = deuxAnglesRonds();
   const mode = pick(["calcul", "trou", "somme"] as const);
-  if (mode === "calcul") return court(pick([`Calcule 180° − ${a}° − ${b}°.`, `Effectue 180° − ${a}° − ${b}°.`, `Combien font 180° − ${a}° − ${b}° ?`]), `${rep}°`, pourquoiManquant(a, b, rep));
-  if (mode === "trou") return court(pick([`Complète : ${a}° + ${b}° + … = 180°.`, `Trouve ce qui manque : ${a}° + ${b}° + … = 180°.`, `Quel angle manque : ${a}° + ${b}° + … = 180° ?`, `Trouve l’angle qui manque : ${a}° + … + ${b}° = 180°.`]), `${rep}°`, pourquoiManquant(a, b, rep));
+  // 14/11/2026 : le triangle de ces angles, les deux connus écrits, « ? » sur le troisième.
+  const noms = sommetsTriangle();
+  const fig = figureAngles(a, b, noms, { A: `${a}°`, B: `${b}°`, C: "?" });
+  if (mode === "calcul") return court(pick([`Calcule 180° − ${a}° − ${b}°.`, `Effectue 180° − ${a}° − ${b}°.`, `Combien font 180° − ${a}° − ${b}° ?`]), `${rep}°`, pourquoiManquant(a, b, rep), fig);
+  if (mode === "trou") return court(pick([`Complète : ${a}° + ${b}° + … = 180°.`, `Trouve ce qui manque : ${a}° + ${b}° + … = 180°.`, `Quel angle manque : ${a}° + ${b}° + … = 180° ?`, `Trouve l’angle qui manque : ${a}° + … + ${b}° = 180°.`]), `${rep}°`, pourquoiManquant(a, b, rep), fig);
   const d = a + b;
-  return court(pick([`Dans un triangle, deux angles font ${d}° en tout. Trouve le troisième.`, `Dans un triangle, deux angles font ${d}°. Combien mesure le troisième ?`, `Calcule le troisième angle : les 2 autres font ${d}°.`]), `${rep}°`, `Les trois angles font 180°. 180 − ${d} = ${rep}°.`);
+  return court(pick([`Dans un triangle, deux angles font ${d}° en tout. Trouve le troisième.`, `Dans un triangle, deux angles font ${d}°. Combien mesure le troisième ?`, `Calcule le troisième angle : les 2 autres font ${d}°.`]), `${rep}°`, `Les trois angles font 180°. 180 − ${d} = ${rep}°.`, figureAngles(a, b, noms, { C: "?" }));
 }
 function genManquantFigure1(): Q {
   const { a, b, rep } = deuxAnglesRonds();
@@ -2887,8 +2951,9 @@ function genManquantFigure1(): Q {
 }
 function genManquantQcm1(): Q {
   const { a, b, rep } = deuxAnglesRonds();
+  const noms = sommetsTriangle();
   if (Math.random() < 0.3)
-    return court(pick([`Deux angles mesurent ${a}° et ${b}°. Combien font-ils ensemble ?`, `Additionne les angles ${a}° et ${b}°.`]), `${a + b}°`, `${a} + ${b} = ${a + b}°. Pour le troisième, on enlèverait ce nombre à 180°.`);
+    return court(pick([`Deux angles mesurent ${a}° et ${b}°. Combien font-ils ensemble ?`, `Additionne les angles ${a}° et ${b}°.`]), `${a + b}°`, `${a} + ${b} = ${a + b}°. Pour le troisième, on enlèverait ce nombre à 180°.`, figureAngles(a, b, noms, { A: `${a}°`, B: `${b}°` }));
   return qcm(
     pick([
       `Deux angles mesurent ${a}° et ${b}°. Choisis le troisième.`,
@@ -2903,6 +2968,7 @@ function genManquantQcm1(): Q {
     `${rep}°`,
     pieges(a, b, rep),
     pourquoiManquant(a, b, rep),
+    figureAngles(a, b, noms, { A: `${a}°`, B: `${b}°`, C: "?" }),
   );
 }
 
@@ -2977,6 +3043,7 @@ function genManquantEgaux(): Q {
       ]),
       `${g}°`,
       `Les trois angles font 180°. 180 − ${p + q} = ${g}°.`,
+      figureAngles(p, q, [U, V, S], { C: "?" }), // 14/11/2026 : seule la somme est connue, « ? » en S
     );
   }
   if (Math.random() < 0.5) {
@@ -3057,6 +3124,7 @@ function genManquantControle(): Q {
       ]),
       vrai,
       `180 − ${p} − ${q} = ${g}°.`,
+      figureAngles(p, q, [P1, P2, P3], { A: `${p}°`, B: `${q}°`, C: "?" }), // 14/11/2026 : l'annonce n'est PAS écrite
     );
   }
   if (mode === "nature") {
@@ -3074,6 +3142,7 @@ function genManquantControle(): Q {
     pick([`Angles du triangle : ${u}°, … et ${v}°. Trouve l’angle manquant.`, `Complète les angles du triangle : ${u}°, ${v}° et … .`, `Le triangle a les angles ${u}° et ${v}°. Écris le dernier.`]),
     `${w}°`,
     `180 − ${u} − ${v} = ${w}°.`,
+    figureAngles(u, v, [P1, P2, P3], { A: `${u}°`, B: `${v}°`, C: "?" }),
   );
 }
 
@@ -3112,6 +3181,7 @@ function genPossibleGrand(): Q {
     pick([`Additionne les 2 plus petits : ${liste3(ls, u)}.`, `Additionne les 2 plus courts : ${liste3(ls, u)}.`, `Ajoute les 2 plus petits : ${liste3(ls, u)}.`, `Somme des 2 plus petits : ${liste3(ls, u)} ?`]),
     `${x + y} ${u}`,
     `Les deux plus petits sont ${x} et ${y} : ${x} + ${y} = ${x + y} ${u}.`,
+    baguettes(ls, u),
   );
 }
 function genPossibleComparer(): Q {
@@ -3158,7 +3228,7 @@ function genPossibleConclure(): Q {
       oui,
       pourquoi,
     );
-  if (mode === "direct") return ouiNon(pick([`Un triangle de côtés ${liste3(ls, u)} existe-t-il ?`, `Existe-t-il un triangle de ${liste3(ls, u)} ?`, `Peut-on tracer un triangle de ${liste3(ls, u)} ?`, `Ces longueurs forment-elles un triangle : ${liste3(ls, u)} ?`, `Forme-t-on un triangle avec ${liste3(ls, u)} ?`]), oui, pourquoi);
+  if (mode === "direct") return ouiNon(pick([`Un triangle de côtés ${liste3(ls, u)} existe-t-il ?`, `Existe-t-il un triangle de ${liste3(ls, u)} ?`, `Peut-on tracer un triangle de ${liste3(ls, u)} ?`, `Ces longueurs forment-elles un triangle : ${liste3(ls, u)} ?`, `Forme-t-on un triangle avec ${liste3(ls, u)} ?`]), oui, pourquoi, baguettes(ls, u));
   const vrai = Math.random() < 0.5;
   return ouiNon(
     vrai
@@ -3192,6 +3262,7 @@ function genPossibleTroisieme(): Q {
       `${pick(dedans)} cm`,
       uniques.slice(0, 3).map((x) => `${x} cm`),
       `Le troisième côté doit être plus petit que ${a} + ${b} = ${hi} cm et plus grand que ${a} − ${b} = ${lo} cm.`,
+      baguettes([a, b], "cm"), // 14/11/2026 : les deux côtés connus, en baguettes
     );
   const bons = shuffle(dedans).slice(0, 3).map((x) => `${x} cm`);
   return qcm(
@@ -3199,6 +3270,7 @@ function genPossibleTroisieme(): Q {
     `${uniques[0]} cm`,
     bons,
     `Le troisième côté doit être plus petit que ${a} + ${b} = ${hi} cm et plus grand que ${a} − ${b} = ${lo} cm.`,
+    baguettes([a, b], "cm"),
   );
 }
 function genPossibleSeries(): Q {
@@ -3251,6 +3323,7 @@ function genPossibleNomme(): Q {
       ]),
       oui,
       pourquoiPossible([x, y, z], u),
+      baguettes([x, y, z], u, [lg(X, Y), lg(Y, Z), lg(X, Z)]), // 14/11/2026 : les trois côtés en baguettes séparées
     );
   }
   const a = randomInt(5, 14);
@@ -3260,12 +3333,14 @@ function genPossibleNomme(): Q {
       pick([`Deux côtés mesurent ${a} cm et ${b} cm. Donne le plus grand troisième côté entier.`, `Deux côtés font ${a} cm et ${b} cm. Trouve le plus grand troisième côté entier.`]),
       `${a + b - 1} cm`,
       `Il doit rester plus petit que ${a} + ${b} = ${a + b} cm. En cm entiers : ${a + b - 1} cm.`,
+      baguettes([a, b], "cm"),
     );
   if (mode === "min")
     return court(
       pick([`Deux côtés mesurent ${a} cm et ${b} cm. Trouve le plus petit troisième côté entier.`, `Deux côtés font ${a} cm et ${b} cm. Donne le plus petit troisième côté entier.`]),
       `${a - b + 1} cm`,
       `Il doit être plus grand que ${a} − ${b} = ${a - b} cm. En cm entiers : ${a - b + 1} cm.`,
+      baguettes([a, b], "cm"),
     );
   return ouiNon(
     pick([`Les 2 petits côtés font ${x + y} ${u}. Le grand mesure ${z} ${u}. Le triangle existe-t-il ?`, `Le grand côté fait ${z} ${u}, les 2 autres font ${x + y} ${u}. Le triangle existe-t-il ?`]),
@@ -3305,6 +3380,7 @@ function genProprieteCalcul1(): Q {
       pick(["Un triangle équilatéral : combien mesure chaque angle ?", "Combien mesure un angle d’un triangle équilatéral ?", "Calcule un angle d’un triangle équilatéral."]),
       "60°",
       "Ses trois angles sont égaux : 180 ÷ 3 = 60°.",
+      figureEquilaterale(sommetsTriangle(), { C: "?" }), // 14/11/2026 : l'énoncé DONNE « équilatéral » : le codage est bienvenu
     );
   if (mode === "isocele") {
     const b = pick([30, 40, 50, 60, 70]);
@@ -3312,6 +3388,7 @@ function genProprieteCalcul1(): Q {
       pick([`Deux angles égaux mesurent ${b}°. Calcule le troisième.`, `Un triangle a 2 angles de ${b}°. Trouve le troisième.`, `Un triangle a deux angles de ${b}°. Combien mesure le troisième ?`]),
       `${180 - 2 * b}°`,
       `${b} + ${b} = ${2 * b}. 180 − ${2 * b} = ${180 - 2 * b}°.`,
+      figureAngles(b, b, sommetsTriangle(), { A: `${b}°`, B: `${b}°`, C: "?" }),
     );
   }
   const { a, b, rep } = deuxAnglesRonds();
@@ -3319,6 +3396,7 @@ function genProprieteCalcul1(): Q {
     pick([`Dans un triangle, deux angles mesurent ${a}° et ${b}°. Calcule le troisième.`, `Deux angles d’un triangle font ${a}° et ${b}°. Combien mesure le troisième ?`, `Un triangle a des angles de ${a}° et ${b}°. Trouve le dernier.`]),
     `${rep}°`,
     pourquoiManquant(a, b, rep),
+    figureAngles(a, b, sommetsTriangle(), { A: `${a}°`, B: `${b}°`, C: "?" }),
   );
 }
 const VF_PROPRIETE_1: Array<[string, boolean, string]> = [
@@ -3420,6 +3498,7 @@ function genProprieteMelange(): Q {
       pick([`Peut-on tracer un triangle de côtés ${liste3(ls, u)} ?`, `${liste3(ls, u)} : ces côtés ferment-ils un triangle ?`, `Peut-on fermer un triangle avec ${liste3(ls, u)} ?`]),
       c === "possible",
       pourquoiPossible(ls, u),
+      baguettes(ls, u),
     );
   }
   if (mode === "intrus") {
@@ -3451,12 +3530,14 @@ function genProprieteComplete(): Q {
       ]),
       `${rep}°`,
       `${a} + ${b} = ${a + b}. 180 − ${a + b} = ${rep}°.`,
+      figureAngles(a, b, sommetsTriangle(), { A: `${a}°`, B: `${b}°`, C: "?" }),
     );
   if (mode === "soustraction")
     return court(
       pick([`Calcule : 180° − ${a}° − ${b}°.`, `Combien fait 180° − ${a}° − ${b}° ?`, `Trouve l’angle : 180° − ${a}° − ${b}°.`]),
       `${rep}°`,
       `180 − ${a} = ${180 - a}, puis ${180 - a} − ${b} = ${rep}°.`,
+      figureAngles(a, b, sommetsTriangle(), { A: `${a}°`, B: `${b}°`, C: "?" }),
     );
   const juste = Math.random() < 0.5;
   const c = juste ? rep : rep + pick([-10, 10, 20]);
@@ -3480,6 +3561,8 @@ function genProprietePlace(): Q {
       ]),
       `${180 - a}°`,
       `Les trois angles font 180°. 180 − ${a} = ${180 - a}°.`,
+      // 14/11/2026 : l'angle donné en haut ; les deux autres, sans mesure, se partagent le reste.
+      figureAngles(Math.round((180 - a) * 0.42), 180 - a - Math.round((180 - a) * 0.42), sommetsTriangle(), { C: `${a}°` }),
     );
   }
   if (mode === "droit") {
@@ -4261,6 +4344,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_somme_angle",
     difficulty: 1,
     theme: "neutral",
+    canvas: dessinQuelconque(["A", "B", "C"]), // 14/11/2026 : sans mesure
     text: "Quelle est la somme des angles d’un triangle ?",
     format: "short",
     expected: ["180°"],
@@ -4341,6 +4425,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_angle_manquant",
     difficulty: 2,
     theme: "neutral",
+    canvas: figureAngles(60, 70, ["A", "B", "C"], { A: "60°", B: "70°", C: "?" }), // 14/11/2026
     text: "Dans un triangle, deux angles mesurent 60° et 70°. Combien mesure le troisième ?",
     format: "short",
     expected: ["50°"],
@@ -4403,6 +4488,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_angle_manquant",
     difficulty: 2,
     theme: "neutral",
+    canvas: figureAngles(40, 90, ["A", "B", "C"], { A: "40°", B: "90°", C: "?" }), // 14/11/2026
     text: "Dans un triangle, deux angles mesurent 40° et 90°. Combien mesure le troisième ?",
     format: "qcm",
     choices: ["40°", "50°", "60°", "70°"],
@@ -4457,6 +4543,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    canvas: baguettes([2, 3, 6], "cm"), // 14/11/2026
     text: "Peut-on construire un triangle de côtés 2 cm, 3 cm et 6 cm ?",
     format: "qcm",
     choices: ["oui", "non"],
@@ -4480,6 +4567,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_possible_ou_non",
     difficulty: 3,
     theme: "neutral",
+    canvas: baguettes([4, 5, 7], "cm"), // 14/11/2026
     text: "Peut-on construire un triangle de côtés 4 cm, 5 cm et 7 cm ?",
     format: "qcm",
     choices: ["oui", "non"],
@@ -4574,6 +4662,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_propriete_defi",
     difficulty: 1,
     theme: "neutral",
+    canvas: figureAngles(40, 60, ["A", "B", "C"], { A: "40°", B: "60°", C: "?" }), // 14/11/2026
     text: "Deux angles d’un triangle mesurent 40° et 60°. Calcule le troisième.",
     format: "short",
     expected: ["80°"],
@@ -4651,6 +4740,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_propriete_defi",
     difficulty: 2,
     theme: "neutral",
+    canvas: baguettes([3, 4, 8], "cm"), // 14/11/2026
     text: "Peut-on construire un triangle avec les longueurs 3 cm, 4 cm et 8 cm ?",
     format: "qcm",
     choices: ["oui", "non"],
@@ -4712,6 +4802,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_propriete_defi",
     difficulty: 3,
     theme: "neutral",
+    canvas: figure(pointsParAngles(40, 40), ["A", "B", "C"], { marks: { equalAngles: [["A", "B"]] }, angleLabels: { C: "100°", A: "?" } }), // 14/11/2026
     text: "Un triangle a deux angles égaux et un angle de 100°. Combien mesurent les deux autres angles ?",
     format: "short",
     expected: ["40°"],
@@ -4823,6 +4914,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_propriete_defi",
     difficulty: 4,
     theme: "neutral",
+    canvas: figureEquilaterale(["A", "B", "C"], { C: "?" }), // 14/11/2026
     text: "Dans un triangle équilatéral, combien mesure chaque angle ?",
     format: "short",
     expected: ["60°"],
@@ -5327,6 +5419,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_somme_angle",
     difficulty: 1, theme: "neutral",
+    canvas: dessinQuelconque(["A", "B", "C"]), // 14/11/2026 : sans mesure
     text: "Dans n’importe quel triangle, la somme des trois angles est égale à...",
     format: "qcm",
     choices: ["180°", "90°", "360°", "60°"],
@@ -5342,6 +5435,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_somme_angle",
     difficulty: 2, theme: "neutral",
+    canvas: figure(pointsParAngles(60, 60), ["A", "B", "C"], { marks: { equalAngles: [["A", "B"], ["B", "C"]] }, angleLabels: { C: "?" } }), // 14/11/2026
     text: "Un triangle a ses trois angles égaux. Combien mesure chacun de ses angles ?",
     format: "short",
     expected: ["60°"],
@@ -5356,6 +5450,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_somme_angle",
     difficulty: 2, theme: "neutral",
+    canvas: figure(pointsParAngles(35, 55), ["A", "B", "C"], { marks: { rightAngleAt: "C" } }), // 14/11/2026
     text: "Un angle d’un triangle mesure 90°. Combien font les deux autres angles ?",
     format: "short",
     expected: ["90°"],
@@ -5370,6 +5465,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_somme_angle",
     difficulty: 2, theme: "neutral",
+    canvas: dessinQuelconque(["A", "B", "C"]), // 14/11/2026 : sans mesure
     text: "La somme des angles d’un triangle peut-elle valoir 200° ?",
     format: "qcm",
     choices: ["oui", "non"],
@@ -5385,6 +5481,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_somme_angle",
     difficulty: 1, theme: "neutral",
+    canvas: figureEquilaterale(["A", "B", "C"]), // 14/11/2026 : sans mesure
     text: "La somme des angles d’un triangle équilatéral vaut...",
     format: "qcm",
     choices: ["180°", "60°", "90°", "360°"],
@@ -5400,6 +5497,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_somme_angle",
     difficulty: 2, theme: "neutral",
+    canvas: figureAngles(80, 60, ["A", "B", "C"], { A: "80°", B: "60°" }), // 14/11/2026
     text: "Deux angles d’un triangle valent 80° et 60°. Quelle est la somme des trois angles ?",
     format: "short",
     expected: ["180°"],
@@ -5428,6 +5526,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_angle_manquant",
     difficulty: 2, theme: "neutral",
+    canvas: figureAngles(30, 80, ["A", "B", "C"], { A: "30°", B: "80°", C: "?" }), // 14/11/2026
     text: "Dans un triangle, deux angles mesurent 30° et 80°. Combien mesure le troisième ?",
     format: "short",
     expected: ["70°"],
@@ -5442,6 +5541,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_angle_manquant",
     difficulty: 3, theme: "neutral",
+    canvas: figure(pointsParAngles(35, 55), ["A", "B", "C"], { marks: { rightAngleAt: "C" }, angleLabels: { A: "35°", B: "?" } }), // 14/11/2026
     text: "Dans un triangle rectangle, un angle aigu mesure 35°. Combien mesure l’autre angle aigu ?",
     format: "short",
     expected: ["55°"],
@@ -5456,6 +5556,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_angle_manquant",
     difficulty: 2, theme: "neutral",
+    canvas: figureAngles(50, 60, ["A", "B", "C"], { A: "50°", B: "60°", C: "?" }), // 14/11/2026
     text: "Dans un triangle, deux angles mesurent 50° et 60°. Combien mesure le troisième ?",
     format: "qcm",
     choices: ["70°", "60°", "80°", "50°"],
@@ -5471,6 +5572,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_angle_manquant",
     difficulty: 3, theme: "neutral",
+    canvas: figure(pointsParAngles(70, 70), ["A", "B", "C"], { marks: { equalSides: [["BC", "CA"]] }, angleLabels: { C: "40°", A: "?" } }), // 14/11/2026
     text: "Un triangle isocèle a son angle au sommet qui mesure 40°. Combien mesure chacun des deux angles à la base ?",
     format: "short",
     expected: ["70°"],
@@ -5514,6 +5616,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_possible_ou_non",
     difficulty: 3, theme: "neutral",
+    canvas: baguettes([1, 2, 10], "cm"), // 14/11/2026
     text: "Peut-on construire un triangle de côtés 1 cm, 2 cm et 10 cm ?",
     format: "qcm",
     choices: ["oui", "non"],
@@ -5530,6 +5633,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     notionId: "triangle_propriete", microId: "triangle_possible_ou_non",
     difficulty: 2, theme: "neutral",
     // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    canvas: baguettes([6, 8, 10], "cm"), // 14/11/2026
     text: "Avec 6 cm, 8 cm et 10 cm, peut-on construire un triangle ?",
     format: "qcm",
     choices: ["oui", "non"],
@@ -5560,6 +5664,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_possible_ou_non",
     difficulty: 3, theme: "neutral",
+    canvas: baguettes([3, 4, 7], "cm"), // 14/11/2026
     text: "Peut-on construire un triangle de côtés 3 cm, 4 cm et 7 cm ?",
     format: "qcm",
     choices: ["oui", "non"],

@@ -1,4 +1,5 @@
 import type { TutorBankItemV4, TutorGeneratedQuestionV4, AngleCanvasData, DroitesCanvasData } from "@/lib/tutor-v4/types";
+import type { ConstructionCanvasData } from "@/lib/tutor-v4/types_canvas";
 import { PRENOMS, de, type Prenom } from "./entiers.bank";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
@@ -138,6 +139,125 @@ function figureAngle(deg: number, n: NomAngle, opts: { mesure?: boolean; droit?:
     },
   };
 }
+// ⭐ 14/11/2026 — PLUS DE FIGURES : les 6e lisent difficilement, la figure porte
+// la donnée. Elle ne donne JAMAIS la réponse : la mesure cherchée ne s'écrit pas
+// (« ? » ou rien), pas de petit carré quand on demande si l'angle est droit.
+/** Ce que les gabarits d'angles peuvent dessiner. */
+type FigAngle = AngleCanvasData | DroitesCanvasData | ConstructionCanvasData;
+/**
+ * L'angle dont parle l'énoncé, dessiné À sa mesure. Nommé si le texte le nomme,
+ * sans aucune lettre sinon. `mesure` : « ecrite » (l'énoncé la donne), « ? »
+ * (c'est elle qu'on cherche), « rien » (on demande la NATURE ou si l'angle est
+ * droit : ni mesure ni petit carré ne la soufflent). `droit` : le petit carré,
+ * seulement quand l'énoncé DIT que l'angle est droit.
+ */
+function figureMesure(deg: number, n: NomAngle | null, texte: string, opts: { mesure?: "ecrite" | "?" | "rien"; droit?: boolean } = {}): AngleCanvasData {
+  const nomme = !!n && texte.includes(n.nom);
+  const mesure = opts.mesure ?? "ecrite";
+  const montre = mesure === "ecrite";
+  return {
+    kind: "angle",
+    size: { width: 320, height: 240 },
+    angle: {
+      angleDeg: deg,
+      labels: n && nomme ? { vertex: n.s, left: n.g, right: n.d } : { vertex: "", left: "", right: "" },
+      display: {
+        showLabels: nomme,
+        showMeasure: montre && !opts.droit,
+        showArc: !opts.droit,
+        showRightAngle: !!opts.droit,
+        ...(mesure === "?" ? { placeholder: "?" } : {}),
+      },
+    },
+  };
+}
+/** Des demi-droites de même origine, SANS lettre (l'énoncé n'en nomme aucune). */
+function rayonsSansNom(degs: number[]): DroitesCanvasData {
+  const f = figureRayons("", degs.map((deg, k) => ({ nom: `_${k}`, deg })));
+  return { ...f, points: (f.points ?? []).map((pt) => ({ ...pt, label: "" })), display: { showLabels: false, showPoints: true } };
+}
+/**
+ * Deux angles côte à côte, chacun avec ce que l'énoncé en dit (`textes` : sa
+ * mesure, ou « ? » pour celle qu'on cherche ; rien sinon). `longs` : la longueur
+ * des côtés de chacun — le piège « longs côtés = grand angle » se voit. Canvas
+ * `construction` (le canvas `angle` n'en dessine qu'un).
+ */
+function deuxAngles(a: number, b: number, o: { textes?: [string, string]; longs?: [number, number] } = {}): ConstructionCanvasData {
+  const rad = (d: number) => (d * Math.PI) / 180;
+  const [L1, L2] = o.longs ?? [4, 4];
+  const x2 = L1 + 1.6 + L2 * Math.max(0, -Math.cos(rad(b)));
+  const r = (x: number) => Math.round(x * 1000) / 1000;
+  return {
+    kind: "construction",
+    points: [
+      { id: "S1", x: 0, y: 0, cache: true },
+      { id: "D1", x: L1, y: 0, cache: true },
+      { id: "G1", x: r(L1 * Math.cos(rad(a))), y: r(L1 * Math.sin(rad(a))), cache: true },
+      { id: "S2", x: r(x2), y: 0, cache: true },
+      { id: "D2", x: r(x2 + L2), y: 0, cache: true },
+      { id: "G2", x: r(x2 + L2 * Math.cos(rad(b))), y: r(L2 * Math.sin(rad(b))), cache: true },
+    ],
+    segments: [{ a: "S1", b: "D1" }, { a: "S1", b: "G1" }, { a: "S2", b: "D2" }, { a: "S2", b: "G2" }],
+    angles: [
+      { sommet: "S1", de: "D1", vers: "G1", ...(o.textes?.[0] ? { texte: o.textes[0] } : {}) },
+      { sommet: "S2", de: "D2", vers: "G2", ...(o.textes?.[1] ? { texte: o.textes[1] } : {}) },
+    ],
+    description: "Deux angles",
+  };
+}
+
+/**
+ * Le même angle que `figureMesure`, tracé par le canvas `construction`. ⚠️ Pour
+ * les gabarits où l'énoncé porte TOUTE la donnée (une mesure, une nature) : les
+ * correcteurs lisent un canvas `angle` comme « la réponse se lit sur la figure »
+ * (estimation à l'œil, rapporteur) ; ici la figure ILLUSTRE, elle n'est pas la
+ * donnée. Un angle plat se trace sans arc (le « petit angle » y est ambigu).
+ */
+function angleTrace(deg: number, n: NomAngle | null, texte: string, o: { mesure?: "ecrite" | "?" | "rien"; droit?: boolean } = {}): ConstructionCanvasData {
+  const nomme = !!n && texte.includes(n.nom);
+  const rad = (deg * Math.PI) / 180;
+  const r = (x: number) => Math.round(x * 1000) / 1000;
+  const mesure = o.mesure ?? "ecrite";
+  const ecrit = o.droit ? undefined : mesure === "ecrite" ? `${deg}°` : mesure === "?" ? "?" : undefined;
+  const nom = (l: string) => (n && nomme ? { nom: l } : { cache: true });
+  return {
+    kind: "construction",
+    points: [
+      { id: "S", x: 0, y: 0, ...nom(n?.s ?? "") },
+      { id: "D", x: 4, y: 0, ...nom(n?.d ?? "") },
+      { id: "G", x: r(4 * Math.cos(rad)), y: r(4 * Math.sin(rad)), ...nom(n?.g ?? "") },
+    ],
+    segments: [{ a: "S", b: "D" }, { a: "S", b: "G" }],
+    angles: deg >= 180 ? [] : [{ sommet: "S", de: "D", vers: "G", ...(o.droit ? { droit: true } : {}), ...(ecrit ? { texte: ecrit } : {}) }],
+    description: "Un angle",
+  };
+}
+/** Des demi-droites de même origine, sans lettre, par le canvas `construction` (même raison que `angleTrace`). */
+function rayonsTrace(degs: number[]): ConstructionCanvasData {
+  const r = (x: number) => Math.round(x * 1000) / 1000;
+  return {
+    kind: "construction",
+    points: [{ id: "O", x: 0, y: 0, nom: "" }, ...degs.map((d, k) => ({ id: `R${k}`, x: r(4 * Math.cos((d * Math.PI) / 180)), y: r(4 * Math.sin((d * Math.PI) / 180)), cache: true }))],
+    segments: degs.map((_, k) => ({ a: "O", b: `R${k}` })),
+    description: "Des demi-droites de même origine",
+  };
+}
+/** Deux droites perpendiculaires, nommées par l'énoncé (« (AB) et (CD) ») ou sans nom ; pas de petit carré. */
+function perpendiculairesTrace(noms?: [string, string, string, string]): ConstructionCanvasData {
+  const r = (x: number) => Math.round(x * 1000) / 1000;
+  const c = Math.cos(Math.PI / 9), sn = Math.sin(Math.PI / 9);
+  const pts = [{ x: 3 * c, y: 3 * sn }, { x: -3 * c, y: -3 * sn }, { x: -3 * sn, y: 3 * c }, { x: 3 * sn, y: -3 * c }];
+  return {
+    kind: "construction",
+    points: [
+      { id: "O", x: 0, y: 0, cache: true },
+      ...pts.map((pt, k) => ({ id: `P${k}`, x: r(pt.x), y: r(pt.y), ...(noms ? { nom: noms[k] } : { cache: true }) })),
+    ],
+    droites: [{ a: "P0", b: "P1" }, { a: "P2", b: "P3" }],
+    description: "Deux droites perpendiculaires",
+  };
+}
+
 /** Une mesure multiple de 5 entre a et b, différente de celles de `sauf`. */
 function mesure5(a: number, b: number, sauf: number[] = []): number {
   const v = 5 * randomInt(Math.ceil(a / 5), Math.floor(b / 5));
@@ -216,6 +336,8 @@ function comparerDeux(plusGrand: boolean, ctx = false) {
     explanation: expl(
       `On compare les nombres de degrés : ${Math.min(a, b)} < ${Math.max(a, b)}. Le plus ${mot} angle mesure ${r}°. La longueur des côtés ne compte pas.`,
     ),
+
+    canvas: deuxAngles(a, b, { textes: [`${a}°`, `${b}°`] }),
   };
 }
 
@@ -237,6 +359,7 @@ function genComparerSigne(): G {
     expected: [s],
     comparator: "mcq_exact",
     explanation: expl(`On compare les nombres de degrés : ${a} ${s} ${b}, donc ${a}° ${s} ${b}°.`),
+    canvas: deuxAngles(a, b, { textes: [`${a}°`, `${b}°`] }),
   };
 }
 
@@ -332,7 +455,8 @@ function comparerAuDroit(v: number, enSituation: boolean, intrus: string) {
     expected: [juste],
     comparator: "mcq_exact" as const,
     explanation: expl(`Un angle droit mesure 90°. ${v} ${v < 90 ? "<" : ">"} 90 : l’angle de ${v}° est ${juste}.`),
-    ...(!enSituation && text.includes(n.nom) ? { canvas: figureAngle(v, n, { mesure: true }) } : {}),
+    // Nommé et nu : la mesure écrite (comme avant). Sinon l'angle seul, ni mesure ni carré : on compare à 90°.
+    canvas: !enSituation && text.includes(n.nom) ? figureAngle(v, n, { mesure: true }) : figureMesure(v, n, text, { mesure: "rien" }),
   };
 }
 
@@ -537,6 +661,8 @@ function genDroitCoin(ctx: boolean): G {
     expected: ["90°", "90"],
     comparator: "number_equal",
     explanation: expl("Un angle droit mesure toujours 90°, quelle que soit la taille de la figure."),
+    // L'énoncé DIT que l'angle est droit : le petit carré, aucune mesure écrite.
+    canvas: figureMesure(90, null, text, { droit: true }),
   };
 }
 
@@ -595,7 +721,7 @@ function genDroitOuiNon(ctx: boolean): G {
     expected: [juste],
     comparator: "mcq_exact",
     explanation: expl(v === 90 ? "90° pile : c’est un angle droit." : `${v}° n’est pas 90°. ${v < 90 ? `${v} < 90 : l’angle est plus petit` : `${v} > 90 : l’angle est plus grand`} qu’un angle droit.`),
-    ...(t.includes(n.nom) ? { canvas: figureAngle(v, n, { mesure: true, droit: v === 90 }) } : {}),
+    canvas: t.includes(n.nom) ? figureAngle(v, n, { mesure: true, droit: v === 90 }) : figureMesure(v, null, t, { mesure: "rien" }),
   };
 }
 
@@ -725,6 +851,7 @@ function genTracer(ctx: boolean): G {
       expected: ["un rapporteur"],
       comparator: "mcq_exact",
       explanation: expl(`Pour obtenir ${v}°, il faut un instrument gradué en degrés : le rapporteur. L’équerre ne donne que 90°.`),
+      canvas: figureMesure(v, n, t),
     };
   }
   if (cas === 1) {
@@ -753,6 +880,7 @@ function genTracer(ctx: boolean): G {
     expected: [v < 90 ? "aigu" : "obtus"],
     comparator: "mcq_exact",
     explanation: expl(`${v}° est ${v < 90 ? "plus petit" : "plus grand"} que 90° : l’angle sera ${v < 90 ? "aigu" : "obtus"}.`),
+    canvas: figureMesure(v, n, t, { mesure: "rien" }),
   };
 }
 
@@ -779,6 +907,7 @@ function genEtapes(ctx: boolean): G {
     expected: [etapes[k]],
     comparator: "mcq_exact",
     explanation: expl(`Dans l’ordre : 1) ${etapes[0]} ; 2) ${etapes[1]} ; 3) ${etapes[2]} ; 4) ${etapes[3]}.`),
+    canvas: figureAngle(v, n, { mesure: true }),
   };
 }
 
@@ -796,23 +925,23 @@ function gabarit(id: string, microId: string, difficulty: number, hint: string, 
 // ★1 : 12 mots au plus. ★2 : 15 mots au plus. Aucun prénom, aucun objet à ★1-★2
 // (../REGLES-6E.md). Correcteurs : correcteurs/angles.ts, section du 07/11.
 // =====================================================================
-const qc = (text: string, juste: string, faux: string[], calcul: string, canvas?: AngleCanvasData | DroitesCanvasData): G => ({
+const qc = (text: string, juste: string, faux: string[], calcul: string, canvas?: FigAngle): G => ({
   text, format: "qcm", choices: shuffle([juste, ...faux]), expected: [juste], comparator: "mcq_exact", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
 });
 /** Réponse courte en degrés. */
-const dg = (text: string, v: number, calcul: string, canvas?: AngleCanvasData | DroitesCanvasData): G => ({
+const dg = (text: string, v: number, calcul: string, canvas?: FigAngle): G => ({
   text, format: "short", expected: [`${v}°`, String(v)], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
 });
 /** Réponse courte : un nombre sans unité. */
-const nb = (text: string, n: number, calcul: string, canvas?: AngleCanvasData | DroitesCanvasData): G => ({
+const nb = (text: string, n: number, calcul: string, canvas?: FigAngle): G => ({
   text, format: "short", expected: [String(n)], comparator: "number_equal", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
 });
 /** Réponse courte en lettres : toutes les écritures justes sont acceptées. */
-const lt = (text: string, justes: string[], calcul: string, canvas?: AngleCanvasData | DroitesCanvasData): G => ({
+const lt = (text: string, justes: string[], calcul: string, canvas?: FigAngle): G => ({
   text, format: "short", expected: justes, comparator: "exact_text", explanation: expl(calcul), ...(canvas ? { canvas } : {}),
 });
-const ouiNon = (text: string, oui: boolean, calcul: string, canvas?: AngleCanvasData | DroitesCanvasData) => qc(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
-const vraiFaux = (text: string, vrai: boolean, calcul: string, canvas?: AngleCanvasData | DroitesCanvasData) => qc(text, vrai ? "vrai" : "faux", [vrai ? "faux" : "vrai"], calcul, canvas);
+const ouiNon = (text: string, oui: boolean, calcul: string, canvas?: FigAngle) => qc(text, oui ? "oui" : "non", [oui ? "non" : "oui"], calcul, canvas);
+const vraiFaux = (text: string, vrai: boolean, calcul: string, canvas?: FigAngle) => qc(text, vrai ? "vrai" : "faux", [vrai ? "faux" : "vrai"], calcul, canvas);
 /** Une mesure franche, aiguë ou obtune : loin de 90° pour se juger à l'œil. */
 const mesureFranche = () => (Math.random() < 0.5 ? mesure5(20, 60) : mesure5(120, 165));
 const NATURES = ["aigu", "droit", "obtus", "plat"];
@@ -875,10 +1004,10 @@ function genRecCotes(): G {
   if (mode === "un")
     return qc(pick(["Observe la figure. Quelle demi-droite est un côté de l’angle ?", "Choisis un côté de cet angle.", `Trouve un côté de l’angle ${n.nom}.`, `Quelle demi-droite est un côté de l’angle ${n.nom} ?`]), c1, [`[${n.g}${n.s})`, `[${n.g}${n.d})`, `[${n.d}${n.s})`], pourquoi, fig);
   if (mode === "autre")
-    return qc(pick([`${c1} est un côté de l’angle ${n.nom}. Quel est l’autre ?`, `L’angle ${n.nom} a le côté ${c1}. Trouve l’autre côté.`, `Angle ${n.nom} : un côté est ${c1}. Choisis l’autre.`]), c2, [`[${n.d}${n.s})`, `[${n.g}${n.d})`, `[${n.g}${n.s})`], pourquoi);
+    return qc(pick([`${c1} est un côté de l’angle ${n.nom}. Quel est l’autre ?`, `L’angle ${n.nom} a le côté ${c1}. Trouve l’autre côté.`, `Angle ${n.nom} : un côté est ${c1}. Choisis l’autre.`]), c2, [`[${n.d}${n.s})`, `[${n.g}${n.d})`, `[${n.g}${n.s})`], pourquoi, fig);
   const juste = Math.random() < 0.5;
   const x = juste ? pick([c1, c2]) : pick([`[${n.g}${n.s})`, `[${n.g}${n.d})`, `[${n.d}${n.s})`]);
-  return ouiNon(pick([`${x} est-elle un côté de l’angle ${n.nom} ?`, `Angle ${n.nom} : ${x} est-elle un de ses côtés ?`, `La demi-droite ${x} est-elle un côté de ${n.nom} ?`]), juste, pourquoi);
+  return ouiNon(pick([`${x} est-elle un côté de l’angle ${n.nom} ?`, `Angle ${n.nom} : ${x} est-elle un de ses côtés ?`, `La demi-droite ${x} est-elle un côté de ${n.nom} ?`]), juste, pourquoi, fig);
 }
 function genRecVerdict(): G {
   const n = nomAngle();
@@ -914,10 +1043,9 @@ const REGLE_NATURE = "Aigu : moins de 90°. Droit : 90°. Obtus : entre 90° et 
 function genNatMesure(): G {
   const n = nomAngle();
   const v = pick([mesure5(15, 75), mesure5(15, 75), mesure5(105, 170), mesure5(105, 170), 90, 180]);
-  return qc(
-    pick([`${v}° : quelle est la nature de cet angle ?`, `Donne la nature d’un angle de ${v}°.`, `Quel type d’angle mesure ${v}° ?`, `Choisis le nom d’un angle de ${v}°.`, `L’angle ${n.nom} fait ${v}°. Quelle est sa nature ?`, `Lis la mesure : ${v}°. Choisis la nature de l’angle.`, `Un angle de ${v}° est :`, `Quelle nature a l’angle ${n.nom} de ${v}° ?`]),
-    natureAngle(v), NATURES.filter((x) => x !== natureAngle(v)), `${REGLE_NATURE} Ici, ${v}°.`,
-  );
+  const t = pick([`${v}° : quelle est la nature de cet angle ?`, `Donne la nature d’un angle de ${v}°.`, `Quel type d’angle mesure ${v}° ?`, `Choisis le nom d’un angle de ${v}°.`, `L’angle ${n.nom} fait ${v}°. Quelle est sa nature ?`, `Lis la mesure : ${v}°. Choisis la nature de l’angle.`, `Un angle de ${v}° est :`, `Quelle nature a l’angle ${n.nom} de ${v}° ?`]);
+  // On demande la nature : l'angle à sa mesure, sans mesure écrite ni petit carré.
+  return qc(t, natureAngle(v), NATURES.filter((x) => x !== natureAngle(v)), `${REGLE_NATURE} Ici, ${v}°.`, angleTrace(v, n, t, { mesure: "rien" }));
 }
 function genNatFigure(): G {
   const n = nomAngle();
@@ -936,14 +1064,19 @@ function genNatPourMesure(): G {
   const uniques = [...new Set(faux)].filter((x) => natureAngle(x) !== nat).slice(0, 3);
   return qc(
     pick([`Quelle mesure convient à un angle ${nat} ?`, `Choisis la mesure d’un angle ${nat}.`, `Un angle est ${nat}. Quelle peut être sa mesure ?`, `Coche la mesure d’un angle ${nat}.`, `Trouve l’angle ${nat} parmi ces mesures.`, `Quelle mesure donne un angle ${nat} ?`]),
-    `${justeV}°`, uniques.map((x) => `${x}°`), REGLE_NATURE,
+    `${justeV}°`, uniques.map((x) => `${x}°`), REGLE_NATURE, angleTrace(justeV, null, "", { mesure: "?", droit: nat === "droit" }),
   );
+}
+/** Un angle de la nature que DIT l'énoncé (le carré seulement s'il dit « droit ») ; aucune mesure écrite. */
+function figureNature(nat: "aigu" | "droit" | "obtus" | "plat"): ConstructionCanvasData {
+  const v = nat === "aigu" ? mesure5(25, 65) : nat === "obtus" ? mesure5(115, 160) : nat === "droit" ? 90 : 180;
+  return angleTrace(v, null, "", { mesure: "rien", droit: nat === "droit" });
 }
 function genNatIntervalle(): G {
   const nat = pick(["aigu", "obtus", "droit", "plat"] as const);
   const def = { aigu: "moins de 90°", droit: "exactement 90°", obtus: "entre 90° et 180°", plat: "exactement 180°" };
   if (Math.random() < 0.5)
-    return qc(pick([`Un angle ${nat} mesure :`, `Quelle mesure décrit un angle ${nat} ?`, `Comment est la mesure d’un angle ${nat} ?`, `Choisis la mesure d’un angle ${nat} :`]), def[nat], Object.values(def).filter((x) => x !== def[nat]), REGLE_NATURE);
+    return qc(pick([`Un angle ${nat} mesure :`, `Quelle mesure décrit un angle ${nat} ?`, `Comment est la mesure d’un angle ${nat} ?`, `Choisis la mesure d’un angle ${nat} :`]), def[nat], Object.values(def).filter((x) => x !== def[nat]), REGLE_NATURE, figureNature(nat));
   return qc(pick([`Un angle mesure ${def[nat]}. Comment s’appelle-t-il ?`, `Mesure : ${def[nat]}. Quelle est la nature de l’angle ?`, `Quel angle mesure ${def[nat]} ?`]), nat, NATURES.filter((x) => x !== nat), REGLE_NATURE);
 }
 function genNatCompter(): G {
@@ -957,10 +1090,10 @@ function genNatCompter(): G {
   const a = pick(["aigu", "obtus"]);
   const vrai = natureAngle(v) === a;
   return pick([
-    () => vraiFaux(`Vrai ou faux : un angle de ${v}° est ${a}.`, vrai, REGLE_NATURE),
-    () => ouiNon(`Un angle de ${v}° est-il ${a} ?`, vrai, REGLE_NATURE),
-    () => ouiNon(`${v}° : est-ce un angle ${a} ?`, vrai, REGLE_NATURE),
-    () => vraiFaux(`${v}° donne un angle ${a}. Vrai ou faux ?`, vrai, REGLE_NATURE),
+    () => vraiFaux(`Vrai ou faux : un angle de ${v}° est ${a}.`, vrai, REGLE_NATURE, angleTrace(v, null, "", { mesure: "rien" })),
+    () => ouiNon(`Un angle de ${v}° est-il ${a} ?`, vrai, REGLE_NATURE, angleTrace(v, null, "", { mesure: "rien" })),
+    () => ouiNon(`${v}° : est-ce un angle ${a} ?`, vrai, REGLE_NATURE, angleTrace(v, null, "", { mesure: "rien" })),
+    () => vraiFaux(`${v}° donne un angle ${a}. Vrai ou faux ?`, vrai, REGLE_NATURE, angleTrace(v, null, "", { mesure: "rien" })),
   ])();
 }
 function genNatOrigine(): G {
@@ -990,11 +1123,14 @@ function genDroitMesureVerdict(): G {
   const v = Math.random() < 0.45 ? 90 : pick([mesure5(20, 80), mesure5(100, 170), 80, 100]);
   const droit = v === 90;
   const pourquoi = "Un angle droit mesure exactement 90°.";
+  // L'angle à sa mesure, sans mesure écrite ni carré. « Un angle droit mesure 80° » : pas de figure, elle contredirait l'énoncé.
+  const fig = (t: string) => angleTrace(v, n, t, { mesure: "rien" });
+  const avec = (t: string, f: (t: string, b: boolean, w: string, c?: FigAngle) => G) => f(t, droit, pourquoi, fig(t));
   return pick([
-    () => ouiNon(`Un angle de ${v}° est-il droit ?`, droit, pourquoi),
-    () => ouiNon(`${v}° : est-ce un angle droit ?`, droit, pourquoi),
-    () => vraiFaux(`Vrai ou faux : ${v}° est un angle droit.`, droit, pourquoi),
-    () => ouiNon(`L’angle ${n.nom} fait ${v}°. Est-il droit ?`, droit, pourquoi),
+    () => avec(`Un angle de ${v}° est-il droit ?`, ouiNon),
+    () => avec(`${v}° : est-ce un angle droit ?`, ouiNon),
+    () => avec(`Vrai ou faux : ${v}° est un angle droit.`, vraiFaux),
+    () => avec(`L’angle ${n.nom} fait ${v}°. Est-il droit ?`, ouiNon),
     () => vraiFaux(`Un angle droit mesure ${v}°. Vrai ou faux ?`, droit, pourquoi),
     () => ouiNon(`Un angle droit peut-il mesurer ${v}° ?`, droit, pourquoi),
   ])();
@@ -1010,7 +1146,7 @@ function genDroitOutil(): G {
     return qc(pick(["Quel instrument vérifie vite un angle droit ?", "Avec quoi traces-tu vite un angle droit ?", "Quel instrument possède un coin droit ?", "Choisis l’instrument qui contrôle un angle droit.", "Quel instrument pose-t-on sur un coin pour le vérifier ?"]), "une équerre", ["un compas", "une gomme", "un crayon"], "L’équerre a un coin droit : elle vérifie et trace les angles droits.");
   if (mode === "nom")
     return qc(pick(["Comment s’appelle un angle de 90° ?", "90° : quel est le nom de cet angle ?", "Un angle de 90° est :", "Donne le nom d’un angle de 90°."]), "un angle droit", ["un angle aigu", "un angle obtus", "un angle plat"], "90° pile : c’est un angle droit.");
-  return dg(pick(["Combien de degrés dans un angle droit ?", "Écris la mesure d’un angle droit.", "Angle droit : combien de degrés ?", "Donne en degrés la mesure d’un angle droit."]), 90, "Un angle droit mesure toujours 90°.");
+  return dg(pick(["Combien de degrés dans un angle droit ?", "Écris la mesure d’un angle droit.", "Angle droit : combien de degrés ?", "Donne en degrés la mesure d’un angle droit."]), 90, "Un angle droit mesure toujours 90°.", angleTrace(90, null, "", { droit: true }));
 }
 function genDroitTrouver(): G {
   if (Math.random() < 0.55) {
@@ -1039,7 +1175,7 @@ function genDroitComplement(): G {
   const a = mesure5(10, 80);
   const r = 90 - a;
   const pourquoi = `Un angle droit mesure 90°. 90 − ${a} = ${r}.`;
-  const figure = Math.random() < 0.3;
+  const figure = Math.random() < 0.65;
   if (figure) {
     const [s, x, y, z] = lettres(4);
     return dg(pick([`L’angle ${x}${s}${z} est droit. L’angle ${x}${s}${y} mesure ${a}°. Trouve l’angle ${y}${s}${z}.`, `Angle droit ${x}${s}${z}. L’angle ${x}${s}${y} mesure ${a}°. Combien mesure l’angle ${y}${s}${z} ?`]), r, pourquoi, figureRayons(s, [{ nom: z, deg: 10 }, { nom: y, deg: 10 + r }, { nom: x, deg: 100 }]));
@@ -1057,7 +1193,7 @@ function genDroitPlusieurs(): G {
     return nb(plat ? pick(["Combien d’angles droits faut-il pour un angle plat ?", "Un angle plat vaut combien d’angles droits ?", "Angle plat : combien d’angles droits dedans ?"]) : pick(["Un tour complet vaut combien d’angles droits ?", "Combien d’angles droits dans un tour complet ?", "Tour complet : combien d’angles droits dedans ?"]), plat ? 2 : 4, plat ? "180 ÷ 90 = 2." : "360 ÷ 90 = 4.");
   }
   const k = pick([2, 3, 5, 6]);
-  return dg(pick([`Un angle droit est coupé en ${k} parts égales. Combien mesure une part ?`, `Partage un angle droit en ${k} angles égaux. Calcule chaque angle.`, `Angle droit, ${k} parts égales : combien de degrés par part ?`]), 90 / k, `90 ÷ ${k} = ${90 / k}.`);
+  return dg(pick([`Un angle droit est coupé en ${k} parts égales. Combien mesure une part ?`, `Partage un angle droit en ${k} angles égaux. Calcule chaque angle.`, `Angle droit, ${k} parts égales : combien de degrés par part ?`]), 90 / k, `90 ÷ ${k} = ${90 / k}.`, rayonsTrace(Array.from({ length: k + 1 }, (_, i) => 20 + (i * 90) / k)));
 }
 function genDroitPerpendiculaire(): G {
   const [s, a, b, c, d] = lettres(5);
@@ -1065,9 +1201,9 @@ function genDroitPerpendiculaire(): G {
   if (mode === "nom")
     return qc(pick(["Deux droites perpendiculaires forment quel angle ?", "Deux droites perpendiculaires se coupent. Quel angle forment-elles ?", "Quel angle voit-on entre deux droites perpendiculaires ?"]), "un angle droit", ["un angle aigu", "un angle obtus", "un angle plat"], "Perpendiculaires : elles se coupent en formant des angles droits.");
   if (mode === "mesure")
-    return dg(pick([`(${a}${b}) et (${c}${d}) sont perpendiculaires. Quelle est la mesure de leur angle ?`, `Droites (${a}${b}) et (${c}${d}) perpendiculaires : combien mesure leur angle ?`]), 90, "Deux droites perpendiculaires forment un angle de 90°.");
+    return dg(pick([`(${a}${b}) et (${c}${d}) sont perpendiculaires. Quelle est la mesure de leur angle ?`, `Droites (${a}${b}) et (${c}${d}) perpendiculaires : combien mesure leur angle ?`]), 90, "Deux droites perpendiculaires forment un angle de 90°.", perpendiculairesTrace([a, b, c, d]));
   if (mode === "compte")
-    return nb(pick(["Deux droites perpendiculaires forment combien d’angles droits ?", "Perpendiculaires : combien d’angles droits au croisement ?"]), 4, "Au croisement, les 4 angles sont droits.");
+    return nb(pick(["Deux droites perpendiculaires forment combien d’angles droits ?", "Perpendiculaires : combien d’angles droits au croisement ?"]), 4, "Au croisement, les 4 angles sont droits.", perpendiculairesTrace());
   const droit = Math.random() < 0.5;
   const t = droit ? 90 : pick([40, 50, 60, 130, 140]);
   return ouiNon(pick([`Observe les deux droites. L’angle ${a}${s}${c} est-il droit ?`, `Regarde le croisement. L’angle ${a}${s}${c} est-il droit ?`]), droit, droit ? "Le coin de l’équerre colle : l’angle est droit." : "Le coin de l’équerre ne colle pas : l’angle est trop ouvert ou trop fermé.", figureRayons(s, [{ nom: a, deg: 10 }, { nom: c, deg: 10 + t }, { nom: b, deg: 190 }, { nom: d, deg: 190 + t }]));
@@ -1101,6 +1237,7 @@ function genDroitMetier(): G {
   return ouiNon(
     pick([`${m.qui} mesure ${m.coin} : ${v}°. Ce coin est-il droit ?`, `${m.qui} vérifie ${m.coin}. Le rapporteur indique ${v}°. Ce coin est-il droit ?`, `${m.qui} trouve ${v}° pour ${m.coin}. L’angle est-il droit ?`, `${m.qui} lit ${v}° sur son rapporteur pour ${m.coin}. L’angle est-il droit ?`]),
     droit, droit ? "90° pile : l’angle est droit." : `${v}° n’est pas 90° : l’angle n’est pas droit, même s’il en est proche.`,
+    figureMesure(v, null, "", { mesure: "rien" }),
   );
 }
 function genDroitHorloge(): G {
@@ -1117,7 +1254,7 @@ function genDroitChantier(): G {
   const mode = pick(["partage", "carreaux", "tour"] as const);
   if (mode === "partage") {
     const k = pick([2, 3, 5, 6]);
-    return dg(pick([`${m.qui} partage ${m.coin}, un angle droit, en ${k} parts égales. Combien mesure chaque part ?`, `${m.qui} divise un coin droit en ${k} angles égaux. Quelle est la mesure de chacun ?`]), 90 / k, `Un angle droit mesure 90°. 90 ÷ ${k} = ${90 / k}.`);
+    return dg(pick([`${m.qui} partage ${m.coin}, un angle droit, en ${k} parts égales. Combien mesure chaque part ?`, `${m.qui} divise un coin droit en ${k} angles égaux. Quelle est la mesure de chacun ?`]), 90 / k, `Un angle droit mesure 90°. 90 ÷ ${k} = ${90 / k}.`, rayonsSansNom(Array.from({ length: k + 1 }, (_, i) => 20 + (i * 90) / k)));
   }
   if (mode === "carreaux") {
     const k = pick([2, 3, 4]);
@@ -1139,7 +1276,7 @@ function genCompOuvert(): G {
   const mot = ouvert ? "le plus ouvert" : "le moins ouvert";
   return dg(
     pick([`Quel angle est ${mot} : ${a}° ou ${b}° ?`, `${n1.nom} = ${a}° et ${n2.nom} = ${b}°. Écris la mesure ${ouvert ? "la plus ouverte" : "la moins ouverte"}.`, `Écris l’angle ${mot} : ${a}° ou ${b}°.`, `Entre ${a}° et ${b}°, écris l’angle ${mot}.`]),
-    r, `L’angle ${mot} a la mesure la plus ${ouvert ? "grande" : "petite"} : ${r}°.`,
+    r, `L’angle ${mot} a la mesure la plus ${ouvert ? "grande" : "petite"} : ${r}°.`, deuxAngles(a, b, { textes: [`${a}°`, `${b}°`] }),
   );
 }
 function genCompVerdict(): G {
@@ -1147,13 +1284,14 @@ function genCompVerdict(): G {
   let b = a;
   while (Math.abs(b - a) < 20) b = 10 * randomInt(2, 17);
   const pourquoi = `On compare les nombres de degrés : ${a} et ${b}.`;
+  const fig = deuxAngles(a, b, { textes: [`${a}°`, `${b}°`] });
   return pick([
-    () => vraiFaux(`Vrai ou faux : ${a}° est plus grand que ${b}°.`, a > b, pourquoi),
-    () => ouiNon(`${a}° est-il plus petit que ${b}° ?`, a < b, pourquoi),
-    () => ouiNon(`Un angle de ${a}° est-il plus grand qu’un angle de ${b}° ?`, a > b, pourquoi),
-    () => vraiFaux(`${a}° < ${b}°. Vrai ou faux ?`, a < b, pourquoi),
-    () => vraiFaux(`${a}° > ${b}°. Vrai ou faux ?`, a > b, pourquoi),
-    () => ouiNon(`Un angle de ${a}° est-il plus petit qu’un angle de ${b}° ?`, a < b, pourquoi),
+    () => vraiFaux(`Vrai ou faux : ${a}° est plus grand que ${b}°.`, a > b, pourquoi, fig),
+    () => ouiNon(`${a}° est-il plus petit que ${b}° ?`, a < b, pourquoi, fig),
+    () => ouiNon(`Un angle de ${a}° est-il plus grand qu’un angle de ${b}° ?`, a > b, pourquoi, fig),
+    () => vraiFaux(`${a}° < ${b}°. Vrai ou faux ?`, a < b, pourquoi, fig),
+    () => vraiFaux(`${a}° > ${b}°. Vrai ou faux ?`, a > b, pourquoi, fig),
+    () => ouiNon(`Un angle de ${a}° est-il plus petit qu’un angle de ${b}° ?`, a < b, pourquoi, fig),
   ])();
 }
 function genCompCotes(): G {
@@ -1167,7 +1305,7 @@ function genCompEgaux(): G {
   const egal = Math.random() < 0.5;
   const b = egal ? a : a + pick([-10, 10, 20]);
   const pourquoi = `Deux angles sont égaux s’ils ont la même mesure : ${a}° et ${b}°.`;
-  return ouiNon(pick([`Deux angles mesurent ${a}° et ${b}°. Sont-ils égaux ?`, `${a}° et ${b}° : est-ce la même mesure ?`, `Ces angles sont-ils égaux : ${a}° et ${b}° ?`, `Un angle de ${a}° est-il égal à un angle de ${b}° ?`]), egal, pourquoi);
+  return ouiNon(pick([`Deux angles mesurent ${a}° et ${b}°. Sont-ils égaux ?`, `${a}° et ${b}° : est-ce la même mesure ?`, `Ces angles sont-ils égaux : ${a}° et ${b}° ?`, `Un angle de ${a}° est-il égal à un angle de ${b}° ?`]), egal, pourquoi, deuxAngles(a, b, { textes: [`${a}°`, `${b}°`] }));
 }
 
 // ----- ANGLE_COMPARER, ★2
@@ -1202,7 +1340,7 @@ function genCompEcart(): G {
   const a = mesure5(60, 170);
   const b = mesure5(15, a - 15);
   const n = nomAngle();
-  return dg(pick([`De combien de degrés ${a}° dépasse-t-il ${b}° ?`, `Calcule l’écart entre ${a}° et ${b}°.`, `Combien de degrés de plus a ${a}° que ${b}° ?`, `Quel est l’écart entre ces angles : ${b}° et ${a}° ?`, `Un angle mesure ${a}°, l’angle ${n.nom} ${b}°. Calcule leur écart.`]), a - b, `${a} − ${b} = ${a - b}.`);
+  return dg(pick([`De combien de degrés ${a}° dépasse-t-il ${b}° ?`, `Calcule l’écart entre ${a}° et ${b}°.`, `Combien de degrés de plus a ${a}° que ${b}° ?`, `Quel est l’écart entre ces angles : ${b}° et ${a}° ?`, `Un angle mesure ${a}°, l’angle ${n.nom} ${b}°. Calcule leur écart.`]), a - b, `${a} − ${b} = ${a - b}.`, deuxAngles(a, b, { textes: [`${a}°`, `${b}°`] }));
 }
 const RANG_NATURE = ["aigu", "droit", "obtus", "plat"];
 function genCompNatures(): G {
@@ -1242,7 +1380,7 @@ function genCompDePlus(): G {
   const n = nomAngle();
   return dg(
     plus ? pick([`Un angle mesure ${a}°. Un autre a ${d}° de plus. Combien mesure-t-il ?`, `L’angle ${n.nom} a ${d}° de plus qu’un angle de ${a}°. Calcule sa mesure.`, `Ajoute ${d}° à un angle de ${a}°. Quelle mesure obtiens-tu ?`]) : pick([`Un angle mesure ${a}°. Un autre a ${d}° de moins. Combien mesure-t-il ?`, `L’angle ${n.nom} a ${d}° de moins qu’un angle de ${a}°. Calcule sa mesure.`, `Retire ${d}° à un angle de ${a}°. Quelle mesure obtiens-tu ?`]),
-    r, `${a} ${plus ? "+" : "−"} ${d} = ${r}.`,
+    r, `${a} ${plus ? "+" : "−"} ${d} = ${r}.`, deuxAngles(a, r, { textes: [`${a}°`, "?"] }),
   );
 }
 
@@ -1263,7 +1401,9 @@ function genCompPiegeCotes(): G {
   const b = a + 10 * randomInt(2, 8);
   const grandLong = Math.random() < 0.5;
   const [va, vb] = grandLong ? [b, a] : [a, b];
-  return dg(pick([`${p.nom} trace un angle de ${va}° à longs côtés. ${q.nom} trace un angle de ${vb}° à courts côtés. Quelle est la plus grande mesure ?`, `Au tableau, l’angle de ${p.nom} a de longs côtés : ${va}°. Celui de ${q.nom} a de petits côtés : ${vb}°. Écris la plus grande mesure.`]), Math.max(a, b), `La longueur des côtés ne compte pas. On compare les degrés : ${Math.max(a, b)}° est le plus grand.`);
+  return dg(pick([`${p.nom} trace un angle de ${va}° à longs côtés. ${q.nom} trace un angle de ${vb}° à courts côtés. Quelle est la plus grande mesure ?`, `Au tableau, l’angle de ${p.nom} a de longs côtés : ${va}°. Celui de ${q.nom} a de petits côtés : ${vb}°. Écris la plus grande mesure.`]), Math.max(a, b), `La longueur des côtés ne compte pas. On compare les degrés : ${Math.max(a, b)}° est le plus grand.`,
+    // Le piège se VOIT : à gauche les longs côtés, à droite les courts.
+    deuxAngles(va, vb, { textes: [`${va}°`, `${vb}°`], longs: [5.5, 2.2] }));
 }
 function genCompOuvrir(): G {
   const p = pick(PRENOMS);
@@ -1271,7 +1411,7 @@ function genCompOuvrir(): G {
   const a = 10 * randomInt(Math.ceil(o.min / 10), Math.floor(o.max / 10) - 2);
   const b = a + 10 * randomInt(2, Math.floor((o.max - a) / 10));
   const elle = p.f ? "elle" : "il";
-  return dg(pick([`${p.nom} ouvre ${o.son} à ${a}°, puis à ${b}°. De combien de degrés l’ouverture a-t-elle grandi ?`, `${p.nom} ouvre ${o.son} : d’abord ${a}°, ensuite ${b}°. Calcule l’écart entre ces deux ouvertures.`, `D’abord, ${p.nom} ouvre ${o.son} à ${a}°. Puis ${elle} l’amène à ${b}°. De combien a-t-${elle} ouvert en plus ?`]), b - a, `${b} − ${a} = ${b - a}.`);
+  return dg(pick([`${p.nom} ouvre ${o.son} à ${a}°, puis à ${b}°. De combien de degrés l’ouverture a-t-elle grandi ?`, `${p.nom} ouvre ${o.son} : d’abord ${a}°, ensuite ${b}°. Calcule l’écart entre ces deux ouvertures.`, `D’abord, ${p.nom} ouvre ${o.son} à ${a}°. Puis ${elle} l’amène à ${b}°. De combien a-t-${elle} ouvert en plus ?`]), b - a, `${b} − ${a} = ${b - a}.`, deuxAngles(a, b, { textes: [`${a}°`, `${b}°`] }));
 }
 function genCompHorloge(): G {
   const p = pick(PRENOMS);
@@ -1346,7 +1486,7 @@ function genMesLecture(): G {
   const [x, y] = shuffle([v, 180 - v]);
   return qc(
     pick([`Tu lis ${x}° et ${y}°. L’angle est ${nat}. Choisis sa mesure.`, `Deux lectures : ${x}° et ${y}°. L’angle est ${nat}. Laquelle convient ?`, `Un angle ${nat} : laquelle convient, ${x}° ou ${y}° ?`, `Pour un angle ${nat}, choisis la bonne lecture : ${x}° ou ${y}°.`, `Angle ${nat}. Le rapporteur donne ${x}° et ${y}°. Quelle est sa mesure ?`]),
-    `${v}°`, [`${180 - v}°`], `Un angle ${nat} mesure ${v < 90 ? "moins" : "plus"} de 90° : c’est ${v}°.`,
+    `${v}°`, [`${180 - v}°`], `Un angle ${nat} mesure ${v < 90 ? "moins" : "plus"} de 90° : c’est ${v}°.`, angleTrace(v, null, "", { mesure: "?" }),
   );
 }
 function genMesPossible(): G {
@@ -1367,7 +1507,7 @@ function genMesEtapes(): G {
     : k === 1
       ? pick([`Le centre est posé sur ${n.s}. Que fais-tu ensuite pour l’angle ${n.nom} ?`, `Angle ${n.nom} : quelle est la deuxième étape de la mesure ?`])
       : pick([`Tu mesures l’angle ${n.nom}. Que fais-tu en dernier ?`, `Quelle est la dernière étape pour mesurer l’angle ${n.nom} ?`]);
-  return qc(t, e[k], [...e.filter((_, i) => i !== k), leurre], `Dans l’ordre : ${e.join(", ")}.`);
+  return qc(t, e[k], [...e.filter((_, i) => i !== k), leurre], `Dans l’ordre : ${e.join(", ")}.`, angleTrace(mesureFranche(), n, t, { mesure: "rien" }));
 }
 function genMesEstimerFin(): G {
   const n = nomAngle();
@@ -1386,8 +1526,8 @@ function genMesGraduations(): G {
 function genTrInstrument(): G {
   const v = mesure5(20, 160, [90]);
   if (Math.random() < 0.25)
-    return qc(pick(["Tu traces un angle de 90°. Quel outil est le plus rapide ?", "Pour tracer vite 90°, que prends-tu ?"]), "une équerre", ["un compas", "une gomme", "un crayon"], "L’équerre a un coin droit : elle trace 90° d’un seul geste.");
-  return qc(pick([`Quel instrument trace un angle de ${v}° ?`, `Tu traces ${v}°. Que prends-tu ?`, `Que prends-tu pour tracer un angle de ${v}° ?`, `Pour tracer ${v}°, quel outil gradué prends-tu ?`, `Choisis l’instrument pour tracer ${v}°.`, `Trace un angle de ${v}° : quel instrument faut-il ?`]), "un rapporteur", ["une équerre", "un compas", "une gomme"], `Pour obtenir ${v}°, il faut un instrument gradué en degrés : le rapporteur.`);
+    return qc(pick(["Tu traces un angle de 90°. Quel outil est le plus rapide ?", "Pour tracer vite 90°, que prends-tu ?"]), "une équerre", ["un compas", "une gomme", "un crayon"], "L’équerre a un coin droit : elle trace 90° d’un seul geste.", figureMesure(90, null, "", { droit: true }));
+  return qc(pick([`Quel instrument trace un angle de ${v}° ?`, `Tu traces ${v}°. Que prends-tu ?`, `Que prends-tu pour tracer un angle de ${v}° ?`, `Pour tracer ${v}°, quel outil gradué prends-tu ?`, `Choisis l’instrument pour tracer ${v}°.`, `Trace un angle de ${v}° : quel instrument faut-il ?`]), "un rapporteur", ["une équerre", "un compas", "une gomme"], `Pour obtenir ${v}°, il faut un instrument gradué en degrés : le rapporteur.`, figureMesure(v, null, ""));
 }
 function genTrCotes(): G {
   const n = nomAngle();
@@ -1404,15 +1544,15 @@ function genTrRepere(): G {
   const v = mesure5(20, 160, [90]);
   const n = nomAngle();
   const faux = [...new Set([180 - v, v + 10, v - 10])].filter((x) => x !== v);
-  return qc(pick([`Tu traces un angle de ${v}°. Quelle graduation cherches-tu ?`, `Tu veux ${v}°. À quelle graduation fais-tu le repère ?`, `Repère à quelle graduation pour ${v}° ?`, `Angle ${n.nom} de ${v}° : où fais-tu le repère ?`, `Le 0 est sur un côté. Quel repère pour ${v}° ?`, `Trace ${v}° : quel nombre repères-tu ?`, `Pour obtenir ${v}°, quelle graduation vises-tu ?`]), `${v}°`, faux.map((x) => `${x}°`), `On compte à partir du 0 jusqu’à ${v}.`);
+  return qc(pick([`Tu traces un angle de ${v}°. Quelle graduation cherches-tu ?`, `Tu veux ${v}°. À quelle graduation fais-tu le repère ?`, `Repère à quelle graduation pour ${v}° ?`, `Angle ${n.nom} de ${v}° : où fais-tu le repère ?`, `Le 0 est sur un côté. Quel repère pour ${v}° ?`, `Trace ${v}° : quel nombre repères-tu ?`, `Pour obtenir ${v}°, quelle graduation vises-tu ?`]), `${v}°`, faux.map((x) => `${x}°`), `On compte à partir du 0 jusqu’à ${v}.`, figureMesure(v, null, "", { mesure: "rien" }));
 }
 function genTrNature(): G {
   const v = mesureFranche();
   const juste = natureAngle(v);
   if (Math.random() < 0.6)
-    return qc(pick([`Tu traces ${v}°. Cet angle sera-t-il aigu ou obtus ?`, `Angle à tracer : ${v}°. Il sera aigu ou obtus ?`, `Tu vas tracer ${v}°. Quelle sera sa nature ?`, `Prévois la nature d’un angle de ${v}° à tracer.`, `Avant de tracer ${v}° : aigu ou obtus ?`]), juste, [juste === "aigu" ? "obtus" : "aigu"], `${v}° est ${v < 90 ? "plus petit" : "plus grand"} que 90°.`);
+    return qc(pick([`Tu traces ${v}°. Cet angle sera-t-il aigu ou obtus ?`, `Angle à tracer : ${v}°. Il sera aigu ou obtus ?`, `Tu vas tracer ${v}°. Quelle sera sa nature ?`, `Prévois la nature d’un angle de ${v}° à tracer.`, `Avant de tracer ${v}° : aigu ou obtus ?`]), juste, [juste === "aigu" ? "obtus" : "aigu"], `${v}° est ${v < 90 ? "plus petit" : "plus grand"} que 90°.`, figureMesure(v, null, "", { mesure: "rien" }));
   const a = pick(["aigu", "obtus"]);
-  return ouiNon(pick([`Tu traces ${v}°. L’angle sera-t-il ${a} ?`, `Un tracé de ${v}° donne-t-il un angle ${a} ?`]), juste === a, `${v}° est ${v < 90 ? "plus petit" : "plus grand"} que 90° : l’angle sera ${juste}.`);
+  return ouiNon(pick([`Tu traces ${v}°. L’angle sera-t-il ${a} ?`, `Un tracé de ${v}° donne-t-il un angle ${a} ?`]), juste === a, `${v}° est ${v < 90 ? "plus petit" : "plus grand"} que 90° : l’angle sera ${juste}.`, figureMesure(v, null, "", { mesure: "rien" }));
 }
 function genTrVerifier(): G {
   const n = nomAngle();
@@ -1450,12 +1590,12 @@ function genTrCalcul(): G {
   const mode = pick(["double", "moitie", "somme"] as const);
   if (mode === "double") return dg(pick([`Trace le double de ${a}°. Quelle mesure traces-tu ?`, `Angle à tracer : le double de ${a}°. Quel repère fais-tu ?`]), 2 * a, `2 × ${a} = ${2 * a}.`);
   if (mode === "moitie") return dg(pick([`Trace la moitié de ${m}°. Quel repère fais-tu ?`, `Angle à tracer : la moitié de ${m}°. Quelle mesure traces-tu ?`]), m / 2, `${m} ÷ 2 = ${m / 2}.`);
-  return dg(pick([`Tu traces ${a}° puis ${b}° côte à côte. Quel angle total obtiens-tu ?`, `Deux angles côte à côte : ${a}° et ${b}°. Quelle mesure a l’angle total ?`]), a + b, `${a} + ${b} = ${a + b}.`);
+  return dg(pick([`Tu traces ${a}° puis ${b}° côte à côte. Quel angle total obtiens-tu ?`, `Deux angles côte à côte : ${a}° et ${b}°. Quelle mesure a l’angle total ?`]), a + b, `${a} + ${b} = ${a + b}.`, rayonsSansNom([10, 10 + a, 10 + a + b]));
 }
 function genTrEquerre(): G {
   const v = Math.random() < 0.45 ? 90 : mesure5(20, 160, [90]);
   const ok = v === 90;
-  return ouiNon(pick([`Tu traces un angle de ${v}°. L’équerre suffit-elle ?`, `Peux-tu tracer ${v}° avec la seule équerre ?`, `Angle de ${v}° : l’équerre seule convient-elle ?`, `L’équerre seule trace-t-elle un angle de ${v}° ?`]), ok, ok ? "Le coin de l’équerre fait 90°." : `L’équerre ne donne que 90°. Pour ${v}°, il faut le rapporteur.`);
+  return ouiNon(pick([`Tu traces un angle de ${v}°. L’équerre suffit-elle ?`, `Peux-tu tracer ${v}° avec la seule équerre ?`, `Angle de ${v}° : l’équerre seule convient-elle ?`, `L’équerre seule trace-t-elle un angle de ${v}° ?`]), ok, ok ? "Le coin de l’équerre fait 90°." : `L’équerre ne donne que 90°. Pour ${v}°, il faut le rapporteur.`, figureMesure(v, null, "", { mesure: "rien" }));
 }
 
 // ----- ANGLE_DEFI, ★4
@@ -1472,7 +1612,7 @@ function genDefiParts(): G {
     `Un cercle est coupé en ${k} parts égales. Combien mesure l’angle de ${m} parts côte à côte ?`,
     `Une roue a ${k} rayons régulièrement espacés. Quel angle forment ${m + 1} rayons voisins, du premier au dernier ?`,
     `Sur ${quoi}, on trace ${k} parts égales. Quel est l’angle total de ${m} parts voisines ?`,
-  ]), r, pourquoi);
+  ]), r, pourquoi, rayonsSansNom(Array.from({ length: k }, (_, i) => 90 + (i * 360) / k)));
 }
 function genDefiMinutes(): G {
   const p = pick(PRENOMS);
@@ -1559,7 +1699,7 @@ function genDefiFoisPlus(): G {
     `Un angle ${nom} est coupé en deux angles. Le plus grand mesure ${fois} le plus petit. Calcule le plus ${mot}.`,
     `On partage un angle ${nom} en deux. Un des deux angles vaut ${fois} l’autre. Quelle est la mesure du plus ${mot} ?`,
     `Deux angles ont pour somme un angle ${nom}. L’un vaut ${fois} l’autre. Trouve le plus ${mot}.`,
-  ]), r, `L’angle ${nom} fait ${k + 1} parts égales : ${total} ÷ ${k + 1} = ${petit}°. Le grand : ${k} × ${petit} = ${k * petit}°.`);
+  ]), r, `L’angle ${nom} fait ${k + 1} parts égales : ${total} ÷ ${k + 1} = ${petit}°. Le grand : ${k} × ${petit} = ${k * petit}°.`, rayonsSansNom([0, petit, total]));
 }
 function genDefiCroixSomme(): G {
   const [A, B, C, D, O] = lettres(5);
@@ -1584,7 +1724,7 @@ function genDefiRayons(): G {
       `${k} demi-droites de même origine partagent le tour en ${k} angles égaux. Combien mesure chaque angle ?`,
       `Autour d’un point, ${k} angles égaux font un tour complet. Calcule la mesure d’un angle.`,
       `Une étoile a ${k} branches régulières. Quel angle sépare deux branches voisines ?`,
-    ]), r, `Un tour complet : 360°. 360 ÷ ${k} = ${r}°.`);
+    ]), r, `Un tour complet : 360°. 360 ÷ ${k} = ${r}°.`, rayonsSansNom(Array.from({ length: k }, (_, i) => 90 + i * r)));
   return nb(pick([
     `Autour d’un point, des angles de ${r}° font un tour complet. Combien y a-t-il d’angles ?`,
     `Un tour complet est coupé en angles égaux de ${r}°. Combien d’angles obtient-on ?`,
@@ -1629,12 +1769,13 @@ function genRelVerdict(): G {
   const ok = Math.random() < 0.5;
   const b = ok ? 180 - a : 180 - a + pick([-20, -10, 10, 20]);
   const pourquoi = `Supplémentaires : la somme fait 180°. ${a} + ${b} = ${a + b}.`;
+  const fig = deuxAngles(a, b, { textes: [`${a}°`, `${b}°`] });
   return pick([
-    () => ouiNon(`${a}° et ${b}° sont-ils supplémentaires ?`, ok, pourquoi),
-    () => vraiFaux(`Vrai ou faux : ${a}° et ${b}° sont supplémentaires.`, ok, pourquoi),
-    () => ouiNon(`${a}° et ${b}° font-ils 180° ensemble ?`, ok, pourquoi),
-    () => ouiNon(`Ces angles sont-ils supplémentaires : ${a}° et ${b}° ?`, ok, pourquoi),
-    () => ouiNon(`Additionne ${a}° et ${b}°. Sont-ils supplémentaires ?`, ok, pourquoi),
+    () => ouiNon(`${a}° et ${b}° sont-ils supplémentaires ?`, ok, pourquoi, fig),
+    () => vraiFaux(`Vrai ou faux : ${a}° et ${b}° sont supplémentaires.`, ok, pourquoi, fig),
+    () => ouiNon(`${a}° et ${b}° font-ils 180° ensemble ?`, ok, pourquoi, fig),
+    () => ouiNon(`Ces angles sont-ils supplémentaires : ${a}° et ${b}° ?`, ok, pourquoi, fig),
+    () => ouiNon(`Additionne ${a}° et ${b}°. Sont-ils supplémentaires ?`, ok, pourquoi, fig),
   ])();
 }
 function genRelVocab(): G {
@@ -1660,7 +1801,7 @@ function genRelOppose(): G {
 // ----- ANGLE_RELATIONS, ★2
 function genRelComplete(): G {
   const a = mesure5(20, 160);
-  return dg(pick([`${a}° + … = 180°. Complète.`, `Il manque combien de degrés à ${a}° pour faire 180° ?`, `Complète : ${a}° et … ° sont supplémentaires.`, `Combien ajouter à ${a}° pour obtenir un angle plat ?`, `Trouve le supplémentaire de ${a}°.`, `Un angle plat contient un angle de ${a}°. Combien mesure l’autre ?`]), 180 - a, `180 − ${a} = ${180 - a}.`);
+  return dg(pick([`${a}° + … = 180°. Complète.`, `Il manque combien de degrés à ${a}° pour faire 180° ?`, `Complète : ${a}° et … ° sont supplémentaires.`, `Combien ajouter à ${a}° pour obtenir un angle plat ?`, `Trouve le supplémentaire de ${a}°.`, `Un angle plat contient un angle de ${a}°. Combien mesure l’autre ?`]), 180 - a, `180 − ${a} = ${180 - a}.`, rayonsSansNom([0, a, 180]));
 }
 function genRelDifference(): G {
   const [s, a, b, c] = lettres(4);
@@ -1671,9 +1812,10 @@ function genRelDifference(): G {
 }
 function genRelVoisin(): G {
   const t = mesure5(40, 130, [90]);
+  const fig = rayonsSansNom([10, 10 + t, 190, 190 + t]);
   if (Math.random() < 0.55)
-    return dg(pick([`Deux droites se coupent. Un angle mesure ${t}°. Combien mesure son voisin ?`, `Un angle de ${t}° a un voisin sur la même droite. Trouve ce voisin.`, `Deux droites se croisent. Un angle fait ${t}°. Calcule son voisin.`, `Au croisement, un angle mesure ${t}°. Quelle est la mesure de son voisin ?`]), 180 - t, `Deux angles voisins sur une droite font 180°. 180 − ${t} = ${180 - t}.`);
-  return dg(pick([`Deux droites se coupent. Un angle mesure ${t}°. Combien mesure l’angle opposé ?`, `Deux droites se croisent. Un angle fait ${t}°. Donne l’angle en face.`, `Au croisement, un angle mesure ${t}°. Quelle est la mesure de l’angle opposé ?`]), t, "Deux angles opposés par le sommet ont la même mesure.");
+    return dg(pick([`Deux droites se coupent. Un angle mesure ${t}°. Combien mesure son voisin ?`, `Un angle de ${t}° a un voisin sur la même droite. Trouve ce voisin.`, `Deux droites se croisent. Un angle fait ${t}°. Calcule son voisin.`, `Au croisement, un angle mesure ${t}°. Quelle est la mesure de son voisin ?`]), 180 - t, `Deux angles voisins sur une droite font 180°. 180 − ${t} = ${180 - t}.`, fig);
+  return dg(pick([`Deux droites se coupent. Un angle mesure ${t}°. Combien mesure l’angle opposé ?`, `Deux droites se croisent. Un angle fait ${t}°. Donne l’angle en face.`, `Au croisement, un angle mesure ${t}°. Quelle est la mesure de l’angle opposé ?`]), t, "Deux angles opposés par le sommet ont la même mesure.", fig);
 }
 function genRelReconnaitre(): G {
   const [s, a, b, c, d] = lettres(5);
@@ -1723,7 +1865,7 @@ function genRelDouble(): G {
     `Deux angles adjacents forment 180°. L’un vaut ${fois} l’autre. Calcule le plus ${mot}.`,
     `Deux droites se coupent. Un angle vaut ${fois} son voisin. Quelle est la mesure du plus ${mot} ?`,
     `Une droite et une demi-droite forment deux angles. L’un vaut ${fois} l’autre. Trouve le plus ${mot}.`,
-  ]), veutPetit ? petit : k * petit, `180° font ${k + 1} parts égales : 180 ÷ ${k + 1} = ${petit}°. Le grand : ${k} × ${petit} = ${k * petit}°.`);
+  ]), veutPetit ? petit : k * petit, `180° font ${k + 1} parts égales : 180 ÷ ${k + 1} = ${petit}°. Le grand : ${k} × ${petit} = ${k * petit}°.`, rayonsSansNom([0, petit, 180]));
 }
 function genRelExtreme(): G {
   const t = 5 * pick([6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 20, 22, 24, 26, 28, 30]);
@@ -1735,7 +1877,7 @@ function genRelExtreme(): G {
     `Deux droites se croisent et un angle fait ${t}°. Écris le plus ${mot} des quatre angles.`,
     `Un des quatre angles d’un croisement mesure ${t}°. Calcule le plus ${mot} des quatre angles.`,
     `Au croisement de deux droites, un angle vaut ${t}°. Trouve le plus ${mot} des quatre angles.`,
-  ]), r, `Les quatre angles valent ${t}° et ${180 - t}°, deux fois chacun. Le plus ${mot} : ${r}°.`);
+  ]), r, `Les quatre angles valent ${t}° et ${180 - t}°, deux fois chacun. Le plus ${mot} : ${r}°.`, rayonsSansNom([10, 10 + t, 190, 190 + t]));
 }
 function genRelEcart(): G {
   const d = 10 * randomInt(1, 8);
@@ -1749,7 +1891,7 @@ function genRelEcart(): G {
     `Deux droites se coupent. Deux angles voisins diffèrent de ${d}°. Quelle est la mesure du plus ${mot} ?`,
     `Deux angles voisins sur une droite ont ${d}° d’écart. Trouve le plus ${mot}.`,
     `Un angle plat est coupé en deux. L’écart entre les deux parts est de ${d}°. Calcule le plus ${mot}.`,
-  ]), r, `Sans l’écart : 180 − ${d} = ${180 - d}, puis ${180 - d} ÷ 2 = ${petit}°. Le grand : ${petit} + ${d} = ${petit + d}°.`);
+  ]), r, `Sans l’écart : 180 − ${d} = ${180 - d}, puis ${180 - d} ÷ 2 = ${petit}°. Le grand : ${petit} + ${d} = ${petit + d}°.`, rayonsSansNom([0, petit, 180]));
 }
 function genRelTourComplet(): G {
   const [s, a, b, c, d] = lettres(5);
@@ -2741,6 +2883,7 @@ export const anglesBank: TutorBankItemV4[] = [
           expected: [`${r}°`, String(r)],
           comparator: "number_equal",
           explanation: expl(`Le tour complet autour du centre mesure 360°. ${k} parts égales : 360 ÷ ${k} = ${r}°.`),
+          canvas: rayonsSansNom(Array.from({ length: k }, (_, i) => 90 + i * r)),
         };
       }
       if (cas === 1) {
@@ -2757,6 +2900,7 @@ export const anglesBank: TutorBankItemV4[] = [
           expected: [`${r}°`, String(r)],
           comparator: "number_equal",
           explanation: expl(`Un angle ${base} mesure ${total}°. En ${k} angles égaux : ${total} ÷ ${k} = ${r}°.`),
+          canvas: rayonsSansNom(Array.from({ length: k + 1 }, (_, i) => 10 + i * r)),
         };
       }
       const v = pick([90, 90, mesure5(40, 85), mesure5(95, 140)]);
@@ -3033,6 +3177,8 @@ export const anglesBank: TutorBankItemV4[] = [
         expected: [`un angle ${nature}`],
         comparator: "mcq_exact",
         explanation: expl(regle[nature]),
+        // On demande la nature : l'angle à sa mesure, ni mesure écrite ni carré (0° et 360° ne se dessinent pas).
+        ...(v > 0 && v < 360 ? { canvas: figureMesure(v, n, t, { mesure: "rien" }) } : {}),
       };
     },
   },
