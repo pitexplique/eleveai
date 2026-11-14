@@ -99,6 +99,11 @@ import {
 // `fixed` et rendait mal. En attendant de revoir le principe, l'aide passe par
 // l'explication IA proposée sur l'écran d'erreur (`CoachErrorHelp`).
 import TutorSimpleView from "./TutorSimpleView";
+import ReactionDessin, {
+  DUREE_REACTION_MS,
+  mouvementReduit,
+  type TypeReaction,
+} from "./ReactionDessin";
 import PaveNumerique from "./PaveNumerique";
 import BoutonVideoCompetence from "./BoutonVideoCompetence";
 
@@ -769,6 +774,12 @@ function forceScrollTopOnArrival() {
 
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
+  /* ⭐ 14/11 : la réaction du dessin, liée à la question à laquelle on a répondu
+     (elle s'éteint d'elle-même dès que la question change). */
+  const [reactionDessin, setReactionDessin] = useState<{
+    questionId: string;
+    type: TypeReaction;
+  } | null>(null);
   const [explanationText, setExplanationText] = useState("");
   const [wrongAnswerPanelOpen, setWrongAnswerPanelOpen] = useState(false);
   const [lastSubmittedAnswer, setLastSubmittedAnswer] = useState("");
@@ -1690,6 +1701,21 @@ function continueAfterExplanation() {
         [currentMicro]: typed.result.ok ? "success" : "retry",
       }));
 
+      /* ⭐ 14/11 — LA RÉACTION DU DESSIN : avant de passer à la suite (ou
+         d'ouvrir le corrigé, qui remplace la question en vue simple), le dessin
+         de la question réagit ~0,7 s. Sans dessin, ou si l'élève a demandé
+         moins d'animations, rien ne change et rien n'attend. */
+      if (currentQuestion.canvas && !mouvementReduit()) {
+        setReactionDessin({
+          questionId: currentQuestion.id,
+          type: typed.result.ok ? "juste" : "faux",
+        });
+        await new Promise((r) => setTimeout(r, DUREE_REACTION_MS));
+        // Éteinte tout de suite : une question revue plus tard ne doit pas
+        // rejouer une réaction qui n'est pas la sienne.
+        setReactionDessin(null);
+      }
+
       if (typed.result.ok) {
         verdictOralRef.current = "Bravo, c'est juste ! Question suivante. ";
         setFeedback(`Bonne réponse : ${currentMicroLabel}`);
@@ -2052,7 +2078,19 @@ function handleInputKeyDown(
           onSelectNotion={goToNotion}
           onPrevNotion={() => shiftNotion(-1)}
           onNextNotion={() => shiftNotion(1)}
-          renderCanvas={(question) => renderCanvas(question.canvas)}
+          renderCanvas={(question) => (
+            <ReactionDessin
+              canvas={question.canvas}
+              classe={classe}
+              reaction={
+                reactionDessin?.questionId === question.id
+                  ? reactionDessin.type
+                  : null
+              }
+            >
+              {renderCanvas(question.canvas)}
+            </ReactionDessin>
+          )}
           onBackCoach={retourCoach}
           onSwitchToComplete={() => choisirMode("complete")}
           onStart={() => void startSession(activeMicroId ?? undefined)}
@@ -2501,7 +2539,17 @@ function handleInputKeyDown(
 
                   {currentQuestion.canvas ? (
                     <div className="mb-5 overflow-x-auto rounded-2xl bg-slate-50 p-3">
-                      {renderCanvas(currentQuestion.canvas)}
+                      <ReactionDessin
+                        canvas={currentQuestion.canvas}
+                        classe={classe}
+                        reaction={
+                          reactionDessin?.questionId === currentQuestion.id
+                            ? reactionDessin.type
+                            : null
+                        }
+                      >
+                        {renderCanvas(currentQuestion.canvas)}
+                      </ReactionDessin>
                     </div>
                   ) : null}
 
