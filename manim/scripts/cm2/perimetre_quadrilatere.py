@@ -343,11 +343,11 @@ class PerimetreQuadrilatereBase(PaysagePerimetreCM2):
         self.play(FadeIn(c2, shift=UP * 0.1), run_time=0.25)
         self.au_mot("240 est plus petit que 250")
         d1 = self.t("240 < 250 : oui !", 40, VERT_OK)
-        self.col(d1, -1.15, 0.35)
+        self.col(d1, -1.1, 0.35)
         self.play(FadeIn(d1, shift=UP * 0.1), Wiggle(po), run_time=0.45)
         self.au_mot("pour 10 mètres")
         res = self.bloc(["Il reste de la peinture", "pour 10 m."], 34, VERT_OK)
-        self.col(res, -1.9, 0.35)
+        self.col(res, -2.0, 0.35)
         self.play(FadeIn(res, scale=1.1), run_time=0.45)
         self.attendre_voix()
 

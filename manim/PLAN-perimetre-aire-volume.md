@@ -77,11 +77,11 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 ## CM2
 
 **Périmètre** (5)
-- [ ] Comprendre ce qu’est un périmètre — `perimetre_comprendre`
-- [ ] Calculer le périmètre d’un triangle — `perimetre_triangle`
-- [ ] Calculer le périmètre d’un quadrilatère — `perimetre_quadrilatere`
-- [ ] Calculer le périmètre d’un polygone — `perimetre_polygone`
-- [ ] Résoudre un défi de périmètre — `perimetre_defi`
+- [x] Comprendre ce qu’est un périmètre — `perimetre_comprendre`
+- [ ] Calculer le périmètre d’un triangle — `perimetre_triangle` (⏳ paysage HD faite ; short à refaire : la voix du « À toi » donne un triangle plat, en attente de Frédéric)
+- [x] Calculer le périmètre d’un quadrilatère — `perimetre_quadrilatere`
+- [x] Calculer le périmètre d’un polygone — `perimetre_polygone`
+- [x] Résoudre un défi de périmètre — `perimetre_defi`
 
 **Aire** (7)
 - [ ] Comprendre ce qu’est une aire — `aire_comprendre`
