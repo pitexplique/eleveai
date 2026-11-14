@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="240" height="240" role="img" aria-label="un chien"><rect x="0" y="0" width="60" height="60" fill="none" stroke="none"/>
+    <path d="M 30 38 C 18 38 15 48 17 56 L 43 56 C 45 48 42 38 30 38 Z" fill="#d97706" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="30" cy="26" r="15" fill="#d97706" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M 17 16 C 7 17 6 36 13 40 C 19 39 20 28 19 20 Z" fill="#78350f" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M 43 16 C 53 17 54 36 47 40 C 41 39 40 28 41 20 Z" fill="#78350f" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M 29 39 L 29 44 a 3 3 0 0 0 6 0 L 35 38 Z" fill="#f472b6" stroke="#111827" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+    <ellipse cx="30" cy="33" rx="9" ry="6.5" fill="#fde68a" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <ellipse cx="30" cy="30" rx="3.4" ry="2.4" fill="#111827"/>
+    <path d="M 30 32 L 30 35 M 30 35 a 3 2.5 0 0 1 -4 0.5 M 30 35 a 3 2.5 0 0 0 4 0.5" fill="none" stroke="#111827" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="24" cy="22" r="2.4" fill="#111827"/><circle cx="36" cy="22" r="2.4" fill="#111827"/></svg>

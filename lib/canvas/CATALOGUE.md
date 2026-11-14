@@ -371,6 +371,11 @@ sont gérés une fois pour toutes. Chaque dessin tient dans une boite de 60 × 6
 en formes FERMÉES : un trait épais est un trait noir, et on ne colorie pas un
 trait.
 
+⭐ **Pour COMPTER des animaux, voir `lib/canvas/animaux/`** (14/11/2026) :
+24 animaux au même contrat 60 × 60 (dont 4 de La Réunion), grille de N à
+compter, mélange et vrac à graine fixe, export SVG pour Manim. Pas encore un
+`kind` du coach : mode d'emploi et branchement dans son `README.md`.
+
 ---
 
 ### `monnaie` — pièces et billets en euros (10/11/2026)

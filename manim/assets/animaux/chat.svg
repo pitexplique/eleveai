@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="240" height="240" role="img" aria-label="un chat"><rect x="0" y="0" width="60" height="60" fill="none" stroke="none"/>
+    <path d="M 40 52 C 53 52 57 41 52 32 C 59 41 54 57 40 57 Z" fill="#94a3b8" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M 30 32 C 18 32 14 44 16 54 L 44 54 C 46 44 42 32 30 32 Z" fill="#94a3b8" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M 21 17 L 18 5 L 31 13 Z" fill="#94a3b8" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M 39 17 L 42 5 L 29 13 Z" fill="#94a3b8" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="30" cy="26" r="14" fill="#94a3b8" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="25" cy="24" r="2.2" fill="#111827"/><circle cx="35" cy="24" r="2.2" fill="#111827"/>
+    <path d="M 27 30 L 33 30 L 30 33 Z" fill="#f9a8d4" stroke="#111827" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M 30 33 L 30 35 M 30 35 a 4 3 0 0 1 -5 1 M 30 35 a 4 3 0 0 0 5 1" fill="none" stroke="#111827" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M 16 27 L 5 25 M 16 30 L 5 32 M 44 27 L 55 25 M 44 30 L 55 32" fill="none" stroke="#111827" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
