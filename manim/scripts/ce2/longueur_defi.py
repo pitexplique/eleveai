@@ -75,9 +75,6 @@ class LongueurDefiBase(PaysageLongueurCE2):
         en morceaux « = 3 × » / « 10 », qui n'ont plus le texte d'origine)."""
         cle = getattr(self, "_cle_voix", None)
         t = self._forces.get((cle, getattr(f, "original_text", None)))
-        if os.environ.get("DBG_FORCE") and cle == "04b-reponse":
-            print("FORCE?", type(f).__name__, repr(getattr(f, "original_text", None)),
-                  [getattr(x, "_force_t", None) for x in f.get_family()][:3], flush=True)
         if t is None:
             for x in f.get_family():
                 c = getattr(x, "_force_t", None)
@@ -100,6 +97,22 @@ class LongueurDefiBase(PaysageLongueurCE2):
             if t is not None:
                 return max(0.0, self._debut_voix + t - self.renderer.time)
         return super()._attente(textes)
+
+    def play(self, *args, **kwargs):
+        """Un morceau forcé (_Morceau : ce n'est pas un Text, la synchro ne l'attend pas) :
+        on attend soi-même son instant avant de le jouer."""
+        if hasattr(self, "_debut_voix") and os.environ.get("SANS_SYNCHRO") != "1":
+            for a in args:
+                m = getattr(a, "mobject", None)
+                if type(a).__name__ in ("FadeIn", "Write") and (isinstance(m, Text) or type(m).__name__ == "_Morceau"):
+                    t = self._force(m)
+                    if t is not None:
+                        d = self._debut_voix + t - self.renderer.time
+                        if d > 0.05:
+                            print(f"FORCE {self._cle_voix} +{d:.2f} s", flush=True)
+                            super().play(Wait(run_time=d))
+                        break
+        return super().play(*args, **kwargs)
 
     def _debut(self, m):
         t = self._force(m)
@@ -247,7 +260,7 @@ class LongueurDefiBase(PaysageLongueurCE2):
         self.play(FadeIn(c0[0], shift=UP * 0.1), GrowFromEdge(b[0], LEFT), run_time=0.35)
         self.aux_extraits([VGroup(c0[1], a1)], [("10 centimètres", 1)], run_time=0.3)
         c1 = self.ligne([("10 cm", MALIA), ("+ 2 cm", "#fdba74"), ("= 12 cm", VERT_OK)], 46, buff=0.3)
-        gauche(c1, -6.2, -0.15)  # (l'accolade « 10 cm » sous la barre descend à y 0.6)
+        gauche(c1, -6.2, -0.4)  # (l'accolade « 10 cm » sous la barre descend à y 0.6 ; -0.15 la frôlait)
         hors_audit(c1[0])
         self.au_mot("Plus 2")
         self.play(FadeIn(c1[0]), FadeIn(c1[1], shift=UP * 0.1), GrowFromEdge(b[1], LEFT), FadeIn(a2), run_time=0.35)
@@ -255,12 +268,12 @@ class LongueurDefiBase(PaysageLongueurCE2):
         hors_audit(c1[2])
         self.aux_extraits([VGroup(c1[2], tout)], [("12 centimètres", 1)], run_time=0.3)
         l = self.t("Les trois ont raison !", 44, VERT_OK)
-        gauche(l, -6.2, -1.25)
+        gauche(l, -6.2, -1.45)
         self.au_mot("Les trois ont raison")
         self.play(FadeIn(l, scale=1.15), run_time=0.4)
         r = self.ligne([("12 cm", LEA), ("=", WHITE), ("120 mm", KEVIN), ("=", WHITE), ("1 dm et 2 cm", MALIA)],
                        40, buff=0.25)
-        gauche(r, -6.2, -2.35)
+        gauche(r, -6.2, -2.55)
         for m in r:
             hors_audit(m)  # rappel des trois écritures déjà dites
             for f in m.get_family():

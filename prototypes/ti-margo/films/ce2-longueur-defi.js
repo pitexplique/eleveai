@@ -25,23 +25,23 @@ FILMS['defi']=function(outils){
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* le défi en commentaire : 1 m = ? dm */
-      if(T>=t1m) ecrire(c,'1 m',300,330,140*zoom(T,t1m,.5),CRAIE.blanc);
+      if(T>=t1m) ecrire(c,'1 m',350,330,140*zoom(T,t1m,.5),CRAIE.blanc);
       if(T>=tDm) ecrire(c,'= ? dm',700,330,120*zoom(T,tDm,.5),CRAIE.jaune);
       tab.maj(); return; }
     const roule=T>=ouf&&T>=tTour?entreL(T,tTour,tTour+1.4):0;
     if(T>=tSkate) skateCraie(c,250+roule*500,200,340,zoom(T,tSkate,.4));
     AMIS.forEach(([val,t,tb,coul],k)=>{ if(T<t||roule>0) return; const y=330+k*110, z=zoom(T,t,.4);
-      if(T>=uni&&T>=tb&&k>0){ ecrire(c,val+' = 60 cm',XL-80,y,64*zoom(T,tb,.4),CRAIE.ok,'left'); return; }
-      if(T>=uni&&T>=tb&&k===0){ ecrire(c,val+' = 60 cm',XL-80,y,64*zoom(T,tb,.4),CRAIE.ok,'left'); return; }
-      ecrire(c,val,XL-80,y,72*z,coul,'left'); });
+      if(T>=uni&&T>=tb&&k>0){ ecrire(c,val+' = 60 cm',XL-140,y,64*zoom(T,tb,.4),CRAIE.ok,'left'); return; }
+      if(T>=uni&&T>=tb&&k===0){ ecrire(c,val+' = 60 cm',XL-140,y,64*zoom(T,tb,.4),CRAIE.ok,'left'); return; }
+      ecrire(c,val,XL-140,y,72*z,coul,'left'); });
     if(T<uni){
       if(T>=t6) coteH(c,80,420,90,'',CRAIE.jaune);
       if(T>=tDisp) ecrire(c,'qui a raison ?',280,620-90,56*zoom(T,tDisp,.4),CRAIE.faux);
     } else if(T<q){
       coteH(c,80,420,90,'',CRAIE.jaune);
-      if(T>=tAussi){ for(let k=0;k<3;k++) coche(c,960,300+k*110,.28); }
+      if(T>=tAussi){ for(let k=0;k<3;k++) coche(c,1000,318+k*110,.28); }
     } else { /* ouf : tout le monde a raison */
-      if(T>=tTout&&roule===0){ for(let k=0;k<3;k++){ ecrire(c,AMIS[k][0]+' = 60 cm',XL-80,330+k*110,64,CRAIE.ok,'left'); coche(c,960,300+k*110,.28); } }
+      if(T>=tTout&&roule===0){ for(let k=0;k<3;k++) coche(c,1000,318+k*110,.28); }
       if(T>=tTour) ecrire(c,'un tour de skate !',528,500,70*zoom(T,tTour,.4),CRAIE.jaune);
     }
     tab.maj();
@@ -65,7 +65,7 @@ FILMS['defi']=function(outils){
   const tA=mot('02b-reponse','A');
 
   const mini=ardoiseMini([['6 dm','#b197fc'],['60 cm','#74c0fc'],['600 mm','#ffc078']]);
-  poserMiniature(outils,acc+1,'6 dm, 60 cm, 600 mm :<br>qui a raison ?'+PARI,mini);
+  poserMiniature(outils,acc+1,'6 dm ou 600 mm :<br>qui a raison ?'+PARI,mini);
   return { clips,FIN,titre:'Le skate de 6 dm',ceinture:2,finTitre,groupes,finClip:'05-abonne',
     cuts:[finTitre,uni,q,r,ouf,com,f],
     question:{ qc:'02-question',rc:'02b-reponse',finR:ouf,cpt:fin('02-question')+.1,bonne:0,tBon:tA-r,

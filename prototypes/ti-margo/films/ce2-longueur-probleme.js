@@ -24,7 +24,7 @@ FILMS['probleme']=function(outils){
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* le défi en commentaire : 2 m et 30 cm = ? cm */
-      if(T>=t2m) ecrire(c,'2 m',300,260,130*zoom(T,t2m,.5),CRAIE.blanc);
+      if(T>=t2m) ecrire(c,'2 m',340,260,130*zoom(T,t2m,.5),CRAIE.blanc);
       if(T>=t30) ecrire(c,'+ 30 cm',700,260,110*zoom(T,t30,.5),CRAIE.blanc);
       if(T>=tTout) ecrire(c,'= ? cm',528,450,120*zoom(T,tTout,.5),CRAIE.jaune);
       tab.maj(); return; }
@@ -33,14 +33,14 @@ FILMS['probleme']=function(outils){
       if(T>=t50){ cordeCraie(c,X0+100*E+8,YC,50*E,CORDE2,entreL(T,t50,t50+.4)); ecrire(c,'50 cm',X0+125*E+8,YC-55,64*zoom(T,t50,.4),CORDE2); }
       if(T>=t1p) ecrire(c,'1 + 50',400,350,100*zoom(T,t1p,.4),CRAIE.blanc);
       if(T>=t51) ecrire(c,'= 51 ?',760,350,100*zoom(T,t51,.4),CRAIE.faux);
-      if(T>=tPetit){ cordeCraie(c,X0,500,51*E/10,CRAIE.faux,1); ecrire(c,'tout petit…',X0+260,500,60*zoom(T,tPetit,.4),CRAIE.gris); }
+      if(T>=tPetit){ cordeCraie(c,X0,500,51*E,CRAIE.faux,1); ecrire(c,'tout petit…',X0+51*E+200,500,60*zoom(T,tPetit,.4),CRAIE.gris); }
     } else if(T<q){
       cordeCraie(c,X0,YC,100*E,CORDE1,1); cordeCraie(c,X0+100*E+8,YC,50*E,CORDE2,1);
       if(T<t1mb){ ecrire(c,'1 m',X0+50*E,YC-55,64,CORDE1); }
       ecrire(c,'50 cm',X0+125*E+8,YC-55,64,CORDE2);
       if(T>=tAdd){ ecrire(c,'1 + 50 = 51',528,330,90,CRAIE.faux); const u=entreL(T,tAdd,tAdd+.4); c.strokeStyle=CRAIE.faux; c.lineWidth=12;
         c.beginPath(); c.moveTo(250,330); c.lineTo(250+560*u,330); c.stroke(); }
-      if(T>=t1mb) ecrire(c,'1 m = 100 cm',X0+50*E,YC-55,58*zoom(T,t100,.4),CRAIE.ok);
+      if(T>=t1mb) ecrire(c,'1 m = 100 cm',X0+50*E-15,YC-55,52*zoom(T,t100,.4),CRAIE.ok);
       if(T>=t100) ecrire(c,'1 m = 100 cm',528,470,96*zoom(T,t100,.4),CRAIE.ok);
     } else { /* ouf : 150 cm de corde */
       cordeCraie(c,X0,YC,100*E,CORDE1,1); cordeCraie(c,X0+100*E+8,YC,50*E,CORDE2,1);

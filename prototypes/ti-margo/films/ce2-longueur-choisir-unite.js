@@ -36,16 +36,16 @@ FILMS['choisir-unite']=function(outils){
     if(T>=tMamie){ route(c,1); voitureCraie(c,150+roule*620,YS,.9); }
     if(T<uni){
       if(T>=t3) ecrire(c,'3 000 000',470,410,100*zoom(T,t3,.4),CRAIE.faux);
-      if(T>=tCm) ecrire(c,'cm',830,410,100*zoom(T,tCm,.4),CRAIE.faux);
+      if(T>=tCm) ecrire(c,'cm',795,410,100*zoom(T,tCm,.4),CRAIE.faux);
       if(T>=tEcrire) ecrire(c,'trop long à écrire !',470,520,58*zoom(T,tEcrire,.4),CRAIE.gris);
     } else if(T<q){
       ecrire(c,'3 000 000 cm',470,410,80,CRAIE.faux);
-      if(T>=tZeros) cercle(c,560,410,150,CRAIE.faux,entreL(T,tZeros,tZeros+.3));
+      if(T>=tZeros){ const k=entreL(T,tZeros,tZeros+.3); c.strokeStyle=CRAIE.faux; c.lineWidth=7; c.lineCap='round'; c.beginPath(); c.moveTo(330,452); c.lineTo(330+270*k,452); c.stroke(); } /* « trop de zéros » : on souligne les zéros */
       if(T>=tRoute) ecrire(c,'une route :',300,520,64*zoom(T,tRoute,.4),CRAIE.gris);
       if(T>=tKm) ecrire(c,'le km',620,520,80*zoom(T,tKm,.4),CRAIE.ok);
-      if(T>=t30){ coteH(c,150,930,YS-150,'30 km',CRAIE.ok,72); }
+      if(T>=t30){ coteH(c,150,870,YS-150,'30 km',CRAIE.ok,72); }
     } else { /* ouf : en route ! */
-      coteH(c,150,930,YS-150,'30 km',CRAIE.ok,72);
+      coteH(c,150,870,YS-150,'30 km',CRAIE.ok,72);
       if(T>=tOuf30) ecrire(c,'30 km : court !',528,450,80*zoom(T,tOuf30,.4),CRAIE.ok);
       if(T>=tEnR) ecrire(c,'en route !',528,550,64*zoom(T,tEnR,.4),CRAIE.jaune);
     }

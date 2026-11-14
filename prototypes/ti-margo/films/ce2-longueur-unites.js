@@ -74,7 +74,7 @@ FILMS['unites']=function(outils){
 
   const mini=`<svg width="330" height="250" viewBox="0 0 330 250"><rect x="6" y="6" width="318" height="238" rx="18" fill="#1f3b2c" stroke="#8a5a2b" stroke-width="12"/>`+
     `<path d="M30 190 Q 110 150 190 185 Q 240 205 290 175" stroke="#69db7c" stroke-width="22" fill="none" stroke-linecap="round"/>`+
-    `<text x="165" y="120" font-family="Segoe UI" font-weight="800" font-size="84" fill="#ff8787" text-anchor="middle">10 km ?</text></svg>`;
+    `<text x="165" y="120" font-family="Segoe UI" font-weight="800" font-size="68" fill="#ff8787" text-anchor="middle">10 km ?</text></svg>`;
   poserMiniature(outils,acc+1,'Ma queue :<br>10 km ?'+PARI,mini);
   return { clips,FIN,titre:'La queue en kilomètres',ceinture:0,finTitre,groupes,finClip:'05-abonne',
     cuts:[finTitre,uni,q,r,ouf,com,f],

@@ -64,8 +64,8 @@ FILMS['estimer']=function(outils){
 
   const mini=`<svg width="330" height="250" viewBox="0 0 330 250"><rect x="6" y="6" width="318" height="238" rx="18" fill="#1f3b2c" stroke="#8a5a2b" stroke-width="12"/>`+
     `<rect x="30" y="40" width="270" height="90" fill="#c0603a"/>`+
-    `<path d="M40 170 Q 90 150 140 172 Q 170 185 200 168" stroke="#69db7c" stroke-width="18" fill="none" stroke-linecap="round"/>`+
-    `<text x="265" y="200" font-family="Segoe UI" font-weight="800" font-size="72" fill="#ffd43b" text-anchor="middle">×10</text></svg>`;
+    `<path d="M40 170 Q 90 150 140 172 Q 150 180 165 172" stroke="#69db7c" stroke-width="18" fill="none" stroke-linecap="round"/>`+
+    `<text x="238" y="194" font-family="Segoe UI" font-weight="800" font-size="50" fill="#ffd43b" text-anchor="middle">×10</text></svg>`;
   poserMiniature(outils,acc+1,'Un mur mesuré<br>à la queue ?'+PARI,mini);
   return { clips,FIN,titre:'Le mur mesuré à la queue',ceinture:1,finTitre,groupes,finClip:'05-abonne',
     cuts:[finTitre,uni,q,r,ouf,com,f],

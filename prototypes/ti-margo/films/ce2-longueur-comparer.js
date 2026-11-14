@@ -25,9 +25,9 @@ FILMS['comparer']=function(outils){
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* le défi en commentaire : 2 m ou 150 cm ? */
       ecrire(c,'le plus long ?',528,150,70,CRAIE.jaune);
-      if(T>=t2m) ecrire(c,'2 m',300,380,140*zoom(T,t2m,.5),CRAIE.blanc);
-      if(T>=t2m) ecrire(c,'ou',528,380,70,CRAIE.gris);
-      if(T>=t150) ecrire(c,'150 cm',790,380,120*zoom(T,t150,.5),CRAIE.blanc);
+      if(T>=t2m) ecrire(c,'2 m',240,380,140*zoom(T,t2m,.5),CRAIE.blanc);
+      if(T>=t2m) ecrire(c,'ou',440,380,70,CRAIE.gris);
+      if(T>=t150) ecrire(c,'150 cm',770,380,120*zoom(T,t150,.5),CRAIE.blanc);
       tab.maj(); return; }
     /* le gecko en haut, Ti Margo (en vert) dessous : chacun avec sa longueur */
     if(T>=tGecko) geckoCraie(c,XG+5*PAS,150,10*PAS,'#b197fc',zoom(T,tGecko,.4));
@@ -44,8 +44,8 @@ FILMS['comparer']=function(outils){
       if(T>=tLui) cercle(c,XG+5*PAS,150,190,CRAIE.ok,entreL(T,tLui,tLui+.3));
     } else { /* ouf : il me bat d'un centimètre */
       cordeCraie(c,XG,215,10*PAS,'#b197fc',1,14); cordeCraie(c,XG,395,9*PAS,QUEUE,1,14);
-      if(T>=tBat){ coteH(c,XG+9*PAS,XG+10*PAS+40,470,'',CRAIE.jaune); ecrire(c,"1 cm d'écart",XR,300,72*zoom(T,tBat,.4),CRAIE.jaune); }
-      if(T>=tVite) ecrire(c,'mais je cours vite !',XR-40,450,52*zoom(T,tVite,.4),CRAIE.ok);
+      if(T>=tBat){ c.save(); c.setLineDash([10,8]); c.strokeStyle=CRAIE.jaune; c.lineWidth=4; c.beginPath(); c.moveTo(XG+9*PAS,395); c.lineTo(XG+9*PAS,480); c.moveTo(XG+10*PAS,215); c.lineTo(XG+10*PAS,480); c.stroke(); c.restore(); { const a=XG+9*PAS, b=XG+10*PAS; c.strokeStyle=CRAIE.jaune; c.lineWidth=5; c.beginPath(); c.moveTo(a-60,470); c.lineTo(a,470); c.moveTo(a-18,458); c.lineTo(a,470); c.lineTo(a-18,482); c.moveTo(b+60,470); c.lineTo(b,470); c.moveTo(b+18,458); c.lineTo(b,470); c.lineTo(b+18,482); c.stroke(); } ecrire(c,"1 cm d'écart",XR,300,72*zoom(T,tBat,.4),CRAIE.jaune); }
+      if(T>=tVite) ecrire(c,'mais je cours vite !',XR-40,580,52*zoom(T,tVite,.4),CRAIE.ok);
     }
     tab.maj();
   }

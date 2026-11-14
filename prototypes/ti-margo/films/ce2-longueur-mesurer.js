@@ -45,7 +45,7 @@ FILMS['mesurer']=function(outils){
     } else { /* ouf : posée sur le 0 */
       if(T>=tO0) cercle(c,xr(0),YR+52,30,CRAIE.ok,entreL(T,tO0,tO0+.3));
       if(T>=tO0) ecrire(c,'du 0 au 10 : 10 cm',528,520,70*zoom(T,tO0,.4),CRAIE.ok);
-      if(T>=tMiam) ecrire(c,'Miam !',900,130,80*zoom(T,tMiam,.4),CRAIE.jaune);
+      if(T>=tMiam) ecrire(c,'Miam !',840,130,72*zoom(T,tMiam,.4),CRAIE.jaune);
     }
     tab.maj();
   }
