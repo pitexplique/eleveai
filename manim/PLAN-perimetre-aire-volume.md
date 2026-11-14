@@ -10,8 +10,8 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Comprendre ce… — `ce2_perimetre_comprendre`
 - [x] Déterminer le périmètre… — `ce2_perimetre_polygone`
 - [x] Comparer les périmètres de plusieurs polygones — `ce2_perimetre_comparer`
-- [ ] Déterminer le périmètre… — `ce2_perimetre_rectangle`
-- [ ] Résoudre un défi de périmètre — `ce2_perimetre_defi`
+- [x] Déterminer le périmètre… — `ce2_perimetre_rectangle`
+- [x] Résoudre un défi de périmètre — `ce2_perimetre_defi`
 
 **Volume et contenance** (5)
 - [ ] Connaître les unités L, dL et cL — `ce2_contenance_unites`

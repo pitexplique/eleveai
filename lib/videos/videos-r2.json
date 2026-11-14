@@ -5761,7 +5761,7 @@
  "ce2-perimetre-comparer": {
   "fichier": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.mp4",
   "poster": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.png",
-  "vignette": null,
+  "vignette": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.vignette.webp",
   "titre": "Rectangle ou triangle : quel tour est plus long ? — Comparer des périmètres — épisode 3 · Maths CE2",
   "short": false,
   "youtube": null,
@@ -5770,7 +5770,7 @@
  "ce2-perimetre-comparer-short": {
   "fichier": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer-short.mp4",
   "poster": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer-short-miniature.png",
-  "vignette": null,
+  "vignette": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer-short-miniature.vignette.webp",
   "titre": "La table la plus petite a le plus petit tour, tu paries ? #maths #ce2",
   "short": true,
   "youtube": null,
@@ -5779,7 +5779,7 @@
  "ce2-perimetre-comprendre": {
   "fichier": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre.mp4",
   "poster": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre.png",
-  "vignette": null,
+  "vignette": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre.vignette.webp",
   "titre": "Combien de clôture pour faire le tour d'un jardin ? — Le périmètre — épisode 1 · Maths CE2",
   "short": false,
   "youtube": null,
@@ -5788,16 +5788,34 @@
  "ce2-perimetre-comprendre-short": {
   "fichier": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre-short.mp4",
   "poster": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre-short-miniature.png",
-  "vignette": null,
+  "vignette": "ce2/maths/perimetre/01-comprendre/eleveai-maths-ce2-perimetre-comprendre-short-miniature.vignette.webp",
   "titre": "Le tour du bac à sable : 9 m, tu paries ? #maths #ce2",
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_comprendre&display=simple"
  },
+ "ce2-perimetre-defi": {
+  "fichier": "ce2/maths/perimetre/05-defi/eleveai-maths-ce2-perimetre-defi.mp4",
+  "poster": "ce2/maths/perimetre/05-defi/eleveai-maths-ce2-perimetre-defi.png",
+  "vignette": "ce2/maths/perimetre/05-defi/eleveai-maths-ce2-perimetre-defi.vignette.webp",
+  "titre": "Une porte, des cages collées : que devient le tour ? — Un défi de périmètre — épisode 5 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_defi&display=simple"
+ },
+ "ce2-perimetre-defi-short": {
+  "fichier": "ce2/maths/perimetre/05-defi/eleveai-maths-ce2-perimetre-defi-short.mp4",
+  "poster": "ce2/maths/perimetre/05-defi/eleveai-maths-ce2-perimetre-defi-short-miniature.png",
+  "vignette": "ce2/maths/perimetre/05-defi/eleveai-maths-ce2-perimetre-defi-short-miniature.vignette.webp",
+  "titre": "16 m de scotch pour ma scène, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_defi&display=simple"
+ },
  "ce2-perimetre-polygone": {
   "fichier": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone.mp4",
   "poster": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone.png",
-  "vignette": null,
+  "vignette": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone.vignette.webp",
   "titre": "6 côtés : comment n'en oublier aucun ? — Le périmètre d'un polygone — épisode 2 · Maths CE2",
   "short": false,
   "youtube": null,
@@ -5806,11 +5824,29 @@
  "ce2-perimetre-polygone-short": {
   "fichier": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone-short.mp4",
   "poster": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone-short-miniature.png",
-  "vignette": null,
+  "vignette": "ce2/maths/perimetre/02-polygone/eleveai-maths-ce2-perimetre-polygone-short-miniature.vignette.webp",
   "titre": "La guirlande de ma cabane : 13 m, tu paries ? #maths #ce2",
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_polygone&display=simple"
+ },
+ "ce2-perimetre-rectangle": {
+  "fichier": "ce2/maths/perimetre/04-rectangle/eleveai-maths-ce2-perimetre-rectangle.mp4",
+  "poster": "ce2/maths/perimetre/04-rectangle/eleveai-maths-ce2-perimetre-rectangle.png",
+  "vignette": "ce2/maths/perimetre/04-rectangle/eleveai-maths-ce2-perimetre-rectangle.vignette.webp",
+  "titre": "Combien de galon pour le tour d'un coussin ? — Le rectangle et le carré — épisode 4 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_rectangle&display=simple"
+ },
+ "ce2-perimetre-rectangle-short": {
+  "fichier": "ce2/maths/perimetre/04-rectangle/eleveai-maths-ce2-perimetre-rectangle-short.mp4",
+  "poster": "ce2/maths/perimetre/04-rectangle/eleveai-maths-ce2-perimetre-rectangle-short-miniature.png",
+  "vignette": "ce2/maths/perimetre/04-rectangle/eleveai-maths-ce2-perimetre-rectangle-short-miniature.vignette.webp",
+  "titre": "Le tour du potager = 10 × 2, tu paries ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=perimetre&microId=ce2_perimetre_rectangle&display=simple"
  },
  "cm1-aire-carre-rectangle": {
   "fichier": "cm1/maths/aire/03-carre-rectangle/eleveai-maths-cm1-aire-carre-rectangle.mp4",

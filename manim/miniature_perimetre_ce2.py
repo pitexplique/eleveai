@@ -1,7 +1,7 @@
 # miniature_perimetre_ce2.py
 # LES MINIATURES des PAYSAGES de la série PÉRIMÈTRE CE2 (13/11/2026).
 # « COMPRENDRE X » + pastille « EN N MIN », la maths en gros, l'échelle des ceintures
-# (01 blanche, 02 jaune, 03 orange). Les miniatures des shorts viennent du film Ti Margo.
+# (01 blanche, 02 jaune, 03 orange, 04 orange, 05 bleue). Les miniatures des shorts viennent du film Ti Margo.
 # Rangées À CÔTÉ DE LEUR VIDÉO : manim/sorties/ce2/maths/perimetre/<NN-slug>/.
 # La durée « EN N MIN » est lue dans le mp4 : relancer après un re-rendu.
 #
@@ -23,6 +23,8 @@ EP = [
     ("comprendre", "01-comprendre", ["COMPRENDRE", "LE PÉRIMÈTRE"], "8 + 5 + 8 + 5 = 26 m", "le tour du jardin, côté après côté !", True, "blanche"),
     ("polygone", "02-polygone", ["LE PÉRIMÈTRE", "D'UN POLYGONE"], "6 côtés : 22 m", "on n'oublie aucun côté !", False, "jaune"),
     ("comparer", "03-comparer", ["COMPARER", "DES PÉRIMÈTRES"], "120 m ou 130 m ?", "on calcule chaque tour !", True, "orange"),
+    ("rectangle", "04-rectangle", ["LE PÉRIMÈTRE", "DU RECTANGLE"], "40 + 30 + 40 + 30 = 140 cm", "longueur × largeur ? Faux !", False, "orange"),
+    ("defi", "05-defi", ["UN DÉFI", "DE PÉRIMÈTRE"], "34 − 2 = 32 m", "une porte, des cages collées !", True, "bleue"),
 ]
 
 
