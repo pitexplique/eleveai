@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire du triangle rectangle. Combien mesure la moitié d'un rectangle ?",
+  "01-situation": "Voici Baptiste. Il est chef traiteur. Pour un buffet, il coupe des sandwichs rectangulaires en deux, en suivant la diagonale. Il obtient deux triangles rectangles. Quelle est l'aire de chaque triangle ?",
+  "02-rectangle": "Le sandwich est un rectangle de 12 centimètres sur 8 centimètres. Son aire : 12 fois 8, 96 centimètres carrés.",
+  "03-moitie": "La diagonale coupe le rectangle en deux triangles exactement pareils. Chaque triangle est la moitié du rectangle : 96 divisé par 2, 48 centimètres carrés.",
+  "04-methode": "Un triangle rectangle a un angle droit. Les deux côtés de l'angle droit sont la longueur et la largeur du rectangle caché. La méthode : on multiplie ces deux côtés, puis on divise par 2.",
+  "05-question": "Question ! Les deux côtés de l'angle droit d'un triangle rectangle mesurent 6 centimètres et 4 centimètres. Quelle est son aire ? A : 12 centimètres carrés. B : 24 centimètres carrés. C : 10 centimètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 6 fois 4, 24 : c'est le rectangle entier. Le triangle en est la moitié : 24 divisé par 2, 12 centimètres carrés.",
+  "06-piege": "Attention au piège ! On prend les deux côtés de l'angle droit, pas le grand côté penché. Et on n'oublie pas de diviser par 2 : sinon, on calcule tout le sandwich, au lieu d'un seul triangle.",
+  "07-question": "Question ! Un triangle rectangle a une base de 8 centimètres et une hauteur de 5 centimètres. Quelle est son aire ? A : 40 centimètres carrés. B : 13 centimètres carrés. C : 20 centimètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 8 fois 5, 40. Divisé par 2 : 20 centimètres carrés.",
+  "08-defi": "À toi de jouer ! Baptiste prépare une grande tarte rectangulaire de 30 centimètres sur 20 centimètres. Il la coupe en 2 triangles rectangles, puis chaque triangle en 2 parts de même aire. Quelle est l'aire d'une petite part ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La tarte : 30 fois 20, 600 centimètres carrés. Un triangle : 600 divisé par 2, 300. Une petite part : 300 divisé par 2, 150 centimètres carrés.",
+  "09-finale": "Ce que tu as appris. Un triangle rectangle est la moitié d'un rectangle. Son aire : on multiplie les deux côtés de l'angle droit, puis on divise par 2.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

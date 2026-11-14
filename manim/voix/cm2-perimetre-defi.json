@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi de périmètre. Retrouver un côté caché, et acheter la bonne longueur.",
+  "01-situation": "Voici Malo. Il est technicien en robotique : il installe des robots tondeuses. Le robot tond la pelouse tout seul, mais il faut enterrer un fil tout autour du jardin : c'est sa frontière. Combien de fil ?",
+  "02-rouleaux": "Le jardin est un rectangle de 18 virgule 5 mètres sur 12 mètres. 18 virgule 5 plus 12, 30 virgule 5. Fois 2 : 61 mètres de fil. Le fil est vendu en rouleaux de 50 mètres : un rouleau ne suffit pas, il en faut 2.",
+  "03-cote-cache": "Un client dit : mon jardin rectangulaire a un périmètre de 50 mètres, et une longueur de 15 mètres. Quelle est sa largeur ? La moitié du tour : 50 divisé par 2, 25. Une longueur plus une largeur font 25. 25 moins 15 : la largeur mesure 10 mètres.",
+  "04-carre": "Un jardin carré a un périmètre de 34 mètres. Ses 4 côtés sont égaux : 34 divisé par 4, 8 virgule 5. Chaque côté mesure 8 virgule 5 mètres.",
+  "05-question": "Question ! Un carré a un périmètre de 28 centimètres. Combien mesure un côté ? A : 14 centimètres. B : 7 centimètres. C : 24 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Les 4 côtés sont égaux : 28 divisé par 4, 7. On vérifie : 7 fois 4, 28.",
+  "06-piege": "Attention au piège ! Pour trouver la largeur, on n'enlève pas la longueur au tour entier. 50 moins 15, 35 : c'est faux, car le tour contient deux longueurs. On prend d'abord la moitié du tour, puis on enlève la longueur.",
+  "07-question": "Question ! Un rectangle a un périmètre de 18 centimètres. Sa longueur mesure 6 centimètres. Quelle est sa largeur ? A : 3 centimètres. B : 12 centimètres. C : 6 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. La moitié du tour : 18 divisé par 2, 9. 9 moins 6 : 3 centimètres. On vérifie : 6 plus 3, 9, fois 2, 18.",
+  "08-defi": "À toi de jouer ! Le jardin de Malo est un carré de 9 virgule 5 mètres de côté. Malo a déjà un vieux morceau de fil de 15 mètres. Combien de mètres de fil doit-il encore acheter ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le tour du carré : 9 virgule 5 fois 4, 38 mètres. Il a déjà 15 mètres : 38 moins 15, 23. Malo doit acheter 23 mètres de fil.",
+  "09-finale": "Ce que tu as appris. Pour retrouver un côté, on part du périmètre. Pour un carré, on divise par 4. Pour un rectangle, on prend la moitié du tour, puis on enlève le côté connu. Et on vérifie !",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

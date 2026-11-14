@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les unités d'aire. Centimètre carré, décimètre carré, mètre carré : laquelle choisir ?",
+  "01-situation": "Voici Tom. Il est imprimeur. Dans son atelier, il imprime des timbres, des affiches et des bâches géantes. Pour chaque commande, il note l'aire. Mais avec quelle unité ?",
+  "02-cm2": "Le centimètre carré, c'est l'aire d'un carré de 1 centimètre de côté : à peu près un ongle. Un timbre de 3 centimètres sur 2 contient 6 de ces carrés : 6 centimètres carrés.",
+  "03-dm2": "Le décimètre carré, c'est un carré de 1 décimètre de côté, 10 centimètres : à peu près une main ouverte. Une affiche de 5 décimètres sur 4 : 20 décimètres carrés.",
+  "04-m2": "Le mètre carré, c'est un carré de 1 mètre de côté : il tient sous une table. Une bâche de 4 mètres sur 3 : 12 mètres carrés. Et pour une île entière, on prend le kilomètre carré : La Réunion fait environ 2 500 kilomètres carrés.",
+  "05-question": "Question ! Quelle unité choisir pour l'aire d'une salle de classe ? A : le centimètre carré. B : le décimètre carré. C : le mètre carré. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Une salle de classe, c'est grand : environ 60 mètres carrés. En centimètres carrés, le nombre serait énorme.",
+  "06-piege": "Attention au piège ! Un mètre carré, ce n'est pas un mètre. Le mètre mesure une longueur : un trait. Le mètre carré mesure une surface : un carré entier de 1 mètre de côté. On l'écrit m, avec un petit 2 en haut.",
+  "07-question": "Question ! Quelle aire est possible pour un timbre ? A : 6 centimètres carrés. B : 6 mètres carrés. C : 6 décimètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Un timbre est tout petit : quelques carrés de 1 centimètre. 6 mètres carrés, ce serait un tapis de chambre !",
+  "08-defi": "À toi de jouer ! Tom range trois commandes : une carte de 8 centimètres sur 5, un poster de 6 décimètres sur 4, et une banderole de 5 mètres sur 2. Donne l'aire de chacune, avec la bonne unité. Mets pause, et cherche !",
+  "08b-correction": "Correction. La carte : 8 fois 5, 40 centimètres carrés. Le poster : 6 fois 4, 24 décimètres carrés. La banderole : 5 fois 2, 10 mètres carrés. L'unité de l'aire suit l'unité des côtés.",
+  "09-finale": "Ce que tu as appris. Une aire se mesure en carrés-unités : centimètre carré, décimètre carré, mètre carré. On choisit l'unité selon la taille de l'objet. Des côtés en mètres donnent une aire en mètres carrés.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

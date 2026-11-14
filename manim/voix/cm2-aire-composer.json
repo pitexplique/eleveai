@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire par découpage. Comment calculer l'aire d'une figure qui n'est pas un rectangle ?",
+  "01-situation": "Voici Nadia. Elle est soigneuse dans un parc animalier. Elle prépare un nouvel enclos pour les tortues géantes, en forme de L. Elle doit couvrir tout le sol d'herbe. Combien de mètres carrés ?",
+  "02-decouper": "Le L n'est pas un rectangle. Mais on peut le découper en deux rectangles. Le premier : 8 mètres sur 3, 24 mètres carrés. Le deuxième : 4 mètres sur 3, 12 mètres carrés.",
+  "03-assembler": "On additionne les deux morceaux : 24 plus 12, 36 mètres carrés d'herbe.",
+  "04-enlever": "Autre méthode : enlever. L'enclos des flamants est un rectangle de 10 mètres sur 6, avec un bassin de 4 mètres sur 2. L'herbe, c'est le grand rectangle moins le bassin : 60 moins 8, 52 mètres carrés.",
+  "05-question": "Question ! Une figure est faite d'un rectangle de 5 mètres sur 4, et d'un rectangle de 3 mètres sur 2. Quelle est son aire ? A : 14 mètres carrés. B : 26 mètres carrés. C : 120 mètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 5 fois 4, 20. 3 fois 2, 6. On additionne les morceaux : 20 plus 6, 26 mètres carrés.",
+  "06-piege": "Attention au piège ! Quand on découpe, chaque morceau ne compte qu'une fois. Si deux rectangles se chevauchent, on compte deux fois le même coin. On découpe sans chevauchement, et sans oublier de morceau.",
+  "07-question": "Question ! Un jardin de 9 mètres sur 5 a une piscine carrée de 3 mètres de côté. Quelle aire reste pour la pelouse ? A : 36 mètres carrés. B : 54 mètres carrés. C : 42 mètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Le jardin : 9 fois 5, 45. La piscine : 3 fois 3, 9. On enlève : 45 moins 9, 36 mètres carrés.",
+  "08-defi": "À toi de jouer ! L'enclos des lémuriens est un rectangle de 6 mètres sur 4, avec un triangle rectangle collé sur le côté. Les côtés de l'angle droit du triangle mesurent 4 mètres et 3 mètres. Quelle est l'aire totale ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le rectangle : 6 fois 4, 24 mètres carrés. Le triangle : 4 fois 3, 12, divisé par 2, 6. En tout : 24 plus 6, 30 mètres carrés.",
+  "09-finale": "Ce que tu as appris. Pour une figure compliquée, on la découpe en rectangles ou en triangles, puis on additionne. On peut aussi enlever un morceau à un grand rectangle. Chaque morceau compte une seule fois.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

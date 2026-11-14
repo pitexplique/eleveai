@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comprendre le périmètre. Le tour ou la surface : qu'est-ce qu'on mesure ?",
+  "01-situation": "Voici Noah. Il est régisseur de concerts. Avant le spectacle, il prépare la scène. Il pose un ruban lumineux tout autour, et un tapis noir sur tout le sol. Le ruban et le tapis, est-ce qu'on les mesure pareil ?",
+  "02-contour": "Le ruban suit le bord de la scène. Sa longueur, c'est le périmètre : la longueur du tour. La scène mesure 8 mètres de long et 5 mètres de large. Le tour : 8 plus 5, plus 8, plus 5 : 26 mètres de ruban.",
+  "03-surface": "Le tapis, lui, couvre tout l'intérieur. Ce n'est pas un tour, c'est une surface : son aire. Le périmètre est une longueur : il se mesure en mètres, en centimètres, en kilomètres.",
+  "04-meme-tour": "Noah a aussi une petite scène carrée, de 6 virgule 5 mètres de côté. Son tour : 6 virgule 5 fois 4, 26 mètres. Le même ruban ! Deux figures différentes peuvent avoir le même périmètre.",
+  "05-question": "Question ! Pour savoir combien de grillage il faut autour d'un champ, que calcule-t-on ? A : son aire. B : son périmètre. C : son volume. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Le grillage fait le tour du champ : on calcule son périmètre, une longueur.",
+  "06-piege": "Attention au piège ! Un élève dit : pour le périmètre d'un rectangle, je fais longueur fois largeur. Non ! 8 fois 5, 40 : c'est le nombre de carrés de 1 mètre qui couvrent la scène, son aire. Le périmètre, c'est la somme des côtés : 26 mètres.",
+  "07-question": "Question ! Quelle unité peut exprimer un périmètre ? A : le litre. B : le mètre carré. C : le mètre. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Un périmètre est une longueur : on l'exprime en mètres, en centimètres ou en kilomètres. Le mètre carré, c'est pour les aires.",
+  "08-defi": "À toi de jouer ! Noah pose du ruban autour d'une scène rectangulaire de 10 mètres sur 4 mètres. Il a un rouleau de 25 mètres. Est-ce assez ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le tour : 10 plus 4, plus 10, plus 4 : 28 mètres. Le rouleau de 25 mètres est trop court : il manque 3 mètres.",
+  "09-finale": "Ce que tu as appris. Le périmètre, c'est la longueur du tour d'une figure. Il se mesure avec une unité de longueur. Deux figures différentes peuvent avoir le même périmètre. On ne confond pas le tour et la surface.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

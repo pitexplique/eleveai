@@ -1,0 +1,9 @@
+{
+  "00-accroche": "J'ai 20 allumettes. Avec, je fais la barrière d'un enclos pour ma tortue. Un enclos long, ou un enclos carré : lequel a le plus grand tour ?",
+  "01-enclos": "L'enclos long : 8 allumettes en haut, 8 en bas, et 2 de chaque côté. L'enclos carré : 5 allumettes sur chaque côté.",
+  "02-question": "Question ! Lequel a le plus grand tour ? A : les deux, pareil. B : l'enclos long. C : l'enclos carré. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! L'enclos long : 8 plus 8, plus 2, plus 2 : 20 allumettes. L'enclos carré : 5 fois 4, 20 allumettes. Le même tour !",
+  "03-ouf": "Le même tour… mais ma tortue préfère le carré : il y a plus de place dedans !",
+  "04-commentaire": "À toi : avec 20 allumettes, je fais un enclos de 6 allumettes en haut et 6 en bas. Combien d'allumettes sur chaque petit côté ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi d'aire. Retrouver un côté à partir de l'aire, et comparer des surfaces.",
+  "01-situation": "Voici Romane. Elle dessine des skateparks. Une mairie lui donne un terrain rectangulaire de 48 mètres carrés, et de 6 mètres de large. Combien mesure-t-il de long ?",
+  "02-cote": "L'aire, c'est la longueur fois la largeur. Ici : la longueur fois 6 égale 48. Quel nombre fois 6 donne 48 ? 48 divisé par 6 : 8. Le terrain mesure 8 mètres de long. On vérifie : 8 fois 6, 48.",
+  "03-carre": "Pour une rampe carrée de 25 mètres carrés : quel nombre, fois lui-même, donne 25 ? 5 fois 5, 25. Le côté mesure 5 mètres.",
+  "04-comparer": "Romane hésite entre deux pistes : un rectangle de 9 mètres sur 4, ou un carré de 6 mètres de côté. 9 fois 4, 36. 6 fois 6, 36. La même aire ! Mais pas le même tour : 26 mètres pour le rectangle, 24 pour le carré.",
+  "05-question": "Question ! Un carré a une aire de 36 centimètres carrés. Combien mesure son côté ? A : 6 centimètres. B : 9 centimètres. C : 18 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. On cherche un nombre qui, fois lui-même, donne 36 : 6 fois 6, 36. Le côté mesure 6 centimètres.",
+  "06-piege": "Attention au piège ! Pour trouver le côté d'un carré à partir de son aire, on ne divise pas par 4. 36 divisé par 4, 9 : ça, c'est quand on connaît le périmètre. Pour l'aire, on cherche le nombre qui, fois lui-même, donne l'aire.",
+  "07-question": "Question ! Un rectangle a une aire de 56 mètres carrés et une largeur de 7 mètres. Quelle est sa longueur ? A : 49 mètres. B : 8 mètres. C : 63 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 56 divisé par 7 : 8. On vérifie : 8 fois 7, 56. La longueur mesure 8 mètres.",
+  "08-defi": "À toi de jouer ! Romane peint le sol du skatepark de 48 mètres carrés. Elle laisse sans peinture un carré de 2 mètres de côté, pour un arbre. Un pot de peinture couvre 10 mètres carrés. Combien de pots faut-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le carré de l'arbre : 2 fois 2, 4 mètres carrés. À peindre : 48 moins 4, 44 mètres carrés. 4 pots couvrent 40 : pas assez. Il faut 5 pots.",
+  "09-finale": "Ce que tu as appris. Si on connaît l'aire et un côté d'un rectangle, on divise l'aire par ce côté. Pour un carré, on cherche le nombre qui, fois lui-même, donne l'aire. Même aire ne veut pas dire même périmètre.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

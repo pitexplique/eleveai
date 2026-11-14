@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mon toast carré : 10 centimètres de côté. Je le coupe en diagonale : deux triangles. Ma sœur coupe le sien tout droit : deux rectangles.",
+  "01-dispute": "Elle dit : ton triangle est plus petit que mon rectangle ! Moi, je dis : c'est pareil !",
+  "02-question": "Question ! Quelle est l'aire de mon triangle ? A : 100 centimètres carrés. B : 20 centimètres carrés. C : 50 centimètres carrés. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! Le toast : 10 fois 10, 100 centimètres carrés. Mon triangle en est la moitié : 50. Et le rectangle de ma sœur ? La moitié aussi : 50. Pareil !",
+  "03-ouf": "Égalité… mais mon triangle a une pointe : je croque en premier !",
+  "04-commentaire": "À toi : un toast rectangulaire de 12 centimètres sur 10, coupé en diagonale. Quelle est l'aire d'un triangle ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

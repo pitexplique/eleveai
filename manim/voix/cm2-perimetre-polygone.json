@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le périmètre d'un polygone. Combien de fil d'argent pour un bijou à 6 côtés ?",
+  "01-situation": "Voici Inaya. Elle est créatrice de bijoux. Elle fabrique un pendentif en forme d'hexagone : un polygone à 6 côtés. Elle entoure son bord d'un fil d'argent. Combien de fil pour un pendentif ?",
+  "02-regulier": "Les 6 côtés sont égaux : 1 virgule 2 centimètre chacun. Au lieu d'additionner 6 fois, on multiplie : 1 virgule 2 fois 6, 7 virgule 2. Il faut 7 virgule 2 centimètres de fil.",
+  "03-quelconque": "Un autre pendentif a 5 côtés différents : 2 centimètres, 1 virgule 5, 3, 2 virgule 5, et 1. On fait le tour, et on coche chaque côté. 2 plus 1 virgule 5, 3 virgule 5. Plus 3, 6 virgule 5. Plus 2 virgule 5, 9. Plus 1 : 10 centimètres.",
+  "04-quadrillage": "Sur un quadrillage, Inaya dessine une broche en forme de L. Chaque carreau a 1 centimètre de côté. On compte les côtés de carreaux sur le bord, tout autour : 12. Le périmètre de la broche est de 12 centimètres.",
+  "05-question": "Question ! Un octogone a ses 8 côtés égaux à 2 virgule 5 centimètres. Quel est son périmètre ? A : 10 virgule 5 centimètres. B : 20 centimètres. C : 16 virgule 5 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 2 virgule 5 fois 8 : 2 fois 8, 16, et 5 dixièmes fois 8, 4. 16 plus 4 : 20 centimètres.",
+  "06-piege": "Attention au piège ! Sur une figure faite de carreaux collés, les traits à l'intérieur ne font pas partie du tour. Le fil passe seulement sur le bord. Si on compte les traits du milieu, on trouve trop.",
+  "07-question": "Question ! Un pentagone a des côtés de 4 centimètres, 3 virgule 5, 2, 4 et 1 virgule 5. Quel est son périmètre ? A : 15 centimètres. B : 13 centimètres. C : 14 virgule 10 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 3 virgule 5 plus 1 virgule 5, 5. Plus 4, plus 2, plus 4 : 15 centimètres. On n'oublie aucun des 5 côtés.",
+  "08-defi": "À toi de jouer ! Inaya a une bobine de 50 centimètres de fil d'argent. Combien de pendentifs à 6 côtés de 1 virgule 2 centimètre peut-elle entourer ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un pendentif : 7 virgule 2 centimètres. 6 pendentifs : 7 virgule 2 fois 6, 43 virgule 2. 7 pendentifs : 50 virgule 4, c'est un peu trop ! Inaya peut en faire 6.",
+  "09-finale": "Ce que tu as appris. Le périmètre d'un polygone, c'est la somme de tous ses côtés. Si les côtés sont égaux, on multiplie un côté par le nombre de côtés. Sur un quadrillage, on ne compte que le bord.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

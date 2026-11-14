@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comprendre l'aire. Comment mesurer la place que prend une surface ?",
+  "01-situation": "Voici Elsa. Elle est couturière : elle fabrique des couvertures en patchwork, avec des carrés de tissu cousus ensemble. Deux clients veulent des couvertures de formes différentes. Laquelle demande le plus de tissu ?",
+  "02-carreaux": "L'aire, c'est la mesure d'une surface. On la mesure avec un carré-unité : ici, un carré de tissu. La couverture bleue a 3 rangées de 4 carrés : 12 carrés. La rouge a 2 rangées de 6 carrés : 12 carrés aussi. Même aire, formes différentes !",
+  "03-demi": "Parfois, Elsa coupe un carré en deux, en suivant sa diagonale : elle obtient 2 triangles. Chaque triangle vaut un demi-carré. 2 demis font 1 carré entier. Une couverture de 10 carrés et 4 demis : 10 plus 2, 12 carrés.",
+  "04-perimetre": "Aire et périmètre, ce n'est pas pareil. La couverture bleue, 4 carrés sur 3 : son tour fait 14 côtés de carré. La rouge, 6 carrés sur 2 : son tour fait 16. Même aire, mais pas le même périmètre.",
+  "05-question": "Question ! L'aire d'une figure, c'est… A : la mesure de sa surface. B : la longueur de son tour. C : le nombre de ses côtés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. L'aire mesure la surface, toute la place à l'intérieur. La longueur du tour, c'est le périmètre.",
+  "06-piege": "Attention au piège ! Un plus grand tour ne veut pas dire une plus grande aire. La couverture rouge a le plus grand tour, 16, mais pas plus de tissu : 12 carrés, comme la bleue. Pour l'aire, on compte les carrés à l'intérieur.",
+  "07-question": "Question ! Une figure est faite de 6 carrés entiers et de 4 demi-carrés. Quelle est son aire ? A : 10 carrés. B : 6 carrés. C : 8 carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 4 demi-carrés, c'est 2 carrés entiers. 6 plus 2 : 8 carrés.",
+  "08-defi": "À toi de jouer ! Elsa a 20 carrés de tissu. Un client veut une couverture de 4 rangées de 5 carrés, avec un galon vert tout autour. A-t-elle assez de tissu ? Et combien de côtés de carré mesure le galon ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le tissu, c'est l'aire : 4 rangées de 5, 20 carrés. Elsa a juste assez. Le galon, c'est le périmètre : 5 plus 4, 9, fois 2 : 18 côtés de carré.",
+  "09-finale": "Ce que tu as appris. L'aire mesure une surface, en carrés-unités. 2 demi-carrés font 1 carré. Deux figures peuvent avoir la même aire et des périmètres différents.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

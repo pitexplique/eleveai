@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je commande un tapis pour ma cabane sur internet. Je tape 4… et je dois choisir l'unité. Oups, je clique trop vite !",
+  "01-livreur": "Le livreur arrive avec une toute petite boîte. Dedans : un tapis grand comme un timbre ! J'avais choisi les centimètres carrés.",
+  "02-question": "Question ! Quelle aire faut-il pour le sol de ma cabane ? A : 4 centimètres carrés. B : 4 mètres carrés. C : 4 kilomètres carrés. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 4 mètres carrés, c'est 4 carrés de 1 mètre de côté : juste la taille du sol. 4 kilomètres carrés, ce serait plus grand qu'un village !",
+  "03-ouf": "Le tapis-timbre ? Il est parfait… pour ma fourmi !",
+  "04-commentaire": "À toi : le sol de ma cabane mesure 2 mètres sur 3. Combien de mètres carrés de tapis ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

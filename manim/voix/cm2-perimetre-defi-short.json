@@ -1,0 +1,9 @@
+{
+  "00-accroche": "J'ai 36 mètres de grillage. Je fais un enclos carré pour mes poules, et je veux utiliser tout le grillage !",
+  "01-couper": "Un carré a 4 côtés égaux. Je coupe le grillage en 4 morceaux… mais de combien de mètres ?",
+  "02-question": "Question ! Combien mesure chaque côté de l'enclos ? A : 18 mètres. B : 32 mètres. C : 9 mètres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 4 côtés égaux : 36 divisé par 4, 9 mètres. On vérifie : 9 fois 4, 36. Tout le grillage est utilisé !",
+  "03-ouf": "Les poules sont ravies dans leur enclos… Mais moi, je suis resté dehors !",
+  "04-commentaire": "À toi : 50 mètres de grillage pour un enclos carré. Combien mesure chaque côté ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

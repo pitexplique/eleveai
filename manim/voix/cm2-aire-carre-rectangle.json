@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire du rectangle et du carré, avec des nombres à virgule. Combien de mètres carrés de panneaux solaires sur un toit ?",
+  "01-situation": "Voici Yasmine. Elle installe des panneaux solaires sur les toits. Avant de commander, elle calcule l'aire du toit, et l'aire d'un panneau. Le toit est un rectangle de 8 mètres sur 5 mètres.",
+  "02-formule": "Un rectangle de 8 sur 5, c'est 5 rangées de 8 carrés de 1 mètre. 8 fois 5 : 40. L'aire du toit est de 40 mètres carrés. Pour un rectangle : la longueur fois la largeur.",
+  "03-virgule": "Un panneau mesure 2 mètres sur 1 virgule 5 mètre. 2 fois 1 virgule 5 : 2 fois 1, 2, et 2 fois 5 dixièmes, 1. 2 plus 1 : 3 mètres carrés par panneau.",
+  "04-carre": "Le toit du garage est un carré de 6 mètres de côté. Pour un carré : le côté fois le côté. 6 fois 6 : 36 mètres carrés.",
+  "05-question": "Question ! Un rectangle mesure 7 mètres sur 4 mètres. Quelle est son aire ? A : 22 mètres carrés. B : 11 mètres carrés. C : 28 mètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. La longueur fois la largeur : 7 fois 4, 28 mètres carrés. 22, c'est le périmètre : le tour, pas la surface.",
+  "06-piege": "Attention au piège ! Les deux côtés doivent être dans la même unité. Un panneau de 1 mètre sur 50 centimètres : on ne fait pas 1 fois 50. 50 centimètres, c'est 0 virgule 5 mètre. 1 fois 0 virgule 5 : 0 virgule 5 mètre carré.",
+  "07-question": "Question ! Un carré a 9 centimètres de côté. Quelle est son aire ? A : 36 centimètres carrés. B : 81 centimètres carrés. C : 18 centimètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le côté fois le côté : 9 fois 9, 81 centimètres carrés. 36, c'est le tour du carré.",
+  "08-defi": "À toi de jouer ! Sur le toit de 40 mètres carrés, Yasmine pose des panneaux de 3 mètres carrés. Combien de panneaux au plus ? Et quelle aire restera libre ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 13 panneaux : 13 fois 3, 39 mètres carrés. 14 panneaux : 42, c'est trop. Yasmine pose 13 panneaux, et il reste 1 mètre carré de libre.",
+  "09-finale": "Ce que tu as appris. L'aire du rectangle : la longueur fois la largeur. L'aire du carré : le côté fois le côté. Les côtés doivent être dans la même unité, et l'aire s'écrit en unités carrées.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

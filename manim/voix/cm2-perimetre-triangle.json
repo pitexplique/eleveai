@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le périmètre du triangle, avec des nombres à virgule. Combien de bande pour border une voile ?",
+  "01-situation": "Voici Maëlle. Elle est voilière : elle fabrique les voiles des bateaux. Tout autour d'une voile, elle coud une bande solide, pour qu'elle ne se déchire pas dans le vent. Combien de mètres de bande pour cette voile ?",
+  "02-cotes": "La voile est un triangle. Ses 3 côtés mesurent 4 mètres, 3 virgule 5 mètres, et 2 virgule 5 mètres. Le périmètre, c'est la somme des 3 côtés.",
+  "03-additionner": "On additionne en alignant les virgules. 3 virgule 5 plus 2 virgule 5 : 6. Plus 4 : 10. Il faut 10 mètres de bande.",
+  "04-egaux": "Une petite voile a ses 3 côtés égaux : 1 virgule 5 mètre chacun. Au lieu d'additionner 3 fois, on multiplie : 1 virgule 5 fois 3, 4 virgule 5. Le périmètre est de 4 virgule 5 mètres.",
+  "05-question": "Question ! Un triangle a 2 côtés égaux de 6 centimètres, et une base de 4 centimètres. Quel est son périmètre ? A : 10 centimètres. B : 16 centimètres. C : 24 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Les 2 côtés égaux comptent chacun : 6 plus 6, 12. Plus la base, 4 : 16 centimètres.",
+  "06-piege": "Attention au piège ! Si les côtés ne sont pas dans la même unité, on convertit d'abord. Un triangle de 80 centimètres, 1 mètre et 1 mètre : on n'ajoute pas 80, 1 et 1 ! 1 mètre, c'est 100 centimètres. 80 plus 100, plus 100 : 280 centimètres.",
+  "07-question": "Question ! Une voile a des côtés de 2 mètres, 1 virgule 5 mètre et 2 virgule 5 mètres. Quel est son périmètre ? A : 6 mètres. B : 5 virgule 10 mètres. C : 4 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 1 virgule 5 plus 2 virgule 5 : 5 dixièmes plus 5 dixièmes, cela fait 1. Donc 4. Plus 2 : 6 mètres.",
+  "08-defi": "À toi de jouer ! Maëlle borde 3 voiles pareilles. Chaque voile a des côtés de 2 virgule 5 mètres, 2 virgule 5 mètres, et 1 mètre. Elle a un rouleau de 20 mètres de bande. Combien de mètres lui restera-t-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Une voile : 2 virgule 5 plus 2 virgule 5, 5. Plus 1 : 6 mètres. Pour 3 voiles : 6 fois 3, 18 mètres. 20 moins 18 : il lui restera 2 mètres.",
+  "09-finale": "Ce que tu as appris. Le périmètre d'un triangle, c'est la somme de ses 3 côtés. Avec des nombres à virgule, on aligne les virgules. Si les unités sont différentes, on convertit d'abord.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je pose du gazon sur mon terrain de jeu : un rectangle de 6 carreaux sur 5. Mais au milieu, il y a mon bac à sable : 2 carreaux sur 2.",
+  "01-sable": "Pas de gazon dans le sable ! Je couvre seulement les carreaux autour.",
+  "02-question": "Question ! Combien de carreaux de gazon ? A : 34. B : 26. C : 30. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Le terrain : 6 fois 5, 30 carreaux. Le bac à sable : 2 fois 2, 4. On enlève : 30 moins 4, 26 carreaux de gazon.",
+  "03-ouf": "J'avais acheté 30 carreaux… Il m'en reste 4 : je me fais un tapis de sieste !",
+  "04-commentaire": "À toi : un terrain de 8 carreaux sur 6, avec une mare de 3 carreaux sur 2. Combien de carreaux de gazon ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
