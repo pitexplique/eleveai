@@ -27,7 +27,10 @@ Questions (index de la bonne réponse) : 01 → 05 rép 0, 09 rép 1 ; 02 → 05
 2. Commun `manim/scripts/ce2/solides_ce2_commun.py` (solides en perspective cavalière) ; scripts ; dry run ; aperçus -ql ; HD sous verrou ; shorts `prototypes/ti-margo/films/ce2-solides*.js` ; miniatures ; manifeste 16, 18, 20, 22, 24/01/2027 (à vérifier libres) ; R2 ; coach.
 3. Voix CM1 (prisme droit, autres patrons, défi CM1 ; le reste par `aussi`), validation à deux, même chaîne (jours pairs après le 24/01/2027).
 
-## CM1 (session mère) — voix écrites 14/11, EN ATTENTE de validation
+## CM1 (session mère) — voix ✅ VALIDÉES 14/11 (« Oui, valide les 6 »), ceintures et centres acceptés avec
+✅ WAV `public/sons/cm1-solides-<ép>[-short]/` (Julie, débit −6) ; ✅ marques `python manim/scripts/cm1/aire_marques.py solides:prisme solides:patron solides:defi` → `manim/scripts/cm1/solides_<ép>_marques.json` (0 introuvable ; ⚠️ jamais sans argument).
+Questions (index) : 01 prisme → 05 rép 1, 08 rép 0 ; 02 patron → 05 rép 1, 08 rép 2 ; 03 défi → 05 rép 0, 07 rép 1. Shorts : 01 C, 02 C, 03 A.
+Production : à la suite du CE2, par la session « Solides CE2 : production » (sorties `manim/sorties/cm1/maths/solides/0N-<ép>/`, scripts `manim/scripts/cm1/solides_<ép>.py`, films `prototypes/ti-margo/films/cm1-solides*.js`).
 Seulement ce qui va plus loin que le CE2. Les autres micros CM1 prennent les vidéos CE2 par `aussi` : `solide_reconnaitre` ← `ce2_solide_reconnaitre` ; `solide_sommet_arete_face` et `solide_face` ← `ce2_solide_decrire` (+ `ce2_solide_faces_pyramide` pour les faces).
 Fichiers : `manim/voix/cm1-solides-{prisme,patron,defi}[-short].json`. Bonnes réponses tirées (3 A, 3 B, 3 C) :
 
@@ -36,4 +39,4 @@ Fichiers : `manim/voix/cm1-solides-{prisme,patron,defi}[-short].json`. Bonnes r�
 | 01 prisme | `solide_prisme` | Sacha, guide de montagne (tente = prisme à base triangulaire) | B, A | la tente n'est pas une pyramide, C | verte / jaune | sport, nature-ecologie ; short nature-ecologie |
 | 02 patron | `solide_patron` | Rose, créatrice de jeux de société (11 patrons du cube, pavé, pyramide, cylindre, dé : faces opposées = 7) | B, C | dé mal numéroté, C | verte / jaune | jeux-defis, art-design ; short jeux-defis |
 | 03 defi | `solide_defi` | Ilan, créateur de décors de jeux vidéo (cubes cachés, étages) | A, B | pyramide de caisses, A | bleue / orange | jeux-video, construction ; short construction |
-Manifeste : jours pairs après le 24/01/2027 (26, 28, 30/01, à vérifier libres). WAV + marques CM1 : `aire_marques.py solides:<ép>` (à vérifier) après validation.
+Manifeste : jours pairs après le 24/01/2027 (26, 28, 30/01, à vérifier libres). 
