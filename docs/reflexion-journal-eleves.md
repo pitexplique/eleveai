@@ -214,3 +214,45 @@ le score d'un élève nommé. Photo possible : le ballon, le but, les fiches.
 
 Exemple de défi QCM : « Une classe a tiré 200 fois et marqué 130 buts.
 Quel est son pourcentage de réussite ? » A. 65 % · B. 130 % · C. 13 %.
+
+## 11. Piste : impliquer des parents et des entreprises
+
+Question de Frédéric (14/11) : « pourrait-on y impliquer des entreprises ou
+des parents ? » Oui, et ça va bien avec « les maths sont partout ».
+
+**Les parents : « l'invité expert »**
+
+- Un parent vient parler de son métier 10 minutes, ou répond à une interview
+  préparée par les élèves (5 questions). Son métier pose la question de
+  l'article : un maçon (combien de parpaings pour un mur ?), une infirmière
+  (les doses), un pêcheur (le poids de la pêche), un chauffeur (distance et
+  temps).
+- Dans l'article : prénom + métier seulement (« Jean-Marc, maçon »).
+  Jamais le lien avec l'élève (« le papa de… »).
+- Bonus : les parents qui participent lisent l'article et en parlent à la
+  maison. C'est un pont entre l'école et la famille.
+
+**Les entreprises et structures de l'île : « la question du mois »**
+
+- Elles posent une vraie question ou donnent des données : le club de foot
+  du quartier (les tirs au but !), une boulangerie (la recette pour 200
+  pains), une sucrerie (la canne), Kélonia (les tortues), Météo-France
+  (la pluie), une station de surf (les vagues).
+- Elles peuvent aussi proposer une visite ou un expert.
+- Dans l'article : leur nom apparaît comme **source**, comme pour les autres
+  articles. **Pas de logo, pas de publicité.**
+
+**Les règles à respecter**
+
+- À l'école publique, la **neutralité commerciale** s'applique : pas de pub
+  pour une entreprise auprès des élèves. Un partenariat passe par l'accord
+  du chef d'établissement (souvent une simple convention).
+- Un intervenant extérieur en classe : toujours en présence du prof, et
+  prévenir la direction.
+- Sur le site EleveAI (en dehors du collège), on peut remercier un
+  partenaire, mais sans faire de pub dans l'article lu par les élèves.
+
+**Pour commencer simplement :** pour les tirs au but, inviter un éducateur
+d'un club de foot du coin (ou un parent qui entraîne) pour la séance dans
+la cour. Il donne un chiffre vrai (« en match, on marque environ 3 tirs
+au but sur 4 ») que les élèves comparent avec le leur.
