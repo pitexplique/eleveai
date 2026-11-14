@@ -8,6 +8,21 @@ import type {
   FigureLibreCanvasData,
 } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+// ⭐ 14/11/2026 — les gabarits à situations (objets, métiers) × tournures vivent
+// à côté : les items figés ci-dessous restent, ces gabarits portent le volume.
+import {
+  cercleGabarits,
+  construireGabarits,
+  defiGabarits,
+  genProprieteAffirmation,
+  intro,
+  introRond,
+  METIERS,
+  genProprieteRayonDiametre,
+  proprieteGabarits,
+  quadrilatereGabarits,
+  triangleGabarits,
+} from "./figures-planes-outils";
 
 type Pt = { x: number; y: number };
 type GridCell = [row: number, col: number];
@@ -15,10 +30,6 @@ type GridPoint = [row: number, col: number];
 
 function randomChoice<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function randomInt(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function shuffle<T>(arr: readonly T[]): T[] {
@@ -584,7 +595,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       const item = randomChoice(TRIANGLE_TYPES);
 
       return {
-        text: "Quelle est la nature de ce triangle ?",
+        text: `${intro().phrase} ${randomChoice(["Quel est le nom le plus précis de ce triangle ?", "Donne le nom le plus précis de ce triangle.", "Lis le codage : quel est son nom le plus précis ?"])}`,
         format: "qcm",
         choices: makeChoices(item.name, [
           "triangle rectangle",
@@ -671,7 +682,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Cette figure a quatre côtés de même longueur. C’est un...",
     format: "qcm",
-    choices: ["losange", "triangle", "cercle", "droite"],
+    choices: ["losange", "triangle", "cercle", "rectangle"],
     expected: ["losange"],
     comparator: "mcq_exact",
     hint: "Un losange a ses quatre côtés égaux.",
@@ -700,7 +711,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       const item = randomChoice(QUADRILATERE_TYPES);
 
       return {
-        text: "Quelle est la nature de ce quadrilatère ?",
+        text: `${intro().phrase} ${randomChoice(["Quel est le nom le plus précis de ce quadrilatère ?", "Donne le nom le plus précis de cette figure.", "Lis le codage : quel est son nom le plus précis ?"])}`,
         format: "qcm",
         choices: makeChoices(item.name, [
           "rectangle",
@@ -816,7 +827,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       const item = randomChoice(CERCLE_ELEMENTS);
 
       return {
-        text: `Sur la figure, quel élément est représenté ?`,
+        text: `${introRond().phrase} ${randomChoice(["Sur le dessin, quel élément est mis en évidence ?", "Quel élément est représenté sur la figure ?", "Comment s’appelle l’élément mis en évidence ?"])}`,
         format: "qcm",
         choices: makeChoices(item.name, ["rayon", "diamètre", "disque", "triangle"]),
         expected: [item.name],
@@ -876,7 +887,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       "Il a quatre côtés égaux et quatre angles droits.",
       "Il a trois côtés.",
       "Il n’a aucun angle droit.",
-      "Il est toujours rond.",
+      "Il a un seul angle droit.",
     ],
     expected: ["Il a quatre côtés égaux et quatre angles droits."],
     comparator: "mcq_exact",
@@ -906,7 +917,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       "Il possède un angle droit.",
       "Il possède quatre côtés.",
       "Il possède un diamètre.",
-      "Il n’a aucun sommet.",
+      "Il a deux angles droits.",
     ],
     expected: ["Il possède un angle droit."],
     comparator: "mcq_exact",
@@ -932,24 +943,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Diamètre = 2 × rayon.",
     tags: ["cm1", "figure_plane", "propriete", "cercle", "template", "short", "canvas"],
-    generate: () => {
-      const rayon = randomInt(2, 9);
-      const diametre = 2 * rayon;
-
-      return {
-        text: `Un cercle a un rayon de ${rayon} cm. Quel est son diamètre ?`,
-        format: "short",
-        expected: [String(diametre)],
-        comparator: "number_equal",
-        explanation: exp(
-          "Le diamètre d’un cercle est le double de son rayon.",
-          "On multiplie le rayon par 2.",
-          `2 × ${rayon} = ${diametre}.`,
-          `Le diamètre mesure ${diametre} cm.`
-        ),
-        canvas: cercleDiametreCanvas(),
-      };
-    },
+    // 14/11/2026 : en situation, dans les deux sens (rayon → diamètre et retour).
+    generate: genProprieteRayonDiametre,
   },
 
   {
@@ -963,49 +958,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise la définition de la figure.",
     tags: ["cm1", "figure_plane", "propriete", "template", "qcm"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          statement: "Un carré a quatre angles droits.",
-          expected: "vrai",
-          observation: "Un carré possède quatre angles droits.",
-        },
-        {
-          statement: "Un triangle a toujours quatre côtés.",
-          expected: "faux",
-          observation: "Un triangle possède trois côtés.",
-        },
-        {
-          statement: "Un diamètre passe par le centre du cercle.",
-          expected: "vrai",
-          observation: "Un diamètre relie deux points du cercle en passant par le centre.",
-        },
-        {
-          statement: "Un rectangle n’a jamais d’angle droit.",
-          expected: "faux",
-          observation: "Un rectangle possède justement quatre angles droits.",
-        },
-        {
-          statement: "Un losange a quatre côtés égaux.",
-          expected: "vrai",
-          observation: "C’est une propriété du losange.",
-        },
-      ]);
-
-      return {
-        text: item.statement,
-        format: "qcm",
-        choices: ["vrai", "faux"],
-        expected: [item.expected],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Les propriétés permettent de reconnaître les figures.",
-          "On vérifie si la phrase correspond à la définition.",
-          item.observation,
-          `La réponse est ${item.expected}.`
-        ),
-      };
-    },
+    // 14/11/2026 : plus de « vrai / faux » à 2 choix : oui/non ET la raison, 4 choix.
+    generate: genProprieteAffirmation,
   },
 
   // ============================================================
@@ -1058,7 +1012,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       "des angles droits",
       "un centre et un rayon",
       "trois côtés seulement",
-      "une part de camembert",
+      "une longueur de 10 cm seulement",
     ],
     expected: ["des angles droits"],
     comparator: "mcq_exact",
@@ -1113,25 +1067,25 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
         {
           figure: "un cercle",
           expected: "un compas",
-          wrongs: ["une calculatrice", "un dé", "un tableau"],
+          wrongs: ["une équerre", "une règle graduée"],
           observation: "Pour tracer un cercle, on utilise un compas.",
         },
         {
           figure: "un angle droit",
           expected: "une équerre",
-          wrongs: ["un compas seul", "un dé", "une balance"],
+          wrongs: ["un compas", "une règle graduée"],
           observation: "Pour tracer ou vérifier un angle droit, on utilise une équerre.",
         },
         {
           figure: "un segment de longueur donnée",
           expected: "une règle graduée",
-          wrongs: ["une roue", "un verre doseur", "une balance"],
+          wrongs: ["un compas", "une équerre"],
           observation: "Pour mesurer une longueur, on utilise une règle graduée.",
         },
       ]);
 
       return {
-        text: `Quel outil est le plus adapté pour construire ${item.figure} ?`,
+        text: `${randomChoice(METIERS)} ${randomChoice(["veut construire", "doit tracer", "va dessiner"])} ${item.figure}. ${randomChoice(["Quel outil est le plus adapté ?", "Quel instrument choisir ?", "Avec quel outil ?"])}`,
         format: "qcm",
         choices: makeChoices(item.expected, item.wrongs),
         expected: [item.expected],
@@ -1254,7 +1208,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
         {
           indices: "J’ai quatre côtés égaux et quatre angles droits.",
           expected: "carré",
-          wrongs: ["triangle", "cercle", "rectangle quelconque"],
+          wrongs: ["triangle", "cercle", "losange sans angle droit"],
           observation: "Quatre côtés égaux et quatre angles droits indiquent un carré.",
           canvas: carreCanvas(),
         },
@@ -1275,7 +1229,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       ]);
 
       return {
-        text: `Qui suis-je ? ${item.indices}`,
+        text: `${randomChoice(["Devinette.", "Énigme du jour.", "Défi de la classe.", "Un magicien demande :", "Le robot du club demande :"])} ${randomChoice(["Qui suis-je ?", "Quelle figure suis-je ?", "Devine qui je suis."])} ${item.indices}`,
         format: "qcm",
         choices: makeChoices(item.expected, item.wrongs),
         expected: [item.expected],
@@ -1300,10 +1254,16 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     microId: "figure_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi cette figure est un carré.",
-    format: "open",
-    expected: ["côtés", "égaux", "angles", "droits"],
-    comparator: "contains_keyword",
+    text: "Pourquoi cette figure est-elle un carré ?",
+    format: "qcm",
+    choices: [
+      "Elle a 4 côtés égaux et 4 angles droits.",
+      "Elle a 4 côtés égaux.",
+      "Elle a 4 angles droits.",
+      "Elle a 4 côtés.",
+    ],
+    expected: ["Elle a 4 côtés égaux et 4 angles droits."],
+    comparator: "mcq_exact",
     hint: "Parle des côtés et des angles.",
     explanation: exp(
       "Un carré est un quadrilatère particulier.",
@@ -1311,7 +1271,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       "La figure a quatre côtés égaux et quatre angles droits.",
       "C’est donc un carré."
     ),
-    tags: ["cm1", "figure_plane", "defi", "open", "carre", "canvas"],
+    tags: ["cm1", "figure_plane", "defi", "qcm", "carre", "canvas"],
     canvas: carreCanvas(),
   },
 
@@ -1735,7 +1695,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Par quel point passe toujours un diamètre ?",
     format: "qcm",
-    choices: ["le centre", "un sommet", "un angle droit", "le bord de la feuille"],
+    choices: ["le centre", "un point du cercle seulement", "le milieu d’un rayon", "aucun point précis"],
     expected: ["le centre"],
     comparator: "mcq_exact",
     hint: "Le diamètre coupe le cercle en deux moitiés égales.",
@@ -2093,7 +2053,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     notionId: "figure_plane",
     microId: "figure_defi",
     difficulty: 3,
-    theme: "reunion",
+    theme: "neutral",
     text: "Sur la plage, un cerf-volant a la forme d’un losange. Combien de côtés a un losange ?",
     format: "short",
     expected: ["4"],
@@ -2166,7 +2126,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     notionId: "figure_plane",
     microId: "figure_defi",
     difficulty: 2,
-    theme: "reunion",
+    theme: "neutral",
     text: "La roue d’une charrette est ronde. Quelle figure géométrique représente son contour ?",
     format: "qcm",
     choices: ["un cercle", "un carré", "un triangle", "un losange"],
@@ -2179,7 +2139,17 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       "Tous les points du bord sont à la même distance du moyeu.",
       "Le contour est un cercle."
     ),
-    tags: ["cm1", "figure_plane", "defi", "reunion", "cercle", "qcm", "canvas"],
+    tags: ["cm1", "figure_plane", "defi", "cercle", "qcm", "canvas"],
     canvas: cercleRayonCanvas(),
   },
+
+  // ============================================================
+  // GABARITS À SITUATIONS (14/11/2026) — figures-planes-outils.ts
+  // ============================================================
+  ...triangleGabarits,
+  ...quadrilatereGabarits,
+  ...cercleGabarits,
+  ...proprieteGabarits,
+  ...construireGabarits,
+  ...defiGabarits,
 ];
