@@ -189,7 +189,7 @@ class LongueurProblemeBase(PaysageLongueurCE2):
         self.au_mot("Puis on additionne")
         tit = self.t("Puis on additionne :", 42, JAUNE_TITRE)
         gauche(tit, -6.2, 3.0)
-        b = barre([300, 250], 0.016, (CABLE1, CABLE2), h=0.6).move_to(P(-0.9, 1.4))
+        b = barre([300, 250], 0.016, (CABLE1, CABLE2), h=0.6).move_to(P(-0.9, 1.2))
         t1 = hors_audit(self.t("300 cm", 30, BLACK)).move_to(b[0])
         t2 = hors_audit(self.t("250 cm", 30, BLACK)).move_to(b[1])
         self.play(FadeIn(tit, shift=UP * 0.1), FadeIn(b), FadeIn(t1), FadeIn(t2), run_time=0.4)
@@ -318,6 +318,7 @@ class LongueurProblemeBase(PaysageLongueurCE2):
         b = self.la_corde(2.6)
         t1 = hors_audit(self.t("65 cm", 28, BLACK)).move_to(b[0])
         t2 = hors_audit(self.t("45 cm", 28, BLACK)).move_to(b[1])
+        t1.set_z_index(3); t2.set_z_index(3)  # l'Indicate de la corde la remet devant : les étiquettes restent dessus
         reste = hors_audit(Text("?", font_size=40, color=ORANGE_RETENUE, weight=BOLD)).move_to(b[2])
         self.add(b, reste)
         self.poser(VGroup(t1, t2), 0.15)  # (un Text ajouté par add() attend son nombre : on le pose)

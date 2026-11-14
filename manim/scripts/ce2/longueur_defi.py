@@ -13,6 +13,7 @@
 # python -m manim render -qh --disable_caching manim/scripts/ce2/longueur_defi.py LongueurDefiCE2 -o eleveai-maths-ce2-longueur-defi --media_dir manim/scripts/ce2/media-lg-08
 # Sortie : manim/sorties/ce2/maths/longueur/08-defi/eleveai-maths-ce2-longueur-defi.mp4
 
+import os
 import sys
 from pathlib import Path
 
@@ -69,18 +70,65 @@ class LongueurDefiBase(PaysageLongueurCE2):
     # Morceaux de réponse dont le nombre est redit loin de sa 1re fois : instant forcé (marques).
     _forces = {("04b-reponse", "= 3 × 10"): 5.58, ("07b-reponse", "200 :"): 5.56}
 
+    def _force(self, f):
+        """L'instant forcé de f : par son texte, ou par ses lettres (la synchro coupe « = 3 × 10 »
+        en morceaux « = 3 × » / « 10 », qui n'ont plus le texte d'origine)."""
+        cle = getattr(self, "_cle_voix", None)
+        t = self._forces.get((cle, getattr(f, "original_text", None)))
+        if os.environ.get("DBG_FORCE") and cle == "04b-reponse":
+            print("FORCE?", type(f).__name__, repr(getattr(f, "original_text", None)),
+                  [getattr(x, "_force_t", None) for x in f.get_family()][:3], flush=True)
+        if t is None:
+            for x in f.get_family():
+                c = getattr(x, "_force_t", None)
+                if c is not None and c[0] == cle:
+                    return c[1]
+        return t
+
+    def _disposer_q(self, question, choix, phrase):
+        r = super()._disposer_q(question, choix, phrase)
+        for (cle, txt), t in self._forces.items():
+            for f in r[5].get_family():
+                if isinstance(f, Text) and f.original_text == txt:
+                    for x in f.get_family():
+                        x._force_t = (cle, t)
+        return r
+
     def _attente(self, textes):
         for f in textes:
-            t = self._forces.get((getattr(self, "_cle_voix", None), getattr(f, "original_text", None)))
+            t = self._force(f)
             if t is not None:
                 return max(0.0, self._debut_voix + t - self.renderer.time)
         return super()._attente(textes)
 
     def _debut(self, m):
-        t = self._forces.get((getattr(self, "_cle_voix", None), getattr(m, "original_text", None)))
+        t = self._force(m)
         if t is not None:  # un morceau forcé ouvre son propre lot (sinon il retient le morceau d'avant)
             return max(0.0, self._debut_voix + t - self.renderer.time)
         return super()._debut(m)
+
+    @staticmethod
+    def _base(t):
+        """La ligne de base d'un Text : le bas de sa 1re lettre sans jambage (ni « = », ni « × »)."""
+        lettres = [c for c in t.original_text if not c.isspace()]
+        if len(lettres) != len(t.submobjects):
+            return None
+        for i, c in enumerate(lettres):
+            if c.isdigit() or (c.isalpha() and c not in "gjpqyQJ"):
+                return t.submobjects[i].get_bottom()[1]
+        return None
+
+    def _aligner_bases(self, m):
+        b0 = self._base(m[0])
+        for x in m[1:]:
+            b = self._base(x)
+            if b0 is not None and b is not None:
+                x.shift(UP * (b0 - b))
+        return m
+
+    def ligne(self, *a, **k):
+        """Une ligne de morceaux sur UNE ligne de base (« Maya a » / « 1 m » ne sautent plus)."""
+        return self._aligner_bases(super().ligne(*a, **k))
 
     def poser(self, m, run_time=0.25):
         for f in m.get_family():
@@ -90,8 +138,7 @@ class LongueurDefiBase(PaysageLongueurCE2):
     def morceaux_a_la_place(self, orig, mots, fs=32):
         """Remplace le Text `orig` (d'une finale) par des morceaux, chacun posé ensuite à son mot."""
         m = VGroup(*[self.t(x, fs) for x in mots]).arrange(RIGHT, buff=0.16)
-        for x in m[1:]:
-            x.shift(UP * (m[0][0].get_bottom()[1] - x[0].get_bottom()[1]))
+        self._aligner_bases(m)  # (« = 120 mm » : le « = » n'est pas sur la ligne de base)
         m.scale(orig[0].height / m[0][0].height)
         m.shift(orig[0].get_corner(DL) - m[0][0].get_corner(DL))
         for x in m:
@@ -132,7 +179,7 @@ class LongueurDefiBase(PaysageLongueurCE2):
         self.au_mot("Elle est pâtissière")
         met = self.t("pâtissière", 26, "#f9a8d4").next_to(pe, DOWN, buff=0.12)
         self.play(FadeIn(met, shift=DOWN * 0.1), run_time=0.35)
-        g = gateau(0.9).move_to(P(4.8, 0.3))
+        g = gateau(0.9).move_to(P(4.2, -1.6))  # (à 0.3, il touchait « Malia : 1 dm et 2 cm »)
         self.au_mot("Autour de chaque gâteau")
         self.play(FadeIn(g, shift=UP * 0.2), run_time=0.4)
         self.au_mot("elle met un ruban")
@@ -193,27 +240,27 @@ class LongueurDefiBase(PaysageLongueurCE2):
         c0 = self.ligne([("1 dm", MALIA), ("= 10 cm", VERT_OK)], 46, buff=0.3)
         gauche(c0, -6.2, 3.0)
         ech = 0.5  # unités Manim par cm
-        b = barre([10, 2], ech, (MALIA, "#fdba74"), h=0.5).move_to(P(-0.2, 1.7)).align_to(P(-5.6, 0), LEFT)
+        b = barre([10, 2], ech, (MALIA, "#fdba74"), h=0.5).move_to(P(-0.2, 1.4)).align_to(P(-5.6, 0), LEFT)
         a1 = accolade(b[0], "10 cm", 28, MALIA, dessus=False)
-        a2 = accolade(b[1], "2 cm", 28, "#fdba74", dessus=True)
+        a2 = etiq(b[1], "2 cm", 28, "#fdba74", RIGHT, 0.15)  # (une accolade au-dessus chevauchait « 1 dm = 10 cm »)
         self.au_mot("1 décimètre")
         self.play(FadeIn(c0[0], shift=UP * 0.1), GrowFromEdge(b[0], LEFT), run_time=0.35)
         self.aux_extraits([VGroup(c0[1], a1)], [("10 centimètres", 1)], run_time=0.3)
         c1 = self.ligne([("10 cm", MALIA), ("+ 2 cm", "#fdba74"), ("= 12 cm", VERT_OK)], 46, buff=0.3)
-        gauche(c1, -6.2, 0.2)
+        gauche(c1, -6.2, -0.15)  # (l'accolade « 10 cm » sous la barre descend à y 0.6)
         hors_audit(c1[0])
         self.au_mot("Plus 2")
         self.play(FadeIn(c1[0]), FadeIn(c1[1], shift=UP * 0.1), GrowFromEdge(b[1], LEFT), FadeIn(a2), run_time=0.35)
-        tout = accolade(b, "12 cm", 30, VERT_OK, dessus=True).shift(UP * 0.55)
+        tout = accolade(b, "12 cm", 30, VERT_OK, dessus=True)
         hors_audit(c1[2])
         self.aux_extraits([VGroup(c1[2], tout)], [("12 centimètres", 1)], run_time=0.3)
         l = self.t("Les trois ont raison !", 44, VERT_OK)
-        gauche(l, -6.2, -1.0)
+        gauche(l, -6.2, -1.25)
         self.au_mot("Les trois ont raison")
         self.play(FadeIn(l, scale=1.15), run_time=0.4)
         r = self.ligne([("12 cm", LEA), ("=", WHITE), ("120 mm", KEVIN), ("=", WHITE), ("1 dm et 2 cm", MALIA)],
                        40, buff=0.25)
-        gauche(r, -6.2, -2.1)
+        gauche(r, -6.2, -2.35)
         for m in r:
             hors_audit(m)  # rappel des trois écritures déjà dites
             for f in m.get_family():
@@ -228,6 +275,7 @@ class LongueurDefiBase(PaysageLongueurCE2):
         self.add_mascotte()
         b = barre([10, 10, 10], 0.13, (MALIA, "#fdba74"), h=0.45).move_to(P(-4.2, 1.6))
         labs = VGroup(*[hors_audit(Text("1 dm", font_size=22, color=BLACK, weight=BOLD)).move_to(p) for p in b])
+        labs.set_z_index(3)  # (l'Indicate de la réponse remet la barre devant)
 
         def autres_q(sc):
             sc.play(GrowFromEdge(b, LEFT), FadeIn(labs), run_time=0.4)
@@ -281,6 +329,7 @@ class LongueurDefiBase(PaysageLongueurCE2):
         labs = VGroup(*[hors_audit(Text("25 cm", font_size=24, color=BLACK, weight=BOLD)).move_to(b[k])
                         for k in range(3)])
         quoi = hors_audit(Text("?", font_size=40, color=ORANGE_RETENUE, weight=BOLD)).move_to(b[3])
+        labs.set_z_index(3)  # l'Indicate des morceaux les remet devant : les étiquettes restent dessus
         self.add(b, quoi)
         self.poser(labs, 0.15)  # (un Text ajouté par add() attend son nombre : on le pose)
         c0 = self.ligne([("1 m", R1), ("= 100 cm", VERT_OK)], 44, buff=0.3)

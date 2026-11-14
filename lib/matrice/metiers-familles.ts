@@ -59,6 +59,13 @@ export const FAMILLES_METIERS = {
     F("couturier", "mesure la longueur d'une manche avec son mètre ruban."),
     M("menuisier", "mesure une planche avant de la couper."),
     F("entraineur", "mesure la longueur d'un saut dans le sable."),
+    // 14/11/2026 : les métiers de la série vidéo Longueurs CE2
+    F("astronome", "mesure à la règle les segments de sa carte du ciel."),
+    F("biologiste", "mesure une tortue de 1 m et un requin de 90 cm : qui est le plus long ?"),
+    M("pilote", "vole 900 km, dans un avion de 40 m de long."),
+    F("paysagiste", "estime une allée en grands pas : 6 pas, environ 6 m."),
+    M("eclairagiste", "met bout à bout un câble de 3 m et un câble de 250 cm."),
+    F("patissier", "coupe des rubans de 25 cm dans 1 m de ruban pour ses gâteaux."),
   ],
   P_masses: [
     M("boulanger", "pèse 1 kg de farine pour faire son pain."),

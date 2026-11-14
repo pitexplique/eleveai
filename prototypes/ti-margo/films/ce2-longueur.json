@@ -1,0 +1,7 @@
+{
+  "voix": "ce2-longueur-{ep}-short",
+  "sons": "public/sons/ce2-longueur-{ep}-short",
+  "sortie": "manim/sorties/ce2/maths/longueur/{num}-{ep}",
+  "nom": "eleveai-maths-ce2-longueur-{ep}-short",
+  "episodes": { "unites": "01", "relations": "02", "mesurer": "03", "comparer": "04", "choisir-unite": "05", "estimer": "06", "probleme": "07", "defi": "08" }
+}
