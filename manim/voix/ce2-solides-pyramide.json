@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les faces d'une pyramide. Une pyramide, est-ce seulement des triangles ?",
+  "01-situation": "Voici Amina. Elle est archéologue : elle étudie les monuments très anciens. Elle fabrique une maquette en carton d'une pyramide d'Égypte. Quelles formes doit-elle découper ?",
+  "02-triangles": "Les faces qui montent vers la pointe sont des triangles. Amina en découpe un pour chaque côté : 1, 2, 3, 4. 4 triangles.",
+  "03-base": "Mais la pyramide est posée sur une base. Ici, la base est un carré. Amina découpe aussi un carré, pour le dessous.",
+  "04-total": "4 triangles, plus 1 carré : 5 faces. La pyramide à base carrée a 5 faces.",
+  "05-question": "Question ! De quelle forme sont les faces qui montent vers la pointe d'une pyramide ? A : des carrés. B : des disques. C : des triangles. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Les faces qui montent vers la pointe sont toujours des triangles.",
+  "06-piege": "Attention au piège ! On dit souvent : une pyramide, ce sont des triangles. Mais on oublie la base ! Retourne la pyramide : dessous, il y a un carré.",
+  "07-bases": "C'est la base qui donne son nom à la pyramide. Base carrée : 4 côtés, donc 4 triangles qui montent. Base triangulaire : 3 côtés, donc 3 triangles qui montent. Il y a autant de triangles qui montent que de côtés à la base.",
+  "08-question": "Question ! La base d'une pyramide a 5 côtés. Combien de triangles montent vers la pointe ? A : 5 triangles. B : 4 triangles. C : 6 triangles. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Autant de triangles que la base a de côtés : 5 côtés, 5 triangles. Avec la base, cela fait 6 faces.",
+  "09-defi": "À toi de jouer ! Amina fabrique maintenant une pyramide à base triangulaire. Combien de faces a-t-elle en tout ? Mets pause, et cherche !",
+  "09b-correction": "Correction. La base a 3 côtés : 3 triangles montent vers la pointe. Plus la base : 3 plus 1, 4 faces. Et ici, la base est aussi un triangle : toutes les faces sont des triangles !",
+  "10-finale": "Ce que tu as appris. Les faces qui montent vers la pointe d'une pyramide sont des triangles. Il y en a autant que la base a de côtés. Et la pyramide a aussi une base : n'oublie pas de la compter !",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

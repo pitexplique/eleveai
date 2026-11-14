@@ -1,0 +1,18 @@
+{
+  "00-garde": "Les solides. Comment s'appellent ces formes qu'on peut prendre dans la main ?",
+  "01-situation": "Voici Jade. Elle tient un magasin de jouets. Ce matin, elle range ses étagères : une étagère pour chaque forme. Mais comment s'appellent ces formes ?",
+  "02-solide": "Un carré se dessine à plat, sur une feuille. Un dé, lui, on le prend dans la main : il a de l'épaisseur. C'est un solide.",
+  "03-cube": "Le dé est un cube. Toutes ses faces sont des carrés, tous pareils.",
+  "04-pave": "La boîte du jeu de société est un pavé droit. Ses faces sont des rectangles, comme une boîte à chaussures.",
+  "05-question": "Question ! Une brique de lait, c'est quel solide ? A : un pavé droit. B : un cube. C : une pyramide. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Ses faces sont des rectangles, pas toutes carrées : c'est un pavé droit.",
+  "06-rouler": "Voici les solides qui roulent. Le ballon est une boule : tout est rond, il n'a aucune face plate. Le tambour est un cylindre : un disque en haut, un disque en bas, et il roule sur le côté.",
+  "07-pointe": "Et voici les solides qui ont une pointe. Le chapeau de fête est un cône : un disque en bas, et il monte en pointe. Le toit du château en bois est une pyramide : ses faces sont des triangles qui montent jusqu'à la pointe.",
+  "08-piege": "Attention au piège ! Le cône et la pyramide ont tous les deux une pointe. Mais le cône est rond en bas : il roule. La pyramide a des faces plates : elle ne roule pas.",
+  "09-question": "Question ! Un cornet de glace, c'est quel solide ? A : une pyramide. B : un cône. C : un cylindre. Mets pause, et choisis !",
+  "09b-reponse": "Réponse B. Le cornet est rond, et il finit en pointe : c'est un cône.",
+  "10-defi": "À toi de jouer ! Jade a encore trois jouets à ranger : une bille, un cube de construction et une petite canette de la dînette. Quel est le nom de chaque solide ? Mets pause, et cherche !",
+  "10b-correction": "Correction. La bille est une boule. Le cube de construction est un cube. La canette est un cylindre. Bravo, les étagères de Jade sont rangées !",
+  "11-finale": "Ce que tu as appris. Il y a six solides à connaître : le cube, le pavé droit, la boule, le cylindre, le cône et la pyramide. Pour les reconnaître, regarde leurs faces : plates ou rondes, carrés, rectangles ou triangles, avec ou sans pointe.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

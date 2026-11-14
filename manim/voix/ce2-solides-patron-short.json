@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je fabrique un dé géant. 6 carrés de carton, collés en ligne. Je plie… je plie…",
+  "01-oups": "Hé ! C'est un tunnel ! Le dessus et le dessous sont ouverts !",
+  "02-question": "Question ! Quel dessin fait un vrai dé ? A : les 6 carrés en ligne. B : la croix. C : les 2 rangées de 3. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! La croix : un fond, 4 côtés qui se relèvent, et un couvercle qui se rabat.",
+  "03-ouf": "Ouf ! Mon dé est fermé. Je le lance… 6 !",
+  "04-commentaire": "À toi : dans la croix, combien de carrés touchent le carré du milieu ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

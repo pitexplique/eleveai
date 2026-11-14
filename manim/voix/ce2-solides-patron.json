@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le patron du cube. Comment un carton à plat devient-il un cube ?",
+  "01-situation": "Voici Théo. Il est designer d'emballages : il invente les boîtes qu'on trouve dans les magasins. Il veut une boîte en forme de cube. Il la dessine d'abord à plat, sur un carton.",
+  "02-patron": "Ce dessin à plat s'appelle un patron. On le découpe, on le plie le long des traits, et il se referme en cube.",
+  "03-six": "Le cube a 6 faces. Le patron a donc 6 carrés, tous pareils : 1, 2, 3, 4, 5, 6.",
+  "04-plier": "Regarde. Le carré du milieu sera le fond. Les 4 carrés autour se relèvent : ce sont les côtés. Le dernier carré se rabat dessus : c'est le couvercle.",
+  "05-question": "Question ! Combien de carrés faut-il dans le patron d'un cube ? A : 4 carrés. B : 6 carrés. C : 8 carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Un carré pour chaque face : le cube a 6 faces, donc 6 carrés.",
+  "06-piege": "Attention au piège ! 6 carrés ne suffisent pas toujours. Ici, Théo a posé 6 carrés en bloc : 2 rangées de 3. On plie… deux carrés arrivent au même endroit, et un côté reste ouvert. Ce n'est pas un patron du cube.",
+  "07-question": "Question ! Lequel de ces dessins se replie en cube ? A : la croix. B : les 6 carrés en ligne. C : les 2 rangées de 3. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. La croix se referme bien. Les 6 carrés en ligne s'enroulent comme un tunnel : le dessus et le dessous restent ouverts.",
+  "08-defi": "À toi de jouer ! Théo a dessiné la croix, mais il a oublié un carré : il n'en a que 5. Où faut-il ajouter le sixième, à la place 1, 2 ou 3 ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On plie : le fond, puis les côtés qui se relèvent. Il manque le couvercle ! Il doit se rabattre sur le dessus : c'est la place 2. Avec 6 carrés, la boîte est fermée.",
+  "09-finale": "Ce que tu as appris. Un patron, c'est le solide déplié à plat. Le patron d'un cube a 6 carrés pareils. Mais il faut aussi qu'une fois pliés, ils se referment sans trou.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
