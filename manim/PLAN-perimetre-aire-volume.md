@@ -56,7 +56,7 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 **Volume et contenance** (4)
 - [x] Comparer des contenances — `contenance_comparer` — ✅ 14/11 paysage (Inès, jaune, 3 min 31) + short « Qui a le plus de jus ? » ; manifeste 07/01/2027, R2, coach
 - [x] Convertir des contenances simples — `contenance_convertir` — ✅ 14/11 paysage (Sofia, verte, 3 min 15) + short « Combien de cuillères de sirop ? » ; manifeste 09/01/2027, R2, coach
-- [ ] Estimer une contenance — `contenance_estimer` — ✅ 14/11 voix validée, WAV + marques
+- [x] Estimer une contenance — `contenance_estimer` — ✅ 14/11 paysage (Malik, jaune, 3 min 26) + short « La piscine… au verre ? » ; manifeste 11/01/2027, R2, coach
 - [ ] Résoudre un défi de contenances — `contenance_defi` — ✅ 14/11 voix validée, WAV + marques
 
 **Solides et espace** (6)

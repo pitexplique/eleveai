@@ -5974,6 +5974,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple"
  },
+ "cm1-contenance-estimer": {
+  "fichier": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer.mp4",
+  "poster": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer.png",
+  "vignette": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer.vignette.webp",
+  "titre": "Une citerne de pompier contient-elle 30, 300 ou 3000 litres ? — Estimer une contenance — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple"
+ },
+ "cm1-contenance-estimer-short": {
+  "fichier": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer-short.mp4",
+  "poster": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer-short-miniature.png",
+  "vignette": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer-short-miniature.vignette.webp",
+  "titre": "Remplir une piscine au verre : combien de verres ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple"
+ },
  "cm1-decimal-droite": {
   "fichier": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.mp4",
   "poster": "cm1/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm1-decimal-droite.png",

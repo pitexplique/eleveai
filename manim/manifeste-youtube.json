@@ -81626,6 +81626,162 @@
       ]
     },
     {
+      "id": "cm1-contenance-estimer",
+      "pas_avant": "2027-01-11",
+      "notionId": "contenance",
+      "microId": "contenance_estimer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer.mp4",
+      "miniature": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer.png",
+      "titre": "Une citerne de pompier contient-elle 30, 300 ou 3000 litres ? — Estimer une contenance — épisode 3 · Maths CM1",
+      "accroche": "Malik est pompier. Son camion-citerne contient-il 30 litres, 300 litres ou 3000 litres ? Pour estimer une contenance, on la compare à des repères qu'on connaît.\n\nDans cette vidéo :\n• des repères : une cuillère (5 mL), un verre (20 cL), une bouteille (1 L), un seau (10 L), une baignoire (150 L)\n• choisir la bonne unité : mL, cL ou L\n• la citerne : 30 L, c'est 3 seaux, bien trop peu ! Environ 3000 L, c'est 20 baignoires\n• le piège : 10 L, c'est un seau, pas une cuillère !\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une tasse, un arrosoir et une piscine. À chacun sa contenance : 25 cL, 10 L ou 2000 L ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple\n\n🧃 Épisode 3 de la série Contenance d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Estimer une contenance"
+        ],
+        [
+          "00:07",
+          "Malik, pompier"
+        ],
+        [
+          "00:24",
+          "Des repères à connaître"
+        ],
+        [
+          "00:41",
+          "Choisir la bonne unité"
+        ],
+        [
+          "00:50",
+          "La citerne : environ 3000 L"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:38",
+          "Le piège : 10 L, c'est un seau"
+        ],
+        [
+          "01:52",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "À toi de jouer"
+        ],
+        [
+          "02:47",
+          "Correction"
+        ],
+        [
+          "03:02",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "contenance",
+        "estimer une contenance",
+        "estimation",
+        "ordre de grandeur",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "pompier",
+        "citerne",
+        "repères",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Quelle est la contenance d'une gourde ?",
+          "choix": [
+            "500 mL",
+            "50 L",
+            "5 mL"
+          ],
+          "reponse": 0,
+          "explication": "Une gourde, c'est à peu près une demi-bouteille : 500 mL. 50 L, c'est 5 seaux ; 5 mL, une cuillère."
+        },
+        {
+          "t": "01:52",
+          "question": "Quelle est la contenance d'une baignoire ?",
+          "choix": [
+            "15 cL",
+            "150 L",
+            "1500 L"
+          ],
+          "reponse": 1,
+          "explication": "Une baignoire, c'est environ 15 seaux de 10 L : 150 L. 15 cL, c'est moins qu'un verre ; 1500 L, dix baignoires."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-contenance-estimer-short",
+      "pas_avant": "2027-01-11",
+      "notionId": "contenance",
+      "microId": "contenance_estimer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-contenance-estimer",
+      "fichier": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer-short.mp4",
+      "miniature": "cm1/maths/contenance/03-estimer/eleveai-maths-cm1-contenance-estimer-short-miniature.png",
+      "titre": "Remplir une piscine au verre : combien de verres ? #maths #cm1",
+      "accroche": "Il fait chaud ! Ti Margo remplit sa piscine gonflable de 1000 litres… avec un verre de 25 centilitres. « Ça va aller vite ! » D'abord, un seul litre : combien de verres ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de verres de 25 centilitres pour remplir un seau de 10 litres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm1",
+      "tags": [
+        "contenance",
+        "estimer",
+        "litre",
+        "centilitre",
+        "piscine",
+        "verre",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Combien de verres de 25 centilitres pour remplir 1 litre ?",
+          "choix": [
+            "25 verres",
+            "40 verres",
+            "4 verres"
+          ],
+          "reponse": 2,
+          "explication": "25 × 4 = 100 cL = 1 L : 4 verres pour 1 litre… et 4000 verres pour 1000 litres !"
+        }
+      ],
+      "centres": [
+        "sciences",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "ce2-perimetre-comprendre",
       "pas_avant": "2026-12-25",
       "prioritaire": true,

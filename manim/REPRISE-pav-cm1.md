@@ -171,3 +171,8 @@ Reprendre la liste « Prochaine étape (session 11) » ci-dessus à partir du sh
 - Short « Combien de cuillères de sirop ? » (`films/cm1-contenance-convertir.js`, réponse A ; outils ajoutés dans `cm1-contenance.js` : forme `'verre'`, `cuillereCraie`, `GRENADINE`, `piscineCraie`) ; film + miniature, `_muet.mp4` supprimé.
 - Manifeste 09/01/2027 (verte, cuisine + sciences ; short 00:18 A), fiche, R2 02-convertir, videos-r2 + bilans (nos clés), coach branché.
 - ⚠️ Leçons : un gros résultat « 2 L = 200 cL » d'un seul Text perd `hors_audit` à la découpe de la synchro → morceaux séparés ; « vers les cL » → TARD (« vers » dit à la fin) : écrire les mots dits (« pour les cL »).
+
+## Fait le 14/11 (session 12, suite) — ✅ CONTENANCE ép. 3 ESTIMER fini
+- `manim/scripts/cm1/contenance_estimer.py` (`ContenanceEstimerCM1`, Malik pompier, jaune) : dry run propre, planches -ql et HD relues, bords 0. Questions 01:03 A, 01:52 B.
+- Short « La piscine… au verre ? » (`films/cm1-contenance-estimer.js`, réponse C 4 verres, puis 4000 verres et le tuyau) ; film + miniature, `_muet.mp4` supprimé.
+- Manifeste 11/01/2027 (jaune, sciences + nature-ecologie ; short 00:17 C), fiche, R2 03-estimer, videos-r2 + bilans (nos clés), coach branché.
