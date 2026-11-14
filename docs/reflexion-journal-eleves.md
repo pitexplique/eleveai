@@ -270,3 +270,33 @@ d'élève est architecte. Idées d'articles avec lui, pour les 6e :
 
 Dans l'article : « Merci à notre invité, architecte », sans nom de famille
 et sans dire de quel élève il est le parent.
+
+## 12. Décidé : le deuxième article, « La case et les cyclones »
+
+**Avec les 6e et le parent architecte** (choix de Frédéric, 14/11).
+Moment conseillé : **janvier**, en pleine saison des cyclones. Le sujet est
+dans l'actualité des élèves.
+
+Question de départ : « Pourquoi la case créole résiste-t-elle au vent ? »
+
+Déroulé possible :
+
+1. **L'invité (20 min).** L'architecte montre un plan de case : la varangue,
+   le toit en pente, les volets, les fondations. Il explique ce qu'il
+   calcule avant de construire.
+2. **Mesurer (1 h).** Par groupes, sur le plan ou sur une photo de case
+   (sans personne) : mesurer les longueurs, l'angle du toit au rapporteur,
+   passer du plan à la vraie taille avec l'échelle.
+3. **La maquette (option, 1 h).** Une case en carton à l'échelle, puis un
+   sèche-cheveux ou un ventilateur pour « le cyclone » : toit plat contre
+   toit en pente. Les élèves notent ce qui se passe.
+4. **Écrire (1 h).** 5 à 8 phrases, le QCM voté par la classe.
+
+Maths de 6e : longueurs et conversions, échelle (proportionnalité), angles
+au rapporteur, aire d'un rectangle (un mur, le sol de la varangue).
+Science : le vent, la pluie, pourquoi un toit en pente évacue l'eau.
+
+Exemple de défi QCM : « Sur le plan, la varangue mesure 4 cm. L'échelle est
+1 cm pour 1 m. Quelle est sa vraie longueur ? » A. 40 cm · B. 4 m · C. 400 m.
+
+Photos possibles : la maquette, le plan, une case (sans personne).
