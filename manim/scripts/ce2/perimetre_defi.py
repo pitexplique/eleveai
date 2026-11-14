@@ -129,7 +129,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
         self.play(FadeIn(met, shift=DOWN * 0.1), run_time=0.35)
         e = 0.42
         en = enclos(12, 5, P(0.9, 0.75), e, ["12 m", "5 m", None, None], fs=32)
-        tos = VGroup(tortue(0.9).move_to(P(-0.4, 1.0)), tortue(0.8).move_to(P(1.6, 0.45)).rotate(PI * 0.9))
+        tos = VGroup(tortue(0.9).move_to(P(-0.4, 1.0)), tortue(0.8).move_to(P(2.6, 1.25)).rotate(PI * 0.9))
         self.au_mot("un enclos pour les tortues")
         self.play(FadeIn(en), FadeIn(tos, shift=RIGHT * 0.2), run_time=0.5)
         self.au_mot("12 mètres")
@@ -173,7 +173,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
         self.tour_cote(en, 1, 0.3, aig)
         self.au_fil(lg)
         for k, (a, b, c, i) in enumerate((("17", "12", "29", 2), ("29", "5", "34", 3))):
-            l = self.ligne([(a, BLEU_D), ("+ " + b, BLEU_D), ("= " + c, BLEU_D)], 38, buff=0.16)
+            l = self.ligne([(a, BLEU_D), ("+ " + b, BLEU_D), ("= " + c, BLEU_D)], 38, buff=0.26)
             hors_audit(l[0])
             gauche(l, 0.6, 1.05 - 0.75 * k)
             self.au_mot("Plus " + b)
@@ -202,7 +202,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
         l1 = self.bloc(["On enlève les 2 m", "de la porte."], 32)
         l1.align_to(P(0.6, 0), LEFT).move_to(P(l1.get_center()[0], 1.15))
         self.aux_extraits([VGroup(l1[0], t2), l1[1]], ["2 mètres de la", "de la porte. 34"])
-        lg = self.ligne([("34", BLEU_D), ("− 2", BLEU_D), ("= 32", BLEU_D)], 40, buff=0.16)
+        lg = self.ligne([("34", BLEU_D), ("− 2", BLEU_D), ("= 32", BLEU_D)], 40, buff=0.26)
         gauche(lg, 0.6, 0.0)
         self.aux_extraits(lg, ["34 moins", "2, 32", "32. Zoé"])
         self.au_mot("32 mètres")
@@ -228,12 +228,12 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
             sc.add(car.lab[0], tp)
 
         def apres(sc):
-            lg = sc.rep_bas(0, ["Tout le tour :", "5 × 4", "= 20."], fs=32, y0=-1.75, pas=0.6)
+            lg = sc.rep_bas(0, ["Tout le tour :", "5 × 4", "= 20."], fs=32, y0=-1.75, pas=0.6, buff=0.26)
             sc.au_mot("Tout le tour")
             sc.play(FadeIn(lg[0], shift=UP * 0.08), Create(car.contour(sw=8)), run_time=0.35)
             sc.add(po)
             sc.aux_extraits(lg[1:], ["5 fois 4", "20. Moins"])
-            lg2 = sc.rep_bas(1, ["Moins la porte :", "20", "− 1", "= 19 m."], fs=32, y0=-1.75, pas=0.6)
+            lg2 = sc.rep_bas(1, ["Moins la porte :", "20", "− 1", "= 19 m."], fs=32, y0=-1.75, pas=0.6, buff=0.26)
             sc.au_mot("Moins la porte")
             sc.play(FadeIn(lg2[0], shift=UP * 0.08), Indicate(po, color=PORTE, scale_factor=1.3), run_time=0.35)
             sc.aux_extraits(lg2[1:], ["20 moins", "1, 19", "19 mètres"])
@@ -268,7 +268,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
                   lab[0].animate.shift(RIGHT * 0.5), lab[1].animate.shift(LEFT * 0.5), run_time=0.6)
         self.au_mot("Quel est le tour")
         q = self.t("Quel est le tour de la grande cage ?", 32, JAUNE_TITRE)
-        gauche(q, -6.2, -1.35)
+        gauche(q, -6.2, -2.3)
         self.play(FadeIn(q, shift=UP * 0.1), run_time=0.35)
         self.au_mot("Le côté collé")
         l1 = self.bloc(["Le côté collé est au milieu :", "il n'est plus sur le bord."], 28, COLLE)
@@ -288,7 +288,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
                             np.sign(round(nrm[1], 2)) if abs(nrm[1]) >= 0.5 else 0, 0])
             nm = self.t(str(k + 1), 26, TOUR).move_to(m.get_center() + nrm * 0.55)
             if abs(nrm[1]) > 0 and nrm[1] < 0:
-                nm.shift(DOWN * 0.35)  # sous les « 3 m »
+                nm.shift(DOWN * 0.6)  # sous les « 3 m », sans les toucher
             hors_audit(nm)  # on compte les morceaux : les numéros ne sont pas dits
             nums.add(nm)
         for m, nm in zip(bm, nums):
@@ -296,7 +296,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
         l3 = self.t("6 côtés de 3 m.", 32, TOUR)
         gauche(l3, 0.4, 0.3)
         self.aux_extraits([l3], ["6 côtés de 3"])
-        lg = self.ligne([("3 × 6", VERT_OK), ("= 18", VERT_OK)], 38, buff=0.16)
+        lg = self.ligne([("3 × 6", VERT_OK), ("= 18", VERT_OK)], 38, buff=0.26)
         gauche(lg, 0.4, -0.45)
         self.aux_extraits(lg, ["3 fois 6", ("18. Le", 1, 0.0)])
         self.au_mot("18 mètres")
@@ -354,7 +354,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
             sc.add(la)
 
         def apres(sc):
-            lg = sc.rep_bas(0, ["Un rectangle de", "6 m", "sur 2 m."], fs=32, y0=-1.75, pas=0.6)
+            lg = sc.rep_bas(0, ["Un rectangle de", "6 m", "sur 2 m."], fs=32, y0=-1.75, pas=0.6, buff=0.26)
             sc.au_mot("un rectangle")
             sc.play(FadeIn(lg[0], shift=UP * 0.08), Create(bord_morceaux(3, 2, c0, e, sw=8)), run_time=0.35)
             sc.aux_extraits(lg[1:], ["6 mètres sur", "2 mètres. 6"])
@@ -365,7 +365,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
             sc.play(FadeIn(lg2[0], shift=UP * 0.08), run_time=0.22)
             sc.aux_extraits([VGroup(lg2[1], lg2[2]), lg2[3], VGroup(lg2[4], lg2[5]), lg2[6]],
                             ["6, 14", "14. Plus", "2, 16", "16. 24"])
-            lg3 = sc.rep_bas(2, ["24,", "ce serait le tour", "des trois carrés séparés."], fs=32, y0=-1.75, pas=0.6)
+            lg3 = sc.rep_bas(2, ["24,", "ce serait le tour", "des trois carrés séparés."], fs=32, y0=-1.75, pas=0.6, buff=0.26)
             sc.au_mot("24,")
             sc.play(FadeIn(lg3[0], shift=UP * 0.08), run_time=0.2)
             sc.au_mot("ce serait")
@@ -423,7 +423,12 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
         q = self.bloc(["Combien de mètres de", "grillage lui faut-il ?"], 36, JAUNE_TITRE)
         q.align_to(P(-6.2, 0), LEFT).move_to(P(q.get_center()[0], -1.25))
         self.play(FadeIn(q, shift=UP * 0.1), run_time=0.4)
-        self.pause_defi(y=-2.55)
+        # « Mets pause » sous la question, à gauche : à droite (colonne XL), il collait Ti-Margo.
+        self.au_mot("Mets pause")
+        pz = self.t("Mets pause, et cherche !", 32, ORANGE_RETENUE)
+        gauche(pz, -6.2, -2.55)
+        self.play(Write(pz), run_time=0.8)
+        self.attendre_voix(marge=2.0)
 
     def ecran_correction(self):
         self.ecran("08b-correction", 0.65)
@@ -434,7 +439,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
         cs, cl, po, lps = self.enclos_lapins(c0, e)
         self.add(cs, cl, lps, po)
         self.au_mot("La grande figure")
-        l0 = self.ligne([("Un rectangle de", WHITE), ("8 m", WHITE), ("sur 4 m.", WHITE)], 34, buff=0.16)
+        l0 = self.ligne([("Un rectangle de", WHITE), ("8 m", WHITE), ("sur 4 m.", WHITE)], 34, buff=0.26)
         gauche(l0, -0.8, 2.2)
         self.play(FadeIn(l0[0], shift=UP * 0.1), FadeOut(cl), run_time=0.3)
         la = self.t("8 m", 26).next_to(cs, DOWN, buff=0.4).shift(LEFT * 0.9)
@@ -445,7 +450,7 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
         self.au_mot("8 plus 4")
         self.au_fil(lg)
         for k, (a, b, c) in enumerate((("12", "8", "20"), ("20", "4", "24"))):
-            l = self.ligne([(a, BLEU_D), ("+ " + b, BLEU_D), ("= " + c, BLEU_D)], 36, buff=0.16)
+            l = self.ligne([(a, BLEU_D), ("+ " + b, BLEU_D), ("= " + c, BLEU_D)], 36, buff=0.26)
             hors_audit(l[0])
             gauche(l, -0.8, 0.75 - 0.7 * k)
             self.au_mot("Plus " + b)
@@ -455,14 +460,14 @@ class PerimetreDefiBase(PaysagePerimetreCE2):
         self.add(po)
         self.au_mot("Moins la porte")
         lp = self.ligne([("Moins la porte :", PORTE), ("24", BLEU_D), ("− 1", BLEU_D), ("= 23.", BLEU_D)], 36,
-                        buff=0.16)
+                        buff=0.26)
         gauche(lp, -0.8, -0.75)
         self.play(FadeIn(lp[0], shift=UP * 0.08), Indicate(po, color=PORTE, scale_factor=1.3), run_time=0.3)
         self.aux_extraits(lp[1:], ["24 moins", "1, 23", "23. Il"])
         self.au_mot("Il faut")
-        g = self.gros("Il faut 23 m de grillage.", fs=36)
+        g = self.gros("Il faut 23 m de grillage.", fs=32)
         hors_audit(g)  # 23 : déjà dit et écrit juste au-dessus
-        gauche(g, -0.8, -1.75)
+        gauche(g, -0.8, -1.6)
         self.play(FadeIn(g, scale=1.2), run_time=0.4)
         self.insister(g, 1.1, 0.25)
         self.attendre_voix()
