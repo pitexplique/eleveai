@@ -1,61 +1,80 @@
-# « Science péi » : le journal scientifique de La Réunion écrit par les élèves
+# « Science péi » : le journal scientifique de La Réunion, avec la participation des élèves
 
 Réflexion du 14/11/2026. Rien n'est décidé : ce document sert à trancher.
 
+> ⛔ Correction de Frédéric (14/11) : le journal n'est **pas écrit par les
+> élèves, mais avec leur participation**. Frédéric en reste l'auteur et c'est
+> lui qui rédige. Les élèves participent : ils posent des questions, mesurent,
+> donnent des idées, proposent des QCM, témoignent, et peuvent apparaître dans
+> la vidéo (sans visage).
+
 ## L'idée en une phrase
 
-Une fois par mois, des élèves de 6e et de 4e partent d'une question de l'île
-ou de leur passion. Ils mesurent, ils calculent, ils écrivent un article court
-avec son défi QCM. Le prof relit, puis l'article paraît dans le Journal
-d'EleveAI, dans l'édition « Île de La Réunion ».
+Une fois par mois, Frédéric publie un article de l'île dans le Journal
+d'EleveAI (édition « Île de La Réunion »). Ses élèves de 6e et de 4e y
+participent : la question vient d'eux ou de leur passion, ils mesurent et
+calculent, ils proposent le défi QCM. Frédéric rédige et signe.
 
-## 1. Qui écrit
+## 1. Qui écrit, qui participe
 
-Deux sources, qui se complètent :
+**L'auteur : Frédéric.** Il choisit le sujet, il rédige l'article, il le
+signe et il décide de publier.
+
+**Les élèves participent**, de deux façons qui se complètent :
 
 - **La classe, en cours.** Une séance de maths (mesure, moyenne, graphique,
-  échelle…) donne la matière d'un article. Toute la classe mesure et calcule.
-  Un petit groupe rédige.
-- **Le club volontaire (6e et 4e).** Quelques élèves motivés, sur la base du
-  volontariat. Ils finissent l'article de la classe, ou proposent le leur à
-  partir d'une passion.
+  échelle…) donne la matière d'un article. Toute la classe mesure, calcule,
+  propose des idées et des QCM.
+- **Le club volontaire (6e et 4e).** Quelques élèves motivés vont plus loin :
+  ils posent des questions, apportent une passion, témoignent.
+
+Ce que font les élèves :
+
+- poser la question de départ ;
+- mesurer, compter, calculer ;
+- donner des idées et des explications ;
+- proposer des QCM (Frédéric choisit et corrige) ;
+- témoigner (« J'ai été surpris que… ») : une phrase citée avec prénom et
+  classe ;
+- apparaître dans la vidéo **sans visage** (les mains, la voix, de dos, les
+  mesures).
 
 Les rôles :
 
-- **Frédéric = rédacteur en chef.** Il choisit le sujet du mois, il valide,
-  il décide de publier.
+- **Frédéric = auteur et rédacteur en chef.** Il rédige, valide, publie.
 - **Claude = secrétaire de rédaction.** Mise en forme, vérification des
   chiffres, relecture du QCM (une seule bonne réponse, bonne réponse au
   hasard A/B/C), recherche de la vidéo qui va avec, et plus tard un short.
-- **Les élèves = journalistes.** Question, mesures, texte, défi.
+- **Les élèves = participants.** Questions, mesures, idées, QCM, témoignages.
 
 ## 2. Le rythme : 1 article par mois
 
-- Semaine 1 : on choisit la question (en classe ou au club).
-- Semaine 2 : on mesure et on calcule.
-- Semaine 3 : on écrit le texte et le QCM.
-- Semaine 4 : relecture du prof, mise en forme, publication.
+- Semaine 1 : on choisit la question avec les élèves (en classe ou au club).
+- Semaine 2 : les élèves mesurent et calculent.
+- Semaine 3 : les élèves proposent idées, témoignages et QCM ; Frédéric rédige.
+- Semaine 4 : mise en forme, validation, publication.
 
 Soit environ 8 articles sur l'année scolaire (de novembre à juin). Un
 article paraît à la Une de l'édition Réunion pendant sa semaine de sortie,
-puis il reste dans une rangée « Écrit par des élèves ».
+puis il reste dans une rangée « Avec la participation des élèves ».
 
-## 3. Le circuit : de l'élève à la publication
+## 3. Le circuit : des idées des élèves à la publication
 
-1. **L'élève écrit** dans la carte « ✍️ Écrire pour le Journal », en bas de
-   son tableau de bord (les maths restent en haut pour les parents).
-   Il faut être connecté.
-2. **Le prof relit** dans son tableau de bord : « Accepter », « À corriger »
-   (avec un commentaire) ou « Pas retenu ».
-3. **L'élève voit le statut** : « Chez ton prof », « À corriger »,
-   « Accepté pour le Journal ».
-4. **Claude met en forme** l'article accepté : il le relit, vérifie les
-   nombres, ajoute « Les maths derrière » et la vidéo.
-5. **Frédéric valide la version finale.** Puis l'article paraît, au moment
+1. **L'élève propose** dans la carte du tableau de bord élève, en bas (les
+   maths restent en haut pour les parents). Il faut être connecté. Il envoie
+   une question, ce qu'il a mesuré ou trouvé, et un QCM.
+2. **Frédéric lit les propositions** dans son tableau de bord : « Retenu »,
+   « À préciser » (avec un commentaire) ou « Pas retenu ».
+3. **L'élève voit le statut** de sa proposition.
+4. **Frédéric rédige l'article** à partir des propositions retenues et du
+   travail de la classe. Il cite les témoignages (prénom + classe).
+5. **Claude met en forme** : relecture, vérification des nombres,
+   « Les maths derrière », la vidéo.
+6. **Frédéric valide la version finale.** Puis l'article paraît, au moment
    du rituel de la semaine du Journal.
 
-Pour un article écrit en classe sur papier : Frédéric prend une photo du
-texte (sans visage) ou le recopie, et on entre directement à l'étape 4.
+Pour un travail fait en classe sur papier : Frédéric reprend les mesures et
+les idées des élèves, et on passe directement à l'étape 4.
 
 ### Ce qui existe déjà (codé le 14/11 par une autre session, pas encore commité)
 
@@ -65,8 +84,24 @@ texte (sans visage) ou le recopie, et on entre directement à l'étape 4.
 - La relecture côté prof : `app/dashboard-prof/ArticlesARelire.tsx`.
 - La table `supabase/journal_propositions.sql` (à exécuter une fois dans Supabase).
 
-Ce qui manque : la publication. Aujourd'hui, un article accepté ne va pas
-encore tout seul dans le Journal. Voir la partie 8.
+⚠️ **À changer pour suivre la correction :** la carte dit aujourd'hui
+« Écrire pour le Journal », « Écrire un article », « Ta passion + des nombres
+= un article lu par d'autres élèves », « Mes articles », « Accepté pour le
+Journal ». Il faudrait plutôt :
+
+- titre : « 💡 Participer au Journal » ;
+- bouton : « Proposer une idée » ;
+- sous-titre : « Ta question, tes mesures, ton QCM : ton prof s'en sert
+  pour l'article » ;
+- « Mes propositions » au lieu de « Mes articles » ;
+- statuts : « Chez ton prof », « Retenu pour un article », « À préciser »,
+  « Pas retenu ».
+
+Ce sont des libellés seulement (≈ 30 min). La structure (question, mesures,
+QCM) reste bonne.
+
+Ce qui manque encore : passer des propositions retenues à l'article. Au
+début, c'est Frédéric qui rédige et Claude qui ajoute l'article au Journal.
 
 ## 4. Le format d'un article
 
@@ -75,13 +110,14 @@ le défi QCM.** Avec, en plus, la trace du travail des élèves.
 
 | Bloc | Ce qu'on y met | Qui |
 |---|---|---|
-| La question | Une question de l'île ou d'une passion. Ex. : « Combien de temps met un cyclone pour traverser l'île ? » | élèves |
-| Les mesures | Ce qu'on a mesuré, compté ou trouvé, avec des nombres et l'unité. | élèves |
-| Les maths utilisées | 1 ou 2 notions du programme : moyenne, proportion, vitesse, échelle, graphique, pourcentage, relatifs… | élèves + prof |
-| Le texte | 5 à 8 phrases courtes. Facile à lire, facile à écouter. | élèves, relu par Claude |
-| Le défi QCM | 1 question, 3 choix, une seule bonne réponse. | élèves, vérifié par Claude |
-| La vidéo | Une vidéo EleveAI de la notion de maths (paysage + short). Plus tard, peut-être un short dessin animé de l'article. | Claude |
-| La signature | « Par Léa et Noah, 6e B » : prénoms + classe. | — |
+| La question | Une question de l'île ou d'une passion. Ex. : « Combien de temps met un cyclone pour traverser l'île ? » | proposée par les élèves |
+| Les mesures | Ce qu'on a mesuré, compté ou trouvé, avec des nombres et l'unité. | faites par les élèves |
+| Les maths utilisées | 1 ou 2 notions du programme : moyenne, proportion, vitesse, échelle, graphique, pourcentage, relatifs… | Frédéric |
+| Le texte | 5 à 8 phrases courtes. Facile à lire, facile à écouter. | Frédéric, relu par Claude |
+| Les témoignages | 1 ou 2 phrases d'élèves, avec prénom et classe. | élèves |
+| Le défi QCM | 1 question, 3 choix, une seule bonne réponse. | proposé par les élèves, choisi par Frédéric, vérifié par Claude |
+| La vidéo | Une vidéo EleveAI de la notion (paysage + short). Les élèves peuvent y apparaître sans visage. | Claude |
+| La signature | « Par Frédéric, avec la participation des 6e B ». | — |
 
 Le lien avec le coach reste : « S'entraîner avec le coach » sur la notion
 de maths de l'article.
@@ -126,28 +162,30 @@ Règles non négociables :
 
 - **Prénom et classe seulement.** Jamais de nom de famille, jamais le nom du
   collège (à trancher, voir les questions).
-- **Pas de photo de visage.** Photos permises : les mains, les objets, les
-  mesures, le paysage, le tableau.
-- **Rien n'est publié sans la validation du prof.** Deux validations :
-  l'idée (dans le tableau de bord), puis la version finale mise en forme.
+- **Pas de visage, ni en photo ni en vidéo.** Permis : les mains, la voix,
+  de dos, les objets, les mesures, le paysage, le tableau.
+- **Rien n'est publié sans la validation du prof.** C'est lui qui rédige ;
+  il valide aussi la version finale mise en forme.
 - **Pas de commentaires publics** sous les articles.
 - **Pas de données personnelles dans les mesures** (pas de poids ni de taille
   d'un élève nommé ; on donne des moyennes de groupe).
 - **Accord des familles** : une autorisation simple pour la publication du
   prénom (à voir avec le collège ; souvent déjà prévu dans le droit à l'image).
-- Un élève peut demander à **retirer** son article à tout moment.
+- Un élève peut demander à **retirer** son témoignage ou son prénom à tout
+  moment.
 
 ## 7. Pourquoi c'est utile
 
 **Pour les élèves**
 
 - Ils voient que les maths servent à comprendre leur île et leur passion.
-- Ils écrivent pour de vrai : quelqu'un va les lire. Ça motive.
-- Écrire un QCM oblige à bien comprendre (il faut trouver la bonne réponse
+- Leur travail sert pour de vrai : leurs mesures et leurs questions sont
+  dans un article lu par d'autres. Ça motive.
+- Proposer un QCM oblige à bien comprendre (il faut trouver la bonne réponse
   et deux erreurs crédibles).
 - Ceux qui lisent mal participent aussi : mesurer, compter, filmer les mains,
   choisir les réponses du QCM.
-- Fierté : « mon article est sur le site ».
+- Fierté : « ma question et mes mesures sont dans le Journal ».
 
 **Pour le site**
 
@@ -165,29 +203,28 @@ Règles non négociables :
 | Chantier | Ce que c'est | Effort |
 |---|---|---|
 | Exécuter le SQL | `supabase/journal_propositions.sql` dans Supabase | 5 min (Frédéric) |
-| Publier un article accepté | Un bouton « Publier » chez le prof, ou Claude qui ajoute l'article à la main dans `lib/accueil/articles.ts` au rituel de la semaine | à la main : 0 code ; bouton : ½ journée |
-| Champ « auteurs » | Afficher « Par Léa et Noah, 6e B » sous le titre | 1 h |
-| Rangée « Écrit par des élèves » | Une rangée dans l'édition Réunion du Journal + un badge sur la carte | 2 h |
+| Publier l'article | Claude ajoute l'article rédigé par Frédéric dans `lib/accueil/articles.ts` au rituel de la semaine | 0 code |
+| Libellés de la carte élève | « Participer au Journal », « Proposer une idée », « Mes propositions » (voir partie 3) | 30 min |
+| Ligne de participation | Afficher « Avec la participation des 6e B » sous le titre | 1 h |
+| Rangée « Avec la participation des élèves » | Une rangée dans l'édition Réunion du Journal + un badge sur la carte | 2 h |
 | Ajouter une photo | Photo d'objets ou de mesures (pas de visage), relue par le prof | ½ journée |
-| Travail de groupe | Plusieurs auteurs pour un article | 2 h |
 | Short dessin animé | Un short Ti Margo par article, à la main | ~½ journée par short |
-| Page « Science péi » | Une page qui liste tous les articles des élèves | ½ journée |
+| Page « Science péi » | Une page qui liste tous les articles faits avec les élèves | ½ journée |
 
-**Conseil pour commencer :** pas de nouveau code. Le premier article se
-publie à la main (Claude l'ajoute au Journal pendant le rituel de la
-semaine). On code le bouton « Publier » seulement si ça marche avec les
-élèves.
+**Conseil pour commencer :** presque pas de code (juste les libellés). Le
+premier article, rédigé par Frédéric, est ajouté à la main par Claude au
+Journal pendant le rituel de la semaine.
 
 ## 9. Questions à trancher par Frédéric
 
 1. Le premier article : en classe (6e ou 4e ?) ou au club ? Et quand ?
 2. Le club : quel moment (midi, après les cours, mercredi) ? Combien d'élèves ?
 3. Le nom : « Science péi », ou un autre nom choisi par les élèves ?
-4. La signature : prénom + classe, ou ajouter le collège / la ville ?
+4. La signature : « Par Frédéric, avec la participation des 6e B » ? Ajouter
+   le collège / la ville ?
 5. L'autorisation des familles : passe-t-elle par le collège (droit à
    l'image déjà signé) ou faut-il un petit mot ?
-6. La publication : à la main par Claude (conseillé au début) ou un bouton
-   « Publier » chez le prof ?
+6. Changer les libellés de la carte élève (« Participer au Journal ») ?
 7. Ouvrir plus tard à d'autres profs et d'autres collèges ?
 8. Une vidéo par article : seulement la vidéo de la notion, ou aussi un short
    dessin animé fait à partir de l'article ?
@@ -206,7 +243,8 @@ Déroulé possible en 2 séances :
    tir de près / tir de loin.
 2. **En classe (1 h).** On calcule le pourcentage de réussite du groupe et
    de la classe (sur 10 tirs : 7 buts = 70 %). On fait un diagramme en
-   barres. Un petit groupe écrit 5 à 8 phrases. La classe vote le QCM.
+   barres. Les élèves proposent des QCM et des phrases de témoignage ;
+   Frédéric rédige l'article et choisit le QCM.
 
 Maths de 6e : fréquence, pourcentage simple, diagramme en barres, comparer.
 Protection : on publie les résultats par groupe ou pour la classe, jamais
@@ -290,7 +328,8 @@ Déroulé possible :
 3. **La maquette (option, 1 h).** Une case en carton à l'échelle, puis un
    sèche-cheveux ou un ventilateur pour « le cyclone » : toit plat contre
    toit en pente. Les élèves notent ce qui se passe.
-4. **Écrire (1 h).** 5 à 8 phrases, le QCM voté par la classe.
+4. **Proposer (1 h).** Les élèves proposent leurs idées, témoignages et
+   QCM ; Frédéric rédige l'article ensuite.
 
 Maths de 6e : longueurs et conversions, échelle (proportionnalité), angles
 au rapporteur, aire d'un rectangle (un mur, le sol de la varangue).
