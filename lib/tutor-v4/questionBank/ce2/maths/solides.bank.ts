@@ -735,7 +735,15 @@ const solidesBase: TutorBankItemV4[] = [
         { nom: "rectangulaire", cotes: 4 },
       ]);
       const quoi = randomChoice(["triangles", "faces"] as const);
-      const valeur = quoi === "triangles" ? base.cotes : base.cotes + 1;
+      // Base triangulaire : la base est AUSSI un triangle (4 triangles en tout).
+      const baseTri = base.cotes === 3;
+      const valeur = quoi === "triangles" ? base.cotes + (baseTri ? 1 : 0) : base.cotes + 1;
+      const dessin =
+        base.nom === "carrée"
+          ? { canvas: solide("pyramide") }
+          : baseTri
+            ? { canvas: { ...solide("pyramide"), baseTriangulaire: true } }
+            : {};
       return {
         text: `Combien de ${quoi} a une pyramide à base ${base.nom} ?`,
         format: "short",
@@ -745,11 +753,13 @@ const solidesBase: TutorBankItemV4[] = [
           "Une pyramide a autant de faces triangulaires que sa base a de côtés, plus la base elle-même.",
           "On compte d'abord les côtés de la base, puis on décide si la base compte dans la réponse.",
           quoi === "triangles"
-            ? `La base ${base.nom} a ${base.cotes} côtés : ${base.cotes} triangles montent vers le sommet. La base, elle, n'est pas un triangle.`
+            ? baseTri
+              ? `La base triangulaire a 3 côtés : 3 triangles montent vers le sommet. Et la base est aussi un triangle : 3 + 1 = 4 triangles.`
+              : `La base ${base.nom} a ${base.cotes} côtés : ${base.cotes} triangles montent vers le sommet. La base, elle, n'est pas un triangle.`
             : `La base ${base.nom} a ${base.cotes} côtés : ${base.cotes} triangles montent vers le sommet, et la base s'ajoute. ${base.cotes} + 1 = ${valeur} faces.`,
           `Il y en a ${valeur}.`,
         ),
-        canvas: solide("pyramide"),
+        ...dessin,
       };
     },
   },
@@ -1447,8 +1457,13 @@ function facesPyramide(d: number): Gen {
   if (r < 0.25) {
     return {
       text: `${debut} ${un(["Combien a-t-elle de faces en triangle ?", "Combien de ses faces sont des triangles ?", "Combien compte-t-elle de triangles ?"])}`,
-      ...qcmN(p.n, [p.n + 1, p.n - 1, 2 * p.n]),
-      explanation: expl(`La base a ${p.n} côtés, donc il y a ${p.n} triangles.`),
+      // Base triangulaire : la base est AUSSI un triangle → 4 triangles.
+      ...(p.n === 3 ? qcmN(4, [3, 5, 6]) : qcmN(p.n, [p.n + 1, p.n - 1, 2 * p.n])),
+      explanation: expl(
+        p.n === 3
+          ? "La base a 3 côtés, donc 3 triangles montent vers la pointe. Et la base est aussi un triangle : 3 + 1 = 4 triangles."
+          : `La base a ${p.n} côtés, donc il y a ${p.n} triangles.`,
+      ),
       ...canvas,
     };
   }
@@ -1471,12 +1486,17 @@ function facesPyramide(d: number): Gen {
   if (r < 0.85) {
     return {
       text: `${debut} ${un(["De quoi sont faites ses faces ?", "Quelles sont toutes ses faces ?", "Quelles faces faut-il découper pour la fabriquer ?"])}`,
-      ...qcm(juste, [
-        `${NOMBRE_MOT[p.n + 1]} triangles`,
-        `${NOMBRE_MOT[p.n]} triangles`,
-        `${p.forme} et ${NOMBRE_MOT[p.n - 1]} triangles`,
-        p.forme === "un carré" ? "six carrés" : `un carré et ${NOMBRE_MOT[p.n]} triangles`,
-      ]),
+      ...qcm(
+        juste,
+        p.n === 3
+          ? ["trois triangles", "cinq triangles", "un carré et trois triangles"]
+          : [
+              `${NOMBRE_MOT[p.n + 1]} triangles`,
+              `${NOMBRE_MOT[p.n]} triangles`,
+              `${p.forme} et ${NOMBRE_MOT[p.n - 1]} triangles`,
+              p.forme === "un carré" ? "six carrés" : `un carré et ${NOMBRE_MOT[p.n]} triangles`,
+            ],
+      ),
       explanation: expl(`Il faut ${juste}.`),
       ...canvas,
     };
