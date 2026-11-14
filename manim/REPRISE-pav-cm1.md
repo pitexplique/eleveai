@@ -122,3 +122,12 @@ Série aire CM1 terminée. Suite du plan CM1 (`PLAN-perimetre-aire-volume.md`) :
 
 ## Prochaine étape (session 9)
 Ép. 4 défi (Karim, ceinture bleue ; questions B, C ; short escargots A) : même chaîne. Dates libres : 04/01 (1 paysage), 06/01 (1 paysage), 07/01… (≤ 2 paysages et 5 vidéos par jour).
+
+## Fait le 14/11 (session 9) — ✅ PÉRIMÈTRE ép. 4 DÉFI fini → PÉRIMÈTRE CM1 FINI (4 épisodes)
+- ✅ `manim/scripts/cm1/perimetre_defi.py` (`PerimetreDefiCM1`, Karim éleveur de chevaux, ceinture bleue ; outils dans le script : `pts_rect`, `piquets`, `cloture` (vue de côté, 3 fils), `tours_decales` (3 tours vus de haut)) : pré 40 × 30, un tour 140, 3 tours 420 ; pré en triangle 100 − (30 + 45) = 25 ; Q1 carré 36 ÷ 4 = 9 (B) ; Q2 piste 200 × 4 = 800 (C) ; défi pré carré 25 m, 3 rangées = 300 m, juste assez. Dry run AUDIT propre (seul « 974 »), planche -ql relue deux fois, HD `manim/sorties/cm1/maths/perimetre/04-defi/` (3 min 32), bords 0. Questions 01:08 B, 02:01 C.
+  - ⚠️ Leçons : un texte `hors_audit` qui MÊLE mots et nombres (« 1 tour = 140 m ») est découpé par la synchro et perd son drapeau (TARD) → n'y mettre que le nombre (« 140 m ») ; étiquettes posées autour de `tours_decales` : `ecart=0.5` ; le rendu HD plante sur « − » dans un print SYNCHRO si la console est en cp1252 → `PYTHONIOENCODING=utf-8` devant `hd.sh`.
+- ✅ Short « La course d'escargots » (`films/cm1-perimetre-defi.js`, 68,8 s) : 20 m de ruban, côtés 8 et 7 (à l'échelle, 62 px/m), 20 − 15 = 5 (A) ; `escargot()` et `cotePointille()` dans le film ; défi ruban 30 m, côtés 10 et 12.
+- Miniatures (`miniature_aire_cm1.py perimetre-defi`), manifeste `cm1-perimetre-defi` (bleue, animaux + nature-ecologie) + `-short` (blanche, 00:20 A, animaux + jeux-defis) le **06/01/2027** ; fiche YouTube ; R2 du dossier 04-defi seul ; `generer-videos-r2.mjs` ; coach branché (2 vidéos).
+
+## Prochaine étape (session 10)
+CONTENANCE CM1 (plan, section CM1), puis les solides : voix à écrire et valider À DEUX avant tout rendu.

@@ -39,6 +39,8 @@ EP = [
      "la moitié du tour, × 2 !", True, "jaune", (0, 0), "perimetre"),
     ("polygone", "03-polygone", ["CALCULER LE PÉRIMÈTRE", "D'UN POLYGONE"], "50 × 8 = 400 cm",
      "une croix sur chaque côté !", True, "verte", (0, 0), "perimetre"),
+    ("defi", "04-defi", ["RÉSOUDRE UN DÉFI", "DE PÉRIMÈTRE"], "3 tours : 140 × 3 = 420 m",
+     "un tour, puis × le nombre de tours !", True, "bleue", (0, 0), "perimetre"),
 ]
 
 

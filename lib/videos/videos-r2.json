@@ -6082,6 +6082,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=fraction&microId=fraction_unite&display=simple"
  },
+ "cm1-perimetre-defi": {
+  "fichier": "cm1/maths/perimetre/04-defi/eleveai-maths-cm1-perimetre-defi.mp4",
+  "poster": "cm1/maths/perimetre/04-defi/eleveai-maths-cm1-perimetre-defi.png",
+  "vignette": null,
+  "titre": "Combien de mètres de fil pour 3 tours de clôture ? — Résoudre un défi de périmètre — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_defi&display=simple"
+ },
+ "cm1-perimetre-defi-short": {
+  "fichier": "cm1/maths/perimetre/04-defi/eleveai-maths-cm1-perimetre-defi-short.mp4",
+  "poster": "cm1/maths/perimetre/04-defi/eleveai-maths-cm1-perimetre-defi-short-miniature.png",
+  "vignette": null,
+  "titre": "Course d'escargots : 20 m de ruban… et le dernier côté ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=perimetre&microId=perimetre_defi&display=simple"
+ },
  "cm1-perimetre-polygone": {
   "fichier": "cm1/maths/perimetre/03-polygone/eleveai-maths-cm1-perimetre-polygone.mp4",
   "poster": "cm1/maths/perimetre/03-polygone/eleveai-maths-cm1-perimetre-polygone.png",
