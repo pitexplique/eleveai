@@ -172,9 +172,52 @@ function figureMesure(deg: number, n: NomAngle | null, texte: string, opts: { me
   };
 }
 /** Des demi-droites de même origine, SANS lettre (l'énoncé n'en nomme aucune). */
-function rayonsSansNom(degs: number[]): DroitesCanvasData {
-  const f = figureRayons("", degs.map((deg, k) => ({ nom: `_${k}`, deg })));
-  return { ...f, points: (f.points ?? []).map((pt) => ({ ...pt, label: "" })), display: { showLabels: false, showPoints: true } };
+/**
+ * ⭐ 14/11/2026 — L'ÉVENTAIL MARQUÉ (remplace des demi-droites fléchées sans
+ * aucun arc : « un angle mesure 75° » ne disait pas LEQUEL). Des rayons de même
+ * origine, sans lettre ; chaque `marque` pose l'arc d'un angle entre deux rayons
+ * (indices dans `degs`) avec sa mesure DONNÉE, « ? » pour celle qu'on cherche,
+ * ou le petit carré. `croisement` : rayons 0-2 et 1-3 prolongés en deux droites.
+ * `disque` : la tarte, et `parts` = [i, j] colore les parts prises.
+ * `bords` : le premier et le dernier rayon en trait épais — l'angle qu'on partage
+ * (un coin droit) se lit d'un coup, son petit carré seul se noyait entre les rayons.
+ * ⛔ Un arc ne se trace que sous 180° (le canvas dessine le petit angle).
+ */
+type Marque = { de: number; vers: number; texte?: string; droit?: boolean; loin?: boolean };
+function eventail(degs: number[], o: { marques?: Marque[]; croisement?: boolean; disque?: boolean; parts?: [number, number]; bords?: boolean } = {}): ConstructionCanvasData {
+  const r = (x: number) => Math.round(x * 1000) / 1000;
+  const R = 4;
+  const pt = (d: number, L = R) => ({ x: r(L * Math.cos((d * Math.PI) / 180)), y: r(L * Math.sin((d * Math.PI) / 180)) });
+  const arc: { id: string; x: number; y: number; cache: true }[] = [];
+  const polygones: NonNullable<ConstructionCanvasData["polygones"]> = [];
+  if (o.disque && o.parts) {
+    const [i, j] = o.parts;
+    const d0 = degs[i];
+    const d1 = j < degs.length ? degs[j] : degs[0] + 360;
+    const n = Math.max(2, Math.ceil((d1 - d0) / 6));
+    for (let k = 0; k <= n; k++) arc.push({ id: `T${k}`, ...pt(d0 + ((d1 - d0) * k) / n), cache: true });
+    polygones.push({ sommets: ["O", ...arc.map((a) => a.id)], fond: "rgba(234, 88, 12, 0.22)", contour: "none" });
+  }
+  const ecart = (m: Marque) => ((degs[m.vers] - degs[m.de]) % 360 + 360) % 360;
+  return {
+    kind: "construction",
+    points: [{ id: "O", x: 0, y: 0, nom: "" }, ...degs.map((d, k) => ({ id: `R${k}`, ...pt(d), cache: true })), ...arc],
+    ...(polygones.length ? { polygones } : {}),
+    ...(o.disque ? { cercles: [{ centre: "O", rayon: R, fond: "rgba(250, 204, 21, 0.18)" }] } : {}),
+    ...(o.croisement
+      ? { droites: [{ a: "R0", b: "R2" }, { a: "R1", b: "R3" }] }
+      : { segments: degs.map((_, k) => ({ a: "O", b: `R${k}`, ...(o.bords && (k === 0 || k === degs.length - 1) ? { epais: true } : {}) })) }),
+    angles: (o.marques ?? [])
+      .filter((m) => ecart(m) > 0 && ecart(m) < 180)
+      .map((m) => ({
+        sommet: "O", de: `R${m.de}`, vers: `R${m.vers}`,
+        ...(m.droit ? { droit: true } : {}),
+        ...(m.texte ? { texte: m.texte } : {}),
+        ...(m.texte && m.texte !== "?" ? { couleur: "#2563eb" } : {}),
+        ...(m.loin ? { rayon: 62 } : ecart(m) < 30 ? { rayon: 34, rayonTexte: 14 } : {}),
+      })),
+    description: o.disque ? "Un disque partagé depuis son centre" : o.croisement ? "Deux droites qui se coupent" : "Des demi-droites de même origine",
+  };
 }
 /**
  * Deux angles côte à côte, chacun avec ce que l'énoncé en dit (`textes` : sa
@@ -1254,7 +1297,7 @@ function genDroitChantier(): G {
   const mode = pick(["partage", "carreaux", "tour"] as const);
   if (mode === "partage") {
     const k = pick([2, 3, 5, 6]);
-    return dg(pick([`${m.qui} partage ${m.coin}, un angle droit, en ${k} parts égales. Combien mesure chaque part ?`, `${m.qui} divise un coin droit en ${k} angles égaux. Quelle est la mesure de chacun ?`]), 90 / k, `Un angle droit mesure 90°. 90 ÷ ${k} = ${90 / k}.`, rayonsSansNom(Array.from({ length: k + 1 }, (_, i) => 20 + (i * 90) / k)));
+    return dg(pick([`${m.qui} partage ${m.coin}, un angle droit, en ${k} parts égales. Combien mesure chaque part ?`, `${m.qui} divise un coin droit en ${k} angles égaux. Quelle est la mesure de chacun ?`]), 90 / k, `Un angle droit mesure 90°. 90 ÷ ${k} = ${90 / k}.`, eventail(Array.from({ length: k + 1 }, (_, i) => 20 + (i * 90) / k), { bords: true, marques: [{ de: 0, vers: k, droit: true }, { de: 0, vers: 1, texte: "?", loin: true }] }));
   }
   if (mode === "carreaux") {
     const k = pick([2, 3, 4]);
@@ -1590,7 +1633,7 @@ function genTrCalcul(): G {
   const mode = pick(["double", "moitie", "somme"] as const);
   if (mode === "double") return dg(pick([`Trace le double de ${a}°. Quelle mesure traces-tu ?`, `Angle à tracer : le double de ${a}°. Quel repère fais-tu ?`]), 2 * a, `2 × ${a} = ${2 * a}.`);
   if (mode === "moitie") return dg(pick([`Trace la moitié de ${m}°. Quel repère fais-tu ?`, `Angle à tracer : la moitié de ${m}°. Quelle mesure traces-tu ?`]), m / 2, `${m} ÷ 2 = ${m / 2}.`);
-  return dg(pick([`Tu traces ${a}° puis ${b}° côte à côte. Quel angle total obtiens-tu ?`, `Deux angles côte à côte : ${a}° et ${b}°. Quelle mesure a l’angle total ?`]), a + b, `${a} + ${b} = ${a + b}.`, rayonsSansNom([10, 10 + a, 10 + a + b]));
+  return dg(pick([`Tu traces ${a}° puis ${b}° côte à côte. Quel angle total obtiens-tu ?`, `Deux angles côte à côte : ${a}° et ${b}°. Quelle mesure a l’angle total ?`]), a + b, `${a} + ${b} = ${a + b}.`, eventail([10, 10 + a, 10 + a + b], { marques: [{ de: 0, vers: 1, texte: `${a}°` }, { de: 1, vers: 2, texte: `${b}°` }, { de: 0, vers: 2, texte: "?", loin: true }] }));
 }
 function genTrEquerre(): G {
   const v = Math.random() < 0.45 ? 90 : mesure5(20, 160, [90]);
@@ -1612,7 +1655,7 @@ function genDefiParts(): G {
     `Un cercle est coupé en ${k} parts égales. Combien mesure l’angle de ${m} parts côte à côte ?`,
     `Une roue a ${k} rayons régulièrement espacés. Quel angle forment ${m + 1} rayons voisins, du premier au dernier ?`,
     `Sur ${quoi}, on trace ${k} parts égales. Quel est l’angle total de ${m} parts voisines ?`,
-  ]), r, pourquoi, rayonsSansNom(Array.from({ length: k }, (_, i) => 90 + (i * 360) / k)));
+  ]), r, pourquoi, eventail(Array.from({ length: k }, (_, i) => 90 + (i * 360) / k), { disque: true, parts: [0, m], marques: [{ de: 0, vers: m, texte: "?" }] }));
 }
 function genDefiMinutes(): G {
   const p = pick(PRENOMS);
@@ -1699,7 +1742,7 @@ function genDefiFoisPlus(): G {
     `Un angle ${nom} est coupé en deux angles. Le plus grand mesure ${fois} le plus petit. Calcule le plus ${mot}.`,
     `On partage un angle ${nom} en deux. Un des deux angles vaut ${fois} l’autre. Quelle est la mesure du plus ${mot} ?`,
     `Deux angles ont pour somme un angle ${nom}. L’un vaut ${fois} l’autre. Trouve le plus ${mot}.`,
-  ]), r, `L’angle ${nom} fait ${k + 1} parts égales : ${total} ÷ ${k + 1} = ${petit}°. Le grand : ${k} × ${petit} = ${k * petit}°.`, rayonsSansNom([0, petit, total]));
+  ]), r, `L’angle ${nom} fait ${k + 1} parts égales : ${total} ÷ ${k + 1} = ${petit}°. Le grand : ${k} × ${petit} = ${k * petit}°.`, eventail([0, petit, total], { bords: !plat, marques: [...(plat ? [] : [{ de: 0, vers: 2, droit: true }]), veutPetit ? { de: 0, vers: 1, texte: "?", loin: !plat } : { de: 1, vers: 2, texte: "?", loin: !plat }] }));
 }
 function genDefiCroixSomme(): G {
   const [A, B, C, D, O] = lettres(5);
@@ -1724,7 +1767,7 @@ function genDefiRayons(): G {
       `${k} demi-droites de même origine partagent le tour en ${k} angles égaux. Combien mesure chaque angle ?`,
       `Autour d’un point, ${k} angles égaux font un tour complet. Calcule la mesure d’un angle.`,
       `Une étoile a ${k} branches régulières. Quel angle sépare deux branches voisines ?`,
-    ]), r, `Un tour complet : 360°. 360 ÷ ${k} = ${r}°.`, rayonsSansNom(Array.from({ length: k }, (_, i) => 90 + i * r)));
+    ]), r, `Un tour complet : 360°. 360 ÷ ${k} = ${r}°.`, eventail(Array.from({ length: k }, (_, i) => 90 + i * r), { marques: [{ de: 0, vers: 1, texte: "?" }] }));
   return nb(pick([
     `Autour d’un point, des angles de ${r}° font un tour complet. Combien y a-t-il d’angles ?`,
     `Un tour complet est coupé en angles égaux de ${r}°. Combien d’angles obtient-on ?`,
@@ -1801,7 +1844,7 @@ function genRelOppose(): G {
 // ----- ANGLE_RELATIONS, ★2
 function genRelComplete(): G {
   const a = mesure5(20, 160);
-  return dg(pick([`${a}° + … = 180°. Complète.`, `Il manque combien de degrés à ${a}° pour faire 180° ?`, `Complète : ${a}° et … ° sont supplémentaires.`, `Combien ajouter à ${a}° pour obtenir un angle plat ?`, `Trouve le supplémentaire de ${a}°.`, `Un angle plat contient un angle de ${a}°. Combien mesure l’autre ?`]), 180 - a, `180 − ${a} = ${180 - a}.`, rayonsSansNom([0, a, 180]));
+  return dg(pick([`${a}° + … = 180°. Complète.`, `Il manque combien de degrés à ${a}° pour faire 180° ?`, `Complète : ${a}° et … ° sont supplémentaires.`, `Combien ajouter à ${a}° pour obtenir un angle plat ?`, `Trouve le supplémentaire de ${a}°.`, `Un angle plat contient un angle de ${a}°. Combien mesure l’autre ?`]), 180 - a, `180 − ${a} = ${180 - a}.`, eventail([0, a, 180], { marques: [{ de: 0, vers: 1, texte: `${a}°` }, { de: 1, vers: 2, texte: "?" }] }));
 }
 function genRelDifference(): G {
   const [s, a, b, c] = lettres(4);
@@ -1812,10 +1855,10 @@ function genRelDifference(): G {
 }
 function genRelVoisin(): G {
   const t = mesure5(40, 130, [90]);
-  const fig = rayonsSansNom([10, 10 + t, 190, 190 + t]);
+  const croix = (cherche: Marque) => eventail([10, 10 + t, 190, 190 + t], { croisement: true, marques: [{ de: 0, vers: 1, texte: `${t}°` }, cherche] });
   if (Math.random() < 0.55)
-    return dg(pick([`Deux droites se coupent. Un angle mesure ${t}°. Combien mesure son voisin ?`, `Un angle de ${t}° a un voisin sur la même droite. Trouve ce voisin.`, `Deux droites se croisent. Un angle fait ${t}°. Calcule son voisin.`, `Au croisement, un angle mesure ${t}°. Quelle est la mesure de son voisin ?`]), 180 - t, `Deux angles voisins sur une droite font 180°. 180 − ${t} = ${180 - t}.`, fig);
-  return dg(pick([`Deux droites se coupent. Un angle mesure ${t}°. Combien mesure l’angle opposé ?`, `Deux droites se croisent. Un angle fait ${t}°. Donne l’angle en face.`, `Au croisement, un angle mesure ${t}°. Quelle est la mesure de l’angle opposé ?`]), t, "Deux angles opposés par le sommet ont la même mesure.", fig);
+    return dg(pick([`Deux droites se coupent. Un angle mesure ${t}°. Combien mesure son voisin ?`, `Un angle de ${t}° a un voisin sur la même droite. Trouve ce voisin.`, `Deux droites se croisent. Un angle fait ${t}°. Calcule son voisin.`, `Au croisement, un angle mesure ${t}°. Quelle est la mesure de son voisin ?`]), 180 - t, `Deux angles voisins sur une droite font 180°. 180 − ${t} = ${180 - t}.`, croix({ de: 1, vers: 2, texte: "?" }));
+  return dg(pick([`Deux droites se coupent. Un angle mesure ${t}°. Combien mesure l’angle opposé ?`, `Deux droites se croisent. Un angle fait ${t}°. Donne l’angle en face.`, `Au croisement, un angle mesure ${t}°. Quelle est la mesure de l’angle opposé ?`]), t, "Deux angles opposés par le sommet ont la même mesure.", croix({ de: 2, vers: 3, texte: "?" }));
 }
 function genRelReconnaitre(): G {
   const [s, a, b, c, d] = lettres(5);
@@ -1865,7 +1908,7 @@ function genRelDouble(): G {
     `Deux angles adjacents forment 180°. L’un vaut ${fois} l’autre. Calcule le plus ${mot}.`,
     `Deux droites se coupent. Un angle vaut ${fois} son voisin. Quelle est la mesure du plus ${mot} ?`,
     `Une droite et une demi-droite forment deux angles. L’un vaut ${fois} l’autre. Trouve le plus ${mot}.`,
-  ]), veutPetit ? petit : k * petit, `180° font ${k + 1} parts égales : 180 ÷ ${k + 1} = ${petit}°. Le grand : ${k} × ${petit} = ${k * petit}°.`, rayonsSansNom([0, petit, 180]));
+  ]), veutPetit ? petit : k * petit, `180° font ${k + 1} parts égales : 180 ÷ ${k + 1} = ${petit}°. Le grand : ${k} × ${petit} = ${k * petit}°.`, eventail([0, petit, 180], { marques: [veutPetit ? { de: 0, vers: 1, texte: "?" } : { de: 1, vers: 2, texte: "?" }] }));
 }
 function genRelExtreme(): G {
   const t = 5 * pick([6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 20, 22, 24, 26, 28, 30]);
@@ -1877,7 +1920,7 @@ function genRelExtreme(): G {
     `Deux droites se croisent et un angle fait ${t}°. Écris le plus ${mot} des quatre angles.`,
     `Un des quatre angles d’un croisement mesure ${t}°. Calcule le plus ${mot} des quatre angles.`,
     `Au croisement de deux droites, un angle vaut ${t}°. Trouve le plus ${mot} des quatre angles.`,
-  ]), r, `Les quatre angles valent ${t}° et ${180 - t}°, deux fois chacun. Le plus ${mot} : ${r}°.`, rayonsSansNom([10, 10 + t, 190, 190 + t]));
+  ]), r, `Les quatre angles valent ${t}° et ${180 - t}°, deux fois chacun. Le plus ${mot} : ${r}°.`, eventail([10, 10 + t, 190, 190 + t], { croisement: true, marques: [{ de: 0, vers: 1, texte: `${t}°` }] }));
 }
 function genRelEcart(): G {
   const d = 10 * randomInt(1, 8);
@@ -1891,7 +1934,7 @@ function genRelEcart(): G {
     `Deux droites se coupent. Deux angles voisins diffèrent de ${d}°. Quelle est la mesure du plus ${mot} ?`,
     `Deux angles voisins sur une droite ont ${d}° d’écart. Trouve le plus ${mot}.`,
     `Un angle plat est coupé en deux. L’écart entre les deux parts est de ${d}°. Calcule le plus ${mot}.`,
-  ]), r, `Sans l’écart : 180 − ${d} = ${180 - d}, puis ${180 - d} ÷ 2 = ${petit}°. Le grand : ${petit} + ${d} = ${petit + d}°.`, rayonsSansNom([0, petit, 180]));
+  ]), r, `Sans l’écart : 180 − ${d} = ${180 - d}, puis ${180 - d} ÷ 2 = ${petit}°. Le grand : ${petit} + ${d} = ${petit + d}°.`, eventail([0, petit, 180], { marques: [veutPetit ? { de: 0, vers: 1, texte: "?" } : { de: 1, vers: 2, texte: "?" }] }));
 }
 function genRelTourComplet(): G {
   const [s, a, b, c, d] = lettres(5);
@@ -2883,7 +2926,7 @@ export const anglesBank: TutorBankItemV4[] = [
           expected: [`${r}°`, String(r)],
           comparator: "number_equal",
           explanation: expl(`Le tour complet autour du centre mesure 360°. ${k} parts égales : 360 ÷ ${k} = ${r}°.`),
-          canvas: rayonsSansNom(Array.from({ length: k }, (_, i) => 90 + i * r)),
+          canvas: eventail(Array.from({ length: k }, (_, i) => 90 + i * r), { disque: true, parts: [0, 1], marques: [{ de: 0, vers: 1, texte: "?" }] }),
         };
       }
       if (cas === 1) {
@@ -2900,7 +2943,7 @@ export const anglesBank: TutorBankItemV4[] = [
           expected: [`${r}°`, String(r)],
           comparator: "number_equal",
           explanation: expl(`Un angle ${base} mesure ${total}°. En ${k} angles égaux : ${total} ÷ ${k} = ${r}°.`),
-          canvas: rayonsSansNom(Array.from({ length: k + 1 }, (_, i) => 10 + i * r)),
+          canvas: eventail(Array.from({ length: k + 1 }, (_, i) => 10 + i * r), { bords: total === 90, marques: [...(total === 90 ? [{ de: 0, vers: k, droit: true }] : []), { de: 0, vers: 1, texte: "?", loin: total === 90 }] }),
         };
       }
       const v = pick([90, 90, mesure5(40, 85), mesure5(95, 140)]);

@@ -75,8 +75,14 @@ micros d'entiers, déjà ❌) ; contexte 6e inchangé ; `tsc` sur `lib/` propre 
 ### À surveiller
 - volume_solide et quadrilatere_propriete sont tout juste au-dessus de 60 % :
   les gabarits restants sont des comparaisons de nombres ou du vocabulaire.
-- Angles : les « croisements » et « parts de tarte » sont des demi-droites
-  fléchées (`figureRayons`) sans arc marqué ; lisible, pas idéal.
+- ✅ Angles (fait le même jour) : `eventail()` en `construction` remplace les
+  demi-droites fléchées sans arc. L'angle DONNÉ porte sa mesure en bleu, le
+  cherché un « ? » rouge. Le croisement est fait de deux vraies droites. La
+  tarte est un disque dont les parts prises sont colorées. Le coin droit
+  partagé a ses deux bords épais et son petit carré. 12 endroits, correcteurs
+  127 ✅, squelettes ✅. Restent en flèches les croisements NOMMÉS
+  (`figureRayons` avec lettres : opposés/adjacents, `genDefiCroixSomme`), où
+  les lettres désignent déjà les angles.
 - Objets de volume_unite / volume_lire : pavé sans mesure, surtout décoratif.
 - Le script d'aperçu `scripts/apercu-canvas.mjs` plante sur l'import CSS de
   katex (contourné par un `--import` qui vide les `.css`).
