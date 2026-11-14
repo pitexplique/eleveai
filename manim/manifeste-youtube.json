@@ -87710,6 +87710,462 @@
         "sport",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-aire-triangle-rectangle",
+      "pas_avant": "2027-03-20",
+      "notionId": "aire",
+      "microId": "aire_triangle_rectangle",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.mp4",
+      "miniature": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.png",
+      "titre": "Sandwich coupé en diagonale : quelle aire ? — L'aire du triangle rectangle — épisode 5 · Maths CM2",
+      "accroche": "Baptiste est chef traiteur. Il coupe des sandwichs rectangulaires de 12 cm sur 8 cm en suivant la diagonale : deux triangles rectangles. Quelle est l'aire de chaque triangle ?\n\nDans cette vidéo :\n• le sandwich entier : 12 × 8 = 96 cm²\n• un triangle rectangle, c'est la moitié d'un rectangle : 96 ÷ 2 = 48 cm²\n• la méthode : on multiplie les deux côtés de l'angle droit, puis on divise par 2\n• le piège : pas le grand côté penché, et ne pas oublier le ÷ 2\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une tarte de 30 cm sur 20 cm coupée en 4 parts : l'aire d'une petite part.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_triangle_rectangle&display=simple\n\n📐 Épisode 5 de la série Aire d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "La moitié d'un rectangle ?"
+        ],
+        [
+          "00:06",
+          "Baptiste, chef traiteur"
+        ],
+        [
+          "00:23",
+          "Le sandwich : un rectangle"
+        ],
+        [
+          "00:34",
+          "Deux triangles pareils"
+        ],
+        [
+          "00:47",
+          "La méthode"
+        ],
+        [
+          "01:01",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Le piège : le côté penché, le ÷ 2"
+        ],
+        [
+          "01:54",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "03:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "aire du triangle rectangle",
+        "triangle rectangle",
+        "moitié d'un rectangle",
+        "angle droit",
+        "diviser par 2",
+        "cuisine",
+        "traiteur",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Les deux côtés de l'angle droit d'un triangle rectangle mesurent 6 cm et 4 cm. Quelle est son aire ?",
+          "choix": [
+            "12 cm²",
+            "24 cm²",
+            "10 cm²"
+          ],
+          "reponse": 0,
+          "explication": "6 × 4 = 24 : c'est le rectangle entier. Le triangle en est la moitié : 24 ÷ 2 = 12 cm²."
+        },
+        {
+          "t": "01:54",
+          "question": "Un triangle rectangle a une base de 8 cm et une hauteur de 5 cm. Quelle est son aire ?",
+          "choix": [
+            "40 cm²",
+            "13 cm²",
+            "20 cm²"
+          ],
+          "reponse": 2,
+          "explication": "8 × 5 = 40. Divisé par 2 : 20 cm²."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm2-aire-triangle-rectangle-short",
+      "pas_avant": "2027-03-20",
+      "notionId": "aire",
+      "microId": "aire_triangle_rectangle",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-aire-triangle-rectangle",
+      "fichier": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short.mp4",
+      "miniature": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short-miniature.png",
+      "titre": "Toast en triangle ou en rectangle : qui en a le plus ? #maths #cm2",
+      "accroche": "Ti Margo coupe son toast carré de 10 cm de côté en diagonale : deux triangles. Sa sœur coupe le sien tout droit : deux rectangles. Elle dit : ton triangle est plus petit ! Qui a raison ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un toast de 12 cm sur 10, coupé en diagonale. Quelle est l'aire d'un triangle ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_triangle_rectangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm2",
+      "tags": [
+        "aire du triangle rectangle",
+        "moitié",
+        "toast",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Un toast carré de 10 cm coupé en diagonale : quelle est l'aire d'un triangle ?",
+          "choix": [
+            "100 cm²",
+            "20 cm²",
+            "50 cm²"
+          ],
+          "reponse": 2,
+          "explication": "Le toast : 10 × 10 = 100 cm². Le triangle en est la moitié : 50 cm². Le rectangle de la sœur aussi : pareil !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-aire-defi",
+      "pas_avant": "2027-03-22",
+      "notionId": "aire",
+      "microId": "aire_defi",
+      "classe": "cm2",
+      "ceinture": "bleue",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.mp4",
+      "miniature": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.png",
+      "titre": "48 m² et 6 m de large : combien de long ? — Défi d'aire — épisode 7 · Maths CM2",
+      "accroche": "Romane dessine des skateparks. Une mairie lui donne un terrain rectangulaire de 48 m², et de 6 m de large. Combien mesure-t-il de long ?\n\nDans cette vidéo :\n• retrouver un côté à partir de l'aire : 48 ÷ 6 = 8 m, et on vérifie : 8 × 6 = 48\n• le côté d'un carré de 25 m² : quel nombre, fois lui-même, donne 25 ? 5 m\n• deux pistes de même aire (9 × 4 et 6 × 6 = 36 m²), mais pas le même tour (26 m et 24 m)\n• le piège : même aire ne veut pas dire même périmètre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : peindre 48 m² sauf un carré de 2 m de côté pour un arbre : combien de pots de 10 m² ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_defi&display=simple\n\n📐 Épisode 7 de la série Aire d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Retrouver un côté, comparer"
+        ],
+        [
+          "00:07",
+          "Romane, conceptrice de skateparks"
+        ],
+        [
+          "00:21",
+          "Retrouver la longueur"
+        ],
+        [
+          "00:43",
+          "Le côté d'un carré"
+        ],
+        [
+          "00:56",
+          "Même aire, pas le même tour"
+        ],
+        [
+          "01:18",
+          "Question 1"
+        ],
+        [
+          "01:53",
+          "Le piège"
+        ],
+        [
+          "02:13",
+          "Question 2"
+        ],
+        [
+          "02:48",
+          "À toi de jouer"
+        ],
+        [
+          "03:10",
+          "Correction"
+        ],
+        [
+          "03:26",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "problème d'aire",
+        "retrouver un côté",
+        "aire et périmètre",
+        "division",
+        "skatepark",
+        "défi",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:18",
+          "question": "Un carré a une aire de 36 cm². Combien mesure son côté ?",
+          "choix": [
+            "6 cm",
+            "9 cm",
+            "18 cm"
+          ],
+          "reponse": 0,
+          "explication": "On cherche un nombre qui, fois lui-même, donne 36 : 6 × 6 = 36. Le côté mesure 6 cm."
+        },
+        {
+          "t": "02:13",
+          "question": "Un rectangle a une aire de 56 m² et une largeur de 7 m. Quelle est sa longueur ?",
+          "choix": [
+            "49 m",
+            "8 m",
+            "63 m"
+          ],
+          "reponse": 1,
+          "explication": "56 ÷ 7 = 8. On vérifie : 8 × 7 = 56. La longueur mesure 8 m."
+        }
+      ],
+      "centres": [
+        "sport",
+        "construction"
+      ]
+    },
+    {
+      "id": "cm2-aire-defi-short",
+      "pas_avant": "2027-03-22",
+      "notionId": "aire",
+      "microId": "aire_defi",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-aire-defi",
+      "fichier": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short.mp4",
+      "miniature": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short-miniature.png",
+      "titre": "24 dalles sur 4 m de large : combien de long ? #maths #cm2",
+      "accroche": "Ti Margo a 24 dalles carrées de 1 m de côté pour sa terrasse. Il les pose toutes, en rectangle, sur 4 m de large. 4 dalles par rangée… mais combien de rangées ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 35 dalles de 1 m de côté, posées sur 5 m de large. Combien de mètres de long ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm2",
+      "tags": [
+        "problème d'aire",
+        "division",
+        "dalles",
+        "terrasse",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "24 dalles de 1 m, sur 4 m de large : combien de mètres de long ?",
+          "choix": [
+            "20 m",
+            "12 m",
+            "6 m"
+          ],
+          "reponse": 2,
+          "explication": "24 ÷ 4 = 6 rangées. On vérifie : 6 × 4 = 24. La terrasse fait 6 m de long."
+        }
+      ],
+      "centres": [
+        "construction",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-aire-carre-rectangle",
+      "pas_avant": "2027-03-19",
+      "notionId": "aire",
+      "microId": "aire_carre_rectangle",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.mp4",
+      "miniature": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.png",
+      "titre": "Panneaux solaires : combien de m² ? — L'aire du rectangle et du carré — épisode 4 · Maths CM2",
+      "accroche": "Yasmine installe des panneaux solaires. Avant de commander, elle calcule l'aire du toit (8 m sur 5 m) et l'aire d'un panneau (2 m sur 1,5 m). Comment multiplier avec un nombre à virgule ?\n\nDans cette vidéo :\n• l'aire d'un rectangle : la longueur fois la largeur, 8 × 5 = 40 m²\n• avec une virgule : 2 × 1,5 = 2 × 1 + 2 × 0,5 = 3 m²\n• l'aire d'un carré : le côté fois le côté, 6 × 6 = 36 m²\n• le piège : les deux côtés dans la même unité (50 cm = 0,5 m)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : combien de panneaux de 3 m² sur un toit de 40 m², et quelle aire reste libre ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple\n\n📐 Épisode 4 de la série Aire d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de m² de panneaux solaires ?"
+        ],
+        [
+          "00:08",
+          "Yasmine, installatrice de panneaux solaires"
+        ],
+        [
+          "00:23",
+          "Rectangle : longueur × largeur"
+        ],
+        [
+          "00:39",
+          "Avec un nombre à virgule"
+        ],
+        [
+          "00:53",
+          "Carré : côté × côté"
+        ],
+        [
+          "01:05",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Le piège : la même unité"
+        ],
+        [
+          "02:01",
+          "Question 2"
+        ],
+        [
+          "02:36",
+          "À toi de jouer"
+        ],
+        [
+          "02:53",
+          "Correction"
+        ],
+        [
+          "03:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "aire du rectangle",
+        "aire du carré",
+        "mètre carré",
+        "nombres à virgule",
+        "longueur fois largeur",
+        "panneaux solaires",
+        "énergie solaire",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:05",
+          "question": "Un rectangle mesure 7 m sur 4 m. Quelle est son aire ?",
+          "choix": [
+            "22 m²",
+            "11 m²",
+            "28 m²"
+          ],
+          "reponse": 2,
+          "explication": "La longueur fois la largeur : 7 × 4 = 28 m². 22, c'est le périmètre : le tour, pas la surface."
+        },
+        {
+          "t": "02:01",
+          "question": "Un carré a 9 cm de côté. Quelle est son aire ?",
+          "choix": [
+            "36 cm²",
+            "81 cm²",
+            "18 cm²"
+          ],
+          "reponse": 1,
+          "explication": "Le côté fois le côté : 9 × 9 = 81 cm². 36, c'est le tour du carré."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm2-aire-carre-rectangle-short",
+      "pas_avant": "2027-03-19",
+      "notionId": "aire",
+      "microId": "aire_carre_rectangle",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-aire-carre-rectangle",
+      "fichier": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short.mp4",
+      "miniature": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short-miniature.png",
+      "titre": "Mon mur fait combien de m² ? Je repeins tout en vert ! #maths #cm2",
+      "accroche": "Ti Margo repeint le mur de sa chambre en vert margouillat : 3 m de long, 2,5 m de haut. Un pot couvre 5 m². Combien de mètres carrés à peindre ? Et combien de pots ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un mur de 4 m sur 2,5 m. Quelle est son aire ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #cm2",
+      "tags": [
+        "aire du rectangle",
+        "nombres à virgule",
+        "mètre carré",
+        "peinture",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Quelle est l'aire d'un mur de 3 m sur 2,5 m ?",
+          "choix": [
+            "11 m²",
+            "7,5 m²",
+            "5,5 m²"
+          ],
+          "reponse": 1,
+          "explication": "3 × 2,5 = 3 × 2 + 3 × 0,5 = 6 + 1,5 = 7,5 m²."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "construction"
+      ]
     }
   ]
 }

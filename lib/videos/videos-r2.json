@@ -15911,5 +15911,77 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple"
+ },
+ "cm2-aire-carre-rectangle": {
+  "fichier": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.mp4",
+  "poster": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.png",
+  "vignette": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.vignette.webp",
+  "titre": "Panneaux solaires : combien de m² ? — L'aire du rectangle et du carré — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple"
+ },
+ "cm2-aire-carre-rectangle-short": {
+  "fichier": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short.mp4",
+  "poster": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short-miniature.png",
+  "vignette": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short-miniature.vignette.webp",
+  "titre": "Mon mur fait combien de m² ? Je repeins tout en vert ! #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple"
+ },
+ "cm2-aire-convertir-unites": {
+  "fichier": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.mp4",
+  "poster": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.png",
+  "vignette": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.vignette.webp",
+  "titre": "1 dm² = 100 cm², pas 10 ! — Convertir des aires — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_convertir_unites&display=simple"
+ },
+ "cm2-aire-convertir-unites-short": {
+  "fichier": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short.mp4",
+  "poster": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short-miniature.png",
+  "vignette": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short-miniature.vignette.webp",
+  "titre": "Combien d'autocollants dans 1 dm² ? Ma sœur dit 10… #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_convertir_unites&display=simple"
+ },
+ "cm2-aire-defi": {
+  "fichier": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.mp4",
+  "poster": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.png",
+  "vignette": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.vignette.webp",
+  "titre": "48 m² et 6 m de large : combien de long ? — Défi d'aire — épisode 7 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_defi&display=simple"
+ },
+ "cm2-aire-defi-short": {
+  "fichier": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short.mp4",
+  "poster": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short-miniature.png",
+  "vignette": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short-miniature.vignette.webp",
+  "titre": "24 dalles sur 4 m de large : combien de long ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_defi&display=simple"
+ },
+ "cm2-aire-triangle-rectangle": {
+  "fichier": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.mp4",
+  "poster": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.png",
+  "vignette": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.vignette.webp",
+  "titre": "Sandwich coupé en diagonale : quelle aire ? — L'aire du triangle rectangle — épisode 5 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_triangle_rectangle&display=simple"
+ },
+ "cm2-aire-triangle-rectangle-short": {
+  "fichier": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short.mp4",
+  "poster": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short-miniature.png",
+  "vignette": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short-miniature.vignette.webp",
+  "titre": "Toast en triangle ou en rectangle : qui en a le plus ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_triangle_rectangle&display=simple"
  }
 }
