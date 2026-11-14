@@ -1,0 +1,17 @@
+{
+  "00-garde": "Un défi de longueurs. Qui a raison ?",
+  "01-situation": "Voici Maya. Elle est pâtissière. Autour de chaque gâteau, elle met un ruban. Ses trois apprentis mesurent le même ruban. Léa écrit 12 centimètres. Kevin écrit 120 millimètres. Malia écrit 1 décimètre et 2 centimètres. Qui a raison ?",
+  "02-mm": "On met tout en centimètres. 10 millimètres font 1 centimètre. 120 millimètres, c'est 12 paquets de 10 millimètres : 12 centimètres.",
+  "03-dm": "1 décimètre, c'est 10 centimètres. Plus 2 centimètres : 12 centimètres. Les trois ont raison : c'est la même longueur, écrite de trois façons.",
+  "04-question": "Question ! Laquelle de ces longueurs est égale à 3 décimètres ? A : 3 centimètres. B : 30 centimètres. C : 300 centimètres. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 1 décimètre, c'est 10 centimètres. 3 décimètres, c'est 3 fois 10 : 30 centimètres.",
+  "05-ruban": "Nouveau défi. Maya a un ruban de 1 mètre. Elle coupe trois morceaux de 25 centimètres. Peut-elle en couper un quatrième ?",
+  "05b-calcul": "1 mètre, c'est 100 centimètres. Trois morceaux : 3 fois 25, 75. Il reste 100 moins 75, 25 centimètres : tout juste de quoi couper un quatrième morceau !",
+  "06-piege": "Attention au piège ! 120 millimètres, ce n'est pas 120 centimètres. Le millimètre est tout petit : 120 millimètres, c'est seulement 12 centimètres, à peine plus que la largeur d'une main.",
+  "07-question": "Question ! Maya a 2 mètres de ruban. Chaque gâteau a besoin de 50 centimètres. Pour combien de gâteaux a-t-elle assez de ruban ? A : 2 gâteaux. B : 50 gâteaux. C : 4 gâteaux. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 2 mètres, c'est 200 centimètres. 50, 100, 150, 200 : 4 morceaux de 50 centimètres. Assez pour 4 gâteaux.",
+  "08-defi": "À toi de jouer ! Maya a 1 mètre de ruban. Elle en utilise 40 centimètres pour un gâteau, puis 35 centimètres pour un autre. Lui en reste-t-il assez pour un gâteau qui a besoin de 30 centimètres ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 1 mètre, c'est 100 centimètres. Utilisé : 40 plus 35, 75. Il reste 100 moins 75, 25 centimètres. 25, c'est moins que 30 : ce n'est pas assez ! Il manque 5 centimètres.",
+  "09-finale": "Ce que tu as appris. Une même longueur peut s'écrire de plusieurs façons : 12 centimètres, 120 millimètres, 1 décimètre et 2 centimètres. Dans un défi, on met tout dans la même unité, puis on calcule étape par étape.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

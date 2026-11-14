@@ -1,0 +1,16 @@
+{
+  "00-garde": "Estimer une longueur. Comment trouver sans règle ?",
+  "01-situation": "Voici Élodie. Elle est paysagiste : elle crée des jardins. Elle n'a pas toujours son mètre ruban. Alors elle estime : elle compare à des longueurs qu'elle connaît par cœur.",
+  "02-reperes": "Ses repères : la largeur d'un doigt, environ 1 centimètre. La largeur d'une main, environ 1 décimètre : 10 centimètres. Un grand pas, environ 1 mètre.",
+  "03-pas": "Élodie veut estimer la longueur d'une allée. Elle compte ses grands pas : 6 grands pas. L'allée mesure environ 6 mètres.",
+  "04-porte": "Une porte ? Un peu plus haute qu'un adulte : environ 2 mètres. Un quart d'heure de marche ? Environ 1 kilomètre.",
+  "05-question": "Question ! Une feuille d'arbre est aussi longue qu'une main. Environ combien mesure-t-elle ? A : 1 décimètre. B : 1 mètre. C : 1 kilomètre. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Une main, c'est environ 1 décimètre : 10 centimètres. 1 mètre, ce serait une feuille géante !",
+  "06-piege": "Attention au piège ! Estimer, ce n'est pas deviner au hasard. Hugo dit : mon doigt fait 1 mètre de large. Impossible ! 1 mètre, c'est 100 doigts. Un doigt fait environ 1 centimètre.",
+  "07-question": "Question ! Élodie plante un arbre deux fois plus haut qu'une porte. Environ combien mesure-t-il ? A : 2 mètres. B : 4 mètres. C : 40 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Une porte, environ 2 mètres. Deux fois plus haut : 2 plus 2, 4 mètres.",
+  "08-defi": "À toi de jouer ! Élodie mesure un banc avec ses mains : 10 largeurs de main. Environ combien mesure le banc ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Une main, environ 10 centimètres. 10 mains : 10 fois 10, 100 centimètres. Le banc mesure environ 1 mètre.",
+  "09-finale": "Ce que tu as appris. Pour estimer, on compare à des repères : un doigt, environ 1 centimètre ; une main, environ 1 décimètre ; un grand pas, environ 1 mètre. Puis on vérifie que le nombre est raisonnable.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

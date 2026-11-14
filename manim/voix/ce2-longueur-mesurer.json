@@ -1,0 +1,17 @@
+{
+  "00-garde": "Mesurer et tracer un segment. Où poser sa règle ?",
+  "01-situation": "Voici Clara. Elle est astronome : elle observe les étoiles. Sur sa carte du ciel, elle relie les étoiles par des segments. Pour que sa carte soit juste, elle mesure chaque segment avec sa règle.",
+  "02-zero": "Sur une règle, le 0 n'est pas toujours au bord. On pose le 0 juste sur le début du segment, et la règle bien le long du segment.",
+  "03-lire": "Puis on lit le nombre sous l'autre bout. Ici, 6. Le segment mesure 6 centimètres.",
+  "04-mm": "Entre deux grands traits, il y a 10 petits traits : les millimètres. Ce segment s'arrête 4 petits traits après le 5. Il mesure 5 centimètres et 4 millimètres.",
+  "05-question": "Question ! Pour mesurer un segment, où pose-t-on son début ? A : sur le 0 de la règle. B : sur le bord de la règle. C : sur le 1. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. On pose le début sur le 0. Le bord de la règle ne compte pas : il y a souvent un petit morceau avant le 0.",
+  "06-piege": "Attention au piège ! Léo pose le début du segment sur le 2. La fin tombe sur le 9. Il lit 9 : faux ! Il faut compter de 2 à 9 : 9 moins 2, 7. Le segment mesure 7 centimètres.",
+  "07-tracer": "Pour tracer un segment de 8 centimètres : on marque un point en face du 0, un point en face du 8, puis on relie les deux points en suivant la règle.",
+  "08-question": "Question ! La règle de Clara est décalée : le début est sur le 3, la fin sur le 8. Combien mesure le segment ? A : 8 centimètres. B : 11 centimètres. C : 5 centimètres. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. De 3 à 8 : 8 moins 3, 5. Le segment mesure 5 centimètres.",
+  "09-defi": "À toi de jouer ! Clara mesure un dernier segment. Il commence sur le 0 et s'arrête 3 petits traits après le 4. Combien mesure-t-il ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Jusqu'au 4 : 4 centimètres. Puis 3 petits traits : 3 millimètres. Le segment mesure 4 centimètres et 3 millimètres.",
+  "10-finale": "Ce que tu as appris. On pose le 0 de la règle sur le début du segment, puis on lit sous l'autre bout. Si la règle est décalée, on soustrait. Pour tracer : deux points, puis on les relie.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

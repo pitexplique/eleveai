@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Je mesure ma banane. Le bout tombe sur le 12 : ma banane fait 12 centimètres !",
+  "01-oups": "Oups ! Ma banane commençait sur le 2, pas sur le 0.",
+  "02-question": "Question ! Ma banane va du 2 au 12. Combien mesure-t-elle ? A : 12 centimètres. B : 10 centimètres. C : 14 centimètres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 12 moins 2, 10. Ma banane mesure 10 centimètres.",
+  "03-ouf": "La prochaine fois, je pose le bout sur le 0. Miam !",
+  "04-commentaire": "À toi : un crayon va du 0 au 9 sur la règle. Combien mesure-t-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Choisir la bonne unité de longueur. Centimètres, mètres ou kilomètres ?",
+  "01-situation": "Voici Karim. Il est pilote d'avion. Son avion mesure 40 mètres de long. Il vole 900 kilomètres jusqu'à une autre ville. Et son stylo mesure 14 centimètres. Pourquoi trois unités différentes ?",
+  "02-regle": "On choisit l'unité qui donne un nombre simple à dire. Le stylo en centimètres : 14. En millimètres, ce serait 140 : c'est plus long à dire.",
+  "03-grand": "Le trajet de l'avion en mètres : 900 000 ! Beaucoup trop de chiffres. En kilomètres : 900. Pour les grandes distances, on prend le kilomètre.",
+  "04-repere": "Pour une pièce, une maison, un avion : le mètre. Pour un objet qui tient dans la main : le centimètre. Pour une chose toute fine : le millimètre.",
+  "05-question": "Question ! Avec quelle unité mesure-t-on la longueur d'un couloir de l'aéroport ? A : le millimètre. B : le mètre. C : le kilomètre. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Pour un couloir, le mètre donne un nombre simple. Le kilomètre, c'est pour les routes, et le millimètre pour les choses toutes fines.",
+  "06-piege": "Attention au piège ! Tom écrit : la porte de l'avion mesure 2 centimètres de haut. Le nombre 2 est juste, mais l'unité est fausse : 2 centimètres, c'est la largeur d'un pouce ! La porte mesure 2 mètres.",
+  "07-question": "Question ! Karim lit : le hublot mesure 30. Quelle unité ? A : 30 kilomètres. B : 30 millimètres. C : 30 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Un hublot est à peu près grand comme une feuille de cahier : 30 centimètres. 30 millimètres, ce serait la taille d'un bouton !",
+  "08-defi": "À toi de jouer ! Choisis l'unité : la longueur d'une valise, le trajet entre deux villes, l'épaisseur d'un billet d'avion. Mets pause, et cherche !",
+  "08b-correction": "Correction. La valise : des centimètres, environ 60. Le trajet entre deux villes : des kilomètres. L'épaisseur d'un billet : des millimètres, à peine 1.",
+  "09-finale": "Ce que tu as appris. On choisit l'unité qui donne un nombre simple. Le kilomètre pour les grandes distances, le mètre pour une maison, le centimètre pour un objet, le millimètre pour une chose toute fine.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les unités de longueur. Avec quoi mesure-t-on une planche, ou une route ?",
+  "01-situation": "Voici Samuel. Il est menuisier : il fabrique des tables et des étagères en bois. Avant de couper une planche, il la mesure. Mais avec quelle unité ?",
+  "02-metre": "L'unité de longueur, c'est le mètre. Il s'écrit avec un petit m. La planche de Samuel mesure 2 mètres. Une porte aussi mesure environ 2 mètres.",
+  "03-petites": "Pour les petites longueurs, on partage le mètre. Le décimètre, d m : environ la largeur d'une main. Le centimètre, c m : environ la largeur d'un doigt. Le millimètre, m m : l'épaisseur d'une pièce de monnaie.",
+  "04-kilometre": "Pour les grandes distances, on utilise le kilomètre, k m. Kilo veut dire mille. La scierie où Samuel achète son bois est à 15 kilomètres de son atelier.",
+  "05-question": "Question ! Avec quelle unité mesure-t-on l'épaisseur d'une pièce de monnaie ? A : le mètre. B : le millimètre. C : le kilomètre. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Une pièce est très fine : on la mesure en millimètres. C'est la plus petite des cinq unités.",
+  "06-ranger": "On range les cinq unités, de la plus petite à la plus grande : le millimètre, le centimètre, le décimètre, le mètre, le kilomètre.",
+  "07-piege": "Attention au piège ! Le petit m tout seul, c'est le mètre. Mais m m, c'est le millimètre : une toute petite longueur. Lis bien toutes les lettres !",
+  "08-question": "Question ! Sur une boîte de vis, Samuel lit 30, puis les lettres m m. Que veulent-elles dire ? A : millimètre. B : mètre. C : centimètre. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. m m, c'est le millimètre. Les vis mesurent 30 millimètres. Une vis de 30 mètres, ce serait plus haut qu'une maison !",
+  "09-defi": "À toi de jouer ! Quelle unité pour chacun : la longueur d'une table, le trajet jusqu'à la scierie, la longueur d'un clou ? Le mètre, le kilomètre ou le centimètre ? Mets pause, et cherche !",
+  "09b-correction": "Correction. La table : environ 2 mètres. Le trajet : 15 kilomètres. Le clou : environ 5 centimètres. Une grande longueur, une grande unité. Une petite longueur, une petite unité.",
+  "10-finale": "Ce que tu as appris. Les longueurs se mesurent en kilomètres, en mètres, en décimètres, en centimètres et en millimètres. Le kilomètre est le plus grand, le millimètre le plus petit. Le m veut dire mètre.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
