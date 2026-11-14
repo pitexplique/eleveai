@@ -1,0 +1,193 @@
+# « Science péi » : le journal scientifique de La Réunion écrit par les élèves
+
+Réflexion du 14/11/2026. Rien n'est décidé : ce document sert à trancher.
+
+## L'idée en une phrase
+
+Une fois par mois, des élèves de 6e et de 4e partent d'une question de l'île
+ou de leur passion. Ils mesurent, ils calculent, ils écrivent un article court
+avec son défi QCM. Le prof relit, puis l'article paraît dans le Journal
+d'EleveAI, dans l'édition « Île de La Réunion ».
+
+## 1. Qui écrit
+
+Deux sources, qui se complètent :
+
+- **La classe, en cours.** Une séance de maths (mesure, moyenne, graphique,
+  échelle…) donne la matière d'un article. Toute la classe mesure et calcule.
+  Un petit groupe rédige.
+- **Le club volontaire (6e et 4e).** Quelques élèves motivés, sur la base du
+  volontariat. Ils finissent l'article de la classe, ou proposent le leur à
+  partir d'une passion.
+
+Les rôles :
+
+- **Frédéric = rédacteur en chef.** Il choisit le sujet du mois, il valide,
+  il décide de publier.
+- **Claude = secrétaire de rédaction.** Mise en forme, vérification des
+  chiffres, relecture du QCM (une seule bonne réponse, bonne réponse au
+  hasard A/B/C), recherche de la vidéo qui va avec, et plus tard un short.
+- **Les élèves = journalistes.** Question, mesures, texte, défi.
+
+## 2. Le rythme : 1 article par mois
+
+- Semaine 1 : on choisit la question (en classe ou au club).
+- Semaine 2 : on mesure et on calcule.
+- Semaine 3 : on écrit le texte et le QCM.
+- Semaine 4 : relecture du prof, mise en forme, publication.
+
+Soit environ 8 articles sur l'année scolaire (de novembre à juin). Un
+article paraît à la Une de l'édition Réunion pendant sa semaine de sortie,
+puis il reste dans une rangée « Écrit par des élèves ».
+
+## 3. Le circuit : de l'élève à la publication
+
+1. **L'élève écrit** dans la carte « ✍️ Écrire pour le Journal », en bas de
+   son tableau de bord (les maths restent en haut pour les parents).
+   Il faut être connecté.
+2. **Le prof relit** dans son tableau de bord : « Accepter », « À corriger »
+   (avec un commentaire) ou « Pas retenu ».
+3. **L'élève voit le statut** : « Chez ton prof », « À corriger »,
+   « Accepté pour le Journal ».
+4. **Claude met en forme** l'article accepté : il le relit, vérifie les
+   nombres, ajoute « Les maths derrière » et la vidéo.
+5. **Frédéric valide la version finale.** Puis l'article paraît, au moment
+   du rituel de la semaine du Journal.
+
+Pour un article écrit en classe sur papier : Frédéric prend une photo du
+texte (sans visage) ou le recopie, et on entre directement à l'étape 4.
+
+### Ce qui existe déjà (codé le 14/11 par une autre session, pas encore commité)
+
+- La carte « ✍️ Écrire pour le Journal » : `app/dashboard-eleve/CarteEcrireJournal.tsx`
+  (choix de la passion ou « Autre chose », question, ce que j'ai mesuré, défi QCM).
+- L'API `app/api/journal-propositions/route.ts`.
+- La relecture côté prof : `app/dashboard-prof/ArticlesARelire.tsx`.
+- La table `supabase/journal_propositions.sql` (à exécuter une fois dans Supabase).
+
+Ce qui manque : la publication. Aujourd'hui, un article accepté ne va pas
+encore tout seul dans le Journal. Voir la partie 8.
+
+## 4. Le format d'un article
+
+Le même modèle que tous les articles du Journal : **Regarder, Lire, Écouter,
+le défi QCM.** Avec, en plus, la trace du travail des élèves.
+
+| Bloc | Ce qu'on y met | Qui |
+|---|---|---|
+| La question | Une question de l'île ou d'une passion. Ex. : « Combien de temps met un cyclone pour traverser l'île ? » | élèves |
+| Les mesures | Ce qu'on a mesuré, compté ou trouvé, avec des nombres et l'unité. | élèves |
+| Les maths utilisées | 1 ou 2 notions du programme : moyenne, proportion, vitesse, échelle, graphique, pourcentage, relatifs… | élèves + prof |
+| Le texte | 5 à 8 phrases courtes. Facile à lire, facile à écouter. | élèves, relu par Claude |
+| Le défi QCM | 1 question, 3 choix, une seule bonne réponse. | élèves, vérifié par Claude |
+| La vidéo | Une vidéo EleveAI de la notion de maths (paysage + short). Plus tard, peut-être un short dessin animé de l'article. | Claude |
+| La signature | « Par Léa et Noah, 6e B » : prénoms + classe. | — |
+
+Le lien avec le coach reste : « S'entraîner avec le coach » sur la notion
+de maths de l'article.
+
+## 5. Huit idées d'articles
+
+Chacune part d'une passion ou de l'île, et utilise des maths de 6e ou de 4e.
+
+1. **Lutte : « Qui est le plus lourd de la catégorie ? »** On regarde les
+   catégories de poids d'un club. Écarts, moyenne, comparer des décimaux (6e).
+2. **Vélo : « Monter au Maïdo, c'est quelle pente ? »** Dénivelé et
+   distance, la pente en pourcentage, la vitesse moyenne (4e : proportion,
+   vitesse).
+3. **Danse : « Combien de pas dans une chorégraphie de maloya ? »** On compte
+   les temps et les pas, on fait des rythmes et des multiples (6e : multiples,
+   proportion).
+4. **Foot : « Tirer au but : qui marque le plus souvent ? »** 10 tirs par
+   élève dans la cour, fréquences en pourcentage, diagramme (6e et 4e :
+   statistiques, pourcentages).
+5. **Cuisine : « Le cari pour 30 élèves »** On part d'une recette pour 4 et on
+   l'adapte pour la classe. Tableau de proportionnalité (6e).
+6. **Volcan : « La Fournaise : combien de mètres par heure pour la lave ? »**
+   Données publiques de l'observatoire, vitesse, ordres de grandeur
+   (4e : puissances de 10, vitesse).
+7. **Cyclones : « Combien de pluie tombe en un jour ? »** Relevés de pluie
+   (pluviomètre fait en classe ou données publiques), graphique, record,
+   moyenne (6e et 4e).
+8. **Tortues et récifs : « Combien de tortues viennent pondre ? »** Comptages
+   publics de Kélonia, évolution sur 10 ans, pourcentages d'augmentation ou de
+   baisse (4e).
+
+Autres pistes pour plus tard : la canne (tonnes de canne → kilos de sucre),
+la température qui baisse quand on monte (relatifs, 4e), la taille des
+vagues à la plage.
+
+Les données publiques (Météo-France, observatoire du volcan, Kélonia) sont
+toujours citées en source, comme dans les autres articles.
+
+## 6. Protéger les élèves (des mineurs)
+
+Règles non négociables :
+
+- **Prénom et classe seulement.** Jamais de nom de famille, jamais le nom du
+  collège (à trancher, voir les questions).
+- **Pas de photo de visage.** Photos permises : les mains, les objets, les
+  mesures, le paysage, le tableau.
+- **Rien n'est publié sans la validation du prof.** Deux validations :
+  l'idée (dans le tableau de bord), puis la version finale mise en forme.
+- **Pas de commentaires publics** sous les articles.
+- **Pas de données personnelles dans les mesures** (pas de poids ni de taille
+  d'un élève nommé ; on donne des moyennes de groupe).
+- **Accord des familles** : une autorisation simple pour la publication du
+  prénom (à voir avec le collège ; souvent déjà prévu dans le droit à l'image).
+- Un élève peut demander à **retirer** son article à tout moment.
+
+## 7. Pourquoi c'est utile
+
+**Pour les élèves**
+
+- Ils voient que les maths servent à comprendre leur île et leur passion.
+- Ils écrivent pour de vrai : quelqu'un va les lire. Ça motive.
+- Écrire un QCM oblige à bien comprendre (il faut trouver la bonne réponse
+  et deux erreurs crédibles).
+- Ceux qui lisent mal participent aussi : mesurer, compter, filmer les mains,
+  choisir les réponses du QCM.
+- Fierté : « mon article est sur le site ».
+
+**Pour le site**
+
+- Du contenu vrai, local, que personne d'autre n'a.
+- Une raison pour les élèves de se connecter (et donc d'être visibles dans le
+  suivi).
+- Une belle histoire à raconter : à Ulule, aux parents, aux autres profs, sur
+  les réseaux.
+- Un modèle qu'un autre prof peut copier dans sa classe, n'importe où.
+- ⚠️ Cela reste dans l'édition « Île de La Réunion », que l'élève choisit.
+  L'édition « Le monde » garde la règle des 4 % de contextes réunionnais.
+
+## 8. Ce qu'il faudrait coder plus tard
+
+| Chantier | Ce que c'est | Effort |
+|---|---|---|
+| Exécuter le SQL | `supabase/journal_propositions.sql` dans Supabase | 5 min (Frédéric) |
+| Publier un article accepté | Un bouton « Publier » chez le prof, ou Claude qui ajoute l'article à la main dans `lib/accueil/articles.ts` au rituel de la semaine | à la main : 0 code ; bouton : ½ journée |
+| Champ « auteurs » | Afficher « Par Léa et Noah, 6e B » sous le titre | 1 h |
+| Rangée « Écrit par des élèves » | Une rangée dans l'édition Réunion du Journal + un badge sur la carte | 2 h |
+| Ajouter une photo | Photo d'objets ou de mesures (pas de visage), relue par le prof | ½ journée |
+| Travail de groupe | Plusieurs auteurs pour un article | 2 h |
+| Short dessin animé | Un short Ti Margo par article, à la main | ~½ journée par short |
+| Page « Science péi » | Une page qui liste tous les articles des élèves | ½ journée |
+
+**Conseil pour commencer :** pas de nouveau code. Le premier article se
+publie à la main (Claude l'ajoute au Journal pendant le rituel de la
+semaine). On code le bouton « Publier » seulement si ça marche avec les
+élèves.
+
+## 9. Questions à trancher par Frédéric
+
+1. Le premier article : en classe (6e ou 4e ?) ou au club ? Et quand ?
+2. Le club : quel moment (midi, après les cours, mercredi) ? Combien d'élèves ?
+3. Le nom : « Science péi », ou un autre nom choisi par les élèves ?
+4. La signature : prénom + classe, ou ajouter le collège / la ville ?
+5. L'autorisation des familles : passe-t-elle par le collège (droit à
+   l'image déjà signé) ou faut-il un petit mot ?
+6. La publication : à la main par Claude (conseillé au début) ou un bouton
+   « Publier » chez le prof ?
+7. Ouvrir plus tard à d'autres profs et d'autres collèges ?
+8. Une vidéo par article : seulement la vidéo de la notion, ou aussi un short
+   dessin animé fait à partir de l'article ?
