@@ -15,6 +15,7 @@
 // ⛔ `prefers-reduced-motion` : aucune animation (CSS), et le client ne retarde
 // pas la question suivante (`mouvementReduit()`).
 // ⛔ Ne touche à aucun gabarit : on enveloppe le canvas, on ne le modifie pas.
+// ⭐ Chaque réaction se règle ou se retire avec son drapeau dans `REACTIONS`.
 
 import type { ReactNode } from "react";
 import type { CanvasFigure } from "@/lib/tutor-v4/types";
@@ -23,6 +24,24 @@ export type TypeReaction = "juste" | "faux";
 
 /** La durée pendant laquelle le client laisse le dessin réagir avant la suite. */
 export const DUREE_REACTION_MS = 750;
+
+/* ⭐ LES RÉGLAGES — Frédéric « verra si ça lui plaît ». Pour retirer une
+   réaction, passer son drapeau à `false` : plus d'animation ET plus d'attente
+   de 0,75 s pour ce cas. Tout à `false` = le coach d'avant. */
+export const REACTIONS = {
+  /** CP → CM2 : les animaux de la question sautent l'un après l'autre. */
+  animaux: true,
+  /** CP → CM2 : objets, monnaie, base dix… font un rebond avec un éclat doré. */
+  objets: true,
+  /** CP → CM2 : figures et graphiques s'entourent d'un anneau vert, le tracé luit. */
+  figures: true,
+  /** 6e et au-delà : contour vert, lueur et jauge qui se remplit. */
+  sobre: true,
+  /** 6e et au-delà : Ti Margo passe la tête (image seule). Suit `sobre`. */
+  tiMargo: true,
+  /** Mauvaise réponse : le dessin penche la tête ou tremble doucement. */
+  faux: true,
+} as const;
 
 const ANIMAUX = new Set(["animaux", "personnage"]);
 const OBJETS = new Set([
@@ -46,6 +65,22 @@ function familleDu(canvas: CanvasFigure | null | undefined): Famille {
   return "figure";
 }
 
+/** Vrai si une réaction est prévue pour ce dessin, cette classe et cette réponse
+ *  (d'après `REACTIONS`). Le client n'attend que dans ce cas. */
+export function reactionPrevue(
+  canvas: CanvasFigure | null | undefined,
+  classe: string,
+  type: TypeReaction
+): boolean {
+  if (!canvas) return false;
+  if (type === "faux") return REACTIONS.faux;
+  if (!PRIMAIRE.has(String(classe))) return REACTIONS.sobre;
+  const famille = familleDu(canvas);
+  if (famille === "animal") return REACTIONS.animaux;
+  if (famille === "objet") return REACTIONS.objets;
+  return REACTIONS.figures;
+}
+
 /** Vrai si l'élève a demandé moins d'animations à son système. */
 export function mouvementReduit(): boolean {
   if (typeof window === "undefined" || !window.matchMedia) return true;
@@ -55,7 +90,7 @@ export function mouvementReduit(): boolean {
 export default function ReactionDessin({
   canvas,
   classe,
-  reaction,
+  reaction: reactionDemandee,
   children,
 }: {
   canvas: CanvasFigure | null | undefined;
@@ -66,6 +101,10 @@ export default function ReactionDessin({
 }) {
   const sobre = !PRIMAIRE.has(String(classe));
   const famille = familleDu(canvas);
+  const reaction =
+    reactionDemandee && reactionPrevue(canvas, classe, reactionDemandee)
+      ? reactionDemandee
+      : null;
   const classes = [
     "rd-dessin",
     `rd-${famille}`,
@@ -82,13 +121,15 @@ export default function ReactionDessin({
       {reaction === "juste" && sobre ? (
         <>
           <span className="rd-jauge" aria-hidden="true" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/cahier-vacances/ti-margo.png"
-            alt=""
-            aria-hidden="true"
-            className="rd-margo"
-          />
+          {REACTIONS.tiMargo ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src="/cahier-vacances/ti-margo.png"
+              alt=""
+              aria-hidden="true"
+              className="rd-margo"
+            />
+          ) : null}
         </>
       ) : null}
       {reaction === "juste" && !sobre && famille === "objet" ? (

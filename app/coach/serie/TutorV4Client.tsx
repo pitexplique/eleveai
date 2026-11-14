@@ -102,6 +102,7 @@ import TutorSimpleView from "./TutorSimpleView";
 import ReactionDessin, {
   DUREE_REACTION_MS,
   mouvementReduit,
+  reactionPrevue,
   type TypeReaction,
 } from "./ReactionDessin";
 import PaveNumerique from "./PaveNumerique";
@@ -1705,10 +1706,14 @@ function continueAfterExplanation() {
          d'ouvrir le corrigé, qui remplace la question en vue simple), le dessin
          de la question réagit ~0,7 s. Sans dessin, ou si l'élève a demandé
          moins d'animations, rien ne change et rien n'attend. */
-      if (currentQuestion.canvas && !mouvementReduit()) {
+      const typeReaction: TypeReaction = typed.result.ok ? "juste" : "faux";
+      if (
+        reactionPrevue(currentQuestion.canvas, classe, typeReaction) &&
+        !mouvementReduit()
+      ) {
         setReactionDessin({
           questionId: currentQuestion.id,
-          type: typed.result.ok ? "juste" : "faux",
+          type: typeReaction,
         });
         await new Promise((r) => setTimeout(r, DUREE_REACTION_MS));
         // Éteinte tout de suite : une question revue plus tard ne doit pas
