@@ -111,7 +111,8 @@ Outils dans le dossier de notes `side-session-notes/local_a8230a7d-e97a-494c-9c7
 - « 2 fois 100 » se dit d'un trait : un seul morceau « 2 × 100 » avec un délai de 0,3 s (sinon AVANCE sur 100) ; « ou 2 × » à part, `hors_audit`.
 - `au_mot("a b")` se déclenche à la marque du DERNIER mot ; une suite de `play` trop longue donne un RETARD sur le `au_mot` suivant : raccourcir les run_time.
 - Choix de question trop long : `"ligne 1" + chr(10) + "ligne 2"` ; phrase de réponse de 4 lignes au plus (sinon texte minuscule).
-- Lancer les dry runs avec `PYTHONIOENCODING=utf-8` et filtrer `tr '' '
+- Lancer les dry runs avec `PYTHONIOENCODING=utf-8` et filtrer `tr '
+' '
 ' | grep -a -E "AUDIT|BORD|RETARD|Error|Traceback"`.
 
 ### Reste (dans l'ordre)
@@ -121,3 +122,32 @@ Outils dans le dossier de notes `side-session-notes/local_a8230a7d-e97a-494c-9c7
 4. Miniatures paysage (copier `manim/miniature_perimetre_ce2.py` → contenance, ceinture par épisode), passe manifeste (copier `manim/passe_perimetre_ce2.py`) : dates 15, 17, 19, 21, 23/01/2027 À VÉRIFIER libres ; centres 01 cuisine, 02 sciences, 03 sport, 04 nature-ecologie, 05 transports ; fiches YouTube, R2 (rclone direct), `generer-videos-r2.mjs` (ne garder que les clés `ce2-contenance-*`), coach (`brancher-videos-coach.mjs --classe ce2 --notion contenance --tout`).
 5. `aussi` : relier les vidéos CE2 au CM1 si pertinent (ex. 02 relations → `contenance_convertir` CM1 ; 03 comparer → `contenance_comparer` CM1).
 6. Plan coché, mémoire `serie-contenance-ce2.md`, commit PAR CHEMIN, pas de push.
+
+## Session 8 (14/11 matin) : paysages 02-05 de la CONTENANCE CE2
+✅ 02 relations : HD fini (3 min 08), bords 0, planche HD relue.
+✅ 03 comparer : `contenance_comparer.py` (`ContenanceComparerCE2`, Théo, orange) : dry run propre, aperçu -ql relu (saladier = `bol()` du script, ouvert vers le haut ; le `saladier()` du commun est à l'envers, ne pas s'en servir), HD FINI `03-comparer/`, bords 0, planche HD relue. Q1 A, Q2 B.
+✅ 04 problème : `contenance_probleme.py` (Mélissa, orange) : dry run propre, aperçu -ql relu ; HD lancé sous verrou (journal `hd-04.log` dans le dossier de notes `side-session-notes/local_460eb91c-…/`). Q1 A, Q2 C.
+⏳ 05 défi : `contenance_defi.py` (Yanis, bleue) : dry run propre ; aperçu -ql et HD à faire (`media-cont-05`, sortie `05-defi/`). Q1 B, Q2 A.
+✅ `aux_extraits` remonté dans le commun (`PaysageContenanceCE2`).
+✅ Série des shorts : `prototypes/ti-margo/films/ce2-contenance.json` + `ce2-contenance-cues.js` (les 5 épisodes). Films à écrire.
+Commit `7cd4d839`. Rien poussé.
+
+⛔ Leçons de synchro (en plus de la session 7) :
+- `au_mot(extrait)` (base `MotsCalesH2`) se cale sur la marque du PREMIER mot de l'extrait : pour montrer un nombre à l'instant où il est dit, l'extrait COMMENCE par ce nombre (« 500 moins », « 160, 340 », « 8 pichets »).
+- Un texte sans nombre peut quand même attendre un mot plus loin dans la voix (« Elle fait pousser… » attendait le 2e « Elle » : 3,5 s de RETARD) → `hors_audit(...)`.
+- Phrase de réponse : la dernière ligne qui redit un nombre (« Il reste 40 cL ») → `sans_audit=(i,)`.
+
+## Session 8 bis (14/11 midi) : shorts faits, passe prête
+✅ 5 shorts Ti Margo écrits et contrôlés (`films/ce2-contenance-<ep>.js`, commun `ce2-contenance.js` avec `deuxAuPlus()` : WinRT triple parfois un jeton, « 200 moins »). Commit `7fe214be`. Films + miniatures 01, 02, 03, 04 rendus (04 relu, propre) ; film 05 en cours de rendu à la relève (journal `$TEMP/film-defi.log`).
+✅ `manim/miniature_contenance_ce2.py` (miniatures paysage 01-03 faites) et `manim/passe_contenance_ce2.py` (temps / voir / manifeste ; dates 15, 17, 19, 21, 23/01/2027 ; `AUSSI_CM1` : 02 → cm1 `contenance_convertir`, 03 → cm1 `contenance_comparer`, sur la paysage ET le short). `temps.json` mesuré pour 01-03 + shorts 01-03.
+⏳ À la relève : HD 04 en cours sous verrou (journal `hd-04.log` dans les notes `local_460eb91c-…`), puis l'aperçu -ql de 05 part tout seul dans `$TEMP/ql05`.
+R2 : `bash <scratchpad>/r2.sh ce2/maths/contenance` n'existe que dans l'ancienne session ; refaire : variables `RCLONE_CONFIG_R2_*` (TYPE=s3, PROVIDER=Cloudflare, ACCESS_KEY_ID / SECRET_ACCESS_KEY / ENDPOINT = `R2_*` de `.env.local`, NO_CHECK_BUCKET=true) puis `rclone copy manim/sorties/ce2/maths/contenance r2:eleveai-videos/ce2/maths/contenance --filter "+ *.mp4" --filter "+ *.png" --filter "+ *.webp" --filter "- *"` (`r2-videos.ps1` plante sous PowerShell 5.1).
+
+### Reste (dans l'ordre)
+1. 04 : attendre « fini » dans hd-04.log ; `python scripts/verifier-bords-video.py <mp4>` = 0 ; planche (`python <notes chef>/images.py <mp4> <png> t1 t2…`).
+2. 05 : relire l'aperçu -ql (`$TEMP/ql05`), HD sous verrou (`bash <notes chef>/hd.sh contenance_defi.py ContenanceDefiCE2 eleveai-maths-ce2-contenance-defi manim/scripts/ce2/media-cont-05 manim/sorties/ce2/maths/contenance/05-defi`), bords, planche.
+3. Film 05 : vérifier `05-defi/…-defi-short.mp4` + miniature, planche, supprimer `_muet.mp4`.
+4. `python manim/miniature_contenance_ce2.py` (04, 05) ; `python manim/passe_contenance_ce2.py temps` puis `voir` puis `manifeste` (n'ajoute que nos entrées) ; `python scripts/fiches-youtube.py ce2-contenance-` ; vignettes `scripts/vignettes-videos.py`.
+5. R2 (ci-dessus), `node scripts/generer-videos-r2.mjs` → ne committer que les clés `ce2-contenance-*` de `lib/videos/videos-r2.json` (le fichier a des modifs d'autres sessions : `git add -p` ou patch filtré).
+6. Coach : `node scripts/brancher-videos-coach.mjs --classe ce2 --notion contenance --tout` puis `--ecrire` ; vérifier les alias cm1.
+7. Cocher les 5 lignes CE2 contenance de `manim/PLAN-perimetre-aire-volume.md`, mémoire `serie-contenance-ce2.md`, commit PAR CHEMIN, pas de push.
