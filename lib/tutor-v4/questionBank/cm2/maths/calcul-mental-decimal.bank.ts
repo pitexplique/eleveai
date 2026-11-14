@@ -259,14 +259,19 @@ const ASTUCE5 = ["", "Astuce : × 10, puis la moitié.", "De tête.", "Sans pose
 const ASTUCE50 = ["", "Astuce : × 100, puis la moitié.", "De tête.", "Sans poser.", "Calcul mental.", "Pense à la moitié de × 100."];
 const decimal50 = () => net(entre(1, 40) + un([0.2, 0.4, 0.5, 0.6, 0.8, 0.1, 0.3]));
 const petit50 = () => net(entre(1, 6) + un([0.2, 0.4, 0.5, 0.6, 0.8, 0.1, 0.3]));
+// ⭐ 14/11/2026 — le dessin de l'astuce : × 5 = cinq fois le nombre ; × 50 = la moitié de × 100.
+const barreM = (x: string, k: number): CanvasFigure =>
+  k === 5
+    ? { kind: "schema_barre", total: "?", parts: Array.from({ length: 5 }, () => ({ label: "", value: x })), display: { showTotal: true, showPartLabels: false, showValues: true } }
+    : barre(`${x} × 100`, "?", "?");
 const calculMultiplier50: TutorBankItemV4[] = [
   m5(1, "Multiplie par 10, puis prends la moitié.", () => {
     const x = entre(6, 80);
-    return qcmN(x * 5, fauxM(x, 5), expM5(x), v(ASTUCE5, MUL(`${x} × 5`)));
+    return qcmN(x * 5, fauxM(x, 5), expM5(x), v(ASTUCE5, MUL(`${x} × 5`)), barreM(fr(x), 5));
   }),
   m5(1, "Multiplie par 100, puis prends la moitié.", () => {
     const x = entre(3, 40);
-    return qcmN(x * 50, fauxM(x, 50), expM50(x), v(ASTUCE50, MUL(`${x} × 50`)));
+    return qcmN(x * 50, fauxM(x, 50), expM50(x), v(ASTUCE50, MUL(`${x} × 50`)), barreM(fr(x), 50));
   }),
   m5(1, "× 5, c'est la moitié de × 10 ; × 50, la moitié de × 100.", () => {
     const k = un([5, 50]);
@@ -276,11 +281,11 @@ const calculMultiplier50: TutorBankItemV4[] = [
   }),
   m5(2, "Multiplie le décimal par 100, puis prends la moitié.", () => {
     const x = decimal50();
-    return qcmN(x * 50, fauxM(x, 50), expM50(x), v(ASTUCE50, MUL(`${fr(x)} × 50`)));
+    return qcmN(x * 50, fauxM(x, 50), expM50(x), v(ASTUCE50, MUL(`${fr(x)} × 50`)), barreM(fr(x), 50));
   }),
   m5(2, "Multiplie le décimal par 10, puis prends la moitié.", () => {
     const x = decimal50();
-    return qcmN(x * 5, fauxM(x, 5), expM5(x), v(ASTUCE5, MUL(`${fr(x)} × 5`)));
+    return qcmN(x * 5, fauxM(x, 5), expM5(x), v(ASTUCE5, MUL(`${fr(x)} × 5`)), barreM(fr(x), 5));
   }),
   m5(2, "Cherche l'étape qui manque.", () => {
     const x = decimal50();
@@ -288,17 +293,33 @@ const calculMultiplier50: TutorBankItemV4[] = [
   }),
   m5(3, "Multiplie le prix par 50 : × 100, puis la moitié.", () => {
     const x = petit50();
-    const O = un(["stylos", "cahiers", "tickets", "ballons", "repas", "bouteilles", "livres", "sachets de graines", "goûters", "cartes postales"]);
-    const P = un(["Une école achète", "Un club commande", "Une association offre", "Un magasin vend", "Un centre de loisirs prend", "Une mairie paie"]);
-    return qcmN(x * 50, fauxM(x, 50), expM50(x), `${P} 50 ${O} à ${eur(x)} € l'unité. ${v(["Quel est le prix total ?", "Combien cela coûte-t-il en tout ?", "Quelle est la somme totale ?"])}`, undefined, "€");
+    const O = un(["stylos", "cahiers", "tickets", "ballons", "repas", "bouteilles", "livres", "sachets de graines", "goûters", "cartes postales", "gourdes", "classeurs", "billets de bus", "plants de tomates", "pots de miel", "badges", "gommes", "places de piscine"]);
+    const P = un(["Une école achète", "Un club commande", "Une association offre", "Un magasin vend", "Un centre de loisirs prend", "Une mairie paie", "Une bibliothécaire commande", "Un entraîneur achète", "Une directrice d'école commande", "Un collège réserve", "Une cantine achète", "Un comité des fêtes offre", "Une infirmière scolaire commande", "Un jardinier achète"]);
+    const U = un(["l'unité", "pièce"]);
+    return qcmN(x * 50, fauxM(x, 50), expM50(x), v(["", "De tête.", "Sans poser.", "Calcul mental."], [`${P} 50 ${O} à ${eur(x)} € ${U}.`], ["Quel est le prix total ?", "Combien cela coûte-t-il en tout ?", "Quelle est la somme totale ?", "Combien faut-il payer ?", "Quel est le montant de la facture ?", "Combien cela fait-il au total ?"]), barreM(`${eur(x)} €`, 50), "€");
   }),
   m5(3, "Multiplie la mesure par 5 ou par 50.", () => {
     const k = un([5, 50]);
     const x = petit50();
+    const MASSE = ["Quelle est la masse totale ?", "Combien cela pèse-t-il en tout ?", "Quelle masse cela fait-il ?"];
+    const LONG = ["Quelle est la longueur totale ?", "Quelle longueur cela fait-il ?", "Combien cela mesure-t-il en tout ?"];
+    const VOL = ["Quelle est la contenance totale ?", "Combien de litres en tout ?", "Quel volume cela fait-il ?"];
+    const DIST = ["Quelle est la distance totale ?", "Combien de kilomètres en tout ?", "Quelle distance cela fait-il ?"];
     const C = un([
-      { t: "sacs de", o: "kg", q: "Quelle est la masse totale ?", m: "pèse" }, { t: "planches de", o: "m", q: "Quelle est la longueur totale ?", m: "mesure" }, { t: "bouteilles de", o: "L", q: "Quelle est la contenance totale ?", m: "contient" }, { t: "morceaux de ruban de", o: "m", q: "Quelle est la longueur totale ?", m: "mesure" }, { t: "colis de", o: "kg", q: "Quelle est la masse totale ?", m: "pèse" }, { t: "bidons de", o: "L", q: "Quelle est la contenance totale ?", m: "contient" }, { t: "étapes de", o: "km", q: "Quelle est la distance totale ?", m: "mesure" }, { t: "tours de piste de", o: "km", q: "Quelle est la distance totale ?", m: "mesure" },
+      { t: "sacs de", o: "kg", q: MASSE, s: ["On compte", "Un camion livre", "Une épicerie reçoit", "Un fermier remplit"] },
+      { t: "planches de", o: "m", q: LONG, s: ["On compte", "Un menuisier scie", "On met bout à bout", "Une scierie livre"] },
+      { t: "bouteilles de", o: "L", q: VOL, s: ["On compte", "Un magasin reçoit", "Une cantine utilise", "On remplit"] },
+      { t: "morceaux de ruban de", o: "m", q: LONG, s: ["Une couturière coupe", "On colle bout à bout", "Une fleuriste utilise"] },
+      { t: "colis de", o: "kg", q: MASSE, s: ["Un livreur transporte", "La poste reçoit", "Un avion cargo emporte"] },
+      { t: "bidons de", o: "L", q: VOL, s: ["Un garage stocke", "Une agricultrice remplit", "On range"] },
+      { t: "étapes de", o: "km", q: DIST, s: ["Un cycliste enchaîne", "Une course comporte", "Une randonneuse parcourt"] },
+      { t: "tours de piste de", o: "km", q: DIST, s: ["Une athlète court", "Un cycliste fait", "Une équipe de relais court"] },
+      { t: "seaux de", o: "L", q: VOL, s: ["Un jardinier verse", "Une peintre utilise", "On vide"] },
+      { t: "barquettes de", o: "kg", q: MASSE, s: ["Un maraîcher prépare", "Une primeuse vend", "On pèse"] },
+      { t: "rouleaux de câble de", o: "m", q: LONG, s: ["Une électricienne pose", "Un magasin vend", "On déroule"] },
+      { t: "sorties en kayak de", o: "km", q: DIST, s: ["Une kayakiste enchaîne", "Un moniteur de kayak fait", "Le club de canoë compte"] },
     ]);
-    return qcmN(x * k, fauxM(x, k), k === 5 ? expM5(x) : expM50(x), `On compte ${k} ${C.t} ${fr(x)} ${C.o}. ${C.q}`, undefined, C.o);
+    return qcmN(x * k, fauxM(x, k), k === 5 ? expM5(x) : expM50(x), v(["", "De tête.", "Sans poser.", "Calcul mental."], [`${un(C.s)} ${k} ${C.t} ${fr(x)} ${C.o}.`], C.q), barreM(`${fr(x)} ${C.o}`, k), C.o);
   }),
 ];
 
