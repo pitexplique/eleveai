@@ -1,0 +1,7 @@
+{
+  "voix": "ce2-solides-{ep}-short",
+  "sons": "public/sons/ce2-solides-{ep}-short",
+  "sortie": "manim/sorties/ce2/maths/solides/{num}-{ep}",
+  "nom": "eleveai-maths-ce2-solides-{ep}-short",
+  "episodes": { "reconnaitre": "01", "decrire": "02", "pyramide": "03", "patron": "04", "defi": "05" }
+}
