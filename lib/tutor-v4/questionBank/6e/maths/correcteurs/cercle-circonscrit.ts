@@ -48,6 +48,7 @@ function triangle(t: string) {
 function canvasTriangle(q: Q, s: string[], o: string, longueur?: string): string[] {
   const c = q.canvas as any;
   if (!c) return [];
+  if (c.kind === "construction") return constructionRelue(q, { s, o });
   if (c.kind !== "cercle") return [`canvas inattendu : ${c.kind}`];
   const p: string[] = [];
   const pt = (l: string) => (c.points ?? []).find((x: any) => x.label === l);
@@ -236,9 +237,112 @@ function lireFig(q: Q) {
 const centreFig = (q: Q) => lireFig(q)?.centre[0]?.label ?? "?";
 /** La longueur écrite sur la figure, lue sur le dessin : « 7 cm » → 7. */
 const rayonFig = (q: Q) => Number(String(lireFig(q)?.longueur?.label ?? "").match(/^(\d+) cm$/)?.[1] ?? NaN);
+/* ⭐ 14/11/2026 — LE CANVAS `construction` (figures tracées : triangle, médiatrices
+   codées, rayons, cercle), RELU et non simplement accepté. On vérifie :
+   1. chaque segment, droite, cercle, arc, angle s'appuie sur des points existants ;
+   2. un angle codé droit est droit au dessin (à 1° près) ;
+   3. des segments de même code ont la même longueur (à 2 % près) — avec 2, les
+      médiatrices codées sont perpendiculaires et passent par le milieu ;
+   4. une médiatrice tracée (une droite ou un segment qui porte l'angle droit au
+      milieu d'un côté codé) est équidistante des extrémités du côté ;
+   5. les lettres affichées sont celles de l'énoncé ou de ses propositions ;
+   6. les longueurs de l'énoncé entre deux points dessinés sont à la même échelle ;
+   7. le centre nommé par l'énoncé est à égale distance des trois sommets dessinés,
+      et un cercle de centre O passe par les trois sommets (sauf question « hors du cercle ») ;
+   8. la figure n'écrit pas la réponse attendue, ni de longueur qui n'est pas dans l'énoncé
+      (seul « ? » marque la longueur cherchée). */
+type PtC = { id: string; x: number; y: number; nom?: string; cache?: boolean };
+const LETTRES_TEXTE = (t: string) => new Set([...t.matchAll(/(?<![\p{L}’])([A-Z]{1,3})(?![\p{L}’])/gu)].flatMap((m) => [...m[1]]));
+export function constructionRelue(q: Q, tri: { s: string[]; o: string | null } | null = triangle(q.text)): string[] {
+  const c = q.canvas as any;
+  const p: string[] = [];
+  const pts: PtC[] = c.points ?? [];
+  const parId = new Map(pts.map((x) => [x.id, x]));
+  const nom = (x: PtC) => x.nom ?? x.id;
+  const visible = (x: PtC) => !x.cache && nom(x) !== "" && nom(x) !== "?";
+  const parNom = (l: string) => pts.find((x) => visible(x) && nom(x) === l);
+  const d = (a: PtC, b: PtC) => Math.hypot(a.x - b.x, a.y - b.y);
+  // 1. Les références.
+  const refs: string[] = [
+    ...(c.segments ?? []).flatMap((g: any) => [g.a, g.b]),
+    ...(c.droites ?? []).flatMap((g: any) => [g.a, g.b]),
+    ...(c.cercles ?? []).map((g: any) => g.centre),
+    ...(c.arcs ?? []).flatMap((g: any) => [g.centre, g.de, g.vers, ...(g.eviter ? [g.eviter] : [])]),
+    ...(c.angles ?? []).flatMap((g: any) => [g.sommet, g.de, g.vers]),
+    ...(c.polygones ?? []).flatMap((g: any) => g.sommets),
+  ];
+  for (const r of refs) if (!parId.has(r)) p.push(`figure : point « ${r} » inconnu`);
+  if (p.length) return p;
+  const P = (id: string) => parId.get(id)!;
+  // 2. Les angles droits.
+  const droits = (c.angles ?? []).filter((a: any) => a.droit);
+  for (const a of droits) {
+    const o = P(a.sommet), u = P(a.de), v = P(a.vers);
+    const cos = ((u.x - o.x) * (v.x - o.x) + (u.y - o.y) * (v.y - o.y)) / (d(u, o) * d(v, o));
+    if (Math.abs(cos) > 0.0175) p.push(`figure : angle codé droit en ${nom(o) || a.sommet}, dessiné à ${Math.round((Math.acos(cos) * 180) / Math.PI)}°`);
+  }
+  // 3. Les codes de longueur.
+  const parCode = new Map<number, number[]>();
+  for (const g of c.segments ?? []) if (g.code) parCode.set(g.code, [...(parCode.get(g.code) ?? []), d(P(g.a), P(g.b))]);
+  for (const [k, ls] of parCode) if (Math.max(...ls) / Math.min(...ls) > 1.02) p.push(`figure : segments codés ${k} de longueurs différentes (${ls.map((x) => x.toFixed(2)).join(", ")})`);
+  // 4. Les médiatrices : l'angle droit posé au milieu d'un segment codé en deux moitiés égales.
+  for (const a of droits) {
+    const m = P(a.sommet);
+    const moities = (c.segments ?? []).filter((g: any) => g.code && (g.a === a.sommet || g.b === a.sommet));
+    const bouts = moities.map((g: any) => P(g.a === a.sommet ? g.b : g.a));
+    for (let i = 0; i < bouts.length; i++)
+      for (let j = i + 1; j < bouts.length; j++) {
+        const [e, f] = [bouts[i], bouts[j]];
+        const g1 = moities[i], g2 = moities[j];
+        if (g1.code !== g2.code) continue;
+        const aligne = Math.abs((e.x - m.x) * (f.y - m.y) - (e.y - m.y) * (f.x - m.x)) < 1e-6 * Math.max(1, d(e, f) ** 2);
+        if (!aligne) continue;
+        // La droite de l'angle droit (autre que [EF]) : chacun de ses points est équidistant de E et F.
+        const autre = [P(a.de), P(a.vers)].find((x) => Math.abs((x.x - m.x) * (f.y - e.y) - (x.y - m.y) * (f.x - e.x)) > 1e-6);
+        if (autre && Math.abs(d(autre, e) - d(autre, f)) / d(e, f) > 0.02) p.push(`figure : la médiatrice tracée en ${nom(m) || a.sommet} n’est pas équidistante de ${nom(e)} et ${nom(f)}`);
+      }
+  }
+  // 5. Les lettres affichées sont celles de l'énoncé.
+  const lettres = LETTRES_TEXTE([q.text, ...(q.choices ?? [])].join(" "));
+  for (const x of pts) if (visible(x) && !(nom(x).length === 1 && lettres.has(nom(x)))) p.push(`figure : lettre « ${nom(x)} » absente de l’énoncé`);
+  // 6. Les longueurs de l'énoncé, à la même échelle.
+  const echelles: { quoi: string; k: number }[] = [];
+  for (const m of q.text.matchAll(/(?<!\+ )\[?\b([A-Z])([A-Z])\]? (?:=|mesure) (\d+(?:,\d+)?) (?:cm|m|km)\b/g)) {
+    const [a, b] = [parNom(m[1]), parNom(m[2])];
+    if (a && b) echelles.push({ quoi: `${m[1]}${m[2]} = ${m[3]}`, k: d(a, b) / nombreFr(m[3]) });
+  }
+  if (echelles.length > 1) {
+    const ks = echelles.map((e) => e.k);
+    if (Math.max(...ks) / Math.min(...ks) > 1.03) p.push(`figure : longueurs dessinées pas à l’échelle de l’énoncé (${echelles.map((e) => e.quoi).join(", ")})`);
+  }
+  // 7. Le centre nommé, à égale distance des sommets ; le cercle qui en part passe par eux.
+  if (tri?.o && !tri.s.includes(tri.o)) {
+    const O = parNom(tri.o);
+    const S = tri.s.map(parNom).filter(Boolean) as PtC[];
+    if (O && S.length === 3) {
+      const ds = S.map((x) => d(O, x));
+      if (Math.max(...ds) / Math.min(...ds) > 1.02) p.push(`figure : ${tri.o} n’est pas à égale distance de ${tri.s.join(", ")}`);
+    }
+    if (O) {
+      const hors = /n’est pas sur le cercle|hors du cercle|bien le cercle circonscrit|circonscrit au triangle/.test(q.text);
+      for (const k of (c.cercles ?? []).filter((k: any) => k.centre === O.id))
+        for (const x of S) if (!hors && Math.abs(d(O, x) - k.rayon) / k.rayon > 0.02) p.push(`figure : ${nom(x)} n’est pas sur le cercle de centre ${tri.o}`);
+    }
+  }
+  // 8. La figure n'écrit ni la réponse, ni une longueur absente de l'énoncé.
+  const textes = [...(c.segments ?? []), ...(c.angles ?? [])].map((g: any) => g.texte).filter(Boolean) as string[];
+  const rep = String(q.expected?.[0] ?? "");
+  for (const x of textes) {
+    if (x === "?") continue;
+    if (x === rep && !q.text.includes(rep)) p.push(`figure : la réponse « ${rep} » est écrite sur le dessin`);
+    else if (/\d/.test(x) && !q.text.includes(x.replace(" ", " ")) && !q.text.includes(x)) p.push(`figure : « ${x} » écrit sur le dessin, absent de l’énoncé`);
+  }
+  return p;
+}
 function figureRelue(q: Q): string[] {
   const f = lireFig(q);
   if (!q.canvas) return [];
+  if ((q.canvas as any).kind === "construction") return constructionRelue(q);
   if (!f) return [`canvas inattendu : ${(q.canvas as any).kind}`];
   const p: string[] = [];
   if (f.centre.length !== 1) p.push("pas exactement un point au centre du cercle dessiné");
@@ -925,3 +1029,41 @@ export const CORRECTEURS: CorrecteursMaths = {
   circonscrit_defi_tpl_1: (q) => [...corrigerDistanceSommet(q), ...accords(q)],
   circonscrit_defi_tpl_ouverte: (q) => [...corrigerDefiSituation(q), ...accords(q)],
 };
+
+/* ⭐ 14/11/2026 — UN CAS DE REFUS : une construction FAUSSE que constructionRelue doit
+   refuser (scripts ou tests : `casRefusConstruction()` doit renvoyer des problèmes).
+   Le centre O est décalé (OA = 5, OB ≈ 5,4, OC ≈ 4,9 : B et C hors du cercle de
+   rayon 5), l’angle « droit » de la médiatrice de [AB] est faux, ses deux moitiés
+   codées sont inégales, et une lettre K absente de l’énoncé est affichée : six refus. */
+export function casRefusConstruction(): string[] {
+  const q = {
+    text: "Les médiatrices du triangle ABC se coupent en O. OA = 5 cm. Combien mesure OB ?",
+    format: "short",
+    expected: ["5 cm"],
+    comparator: "number_equal",
+    explanation: "",
+    canvas: {
+      kind: "construction",
+      points: [
+        { id: "O", x: 0.4, y: 0 },
+        { id: "A", x: -4.6, y: 0 },
+        { id: "B", x: 0, y: 5.4 },
+        { id: "C", x: 4.7, y: -1.2 },
+        { id: "_m", x: -2.1, y: 2.9, cache: true },
+        { id: "_n", x: -0.3, y: 4.2, cache: true },
+        { id: "K", x: 2, y: 3 },
+      ],
+      segments: [
+        { a: "A", b: "_m", code: 1 },
+        { a: "_m", b: "B", code: 1 },
+        { a: "B", b: "C" },
+        { a: "A", b: "C" },
+        { a: "O", b: "B", texte: "5 cm" },
+      ],
+      droites: [{ a: "_m", b: "_n" }],
+      angles: [{ sommet: "_m", de: "B", vers: "_n", droit: true }],
+      cercles: [{ centre: "O", rayon: 5 }],
+    },
+  } as unknown as Q;
+  return constructionRelue(q);
+}

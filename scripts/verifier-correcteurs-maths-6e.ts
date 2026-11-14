@@ -16,6 +16,7 @@
 
 import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths/index";
 import { CORRECTEURS_6E } from "@/lib/tutor-v4/questionBank/6e/maths/correcteurs";
+import { casRefusConstruction } from "@/lib/tutor-v4/questionBank/6e/maths/correcteurs/cercle-circonscrit";
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths/index";
 import { CORRECTEURS_4E } from "@/lib/tutor-v4/questionBank/4e/maths/correcteurs";
 import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths/index";
@@ -121,4 +122,13 @@ for (const [micro, gs] of parMicro) {
 console.log(
   `\n${fautes ? `❌ ${fautes} gabarit(s) en défaut` : `✅ ${gabarits.length} gabarit(s) justes`} (correcteur sur ${TIRAGES} tirages).`,
 );
+// ⭐ 14/11/2026 — Le correcteur du cercle circonscrit relit le canvas `construction` :
+// une construction volontairement FAUSSE doit être refusée, sinon il accepte tout.
+if (!en4e && !en5e && !en3e && !enCm2 && !enCm1 && !enCe1) {
+  const motifs = casRefusConstruction();
+  if (!motifs.length) {
+    fautes++;
+    console.log("❌ cercle circonscrit : la construction fausse de casRefusConstruction() est ACCEPTÉE");
+  } else console.log(`✅ cercle circonscrit : la construction fausse est refusée (${motifs.length} motifs)`);
+}
 process.exit(fautes ? 1 : 0);
